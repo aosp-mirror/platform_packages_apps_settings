@@ -46,6 +46,8 @@
     <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"L\'écran frontal s\'allume lorsque vous pliez votre appareil"</string>
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"Seulement pour les jeux, les vidéos et plus"</string>
     <string name="selective_stay_awake_summary" msgid="9055967322921984543">"L\'écran frontal s\'allume pour les applications qui empêchent la mise en veille de votre écran"</string>
+    <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Balayez vers le haut pour continuer"</string>
+    <string name="stay_awake_on_lockscreen_summary" msgid="2299351813382522952">"Pliez votre téléphone et balayez l\'écran frontal vers le haut pour continuer à utiliser l\'application ou attendez quelques secondes pour verrouiller l\'écran"</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"Jamais"</string>
     <string name="sleep_on_fold_summary" msgid="7737992842459588846">"L\'écran frontal se verrouille lorsque vous pliez votre appareil"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Utiliser la rotation automatique"</string>
@@ -283,8 +285,7 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Les applications qui disposent de l\'autorisation de détection des appareils à proximité peuvent déterminer la position relative des appareils connectés."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"L\'accès à la position est désactivé pour les applications et les services. La position de votre appareil pourrait quand même être envoyée aux intervenants d\'urgence lorsque vous appelez ou textez un numéro d\'urgence."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"En savoir plus sur les paramètres de localisation"</string>
-    <!-- no translation found for location_settings_tooltip_text_for_chrome (3574930966097093550) -->
-    <skip />
+    <string name="location_settings_tooltip_text_for_chrome" msgid="3574930966097093550">"Position : Paramètres &gt; Sécurité et confidentialité &gt; Paramètres de confidentialité"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Comptes"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Sécurité"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Chiffrement et authentifiants"</string>
@@ -544,20 +545,16 @@
     <string name="privacy_header" msgid="5526002421324257007">"Confidentialité"</string>
     <string name="work_profile_category_header" msgid="85707750968948517">"Profil professionnel"</string>
     <string name="private_space_title" msgid="7078627930195569767">"Espace privé"</string>
-    <!-- no translation found for private_space_summary (2274405892301976238) -->
-    <skip />
-    <string name="private_space_description" msgid="5494963647270826210">"Masquer des applications dans un dossier privé auquel vous seul pouvez avoir accès"</string>
+    <string name="private_space_summary" msgid="2274405892301976238">"Verrouiller et cacher les applications privées"</string>
+    <string name="private_space_description" msgid="4059594203775816136">"Conservez les applications privées dans un espace séparé que vous pouvez masquer ou verrouiller"</string>
     <string name="private_space_lock_title" msgid="3006539720164938296">"Verrouillage de l\'Espace privé"</string>
     <string name="private_space_one_lock_summary" msgid="2759953747682959371">"Vous pouvez déverrouiller l\'Espace privé de la même manière que votre appareil ou choisir un autre type de verrou"</string>
     <string name="private_space_screen_lock_title" msgid="8679383894967823163">"Utiliser le verrouillage de l\'écran de l\'appareil"</string>
     <string name="private_space_biometric_title" msgid="3934339826674553174">"Déverrouil. par reconnaissance faciale et empreinte digitale"</string>
     <string name="private_space_biometric_summary" msgid="4403837276018724581">"Toucher pour configurer"</string>
-    <!-- no translation found for private_space_fingerprint_unlock_title (5804023571114910034) -->
-    <skip />
-    <!-- no translation found for private_space_face_unlock_title (6613018437620070183) -->
-    <skip />
-    <!-- no translation found for private_space_category_ways_to_unlock (4356631225316950046) -->
-    <skip />
+    <string name="private_space_fingerprint_unlock_title" msgid="5804023571114910034">"Déverrouillage par empreinte digitale pour l\'Espace privé"</string>
+    <string name="private_space_face_unlock_title" msgid="6613018437620070183">"Déverrouillage par reconnaissance faciale pour Espace privé"</string>
+    <string name="private_space_category_ways_to_unlock" msgid="4356631225316950046">"Méthodes de déverrouillage"</string>
     <string name="private_space_screen_lock_summary" msgid="394837965365561070">"Identique au verrouillage de l\'écran de l\'appareil"</string>
     <string name="private_space_new_lock_title" msgid="7306873010565337671">"Choisir un nouveau verrou pour l\'Espace privé?"</string>
     <string name="private_space_hide_title" msgid="8687034008994037610">"Masquer lorsque verrouillé"</string>
@@ -588,8 +585,7 @@
     <string name="private_space_apps_permission_text" msgid="7030946025253366172">"Les applications de votre Espace privé ne figureront pas dans le gestionnaire des autorisations, dans le Tableau de bord de confidentialité ni dans d\'autres paramètres lorsque l\'Espace privé est verrouillé.\n\nVotre Espace privé ne peut pas être déplacé vers un nouvel appareil. Vous devrez créer un autre Espace privé si vous souhaitez l\'utiliser sur un autre appareil.\n\nToute personne qui connecte votre appareil à un ordinateur ou installe des applications nuisibles sur votre appareil peut être en mesure d\'accéder à votre Espace privé."</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Configuration de l\'Espace privé en cours…"</string>
     <string name="private_space_notifications_hidden_title" msgid="4377296080723608107">"Les notifications des applications de l\'Espace privé sont masquées lorsqu\'il est verrouillé"</string>
-    <!-- no translation found for private_space_share_photos_title (2102594859384040485) -->
-    <skip />
+    <string name="private_space_share_photos_title" msgid="2102594859384040485">"Déverrouiller l\'Espace privé pour partager des photos ou des fichiers à partir des applications de l\'Espace privé"</string>
     <string name="private_space_apps_installed_title" msgid="2428207301009983268">"Certaines applications sont déjà installées dans votre Espace privé"</string>
     <string name="private_space_error_screen_title" msgid="1210906480024148398">"Impossible de configurer l\'Espace privé"</string>
     <string name="private_space_tryagain_label" msgid="8305362615231738367">"Réessayer"</string>
@@ -605,12 +601,9 @@
     <string name="private_space_retry_summary" msgid="1976929616948459609">"Vous devez vous connecter à un compte pour configurer un Espace privé"</string>
     <string name="private_space_lock_setup_title" msgid="6541564212199510787">"Choisir un verrouillage pour votre Espace privé"</string>
     <string name="private_space_lock_setup_description" msgid="423405593476300918">"Vous pouvez déverrouiller votre Espace privé à l\'aide de votre empreinte digitale. Pour plus de sécurité, cette option exige un verrouillage secondaire."</string>
-    <!-- no translation found for private_space_choose_your_pin_header (4560802934975898265) -->
-    <skip />
-    <!-- no translation found for private_space_choose_your_password_header (7660259341095044434) -->
-    <skip />
-    <!-- no translation found for private_space_choose_your_pattern_header (2165607102459936724) -->
-    <skip />
+    <string name="private_space_choose_your_pin_header" msgid="4560802934975898265">"Créer un NIP pour l\'Espace privé"</string>
+    <string name="private_space_choose_your_password_header" msgid="7660259341095044434">"Créer un mot de passe pour Espace privé"</string>
+    <string name="private_space_choose_your_pattern_header" msgid="2165607102459936724">"Créer un schéma pour l\'Espace privé"</string>
     <string name="privatespace_unhide_header" msgid="1192011539687584004">"Pour afficher l\'Espace privé (version non finale de l\'EU)"</string>
     <string name="privatespace_open_settings" msgid="5038101805604421393">"Ouvrez l\'application Paramètres"</string>
     <string name="privatespace_tap_settings" msgid="928932826450238276">"Touchez Sécurité et confidentialité &gt; Espace privé &gt; Masquer l\'Espace privé lorsqu\'il est verrouillé"</string>
@@ -1822,19 +1815,14 @@
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Clavier à l\'écran accessible"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Gérer les claviers à l\'écran"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"Options"</string>
-    <!-- no translation found for keyboard_a11y_category (8230758278046841469) -->
-    <skip />
+    <string name="keyboard_a11y_category" msgid="8230758278046841469">"Accessibilité"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Clavier physique"</string>
     <string name="show_ime" msgid="4334255501724746849">"Utiliser le clavier à l\'écran"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"Afficher lorsque le clavier physique est activé"</string>
-    <!-- no translation found for bounce_keys (7419450970351743904) -->
-    <skip />
-    <!-- no translation found for bounce_keys_summary (6922850403920596246) -->
-    <skip />
-    <!-- no translation found for sticky_keys (7317317044898161747) -->
-    <skip />
-    <!-- no translation found for sticky_keys_summary (8520909829540989765) -->
-    <skip />
+    <string name="bounce_keys" msgid="7419450970351743904">"Touches non répétées"</string>
+    <string name="bounce_keys_summary" msgid="6922850403920596246">"Activez les touches non répétées pour rehausser l\'accessibilité du clavier physique"</string>
+    <string name="sticky_keys" msgid="7317317044898161747">"Touches rémanentes"</string>
+    <string name="sticky_keys_summary" msgid="8520909829540989765">"Activez les Touches rémanentes pour rehausser l\'accessibilité du clavier physique"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Raccourcis clavier"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Afficher la liste de raccourcis"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Claviers et outils pour le profil professionnel"</string>
@@ -1932,7 +1920,10 @@
     <string name="usage_stats_sort_by_usage_time" msgid="2927310334119998301">"Trier par temps d\'utilisation"</string>
     <string name="usage_stats_sort_by_last_time_used" msgid="7039213339779884017">"Trier par dernière utilisation"</string>
     <string name="usage_stats_sort_by_app_name" msgid="4463833145514850478">"Trier par nom d\'application"</string>
-    <string name="last_time_used_label" msgid="2639712813493534074">"Dernière utilisation :"</string>
+    <!-- no translation found for last_time_used_label (7589377271406011659) -->
+    <skip />
+    <!-- no translation found for last_time_used_never (2936073559267990034) -->
+    <skip />
     <string name="usage_time_label" msgid="9105343335151559883">"Temps d\'utilisation"</string>
     <string name="accessibility_settings" msgid="4713215774904704682">"Accessibilité"</string>
     <string name="accessibility_settings_title" msgid="6739115703615065716">"Paramètres d\'accessibilité"</string>
@@ -2502,9 +2493,13 @@
     <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"maintenant"</string>
     <string name="battery_usage_timestamps_hyphen" msgid="7401188432989043905">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g> – <xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
     <string name="battery_usage_day_and_hour" msgid="1417890420844950881">"<xliff:g id="DAY">%1$s</xliff:g> <xliff:g id="HOUR">%2$s</xliff:g>⁠"</string>
+    <!-- no translation found for battery_usage_time_info_and_battery_level (6732629268310936155) -->
+    <skip />
     <string name="battery_usage_chart" msgid="4114747521432440017">"Graphique d\'utilisation de la pile"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Graphique de l\'utilisation quotidienne de la pile"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Graphique de l\'utilisation horaire de la pile"</string>
+    <!-- no translation found for battery_level_percentage (1433178290838842146) -->
+    <skip />
     <string name="battery_usage_breakdown_title_since_last_full_charge" msgid="435006273323199906">"Utilisation de la pile depuis la dernière recharge complète"</string>
     <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"Utilisation de la pile : <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"Temps d\'utilisation des écrans depuis la dernière recharge complète"</string>
@@ -3392,6 +3387,7 @@
     <string name="recent_convos_removed" msgid="2122932798895714203">"Conversations récentes retirées"</string>
     <string name="recent_convo_removed" msgid="8686414146325958281">"Conversation retirée"</string>
     <string name="clear" msgid="5092178335409471100">"Effacer"</string>
+    <string name="clear_conversation" msgid="5564321180363279096">"Effacer <xliff:g id="CONVERSATION_NAME">%1$s</xliff:g>"</string>
     <string name="conversation_onboarding_title" msgid="5194559958353468484">"Les conversations prioritaires et modifiées s\'afficheront ici"</string>
     <string name="conversation_onboarding_summary" msgid="2484845363368486941">"Lorsque vous marquez des conversations comme prioritaires, ou si vous apportez d\'autres modifications aux conversations, elles s\'afficheront ici. \n\nPour modifier les paramètres de conversation : \nbalayez l\'écran du haut vers le bas pour ouvrir le volet déroulant, puis maintenez le doigt sur une conversation."</string>
     <string name="notification_importance_min_title" msgid="7676541266705442501">"Réduire"</string>
@@ -4982,6 +4978,5 @@
     <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="3004347470520916069">"Utiliser l\'analyse des applications trompeuses pour le travail"</string>
     <string name="content_protection_preference_subpage_summary" msgid="3595621220981703364"></string>
     <string name="content_protection_preference_subpage_info" msgid="6890886357653365489"></string>
-    <!-- no translation found for accessibility_setup_password_complete (6358749253318369077) -->
-    <skip />
+    <string name="accessibility_setup_password_complete" msgid="6358749253318369077">"Le mot de passe a été configuré"</string>
 </resources>

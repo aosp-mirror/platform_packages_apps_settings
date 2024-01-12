@@ -46,6 +46,8 @@
     <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"기기를 접으면 전면 디스플레이가 켜집니다"</string>
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"게임, 동영상 등만"</string>
     <string name="selective_stay_awake_summary" msgid="9055967322921984543">"화면 유휴 상태를 중지하는 앱의 경우 전면 디스플레이가 켜집니다"</string>
+    <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"위로 스와이프하여 계속하기"</string>
+    <string name="stay_awake_on_lockscreen_summary" msgid="2299351813382522952">"휴대전화를 접고 전면 디스플레이에서 위로 스와이프하여 계속 앱을 사용하거나 화면이 잠길 때까지 몇 초 동안 기다리세요."</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"사용 안 함"</string>
     <string name="sleep_on_fold_summary" msgid="7737992842459588846">"기기를 접으면 전면 디스플레이가 잠깁니다"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"자동 회전 사용"</string>
@@ -283,8 +285,7 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"근처 기기 액세스 권한이 있는 앱은 연결된 기기 간의 상대적인 위치를 파악할 수 있습니다."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"앱 및 서비스에 대한 위치 정보 액세스가 사용 중지되어 있습니다. 그래도 긴급 전화번호로 전화를 걸거나 문자 메시지를 보내면 기기의 위치 정보가 긴급 구조원에게 전달될 수 있습니다."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"위치 설정에 대해 자세히 알아보기"</string>
-    <!-- no translation found for location_settings_tooltip_text_for_chrome (3574930966097093550) -->
-    <skip />
+    <string name="location_settings_tooltip_text_for_chrome" msgid="3574930966097093550">"위치 액세스 권한을 변경하려면 설정 &gt; 보안 및 개인 정보 보호 &gt; 개인 정보 보호 설정으로 이동하세요."</string>
     <string name="account_settings_title" msgid="9138880127246241885">"계정"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"보안"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"암호화 및 사용자 인증 정보"</string>
@@ -545,7 +546,7 @@
     <string name="work_profile_category_header" msgid="85707750968948517">"직장 프로필"</string>
     <string name="private_space_title" msgid="7078627930195569767">"비공개 스페이스"</string>
     <string name="private_space_summary" msgid="2274405892301976238">"비공개 앱을 잠그고 숨겨진 상태로 유지"</string>
-    <string name="private_space_description" msgid="5494963647270826210">"나만 액세스할 수 있는 비공개 폴더에 앱을 숨기세요."</string>
+    <string name="private_space_description" msgid="4059594203775816136">"비공개 앱을 숨기거나 잠글 수 있는 별도의 스페이스에 보관하세요."</string>
     <string name="private_space_lock_title" msgid="3006539720164938296">"비공개 스페이스 잠금"</string>
     <string name="private_space_one_lock_summary" msgid="2759953747682959371">"기기를 잠금 해제하는 방식과 동일하게 비공개 스페이스를 잠금 해제하거나 다른 잠금 방식을 선택할 수 있습니다."</string>
     <string name="private_space_screen_lock_title" msgid="8679383894967823163">"기기 화면 잠금 사용"</string>
@@ -1814,19 +1815,14 @@
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"사용 가능한 터치 키보드"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"터치 키보드 관리"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"옵션"</string>
-    <!-- no translation found for keyboard_a11y_category (8230758278046841469) -->
-    <skip />
+    <string name="keyboard_a11y_category" msgid="8230758278046841469">"접근성"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"물리적 키보드"</string>
     <string name="show_ime" msgid="4334255501724746849">"터치 키보드 사용"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"물리적 키보드가 활성 상태인 경우 화면에 켜 둠"</string>
-    <!-- no translation found for bounce_keys (7419450970351743904) -->
-    <skip />
-    <!-- no translation found for bounce_keys_summary (6922850403920596246) -->
-    <skip />
-    <!-- no translation found for sticky_keys (7317317044898161747) -->
-    <skip />
-    <!-- no translation found for sticky_keys_summary (8520909829540989765) -->
-    <skip />
+    <string name="bounce_keys" msgid="7419450970351743904">"바운스 키"</string>
+    <string name="bounce_keys_summary" msgid="6922850403920596246">"물리적 키보드 접근성을 위해 바운스 키 사용 설정"</string>
+    <string name="sticky_keys" msgid="7317317044898161747">"고정키"</string>
+    <string name="sticky_keys_summary" msgid="8520909829540989765">"물리적 키보드 접근성을 위해 고정키 사용 설정"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"단축키"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"단축키 목록을 표시합니다."</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"직장 프로필 키보드 및 도구"</string>
@@ -1924,7 +1920,10 @@
     <string name="usage_stats_sort_by_usage_time" msgid="2927310334119998301">"사용 시간으로 정렬"</string>
     <string name="usage_stats_sort_by_last_time_used" msgid="7039213339779884017">"최근 사용 시간으로 정렬"</string>
     <string name="usage_stats_sort_by_app_name" msgid="4463833145514850478">"앱 이름으로 정렬"</string>
-    <string name="last_time_used_label" msgid="2639712813493534074">"최근 사용"</string>
+    <!-- no translation found for last_time_used_label (7589377271406011659) -->
+    <skip />
+    <!-- no translation found for last_time_used_never (2936073559267990034) -->
+    <skip />
     <string name="usage_time_label" msgid="9105343335151559883">"사용 시간"</string>
     <string name="accessibility_settings" msgid="4713215774904704682">"접근성"</string>
     <string name="accessibility_settings_title" msgid="6739115703615065716">"접근성 설정"</string>
@@ -2494,9 +2493,13 @@
     <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"현재"</string>
     <string name="battery_usage_timestamps_hyphen" msgid="7401188432989043905">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g>~<xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
     <string name="battery_usage_day_and_hour" msgid="1417890420844950881">"<xliff:g id="DAY">%1$s</xliff:g> <xliff:g id="HOUR">%2$s</xliff:g>"</string>
+    <!-- no translation found for battery_usage_time_info_and_battery_level (6732629268310936155) -->
+    <skip />
     <string name="battery_usage_chart" msgid="4114747521432440017">"배터리 사용량 차트"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"일일 배터리 사용량 차트"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"시간별 배터리 사용량 차트"</string>
+    <!-- no translation found for battery_level_percentage (1433178290838842146) -->
+    <skip />
     <string name="battery_usage_breakdown_title_since_last_full_charge" msgid="435006273323199906">"마지막 완충 이후 배터리 사용량"</string>
     <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"배터리 사용량(<xliff:g id="SLOT">%s</xliff:g>)"</string>
     <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"마지막 완충 이후 기기 사용 시간"</string>
@@ -3384,6 +3387,7 @@
     <string name="recent_convos_removed" msgid="2122932798895714203">"최근 대화 삭제됨"</string>
     <string name="recent_convo_removed" msgid="8686414146325958281">"대화 삭제"</string>
     <string name="clear" msgid="5092178335409471100">"삭제"</string>
+    <string name="clear_conversation" msgid="5564321180363279096">"<xliff:g id="CONVERSATION_NAME">%1$s</xliff:g> 삭제"</string>
     <string name="conversation_onboarding_title" msgid="5194559958353468484">"우선순위 대화 및 수정된 대화가 여기에 표시됩니다"</string>
     <string name="conversation_onboarding_summary" msgid="2484845363368486941">"대화를 우선순위로 표시하는 등 수정하면 여기에 표시됩니다. \n\n대화 설정 변경하기: \n화면 상단에서 아래로 스와이프하여 풀다운 창을 열고 대화를 길게 누릅니다."</string>
     <string name="notification_importance_min_title" msgid="7676541266705442501">"최소화"</string>
@@ -3808,7 +3812,7 @@
     <string name="assist_access_screenshot_summary" msgid="5276593070956201863">"지원 앱이 화면의 이미지를 사용하도록 허용합니다."</string>
     <string name="assist_flash_title" msgid="5449512572885550108">"화면 깜빡이기"</string>
     <string name="assist_flash_summary" msgid="3032289860177784594">"지원 앱이 화면이나 스크린샷에서 텍스트를 사용할 때 화면 가장자리가 깜빡입니다."</string>
-    <string name="assist_footer" msgid="8248015363806299068">"지원 앱은 화면에 표시된 정보에 맞게 도움을 줄 수 있습니다. 일부 앱은 통합된 지원을 제공하기 위해 런처와 음성 입력 서비스를 모두 지원합니다."</string>
+    <string name="assist_footer" msgid="8248015363806299068">"지원 앱은 화면에 표시된 정보를 기반으로 도움을 줄 수 있습니다. 일부 앱은 통합된 지원을 제공하기 위해 런처와 음성 입력 서비스를 모두 지원합니다."</string>
     <string name="average_memory_use" msgid="717313706368825388">"평균 메모리 사용"</string>
     <string name="maximum_memory_use" msgid="2171779724001152933">"최대 메모리 사용"</string>
     <string name="memory_usage" msgid="5594133403819880617">"메모리 사용량"</string>

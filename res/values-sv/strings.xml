@@ -46,6 +46,8 @@
     <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"Främre skärmen slås på när du viker enheten"</string>
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"Endast spel, videor med mera"</string>
     <string name="selective_stay_awake_summary" msgid="9055967322921984543">"Främre skärmen slås på för appar som förhindrar att skärmen inaktiveras"</string>
+    <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Svep uppåt för att fortsätta"</string>
+    <string name="stay_awake_on_lockscreen_summary" msgid="2299351813382522952">"Vik telefonen och svep uppåt på den främre skärmen för att fortsätta använda appen, eller vänta i några sekunder till skärmen låses"</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"Aldrig"</string>
     <string name="sleep_on_fold_summary" msgid="7737992842459588846">"Främre skärmen låses när du viker enheten"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Använd automatisk rotation"</string>
@@ -283,8 +285,7 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Appar med behörighet att upptäcka enheter i närheten kan beräkna anslutna enheters relativa position."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Platsåtkomst har inaktiverats för appar och tjänster. Enhetens plats kan fortfarande skickas till räddningstjänst när du ringer eller skickar sms till ett nödnummer."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Läs mer om platsinställningar"</string>
-    <!-- no translation found for location_settings_tooltip_text_for_chrome (3574930966097093550) -->
-    <skip />
+    <string name="location_settings_tooltip_text_for_chrome" msgid="3574930966097093550">"Ändra platsåtkomst i Inställningar &gt; Säkerhet och integritet &gt; Integritetsinställningar"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Konton"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Säkerhet"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Kryptering och användaruppgifter"</string>
@@ -545,7 +546,7 @@
     <string name="work_profile_category_header" msgid="85707750968948517">"Jobbprofil"</string>
     <string name="private_space_title" msgid="7078627930195569767">"Privat rum"</string>
     <string name="private_space_summary" msgid="2274405892301976238">"Håll privata appar låsta och dolda"</string>
-    <string name="private_space_description" msgid="5494963647270826210">"Dölj appar i en privat mapp som bara du har tillgång till"</string>
+    <string name="private_space_description" msgid="4059594203775816136">"Ha privata appar i ett separat rum som du kan dölja eller låsa"</string>
     <string name="private_space_lock_title" msgid="3006539720164938296">"Lås privat rum"</string>
     <string name="private_space_one_lock_summary" msgid="2759953747682959371">"Du kan låsa upp privat rum på samma sätt som du låser upp din enhet, eller så väljer du ett annat lås"</string>
     <string name="private_space_screen_lock_title" msgid="8679383894967823163">"Använd skärmlåset för enheten"</string>
@@ -1814,19 +1815,14 @@
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Tillgängligt skärmtangentbord"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Hantera skärmtangentbord"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"Alternativ"</string>
-    <!-- no translation found for keyboard_a11y_category (8230758278046841469) -->
-    <skip />
+    <string name="keyboard_a11y_category" msgid="8230758278046841469">"Tillgänglighet"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Fysiskt tangentbord"</string>
     <string name="show_ime" msgid="4334255501724746849">"Använd skärmtangentbord"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"Ha kvar det på skärmen när det fysiska tangentbordet används"</string>
-    <!-- no translation found for bounce_keys (7419450970351743904) -->
-    <skip />
-    <!-- no translation found for bounce_keys_summary (6922850403920596246) -->
-    <skip />
-    <!-- no translation found for sticky_keys (7317317044898161747) -->
-    <skip />
-    <!-- no translation found for sticky_keys_summary (8520909829540989765) -->
-    <skip />
+    <string name="bounce_keys" msgid="7419450970351743904">"Studsande tangenter"</string>
+    <string name="bounce_keys_summary" msgid="6922850403920596246">"Aktivera studsande tangenter för tillgänglighet med fysiskt tangentbord"</string>
+    <string name="sticky_keys" msgid="7317317044898161747">"Tröga tangenter"</string>
+    <string name="sticky_keys_summary" msgid="8520909829540989765">"Aktivera tröga tangenter för tillgänglighet med fysiskt tangentbord"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Kortkommandon"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Visa en lista över genvägar"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Tangentbord och verktyg för jobbprofilen"</string>
@@ -1924,7 +1920,10 @@
     <string name="usage_stats_sort_by_usage_time" msgid="2927310334119998301">"Sortera efter användningstid"</string>
     <string name="usage_stats_sort_by_last_time_used" msgid="7039213339779884017">"Sortera efter senast användning"</string>
     <string name="usage_stats_sort_by_app_name" msgid="4463833145514850478">"Sortera efter appnamn"</string>
-    <string name="last_time_used_label" msgid="2639712813493534074">"Användes senast"</string>
+    <!-- no translation found for last_time_used_label (7589377271406011659) -->
+    <skip />
+    <!-- no translation found for last_time_used_never (2936073559267990034) -->
+    <skip />
     <string name="usage_time_label" msgid="9105343335151559883">"Användningstid"</string>
     <string name="accessibility_settings" msgid="4713215774904704682">"Tillgänglighet"</string>
     <string name="accessibility_settings_title" msgid="6739115703615065716">"Tillgänglighetsinställningar"</string>
@@ -2494,9 +2493,13 @@
     <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"nu"</string>
     <string name="battery_usage_timestamps_hyphen" msgid="7401188432989043905">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g>–<xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
     <string name="battery_usage_day_and_hour" msgid="1417890420844950881">"<xliff:g id="DAY">%1$s</xliff:g> <xliff:g id="HOUR">%2$s</xliff:g>"</string>
+    <!-- no translation found for battery_usage_time_info_and_battery_level (6732629268310936155) -->
+    <skip />
     <string name="battery_usage_chart" msgid="4114747521432440017">"Diagram över batteriförbrukning"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Diagram över batteriförbrukning per dag"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Diagram över batteriförbrukning per timme"</string>
+    <!-- no translation found for battery_level_percentage (1433178290838842146) -->
+    <skip />
     <string name="battery_usage_breakdown_title_since_last_full_charge" msgid="435006273323199906">"Batteriförbrukning sedan batteriet senast var fulladdat"</string>
     <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"Batteriförbrukning för <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"Skärmtid sedan batteriet senast var fulladdat"</string>
@@ -3384,6 +3387,7 @@
     <string name="recent_convos_removed" msgid="2122932798895714203">"De senaste konversationerna har tagits bort"</string>
     <string name="recent_convo_removed" msgid="8686414146325958281">"Konversationen har tagits bort"</string>
     <string name="clear" msgid="5092178335409471100">"Rensa"</string>
+    <string name="clear_conversation" msgid="5564321180363279096">"Rensa <xliff:g id="CONVERSATION_NAME">%1$s</xliff:g>"</string>
     <string name="conversation_onboarding_title" msgid="5194559958353468484">"Prioriterade och ändrade konversationer visas här"</string>
     <string name="conversation_onboarding_summary" msgid="2484845363368486941">"När du markerar en konversation som prioriterad eller gör andra ändringar för konversationer så visas det här. \n\nSå här ändrar du inställningarna för konversationer: \nÖppna aviseringspanelen genom att svepa nedåt från skärmens överkant. Sedan trycker du länge på en konversation."</string>
     <string name="notification_importance_min_title" msgid="7676541266705442501">"Minimera"</string>

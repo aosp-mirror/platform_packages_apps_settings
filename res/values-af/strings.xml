@@ -46,6 +46,8 @@
     <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"Boonste skerm skakel aan wanneer jy jou toestel vou"</string>
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"Slegs speletjies, video’s en meer"</string>
     <string name="selective_stay_awake_summary" msgid="9055967322921984543">"Boonste skerm skakel aan vir apps wat keer dat jou skerm onaktief word"</string>
+    <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Swiep op om voort te gaan"</string>
+    <string name="stay_awake_on_lockscreen_summary" msgid="2299351813382522952">"Vou jou foon en swiep op die boonste skerm op om voort te gaan om die app te gebruik, of wag ’n paar sekondes vir die skerm om te sluit"</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"Nooit"</string>
     <string name="sleep_on_fold_summary" msgid="7737992842459588846">"Boonste skerm sluit wanneer jy jou toestel vou"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Gebruik outodraai"</string>
@@ -283,8 +285,7 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Programme met die Toestelle in die Omtrek-toestemming kan die relatiewe posisie van gekoppelde toestelle bepaal."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Liggingtoegang is af vir programme en dienste. Jou toestelligging kan steeds aan nooddienste gestuur word wanneer jy \'n noodnommer bel of \'n SMS daarheen stuur."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Kom meer te wete oor ligginginstellings"</string>
-    <!-- no translation found for location_settings_tooltip_text_for_chrome (3574930966097093550) -->
-    <skip />
+    <string name="location_settings_tooltip_text_for_chrome" msgid="3574930966097093550">"Om liggingtoegang te verander, gaan na Instellings &gt; Sekuriteit en Privaatheid &gt; Privaatheidkontroles."</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Rekeninge"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Sekuriteit"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Enkripsie en eiebewyse"</string>
@@ -545,7 +546,7 @@
     <string name="work_profile_category_header" msgid="85707750968948517">"Werkprofiel"</string>
     <string name="private_space_title" msgid="7078627930195569767">"Privaat ruimte"</string>
     <string name="private_space_summary" msgid="2274405892301976238">"Behou private apps gesluit en versteek"</string>
-    <string name="private_space_description" msgid="5494963647270826210">"Versteek apps in ’n privaat vouer waartoe net jy toegang kan kry"</string>
+    <string name="private_space_description" msgid="4059594203775816136">"Hou privaat apps in ’n aparte ruimte wat jy kan versteek of sluit"</string>
     <string name="private_space_lock_title" msgid="3006539720164938296">"Privaat Ruimte-slot"</string>
     <string name="private_space_one_lock_summary" msgid="2759953747682959371">"Jy kan Privaat Ruimte ontsluit nes jy jou toestel ontsluit of jy kan ’n ander slot kies"</string>
     <string name="private_space_screen_lock_title" msgid="8679383894967823163">"Gebruik toestelskermslot"</string>
@@ -844,12 +845,9 @@
     <string name="wifi_in_airplane_mode" msgid="1235412508135267981">"In vliegtuigmodus"</string>
     <string name="wifi_notify_open_networks" msgid="2610323626246818961">"Stel in kennis oor publieke netwerke"</string>
     <string name="wifi_notify_open_networks_summary" msgid="191058832201741013">"Stel in kennis wanneer \'n publieke netwerk van hoë gehalte beskikbaar is"</string>
-    <!-- no translation found for wifi_allow_wep_networks (8772342993235292010) -->
-    <skip />
-    <!-- no translation found for wifi_allow_wep_networks_summary (3033397893296724615) -->
-    <skip />
-    <!-- no translation found for wifi_allow_wep_networks_summary_carrier_not_allow (6298103289728210026) -->
-    <skip />
+    <string name="wifi_allow_wep_networks" msgid="8772342993235292010">"Laat BEP-netwerke toe"</string>
+    <string name="wifi_allow_wep_networks_summary" msgid="3033397893296724615">"BEP is ’n ouer sekuriteitprotokol wat minder veilig is"</string>
+    <string name="wifi_allow_wep_networks_summary_carrier_not_allow" msgid="6298103289728210026">"Jou diensverskaffer laat nie BEP-netwerke toe nie omdat hulle minder veilig is"</string>
     <string name="wifi_wakeup" msgid="3834327315861781611">"Skakel Wi-Fi outomaties aan"</string>
     <string name="wifi_wakeup_summary" msgid="5778059083790221465">"Wi‑Fi sal weer aanskakel naby gestoorde netwerke van hoë gehalte, soos jou tuisnetwerk"</string>
     <string name="wifi_wakeup_summary_no_location" msgid="681323616606485096">"Onbeskikbaar omdat ligging afgeskakel is. Skakel "<annotation id="link">"ligging"</annotation>" aan."</string>
@@ -871,18 +869,12 @@
     <string name="wifi_settings_scanning_required_info" msgid="1473411566072565789">"Wi-fi-opsporing maak dit vir programme en dienste moontlik om enige tyd na Wi-Fi-netwerke te soek, selfs wanneer Wi-Fi af is. Dit kan byvoorbeeld gebruik word om ligginggegronde kenmerke en dienste te verbeter."</string>
     <string name="wifi_settings_scanning_required_turn_on" msgid="1112223196123955447">"Skakel aan"</string>
     <string name="wifi_settings_scanning_required_enabled" msgid="4721729158927146365">"Wi‑Fi-opsporing is aangeskakel"</string>
-    <!-- no translation found for wifi_settings_warning_wep_network (2655077013800385646) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_blocked_title (8337700496544833669) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_summary_toggle_off (1113138364046142949) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_summary_blocked_by_carrier (6085673947156094523) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_button_allow (2807926329019873706) -->
-    <skip />
-    <!-- no translation found for wifi_settings_ssid_block_button_close (3013886895576949908) -->
-    <skip />
+    <string name="wifi_settings_warning_wep_network" msgid="2655077013800385646">"Hierdie netwerk gebruik ’n ouer sekuriteitprotokol wat minder veilig is"</string>
+    <string name="wifi_settings_wep_networks_blocked_title" msgid="8337700496544833669">"<xliff:g id="NAME">%1$s</xliff:g> is geblokkeer"</string>
+    <string name="wifi_settings_wep_networks_summary_toggle_off" msgid="1113138364046142949">"Hierdie netwerk gebruik ’n ouer sekuriteitprotokol genaamd BEP, wat minder veilig is. Jy kan BEP-netwerke toelaat om in elk geval te koppel."</string>
+    <string name="wifi_settings_wep_networks_summary_blocked_by_carrier" msgid="6085673947156094523">"Jou diensverskaffer laat jou nie toe om aan hierdie netwerk te koppel nie, want dit gebruik \'n ouer sekuriteitsprotokol wat minder veilig is"</string>
+    <string name="wifi_settings_wep_networks_button_allow" msgid="2807926329019873706">"Laat BEP toe"</string>
+    <string name="wifi_settings_ssid_block_button_close" msgid="3013886895576949908">"Maak toe"</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Gevorderde opsies"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Gevorderde Opsies-aftreklys"</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"vou uit"</string>
@@ -1823,19 +1815,14 @@
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Beskikbare skermsleutelbord"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Bestuur sleutelborde op die skerm"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"Opsies"</string>
-    <!-- no translation found for keyboard_a11y_category (8230758278046841469) -->
-    <skip />
+    <string name="keyboard_a11y_category" msgid="8230758278046841469">"Toeganklikheid"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Fisiese sleutelbord"</string>
     <string name="show_ime" msgid="4334255501724746849">"Gebruik skermsleutelbord"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"Hou dit op die skerm terwyl fisieke sleutelbord aktief is"</string>
-    <!-- no translation found for bounce_keys (7419450970351743904) -->
-    <skip />
-    <!-- no translation found for bounce_keys_summary (6922850403920596246) -->
-    <skip />
-    <!-- no translation found for sticky_keys (7317317044898161747) -->
-    <skip />
-    <!-- no translation found for sticky_keys_summary (8520909829540989765) -->
-    <skip />
+    <string name="bounce_keys" msgid="7419450970351743904">"Hopsleutels"</string>
+    <string name="bounce_keys_summary" msgid="6922850403920596246">"Aktiveer Hopsleutels vir fisiese sleutelbordtoeganklikheid"</string>
+    <string name="sticky_keys" msgid="7317317044898161747">"Taaisleutels"</string>
+    <string name="sticky_keys_summary" msgid="8520909829540989765">"Aktiveer Taaisleutels vir fisiese sleutelbordtoeganklikheid"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Kortpadsleutels"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Wys lys met kortpaaie"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Werkprofielsleutelborde en -nutsgoed"</string>
@@ -1933,7 +1920,10 @@
     <string name="usage_stats_sort_by_usage_time" msgid="2927310334119998301">"Sorteer volgens gebruikstyd"</string>
     <string name="usage_stats_sort_by_last_time_used" msgid="7039213339779884017">"Sorteer volgens laas gebruik"</string>
     <string name="usage_stats_sort_by_app_name" msgid="4463833145514850478">"Sorteer volgens programnaam"</string>
-    <string name="last_time_used_label" msgid="2639712813493534074">"Laas gebruik"</string>
+    <!-- no translation found for last_time_used_label (7589377271406011659) -->
+    <skip />
+    <!-- no translation found for last_time_used_never (2936073559267990034) -->
+    <skip />
     <string name="usage_time_label" msgid="9105343335151559883">"Gebruikstyd"</string>
     <string name="accessibility_settings" msgid="4713215774904704682">"Toeganklikheid"</string>
     <string name="accessibility_settings_title" msgid="6739115703615065716">"Toeganklikheids-instellings"</string>
@@ -2503,9 +2493,13 @@
     <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"nou"</string>
     <string name="battery_usage_timestamps_hyphen" msgid="7401188432989043905">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g>-<xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
     <string name="battery_usage_day_and_hour" msgid="1417890420844950881">"<xliff:g id="DAY">%1$s</xliff:g> <xliff:g id="HOUR">%2$s</xliff:g>"</string>
+    <!-- no translation found for battery_usage_time_info_and_battery_level (6732629268310936155) -->
+    <skip />
     <string name="battery_usage_chart" msgid="4114747521432440017">"Batterygebruikgrafiek"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Grafiek van daaglikse batterygebruik"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Grafiek van uurlikse batterygebruik"</string>
+    <!-- no translation found for battery_level_percentage (1433178290838842146) -->
+    <skip />
     <string name="battery_usage_breakdown_title_since_last_full_charge" msgid="435006273323199906">"Batterygebruik sedert dit laas volgelaai is"</string>
     <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"Batterygebruik vir <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"Skermtyd sedert battery laas volgelaai is"</string>
@@ -3393,6 +3387,7 @@
     <string name="recent_convos_removed" msgid="2122932798895714203">"Onlangse gesprekke is verwyder"</string>
     <string name="recent_convo_removed" msgid="8686414146325958281">"Gesprek is verwyder"</string>
     <string name="clear" msgid="5092178335409471100">"Vee uit"</string>
+    <string name="clear_conversation" msgid="5564321180363279096">"Vee uit <xliff:g id="CONVERSATION_NAME">%1$s</xliff:g>"</string>
     <string name="conversation_onboarding_title" msgid="5194559958353468484">"Prioriteit- en gewysigde gesprekke sal hier verskyn"</string>
     <string name="conversation_onboarding_summary" msgid="2484845363368486941">"Nadat jy \'n gesprek as prioriteit gemerk het, of enige ander veranderinge aan gesprekke gemaak het, sal hulle hier verskyn. \n\nHoe om gesprekinstellings te verander: \nSwiep van die bokant van die skerm af om die kennisgewingskerm oop te maak, en raak en hou dan \'n gesprek."</string>
     <string name="notification_importance_min_title" msgid="7676541266705442501">"Minimeer"</string>
@@ -3833,12 +3828,9 @@
     <string name="free_memory" msgid="439783742246854785">"Beskikbaar"</string>
     <string name="memory_usage_apps" msgid="5776108502569850579">"Geheue wat deur programme gebruik word"</string>
     <string name="memory_usage_apps_summary" msgid="7168292864155527974">"{count,plural, =1{1 app het geheue gebruik in die afgelope {time}}other{# apps het geheue gebruik in die afgelope {time}}}"</string>
-    <!-- no translation found for force_enable_pss_profiling_title (2253816522775341523) -->
-    <skip />
-    <!-- no translation found for force_enable_pss_profiling_summary (7714294324548399136) -->
-    <skip />
-    <!-- no translation found for pss_profiling_disabled (1967278421143514850) -->
-    <skip />
+    <string name="force_enable_pss_profiling_title" msgid="2253816522775341523">"Aktiveer geheuegebruikprofielbepaling"</string>
+    <string name="force_enable_pss_profiling_summary" msgid="7714294324548399136">"Geheuegebruikprofielbepaling vereis bykomende stelselhulpbronne."</string>
+    <string name="pss_profiling_disabled" msgid="1967278421143514850">"Geheueprofielbepaling is gedeaktiveer"</string>
     <string name="running_frequency" msgid="7260225121706316639">"Frekwensie"</string>
     <string name="memory_maximum_usage" msgid="2047013391595835607">"Maksimum gebruik"</string>
     <string name="no_data_usage" msgid="4665617440434654132">"Geen data is gebruik nie"</string>

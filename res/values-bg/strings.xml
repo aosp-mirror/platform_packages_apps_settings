@@ -46,6 +46,8 @@
     <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"Предният дисплей се включва, когато сгънете устройството си"</string>
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"Само игри, видеоклипове и др."</string>
     <string name="selective_stay_awake_summary" msgid="9055967322921984543">"Предният дисплей се включва за приложенията, които не позволяват на екрана да премине в неактивно състояние"</string>
+    <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Прекарайте пръст нагоре, за да продължите"</string>
+    <string name="stay_awake_on_lockscreen_summary" msgid="2299351813382522952">"Затворете телефона си и прекарайте пръст нагоре по предния дисплей, за да продължите да използвате приложението, или изчакайте няколко секунди, за да се заключи екранът"</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"Никога"</string>
     <string name="sleep_on_fold_summary" msgid="7737992842459588846">"Предният дисплей се заключва, когато сгънете устройството си"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Използване на автоматичното завъртане"</string>
@@ -283,8 +285,7 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Приложенията с разрешението за устройства в близост могат да определят относителната позиция на свързаните устройства."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Достъпът до местоположението е изключен за приложенията и услугите. Местоположението на устройството ви пак може да се изпраща до органите за бързо реагиране, когато се обадите на номер за спешни случаи или изпратите SMS до такъв."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Научете повече за настройките за местоположението"</string>
-    <!-- no translation found for location_settings_tooltip_text_for_chrome (3574930966097093550) -->
-    <skip />
+    <string name="location_settings_tooltip_text_for_chrome" msgid="3574930966097093550">"За промени в достъпа до местопол.: „Настройки &gt; Сигурност и поверителност &gt; Контроли за поверителност“"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Профили"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Сигурност"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Шифроване и идентификационни данни"</string>
@@ -545,7 +546,7 @@
     <string name="work_profile_category_header" msgid="85707750968948517">"Служебен потребителски профил"</string>
     <string name="private_space_title" msgid="7078627930195569767">"Лично пространство"</string>
     <string name="private_space_summary" msgid="2274405892301976238">"Заключване и скриване на частните приложения"</string>
-    <string name="private_space_description" msgid="5494963647270826210">"Скриване на приложенията в лична папка, до която само вие имате достъп"</string>
+    <string name="private_space_description" msgid="4059594203775816136">"Частните приложения са на отделно място, което можете да скриете или заключите"</string>
     <string name="private_space_lock_title" msgid="3006539720164938296">"Опция за заключване на личното пространство"</string>
     <string name="private_space_one_lock_summary" msgid="2759953747682959371">"Можете да отключвате личното пространство по същия начин, по който отключвате устройството си, или да изберете друга опция за заключване"</string>
     <string name="private_space_screen_lock_title" msgid="8679383894967823163">"Използване на опцията за заключване на екрана на у-вото"</string>
@@ -1814,19 +1815,14 @@
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Налична екранна клавиатура"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Управление на екранните клавиатури"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"Опции"</string>
-    <!-- no translation found for keyboard_a11y_category (8230758278046841469) -->
-    <skip />
+    <string name="keyboard_a11y_category" msgid="8230758278046841469">"Достъпност"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Физическа клавиатура"</string>
     <string name="show_ime" msgid="4334255501724746849">"Използване на екранната клавиатура"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"Показва се на екрана, докато физическата клавиатура е активна"</string>
-    <!-- no translation found for bounce_keys (7419450970351743904) -->
-    <skip />
-    <!-- no translation found for bounce_keys_summary (6922850403920596246) -->
-    <skip />
-    <!-- no translation found for sticky_keys (7317317044898161747) -->
-    <skip />
-    <!-- no translation found for sticky_keys_summary (8520909829540989765) -->
-    <skip />
+    <string name="bounce_keys" msgid="7419450970351743904">"Игнориране на многократ. натискане"</string>
+    <string name="bounce_keys_summary" msgid="6922850403920596246">"Активиране на игнорирането на многократното натискане за достъпност чрез физическата клавиатура"</string>
+    <string name="sticky_keys" msgid="7317317044898161747">"Фиксирани клавиши"</string>
+    <string name="sticky_keys_summary" msgid="8520909829540989765">"Активиране на фиксираните клавиши за достъпност чрез физическата клавиатура"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Клавишни комбинации"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Показване на списък с клавишните комбинации"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Клавиатури и инструменти за служебния потр. профил"</string>
@@ -1924,7 +1920,10 @@
     <string name="usage_stats_sort_by_usage_time" msgid="2927310334119998301">"Сортиране по време на използв."</string>
     <string name="usage_stats_sort_by_last_time_used" msgid="7039213339779884017">"Сортиране по последно използв."</string>
     <string name="usage_stats_sort_by_app_name" msgid="4463833145514850478">"Сортиране по име на прилож."</string>
-    <string name="last_time_used_label" msgid="2639712813493534074">"Последно използване"</string>
+    <!-- no translation found for last_time_used_label (7589377271406011659) -->
+    <skip />
+    <!-- no translation found for last_time_used_never (2936073559267990034) -->
+    <skip />
     <string name="usage_time_label" msgid="9105343335151559883">"Време на употреба"</string>
     <string name="accessibility_settings" msgid="4713215774904704682">"Достъпност"</string>
     <string name="accessibility_settings_title" msgid="6739115703615065716">"Настройки за достъпност"</string>
@@ -2494,9 +2493,13 @@
     <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"сега"</string>
     <string name="battery_usage_timestamps_hyphen" msgid="7401188432989043905">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g> – <xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
     <string name="battery_usage_day_and_hour" msgid="1417890420844950881">"<xliff:g id="DAY">%1$s</xliff:g> <xliff:g id="HOUR">%2$s</xliff:g>"</string>
+    <!-- no translation found for battery_usage_time_info_and_battery_level (6732629268310936155) -->
+    <skip />
     <string name="battery_usage_chart" msgid="4114747521432440017">"Диаграма за използването на батерията"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Диаграма на ежедневното използване на батерията"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Диаграма на почасовото използване на батерията"</string>
+    <!-- no translation found for battery_level_percentage (1433178290838842146) -->
+    <skip />
     <string name="battery_usage_breakdown_title_since_last_full_charge" msgid="435006273323199906">"Използване на батерията след последното пълно зареждане"</string>
     <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"Използване на батерията за периода <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"Време на ползване след последното пълно зареждане"</string>
@@ -3384,6 +3387,7 @@
     <string name="recent_convos_removed" msgid="2122932798895714203">"Скорошните разговори са премахнати"</string>
     <string name="recent_convo_removed" msgid="8686414146325958281">"Разговорът е премахнат"</string>
     <string name="clear" msgid="5092178335409471100">"Изчистване"</string>
+    <string name="clear_conversation" msgid="5564321180363279096">"Изчистване на разговора с(ъс) <xliff:g id="CONVERSATION_NAME">%1$s</xliff:g>"</string>
     <string name="conversation_onboarding_title" msgid="5194559958353468484">"Приоритетните и променените разговори ще се показват тук"</string>
     <string name="conversation_onboarding_summary" msgid="2484845363368486941">"След като означите даден разговор като приоритетен или направите други промени в разговорите, те ще се показват тук. \n\nЗа да промените настройките за разговорите: \nПлъзнете пръст надолу от горната част на екрана, за да отворите падащия панел, след което докоснете даден разговор и го задръжте."</string>
     <string name="notification_importance_min_title" msgid="7676541266705442501">"Намаляване"</string>
