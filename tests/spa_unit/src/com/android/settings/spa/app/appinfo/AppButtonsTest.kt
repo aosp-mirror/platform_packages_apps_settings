@@ -45,6 +45,7 @@ import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.MockitoSession
 import org.mockito.Spy
+import org.mockito.kotlin.any
 import org.mockito.quality.Strictness
 import org.mockito.Mockito.`when` as whenever
 
@@ -80,6 +81,7 @@ class AppButtonsTest {
         whenever(packageInfoPresenter.context).thenReturn(context)
         whenever(packageInfoPresenter.packageName).thenReturn(PACKAGE_NAME)
         whenever(packageInfoPresenter.userPackageManager).thenReturn(packageManager)
+        whenever(packageManager.getApplicationLabel(any())).thenReturn(APP_LABEL)
         whenever(packageManager.packageInstaller).thenReturn(packageInstaller)
         whenever(packageManager.getPackageInfo(PACKAGE_NAME, 0)).thenReturn(PACKAGE_INFO)
         whenever(AppUtils.isMainlineModule(packageManager, PACKAGE_NAME)).thenReturn(false)
@@ -113,7 +115,8 @@ class AppButtonsTest {
         featureFlags.setFlag(Flags.FLAG_ARCHIVING, false)
         setContent()
 
-        composeTestRule.onNodeWithText(context.getString(R.string.launch_instant_app)).assertIsDisplayed()
+        composeTestRule.onNodeWithText(context.getString(R.string.launch_instant_app))
+            .assertIsDisplayed()
     }
 
     @Test
@@ -122,7 +125,8 @@ class AppButtonsTest {
         featureFlags.setFlag(Flags.FLAG_ARCHIVING, true)
         setContent()
 
-        composeTestRule.onNodeWithText(context.getString(R.string.launch_instant_app)).assertIsNotDisplayed()
+        composeTestRule.onNodeWithText(context.getString(R.string.launch_instant_app))
+            .assertIsNotDisplayed()
     }
 
     @Test
@@ -184,6 +188,7 @@ class AppButtonsTest {
 
     private companion object {
         const val PACKAGE_NAME = "package.name"
+        const val APP_LABEL = "App label"
         val PACKAGE_INFO = PackageInfo().apply {
             applicationInfo = ApplicationInfo().apply {
                 packageName = PACKAGE_NAME
