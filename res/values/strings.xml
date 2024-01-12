@@ -11285,7 +11285,7 @@
     <string name="mobile_network_sim_name_rename">Save</string>
     <!-- Label for the on position of a switch on the mobile network details page which allows
          disabling/enabling a SIM. The SIM is enabled in this state. [CHAR LIMIT=40] -->
-    <string name="mobile_network_use_sim_on">Use SIM</string>
+    <string name="mobile_network_use_sim_on">Use this SIM</string>
     <!-- Label for the off position of a switch on the mobile network details page which allows
          disabling/enabling a SIM. The SIM is disabled in this state. [CHAR LIMIT=40] -->
     <string name="mobile_network_use_sim_off">Off</string>
@@ -11427,6 +11427,56 @@
     <string name="dsds_activation_failure_title">Can\u2019t activate SIM</string>
     <!-- Body text of DSDS activation failure dialog. Users could toggle the selected SIM again or reboot to recover. [CHAR LIMIT=NONE] -->
     <string name="dsds_activation_failure_body_msg2">Try turning on the SIM again. If the problem continues, restart your device.</string>
+
+    <!-- Strings for dual SIM onboarding -->
+    <!-- Title of dual sim onboarding's bottom sheets. [CHAR LIMIT=30] -->
+    <string name="sim_onboarding_bottomsheets_title">Set up your SIM</string>
+    <!-- Body text of dual sim onboarding's bottom sheets. [CHAR LIMIT=NONE] -->
+    <string name="sim_onboarding_bottomsheets_msg">Set your mobile network preferences to use multiple SIMs on this device</string>
+    <!-- Title of dual sim onboarding's label sim page. [CHAR LIMIT=30] -->
+    <string name="sim_onboarding_label_sim_title">Label your SIMs</string>
+    <!-- Body text of dual sim onboarding's label sim page. [CHAR LIMIT=NONE] -->
+    <string name="sim_onboarding_label_sim_msg">You’ll see these labels when making calls, sending texts, and using data, and in Settings</string>
+    <!-- Title of dual sim onboarding's label sim dialog. [CHAR LIMIT=30] -->
+    <string name="sim_onboarding_label_sim_dialog_title">SIM label</string>
+    <!-- Label text of dual sim onboarding's label sim dialog. [CHAR LIMIT=30] -->
+    <string name="sim_onboarding_label_sim_dialog_label">Label</string>
+    <!-- Title of dual sim onboarding's select sim page. [CHAR LIMIT=30] -->
+    <string name="sim_onboarding_select_sim_title">Select which SIMs to use</string>
+    <!-- Body text of dual sim onboarding's select sim page. [CHAR LIMIT=NONE] -->
+    <string name="sim_onboarding_select_sim_msg">You can use 2 SIMs at a time</string>
+    <!-- Title of dual sim onboarding's primary sim page. [CHAR LIMIT=30] -->
+    <string name="sim_onboarding_primary_sim_title">Set your primary SIMs</string>
+    <!-- Body text of dual sim onboarding's primary sim page. [CHAR LIMIT=NONE] -->
+    <string name="sim_onboarding_primary_sim_msg">Choose which SIMs to use by default for calls, texts, and data</string>
+
+    <!-- Title of primary sim at SIMs page. [CHAR LIMIT=30] -->
+    <string name="primary_sim_title">Your primary SIMs</string>
+
+    <!-- Title of Calls item/dialog at dual sim onboarding's primary sim page or SIMs page. [CHAR LIMIT=30] -->
+    <string name="primary_sim_calls_title">Calls</string>
+    <!-- Title of Texts item/dialog at dual sim onboarding's primary sim page or SIMs page. [CHAR LIMIT=30] -->
+    <string name="primary_sim_texts_title">Texts</string>
+    <!-- Title of automatic data switching at dual sim onboarding's primary sim page or SIMs page. [CHAR LIMIT=30] -->
+    <string name="primary_sim_automatic_data_title">Automatic data switching</string>
+    <!-- Body text of automatic data switching at dual sim onboarding's primary sim page or SIMs page. [CHAR LIMIT=NONE] -->
+    <string name="primary_sim_automatic_data_msg">Use data from either SIM depending on coverage and availability</string>
+
+    <!-- Text of phone number item when the sim is data only. [CHAR LIMIT=NONE] -->
+    <string name="sim_onboarding_phoneNumber_data_only">Data only</string>
+
+    <!-- Button on the dual sim onboarding to start to set up sim. [CHAR LIMIT=30] -->
+    <string name="sim_onboarding_setup">Set up</string>
+    <!-- Button on the dual sim onboarding to go to next page. [CHAR LIMIT=30] -->
+    <string name="sim_onboarding_next">Next</string>
+    <!-- Text on the progressbar of dual sim onboarding for turning sim on. [CHAR LIMIT=30] -->
+    <string name="sim_onboarding_profressbar_turning_sim_on">Turning on <xliff:g id="carrier_name" example="Google Fi">%1$s</xliff:g>&#8230;</string>
+    <!-- Title of service provider name(SPN) at mobile network settings page. [CHAR LIMIT=30] -->
+    <string name="mobile_network_spn_title">Mobile network</string>
+    <!-- Title of phone number at mobile network settings page. [CHAR LIMIT=30] -->
+    <string name="mobile_network_phone_number_title">Phone number</string>
+    <!-- Title of SIM label and color editor dialog at mobile network settings page. [CHAR LIMIT=30] -->
+    <string name="mobile_network_sim_label_color_title">SIM label and color</string>
 
     <!--  Strings for SIM push notifications  -->
     <!-- Category name of the notifications related to SIM setup. [CHAR LIMIT=NONE] -->
