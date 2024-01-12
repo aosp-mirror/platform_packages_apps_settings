@@ -17,10 +17,13 @@
 package com.android.settings.development;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.ParcelFileDescriptor;
+import android.os.PersistableBundle;
 import android.os.PowerManager;
 import android.os.SystemProperties;
+import android.os.SystemUpdateManager;
 import android.os.UpdateEngine;
 import android.os.UpdateEngineStable;
 import android.os.UpdateEngineStableCallback;
@@ -82,6 +85,7 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
     private static final String PAYLOAD_BINARY_FILE_NAME = "payload.bin";
     private static final String PAYLOAD_PROPERTIES_FILE_NAME = "payload_properties.txt";
     private static final int OFFSET_TO_FILE_NAME = 30;
+    public static final String EXPERIMENTAL_UPDATE_TITLE = "Android 16K Kernel Experimental Update";
 
     private @Nullable DevelopmentSettingsDashboardFragment mFragment = null;
     private boolean mEnable16k;
@@ -172,6 +176,14 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
     public void on16kPagesDialogDismissed() {}
 
     private void installUpdate() {
+        SystemUpdateManager manager = mContext.getSystemService(SystemUpdateManager.class);
+        Bundle data = manager.retrieveSystemUpdateInfo();
+        int status = data.getInt(SystemUpdateManager.KEY_STATUS);
+        if (status != SystemUpdateManager.STATUS_UNKNOWN
+                && status != SystemUpdateManager.STATUS_IDLE) {
+            throw new RuntimeException("System has pending update!");
+        }
+
         String updateFilePath = mEnable16k ? OTA_16K_PATH : OTA_4K_PATH;
         try {
             File updateFile = new File(updateFilePath);
@@ -295,11 +307,20 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
 
             if (errorCode == UpdateEngine.ErrorCodeConstants.SUCCESS) {
                 Log.i(TAG, "applyPayload successful");
+
+                // Save changed preference
                 Settings.Global.putInt(
                         mContext.getContentResolver(),
                         Settings.Global.ENABLE_16K_PAGES,
                         mEnable16k ? ENABLE_16K_PAGE_SIZE : ENABLE_4K_PAGE_SIZE);
 
+                // Publish system update info
+                SystemUpdateManager manager =
+                        (SystemUpdateManager)
+                                mContext.getSystemService(Context.SYSTEM_UPDATE_SERVICE);
+                manager.updateSystemUpdateInfo(getUpdateInfo());
+
+                // Restart device to complete update
                 PowerManager pm = mContext.getSystemService(PowerManager.class);
                 pm.reboot(REBOOT_REASON);
             } else {
@@ -322,5 +343,14 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
         builder.setView(progressBar);
         builder.setCancelable(false);
         return builder.create();
+    }
+
+    private PersistableBundle getUpdateInfo() {
+        PersistableBundle infoBundle = new PersistableBundle();
+        infoBundle.putInt(
+                SystemUpdateManager.KEY_STATUS, SystemUpdateManager.STATUS_WAITING_REBOOT);
+        infoBundle.putBoolean(SystemUpdateManager.KEY_IS_SECURITY_UPDATE, false);
+        infoBundle.putString(SystemUpdateManager.KEY_TITLE, EXPERIMENTAL_UPDATE_TITLE);
+        return infoBundle;
     }
 }
