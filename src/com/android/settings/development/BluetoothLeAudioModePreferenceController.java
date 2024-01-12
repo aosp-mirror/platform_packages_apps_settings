@@ -26,6 +26,7 @@ import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 
@@ -50,8 +51,9 @@ public class BluetoothLeAudioModePreferenceController
 
     private final String[] mListValues;
     private final String[] mListSummaries;
-    @Nullable private String mNewMode;
-
+    @VisibleForTesting
+    @Nullable String mNewMode;
+    @VisibleForTesting
     BluetoothAdapter mBluetoothAdapter;
 
     boolean mChanged = false;
