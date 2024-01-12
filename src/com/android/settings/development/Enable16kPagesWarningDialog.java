@@ -35,6 +35,7 @@ public class Enable16kPagesWarningDialog extends InstrumentedDialogFragment
         implements DialogInterface.OnClickListener, DialogInterface.OnDismissListener {
 
     public static final String TAG = "Enable16KDialog";
+    private static final String DIALOG_BUNDLE_KEY = "SHOW_16K_DIALOG";
 
     private Enable16kbPagesDialogHost mHost;
 
@@ -42,17 +43,22 @@ public class Enable16kPagesWarningDialog extends InstrumentedDialogFragment
         mHost = host;
     }
 
-    /** Used to display warning dialog */
+    /** This method is used to show warning dialog to apply 16K update and reboot */
     public static void show(
-            @NonNull Fragment hostFragment, @NonNull Enable16kbPagesDialogHost dialogHost) {
+            @NonNull Fragment hostFragment,
+            @NonNull Enable16kbPagesDialogHost dialogHost,
+            boolean enable16k) {
         final FragmentManager manager = hostFragment.getActivity().getSupportFragmentManager();
         Fragment existingFragment = manager.findFragmentByTag(TAG);
         if (existingFragment == null) {
             existingFragment = new Enable16kPagesWarningDialog();
-            existingFragment.setTargetFragment(hostFragment, 0 /* requestCode */);
         }
 
         if (existingFragment instanceof Enable16kPagesWarningDialog) {
+            Bundle bundle = new Bundle();
+            bundle.putBoolean(DIALOG_BUNDLE_KEY, enable16k);
+            existingFragment.setArguments(bundle);
+            existingFragment.setTargetFragment(hostFragment, 0 /* requestCode */);
             ((Enable16kPagesWarningDialog) existingFragment).setHost(dialogHost);
             ((Enable16kPagesWarningDialog) existingFragment).show(manager, TAG);
         }
@@ -66,9 +72,17 @@ public class Enable16kPagesWarningDialog extends InstrumentedDialogFragment
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+        final Bundle bundle = getArguments();
+        boolean is16kDialog = bundle.getBoolean(DIALOG_BUNDLE_KEY);
         return new AlertDialog.Builder(getActivity())
-                .setTitle(R.string.confirm_enable_16k_pages_title)
-                .setMessage(R.string.confirm_enable_16k_pages_text)
+                .setTitle(
+                        is16kDialog
+                                ? R.string.confirm_enable_16k_pages_title
+                                : R.string.confirm_enable_4k_pages_title)
+                .setMessage(
+                        is16kDialog
+                                ? R.string.confirm_enable_16k_pages_text
+                                : R.string.confirm_enable_4k_pages_text)
                 .setPositiveButton(android.R.string.ok, this /* onClickListener */)
                 .setNegativeButton(android.R.string.cancel, this /* onClickListener */)
                 .create();
