@@ -46,6 +46,8 @@
     <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"Predná obrazovka sa pri zložení zariadenia zapne"</string>
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"Iba hry, videá a ďalší obsah"</string>
     <string name="selective_stay_awake_summary" msgid="9055967322921984543">"Predná obrazovka sa zapne v prípade aplikácií, ktoré bránia spusteniu režimu obrazovky pri nečinnosti"</string>
+    <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Pokračujte potiahnutím nahor"</string>
+    <string name="stay_awake_on_lockscreen_summary" msgid="2299351813382522952">"Ak chcete pokračovať v používaní aplikácie, zložte telefón a potiahnite prstom nahor po prednej obrazovke alebo počkajte niekoľko sekúnd, kým sa obrazovka uzamkne"</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"Nikdy"</string>
     <string name="sleep_on_fold_summary" msgid="7737992842459588846">"Predná obrazovka sa pri zložení zariadenia uzamkne"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Používať automatické otáčanie"</string>
@@ -283,8 +285,7 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Aplikácie s povolením pre zariadenia v okolí môžu rozpoznať relatívnu pozíciu pripojených zariadení."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Prístup aplikácií a služieb k polohe je vypnutý. Poloha zariadenia však stále môže byť odoslaná pracovníkom záchranného systému, keď zavoláte na tiesňovú linku alebo na ňu pošlete textovú správu."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Ďalšie informácie o nastaveniach polohy"</string>
-    <!-- no translation found for location_settings_tooltip_text_for_chrome (3574930966097093550) -->
-    <skip />
+    <string name="location_settings_tooltip_text_for_chrome" msgid="3574930966097093550">"Zmena prístupu k polohe: Nastavenia &gt; Zabezp. a ochr. súkromia &gt; Nast. och. súkromia"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Účty"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Zabezpečenie"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Šifrovanie a poverenia"</string>
@@ -545,7 +546,7 @@
     <string name="work_profile_category_header" msgid="85707750968948517">"Pracovný profil"</string>
     <string name="private_space_title" msgid="7078627930195569767">"Súkromný priestor"</string>
     <string name="private_space_summary" msgid="2274405892301976238">"Ponechajte súkromné aplikácie uzamknuté a skryté"</string>
-    <string name="private_space_description" msgid="5494963647270826210">"Skryte aplikácie do súkromného priečinka, do ktorého máte prístup iba vy"</string>
+    <string name="private_space_description" msgid="4059594203775816136">"Uchovávajte súkromné aplikácie v samostatnom priestore, ktorý môžete skryť alebo uzamknúť"</string>
     <string name="private_space_lock_title" msgid="3006539720164938296">"Zámka súkromného priestoru"</string>
     <string name="private_space_one_lock_summary" msgid="2759953747682959371">"Súkromný priestor môžete uzamknúť rovnakým spôsobom ako svoje zariadenie, prípadne môžete vybrať inú zámku"</string>
     <string name="private_space_screen_lock_title" msgid="8679383894967823163">"Používať zámku obrazovky zariadenia"</string>
@@ -1814,19 +1815,14 @@
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Dostupná klávesnica na obrazovke"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Spravovať klávesnice na obrazovke"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"Možnosti"</string>
-    <!-- no translation found for keyboard_a11y_category (8230758278046841469) -->
-    <skip />
+    <string name="keyboard_a11y_category" msgid="8230758278046841469">"Dostupnosť"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Fyzická klávesnica"</string>
     <string name="show_ime" msgid="4334255501724746849">"Používať klávesnicu na obrazovke"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"Ponechať na obrazovke, keď je aktívna fyzická klávesnica"</string>
-    <!-- no translation found for bounce_keys (7419450970351743904) -->
-    <skip />
-    <!-- no translation found for bounce_keys_summary (6922850403920596246) -->
-    <skip />
-    <!-- no translation found for sticky_keys (7317317044898161747) -->
-    <skip />
-    <!-- no translation found for sticky_keys_summary (8520909829540989765) -->
-    <skip />
+    <string name="bounce_keys" msgid="7419450970351743904">"Klávesy jedného stlačenia"</string>
+    <string name="bounce_keys_summary" msgid="6922850403920596246">"Povoľte klávesy jedného stlačenia pre dostupnosť na fyzickej klávesnici"</string>
+    <string name="sticky_keys" msgid="7317317044898161747">"Režim uzamknutia klávesa"</string>
+    <string name="sticky_keys_summary" msgid="8520909829540989765">"Povoľte režim uzamknutia klávesa pre dostupnosť na fyzickej klávesnici"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Klávesové skratky"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Zobrazenie zoznamu skratiek"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Klávesnice a nástroje pracovného profilu"</string>
@@ -1924,7 +1920,10 @@
     <string name="usage_stats_sort_by_usage_time" msgid="2927310334119998301">"Zoradiť podľa času používania"</string>
     <string name="usage_stats_sort_by_last_time_used" msgid="7039213339779884017">"Zoradiť podľa posledného použitia"</string>
     <string name="usage_stats_sort_by_app_name" msgid="4463833145514850478">"Zoradiť podľa názvu aplikácie"</string>
-    <string name="last_time_used_label" msgid="2639712813493534074">"Naposledy použité"</string>
+    <!-- no translation found for last_time_used_label (7589377271406011659) -->
+    <skip />
+    <!-- no translation found for last_time_used_never (2936073559267990034) -->
+    <skip />
     <string name="usage_time_label" msgid="9105343335151559883">"Doba použitia"</string>
     <string name="accessibility_settings" msgid="4713215774904704682">"Dostupnosť"</string>
     <string name="accessibility_settings_title" msgid="6739115703615065716">"Nastavenia dostupnosti"</string>
@@ -2494,9 +2493,13 @@
     <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"teraz"</string>
     <string name="battery_usage_timestamps_hyphen" msgid="7401188432989043905">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g> – <xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
     <string name="battery_usage_day_and_hour" msgid="1417890420844950881">"<xliff:g id="DAY">%1$s</xliff:g> <xliff:g id="HOUR">%2$s</xliff:g>"</string>
+    <!-- no translation found for battery_usage_time_info_and_battery_level (6732629268310936155) -->
+    <skip />
     <string name="battery_usage_chart" msgid="4114747521432440017">"Graf spotreby batérie"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Graf spotreby batérie za deň"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Graf spotreby batérie za hodinu"</string>
+    <!-- no translation found for battery_level_percentage (1433178290838842146) -->
+    <skip />
     <string name="battery_usage_breakdown_title_since_last_full_charge" msgid="435006273323199906">"Spotreba batérie od posledného úplného nabitia"</string>
     <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"Spotreba batérie: <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"Čas používania od posledného úplného nabitia"</string>
@@ -3384,6 +3387,7 @@
     <string name="recent_convos_removed" msgid="2122932798895714203">"Nedávne konverzácie boli odstránené"</string>
     <string name="recent_convo_removed" msgid="8686414146325958281">"Konverzácia bola odstránená"</string>
     <string name="clear" msgid="5092178335409471100">"Vymazať"</string>
+    <string name="clear_conversation" msgid="5564321180363279096">"Vymazať konverzáciu <xliff:g id="CONVERSATION_NAME">%1$s</xliff:g>"</string>
     <string name="conversation_onboarding_title" msgid="5194559958353468484">"Tu sa budú zobrazovať prioritné a zmenené konverzácie"</string>
     <string name="conversation_onboarding_summary" msgid="2484845363368486941">"Keď označíte konverzáciu ako prioritnú alebo vykonáte v konverzáciách akékoľvek iné zmeny, zobrazia sa tu. \n\nAko zmeniť nastavenia konverzácie: \nPotiahnutím z hornej časti obrazovky smerom nadol otvorte panel upozornení a potom pridržte požadovanú konverzáciu."</string>
     <string name="notification_importance_min_title" msgid="7676541266705442501">"Minimalizovať"</string>

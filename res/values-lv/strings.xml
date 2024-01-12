@@ -46,6 +46,8 @@
     <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"Priekšējais ekrāns tiek ieslēgts, kad ierīce tiek salocīta"</string>
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"Tikai spēles, video u.c."</string>
     <string name="selective_stay_awake_summary" msgid="9055967322921984543">"Priekšējais displejs tiek ieslēgts lietotnēm, kas neļauj ekrānam pāriet miega režīmā"</string>
+    <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Vilkt augšup, lai turpinātu"</string>
+    <string name="stay_awake_on_lockscreen_summary" msgid="2299351813382522952">"Salokiet tālruni un velciet augšup priekšējā displejā, lai turpinātu izmantot lietotni, vai uzgaidiet dažas sekundes, lai ekrāns tiktu bloķēts."</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"Nekad"</string>
     <string name="sleep_on_fold_summary" msgid="7737992842459588846">"Priekšējais displejs tiek bloķēts, kad ierīce tiek salocīta"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Automātiska pagriešana"</string>
@@ -283,8 +285,7 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Lietotnes, kurām ir atļauja noteikt tuvumā esošās ierīces, var noteikt pievienoto ierīču relatīvo pozīciju."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Lietotnēm un pakalpojumiem nav atļaujas piekļūt atrašanās vietai. Jūsu ierīces atrašanās vietas datus joprojām var nosūtīt ārkārtas dienestiem, ja zvanīsiet vai sūtīsiet īsziņu uz ārkārtas numuru."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Uzzināt vairāk par atrašanās vietas iestatījumiem"</string>
-    <!-- no translation found for location_settings_tooltip_text_for_chrome (3574930966097093550) -->
-    <skip />
+    <string name="location_settings_tooltip_text_for_chrome" msgid="3574930966097093550">"Lai mainītu piekļuvi atrašanās vietai, pārejiet uz sadaļu Iestatījumi &gt; Drošība un konfidencialitāte &gt; Konfidencialitātes vadīklas."</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Konti"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Drošība"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Šifrēšana un akreditācijas dati"</string>
@@ -545,7 +546,7 @@
     <string name="work_profile_category_header" msgid="85707750968948517">"Darba profils"</string>
     <string name="private_space_title" msgid="7078627930195569767">"Privātā mape"</string>
     <string name="private_space_summary" msgid="2274405892301976238">"Paslēpiet privātās lietotnes un bloķējiet piekļuvi tām."</string>
-    <string name="private_space_description" msgid="5494963647270826210">"Paslēpiet lietotnes privātā mapē, kurai varēsiet piekļūt tikai jūs."</string>
+    <string name="private_space_description" msgid="4059594203775816136">"Glabājiet privātās lietotnes atsevišķā telpā, kuru varat paslēpt vai bloķēt."</string>
     <string name="private_space_lock_title" msgid="3006539720164938296">"Privātās mapes bloķēšana"</string>
     <string name="private_space_one_lock_summary" msgid="2759953747682959371">"Varat atbloķēt privāto mapi tāpat kā ierīci vai izvēlēties citu bloķēšanas metodi."</string>
     <string name="private_space_screen_lock_title" msgid="8679383894967823163">"Izmantot ierīces ekrāna bloķēšanas metodi"</string>
@@ -1814,19 +1815,14 @@
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Pieejamā ekrāna tastatūra"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Pārvaldīt ekrāna tastatūru"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"Opcijas"</string>
-    <!-- no translation found for keyboard_a11y_category (8230758278046841469) -->
-    <skip />
+    <string name="keyboard_a11y_category" msgid="8230758278046841469">"Pieejamība"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Fiziskā tastatūra"</string>
     <string name="show_ime" msgid="4334255501724746849">"Izmantot ekrāna tastatūru"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"Paturēt ekrānā, kamēr ir aktīva fiziskā tastatūra"</string>
-    <!-- no translation found for bounce_keys (7419450970351743904) -->
-    <skip />
-    <!-- no translation found for bounce_keys_summary (6922850403920596246) -->
-    <skip />
-    <!-- no translation found for sticky_keys (7317317044898161747) -->
-    <skip />
-    <!-- no translation found for sticky_keys_summary (8520909829540989765) -->
-    <skip />
+    <string name="bounce_keys" msgid="7419450970351743904">"Atlēcienu taustiņi"</string>
+    <string name="bounce_keys_summary" msgid="6922850403920596246">"Iespējojiet atlēcienu taustiņus fiziskās tastatūras pieejamībai."</string>
+    <string name="sticky_keys" msgid="7317317044898161747">"Taustiņu ķēde"</string>
+    <string name="sticky_keys_summary" msgid="8520909829540989765">"Iespējojiet taustiņu ķēdi fiziskās tastatūras pieejamībai."</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Īsinājumtaustiņi"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Rādīt īsinājumtaustiņu sarakstu"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Tastatūras un rīki darba profilā"</string>
@@ -1924,7 +1920,10 @@
     <string name="usage_stats_sort_by_usage_time" msgid="2927310334119998301">"Kārtot pēc lietojuma laika"</string>
     <string name="usage_stats_sort_by_last_time_used" msgid="7039213339779884017">"Kārtot pēc pēdējās lietošanas"</string>
     <string name="usage_stats_sort_by_app_name" msgid="4463833145514850478">"Kārtot pēc lietotnes nosaukuma"</string>
-    <string name="last_time_used_label" msgid="2639712813493534074">"Pēdējo reizi izmantots"</string>
+    <!-- no translation found for last_time_used_label (7589377271406011659) -->
+    <skip />
+    <!-- no translation found for last_time_used_never (2936073559267990034) -->
+    <skip />
     <string name="usage_time_label" msgid="9105343335151559883">"Lietojuma laiks"</string>
     <string name="accessibility_settings" msgid="4713215774904704682">"Pieejamība"</string>
     <string name="accessibility_settings_title" msgid="6739115703615065716">"Pieejamības iestatījumi"</string>
@@ -2494,9 +2493,13 @@
     <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"tagad"</string>
     <string name="battery_usage_timestamps_hyphen" msgid="7401188432989043905">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g>–<xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
     <string name="battery_usage_day_and_hour" msgid="1417890420844950881">"<xliff:g id="DAY">%1$s</xliff:g> plkst. <xliff:g id="HOUR">%2$s</xliff:g>"</string>
+    <!-- no translation found for battery_usage_time_info_and_battery_level (6732629268310936155) -->
+    <skip />
     <string name="battery_usage_chart" msgid="4114747521432440017">"Akumulatora lietojuma diagramma"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Diagramma ar datiem par akumulatora lietojumu dienā"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Diagramma ar datiem par akumulatora lietojumu stundā"</string>
+    <!-- no translation found for battery_level_percentage (1433178290838842146) -->
+    <skip />
     <string name="battery_usage_breakdown_title_since_last_full_charge" msgid="435006273323199906">"Akumulatora lietojums kopš pēdējās pilnās uzlādes"</string>
     <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"Akumulatora lietojums: <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"Izmantošanas ilgums kopš pēdējās pilnās uzlādes"</string>
@@ -3384,6 +3387,7 @@
     <string name="recent_convos_removed" msgid="2122932798895714203">"Jaunākās sarunas ir noņemtas"</string>
     <string name="recent_convo_removed" msgid="8686414146325958281">"Saruna noņemta"</string>
     <string name="clear" msgid="5092178335409471100">"Notīrīt"</string>
+    <string name="clear_conversation" msgid="5564321180363279096">"Notīrīt sarunu <xliff:g id="CONVERSATION_NAME">%1$s</xliff:g>"</string>
     <string name="conversation_onboarding_title" msgid="5194559958353468484">"Šeit būs redzamas prioritārās un mainītās sarunas"</string>
     <string name="conversation_onboarding_summary" msgid="2484845363368486941">"Tiklīdz atzīmēsiet kādu sarunu kā prioritāru vai veiksiet citas izmaiņas sarunās, tās tiks rādītas šeit. \n\nSarunas iestatījumu mainīšana: \nvelciet lejup no ekrāna augšdaļas, lai atvērtu nolaižamo paneli, pēc tam pieskarieties konkrētai sarunai un turiet to."</string>
     <string name="notification_importance_min_title" msgid="7676541266705442501">"Minimizēt"</string>

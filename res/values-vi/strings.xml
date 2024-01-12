@@ -46,6 +46,8 @@
     <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"Màn hình ngoài sẽ bật khi bạn gập thiết bị"</string>
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"Chỉ trò chơi, video và nhiều nội dung khác"</string>
     <string name="selective_stay_awake_summary" msgid="9055967322921984543">"Màn hình ngoài bật đối với các ứng dụng ngăn không cho màn hình chuyển sang chế độ rảnh"</string>
+    <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Vuốt lên để tiếp tục"</string>
+    <string name="stay_awake_on_lockscreen_summary" msgid="2299351813382522952">"Gập điện thoại và vuốt lên trên màn hình ngoài để tiếp tục sử dụng ứng dụng, hoặc đợi vài giây để màn hình tự khoá lại"</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"Không bao giờ"</string>
     <string name="sleep_on_fold_summary" msgid="7737992842459588846">"Màn hình ngoài sẽ khoá khi bạn gập thiết bị"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Dùng chế độ tự động xoay"</string>
@@ -283,8 +285,7 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Những ứng dụng có quyền đối với các Thiết bị ở gần có thể xác định vị trí tương đối của các thiết bị đã kết nối."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Các ứng dụng và dịch vụ sẽ không có quyền truy cập vào thông tin vị trí. Khi bạn gọi điện hoặc nhắn tin đến một số khẩn cấp, những người ứng cứu khẩn cấp vẫn có thể nhận được thông tin vị trí thiết bị của bạn."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Tìm hiểu thêm về chế độ Cài đặt vị trí"</string>
-    <!-- no translation found for location_settings_tooltip_text_for_chrome (3574930966097093550) -->
-    <skip />
+    <string name="location_settings_tooltip_text_for_chrome" msgid="3574930966097093550">"Thay đổi quyền vị trí: Cài đặt &gt; Bảo mật &amp; quyền riêng tư &gt; Kiểm soát quyền riêng tư"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Tài khoản"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Bảo mật"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Mã hóa và thông tin xác thực"</string>
@@ -545,7 +546,7 @@
     <string name="work_profile_category_header" msgid="85707750968948517">"Hồ sơ công việc"</string>
     <string name="private_space_title" msgid="7078627930195569767">"Không gian riêng tư"</string>
     <string name="private_space_summary" msgid="2274405892301976238">"Luôn khoá và ẩn các ứng dụng riêng tư"</string>
-    <string name="private_space_description" msgid="5494963647270826210">"Ẩn các ứng dụng trong một thư mục riêng tư mà chỉ bạn mới có thể truy cập vào được"</string>
+    <string name="private_space_description" msgid="4059594203775816136">"Đưa các ứng dụng riêng tư vào một không gian riêng biệt mà bạn có thể ẩn hoặc khoá"</string>
     <string name="private_space_lock_title" msgid="3006539720164938296">"Khoá không gian riêng tư"</string>
     <string name="private_space_one_lock_summary" msgid="2759953747682959371">"Bạn có thể mở khoá Không gian riêng tư giống như cách mở khoá thiết bị của mình, hoặc chọn một phương thức khoá khác"</string>
     <string name="private_space_screen_lock_title" msgid="8679383894967823163">"Sử dụng phương thức khoá màn hình thiết bị"</string>
@@ -1814,19 +1815,14 @@
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Bàn phím ảo có sẵn"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Quản lý bàn phím ảo"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"Tuỳ chọn"</string>
-    <!-- no translation found for keyboard_a11y_category (8230758278046841469) -->
-    <skip />
+    <string name="keyboard_a11y_category" msgid="8230758278046841469">"Hỗ trợ tiếp cận"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Bàn phím vật lý"</string>
     <string name="show_ime" msgid="4334255501724746849">"Sử dụng bàn phím ảo"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"Hiện bàn phím ảo trên màn hình trong khi bàn phím vật lý đang hoạt động"</string>
-    <!-- no translation found for bounce_keys (7419450970351743904) -->
-    <skip />
-    <!-- no translation found for bounce_keys_summary (6922850403920596246) -->
-    <skip />
-    <!-- no translation found for sticky_keys (7317317044898161747) -->
-    <skip />
-    <!-- no translation found for sticky_keys_summary (8520909829540989765) -->
-    <skip />
+    <string name="bounce_keys" msgid="7419450970351743904">"Phím nảy"</string>
+    <string name="bounce_keys_summary" msgid="6922850403920596246">"Bật Phím nảy để hỗ trợ tiếp cận cho bàn phím vật lý"</string>
+    <string name="sticky_keys" msgid="7317317044898161747">"Phím cố định"</string>
+    <string name="sticky_keys_summary" msgid="8520909829540989765">"Bật Phím cố định để hỗ trợ tiếp cận cho bàn phím vật lý"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Phím tắt"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Hiện danh sách phím tắt"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Công cụ và bàn phím hồ sơ công việc"</string>
@@ -1924,7 +1920,10 @@
     <string name="usage_stats_sort_by_usage_time" msgid="2927310334119998301">"Sắp xếp theo thời gian dùng"</string>
     <string name="usage_stats_sort_by_last_time_used" msgid="7039213339779884017">"Sắp xếp theo lần dùng gần đây nhất"</string>
     <string name="usage_stats_sort_by_app_name" msgid="4463833145514850478">"Sắp xếp theo tên ứng dụng"</string>
-    <string name="last_time_used_label" msgid="2639712813493534074">"Sử dụng lần cuối"</string>
+    <!-- no translation found for last_time_used_label (7589377271406011659) -->
+    <skip />
+    <!-- no translation found for last_time_used_never (2936073559267990034) -->
+    <skip />
     <string name="usage_time_label" msgid="9105343335151559883">"Thời gian sử dụng"</string>
     <string name="accessibility_settings" msgid="4713215774904704682">"Hỗ trợ tiếp cận"</string>
     <string name="accessibility_settings_title" msgid="6739115703615065716">"Cài đặt hỗ trợ tiếp cận"</string>
@@ -2494,9 +2493,13 @@
     <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"hiện tại"</string>
     <string name="battery_usage_timestamps_hyphen" msgid="7401188432989043905">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g> – <xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
     <string name="battery_usage_day_and_hour" msgid="1417890420844950881">"<xliff:g id="DAY">%1$s</xliff:g> <xliff:g id="HOUR">%2$s</xliff:g>"</string>
+    <!-- no translation found for battery_usage_time_info_and_battery_level (6732629268310936155) -->
+    <skip />
     <string name="battery_usage_chart" msgid="4114747521432440017">"Biểu đồ mức sử dụng pin"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Biểu đồ mức sử dụng pin hằng ngày"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Biểu đồ mức sử dụng pin hằng giờ"</string>
+    <!-- no translation found for battery_level_percentage (1433178290838842146) -->
+    <skip />
     <string name="battery_usage_breakdown_title_since_last_full_charge" msgid="435006273323199906">"Mức sử dụng pin từ lần sạc đầy gần nhất"</string>
     <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"Mức sử dụng pin: <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"Thời gian sử dụng thiết bị kể từ lần sạc đầy gần đây nhất"</string>
@@ -3384,6 +3387,7 @@
     <string name="recent_convos_removed" msgid="2122932798895714203">"Đã xóa các cuộc trò chuyện gần đây"</string>
     <string name="recent_convo_removed" msgid="8686414146325958281">"Đã xóa cuộc trò chuyện"</string>
     <string name="clear" msgid="5092178335409471100">"Xóa"</string>
+    <string name="clear_conversation" msgid="5564321180363279096">"Xoá <xliff:g id="CONVERSATION_NAME">%1$s</xliff:g>"</string>
     <string name="conversation_onboarding_title" msgid="5194559958353468484">"Các cuộc trò chuyện ưu tiên và đã sửa đổi sẽ xuất hiện ở đây"</string>
     <string name="conversation_onboarding_summary" msgid="2484845363368486941">"Sau khi bạn đánh dấu một cuộc trò chuyện là ưu tiên hoặc thực hiện bất kỳ sự thay đổi nào khác đối với các cuộc trò chuyện, thì những cuộc trò chuyện đó sẽ xuất hiện ở đây. \n\nĐể thay đổi chế độ cài đặt cuộc trò chuyện: \nVuốt từ đầu màn hình xuống để mở ngăn kéo xuống rồi chạm và giữ cuộc trò chuyện."</string>
     <string name="notification_importance_min_title" msgid="7676541266705442501">"Thu nhỏ"</string>

@@ -46,6 +46,8 @@
     <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"Mag-o-on ang display sa harap kapag na-fold mo ang iyong device"</string>
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"Para lang sa mga laro, video, at higit pa"</string>
     <string name="selective_stay_awake_summary" msgid="9055967322921984543">"Mag-o-on ang display sa harap para sa mga app na pumipigil sa pag-idle ng iyong screen"</string>
+    <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Mag-swipe pataas para magpatuloy"</string>
+    <string name="stay_awake_on_lockscreen_summary" msgid="2299351813382522952">"I-fold ang iyong telepono at mag-swipe pataas sa front display para patuloy na gamitin ang app, o maghintay nang ilang segundo para mag-lock ang screen"</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"Hindi kailanman"</string>
     <string name="sleep_on_fold_summary" msgid="7737992842459588846">"Magla-lock ang display sa harap kapag na-fold mo ang iyong device"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Gumamit ng auto-rotate"</string>
@@ -283,8 +285,7 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Matutukoy ng mga app na may pahintulot sa Mga kalapit na device ang relatibong posisyon ng mga nakakonektang device."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Naka-off para sa mga app at serbisyo ang access sa lokasyon. Posibleng ipadala pa rin ang lokasyon ng iyong device sa mga reresponde sa emergency kapag tumawag o nag-text ka sa pang-emergency na numero."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Matuto pa tungkol sa Mga setting ng lokasyon."</string>
-    <!-- no translation found for location_settings_tooltip_text_for_chrome (3574930966097093550) -->
-    <skip />
+    <string name="location_settings_tooltip_text_for_chrome" msgid="3574930966097093550">"Para baguhin ang access sa lokasyon, pumunta sa Mga Setting &gt; Seguridad at Privacy &gt; Mga kontrol sa privacy"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Mga Account"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Seguridad"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Pag-encrypt at mga kredensyal"</string>
@@ -545,7 +546,7 @@
     <string name="work_profile_category_header" msgid="85707750968948517">"Profile sa trabaho"</string>
     <string name="private_space_title" msgid="7078627930195569767">"Pribadong Space"</string>
     <string name="private_space_summary" msgid="2274405892301976238">"Panatilihing naka-lock at nakatago ang mga pribadong app"</string>
-    <string name="private_space_description" msgid="5494963647270826210">"Itago ang mga app sa pribadong folder na ikaw lang ang makaka-access"</string>
+    <string name="private_space_description" msgid="4059594203775816136">"Ilagay ang mga pribadong app sa hiwalay na space na puwede mong itago o i-lock"</string>
     <string name="private_space_lock_title" msgid="3006539720164938296">"Lock ng Pribadong Space"</string>
     <string name="private_space_one_lock_summary" msgid="2759953747682959371">"Puwede mong i-unlock ang Pribadong Space sa parehong paraan kung paano mo i-unlock ang iyong device, o pumili ng ibang lock"</string>
     <string name="private_space_screen_lock_title" msgid="8679383894967823163">"Gamitin ang lock ng screen ng device"</string>
@@ -1814,19 +1815,14 @@
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Available na On-screen na keyboard"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Pamahalaan ang on-screen na keyboard"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"Mga Opsyon"</string>
-    <!-- no translation found for keyboard_a11y_category (8230758278046841469) -->
-    <skip />
+    <string name="keyboard_a11y_category" msgid="8230758278046841469">"Accessibility"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Aktwal na keyboard"</string>
     <string name="show_ime" msgid="4334255501724746849">"Gumamit ng on-screen na keyboard"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"Panatilihin ito sa screen habang aktibo ang pisikal na keyboard"</string>
-    <!-- no translation found for bounce_keys (7419450970351743904) -->
-    <skip />
-    <!-- no translation found for bounce_keys_summary (6922850403920596246) -->
-    <skip />
-    <!-- no translation found for sticky_keys (7317317044898161747) -->
-    <skip />
-    <!-- no translation found for sticky_keys_summary (8520909829540989765) -->
-    <skip />
+    <string name="bounce_keys" msgid="7419450970351743904">"Mga bounce key"</string>
+    <string name="bounce_keys_summary" msgid="6922850403920596246">"I-enable ang Mga bounce key para sa accessibility ng pisikal na keyboard"</string>
+    <string name="sticky_keys" msgid="7317317044898161747">"Mga sticky key"</string>
+    <string name="sticky_keys_summary" msgid="8520909829540989765">"I-enable ang Mga sticky key para sa accessibility ng pisikal na keyboard"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Mga keyboard shortcut"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Ipakita ang listahan ng mga shortcut"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Mga keyboard at tool ng profile sa trabaho"</string>
@@ -1924,7 +1920,10 @@
     <string name="usage_stats_sort_by_usage_time" msgid="2927310334119998301">"Ayusin ayon sa tagal ng gamit"</string>
     <string name="usage_stats_sort_by_last_time_used" msgid="7039213339779884017">"Ayusin ayon sa huling paggamit"</string>
     <string name="usage_stats_sort_by_app_name" msgid="4463833145514850478">"Ayusin ayon sa pangalan ng app"</string>
-    <string name="last_time_used_label" msgid="2639712813493534074">"Huling oras na ginamit"</string>
+    <!-- no translation found for last_time_used_label (7589377271406011659) -->
+    <skip />
+    <!-- no translation found for last_time_used_never (2936073559267990034) -->
+    <skip />
     <string name="usage_time_label" msgid="9105343335151559883">"Oras ng paggamit"</string>
     <string name="accessibility_settings" msgid="4713215774904704682">"Accessibility"</string>
     <string name="accessibility_settings_title" msgid="6739115703615065716">"Mga setting ng pagiging maa-access"</string>
@@ -2494,9 +2493,13 @@
     <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"ngayon"</string>
     <string name="battery_usage_timestamps_hyphen" msgid="7401188432989043905">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g> - <xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
     <string name="battery_usage_day_and_hour" msgid="1417890420844950881">"<xliff:g id="DAY">%1$s</xliff:g> <xliff:g id="HOUR">%2$s</xliff:g>⁠"</string>
+    <!-- no translation found for battery_usage_time_info_and_battery_level (6732629268310936155) -->
+    <skip />
     <string name="battery_usage_chart" msgid="4114747521432440017">"Chart ng paggamit ng baterya"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Chart ng paggamit ng baterya kada araw"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Chart ng paggamit ng baterya kada oras"</string>
+    <!-- no translation found for battery_level_percentage (1433178290838842146) -->
+    <skip />
     <string name="battery_usage_breakdown_title_since_last_full_charge" msgid="435006273323199906">"Paggamit ng baterya mula noong huling na-full charge"</string>
     <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"Paggamit ng baterya para sa <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"Tagal ng paggamit mula noong huling ma-full charge"</string>
@@ -3384,6 +3387,7 @@
     <string name="recent_convos_removed" msgid="2122932798895714203">"Inalis ang mga kamakailang pag-uusap"</string>
     <string name="recent_convo_removed" msgid="8686414146325958281">"Inalis ang pag-uusap"</string>
     <string name="clear" msgid="5092178335409471100">"I-clear"</string>
+    <string name="clear_conversation" msgid="5564321180363279096">"I-clear ang <xliff:g id="CONVERSATION_NAME">%1$s</xliff:g>"</string>
     <string name="conversation_onboarding_title" msgid="5194559958353468484">"Lalabas dito ang mga priyoridad at binagong pag-uusap"</string>
     <string name="conversation_onboarding_summary" msgid="2484845363368486941">"Sa sandaling markahan mo ang isang pag-uusap bilang priyoridad, o magsagawa ng anupamang pagbabago sa mga pag-uusap, lalabas dito ang mga ito. \n\nPara baguhin ang mga setting ng pag-uusap: \nMag-swipe pababa mula sa itaas ng screen para buksan ang pull-down shade, pagkatapos ay pindutin nang matagal ang isang pag-uusap."</string>
     <string name="notification_importance_min_title" msgid="7676541266705442501">"I-minimize"</string>

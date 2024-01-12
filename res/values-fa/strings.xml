@@ -46,6 +46,8 @@
     <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"وقتی دستگاه را به حالت تاخوردگی می‌برید، نمایشگر جلو روشن می‌شود"</string>
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"فقط بازی‌ها، ویدیوها، و موارد دیگر"</string>
     <string name="selective_stay_awake_summary" msgid="9055967322921984543">"نمایشگر جلو برای برنامه‌هایی که حالت آزاد صفحه‌نمایش را متوقف می‌کنند روشن می‌شود"</string>
+    <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"تند کشیدن به‌بالا برای ادامه دادن"</string>
+    <string name="stay_awake_on_lockscreen_summary" msgid="2299351813382522952">"برای ادامه استفاده از برنامه، تلفن را تا کنید و روی نمایشگر جلویی تند به‌بالا بکشید، یا چند ثانیه صبر کنید تا صفحه‌نمایش قفل شود"</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"هرگز"</string>
     <string name="sleep_on_fold_summary" msgid="7737992842459588846">"وقتی دستگاه را به حالت تاخوردگی می‌برید، نمایشگر جلو قفل می‌شود"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"استفاده از چرخش خودکار"</string>
@@ -283,8 +285,7 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"برنامه‌هایی که اجازه «دستگاه‌های اطراف» را دارند می‌توانند موقعیت نسبی دستگاه‌های متصل را مشخص کنند."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"دسترسی به مکان برای برنامه‌ها و سرویس‌ها خاموش است. وقتی با شماره تلفن اضطراری تماس می‌گیرید یا به آن پیامک ارسال می‌کنید، ممکن است مکان دستگاهتان همچنان برای مسئولان خدمات اضطراری ارسال شود."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"درباره «تنظیمات مکان» بیشتر بدانید"</string>
-    <!-- no translation found for location_settings_tooltip_text_for_chrome (3574930966097093550) -->
-    <skip />
+    <string name="location_settings_tooltip_text_for_chrome" msgid="3574930966097093550">"برای تغییر دسترسی به مکان، به «تنظیمات &gt; امنیت و حریم خصوصی &gt; تنظیمات حریم خصوصی» بروید"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"حساب‌ها"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"امنیت"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"رمزگذاری و اطلاعات اعتباری"</string>
@@ -545,7 +546,7 @@
     <string name="work_profile_category_header" msgid="85707750968948517">"نمایه کاری"</string>
     <string name="private_space_title" msgid="7078627930195569767">"فضای خصوصی"</string>
     <string name="private_space_summary" msgid="2274405892301976238">"برنامه‌های خصوصی قفل و پنهان نگه داشته می‌شود"</string>
-    <string name="private_space_description" msgid="5494963647270826210">"پنهان کردن برنامه‌ها در پوشه‌ای خصوصی که فقط شما به آن دسترسی دارید"</string>
+    <string name="private_space_description" msgid="4059594203775816136">"برنامه‌های خصوصی را در فضای جداگانه‌ای نگه دارید که قابلیت پنهان کردن یا قفل کردن داشته باشد"</string>
     <string name="private_space_lock_title" msgid="3006539720164938296">"قفل «فضای خصوصی»"</string>
     <string name="private_space_one_lock_summary" msgid="2759953747682959371">"می‌توانید با همان روشی که قفل دستگاهتان را باز می‌کنید قفل «فضای خصوصی» را باز کنید، یا اینکه قفل دیگری انتخاب کنید"</string>
     <string name="private_space_screen_lock_title" msgid="8679383894967823163">"استفاده از قفل صفحه دستگاه"</string>
@@ -1814,19 +1815,14 @@
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"صفحه‌کلید مجازی دردسترس است"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"مدیریت صفحه‌کلیدهای روی صفحه"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"گزینه‌ها"</string>
-    <!-- no translation found for keyboard_a11y_category (8230758278046841469) -->
-    <skip />
+    <string name="keyboard_a11y_category" msgid="8230758278046841469">"دسترس‌پذیری"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"صفحه‌کلید فیزیکی"</string>
     <string name="show_ime" msgid="4334255501724746849">"استفاده از صفحه‌کلید مجازی"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"وقتی صفحه‌کلید فیزیکی فعال است این ویرایشگر را روی صفحه نگه‌می‌دارد"</string>
-    <!-- no translation found for bounce_keys (7419450970351743904) -->
-    <skip />
-    <!-- no translation found for bounce_keys_summary (6922850403920596246) -->
-    <skip />
-    <!-- no translation found for sticky_keys (7317317044898161747) -->
-    <skip />
-    <!-- no translation found for sticky_keys_summary (8520909829540989765) -->
-    <skip />
+    <string name="bounce_keys" msgid="7419450970351743904">"کلیدهای واگشت"</string>
+    <string name="bounce_keys_summary" msgid="6922850403920596246">"کلیدهای واگشت را برای دسترس‌پذیری صفحه‌کلید فیزیکی فعال کنید"</string>
+    <string name="sticky_keys" msgid="7317317044898161747">"کلیدهای چسبان"</string>
+    <string name="sticky_keys_summary" msgid="8520909829540989765">"کلیدهای چسبان را برای دسترس‌پذیری صفحه‌کلید فیزیکی فعال کنید"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"میان‌برهای صفحه‌کلید"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"نمایش فهرست میان‌برها"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"نمایه کاری صفحه‌کلیدها و ابزارها"</string>
@@ -1924,7 +1920,10 @@
     <string name="usage_stats_sort_by_usage_time" msgid="2927310334119998301">"مرتب کردن براساس زمان استفاده"</string>
     <string name="usage_stats_sort_by_last_time_used" msgid="7039213339779884017">"مرتب کردن براساس آخرین استفاده"</string>
     <string name="usage_stats_sort_by_app_name" msgid="4463833145514850478">"مرتب کردن براساس نام برنامه"</string>
-    <string name="last_time_used_label" msgid="2639712813493534074">"آخرین زمان استفاده"</string>
+    <!-- no translation found for last_time_used_label (7589377271406011659) -->
+    <skip />
+    <!-- no translation found for last_time_used_never (2936073559267990034) -->
+    <skip />
     <string name="usage_time_label" msgid="9105343335151559883">"زمان استفاده"</string>
     <string name="accessibility_settings" msgid="4713215774904704682">"دسترس‌پذیری"</string>
     <string name="accessibility_settings_title" msgid="6739115703615065716">"تنظیمات دسترس‌پذیری"</string>
@@ -2098,7 +2097,7 @@
     <string name="accessibility_control_timeout_footer_learn_more_content_description" msgid="8118584413220542193">"درباره زمان اقدام کردن (درنگ دسترس‌پذیری) بیشتر بدانید"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"زمان لازم برای اقدام"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="4037051091059316310">"همه برنامه‌ها از این اولویت زمان‌بندی پشتیبانی نمی‌کنند"</string>
-    <string name="accessibility_control_timeout_preference_intro_text" msgid="1398116710556762245">"انتخاب کنید پیام‌های موقتی که از شما می‌خواهند اقدامی انجام دهید، چه‌مدت نمایش داده شوند"</string>
+    <string name="accessibility_control_timeout_preference_intro_text" msgid="1398116710556762245">"انتخاب کنید پیام‌های موقتی که از شما می‌خواهند اقدامی بکنید چه‌مدت نمایش داده شوند"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"تأخیر لمس کردن و نگه داشتن"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"وارونگی رنگ"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"استفاده از وارونگی رنگ"</string>
@@ -2494,9 +2493,13 @@
     <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"اکنون"</string>
     <string name="battery_usage_timestamps_hyphen" msgid="7401188432989043905">"از <xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g> تا <xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
     <string name="battery_usage_day_and_hour" msgid="1417890420844950881">"<xliff:g id="DAY">%1$s</xliff:g> <xliff:g id="HOUR">%2$s</xliff:g>⁠"</string>
+    <!-- no translation found for battery_usage_time_info_and_battery_level (6732629268310936155) -->
+    <skip />
     <string name="battery_usage_chart" msgid="4114747521432440017">"نمودار مصرف باتری"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"نمودار مصرف روزانه باتری"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"نمودار مصرف ساعتی باتری"</string>
+    <!-- no translation found for battery_level_percentage (1433178290838842146) -->
+    <skip />
     <string name="battery_usage_breakdown_title_since_last_full_charge" msgid="435006273323199906">"مصرف باتری از آخرین شارژ کامل"</string>
     <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"مصرف باتری: <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"مدت تماشای صفحه از آخرین شارژ کامل"</string>
@@ -3384,6 +3387,7 @@
     <string name="recent_convos_removed" msgid="2122932798895714203">"مکالمه‌های اخیر برداشته شد"</string>
     <string name="recent_convo_removed" msgid="8686414146325958281">"مکالمه حذف شد"</string>
     <string name="clear" msgid="5092178335409471100">"پاک کردن"</string>
+    <string name="clear_conversation" msgid="5564321180363279096">"پاک کردن <xliff:g id="CONVERSATION_NAME">%1$s</xliff:g>"</string>
     <string name="conversation_onboarding_title" msgid="5194559958353468484">"مکالمه‌های اولویت‌دار و اصلاح‌شده در اینجا نشان داده می‌شوند"</string>
     <string name="conversation_onboarding_summary" msgid="2484845363368486941">"وقتی مکالمه‌ای را به‌عنوان اولویت‌دار علامت‌گذاری کنید یا تغییرات دیگری در مکالمه‌ها ایجاد کنید، در اینجا نشان داده می‌شوند. \n\nبرای تغییر تنظیمات مکالمه: \nاز بالای صفحه به پایین بکشید تا کشوی پایین‌پر باز شود و سپس مکالمه را لمس کنید و نگه دارید."</string>
     <string name="notification_importance_min_title" msgid="7676541266705442501">"کوچک کردن"</string>

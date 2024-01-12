@@ -46,6 +46,8 @@
     <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"Ön ekran, cihazınızı katladığınızda açılır"</string>
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"Yalnızca oyunlar, videolar ve daha fazlası"</string>
     <string name="selective_stay_awake_summary" msgid="9055967322921984543">"Ön ekran, ekranınızın boşta kalmasını engelleyen uygulamalar için açılır"</string>
+    <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Devam etmek için yukarı kaydırın"</string>
+    <string name="stay_awake_on_lockscreen_summary" msgid="2299351813382522952">"Uygulamayı kullanmaya devam etmek için telefonunuzu katlayıp ön ekranda yukarı kaydırın veya ekranın kilitlenmesi için birkaç saniye bekleyin"</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"Hiçbir zaman"</string>
     <string name="sleep_on_fold_summary" msgid="7737992842459588846">"Ön ekran, cihazınızı katladığınızda kilitlenir"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Otomatik döndürmeyi kullan"</string>
@@ -283,8 +285,7 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Yakındaki cihazlarla bağlanma izni olan uygulamalar, bağlı cihazların göreli konumunu belirleyebilir."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Uygulamaların ve hizmetlerin konum erişimi kapalı. Yine de arayarak veya mesaj göndererek bir acil durum numarasına ulaştığınızda cihazınızın konumu acil durum müdahale ekiplerine gönderilebilir."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Konum ayarları hakkında daha fazla bilgi edinin"</string>
-    <!-- no translation found for location_settings_tooltip_text_for_chrome (3574930966097093550) -->
-    <skip />
+    <string name="location_settings_tooltip_text_for_chrome" msgid="3574930966097093550">"Konum erişimini değiştirmek için Ayarlar &gt; Güvenlik ve Gizlilik &gt; Gizlilik denetimleri\'ne gidin"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Hesaplar"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Güvenlik"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Şifreleme ve kimlik bilgileri"</string>
@@ -545,7 +546,7 @@
     <string name="work_profile_category_header" msgid="85707750968948517">"İş profili"</string>
     <string name="private_space_title" msgid="7078627930195569767">"Gizli Alan"</string>
     <string name="private_space_summary" msgid="2274405892301976238">"Özel uygulamaları kilitli ve gizli tutun"</string>
-    <string name="private_space_description" msgid="5494963647270826210">"Uygulamaları yalnızca sizin erişebileceğiniz gizli bir klasörde gizleyin"</string>
+    <string name="private_space_description" msgid="4059594203775816136">"Özel uygulamaları, gizleyebileceğiniz veya kilitleyebileceğiniz ayrı bir alanda saklayın"</string>
     <string name="private_space_lock_title" msgid="3006539720164938296">"Gizli alan kilidi"</string>
     <string name="private_space_one_lock_summary" msgid="2759953747682959371">"Gizli alanın kilidini, cihazınızın kilidini açtığınız şekilde açabilir veya farklı bir kilit seçebilirsiniz"</string>
     <string name="private_space_screen_lock_title" msgid="8679383894967823163">"Cihaz ekran kilidini kullanma"</string>
@@ -1814,19 +1815,14 @@
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Kullanılabilir dokunmatik klavye"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Ekran klavyelerini yönet"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"Seçenekler"</string>
-    <!-- no translation found for keyboard_a11y_category (8230758278046841469) -->
-    <skip />
+    <string name="keyboard_a11y_category" msgid="8230758278046841469">"Erişilebilirlik"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Fiziksel klavye"</string>
     <string name="show_ime" msgid="4334255501724746849">"Ekran klavyesi kullan"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"Fiziksel klavye etkin durumdayken ekranda tut"</string>
-    <!-- no translation found for bounce_keys (7419450970351743904) -->
-    <skip />
-    <!-- no translation found for bounce_keys_summary (6922850403920596246) -->
-    <skip />
-    <!-- no translation found for sticky_keys (7317317044898161747) -->
-    <skip />
-    <!-- no translation found for sticky_keys_summary (8520909829540989765) -->
-    <skip />
+    <string name="bounce_keys" msgid="7419450970351743904">"Geri sekme tuşları"</string>
+    <string name="bounce_keys_summary" msgid="6922850403920596246">"Geri sekme tuşlarına klavyeden fiziksel erişimi etkinleştirin"</string>
+    <string name="sticky_keys" msgid="7317317044898161747">"Yapışkan tuşlar"</string>
+    <string name="sticky_keys_summary" msgid="8520909829540989765">"Yapışkan tuşlara klavyeden fiziksel erişimi etkinleştirin"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Klavye kısayolları"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Kısayol listesini göster"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"İş profili klavyeleri ve araçları"</string>
@@ -1924,7 +1920,10 @@
     <string name="usage_stats_sort_by_usage_time" msgid="2927310334119998301">"Kullanım süresine göre sırala"</string>
     <string name="usage_stats_sort_by_last_time_used" msgid="7039213339779884017">"Son kullanılmaya göre sırala"</string>
     <string name="usage_stats_sort_by_app_name" msgid="4463833145514850478">"Uygulama adına göre sırala"</string>
-    <string name="last_time_used_label" msgid="2639712813493534074">"Son kullanıldığı tarih"</string>
+    <!-- no translation found for last_time_used_label (7589377271406011659) -->
+    <skip />
+    <!-- no translation found for last_time_used_never (2936073559267990034) -->
+    <skip />
     <string name="usage_time_label" msgid="9105343335151559883">"Kullanım süresi"</string>
     <string name="accessibility_settings" msgid="4713215774904704682">"Erişilebilirlik"</string>
     <string name="accessibility_settings_title" msgid="6739115703615065716">"Erişebilirlik ayarları"</string>
@@ -2494,9 +2493,13 @@
     <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"şu an"</string>
     <string name="battery_usage_timestamps_hyphen" msgid="7401188432989043905">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g>-<xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
     <string name="battery_usage_day_and_hour" msgid="1417890420844950881">"<xliff:g id="DAY">%1$s</xliff:g> <xliff:g id="HOUR">%2$s</xliff:g>"</string>
+    <!-- no translation found for battery_usage_time_info_and_battery_level (6732629268310936155) -->
+    <skip />
     <string name="battery_usage_chart" msgid="4114747521432440017">"Pil kullanım grafiği"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Günlük pil kullanımı grafiği"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Saatlik pil kullanımı grafiği"</string>
+    <!-- no translation found for battery_level_percentage (1433178290838842146) -->
+    <skip />
     <string name="battery_usage_breakdown_title_since_last_full_charge" msgid="435006273323199906">"Son tam şarjdan sonraki pil kullanımı"</string>
     <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"<xliff:g id="SLOT">%s</xliff:g> arası pil kullanımı"</string>
     <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"Son tam şarjdan sonraki ekran süresi"</string>
@@ -3384,6 +3387,7 @@
     <string name="recent_convos_removed" msgid="2122932798895714203">"Son görüşmeler kaldırıldı"</string>
     <string name="recent_convo_removed" msgid="8686414146325958281">"Görüşme kaldırıldı"</string>
     <string name="clear" msgid="5092178335409471100">"Sil"</string>
+    <string name="clear_conversation" msgid="5564321180363279096">"<xliff:g id="CONVERSATION_NAME">%1$s</xliff:g> ile sohbeti temizle"</string>
     <string name="conversation_onboarding_title" msgid="5194559958353468484">"Öncelikli ve değiştirilmiş görüşmeler burada görünür"</string>
     <string name="conversation_onboarding_summary" msgid="2484845363368486941">"Öncelikli olarak işaretlediğiniz veya üzerinde başka değişiklikler yaptığınız görüşmeler burada görünür. \n\nGörüşme ayarlarını değiştirmek için:\nEkranın üst kısmından aşağı kaydırarak aşağı indirilen gölgeyi açın, ardından bir görüşmeye dokunup basılı tutun."</string>
     <string name="notification_importance_min_title" msgid="7676541266705442501">"Küçült"</string>

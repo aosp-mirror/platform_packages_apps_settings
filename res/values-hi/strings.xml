@@ -46,6 +46,8 @@
     <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"डिवाइस को फ़ोल्ड करने पर फ़्रंट डिसप्ले चालू हो जाता है"</string>
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"सिर्फ़ गेम, वीडियो वगैरह"</string>
     <string name="selective_stay_awake_summary" msgid="9055967322921984543">"स्क्रीन को बंद होने से रोकने वाले ऐप्लिकेशन के लिए फ़्रंट डिसप्ले चालू हो जाता है"</string>
+    <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"जारी रखने के लिए, ऊपर की ओर स्वाइप करें"</string>
+    <string name="stay_awake_on_lockscreen_summary" msgid="2299351813382522952">"ऐप्लिकेशन का इस्तेमाल जारी रखने के लिए, अपने फ़ोन को फ़ोल्ड करें और फ़्रंट डिसप्ले पर ऊपर की ओर स्वाइप करें या स्क्रीन लॉक होने तक इंतज़ार करें"</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"कभी नहीं"</string>
     <string name="sleep_on_fold_summary" msgid="7737992842459588846">"डिवाइस को फ़ोल्ड करने पर फ़्रंट डिसप्ले लॉक हो जाता है"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"स्क्रीन की अपने-आप दिशा बदलने की सुविधा का इस्तेमाल करें"</string>
@@ -283,8 +285,7 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"ऐसे ऐप्लिकेशन, जिन्हें आस-पास मौजूद डिवाइसों के साथ इंटरैक्ट करने की अनुमति मिली है वे कनेक्ट किए गए डिवाइसों की जगह की जानकारी का पता लगा सकते हैं."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"ऐप्लिकेशन और सेवाओं के लिए, जगह की जानकारी का ऐक्सेस बंद है. आपके डिवाइस की जगह की जानकारी, आपातकालीन स्थिति में मदद करने वाले लोगों को अब भी दी जा सकती है. ऐसा आपके किसी आपातकालीन नंबर पर कॉल करने या मैसेज भेजने पर किया जाएगा."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"जगह की जानकारी की सेटिंग के बारे में ज़्यादा जानें"</string>
-    <!-- no translation found for location_settings_tooltip_text_for_chrome (3574930966097093550) -->
-    <skip />
+    <string name="location_settings_tooltip_text_for_chrome" msgid="3574930966097093550">"सेटिंग &gt; सुरक्षा और निजता &gt; निजता सेटिंग में जाकर जगह की जानकारी का ऐक्सेस बदलें"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"खाते"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"सुरक्षा"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"एन्क्रिप्ट (सुरक्षित) करना और क्रेडेंशियल"</string>
@@ -545,7 +546,7 @@
     <string name="work_profile_category_header" msgid="85707750968948517">"वर्क प्रोफ़ाइल"</string>
     <string name="private_space_title" msgid="7078627930195569767">"प्राइवेट स्पेस"</string>
     <string name="private_space_summary" msgid="2274405892301976238">"निजी ऐप्लिकेशन, लॉक करें और छिपाकर रखें"</string>
-    <string name="private_space_description" msgid="5494963647270826210">"प्राइवेट फ़ोल्डर में ऐप्लिकेशन छिपाएं, ताकि उनका ऐक्सेस सिर्फ़ आपके पास हो"</string>
+    <string name="private_space_description" msgid="4059594203775816136">"निजी ऐप्लिकेशन ऐसी जगह पर रखें जिसे छिपाया या लॉक किया जा सकता है"</string>
     <string name="private_space_lock_title" msgid="3006539720164938296">"प्राइवेट स्पेस लॉक"</string>
     <string name="private_space_one_lock_summary" msgid="2759953747682959371">"डिवाइस की तरह ही प्राइवेट स्पेस को अनलॉक किया जा सकता है या कोई दूसरा लॉक सेट किया जा सकता है"</string>
     <string name="private_space_screen_lock_title" msgid="8679383894967823163">"डिवाइस के स्क्रीन लॉक का इस्तेमाल करें"</string>
@@ -1814,19 +1815,14 @@
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"ऑन-स्क्रीन कीबोर्ड उपलब्ध है"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"ऑन-स्क्रीन कीबोर्ड को मैनेज करें"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"अन्य विकल्प"</string>
-    <!-- no translation found for keyboard_a11y_category (8230758278046841469) -->
-    <skip />
+    <string name="keyboard_a11y_category" msgid="8230758278046841469">"सुलभता सुविधा"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"सामान्य कीबोर्ड"</string>
     <string name="show_ime" msgid="4334255501724746849">"ऑन-स्क्रीन कीबोर्ड का इस्तेमाल करें"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"सामान्य कीबोर्ड चालू रहने के दौरान इसे स्‍क्रीन पर दिखाते रहें"</string>
-    <!-- no translation found for bounce_keys (7419450970351743904) -->
-    <skip />
-    <!-- no translation found for bounce_keys_summary (6922850403920596246) -->
-    <skip />
-    <!-- no translation found for sticky_keys (7317317044898161747) -->
-    <skip />
-    <!-- no translation found for sticky_keys_summary (8520909829540989765) -->
-    <skip />
+    <string name="bounce_keys" msgid="7419450970351743904">"बाउंस कुंजियां"</string>
+    <string name="bounce_keys_summary" msgid="6922850403920596246">"फ़िज़िकल कीबोर्ड सुलभता के लिए बाउंस कुंजियों को चालू करें"</string>
+    <string name="sticky_keys" msgid="7317317044898161747">"स्टिकी बटन"</string>
+    <string name="sticky_keys_summary" msgid="8520909829540989765">"फ़िज़िकल कीबोर्ड सुलभता के लिए स्टिकी बटन को चालू करें"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"कीबोर्ड शॉर्टकट"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"शॉर्टकट की सूची दिखाएं"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"काम के प्रोफ़ाइल से जुड़े कीबोर्ड और टूल"</string>
@@ -1924,7 +1920,10 @@
     <string name="usage_stats_sort_by_usage_time" msgid="2927310334119998301">"इस्तेमाल किए जाने की अवधि के मुताबिक क्रम में लगाएं"</string>
     <string name="usage_stats_sort_by_last_time_used" msgid="7039213339779884017">"पिछली बार इस्तेमाल किए जाने के मुताबिक क्रम में लगाएं"</string>
     <string name="usage_stats_sort_by_app_name" msgid="4463833145514850478">"ऐप के नाम से क्रम में लगाएं"</string>
-    <string name="last_time_used_label" msgid="2639712813493534074">"पिछली बार उपयोग किया गया"</string>
+    <!-- no translation found for last_time_used_label (7589377271406011659) -->
+    <skip />
+    <!-- no translation found for last_time_used_never (2936073559267990034) -->
+    <skip />
     <string name="usage_time_label" msgid="9105343335151559883">"उपयोग समय"</string>
     <string name="accessibility_settings" msgid="4713215774904704682">"सुलभता"</string>
     <string name="accessibility_settings_title" msgid="6739115703615065716">"सरल उपयोग सेटिंग"</string>
@@ -2494,9 +2493,13 @@
     <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"अभी"</string>
     <string name="battery_usage_timestamps_hyphen" msgid="7401188432989043905">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g> - <xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
     <string name="battery_usage_day_and_hour" msgid="1417890420844950881">"<xliff:g id="DAY">%1$s</xliff:g> <xliff:g id="HOUR">%2$s</xliff:g>⁠"</string>
+    <!-- no translation found for battery_usage_time_info_and_battery_level (6732629268310936155) -->
+    <skip />
     <string name="battery_usage_chart" msgid="4114747521432440017">"बैटरी खर्च दिखाने वाला चार्ट"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"हर दिन का बैटरी खर्च दिखाने वाला चार्ट"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"हर घंटे का बैटरी खर्च दिखाने वाला चार्ट"</string>
+    <!-- no translation found for battery_level_percentage (1433178290838842146) -->
+    <skip />
     <string name="battery_usage_breakdown_title_since_last_full_charge" msgid="435006273323199906">"पूरा चार्ज होने के बाद से, बैटरी खर्च"</string>
     <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"<xliff:g id="SLOT">%s</xliff:g> तक का बैटरी खर्च"</string>
     <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"पूरा चार्ज होने के बाद से, किसी डिवाइस के इस्तेमाल में बीता समय"</string>
@@ -3384,6 +3387,7 @@
     <string name="recent_convos_removed" msgid="2122932798895714203">"हाल ही में की गई बातचीत को हटाया गया"</string>
     <string name="recent_convo_removed" msgid="8686414146325958281">"बातचीत हटाई गई"</string>
     <string name="clear" msgid="5092178335409471100">"मिटाएं"</string>
+    <string name="clear_conversation" msgid="5564321180363279096">"<xliff:g id="CONVERSATION_NAME">%1$s</xliff:g> मिटाएं"</string>
     <string name="conversation_onboarding_title" msgid="5194559958353468484">"यहां ऐसी बातचीत दिखेंगी जो अहम हैं और जिनमें बदलाव किए गए हैं"</string>
     <string name="conversation_onboarding_summary" msgid="2484845363368486941">"जब किसी बातचीत को अहम के रूप में मार्क किया जाता है या उसमें कोई बदलाव किया जाता है, तो वह यहां दिखेगी. \n\nबातचीत की सेटिंग बदलने के लिए: \nपुल-डाउन शेड खोलने के लिए, स्क्रीन पर ऊपर से नीचे की ओर स्वाइप करें. इसके बाद, किसी बातचीत को दबाकर रखें."</string>
     <string name="notification_importance_min_title" msgid="7676541266705442501">"छोटा करें"</string>

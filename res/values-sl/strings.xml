@@ -46,6 +46,8 @@
     <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"Sprednji zaslon se vklopi, ko zložite napravo."</string>
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"Samo igre, videoposnetki in drugo"</string>
     <string name="selective_stay_awake_summary" msgid="9055967322921984543">"Sprednji zaslon se vklopi pri aplikacijah, ki preprečujejo, da bi zaslon preklopil v stanje pripravljenosti."</string>
+    <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Povlecite navzgor za nadaljevanje"</string>
+    <string name="stay_awake_on_lockscreen_summary" msgid="2299351813382522952">"Zložite telefon in povlecite navzgor po sprednjem zaslonu za nadaljnjo uporabo aplikacije ali počakajte nekaj sekund, da se zaslon zaklene."</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"Nikoli"</string>
     <string name="sleep_on_fold_summary" msgid="7737992842459588846">"Sprednji zaslon se zaklene, ko zložite napravo."</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Uporabi samodejni zasuk"</string>
@@ -283,8 +285,7 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Aplikacije z dovoljenjem za naprave v bližini lahko določijo relativno lokacijo povezanih naprav."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Dostop do lokacije je izklopljen za aplikacije in storitve. Lokacija naprave bo morda kljub temu poslana službam za nujne primere, ko pokličete številko za klic v sili ali nanjo pošljete sporočilo SMS."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Preberite več o nastavitvah lokacije"</string>
-    <!-- no translation found for location_settings_tooltip_text_for_chrome (3574930966097093550) -->
-    <skip />
+    <string name="location_settings_tooltip_text_for_chrome" msgid="3574930966097093550">"Za spremembo dostopa do lokacije odprite »Nastavitve« &gt; »Varnost in zasebnost« &gt; »Nastavitve zasebnosti«"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Računi"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Varnost"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Šifriranje in poverilnice"</string>
@@ -545,7 +546,7 @@
     <string name="work_profile_category_header" msgid="85707750968948517">"Delovni profil"</string>
     <string name="private_space_title" msgid="7078627930195569767">"Zasebni prostor"</string>
     <string name="private_space_summary" msgid="2274405892301976238">"Naj vaše zasebne aplikacije ostanejo zaklenjene in skrite"</string>
-    <string name="private_space_description" msgid="5494963647270826210">"Skrijte aplikacije v zasebni mapi, do katere lahko dostopate samo vi"</string>
+    <string name="private_space_description" msgid="4059594203775816136">"Zasebne aplikacije ohranite v ločenem prostoru, ki ga lahko skrijete ali zaklenete"</string>
     <string name="private_space_lock_title" msgid="3006539720164938296">"Zaklepanje zasebnega prostora"</string>
     <string name="private_space_one_lock_summary" msgid="2759953747682959371">"Zasebni prostor lahko odklepate na enak način kot napravo, lahko pa izberete drug način zaklepanja"</string>
     <string name="private_space_screen_lock_title" msgid="8679383894967823163">"Uporabi zaklepanje zaslona naprave"</string>
@@ -1814,19 +1815,14 @@
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Razpoložljiva zaslonska tipkovnica"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Upravljaj zaslonske tipkovnice"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"Možnosti"</string>
-    <!-- no translation found for keyboard_a11y_category (8230758278046841469) -->
-    <skip />
+    <string name="keyboard_a11y_category" msgid="8230758278046841469">"Dostopnost"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Fizična tipkovnica"</string>
     <string name="show_ime" msgid="4334255501724746849">"Uporabi zaslonsko tipkovnico"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"Obdrži na zaslonu, tudi ko je fizična tipkovnica aktivna."</string>
-    <!-- no translation found for bounce_keys (7419450970351743904) -->
-    <skip />
-    <!-- no translation found for bounce_keys_summary (6922850403920596246) -->
-    <skip />
-    <!-- no translation found for sticky_keys (7317317044898161747) -->
-    <skip />
-    <!-- no translation found for sticky_keys_summary (8520909829540989765) -->
-    <skip />
+    <string name="bounce_keys" msgid="7419450970351743904">"Zaznava večkratnih pritiskov tipk"</string>
+    <string name="bounce_keys_summary" msgid="6922850403920596246">"Omogočanje zaznave večkratnih pritiskov tipk za zagotavljanje dostopnosti na fizični tipkovnici"</string>
+    <string name="sticky_keys" msgid="7317317044898161747">"Zaklepanje tipk"</string>
+    <string name="sticky_keys_summary" msgid="8520909829540989765">"Omogočanje zaklepanja tipk za zagotavljanje dostopnosti na fizični tipkovnici"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Bližnjične tipke"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Prikaz seznama bližnjic"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Tipkovnice in orodja delovnega profila"</string>
@@ -1924,7 +1920,10 @@
     <string name="usage_stats_sort_by_usage_time" msgid="2927310334119998301">"Razvrsti po času uporabe"</string>
     <string name="usage_stats_sort_by_last_time_used" msgid="7039213339779884017">"Razvrsti po datumu zadnje uporabe"</string>
     <string name="usage_stats_sort_by_app_name" msgid="4463833145514850478">"Razvrsti po imenu aplikacije"</string>
-    <string name="last_time_used_label" msgid="2639712813493534074">"Zadnjič uporabljeno"</string>
+    <!-- no translation found for last_time_used_label (7589377271406011659) -->
+    <skip />
+    <!-- no translation found for last_time_used_never (2936073559267990034) -->
+    <skip />
     <string name="usage_time_label" msgid="9105343335151559883">"Čas uporabe"</string>
     <string name="accessibility_settings" msgid="4713215774904704682">"Dostopnost"</string>
     <string name="accessibility_settings_title" msgid="6739115703615065716">"Nastavitve dostopnosti"</string>
@@ -1961,11 +1960,11 @@
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Povečava"</string>
     <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Bližnjica za povečavo"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"Povečava tipkanja"</string>
-    <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"Povečevalnik zaslona sledi besedilu med tipkanjem"</string>
+    <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"Lupa sledi besedilu med tipkanjem"</string>
     <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"Pusti vklopljeno ob preklopu aplikacij"</string>
-    <string name="accessibility_screen_magnification_always_on_summary" msgid="306908451430863049">"Ob preklopu aplikacij ostane povečevalnik vklopljen in izvede se pomanjšava na običajno velikost"</string>
+    <string name="accessibility_screen_magnification_always_on_summary" msgid="306908451430863049">"Ob preklopu aplikacij ostane Lupa vklopljena in izvede se pomanjšava na običajno velikost"</string>
     <string name="accessibility_screen_magnification_joystick_title" msgid="1803769708582404964">"Krmilna palica"</string>
-    <string name="accessibility_screen_magnification_joystick_summary" msgid="4640300148573982720">"Povečevalnik aktivirajte in premikajte s krmilno palico na zaslonu. Dotaknite se, pridržite in nato povečevalnik upravljajte z vlečenjem po krmilni palici. Če želite premakniti krmilno palico, se je dotaknite in jo povlecite."</string>
+    <string name="accessibility_screen_magnification_joystick_summary" msgid="4640300148573982720">"Lupo aktivirajte in premikajte s krmilno palico na zaslonu. Dotaknite se, pridržite in nato lupo upravljajte z vlečenjem po krmilni palici. Če želite premakniti krmilno palico, se je dotaknite in jo povlecite."</string>
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"O povečavi"</string>
     <string name="accessibility_screen_magnification_footer_learn_more_content_description" msgid="924848332575978463">"Preberite več o povečavi."</string>
     <string name="accessibility_magnification_mode_title" msgid="8446475127807168063">"Način povečave"</string>
@@ -2494,9 +2493,13 @@
     <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"zdaj"</string>
     <string name="battery_usage_timestamps_hyphen" msgid="7401188432989043905">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g>–<xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
     <string name="battery_usage_day_and_hour" msgid="1417890420844950881">"<xliff:g id="DAY">%1$s</xliff:g> <xliff:g id="HOUR">%2$s</xliff:g>"</string>
+    <!-- no translation found for battery_usage_time_info_and_battery_level (6732629268310936155) -->
+    <skip />
     <string name="battery_usage_chart" msgid="4114747521432440017">"Grafikon porabe energije baterije"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Grafikon porabe energije baterije po dnevih"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Grafikon porabe energije baterije po urah"</string>
+    <!-- no translation found for battery_level_percentage (1433178290838842146) -->
+    <skip />
     <string name="battery_usage_breakdown_title_since_last_full_charge" msgid="435006273323199906">"Poraba energije baterije od zadnje polne napolnjenosti"</string>
     <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"Poraba energije baterije za <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"Čas uporabe od zadnje polne napolnjenosti"</string>
@@ -3384,6 +3387,7 @@
     <string name="recent_convos_removed" msgid="2122932798895714203">"Nedavni pogovori odstranjeni"</string>
     <string name="recent_convo_removed" msgid="8686414146325958281">"Pogovor je odstranjen."</string>
     <string name="clear" msgid="5092178335409471100">"Počisti"</string>
+    <string name="clear_conversation" msgid="5564321180363279096">"Počisti pogovor <xliff:g id="CONVERSATION_NAME">%1$s</xliff:g>"</string>
     <string name="conversation_onboarding_title" msgid="5194559958353468484">"Prednostni in spremenjeni pogovori bodo prikazani tukaj"</string>
     <string name="conversation_onboarding_summary" msgid="2484845363368486941">"Pogovori, ki jih označite kot prednostne ali jih kakor koli drugače spremenite, bodo prikazani tukaj. \n\nČe želite spremeniti nastavitve pogovorov: \nS prstom povlecite z vrha zaslona navzdol, da odprete potezni zaslon z obvestili, in nato pridržite pogovor."</string>
     <string name="notification_importance_min_title" msgid="7676541266705442501">"Minimiraj"</string>
