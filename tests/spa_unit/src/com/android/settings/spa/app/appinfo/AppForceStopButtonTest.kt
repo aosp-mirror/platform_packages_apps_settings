@@ -17,79 +17,82 @@
 package com.android.settings.spa.app.appinfo
 
 import android.app.admin.DevicePolicyManager
+import android.content.ComponentName
 import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
+import android.os.UserHandle
+import android.os.UserManager
+import androidx.compose.material3.Button
+import androidx.compose.material3.Text
+import androidx.compose.ui.test.assertIsEnabled
+import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onNodeWithText
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.android.settingslib.spa.widget.button.ActionButton
+import com.android.settings.R
+import com.android.settingslib.spa.testutils.delay
 import com.android.settingslib.spaprivileged.framework.common.devicePolicyManager
 import com.android.settingslib.spaprivileged.model.app.userId
 import com.google.common.truth.Truth.assertThat
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mock
-import org.mockito.Spy
-import org.mockito.junit.MockitoJUnit
-import org.mockito.junit.MockitoRule
-import org.mockito.Mockito.`when` as whenever
+import org.mockito.kotlin.any
+import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.spy
+import org.mockito.kotlin.stub
 
 @RunWith(AndroidJUnit4::class)
 class AppForceStopButtonTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
-    @get:Rule
-    val mockito: MockitoRule = MockitoJUnit.rule()
+    private val mockPackageManager = mock<PackageManager>()
 
-    @Spy
-    private val context: Context = ApplicationProvider.getApplicationContext()
+    private val mockDevicePolicyManager = mock<DevicePolicyManager>()
 
-    @Mock
-    private lateinit var packageInfoPresenter: PackageInfoPresenter
-
-    @Mock
-    private lateinit var packageManager: PackageManager
-
-    @Mock
-    private lateinit var devicePolicyManager: DevicePolicyManager
-
-    private lateinit var appForceStopButton: AppForceStopButton
-
-    @Before
-    fun setUp() {
-        whenever(packageInfoPresenter.context).thenReturn(context)
-        whenever(context.packageManager).thenReturn(packageManager)
-        whenever(context.devicePolicyManager).thenReturn(devicePolicyManager)
-        appForceStopButton = AppForceStopButton(packageInfoPresenter)
+    private val mockUserManager = mock<UserManager> {
+        on { getUserRestrictionSources(any(), any()) } doReturn emptyList()
     }
 
-    @Test
-    fun getActionButton() {
+    private val context: Context = spy(ApplicationProvider.getApplicationContext()) {
+        on { packageManager } doReturn mockPackageManager
+        on { devicePolicyManager } doReturn mockDevicePolicyManager
+        on { getSystemService(Context.DEVICE_POLICY_SERVICE) } doReturn mockDevicePolicyManager
+        on { getSystemService(Context.USER_SERVICE) } doReturn mockUserManager
     }
+
+    private val packageInfoPresenter = mock<PackageInfoPresenter> {
+        on { context } doReturn context
+    }
+
+    private val appForceStopButton = AppForceStopButton(packageInfoPresenter)
 
     @Test
     fun getActionButton_isActiveAdmin_buttonDisabled() {
         val app = createApp()
-        whenever(devicePolicyManager.packageHasActiveAdmins(PACKAGE_NAME, app.userId))
-            .thenReturn(true)
+        mockDevicePolicyManager.stub {
+            on { packageHasActiveAdmins(PACKAGE_NAME, app.userId) } doReturn true
+        }
 
-        val actionButton = setForceStopButton(app)
+        setForceStopButton(app)
 
-        assertThat(actionButton.enabled).isFalse()
+        composeTestRule.onNodeWithText(context.getString(R.string.force_stop)).assertIsNotEnabled()
     }
 
     @Test
     fun getActionButton_isUninstallInQueue_buttonDisabled() {
         val app = createApp()
-        whenever(devicePolicyManager.isUninstallInQueue(PACKAGE_NAME)).thenReturn(true)
+        mockDevicePolicyManager.stub {
+            on { isUninstallInQueue(PACKAGE_NAME) } doReturn true
+        }
 
-        val actionButton = setForceStopButton(app)
+        setForceStopButton(app)
 
-        assertThat(actionButton.enabled).isFalse()
+        composeTestRule.onNodeWithText(context.getString(R.string.force_stop)).assertIsNotEnabled()
     }
 
     @Test
@@ -98,35 +101,79 @@ class AppForceStopButtonTest {
             flags = ApplicationInfo.FLAG_STOPPED
         }
 
-        val actionButton = setForceStopButton(app)
+        setForceStopButton(app)
 
-        assertThat(actionButton.enabled).isFalse()
+        composeTestRule.onNodeWithText(context.getString(R.string.force_stop)).assertIsNotEnabled()
     }
 
     @Test
     fun getActionButton_regularApp_buttonEnabled() {
         val app = createApp()
 
-        val actionButton = setForceStopButton(app)
+        setForceStopButton(app)
 
-        assertThat(actionButton.enabled).isTrue()
+        composeTestRule.onNodeWithText(context.getString(R.string.force_stop)).assertIsEnabled()
     }
 
-    private fun setForceStopButton(app: ApplicationInfo): ActionButton {
-        lateinit var actionButton: ActionButton
-        composeTestRule.setContent {
-            actionButton = appForceStopButton.getActionButton(app)
+    @Test
+    fun getAdminRestriction_packageNotProtected() {
+        mockPackageManager.stub {
+            on { isPackageStateProtected(PACKAGE_NAME, UserHandle.getUserId(UID)) } doReturn false
         }
-        return actionButton
+
+        val admin = appForceStopButton.getAdminRestriction(createApp())
+
+        assertThat(admin).isNull()
+    }
+
+    @Test
+    fun getAdminRestriction_packageProtectedAndHaveOwner() {
+        mockPackageManager.stub {
+            on { isPackageStateProtected(PACKAGE_NAME, UserHandle.getUserId(UID)) } doReturn true
+        }
+        mockDevicePolicyManager.stub {
+            on { deviceOwnerComponentOnAnyUser } doReturn DEVICE_OWNER
+        }
+
+        val admin = appForceStopButton.getAdminRestriction(createApp())!!
+
+        assertThat(admin.component).isEqualTo(DEVICE_OWNER)
+    }
+
+    @Test
+    fun getAdminRestriction_packageProtectedAndNotHaveOwner() {
+        mockPackageManager.stub {
+            on { isPackageStateProtected(PACKAGE_NAME, UserHandle.getUserId(UID)) } doReturn true
+        }
+        mockDevicePolicyManager.stub {
+            on { deviceOwnerComponentOnAnyUser } doReturn null
+        }
+
+        val admin = appForceStopButton.getAdminRestriction(createApp())!!
+
+        assertThat(admin.component).isNull()
+    }
+
+    private fun setForceStopButton(app: ApplicationInfo) {
+        composeTestRule.setContent {
+            val actionButton = appForceStopButton.getActionButton(app)
+            Button(onClick = {}, enabled = actionButton.enabled) {
+                Text(actionButton.text)
+            }
+        }
+        composeTestRule.delay()
     }
 
     private fun createApp(builder: ApplicationInfo.() -> Unit = {}) =
         ApplicationInfo().apply {
             packageName = PACKAGE_NAME
+            uid = UID
             enabled = true
         }.apply(builder)
 
     private companion object {
         const val PACKAGE_NAME = "package.name"
+        const val UID = 10000
+        val DEVICE_OWNER = ComponentName("device", "Owner")
     }
 }

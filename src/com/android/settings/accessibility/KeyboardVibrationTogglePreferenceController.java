@@ -21,7 +21,7 @@ import static android.provider.Settings.System.KEYBOARD_VIBRATION_ENABLED;
 import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
 import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
 
-
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.database.ContentObserver;
 import android.net.Uri;
@@ -42,6 +42,8 @@ import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 
 /**
@@ -62,6 +64,8 @@ public class KeyboardVibrationTogglePreferenceController extends TogglePreferenc
     @Nullable
     private TwoStatePreference mPreference;
 
+    private MetricsFeatureProvider mMetricsFeatureProvider;
+
     public KeyboardVibrationTogglePreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         mVibrator = context.getSystemService(Vibrator.class);
@@ -75,6 +79,7 @@ public class KeyboardVibrationTogglePreferenceController extends TogglePreferenc
                 }
             }
         };
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     @Override
@@ -120,6 +125,8 @@ public class KeyboardVibrationTogglePreferenceController extends TogglePreferenc
     @Override
     public boolean setChecked(boolean isChecked) {
         final boolean success = updateKeyboardVibrationSetting(isChecked);
+        mMetricsFeatureProvider.action(mContext,
+                SettingsEnums.ACTION_KEYBOARD_VIBRATION_CHANGED, isChecked);
         if (success && isChecked) {
             // Play the preview vibration effect when the toggle is on.
             final VibrationAttributes touchAttrs =

@@ -47,11 +47,11 @@ import android.widget.CompoundButton;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.loader.app.LoaderManager;
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.SettingsActivity;
 import com.android.settings.fuelgauge.batteryusage.BatteryEntry;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.shadow.ShadowActivityManager;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.applications.AppUtils;
@@ -65,15 +65,16 @@ import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.mockito.stubbing.Answer;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
@@ -83,10 +84,13 @@ import java.util.concurrent.TimeUnit;
 @Config(
         shadows = {
             ShadowEntityHeaderController.class,
-            ShadowActivityManager.class,
             com.android.settings.testutils.shadow.ShadowFragment.class,
         })
 public class PowerBackgroundUsageDetailTest {
+
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+
     private static final String APP_LABEL = "app label";
     private static final String SUMMARY = "summary";
     private static final int ICON_ID = 123;
@@ -123,9 +127,7 @@ public class PowerBackgroundUsageDetailTest {
 
     @Before
     public void setUp() throws Exception {
-        MockitoAnnotations.initMocks(this);
-
-        mContext = spy(RuntimeEnvironment.application);
+        mContext = spy(ApplicationProvider.getApplicationContext());
         when(mContext.getPackageName()).thenReturn("foo");
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
         when(mPackageManager.getInstallSourceInfo(anyString())).thenReturn(mInstallSourceInfo);
