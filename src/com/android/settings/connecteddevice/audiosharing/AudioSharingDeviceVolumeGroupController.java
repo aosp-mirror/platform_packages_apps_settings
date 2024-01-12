@@ -37,22 +37,20 @@ import com.android.settings.bluetooth.BluetoothDeviceUpdater;
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.VolumeControlProfile;
-import com.android.settingslib.utils.ThreadUtils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 public class AudioSharingDeviceVolumeGroupController extends AudioSharingBasePreferenceController
         implements DevicePreferenceCallback {
-    private static final boolean DEBUG = BluetoothUtils.D;
-
     private static final String TAG = "AudioSharingDeviceVolumeGroupController";
     private static final String KEY = "audio_sharing_device_volume_group";
 
@@ -63,8 +61,43 @@ public class AudioSharingDeviceVolumeGroupController extends AudioSharingBasePre
     private BluetoothDeviceUpdater mBluetoothDeviceUpdater;
     private FragmentManager mFragmentManager;
     private PreferenceGroup mPreferenceGroup;
-    private Map<Preference, BluetoothVolumeControl.Callback> mCallbackMap =
-            new HashMap<Preference, BluetoothVolumeControl.Callback>();
+    private List<AudioSharingDeviceVolumePreference> mVolumePreferences = new ArrayList<>();
+    private Map<Integer, Integer> mValueMap = new HashMap<Integer, Integer>();
+
+    private BluetoothVolumeControl.Callback mVolumeControlCallback =
+            new BluetoothVolumeControl.Callback() {
+                @Override
+                public void onVolumeOffsetChanged(
+                        @NonNull BluetoothDevice device, int volumeOffset) {}
+
+                @Override
+                public void onDeviceVolumeChanged(
+                        @NonNull BluetoothDevice device,
+                        @IntRange(from = -255, to = 255) int volume) {
+                    CachedBluetoothDevice cachedDevice =
+                            mLocalBtManager.getCachedDeviceManager().findDevice(device);
+                    if (cachedDevice == null) return;
+                    mValueMap.put(cachedDevice.getGroupId(), volume);
+                    for (AudioSharingDeviceVolumePreference preference : mVolumePreferences) {
+                        if (preference.getCachedDevice() != null
+                                && preference.getCachedDevice().getGroupId()
+                                        == cachedDevice.getGroupId()) {
+                            // If the callback return invalid volume, try to
+                            // get the volume from AudioManager.STREAM_MUSIC
+                            int finalVolume = getAudioVolumeIfNeeded(volume);
+                            Log.d(
+                                    TAG,
+                                    "onDeviceVolumeChanged: set volume to "
+                                            + finalVolume
+                                            + " for "
+                                            + device.getAnonymizedAddress());
+                            mContext.getMainExecutor()
+                                    .execute(() -> preference.setProgress(finalVolume));
+                            break;
+                        }
+                    }
+                }
+            };
 
     private BluetoothLeBroadcastAssistant.Callback mBroadcastAssistantCallback =
             new BluetoothLeBroadcastAssistant.Callback() {
@@ -176,6 +209,10 @@ public class AudioSharingDeviceVolumeGroupController extends AudioSharingBasePre
         }
         mAssistant.registerServiceCallBack(mExecutor, mBroadcastAssistantCallback);
         mBluetoothDeviceUpdater.registerCallback();
+        if (mVolumeControl != null) {
+            Log.d(TAG, "onStart() Registered volume control callback");
+            mVolumeControl.registerCallback(mExecutor, mVolumeControlCallback);
+        }
     }
 
     @Override
@@ -191,17 +228,16 @@ public class AudioSharingDeviceVolumeGroupController extends AudioSharingBasePre
         }
         mAssistant.unregisterServiceCallBack(mBroadcastAssistantCallback);
         mBluetoothDeviceUpdater.unregisterCallback();
+        if (mVolumeControl != null) {
+            Log.d(TAG, "onStop() Unregistered volume control callback");
+            mVolumeControl.unregisterCallback(mVolumeControlCallback);
+            mValueMap.clear();
+        }
     }
 
     @Override
     public void onDestroy(@NonNull LifecycleOwner owner) {
-        for (var entry : mCallbackMap.entrySet()) {
-            if (DEBUG) {
-                Log.d(TAG, "onDestroy: unregister callback for " + entry.getKey());
-            }
-            mVolumeControl.unregisterCallback(entry.getValue());
-        }
-        mCallbackMap.clear();
+        mVolumePreferences.clear();
     }
 
     @Override
@@ -228,14 +264,22 @@ public class AudioSharingDeviceVolumeGroupController extends AudioSharingBasePre
             mPreferenceGroup.setVisible(true);
         }
         mPreferenceGroup.addPreference(preference);
-        if (mVolumeControl != null && preference instanceof AudioSharingDeviceVolumePreference) {
-            BluetoothVolumeControl.Callback callback =
-                    buildVcCallback((AudioSharingDeviceVolumePreference) preference);
-            mCallbackMap.put(preference, callback);
-            if (DEBUG) {
-                Log.d(TAG, "onDeviceAdded: register callback for " + preference);
-            }
-            mVolumeControl.registerCallback(mExecutor, callback);
+        if (preference instanceof AudioSharingDeviceVolumePreference) {
+            var volumePref = (AudioSharingDeviceVolumePreference) preference;
+            mVolumePreferences.add(volumePref);
+            if (volumePref.getProgress() > 0) return;
+            CachedBluetoothDevice device = volumePref.getCachedDevice();
+            if (device == null) return;
+            int volume = mValueMap.getOrDefault(device.getGroupId(), -1);
+            // If the volume is invalid, try to get the volume from AudioManager.STREAM_MUSIC
+            int finalVolume = getAudioVolumeIfNeeded(volume);
+            Log.d(
+                    TAG,
+                    "onDeviceAdded: set volume to "
+                            + finalVolume
+                            + " for "
+                            + device.getDevice().getAnonymizedAddress());
+            mContext.getMainExecutor().execute(() -> volumePref.setProgress(finalVolume));
         }
     }
 
@@ -245,12 +289,18 @@ public class AudioSharingDeviceVolumeGroupController extends AudioSharingBasePre
         if (mPreferenceGroup.getPreferenceCount() == 0) {
             mPreferenceGroup.setVisible(false);
         }
-        if (mVolumeControl != null && mCallbackMap.containsKey(preference)) {
-            if (DEBUG) {
-                Log.d(TAG, "onDeviceRemoved: unregister callback for " + preference);
+        if (preference instanceof AudioSharingDeviceVolumePreference) {
+            var volumePref = (AudioSharingDeviceVolumePreference) preference;
+            if (mVolumePreferences.contains(volumePref)) {
+                mVolumePreferences.remove(volumePref);
             }
-            mVolumeControl.unregisterCallback(mCallbackMap.get(preference));
-            mCallbackMap.remove(preference);
+            CachedBluetoothDevice device = volumePref.getCachedDevice();
+            Log.d(
+                    TAG,
+                    "onDeviceRemoved: "
+                            + (device == null
+                                    ? "null"
+                                    : device.getDevice().getAnonymizedAddress()));
         }
     }
 
@@ -276,39 +326,6 @@ public class AudioSharingDeviceVolumeGroupController extends AudioSharingBasePre
                         fragment.getContext(),
                         AudioSharingDeviceVolumeGroupController.this,
                         fragment.getMetricsCategory());
-    }
-
-    private BluetoothVolumeControl.Callback buildVcCallback(
-            AudioSharingDeviceVolumePreference preference) {
-        return new BluetoothVolumeControl.Callback() {
-            @Override
-            public void onVolumeOffsetChanged(BluetoothDevice device, int volumeOffset) {}
-
-            @Override
-            public void onDeviceVolumeChanged(
-                    @NonNull BluetoothDevice device,
-                    @IntRange(from = -255, to = 255) int volume) {
-                CachedBluetoothDevice cachedDevice =
-                        mLocalBtManager.getCachedDeviceManager().findDevice(device);
-                if (cachedDevice == null) return;
-                if (preference.getCachedDevice() != null
-                        && preference.getCachedDevice().getGroupId() == cachedDevice.getGroupId()) {
-                    // If the callback return invalid volume, try to get the volume from
-                    // AudioManager.STREAM_MUSIC
-                    int finalVolume = getAudioVolumeIfNeeded(volume);
-                    Log.d(
-                            TAG,
-                            "onDeviceVolumeChanged: set volume to "
-                                    + finalVolume
-                                    + " for "
-                                    + device.getAnonymizedAddress());
-                    ThreadUtils.postOnMainThread(
-                            () -> {
-                                preference.setProgress(finalVolume);
-                            });
-                }
-            }
-        };
     }
 
     private int getAudioVolumeIfNeeded(int volume) {
