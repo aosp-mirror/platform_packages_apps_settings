@@ -1295,4 +1295,5 @@ public final class Utils extends com.android.settingslib.Utils {
                 com.android.internal.R.bool.config_dreamsOnlyEnabledForDockUser);
         return dreamsSupported && (!dreamsOnlyEnabledForDockUser || canCurrentUserDream(context));
     }
+
 }
