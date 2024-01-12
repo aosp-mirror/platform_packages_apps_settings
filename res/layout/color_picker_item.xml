@@ -26,14 +26,15 @@
 
     <ImageView
         android:id="@+id/color_swatch"
-        android:layout_width="96dp"
+        android:layout_width="match_parent"
         android:layout_height="96dp"
         android:contentDescription="@null" />
 
     <TextView
         android:id="@+id/summary"
-        android:layout_width="96dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center" />
+        android:gravity="center"
+        android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Body1" />
 
 </LinearLayout>
