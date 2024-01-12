@@ -42,6 +42,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.internal.telephony.util.TelephonyUtils;
+import com.android.settings.R;
 import com.android.settings.network.MobileNetworkRepository;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -110,6 +111,9 @@ public class ConvertToEsimPreferenceController extends TelephonyBasePreferenceCo
          * To avoid showing users dialogs that can cause confusion,
          * add conditions to allow conversion in the absence of active eSIM.
          */
+        if (!mContext.getResources().getBoolean(R.bool.config_psim_conversion_menu_enabled)) {
+            return CONDITIONALLY_UNAVAILABLE;
+        }
         if (findConversionSupportComponent()) {
             return mSubscriptionInfoEntity != null && mSubscriptionInfoEntity.isActiveSubscriptionId
                     && !mSubscriptionInfoEntity.isEmbedded && isActiveSubscription(subId)
