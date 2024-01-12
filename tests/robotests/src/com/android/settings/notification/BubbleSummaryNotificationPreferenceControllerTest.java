@@ -30,17 +30,17 @@ import android.content.Context;
 import android.provider.Settings;
 
 import androidx.preference.Preference;
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
-import com.android.settings.testutils.shadow.ShadowActivityManager;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.ShadowActivityManager;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
@@ -48,19 +48,23 @@ import org.robolectric.shadow.api.Shadow;
 })
 public class BubbleSummaryNotificationPreferenceControllerTest {
 
+    private static final String KEY_NOTIFICATION_BUBBLES = "notification_bubbles";
     private Context mContext;
 
     private BubbleSummaryNotificationPreferenceController mController;
     private Preference mPreference;
 
-    private static final String KEY_NOTIFICATION_BUBBLES = "notification_bubbles";
+    private ShadowActivityManager mActivityManager;
+
 
     @Before
     public void setUp() {
-        mContext = RuntimeEnvironment.application;
+        mContext = ApplicationProvider.getApplicationContext();
         mController = new BubbleSummaryNotificationPreferenceController(mContext,
                 KEY_NOTIFICATION_BUBBLES);
-        mPreference = new Preference(RuntimeEnvironment.application);
+        mPreference = new Preference(mContext);
+        mActivityManager =
+                Shadow.extract(mContext.getSystemService(ActivityManager.class));
     }
 
     @Test
@@ -80,17 +84,13 @@ public class BubbleSummaryNotificationPreferenceControllerTest {
 
     @Test
     public void isAvailable_lowRam_returnsUnsupported() {
-        final ShadowActivityManager activityManager =
-                Shadow.extract(mContext.getSystemService(ActivityManager.class));
-        activityManager.setIsLowRamDevice(true);
+        mActivityManager.setIsLowRamDevice(true);
         assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 
     @Test
     public void isAvailable_notLowRam_returnsAvailable() {
-        final ShadowActivityManager activityManager =
-                Shadow.extract(mContext.getSystemService(ActivityManager.class));
-        activityManager.setIsLowRamDevice(false);
+        mActivityManager.setIsLowRamDevice(false);
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 }
