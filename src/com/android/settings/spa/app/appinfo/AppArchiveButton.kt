@@ -54,6 +54,7 @@ class AppArchiveButton(
     private val packageName = packageInfoPresenter.packageName
     private val userHandle = UserHandle.of(packageInfoPresenter.userId)
     private var broadcastReceiverIsCreated = false
+    private lateinit var appLabel: CharSequence
 
     @Composable
     fun getActionButton(app: ApplicationInfo): ActionButton {
@@ -61,11 +62,12 @@ class AppArchiveButton(
             val intentFilter = IntentFilter(INTENT_ACTION)
             DisposableBroadcastReceiverAsUser(intentFilter, userHandle) { intent ->
                 if (app.packageName == intent.getStringExtra(PackageInstaller.EXTRA_PACKAGE_NAME)) {
-                    onReceive(intent, app)
+                    onReceive(intent)
                 }
             }
             broadcastReceiverIsCreated = true
         }
+        appLabel = userPackageManager.getApplicationLabel(app)
         return ActionButton(
             text = context.getString(R.string.archive),
             imageVector = Icons.Outlined.CloudUpload,
@@ -113,10 +115,9 @@ class AppArchiveButton(
         }
     }
 
-    private fun onReceive(intent: Intent, app: ApplicationInfo) {
+    private fun onReceive(intent: Intent) {
         when (val status = intent.getIntExtra(PackageInstaller.EXTRA_STATUS, Int.MIN_VALUE)) {
             PackageInstaller.STATUS_SUCCESS -> {
-                val appLabel = userPackageManager.getApplicationLabel(app)
                 Toast.makeText(
                     context,
                     context.getString(R.string.archiving_succeeded, appLabel),

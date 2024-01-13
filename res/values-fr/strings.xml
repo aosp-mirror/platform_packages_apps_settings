@@ -46,6 +46,8 @@
     <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"L\'écran frontal s\'allume lorsque vous pliez votre appareil"</string>
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"Seulement pour les jeux, les vidéos et autres"</string>
     <string name="selective_stay_awake_summary" msgid="9055967322921984543">"L\'écran frontal s\'allume pour les applis qui empêchent la mise en veille de l\'écran"</string>
+    <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Balayez vers le haut pour continuer"</string>
+    <string name="stay_awake_on_lockscreen_summary" msgid="2299351813382522952">"Pliez votre téléphone et balayez vers le haut sur l\'écran frontal pour continuer à utiliser l\'application, ou attendez quelques secondes pour que l\'écran se verrouille"</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"Jamais"</string>
     <string name="sleep_on_fold_summary" msgid="7737992842459588846">"L\'écran frontal se verrouille lorsque vous pliez votre appareil"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Utiliser la rotation automatique"</string>
@@ -283,8 +285,7 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Les applis ayant l\'autorisation de détecter les appareils à proximité peuvent déterminer la position relative des appareils connectés."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"L\'accès à la position est désactivé pour les applis et les services. La position de votre appareil peut toujours être envoyée aux services d\'urgence lorsque vous les contactez par téléphone ou SMS."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"En savoir plus sur les paramètres de localisation."</string>
-    <!-- no translation found for location_settings_tooltip_text_for_chrome (3574930966097093550) -->
-    <skip />
+    <string name="location_settings_tooltip_text_for_chrome" msgid="3574930966097093550">"Pour modifier l\'accès à la position, allez dans Paramètres &gt; Sécurité &gt; Paramètres de confidentialité"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Comptes"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Sécurité"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Chiffrement et identifiants"</string>
@@ -374,7 +375,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"Annuler"</string>
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="6104718999323591180">"Non, merci"</string>
     <string name="security_settings_fingerprint_enroll_introduction_agree" msgid="4068276083536421828">"J\'accepte"</string>
-    <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"Passer la config. empreinte ?"</string>
+    <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"Passer cette étape ?"</string>
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"La configuration de l\'empreinte digitale ne prend qu\'une minute ou deux. Si vous passez cette étape, vous pourrez ajouter votre empreinte digitale plus tard dans les paramètres."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"Quand vous verrez cette icône, authentifiez-vous à l\'aide de votre empreinte, par exemple pour vous connecter à des applis ou approuver un achat"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_1" msgid="4360262371633254407">"À noter"</string>
@@ -545,7 +546,7 @@
     <string name="work_profile_category_header" msgid="85707750968948517">"Profil professionnel"</string>
     <string name="private_space_title" msgid="7078627930195569767">"Espace privé"</string>
     <string name="private_space_summary" msgid="2274405892301976238">"Gardez les applications privées verrouillées et masquées"</string>
-    <string name="private_space_description" msgid="5494963647270826210">"Cacher les applications dans un dossier privé auquel vous seul avez accès"</string>
+    <string name="private_space_description" msgid="4059594203775816136">"Gardez vos applis privées dans un espace séparé que vous pouvez masquer ou verrouiller"</string>
     <string name="private_space_lock_title" msgid="3006539720164938296">"Verrouillage d\'Espace privé"</string>
     <string name="private_space_one_lock_summary" msgid="2759953747682959371">"Vous pouvez déverrouiller Espace privé de la même manière que vous déverrouillez votre appareil ou bien choisir un verrouillage différent."</string>
     <string name="private_space_screen_lock_title" msgid="8679383894967823163">"Utiliser le verrouillage de l\'écran de l\'appareil"</string>
@@ -1814,19 +1815,14 @@
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Clavier à l\'écran disponible"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Gérer les claviers à l\'écran"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"Options"</string>
-    <!-- no translation found for keyboard_a11y_category (8230758278046841469) -->
-    <skip />
+    <string name="keyboard_a11y_category" msgid="8230758278046841469">"Accessibilité"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Clavier physique"</string>
     <string name="show_ime" msgid="4334255501724746849">"Utiliser le clavier à l\'écran"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"Afficher le clavier virtuel même lorsque le clavier physique est actif"</string>
-    <!-- no translation found for bounce_keys (7419450970351743904) -->
-    <skip />
-    <!-- no translation found for bounce_keys_summary (6922850403920596246) -->
-    <skip />
-    <!-- no translation found for sticky_keys (7317317044898161747) -->
-    <skip />
-    <!-- no translation found for sticky_keys_summary (8520909829540989765) -->
-    <skip />
+    <string name="bounce_keys" msgid="7419450970351743904">"Touches à rebonds"</string>
+    <string name="bounce_keys_summary" msgid="6922850403920596246">"Activez les Touches à rebonds pour une accessibilité accrue sur un clavier physique"</string>
+    <string name="sticky_keys" msgid="7317317044898161747">"Touches persistantes"</string>
+    <string name="sticky_keys_summary" msgid="8520909829540989765">"Activer les Touches persistantes pour une accessibilité accrue sur un clavier physique"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Raccourcis clavier"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Afficher la liste des raccourcis"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Claviers et outils du profil professionnel"</string>
@@ -1924,7 +1920,10 @@
     <string name="usage_stats_sort_by_usage_time" msgid="2927310334119998301">"Trier par temps d\'utilisation"</string>
     <string name="usage_stats_sort_by_last_time_used" msgid="7039213339779884017">"Trier par dernière utilisation"</string>
     <string name="usage_stats_sort_by_app_name" msgid="4463833145514850478">"Trier par nom d\'appli"</string>
-    <string name="last_time_used_label" msgid="2639712813493534074">"Dernière utilisation"</string>
+    <!-- no translation found for last_time_used_label (7589377271406011659) -->
+    <skip />
+    <!-- no translation found for last_time_used_never (2936073559267990034) -->
+    <skip />
     <string name="usage_time_label" msgid="9105343335151559883">"Durée d\'utilisation"</string>
     <string name="accessibility_settings" msgid="4713215774904704682">"Accessibilité"</string>
     <string name="accessibility_settings_title" msgid="6739115703615065716">"Paramètres d\'accessibilité"</string>
@@ -2052,10 +2051,10 @@
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"Le geste d\'accessibilité est défini sur <xliff:g id="SERVICE">%1$s</xliff:g>. Pour utiliser la loupe, balayez l\'écran de bas en haut avec deux doigts et maintenez la pression, puis sélectionnez la loupe."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="3713636732641882959">"Raccourci (volume)"</string>
     <string name="accessibility_shortcut_settings" msgid="836783442658447995">"Paramètres des raccourcis"</string>
-    <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="3923122834058574478">"Raccourci depuis l\'écran de verrouillage"</string>
-    <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Autoriser le raccourci de la fonctionnalité à s\'activer à partir de l\'écran de verrouillage. Appuyer sur les deux touches de volume pendant quelques secondes."</string>
+    <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="3923122834058574478">"Raccourci accessible sur l\'écran de verrouillage"</string>
+    <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Permet d\'autoriser l\'activation du raccourci sur l\'écran de verrouillage. Maintenez les deux touches de volume enfoncées pendant quelques secondes."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Bouton Accessibilité"</string>
-    <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Bouton et geste Accessibilité"</string>
+    <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Bouton et geste d\'accessibilité"</string>
     <string name="accessibility_button_intro_text" msgid="80993874471745687">"Accéder rapidement aux fonctionnalités d\'accessibilité depuis n\'importe quel écran"</string>
     <string name="accessibility_button_about_title" msgid="3581116105084067926">"À propos du bouton Accessibilité"</string>
     <string name="accessibility_button_gesture_about_title" msgid="8468987303602865536">"Bouton et geste d\'accessibilité"</string>
@@ -2494,9 +2493,13 @@
     <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"maintenant"</string>
     <string name="battery_usage_timestamps_hyphen" msgid="7401188432989043905">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g> – <xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
     <string name="battery_usage_day_and_hour" msgid="1417890420844950881">"<xliff:g id="DAY">%1$s</xliff:g> <xliff:g id="HOUR">%2$s</xliff:g>"</string>
+    <!-- no translation found for battery_usage_time_info_and_battery_level (6732629268310936155) -->
+    <skip />
     <string name="battery_usage_chart" msgid="4114747521432440017">"Graphique d\'utilisation de la batterie"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Graphique d\'utilisation de la batterie par jour"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Graphique d\'utilisation de la batterie par heure"</string>
+    <!-- no translation found for battery_level_percentage (1433178290838842146) -->
+    <skip />
     <string name="battery_usage_breakdown_title_since_last_full_charge" msgid="435006273323199906">"Utilisation de la batterie depuis la dernière charge complète"</string>
     <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"Utilisation de la batterie (<xliff:g id="SLOT">%s</xliff:g>)"</string>
     <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"Temps d\'utilisation depuis la dernière charge complète"</string>
@@ -3384,6 +3387,7 @@
     <string name="recent_convos_removed" msgid="2122932798895714203">"Conversations récentes supprimées"</string>
     <string name="recent_convo_removed" msgid="8686414146325958281">"Conversation supprimée"</string>
     <string name="clear" msgid="5092178335409471100">"Effacer"</string>
+    <string name="clear_conversation" msgid="5564321180363279096">"Effacer <xliff:g id="CONVERSATION_NAME">%1$s</xliff:g>"</string>
     <string name="conversation_onboarding_title" msgid="5194559958353468484">"Les conversations prioritaires ou modifiées s\'afficheront ici"</string>
     <string name="conversation_onboarding_summary" msgid="2484845363368486941">"Lorsque vous marquerez une conversation comme prioritaire ou que vous la modifierez, elle s\'affichera ici. \n\nPour modifier les paramètres des conversations : \nBalayez l\'écran de haut en bas pour ouvrir le volet déroulant, puis appuyez de manière prolongée sur une conversation."</string>
     <string name="notification_importance_min_title" msgid="7676541266705442501">"Réduire"</string>

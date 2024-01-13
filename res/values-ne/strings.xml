@@ -46,6 +46,8 @@
     <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"तपाईंले आफ्नो डिभाइस फोल्ड गरेपछि अगाडिको डिस्प्ले अन हुन्छ"</string>
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"केवल गेम, भिडियो र अन्य कुराहरू"</string>
     <string name="selective_stay_awake_summary" msgid="9055967322921984543">"तपाईंको डिभाइसको स्क्रिनलाई अफ हुन नदिने एपहरूमा अगाडिको डिस्प्ले अन हुन्छ"</string>
+    <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"जारी राख्न माथितिर स्वाइप गर्नुहोस्"</string>
+    <string name="stay_awake_on_lockscreen_summary" msgid="2299351813382522952">"एप चलाइराख्न आफ्नो फोनलाई फोल्ड गरी अगाडिको डिस्प्लेमा स्वाइप गर्नुहोस् वा स्क्रिन लक भइन्जेल केही बेर पर्खनुहोस्"</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"कहिल्यै पनि होइन"</string>
     <string name="sleep_on_fold_summary" msgid="7737992842459588846">"तपाईंले आफ्नो डिभाइस फोल्ड गरेपछि अगाडिको डिस्प्ले लक हुन्छ"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"अटो-रोटेट प्रयोग गर्नुहोस्"</string>
@@ -283,8 +285,7 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"वरपर रहेका ब्लुटुथ चल्ने डिभाइसहरू खोज्ने अनुमति दिइएका एपहरूले कनेक्ट गरिएका डिभाइसहरूको सापेक्ष लोकेसन पत्ता लगाउन सक्छन्।"</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"एप तथा सेवाहरूलाई लोकेसन प्रयोग गर्ने अनुमति दिइएको छैन। तपाईंले कुनै आपत्‌कालीन नम्बरमा कल गर्दा वा टेक्स्ट म्यासेज पठाउँदा भने आपत्‌कालीन सेवा प्रदान गर्ने निकायलाई तपाईंको डिभाइसको लोकेसन पठाइन सक्छ।"</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"लोकेसन सेटिङका बारेमा थप जान्नुहोस्"</string>
-    <!-- no translation found for location_settings_tooltip_text_for_chrome (3574930966097093550) -->
-    <skip />
+    <string name="location_settings_tooltip_text_for_chrome" msgid="3574930966097093550">"लोकेसन एक्सेस गर्ने सुविधा परिवर्तन गर्न \"सेटिङ\", \"सुरक्षा तथा गोपनीयता\" तथा \"गोपनीयतासम्बन्धी सेटिङ\" मा जानुहोस्"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"खाताहरू"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"सुरक्षा"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"इन्क्रिप्सन र क्रिडेन्सियल"</string>
@@ -545,7 +546,7 @@
     <string name="work_profile_category_header" msgid="85707750968948517">"कार्य प्रोफाइल"</string>
     <string name="private_space_title" msgid="7078627930195569767">"निजी स्पेस"</string>
     <string name="private_space_summary" msgid="2274405892301976238">"निजी एपहरू लक गरिराख्नुहोस् र लुकाइराख्नुहोस्"</string>
-    <string name="private_space_description" msgid="5494963647270826210">"एपहरू तपाईंले मात्र हेर्न र प्रयोग गर्न सक्ने निजी फोल्डरमा लुकाउनुहोस्"</string>
+    <string name="private_space_description" msgid="4059594203775816136">"निजी एपहरू तपाईंले लुकाउन वा लक गर्न सक्ने खालको छुट्टै स्पेसमा राख्नुहोस्"</string>
     <string name="private_space_lock_title" msgid="3006539720164938296">"निजी स्पेसको लक"</string>
     <string name="private_space_one_lock_summary" msgid="2759953747682959371">"तपाईं आफूले आफ्नो डिभाइस अनलक गरे जसरी नै निजी स्पेस अनलक गर्न वा अर्कै लक छनौट गर्न सक्नुहुन्छ"</string>
     <string name="private_space_screen_lock_title" msgid="8679383894967823163">"डिभाइसको स्क्रिन लक प्रयोग गरियोस्"</string>
@@ -1814,19 +1815,14 @@
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"उपलब्ध अनस्क्रिन किबोर्ड"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"अनस्क्रिन किबोर्डहरूको व्यवस्थापन गर्नुहोस्"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"विकल्पहरू"</string>
-    <!-- no translation found for keyboard_a11y_category (8230758278046841469) -->
-    <skip />
+    <string name="keyboard_a11y_category" msgid="8230758278046841469">"एक्सेसिबिलिटी सुविधा"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"फिजिकल किबोर्ड"</string>
     <string name="show_ime" msgid="4334255501724746849">"अनस्क्रिन किबोर्ड प्रयोग गरियोस्"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"फिजिकल किबोर्ड सक्रिय हुँदा यसलाई स्क्रिनमा राखियोस्"</string>
-    <!-- no translation found for bounce_keys (7419450970351743904) -->
-    <skip />
-    <!-- no translation found for bounce_keys_summary (6922850403920596246) -->
-    <skip />
-    <!-- no translation found for sticky_keys (7317317044898161747) -->
-    <skip />
-    <!-- no translation found for sticky_keys_summary (8520909829540989765) -->
-    <skip />
+    <string name="bounce_keys" msgid="7419450970351743904">"बाउन्स की"</string>
+    <string name="bounce_keys_summary" msgid="6922850403920596246">"भौतिक किबोर्डमा एक्सेसिबिलिटी सुविधा प्रयोग गर्न बाउन्स की अन गर्नुहोस्"</string>
+    <string name="sticky_keys" msgid="7317317044898161747">"स्टिकी की"</string>
+    <string name="sticky_keys_summary" msgid="8520909829540989765">"भौतिक किबोर्डमा एक्सेसिबिलिटी सुविधा प्रयोग गर्न स्टिकी की अन गर्नुहोस्"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"किबोर्डका सर्टकटहरू"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"सर्टकटहरूको सूची देखाइयोस्"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"कार्य प्रोफाइल किबोर्ड र उपकरणहरू"</string>
@@ -1924,7 +1920,10 @@
     <string name="usage_stats_sort_by_usage_time" msgid="2927310334119998301">"प्रयोग गरिएको समयअनुसार क्रमबद्ध गर्नुहोस्"</string>
     <string name="usage_stats_sort_by_last_time_used" msgid="7039213339779884017">"पछिल्लो पटक प्रयोग गरिएको समयअनुसार क्रमबद्ध गर्नुहोस्"</string>
     <string name="usage_stats_sort_by_app_name" msgid="4463833145514850478">"एपको नामअनुसार क्रमबद्ध गर्नुहोस्"</string>
-    <string name="last_time_used_label" msgid="2639712813493534074">"पछिल्लो समय प्रयोग गरिएको"</string>
+    <!-- no translation found for last_time_used_label (7589377271406011659) -->
+    <skip />
+    <!-- no translation found for last_time_used_never (2936073559267990034) -->
+    <skip />
     <string name="usage_time_label" msgid="9105343335151559883">"उपयोग समय"</string>
     <string name="accessibility_settings" msgid="4713215774904704682">"एक्सेसिबिलिटी"</string>
     <string name="accessibility_settings_title" msgid="6739115703615065716">"उपलब्धता सेटिङहरू"</string>
@@ -2494,9 +2493,13 @@
     <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"अहिले"</string>
     <string name="battery_usage_timestamps_hyphen" msgid="7401188432989043905">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g> - <xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
     <string name="battery_usage_day_and_hour" msgid="1417890420844950881">"<xliff:g id="DAY">%1$s</xliff:g> <xliff:g id="HOUR">%2$s</xliff:g>⁠"</string>
+    <!-- no translation found for battery_usage_time_info_and_battery_level (6732629268310936155) -->
+    <skip />
     <string name="battery_usage_chart" msgid="4114747521432440017">"ब्याट्रीको खपत देखाइएको चार्ट"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"दैनिक ब्याट्रीको खपतसम्बन्धी चार्ट"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"प्रति घण्टा ब्याट्रीको खपतसम्बन्धी चार्ट"</string>
+    <!-- no translation found for battery_level_percentage (1433178290838842146) -->
+    <skip />
     <string name="battery_usage_breakdown_title_since_last_full_charge" msgid="435006273323199906">"पछिल्लो पटक पूरा चार्ज गरेदेखि अहिलेसम्म भएको ब्याट्रीको खपत"</string>
     <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"<xliff:g id="SLOT">%s</xliff:g> का बीचमा खपत भएको ब्याट्री"</string>
     <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"पछिल्लो पटक पूरा चार्ज गरेदेखि अहिलेसम्मको स्क्रिन टाइम"</string>
@@ -2986,7 +2989,7 @@
     <string name="select_specific_sim_for_data_msg" msgid="7401698123430573637">"तपाईंले <xliff:g id="NEW_SIM">%1$s</xliff:g> चलाउनुभयो भने अबदेखि <xliff:g id="OLD_SIM">%2$s</xliff:g> को मोबाइल डेटा प्रयोग गरिने छैन।"</string>
     <string name="select_specific_sim_for_data_button" msgid="6571935548920603512">"<xliff:g id="NEW_SIM">%1$s</xliff:g> चलाउनुहोस्"</string>
     <string name="select_sim_for_calls" msgid="7843107015635189868">"संग कल"</string>
-    <string name="sim_name_hint" msgid="8231524869124193119">"SIM नाम प्रविष्टि गर्नुहोस्"</string>
+    <string name="sim_name_hint" msgid="8231524869124193119">"SIM नाम हाल्नुहोस्"</string>
     <string name="sim_editor_title" msgid="918655391915256859">"SIM स्लट %1$d"</string>
     <string name="color_orange" msgid="216547825489739010">"सुन्तले"</string>
     <string name="color_purple" msgid="6603701972079904843">"बैजनी"</string>
@@ -3067,7 +3070,7 @@
     <string name="keywords_location" msgid="8016374808099706213">"वरपर, स्थान, इतिहास, रिपोर्टिङ, GPS"</string>
     <string name="keywords_accounts" msgid="3013897982630845506">"खाता, कुनै खाता हाल्नुहोस्, कार्य प्रोफाइल, खाता हाल्नुहोस्, हटाउनुहोस्, मेटाउनुहोस्"</string>
     <string name="keywords_users" msgid="3497517660077620843">"प्रतिबन्ध, प्रतिबन्ध लगाउनुहोस्, प्रतिबन्धित"</string>
-    <string name="keywords_keyboard_and_ime" msgid="4741098648730042570">"पाठ सच्याइ, सही, ध्वनि, कम्पन, स्वतः, भाषा, इसारा, सुझाव दिनु, सुझाव, विषयवस्तु, अपमानजनक, शब्द, प्रकार, इमोजी, अन्तर्राष्ट्रिय"</string>
+    <string name="keywords_keyboard_and_ime" msgid="4741098648730042570">"टेक्स्ट सच्याउने, सच्याउने, साउन्ड, भाइब्रेट, स्वतः, भाषा, इसारा, सुझाव दिनु, सुझाव, थिम, अपमानजनक, शब्द, प्रकार, इमोजी, अन्तर्राष्ट्रिय"</string>
     <string name="keywords_reset_apps" msgid="8254315757754930862">"रिसेट गर्नुहोस्, प्राथमिकताहरू, डिफल्ट"</string>
     <string name="keywords_all_apps" msgid="9016323378609007166">"एपहरू, डाउनलोड, एपहरू, प्रणाली"</string>
     <string name="keywords_app_permissions" msgid="2061773665663541610">"एपहरू, अनुमतिहरू, सुरक्षा"</string>
@@ -3384,6 +3387,7 @@
     <string name="recent_convos_removed" msgid="2122932798895714203">"हालसालैका वार्तालापहरू हटाइए"</string>
     <string name="recent_convo_removed" msgid="8686414146325958281">"वार्तालाप हटाइएको छ"</string>
     <string name="clear" msgid="5092178335409471100">"हटाउनुहोस्"</string>
+    <string name="clear_conversation" msgid="5564321180363279096">"<xliff:g id="CONVERSATION_NAME">%1$s</xliff:g> सँगको कुराकानी मेटाउनुहोस्"</string>
     <string name="conversation_onboarding_title" msgid="5194559958353468484">"महत्त्वपूर्ण तथा संशोधित वार्तालापहरू यहाँ देखिने छन्"</string>
     <string name="conversation_onboarding_summary" msgid="2484845363368486941">"तपाईंले महत्त्वपूर्ण वार्तालापका रूपमा चिन्ह लगाएका वार्तालाप वा ती वार्तालापहरूमा गरिएका परिवर्तनहरू यहाँ देखिने छन्। \n\nवार्तालापसम्बन्धी सेटिङ परिवर्तन गर्न: \nस्क्रिनको सिरानबाट तलतिर स्वाइप गरेर पुल डाउन सेड खोल्नुहोस्, त्यसपछि कुनै वार्तालापमा टच एण्ड होल्ड गर्नुहोस्।"</string>
     <string name="notification_importance_min_title" msgid="7676541266705442501">"सानो बनाउनुहोस्"</string>

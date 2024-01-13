@@ -32,6 +32,7 @@ import android.content.res.Resources;
 import android.credentials.CredentialManager;
 import android.credentials.CredentialProviderInfo;
 import android.credentials.SetEnabledProvidersException;
+import android.credentials.flags.Flags;
 import android.database.ContentObserver;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -108,6 +109,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
     private final List<ServiceInfo> mPendingServiceInfos = new ArrayList<>();
     private final Handler mHandler = new Handler();
     private final SettingContentObserver mSettingsContentObserver;
+    private final ImageUtils.IconResizer mIconResizer;
 
     private @Nullable FragmentManager mFragmentManager = null;
     private @Nullable Delegate mDelegate = null;
@@ -116,6 +118,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
 
     private boolean mVisibility = false;
     private boolean mIsWorkProfile = false;
+    private boolean mSimulateConnectedForTests = false;
 
     public CredentialManagerPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -129,6 +132,13 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
                 new SettingContentObserver(mHandler, context.getContentResolver());
         mSettingsContentObserver.register();
         mSettingsPackageMonitor.register(context, context.getMainLooper(), false);
+        mIconResizer = getResizer(context);
+    }
+
+    private static ImageUtils.IconResizer getResizer(Context context) {
+        final Resources resources = context.getResources();
+        int size = (int) resources.getDimension(android.R.dimen.app_icon_size);
+        return new ImageUtils.IconResizer(size, size, resources.getDisplayMetrics());
     }
 
     private @Nullable CredentialManager getCredentialManager(Context context, boolean isTest) {
@@ -147,7 +157,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
 
     @Override
     public int getAvailabilityStatus() {
-        if (mCredentialManager == null) {
+        if (!isConnected()) {
             return UNSUPPORTED_ON_DEVICE;
         }
 
@@ -174,7 +184,11 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
 
     @VisibleForTesting
     public boolean isConnected() {
-        return mCredentialManager != null;
+        return mCredentialManager != null || mSimulateConnectedForTests;
+    }
+
+    public void setSimulateConnectedForTests(boolean simulateConnectedForTests) {
+        mSimulateConnectedForTests = simulateConnectedForTests;
     }
 
     /**
@@ -293,7 +307,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
 
         NewProviderConfirmationDialogFragment fragment =
                 newNewProviderConfirmationDialogFragment(
-                        serviceInfo.packageName, appName, /* setActivityResult= */ true);
+                        serviceInfo.packageName, appName, /* shouldSetActivityResult= */ true);
         if (fragment == null || mFragmentManager == null) {
             return;
         }
@@ -365,7 +379,8 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         }
     }
 
-    private void setVisibility(boolean newVisibility) {
+    @VisibleForTesting
+    public void setVisibility(boolean newVisibility) {
         if (newVisibility == mVisibility) {
             return;
         }
@@ -374,6 +389,11 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         if (mDelegate != null) {
             mDelegate.forceDelegateRefresh();
         }
+    }
+
+    @VisibleForTesting
+    public boolean getVisibility() {
+        return mVisibility;
     }
 
     @VisibleForTesting
@@ -574,6 +594,17 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         return enabledServices;
     }
 
+    @VisibleForTesting
+    public @NonNull Drawable processIcon(@Nullable Drawable icon) {
+        // If we didn't get an icon then we should use the default app icon.
+        if (icon == null) {
+            icon = mPm.getDefaultActivityIcon();
+        }
+
+        Drawable providerIcon = Utils.getSafeIcon(icon);
+        return mIconResizer.createIconThumbnail(providerIcon);
+    }
+
     private CombiPreference addProviderPreference(
             @NonNull Context prefContext,
             @NonNull CharSequence title,
@@ -584,12 +615,13 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         final CombiPreference pref =
                 new CombiPreference(prefContext, mEnabledPackageNames.contains(packageName));
         pref.setTitle(title);
+        pref.setLayoutResource(R.layout.preference_icon_credman);
 
-        if (icon != null) {
+        if (Flags.newSettingsUi()) {
+            pref.setIcon(processIcon(icon));
+        } else if (icon != null) {
             pref.setIcon(icon);
         }
-
-        pref.setLayoutResource(R.layout.preference_icon_credman);
 
         if (subtitle != null) {
             pref.setSummary(subtitle);
@@ -711,13 +743,13 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
             newNewProviderConfirmationDialogFragment(
                     @NonNull String packageName,
                     @NonNull CharSequence appName,
-                    boolean setActivityResult) {
+                    boolean shouldSetActivityResult) {
         DialogHost host =
                 new DialogHost() {
                     @Override
                     public void onDialogClick(int whichButton) {
                         completeEnableProviderDialogBox(
-                                whichButton, packageName, setActivityResult);
+                                whichButton, packageName, shouldSetActivityResult);
                     }
 
                     @Override
@@ -728,8 +760,8 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
     }
 
     @VisibleForTesting
-    void completeEnableProviderDialogBox(
-            int whichButton, String packageName, boolean setActivityResult) {
+    int completeEnableProviderDialogBox(
+            int whichButton, String packageName, boolean shouldSetActivityResult) {
         int activityResult = -1;
         if (whichButton == DialogInterface.BUTTON_POSITIVE) {
             if (togglePackageNameEnabled(packageName)) {
@@ -746,7 +778,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
                 final DialogFragment fragment = newErrorDialogFragment();
 
                 if (fragment == null || mFragmentManager == null) {
-                    return;
+                    return activityResult;
                 }
 
                 fragment.show(mFragmentManager, ErrorDialogFragment.TAG);
@@ -758,9 +790,11 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
 
         // If the dialog is being shown because of the intent we should
         // return a result.
-        if (activityResult == -1 || !setActivityResult) {
+        if (activityResult == -1 || !shouldSetActivityResult) {
             setActivityResult(activityResult);
         }
+
+        return activityResult;
     }
 
     private @Nullable ErrorDialogFragment newErrorDialogFragment() {
@@ -1002,6 +1036,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
             }
         }
 
+        @VisibleForTesting
         public boolean isChecked() {
             return mChecked;
         }

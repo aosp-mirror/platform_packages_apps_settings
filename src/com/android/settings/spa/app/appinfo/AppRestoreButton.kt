@@ -73,12 +73,6 @@ class AppRestoreButton(packageInfoPresenter: PackageInfoPresenter) {
         )
         try {
             packageInstaller.requestUnarchive(app.packageName, pendingIntent.intentSender)
-            val appLabel = userPackageManager.getApplicationLabel(app)
-            Toast.makeText(
-                context,
-                context.getString(R.string.restoring_in_progress, appLabel),
-                Toast.LENGTH_SHORT
-            ).show()
         } catch (e: Exception) {
             Log.e(LOG_TAG, "Request unarchive failed", e)
             Toast.makeText(
@@ -92,23 +86,11 @@ class AppRestoreButton(packageInfoPresenter: PackageInfoPresenter) {
     private fun onReceive(intent: Intent, app: ApplicationInfo) {
         when (val unarchiveStatus =
             intent.getIntExtra(PackageInstaller.EXTRA_UNARCHIVE_STATUS, Int.MIN_VALUE)) {
-            PackageInstaller.STATUS_PENDING_USER_ACTION -> {
-                Log.e(
-                    LOG_TAG,
-                    "Request unarchiving failed for $packageName with code $unarchiveStatus"
-                )
-                Toast.makeText(
-                    context,
-                    context.getString(R.string.restoring_failed),
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-
-            PackageInstaller.STATUS_SUCCESS -> {
+            PackageInstaller.UNARCHIVAL_OK -> {
                 val appLabel = userPackageManager.getApplicationLabel(app)
                 Toast.makeText(
                     context,
-                    context.getString(R.string.restoring_succeeded, appLabel),
+                    context.getString(R.string.restoring_in_progress, appLabel),
                     Toast.LENGTH_SHORT
                 ).show()
             }

@@ -46,6 +46,8 @@
     <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"ඔබ ඔබේ උපාංගය නැමූ විට ඉදිරිපස සංදර්ශකය ක්‍රියාත්මක වේ"</string>
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"ක්‍රීඩා, වීඩියෝ, සහ තවත් දේ පමණි"</string>
     <string name="selective_stay_awake_summary" msgid="9055967322921984543">"ඔබේ තිරය අක්‍රිය වීම නවත්වන යෙදුම් සඳහා ඉදිරිපස සංදර්ශකය ක්‍රියාත්මක වේ"</string>
+    <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"ඉදිරියට යාමට ඉහළට ස්වයිප් කරන්න"</string>
+    <string name="stay_awake_on_lockscreen_summary" msgid="2299351813382522952">"යෙදුම දිගටම භාවිතා කිරීම සඳහා ඔබේ දුරකථනය නමා ඉදිරිපස සංදර්ශකය මත ස්වයිප් කරන්න, නැතහොත් තිරය අගුළු දැමීම සඳහා තත්පර කිහිපයක් රැඳී සිටින්න"</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"කිසිදා නැත"</string>
     <string name="sleep_on_fold_summary" msgid="7737992842459588846">"ඔබ ඔබේ උපාංගය නවන විට ඉදිරිපස සංදර්ශකය අගුළු වැටෙයි"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"ස්වයංක්‍රිය කරකැවීම භාවිත කරන්න"</string>
@@ -283,8 +285,7 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"අවට උපාංගවල සාපේක්ෂ පිහිටීම තීරණය කිරීමට අවට උපාංග අවසරය ඇති යෙදුම්වලට හැකිය."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"යෙදුම් සහ සේවා සඳහා ස්ථාන ප්‍රවේශය ක්‍රියාවිරහිතයි. ඔබ හදිසි අවස්ථා අංකයක් අමතන විට හෝ කෙටි පණිවිඩයක් යැවීමේදී ඔබගේ උපාංගයේ ස්ථානය හදිසි අවස්ථා ප්‍රතිචාර දක්වන්නන්ට තවම යැවිය හැකිය."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"ස්ථාන සැකසීම් පිළිබඳව තව දැන ගන්න"</string>
-    <!-- no translation found for location_settings_tooltip_text_for_chrome (3574930966097093550) -->
-    <skip />
+    <string name="location_settings_tooltip_text_for_chrome" msgid="3574930966097093550">"ස්ථාන ප්‍රවේශය වෙනස් කිරීමට, සැකසීම් &gt; ආරක්ෂාව සහ පෞද්ගලිකත්වය &gt; පෞද්ගලිකත්ව පාලන වෙත යන්න"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"ගිණුම්"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"ආරක්ෂාව"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"සංකේතනය සහ අක්තපත්‍ර"</string>
@@ -545,7 +546,7 @@
     <string name="work_profile_category_header" msgid="85707750968948517">"කාර්යාල පැතිකඩ"</string>
     <string name="private_space_title" msgid="7078627930195569767">"පෞද්ගලික ඉඩ"</string>
     <string name="private_space_summary" msgid="2274405892301976238">"පෞද්ගලික යෙදුම් අගුළු දමා සඟවා තබා ගන්න"</string>
-    <string name="private_space_description" msgid="5494963647270826210">"ඔබට පමණක් ප්‍රවේශ විය හැකි පෞද්ගලික ෆෝල්ඩරයක යෙදුම් සඟවන්න"</string>
+    <string name="private_space_description" msgid="4059594203775816136">"පෞද්ගලික යෙදුම් ඔබට සැඟවීමට හෝ අගුළු දැමීමට හැකි වෙනම අවකාශයක තබා ගන්න"</string>
     <string name="private_space_lock_title" msgid="3006539720164938296">"පෞද්ගලික අවකාශ අගුල"</string>
     <string name="private_space_one_lock_summary" msgid="2759953747682959371">"ඔබට ඔබේ උපාංගය අගුළු හරින ආකාරයටම පෞද්ගලික අවකාශය අගුළු ඇරීමට හෝ වෙනත් අගුලක් තෝරා ගැනීමට හැක"</string>
     <string name="private_space_screen_lock_title" msgid="8679383894967823163">"උපාංග තිර අගුල භාවිතා කරන්න"</string>
@@ -1814,19 +1815,14 @@
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"තිරය මත යතුරු පුවරුව ලබා ගත හැකිය"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"තිර යතුරු පුවරුවල කළමනාකරණය කරන්න"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"විකල්ප"</string>
-    <!-- no translation found for keyboard_a11y_category (8230758278046841469) -->
-    <skip />
+    <string name="keyboard_a11y_category" msgid="8230758278046841469">"ප්‍රවේශ්‍යතාව"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"භෞතික යතුරු පුවරුව"</string>
     <string name="show_ime" msgid="4334255501724746849">"තිරය මත යතුරු පුවරුව භාවිත කරන්න"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"භෞතික යතුරු පුවරුව සක්‍රිය අතරතුර එය තිරය මත තබා ගන්න"</string>
-    <!-- no translation found for bounce_keys (7419450970351743904) -->
-    <skip />
-    <!-- no translation found for bounce_keys_summary (6922850403920596246) -->
-    <skip />
-    <!-- no translation found for sticky_keys (7317317044898161747) -->
-    <skip />
-    <!-- no translation found for sticky_keys_summary (8520909829540989765) -->
-    <skip />
+    <string name="bounce_keys" msgid="7419450970351743904">"පනින යතුරු"</string>
+    <string name="bounce_keys_summary" msgid="6922850403920596246">"භෞතික යතුරුපුවරු ප්‍රවේශ්‍යතාව සඳහා පනින යතුරු සබල කරන්න"</string>
+    <string name="sticky_keys" msgid="7317317044898161747">"ඇලෙන යතුරු"</string>
+    <string name="sticky_keys_summary" msgid="8520909829540989765">"භෞතික යතුරුපුවරු ප්‍රවේශ්‍යතාව සඳහා ඇලෙන යතුරු සබල කරන්න"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"යතුරු පුවරු කෙටිමං"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"කෙටිමං ලැයිස්තුව පෙන්වන්න"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"කාර්යාල පැතිකඩ යතුරු පුවරු සහ මෙවලම්"</string>
@@ -1924,7 +1920,10 @@
     <string name="usage_stats_sort_by_usage_time" msgid="2927310334119998301">"භාවිත කාලය අනුව වර්ග කරන්න"</string>
     <string name="usage_stats_sort_by_last_time_used" msgid="7039213339779884017">"අවසන් භාවිත කාලය අනුව සුබෙදන්න"</string>
     <string name="usage_stats_sort_by_app_name" msgid="4463833145514850478">"යෙදුමේ නම අනුව වර්ග කරන්න"</string>
-    <string name="last_time_used_label" msgid="2639712813493534074">"අවසන් වරට භාවිත කළේ"</string>
+    <!-- no translation found for last_time_used_label (7589377271406011659) -->
+    <skip />
+    <!-- no translation found for last_time_used_never (2936073559267990034) -->
+    <skip />
     <string name="usage_time_label" msgid="9105343335151559883">"භාවිත කාලය"</string>
     <string name="accessibility_settings" msgid="4713215774904704682">"ප්‍රවේශ්‍යතාව"</string>
     <string name="accessibility_settings_title" msgid="6739115703615065716">"ළඟාවීමේ සැකසීම්"</string>
@@ -2494,9 +2493,13 @@
     <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"දැන්"</string>
     <string name="battery_usage_timestamps_hyphen" msgid="7401188432989043905">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g> - <xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
     <string name="battery_usage_day_and_hour" msgid="1417890420844950881">"<xliff:g id="DAY">%1$s</xliff:g> <xliff:g id="HOUR">%2$s</xliff:g>⁠"</string>
+    <!-- no translation found for battery_usage_time_info_and_battery_level (6732629268310936155) -->
+    <skip />
     <string name="battery_usage_chart" msgid="4114747521432440017">"බැටරි භාවිතය පිළිබඳ ප්‍රස්තාරය"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"දිනපතා බැටරි භාවිතයේ ප්‍රස්තාරය"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"පැයක් පාසා බැටරි භාවිතයේ ප්‍රස්තාරය"</string>
+    <!-- no translation found for battery_level_percentage (1433178290838842146) -->
+    <skip />
     <string name="battery_usage_breakdown_title_since_last_full_charge" msgid="435006273323199906">"අවසන් පූර්ණ ආරෝපණයේ සිට බැටරි භාවිතය"</string>
     <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"<xliff:g id="SLOT">%s</xliff:g> සඳහා බැටරි භාවිතය"</string>
     <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"අවසන් පූර්ණ ආරෝපණයේ සිට තිර කාලය"</string>
@@ -3384,6 +3387,7 @@
     <string name="recent_convos_removed" msgid="2122932798895714203">"මෑත සංවාද ඉවත් කරන ලදි"</string>
     <string name="recent_convo_removed" msgid="8686414146325958281">"සංවාදය ඉවත් කරන ලදි"</string>
     <string name="clear" msgid="5092178335409471100">"හිස් කරන්න"</string>
+    <string name="clear_conversation" msgid="5564321180363279096">"<xliff:g id="CONVERSATION_NAME">%1$s</xliff:g> හිස් කරන්න"</string>
     <string name="conversation_onboarding_title" msgid="5194559958353468484">"ප්‍රමුඛතා සහ වෙනස් කළ සංවාද මෙහි දිස් වනු ඇත"</string>
     <string name="conversation_onboarding_summary" msgid="2484845363368486941">"ඔබ සංවාදයක් ප්‍රමුඛතාවයක් ලෙස ලකුණු කළ පසු හෝ සංවාදවලට වෙනත් වෙනස්කම් කළ විට ඒවා මෙහි දිස්වනු ඇත. \n\nසංවාද සැකසීම් වෙනස් කිරීමට: \nපහළට ඇදීමේ වැස්ම විවෘත කිරීමට තිරයේ ඉහළ සිට පහළට ස්වයිප් කර, අනතුරුව සංවාදයක් ස්පර්ශ කර අල්ලාගෙන සිටින්න."</string>
     <string name="notification_importance_min_title" msgid="7676541266705442501">"අවම කරන්න"</string>

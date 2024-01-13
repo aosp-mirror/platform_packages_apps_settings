@@ -46,6 +46,8 @@
     <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"O ecrã frontal liga-se quando dobra o dispositivo"</string>
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"Apenas jogos, vídeos e muito mais"</string>
     <string name="selective_stay_awake_summary" msgid="9055967322921984543">"O ecrã frontal liga-se para apps que impedem o ecrã de ficar inativo"</string>
+    <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Deslizar rapidamente para continuar"</string>
+    <string name="stay_awake_on_lockscreen_summary" msgid="2299351813382522952">"Dobre o telemóvel e deslize rapidamente para cima no ecrã frontal para continuar a usar a app ou aguarde alguns segundos até o ecrã ficar bloqueado"</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"Nunca"</string>
     <string name="sleep_on_fold_summary" msgid="7737992842459588846">"O ecrã frontal é bloqueado quando dobra o dispositivo"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Usar rotação automática"</string>
@@ -283,8 +285,7 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"As apps com a autorização Dispositivos próximos podem determinar a posição relativa dos dispositivos ligados."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"O acesso à localização está desativado para apps e serviços. A localização do dispositivo ainda pode ser enviada para os contactos de resposta a emergências quando liga ou envia uma mensagem de texto para um número de emergência."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Saiba mais acerca das definições de localização"</string>
-    <!-- no translation found for location_settings_tooltip_text_for_chrome (3574930966097093550) -->
-    <skip />
+    <string name="location_settings_tooltip_text_for_chrome" msgid="3574930966097093550">"Alterar acesso localização: Definições &gt; Segurança e privacidade &gt; Controlos privac."</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Contas"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Segurança"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Encriptação/credenciais"</string>
@@ -545,7 +546,7 @@
     <string name="work_profile_category_header" msgid="85707750968948517">"Perfil de trabalho"</string>
     <string name="private_space_title" msgid="7078627930195569767">"Espaço privado"</string>
     <string name="private_space_summary" msgid="2274405892301976238">"Mantenha as apps privadas bloqueadas e ocultas"</string>
-    <string name="private_space_description" msgid="5494963647270826210">"Oculte as apps numa pasta privada que só pode ser acedida por si"</string>
+    <string name="private_space_description" msgid="4059594203775816136">"Mantenha as apps privadas num espaço separado que pode ocultar ou bloquear"</string>
     <string name="private_space_lock_title" msgid="3006539720164938296">"Bloqueio do espaço privado"</string>
     <string name="private_space_one_lock_summary" msgid="2759953747682959371">"Pode desbloquear o espaço privado da mesma forma que desbloqueia o seu dispositivo ou escolher um bloqueio diferente"</string>
     <string name="private_space_screen_lock_title" msgid="8679383894967823163">"Usar bloqueio de ecrã do dispositivo"</string>
@@ -1814,19 +1815,14 @@
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Teclado no ecrã disponível"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Gerir teclados no ecrã"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"Opções"</string>
-    <!-- no translation found for keyboard_a11y_category (8230758278046841469) -->
-    <skip />
+    <string name="keyboard_a11y_category" msgid="8230758278046841469">"Acessibilidade"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Teclado físico"</string>
     <string name="show_ime" msgid="4334255501724746849">"Usar o teclado no ecrã"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"Manter no ecrã enquanto o teclado físico estiver ativo"</string>
-    <!-- no translation found for bounce_keys (7419450970351743904) -->
-    <skip />
-    <!-- no translation found for bounce_keys_summary (6922850403920596246) -->
-    <skip />
-    <!-- no translation found for sticky_keys (7317317044898161747) -->
-    <skip />
-    <!-- no translation found for sticky_keys_summary (8520909829540989765) -->
-    <skip />
+    <string name="bounce_keys" msgid="7419450970351743904">"Teclas de rejeição"</string>
+    <string name="bounce_keys_summary" msgid="6922850403920596246">"Ative as Teclas de rejeição para a acessibilidade do teclado físico"</string>
+    <string name="sticky_keys" msgid="7317317044898161747">"Teclas aderentes"</string>
+    <string name="sticky_keys_summary" msgid="8520909829540989765">"Ative as teclas aderentes para a acessibilidade do teclado físico"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Atalhos de teclado"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Mostre a lista de atalhos"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Teclados e ferramentas do perfil de trabalho"</string>
@@ -1924,7 +1920,8 @@
     <string name="usage_stats_sort_by_usage_time" msgid="2927310334119998301">"Ordenar por tempo de utiliz."</string>
     <string name="usage_stats_sort_by_last_time_used" msgid="7039213339779884017">"Ordenar por h da últ. utiliz."</string>
     <string name="usage_stats_sort_by_app_name" msgid="4463833145514850478">"Ordenar por nome da app"</string>
-    <string name="last_time_used_label" msgid="2639712813493534074">"Última utilização"</string>
+    <string name="last_time_used_label" msgid="7589377271406011659">"Última utilização"</string>
+    <string name="last_time_used_never" msgid="2936073559267990034">"nunca"</string>
     <string name="usage_time_label" msgid="9105343335151559883">"Tempo de utilização"</string>
     <string name="accessibility_settings" msgid="4713215774904704682">"Acessibilidade"</string>
     <string name="accessibility_settings_title" msgid="6739115703615065716">"Definições de acessibilidade"</string>
@@ -2494,9 +2491,11 @@
     <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"agora"</string>
     <string name="battery_usage_timestamps_hyphen" msgid="7401188432989043905">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g> – <xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
     <string name="battery_usage_day_and_hour" msgid="1417890420844950881">"<xliff:g id="DAY">%1$s</xliff:g> <xliff:g id="HOUR">%2$s</xliff:g>"</string>
+    <string name="battery_usage_time_info_and_battery_level" msgid="6732629268310936155">"<xliff:g id="TIME_INFO">%1$s</xliff:g> <xliff:g id="BATTERY_LEVEL">%2$s</xliff:g>"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Gráfico de utilização da bateria"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Gráfico de utilização da bateria por dia"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Gráfico de utilização da bateria por hora"</string>
+    <string name="battery_level_percentage" msgid="1433178290838842146">"Percentagem do nível da bateria de <xliff:g id="START_PERCENTAGE">%1$s</xliff:g> a <xliff:g id="END_PERCENTAGE">%2$s</xliff:g>"</string>
     <string name="battery_usage_breakdown_title_since_last_full_charge" msgid="435006273323199906">"Utilização da bateria desde o último carregamento completo"</string>
     <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"Utilização da bateria: <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"Tempo ao ecrã desde o último carregamento completo"</string>
@@ -3384,6 +3383,7 @@
     <string name="recent_convos_removed" msgid="2122932798895714203">"Conversas recentes removidas"</string>
     <string name="recent_convo_removed" msgid="8686414146325958281">"Conversa removida"</string>
     <string name="clear" msgid="5092178335409471100">"Limpar"</string>
+    <string name="clear_conversation" msgid="5564321180363279096">"Limpar <xliff:g id="CONVERSATION_NAME">%1$s</xliff:g>"</string>
     <string name="conversation_onboarding_title" msgid="5194559958353468484">"As conversas com prioridade e modificadas são apresentadas aqui"</string>
     <string name="conversation_onboarding_summary" msgid="2484845363368486941">"Quando marcar uma conversa como tendo prioridade ou efetuar qualquer outra alteração às conversas, as mesmas aparecem aqui. \n\nPara alterar as definições de conversa, \ndeslize rapidamente para baixo a partir da parte superior do ecrã para abrir o painel pendente e, em seguida, toque sem soltar numa conversa."</string>
     <string name="notification_importance_min_title" msgid="7676541266705442501">"Minimizar"</string>

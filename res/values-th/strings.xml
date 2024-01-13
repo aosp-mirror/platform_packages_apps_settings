@@ -46,6 +46,8 @@
     <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"หน้าจอด้านหน้าจะเปิดขึ้นเมื่อคุณพับอุปกรณ์"</string>
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"เฉพาะเกม วิดีโอ และอื่นๆ"</string>
     <string name="selective_stay_awake_summary" msgid="9055967322921984543">"หน้าจอด้านหน้าจะเปิดขึ้นสำหรับแอปที่ทำให้หน้าจอของคุณไม่มีการใช้งาน"</string>
+    <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"ปัดขึ้นเพื่อดำเนินการต่อ"</string>
+    <string name="stay_awake_on_lockscreen_summary" msgid="2299351813382522952">"พับโทรศัพท์แล้วปัดขึ้นบนหน้าจอด้านหน้าเพื่อใช้แอปต่อ หรือรอไม่กี่วินาทีเพื่อให้หน้าจอล็อก"</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"ไม่ต้องเลย"</string>
     <string name="sleep_on_fold_summary" msgid="7737992842459588846">"หน้าจอด้านหน้าจะล็อกเมื่อคุณพับอุปกรณ์"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"ใช้การหมุนอัตโนมัติ"</string>
@@ -283,8 +285,7 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"แอปที่มีสิทธิ์เข้าถึงอุปกรณ์ที่อยู่ใกล้เคียงจะสามารถระบุตำแหน่งซึ่งสัมพันธ์กับอุปกรณ์ที่เชื่อมต่อ"</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"สิทธิ์เข้าถึงตำแหน่งปิดอยู่สำหรับแอปและบริการต่างๆ ระบบอาจยังส่งตำแหน่งของอุปกรณ์ไปให้หน่วยกู้ภัยฉุกเฉินเมื่อคุณโทรหาหรือส่ง SMS ถึงหมายเลขฉุกเฉิน"</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"ดูข้อมูลเพิ่มเติมเกี่ยวกับการตั้งค่าตำแหน่ง"</string>
-    <!-- no translation found for location_settings_tooltip_text_for_chrome (3574930966097093550) -->
-    <skip />
+    <string name="location_settings_tooltip_text_for_chrome" msgid="3574930966097093550">"หากต้องการเปลี่ยนสิทธิ์เข้าถึงตำแหน่ง ให้ไปที่การตั้งค่า &gt; ความปลอดภัยและความเป็นส่วนตัว &gt; การควบคุมความเป็นส่วนตัว"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"บัญชี"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"ความปลอดภัย"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"การเข้ารหัสและข้อมูลเข้าสู่ระบบ"</string>
@@ -545,7 +546,7 @@
     <string name="work_profile_category_header" msgid="85707750968948517">"โปรไฟล์งาน"</string>
     <string name="private_space_title" msgid="7078627930195569767">"พื้นที่ส่วนตัว"</string>
     <string name="private_space_summary" msgid="2274405892301976238">"ล็อกและซ่อนแอปส่วนตัวไว้"</string>
-    <string name="private_space_description" msgid="5494963647270826210">"ซ่อนแอปในโฟลเดอร์ส่วนตัวที่มีเพียงคุณเท่านั้นที่เข้าถึงได้"</string>
+    <string name="private_space_description" msgid="4059594203775816136">"เก็บแอปส่วนตัวไว้ในพื้นที่แยกต่างหากซึ่งคุณจะซ่อนหรือล็อกได้"</string>
     <string name="private_space_lock_title" msgid="3006539720164938296">"การล็อกพื้นที่ส่วนตัว"</string>
     <string name="private_space_one_lock_summary" msgid="2759953747682959371">"คุณจะปลดล็อกพื้นที่ส่วนตัวได้โดยใช้วิธีเดียวกับที่คุณปลดล็อกอุปกรณ์ หรือเลือกการล็อกอื่น"</string>
     <string name="private_space_screen_lock_title" msgid="8679383894967823163">"ใช้การล็อกหน้าจออุปกรณ์"</string>
@@ -1814,19 +1815,14 @@
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"แป้นพิมพ์บนหน้าจอที่พร้อมใช้งาน"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"จัดการแป้นพิมพ์บนหน้าจอ"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"ตัวเลือก"</string>
-    <!-- no translation found for keyboard_a11y_category (8230758278046841469) -->
-    <skip />
+    <string name="keyboard_a11y_category" msgid="8230758278046841469">"การช่วยเหลือพิเศษ"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"แป้นพิมพ์จริง"</string>
     <string name="show_ime" msgid="4334255501724746849">"ใช้แป้นพิมพ์บนหน้าจอ"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"เปิดทิ้งไว้บนหน้าจอในระหว่างใช้งานแป้นพิมพ์จริง"</string>
-    <!-- no translation found for bounce_keys (7419450970351743904) -->
-    <skip />
-    <!-- no translation found for bounce_keys_summary (6922850403920596246) -->
-    <skip />
-    <!-- no translation found for sticky_keys (7317317044898161747) -->
-    <skip />
-    <!-- no translation found for sticky_keys_summary (8520909829540989765) -->
-    <skip />
+    <string name="bounce_keys" msgid="7419450970351743904">"คีย์ตีกลับ"</string>
+    <string name="bounce_keys_summary" msgid="6922850403920596246">"เปิดใช้คีย์ตีกลับสำหรับการช่วยเหลือพิเศษของแป้นพิมพ์จริง"</string>
+    <string name="sticky_keys" msgid="7317317044898161747">"คีย์ติดหนึบ"</string>
+    <string name="sticky_keys_summary" msgid="8520909829540989765">"เปิดใช้คีย์ติดหนึบสำหรับการช่วยเหลือพิเศษของแป้นพิมพ์จริง"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"แป้นพิมพ์ลัด"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"แสดงรายการแป้นพิมพ์ลัด"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"แป้นพิมพ์และเครื่องมือของโปรไฟล์งาน"</string>
@@ -1924,7 +1920,10 @@
     <string name="usage_stats_sort_by_usage_time" msgid="2927310334119998301">"จัดเรียงตามเวลาการใช้งาน"</string>
     <string name="usage_stats_sort_by_last_time_used" msgid="7039213339779884017">"จัดเรียงตามครั้งสุดท้ายที่ใช้"</string>
     <string name="usage_stats_sort_by_app_name" msgid="4463833145514850478">"จัดเรียงตามชื่อแอป"</string>
-    <string name="last_time_used_label" msgid="2639712813493534074">"ครั้งสุดท้ายที่ใช้"</string>
+    <!-- no translation found for last_time_used_label (7589377271406011659) -->
+    <skip />
+    <!-- no translation found for last_time_used_never (2936073559267990034) -->
+    <skip />
     <string name="usage_time_label" msgid="9105343335151559883">"เวลาการใช้งาน"</string>
     <string name="accessibility_settings" msgid="4713215774904704682">"การช่วยเหลือพิเศษ"</string>
     <string name="accessibility_settings_title" msgid="6739115703615065716">"การตั้งค่าการเข้าถึง"</string>
@@ -2494,9 +2493,13 @@
     <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"ขณะนี้"</string>
     <string name="battery_usage_timestamps_hyphen" msgid="7401188432989043905">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g> - <xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
     <string name="battery_usage_day_and_hour" msgid="1417890420844950881">"<xliff:g id="DAY">%1$s</xliff:g> <xliff:g id="HOUR">%2$s</xliff:g>"</string>
+    <!-- no translation found for battery_usage_time_info_and_battery_level (6732629268310936155) -->
+    <skip />
     <string name="battery_usage_chart" msgid="4114747521432440017">"แผนภูมิการใช้งานแบตเตอรี่"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"แผนภูมิการใช้งานแบตเตอรี่รายวัน"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"แผนภูมิการใช้งานแบตเตอรี่รายชั่วโมง"</string>
+    <!-- no translation found for battery_level_percentage (1433178290838842146) -->
+    <skip />
     <string name="battery_usage_breakdown_title_since_last_full_charge" msgid="435006273323199906">"การใช้งานแบตเตอรี่ตั้งแต่ชาร์จจนเต็มครั้งล่าสุด"</string>
     <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"การใช้งานแบตเตอรี่ในช่วง <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"เวลาอยู่หน้าจอตั้งแต่ชาร์จจนเต็มครั้งล่าสุด"</string>
@@ -3384,6 +3387,7 @@
     <string name="recent_convos_removed" msgid="2122932798895714203">"นำการสนทนาล่าสุดออกแล้ว"</string>
     <string name="recent_convo_removed" msgid="8686414146325958281">"นำการสนทนาออกแล้ว"</string>
     <string name="clear" msgid="5092178335409471100">"ล้าง"</string>
+    <string name="clear_conversation" msgid="5564321180363279096">"ล้าง <xliff:g id="CONVERSATION_NAME">%1$s</xliff:g>"</string>
     <string name="conversation_onboarding_title" msgid="5194559958353468484">"การสนทนาที่สำคัญและการสนทนาที่มีการเปลี่ยนแปลงจะปรากฏที่นี่"</string>
     <string name="conversation_onboarding_summary" msgid="2484845363368486941">"การสนทนาจะปรากฏที่นี่เมื่อตั้งสถานะให้เป็นการสนทนาที่สำคัญหรือทำการเปลี่ยนแปลงอื่นๆ \n\nวิธีเปลี่ยนการตั้งค่าการสนทนา \nปัดลงจากด้านบนของหน้าจอเพื่อเปิดหน้าต่างแจ้งเตือนแบบดึงลง จากนั้นแตะการสนทนาค้างไว้"</string>
     <string name="notification_importance_min_title" msgid="7676541266705442501">"ย่อเล็กสุด"</string>

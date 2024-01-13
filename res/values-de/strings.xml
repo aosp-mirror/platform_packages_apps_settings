@@ -46,6 +46,8 @@
     <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"Frontdisplay wird beim Zuklappen des Geräts eingeschaltet"</string>
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"Nur Spiele, Videos und mehr"</string>
     <string name="selective_stay_awake_summary" msgid="9055967322921984543">"Frontdisplay wird für Apps eingeschaltet, die das Display aktiv lassen"</string>
+    <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Zum Fortfahren wischen"</string>
+    <string name="stay_awake_on_lockscreen_summary" msgid="2299351813382522952">"Falte dein Smartphone und wische auf dem Frontdisplay nach oben, um die App weiter zu verwenden, oder warte einige Sekunden, bis das Display gesperrt ist"</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"Nie"</string>
     <string name="sleep_on_fold_summary" msgid="7737992842459588846">"Frontdisplay wird beim Zuklappen des Geräts gesperrt"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"„Automatisch drehen“ verwenden"</string>
@@ -181,7 +183,7 @@
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Die Sprache kann von den in der App verfügbaren Sprachen abweichen. Einige Apps unterstützen diese Einstellung möglicherweise nicht."</string>
     <string name="desc_app_locale_selection_supported" msgid="6744909281573556379">"Leg die Sprache für einzelne Apps fest."</string>
     <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Dein System, deine Apps und deine Websites verwenden die erste deiner bevorzugten Sprachen, die unterstützt wird."</string>
-    <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Unter „App-Sprache“ kannst du für jede App eine andere Sprache festlegen."</string>
+    <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Unter „App-Sprachen“ kannst du für jede App eine andere Sprache festlegen."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Weitere Informationen zu App-Sprachen"</string>
     <string name="title_change_system_locale" msgid="8589844586256566951">"Systemsprache in %s ändern?"</string>
     <string name="title_system_locale_addition" msgid="8218683660751479466">"%s zu bevorzugten Sprachen hinzufügen?"</string>
@@ -283,8 +285,7 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Apps mit der Berechtigung zum Zugriff auf Geräte in der Nähe können die relative Position von verbundenen Geräten ermitteln."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Standortzugriff ist für Apps und Dienste deaktiviert. Wenn du eine Notrufnummer wählst oder eine Nachricht an eine solche Nummer schickst, kann dein Standort dennoch an den Notdienst gesendet werden."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Weitere Informationen zu Standorteinstellungen"</string>
-    <!-- no translation found for location_settings_tooltip_text_for_chrome (3574930966097093550) -->
-    <skip />
+    <string name="location_settings_tooltip_text_for_chrome" msgid="3574930966097093550">"Du kannst den Standortzugriff in den Einstellungen &gt; „Sicherheit und Datenschutz“ &gt; „Datenschutzeinstellungen“ ändern"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Konten"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Sicherheit"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Verschlüsselung &amp; Anmeldedaten"</string>
@@ -545,7 +546,7 @@
     <string name="work_profile_category_header" msgid="85707750968948517">"Arbeitsprofil"</string>
     <string name="private_space_title" msgid="7078627930195569767">"Privater Bereich"</string>
     <string name="private_space_summary" msgid="2274405892301976238">"Hier kannst du deine privaten Apps verstecken und sperren"</string>
-    <string name="private_space_description" msgid="5494963647270826210">"Apps in einem privaten Ordner verstecken, auf den nur du zugreifen kannst"</string>
+    <string name="private_space_description" msgid="4059594203775816136">"Du kannst für interne Apps einen separaten Bereich nutzen, der sich ausblenden oder sperren lässt"</string>
     <string name="private_space_lock_title" msgid="3006539720164938296">"Sperre für privaten Bereich"</string>
     <string name="private_space_one_lock_summary" msgid="2759953747682959371">"Du kannst zum Entsperren des privaten Bereichs dieselbe Methode wie für das Entsperren deines Geräts verwenden oder aber eine andere Sperrmethode einrichten"</string>
     <string name="private_space_screen_lock_title" msgid="8679383894967823163">"Displaysperre des Geräts verwenden"</string>
@@ -1814,19 +1815,14 @@
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Verfügbare Bildschirmtastatur"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Bildschirmtastaturen verwalten"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"Optionen"</string>
-    <!-- no translation found for keyboard_a11y_category (8230758278046841469) -->
-    <skip />
+    <string name="keyboard_a11y_category" msgid="8230758278046841469">"Barrierefreiheit"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Physische Tastatur"</string>
     <string name="show_ime" msgid="4334255501724746849">"Bildschirmtastatur verwenden"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"Bildschirmtastatur auch dann anzeigen, wenn physische Tastatur aktiv ist"</string>
-    <!-- no translation found for bounce_keys (7419450970351743904) -->
-    <skip />
-    <!-- no translation found for bounce_keys_summary (6922850403920596246) -->
-    <skip />
-    <!-- no translation found for sticky_keys (7317317044898161747) -->
-    <skip />
-    <!-- no translation found for sticky_keys_summary (8520909829540989765) -->
-    <skip />
+    <string name="bounce_keys" msgid="7419450970351743904">"Bounce-Tasten"</string>
+    <string name="bounce_keys_summary" msgid="6922850403920596246">"Bounce-Tasten für Bedienungshilfen auf einer physischen Tastatur aktivieren"</string>
+    <string name="sticky_keys" msgid="7317317044898161747">"Einfingerbedienung"</string>
+    <string name="sticky_keys_summary" msgid="8520909829540989765">"Einfingerbedienung für Bedienungshilfen auf einer physischen Tastatur aktivieren"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Tastenkürzel"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Liste der Tastenkombinationen anzeigen"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Tastaturen und Tools für das Arbeitsprofil"</string>
@@ -1844,7 +1840,7 @@
     <string name="trackpad_bottom_right_tap_summary" msgid="8734094086900680674">"Tippe unten rechts auf das Touchpad für weitere Optionen"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Zeigergeschwindigkeit"</string>
     <string name="trackpad_touch_gesture" msgid="8641725062131922497">"Informationen zu Touchpad-Gesten"</string>
-    <string name="gesture_title_go_home" msgid="3682238648647225933">"Zum StartU+00ADbildschirm"</string>
+    <string name="gesture_title_go_home" msgid="3682238648647225933">"Zum Start­bildschirm"</string>
     <string name="gesture_summary_go_home" msgid="6409031586904205741">"Wische irgendwo auf dem Touchpad mit drei Fingern nach oben"</string>
     <string name="gesture_title_go_back" msgid="6619462058488419802">"Zurück"</string>
     <string name="gesture_summary_go_back" msgid="4981604277892236888">"Wische mit drei Fingern von links oder rechts"</string>
@@ -1924,7 +1920,10 @@
     <string name="usage_stats_sort_by_usage_time" msgid="2927310334119998301">"Nach Nutzungszeit sortieren"</string>
     <string name="usage_stats_sort_by_last_time_used" msgid="7039213339779884017">"Nach „Zuletzt verwendet“ sortieren"</string>
     <string name="usage_stats_sort_by_app_name" msgid="4463833145514850478">"Nach App-Name sortieren"</string>
-    <string name="last_time_used_label" msgid="2639712813493534074">"Zuletzt verwendet"</string>
+    <!-- no translation found for last_time_used_label (7589377271406011659) -->
+    <skip />
+    <!-- no translation found for last_time_used_never (2936073559267990034) -->
+    <skip />
     <string name="usage_time_label" msgid="9105343335151559883">"Nutzungszeit"</string>
     <string name="accessibility_settings" msgid="4713215774904704682">"Bedienungshilfen"</string>
     <string name="accessibility_settings_title" msgid="6739115703615065716">"Einstellungen für Bedienungshilfen"</string>
@@ -2494,9 +2493,13 @@
     <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"jetzt"</string>
     <string name="battery_usage_timestamps_hyphen" msgid="7401188432989043905">"von <xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g> bis <xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
     <string name="battery_usage_day_and_hour" msgid="1417890420844950881">"<xliff:g id="DAY">%1$s</xliff:g> <xliff:g id="HOUR">%2$s</xliff:g>"</string>
+    <!-- no translation found for battery_usage_time_info_and_battery_level (6732629268310936155) -->
+    <skip />
     <string name="battery_usage_chart" msgid="4114747521432440017">"Diagramm zur Akkunutzung"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Diagramm zur täglichen Akkunutzung"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Diagramm zur stündlichen Akkunutzung"</string>
+    <!-- no translation found for battery_level_percentage (1433178290838842146) -->
+    <skip />
     <string name="battery_usage_breakdown_title_since_last_full_charge" msgid="435006273323199906">"Akkunutzung seit dem letzten kompletten Aufladen"</string>
     <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"Akkunutzung von <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"Bildschirmzeit seit dem letzten kompletten Aufladen"</string>
@@ -3384,6 +3387,7 @@
     <string name="recent_convos_removed" msgid="2122932798895714203">"Neueste Unterhaltungen wurden entfernt"</string>
     <string name="recent_convo_removed" msgid="8686414146325958281">"Unterhaltung wurde entfernt"</string>
     <string name="clear" msgid="5092178335409471100">"Löschen"</string>
+    <string name="clear_conversation" msgid="5564321180363279096">"<xliff:g id="CONVERSATION_NAME">%1$s</xliff:g> löschen"</string>
     <string name="conversation_onboarding_title" msgid="5194559958353468484">"Hier werden vorrangige und geänderte Unterhaltungen angezeigt"</string>
     <string name="conversation_onboarding_summary" msgid="2484845363368486941">"Wenn du einer Unterhaltung Priorität gibst oder andere Änderungen daran vornimmst, wird sie hier angezeigt. \n\nSo änderst du die Einstellungen für eine Unterhaltung:\nWische vom oberen Displayrand nach unten, um die Benachrichtigungsleiste zu öffnen, und halte die entsprechende Unterhaltung gedrückt."</string>
     <string name="notification_importance_min_title" msgid="7676541266705442501">"Minimieren"</string>

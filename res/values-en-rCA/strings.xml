@@ -46,6 +46,8 @@
     <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"Front display turns on when you fold your device"</string>
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"Only games, videos, and more"</string>
     <string name="selective_stay_awake_summary" msgid="9055967322921984543">"Front display turns on for apps that stop your screen going idle"</string>
+    <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Swipe up to continue"</string>
+    <string name="stay_awake_on_lockscreen_summary" msgid="2299351813382522952">"Fold your phone and swipe up on the front display to continue using the app, or wait a few seconds for the screen to lock"</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"Never"</string>
     <string name="sleep_on_fold_summary" msgid="7737992842459588846">"Front display locks when you fold your device"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Use auto-rotate"</string>
@@ -283,8 +285,7 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Apps with the Nearby devices permission can determine the relative position of connected devices."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Location access is off for apps and services. Your device location may still be sent to emergency responders when you call or text an emergency number."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Learn more about Location settings"</string>
-    <!-- no translation found for location_settings_tooltip_text_for_chrome (3574930966097093550) -->
-    <skip />
+    <string name="location_settings_tooltip_text_for_chrome" msgid="3574930966097093550">"To change location access, go to Settings &gt; Security and Privacy &gt; Privacy controls"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Accounts"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Security"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Encryption &amp; credentials"</string>
@@ -545,7 +546,7 @@
     <string name="work_profile_category_header" msgid="85707750968948517">"Work profile"</string>
     <string name="private_space_title" msgid="7078627930195569767">"Private Space"</string>
     <string name="private_space_summary" msgid="2274405892301976238">"Keep private apps locked and hidden"</string>
-    <string name="private_space_description" msgid="5494963647270826210">"Hide apps in a private folder that only you can access"</string>
+    <string name="private_space_description" msgid="4059594203775816136">"Keep private apps in a separate space that you can hide or lock"</string>
     <string name="private_space_lock_title" msgid="3006539720164938296">"Private Space lock"</string>
     <string name="private_space_one_lock_summary" msgid="2759953747682959371">"You can unlock Private Space the same way you unlock your device, or choose a different lock"</string>
     <string name="private_space_screen_lock_title" msgid="8679383894967823163">"Use device screen lock"</string>
@@ -1814,19 +1815,14 @@
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Available On-screen keyboard"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Manage on-screen keyboards"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"Options"</string>
-    <!-- no translation found for keyboard_a11y_category (8230758278046841469) -->
-    <skip />
+    <string name="keyboard_a11y_category" msgid="8230758278046841469">"Accessibility"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Physical keyboard"</string>
     <string name="show_ime" msgid="4334255501724746849">"Use on-screen keyboard"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"Keep it on screen while physical keyboard is active"</string>
-    <!-- no translation found for bounce_keys (7419450970351743904) -->
-    <skip />
-    <!-- no translation found for bounce_keys_summary (6922850403920596246) -->
-    <skip />
-    <!-- no translation found for sticky_keys (7317317044898161747) -->
-    <skip />
-    <!-- no translation found for sticky_keys_summary (8520909829540989765) -->
-    <skip />
+    <string name="bounce_keys" msgid="7419450970351743904">"Bounce keys"</string>
+    <string name="bounce_keys_summary" msgid="6922850403920596246">"Enable Bounce keys for physical keyboard accessibility"</string>
+    <string name="sticky_keys" msgid="7317317044898161747">"Sticky keys"</string>
+    <string name="sticky_keys_summary" msgid="8520909829540989765">"Enable Sticky keys for physical keyboard accessibility"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Keyboard shortcuts"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Show list of shortcuts"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Work profile keyboards &amp; tools"</string>
@@ -1924,7 +1920,8 @@
     <string name="usage_stats_sort_by_usage_time" msgid="2927310334119998301">"Sort by usage time"</string>
     <string name="usage_stats_sort_by_last_time_used" msgid="7039213339779884017">"Sort by last time used"</string>
     <string name="usage_stats_sort_by_app_name" msgid="4463833145514850478">"Sort by app name"</string>
-    <string name="last_time_used_label" msgid="2639712813493534074">"Last time used"</string>
+    <string name="last_time_used_label" msgid="7589377271406011659">"Last used"</string>
+    <string name="last_time_used_never" msgid="2936073559267990034">"never"</string>
     <string name="usage_time_label" msgid="9105343335151559883">"Usage time"</string>
     <string name="accessibility_settings" msgid="4713215774904704682">"Accessibility"</string>
     <string name="accessibility_settings_title" msgid="6739115703615065716">"Accessibility settings"</string>
@@ -2494,9 +2491,11 @@
     <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"now"</string>
     <string name="battery_usage_timestamps_hyphen" msgid="7401188432989043905">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g> - <xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
     <string name="battery_usage_day_and_hour" msgid="1417890420844950881">"<xliff:g id="DAY">%1$s</xliff:g> <xliff:g id="HOUR">%2$s</xliff:g>"</string>
+    <string name="battery_usage_time_info_and_battery_level" msgid="6732629268310936155">"<xliff:g id="TIME_INFO">%1$s</xliff:g> <xliff:g id="BATTERY_LEVEL">%2$s</xliff:g>"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Battery usage chart"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Daily battery usage chart"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Hourly battery usage chart"</string>
+    <string name="battery_level_percentage" msgid="1433178290838842146">"Battery level percentage from <xliff:g id="START_PERCENTAGE">%1$s</xliff:g> to <xliff:g id="END_PERCENTAGE">%2$s</xliff:g>"</string>
     <string name="battery_usage_breakdown_title_since_last_full_charge" msgid="435006273323199906">"Battery usage since last full charge"</string>
     <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"Battery usage for <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"Screen time since last full charge"</string>
@@ -3384,6 +3383,7 @@
     <string name="recent_convos_removed" msgid="2122932798895714203">"Recent conversations removed"</string>
     <string name="recent_convo_removed" msgid="8686414146325958281">"Conversation removed"</string>
     <string name="clear" msgid="5092178335409471100">"Clear"</string>
+    <string name="clear_conversation" msgid="5564321180363279096">"Clear <xliff:g id="CONVERSATION_NAME">%1$s</xliff:g>"</string>
     <string name="conversation_onboarding_title" msgid="5194559958353468484">"Priority and modified conversations will appear here"</string>
     <string name="conversation_onboarding_summary" msgid="2484845363368486941">"Once you mark a conversation as a priority or make any other changes to conversations, they\'ll appear here.\n\nTo change conversation settings: \nSwipe down from the top of the screen to open the pull-down shade, then touch and hold a conversation."</string>
     <string name="notification_importance_min_title" msgid="7676541266705442501">"Minimize"</string>
