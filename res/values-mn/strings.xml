@@ -46,6 +46,8 @@
     <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"Таныг төхөөрөмжөө эвхэх үед урд талын дэлгэц асна"</string>
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"Зөвхөн тоглоом, видео болон бусад"</string>
     <string name="selective_stay_awake_summary" msgid="9055967322921984543">"Таны дэлгэцийг идэвхгүй болохыг зогсоодог аппуудад урд талын дэлгэц асдаг"</string>
+    <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Үргэлжлүүлэхийн тулд дээш шудрах"</string>
+    <string name="stay_awake_on_lockscreen_summary" msgid="2299351813382522952">"Аппыг үргэлжлүүлэн ашиглахын тулд утсаа эвхээд, урд талын дэлгэц дээр дээш шудрах эсвэл дэлгэцийг түгжигдэх хүртэл хэдэн секунд хүлээнэ үү"</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"Хэзээ ч үгүй"</string>
     <string name="sleep_on_fold_summary" msgid="7737992842459588846">"Таныг төхөөрөмжөө эвхэх үед урд талын дэлгэц түгжигдэнэ"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Автоматаар эргүүлэх онцлогийг ашиглах"</string>
@@ -283,8 +285,7 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Ойролцоох төхөөрөмжүүдийн зөвшөөрөлтэй аппууд холбогдсон төхөөрөмжүүдийн харгалзах байрлалыг тодорхойлох боломжтой."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Аппууд болон үйлчилгээнүүдэд байршлын хандалт унтраалттай байна. Таныг яаралтай тусламжийн утасны дугаар луу залгах эсвэл мессеж бичих үед таны төхөөрөмжийн байршлыг яаралтай тусламжийн үйлчилгээ үзүүлэгчид рүү илгээсэн хэвээр байж магадгүй."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Байршлын тохиргооны талаар нэмэлт мэдээлэл авах"</string>
-    <!-- no translation found for location_settings_tooltip_text_for_chrome (3574930966097093550) -->
-    <skip />
+    <string name="location_settings_tooltip_text_for_chrome" msgid="3574930966097093550">"Байршлын хандалт өөрчлөхөд Тохиргоо &gt; Хамгаалалт, нууцлал &gt; Нууцлалын тохиргоонд оч"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Бүртгэл"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Аюулгүй байдал"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Шифр, мандат үнэмлэх"</string>
@@ -545,7 +546,7 @@
     <string name="work_profile_category_header" msgid="85707750968948517">"Ажлын профайл"</string>
     <string name="private_space_title" msgid="7078627930195569767">"Хувийн орон зай"</string>
     <string name="private_space_summary" msgid="2274405892301976238">"Хувийн аппуудыг түгжээтэй бөгөөд нуугдсан байлгана уу"</string>
-    <string name="private_space_description" msgid="5494963647270826210">"Зөвхөн та харах боломжтой хувийн фолдерт аппуудыг нуух"</string>
+    <string name="private_space_description" msgid="4059594203775816136">"Хувийн аппуудыг та нуух эсвэл түгжих боломжтой тусдаа орон зайд байлгаарай"</string>
     <string name="private_space_lock_title" msgid="3006539720164938296">"Private Space-н түгжээ"</string>
     <string name="private_space_one_lock_summary" msgid="2759953747682959371">"Та Private Space-н түгжээг төхөөрөмжийнхөө түгжээг тайлдагтайгаа ижил аргаар тайлах эсвэл өөр түгжээ сонгох боломжтой"</string>
     <string name="private_space_screen_lock_title" msgid="8679383894967823163">"Төхөөрөмжийн дэлгэцийн түгжээг ашиглах"</string>
@@ -1814,19 +1815,14 @@
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Боломжтой дэлгэц дээрх гар"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Дэлгэц дээрх гарыг удирдах"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"Сонголт"</string>
-    <!-- no translation found for keyboard_a11y_category (8230758278046841469) -->
-    <skip />
+    <string name="keyboard_a11y_category" msgid="8230758278046841469">"Хандалт"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Биет гар"</string>
     <string name="show_ime" msgid="4334255501724746849">"Дэлгэц дээрх гарыг ашиглах"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"Биет гар идэвхтэй үед үүнийг дэлгэцэд харуулна уу"</string>
-    <!-- no translation found for bounce_keys (7419450970351743904) -->
-    <skip />
-    <!-- no translation found for bounce_keys_summary (6922850403920596246) -->
-    <skip />
-    <!-- no translation found for sticky_keys (7317317044898161747) -->
-    <skip />
-    <!-- no translation found for sticky_keys_summary (8520909829540989765) -->
-    <skip />
+    <string name="bounce_keys" msgid="7419450970351743904">"Ойх түлхүүрүүд"</string>
+    <string name="bounce_keys_summary" msgid="6922850403920596246">"Биет гарын хандалтад Ойх түлхүүрүүдийг идэвхжүүлнэ үү"</string>
+    <string name="sticky_keys" msgid="7317317044898161747">"Бэхэлсэн түлхүүрүүд"</string>
+    <string name="sticky_keys_summary" msgid="8520909829540989765">"Биет гарын хандалтад Бэхэлсэн түлхүүрүүдийг идэвхжүүлнэ үү"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Гарын товчлол"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Товчлолын жагсаалтыг харуулах"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Ажлын профайлын гар &amp; хэрэгсэл"</string>
@@ -1924,7 +1920,10 @@
     <string name="usage_stats_sort_by_usage_time" msgid="2927310334119998301">"Ашиглалтын цагаар эрэмбэлэх"</string>
     <string name="usage_stats_sort_by_last_time_used" msgid="7039213339779884017">"Сүүлд ашигласан цагаар эрэмбэл"</string>
     <string name="usage_stats_sort_by_app_name" msgid="4463833145514850478">"Аппын нэрээр эрэмбэлэх"</string>
-    <string name="last_time_used_label" msgid="2639712813493534074">"Ашигласан сүүлийн цаг"</string>
+    <!-- no translation found for last_time_used_label (7589377271406011659) -->
+    <skip />
+    <!-- no translation found for last_time_used_never (2936073559267990034) -->
+    <skip />
     <string name="usage_time_label" msgid="9105343335151559883">"Ашиглалтын цаг"</string>
     <string name="accessibility_settings" msgid="4713215774904704682">"Хандалт"</string>
     <string name="accessibility_settings_title" msgid="6739115703615065716">"Хандалтын тохиргоо"</string>
@@ -2494,9 +2493,13 @@
     <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"одоо"</string>
     <string name="battery_usage_timestamps_hyphen" msgid="7401188432989043905">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g> - <xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
     <string name="battery_usage_day_and_hour" msgid="1417890420844950881">"<xliff:g id="DAY">%1$s</xliff:g> <xliff:g id="HOUR">%2$s</xliff:g>⁠"</string>
+    <!-- no translation found for battery_usage_time_info_and_battery_level (6732629268310936155) -->
+    <skip />
     <string name="battery_usage_chart" msgid="4114747521432440017">"Батарей ашиглалтын график"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Батарей ашиглалтын өдөр тутмын график"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Батарей ашиглалтын цаг тутмын график"</string>
+    <!-- no translation found for battery_level_percentage (1433178290838842146) -->
+    <skip />
     <string name="battery_usage_breakdown_title_since_last_full_charge" msgid="435006273323199906">"Сүүлд бүрэн цэнэглэснээс хойших батарей ашиглалт"</string>
     <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"<xliff:g id="SLOT">%s</xliff:g>-н батарей ашиглалт"</string>
     <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"Сүүлд бүрэн цэнэглэснээс хойших дэлгэцийн цаг"</string>
@@ -3384,6 +3387,7 @@
     <string name="recent_convos_removed" msgid="2122932798895714203">"Саяхны харилцан яриаг хассан"</string>
     <string name="recent_convo_removed" msgid="8686414146325958281">"Харилцан яриаг хассан"</string>
     <string name="clear" msgid="5092178335409471100">"Арилгах"</string>
+    <string name="clear_conversation" msgid="5564321180363279096">"<xliff:g id="CONVERSATION_NAME">%1$s</xliff:g>-г арилгах"</string>
     <string name="conversation_onboarding_title" msgid="5194559958353468484">"Чухал болон өөрчилсөн харилцан яриа энд харагдана"</string>
     <string name="conversation_onboarding_summary" msgid="2484845363368486941">"Та харилцан яриаг чухал гэж тэмдэглэхэд эсвэл харилцан ярианд аливаа бусад өөрчлөлт хийх тохиолдолд энд харагдана. \n\nХарилцан ярианы тохиргоог өөрчлөхийн тулд: \nДэлгэцийн дээрээс доош шудран доош татдаг хураангуй самбарыг нээгээд, дараа нь харилцан ярианд хүрээд, удаан дарна."</string>
     <string name="notification_importance_min_title" msgid="7676541266705442501">"Багасгах"</string>

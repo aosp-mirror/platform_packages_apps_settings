@@ -46,6 +46,8 @@
     <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"デバイスを折りたたむとフロント ディスプレイが ON になります"</string>
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"ゲームや動画などの場合のみ"</string>
     <string name="selective_stay_awake_summary" msgid="9055967322921984543">"画面がアイドル状態にならないアプリを使用している場合にフロント ディスプレイが ON になります"</string>
+    <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"上にスワイプして続行"</string>
+    <string name="stay_awake_on_lockscreen_summary" msgid="2299351813382522952">"スマートフォンを折りたたみ、フロント ディスプレイで上にスワイプしてアプリを使い続け、数秒ほどすると画面がロックされます"</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"継続しない"</string>
     <string name="sleep_on_fold_summary" msgid="7737992842459588846">"デバイスを折りたたむとフロント ディスプレイがロックされます"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"画面を自動で回転させる"</string>
@@ -283,8 +285,7 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"付近のデバイスへのアクセス許可を持つアプリは、接続されたデバイスの相対位置を確認できます。"</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"アプリとサービスの位置情報へのアクセスは OFF になっています。緊急通報番号に電話をかけたりテキスト メッセージを送信したりした場合は、デバイスの位置情報が緊急サービスに送信されることがあります。"</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"位置情報の設定の詳細"</string>
-    <!-- no translation found for location_settings_tooltip_text_for_chrome (3574930966097093550) -->
-    <skip />
+    <string name="location_settings_tooltip_text_for_chrome" msgid="3574930966097093550">"位置情報のアクセス権を変更するには、[設定] &gt; [セキュリティとプライバシー] &gt; [プライバシー管理] に移動します"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"アカウント"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"セキュリティ"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"暗号化と認証情報"</string>
@@ -545,7 +546,7 @@
     <string name="work_profile_category_header" msgid="85707750968948517">"仕事用プロファイル"</string>
     <string name="private_space_title" msgid="7078627930195569767">"プライベート スペース"</string>
     <string name="private_space_summary" msgid="2274405892301976238">"限定公開アプリはロックされたままで非表示となります"</string>
-    <string name="private_space_description" msgid="5494963647270826210">"あなただけがアクセスできるプライベート フォルダ内のアプリを非表示にします"</string>
+    <string name="private_space_description" msgid="4059594203775816136">"非表示またはロックできる個別のスペースに限定公開アプリを保持できます"</string>
     <string name="private_space_lock_title" msgid="3006539720164938296">"プライベート スペースのロック"</string>
     <string name="private_space_one_lock_summary" msgid="2759953747682959371">"デバイスのロック解除と同じ方法でプライベート スペースのロックを解除するか、別のロックを選択できます"</string>
     <string name="private_space_screen_lock_title" msgid="8679383894967823163">"デバイスの画面ロックを使用"</string>
@@ -1814,19 +1815,14 @@
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"利用可能な画面キーボード"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"画面キーボードを管理"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"オプション"</string>
-    <!-- no translation found for keyboard_a11y_category (8230758278046841469) -->
-    <skip />
+    <string name="keyboard_a11y_category" msgid="8230758278046841469">"ユーザー補助"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"物理キーボード"</string>
     <string name="show_ime" msgid="4334255501724746849">"画面キーボードの使用"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"物理キーボードが有効になっていても画面に表示させます"</string>
-    <!-- no translation found for bounce_keys (7419450970351743904) -->
-    <skip />
-    <!-- no translation found for bounce_keys_summary (6922850403920596246) -->
-    <skip />
-    <!-- no translation found for sticky_keys (7317317044898161747) -->
-    <skip />
-    <!-- no translation found for sticky_keys_summary (8520909829540989765) -->
-    <skip />
+    <string name="bounce_keys" msgid="7419450970351743904">"バウンスキー"</string>
+    <string name="bounce_keys_summary" msgid="6922850403920596246">"物理キーボードのユーザー補助のバウンスキーを有効にします"</string>
+    <string name="sticky_keys" msgid="7317317044898161747">"固定キー"</string>
+    <string name="sticky_keys_summary" msgid="8520909829540989765">"物理キーボードのユーザー補助の固定キーを有効にする"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"キーボード ショートカット"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"ショートカットのリストを表示"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"仕事用プロファイルのキーボードとツール"</string>
@@ -1924,7 +1920,10 @@
     <string name="usage_stats_sort_by_usage_time" msgid="2927310334119998301">"使用時間で並び替え"</string>
     <string name="usage_stats_sort_by_last_time_used" msgid="7039213339779884017">"前回の使用日時で並び替え"</string>
     <string name="usage_stats_sort_by_app_name" msgid="4463833145514850478">"アプリ名で並び替え"</string>
-    <string name="last_time_used_label" msgid="2639712813493534074">"前回の使用"</string>
+    <!-- no translation found for last_time_used_label (7589377271406011659) -->
+    <skip />
+    <!-- no translation found for last_time_used_never (2936073559267990034) -->
+    <skip />
     <string name="usage_time_label" msgid="9105343335151559883">"使用時間"</string>
     <string name="accessibility_settings" msgid="4713215774904704682">"ユーザー補助"</string>
     <string name="accessibility_settings_title" msgid="6739115703615065716">"ユーザー補助の設定"</string>
@@ -2494,9 +2493,13 @@
     <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"現在"</string>
     <string name="battery_usage_timestamps_hyphen" msgid="7401188432989043905">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g>～<xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
     <string name="battery_usage_day_and_hour" msgid="1417890420844950881">"<xliff:g id="DAY">%1$s</xliff:g> <xliff:g id="HOUR">%2$s</xliff:g>⁠"</string>
+    <!-- no translation found for battery_usage_time_info_and_battery_level (6732629268310936155) -->
+    <skip />
     <string name="battery_usage_chart" msgid="4114747521432440017">"バッテリー使用量グラフ"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"バッテリー使用量グラフ（日）"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"バッテリー使用量グラフ（時間）"</string>
+    <!-- no translation found for battery_level_percentage (1433178290838842146) -->
+    <skip />
     <string name="battery_usage_breakdown_title_since_last_full_charge" msgid="435006273323199906">"前回のフル充電以降のバッテリー使用量"</string>
     <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"<xliff:g id="SLOT">%s</xliff:g> のバッテリー使用量"</string>
     <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"前回のフル充電以降の利用時間"</string>
@@ -3384,6 +3387,7 @@
     <string name="recent_convos_removed" msgid="2122932798895714203">"最近の会話を削除しました"</string>
     <string name="recent_convo_removed" msgid="8686414146325958281">"会話を削除しました"</string>
     <string name="clear" msgid="5092178335409471100">"消去"</string>
+    <string name="clear_conversation" msgid="5564321180363279096">"<xliff:g id="CONVERSATION_NAME">%1$s</xliff:g>を消去"</string>
     <string name="conversation_onboarding_title" msgid="5194559958353468484">"優先度の高い会話や設定を変更した会話がここに表示されます"</string>
     <string name="conversation_onboarding_summary" msgid="2484845363368486941">"会話の優先度を高く設定したり、設定を変更したりすると、ここに表示されます。\n\n会話の設定を変更するには: \n画面の上から下にスワイプし、プルダウン シェードを開いて、会話を長押しします。"</string>
     <string name="notification_importance_min_title" msgid="7676541266705442501">"最小化"</string>
@@ -3808,7 +3812,7 @@
     <string name="assist_access_screenshot_summary" msgid="5276593070956201863">"表示中の画像にアクセスすることをアシストアプリに許可します"</string>
     <string name="assist_flash_title" msgid="5449512572885550108">"画面の点滅"</string>
     <string name="assist_flash_summary" msgid="3032289860177784594">"アシストアプリが画面のテキストやスクリーンショットにアクセスしたときに画面の端を点滅させます"</string>
-    <string name="assist_footer" msgid="8248015363806299068">"アシストアプリは、表示している画面の情報に基づいてアシスタントを提供します。一部のアプリはランチャーと音声入力サービスの両方に対応しており、統合されたアシスタントを提供します。"</string>
+    <string name="assist_footer" msgid="8248015363806299068">"アシストアプリは、表示している画面の情報に基づいてサポートを提供します。一部のアプリはランチャーと音声入力サービスの両方に対応しており、統合されたサポートを提供します。"</string>
     <string name="average_memory_use" msgid="717313706368825388">"平均メモリ使用"</string>
     <string name="maximum_memory_use" msgid="2171779724001152933">"最大メモリ使用"</string>
     <string name="memory_usage" msgid="5594133403819880617">"メモリ使用量"</string>

@@ -41,8 +41,12 @@
     <!-- [CHAR LIMIT=NONE] Device Info screen. Okay we get it, stop pressing, you already have it on -->
     <string name="show_dev_already">No need, you are already a developer.</string>
 
-    <!-- [CHAR LIMIT=NONE] Toast message when user attemps to launch developer otions before enabling it. -->
+    <!-- [CHAR LIMIT=NONE] Toast message when user attempts to launch developer options before enabling it. -->
     <string name="dev_settings_disabled_warning">Please enable developer options first.</string>
+
+    <!-- [CHAR LIMIT=NONE] Toast message when non-admin user attempts to launch developer options. -->
+    <string name="dev_settings_available_to_admin_only_warning">Only the admin users can access developer settings.</string>
+
 
     <!-- Category headings in left-pane header menu --> <skip />
     <!-- Settings main menu category heading. System (Updates, data, accessibility, about phone). [CHAR LIMIT=40] -->
@@ -1233,10 +1237,22 @@
     <string name="private_space_face_unlock_title">Face Unlock for Private Space</string>
     <!-- Biometric category title - biometric options for unlocking the device. [CHAR LIMIT=50] -->
     <string name="private_space_category_ways_to_unlock">Ways to unlock</string>
-    <!-- Summary for one lock when device screen lock is used as private profile lock. [CHAR LIMIT=60] -->
+    <!-- Summary for one lock when device screen lock is used as private profile lock. [CHAR LIMIT=40] -->
     <string name="private_space_screen_lock_summary">Same as device screen lock</string>
     <!-- Dialog message to choose a new lock for Private Space. [CHAR LIMIT=50] -->
     <string name="private_space_new_lock_title">Choose a new lock for Private Space?</string>
+    <!-- Title for the preference for auto lock private space. [CHAR LIMIT=40] -->
+    <string name="private_space_auto_lock_title">Lock automatically</string>
+    <!-- Title for private space auto lock settings page. [CHAR LIMIT=50] -->
+    <string name="private_space_auto_lock_page_title">Lock private space automatically</string>
+    <!-- Description for private space auto lock settings page. [CHAR LIMIT=NONE] -->
+    <string name="private_space_auto_lock_page_summary">You can lock your private space automatically if you haven\’t used your device for a period of time</string>
+    <!-- Configure auto lock: Value for auto lock configuration to lock private space every time device locks. [CHAR LIMIT=40] -->
+    <string name="private_space_auto_lock_every_time">Every time device locks</string>
+    <!-- Configure auto lock: Value for auto lock configuration to lock private space after 5 minutes of inactivity. [CHAR LIMIT=40] -->
+    <string name="private_space_auto_lock_after_inactivity">After 5 minutes of inactivity</string>
+    <!-- Configure auto lock: Value for auto lock configuration to never lock private space. [CHAR LIMIT=20] -->
+    <string name="private_space_auto_lock_never">Never</string>
     <!-- Title for the preference to hide Private Space. [CHAR LIMIT=60] -->
     <string name="private_space_hide_title">Hide when locked</string>
     <!-- Title for the hide Private Space setting. [CHAR LIMIT=60] -->
@@ -4057,8 +4073,6 @@
     <string name="archiving_succeeded">Archived <xliff:g id="package_label" example="Translate">%1$s</xliff:g></string>
     <!-- Toast message when restoring an app failed. -->
     <string name="restoring_failed">Restoring failed</string>
-    <!-- Toast message when restoring an app succeeded. -->
-    <string name="restoring_succeeded">Restored <xliff:g id="package_label" example="Translate">%1$s</xliff:g></string>
     <!-- Toast message when restoring an app has started. -->
     <string name="restoring_in_progress">Restoring <xliff:g id="package_label" example="Translate">%1$s</xliff:g></string>
 
@@ -11285,7 +11299,7 @@
     <string name="mobile_network_sim_name_rename">Save</string>
     <!-- Label for the on position of a switch on the mobile network details page which allows
          disabling/enabling a SIM. The SIM is enabled in this state. [CHAR LIMIT=40] -->
-    <string name="mobile_network_use_sim_on">Use SIM</string>
+    <string name="mobile_network_use_sim_on">Use this SIM</string>
     <!-- Label for the off position of a switch on the mobile network details page which allows
          disabling/enabling a SIM. The SIM is disabled in this state. [CHAR LIMIT=40] -->
     <string name="mobile_network_use_sim_off">Off</string>
@@ -11427,6 +11441,56 @@
     <string name="dsds_activation_failure_title">Can\u2019t activate SIM</string>
     <!-- Body text of DSDS activation failure dialog. Users could toggle the selected SIM again or reboot to recover. [CHAR LIMIT=NONE] -->
     <string name="dsds_activation_failure_body_msg2">Try turning on the SIM again. If the problem continues, restart your device.</string>
+
+    <!-- Strings for dual SIM onboarding -->
+    <!-- Title of dual sim onboarding's bottom sheets. [CHAR LIMIT=30] -->
+    <string name="sim_onboarding_bottomsheets_title">Set up your SIM</string>
+    <!-- Body text of dual sim onboarding's bottom sheets. [CHAR LIMIT=NONE] -->
+    <string name="sim_onboarding_bottomsheets_msg">Set your mobile network preferences to use multiple SIMs on this device</string>
+    <!-- Title of dual sim onboarding's label sim page. [CHAR LIMIT=30] -->
+    <string name="sim_onboarding_label_sim_title">Label your SIMs</string>
+    <!-- Body text of dual sim onboarding's label sim page. [CHAR LIMIT=NONE] -->
+    <string name="sim_onboarding_label_sim_msg">You’ll see these labels when making calls, sending texts, and using data, and in Settings</string>
+    <!-- Title of dual sim onboarding's label sim dialog. [CHAR LIMIT=30] -->
+    <string name="sim_onboarding_label_sim_dialog_title">SIM label</string>
+    <!-- Label text of dual sim onboarding's label sim dialog. [CHAR LIMIT=30] -->
+    <string name="sim_onboarding_label_sim_dialog_label">Label</string>
+    <!-- Title of dual sim onboarding's select sim page. [CHAR LIMIT=30] -->
+    <string name="sim_onboarding_select_sim_title">Select which SIMs to use</string>
+    <!-- Body text of dual sim onboarding's select sim page. [CHAR LIMIT=NONE] -->
+    <string name="sim_onboarding_select_sim_msg">You can use 2 SIMs at a time</string>
+    <!-- Title of dual sim onboarding's primary sim page. [CHAR LIMIT=30] -->
+    <string name="sim_onboarding_primary_sim_title">Set your primary SIMs</string>
+    <!-- Body text of dual sim onboarding's primary sim page. [CHAR LIMIT=NONE] -->
+    <string name="sim_onboarding_primary_sim_msg">Choose which SIMs to use by default for calls, texts, and data</string>
+
+    <!-- Title of primary sim at SIMs page. [CHAR LIMIT=30] -->
+    <string name="primary_sim_title">Your primary SIMs</string>
+
+    <!-- Title of Calls item/dialog at dual sim onboarding's primary sim page or SIMs page. [CHAR LIMIT=30] -->
+    <string name="primary_sim_calls_title">Calls</string>
+    <!-- Title of Texts item/dialog at dual sim onboarding's primary sim page or SIMs page. [CHAR LIMIT=30] -->
+    <string name="primary_sim_texts_title">Texts</string>
+    <!-- Title of automatic data switching at dual sim onboarding's primary sim page or SIMs page. [CHAR LIMIT=30] -->
+    <string name="primary_sim_automatic_data_title">Automatic data switching</string>
+    <!-- Body text of automatic data switching at dual sim onboarding's primary sim page or SIMs page. [CHAR LIMIT=NONE] -->
+    <string name="primary_sim_automatic_data_msg">Use data from either SIM depending on coverage and availability</string>
+
+    <!-- Text of phone number item when the sim is data only. [CHAR LIMIT=NONE] -->
+    <string name="sim_onboarding_phoneNumber_data_only">Data only</string>
+
+    <!-- Button on the dual sim onboarding to start to set up sim. [CHAR LIMIT=30] -->
+    <string name="sim_onboarding_setup">Set up</string>
+    <!-- Button on the dual sim onboarding to go to next page. [CHAR LIMIT=30] -->
+    <string name="sim_onboarding_next">Next</string>
+    <!-- Text on the progressbar of dual sim onboarding for turning sim on. [CHAR LIMIT=30] -->
+    <string name="sim_onboarding_profressbar_turning_sim_on">Turning on <xliff:g id="carrier_name" example="Google Fi">%1$s</xliff:g>&#8230;</string>
+    <!-- Title of service provider name(SPN) at mobile network settings page. [CHAR LIMIT=30] -->
+    <string name="mobile_network_spn_title">Mobile network</string>
+    <!-- Title of phone number at mobile network settings page. [CHAR LIMIT=30] -->
+    <string name="mobile_network_phone_number_title">Phone number</string>
+    <!-- Title of SIM label and color editor dialog at mobile network settings page. [CHAR LIMIT=30] -->
+    <string name="mobile_network_sim_label_color_title">SIM label and color</string>
 
     <!--  Strings for SIM push notifications  -->
     <!-- Category name of the notifications related to SIM setup. [CHAR LIMIT=NONE] -->
@@ -11672,7 +11736,23 @@
     <!-- Developer Settings: Search keywords for the Profile HWUI rendering. [CHAR_LIMIT=NONE] -->
     <string name="track_frame_time_keywords">GPU</string>
 
+    <!-- setting Checkbox title whether to boot with 16K page size [CHAR_LIMIT=35] -->
+    <string name="enable_16k_pages">Boot with 16K page size</string>
+    <!-- setting Checkbox summary whether to boot with 16K page size[CHAR_LIMIT=50] -->
+    <string name="enable_16k_pages_summary">Boot device using 16K page size supported kernel</string>
+    <!-- Confirmation dialog title to ensure user wishes to enable 16K page size -->
+    <string name="confirm_enable_16k_pages_title">Reboot with 16KB pages compatible kernel?</string>
+    <!-- Warning dialog message to confirm user wishes to enable 16K page size -->
+    <string name="confirm_enable_16k_pages_text">WARNING: Some applications may not be compatible with this mode. Device will reboot after confirmation.</string>
+    <!-- dialog title to confirm user wishes to revert to 4k page size kernel -->
+    <string name="confirm_enable_4k_pages_title">Reboot with 4KB pages compatible kernel?</string>
+    <!-- dialog message to confirm user wishes to enable 4K page size -->
+    <string name="confirm_enable_4k_pages_text">Device will reboot after confirmation.</string>
+    <!-- Toast message when 16k OTA update fails -->
+    <string name="toast_16k_update_failed_text">Failed to update kernel to 16KB pages compatible kernel.</string>
+    <string name="progress_16k_ota_title">Applying change</string>
     <!-- DSU Loader. Do not translate. -->
+
     <string name="dsu_loader_title" translatable="false">DSU Loader</string>
     <!-- DSU Loader Description. Do not translate. -->
     <string name="dsu_loader_description" translatable="false">Load a Dynamic System Update Image</string>

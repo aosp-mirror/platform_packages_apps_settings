@@ -46,6 +46,8 @@
     <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"Передній екран вмикається, коли ви складаєте пристрій"</string>
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"Лише ігри, відео тощо"</string>
     <string name="selective_stay_awake_summary" msgid="9055967322921984543">"Для додатків, які перешкоджають блокуванню пристрою, активується передній екран"</string>
+    <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Проведіть пальцем угору, щоб продовжити"</string>
+    <string name="stay_awake_on_lockscreen_summary" msgid="2299351813382522952">"Складіть телефон і проведіть пальцем угору по передньому екрану, щоб і надалі користуватися додатком, або зачекайте кілька секунд, і екран заблокується"</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"Ніколи"</string>
     <string name="sleep_on_fold_summary" msgid="7737992842459588846">"Передній екран блокується, коли ви складаєте пристрій"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Увімкнути автообертання"</string>
@@ -283,8 +285,7 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Додатки з дозволами на доступ до пристроїв поблизу можуть визначати відносне розташування підключених пристроїв."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Доступ до геоданих вимкнено для додатків і сервісів. Однак дані про місцезнаходження вашого пристрою можуть надсилатися в екстрених випадках, якщо ви зателефонуєте або надішлете SMS на екстрений номер."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Докладніше про доступ до геоданих"</string>
-    <!-- no translation found for location_settings_tooltip_text_for_chrome (3574930966097093550) -->
-    <skip />
+    <string name="location_settings_tooltip_text_for_chrome" msgid="3574930966097093550">"Змінити доступ до геоданих: \"Налаштування\" &gt; \"Безпека й конфід.\" &gt; \"Налашт. конфід.\""</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Облікові записи"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Безпека"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Шифрування й облікові дані"</string>
@@ -545,7 +546,7 @@
     <string name="work_profile_category_header" msgid="85707750968948517">"Робочий профіль"</string>
     <string name="private_space_title" msgid="7078627930195569767">"Приватний простір"</string>
     <string name="private_space_summary" msgid="2274405892301976238">"Зберігайте приватні додатки в прихованому й заблокованому сховищі"</string>
-    <string name="private_space_description" msgid="5494963647270826210">"Ховайте додатки в приватній папці, доступ до якої маєте лише ви"</string>
+    <string name="private_space_description" msgid="4059594203775816136">"Зберігайте приватні додатки в окремому просторі, який можна приховати або заблокувати"</string>
     <string name="private_space_lock_title" msgid="3006539720164938296">"Блокування приватного простору"</string>
     <string name="private_space_one_lock_summary" msgid="2759953747682959371">"Ви можете розблоковувати приватний простір так само, як і свій пристрій, або вибрати інший спосіб розблокування"</string>
     <string name="private_space_screen_lock_title" msgid="8679383894967823163">"Використовувати спосіб розблокування екрана пристрою"</string>
@@ -1814,19 +1815,14 @@
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Доступна екранна клавіатура"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Керувати екранною клавіатурою"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"Опції"</string>
-    <!-- no translation found for keyboard_a11y_category (8230758278046841469) -->
-    <skip />
+    <string name="keyboard_a11y_category" msgid="8230758278046841469">"Доступність"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Фізична клавіатура"</string>
     <string name="show_ime" msgid="4334255501724746849">"Використовувати екранну клавіатуру"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"Залишати її на екрані, коли активна фізична клавіатура"</string>
-    <!-- no translation found for bounce_keys (7419450970351743904) -->
-    <skip />
-    <!-- no translation found for bounce_keys_summary (6922850403920596246) -->
-    <skip />
-    <!-- no translation found for sticky_keys (7317317044898161747) -->
-    <skip />
-    <!-- no translation found for sticky_keys_summary (8520909829540989765) -->
-    <skip />
+    <string name="bounce_keys" msgid="7419450970351743904">"Ігнорувати повторне натискання"</string>
+    <string name="bounce_keys_summary" msgid="6922850403920596246">"Активуйте ігнорування повторного натискання клавіш як функцію доступності для фізичної клавіатури"</string>
+    <string name="sticky_keys" msgid="7317317044898161747">"Залипання клавіш"</string>
+    <string name="sticky_keys_summary" msgid="8520909829540989765">"Активуйте залипання клавіш як функцію доступності фізичної клавіатури"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Комбінації клавіш"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Показати список комбінацій клавіш"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Клавіатури та інструменти робочого профілю"</string>
@@ -1924,7 +1920,10 @@
     <string name="usage_stats_sort_by_usage_time" msgid="2927310334119998301">"За часом використання"</string>
     <string name="usage_stats_sort_by_last_time_used" msgid="7039213339779884017">"За часом ост. використання"</string>
     <string name="usage_stats_sort_by_app_name" msgid="4463833145514850478">"За назвою додатка"</string>
-    <string name="last_time_used_label" msgid="2639712813493534074">"Останнє використання"</string>
+    <!-- no translation found for last_time_used_label (7589377271406011659) -->
+    <skip />
+    <!-- no translation found for last_time_used_never (2936073559267990034) -->
+    <skip />
     <string name="usage_time_label" msgid="9105343335151559883">"Час використ."</string>
     <string name="accessibility_settings" msgid="4713215774904704682">"Доступність"</string>
     <string name="accessibility_settings_title" msgid="6739115703615065716">"Налаштування доступності"</string>
@@ -2494,9 +2493,13 @@
     <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"зараз"</string>
     <string name="battery_usage_timestamps_hyphen" msgid="7401188432989043905">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g> – <xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
     <string name="battery_usage_day_and_hour" msgid="1417890420844950881">"<xliff:g id="DAY">%1$s</xliff:g> <xliff:g id="HOUR">%2$s</xliff:g>"</string>
+    <!-- no translation found for battery_usage_time_info_and_battery_level (6732629268310936155) -->
+    <skip />
     <string name="battery_usage_chart" msgid="4114747521432440017">"Діаграма використання заряду"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Діаграма використання заряду акумулятора за день"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Діаграма використання заряду акумулятора за годину"</string>
+    <!-- no translation found for battery_level_percentage (1433178290838842146) -->
+    <skip />
     <string name="battery_usage_breakdown_title_since_last_full_charge" msgid="435006273323199906">"Використання заряду акумулятора після останнього повного заряджання"</string>
     <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"Використання заряду акумулятора (<xliff:g id="SLOT">%s</xliff:g>)"</string>
     <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"Час використання пристрою після останнього повного заряджання"</string>
@@ -3384,6 +3387,7 @@
     <string name="recent_convos_removed" msgid="2122932798895714203">"Нещодавні розмови видалено"</string>
     <string name="recent_convo_removed" msgid="8686414146325958281">"Чат видалено"</string>
     <string name="clear" msgid="5092178335409471100">"Очистити"</string>
+    <string name="clear_conversation" msgid="5564321180363279096">"Видалити користувача <xliff:g id="CONVERSATION_NAME">%1$s</xliff:g>"</string>
     <string name="conversation_onboarding_title" msgid="5194559958353468484">"Тут з’являтимуться важливі та змінені розмови"</string>
     <string name="conversation_onboarding_summary" msgid="2484845363368486941">"Якщо ви внесете зміни до розмов, наприклад позначите певну розмову як важливу, вони з’являться тут. \n\nЩоб змінити налаштування розмови: \nвідкрийте розкривну панель, провівши пальцем униз від верху екрана, а потім натисніть і утримуйте розмову."</string>
     <string name="notification_importance_min_title" msgid="7676541266705442501">"Згортати"</string>

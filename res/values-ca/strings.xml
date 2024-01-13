@@ -46,6 +46,8 @@
     <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"La pantalla frontal s\'encén quan plegues el dispositiu"</string>
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"Només jocs, vídeos i més"</string>
     <string name="selective_stay_awake_summary" msgid="9055967322921984543">"La pantalla frontal s\'encén per a les aplicacions que eviten que la pantalla es quedi inactiva"</string>
+    <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Llisca cap amunt per continuar"</string>
+    <string name="stay_awake_on_lockscreen_summary" msgid="2299351813382522952">"Plega el telèfon i llisca cap amunt a la pantalla frontal per continuar utilitzant l\'aplicació, o bé espera uns quants segons que la pantalla es bloquegi"</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"Mai"</string>
     <string name="sleep_on_fold_summary" msgid="7737992842459588846">"La pantalla frontal es bloqueja quan plegues el dispositiu"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Gira automàticament"</string>
@@ -283,8 +285,7 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Les aplicacions amb permís per trobar dispositius propers poden determinar la posició relativa dels dispositius connectats."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"L\'accés a la ubicació està desactivat per a aplicacions i serveis. Tanmateix, la ubicació del dispositiu es pot continuar enviant als serveis d\'emergències quan truquis o enviïs un missatge de text a un número d\'emergència."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Més informació sobre la configuració d\'ubicació"</string>
-    <!-- no translation found for location_settings_tooltip_text_for_chrome (3574930966097093550) -->
-    <skip />
+    <string name="location_settings_tooltip_text_for_chrome" msgid="3574930966097093550">"Canvia l\'accés a la ubicació a Configuració &gt; Seguretat i priv. &gt; Controls de priv."</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Comptes"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Seguretat"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Encriptació i credencials"</string>
@@ -545,7 +546,7 @@
     <string name="work_profile_category_header" msgid="85707750968948517">"Perfil de treball"</string>
     <string name="private_space_title" msgid="7078627930195569767">"Espai privat"</string>
     <string name="private_space_summary" msgid="2274405892301976238">"Mantén les aplicacions privades bloquejades i amagades"</string>
-    <string name="private_space_description" msgid="5494963647270826210">"Amaga les aplicacions en una carpeta privada a què només pots accedir tu"</string>
+    <string name="private_space_description" msgid="4059594203775816136">"Mantén les aplicacions privades en un espai separat que puguis amagar o bloquejar"</string>
     <string name="private_space_lock_title" msgid="3006539720164938296">"Bloqueig d\'Espai privat"</string>
     <string name="private_space_one_lock_summary" msgid="2759953747682959371">"Pots desbloquejar Espai privat de la mateixa manera que desbloqueges el dispositiu, o triar un altre bloqueig"</string>
     <string name="private_space_screen_lock_title" msgid="8679383894967823163">"Utilitza el bloqueig de pantalla del dispositiu"</string>
@@ -1814,19 +1815,14 @@
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Teclat en pantalla disponible"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Gestiona els teclats en pantalla"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"Opcions"</string>
-    <!-- no translation found for keyboard_a11y_category (8230758278046841469) -->
-    <skip />
+    <string name="keyboard_a11y_category" msgid="8230758278046841469">"Accessibilitat"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Teclat físic"</string>
     <string name="show_ime" msgid="4334255501724746849">"Utilitza el teclat en pantalla"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"Mantén-lo en pantalla mentre el teclat físic està actiu"</string>
-    <!-- no translation found for bounce_keys (7419450970351743904) -->
-    <skip />
-    <!-- no translation found for bounce_keys_summary (6922850403920596246) -->
-    <skip />
-    <!-- no translation found for sticky_keys (7317317044898161747) -->
-    <skip />
-    <!-- no translation found for sticky_keys_summary (8520909829540989765) -->
-    <skip />
+    <string name="bounce_keys" msgid="7419450970351743904">"Tecles de rebot"</string>
+    <string name="bounce_keys_summary" msgid="6922850403920596246">"Activa les tecles de rebot per millorar l\'accessibilitat del teclat físic"</string>
+    <string name="sticky_keys" msgid="7317317044898161747">"Tecles permanents"</string>
+    <string name="sticky_keys_summary" msgid="8520909829540989765">"Activa les tecles permanents per millorar l\'accessibilitat del teclat físic"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Tecles de drecera"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Mostra la llista de dreceres"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Teclats i eines del perfil de treball"</string>
@@ -1924,7 +1920,10 @@
     <string name="usage_stats_sort_by_usage_time" msgid="2927310334119998301">"Ordena pel temps d\'ús"</string>
     <string name="usage_stats_sort_by_last_time_used" msgid="7039213339779884017">"Ordena pel darrer ús"</string>
     <string name="usage_stats_sort_by_app_name" msgid="4463833145514850478">"Ordena per nom de l\'aplicació"</string>
-    <string name="last_time_used_label" msgid="2639712813493534074">"Darrer ús"</string>
+    <!-- no translation found for last_time_used_label (7589377271406011659) -->
+    <skip />
+    <!-- no translation found for last_time_used_never (2936073559267990034) -->
+    <skip />
     <string name="usage_time_label" msgid="9105343335151559883">"Temps d\'ús"</string>
     <string name="accessibility_settings" msgid="4713215774904704682">"Accessibilitat"</string>
     <string name="accessibility_settings_title" msgid="6739115703615065716">"Configuració d\'accessibilitat"</string>
@@ -2494,9 +2493,13 @@
     <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"ara"</string>
     <string name="battery_usage_timestamps_hyphen" msgid="7401188432989043905">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g>-<xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
     <string name="battery_usage_day_and_hour" msgid="1417890420844950881">"<xliff:g id="DAY">%1$s</xliff:g> <xliff:g id="HOUR">%2$s</xliff:g>"</string>
+    <!-- no translation found for battery_usage_time_info_and_battery_level (6732629268310936155) -->
+    <skip />
     <string name="battery_usage_chart" msgid="4114747521432440017">"Gràfic de l\'ús de la bateria"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Gràfic de l\'ús diari de la bateria"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Gràfic de l\'ús de la bateria per hores"</string>
+    <!-- no translation found for battery_level_percentage (1433178290838842146) -->
+    <skip />
     <string name="battery_usage_breakdown_title_since_last_full_charge" msgid="435006273323199906">"Ús de la bateria des de la darrera càrrega completa"</string>
     <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"Ús de la bateria: <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"Temps de connexió des de la darrera càrrega completa"</string>
@@ -3384,6 +3387,7 @@
     <string name="recent_convos_removed" msgid="2122932798895714203">"Les converses recents s\'han suprimit"</string>
     <string name="recent_convo_removed" msgid="8686414146325958281">"S\'ha suprimit la conversa"</string>
     <string name="clear" msgid="5092178335409471100">"Esborra"</string>
+    <string name="clear_conversation" msgid="5564321180363279096">"Esborra <xliff:g id="CONVERSATION_NAME">%1$s</xliff:g>"</string>
     <string name="conversation_onboarding_title" msgid="5194559958353468484">"Les converses que hagis marcat com a prioritàries o en què hagis fet canvis es mostraran aquí"</string>
     <string name="conversation_onboarding_summary" msgid="2484845363368486941">"Quan marquis una conversa com a prioritària, o quan facis qualsevol altre canvi en una conversa, es mostrarà aquí. \n\nPer canviar la configuració de les converses:\nllisca cap avall des de la part superior de la pantalla per obrir l\'àrea desplegable i, a continuació, mantén premuda una conversa."</string>
     <string name="notification_importance_min_title" msgid="7676541266705442501">"Minimitza"</string>

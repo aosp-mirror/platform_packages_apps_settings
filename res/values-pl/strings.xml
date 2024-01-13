@@ -46,6 +46,8 @@
     <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"Przedni ekran włącza się, gdy składasz urządzenie"</string>
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"Tylko gry, filmy i inne treści"</string>
     <string name="selective_stay_awake_summary" msgid="9055967322921984543">"Przedni ekran włącza się w przypadku aplikacji, które blokują przechodzenie ekranu w tryb bezczynności"</string>
+    <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Przesuń w górę, aby kontynuować"</string>
+    <string name="stay_awake_on_lockscreen_summary" msgid="2299351813382522952">"Złóż telefon i przesuń palcem w górę na przednim ekranie, aby kontynuować korzystanie z aplikacji, lub poczekaj kilka sekund na zablokowanie ekranu."</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"Nigdy"</string>
     <string name="sleep_on_fold_summary" msgid="7737992842459588846">"Przedni ekran blokuje się, gdy składasz urządzenie"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Używaj autoobracania"</string>
@@ -283,8 +285,7 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Aplikacje z uprawnieniami dostępu do urządzeń w pobliżu mogą określać położenie połączonych urządzeń względem siebie."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Dostęp aplikacji i usług do lokalizacji jest wyłączony. Informacje o lokalizacji urządzenia mogą jednak zostać przesłane do ratowników, gdy zadzwonisz lub wyślesz SMS-a na numer alarmowy."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Więcej informacji o ustawieniach lokalizacji"</string>
-    <!-- no translation found for location_settings_tooltip_text_for_chrome (3574930966097093550) -->
-    <skip />
+    <string name="location_settings_tooltip_text_for_chrome" msgid="3574930966097093550">"Aby zmienić dostęp do lokalizacji, kliknij Ustawienia &gt; Prywatność i bezpieczeństwo &gt; Ustawienia prywatności"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Konta"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Zabezpieczenia"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Szyfrowanie i dane logowania"</string>
@@ -545,7 +546,7 @@
     <string name="work_profile_category_header" msgid="85707750968948517">"Profil służbowy"</string>
     <string name="private_space_title" msgid="7078627930195569767">"Obszar prywatny"</string>
     <string name="private_space_summary" msgid="2274405892301976238">"Pozostaw aplikacje prywatne zablokowane i ukryte"</string>
-    <string name="private_space_description" msgid="5494963647270826210">"Ukryj w prywatnym folderze aplikacje, do których tylko Ty masz mieć dostęp"</string>
+    <string name="private_space_description" msgid="4059594203775816136">"Przechowuj aplikacje prywatne w oddzielnym obszarze, który możesz ukryć lub zablokować"</string>
     <string name="private_space_lock_title" msgid="3006539720164938296">"Blokada obszaru prywatnego"</string>
     <string name="private_space_one_lock_summary" msgid="2759953747682959371">"Obszar prywatny można odblokowywać tak samo jak urządzenie lub wybrać inną blokadę"</string>
     <string name="private_space_screen_lock_title" msgid="8679383894967823163">"Używaj blokady ekranu urządzenia"</string>
@@ -1814,19 +1815,14 @@
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Dostępna klawiatura ekranowa"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Zarządzaj klawiaturami ekranowymi"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"Opcje"</string>
-    <!-- no translation found for keyboard_a11y_category (8230758278046841469) -->
-    <skip />
+    <string name="keyboard_a11y_category" msgid="8230758278046841469">"Ułatwienia dostępu"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Klawiatura fizyczna"</string>
     <string name="show_ime" msgid="4334255501724746849">"Używaj klawiatury ekranowej"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"Pozostaw na ekranie, gdy aktywna jest klawiatura fizyczna"</string>
-    <!-- no translation found for bounce_keys (7419450970351743904) -->
-    <skip />
-    <!-- no translation found for bounce_keys_summary (6922850403920596246) -->
-    <skip />
-    <!-- no translation found for sticky_keys (7317317044898161747) -->
-    <skip />
-    <!-- no translation found for sticky_keys_summary (8520909829540989765) -->
-    <skip />
+    <string name="bounce_keys" msgid="7419450970351743904">"Klawisze zwrócone"</string>
+    <string name="bounce_keys_summary" msgid="6922850403920596246">"Włącz Klawisze zwrócone w ułatwieniach dostępu klawiatury fizycznej"</string>
+    <string name="sticky_keys" msgid="7317317044898161747">"Klawisze trwałe"</string>
+    <string name="sticky_keys_summary" msgid="8520909829540989765">"Włącz Klawisze trwałe w ułatwieniach dostępu klawiatury fizycznej"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Skróty klawiszowe"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Lista skrótów"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Klawiatura i narzędzia w profilu służbowym"</string>
@@ -1924,7 +1920,10 @@
     <string name="usage_stats_sort_by_usage_time" msgid="2927310334119998301">"Sortuj według czasu użycia"</string>
     <string name="usage_stats_sort_by_last_time_used" msgid="7039213339779884017">"Sortuj według ostatniego użycia"</string>
     <string name="usage_stats_sort_by_app_name" msgid="4463833145514850478">"Sortuj według nazwy aplikacji"</string>
-    <string name="last_time_used_label" msgid="2639712813493534074">"Ostatnie użycie"</string>
+    <!-- no translation found for last_time_used_label (7589377271406011659) -->
+    <skip />
+    <!-- no translation found for last_time_used_never (2936073559267990034) -->
+    <skip />
     <string name="usage_time_label" msgid="9105343335151559883">"Czas użycia"</string>
     <string name="accessibility_settings" msgid="4713215774904704682">"Ułatwienia dostępu"</string>
     <string name="accessibility_settings_title" msgid="6739115703615065716">"Ustawienia ułatwień dostępu"</string>
@@ -2494,9 +2493,13 @@
     <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"teraz"</string>
     <string name="battery_usage_timestamps_hyphen" msgid="7401188432989043905">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g>–<xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
     <string name="battery_usage_day_and_hour" msgid="1417890420844950881">"<xliff:g id="DAY">%1$s</xliff:g> <xliff:g id="HOUR">%2$s</xliff:g>⁠"</string>
+    <!-- no translation found for battery_usage_time_info_and_battery_level (6732629268310936155) -->
+    <skip />
     <string name="battery_usage_chart" msgid="4114747521432440017">"Wykres zużycia baterii"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Wykres dziennego wykorzystania baterii"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Wykres godzinowego wykorzystania baterii"</string>
+    <!-- no translation found for battery_level_percentage (1433178290838842146) -->
+    <skip />
     <string name="battery_usage_breakdown_title_since_last_full_charge" msgid="435006273323199906">"Wykorzystanie baterii od ostatniego naładowania"</string>
     <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"Wykorzystanie baterii – <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"Czas korzystania z urządzenia od ostatniego naładowania"</string>
@@ -3384,6 +3387,7 @@
     <string name="recent_convos_removed" msgid="2122932798895714203">"Ostatnie rozmowy zostały usunięte"</string>
     <string name="recent_convo_removed" msgid="8686414146325958281">"Rozmowa została usunięta"</string>
     <string name="clear" msgid="5092178335409471100">"Wyczyść"</string>
+    <string name="clear_conversation" msgid="5564321180363279096">"Wyczyść <xliff:g id="CONVERSATION_NAME">%1$s</xliff:g>"</string>
     <string name="conversation_onboarding_title" msgid="5194559958353468484">"Tu będą pojawiały się rozmowy priorytetowe i zmodyfikowane"</string>
     <string name="conversation_onboarding_summary" msgid="2484845363368486941">"Tutaj będą pojawiać się rozmowy, które oznaczysz jako priorytetowe lub zmienisz w dowolny inny sposób. \n\nAby zmienić ustawienia rozmowy: \nprzesuń palcem w dół od góry ekranu, by otworzyć obszar powiadomień, a potem naciśnij i przytrzymaj rozmowę."</string>
     <string name="notification_importance_min_title" msgid="7676541266705442501">"Minimalizuj"</string>
