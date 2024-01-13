@@ -455,6 +455,7 @@
         <activity
             android:name="Settings$NetworkSelectActivity"
             android:label="@string/choose_network_title"
+            android:permission="android.permission.SATELLITE_COMMUNICATION"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize|screenLayout|smallestScreenSize">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.network.telephony.NetworkSelectSettings" />
