@@ -4697,14 +4697,6 @@
         <receiver android:name=".fuelgauge.batterytip.AnomalyDetectionReceiver"
                   android:exported="false" />
 
-        <receiver android:name=".fuelgauge.batterytip.AnomalyConfigReceiver"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.app.action.STATSD_STARTED"/>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
-            </intent-filter>
-        </receiver>
-
         <service android:name=".fuelgauge.batterytip.AnomalyCleanupJobService"
                  android:permission="android.permission.BIND_JOB_SERVICE" />
 

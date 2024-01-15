@@ -71,6 +71,7 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ServiceController;
 import org.robolectric.annotation.Config;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -133,7 +134,7 @@ public class AnomalyDetectionJobServiceTest {
         JobInfo pendingJob = pendingJobs.get(0);
         assertThat(pendingJob.getId()).isEqualTo(R.integer.job_anomaly_detection);
         assertThat(pendingJob.getMaxExecutionDelayMillis())
-                .isEqualTo(TimeUnit.MINUTES.toMillis(30));
+                .isEqualTo(Duration.ofDays(1).toMillis());
     }
 
     @Test
