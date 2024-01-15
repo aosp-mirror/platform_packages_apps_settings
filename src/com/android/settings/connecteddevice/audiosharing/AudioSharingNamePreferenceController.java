@@ -18,13 +18,12 @@ package com.android.settings.connecteddevice.audiosharing;
 
 import android.content.Context;
 
-import androidx.annotation.NonNull;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
 
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.widget.ValidatedEditTextPreference;
 
-public class AudioSharingNamePreferenceController extends AudioSharingBasePreferenceController
+public class AudioSharingNamePreferenceController extends BasePreferenceController
         implements ValidatedEditTextPreference.Validator, Preference.OnPreferenceChangeListener {
 
     private static final String TAG = "AudioSharingNamePreferenceController";
@@ -33,9 +32,14 @@ public class AudioSharingNamePreferenceController extends AudioSharingBasePrefer
 
     private AudioSharingNameTextValidator mAudioSharingNameTextValidator;
 
-    public AudioSharingNamePreferenceController(Context context) {
-        super(context, PREF_KEY);
+    public AudioSharingNamePreferenceController(Context context, String preferenceKey) {
+        super(context, preferenceKey);
         mAudioSharingNameTextValidator = new AudioSharingNameTextValidator();
+    }
+
+    @Override
+    public int getAvailabilityStatus() {
+        return AudioSharingUtils.isFeatureEnabled() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
@@ -52,17 +56,5 @@ public class AudioSharingNamePreferenceController extends AudioSharingBasePrefer
     @Override
     public boolean isTextValid(String value) {
         return mAudioSharingNameTextValidator.isTextValid(value);
-    }
-
-    @Override
-    public void onStart(@NonNull LifecycleOwner owner) {
-        super.onStart(owner);
-        // TODO
-    }
-
-    @Override
-    public void onStop(@NonNull LifecycleOwner owner) {
-        super.onStop(owner);
-        // TODO
     }
 }
