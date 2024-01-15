@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 The Android Open Source Project
+ * Copyright (C) 2024 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,10 +14,9 @@
  * limitations under the License.
  */
 
-package com.android.settings.system
+package com.android.settings.network.telephony
 
 import android.content.Context
-import android.content.Intent
 import android.telephony.CarrierConfigManager
 import androidx.core.os.persistableBundleOf
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -25,53 +24,47 @@ import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.any
-import org.mockito.kotlin.argumentCaptor
 import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.doThrow
+import org.mockito.kotlin.eq
 import org.mockito.kotlin.mock
-import org.mockito.kotlin.never
 import org.mockito.kotlin.stub
-import org.mockito.kotlin.verify
 
 @RunWith(AndroidJUnit4::class)
-class ClientInitiatedActionRepositoryTest {
+class CarrierConfigManagerExtTest {
+
     private val mockCarrierConfigManager = mock<CarrierConfigManager>()
 
     private val context = mock<Context> {
-        on { applicationContext } doReturn mock
         on { getSystemService(CarrierConfigManager::class.java) } doReturn mockCarrierConfigManager
     }
 
-    private val repository = ClientInitiatedActionRepository(context)
-
     @Test
-    fun onSystemUpdate_notEnabled() {
+    fun safeGetConfig_managerReturnKeyValue_returnNonEmptyBundle() {
         mockCarrierConfigManager.stub {
-            on { getConfigForSubId(any(), any()) } doReturn persistableBundleOf()
+            on { getConfigForSubId(any(), eq(KEY)) } doReturn persistableBundleOf(KEY to VALUE)
         }
+        val carrierConfigManager = context.getSystemService(CarrierConfigManager::class.java)!!
 
-        repository.onSystemUpdate()
+        val bundle = carrierConfigManager.safeGetConfig(listOf(KEY))
 
-        verify(context, never()).sendBroadcast(any())
+        assertThat(bundle.getString(KEY)).isEqualTo(VALUE)
     }
 
     @Test
-    fun onSystemUpdate_enabled() {
+    fun safeGetConfig_managerThrowIllegalStateException_returnEmptyBundle() {
         mockCarrierConfigManager.stub {
-            on { getConfigForSubId(any(), any()) } doReturn persistableBundleOf(
-                CarrierConfigManager.KEY_CI_ACTION_ON_SYS_UPDATE_BOOL to true,
-                CarrierConfigManager.KEY_CI_ACTION_ON_SYS_UPDATE_INTENT_STRING to ACTION,
-            )
+            on { getConfigForSubId(any(), eq(KEY)) } doThrow IllegalStateException()
         }
+        val carrierConfigManager = context.getSystemService(CarrierConfigManager::class.java)!!
 
-        repository.onSystemUpdate()
+        val bundle = carrierConfigManager.safeGetConfig(listOf(KEY))
 
-        val intent = argumentCaptor<Intent> {
-            verify(context).sendBroadcast(capture())
-        }.firstValue
-        assertThat(intent.action).isEqualTo(ACTION)
+        assertThat(bundle.containsKey(KEY)).isFalse()
     }
 
     private companion object {
-        const val ACTION = "ACTION"
+        const val KEY = "key"
+        const val VALUE = "value"
     }
 }
