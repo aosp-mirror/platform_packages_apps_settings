@@ -153,6 +153,11 @@ public class TopLevelBatteryPreferenceController extends BasePreferenceControlle
             return mContext.getString(
                     com.android.settingslib.R.string.battery_info_status_not_charging);
         }
+        if (BatteryUtils.isBatteryDefenderOn(info)) {
+            return mContext.getString(
+                    com.android.settingslib.R.string.power_charging_on_hold_settings_home_page,
+                    info.batteryPercentString);
+        }
         if (info.batteryStatus == BatteryManager.BATTERY_STATUS_NOT_CHARGING) {
             // Present status only if no remaining time or status anomalous
             return info.statusLabel;
