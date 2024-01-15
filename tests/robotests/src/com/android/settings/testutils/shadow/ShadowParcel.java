@@ -9,7 +9,7 @@ import org.robolectric.annotation.Implements;
  * This class provides helpers to test logic that reads from parcels.
  */
 @Implements(Parcel.class)
-public class ShadowParcel {
+public class ShadowParcel extends org.robolectric.shadows.ShadowParcel {
 
     public static int sReadIntResult;
     public static int sWriteIntResult;
