@@ -29,10 +29,6 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 
-import com.android.settings.fuelgauge.batterytip.AnomalyConfigJobService;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -81,22 +77,6 @@ public class SettingsDumpServiceTest {
         mResolveInfo.activityInfo.packageName = PACKAGE_NULL;
 
         assertThat(mTestService.dumpDefaultBrowser()).isEqualTo(null);
-    }
-
-    @Test
-    public void testDumpAnomalyDetection_returnAnomalyInfo() throws JSONException {
-        final SharedPreferences sharedPreferences =
-                RuntimeEnvironment.application.getSharedPreferences(AnomalyConfigJobService.PREF_DB,
-                        Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt(AnomalyConfigJobService.KEY_ANOMALY_CONFIG_VERSION, ANOMALY_VERSION);
-        editor.commit();
-        doReturn(sharedPreferences).when(mTestService).getSharedPreferences(anyString(), anyInt());
-
-        final JSONObject jsonObject = mTestService.dumpAnomalyDetection();
-
-        assertThat(jsonObject.getInt(AnomalyConfigJobService.KEY_ANOMALY_CONFIG_VERSION)).isEqualTo(
-                ANOMALY_VERSION);
     }
 
     @Test

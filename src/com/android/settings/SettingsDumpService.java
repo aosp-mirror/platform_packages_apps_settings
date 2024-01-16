@@ -38,7 +38,6 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.applications.ProcStatsData;
 import com.android.settings.datausage.lib.DataUsageLib;
-import com.android.settings.fuelgauge.batterytip.AnomalyConfigJobService;
 import com.android.settings.network.MobileNetworkRepository;
 import com.android.settingslib.net.DataUsageController;
 
@@ -99,7 +98,6 @@ public class SettingsDumpService extends Service {
                 dump.put(KEY_DATAUSAGE, dumpDataUsage());
                 dump.put(KEY_MEMORY, dumpMemory());
                 dump.put(KEY_DEFAULT_BROWSER_APP, dumpDefaultBrowser());
-                dump.put(KEY_ANOMALY_DETECTION, dumpAnomalyDetection());
             } catch (Exception e) {
                 Log.w(TAG, "exception in dump: ", e);
             }
@@ -195,20 +193,6 @@ public class SettingsDumpService extends Service {
         } else {
             return resolveInfo.activityInfo.packageName;
         }
-    }
-
-    @VisibleForTesting
-    JSONObject dumpAnomalyDetection() throws JSONException {
-        final JSONObject obj = new JSONObject();
-        final SharedPreferences sharedPreferences = getSharedPreferences(
-                AnomalyConfigJobService.PREF_DB,
-                Context.MODE_PRIVATE);
-        final int currentVersion = sharedPreferences.getInt(
-                AnomalyConfigJobService.KEY_ANOMALY_CONFIG_VERSION,
-                0 /* defValue */);
-        obj.put("anomaly_config_version", String.valueOf(currentVersion));
-
-        return obj;
     }
 
     private void dumpMobileNetworkSettings(IndentingPrintWriter writer) {
