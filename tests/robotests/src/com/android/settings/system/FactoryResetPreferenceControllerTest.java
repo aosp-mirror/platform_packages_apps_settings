@@ -17,75 +17,125 @@ package com.android.settings.system;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
 import android.os.UserHandle;
+import android.os.UserManager;
+import android.platform.test.annotations.RequiresFlagsEnabled;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.provider.Settings;
 
-import com.android.settings.testutils.shadow.ShadowUserManager;
-import com.android.settings.testutils.shadow.ShadowUtils;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.preference.Preference;
+
+import com.google.common.collect.ImmutableList;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = ShadowUserManager.class)
 public class FactoryResetPreferenceControllerTest {
 
+    @Rule
+    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
+
     private static final String FACTORY_RESET_KEY = "factory_reset";
+    private static final String FACTORY_RESET_APP_PACKAGE = "com.frw_app";
 
-    private ShadowUserManager mShadowUserManager;
+    @Mock private ActivityResultLauncher<Intent> mFactoryResetLauncher;
+    @Mock private Preference mPreference;
+    @Mock private Context mContext;
+    @Mock private PackageManager mPackageManager;
+    @Mock private UserManager mUserManager;
+    private ResolveInfo mFactoryResetAppResolveInfo;
+    private PackageInfo mFactoryResetAppPackageInfo;
 
-    private Context mContext;
     private FactoryResetPreferenceController mController;
 
     @Before
-    public void setUp() {
-        mContext = RuntimeEnvironment.application;
-        mShadowUserManager = ShadowUserManager.getShadow();
-
+    public void setUp() throws PackageManager.NameNotFoundException {
+        MockitoAnnotations.initMocks(this);
+        when(mContext.getPackageManager()).thenReturn(mPackageManager);
+        when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
         mController = new FactoryResetPreferenceController(mContext, FACTORY_RESET_KEY);
+        mFactoryResetAppResolveInfo = new ResolveInfo();
+        mFactoryResetAppResolveInfo.activityInfo = new ActivityInfo();
+        mFactoryResetAppResolveInfo.activityInfo.packageName = FACTORY_RESET_APP_PACKAGE;
+        mFactoryResetAppPackageInfo = new PackageInfo();
+        mFactoryResetAppPackageInfo.requestedPermissions =
+                new String[] {Manifest.permission.PREPARE_FACTORY_RESET};
+        mFactoryResetAppPackageInfo.requestedPermissionsFlags = new int[] {
+                PackageInfo.REQUESTED_PERMISSION_GRANTED
+        };
+        when(mPackageManager.resolveActivity(any(), anyInt()))
+                .thenReturn(mFactoryResetAppResolveInfo);
+        when(mPackageManager.getPackageInfo(anyString(), anyInt()))
+                .thenReturn(mFactoryResetAppPackageInfo);
+        when(mPreference.getKey()).thenReturn(FACTORY_RESET_KEY);
+        mController.mFactoryResetPreparationLauncher = mFactoryResetLauncher;
+
     }
 
     @After
     public void tearDown() {
-        ShadowUtils.reset();
-        mShadowUserManager.setIsAdminUser(false);
-        mShadowUserManager.setIsDemoUser(false);
-        Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.DEVICE_DEMO_MODE, 0);
+        Mockito.reset(mUserManager, mPackageManager);
+        Settings.Global.putInt(RuntimeEnvironment.application.getContentResolver(),
+                Settings.Global.DEVICE_DEMO_MODE, 0);
     }
 
     @Ignore("b/314930928")
     @Test
     public void isAvailable_systemUser() {
-        mShadowUserManager.setIsAdminUser(true);
+        when(mUserManager.isAdminUser()).thenReturn(true);
 
         assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
     public void isAvailable_nonSystemUser() {
-        mShadowUserManager.setIsAdminUser(false);
-        mShadowUserManager.setIsDemoUser(false);
+        when(mUserManager.isAdminUser()).thenReturn(false);
+        when(mUserManager.isDemoUser()).thenReturn(false);
 
         assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
     public void isAvailable_demoUser() {
-        mShadowUserManager.setIsAdminUser(false);
+        when(mUserManager.isAdminUser()).thenReturn(false);
 
         // Place the device in demo mode.
-        Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.DEVICE_DEMO_MODE, 1);
+        Settings.Global.putInt(RuntimeEnvironment.application.getContentResolver(),
+                Settings.Global.DEVICE_DEMO_MODE, 1);
 
         // Indicate the user is a demo user.
-        mShadowUserManager.addUser(UserHandle.myUserId(), "test", UserInfo.FLAG_DEMO);
+        when(mUserManager.getUserProfiles())
+                .thenReturn(ImmutableList.of(new UserHandle(UserHandle.myUserId())));
+        when(mUserManager.getUserInfo(eq(UserHandle.myUserId())))
+                .thenReturn(new UserInfo(UserHandle.myUserId(), "test", UserInfo.FLAG_DEMO));
 
         assertThat(mController.isAvailable()).isFalse();
     }
@@ -93,5 +143,17 @@ public class FactoryResetPreferenceControllerTest {
     @Test
     public void getPreferenceKey() {
         assertThat(mController.getPreferenceKey()).isEqualTo(FACTORY_RESET_KEY);
+    }
+
+    @Test
+    @RequiresFlagsEnabled(com.android.settings.factory_reset.Flags.FLAG_ENABLE_FACTORY_RESET_WIZARD)
+    public void handlePreference_factoryResetWizardEnabled() {
+        ArgumentCaptor<Intent> intentArgumentCaptor = ArgumentCaptor.forClass(Intent.class);
+
+        assertThat(mController.handlePreferenceTreeClick(mPreference)).isTrue();
+        verify(mFactoryResetLauncher).launch(intentArgumentCaptor.capture());
+        assertThat(intentArgumentCaptor.getValue()).isNotNull();
+        assertThat(intentArgumentCaptor.getValue().getAction())
+                .isEqualTo(FactoryResetPreferenceController.ACTION_PREPARE_FACTORY_RESET);
     }
 }
