@@ -10813,8 +10813,36 @@
         ]]>
     </string>
 
+    <!-- Message of the warning dialog for disabling the credential provider (new strings for 24Q3). [CHAR_LIMIT=NONE] -->
+    <string name="credman_confirmation_message_new_ui">
+        <![CDATA[
+        <b>Turn off all services?</b>
+        <br/>
+        <br/>
+        Passwords, passkeys, and other saved info won\'t be available for autofill when you sign in
+        ]]>
+    </string>
+
+    <!-- Message of the warning dialog for setting a new preferred credential provider (new strings for 24Q3). [CHAR_LIMIT=NONE] -->
+    <string name="credman_autofill_confirmation_message_new_ui">
+        <![CDATA[
+        <b>Change your preferred service to <xliff:g id="app_name" example="Provider">%1$s</xliff:g>\?</b>
+        <br/>
+        <br/>
+        New passwords, passkeys, and other info will be saved here from now on.
+        <xliff:g id="app_name" example="Provider">%1$s</xliff:g> may use what\'s on your
+        screen to determine what can be autofilled
+        ]]>
+    </string>
+
     <!-- Title of the warning dialog for enabling the credential provider. [CHAR_LIMIT=NONE] -->
     <string name="credman_enable_confirmation_message_title">Use %1$s\?</string>
+
+    <!-- Title of the error dialog when too many credential providers are selected (new strings for 24Q3). [CHAR_LIMIT=NONE] -->
+    <string name="credman_limit_error_msg_title">You can only have 5 services on</string>
+
+    <!-- Message of the error dialog when too many credential providers are selected (new strings for 24Q3). [CHAR_LIMIT=NONE] -->
+    <string name="credman_limit_error_msg">Turn off at least 1 service to add another</string>
 
     <!-- Message of the warning dialog for enabling the credential provider. [CHAR_LIMIT=NONE] -->
     <string name="credman_enable_confirmation_message">%1$s uses what\'s on your screen to determine what can be autofilled.</string>
