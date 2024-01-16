@@ -767,7 +767,8 @@ public final class DatabaseUtils {
                 BatteryUsageBroadcastReceiver.ACTION_CLEAR_BATTERY_CACHE_DATA);
         writeString(context, writer, "LastLoadFullChargeTime", KEY_LAST_LOAD_FULL_CHARGE_TIME);
         writeString(context, writer, "LastUploadFullChargeTime", KEY_LAST_UPLOAD_FULL_CHARGE_TIME);
-        writeString(context, writer, "DismissedPowerAnomalyKeys", KEY_DISMISSED_POWER_ANOMALY_KEYS);
+        writeStringSet(
+                context, writer, "DismissedPowerAnomalyKeys", KEY_DISMISSED_POWER_ANOMALY_KEYS);
     }
 
     static SharedPreferences getSharedPreferences(Context context) {
@@ -921,9 +922,22 @@ public final class DatabaseUtils {
     private static void writeString(
             Context context, PrintWriter writer, String prefix, String key) {
         final SharedPreferences sharedPreferences = getSharedPreferences(context);
-        if (sharedPreferences != null) {
-            final String content = sharedPreferences.getString(key, "");
-            writer.println(String.format("\t\t%s: %s", prefix, content));
+        if (sharedPreferences == null) {
+            return;
+        }
+        final String content = sharedPreferences.getString(key, "");
+        writer.println(String.format("\t\t%s: %s", prefix, content));
+    }
+
+    private static void writeStringSet(
+            Context context, PrintWriter writer, String prefix, String key) {
+        final SharedPreferences sharedPreferences = getSharedPreferences(context);
+        if (sharedPreferences == null) {
+            return;
+        }
+        final Set<String> results = sharedPreferences.getStringSet(key, new ArraySet<>());
+        if (results != null) {
+            writer.println(String.format("\t\t%s: %s", prefix, results.toString()));
         }
     }
 
