@@ -38,11 +38,17 @@
         android:title="Play a test sound"
         settings:controller="com.android.settings.connecteddevice.audiosharing.AudioSharingPlaySoundPreferenceController" />
 
-    <com.android.settings.connecteddevice.audiosharing.AudioSharingNamePreference
-        android:key="audio_sharing_stream_name"
-        android:summary="********"
-        android:title="Stream name"
-        settings:controller="com.android.settings.connecteddevice.audiosharing.AudioSharingNamePreferenceController" />
+    <PreferenceCategory
+        android:key="audio_sharing_stream_settings_category"
+        android:title="Stream settings"
+        settings:controller="com.android.settings.connecteddevice.audiosharing.StreamSettingsCategoryController">
+
+        <com.android.settings.connecteddevice.audiosharing.AudioSharingNamePreference
+            android:key="audio_sharing_stream_name"
+            android:summary="********"
+            android:title="Stream name"
+            settings:controller="com.android.settings.connecteddevice.audiosharing.AudioSharingNamePreferenceController" />
+    </PreferenceCategory>
 
     <PreferenceCategory
         android:key="audio_streams_settings_category"
