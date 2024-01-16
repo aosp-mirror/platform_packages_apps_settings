@@ -15,18 +15,25 @@
  */
 package com.android.settings.connecteddevice;
 
+import static com.android.settings.accessibility.AccessibilityHearingAidsFragment.KEY_HEARING_DEVICE_ADD_BT_DEVICES;
+
 import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.text.TextUtils;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.accessibility.HearingDevicePairingDetail;
+import com.android.settings.accessibility.HearingDevicePairingFragment;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.flags.Flags;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
@@ -73,6 +80,21 @@ public class AddDevicePreferenceController extends BasePreferenceController
             mPreference = screen.findPreference(getPreferenceKey());
             updateState(mPreference);
         }
+    }
+
+    @Override
+    public boolean handlePreferenceTreeClick(Preference preference) {
+        if (TextUtils.equals(preference.getKey(), KEY_HEARING_DEVICE_ADD_BT_DEVICES)) {
+            String destination = Flags.newHearingDevicePairingPage()
+                    ? HearingDevicePairingFragment.class.getName()
+                    : HearingDevicePairingDetail.class.getName();
+            new SubSettingLauncher(preference.getContext())
+                    .setDestination(destination)
+                    .setSourceMetricsCategory(getMetricsCategory())
+                    .launch();
+            return true;
+        }
+        return super.handlePreferenceTreeClick(preference);
     }
 
     @Override
