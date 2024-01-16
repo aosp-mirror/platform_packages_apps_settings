@@ -101,17 +101,19 @@ fun ApnPage(apnDataInit: ApnData, apnDataCur: MutableState<ApnData>, uriInit: Ur
     RegularScaffold(
         title = if (apnDataInit.newApn) stringResource(id = R.string.apn_add) else stringResource(id = R.string.apn_edit),
         actions = {
-            IconButton(onClick = {
-                if (!apnData.validEnabled) apnData = apnData.copy(validEnabled = true)
-                val valid = validateAndSaveApnData(
-                    apnDataInit,
-                    apnData,
-                    context,
-                    uriInit,
-                    networkTypeSelectedOptionsState
-                )
-                if (valid) navController.navigateBack()
-            }) { Icon(imageVector = Icons.Outlined.Done, contentDescription = null) }
+            if (!apnData.customizedConfig.readOnlyApn) {
+                IconButton(onClick = {
+                    if (!apnData.validEnabled) apnData = apnData.copy(validEnabled = true)
+                    val valid = validateAndSaveApnData(
+                        apnDataInit,
+                        apnData,
+                        context,
+                        uriInit,
+                        networkTypeSelectedOptionsState
+                    )
+                    if (valid) navController.navigateBack()
+                }) { Icon(imageVector = Icons.Outlined.Done, contentDescription = null) }
+            }
         },
     ) {
         Column {
@@ -212,7 +214,9 @@ fun ApnPage(apnDataInit: ApnData, apnDataCur: MutableState<ApnData>, uriInit: Ur
                 emptyVal = stringResource(R.string.network_type_unspecified),
                 enabled = apnData.networkTypeEnabled
             ) {}
-            if (!apnData.newApn) {
+            if (!apnData.newApn && !apnData.customizedConfig.readOnlyApn
+                && apnData.customizedConfig.isAddApnAllowed
+            ) {
                 Preference(
                     object : PreferenceModel {
                         override val title = stringResource(R.string.menu_delete)

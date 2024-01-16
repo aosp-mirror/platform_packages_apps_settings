@@ -35,21 +35,27 @@ import com.google.common.base.Strings;
  */
 class AudioStreamPreference extends TwoTargetPreference {
     private boolean mIsConnected = false;
+    private AudioStream mAudioStream;
 
     /**
      * Update preference UI based on connection status
      *
-     * @param isConnected Is this streams connected
+     * @param isConnected Is this stream connected
+     * @param summary Summary text
+     * @param onPreferenceClickListener Click listener for the preference
      */
     void setIsConnected(
-            boolean isConnected, @Nullable OnPreferenceClickListener onPreferenceClickListener) {
+            boolean isConnected,
+            String summary,
+            @Nullable OnPreferenceClickListener onPreferenceClickListener) {
         if (mIsConnected == isConnected
+                && getSummary() == summary
                 && getOnPreferenceClickListener() == onPreferenceClickListener) {
             // Nothing to update.
             return;
         }
         mIsConnected = isConnected;
-        setSummary(isConnected ? "Listening now" : "");
+        setSummary(summary);
         setOrder(isConnected ? 0 : 1);
         setOnPreferenceClickListener(onPreferenceClickListener);
         notifyChanged();
@@ -58,6 +64,14 @@ class AudioStreamPreference extends TwoTargetPreference {
     AudioStreamPreference(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         setIcon(R.drawable.ic_bt_audio_sharing);
+    }
+
+    void setAudioStreamState(AudioStreamsProgressCategoryController.AudioStreamState state) {
+        mAudioStream.setState(state);
+    }
+
+    AudioStreamsProgressCategoryController.AudioStreamState getAudioStreamState() {
+        return mAudioStream.getState();
     }
 
     @Override
@@ -71,17 +85,29 @@ class AudioStreamPreference extends TwoTargetPreference {
     }
 
     static AudioStreamPreference fromMetadata(
-            Context context, BluetoothLeBroadcastMetadata source) {
+            Context context,
+            BluetoothLeBroadcastMetadata source,
+            AudioStreamsProgressCategoryController.AudioStreamState streamState) {
         AudioStreamPreference preference = new AudioStreamPreference(context, /* attrs= */ null);
         preference.setTitle(getBroadcastName(source));
+        preference.setAudioStream(new AudioStream(source.getBroadcastId(), streamState));
         return preference;
     }
 
     static AudioStreamPreference fromReceiveState(
-            Context context, BluetoothLeBroadcastReceiveState state) {
+            Context context,
+            BluetoothLeBroadcastReceiveState receiveState,
+            AudioStreamsProgressCategoryController.AudioStreamState streamState) {
         AudioStreamPreference preference = new AudioStreamPreference(context, /* attrs= */ null);
-        preference.setTitle(getBroadcastName(state));
+        preference.setTitle(getBroadcastName(receiveState));
+        preference.setAudioStream(
+                new AudioStream(
+                        receiveState.getSourceId(), receiveState.getBroadcastId(), streamState));
         return preference;
+    }
+
+    private void setAudioStream(AudioStream audioStream) {
+        mAudioStream = audioStream;
     }
 
     private static String getBroadcastName(BluetoothLeBroadcastMetadata source) {
@@ -98,5 +124,44 @@ class AudioStreamPreference extends TwoTargetPreference {
                 .filter(i -> !Strings.isNullOrEmpty(i))
                 .findFirst()
                 .orElse("Broadcast Id: " + state.getBroadcastId());
+    }
+
+    private static final class AudioStream {
+        private int mSourceId;
+        private int mBroadcastId;
+        private AudioStreamsProgressCategoryController.AudioStreamState mState;
+
+        private AudioStream(
+                int broadcastId, AudioStreamsProgressCategoryController.AudioStreamState state) {
+            mBroadcastId = broadcastId;
+            mState = state;
+        }
+
+        private AudioStream(
+                int sourceId,
+                int broadcastId,
+                AudioStreamsProgressCategoryController.AudioStreamState state) {
+            mSourceId = sourceId;
+            mBroadcastId = broadcastId;
+            mState = state;
+        }
+
+        // TODO(chelseahao): use this to handleSourceRemoved
+        private int getSourceId() {
+            return mSourceId;
+        }
+
+        // TODO(chelseahao): use this to handleSourceRemoved
+        private int getBroadcastId() {
+            return mBroadcastId;
+        }
+
+        private AudioStreamsProgressCategoryController.AudioStreamState getState() {
+            return mState;
+        }
+
+        private void setState(AudioStreamsProgressCategoryController.AudioStreamState state) {
+            mState = state;
+        }
     }
 }

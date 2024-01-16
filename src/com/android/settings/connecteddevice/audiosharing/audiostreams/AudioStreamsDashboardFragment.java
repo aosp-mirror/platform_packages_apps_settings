@@ -34,7 +34,7 @@ import com.android.settingslib.bluetooth.BluetoothUtils;
 public class AudioStreamsDashboardFragment extends DashboardFragment {
     private static final String TAG = "AudioStreamsDashboardFrag";
     private static final boolean DEBUG = BluetoothUtils.D;
-    private AudioStreamsScanQrCodeController mAudioStreamsScanQrCodeController;
+    private AudioStreamsProgressCategoryController mAudioStreamsProgressCategoryController;
 
     public AudioStreamsDashboardFragment() {
         super();
@@ -69,8 +69,8 @@ public class AudioStreamsDashboardFragment extends DashboardFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mAudioStreamsScanQrCodeController = use(AudioStreamsScanQrCodeController.class);
-        mAudioStreamsScanQrCodeController.setFragment(this);
+        use(AudioStreamsScanQrCodeController.class).setFragment(this);
+        mAudioStreamsProgressCategoryController = use(AudioStreamsProgressCategoryController.class);
     }
 
     @Override
@@ -103,11 +103,13 @@ public class AudioStreamsDashboardFragment extends DashboardFragment {
                 if (DEBUG) {
                     Log.d(TAG, "onActivityResult() broadcastId : " + source.getBroadcastId());
                 }
-                if (mAudioStreamsScanQrCodeController == null) {
-                    Log.w(TAG, "onActivityResult() AudioStreamsScanQrCodeController is null!");
+                if (mAudioStreamsProgressCategoryController == null) {
+                    Log.w(
+                            TAG,
+                            "onActivityResult() AudioStreamsProgressCategoryController is null!");
                     return;
                 }
-                mAudioStreamsScanQrCodeController.addSource(source);
+                mAudioStreamsProgressCategoryController.setSourceFromQrCode(source);
             }
         }
     }

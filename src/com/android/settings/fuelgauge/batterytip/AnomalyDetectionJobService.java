@@ -49,6 +49,7 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.fuelgauge.PowerAllowlistBackend;
 import com.android.settingslib.utils.ThreadUtils;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -59,7 +60,7 @@ public class AnomalyDetectionJobService extends JobService {
     private static final int ON = 1;
     @VisibleForTesting static final int UID_NULL = -1;
     @VisibleForTesting static final int STATSD_UID_FILED = 1;
-    @VisibleForTesting static final long MAX_DELAY_MS = TimeUnit.MINUTES.toMillis(30);
+    @VisibleForTesting static final long MAX_DELAY_MS = Duration.ofDays(1).toMillis();
 
     private final Object mLock = new Object();
 

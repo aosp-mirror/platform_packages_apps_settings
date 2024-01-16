@@ -51,6 +51,7 @@ import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ConvertToEsimPreferenceController extends TelephonyBasePreferenceController implements
@@ -111,7 +112,8 @@ public class ConvertToEsimPreferenceController extends TelephonyBasePreferenceCo
          * To avoid showing users dialogs that can cause confusion,
          * add conditions to allow conversion in the absence of active eSIM.
          */
-        if (!mContext.getResources().getBoolean(R.bool.config_psim_conversion_menu_enabled)) {
+        if (!mContext.getResources().getBoolean(R.bool.config_psim_conversion_menu_enabled)
+                || !isPsimConversionSupport(subId)) {
             return CONDITIONALLY_UNAVAILABLE;
         }
         if (findConversionSupportComponent()) {
@@ -237,5 +239,17 @@ public class ConvertToEsimPreferenceController extends TelephonyBasePreferenceCo
             return false;
         }
         return true;
+    }
+
+    private boolean isPsimConversionSupport(int subId) {
+        SubscriptionManager subscriptionManager = mContext.getSystemService(
+                SubscriptionManager.class);
+        SubscriptionInfo subInfo = subscriptionManager.getActiveSubscriptionInfo(subId);
+        if (subInfo == null) {
+            return false;
+        }
+        final int[] supportedCarriers = mContext.getResources().getIntArray(
+                R.array.config_psim_conversion_menu_enabled_carrier);
+        return Arrays.stream(supportedCarriers).anyMatch(id -> id == subInfo.getCarrierId());
     }
 }
