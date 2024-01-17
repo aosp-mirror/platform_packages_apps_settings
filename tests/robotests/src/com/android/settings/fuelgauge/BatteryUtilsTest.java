@@ -40,20 +40,16 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.os.BatteryConsumer;
 import android.os.BatteryStats;
 import android.os.BatteryStatsManager;
 import android.os.BatteryUsageStats;
 import android.os.Build;
-import android.os.Process;
 import android.os.SystemClock;
 
 import com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper;
-import com.android.settings.fuelgauge.batterytip.AnomalyInfo;
 import com.android.settings.fuelgauge.batterytip.BatteryDatabaseManager;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowThreadUtils;
@@ -69,9 +65,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 public class BatteryUtilsTest {
@@ -122,7 +115,6 @@ public class BatteryUtilsTest {
     @Mock private ApplicationInfo mLowApplicationInfo;
     @Mock private PowerAllowlistBackend mPowerAllowlistBackend;
     @Mock private BatteryDatabaseManager mBatteryDatabaseManager;
-    private AnomalyInfo mAnomalyInfo;
     private BatteryUtils mBatteryUtils;
     private FakeFeatureFactory mFeatureFactory;
     private PowerUsageFeatureProvider mProvider;
@@ -169,7 +161,6 @@ public class BatteryUtilsTest {
         doReturn(0L)
                 .when(mBatteryUtils)
                 .getForegroundServiceTotalTimeUs(any(BatteryStats.Uid.class), anyLong());
-        mAnomalyInfo = new AnomalyInfo(INFO_WAKELOCK);
 
         BatteryDatabaseManager.setUpForTest(mBatteryDatabaseManager);
         ShadowThreadUtils.setIsMainThread(true);
@@ -388,79 +379,6 @@ public class BatteryUtilsTest {
                 .thenReturn(AppOpsManager.MODE_ALLOWED);
 
         assertThat(mBatteryUtils.isForceAppStandbyEnabled(UID, PACKAGE_NAME)).isFalse();
-    }
-
-    @Test
-    public void testShouldHideAnomaly_systemAppWithLauncher_returnTrue() {
-        final List<ResolveInfo> resolveInfos = new ArrayList<>();
-        final ResolveInfo resolveInfo = new ResolveInfo();
-        resolveInfo.activityInfo = new ActivityInfo();
-        resolveInfo.activityInfo.packageName = HIGH_SDK_PACKAGE;
-
-        doReturn(resolveInfos).when(mPackageManager).queryIntentActivities(any(), anyInt());
-        doReturn(new String[] {HIGH_SDK_PACKAGE}).when(mPackageManager).getPackagesForUid(UID);
-        mHighApplicationInfo.flags = ApplicationInfo.FLAG_SYSTEM;
-
-        assertThat(mBatteryUtils.shouldHideAnomaly(mPowerAllowlistBackend, UID, mAnomalyInfo))
-                .isTrue();
-    }
-
-    @Test
-    public void testShouldHideAnomaly_systemAppWithoutLauncher_returnTrue() {
-        doReturn(new ArrayList<>()).when(mPackageManager).queryIntentActivities(any(), anyInt());
-        doReturn(new String[] {HIGH_SDK_PACKAGE}).when(mPackageManager).getPackagesForUid(UID);
-        mHighApplicationInfo.flags = ApplicationInfo.FLAG_SYSTEM;
-
-        assertThat(mBatteryUtils.shouldHideAnomaly(mPowerAllowlistBackend, UID, mAnomalyInfo))
-                .isTrue();
-    }
-
-    @Test
-    public void testShouldHideAnomaly_systemUid_returnTrue() {
-        final int systemUid = Process.ROOT_UID;
-        doReturn(new String[] {HIGH_SDK_PACKAGE})
-                .when(mPackageManager)
-                .getPackagesForUid(systemUid);
-
-        assertThat(mBatteryUtils.shouldHideAnomaly(mPowerAllowlistBackend, systemUid, mAnomalyInfo))
-                .isTrue();
-    }
-
-    @Test
-    public void testShouldHideAnomaly_AppInDozeList_returnTrue() {
-        doReturn(new String[] {HIGH_SDK_PACKAGE}).when(mPackageManager).getPackagesForUid(UID);
-        doReturn(true)
-                .when(mPowerAllowlistBackend)
-                .isAllowlisted(new String[] {HIGH_SDK_PACKAGE}, UID);
-
-        assertThat(mBatteryUtils.shouldHideAnomaly(mPowerAllowlistBackend, UID, mAnomalyInfo))
-                .isTrue();
-    }
-
-    @Test
-    public void testShouldHideAnomaly_normalApp_returnFalse() {
-        doReturn(new String[] {HIGH_SDK_PACKAGE}).when(mPackageManager).getPackagesForUid(UID);
-
-        assertThat(mBatteryUtils.shouldHideAnomaly(mPowerAllowlistBackend, UID, mAnomalyInfo))
-                .isFalse();
-    }
-
-    @Test
-    public void testShouldHideAnomaly_excessivePriorOApp_returnFalse() {
-        doReturn(new String[] {LOW_SDK_PACKAGE}).when(mPackageManager).getPackagesForUid(UID);
-        mAnomalyInfo = new AnomalyInfo(INFO_EXCESSIVE);
-
-        assertThat(mBatteryUtils.shouldHideAnomaly(mPowerAllowlistBackend, UID, mAnomalyInfo))
-                .isFalse();
-    }
-
-    @Test
-    public void testShouldHideAnomaly_excessiveOApp_returnTrue() {
-        doReturn(new String[] {HIGH_SDK_PACKAGE}).when(mPackageManager).getPackagesForUid(UID);
-        mAnomalyInfo = new AnomalyInfo(INFO_EXCESSIVE);
-
-        assertThat(mBatteryUtils.shouldHideAnomaly(mPowerAllowlistBackend, UID, mAnomalyInfo))
-                .isTrue();
     }
 
     @Test

@@ -361,6 +361,52 @@ public final class ConvertUtilsTest {
     }
 
     @Test
+    public void convertToBatteryUsageDiff_returnsExpectedResult() {
+        final BatteryDiffEntry batteryDiffEntry =
+                new BatteryDiffEntry(
+                        mContext,
+                        /* uid= */ 101L,
+                        /* userId= */ 1001L,
+                        /* key= */ "key",
+                        /* isHidden= */ false,
+                        /* componentId= */ -1,
+                        /* legacyPackageName= */ null,
+                        /* legacyLabel= */ null,
+                        /* consumerType= */ ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
+                        /* foregroundUsageTimeInMs= */ 1234L,
+                        /* foregroundServiceUsageTimeInMs= */ 3456L,
+                        /* backgroundUsageTimeInMs= */ 5678L,
+                        /* screenOnTimeInMs= */ 123L,
+                        /* consumePower= */ 1.1,
+                        /* foregroundUsageConsumePower= */ 1.2,
+                        /* foregroundServiceUsageConsumePower= */ 1.3,
+                        /* backgroundUsageConsumePower= */ 1.4,
+                        /* cachedUsageConsumePower= */ 1.5);
+
+        final BatteryUsageDiff batteryUsageDiff =
+                ConvertUtils.convertToBatteryUsageDiff(batteryDiffEntry);
+
+        assertThat(batteryUsageDiff.getUid()).isEqualTo(101L);
+        assertThat(batteryUsageDiff.getUserId()).isEqualTo(1001L);
+        assertThat(batteryUsageDiff.getIsHidden()).isFalse();
+        assertThat(batteryUsageDiff.getComponentId()).isEqualTo(-1);
+        assertThat(batteryUsageDiff.getConsumerType())
+                .isEqualTo(ConvertUtils.CONSUMER_TYPE_UID_BATTERY);
+        assertThat(batteryUsageDiff.getConsumePower()).isEqualTo(1.1);
+        assertThat(batteryUsageDiff.getForegroundUsageConsumePower()).isEqualTo(1.2);
+        assertThat(batteryUsageDiff.getForegroundServiceUsageConsumePower()).isEqualTo(1.3);
+        assertThat(batteryUsageDiff.getBackgroundUsageConsumePower()).isEqualTo(1.4);
+        assertThat(batteryUsageDiff.getCachedUsageConsumePower()).isEqualTo(1.5);
+        assertThat(batteryUsageDiff.getForegroundUsageTime()).isEqualTo(1234L);
+        assertThat(batteryUsageDiff.getForegroundServiceUsageTime()).isEqualTo(3456L);
+        assertThat(batteryUsageDiff.getBackgroundUsageTime()).isEqualTo(5678L);
+        assertThat(batteryUsageDiff.getScreenOnTime()).isEqualTo(123L);
+        assertThat(batteryUsageDiff.getKey()).isEqualTo("key");
+        assertThat(batteryUsageDiff.hasPackageName()).isFalse();
+        assertThat(batteryUsageDiff.hasLabel()).isFalse();
+    }
+
+    @Test
     public void convertToAppUsageEvent_returnsExpectedResult()
             throws PackageManager.NameNotFoundException {
         final Event event = new Event();

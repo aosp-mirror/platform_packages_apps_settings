@@ -15,34 +15,49 @@
  */
 package com.android.settings.connecteddevice;
 
+import static com.android.settings.accessibility.AccessibilityHearingAidsFragment.KEY_HEARING_DEVICE_ADD_BT_DEVICES;
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.robolectric.Shadows.shadowOf;
 
 import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.platform.test.annotations.RequiresFlagsDisabled;
+import android.platform.test.annotations.RequiresFlagsEnabled;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.text.TextUtils;
 
 import androidx.preference.PreferenceScreen;
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
+import com.android.settings.accessibility.HearingDevicePairingDetail;
+import com.android.settings.accessibility.HearingDevicePairingFragment;
+import com.android.settings.flags.Flags;
 import com.android.settingslib.RestrictedPreference;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
-import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplicationPackageManager;
 import org.robolectric.util.ReflectionHelpers;
@@ -51,12 +66,16 @@ import org.robolectric.util.ReflectionHelpers;
 @Config(shadows = ShadowApplicationPackageManager.class)
 public class AddDevicePreferenceControllerTest {
 
+    @Rule
+    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
+
     @Mock
     private PreferenceScreen mScreen;
     @Mock
     private BluetoothAdapter mBluetoothAdapter;
 
-    private Context mContext;
+    @Spy
+    private Context mContext = ApplicationProvider.getApplicationContext();
     private AddDevicePreferenceController mAddDevicePreferenceController;
     private RestrictedPreference mAddDevicePreference;
     private ShadowApplicationPackageManager mPackageManager;
@@ -66,8 +85,7 @@ public class AddDevicePreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mContext = RuntimeEnvironment.application;
-        mPackageManager = (ShadowApplicationPackageManager) Shadows.shadowOf(
+        mPackageManager = (ShadowApplicationPackageManager) shadowOf(
                 mContext.getPackageManager());
         mPackageManager.setSystemFeature(PackageManager.FEATURE_BLUETOOTH, true);
 
@@ -82,6 +100,8 @@ public class AddDevicePreferenceControllerTest {
         when(mBluetoothAdapter.isEnabled()).thenReturn(true);
         when(mScreen.findPreference(key)).thenReturn(mAddDevicePreference);
         mAddDevicePreferenceController.displayPreference(mScreen);
+
+        doNothing().when(mContext).startActivity(any(Intent.class));
     }
 
     @Test
@@ -136,5 +156,31 @@ public class AddDevicePreferenceControllerTest {
 
         assertThat(mAddDevicePreferenceController.getAvailabilityStatus())
                 .isEqualTo(UNSUPPORTED_ON_DEVICE);
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_NEW_HEARING_DEVICE_PAIRING_PAGE)
+    public void handlePreferenceClick_A11yPreference_redirectToNewPairingPage() {
+        mAddDevicePreference.setKey(KEY_HEARING_DEVICE_ADD_BT_DEVICES);
+        final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
+
+        mAddDevicePreferenceController.handlePreferenceTreeClick(mAddDevicePreference);
+
+        verify(mContext).startActivity(intentCaptor.capture());
+        assertThat(intentCaptor.getValue().getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT))
+                .isEqualTo(HearingDevicePairingFragment.class.getName());
+    }
+
+    @Test
+    @RequiresFlagsDisabled(Flags.FLAG_NEW_HEARING_DEVICE_PAIRING_PAGE)
+    public void handlePreferenceClick_A11yPreference_redirectToOldPairingPage() {
+        mAddDevicePreference.setKey(KEY_HEARING_DEVICE_ADD_BT_DEVICES);
+        final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
+
+        mAddDevicePreferenceController.handlePreferenceTreeClick(mAddDevicePreference);
+
+        verify(mContext).startActivity(intentCaptor.capture());
+        assertThat(intentCaptor.getValue().getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT))
+                .isEqualTo(HearingDevicePairingDetail.class.getName());
     }
 }
