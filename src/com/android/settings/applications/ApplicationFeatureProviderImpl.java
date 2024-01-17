@@ -30,6 +30,7 @@ import android.content.pm.ServiceInfo;
 import android.content.pm.UserInfo;
 import android.location.LocationManager;
 import android.os.RemoteException;
+import android.os.SystemConfigManager;
 import android.os.UserManager;
 import android.service.euicc.EuiccService;
 import android.telecom.DefaultDialerManager;
@@ -54,6 +55,8 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
     private final IPackageManager mPms;
     private final DevicePolicyManager mDpm;
     private final UserManager mUm;
+    private final SystemConfigManager mSystemConfigManager;
+
     /** Flags to use when querying PackageManager for Euicc component implementations. */
     private static final int EUICC_QUERY_FLAGS =
             PackageManager.MATCH_SYSTEM_ONLY | PackageManager.MATCH_DEBUG_TRIAGED_MISSING
@@ -66,6 +69,7 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
         mPms = pms;
         mDpm = dpm;
         mUm = UserManager.get(mContext);
+        mSystemConfigManager = context.getSystemService(SystemConfigManager.class);
     }
 
     @Override
@@ -167,6 +171,7 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
         if (locationHistoryPackage != null) {
             keepEnabledPackages.add(locationHistoryPackage);
         }
+        keepEnabledPackages.addAll(mSystemConfigManager.getPreventUserDisablePackages());
         return keepEnabledPackages;
     }
 
