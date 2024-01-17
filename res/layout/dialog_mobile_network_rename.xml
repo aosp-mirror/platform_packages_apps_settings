@@ -80,13 +80,15 @@
                 android:paddingTop="@dimen/sim_label_padding"
                 android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Subhead"
                 android:textColor="?android:attr/textColorPrimary"
-                android:text="@string/status_operator"/>
+                android:text="@string/status_operator"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/operator_name_value"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/device_info_not_available"/>
+                android:text="@string/device_info_not_available"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/number_label"
@@ -95,13 +97,15 @@
                 android:paddingTop="@dimen/sim_label_padding"
                 android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Subhead"
                 android:textColor="?android:attr/textColorPrimary"
-                android:text="@string/status_number_sim_status"/>
+                android:text="@string/status_number_sim_status"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/number_value"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/device_info_not_available"/>
+                android:text="@string/device_info_not_available"
+                android:visibility="gone"/>
 
         </LinearLayout>
 
