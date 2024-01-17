@@ -31,6 +31,8 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.bluetooth.BluetoothLeBroadcastMetadataExt;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 
+import com.google.common.base.Strings;
+
 public class AudioStreamsDashboardFragment extends DashboardFragment {
     private static final String TAG = "AudioStreamsDashboardFrag";
     private static final boolean DEBUG = BluetoothUtils.D;
@@ -72,6 +74,21 @@ public class AudioStreamsDashboardFragment extends DashboardFragment {
         use(AudioStreamsScanQrCodeController.class).setFragment(this);
         mAudioStreamsProgressCategoryController = use(AudioStreamsProgressCategoryController.class);
         mAudioStreamsProgressCategoryController.setFragment(this);
+
+        if (getArguments() != null) {
+            String broadcastMetadataStr =
+                    getArguments().getString(AudioStreamConfirmDialog.KEY_BROADCAST_METADATA);
+            if (!Strings.isNullOrEmpty(broadcastMetadataStr)) {
+                BluetoothLeBroadcastMetadata broadcastMetadata =
+                        BluetoothLeBroadcastMetadataExt.INSTANCE.convertToBroadcastMetadata(
+                                broadcastMetadataStr);
+                if (broadcastMetadata == null) {
+                    Log.w(TAG, "onAttach() broadcastMetadata is null!");
+                } else {
+                    mAudioStreamsProgressCategoryController.setSourceFromQrCode(broadcastMetadata);
+                }
+            }
+        }
     }
 
     @Override
