@@ -18,6 +18,7 @@ package com.android.settings.privatespace;
 
 import static android.app.admin.DevicePolicyManager.ACTION_SET_NEW_PASSWORD;
 
+import android.app.ActivityOptions;
 import android.app.AlertDialog;
 import android.app.KeyguardManager;
 import android.app.PendingIntent;
@@ -50,6 +51,8 @@ import com.google.android.setupdesign.util.ThemeHelper;
  */
 public class PrivateSpaceAuthenticationActivity extends FragmentActivity {
     private static final String TAG = "PrivateSpaceAuthCheck";
+    public static final String EXTRA_SHOW_PRIVATE_SPACE_UNLOCKED =
+            "extra_show_private_space_unlocked";
     private PrivateSpaceMaintainer mPrivateSpaceMaintainer;
     private KeyguardManager mKeyguardManager;
 
@@ -158,12 +161,19 @@ public class PrivateSpaceAuthenticationActivity extends FragmentActivity {
                         .setTransitionType(SettingsTransitionHelper.TransitionType.TRANSITION_SLIDE)
                         .setSourceMetricsCategory(SettingsEnums.PRIVATE_SPACE_SETTINGS);
         if (mPrivateSpaceMaintainer.isPrivateSpaceLocked()) {
+            ActivityOptions options =
+                    ActivityOptions.makeBasic()
+                            .setPendingIntentCreatorBackgroundActivityStartMode(
+                                    ActivityOptions.MODE_BACKGROUND_ACTIVITY_START_ALLOWED);
             mPrivateSpaceMaintainer.unlockPrivateSpace(
                     PendingIntent.getActivity(
                                     context, /* requestCode */
                                     0,
-                                    privateSpaceSettings.toIntent(),
-                                    PendingIntent.FLAG_IMMUTABLE)
+                                    privateSpaceSettings
+                                            .toIntent()
+                                            .putExtra(EXTRA_SHOW_PRIVATE_SPACE_UNLOCKED, true),
+                                    PendingIntent.FLAG_IMMUTABLE,
+                                    options.toBundle())
                             .getIntentSender());
         } else {
             privateSpaceSettings.launch();
