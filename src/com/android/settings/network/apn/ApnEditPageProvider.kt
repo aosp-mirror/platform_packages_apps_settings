@@ -21,10 +21,8 @@ import android.os.Bundle
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Done
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
+import androidx.compose.material3.Button
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -49,10 +47,9 @@ import com.android.settingslib.spa.widget.editor.SettingsExposedDropdownMenuBox
 import com.android.settingslib.spa.widget.editor.SettingsExposedDropdownMenuCheckBox
 import com.android.settingslib.spa.widget.editor.SettingsOutlinedTextField
 import com.android.settingslib.spa.widget.editor.SettingsTextFieldPassword
-import com.android.settingslib.spa.widget.preference.Preference
-import com.android.settingslib.spa.widget.preference.PreferenceModel
 import com.android.settingslib.spa.widget.preference.SwitchPreference
 import com.android.settingslib.spa.widget.preference.SwitchPreferenceModel
+import com.android.settingslib.spa.widget.scaffold.MoreOptionsAction
 import com.android.settingslib.spa.widget.scaffold.RegularScaffold
 import java.util.Base64
 
@@ -109,7 +106,7 @@ fun ApnPage(apnDataInit: ApnData, apnDataCur: MutableState<ApnData>, uriInit: Ur
         title = if (apnDataInit.newApn) stringResource(id = R.string.apn_add) else stringResource(id = R.string.apn_edit),
         actions = {
             if (!apnData.customizedConfig.readOnlyApn) {
-                IconButton(onClick = {
+                Button(onClick = {
                     apnData = apnData.copy(
                         networkType = ApnNetworkTypes.getNetworkType(
                             networkTypeSelectedOptionsState
@@ -123,7 +120,19 @@ fun ApnPage(apnDataInit: ApnData, apnDataCur: MutableState<ApnData>, uriInit: Ur
                     )
                     if (valid == null) navController.navigateBack()
                     else if (!apnData.validEnabled) apnData = apnData.copy(validEnabled = true)
-                }) { Icon(imageVector = Icons.Outlined.Done, contentDescription = null) }
+                }) { Text(text = stringResource(id = R.string.save)) }
+            }
+            if (!apnData.newApn && !apnData.customizedConfig.readOnlyApn
+                && apnData.customizedConfig.isAddApnAllowed
+            ) {
+                MoreOptionsAction {
+                    DropdownMenuItem(
+                        text = { Text(stringResource(R.string.menu_delete)) },
+                        onClick = {
+                            deleteApn(uriInit, context)
+                            navController.navigateBack()
+                        })
+                }
             }
         },
     ) {
@@ -242,19 +251,6 @@ fun ApnPage(apnDataInit: ApnData, apnDataCur: MutableState<ApnData>, uriInit: Ur
                 emptyVal = stringResource(R.string.network_type_unspecified),
                 enabled = apnData.networkTypeEnabled
             ) {}
-            if (!apnData.newApn && !apnData.customizedConfig.readOnlyApn
-                && apnData.customizedConfig.isAddApnAllowed
-            ) {
-                Preference(
-                    object : PreferenceModel {
-                        override val title = stringResource(R.string.menu_delete)
-                        override val onClick = {
-                            deleteApn(uriInit, context)
-                            navController.navigateBack()
-                        }
-                    }
-                )
-            }
         }
     }
 }
