@@ -11325,7 +11325,23 @@
     <!-- Developer Settings: Search keywords for the Profile HWUI rendering. [CHAR_LIMIT=NONE] -->
     <string name="track_frame_time_keywords">GPU</string>
 
+    <!-- setting Checkbox title whether to boot with 16K page size [CHAR_LIMIT=35] -->
+    <string name="enable_16k_pages">Boot with 16K page size</string>
+    <!-- setting Checkbox summary whether to boot with 16K page size[CHAR_LIMIT=50] -->
+    <string name="enable_16k_pages_summary">Boot device using 16K page size supported kernel</string>
+    <!-- Confirmation dialog title to ensure user wishes to enable 16K page size -->
+    <string name="confirm_enable_16k_pages_title">Reboot with 16KB pages compatible kernel?</string>
+    <!-- Warning dialog message to confirm user wishes to enable 16K page size -->
+    <string name="confirm_enable_16k_pages_text">WARNING: Some applications may not be compatible with this mode. Device will reboot after confirmation.</string>
+    <!-- dialog title to confirm user wishes to revert to 4k page size kernel -->
+    <string name="confirm_enable_4k_pages_title">Reboot with 4KB pages compatible kernel?</string>
+    <!-- dialog message to confirm user wishes to enable 4K page size -->
+    <string name="confirm_enable_4k_pages_text">Device will reboot after confirmation.</string>
+    <!-- Toast message when 16k OTA update fails -->
+    <string name="toast_16k_update_failed_text">Failed to update kernel to 16KB pages compatible kernel.</string>
+    <string name="progress_16k_ota_title">Applying change</string>
     <!-- DSU Loader. Do not translate. -->
+
     <string name="dsu_loader_title" translatable="false">DSU Loader</string>
     <!-- DSU Loader Description. Do not translate. -->
     <string name="dsu_loader_description" translatable="false">Load a Dynamic System Update Image</string>
