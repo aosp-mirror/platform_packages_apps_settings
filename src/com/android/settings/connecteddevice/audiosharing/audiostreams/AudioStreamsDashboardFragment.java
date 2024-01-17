@@ -71,6 +71,7 @@ public class AudioStreamsDashboardFragment extends DashboardFragment {
         super.onAttach(context);
         use(AudioStreamsScanQrCodeController.class).setFragment(this);
         mAudioStreamsProgressCategoryController = use(AudioStreamsProgressCategoryController.class);
+        mAudioStreamsProgressCategoryController.setFragment(this);
     }
 
     @Override
