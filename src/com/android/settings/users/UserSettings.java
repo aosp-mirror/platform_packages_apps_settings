@@ -35,6 +35,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.BlendMode;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
+import android.multiuser.Flags;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -892,13 +893,24 @@ public class UserSettings extends SettingsPreferenceFragment
                                         UserIcons.convertToBitmapAtUserIconSize(
                                                 activity.getResources(), newUserIcon)));
                         mMePreference.setIcon(newUserIcon);
+                        if (Flags.avatarSync()) {
+                            final String pkg = getString(R.string.config_avatar_picker_package);
+                            final String action = pkg + ".set.confirm";
+                            activity.sendBroadcast(new Intent(action).setPackage(pkg));
+                        }
                     }
 
                     if (!TextUtils.isEmpty(newUserName) && !newUserName.equals(user.name)) {
                         mMePreference.setTitle(newUserName);
                         mUserManager.setUserName(user.id, newUserName);
                     }
-                }, null);
+                }, () -> {
+                    if (Flags.avatarSync()) {
+                        final String pkg = getString(R.string.config_avatar_picker_package);
+                        final String action = pkg + ".set.cancel";
+                        activity.sendBroadcast(new Intent(action).setPackage(pkg));
+                    }
+                });
     }
 
     private Dialog buildAddUserDialog(int userType) {
