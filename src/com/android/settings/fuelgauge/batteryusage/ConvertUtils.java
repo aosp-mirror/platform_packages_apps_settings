@@ -479,7 +479,9 @@ public final class ConvertUtils {
         }
     }
 
-    private static BatteryUsageDiff convertToBatteryUsageDiff(BatteryDiffEntry batteryDiffEntry) {
+
+    @VisibleForTesting
+    static BatteryUsageDiff convertToBatteryUsageDiff(BatteryDiffEntry batteryDiffEntry) {
         BatteryUsageDiff.Builder builder =
                 BatteryUsageDiff.newBuilder()
                         .setUid(batteryDiffEntry.mUid)
@@ -496,6 +498,8 @@ public final class ConvertUtils {
                                 batteryDiffEntry.mForegroundServiceUsageConsumePower)
                         .setCachedUsageConsumePower(batteryDiffEntry.mCachedUsageConsumePower)
                         .setForegroundUsageTime(batteryDiffEntry.mForegroundUsageTimeInMs)
+                        .setForegroundServiceUsageTime(
+                                batteryDiffEntry.mForegroundServiceUsageTimeInMs)
                         .setBackgroundUsageTime(batteryDiffEntry.mBackgroundUsageTimeInMs)
                         .setScreenOnTime(batteryDiffEntry.mScreenOnTimeInMs);
         if (batteryDiffEntry.mKey != null) {

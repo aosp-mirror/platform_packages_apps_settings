@@ -20,6 +20,7 @@ import android.content.Context
 import android.content.Intent
 import android.telephony.CarrierConfigManager
 import android.util.Log
+import com.android.settings.network.telephony.safeGetConfig
 
 class ClientInitiatedActionRepository(private val context: Context) {
     private val configManager = context.getSystemService(CarrierConfigManager::class.java)!!
@@ -29,11 +30,13 @@ class ClientInitiatedActionRepository(private val context: Context) {
      */
     fun onSystemUpdate() {
         val bundle =
-            configManager.getConfig(
-                CarrierConfigManager.KEY_CI_ACTION_ON_SYS_UPDATE_BOOL,
-                CarrierConfigManager.KEY_CI_ACTION_ON_SYS_UPDATE_INTENT_STRING,
-                CarrierConfigManager.KEY_CI_ACTION_ON_SYS_UPDATE_EXTRA_STRING,
-                CarrierConfigManager.KEY_CI_ACTION_ON_SYS_UPDATE_EXTRA_VAL_STRING,
+            configManager.safeGetConfig(
+                keys = listOf(
+                    CarrierConfigManager.KEY_CI_ACTION_ON_SYS_UPDATE_BOOL,
+                    CarrierConfigManager.KEY_CI_ACTION_ON_SYS_UPDATE_INTENT_STRING,
+                    CarrierConfigManager.KEY_CI_ACTION_ON_SYS_UPDATE_EXTRA_STRING,
+                    CarrierConfigManager.KEY_CI_ACTION_ON_SYS_UPDATE_EXTRA_VAL_STRING,
+                ),
             )
 
         if (!bundle.getBoolean(CarrierConfigManager.KEY_CI_ACTION_ON_SYS_UPDATE_BOOL)) return

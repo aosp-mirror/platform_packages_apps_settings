@@ -4692,20 +4692,6 @@
             android:permission="android.permission.MANAGE_SLICE_PERMISSIONS"
             android:exported="true" />
 
-        <!-- Couldn't be triggered from outside of settings. Statsd can trigger it because we send
-             PendingIntent to it-->
-        <receiver android:name=".fuelgauge.batterytip.AnomalyDetectionReceiver"
-                  android:exported="false" />
-
-        <service android:name=".fuelgauge.batterytip.AnomalyCleanupJobService"
-                 android:permission="android.permission.BIND_JOB_SERVICE" />
-
-        <service android:name=".fuelgauge.batterytip.AnomalyConfigJobService"
-                 android:permission="android.permission.BIND_JOB_SERVICE" />
-
-        <service android:name=".fuelgauge.batterytip.AnomalyDetectionJobService"
-                 android:permission="android.permission.BIND_JOB_SERVICE" />
-
         <provider
             android:name=".homepage.contextualcards.CardContentProvider"
             android:authorities="${applicationId}.homepage.CardContentProvider"

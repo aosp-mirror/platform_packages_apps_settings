@@ -17,8 +17,6 @@
 package com.android.settings.fuelgauge.batterytip;
 
 import android.app.AppOpsManager;
-import android.app.PendingIntent;
-import android.app.StatsManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.UserHandle;
@@ -111,36 +109,8 @@ public class BatteryTipUtils {
         }
     }
 
-    /**
-     * Upload the {@link PendingIntent} to {@link StatsManager} for anomaly detection
-     *
-     * @throws StatsManager.StatsUnavailableException if failed to communicate with stats service
-     */
-    public static void uploadAnomalyPendingIntent(Context context, StatsManager statsManager)
-            throws StatsManager.StatsUnavailableException {
-        final Intent extraIntent = new Intent(context, AnomalyDetectionReceiver.class);
-        final PendingIntent pendingIntent =
-                PendingIntent.getBroadcast(
-                        context,
-                        REQUEST_CODE,
-                        extraIntent,
-                        PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
-        statsManager.setBroadcastSubscriber(
-                pendingIntent,
-                StatsManagerConfig.ANOMALY_CONFIG_KEY,
-                StatsManagerConfig.SUBSCRIBER_ID);
-    }
-
-    /** Detect and return anomaly apps after {@code timeAfterMs} */
+   /** Detect and return anomaly apps after {@code timeAfterMs} */
     public static List<AppInfo> detectAnomalies(Context context, long timeAfterMs) {
-        final List<AppInfo> highUsageApps =
-                BatteryDatabaseManager.getInstance(context)
-                        .queryAllAnomalies(timeAfterMs, AnomalyDatabaseHelper.State.NEW);
-        // Remove it if it doesn't have label or been restricted
-        highUsageApps.removeIf(
-                AppLabelPredicate.getInstance(context)
-                        .or(AppRestrictionPredicate.getInstance(context)));
-
-        return highUsageApps;
+        return new ArrayList<>();
     }
 }
