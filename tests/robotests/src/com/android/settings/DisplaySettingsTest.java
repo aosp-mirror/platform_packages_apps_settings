@@ -4,15 +4,14 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 
+import androidx.test.core.app.ApplicationProvider;
+
 import com.android.settings.testutils.XmlTestUtils;
-import com.android.settings.testutils.shadow.ShadowPowerManager;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,9 +20,8 @@ import java.util.List;
 public class DisplaySettingsTest {
 
     @Test
-    @Config(shadows = ShadowPowerManager.class)
     public void testPreferenceControllers_getPreferenceKeys_existInPreferenceScreen() {
-        final Context context = RuntimeEnvironment.application;
+        final Context context = ApplicationProvider.getApplicationContext();
         final DisplaySettings fragment = new DisplaySettings();
         final List<String> preferenceScreenKeys = XmlTestUtils.getKeysFromPreferenceXml(context,
                 fragment.getPreferenceScreenResId());
