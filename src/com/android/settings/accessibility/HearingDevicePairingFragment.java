@@ -149,6 +149,7 @@ public class HearingDevicePairingFragment extends RestrictedDashboardFragment im
         for (BluetoothGatt gatt: mConnectingGattList) {
             gatt.disconnect();
         }
+        mConnectingGattList.clear();
         mLocalManager.setForegroundActivity(null);
         mLocalManager.getEventManager().unregisterCallback(this);
     }
