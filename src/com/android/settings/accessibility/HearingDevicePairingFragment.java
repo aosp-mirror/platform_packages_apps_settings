@@ -17,6 +17,7 @@
 package com.android.settings.accessibility;
 
 import static android.app.Activity.RESULT_OK;
+import static android.bluetooth.BluetoothGatt.GATT_SUCCESS;
 import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
 
 import android.app.settings.SettingsEnums;
@@ -461,24 +462,33 @@ public class HearingDevicePairingFragment extends RestrictedDashboardFragment im
                             Log.d(TAG, "onConnectionStateChange, status: " + status + ", newState: "
                                     + newState + ", device: " + cachedDevice);
                         }
-                        if (newState == BluetoothProfile.STATE_CONNECTED) {
+                        if (status == GATT_SUCCESS
+                                && newState == BluetoothProfile.STATE_CONNECTED) {
                             gatt.discoverServices();
+                        } else {
+                            gatt.disconnect();
+                            mConnectingGattList.remove(gatt);
                         }
                     }
 
                     @Override
                     public void onServicesDiscovered(BluetoothGatt gatt, int status) {
                         super.onServicesDiscovered(gatt, status);
-                        boolean isCompatible = gatt.getService(BluetoothUuid.HEARING_AID.getUuid())
-                                != null
-                                || gatt.getService(BluetoothUuid.HAS.getUuid()) != null;
                         if (DEBUG) {
-                            Log.d(TAG,
-                                    "onServicesDiscovered, compatible with Android: " + isCompatible
-                                            + ", device: " + cachedDevice);
+                            Log.d(TAG, "onServicesDiscovered, status: " + status + ", device: "
+                                    + cachedDevice);
                         }
-                        if (isCompatible) {
-                            addDevice(cachedDevice);
+                        if (status == GATT_SUCCESS) {
+                            if (gatt.getService(BluetoothUuid.HEARING_AID.getUuid()) != null
+                                    || gatt.getService(BluetoothUuid.HAS.getUuid()) != null) {
+                                if (DEBUG) {
+                                    Log.d(TAG, "compatible with Android, device: " + cachedDevice);
+                                }
+                                addDevice(cachedDevice);
+                            }
+                        } else {
+                            gatt.disconnect();
+                            mConnectingGattList.remove(gatt);
                         }
                     }
                 });
