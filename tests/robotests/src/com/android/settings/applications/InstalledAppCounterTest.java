@@ -43,6 +43,7 @@ import android.os.UserHandle;
 import android.os.UserManager;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatcher;
@@ -189,11 +190,13 @@ public final class InstalledAppCounterTest {
                 mPackageManager, mApp6)).isFalse();
     }
 
+    @Ignore("b/313578776")
     @Test
     public void testCountInstalledAppsAcrossAllUsersSync() {
         testCountInstalledAppsAcrossAllUsers(false /* async */);
     }
 
+    @Ignore("b/313578776")
     @Test
     public void testCountInstalledAppsAcrossAllUsersAsync() {
         testCountInstalledAppsAcrossAllUsers(true /* async */);

@@ -1114,6 +1114,8 @@
     <string name="security_settings_udfps_enroll_progress_a11y_message">Enrolling fingerprint <xliff:g id="percentage" example="10">%d</xliff:g> percent</string>
     <!-- Title shown in fingerprint enrollment dialog once enrollment is completed [CHAR LIMIT=29] -->
     <string name="security_settings_fingerprint_enroll_finish_title">Fingerprint added</string>
+    <!-- Key for require screen on to auth toggle shown in fingerprint enrollment dialog once enrollment is completed. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_require_screen_on_to_auth_key" translatable="false">security_settings_require_screen_on_to_auth</string>
     <!-- Title for require screen on to auth toggle shown in fingerprint enrollment dialog once enrollment is completed. [CHAR LIMIT=NONE] -->
     <string name="security_settings_require_screen_on_to_auth_title">Touch to unlock anytime</string>
     <!-- Description for require screen on to auth toggle shown in fingerprint enrollment dialog once enrollment is completed. [CHAR LIMIT=NONE] -->
@@ -1229,6 +1231,10 @@
     <string name="private_space_screen_lock_title">Use device screen lock</string>
     <!-- Title for the Face and Fingerprint preference. [CHAR LIMIT=60] -->
     <string name="private_space_biometric_title">Face &amp; Fingerprint Unlock</string>
+    <!-- Title for the Fingerprint preference when face hardware is not supported on device. [CHAR LIMIT=40] -->
+    <string name="private_space_fingerprint_title">Fingerprint Unlock</string>
+    <!-- Title for the Face preference when fingerprint unlock is not supported on device. [CHAR LIMIT=40] -->
+    <string name="private_space_face_title">Face Unlock</string>
     <!-- Summary for the Face and Fingerprint preference when no biometric is set. [CHAR LIMIT=60] -->
     <string name="private_space_biometric_summary">Tap to set up</string>
     <!-- Title for the Fingerprint unlock for private space preference. [CHAR LIMIT=60] -->
@@ -1279,6 +1285,8 @@
     <string name="private_space_deleted">Private Space successfully deleted</string>
     <!-- Toast to show when the private space could not be deleted. [CHAR LIMIT=NONE] -->
     <string name="private_space_delete_failed">Private Space could not be deleted</string>
+    <!-- Toast to show when the private space is unlocked from settings entry point. [CHAR LIMIT=40] -->
+    <string name="private_space_unlocked">Private space unlocked</string>
     <!-- Title of the Alert Dialog when no screen lock is set [CHAR LIMIT=30] -->
     <string name="no_device_lock_title">Set a screen lock</string>
     <!-- Summary of the alert when no screen lock is set [CHAR LIMIT=90] -->
@@ -9605,6 +9613,10 @@
     <string name="permit_voice_activation_apps">Allow voice activation</string>
     <!-- Description for a setting which controls whether an app can be voice activated [CHAR LIMIT=NONE] -->
     <string name ="allow_voice_activation_apps_description">Voice activation turns-on approved apps, hands-free, using voice command. Built-in adaptive sensing ensures data stays private only to you.\n\n<a href="">More about protected adaptive sensing</a></string>
+    <!-- Label for a setting which controls whether an app can receive sandboxed detection training data [CHAR LIMIT=NONE] -->
+    <string name = "permit_receive_sandboxed_detection_training_data">Improve voice activation</string>
+    <!-- Description for a setting which controls whether an app can receive sandboxed detection training data [CHAR LIMIT=NONE] -->
+    <string name= "receive_sandboxed_detection_training_data_description">This device uses private intelligence to improve the voice activation model. Apps can receive summarized updates that are aggregated across many users to maintain privacy while improving the model for everyone.\n\n<a href="">More about private intelligence</a></string>
 
     <!-- Manage full screen intent permission title [CHAR LIMIT=40] -->
     <string name="full_screen_intent_title">Full screen notifications</string>
@@ -10813,8 +10825,36 @@
         ]]>
     </string>
 
+    <!-- Message of the warning dialog for disabling the credential provider (new strings for 24Q3). [CHAR_LIMIT=NONE] -->
+    <string name="credman_confirmation_message_new_ui">
+        <![CDATA[
+        <b>Turn off all services?</b>
+        <br/>
+        <br/>
+        Passwords, passkeys, and other saved info won\'t be available for autofill when you sign in
+        ]]>
+    </string>
+
+    <!-- Message of the warning dialog for setting a new preferred credential provider (new strings for 24Q3). [CHAR_LIMIT=NONE] -->
+    <string name="credman_autofill_confirmation_message_new_ui">
+        <![CDATA[
+        <b>Change your preferred service to <xliff:g id="app_name" example="Provider">%1$s</xliff:g>\?</b>
+        <br/>
+        <br/>
+        New passwords, passkeys, and other info will be saved here from now on.
+        <xliff:g id="app_name" example="Provider">%1$s</xliff:g> may use what\'s on your
+        screen to determine what can be autofilled
+        ]]>
+    </string>
+
     <!-- Title of the warning dialog for enabling the credential provider. [CHAR_LIMIT=NONE] -->
     <string name="credman_enable_confirmation_message_title">Use %1$s\?</string>
+
+    <!-- Title of the error dialog when too many credential providers are selected (new strings for 24Q3). [CHAR_LIMIT=NONE] -->
+    <string name="credman_limit_error_msg_title">You can only have 5 services on</string>
+
+    <!-- Message of the error dialog when too many credential providers are selected (new strings for 24Q3). [CHAR_LIMIT=NONE] -->
+    <string name="credman_limit_error_msg">Turn off at least 1 service to add another</string>
 
     <!-- Message of the warning dialog for enabling the credential provider. [CHAR_LIMIT=NONE] -->
     <string name="credman_enable_confirmation_message">%1$s uses what\'s on your screen to determine what can be autofilled.</string>

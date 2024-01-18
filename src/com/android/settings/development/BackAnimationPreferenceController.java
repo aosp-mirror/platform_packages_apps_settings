@@ -16,7 +16,7 @@
 
 package com.android.settings.development;
 
-import static com.android.window.flags.Flags.predictiveBackSystemAnimations;
+import static com.android.window.flags.Flags.predictiveBackSystemAnims;
 
 import android.content.Context;
 import android.provider.Settings;
@@ -57,7 +57,7 @@ public class BackAnimationPreferenceController extends DeveloperOptionsPreferenc
 
     @Override
     public boolean isAvailable() {
-        return !predictiveBackSystemAnimations();
+        return !predictiveBackSystemAnims();
     }
 
     @Override

@@ -23,8 +23,8 @@ java_library {
 genrule {
     name: "statslog-settings-java-gen",
     tools: ["stats-log-api-gen"],
-    cmd: "$(location stats-log-api-gen) --java $(out) --module settings"
-        + " --javaPackage com.android.settings.core.instrumentation --javaClass SettingsStatsLog",
+    cmd: "$(location stats-log-api-gen) --java $(out) --module settings" +
+        " --javaPackage com.android.settings.core.instrumentation --javaClass SettingsStatsLog",
     out: ["com/android/settings/core/instrumentation/SettingsStatsLog.java"],
 }
 
@@ -48,10 +48,14 @@ android_library {
     platform_apis: true,
     defaults: [
         "SettingsLib-search-defaults",
+        "SettingsLintDefaults",
         "SpaPrivilegedLib-defaults",
     ],
 
-    srcs: ["src/**/*.java", "src/**/*.kt"],
+    srcs: [
+        "src/**/*.java",
+        "src/**/*.kt",
+    ],
     exclude_srcs: [
         "src/com/android/settings/biometrics/fingerprint2/shared/**/*.kt",
     ],
@@ -120,10 +124,6 @@ android_library {
         "telephony-common",
         "ims-common",
     ],
-
-    lint: {
-        extra_check_modules: ["SettingsLibLintChecker"],
-    },
 }
 
 platform_compat_config {

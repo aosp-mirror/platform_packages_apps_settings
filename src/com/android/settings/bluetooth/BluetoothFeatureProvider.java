@@ -22,6 +22,10 @@ import android.content.Context;
 import android.media.Spatializer;
 import android.net.Uri;
 
+import androidx.preference.Preference;
+
+import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+
 import java.util.List;
 
 /**
@@ -60,4 +64,13 @@ public interface BluetoothFeatureProvider {
      * @return the Spatializer instance
      */
     Spatializer getSpatializer(Context context);
+
+    /**
+     * Gets bluetooth device extra options
+     *
+     * @param context Context
+     * @param device the bluetooth device
+     * @return the extra bluetooth preference list
+     */
+    List<Preference> getBluetoothExtraOptions(Context context, CachedBluetoothDevice device);
 }
