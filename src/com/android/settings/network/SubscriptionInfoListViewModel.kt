@@ -32,7 +32,19 @@ class SubscriptionInfoListViewModel(application: Application) : AndroidViewModel
         application.getSystemService(SubscriptionManager::class.java)!!
     private val scope = viewModelScope + Dispatchers.Default
 
+    /**
+     * Getting the active Subscription list
+     */
+    //ToDo: renaming the function name
     val subscriptionInfoListFlow = application.subscriptionsChangedFlow().map {
         SubscriptionUtil.getActiveSubscriptions(subscriptionManager)
+    }.stateIn(scope, SharingStarted.Eagerly, initialValue = emptyList())
+
+    /**
+     * Getting the Selectable SubscriptionInfo List from the SubscriptionManager's
+     * getAvailableSubscriptionInfoList
+     */
+    val selectableSubscriptionInfoListFlow = application.subscriptionsChangedFlow().map {
+        SubscriptionUtil.getSelectableSubscriptionInfoList(application)
     }.stateIn(scope, SharingStarted.Eagerly, initialValue = emptyList())
 }
