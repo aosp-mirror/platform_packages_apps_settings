@@ -72,41 +72,38 @@ data class ApnData(
     val validEnabled: Boolean = false,
     val customizedConfig: CustomizedConfig = CustomizedConfig()
 ) {
+    fun getContentValueMap(context: Context): MutableMap<String, Any> {
+        val simCarrierId =
+            context.getSystemService(TelephonyManager::class.java)!!
+                .createForSubscriptionId(subId)
+                .getSimCarrierId()
+        return mutableMapOf(
+            Telephony.Carriers.NAME to name, Telephony.Carriers.APN to apn,
+            Telephony.Carriers.PROXY to proxy, Telephony.Carriers.PORT to port,
+            Telephony.Carriers.MMSPROXY to mmsProxy, Telephony.Carriers.MMSPORT to mmsPort,
+            Telephony.Carriers.USER to userName, Telephony.Carriers.SERVER to server,
+            Telephony.Carriers.PASSWORD to passWord, Telephony.Carriers.MMSC to mmsc,
+            Telephony.Carriers.AUTH_TYPE to authType,
+            Telephony.Carriers.PROTOCOL to convertOptions2Protocol(apnProtocol, context),
+            Telephony.Carriers.ROAMING_PROTOCOL to convertOptions2Protocol(apnRoaming, context),
+            Telephony.Carriers.TYPE to apnType,
+            Telephony.Carriers.NETWORK_TYPE_BITMASK to networkType,
+            Telephony.Carriers.CARRIER_ENABLED to apnEnable,
+            Telephony.Carriers.EDITED_STATUS to Telephony.Carriers.USER_EDITED,
+            Telephony.Carriers.CARRIER_ID to simCarrierId
+        )
+    }
+
     fun getContentValues(context: Context): ContentValues {
         val values = ContentValues()
-        values.put(Telephony.Carriers.NAME, name)
-        values.put(Telephony.Carriers.APN, apn)
-        values.put(Telephony.Carriers.PROXY, proxy)
-        values.put(Telephony.Carriers.PORT, port)
-        values.put(Telephony.Carriers.MMSPROXY, mmsProxy)
-        values.put(Telephony.Carriers.MMSPORT, mmsPort)
-        values.put(Telephony.Carriers.USER, userName)
-        values.put(Telephony.Carriers.SERVER, server)
-        values.put(Telephony.Carriers.PASSWORD, passWord)
-        values.put(Telephony.Carriers.MMSC, mmsc)
-        values.put(Telephony.Carriers.AUTH_TYPE, authType)
-        values.put(Telephony.Carriers.PROTOCOL, convertOptions2Protocol(apnProtocol, context))
-        values.put(
-            Telephony.Carriers.ROAMING_PROTOCOL,
-            convertOptions2Protocol(apnRoaming, context)
-        )
-        values.put(Telephony.Carriers.TYPE, apnType)
-        values.put(Telephony.Carriers.NETWORK_TYPE_BITMASK, networkType)
-        values.put(Telephony.Carriers.CARRIER_ENABLED, apnEnable)
-        values.put(Telephony.Carriers.EDITED_STATUS, Telephony.Carriers.USER_EDITED)
-        if (newApn) {
-            val simCarrierId =
-                context.getSystemService(TelephonyManager::class.java)!!
-                    .createForSubscriptionId(subId)
-                    .getSimCarrierId()
-            values.put(Telephony.Carriers.CARRIER_ID, simCarrierId)
-        }
+        val contentValueMap = getContentValueMap(context)
+        if (!newApn) contentValueMap.remove(Telephony.Carriers.CARRIER_ID)
+        contentValueMap.forEach { (key, value) -> values.putObject(key, value) }
         return values
     }
 }
 
 data class CustomizedConfig(
-    val newApn: Boolean = false,
     val readOnlyApn: Boolean = false,
     val isAddApnAllowed: Boolean = true,
     val readOnlyApnTypes: List<String> = emptyList(),
@@ -227,20 +224,14 @@ fun getApnDataInit(arguments: Bundle, context: Context, uriInit: Uri, subId: Int
  */
 fun validateAndSaveApnData(
     apnDataInit: ApnData,
-    apnData: ApnData,
+    newApnData: ApnData,
     context: Context,
-    uriInit: Uri,
-    networkTypeSelectedOptionsState: SnapshotStateList<Int>
-): Boolean {
-    // Nothing to do if it's a read only APN
-    if (apnData.customizedConfig.readOnlyApn) {
-        return true
-    }
-    val errorMsg = validateApnData(apnData, context)
+    uriInit: Uri
+): String? {
+    val errorMsg = validateApnData(uriInit, newApnData, context)
     if (errorMsg != null) {
-        return false
+        return errorMsg
     }
-    val newApnData = apnData.copy(networkType = getNetworkType(networkTypeSelectedOptionsState))
     if (newApnData.newApn || (newApnData != apnDataInit)) {
         Log.d(TAG, "[validateAndSaveApnData] newApnData.networkType: ${newApnData.networkType}")
         updateApnDataToDatabase(
@@ -250,7 +241,7 @@ fun validateAndSaveApnData(
             uriInit
         )
     }
-    return true
+    return null
 }
 
 /**
@@ -258,7 +249,7 @@ fun validateAndSaveApnData(
  *
  * @return An error message if the apn data is invalid, otherwise return null.
  */
-fun validateApnData(apnData: ApnData, context: Context): String? {
+fun validateApnData(uri: Uri, apnData: ApnData, context: Context): String? {
     var errorMsg: String?
     val name = apnData.name
     val apn = apnData.apn
@@ -267,11 +258,14 @@ fun validateApnData(apnData: ApnData, context: Context): String? {
     } else if (apn == "") {
         context.resources.getString(R.string.error_apn_empty)
     } else {
-        validateMMSC(apnData.validEnabled, apnData.mmsc, context)
+        validateMMSC(true, apnData.mmsc, context)
+    }
+    if (errorMsg == null) {
+        errorMsg = isItemExist(uri, apnData, context)
     }
     if (errorMsg == null) {
         errorMsg = validateAPNType(
-            apnData.validEnabled,
+            true,
             apnData.apnType,
             apnData.customizedConfig.readOnlyApnTypes,
             context
