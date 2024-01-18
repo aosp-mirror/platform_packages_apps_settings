@@ -28,6 +28,7 @@
     <string name="show_dev_on" msgid="2840850085134853754">"開発者向けオプションが有効になりました"</string>
     <string name="show_dev_already" msgid="7041756429707644630">"開発者向けオプションはすでに有効です"</string>
     <string name="dev_settings_disabled_warning" msgid="6971867026249671244">"まず開発者向けオプションを有効にしてください。"</string>
+    <string name="dev_settings_available_to_admin_only_warning" msgid="3408243404879083111">"デベロッパー向けの設定には管理者ユーザーのみアクセスできます。"</string>
     <string name="header_category_system" msgid="1665516346845259058">"システム"</string>
     <string name="radioInfo_service_in" msgid="9088637745836646271">"圏内"</string>
     <string name="radioInfo_service_out" msgid="1868347333892403287">"圏外"</string>
@@ -551,12 +552,22 @@
     <string name="private_space_one_lock_summary" msgid="2759953747682959371">"デバイスのロック解除と同じ方法でプライベート スペースのロックを解除するか、別のロックを選択できます"</string>
     <string name="private_space_screen_lock_title" msgid="8679383894967823163">"デバイスの画面ロックを使用"</string>
     <string name="private_space_biometric_title" msgid="3934339826674553174">"顔認証と指紋認証によるロック解除"</string>
+    <!-- no translation found for private_space_fingerprint_title (5989254643211889931) -->
+    <skip />
+    <!-- no translation found for private_space_face_title (3290402865367663079) -->
+    <skip />
     <string name="private_space_biometric_summary" msgid="4403837276018724581">"タップして設定してください"</string>
     <string name="private_space_fingerprint_unlock_title" msgid="5804023571114910034">"プライベート スペースの指紋認証"</string>
     <string name="private_space_face_unlock_title" msgid="6613018437620070183">"プライベート スペースの顔認証"</string>
     <string name="private_space_category_ways_to_unlock" msgid="4356631225316950046">"ロック解除方法"</string>
     <string name="private_space_screen_lock_summary" msgid="394837965365561070">"デバイスと同じ画面ロックを使用中"</string>
     <string name="private_space_new_lock_title" msgid="7306873010565337671">"プライベート スペースの新規ロックを選択しますか？"</string>
+    <string name="private_space_auto_lock_title" msgid="4757097802686131305">"自動ロック"</string>
+    <string name="private_space_auto_lock_page_title" msgid="2993714305725968632">"プライベート スペースを自動的にロックする"</string>
+    <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"デバイスを一定時間使用していないときに、プライベート スペースを自動的にロックできます"</string>
+    <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"デバイスのロック時は毎回"</string>
+    <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"操作が行われない状態で 5 分経過後"</string>
+    <string name="private_space_auto_lock_never" msgid="595014527119778873">"なし"</string>
     <string name="private_space_hide_title" msgid="8687034008994037610">"ロック時に表示しない"</string>
     <string name="privatespace_hide_page_title" msgid="972581369094289386">"ロック時にプライベート スペースを表示しない"</string>
     <string name="privatespace_hide_page_summary" msgid="1052569521186403642">"プライベート スペースがデバイスにあることを秘密にするために、アプリのリストで非表示にできます"</string>
@@ -570,6 +581,8 @@
     <string name="private_space_delete_title" msgid="3075645119800272800">"プライベート スペースの削除"</string>
     <string name="private_space_deleted" msgid="7825768516955610897">"プライベート スペースを削除しました"</string>
     <string name="private_space_delete_failed" msgid="8500755484258565011">"プライベート スペースを削除できませんでした"</string>
+    <!-- no translation found for private_space_unlocked (9091600948712932046) -->
+    <skip />
     <string name="no_device_lock_title" msgid="1078223464721029954">"画面ロックの設定"</string>
     <string name="no_device_lock_summary" msgid="7436025227616244687">"プライベート スペースを使用するには、このデバイスで画面ロックを設定してください"</string>
     <string name="no_device_lock_action_label" msgid="2640487005629001288">"画面ロックを設定"</string>
@@ -1407,6 +1420,8 @@
     <string name="menu_save" msgid="6611465355127483100">"保存"</string>
     <string name="menu_cancel" msgid="1197826697950745335">"キャンセル"</string>
     <string name="error_title" msgid="7158648377702417716"></string>
+    <!-- no translation found for error_duplicate_apn_entry (7792928408935276618) -->
+    <skip />
     <string name="error_name_empty" msgid="1258275899283079142">"[名前]フィールドは必須です。"</string>
     <string name="error_apn_empty" msgid="7657491065443746915">"APNは必ず指定してください。"</string>
     <string name="error_mcc_not3" msgid="883659545640179094">"MCC欄は3桁で指定してください。"</string>
@@ -1728,7 +1743,6 @@
     <string name="archiving_failed" msgid="2037798988961634978">"アーカイブできませんでした"</string>
     <string name="archiving_succeeded" msgid="7891249456483297845">"<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> をアーカイブしました"</string>
     <string name="restoring_failed" msgid="3390531747355943533">"復元に失敗しました"</string>
-    <string name="restoring_succeeded" msgid="4967353965137524330">"<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>アプリを復元しました"</string>
     <string name="restoring_in_progress" msgid="7787443682651146115">"<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>アプリを復元しています"</string>
     <string name="another_migration_already_in_progress" msgid="6550546307856052261">"別の移行を既に実行しています。"</string>
     <string name="insufficient_storage" msgid="8115088042669030558">"十分な空き容量がありません。"</string>
@@ -1920,10 +1934,8 @@
     <string name="usage_stats_sort_by_usage_time" msgid="2927310334119998301">"使用時間で並び替え"</string>
     <string name="usage_stats_sort_by_last_time_used" msgid="7039213339779884017">"前回の使用日時で並び替え"</string>
     <string name="usage_stats_sort_by_app_name" msgid="4463833145514850478">"アプリ名で並び替え"</string>
-    <!-- no translation found for last_time_used_label (7589377271406011659) -->
-    <skip />
-    <!-- no translation found for last_time_used_never (2936073559267990034) -->
-    <skip />
+    <string name="last_time_used_label" msgid="7589377271406011659">"最終使用日時"</string>
+    <string name="last_time_used_never" msgid="2936073559267990034">"なし"</string>
     <string name="usage_time_label" msgid="9105343335151559883">"使用時間"</string>
     <string name="accessibility_settings" msgid="4713215774904704682">"ユーザー補助"</string>
     <string name="accessibility_settings_title" msgid="6739115703615065716">"ユーザー補助の設定"</string>
@@ -2493,13 +2505,11 @@
     <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"現在"</string>
     <string name="battery_usage_timestamps_hyphen" msgid="7401188432989043905">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g>～<xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
     <string name="battery_usage_day_and_hour" msgid="1417890420844950881">"<xliff:g id="DAY">%1$s</xliff:g> <xliff:g id="HOUR">%2$s</xliff:g>⁠"</string>
-    <!-- no translation found for battery_usage_time_info_and_battery_level (6732629268310936155) -->
-    <skip />
+    <string name="battery_usage_time_info_and_battery_level" msgid="6732629268310936155">"<xliff:g id="TIME_INFO">%1$s</xliff:g> <xliff:g id="BATTERY_LEVEL">%2$s</xliff:g>"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"バッテリー使用量グラフ"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"バッテリー使用量グラフ（日）"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"バッテリー使用量グラフ（時間）"</string>
-    <!-- no translation found for battery_level_percentage (1433178290838842146) -->
-    <skip />
+    <string name="battery_level_percentage" msgid="1433178290838842146">"バッテリー残量が<xliff:g id="START_PERCENTAGE">%1$s</xliff:g>から<xliff:g id="END_PERCENTAGE">%2$s</xliff:g>に低下しました"</string>
     <string name="battery_usage_breakdown_title_since_last_full_charge" msgid="435006273323199906">"前回のフル充電以降のバッテリー使用量"</string>
     <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"<xliff:g id="SLOT">%s</xliff:g> のバッテリー使用量"</string>
     <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"前回のフル充電以降の利用時間"</string>
@@ -3859,6 +3869,10 @@
     <string name="voice_activation_apps_title" msgid="7130045161611529825">"音声アクティベーション アプリ"</string>
     <string name="permit_voice_activation_apps" msgid="9152780172988949319">"音声アクティベーションを許可する"</string>
     <string name="allow_voice_activation_apps_description" msgid="6369745626995060656">"音声アクティベーション機能により、承認されたアプリを音声コマンドを通じてハンズフリーで有効にできます。組み込みのアダプティブ センシングで、あなた以外にデータが公開されることはありません。\n\n"<a href="">"保護されたアダプティブ センシングの詳細"</a></string>
+    <!-- no translation found for permit_receive_sandboxed_detection_training_data (3929496847420108753) -->
+    <skip />
+    <!-- no translation found for receive_sandboxed_detection_training_data_description (1415687008184625050) -->
+    <skip />
     <string name="full_screen_intent_title" msgid="747270185715224130">"全画面通知"</string>
     <string name="permit_full_screen_intent" msgid="9035367640019960861">"このアプリからの全画面通知を許可する"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"デバイスがロックされているときに通知を全画面に表示することを、このアプリに許可します。アプリはこの設定を、アラーム、着信、緊急通知などを強調するために使用することがあります。"</string>
@@ -4291,7 +4305,15 @@
     <string name="credman_picker_title" msgid="8191267620665129205">"パスワード、パスキー、データのサービス"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"%1$s を OFF にしますか？"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;このサービスを無効にしますか？&lt;/b&gt; &lt;br/&gt; &lt;br/&gt;パスワード、パスキー、お支払い方法などの情報を保存しました。その他の情報はログイン時に入力されません。保存された情報を使用するには、パスワード、パスキー、またはデータのサービスを選択してください。"</string>
+    <!-- no translation found for credman_confirmation_message_new_ui (6126274509951156460) -->
+    <skip />
+    <!-- no translation found for credman_autofill_confirmation_message_new_ui (6222139222478822267) -->
+    <skip />
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"%1$s を使用しますか？"</string>
+    <!-- no translation found for credman_limit_error_msg_title (1525814645803612135) -->
+    <skip />
+    <!-- no translation found for credman_limit_error_msg (2521803280130310063) -->
+    <skip />
     <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"%1$s は自動入力できる情報を判断するために画面上に表示される情報を使用します。"</string>
     <string name="credman_error_message_title" msgid="4099557206946333568">"パスワード、パスキー、データのサービスの上限に達しました"</string>
     <string name="credman_error_message" msgid="8334797097200415449">"一度に有効にできるパスワード、パスキー、データのサービスは 5 個までです。追加するには、いずれかのサービスを OFF にしてください。"</string>
@@ -4461,7 +4483,7 @@
     <string name="mobile_network_sim_name_label" msgid="1452440641628369625">"名前"</string>
     <string name="mobile_network_sim_color_label" msgid="5293944087609632340">"色（対応アプリで使用）"</string>
     <string name="mobile_network_sim_name_rename" msgid="5967588549571582924">"保存"</string>
-    <string name="mobile_network_use_sim_on" msgid="7298332437547707908">"SIM を使用"</string>
+    <string name="mobile_network_use_sim_on" msgid="5333182776279917886">"この SIM を使用する"</string>
     <string name="mobile_network_use_sim_off" msgid="6303281166199670639">"OFF"</string>
     <string name="mobile_network_disable_sim_explanation" msgid="2851862257846773796">"この SIM を無効にするには、SIM カードを取り出してください"</string>
     <string name="mobile_network_tap_to_activate" msgid="4139979375717958102">"<xliff:g id="CARRIER">%1$s</xliff:g> を有効にするにはタップします"</string>
@@ -4520,6 +4542,28 @@
     <string name="sim_action_turn_off" msgid="3506698692916473000">"OFF にする"</string>
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"SIM を有効にできません"</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"SIM をもう一度 ON にしてみてください。問題が解決しない場合は、デバイスを再起動してください。"</string>
+    <string name="sim_onboarding_bottomsheets_title" msgid="143711121394213711">"SIM を設定する"</string>
+    <string name="sim_onboarding_bottomsheets_msg" msgid="7367245016476460849">"モバイル ネットワークの設定を変更して、このデバイスで複数の SIM を使用できるようにします"</string>
+    <string name="sim_onboarding_label_sim_title" msgid="273162565849288273">"SIM のラベルを設定する"</string>
+    <string name="sim_onboarding_label_sim_msg" msgid="5105859235219529056">"通話時、テキスト メッセージの送信時、データの使用時や [設定] 内で、これらのラベルが表示されます"</string>
+    <string name="sim_onboarding_label_sim_dialog_title" msgid="5839073125605286120">"SIM のラベル"</string>
+    <string name="sim_onboarding_label_sim_dialog_label" msgid="9020433985426525185">"ラベル"</string>
+    <string name="sim_onboarding_select_sim_title" msgid="5895262188167744055">"使用する SIM を選択する"</string>
+    <string name="sim_onboarding_select_sim_msg" msgid="5638859405391915048">"同時に 2 つの SIM を使用できます"</string>
+    <string name="sim_onboarding_primary_sim_title" msgid="2793090401371135675">"プライマリ SIM を設定する"</string>
+    <string name="sim_onboarding_primary_sim_msg" msgid="5484656671490558032">"通話、テキスト メッセージ、データ用にデフォルトで使う SIM を選択します"</string>
+    <string name="primary_sim_title" msgid="2508161011657571566">"プライマリ SIM"</string>
+    <string name="primary_sim_calls_title" msgid="4961189133582615685">"通話"</string>
+    <string name="primary_sim_texts_title" msgid="1287584042733097749">"テキスト メッセージ"</string>
+    <string name="primary_sim_automatic_data_title" msgid="1265528923229642480">"自動データ切り替え"</string>
+    <string name="primary_sim_automatic_data_msg" msgid="1612203837010785203">"サービスの対象エリアや提供状況に応じて、いずれかの SIM のデータを使用します"</string>
+    <string name="sim_onboarding_phoneNumber_data_only" msgid="8158409121949373662">"データのみ"</string>
+    <string name="sim_onboarding_setup" msgid="5750393553605388463">"設定"</string>
+    <string name="sim_onboarding_next" msgid="6415025179929475355">"次へ"</string>
+    <string name="sim_onboarding_profressbar_turning_sim_on" msgid="4888545282948732575">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> を ON にしています…"</string>
+    <string name="mobile_network_spn_title" msgid="3053793174495329077">"モバイル ネットワーク"</string>
+    <string name="mobile_network_phone_number_title" msgid="2090794402855021784">"電話番号"</string>
+    <string name="mobile_network_sim_label_color_title" msgid="2401352348041132876">"SIM のラベルと色"</string>
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"ネットワークの有効化"</string>
     <string name="sim_switch_channel_id" msgid="4927038626791837861">"携帯通信会社の切り替え"</string>
     <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> は有効です"</string>
@@ -4615,6 +4659,14 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"仕事に関するポリシーの情報"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"IT 管理者によって管理されている設定"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
+    <string name="enable_16k_pages" msgid="5009476566957520607">"16 KB ページサイズで起動"</string>
+    <string name="enable_16k_pages_summary" msgid="428117226069445198">"16 KB ページサイズのサポートされているカーネルでデバイスを起動します"</string>
+    <string name="confirm_enable_16k_pages_title" msgid="6751570067857011642">"16 KB ページの互換性のあるカーネルで再起動しますか？"</string>
+    <string name="confirm_enable_16k_pages_text" msgid="702888115148257215">"警告: 一部のアプリケーションはこのモードに対応していない可能性があります。確認後にデバイスが再起動します。"</string>
+    <string name="confirm_enable_4k_pages_title" msgid="626987400420355263">"4 KB ページの互換性のあるカーネルで再起動しますか？"</string>
+    <string name="confirm_enable_4k_pages_text" msgid="6168921566226074524">"確認後にデバイスが再起動します。"</string>
+    <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"16 KB ページの互換性のあるカーネルにアップデートできませんでした。"</string>
+    <string name="progress_16k_ota_title" msgid="2117218313875523741">"変更を適用しています"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"バグレポート ハンドラ"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"デバイスでバグレポートのショートカットを処理するアプリを選択します。"</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"個人用"</string>
