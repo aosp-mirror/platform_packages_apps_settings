@@ -469,9 +469,9 @@ public class ChooseLockPattern extends SettingsActivity {
 
         private void updateActivityTitle() {
             final String msg;
-            if (mForFingerprint) {
+            if (mForFingerprint && !shouldShowGenericTitle()) {
                 msg = getString(R.string.lockpassword_choose_your_pattern_header_for_fingerprint);
-            } else if (mForFace) {
+            } else if (mForFace && !shouldShowGenericTitle()) {
                 msg = getString(R.string.lockpassword_choose_your_pattern_header_for_face);
             } else if (mIsManagedProfile) {
                 msg = getContext().getSystemService(DevicePolicyManager.class).getResources()
@@ -484,6 +484,10 @@ public class ChooseLockPattern extends SettingsActivity {
                 msg = getString(R.string.lockpassword_choose_your_pattern_header);
             }
             getActivity().setTitle(msg);
+        }
+
+        protected boolean shouldShowGenericTitle() {
+            return false;
         }
 
         @SuppressLint("ClickableViewAccessibility")
