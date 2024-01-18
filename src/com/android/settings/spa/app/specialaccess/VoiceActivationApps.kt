@@ -56,9 +56,12 @@ class VoiceActivationAppsListModel(context: Context) : AppOpPermissionListModel(
     override val appOp = AppOpsManager.OP_RECEIVE_SANDBOX_TRIGGER_AUDIO
     override val permission = Manifest.permission.RECEIVE_SANDBOX_TRIGGER_AUDIO
     override val setModeByUid = true
-
+    private var receiveDetectionTrainingDataOpController:AppOpsController? = null
     override fun setAllowed(record: AppOpPermissionRecord, newAllowed: Boolean) {
         super.setAllowed(record, newAllowed)
+        if (!newAllowed && receiveDetectionTrainingDataOpController != null) {
+            receiveDetectionTrainingDataOpController!!.setAllowed(false)
+        }
         logPermissionChange(newAllowed)
     }
 
@@ -79,20 +82,21 @@ class VoiceActivationAppsListModel(context: Context) : AppOpPermissionListModel(
         isReceiveSandBoxTriggerAudioOpAllowed: () -> Boolean?
     ): ReceiveDetectionTrainingDataOpSwitchModel {
         val context = LocalContext.current
-        val ReceiveDetectionTrainingDataOpController = remember {
+        receiveDetectionTrainingDataOpController = remember {
             AppOpsController(
                 context = context,
                 app = record.app,
                 op = AppOpsManager.OP_RECEIVE_SANDBOXED_DETECTION_TRAINING_DATA,
             )
         }
-        val isReceiveDetectionTrainingDataOpAllowed = isReceiveDetectionTrainingDataOpAllowed(record, ReceiveDetectionTrainingDataOpController)
+        val isReceiveDetectionTrainingDataOpAllowed = isReceiveDetectionTrainingDataOpAllowed(record, receiveDetectionTrainingDataOpController!!)
+
         return remember(record) {
             ReceiveDetectionTrainingDataOpSwitchModel(
                 context,
                 record,
                 isReceiveSandBoxTriggerAudioOpAllowed,
-                ReceiveDetectionTrainingDataOpController,
+                receiveDetectionTrainingDataOpController!!,
                 isReceiveDetectionTrainingDataOpAllowed,
             )
         }.also { model -> LaunchedEffect(model, Dispatchers.Default) { model.initState() } }
