@@ -25,6 +25,7 @@ import android.content.pm.ServiceInfo;
 import android.credentials.CredentialManager;
 import android.credentials.CredentialProviderInfo;
 import android.credentials.SetEnabledProvidersException;
+import android.credentials.flags.Flags;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -305,14 +306,21 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
     protected CharSequence getConfirmationMessage(CandidateInfo appInfo) {
         // If we are selecting none then show a warning label.
         if (appInfo == null) {
-            final String message = getContext().getString(R.string.credman_confirmation_message);
+            final String message =
+                    getContext()
+                            .getString(
+                                    Flags.newSettingsUi()
+                                            ? R.string.credman_confirmation_message_new_ui
+                                            : R.string.credman_confirmation_message);
             return Html.fromHtml(message);
         }
         final CharSequence appName = appInfo.loadLabel();
         final String message =
                 getContext()
                         .getString(
-                                R.string.credman_autofill_confirmation_message,
+                                Flags.newSettingsUi()
+                                        ? R.string.credman_autofill_confirmation_message_new_ui
+                                        : R.string.credman_autofill_confirmation_message,
                                 Html.escapeHtml(appName));
         return Html.fromHtml(message);
     }

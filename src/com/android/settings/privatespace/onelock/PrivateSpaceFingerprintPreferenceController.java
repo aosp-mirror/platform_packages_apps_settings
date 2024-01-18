@@ -20,8 +20,13 @@ import android.content.Context;
 import android.os.UserHandle;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.Lifecycle;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.biometrics.combination.BiometricFingerprintStatusPreferenceController;
 import com.android.settings.privatespace.PrivateSpaceMaintainer;
 
@@ -63,5 +68,26 @@ public class PrivateSpaceFingerprintPreferenceController
                         && android.multiuser.Flags.enableBiometricsToUnlockPrivateSpace()
                 ? AVAILABLE
                 : UNSUPPORTED_ON_DEVICE;
+    }
+
+    @Override
+    public void updateState(@NonNull Preference preference) {
+        if (mLockPatternUtils.isSeparateProfileChallengeEnabled(getUserId())) {
+            super.updateState(preference);
+            preference.setEnabled(true);
+        } else {
+            preference.setSummary(
+                    mContext.getString(R.string.lock_settings_profile_unified_summary));
+            preference.setEnabled(false);
+        }
+    }
+
+    @Override
+    public void displayPreference(@NonNull PreferenceScreen screen) {
+        super.displayPreference(screen);
+        Preference preference = screen.findPreference(getPreferenceKey());
+        if (!Utils.isMultipleBiometricsSupported(mContext)) {
+            preference.setTitle(R.string.private_space_fingerprint_title);
+        }
     }
 }

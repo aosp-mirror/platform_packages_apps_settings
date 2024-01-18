@@ -75,6 +75,7 @@ import com.android.settings.biometrics2.ui.view.FingerprintEnrollmentActivity;
 import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -635,6 +636,19 @@ public class FingerprintSettings extends SubSettings {
         private void addFingerprintUnlockCategory() {
             mFingerprintUnlockCategory = findPreference(KEY_FINGERPRINT_UNLOCK_CATEGORY);
             setupFingerprintUnlockCategoryPreferences();
+            final Preference restToUnlockPreference = FeatureFactory.getFeatureFactory()
+                    .getFingerprintFeatureProvider()
+                    .getSfpsRestToUnlockFeature(getContext())
+                    .getRestToUnlockPreference(getContext());
+            if (restToUnlockPreference != null) {
+                // Use custom featured preference if any.
+                mRequireScreenOnToAuthPreference.setTitle(restToUnlockPreference.getTitle());
+                mRequireScreenOnToAuthPreference.setSummary(restToUnlockPreference.getSummary());
+                mRequireScreenOnToAuthPreference.setChecked(
+                        ((TwoStatePreference) restToUnlockPreference).isChecked());
+                mRequireScreenOnToAuthPreference.setOnPreferenceChangeListener(
+                        restToUnlockPreference.getOnPreferenceChangeListener());
+            }
             updateFingerprintUnlockCategoryVisibility();
         }
 

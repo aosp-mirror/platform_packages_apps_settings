@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2024 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,27 +12,17 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
  */
 
-package com.android.settings.testutils.shadow;
+package com.android.settings.biometrics.fingerprint.feature
 
-import android.os.PowerManager;
+import android.content.Context
 
-import org.robolectric.annotation.Implementation;
-import org.robolectric.annotation.Implements;
-
-@Implements(PowerManager.class)
-public class ShadowPowerManager {
-
-    @Implementation
-    protected int getMinimumScreenBrightnessSetting() {
-        return 0;
+class SfpsRestToUnlockFeatureImpl : SfpsRestToUnlockFeature {
+    override fun getDescriptionForSfps(context: Context) : String {
+        return context.getString(
+            com.android.settings.R
+                .string.security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message
+        )
     }
-
-    @Implementation
-    protected int getMaximumScreenBrightnessSetting() {
-        return 0;
-    }
-
 }

@@ -24,6 +24,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.privatespace.PrivateSpaceMaintainer;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -71,7 +72,17 @@ public class UseOneLockSettingsFragment extends DashboardFragment {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new UseOneLockControllerSwitch(context, this));
         controllers.add(new PrivateSpaceLockController(context, this));
-        controllers.add(new FaceFingerprintUnlockController(context, getSettingsLifecycle()));
+        if (Utils.isMultipleBiometricsSupported(context)) {
+            controllers.add(new FaceFingerprintUnlockController(context, getSettingsLifecycle()));
+        } else if (Utils.hasFingerprintHardware(context)) {
+            controllers.add(
+                    new PrivateSpaceFingerprintPreferenceController(
+                            context, "private_space_biometrics", getSettingsLifecycle()));
+        } else if (Utils.hasFaceHardware(context)) {
+            controllers.add(
+                    new PrivateSpaceFacePreferenceController(
+                            context, "private_space_biometrics", getSettingsLifecycle()));
+        }
         return controllers;
     }
 

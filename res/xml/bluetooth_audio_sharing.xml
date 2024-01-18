@@ -48,6 +48,10 @@
             android:summary="********"
             android:title="Stream name"
             settings:controller="com.android.settings.connecteddevice.audiosharing.AudioSharingNamePreferenceController" />
+        <SwitchPreferenceCompat
+            android:key="audio_sharing_stream_compatibility"
+            android:title="Improve compatibility"
+            settings:controller="com.android.settings.connecteddevice.audiosharing.AudioSharingCompatibilityPreferenceController" />
     </PreferenceCategory>
 
     <PreferenceCategory
