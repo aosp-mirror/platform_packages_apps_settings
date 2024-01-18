@@ -26,7 +26,6 @@ import static com.android.settings.privatespace.PrivateSpaceSetupActivity.ACCOUN
 import static com.android.settings.privatespace.PrivateSpaceSetupActivity.EXTRA_ACTION_TYPE;
 import static com.android.settings.privatespace.PrivateSpaceSetupActivity.SET_LOCK_ACTION;
 
-import android.app.KeyguardManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -37,6 +36,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
+import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.overlay.FeatureFactory;
@@ -52,9 +52,10 @@ public class PrivateProfileContextHelperActivity extends FragmentActivity {
     private final ActivityResultLauncher<Intent> mAddAccountToPrivateProfile =
             registerForActivityResult(
                     new ActivityResultContracts.StartActivityForResult(), this::onAccountAdded);
-    private final ActivityResultLauncher<Intent> mVerifyDeviceLock =
+    private final ActivityResultLauncher<Intent> mSetNewPrivateProfileLock =
             registerForActivityResult(
-                    new ActivityResultContracts.StartActivityForResult(), this::onSetDeviceNewLock);
+                    new ActivityResultContracts.StartActivityForResult(),
+                    this::onSetNewProfileLockActionCompleted);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +89,7 @@ public class PrivateProfileContextHelperActivity extends FragmentActivity {
         intent.putExtra(
                 EXTRA_KEY_CHOOSE_LOCK_SCREEN_DESCRIPTION,
                 R.string.private_space_lock_setup_description);
-        mVerifyDeviceLock.launch(intent);
+        mSetNewPrivateProfileLock.launch(intent);
     }
 
     private void onAccountAdded(@Nullable ActivityResult result) {
@@ -102,10 +103,12 @@ public class PrivateProfileContextHelperActivity extends FragmentActivity {
         finish();
     }
 
-    private void onSetDeviceNewLock(@Nullable ActivityResult result) {
-        // TODO(b/307281644) : Verify this for biometrics and check result code after new
-        //  Authentication changes are merged.
-        if (result != null && getSystemService(KeyguardManager.class).isDeviceSecure()) {
+    private void onSetNewProfileLockActionCompleted(@Nullable ActivityResult result) {
+        LockPatternUtils lockPatternUtils =
+                FeatureFactory.getFeatureFactory()
+                        .getSecurityFeatureProvider()
+                        .getLockPatternUtils(this);
+        if (result != null && lockPatternUtils.isSeparateProfileChallengeEnabled(getUserId())) {
             Log.i(TAG, "separate private space lock setup success");
             setResult(RESULT_OK);
         } else {
