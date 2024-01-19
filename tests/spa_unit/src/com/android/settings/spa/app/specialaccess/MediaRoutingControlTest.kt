@@ -23,9 +23,11 @@ import android.app.settings.SettingsEnums
 import android.companion.AssociationRequest
 import android.content.Context
 import android.content.pm.ApplicationInfo
+import android.platform.test.flag.junit.SetFlagsRule
 import androidx.lifecycle.MutableLiveData
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.media.flags.Flags
 import com.android.settings.R
 import com.android.settings.testutils.FakeFeatureFactory
 import com.android.settingslib.spaprivileged.model.app.IAppOpsController
@@ -36,16 +38,18 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
+import org.mockito.Mockito.verify
 import org.mockito.Spy
 import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoRule
 import org.mockito.Mockito.`when` as whenever
-import org.mockito.Mockito.verify
 
 @RunWith(AndroidJUnit4::class)
 class MediaRoutingControlTest {
     @get:Rule
     val mockito: MockitoRule = MockitoJUnit.rule()
+
+    @get:Rule val setFlagsRule: SetFlagsRule = SetFlagsRule();
 
     @Spy
     private val context: Context = ApplicationProvider.getApplicationContext()
@@ -143,6 +147,7 @@ class MediaRoutingControlTest {
 
     @Test
     fun isChangeable_permissionRequestedByAppAndWatchCompanionRoleAssigned_shouldReturnTrue() {
+        setFlagsRule.enableFlags(Flags.FLAG_ENABLE_PRIVILEGED_ROUTING_FOR_MEDIA_ROUTING_CONTROL)
         val permissionRequestedRecord =
                 AppOpPermissionRecord(
                         app = ApplicationInfo().apply { packageName = PACKAGE_NAME },
@@ -161,6 +166,7 @@ class MediaRoutingControlTest {
 
     @Test
     fun isChangeable_permissionNotRequestedByAppButWatchCompanionRoleAssigned_shouldReturnFalse() {
+        setFlagsRule.enableFlags(Flags.FLAG_ENABLE_PRIVILEGED_ROUTING_FOR_MEDIA_ROUTING_CONTROL)
         val permissionNotRequestedRecord =
                 AppOpPermissionRecord(
                         app = ApplicationInfo().apply { packageName = PACKAGE_NAME },
@@ -179,6 +185,7 @@ class MediaRoutingControlTest {
 
     @Test
     fun isChangeable_permissionRequestedByAppButWatchCompanionRoleNotAssigned_shouldReturnFalse() {
+        setFlagsRule.enableFlags(Flags.FLAG_ENABLE_PRIVILEGED_ROUTING_FOR_MEDIA_ROUTING_CONTROL)
         val permissionRequestedRecord =
                 AppOpPermissionRecord(
                         app = ApplicationInfo().apply { packageName = PACKAGE_NAME },
@@ -189,6 +196,25 @@ class MediaRoutingControlTest {
                 )
         whenever(mockRoleManager.getRoleHolders(AssociationRequest.DEVICE_PROFILE_WATCH))
                 .thenReturn(listOf("other.package.name"))
+
+        val isSpecialAccessChangeable = listModel.isChangeable(permissionRequestedRecord)
+
+        assertThat(isSpecialAccessChangeable).isFalse()
+    }
+
+    @Test
+    fun isChangeable_withFlagDisabled_shouldReturnFalse() {
+        setFlagsRule.disableFlags(Flags.FLAG_ENABLE_PRIVILEGED_ROUTING_FOR_MEDIA_ROUTING_CONTROL)
+        val permissionRequestedRecord =
+                AppOpPermissionRecord(
+                        app = ApplicationInfo().apply { packageName = PACKAGE_NAME },
+                        hasRequestPermission = true,
+                        hasRequestBroaderPermission = false,
+                        appOpsController =
+                        FakeAppOpsController(fakeMode = AppOpsManager.MODE_DEFAULT),
+                )
+        whenever(mockRoleManager.getRoleHolders(AssociationRequest.DEVICE_PROFILE_WATCH))
+                .thenReturn(listOf(PACKAGE_NAME))
 
         val isSpecialAccessChangeable = listModel.isChangeable(permissionRequestedRecord)
 
