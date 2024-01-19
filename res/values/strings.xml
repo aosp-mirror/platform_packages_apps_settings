@@ -3370,7 +3370,7 @@
     <!-- Erase Euicc dialog and SD card & phone storage settings screen, title for the menu option and checkbox to let user decide whether erase eSIM data together [CHAR LIMIT=50] -->
     <string name="reset_esim_title">Erase eSIMs</string>
     <!-- Erase Euicc dialog and SD card & phone storage settings screen, message for the checkbox to let user decide whether erase eSIM data together [CHAR LIMIT=NONE] -->
-    <string name="reset_esim_desc">This won’t cancel any mobile service plans. To download replacement SIMs, contact your carrier.</string>
+    <string name="reset_esim_desc">This won’t cancel your mobile service plan. To get a replacement SIM, contact your carrier.</string>
 
     <!-- SD card & phone storage settings screen, button on screen after user selects Reset network settings -->
     <string name="reset_network_button_text">Reset settings</string>
@@ -3387,9 +3387,9 @@
     <!-- Reset settings complete toast text [CHAR LIMIT=75] -->
     <string name="reset_network_complete_toast">Network settings have been reset</string>
     <!-- Title of the error message shown when error happens during erase eSIM data [CHAR LIMIT=NONE] -->
-    <string name="reset_esim_error_title">Can\u2019t erase SIMs</string>
+    <string name="reset_esim_error_title">Can\u2019t erase eSIMs</string>
     <!-- Message of the error message shown when error happens during erase eSIM data [CHAR LIMIT=NONE] -->
-    <string name="reset_esim_error_msg">eSIMs can\u2019t be erased due to an error.\n\nRestart your device and try again.</string>
+    <string name="reset_esim_error_msg">Something went wrong and your eSIMs weren\u2019t erased.\n\nRestart your device and try again.</string>
 
     <!-- Main Clear -->
     <!-- Button title to factory data reset the entire device [CHAR LIMIT=NONE] -->
@@ -3405,7 +3405,7 @@
     <!-- SD card & phone storage settings screen, message on screen after user selects Reset phone button [CHAR LIMIT=NONE] -->
     <string name="main_clear_final_desc">All of your personal information and downloaded apps will be deleted. You can\u2019t undo this action.</string>
     <!-- SD card & phone storage settings screen, message on screen after user selects Reset phone button [CHAR LIMIT=NONE] -->
-    <string name="main_clear_final_desc_esim">All of your personal information, including downloaded apps &amp; SIMs, will be deleted. You can\u2019t undo this action.</string>
+    <string name="main_clear_final_desc_esim">All of your personal information, including downloaded apps &amp; eSIMs, will be deleted. You can\u2019t undo this action.</string>
     <!-- Main clear confirmation screen title [CHAR LIMIT=33] -->
     <string name="main_clear_confirm_title">Erase all data?</string>
     <!-- Error message for users that aren't allowed to factory reset [CHAR LIMIT=none] -->
@@ -11362,7 +11362,7 @@
 
     <!-- Mobile network details page. Label for an option that lets the user delete an eSIM from
          the device. [CHAR LIMIT=60] -->
-    <string name="mobile_network_erase_sim">Erase SIM</string>
+    <string name="mobile_network_erase_sim">Erase eSIM</string>
 
     <!-- Title for preferred network type [CHAR LIMIT=NONE] -->
     <string name="preferred_network_mode_title">Preferred network type</string>
@@ -11430,11 +11430,11 @@
     <!-- Title of confirmation dialog asking the user if they want to switch subscription. [CHAR_LIMIT=NONE] -->
     <string name="sim_action_switch_sub_dialog_mep_title">Use <xliff:g id="carrier_name" example="Google Fi">%1$s</xliff:g>?</string>
     <!-- Body text of confirmation dialog for switching subscription that involves switching SIM slots. Indicates that only one SIM can be active at a time. Also that switching will not cancel the user's mobile service plan. [CHAR_LIMIT=NONE] -->
-    <string name="sim_action_switch_sub_dialog_text">Only one SIM can be active at a time.\n\nSwitching to <xliff:g id="to_carrier_name" example="Google Fi">%1$s</xliff:g> won\u2019t cancel your <xliff:g id="from_carrier_name" example="Sprint">%2$s</xliff:g> service.</string>
-    <!-- Body text of confirmation dialog for switching subscription between two eSIM profiles. Indicates that only 1 eSIM can be active at a time. Also that switching will not cancel the user's mobile service plan. [CHAR_LIMIT=NONE] -->
-    <string name="sim_action_switch_sub_dialog_text_downloaded">Only 1 eSIM can be active at a time.\n\nSwitching to <xliff:g id="to_carrier_name" example="Google Fi">%1$s</xliff:g> won\u2019t cancel your <xliff:g id="from_carrier_name" example="Sprint">%2$s</xliff:g> service.</string>
+    <string name="sim_action_switch_sub_dialog_text">Only 1 SIM can be on at a time.\n\nSwitching to <xliff:g id="to_carrier_name" example="Google Fi">%1$s</xliff:g> won\u2019t cancel your <xliff:g id="from_carrier_name" example="Sprint">%2$s</xliff:g> service.</string>
+    <!-- Body text of confirmation dialog for switching subscription between two eSIM profiles. Indicates that only 1 eSIM can be on at a time. Also that switching will not cancel the user's mobile service plan. [CHAR_LIMIT=NONE] -->
+    <string name="sim_action_switch_sub_dialog_text_downloaded">Only 1 eSIM can be on at a time.\n\nSwitching to <xliff:g id="to_carrier_name" example="Google Fi">%1$s</xliff:g> won\u2019t cancel your <xliff:g id="from_carrier_name" example="Sprint">%2$s</xliff:g> service.</string>
     <!-- Body text of confirmation dialog for switching subscription between two eSIM profiles. Indicates that only one SIM can be active at a time. Also that switching will not cancel the user's mobile service plan. [CHAR_LIMIT=NONE] -->
-    <string name="sim_action_switch_sub_dialog_text_single_sim">Only one SIM can be active at a time.\n\nSwitching won\u2019t cancel your <xliff:g id="to_carrier_name" example="Google Fi">%1$s</xliff:g> service.</string>
+    <string name="sim_action_switch_sub_dialog_text_single_sim">Only 1 SIM can be on at a time.\n\nSwitching won\u2019t cancel your <xliff:g id="to_carrier_name" example="Google Fi">%1$s</xliff:g> service.</string>
     <!-- Body text of confirmation dialog for switching subscription between two eSIM profiles. Indicates that only one downloaded SIM can be active at a time. Also that switching will not cancel the user's mobile service plan. [CHAR_LIMIT=NONE] -->
     <string name="sim_action_switch_sub_dialog_mep_text">You can use 2 SIMs at a time. To use <xliff:g id="carrier_name" example="Google Fi">%1$s</xliff:g>, turn off another SIM.</string>
     <!-- Text of confirm button in the confirmation dialog asking the user if they want to switch subscription. [CHAR_LIMIT=NONE] -->
@@ -11585,15 +11585,15 @@
     <!-- Title on confirmation dialog asking the user if they want to erase the eSIM from the device. [CHAR_LIMIT=NONE] -->
     <string name="erase_sim_dialog_title">Erase this eSIM?</string>
     <!-- Body text in confirmation dialog indicating what erasing a SIM entails. [CHAR_LIMIT=NONE] -->
-    <string name="erase_sim_dialog_text">Erasing this SIM removes <xliff:g id="carrier_name_a" example="Google Fi">%1$s</xliff:g> service from this device.\n\nService for <xliff:g id="carrier_name_b" example="Google Fi">%1$s</xliff:g> won\'t be canceled.</string>
+    <string name="erase_sim_dialog_text">This removes <xliff:g id="carrier_name_a" example="Google Fi">%1$s</xliff:g> service from this device, but your <xliff:g id="carrier_name_b" example="Google Fi">%1$s</xliff:g> plan won\'t be canceled.</string>
     <!-- Button label to erase the eSIM [CHAR_LIMIT=20] -->
     <string name="erase_sim_confirm_button">Erase</string>
     <!-- Status message indicating the device is in the process of erasing the SIM. [CHAR_LIMIT=NONE] -->
-    <string name="erasing_sim">Erasing SIM&#8230;</string>
+    <string name="erasing_sim">Erasing eSIM&#8230;</string>
     <!-- Title of error message indicating the device could not erase the SIM. [CHAR_LIMIT=NONE] -->
-    <string name="erase_sim_fail_title">Can\'t erase SIM</string>
+    <string name="erase_sim_fail_title">Can\'t erase eSIM</string>
     <!-- Body text of error message indicating the device could not erase the SIM due to an error. [CHAR_LIMIT=NONE] -->
-    <string name="erase_sim_fail_text">This SIM can\'t be erased due to an error.\n\nRestart your device and try again.</string>
+    <string name="erase_sim_fail_text">Something went wrong and this eSIM wasn\'t erased.\n\nRestart your device and try again.</string>
 
     <!-- Title for Network connection request Dialog [CHAR LIMIT=60] -->
     <string name="network_connection_request_dialog_title">Connect to device</string>
@@ -11998,9 +11998,9 @@
     <!-- Provider Model: title of eSIMs category. [CHAR LIMIT=50] -->
     <string name="downloaded_sims_category_title">eSIMs</string>
     <!-- Provider Model: summary of Active in SIM category. [CHAR LIMIT=50] -->
-    <string name="sim_category_active_sim">Active</string>
+    <string name="sim_category_active_sim">On</string>
     <!-- Provider Model: summary of Inactive in SIM category. [CHAR LIMIT=50] -->
-    <string name="sim_category_inactive_sim">Inactive</string>
+    <string name="sim_category_inactive_sim">Off</string>
     <!-- Provider Model: summary of default config. [CHAR LIMIT=50] -->
     <string name="sim_category_default_active_sim">\u0020/ Default for <xliff:g name="default_sim_config" example=" / Default for calls">%1$s</xliff:g></string>
     <!-- Provider Model: summary of default call. [CHAR LIMIT=50] -->
