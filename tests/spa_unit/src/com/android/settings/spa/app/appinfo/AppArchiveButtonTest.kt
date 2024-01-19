@@ -136,8 +136,7 @@ class AppArchiveButtonTest {
 
         verify(packageInstaller).requestArchive(
             eq(PACKAGE_NAME),
-            any(),
-            eq(0)
+            any()
         )
     }
 

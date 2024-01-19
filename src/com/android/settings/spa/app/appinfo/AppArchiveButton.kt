@@ -104,7 +104,7 @@ class AppArchiveButton(
             userHandle
         )
         try {
-            packageInstaller.requestArchive(app.packageName, pendingIntent.intentSender, 0)
+            packageInstaller.requestArchive(app.packageName, pendingIntent.intentSender)
         } catch (e: Exception) {
             Log.e(LOG_TAG, "Request archive failed", e)
             Toast.makeText(

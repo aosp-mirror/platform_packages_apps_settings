@@ -5036,6 +5036,12 @@
             android:authorities="${applicationId}.androidx-startup"
             tools:node="remove" />
 
+        <activity
+            android:name="com.android.settings.network.WepNetworkDialogActivity"
+            android:exported="false"
+            android:theme="@style/Theme.SpaLib.Dialog">
+        </activity>
+
         <!-- This is the longest AndroidManifest.xml ever. -->
     </application>
 </manifest>
