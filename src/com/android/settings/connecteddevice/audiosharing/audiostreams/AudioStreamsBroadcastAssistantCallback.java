@@ -24,20 +24,11 @@ import android.util.Log;
 
 import com.android.settingslib.bluetooth.BluetoothUtils;
 
-import java.util.Locale;
-
 public class AudioStreamsBroadcastAssistantCallback
         implements BluetoothLeBroadcastAssistant.Callback {
 
     private static final String TAG = "AudioStreamsBroadcastAssistantCallback";
     private static final boolean DEBUG = BluetoothUtils.D;
-
-    private final AudioStreamsProgressCategoryController mCategoryController;
-
-    public AudioStreamsBroadcastAssistantCallback(
-            AudioStreamsProgressCategoryController audioStreamsProgressCategoryController) {
-        mCategoryController = audioStreamsProgressCategoryController;
-    }
 
     @Override
     public void onReceiveStateChanged(
@@ -52,45 +43,30 @@ public class AudioStreamsBroadcastAssistantCallback
                             + " state: "
                             + state);
         }
-        mCategoryController.handleSourceConnected(state);
     }
 
     @Override
     public void onSearchStartFailed(int reason) {
         Log.w(TAG, "onSearchStartFailed() reason : " + reason);
-        mCategoryController.showToast(
-                String.format(Locale.US, "Failed to start scanning, reason %d", reason));
     }
 
     @Override
     public void onSearchStarted(int reason) {
-        if (mCategoryController == null) {
-            Log.w(TAG, "onSearchStarted() : mCategoryController is null!");
-            return;
-        }
         if (DEBUG) {
             Log.d(TAG, "onSearchStarted() reason : " + reason);
         }
-        mCategoryController.setScanning(true);
     }
 
     @Override
     public void onSearchStopFailed(int reason) {
         Log.w(TAG, "onSearchStopFailed() reason : " + reason);
-        mCategoryController.showToast(
-                String.format(Locale.US, "Failed to stop scanning, reason %d", reason));
     }
 
     @Override
     public void onSearchStopped(int reason) {
-        if (mCategoryController == null) {
-            Log.w(TAG, "onSearchStopped() : mCategoryController is null!");
-            return;
-        }
         if (DEBUG) {
             Log.d(TAG, "onSearchStopped() reason : " + reason);
         }
-        mCategoryController.setScanning(false);
     }
 
     @Override
@@ -106,8 +82,6 @@ public class AudioStreamsBroadcastAssistantCallback
                             + " reason: "
                             + reason);
         }
-        mCategoryController.showToast(
-                String.format(Locale.US, "Failed to join broadcast, reason %d", reason));
     }
 
     @Override
@@ -126,14 +100,9 @@ public class AudioStreamsBroadcastAssistantCallback
 
     @Override
     public void onSourceFound(BluetoothLeBroadcastMetadata source) {
-        if (mCategoryController == null) {
-            Log.w(TAG, "onSourceFound() : mCategoryController is null!");
-            return;
-        }
         if (DEBUG) {
             Log.d(TAG, "onSourceFound() broadcastId : " + source.getBroadcastId());
         }
-        mCategoryController.handleSourceFound(source);
     }
 
     @Override
@@ -141,7 +110,6 @@ public class AudioStreamsBroadcastAssistantCallback
         if (DEBUG) {
             Log.d(TAG, "onSourceLost() broadcastId : " + broadcastId);
         }
-        mCategoryController.handleSourceLost(broadcastId);
     }
 
     @Override
@@ -153,12 +121,6 @@ public class AudioStreamsBroadcastAssistantCallback
     @Override
     public void onSourceRemoveFailed(BluetoothDevice sink, int sourceId, int reason) {
         Log.w(TAG, "onSourceRemoveFailed() sourceId : " + sourceId + " reason : " + reason);
-        mCategoryController.showToast(
-                String.format(
-                        Locale.US,
-                        "Failed to remove source %d for sink %s",
-                        sourceId,
-                        sink.getAddress()));
     }
 
     @Override
@@ -166,8 +128,5 @@ public class AudioStreamsBroadcastAssistantCallback
         if (DEBUG) {
             Log.d(TAG, "onSourceRemoved() sourceId : " + sourceId + " reason : " + reason);
         }
-        mCategoryController.showToast(
-                String.format(
-                        Locale.US, "Source %d removed for sink %s", sourceId, sink.getAddress()));
     }
 }

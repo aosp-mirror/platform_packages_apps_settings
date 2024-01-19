@@ -74,6 +74,9 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
                 }
             };
 
+    private final AudioStreamsRepository mAudioStreamsRepository =
+            AudioStreamsRepository.getInstance();
+
     enum AudioStreamState {
         // When mTimedSourceFromQrCode is present and this source has not been synced.
         WAIT_FOR_SYNC,
@@ -86,7 +89,7 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
     }
 
     private final Executor mExecutor;
-    private final AudioStreamsBroadcastAssistantCallback mBroadcastAssistantCallback;
+    private final AudioStreamsProgressCategoryCallback mBroadcastAssistantCallback;
     private final AudioStreamsHelper mAudioStreamsHelper;
     private final @Nullable LocalBluetoothLeBroadcastAssistant mLeBroadcastAssistant;
     private final @Nullable LocalBluetoothManager mBluetoothManager;
@@ -102,7 +105,7 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
         mBluetoothManager = Utils.getLocalBtManager(mContext);
         mAudioStreamsHelper = new AudioStreamsHelper(mBluetoothManager);
         mLeBroadcastAssistant = mAudioStreamsHelper.getLeBroadcastAssistant();
-        mBroadcastAssistantCallback = new AudioStreamsBroadcastAssistantCallback(this);
+        mBroadcastAssistantCallback = new AudioStreamsProgressCategoryCallback(this);
     }
 
     @Override
@@ -170,6 +173,7 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
                                                 source, (AudioStreamPreference) preference));
                     } else {
                         mAudioStreamsHelper.addSource(source);
+                        mAudioStreamsRepository.cacheMetadata(source);
                         ((AudioStreamPreference) preference)
                                 .setAudioStreamState(AudioStreamState.WAIT_FOR_SOURCE_ADD);
                         updatePreferenceConnectionState(
@@ -202,6 +206,7 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
                             return v;
                         }
                         mAudioStreamsHelper.addSource(pendingSource);
+                        mAudioStreamsRepository.cacheMetadata(pendingSource);
                         mTimedSourceFromQrCode.consumed();
                         v.setAudioStreamState(AudioStreamState.WAIT_FOR_SOURCE_ADD);
                         updatePreferenceConnectionState(
@@ -236,6 +241,7 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
                     var fromState = v.getAudioStreamState();
                     if (fromState == AudioStreamState.SYNCED) {
                         mAudioStreamsHelper.addSource(metadataFromQrCode);
+                        mAudioStreamsRepository.cacheMetadata(metadataFromQrCode);
                         mTimedSourceFromQrCode.consumed();
                         v.setAudioStreamState(AudioStreamState.WAIT_FOR_SOURCE_ADD);
                         updatePreferenceConnectionState(
@@ -302,6 +308,16 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
                             v, sourceAddedState, p -> launchDetailFragment(broadcastIdConnected));
                     return v;
                 });
+        // Saved connected metadata for user to re-join this broadcast later.
+        var unused =
+                ThreadUtils.postOnBackgroundThread(
+                        () -> {
+                            var cached =
+                                    mAudioStreamsRepository.getCachedMetadata(broadcastIdConnected);
+                            if (cached != null) {
+                                mAudioStreamsRepository.saveMetadata(mContext, cached);
+                            }
+                        });
     }
 
     private static String getPreferenceSummary(AudioStreamState state) {
@@ -457,11 +473,13 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
                                                                     R.id.broadcast_edit_text))
                                                     .getText()
                                                     .toString();
-                                    mAudioStreamsHelper.addSource(
+                                    var metadata =
                                             new BluetoothLeBroadcastMetadata.Builder(source)
                                                     .setBroadcastCode(
                                                             code.getBytes(StandardCharsets.UTF_8))
-                                                    .build());
+                                                    .build();
+                                    mAudioStreamsHelper.addSource(metadata);
+                                    mAudioStreamsRepository.cacheMetadata(metadata);
                                     preference.setAudioStreamState(
                                             AudioStreamState.WAIT_FOR_SOURCE_ADD);
                                     updatePreferenceConnectionState(

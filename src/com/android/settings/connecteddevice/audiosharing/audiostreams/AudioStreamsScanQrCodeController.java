@@ -16,7 +16,6 @@
 
 package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
-import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.content.Intent;
@@ -122,10 +121,6 @@ public class AudioStreamsScanQrCodeController extends BasePreferenceController
                     }
                     return false;
                 });
-    }
-
-    void addSource(BluetoothLeBroadcastMetadata source) {
-        mAudioStreamsHelper.addSource(source);
     }
 
     private void updateVisibility() {
