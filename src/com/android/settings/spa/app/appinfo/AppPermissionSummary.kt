@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022 The Android Open Source Project
+ * Copyright (C) 2024 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,18 +18,22 @@ package com.android.settings.spa.app.appinfo
 
 import android.content.Context
 import android.content.pm.ApplicationInfo
-import android.content.pm.PackageManager.OnPermissionsChangedListener
 import android.icu.text.ListFormatter
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
-import androidx.lifecycle.LiveData
 import com.android.settings.R
 import com.android.settingslib.applications.PermissionsSummaryHelper
-import com.android.settingslib.applications.PermissionsSummaryHelper.PermissionsResultCallback
 import com.android.settingslib.spa.framework.util.formatString
 import com.android.settingslib.spaprivileged.framework.common.asUser
+import com.android.settingslib.spaprivileged.model.app.permissionsChangedFlow
 import com.android.settingslib.spaprivileged.model.app.userHandle
+import kotlin.coroutines.resume
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.suspendCancellableCoroutine
 
 data class AppPermissionSummaryState(
     val summary: String,
@@ -37,58 +41,40 @@ data class AppPermissionSummaryState(
 )
 
 @Composable
-fun rememberAppPermissionSummary(app: ApplicationInfo): AppPermissionSummaryLiveData {
+fun rememberAppPermissionSummary(app: ApplicationInfo): Flow<AppPermissionSummaryState> {
     val context = LocalContext.current
-    return remember(app) { AppPermissionSummaryLiveData(context, app) }
+    return remember(app) { AppPermissionSummaryRepository(context, app).flow }
 }
 
-class AppPermissionSummaryLiveData(
+class AppPermissionSummaryRepository(
     private val context: Context,
     private val app: ApplicationInfo,
-) : LiveData<AppPermissionSummaryState>() {
+) {
     private val userContext = context.asUser(app.userHandle)
-    private val userPackageManager = userContext.packageManager
 
-    private val onPermissionsChangedListener = OnPermissionsChangedListener { uid ->
-        if (uid == app.uid) update()
-    }
+    val flow = context.permissionsChangedFlow(app)
+        .map { getPermissionSummary() }
+        .flowOn(Dispatchers.Default)
 
-    override fun onActive() {
-        userPackageManager.addOnPermissionsChangeListener(onPermissionsChangedListener)
-        if (app.isArchived) {
-            postValue(noPermissionRequestedState())
-        } else {
-            update()
-        }
-    }
-
-    override fun onInactive() {
-        userPackageManager.removeOnPermissionsChangeListener(onPermissionsChangedListener)
-    }
-
-    private fun update() {
+    private suspend fun getPermissionSummary() = suspendCancellableCoroutine { continuation ->
         PermissionsSummaryHelper.getPermissionSummary(
-            userContext, app.packageName, permissionsCallback
-        )
-    }
-
-    private val permissionsCallback = object : PermissionsResultCallback {
-        override fun onPermissionSummaryResult(
-            requestedPermissionCount: Int,
+            userContext,
+            app.packageName,
+        ) { requestedPermissionCount: Int,
             additionalGrantedPermissionCount: Int,
-            grantedGroupLabels: List<CharSequence>,
-        ) {
-            if (requestedPermissionCount == 0) {
-                postValue(noPermissionRequestedState())
-                return
-            }
-            val labels = getDisplayLabels(additionalGrantedPermissionCount, grantedGroupLabels)
-            val summary = if (labels.isNotEmpty()) {
-                ListFormatter.getInstance().format(labels)
+            grantedGroupLabels: List<CharSequence> ->
+            val summaryState = if (requestedPermissionCount == 0) {
+                noPermissionRequestedState()
             } else {
-                context.getString(R.string.runtime_permissions_summary_no_permissions_granted)
+                val labels = getDisplayLabels(additionalGrantedPermissionCount, grantedGroupLabels)
+                val summary = if (labels.isNotEmpty()) {
+                    ListFormatter.getInstance().format(labels)
+                } else {
+                    context.getString(R.string.runtime_permissions_summary_no_permissions_granted)
+                }
+                AppPermissionSummaryState(summary = summary, enabled = true)
             }
-            postValue(AppPermissionSummaryState(summary = summary, enabled = true))
+            continuation.resume(summaryState)
         }
     }
 
@@ -100,15 +86,14 @@ class AppPermissionSummaryLiveData(
     private fun getDisplayLabels(
         additionalGrantedPermissionCount: Int,
         grantedGroupLabels: List<CharSequence>,
-    ): List<CharSequence> = when (additionalGrantedPermissionCount) {
-        0 -> grantedGroupLabels
-        else -> {
-            grantedGroupLabels +
-                // N additional permissions.
-                context.formatString(
-                    R.string.runtime_permissions_additional_count,
-                    "count" to additionalGrantedPermissionCount,
-                )
-        }
+    ): List<CharSequence> = if (additionalGrantedPermissionCount == 0) {
+        grantedGroupLabels
+    } else {
+        grantedGroupLabels +
+            // N additional permissions.
+            context.formatString(
+                R.string.runtime_permissions_additional_count,
+                "count" to additionalGrantedPermissionCount,
+            )
     }
 }
