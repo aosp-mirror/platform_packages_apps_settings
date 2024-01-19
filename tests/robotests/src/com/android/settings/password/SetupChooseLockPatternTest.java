@@ -221,6 +221,14 @@ public class SetupChooseLockPatternTest {
     }
 
     @Test
+    public void createActivity_patternTitle_shouldShowGenericText() {
+        final CharSequence headerView = mActivity.getTitle();
+
+        assertThat(headerView).isEqualTo(
+                application.getString(R.string.lockpassword_choose_your_pattern_header));
+    }
+
+    @Test
     public void inIntroductionStage_theHeaderHeight_shouldSetMinLinesTwoToPreventFlicker() {
         final PartnerCustomizationLayout layout = mActivity.findViewById(R.id.setup_wizard_layout);
         final TextView headerView = layout.findViewById(R.id.sud_layout_subtitle);

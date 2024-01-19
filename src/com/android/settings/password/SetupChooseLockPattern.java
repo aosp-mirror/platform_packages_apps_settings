@@ -161,6 +161,11 @@ public class SetupChooseLockPattern extends ChooseLockPattern {
         }
 
         @Override
+        protected boolean shouldShowGenericTitle() {
+            return true;
+        }
+
+        @Override
         protected Intent getRedactionInterstitialIntent(Context context) {
             // Setup wizard's redaction interstitial is deferred to optional step. Enable that
             // optional step if the lock screen was set up.
