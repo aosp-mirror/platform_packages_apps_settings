@@ -153,7 +153,8 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         mPreferenceGroupKey = preferenceGroupKey;
         mStartOrder = startOrder;
         mTelephonyManager = context.getSystemService(TelephonyManager.class);
-        mSubscriptionManager = context.getSystemService(SubscriptionManager.class);
+        mSubscriptionManager = context.getSystemService(SubscriptionManager.class)
+                .createForAllUserProfiles();
         mWifiManager = context.getSystemService(WifiManager.class);
         mSubscriptionPreferences = new ArrayMap<>();
         mSubscriptionsListener = new SubscriptionsChangeListener(context, this);

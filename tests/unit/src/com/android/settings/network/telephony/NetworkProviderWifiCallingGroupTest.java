@@ -37,7 +37,6 @@ import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
-import android.util.FeatureFlagUtils;
 
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceManager;
@@ -100,6 +99,7 @@ public class NetworkProviderWifiCallingGroupTest {
         when(mContext.getSystemService(CarrierConfigManager.class)).thenReturn(
                 mCarrierConfigManager);
         when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
+        when(mSubscriptionManager.createForAllUserProfiles()).thenReturn(mSubscriptionManager);
         when(mContext.getSystemService(TelecomManager.class)).thenReturn(mTelecomManager);
         when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
         when(mTelephonyManager.createForSubscriptionId(SUB_ID)).thenReturn(mTelephonyManager);

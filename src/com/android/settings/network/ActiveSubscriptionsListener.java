@@ -174,7 +174,8 @@ public abstract class ActiveSubscriptionsListener
      */
     public SubscriptionManager getSubscriptionManager() {
         if (mSubscriptionManager == null) {
-            mSubscriptionManager = mContext.getSystemService(SubscriptionManager.class);
+            mSubscriptionManager = mContext.getSystemService(SubscriptionManager.class)
+                    .createForAllUserProfiles();
         }
         return mSubscriptionManager;
     }
