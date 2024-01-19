@@ -16,6 +16,8 @@
 
 package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
+import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsScanQrCodeController.REQUEST_SCAN_BT_BROADCAST_QR_CODE;
+
 import static java.util.Collections.emptyList;
 
 import android.app.AlertDialog;
@@ -43,8 +45,10 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.connecteddevice.audiosharing.AudioSharingUtils;
+import com.android.settings.connecteddevice.audiosharing.audiostreams.qrcode.QrCodeScanModeActivity;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settingslib.bluetooth.BluetoothBroadcastUtils;
 import com.android.settingslib.bluetooth.BluetoothCallback;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
@@ -75,16 +79,56 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
                 }
             };
 
+    private final Preference.OnPreferenceClickListener mAddSourceOrShowDialog =
+            preference -> {
+                var p = (AudioStreamPreference) preference;
+                if (DEBUG) {
+                    Log.d(
+                            TAG,
+                            "preferenceClicked(): attempt to join broadcast id : "
+                                    + p.getAudioStreamBroadcastId());
+                }
+                var source = p.getAudioStreamMetadata();
+                if (source != null) {
+                    if (source.isEncrypted()) {
+                        ThreadUtils.postOnMainThread(() -> launchPasswordDialog(source, p));
+                    } else {
+                        moveToState(p, AudioStreamState.ADD_SOURCE_WAIT_FOR_RESPONSE);
+                    }
+                }
+                return true;
+            };
+
+    private final Preference.OnPreferenceClickListener mLaunchDetailFragment =
+            preference -> {
+                var p = (AudioStreamPreference) preference;
+                Bundle broadcast = new Bundle();
+                broadcast.putString(
+                        AudioStreamDetailsFragment.BROADCAST_NAME_ARG, (String) p.getTitle());
+                broadcast.putInt(
+                        AudioStreamDetailsFragment.BROADCAST_ID_ARG, p.getAudioStreamBroadcastId());
+
+                new SubSettingLauncher(mContext)
+                        .setTitleText("Audio stream details")
+                        .setDestination(AudioStreamDetailsFragment.class.getName())
+                        // TODO(chelseahao): Add logging enum
+                        .setSourceMetricsCategory(SettingsEnums.PAGE_UNKNOWN)
+                        .setArguments(broadcast)
+                        .launch();
+                return true;
+            };
+
     private final AudioStreamsRepository mAudioStreamsRepository =
             AudioStreamsRepository.getInstance();
 
     enum AudioStreamState {
+        UNKNOWN,
         // When mTimedSourceFromQrCode is present and this source has not been synced.
         WAIT_FOR_SYNC,
         // When source has been synced but not added to any sink.
         SYNCED,
         // When addSource is called for this source and waiting for response.
-        WAIT_FOR_SOURCE_ADD,
+        ADD_SOURCE_WAIT_FOR_RESPONSE,
         // Source is added to active sink.
         SOURCE_ADDED,
     }
@@ -105,7 +149,7 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
     private final @Nullable LocalBluetoothManager mBluetoothManager;
     private final ConcurrentHashMap<Integer, AudioStreamPreference> mBroadcastIdToPreferenceMap =
             new ConcurrentHashMap<>();
-    private TimedSourceFromQrCode mTimedSourceFromQrCode;
+    private @Nullable TimedSourceFromQrCode mTimedSourceFromQrCode;
     private AudioStreamsProgressCategoryPreference mCategoryPreference;
     private AudioStreamsDashboardFragment mFragment;
 
@@ -168,42 +212,18 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
     }
 
     void handleSourceFound(BluetoothLeBroadcastMetadata source) {
-        Preference.OnPreferenceClickListener addSourceOrShowDialog =
-                preference -> {
-                    if (DEBUG) {
-                        Log.d(
-                                TAG,
-                                "preferenceClicked(): attempt to join broadcast id : "
-                                        + source.getBroadcastId());
-                    }
-                    if (source.isEncrypted()) {
-                        ThreadUtils.postOnMainThread(
-                                () ->
-                                        launchPasswordDialog(
-                                                source, (AudioStreamPreference) preference));
-                    } else {
-                        mAudioStreamsHelper.addSource(source);
-                        mAudioStreamsRepository.cacheMetadata(source);
-                        ((AudioStreamPreference) preference)
-                                .setAudioStreamState(AudioStreamState.WAIT_FOR_SOURCE_ADD);
-                        updatePreferenceConnectionState(
-                                (AudioStreamPreference) preference,
-                                AudioStreamState.WAIT_FOR_SOURCE_ADD,
-                                null);
-                    }
-                    return true;
-                };
-
         var broadcastIdFound = source.getBroadcastId();
         mBroadcastIdToPreferenceMap.compute(
                 broadcastIdFound,
                 (k, v) -> {
                     if (v == null) {
-                        return addNewPreference(
-                                source, AudioStreamState.SYNCED, addSourceOrShowDialog);
+                        // No existing preference for this source founded, add one and set initial
+                        // state to SYNCED.
+                        return addNewPreference(source, AudioStreamState.SYNCED);
                     }
                     var fromState = v.getAudioStreamState();
-                    if (fromState == AudioStreamState.WAIT_FOR_SYNC) {
+                    if (fromState == AudioStreamState.WAIT_FOR_SYNC
+                            && mTimedSourceFromQrCode != null) {
                         var pendingSource = mTimedSourceFromQrCode.get();
                         if (pendingSource == null) {
                             Log.w(
@@ -212,16 +232,20 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
                                             + fromState
                                             + " for broadcastId : "
                                             + broadcastIdFound);
-                            v.setAudioStreamState(AudioStreamState.SYNCED);
+                            v.setAudioStreamMetadata(source);
+                            moveToState(v, AudioStreamState.SYNCED);
                             return v;
                         }
-                        mAudioStreamsHelper.addSource(pendingSource);
-                        mAudioStreamsRepository.cacheMetadata(pendingSource);
-                        mTimedSourceFromQrCode.consumed();
-                        v.setAudioStreamState(AudioStreamState.WAIT_FOR_SOURCE_ADD);
-                        updatePreferenceConnectionState(
-                                v, AudioStreamState.WAIT_FOR_SOURCE_ADD, null);
+                        // A preference with source founded is existed from a QR code scan. As the
+                        // source is now synced, we update the preference with pendingSource from QR
+                        // code scan and add source with it (since it has the password).
+                        v.setAudioStreamMetadata(pendingSource);
+                        moveToState(v, AudioStreamState.ADD_SOURCE_WAIT_FOR_RESPONSE);
                     } else {
+                        // A preference with source founded existed either because it's already
+                        // connected (SOURCE_ADDED), or other unexpected reason. We update the
+                        // preference with this source and won't change it's state.
+                        v.setAudioStreamMetadata(source);
                         if (fromState != AudioStreamState.SOURCE_ADDED) {
                             Log.w(
                                     TAG,
@@ -244,19 +268,18 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
                 metadataFromQrCode.getBroadcastId(),
                 (k, v) -> {
                     if (v == null) {
-                        mTimedSourceFromQrCode.waitForConsume();
-                        return addNewPreference(
-                                metadataFromQrCode, AudioStreamState.WAIT_FOR_SYNC, null);
+                        // No existing preference for this source from the QR code scan, add one and
+                        // set initial state to WAIT_FOR_SYNC.
+                        return addNewPreference(metadataFromQrCode, AudioStreamState.WAIT_FOR_SYNC);
                     }
                     var fromState = v.getAudioStreamState();
                     if (fromState == AudioStreamState.SYNCED) {
-                        mAudioStreamsHelper.addSource(metadataFromQrCode);
-                        mAudioStreamsRepository.cacheMetadata(metadataFromQrCode);
-                        mTimedSourceFromQrCode.consumed();
-                        v.setAudioStreamState(AudioStreamState.WAIT_FOR_SOURCE_ADD);
-                        updatePreferenceConnectionState(
-                                v, AudioStreamState.WAIT_FOR_SOURCE_ADD, null);
+                        // A preference with source from the QR code is existed because it has been
+                        // founded during scanning, now we have the password, we can add source.
+                        v.setAudioStreamMetadata(metadataFromQrCode);
+                        moveToState(v, AudioStreamState.ADD_SOURCE_WAIT_FOR_RESPONSE);
                     } else {
+                        v.setAudioStreamMetadata(metadataFromQrCode);
                         Log.w(
                                 TAG,
                                 "handleSourceFromQrCode(): unexpected state : "
@@ -281,62 +304,69 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
         mAudioStreamsHelper.removeSource(broadcastId);
     }
 
+    void handleSourceRemoved() {
+        for (var entry : mBroadcastIdToPreferenceMap.entrySet()) {
+            var preference = entry.getValue();
+
+            // Look for preference has SOURCE_ADDED state, re-check if they are still connected. If
+            // not, means the source is removed from the sink, we move back the preference to SYNCED
+            // state.
+            if (preference.getAudioStreamState() == AudioStreamState.SOURCE_ADDED
+                    && mAudioStreamsHelper.getAllConnectedSources().stream()
+                            .noneMatch(
+                                    connected ->
+                                            connected.getBroadcastId()
+                                                    == preference.getAudioStreamBroadcastId())) {
+
+                ThreadUtils.postOnMainThread(
+                        () -> {
+                            var metadata = preference.getAudioStreamMetadata();
+
+                            if (metadata != null) {
+                                moveToState(preference, AudioStreamState.SYNCED);
+                            } else {
+                                handleSourceLost(preference.getAudioStreamBroadcastId());
+                            }
+                        });
+
+                return;
+            }
+        }
+    }
+
     void handleSourceConnected(BluetoothLeBroadcastReceiveState receiveState) {
         if (!mAudioStreamsHelper.isConnected(receiveState)) {
             return;
         }
-        var sourceAddedState = AudioStreamState.SOURCE_ADDED;
         var broadcastIdConnected = receiveState.getBroadcastId();
         mBroadcastIdToPreferenceMap.compute(
                 broadcastIdConnected,
                 (k, v) -> {
                     if (v == null) {
-                        return addNewPreference(
-                                receiveState,
-                                sourceAddedState,
-                                p -> launchDetailFragment(broadcastIdConnected));
+                        // No existing preference for this source even if it's already connected,
+                        // add one and set initial state to SOURCE_ADDED. This could happen because
+                        // we retrieves the connected source during onStart() from
+                        // AudioStreamsHelper#getAllConnectedSources() even before the source is
+                        // founded by scanning.
+                        return addNewPreference(receiveState, AudioStreamState.SOURCE_ADDED);
                     }
                     var fromState = v.getAudioStreamState();
-                    if (fromState == AudioStreamState.WAIT_FOR_SOURCE_ADD
+                    if (fromState == AudioStreamState.ADD_SOURCE_WAIT_FOR_RESPONSE
                             || fromState == AudioStreamState.SYNCED
-                            || fromState == AudioStreamState.WAIT_FOR_SYNC) {
-                        if (mTimedSourceFromQrCode != null) {
-                            mTimedSourceFromQrCode.consumed();
-                        }
+                            || fromState == AudioStreamState.WAIT_FOR_SYNC
+                            || fromState == AudioStreamState.SOURCE_ADDED) {
+                        // Expected state, do nothing
                     } else {
-                        if (fromState != AudioStreamState.SOURCE_ADDED) {
-                            Log.w(
-                                    TAG,
-                                    "handleSourceConnected(): unexpected state : "
-                                            + fromState
-                                            + " for broadcastId : "
-                                            + broadcastIdConnected);
-                        }
+                        Log.w(
+                                TAG,
+                                "handleSourceConnected(): unexpected state : "
+                                        + fromState
+                                        + " for broadcastId : "
+                                        + broadcastIdConnected);
                     }
-                    v.setAudioStreamState(sourceAddedState);
-                    updatePreferenceConnectionState(
-                            v, sourceAddedState, p -> launchDetailFragment(broadcastIdConnected));
+                    moveToState(v, AudioStreamState.SOURCE_ADDED);
                     return v;
                 });
-        // Saved connected metadata for user to re-join this broadcast later.
-        var unused =
-                ThreadUtils.postOnBackgroundThread(
-                        () -> {
-                            var cached =
-                                    mAudioStreamsRepository.getCachedMetadata(broadcastIdConnected);
-                            if (cached != null) {
-                                mAudioStreamsRepository.saveMetadata(mContext, cached);
-                            }
-                        });
-    }
-
-    private static String getPreferenceSummary(AudioStreamState state) {
-        return switch (state) {
-            case WAIT_FOR_SYNC -> "Scanning...";
-            case WAIT_FOR_SOURCE_ADD -> "Connecting...";
-            case SOURCE_ADDED -> "Listening now";
-            default -> "";
-        };
     }
 
     void showToast(String msg) {
@@ -374,7 +404,6 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
             Log.d(TAG, "startScanning()");
         }
         mLeBroadcastAssistant.registerServiceCallBack(mExecutor, mBroadcastAssistantCallback);
-        mLeBroadcastAssistant.startSearchingForSources(emptyList());
 
         // Handle QR code scan and display currently connected streams
         var unused =
@@ -384,6 +413,7 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
                             mAudioStreamsHelper
                                     .getAllConnectedSources()
                                     .forEach(this::handleSourceConnected);
+                            mLeBroadcastAssistant.startSearchingForSources(emptyList());
                         });
     }
 
@@ -400,66 +430,91 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
         }
         mLeBroadcastAssistant.unregisterServiceCallBack(mBroadcastAssistantCallback);
         if (mTimedSourceFromQrCode != null) {
-            mTimedSourceFromQrCode.consumed();
+            mTimedSourceFromQrCode.cleanup();
+            mTimedSourceFromQrCode = null;
         }
     }
 
     private AudioStreamPreference addNewPreference(
-            BluetoothLeBroadcastReceiveState receiveState,
-            AudioStreamState state,
-            Preference.OnPreferenceClickListener onClickListener) {
-        var preference = AudioStreamPreference.fromReceiveState(mContext, receiveState, state);
-        updatePreferenceConnectionState(preference, state, onClickListener);
+            BluetoothLeBroadcastReceiveState receiveState, AudioStreamState state) {
+        var preference = AudioStreamPreference.fromReceiveState(mContext, receiveState);
+        moveToState(preference, state);
         return preference;
     }
 
     private AudioStreamPreference addNewPreference(
-            BluetoothLeBroadcastMetadata metadata,
-            AudioStreamState state,
-            Preference.OnPreferenceClickListener onClickListener) {
-        var preference = AudioStreamPreference.fromMetadata(mContext, metadata, state);
-        updatePreferenceConnectionState(preference, state, onClickListener);
+            BluetoothLeBroadcastMetadata metadata, AudioStreamState state) {
+        var preference = AudioStreamPreference.fromMetadata(mContext, metadata);
+        moveToState(preference, state);
         return preference;
     }
 
-    private void updatePreferenceConnectionState(
-            AudioStreamPreference preference,
-            AudioStreamState state,
-            Preference.OnPreferenceClickListener onClickListener) {
+    private void moveToState(AudioStreamPreference preference, AudioStreamState state) {
+        if (preference.getAudioStreamState() == state) {
+            return;
+        }
+        preference.setAudioStreamState(state);
+
+        // Perform action according to the new state
+        if (state == AudioStreamState.ADD_SOURCE_WAIT_FOR_RESPONSE) {
+            if (mTimedSourceFromQrCode != null) {
+                mTimedSourceFromQrCode.consumed(preference.getAudioStreamBroadcastId());
+            }
+            var metadata = preference.getAudioStreamMetadata();
+            if (metadata != null) {
+                mAudioStreamsHelper.addSource(metadata);
+                // Cache the metadata that used for add source, if source is added successfully, we
+                // will save it persistently.
+                mAudioStreamsRepository.cacheMetadata(metadata);
+            }
+        } else if (state == AudioStreamState.SOURCE_ADDED) {
+            if (mTimedSourceFromQrCode != null) {
+                mTimedSourceFromQrCode.consumed(preference.getAudioStreamBroadcastId());
+            }
+            // Saved connected metadata for user to re-join this broadcast later.
+            var cached =
+                    mAudioStreamsRepository.getCachedMetadata(
+                            preference.getAudioStreamBroadcastId());
+            if (cached != null) {
+                mAudioStreamsRepository.saveMetadata(mContext, cached);
+            }
+        } else if (state == AudioStreamState.WAIT_FOR_SYNC) {
+            if (mTimedSourceFromQrCode != null) {
+                mTimedSourceFromQrCode.waitForConsume();
+            }
+        }
+
+        // Get preference click listener according to the new state
+        Preference.OnPreferenceClickListener listener;
+        if (state == AudioStreamState.SYNCED) {
+            listener = mAddSourceOrShowDialog;
+        } else if (state == AudioStreamState.SOURCE_ADDED) {
+            listener = mLaunchDetailFragment;
+        } else {
+            listener = null;
+        }
+
+        // Get preference summary according to the new state
+        String summary;
+        if (state == AudioStreamState.WAIT_FOR_SYNC) {
+            summary = "Scanning...";
+        } else if (state == AudioStreamState.ADD_SOURCE_WAIT_FOR_RESPONSE) {
+            summary = "Connecting...";
+        } else if (state == AudioStreamState.SOURCE_ADDED) {
+            summary = "Listening now";
+        } else {
+            summary = "";
+        }
+
+        // Update UI
         ThreadUtils.postOnMainThread(
                 () -> {
                     preference.setIsConnected(
-                            state == AudioStreamState.SOURCE_ADDED,
-                            getPreferenceSummary(state),
-                            onClickListener);
+                            state == AudioStreamState.SOURCE_ADDED, summary, listener);
                     if (mCategoryPreference != null) {
                         mCategoryPreference.addAudioStreamPreference(preference, mComparator);
                     }
                 });
-    }
-
-    private boolean launchDetailFragment(int broadcastId) {
-        if (!mBroadcastIdToPreferenceMap.containsKey(broadcastId)) {
-            Log.w(
-                    TAG,
-                    "launchDetailFragment(): broadcastId not exist in BroadcastIdToPreferenceMap!");
-            return false;
-        }
-        AudioStreamPreference preference = mBroadcastIdToPreferenceMap.get(broadcastId);
-
-        Bundle broadcast = new Bundle();
-        broadcast.putString(
-                AudioStreamDetailsFragment.BROADCAST_NAME_ARG, (String) preference.getTitle());
-        broadcast.putInt(AudioStreamDetailsFragment.BROADCAST_ID_ARG, broadcastId);
-
-        new SubSettingLauncher(mContext)
-                .setTitleText("Audio stream details")
-                .setDestination(AudioStreamDetailsFragment.class.getName())
-                // TODO(chelseahao): Add logging enum
-                .setSourceMetricsCategory(SettingsEnums.PAGE_UNKNOWN)
-                .setArguments(broadcast)
-                .launch();
-        return true;
     }
 
     private void launchPasswordDialog(
@@ -488,12 +543,11 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
                                                     .setBroadcastCode(
                                                             code.getBytes(StandardCharsets.UTF_8))
                                                     .build();
-                                    mAudioStreamsHelper.addSource(metadata);
-                                    mAudioStreamsRepository.cacheMetadata(metadata);
-                                    preference.setAudioStreamState(
-                                            AudioStreamState.WAIT_FOR_SOURCE_ADD);
-                                    updatePreferenceConnectionState(
-                                            preference, AudioStreamState.WAIT_FOR_SOURCE_ADD, null);
+                                    // Update the metadata after user entered the password
+                                    preference.setAudioStreamMetadata(metadata);
+                                    moveToState(
+                                            preference,
+                                            AudioStreamState.ADD_SOURCE_WAIT_FOR_RESPONSE);
                                 })
                         .create();
         alertDialog.show();
@@ -509,9 +563,10 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
                 .setLeftButtonOnClickListener(AlertDialog::dismiss)
                 .setRightButtonText("Connect a device")
                 .setRightButtonOnClickListener(
-                        unused ->
-                                mContext.startActivity(
-                                        new Intent(Settings.ACTION_BLUETOOTH_SETTINGS)));
+                        dialog -> {
+                            mContext.startActivity(new Intent(Settings.ACTION_BLUETOOTH_SETTINGS));
+                            dialog.dismiss();
+                        });
     }
 
     private AudioStreamsDialogFragment.DialogBuilder getBroadcastUnavailableDialog(
@@ -523,8 +578,18 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
                 .setLeftButtonText("Close")
                 .setLeftButtonOnClickListener(AlertDialog::dismiss)
                 .setRightButtonText("Retry")
-                // TODO(chelseahao): Add retry action
-                .setRightButtonOnClickListener(AlertDialog::dismiss);
+                .setRightButtonOnClickListener(
+                        dialog -> {
+                            if (mFragment != null) {
+                                Intent intent = new Intent(mContext, QrCodeScanModeActivity.class);
+                                intent.setAction(
+                                        BluetoothBroadcastUtils
+                                                .ACTION_BLUETOOTH_LE_AUDIO_QR_CODE_SCANNER);
+                                mFragment.startActivityForResult(
+                                        intent, REQUEST_SCAN_BT_BROADCAST_QR_CODE);
+                                dialog.dismiss();
+                            }
+                        });
     }
 
     private class TimedSourceFromQrCode {
@@ -557,9 +622,16 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
             mTimer.start();
         }
 
-        private void consumed() {
+        private void cleanup() {
             mTimer.cancel();
             mSourceFromQrCode = null;
+        }
+
+        private void consumed(int broadcastId) {
+            if (mSourceFromQrCode == null || broadcastId != mSourceFromQrCode.getBroadcastId()) {
+                return;
+            }
+            cleanup();
         }
 
         private BluetoothLeBroadcastMetadata get() {

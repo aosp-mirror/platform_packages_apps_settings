@@ -71,8 +71,21 @@ class AudioStreamPreference extends TwoTargetPreference {
         mAudioStream.setState(state);
     }
 
+    void setAudioStreamMetadata(BluetoothLeBroadcastMetadata metadata) {
+        mAudioStream.setMetadata(metadata);
+    }
+
+    int getAudioStreamBroadcastId() {
+        return mAudioStream.getBroadcastId();
+    }
+
     int getAudioStreamRssi() {
         return mAudioStream.getRssi();
+    }
+
+    @Nullable
+    BluetoothLeBroadcastMetadata getAudioStreamMetadata() {
+        return mAudioStream.getMetadata();
     }
 
     AudioStreamsProgressCategoryController.AudioStreamState getAudioStreamState() {
@@ -102,25 +115,18 @@ class AudioStreamPreference extends TwoTargetPreference {
     }
 
     static AudioStreamPreference fromMetadata(
-            Context context,
-            BluetoothLeBroadcastMetadata source,
-            AudioStreamsProgressCategoryController.AudioStreamState streamState) {
+            Context context, BluetoothLeBroadcastMetadata source) {
         AudioStreamPreference preference = new AudioStreamPreference(context, /* attrs= */ null);
         preference.setTitle(getBroadcastName(source));
-        preference.setAudioStream(
-                new AudioStream(source.getBroadcastId(), streamState, source.getRssi()));
+        preference.setAudioStream(new AudioStream(source));
         return preference;
     }
 
     static AudioStreamPreference fromReceiveState(
-            Context context,
-            BluetoothLeBroadcastReceiveState receiveState,
-            AudioStreamsProgressCategoryController.AudioStreamState streamState) {
+            Context context, BluetoothLeBroadcastReceiveState receiveState) {
         AudioStreamPreference preference = new AudioStreamPreference(context, /* attrs= */ null);
         preference.setTitle(getBroadcastName(receiveState));
-        preference.setAudioStream(
-                new AudioStream(
-                        receiveState.getSourceId(), receiveState.getBroadcastId(), streamState));
+        preference.setAudioStream(new AudioStream(receiveState));
         return preference;
     }
 
@@ -145,49 +151,45 @@ class AudioStreamPreference extends TwoTargetPreference {
     }
 
     private static final class AudioStream {
-        private int mSourceId;
-        private int mBroadcastId;
-        private int mRssi = Integer.MIN_VALUE;
-        private AudioStreamsProgressCategoryController.AudioStreamState mState;
+        private static final int UNAVAILABLE = -1;
+        @Nullable private BluetoothLeBroadcastMetadata mMetadata;
+        @Nullable private BluetoothLeBroadcastReceiveState mReceiveState;
+        private AudioStreamsProgressCategoryController.AudioStreamState mState =
+                AudioStreamsProgressCategoryController.AudioStreamState.UNKNOWN;
 
-        private AudioStream(
-                int broadcastId,
-                AudioStreamsProgressCategoryController.AudioStreamState state,
-                int rssi) {
-            mBroadcastId = broadcastId;
-            mState = state;
-            mRssi = rssi;
+        private AudioStream(BluetoothLeBroadcastMetadata metadata) {
+            mMetadata = metadata;
         }
 
-        private AudioStream(
-                int sourceId,
-                int broadcastId,
-                AudioStreamsProgressCategoryController.AudioStreamState state) {
-            mSourceId = sourceId;
-            mBroadcastId = broadcastId;
-            mState = state;
+        private AudioStream(BluetoothLeBroadcastReceiveState receiveState) {
+            mReceiveState = receiveState;
         }
 
-        // TODO(chelseahao): use this to handleSourceRemoved
-        private int getSourceId() {
-            return mSourceId;
-        }
-
-        // TODO(chelseahao): use this to handleSourceRemoved
         private int getBroadcastId() {
-            return mBroadcastId;
+            return mMetadata != null
+                    ? mMetadata.getBroadcastId()
+                    : mReceiveState != null ? mReceiveState.getBroadcastId() : UNAVAILABLE;
         }
 
         private int getRssi() {
-            return mRssi;
+            return mMetadata != null ? mMetadata.getRssi() : Integer.MAX_VALUE;
         }
 
         private AudioStreamsProgressCategoryController.AudioStreamState getState() {
             return mState;
         }
 
+        @Nullable
+        private BluetoothLeBroadcastMetadata getMetadata() {
+            return mMetadata;
+        }
+
         private void setState(AudioStreamsProgressCategoryController.AudioStreamState state) {
             mState = state;
+        }
+
+        private void setMetadata(BluetoothLeBroadcastMetadata metadata) {
+            mMetadata = metadata;
         }
     }
 }

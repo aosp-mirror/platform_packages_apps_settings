@@ -112,8 +112,6 @@ public class AudioStreamsProgressCategoryCallback extends AudioStreamsBroadcastA
     @Override
     public void onSourceRemoved(BluetoothDevice sink, int sourceId, int reason) {
         super.onSourceRemoved(sink, sourceId, reason);
-        mCategoryController.showToast(
-                String.format(
-                        Locale.US, "Source %d removed for sink %s", sourceId, sink.getAddress()));
+        mCategoryController.handleSourceRemoved();
     }
 }
