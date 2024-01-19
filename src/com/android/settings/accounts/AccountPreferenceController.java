@@ -353,6 +353,10 @@ public class AccountPreferenceController extends AbstractPreferenceController
             }
             return;
         }
+        if (mUm.getUserProperties(userInfo.getUserHandle()).getShowInSettings()
+                == UserProperties.SHOW_IN_SETTINGS_NO) {
+            return;
+        }
         final Context context = mContext;
         final ProfileData profileData = new ProfileData();
         profileData.userInfo = userInfo;
