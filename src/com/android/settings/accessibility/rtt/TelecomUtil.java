@@ -64,7 +64,7 @@ public abstract class TelecomUtil {
             return Optional.empty();
         }
         SubscriptionManager subscriptionManager = context.getSystemService(
-                SubscriptionManager.class);
+                SubscriptionManager.class).createForAllUserProfiles();
         List<SubscriptionInfo> subscriptionInfos =
                 subscriptionManager.getActiveSubscriptionInfoList();
         if (subscriptionInfos == null) {
