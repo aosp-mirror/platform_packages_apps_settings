@@ -28,6 +28,7 @@
     <string name="show_dev_on" msgid="2840850085134853754">"Você agora é um desenvolvedor!"</string>
     <string name="show_dev_already" msgid="7041756429707644630">"Não é necessário. Você já é um desenvolvedor."</string>
     <string name="dev_settings_disabled_warning" msgid="6971867026249671244">"Primeiro, ative as opções do desenvolvedor."</string>
+    <string name="dev_settings_available_to_admin_only_warning" msgid="3408243404879083111">"Apenas os usuários administradores podem acessar as configurações do desenvolvedor."</string>
     <string name="header_category_system" msgid="1665516346845259058">"Sistema"</string>
     <string name="radioInfo_service_in" msgid="9088637745836646271">"Em serviço"</string>
     <string name="radioInfo_service_out" msgid="1868347333892403287">"Fora de serviço"</string>
@@ -551,12 +552,22 @@
     <string name="private_space_one_lock_summary" msgid="2759953747682959371">"Você pode desbloquear o Espaço particular da mesma maneira que desbloqueia seu dispositivo ou escolher um bloqueio diferente"</string>
     <string name="private_space_screen_lock_title" msgid="8679383894967823163">"Usar o bloqueio de tela do dispositivo"</string>
     <string name="private_space_biometric_title" msgid="3934339826674553174">"Desbloqueio facial e por impressão digital"</string>
+    <!-- no translation found for private_space_fingerprint_title (5989254643211889931) -->
+    <skip />
+    <!-- no translation found for private_space_face_title (3290402865367663079) -->
+    <skip />
     <string name="private_space_biometric_summary" msgid="4403837276018724581">"Toque para configurar"</string>
     <string name="private_space_fingerprint_unlock_title" msgid="5804023571114910034">"Desbloqueio por impressão digital para o espaço privado"</string>
     <string name="private_space_face_unlock_title" msgid="6613018437620070183">"Desbloqueio facial para o espaço privado"</string>
     <string name="private_space_category_ways_to_unlock" msgid="4356631225316950046">"Formas de desbloquear a tela"</string>
     <string name="private_space_screen_lock_summary" msgid="394837965365561070">"Igual ao bloqueio de tela do dispositivo"</string>
     <string name="private_space_new_lock_title" msgid="7306873010565337671">"Escolher outro bloqueio para o Espaço particular?"</string>
+    <string name="private_space_auto_lock_title" msgid="4757097802686131305">"Bloquear automaticamente"</string>
+    <string name="private_space_auto_lock_page_title" msgid="2993714305725968632">"Bloquear o espaço privado automaticamente"</string>
+    <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"Você poderá bloquear seu espaço privado automaticamente se não usar o dispositivo por um período de tempo"</string>
+    <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"Sempre que o dispositivo for bloqueado"</string>
+    <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"Depois de cinco minutos de inatividade"</string>
+    <string name="private_space_auto_lock_never" msgid="595014527119778873">"Nunca"</string>
     <string name="private_space_hide_title" msgid="8687034008994037610">"Ocultar quando bloqueado"</string>
     <string name="privatespace_hide_page_title" msgid="972581369094289386">"Ocultar o Espaço particular quando bloqueado"</string>
     <string name="privatespace_hide_page_summary" msgid="1052569521186403642">"Oculte o Espaço particular na sua lista de apps para que outras pessoas não saibam que ele está no dispositivo"</string>
@@ -570,6 +581,8 @@
     <string name="private_space_delete_title" msgid="3075645119800272800">"Excluir o Espaço particular"</string>
     <string name="private_space_deleted" msgid="7825768516955610897">"O Espaço particular foi excluído"</string>
     <string name="private_space_delete_failed" msgid="8500755484258565011">"Não foi possível excluir o Espaço particular"</string>
+    <!-- no translation found for private_space_unlocked (9091600948712932046) -->
+    <skip />
     <string name="no_device_lock_title" msgid="1078223464721029954">"Defina um bloqueio de tela"</string>
     <string name="no_device_lock_summary" msgid="7436025227616244687">"Para usar o Espaço particular, defina um bloqueio de tela neste dispositivo."</string>
     <string name="no_device_lock_action_label" msgid="2640487005629001288">"Definir bloqueio de tela"</string>
@@ -1407,6 +1420,8 @@
     <string name="menu_save" msgid="6611465355127483100">"Salvar"</string>
     <string name="menu_cancel" msgid="1197826697950745335">"Cancelar"</string>
     <string name="error_title" msgid="7158648377702417716"></string>
+    <!-- no translation found for error_duplicate_apn_entry (7792928408935276618) -->
+    <skip />
     <string name="error_name_empty" msgid="1258275899283079142">"O campo Nome não pode ficar vazio."</string>
     <string name="error_apn_empty" msgid="7657491065443746915">"O APN não pode estar vazio."</string>
     <string name="error_mcc_not3" msgid="883659545640179094">"O campo MCC deve ter 3 dígitos."</string>
@@ -1728,7 +1743,6 @@
     <string name="archiving_failed" msgid="2037798988961634978">"Falha ao arquivar"</string>
     <string name="archiving_succeeded" msgid="7891249456483297845">"<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> arquivado"</string>
     <string name="restoring_failed" msgid="3390531747355943533">"Falha na restauração"</string>
-    <string name="restoring_succeeded" msgid="4967353965137524330">"<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> Restaurado"</string>
     <string name="restoring_in_progress" msgid="7787443682651146115">"Restaurando <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>"</string>
     <string name="another_migration_already_in_progress" msgid="6550546307856052261">"Outra migração já está em andamento."</string>
     <string name="insufficient_storage" msgid="8115088042669030558">"Não há espaço de armazenamento suficiente."</string>
@@ -3855,6 +3869,10 @@
     <string name="voice_activation_apps_title" msgid="7130045161611529825">"Apps com ativação por voz"</string>
     <string name="permit_voice_activation_apps" msgid="9152780172988949319">"Permitir ativação por voz"</string>
     <string name="allow_voice_activation_apps_description" msgid="6369745626995060656">"A ativação por voz ativa apps aprovados usando comando de voz. A detecção adaptativa integrada garante a privacidade dos seus dados.\n\n"<a href="">"Saiba mais sobre a detecção adaptativa"</a></string>
+    <!-- no translation found for permit_receive_sandboxed_detection_training_data (3929496847420108753) -->
+    <skip />
+    <!-- no translation found for receive_sandboxed_detection_training_data_description (1415687008184625050) -->
+    <skip />
     <string name="full_screen_intent_title" msgid="747270185715224130">"Notificações em tela cheia"</string>
     <string name="permit_full_screen_intent" msgid="9035367640019960861">"Permitir que esse app mostre notificações em tela cheia"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Permita que o app mostre notificações que ocupam a tela inteira quando o dispositivo estiver bloqueado. Os apps poderão usar essa permissão para destacar alarmes, ligações recebidas ou outras notificações urgentes."</string>
@@ -4287,7 +4305,15 @@
     <string name="credman_picker_title" msgid="8191267620665129205">"Senhas, chaves de acesso e serviços de dados"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Desativar %1$s?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Desativar este serviço?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Senhas, chaves de acesso, formas de pagamento e outras informações salvas não serão preenchidas quando você fizer login. Para usar suas informações salvas, escolha uma senha, uma chave de acesso ou um serviço de dados."</string>
+    <!-- no translation found for credman_confirmation_message_new_ui (6126274509951156460) -->
+    <skip />
+    <!-- no translation found for credman_autofill_confirmation_message_new_ui (6222139222478822267) -->
+    <skip />
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"Usar %1$s?"</string>
+    <!-- no translation found for credman_limit_error_msg_title (1525814645803612135) -->
+    <skip />
+    <!-- no translation found for credman_limit_error_msg (2521803280130310063) -->
+    <skip />
     <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"%1$s usa o que aparece na tela para determinar o que pode ser preenchido automaticamente."</string>
     <string name="credman_error_message_title" msgid="4099557206946333568">"Limite de senhas, chaves de acesso e serviços de dados"</string>
     <string name="credman_error_message" msgid="8334797097200415449">"É possível ter até cinco senhas, chaves de acesso e serviços de dados ativos ao mesmo tempo. Desative um para adicionar outro."</string>
@@ -4457,7 +4483,7 @@
     <string name="mobile_network_sim_name_label" msgid="1452440641628369625">"Nome"</string>
     <string name="mobile_network_sim_color_label" msgid="5293944087609632340">"Cor (usada por apps compatíveis)"</string>
     <string name="mobile_network_sim_name_rename" msgid="5967588549571582924">"Salvar"</string>
-    <string name="mobile_network_use_sim_on" msgid="7298332437547707908">"Usar chip"</string>
+    <string name="mobile_network_use_sim_on" msgid="5333182776279917886">"Usar este chip"</string>
     <string name="mobile_network_use_sim_off" msgid="6303281166199670639">"Desativado"</string>
     <string name="mobile_network_disable_sim_explanation" msgid="2851862257846773796">"Para desativar este chip ele deve ser removido."</string>
     <string name="mobile_network_tap_to_activate" msgid="4139979375717958102">"Toque para ativar a <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -4516,6 +4542,28 @@
     <string name="sim_action_turn_off" msgid="3506698692916473000">"Desativar"</string>
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"Não foi possível ativar o chip"</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"Tente ativar o chip novamente. Se o problema continuar, reinicie o dispositivo."</string>
+    <string name="sim_onboarding_bottomsheets_title" msgid="143711121394213711">"Configure seu chip"</string>
+    <string name="sim_onboarding_bottomsheets_msg" msgid="7367245016476460849">"Defina suas preferências de rede móvel para usar vários chips neste dispositivo"</string>
+    <string name="sim_onboarding_label_sim_title" msgid="273162565849288273">"Rotule seus chips"</string>
+    <string name="sim_onboarding_label_sim_msg" msgid="5105859235219529056">"Esses rótulos vão aparecer ao fazer ligações, enviar mensagens de texto e usar dados, além de aparecerem nas Configurações"</string>
+    <string name="sim_onboarding_label_sim_dialog_title" msgid="5839073125605286120">"Rótulo do chip"</string>
+    <string name="sim_onboarding_label_sim_dialog_label" msgid="9020433985426525185">"Rótulo"</string>
+    <string name="sim_onboarding_select_sim_title" msgid="5895262188167744055">"Selecione quais chips usar"</string>
+    <string name="sim_onboarding_select_sim_msg" msgid="5638859405391915048">"Você pode usar dois chips ao mesmo tempo"</string>
+    <string name="sim_onboarding_primary_sim_title" msgid="2793090401371135675">"Defina seus chips principais"</string>
+    <string name="sim_onboarding_primary_sim_msg" msgid="5484656671490558032">"Escolha quais chips usar por padrão para fazer ligações, enviar mensagens de texto e usar dados"</string>
+    <string name="primary_sim_title" msgid="2508161011657571566">"Seus principais chips"</string>
+    <string name="primary_sim_calls_title" msgid="4961189133582615685">"Ligações"</string>
+    <string name="primary_sim_texts_title" msgid="1287584042733097749">"Mensagens de texto"</string>
+    <string name="primary_sim_automatic_data_title" msgid="1265528923229642480">"Troca de dados automática"</string>
+    <string name="primary_sim_automatic_data_msg" msgid="1612203837010785203">"Usar dados de qualquer chip dependendo da cobertura e disponibilidade"</string>
+    <string name="sim_onboarding_phoneNumber_data_only" msgid="8158409121949373662">"Somente dados"</string>
+    <string name="sim_onboarding_setup" msgid="5750393553605388463">"Configurar"</string>
+    <string name="sim_onboarding_next" msgid="6415025179929475355">"Próxima"</string>
+    <string name="sim_onboarding_profressbar_turning_sim_on" msgid="4888545282948732575">"Ativando <xliff:g id="CARRIER_NAME">%1$s</xliff:g>…"</string>
+    <string name="mobile_network_spn_title" msgid="3053793174495329077">"Rede móvel"</string>
+    <string name="mobile_network_phone_number_title" msgid="2090794402855021784">"Número de telefone"</string>
+    <string name="mobile_network_sim_label_color_title" msgid="2401352348041132876">"Rótulo e cor do chip"</string>
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"Ativação de rede"</string>
     <string name="sim_switch_channel_id" msgid="4927038626791837861">"Mudança de operadora"</string>
     <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"A operadora <xliff:g id="CARRIER_NAME">%1$s</xliff:g> está ativa"</string>
@@ -4611,6 +4659,14 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"Informações sobre sua política de trabalho"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"Configurações gerenciadas pelo administrador de TI"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
+    <string name="enable_16k_pages" msgid="5009476566957520607">"Inicializar com páginas de 16K"</string>
+    <string name="enable_16k_pages_summary" msgid="428117226069445198">"Inicializar dispositivo usando o kernel com suporte a páginas de 16K"</string>
+    <string name="confirm_enable_16k_pages_title" msgid="6751570067857011642">"Reiniciar com kernel compatível com páginas de 16 KB?"</string>
+    <string name="confirm_enable_16k_pages_text" msgid="702888115148257215">"AVISO: alguns aplicativos podem não ser compatíveis com esse modo. O dispositivo será reiniciado após a confirmação."</string>
+    <string name="confirm_enable_4k_pages_title" msgid="626987400420355263">"Reiniciar com kernel compatível com páginas de 4 KB?"</string>
+    <string name="confirm_enable_4k_pages_text" msgid="6168921566226074524">"O dispositivo será reiniciado após a confirmação."</string>
+    <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"Falha ao atualizar para um kernel compatível com páginas de 16 KB."</string>
+    <string name="progress_16k_ota_title" msgid="2117218313875523741">"Aplicando mudança"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Gerenciador de relatórios de bugs"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Determina qual app gerencia o atalho para o Relatório de bug no dispositivo."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Pessoais"</string>
