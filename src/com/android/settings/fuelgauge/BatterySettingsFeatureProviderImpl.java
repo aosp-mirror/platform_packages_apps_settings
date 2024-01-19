@@ -41,5 +41,6 @@ public class BatterySettingsFeatureProviderImpl implements BatterySettingsFeatur
     }
 
     @Override
-    public void addBatteryTipDetector(Context context, List<BatteryTip> tips) {}
+    public void addBatteryTipDetector(
+            Context context, List<BatteryTip> tips, BatteryInfo batteryInfo) {}
 }
