@@ -20,6 +20,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.net.Uri
 import android.provider.Telephony
+import android.telephony.TelephonyManager
 import android.util.Log
 import com.android.settings.R
 import com.android.settingslib.utils.ThreadUtils
@@ -150,7 +151,6 @@ fun getApnDataFromUri(uri: Uri, context: Context): ApnData {
 private fun convertProtocol2Options(raw: String, context: Context): String {
     val apnProtocolOptions = context.resources.getStringArray(R.array.apn_protocol_entries).toList()
     val apnProtocolValues = context.resources.getStringArray(R.array.apn_protocol_values).toList()
-
     var uRaw = raw.uppercase(Locale.getDefault())
     uRaw = if (uRaw == "IPV4") "IP" else uRaw
     val protocolIndex = apnProtocolValues.indexOf(uRaw)
@@ -167,7 +167,6 @@ private fun convertProtocol2Options(raw: String, context: Context): String {
 
 fun convertOptions2Protocol(protocolIndex: Int, context: Context): String {
     val apnProtocolValues = context.resources.getStringArray(R.array.apn_protocol_values).toList()
-
     return if (protocolIndex == -1) {
         ""
     } else {
@@ -179,7 +178,12 @@ fun convertOptions2Protocol(protocolIndex: Int, context: Context): String {
     }
 }
 
-fun updateApnDataToDatabase(newApn: Boolean, values: ContentValues, context: Context, uriInit: Uri) {
+fun updateApnDataToDatabase(
+    newApn: Boolean,
+    values: ContentValues,
+    context: Context,
+    uriInit: Uri
+) {
     ThreadUtils.postOnBackgroundThread {
         if (newApn) {
             // Add a new apn to the database
@@ -194,4 +198,24 @@ fun updateApnDataToDatabase(newApn: Boolean, values: ContentValues, context: Con
             )
         }
     }
+}
+
+fun isItemExist(uri: Uri, apnData: ApnData, context: Context): String? {
+    val contentValueMap = apnData.getContentValueMap(context)
+    contentValueMap.remove(Telephony.Carriers.CARRIER_ENABLED)
+    val list = contentValueMap.entries.toList()
+    val selection = list.joinToString(" AND ") { "${it.key} = ?" }
+    val selectionArgs: Array<String> = list.map { it.value.toString() }.toTypedArray()
+    context.contentResolver.query(
+        uri,
+        sProjection,
+        selection /* selection */,
+        selectionArgs /* selectionArgs */,
+        null /* sortOrder */
+    )?.use { cursor ->
+        if (cursor.count > 0) {
+            return context.resources.getString(R.string.error_duplicate_apn_entry)
+        }
+    }
+    return null
 }

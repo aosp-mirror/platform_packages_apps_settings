@@ -19,16 +19,19 @@ package com.android.settings.network.apn
 import android.net.Uri
 import android.os.Bundle
 import androidx.compose.foundation.layout.Column
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Done
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
@@ -39,14 +42,14 @@ import com.android.settings.network.apn.ApnNetworkTypes.getNetworkTypeDisplayNam
 import com.android.settings.network.apn.ApnNetworkTypes.getNetworkTypeSelectedOptionsState
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
 import com.android.settingslib.spa.framework.compose.LocalNavController
+import com.android.settingslib.spa.framework.theme.SettingsDimension
 import com.android.settingslib.spa.widget.editor.SettingsExposedDropdownMenuBox
 import com.android.settingslib.spa.widget.editor.SettingsExposedDropdownMenuCheckBox
 import com.android.settingslib.spa.widget.editor.SettingsOutlinedTextField
 import com.android.settingslib.spa.widget.editor.SettingsTextFieldPassword
-import com.android.settingslib.spa.widget.preference.Preference
-import com.android.settingslib.spa.widget.preference.PreferenceModel
 import com.android.settingslib.spa.widget.preference.SwitchPreference
 import com.android.settingslib.spa.widget.preference.SwitchPreferenceModel
+import com.android.settingslib.spa.widget.scaffold.MoreOptionsAction
 import com.android.settingslib.spa.widget.scaffold.RegularScaffold
 import java.util.Base64
 
@@ -98,25 +101,59 @@ fun ApnPage(apnDataInit: ApnData, apnDataCur: MutableState<ApnData>, uriInit: Ur
         getNetworkTypeSelectedOptionsState(apnData.networkType)
     }
     val navController = LocalNavController.current
+    var valid: String?
     RegularScaffold(
         title = if (apnDataInit.newApn) stringResource(id = R.string.apn_add) else stringResource(id = R.string.apn_edit),
         actions = {
             if (!apnData.customizedConfig.readOnlyApn) {
-                IconButton(onClick = {
-                    if (!apnData.validEnabled) apnData = apnData.copy(validEnabled = true)
-                    val valid = validateAndSaveApnData(
+                Button(onClick = {
+                    apnData = apnData.copy(
+                        networkType = ApnNetworkTypes.getNetworkType(
+                            networkTypeSelectedOptionsState
+                        )
+                    )
+                    valid = validateAndSaveApnData(
                         apnDataInit,
                         apnData,
                         context,
-                        uriInit,
-                        networkTypeSelectedOptionsState
+                        uriInit
                     )
-                    if (valid) navController.navigateBack()
-                }) { Icon(imageVector = Icons.Outlined.Done, contentDescription = null) }
+                    if (valid == null) navController.navigateBack()
+                    else if (!apnData.validEnabled) apnData = apnData.copy(validEnabled = true)
+                }) { Text(text = stringResource(id = R.string.save)) }
+            }
+            if (!apnData.newApn && !apnData.customizedConfig.readOnlyApn
+                && apnData.customizedConfig.isAddApnAllowed
+            ) {
+                MoreOptionsAction {
+                    DropdownMenuItem(
+                        text = { Text(stringResource(R.string.menu_delete)) },
+                        onClick = {
+                            deleteApn(uriInit, context)
+                            navController.navigateBack()
+                        })
+                }
             }
         },
     ) {
         Column {
+            if (apnData.validEnabled) {
+                apnData = apnData.copy(
+                    networkType = ApnNetworkTypes.getNetworkType(
+                        networkTypeSelectedOptionsState
+                    )
+                )
+                valid = validateApnData(uriInit, apnData, context)
+                valid?.let {
+                    Text(
+                        text = it,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(SettingsDimension.menuFieldPadding),
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                }
+            }
             SettingsOutlinedTextField(
                 value = apnData.name,
                 label = stringResource(R.string.apn_name),
@@ -214,19 +251,6 @@ fun ApnPage(apnDataInit: ApnData, apnDataCur: MutableState<ApnData>, uriInit: Ur
                 emptyVal = stringResource(R.string.network_type_unspecified),
                 enabled = apnData.networkTypeEnabled
             ) {}
-            if (!apnData.newApn && !apnData.customizedConfig.readOnlyApn
-                && apnData.customizedConfig.isAddApnAllowed
-            ) {
-                Preference(
-                    object : PreferenceModel {
-                        override val title = stringResource(R.string.menu_delete)
-                        override val onClick = {
-                            deleteApn(uriInit, context)
-                            navController.navigateBack()
-                        }
-                    }
-                )
-            }
         }
     }
 }
