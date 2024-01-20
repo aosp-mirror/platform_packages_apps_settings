@@ -55,8 +55,8 @@ public class PrivateSpaceSetLockFragment extends InstrumentedFragment {
             return null;
         }
         GlifLayout rootView =
-                (GlifLayout) inflater.inflate(
-                        R.layout.privatespace_setlock_screen, container, false);
+                (GlifLayout)
+                        inflater.inflate(R.layout.privatespace_setlock_screen, container, false);
         final FooterBarMixin mixin = rootView.getMixin(FooterBarMixin.class);
         mixin.setPrimaryButton(
                 new FooterButton.Builder(getContext())
@@ -99,6 +99,7 @@ public class PrivateSpaceSetLockFragment extends InstrumentedFragment {
             // Simply Use default screen lock. No need to handle
             mMetricsFeatureProvider.action(
                     getContext(), SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_ACCOUNT_LOGIN_START);
+            Log.d(TAG, "Use device lock for private profile");
             launchActivityForAction(ACCOUNT_LOGIN_ACTION);
         };
     }
@@ -117,6 +118,7 @@ public class PrivateSpaceSetLockFragment extends InstrumentedFragment {
         if (userHandle != null) {
             Intent intent = new Intent(getContext(), PrivateProfileContextHelperActivity.class);
             intent.putExtra(EXTRA_ACTION_TYPE, action);
+            Log.i(TAG, "Start separate lock setup for private profile");
             getActivity().startActivityForResultAsUser(intent, action, userHandle);
         } else {
             Log.w(TAG, "Private profile user handle is null");

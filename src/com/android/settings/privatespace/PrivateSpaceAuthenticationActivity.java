@@ -111,12 +111,14 @@ public class PrivateSpaceAuthenticationActivity extends FragmentActivity {
     }
 
     private void promptToSetDeviceLock() {
+        Log.d(TAG, "Show prompt to set device lock before using private space feature");
         new AlertDialog.Builder(this)
                 .setTitle(R.string.no_device_lock_title)
                 .setMessage(R.string.no_device_lock_summary)
                 .setPositiveButton(
                         R.string.no_device_lock_action_label,
                         (DialogInterface dialog, int which) -> {
+                            Log.d(TAG, "Start activity to set new device lock");
                             mSetDeviceLock.launch(new Intent(ACTION_SET_NEW_PASSWORD));
                         })
                 .setNegativeButton(
@@ -176,6 +178,7 @@ public class PrivateSpaceAuthenticationActivity extends FragmentActivity {
                                     options.toBundle())
                             .getIntentSender());
         } else {
+            Log.i(TAG, "Launch private space settings");
             privateSpaceSettings.launch();
         }
         finish();
