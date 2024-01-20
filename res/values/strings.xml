@@ -3967,6 +3967,14 @@
     <string name="archive">Archive</string>
     <!-- Manage applications, text label for button to restore an application. Restoring means installing the archived app. -->
     <string name="restore">Restore</string>
+    <!-- Manage applications, text label for button while the application is restoring. -->
+    <string name="restoring_step_one">Restoring</string>
+    <!-- Manage applications, text label for button while the application is restoring. -->
+    <string name="restoring_step_two">Restoring.</string>
+    <!-- Manage applications, text label for button while the application is restoring. -->
+    <string name="restoring_step_three">Restoring..</string>
+    <!-- Manage applications, text label for button while the application is restoring. -->
+    <string name="restoring_step_four">Restoring...</string>
     <!-- Manage applications, individual application info screen,label under Storage heading.  The total storage space taken up by this app. -->
     <string name="total_size_label">Total</string>
     <!-- Manage applications, individual application info screen, label under Storage heading. The amount of space taken up by the application itself (for example, the java compield files and things like that) -->
@@ -10767,7 +10775,7 @@
     <!-- Preference category for showing auto-fill services with saved passwords. [CHAR LIMIT=60] -->
     <string name="autofill_passwords">Passwords</string>
     <!-- Preference category for showing autofill and credman services with saved credentials. [CHAR LIMIT=60] -->
-    <string name="credman_chosen_app_title">Passwords, passkeys, and data services</string>
+    <string name="credman_chosen_app_title">Preferred service</string>
     <!-- Preference category for showing additional credential providers. [CHAR LIMIT=60] -->
     <string name="credman_credentials">Additional providers</string>
     <!-- Summary for passwords settings that shows how many passwords are saved for each autofill
@@ -10785,6 +10793,10 @@
     <string name="credman_keywords">data, passkey, password</string>
     <!-- Keywords for the credman feature. [CHAR LIMIT=NONE] -->
     <string name="credman_autofill_keywords">auto, fill, autofill, data, passkey, password</string>
+    <!-- Button for choosing credman service. [CHAR LIMIT=40] -->
+    <string name="credman_button_change">Change</string>
+    <!-- Button for opening credman service settings. [CHAR LIMIT=40] -->
+    <string name="credman_button_open">Open</string>
 
     <!-- Message of the warning dialog for setting the auto-fill app. [CHAR_LIMIT=NONE] -->
     <string name="autofill_confirmation_message">
