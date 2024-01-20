@@ -224,6 +224,7 @@ public class PrivateSpaceMaintainer {
 
     /** Sets the setting to show PS entry point to the provided value. */
     public void setHidePrivateSpaceEntryPointSetting(int value) {
+        Log.d(TAG, "Setting HIDE_PRIVATE_SPACE_ENTRY_POINT = " + value);
         Settings.Secure.putInt(mContext.getContentResolver(), HIDE_PRIVATESPACE_ENTRY_POINT, value);
     }
 
@@ -261,6 +262,7 @@ public class PrivateSpaceMaintainer {
      */
     public synchronized boolean lockPrivateSpace() {
         if (isPrivateProfileRunning()) {
+            Log.d(TAG, "Calling requestQuietModeEnabled to enableQuietMode");
             return mUserManager.requestQuietModeEnabled(true, mUserHandle);
         }
         return false;
@@ -273,6 +275,7 @@ public class PrivateSpaceMaintainer {
      */
     public synchronized void unlockPrivateSpace(IntentSender intentSender) {
         if (mUserHandle != null) {
+            Log.d(TAG, "Calling requestQuietModeEnabled to disableQuietMode");
             mUserManager.requestQuietModeEnabled(false, mUserHandle, intentSender);
         }
     }
@@ -297,6 +300,7 @@ public class PrivateSpaceMaintainer {
      */
     @GuardedBy("this")
     private void setUserSetupComplete() {
+        Log.d(TAG, "setting USER_SETUP_COMPLETE = 1 for private profile");
         Settings.Secure.putIntForUser(mContext.getContentResolver(), USER_SETUP_COMPLETE,
                 1, mUserHandle.getIdentifier());
     }

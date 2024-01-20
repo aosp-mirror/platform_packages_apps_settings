@@ -19,6 +19,7 @@ package com.android.settings.privatespace;
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +36,7 @@ import com.google.android.setupdesign.GlifLayout;
 
 /** Fragment educating about the usage of Private Space. */
 public class PrivateSpaceEducation extends InstrumentedFragment {
+    private static final String TAG = "PrivateSpaceEducation";
 
     @Override
     public View onCreateView(
@@ -77,6 +79,7 @@ public class PrivateSpaceEducation extends InstrumentedFragment {
         return v -> {
             mMetricsFeatureProvider.action(
                     getContext(), SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_START);
+            Log.i(TAG, "Starting private space setup");
             NavHostFragment.findNavController(PrivateSpaceEducation.this)
                     .navigate(R.id.action_education_to_auto_advance);
         };
@@ -88,6 +91,7 @@ public class PrivateSpaceEducation extends InstrumentedFragment {
             if (activity != null) {
                 mMetricsFeatureProvider.action(
                         getContext(), SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_CANCEL);
+                Log.i(TAG, "private space setup cancelled");
                 activity.finish();
             }
         };
