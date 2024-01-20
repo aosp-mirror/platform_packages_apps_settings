@@ -18,13 +18,17 @@ package com.android.settings.applications.credentials;
 
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.ServiceInfo;
 import android.credentials.CredentialProviderInfo;
 import android.graphics.drawable.Drawable;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.service.autofill.AutofillServiceInfo;
 import android.text.TextUtils;
 import android.util.IconDrawableFactory;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -42,6 +46,11 @@ import java.util.Set;
  * logic for each row in settings.
  */
 public final class CombinedProviderInfo {
+    private static final String TAG = "CombinedProviderInfo";
+    private static final String SETTINGS_ACTIVITY_INTENT_ACTION = "android.intent.action.MAIN";
+    private static final String SETTINGS_ACTIVITY_INTENT_CATEGORY =
+            "android.intent.category.LAUNCHER";
+
     private final List<CredentialProviderInfo> mCredentialProviderInfos;
     private final @Nullable AutofillServiceInfo mAutofillServiceInfo;
     private final boolean mIsDefaultAutofillProvider;
@@ -315,5 +324,45 @@ public final class CombinedProviderInfo {
         }
 
         return cmpi;
+    }
+
+    public static @Nullable Intent createSettingsActivityIntent(
+            @NonNull Context context,
+            @Nullable CharSequence packageName,
+            @Nullable CharSequence settingsActivity,
+            int currentUserId) {
+        if (TextUtils.isEmpty(packageName) || TextUtils.isEmpty(settingsActivity)) {
+            return null;
+        }
+
+        ComponentName cn =
+                new ComponentName(String.valueOf(packageName), String.valueOf(settingsActivity));
+        if (cn == null) {
+            Log.e(
+                    TAG,
+                    "Failed to deserialize settingsActivity attribute, we got: "
+                            + String.valueOf(packageName)
+                            + " and "
+                            + String.valueOf(settingsActivity));
+            return null;
+        }
+
+        Intent intent = new Intent(SETTINGS_ACTIVITY_INTENT_ACTION);
+        intent.addCategory(SETTINGS_ACTIVITY_INTENT_CATEGORY);
+        intent.setComponent(cn);
+
+        int contextUserId = context.getUser().getIdentifier();
+        if (currentUserId != contextUserId && UserManager.isHeadlessSystemUserMode()) {
+            Log.w(
+                    TAG,
+                    "onLeftSideClicked(): using context for current user ("
+                            + currentUserId
+                            + ") instead of user "
+                            + contextUserId
+                            + " on headless system user mode");
+            context = context.createContextAsUser(UserHandle.of(currentUserId), /* flags= */ 0);
+        }
+
+        return intent;
     }
 }

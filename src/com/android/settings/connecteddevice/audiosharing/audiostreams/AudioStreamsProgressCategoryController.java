@@ -24,8 +24,10 @@ import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -92,6 +94,7 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
             new ConcurrentHashMap<>();
     private TimedSourceFromQrCode mTimedSourceFromQrCode;
     private AudioStreamsProgressCategoryPreference mCategoryPreference;
+    private AudioStreamsDashboardFragment mFragment;
 
     public AudioStreamsProgressCategoryController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -135,10 +138,13 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
         mExecutor.execute(this::stopScanning);
     }
 
+    void setFragment(AudioStreamsDashboardFragment fragment) {
+        mFragment = fragment;
+    }
+
     void setSourceFromQrCode(BluetoothLeBroadcastMetadata source) {
         mTimedSourceFromQrCode =
-                new TimedSourceFromQrCode(
-                        mContext, source, () -> handleSourceLost(source.getBroadcastId()));
+                new TimedSourceFromQrCode(source, () -> handleSourceLost(source.getBroadcastId()));
     }
 
     void setScanning(boolean isScanning) {
@@ -324,6 +330,8 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
             startScanning();
         } else {
             stopScanning();
+            ThreadUtils.postOnMainThread(
+                    () -> AudioStreamsDialogFragment.show(mFragment, getNoLeDeviceDialog()));
         }
     }
 
@@ -463,15 +471,41 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
         alertDialog.show();
     }
 
-    private static class TimedSourceFromQrCode {
+    private AudioStreamsDialogFragment.DialogBuilder getNoLeDeviceDialog() {
+        return new AudioStreamsDialogFragment.DialogBuilder(mContext)
+                .setTitle("Connect compatible headphones")
+                .setSubTitle1(
+                        "To listen to an audio stream, first connect headphones that support LE"
+                                + " Audio to this device. Learn more")
+                .setLeftButtonText("Close")
+                .setLeftButtonOnClickListener(AlertDialog::dismiss)
+                .setRightButtonText("Connect a device")
+                .setRightButtonOnClickListener(
+                        unused ->
+                                mContext.startActivity(
+                                        new Intent(Settings.ACTION_BLUETOOTH_SETTINGS)));
+    }
+
+    private AudioStreamsDialogFragment.DialogBuilder getBroadcastUnavailableDialog(
+            String broadcastName) {
+        return new AudioStreamsDialogFragment.DialogBuilder(mContext)
+                .setTitle("Audio stream isn't available")
+                .setSubTitle1(broadcastName)
+                .setSubTitle2("This audio stream isn't playing anything right now")
+                .setLeftButtonText("Close")
+                .setLeftButtonOnClickListener(AlertDialog::dismiss)
+                .setRightButtonText("Retry")
+                // TODO(chelseahao): Add retry action
+                .setRightButtonOnClickListener(AlertDialog::dismiss);
+    }
+
+    private class TimedSourceFromQrCode {
         private static final int WAIT_FOR_SYNC_TIMEOUT_MILLIS = 15000;
         private final CountDownTimer mTimer;
         private BluetoothLeBroadcastMetadata mSourceFromQrCode;
 
         private TimedSourceFromQrCode(
-                Context context,
-                BluetoothLeBroadcastMetadata sourceFromQrCode,
-                Runnable timeoutAction) {
+                BluetoothLeBroadcastMetadata sourceFromQrCode, Runnable timeoutAction) {
             mSourceFromQrCode = sourceFromQrCode;
             mTimer =
                     new CountDownTimer(WAIT_FOR_SYNC_TIMEOUT_MILLIS, 1000) {
@@ -481,7 +515,12 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
                         @Override
                         public void onFinish() {
                             timeoutAction.run();
-                            AudioSharingUtils.toastMessage(context, "Audio steam isn't available");
+                            ThreadUtils.postOnMainThread(
+                                    () ->
+                                            AudioStreamsDialogFragment.show(
+                                                    mFragment,
+                                                    getBroadcastUnavailableDialog(
+                                                            sourceFromQrCode.getBroadcastName())));
                         }
                     };
         }

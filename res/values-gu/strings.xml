@@ -28,6 +28,7 @@
     <string name="show_dev_on" msgid="2840850085134853754">"તમે હવે ડેવલપર છો!"</string>
     <string name="show_dev_already" msgid="7041756429707644630">"કોઈ જરૂર નથી, તમે પહેલાંથી જ એક ડેવલપર છો."</string>
     <string name="dev_settings_disabled_warning" msgid="6971867026249671244">"કૃપા કરીને પહેલાં વિકાસકર્તાના વિકલ્પો સક્ષમ કરો."</string>
+    <string name="dev_settings_available_to_admin_only_warning" msgid="3408243404879083111">"ફક્ત ઍડમિન વપરાશકર્તાઓ જ ડેવલપર સેટિંગ ઍક્સેસ કરી શકે છે."</string>
     <string name="header_category_system" msgid="1665516346845259058">"સિસ્ટમ"</string>
     <string name="radioInfo_service_in" msgid="9088637745836646271">"સેવામાં"</string>
     <string name="radioInfo_service_out" msgid="1868347333892403287">"કાર્યરત્ નથી"</string>
@@ -551,12 +552,28 @@
     <string name="private_space_one_lock_summary" msgid="2759953747682959371">"તમે તમારા ડિવાઇસને જે રીતે અનલૉક કરો છો તે જ રીતે તમે ખાનગી સ્પેસને અનલૉક કરી શકો છો અથવા કોઈ અલગ લૉક પસંદ કરી શકો છો"</string>
     <string name="private_space_screen_lock_title" msgid="8679383894967823163">"ડિવાઇસના સ્ક્રીન લૉકનો ઉપયોગ કરો"</string>
     <string name="private_space_biometric_title" msgid="3934339826674553174">"ચહેરા અને ફિંગરપ્રિન્ટ વડે અનલૉક કરવાની સુવિધા"</string>
+    <!-- no translation found for private_space_fingerprint_title (5989254643211889931) -->
+    <skip />
+    <!-- no translation found for private_space_face_title (3290402865367663079) -->
+    <skip />
     <string name="private_space_biometric_summary" msgid="4403837276018724581">"સેટઅપ કરવા માટે ટૅપ કરો"</string>
     <string name="private_space_fingerprint_unlock_title" msgid="5804023571114910034">"ખાનગી સ્પેસ માટે ફિંગરપ્રિન્ટ અનલૉક"</string>
     <string name="private_space_face_unlock_title" msgid="6613018437620070183">"ખાનગી સ્પેસ માટે ફેસ અનલૉક"</string>
     <string name="private_space_category_ways_to_unlock" msgid="4356631225316950046">"અનલૉક કરવાની રીતો"</string>
     <string name="private_space_screen_lock_summary" msgid="394837965365561070">"ડિવાઇસના સ્ક્રીન લૉક જેવું જ લૉક"</string>
     <string name="private_space_new_lock_title" msgid="7306873010565337671">"ખાનગી સ્પેસ માટે નવું લૉક પસંદ કરીએ?"</string>
+    <!-- no translation found for private_space_auto_lock_title (4757097802686131305) -->
+    <skip />
+    <!-- no translation found for private_space_auto_lock_page_title (2993714305725968632) -->
+    <skip />
+    <!-- no translation found for private_space_auto_lock_page_summary (8679844515655838654) -->
+    <skip />
+    <!-- no translation found for private_space_auto_lock_every_time (1215061855836002830) -->
+    <skip />
+    <!-- no translation found for private_space_auto_lock_after_inactivity (1748673030841528649) -->
+    <skip />
+    <!-- no translation found for private_space_auto_lock_never (595014527119778873) -->
+    <skip />
     <string name="private_space_hide_title" msgid="8687034008994037610">"લૉક કરેલી હોય, ત્યારે છુપાવો"</string>
     <string name="privatespace_hide_page_title" msgid="972581369094289386">"ખાનગી સ્પેસ લૉક કરેલી હોય, ત્યારે છુપાવો"</string>
     <string name="privatespace_hide_page_summary" msgid="1052569521186403642">"ડિવાઇસની ખાનગી સ્પેસ અન્યોથી છુપાવવા તેને ઍપની સૂચિથી છુપાવો"</string>
@@ -570,6 +587,8 @@
     <string name="private_space_delete_title" msgid="3075645119800272800">"ખાનગી સ્પેસ ડિલીટ કરી"</string>
     <string name="private_space_deleted" msgid="7825768516955610897">"ખાનગી સ્પેસ સફળતાપૂર્વક ડિલીટ કરી"</string>
     <string name="private_space_delete_failed" msgid="8500755484258565011">"ખાનગી સ્પેસ ડિલીટ કરી શકાઈ નથી"</string>
+    <!-- no translation found for private_space_unlocked (9091600948712932046) -->
+    <skip />
     <string name="no_device_lock_title" msgid="1078223464721029954">"કોઈ સ્ક્રીન લૉક સેટ કરો"</string>
     <string name="no_device_lock_summary" msgid="7436025227616244687">"ખાનગી સ્પેસનો ઉપયોગ કરવા, આ ડિવાઇસ પર સ્ક્રીન લૉક સેટ કરો"</string>
     <string name="no_device_lock_action_label" msgid="2640487005629001288">"સ્ક્રીન લૉક સેટ કરો"</string>
@@ -1407,6 +1426,8 @@
     <string name="menu_save" msgid="6611465355127483100">"સાચવો"</string>
     <string name="menu_cancel" msgid="1197826697950745335">"રદ કરો"</string>
     <string name="error_title" msgid="7158648377702417716"></string>
+    <!-- no translation found for error_duplicate_apn_entry (7792928408935276618) -->
+    <skip />
     <string name="error_name_empty" msgid="1258275899283079142">"નામ ફીલ્ડ ખાલી હોઈ શકતું નથી."</string>
     <string name="error_apn_empty" msgid="7657491065443746915">"APN ખાલી હોઇ શકતું નથી."</string>
     <string name="error_mcc_not3" msgid="883659545640179094">"MCC ફીલ્ડ 3 આંકડાનું હોવું આવશ્યક છે."</string>
@@ -1728,7 +1749,6 @@
     <string name="archiving_failed" msgid="2037798988961634978">"આર્કાઇવ કરવાની પ્રક્રિયા નિષ્ફળ રહી"</string>
     <string name="archiving_succeeded" msgid="7891249456483297845">"<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> આર્કાઇવ કરી"</string>
     <string name="restoring_failed" msgid="3390531747355943533">"રિસ્ટોર કરવાની પ્રક્રિયા નિષ્ફળ રહી"</string>
-    <string name="restoring_succeeded" msgid="4967353965137524330">"<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> રિસ્ટોર કરી"</string>
     <string name="restoring_in_progress" msgid="7787443682651146115">"<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> રિસ્ટોર કરી રહ્યાં છીએ"</string>
     <string name="another_migration_already_in_progress" msgid="6550546307856052261">"અન્ય સ્થાનાંતરણ પહેલેથી જ પ્રગતિ પર છે."</string>
     <string name="insufficient_storage" msgid="8115088042669030558">"પર્યાપ્ત સંગ્રહ સ્થાન નથી."</string>
@@ -1920,10 +1940,8 @@
     <string name="usage_stats_sort_by_usage_time" msgid="2927310334119998301">"વપરાશના સમય મુજબ સૉર્ટ કરો"</string>
     <string name="usage_stats_sort_by_last_time_used" msgid="7039213339779884017">"છેલ્લે ઉપયોગ કર્યાના સમય મુજબ સૉર્ટ કરો"</string>
     <string name="usage_stats_sort_by_app_name" msgid="4463833145514850478">"ઍપના નામ મુજબ સૉર્ટ કરો"</string>
-    <!-- no translation found for last_time_used_label (7589377271406011659) -->
-    <skip />
-    <!-- no translation found for last_time_used_never (2936073559267990034) -->
-    <skip />
+    <string name="last_time_used_label" msgid="7589377271406011659">"છેલ્લે ઉપયોગ કરેલી"</string>
+    <string name="last_time_used_never" msgid="2936073559267990034">"ક્યારેય નહીં"</string>
     <string name="usage_time_label" msgid="9105343335151559883">"વપરાશ સમય"</string>
     <string name="accessibility_settings" msgid="4713215774904704682">"ઍક્સેસિબિલિટી"</string>
     <string name="accessibility_settings_title" msgid="6739115703615065716">"ઍક્સેસિબિલિટી સેટિંગ"</string>
@@ -2493,13 +2511,11 @@
     <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"હમણાં"</string>
     <string name="battery_usage_timestamps_hyphen" msgid="7401188432989043905">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g> - <xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
     <string name="battery_usage_day_and_hour" msgid="1417890420844950881">"<xliff:g id="DAY">%1$s</xliff:g> <xliff:g id="HOUR">%2$s</xliff:g>"</string>
-    <!-- no translation found for battery_usage_time_info_and_battery_level (6732629268310936155) -->
-    <skip />
+    <string name="battery_usage_time_info_and_battery_level" msgid="6732629268310936155">"<xliff:g id="TIME_INFO">%1$s</xliff:g> <xliff:g id="BATTERY_LEVEL">%2$s</xliff:g>"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"બૅટરીના વપરાશનો ચાર્ટ"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"બૅટરીના દૈનિક વપરાશનો ચાર્ટ"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"બૅટરીના કલાક દીઠ વપરાશનો ચાર્ટ"</string>
-    <!-- no translation found for battery_level_percentage (1433178290838842146) -->
-    <skip />
+    <string name="battery_level_percentage" msgid="1433178290838842146">"બૅટરીનું લેવલ <xliff:g id="START_PERCENTAGE">%1$s</xliff:g>થી <xliff:g id="END_PERCENTAGE">%2$s</xliff:g> છે"</string>
     <string name="battery_usage_breakdown_title_since_last_full_charge" msgid="435006273323199906">"છેલ્લા પૂર્ણ ચાર્જ પછી બૅટરીનો વપરાશ"</string>
     <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"<xliff:g id="SLOT">%s</xliff:g> માટેનો બૅટરીનો વપરાશ"</string>
     <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"છેલ્લે પૂર્ણ ચાર્જ કર્યા પછી સ્ક્રીન સમય"</string>
@@ -3859,6 +3875,10 @@
     <string name="voice_activation_apps_title" msgid="7130045161611529825">"વૉઇસ દ્વારા સક્રિય ઍપ"</string>
     <string name="permit_voice_activation_apps" msgid="9152780172988949319">"વૉઇસ સક્રિયકરણને મંજૂરી આપો"</string>
     <string name="allow_voice_activation_apps_description" msgid="6369745626995060656">"વૉઇસ સક્રિયકરણ વૉઇસ આદેશનો ઉપયોગ કરીને મંજૂર કરેલી ઍપ, હાથના ઉપયોગ વિના ચાલુ કરે છે. બિલ્ટ-ઇન અડૅપ્ટિવ સેન્સિંગ એ ખાતરી કરે છે કે ડેટા ફક્ત તમારા માટે ખાનગી રહે.\n\n"<a href="">"સુરક્ષિત અડૅપ્ટિવ સેન્સિંગ વિશે વધુ"</a></string>
+    <!-- no translation found for permit_receive_sandboxed_detection_training_data (3929496847420108753) -->
+    <skip />
+    <!-- no translation found for receive_sandboxed_detection_training_data_description (1415687008184625050) -->
+    <skip />
     <string name="full_screen_intent_title" msgid="747270185715224130">"પૂર્ણ સ્ક્રીનના નોટિફિકેશન"</string>
     <string name="permit_full_screen_intent" msgid="9035367640019960861">"આ ઍપમાંથી પૂર્ણ સ્ક્રીનના નોટિફિકેશનને મંજૂરી આપો"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"જ્યારે ડિવાઇસ લૉક કરેલું હોય, ત્યારે આ ઍપને પૂર્ણ સ્ક્રીનમાં નોટિફિકેશન બતાવવાની મંજૂરી આપો. ઍપ આનો ઉપયોગ અલાર્મ, ઇનકમિંગ કૉલ અથવા અન્ય તાકીદના નોટિફિકેશન હાઇલાઇટ કરવા માટે કરી શકે છે."</string>
@@ -4291,7 +4311,15 @@
     <string name="credman_picker_title" msgid="8191267620665129205">"પાસવર્ડ, પાસકી, અને ડેટા સંબંધિત સેવાઓ"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"%1$sને બંધ કરીએ?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;શું આ સેવા બંધ કરીએ?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; જ્યારે તમે સાઇન ઇન કરશો ત્યારે પાસવર્ડ, પાસકી, ચુકવણી પદ્ધતિઓ અને અન્ય માહિતી જેવી સાચવેલી માહિતી ભરવામાં આવશે નહીં. તમારી સાચવેલી માહિતીનો ઉપયોગ કરવા માટે, કોઈ પાસવર્ડ, પાસકી કે ડેટા સેવા પસંદ કરો."</string>
+    <!-- no translation found for credman_confirmation_message_new_ui (6126274509951156460) -->
+    <skip />
+    <!-- no translation found for credman_autofill_confirmation_message_new_ui (6222139222478822267) -->
+    <skip />
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"%1$sનો ઉપયોગ કરીએ?"</string>
+    <!-- no translation found for credman_limit_error_msg_title (1525814645803612135) -->
+    <skip />
+    <!-- no translation found for credman_limit_error_msg (2521803280130310063) -->
+    <skip />
     <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"ઑટોમૅટિક રીતે શું ભરી શકાય તે નક્કી કરવા માટે %1$s તમારી સ્ક્રીન પર જે છે તેનો ઉપયોગ કરે છે."</string>
     <string name="credman_error_message_title" msgid="4099557206946333568">"પાસવર્ડ, પાસકી, અને ડેટા સંબંધિત સેવાઓની મર્યાદા"</string>
     <string name="credman_error_message" msgid="8334797097200415449">"તમે એક જ સમયે 5 પાસવર્ડ, પાસકી, અને ડેટા સંબંધિત સેવાઓ સક્રિય રાખી શકો છો. વધુ સેવા ઉમેરવા માટે, કોઈ સેવાને બંધ કરો."</string>
@@ -4461,7 +4489,7 @@
     <string name="mobile_network_sim_name_label" msgid="1452440641628369625">"નામ"</string>
     <string name="mobile_network_sim_color_label" msgid="5293944087609632340">"રંગ (સુસંગત ઍપ દ્વારા ઉપયોગમાં લેવાય છે)"</string>
     <string name="mobile_network_sim_name_rename" msgid="5967588549571582924">"સાચવો"</string>
-    <string name="mobile_network_use_sim_on" msgid="7298332437547707908">"સિમનો ઉપયોગ કરો"</string>
+    <string name="mobile_network_use_sim_on" msgid="5333182776279917886">"આ સિમ કાર્ડનો ઉપયોગ કરો"</string>
     <string name="mobile_network_use_sim_off" msgid="6303281166199670639">"બંધ છે"</string>
     <string name="mobile_network_disable_sim_explanation" msgid="2851862257846773796">"આ સિમને બંધ કરવા માટે, સિમ કાર્ડ કાઢી નાખો"</string>
     <string name="mobile_network_tap_to_activate" msgid="4139979375717958102">"<xliff:g id="CARRIER">%1$s</xliff:g>ને સક્રિય કરવા માટે ટૅપ કરો"</string>
@@ -4520,6 +4548,28 @@
     <string name="sim_action_turn_off" msgid="3506698692916473000">"બંધ કરો"</string>
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"સિમ કાર્ડ સક્રિય કરી શકાતું નથી"</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"સિમ કાર્ડ ફરીથી ચાલુ કરવાનો પ્રયાસ કરો. તેમ છતાં સમસ્યા આવે, તો તમારું ડિવાઇસ ફરી શરૂ કરો."</string>
+    <string name="sim_onboarding_bottomsheets_title" msgid="143711121394213711">"તમારા સિમ કાર્ડનું સેટઅપ કરો"</string>
+    <string name="sim_onboarding_bottomsheets_msg" msgid="7367245016476460849">"આ ડિવાઇસ પર અનેક સિમ કાર્ડનો ઉપયોગ કરવા માટે મોબાઇલ નેટવર્કની તમારી પસંદગીઓ સેટ કરો"</string>
+    <string name="sim_onboarding_label_sim_title" msgid="273162565849288273">"તમારા સિમ કાર્ડને લેબલ કરો"</string>
+    <string name="sim_onboarding_label_sim_msg" msgid="5105859235219529056">"કૉલ કરતી વખતે, ટેક્સ્ટ મોકલતી વખતે અને ડેટાનો ઉપયોગ કરતી વખતે તેમજ સેટિંગમાં તમને આ લેબલ દેખાશે"</string>
+    <string name="sim_onboarding_label_sim_dialog_title" msgid="5839073125605286120">"સિમ કાર્ડનું લેબલ"</string>
+    <string name="sim_onboarding_label_sim_dialog_label" msgid="9020433985426525185">"લેબલ"</string>
+    <string name="sim_onboarding_select_sim_title" msgid="5895262188167744055">"કયા સિમ કાર્ડનો ઉપયોગ કરવો તે પસંદ કરો"</string>
+    <string name="sim_onboarding_select_sim_msg" msgid="5638859405391915048">"તમે એકવારમાં 2 સિમ કાર્ડનો ઉપયોગ કરી શકો છો"</string>
+    <string name="sim_onboarding_primary_sim_title" msgid="2793090401371135675">"તમારા પ્રાથમિક સિમ કાર્ડ સેટ કરો"</string>
+    <string name="sim_onboarding_primary_sim_msg" msgid="5484656671490558032">"કૉલ, ટેક્સ્ટ અને ડેટા માટે ડિફૉલ્ટ તરીકે કયા સિમ કાર્ડનો ઉપયોગ કરવો તે પસંદ કરો"</string>
+    <string name="primary_sim_title" msgid="2508161011657571566">"તમારા પ્રાથમિક સિમ કાર્ડ"</string>
+    <string name="primary_sim_calls_title" msgid="4961189133582615685">"કૉલ"</string>
+    <string name="primary_sim_texts_title" msgid="1287584042733097749">"ટેક્સ્ટ"</string>
+    <string name="primary_sim_automatic_data_title" msgid="1265528923229642480">"ઑટોમૅટિક રીતે ડેટા સ્વિચ કરવો"</string>
+    <string name="primary_sim_automatic_data_msg" msgid="1612203837010785203">"કવરેજ અને ઉપલબ્ધતાના આધારે કોઈપણ સિમ કાર્ડમાંથી ડેટાનો ઉપયોગ કરો"</string>
+    <string name="sim_onboarding_phoneNumber_data_only" msgid="8158409121949373662">"ફક્ત ડેટા"</string>
+    <string name="sim_onboarding_setup" msgid="5750393553605388463">"સેટઅપ કરો"</string>
+    <string name="sim_onboarding_next" msgid="6415025179929475355">"આગળ"</string>
+    <string name="sim_onboarding_profressbar_turning_sim_on" msgid="4888545282948732575">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> ચાલુ કરી રહ્યાં છીએ…"</string>
+    <string name="mobile_network_spn_title" msgid="3053793174495329077">"મોબાઇલ નેટવર્ક"</string>
+    <string name="mobile_network_phone_number_title" msgid="2090794402855021784">"ફોન નંબર"</string>
+    <string name="mobile_network_sim_label_color_title" msgid="2401352348041132876">"સિમ કાર્ડનું લેબલ અને રંગ"</string>
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"નેટવર્કનું સક્રિયકરણ"</string>
     <string name="sim_switch_channel_id" msgid="4927038626791837861">"મોબાઇલ ઑપરેટર સ્વિચ કરી રહ્યાં છે"</string>
     <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> સક્રિય છે"</string>
@@ -4615,6 +4665,22 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"તમારા ઑફિસની પૉલિસીની માહિતી"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"તમારા IT ઍડમિન દ્વારા સેટિંગ મેનેજ કરવામાં આવે છે"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
+    <!-- no translation found for enable_16k_pages (5009476566957520607) -->
+    <skip />
+    <!-- no translation found for enable_16k_pages_summary (428117226069445198) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_title (6751570067857011642) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_text (702888115148257215) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_title (626987400420355263) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_text (6168921566226074524) -->
+    <skip />
+    <!-- no translation found for toast_16k_update_failed_text (8888858987184345567) -->
+    <skip />
+    <!-- no translation found for progress_16k_ota_title (2117218313875523741) -->
+    <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"બગ રિપોર્ટ હૅન્ડલ કરનાર"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"તમારા ડિવાઇસ પર કઈ ઍપ ખામીની જાણકારીના શૉર્ટકટને હૅન્ડલ કરે તે નક્કી કરે છે."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"વ્યક્તિગત"</string>
