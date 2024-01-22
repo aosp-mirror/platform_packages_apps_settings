@@ -29,6 +29,12 @@ import androidx.compose.runtime.snapshots.SnapshotStateList
 import com.android.internal.util.ArrayUtils
 import com.android.settings.R
 import com.android.settings.network.apn.ApnNetworkTypes.getNetworkType
+import com.android.settings.network.apn.ApnTypes.APN_TYPES
+import com.android.settings.network.apn.ApnTypes.APN_TYPE_ALL
+import com.android.settings.network.apn.ApnTypes.APN_TYPE_EMERGENCY
+import com.android.settings.network.apn.ApnTypes.APN_TYPE_IA
+import com.android.settings.network.apn.ApnTypes.APN_TYPE_IMS
+import com.android.settings.network.apn.ApnTypes.APN_TYPE_MCX
 import java.util.Locale
 
 data class ApnData(
@@ -111,67 +117,6 @@ data class CustomizedConfig(
     val defaultApnTypes: List<String> = emptyList(),
     val defaultApnProtocol: String = "",
     val defaultApnRoamingProtocol: String = "",
-)
-
-/**
- * APN types for data connections.  These are usage categories for an APN
- * entry.  One APN entry may support multiple APN types, eg, a single APN
- * may service regular internet traffic ("default") as well as MMS-specific
- * connections.<br></br>
- * APN_TYPE_ALL is a special type to indicate that this APN entry can
- * service all data connections.
- */
-const val APN_TYPE_ALL = "*"
-
-/** APN type for default data traffic  */
-const val APN_TYPE_DEFAULT = "default"
-
-/** APN type for MMS traffic  */
-const val APN_TYPE_MMS = "mms"
-
-/** APN type for SUPL assisted GPS  */
-const val APN_TYPE_SUPL = "supl"
-
-/** APN type for DUN traffic  */
-const val APN_TYPE_DUN = "dun"
-
-/** APN type for HiPri traffic  */
-const val APN_TYPE_HIPRI = "hipri"
-
-/** APN type for FOTA  */
-const val APN_TYPE_FOTA = "fota"
-
-/** APN type for IMS  */
-const val APN_TYPE_IMS = "ims"
-
-/** APN type for CBS  */
-const val APN_TYPE_CBS = "cbs"
-
-/** APN type for IA Initial Attach APN  */
-const val APN_TYPE_IA = "ia"
-
-/** APN type for Emergency PDN. This is not an IA apn, but is used
- * for access to carrier services in an emergency call situation.  */
-const val APN_TYPE_EMERGENCY = "emergency"
-
-/** APN type for Mission Critical Services  */
-const val APN_TYPE_MCX = "mcx"
-
-/** APN type for XCAP  */
-const val APN_TYPE_XCAP = "xcap"
-val APN_TYPES = arrayOf(
-    APN_TYPE_DEFAULT,
-    APN_TYPE_MMS,
-    APN_TYPE_SUPL,
-    APN_TYPE_DUN,
-    APN_TYPE_HIPRI,
-    APN_TYPE_FOTA,
-    APN_TYPE_IMS,
-    APN_TYPE_CBS,
-    APN_TYPE_IA,
-    APN_TYPE_EMERGENCY,
-    APN_TYPE_MCX,
-    APN_TYPE_XCAP
 )
 
 /**
@@ -482,25 +427,6 @@ fun hasAllApns(apnTypes: List<String>): Boolean {
 
 private fun normalizeApnType(apnType: String): String =
     apnType.trim().lowercase(Locale.getDefault())
-
-fun updateApnType(apnData: ApnData): String {
-    return if (apnData.apnType == "" && apnData.customizedConfig.defaultApnTypes.isNotEmpty())
-        getEditableApnType(apnData)
-    else
-        apnData.apnType
-}
-
-private fun getEditableApnType(apnData: ApnData): String {
-    val customizedConfig = apnData.customizedConfig
-    return customizedConfig.defaultApnTypes.filterNot { apnType ->
-        customizedConfig.readOnlyApnTypes.contains(apnType) || apnType in listOf(
-            APN_TYPE_IA,
-            APN_TYPE_EMERGENCY,
-            APN_TYPE_MCX,
-            APN_TYPE_IMS,
-        )
-    }.joinToString()
-}
 
 fun deleteApn(uri: Uri, context: Context) {
     val contentResolver = context.contentResolver

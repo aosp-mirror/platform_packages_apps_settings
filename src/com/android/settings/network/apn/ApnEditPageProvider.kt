@@ -40,6 +40,10 @@ import androidx.navigation.navArgument
 import com.android.settings.R
 import com.android.settings.network.apn.ApnNetworkTypes.getNetworkTypeDisplayNames
 import com.android.settings.network.apn.ApnNetworkTypes.getNetworkTypeSelectedOptionsState
+import com.android.settings.network.apn.ApnTypes.APN_TYPES_OPTIONS
+import com.android.settings.network.apn.ApnTypes.APN_TYPE_MMS
+import com.android.settings.network.apn.ApnTypes.getApnTypeSelectedOptionsState
+import com.android.settings.network.apn.ApnTypes.updateApnType
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
 import com.android.settingslib.spa.framework.compose.LocalNavController
 import com.android.settingslib.spa.framework.theme.SettingsDimension
@@ -99,6 +103,9 @@ fun ApnPage(apnDataInit: ApnData, apnDataCur: MutableState<ApnData>, uriInit: Ur
     val apnProtocolOptions = stringArrayResource(R.array.apn_protocol_entries).toList()
     val networkTypeSelectedOptionsState = remember {
         getNetworkTypeSelectedOptionsState(apnData.networkType)
+    }
+    var apnTypeSelectedOptionsState = remember {
+        getApnTypeSelectedOptionsState(apnData.apnType)
     }
     val navController = LocalNavController.current
     var valid: String?
@@ -191,37 +198,50 @@ fun ApnPage(apnDataInit: ApnData, apnDataCur: MutableState<ApnData>, uriInit: Ur
                 label = stringResource(R.string.apn_server),
                 enabled = apnData.serverEnabled
             ) { apnData = apnData.copy(server = it) }
-            SettingsOutlinedTextField(
-                value = apnData.mmsc,
-                label = stringResource(R.string.apn_mmsc),
-                errorMessage = validateMMSC(apnData.validEnabled, apnData.mmsc, context),
-                enabled = apnData.mmscEnabled
-            ) { apnData = apnData.copy(mmsc = it) }
-            SettingsOutlinedTextField(
-                value = apnData.mmsProxy,
-                label = stringResource(R.string.apn_mms_proxy),
-                enabled = apnData.mmsProxyEnabled
-            ) { apnData = apnData.copy(mmsProxy = it) }
-            SettingsOutlinedTextField(
-                value = apnData.mmsPort,
-                label = stringResource(R.string.apn_mms_port),
-                enabled = apnData.mmsPortEnabled
-            ) { apnData = apnData.copy(mmsPort = it) }
+            SettingsExposedDropdownMenuCheckBox(
+                label = stringResource(R.string.apn_type),
+                options = APN_TYPES_OPTIONS,
+                selectedOptionsState = apnTypeSelectedOptionsState,
+                enabled = apnData.apnTypeEnabled,
+                errorMessage = validateAPNType(
+                    apnData.validEnabled, apnData.apnType,
+                    apnData.customizedConfig.readOnlyApnTypes, context
+                )
+            ) {
+                val apnType = updateApnType(
+                    apnTypeSelectedOptionsState,
+                    apnData.customizedConfig.defaultApnTypes,
+                    apnData.customizedConfig.readOnlyApnTypes
+                )
+                apnTypeSelectedOptionsState = getApnTypeSelectedOptionsState(apnType)
+                apnData = apnData.copy(
+                    apnType = apnType
+                )
+            }
+            if (apnTypeSelectedOptionsState.contains(APN_TYPES_OPTIONS.indexOf(APN_TYPE_MMS))) {
+                SettingsOutlinedTextField(
+                    value = apnData.mmsc,
+                    label = stringResource(R.string.apn_mmsc),
+                    errorMessage = validateMMSC(apnData.validEnabled, apnData.mmsc, context),
+                    enabled = apnData.mmscEnabled
+                ) { apnData = apnData.copy(mmsc = it) }
+                SettingsOutlinedTextField(
+                    value = apnData.mmsProxy,
+                    label = stringResource(R.string.apn_mms_proxy),
+                    enabled = apnData.mmsProxyEnabled
+                ) { apnData = apnData.copy(mmsProxy = it) }
+                SettingsOutlinedTextField(
+                    value = apnData.mmsPort,
+                    label = stringResource(R.string.apn_mms_port),
+                    enabled = apnData.mmsPortEnabled
+                ) { apnData = apnData.copy(mmsPort = it) }
+            }
             SettingsExposedDropdownMenuBox(
                 label = stringResource(R.string.apn_auth_type),
                 options = authTypeOptions,
                 selectedOptionIndex = apnData.authType,
                 enabled = apnData.authTypeEnabled,
             ) { apnData = apnData.copy(authType = it) }
-            SettingsOutlinedTextField(
-                value = apnData.apnType,
-                label = stringResource(R.string.apn_type),
-                enabled = apnData.apnTypeEnabled,
-                errorMessage = validateAPNType(
-                    apnData.validEnabled, apnData.apnType,
-                    apnData.customizedConfig.readOnlyApnTypes, context
-                )
-            ) { apnData = apnData.copy(apnType = updateApnType(apnData.copy(apnType = it))) }
             SettingsExposedDropdownMenuBox(
                 label = stringResource(R.string.apn_protocol),
                 options = apnProtocolOptions,
@@ -234,6 +254,13 @@ fun ApnPage(apnDataInit: ApnData, apnDataCur: MutableState<ApnData>, uriInit: Ur
                 selectedOptionIndex = apnData.apnRoaming,
                 enabled = apnData.apnRoamingEnabled
             ) { apnData = apnData.copy(apnRoaming = it) }
+            SettingsExposedDropdownMenuCheckBox(
+                label = stringResource(R.string.network_type),
+                options = getNetworkTypeDisplayNames(),
+                selectedOptionsState = networkTypeSelectedOptionsState,
+                emptyVal = stringResource(R.string.network_type_unspecified),
+                enabled = apnData.networkTypeEnabled
+            ) {}
             SwitchPreference(
                 object : SwitchPreferenceModel {
                     override val title = context.resources.getString(R.string.carrier_enabled)
@@ -244,13 +271,6 @@ fun ApnPage(apnDataInit: ApnData, apnDataCur: MutableState<ApnData>, uriInit: Ur
                     }
                 }
             )
-            SettingsExposedDropdownMenuCheckBox(
-                label = stringResource(R.string.network_type),
-                options = getNetworkTypeDisplayNames(),
-                selectedOptionsState = networkTypeSelectedOptionsState,
-                emptyVal = stringResource(R.string.network_type_unspecified),
-                enabled = apnData.networkTypeEnabled
-            ) {}
         }
     }
 }
