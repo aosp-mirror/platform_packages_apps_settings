@@ -16,21 +16,29 @@
 
 package com.android.settings.bluetooth;
 
+import static android.bluetooth.BluetoothCsipSetCoordinator.GROUP_ID_INVALID;
+import static android.bluetooth.BluetoothHapClient.PRESET_INDEX_UNAVAILABLE;
+
 import static com.android.settings.bluetooth.BluetoothDetailsHearingDeviceController.KEY_HEARING_DEVICE_GROUP;
 import static com.android.settings.bluetooth.BluetoothDetailsHearingAidsPresetsController.KEY_HEARING_AIDS_PRESETS;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothHapClient;
+import android.bluetooth.BluetoothHapPresetInfo;
 
 import androidx.preference.ListPreference;
 import androidx.preference.PreferenceCategory;
 
+import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.HapClientProfile;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
@@ -43,7 +51,9 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.Executor;
 
 /** Tests for {@link BluetoothDetailsHearingAidsPresetsController}. */
@@ -53,6 +63,7 @@ public class BluetoothDetailsHearingAidsPresetsControllerTest extends
 
     private static final int TEST_PRESET_INDEX = 1;
     private static final String TEST_PRESET_NAME = "test_preset";
+    private static final int TEST_HAP_GROUP_ID = 1;
 
     @Rule
     public final MockitoRule mockito = MockitoJUnit.rule();
@@ -63,6 +74,10 @@ public class BluetoothDetailsHearingAidsPresetsControllerTest extends
     private LocalBluetoothProfileManager mProfileManager;
     @Mock
     private HapClientProfile mHapClientProfile;
+    @Mock
+    private CachedBluetoothDevice mCachedChildDevice;
+    @Mock
+    private BluetoothDevice mChildDevice;
 
     private BluetoothDetailsHearingAidsPresetsController mController;
 
@@ -73,12 +88,28 @@ public class BluetoothDetailsHearingAidsPresetsControllerTest extends
         when(mLocalManager.getProfileManager()).thenReturn(mProfileManager);
         when(mProfileManager.getHapClientProfile()).thenReturn(mHapClientProfile);
         when(mCachedDevice.getProfiles()).thenReturn(List.of(mHapClientProfile));
+        when(mCachedDevice.isConnectedHapClientDevice()).thenReturn(true);
+        when(mCachedChildDevice.getDevice()).thenReturn(mChildDevice);
         PreferenceCategory deviceControls = new PreferenceCategory(mContext);
         deviceControls.setKey(KEY_HEARING_DEVICE_GROUP);
         mScreen.addPreference(deviceControls);
         mController = new BluetoothDetailsHearingAidsPresetsController(mContext, mFragment,
                 mLocalManager, mCachedDevice, mLifecycle);
         mController.init(mScreen);
+    }
+
+    @Test
+    public void isAvailable_supportHap_returnTrue() {
+        when(mCachedDevice.getProfiles()).thenReturn(List.of(mHapClientProfile));
+
+        assertThat(mController.isAvailable()).isTrue();
+    }
+
+    @Test
+    public void isAvailable_notSupportHap_returnFalse() {
+        when(mCachedDevice.getProfiles()).thenReturn(new ArrayList<>());
+
+        assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
@@ -96,7 +127,6 @@ public class BluetoothDetailsHearingAidsPresetsControllerTest extends
         verify(mHapClientProfile).unregisterCallback(any(BluetoothHapClient.Callback.class));
     }
 
-
     @Test
     public void onPreferenceChange_keyMatched_verifyStatusUpdated() {
         final ListPreference presetPreference = getTestPresetPreference(KEY_HEARING_AIDS_PRESETS);
@@ -105,6 +135,7 @@ public class BluetoothDetailsHearingAidsPresetsControllerTest extends
                 String.valueOf(TEST_PRESET_INDEX));
 
         assertThat(handled).isTrue();
+        verify(presetPreference).setSummary(TEST_PRESET_NAME);
     }
 
     @Test
@@ -115,6 +146,116 @@ public class BluetoothDetailsHearingAidsPresetsControllerTest extends
                 presetPreference, String.valueOf(TEST_PRESET_INDEX));
 
         assertThat(handled).isFalse();
+        verify(presetPreference, never()).setSummary(any());
+    }
+
+    @Test
+    public void onPreferenceChange_supportGroupOperation_validGroupId_verifySelectPresetForGroup() {
+        final ListPreference presetPreference = getTestPresetPreference(KEY_HEARING_AIDS_PRESETS);
+        when(mHapClientProfile.supportsSynchronizedPresets(mDevice)).thenReturn(true);
+        when(mHapClientProfile.getHapGroup(mDevice)).thenReturn(TEST_HAP_GROUP_ID);
+
+        mController.onPreferenceChange(presetPreference, String.valueOf(TEST_PRESET_INDEX));
+
+        verify(mHapClientProfile).selectPresetForGroup(TEST_HAP_GROUP_ID, TEST_PRESET_INDEX);
+    }
+
+    @Test
+    public void onPreferenceChange_notSupportGroupOperation_verifySelectPreset() {
+        final ListPreference presetPreference = getTestPresetPreference(KEY_HEARING_AIDS_PRESETS);
+        when(mHapClientProfile.supportsSynchronizedPresets(mDevice)).thenReturn(false);
+        when(mHapClientProfile.getHapGroup(mDevice)).thenReturn(TEST_HAP_GROUP_ID);
+
+        mController.onPreferenceChange(presetPreference, String.valueOf(TEST_PRESET_INDEX));
+
+        verify(mHapClientProfile).selectPreset(mDevice, TEST_PRESET_INDEX);
+    }
+
+    @Test
+    public void onPreferenceChange_invalidGroupId_verifySelectPreset() {
+        final ListPreference presetPreference = getTestPresetPreference(KEY_HEARING_AIDS_PRESETS);
+        when(mHapClientProfile.supportsSynchronizedPresets(mDevice)).thenReturn(true);
+        when(mHapClientProfile.getHapGroup(mDevice)).thenReturn(GROUP_ID_INVALID);
+
+        mController.onPreferenceChange(presetPreference, String.valueOf(TEST_PRESET_INDEX));
+
+        verify(mHapClientProfile).selectPreset(mDevice, TEST_PRESET_INDEX);
+    }
+
+    @Test
+    public void onPreferenceChange_notSupportGroupOperation_hasSubDevice_verifyStatusUpdated() {
+        final ListPreference presetPreference = getTestPresetPreference(KEY_HEARING_AIDS_PRESETS);
+        when(mHapClientProfile.supportsSynchronizedPresets(mDevice)).thenReturn(false);
+        when(mCachedDevice.getSubDevice()).thenReturn(mCachedChildDevice);
+
+        mController.onPreferenceChange(presetPreference, String.valueOf(TEST_PRESET_INDEX));
+
+        verify(mHapClientProfile).selectPreset(mDevice, TEST_PRESET_INDEX);
+        verify(mHapClientProfile).selectPreset(mChildDevice, TEST_PRESET_INDEX);
+    }
+
+    @Test
+    public void onPreferenceChange_notSupportGroupOperation_hasMemberDevice_verifyStatusUpdated() {
+        final ListPreference presetPreference = getTestPresetPreference(KEY_HEARING_AIDS_PRESETS);
+        when(mHapClientProfile.supportsSynchronizedPresets(mDevice)).thenReturn(false);
+        when(mCachedDevice.getMemberDevice()).thenReturn(Set.of(mCachedChildDevice));
+
+        mController.onPreferenceChange(presetPreference, String.valueOf(TEST_PRESET_INDEX));
+
+        verify(mHapClientProfile).selectPreset(mDevice, TEST_PRESET_INDEX);
+        verify(mHapClientProfile).selectPreset(mChildDevice, TEST_PRESET_INDEX);
+    }
+
+    @Test
+    public void refresh_emptyPresetInfo_preferenceDisabled() {
+        when(mHapClientProfile.getAllPresetInfo(mDevice)).thenReturn(new ArrayList<>());
+
+        mController.refresh();
+
+        assertThat(mController.getPreference()).isNotNull();
+        assertThat(mController.getPreference().isEnabled()).isFalse();
+    }
+
+    @Test
+    public void refresh_validPresetInfo_preferenceEnabled() {
+        BluetoothHapPresetInfo info = getTestPresetInfo();
+        when(mHapClientProfile.getAllPresetInfo(mDevice)).thenReturn(List.of(info));
+
+        mController.refresh();
+
+        assertThat(mController.getPreference()).isNotNull();
+        assertThat(mController.getPreference().isEnabled()).isTrue();
+    }
+
+    @Test
+    public void refresh_invalidActivePresetIndex_summaryIsNull() {
+        BluetoothHapPresetInfo info = getTestPresetInfo();
+        when(mHapClientProfile.getAllPresetInfo(mDevice)).thenReturn(List.of(info));
+        when(mHapClientProfile.getActivePresetIndex(mDevice)).thenReturn(PRESET_INDEX_UNAVAILABLE);
+
+        mController.refresh();
+
+        assertThat(mController.getPreference()).isNotNull();
+        assertThat(mController.getPreference().getSummary()).isNull();
+    }
+
+    @Test
+    public void refresh_validActivePresetIndex_summaryIsNotNull() {
+        BluetoothHapPresetInfo info = getTestPresetInfo();
+        when(mHapClientProfile.getAllPresetInfo(mDevice)).thenReturn(List.of(info));
+        when(mHapClientProfile.getActivePresetIndex(mDevice)).thenReturn(TEST_PRESET_INDEX);
+
+        mController.refresh();
+
+        assertThat(mController.getPreference()).isNotNull();
+        assertThat(mController.getPreference().getSummary()).isNotNull();
+    }
+
+    private BluetoothHapPresetInfo getTestPresetInfo() {
+        BluetoothHapPresetInfo info = mock(BluetoothHapPresetInfo.class);
+        when(info.getName()).thenReturn(TEST_PRESET_NAME);
+        when(info.getIndex()).thenReturn(TEST_PRESET_INDEX);
+        return info;
     }
 
     private ListPreference getTestPresetPreference(String key) {
