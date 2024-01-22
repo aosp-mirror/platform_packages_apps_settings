@@ -42,12 +42,14 @@ import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.telephony.MccTable;
-import com.android.internal.telephony.flags.Flags;
 import com.android.settings.R;
+import com.android.settings.flags.Flags;
 import com.android.settings.network.helper.SelectableSubscriptions;
 import com.android.settings.network.helper.SubscriptionAnnotation;
 import com.android.settings.network.telephony.DeleteEuiccSubscriptionDialogActivity;
 import com.android.settings.network.telephony.ToggleSubscriptionDialogActivity;
+import com.android.settings.spa.SpaActivity;
+import com.android.settings.spa.network.SimOnboardingPageProvider;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -543,6 +545,11 @@ public class SubscriptionUtil {
             Log.i(TAG, "Unable to toggle subscription due to invalid subscription ID.");
             return;
         }
+        if (enable && Flags.isDualSimOnboardingEnabled()) {
+            String route = SimOnboardingPageProvider.INSTANCE.getRoute(subId);
+            SpaActivity.startSpaActivity(context, route);
+            return;
+        }
         context.startActivity(ToggleSubscriptionDialogActivity.getIntent(context, subId, enable));
     }
 
@@ -822,7 +829,7 @@ public class SubscriptionUtil {
     private static boolean isEmbeddedSubscriptionVisible(@NonNull SubscriptionInfo subInfo) {
         if (subInfo.isEmbedded()
                 && (subInfo.getProfileClass() == PROFILE_CLASS_PROVISIONING
-                || (Flags.oemEnabledSatelliteFlag()
+                || (com.android.internal.telephony.flags.Flags.oemEnabledSatelliteFlag()
                 && subInfo.isOnlyNonTerrestrialNetwork()))) {
             return false;
         }
