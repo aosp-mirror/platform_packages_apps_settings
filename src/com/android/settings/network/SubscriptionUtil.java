@@ -335,8 +335,16 @@ public class SubscriptionUtil {
 
             if (duplicateOriginalNames.contains(info.originalName)) {
                 // This may return null, if the user cannot view the phone number itself.
-                final String phoneNumber = getBidiFormattedPhoneNumber(context,
-                        info.subscriptionInfo);
+                String phoneNumber = "";
+                try {
+                    final SubscriptionManager subscriptionManager = context.getSystemService(
+                        SubscriptionManager.class);
+                    phoneNumber = subscriptionManager.getPhoneNumber(infoSubId);
+                } catch (IllegalStateException
+                        | SecurityException
+                        | UnsupportedOperationException e) {
+                    Log.w(TAG, "get number error." + e);
+                }
                 String lastFourDigits = "";
                 if (phoneNumber != null) {
                     lastFourDigits = (phoneNumber.length() > 4)
