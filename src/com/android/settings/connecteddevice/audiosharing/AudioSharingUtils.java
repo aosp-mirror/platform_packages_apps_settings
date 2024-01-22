@@ -29,10 +29,11 @@ import com.android.settings.flags.Flags;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
+import com.android.settingslib.bluetooth.LeAudioProfile;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
-import com.android.settingslib.utils.ThreadUtils;
+import com.android.settingslib.bluetooth.LocalBluetoothProfile;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -57,10 +58,16 @@ public class AudioSharingUtils {
     public static Map<Integer, List<CachedBluetoothDevice>> fetchConnectedDevicesByGroupId(
             LocalBluetoothManager localBtManager) {
         Map<Integer, List<CachedBluetoothDevice>> groupedDevices = new HashMap<>();
+        if (localBtManager == null) {
+            Log.d(TAG, "Skip fetchConnectedDevicesByGroupId due to bt manager is null");
+            return groupedDevices;
+        }
         LocalBluetoothLeBroadcastAssistant assistant =
                 localBtManager.getProfileManager().getLeAudioBroadcastAssistantProfile();
-        if (assistant == null) return groupedDevices;
-        // TODO: filter out devices with le audio disabled.
+        if (assistant == null) {
+            Log.d(TAG, "Skip fetchConnectedDevicesByGroupId due to assistant profile is null");
+            return groupedDevices;
+        }
         List<BluetoothDevice> connectedDevices = assistant.getConnectedDevices();
         CachedBluetoothDeviceManager cacheManager = localBtManager.getCachedDeviceManager();
         for (BluetoothDevice device : connectedDevices) {
@@ -69,7 +76,7 @@ public class AudioSharingUtils {
                 Log.d(TAG, "Skip device due to not being cached: " + device.getAnonymizedAddress());
                 continue;
             }
-            int groupId = cachedDevice.getGroupId();
+            int groupId = getGroupId(cachedDevice);
             if (groupId == BluetoothCsipSetCoordinator.GROUP_ID_INVALID) {
                 Log.d(
                         TAG,
@@ -105,9 +112,6 @@ public class AudioSharingUtils {
             Map<Integer, List<CachedBluetoothDevice>> groupedConnectedDevices,
             boolean filterByInSharing) {
         List<CachedBluetoothDevice> orderedDevices = new ArrayList<>();
-        LocalBluetoothLeBroadcastAssistant assistant =
-                localBtManager.getProfileManager().getLeAudioBroadcastAssistantProfile();
-        if (assistant == null) return orderedDevices;
         for (List<CachedBluetoothDevice> devices : groupedConnectedDevices.values()) {
             CachedBluetoothDevice leadDevice = null;
             for (CachedBluetoothDevice device : devices) {
@@ -191,7 +195,7 @@ public class AudioSharingUtils {
             CachedBluetoothDevice cachedDevice) {
         return new AudioSharingDeviceItem(
                 cachedDevice.getName(),
-                cachedDevice.getGroupId(),
+                getGroupId(cachedDevice),
                 isActiveLeAudioDevice(cachedDevice));
     }
 
@@ -204,19 +208,36 @@ public class AudioSharingUtils {
      */
     public static boolean hasBroadcastSource(
             CachedBluetoothDevice cachedDevice, LocalBluetoothManager localBtManager) {
+        if (localBtManager == null) {
+            Log.d(TAG, "Skip check hasBroadcastSource due to bt manager is null");
+            return false;
+        }
         LocalBluetoothLeBroadcastAssistant assistant =
                 localBtManager.getProfileManager().getLeAudioBroadcastAssistantProfile();
         if (assistant == null) {
+            Log.d(TAG, "Skip check hasBroadcastSource due to assistant profile is null");
             return false;
         }
         List<BluetoothLeBroadcastReceiveState> sourceList =
                 assistant.getAllSources(cachedDevice.getDevice());
-        if (!sourceList.isEmpty()) return true;
+        if (!sourceList.isEmpty()) {
+            Log.d(
+                    TAG,
+                    "Lead device has broadcast source, device = "
+                            + cachedDevice.getDevice().getAnonymizedAddress());
+            return true;
+        }
         // Return true if member device is in broadcast.
         for (CachedBluetoothDevice device : cachedDevice.getMemberDevice()) {
             List<BluetoothLeBroadcastReceiveState> list =
                     assistant.getAllSources(device.getDevice());
-            if (!list.isEmpty()) return true;
+            if (!list.isEmpty()) {
+                Log.d(
+                        TAG,
+                        "Member device has broadcast source, device = "
+                                + device.getDevice().getAnonymizedAddress());
+                return true;
+            }
         }
         return false;
     }
@@ -257,8 +278,8 @@ public class AudioSharingUtils {
 
     /** Toast message on main thread. */
     public static void toastMessage(Context context, String message) {
-        ThreadUtils.postOnMainThread(
-                () -> Toast.makeText(context, message, Toast.LENGTH_LONG).show());
+        context.getMainExecutor()
+                .execute(() -> Toast.makeText(context, message, Toast.LENGTH_LONG).show());
     }
 
     /** Returns if the le audio sharing is enabled. */
@@ -273,7 +294,10 @@ public class AudioSharingUtils {
 
     /** Automatically update active device if needed. */
     public static void updateActiveDeviceIfNeeded(LocalBluetoothManager localBtManager) {
-        if (localBtManager == null) return;
+        if (localBtManager == null) {
+            Log.d(TAG, "Skip updateActiveDeviceIfNeeded due to bt manager is null");
+            return;
+        }
         Map<Integer, List<CachedBluetoothDevice>> groupedConnectedDevices =
                 fetchConnectedDevicesByGroupId(localBtManager);
         List<CachedBluetoothDevice> devicesInSharing =
@@ -283,6 +307,7 @@ public class AudioSharingUtils {
         List<BluetoothDevice> devices =
                 BluetoothAdapter.getDefaultAdapter().getMostRecentlyConnectedDevices();
         CachedBluetoothDevice targetDevice = null;
+        // Find the earliest connected device in sharing session.
         int targetDeviceIdx = -1;
         for (CachedBluetoothDevice device : devicesInSharing) {
             if (devices.contains(device.getDevice())) {
@@ -299,6 +324,14 @@ public class AudioSharingUtils {
                     "updateActiveDeviceIfNeeded, set active device: "
                             + targetDevice.getDevice().getAnonymizedAddress());
             targetDevice.setActive();
+        } else {
+            Log.d(
+                    TAG,
+                    "updateActiveDeviceIfNeeded, skip set active device: "
+                            + (targetDevice == null
+                                    ? "null"
+                                    : (targetDevice.getDevice().getAnonymizedAddress()
+                                            + " is already active")));
         }
     }
 
@@ -312,9 +345,38 @@ public class AudioSharingUtils {
 
     /** Stops the latest broadcast. */
     public static void stopBroadcasting(LocalBluetoothManager manager) {
-        if (manager == null) return;
+        if (manager == null) {
+            Log.d(TAG, "Skip stop broadcasting due to bt manager is null");
+            return;
+        }
         LocalBluetoothLeBroadcast broadcast =
                 manager.getProfileManager().getLeAudioBroadcastProfile();
+        if (broadcast == null) {
+            Log.d(TAG, "Skip stop broadcasting due to broadcast profile is null");
+        }
         broadcast.stopBroadcast(broadcast.getLatestBroadcastId());
+    }
+
+    /**
+     * Get CSIP group id for {@link CachedBluetoothDevice}.
+     *
+     * <p>If CachedBluetoothDevice#getGroupId is invalid, fetch group id from
+     * LeAudioProfile#getGroupId.
+     */
+    public static int getGroupId(CachedBluetoothDevice cachedDevice) {
+        int groupId = cachedDevice.getGroupId();
+        String anonymizedAddress = cachedDevice.getDevice().getAnonymizedAddress();
+        if (groupId != BluetoothCsipSetCoordinator.GROUP_ID_INVALID) {
+            Log.d(TAG, "getGroupId by CSIP profile for device: " + anonymizedAddress);
+            return groupId;
+        }
+        for (LocalBluetoothProfile profile : cachedDevice.getProfiles()) {
+            if (profile instanceof LeAudioProfile) {
+                Log.d(TAG, "getGroupId by LEA profile for device: " + anonymizedAddress);
+                return ((LeAudioProfile) profile).getGroupId(cachedDevice.getDevice());
+            }
+        }
+        Log.d(TAG, "getGroupId return invalid id for device: " + anonymizedAddress);
+        return BluetoothCsipSetCoordinator.GROUP_ID_INVALID;
     }
 }
