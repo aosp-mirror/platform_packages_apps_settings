@@ -103,9 +103,11 @@
             <Switch
                 android:id="@+id/phonebook_sharing_message_confirm_pin"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="48dp"
                 android:layout_weight="0"
-                android:gravity="center_vertical" />
+                android:gravity="center_vertical"
+                android:contentDescription="@string/bluetooth_pairing_phonebook_toggle_text"
+                android:switchMinWidth="48dp" />
         </LinearLayout>
     </LinearLayout>
 
