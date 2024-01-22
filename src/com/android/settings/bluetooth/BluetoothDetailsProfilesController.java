@@ -37,6 +37,8 @@ import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.core.SettingsUIDeviceConfig;
+import com.android.settings.flags.Flags;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.bluetooth.A2dpProfile;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
@@ -49,11 +51,14 @@ import com.android.settingslib.bluetooth.MapProfile;
 import com.android.settingslib.bluetooth.PanProfile;
 import com.android.settingslib.bluetooth.PbapServerProfile;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * This class adds switches for toggling the individual profiles that a Bluetooth device
@@ -78,6 +83,8 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
     private static final boolean LE_AUDIO_TOGGLE_VISIBLE_DEFAULT_VALUE = true;
     private static final String LE_AUDIO_TOGGLE_VISIBLE_PROPERTY =
             "persist.bluetooth.leaudio.toggle_visible";
+
+    private final AtomicReference<Set<String>> mInvisiblePreferenceKey = new AtomicReference<>();
 
     private LocalBluetoothManager mManager;
     private LocalBluetoothProfileManager mProfileManager;
@@ -547,6 +554,22 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
      */
     @Override
     protected void refresh() {
+        if (Flags.enableBluetoothProfileToggleVisibilityChecker()) {
+            ThreadUtils.postOnBackgroundThread(
+                    () -> {
+                        mInvisiblePreferenceKey.set(
+                                FeatureFactory.getFeatureFactory()
+                                        .getBluetoothFeatureProvider()
+                                        .getInvisibleProfilePreferenceKeys(
+                                                mContext, mCachedDevice.getDevice()));
+                        ThreadUtils.postOnMainThread(this::refreshUi);
+                    });
+        } else {
+            refreshUi();
+        }
+    }
+
+    private void refreshUi() {
         for (LocalBluetoothProfile profile : getProfiles()) {
             if (profile == null || !profile.isProfileReady()) {
                 continue;
@@ -576,6 +599,16 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
             preference.setOrder(ORDINAL);
             preference.setSelectable(false);
             mProfilesContainer.addPreference(preference);
+        }
+
+        if (Flags.enableBluetoothProfileToggleVisibilityChecker()) {
+            Set<String> invisibleKeys = mInvisiblePreferenceKey.get();
+            if (invisibleKeys != null) {
+                for (int i = 0; i < mProfilesContainer.getPreferenceCount(); ++i) {
+                    Preference pref = mProfilesContainer.getPreference(i);
+                    pref.setVisible(pref.isVisible() && !invisibleKeys.contains(pref.getKey()));
+                }
+            }
         }
     }
 
