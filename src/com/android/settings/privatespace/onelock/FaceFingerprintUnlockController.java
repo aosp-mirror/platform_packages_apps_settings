@@ -23,6 +23,7 @@ import android.util.Log;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.biometrics.combination.CombinedBiometricStatusPreferenceController;
 import com.android.settings.privatespace.PrivateSpaceMaintainer;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -72,6 +73,8 @@ public class FaceFingerprintUnlockController extends CombinedBiometricStatusPref
             super.updateState(preference);
             preference.setEnabled(true);
         } else {
+            Utils.removeEnrolledFaceForUser(mContext, getUserId());
+            Utils.removeEnrolledFingerprintForUser(mContext, getUserId());
             preference.setSummary(
                     mContext.getString(R.string.lock_settings_profile_unified_summary));
             preference.setEnabled(false);
