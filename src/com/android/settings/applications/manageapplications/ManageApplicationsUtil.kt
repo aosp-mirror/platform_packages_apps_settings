@@ -59,6 +59,7 @@ import com.android.settings.applications.manageapplications.ManageApplications.L
 import com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_WIFI_ACCESS
 import com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_WRITE_SETTINGS
 import com.android.settings.spa.app.AllAppListPageProvider
+import com.android.settings.spa.app.battery.BatteryOptimizationModeAppListPageProvider
 import com.android.settings.spa.app.appcompat.UserAspectRatioAppsPageProvider
 import com.android.settings.spa.app.specialaccess.AlarmsAndRemindersAppListProvider
 import com.android.settings.spa.app.specialaccess.AllFilesAccessAppListProvider
@@ -70,7 +71,6 @@ import com.android.settings.spa.app.specialaccess.ModifySystemSettingsAppListPro
 import com.android.settings.spa.app.specialaccess.NfcTagAppsSettingsProvider
 import com.android.settings.spa.app.specialaccess.TurnScreenOnAppsAppListProvider
 import com.android.settings.spa.app.specialaccess.WifiControlAppListProvider
-import com.android.settings.spa.app.storage.StorageAppListPageProvider
 import com.android.settings.spa.notification.AppListNotificationsPageProvider
 import com.android.settings.spa.system.AppLanguagesPageProvider
 
@@ -127,6 +127,7 @@ object ManageApplicationsUtil {
             // TODO(b/292165031) enable once sorting is supported
             //LIST_TYPE_STORAGE -> StorageAppListPageProvider.Apps.name
             //LIST_TYPE_GAMES -> StorageAppListPageProvider.Games.name
+            LIST_TYPE_BATTERY_OPTIMIZATION -> BatteryOptimizationModeAppListPageProvider.name
             else -> null
         }
     }
