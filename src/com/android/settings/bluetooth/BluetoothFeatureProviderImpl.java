@@ -29,8 +29,10 @@ import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Impl of {@link BluetoothFeatureProvider}
@@ -64,5 +66,11 @@ public class BluetoothFeatureProviderImpl implements BluetoothFeatureProvider {
     public List<Preference> getBluetoothExtraOptions(Context context,
             CachedBluetoothDevice device) {
         return ImmutableList.of();
+    }
+
+    @Override
+    public Set<String> getInvisibleProfilePreferenceKeys(
+            Context context, BluetoothDevice bluetoothDevice) {
+        return ImmutableSet.of();
     }
 }

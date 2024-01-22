@@ -27,6 +27,7 @@ import androidx.preference.Preference;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Provider for bluetooth related features.
@@ -73,4 +74,14 @@ public interface BluetoothFeatureProvider {
      * @return the extra bluetooth preference list
      */
     List<Preference> getBluetoothExtraOptions(Context context, CachedBluetoothDevice device);
+
+    /**
+     * Gets the bluetooth profile preference keys which should be hidden in the device details page.
+     *
+     * @param context         Context
+     * @param bluetoothDevice the bluetooth device
+     * @return the profiles which should be hidden
+     */
+    Set<String> getInvisibleProfilePreferenceKeys(
+            Context context, BluetoothDevice bluetoothDevice);
 }
