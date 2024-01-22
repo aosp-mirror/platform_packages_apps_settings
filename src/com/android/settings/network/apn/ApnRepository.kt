@@ -20,7 +20,6 @@ import android.content.ContentValues
 import android.content.Context
 import android.net.Uri
 import android.provider.Telephony
-import android.telephony.TelephonyManager
 import android.util.Log
 import com.android.settings.R
 import com.android.settingslib.utils.ThreadUtils
@@ -200,14 +199,21 @@ fun updateApnDataToDatabase(
     }
 }
 
-fun isItemExist(uri: Uri, apnData: ApnData, context: Context): String? {
-    val contentValueMap = apnData.getContentValueMap(context)
-    contentValueMap.remove(Telephony.Carriers.CARRIER_ENABLED)
+fun isItemExist(apnData: ApnData, context: Context): String? {
+    var contentValueMap = apnData.getContentValueMap(context)
+    val removedList = arrayListOf(
+        Telephony.Carriers.NAME, Telephony.Carriers.USER,
+        Telephony.Carriers.SERVER, Telephony.Carriers.PASSWORD, Telephony.Carriers.AUTH_TYPE,
+        Telephony.Carriers.TYPE, Telephony.Carriers.NETWORK_TYPE_BITMASK,
+        Telephony.Carriers.CARRIER_ENABLED
+    )
+    contentValueMap =
+        contentValueMap.filterNot { removedList.contains(it.key) } as MutableMap<String, Any>
     val list = contentValueMap.entries.toList()
     val selection = list.joinToString(" AND ") { "${it.key} = ?" }
     val selectionArgs: Array<String> = list.map { it.value.toString() }.toTypedArray()
     context.contentResolver.query(
-        uri,
+        Telephony.Carriers.CONTENT_URI,
         sProjection,
         selection /* selection */,
         selectionArgs /* selectionArgs */,
