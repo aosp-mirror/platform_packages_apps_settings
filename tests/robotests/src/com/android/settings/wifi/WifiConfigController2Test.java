@@ -21,9 +21,11 @@ import static com.android.settings.wifi.WifiConfigController2.WIFI_EAP_METHOD_SI
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -995,6 +997,18 @@ public class WifiConfigController2Test {
 
         assertThat(anonymousLayout.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(anonymousId.getText().toString()).isEqualTo(DEFAULT_ANONYMOUS_ID);
+    }
+
+    @Test
+    public void setAnonymousIdVisible_viewIsVisible_doNotSetText() {
+        createController(mWifiEntry, WifiConfigUiBase2.MODE_CONNECT, false);
+        View anonymousLayout = mView.findViewById(R.id.l_anonymous);
+        mController.mEapAnonymousView = mock(TextView.class);
+        anonymousLayout.setVisibility(View.VISIBLE);
+
+        mController.setAnonymousIdVisible();
+
+        verify(mController.mEapAnonymousView, never()).setText(any(String.class));
     }
 
     private void setUpModifyingSavedCertificateConfigController(String savedCaCertificate,
