@@ -31,6 +31,7 @@ import android.view.ViewGroup;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
@@ -55,10 +56,19 @@ public class PrivateSpaceAccountLoginError extends InstrumentedFragment {
         final FooterBarMixin mixin = rootView.getMixin(FooterBarMixin.class);
         mixin.setPrimaryButton(
                 new FooterButton.Builder(getContext())
-                        .setText(R.string.private_space_tryagain_label)
+                        .setText(R.string.private_space_continue_login_label)
                         .setListener(nextScreen())
                         .setButtonType(FooterButton.ButtonType.NEXT)
                         .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Primary)
+                        .build());
+        mixin.setSecondaryButton(
+                new FooterButton.Builder(getContext())
+                        .setText(R.string.private_space_skip_login_label)
+                        .setListener(onSkip())
+                        .setButtonType(FooterButton.ButtonType.CANCEL)
+                        .setTheme(
+                                androidx.appcompat.R.style
+                                        .Base_TextAppearance_AppCompat_Widget_Button)
                         .build());
         OnBackPressedCallback callback =
                 new OnBackPressedCallback(true /* enabled by default */) {
@@ -94,6 +104,19 @@ public class PrivateSpaceAccountLoginError extends InstrumentedFragment {
                 getActivity()
                         .startActivityForResultAsUser(intent, ACCOUNT_LOGIN_ACTION, userHandle);
             }
+        };
+    }
+
+    private View.OnClickListener onSkip() {
+        return v -> {
+            mMetricsFeatureProvider.action(
+                    getContext(), SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_SKIP_ACCOUNT_LOGIN);
+            mMetricsFeatureProvider.action(
+                    getContext(),
+                    SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_ACCOUNT_LOGIN_SUCCESS,
+                    false);
+            NavHostFragment.findNavController(PrivateSpaceAccountLoginError.this)
+                    .navigate(R.id.action_success_fragment);
         };
     }
 }
