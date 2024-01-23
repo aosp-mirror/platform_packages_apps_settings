@@ -43,7 +43,8 @@ public class SubscriptionActionDialogActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mSubscriptionManager = getSystemService(SubscriptionManager.class);
+        mSubscriptionManager = getSystemService(SubscriptionManager.class)
+                .createForAllUserProfiles();
         setProgressState(PROGRESS_IS_NOT_SHOWING);
     }
 
