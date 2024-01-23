@@ -91,6 +91,10 @@ final class AnomalyEventWrapper {
         mRelatedBatteryDiffEntry = batteryDiffEntry;
     }
 
+    int getAnomalyKeyNumber() {
+        return mPowerAnomalyEvent.getKey().getNumber();
+    }
+
     String getEventId() {
         return mPowerAnomalyEvent.hasEventId() ? mPowerAnomalyEvent.getEventId() : null;
     }
