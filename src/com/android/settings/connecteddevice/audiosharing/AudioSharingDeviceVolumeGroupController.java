@@ -77,11 +77,12 @@ public class AudioSharingDeviceVolumeGroupController extends AudioSharingBasePre
                     CachedBluetoothDevice cachedDevice =
                             mLocalBtManager.getCachedDeviceManager().findDevice(device);
                     if (cachedDevice == null) return;
-                    mValueMap.put(cachedDevice.getGroupId(), volume);
+                    int groupId = AudioSharingUtils.getGroupId(cachedDevice);
+                    mValueMap.put(groupId, volume);
                     for (AudioSharingDeviceVolumePreference preference : mVolumePreferences) {
                         if (preference.getCachedDevice() != null
-                                && preference.getCachedDevice().getGroupId()
-                                        == cachedDevice.getGroupId()) {
+                                && AudioSharingUtils.getGroupId(preference.getCachedDevice())
+                                        == groupId) {
                             // If the callback return invalid volume, try to
                             // get the volume from AudioManager.STREAM_MUSIC
                             int finalVolume = getAudioVolumeIfNeeded(volume);
@@ -270,7 +271,7 @@ public class AudioSharingDeviceVolumeGroupController extends AudioSharingBasePre
             if (volumePref.getProgress() > 0) return;
             CachedBluetoothDevice device = volumePref.getCachedDevice();
             if (device == null) return;
-            int volume = mValueMap.getOrDefault(device.getGroupId(), -1);
+            int volume = mValueMap.getOrDefault(AudioSharingUtils.getGroupId(device), -1);
             // If the volume is invalid, try to get the volume from AudioManager.STREAM_MUSIC
             int finalVolume = getAudioVolumeIfNeeded(volume);
             Log.d(
