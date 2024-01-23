@@ -27,8 +27,7 @@
             android:order="10"
             android:title="@string/app_notification_field"
             android:summary="@string/app_notification_field_summary"
-            android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
-            settings:searchable="false">
+            android:fragment="com.android.settings.applications.manageapplications.ManageApplications">
             <extra
                 android:name="classname"
                 android:value="com.android.settings.Settings$NotificationAppListActivity"/>
