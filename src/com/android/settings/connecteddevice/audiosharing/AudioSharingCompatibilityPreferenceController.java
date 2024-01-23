@@ -139,16 +139,20 @@ public class AudioSharingCompatibilityPreferenceController extends TogglePrefere
 
     @Override
     public boolean isChecked() {
-        // TODO: return real compatibility config.
-        return false;
+        return mBroadcast != null && mBroadcast.getImproveCompatibility();
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        if (mBroadcast == null) {
+        if (mBroadcast == null || mBroadcast.getImproveCompatibility() == isChecked) {
+            Log.d(
+                    TAG,
+                    "Skip setting improveCompatibility, unchanged = "
+                            + (mBroadcast.getImproveCompatibility() == isChecked));
             return false;
         }
-        // TODO: set real compatibility config.
+        mBroadcast.setImproveCompatibility(isChecked);
+        // TODO: call updateBroadcast once framework change ready.
         return true;
     }
 
