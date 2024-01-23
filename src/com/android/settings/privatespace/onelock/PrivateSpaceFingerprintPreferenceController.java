@@ -76,6 +76,7 @@ public class PrivateSpaceFingerprintPreferenceController
             super.updateState(preference);
             preference.setEnabled(true);
         } else {
+            Utils.removeEnrolledFingerprintForUser(mContext, getUserId());
             preference.setSummary(
                     mContext.getString(R.string.lock_settings_profile_unified_summary));
             preference.setEnabled(false);
