@@ -51,23 +51,24 @@ class WepNetworkDialogActivity : SpaBaseDialogActivity() {
             confirmButton = AlertDialogButton(
                 getString(R.string.wifi_settings_ssid_block_button_close)
             ) { finish() },
-            dismissButton = AlertDialogButton(
-                getString(R.string.wifi_settings_wep_networks_button_allow)
-            ) {
-                SubSettingLauncher(context)
-                    .setTitleText(context.getText(R.string.network_and_internet_preferences_title))
-                    .setSourceMetricsCategory(SettingsEnums.CONFIGURE_WIFI)
-                    .setDestination(ConfigureWifiSettings::class.java.getName())
-                    .launch()
-                finish()
-            },
+            dismissButton = if (wifiManager?.isWepSupported == true)
+                AlertDialogButton(
+                    getString(R.string.wifi_settings_wep_networks_button_allow)
+                ) {
+                    SubSettingLauncher(context)
+                        .setTitleText(context.getText(R.string.network_and_internet_preferences_title))
+                        .setSourceMetricsCategory(SettingsEnums.CONFIGURE_WIFI)
+                        .setDestination(ConfigureWifiSettings::class.java.getName())
+                        .launch()
+                    finish()
+                } else null,
             title = String.format(
                 getString(R.string.wifi_settings_wep_networks_blocked_title),
                 intent.getStringExtra(SSID) ?: SSID
             ),
             text = {
                 Text(
-                    if (wifiManager?.isWepSupported == false)
+                    if (wifiManager?.isWepSupported == true)
                         getString(R.string.wifi_settings_wep_networks_summary_toggle_off)
                     else getString(R.string.wifi_settings_wep_networks_summary_blocked_by_carrier),
                     modifier = Modifier.fillMaxWidth(),
