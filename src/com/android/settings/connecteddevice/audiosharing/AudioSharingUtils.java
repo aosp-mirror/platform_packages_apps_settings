@@ -336,7 +336,7 @@ public class AudioSharingUtils {
     }
 
     /** Returns if the broadcast is on-going. */
-    public static boolean isBroadcasting(LocalBluetoothManager manager) {
+    public static boolean isBroadcasting(@Nullable LocalBluetoothManager manager) {
         if (manager == null) return false;
         LocalBluetoothLeBroadcast broadcast =
                 manager.getProfileManager().getLeAudioBroadcastProfile();
