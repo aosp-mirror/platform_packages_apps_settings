@@ -21,8 +21,10 @@ import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.View;
 
 import androidx.annotation.Nullable;
+import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
 import com.android.settingslib.widget.TwoTargetPreference;
@@ -56,7 +58,6 @@ class AudioStreamPreference extends TwoTargetPreference {
         }
         mIsConnected = isConnected;
         setSummary(summary);
-        setOrder(isConnected ? 0 : 1);
         setOnPreferenceClickListener(onPreferenceClickListener);
         notifyChanged();
     }
@@ -68,6 +69,10 @@ class AudioStreamPreference extends TwoTargetPreference {
 
     void setAudioStreamState(AudioStreamsProgressCategoryController.AudioStreamState state) {
         mAudioStream.setState(state);
+    }
+
+    int getAudioStreamRssi() {
+        return mAudioStream.getRssi();
     }
 
     AudioStreamsProgressCategoryController.AudioStreamState getAudioStreamState() {
@@ -84,13 +89,26 @@ class AudioStreamPreference extends TwoTargetPreference {
         return R.layout.preference_widget_lock;
     }
 
+    @Override
+    public void onBindViewHolder(PreferenceViewHolder holder) {
+        super.onBindViewHolder(holder);
+        View divider =
+                holder.findViewById(
+                        com.android.settingslib.widget.preference.twotarget.R.id
+                                .two_target_divider);
+        if (divider != null) {
+            divider.setVisibility(View.GONE);
+        }
+    }
+
     static AudioStreamPreference fromMetadata(
             Context context,
             BluetoothLeBroadcastMetadata source,
             AudioStreamsProgressCategoryController.AudioStreamState streamState) {
         AudioStreamPreference preference = new AudioStreamPreference(context, /* attrs= */ null);
         preference.setTitle(getBroadcastName(source));
-        preference.setAudioStream(new AudioStream(source.getBroadcastId(), streamState));
+        preference.setAudioStream(
+                new AudioStream(source.getBroadcastId(), streamState, source.getRssi()));
         return preference;
     }
 
@@ -129,12 +147,16 @@ class AudioStreamPreference extends TwoTargetPreference {
     private static final class AudioStream {
         private int mSourceId;
         private int mBroadcastId;
+        private int mRssi = Integer.MIN_VALUE;
         private AudioStreamsProgressCategoryController.AudioStreamState mState;
 
         private AudioStream(
-                int broadcastId, AudioStreamsProgressCategoryController.AudioStreamState state) {
+                int broadcastId,
+                AudioStreamsProgressCategoryController.AudioStreamState state,
+                int rssi) {
             mBroadcastId = broadcastId;
             mState = state;
+            mRssi = rssi;
         }
 
         private AudioStream(
@@ -154,6 +176,10 @@ class AudioStreamPreference extends TwoTargetPreference {
         // TODO(chelseahao): use this to handleSourceRemoved
         private int getBroadcastId() {
             return mBroadcastId;
+        }
+
+        private int getRssi() {
+            return mRssi;
         }
 
         private AudioStreamsProgressCategoryController.AudioStreamState getState() {

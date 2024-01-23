@@ -53,6 +53,7 @@ import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Comparator;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -87,6 +88,15 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
         // Source is added to active sink.
         SOURCE_ADDED,
     }
+
+    private final Comparator<AudioStreamPreference> mComparator =
+            Comparator.<AudioStreamPreference, Boolean>comparing(
+                            p ->
+                                    p.getAudioStreamState()
+                                            == AudioStreamsProgressCategoryController
+                                                    .AudioStreamState.SOURCE_ADDED)
+                    .thenComparingInt(AudioStreamPreference::getAudioStreamRssi)
+                    .reversed();
 
     private final Executor mExecutor;
     private final AudioStreamsProgressCategoryCallback mBroadcastAssistantCallback;
@@ -338,7 +348,7 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
         ThreadUtils.postOnMainThread(
                 () -> {
                     if (mCategoryPreference != null) {
-                        mCategoryPreference.removeAll();
+                        mCategoryPreference.removeAudioStreamPreferences();
                         mCategoryPreference.setVisible(hasActive);
                     }
                 });
@@ -423,7 +433,7 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
                             getPreferenceSummary(state),
                             onClickListener);
                     if (mCategoryPreference != null) {
-                        mCategoryPreference.addPreference(preference);
+                        mCategoryPreference.addAudioStreamPreference(preference, mComparator);
                     }
                 });
     }
@@ -492,7 +502,7 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
     private AudioStreamsDialogFragment.DialogBuilder getNoLeDeviceDialog() {
         return new AudioStreamsDialogFragment.DialogBuilder(mContext)
                 .setTitle("Connect compatible headphones")
-                .setSubTitle1(
+                .setSubTitle2(
                         "To listen to an audio stream, first connect headphones that support LE"
                                 + " Audio to this device. Learn more")
                 .setLeftButtonText("Close")

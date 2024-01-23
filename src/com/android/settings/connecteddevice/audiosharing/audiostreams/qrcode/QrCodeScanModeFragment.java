@@ -229,6 +229,7 @@ public class QrCodeScanModeFragment extends InstrumentedFragment
         }
 
         mErrorMessage.setVisibility(View.INVISIBLE);
+        mTextureView.setVisibility(View.INVISIBLE);
 
         triggerVibrationForQrCodeRecognition(getContext());
 

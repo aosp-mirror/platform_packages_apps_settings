@@ -19,8 +19,14 @@ package com.android.settings.connecteddevice.audiosharing.audiostreams;
 import android.content.Context;
 import android.util.AttributeSet;
 
+import androidx.annotation.NonNull;
+
 import com.android.settings.ProgressCategory;
 import com.android.settings.R;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 public class AudioStreamsProgressCategoryPreference extends ProgressCategory {
 
@@ -44,6 +50,37 @@ public class AudioStreamsProgressCategoryPreference extends ProgressCategory {
             Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init();
+    }
+
+    void addAudioStreamPreference(
+            @NonNull AudioStreamPreference preference,
+            Comparator<AudioStreamPreference> comparator) {
+        super.addPreference(preference);
+
+        List<AudioStreamPreference> preferences = getAllAudioStreamPreferences();
+        preferences.sort(comparator);
+        for (int i = 0; i < preferences.size(); i++) {
+            // setOrder to i + 1, since the order 0 preference should always be the
+            // "audio_streams_scan_qr_code"
+            preferences.get(i).setOrder(i + 1);
+        }
+    }
+
+    void removeAudioStreamPreferences() {
+        List<AudioStreamPreference> streams = getAllAudioStreamPreferences();
+        for (var toRemove : streams) {
+            removePreference(toRemove);
+        }
+    }
+
+    private List<AudioStreamPreference> getAllAudioStreamPreferences() {
+        List<AudioStreamPreference> streams = new ArrayList<>();
+        for (int i = 0; i < getPreferenceCount(); i++) {
+            if (getPreference(i) instanceof AudioStreamPreference) {
+                streams.add((AudioStreamPreference) getPreference(i));
+            }
+        }
+        return streams;
     }
 
     private void init() {
