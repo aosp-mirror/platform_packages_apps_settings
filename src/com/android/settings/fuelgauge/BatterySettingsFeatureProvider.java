@@ -35,5 +35,5 @@ public interface BatterySettingsFeatureProvider {
     boolean isBatteryInfoEnabled(Context context);
 
     /** A way to add more battery tip detectors. */
-    void addBatteryTipDetector(Context context, List<BatteryTip> tips);
+    void addBatteryTipDetector(Context context, List<BatteryTip> tips, BatteryInfo batteryInfo);
 }

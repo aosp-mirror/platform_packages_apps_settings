@@ -52,7 +52,6 @@ public class BatteryTipLoaderTest {
     private static final int[] TIP_ORDER = {
         BatteryTip.TipType.LOW_BATTERY,
         BatteryTip.TipType.BATTERY_DEFENDER,
-        BatteryTip.TipType.DOCK_DEFENDER,
         BatteryTip.TipType.INCOMPATIBLE_CHARGER,
         BatteryTip.TipType.HIGH_DEVICE_USAGE
     };
