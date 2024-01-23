@@ -173,7 +173,7 @@ fun validateAndSaveApnData(
     context: Context,
     uriInit: Uri
 ): String? {
-    val errorMsg = validateApnData(uriInit, newApnData, context)
+    val errorMsg = validateApnData(newApnData, context)
     if (errorMsg != null) {
         return errorMsg
     }
@@ -194,7 +194,7 @@ fun validateAndSaveApnData(
  *
  * @return An error message if the apn data is invalid, otherwise return null.
  */
-fun validateApnData(uri: Uri, apnData: ApnData, context: Context): String? {
+fun validateApnData(apnData: ApnData, context: Context): String? {
     var errorMsg: String?
     val name = apnData.name
     val apn = apnData.apn
@@ -206,7 +206,7 @@ fun validateApnData(uri: Uri, apnData: ApnData, context: Context): String? {
         validateMMSC(true, apnData.mmsc, context)
     }
     if (errorMsg == null) {
-        errorMsg = isItemExist(uri, apnData, context)
+        errorMsg = isItemExist(apnData, context)
     }
     if (errorMsg == null) {
         errorMsg = validateAPNType(
