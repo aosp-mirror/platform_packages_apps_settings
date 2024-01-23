@@ -52,7 +52,7 @@ public final class IncompatibleChargerTip extends BatteryTip {
 
     @Override
     public int getIconId() {
-        return R.drawable.ic_battery_charger;
+        return R.drawable.ic_battery_incompatible_charger;
     }
 
     @Override
