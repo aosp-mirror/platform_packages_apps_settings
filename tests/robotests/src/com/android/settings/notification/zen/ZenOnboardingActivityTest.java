@@ -27,10 +27,13 @@ import static com.android.settings.notification.zen.ZenOnboardingActivity.isSugg
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.Flags;
 import android.app.NotificationManager;
 import android.app.NotificationManager.Policy;
 import android.content.Context;
@@ -42,7 +45,6 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -91,7 +93,6 @@ public class ZenOnboardingActivityTest {
         verify(mMetricsLogger).visible(MetricsEvent.SETTINGS_ZEN_ONBOARDING);
     }
 
-    @Ignore
     @Test
     public void saveNewSetting() {
         Policy policy = new Policy(PRIORITY_CATEGORY_ALARMS, 0, 0, SUPPRESSED_EFFECT_SCREEN_ON);
@@ -103,7 +104,11 @@ public class ZenOnboardingActivityTest {
         verify(mMetricsLogger).action(MetricsEvent.ACTION_ZEN_ONBOARDING_OK);
 
         ArgumentCaptor<Policy> captor = ArgumentCaptor.forClass(Policy.class);
-        verify(mNm).setNotificationPolicy(captor.capture());
+        if (android.app.Flags.modesApi()) {
+            verify(mNm).setNotificationPolicy(captor.capture(), eq(true));
+        } else {
+            verify(mNm).setNotificationPolicy(captor.capture());
+        }
 
         Policy actual = captor.getValue();
         assertThat(actual.priorityCategories).isEqualTo(PRIORITY_CATEGORY_ALARMS
@@ -123,7 +128,11 @@ public class ZenOnboardingActivityTest {
         mActivity.save(null);
 
         verify(mMetricsLogger).action(MetricsEvent.ACTION_ZEN_ONBOARDING_KEEP_CURRENT_SETTINGS);
-        verify(mNm, never()).setNotificationPolicy(any());
+        if (Flags.modesApi()) {
+            verify(mNm, never()).setNotificationPolicy(any(), anyBoolean());
+        } else {
+            verify(mNm, never()).setNotificationPolicy(any());
+        }
     }
 
     @Test
