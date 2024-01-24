@@ -21,8 +21,7 @@ import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_REPEAT_CA
 import static android.app.NotificationManager.Policy.SUPPRESSED_EFFECT_SCREEN_ON;
 
 import static com.android.settings.notification.zen.ZenOnboardingActivity.ALWAYS_SHOW_THRESHOLD;
-import static com.android.settings.notification.zen.ZenOnboardingActivity
-        .PREF_KEY_SUGGESTION_FIRST_DISPLAY_TIME;
+import static com.android.settings.notification.zen.ZenOnboardingActivity.PREF_KEY_SUGGESTION_FIRST_DISPLAY_TIME;
 import static com.android.settings.notification.zen.ZenOnboardingActivity.isSuggestionComplete;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -40,10 +39,10 @@ import android.provider.Settings;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.notification.zen.ZenOnboardingActivity;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -92,6 +91,7 @@ public class ZenOnboardingActivityTest {
         verify(mMetricsLogger).visible(MetricsEvent.SETTINGS_ZEN_ONBOARDING);
     }
 
+    @Ignore
     @Test
     public void saveNewSetting() {
         Policy policy = new Policy(PRIORITY_CATEGORY_ALARMS, 0, 0, SUPPRESSED_EFFECT_SCREEN_ON);

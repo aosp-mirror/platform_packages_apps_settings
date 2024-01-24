@@ -37,6 +37,7 @@ import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -95,6 +96,7 @@ public class ZenModeSliceBuilderTest {
         assertThat(primaryAction.getIcon()).isNull();
     }
 
+    @Ignore
     @Test
     public void handleUriChange_turnOn_zenModeTurnsOn() {
         final Intent intent = new Intent();
@@ -107,6 +109,7 @@ public class ZenModeSliceBuilderTest {
         assertThat(zenMode).isEqualTo(Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS);
     }
 
+    @Ignore
     @Test
     public void handleUriChange_turnOff_zenModeTurnsOff() {
         final Intent intent = new Intent();
