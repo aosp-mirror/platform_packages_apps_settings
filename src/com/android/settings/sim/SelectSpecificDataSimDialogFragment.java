@@ -194,7 +194,7 @@ public class SelectSpecificDataSimDialogFragment extends SimDialogFragment imple
 
     @VisibleForTesting
     protected SubscriptionManager getSubscriptionManager() {
-        return getContext().getSystemService(SubscriptionManager.class);
+        return getContext().getSystemService(SubscriptionManager.class).createForAllUserProfiles();
     }
 
     @Override
