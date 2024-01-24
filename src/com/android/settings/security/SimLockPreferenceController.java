@@ -44,8 +44,9 @@ public class SimLockPreferenceController extends BasePreferenceController {
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
         mCarrierConfigManager = (CarrierConfigManager)
                 mContext.getSystemService(Context.CARRIER_CONFIG_SERVICE);
-        mSubscriptionManager = (SubscriptionManager) context
-                .getSystemService(Context.TELEPHONY_SUBSCRIPTION_SERVICE);
+        mSubscriptionManager = ((SubscriptionManager) context
+                .getSystemService(Context.TELEPHONY_SUBSCRIPTION_SERVICE))
+                .createForAllUserProfiles();
         mTelephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
     }
 
