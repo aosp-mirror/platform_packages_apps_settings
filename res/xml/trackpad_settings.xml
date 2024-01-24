@@ -52,6 +52,13 @@
         android:order="30"
         settings:keywords="@string/keywords_trackpad_bottom_right_tap"/>
 
+    <!-- TODO(b/321978150): add a summary line once we have finalized text from UX. -->
+    <SwitchPreferenceCompat
+        android:key="trackpad_tap_dragging"
+        android:title="@string/trackpad_tap_dragging"
+        settings:controller="com.android.settings.inputmethod.TrackpadTapDraggingPreferenceController"
+        android:order="35"/>
+
     <com.android.settings.widget.SeekBarPreference
         android:key="trackpad_pointer_speed"
         android:title="@string/trackpad_pointer_speed"
