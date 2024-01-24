@@ -101,7 +101,7 @@ public class SwitchToEuiccSubscriptionSidecar extends EuiccOperationSidecar {
         }
 
         SubscriptionManager subscriptionManager = getContext().getSystemService(
-                SubscriptionManager.class);
+                SubscriptionManager.class).createForAllUserProfiles();
         mActiveSubInfos = SubscriptionUtil.getActiveSubscriptions(subscriptionManager);
 
         // To check whether the esim slot's port is active. If yes, skip setSlotMapping. If no,

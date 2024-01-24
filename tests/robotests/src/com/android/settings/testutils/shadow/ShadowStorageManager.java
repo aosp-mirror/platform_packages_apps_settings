@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Implements(StorageManager.class)
-public class ShadowStorageManager {
+public class ShadowStorageManager extends org.robolectric.shadows.ShadowStorageManager {
 
     private static boolean sIsUnmountCalled;
     private static boolean sIsForgetCalled;

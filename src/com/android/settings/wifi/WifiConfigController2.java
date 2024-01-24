@@ -1390,7 +1390,11 @@ public class WifiConfigController2 implements TextWatcher,
 
     @VisibleForTesting
     void setAnonymousIdVisible() {
-        mView.findViewById(R.id.l_anonymous).setVisibility(View.VISIBLE);
+        View view = mView.findViewById(R.id.l_anonymous);
+        if (view.getVisibility() == View.VISIBLE) {
+            return;
+        }
+        view.setVisibility(View.VISIBLE);
         mEapAnonymousView.setText(DEFAULT_ANONYMOUS_ID);
     }
 

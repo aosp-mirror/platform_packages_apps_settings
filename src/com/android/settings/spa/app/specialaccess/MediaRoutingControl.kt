@@ -22,6 +22,7 @@ import android.app.role.RoleManager
 import android.app.settings.SettingsEnums
 import android.companion.AssociationRequest
 import android.content.Context
+import com.android.media.flags.Flags;
 import com.android.settings.R
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settingslib.spaprivileged.template.app.AppOpPermissionListModel
@@ -48,8 +49,9 @@ class MediaRoutingControlAppsListModel(context: Context) : AppOpPermissionListMo
     }
 
     override fun isChangeable(record: AppOpPermissionRecord): Boolean {
-        return super.isChangeable(record) && (this.roleManager
-                ?.getRoleHolders(AssociationRequest.DEVICE_PROFILE_WATCH)
+        return Flags.enablePrivilegedRoutingForMediaRoutingControl()
+                && super.isChangeable(record)
+                && (this.roleManager?.getRoleHolders(AssociationRequest.DEVICE_PROFILE_WATCH)
                 ?.contains(record.app.packageName) == true)
     }
 
