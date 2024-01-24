@@ -49,7 +49,8 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.SwitchPreferenceCompat;
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
@@ -66,13 +67,13 @@ import com.android.settingslib.drawer.ProviderTile;
 import com.android.settingslib.drawer.Tile;
 
 import org.junit.Before;
-import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
@@ -86,6 +87,10 @@ import java.util.Map;
 
 @RunWith(RobolectricTestRunner.class)
 public class DashboardFragmentTest {
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+
+    private final Context mAppContext = ApplicationProvider.getApplicationContext();
 
     @Mock
     private FakeFeatureFactory mFakeFeatureFactory;
@@ -98,8 +103,7 @@ public class DashboardFragmentTest {
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-        mContext = spy(RuntimeEnvironment.application);
+        mContext = spy(mAppContext);
         final ActivityInfo activityInfo = new ActivityInfo();
         activityInfo.packageName = "pkg";
         activityInfo.name = "class";
@@ -120,11 +124,11 @@ public class DashboardFragmentTest {
         mProviderTile = new ProviderTile(providerInfo, mDashboardCategory.key, metaData);
         mDashboardCategory.addTile(mProviderTile);
 
-        mTestFragment = new TestFragment(RuntimeEnvironment.application);
+        mTestFragment = new TestFragment(mAppContext);
         when(mFakeFeatureFactory.dashboardFeatureProvider
                 .getTilesForCategory(nullable(String.class)))
                 .thenReturn(mDashboardCategory);
-        mTestFragment.onAttach(RuntimeEnvironment.application);
+        mTestFragment.onAttach(mAppContext);
         when(mContext.getPackageName()).thenReturn("TestPackage");
         mControllers = new ArrayList<>();
     }
@@ -297,7 +301,7 @@ public class DashboardFragmentTest {
         preferenceControllers.add(mockController2);
         when(mockController1.isAvailable()).thenReturn(false);
         when(mockController2.isAvailable()).thenReturn(true);
-        mTestFragment.onAttach(RuntimeEnvironment.application);
+        mTestFragment.onAttach(mAppContext);
         mTestFragment.onResume();
 
         verify(mockController1).getPreferenceKey();
@@ -387,12 +391,11 @@ public class DashboardFragmentTest {
         assertThat(mTestFragment.mBlockerController).isNull();
     }
 
-    @Ignore("b/313569889")
     @Test
     public void createPreference_isProviderTile_returnSwitchPreference() {
         final Preference pref = mTestFragment.createPreference(mProviderTile);
 
-        assertThat(pref).isInstanceOf(SwitchPreference.class);
+        assertThat(pref).isInstanceOf(SwitchPreferenceCompat.class);
     }
 
     @Test
@@ -401,7 +404,7 @@ public class DashboardFragmentTest {
 
         assertThat(pref).isInstanceOf(Preference.class);
         assertThat(pref).isNotInstanceOf(PrimarySwitchPreference.class);
-        assertThat(pref).isNotInstanceOf(SwitchPreference.class);
+        assertThat(pref).isNotInstanceOf(SwitchPreferenceCompat.class);
         assertThat(pref.getWidgetLayoutResource()).isEqualTo(0);
     }
 
@@ -431,7 +434,7 @@ public class DashboardFragmentTest {
 
         assertThat(pref).isInstanceOf(Preference.class);
         assertThat(pref).isNotInstanceOf(PrimarySwitchPreference.class);
-        assertThat(pref).isNotInstanceOf(SwitchPreference.class);
+        assertThat(pref).isNotInstanceOf(SwitchPreferenceCompat.class);
         assertThat(pref.getWidgetLayoutResource())
                 .isEqualTo(R.layout.preference_external_action_icon);
     }
