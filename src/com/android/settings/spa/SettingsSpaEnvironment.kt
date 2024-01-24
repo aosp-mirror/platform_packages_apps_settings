@@ -22,6 +22,7 @@ import com.android.settings.network.apn.ApnEditPageProvider
 import com.android.settings.spa.about.AboutPhonePageProvider
 import com.android.settings.spa.app.AllAppListPageProvider
 import com.android.settings.spa.app.AppsMainPageProvider
+import com.android.settings.spa.app.battery.BatteryOptimizationModeAppListPageProvider
 import com.android.settings.spa.app.appcompat.UserAspectRatioAppsPageProvider
 import com.android.settings.spa.app.appinfo.AppInfoSettingsProvider
 import com.android.settings.spa.app.appinfo.CloneAppInfoSettingsProvider
@@ -116,6 +117,7 @@ open class SettingsSpaEnvironment(context: Context) : SpaEnvironment(context) {
         StorageAppListPageProvider.Games,
         ApnEditPageProvider,
         SimOnboardingPageProvider,
+        BatteryOptimizationModeAppListPageProvider,
     )
 
     override val logger = if (FeatureFlagUtils.isEnabled(

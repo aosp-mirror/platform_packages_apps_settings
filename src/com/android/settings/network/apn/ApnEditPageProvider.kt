@@ -145,12 +145,7 @@ fun ApnPage(apnDataInit: ApnData, apnDataCur: MutableState<ApnData>, uriInit: Ur
     ) {
         Column {
             if (apnData.validEnabled) {
-                apnData = apnData.copy(
-                    networkType = ApnNetworkTypes.getNetworkType(
-                        networkTypeSelectedOptionsState
-                    )
-                )
-                valid = validateApnData(uriInit, apnData, context)
+                valid = validateApnData(apnData, context)
                 valid?.let {
                     Text(
                         text = it,
