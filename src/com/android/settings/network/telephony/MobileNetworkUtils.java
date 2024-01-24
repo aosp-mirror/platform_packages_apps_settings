@@ -358,7 +358,8 @@ public class MobileNetworkUtils {
                 .createForSubscriptionId(subId);
         final SubscriptionManager subscriptionManager = context.getSystemService(
                 SubscriptionManager.class).createForAllUserProfiles();
-        telephonyManager.setDataEnabled(enabled);
+        telephonyManager.setDataEnabledForReason(TelephonyManager.DATA_ENABLED_REASON_USER,
+                enabled);
 
         if (disableOtherSubscriptions) {
             final List<SubscriptionInfo> subInfoList =
@@ -367,8 +368,10 @@ public class MobileNetworkUtils {
                 for (SubscriptionInfo subInfo : subInfoList) {
                     // We never disable mobile data for opportunistic subscriptions.
                     if (subInfo.getSubscriptionId() != subId && !subInfo.isOpportunistic()) {
-                        context.getSystemService(TelephonyManager.class).createForSubscriptionId(
-                                subInfo.getSubscriptionId()).setDataEnabled(false);
+                        context.getSystemService(TelephonyManager.class)
+                                .createForSubscriptionId(subInfo.getSubscriptionId())
+                                .setDataEnabledForReason(TelephonyManager.DATA_ENABLED_REASON_USER,
+                                        false);
                     }
                 }
             }
