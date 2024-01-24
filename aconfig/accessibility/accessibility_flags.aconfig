@@ -17,6 +17,13 @@ flag {
 }
 
 flag {
+  name: "enable_hearing_aid_volume_offset_control"
+  namespace: "accessibility"
+  description: "Allows users to control hearing aid volume offset in the Bluetooth device details page."
+  bug: "301198830"
+}
+
+flag {
   name: "remove_qs_tooltip_in_suw"
   namespace: "accessibility"
   description: "Don't show quick settings tooltip in SUW, since the user can't use quick settings there."
