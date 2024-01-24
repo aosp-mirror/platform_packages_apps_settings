@@ -31,7 +31,7 @@ import java.util.List;
 import java.util.Map;
 
 @Implements(AccountManager.class)
-public class ShadowAccountManager {
+public class ShadowAccountManager extends org.robolectric.shadows.ShadowAccountManager {
 
     private static final Map<String, AuthenticatorDescription> sAuthenticators = new HashMap<>();
     private static final Map<Integer, List<Account>> sAccountsByUserId = new HashMap<>();
@@ -41,7 +41,8 @@ public class ShadowAccountManager {
         return sAuthenticators.values().toArray(new AuthenticatorDescription[sAuthenticators.size()]);
     }
 
-    public static void addAuthenticator(AuthenticatorDescription authenticator) {
+    @Override
+    public void addAuthenticator(AuthenticatorDescription authenticator) {
         sAuthenticators.put(authenticator.type, authenticator);
     }
 
