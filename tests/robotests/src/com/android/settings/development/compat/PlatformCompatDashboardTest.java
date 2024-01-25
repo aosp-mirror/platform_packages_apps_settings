@@ -41,7 +41,8 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.SwitchPreferenceCompat;
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.internal.compat.CompatibilityChangeConfig;
 import com.android.internal.compat.CompatibilityChangeInfo;
@@ -51,13 +52,13 @@ import com.android.internal.compat.OverrideAllowedState;
 import com.android.settings.R;
 
 import org.junit.Before;
-import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -67,6 +68,8 @@ import java.util.Set;
 
 @RunWith(RobolectricTestRunner.class)
 public class PlatformCompatDashboardTest {
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
     private PlatformCompatDashboard mDashboard;
 
     @Mock
@@ -87,7 +90,6 @@ public class PlatformCompatDashboardTest {
 
     @Before
     public void setUp() throws RemoteException, NameNotFoundException {
-        MockitoAnnotations.initMocks(this);
         mChanges = new CompatibilityChangeInfo[5];
         mChanges[0] = new CompatibilityChangeInfo(
                 1L, "Default_Enabled", 0, 0, false, false, "", false);
@@ -104,7 +106,7 @@ public class PlatformCompatDashboardTest {
         // By default, allow any change
         when(mOverrideValidator.getOverrideAllowedState(anyLong(),anyString()))
             .thenReturn(new OverrideAllowedState(ALLOWED, -1, -1));
-        mContext = spy(RuntimeEnvironment.application);
+        mContext = spy(ApplicationProvider.getApplicationContext());
         mPreferenceManager = new PreferenceManager(mContext);
         mPreferenceScreen = mPreferenceManager.createPreferenceScreen(mContext);
         mApplicationInfo.packageName = APP_NAME;
@@ -141,7 +143,6 @@ public class PlatformCompatDashboardTest {
                 R.string.platform_compat_selected_app_summary, APP_NAME, 1));
     }
 
-    @Ignore("b/313591873")
     @Test
     public void createPreferenceForChange_defaultEnabledChange_createCheckedEntry() {
         CompatibilityChangeInfo enabledChange = mChanges[0];
@@ -152,15 +153,14 @@ public class PlatformCompatDashboardTest {
         Preference enabledPreference = mDashboard.createPreferenceForChange(mContext, enabledChange,
                 config);
 
-        SwitchPreference enabledSwitchPreference = (SwitchPreference) enabledPreference;
+        SwitchPreferenceCompat enabledSwitchPreference = (SwitchPreferenceCompat) enabledPreference;
 
         assertThat(enabledPreference.getSummary()).isEqualTo(mChanges[0].getName());
-        assertThat(enabledPreference instanceof SwitchPreference).isTrue();
+        assertThat(enabledPreference instanceof SwitchPreferenceCompat).isTrue();
         assertThat(enabledSwitchPreference.isChecked()).isTrue();
         assertThat(enabledSwitchPreference.isEnabled()).isTrue();
     }
 
-    @Ignore("b/313591873")
     @Test
     public void createPreferenceForChange_defaultDisabledChange_createUncheckedEntry() {
         CompatibilityChangeInfo disabledChange = mChanges[1];
@@ -172,12 +172,12 @@ public class PlatformCompatDashboardTest {
                 disabledChange, config);
 
         assertThat(disabledPreference.getSummary()).isEqualTo(mChanges[1].getName());
-        SwitchPreference disabledSwitchPreference = (SwitchPreference) disabledPreference;
+        SwitchPreferenceCompat disabledSwitchPreference =
+                (SwitchPreferenceCompat) disabledPreference;
         assertThat(disabledSwitchPreference.isChecked()).isFalse();
         assertThat(disabledSwitchPreference.isEnabled()).isTrue();
     }
 
-    @Ignore("b/313591873")
     @Test
     public void createPreferenceForChange_cannotOverride_createDisabledEntry()
                     throws RemoteException {
@@ -191,15 +191,14 @@ public class PlatformCompatDashboardTest {
         Preference preference = mDashboard.createPreferenceForChange(mContext, enabledChange,
                 config);
 
-        SwitchPreference switchPreference = (SwitchPreference) preference;
+        SwitchPreferenceCompat switchPreference = (SwitchPreferenceCompat) preference;
 
         assertThat(preference.getSummary()).isEqualTo(mChanges[0].getName());
-        assertThat(preference instanceof SwitchPreference).isTrue();
+        assertThat(preference instanceof SwitchPreferenceCompat).isTrue();
         assertThat(switchPreference.isChecked()).isTrue();
         assertThat(switchPreference.isEnabled()).isFalse();
     }
 
-    @Ignore("b/313591873")
     @Test
     public void createChangeCategoryPreference_enabledAndDisabled_hasTitleAndEntries() {
         Set<Long> enabledChanges = new HashSet<>();
@@ -226,7 +225,7 @@ public class PlatformCompatDashboardTest {
         assertThat(category.getPreferenceCount()).isEqualTo(mChanges.length);
         for (int i = 0; i < mChanges.length; ++i) {
             Preference childPreference = category.getPreference(i);
-            assertThat(childPreference instanceof SwitchPreference).isTrue();
+            assertThat(childPreference instanceof SwitchPreferenceCompat).isTrue();
         }
     }
 }

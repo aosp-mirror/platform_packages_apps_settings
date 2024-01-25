@@ -15,6 +15,9 @@
  */
 package com.android.settings.connecteddevice;
 
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
 
@@ -23,17 +26,24 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.bluetooth.BluetoothDevicePreference;
 import com.android.settings.bluetooth.BluetoothDeviceUpdater;
 import com.android.settings.bluetooth.SavedBluetoothDeviceUpdater;
 import com.android.settings.connecteddevice.dock.DockUpdater;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.flags.Flags;
 import com.android.settings.overlay.DockUpdaterFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Controller to maintain the {@link PreferenceGroup} for all
@@ -44,6 +54,10 @@ public class SavedDeviceGroupController extends BasePreferenceController
         DevicePreferenceCallback {
 
     private static final String KEY = "saved_device_list";
+
+    private final Map<BluetoothDevice, Preference> mDevicePreferenceMap = new HashMap<>();
+    private final List<Preference> mDockDevicesList = new ArrayList<>();
+    private final BluetoothAdapter mBluetoothAdapter;
 
     @VisibleForTesting
     PreferenceGroup mPreferenceGroup;
@@ -57,6 +71,7 @@ public class SavedDeviceGroupController extends BasePreferenceController
                 FeatureFactory.getFeatureFactory().getDockUpdaterFeatureProvider();
         mSavedDockUpdater =
                 dockUpdaterFeatureProvider.getSavedDockUpdater(context, this);
+        mBluetoothAdapter = context.getSystemService(BluetoothManager.class).getAdapter();
     }
 
     @Override
@@ -64,6 +79,9 @@ public class SavedDeviceGroupController extends BasePreferenceController
         mBluetoothDeviceUpdater.registerCallback();
         mSavedDockUpdater.registerCallback();
         mBluetoothDeviceUpdater.refreshPreference();
+        if (Flags.enableSavedDevicesOrderByRecency()) {
+            updatePreferenceGroup();
+        }
     }
 
     @Override
@@ -101,17 +119,63 @@ public class SavedDeviceGroupController extends BasePreferenceController
 
     @Override
     public void onDeviceAdded(Preference preference) {
-        if (mPreferenceGroup.getPreferenceCount() == 0) {
-            mPreferenceGroup.setVisible(true);
+        if (Flags.enableSavedDevicesOrderByRecency()) {
+            mPreferenceGroup.addPreference(preference);
+            if (preference instanceof BluetoothDevicePreference) {
+                mDevicePreferenceMap.put(
+                        ((BluetoothDevicePreference) preference).getBluetoothDevice().getDevice(),
+                        preference);
+            } else {
+                mDockDevicesList.add(preference);
+            }
+            updatePreferenceGroup();
+        } else {
+            if (mPreferenceGroup.getPreferenceCount() == 0) {
+                mPreferenceGroup.setVisible(true);
+            }
+            mPreferenceGroup.addPreference(preference);
         }
-        mPreferenceGroup.addPreference(preference);
     }
 
     @Override
     public void onDeviceRemoved(Preference preference) {
-        mPreferenceGroup.removePreference(preference);
-        if (mPreferenceGroup.getPreferenceCount() == 0) {
+        if (Flags.enableSavedDevicesOrderByRecency()) {
+            mPreferenceGroup.removePreference(preference);
+            if (preference instanceof BluetoothDevicePreference) {
+                mDevicePreferenceMap.remove(
+                        ((BluetoothDevicePreference) preference).getBluetoothDevice().getDevice(),
+                        preference);
+            } else {
+                mDockDevicesList.remove(preference);
+            }
+            updatePreferenceGroup();
+        } else {
+            mPreferenceGroup.removePreference(preference);
+            if (mPreferenceGroup.getPreferenceCount() == 0) {
+                mPreferenceGroup.setVisible(false);
+            }
+        }
+    }
+
+    /** Sort the preferenceGroup by most recently used. */
+    public void updatePreferenceGroup() {
+        if (mBluetoothAdapter == null || !mBluetoothAdapter.isEnabled()) {
+            // Bluetooth is unsupported or disabled
             mPreferenceGroup.setVisible(false);
+        } else {
+            mPreferenceGroup.setVisible(true);
+            int order = 0;
+            for (BluetoothDevice device : mBluetoothAdapter.getMostRecentlyConnectedDevices()) {
+                Preference preference = mDevicePreferenceMap.getOrDefault(device, null);
+                if (preference != null) {
+                    preference.setOrder(order);
+                    order += 1;
+                }
+            }
+            for (Preference preference : mDockDevicesList) {
+                preference.setOrder(order);
+                order += 1;
+            }
         }
     }
 
@@ -129,5 +193,10 @@ public class SavedDeviceGroupController extends BasePreferenceController
     @VisibleForTesting
     public void setSavedDockUpdater(DockUpdater savedDockUpdater) {
         mSavedDockUpdater = savedDockUpdater;
+    }
+
+    @VisibleForTesting
+    void setPreferenceGroup(PreferenceGroup preferenceGroup) {
+        mPreferenceGroup = preferenceGroup;
     }
 }

@@ -77,6 +77,7 @@ public class SimLockPreferenceControllerTest {
         ShadowApplication shadowApplication = ShadowApplication.getInstance();
         shadowApplication.setSystemService(Context.TELEPHONY_SUBSCRIPTION_SERVICE,
                 mSubscriptionManager);
+        when(mSubscriptionManager.createForAllUserProfiles()).thenReturn(mSubscriptionManager);
         shadowApplication.setSystemService(Context.CARRIER_CONFIG_SERVICE, mCarrierManager);
         shadowApplication.setSystemService(Context.USER_SERVICE, mUserManager);
         shadowApplication.setSystemService(Context.TELEPHONY_SERVICE, mTelephonyManager);

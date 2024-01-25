@@ -148,24 +148,30 @@ public class MobileNetworkUtilsTest {
     public void setMobileDataEnabled_setEnabled_enabled() {
         MobileNetworkUtils.setMobileDataEnabled(mContext, SUB_ID_1, true, false);
 
-        verify(mTelephonyManager).setDataEnabled(true);
-        verify(mTelephonyManager2, never()).setDataEnabled(anyBoolean());
+        verify(mTelephonyManager)
+                .setDataEnabledForReason(TelephonyManager.DATA_ENABLED_REASON_USER, true);
+        verify(mTelephonyManager2, never())
+                .setDataEnabledForReason(anyInt(), anyBoolean());
     }
 
     @Test
     public void setMobileDataEnabled_setDisabled_disabled() {
         MobileNetworkUtils.setMobileDataEnabled(mContext, SUB_ID_2, true, false);
 
-        verify(mTelephonyManager2).setDataEnabled(true);
-        verify(mTelephonyManager, never()).setDataEnabled(anyBoolean());
+        verify(mTelephonyManager2)
+                .setDataEnabledForReason(TelephonyManager.DATA_ENABLED_REASON_USER, true);
+        verify(mTelephonyManager, never())
+                .setDataEnabledForReason(anyInt(), anyBoolean());
     }
 
     @Test
     public void setMobileDataEnabled_disableOtherSubscriptions() {
         MobileNetworkUtils.setMobileDataEnabled(mContext, SUB_ID_1, true, true);
 
-        verify(mTelephonyManager).setDataEnabled(true);
-        verify(mTelephonyManager2).setDataEnabled(false);
+        verify(mTelephonyManager)
+                .setDataEnabledForReason(TelephonyManager.DATA_ENABLED_REASON_USER, true);
+        verify(mTelephonyManager2)
+                .setDataEnabledForReason(TelephonyManager.DATA_ENABLED_REASON_USER, false);
     }
 
     @Test

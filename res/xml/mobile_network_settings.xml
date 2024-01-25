@@ -208,6 +208,7 @@
         <PreferenceCategory
             android:key="network_operators_category_key"
             android:title="@string/network_operator_category"
+            settings:allowDividerBelow="true"
             settings:controller="com.android.settings.network.telephony.NetworkPreferenceCategoryController">
 
             <com.android.settings.spa.preference.ComposePreference
@@ -221,12 +222,19 @@
                 settings:controller="com.android.settings.network.telephony.gsm.OpenNetworkSelectPagePreferenceController"/>
         </PreferenceCategory>
 
+        <com.android.settingslib.RestrictedPreference
+            android:key="telephony_satellite_setting_key"
+            android:persistent="false"
+            android:title="@string/satellite_setting_title"
+            settings:keywords="@string/keywords_satellite_setting"
+            settings:controller=
+                "com.android.settings.network.telephony.SatelliteSettingPreferenceController"/>
+
         <!--We want separate APN setting from reset of settings because we want user to change it with caution-->
         <com.android.settingslib.RestrictedPreference
             android:key="telephony_apn_key"
             android:persistent="false"
             android:title="@string/mobile_network_apn_title"
-            settings:allowDividerAbove="true"
             settings:keywords="@string/keywords_access_point_names"
             settings:controller="com.android.settings.network.telephony.ApnPreferenceController"/>
 
@@ -249,7 +257,7 @@
             android:title="@string/require_cellular_encryption_title"
             android:summary="@string/require_cellular_encryption_summary"
             settings:controller=
-                "com.android.settings.network.telephony.NullAlgorithmsPreferenceController" />
+                "com.android.settings.network.telephony.NullAlgorithmsPreferenceController"/>
 
         <SwitchPreferenceCompat
             android:key="nr_advanced_calling"

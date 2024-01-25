@@ -43,6 +43,7 @@ import android.widget.LinearLayout;
 
 import androidx.lifecycle.LiveData;
 import androidx.slice.Slice;
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
 import com.android.settings.panel.PanelSlicesAdapter.SliceRowViewHolder;
@@ -50,14 +51,14 @@ import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
@@ -69,6 +70,8 @@ import java.util.Map;
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = PanelSlicesAdapterTest.ShadowLayoutInflater.class)
 public class PanelSlicesAdapterTest {
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
 
     private static LayoutInflater sLayoutInflater;
 
@@ -81,8 +84,7 @@ public class PanelSlicesAdapterTest {
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
+        mContext = ApplicationProvider.getApplicationContext();
 
         mPanelFeatureProvider = spy(new PanelFeatureProviderImpl());
         mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
@@ -104,8 +106,7 @@ public class PanelSlicesAdapterTest {
 
     private void addTestLiveData(Uri uri) {
         // Create a slice to return for the LiveData
-        final Slice slice = spy(new Slice());
-        doReturn(uri).when(slice).getUri();
+        final Slice slice = new Slice();
         final LiveData<Slice> liveData = mock(LiveData.class);
         when(liveData.getValue()).thenReturn(slice);
         mData.put(uri, liveData);
@@ -126,7 +127,6 @@ public class PanelSlicesAdapterTest {
     /**
      * ViewHolder should load and set the action label correctly.
      */
-    @Ignore("b/313576125")
     @Test
     public void setActionLabel_loadsActionLabel() {
         addTestLiveData(VOLUME_NOTIFICATION_URI);
@@ -167,7 +167,6 @@ public class PanelSlicesAdapterTest {
         return foundLabel;
     }
 
-    @Ignore("b/313576125")
     @Test
     public void sizeOfAdapter_shouldNotExceedMaxNum() {
         for (int i = 0; i < MAX_NUM_OF_SLICES + 2; i++) {
@@ -186,7 +185,6 @@ public class PanelSlicesAdapterTest {
         assertThat(adapter.getData().size()).isEqualTo(MAX_NUM_OF_SLICES);
     }
 
-    @Ignore("b/313576125")
     @Test
     public void mediaOutputIndicatorSlice_notSliderPanel_noSliderLayout() {
         addTestLiveData(MEDIA_OUTPUT_INDICATOR_SLICE_URI);
@@ -203,7 +201,6 @@ public class PanelSlicesAdapterTest {
         assertThat(viewHolder.mSliceSliderLayout).isNull();
     }
 
-    @Ignore("b/313576125")
     @Test
     public void onBindViewHolder_viewTypeSlider_verifyActionLabelSet() {
         addTestLiveData(VOLUME_NOTIFICATION_URI);
