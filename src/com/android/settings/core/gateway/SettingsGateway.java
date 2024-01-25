@@ -34,6 +34,7 @@ import com.android.settings.accessibility.TextReadingPreferenceFragmentForSetupW
 import com.android.settings.accessibility.ToggleColorInversionPreferenceFragment;
 import com.android.settings.accessibility.ToggleDaltonizerPreferenceFragment;
 import com.android.settings.accessibility.ToggleReduceBrightColorsPreferenceFragment;
+import com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragment;
 import com.android.settings.accounts.AccountDashboardFragment;
 import com.android.settings.accounts.AccountSyncSettings;
 import com.android.settings.accounts.ChooseAccountFragment;
@@ -250,6 +251,7 @@ public class SettingsGateway {
             AccessibilityDetailsSettingsFragment.class.getName(),
             AccessibilitySettings.class.getName(),
             AccessibilitySettingsForSetupWizard.class.getName(),
+            EditShortcutsPreferenceFragment.class.getName(),
             TextReadingPreferenceFragment.class.getName(),
             TextReadingPreferenceFragmentForSetupWizard.class.getName(),
             CaptioningPropertiesFragment.class.getName(),
