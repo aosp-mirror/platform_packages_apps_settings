@@ -77,6 +77,7 @@ public class UiccSlotUtilTest {
         when(mTelephonyManager.getUiccCardsInfo()).thenReturn(mUiccCardInfo);
 
         when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
+        when(mSubscriptionManager.createForAllUserProfiles()).thenReturn(mSubscriptionManager);
         when(mSubscriptionManager.getAllSubscriptionInfoList()).thenReturn(mSubscriptionInfoList);
     }
 

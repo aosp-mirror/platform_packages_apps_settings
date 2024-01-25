@@ -79,7 +79,8 @@ public class NetworkProviderWifiCallingGroup extends
             String preferenceGroupKey) {
         super(context);
         mCarrierConfigManager = context.getSystemService(CarrierConfigManager.class);
-        mSubscriptionManager = context.getSystemService(SubscriptionManager.class);
+        mSubscriptionManager = context.getSystemService(SubscriptionManager.class)
+                .createForAllUserProfiles();
         mPreferenceGroupKey = preferenceGroupKey;
         mWifiCallingForSubPreferences = new ArrayMap<>();
         setSubscriptionInfoList(context);

@@ -52,6 +52,9 @@
         <action
             android:id="@+id/action_advance_login_error"
             app:destination="@id/ps_account_error_fragment"/>
+        <action
+            android:id="@+id/action_success_fragment"
+            app:destination="@id/ps_profile_success_fragment"/>
     </fragment>
     <fragment android:id="@+id/ps_profile_lock_fragment"
               android:name="com.android.settings.privatespace.PrivateSpaceSetLockFragment"

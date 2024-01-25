@@ -49,7 +49,8 @@ class OpenNetworkSelectPagePreferenceControllerTest {
     }
 
     private val mockSubscriptionManager = mock<SubscriptionManager> {
-        on { activeSubscriptionInfoList } doAnswer { listOf(subscriptionInfo) }
+        on { createForAllUserProfiles() } doReturn mock
+        on { getActiveSubscriptionInfo(SUB_ID) } doReturn subscriptionInfo
     }
 
     private val context: Context = spy(ApplicationProvider.getApplicationContext()) {

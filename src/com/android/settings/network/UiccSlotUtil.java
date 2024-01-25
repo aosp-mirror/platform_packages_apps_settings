@@ -162,7 +162,7 @@ public class UiccSlotUtil {
         Log.d(TAG, "The SimSlotMapping: " + uiccSlotMappings);
 
         SubscriptionManager subscriptionManager = context.getSystemService(
-                SubscriptionManager.class);
+                SubscriptionManager.class).createForAllUserProfiles();
         int excludedLogicalSlotIndex = getExcludedLogicalSlotIndex(uiccSlotMappings,
                 SubscriptionUtil.getActiveSubscriptions(subscriptionManager), removedSubInfo,
                 telMgr.isMultiSimEnabled());
@@ -203,7 +203,7 @@ public class UiccSlotUtil {
         }
 
         SubscriptionManager subscriptionManager = context.getSystemService(
-                SubscriptionManager.class);
+                SubscriptionManager.class).createForAllUserProfiles();
         int excludedLogicalSlotIndex = getExcludedLogicalSlotIndex(uiccSlotMappings,
                 SubscriptionUtil.getActiveSubscriptions(subscriptionManager), removedSubInfo,
                 telMgr.isMultiSimEnabled());
@@ -222,7 +222,7 @@ public class UiccSlotUtil {
         List<UiccCardInfo> uiccCardInfos = telMgr.getUiccCardsInfo();
         ImmutableList<UiccSlotInfo> slotInfos = UiccSlotUtil.getSlotInfos(telMgr);
         SubscriptionManager subscriptionManager = context.getSystemService(
-                SubscriptionManager.class);
+                SubscriptionManager.class).createForAllUserProfiles();
         SubscriptionInfo subInfo = SubscriptionUtil.getSubById(subscriptionManager, subId);
 
         // checking whether this is the removable esim. If it is, then return the removable slot id.

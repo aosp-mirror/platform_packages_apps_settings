@@ -27,3 +27,10 @@ flag {
   description: "Gates whether to require an auth challenge for changing USB preferences"
   bug: "317367746"
 }
+
+flag {
+  name: "enable_saved_devices_order_by_recency"
+  namespace: "pixel_cross_device_control"
+  description: "Order the saved bluetooth devices by most recently connected."
+  bug: "306160434"
+}
