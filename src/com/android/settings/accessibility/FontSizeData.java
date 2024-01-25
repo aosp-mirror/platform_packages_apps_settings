@@ -25,6 +25,7 @@ import android.content.res.Resources;
 import android.provider.Settings;
 
 import com.android.settingslib.R;
+import com.android.window.flags.Flags;
 
 import java.util.Arrays;
 import java.util.List;
@@ -38,12 +39,11 @@ final class FontSizeData extends PreviewSizeData<Float> {
 
     FontSizeData(Context context) {
         super(context);
-
         final Resources resources = getContext().getResources();
         final ContentResolver resolver = getContext().getContentResolver();
         final List<String> strEntryValues =
                 Arrays.asList(resources.getStringArray(R.array.entryvalues_font_size));
-        setDefaultValue(FONT_SCALE_DEF_VALUE);
+        setDefaultValue(getFontScaleDefValue(resolver));
         final float currentScale =
                 Settings.System.getFloat(resolver, Settings.System.FONT_SCALE, getDefaultValue());
         setInitialIndex(fontSizeValueToIndex(currentScale, strEntryValues.toArray(new String[0])));
@@ -77,5 +77,11 @@ final class FontSizeData extends PreviewSizeData<Float> {
             lastVal = thisVal;
         }
         return indices.length - 1;
+    }
+
+    private float getFontScaleDefValue(ContentResolver resolver) {
+        return Flags.configurableFontScaleDefault() ? Settings.System.getFloat(resolver,
+                Settings.System.DEFAULT_DEVICE_FONT_SCALE, FONT_SCALE_DEF_VALUE)
+                : FONT_SCALE_DEF_VALUE;
     }
 }
