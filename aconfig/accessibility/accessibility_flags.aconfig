@@ -9,6 +9,19 @@ flag {
   bug: "300302098"
 }
 
+flag {
+  name: "enable_hearing_aid_preset_control"
+  namespace: "accessibility"
+  description: "Allows users to control hearing aid preset in the Bluetooth device details page."
+  bug: "300015207"
+}
+
+flag {
+  name: "enable_hearing_aid_volume_offset_control"
+  namespace: "accessibility"
+  description: "Allows users to control hearing aid volume offset in the Bluetooth device details page."
+  bug: "301198830"
+}
 
 flag {
   name: "remove_qs_tooltip_in_suw"
