@@ -70,6 +70,7 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
     private static final String KEYBOARD_A11Y_CATEGORY = "keyboard_a11y_category";
     private static final String SHOW_VIRTUAL_KEYBOARD_SWITCH = "show_virtual_keyboard_switch";
     private static final String ACCESSIBILITY_BOUNCE_KEYS = "accessibility_bounce_keys";
+    private static final String ACCESSIBILITY_SLOW_KEYS = "accessibility_slow_keys";
     private static final String ACCESSIBILITY_STICKY_KEYS = "accessibility_sticky_keys";
     private static final String KEYBOARD_SHORTCUTS_HELPER = "keyboard_shortcuts_helper";
     private static final String MODIFIER_KEYS_SETTINGS = "modifier_keys_settings";
@@ -78,6 +79,8 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
             Secure.SHOW_IME_WITH_HARD_KEYBOARD);
     private static final Uri sAccessibilityBounceKeysUri = Secure.getUriFor(
             Secure.ACCESSIBILITY_BOUNCE_KEYS);
+    private static final Uri sAccessibilitySlowKeysUri = Secure.getUriFor(
+            Secure.ACCESSIBILITY_SLOW_KEYS);
     private static final Uri sAccessibilityStickyKeysUri = Secure.getUriFor(
             Secure.ACCESSIBILITY_STICKY_KEYS);
 
@@ -96,6 +99,8 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
     private TwoStatePreference mShowVirtualKeyboardSwitch = null;
     @Nullable
     private TwoStatePreference mAccessibilityBounceKeys = null;
+    @Nullable
+    private TwoStatePreference mAccessibilitySlowKeys = null;
     @Nullable
     private TwoStatePreference mAccessibilityStickyKeys = null;
 
@@ -127,6 +132,8 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
         mKeyboardA11yCategory = Objects.requireNonNull(findPreference(KEYBOARD_A11Y_CATEGORY));
         mAccessibilityBounceKeys = Objects.requireNonNull(
                 mKeyboardA11yCategory.findPreference(ACCESSIBILITY_BOUNCE_KEYS));
+        mAccessibilitySlowKeys = Objects.requireNonNull(
+                mKeyboardA11yCategory.findPreference(ACCESSIBILITY_SLOW_KEYS));
         mAccessibilityStickyKeys = Objects.requireNonNull(
                 mKeyboardA11yCategory.findPreference(ACCESSIBILITY_STICKY_KEYS));
 
@@ -146,6 +153,9 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
         }
         if (!InputSettings.isAccessibilityBounceKeysFeatureEnabled()) {
             mKeyboardA11yCategory.removePreference(mAccessibilityBounceKeys);
+        }
+        if (!InputSettings.isAccessibilitySlowKeysFeatureFlagEnabled()) {
+            mKeyboardA11yCategory.removePreference(mAccessibilitySlowKeys);
         }
         if (!InputSettings.isAccessibilityStickyKeysFeatureEnabled()) {
             mKeyboardA11yCategory.removePreference(mAccessibilityStickyKeys);
@@ -196,6 +206,8 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
                 mShowVirtualKeyboardSwitchPreferenceChangeListener);
         Objects.requireNonNull(mAccessibilityBounceKeys).setOnPreferenceChangeListener(
                 mAccessibilityBounceKeysSwitchPreferenceChangeListener);
+        Objects.requireNonNull(mAccessibilitySlowKeys).setOnPreferenceChangeListener(
+                mAccessibilitySlowKeysSwitchPreferenceChangeListener);
         Objects.requireNonNull(mAccessibilityStickyKeys).setOnPreferenceChangeListener(
                 mAccessibilityStickyKeysSwitchPreferenceChangeListener);
         registerSettingsObserver();
@@ -208,6 +220,7 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
         mIm.unregisterInputDeviceListener(this);
         Objects.requireNonNull(mShowVirtualKeyboardSwitch).setOnPreferenceChangeListener(null);
         Objects.requireNonNull(mAccessibilityBounceKeys).setOnPreferenceChangeListener(null);
+        Objects.requireNonNull(mAccessibilitySlowKeys).setOnPreferenceChangeListener(null);
         Objects.requireNonNull(mAccessibilityStickyKeys).setOnPreferenceChangeListener(null);
         unregisterSettingsObserver();
     }
@@ -315,10 +328,12 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
         updateShowVirtualKeyboardSwitch();
 
         if (InputSettings.isAccessibilityBounceKeysFeatureEnabled()
-                || InputSettings.isAccessibilityStickyKeysFeatureEnabled()) {
+                || InputSettings.isAccessibilityStickyKeysFeatureEnabled()
+                || InputSettings.isAccessibilitySlowKeysFeatureFlagEnabled()) {
             Objects.requireNonNull(mKeyboardA11yCategory).setOrder(2);
             preferenceScreen.addPreference(mKeyboardA11yCategory);
             updateAccessibilityBounceKeysSwitch();
+            updateAccessibilitySlowKeysSwitch();
             updateAccessibilityStickyKeysSwitch();
         }
     }
@@ -356,6 +371,13 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
                     mContentObserver,
                     UserHandle.myUserId());
         }
+        if (InputSettings.isAccessibilitySlowKeysFeatureFlagEnabled()) {
+            contentResolver.registerContentObserver(
+                    sAccessibilitySlowKeysUri,
+                    false,
+                    mContentObserver,
+                    UserHandle.myUserId());
+        }
         if (InputSettings.isAccessibilityStickyKeysFeatureEnabled()) {
             contentResolver.registerContentObserver(
                     sAccessibilityStickyKeysUri,
@@ -365,6 +387,7 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
         }
         updateShowVirtualKeyboardSwitch();
         updateAccessibilityBounceKeysSwitch();
+        updateAccessibilitySlowKeysSwitch();
         updateAccessibilityStickyKeysSwitch();
     }
 
@@ -383,6 +406,14 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
         }
         Objects.requireNonNull(mAccessibilityBounceKeys).setChecked(
                 InputSettings.isAccessibilityBounceKeysEnabled(getContext()));
+    }
+
+    private void updateAccessibilitySlowKeysSwitch() {
+        if (!InputSettings.isAccessibilitySlowKeysFeatureFlagEnabled()) {
+            return;
+        }
+        Objects.requireNonNull(mAccessibilitySlowKeys).setChecked(
+                InputSettings.isAccessibilitySlowKeysEnabled(getContext()));
     }
 
     private void updateAccessibilityStickyKeysSwitch() {
@@ -414,6 +445,13 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
             };
 
     private final OnPreferenceChangeListener
+            mAccessibilitySlowKeysSwitchPreferenceChangeListener = (preference, newValue) -> {
+                InputSettings.setAccessibilitySlowKeysThreshold(getContext(),
+                        ((Boolean) newValue) ? 500 : 0);
+                return true;
+            };
+
+    private final OnPreferenceChangeListener
             mAccessibilityStickyKeysSwitchPreferenceChangeListener = (preference, newValue) -> {
                 InputSettings.setAccessibilityStickyKeysEnabled(getContext(), (Boolean) newValue);
                 return true;
@@ -426,6 +464,8 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
                 updateShowVirtualKeyboardSwitch();
             } else if (sAccessibilityBounceKeysUri.equals(uri)) {
                 updateAccessibilityBounceKeysSwitch();
+            } else if (sAccessibilitySlowKeysUri.equals(uri)) {
+                updateAccessibilitySlowKeysSwitch();
             } else if (sAccessibilityStickyKeysUri.equals(uri)) {
                 updateAccessibilityStickyKeysSwitch();
             }
