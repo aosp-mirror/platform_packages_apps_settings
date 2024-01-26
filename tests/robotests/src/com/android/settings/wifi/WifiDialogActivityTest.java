@@ -57,8 +57,10 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.LooperMode;
 
 @RunWith(RobolectricTestRunner.class)
+@LooperMode(LooperMode.Mode.LEGACY)
 public class WifiDialogActivityTest {
 
     static final String CALLING_PACKAGE = "calling_package";
