@@ -45,9 +45,15 @@
 
         <com.android.settings.connecteddevice.audiosharing.AudioSharingNamePreference
             android:key="audio_sharing_stream_name"
-            android:summary="********"
-            android:title="Stream name"
+            android:title="Name"
             settings:controller="com.android.settings.connecteddevice.audiosharing.AudioSharingNamePreferenceController" />
+
+        <com.android.settings.widget.ValidatedEditTextPreference
+            android:key="audio_sharing_stream_password"
+            android:summary="********"
+            android:title="Password"
+            settings:controller="com.android.settings.connecteddevice.audiosharing.AudioSharingPasswordPreferenceController" />
+
         <SwitchPreferenceCompat
             android:key="audio_sharing_stream_compatibility"
             android:title="Improve compatibility"
