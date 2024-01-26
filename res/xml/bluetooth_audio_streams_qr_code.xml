@@ -36,7 +36,7 @@
             android:gravity="start"
             android:textSize="15sp"
             android:textColor="?android:attr/textColorPrimary"
-            android:text="Scan this QR code with another device connected to LE audio headphones to start sharing audio"/>
+            android:text="To listen to this audio stream, other people can connect compatible headphones to their Android device. They can then scan this QR code."/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -50,6 +50,13 @@
                 android:layout_width="@dimen/qrcode_size"
                 android:layout_height="@dimen/qrcode_size"
                 android:src="@android:color/transparent"/>
+
+            <TextView
+                android:id="@+id/password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:textColor="?android:attr/textColorPrimary"/>
         </LinearLayout>
 
     </LinearLayout>

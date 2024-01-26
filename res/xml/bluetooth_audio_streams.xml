@@ -18,23 +18,31 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:title="@string/audio_streams_title">
+    android:title="Find an audio stream">
 
-    <Preference
-        android:key="audio_streams_scan_qr_code"
-        android:title="@string/bluetooth_find_broadcast_button_scan"
-        android:icon="@drawable/ic_add_24dp"
-        android:summary="@string/audio_streams_qr_code_summary"
-        settings:controller="com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsScanQrCodeController" />
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="audio_streams_top_intro"
+        android:title="Listen to a device that's sharing audio or to a nearby Auracast broadcast"
+        settings:searchable="false"/>
 
     <Preference
         android:key="audio_streams_active_device"
-        android:title="Listen with"
+        android:title="Your audio device"
         settings:controller="com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsActiveDeviceController" />
 
     <com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsProgressCategoryPreference
         android:key="audio_streams_nearby_category"
-        android:title="@string/audio_streams_pref_title"
-        settings:controller="com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsProgressCategoryController" />
+        android:title="Audio streams nearby"
+        settings:controller="com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsProgressCategoryController">
+
+    <Preference
+        android:key="audio_streams_scan_qr_code"
+        android:title="Scan a QR code"
+        android:icon="@drawable/ic_add_24dp"
+        android:summary="Start listening by scanning a stream's QR code"
+        android:order="0"
+        settings:controller="com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsScanQrCodeController" />
+
+    </com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsProgressCategoryPreference>
 
 </PreferenceScreen>

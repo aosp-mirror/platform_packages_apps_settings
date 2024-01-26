@@ -16,22 +16,64 @@
 
 package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothLeBroadcastAssistant;
+import android.bluetooth.BluetoothLeBroadcastReceiveState;
 import android.content.Context;
+import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.DefaultLifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.bluetooth.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.widget.EntityHeaderController;
+import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
+import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.widget.LayoutPreference;
+
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 import javax.annotation.Nullable;
 
 public class AudioStreamHeaderController extends BasePreferenceController
         implements DefaultLifecycleObserver {
+    private static final String TAG = "AudioStreamHeaderController";
     private static final String KEY = "audio_stream_header";
+    private final Executor mExecutor;
+    private final AudioStreamsHelper mAudioStreamsHelper;
+    @Nullable private final LocalBluetoothLeBroadcastAssistant mLeBroadcastAssistant;
+    private final BluetoothLeBroadcastAssistant.Callback mBroadcastAssistantCallback =
+            new AudioStreamsBroadcastAssistantCallback() {
+                @Override
+                public void onSourceRemoved(BluetoothDevice sink, int sourceId, int reason) {
+                    super.onSourceRemoved(sink, sourceId, reason);
+                    updateSummary();
+                }
+
+                @Override
+                public void onSourceLost(int broadcastId) {
+                    super.onSourceLost(broadcastId);
+                    updateSummary();
+                }
+
+                @Override
+                public void onReceiveStateChanged(
+                        BluetoothDevice sink,
+                        int sourceId,
+                        BluetoothLeBroadcastReceiveState state) {
+                    super.onReceiveStateChanged(sink, sourceId, state);
+                    if (mAudioStreamsHelper.isConnected(state)) {
+                        updateSummary();
+                    }
+                }
+            };
+
     private @Nullable EntityHeaderController mHeaderController;
     private @Nullable DashboardFragment mFragment;
     private String mBroadcastName = "";
@@ -39,6 +81,27 @@ public class AudioStreamHeaderController extends BasePreferenceController
 
     public AudioStreamHeaderController(Context context, String preferenceKey) {
         super(context, preferenceKey);
+        mExecutor = Executors.newSingleThreadExecutor();
+        mAudioStreamsHelper = new AudioStreamsHelper(Utils.getLocalBtManager(context));
+        mLeBroadcastAssistant = mAudioStreamsHelper.getLeBroadcastAssistant();
+    }
+
+    @Override
+    public void onStart(@NonNull LifecycleOwner owner) {
+        if (mLeBroadcastAssistant == null) {
+            Log.w(TAG, "onStart(): LeBroadcastAssistant is null!");
+            return;
+        }
+        mLeBroadcastAssistant.registerServiceCallBack(mExecutor, mBroadcastAssistantCallback);
+    }
+
+    @Override
+    public void onStop(@NonNull LifecycleOwner owner) {
+        if (mLeBroadcastAssistant == null) {
+            Log.w(TAG, "onStop(): LeBroadcastAssistant is null!");
+            return;
+        }
+        mLeBroadcastAssistant.unregisterServiceCallBack(mBroadcastAssistantCallback);
     }
 
     @Override
@@ -55,12 +118,35 @@ public class AudioStreamHeaderController extends BasePreferenceController
             }
             mHeaderController.setIcon(
                     screen.getContext().getDrawable(R.drawable.ic_bt_audio_sharing));
-            // TODO(chelseahao): update this based on stream connection state
-            mHeaderController.setSummary("Listening now");
-            mHeaderController.done(true);
             screen.addPreference(headerPreference);
+            updateSummary();
         }
         super.displayPreference(screen);
+    }
+
+    private void updateSummary() {
+        var unused =
+                ThreadUtils.postOnBackgroundThread(
+                        () -> {
+                            var latestSummary =
+                                    mAudioStreamsHelper.getAllConnectedSources().stream()
+                                                    .map(
+                                                            BluetoothLeBroadcastReceiveState
+                                                                    ::getBroadcastId)
+                                                    .anyMatch(
+                                                            connectedBroadcastId ->
+                                                                    connectedBroadcastId
+                                                                            == mBroadcastId)
+                                            ? "Listening now"
+                                            : "";
+                            ThreadUtils.postOnMainThread(
+                                    () -> {
+                                        if (mHeaderController != null) {
+                                            mHeaderController.setSummary(latestSummary);
+                                            mHeaderController.done(true);
+                                        }
+                                    });
+                        });
     }
 
     @Override
