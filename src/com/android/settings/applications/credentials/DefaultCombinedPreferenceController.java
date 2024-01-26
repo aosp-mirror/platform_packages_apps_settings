@@ -16,6 +16,7 @@
 
 package com.android.settings.applications.credentials;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.credentials.CredentialManager;
@@ -26,6 +27,7 @@ import android.provider.Settings;
 import android.service.autofill.AutofillService;
 import android.service.autofill.AutofillServiceInfo;
 import android.view.autofill.AutofillManager;
+import android.util.Slog;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
@@ -132,7 +134,11 @@ public class DefaultCombinedPreferenceController extends DefaultAppPreferenceCon
                     new PrimaryProviderPreference.Delegate() {
                         public void onOpenButtonClicked() {
                             if (settingsActivityIntent != null) {
-                                startActivity(settingsActivityIntent);
+                                try {
+                                    startActivity(settingsActivityIntent);
+                                } catch (ActivityNotFoundException e) {
+                                    Slog.e(TAG, "Failed to open settings activity", e);
+                                }
                             }
                         }
 
