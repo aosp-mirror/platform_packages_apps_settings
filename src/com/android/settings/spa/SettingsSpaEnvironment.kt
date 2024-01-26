@@ -48,6 +48,7 @@ import com.android.settings.spa.development.UsageStatsPageProvider
 import com.android.settings.spa.development.compat.PlatformCompatAppListPageProvider
 import com.android.settings.spa.home.HomePageProvider
 import com.android.settings.spa.network.NetworkAndInternetPageProvider
+import com.android.settings.spa.network.NetworkCellularGroupProvider
 import com.android.settings.spa.network.SimOnboardingPageProvider
 import com.android.settings.spa.notification.AppListNotificationsPageProvider
 import com.android.settings.spa.notification.NotificationMainPageProvider
@@ -118,6 +119,7 @@ open class SettingsSpaEnvironment(context: Context) : SpaEnvironment(context) {
         ApnEditPageProvider,
         SimOnboardingPageProvider,
         BatteryOptimizationModeAppListPageProvider,
+        NetworkCellularGroupProvider,
     )
 
     override val logger = if (FeatureFlagUtils.isEnabled(
