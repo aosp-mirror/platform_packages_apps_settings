@@ -17,6 +17,8 @@
 package com.android.settings.wifi;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+import static android.os.UserManager.DISALLOW_ADD_WIFI_CONFIG;
+import static android.os.UserManager.DISALLOW_CONFIG_WIFI;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -31,6 +33,7 @@ import android.os.Looper;
 import android.os.Process;
 import android.os.SimpleClock;
 import android.os.SystemClock;
+import android.os.UserManager;
 import android.text.TextUtils;
 import android.util.EventLog;
 import android.util.Log;
@@ -115,6 +118,10 @@ public class WifiDialogActivity extends ObservableActivity implements WifiDialog
         }
 
         super.onCreate(savedInstanceState);
+        if (!isConfigWifiAllowed() || !isAddWifiConfigAllowed()) {
+            finish();
+            return;
+        }
 
         mIsWifiTrackerLib = !TextUtils.isEmpty(mIntent.getStringExtra(KEY_CHOSEN_WIFIENTRY_KEY));
 
@@ -359,6 +366,29 @@ public class WifiDialogActivity extends ObservableActivity implements WifiDialog
             }
             finish();
         }
+    }
+
+    @VisibleForTesting
+    boolean isConfigWifiAllowed() {
+        UserManager userManager = getSystemService(UserManager.class);
+        if (userManager == null) return true;
+        final boolean isConfigWifiAllowed = !userManager.hasUserRestriction(DISALLOW_CONFIG_WIFI);
+        if (!isConfigWifiAllowed) {
+            Log.e(TAG, "The user is not allowed to configure Wi-Fi.");
+            EventLog.writeEvent(0x534e4554, "226133034", getApplicationContext().getUserId(),
+                    "The user is not allowed to configure Wi-Fi.");
+        }
+        return isConfigWifiAllowed;
+    }
+
+    @VisibleForTesting
+    boolean isAddWifiConfigAllowed() {
+        UserManager userManager = getSystemService(UserManager.class);
+        if (userManager != null && userManager.hasUserRestriction(DISALLOW_ADD_WIFI_CONFIG)) {
+            Log.e(TAG, "The user is not allowed to add Wi-Fi configuration.");
+            return false;
+        }
+        return true;
     }
 
     private boolean hasWifiManager() {
