@@ -16,9 +16,9 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static junit.framework.Assert.assertEquals;
 
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -31,7 +31,6 @@ import android.provider.Settings;
 import android.service.notification.ZenModeConfig;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -189,7 +188,6 @@ public class ZenModeBackendTest {
         }
     }
 
-    @Ignore
     @Test
     public void saveConversationSenders_importantToNone() {
         when(mNotificationManager.getNotificationPolicy()).thenReturn(
@@ -204,7 +202,11 @@ public class ZenModeBackendTest {
         mBackend.saveConversationSenders(CONVERSATION_SENDERS_NONE);
 
         ArgumentCaptor<Policy> captor = ArgumentCaptor.forClass(Policy.class);
-        verify(mNotificationManager, times(1)).setNotificationPolicy(captor.capture());
+        if (android.app.Flags.modesApi()) {
+            verify(mNotificationManager).setNotificationPolicy(captor.capture(), eq(true));
+        } else {
+            verify(mNotificationManager).setNotificationPolicy(captor.capture());
+        }
 
         Policy expected = new Policy(
                 PRIORITY_CATEGORY_CALLS | PRIORITY_CATEGORY_MESSAGES | PRIORITY_CATEGORY_ALARMS,
@@ -215,7 +217,6 @@ public class ZenModeBackendTest {
         assertEquals(expected, captor.getValue());
     }
 
-    @Ignore
     @Test
     public void saveConversationSenders_noneToAll() {
         when(mNotificationManager.getNotificationPolicy()).thenReturn(new Policy(
@@ -229,7 +230,11 @@ public class ZenModeBackendTest {
         mBackend.saveConversationSenders(CONVERSATION_SENDERS_ANYONE);
 
         ArgumentCaptor<Policy> captor = ArgumentCaptor.forClass(Policy.class);
-        verify(mNotificationManager, times(1)).setNotificationPolicy(captor.capture());
+        if (android.app.Flags.modesApi()) {
+            verify(mNotificationManager).setNotificationPolicy(captor.capture(), eq(true));
+        } else {
+            verify(mNotificationManager).setNotificationPolicy(captor.capture());
+        }
 
         Policy expected = new Policy(PRIORITY_CATEGORY_CONVERSATIONS
                 | PRIORITY_CATEGORY_CALLS | PRIORITY_CATEGORY_MESSAGES | PRIORITY_CATEGORY_ALARMS,
@@ -240,7 +245,6 @@ public class ZenModeBackendTest {
         assertEquals(expected, captor.getValue());
     }
 
-    @Ignore
     @Test
     public void saveSenders_doesNotChangeConversations() {
         when(mNotificationManager.getNotificationPolicy()).thenReturn(
@@ -255,7 +259,11 @@ public class ZenModeBackendTest {
         mBackend.saveSenders(PRIORITY_CATEGORY_CALLS, PRIORITY_SENDERS_ANY);
 
         ArgumentCaptor<Policy> captor = ArgumentCaptor.forClass(Policy.class);
-        verify(mNotificationManager, times(1)).setNotificationPolicy(captor.capture());
+        if (android.app.Flags.modesApi()) {
+            verify(mNotificationManager).setNotificationPolicy(captor.capture(), eq(true));
+        } else {
+            verify(mNotificationManager).setNotificationPolicy(captor.capture());
+        }
 
         Policy expected = new Policy(PRIORITY_CATEGORY_CONVERSATIONS
                 | PRIORITY_CATEGORY_CALLS | PRIORITY_CATEGORY_MESSAGES | PRIORITY_CATEGORY_ALARMS,

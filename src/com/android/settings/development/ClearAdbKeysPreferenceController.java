@@ -52,6 +52,9 @@ public class ClearAdbKeysPreferenceController extends DeveloperOptionsPreference
 
     @Override
     public boolean isAvailable() {
+        // If the build is insecure (any -user build, 'ro.adb.secure=0'), adbd does not
+        // requests/store authorizations. There is no need for a "revoke authorizations"
+        // button.
         return AdbProperties.secure().orElse(false);
     }
 

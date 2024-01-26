@@ -50,6 +50,7 @@ public class ShadowLockPatternUtils {
     private static Map<Integer, Boolean> sUserToVisiblePatternEnabledMap = new HashMap<>();
     private static Map<Integer, Boolean> sUserToBiometricAllowedMap = new HashMap<>();
     private static Map<Integer, Boolean> sUserToLockPatternEnabledMap = new HashMap<>();
+    private static Map<Integer, Integer> sKeyguardStoredPasswordQualityMap = new HashMap<>();
 
     private static boolean sIsUserOwnsFrpCredential;
 
@@ -66,6 +67,7 @@ public class ShadowLockPatternUtils {
         sUserToLockPatternEnabledMap.clear();
         sDeviceEncryptionEnabled = false;
         sIsUserOwnsFrpCredential = false;
+        sKeyguardStoredPasswordQualityMap.clear();
     }
 
     @Implementation
@@ -97,7 +99,7 @@ public class ShadowLockPatternUtils {
 
     @Implementation
     protected int getKeyguardStoredPasswordQuality(int userHandle) {
-        return 1;
+        return sKeyguardStoredPasswordQualityMap.getOrDefault(userHandle, /* defaultValue= */ 1);
     }
 
     @Implementation
@@ -171,7 +173,7 @@ public class ShadowLockPatternUtils {
 
     @Implementation
     public boolean isLockPatternEnabled(int userId) {
-        return sUserToBiometricAllowedMap.getOrDefault(userId, false);
+        return sUserToLockPatternEnabledMap.getOrDefault(userId, false);
     }
 
     public static void setIsLockPatternEnabled(int userId, boolean isLockPatternEnabled) {
@@ -237,5 +239,9 @@ public class ShadowLockPatternUtils {
     @Implementation
     public boolean isSeparateProfileChallengeEnabled(int userHandle) {
         return false;
+    }
+
+    public static void setKeyguardStoredPasswordQuality(int quality) {
+        sKeyguardStoredPasswordQualityMap.put(UserHandle.myUserId(), quality);
     }
 }
