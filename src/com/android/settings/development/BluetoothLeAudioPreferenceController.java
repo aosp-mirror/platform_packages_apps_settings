@@ -21,6 +21,7 @@ import android.bluetooth.BluetoothManager;
 import android.bluetooth.BluetoothStatusCodes;
 import android.content.Context;
 import android.os.SystemProperties;
+import android.sysprop.BluetoothProperties;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -62,6 +63,12 @@ public class BluetoothLeAudioPreferenceController
     @Override
     public String getPreferenceKey() {
         return PREFERENCE_KEY;
+    }
+
+    @Override
+    public boolean isAvailable() {
+        return BluetoothProperties.isProfileBapUnicastClientEnabled().orElse(false)
+                && !BluetoothProperties.isProfileBapBroadcastSourceEnabled().orElse(false);
     }
 
     @Override

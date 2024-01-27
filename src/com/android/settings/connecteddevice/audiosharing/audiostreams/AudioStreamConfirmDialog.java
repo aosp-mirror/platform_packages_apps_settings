@@ -104,7 +104,7 @@ public class AudioStreamConfirmDialog extends InstrumentedDialogFragment {
     private Dialog getErrorDialog() {
         return new AudioStreamsDialogFragment.DialogBuilder(mActivity)
                 .setTitle("Can't listen to audio stream")
-                .setSubTitle1("Can't play this audio stream. Learn more")
+                .setSubTitle2("Can't play this audio stream. Learn more")
                 .setRightButtonText("Close")
                 .setRightButtonOnClickListener(
                         unused -> {

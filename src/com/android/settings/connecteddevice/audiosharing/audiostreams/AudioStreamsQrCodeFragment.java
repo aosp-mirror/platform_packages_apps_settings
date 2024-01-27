@@ -24,6 +24,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import androidx.annotation.Nullable;
 
 import com.android.settings.R;
 import com.android.settings.bluetooth.Utils;
@@ -34,6 +37,7 @@ import com.android.settingslib.qrcode.QrCodeGenerator;
 
 import com.google.zxing.WriterException;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
 public class AudioStreamsQrCodeFragment extends InstrumentedFragment {
@@ -49,30 +53,47 @@ public class AudioStreamsQrCodeFragment extends InstrumentedFragment {
     public final View onCreateView(
             LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.xml.bluetooth_audio_streams_qr_code, container, false);
-        getQrCodeBitmap()
-                .ifPresent(
-                        bm ->
+
+        BluetoothLeBroadcastMetadata broadcastMetadata = getBroadcastMetadata();
+
+        if (broadcastMetadata != null) {
+            getQrCodeBitmap(broadcastMetadata)
+                    .ifPresent(
+                            bm -> {
                                 ((ImageView) view.requireViewById(R.id.qrcode_view))
-                                        .setImageBitmap(bm));
+                                        .setImageBitmap(bm);
+                                ((TextView) view.requireViewById(R.id.password))
+                                        .setText(
+                                                "Password: "
+                                                        + new String(
+                                                                broadcastMetadata
+                                                                        .getBroadcastCode(),
+                                                                StandardCharsets.UTF_8));
+                            });
+        }
         return view;
     }
 
-    private Optional<Bitmap> getQrCodeBitmap() {
-        String broadcastMetadata = getBroadcastMetadataQrCode();
-        if (broadcastMetadata.isEmpty()) {
+    private Optional<Bitmap> getQrCodeBitmap(@Nullable BluetoothLeBroadcastMetadata metadata) {
+        if (metadata == null) {
             Log.d(TAG, "onCreateView: broadcastMetadata is empty!");
             return Optional.empty();
         }
-
+        String metadataStr = BluetoothLeBroadcastMetadataExt.INSTANCE.toQrCodeString(metadata);
+        if (metadataStr.isEmpty()) {
+            Log.d(TAG, "onCreateView: metadataStr is empty!");
+            return Optional.empty();
+        }
+        Log.d("chelsea", metadataStr);
         try {
             int qrcodeSize = getContext().getResources().getDimensionPixelSize(R.dimen.qrcode_size);
-            Bitmap bitmap = QrCodeGenerator.encodeQrCode(broadcastMetadata, qrcodeSize);
+            Bitmap bitmap = QrCodeGenerator.encodeQrCode(metadataStr, qrcodeSize);
             return Optional.of(bitmap);
         } catch (WriterException e) {
             Log.d(
                     TAG,
                     "onCreateView: broadcastMetadata "
-                            + broadcastMetadata
+                            + metadata
                             + " qrCode generation exception "
                             + e);
         }
@@ -80,23 +101,24 @@ public class AudioStreamsQrCodeFragment extends InstrumentedFragment {
         return Optional.empty();
     }
 
-    private String getBroadcastMetadataQrCode() {
+    @Nullable
+    private BluetoothLeBroadcastMetadata getBroadcastMetadata() {
         LocalBluetoothLeBroadcast localBluetoothLeBroadcast =
                 Utils.getLocalBtManager(getActivity())
                         .getProfileManager()
                         .getLeAudioBroadcastProfile();
         if (localBluetoothLeBroadcast == null) {
             Log.d(TAG, "getBroadcastMetadataQrCode: localBluetoothLeBroadcast is null!");
-            return "";
+            return null;
         }
 
         BluetoothLeBroadcastMetadata metadata =
                 localBluetoothLeBroadcast.getLatestBluetoothLeBroadcastMetadata();
         if (metadata == null) {
             Log.d(TAG, "getBroadcastMetadataQrCode: metadata is null!");
-            return "";
+            return null;
         }
 
-        return BluetoothLeBroadcastMetadataExt.INSTANCE.toQrCodeString(metadata);
+        return metadata;
     }
 }

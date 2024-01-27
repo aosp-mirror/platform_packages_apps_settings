@@ -26,8 +26,11 @@ import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.SettingsPreferenceFragment
 import com.android.settings.dashboard.DashboardFragment
+import com.android.settings.flags.Flags
 import com.android.settings.network.telephony.MobileNetworkUtils
 import com.android.settings.search.BaseSearchIndexProvider
+import com.android.settings.spa.SpaActivity.Companion.startSpaActivity
+import com.android.settings.spa.network.NetworkCellularGroupProvider
 import com.android.settingslib.search.SearchIndexable
 import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
 import com.android.settingslib.spaprivileged.framework.common.userManager
@@ -38,6 +41,15 @@ class MobileNetworkListFragment : DashboardFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         collectAirplaneModeAndFinishIfOn()
+    }
+
+    override fun onCreate(icicle: Bundle?) {
+        super.onCreate(icicle)
+
+        if (Flags.isDualSimOnboardingEnabled()) {
+            context?.startSpaActivity(NetworkCellularGroupProvider.name);
+            finish()
+        }
     }
 
     override fun onResume() {
