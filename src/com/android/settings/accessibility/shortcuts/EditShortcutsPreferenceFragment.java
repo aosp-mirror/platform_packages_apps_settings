@@ -270,6 +270,7 @@ public class EditShortcutsPreferenceFragment extends DashboardFragment {
         }
 
         mShortcutTargets = Set.of(targets);
+        // TODO(318748373): use 'targets' to populate title when no title is given
     }
 
     @Override

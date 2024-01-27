@@ -21,19 +21,26 @@ import com.android.settings.widget.ValidatedEditTextPreference;
 import java.nio.charset.StandardCharsets;
 
 /**
- * Validator for Audio Sharing Name, which should be a UTF-8 encoded string containing a minimum of
- * 4 characters and a maximum of 32 human-readable characters.
+ * Validator for Audio Sharing Password, which should be a UTF-8 string that has at least 4 octets
+ * and should not exceed 16 octets.
  */
-public class AudioSharingNameTextValidator implements ValidatedEditTextPreference.Validator {
-    private static final int MIN_LENGTH = 4;
-    private static final int MAX_LENGTH = 32;
+public class AudioSharingPasswordValidator implements ValidatedEditTextPreference.Validator {
+    private static final int MIN_OCTETS = 4;
+    private static final int MAX_OCTETS = 16;
 
     @Override
     public boolean isTextValid(String value) {
-        if (value == null || value.length() < MIN_LENGTH || value.length() > MAX_LENGTH) {
+        if (value == null
+                || getOctetsCount(value) < MIN_OCTETS
+                || getOctetsCount(value) > MAX_OCTETS) {
             return false;
         }
+
         return isValidUTF8(value);
+    }
+
+    private static int getOctetsCount(String value) {
+        return value.getBytes(StandardCharsets.UTF_8).length;
     }
 
     private static boolean isValidUTF8(String value) {

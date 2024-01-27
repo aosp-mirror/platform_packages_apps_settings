@@ -108,21 +108,22 @@ private fun primarySimBody(onboardingService: SimOnboardingService) {
         list,
         callsSelectedId,
         ImageVector.vectorResource(R.drawable.ic_phone),
-        true
+        onIdSelected = { callsSelectedId.intValue = it }
     )
     createPrimarySimListPreference(
         stringResource(id = R.string.primary_sim_texts_title),
         list,
         textsSelectedId,
         Icons.AutoMirrored.Outlined.Message,
-        true
+        onIdSelected = { textsSelectedId.intValue = it }
     )
+
     createPrimarySimListPreference(
-        stringResource(id = R.string.mobile_data_settings_title),
-        list,
-        mobileDataSelectedId,
+            stringResource(id = R.string.mobile_data_settings_title),
+            list,
+            mobileDataSelectedId,
         Icons.Outlined.DataUsage,
-        true
+            onIdSelected = { mobileDataSelectedId.intValue = it }
     )
 
     val autoDataTitle = stringResource(id = R.string.primary_sim_automatic_data_title)
@@ -140,17 +141,18 @@ private fun primarySimBody(onboardingService: SimOnboardingService) {
 
 @Composable
 fun createPrimarySimListPreference(
-    title: String,
-    list: List<ListPreferenceOption>,
-    selectedId: MutableIntState,
-    icon: ImageVector,
-    enable: Boolean
+        title: String,
+        list: List<ListPreferenceOption>,
+        selectedId: MutableIntState,
+        icon: ImageVector,
+        enable: Boolean = true,
+        onIdSelected: (id: Int) -> Unit
 ) = ListPreference(remember {
     object : ListPreferenceModel {
         override val title = title
         override val options = list
         override val selectedId = selectedId
-        override val onIdSelected: (id: Int) -> Unit = { selectedId.intValue = it }
+        override val onIdSelected = onIdSelected
         override val icon = @Composable {
             SettingsIcon(icon)
         }

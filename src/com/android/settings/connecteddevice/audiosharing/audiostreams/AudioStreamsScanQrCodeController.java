@@ -16,7 +16,6 @@
 
 package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
-import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.content.Intent;
@@ -58,14 +57,12 @@ public class AudioStreamsScanQrCodeController extends BasePreferenceController
             };
 
     private final LocalBluetoothManager mLocalBtManager;
-    private final AudioStreamsHelper mAudioStreamsHelper;
     private AudioStreamsDashboardFragment mFragment;
     private Preference mPreference;
 
     public AudioStreamsScanQrCodeController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         mLocalBtManager = Utils.getLocalBtManager(mContext);
-        mAudioStreamsHelper = new AudioStreamsHelper(mLocalBtManager);
     }
 
     public void setFragment(AudioStreamsDashboardFragment fragment) {
@@ -122,10 +119,6 @@ public class AudioStreamsScanQrCodeController extends BasePreferenceController
                     }
                     return false;
                 });
-    }
-
-    void addSource(BluetoothLeBroadcastMetadata source) {
-        mAudioStreamsHelper.addSource(source);
     }
 
     private void updateVisibility() {

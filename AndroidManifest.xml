@@ -2283,6 +2283,21 @@
                 android:value="true" />
         </activity>
 
+        <activity
+            android:name="Settings$AccessibilityEditShortcutsActivity"
+            android:label="@string/accessibility_settings"
+            android:exported="true"
+            android:permission="android.permission.MANAGE_ACCESSIBILITY">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.ACCESSIBILITY_SHORTCUT_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragment" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_accessibility"/>
+        </activity>
+
         <activity android:name=".accessibility.AccessibilitySettingsForSetupWizardActivity"
                 android:icon="@drawable/ic_accessibility_suggestion"
                 android:label="@string/vision_settings_title"
