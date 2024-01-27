@@ -113,7 +113,7 @@ public class SatelliteSettingPreferenceController extends
     private void updateSummary(Preference preference) {
         try {
             Set<Integer> restrictionReason =
-                    mSatelliteManager.getSatelliteAttachRestrictionReasonsForCarrier(mSubId);
+                    mSatelliteManager.getAttachRestrictionReasonsForCarrier(mSubId);
             boolean isSatelliteEligible = !restrictionReason.contains(
                     SatelliteManager.SATELLITE_COMMUNICATION_RESTRICTION_REASON_ENTITLEMENT);
             if (mIsSatelliteEligible == null || mIsSatelliteEligible != isSatelliteEligible) {
