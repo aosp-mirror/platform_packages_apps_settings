@@ -454,6 +454,11 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                 getDevelopmentOptionsController(
                         BluetoothLeAudioPreferenceController.class);
         leAudioFeatureController.onRebootDialogConfirmed();
+
+        final BluetoothLeAudioModePreferenceController leAudioModeController =
+                getDevelopmentOptionsController(
+                        BluetoothLeAudioModePreferenceController.class);
+        leAudioModeController.onRebootDialogConfirmed();
     }
 
     @Override
@@ -471,6 +476,11 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                 getDevelopmentOptionsController(
                         BluetoothLeAudioPreferenceController.class);
         leAudioFeatureController.onRebootDialogCanceled();
+
+        final BluetoothLeAudioModePreferenceController leAudioModeController =
+                getDevelopmentOptionsController(
+                        BluetoothLeAudioModePreferenceController.class);
+        leAudioModeController.onRebootDialogCanceled();
     }
 
     @Override
@@ -670,6 +680,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new BluetoothAvrcpVersionPreferenceController(context));
         controllers.add(new BluetoothMapVersionPreferenceController(context));
         controllers.add(new BluetoothLeAudioPreferenceController(context, fragment));
+        controllers.add(new BluetoothLeAudioModePreferenceController(context, fragment));
         controllers.add(new BluetoothLeAudioDeviceDetailsPreferenceController(context));
         controllers.add(new BluetoothLeAudioAllowListPreferenceController(context, fragment));
         controllers.add(new BluetoothA2dpHwOffloadPreferenceController(context, fragment));

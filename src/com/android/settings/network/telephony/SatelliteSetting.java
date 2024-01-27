@@ -183,7 +183,7 @@ public class SatelliteSetting extends RestrictedDashboardFragment {
     private boolean isSatelliteEligible() {
         try {
             Set<Integer> restrictionReason =
-                    mSatelliteManager.getSatelliteAttachRestrictionReasonsForCarrier(mSubId);
+                    mSatelliteManager.getAttachRestrictionReasonsForCarrier(mSubId);
             return !restrictionReason.contains(
                     SatelliteManager.SATELLITE_COMMUNICATION_RESTRICTION_REASON_ENTITLEMENT);
         } catch (SecurityException | IllegalStateException | IllegalArgumentException ex) {
