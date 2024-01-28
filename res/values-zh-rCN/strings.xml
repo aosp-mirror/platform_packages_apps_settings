@@ -552,10 +552,8 @@
     <string name="private_space_one_lock_summary" msgid="2759953747682959371">"您可以像解锁设备一样解锁私密空间，也可以选择其他锁定方式"</string>
     <string name="private_space_screen_lock_title" msgid="8679383894967823163">"使用设备屏幕锁定方式"</string>
     <string name="private_space_biometric_title" msgid="3934339826674553174">"人脸解锁和指纹解锁"</string>
-    <!-- no translation found for private_space_fingerprint_title (5989254643211889931) -->
-    <skip />
-    <!-- no translation found for private_space_face_title (3290402865367663079) -->
-    <skip />
+    <string name="private_space_fingerprint_title" msgid="5989254643211889931">"指纹解锁"</string>
+    <string name="private_space_face_title" msgid="3290402865367663079">"人脸解锁"</string>
     <string name="private_space_biometric_summary" msgid="4403837276018724581">"点按即可设置"</string>
     <string name="private_space_fingerprint_unlock_title" msgid="5804023571114910034">"使用指纹解锁私密空间"</string>
     <string name="private_space_face_unlock_title" msgid="6613018437620070183">"使用人脸解锁私密空间"</string>
@@ -581,8 +579,7 @@
     <string name="private_space_delete_title" msgid="3075645119800272800">"删除私密空间"</string>
     <string name="private_space_deleted" msgid="7825768516955610897">"已成功删除私密空间"</string>
     <string name="private_space_delete_failed" msgid="8500755484258565011">"无法删除私密空间"</string>
-    <!-- no translation found for private_space_unlocked (9091600948712932046) -->
-    <skip />
+    <string name="private_space_unlocked" msgid="9091600948712932046">"已解锁私密空间"</string>
     <string name="no_device_lock_title" msgid="1078223464721029954">"设置屏锁"</string>
     <string name="no_device_lock_summary" msgid="7436025227616244687">"若要使用私密空间，请在此设备上设置屏锁"</string>
     <string name="no_device_lock_action_label" msgid="2640487005629001288">"设置屏锁"</string>
@@ -610,8 +607,14 @@
     <string name="private_space_access_text" msgid="4258842502257201013">"若要访问私密空间，请前往应用列表，然后向下滚动"</string>
     <string name="private_space_done_label" msgid="1020482651595246071">"完成"</string>
     <string name="private_space_scrolldown_to_access" msgid="4820954877349434545">"向下滚动可找到私密空间"</string>
-    <string name="private_space_retry_signin_title" msgid="2340841075193680666">"登录后才能设置私密空间"</string>
-    <string name="private_space_retry_summary" msgid="1976929616948459609">"您需要登录账号，才能设置私密空间"</string>
+    <!-- no translation found for private_space_retry_signin_title (8090276618867918844) -->
+    <skip />
+    <!-- no translation found for private_space_retry_summary (1920444015972648774) -->
+    <skip />
+    <!-- no translation found for private_space_skip_login_label (7078019409056628192) -->
+    <skip />
+    <!-- no translation found for private_space_continue_login_label (7779965766333065391) -->
+    <skip />
     <string name="private_space_lock_setup_title" msgid="6541564212199510787">"为私密空间选择一种锁定方式"</string>
     <string name="private_space_lock_setup_description" msgid="423405593476300918">"您可以通过指纹解锁私密空间。为安全起见，您必须设置备用锁定方式，才能使用此选项。"</string>
     <string name="private_space_choose_your_pin_header" msgid="4560802934975898265">"为您的私密空间设置 PIN 码"</string>
@@ -1386,6 +1389,8 @@
     <string name="battery_level_title" msgid="1371765298786083448">"电池电量"</string>
     <string name="communal_settings_title" msgid="2845678473945902115">"共用"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"通用设置"</string>
+    <!-- no translation found for satellite_setting (706846910912477125) -->
+    <skip />
     <string name="apn_settings" msgid="4295467389400441299">"APN"</string>
     <string name="apn_edit" msgid="2003683641840248741">"修改接入点"</string>
     <string name="apn_add" msgid="9069613192201630934">"添加接入点"</string>
@@ -1440,7 +1445,8 @@
     <string name="reset_bluetooth_wifi_button_text" msgid="3974098137045963639">"重置"</string>
     <string name="reset_bluetooth_wifi_complete_toast" msgid="5893439291030574365">"蓝牙和 WLAN 已重置"</string>
     <string name="reset_esim_title" msgid="4194570573425902754">"清空 eSIM 卡"</string>
-    <string name="reset_esim_desc" msgid="3662444090563399131">"此操作并不会取消任何移动服务套餐。如要下载替代 SIM 卡，请与您的运营商联系。"</string>
+    <!-- no translation found for reset_esim_desc (6125192435907740751) -->
+    <skip />
     <string name="reset_network_button_text" msgid="2281476496459610071">"重置设置"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"要重置所有网络设置吗？此操作无法撤消。"</string>
     <string name="reset_network_final_desc_esim" msgid="1129251284212847939">"要重置所有网络设置并清空 eSIM 卡吗？此操作无法撤消。"</string>
@@ -1448,15 +1454,18 @@
     <string name="reset_network_confirm_title" msgid="913014422184481270">"要重置网络设置吗？"</string>
     <string name="network_reset_not_available" msgid="1966334631394607829">"此用户无权重置网络设置"</string>
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"网络设置已重置"</string>
-    <string name="reset_esim_error_title" msgid="4670073610967959597">"无法清除 SIM 卡"</string>
-    <string name="reset_esim_error_msg" msgid="7279607120606365250">"发生错误，因此无法清空 eSIM 卡。\n\n请重启设备，然后重试。"</string>
+    <!-- no translation found for reset_esim_error_title (6516110227665862295) -->
+    <skip />
+    <!-- no translation found for reset_esim_error_msg (8459527827897797168) -->
+    <skip />
     <string name="main_clear_title" msgid="277664302144837723">"清除所有数据（恢复出厂设置）"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"清除所有数据（恢复出厂设置）"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"音乐"</li>\n<li>"照片"</li>\n<li>"其他用户数据"</li></string>
     <string name="main_clear_desc_also_erases_esim" msgid="4553469876411831729"><li>"eSIM 卡"</li></string>
     <string name="main_clear_desc_no_cancel_mobile_plan" msgid="369883568059127035">\n\n"这样并不会取消您的移动服务套餐。"</string>
     <string name="main_clear_final_desc" msgid="5800877928569039580">"系统将删除您所有的个人信息和已下载的应用。此操作无法撤消。"</string>
-    <string name="main_clear_final_desc_esim" msgid="440406836793824969">"系统将删除您所有的个人信息（包括已下载的应用和 SIM 卡）。此操作无法撤消。"</string>
+    <!-- no translation found for main_clear_final_desc_esim (6592404057237813989) -->
+    <skip />
     <string name="main_clear_confirm_title" msgid="6577071819657853713">"要清除所有数据吗？"</string>
     <string name="main_clear_not_available" msgid="3433795327146684827">"此用户无权恢复出厂设置"</string>
     <string name="main_clear_progress_title" msgid="7239741132015617719">"正在清除"</string>
@@ -1687,6 +1696,14 @@
     <string name="force_stop" msgid="2681771622136916280">"强行停止"</string>
     <string name="archive" msgid="9074663845068632127">"归档"</string>
     <string name="restore" msgid="7622486640713967157">"恢复"</string>
+    <!-- no translation found for restoring_step_one (3465050101254272874) -->
+    <skip />
+    <!-- no translation found for restoring_step_two (140484846432595108) -->
+    <skip />
+    <!-- no translation found for restoring_step_three (3712883580876329811) -->
+    <skip />
+    <!-- no translation found for restoring_step_four (8966846882470446209) -->
+    <skip />
     <string name="total_size_label" msgid="2052185048749658866">"总计"</string>
     <string name="application_size_label" msgid="6407051020651716729">"应用大小"</string>
     <string name="external_code_size_label" msgid="7375146402660973743">"USB存储（应用）"</string>
@@ -2390,12 +2407,6 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"查看耗电量较高的应用"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="6258554134146272311">"为保护电池，已采用更优化的充电方式"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="5107379280241187562">"为延长电池寿命，已采用更优化的充电方式"</string>
-    <string name="battery_tip_dock_defender_future_bypass_title" msgid="4332616280495788195">"为保护电池，已采用更优化的充电方式"</string>
-    <string name="battery_tip_dock_defender_future_bypass_summary" msgid="7870758621381307597">"为延长电池寿命，在插入基座时会采用更优化的充电方式"</string>
-    <string name="battery_tip_dock_defender_active_title" msgid="1414785238383255699">"为保护电池，已采用更优化的充电方式"</string>
-    <string name="battery_tip_dock_defender_active_summary" msgid="3512082623718801459">"为延长电池寿命，在插入基座时会采用更优化的充电方式"</string>
-    <string name="battery_tip_dock_defender_temporarily_bypassed_title" msgid="1679449361090557201">"正在充满电量"</string>
-    <string name="battery_tip_dock_defender_temporarily_bypassed_summary" msgid="1099500476761333281">"为保护电池，下次平板电脑插入基座时，将采用更优化的充电方式"</string>
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"详细了解充电暂停的原因"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"继续充电"</string>
     <string name="battery_tip_dialog_message_footer" msgid="986542164372177504">"包括高耗电后台活动"</string>
@@ -2413,7 +2424,8 @@
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"移除"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"取消"</string>
     <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"充满电"</string>
-    <string name="battery_tip_incompatible_charging_title" msgid="5120763575150751300">"充电配件有问题"</string>
+    <!-- no translation found for battery_tip_incompatible_charging_title (1567827436103364999) -->
+    <skip />
     <string name="battery_tip_incompatible_charging_content_description" msgid="355668467640367701">"详细了解不兼容的充电装置"</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"电池管理器"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"自动管理应用"</string>
@@ -3869,10 +3881,8 @@
     <string name="voice_activation_apps_title" msgid="7130045161611529825">"语音启动应用"</string>
     <string name="permit_voice_activation_apps" msgid="9152780172988949319">"允许使用语音启动"</string>
     <string name="allow_voice_activation_apps_description" msgid="6369745626995060656">"语音启动功能可使用语音指令开启批准的应用，而无需手动操作。内置的自适应传感功能会确保您的数据不外泄。\n\n"<a href="">"详细了解受保护的自适应传感功能"</a></string>
-    <!-- no translation found for permit_receive_sandboxed_detection_training_data (3929496847420108753) -->
-    <skip />
-    <!-- no translation found for receive_sandboxed_detection_training_data_description (1415687008184625050) -->
-    <skip />
+    <string name="permit_receive_sandboxed_detection_training_data" msgid="3929496847420108753">"改进语音启动"</string>
+    <string name="receive_sandboxed_detection_training_data_description" msgid="1415687008184625050">"此设备使用私人情报改进语音启动模型。应用可接收从众多用户处汇总的最新动态摘要，从而在维护隐私的同时为所有用户改进此模型。\n\n"<a href="">"详细了解私人情报"</a></string>
     <string name="full_screen_intent_title" msgid="747270185715224130">"全屏通知"</string>
     <string name="permit_full_screen_intent" msgid="9035367640019960861">"允许此应用显示全屏通知"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"允许此应用在设备锁定时显示占据整个屏幕空间的通知。应用可以利用全屏通知显示闹钟、来电或其他紧急通知。"</string>
@@ -4294,26 +4304,27 @@
     <string name="autofill_app" msgid="7595308061826307921">"自动填充服务"</string>
     <string name="default_autofill_app" msgid="372234803718251606">"默认自动填充服务"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"密码"</string>
-    <string name="credman_chosen_app_title" msgid="872524130208251505">"密码、通行密钥和数据服务"</string>
+    <!-- no translation found for credman_chosen_app_title (7735183808067729319) -->
+    <skip />
     <string name="credman_credentials" msgid="4931371941253324143">"其他提供方"</string>
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# 个密码}other{# 个密码}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"自动, 填充, 自动填充, 密码, auto, fill, autofill, password"</string>
     <string name="credman_keywords" msgid="8305600680836806170">"数据, 通行密钥, 密码, data, passkey, password"</string>
     <string name="credman_autofill_keywords" msgid="701180623776848914">"自动, 填充, 自动填充, 数据, 通行密钥, 密码, auto, fill, autofill, data, passkey, password"</string>
+    <!-- no translation found for credman_button_change (4072629639218503790) -->
+    <skip />
+    <!-- no translation found for credman_button_open (7519871964170816850) -->
+    <skip />
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;请确认这是您信任的应用&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt;会根据您的屏幕内容判断可自动填充哪些内容。"</string>
     <string name="credman_autofill_confirmation_message" msgid="843829628024668466">"&lt;b&gt;要使用&lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;吗？&lt;/b&gt; &lt;br/&gt; &lt;br/&gt;从现在起，系统会将新密码、通行密钥和其他信息保存在此处。&lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;可能会根据屏幕上的内容判断可以自动填充的内容。"</string>
     <string name="credman_picker_title" msgid="8191267620665129205">"密码、通行密钥和数据服务"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"要关闭%1$s吗？"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;停用此服务？&lt;/b&gt; &lt;br/&gt; &lt;br/&gt;停用此服务后，当您登录时，系统不会填充密码、通行密钥、付款方式等已保存的信息以及其他信息。如需使用已保存的信息，请选择一个密码、通行密钥或数据服务。"</string>
-    <!-- no translation found for credman_confirmation_message_new_ui (6126274509951156460) -->
-    <skip />
-    <!-- no translation found for credman_autofill_confirmation_message_new_ui (6222139222478822267) -->
-    <skip />
+    <string name="credman_confirmation_message_new_ui" msgid="6126274509951156460">"&lt;b&gt;关闭所有服务？&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;密码、通行密钥和其他已存信息将不可用于登录时自动填充"</string>
+    <string name="credman_autofill_confirmation_message_new_ui" msgid="6222139222478822267">"&lt;b&gt;将您的首选服务更改为&lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;？&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;从现在起，新的密码、通行密钥和其他信息将保存在这里。&lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;可能会根据屏幕上的内容判断可以自动填充的信息"</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"使用%1$s？"</string>
-    <!-- no translation found for credman_limit_error_msg_title (1525814645803612135) -->
-    <skip />
-    <!-- no translation found for credman_limit_error_msg (2521803280130310063) -->
-    <skip />
+    <string name="credman_limit_error_msg_title" msgid="1525814645803612135">"您只能开启 5 项服务"</string>
+    <string name="credman_limit_error_msg" msgid="2521803280130310063">"至少关闭 1 项服务才能添加另 1 项服务"</string>
     <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"%1$s会根据屏幕上的内容判断可以自动填充的内容。"</string>
     <string name="credman_error_message_title" msgid="4099557206946333568">"密码、通行密钥和数据服务限制"</string>
     <string name="credman_error_message" msgid="8334797097200415449">"同时最多可以启用 5 个密码、通行密钥和数据服务。若要添加其他服务，请先关闭一个已启用的服务。"</string>
@@ -4487,7 +4498,8 @@
     <string name="mobile_network_use_sim_off" msgid="6303281166199670639">"关闭"</string>
     <string name="mobile_network_disable_sim_explanation" msgid="2851862257846773796">"要停用此 SIM 卡，请将其拔出"</string>
     <string name="mobile_network_tap_to_activate" msgid="4139979375717958102">"点按即可激活<xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <string name="mobile_network_erase_sim" msgid="4629071168032714930">"清除 SIM 卡"</string>
+    <!-- no translation found for mobile_network_erase_sim (5387971155494245850) -->
+    <skip />
     <string name="preferred_network_mode_title" msgid="3083431168988535628">"首选网络类型"</string>
     <string name="preferred_network_mode_summary" msgid="537577807865497546">"更改网络运行方式"</string>
     <string name="preferred_network_mode_dialogtitle" msgid="4179420486180351631">"首选网络类型"</string>
@@ -4506,6 +4518,40 @@
     <string name="roaming_check_price_warning" msgid="5876977438036791361">"请与您的网络服务提供商联系以了解定价。"</string>
     <string name="mobile_data_usage_title" msgid="2047864499317759728">"应用的流量使用情况"</string>
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"无效的网络模式<xliff:g id="NETWORKMODEID">%1$d</xliff:g>。忽略。"</string>
+    <!-- no translation found for satellite_setting_title (2543034229989047673) -->
+    <skip />
+    <!-- no translation found for satellite_setting_enabled_summary (3554127722727530845) -->
+    <skip />
+    <!-- no translation found for satellite_setting_disabled_summary (6789122487534159857) -->
+    <skip />
+    <!-- no translation found for keywords_satellite_setting (3312183289776517695) -->
+    <skip />
+    <!-- no translation found for category_name_about_satellite_messaging (3756205049485508340) -->
+    <skip />
+    <!-- no translation found for title_about_satellite_setting (9212860038048311345) -->
+    <skip />
+    <!-- no translation found for category_title_your_satellite_plan (3017895097366691841) -->
+    <skip />
+    <!-- no translation found for title_have_satellite_plan (2048372355699977947) -->
+    <skip />
+    <!-- no translation found for title_no_satellite_plan (2876056203035197505) -->
+    <skip />
+    <!-- no translation found for summary_add_satellite_setting (3815254731634052432) -->
+    <skip />
+    <!-- no translation found for category_name_how_it_works (585303230539269496) -->
+    <skip />
+    <!-- no translation found for title_satellite_connection_guide (3294802307913609072) -->
+    <skip />
+    <!-- no translation found for summary_satellite_connection_guide (3496123195218418456) -->
+    <skip />
+    <!-- no translation found for title_supported_service (4275535165812691571) -->
+    <skip />
+    <!-- no translation found for summary_supported_service (4320535903444834786) -->
+    <skip />
+    <!-- no translation found for satellite_setting_summary_more_information (4008690241760925372) -->
+    <skip />
+    <!-- no translation found for more_about_satellite_messaging (3385673133561348509) -->
+    <skip />
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"接入点名称"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"连接到<xliff:g id="CARRIER">%1$s</xliff:g>时无法使用"</string>
@@ -4515,9 +4561,12 @@
     <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"要切换到<xliff:g id="CARRIER_NAME">%1$s</xliff:g>吗？"</string>
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"要切换为使用 SIM 卡吗？"</string>
     <string name="sim_action_switch_sub_dialog_mep_title" msgid="933856847099933004">"要使用“<xliff:g id="CARRIER_NAME">%1$s</xliff:g>”吗？"</string>
-    <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"一次只能启用一个 SIM 卡。\n\n切换到<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>不会取消<xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>服务。"</string>
-    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="8977951796005849471">"一次只能启用一个 eSIM 卡。\n\n切换到<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>不会取消<xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>服务。"</string>
-    <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"一次只能启用一个 SIM 卡。\n\n进行切换并不会取消<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>服务。"</string>
+    <!-- no translation found for sim_action_switch_sub_dialog_text (7474905814976249607) -->
+    <skip />
+    <!-- no translation found for sim_action_switch_sub_dialog_text_downloaded (6415848271400253954) -->
+    <skip />
+    <!-- no translation found for sim_action_switch_sub_dialog_text_single_sim (421658355882679837) -->
+    <skip />
     <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"可以同时使用 2 张 SIM 卡。要使用<xliff:g id="CARRIER_NAME">%1$s</xliff:g>，请关闭另一张 SIM 卡。"</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"切换到<xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"关闭<xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
@@ -4560,7 +4609,8 @@
     <string name="sim_onboarding_phoneNumber_data_only" msgid="8158409121949373662">"上网专用"</string>
     <string name="sim_onboarding_setup" msgid="5750393553605388463">"设置"</string>
     <string name="sim_onboarding_next" msgid="6415025179929475355">"继续"</string>
-    <string name="sim_onboarding_profressbar_turning_sim_on" msgid="4888545282948732575">"正在开启 <xliff:g id="CARRIER_NAME">%1$s</xliff:g>…"</string>
+    <!-- no translation found for sim_onboarding_progressbar_turning_sim_on (1163318788393361574) -->
+    <skip />
     <string name="mobile_network_spn_title" msgid="3053793174495329077">"移动网络"</string>
     <string name="mobile_network_phone_number_title" msgid="2090794402855021784">"电话号码"</string>
     <string name="mobile_network_sim_label_color_title" msgid="2401352348041132876">"SIM 卡标签和颜色"</string>
@@ -4583,11 +4633,15 @@
     <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"如要在日后使用移动数据、通话和短信功能，请转到“网络设置”部分"</string>
     <string name="sim_card_label" msgid="6263064316075963775">"SIM 卡"</string>
     <string name="erase_sim_dialog_title" msgid="4742077437653028326">"要清空此 eSIM 卡吗？"</string>
-    <string name="erase_sim_dialog_text" msgid="753031064269699885">"清空此 SIM 卡将从此设备中移除<xliff:g id="CARRIER_NAME_A">%1$s</xliff:g>服务。\n\n<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g>的服务不会因此被取消。"</string>
+    <!-- no translation found for erase_sim_dialog_text (1406141218170595272) -->
+    <skip />
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"清空"</string>
-    <string name="erasing_sim" msgid="7877703231075699139">"正在清空 SIM 卡…"</string>
-    <string name="erase_sim_fail_title" msgid="2024446702985862427">"无法清空 SIM 卡"</string>
-    <string name="erase_sim_fail_text" msgid="7870804401227483131">"发生错误，因此无法清除此 SIM 卡。\n\n请重启设备，然后重试。"</string>
+    <!-- no translation found for erasing_sim (4237180547590463930) -->
+    <skip />
+    <!-- no translation found for erase_sim_fail_title (1445700500168357303) -->
+    <skip />
+    <!-- no translation found for erase_sim_fail_text (6898841004987411547) -->
+    <skip />
     <string name="network_connection_request_dialog_title" msgid="1896186380874289434">"连接到设备"</string>
     <string name="network_connection_request_dialog_summary" msgid="7693038309792726170">"“<xliff:g id="APPNAME">%1$s</xliff:g>”应用要使用临时 WLAN 网络连接到您的设备"</string>
     <string name="network_connection_timeout_dialog_message" msgid="598509083077743772">"找不到设备。请确保设备已开启并可连接到网络。"</string>
@@ -4752,8 +4806,10 @@
     <string name="sim_category_title" msgid="2341314000964710495">"SIM 卡"</string>
     <string name="downloaded_sim_category_title" msgid="2876988650413179752">"eSIM 卡"</string>
     <string name="downloaded_sims_category_title" msgid="487799905978489922">"eSIM 卡"</string>
-    <string name="sim_category_active_sim" msgid="1503823567818544012">"使用中"</string>
-    <string name="sim_category_inactive_sim" msgid="4068899490133820881">"未使用"</string>
+    <!-- no translation found for sim_category_active_sim (3077009911935592178) -->
+    <skip />
+    <!-- no translation found for sim_category_inactive_sim (7351553344148400450) -->
+    <skip />
     <string name="sim_category_default_active_sim" msgid="1208194173387987231">" /默认用于<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="default_active_sim_calls" msgid="2390973682556353558">"通话"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"短信"</string>
