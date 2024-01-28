@@ -378,7 +378,7 @@ public class EditShortcutsPreferenceFragmentTest {
         mFragmentScenario.moveToState(Lifecycle.State.CREATED);
         assertThat(
                 PreferredShortcuts.retrieveUserShortcutType(
-                        mContext, TARGET, ShortcutConstants.UserShortcutType.SOFTWARE)
+                        mContext, TARGET)
         ).isEqualTo(ShortcutConstants.UserShortcutType.SOFTWARE);
         // Update the chosen shortcut type to Volume keys while the fragment is in the background
         ShortcutUtils.optInValueToSettings(
@@ -388,7 +388,7 @@ public class EditShortcutsPreferenceFragmentTest {
 
         assertThat(
                 PreferredShortcuts.retrieveUserShortcutType(
-                        mContext, TARGET, ShortcutConstants.UserShortcutType.SOFTWARE)
+                        mContext, TARGET)
         ).isEqualTo(ShortcutConstants.UserShortcutType.HARDWARE);
     }
 
@@ -398,7 +398,7 @@ public class EditShortcutsPreferenceFragmentTest {
         mFragmentScenario.moveToState(Lifecycle.State.CREATED);
         assertThat(
                 PreferredShortcuts.retrieveUserShortcutType(
-                        mContext, TARGET, ShortcutConstants.UserShortcutType.SOFTWARE)
+                        mContext, TARGET)
         ).isEqualTo(ShortcutConstants.UserShortcutType.SOFTWARE);
 
         ShortcutUtils.optInValueToSettings(
@@ -408,7 +408,7 @@ public class EditShortcutsPreferenceFragmentTest {
         mFragmentScenario.onFragment(fragment ->
                 assertThat(
                         PreferredShortcuts.retrieveUserShortcutType(
-                                mContext, TARGET, ShortcutConstants.UserShortcutType.SOFTWARE)
+                                mContext, TARGET)
                 ).isEqualTo(ShortcutConstants.UserShortcutType.HARDWARE)
         );
 
