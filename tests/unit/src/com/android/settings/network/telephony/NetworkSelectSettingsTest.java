@@ -290,7 +290,7 @@ public class NetworkSelectSettingsTest {
 
         List<String> testSatellitePlmn = new ArrayList<>(Arrays.asList("123232", "123235"));
         doReturn(testSatellitePlmn).when(
-                mNetworkSelectSettings).getAllSatellitePlmnsForCarrierWrapper();
+                mNetworkSelectSettings).getSatellitePlmnsForCarrierWrapper();
 
         /* Expect filter out satellite plmns when
            KEY_REMOVE_SATELLITE_PLMN_IN_MANUAL_NETWORK_SCAN_BOOL is true, and there is available
@@ -318,13 +318,13 @@ public class NetworkSelectSettingsTest {
 
         List<String> testSatellitePlmn = new ArrayList<>(Arrays.asList("123232", "123235"));
         doReturn(testSatellitePlmn).when(
-                mNetworkSelectSettings).getAllSatellitePlmnsForCarrierWrapper();
+                mNetworkSelectSettings).getSatellitePlmnsForCarrierWrapper();
 
         // Expect no filter out when there is no available satellite plmns.
         mNetworkSelectSettings.onCreateInitialization();
         testSatellitePlmn = new ArrayList<>();
         doReturn(testSatellitePlmn).when(
-                mNetworkSelectSettings).getAllSatellitePlmnsForCarrierWrapper();
+                mNetworkSelectSettings).getSatellitePlmnsForCarrierWrapper();
         mNetworkSelectSettings.onCreateInitialization();
         List<CellInfo> testList = Arrays.asList(
                 createLteCellInfo(true, 123, "123", "232", "CarrierA"),
@@ -356,7 +356,7 @@ public class NetworkSelectSettingsTest {
 
         List<String> testSatellitePlmn = new ArrayList<>(Arrays.asList("123232", "123235"));
         doReturn(testSatellitePlmn).when(
-                mNetworkSelectSettings).getAllSatellitePlmnsForCarrierWrapper();
+                mNetworkSelectSettings).getSatellitePlmnsForCarrierWrapper();
 
         // Expect no filter out when KEY_REMOVE_SATELLITE_PLMN_IN_MANUAL_NETWORK_SCAN_BOOL is false.
         config.putBoolean(

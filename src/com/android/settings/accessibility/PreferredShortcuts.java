@@ -19,10 +19,17 @@ package com.android.settings.accessibility;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.UserHandle;
+import android.util.ArrayMap;
 
+import androidx.annotation.NonNull;
+
+import com.android.internal.accessibility.common.ShortcutConstants;
+import com.android.internal.accessibility.util.ShortcutUtils;
 import com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
 
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /** Static utility methods relating to {@link PreferredShortcut} */
@@ -78,6 +85,41 @@ public final class PreferredShortcuts {
         info.removeIf(str -> str.contains(componentName));
         info.add(shortcut.toString());
         saveToSharedPreferences(context, info);
+    }
+
+    /**
+     * Update the user preferred shortcut from Settings data
+     *
+     * @param context    {@link Context} to access the {@link SharedPreferences}
+     * @param components contains a set of {@link ComponentName} the service or activity. The
+     *                   string
+     *                   representation of the ComponentName should be in the format of
+     *                   {@link ComponentName#flattenToString()}.
+     */
+    public static void updatePreferredShortcutsFromSettings(
+            @NonNull Context context, @NonNull Set<String> components) {
+        final Map<Integer, Set<String>> shortcutTypeToTargets = new ArrayMap<>();
+        for (int shortcutType : ShortcutConstants.USER_SHORTCUT_TYPES) {
+            shortcutTypeToTargets.put(
+                    shortcutType,
+                    ShortcutUtils.getShortcutTargetsFromSettings(
+                            context, shortcutType, UserHandle.myUserId()));
+        }
+
+        for (String target : components) {
+            int shortcutTypes = ShortcutConstants.UserShortcutType.DEFAULT;
+            for (Map.Entry<Integer, Set<String>> entry : shortcutTypeToTargets.entrySet()) {
+                if (entry.getValue().contains(target)) {
+                    shortcutTypes |= entry.getKey();
+                }
+            }
+
+            if (shortcutTypes != ShortcutConstants.UserShortcutType.DEFAULT) {
+                final PreferredShortcut shortcut = new PreferredShortcut(
+                        target, shortcutTypes);
+                PreferredShortcuts.saveUserShortcutType(context, shortcut);
+            }
+        }
     }
 
     /**
