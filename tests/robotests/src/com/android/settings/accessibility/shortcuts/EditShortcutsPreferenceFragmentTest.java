@@ -51,6 +51,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SubSettings;
 import com.android.settings.accessibility.AccessibilityUtil;
+import com.android.settings.accessibility.PreferredShortcuts;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -367,6 +368,50 @@ public class EditShortcutsPreferenceFragmentTest {
                     mContext.getString(R.string.accessibility_shortcuts_advanced_collapsed));
             assertThat(advanced.isVisible()).isTrue();
         });
+    }
+
+    @Test
+    public void fragmentResumed_preferredShortcutsUpdated() {
+        mFragmentScenario = createFragScenario(/* isInSuw= */ false);
+        mFragmentScenario.moveToState(Lifecycle.State.RESUMED);
+        // Move the fragment to the background
+        mFragmentScenario.moveToState(Lifecycle.State.CREATED);
+        assertThat(
+                PreferredShortcuts.retrieveUserShortcutType(
+                        mContext, TARGET, ShortcutConstants.UserShortcutType.SOFTWARE)
+        ).isEqualTo(ShortcutConstants.UserShortcutType.SOFTWARE);
+        // Update the chosen shortcut type to Volume keys while the fragment is in the background
+        ShortcutUtils.optInValueToSettings(
+                mContext, ShortcutConstants.UserShortcutType.HARDWARE, TARGET);
+
+        mFragmentScenario.moveToState(Lifecycle.State.RESUMED);
+
+        assertThat(
+                PreferredShortcuts.retrieveUserShortcutType(
+                        mContext, TARGET, ShortcutConstants.UserShortcutType.SOFTWARE)
+        ).isEqualTo(ShortcutConstants.UserShortcutType.HARDWARE);
+    }
+
+    @Test
+    public void onVolumeKeysShortcutSettingChanged_preferredShortcutsUpdated() {
+        mFragmentScenario = createFragScenario(/* isInSuw= */ false);
+        mFragmentScenario.moveToState(Lifecycle.State.CREATED);
+        assertThat(
+                PreferredShortcuts.retrieveUserShortcutType(
+                        mContext, TARGET, ShortcutConstants.UserShortcutType.SOFTWARE)
+        ).isEqualTo(ShortcutConstants.UserShortcutType.SOFTWARE);
+
+        ShortcutUtils.optInValueToSettings(
+                mContext, ShortcutConstants.UserShortcutType.HARDWARE, TARGET);
+
+        // Calls onFragment so that the change to Setting is notified to its observer
+        mFragmentScenario.onFragment(fragment ->
+                assertThat(
+                        PreferredShortcuts.retrieveUserShortcutType(
+                                mContext, TARGET, ShortcutConstants.UserShortcutType.SOFTWARE)
+                ).isEqualTo(ShortcutConstants.UserShortcutType.HARDWARE)
+        );
+
     }
 
     private void assertLaunchSubSettingWithCurrentTargetComponents(

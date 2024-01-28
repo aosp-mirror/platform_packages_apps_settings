@@ -51,6 +51,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.accessibility.AccessibilitySetupWizardUtils;
+import com.android.settings.accessibility.PreferredShortcuts;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -161,6 +162,9 @@ public class EditShortcutsPreferenceFragment extends DashboardFragment {
                 } else if (TWO_FINGERS_DOUBLE_TAP_SHORTCUT_SETTING.equals(uri)) {
                     refreshPreferenceController(TwoFingersDoubleTapShortcutOptionController.class);
                 }
+
+                PreferredShortcuts.updatePreferredShortcutsFromSettings(
+                        getContext(), mShortcutTargets);
             }
         };
 
@@ -212,6 +216,7 @@ public class EditShortcutsPreferenceFragment extends DashboardFragment {
         final AccessibilityManager am = getSystemService(
                 AccessibilityManager.class);
         am.addTouchExplorationStateChangeListener(mTouchExplorationStateChangeListener);
+        PreferredShortcuts.updatePreferredShortcutsFromSettings(getContext(), mShortcutTargets);
     }
 
     @Override
