@@ -49,32 +49,32 @@ import com.google.common.collect.Lists;
 import java.util.List;
 
 /**
- * Fragment that allows users to customize their automatic battery saver mode settings.
- *
- * Location: Settings > Battery > Battery Saver > Set a Schedule
+ * Fragment that allows users to customize their automatic battery saver mode settings. <br>
+ * <br>
+ * Location: Settings > Battery > Battery Saver > Set a Schedule <br>
  * See {@link BatterySaverSchedulePreferenceController} for the controller that manages navigation
- * to this screen from "Settings > Battery > Battery Saver" and the summary.
- * See {@link BatterySaverScheduleRadioButtonsController} &
- * {@link BatterySaverScheduleSeekBarController} for the controller that manages user
- * interactions in this screen.
+ * to this screen from "Settings > Battery > Battery Saver" and the summary. <br>
+ * See {@link BatterySaverScheduleRadioButtonsController} & {@link
+ * BatterySaverScheduleSeekBarController} for the controller that manages user interactions in this
+ * screen.
  */
 public class BatterySaverScheduleSettings extends RadioButtonPickerFragment {
 
     public BatterySaverScheduleRadioButtonsController mRadioButtonController;
-    @VisibleForTesting
-    Context mContext;
+    @VisibleForTesting Context mContext;
     private int mSaverPercentage;
     private String mSaverScheduleKey;
     private BatterySaverScheduleSeekBarController mSeekBarController;
 
     @VisibleForTesting
-    final ContentObserver mSettingsObserver = new ContentObserver(new Handler()) {
-        @Override
-        public void onChange(boolean selfChange, Uri uri) {
-            getPreferenceScreen().removeAll();
-            updateCandidates();
-        }
-    };
+    final ContentObserver mSettingsObserver =
+            new ContentObserver(new Handler()) {
+                @Override
+                public void onChange(boolean selfChange, Uri uri) {
+                    getPreferenceScreen().removeAll();
+                    updateCandidates();
+                }
+            };
 
     @Override
     protected int getPreferenceScreenResId() {
@@ -85,18 +85,19 @@ public class BatterySaverScheduleSettings extends RadioButtonPickerFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         mSeekBarController = new BatterySaverScheduleSeekBarController(context);
-        mRadioButtonController = new BatterySaverScheduleRadioButtonsController(
-                context, mSeekBarController);
+        mRadioButtonController =
+                new BatterySaverScheduleRadioButtonsController(context, mSeekBarController);
         mContext = context;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        mContext.getContentResolver().registerContentObserver(
-                Settings.Secure.getUriFor(Settings.Secure.LOW_POWER_WARNING_ACKNOWLEDGED),
-                false,
-                mSettingsObserver);
+        mContext.getContentResolver()
+                .registerContentObserver(
+                        Settings.Secure.getUriFor(Settings.Secure.LOW_POWER_WARNING_ACKNOWLEDGED),
+                        false,
+                        mSettingsObserver);
         mSaverScheduleKey = BatterySaverUtils.getBatterySaverScheduleKey(mContext);
         mSaverPercentage = getSaverPercentage();
     }
@@ -124,24 +125,30 @@ public class BatterySaverScheduleSettings extends RadioButtonPickerFragment {
     protected List<? extends CandidateInfo> getCandidates() {
         Context context = getContext();
         List<CandidateInfo> candidates = Lists.newArrayList();
-        candidates.add(new BatterySaverScheduleCandidateInfo(
-                context.getText(R.string.battery_saver_auto_no_schedule),
-                /* summary */ null,
-                KEY_NO_SCHEDULE,
-                /* enabled */ true));
+        candidates.add(
+                new BatterySaverScheduleCandidateInfo(
+                        context.getText(R.string.battery_saver_auto_no_schedule),
+                        /* summary */ null,
+                        KEY_NO_SCHEDULE,
+                        /* enabled */ true));
         BatterySaverUtils.revertScheduleToNoneIfNeeded(context);
-        candidates.add(new BatterySaverScheduleCandidateInfo(
-                context.getText(R.string.battery_saver_auto_percentage),
-                /* summary */ null,
-                KEY_PERCENTAGE,
-                /* enabled */ true));
+        candidates.add(
+                new BatterySaverScheduleCandidateInfo(
+                        context.getText(R.string.battery_saver_auto_percentage),
+                        /* summary */ null,
+                        KEY_PERCENTAGE,
+                        /* enabled */ true));
 
         return candidates;
     }
 
     @Override
-    public void bindPreferenceExtra(SelectorWithWidgetPreference pref, String key,
-            CandidateInfo info, String defaultKey, String systemDefaultKey) {
+    public void bindPreferenceExtra(
+            SelectorWithWidgetPreference pref,
+            String key,
+            CandidateInfo info,
+            String defaultKey,
+            String systemDefaultKey) {
         final BatterySaverScheduleCandidateInfo candidateInfo =
                 (BatterySaverScheduleCandidateInfo) info;
         final CharSequence summary = candidateInfo.getSummary();
@@ -174,14 +181,16 @@ public class BatterySaverScheduleSettings extends RadioButtonPickerFragment {
 
     private void logPowerSaver() {
         final int currentSaverPercentage = getSaverPercentage();
-        final String currentSaverScheduleKey = BatterySaverUtils.getBatterySaverScheduleKey(
-                mContext);
+        final String currentSaverScheduleKey =
+                BatterySaverUtils.getBatterySaverScheduleKey(mContext);
         if (mSaverScheduleKey.equals(currentSaverScheduleKey)
                 && mSaverPercentage == currentSaverPercentage) {
             return;
         }
-        FeatureFactory.getFactory(mContext).getMetricsFeatureProvider()
-                .action(SettingsEnums.FUELGAUGE_BATTERY_SAVER,
+        FeatureFactory.getFeatureFactory()
+                .getMetricsFeatureProvider()
+                .action(
+                        SettingsEnums.FUELGAUGE_BATTERY_SAVER,
                         SettingsEnums.FIELD_BATTERY_SAVER_SCHEDULE_TYPE,
                         SettingsEnums.FIELD_BATTERY_SAVER_PERCENTAGE_VALUE,
                         currentSaverScheduleKey,
@@ -189,8 +198,8 @@ public class BatterySaverScheduleSettings extends RadioButtonPickerFragment {
     }
 
     private int getSaverPercentage() {
-        return Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL, -1);
+        return Settings.Global.getInt(
+                mContext.getContentResolver(), Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL, -1);
     }
 
     static class BatterySaverScheduleCandidateInfo extends CandidateInfo {
@@ -199,8 +208,8 @@ public class BatterySaverScheduleSettings extends RadioButtonPickerFragment {
         private final CharSequence mSummary;
         private final String mKey;
 
-        BatterySaverScheduleCandidateInfo(CharSequence label, CharSequence summary, String key,
-                boolean enabled) {
+        BatterySaverScheduleCandidateInfo(
+                CharSequence label, CharSequence summary, String key, boolean enabled) {
             super(enabled);
             mLabel = label;
             mKey = key;

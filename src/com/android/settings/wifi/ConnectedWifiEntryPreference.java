@@ -56,7 +56,7 @@ public class ConnectedWifiEntryPreference extends LongPressWifiEntryPreference i
         holder.findViewById(R.id.settings_button_no_background).setVisibility(
                 canSignIn ? View.INVISIBLE : View.VISIBLE);
         gear.setVisibility(canSignIn ? View.VISIBLE : View.INVISIBLE);
-        holder.findViewById(R.id.two_target_divider).setVisibility(
+        holder.findViewById(com.android.settingslib.widget.preference.twotarget.R.id.two_target_divider).setVisibility(
                 canSignIn ? View.VISIBLE : View.INVISIBLE);
     }
 

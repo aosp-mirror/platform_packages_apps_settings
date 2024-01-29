@@ -43,6 +43,7 @@ import org.mockito.ArgumentMatcher;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.LooperMode;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.util.Arrays;
@@ -52,6 +53,7 @@ import java.util.List;
 import java.util.Set;
 
 @RunWith(RobolectricTestRunner.class)
+@LooperMode(LooperMode.Mode.LEGACY)
 public final class InstalledAppListerTest {
 
     private final String APP_1 = "app1";

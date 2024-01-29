@@ -21,7 +21,7 @@ import android.provider.Settings;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
@@ -61,7 +61,7 @@ public class TetheringHardwareAccelPreferenceController extends DeveloperOptions
         final int tetheringMode = Settings.Global.getInt(
                 mContext.getContentResolver(),
                 Settings.Global.TETHER_OFFLOAD_DISABLED, 0 /* default */);
-        ((SwitchPreference) mPreference).setChecked(tetheringMode != SETTING_VALUE_OFF);
+        ((TwoStatePreference) mPreference).setChecked(tetheringMode != SETTING_VALUE_OFF);
     }
 
     @Override
@@ -69,6 +69,6 @@ public class TetheringHardwareAccelPreferenceController extends DeveloperOptions
         super.onDeveloperOptionsSwitchDisabled();
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.TETHER_OFFLOAD_DISABLED, SETTING_VALUE_OFF);
-        ((SwitchPreference) mPreference).setChecked(false);
+        ((TwoStatePreference) mPreference).setChecked(false);
     }
 }

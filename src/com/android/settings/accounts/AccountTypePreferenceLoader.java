@@ -92,7 +92,8 @@ public class AccountTypePreferenceLoader {
                     final Context targetCtx = mFragment.getActivity().createPackageContextAsUser(
                             desc.packageName, 0, mUserHandle);
                     final Theme baseTheme = mFragment.getResources().newTheme();
-                    baseTheme.applyStyle(R.style.Theme_SettingsBase, true);
+                    baseTheme.applyStyle(
+                            com.android.settingslib.widget.theme.R.style.Theme_SettingsBase, true);
                     final Context themedCtx =
                             new LocalClassLoaderContextThemeWrapper(getClass(), targetCtx, 0);
                     themedCtx.getTheme().setTo(baseTheme);

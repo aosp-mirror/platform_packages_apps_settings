@@ -1,0 +1,8 @@
+package: "com.android.settings.flags"
+
+flag {
+  name: "enable_volume_plus_quick_settings"
+  namespace: "pixel_cross_device_control"
+  description: "Gates whether to enable VolumePlus quick settings panel."
+  bug: "309052662"
+}

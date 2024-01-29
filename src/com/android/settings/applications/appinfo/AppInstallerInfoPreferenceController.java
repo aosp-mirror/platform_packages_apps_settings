@@ -18,7 +18,6 @@ package com.android.settings.applications.appinfo;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.UserManager;
 
 import androidx.preference.Preference;
 
@@ -39,10 +38,6 @@ public class AppInstallerInfoPreferenceController extends AppInfoPreferenceContr
 
     @Override
     public int getAvailabilityStatus() {
-        if (UserManager.get(mContext).isManagedProfile()) {
-            return DISABLED_FOR_USER;
-        }
-
         if (AppUtils.isMainlineModule(mContext.getPackageManager(), mPackageName)) {
             return DISABLED_FOR_USER;
         }

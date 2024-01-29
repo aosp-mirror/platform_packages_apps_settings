@@ -45,7 +45,6 @@ import com.android.settings.testutils.CustomActivity;
 import com.android.settings.testutils.shadow.ShadowActivity;
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settings.testutils.shadow.ShadowUserManager;
-import com.android.settings.utils.ActivityControllerWrapper;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import org.junit.Before;
@@ -78,8 +77,7 @@ public class ActionDisabledByAdminDialogHelperTest {
 
     @Before
     public void setUp() {
-        mActivity = (CustomActivity) ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(CustomActivity.class)).get();
+        mActivity = Robolectric.setupActivity(CustomActivity.class);
         mActivityShadow = Shadow.extract(mActivity);
         mHelper = new ActionDisabledByAdminDialogHelper(mActivity);
     }

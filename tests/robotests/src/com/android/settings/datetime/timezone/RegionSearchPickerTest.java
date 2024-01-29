@@ -33,7 +33,6 @@ import com.android.settings.datetime.timezone.BaseTimeZoneAdapter.AdapterItem;
 import com.android.settings.datetime.timezone.BaseTimeZoneAdapter.ItemViewHolder;
 import com.android.settings.datetime.timezone.RegionSearchPicker.RegionItem;
 import com.android.settings.datetime.timezone.model.TimeZoneData;
-import com.android.settings.utils.ActivityControllerWrapper;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -143,8 +142,7 @@ public class RegionSearchPickerTest {
     @Implements(Fragment.class)
     public static class ShadowFragment {
 
-        private FragmentActivity mActivity = (FragmentActivity) ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(FragmentActivity.class)).get();
+        private FragmentActivity mActivity = Robolectric.setupActivity(FragmentActivity.class);
 
         @Implementation
         public final FragmentActivity getActivity() {

@@ -16,6 +16,8 @@
 
 package com.android.settings.biometrics.fingerprint;
 
+import static android.text.Layout.HYPHENATION_FREQUENCY_NORMAL;
+
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -27,7 +29,6 @@ import android.util.Log;
 import android.view.OrientationEventListener;
 import android.view.Surface;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.accessibility.AccessibilityManager;
 
 import androidx.annotation.NonNull;
@@ -38,6 +39,8 @@ import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.BiometricEnrollSidecar;
 import com.android.settings.biometrics.BiometricUtils;
+import com.android.settings.flags.Flags;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settingslib.widget.LottieColorUtils;
 import com.android.systemui.unfold.compat.ScreenSizeFoldProvider;
@@ -74,6 +77,8 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
     private ScreenSizeFoldProvider mScreenSizeFoldProvider;
     private boolean mIsFolded;
     private boolean mIsReverseDefaultRotation;
+    @Nullable
+    private UdfpsEnrollCalibrator mCalibrator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,23 +100,16 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
                         .setText(R.string.security_settings_fingerprint_enroll_enrolling_skip)
                         .setListener(this::onSkipButtonClick)
                         .setButtonType(FooterButton.ButtonType.SKIP)
-                        .setTheme(R.style.SudGlifButton_Secondary)
+                        .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Secondary)
                         .build()
         );
+        getLayout().getHeaderTextView().setHyphenationFrequency(HYPHENATION_FREQUENCY_NORMAL);
 
         listenOrientationEvent();
 
         if (mCanAssumeUdfps) {
             setHeaderText(R.string.security_settings_udfps_enroll_find_sensor_title);
             setDescriptionText(R.string.security_settings_udfps_enroll_find_sensor_message);
-            mFooterBarMixin.setPrimaryButton(
-                    new FooterButton.Builder(this)
-                    .setText(R.string.security_settings_udfps_enroll_find_sensor_start_button)
-                    .setListener(this::onStartButtonClick)
-                    .setButtonType(FooterButton.ButtonType.NEXT)
-                    .setTheme(R.style.SudGlifButton_Primary)
-                    .build()
-            );
 
             mIllustrationLottie = findViewById(R.id.illustration_lottie);
             AccessibilityManager am = getSystemService(AccessibilityManager.class);
@@ -164,17 +162,46 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
 
         mAnimation = null;
         if (mCanAssumeUdfps) {
-            mIllustrationLottie.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onStartButtonClick(v);
+            if (Flags.udfpsEnrollCalibration()) {
+                mCalibrator = FeatureFactory.getFeatureFactory().getFingerprintFeatureProvider()
+                        .getUdfpsEnrollCalibrator(getApplicationContext(), savedInstanceState,
+                                getIntent());
+                if (mCalibrator != null) {
+                    mCalibrator.onFindSensorPage(
+                            getLifecycle(),
+                            getSupportFragmentManager(),
+                            this::enableUdfpsLottieAndNextButton
+                    );
+                } else {
+                    enableUdfpsLottieAndNextButton();
                 }
-            });
+            } else {
+                enableUdfpsLottieAndNextButton();
+            }
         } else if (!mCanAssumeSfps) {
             View animationView = findViewById(R.id.fingerprint_sensor_location_animation);
             if (animationView instanceof FingerprintFindSensorAnimation) {
                 mAnimation = (FingerprintFindSensorAnimation) animationView;
             }
+        }
+    }
+
+    private void enableUdfpsLottieAndNextButton() {
+        if (isFinishing()) {
+            return;
+        }
+
+        if (mFooterBarMixin.getPrimaryButton() == null) {
+            mFooterBarMixin.setPrimaryButton(new FooterButton.Builder(this)
+                    .setText(R.string.security_settings_udfps_enroll_find_sensor_start_button)
+                    .setListener(this::onStartButtonClick)
+                    .setButtonType(FooterButton.ButtonType.NEXT)
+                    .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Primary)
+                    .build()
+            );
+        }
+        if (mIllustrationLottie != null) {
+            mIllustrationLottie.setOnClickListener(this::onStartButtonClick);
         }
     }
 
@@ -255,6 +282,22 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBoolean(SAVED_STATE_IS_NEXT_CLICKED, mNextClicked);
+        if (Flags.udfpsEnrollCalibration()) {
+            if (mCalibrator != null) {
+                mCalibrator.onSaveInstanceState(outState);
+            }
+        }
+    }
+
+    @Override
+    protected Intent getFingerprintEnrollingIntent() {
+        final Intent ret = super.getFingerprintEnrollingIntent();
+        if (Flags.udfpsEnrollCalibration()) {
+            if (mCalibrator != null) {
+                ret.putExtras(mCalibrator.getExtrasForNextIntent(true));
+            }
+        }
+        return ret;
     }
 
     @Override

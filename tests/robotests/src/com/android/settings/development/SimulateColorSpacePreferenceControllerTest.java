@@ -16,10 +16,8 @@
 
 package com.android.settings.development;
 
-import static com.android.settings.development.SimulateColorSpacePreferenceController
-        .SETTING_VALUE_OFF;
-import static com.android.settings.development.SimulateColorSpacePreferenceController
-        .SETTING_VALUE_ON;
+import static com.android.settings.development.SimulateColorSpacePreferenceController.SETTING_VALUE_OFF;
+import static com.android.settings.development.SimulateColorSpacePreferenceController.SETTING_VALUE_ON;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -33,8 +31,6 @@ import android.provider.Settings;
 
 import androidx.preference.ListPreference;
 import androidx.preference.PreferenceScreen;
-
-import com.android.settings.R;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -67,7 +63,8 @@ public class SimulateColorSpacePreferenceControllerTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mListValues = mContext.getResources().getStringArray(R.array.simulate_color_space_values);
+        mListValues = mContext.getResources().getStringArray(
+                com.android.settingslib.R.array.simulate_color_space_values);
         mController = new SimulateColorSpacePreferenceController(mContext);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         mController.displayPreference(mScreen);
@@ -130,8 +127,10 @@ public class SimulateColorSpacePreferenceControllerTest {
 
         mController.updateState(mPreference);
 
-        verify(mPreference).setSummary(res.getString(R.string.daltonizer_type_overridden,
-                res.getString(R.string.accessibility_display_daltonizer_preference_title)));
+        verify(mPreference).setSummary(
+                res.getString(com.android.settingslib.R.string.daltonizer_type_overridden,
+                res.getString(com.android.settingslib.R
+                        .string.accessibility_display_daltonizer_preference_title)));
     }
 
     @Test

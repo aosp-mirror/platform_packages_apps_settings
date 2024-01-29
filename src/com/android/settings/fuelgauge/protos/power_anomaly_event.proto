@@ -21,18 +21,12 @@ message PowerAnomalyEvent {
   optional string dismiss_record_key = 8;
 }
 
-// NOTE: Please DO NOT delete enum items or change enum values. Use [deprecated = true] instead.
-// The enum value will be used to decide the tips card style like icons and colors.
-//
 // Next id: 2
 enum PowerAnomalyType{
   TYPE_SETTINGS_BANNER = 0;
   TYPE_APPS_ITEM = 1;
 }
 
-// NOTE: Please DO NOT delete enum items or change enum values. Use [deprecated = true] instead.
-// The enum value will be used to decide pre-defined title and button labels.
-//
 // Next id: 8
 enum PowerAnomalyKey{
   KEY_BRIGHTNESS = 0;
@@ -43,6 +37,13 @@ enum PowerAnomalyKey{
   KEY_APP_BACKGROUND_HIGHER_THAN_USUAL = 5;
   KEY_APP_FOREGROUND_ALWAYS_HIGH = 6;
   KEY_APP_FOREGROUND_HIGHER_THAN_USUAL = 7;
+}
+
+// Next id: 3
+enum DetectRequestSourceType{
+  TYPE_UNKNOWN_SOURCE = 0;
+  TYPE_USAGE_UI = 1;
+  TYPE_DATA_LOADER = 2;
 }
 
 message WarningBannerInfo {
@@ -67,4 +68,6 @@ message WarningItemInfo {
   optional string main_button_string = 6;
   optional string cancel_button_string = 7;
   optional string item_key = 8;
+  optional string warning_info_string = 9;
+  optional string anomaly_hint_pref_key = 10;
 }

@@ -16,10 +16,6 @@
 
 package com.android.settings.network.telephony.gsm;
 
-import static androidx.lifecycle.Lifecycle.Event.ON_RESUME;
-import static androidx.lifecycle.Lifecycle.Event.ON_START;
-import static androidx.lifecycle.Lifecycle.Event.ON_STOP;
-
 import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
 
 import android.app.ProgressDialog;
@@ -44,7 +40,7 @@ import androidx.lifecycle.LifecycleEventObserver;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.network.AllowedNetworkTypesListener;
@@ -80,7 +76,7 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
     @VisibleForTesting
     ProgressDialog mProgressDialog;
     @VisibleForTesting
-    SwitchPreference mSwitchPreference;
+    TwoStatePreference mSwitchPreference;
     private AtomicBoolean mUpdatingConfig;
     private int mCacheOfModeStatus;
     private AtomicLong mRecursiveUpdate;

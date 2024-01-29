@@ -67,13 +67,13 @@ public final class Utils {
     public static int getConnectionStateSummary(int connectionState) {
         switch (connectionState) {
             case BluetoothProfile.STATE_CONNECTED:
-                return R.string.bluetooth_connected;
+                return com.android.settingslib.R.string.bluetooth_connected;
             case BluetoothProfile.STATE_CONNECTING:
-                return R.string.bluetooth_connecting;
+                return com.android.settingslib.R.string.bluetooth_connecting;
             case BluetoothProfile.STATE_DISCONNECTED:
-                return R.string.bluetooth_disconnected;
+                return com.android.settingslib.R.string.bluetooth_disconnected;
             case BluetoothProfile.STATE_DISCONNECTING:
-                return R.string.bluetooth_disconnecting;
+                return com.android.settingslib.R.string.bluetooth_disconnecting;
             default:
                 return 0;
         }
@@ -106,7 +106,7 @@ public final class Utils {
 
     @VisibleForTesting
     static void showConnectingError(Context context, String name, LocalBluetoothManager manager) {
-        FeatureFactory.getFactory(context).getMetricsFeatureProvider().visible(context,
+        FeatureFactory.getFeatureFactory().getMetricsFeatureProvider().visible(context,
                 SettingsEnums.PAGE_UNKNOWN, SettingsEnums.ACTION_SETTINGS_BLUETOOTH_CONNECT_ERROR,
                 0);
         showError(context, name, R.string.bluetooth_connecting_error_message, manager);

@@ -31,8 +31,7 @@ public class TemplatePreferenceCategory extends PreferenceCategory implements Te
     }
 
     @Override
-    public void setTemplate(NetworkTemplate template, int subId,
-            NetworkServices services) {
+    public void setTemplate(NetworkTemplate template, int subId) {
         mTemplate = template;
         mSubId = subId;
     }
@@ -46,12 +45,13 @@ public class TemplatePreferenceCategory extends PreferenceCategory implements Te
         return super.addPreference(preference);
     }
 
-    public void pushTemplates(NetworkServices services) {
+    /** Pushes the templates. */
+    public void pushTemplates() {
         if (mTemplate == null) {
             throw new RuntimeException("null mTemplate for " + getKey());
         }
         for (int i = 0; i < getPreferenceCount(); i++) {
-            ((TemplatePreference) getPreference(i)).setTemplate(mTemplate, mSubId, services);
+            ((TemplatePreference) getPreference(i)).setTemplate(mTemplate, mSubId);
         }
     }
 

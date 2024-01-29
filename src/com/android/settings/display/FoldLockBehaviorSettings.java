@@ -48,18 +48,18 @@ public class FoldLockBehaviorSettings extends RadioButtonPickerFragment implemen
     public static final String SETTING_VALUE_STAY_AWAKE_ON_FOLD = "stay_awake_on_fold_key";
     public static final String SETTING_VALUE_SELECTIVE_STAY_AWAKE = "selective_stay_awake_key";
     public static final String SETTING_VALUE_SLEEP_ON_FOLD = "sleep_on_fold_key";
-    private static final String SETTING_VALUE_DEFAULT = SETTING_VALUE_SELECTIVE_STAY_AWAKE;
     public static final String TAG = "FoldLockBehaviorSetting";
     public static final HashSet<String> SETTING_VALUES = new HashSet<>(
             Set.of(SETTING_VALUE_STAY_AWAKE_ON_FOLD, SETTING_VALUE_SELECTIVE_STAY_AWAKE,
                     SETTING_VALUE_SLEEP_ON_FOLD));
-
+    private static final String SETTING_VALUE_DEFAULT = SETTING_VALUE_SELECTIVE_STAY_AWAKE;
     private Context mContext;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         mContext = context;
+        setIllustrationLottieAnimation(getDefaultKey());
     }
 
     @Override
@@ -134,6 +134,31 @@ public class FoldLockBehaviorSettings extends RadioButtonPickerFragment implemen
                 FOLD_LOCK_BEHAVIOR,
                 key,
                 UserHandle.USER_CURRENT);
+    }
+
+    @Override
+    protected void onSelectionPerformed(boolean success) {
+        if (success) {
+            setIllustrationLottieAnimation(getDefaultKey());
+            updateCandidates();
+        }
+    }
+
+    private void setIllustrationLottieAnimation(String foldSettingValue) {
+        switch (foldSettingValue) {
+            case SETTING_VALUE_STAY_AWAKE_ON_FOLD:
+                setIllustration(R.raw.fold_setting_stay_awake_on_fold_lottie,
+                        IllustrationType.LOTTIE_ANIMATION);
+                break;
+            case SETTING_VALUE_SELECTIVE_STAY_AWAKE:
+                setIllustration(R.raw.fold_setting_selective_stay_awake_lottie,
+                        IllustrationType.LOTTIE_ANIMATION);
+                break;
+            case SETTING_VALUE_SLEEP_ON_FOLD:
+                setIllustration(R.raw.fold_setting_sleep_on_fold_lottie,
+                        IllustrationType.LOTTIE_ANIMATION);
+                break;
+        }
     }
 
     private String resourceToString(int resource) {

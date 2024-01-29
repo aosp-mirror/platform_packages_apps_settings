@@ -72,7 +72,8 @@ public class AccessibilityFooterPreferenceControllerTest {
         mPreference.setTitle(TEST_TITLE);
 
         final LayoutInflater inflater = LayoutInflater.from(mContext);
-        final View view = inflater.inflate(R.layout.preference_footer, null);
+        final View view = inflater.inflate(
+                com.android.settingslib.widget.preference.footer.R.layout.preference_footer, null);
         mPreferenceViewHolder = PreferenceViewHolder.createInstanceForTests(view);
         mPreference.onBindViewHolder(mPreferenceViewHolder);
 
@@ -116,7 +117,7 @@ public class AccessibilityFooterPreferenceControllerTest {
         mPreference.onBindViewHolder(mPreferenceViewHolder);
 
         final TextView learnMoreView = (TextView) mPreferenceViewHolder
-                .findViewById(com.android.settingslib.R.id.settingslib_learn_more);
+                .findViewById(com.android.settingslib.widget.preference.footer.R.id.settingslib_learn_more);
         assertThat(learnMoreView.getContentDescription()).isNull();
         assertThat(learnMoreView.getVisibility()).isEqualTo(View.GONE);
         assertThat(mPreference.isLinkEnabled()).isFalse();

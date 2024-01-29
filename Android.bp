@@ -43,70 +43,76 @@ java_library {
     ],
 }
 
-
-// Build the Settings APK
 android_library {
     name: "Settings-core",
     platform_apis: true,
     defaults: [
-        "SettingsLibDefaults",
         "SettingsLib-search-defaults",
         "SpaPrivilegedLib-defaults",
     ],
 
     srcs: ["src/**/*.java", "src/**/*.kt"],
+    exclude_srcs: [
+        "src/com/android/settings/biometrics/fingerprint2/shared/**/*.kt",
+    ],
+    use_resource_processor: true,
     resource_dirs: [
         "res",
         "res-export", // for external usage
         "res-product",
     ],
     static_libs: [
-        "androidx-constraintlayout_constraintlayout",
-        "androidx.slice_slice-builders",
-        "androidx.slice_slice-core",
-        "androidx.slice_slice-view",
-        "androidx.core_core",
-        "androidx.appcompat_appcompat",
-        "androidx.cardview_cardview",
-        "androidx.compose.runtime_runtime-livedata",
-        "androidx.activity_activity-ktx",
-        "androidx.preference_preference",
-        "androidx.recyclerview_recyclerview",
-        "androidx.window_window",
-        "com.google.android.material_material",
-        "setupcompat",
-        "setupdesign",
-        "androidx.lifecycle_lifecycle-runtime",
-        "androidx.lifecycle_lifecycle-viewmodel",
+        // External dependencies
+        "androidx.navigation_navigation-fragment-ktx",
+        "androidx.window_window-java",
+        "gson",
         "guava",
-        "jsr305",
+
+        // Android internal dependencies
+        "BiometricsSharedLib",
+        "SystemUIUnfoldLib",
+        "WifiTrackerLib",
+        "android.hardware.dumpstate-V1-java",
+        "android.hardware.dumpstate-V1.0-java",
+        "android.hardware.dumpstate-V1.1-java",
+        "android.view.accessibility.flags-aconfig-java",
+        "com_android_server_accessibility_flags_lib",
         "net-utils-framework-common",
+        "notification_flags_lib",
+        "securebox",
+
+        // Settings dependencies
+        "FingerprintManagerInteractor",
+        "MediaDrmSettingsFlagsLib",
+        "Settings-change-ids",
+        "SettingsLib",
+        "SettingsLibActivityEmbedding",
+        "aconfig_settings_flags_lib",
+        "accessibility_settings_flags_lib",
         "app-usage-event-protos-lite",
         "battery-event-protos-lite",
         "battery-usage-slot-protos-lite",
+        "contextualcards",
+        "development_settings_flag_lib",
+        "factory_reset_flags_lib",
+        "fuelgauge-log-protos-lite",
+        "fuelgauge-usage-state-protos-lite",
         "power-anomaly-event-protos-lite",
         "settings-contextual-card-protos-lite",
         "settings-log-bridge-protos-lite",
-        "settings-telephony-protos-lite",
-        "fuelgauge-log-protos-lite",
-        "fuelgauge-usage-state-protos-lite",
-        "contextualcards",
-        "securebox",
         "settings-logtags",
+        "settings-telephony-protos-lite",
         "statslog-settings",
-        "zxing-core-1.7",
-        "android.hardware.dumpstate-V1.0-java",
-        "android.hardware.dumpstate-V1.1-java",
-        "android.hardware.dumpstate-V1-java",
-        "lottie",
-        "WifiTrackerLib",
-        "SettingsLibActivityEmbedding",
-        "Settings-change-ids",
-        "androidx.room_room-runtime",
-        "SystemUIUnfoldLib",
     ],
 
     plugins: ["androidx.room_room-compiler-plugin"],
+
+    errorprone: {
+        extra_check_modules: ["//external/nullaway:nullaway_plugin"],
+        javacflags: [
+            "-XepOpt:NullAway:AnnotatedPackages=com.android.settings",
+        ],
+    },
 
     libs: [
         "telephony-common",
@@ -120,6 +126,7 @@ platform_compat_config {
     system_ext_specific: true,
 }
 
+// Build the Settings APK
 android_app {
     name: "Settings",
     defaults: [
@@ -136,6 +143,7 @@ android_app {
     ],
     static_libs: ["Settings-core"],
     uses_libs: ["org.apache.http.legacy"],
+    use_resource_processor: true,
     resource_dirs: [],
     optimize: {
         proguard_flags_files: ["proguard.flags"],
@@ -150,20 +158,4 @@ android_library_import {
 filegroup {
     name: "Settings_proguard_flags",
     srcs: ["proguard.flags"],
-}
-
-// Deprecated. The sources for Settings need to be exposed to ArcSettings, so they can run the
-// com.android.settingslib.search.IndexableProcessor over all the sources together.
-// Use "-Acom.android.settingslib.search.processor.package=" instead to generate the search data
-// separately for different modules.
-filegroup {
-    name: "Settings_srcs",
-    srcs: ["src/**/*.java", "src/**/*.kt"],
-}
-
-// Deprecated. Do not depend on this, only depend on Settings-core, and its manifest is also
-// included.
-filegroup {
-    name: "Settings_manifest",
-    srcs: ["AndroidManifest.xml"],
 }

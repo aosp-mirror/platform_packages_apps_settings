@@ -40,17 +40,20 @@ import android.os.UserHandle;
 import android.os.UserManager;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.LooperMode;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.util.Arrays;
 import java.util.Collections;
 
 @RunWith(RobolectricTestRunner.class)
+@LooperMode(LooperMode.Mode.LEGACY)
 public final class AppWithAdminGrantedPermissionsCounterTest {
 
     private final String APP_1 = "app1";
@@ -155,11 +158,13 @@ public final class AppWithAdminGrantedPermissionsCounterTest {
                 mDevicePolicyManager, mPackageManager, mPackageManagerService, mApp5)).isFalse();
     }
 
+    @Ignore("b/313578776")
     @Test
     public void testCountInstalledAppsSync() throws Exception {
         verifyCountInstalledApps(false /* async */);
     }
 
+    @Ignore("b/313578776")
     @Test
     public void testCountInstalledAppsAync() throws Exception {
         verifyCountInstalledApps(true /* async */);

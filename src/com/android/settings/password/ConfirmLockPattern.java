@@ -135,7 +135,8 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
             mLockPatternView = (LockPatternView) view.findViewById(R.id.lockPattern);
             mErrorTextView = (TextView) view.findViewById(R.id.errorText);
             // TODO(b/243008023) Workaround for Glif layout on 2 panel choose lock settings.
-            mSudContent = mGlifLayout.findViewById(R.id.sud_layout_content);
+            mSudContent = mGlifLayout.findViewById(
+                    com.google.android.setupdesign.R.id.sud_layout_content);
             mSudContent.setPadding(mSudContent.getPaddingLeft(), 0, mSudContent.getPaddingRight(),
                     0);
             mIsManagedProfile = UserManager.get(getActivity()).isManagedProfile(mEffectiveUserId);
@@ -696,6 +697,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
         }
 
         private void handleAttemptLockout(long elapsedRealtimeDeadline) {
+            clearResetErrorRunnable();
             updateStage(Stage.LockedOut);
             long elapsedRealtime = SystemClock.elapsedRealtime();
             mCountdownTimer = new CountDownTimer(

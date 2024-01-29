@@ -32,6 +32,17 @@
             android:layout="@layout/locale_order_list" />
     </PreferenceCategory>
 
+    <PreferenceCategory
+        android:key="key_category_terms_of_address"
+        android:title="@string/category_title_terms_of_address"
+        settings:controller="com.android.settings.localepicker.TermsOfAddressCategoryController">
+        <Preference
+            android:key="key_terms_of_address"
+            android:title="@string/terms_of_address_title"
+            android:summary="@string/terms_of_address_summary"
+            settings:controller="com.android.settings.localepicker.TermsOfAddressController"/>
+    </PreferenceCategory>
+
     <com.android.settingslib.widget.FooterPreference
         android:key="footer_languages_picker"
         android:title="@string/desc_notice_of_language_picker"

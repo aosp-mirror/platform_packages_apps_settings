@@ -22,7 +22,7 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
@@ -69,7 +69,7 @@ public class NfcSnoopLogPreferenceController extends
     public void updateState(Preference preference) {
         try {
             final String currentValue = SystemProperties.get(NFC_NFCSNOOP_LOG_MODE_PROPERTY);
-            ((SwitchPreference) mPreference).setChecked(currentValue.equals(NFCSNOOP_MODE_FULL));
+            ((TwoStatePreference) mPreference).setChecked(currentValue.equals(NFCSNOOP_MODE_FULL));
         } catch (RuntimeException e) {
             Log.e(TAG, "Fail to get nfc system property: " + e.getMessage());
         }
@@ -80,7 +80,7 @@ public class NfcSnoopLogPreferenceController extends
         super.onDeveloperOptionsSwitchDisabled();
         try {
             SystemProperties.set(NFC_NFCSNOOP_LOG_MODE_PROPERTY, NFCSNOOP_MODE_FILTERED);
-            ((SwitchPreference) mPreference).setChecked(false);
+            ((TwoStatePreference) mPreference).setChecked(false);
         } catch (RuntimeException e) {
             Log.e(TAG, "Fail to set nfc system property: " + e.getMessage());
         }

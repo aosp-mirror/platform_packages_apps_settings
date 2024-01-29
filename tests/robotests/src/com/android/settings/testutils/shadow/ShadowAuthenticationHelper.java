@@ -33,6 +33,7 @@ public class ShadowAuthenticationHelper {
     static final String[] LABELS = {"LABEL1", "LABEL2", "LABEL3", "LABEL4"};
     private static String[] sEnabledAccount = TYPES;
 
+    @Implementation
     protected void __constructor__(Context context, UserHandle userHandle,
             AuthenticatorHelper.OnAccountsUpdateListener listener) {
     }

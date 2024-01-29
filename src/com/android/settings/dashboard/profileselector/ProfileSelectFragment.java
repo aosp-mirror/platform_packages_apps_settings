@@ -17,23 +17,32 @@
 package com.android.settings.dashboard.profileselector;
 
 import static android.app.admin.DevicePolicyResources.Strings.Settings.PERSONAL_CATEGORY_HEADER;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.PRIVATE_CATEGORY_HEADER;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_CATEGORY_HEADER;
 import static android.content.Intent.EXTRA_USER_ID;
 
 import android.annotation.IntDef;
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
+import android.content.Context;
+import android.content.pm.UserInfo;
 import android.os.Bundle;
+import android.os.Flags;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Lifecycle;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
@@ -42,12 +51,15 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.privatespace.PrivateSpaceMaintainer;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Base fragment class for profile settings.
@@ -77,9 +89,14 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
         int WORK = 1 << 1;
 
         /**
-         * It is personal and work profile
+         * It is private profile
          */
-        int ALL = PERSONAL | WORK;
+        int PRIVATE = 1 << 2;
+
+        /**
+         * It is personal, work, and private profile
+         */
+        int ALL = PERSONAL | WORK | PRIVATE;
     }
 
     /**
@@ -97,6 +114,11 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
      */
     public static final int WORK_TAB = 1;
 
+    /**
+     * Used in fragment argument with Extra key {@link SettingsActivity.EXTRA_SHOW_FRAGMENT_TAB}
+     */
+    public static final int PRIVATE_TAB = 2;
+
     private ViewGroup mContentView;
 
     private ViewPager2 mViewPager;
@@ -110,7 +132,6 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
         if (titleResId > 0) {
             activity.setTitle(titleResId);
         }
-        final int selectedTab = getTabId(activity, getArguments());
 
         final View tabContainer = mContentView.findViewById(R.id.tab_container);
         mViewPager = tabContainer.findViewById(R.id.view_pager);
@@ -129,6 +150,7 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
                 }
         );
         tabContainer.setVisibility(View.VISIBLE);
+        final int selectedTab = getTabId(activity, getArguments());
         final TabLayout.Tab tab = tabs.getTabAt(selectedTab);
         tab.select();
 
@@ -208,18 +230,26 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
         if (bundle != null) {
             final int extraTab = bundle.getInt(SettingsActivity.EXTRA_SHOW_FRAGMENT_TAB, -1);
             if (extraTab != -1) {
-                return extraTab;
+                return ((ViewPagerAdapter) mViewPager.getAdapter()).getTabForPosition(extraTab);
             }
             final int userId = bundle.getInt(EXTRA_USER_ID, UserHandle.SYSTEM.getIdentifier());
             final boolean isWorkProfile = UserManager.get(activity).isManagedProfile(userId);
             if (isWorkProfile) {
                 return WORK_TAB;
             }
+            UserInfo userInfo = UserManager.get(activity).getUserInfo(userId);
+            if (Flags.allowPrivateProfile() && userInfo != null && userInfo.isPrivateProfile()) {
+                return PRIVATE_TAB;
+            }
         }
         // Start intent from a specific user eg: adb shell --user 10
         final int intentUser = activity.getIntent().getContentUserHint();
         if (UserManager.get(activity).isManagedProfile(intentUser)) {
             return WORK_TAB;
+        }
+        UserInfo userInfo = UserManager.get(activity).getUserInfo(intentUser);
+        if (Flags.allowPrivateProfile() && userInfo != null && userInfo.isPrivateProfile()) {
+            return PRIVATE_TAB;
         }
 
         return PERSONAL_TAB;
@@ -229,13 +259,119 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
         final DevicePolicyManager devicePolicyManager =
                 getContext().getSystemService(DevicePolicyManager.class);
 
-        if (position == WORK_TAB) {
+        if (Flags.allowPrivateProfile()) {
+            int tabForPosition =
+                    ((ViewPagerAdapter) mViewPager.getAdapter()).getTabForPosition(position);
+
+            if (tabForPosition == WORK_TAB) {
+                return devicePolicyManager.getResources().getString(WORK_CATEGORY_HEADER,
+                        () -> getContext().getString(
+                                com.android.settingslib.R.string.category_work));
+            }
+
+            if (tabForPosition == PRIVATE_TAB) {
+                return devicePolicyManager.getResources().getString(PRIVATE_CATEGORY_HEADER,
+                        () -> getContext()
+                                .getString(com.android.settingslib.R.string.category_private));
+            }
+
+        } else if (position == WORK_TAB) {
             return devicePolicyManager.getResources().getString(WORK_CATEGORY_HEADER,
-                    () -> getContext().getString(R.string.category_work));
+                    () -> getContext().getString(com.android.settingslib.R.string.category_work));
+
+        }
+        return devicePolicyManager.getResources().getString(PERSONAL_CATEGORY_HEADER,
+                () -> getContext().getString(
+                        com.android.settingslib.R.string.category_personal));
+    }
+
+    /** Creates fragments of passed types, and returns them in an array. */
+    @NonNull static Fragment[] getFragments(
+            Context context,
+            @Nullable Bundle bundle,
+            FragmentConstructor personalFragmentConstructor,
+            FragmentConstructor workFragmentConstructor,
+            FragmentConstructor privateFragmentConstructor) {
+        return getFragments(
+                context,
+                bundle,
+                personalFragmentConstructor,
+                workFragmentConstructor,
+                privateFragmentConstructor,
+                new PrivateSpaceInfoProvider() {});
+    }
+
+    /**
+     * Creates fragments of passed types, and returns them in an array. This overload exists only
+     * for helping with testing.
+     */
+    @NonNull static Fragment[] getFragments(
+            Context context,
+            @Nullable Bundle bundle,
+            FragmentConstructor personalFragmentConstructor,
+            FragmentConstructor workFragmentConstructor,
+            FragmentConstructor privateFragmentConstructor,
+            PrivateSpaceInfoProvider privateSpaceInfoProvider) {
+        Fragment[] result = new Fragment[0];
+        ArrayList<Fragment> fragments = new ArrayList<>();
+
+        try {
+            UserManager userManager = context.getSystemService(UserManager.class);
+            List<UserInfo> userInfos = userManager.getProfiles(UserHandle.myUserId());
+
+            for (UserInfo userInfo : userInfos) {
+                if (userInfo.getUserHandle().isSystem()) {
+                    fragments.add(createAndGetFragment(
+                            ProfileType.PERSONAL,
+                            bundle != null ? bundle : new Bundle(),
+                            personalFragmentConstructor));
+                } else if (userInfo.isManagedProfile()) {
+                    fragments.add(createAndGetFragment(
+                            ProfileType.WORK,
+                            bundle != null ? bundle.deepCopy() : new Bundle(),
+                            workFragmentConstructor));
+                } else if (Flags.allowPrivateProfile() && userInfo.isPrivateProfile()) {
+                    if (!privateSpaceInfoProvider.isPrivateSpaceLocked(context)) {
+                        fragments.add(createAndGetFragment(
+                                ProfileType.PRIVATE,
+                                bundle != null ? bundle.deepCopy() : new Bundle(),
+                                privateFragmentConstructor));
+                    }
+                } else {
+                    Log.d(TAG, "Not showing tab for unsupported user");
+                }
+            }
+
+            result = new Fragment[fragments.size()];
+            fragments.toArray(result);
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to create fragment");
         }
 
-        return devicePolicyManager.getResources().getString(PERSONAL_CATEGORY_HEADER,
-                () -> getContext().getString(R.string.category_personal));
+        return result;
+    }
+
+    private static Fragment createAndGetFragment(
+            @ProfileType int profileType, Bundle bundle, FragmentConstructor fragmentConstructor) {
+        bundle.putInt(EXTRA_PROFILE, profileType);
+        final Fragment fragment = fragmentConstructor.constructAndGetFragment();
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
+    @VisibleForTesting
+    void setViewPager(ViewPager2 viewPager) {
+        mViewPager = viewPager;
+    }
+
+    interface FragmentConstructor {
+        Fragment constructAndGetFragment();
+    }
+
+    interface PrivateSpaceInfoProvider {
+        default boolean isPrivateSpaceLocked(Context context) {
+            return PrivateSpaceMaintainer.getInstance(context).isPrivateSpaceLocked();
+        }
     }
 
     static class ViewPagerAdapter extends FragmentStateAdapter {
@@ -247,6 +383,15 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
             mChildFragments = fragment.getFragments();
         }
 
+        @VisibleForTesting
+        ViewPagerAdapter(
+                @NonNull FragmentManager fragmentManager,
+                @NonNull Lifecycle lifecycle,
+                ProfileSelectFragment profileSelectFragment) {
+            super(fragmentManager, lifecycle);
+            mChildFragments = profileSelectFragment.getFragments();
+        }
+
         @Override
         public Fragment createFragment(int position) {
             return mChildFragments[position];
@@ -255,6 +400,24 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
         @Override
         public int getItemCount() {
             return mChildFragments.length;
+        }
+
+        @VisibleForTesting
+        int getTabForPosition(int position) {
+            if (position >= mChildFragments.length) {
+                Log.e(TAG, "tab requested for out of bound position " + position);
+                return PERSONAL_TAB;
+            }
+            @ProfileType
+            int profileType = mChildFragments[position].getArguments().getInt(EXTRA_PROFILE);
+
+            if (profileType == ProfileType.WORK) {
+                return WORK_TAB;
+            }
+            if (profileType == ProfileType.PRIVATE) {
+                return PRIVATE_TAB;
+            }
+            return PERSONAL_TAB;
         }
     }
 }

@@ -18,8 +18,9 @@ package com.android.settings.spa.app
 
 import android.content.Context
 import android.content.pm.ApplicationInfo
+import android.content.pm.PackageManager
+import android.graphics.drawable.Drawable
 import androidx.compose.runtime.SideEffect
-import androidx.compose.runtime.State
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
@@ -33,21 +34,32 @@ import com.android.settingslib.spa.testutils.firstWithTimeoutOrNull
 import com.android.settingslib.spaprivileged.template.app.AppListInput
 import com.android.settingslib.spaprivileged.template.app.AppListItemModel
 import com.google.common.truth.Truth.assertThat
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.kotlin.any
+import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.spy
+import org.mockito.kotlin.stub
+
 
 @RunWith(AndroidJUnit4::class)
 class AllAppListTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
-    private val context: Context = ApplicationProvider.getApplicationContext()
-
     private val fakeNavControllerWrapper = FakeNavControllerWrapper()
+
+    private val packageManager = mock<PackageManager> {
+        on { getPackagesForUid(USER_ID) } doReturn arrayOf(PACKAGE_NAME)
+    }
+
+    private val context: Context = spy(ApplicationProvider.getApplicationContext()) {
+        on { packageManager } doReturn packageManager
+    }
 
     @Test
     fun allAppListPageProvider_name() {
@@ -118,7 +130,6 @@ class AllAppListTest {
             .isEqualTo("AppInfoSettings/package.name/0")
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun allAppListModel_transform() = runTest {
         val listModel = AllAppListModel(context) { stateOf(SUMMARY) }
@@ -134,12 +145,12 @@ class AllAppListTest {
     fun allAppListModel_getSummary() {
         val listModel = AllAppListModel(context) { stateOf(SUMMARY) }
 
-        lateinit var summaryState: State<String>
+        lateinit var summary: () -> String
         composeTestRule.setContent {
-            summaryState = listModel.getSummary(option = 0, record = AppRecordWithSize(app = APP))
+            summary = listModel.getSummary(option = 0, record = AppRecordWithSize(app = APP))
         }
 
-        assertThat(summaryState.value).isEqualTo(SUMMARY)
+        assertThat(summary()).isEqualTo(SUMMARY)
     }
 
     @Test
@@ -151,13 +162,13 @@ class AllAppListTest {
             enabled = false
         }
 
-        lateinit var summaryState: State<String>
+        lateinit var summary: () -> String
         composeTestRule.setContent {
-            summaryState =
+            summary =
                 listModel.getSummary(option = 0, record = AppRecordWithSize(app = disabledApp))
         }
 
-        assertThat(summaryState.value).isEqualTo("$SUMMARY${System.lineSeparator()}Disabled")
+        assertThat(summary()).isEqualTo("$SUMMARY${System.lineSeparator()}Disabled")
     }
 
     @Test
@@ -167,14 +178,58 @@ class AllAppListTest {
             packageName = PACKAGE_NAME
         }
 
-        lateinit var summaryState: State<String>
+        lateinit var summary: () -> String
         composeTestRule.setContent {
-            summaryState =
+            summary =
                 listModel.getSummary(option = 0, record = AppRecordWithSize(app = notInstalledApp))
         }
 
-        assertThat(summaryState.value)
+        assertThat(summary())
             .isEqualTo("$SUMMARY${System.lineSeparator()}Not installed for this user")
+    }
+
+    @Test
+    fun allAppListModel_archivedApp() {
+        val app = mock<ApplicationInfo> {
+            on { loadUnbadgedIcon(any()) } doReturn UNBADGED_ICON
+            on { loadLabel(any()) } doReturn LABEL
+        }
+        app.isArchived = true
+        packageManager.stub {
+            on {
+                getApplicationInfoAsUser(PACKAGE_NAME, 0, USER_ID)
+            } doReturn app
+        }
+        composeTestRule.setContent {
+            fakeNavControllerWrapper.Wrapper {
+                with(AllAppListModel(context)) {
+                    AppListItemModel(
+                        record = AppRecordWithSize(app = app),
+                        label = LABEL,
+                        summary = { SUMMARY },
+                    ).AppItem()
+                }
+            }
+        }
+
+        composeTestRule.onNodeWithText(LABEL).assertIsDisplayed()
+    }
+
+    @Test
+    fun allAppListModel_getSummaryWhenArchived() {
+        val listModel = AllAppListModel(context) { stateOf(SUMMARY) }
+        val archivedApp = ApplicationInfo().apply {
+            packageName = PACKAGE_NAME
+            isArchived = true
+        }
+
+        lateinit var summary: () -> String
+        composeTestRule.setContent {
+            summary =
+                listModel.getSummary(option = 0, record = AppRecordWithSize(app = archivedApp))
+        }
+
+        assertThat(summary()).isEqualTo(SUMMARY)
     }
 
     private fun getAppListInput(): AppListInput<AppRecordWithSize> {
@@ -196,7 +251,7 @@ class AllAppListTest {
                     AppListItemModel(
                         record = AppRecordWithSize(app = APP),
                         label = LABEL,
-                        summary = stateOf(SUMMARY),
+                        summary = { SUMMARY },
                     ).AppItem()
                 }
             }
@@ -208,6 +263,7 @@ class AllAppListTest {
         const val PACKAGE_NAME = "package.name"
         const val LABEL = "Label"
         const val SUMMARY = "Summary"
+        val UNBADGED_ICON = mock<Drawable>()
         val APP = ApplicationInfo().apply {
             packageName = PACKAGE_NAME
             flags = ApplicationInfo.FLAG_INSTALLED

@@ -25,8 +25,12 @@ import androidx.room.RoomDatabase;
 
 /** A {@link RoomDatabase} for battery usage states history. */
 @Database(
-        entities = {AppUsageEventEntity.class, BatteryEventEntity.class, BatteryState.class,
-                BatteryUsageSlotEntity.class},
+        entities = {
+            AppUsageEventEntity.class,
+            BatteryEventEntity.class,
+            BatteryState.class,
+            BatteryUsageSlotEntity.class
+        },
         version = 1)
 public abstract class BatteryStateDatabase extends RoomDatabase {
     private static final String TAG = "BatteryStateDatabase";
@@ -35,10 +39,13 @@ public abstract class BatteryStateDatabase extends RoomDatabase {
 
     /** Provides DAO for app usage event table. */
     public abstract AppUsageEventDao appUsageEventDao();
+
     /** Provides DAO for battery event table. */
     public abstract BatteryEventDao batteryEventDao();
+
     /** Provides DAO for battery state table. */
     public abstract BatteryStateDao batteryStateDao();
+
     /** Provides DAO for battery usage slot table. */
     public abstract BatteryUsageSlotDao batteryUsageSlotDao();
 
@@ -46,8 +53,7 @@ public abstract class BatteryStateDatabase extends RoomDatabase {
     public static BatteryStateDatabase getInstance(Context context) {
         if (sBatteryStateDatabase == null) {
             sBatteryStateDatabase =
-                    Room.databaseBuilder(
-                                    context, BatteryStateDatabase.class, "battery-usage-db-v9")
+                    Room.databaseBuilder(context, BatteryStateDatabase.class, "battery-usage-db-v9")
                             // Allows accessing data in the main thread for dumping bugreport.
                             .allowMainThreadQueries()
                             .fallbackToDestructiveMigration()

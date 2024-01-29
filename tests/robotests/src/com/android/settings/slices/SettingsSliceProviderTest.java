@@ -30,6 +30,7 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -200,6 +201,7 @@ public class SettingsSliceProviderTest {
                 .registerIntentToUri(eq(FakeToggleController.INTENT_FILTER), eq(INTENT_SLICE_URI));
     }
 
+    @Ignore("b/314925256")
     @Test
     public void loadSlice_registersBackgroundListener() {
         SliceTestUtils.insertSliceToDb(mContext, KEY);
@@ -636,7 +638,6 @@ public class SettingsSliceProviderTest {
         verify(mManager, never()).grantSlicePermission(anyString(), any(Uri.class));
     }
 
-    @Ignore
     @Test
     @Config(qualifiers = "mcc999")
     public void grantAllowlistedPackagePermissions_hasPackageAllowlist_shouldGrant() {
@@ -664,7 +665,6 @@ public class SettingsSliceProviderTest {
         assertThat(mProvider.isPrivateSlicesNeeded(uri)).isFalse();
     }
 
-    @Ignore
     @Test
     @Config(qualifiers = "mcc999")
     public void isPrivateSlicesNeeded_correctUriWithPermissionAndIsSI_returnTrue() {

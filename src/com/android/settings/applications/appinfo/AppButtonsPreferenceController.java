@@ -138,9 +138,9 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
                     "Fragment should implement AppButtonsDialogListener");
         }
 
-        final FeatureFactory factory = FeatureFactory.getFactory(activity);
+        final FeatureFactory factory = FeatureFactory.getFeatureFactory();
         mMetricsFeatureProvider = factory.getMetricsFeatureProvider();
-        mApplicationFeatureProvider = factory.getApplicationFeatureProvider(activity);
+        mApplicationFeatureProvider = factory.getApplicationFeatureProvider();
         mState = state;
         mDpm = (DevicePolicyManager) activity.getSystemService(Context.DEVICE_POLICY_SERVICE);
         mUserManager = (UserManager) activity.getSystemService(Context.USER_SERVICE);

@@ -125,7 +125,8 @@ public class PrimaryCheckBoxPreferenceTest {
     public void clickWidgetView_shouldToggleCheckBox() {
         final LayoutInflater inflater = LayoutInflater.from(mContext);
         final PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(
-                inflater.inflate(R.layout.preference_two_target, null));
+                inflater.inflate(
+                        com.android.settingslib.widget.preference.twotarget.R.layout.preference_two_target, null));
         final LinearLayout widgetView = holder.itemView.findViewById(android.R.id.widget_frame);
         assertThat(widgetView).isNotNull();
 
@@ -144,7 +145,8 @@ public class PrimaryCheckBoxPreferenceTest {
     public void clickWidgetView_shouldNotToggleCheckBoxIfDisabled() {
         final LayoutInflater inflater = LayoutInflater.from(mContext);
         final PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(
-                inflater.inflate(R.layout.preference_two_target, null));
+                inflater.inflate(
+                        com.android.settingslib.widget.preference.twotarget.R.layout.preference_two_target, null));
         final LinearLayout widgetView = holder.itemView.findViewById(android.R.id.widget_frame);
         assertThat(widgetView).isNotNull();
 
@@ -160,7 +162,8 @@ public class PrimaryCheckBoxPreferenceTest {
     @Test
     public void clickWidgetView_shouldNotifyPreferenceChanged() {
         final PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(
-                LayoutInflater.from(mContext).inflate(R.layout.preference_two_target, null));
+                LayoutInflater.from(mContext).inflate(
+                        com.android.settingslib.widget.preference.twotarget.R.layout.preference_two_target, null));
         final View widgetView = holder.findViewById(android.R.id.widget_frame);
         final OnPreferenceChangeListener listener = mock(OnPreferenceChangeListener.class);
         mPreference.setOnPreferenceChangeListener(listener);

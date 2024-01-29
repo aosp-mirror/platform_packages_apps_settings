@@ -21,7 +21,7 @@ import android.app.AppOpsManager
 import android.app.settings.SettingsEnums
 import android.content.Context
 import com.android.settings.R
-import com.android.settings.overlay.FeatureFactory
+import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settingslib.spaprivileged.template.app.AppOpPermissionListModel
 import com.android.settingslib.spaprivileged.template.app.AppOpPermissionRecord
 import com.android.settingslib.spaprivileged.template.app.TogglePermissionAppListProvider
@@ -45,7 +45,7 @@ class MediaManagementAppsListModel(context: Context) : AppOpPermissionListModel(
     }
 
     private fun logPermissionChange(newAllowed: Boolean) {
-        FeatureFactory.getFactory(context).metricsFeatureProvider.action(
+        featureFactory.metricsFeatureProvider.action(
             SettingsEnums.PAGE_UNKNOWN,
             SettingsEnums.ACTION_MEDIA_MANAGEMENT_APPS_TOGGLE,
             SettingsEnums.MEDIA_MANAGEMENT_APPS,

@@ -72,6 +72,7 @@ import com.android.settingslib.core.AbstractPreferenceController;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -407,6 +408,7 @@ public class CombinedBiometricProfileSettingsTest {
     }
 
     @Test
+    @Ignore("b/295325503")
     public void testClickFaceUnlock_inMultiWindow_withoutEnrolledFp_showsDialog() {
         testClickFaceUnlock(true /* isInMultiWindow */, false /*hasEnrolledFace*/);
         verifyShowsDialogAfterClickingUnlock(mFragment.getFacePreferenceKey());

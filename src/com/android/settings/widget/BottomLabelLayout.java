@@ -25,8 +25,6 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.VisibleForTesting;
 
-import com.android.settingslib.R;
-
 /**
  * An extension of LinearLayout that automatically switches to vertical
  * orientation when it can't fit its child views horizontally.
@@ -85,7 +83,7 @@ public class BottomLabelLayout extends LinearLayout {
         setOrientation(stacked ? LinearLayout.VERTICAL : LinearLayout.HORIZONTAL);
         setGravity(stacked ? Gravity.START : Gravity.BOTTOM);
 
-        final View spacer = findViewById(R.id.spacer);
+        final View spacer = findViewById(com.android.settings.R.id.spacer);
         if (spacer != null) {
             spacer.setVisibility(stacked ? View.GONE : View.VISIBLE);
         }

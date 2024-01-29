@@ -24,7 +24,6 @@ import static java.lang.Boolean.FALSE;
 
 import android.app.AppGlobals;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.IPackageManager;
 import android.content.pm.LauncherApps;
@@ -48,10 +47,6 @@ import java.util.Map;
  * {@link PackageManager.UserMinAspectRatio} set by user
  */
 public class UserAspectRatioManager {
-    private static final Intent LAUNCHER_ENTRY_INTENT =
-            new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER);
-
-    // TODO(b/288142656): Enable user aspect ratio settings by default
     private static final boolean DEFAULT_VALUE_ENABLE_USER_ASPECT_RATIO_SETTINGS = true;
     @VisibleForTesting
     static final String KEY_ENABLE_USER_ASPECT_RATIO_SETTINGS =
@@ -173,12 +168,9 @@ public class UserAspectRatioManager {
                     DEFAULT_VALUE_ENABLE_USER_ASPECT_RATIO_FULLSCREEN);
     }
 
-    LauncherApps getLauncherApps() {
-        return mContext.getSystemService(LauncherApps.class);
-    }
-
     private boolean hasLauncherEntry(@NonNull ApplicationInfo app) {
-        return !getLauncherApps().getActivityList(app.packageName, getUserHandleForUid(app.uid))
+        return !mContext.getSystemService(LauncherApps.class)
+                .getActivityList(app.packageName, getUserHandleForUid(app.uid))
                 .isEmpty();
     }
 
@@ -232,7 +224,7 @@ public class UserAspectRatioManager {
 
     @NonNull
     private String getAccessibleOption(String numerator, String denominator) {
-        return mContext.getResources().getString(R.string.user_aspect_ratio_option_a11y,
+        return mContext.getString(R.string.user_aspect_ratio_option_a11y,
                 numerator, denominator);
     }
 

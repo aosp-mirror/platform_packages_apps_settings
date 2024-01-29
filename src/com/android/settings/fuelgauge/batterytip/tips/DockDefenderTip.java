@@ -32,9 +32,7 @@ import com.android.settings.widget.CardPreference;
 import com.android.settingslib.HelpUtils;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
-/**
- * Tip to show dock defender status
- */
+/** Tip to show dock defender status */
 public class DockDefenderTip extends BatteryTip {
     private static final String TAG = "DockDefenderTip";
     private int mMode;
@@ -84,8 +82,9 @@ public class DockDefenderTip extends BatteryTip {
 
     @Override
     public int getIconId() {
-        return mMode == DockDefenderMode.ACTIVE ? R.drawable.ic_battery_status_protected_24dp :
-                R.drawable.ic_battery_dock_defender_untriggered_24dp;
+        return mMode == DockDefenderMode.ACTIVE
+                ? R.drawable.ic_battery_status_protected_24dp
+                : R.drawable.ic_battery_dock_defender_untriggered_24dp;
     }
 
     @Override
@@ -98,8 +97,7 @@ public class DockDefenderTip extends BatteryTip {
 
     @Override
     public void log(Context context, MetricsFeatureProvider metricsFeatureProvider) {
-        metricsFeatureProvider.action(context, SettingsEnums.ACTION_DOCK_DEFENDER_TIP,
-                mState);
+        metricsFeatureProvider.action(context, SettingsEnums.ACTION_DOCK_DEFENDER_TIP, mState);
     }
 
     @Override
@@ -119,15 +117,19 @@ public class DockDefenderTip extends BatteryTip {
             case DockDefenderMode.ACTIVE:
                 cardPreference.setPrimaryButtonText(
                         context.getString(R.string.battery_tip_charge_to_full_button));
-                cardPreference.setPrimaryButtonClickListener(unused -> {
-                    resumeCharging(context);
-                    mMode = DockDefenderMode.TEMPORARILY_BYPASSED;
-                    context.sendBroadcast(new Intent().setAction(
-                            BatteryUtils.BYPASS_DOCK_DEFENDER_ACTION).setPackage(
-                            context.getPackageName()).addFlags(Intent.FLAG_RECEIVER_REGISTERED_ONLY
-                            | Intent.FLAG_RECEIVER_FOREGROUND));
-                    updatePreference(preference);
-                });
+                cardPreference.setPrimaryButtonClickListener(
+                        unused -> {
+                            resumeCharging(context);
+                            mMode = DockDefenderMode.TEMPORARILY_BYPASSED;
+                            context.sendBroadcast(
+                                    new Intent()
+                                            .setAction(BatteryUtils.BYPASS_DOCK_DEFENDER_ACTION)
+                                            .setPackage(context.getPackageName())
+                                            .addFlags(
+                                                    Intent.FLAG_RECEIVER_REGISTERED_ONLY
+                                                            | Intent.FLAG_RECEIVER_FOREGROUND));
+                            updatePreference(preference);
+                        });
                 cardPreference.setPrimaryButtonVisible(true);
                 break;
             case DockDefenderMode.TEMPORARILY_BYPASSED:
@@ -140,21 +142,23 @@ public class DockDefenderTip extends BatteryTip {
 
         cardPreference.setSecondaryButtonText(context.getString(R.string.learn_more));
         cardPreference.setSecondaryButtonClickListener(
-                button -> button.startActivityForResult(
-                        HelpUtils.getHelpIntent(
-                                context,
-                                context.getString(R.string.help_url_dock_defender),
-                                /* backupContext */ ""), /* requestCode */ 0));
+                button ->
+                        button.startActivityForResult(
+                                HelpUtils.getHelpIntent(
+                                        context,
+                                        context.getString(R.string.help_url_dock_defender),
+                                        /* backupContext */ ""), /* requestCode */
+                                0));
         cardPreference.setSecondaryButtonVisible(true);
-        cardPreference.setSecondaryButtonContentDescription(context.getString(
-                R.string.battery_tip_limited_temporarily_sec_button_content_description));
-
+        cardPreference.setSecondaryButtonContentDescription(
+                context.getString(
+                        R.string.battery_tip_limited_temporarily_sec_button_content_description));
     }
 
     private void resumeCharging(Context context) {
         final Intent intent =
-                FeatureFactory.getFactory(context)
-                        .getPowerUsageFeatureProvider(context)
+                FeatureFactory.getFeatureFactory()
+                        .getPowerUsageFeatureProvider()
                         .getResumeChargeIntent(true);
         if (intent != null) {
             context.sendBroadcast(intent);
@@ -163,13 +167,14 @@ public class DockDefenderTip extends BatteryTip {
         Log.i(TAG, "send resume charging broadcast intent=" + intent);
     }
 
-    public static final Creator CREATOR = new Creator() {
-        public BatteryTip createFromParcel(Parcel in) {
-            return new DockDefenderTip(in);
-        }
+    public static final Creator CREATOR =
+            new Creator() {
+                public BatteryTip createFromParcel(Parcel in) {
+                    return new DockDefenderTip(in);
+                }
 
-        public BatteryTip[] newArray(int size) {
-            return new DockDefenderTip[size];
-        }
-    };
+                public BatteryTip[] newArray(int size) {
+                    return new DockDefenderTip[size];
+                }
+            };
 }

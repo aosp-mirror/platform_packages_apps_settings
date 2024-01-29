@@ -22,10 +22,16 @@ import static com.android.settings.accessibility.DisableAnimationsPreferenceCont
 
 import static com.google.common.truth.Truth.assertThat;
 
+import android.content.ContentResolver;
 import android.content.Context;
+import android.database.ContentObserver;
+import android.net.Uri;
+import android.os.Handler;
 import android.os.Looper;
+import android.os.UserHandle;
 import android.provider.Settings;
 
+import androidx.annotation.Nullable;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
@@ -34,15 +40,21 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.settings.core.BasePreferenceController;
 
+import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 @RunWith(AndroidJUnit4.class)
 public class DisableAnimationsPreferenceControllerTest {
 
     private static final String TEST_PREFERENCE_KEY = "disable_animation";
     private final Context mContext = ApplicationProvider.getApplicationContext();
+    private Looper mLooper;
 
     private PreferenceScreen mScreen;
     private SwitchPreference mPreference;
@@ -53,15 +65,25 @@ public class DisableAnimationsPreferenceControllerTest {
         if (Looper.myLooper() == null) {
             Looper.prepare();
         }
+        mLooper = Looper.myLooper();
         PreferenceManager preferenceManager = new PreferenceManager(mContext);
         mScreen = preferenceManager.createPreferenceScreen(mContext);
         final SwitchPreference preference = new SwitchPreference(mContext);
         preference.setKey(TEST_PREFERENCE_KEY);
+        preference.setPersistent(false);
         mScreen.addPreference(preference);
 
         mController = new DisableAnimationsPreferenceController(mContext, TEST_PREFERENCE_KEY);
         mController.displayPreference(mScreen);
         mPreference = mScreen.findPreference(TEST_PREFERENCE_KEY);
+    }
+
+    @After
+    public void cleanUp() {
+        // calling Settings.Global.resetToDefaults doesn't work somehow
+        // one could check if it works by running the test ones, and see if the settings
+        // that were changed being restored to default
+        setAnimationScaleAndWaitForUpdate(ANIMATION_ON_VALUE);
     }
 
     @Test
@@ -72,7 +94,7 @@ public class DisableAnimationsPreferenceControllerTest {
 
     @Test
     public void isChecked_enabledAnimation_shouldReturnFalse() {
-        setAnimationScale(ANIMATION_ON_VALUE);
+        setAnimationScaleAndWaitForUpdate(ANIMATION_ON_VALUE);
 
         mController.updateState(mPreference);
 
@@ -82,7 +104,7 @@ public class DisableAnimationsPreferenceControllerTest {
 
     @Test
     public void isChecked_disabledAnimation_shouldReturnTrue() {
-        setAnimationScale(ANIMATION_OFF_VALUE);
+        setAnimationScaleAndWaitForUpdate(ANIMATION_OFF_VALUE);
 
         mController.updateState(mPreference);
 
@@ -116,7 +138,7 @@ public class DisableAnimationsPreferenceControllerTest {
     public void onStart_enabledAnimation_shouldReturnFalse() {
         mController.onStart();
 
-        setAnimationScale(ANIMATION_ON_VALUE);
+        setAnimationScaleAndWaitForUpdate(ANIMATION_ON_VALUE);
 
         assertThat(mController.isChecked()).isFalse();
         assertThat(mPreference.isChecked()).isFalse();
@@ -126,7 +148,7 @@ public class DisableAnimationsPreferenceControllerTest {
     public void onStart_disabledAnimation_shouldReturnTrue() {
         mController.onStart();
 
-        setAnimationScale(ANIMATION_OFF_VALUE);
+        setAnimationScaleAndWaitForUpdate(ANIMATION_OFF_VALUE);
 
         assertThat(mController.isChecked()).isTrue();
         assertThat(mPreference.isChecked()).isTrue();
@@ -138,15 +160,34 @@ public class DisableAnimationsPreferenceControllerTest {
         mController.onStart();
         mController.onStop();
 
-        setAnimationScale(ANIMATION_ON_VALUE);
+        setAnimationScaleAndWaitForUpdate(ANIMATION_ON_VALUE);
 
         assertThat(mPreference.isChecked()).isTrue();
     }
 
-    private void setAnimationScale(float newValue) {
-        for (String animationPreference : TOGGLE_ANIMATION_TARGETS) {
-            Settings.Global.putFloat(mContext.getContentResolver(), animationPreference,
-                    newValue);
+    private void setAnimationScaleAndWaitForUpdate(float newValue) {
+        ContentResolver resolver = mContext.getContentResolver();
+        CountDownLatch countDownLatch = new CountDownLatch(TOGGLE_ANIMATION_TARGETS.size());
+        ContentObserver settingsObserver = new ContentObserver(new Handler(mLooper)) {
+            @Override
+            public void onChange(boolean selfChange, @Nullable Uri uri) {
+                countDownLatch.countDown();
+
+            }
+        };
+
+        try {
+            for (String key : TOGGLE_ANIMATION_TARGETS) {
+                resolver.registerContentObserver(Settings.Global.getUriFor(key),
+                        false, settingsObserver, UserHandle.USER_ALL);
+                Settings.Global.putFloat(mContext.getContentResolver(), key,
+                        newValue);
+            }
+            countDownLatch.await(5, TimeUnit.SECONDS);
+        } catch (InterruptedException e) {
+            Assert.fail(e.getMessage());
+        } finally {
+            resolver.unregisterContentObserver(settingsObserver);
         }
     }
 }

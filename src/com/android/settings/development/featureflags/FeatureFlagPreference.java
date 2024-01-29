@@ -19,9 +19,9 @@ package com.android.settings.development.featureflags;
 import android.content.Context;
 import android.util.FeatureFlagUtils;
 
-import androidx.preference.SwitchPreference;
+import androidx.preference.SwitchPreferenceCompat;
 
-public class FeatureFlagPreference extends SwitchPreference {
+public class FeatureFlagPreference extends SwitchPreferenceCompat {
 
     private final String mKey;
     private final boolean mIsPersistent;

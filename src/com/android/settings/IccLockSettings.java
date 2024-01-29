@@ -53,7 +53,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.network.ProxySubscriptionManager;
 import com.android.settings.network.SubscriptionUtil;
@@ -122,7 +122,7 @@ public class IccLockSettings extends SettingsPreferenceFragment
     private ProxySubscriptionManager mProxySubscriptionMgr;
 
     private EditPinPreference mPinDialog;
-    private SwitchPreference mPinToggle;
+    private TwoStatePreference mPinToggle;
 
     private Resources mRes;
 
@@ -193,7 +193,7 @@ public class IccLockSettings extends SettingsPreferenceFragment
         addPreferencesFromResource(R.xml.sim_lock_settings);
 
         mPinDialog = (EditPinPreference) findPreference(PIN_DIALOG);
-        mPinToggle = (SwitchPreference) findPreference(PIN_TOGGLE);
+        mPinToggle = (TwoStatePreference) findPreference(PIN_TOGGLE);
         if (savedInstanceState != null) {
             if (savedInstanceState.containsKey(DIALOG_STATE)
                     && restoreDialogStates(savedInstanceState)) {

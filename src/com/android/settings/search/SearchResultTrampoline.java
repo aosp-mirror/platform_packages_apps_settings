@@ -18,6 +18,7 @@ package com.android.settings.search;
 
 import static com.android.settings.SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS;
 import static com.android.settings.SettingsActivity.EXTRA_SHOW_FRAGMENT_TAB;
+import static com.android.settings.activityembedding.EmbeddedDeepLinkUtils.getTrampolineIntent;
 
 import android.app.Activity;
 import android.content.ComponentName;
@@ -54,7 +55,7 @@ public class SearchResultTrampoline extends Activity {
 
         final ComponentName callingActivity = getCallingActivity();
         // First make sure caller has privilege to launch a search result page.
-        FeatureFactory.getFactory(this)
+        FeatureFactory.getFeatureFactory()
                 .getSearchFeatureProvider()
                 .verifyLaunchSearchResultPageCaller(this, callingActivity);
         // Didn't crash, proceed and launch the result as a subsetting.
@@ -107,7 +108,7 @@ public class SearchResultTrampoline extends Activity {
             startActivity(intent);
         } else if (isSettingsIntelligence(callingActivity)) {
             if (FeatureFlagUtils.isEnabled(this, FeatureFlags.SETTINGS_SEARCH_ALWAYS_EXPAND)) {
-                startActivity(SettingsActivity.getTrampolineIntent(intent, highlightMenuKey)
+                startActivity(getTrampolineIntent(intent, highlightMenuKey)
                         .setClass(this, DeepLinkHomepageActivityInternal.class)
                         .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
                                 | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS));
@@ -130,7 +131,7 @@ public class SearchResultTrampoline extends Activity {
             }
         } else {
             // Two-pane case
-            startActivity(SettingsActivity.getTrampolineIntent(intent, highlightMenuKey)
+            startActivity(getTrampolineIntent(intent, highlightMenuKey)
                     .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
         }
 
@@ -141,7 +142,7 @@ public class SearchResultTrampoline extends Activity {
     private boolean isSettingsIntelligence(ComponentName callingActivity) {
         return callingActivity != null && TextUtils.equals(
                 callingActivity.getPackageName(),
-                FeatureFactory.getFactory(this).getSearchFeatureProvider()
+                FeatureFactory.getFeatureFactory().getSearchFeatureProvider()
                         .getSettingsIntelligencePkgName(this));
     }
 }

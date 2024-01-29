@@ -25,7 +25,7 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
@@ -84,7 +84,7 @@ public class EnableVerboseVendorLoggingPreferenceController
         ThreadUtils.postOnBackgroundThread(() -> {
                     final boolean enabled = getVerboseLoggingEnabled();
                     ThreadUtils.getUiThreadHandler().post(() ->
-                            ((SwitchPreference) mPreference).setChecked(enabled));
+                            ((TwoStatePreference) mPreference).setChecked(enabled));
                 }
         );
     }
@@ -95,7 +95,7 @@ public class EnableVerboseVendorLoggingPreferenceController
         super.onDeveloperOptionsSwitchDisabled();
         ThreadUtils.postOnBackgroundThread(() ->
                 setVerboseLoggingEnabled(false));
-        ((SwitchPreference) mPreference).setChecked(false);
+        ((TwoStatePreference) mPreference).setChecked(false);
     }
 
     @VisibleForTesting

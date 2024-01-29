@@ -176,7 +176,13 @@ public class ConfirmDialogFragment extends BaseDialogFragment
     }
 
     private void informCaller(boolean confirmed, int itemPosition) {
-        OnConfirmListener listener = getListener(OnConfirmListener.class);
+        OnConfirmListener listener;
+        try {
+            listener = getListener(OnConfirmListener.class);
+        } catch (IllegalArgumentException e) {
+            Log.e(TAG, "Do nothing and return.", e);
+            return;
+        }
         if (listener == null) {
             return;
         }

@@ -21,7 +21,7 @@ import android.provider.Settings;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
@@ -58,7 +58,8 @@ public class EnableGpuDebugLayersPreferenceController extends DeveloperOptionsPr
     public void updateState(Preference preference) {
         final int enableGpuDebugLayersMode = Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.ENABLE_GPU_DEBUG_LAYERS, SETTING_VALUE_OFF);
-        ((SwitchPreference) mPreference).setChecked(enableGpuDebugLayersMode != SETTING_VALUE_OFF);
+        ((TwoStatePreference) mPreference)
+                .setChecked(enableGpuDebugLayersMode != SETTING_VALUE_OFF);
     }
 
     @Override
@@ -66,6 +67,6 @@ public class EnableGpuDebugLayersPreferenceController extends DeveloperOptionsPr
         super.onDeveloperOptionsSwitchDisabled();
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.ENABLE_GPU_DEBUG_LAYERS, SETTING_VALUE_OFF);
-        ((SwitchPreference) mPreference).setChecked(false);
+        ((TwoStatePreference) mPreference).setChecked(false);
     }
 }

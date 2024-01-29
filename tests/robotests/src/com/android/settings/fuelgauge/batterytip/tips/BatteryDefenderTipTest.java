@@ -17,9 +17,7 @@ package com.android.settings.fuelgauge.batterytip.tips;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -63,8 +61,8 @@ public class BatteryDefenderTipTest {
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mMetricsFeatureProvider = mFeatureFactory.metricsFeatureProvider;
         mContext = RuntimeEnvironment.application;
-        mBatteryDefenderTip = new BatteryDefenderTip(BatteryTip.StateType.NEW,
-                false /* isPluggedIn */);
+        mBatteryDefenderTip =
+                new BatteryDefenderTip(BatteryTip.StateType.NEW, false /* isPluggedIn */);
 
         when(mPreference.getContext()).thenReturn(mContext);
         when(mCardPreference.getContext()).thenReturn(mContext);
@@ -93,8 +91,8 @@ public class BatteryDefenderTipTest {
         mBatteryDefenderTip.updateState(mBatteryTip);
         mBatteryDefenderTip.log(mContext, mMetricsFeatureProvider);
 
-        verify(mMetricsFeatureProvider).action(mContext,
-                SettingsEnums.ACTION_BATTERY_DEFENDER_TIP, mBatteryTip.mState);
+        verify(mMetricsFeatureProvider)
+                .action(mContext, SettingsEnums.ACTION_BATTERY_DEFENDER_TIP, mBatteryTip.mState);
     }
 
     @Test
@@ -131,8 +129,8 @@ public class BatteryDefenderTipTest {
 
     @Test
     public void updatePreference_whenCharging_setPrimaryButtonVisibleToBeTrue() {
-        mBatteryDefenderTip = new BatteryDefenderTip(BatteryTip.StateType.NEW,
-                true /* isPluggedIn */);
+        mBatteryDefenderTip =
+                new BatteryDefenderTip(BatteryTip.StateType.NEW, true /* isPluggedIn */);
 
         mBatteryDefenderTip.updatePreference(mCardPreference);
 

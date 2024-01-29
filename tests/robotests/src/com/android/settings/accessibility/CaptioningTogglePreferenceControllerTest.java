@@ -142,7 +142,7 @@ public class CaptioningTogglePreferenceControllerTest {
     public void onSwitchChanged_switchChecked_shouldSetCaptionEnabled() {
         mController.displayPreference(mScreen);
 
-        mController.onSwitchChanged(/* switchView= */ null, /* isChecked= */ true);
+        mController.onCheckedChanged(/* buttonView= */ null, /* isChecked= */ true);
 
         assertThat(isCaptionEnabled()).isTrue();
     }
@@ -151,7 +151,7 @@ public class CaptioningTogglePreferenceControllerTest {
     public void onSwitchChanged_switchUnchecked_shouldSetCaptionDisabled() {
         mController.displayPreference(mScreen);
 
-        mController.onSwitchChanged(/* switchView= */ null, /* isChecked= */ false);
+        mController.onCheckedChanged(/* buttonView= */ null, /* isChecked= */ false);
 
         assertThat(isCaptionEnabled()).isFalse();
     }

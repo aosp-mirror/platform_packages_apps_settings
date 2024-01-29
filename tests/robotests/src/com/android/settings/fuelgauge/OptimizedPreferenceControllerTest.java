@@ -18,7 +18,12 @@ package com.android.settings.fuelgauge;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
+
+import android.content.Context;
+import android.content.pm.PackageManager;
 
 import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
@@ -37,35 +42,42 @@ public class OptimizedPreferenceControllerTest {
 
     private OptimizedPreferenceController mController;
     private SelectorWithWidgetPreference mPreference;
+    private BatteryOptimizeUtils mBatteryOptimizeUtils;
 
-    @Mock BatteryOptimizeUtils mockBatteryOptimizeUtils;
+    @Mock PackageManager mMockPackageManager;
 
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        mController = new OptimizedPreferenceController(
-                RuntimeEnvironment.application, UID, PACKAGE_NAME);
+        Context context = spy(RuntimeEnvironment.application);
+        BatteryUtils.getInstance(context).reset();
+        doReturn(UID)
+                .when(mMockPackageManager)
+                .getPackageUid(PACKAGE_NAME, PackageManager.GET_META_DATA);
+
+        mController = new OptimizedPreferenceController(context, UID, PACKAGE_NAME);
         mPreference = new SelectorWithWidgetPreference(RuntimeEnvironment.application);
-        mController.mBatteryOptimizeUtils = mockBatteryOptimizeUtils;
+        mBatteryOptimizeUtils = spy(new BatteryOptimizeUtils(context, UID, PACKAGE_NAME));
+        mController.mBatteryOptimizeUtils = mBatteryOptimizeUtils;
     }
 
     @Test
     public void testUpdateState_invalidPackage_prefEnabled() {
-        when(mockBatteryOptimizeUtils.isDisabledForOptimizeModeOnly()).thenReturn(true);
+        when(mBatteryOptimizeUtils.isDisabledForOptimizeModeOnly()).thenReturn(true);
 
         mController.updateState(mPreference);
 
-        assertThat(mPreference.isEnabled()).isTrue();
+        assertThat(mPreference.isEnabled()).isFalse();
         assertThat(mPreference.isChecked()).isTrue();
     }
 
     @Test
     public void testUpdateState_isSystemOrDefaultAppAndOptimizeStates_prefChecked() {
-        when(mockBatteryOptimizeUtils.isDisabledForOptimizeModeOnly()).thenReturn(false);
-        when(mockBatteryOptimizeUtils.isSystemOrDefaultApp()).thenReturn(true);
-        when(mockBatteryOptimizeUtils.getAppOptimizationMode()).thenReturn(
-                BatteryOptimizeUtils.MODE_OPTIMIZED);
+        when(mBatteryOptimizeUtils.isDisabledForOptimizeModeOnly()).thenReturn(false);
+        when(mBatteryOptimizeUtils.isSystemOrDefaultApp()).thenReturn(true);
+        when(mBatteryOptimizeUtils.getAppOptimizationMode())
+                .thenReturn(BatteryOptimizeUtils.MODE_OPTIMIZED);
 
         mController.updateState(mPreference);
 
@@ -74,8 +86,8 @@ public class OptimizedPreferenceControllerTest {
 
     @Test
     public void testUpdateState_isSystemOrDefaultApp_prefUnchecked() {
-        when(mockBatteryOptimizeUtils.isDisabledForOptimizeModeOnly()).thenReturn(false);
-        when(mockBatteryOptimizeUtils.isSystemOrDefaultApp()).thenReturn(true);
+        when(mBatteryOptimizeUtils.isDisabledForOptimizeModeOnly()).thenReturn(false);
+        when(mBatteryOptimizeUtils.isSystemOrDefaultApp()).thenReturn(true);
 
         mController.updateState(mPreference);
 
@@ -85,9 +97,9 @@ public class OptimizedPreferenceControllerTest {
 
     @Test
     public void testUpdateState_isOptimizedStates_prefChecked() {
-        when(mockBatteryOptimizeUtils.isDisabledForOptimizeModeOnly()).thenReturn(false);
-        when(mockBatteryOptimizeUtils.getAppOptimizationMode()).thenReturn(
-                BatteryOptimizeUtils.MODE_OPTIMIZED);
+        when(mBatteryOptimizeUtils.isDisabledForOptimizeModeOnly()).thenReturn(false);
+        when(mBatteryOptimizeUtils.getAppOptimizationMode())
+                .thenReturn(BatteryOptimizeUtils.MODE_OPTIMIZED);
 
         mController.updateState(mPreference);
 
@@ -96,7 +108,7 @@ public class OptimizedPreferenceControllerTest {
 
     @Test
     public void testUpdateState_prefUnchecked() {
-        when(mockBatteryOptimizeUtils.isDisabledForOptimizeModeOnly()).thenReturn(false);
+        when(mBatteryOptimizeUtils.isDisabledForOptimizeModeOnly()).thenReturn(false);
 
         mController.updateState(mPreference);
 

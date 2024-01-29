@@ -23,12 +23,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.Preference.OnPreferenceClickListener;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -50,7 +51,8 @@ public class DrawOverlayDetails extends AppInfoWithHeader implements OnPreferenc
     // TODO: Break out this functionality into its own class.
     private AppStateOverlayBridge mOverlayBridge;
     private AppOpsManager mAppOpsManager;
-    private SwitchPreference mSwitchPref;
+    @Nullable
+    private TwoStatePreference mSwitchPref = null;
     private OverlayState mOverlayState;
 
     @Override
@@ -121,7 +123,7 @@ public class DrawOverlayDetails extends AppInfoWithHeader implements OnPreferenc
         int logCategory = newState ? SettingsEnums.APP_SPECIAL_PERMISSION_APPDRAW_ALLOW
                 : SettingsEnums.APP_SPECIAL_PERMISSION_APPDRAW_DENY;
         final MetricsFeatureProvider metricsFeatureProvider =
-                FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider();
+                FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
         metricsFeatureProvider.action(
                 metricsFeatureProvider.getAttribution(getActivity()),
                 logCategory,

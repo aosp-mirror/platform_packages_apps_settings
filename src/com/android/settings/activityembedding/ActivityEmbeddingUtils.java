@@ -53,7 +53,7 @@ public class ActivityEmbeddingUtils {
      * @see androidx.window.embedding.SplitController.SplitSupportStatus#SPLIT_UNAVAILABLE
      */
     private static final boolean SHOULD_ENABLE_LARGE_SCREEN_OPTIMIZATION =
-            SystemProperties.getBoolean("persist.settings.large_screen_opt.enabled", true);
+            SystemProperties.getBoolean("persist.settings.large_screen_opt.enabled", false);
 
     private static final String TAG = "ActivityEmbeddingUtils";
 

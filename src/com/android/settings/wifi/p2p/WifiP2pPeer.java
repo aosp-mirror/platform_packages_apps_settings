@@ -31,7 +31,7 @@ import com.android.settings.R;
 public class WifiP2pPeer extends Preference {
 
     private static final int FIXED_RSSI = 60;
-    private static final int[] STATE_SECURED = {R.attr.state_encrypted};
+    private static final int[] STATE_SECURED = {com.android.settingslib.R.attr.state_encrypted};
     public WifiP2pDevice device;
 
     @VisibleForTesting final int mRssi;

@@ -16,16 +16,12 @@
 
 package com.android.settings;
 
-import static android.provider.Settings.ACTION_SETTINGS_EMBED_DEEP_LINK_ACTIVITY;
-import static android.provider.Settings.EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_HIGHLIGHT_MENU_KEY;
-import static android.provider.Settings.EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_INTENT_URI;
-
+import static com.android.settings.activityembedding.EmbeddedDeepLinkUtils.tryStartMultiPaneDeepLink;
 import static com.android.settings.applications.appinfo.AppButtonsPreferenceController.KEY_REMOVE_TASK_WHEN_FINISHING;
 
 import android.app.ActionBar;
 import android.app.ActivityManager;
 import android.app.settings.SettingsEnums;
-import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -35,7 +31,6 @@ import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.content.pm.UserInfo;
 import android.content.res.Resources;
 import android.content.res.Resources.Theme;
 import android.graphics.drawable.Icon;
@@ -53,7 +48,6 @@ import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
@@ -67,7 +61,6 @@ import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.gateway.SettingsGateway;
 import com.android.settings.dashboard.DashboardFeatureProvider;
-import com.android.settings.homepage.DeepLinkHomepageActivityInternal;
 import com.android.settings.homepage.SettingsHomepageActivity;
 import com.android.settings.homepage.TopLevelSettings;
 import com.android.settings.overlay.FeatureFactory;
@@ -76,7 +69,6 @@ import com.android.settings.wfd.WifiDisplaySettings;
 import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settingslib.core.instrumentation.Instrumentable;
 import com.android.settingslib.core.instrumentation.SharedPreferencesLogger;
-import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.drawer.DashboardCategory;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
@@ -180,8 +172,6 @@ public class SettingsActivity extends SettingsBaseActivity
     private CharSequence mInitialTitle;
     private int mInitialTitleResId;
 
-    private BroadcastReceiver mDevelopmentSettingsListener;
-
     private boolean mBatteryPresent = true;
     private BroadcastReceiver mBatteryInfoReceiver = new BroadcastReceiver() {
         @Override
@@ -238,7 +228,7 @@ public class SettingsActivity extends SettingsBaseActivity
         String tag = getMetricsTag();
 
         return new SharedPreferencesLogger(this, tag,
-                FeatureFactory.getFactory(this).getMetricsFeatureProvider(),
+                FeatureFactory.getFeatureFactory().getMetricsFeatureProvider(),
                 lookupMetricsCategory());
     }
 
@@ -278,7 +268,8 @@ public class SettingsActivity extends SettingsBaseActivity
         getMetaData();
         final Intent intent = getIntent();
 
-        if (shouldShowTwoPaneDeepLink(intent) && tryStartTwoPaneDeepLink(intent)) {
+        if (shouldShowMultiPaneDeepLink(intent)
+                && tryStartMultiPaneDeepLink(this, intent, mHighlightMenuKey)) {
             finish();
             super.onCreate(savedState);
             return;
@@ -292,8 +283,8 @@ public class SettingsActivity extends SettingsBaseActivity
     protected void createUiFromIntent(Bundle savedState, Intent intent) {
         long startTime = System.currentTimeMillis();
 
-        final FeatureFactory factory = FeatureFactory.getFactory(this);
-        mDashboardFeatureProvider = factory.getDashboardFeatureProvider(this);
+        final FeatureFactory factory = FeatureFactory.getFeatureFactory();
+        mDashboardFeatureProvider = factory.getDashboardFeatureProvider();
 
         if (intent.hasExtra(EXTRA_UI_OPTIONS)) {
             getWindow().setUiOptions(intent.getIntExtra(EXTRA_UI_OPTIONS, 0));
@@ -330,14 +321,6 @@ public class SettingsActivity extends SettingsBaseActivity
             launchSettingFragment(initialFragmentName, intent);
         }
 
-        final boolean isActionBarButtonEnabled = isActionBarButtonEnabled(intent);
-
-        final ActionBar actionBar = getActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(isActionBarButtonEnabled);
-            actionBar.setHomeButtonEnabled(isActionBarButtonEnabled);
-            actionBar.setDisplayShowTitleEnabled(true);
-        }
         mMainSwitch = findViewById(R.id.switch_bar);
         if (mMainSwitch != null) {
             mMainSwitch.setMetricsCategory(lookupMetricsCategory());
@@ -395,6 +378,17 @@ public class SettingsActivity extends SettingsBaseActivity
         }
     }
 
+    private void setActionBarStatus() {
+        final boolean isActionBarButtonEnabled = isActionBarButtonEnabled(getIntent());
+
+        final ActionBar actionBar = getActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(isActionBarButtonEnabled);
+            actionBar.setHomeButtonEnabled(isActionBarButtonEnabled);
+            actionBar.setDisplayShowTitleEnabled(true);
+        }
+    }
+
     private boolean isActionBarButtonEnabled(Intent intent) {
         if (WizardManagerHelper.isAnySetupWizard(intent)) {
             return false;
@@ -412,73 +406,7 @@ public class SettingsActivity extends SettingsBaseActivity
             intent.getBooleanExtra(EXTRA_SHOW_FRAGMENT_AS_SUBSETTING, false);
     }
 
-    /**
-     * Returns the deep link trampoline intent for large screen devices.
-     */
-    public static Intent getTrampolineIntent(Intent intent, String highlightMenuKey) {
-        final Intent detailIntent = new Intent(intent);
-        // Guard against the arbitrary Intent injection.
-        if (detailIntent.getSelector() != null) {
-            detailIntent.setSelector(null);
-        }
-        // It's a deep link intent, SettingsHomepageActivity will set SplitPairRule and start it.
-        final Intent trampolineIntent = new Intent(ACTION_SETTINGS_EMBED_DEEP_LINK_ACTIVITY)
-                .setPackage(Utils.SETTINGS_PACKAGE_NAME)
-                .replaceExtras(detailIntent);
-
-        // Relay detail intent data to prevent failure of Intent#ParseUri.
-        // If Intent#getData() is not null, Intent#toUri will return an Uri which has the scheme of
-        // Intent#getData() and it may not be the scheme of an Intent.
-        trampolineIntent.putExtra(
-                SettingsHomepageActivity.EXTRA_SETTINGS_LARGE_SCREEN_DEEP_LINK_INTENT_DATA,
-                detailIntent.getData());
-        detailIntent.setData(null);
-
-        trampolineIntent.putExtra(EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_INTENT_URI,
-                detailIntent.toUri(Intent.URI_INTENT_SCHEME));
-
-        trampolineIntent.putExtra(EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_HIGHLIGHT_MENU_KEY,
-                highlightMenuKey);
-        trampolineIntent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
-        return trampolineIntent;
-    }
-
-    private boolean tryStartTwoPaneDeepLink(Intent intent) {
-        intent.putExtra(EXTRA_INITIAL_CALLING_PACKAGE, PasswordUtils.getCallingAppPackageName(
-                getActivityToken()));
-        final Intent trampolineIntent;
-        if (intent.getBooleanExtra(EXTRA_IS_FROM_SLICE, false)) {
-            // Get menu key for slice deep link case.
-            final String highlightMenuKey = intent.getStringExtra(
-                    EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_HIGHLIGHT_MENU_KEY);
-            if (!TextUtils.isEmpty(highlightMenuKey)) {
-                mHighlightMenuKey = highlightMenuKey;
-            }
-            trampolineIntent = getTrampolineIntent(intent, mHighlightMenuKey);
-            trampolineIntent.setClass(this, DeepLinkHomepageActivityInternal.class);
-        } else {
-            trampolineIntent = getTrampolineIntent(intent, mHighlightMenuKey);
-        }
-
-        try {
-            final UserManager um = getSystemService(UserManager.class);
-            final UserInfo userInfo = um.getUserInfo(getUser().getIdentifier());
-            if (userInfo.isManagedProfile()) {
-                trampolineIntent.setClass(this, DeepLinkHomepageActivityInternal.class)
-                        .putExtra(EXTRA_USER_HANDLE, getUser());
-                startActivityAsUser(trampolineIntent,
-                        um.getProfileParent(userInfo.id).getUserHandle());
-            } else {
-                startActivity(trampolineIntent);
-            }
-        } catch (ActivityNotFoundException e) {
-            Log.e(LOG_TAG, "Deep link homepage is not available to show 2-pane UI");
-            return false;
-        }
-        return true;
-    }
-
-    private boolean shouldShowTwoPaneDeepLink(Intent intent) {
+    private boolean shouldShowMultiPaneDeepLink(Intent intent) {
         if (!ActivityEmbeddingUtils.isEmbeddingActivityEnabled(this)) {
             return false;
         }
@@ -680,15 +608,7 @@ public class SettingsActivity extends SettingsBaseActivity
     @Override
     protected void onResume() {
         super.onResume();
-
-        mDevelopmentSettingsListener = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                updateTilesList();
-            }
-        };
-        LocalBroadcastManager.getInstance(this).registerReceiver(mDevelopmentSettingsListener,
-                new IntentFilter(DevelopmentSettingsEnabler.DEVELOPMENT_SETTINGS_CHANGED_ACTION));
+        setActionBarStatus();
 
         registerReceiver(mBatteryInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
 
@@ -698,8 +618,6 @@ public class SettingsActivity extends SettingsBaseActivity
     @Override
     protected void onPause() {
         super.onPause();
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(mDevelopmentSettingsListener);
-        mDevelopmentSettingsListener = null;
         unregisterReceiver(mBatteryInfoReceiver);
     }
 
@@ -846,19 +764,6 @@ public class SettingsActivity extends SettingsBaseActivity
         somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
                         Settings.DataUsageSummaryActivity.class.getName()),
                 Utils.isBandwidthControlEnabled(), isAdmin)
-                || somethingChanged;
-
-        somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
-                        Settings.UserSettingsActivity.class.getName()),
-                UserHandle.MU_ENABLED && UserManager.supportsMultipleUsers()
-                        && !Utils.isMonkeyRunning(), isAdmin)
-                || somethingChanged;
-
-        final boolean showDev = DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(this)
-                && !Utils.isMonkeyRunning();
-        somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
-                        Settings.DevelopmentSettingsDashboardActivity.class.getName()),
-                showDev, isAdmin)
                 || somethingChanged;
 
         somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,

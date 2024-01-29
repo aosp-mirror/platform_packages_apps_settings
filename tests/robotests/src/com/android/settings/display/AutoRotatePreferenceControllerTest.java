@@ -50,6 +50,9 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowSystemSettings.class,
+})
 public class AutoRotatePreferenceControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -187,15 +190,17 @@ public class AutoRotatePreferenceControllerTest {
     private void enableAutoRotationPreference() {
         when(mPackageManager.hasSystemFeature(anyString())).thenReturn(true);
         when(mContext.getResources().getBoolean(anyInt())).thenReturn(true);
-        Settings.System.putInt(mContentResolver,
-                Settings.System.HIDE_ROTATION_LOCK_TOGGLE_FOR_ACCESSIBILITY, 0);
+        Settings.System.putIntForUser(mContentResolver,
+                Settings.System.HIDE_ROTATION_LOCK_TOGGLE_FOR_ACCESSIBILITY, 0,
+                UserHandle.USER_CURRENT);
     }
 
     private void disableAutoRotationPreference() {
         when(mPackageManager.hasSystemFeature(anyString())).thenReturn(true);
         when(mContext.getResources().getBoolean(anyInt())).thenReturn(true);
-        Settings.System.putInt(mContentResolver,
-                Settings.System.HIDE_ROTATION_LOCK_TOGGLE_FOR_ACCESSIBILITY, 1);
+        Settings.System.putIntForUser(mContentResolver,
+                Settings.System.HIDE_ROTATION_LOCK_TOGGLE_FOR_ACCESSIBILITY, 1,
+                UserHandle.USER_CURRENT);
     }
 
     private void enableAutoRotation() {

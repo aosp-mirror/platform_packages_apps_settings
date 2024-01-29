@@ -16,11 +16,14 @@
 
 package com.android.settings.bluetooth;
 
+import static android.bluetooth.BluetoothDevice.METADATA_MODEL_NAME;
+
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.os.SystemProperties;
 import android.provider.DeviceConfig;
+import android.sysprop.BluetoothProperties;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -29,11 +32,13 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.SwitchPreferenceCompat;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.core.SettingsUIDeviceConfig;
 import com.android.settingslib.bluetooth.A2dpProfile;
+import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.HeadsetProfile;
 import com.android.settingslib.bluetooth.LeAudioProfile;
@@ -68,7 +73,8 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
 
     private static final String ENABLE_DUAL_MODE_AUDIO =
             "persist.bluetooth.enable_dual_mode_audio";
-    private static final String CONFIG_LE_AUDIO_ENABLED_BY_DEFAULT = "le_audio_enabled_by_default";
+    private static final String LE_AUDIO_CONNECTION_BY_DEFAULT_PROPERTY =
+            "ro.bluetooth.leaudio.le_audio_connection_by_default";
     private static final boolean LE_AUDIO_TOGGLE_VISIBLE_DEFAULT_VALUE = true;
     private static final String LE_AUDIO_TOGGLE_VISIBLE_PROPERTY =
             "persist.bluetooth.leaudio.toggle_visible";
@@ -107,29 +113,48 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
     /**
      * Creates a switch preference for the particular profile.
      *
-     * @param context The context to use when creating the SwitchPreference
+     * @param context The context to use when creating the TwoStatePreference
      * @param profile The profile for which the preference controls.
      * @return A preference that allows the user to choose whether this profile
      * will be connected to.
      */
-    private SwitchPreference createProfilePreference(Context context,
+    private TwoStatePreference createProfilePreference(Context context,
             LocalBluetoothProfile profile) {
-        SwitchPreference pref = new SwitchPreference(context);
+        TwoStatePreference pref = new SwitchPreferenceCompat(context);
         pref.setKey(profile.toString());
         pref.setTitle(profile.getNameResource(mCachedDevice.getDevice()));
         pref.setOnPreferenceClickListener(this);
         pref.setOrder(profile.getOrdinal());
 
-        if (profile instanceof LeAudioProfile) {
+        boolean isLeEnabledByDefault =
+                SystemProperties.getBoolean(LE_AUDIO_CONNECTION_BY_DEFAULT_PROPERTY, true);
+
+        if (profile instanceof LeAudioProfile && (!isLeEnabledByDefault || !isModelNameInAllowList(
+                BluetoothUtils.getStringMetaData(mCachedDevice.getDevice(),
+                        METADATA_MODEL_NAME)))) {
             pref.setSummary(R.string.device_details_leaudio_toggle_summary);
         }
         return pref;
     }
 
     /**
-     * Refreshes the state for an existing SwitchPreference for a profile.
+     * Checks if the device model name is in the LE audio allow list based on its model name.
+     *
+     * @param modelName The model name of the device to be checked.
+     * @return true if the device is in the allow list, false otherwise.
      */
-    private void refreshProfilePreference(SwitchPreference profilePref,
+    @VisibleForTesting
+    boolean isModelNameInAllowList(String modelName) {
+        if (modelName == null || modelName.isEmpty()) {
+            return false;
+        }
+        return BluetoothProperties.le_audio_allow_list().contains(modelName);
+    }
+
+    /**
+     * Refreshes the state for an existing TwoStatePreference for a profile.
+     */
+    private void refreshProfilePreference(TwoStatePreference profilePref,
             LocalBluetoothProfile profile) {
         BluetoothDevice device = mCachedDevice.getDevice();
         boolean isLeAudioEnabled = isLeAudioEnabled();
@@ -158,6 +183,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
         } else if (profile instanceof PbapServerProfile) {
             profilePref.setChecked(device.getPhonebookAccessPermission()
                     == BluetoothDevice.ACCESS_ALLOWED);
+            profilePref.setSummary(profile.getSummaryResourceForDevice(mCachedDevice.getDevice()));
         } else if (profile instanceof PanProfile) {
             profilePref.setChecked(profile.getConnectionStatus(device) ==
                     BluetoothProfile.STATE_CONNECTED);
@@ -167,8 +193,8 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
 
         if (profile instanceof A2dpProfile) {
             A2dpProfile a2dp = (A2dpProfile) profile;
-            SwitchPreference highQualityPref = (SwitchPreference) mProfilesContainer.findPreference(
-                    HIGH_QUALITY_AUDIO_PREF_TAG);
+            TwoStatePreference highQualityPref =
+                    mProfilesContainer.findPreference(HIGH_QUALITY_AUDIO_PREF_TAG);
             if (highQualityPref != null) {
                 if (a2dp.isEnabled(device) && a2dp.supportsHighQualityAudio(device)) {
                     highQualityPref.setVisible(true);
@@ -253,7 +279,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
                 return false;
             }
         }
-        SwitchPreference profilePref = (SwitchPreference) preference;
+        TwoStatePreference profilePref = (TwoStatePreference) preference;
         if (profilePref.isChecked()) {
             enableProfile(profile);
         } else {
@@ -327,14 +353,22 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
         }
 
         LocalBluetoothProfile asha = mProfileManager.getHearingAidProfile();
+        LocalBluetoothProfile broadcastAssistant =
+                mProfileManager.getLeAudioBroadcastAssistantProfile();
 
         for (CachedBluetoothDevice leAudioDevice : mProfileDeviceMap.get(profile.toString())) {
             Log.d(TAG,
                     "device:" + leAudioDevice.getDevice().getAnonymizedAddress()
-                            + "disable LE profile");
+                            + " disable LE profile");
             profile.setEnabled(leAudioDevice.getDevice(), false);
             if (asha != null) {
                 asha.setEnabled(leAudioDevice.getDevice(), true);
+            }
+            if (broadcastAssistant != null) {
+                Log.d(TAG,
+                        "device:" + leAudioDevice.getDevice().getAnonymizedAddress()
+                                + " disable LE broadcast assistant profile");
+                broadcastAssistant.setEnabled(leAudioDevice.getDevice(), false);
             }
         }
 
@@ -362,14 +396,22 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
             disableProfileBeforeUserEnablesLeAudio(mProfileManager.getHeadsetProfile());
         }
         LocalBluetoothProfile asha = mProfileManager.getHearingAidProfile();
+        LocalBluetoothProfile broadcastAssistant =
+                mProfileManager.getLeAudioBroadcastAssistantProfile();
 
         for (CachedBluetoothDevice leAudioDevice : mProfileDeviceMap.get(profile.toString())) {
             Log.d(TAG,
                     "device:" + leAudioDevice.getDevice().getAnonymizedAddress()
-                            + "enable LE profile");
+                            + " enable LE profile");
             profile.setEnabled(leAudioDevice.getDevice(), true);
             if (asha != null) {
                 asha.setEnabled(leAudioDevice.getDevice(), false);
+            }
+            if (broadcastAssistant != null) {
+                Log.d(TAG,
+                        "device:" + leAudioDevice.getDevice().getAnonymizedAddress()
+                                + " enable LE broadcast assistant profile");
+                broadcastAssistant.setEnabled(leAudioDevice.getDevice(), true);
             }
         }
     }
@@ -432,12 +474,12 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
         BluetoothDevice device = mCachedDevice.getDevice();
         A2dpProfile a2dp = (A2dpProfile) profile;
         if (a2dp.isProfileReady() && a2dp.supportsHighQualityAudio(device)) {
-            SwitchPreference highQualityAudioPref = new SwitchPreference(
+            TwoStatePreference highQualityAudioPref = new SwitchPreferenceCompat(
                     mProfilesContainer.getContext());
             highQualityAudioPref.setKey(HIGH_QUALITY_AUDIO_PREF_TAG);
             highQualityAudioPref.setVisible(false);
             highQualityAudioPref.setOnPreferenceClickListener(clickedPref -> {
-                boolean enable = ((SwitchPreference) clickedPref).isChecked();
+                boolean enable = ((TwoStatePreference) clickedPref).isChecked();
                 a2dp.setHighQualityAudioEnabled(mCachedDevice.getDevice(), enable);
                 return true;
             });
@@ -468,12 +510,12 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
                 SettingsUIDeviceConfig.BT_LE_AUDIO_CONTACT_SHARING_ENABLED, true);
         boolean isLeAudioToggleVisible = SystemProperties.getBoolean(
                 LE_AUDIO_TOGGLE_VISIBLE_PROPERTY, LE_AUDIO_TOGGLE_VISIBLE_DEFAULT_VALUE);
-        boolean isLeEnabledByDefault = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_BLUETOOTH,
-                CONFIG_LE_AUDIO_ENABLED_BY_DEFAULT, false);
+        boolean isLeEnabledByDefault =
+                SystemProperties.getBoolean(LE_AUDIO_CONNECTION_BY_DEFAULT_PROPERTY, true);
         mIsLeAudioToggleEnabled = isLeAudioToggleVisible || isLeEnabledByDefault;
         Log.d(TAG, "BT_LE_AUDIO_CONTACT_SHARING_ENABLED:" + mIsLeContactSharingEnabled
                 + ", LE_AUDIO_TOGGLE_VISIBLE_PROPERTY:" + isLeAudioToggleVisible
-                + ", CONFIG_LE_AUDIO_ENABLED_BY_DEFAULT:" + isLeEnabledByDefault);
+                + ", LE_AUDIO_CONNECTION_BY_DEFAULT_PROPERTY:" + isLeEnabledByDefault);
     }
 
     @Override
@@ -509,8 +551,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
             if (profile == null || !profile.isProfileReady()) {
                 continue;
             }
-            SwitchPreference pref = mProfilesContainer.findPreference(
-                    profile.toString());
+            TwoStatePreference pref = mProfilesContainer.findPreference(profile.toString());
             if (pref == null) {
                 pref = createProfilePreference(mProfilesContainer.getContext(), profile);
                 mProfilesContainer.addPreference(pref);
@@ -519,8 +560,8 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
             refreshProfilePreference(pref, profile);
         }
         for (LocalBluetoothProfile removedProfile : mCachedDevice.getRemovedProfiles()) {
-            final SwitchPreference pref = mProfilesContainer.findPreference(
-                    removedProfile.toString());
+            final TwoStatePreference pref =
+                    mProfilesContainer.findPreference(removedProfile.toString());
             if (pref != null) {
                 mProfilesContainer.removePreference(pref);
             }

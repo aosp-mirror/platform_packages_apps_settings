@@ -28,7 +28,7 @@
         android:persistent="false"
         android:title="@string/assistant_gesture_category_title">
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="assistant_gesture_corner_swipe"
             android:title="@string/assistant_corner_gesture_title"
             android:summary="@string/assistant_corner_gesture_summary"

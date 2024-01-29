@@ -36,20 +36,18 @@ public class SmartBatteryAction extends BatteryTipAction {
         mFragment = fragment;
     }
 
-    /**
-     * Handle the action when user clicks positive button
-     */
+    /** Handle the action when user clicks positive button */
     @Override
     public void handlePositiveAction(int metricsKey) {
-        mMetricsFeatureProvider.action(mContext,
-                SettingsEnums.ACTION_TIP_OPEN_SMART_BATTERY, metricsKey);
+        mMetricsFeatureProvider.action(
+                mContext, SettingsEnums.ACTION_TIP_OPEN_SMART_BATTERY, metricsKey);
         new SubSettingLauncher(mSettingsActivity)
-                .setSourceMetricsCategory(mFragment instanceof Instrumentable
-                        ? ((Instrumentable) mFragment).getMetricsCategory()
-                        : Instrumentable.METRICS_CATEGORY_UNKNOWN)
+                .setSourceMetricsCategory(
+                        mFragment instanceof Instrumentable
+                                ? ((Instrumentable) mFragment).getMetricsCategory()
+                                : Instrumentable.METRICS_CATEGORY_UNKNOWN)
                 .setDestination(SmartBatterySettings.class.getName())
                 .setTitleRes(R.string.smart_battery_manager_title)
                 .launch();
-
     }
 }

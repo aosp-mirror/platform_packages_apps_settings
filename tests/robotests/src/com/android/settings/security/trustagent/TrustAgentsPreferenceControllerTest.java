@@ -40,6 +40,7 @@ import com.android.settingslib.RestrictedSwitchPreference;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -105,6 +106,7 @@ public class TrustAgentsPreferenceControllerTest {
         assertThat(mPreferenceScreen.getPreferenceCount()).isEqualTo(0);
     }
 
+    @Ignore("b/313612480")
     @Test
     public void
     onStart_hasAUninstalledTrustAgent_shouldRemoveOnePreferenceAndLeaveTwoPreferences() {
@@ -125,6 +127,7 @@ public class TrustAgentsPreferenceControllerTest {
         assertThat(mPreferenceScreen.getPreferenceCount()).isEqualTo(2);
     }
 
+    @Ignore("b/313612480")
     @Test
     public void onStart_hasANewTrustAgent_shouldAddOnePreferenceAndHaveFourPreferences() {
         final List<ResolveInfo> availableAgents = createFakeAvailableAgents();
@@ -145,6 +148,7 @@ public class TrustAgentsPreferenceControllerTest {
         assertThat(mPreferenceScreen.getPreferenceCount()).isEqualTo(4);
     }
 
+    @Ignore("b/313612480")
     @Test
     public void onStart_hasUnrestrictedTrustAgent_shouldAddThreeChangeablePreferences() {
         ShadowRestrictedLockUtilsInternal.setKeyguardDisabledFeatures(0);
@@ -165,6 +169,7 @@ public class TrustAgentsPreferenceControllerTest {
         }
     }
 
+    @Ignore("b/313612480")
     @Test
     public void onStart_hasRestrictedTructAgent_shouldAddThreeUnchangeablePreferences() {
         final List<ResolveInfo> availableAgents = createFakeAvailableAgents();

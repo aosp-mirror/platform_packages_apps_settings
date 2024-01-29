@@ -57,7 +57,7 @@ public final class PeriodicJobManagerTest {
 
     @Test
     public void refreshJob_refreshesAlarmJob() {
-        mPeriodicJobManager.refreshJob(/*fromBoot=*/ false);
+        mPeriodicJobManager.refreshJob(/* fromBoot= */ false);
 
         final ShadowAlarmManager.ScheduledAlarm alarm =
                 mShadowAlarmManager.peekNextScheduledAlarm();
@@ -71,12 +71,13 @@ public final class PeriodicJobManagerTest {
     public void getTriggerAtMillis_withoutOffset_returnsExpectedResult() {
         long timeSlotUnit = PeriodicJobManager.DATA_FETCH_INTERVAL_MINUTE;
         // Sets the current time.
-        Duration currentTimeDuration =
-                Duration.ofMinutes(timeSlotUnit * 2);
+        Duration currentTimeDuration = Duration.ofMinutes(timeSlotUnit * 2);
         FakeClock fakeClock = new FakeClock();
         fakeClock.setCurrentTime(currentTimeDuration);
 
-        assertThat(PeriodicJobManager.getTriggerAtMillis(mContext, fakeClock, /*fromBoot=*/ false))
+        assertThat(
+                        PeriodicJobManager.getTriggerAtMillis(
+                                mContext, fakeClock, /* fromBoot= */ false))
                 .isEqualTo(currentTimeDuration.plusMinutes(timeSlotUnit).toMillis());
     }
 
@@ -86,10 +87,9 @@ public final class PeriodicJobManagerTest {
         // Sets the current time.
         Duration currentTimeDuration = Duration.ofMinutes(timeSlotUnit * 2);
         FakeClock fakeClock = new FakeClock();
-        fakeClock.setCurrentTime(
-                currentTimeDuration.plusMinutes(1L).plusMillis(51L));
+        fakeClock.setCurrentTime(currentTimeDuration.plusMinutes(1L).plusMillis(51L));
 
-        assertThat(PeriodicJobManager.getTriggerAtMillis(mContext, fakeClock, /*fromBoot=*/ true))
+        assertThat(PeriodicJobManager.getTriggerAtMillis(mContext, fakeClock, /* fromBoot= */ true))
                 .isEqualTo(currentTimeDuration.plusMinutes(timeSlotUnit).toMillis());
     }
 }

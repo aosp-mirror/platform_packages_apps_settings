@@ -19,6 +19,7 @@ package com.android.settings.accessibility;
 import android.content.Context;
 import android.provider.Settings;
 
+import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
 /** Controller that shows and updates the color correction summary. */
@@ -37,6 +38,9 @@ public class DaltonizerPreferenceController extends BasePreferenceController {
 
     @Override
     public CharSequence getSummary() {
-        return AccessibilityUtil.getSummary(mContext, DALTONIZER_ENABLED);
+        return AccessibilityUtil.getSummary(
+                mContext,
+                DALTONIZER_ENABLED,
+                R.string.daltonizer_state_on, R.string.daltonizer_state_off);
     }
 }

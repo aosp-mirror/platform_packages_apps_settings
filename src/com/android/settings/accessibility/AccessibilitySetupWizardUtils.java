@@ -21,12 +21,11 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.StringRes;
 
-import com.android.settings.R;
-
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupcompat.template.Mixin;
 import com.google.android.setupdesign.GlifPreferenceLayout;
+import com.google.android.setupdesign.R;
 import com.google.android.setupdesign.util.ThemeHelper;
 
 /** Provides utility methods to accessibility settings for Setup Wizard only. */

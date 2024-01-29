@@ -22,25 +22,20 @@ import android.os.Bundle;
 import android.util.ArrayMap;
 import android.util.SparseIntArray;
 
+import com.android.settings.fuelgauge.batteryusage.DetectRequestSourceType;
 import com.android.settings.fuelgauge.batteryusage.PowerAnomalyEventList;
 import com.android.settingslib.fuelgauge.Estimate;
 
 import java.util.List;
 import java.util.Set;
 
-/**
- * Feature Provider used in power usage
- */
+/** Feature Provider used in power usage */
 public interface PowerUsageFeatureProvider {
 
-    /**
-     * Check whether the battery usage button is enabled in the battery page
-     */
+    /** Check whether the battery usage button is enabled in the battery page */
     boolean isBatteryUsageEnabled();
 
-    /**
-     * Check whether the battery tips card is enabled in the battery usage page
-     */
+    /** Check whether the battery tips card is enabled in the battery usage page */
     boolean isBatteryTipsEnabled();
 
     /**
@@ -48,39 +43,25 @@ public interface PowerUsageFeatureProvider {
      */
     double getBatteryUsageListScreenOnTimeThresholdInMs();
 
-    /**
-     * Returns a threshold (mA) for the minimal comsume power in battery usage list
-     */
+    /** Returns a threshold (mA) for the minimal comsume power in battery usage list */
     double getBatteryUsageListConsumePowerThreshold();
 
-    /**
-     * Returns an allowlist of app names combined into the system-apps item
-     */
+    /** Returns an allowlist of app names combined into the system-apps item */
     List<String> getSystemAppsAllowlist();
 
-    /**
-     * Check whether location setting is enabled
-     */
+    /** Check whether location setting is enabled */
     boolean isLocationSettingEnabled(String[] packages);
 
-    /**
-     * Gets an {@link Intent} to show additional battery info
-     */
+    /** Gets an {@link Intent} to show additional battery info */
     Intent getAdditionalBatteryInfoIntent();
 
-    /**
-     * Check whether it is type service
-     */
+    /** Check whether it is type service */
     boolean isTypeService(int uid);
 
-    /**
-     * Check whether it is type system
-     */
+    /** Check whether it is type system */
     boolean isTypeSystem(int uid, String[] packages);
 
-    /**
-     * Returns an improved prediction for battery time remaining
-     */
+    /** Returns an improved prediction for battery time remaining */
     Estimate getEnhancedBatteryPrediction(Context context);
 
     /**
@@ -90,14 +71,10 @@ public interface PowerUsageFeatureProvider {
      */
     SparseIntArray getEnhancedBatteryPredictionCurve(Context context, long zeroTime);
 
-    /**
-     * Checks whether the toggle for enhanced battery predictions is enabled
-     */
+    /** Checks whether the toggle for enhanced battery predictions is enabled */
     boolean isEnhancedBatteryPredictionEnabled(Context context);
 
-    /**
-     * Checks whether debugging should be enabled for battery estimates
-     */
+    /** Checks whether debugging should be enabled for battery estimates */
     boolean isEstimateDebugEnabled();
 
     /**
@@ -115,88 +92,52 @@ public interface PowerUsageFeatureProvider {
      */
     String getOldEstimateDebugString(String timeRemaining);
 
-    /**
-     * Checks whether smart battery feature is supported in this device
-     */
+    /** Checks whether smart battery feature is supported in this device */
     boolean isSmartBatterySupported();
 
-    /**
-     * Checks whether we should show usage information by slots or not
-     */
+    /** Checks whether we should show usage information by slots or not */
     boolean isChartGraphSlotsEnabled(Context context);
 
-    /**
-     * Returns {@code true} if current defender mode is extra defend
-     */
+    /** Returns {@code true} if current defender mode is extra defend */
     boolean isExtraDefend();
 
-    /**
-     * Returns {@code true} if delay the hourly job when device is booting
-     */
+    /** Returns {@code true} if delay the hourly job when device is booting */
     boolean delayHourlyJobWhenBooting();
 
-    /**
-     * Insert settings configuration data for anomaly detection
-     */
-    void insertSettingsData(Context context, double displayDrain);
+    /** Returns {@link Bundle} for settings anomaly detection result */
+    PowerAnomalyEventList detectSettingsAnomaly(
+            Context context, double displayDrain, DetectRequestSourceType detectRequestSourceType);
 
-    /**
-     * Returns {@link Bundle} for settings anomaly detection result
-     */
-    PowerAnomalyEventList detectSettingsAnomaly(Context context, double displayDrain);
-
-    /**
-     * Gets an intent for one time bypass charge limited to resume charging.
-     */
+    /** Gets an intent for one time bypass charge limited to resume charging. */
     Intent getResumeChargeIntent(boolean isDockDefender);
 
-    /**
-     * Returns the intent action used to mark as the full charge start event.
-     */
+    /** Returns the intent action used to mark as the full charge start event. */
     String getFullChargeIntentAction();
 
-    /**
-     * Returns {@link Set} for the system component ids which are combined into others
-     */
+    /** Returns {@link Set} for the system component ids which are combined into others */
     Set<Integer> getOthersSystemComponentSet();
 
-    /**
-     * Returns {@link Set} for the custom system component names which are combined into others
-     */
+    /** Returns {@link Set} for the custom system component names which are combined into others */
     Set<String> getOthersCustomComponentNameSet();
 
-    /**
-     * Returns {@link Set} for hiding system component ids in the usage screen
-     */
+    /** Returns {@link Set} for hiding system component ids in the usage screen */
     Set<Integer> getHideSystemComponentSet();
 
-    /**
-     * Returns {@link Set} for hiding application package names in the usage screen
-     */
+    /** Returns {@link Set} for hiding application package names in the usage screen */
     Set<String> getHideApplicationSet();
 
-    /**
-     * Returns {@link Set} for hiding applications background usage time
-     */
+    /** Returns {@link Set} for hiding applications background usage time */
     Set<String> getHideBackgroundUsageTimeSet();
 
-    /**
-     * Returns {@link Set} for ignoring task root class names for screen on time
-     */
+    /** Returns {@link Set} for ignoring task root class names for screen on time */
     Set<String> getIgnoreScreenOnTimeTaskRootSet();
 
-    /**
-     * Returns the customized device build information for data backup
-     */
+    /** Returns the customized device build information for data backup */
     String getBuildMetadata1(Context context);
 
-    /**
-     * Returns the customized device build information for data backup
-     */
+    /** Returns the customized device build information for data backup */
     String getBuildMetadata2(Context context);
 
-    /**
-     * Whether the app optimization mode is valid to restore
-     */
+    /** Whether the app optimization mode is valid to restore */
     boolean isValidToRestoreOptimizationMode(ArrayMap<String, String> deviceInfoMap);
 }

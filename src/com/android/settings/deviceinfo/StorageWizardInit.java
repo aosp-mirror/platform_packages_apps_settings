@@ -133,7 +133,7 @@ public class StorageWizardInit extends StorageWizardBase {
     public void onNavigateExternal(View view) {
         if (view != null) {
             // User made an explicit choice for external
-            FeatureFactory.getFactory(this).getMetricsFeatureProvider().action(this,
+            FeatureFactory.getFeatureFactory().getMetricsFeatureProvider().action(this,
                 SettingsEnums.ACTION_STORAGE_INIT_EXTERNAL);
         }
         StorageWizardFormatConfirm.showPublic(this, mDisk.getId());
@@ -142,7 +142,7 @@ public class StorageWizardInit extends StorageWizardBase {
     public void onNavigateInternal(View view) {
         if (view != null) {
             // User made an explicit choice for internal
-            FeatureFactory.getFactory(this).getMetricsFeatureProvider().action(this,
+            FeatureFactory.getFeatureFactory().getMetricsFeatureProvider().action(this,
                 SettingsEnums.ACTION_STORAGE_INIT_INTERNAL);
         }
         StorageWizardFormatConfirm.showPrivate(this, mDisk.getId());

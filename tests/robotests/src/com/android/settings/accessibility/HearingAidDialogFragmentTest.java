@@ -34,7 +34,6 @@ import androidx.fragment.app.FragmentActivity;
 import com.android.settings.SettingsActivity;
 import com.android.settings.bluetooth.BluetoothPairingDetail;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
-import com.android.settings.utils.ActivityControllerWrapper;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -45,10 +44,15 @@ import org.mockito.junit.MockitoRule;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
+import org.robolectric.annotation.LooperMode;
 
 /** Tests for {@link HearingAidDialogFragment}. */
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = ShadowAlertDialogCompat.class)
+@LooperMode(LooperMode.Mode.LEGACY)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+        ShadowAlertDialogCompat.class,
+})
 public class HearingAidDialogFragmentTest {
 
     @Rule
@@ -60,8 +64,7 @@ public class HearingAidDialogFragmentTest {
     @Before
     public void setUpTestFragment() {
         mFragment = spy(HearingAidDialogFragment.newInstance());
-        mActivity = (FragmentActivity) ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(FragmentActivity.class)).get();
+        mActivity = Robolectric.setupActivity(FragmentActivity.class);
         when(mFragment.getActivity()).thenReturn(mActivity);
     }
 

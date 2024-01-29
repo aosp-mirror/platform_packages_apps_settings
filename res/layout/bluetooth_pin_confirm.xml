@@ -76,15 +76,37 @@
             android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Body1"
             android:visibility="gone" />
 
-        <CheckBox
-            android:id="@+id/phonebook_sharing_message_confirm_pin"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/phonebook_sharing"
             android:layout_height="wrap_content"
-            android:minHeight="@dimen/min_tap_target_size"
+            android:layout_width="match_parent"
             android:layout_marginStart="@dimen/bluetooth_dialog_padding"
             android:layout_marginEnd="@dimen/bluetooth_dialog_padding"
-            android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Body1" />
-
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="10dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/bluetooth_pairing_phonebook_toggle_text"
+                    android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Body1" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/bluetooth_pairing_phonebook_toggle_details"
+                    android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Caption" />
+            </LinearLayout>
+            <Switch
+                android:id="@+id/phonebook_sharing_message_confirm_pin"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0"
+                android:gravity="center_vertical" />
+        </LinearLayout>
     </LinearLayout>
 
 </ScrollView>

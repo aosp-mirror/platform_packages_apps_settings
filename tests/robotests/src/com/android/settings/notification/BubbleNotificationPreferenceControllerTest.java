@@ -35,6 +35,7 @@ import android.widget.Switch;
 
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.testutils.shadow.ShadowActivityManager;
 import com.android.settingslib.testutils.shadow.ShadowInteractionJankMonitor;
 import com.android.settingslib.widget.MainSwitchPreference;
 
@@ -48,10 +49,12 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
-import org.robolectric.shadows.ShadowActivityManager;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowInteractionJankMonitor.class})
+@Config(shadows = {
+        ShadowInteractionJankMonitor.class,
+        ShadowActivityManager.class,
+})
 public class BubbleNotificationPreferenceControllerTest {
 
     private Context mContext;
@@ -109,7 +112,7 @@ public class BubbleNotificationPreferenceControllerTest {
     public void onSwitchChanged_true_settingIsOff_flagShouldOn() {
         Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, OFF);
 
-        mController.onSwitchChanged(mSwitch, true);
+        mController.onCheckedChanged(mSwitch, true);
 
         assertThat(Settings.Global.getInt(mContext.getContentResolver(),
                 NOTIFICATION_BUBBLES, OFF)).isEqualTo(ON);
@@ -119,7 +122,7 @@ public class BubbleNotificationPreferenceControllerTest {
     public void onSwitchChanged_false_settingIsOn_flagShouldOff() {
         Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, ON);
 
-        mController.onSwitchChanged(mSwitch, false);
+        mController.onCheckedChanged(mSwitch, false);
 
         assertThat(Settings.Global.getInt(mContext.getContentResolver(),
                 NOTIFICATION_BUBBLES, ON)).isEqualTo(OFF);

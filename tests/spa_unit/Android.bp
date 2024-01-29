@@ -27,13 +27,14 @@ android_test {
     srcs: [
         "src/**/*.kt",
     ],
-
+    use_resource_processor: true,
     static_libs: [
         "Settings-core",
         "SpaLibTestUtils",
         "androidx.compose.runtime_runtime",
         "androidx.test.ext.junit",
         "androidx.test.runner",
+        "flag-junit",
         "mockito-target-extended-minus-junit4",
     ],
     jni_libs: [

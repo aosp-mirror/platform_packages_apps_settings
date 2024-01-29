@@ -43,7 +43,6 @@ import android.net.NetworkRequest;
 import android.os.Bundle;
 
 import com.android.settings.R;
-import com.android.settings.utils.ActivityControllerWrapper;
 
 import org.junit.Before;
 import org.junit.Ignore;
@@ -57,7 +56,7 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@Ignore
+@Ignore("b/314867581")
 @RunWith(RobolectricTestRunner.class)
 public class WifiNoInternetDialogTest {
 
@@ -87,8 +86,8 @@ public class WifiNoInternetDialogTest {
 
     @Test
     public void launchActivity_noIntentAction_shouldNotFatalException() {
-        ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(WifiNoInternetDialog.class)).get();
+        WifiNoInternetDialog wifiNoInternetDialog =
+                Robolectric.setupActivity(WifiNoInternetDialog.class);
     }
 
     @Test
@@ -276,7 +275,6 @@ public class WifiNoInternetDialogTest {
                 RuntimeEnvironment.application.getPackageName(),
                 WifiNoInternetDialog.class.getName());
         intent.putExtra(ConnectivityManager.EXTRA_NETWORK, network);
-        mActivity = spy((WifiNoInternetDialog) ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(WifiNoInternetDialog.class, intent)).get());
+        mActivity = spy(Robolectric.buildActivity(WifiNoInternetDialog.class, intent).get());
     }
 }
