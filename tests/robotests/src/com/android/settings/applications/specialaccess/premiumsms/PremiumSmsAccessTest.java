@@ -124,8 +124,6 @@ public class PremiumSmsAccessTest {
 
         doAnswer((invocation) -> {
             final RestrictedDropDownPreference preference = invocation.getArgument(0);
-            final ApplicationsState.AppEntry entry = ReflectionHelpers
-                    .getField(preference, "mAppEntry");
             // Verify preference is disabled by ecm and the summary is changed accordingly.
             assertThat(preference.isDisabledByEcm()).isTrue();
             assertThat(preference.getSummary().toString()).isEqualTo(
@@ -156,13 +154,11 @@ public class PremiumSmsAccessTest {
         doReturn(preferenceManager).when(mFragment).getPreferenceManager();
         doReturn(preferenceScreen).when(mFragment).getPreferenceScreen();
         final String testPkg = "com.example.enabled";
-        doNothing().when(mContext).startActivity(any());
         ShadowRestrictedLockUtilsInternal.setEcmRestrictedPkgs();
+
 
         doAnswer((invocation) -> {
             final RestrictedDropDownPreference preference = invocation.getArgument(0);
-            final ApplicationsState.AppEntry entry = ReflectionHelpers
-                    .getField(preference, "mAppEntry");
             assertThat(preference.isDisabledByEcm()).isFalse();
             assertThat(preference.getSummary().toString()).isEqualTo("");
             preference.onBindViewHolder(holder);
@@ -195,4 +191,3 @@ public class PremiumSmsAccessTest {
         return appEntries;
     }
 }
-

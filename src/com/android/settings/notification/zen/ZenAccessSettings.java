@@ -134,7 +134,7 @@ public class ZenAccessSettings extends EmptyTextSettings implements
                 // Not auto approved, update summary according to notification backend.
                 pref.setSummary(getPreferenceSummary(pkg));
                 pref.checkEcmRestrictionAndSetDisabled(
-                        android.Manifest.permission.MANAGE_NOTIFICATIONS, app.packageName, app.uid);
+                        android.Manifest.permission.MANAGE_NOTIFICATIONS, app.packageName);
             }
             pref.setOnPreferenceClickListener(preference -> {
                 AppInfoBase.startAppInfoFragment(

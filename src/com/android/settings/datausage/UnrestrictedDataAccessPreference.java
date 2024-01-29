@@ -20,6 +20,7 @@ import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceViewHolder;
@@ -37,7 +38,7 @@ import com.android.settingslib.widget.AppSwitchPreference;
 
 public class UnrestrictedDataAccessPreference extends AppSwitchPreference implements
         DataSaverBackend.Listener {
-    private static final String ECM_RESTRICTION_KEY = "android:unrestricted_data_access";
+    private static final String ECM_SETTING_IDENTIFIER = "android:unrestricted_data_access";
 
     private final ApplicationsState mApplicationsState;
     private final AppEntry mEntry;
@@ -60,8 +61,7 @@ public class UnrestrictedDataAccessPreference extends AppSwitchPreference implem
         mParentFragment = parentFragment;
         setDisabledByAdmin(checkIfMeteredDataUsageUserControlDisabled(
                 context, entry.info.packageName, UserHandle.getUserId(entry.info.uid)));
-        mHelper.checkEcmRestrictionAndSetDisabled(ECM_RESTRICTION_KEY, entry.info.packageName,
-                entry.info.uid);
+        mHelper.checkEcmRestrictionAndSetDisabled(ECM_SETTING_IDENTIFIER, entry.info.packageName);
         updateState();
         setKey(generateKey(mEntry));
 
@@ -183,10 +183,9 @@ public class UnrestrictedDataAccessPreference extends AppSwitchPreference implem
      * Checks if the given setting is subject to Enhanced Confirmation Mode restrictions for this
      * package. Marks the preference as disabled if so.
      * @param packageName the package to check the restriction for
-     * @param uid the uid of the package
      */
-    public void checkEcmRestrictionAndSetDisabled(@Nullable String packageName, int uid) {
-        mHelper.checkEcmRestrictionAndSetDisabled(ECM_RESTRICTION_KEY, packageName, uid);
+    public void checkEcmRestrictionAndSetDisabled(@NonNull String packageName) {
+        mHelper.checkEcmRestrictionAndSetDisabled(ECM_SETTING_IDENTIFIER, packageName);
     }
 
     // Sets UI state based on allowlist/denylist status.

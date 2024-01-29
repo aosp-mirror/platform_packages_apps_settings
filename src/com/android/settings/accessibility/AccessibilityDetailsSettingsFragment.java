@@ -43,6 +43,7 @@ import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.accessibility.AccessibilityUtils;
 
 import java.util.List;
@@ -164,16 +165,9 @@ public class AccessibilityDetailsSettingsFragment extends InstrumentedFragment {
         if (permittedServices != null && !permittedServices.contains(packageName)) {
             return false;
         }
-        try {
-            final int mode = mAppOps.noteOpNoThrow(AppOpsManager.OP_ACCESS_RESTRICTED_SETTINGS,
-                    uid, packageName);
-            final boolean ecmEnabled = getContext().getResources().getBoolean(
-                    com.android.internal.R.bool.config_enhancedConfirmationModeEnabled);
-            return !ecmEnabled || mode == AppOpsManager.MODE_ALLOWED;
-        } catch (Exception e) {
-            // Fallback in case if app ops is not available in testing.
-            return true;
-        }
+
+        return !RestrictedLockUtilsInternal.isEnhancedConfirmationRestricted(getContext(),
+                packageName, AppOpsManager.OPSTR_BIND_ACCESSIBILITY_SERVICE);
     }
 
     private AccessibilityServiceInfo getAccessibilityServiceInfo(ComponentName componentName) {

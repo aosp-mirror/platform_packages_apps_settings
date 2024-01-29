@@ -153,8 +153,7 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
             });
             pref.setKey(cn.flattenToString());
             if (!pref.isChecked()) {
-                pref.checkEcmRestrictionAndSetDisabled(mConfig.permission, service.packageName,
-                        service.applicationInfo.uid);
+                pref.checkEcmRestrictionAndSetDisabled(mConfig.permission, service.packageName);
             }
             screen.addPreference(pref);
         }

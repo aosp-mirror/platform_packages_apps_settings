@@ -21,7 +21,6 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.ArgumentMatchers.isNull;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -37,6 +36,9 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.platform.test.annotations.EnableFlags;
+import android.platform.test.annotations.RequiresFlagsDisabled;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.test.core.app.ApplicationProvider;
@@ -46,6 +48,7 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.RestrictedSwitchPreference;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -59,6 +62,8 @@ public class ApprovalPreferenceControllerTest {
     @Rule
     public final SetFlagsRule mSetFlagsRule = new SetFlagsRule(
             SetFlagsRule.DefaultInitValueType.DEVICE_DEFAULT);
+    @Rule
+    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
 
     private Context mContext;
     private FakeFeatureFactory mFeatureFactory;
@@ -123,6 +128,7 @@ public class ApprovalPreferenceControllerTest {
     }
 
     @Test
+    @RequiresFlagsDisabled(android.security.Flags.FLAG_EXTEND_ECM_TO_ALL_SETTINGS)
     public void updateState_checked() {
         when(mAppOpsManager.noteOpNoThrow(anyInt(), anyInt(), anyString())).thenReturn(
                 AppOpsManager.MODE_ALLOWED);
@@ -137,24 +143,26 @@ public class ApprovalPreferenceControllerTest {
     }
 
     @Test
+    @RequiresFlagsDisabled(android.security.Flags.FLAG_EXTEND_ECM_TO_ALL_SETTINGS)
     public void restrictedSettings_appOpsDisabled() {
-        when(mAppOpsManager.noteOpNoThrow(anyInt(), anyInt(), anyString(), isNull(), isNull()))
+        Assert.assertFalse(android.security.Flags.extendEcmToAllSettings());
+        when(mAppOpsManager.noteOpNoThrow(anyInt(), anyInt(), anyString()))
                 .thenReturn(AppOpsManager.MODE_ERRORED);
         doReturn(mAppOpsManager).when(mContext).getSystemService(Context.APP_OPS_SERVICE);
         when(mNm.isNotificationListenerAccessGranted(mCn)).thenReturn(false);
         RestrictedSwitchPreference pref = new RestrictedSwitchPreference(
                 mContext);
         pref.setAppOps(mAppOpsManager);
-        mController.setAppOpStr(AppOpsManager.OPSTR_ACCESS_NOTIFICATIONS);
+        mController.setSettingIdentifier(AppOpsManager.OPSTR_ACCESS_NOTIFICATIONS);
 
         mController.updateState(pref);
 
-        verify(mContext).getSystemService(Context.APP_OPS_SERVICE);
-        verify(mAppOpsManager).noteOpNoThrow(anyInt(), anyInt(), anyString(), isNull(), isNull());
+        verify(mAppOpsManager).noteOpNoThrow(anyInt(), anyInt(), anyString());
         assertThat(pref.isEnabled()).isFalse();
     }
 
     @Test
+    @RequiresFlagsDisabled(android.security.Flags.FLAG_EXTEND_ECM_TO_ALL_SETTINGS)
     public void restrictedSettings_serviceAlreadyEnabled() {
         when(mAppOpsManager.noteOpNoThrow(anyInt(), anyInt(), anyString())).thenReturn(
                 AppOpsManager.MODE_ERRORED);

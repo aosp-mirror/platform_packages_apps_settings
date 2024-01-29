@@ -226,8 +226,7 @@ public class PremiumSmsAccess extends EmptyTextSettings
             });
             setValue(String.valueOf(getCurrentValue()));
             setSummary("%s");
-            this.checkEcmRestrictionAndSetDisabled(ECM_RESTRICTION_KEY, appEntry.info.packageName,
-                    appEntry.info.uid);
+            this.checkEcmRestrictionAndSetDisabled(ECM_RESTRICTION_KEY, appEntry.info.packageName);
         }
 
         private int getCurrentValue() {

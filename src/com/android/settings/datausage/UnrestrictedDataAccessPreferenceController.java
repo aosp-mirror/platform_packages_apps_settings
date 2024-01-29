@@ -151,8 +151,7 @@ public class UnrestrictedDataAccessPreferenceController extends BasePreferenceCo
             } else {
                 preference.setDisabledByAdmin(checkIfMeteredDataUsageUserControlDisabled(mContext,
                         entry.info.packageName, UserHandle.getUserId(entry.info.uid)));
-                preference.checkEcmRestrictionAndSetDisabled(entry.info.packageName,
-                        entry.info.uid);
+                preference.checkEcmRestrictionAndSetDisabled(entry.info.packageName);
                 preference.updateState();
             }
             preference.setOrder(i);

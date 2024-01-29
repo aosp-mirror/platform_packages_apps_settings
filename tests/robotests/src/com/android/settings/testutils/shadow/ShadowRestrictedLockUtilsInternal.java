@@ -16,7 +16,6 @@
 package com.android.settings.testutils.shadow;
 
 import android.annotation.NonNull;
-import android.annotation.Nullable;
 import android.annotation.UserIdInt;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
@@ -122,14 +121,18 @@ public class ShadowRestrictedLockUtilsInternal {
 
     @Implementation
     public static Intent checkIfRequiresEnhancedConfirmation(@NonNull Context context,
-            @NonNull String restriction,
-            int uid,
-            @Nullable String packageName) {
+            @NonNull String settingIdentifier, @NonNull String packageName) {
         if (ArrayUtils.contains(sEcmRestrictedPkgs, packageName)) {
             return new Intent();
         }
 
         return null;
+    }
+
+    @Implementation
+    public static boolean isEnhancedConfirmationRestricted(@NonNull Context context,
+            @NonNull String settingIdentifier, @NonNull String packageName) {
+        return false;
     }
 
     public static void setRestricted(boolean restricted) {

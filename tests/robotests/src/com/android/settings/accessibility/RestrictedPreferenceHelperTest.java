@@ -31,8 +31,10 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
+import android.platform.test.annotations.RequiresFlagsEnabled;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.platform.test.flag.junit.SetFlagsRule;
-import android.security.Flags;
 
 import androidx.test.core.app.ApplicationProvider;
 
@@ -81,6 +83,8 @@ public class RestrictedPreferenceHelperTest {
 
     @Rule
     public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+    @Rule
+    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
 
     @Test
     public void createAccessibilityServicePreferenceList_hasOneInfo_containsSameKey() {
@@ -96,8 +100,9 @@ public class RestrictedPreferenceHelperTest {
     }
 
     @Test
+    @RequiresFlagsEnabled(value = {android.security.Flags.FLAG_EXTEND_ECM_TO_ALL_SETTINGS,
+            android.permission.flags.Flags.FLAG_ENHANCED_CONFIRMATION_MODE_APIS_ENABLED})
     public void createAccessibilityServicePreferenceList_ecmRestricted_prefIsEcmRestricted() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_EXTEND_ECM_TO_ALL_SETTINGS);
         ShadowRestrictedLockUtilsInternal.setEcmRestrictedPkgs(
                 mServiceInfo.getResolveInfo().serviceInfo.packageName);
         final List<AccessibilityServiceInfo> infoList = new ArrayList<>(
@@ -111,8 +116,9 @@ public class RestrictedPreferenceHelperTest {
     }
 
     @Test
+    @RequiresFlagsEnabled(value = {android.security.Flags.FLAG_EXTEND_ECM_TO_ALL_SETTINGS,
+            android.permission.flags.Flags.FLAG_ENHANCED_CONFIRMATION_MODE_APIS_ENABLED})
     public void createAccessibilityServicePreferenceList_ecmNotRestricted_prefIsNotEcmRestricted() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_EXTEND_ECM_TO_ALL_SETTINGS);
         ShadowRestrictedLockUtilsInternal.setEcmRestrictedPkgs();
         final List<AccessibilityServiceInfo> infoList = new ArrayList<>(
                 singletonList(mServiceInfo));
