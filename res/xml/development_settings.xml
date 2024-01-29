@@ -75,6 +75,13 @@
             android:entryValues="@array/hdcp_checking_values" />
 
         <ListPreference
+            android:key="bt_stack_log_level"
+            android:title="@string/bt_stack_log_level"
+            android:dialogTitle="@string/bt_stack_log_level_summary"
+            android:entries="@array/bt_stack_log_level_entries"
+            android:entryValues="@array/bt_stack_log_level_values" />
+
+        <ListPreference
             android:key="bt_hci_snoop_log"
             android:title="@string/bt_hci_snoop_log"
             android:dialogTitle="@string/bt_hci_snoop_log_summary"
