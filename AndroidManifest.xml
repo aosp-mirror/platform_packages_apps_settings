@@ -4403,9 +4403,12 @@
         <activity android:name=".applications.credentials.CredentialsPickerActivity"
                 android:excludeFromRecents="true"
                 android:launchMode="singleInstance"
-                android:exported="false">
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.applications.credentials.DefaultCombinedPicker" />
+                android:exported="true">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.REQUEST_SET_AUTOFILL_SERVICE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="package" />
+            </intent-filter>
         </activity>
 
         <activity
@@ -4548,19 +4551,6 @@
                 android:excludeFromRecents="true"
                 android:launchMode="singleInstance"
                 android:exported="false">
-        </activity>
-
-        <activity android:name=".applications.autofill.AutofillPickerTrampolineActivity"
-                android:theme="@android:style/Theme.NoDisplay"
-                android:excludeFromRecents="true"
-                android:launchMode="singleInstance"
-                android:exported="true"
-                android:label="@string/autofill_app">
-            <intent-filter android:priority="1">
-                <action android:name="android.settings.REQUEST_SET_AUTOFILL_SERVICE" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:scheme="package" />
-            </intent-filter>
         </activity>
 
         <activity android:name="Settings$AdvancedConnectedDeviceActivity"
