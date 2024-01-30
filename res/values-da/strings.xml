@@ -552,28 +552,20 @@
     <string name="private_space_one_lock_summary" msgid="2759953747682959371">"Du kan låse op for det private område på samme måde, som du låser din enhed op, eller ved at vælge en anden lås"</string>
     <string name="private_space_screen_lock_title" msgid="8679383894967823163">"Brug enhedens skærmlås"</string>
     <string name="private_space_biometric_title" msgid="3934339826674553174">"Ansigtsoplåsning og fingeroplåsning"</string>
-    <!-- no translation found for private_space_fingerprint_title (5989254643211889931) -->
-    <skip />
-    <!-- no translation found for private_space_face_title (3290402865367663079) -->
-    <skip />
+    <string name="private_space_fingerprint_title" msgid="5989254643211889931">"Fingeroplåsning"</string>
+    <string name="private_space_face_title" msgid="3290402865367663079">"Ansigtsoplåsning"</string>
     <string name="private_space_biometric_summary" msgid="4403837276018724581">"Tryk for at konfigurere"</string>
     <string name="private_space_fingerprint_unlock_title" msgid="5804023571114910034">"Fingeroplåsning til privat område"</string>
     <string name="private_space_face_unlock_title" msgid="6613018437620070183">"Ansigtsoplåsning til privat område"</string>
     <string name="private_space_category_ways_to_unlock" msgid="4356631225316950046">"Muligheder for oplåsning"</string>
     <string name="private_space_screen_lock_summary" msgid="394837965365561070">"Den samme som enhedens skærmlås"</string>
     <string name="private_space_new_lock_title" msgid="7306873010565337671">"Vil du vælge en ny lås til det private område?"</string>
-    <!-- no translation found for private_space_auto_lock_title (4757097802686131305) -->
-    <skip />
-    <!-- no translation found for private_space_auto_lock_page_title (2993714305725968632) -->
-    <skip />
-    <!-- no translation found for private_space_auto_lock_page_summary (8679844515655838654) -->
-    <skip />
-    <!-- no translation found for private_space_auto_lock_every_time (1215061855836002830) -->
-    <skip />
-    <!-- no translation found for private_space_auto_lock_after_inactivity (1748673030841528649) -->
-    <skip />
-    <!-- no translation found for private_space_auto_lock_never (595014527119778873) -->
-    <skip />
+    <string name="private_space_auto_lock_title" msgid="4757097802686131305">"Lås automatisk"</string>
+    <string name="private_space_auto_lock_page_title" msgid="2993714305725968632">"Lås det private område automatisk"</string>
+    <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"Du kan låse dit private område automatisk, hvis du ikke har brugt din enhed i et stykke tid"</string>
+    <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"Hver gang enheden låses"</string>
+    <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"Efter 5 minutters inaktivitet"</string>
+    <string name="private_space_auto_lock_never" msgid="595014527119778873">"Aldrig"</string>
     <string name="private_space_hide_title" msgid="8687034008994037610">"Skjul, når det er låst"</string>
     <string name="privatespace_hide_page_title" msgid="972581369094289386">"Skjul det private område, når det er låst"</string>
     <string name="privatespace_hide_page_summary" msgid="1052569521186403642">"Hvis andre ikke må kende til det private område på din enhed, kan du skjule det på listen over apps"</string>
@@ -587,8 +579,7 @@
     <string name="private_space_delete_title" msgid="3075645119800272800">"Slet det private område"</string>
     <string name="private_space_deleted" msgid="7825768516955610897">"Det private område er slettet"</string>
     <string name="private_space_delete_failed" msgid="8500755484258565011">"Det private område kunne ikke slettes"</string>
-    <!-- no translation found for private_space_unlocked (9091600948712932046) -->
-    <skip />
+    <string name="private_space_unlocked" msgid="9091600948712932046">"Privat område er låst op"</string>
     <string name="no_device_lock_title" msgid="1078223464721029954">"Konfigurer en skærmlås"</string>
     <string name="no_device_lock_summary" msgid="7436025227616244687">"Konfigurer en skærmlås på enheden for at bruge dit private område"</string>
     <string name="no_device_lock_action_label" msgid="2640487005629001288">"Konfigurer skærmlås"</string>
@@ -616,8 +607,14 @@
     <string name="private_space_access_text" msgid="4258842502257201013">"Hvis du vil åbne dit private område, skal du gå til din liste over apps og rulle ned"</string>
     <string name="private_space_done_label" msgid="1020482651595246071">"Udfør"</string>
     <string name="private_space_scrolldown_to_access" msgid="4820954877349434545">"Rul ned for at finde det private område"</string>
-    <string name="private_space_retry_signin_title" msgid="2340841075193680666">"Log ind for at konfigurere et privat område"</string>
-    <string name="private_space_retry_summary" msgid="1976929616948459609">"Du skal logge ind på en konto for at konfigurere et privat rum"</string>
+    <!-- no translation found for private_space_retry_signin_title (8090276618867918844) -->
+    <skip />
+    <!-- no translation found for private_space_retry_summary (1920444015972648774) -->
+    <skip />
+    <!-- no translation found for private_space_skip_login_label (7078019409056628192) -->
+    <skip />
+    <!-- no translation found for private_space_continue_login_label (7779965766333065391) -->
+    <skip />
     <string name="private_space_lock_setup_title" msgid="6541564212199510787">"Vælg en lås til dit private område"</string>
     <string name="private_space_lock_setup_description" msgid="423405593476300918">"Du kan låse dit private område op med dit fingeraftryk. Af hensyn til sikkerheden kræver denne mulighed en alternativ lås."</string>
     <string name="private_space_choose_your_pin_header" msgid="4560802934975898265">"Angiv en pinkode til dit private område"</string>
@@ -1392,6 +1389,8 @@
     <string name="battery_level_title" msgid="1371765298786083448">"Batteriniveau"</string>
     <string name="communal_settings_title" msgid="2845678473945902115">"Fælles"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"Fælles indstillinger"</string>
+    <!-- no translation found for satellite_setting (706846910912477125) -->
+    <skip />
     <string name="apn_settings" msgid="4295467389400441299">"Adgangspunkter"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Rediger adgangspunkt"</string>
     <string name="apn_add" msgid="9069613192201630934">"Tilføj adgangspunkt"</string>
@@ -1446,7 +1445,8 @@
     <string name="reset_bluetooth_wifi_button_text" msgid="3974098137045963639">"Nulstil"</string>
     <string name="reset_bluetooth_wifi_complete_toast" msgid="5893439291030574365">"Bluetooth og Wi‑Fi er blevet nulstillet"</string>
     <string name="reset_esim_title" msgid="4194570573425902754">"Slet eSIM"</string>
-    <string name="reset_esim_desc" msgid="3662444090563399131">"Mobilabonnementer opsiges ikke. Kontakt dit mobilselskab for at downloade nye SIM-kort."</string>
+    <!-- no translation found for reset_esim_desc (6125192435907740751) -->
+    <skip />
     <string name="reset_network_button_text" msgid="2281476496459610071">"Nulstil indstillinger"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"Vil du nulstille alle netværksindstillinger? Denne handling kan ikke fortrydes."</string>
     <string name="reset_network_final_desc_esim" msgid="1129251284212847939">"Vil du rydde alle netværksindstillinger og rydde eSIM? Denne handling kan ikke fortrydes."</string>
@@ -1454,15 +1454,18 @@
     <string name="reset_network_confirm_title" msgid="913014422184481270">"Vil du nulstille?"</string>
     <string name="network_reset_not_available" msgid="1966334631394607829">"Gendannelse af netværk er ikke tilgængeligt for denne bruger"</string>
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"Netværksindstillingerne er blevet nulstillet"</string>
-    <string name="reset_esim_error_title" msgid="4670073610967959597">"SIM-kortene kan ikke ryddes"</string>
-    <string name="reset_esim_error_msg" msgid="7279607120606365250">"eSIM kan ikke ryddes på grund af en fejl.\n\nGenstart din enhed, og prøv igen."</string>
+    <!-- no translation found for reset_esim_error_title (6516110227665862295) -->
+    <skip />
+    <!-- no translation found for reset_esim_error_msg (8459527827897797168) -->
+    <skip />
     <string name="main_clear_title" msgid="277664302144837723">"Ryd alle data (gendan fabriksindstillinger)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Ryd alle data (gendan fabriksindstillinger)"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"Musik"</li>\n<li>"Billeder"</li>\n<li>"Andre brugerdata"</li></string>
     <string name="main_clear_desc_also_erases_esim" msgid="4553469876411831729"><li>"eSIM"</li></string>
     <string name="main_clear_desc_no_cancel_mobile_plan" msgid="369883568059127035">\n\n"Dette opsiger ikke automatisk dit mobilabonnement."</string>
     <string name="main_clear_final_desc" msgid="5800877928569039580">"Alle dine personlige oplysninger og downloadede apps slettes. Denne handling kan ikke fortrydes."</string>
-    <string name="main_clear_final_desc_esim" msgid="440406836793824969">"Alle dine personlige oplysninger, bl.a. downloadede apps og SIM-kort, slettes. Denne handling kan ikke fortrydes."</string>
+    <!-- no translation found for main_clear_final_desc_esim (6592404057237813989) -->
+    <skip />
     <string name="main_clear_confirm_title" msgid="6577071819657853713">"Vil du rydde alle data?"</string>
     <string name="main_clear_not_available" msgid="3433795327146684827">"Det er ikke muligt for denne bruger at gendanne fabriksindstillingerne"</string>
     <string name="main_clear_progress_title" msgid="7239741132015617719">"Rydder"</string>
@@ -1693,6 +1696,14 @@
     <string name="force_stop" msgid="2681771622136916280">"Tving til at standse"</string>
     <string name="archive" msgid="9074663845068632127">"Arkivér"</string>
     <string name="restore" msgid="7622486640713967157">"Gendan"</string>
+    <!-- no translation found for restoring_step_one (3465050101254272874) -->
+    <skip />
+    <!-- no translation found for restoring_step_two (140484846432595108) -->
+    <skip />
+    <!-- no translation found for restoring_step_three (3712883580876329811) -->
+    <skip />
+    <!-- no translation found for restoring_step_four (8966846882470446209) -->
+    <skip />
     <string name="total_size_label" msgid="2052185048749658866">"I alt"</string>
     <string name="application_size_label" msgid="6407051020651716729">"Appstørrelse"</string>
     <string name="external_code_size_label" msgid="7375146402660973743">"Appdata på USB-lager"</string>
@@ -2396,12 +2407,6 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Se apps med højest forbrug"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="6258554134146272311">"Opladning optimeres for at beskytte dit batteri"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="5107379280241187562">"Opladning optimeres for at hjælpe med at forlænge batteriets levetid"</string>
-    <string name="battery_tip_dock_defender_future_bypass_title" msgid="4332616280495788195">"Opladningen optimeres for at beskytte dit batteri"</string>
-    <string name="battery_tip_dock_defender_future_bypass_summary" msgid="7870758621381307597">"Opladningen optimeres, mens enheden er i dockingstationen, for at hjælpe med at forlænge batteriets levetid"</string>
-    <string name="battery_tip_dock_defender_active_title" msgid="1414785238383255699">"Opladning er optimeret for at beskytte dit batteri"</string>
-    <string name="battery_tip_dock_defender_active_summary" msgid="3512082623718801459">"Opladning er optimeret, mens enheden er i dockingstationen, for at hjælpe med at forlænge batteriets levetid"</string>
-    <string name="battery_tip_dock_defender_temporarily_bypassed_title" msgid="1679449361090557201">"Lader helt op"</string>
-    <string name="battery_tip_dock_defender_temporarily_bypassed_summary" msgid="1099500476761333281">"For at beskytte dit batteri optimeres opladningen, næste gang din tablet sættes i dockingstationen"</string>
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"Få flere oplysninger om, hvad det betyder, når opladning er sat på pause"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Genoptag opladning"</string>
     <string name="battery_tip_dialog_message_footer" msgid="986542164372177504">"Omfatter batterikrævende aktivitet i baggrunden"</string>
@@ -2419,7 +2424,8 @@
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Fjern"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Annuller"</string>
     <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"Oplad helt"</string>
-    <string name="battery_tip_incompatible_charging_title" msgid="5120763575150751300">"Problem med opladertilbehør"</string>
+    <!-- no translation found for battery_tip_incompatible_charging_title (1567827436103364999) -->
+    <skip />
     <string name="battery_tip_incompatible_charging_content_description" msgid="355668467640367701">"Få flere oplysninger om opladning med inkompatible strømadaptere"</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"Batteriadministration"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"Administrer automatisk apps"</string>
@@ -3875,10 +3881,8 @@
     <string name="voice_activation_apps_title" msgid="7130045161611529825">"Stemmeaktiverede apps"</string>
     <string name="permit_voice_activation_apps" msgid="9152780172988949319">"Tillad stemmeaktivering"</string>
     <string name="allow_voice_activation_apps_description" msgid="6369745626995060656">"Stemmeaktivering aktiverer godkendte apps håndfrit ved hjælp af stemmekommandoer. Indbygget adaptiv registrering sørger for, at dine private data forbliver beskyttet.\n\n"<a href="">"Få flere oplysninger om beskyttelse med adaptiv registrering"</a></string>
-    <!-- no translation found for permit_receive_sandboxed_detection_training_data (3929496847420108753) -->
-    <skip />
-    <!-- no translation found for receive_sandboxed_detection_training_data_description (1415687008184625050) -->
-    <skip />
+    <string name="permit_receive_sandboxed_detection_training_data" msgid="3929496847420108753">"Gør stemmeaktivering endnu bedre"</string>
+    <string name="receive_sandboxed_detection_training_data_description" msgid="1415687008184625050">"Denne enhed anvender privat intelligens til at forbedre stemmeaktiveringsmodellen. Apps kan modtage opsummerede opdateringer, der er samlet fra mange forskellige brugere, med henblik på at opretholde privatlivsbeskyttelsen og samtidig forbedre modellen for alle.\n\n"<a href="">"Få flere oplysninger om privat intelligens"</a></string>
     <string name="full_screen_intent_title" msgid="747270185715224130">"Notifikationer i fuld skærm"</string>
     <string name="permit_full_screen_intent" msgid="9035367640019960861">"Tillad notifikationer i fuld skærm fra denne app"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Tillad appen at vise notifikationer, der fylder hele skærmen, når enheden er låst. Apps kan benytte denne mulighed til at fremhæve alarmer, indgående opkald og andre presserende notifikationer."</string>
@@ -4300,26 +4304,27 @@
     <string name="autofill_app" msgid="7595308061826307921">"Autofyld-tjeneste"</string>
     <string name="default_autofill_app" msgid="372234803718251606">"Standardtjeneste til autofyld"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"Adgangskoder"</string>
-    <string name="credman_chosen_app_title" msgid="872524130208251505">"Adgangskoder, adgangsnøgler og datatjenester"</string>
+    <!-- no translation found for credman_chosen_app_title (7735183808067729319) -->
+    <skip />
     <string name="credman_credentials" msgid="4931371941253324143">"Yderligere udbydere"</string>
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# adgangskode}one{# adgangskode}other{# adgangskoder}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"automatisk, udfyld, autofyld, adgangskode"</string>
     <string name="credman_keywords" msgid="8305600680836806170">"data, adgangsnøgle, adgangskode"</string>
     <string name="credman_autofill_keywords" msgid="701180623776848914">"automatisk, udfyldning, autofyld, data, adgangsnøgle, adgangskode"</string>
+    <!-- no translation found for credman_button_change (4072629639218503790) -->
+    <skip />
+    <!-- no translation found for credman_button_open (7519871964170816850) -->
+    <skip />
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Sørg for, at du har tillid til denne app&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; anvender indholdet af din skærm til at fastslå, hvad der kan udfyldes automatisk."</string>
     <string name="credman_autofill_confirmation_message" msgid="843829628024668466">"&lt;b&gt;Brug &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Fra nu af gemmes nye adgangskoder, adgangsnøgler og andre oplysninger her. &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; kan bruge, hvad der er på din skærm, til at vurdere, hvad der kan udfyldes automatisk."</string>
     <string name="credman_picker_title" msgid="8191267620665129205">"Adgangskoder, adgangsnøgler og datatjenester"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Vil du deaktivere %1$s?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Vil du deaktivere denne tjeneste?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Gemte oplysninger som f.eks. adgangskoder, adgangsnøgler, betalingsmetoder og andre oplysninger udfyldes ikke, når du logger ind. Hvis du vil bruge dine gemte oplysninger, skal du vælge en adgangskode, en adgangsnøgle eller en datatjeneste."</string>
-    <!-- no translation found for credman_confirmation_message_new_ui (6126274509951156460) -->
-    <skip />
-    <!-- no translation found for credman_autofill_confirmation_message_new_ui (6222139222478822267) -->
-    <skip />
+    <string name="credman_confirmation_message_new_ui" msgid="6126274509951156460">"&lt;b&gt;Vil du deaktivere alle tjenester?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Adgangskoder, adgangsnøgler og andre gemte oplysninger kan ikke udfyldes automatisk, når du logger ind"</string>
+    <string name="credman_autofill_confirmation_message_new_ui" msgid="6222139222478822267">"&lt;b&gt;Skift din foretrukne tjeneste til &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Fra nu af gemmes nye adgangskoder, adgangsnøgler og andre oplysninger her. &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; kan bruge, hvad der er på din skærm, til at vurdere, hvad der kan udfyldes automatisk"</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"Vil du bruge %1$s?"</string>
-    <!-- no translation found for credman_limit_error_msg_title (1525814645803612135) -->
-    <skip />
-    <!-- no translation found for credman_limit_error_msg (2521803280130310063) -->
-    <skip />
+    <string name="credman_limit_error_msg_title" msgid="1525814645803612135">"Du kan kun have 5 tjenester aktiveret"</string>
+    <string name="credman_limit_error_msg" msgid="2521803280130310063">"Deaktiver mindst 1 tjeneste for at tilføje en anden"</string>
     <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"%1$s bruger det, der vises på din skærm, til at afgøre, hvad der kan udfyldes automatisk."</string>
     <string name="credman_error_message_title" msgid="4099557206946333568">"Grænse for antal adgangskoder, adgangsnøgler og datatjenester"</string>
     <string name="credman_error_message" msgid="8334797097200415449">"Du kan have op til 5 aktive adgangskoder, adgangsnøgler og datatjenester ad gangen. Deaktiver en tjeneste, hvis du vil tilføje en ny."</string>
@@ -4493,7 +4498,8 @@
     <string name="mobile_network_use_sim_off" msgid="6303281166199670639">"Fra"</string>
     <string name="mobile_network_disable_sim_explanation" msgid="2851862257846773796">"Fjern SIM-kortet for at deaktivere det"</string>
     <string name="mobile_network_tap_to_activate" msgid="4139979375717958102">"Tryk for at aktivere <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <string name="mobile_network_erase_sim" msgid="4629071168032714930">"Ryd SIM-kort"</string>
+    <!-- no translation found for mobile_network_erase_sim (5387971155494245850) -->
+    <skip />
     <string name="preferred_network_mode_title" msgid="3083431168988535628">"Foretrukken netværkstype"</string>
     <string name="preferred_network_mode_summary" msgid="537577807865497546">"Skift driftstilstand for netværket"</string>
     <string name="preferred_network_mode_dialogtitle" msgid="4179420486180351631">"Foretrukken netværkstype"</string>
@@ -4512,6 +4518,40 @@
     <string name="roaming_check_price_warning" msgid="5876977438036791361">"Kontakt din netværksudbyder for at få oplyst priser."</string>
     <string name="mobile_data_usage_title" msgid="2047864499317759728">"Dataforbrug i apps"</string>
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"Ugyldig netværkstilstand <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Ignorer."</string>
+    <!-- no translation found for satellite_setting_title (2543034229989047673) -->
+    <skip />
+    <!-- no translation found for satellite_setting_enabled_summary (3554127722727530845) -->
+    <skip />
+    <!-- no translation found for satellite_setting_disabled_summary (6789122487534159857) -->
+    <skip />
+    <!-- no translation found for keywords_satellite_setting (3312183289776517695) -->
+    <skip />
+    <!-- no translation found for category_name_about_satellite_messaging (3756205049485508340) -->
+    <skip />
+    <!-- no translation found for title_about_satellite_setting (9212860038048311345) -->
+    <skip />
+    <!-- no translation found for category_title_your_satellite_plan (3017895097366691841) -->
+    <skip />
+    <!-- no translation found for title_have_satellite_plan (2048372355699977947) -->
+    <skip />
+    <!-- no translation found for title_no_satellite_plan (2876056203035197505) -->
+    <skip />
+    <!-- no translation found for summary_add_satellite_setting (3815254731634052432) -->
+    <skip />
+    <!-- no translation found for category_name_how_it_works (585303230539269496) -->
+    <skip />
+    <!-- no translation found for title_satellite_connection_guide (3294802307913609072) -->
+    <skip />
+    <!-- no translation found for summary_satellite_connection_guide (3496123195218418456) -->
+    <skip />
+    <!-- no translation found for title_supported_service (4275535165812691571) -->
+    <skip />
+    <!-- no translation found for summary_supported_service (4320535903444834786) -->
+    <skip />
+    <!-- no translation found for satellite_setting_summary_more_information (4008690241760925372) -->
+    <skip />
+    <!-- no translation found for more_about_satellite_messaging (3385673133561348509) -->
+    <skip />
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Adgangspunkter"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Utilgængelig ved forbindelse til <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -4521,9 +4561,12 @@
     <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"Vil du skifte til <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"Vil du skifte til at bruge SIM-kort?"</string>
     <string name="sim_action_switch_sub_dialog_mep_title" msgid="933856847099933004">"Vil du bruge <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
-    <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"Der kan kun være ét aktivt SIM-kort ad gangen.\n\nSelvom du skifter til <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>, opsiges din tjeneste fra <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> ikke."</string>
-    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="8977951796005849471">"Der kan kun være 1 aktivt eSIM ad gangen.\n\nDin <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>-tjeneste opsiges ikke, hvisdu skifter til <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>."</string>
-    <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"Der kan kun være ét aktivt SIM-kort ad gangen.\n\nSelvom du skifter SIM-kort, opsiges din tjeneste fra <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> ikke."</string>
+    <!-- no translation found for sim_action_switch_sub_dialog_text (7474905814976249607) -->
+    <skip />
+    <!-- no translation found for sim_action_switch_sub_dialog_text_downloaded (6415848271400253954) -->
+    <skip />
+    <!-- no translation found for sim_action_switch_sub_dialog_text_single_sim (421658355882679837) -->
+    <skip />
     <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"Du kan ikke bruge 2 SIM-kort ad gangen. Hvis du vil bruge <xliff:g id="CARRIER_NAME">%1$s</xliff:g>, skal du deaktivere et andet SIM-kort."</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"Skift til <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"Deaktiver <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
@@ -4566,7 +4609,8 @@
     <string name="sim_onboarding_phoneNumber_data_only" msgid="8158409121949373662">"Kun data"</string>
     <string name="sim_onboarding_setup" msgid="5750393553605388463">"Konfigurer"</string>
     <string name="sim_onboarding_next" msgid="6415025179929475355">"Næste"</string>
-    <string name="sim_onboarding_profressbar_turning_sim_on" msgid="4888545282948732575">"Aktiverer <xliff:g id="CARRIER_NAME">%1$s</xliff:g>…"</string>
+    <!-- no translation found for sim_onboarding_progressbar_turning_sim_on (1163318788393361574) -->
+    <skip />
     <string name="mobile_network_spn_title" msgid="3053793174495329077">"Mobilnetværk"</string>
     <string name="mobile_network_phone_number_title" msgid="2090794402855021784">"Telefonnummer"</string>
     <string name="mobile_network_sim_label_color_title" msgid="2401352348041132876">"SIM-etiket og -farve"</string>
@@ -4589,11 +4633,15 @@
     <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"Hvis du senere vil bruge mobildata, opkaldsfunktioner og sms, kan du gå til dine netværksindstillinger"</string>
     <string name="sim_card_label" msgid="6263064316075963775">"SIM-kort"</string>
     <string name="erase_sim_dialog_title" msgid="4742077437653028326">"Vil du rydde dette eSIM?"</string>
-    <string name="erase_sim_dialog_text" msgid="753031064269699885">"Hvis du rydder dette SIM-kort, fjernes tjenesten fra <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> på denne enhed.\n\nTjenesten fra <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> opsiges ikke."</string>
+    <!-- no translation found for erase_sim_dialog_text (1406141218170595272) -->
+    <skip />
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Ryd"</string>
-    <string name="erasing_sim" msgid="7877703231075699139">"Rydder SIM-kort…"</string>
-    <string name="erase_sim_fail_title" msgid="2024446702985862427">"SIM-kortet kan ikke ryddes"</string>
-    <string name="erase_sim_fail_text" msgid="7870804401227483131">"Dette SIM-kort kan ikke ryddes på grund af en fejl.\n\nGenstart din enhed, og prøv igen."</string>
+    <!-- no translation found for erasing_sim (4237180547590463930) -->
+    <skip />
+    <!-- no translation found for erase_sim_fail_title (1445700500168357303) -->
+    <skip />
+    <!-- no translation found for erase_sim_fail_text (6898841004987411547) -->
+    <skip />
     <string name="network_connection_request_dialog_title" msgid="1896186380874289434">"Opret forbindelse til enheden"</string>
     <string name="network_connection_request_dialog_summary" msgid="7693038309792726170">"Appen <xliff:g id="APPNAME">%1$s</xliff:g> vil gerne have midlertidig adgang til dit Wi-Fi-netværk for at oprette forbindelse til din enhed"</string>
     <string name="network_connection_timeout_dialog_message" msgid="598509083077743772">"Der blev ikke fundet nogen enheder. Sørg for, at enhederne er tændt, og at der kan oprettes forbindelse til dem."</string>
@@ -4665,22 +4713,14 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"Oplysninger om din arbejdspolitik"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"Indstillinger, som administreres af din it-administrator"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"Grafikprocessor"</string>
-    <!-- no translation found for enable_16k_pages (5009476566957520607) -->
-    <skip />
-    <!-- no translation found for enable_16k_pages_summary (428117226069445198) -->
-    <skip />
-    <!-- no translation found for confirm_enable_16k_pages_title (6751570067857011642) -->
-    <skip />
-    <!-- no translation found for confirm_enable_16k_pages_text (702888115148257215) -->
-    <skip />
-    <!-- no translation found for confirm_enable_4k_pages_title (626987400420355263) -->
-    <skip />
-    <!-- no translation found for confirm_enable_4k_pages_text (6168921566226074524) -->
-    <skip />
-    <!-- no translation found for toast_16k_update_failed_text (8888858987184345567) -->
-    <skip />
-    <!-- no translation found for progress_16k_ota_title (2117218313875523741) -->
-    <skip />
+    <string name="enable_16k_pages" msgid="5009476566957520607">"Genstart med sidestørrelsen 16 kB"</string>
+    <string name="enable_16k_pages_summary" msgid="428117226069445198">"Genstart enheden med en sidestørrelse på 16 kB, der understøtter kernen"</string>
+    <string name="confirm_enable_16k_pages_title" msgid="6751570067857011642">"Vil du genstarte med en sidestørrelse på 16 kB, der er kompatibel med kernen?"</string>
+    <string name="confirm_enable_16k_pages_text" msgid="702888115148257215">"ADVARSEL! Nogle apps er muligvis ikke kompatible med denne tilstand. Enheden genstartes efter bekræftelsen."</string>
+    <string name="confirm_enable_4k_pages_title" msgid="626987400420355263">"Vil du genstarte med en sidestørrelse på 4 kB, der er kompatibel med kernen?"</string>
+    <string name="confirm_enable_4k_pages_text" msgid="6168921566226074524">"Enheden genstartes efter bekræftelsen."</string>
+    <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"Sidestørrelsen kunne ikke opdateres til 16 kB, der er kompatibel med kernen."</string>
+    <string name="progress_16k_ota_title" msgid="2117218313875523741">"Anvender ændringer"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Håndtering af fejlrapport"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Afgør, hvilken app der håndterer genvejen til fejlrapporten på din enhed."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Personlig"</string>
@@ -4766,8 +4806,10 @@
     <string name="sim_category_title" msgid="2341314000964710495">"SIM"</string>
     <string name="downloaded_sim_category_title" msgid="2876988650413179752">"eSIM"</string>
     <string name="downloaded_sims_category_title" msgid="487799905978489922">"eSIM"</string>
-    <string name="sim_category_active_sim" msgid="1503823567818544012">"Aktiv"</string>
-    <string name="sim_category_inactive_sim" msgid="4068899490133820881">"Inaktiv"</string>
+    <!-- no translation found for sim_category_active_sim (3077009911935592178) -->
+    <skip />
+    <!-- no translation found for sim_category_inactive_sim (7351553344148400450) -->
+    <skip />
     <string name="sim_category_default_active_sim" msgid="1208194173387987231">" / Standard til <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="default_active_sim_calls" msgid="2390973682556353558">"opkald"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"sms"</string>
