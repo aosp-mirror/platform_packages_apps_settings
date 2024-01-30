@@ -16,6 +16,8 @@
 
 package com.android.settings.connecteddevice.stylus;
 
+import static android.view.KeyEvent.KEYCODE_STYLUS_BUTTON_TAIL;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.junit.Assert.assertEquals;
@@ -52,7 +54,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.SwitchPreferenceCompat;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
@@ -139,6 +141,8 @@ public class StylusDevicesControllerTest {
                 .setSources(InputDevice.SOURCE_STYLUS)
                 .build());
         when(mInputDevice.getBluetoothAddress()).thenReturn("SOME:ADDRESS");
+        when(mInputDevice.hasKeys(KEYCODE_STYLUS_BUTTON_TAIL)).thenReturn(
+                new boolean[]{true});
 
         mController = new StylusDevicesController(mContext, mInputDevice, null, mLifecycle);
     }
@@ -218,6 +222,28 @@ public class StylusDevicesControllerTest {
         showScreen(controller);
 
         assertThat(mPreferenceContainer.getPreferenceCount()).isEqualTo(3);
+    }
+
+    @Test
+    public void usiStylusInputDevice_doesntSupportTailButton_tailButtonPreferenceNotShown() {
+        when(mInputDevice.hasKeys(KEYCODE_STYLUS_BUTTON_TAIL)).thenReturn(new boolean[]{false});
+        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_DEVICE_TYPE)).thenReturn(
+                BluetoothDevice.DEVICE_TYPE_WATCH.getBytes());
+        StylusDevicesController controller = new StylusDevicesController(
+                mContext, mInputDevice, mCachedBluetoothDevice, mLifecycle
+        );
+
+        showScreen(controller);
+        Preference handwritingPref = mPreferenceContainer.getPreference(0);
+        Preference buttonPref = mPreferenceContainer.getPreference(1);
+
+        assertThat(mPreferenceContainer.getPreferenceCount()).isEqualTo(2);
+        assertThat(handwritingPref.getTitle().toString()).isEqualTo(
+                mContext.getString(R.string.stylus_textfield_handwriting));
+        assertThat(handwritingPref.isVisible()).isTrue();
+        assertThat(buttonPref.getTitle().toString()).isEqualTo(
+                mContext.getString(R.string.stylus_ignore_button));
+        assertThat(buttonPref.isVisible()).isTrue();
     }
 
     @Test
@@ -331,7 +357,7 @@ public class StylusDevicesControllerTest {
 
     @Test
     public void defaultNotesPreferenceClick_multiUserManagedProfile_showsProfileSelectorDialog() {
-        mContext.setTheme(R.style.Theme_AppCompat);
+        mContext.setTheme(androidx.appcompat.R.style.Theme_AppCompat);
         final String permissionPackageName = "permissions.package";
         final UserHandle currentUser = Process.myUserHandle();
         List<UserInfo> userInfos = Arrays.asList(
@@ -355,7 +381,7 @@ public class StylusDevicesControllerTest {
     @Test
     public void defaultNotesPreferenceClick_noManagedProfile_sendsManageDefaultRoleIntent() {
         final ArgumentCaptor<Intent> captor = ArgumentCaptor.forClass(Intent.class);
-        mContext.setTheme(R.style.Theme_AppCompat);
+        mContext.setTheme(androidx.appcompat.R.style.Theme_AppCompat);
         final String permissionPackageName = "permissions.package";
         final UserHandle currentUser = Process.myUserHandle();
         List<UserInfo> userInfos = Arrays.asList(
@@ -492,7 +518,8 @@ public class StylusDevicesControllerTest {
                 Settings.Secure.STYLUS_BUTTONS_ENABLED, 0);
 
         showScreen(mController);
-        SwitchPreference buttonsPref = (SwitchPreference) mPreferenceContainer.getPreference(2);
+        SwitchPreferenceCompat buttonsPref =
+                (SwitchPreferenceCompat) mPreferenceContainer.getPreference(2);
 
         assertThat(buttonsPref.isChecked()).isEqualTo(true);
     }
@@ -503,7 +530,8 @@ public class StylusDevicesControllerTest {
                 Settings.Secure.STYLUS_BUTTONS_ENABLED, 1);
 
         showScreen(mController);
-        SwitchPreference buttonsPref = (SwitchPreference) mPreferenceContainer.getPreference(2);
+        SwitchPreferenceCompat buttonsPref =
+                (SwitchPreferenceCompat) mPreferenceContainer.getPreference(2);
 
         assertThat(buttonsPref.isChecked()).isEqualTo(false);
     }
@@ -513,7 +541,8 @@ public class StylusDevicesControllerTest {
         Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.STYLUS_BUTTONS_ENABLED, 0);
         showScreen(mController);
-        SwitchPreference buttonsPref = (SwitchPreference) mPreferenceContainer.getPreference(2);
+        SwitchPreferenceCompat buttonsPref =
+                (SwitchPreferenceCompat) mPreferenceContainer.getPreference(2);
 
         buttonsPref.performClick();
 

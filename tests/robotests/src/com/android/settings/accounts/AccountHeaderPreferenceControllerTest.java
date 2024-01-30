@@ -72,7 +72,8 @@ public class AccountHeaderPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         FakeFeatureFactory.setupForTest();
         mHeaderPreference = new LayoutPreference(
-                RuntimeEnvironment.application, R.layout.settings_entity_header);
+                RuntimeEnvironment.application,
+                com.android.settingslib.widget.preference.layout.R.layout.settings_entity_header);
         doReturn(RuntimeEnvironment.application).when(mActivity).getApplicationContext();
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);

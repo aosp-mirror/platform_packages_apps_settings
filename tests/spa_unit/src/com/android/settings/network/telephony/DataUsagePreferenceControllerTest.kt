@@ -25,7 +25,7 @@ import android.util.DataUnit
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.testing.TestLifecycleOwner
 import androidx.preference.Preference
-import androidx.preference.PreferenceScreen
+import androidx.preference.PreferenceManager
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.dx.mockito.inline.extended.ExtendedMockito
@@ -33,47 +33,46 @@ import com.android.settings.core.BasePreferenceController.AVAILABLE
 import com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE
 import com.android.settings.datausage.DataUsageUtils
 import com.android.settings.datausage.lib.DataUsageLib
-import com.android.settingslib.net.DataUsageController
-import com.android.settingslib.net.DataUsageController.DataUsageInfo
+import com.android.settings.datausage.lib.NetworkCycleDataRepository
+import com.android.settings.datausage.lib.NetworkUsageData
 import com.android.settingslib.spa.testutils.waitUntil
 import com.google.common.truth.Truth.assertThat
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.ArgumentCaptor
-import org.mockito.Mock
-import org.mockito.Mockito.any
-import org.mockito.Mockito.doNothing
-import org.mockito.Mockito.verify
 import org.mockito.MockitoSession
-import org.mockito.Spy
+import org.mockito.kotlin.any
+import org.mockito.kotlin.argumentCaptor
+import org.mockito.kotlin.doNothing
+import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.spy
+import org.mockito.kotlin.stub
+import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 import org.mockito.quality.Strictness
-import org.mockito.Mockito.`when` as whenever
 
-@OptIn(ExperimentalCoroutinesApi::class)
 @RunWith(AndroidJUnit4::class)
 class DataUsagePreferenceControllerTest {
 
     private lateinit var mockSession: MockitoSession
 
-    @Spy
-    private val context: Context = ApplicationProvider.getApplicationContext()
+    private val context: Context = spy(ApplicationProvider.getApplicationContext()) {
+        doNothing().whenever(mock).startActivity(any())
+    }
 
-    private lateinit var controller: DataUsagePreferenceController
+    private val preference = Preference(context).apply { key = TEST_KEY }
+    private val preferenceScreen = PreferenceManager(context).createPreferenceScreen(context)
+    private val networkTemplate = mock<NetworkTemplate>()
+    private val repository = mock<NetworkCycleDataRepository> {
+        on { queryUsage(any()) } doReturn NetworkUsageData(START_TIME, END_TIME, 0L)
+    }
 
-    private val preference = Preference(context)
-
-    @Mock
-    private lateinit var networkTemplate: NetworkTemplate
-
-    @Mock
-    private lateinit var dataUsageController: DataUsageController
-
-    @Mock
-    private lateinit var preferenceScreen: PreferenceScreen
+    private val controller = spy(DataUsagePreferenceController(context, TEST_KEY)) {
+        doReturn(repository).whenever(mock).createNetworkCycleDataRepository()
+    }
 
     @Before
     fun setUp() {
@@ -87,17 +86,15 @@ class DataUsagePreferenceControllerTest {
 
         whenever(SubscriptionManager.isValidSubscriptionId(SUB_ID)).thenReturn(true)
         ExtendedMockito.doReturn(true).`when` { DataUsageUtils.hasMobileData(context) }
-        ExtendedMockito.doReturn(networkTemplate)
-            .`when` { DataUsageLib.getMobileTemplate(context, SUB_ID) }
-        preference.key = TEST_KEY
-        whenever(preferenceScreen.findPreference<Preference>(TEST_KEY)).thenReturn(preference)
+        ExtendedMockito.doReturn(networkTemplate).`when` {
+            DataUsageLib.getMobileTemplate(context, SUB_ID)
+        }
 
-        controller =
-            DataUsagePreferenceController(context, TEST_KEY).apply {
-                init(SUB_ID)
-                displayPreference(preferenceScreen)
-                dataUsageControllerFactory = { dataUsageController }
-            }
+        preferenceScreen.addPreference(preference)
+        controller.apply {
+            init(SUB_ID)
+            displayPreference(preferenceScreen)
+        }
     }
 
     @After
@@ -118,51 +115,52 @@ class DataUsagePreferenceControllerTest {
     }
 
     @Test
-    fun handlePreferenceTreeClick_startActivity() = runTest {
-        val usageInfo = DataUsageInfo().apply {
-            usageLevel = DataUnit.MEBIBYTES.toBytes(1)
+    fun handlePreferenceTreeClick_startActivity() = runBlocking {
+        val usageData = NetworkUsageData(START_TIME, END_TIME, 1L)
+        repository.stub {
+            on { loadFirstCycle() } doReturn usageData
         }
-        whenever(dataUsageController.getDataUsageInfo(networkTemplate)).thenReturn(usageInfo)
-        doNothing().`when`(context).startActivity(any())
-        controller.whenViewCreated(TestLifecycleOwner(initialState = Lifecycle.State.STARTED))
+        controller.onViewCreated(TestLifecycleOwner(initialState = Lifecycle.State.STARTED))
         waitUntil { preference.summary != null }
 
         controller.handlePreferenceTreeClick(preference)
 
-        val captor = ArgumentCaptor.forClass(Intent::class.java)
-        verify(context).startActivity(captor.capture())
-        val intent = captor.value
+        val intent = argumentCaptor<Intent> {
+            verify(context).startActivity(capture())
+        }.firstValue
         assertThat(intent.action).isEqualTo(Settings.ACTION_MOBILE_DATA_USAGE)
         assertThat(intent.getIntExtra(Settings.EXTRA_SUB_ID, 0)).isEqualTo(SUB_ID)
     }
 
     @Test
-    fun updateState_invalidSubId_disabled() = runTest {
+    fun updateState_invalidSubId_disabled() = runBlocking {
         controller.init(SubscriptionManager.INVALID_SUBSCRIPTION_ID)
 
-        controller.whenViewCreated(TestLifecycleOwner(initialState = Lifecycle.State.STARTED))
+        controller.onViewCreated(TestLifecycleOwner(initialState = Lifecycle.State.STARTED))
 
         waitUntil { !preference.isEnabled }
     }
 
     @Test
-    fun updateState_noUsageData_shouldDisablePreference() = runTest {
-        val usageInfo = DataUsageInfo()
-        whenever(dataUsageController.getDataUsageInfo(networkTemplate)).thenReturn(usageInfo)
-
-        controller.whenViewCreated(TestLifecycleOwner(initialState = Lifecycle.State.STARTED))
-
-        waitUntil { !preference.isEnabled }
-    }
-
-    @Test
-    fun updateState_shouldUseIecUnit() = runTest {
-        val usageInfo = DataUsageInfo().apply {
-            usageLevel = DataUnit.MEBIBYTES.toBytes(1)
+    fun updateState_noUsageData_shouldDisablePreference() = runBlocking {
+        val usageData = NetworkUsageData(START_TIME, END_TIME, 0L)
+        repository.stub {
+            on { loadFirstCycle() } doReturn usageData
         }
-        whenever(dataUsageController.getDataUsageInfo(networkTemplate)).thenReturn(usageInfo)
 
-        controller.whenViewCreated(TestLifecycleOwner(initialState = Lifecycle.State.STARTED))
+        controller.onViewCreated(TestLifecycleOwner(initialState = Lifecycle.State.STARTED))
+
+        waitUntil { !preference.isEnabled }
+    }
+
+    @Test
+    fun updateState_shouldUseIecUnit() = runBlocking {
+        val usageData = NetworkUsageData(START_TIME, END_TIME, DataUnit.MEBIBYTES.toBytes(1))
+        repository.stub {
+            on { loadFirstCycle() } doReturn usageData
+        }
+
+        controller.onViewCreated(TestLifecycleOwner(initialState = Lifecycle.State.STARTED))
 
         waitUntil { preference.summary?.contains("1.00 MB") == true }
     }
@@ -170,5 +168,7 @@ class DataUsagePreferenceControllerTest {
     private companion object {
         const val TEST_KEY = "test_key"
         const val SUB_ID = 2
+        const val START_TIME = 10L
+        const val END_TIME = 30L
     }
 }

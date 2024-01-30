@@ -28,8 +28,6 @@ import android.os.RemoteException;
 import androidx.preference.ListPreference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.R;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -65,8 +63,10 @@ public class BackgroundProcessLimitPreferenceControllerTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mListValues = mContext.getResources().getStringArray(R.array.app_process_limit_values);
-        mListSummaries = mContext.getResources().getStringArray(R.array.app_process_limit_entries);
+        mListValues = mContext.getResources()
+                .getStringArray(com.android.settingslib.R.array.app_process_limit_values);
+        mListSummaries = mContext.getResources()
+                .getStringArray(com.android.settingslib.R.array.app_process_limit_entries);
         mController = spy(new BackgroundProcessLimitPreferenceController(mContext));
         doReturn(mActivityManager).when(mController).getActivityManagerService();
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);

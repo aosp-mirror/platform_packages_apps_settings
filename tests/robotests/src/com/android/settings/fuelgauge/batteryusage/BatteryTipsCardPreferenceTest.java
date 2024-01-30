@@ -40,6 +40,7 @@ import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -61,19 +62,16 @@ public final class BatteryTipsCardPreferenceTest {
     private BatteryTipsController mBatteryTipsController;
     private BatteryChartPreferenceController mBatteryChartPreferenceController;
 
-    @Mock
-    private View mFakeView;
-    @Mock
-    private BatteryUsageBreakdownController mBatteryUsageBreakdownController;
-    @Mock
-    private BatteryDiffEntry mFakeEntry;
+    @Mock private View mFakeView;
+    @Mock private BatteryUsageBreakdownController mBatteryUsageBreakdownController;
+    @Mock private BatteryDiffEntry mFakeEntry;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
         mFeatureFactory = FakeFeatureFactory.setupForTest();
-        mBatteryTipsCardPreference = new BatteryTipsCardPreference(mContext, /*attrs=*/ null);
+        mBatteryTipsCardPreference = new BatteryTipsCardPreference(mContext, /* attrs= */ null);
         mBatteryTipsController = new BatteryTipsController(mContext);
         mBatteryChartPreferenceController =
                 spy(new BatteryChartPreferenceController(mContext, null, null));
@@ -85,17 +83,20 @@ public final class BatteryTipsCardPreferenceTest {
         mPowerUsageAdvanced.mBatteryTipsController = mBatteryTipsController;
         mPowerUsageAdvanced.mBatteryChartPreferenceController = mBatteryChartPreferenceController;
         mPowerUsageAdvanced.mBatteryUsageBreakdownController = mBatteryUsageBreakdownController;
-        mPowerUsageAdvanced.mBatteryLevelData = Optional.of(new BatteryLevelData(Map.of(
-                1694354400000L, 1,      // 2023-09-10 22:00:00
-                1694361600000L, 2,      // 2023-09-11 00:00:00
-                1694368800000L, 3)));    // 2023-09-11 02:00:00
+        mPowerUsageAdvanced.mBatteryLevelData =
+                Optional.of(
+                        new BatteryLevelData(
+                                Map.of(
+                                        1694354400000L, 1, // 2023-09-10 22:00:00
+                                        1694361600000L, 2, // 2023-09-11 00:00:00
+                                        1694368800000L, 3))); // 2023-09-11 02:00:00
         doReturn("TestEntriesKey").when(mFakeEntry).getKey();
     }
 
     @Test
     public void constructor_returnExpectedResult() {
-        assertThat(mBatteryTipsCardPreference.getLayoutResource()).isEqualTo(
-                R.layout.battery_tips_card);
+        assertThat(mBatteryTipsCardPreference.getLayoutResource())
+                .isEqualTo(R.layout.battery_tips_card);
     }
 
     @Test
@@ -118,10 +119,13 @@ public final class BatteryTipsCardPreferenceTest {
                 .isEqualTo(DisplaySettings.class.getName());
         assertThat(intent.getIntExtra(MetricsFeatureProvider.EXTRA_SOURCE_METRICS_CATEGORY, -1))
                 .isEqualTo(SettingsEnums.DISPLAY);
-        verify(mFeatureFactory.metricsFeatureProvider).action(
-                mContext, SettingsEnums.ACTION_BATTERY_TIPS_CARD_SHOW, "BrightnessAnomaly");
-        verify(mFeatureFactory.metricsFeatureProvider).action(
-                mContext, SettingsEnums.ACTION_BATTERY_TIPS_CARD_ACCEPT, "BrightnessAnomaly");
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(mContext, SettingsEnums.ACTION_BATTERY_TIPS_CARD_SHOW, "BrightnessAnomaly");
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(
+                        mContext,
+                        SettingsEnums.ACTION_BATTERY_TIPS_CARD_ACCEPT,
+                        "BrightnessAnomaly");
     }
 
     @Test
@@ -140,12 +144,19 @@ public final class BatteryTipsCardPreferenceTest {
         assertThat(DatabaseUtils.getDismissedPowerAnomalyKeys(mContext)).hasSize(1);
         assertThat(DatabaseUtils.getDismissedPowerAnomalyKeys(mContext))
                 .contains(PowerAnomalyKey.KEY_SCREEN_TIMEOUT.name());
-        verify(mFeatureFactory.metricsFeatureProvider).action(
-                mContext, SettingsEnums.ACTION_BATTERY_TIPS_CARD_SHOW, "ScreenTimeoutAnomaly");
-        verify(mFeatureFactory.metricsFeatureProvider).action(
-                mContext, SettingsEnums.ACTION_BATTERY_TIPS_CARD_DISMISS, "ScreenTimeoutAnomaly");
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(
+                        mContext,
+                        SettingsEnums.ACTION_BATTERY_TIPS_CARD_SHOW,
+                        "ScreenTimeoutAnomaly");
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(
+                        mContext,
+                        SettingsEnums.ACTION_BATTERY_TIPS_CARD_DISMISS,
+                        "ScreenTimeoutAnomaly");
     }
 
+    @Ignore("b/313582999")
     @Test
     public void onClick_mainBtnOfAppsAnomaly_selectHighlightSlot() {
         final PowerAnomalyEvent appsAnomaly = BatteryTestUtils.createAppAnomalyEvent();
@@ -159,15 +170,15 @@ public final class BatteryTipsCardPreferenceTest {
 
         assertThat(mBatteryTipsCardPreference.isVisible()).isFalse();
         verify(mContext, never()).startActivity(any(Intent.class));
-        verify(mBatteryChartPreferenceController).onHighlightSlotIndexUpdate(
-                eq(1), eq(0));
+        verify(mBatteryChartPreferenceController).onHighlightSlotIndexUpdate(eq(1), eq(0));
         verify(mBatteryChartPreferenceController).selectHighlightSlotIndex();
-        verify(mFeatureFactory.metricsFeatureProvider).action(
-                mContext, SettingsEnums.ACTION_BATTERY_TIPS_CARD_SHOW, "AppAnomaly");
-        verify(mFeatureFactory.metricsFeatureProvider).action(
-                mContext, SettingsEnums.ACTION_BATTERY_TIPS_CARD_ACCEPT, "AppAnomaly");
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(mContext, SettingsEnums.ACTION_BATTERY_TIPS_CARD_SHOW, "AppAnomaly");
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(mContext, SettingsEnums.ACTION_BATTERY_TIPS_CARD_ACCEPT, "AppAnomaly");
     }
 
+    @Ignore("b/313582999")
     @Test
     public void onClick_dismissBtnOfAppsAnomaly_keepHighlightSlotIndex() {
         final PowerAnomalyEvent appsAnomaly = BatteryTestUtils.createAppAnomalyEvent();
@@ -180,12 +191,11 @@ public final class BatteryTipsCardPreferenceTest {
 
         assertThat(mBatteryTipsCardPreference.isVisible()).isFalse();
         verify(mContext, never()).startActivity(any(Intent.class));
-        verify(mBatteryChartPreferenceController).onHighlightSlotIndexUpdate(
-                eq(1), eq(0));
+        verify(mBatteryChartPreferenceController).onHighlightSlotIndexUpdate(eq(1), eq(0));
         verify(mBatteryChartPreferenceController, never()).selectHighlightSlotIndex();
-        verify(mFeatureFactory.metricsFeatureProvider).action(
-                mContext, SettingsEnums.ACTION_BATTERY_TIPS_CARD_SHOW, "AppAnomaly");
-        verify(mFeatureFactory.metricsFeatureProvider).action(
-                mContext, SettingsEnums.ACTION_BATTERY_TIPS_CARD_DISMISS, "AppAnomaly");
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(mContext, SettingsEnums.ACTION_BATTERY_TIPS_CARD_SHOW, "AppAnomaly");
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(mContext, SettingsEnums.ACTION_BATTERY_TIPS_CARD_DISMISS, "AppAnomaly");
     }
 }

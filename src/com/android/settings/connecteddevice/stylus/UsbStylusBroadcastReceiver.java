@@ -23,7 +23,7 @@ import android.content.IntentFilter;
 import android.hardware.usb.UsbDevice;
 import android.hardware.usb.UsbManager;
 
-/** Broadcast receiver for styluses connected via USB */
+/** Broadcast receiver for styluses connected via USB **/
 public class UsbStylusBroadcastReceiver extends BroadcastReceiver {
     private Context mContext;
     private UsbStylusConnectionListener mUsbConnectionListener;
@@ -35,7 +35,7 @@ public class UsbStylusBroadcastReceiver extends BroadcastReceiver {
         mUsbConnectionListener = usbConnectionListener;
     }
 
-    /** Registers the receiver. */
+    /** Registers the receiver. **/
     public void register() {
         if (!mListeningToUsbEvents) {
             final IntentFilter intentFilter = new IntentFilter();
@@ -50,7 +50,7 @@ public class UsbStylusBroadcastReceiver extends BroadcastReceiver {
         }
     }
 
-    /** Unregisters the receiver. */
+    /** Unregisters the receiver. **/
     public void unregister() {
         if (mListeningToUsbEvents) {
             mContext.unregisterReceiver(this);

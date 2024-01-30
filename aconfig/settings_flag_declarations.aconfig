@@ -1,0 +1,15 @@
+package: "com.android.settings.flags"
+
+flag {
+    name: "show_factory_reset_cancel_button"
+    namespace: "android_settings"
+    description: "This flag controls whether to show a Cancel button when factory reset"
+    bug: "300634367"
+}
+
+flag {
+    name: "mainline_module_explicit_intent"
+    namespace: "android_settings"
+    description: "Enabling will provide an explicit package name for Intent to update mainline modules"
+    bug: "278987474"
+}

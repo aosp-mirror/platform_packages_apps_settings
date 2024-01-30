@@ -72,21 +72,20 @@ public class BatteryInfoTest {
     private static final String ENHANCED_STRING_SUFFIX = "based on your usage";
     private static final String BATTERY_RUN_OUT_PREFIX = "Battery may run out by";
     private static final long TEST_CHARGE_TIME_REMAINING = TimeUnit.MINUTES.toMicros(1);
-    private static final String TEST_CHARGE_TIME_REMAINING_STRINGIFIED =
-            "1 min left until full";
+    private static final String TEST_CHARGE_TIME_REMAINING_STRINGIFIED = "1 min left until full";
     private static final String TEST_BATTERY_LEVEL_10 = "10%";
     private static final String FIFTEEN_MIN_FORMATTED = "15 min";
-    private static final Estimate MOCK_ESTIMATE = new Estimate(
-            1000, /* estimateMillis */
-            false, /* isBasedOnUsage */
-            1000 /* averageDischargeTime */);
+    private static final Estimate MOCK_ESTIMATE =
+            new Estimate(
+                    1000, /* estimateMillis */
+                    false, /* isBasedOnUsage */
+                    1000 /* averageDischargeTime */);
 
     private Intent mDisChargingBatteryBroadcast;
     private Intent mChargingBatteryBroadcast;
     private Context mContext;
     private FakeFeatureFactory mFeatureFactory;
-    @Mock
-    private BatteryUsageStats mBatteryUsageStats;
+    @Mock private BatteryUsageStats mBatteryUsageStats;
 
     @Before
     public void setUp() {
@@ -99,17 +98,22 @@ public class BatteryInfoTest {
         mChargingBatteryBroadcast = BatteryTestUtils.getChargingIntent();
 
         doReturn(false).when(mFeatureFactory.powerUsageFeatureProvider).isExtraDefend();
-        Settings.Global.putInt(mContext.getContentResolver(),
-                BatteryUtils.SETTINGS_GLOBAL_DOCK_DEFENDER_BYPASS, 0);
+        Settings.Global.putInt(
+                mContext.getContentResolver(),
+                BatteryUtils.SETTINGS_GLOBAL_DOCK_DEFENDER_BYPASS,
+                0);
     }
 
     @Test
     public void testGetBatteryInfo_hasStatusLabel() {
         doReturn(REMAINING_TIME_NULL).when(mBatteryUsageStats).getBatteryTimeRemainingMs();
-        BatteryInfo info = BatteryInfo.getBatteryInfoOld(mContext,
-                mDisChargingBatteryBroadcast, mBatteryUsageStats,
-                SystemClock.elapsedRealtime() * 1000,
-                true /* shortString */);
+        BatteryInfo info =
+                BatteryInfo.getBatteryInfoOld(
+                        mContext,
+                        mDisChargingBatteryBroadcast,
+                        mBatteryUsageStats,
+                        SystemClock.elapsedRealtime() * 1000,
+                        true /* shortString */);
 
         assertThat(info.statusLabel).isEqualTo(STATUS_NOT_CHARGING);
     }
@@ -117,8 +121,13 @@ public class BatteryInfoTest {
     @Test
     public void testGetBatteryInfo_doNotShowChargingMethod_hasRemainingTime() {
         doReturn(REMAINING_TIME).when(mBatteryUsageStats).getChargeTimeRemainingMs();
-        BatteryInfo info = BatteryInfo.getBatteryInfoOld(mContext, mChargingBatteryBroadcast,
-                mBatteryUsageStats, SystemClock.elapsedRealtime() * 1000, false /* shortString */);
+        BatteryInfo info =
+                BatteryInfo.getBatteryInfoOld(
+                        mContext,
+                        mChargingBatteryBroadcast,
+                        mBatteryUsageStats,
+                        SystemClock.elapsedRealtime() * 1000,
+                        false /* shortString */);
 
         assertThat(info.chargeLabel.toString()).isEqualTo(STATUS_CHARGING_TIME);
     }
@@ -126,8 +135,13 @@ public class BatteryInfoTest {
     @Test
     public void testGetBatteryInfo_doNotShowChargingMethod_noRemainingTime() {
         doReturn(REMAINING_TIME_NULL).when(mBatteryUsageStats).getChargeTimeRemainingMs();
-        BatteryInfo info = BatteryInfo.getBatteryInfoOld(mContext, mChargingBatteryBroadcast,
-                mBatteryUsageStats, SystemClock.elapsedRealtime() * 1000, false /* shortString */);
+        BatteryInfo info =
+                BatteryInfo.getBatteryInfoOld(
+                        mContext,
+                        mChargingBatteryBroadcast,
+                        mBatteryUsageStats,
+                        SystemClock.elapsedRealtime() * 1000,
+                        false /* shortString */);
 
         assertThat(info.chargeLabel.toString()).ignoringCase().isEqualTo(STATUS_CHARGING_NO_TIME);
     }
@@ -135,9 +149,15 @@ public class BatteryInfoTest {
     @Test
     public void testGetBatteryInfo_pluggedInUsingShortString_usesCorrectData() {
         doReturn(TEST_CHARGE_TIME_REMAINING / 1000)
-                .when(mBatteryUsageStats).getChargeTimeRemainingMs();
-        BatteryInfo info = BatteryInfo.getBatteryInfoOld(mContext, mChargingBatteryBroadcast,
-                mBatteryUsageStats, SystemClock.elapsedRealtime() * 1000, true /* shortString */);
+                .when(mBatteryUsageStats)
+                .getChargeTimeRemainingMs();
+        BatteryInfo info =
+                BatteryInfo.getBatteryInfoOld(
+                        mContext,
+                        mChargingBatteryBroadcast,
+                        mBatteryUsageStats,
+                        SystemClock.elapsedRealtime() * 1000,
+                        true /* shortString */);
 
         assertThat(info.discharging).isEqualTo(false);
         assertThat(info.chargeLabel.toString()).isEqualTo("50% - 1 min left until full");
@@ -145,15 +165,27 @@ public class BatteryInfoTest {
 
     @Test
     public void testGetBatteryInfo_basedOnUsageTrueMoreThanFifteenMinutes_usesCorrectString() {
-        Estimate estimate = new Estimate(Duration.ofHours(4).toMillis(),
-                true /* isBasedOnUsage */,
-                1000 /* averageDischargeTime */);
-        BatteryInfo info = BatteryInfo.getBatteryInfo(mContext, mDisChargingBatteryBroadcast,
-                mBatteryUsageStats, estimate, SystemClock.elapsedRealtime() * 1000,
-                false /* shortString */);
-        BatteryInfo info2 = BatteryInfo.getBatteryInfo(mContext, mDisChargingBatteryBroadcast,
-                mBatteryUsageStats, estimate, SystemClock.elapsedRealtime() * 1000,
-                true /* shortString */);
+        Estimate estimate =
+                new Estimate(
+                        Duration.ofHours(4).toMillis(),
+                        true /* isBasedOnUsage */,
+                        1000 /* averageDischargeTime */);
+        BatteryInfo info =
+                BatteryInfo.getBatteryInfo(
+                        mContext,
+                        mDisChargingBatteryBroadcast,
+                        mBatteryUsageStats,
+                        estimate,
+                        SystemClock.elapsedRealtime() * 1000,
+                        false /* shortString */);
+        BatteryInfo info2 =
+                BatteryInfo.getBatteryInfo(
+                        mContext,
+                        mDisChargingBatteryBroadcast,
+                        mBatteryUsageStats,
+                        estimate,
+                        SystemClock.elapsedRealtime() * 1000,
+                        true /* shortString */);
 
         // Both long and short strings should not have extra text
         assertThat(info.remainingLabel.toString()).doesNotContain(ENHANCED_STRING_SUFFIX);
@@ -165,24 +197,41 @@ public class BatteryInfoTest {
     @Test
     @Ignore
     public void getBatteryInfo_MoreThanOneDay_suggestionLabelIsCorrectString() {
-        Estimate estimate = new Estimate(Duration.ofDays(3).toMillis(),
-                true /* isBasedOnUsage */,
-                1000 /* averageDischargeTime */);
-        BatteryInfo info = BatteryInfo.getBatteryInfo(mContext, mDisChargingBatteryBroadcast,
-                mBatteryUsageStats, estimate, SystemClock.elapsedRealtime() * 1000,
-                false /* shortString */);
+        Estimate estimate =
+                new Estimate(
+                        Duration.ofDays(3).toMillis(),
+                        true /* isBasedOnUsage */,
+                        1000 /* averageDischargeTime */);
+        BatteryInfo info =
+                BatteryInfo.getBatteryInfo(
+                        mContext,
+                        mDisChargingBatteryBroadcast,
+                        mBatteryUsageStats,
+                        estimate,
+                        SystemClock.elapsedRealtime() * 1000,
+                        false /* shortString */);
 
         assertThat(info.suggestionLabel).doesNotContain(BATTERY_RUN_OUT_PREFIX);
     }
 
     @Test
     public void testGetBatteryInfo_basedOnUsageFalse_usesDefaultString() {
-        BatteryInfo info = BatteryInfo.getBatteryInfo(mContext, mDisChargingBatteryBroadcast,
-                mBatteryUsageStats, MOCK_ESTIMATE, SystemClock.elapsedRealtime() * 1000,
-                false /* shortString */);
-        BatteryInfo info2 = BatteryInfo.getBatteryInfo(mContext, mDisChargingBatteryBroadcast,
-                mBatteryUsageStats, MOCK_ESTIMATE, SystemClock.elapsedRealtime() * 1000,
-                true /* shortString */);
+        BatteryInfo info =
+                BatteryInfo.getBatteryInfo(
+                        mContext,
+                        mDisChargingBatteryBroadcast,
+                        mBatteryUsageStats,
+                        MOCK_ESTIMATE,
+                        SystemClock.elapsedRealtime() * 1000,
+                        false /* shortString */);
+        BatteryInfo info2 =
+                BatteryInfo.getBatteryInfo(
+                        mContext,
+                        mDisChargingBatteryBroadcast,
+                        mBatteryUsageStats,
+                        MOCK_ESTIMATE,
+                        SystemClock.elapsedRealtime() * 1000,
+                        true /* shortString */);
 
         assertThat(info.remainingLabel.toString()).doesNotContain(ENHANCED_STRING_SUFFIX);
         assertThat(info2.remainingLabel.toString()).doesNotContain(ENHANCED_STRING_SUFFIX);
@@ -191,11 +240,17 @@ public class BatteryInfoTest {
     @Test
     public void testGetBatteryInfo_charging_usesChargeTime() {
         doReturn(TEST_CHARGE_TIME_REMAINING / 1000)
-                .when(mBatteryUsageStats).getChargeTimeRemainingMs();
+                .when(mBatteryUsageStats)
+                .getChargeTimeRemainingMs();
 
-        BatteryInfo info = BatteryInfo.getBatteryInfo(mContext, mChargingBatteryBroadcast,
-                mBatteryUsageStats, MOCK_ESTIMATE, SystemClock.elapsedRealtime() * 1000,
-                false /* shortString */);
+        BatteryInfo info =
+                BatteryInfo.getBatteryInfo(
+                        mContext,
+                        mChargingBatteryBroadcast,
+                        mBatteryUsageStats,
+                        MOCK_ESTIMATE,
+                        SystemClock.elapsedRealtime() * 1000,
+                        false /* shortString */);
 
         assertThat(info.remainingTimeUs).isEqualTo(TEST_CHARGE_TIME_REMAINING);
         assertThat(info.remainingLabel.toString())
@@ -206,44 +261,95 @@ public class BatteryInfoTest {
     public void testGetBatteryInfo_pluggedInWithFullBattery_onlyShowBatteryLevel() {
         mChargingBatteryBroadcast.putExtra(BatteryManager.EXTRA_LEVEL, 100);
 
-        BatteryInfo info = BatteryInfo.getBatteryInfo(mContext, mChargingBatteryBroadcast,
-                mBatteryUsageStats, MOCK_ESTIMATE, SystemClock.elapsedRealtime() * 1000,
-                false /* shortString */);
+        BatteryInfo info =
+                BatteryInfo.getBatteryInfo(
+                        mContext,
+                        mChargingBatteryBroadcast,
+                        mBatteryUsageStats,
+                        MOCK_ESTIMATE,
+                        SystemClock.elapsedRealtime() * 1000,
+                        false /* shortString */);
 
         assertThat(info.chargeLabel).isEqualTo("100%");
     }
 
     @Test
     public void testGetBatteryInfo_chargingWithDefender_updateChargeLabel() {
-        doReturn(TEST_CHARGE_TIME_REMAINING)
-                .when(mBatteryUsageStats)
-                .getChargeTimeRemainingMs();
-        mChargingBatteryBroadcast.putExtra(BatteryManager.EXTRA_CHARGING_STATUS,
+        doReturn(TEST_CHARGE_TIME_REMAINING).when(mBatteryUsageStats).getChargeTimeRemainingMs();
+        mChargingBatteryBroadcast.putExtra(
+                BatteryManager.EXTRA_CHARGING_STATUS,
                 BatteryManager.CHARGING_POLICY_ADAPTIVE_LONGLIFE);
 
-        BatteryInfo info = BatteryInfo.getBatteryInfo(mContext, mChargingBatteryBroadcast,
-                mBatteryUsageStats, MOCK_ESTIMATE, SystemClock.elapsedRealtime() * 1000,
-                false /* shortString */);
+        BatteryInfo info =
+                BatteryInfo.getBatteryInfo(
+                        mContext,
+                        mChargingBatteryBroadcast,
+                        mBatteryUsageStats,
+                        MOCK_ESTIMATE,
+                        SystemClock.elapsedRealtime() * 1000,
+                        false /* shortString */);
 
         assertThat(info.isBatteryDefender).isTrue();
         assertThat(info.chargeLabel.toString()).contains(STATUS_CHARGING_PAUSED);
     }
 
     @Test
+    public void testGetBatteryInfo_getChargeTimeRemaining_updateSettingsGlobal() {
+        doReturn(TEST_CHARGE_TIME_REMAINING).when(mBatteryUsageStats).getChargeTimeRemainingMs();
+
+        BatteryInfo.getBatteryInfo(
+                mContext,
+                mChargingBatteryBroadcast,
+                mBatteryUsageStats,
+                MOCK_ESTIMATE,
+                SystemClock.elapsedRealtime() * 1000,
+                false /* shortString */);
+
+        assertThat(BatteryInfo.getSettingsChargeTimeRemaining(mContext))
+                .isEqualTo(TEST_CHARGE_TIME_REMAINING);
+    }
+
+    @Test
+    public void testGetBatteryInfo_differentChargeTimeRemaining_updateSettingsGlobal() {
+        doReturn(TEST_CHARGE_TIME_REMAINING).when(mBatteryUsageStats).getChargeTimeRemainingMs();
+        final long newTimeToFull = 300L;
+        doReturn(newTimeToFull).when(mBatteryUsageStats).getChargeTimeRemainingMs();
+
+        BatteryInfo.getBatteryInfo(
+                mContext,
+                mChargingBatteryBroadcast,
+                mBatteryUsageStats,
+                MOCK_ESTIMATE,
+                SystemClock.elapsedRealtime() * 1000,
+                false /* shortString */);
+
+        assertThat(BatteryInfo.getSettingsChargeTimeRemaining(mContext)).isEqualTo(newTimeToFull);
+    }
+
+    @Test
     public void testGetBatteryInfo_dockDefenderActive_updateChargeString() {
         doReturn(TEST_CHARGE_TIME_REMAINING / 1000)
-                .when(mBatteryUsageStats).getChargeTimeRemainingMs();
+                .when(mBatteryUsageStats)
+                .getChargeTimeRemainingMs();
         doReturn(true).when(mFeatureFactory.powerUsageFeatureProvider).isExtraDefend();
-        Intent intent = BatteryTestUtils.getCustomBatteryIntent(BatteryManager.BATTERY_PLUGGED_DOCK,
-                        50 /* level */,
-                        100 /* scale */,
-                        BatteryManager.BATTERY_STATUS_CHARGING)
-                .putExtra(BatteryManager.EXTRA_CHARGING_STATUS,
-                        BatteryManager.CHARGING_POLICY_ADAPTIVE_LONGLIFE);
+        Intent intent =
+                BatteryTestUtils.getCustomBatteryIntent(
+                                BatteryManager.BATTERY_PLUGGED_DOCK,
+                                50 /* level */,
+                                100 /* scale */,
+                                BatteryManager.BATTERY_STATUS_CHARGING)
+                        .putExtra(
+                                BatteryManager.EXTRA_CHARGING_STATUS,
+                                BatteryManager.CHARGING_POLICY_ADAPTIVE_LONGLIFE);
 
-        BatteryInfo info = BatteryInfo.getBatteryInfo(mContext, intent,
-                mBatteryUsageStats, MOCK_ESTIMATE, SystemClock.elapsedRealtime() * 1000,
-                false /* shortString */);
+        BatteryInfo info =
+                BatteryInfo.getBatteryInfo(
+                        mContext,
+                        intent,
+                        mBatteryUsageStats,
+                        MOCK_ESTIMATE,
+                        SystemClock.elapsedRealtime() * 1000,
+                        false /* shortString */);
 
         assertThat(info.chargeLabel.toString()).contains(STATUS_CHARGING_PAUSED);
     }
@@ -251,18 +357,25 @@ public class BatteryInfoTest {
     @Test
     public void testGetBatteryInfo_dockDefenderTemporarilyBypassed_updateChargeLabel() {
         doReturn(REMAINING_TIME).when(mBatteryUsageStats).getChargeTimeRemainingMs();
-        mChargingBatteryBroadcast.putExtra(BatteryManager.EXTRA_CHARGING_STATUS,
-                BatteryManager.CHARGING_POLICY_DEFAULT);
-        Settings.Global.putInt(mContext.getContentResolver(),
-                BatteryUtils.SETTINGS_GLOBAL_DOCK_DEFENDER_BYPASS, 1);
+        mChargingBatteryBroadcast.putExtra(
+                BatteryManager.EXTRA_CHARGING_STATUS, BatteryManager.CHARGING_POLICY_DEFAULT);
+        Settings.Global.putInt(
+                mContext.getContentResolver(),
+                BatteryUtils.SETTINGS_GLOBAL_DOCK_DEFENDER_BYPASS,
+                1);
 
-        BatteryInfo info = BatteryInfo.getBatteryInfo(mContext,
-                BatteryTestUtils.getCustomBatteryIntent(BatteryManager.BATTERY_PLUGGED_DOCK,
-                        50 /* level */,
-                        100 /* scale */,
-                        BatteryManager.BATTERY_STATUS_CHARGING),
-                mBatteryUsageStats, MOCK_ESTIMATE, SystemClock.elapsedRealtime() * 1000,
-                false /* shortString */);
+        BatteryInfo info =
+                BatteryInfo.getBatteryInfo(
+                        mContext,
+                        BatteryTestUtils.getCustomBatteryIntent(
+                                BatteryManager.BATTERY_PLUGGED_DOCK,
+                                50 /* level */,
+                                100 /* scale */,
+                                BatteryManager.BATTERY_STATUS_CHARGING),
+                        mBatteryUsageStats,
+                        MOCK_ESTIMATE,
+                        SystemClock.elapsedRealtime() * 1000,
+                        false /* shortString */);
 
         assertThat(info.chargeLabel.toString()).contains(STATUS_CHARGING_TIME);
     }
@@ -270,16 +383,21 @@ public class BatteryInfoTest {
     @Test
     public void testGetBatteryInfo_dockDefenderFutureBypass_updateChargeLabel() {
         doReturn(false).when(mFeatureFactory.powerUsageFeatureProvider).isExtraDefend();
-        mChargingBatteryBroadcast.putExtra(BatteryManager.EXTRA_CHARGING_STATUS,
-                BatteryManager.CHARGING_POLICY_DEFAULT);
+        mChargingBatteryBroadcast.putExtra(
+                BatteryManager.EXTRA_CHARGING_STATUS, BatteryManager.CHARGING_POLICY_DEFAULT);
 
-        BatteryInfo info = BatteryInfo.getBatteryInfo(mContext,
-                BatteryTestUtils.getCustomBatteryIntent(BatteryManager.BATTERY_PLUGGED_DOCK,
-                        50 /* level */,
-                        100 /* scale */,
-                        BatteryManager.BATTERY_STATUS_CHARGING),
-                mBatteryUsageStats, MOCK_ESTIMATE, SystemClock.elapsedRealtime() * 1000,
-                false /* shortString */);
+        BatteryInfo info =
+                BatteryInfo.getBatteryInfo(
+                        mContext,
+                        BatteryTestUtils.getCustomBatteryIntent(
+                                BatteryManager.BATTERY_PLUGGED_DOCK,
+                                50 /* level */,
+                                100 /* scale */,
+                                BatteryManager.BATTERY_STATUS_CHARGING),
+                        mBatteryUsageStats,
+                        MOCK_ESTIMATE,
+                        SystemClock.elapsedRealtime() * 1000,
+                        false /* shortString */);
 
         assertThat(info.chargeLabel.toString()).contains(STATUS_CHARGING_FUTURE_BYPASS);
     }
@@ -287,15 +405,20 @@ public class BatteryInfoTest {
     // Make our battery stats return a sequence of battery events.
     private void mockBatteryStatsHistory() {
         // Mock out new data every time iterateBatteryStatsHistory is called.
-        doAnswer(invocation -> {
-            BatteryStatsHistoryIterator iterator = mock(BatteryStatsHistoryIterator.class);
-            when(iterator.next()).thenReturn(
-                    makeHistoryIterm(1000, 99),
-                    makeHistoryIterm(1500, 98),
-                    makeHistoryIterm(2000, 97),
-                    null);
-            return iterator;
-        }).when(mBatteryUsageStats).iterateBatteryStatsHistory();
+        doAnswer(
+                        invocation -> {
+                            BatteryStatsHistoryIterator iterator =
+                                    mock(BatteryStatsHistoryIterator.class);
+                            when(iterator.next())
+                                    .thenReturn(
+                                            makeHistoryIterm(1000, 99),
+                                            makeHistoryIterm(1500, 98),
+                                            makeHistoryIterm(2000, 97),
+                                            null);
+                            return iterator;
+                        })
+                .when(mBatteryUsageStats)
+                .iterateBatteryStatsHistory();
     }
 
     private BatteryStats.HistoryItem makeHistoryIterm(long time, int batteryLevel) {
@@ -342,7 +465,8 @@ public class BatteryInfoTest {
         pointsExpected.append(2000, 96);
         pointsExpected.append(2500, 95);
         pointsExpected.append(3000, 94);
-        doReturn(pointsExpected).when(mFeatureFactory.powerUsageFeatureProvider)
+        doReturn(pointsExpected)
+                .when(mFeatureFactory.powerUsageFeatureProvider)
                 .getEnhancedBatteryPredictionCurve(any(Context.class), anyLong());
 
         info.bindHistory(view);
@@ -359,14 +483,21 @@ public class BatteryInfoTest {
         } else {
             doReturn(0L).when(mBatteryUsageStats).getChargeTimeRemainingMs();
         }
-        Estimate batteryEstimate = new Estimate(
-                estimate ? 1000 : 0,
-                false /* isBasedOnUsage */,
-                1000 /* averageDischargeTime */);
-        BatteryInfo info = BatteryInfo.getBatteryInfo(mContext,
-                charging ? mChargingBatteryBroadcast : mDisChargingBatteryBroadcast,
-                mBatteryUsageStats, batteryEstimate, SystemClock.elapsedRealtime() * 1000, false);
-        doReturn(enhanced).when(mFeatureFactory.powerUsageFeatureProvider)
+        Estimate batteryEstimate =
+                new Estimate(
+                        estimate ? 1000 : 0,
+                        false /* isBasedOnUsage */,
+                        1000 /* averageDischargeTime */);
+        BatteryInfo info =
+                BatteryInfo.getBatteryInfo(
+                        mContext,
+                        charging ? mChargingBatteryBroadcast : mDisChargingBatteryBroadcast,
+                        mBatteryUsageStats,
+                        batteryEstimate,
+                        SystemClock.elapsedRealtime() * 1000,
+                        false);
+        doReturn(enhanced)
+                .when(mFeatureFactory.powerUsageFeatureProvider)
                 .isEnhancedBatteryPredictionEnabled(mContext);
         return info;
     }

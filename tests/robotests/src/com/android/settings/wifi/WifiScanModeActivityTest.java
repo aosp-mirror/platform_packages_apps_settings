@@ -30,7 +30,6 @@ import android.text.TextUtils;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.testutils.shadow.ShadowUtils;
-import com.android.settings.utils.ActivityControllerWrapper;
 import com.android.settingslib.wifi.WifiPermissionChecker;
 
 import org.junit.After;
@@ -69,8 +68,7 @@ public class WifiScanModeActivityTest {
         when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
         when(mUserManager.isGuestUser()).thenReturn(false);
 
-        mActivity = spy((WifiScanModeActivity) ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(WifiScanModeActivity.class)).get());
+        mActivity = spy(Robolectric.setupActivity(WifiScanModeActivity.class));
         when(mActivity.getApplicationContext()).thenReturn(mContext);
         mActivity.mWifiPermissionChecker = mWifiPermissionChecker;
     }
@@ -82,8 +80,8 @@ public class WifiScanModeActivityTest {
 
     @Test
     public void launchActivity_noIntentAction_shouldNotFatalException() {
-        ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(WifiScanModeActivity.class)).get();
+        WifiScanModeActivity wifiScanModeActivity =
+                Robolectric.setupActivity(WifiScanModeActivity.class);
     }
 
     @Test

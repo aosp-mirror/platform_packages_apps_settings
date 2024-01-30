@@ -20,10 +20,12 @@ import android.app.settings.SettingsEnums
 import android.content.pm.ApplicationInfo
 import android.os.UserManager
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.WarningAmber
+import androidx.compose.material.icons.outlined.Report
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settings.R
 import com.android.settingslib.RestrictedLockUtils
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin
@@ -35,6 +37,9 @@ import com.android.settingslib.spa.widget.dialog.rememberAlertDialogPresenter
 import com.android.settingslib.spaprivileged.model.app.hasFlag
 import com.android.settingslib.spaprivileged.model.app.isActiveAdmin
 import com.android.settingslib.spaprivileged.model.app.userId
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 
 class AppForceStopButton(
     private val packageInfoPresenter: PackageInfoPresenter,
@@ -47,9 +52,13 @@ class AppForceStopButton(
     fun getActionButton(app: ApplicationInfo): ActionButton {
         val dialogPresenter = confirmDialogPresenter()
         return ActionButton(
-            text = context.getString(R.string.force_stop),
-            imageVector = Icons.Outlined.WarningAmber,
-            enabled = isForceStopButtonEnable(app),
+            text = stringResource(R.string.force_stop),
+            imageVector = Icons.Outlined.Report,
+            enabled = remember(app) {
+                flow {
+                    emit(isForceStopButtonEnable(app))
+                }.flowOn(Dispatchers.Default)
+            }.collectAsStateWithLifecycle(false).value,
         ) { onForceStopButtonClicked(app, dialogPresenter) }
     }
 

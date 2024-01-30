@@ -39,7 +39,7 @@ public class AutoRotatePreferenceController extends TogglePreferenceController i
 
     public AutoRotatePreferenceController(Context context, String key) {
         super(context, key);
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     @Override
@@ -103,7 +103,8 @@ public class AutoRotatePreferenceController extends TogglePreferenceController i
         final boolean isLocked = !isChecked;
         mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_ROTATION_LOCK,
                 isLocked);
-        RotationPolicy.setRotationLock(mContext, isLocked);
+        RotationPolicy.setRotationLock(mContext, isLocked,
+                /* caller= */ "AutoRotatePreferenceController#setChecked");
         return true;
     }
 }

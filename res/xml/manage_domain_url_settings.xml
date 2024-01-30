@@ -25,7 +25,7 @@
         android:key="web_action_category"
         android:title="@string/web_action_section_title"
         settings:controller="com.android.settings.applications.managedomainurls.WebActionCategoryController">
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="instant_app_web_action_toggle"
             android:title="@string/web_action_enable_title"
             android:summary="@string/web_action_enable_summary"

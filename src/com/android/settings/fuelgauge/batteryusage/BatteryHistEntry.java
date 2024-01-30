@@ -20,8 +20,6 @@ import android.database.Cursor;
 import android.os.BatteryConsumer;
 import android.util.Log;
 
-import java.time.Duration;
-
 /** A container class to carry data from {@link ContentValues}. */
 public class BatteryHistEntry {
     private static final boolean DEBUG = false;
@@ -29,6 +27,7 @@ public class BatteryHistEntry {
 
     /** Keys for accessing {@link ContentValues} or {@link Cursor}. */
     public static final String KEY_UID = "uid";
+
     public static final String KEY_USER_ID = "userId";
     public static final String KEY_PACKAGE_NAME = "packageName";
     public static final String KEY_TIMESTAMP = "timestamp";
@@ -56,11 +55,10 @@ public class BatteryHistEntry {
     public final double mCachedUsageConsumePower;
     public final double mPercentOfTotal;
     public final long mForegroundUsageTimeInMs;
+    public final long mForegroundServiceUsageTimeInMs;
     public final long mBackgroundUsageTimeInMs;
-    @BatteryConsumer.PowerComponent
-    public final int mDrainType;
-    @ConvertUtils.ConsumerType
-    public final int mConsumerType;
+    @BatteryConsumer.PowerComponent public final int mDrainType;
+    @ConvertUtils.ConsumerType public final int mConsumerType;
     // Records the battery intent relative information.
     public final int mBatteryLevel;
     public final int mBatteryStatus;
@@ -90,6 +88,7 @@ public class BatteryHistEntry {
         mCachedUsageConsumePower = batteryInformation.getCachedUsageConsumePower();
         mPercentOfTotal = batteryInformation.getPercentOfTotal();
         mForegroundUsageTimeInMs = batteryInformation.getForegroundUsageTimeInMs();
+        mForegroundServiceUsageTimeInMs = batteryInformation.getForegroundServiceUsageTimeInMs();
         mBackgroundUsageTimeInMs = batteryInformation.getBackgroundUsageTimeInMs();
         mDrainType = batteryInformation.getDrainType();
         final DeviceBatteryState deviceBatteryState = batteryInformation.getDeviceBatteryState();
@@ -119,6 +118,7 @@ public class BatteryHistEntry {
         mCachedUsageConsumePower = batteryInformation.getCachedUsageConsumePower();
         mPercentOfTotal = batteryInformation.getPercentOfTotal();
         mForegroundUsageTimeInMs = batteryInformation.getForegroundUsageTimeInMs();
+        mForegroundServiceUsageTimeInMs = batteryInformation.getForegroundServiceUsageTimeInMs();
         mBackgroundUsageTimeInMs = batteryInformation.getBackgroundUsageTimeInMs();
         mDrainType = batteryInformation.getDrainType();
         final DeviceBatteryState deviceBatteryState = batteryInformation.getDeviceBatteryState();
@@ -138,6 +138,7 @@ public class BatteryHistEntry {
             double backgroundUsageConsumePower,
             double cachedUsageConsumePower,
             long foregroundUsageTimeInMs,
+            long foregroundServiceUsageTimeInMs,
             long backgroundUsageTimeInMs,
             int batteryLevel) {
         mUid = fromEntry.mUid;
@@ -156,6 +157,7 @@ public class BatteryHistEntry {
         mCachedUsageConsumePower = cachedUsageConsumePower;
         mPercentOfTotal = fromEntry.mPercentOfTotal;
         mForegroundUsageTimeInMs = foregroundUsageTimeInMs;
+        mForegroundServiceUsageTimeInMs = foregroundServiceUsageTimeInMs;
         mBackgroundUsageTimeInMs = backgroundUsageTimeInMs;
         mDrainType = fromEntry.mDrainType;
         mConsumerType = fromEntry.mConsumerType;
@@ -190,24 +192,39 @@ public class BatteryHistEntry {
     @Override
     public String toString() {
         final String recordAtDateTime = ConvertUtils.utcToLocalTimeForLogging(mTimestamp);
-        final StringBuilder builder = new StringBuilder()
-                .append("\nBatteryHistEntry{")
-                .append(String.format("\n\tpackage=%s|label=%s|uid=%d|userId=%d|isHidden=%b",
-                        mPackageName, mAppLabel, mUid, mUserId, mIsHidden))
-                .append(String.format("\n\ttimestamp=%s|zoneId=%s|bootTimestamp=%d",
-                        recordAtDateTime, mZoneId, Duration.ofMillis(mBootTimestamp).getSeconds()))
-                .append(String.format("\n\tusage=%f|total=%f|consume=%f",
-                        mPercentOfTotal, mTotalPower, mConsumePower))
-                .append(String.format("\n\tforeground=%f|foregroundService=%f",
-                        mForegroundUsageConsumePower, mForegroundServiceUsageConsumePower))
-                .append(String.format("\n\tbackground=%f|cached=%f",
-                        mBackgroundUsageConsumePower, mCachedUsageConsumePower))
-                .append(String.format("\n\telapsedTime=%d|%d",
-                        Duration.ofMillis(mForegroundUsageTimeInMs).getSeconds(),
-                        Duration.ofMillis(mBackgroundUsageTimeInMs).getSeconds()))
-                .append(String.format("\n\tdrainType=%d|consumerType=%d",
-                        mDrainType, mConsumerType))
-                .append(String.format("\n\tbattery=%d|status=%d|health=%d\n}",
+        final StringBuilder builder = new StringBuilder();
+        builder.append("\nBatteryHistEntry{");
+        builder.append(
+                String.format(
+                        "\n\tpackage=%s|label=%s|uid=%d|userId=%d|isHidden=%b",
+                        mPackageName, mAppLabel, mUid, mUserId, mIsHidden));
+        builder.append(
+                String.format(
+                        "\n\ttimestamp=%s|zoneId=%s|bootTimestamp=%d",
+                        recordAtDateTime, mZoneId, TimestampUtils.getSeconds(mBootTimestamp)));
+        builder.append(
+                String.format(
+                        "\n\tusage=%f|total=%f|consume=%f",
+                        mPercentOfTotal, mTotalPower, mConsumePower));
+        builder.append(
+                String.format(
+                        "\n\tforeground=%f|foregroundService=%f",
+                        mForegroundUsageConsumePower, mForegroundServiceUsageConsumePower));
+        builder.append(
+                String.format(
+                        "\n\tbackground=%f|cached=%f",
+                        mBackgroundUsageConsumePower, mCachedUsageConsumePower));
+        builder.append(
+                String.format(
+                        "\n\telapsedTime,fg=%d|fgs=%d|bg=%d",
+                        TimestampUtils.getSeconds(mBackgroundUsageTimeInMs),
+                        TimestampUtils.getSeconds(mForegroundServiceUsageTimeInMs),
+                        TimestampUtils.getSeconds(mBackgroundUsageTimeInMs)));
+        builder.append(
+                String.format("\n\tdrainType=%d|consumerType=%d", mDrainType, mConsumerType));
+        builder.append(
+                String.format(
+                        "\n\tbattery=%d|status=%d|health=%d\n}",
                         mBatteryLevel, mBatteryStatus, mBatteryHealth));
         return builder.toString();
     }
@@ -270,65 +287,83 @@ public class BatteryHistEntry {
             double ratio,
             BatteryHistEntry lowerHistEntry,
             BatteryHistEntry upperHistEntry) {
-        final double totalPower = interpolate(
-                lowerHistEntry == null ? 0 : lowerHistEntry.mTotalPower,
-                upperHistEntry.mTotalPower,
-                ratio);
-        final double consumePower = interpolate(
-                lowerHistEntry == null ? 0 : lowerHistEntry.mConsumePower,
-                upperHistEntry.mConsumePower,
-                ratio);
-        final double foregroundUsageConsumePower = interpolate(
-                lowerHistEntry == null ? 0 : lowerHistEntry.mForegroundUsageConsumePower,
-                upperHistEntry.mForegroundUsageConsumePower,
-                ratio);
-        final double foregroundServiceUsageConsumePower = interpolate(
-                lowerHistEntry == null ? 0 : lowerHistEntry.mForegroundServiceUsageConsumePower,
-                upperHistEntry.mForegroundServiceUsageConsumePower,
-                ratio);
-        final double backgroundUsageConsumePower = interpolate(
-                lowerHistEntry == null ? 0 : lowerHistEntry.mBackgroundUsageConsumePower,
-                upperHistEntry.mBackgroundUsageConsumePower,
-                ratio);
-        final double cachedUsageConsumePower = interpolate(
-                lowerHistEntry == null ? 0 : lowerHistEntry.mCachedUsageConsumePower,
-                upperHistEntry.mCachedUsageConsumePower,
-                ratio);
-        final double foregroundUsageTimeInMs = interpolate(
-                (double) (lowerHistEntry == null ? 0 : lowerHistEntry.mForegroundUsageTimeInMs),
-                (double) upperHistEntry.mForegroundUsageTimeInMs,
-                ratio);
-        final double backgroundUsageTimeInMs = interpolate(
-                (double) (lowerHistEntry == null ? 0 : lowerHistEntry.mBackgroundUsageTimeInMs),
-                (double) upperHistEntry.mBackgroundUsageTimeInMs,
-                ratio);
+        final double totalPower =
+                interpolate(
+                        lowerHistEntry == null ? 0 : lowerHistEntry.mTotalPower,
+                        upperHistEntry.mTotalPower,
+                        ratio);
+        final double consumePower =
+                interpolate(
+                        lowerHistEntry == null ? 0 : lowerHistEntry.mConsumePower,
+                        upperHistEntry.mConsumePower,
+                        ratio);
+        final double foregroundUsageConsumePower =
+                interpolate(
+                        lowerHistEntry == null ? 0 : lowerHistEntry.mForegroundUsageConsumePower,
+                        upperHistEntry.mForegroundUsageConsumePower,
+                        ratio);
+        final double foregroundServiceUsageConsumePower =
+                interpolate(
+                        lowerHistEntry == null
+                                ? 0
+                                : lowerHistEntry.mForegroundServiceUsageConsumePower,
+                        upperHistEntry.mForegroundServiceUsageConsumePower,
+                        ratio);
+        final double backgroundUsageConsumePower =
+                interpolate(
+                        lowerHistEntry == null ? 0 : lowerHistEntry.mBackgroundUsageConsumePower,
+                        upperHistEntry.mBackgroundUsageConsumePower,
+                        ratio);
+        final double cachedUsageConsumePower =
+                interpolate(
+                        lowerHistEntry == null ? 0 : lowerHistEntry.mCachedUsageConsumePower,
+                        upperHistEntry.mCachedUsageConsumePower,
+                        ratio);
+        final double foregroundUsageTimeInMs =
+                interpolate(
+                        (lowerHistEntry == null ? 0 : lowerHistEntry.mForegroundUsageTimeInMs),
+                        upperHistEntry.mForegroundUsageTimeInMs,
+                        ratio);
+        final double foregroundServiceUsageTimeInMs =
+                interpolate(
+                        (lowerHistEntry == null
+                                ? 0
+                                : lowerHistEntry.mForegroundServiceUsageTimeInMs),
+                        upperHistEntry.mForegroundServiceUsageTimeInMs,
+                        ratio);
+        final double backgroundUsageTimeInMs =
+                interpolate(
+                        (lowerHistEntry == null ? 0 : lowerHistEntry.mBackgroundUsageTimeInMs),
+                        upperHistEntry.mBackgroundUsageTimeInMs,
+                        ratio);
         // Checks whether there is any abnormal cases!
         if (upperHistEntry.mConsumePower < consumePower
                 || upperHistEntry.mForegroundUsageConsumePower < foregroundUsageConsumePower
                 || upperHistEntry.mForegroundServiceUsageConsumePower
-                < foregroundServiceUsageConsumePower
+                        < foregroundServiceUsageConsumePower
                 || upperHistEntry.mBackgroundUsageConsumePower < backgroundUsageConsumePower
                 || upperHistEntry.mCachedUsageConsumePower < cachedUsageConsumePower
                 || upperHistEntry.mForegroundUsageTimeInMs < foregroundUsageTimeInMs
+                || upperHistEntry.mForegroundServiceUsageTimeInMs < foregroundServiceUsageTimeInMs
                 || upperHistEntry.mBackgroundUsageTimeInMs < backgroundUsageTimeInMs) {
             if (DEBUG) {
-                Log.w(TAG, String.format(
-                        "abnormal interpolation:\nupper:%s\nlower:%s",
-                        upperHistEntry, lowerHistEntry));
+                Log.w(
+                        TAG,
+                        String.format(
+                                "abnormal interpolation:\nupper:%s\nlower:%s",
+                                upperHistEntry, lowerHistEntry));
             }
         }
         final double batteryLevel =
                 lowerHistEntry == null
                         ? upperHistEntry.mBatteryLevel
                         : interpolate(
-                                lowerHistEntry.mBatteryLevel,
-                                upperHistEntry.mBatteryLevel,
-                                ratio);
+                                lowerHistEntry.mBatteryLevel, upperHistEntry.mBatteryLevel, ratio);
         return new BatteryHistEntry(
                 upperHistEntry,
-                /*bootTimestamp=*/ upperHistEntry.mBootTimestamp
-                - (upperTimestamp - slotTimestamp),
-                /*timestamp=*/ slotTimestamp,
+                /* bootTimestamp= */ upperHistEntry.mBootTimestamp
+                        - (upperTimestamp - slotTimestamp),
+                /* timestamp= */ slotTimestamp,
                 totalPower,
                 consumePower,
                 foregroundUsageConsumePower,
@@ -336,6 +371,7 @@ public class BatteryHistEntry {
                 backgroundUsageConsumePower,
                 cachedUsageConsumePower,
                 Math.round(foregroundUsageTimeInMs),
+                Math.round(foregroundServiceUsageTimeInMs),
                 Math.round(backgroundUsageTimeInMs),
                 (int) Math.round(batteryLevel));
     }

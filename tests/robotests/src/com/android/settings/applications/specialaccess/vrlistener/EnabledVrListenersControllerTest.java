@@ -24,7 +24,6 @@ import static com.google.common.truth.Truth.assertThat;
 import android.content.Context;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -34,6 +33,9 @@ import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowActivityManager;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        ShadowActivityManager.class,
+})
 public class EnabledVrListenersControllerTest {
 
     private Context mContext;
@@ -58,7 +60,6 @@ public class EnabledVrListenersControllerTest {
         assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 
-    @Ignore
     @Test
     @Config(qualifiers = "mcc999")
     public void getAvailability_disabled_unavailable() {

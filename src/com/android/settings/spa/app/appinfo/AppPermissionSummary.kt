@@ -39,7 +39,7 @@ data class AppPermissionSummaryState(
 @Composable
 fun rememberAppPermissionSummary(app: ApplicationInfo): AppPermissionSummaryLiveData {
     val context = LocalContext.current
-    return remember { AppPermissionSummaryLiveData(context, app) }
+    return remember(app) { AppPermissionSummaryLiveData(context, app) }
 }
 
 class AppPermissionSummaryLiveData(
@@ -55,7 +55,11 @@ class AppPermissionSummaryLiveData(
 
     override fun onActive() {
         userPackageManager.addOnPermissionsChangeListener(onPermissionsChangedListener)
-        update()
+        if (app.isArchived) {
+            postValue(noPermissionRequestedState())
+        } else {
+            update()
+        }
     }
 
     override fun onInactive() {

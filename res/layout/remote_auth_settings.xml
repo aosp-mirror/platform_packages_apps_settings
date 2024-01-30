@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (C) 2023 The Android Open Source Project
+
+    Licensed under the Apache License, Version 2.0 (the "License")
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+
+<com.google.android.setupdesign.GlifLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/setup_wizard_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:sucUsePartnerResource="false"
+    app:sucHeaderText="@string/security_settings_remoteauth_settings_title"
+    app:sudDescriptionText="@string/security_settings_remoteauth_settings_description" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="start"
+        android:paddingHorizontal="@dimen/remoteauth_padding_horizontal">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/registered_authenticator_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/remoteauth_settings_top_margin"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/add_authenticator_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/remoteauth_device_vertical_margin"
+            android:minHeight="@dimen/remoteauth_touchable_area_minimum_span"
+            android:clickable="true">
+
+            <ImageView
+                android:id="@+id/add_icon"
+                android:layout_width="@dimen/remoteauth_icon_small_size"
+                android:layout_height="@dimen/remoteauth_icon_small_size"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:background="@drawable/ic_add_24dp"
+                android:clickable="false" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/remoteauth_settings_device_horizontal_margin"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="@dimen/remoteauth_device_name_text_size"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/add_icon"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="@string/security_settings_remoteauth_settings_register_new_authenticator"
+                android:clickable="false" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:layout_marginTop="@dimen/remoteauth_settings_top_margin"
+            android:layout_width="@dimen/remoteauth_icon_small_size"
+            android:layout_height="@dimen/remoteauth_icon_small_size"
+            android:background="@drawable/ic_info_outline_24dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/remoteauth_settings_top_margin"
+            android:textSize="@dimen/remoteauth_fragment_subtitle_text_size"
+            android:text="@string/security_settings_remoteauth_settings_info_footer"
+            android:textColor="?android:attr/textColorPrimary" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/remoteauth_settings_top_margin"
+            android:textSize="@dimen/remoteauth_fragment_subtitle_text_size"
+            android:text="@string/security_settings_remoteauth_settings_learn_more"
+            android:textColor="?android:attr/textColorPrimary" />
+
+    </LinearLayout>
+
+</com.google.android.setupdesign.GlifLayout>

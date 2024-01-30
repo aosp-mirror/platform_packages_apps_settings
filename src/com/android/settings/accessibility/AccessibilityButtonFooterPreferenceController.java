@@ -17,6 +17,8 @@
 package com.android.settings.accessibility;
 
 import android.content.Context;
+import android.icu.text.MessageFormat;
+import android.text.Html;
 
 import androidx.preference.PreferenceScreen;
 
@@ -50,7 +52,9 @@ public class AccessibilityButtonFooterPreferenceController extends
         final int titleResource = AccessibilityUtil.isGestureNavigateEnabled(mContext)
                 ? R.string.accessibility_button_gesture_description
                 : R.string.accessibility_button_description;
-        final CharSequence footerText = mContext.getText(titleResource);
+        final CharSequence footerText = Html.fromHtml(
+                MessageFormat.format(mContext.getString(titleResource), 1, 2, 3),
+                Html.FROM_HTML_MODE_COMPACT);
         final AccessibilityFooterPreference footerPreference =
                 screen.findPreference(getPreferenceKey());
         footerPreference.setTitle(footerText);

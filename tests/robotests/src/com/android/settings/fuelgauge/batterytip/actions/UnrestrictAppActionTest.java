@@ -44,8 +44,7 @@ public class UnrestrictAppActionTest {
     private static final String PACKAGE_NAME_1 = "com.android.app1";
     private static final int METRICS_KEY = 1;
 
-    @Mock
-    private BatteryUtils mBatteryUtils;
+    @Mock private BatteryUtils mBatteryUtils;
     private UnrestrictAppAction mUnrestrictAppAction;
     private FakeFeatureFactory mFeatureFactory;
 
@@ -53,14 +52,14 @@ public class UnrestrictAppActionTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        final AppInfo appInfo = new AppInfo.Builder()
-                .setUid(UID_1)
-                .setPackageName(PACKAGE_NAME_1)
-                .build();
+        final AppInfo appInfo =
+                new AppInfo.Builder().setUid(UID_1).setPackageName(PACKAGE_NAME_1).build();
         mFeatureFactory = FakeFeatureFactory.setupForTest();
 
-        mUnrestrictAppAction = new UnrestrictAppAction(RuntimeEnvironment.application,
-                new UnrestrictAppTip(BatteryTip.StateType.NEW, appInfo));
+        mUnrestrictAppAction =
+                new UnrestrictAppAction(
+                        RuntimeEnvironment.application,
+                        new UnrestrictAppTip(BatteryTip.StateType.NEW, appInfo));
         mUnrestrictAppAction.mBatteryUtils = mBatteryUtils;
     }
 
@@ -73,13 +72,13 @@ public class UnrestrictAppActionTest {
     public void testHandlePositiveAction() {
         mUnrestrictAppAction.handlePositiveAction(METRICS_KEY);
 
-        verify(mBatteryUtils)
-                .setForceAppStandby(UID_1, PACKAGE_NAME_1, AppOpsManager.MODE_ALLOWED);
-        verify(mFeatureFactory.metricsFeatureProvider).action(
-                SettingsEnums.PAGE_UNKNOWN,
-                MetricsProto.MetricsEvent.ACTION_TIP_UNRESTRICT_APP,
-                METRICS_KEY,
-                PACKAGE_NAME_1,
-                0);
+        verify(mBatteryUtils).setForceAppStandby(UID_1, PACKAGE_NAME_1, AppOpsManager.MODE_ALLOWED);
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(
+                        SettingsEnums.PAGE_UNKNOWN,
+                        MetricsProto.MetricsEvent.ACTION_TIP_UNRESTRICT_APP,
+                        METRICS_KEY,
+                        PACKAGE_NAME_1,
+                        0);
     }
 }

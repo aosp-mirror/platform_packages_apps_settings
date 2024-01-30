@@ -121,6 +121,7 @@
         <item name="android:textAppearance">@android:style/TextAppearance.DeviceDefault.Medium</item>
         <item name="android:textColorHint">?android:attr/textColorSecondary</item>
         <item name="android:minHeight">@dimen/min_tap_target_size</item>
+        <item name="android:maxLength">500</item>
     </style>
 
     <style name="wifi_section">
@@ -215,10 +216,6 @@
 
     <style name="TextAppearance.Medium" parent="@android:style/TextAppearance.DeviceDefault.Medium"/>
     <style name="TextAppearance.Small" parent="@android:style/TextAppearance.DeviceDefault.Small"/>
-    <style name="TextAppearance.Switch"
-           parent="@android:style/TextAppearance.DeviceDefault.Widget.ActionBar.Title">
-        <item name="android:textSize">16sp</item>
-    </style>
 
     <style name="TextAppearance.CategoryTitle"
            parent="@*android:style/TextAppearance.DeviceDefault.Body2">
@@ -240,11 +237,6 @@
     <style name="TextAppearance.ErrorText"
            parent="@*android:TextAppearance.DeviceDefault.Body1">
         <item name="android:textColor">?android:attr/colorError</item>
-    </style>
-
-    <style name="TextAppearance.Small.SwitchBar">
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
-        <item name="android:textStyle">normal</item>
     </style>
 
     <style name="TextAppearance.RemoveDialogContent"
@@ -442,6 +434,14 @@
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">?android:attr/textColorPrimary</item>
         <item name="android:paddingBottom">24dp</item>
+        <item name="android:textIsSelectable">true</item>
+    </style>
+
+    <style name="DeviceAudioSharingText">
+        <item name="android:textAlignment">center</item>
+        <item name="android:fontFamily">@*android:string/config_bodyFontFamily</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
     </style>
 
     <style name="ContextualCardStyle">
@@ -949,8 +949,44 @@
     </style>
 
     <style name="ScreenLockPasswordHintTextFontStyle">
+        <item name="android:textColor">?android:attr/colorError</item>
+        <item name="android:fontFamily">google-sans-text</item>
+    </style>
+
+    <style name="PrivateSpaceSetupTextFontStyle">
         <item name="android:textColor">?android:attr/textColorPrimary</item>
         <item name="android:fontFamily">google-sans-text</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="PrivateSpaceSetupSubHeaderStyle" parent="@style/PrivateSpaceSetupTextFontStyle">
+        <item name="android:paddingLeft">24dp</item>
+        <item name="android:paddingRight">24dp</item>
+        <item name="android:paddingTop">20dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="PrivateSpaceSetupBulletPointLayoutStyle">
+        <item name="android:paddingLeft">24dp</item>
+        <item name="android:paddingRight">24dp</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">16dp</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="PrivateSpaceBulletPointTextFontStyle" parent="@style/PrivateSpaceSetupTextFontStyle">
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="PrivateSpaceBulletPointIconStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:layout_alignParentTop">true</item>
     </style>
 
 </resources>

@@ -22,7 +22,7 @@ import android.net.wifi.WifiManager;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
@@ -38,7 +38,7 @@ public class WifiTetherAutoOffPreferenceController extends BasePreferenceControl
 
     public WifiTetherAutoOffPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
-        WifiHotspotRepository wifiHotspotRepository = FeatureFactory.getFactory(context)
+        WifiHotspotRepository wifiHotspotRepository = FeatureFactory.getFeatureFactory()
                 .getWifiFeatureProvider().getWifiHotspotRepository();
         if (wifiHotspotRepository.isSpeedFeatureAvailable() && wifiHotspotRepository.isDualBand()) {
             mNeedShutdownSecondarySap = true;
@@ -56,7 +56,7 @@ public class WifiTetherAutoOffPreferenceController extends BasePreferenceControl
         SoftApConfiguration softApConfiguration = mWifiManager.getSoftApConfiguration();
         mSettingsOn = softApConfiguration.isAutoShutdownEnabled();
 
-        ((SwitchPreference) preference).setChecked(mSettingsOn);
+        ((TwoStatePreference) preference).setChecked(mSettingsOn);
     }
 
     @Override

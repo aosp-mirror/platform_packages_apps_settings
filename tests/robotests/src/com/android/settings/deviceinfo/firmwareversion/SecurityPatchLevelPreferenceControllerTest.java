@@ -35,8 +35,6 @@ import android.os.Build;
 
 import androidx.preference.Preference;
 
-import com.android.settings.utils.ActivityControllerWrapper;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -60,8 +58,7 @@ public class SecurityPatchLevelPreferenceControllerTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        mContext = spy((Context) ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(Activity.class)).get());
+        mContext = spy(Robolectric.setupActivity(Activity.class));
     }
 
     @Test

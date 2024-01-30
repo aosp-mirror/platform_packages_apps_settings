@@ -32,7 +32,6 @@ import android.content.pm.ServiceInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.text.TextUtils;
-import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.view.accessibility.AccessibilityManager;
 
@@ -104,10 +103,7 @@ public class AccessibilityDetailsSettingsFragment extends InstrumentedFragment {
             @Nullable ComponentName componentName) {
         if (MAGNIFICATION_COMPONENT_NAME.equals(componentName)) {
             final String destination = ToggleScreenMagnificationPreferenceFragment.class.getName();
-            final Bundle arguments = new Bundle();
-            MagnificationGesturesPreferenceController.populateMagnificationGesturesPreferenceExtras(
-                    arguments, getContext());
-            return new LaunchFragmentArguments(destination, arguments);
+            return new LaunchFragmentArguments(destination, /* arguments= */ null);
         }
 
         if (ACCESSIBILITY_BUTTON_COMPONENT_NAME.equals(componentName)) {
@@ -115,9 +111,7 @@ public class AccessibilityDetailsSettingsFragment extends InstrumentedFragment {
             return new LaunchFragmentArguments(destination, /* arguments= */ null);
         }
 
-        if (ACCESSIBILITY_HEARING_AIDS_COMPONENT_NAME.equals(componentName)
-                && FeatureFlagUtils.isEnabled(getContext(),
-                FeatureFlagUtils.SETTINGS_ACCESSIBILITY_HEARING_AID_PAGE)) {
+        if (ACCESSIBILITY_HEARING_AIDS_COMPONENT_NAME.equals(componentName)) {
             final String destination = AccessibilityHearingAidsFragment.class.getName();
             return new LaunchFragmentArguments(destination, /* arguments= */ null);
         }
@@ -240,7 +234,7 @@ public class AccessibilityDetailsSettingsFragment extends InstrumentedFragment {
                     new ComponentName(packageName, tileServiceClassName).flattenToString());
         }
 
-        final int metricsCategory = FeatureFactory.getFactory(getActivity().getApplicationContext())
+        final int metricsCategory = FeatureFactory.getFeatureFactory()
                 .getAccessibilityMetricsFeatureProvider()
                 .getDownloadedFeatureMetricsCategory(componentName);
         extras.putInt(AccessibilitySettings.EXTRA_METRICS_CATEGORY, metricsCategory);

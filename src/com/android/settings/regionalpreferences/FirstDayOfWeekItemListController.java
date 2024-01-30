@@ -16,6 +16,7 @@
 
 package com.android.settings.regionalpreferences;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 
 import com.android.settings.R;
@@ -56,5 +57,10 @@ public class FirstDayOfWeekItemListController extends
     @Override
     protected String[] getUnitValues() {
         return mContext.getResources().getStringArray(R.array.first_day_of_week);
+    }
+
+    @Override
+    protected int getMetricsActionKey() {
+        return SettingsEnums.ACTION_SET_FIRST_DAY_OF_WEEK;
     }
 }

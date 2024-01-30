@@ -162,7 +162,6 @@ public class ConfirmLockPasswordTest {
                 InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
     }
 
-    @Ignore
     @Test
     public void handleNext_normalFlow_doesNotAttemptRemoteLockscreenValidation() {
         ConfirmLockPassword activity = Robolectric.buildActivity(
@@ -177,8 +176,8 @@ public class ConfirmLockPasswordTest {
         verifyNoInteractions(mRemoteLockscreenValidationClient);
     }
 
-    @Ignore
     @Test
+    @Ignore("b/295325503")
     public void handleNext_remoteValidation_correctGuess_checkboxChecked() throws Exception {
         ConfirmDeviceCredentialBaseActivity activity =
                 buildConfirmDeviceCredentialBaseActivity(
@@ -204,6 +203,7 @@ public class ConfirmLockPasswordTest {
     }
 
     @Test
+    @Ignore("b/295325503")
     public void handleNext_remoteValidation_correctGuess_checkboxUnchecked() throws Exception {
         ConfirmDeviceCredentialBaseActivity activity =
                 buildConfirmDeviceCredentialBaseActivity(
@@ -230,6 +230,7 @@ public class ConfirmLockPasswordTest {
     }
 
     @Test
+    @Ignore("b/295325503")
     public void handleNext_remoteValidation_guessInvalid() throws Exception {
         ConfirmDeviceCredentialBaseActivity activity =
                 buildConfirmDeviceCredentialBaseActivity(
@@ -254,6 +255,7 @@ public class ConfirmLockPasswordTest {
     }
 
     @Test
+    @Ignore("b/295325503")
     public void handleNext_remoteValidation_lockout() throws Exception {
         ConfirmDeviceCredentialBaseActivity activity =
                 buildConfirmDeviceCredentialBaseActivity(
@@ -278,6 +280,7 @@ public class ConfirmLockPasswordTest {
     }
 
     @Test
+    @Ignore("b/295325503")
     public void handleNext_remoteValidation_noRemainingAttempts_finishActivity() throws Exception {
         ConfirmDeviceCredentialBaseActivity activity =
                 buildConfirmDeviceCredentialBaseActivity(

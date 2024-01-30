@@ -48,8 +48,7 @@ public final class BatteryTipsControllerTest {
     private FakeFeatureFactory mFeatureFactory;
     private BatteryTipsController mBatteryTipsController;
 
-    @Mock
-    private BatteryTipsCardPreference mBatteryTipsCardPreference;
+    @Mock private BatteryTipsCardPreference mBatteryTipsCardPreference;
 
     @Before
     public void setUp() {
@@ -82,17 +81,16 @@ public final class BatteryTipsControllerTest {
                 new AnomalyEventWrapper(mContext, event), false);
 
         // Check pre-defined string
-        verify(mBatteryTipsCardPreference).setTitle(
-                "Turn on adaptive brightness to extend battery life");
+        verify(mBatteryTipsCardPreference)
+                .setTitle("Turn on adaptive brightness to extend battery life");
         verify(mBatteryTipsCardPreference).setIconResourceId(R.drawable.ic_battery_tips_lightbulb);
-        verify(mBatteryTipsCardPreference).setMainButtonStrokeColorResourceId(
-                R.color.color_accent_selector);
+        verify(mBatteryTipsCardPreference).setButtonColorResourceId(R.color.color_accent_selector);
         verify(mBatteryTipsCardPreference).setMainButtonLabel("View Settings");
         verify(mBatteryTipsCardPreference).setDismissButtonLabel("Got it");
         // Check proto info
         verify(mBatteryTipsCardPreference).setVisible(true);
-        verify(mFeatureFactory.metricsFeatureProvider).action(
-                mContext, SettingsEnums.ACTION_BATTERY_TIPS_CARD_SHOW, "BrightnessAnomaly");
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(mContext, SettingsEnums.ACTION_BATTERY_TIPS_CARD_SHOW, "BrightnessAnomaly");
     }
 
     @Test
@@ -105,25 +103,28 @@ public final class BatteryTipsControllerTest {
 
         verify(mBatteryTipsCardPreference).setTitle("Reduce screen timeout to extend battery life");
         verify(mBatteryTipsCardPreference).setIconResourceId(R.drawable.ic_battery_tips_lightbulb);
-        verify(mBatteryTipsCardPreference).setMainButtonStrokeColorResourceId(
-                R.color.color_accent_selector);
+        verify(mBatteryTipsCardPreference).setButtonColorResourceId(R.color.color_accent_selector);
         verify(mBatteryTipsCardPreference).setMainButtonLabel("View Settings");
         verify(mBatteryTipsCardPreference).setDismissButtonLabel("Got it");
         verify(mBatteryTipsCardPreference).setVisible(true);
-        verify(mFeatureFactory.metricsFeatureProvider).action(
-                mContext, SettingsEnums.ACTION_BATTERY_TIPS_CARD_SHOW, "ScreenTimeoutAnomaly");
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(
+                        mContext,
+                        SettingsEnums.ACTION_BATTERY_TIPS_CARD_SHOW,
+                        "ScreenTimeoutAnomaly");
     }
 
     @Test
     public void handleBatteryTipsCardUpdated_screenTimeoutAnomalyHasTitle_showAnomaly() {
         PowerAnomalyEvent event = BatteryTestUtils.createScreenTimeoutAnomalyEvent();
         String testTitle = "TestTitle";
-        event = event.toBuilder()
-                .setWarningBannerInfo(
-                        event.getWarningBannerInfo().toBuilder()
-                                .setTitleString(testTitle)
-                                .build())
-                .build();
+        event =
+                event.toBuilder()
+                        .setWarningBannerInfo(
+                                event.getWarningBannerInfo().toBuilder()
+                                        .setTitleString(testTitle)
+                                        .build())
+                        .build();
         when(mFeatureFactory.powerUsageFeatureProvider.isBatteryTipsEnabled()).thenReturn(true);
 
         mBatteryTipsController.handleBatteryTipsCardUpdated(
@@ -131,13 +132,15 @@ public final class BatteryTipsControllerTest {
 
         verify(mBatteryTipsCardPreference).setTitle(testTitle);
         verify(mBatteryTipsCardPreference).setIconResourceId(R.drawable.ic_battery_tips_lightbulb);
-        verify(mBatteryTipsCardPreference).setMainButtonStrokeColorResourceId(
-                R.color.color_accent_selector);
+        verify(mBatteryTipsCardPreference).setButtonColorResourceId(R.color.color_accent_selector);
         verify(mBatteryTipsCardPreference).setMainButtonLabel("View Settings");
         verify(mBatteryTipsCardPreference).setDismissButtonLabel("Got it");
         verify(mBatteryTipsCardPreference).setVisible(true);
-        verify(mFeatureFactory.metricsFeatureProvider).action(
-                mContext, SettingsEnums.ACTION_BATTERY_TIPS_CARD_SHOW, "ScreenTimeoutAnomaly");
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(
+                        mContext,
+                        SettingsEnums.ACTION_BATTERY_TIPS_CARD_SHOW,
+                        "ScreenTimeoutAnomaly");
     }
 
     @Test
@@ -146,20 +149,18 @@ public final class BatteryTipsControllerTest {
         when(mFeatureFactory.powerUsageFeatureProvider.isBatteryTipsEnabled()).thenReturn(true);
 
         AnomalyEventWrapper eventWrapper = new AnomalyEventWrapper(mContext, event);
-        eventWrapper.setRelatedBatteryDiffEntry(
-                new BatteryDiffEntry(mContext, "", "Chrome", 0));
+        eventWrapper.setRelatedBatteryDiffEntry(new BatteryDiffEntry(mContext, "", "Chrome", 0));
         mBatteryTipsController.handleBatteryTipsCardUpdated(eventWrapper, false);
 
-        verify(mBatteryTipsCardPreference).setTitle(
-                "Chrome used more battery than usual");
-        verify(mBatteryTipsCardPreference).setIconResourceId(
-                R.drawable.ic_battery_tips_warning_icon);
-        verify(mBatteryTipsCardPreference).setMainButtonStrokeColorResourceId(
-                R.color.color_battery_anomaly_yellow_selector);
+        verify(mBatteryTipsCardPreference).setTitle("Chrome used more battery than usual");
+        verify(mBatteryTipsCardPreference)
+                .setIconResourceId(R.drawable.ic_battery_tips_warning_icon);
+        verify(mBatteryTipsCardPreference)
+                .setButtonColorResourceId(R.color.color_battery_anomaly_app_warning_selector);
         verify(mBatteryTipsCardPreference).setMainButtonLabel("Check");
         verify(mBatteryTipsCardPreference).setDismissButtonLabel("Got it");
         verify(mBatteryTipsCardPreference).setVisible(true);
-        verify(mFeatureFactory.metricsFeatureProvider).action(
-                mContext, SettingsEnums.ACTION_BATTERY_TIPS_CARD_SHOW, "AppAnomaly");
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(mContext, SettingsEnums.ACTION_BATTERY_TIPS_CARD_SHOW, "AppAnomaly");
     }
 }

@@ -236,7 +236,6 @@ public class DashboardFragmentTest {
         verify(mTestFragment.mScreen, never()).addPreference(nullable(Preference.class));
     }
 
-    @Ignore
     @Test
     @Config(qualifiers = "mcc999")
     public void displayTilesAsPreference_shouldNotAddSuppressedTiles() {
@@ -388,6 +387,7 @@ public class DashboardFragmentTest {
         assertThat(mTestFragment.mBlockerController).isNull();
     }
 
+    @Ignore("b/313569889")
     @Test
     public void createPreference_isProviderTile_returnSwitchPreference() {
         final Preference pref = mTestFragment.createPreference(mProviderTile);

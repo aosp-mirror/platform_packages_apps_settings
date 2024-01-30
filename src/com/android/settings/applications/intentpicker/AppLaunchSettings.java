@@ -35,7 +35,8 @@ import android.util.ArraySet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Switch;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
 
 import androidx.annotation.VisibleForTesting;
@@ -51,7 +52,6 @@ import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.MainSwitchPreference;
-import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 import java.util.HashMap;
 import java.util.List;
@@ -62,7 +62,7 @@ import java.util.UUID;
 
 /** The page of the Open by default */
 public class AppLaunchSettings extends AppInfoBase implements
-        Preference.OnPreferenceChangeListener, OnMainSwitchChangeListener {
+        Preference.OnPreferenceChangeListener, OnCheckedChangeListener {
     private static final String TAG = "AppLaunchSettings";
     // Preference keys
     private static final String MAIN_SWITCH_PREF_KEY = "open_by_default_supported_links";
@@ -168,7 +168,7 @@ public class AppLaunchSettings extends AppInfoBase implements
     }
 
     @Override
-    public void onSwitchChanged(Switch switchView, boolean isChecked) {
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         IntentPickerUtils.logd("onSwitchChanged: isChecked=" + isChecked);
         if (mMainSwitchPreference != null) { //mMainSwitchPreference synced with Switch
             mMainSwitchPreference.setChecked(isChecked);
@@ -200,7 +200,6 @@ public class AppLaunchSettings extends AppInfoBase implements
         final String summary = activity.getString(R.string.app_launch_top_intro_message);
         final Preference pref = EntityHeaderController
                 .newInstance(activity, this, null /* header */)
-                .setRecyclerView(getListView(), getSettingsLifecycle())
                 .setIcon(Utils.getBadgedIcon(mContext, mPackageInfo.applicationInfo))
                 .setLabel(mPackageInfo.applicationInfo.loadLabel(mPm))
                 .setSummary(summary)  // add intro text
@@ -210,7 +209,7 @@ public class AppLaunchSettings extends AppInfoBase implements
                 .setHasAppInfoLink(true)
                 .setButtonActions(EntityHeaderController.ActionType.ACTION_NONE,
                         EntityHeaderController.ActionType.ACTION_NONE)
-                .done(activity, getPrefContext());
+                .done(getPrefContext());
         getPreferenceScreen().addPreference(pref);
     }
 

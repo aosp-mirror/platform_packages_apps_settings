@@ -68,7 +68,8 @@ public class FlashNotificationsPreviewPreferenceTest {
 
         final View frame = mPreferenceViewHolder.findViewById(R.id.frame);
         final int backgroundResId = Shadows.shadowOf(frame.getBackground()).getCreatedFromResId();
-        assertThat(backgroundResId).isEqualTo(R.drawable.settingslib_switch_bar_bg_on);
+        assertThat(backgroundResId).isEqualTo(
+                com.android.settingslib.widget.mainswitch.R.drawable.settingslib_switch_bar_bg_on);
         final TextView title = (TextView) mPreferenceViewHolder.findViewById(android.R.id.title);
         assertThat(title.getAlpha()).isEqualTo(1f);
         assertThat(title.getCurrentTextColor()).isEqualTo(textColorEnabled);

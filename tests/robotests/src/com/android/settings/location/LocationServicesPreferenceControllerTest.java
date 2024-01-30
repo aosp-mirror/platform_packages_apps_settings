@@ -23,7 +23,6 @@ import static org.mockito.Mockito.spy;
 import android.content.Context;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -50,7 +49,6 @@ public class LocationServicesPreferenceControllerTest {
         assertThat(mController.isAvailable()).isTrue();
     }
 
-    @Ignore
     @Test
     @Config(qualifiers = "mcc999")
     public void testLocationScanning_ifDisabled_shouldNotBeShown() {

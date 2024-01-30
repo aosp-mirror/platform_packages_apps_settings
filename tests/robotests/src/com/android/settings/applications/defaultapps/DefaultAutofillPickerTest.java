@@ -58,7 +58,10 @@ import org.robolectric.util.ReflectionHelpers;
 import java.util.Arrays;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = ShadowSecureSettings.class)
+@Config(shadows = {
+        ShadowSecureSettings.class,
+        ShadowFragment.class,
+})
 public class DefaultAutofillPickerTest {
 
     private static final String MAIN_APP_KEY = "main.foo.bar/foo.bar.Baz";

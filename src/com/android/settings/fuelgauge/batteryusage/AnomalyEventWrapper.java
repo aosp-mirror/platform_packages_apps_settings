@@ -48,7 +48,8 @@ final class AnomalyEventWrapper {
         mResourceIndex = mPowerAnomalyEvent.getKey().getNumber();
     }
 
-    private <T> T getInfo(Function<WarningBannerInfo, T> warningBannerInfoSupplier,
+    private <T> T getInfo(
+            Function<WarningBannerInfo, T> warningBannerInfoSupplier,
             Function<WarningItemInfo, T> warningItemInfoSupplier) {
         if (warningBannerInfoSupplier != null && mPowerAnomalyEvent.hasWarningBannerInfo()) {
             return warningBannerInfoSupplier.apply(mPowerAnomalyEvent.getWarningBannerInfo());
@@ -60,15 +61,19 @@ final class AnomalyEventWrapper {
 
     private int getResourceId(int resourceId, int resourceIndex, String defType) {
         final String key = getStringFromArrayResource(resourceId, resourceIndex);
-        return TextUtils.isEmpty(key) ? 0
+        return TextUtils.isEmpty(key)
+                ? 0
                 : mContext.getResources().getIdentifier(key, defType, mContext.getPackageName());
     }
 
-    private String getString(Function<WarningBannerInfo, String> warningBannerInfoSupplier,
+    private String getString(
+            Function<WarningBannerInfo, String> warningBannerInfoSupplier,
             Function<WarningItemInfo, String> warningItemInfoSupplier,
-            int resourceId, int resourceIndex) {
+            int resourceId,
+            int resourceIndex) {
         final String string = getInfo(warningBannerInfoSupplier, warningItemInfoSupplier);
-        return (!TextUtils.isEmpty(string) || resourceId <= 0) ? string
+        return (!TextUtils.isEmpty(string) || resourceId <= 0)
+                ? string
                 : getStringFromArrayResource(resourceId, resourceIndex);
     }
 
@@ -78,7 +83,8 @@ final class AnomalyEventWrapper {
         }
         final String[] stringArray = mContext.getResources().getStringArray(resourceId);
         return (resourceIndex >= 0 && resourceIndex < stringArray.length)
-                ? stringArray[resourceIndex] : null;
+                ? stringArray[resourceIndex]
+                : null;
     }
 
     void setRelatedBatteryDiffEntry(BatteryDiffEntry batteryDiffEntry) {
@@ -98,13 +104,13 @@ final class AnomalyEventWrapper {
     }
 
     String getTitleString() {
-        final String protoTitleString = getInfo(WarningBannerInfo::getTitleString,
-                WarningItemInfo::getTitleString);
-        if (!TextUtils.isEmpty(protoTitleString)) {
-            return protoTitleString;
+        final String titleStringFromProto =
+                getInfo(WarningBannerInfo::getTitleString, WarningItemInfo::getTitleString);
+        if (!TextUtils.isEmpty(titleStringFromProto)) {
+            return titleStringFromProto;
         }
-        final int titleFormatResId = getResourceId(R.array.power_anomaly_title_ids,
-                mResourceIndex, "string");
+        final int titleFormatResId =
+                getResourceId(R.array.power_anomaly_title_ids, mResourceIndex, "string");
         if (mPowerAnomalyEvent.hasWarningBannerInfo()) {
             return mContext.getString(titleFormatResId);
         } else if (mPowerAnomalyEvent.hasWarningItemInfo() && mRelatedBatteryDiffEntry != null) {
@@ -115,19 +121,31 @@ final class AnomalyEventWrapper {
     }
 
     String getMainBtnString() {
-        return getString(WarningBannerInfo::getMainButtonString,
+        return getString(
+                WarningBannerInfo::getMainButtonString,
                 WarningItemInfo::getMainButtonString,
-                R.array.power_anomaly_main_btn_strings, mResourceIndex);
+                R.array.power_anomaly_main_btn_strings,
+                mResourceIndex);
     }
 
     String getDismissBtnString() {
-        return getString(WarningBannerInfo::getCancelButtonString,
+        return getString(
+                WarningBannerInfo::getCancelButtonString,
                 WarningItemInfo::getCancelButtonString,
-                R.array.power_anomaly_dismiss_btn_strings, mResourceIndex);
+                R.array.power_anomaly_dismiss_btn_strings,
+                mResourceIndex);
     }
 
     String getAnomalyHintString() {
-        return getStringFromArrayResource(R.array.power_anomaly_hint_messages, mResourceIndex);
+        final String anomalyHintStringFromProto =
+                getInfo(null, WarningItemInfo::getWarningInfoString);
+        return TextUtils.isEmpty(anomalyHintStringFromProto)
+                ? getStringFromArrayResource(R.array.power_anomaly_hint_messages, mResourceIndex)
+                : anomalyHintStringFromProto;
+    }
+
+    String getAnomalyHintPrefKey() {
+        return getInfo(null, WarningItemInfo::getAnomalyHintPrefKey);
     }
 
     String getDismissRecordKey() {
@@ -140,8 +158,9 @@ final class AnomalyEventWrapper {
 
     String getAnomalyEntryKey() {
         return mPowerAnomalyEvent.hasWarningItemInfo()
-                && mPowerAnomalyEvent.getWarningItemInfo().hasItemKey()
-                ? mPowerAnomalyEvent.getWarningItemInfo().getItemKey() : null;
+                        && mPowerAnomalyEvent.getWarningItemInfo().hasItemKey()
+                ? mPowerAnomalyEvent.getWarningItemInfo().getItemKey()
+                : null;
     }
 
     boolean hasSubSettingLauncher() {
@@ -155,23 +174,24 @@ final class AnomalyEventWrapper {
         if (mSubSettingLauncher != null) {
             return mSubSettingLauncher;
         }
-        final String destinationClassName = getInfo(
-                WarningBannerInfo::getMainButtonDestination, null);
+        final String destinationClassName =
+                getInfo(WarningBannerInfo::getMainButtonDestination, null);
         if (!TextUtils.isEmpty(destinationClassName)) {
-            final Integer sourceMetricsCategory = getInfo(
-                    WarningBannerInfo::getMainButtonSourceMetricsCategory, null);
-            final String preferenceHighlightKey = getInfo(
-                    WarningBannerInfo::getMainButtonSourceHighlightKey, null);
+            final Integer sourceMetricsCategory =
+                    getInfo(WarningBannerInfo::getMainButtonSourceMetricsCategory, null);
+            final String preferenceHighlightKey =
+                    getInfo(WarningBannerInfo::getMainButtonSourceHighlightKey, null);
             Bundle arguments = Bundle.EMPTY;
             if (!TextUtils.isEmpty(preferenceHighlightKey)) {
                 arguments = new Bundle(1);
-                arguments.putString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY,
-                        preferenceHighlightKey);
+                arguments.putString(
+                        SettingsActivity.EXTRA_FRAGMENT_ARG_KEY, preferenceHighlightKey);
             }
-            mSubSettingLauncher = new SubSettingLauncher(mContext)
-                    .setDestination(destinationClassName)
-                    .setSourceMetricsCategory(sourceMetricsCategory)
-                    .setArguments(arguments);
+            mSubSettingLauncher =
+                    new SubSettingLauncher(mContext)
+                            .setDestination(destinationClassName)
+                            .setSourceMetricsCategory(sourceMetricsCategory)
+                            .setArguments(arguments);
         }
         return mSubSettingLauncher;
     }
@@ -191,13 +211,13 @@ final class AnomalyEventWrapper {
             return null;
         }
         final WarningItemInfo warningItemInfo = mPowerAnomalyEvent.getWarningItemInfo();
-        final Long startTimestamp = warningItemInfo.hasStartTimestamp()
-                ? warningItemInfo.getStartTimestamp() : null;
-        final Long endTimestamp = warningItemInfo.hasEndTimestamp()
-                ? warningItemInfo.getEndTimestamp() : null;
+        final Long startTimestamp =
+                warningItemInfo.hasStartTimestamp() ? warningItemInfo.getStartTimestamp() : null;
+        final Long endTimestamp =
+                warningItemInfo.hasEndTimestamp() ? warningItemInfo.getEndTimestamp() : null;
         if (startTimestamp != null && endTimestamp != null) {
-            mHighlightSlotPair = batteryLevelData
-                    .getIndexByTimestamps(startTimestamp, endTimestamp);
+            mHighlightSlotPair =
+                    batteryLevelData.getIndexByTimestamps(startTimestamp, endTimestamp);
             if (mHighlightSlotPair.first == BatteryChartViewModel.SELECTED_INDEX_INVALID
                     || mHighlightSlotPair.second == BatteryChartViewModel.SELECTED_INDEX_INVALID) {
                 // Drop invalid mHighlightSlotPair index
@@ -214,7 +234,7 @@ final class AnomalyEventWrapper {
         }
         preference.setTitle(titleString);
         preference.setIconResourceId(getIconResId());
-        preference.setMainButtonStrokeColorResourceId(getColorResId());
+        preference.setButtonColorResourceId(getColorResId());
         preference.setMainButtonLabel(getMainBtnString());
         preference.setDismissButtonLabel(getDismissBtnString());
         return true;

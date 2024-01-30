@@ -104,7 +104,7 @@ public class DeviceAdminListPreferenceController extends BasePreferenceControlle
         mUm = (UserManager) context.getSystemService(Context.USER_SERVICE);
         mPackageManager = mContext.getPackageManager();
         mIPackageManager = AppGlobals.getPackageManager();
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     @Override

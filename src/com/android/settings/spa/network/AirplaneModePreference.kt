@@ -20,8 +20,9 @@ import android.content.pm.PackageManager
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AirplanemodeActive
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -37,11 +38,12 @@ fun AirplaneModePreference() {
     val context = LocalContext.current
     val controller = remember { AirplaneModeController(context) }
     if (!controller.isAvailable()) return
+    val checked by controller.airplaneModeState.observeAsState(
+        initial = controller.isAirplaneModeOn()
+    )
     SwitchPreference(object : SwitchPreferenceModel {
         override val title = context.getString(R.string.airplane_mode)
-        override val checked = controller.airplaneModeState.observeAsState(
-            initial = controller.isAirplaneModeOn()
-        )
+        override val checked = { checked }
         override val onCheckedChange = { newChecked: Boolean ->
             controller.setChecked(newChecked)
         }

@@ -21,25 +21,27 @@ import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.icu.text.RelativeDateTimeFormatter
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.produceState
 import com.android.settings.R
 import com.android.settings.applications.AppInfoBase
 import com.android.settings.notification.app.AppNotificationSettings
 import com.android.settings.spa.notification.SpinnerItem.Companion.toSpinnerItem
-import com.android.settingslib.spa.framework.compose.stateOf
 import com.android.settingslib.spa.framework.util.asyncFilter
 import com.android.settingslib.spa.framework.util.asyncForEach
+import com.android.settingslib.spa.livedata.observeAsCallback
 import com.android.settingslib.spa.widget.ui.SpinnerOption
 import com.android.settingslib.spaprivileged.model.app.AppEntry
 import com.android.settingslib.spaprivileged.model.app.AppListModel
 import com.android.settingslib.spaprivileged.model.app.AppRecord
 import com.android.settingslib.spaprivileged.template.app.AppListItemModel
-import com.android.settingslib.spaprivileged.template.app.AppListSwitchItem
+import com.android.settingslib.spaprivileged.template.app.AppListTwoTargetSwitchItem
 import com.android.settingslib.utils.StringUtil
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.withContext
 
 data class AppNotificationsRecord(
     override val app: ApplicationInfo,
@@ -91,16 +93,17 @@ class AppNotificationsListModel(
     }.then(super.getComparator(option))
 
     @Composable
-    override fun getSummary(option: Int, record: AppNotificationsRecord) = record.sentState?.let {
-        when (option.toSpinnerItem()) {
-            SpinnerItem.MostRecent -> stateOf(formatLastSent(it.lastSent))
-            SpinnerItem.MostFrequent -> stateOf(repository.calculateFrequencySummary(it.sentCount))
-            else -> null
+    override fun getSummary(option: Int, record: AppNotificationsRecord): (() -> String)? =
+        record.sentState?.let {
+            when (option.toSpinnerItem()) {
+                SpinnerItem.MostRecent -> ({ formatLastSent(it.lastSent) })
+                SpinnerItem.MostFrequent -> ({ repository.calculateFrequencySummary(it.sentCount) })
+                else -> null
+            }
         }
-    }
 
     override fun getSpinnerOptions(recordList: List<AppNotificationsRecord>): List<SpinnerOption> =
-        SpinnerItem.values().map {
+        SpinnerItem.entries.map {
             SpinnerOption(
                 id = it.ordinal,
                 text = context.getString(it.stringResId),
@@ -117,12 +120,15 @@ class AppNotificationsListModel(
 
     @Composable
     override fun AppListItemModel<AppNotificationsRecord>.AppItem() {
-        AppListSwitchItem(
-            onClick = { navigateToAppNotificationSettings(app = record.app) },
-            checked = record.controller.isEnabled.observeAsState(),
-            changeable = produceState(initialValue = false) {
+        val changeable by produceState(initialValue = false) {
+            withContext(Dispatchers.Default) {
                 value = repository.isChangeable(record.app)
-            },
+            }
+        }
+        AppListTwoTargetSwitchItem(
+            onClick = { navigateToAppNotificationSettings(app = record.app) },
+            checked = record.controller.isEnabled.observeAsCallback(),
+            changeable = { changeable },
             onCheckedChange = record.controller::setEnabled,
         )
     }
@@ -145,6 +151,6 @@ private enum class SpinnerItem(val stringResId: Int) {
     TurnedOff(R.string.filter_notif_blocked_apps);
 
     companion object {
-        fun Int.toSpinnerItem(): SpinnerItem = values()[this]
+        fun Int.toSpinnerItem(): SpinnerItem = entries[this]
     }
 }

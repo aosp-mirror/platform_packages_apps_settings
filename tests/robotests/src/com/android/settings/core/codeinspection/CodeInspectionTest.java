@@ -52,8 +52,8 @@ public class CodeInspectionTest {
         new InstrumentableFragmentCodeInspector(mClasses).run();
     }
 
+    @Ignore("b/313612087")
     @Test
-    @Ignore
     public void runSliceControllerInXmlInspection() throws Exception {
         new SliceControllerInXmlCodeInspector(mClasses).run();
     }

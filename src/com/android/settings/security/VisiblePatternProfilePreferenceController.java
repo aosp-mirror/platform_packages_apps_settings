@@ -66,7 +66,7 @@ public class VisiblePatternProfilePreferenceController extends TogglePreferenceC
             Context context, Lifecycle lifecycle, String key) {
         super(context, key);
         mUm = (UserManager) context.getSystemService(Context.USER_SERVICE);
-        mLockPatternUtils = FeatureFactory.getFactory(context)
+        mLockPatternUtils = FeatureFactory.getFeatureFactory()
                 .getSecurityFeatureProvider()
                 .getLockPatternUtils(context);
         mProfileChallengeUserId = Utils.getManagedProfileId(mUm, mUserId);

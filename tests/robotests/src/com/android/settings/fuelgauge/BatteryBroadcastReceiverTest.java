@@ -54,8 +54,7 @@ public class BatteryBroadcastReceiverTest {
     private static final int BATTERY_INTENT_LEVEL = 80;
     private static final int BATTERY_INTENT_SCALE = 100;
 
-    @Mock
-    private BatteryBroadcastReceiver.OnBatteryChangedListener mBatteryListener;
+    @Mock private BatteryBroadcastReceiver.OnBatteryChangedListener mBatteryListener;
     private BatteryBroadcastReceiver mBatteryBroadcastReceiver;
     private Context mContext;
     private Intent mChargingIntent;
@@ -75,8 +74,8 @@ public class BatteryBroadcastReceiverTest {
         mChargingIntent = new Intent(Intent.ACTION_BATTERY_CHANGED);
         mChargingIntent.putExtra(BatteryManager.EXTRA_LEVEL, BATTERY_INTENT_LEVEL);
         mChargingIntent.putExtra(BatteryManager.EXTRA_SCALE, BATTERY_INTENT_SCALE);
-        mChargingIntent
-                .putExtra(BatteryManager.EXTRA_STATUS, BatteryManager.BATTERY_STATUS_CHARGING);
+        mChargingIntent.putExtra(
+                BatteryManager.EXTRA_STATUS, BatteryManager.BATTERY_STATUS_CHARGING);
     }
 
     @Test
@@ -85,8 +84,10 @@ public class BatteryBroadcastReceiverTest {
 
         assertThat(mBatteryBroadcastReceiver.mBatteryLevel)
                 .isEqualTo(Utils.getBatteryPercentage(mChargingIntent));
-        assertThat(mBatteryBroadcastReceiver.mBatteryStatus).isEqualTo(
-                Utils.getBatteryStatus(mContext, mChargingIntent, /* compactStatus= */ false));
+        assertThat(mBatteryBroadcastReceiver.mBatteryStatus)
+                .isEqualTo(
+                        Utils.getBatteryStatus(
+                                mContext, mChargingIntent, /* compactStatus= */ false));
         verify(mBatteryListener).onBatteryChanged(BatteryUpdateType.BATTERY_LEVEL);
     }
 
@@ -103,7 +104,8 @@ public class BatteryBroadcastReceiverTest {
 
     @Test
     public void onReceive_chargingStatusChanged_dataUpdated() {
-        mChargingIntent.putExtra(BatteryManager.EXTRA_CHARGING_STATUS,
+        mChargingIntent.putExtra(
+                BatteryManager.EXTRA_CHARGING_STATUS,
                 BatteryManager.CHARGING_POLICY_ADAPTIVE_LONGLIFE);
         mBatteryBroadcastReceiver.onReceive(mContext, mChargingIntent);
 
@@ -123,8 +125,8 @@ public class BatteryBroadcastReceiverTest {
 
     @Test
     public void onReceive_powerSaveModeChanged_listenerInvoked() {
-        mBatteryBroadcastReceiver.onReceive(mContext,
-                new Intent(PowerManager.ACTION_POWER_SAVE_MODE_CHANGED));
+        mBatteryBroadcastReceiver.onReceive(
+                mContext, new Intent(PowerManager.ACTION_POWER_SAVE_MODE_CHANGED));
 
         verify(mBatteryListener).onBatteryChanged(BatteryUpdateType.BATTERY_SAVER);
     }
@@ -150,16 +152,16 @@ public class BatteryBroadcastReceiverTest {
 
     @Test
     public void onReceive_dockDefenderBypassed_listenerInvoked() {
-        mBatteryBroadcastReceiver.onReceive(mContext,
-                new Intent(BatteryUtils.BYPASS_DOCK_DEFENDER_ACTION));
+        mBatteryBroadcastReceiver.onReceive(
+                mContext, new Intent(BatteryUtils.BYPASS_DOCK_DEFENDER_ACTION));
 
         verify(mBatteryListener).onBatteryChanged(BatteryUpdateType.BATTERY_STATUS);
     }
 
     @Test
     public void onReceive_usbPortComplianceChanged_listenerInvoked() {
-        mBatteryBroadcastReceiver.onReceive(mContext,
-                new Intent(UsbManager.ACTION_USB_PORT_COMPLIANCE_CHANGED));
+        mBatteryBroadcastReceiver.onReceive(
+                mContext, new Intent(UsbManager.ACTION_USB_PORT_COMPLIANCE_CHANGED));
 
         verify(mBatteryListener).onBatteryChanged(BatteryUpdateType.BATTERY_STATUS);
     }
@@ -173,8 +175,10 @@ public class BatteryBroadcastReceiverTest {
 
         assertThat(mBatteryBroadcastReceiver.mBatteryLevel)
                 .isEqualTo(Utils.getBatteryPercentage(mChargingIntent));
-        assertThat(mBatteryBroadcastReceiver.mBatteryStatus).isEqualTo(
-                Utils.getBatteryStatus(mContext, mChargingIntent, /* compactStatus= */ false));
+        assertThat(mBatteryBroadcastReceiver.mBatteryStatus)
+                .isEqualTo(
+                        Utils.getBatteryStatus(
+                                mContext, mChargingIntent, /* compactStatus= */ false));
         assertThat(mBatteryBroadcastReceiver.mBatteryHealth)
                 .isEqualTo(BatteryManager.BATTERY_HEALTH_UNKNOWN);
         assertThat(mBatteryBroadcastReceiver.mChargingStatus)
@@ -188,10 +192,11 @@ public class BatteryBroadcastReceiverTest {
         mBatteryBroadcastReceiver.register();
 
         ArgumentCaptor<IntentFilter> captor = ArgumentCaptor.forClass(IntentFilter.class);
-        verify(mContext).registerReceiver(
-                eq(mBatteryBroadcastReceiver),
-                captor.capture(),
-                eq(Context.RECEIVER_EXPORTED));
+        verify(mContext)
+                .registerReceiver(
+                        eq(mBatteryBroadcastReceiver),
+                        captor.capture(),
+                        eq(Context.RECEIVER_EXPORTED));
         assertAction(captor, Intent.ACTION_BATTERY_CHANGED);
         assertAction(captor, PowerManager.ACTION_POWER_SAVE_MODE_CHANGED);
         assertAction(captor, BatteryUtils.BYPASS_DOCK_DEFENDER_ACTION);

@@ -63,16 +63,15 @@ public class AnomalyCleanupJobServiceTest {
 
     private Context mContext;
     private JobScheduler mJobScheduler;
-    @Mock
-    private JobParameters mParams;
+    @Mock private JobParameters mParams;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
         mContext = spy(RuntimeEnvironment.application);
-        mJobScheduler = spy(new JobSchedulerImpl(mContext,
-                IJobScheduler.Stub.asInterface(new Binder())));
+        mJobScheduler =
+                spy(new JobSchedulerImpl(mContext, IJobScheduler.Stub.asInterface(new Binder())));
         when(mContext.getSystemService(JobScheduler.class)).thenReturn(mJobScheduler);
     }
 
@@ -108,25 +107,31 @@ public class AnomalyCleanupJobServiceTest {
     @Ignore
     public void onStartJob_cleanUpDataBefore30days() {
         final BatteryDatabaseManager databaseManager = BatteryDatabaseManager.getInstance(mContext);
-        final AnomalyCleanupJobService service = spy(Robolectric.setupService(
-                AnomalyCleanupJobService.class));
+        final AnomalyCleanupJobService service =
+                spy(Robolectric.setupService(AnomalyCleanupJobService.class));
         doNothing().when(service).jobFinished(any(), anyBoolean());
 
         // Insert two records, one is current and the other one is 31 days before
-        databaseManager.insertAnomaly(UID, PACKAGE_NAME, ANOMALY_TYPE,
-                AnomalyDatabaseHelper.State.NEW, TIMESTAMP_NOW);
-        databaseManager.insertAnomaly(UID, PACKAGE_NAME_OLD, ANOMALY_TYPE,
-                AnomalyDatabaseHelper.State.NEW, TIMESTAMP_31_DAYS_BEFORE);
+        databaseManager.insertAnomaly(
+                UID, PACKAGE_NAME, ANOMALY_TYPE, AnomalyDatabaseHelper.State.NEW, TIMESTAMP_NOW);
+        databaseManager.insertAnomaly(
+                UID,
+                PACKAGE_NAME_OLD,
+                ANOMALY_TYPE,
+                AnomalyDatabaseHelper.State.NEW,
+                TIMESTAMP_31_DAYS_BEFORE);
 
         service.onStartJob(mParams);
 
         // In database, it only contains the current record
-        final List<AppInfo> appInfos = databaseManager.queryAllAnomalies(0,
-                AnomalyDatabaseHelper.State.NEW);
-        assertThat(appInfos).containsExactly(new AppInfo.Builder()
-                .setUid(UID)
-                .setPackageName(PACKAGE_NAME)
-                .addAnomalyType(ANOMALY_TYPE)
-                .build());
+        final List<AppInfo> appInfos =
+                databaseManager.queryAllAnomalies(0, AnomalyDatabaseHelper.State.NEW);
+        assertThat(appInfos)
+                .containsExactly(
+                        new AppInfo.Builder()
+                                .setUid(UID)
+                                .setPackageName(PACKAGE_NAME)
+                                .addAnomalyType(ANOMALY_TYPE)
+                                .build());
     }
 }

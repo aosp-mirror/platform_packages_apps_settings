@@ -29,14 +29,11 @@ import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.settings.core.SubSettingLauncher;
-import com.android.settings.fuelgauge.AdvancedPowerUsageDetail;
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.core.SubSettingLauncher;
 
-/**
- * Trampoline activity for launching the {@link AdvancedPowerUsageDetail} fragment.
- */
+/** Trampoline activity for launching the {@link AdvancedPowerUsageDetail} fragment. */
 public class AdvancedPowerUsageDetailActivity extends AppCompatActivity {
 
     private static final String TAG = "AdvancedPowerDetailActivity";

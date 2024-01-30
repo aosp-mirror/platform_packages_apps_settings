@@ -52,8 +52,7 @@ public class RestrictAppActionTest {
     private static final int ANOMALY_BT = 1;
     private static final int METRICS_KEY = 1;
 
-    @Mock
-    private BatteryUtils mBatteryUtils;
+    @Mock private BatteryUtils mBatteryUtils;
     private RestrictAppAction mRestrictAppAction;
     private FakeFeatureFactory mFeatureFactory;
 
@@ -62,20 +61,20 @@ public class RestrictAppActionTest {
         MockitoAnnotations.initMocks(this);
 
         final List<AppInfo> mAppInfos = new ArrayList<>();
-        mAppInfos.add(new AppInfo.Builder()
-                .setUid(UID_1)
-                .setPackageName(PACKAGE_NAME_1)
-                .build());
-        mAppInfos.add(new AppInfo.Builder()
-                .setUid(UID_2)
-                .setPackageName(PACKAGE_NAME_2)
-                .addAnomalyType(ANOMALY_BT)
-                .addAnomalyType(ANOMALY_WAKEUP)
-                .build());
+        mAppInfos.add(new AppInfo.Builder().setUid(UID_1).setPackageName(PACKAGE_NAME_1).build());
+        mAppInfos.add(
+                new AppInfo.Builder()
+                        .setUid(UID_2)
+                        .setPackageName(PACKAGE_NAME_2)
+                        .addAnomalyType(ANOMALY_BT)
+                        .addAnomalyType(ANOMALY_WAKEUP)
+                        .build());
         mFeatureFactory = FakeFeatureFactory.setupForTest();
 
-        mRestrictAppAction = new RestrictAppAction(RuntimeEnvironment.application,
-                new RestrictAppTip(BatteryTip.StateType.NEW, mAppInfos));
+        mRestrictAppAction =
+                new RestrictAppAction(
+                        RuntimeEnvironment.application,
+                        new RestrictAppTip(BatteryTip.StateType.NEW, mAppInfos));
         mRestrictAppAction.mBatteryUtils = mBatteryUtils;
     }
 
@@ -89,17 +88,28 @@ public class RestrictAppActionTest {
     public void testHandlePositiveAction() {
         mRestrictAppAction.handlePositiveAction(METRICS_KEY);
 
-        verify(mBatteryUtils)
-                .setForceAppStandby(UID_1, PACKAGE_NAME_1, AppOpsManager.MODE_IGNORED);
-        verify(mBatteryUtils)
-                .setForceAppStandby(UID_2, PACKAGE_NAME_2, AppOpsManager.MODE_IGNORED);
-        verify(mFeatureFactory.metricsFeatureProvider).action(SettingsEnums.PAGE_UNKNOWN,
-                MetricsProto.MetricsEvent.ACTION_TIP_RESTRICT_APP, METRICS_KEY, PACKAGE_NAME_1, 0);
-        verify(mFeatureFactory.metricsFeatureProvider).action(SettingsEnums.PAGE_UNKNOWN,
-                MetricsProto.MetricsEvent.ACTION_TIP_RESTRICT_APP, METRICS_KEY, PACKAGE_NAME_2,
-                ANOMALY_WAKEUP);
-        verify(mFeatureFactory.metricsFeatureProvider).action(SettingsEnums.PAGE_UNKNOWN,
-                MetricsProto.MetricsEvent.ACTION_TIP_RESTRICT_APP, METRICS_KEY, PACKAGE_NAME_2,
-                ANOMALY_BT);
+        verify(mBatteryUtils).setForceAppStandby(UID_1, PACKAGE_NAME_1, AppOpsManager.MODE_IGNORED);
+        verify(mBatteryUtils).setForceAppStandby(UID_2, PACKAGE_NAME_2, AppOpsManager.MODE_IGNORED);
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(
+                        SettingsEnums.PAGE_UNKNOWN,
+                        MetricsProto.MetricsEvent.ACTION_TIP_RESTRICT_APP,
+                        METRICS_KEY,
+                        PACKAGE_NAME_1,
+                        0);
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(
+                        SettingsEnums.PAGE_UNKNOWN,
+                        MetricsProto.MetricsEvent.ACTION_TIP_RESTRICT_APP,
+                        METRICS_KEY,
+                        PACKAGE_NAME_2,
+                        ANOMALY_WAKEUP);
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(
+                        SettingsEnums.PAGE_UNKNOWN,
+                        MetricsProto.MetricsEvent.ACTION_TIP_RESTRICT_APP,
+                        METRICS_KEY,
+                        PACKAGE_NAME_2,
+                        ANOMALY_BT);
     }
 }

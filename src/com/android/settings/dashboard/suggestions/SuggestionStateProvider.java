@@ -83,7 +83,7 @@ public class SuggestionStateProvider extends ContentProvider {
                 isComplete = true;
             } else {
                 final Context context = getContext();
-                isComplete = FeatureFactory.getFactory(context)
+                isComplete = FeatureFactory.getFeatureFactory()
                         .getSuggestionFeatureProvider()
                         .isSuggestionComplete(context, cn);
             }

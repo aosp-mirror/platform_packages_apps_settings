@@ -63,7 +63,7 @@ public class ScreenFlashNotificationPreferenceController extends TogglePreferenc
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        FeatureFactory.getFactory(mContext).getMetricsFeatureProvider().changed(
+        FeatureFactory.getFeatureFactory().getMetricsFeatureProvider().changed(
                 getMetricsCategory(), getPreferenceKey(), isChecked ? 1 : 0);
         if (isChecked) {
             checkAndSetInitialColor();

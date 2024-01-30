@@ -47,10 +47,8 @@ public class BatterySaverButtonPreferenceControllerTest {
     private Context mContext;
     private MainSwitchPreference mPreference;
 
-    @Mock
-    private PowerManager mPowerManager;
-    @Mock
-    private PreferenceScreen mPreferenceScreen;
+    @Mock private PowerManager mPowerManager;
+    @Mock private PreferenceScreen mPreferenceScreen;
 
     @Before
     public void setUp() {

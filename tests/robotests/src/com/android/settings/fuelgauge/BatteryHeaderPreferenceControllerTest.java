@@ -23,7 +23,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.hardware.usb.UsbManager;
@@ -34,8 +33,6 @@ import android.os.BatteryManager;
 import android.os.PowerManager;
 import android.text.TextUtils;
 
-import androidx.lifecycle.LifecycleOwner;
-import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
@@ -47,7 +44,6 @@ import com.android.settings.testutils.BatteryTestUtils;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settings.widget.EntityHeaderController;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.widget.UsageProgressBarPreference;
 
 import org.junit.After;
@@ -72,40 +68,24 @@ public class BatteryHeaderPreferenceControllerTest {
     private static final String TIME_LEFT = "2h30min";
     private static final String BATTERY_STATUS = "Charging";
 
-    @Mock
-    private Activity mActivity;
-    @Mock
-    private PreferenceFragmentCompat mPreferenceFragment;
-    @Mock
-    private PreferenceScreen mPreferenceScreen;
-    @Mock
-    private BatteryInfo mBatteryInfo;
-    @Mock
-    private EntityHeaderController mEntityHeaderController;
-    @Mock
-    private UsageProgressBarPreference mBatteryUsageProgressBarPref;
-    @Mock
-    private BatteryStatusFeatureProvider mBatteryStatusFeatureProvider;
-    @Mock
-    private UsbPort mUsbPort;
-    @Mock
-    private UsbManager mUsbManager;
-    @Mock
-    private UsbPortStatus mUsbPortStatus;
+    @Mock private PreferenceScreen mPreferenceScreen;
+    @Mock private BatteryInfo mBatteryInfo;
+    @Mock private EntityHeaderController mEntityHeaderController;
+    @Mock private UsageProgressBarPreference mBatteryUsageProgressBarPref;
+    @Mock private BatteryStatusFeatureProvider mBatteryStatusFeatureProvider;
+    @Mock private UsbPort mUsbPort;
+    @Mock private UsbManager mUsbManager;
+    @Mock private UsbPortStatus mUsbPortStatus;
 
     private BatteryHeaderPreferenceController mController;
     private Context mContext;
     private ShadowPowerManager mShadowPowerManager;
     private Intent mBatteryIntent;
-    private LifecycleOwner mLifecycleOwner;
-    private Lifecycle mLifecycle;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mLifecycleOwner = () -> mLifecycle;
-        mLifecycle = new Lifecycle(mLifecycleOwner);
         mContext = spy(RuntimeEnvironment.application);
         when(mContext.getSystemService(UsbManager.class)).thenReturn(mUsbManager);
         ShadowEntityHeaderController.setUseMock(mEntityHeaderController);
@@ -116,18 +96,15 @@ public class BatteryHeaderPreferenceControllerTest {
         mBatteryIntent.putExtra(BatteryManager.EXTRA_PLUGGED, 1);
         doReturn(mBatteryIntent).when(mContext).registerReceiver(any(), any());
 
-        doReturn(mBatteryUsageProgressBarPref).when(mPreferenceScreen)
-            .findPreference(BatteryHeaderPreferenceController.KEY_BATTERY_HEADER);
+        doReturn(mBatteryUsageProgressBarPref)
+                .when(mPreferenceScreen)
+                .findPreference(BatteryHeaderPreferenceController.KEY_BATTERY_HEADER);
 
         mBatteryInfo.batteryLevel = BATTERY_LEVEL;
 
         mShadowPowerManager = Shadows.shadowOf(mContext.getSystemService(PowerManager.class));
 
         mController = spy(new BatteryHeaderPreferenceController(mContext, PREF_KEY));
-        mLifecycle.addObserver(mController);
-        mController.setActivity(mActivity);
-        mController.setFragment(mPreferenceFragment);
-        mController.setLifecycle(mLifecycle);
         mController.mBatteryUsageProgressBarPref = mBatteryUsageProgressBarPref;
         mController.mBatteryStatusFeatureProvider = mBatteryStatusFeatureProvider;
     }
@@ -251,8 +228,8 @@ public class BatteryHeaderPreferenceControllerTest {
     @Test
     public void updateHeaderByBatteryTips_lowBatteryTip_showLowBattery() {
         setChargingState(/* isDischarging */ true, /* updatedByStatusFeature */ false);
-        BatteryTip lowBatteryTip = new LowBatteryTip(
-                BatteryTip.StateType.NEW, /* powerSaveModeOn */false);
+        BatteryTip lowBatteryTip =
+                new LowBatteryTip(BatteryTip.StateType.NEW, /* powerSaveModeOn */ false);
 
         mController.updateHeaderByBatteryTips(lowBatteryTip, mBatteryInfo);
 
@@ -281,8 +258,8 @@ public class BatteryHeaderPreferenceControllerTest {
 
     @Test
     public void updateHeaderByBatteryTips_noBatteryInfo_noAction() {
-        BatteryTip lowBatteryTip = new LowBatteryTip(
-                BatteryTip.StateType.NEW, /* powerSaveModeOn */false);
+        BatteryTip lowBatteryTip =
+                new LowBatteryTip(BatteryTip.StateType.NEW, /* powerSaveModeOn */ false);
 
         mController.updateHeaderByBatteryTips(lowBatteryTip, null);
 
@@ -304,8 +281,10 @@ public class BatteryHeaderPreferenceControllerTest {
 
         mController.updateHeaderPreference(mBatteryInfo);
 
-        verify(mBatteryUsageProgressBarPref).setBottomSummary(
-            mContext.getString(R.string.battery_info_status_not_charging));
+        verify(mBatteryUsageProgressBarPref)
+                .setBottomSummary(
+                        mContext.getString(
+                                com.android.settingslib.R.string.battery_info_status_not_charging));
     }
 
     @Test
@@ -318,8 +297,8 @@ public class BatteryHeaderPreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_returnAvailableUnsearchable() {
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(
-                BasePreferenceController.AVAILABLE_UNSEARCHABLE);
+        assertThat(mController.getAvailabilityStatus())
+                .isEqualTo(BasePreferenceController.AVAILABLE_UNSEARCHABLE);
     }
 
     @Test
@@ -335,12 +314,13 @@ public class BatteryHeaderPreferenceControllerTest {
     public void displayPreference_init_showLoading() {
         mController.displayPreference(mPreferenceScreen);
 
-        verify(mBatteryUsageProgressBarPref).setBottomSummary(
-                mContext.getString(R.string.settings_license_activity_loading));
+        verify(mBatteryUsageProgressBarPref)
+                .setBottomSummary(mContext.getString(R.string.settings_license_activity_loading));
     }
 
     private CharSequence formatBatteryPercentageText() {
-        return TextUtils.expandTemplate(mContext.getText(R.string.battery_header_title_alternate),
+        return TextUtils.expandTemplate(
+                mContext.getText(R.string.battery_header_title_alternate),
                 NumberFormat.getIntegerInstance().format(BATTERY_LEVEL));
     }
 
@@ -349,7 +329,7 @@ public class BatteryHeaderPreferenceControllerTest {
         mBatteryInfo.statusLabel = BATTERY_STATUS;
         mBatteryInfo.discharging = isDischarging;
 
-        when(mBatteryStatusFeatureProvider.triggerBatteryStatusUpdate(
-                mController, mBatteryInfo)).thenReturn(updatedByStatusFeature);
+        when(mBatteryStatusFeatureProvider.triggerBatteryStatusUpdate(mController, mBatteryInfo))
+                .thenReturn(updatedByStatusFeature);
     }
 }

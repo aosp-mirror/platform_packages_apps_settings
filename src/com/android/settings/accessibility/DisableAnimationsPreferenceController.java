@@ -26,7 +26,7 @@ import android.provider.Settings;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
@@ -62,7 +62,7 @@ public class DisableAnimationsPreferenceController extends TogglePreferenceContr
     };
 
     private final ContentResolver mContentResolver;
-    private SwitchPreference mPreference;
+    private TwoStatePreference mPreference;
 
     public DisableAnimationsPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);

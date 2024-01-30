@@ -25,7 +25,7 @@ import android.view.IWindowManager;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
@@ -64,14 +64,14 @@ public class StrictModePreferenceController extends DeveloperOptionsPreferenceCo
 
     @Override
     public void updateState(Preference preference) {
-        ((SwitchPreference) mPreference).setChecked(isStrictModeEnabled());
+        ((TwoStatePreference) mPreference).setChecked(isStrictModeEnabled());
     }
 
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
         super.onDeveloperOptionsSwitchDisabled();
         writeStrictModeVisualOptions(false);
-        ((SwitchPreference) mPreference).setChecked(false);
+        ((TwoStatePreference) mPreference).setChecked(false);
     }
 
     private boolean isStrictModeEnabled() {

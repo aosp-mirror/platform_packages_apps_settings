@@ -1,0 +1,62 @@
+package {
+    default_applicable_licenses: ["packages_apps_Settings_license"],
+}
+
+aconfig_declarations {
+    name: "aconfig_settings_flags",
+    package: "com.android.settings.flags",
+    srcs: [
+        "*.aconfig",
+    ],
+}
+
+java_aconfig_library {
+    name: "aconfig_settings_flags_lib",
+    aconfig_declarations: "aconfig_settings_flags",
+}
+
+aconfig_declarations {
+    name: "factory_reset_flags",
+    package: "com.android.settings.factory_reset",
+    srcs: ["factory_reset/*.aconfig"],
+}
+
+java_aconfig_library {
+    name: "factory_reset_flags_lib",
+    aconfig_declarations: "factory_reset_flags",
+}
+
+aconfig_declarations {
+    name: "media_drm_flags",
+    package: "com.android.settings.media_drm",
+    srcs: ["media_drm/*.aconfig"],
+}
+
+java_aconfig_library {
+    name: "MediaDrmSettingsFlagsLib",
+    aconfig_declarations: "media_drm_flags",
+}
+
+aconfig_declarations {
+    name: "accessibility_flags",
+    package: "com.android.settings.accessibility",
+    srcs: ["accessibility/*.aconfig"],
+}
+
+java_aconfig_library {
+    name: "accessibility_settings_flags_lib",
+    aconfig_declarations: "accessibility_flags",
+}
+
+aconfig_declarations {
+    name: "development_settings_flags",
+    package: "com.android.settings.development",
+    srcs: [
+        "development/**/*.aconfig"
+    ],
+}
+
+java_aconfig_library {
+    name: "development_settings_flag_lib",
+    aconfig_declarations: "development_settings_flags",
+}

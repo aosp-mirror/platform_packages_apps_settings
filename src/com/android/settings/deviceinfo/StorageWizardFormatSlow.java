@@ -57,7 +57,7 @@ public class StorageWizardFormatSlow extends StorageWizardBase {
 
     @Override
     public void onNavigateBack(View view) {
-        FeatureFactory.getFactory(this).getMetricsFeatureProvider().action(this,
+        FeatureFactory.getFeatureFactory().getMetricsFeatureProvider().action(this,
                 SettingsEnums.ACTION_STORAGE_BENCHMARK_SLOW_ABORT);
 
         final Intent intent = new Intent(this, StorageWizardInit.class);
@@ -69,11 +69,11 @@ public class StorageWizardFormatSlow extends StorageWizardBase {
     public void onNavigateNext(View view) {
         if (view != null) {
             // User made an explicit choice to continue when slow
-            FeatureFactory.getFactory(this).getMetricsFeatureProvider().action(this,
+            FeatureFactory.getFeatureFactory().getMetricsFeatureProvider().action(this,
                     SettingsEnums.ACTION_STORAGE_BENCHMARK_SLOW_CONTINUE);
         } else {
             // User made an implicit choice to continue when fast
-            FeatureFactory.getFactory(this).getMetricsFeatureProvider().action(this,
+            FeatureFactory.getFeatureFactory().getMetricsFeatureProvider().action(this,
                     SettingsEnums.ACTION_STORAGE_BENCHMARK_FAST_CONTINUE);
         }
 

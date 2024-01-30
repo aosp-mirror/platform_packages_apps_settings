@@ -64,7 +64,7 @@ public class FingerprintEnrollFinishViewModelTest {
     @Before
     public void setUp() {
         mApplication = ApplicationProvider.getApplicationContext();
-        mRequest = new EnrollmentRequest(new Intent(), mApplication);
+        mRequest = new EnrollmentRequest(new Intent(), mApplication, true);
         mViewModel = new FingerprintEnrollFinishViewModel(mApplication, USER_ID, mRequest,
                 newFingerprintRepository(mFingerprintManager, TYPE_UDFPS_OPTICAL, MAX_ENROLLABLE));
     }

@@ -33,6 +33,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.clearInvocations;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -51,8 +52,6 @@ import android.net.wifi.WifiManager;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.network.TetherEnabler.OnTetherStateUpdateListener;
-import com.android.settings.widget.SwitchBar;
-import com.android.settings.widget.SwitchBarController;
 import com.android.settings.widget.SwitchWidgetController;
 
 import org.junit.Before;
@@ -82,8 +81,8 @@ public class TetherEnablerTest {
     @Mock
     private BluetoothAdapter mBluetoothAdapter;
 
-    private SwitchBar mSwitchBar;
     private TetherEnabler mEnabler;
+    @Mock
     private SwitchWidgetController mSwitchWidgetController;
     private static final String[] USB_TETHERED = {"usb"};
 
@@ -93,8 +92,6 @@ public class TetherEnablerTest {
 
         Context context = spy(ApplicationProvider.getApplicationContext());
         AtomicReference<BluetoothPan> panReference = spy(AtomicReference.class);
-        mSwitchBar = spy(new SwitchBar(context));
-        mSwitchWidgetController = spy(new SwitchBarController(mSwitchBar));
         when(context.getSystemService(Context.WIFI_SERVICE)).thenReturn(mWifiManager);
         when(context.getSystemService(Context.CONNECTIVITY_SERVICE)).thenReturn(
                 mConnectivityManager);
@@ -115,7 +112,8 @@ public class TetherEnablerTest {
         when(mTetheringManager.getTetherableUsbRegexs()).thenReturn(USB_TETHERED);
 
         mEnabler.onStart();
-        assertThat(mSwitchBar.isChecked()).isTrue();
+
+        verify(mSwitchWidgetController).setChecked(true);
     }
 
     @Test
@@ -150,26 +148,29 @@ public class TetherEnablerTest {
         mEnabler.onStart();
         mEnabler.startTethering(TetheringManager.TETHERING_WIFI);
 
+        clearInvocations(mSwitchWidgetController);
         when(mTetheringManager.getTetheredIfaces()).thenReturn(new String[0]);
         mEnabler.mOnStartTetheringCallback.onTetheringFailed();
 
-        assertThat(mSwitchBar.isChecked()).isFalse();
-        assertThat(mSwitchBar.isEnabled()).isTrue();
+        verify(mSwitchWidgetController).setEnabled(true);
+        verify(mSwitchWidgetController).setChecked(false);
     }
 
     @Test
     public void onDataSaverChanged_setsEnabledCorrectly() {
-        mSwitchBar.setEnabled(true);
+        mSwitchWidgetController.setEnabled(true);
 
         // try to turn data saver on
+        clearInvocations(mSwitchWidgetController);
         when(mNetworkPolicyManager.getRestrictBackground()).thenReturn(true);
         mEnabler.onDataSaverChanged(true);
-        assertThat(mSwitchBar.isEnabled()).isFalse();
+        verify(mSwitchWidgetController).setEnabled(false);
 
         // lets turn data saver off again
+        clearInvocations(mSwitchWidgetController);
         when(mNetworkPolicyManager.getRestrictBackground()).thenReturn(false);
         mEnabler.onDataSaverChanged(false);
-        assertThat(mSwitchBar.isEnabled()).isTrue();
+        verify(mSwitchWidgetController).setEnabled(true);
     }
 
     @Test
@@ -250,7 +251,7 @@ public class TetherEnablerTest {
 
         ReflectionHelpers.setField(mEnabler, "mDataSaverEnabled", false);
         mEnabler.updateState(null/*tethered*/);
-        verify(mSwitchBar).setEnabled(true);
+        verify(mSwitchWidgetController).setEnabled(true);
     }
 
     @Test
@@ -263,7 +264,7 @@ public class TetherEnablerTest {
 
         ReflectionHelpers.setField(mEnabler, "mDataSaverEnabled", false);
         mEnabler.updateState(null/*tethered*/);
-        verify(mSwitchBar).setEnabled(true);
+        verify(mSwitchWidgetController).setEnabled(true);
     }
 
     @Test

@@ -20,7 +20,7 @@ import android.content.Context;
 import android.provider.Settings;
 
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
@@ -57,7 +57,7 @@ class StylusHandwritingPreferenceController extends DeveloperOptionsPreferenceCo
         final int enable = Settings.Secure.getInt(mContext.getContentResolver(),
                 Settings.Secure.STYLUS_HANDWRITING_ENABLED,
                 Settings.Secure.STYLUS_HANDWRITING_DEFAULT_VALUE);
-        ((SwitchPreference) mPreference).setChecked(enable != SETTING_VALUE_OFF);
+        ((TwoStatePreference) mPreference).setChecked(enable != SETTING_VALUE_OFF);
     }
 
     @Override
@@ -66,6 +66,6 @@ class StylusHandwritingPreferenceController extends DeveloperOptionsPreferenceCo
         Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.STYLUS_HANDWRITING_ENABLED,
                 Settings.Secure.STYLUS_HANDWRITING_DEFAULT_VALUE);
-        ((SwitchPreference) mPreference).setChecked(false);
+        ((TwoStatePreference) mPreference).setChecked(false);
     }
 }

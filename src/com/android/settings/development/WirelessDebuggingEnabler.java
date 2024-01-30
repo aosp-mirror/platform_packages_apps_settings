@@ -26,7 +26,6 @@ import android.provider.Settings;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.android.settings.R;
 import com.android.settings.widget.SwitchWidgetController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -125,8 +124,8 @@ public class WirelessDebuggingEnabler implements SwitchWidgetController.OnSwitch
     public boolean onSwitchToggled(boolean isChecked) {
         if (isChecked && !WirelessDebuggingPreferenceController.isWifiConnected(mContext)) {
             // No connected Wi-Fi network. Reset the switch to off.
-            Toast.makeText(
-                    mContext, R.string.adb_wireless_no_network_msg, Toast.LENGTH_LONG)
+            Toast.makeText(mContext, com.android.settingslib.R.string.adb_wireless_no_network_msg,
+                            Toast.LENGTH_LONG)
                     .show();
             mSwitchWidget.setChecked(false);
             return false;

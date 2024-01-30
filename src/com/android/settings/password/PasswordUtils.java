@@ -107,7 +107,7 @@ public final class PasswordUtils extends com.android.settingslib.Utils {
     /** Setup screen lock options button under the Glif Header. */
     public static void setupScreenLockOptionsButton(Context context, View view, Button optButton) {
         final LinearLayout headerLayout = view.findViewById(
-                R.id.sud_layout_header);
+                com.google.android.setupdesign.R.id.sud_layout_header);
         final TextView sucTitleView = headerLayout.findViewById(R.id.suc_layout_title);
         if (headerLayout != null && sucTitleView != null) {
             final ViewGroup.MarginLayoutParams layoutTitleParams =

@@ -23,17 +23,17 @@
     settings:searchable="false">
 
     <!-- available in pattern -->
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="visiblepattern"
         android:title="@string/lockpattern_settings_enable_visible_pattern_title" />
 
     <!-- available in pin -->
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="auto_pin_confirm"
         android:title="@string/lock_screen_auto_pin_confirm_title"
         android:summary="@string/lock_screen_auto_pin_confirm_summary" />
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="enhancedPinPrivacy"
         android:title="@string/lockpattern_settings_enhanced_pin_privacy_title"
         android:summary="@string/lockpattern_settings_enhanced_pin_privacy_summary" />
@@ -48,7 +48,7 @@
         android:entryValues="@array/lock_after_timeout_values" />
 
     <!-- available in pin/pattern/password -->
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="power_button_instantly_locks"
         android:title="@string/lockpattern_settings_enable_power_button_instantly_locks" />
 

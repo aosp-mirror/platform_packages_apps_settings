@@ -43,6 +43,7 @@ message BatteryUsageHistoricalLogEntry {
     RECHECK_JOB = 3;
     FETCH_USAGE_DATA = 4;
     INSERT_USAGE_DATA = 5;
+    TIME_UPDATED = 6;
   }
 
   optional int64 timestamp = 1;

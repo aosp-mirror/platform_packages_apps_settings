@@ -18,7 +18,6 @@ package com.android.settings.notification;
 
 import static android.provider.Settings.Secure.NOTIFICATION_BUBBLES;
 
-import android.app.ActivityManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.ContentObserver;
@@ -26,7 +25,6 @@ import android.net.Uri;
 import android.os.Handler;
 import android.provider.Settings;
 
-import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
@@ -43,11 +41,6 @@ public class BubbleNotificationPreferenceController extends
         SettingsMainSwitchPreferenceController implements LifecycleObserver, OnResume, OnPause {
 
     private static final String TAG = "BubbleNotifPrefContr";
-
-    @VisibleForTesting
-    static final int ON = 1;
-    @VisibleForTesting
-    static final int OFF = 0;
 
     private SettingObserver mSettingObserver;
 
@@ -79,8 +72,7 @@ public class BubbleNotificationPreferenceController extends
 
     @Override
     public int getAvailabilityStatus() {
-        ActivityManager am = mContext.getSystemService(ActivityManager.class);
-        return am.isLowRamDevice() ? UNSUPPORTED_ON_DEVICE : AVAILABLE;
+        return BubbleHelper.isSupportedByDevice(mContext) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
@@ -96,14 +88,14 @@ public class BubbleNotificationPreferenceController extends
 
     @Override
     public boolean isChecked() {
-        return Settings.Global.getInt(mContext.getContentResolver(),
-                NOTIFICATION_BUBBLES, ON) == ON;
+        return Settings.Global.getInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES,
+                BubbleHelper.SYSTEM_WIDE_ON) == BubbleHelper.SYSTEM_WIDE_ON;
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        Settings.Global.putInt(mContext.getContentResolver(),
-                NOTIFICATION_BUBBLES, isChecked ? ON : OFF);
+        Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES,
+                isChecked ? BubbleHelper.SYSTEM_WIDE_ON : BubbleHelper.SYSTEM_WIDE_OFF);
         return true;
     }
 

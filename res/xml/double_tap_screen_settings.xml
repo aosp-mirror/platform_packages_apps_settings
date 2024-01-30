@@ -24,7 +24,7 @@
         android:key="gesture_double_tap_screen_video"
         app:lottie_rawRes="@raw/lottie_tap_to_check_phone" />
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="gesture_double_tap_screen"
         android:title="@string/ambient_display_title"
         android:summary="@string/ambient_display_summary"

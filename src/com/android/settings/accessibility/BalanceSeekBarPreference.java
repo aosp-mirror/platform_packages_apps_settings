@@ -17,16 +17,12 @@
 package com.android.settings.accessibility;
 
 import android.content.Context;
-import android.media.AudioSystem;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.AttributeSet;
-import android.view.View;
 import android.widget.ImageView;
-import android.widget.SeekBar;
 
 import androidx.core.content.res.TypedArrayUtils;
-import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
@@ -43,7 +39,7 @@ public class BalanceSeekBarPreference extends SeekBarPreference {
 
     public BalanceSeekBarPreference(Context context, AttributeSet attrs) {
         super(context, attrs, TypedArrayUtils.getAttr(context,
-                R.attr.preferenceStyle,
+                com.android.settingslib.R.attr.preferenceStyle,
                 android.R.attr.preferenceStyle));
         mContext = context;
         setLayoutResource(R.layout.preference_balance_slider);

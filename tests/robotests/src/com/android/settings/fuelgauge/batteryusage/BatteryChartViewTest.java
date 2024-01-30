@@ -45,8 +45,7 @@ public final class BatteryChartViewTest {
     private FakeFeatureFactory mFeatureFactory;
     private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
 
-    @Mock
-    private View mMockView;
+    @Mock private View mMockView;
 
     @Before
     public void setUp() {
@@ -54,17 +53,19 @@ public final class BatteryChartViewTest {
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mPowerUsageFeatureProvider = mFeatureFactory.powerUsageFeatureProvider;
         mContext = spy(RuntimeEnvironment.application);
-        mContext.getResources().getConfiguration().setLocales(
-                new LocaleList(new Locale("en_US")));
+        mContext.getResources().getConfiguration().setLocales(new LocaleList(new Locale("en_US")));
         mBatteryChartView = new BatteryChartView(mContext);
     }
 
     @Test
     public void onClick_invokesCallback() {
         final int originalSelectedIndex = 2;
-        BatteryChartViewModel batteryChartViewModel = new BatteryChartViewModel(
-                List.of(90, 80, 70, 60), List.of(0L, 0L, 0L, 0L),
-                BatteryChartViewModel.AxisLabelPosition.BETWEEN_TRAPEZOIDS, null);
+        BatteryChartViewModel batteryChartViewModel =
+                new BatteryChartViewModel(
+                        List.of(90, 80, 70, 60),
+                        List.of(0L, 0L, 0L, 0L),
+                        BatteryChartViewModel.AxisLabelPosition.BETWEEN_TRAPEZOIDS,
+                        null);
         batteryChartViewModel.setSelectedIndex(originalSelectedIndex);
         mBatteryChartView.setViewModel(batteryChartViewModel);
         for (int i = 0; i < mBatteryChartView.mTrapezoidSlots.length; i++) {

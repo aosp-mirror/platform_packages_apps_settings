@@ -72,6 +72,7 @@ import com.android.settingslib.RestrictedSwitchPreference;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -201,6 +202,7 @@ public class FingerprintSettingsFragmentTest {
         assertThat(mFingerprintAuthenticateSidecar.isCancelled()).isTrue();
     }
 
+    @Ignore("b/313342682")
     @Test
     public void testGuestUserRequireScreenOnToAuth() {
         Settings.Secure.putIntForUser(
@@ -258,6 +260,13 @@ public class FingerprintSettingsFragmentTest {
         mFragment.onCreate(null);
         mFragment.onCreateView(LayoutInflater.from(mContext), mock(ViewGroup.class), Bundle.EMPTY);
         mFragment.onResume();
+    }
+
+    @Test
+    public void testFragmentVisibleWhenNoHardwareDetected() {
+        doReturn(false).when(mFingerprintManager).isHardwareDetected();
+        setUpFragment(false);
+        assertThat(mFragment.isVisible()).isTrue();
     }
 
     private void setSensor(@FingerprintSensorProperties.SensorType int sensorType) {

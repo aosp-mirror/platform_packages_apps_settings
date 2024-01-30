@@ -45,7 +45,6 @@ import androidx.fragment.app.FragmentActivity;
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
-import com.android.settings.utils.ActivityControllerWrapper;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiPickerTracker;
 
@@ -104,11 +103,10 @@ public class NetworkRequestDialogFragmentTest {
         when(fakeFeatureFactory.wifiTrackerLibProvider.createWifiPickerTracker(
                 any(), any(), any(), any(), any(), anyLong(), anyLong(), any()))
                 .thenReturn(mock(WifiPickerTracker.class));
-        Intent intent = new Intent();
-        intent.putExtra(NetworkRequestDialogFragment.EXTRA_APP_NAME,
-                TEST_APP_NAME);
-        mActivity = (WifiDialogActivity) ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(WifiDialogActivity.class, intent)).get();
+
+        mActivity = Robolectric.buildActivity(FragmentActivity.class,
+                new Intent().putExtra(NetworkRequestDialogFragment.EXTRA_APP_NAME,
+                        TEST_APP_NAME)).setup().get();
         networkRequestDialogFragment = spy(NetworkRequestDialogFragment.newInstance());
         networkRequestDialogFragment.mWifiPickerTracker = mWifiPickerTracker;
     }

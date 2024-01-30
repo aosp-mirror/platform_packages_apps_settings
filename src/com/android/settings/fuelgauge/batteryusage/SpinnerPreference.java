@@ -36,12 +36,9 @@ public class SpinnerPreference extends Preference {
 
     private AdapterView.OnItemSelectedListener mOnItemSelectedListener;
 
-    @VisibleForTesting
-    Spinner mSpinner;
-    @VisibleForTesting
-    String[] mItems;
-    @VisibleForTesting
-    int mSavedSpinnerPosition;
+    @VisibleForTesting Spinner mSpinner;
+    @VisibleForTesting String[] mItems;
+    @VisibleForTesting int mSavedSpinnerPosition;
 
     public SpinnerPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -84,14 +81,19 @@ public class SpinnerPreference extends Preference {
             return;
         }
         if (!(state instanceof SavedState)) {
+            // To avoid the IllegalArgumentException, return the BaseSavedState.EMPTY_STATE.
+            super.onRestoreInstanceState(BaseSavedState.EMPTY_STATE);
             return;
         }
         SavedState savedState = (SavedState) state;
         super.onRestoreInstanceState(savedState.getSuperState());
         mSavedSpinnerPosition = savedState.getSpinnerPosition();
         if (mOnItemSelectedListener != null) {
-            mOnItemSelectedListener.onItemSelected(/* parent= */null, /* view= */null,
-                    savedState.getSpinnerPosition(), /* id= */ 0);
+            mOnItemSelectedListener.onItemSelected(
+                    /* parent= */ null,
+                    /* view= */ null,
+                    savedState.getSpinnerPosition(),
+                    /* id= */ 0);
         }
         Log.d(TAG, "onRestoreInstanceState() spinnerPosition=" + savedState.getSpinnerPosition());
     }

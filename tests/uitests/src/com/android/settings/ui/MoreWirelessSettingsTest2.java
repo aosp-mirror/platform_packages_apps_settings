@@ -35,9 +35,12 @@ import androidx.test.uiautomator.UiDevice;
 import androidx.test.uiautomator.UiObject2;
 import androidx.test.uiautomator.Until;
 
+import org.junit.Ignore;
+
 /**
  * Additional tests for Wifi Settings.
  */
+@Ignore
 public class MoreWirelessSettingsTest2 extends InstrumentationTestCase {
     // These back button presses are performed in tearDown() to exit Wifi
     // Settings sub-menus that a test might finish in. This number should be

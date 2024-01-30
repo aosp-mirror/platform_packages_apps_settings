@@ -54,10 +54,8 @@ public class DockDefenderTipTest {
     private FakeFeatureFactory mFeatureFactory;
     private MetricsFeatureProvider mMetricsFeatureProvider;
 
-    @Mock
-    private Preference mPreference;
-    @Mock
-    private CardPreference mCardPreference;
+    @Mock private Preference mPreference;
+    @Mock private CardPreference mCardPreference;
 
     @Before
     public void setUp() {
@@ -67,14 +65,18 @@ public class DockDefenderTipTest {
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mMetricsFeatureProvider = mFeatureFactory.metricsFeatureProvider;
 
-        mDockDefenderTipFutureBypass = new DockDefenderTip(BatteryTip.StateType.NEW,
-                BatteryUtils.DockDefenderMode.FUTURE_BYPASS);
-        mDockDefenderTipActive = new DockDefenderTip(BatteryTip.StateType.NEW,
-                BatteryUtils.DockDefenderMode.ACTIVE);
-        mDockDefenderTipTemporarilyBypassed = new DockDefenderTip(BatteryTip.StateType.NEW,
-                BatteryUtils.DockDefenderMode.TEMPORARILY_BYPASSED);
-        mDockDefenderTipDisabled = new DockDefenderTip(BatteryTip.StateType.INVISIBLE,
-                BatteryUtils.DockDefenderMode.DISABLED);
+        mDockDefenderTipFutureBypass =
+                new DockDefenderTip(
+                        BatteryTip.StateType.NEW, BatteryUtils.DockDefenderMode.FUTURE_BYPASS);
+        mDockDefenderTipActive =
+                new DockDefenderTip(BatteryTip.StateType.NEW, BatteryUtils.DockDefenderMode.ACTIVE);
+        mDockDefenderTipTemporarilyBypassed =
+                new DockDefenderTip(
+                        BatteryTip.StateType.NEW,
+                        BatteryUtils.DockDefenderMode.TEMPORARILY_BYPASSED);
+        mDockDefenderTipDisabled =
+                new DockDefenderTip(
+                        BatteryTip.StateType.INVISIBLE, BatteryUtils.DockDefenderMode.DISABLED);
 
         doReturn(mContext).when(mPreference).getContext();
         doReturn(mContext).when(mCardPreference).getContext();
@@ -82,69 +84,78 @@ public class DockDefenderTipTest {
 
     @Test
     public void testGetTitle() {
-        assertThat(mDockDefenderTipFutureBypass.getTitle(mContext).toString()).isEqualTo(
-                mContext.getString(R.string.battery_tip_dock_defender_future_bypass_title));
-        assertThat(mDockDefenderTipActive.getTitle(mContext).toString()).isEqualTo(
-                mContext.getString(R.string.battery_tip_dock_defender_active_title));
-        assertThat(mDockDefenderTipTemporarilyBypassed.getTitle(mContext).toString()).isEqualTo(
-                mContext.getString(R.string.battery_tip_dock_defender_temporarily_bypassed_title));
+        assertThat(mDockDefenderTipFutureBypass.getTitle(mContext).toString())
+                .isEqualTo(
+                        mContext.getString(R.string.battery_tip_dock_defender_future_bypass_title));
+        assertThat(mDockDefenderTipActive.getTitle(mContext).toString())
+                .isEqualTo(mContext.getString(R.string.battery_tip_dock_defender_active_title));
+        assertThat(mDockDefenderTipTemporarilyBypassed.getTitle(mContext).toString())
+                .isEqualTo(
+                        mContext.getString(
+                                R.string.battery_tip_dock_defender_temporarily_bypassed_title));
         assertThat(mDockDefenderTipDisabled.getTitle(mContext)).isNull();
     }
 
     @Test
     public void testGetSummary() {
-        assertThat(mDockDefenderTipFutureBypass.getSummary(mContext).toString()).isEqualTo(
-                mContext.getString(R.string.battery_tip_dock_defender_future_bypass_summary));
-        assertThat(mDockDefenderTipActive.getSummary(mContext).toString()).isEqualTo(
-                mContext.getString(R.string.battery_tip_dock_defender_active_summary));
-        assertThat(mDockDefenderTipTemporarilyBypassed.getSummary(mContext).toString()).isEqualTo(
-                mContext.getString(
-                        R.string.battery_tip_dock_defender_temporarily_bypassed_summary));
+        assertThat(mDockDefenderTipFutureBypass.getSummary(mContext).toString())
+                .isEqualTo(
+                        mContext.getString(
+                                R.string.battery_tip_dock_defender_future_bypass_summary));
+        assertThat(mDockDefenderTipActive.getSummary(mContext).toString())
+                .isEqualTo(mContext.getString(R.string.battery_tip_dock_defender_active_summary));
+        assertThat(mDockDefenderTipTemporarilyBypassed.getSummary(mContext).toString())
+                .isEqualTo(
+                        mContext.getString(
+                                R.string.battery_tip_dock_defender_temporarily_bypassed_summary));
         assertThat(mDockDefenderTipDisabled.getSummary(mContext)).isNull();
     }
 
     @Test
     public void testGetIconId_dockDefenderActive_getProtectedIcon() {
-        assertThat(mDockDefenderTipActive.getIconId()).isEqualTo(
-                R.drawable.ic_battery_status_protected_24dp);
+        assertThat(mDockDefenderTipActive.getIconId())
+                .isEqualTo(R.drawable.ic_battery_status_protected_24dp);
     }
 
     @Test
     public void testGetIconId_dockDefenderNotActive_getUntriggeredIcon() {
-        assertThat(mDockDefenderTipFutureBypass.getIconId()).isEqualTo(
-                R.drawable.ic_battery_dock_defender_untriggered_24dp);
-        assertThat(mDockDefenderTipTemporarilyBypassed.getIconId()).isEqualTo(
-                R.drawable.ic_battery_dock_defender_untriggered_24dp);
-        assertThat(mDockDefenderTipDisabled.getIconId()).isEqualTo(
-                R.drawable.ic_battery_dock_defender_untriggered_24dp);
+        assertThat(mDockDefenderTipFutureBypass.getIconId())
+                .isEqualTo(R.drawable.ic_battery_dock_defender_untriggered_24dp);
+        assertThat(mDockDefenderTipTemporarilyBypassed.getIconId())
+                .isEqualTo(R.drawable.ic_battery_dock_defender_untriggered_24dp);
+        assertThat(mDockDefenderTipDisabled.getIconId())
+                .isEqualTo(R.drawable.ic_battery_dock_defender_untriggered_24dp);
     }
 
     @Test
     public void testUpdateState() {
         mDockDefenderTipTemporarilyBypassed.updateState(mDockDefenderTipDisabled);
 
-        assertThat(mDockDefenderTipTemporarilyBypassed.getState()).isEqualTo(
-                BatteryTip.StateType.INVISIBLE);
-        assertThat(mDockDefenderTipTemporarilyBypassed.getMode()).isEqualTo(
-                BatteryUtils.DockDefenderMode.DISABLED);
+        assertThat(mDockDefenderTipTemporarilyBypassed.getState())
+                .isEqualTo(BatteryTip.StateType.INVISIBLE);
+        assertThat(mDockDefenderTipTemporarilyBypassed.getMode())
+                .isEqualTo(BatteryUtils.DockDefenderMode.DISABLED);
     }
 
     @Test
     public void testLog() {
         mDockDefenderTipActive.log(mContext, mMetricsFeatureProvider);
 
-        verify(mMetricsFeatureProvider).action(mContext, SettingsEnums.ACTION_DOCK_DEFENDER_TIP,
-                mDockDefenderTipActive.getState());
+        verify(mMetricsFeatureProvider)
+                .action(
+                        mContext,
+                        SettingsEnums.ACTION_DOCK_DEFENDER_TIP,
+                        mDockDefenderTipActive.getState());
     }
-
 
     @Test
     public void testUpdatePreference_dockDefenderTipFutureBypass() {
         mDockDefenderTipFutureBypass.updatePreference(mCardPreference);
 
         verify(mCardPreference).setPrimaryButtonVisible(true);
-        verify(mCardPreference).setPrimaryButtonText(
-                mContext.getString(R.string.battery_tip_charge_to_full_button));
+        verify(mCardPreference)
+                .setPrimaryButtonText(
+                        mContext.getString(R.string.battery_tip_charge_to_full_button));
         verifySecondaryButton();
     }
 
@@ -153,8 +164,9 @@ public class DockDefenderTipTest {
         mDockDefenderTipActive.updatePreference(mCardPreference);
 
         verify(mCardPreference).setPrimaryButtonVisible(true);
-        verify(mCardPreference).setPrimaryButtonText(
-                mContext.getString(R.string.battery_tip_charge_to_full_button));
+        verify(mCardPreference)
+                .setPrimaryButtonText(
+                        mContext.getString(R.string.battery_tip_charge_to_full_button));
         verifySecondaryButton();
     }
 
@@ -170,8 +182,10 @@ public class DockDefenderTipTest {
     private void verifySecondaryButton() {
         verify(mCardPreference).setSecondaryButtonText(mContext.getString(R.string.learn_more));
         verify(mCardPreference).setSecondaryButtonVisible(true);
-        verify(mCardPreference).setSecondaryButtonContentDescription(mContext.getString(
-                R.string.battery_tip_limited_temporarily_sec_button_content_description));
+        final String expectedContent =
+                mContext.getString(
+                        R.string.battery_tip_limited_temporarily_sec_button_content_description);
+        verify(mCardPreference).setSecondaryButtonContentDescription(expectedContent);
     }
 
     @Test
@@ -182,9 +196,11 @@ public class DockDefenderTipTest {
     }
 
     private String getLastErrorLog() {
-        return ShadowLog.getLogsForTag(DockDefenderTip.class.getSimpleName()).stream().filter(
-                log -> log.type == Log.ERROR).reduce((first, second) -> second).orElse(
-                createErrorLog("No Error Log")).msg;
+        return ShadowLog.getLogsForTag(DockDefenderTip.class.getSimpleName()).stream()
+                .filter(log -> log.type == Log.ERROR)
+                .reduce((first, second) -> second)
+                .orElse(createErrorLog("No Error Log"))
+                .msg;
     }
 
     private ShadowLog.LogItem createErrorLog(String msg) {

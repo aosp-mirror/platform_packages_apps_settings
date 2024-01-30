@@ -39,10 +39,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.robolectric.RobolectricTestRunner;
 
 @RunWith(RobolectricTestRunner.class)
 public class OpenRestrictAppFragmentActionTest {
@@ -53,10 +53,8 @@ public class OpenRestrictAppFragmentActionTest {
     private static final int ANOMALY_BT = 1;
     private static final int METRICS_KEY = 1;
 
-    @Mock
-    private InstrumentedPreferenceFragment mFragment;
-    @Mock
-    private BatteryDatabaseManager mBatteryDatabaseManager;
+    @Mock private InstrumentedPreferenceFragment mFragment;
+    @Mock private BatteryDatabaseManager mBatteryDatabaseManager;
     private OpenRestrictAppFragmentAction mAction;
     private FakeFeatureFactory mFeatureFactory;
     private Context mContext;
@@ -67,19 +65,22 @@ public class OpenRestrictAppFragmentActionTest {
         MockitoAnnotations.initMocks(this);
         mContext = ApplicationProvider.getApplicationContext();
         mAppInfos = new ArrayList<>();
-        mAppInfos.add(new AppInfo.Builder()
-                .setPackageName(PACKAGE_NAME_1)
-                .addAnomalyType(ANOMALY_BT)
-                .build());
-        mAppInfos.add(new AppInfo.Builder()
-                .setPackageName(PACKAGE_NAME_2)
-                .addAnomalyType(ANOMALY_WAKEUP)
-                .build());
+        mAppInfos.add(
+                new AppInfo.Builder()
+                        .setPackageName(PACKAGE_NAME_1)
+                        .addAnomalyType(ANOMALY_BT)
+                        .build());
+        mAppInfos.add(
+                new AppInfo.Builder()
+                        .setPackageName(PACKAGE_NAME_2)
+                        .addAnomalyType(ANOMALY_WAKEUP)
+                        .build());
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         when(mFragment.getContext()).thenReturn(mContext);
 
-        mAction = new OpenRestrictAppFragmentAction(mFragment,
-                new RestrictAppTip(BatteryTip.StateType.HANDLED, mAppInfos));
+        mAction =
+                new OpenRestrictAppFragmentAction(
+                        mFragment, new RestrictAppTip(BatteryTip.StateType.HANDLED, mAppInfos));
         mAction.mBatteryDatabaseManager = mBatteryDatabaseManager;
     }
 
@@ -93,9 +94,12 @@ public class OpenRestrictAppFragmentActionTest {
     public void testHandlePositiveAction() {
         mAction.handlePositiveAction(METRICS_KEY);
 
-        verify(mFeatureFactory.metricsFeatureProvider).action(mContext,
-                MetricsProto.MetricsEvent.ACTION_TIP_OPEN_APP_RESTRICTION_PAGE, METRICS_KEY);
-        verify(mBatteryDatabaseManager).updateAnomalies(mAppInfos,
-                AnomalyDatabaseHelper.State.HANDLED);
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(
+                        mContext,
+                        MetricsProto.MetricsEvent.ACTION_TIP_OPEN_APP_RESTRICTION_PAGE,
+                        METRICS_KEY);
+        verify(mBatteryDatabaseManager)
+                .updateAnomalies(mAppInfos, AnomalyDatabaseHelper.State.HANDLED);
     }
 }

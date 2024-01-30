@@ -17,9 +17,10 @@
 package com.android.settings.spa
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
-import com.android.settings.spa.SpaActivity.Companion.startSpaActivityForApp
-import com.android.settings.spa.SpaBridgeActivity.Companion.getDestination
+import android.os.UserHandle
+import com.android.settings.spa.SpaBridgeActivity.Companion.startSpaActivityFromBridge
 
 /**
  * Activity used as a bridge to [SpaActivity] with package scheme for application usage.
@@ -31,9 +32,14 @@ import com.android.settings.spa.SpaBridgeActivity.Companion.getDestination
 class SpaAppBridgeActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        getDestination()?.let { destination ->
-            startSpaActivityForApp(destination, intent)
-        }
+        startSpaActivityFromBridge { getDestinationForApp(it, intent) }
         finish()
+    }
+
+    companion object {
+        fun getDestinationForApp(destinationPrefix: String, intent: Intent): String? {
+            val packageName = intent.data?.schemeSpecificPart ?: return null
+            return "$destinationPrefix/$packageName/${UserHandle.myUserId()}"
+        }
     }
 }

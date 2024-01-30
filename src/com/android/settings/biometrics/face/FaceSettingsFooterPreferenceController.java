@@ -49,7 +49,7 @@ public class FaceSettingsFooterPreferenceController extends BasePreferenceContro
 
     public FaceSettingsFooterPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
-        mProvider = FeatureFactory.getFactory(context).getFaceFeatureProvider();
+        mProvider = FeatureFactory.getFeatureFactory().getFaceFeatureProvider();
     }
 
     @Override
