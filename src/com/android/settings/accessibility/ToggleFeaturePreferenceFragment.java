@@ -658,7 +658,7 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
         int value = restoreOnConfigChangedValue();
         if (value == NOT_SET) {
             final int lastNonEmptyUserShortcutType = PreferredShortcuts.retrieveUserShortcutType(
-                    getPrefContext(), mComponentName.flattenToString(), UserShortcutType.SOFTWARE);
+                    getPrefContext(), mComponentName.flattenToString());
             value = mShortcutPreference.isChecked() ? lastNonEmptyUserShortcutType
                     : UserShortcutType.EMPTY;
         }
@@ -708,7 +708,7 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
         }
 
         final int shortcutTypes = PreferredShortcuts.retrieveUserShortcutType(context,
-                mComponentName.flattenToString(), UserShortcutType.SOFTWARE);
+                mComponentName.flattenToString());
 
         final List<CharSequence> list = new ArrayList<>();
         if (hasShortcutType(shortcutTypes, UserShortcutType.SOFTWARE)) {
@@ -801,7 +801,7 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
         }
 
         final int shortcutTypes = PreferredShortcuts.retrieveUserShortcutType(getPrefContext(),
-                mComponentName.flattenToString(), UserShortcutType.SOFTWARE);
+                mComponentName.flattenToString());
         mShortcutPreference.setChecked(
                 AccessibilityUtil.hasValuesInSettings(getPrefContext(), shortcutTypes,
                         mComponentName));
@@ -819,7 +819,7 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
         }
 
         final int shortcutTypes = PreferredShortcuts.retrieveUserShortcutType(getPrefContext(),
-                mComponentName.flattenToString(), UserShortcutType.SOFTWARE);
+                mComponentName.flattenToString());
         if (preference.isChecked()) {
             AccessibilityUtil.optInAllValuesToSettings(getPrefContext(), shortcutTypes,
                     mComponentName);

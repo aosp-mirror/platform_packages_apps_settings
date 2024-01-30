@@ -607,8 +607,10 @@
     <string name="private_space_access_text" msgid="4258842502257201013">"To access your private space, go to your apps list then scroll down"</string>
     <string name="private_space_done_label" msgid="1020482651595246071">"Done"</string>
     <string name="private_space_scrolldown_to_access" msgid="4820954877349434545">"Scroll down to find private space"</string>
-    <string name="private_space_retry_signin_title" msgid="2340841075193680666">"Sign in to set up a private space"</string>
-    <string name="private_space_retry_summary" msgid="1976929616948459609">"You need to sign in to an account to set up a private space"</string>
+    <string name="private_space_retry_signin_title" msgid="8090276618867918844">"Sign in"</string>
+    <string name="private_space_retry_summary" msgid="1920444015972648774">"Sign in to an account to use with your private space"</string>
+    <string name="private_space_skip_login_label" msgid="7078019409056628192">"Not now"</string>
+    <string name="private_space_continue_login_label" msgid="7779965766333065391">"Continue"</string>
     <string name="private_space_lock_setup_title" msgid="6541564212199510787">"Choose a lock for your private space"</string>
     <string name="private_space_lock_setup_description" msgid="423405593476300918">"You can unlock your private space using your fingerprint. For security, this option requires a backup lock."</string>
     <string name="private_space_choose_your_pin_header" msgid="4560802934975898265">"Set a PIN for your private space"</string>
@@ -1383,6 +1385,7 @@
     <string name="battery_level_title" msgid="1371765298786083448">"Battery level"</string>
     <string name="communal_settings_title" msgid="2845678473945902115">"Communal"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"Communal settings"</string>
+    <string name="satellite_setting" msgid="706846910912477125">"Satellite Messaging"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APNs"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Edit access point"</string>
     <string name="apn_add" msgid="9069613192201630934">"Add access point"</string>
@@ -1417,8 +1420,7 @@
     <string name="menu_save" msgid="6611465355127483100">"Save"</string>
     <string name="menu_cancel" msgid="1197826697950745335">"Cancel"</string>
     <string name="error_title" msgid="7158648377702417716"></string>
-    <!-- no translation found for error_duplicate_apn_entry (7792928408935276618) -->
-    <skip />
+    <string name="error_duplicate_apn_entry" msgid="7792928408935276618">"Duplicate apn entry."</string>
     <string name="error_name_empty" msgid="1258275899283079142">"The Name field can’t be empty."</string>
     <string name="error_apn_empty" msgid="7657491065443746915">"The APN can’t be empty."</string>
     <string name="error_mcc_not3" msgid="883659545640179094">"MCC field must be 3 digits."</string>
@@ -1437,7 +1439,7 @@
     <string name="reset_bluetooth_wifi_button_text" msgid="3974098137045963639">"Reset"</string>
     <string name="reset_bluetooth_wifi_complete_toast" msgid="5893439291030574365">"Bluetooth &amp; Wi‑Fi have been reset"</string>
     <string name="reset_esim_title" msgid="4194570573425902754">"Erase eSIMs"</string>
-    <string name="reset_esim_desc" msgid="3662444090563399131">"This won’t cancel any mobile service plans. To download replacement SIMs, contact your carrier."</string>
+    <string name="reset_esim_desc" msgid="6125192435907740751">"This won’t cancel your mobile service plan. To get a replacement SIM, contact your carrier."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"Reset settings"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"Reset all network settings? You can\'t undo this action."</string>
     <string name="reset_network_final_desc_esim" msgid="1129251284212847939">"Reset all network settings and erase eSIMs? You can’t undo this action."</string>
@@ -1445,15 +1447,15 @@
     <string name="reset_network_confirm_title" msgid="913014422184481270">"Reset?"</string>
     <string name="network_reset_not_available" msgid="1966334631394607829">"Network reset is not available for this user"</string>
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"Network settings have been reset"</string>
-    <string name="reset_esim_error_title" msgid="4670073610967959597">"Can’t erase SIMs"</string>
-    <string name="reset_esim_error_msg" msgid="7279607120606365250">"eSIMs can’t be erased due to an error.\n\nRestart your device and try again."</string>
+    <string name="reset_esim_error_title" msgid="6516110227665862295">"Can’t erase eSIMs"</string>
+    <string name="reset_esim_error_msg" msgid="8459527827897797168">"Something went wrong and your eSIMs weren’t erased.\n\nRestart your device and try again."</string>
     <string name="main_clear_title" msgid="277664302144837723">"Erase all data (factory reset)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Erase all data (factory reset)"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"Music"</li>\n<li>"Photos"</li>\n<li>"Other user data"</li></string>
     <string name="main_clear_desc_also_erases_esim" msgid="4553469876411831729"><li>"eSIMs"</li></string>
     <string name="main_clear_desc_no_cancel_mobile_plan" msgid="369883568059127035">\n\n"This will not cancel your mobile service plan."</string>
     <string name="main_clear_final_desc" msgid="5800877928569039580">"All of your personal information and downloaded apps will be deleted. You can’t undo this action."</string>
-    <string name="main_clear_final_desc_esim" msgid="440406836793824969">"All of your personal information, including downloaded apps &amp; SIMs, will be deleted. You can’t undo this action."</string>
+    <string name="main_clear_final_desc_esim" msgid="6592404057237813989">"All of your personal information, including downloaded apps &amp; eSIMs, will be deleted. You can’t undo this action."</string>
     <string name="main_clear_confirm_title" msgid="6577071819657853713">"Erase all data?"</string>
     <string name="main_clear_not_available" msgid="3433795327146684827">"Factory reset is not available for this user"</string>
     <string name="main_clear_progress_title" msgid="7239741132015617719">"Erasing"</string>
@@ -1684,6 +1686,10 @@
     <string name="force_stop" msgid="2681771622136916280">"Force stop"</string>
     <string name="archive" msgid="9074663845068632127">"Archive"</string>
     <string name="restore" msgid="7622486640713967157">"Restore"</string>
+    <string name="restoring_step_one" msgid="3465050101254272874">"Restoring"</string>
+    <string name="restoring_step_two" msgid="140484846432595108">"Restoring."</string>
+    <string name="restoring_step_three" msgid="3712883580876329811">"Restoring.."</string>
+    <string name="restoring_step_four" msgid="8966846882470446209">"Restoring..."</string>
     <string name="total_size_label" msgid="2052185048749658866">"Total"</string>
     <string name="application_size_label" msgid="6407051020651716729">"App size"</string>
     <string name="external_code_size_label" msgid="7375146402660973743">"USB storage app"</string>
@@ -2387,12 +2393,6 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"See apps with highest usage"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="6258554134146272311">"Charging optimized to protect your battery"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="5107379280241187562">"To help extend your battery\'s lifespan, charging is optimized"</string>
-    <string name="battery_tip_dock_defender_future_bypass_title" msgid="4332616280495788195">"Charging optimized to protect your battery"</string>
-    <string name="battery_tip_dock_defender_future_bypass_summary" msgid="7870758621381307597">"To help extend your battery\'s lifespan, charging is optimized while docked"</string>
-    <string name="battery_tip_dock_defender_active_title" msgid="1414785238383255699">"Charging optimized to protect your battery"</string>
-    <string name="battery_tip_dock_defender_active_summary" msgid="3512082623718801459">"To help extend your battery\'s lifespan, charging is optimized while docked"</string>
-    <string name="battery_tip_dock_defender_temporarily_bypassed_title" msgid="1679449361090557201">"Charging to full"</string>
-    <string name="battery_tip_dock_defender_temporarily_bypassed_summary" msgid="1099500476761333281">"To protect your battery, charging will be optimized the next time your tablet is docked"</string>
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"Learn more about charging is paused"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Resume charging"</string>
     <string name="battery_tip_dialog_message_footer" msgid="986542164372177504">"Includes high-power background activity"</string>
@@ -2410,7 +2410,7 @@
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Remove"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Cancel"</string>
     <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"Charge to full"</string>
-    <string name="battery_tip_incompatible_charging_title" msgid="5120763575150751300">"Issue with charging accessory"</string>
+    <string name="battery_tip_incompatible_charging_title" msgid="1567827436103364999">"Check charging accessory"</string>
     <string name="battery_tip_incompatible_charging_content_description" msgid="355668467640367701">"Learn more about incompatible charging"</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"Battery Manager"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"Manage apps automatically"</string>
@@ -4289,12 +4289,14 @@
     <string name="autofill_app" msgid="7595308061826307921">"Autofill service"</string>
     <string name="default_autofill_app" msgid="372234803718251606">"Default autofill service"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"Passwords"</string>
-    <string name="credman_chosen_app_title" msgid="872524130208251505">"Passwords, passkeys, and data services"</string>
+    <string name="credman_chosen_app_title" msgid="7735183808067729319">"Preferred service"</string>
     <string name="credman_credentials" msgid="4931371941253324143">"Additional providers"</string>
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# password}other{# passwords}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"auto, fill, autofill, password"</string>
     <string name="credman_keywords" msgid="8305600680836806170">"data, passkey, password"</string>
     <string name="credman_autofill_keywords" msgid="701180623776848914">"auto, fill, autofill, data, passkey, password"</string>
+    <string name="credman_button_change" msgid="4072629639218503790">"Change"</string>
+    <string name="credman_button_open" msgid="7519871964170816850">"Open"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Make sure you trust this app&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; uses what\'s on your screen to determine what can be autofilled."</string>
     <string name="credman_autofill_confirmation_message" msgid="843829628024668466">"&lt;b&gt;Use &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; New passwords, passkeys, and other info will be saved here from now on. &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; may use what\'s on your screen to determine what can be autofilled."</string>
     <string name="credman_picker_title" msgid="8191267620665129205">"Passwords, passkeys, and data services"</string>
@@ -4478,7 +4480,7 @@
     <string name="mobile_network_use_sim_off" msgid="6303281166199670639">"Off"</string>
     <string name="mobile_network_disable_sim_explanation" msgid="2851862257846773796">"To disable this SIM, remove the SIM card"</string>
     <string name="mobile_network_tap_to_activate" msgid="4139979375717958102">"Tap to activate <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <string name="mobile_network_erase_sim" msgid="4629071168032714930">"Erase SIM"</string>
+    <string name="mobile_network_erase_sim" msgid="5387971155494245850">"Erase eSIM"</string>
     <string name="preferred_network_mode_title" msgid="3083431168988535628">"Preferred network type"</string>
     <string name="preferred_network_mode_summary" msgid="537577807865497546">"Change the network operating mode"</string>
     <string name="preferred_network_mode_dialogtitle" msgid="4179420486180351631">"Preferred network type"</string>
@@ -4497,6 +4499,23 @@
     <string name="roaming_check_price_warning" msgid="5876977438036791361">"Check with your network provider for pricing."</string>
     <string name="mobile_data_usage_title" msgid="2047864499317759728">"App data usage"</string>
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"Invalid Network Mode <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Ignore."</string>
+    <string name="satellite_setting_title" msgid="2543034229989047673">"Satellite messaging"</string>
+    <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"Send and receive text messages by satellite. Included with your account."</string>
+    <string name="satellite_setting_disabled_summary" msgid="6789122487534159857">"Send and receive text messages by satellite. Non included with your account."</string>
+    <string name="keywords_satellite_setting" msgid="3312183289776517695">"Satellite messaging"</string>
+    <string name="category_name_about_satellite_messaging" msgid="3756205049485508340">"About satellite messaging"</string>
+    <string name="title_about_satellite_setting" msgid="9212860038048311345">"You can send and receive text messages by satellite as part of an eligible <xliff:g id="CARRIER_NAME">%1$s</xliff:g> account"</string>
+    <string name="category_title_your_satellite_plan" msgid="3017895097366691841">"Your <xliff:g id="CARRIER_NAME">%1$s</xliff:g> plan"</string>
+    <string name="title_have_satellite_plan" msgid="2048372355699977947">"Satellite messaging is included with your account"</string>
+    <string name="title_no_satellite_plan" msgid="2876056203035197505">"Satellite messaging isn’t included with your account"</string>
+    <string name="summary_add_satellite_setting" msgid="3815254731634052432">"Add satellite messaging"</string>
+    <string name="category_name_how_it_works" msgid="585303230539269496">"How it works"</string>
+    <string name="title_satellite_connection_guide" msgid="3294802307913609072">"When you don’t have a mobile network"</string>
+    <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"Your phone will auto-connect to a satellite. For the best connection, keep a clear view of the sky."</string>
+    <string name="title_supported_service" msgid="4275535165812691571">"After your phone connects to a satellite"</string>
+    <string name="summary_supported_service" msgid="4320535903444834786">"You can text anyone, including emergency services. Your phone will reconnect to a mobile network when available."</string>
+    <string name="satellite_setting_summary_more_information" msgid="4008690241760925372">"Satellite messaging may take longer and is available only in some areas, Weather and certain structures may affect your satellite connection. Calling by satellite isn’t available.\n\nIt may take some time for changes to your account to show in Settings. Contact <xliff:g id="CARRIER_NAME">%1$s</xliff:g> for details."</string>
+    <string name="more_about_satellite_messaging" msgid="3385673133561348509">"More about satellite messaging"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Access Point Names"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Unavailable when connected to <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -4506,9 +4525,9 @@
     <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"Switch to <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"Switch to using SIM card?"</string>
     <string name="sim_action_switch_sub_dialog_mep_title" msgid="933856847099933004">"Use <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
-    <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"Only one SIM can be active at a time.\n\nSwitching to <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> won’t cancel your <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> service."</string>
-    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="8977951796005849471">"Only 1 eSIM can be active at a time.\n\nSwitching to <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> won’t cancel your <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> service."</string>
-    <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"Only one SIM can be active at a time.\n\nSwitching won’t cancel your <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> service."</string>
+    <string name="sim_action_switch_sub_dialog_text" msgid="7474905814976249607">"Only 1 SIM can be on at a time.\n\nSwitching to <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> won’t cancel your <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> service."</string>
+    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="6415848271400253954">"Only 1 eSIM can be on at a time.\n\nSwitching to <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> won’t cancel your <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> service."</string>
+    <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="421658355882679837">"Only 1 SIM can be on at a time.\n\nSwitching won’t cancel your <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> service."</string>
     <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"You can use 2 SIMs at a time. To use <xliff:g id="CARRIER_NAME">%1$s</xliff:g>, turn off another SIM."</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"Switch to <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"Turn off <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
@@ -4551,7 +4570,7 @@
     <string name="sim_onboarding_phoneNumber_data_only" msgid="8158409121949373662">"Data only"</string>
     <string name="sim_onboarding_setup" msgid="5750393553605388463">"Set up"</string>
     <string name="sim_onboarding_next" msgid="6415025179929475355">"Next"</string>
-    <string name="sim_onboarding_profressbar_turning_sim_on" msgid="4888545282948732575">"Turning on <xliff:g id="CARRIER_NAME">%1$s</xliff:g>…"</string>
+    <string name="sim_onboarding_progressbar_turning_sim_on" msgid="1163318788393361574">"Turning on <xliff:g id="CARRIER_NAME">%1$s</xliff:g>…"</string>
     <string name="mobile_network_spn_title" msgid="3053793174495329077">"Mobile network"</string>
     <string name="mobile_network_phone_number_title" msgid="2090794402855021784">"Phone number"</string>
     <string name="mobile_network_sim_label_color_title" msgid="2401352348041132876">"SIM label and color"</string>
@@ -4574,11 +4593,11 @@
     <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"To use mobile data, call features, and SMS at a later time, go to your network settings"</string>
     <string name="sim_card_label" msgid="6263064316075963775">"SIM"</string>
     <string name="erase_sim_dialog_title" msgid="4742077437653028326">"Erase this eSIM?"</string>
-    <string name="erase_sim_dialog_text" msgid="753031064269699885">"Erasing this SIM removes <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> service from this device.\n\nService for <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> won\'t be canceled."</string>
+    <string name="erase_sim_dialog_text" msgid="1406141218170595272">"This removes <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> service from this device, but your <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> plan won\'t be canceled."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Erase"</string>
-    <string name="erasing_sim" msgid="7877703231075699139">"Erasing SIM…"</string>
-    <string name="erase_sim_fail_title" msgid="2024446702985862427">"Can\'t erase SIM"</string>
-    <string name="erase_sim_fail_text" msgid="7870804401227483131">"This SIM can\'t be erased due to an error.\n\nRestart your device and try again."</string>
+    <string name="erasing_sim" msgid="4237180547590463930">"Erasing eSIM…"</string>
+    <string name="erase_sim_fail_title" msgid="1445700500168357303">"Can\'t erase eSIM"</string>
+    <string name="erase_sim_fail_text" msgid="6898841004987411547">"Something went wrong and this eSIM wasn\'t erased.\n\nRestart your device and try again."</string>
     <string name="network_connection_request_dialog_title" msgid="1896186380874289434">"Connect to device"</string>
     <string name="network_connection_request_dialog_summary" msgid="7693038309792726170">"<xliff:g id="APPNAME">%1$s</xliff:g> app wants to use a temporary Wi‑Fi network to connect to your device"</string>
     <string name="network_connection_timeout_dialog_message" msgid="598509083077743772">"No devices found. Make sure devices are turned on and available to connect."</string>
@@ -4743,8 +4762,8 @@
     <string name="sim_category_title" msgid="2341314000964710495">"SIM"</string>
     <string name="downloaded_sim_category_title" msgid="2876988650413179752">"eSIM"</string>
     <string name="downloaded_sims_category_title" msgid="487799905978489922">"eSIMs"</string>
-    <string name="sim_category_active_sim" msgid="1503823567818544012">"Active"</string>
-    <string name="sim_category_inactive_sim" msgid="4068899490133820881">"Inactive"</string>
+    <string name="sim_category_active_sim" msgid="3077009911935592178">"On"</string>
+    <string name="sim_category_inactive_sim" msgid="7351553344148400450">"Off"</string>
     <string name="sim_category_default_active_sim" msgid="1208194173387987231">" / Default for <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="default_active_sim_calls" msgid="2390973682556353558">"calls"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"SMS"</string>

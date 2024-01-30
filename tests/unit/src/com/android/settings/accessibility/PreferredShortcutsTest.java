@@ -75,7 +75,7 @@ public class PreferredShortcutsTest {
 
         PreferredShortcuts.saveUserShortcutType(mContext, shortcut);
         final int retrieveType = PreferredShortcuts.retrieveUserShortcutType(mContext,
-                COMPONENT_NAME_1.flattenToString(), 0);
+                COMPONENT_NAME_1.flattenToString());
 
         assertThat(retrieveType).isEqualTo(type);
     }
@@ -92,7 +92,7 @@ public class PreferredShortcutsTest {
         PreferredShortcuts.saveUserShortcutType(mContext, shortcut1);
         PreferredShortcuts.saveUserShortcutType(mContext, shortcut2);
         final int retrieveType = PreferredShortcuts.retrieveUserShortcutType(mContext,
-                COMPONENT_NAME_1.flattenToString(), 0);
+                COMPONENT_NAME_1.flattenToString());
 
         assertThat(retrieveType).isEqualTo(type1);
     }
@@ -113,8 +113,8 @@ public class PreferredShortcutsTest {
 
         assertThat(
                 PreferredShortcuts.retrieveUserShortcutType(
-                        mContext, MAGNIFICATION_CONTROLLER_NAME,
-                        ShortcutConstants.UserShortcutType.SOFTWARE))
+                        mContext, MAGNIFICATION_CONTROLLER_NAME
+                ))
                 .isEqualTo(expectedShortcutTypes);
     }
 
@@ -132,8 +132,8 @@ public class PreferredShortcutsTest {
 
         assertThat(
                 PreferredShortcuts.retrieveUserShortcutType(
-                        mContext, MAGNIFICATION_CONTROLLER_NAME,
-                        ShortcutConstants.UserShortcutType.SOFTWARE))
+                        mContext, MAGNIFICATION_CONTROLLER_NAME
+                ))
                 .isEqualTo(expectedShortcutTypes);
     }
 
@@ -156,13 +156,13 @@ public class PreferredShortcutsTest {
 
         assertThat(
                 PreferredShortcuts.retrieveUserShortcutType(
-                        mContext, target1,
-                        ShortcutConstants.UserShortcutType.SOFTWARE))
+                        mContext, target1
+                ))
                 .isEqualTo(target1ShortcutTypes);
         assertThat(
                 PreferredShortcuts.retrieveUserShortcutType(
-                        mContext, target2,
-                        ShortcutConstants.UserShortcutType.SOFTWARE))
+                        mContext, target2
+                ))
                 .isEqualTo(target2ShortcutTypes);
     }
 

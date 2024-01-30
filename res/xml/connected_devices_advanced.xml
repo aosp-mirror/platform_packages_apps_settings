@@ -21,57 +21,59 @@
 
     <Preference
         android:fragment="com.android.settings.connecteddevice.BluetoothDashboardFragment"
-        android:key="bluetooth_switchbar_screen"
-        android:title="@string/bluetooth_settings_title"
         android:icon="@*android:drawable/ic_settings_bluetooth"
-        android:order="-9"/>
+        android:key="bluetooth_switchbar_screen"
+        android:order="-10"
+        android:title="@string/bluetooth_settings_title" />
 
     <Preference
         android:fragment="com.android.settings.connecteddevice.audiosharing.AudioSharingDashboardFragment"
-        android:key="audio_sharing_settings"
-        android:title="@string/audio_sharing_title"
         android:icon="@drawable/ic_bt_audio_sharing"
-        settings:controller="com.android.settings.connecteddevice.audiosharing.AudioSharingPreferenceController"/>
+        android:key="audio_sharing_settings"
+        android:order="-9"
+        android:title="@string/audio_sharing_title"
+        settings:controller="com.android.settings.connecteddevice.audiosharing.AudioSharingPreferenceController"
+        settings:searchable="true" />
 
     <com.android.settingslib.RestrictedPreference
         android:fragment="com.android.settings.connecteddevice.NfcAndPaymentFragment"
-        android:key="nfc_and_payment_settings"
-        android:title="@string/nfc_quick_toggle_title"
         android:icon="@drawable/ic_nfc"
+        android:key="nfc_and_payment_settings"
         android:order="-7"
-        settings:searchable="false"
+        android:title="@string/nfc_quick_toggle_title"
         settings:controller="com.android.settings.connecteddevice.NfcAndPaymentFragmentController"
-        settings:userRestriction="no_near_field_communication_radio"
-        settings:useAdminDisabledSummary="true"/>
+        settings:searchable="false"
+        settings:useAdminDisabledSummary="true"
+        settings:userRestriction="no_near_field_communication_radio" />
 
     <Preference
         android:fragment="com.android.settings.wfd.WifiDisplaySettings"
-        android:key="wifi_display_settings"
-        android:title="@string/wifi_display_settings_title"
         android:icon="@drawable/ic_cast_24dp"
+        android:key="wifi_display_settings"
         android:order="-6"
+        android:title="@string/wifi_display_settings_title"
         settings:controller="com.android.settings.wfd.WifiDisplayPreferenceController"
-        settings:keywords="@string/keywords_wifi_display_settings"/>
+        settings:keywords="@string/keywords_wifi_display_settings" />
 
     <com.android.settingslib.RestrictedPreference
-        android:key="connected_device_printing"
-        android:title="@string/print_settings"
-        android:summary="@string/summary_placeholder"
-        android:icon="@*android:drawable/ic_settings_print"
         android:fragment="com.android.settings.print.PrintSettingsFragment"
-        android:order="-3"/>
+        android:icon="@*android:drawable/ic_settings_print"
+        android:key="connected_device_printing"
+        android:order="-3"
+        android:summary="@string/summary_placeholder"
+        android:title="@string/print_settings" />
 
     <com.android.settingslib.RestrictedSwitchPreference
         android:key="uwb_settings"
-        android:title="@string/uwb_settings_title"
         android:order="100"
         android:summary="@string/summary_placeholder"
+        android:title="@string/uwb_settings_title"
         settings:controller="com.android.settings.uwb.UwbPreferenceController"
-        settings:userRestriction="no_ultra_wideband_radio"
-        settings:useAdminDisabledSummary="true"/>
+        settings:useAdminDisabledSummary="true"
+        settings:userRestriction="no_ultra_wideband_radio" />
 
     <PreferenceCategory
         android:key="dashboard_tile_placeholder"
-        android:order="-8"/>
+        android:order="-8" />
 
 </PreferenceScreen>
