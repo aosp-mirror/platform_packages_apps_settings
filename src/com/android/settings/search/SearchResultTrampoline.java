@@ -39,7 +39,7 @@ public class SearchResultTrampoline extends Activity {
         // First make sure caller has privilege to launch a search result page.
         FeatureFactory.getFactory(this)
                 .getSearchFeatureProvider()
-                .verifyLaunchSearchResultPageCaller(this, getCallingActivity());
+                .verifyLaunchSearchResultPageCaller(this, getLaunchedFromPackage());
         // Didn't crash, proceed and launch the result as a subsetting.
         final Intent intent = getIntent();
 
