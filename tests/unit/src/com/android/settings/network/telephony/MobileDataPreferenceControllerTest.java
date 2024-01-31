@@ -98,6 +98,7 @@ public class MobileDataPreferenceControllerTest {
         doReturn(mTelephonyManager).when(mContext).getSystemService(Context.TELEPHONY_SERVICE);
 
         when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
+        when(mSubscriptionManager.createForAllUserProfiles()).thenReturn(mSubscriptionManager);
         doReturn(mTelephonyManager).when(mTelephonyManager).createForSubscriptionId(SUB_ID);
         doReturn(mInvalidTelephonyManager).when(mTelephonyManager).createForSubscriptionId(
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
@@ -182,7 +183,8 @@ public class MobileDataPreferenceControllerTest {
 
         mController.onPreferenceChange(mPreference, true);
 
-        verify(mTelephonyManager).setDataEnabled(true);
+        verify(mTelephonyManager).setDataEnabledForReason(TelephonyManager.DATA_ENABLED_REASON_USER
+                ,true);
     }
 
     @Test
@@ -195,7 +197,8 @@ public class MobileDataPreferenceControllerTest {
 
         mController.onPreferenceChange(mPreference, true);
 
-        verify(mTelephonyManager).setDataEnabled(true);
+        verify(mTelephonyManager).setDataEnabledForReason(TelephonyManager.DATA_ENABLED_REASON_USER
+                ,true);
     }
 
     @Test

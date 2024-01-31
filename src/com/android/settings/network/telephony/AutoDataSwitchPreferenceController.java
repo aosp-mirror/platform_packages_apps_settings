@@ -42,6 +42,7 @@ import androidx.preference.TwoStatePreference;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.datausage.DataUsageUtils;
+import com.android.settings.flags.Flags;
 import com.android.settings.network.MobileDataContentObserver;
 import com.android.settings.network.ProxySubscriptionManager;
 import com.android.settings.network.SubscriptionsChangeListener;
@@ -194,7 +195,8 @@ public class AutoDataSwitchPreferenceController extends TelephonyTogglePreferenc
 
     @Override
     public int getAvailabilityStatus(int subId) {
-        if (!SubscriptionManager.isValidSubscriptionId(subId)
+        if (Flags.isDualSimOnboardingEnabled()
+                || !SubscriptionManager.isValidSubscriptionId(subId)
                 || SubscriptionManager.getDefaultDataSubscriptionId() == subId
                 || (!hasMobileData())) {
             return CONDITIONALLY_UNAVAILABLE;
