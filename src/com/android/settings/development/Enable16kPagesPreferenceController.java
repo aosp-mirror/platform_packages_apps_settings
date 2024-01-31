@@ -176,6 +176,7 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
     public void on16kPagesDialogDismissed() {}
 
     private void installUpdate() {
+        // Check if there is any pending system update
         SystemUpdateManager manager = mContext.getSystemService(SystemUpdateManager.class);
         Bundle data = manager.retrieveSystemUpdateInfo();
         int status = data.getInt(SystemUpdateManager.KEY_STATUS);
@@ -183,6 +184,10 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
                 && status != SystemUpdateManager.STATUS_IDLE) {
             throw new RuntimeException("System has pending update!");
         }
+
+        // Publish system update info
+        PersistableBundle info = createUpdateInfo(SystemUpdateManager.STATUS_IN_PROGRESS);
+        manager.updateSystemUpdateInfo(info);
 
         String updateFilePath = mEnable16k ? OTA_16K_PATH : OTA_4K_PATH;
         try {
@@ -315,10 +320,10 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
                         mEnable16k ? ENABLE_16K_PAGE_SIZE : ENABLE_4K_PAGE_SIZE);
 
                 // Publish system update info
-                SystemUpdateManager manager =
-                        (SystemUpdateManager)
-                                mContext.getSystemService(Context.SYSTEM_UPDATE_SERVICE);
-                manager.updateSystemUpdateInfo(getUpdateInfo());
+                SystemUpdateManager manager = mContext.getSystemService(SystemUpdateManager.class);
+                PersistableBundle info =
+                        createUpdateInfo(SystemUpdateManager.STATUS_WAITING_REBOOT);
+                manager.updateSystemUpdateInfo(info);
 
                 // Restart device to complete update
                 PowerManager pm = mContext.getSystemService(PowerManager.class);
@@ -345,10 +350,9 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
         return builder.create();
     }
 
-    private PersistableBundle getUpdateInfo() {
+    private PersistableBundle createUpdateInfo(int status) {
         PersistableBundle infoBundle = new PersistableBundle();
-        infoBundle.putInt(
-                SystemUpdateManager.KEY_STATUS, SystemUpdateManager.STATUS_WAITING_REBOOT);
+        infoBundle.putInt(SystemUpdateManager.KEY_STATUS, status);
         infoBundle.putBoolean(SystemUpdateManager.KEY_IS_SECURITY_UPDATE, false);
         infoBundle.putString(SystemUpdateManager.KEY_TITLE, EXPERIMENTAL_UPDATE_TITLE);
         return infoBundle;
