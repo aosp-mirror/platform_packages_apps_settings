@@ -32,6 +32,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
+import com.android.settings.flags.Flags;
 import com.android.settings.network.DefaultSubscriptionReceiver;
 import com.android.settings.network.MobileNetworkRepository;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -88,6 +89,9 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
 
     @Override
     public int getAvailabilityStatus(int subId) {
+        if (Flags.isDualSimOnboardingEnabled()) {
+            return CONDITIONALLY_UNAVAILABLE;
+        }
         return AVAILABLE;
     }
 

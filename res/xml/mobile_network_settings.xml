@@ -48,6 +48,23 @@
             settings:controller="com.android.settings.network.telephony.SmsDefaultSubscriptionController"/>
 
         <Preference
+            android:key="mobile_network_spn"
+            android:title="@string/mobile_network_spn_title"
+            android:summary="@string/summary_placeholder"
+            android:selectable="false"
+            settings:controller="com.android.settings.network.telephony.MobileNetworkSpnPreferenceController"
+            settings:allowDividerAbove="true" />
+
+        <Preference
+            android:key="phone_number"
+            android:title="@string/status_number"
+            android:summary="@string/summary_placeholder"
+            android:selectable="false"
+            settings:controller="com.android.settings.network.telephony.MobileNetworkPhoneNumberPreferenceController"
+            settings:allowDividerBelow="true"
+            settings:enableCopying="true"/>
+
+        <Preference
             android:key="cdma_lte_data_service_key"
             android:title="@string/cdma_lte_data_service"
             settings:controller="com.android.settings.network.telephony.DataServiceSetupPreferenceController"
@@ -161,6 +178,24 @@
             android:selectable="false"
             settings:controller="com.android.settings.network.telephony.CarrierSettingsVersionPreferenceController"
             settings:enableCopying="true"/>
+
+        <!-- IMEI -->
+        <Preference
+            android:key="network_mode_imei_info"
+            android:title="@string/status_imei"
+            android:summary="@string/summary_placeholder"
+            settings:keywords="@string/keywords_imei_info"
+            settings:enableCopying="true"
+            settings:controller="com.android.settings.network.telephony.MobileNetworkImeiPreferenceController"/>
+        <!-- EID -->
+        <com.android.settingslib.CustomDialogPreferenceCompat
+            android:key="network_mode_eid_info"
+            android:title="@string/status_eid"
+            android:summary="@string/device_info_protected_single_press"
+            android:positiveButtonText="@string/dlg_ok"
+            android:dialogLayout="@layout/dialog_eid_status"
+            settings:enableCopying="true"
+            settings:controller="com.android.settings.network.telephony.MobileNetworkEidPreferenceController"/>
 
         <PreferenceCategory
             android:key="calling_category"
