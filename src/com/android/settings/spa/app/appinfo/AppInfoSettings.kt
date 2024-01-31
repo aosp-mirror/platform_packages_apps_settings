@@ -18,9 +18,8 @@ package com.android.settings.spa.app.appinfo
 
 import android.app.settings.SettingsEnums
 import android.content.pm.ApplicationInfo
-import android.content.pm.FeatureFlags
-import android.content.pm.FeatureFlagsImpl
 import android.os.Bundle
+import android.os.SystemProperties
 import android.os.UserHandle
 import android.util.FeatureFlagUtils
 import androidx.compose.runtime.Composable
@@ -51,6 +50,8 @@ import com.android.settingslib.spa.widget.ui.Category
 import com.android.settingslib.spaprivileged.model.app.toRoute
 import com.android.settingslib.spaprivileged.template.app.AppInfoProvider
 import kotlinx.coroutines.flow.MutableStateFlow
+import android.content.pm.FeatureFlags as PmFeatureFlags
+import android.content.pm.FeatureFlagsImpl as PmFeatureFlagsImpl
 
 private const val PACKAGE_NAME = "packageName"
 private const val USER_ID = "userId"
@@ -121,7 +122,7 @@ object AppInfoSettingsProvider : SettingsPageProvider {
 @Composable
 private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
     val packageInfoState = packageInfoPresenter.flow.collectAsStateWithLifecycle()
-    val featureFlags: FeatureFlags = FeatureFlagsImpl()
+    val featureFlags: PmFeatureFlags = PmFeatureFlagsImpl()
     RegularScaffold(
         title = stringResource(R.string.application_info_label),
         actions = {
@@ -177,5 +178,6 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
     }
 }
 
-fun isArchivingEnabled(featureFlags: FeatureFlags) =
-        featureFlags.archiving() || "true" == System.getProperty("pm.archiving.enabled")
+fun isArchivingEnabled(featureFlags: PmFeatureFlags) =
+        featureFlags.archiving() || SystemProperties.getBoolean("pm.archiving.enabled", false)
+                || Flags.appArchiving()
