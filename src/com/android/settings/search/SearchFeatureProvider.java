@@ -56,7 +56,7 @@ public interface SearchFeatureProvider {
      * @throws IllegalArgumentException when caller is null
      * @throws SecurityException        when caller is not allowed to launch search result page
      */
-    void verifyLaunchSearchResultPageCaller(Context context, @NonNull ComponentName caller)
+    void verifyLaunchSearchResultPageCaller(@NonNull Context context, @NonNull String callerPackage)
             throws SecurityException, IllegalArgumentException;
 
     /**
