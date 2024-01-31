@@ -39,27 +39,25 @@ public final class PreferredShortcuts {
     private static final String USER_SHORTCUT_TYPE = "user_shortcut_type";
 
     /**
-     * Retrieves {@link UserShortcutType} for the given {@code componentName} from
+     * Retrieves the user preferred shortcut types for the given {@code componentName} from
      * SharedPreferences.
      *
      * @param context       {@link Context} to access the {@link SharedPreferences}
      * @param componentName Name of the service or activity, should be the format of {@link
      *                      ComponentName#flattenToString()}.
-     * @param defaultType   See {@link UserShortcutType}
-     * @return {@link UserShortcutType}
+     * @return {@link ShortcutConstants.UserShortcutType}
      */
-    public static int retrieveUserShortcutType(Context context, String componentName,
-            int defaultType) {
-        if (componentName == null) {
-            return defaultType;
-        }
+    @ShortcutConstants.UserShortcutType
+    public static int retrieveUserShortcutType(
+            @NonNull Context context, @NonNull String componentName) {
+        final int defaultTypes = getDefaultPreferredShortcutTypesForTarget(componentName);
 
         // Create a mutable set to modify
         final Set<String> info = new HashSet<>(getFromSharedPreferences(context));
         info.removeIf(str -> !str.contains(componentName));
 
         if (info.isEmpty()) {
-            return defaultType;
+            return defaultTypes;
         }
 
         final String str = info.stream().findFirst().get();
@@ -138,6 +136,15 @@ public final class PreferredShortcuts {
 
     private static SharedPreferences getSharedPreferences(Context context) {
         return context.getSharedPreferences(ACCESSIBILITY_PERF, Context.MODE_PRIVATE);
+    }
+
+    /**
+     * Returns the default shortcut types for the given accessibility feature.
+     */
+    @ShortcutConstants.UserShortcutType
+    private static int getDefaultPreferredShortcutTypesForTarget(@NonNull String componentName) {
+        // TODO (b/322712028): return different default shortcut types for the given component
+        return ShortcutConstants.UserShortcutType.SOFTWARE;
     }
 
     private PreferredShortcuts() {}

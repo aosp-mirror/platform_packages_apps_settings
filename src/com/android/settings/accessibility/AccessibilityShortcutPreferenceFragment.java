@@ -272,7 +272,7 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
         }
 
         final int shortcutTypes = PreferredShortcuts.retrieveUserShortcutType(getPrefContext(),
-                getComponentName().flattenToString(), AccessibilityUtil.UserShortcutType.SOFTWARE);
+                getComponentName().flattenToString());
         if (preference.isChecked()) {
             AccessibilityUtil.optInAllValuesToSettings(getPrefContext(), shortcutTypes,
                     getComponentName());
@@ -449,7 +449,7 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
         }
 
         final int shortcutTypes = PreferredShortcuts.retrieveUserShortcutType(context,
-                getComponentName().flattenToString(), AccessibilityUtil.UserShortcutType.SOFTWARE);
+                getComponentName().flattenToString());
 
         final List<CharSequence> list = new ArrayList<>();
 
@@ -477,8 +477,8 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
         int value = restoreOnConfigChangedValue();
         if (value == NOT_SET) {
             final int lastNonEmptyUserShortcutType = PreferredShortcuts.retrieveUserShortcutType(
-                    getPrefContext(), getComponentName().flattenToString(),
-                    AccessibilityUtil.UserShortcutType.SOFTWARE);
+                    getPrefContext(), getComponentName().flattenToString()
+            );
             value = mShortcutPreference.isChecked() ? lastNonEmptyUserShortcutType
                     : AccessibilityUtil.UserShortcutType.EMPTY;
         }
@@ -519,7 +519,7 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
         }
 
         final int shortcutTypes = PreferredShortcuts.retrieveUserShortcutType(getPrefContext(),
-                getComponentName().flattenToString(), AccessibilityUtil.UserShortcutType.SOFTWARE);
+                getComponentName().flattenToString());
         mShortcutPreference.setChecked(
                 AccessibilityUtil.hasValuesInSettings(getPrefContext(), shortcutTypes,
                         getComponentName()));
