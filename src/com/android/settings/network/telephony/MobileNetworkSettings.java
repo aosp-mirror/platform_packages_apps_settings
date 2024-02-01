@@ -85,6 +85,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     private static final String KEY_SMS_PREF = "sms_preference";
     private static final String KEY_MOBILE_DATA_PREF = "mobile_data_enable";
     private static final String KEY_CONVERT_TO_ESIM_PREF = "convert_to_esim";
+    private static final String KEY_EID_KEY = "network_mode_eid_info";
 
     //String keys for preference lookup
     private static final String BUTTON_CDMA_SYSTEM_SELECT_KEY = "cdma_system_select_key";
@@ -171,6 +172,10 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
                             String.valueOf(mSubId));
         });
 
+        MobileNetworkEidPreferenceController eid = new MobileNetworkEidPreferenceController(context,
+                KEY_EID_KEY);
+        eid.init(this, mSubId);
+
         return Arrays.asList(
                 new DataUsageSummaryPreferenceController(context, mSubId),
                 new RoamingPreferenceController(context, KEY_ROAMING_PREF, getSettingsLifecycle(),
@@ -182,7 +187,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
                 new MobileDataPreferenceController(context, KEY_MOBILE_DATA_PREF,
                         getSettingsLifecycle(), this, mSubId),
                 new ConvertToEsimPreferenceController(context, KEY_CONVERT_TO_ESIM_PREF,
-                        getSettingsLifecycle(), this, mSubId));
+                        getSettingsLifecycle(), this, mSubId), eid);
     }
 
     @Override
@@ -238,6 +243,10 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         use(DeleteSimProfilePreferenceController.class).init(mSubId);
         use(DisableSimFooterPreferenceController.class).init(mSubId);
         use(NrDisabledInDsdsFooterPreferenceController.class).init(mSubId);
+
+        use(MobileNetworkSpnPreferenceController.class).init(this, mSubId);
+        use(MobileNetworkPhoneNumberPreferenceController.class).init(this, mSubId);
+        use(MobileNetworkImeiPreferenceController.class).init(this, mSubId);
 
         final MobileDataPreferenceController mobileDataPreferenceController =
                 use(MobileDataPreferenceController.class);
