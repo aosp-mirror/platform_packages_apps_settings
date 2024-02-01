@@ -7265,7 +7265,7 @@
     <!-- Summary text describing signal strength to the user.  [CHAR LIMIT=60] -->
     <string name="sim_signal_strength"><xliff:g id="dbm">%1$d</xliff:g> dBm <xliff:g id="asu">%2$d</xliff:g> asu</string>
     <!-- Title for SIM notification.  [CHAR LIMIT=40] -->
-    <string name="sim_notification_title">SIMs changed.</string>
+    <string name="sim_notification_title">Your SIMs changed</string>
     <!-- Message under title informing the user to touch to go to SIM Cards in Settings.  [CHAR LIMIT=40] -->
     <string name="sim_notification_summary">Tap to set up</string>
 
@@ -9055,7 +9055,7 @@
     <string name="screen_pinning_unlock_none">Lock device when unpinning</string>
 
     <!-- [CHAR LIMIT=60] turn eSim deletion confirmation on/off  -->
-    <string name="confirm_sim_deletion_title">Confirm SIM deletion</string>
+    <string name="confirm_sim_deletion_title">Confirm you want to erase your eSIM</string>
     <!-- [CHAR LIMIT=NONE] eSim deletion confirmation description  -->
     <string name="confirm_sim_deletion_description">Verify it\u0027s you before erasing an eSIM</string>
 
@@ -11370,7 +11370,7 @@
          the user that the way to disable this SIM is to physically remove it. This is in contrast
          to eSIM's, which can disabled using an on/off toggle switch. [CHAR LIMIT=NONE] -->
     <string name="mobile_network_disable_sim_explanation">
-        To disable this SIM, remove the SIM card
+        To turn off this SIM, remove the SIM card
     </string>
 
     <!--Summary used when a physical SIM is disabled, indicating that tapping on the preference will
@@ -11378,7 +11378,7 @@
         Network & internet page (if there are no other SIMs), or on the mobile network list page.
         [CHAR LIMIT=50] -->
     <string name="mobile_network_tap_to_activate">
-        Tap to activate <xliff:g id="carrier" example="T-mobile">%1$s</xliff:g>
+        Tap to activate your <xliff:g id="carrier" example="T-mobile">%1$s</xliff:g> SIM
     </string>
 
     <!-- Mobile network details page. Label for an option that lets the user delete an eSIM from
@@ -11502,13 +11502,13 @@
     <!-- Text of carrier list item in the mep confirmation dialog asking the user if they want to turn off the carrier. [CHAR_LIMIT=NONE] -->
     <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off">Turning off a SIM won\u2019t cancel your service</string>
     <!-- Status message indicating the device is in the process of disconnecting from one mobile network and immediately connecting to another. [CHAR_LIMIT=NONE] -->
-    <string name="sim_action_enabling_sim_without_carrier_name">Connecting to network&#8230;</string>
+    <string name="sim_action_enabling_sim_without_carrier_name">Activating your SIM&#8230;</string>
     <!-- Text of progress dialog indicating the subscription switch is in progress. [CHAR_LIMIT=NONE] -->
-    <string name="sim_action_switch_sub_dialog_progress">Switching to <xliff:g id="carrier_name" example="Google Fi">%1$s</xliff:g> for calls and messages&#8230;</string>
+    <string name="sim_action_switch_sub_dialog_progress">Switching to <xliff:g id="carrier_name" example="Google Fi">%1$s</xliff:g>&#8230;</string>
     <!-- Title of error message indicating that the device could not disconnect from one mobile network and immediately connect to another. [CHAR_LIMIT=NONE] -->
-    <string name="sim_action_enable_sim_fail_title">Can\u2019t switch carrier</string>
+    <string name="sim_action_enable_sim_fail_title">Can\u2019t switch SIMs</string>
     <!-- Body text of error message indicating the device could not disconnect from one mobile network and immediately connect to another, due to an unspecified issue. [CHAR_LIMIT=NONE] -->
-    <string name="sim_action_enable_sim_fail_text">The carrier can\u2019t be switched due to an error.</string>
+    <string name="sim_action_enable_sim_fail_text">Something went wrong. Can\u2019t switch SIMs.</string>
     <!-- Title of confirmation dialog asking the user if they want to disable subscription. [CHAR_LIMIT=NONE] -->
     <string name="privileged_action_disable_sub_dialog_title">Turn off <xliff:g id="carrier_name" example="Google Fi">%1$s</xliff:g>?</string>
     <!-- Title of confirmation dialog asking the user if they want to disable subscription. [CHAR_LIMIT=NONE] -->
@@ -11516,9 +11516,9 @@
     <!-- Disabling SIMs progress dialog message [CHAR LIMIT=NONE] -->
     <string name="privileged_action_disable_sub_dialog_progress">Turning off SIM<xliff:g id="ellipsis" example="...">&#8230;</xliff:g></string>
     <!-- Title of error messaging indicating the device could not disable the mobile network. [CHAR LIMIT=NONE] -->
-    <string name="privileged_action_disable_fail_title">Can\u2019t disable carrier</string>
+    <string name="privileged_action_disable_fail_title">Can\u2019t turn off SIM</string>
     <!-- Body text of error message indicating the device could not disable the mobile network, due to an unknown issue. [CHAR LIMIT=NONE] -->
-    <string name="privileged_action_disable_fail_text">Something went wrong and your carrier could not be disabled.</string>
+    <string name="privileged_action_disable_fail_text">Something went wrong and your SIM could not be turned off.</string>
     <!-- Title on a dialog asking the users whether they want to enable DSDS mode. [CHAR LIMIT=NONE] -->
     <string name="sim_action_enable_dsds_title">Use 2 SIMs?</string>
     <!-- Message in a dialog indicating the user can enable DSDS mode. [CHAR LIMIT=NONE] -->
@@ -11598,7 +11598,7 @@
     <!-- Title on a push notification indicating that the user's device is in the middle of switching between mobile networks. [CHAR LIMIT=NONE] -->
     <string name="sim_switch_channel_id">Carrier switching</string>
     <!--  The title of post DSDS reboot notification. The title includes carrier's name. [CHAR LIMIT=NONE] -->
-    <string name="post_dsds_reboot_notification_title_with_carrier"><xliff:g id="carrier_name" example="Google Fi">%1$s</xliff:g> is active</string>
+    <string name="post_dsds_reboot_notification_title_with_carrier">Your <xliff:g id="carrier_name" example="Google Fi">%1$s</xliff:g> SIM is active</string>
     <!--  The body text of post DSDS reboot notification. [CHAR LIMIT=NONE] -->
     <string name="post_dsds_reboot_notification_text">Tap to update SIM settings</string>
     <!-- Title on a push notification indicating that the user's device switched to a new mobile network. [CHAR LIMIT=NONE] -->
@@ -11614,17 +11614,17 @@
 
     <!-- Strings for choose SIM activity -->
     <!--  The title text of choose SIM activity. [CHAR LIMIT=NONE] -->
-    <string name="choose_sim_title">Choose a number to use</string>
+    <string name="choose_sim_title">Choose a SIM to use</string>
     <!--  The body text of choose SIM activity. [CHAR LIMIT=NONE] -->
     <string name="choose_sim_text">{count, plural,
-      =1      {1 number is available on this device, but only one can be used at a time}
-      =2      {2 numbers are available on this device, but only one can be used at a time}
-      other   {# numbers are available on this device, but only one can be used at a time}
+      =1      {1 SIM is available on this device, but only one can be used at a time}
+      =2      {2 SIMs are available on this device, but only one can be used at a time}
+      other   {# SIMs are available on this device, but only one can be used at a time}
     }</string>
     <!-- String indicating that we are activating the profile [CHAR LIMIT=NONE] -->
     <string name="choose_sim_activating">Activating<xliff:g id="ellipsis" example="...">&#8230;</xliff:g></string>
     <!-- String indicating that we failed to activate the selected profile [CHAR LIMIT=NONE] -->
-    <string name="choose_sim_could_not_activate">Couldn\u2019t be activated right now</string>
+    <string name="choose_sim_could_not_activate">Couldn\u2019t activate this SIM right now</string>
 
     <!-- Strings for switch SIM confirmation dialog. -->
     <!--  The title text of switch SIM confirmation dialog. [CHAR LIMIT=NONE] -->
