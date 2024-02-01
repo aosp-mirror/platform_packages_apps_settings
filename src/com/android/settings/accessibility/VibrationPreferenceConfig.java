@@ -150,9 +150,13 @@ public abstract class VibrationPreferenceConfig {
             @VibrationAttributes.Usage int vibrationUsage) {
         return new VibrationAttributes.Builder()
                 .setUsage(vibrationUsage)
-                // Enforce fresh settings to be applied for the preview vibration, as they
-                // are played immediately after the new user values are set.
-                .setFlags(VibrationAttributes.FLAG_INVALIDATE_SETTINGS_CACHE)
+                .setFlags(
+                        // Enforce fresh settings to be applied for the preview vibration, as they
+                        // are played immediately after the new user values are set.
+                        VibrationAttributes.FLAG_INVALIDATE_SETTINGS_CACHE
+                        // Bypass user settings to allow vibration previews to be played while in
+                        // limited interruptions' mode, e.g. zen mode.
+                        | VibrationAttributes.FLAG_BYPASS_INTERRUPTION_POLICY)
                 .build();
     }
 
