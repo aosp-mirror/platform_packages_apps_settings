@@ -134,6 +134,7 @@ class FingerprintEnrollmentV2Activity : FragmentActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
+    // TODO(b/299573056): Show split screen dialog when it's in multi window mode.
     setContentView(R.layout.fingerprint_v2_enroll_main)
 
     setTheme(SetupWizardUtils.getTheme(applicationContext, intent))
