@@ -5070,6 +5070,11 @@
 
         <activity android:name=".privatespace.PrivateProfileContextHelperActivity" android:exported="false"/>
 
+        <activity android:name=".privatespace.delete.PrivateSpaceDeleteActivity"
+                  android:label="@string/private_space_delete_header"
+                  android:exported="false">
+        </activity>
+
         <activity-alias android:name="UsageStatsActivity"
                         android:exported="true"
                         android:label="@string/testing_usage_stats"
