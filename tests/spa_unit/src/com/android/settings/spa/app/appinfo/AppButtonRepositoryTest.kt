@@ -20,8 +20,11 @@ import android.app.ActivityManager
 import android.content.ComponentName
 import android.content.Context
 import android.content.pm.ActivityInfo
+import android.content.pm.ApplicationInfo
+import android.content.pm.Flags
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
+import android.platform.test.annotations.RequiresFlagsEnabled
 import androidx.core.os.bundleOf
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -126,14 +129,72 @@ class AppButtonRepositoryTest {
         assertThat(homePackageInfo.homePackages).containsExactly(PACKAGE_NAME)
     }
 
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_IMPROVE_HOME_APP_BEHAVIOR)
+    fun uninstallDisallowedDueToHomeApp_isNotSystemAndIsCurrentHomeAndHasOnlyOneHomeApp() {
+        val app = ApplicationInfo().apply {
+            packageName = PACKAGE_NAME
+        }
+
+        mockGetHomeActivities(
+            homeActivities = listOf(RESOLVE_INFO),
+            currentDefaultHome = COMPONENT_NAME,
+        )
+
+        val value = appButtonRepository.uninstallDisallowedDueToHomeApp(app)
+
+        assertThat(value).isTrue()
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_IMPROVE_HOME_APP_BEHAVIOR)
+    fun uninstallDisallowedDueToHomeApp_isNotSystemAndIsCurrentHomeAndHasOtherHomeApps() {
+        val app = ApplicationInfo().apply {
+            packageName = PACKAGE_NAME
+        }
+
+        mockGetHomeActivities(
+            homeActivities = listOf(RESOLVE_INFO, RESOLVE_INFO_FAKE),
+            currentDefaultHome = COMPONENT_NAME,
+        )
+
+        val value = appButtonRepository.uninstallDisallowedDueToHomeApp(app)
+
+        assertThat(value).isFalse()
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_IMPROVE_HOME_APP_BEHAVIOR)
+    fun uninstallDisallowedDueToHomeApp_isSystemAndIsCurrentHomeAndHasOtherHomeApps() {
+        val app = ApplicationInfo().apply {
+            packageName = PACKAGE_NAME
+            flags = ApplicationInfo.FLAG_SYSTEM
+        }
+
+        mockGetHomeActivities(
+            homeActivities = listOf(RESOLVE_INFO, RESOLVE_INFO_FAKE),
+            currentDefaultHome = COMPONENT_NAME,
+        )
+
+        val value = appButtonRepository.uninstallDisallowedDueToHomeApp(app)
+
+        assertThat(value).isTrue()
+    }
+
     private companion object {
         const val PACKAGE_NAME = "packageName"
         const val PACKAGE_NAME_ALTERNATE = "packageName.alternate"
+        const val PACKAGE_NAME_FAKE = "packageName.fake"
         const val ACTIVITY_NAME = "activityName"
         val COMPONENT_NAME = ComponentName(PACKAGE_NAME, ACTIVITY_NAME)
         val RESOLVE_INFO = ResolveInfo().apply {
             activityInfo = ActivityInfo().apply {
                 packageName = PACKAGE_NAME
+            }
+        }
+        val RESOLVE_INFO_FAKE = ResolveInfo().apply {
+            activityInfo = ActivityInfo().apply {
+                packageName = PACKAGE_NAME_FAKE
             }
         }
         val RESOLVE_INFO_WITH_ALTERNATE = ResolveInfo().apply {
