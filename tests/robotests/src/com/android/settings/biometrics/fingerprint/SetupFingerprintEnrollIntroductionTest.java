@@ -21,6 +21,7 @@ import static com.google.common.truth.Truth.assertWithMessage;
 
 import static org.robolectric.RuntimeEnvironment.application;
 
+import android.app.Activity;
 import android.app.KeyguardManager;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -28,14 +29,18 @@ import android.hardware.biometrics.ComponentInfoInternal;
 import android.hardware.biometrics.SensorProperties;
 import android.hardware.fingerprint.FingerprintSensorProperties;
 import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
+import android.os.Looper;
 import android.view.View;
 import android.widget.Button;
+
+import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.R;
 import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.BiometricEnrollIntroduction;
 import com.android.settings.password.SetupSkipDialog;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.testutils.shadow.ShadowFingerprintManager;
 import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowStorageManager;
@@ -66,11 +71,22 @@ import java.util.List;
     ShadowFingerprintManager.class,
     ShadowLockPatternUtils.class,
     ShadowStorageManager.class,
-    ShadowUserManager.class
+    ShadowUserManager.class,
+    ShadowAlertDialogCompat.class
 })
 public class SetupFingerprintEnrollIntroductionTest {
 
     private ActivityController<SetupFingerprintEnrollIntroduction> mController;
+
+    public static class TestSetupFingerprintEnrollIntroductionInMultiWindowMode
+            extends SetupFingerprintEnrollIntroduction {
+        public boolean mIsMultiWindowMode = true;
+
+        @Override
+        public boolean isInMultiWindowMode() {
+            return mIsMultiWindowMode;
+        }
+    }
 
     @Before
     public void setUp() {
@@ -105,6 +121,36 @@ public class SetupFingerprintEnrollIntroductionTest {
     @After
     public void tearDown() {
         ShadowStorageManager.reset();
+        ShadowAlertDialogCompat.reset();
+    }
+
+    @Test
+    public void multiWindow_showsDialog() {
+        Activity activity = Robolectric.buildActivity(
+                TestSetupFingerprintEnrollIntroductionInMultiWindowMode.class).setup().get();
+        Shadows.shadowOf(Looper.getMainLooper()).idle();
+        final AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+        assertThat(dialog).isNotNull();
+
+        final ShadowAlertDialogCompat shadowAlertDialog = ShadowAlertDialogCompat.shadowOf(dialog);
+        assertThat(shadowAlertDialog.getTitle().toString()).isEqualTo(
+                activity.getString(
+                        R.string.biometric_settings_add_fingerprint_in_split_mode_title));
+        assertThat(shadowAlertDialog.getMessage().toString()).isEqualTo(
+                activity.getString(
+                        R.string.biometric_settings_add_fingerprint_in_split_mode_message));
+
+        // TODO(b/299573056): Make WizardManagerHelper.isAnySetupWizard(getIntent()) correct and
+        //  test button click not finishing the activity.
+    }
+
+    @Test
+    public void singleWindow_noDialog() {
+        Robolectric.buildActivity(SetupFingerprintEnrollIntroduction.class).setup().get();
+        Shadows.shadowOf(Looper.getMainLooper()).idle();
+
+        final AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+        assertThat(dialog).isNull();
     }
 
     @Test

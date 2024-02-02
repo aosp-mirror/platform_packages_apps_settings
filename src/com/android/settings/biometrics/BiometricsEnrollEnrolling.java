@@ -97,6 +97,14 @@ public abstract class BiometricsEnrollEnrolling extends BiometricEnrollBase
     }
 
     public void startEnrollment() {
+        // If it's in multi window mode, dialog is shown, do not start enrollment.
+        if (shouldShowSplitScreenDialog()) {
+            return;
+        }
+        startEnrollmentInternal();
+    }
+
+    protected void startEnrollmentInternal() {
         mSidecar = (BiometricEnrollSidecar) getSupportFragmentManager()
                 .findFragmentByTag(TAG_SIDECAR);
         if (mSidecar == null) {
