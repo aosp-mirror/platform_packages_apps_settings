@@ -295,6 +295,7 @@ public class ManageApplications extends InstrumentedFragment
     private String mVolumeUuid;
     private int mStorageType;
     private boolean mIsWorkOnly;
+    private boolean mIsPrivateProfileOnly;
     private int mWorkUserId;
     private boolean mIsPersonalOnly;
     private View mEmptyView;
@@ -378,6 +379,8 @@ public class ManageApplications extends InstrumentedFragment
                 == ProfileSelectFragment.ProfileType.PERSONAL;
         mIsWorkOnly = args != null && args.getInt(ProfileSelectFragment.EXTRA_PROFILE)
                 == ProfileSelectFragment.ProfileType.WORK;
+        mIsPrivateProfileOnly = args != null && args.getInt(ProfileSelectFragment.EXTRA_PROFILE)
+                == ProfileSelectFragment.ProfileType.PRIVATE;
         mWorkUserId = args != null ? args.getInt(EXTRA_WORK_ID) : UserHandle.myUserId();
         if (mIsWorkOnly && mWorkUserId == UserHandle.myUserId()) {
             mWorkUserId = Utils.getManagedProfileId(mUserManager, UserHandle.myUserId());
@@ -659,6 +662,10 @@ public class ManageApplications extends InstrumentedFragment
         }
         if (mIsWorkOnly) {
             compositeFilter = new CompoundFilter(compositeFilter, ApplicationsState.FILTER_WORK);
+        }
+        if (mIsPrivateProfileOnly) {
+            compositeFilter =
+                    new CompoundFilter(compositeFilter, ApplicationsState.FILTER_PRIVATE_PROFILE);
         }
         if (mIsPersonalOnly) {
             compositeFilter = new CompoundFilter(compositeFilter,
