@@ -18,7 +18,6 @@ package com.android.settings.connecteddevice.audiosharing;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.verify;
 import static org.robolectric.Shadows.shadowOf;
 
 import android.bluetooth.BluetoothAdapter;
@@ -71,6 +70,7 @@ public class AudioSharingSwitchBarControllerTest {
     @Test
     @RequiresFlagsEnabled(Flags.FLAG_ENABLE_LE_AUDIO_SHARING)
     public void bluetoothOff_switchDisabled() {
+        assertThat(mSwitchBar.isEnabled()).isTrue();
         mContext.registerReceiver(
                 mController.mReceiver,
                 mController.mIntentFilter,
@@ -79,7 +79,7 @@ public class AudioSharingSwitchBarControllerTest {
         intent.putExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.STATE_OFF);
         mContext.sendBroadcast(intent);
         shadowOf(Looper.getMainLooper()).idle();
-        verify(mSwitch).setEnabled(false);
+        assertThat(mSwitchBar.isEnabled()).isFalse();
         assertThat(mOnSwitchBarChanged).isTrue();
     }
 }

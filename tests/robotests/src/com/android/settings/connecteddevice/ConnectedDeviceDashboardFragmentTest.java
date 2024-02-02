@@ -25,8 +25,6 @@ import static org.mockito.Mockito.spy;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.platform.test.annotations.RequiresFlagsDisabled;
-import android.platform.test.annotations.RequiresFlagsEnabled;
 import android.platform.test.flag.junit.CheckFlagsRule;
 import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.provider.SearchIndexableResource;
@@ -34,7 +32,6 @@ import android.provider.SearchIndexableResource;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerListHelper;
-import com.android.settings.flags.Flags;
 import com.android.settings.slices.SlicePreferenceController;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
@@ -53,8 +50,12 @@ import org.robolectric.annotation.Config;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowUserManager.class,
-        ShadowConnectivityManager.class, ShadowBluetoothAdapter.class})
+@Config(
+        shadows = {
+            ShadowUserManager.class,
+            ShadowConnectivityManager.class,
+            ShadowBluetoothAdapter.class
+        })
 public class ConnectedDeviceDashboardFragmentTest {
     @Rule
     public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
@@ -98,26 +99,7 @@ public class ConnectedDeviceDashboardFragmentTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_ENABLE_LE_AUDIO_SHARING)
     public void nonIndexableKeys_existInXmlLayout() {
-        final List<String> niks =
-                ConnectedDeviceDashboardFragment.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(
-                        mContext);
-
-        assertThat(niks)
-                .containsExactly(
-                        KEY_CONNECTED_DEVICES,
-                        KEY_AVAILABLE_DEVICES,
-                        KEY_NEARBY_DEVICES,
-                        KEY_DISCOVERABLE_FOOTER,
-                        KEY_SAVED_DEVICE_SEE_ALL,
-                        KEY_FAST_PAIR_DEVICE_SEE_ALL,
-                        KEY_AUDIO_SHARING_SETTINGS);
-    }
-
-    @Test
-    @RequiresFlagsDisabled(Flags.FLAG_ENABLE_LE_AUDIO_SHARING)
-    public void nonIndexableKeys_existInXmlLayout_flagOff() {
         final List<String> niks =
                 ConnectedDeviceDashboardFragment.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(
                         mContext);
@@ -160,10 +142,12 @@ public class ConnectedDeviceDashboardFragmentTest {
                 PreferenceControllerListHelper.getPreferenceControllersFromXml(
                         mContext, R.xml.connected_devices);
 
-        assertThat(controllers
-                .stream()
-                .filter(controller -> controller instanceof SlicePreferenceController)
-                .count())
+        assertThat(
+                        controllers.stream()
+                                .filter(
+                                        controller ->
+                                                controller instanceof SlicePreferenceController)
+                                .count())
                 .isEqualTo(1);
     }
 }
