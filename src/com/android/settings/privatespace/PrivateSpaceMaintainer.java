@@ -75,7 +75,8 @@ public class PrivateSpaceMaintainer {
      *
      * <p> This method should be used by the Private Space Setup Flow ONLY.
      */
-    final synchronized boolean createPrivateSpace() {
+    @VisibleForTesting
+    public final synchronized boolean createPrivateSpace() {
         if (!Flags.allowPrivateProfile()) {
             return false;
         }
