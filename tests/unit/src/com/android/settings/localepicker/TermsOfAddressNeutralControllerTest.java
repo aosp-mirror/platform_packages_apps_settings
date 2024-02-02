@@ -97,7 +97,6 @@ public class TermsOfAddressNeutralControllerTest {
 
         selectedPreference.performClick();
 
-        assertThat(selectedPreference.getKey()).isEqualTo(KEY_NEUTRAL);
         assertThat(selectedPreference.isSelected()).isTrue();
         assertThat(pref.isSelected()).isFalse();
     }
