@@ -16,12 +16,14 @@
 
 package com.android.settings.fuelgauge.batterytip.tips;
 
+import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Parcel;
 import android.util.Log;
 
+import androidx.core.app.ActivityCompat;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
@@ -29,6 +31,8 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.CardPreference;
 import com.android.settingslib.HelpUtils;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+
+import kotlin.Unit;
 
 /** Tip to show current battery is overheated */
 public class BatteryDefenderTip extends BatteryTip {
@@ -83,28 +87,39 @@ public class BatteryDefenderTip extends BatteryTip {
         }
 
         cardPreference.setSelectable(false);
+        cardPreference.setIconResId(getIconId());
         cardPreference.setPrimaryButtonText(context.getString(R.string.learn_more));
-        cardPreference.setPrimaryButtonClickListener(
-                button ->
-                        button.startActivityForResult(
-                                HelpUtils.getHelpIntent(
-                                        context,
-                                        context.getString(R.string.help_url_battery_defender),
-                                        /* backupContext */ ""), /* requestCode */
-                                0));
-        cardPreference.setPrimaryButtonVisible(true);
+        cardPreference.setPrimaryButtonAction(
+                () -> {
+                    var helpIntent =
+                            HelpUtils.getHelpIntent(
+                                    context,
+                                    context.getString(R.string.help_url_battery_defender),
+                                    /* backupContext= */ "");
+                    ActivityCompat.startActivityForResult(
+                            (Activity) preference.getContext(),
+                            helpIntent,
+                            /* requestCode= */ 0,
+                            /* options= */ null);
+
+                    return Unit.INSTANCE;
+                });
+        cardPreference.setPrimaryButtonVisibility(true);
         cardPreference.setPrimaryButtonContentDescription(
                 context.getString(
                         R.string.battery_tip_limited_temporarily_sec_button_content_description));
 
         cardPreference.setSecondaryButtonText(
                 context.getString(R.string.battery_tip_charge_to_full_button));
-        cardPreference.setSecondaryButtonClickListener(
-                unused -> {
+        cardPreference.setSecondaryButtonAction(
+                () -> {
                     resumeCharging(context);
                     preference.setVisible(false);
+
+                    return Unit.INSTANCE;
                 });
-        cardPreference.setSecondaryButtonVisible(mIsPluggedIn);
+        cardPreference.setSecondaryButtonVisibility(mIsPluggedIn);
+        cardPreference.buildContent();
     }
 
     private void resumeCharging(Context context) {

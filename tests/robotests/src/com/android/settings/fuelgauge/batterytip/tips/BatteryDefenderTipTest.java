@@ -124,7 +124,7 @@ public class BatteryDefenderTipTest {
     public void updatePreference_shouldSetPrimaryButtonVisible() {
         mBatteryDefenderTip.updatePreference(mCardPreference);
 
-        verify(mCardPreference).setPrimaryButtonVisible(true);
+        verify(mCardPreference).setPrimaryButtonVisibility(true);
     }
 
     @Test
@@ -134,14 +134,14 @@ public class BatteryDefenderTipTest {
 
         mBatteryDefenderTip.updatePreference(mCardPreference);
 
-        verify(mCardPreference).setPrimaryButtonVisible(true);
+        verify(mCardPreference).setPrimaryButtonVisibility(true);
     }
 
     @Test
     public void updatePreference_whenNotCharging_setSecondaryButtonVisibleToBeFalse() {
         mBatteryDefenderTip.updatePreference(mCardPreference);
 
-        verify(mCardPreference).setSecondaryButtonVisible(false);
+        verify(mCardPreference).setSecondaryButtonVisibility(false);
     }
 
     @Test
@@ -150,7 +150,7 @@ public class BatteryDefenderTipTest {
 
         mBatteryDefenderTip.updatePreference(mCardPreference);
 
-        verify(mCardPreference).setSecondaryButtonVisible(false);
+        verify(mCardPreference).setSecondaryButtonVisibility(false);
     }
 
     private void fakeGetChargingStatusFailed() {
