@@ -27,11 +27,11 @@
         android:clipChildren="true"
         android:orientation="vertical">
 
-        <com.android.settings.localepicker.LocaleRecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/dragList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scrollbars="vertical"/>
+            android:scrollbars="none"/>
 
         <Button
             android:id="@+id/add_language"

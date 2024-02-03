@@ -119,6 +119,7 @@ public class SettingsSliceProviderTest {
     private Context mContext;
     private SettingsSliceProvider mProvider;
     private ShadowPackageManager mPackageManager;
+    private ShadowUserManager mShadowUserManager;
 
     @Mock
     private SliceManager mManager;
@@ -157,6 +158,7 @@ public class SettingsSliceProviderTest {
         when(mManager.getPinnedSlices()).thenReturn(Collections.emptyList());
 
         mPackageManager = Shadows.shadowOf(mContext.getPackageManager());
+        mShadowUserManager = ShadowUserManager.getShadow();
 
         SliceProvider.setSpecs(SliceLiveData.SUPPORTED_SPECS);
     }
@@ -290,6 +292,37 @@ public class SettingsSliceProviderTest {
         mProvider.onBindSlice(data.getUri());
 
         assertThat(ShadowTheme.isThemeRebased()).isFalse();
+    }
+
+    @Test
+    public void onBindSlice_guestRestricted_returnsNull() {
+        final String key = "enable_usb_tethering";
+        mShadowUserManager.setGuestUser(true);
+        final Uri testUri = new Uri.Builder()
+            .scheme(ContentResolver.SCHEME_CONTENT)
+            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+            .appendPath(key)
+            .build();
+
+        final Slice slice = mProvider.onBindSlice(testUri);
+
+        assertThat(slice).isNull();
+    }
+
+    @Test
+    public void onBindSlice_notGuestRestricted_returnsNotNull() {
+        final String key = "enable_usb_tethering";
+        final Uri testUri = new Uri.Builder()
+            .scheme(ContentResolver.SCHEME_CONTENT)
+            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+            .appendPath(key)
+            .build();
+
+        final Slice slice = mProvider.onBindSlice(testUri);
+
+        assertThat(slice).isNotNull();
     }
 
     @Test

@@ -623,9 +623,11 @@ public class WifiHotspotRepository {
 
     @VisibleForTesting
     class SoftApCallback implements WifiManager.SoftApCallback {
+        private static final String TAG = "SoftApCallback";
+
         @Override
         public void onStateChanged(int state, int failureReason) {
-            log("onStateChanged(), state:" + state + ", failureReason:" + failureReason);
+            Log.d(TAG, "onStateChanged(), state:" + state + ", failureReason:" + failureReason);
             mWifiApState = state;
             if (!mIsRestarting) {
                 return;

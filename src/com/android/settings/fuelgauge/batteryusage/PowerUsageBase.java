@@ -32,7 +32,6 @@ import androidx.loader.content.Loader;
 
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.fuelgauge.BatteryBroadcastReceiver;
-import com.android.settings.fuelgauge.BatteryUtils;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -63,14 +62,14 @@ public abstract class PowerUsageBase extends DashboardFragment {
             LoaderIndex.BATTERY_USAGE_STATS_LOADER,
             LoaderIndex.BATTERY_INFO_LOADER,
             LoaderIndex.BATTERY_TIP_LOADER,
-            LoaderIndex.BATTERY_HISTORY_LOADER
+            LoaderIndex.BATTERY_LEVEL_DATA_LOADER
 
     })
     public @interface LoaderIndex {
         int BATTERY_USAGE_STATS_LOADER = 0;
         int BATTERY_INFO_LOADER = 1;
         int BATTERY_TIP_LOADER = 2;
-        int BATTERY_HISTORY_LOADER = 3;
+        int BATTERY_LEVEL_DATA_LOADER = 3;
     }
 
     @Override
@@ -108,7 +107,7 @@ public abstract class PowerUsageBase extends DashboardFragment {
     protected void restartBatteryStatsLoader(int refreshType) {
         final Bundle bundle = new Bundle();
         bundle.putInt(KEY_REFRESH_TYPE, refreshType);
-        bundle.putBoolean(KEY_INCLUDE_HISTORY, isBatteryHistoryNeeded());
+        bundle.putBoolean(KEY_INCLUDE_HISTORY, false);
         restartLoader(LoaderIndex.BATTERY_USAGE_STATS_LOADER, bundle,
                 mBatteryUsageStatsLoaderCallbacks);
     }
@@ -136,14 +135,6 @@ public abstract class PowerUsageBase extends DashboardFragment {
     }
 
     protected abstract void refreshUi(@BatteryUpdateType int refreshType);
-
-    protected abstract boolean isBatteryHistoryNeeded();
-
-    protected void updatePreference(BatteryHistoryPreference historyPref) {
-        final long startTime = System.currentTimeMillis();
-        historyPref.setBatteryUsageStats(mBatteryUsageStats);
-        BatteryUtils.logRuntime(TAG, "updatePreference", startTime);
-    }
 
     private class BatteryUsageStatsLoaderCallbacks
             implements LoaderManager.LoaderCallbacks<BatteryUsageStats> {

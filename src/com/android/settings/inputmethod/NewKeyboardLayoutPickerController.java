@@ -20,6 +20,7 @@ import android.content.Context;
 import android.hardware.input.InputDeviceIdentifier;
 import android.hardware.input.InputManager;
 import android.hardware.input.KeyboardLayout;
+import android.os.Bundle;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodSubtype;
 
@@ -27,6 +28,7 @@ import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.widget.TickButtonPreference;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -38,16 +40,16 @@ import java.util.Map;
 
 public class NewKeyboardLayoutPickerController extends BasePreferenceController implements
         InputManager.InputDeviceListener, LifecycleObserver, OnStart, OnStop {
+
     private final InputManager mIm;
     private final Map<TickButtonPreference, KeyboardLayout> mPreferenceMap;
-
     private Fragment mParent;
+    private CharSequence mTitle;
     private int mInputDeviceId;
     private int mUserId;
     private InputDeviceIdentifier mInputDeviceIdentifier;
     private InputMethodInfo mInputMethodInfo;
     private InputMethodSubtype mInputMethodSubtype;
-
     private KeyboardLayout[] mKeyboardLayouts;
     private PreferenceScreen mScreen;
     private String mPreviousSelection;
@@ -60,16 +62,21 @@ public class NewKeyboardLayoutPickerController extends BasePreferenceController 
         mPreferenceMap = new HashMap<>();
     }
 
-    public void initialize(Fragment parent, int userId, InputDeviceIdentifier inputDeviceIdentifier,
-            InputMethodInfo imeInfo, InputMethodSubtype imeSubtype, String layout) {
+    public void initialize(Fragment parent) {
         mParent = parent;
-        mUserId = userId;
-        mInputDeviceIdentifier = inputDeviceIdentifier;
-        mInputMethodInfo = imeInfo;
-        mInputMethodSubtype = imeSubtype;
-        mLayout = layout;
+        Bundle arguments = parent.getArguments();
+        mTitle = arguments.getCharSequence(NewKeyboardSettingsUtils.EXTRA_TITLE);
+        mUserId = arguments.getInt(NewKeyboardSettingsUtils.EXTRA_USER_ID);
+        mInputDeviceIdentifier =
+                arguments.getParcelable(NewKeyboardSettingsUtils.EXTRA_INPUT_DEVICE_IDENTIFIER);
+        mInputMethodInfo =
+                arguments.getParcelable(NewKeyboardSettingsUtils.EXTRA_INPUT_METHOD_INFO);
+        mInputMethodSubtype =
+                arguments.getParcelable(NewKeyboardSettingsUtils.EXTRA_INPUT_METHOD_SUBTYPE);
+        mLayout = getSelectedLayoutLabel();
         mKeyboardLayouts = mIm.getKeyboardLayoutListForInputDevice(
-                inputDeviceIdentifier, userId, imeInfo, imeSubtype);
+                mInputDeviceIdentifier, mUserId, mInputMethodInfo, mInputMethodSubtype);
+        parent.getActivity().setTitle(mTitle);
     }
 
     @Override
@@ -161,5 +168,22 @@ public class NewKeyboardLayoutPickerController extends BasePreferenceController 
                 mInputMethodInfo,
                 mInputMethodSubtype,
                 mPreferenceMap.get(preference).getDescriptor());
+    }
+
+    private String getSelectedLayoutLabel() {
+        String label = mContext.getString(R.string.keyboard_default_layout);
+        String layout = NewKeyboardSettingsUtils.getKeyboardLayout(
+                mIm, mUserId, mInputDeviceIdentifier, mInputMethodInfo, mInputMethodSubtype);
+        KeyboardLayout[] keyboardLayouts = NewKeyboardSettingsUtils.getKeyboardLayouts(
+                mIm, mUserId, mInputDeviceIdentifier, mInputMethodInfo, mInputMethodSubtype);
+        if (layout != null) {
+            for (KeyboardLayout keyboardLayout : keyboardLayouts) {
+                if (keyboardLayout.getDescriptor().equals(layout)) {
+                    label = keyboardLayout.getLabel();
+                    break;
+                }
+            }
+        }
+        return label;
     }
 }

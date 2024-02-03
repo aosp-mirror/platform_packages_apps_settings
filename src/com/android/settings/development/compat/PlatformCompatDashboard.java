@@ -17,21 +17,16 @@
 package com.android.settings.development.compat;
 
 import static com.android.internal.compat.OverrideAllowedState.ALLOWED;
-import static com.android.settings.development.DevelopmentOptionsActivityRequestCodes.REQUEST_COMPAT_CHANGE_APP;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.settings.SettingsEnums;
 import android.compat.Compatibility.ChangeConfig;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
-import android.text.TextUtils;
 import android.util.ArraySet;
 
 import androidx.annotation.VisibleForTesting;
@@ -40,34 +35,27 @@ import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.SwitchPreference;
 
-import com.android.internal.compat.AndroidBuildClassifier;
 import com.android.internal.compat.CompatibilityChangeConfig;
 import com.android.internal.compat.CompatibilityChangeInfo;
 import com.android.internal.compat.IPlatformCompat;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.development.AppPicker;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-
 /**
  * Dashboard for Platform Compat preferences.
  */
 public class PlatformCompatDashboard extends DashboardFragment {
     private static final String TAG = "PlatformCompatDashboard";
-    private static final String COMPAT_APP = "compat_app";
+    public static final String COMPAT_APP = "compat_app";
 
     private IPlatformCompat mPlatformCompat;
 
     private CompatibilityChangeInfo[] mChanges;
-
-    private AndroidBuildClassifier mAndroidBuildClassifier = new AndroidBuildClassifier();
-
-    private boolean mShouldStartAppPickerOnResume = true;
 
     @VisibleForTesting
     String mSelectedApp;
@@ -108,32 +96,6 @@ public class PlatformCompatDashboard extends DashboardFragment {
         } catch (RemoteException e) {
             throw new RuntimeException("Could not list changes!", e);
         }
-        if (icicle != null) {
-            mShouldStartAppPickerOnResume = false;
-            mSelectedApp = icicle.getString(COMPAT_APP);
-        }
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_COMPAT_CHANGE_APP) {
-            mShouldStartAppPickerOnResume = false;
-            switch (resultCode) {
-                case Activity.RESULT_OK:
-                    mSelectedApp = data.getAction();
-                    break;
-                case Activity.RESULT_CANCELED:
-                    if (TextUtils.isEmpty(mSelectedApp)) {
-                        finish();
-                    }
-                    break;
-                case AppPicker.RESULT_NO_MATCHING_APPS:
-                    mSelectedApp = null;
-                    break;
-            }
-            return;
-        }
-        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
@@ -142,33 +104,18 @@ public class PlatformCompatDashboard extends DashboardFragment {
         if (isFinishingOrDestroyed()) {
             return;
         }
-        if (!mShouldStartAppPickerOnResume) {
-            if (TextUtils.isEmpty(mSelectedApp)) {
-                new AlertDialog.Builder(getContext())
-                        .setTitle(R.string.platform_compat_dialog_title_no_apps)
-                        .setMessage(R.string.platform_compat_dialog_text_no_apps)
-                        .setPositiveButton(R.string.okay, (dialog, which) -> finish())
-                        .setOnDismissListener(dialog -> finish())
-                        .setCancelable(false)
-                        .show();
-                return;
-            }
-            try {
-                final ApplicationInfo applicationInfo = getApplicationInfo();
-                addPreferences(applicationInfo);
-                return;
-            } catch (PackageManager.NameNotFoundException e) {
-                mShouldStartAppPickerOnResume = true;
-                mSelectedApp = null;
-            }
+        Bundle arguments = getArguments();
+        if (arguments == null) {
+            finish();
+            return;
         }
-        startAppPicker();
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putString(COMPAT_APP, mSelectedApp);
+        mSelectedApp = arguments.getString(COMPAT_APP);
+        try {
+            final ApplicationInfo applicationInfo = getApplicationInfo();
+            addPreferences(applicationInfo);
+        } catch (PackageManager.NameNotFoundException ignored) {
+            finish();
+        }
     }
 
     private void addPreferences(ApplicationInfo applicationInfo) {
@@ -266,12 +213,6 @@ public class PlatformCompatDashboard extends DashboardFragment {
         appPreference.setIcon(icon);
         appPreference.setSummary(getString(R.string.platform_compat_selected_app_summary,
                                          mSelectedApp, applicationInfo.targetSdkVersion));
-        appPreference.setKey(mSelectedApp);
-        appPreference.setOnPreferenceClickListener(
-                preference -> {
-                    startAppPicker();
-                    return true;
-                });
         return appPreference;
     }
 
@@ -292,17 +233,6 @@ public class PlatformCompatDashboard extends DashboardFragment {
                     change, configMappings);
             category.addPreference(preference);
         }
-    }
-
-    private void startAppPicker() {
-        final Intent intent = new Intent(getContext(), AppPicker.class)
-                .putExtra(AppPicker.EXTRA_INCLUDE_NOTHING, false);
-        // If build is neither userdebug nor eng, only include debuggable apps
-        final boolean debuggableBuild = mAndroidBuildClassifier.isDebuggableBuild();
-        if (!debuggableBuild) {
-            intent.putExtra(AppPicker.EXTRA_DEBUGGABLE, true /* value */);
-        }
-        startActivityForResult(intent, REQUEST_COMPAT_CHANGE_APP);
     }
 
     private class CompatChangePreferenceChangeListener implements OnPreferenceChangeListener {

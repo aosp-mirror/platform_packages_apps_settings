@@ -369,6 +369,12 @@ public class ScreenResolutionFragment extends RadioButtonPickerFragment {
 
         private void restoreDensity() {
             final DisplayDensityUtils density = new DisplayDensityUtils(mContext);
+            /* If current density is the same as a default density of other resolutions,
+             * then mCurrentIndex may be out of boundary.
+             */
+            if (density.getDefaultDisplayDensityValues().length <= mCurrentIndex) {
+                mCurrentIndex = density.getCurrentIndexForDefaultDisplay();
+            }
             if (density.getDefaultDisplayDensityValues()[mCurrentIndex]
                     != density.getDefaultDensityForDefaultDisplay()) {
                 density.setForcedDisplayDensity(mCurrentIndex);

@@ -108,15 +108,17 @@ public class WifiHotspotSpeedSettings extends DashboardFragment implements
             if (radioButton == null) {
                 continue;
             }
-            if (radioButton.isChecked() != speedInfo.mIsChecked) {
-                radioButton.setChecked(speedInfo.mIsChecked);
+            if (!speedInfo.mIsVisible) {
+                radioButton.setVisible(false);
+                continue;
             }
-            if (radioButton.isEnabled() != speedInfo.mIsEnabled) {
-                radioButton.setEnabled(speedInfo.mIsEnabled);
+            radioButton.setEnabled(speedInfo.mIsEnabled);
+            radioButton.setChecked(speedInfo.mIsChecked);
+            if (speedInfo.mSummary != null) {
+                radioButton.setSummary(speedInfo.mSummary);
             }
-            if (radioButton.isVisible() != speedInfo.mIsVisible) {
-                radioButton.setVisible(speedInfo.mIsVisible);
-            }
+            // setVisible at the end to avoid UI flickering
+            radioButton.setVisible(true);
         }
     }
 

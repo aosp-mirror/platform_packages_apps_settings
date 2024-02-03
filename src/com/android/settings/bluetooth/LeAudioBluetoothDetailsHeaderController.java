@@ -88,6 +88,7 @@ public class LeAudioBluetoothDetailsHeaderController extends BasePreferenceContr
 
     @VisibleForTesting
     LayoutPreference mLayoutPreference;
+    LocalBluetoothManager mManager;
     private CachedBluetoothDevice mCachedDevice;
     private List<CachedBluetoothDevice> mAllOfCachedDevices;
     @VisibleForTesting
@@ -152,8 +153,9 @@ public class LeAudioBluetoothDetailsHeaderController extends BasePreferenceContr
     public void init(CachedBluetoothDevice cachedBluetoothDevice,
             LocalBluetoothManager bluetoothManager) {
         mCachedDevice = cachedBluetoothDevice;
+        mManager = bluetoothManager;
         mProfileManager = bluetoothManager.getProfileManager();
-        mAllOfCachedDevices = Utils.getAllOfCachedBluetoothDevices(mContext, mCachedDevice);
+        mAllOfCachedDevices = Utils.getAllOfCachedBluetoothDevices(mManager, mCachedDevice);
     }
 
     @VisibleForTesting
@@ -300,7 +302,7 @@ public class LeAudioBluetoothDetailsHeaderController extends BasePreferenceContr
         for (CachedBluetoothDevice item : mAllOfCachedDevices) {
             item.unregisterCallback(this);
         }
-        mAllOfCachedDevices = Utils.getAllOfCachedBluetoothDevices(mContext, mCachedDevice);
+        mAllOfCachedDevices = Utils.getAllOfCachedBluetoothDevices(mManager, mCachedDevice);
         for (CachedBluetoothDevice item : mAllOfCachedDevices) {
             item.registerCallback(this);
         }

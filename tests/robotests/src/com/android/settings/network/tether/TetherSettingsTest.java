@@ -131,10 +131,12 @@ public class TetherSettingsTest {
     @Test
     @Config(shadows = ShadowRestrictedSettingsFragment.class)
     public void onCreate_isUiRestricted_doNotSetupViewModel() {
+        doNothing().when(mTetherSettings).addPreferencesFromResource(anyInt());
         when(mTetherSettings.isUiRestricted()).thenReturn(true);
 
         mTetherSettings.onCreate(null);
 
+        verify(mTetherSettings).addPreferencesFromResource(anyInt());
         verify(mTetherSettings, never()).setupViewModel();
     }
 

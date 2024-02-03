@@ -26,6 +26,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AlertDialog;
 
@@ -102,6 +103,20 @@ public class SetupChooseLockPasswordTest {
         SetupChooseLockPassword activity = createSetupChooseLockPassword();
         Button optionsButton = activity.findViewById(R.id.screen_lock_options);
         assertThat(optionsButton).isNotNull();
+        optionsButton.performClick();
+        assertThat(ShadowDialog.getLatestDialog()).isNotNull();
+    }
+
+    @Test
+    public void createActivity_withShowOptionsButtonExtra_shouldShowButtonUnderSudHeader() {
+        SetupChooseLockPassword activity = createSetupChooseLockPassword();
+        final LinearLayout headerLayout = activity.findViewById(
+                R.id.sud_layout_header);
+        assertThat(headerLayout).isNotNull();
+
+        final Button optionsButton = headerLayout.findViewById(R.id.screen_lock_options);
+        assertThat(optionsButton).isNotNull();
+
         optionsButton.performClick();
         assertThat(ShadowDialog.getLatestDialog()).isNotNull();
     }

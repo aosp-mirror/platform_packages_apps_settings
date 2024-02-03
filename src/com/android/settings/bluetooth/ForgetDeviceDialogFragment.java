@@ -23,6 +23,7 @@ import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
@@ -63,6 +64,13 @@ public class ForgetDeviceDialogFragment extends InstrumentedDialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle inState) {
+        Context context = getContext();
+        mDevice = getDevice(context);
+        if (mDevice == null) {
+            Log.e(TAG, "onCreateDialog: Device is null.");
+            return null;
+        }
+
         DialogInterface.OnClickListener onConfirm = (dialog, which) -> {
             mDevice.unpair();
             Activity activity = getActivity();
@@ -70,9 +78,6 @@ public class ForgetDeviceDialogFragment extends InstrumentedDialogFragment {
                 activity.finish();
             }
         };
-        Context context = getContext();
-        mDevice = getDevice(context);
-
         AlertDialog dialog = new AlertDialog.Builder(context)
                 .setPositiveButton(R.string.bluetooth_unpair_dialog_forget_confirm_button,
                         onConfirm)

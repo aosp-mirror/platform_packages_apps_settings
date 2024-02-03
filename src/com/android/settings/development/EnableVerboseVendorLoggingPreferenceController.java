@@ -29,6 +29,7 @@ import androidx.preference.SwitchPreference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
+import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.NoSuchElementException;
 
@@ -66,23 +67,34 @@ public class EnableVerboseVendorLoggingPreferenceController
         return isIDumpstateDeviceAidlServiceAvailable() || isIDumpstateDeviceV1_1ServiceAvailable();
     }
 
+    @SuppressWarnings("FutureReturnValueIgnored")
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final boolean isEnabled = (Boolean) newValue;
-        setVerboseLoggingEnabled(isEnabled);
+        // IDumpstateDevice IPC may be blocking when system is extremely heavily-loaded.
+        // Post to background thread to avoid ANR. Ignore the returned Future.
+        ThreadUtils.postOnBackgroundThread(() ->
+                setVerboseLoggingEnabled(isEnabled));
         return true;
     }
 
+    @SuppressWarnings("FutureReturnValueIgnored")
     @Override
     public void updateState(Preference preference) {
-        final boolean enabled = getVerboseLoggingEnabled();
-        ((SwitchPreference) mPreference).setChecked(enabled);
+        ThreadUtils.postOnBackgroundThread(() -> {
+                    final boolean enabled = getVerboseLoggingEnabled();
+                    ThreadUtils.getUiThreadHandler().post(() ->
+                            ((SwitchPreference) mPreference).setChecked(enabled));
+                }
+        );
     }
 
+    @SuppressWarnings("FutureReturnValueIgnored")
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
         super.onDeveloperOptionsSwitchDisabled();
-        setVerboseLoggingEnabled(false);
+        ThreadUtils.postOnBackgroundThread(() ->
+                setVerboseLoggingEnabled(false));
         ((SwitchPreference) mPreference).setChecked(false);
     }
 

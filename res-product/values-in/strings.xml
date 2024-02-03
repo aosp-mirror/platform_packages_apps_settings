@@ -188,9 +188,9 @@
     <string name="lock_screen_pin_skip_biometrics_message" product="default" msgid="2717938545326672010">"Perlu PIN untuk menyiapkan Buka dengan Wajah dan Buka dengan Sidik Jari.\n\nPIN melindungi ponsel jika hilang atau dicuri."</string>
     <string name="lock_screen_pattern_skip_biometrics_message" product="default" msgid="6067309080610183546">"Perlu pola untuk menyiapkan Buka dengan Wajah dan Buka dengan Sidik Jari.\n\nPola melindungi ponsel jika hilang atau dicuri."</string>
     <string name="lock_screen_password_skip_biometrics_message" product="default" msgid="4739690336878613804">"Perlu sandi untuk menyiapkan Buka dengan Wajah dan Buka dengan Sidik Jari.\n\nSandi melindungi ponsel jika hilang atau dicuri."</string>
-    <string name="fingerprint_v2_delete_message" product="default" msgid="8723083814238510088">"Tindakan ini akan menghapus gambar dan model sidik jari yang terkait dengan \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' yang disimpan di ponsel Anda"</string>
-    <string name="fingerprint_v2_delete_message" product="tablet" msgid="527375244730792698">"Tindakan ini akan menghapus gambar dan model sidik jari yang terkait dengan \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' yang disimpan di tablet Anda"</string>
-    <string name="fingerprint_v2_delete_message" product="device" msgid="4549780655045100171">"Tindakan ini akan menghapus gambar dan model sidik jari yang terkait dengan \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' yang disimpan di perangkat Anda"</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8723083814238510088">"Ini akan menghapus gambar dan model sidik jari yang terkait dengan \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' yang disimpan di ponsel Anda"</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="527375244730792698">"Ini akan menghapus gambar dan model sidik jari yang terkait dengan \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' yang disimpan di tablet Anda"</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4549780655045100171">"Ini akan menghapus gambar dan model sidik jari yang terkait dengan \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' yang disimpan di perangkat Anda"</string>
     <string name="fingerprint_last_delete_message" product="default" msgid="3187410175262625294">"Anda tidak akan dapat menggunakan sidik jari untuk membuka kunci ponsel atau memverifikasi diri Anda di aplikasi."</string>
     <string name="fingerprint_last_delete_message" product="tablet" msgid="8618307419148004587">"Anda tidak akan dapat menggunakan sidik jari untuk membuka kunci tablet atau memverifikasi diri Anda di aplikasi."</string>
     <string name="fingerprint_last_delete_message" product="device" msgid="3910012280858587242">"Anda tidak akan dapat menggunakan sidik jari untuk membuka kunci perangkat atau memverifikasi diri Anda di aplikasi."</string>
@@ -225,8 +225,8 @@
     <string name="wifi_add_app_single_network_summary" product="tablet" msgid="93466057231937113">"<xliff:g id="APPNAME">%1$s</xliff:g> ingin menyimpan jaringan ke tablet Anda"</string>
     <string name="wifi_add_app_networks_summary" product="default" msgid="7014504084783236696">"<xliff:g id="APPNAME">%1$s</xliff:g> ingin menyimpan jaringan ini ke ponsel"</string>
     <string name="wifi_add_app_networks_summary" product="tablet" msgid="6433255556506891439">"<xliff:g id="APPNAME">%1$s</xliff:g> ingin menyimpan jaringan ini ke tablet Anda"</string>
-    <string name="auto_rotate_screen_summary" product="default" msgid="5562937346878935483">"Otomatis sesuaikan orientasi layar saat posisi ponsel diubah dari potret ke lanskap dan sebaliknya"</string>
-    <string name="auto_rotate_screen_summary" product="tablet" msgid="3163709742477804994">"Otomatis sesuaikan orientasi layar saat posisi tablet diubah dari potret ke lanskap dan sebaliknya"</string>
+    <string name="auto_rotate_screen_summary" product="default" msgid="5562937346878935483">"Otomatis menyesuaikan orientasi layar antara potret dan lanskap saat Anda memutar ponsel"</string>
+    <string name="auto_rotate_screen_summary" product="tablet" msgid="3163709742477804994">"Otomatis menyesuaikan orientasi layar antara potret dan lanskap saat Anda memutar tablet"</string>
     <string name="sim_lock_on" product="tablet" msgid="227481196121403470">"Memerlukan PIN untuk menggunakan tablet"</string>
     <string name="sim_lock_on" product="default" msgid="6896034657274595838">"Perlu PIN untuk menggunakan ponsel"</string>
     <string name="sim_lock_off" product="tablet" msgid="4619320846576958981">"Memerlukan PIN untuk menggunakan tablet"</string>
@@ -234,7 +234,7 @@
     <string name="status_number" product="tablet" msgid="6746773328312218158">"MDN"</string>
     <string name="status_number" product="default" msgid="2333455505912871374">"Nomor telepon"</string>
     <string name="status_number_sim_slot" product="tablet" msgid="2190552731606069787">"MDN (slot sim %1$d)"</string>
-    <string name="status_number_sim_slot" product="default" msgid="1333171940376236656">"Nomor telepon (slot SIM %1$d)"</string>
+    <string name="status_number_sim_slot" product="default" msgid="1333171940376236656">"Nomor telepon (slot sim %1$d)"</string>
     <string name="status_number_sim_status" product="tablet" msgid="9003886361856568694">"MDN di SIM"</string>
     <string name="status_number_sim_status" product="default" msgid="7536755538266735352">"Nomor telepon di SIM"</string>
     <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="2049551739429034707">"Format kartu SD untuk penyimpanan internal"</string>
@@ -247,7 +247,7 @@
     <string name="storage_wizard_migrate_v2_body" product="default" msgid="3807501187945770401">"Anda dapat memindahkan file, media, dan aplikasi tertentu ke <xliff:g id="NAME">^1</xliff:g> ini. \n\nPemindahan ini akan mengosongkan <xliff:g id="SIZE">^2</xliff:g> dari penyimpanan ponsel dan memerlukan waktu sekitar <xliff:g id="DURATION">^3</xliff:g>."</string>
     <string name="storage_wizard_migrate_v2_checklist_battery" product="tablet" msgid="5326017162943304749">"Tetap isi daya baterai tablet ini"</string>
     <string name="storage_wizard_migrate_v2_checklist_battery" product="default" msgid="8041162611685970218">"Tetap isi daya baterai ponsel ini"</string>
-    <string name="main_clear_desc" product="tablet" msgid="5778614597513856716">"Tindakan ini akan menghapus semua data dari "<b>"penyimpanan internal"</b>" tablet Anda, termasuk:\n\n"<li>"Akun Google Anda"</li>\n<li>"Data dan setelan sistem dan aplikasi"</li>\n<li>"Aplikasi yang didownload"</li></string>
+    <string name="main_clear_desc" product="tablet" msgid="5778614597513856716">"Tindakan ini akan menghapus semua data dari "<b>"penyimpanan internal"</b>" tablet Anda, termasuk:\n\n"<li>"Akun Google Anda"</li>\n<li>"Data sistem dan aplikasi serta setelan"</li>\n<li>"Aplikasi yang didownload"</li></string>
     <string name="main_clear_desc" product="default" msgid="1888412491866186706">"Tindakan ini akan menghapus semua data dari "<b>"penyimpanan internal"</b>" ponsel Anda, termasuk:\n\n"<li>"Akun Google Anda"</li>\n<li>"Data sistem dan aplikasi serta setelan"</li>\n<li>"Aplikasi yang didownload"</li></string>
     <string name="main_clear_accounts" product="default" msgid="3604029744509330786">\n\n"Saat ini Anda login ke akun berikut:\n"</string>
     <string name="main_clear_other_users_present" product="default" msgid="7750368595882863399">\n\n"Ada pengguna lain yang aktif di perangkat ini.\n"</string>
@@ -280,8 +280,8 @@
     <string name="accessibility_text_reading_confirm_dialog_message" product="tablet" msgid="2547948891207211388">"Preferensi ukuran layar dan teks akan direset ke setelan asli tablet"</string>
     <string name="accessibility_daltonizer_about_intro_text" product="default" msgid="5234458848997942613">"Sesuaikan tampilan warna di ponsel Anda"</string>
     <string name="accessibility_daltonizer_about_intro_text" product="tablet" msgid="5300401841391736534">"Sesuaikan tampilan warna di tablet Anda"</string>
-    <string name="reduce_bright_colors_preference_summary" product="default" msgid="2025941326724094318">"Buat layar bahkan lebih redup daripada kecerahan minimum ponsel"</string>
-    <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="3106979202311807559">"Buat layar bahkan lebih redup daripada kecerahan minimum tablet"</string>
+    <string name="reduce_bright_colors_preference_summary" product="default" msgid="2025941326724094318">"Membuat layar lebih redup daripada kecerahan minimum ponsel"</string>
+    <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="3106979202311807559">"Membuat layar lebih redup daripada kecerahan minimum tablet"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="9162440023310121356">"Ekstra redup dapat berguna saat: &lt;ol&gt; &lt;li&gt; Kecerahan minimum default ponsel masih terlalu cerah&lt;/li&gt; &lt;li&gt; Anda menggunakan ponsel di lingkungan yang gelap, seperti saat malam hari atau di kamar yang gelap sebelum tidur&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="5747242697890472822">"Ekstra redup dapat berguna saat: &lt;ol&gt; &lt;li&gt; Kecerahan minimum default tablet masih terlalu cerah&lt;/li&gt; &lt;li&gt; Anda menggunakan tablet di lingkungan yang gelap, seperti saat malam hari atau di kamar yang gelap sebelum tidur&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="battery_tip_summary_summary" product="default" msgid="1880496476760792933">"Ponsel menggunakan baterai secara normal di latar belakang"</string>
@@ -310,7 +310,7 @@
     <string name="data_usage_limit_dialog_mobile" product="default" msgid="4552449053646826676">"Ponsel akan menonaktifkan data seluler jika mencapai batas yang disetel.\n\nPenggunaan data ini diukur oleh ponsel dan dapat berbeda dari perhitungan data oleh operator, maka pertimbangkan untuk menyetel batas secara berhati-hati."</string>
     <string name="user_settings_footer_text" product="device" msgid="8543171604218174424">"Gunakan perangkat bersama orang lain dengan menambahkan pengguna baru. Setiap pengguna memiliki ruang pribadi di perangkat Anda untuk akun, aplikasi, setelan, Layar utama kustom, dan lainnya."</string>
     <string name="user_settings_footer_text" product="tablet" msgid="4749331578207116797">"Gunakan tablet bersama orang lain dengan menambahkan pengguna baru. Setiap pengguna memiliki ruang pribadi di perangkat Anda untuk akun, aplikasi, setelan, Layar utama kustom, dan lainnya."</string>
-    <string name="user_settings_footer_text" product="default" msgid="5440172971747221370">"Gunakan ponsel bersama orang lain dengan menambahkan pengguna baru. Setiap pengguna memiliki ruang pribadi di ponsel Anda, sehingga akun, aplikasi, setelan, Layar utama, dan lainnya dapat disesuaikan."</string>
+    <string name="user_settings_footer_text" product="default" msgid="5440172971747221370">"Gunakan ponsel bersama orang lain dengan menambahkan pengguna baru. Setiap pengguna memiliki ruang pribadi di ponsel Anda untuk akun, aplikasi, setelan, Layar utama kustom, dan lainnya."</string>
     <string name="user_cannot_manage_message" product="tablet" msgid="5566619500245432179">"Hanya pemilik tablet yang dapat mengelola pengguna."</string>
     <string name="user_cannot_manage_message" product="default" msgid="8596259161937605316">"Hanya pemilik ponsel yang dapat mengelola pengguna."</string>
     <string name="user_confirm_remove_self_message" product="tablet" msgid="6880861846664267876">"Ruang dan data Anda akan hilang dari tablet ini. Anda tidak dapat mengurungkan tindakan ini."</string>
@@ -350,8 +350,8 @@
     <string name="battery_tip_incompatible_charging_message" product="default" msgid="5315451445653379744">"Pengisian daya baterai lambat atau tidak mau mengisi daya sama sekali. Periksa apakah kabel dan adaptor daya berfungsi dengan ponsel Anda"</string>
     <string name="battery_tip_incompatible_charging_message" product="device" msgid="7265524281090787927">"Pengisian daya baterai lambat atau tidak mau mengisi daya sama sekali. Periksa apakah kabel dan adaptor daya berfungsi dengan perangkat Anda"</string>
     <string name="battery_tip_incompatible_charging_message" product="tablet" msgid="174383022413708569">"Pengisian daya baterai lambat atau tidak mau mengisi daya sama sekali. Periksa apakah kabel dan adaptor daya berfungsi dengan tablet Anda"</string>
-    <string name="lockscreen_trivial_controls_summary" product="default" msgid="42562533085885152">"Tanpa membuka kunci ponsel Anda"</string>
-    <string name="lockscreen_trivial_controls_summary" product="tablet" msgid="9052068482124729345">"Tanpa membuka kunci tablet Anda"</string>
-    <string name="auto_rotate_summary_a11y" product="default" msgid="2813368383309985185">"Saat Anda berganti mode ponsel antara potret dan lanskap"</string>
-    <string name="auto_rotate_summary_a11y" product="tabled" msgid="4708833814245913981">"Saat Anda berganti mode tablet antara potret dan lanskap"</string>
+    <!-- no translation found for lockscreen_trivial_controls_summary (42562533085885152) -->
+    <skip />
+    <!-- no translation found for lockscreen_trivial_controls_summary (9052068482124729345) -->
+    <skip />
 </resources>

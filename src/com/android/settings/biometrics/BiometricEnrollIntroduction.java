@@ -236,6 +236,9 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
     protected void onResume() {
         super.onResume();
 
+        //reset mNextClick to make sure introduction page would be closed correctly
+        mNextClicked = false;
+
         final int errorMsg = checkMaxEnrolled();
         if (errorMsg == 0) {
             mErrorText.setText(null);

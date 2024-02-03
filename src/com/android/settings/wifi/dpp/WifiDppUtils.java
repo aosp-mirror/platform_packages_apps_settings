@@ -27,11 +27,13 @@ import android.net.wifi.WifiManager;
 import android.os.CancellationSignal;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.UserHandle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.text.TextUtils;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.wifitrackerlib.WifiEntry;
 
@@ -391,11 +393,19 @@ public class WifiDppUtils {
                         }
             };
 
+            final int userId = UserHandle.myUserId();
+
             final BiometricPrompt.Builder builder = new BiometricPrompt.Builder(context)
-                    .setTitle(context.getText(R.string.wifi_dpp_lockscreen_title));
+                    .setTitle(context.getText(R.string.wifi_dpp_lockscreen_title))
+                    .setUseDefaultSubtitle();
 
             if (keyguardManager.isDeviceSecure()) {
                 builder.setDeviceCredentialAllowed(true);
+                builder.setTextForDeviceCredential(
+                        null /* title */,
+                        Utils.getConfirmCredentialStringForUser(
+                                context, userId, Utils.getCredentialType(context, userId)),
+                        null /* description */);
             }
 
             final BiometricPrompt bp = builder.build();

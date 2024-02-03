@@ -22,6 +22,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+import com.android.settings.fuelgauge.BatteryUsageHistoricalLogEntry.Action;
+import com.android.settings.fuelgauge.batteryusage.bugreport.BatteryUsageLogUtils;
+
 /** Receives the periodic alarm {@link PendingIntent} callback. */
 public final class PeriodicJobReceiver extends BroadcastReceiver {
     private static final String TAG = "PeriodicJobReceiver";
@@ -30,17 +33,28 @@ public final class PeriodicJobReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        try {
+            loadDataAndRefreshJob(context, intent);
+        } catch (Exception e) {
+            BatteryUsageLogUtils.writeLog(context, Action.SCHEDULE_JOB,
+                    String.format("loadDataAndRefreshJob() failed: %s", e));
+        }
+    }
+
+    private static void loadDataAndRefreshJob(Context context, Intent intent) {
         final String action = intent == null ? "" : intent.getAction();
         if (!ACTION_PERIODIC_JOB_UPDATE.equals(action)) {
             Log.w(TAG, "receive unexpected action=" + action);
             return;
         }
         if (DatabaseUtils.isWorkProfile(context)) {
+            BatteryUsageLogUtils.writeLog(context, Action.SCHEDULE_JOB,
+                    "do not refresh job for work profile");
             Log.w(TAG, "do not refresh job for work profile action=" + action);
             return;
         }
+        BatteryUsageLogUtils.writeLog(context, Action.EXECUTE_JOB, "");
         BatteryUsageDataLoader.enqueueWork(context, /*isFullChargeStart=*/ false);
-        AppUsageDataLoader.enqueueWork(context);
         Log.d(TAG, "refresh periodic job from action=" + action);
         PeriodicJobManager.getInstance(context).refreshJob(/*fromBoot=*/ false);
         DatabaseUtils.clearExpiredDataIfNeeded(context);

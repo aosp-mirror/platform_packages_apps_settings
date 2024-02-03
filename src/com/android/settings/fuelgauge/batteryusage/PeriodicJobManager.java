@@ -24,6 +24,8 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
+import com.android.settings.fuelgauge.BatteryUsageHistoricalLogEntry.Action;
+import com.android.settings.fuelgauge.batteryusage.bugreport.BatteryUsageLogUtils;
 import com.android.settings.overlay.FeatureFactory;
 
 import java.time.Clock;
@@ -66,6 +68,8 @@ public final class PeriodicJobManager {
     /** Schedules the next alarm job if it is available. */
     public void refreshJob(final boolean fromBoot) {
         if (mAlarmManager == null) {
+            BatteryUsageLogUtils.writeLog(mContext, Action.SCHEDULE_JOB,
+                    "cannot schedule next alarm job due to AlarmManager is null");
             Log.e(TAG, "cannot schedule next alarm job");
             return;
         }
@@ -76,8 +80,11 @@ public final class PeriodicJobManager {
         final long triggerAtMillis = getTriggerAtMillis(mContext, Clock.systemUTC(), fromBoot);
         mAlarmManager.setExactAndAllowWhileIdle(
                 AlarmManager.RTC_WAKEUP, triggerAtMillis, pendingIntent);
-        Log.d(TAG, "schedule next alarm job at "
-                + ConvertUtils.utcToLocalTimeForLogging(triggerAtMillis));
+
+        final String utcToLocalTime = ConvertUtils.utcToLocalTimeForLogging(triggerAtMillis);
+        BatteryUsageLogUtils.writeLog(mContext, Action.SCHEDULE_JOB,
+                String.format("triggerTime=%s, fromBoot=%b", utcToLocalTime, fromBoot));
+        Log.d(TAG, "schedule next alarm job at " + utcToLocalTime);
     }
 
     void cancelJob(PendingIntent pendingIntent) {

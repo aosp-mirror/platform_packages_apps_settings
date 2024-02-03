@@ -42,6 +42,7 @@ import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
+import android.content.pm.UserProperties;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -334,6 +335,10 @@ public class AccountPreferenceController extends AbstractPreferenceController
                 data.authenticatorHelper =
                         new AuthenticatorHelper(mContext, userInfo.getUserHandle(), this);
             }
+            return;
+        }
+        if (mUm.getUserProperties(userInfo.getUserHandle()).getShowInSettings()
+                == UserProperties.SHOW_IN_SETTINGS_NO) {
             return;
         }
         final Context context = mContext;

@@ -119,20 +119,21 @@ public class Enable2gPreferenceController extends TelephonyTogglePreferenceContr
         String summary;
         if (isDisabledByCarrier) {
             summary = mContext.getString(R.string.enable_2g_summary_disabled_carrier,
-                    getCarrierName());
+                    getSimCardName());
         } else {
             summary = mContext.getString(R.string.enable_2g_summary);
         }
         preference.setSummary(summary);
     }
 
-    private String getCarrierName() {
+    private String getSimCardName() {
         SubscriptionInfo subInfo = SubscriptionUtil.getSubById(mSubscriptionManager, mSubId);
         if (subInfo == null) {
             return "";
         }
-        CharSequence carrierName = subInfo.getCarrierName();
-        return TextUtils.isEmpty(carrierName) ? "" : carrierName.toString();
+        // It is the sim card name, and it should be the same name as the sim page.
+        CharSequence simCardName = subInfo.getDisplayName();
+        return TextUtils.isEmpty(simCardName) ? "" : simCardName.toString();
     }
 
     /**
