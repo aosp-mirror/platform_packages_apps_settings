@@ -81,8 +81,12 @@ public class CallsAndAlarmsDialogFragment extends InstrumentedDialogFragment {
         ArrayList<AudioSharingDeviceItem> deviceItems =
                 arguments.getParcelableArrayList(BUNDLE_KEY_DEVICE_ITEMS);
         int checkedItem = -1;
-        // deviceItems is ordered. The active device is put in the first place if it does exist
-        if (!deviceItems.isEmpty() && deviceItems.get(0).isActive()) checkedItem = 0;
+        for (AudioSharingDeviceItem item : deviceItems) {
+            int fallbackActiveGroupId = AudioSharingUtils.getFallbackActiveGroupId(getContext());
+            if (item.getGroupId() == fallbackActiveGroupId) {
+                checkedItem = deviceItems.indexOf(item);
+            }
+        }
         String[] choices =
                 deviceItems.stream().map(AudioSharingDeviceItem::getName).toArray(String[]::new);
         AlertDialog.Builder builder =

@@ -27,6 +27,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
+import android.telephony.ServiceState;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyCallback;
 import android.telephony.TelephonyManager;
@@ -49,6 +50,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.ims.ImsConfig;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.telephony.Phone;
+import com.android.internal.telephony.flags.Flags;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
@@ -97,6 +99,7 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
     private boolean mEditableWfcMode = true;
     private boolean mEditableWfcRoamingMode = true;
     private boolean mUseWfcHomeModeForRoaming = false;
+    private boolean mOverrideWfcRoamingModeWhileUsingNtn = false;
 
     private int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     private ImsMmTelManager mImsMmTelManager;
@@ -166,7 +169,8 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
             final Preference pref_roam =
                     getPreferenceScreen().findPreference(BUTTON_WFC_ROAMING_MODE);
             if (pref_roam != null) {
-                pref_roam.setEnabled(isWfcRoamingModeEditable);
+                pref_roam.setEnabled(isWfcRoamingModeEditable
+                        && !overrideWfcRoamingModeWhileUsingNtn());
             }
         }
     }
@@ -361,6 +365,9 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
                         false);
                 isWifiOnlySupported = b.getBoolean(
                         CarrierConfigManager.KEY_CARRIER_WFC_SUPPORTS_WIFI_ONLY_BOOL, true);
+                mOverrideWfcRoamingModeWhileUsingNtn = b.getBoolean(
+                        CarrierConfigManager.KEY_OVERRIDE_WFC_ROAMING_MODE_WHILE_USING_NTN_BOOL,
+                        true);
             }
         }
 
@@ -577,7 +584,8 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
         mButtonWfcMode.setSummary(getWfcModeSummary(wfcMode));
         mButtonWfcMode.setEnabled(wfcEnabled && mEditableWfcMode);
         // mButtonWfcRoamingMode.setSummary is not needed; summary is just selected value.
-        mButtonWfcRoamingMode.setEnabled(wfcEnabled && mEditableWfcRoamingMode);
+        mButtonWfcRoamingMode.setEnabled(wfcEnabled && mEditableWfcRoamingMode
+                && !overrideWfcRoamingModeWhileUsingNtn());
 
         final PreferenceScreen preferenceScreen = getPreferenceScreen();
         final boolean updateAddressEnabled = (getCarrierActivityIntent() != null);
@@ -710,5 +718,31 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
             return;
         }
         mProvisioningManager.unregisterProvisioningChangedCallback(mProvisioningCallback);
+    }
+
+    /**
+     * Determine whether to override roaming Wi-Fi calling preference when device is connected to
+     * non-terrestrial network.
+     *
+     * @return {@code true} if phone is connected to non-terrestrial network and if
+     * {@link CarrierConfigManager#KEY_OVERRIDE_WFC_ROAMING_MODE_WHILE_USING_NTN_BOOL} is true,
+     * {@code false} otherwise.
+     */
+    private boolean overrideWfcRoamingModeWhileUsingNtn() {
+        if (!Flags.carrierEnabledSatelliteFlag()) {
+            return false;
+        }
+
+        TelephonyManager tm = getTelephonyManagerForSub(mSubId);
+        ServiceState serviceState = tm.getServiceState();
+        if (serviceState == null) {
+            return false;
+        }
+
+        if (!serviceState.isUsingNonTerrestrialNetwork()) {
+            return false;
+        }
+
+        return mOverrideWfcRoamingModeWhileUsingNtn;
     }
 }

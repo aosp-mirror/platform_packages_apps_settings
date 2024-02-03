@@ -160,8 +160,13 @@ public class FoldLockBehaviorSettings extends RadioButtonPickerFragment implemen
                         IllustrationType.LOTTIE_ANIMATION);
                 break;
             case SETTING_VALUE_SELECTIVE_STAY_AWAKE:
-                setIllustration(R.raw.fold_setting_selective_stay_awake_lottie,
-                        IllustrationType.LOTTIE_ANIMATION);
+                if (mFoldGracePeriodProvider.isEnabled()) {
+                    setIllustration(R.raw.fold_setting_grace_period_selective_stay_awake_lottie,
+                            IllustrationType.LOTTIE_ANIMATION);
+                } else {
+                    setIllustration(R.raw.fold_setting_selective_stay_awake_lottie,
+                            IllustrationType.LOTTIE_ANIMATION);
+                }
                 break;
             case SETTING_VALUE_SLEEP_ON_FOLD:
                 setIllustration(R.raw.fold_setting_sleep_on_fold_lottie,

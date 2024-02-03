@@ -476,9 +476,12 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
 
     private void enableCallsAndSms(boolean enabled) {
         mPhonePref.setChecked(enabled);
-        UserHandle userHandle = UserHandle.of(mUserInfo.id);
-        mUserManager.setUserRestriction(UserManager.DISALLOW_OUTGOING_CALLS, !enabled, userHandle);
-        mUserManager.setUserRestriction(UserManager.DISALLOW_SMS, !enabled, userHandle);
+        int[] userProfiles = mUserManager.getProfileIdsWithDisabled(mUserInfo.id);
+        for (int userId : userProfiles) {
+            UserHandle user = UserHandle.of(userId);
+            mUserManager.setUserRestriction(UserManager.DISALLOW_OUTGOING_CALLS, !enabled, user);
+            mUserManager.setUserRestriction(UserManager.DISALLOW_SMS, !enabled, user);
+        }
     }
 
     /**

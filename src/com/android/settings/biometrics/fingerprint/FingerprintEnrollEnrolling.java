@@ -16,6 +16,7 @@
 
 package com.android.settings.biometrics.fingerprint;
 
+import static android.hardware.biometrics.BiometricAuthenticator.TYPE_FINGERPRINT;
 import static android.text.Layout.HYPHENATION_FREQUENCY_NONE;
 
 import android.animation.Animator;
@@ -67,6 +68,7 @@ import com.android.settings.R;
 import com.android.settings.biometrics.BiometricEnrollSidecar;
 import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.biometrics.BiometricsEnrollEnrolling;
+import com.android.settings.biometrics.BiometricsSplitScreenDialog;
 import com.android.settings.biometrics.fingerprint.feature.SfpsEnrollmentFeature;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.flags.Flags;
@@ -223,7 +225,10 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        if (shouldShowSplitScreenDialog()) {
+            BiometricsSplitScreenDialog.newInstance(TYPE_FINGERPRINT, true /*destroyActivity*/)
+                    .show(getSupportFragmentManager(), BiometricsSplitScreenDialog.class.getName());
+        }
         if (savedInstanceState != null) {
             restoreSavedState(savedInstanceState);
         }
