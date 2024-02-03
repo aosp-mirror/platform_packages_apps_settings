@@ -65,7 +65,6 @@ import android.text.Spannable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.util.Pair;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -74,9 +73,11 @@ import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.CheckBox;
 import android.widget.ImeAwareEditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -87,7 +88,6 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockscreenCredential;
 import com.android.internal.widget.PasswordValidationError;
 import com.android.internal.widget.TextViewInputDisabler;
-import com.android.internal.widget.VerifyCredentialResponse;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SetupWizardUtils;
@@ -234,6 +234,7 @@ public class ChooseLockPassword extends SettingsActivity {
         private LockscreenCredential mCurrentCredential;
         private LockscreenCredential mChosenPassword;
         private boolean mRequestGatekeeperPassword;
+        private boolean mRequestWriteRepairModePassword;
         private ImeAwareEditText mPasswordEntry;
         private TextViewInputDisabler mPasswordEntryInputDisabler;
 
@@ -517,7 +518,9 @@ public class ChooseLockPassword extends SettingsActivity {
                     || DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC == mPasswordType
                     || DevicePolicyManager.PASSWORD_QUALITY_COMPLEX == mPasswordType;
 
-            setupPasswordRequirementsView(view);
+            final LinearLayout headerLayout = view.findViewById(
+                    R.id.sud_layout_header);
+            setupPasswordRequirementsView(headerLayout);
 
             mPasswordRestrictionView.setLayoutManager(new LinearLayoutManager(getActivity()));
             mPasswordEntry = view.findViewById(R.id.password_entry);
@@ -561,6 +564,8 @@ public class ChooseLockPassword extends SettingsActivity {
                     ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
             mRequestGatekeeperPassword = intent.getBooleanExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW_HANDLE, false);
+            mRequestWriteRepairModePassword = intent.getBooleanExtra(
+                    ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_WRITE_REPAIR_MODE_PW, false);
             if (savedInstanceState == null) {
                 updateStage(Stage.Introduction);
                 if (confirmCredentials) {
@@ -570,6 +575,7 @@ public class ChooseLockPassword extends SettingsActivity {
                             .setTitle(getString(R.string.unlock_set_unlock_launch_picker_title))
                             .setReturnCredentials(true)
                             .setRequestGatekeeperPasswordHandle(mRequestGatekeeperPassword)
+                            .setRequestWriteRepairModePassword(mRequestWriteRepairModePassword)
                             .setUserId(mUserId)
                             .show();
                 }
@@ -626,11 +632,33 @@ public class ChooseLockPassword extends SettingsActivity {
             }
         }
 
-        private void setupPasswordRequirementsView(View view) {
-            mPasswordRestrictionView = view.findViewById(R.id.password_requirements_view);
+        private void setupPasswordRequirementsView(@Nullable ViewGroup view) {
+            if (view == null) {
+                return;
+            }
+
+            createHintMessageView(view);
             mPasswordRestrictionView.setLayoutManager(new LinearLayoutManager(getActivity()));
-            mPasswordRequirementAdapter = new PasswordRequirementAdapter();
+            mPasswordRequirementAdapter = new PasswordRequirementAdapter(getActivity());
             mPasswordRestrictionView.setAdapter(mPasswordRequirementAdapter);
+            view.addView(mPasswordRestrictionView);
+        }
+
+        private void createHintMessageView(ViewGroup view) {
+            if (mPasswordRestrictionView != null) {
+                return;
+            }
+
+            final TextView sucTitleView = view.findViewById(R.id.suc_layout_title);
+            final ViewGroup.MarginLayoutParams titleLayoutParams =
+                    (ViewGroup.MarginLayoutParams) sucTitleView.getLayoutParams();
+            mPasswordRestrictionView = new RecyclerView(getActivity());
+            final LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT);
+            lp.setMargins(titleLayoutParams.leftMargin, getResources().getDimensionPixelSize(
+                    R.dimen.password_requirement_view_margin_top), titleLayoutParams.leftMargin, 0);
+            mPasswordRestrictionView.setLayoutParams(lp);
         }
 
         @Override
@@ -1005,10 +1033,11 @@ public class ChooseLockPassword extends SettingsActivity {
                     getActivity().getWindow().getDecorView());
 
             mPasswordEntryInputDisabler.setInputEnabled(false);
-            setNextEnabled(false);
-
             mSaveAndFinishWorker = new SaveAndFinishWorker();
-            mSaveAndFinishWorker.setListener(this);
+            mSaveAndFinishWorker
+                    .setListener(this)
+                    .setRequestGatekeeperPasswordHandle(mRequestGatekeeperPassword)
+                    .setRequestWriteRepairModePassword(mRequestWriteRepairModePassword);
 
             getFragmentManager().beginTransaction().add(mSaveAndFinishWorker,
                     FRAGMENT_TAG_SAVE_AND_FINISH).commit();
@@ -1028,7 +1057,7 @@ public class ChooseLockPassword extends SettingsActivity {
                     (mAutoPinConfirmOption != null && mAutoPinConfirmOption.isChecked()),
                     mUserId);
 
-            mSaveAndFinishWorker.start(mLockPatternUtils, mRequestGatekeeperPassword,
+            mSaveAndFinishWorker.start(mLockPatternUtils,
                     mChosenPassword, mCurrentCredential, mUserId);
         }
 
@@ -1079,57 +1108,6 @@ public class ChooseLockPassword extends SettingsActivity {
                     updateUi();
                 }
             }
-        }
-    }
-
-    public static class SaveAndFinishWorker extends SaveChosenLockWorkerBase {
-
-        private LockscreenCredential mChosenPassword;
-        private LockscreenCredential mCurrentCredential;
-
-        public void start(LockPatternUtils utils, boolean requestGatekeeperPassword,
-                LockscreenCredential chosenPassword, LockscreenCredential currentCredential,
-                int userId) {
-            prepare(utils, requestGatekeeperPassword, userId);
-
-            mChosenPassword = chosenPassword;
-            mCurrentCredential = currentCredential != null ? currentCredential
-                    : LockscreenCredential.createNone();
-            mUserId = userId;
-
-            start();
-        }
-
-        @Override
-        protected Pair<Boolean, Intent> saveAndVerifyInBackground() {
-            boolean success;
-            try {
-                success = mUtils.setLockCredential(mChosenPassword, mCurrentCredential, mUserId);
-            } catch (RuntimeException e) {
-                Log.e(TAG, "Failed to set lockscreen credential", e);
-                success = false;
-            }
-            if (success) {
-                unifyProfileCredentialIfRequested();
-            }
-            Intent result = null;
-            if (success && mRequestGatekeeperPassword) {
-                // If a Gatekeeper Password was requested, invoke the LockSettingsService code
-                // path to return a Gatekeeper Password based on the credential that the user
-                // chose. This should only be run if the credential was successfully set.
-                final VerifyCredentialResponse response = mUtils.verifyCredential(mChosenPassword,
-                        mUserId, LockPatternUtils.VERIFY_FLAG_REQUEST_GK_PW_HANDLE);
-
-                if (!response.isMatched() || !response.containsGatekeeperPasswordHandle()) {
-                    Log.e(TAG, "critical: bad response or missing GK PW handle for known good"
-                            + " password: " + response.toString());
-                }
-
-                result = new Intent();
-                result.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE,
-                        response.getGatekeeperPasswordHandle());
-            }
-            return Pair.create(success, result);
         }
     }
 }

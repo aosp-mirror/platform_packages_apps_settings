@@ -21,6 +21,7 @@ import static android.hardware.biometrics.BiometricAuthenticator.TYPE_FINGERPRIN
 
 import static com.android.settings.password.ChooseLockPattern.RESULT_FINISHED;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.hardware.biometrics.SensorProperties;
@@ -179,6 +180,12 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
             }
 
             mFaceManager.generateChallenge(mUserId, (sensorId, userId, challenge) -> {
+                final Activity activity = getActivity();
+                if (activity == null || activity.isFinishing()) {
+                    Log.e(getLogTag(), "Stop during generating face unlock challenge"
+                            + " because activity is null or finishing");
+                    return;
+                }
                 try {
                     final byte[] token = requestGatekeeperHat(context, mGkPwHandle, mUserId,
                             challenge);
@@ -215,6 +222,12 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
             }
 
             mFingerprintManager.generateChallenge(mUserId, (sensorId, userId, challenge) -> {
+                final Activity activity = getActivity();
+                if (activity == null || activity.isFinishing()) {
+                    Log.e(getLogTag(), "Stop during generating fingerprint challenge"
+                            + " because activity is null or finishing");
+                    return;
+                }
                 try {
                     final byte[] token = requestGatekeeperHat(context, mGkPwHandle, mUserId,
                             challenge);

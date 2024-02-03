@@ -15,8 +15,13 @@
  */
 package com.android.settings.wifi.details2;
 
+import static android.net.wifi.sharedconnectivity.app.NetworkProviderInfo.DEVICE_TYPE_PHONE;
+
+import static com.android.settingslib.wifi.WifiUtils.getHotspotIconResource;
+
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.anyBoolean;
 import static org.mockito.Mockito.anyInt;
@@ -83,6 +88,7 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.utils.StringUtil;
 import com.android.settingslib.widget.ActionButtonsPreference;
 import com.android.settingslib.widget.LayoutPreference;
+import com.android.wifitrackerlib.HotspotNetworkEntry;
 import com.android.wifitrackerlib.NetworkDetailsTracker;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiEntry.ConnectCallback;
@@ -299,6 +305,8 @@ public class WifiDetailPreferenceController2Test {
 
         ShadowEntityHeaderController.setUseMock(mMockHeaderController);
         // builder pattern
+        when(mMockHeaderController.setLabel(any(CharSequence.class)))
+                .thenReturn(mMockHeaderController);
         when(mMockHeaderController.setRecyclerView(mMockFragment.getListView(), mLifecycle))
                 .thenReturn(mMockHeaderController);
         when(mMockHeaderController.setSummary(nullable(String.class)))
@@ -526,12 +534,12 @@ public class WifiDetailPreferenceController2Test {
     }
 
     @Test
-    public void entityHeader_shouldNotHaveIconSetForNotInRangeNetwork() {
+    public void entityHeader_shouldHaveIconSetForNotInRangeNetwork() {
         setUpForNotInRangeNetwork();
 
         displayAndResume();
 
-        verify(mMockHeaderController, never()).setIcon(any(Drawable.class));
+        verify(mMockHeaderController).setIcon(any(Drawable.class));
     }
 
     @Test
@@ -701,10 +709,10 @@ public class WifiDetailPreferenceController2Test {
     }
 
     @Test
-    public void linkSpeedPref_shouldNotShowIfNotSet() {
+    public void linkSpeedPref_shouldNotShowIfSpeedStringIsEmpty() {
         setUpForConnectedNetwork();
         setUpSpyController();
-        when(mMockWifiInfo.getTxLinkSpeedMbps()).thenReturn(WifiInfo.LINK_SPEED_UNKNOWN);
+        when(mMockWifiEntry.getTxSpeedString()).thenReturn("");
 
         displayAndResume();
 
@@ -712,42 +720,22 @@ public class WifiDetailPreferenceController2Test {
     }
 
     @Test
-    public void linkSpeedPref_shouldVisibleForConnectedNetwork() {
+    public void linkSpeedPref_shouldBeVisibleIfSpeedStringIsNotEmpty() {
         setUpForConnectedNetwork();
         setUpSpyController();
-        String expectedLinkSpeed = mContext.getString(R.string.tx_link_speed, TX_LINK_SPEED);
+        when(mMockWifiEntry.getTxSpeedString()).thenReturn("100 Mbps");
 
         displayAndResume();
 
         verify(mMockTxLinkSpeedPref).setVisible(true);
-        verify(mMockTxLinkSpeedPref).setSummary(expectedLinkSpeed);
+        verify(mMockTxLinkSpeedPref).setSummary("100 Mbps");
     }
 
     @Test
-    public void linkSpeedPref_shouldInvisibleForDisconnectedNetwork() {
-        setUpForDisconnectedNetwork();
-
-        displayAndResume();
-
-        verify(mMockTxLinkSpeedPref).setVisible(false);
-        verify(mMockTxLinkSpeedPref, never()).setSummary(any(String.class));
-    }
-
-    @Test
-    public void linkSpeedPref_shouldInvisibleForNotInRangeNetwork() {
-        setUpForNotInRangeNetwork();
-
-        displayAndResume();
-
-        verify(mMockTxLinkSpeedPref).setVisible(false);
-        verify(mMockTxLinkSpeedPref, never()).setSummary(any(String.class));
-    }
-
-    @Test
-    public void rxLinkSpeedPref_shouldNotShowIfNotSet() {
+    public void rxLinkSpeedPref_shouldNotShowIfSpeedStringIsEmpty() {
         setUpForConnectedNetwork();
         setUpSpyController();
-        when(mMockWifiInfo.getRxLinkSpeedMbps()).thenReturn(WifiInfo.LINK_SPEED_UNKNOWN);
+        when(mMockWifiEntry.getRxSpeedString()).thenReturn("");
 
         displayAndResume();
 
@@ -755,35 +743,15 @@ public class WifiDetailPreferenceController2Test {
     }
 
     @Test
-    public void rxLinkSpeedPref_shouldVisibleForConnectedNetwork() {
+    public void rxLinkSpeedPref_shouldBeVisibleIfSpeedStringIsNotEmpty() {
         setUpForConnectedNetwork();
         setUpSpyController();
-        String expectedLinkSpeed = mContext.getString(R.string.rx_link_speed, RX_LINK_SPEED);
+        when(mMockWifiEntry.getRxSpeedString()).thenReturn("100 Mbps");
 
         displayAndResume();
 
         verify(mMockRxLinkSpeedPref).setVisible(true);
-        verify(mMockRxLinkSpeedPref).setSummary(expectedLinkSpeed);
-    }
-
-    @Test
-    public void rxLinkSpeedPref_shouldInvisibleForDisconnectedNetwork() {
-        setUpForDisconnectedNetwork();
-
-        displayAndResume();
-
-        verify(mMockRxLinkSpeedPref).setVisible(false);
-        verify(mMockRxLinkSpeedPref, never()).setSummary(any(String.class));
-    }
-
-    @Test
-    public void rxLinkSpeedPref_shouldInvisibleForNotInRangeNetwork() {
-        setUpForNotInRangeNetwork();
-
-        displayAndResume();
-
-        verify(mMockRxLinkSpeedPref).setVisible(false);
-        verify(mMockRxLinkSpeedPref, never()).setSummary(any(String.class));
+        verify(mMockRxLinkSpeedPref).setSummary("100 Mbps");
     }
 
     @Test
@@ -1854,6 +1822,71 @@ public class WifiDetailPreferenceController2Test {
 
         assertThat(info).isNotNull();
         assertThat(info.getDisplayName().toString()).isEqualTo("sim2");
+    }
+
+    @Test
+    public void refreshEntryHeaderIcon_entityHeaderControllerNull_doNothing() {
+        setUpSpyController();
+        mController.mEntityHeaderController = null;
+
+        mController.refreshEntryHeaderIcon();
+
+        verify(mController, never()).getWifiDrawable(any());
+    }
+
+    @Test
+    public void refreshEntryHeaderIcon_entityHeaderControllerNotNull_setIcon() {
+        setUpSpyController();
+        mController.mEntityHeaderController = mMockHeaderController;
+
+        mController.refreshEntryHeaderIcon();
+
+        verify(mController).getWifiDrawable(any());
+        verify(mMockHeaderController).setIcon(any(Drawable.class));
+    }
+
+    @Test
+    public void getWifiDrawable_withHotspotNetworkEntry_returnHotspotDrawable() {
+        setUpSpyController();
+        HotspotNetworkEntry entry = mock(HotspotNetworkEntry.class);
+        when(entry.getDeviceType()).thenReturn(DEVICE_TYPE_PHONE);
+
+        mController.getWifiDrawable(entry);
+
+        verify(mContext).getDrawable(getHotspotIconResource(DEVICE_TYPE_PHONE));
+    }
+
+    @Test
+    public void getWifiDrawable_withWifiEntryNotShowXLevelIcon_getIconWithInternet() {
+        setUpSpyController();
+        when(mMockWifiEntry.getLevel()).thenReturn(WifiEntry.WIFI_LEVEL_MAX);
+        when(mMockWifiEntry.shouldShowXLevelIcon()).thenReturn(false);
+
+        mController.getWifiDrawable(mMockWifiEntry);
+
+        verify(mMockIconInjector).getIcon(eq(false) /* noInternet */, anyInt());
+    }
+
+    @Test
+    public void getWifiDrawable_withWifiEntryShowXLevelIcon_getIconWithNoInternet() {
+        setUpSpyController();
+        when(mMockWifiEntry.getLevel()).thenReturn(WifiEntry.WIFI_LEVEL_MAX);
+        when(mMockWifiEntry.shouldShowXLevelIcon()).thenReturn(true);
+
+        mController.getWifiDrawable(mMockWifiEntry);
+
+        verify(mMockIconInjector).getIcon(eq(true) /* noInternet */, anyInt());
+        verify(mMockIconInjector).getIcon(eq(true) /* noInternet */, anyInt());
+    }
+
+    @Test
+    public void setSignalStrengthTitle_prefNotNull_setPrefTitle() {
+        setUpSpyController();
+        mController.displayPreference(mMockScreen);
+
+        mController.setSignalStrengthTitle(R.string.hotspot_connection_strength);
+
+        verify(mMockSignalStrengthPref).setTitle(R.string.hotspot_connection_strength);
     }
 
     private SubscriptionInfo mockSubscriptionInfo(int subId, String displayName, int carrierId) {

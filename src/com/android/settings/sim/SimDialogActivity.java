@@ -280,8 +280,20 @@ public class SimDialogActivity extends FragmentActivity {
     public void showEnableAutoDataSwitchDialog() {
         final FragmentManager fragmentManager = getSupportFragmentManager();
         SimDialogFragment fragment = createFragment(ENABLE_AUTO_DATA_SWITCH);
-        fragment.show(fragmentManager, Integer.toString(ENABLE_AUTO_DATA_SWITCH));
 
+        if (fragmentManager.isStateSaved()) {
+            Log.w(TAG, "Failed to show EnableAutoDataSwitchDialog. The fragmentManager "
+                    + "is StateSaved.");
+            forceClose();
+            return;
+        }
+        try {
+            fragment.show(fragmentManager, Integer.toString(ENABLE_AUTO_DATA_SWITCH));
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to show EnableAutoDataSwitchDialog.", e);
+            forceClose();
+            return;
+        }
         if (getResources().getBoolean(
                 R.bool.config_auto_data_switch_enables_cross_sim_calling)) {
             // If auto data switch is already enabled on the non-DDS, the dialog for enabling it

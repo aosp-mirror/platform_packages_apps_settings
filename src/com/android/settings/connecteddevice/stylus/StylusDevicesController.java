@@ -16,12 +16,17 @@
 
 package com.android.settings.connecteddevice.stylus;
 
+import android.app.Dialog;
 import android.app.role.RoleManager;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.UserInfo;
+import android.os.Process;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.Settings;
 import android.provider.Settings.Secure;
 import android.text.TextUtils;
@@ -38,6 +43,9 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
+import com.android.settings.dashboard.profileselector.ProfileSelectDialog;
+import com.android.settings.dashboard.profileselector.UserAdapter;
+import com.android.settingslib.PrimarySwitchPreference;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -45,13 +53,15 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * This class adds stylus preferences.
  */
 public class StylusDevicesController extends AbstractPreferenceController implements
-        Preference.OnPreferenceClickListener, LifecycleObserver, OnResume {
+        Preference.OnPreferenceClickListener, Preference.OnPreferenceChangeListener,
+        LifecycleObserver, OnResume {
 
     @VisibleForTesting
     static final String KEY_STYLUS = "device_stylus";
@@ -72,6 +82,9 @@ public class StylusDevicesController extends AbstractPreferenceController implem
 
     @VisibleForTesting
     PreferenceCategory mPreferencesContainer;
+
+    @VisibleForTesting
+    Dialog mDialog;
 
     public StylusDevicesController(Context context, InputDevice inputDevice,
             CachedBluetoothDevice cachedBluetoothDevice, Lifecycle lifecycle) {
@@ -100,8 +113,8 @@ public class StylusDevicesController extends AbstractPreferenceController implem
         pref.setOnPreferenceClickListener(this);
         pref.setEnabled(true);
 
-        List<String> roleHolders = rm.getRoleHoldersAsUser(RoleManager.ROLE_NOTES,
-                mContext.getUser());
+        UserHandle user = getDefaultNoteTaskProfile();
+        List<String> roleHolders = rm.getRoleHoldersAsUser(RoleManager.ROLE_NOTES, user);
         if (roleHolders.isEmpty()) {
             pref.setSummary(R.string.default_app_none);
             return pref;
@@ -113,19 +126,29 @@ public class StylusDevicesController extends AbstractPreferenceController implem
         try {
             ApplicationInfo ai = pm.getApplicationInfo(packageName,
                     PackageManager.ApplicationInfoFlags.of(0));
-            appName = ai == null ? packageName : pm.getApplicationLabel(ai).toString();
+            appName = ai == null ? "" : pm.getApplicationLabel(ai).toString();
         } catch (PackageManager.NameNotFoundException e) {
             Log.e(TAG, "Notes role package not found.");
         }
-        pref.setSummary(appName);
+
+        if (mContext.getSystemService(UserManager.class).isManagedProfile(user.getIdentifier())) {
+            pref.setSummary(
+                    mContext.getString(R.string.stylus_default_notes_summary_work, appName));
+        } else {
+            pref.setSummary(appName);
+        }
         return pref;
     }
 
-    private SwitchPreference createOrUpdateHandwritingPreference(SwitchPreference preference) {
-        SwitchPreference pref = preference == null ? new SwitchPreference(mContext) : preference;
+    private PrimarySwitchPreference createOrUpdateHandwritingPreference(
+            PrimarySwitchPreference preference) {
+        PrimarySwitchPreference pref = preference == null ? new PrimarySwitchPreference(mContext)
+                : preference;
         pref.setKey(KEY_HANDWRITING);
         pref.setTitle(mContext.getString(R.string.stylus_textfield_handwriting));
         pref.setIcon(R.drawable.ic_text_fields_alt);
+        // Using a two-target preference, clicking will send an intent and change will toggle.
+        pref.setOnPreferenceChangeListener(this);
         pref.setOnPreferenceClickListener(this);
         pref.setChecked(Settings.Secure.getInt(mContext.getContentResolver(),
                 Settings.Secure.STYLUS_HANDWRITING_ENABLED,
@@ -148,36 +171,47 @@ public class StylusDevicesController extends AbstractPreferenceController implem
     @Override
     public boolean onPreferenceClick(Preference preference) {
         String key = preference.getKey();
-
         switch (key) {
             case KEY_DEFAULT_NOTES:
                 PackageManager pm = mContext.getPackageManager();
                 String packageName = pm.getPermissionControllerPackageName();
                 Intent intent = new Intent(Intent.ACTION_MANAGE_DEFAULT_APP).setPackage(
                         packageName).putExtra(Intent.EXTRA_ROLE_NAME, RoleManager.ROLE_NOTES);
-                mContext.startActivity(intent);
+
+                List<UserHandle> users = getUserAndManagedProfiles();
+                if (users.size() <= 1) {
+                    mContext.startActivity(intent);
+                } else {
+                    createAndShowProfileSelectDialog(intent, users);
+                }
                 break;
             case KEY_HANDWRITING:
-                Settings.Secure.putInt(mContext.getContentResolver(),
-                        Settings.Secure.STYLUS_HANDWRITING_ENABLED,
-                        ((SwitchPreference) preference).isChecked() ? 1 : 0);
-
-                if (((SwitchPreference) preference).isChecked()) {
-                    InputMethodManager imm = mContext.getSystemService(InputMethodManager.class);
-                    InputMethodInfo inputMethod = imm.getCurrentInputMethodInfo();
-                    if (inputMethod == null) break;
-
-                    Intent handwritingIntent =
-                            inputMethod.createStylusHandwritingSettingsActivityIntent();
-                    if (handwritingIntent != null) {
-                        mContext.startActivity(handwritingIntent);
-                    }
+                InputMethodManager imm = mContext.getSystemService(InputMethodManager.class);
+                InputMethodInfo inputMethod = imm.getCurrentInputMethodInfo();
+                if (inputMethod == null) break;
+                Intent handwritingIntent =
+                        inputMethod.createStylusHandwritingSettingsActivityIntent();
+                if (handwritingIntent != null) {
+                    mContext.startActivity(handwritingIntent);
                 }
                 break;
             case KEY_IGNORE_BUTTON:
                 Settings.Secure.putInt(mContext.getContentResolver(),
                         Secure.STYLUS_BUTTONS_ENABLED,
                         ((SwitchPreference) preference).isChecked() ? 0 : 1);
+                break;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        String key = preference.getKey();
+        switch (key) {
+            case KEY_HANDWRITING:
+                Settings.Secure.putInt(mContext.getContentResolver(),
+                        Settings.Secure.STYLUS_HANDWRITING_ENABLED,
+                        (boolean) newValue ? 1 : 0);
                 break;
         }
         return true;
@@ -210,7 +244,7 @@ public class StylusDevicesController extends AbstractPreferenceController implem
             mPreferencesContainer.addPreference(notesPref);
         }
 
-        SwitchPreference currHandwritingPref = mPreferencesContainer.findPreference(
+        PrimarySwitchPreference currHandwritingPref = mPreferencesContainer.findPreference(
                 KEY_HANDWRITING);
         Preference handwritingPref = createOrUpdateHandwritingPreference(currHandwritingPref);
         if (currHandwritingPref == null) {
@@ -227,6 +261,56 @@ public class StylusDevicesController extends AbstractPreferenceController implem
         InputMethodManager imm = mContext.getSystemService(InputMethodManager.class);
         InputMethodInfo inputMethod = imm.getCurrentInputMethodInfo();
         return inputMethod != null && inputMethod.supportsStylusHandwriting();
+    }
+
+    private List<UserHandle> getUserAndManagedProfiles() {
+        UserManager um = mContext.getSystemService(UserManager.class);
+        final List<UserHandle> userManagedProfiles = new ArrayList<>();
+        // Add the current user, then add all the associated managed profiles.
+        final UserHandle currentUser = Process.myUserHandle();
+        userManagedProfiles.add(currentUser);
+
+        final List<UserInfo> userInfos = um.getUsers();
+        for (UserInfo info : userInfos) {
+            int userId = info.id;
+            if (um.isManagedProfile(userId)
+                    && um.getProfileParent(userId).id == currentUser.getIdentifier()) {
+                userManagedProfiles.add(UserHandle.of(userId));
+            }
+        }
+        return userManagedProfiles;
+    }
+
+    private UserHandle getDefaultNoteTaskProfile() {
+        final int userId = Secure.getInt(
+                mContext.getContentResolver(),
+                Secure.DEFAULT_NOTE_TASK_PROFILE,
+                UserHandle.myUserId());
+        return UserHandle.of(userId);
+    }
+
+    @VisibleForTesting
+    UserAdapter.OnClickListener createProfileDialogClickCallback(
+            Intent intent, List<UserHandle> users) {
+        // TODO(b/281659827): improve UX flow for when activity is cancelled
+        return (int position) -> {
+            intent.putExtra(Intent.EXTRA_USER, users.get(position));
+
+            Secure.putInt(mContext.getContentResolver(),
+                    Secure.DEFAULT_NOTE_TASK_PROFILE,
+                    users.get(position).getIdentifier());
+            mContext.startActivity(intent);
+
+            mDialog.dismiss();
+        };
+    }
+
+    private void createAndShowProfileSelectDialog(Intent intent, List<UserHandle> users) {
+        mDialog = ProfileSelectDialog.createDialog(
+                mContext,
+                users,
+                createProfileDialogClickCallback(intent, users));
+        mDialog.show();
     }
 
     /**
@@ -255,5 +339,4 @@ public class StylusDevicesController extends AbstractPreferenceController implem
 
         return false;
     }
-
 }

@@ -101,7 +101,7 @@ public class StorageWizardMigrateConfirm extends StorageWizardBase {
         final LockPatternUtils lpu = new LockPatternUtils(this);
         if (StorageManager.isFileEncrypted()) {
             for (UserInfo user : getSystemService(UserManager.class).getUsers()) {
-                if (StorageManager.isUserKeyUnlocked(user.id)) {
+                if (StorageManager.isCeStorageUnlocked(user.id)) {
                     continue;
                 }
                 if (!lpu.isSecure(user.id)) {

@@ -40,6 +40,31 @@
         android:key="buttons"
         android:selectable="false"/>
 
+    <!-- Hotspot device details category -->
+    <PreferenceCategory
+        android:key="hotspot_device_details_category"
+        android:title="@string/hotspot_device_details_category"
+        settings:isPreferenceVisible="false">
+        <Preference
+            android:key="hotspot_device_details_internet_source"
+            android:title="@string/hotspot_device_details_internet_source"
+            android:selectable="false"
+            settings:enableCopying="true"/>
+        <Preference
+            android:key="hotspot_device_details_battery"
+            android:icon="@drawable/ic_battery_full"
+            android:title="@string/power_usage_summary_title"
+            android:selectable="false"
+            settings:enableCopying="true"/>
+    </PreferenceCategory>
+
+    <!-- Hotspot connection category -->
+    <PreferenceCategory
+        android:key="hotspot_connection_category"
+        android:title="@string/hotspot_connection_category"
+        settings:isPreferenceVisible="false">
+    </PreferenceCategory>
+
     <!-- General Details Preferences -->
     <Preference
         android:key="signal_strength"

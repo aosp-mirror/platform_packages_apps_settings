@@ -27,7 +27,13 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.android.settings.R;
 import com.android.settings.Utils;
 
 public final class PasswordUtils extends com.android.settingslib.Utils {
@@ -95,6 +101,27 @@ public final class PasswordUtils extends com.android.settingslib.Utils {
                     exceptionTypeId);
         } catch (RemoteException e) {
             Log.v(TAG, "Could not talk to activity manager.", e);
+        }
+    }
+
+    /** Setup screen lock options button under the Glif Header. */
+    public static void setupScreenLockOptionsButton(Context context, View view, Button optButton) {
+        final LinearLayout headerLayout = view.findViewById(
+                R.id.sud_layout_header);
+        final TextView sucTitleView = headerLayout.findViewById(R.id.suc_layout_title);
+        if (headerLayout != null && sucTitleView != null) {
+            final ViewGroup.MarginLayoutParams layoutTitleParams =
+                    (ViewGroup.MarginLayoutParams) sucTitleView.getLayoutParams();
+            final ViewGroup.MarginLayoutParams lp = new ViewGroup.MarginLayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT);
+            lp.leftMargin = layoutTitleParams.leftMargin;
+            lp.topMargin = (int) context.getResources().getDimensionPixelSize(
+                    R.dimen.screen_lock_options_button_margin_top);
+            optButton.setPadding(0, 0, 0, 0);
+            optButton.setLayoutParams(lp);
+            optButton.setText(context.getString(R.string.setup_lock_settings_options_button_label));
+            headerLayout.addView(optButton);
         }
     }
 }

@@ -18,11 +18,15 @@ package com.android.settings.wifi;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.net.wifi.sharedconnectivity.app.NetworkProviderInfo;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -31,6 +35,7 @@ import androidx.preference.PreferenceViewHolder;
 
 import com.android.settingslib.R;
 import com.android.settingslib.wifi.WifiUtils;
+import com.android.wifitrackerlib.HotspotNetworkEntry;
 import com.android.wifitrackerlib.WifiEntry;
 
 import org.junit.Before;
@@ -51,6 +56,8 @@ public class WifiEntryPreferenceTest {
 
     @Mock
     private WifiEntry mMockWifiEntry;
+    @Mock
+    private HotspotNetworkEntry mHotspotNetworkEntry;
     @Mock
     private WifiUtils.InternetIconInjector mMockIconInjector;
 
@@ -255,5 +262,27 @@ public class WifiEntryPreferenceTest {
     @Test
     public void getSecondTargetResId_shouldNotReturnZero() {
         assertThat(mPref.getSecondTargetResId()).isNotEqualTo(0);
+    }
+
+    @Test
+    public void refresh_itsHotspotNetworkEntry_shouldUpdateHotspotIcon() {
+        int deviceType = NetworkProviderInfo.DEVICE_TYPE_PHONE;
+        when(mHotspotNetworkEntry.getDeviceType()).thenReturn(deviceType);
+        WifiEntryPreference pref = spy(
+                new WifiEntryPreference(mContext, mHotspotNetworkEntry, mMockIconInjector));
+
+        pref.refresh();
+
+        verify(pref).updateHotspotIcon(deviceType);
+    }
+
+    @Test
+    public void refresh_notHotspotNetworkEntry_shouldNotUpdateHotspotIcon() {
+        WifiEntryPreference pref = spy(
+                new WifiEntryPreference(mContext, mMockWifiEntry, mMockIconInjector));
+
+        pref.refresh();
+
+        verify(pref, never()).updateHotspotIcon(anyInt());
     }
 }

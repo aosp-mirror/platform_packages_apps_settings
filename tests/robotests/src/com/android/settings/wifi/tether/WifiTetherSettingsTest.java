@@ -23,6 +23,7 @@ import static android.view.View.VISIBLE;
 
 import static com.android.settings.wifi.WifiUtils.setCanShowWifiHotspotCached;
 import static com.android.settings.wifi.repository.WifiHotspotRepository.BAND_2GHZ_5GHZ_6GHZ;
+import static com.android.settings.wifi.tether.WifiTetherSettings.KEY_INSTANT_HOTSPOT;
 import static com.android.settings.wifi.tether.WifiTetherSettings.KEY_WIFI_HOTSPOT_SECURITY;
 import static com.android.settings.wifi.tether.WifiTetherSettings.KEY_WIFI_HOTSPOT_SPEED;
 
@@ -90,6 +91,7 @@ public class WifiTetherSettingsTest {
     private static final String[] WIFI_REGEXS = {"wifi_regexs"};
     private static final String SSID = "ssid";
     private static final String PASSWORD = "password";
+    private static final String SUMMARY = "summary";
 
     @Rule
     public final MockitoRule mMockitoRule = MockitoJUnit.rule();
@@ -133,6 +135,10 @@ public class WifiTetherSettingsTest {
     private WifiTetherAutoOffPreferenceController mWifiTetherAutoOffPreferenceController;
     @Mock
     private WifiTetherMaximizeCompatibilityPreferenceController mMaxCompatibilityPrefController;
+    @Mock
+    private Preference mInstantHotspot;
+    @Mock
+    private LiveData<String> mInstantHotspotSummary;
 
     private WifiTetherSettings mSettings;
 
@@ -146,6 +152,7 @@ public class WifiTetherSettingsTest {
         doReturn(mTetheringManager).when(mContext).getSystemService(Context.TETHERING_SERVICE);
         doReturn(WIFI_REGEXS).when(mTetheringManager).getTetherableWifiRegexs();
         doReturn(mUserManager).when(mContext).getSystemService(Context.USER_SERVICE);
+        doReturn(true).when(mUserManager).isAdminUser();
         when(mWifiRestriction.isTetherAvailable(mContext)).thenReturn(true);
         when(mWifiRestriction.isHotspotAvailable(mContext)).thenReturn(true);
 
@@ -154,8 +161,10 @@ public class WifiTetherSettingsTest {
         when(provider.getWifiTetherViewModel(mock(ViewModelStoreOwner.class)))
                 .thenReturn(mWifiTetherViewModel);
         when(mWifiTetherViewModel.isSpeedFeatureAvailable()).thenReturn(false);
+        when(mWifiTetherViewModel.isInstantHotspotFeatureAvailable()).thenReturn(true);
         when(mWifiTetherViewModel.getSecuritySummary()).thenReturn(mSecuritySummary);
         when(mWifiTetherViewModel.getSpeedSummary()).thenReturn(mSpeedSummary);
+        when(mWifiTetherViewModel.getInstantHotspotSummary()).thenReturn(mInstantHotspotSummary);
 
         mSettings = spy(new WifiTetherSettings(mWifiRestriction));
         mSettings.mMainSwitchBar = mMainSwitchBar;
@@ -171,6 +180,8 @@ public class WifiTetherSettingsTest {
         mSettings.mWifiTetherViewModel = mWifiTetherViewModel;
         when(mSettings.findPreference(KEY_WIFI_HOTSPOT_SECURITY)).thenReturn(mWifiHotspotSecurity);
         when(mSettings.findPreference(KEY_WIFI_HOTSPOT_SPEED)).thenReturn(mWifiHotspotSpeed);
+        when(mSettings.findPreference(KEY_INSTANT_HOTSPOT)).thenReturn(mInstantHotspot);
+        mSettings.mInstantHotspot = mInstantHotspot;
     }
 
     @Test
@@ -185,9 +196,21 @@ public class WifiTetherSettingsTest {
     }
 
     @Test
+    @Config(shadows = ShadowRestrictedDashboardFragment.class)
+    public void onCreate_uiIsRestricted_shouldNotGetViewModel() {
+        mSettings.mWifiTetherViewModel = null;
+        when(mWifiRestriction.isHotspotAvailable(mContext)).thenReturn(false);
+
+        mSettings.onCreate(null);
+
+        assertThat(mSettings.mWifiTetherViewModel).isNull();
+    }
+
+    @Test
     @Config(shadows = ShadowFragment.class)
     public void onStart_uiIsRestricted_removeAllPreferences() {
         spyWifiTetherSettings();
+        mSettings.mUnavailable = true;
 
         mSettings.onStart();
 
@@ -306,11 +329,19 @@ public class WifiTetherSettingsTest {
     }
 
     @Test
-    public void isPageSearchEnabled_canShowWifiHotspot_returnTrue() {
+    public void isPageSearchEnabled_allReady_returnTrue() {
         setCanShowWifiHotspotCached(true);
 
         assertThat(WifiTetherSettings.SEARCH_INDEX_DATA_PROVIDER.isPageSearchEnabled(mContext))
                 .isTrue();
+    }
+
+    @Test
+    public void isPageSearchEnabled_isNotAdminUser_returnFalse() {
+        doReturn(false).when(mUserManager).isAdminUser();
+
+        assertThat(WifiTetherSettings.SEARCH_INDEX_DATA_PROVIDER.isPageSearchEnabled(mContext))
+                .isFalse();
     }
 
     @Test
@@ -349,6 +380,47 @@ public class WifiTetherSettingsTest {
 
         verify(mMainSwitchBar).setVisibility(INVISIBLE);
         verify(mSettings).setLoading(true, false);
+    }
+
+    @Test
+    public void setupInstantHotspot_featureNotAvailable_doNothing() {
+        mSettings.setupInstantHotspot(false /* isFeatureAvailable */);
+
+        verify(mSettings, never()).findPreference(KEY_INSTANT_HOTSPOT);
+        verify(mWifiTetherViewModel, never()).getInstantHotspotSummary();
+    }
+
+    @Test
+    public void setupInstantHotspot_featureAvailable_doSetup() {
+        when(mWifiTetherViewModel.isInstantHotspotFeatureAvailable()).thenReturn(true);
+
+        mSettings.setupInstantHotspot(true /* isFeatureAvailable */);
+
+        verify(mSettings).findPreference(KEY_INSTANT_HOTSPOT);
+        verify(mInstantHotspotSummary).observe(any(), any());
+        verify(mInstantHotspot).setOnPreferenceClickListener(any());
+    }
+
+    @Test
+    public void onInstantHotspotChanged_nullRecord_setVisibleFalse() {
+        mSettings.onInstantHotspotChanged(null);
+
+        verify(mInstantHotspot).setVisible(false);
+    }
+
+    @Test
+    public void onInstantHotspotChanged_summaryNull_setVisibleFalse() {
+        mSettings.onInstantHotspotChanged(null);
+
+        verify(mInstantHotspot).setVisible(false);
+    }
+
+    @Test
+    public void onInstantHotspotChanged_summaryNotNull_setVisibleAndSummary() {
+        mSettings.onInstantHotspotChanged(SUMMARY);
+
+        verify(mInstantHotspot).setVisible(true);
+        verify(mInstantHotspot).setSummary(SUMMARY);
     }
 
     @Test
@@ -418,6 +490,11 @@ public class WifiTetherSettingsTest {
         @Implementation
         public void onCreate(Bundle icicle) {
             // do nothing
+        }
+
+        @Implementation
+        public boolean isUiRestricted() {
+            return false;
         }
     }
 }

@@ -18,8 +18,10 @@ package com.android.settings.wifi.slice;
 
 import static android.app.slice.Slice.HINT_LIST_ITEM;
 import static android.app.slice.SliceItem.FORMAT_SLICE;
+import static android.net.wifi.sharedconnectivity.app.NetworkProviderInfo.DEVICE_TYPE_PHONE;
 
 import static com.android.settings.wifi.slice.WifiSlice.DEFAULT_EXPANDED_ROW_COUNT;
+import static com.android.settingslib.wifi.WifiUtils.getHotspotIconResource;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -49,6 +51,7 @@ import com.android.settings.R;
 import com.android.settings.slices.SliceBackgroundWorker;
 import com.android.settings.testutils.SliceTester;
 import com.android.settings.testutils.shadow.ShadowWifiSlice;
+import com.android.settings.wifi.WifiUtils;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiEntry.ConnectedState;
 
@@ -333,6 +336,27 @@ public class WifiSliceTest {
         mWifiSlice.onNotifyChange(intent);
 
         assertThat(wifiManager.getWifiState()).isEqualTo(WifiManager.WIFI_STATE_ENABLED);
+    }
+
+    @Test
+    public void getWifiIconResId_isInstantHotspotNetwork_returnHotspotIcon() {
+        WifiSliceItem wifiSliceItem = mock(WifiSliceItem.class);
+        when(wifiSliceItem.isInstantHotspotNetwork()).thenReturn(true);
+        when(wifiSliceItem.getInstantHotspotDeviceType()).thenReturn(DEVICE_TYPE_PHONE);
+
+        assertThat(mWifiSlice.getWifiIconResId(wifiSliceItem))
+                .isEqualTo(getHotspotIconResource(DEVICE_TYPE_PHONE));
+    }
+
+    @Test
+    public void getWifiIconResId_notInstantHotspotNetwork_returnInternetIcon() {
+        WifiSliceItem wifiSliceItem = mock(WifiSliceItem.class);
+        when(wifiSliceItem.isInstantHotspotNetwork()).thenReturn(false);
+        when(wifiSliceItem.getLevel()).thenReturn(WifiEntry.WIFI_LEVEL_MAX);
+        when(wifiSliceItem.shouldShowXLevelIcon()).thenReturn(false);
+
+        assertThat(mWifiSlice.getWifiIconResId(wifiSliceItem))
+                .isEqualTo(WifiUtils.getInternetIconResource(WifiEntry.WIFI_LEVEL_MAX, false));
     }
 
     @Implements(SliceBackgroundWorker.class)

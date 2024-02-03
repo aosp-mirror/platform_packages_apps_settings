@@ -79,6 +79,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
 
     /** Whether to enable the app_copying fragment. */
     private static final boolean SHOW_APP_COPYING_PREF = false;
+    private static final int MESSAGE_PADDING = 20;
 
     private UserManager mUserManager;
     private UserCapabilities mUserCaps;
@@ -274,6 +275,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                 context.getDrawable(com.android.settingslib.R.drawable.ic_admin_panel_settings));
         dialogHelper.setTitle(R.string.user_revoke_admin_confirm_title);
         dialogHelper.setMessage(R.string.user_revoke_admin_confirm_message);
+        dialogHelper.setMessagePadding(MESSAGE_PADDING);
         dialogHelper.setPositiveButton(R.string.remove, view -> {
             updateUserAdminStatus(false);
             dialogHelper.getDialog().dismiss();
@@ -294,6 +296,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                 context.getDrawable(com.android.settingslib.R.drawable.ic_admin_panel_settings));
         dialogHelper.setTitle(com.android.settingslib.R.string.user_grant_admin_title);
         dialogHelper.setMessage(com.android.settingslib.R.string.user_grant_admin_message);
+        dialogHelper.setMessagePadding(MESSAGE_PADDING);
         dialogHelper.setPositiveButton(com.android.settingslib.R.string.user_grant_admin_button,
                 view -> {
                     updateUserAdminStatus(true);
