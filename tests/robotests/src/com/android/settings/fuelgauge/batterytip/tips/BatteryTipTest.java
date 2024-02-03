@@ -91,7 +91,7 @@ public class BatteryTipTest {
                                 mContext, R.layout.card_preference_layout, /* parent= */ null));
         CardPreference cardPreference = new CardPreference(mContext);
         cardPreference.onBindViewHolder(holder);
-        cardPreference.setPrimaryButtonVisible(true);
+        cardPreference.setPrimaryButtonVisibility(true);
 
         mBatteryTip.updatePreference(cardPreference);
 

@@ -38,7 +38,8 @@ import com.google.common.annotations.VisibleForTesting;
 public class BluetoothDetailsHearingDeviceControlsController extends BluetoothDetailsController
         implements Preference.OnPreferenceClickListener {
 
-    private static final String KEY_DEVICE_CONTROLS_GENERAL_GROUP = "device_controls_general";
+    @VisibleForTesting
+    static final String KEY_DEVICE_CONTROLS_GENERAL_GROUP = "device_controls_general";
     @VisibleForTesting
     static final String KEY_HEARING_DEVICE_CONTROLS = "hearing_device_controls";
 
