@@ -158,7 +158,9 @@ public class AudioSharingDialogFragmentTest {
     @Test
     @RequiresFlagsEnabled(Flags.FLAG_ENABLE_LE_AUDIO_SHARING)
     public void onCreateDialog_singleConnectedDevice_dialogDismiss() {
-        mFragment.show(mParent, new ArrayList<>(), (item) -> {});
+        ArrayList<AudioSharingDeviceItem> list = new ArrayList<>();
+        list.add(TEST_DEVICE_ITEM1);
+        mFragment.show(mParent, list, (item) -> {});
         shadowMainLooper().idle();
         AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         ShadowAlertDialogCompat shadowDialog = ShadowAlertDialogCompat.shadowOf(dialog);
@@ -170,10 +172,12 @@ public class AudioSharingDialogFragmentTest {
     @Test
     @RequiresFlagsEnabled(Flags.FLAG_ENABLE_LE_AUDIO_SHARING)
     public void onCreateDialog_singleConnectedDevice_shareClicked() {
+        ArrayList<AudioSharingDeviceItem> list = new ArrayList<>();
+        list.add(TEST_DEVICE_ITEM1);
         AtomicBoolean isShareBtnClicked = new AtomicBoolean(false);
         mFragment.show(
                 mParent,
-                new ArrayList<>(),
+                list,
                 (item) -> {
                     isShareBtnClicked.set(true);
                 });

@@ -22,8 +22,11 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
 import android.bluetooth.BluetoothStatusCodes;
 import android.content.Context;
+import android.provider.Settings;
 import android.util.Log;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 
 import com.android.settings.flags.Flags;
 import com.android.settingslib.bluetooth.BluetoothUtils;
@@ -113,20 +116,7 @@ public class AudioSharingUtils {
             boolean filterByInSharing) {
         List<CachedBluetoothDevice> orderedDevices = new ArrayList<>();
         for (List<CachedBluetoothDevice> devices : groupedConnectedDevices.values()) {
-            CachedBluetoothDevice leadDevice = null;
-            for (CachedBluetoothDevice device : devices) {
-                if (!device.getMemberDevice().isEmpty()) {
-                    leadDevice = device;
-                    break;
-                }
-            }
-            if (leadDevice == null && !devices.isEmpty()) {
-                leadDevice = devices.get(0);
-                Log.d(
-                        TAG,
-                        "Empty member device, pick arbitrary device as the lead: "
-                                + leadDevice.getDevice().getAnonymizedAddress());
-            }
+            @Nullable CachedBluetoothDevice leadDevice = getLeadDevice(devices);
             if (leadDevice == null) {
                 Log.d(TAG, "Skip due to no lead device");
                 continue;
@@ -164,6 +154,29 @@ public class AudioSharingUtils {
                             : d1.getName().compareTo(d2.getName());
                 });
         return orderedDevices;
+    }
+
+    /**
+     * Get the lead device from a list of devices with same group id.
+     *
+     * @param devices A list of devices with same group id.
+     * @return The lead device
+     */
+    @Nullable
+    public static CachedBluetoothDevice getLeadDevice(
+            @NonNull List<CachedBluetoothDevice> devices) {
+        if (devices.isEmpty()) return null;
+        for (CachedBluetoothDevice device : devices) {
+            if (!device.getMemberDevice().isEmpty()) {
+                return device;
+            }
+        }
+        CachedBluetoothDevice leadDevice = devices.get(0);
+        Log.d(
+                TAG,
+                "No lead device in the group, pick arbitrary device as the lead: "
+                        + leadDevice.getDevice().getAnonymizedAddress());
+        return leadDevice;
     }
 
     /**
@@ -268,7 +281,7 @@ public class AudioSharingUtils {
         var groupedDevices = fetchConnectedDevicesByGroupId(manager);
         var leadDevices = buildOrderedConnectedLeadDevices(manager, groupedDevices, false);
 
-        if (!leadDevices.isEmpty() && AudioSharingUtils.isActiveLeAudioDevice(leadDevices.get(0))) {
+        if (!leadDevices.isEmpty() && isActiveLeAudioDevice(leadDevices.get(0))) {
             return Optional.of(leadDevices.get(0));
         } else {
             Log.w(TAG, "getActiveSinksOnAssistant(): No active lead device!");
@@ -378,5 +391,18 @@ public class AudioSharingUtils {
         }
         Log.d(TAG, "getGroupId return invalid id for device: " + anonymizedAddress);
         return BluetoothCsipSetCoordinator.GROUP_ID_INVALID;
+    }
+
+    /** Get the fallback active group id from SettingsProvider. */
+    public static int getFallbackActiveGroupId(@NonNull Context context) {
+        return Settings.Secure.getInt(
+                context.getContentResolver(),
+                "bluetooth_le_broadcast_fallback_active_group_id",
+                BluetoothCsipSetCoordinator.GROUP_ID_INVALID);
+    }
+
+    /** Post the runnable to main thread. */
+    public static void postOnMainThread(@NonNull Context context, @NonNull Runnable runnable) {
+        context.getMainExecutor().execute(runnable);
     }
 }

@@ -677,7 +677,7 @@ public class DashboardFeatureProviderImplTest {
         preference.performClick();
 
         Intent nextStartedActivity =
-                Shadows.shadowOf((Application) mApplication).peekNextStartedActivity();
+                Shadows.shadowOf(mApplication).peekNextStartedActivity();
         assertThat(nextStartedActivity).isNotNull();
         assertThat(nextStartedActivity.getAction()).isEqualTo("test");
     }
@@ -704,7 +704,7 @@ public class DashboardFeatureProviderImplTest {
                 mActivity.getSupportFragmentManager().findFragmentByTag("select_profile");
         assertThat(dialogFragment).isNotNull();
         Intent nextStartedActivity =
-                Shadows.shadowOf((Application) mApplication).peekNextStartedActivity();
+                Shadows.shadowOf(mApplication).peekNextStartedActivity();
         assertThat(nextStartedActivity).isNull();
     }
 
