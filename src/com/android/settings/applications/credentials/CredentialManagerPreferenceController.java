@@ -46,6 +46,7 @@ import android.provider.Settings;
 import android.service.autofill.AutofillServiceInfo;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.Pair;
 import android.view.View;
 import android.widget.CompoundButton;
 
@@ -77,6 +78,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.Executor;
 
@@ -114,7 +116,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
     private @Nullable String mFlagOverrideForTest = null;
     private @Nullable PreferenceScreen mPreferenceScreen = null;
 
-    private boolean mVisibility = false;
+    private Optional<Boolean> mSimulateHiddenForTests = Optional.empty();
     private boolean mIsWorkProfile = false;
     private boolean mSimulateConnectedForTests = false;
 
@@ -159,7 +161,9 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
             return UNSUPPORTED_ON_DEVICE;
         }
 
-        if (!mVisibility) {
+        // If there is no top provider or any providers in the list then
+        // we should hide this pref.
+        if (isHiddenDueToNoProviderSet()) {
             return CONDITIONALLY_UNAVAILABLE;
         }
 
@@ -378,20 +382,29 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
     }
 
     @VisibleForTesting
-    public void setVisibility(boolean newVisibility) {
-        if (newVisibility == mVisibility) {
-            return;
-        }
-
-        mVisibility = newVisibility;
+    public void forceDelegateRefresh() {
         if (mDelegate != null) {
             mDelegate.forceDelegateRefresh();
         }
     }
 
     @VisibleForTesting
-    public boolean getVisibility() {
-        return mVisibility;
+    public void setSimulateHiddenForTests(Optional<Boolean> simulateHiddenForTests) {
+        mSimulateHiddenForTests = simulateHiddenForTests;
+    }
+
+    @VisibleForTesting
+    public boolean isHiddenDueToNoProviderSet() {
+        return isHiddenDueToNoProviderSet(getProviders());
+    }
+
+    private boolean isHiddenDueToNoProviderSet(
+            Pair<List<CombinedProviderInfo>, CombinedProviderInfo> providerPair) {
+        if (mSimulateHiddenForTests.isPresent()) {
+            return mSimulateHiddenForTests.get();
+        }
+
+        return (providerPair.first.size() == 0 || providerPair.second == null);
     }
 
     @VisibleForTesting
@@ -459,10 +472,11 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         return preference;
     }
 
-    /** Aggregates the list of services and builds a list of UI prefs to show. */
-    @VisibleForTesting
-    public Map<String, CombiPreference> buildPreferenceList(
-            Context context, PreferenceGroup group) {
+    /**
+     * Returns a pair that contains a list of the providers in the first position and the top
+     * provider in the second position.
+     */
+    private Pair<List<CombinedProviderInfo>, CombinedProviderInfo> getProviders() {
         // Get the selected autofill provider. If it is the placeholder then replace it with an
         // empty string.
         String selectedAutofillProvider =
@@ -475,15 +489,25 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         // Get the list of combined providers.
         List<CombinedProviderInfo> providers =
                 CombinedProviderInfo.buildMergedList(
-                        AutofillServiceInfo.getAvailableServices(context, getUser()),
+                        AutofillServiceInfo.getAvailableServices(mContext, getUser()),
                         mServices,
                         selectedAutofillProvider);
+        return new Pair<>(providers, CombinedProviderInfo.getTopProvider(providers));
+    }
 
-        // Get the provider that is displayed at the top. If there is none then hide
-        // everything.
-        CombinedProviderInfo topProvider = CombinedProviderInfo.getTopProvider(providers);
-        if (topProvider == null) {
-            setVisibility(false);
+    /** Aggregates the list of services and builds a list of UI prefs to show. */
+    @VisibleForTesting
+    public @NonNull Map<String, CombiPreference> buildPreferenceList(
+            @NonNull Context context, @NonNull PreferenceGroup group) {
+        // Get the providers and extract the values.
+        Pair<List<CombinedProviderInfo>, CombinedProviderInfo> providerPair = getProviders();
+        CombinedProviderInfo topProvider = providerPair.second;
+        List<CombinedProviderInfo> providers = providerPair.first;
+
+        // If the provider is set to "none" or there are no providers then we should not
+        // return any providers.
+        if (isHiddenDueToNoProviderSet(providerPair)) {
+            forceDelegateRefresh();
             return new HashMap<>();
         }
 
@@ -520,7 +544,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         }
 
         // Set the visibility if we have services.
-        setVisibility(!output.isEmpty());
+        forceDelegateRefresh();
 
         return output;
     }

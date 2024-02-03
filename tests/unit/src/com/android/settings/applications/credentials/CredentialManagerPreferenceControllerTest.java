@@ -17,6 +17,7 @@
 package com.android.settings.applications.credentials;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -55,6 +56,7 @@ import org.junit.runner.RunWith;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 @RunWith(AndroidJUnit4.class)
@@ -121,17 +123,34 @@ public class CredentialManagerPreferenceControllerTest {
                 createControllerWithServices(Lists.newArrayList(createCredentialProviderInfo()));
         controller.setSimulateConnectedForTests(true);
         assertThat(controller.isConnected()).isTrue();
-        controller.setVisibility(true);
-        assertThat(controller.getVisibility()).isTrue();
+        controller.setSimulateHiddenForTests(Optional.of(false));
+        assertThat(controller.isHiddenDueToNoProviderSet()).isFalse();
         assertThat(controller.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_isHidden_returnsConditionallyUnavailable() {
+        CredentialManagerPreferenceController controller =
+                createControllerWithServices(Lists.newArrayList(createCredentialProviderInfo()));
+        controller.setSimulateConnectedForTests(true);
+        assertThat(controller.isConnected()).isTrue();
+        controller.setSimulateHiddenForTests(Optional.of(true));
+        assertThat(controller.isHiddenDueToNoProviderSet()).isTrue();
+        assertThat(controller.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 
     @Test
     public void displayPreference_withServices_preferencesAdded() {
         CredentialManagerPreferenceController controller =
                 createControllerWithServices(Lists.newArrayList(createCredentialProviderInfo()));
+        controller.setSimulateConnectedForTests(true);
+        controller.setSimulateHiddenForTests(Optional.of(false));
+
+        assertThat(controller.isHiddenDueToNoProviderSet()).isFalse();
+        assertThat(controller.isConnected()).isTrue();
+        assertThat(controller.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+
         controller.displayPreference(mScreen);
-        assertThat(controller.isConnected()).isFalse();
         assertThat(mCredentialsPreferenceCategory.getPreferenceCount()).isEqualTo(1);
 
         Preference pref = mCredentialsPreferenceCategory.getPreference(0);
@@ -150,8 +169,8 @@ public class CredentialManagerPreferenceControllerTest {
                 createControllerWithServices(Lists.newArrayList(providerInfo1, providerInfo2));
         controller.setSimulateConnectedForTests(true);
         assertThat(controller.isConnected()).isTrue();
-        controller.setVisibility(true);
-        assertThat(controller.getVisibility()).isTrue();
+        controller.setSimulateHiddenForTests(Optional.of(false));
+        assertThat(controller.isHiddenDueToNoProviderSet()).isFalse();
         assertThat(controller.getAvailabilityStatus()).isEqualTo(AVAILABLE);
 
         // Test the data is correct.
@@ -194,8 +213,8 @@ public class CredentialManagerPreferenceControllerTest {
                                 createCredentialProviderInfo("com.android.provider6", "ClassA")));
         controller.setSimulateConnectedForTests(true);
         assertThat(controller.isConnected()).isTrue();
-        controller.setVisibility(true);
-        assertThat(controller.getVisibility()).isTrue();
+        controller.setSimulateHiddenForTests(Optional.of(false));
+        assertThat(controller.isHiddenDueToNoProviderSet()).isFalse();
         assertThat(controller.getAvailabilityStatus()).isEqualTo(AVAILABLE);
 
         // Ensure that we stay under 5 providers.
@@ -263,8 +282,8 @@ public class CredentialManagerPreferenceControllerTest {
                 createControllerWithServices(Lists.newArrayList(providerInfo1, providerInfo2));
         controller.setSimulateConnectedForTests(true);
         assertThat(controller.isConnected()).isTrue();
-        controller.setVisibility(true);
-        assertThat(controller.getVisibility()).isTrue();
+        controller.setSimulateHiddenForTests(Optional.of(false));
+        assertThat(controller.isHiddenDueToNoProviderSet()).isFalse();
         assertThat(controller.getAvailabilityStatus()).isEqualTo(AVAILABLE);
 
         // Test the data is correct.
@@ -316,9 +335,14 @@ public class CredentialManagerPreferenceControllerTest {
         CredentialManagerPreferenceController controller =
                 createControllerWithServices(
                         Lists.newArrayList(serviceA1, serviceB1, serviceC1, serviceC2, serviceC3));
-        controller.displayPreference(mScreen);
+        controller.setSimulateConnectedForTests(true);
+        controller.setSimulateHiddenForTests(Optional.of(false));
 
-        assertThat(controller.isConnected()).isFalse();
+        assertThat(controller.isHiddenDueToNoProviderSet()).isFalse();
+        assertThat(controller.isConnected()).isTrue();
+        assertThat(controller.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+
+        controller.displayPreference(mScreen);
         assertThat(mCredentialsPreferenceCategory.getPreferenceCount()).isEqualTo(3);
 
         Map<String, CredentialManagerPreferenceController.CombiPreference> prefs =
