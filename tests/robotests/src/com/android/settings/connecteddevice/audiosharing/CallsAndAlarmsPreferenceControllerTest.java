@@ -171,6 +171,7 @@ public class CallsAndAlarmsPreferenceControllerTest {
         mShadowBluetoothAdapter.setEnabled(false);
         mController.displayPreference(mScreen);
         mController.updateVisibility();
+        shadowOf(Looper.getMainLooper()).idle();
         assertThat(mPreference.isVisible()).isFalse();
     }
 
@@ -180,6 +181,7 @@ public class CallsAndAlarmsPreferenceControllerTest {
         mShadowBluetoothAdapter.setEnabled(false);
         mController.displayPreference(mScreen);
         mController.updateVisibility();
+        shadowOf(Looper.getMainLooper()).idle();
         assertThat(mPreference.isVisible()).isFalse();
     }
 
@@ -188,6 +190,7 @@ public class CallsAndAlarmsPreferenceControllerTest {
         when(mBroadcast.isEnabled(any())).thenReturn(false);
         mController.displayPreference(mScreen);
         mController.updateVisibility();
+        shadowOf(Looper.getMainLooper()).idle();
         assertThat(mPreference.isVisible()).isFalse();
     }
 

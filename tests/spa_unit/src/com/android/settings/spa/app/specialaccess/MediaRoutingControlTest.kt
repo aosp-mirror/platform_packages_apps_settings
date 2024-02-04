@@ -24,7 +24,6 @@ import android.companion.AssociationRequest
 import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.platform.test.flag.junit.SetFlagsRule
-import androidx.lifecycle.MutableLiveData
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.media.flags.Flags
@@ -33,6 +32,7 @@ import com.android.settings.testutils.FakeFeatureFactory
 import com.android.settingslib.spaprivileged.model.app.IAppOpsController
 import com.android.settingslib.spaprivileged.template.app.AppOpPermissionRecord
 import com.google.common.truth.Truth.assertThat
+import kotlinx.coroutines.flow.MutableStateFlow
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -223,16 +223,13 @@ class MediaRoutingControlTest {
 
     private class FakeAppOpsController(fakeMode: Int) : IAppOpsController {
 
-        override val mode = MutableLiveData(fakeMode)
+        override val mode = MutableStateFlow(fakeMode)
 
         override fun setAllowed(allowed: Boolean) {
-            if (allowed)
-                mode.postValue(AppOpsManager.MODE_ALLOWED)
-            else
-                mode.postValue(AppOpsManager.MODE_ERRORED)
+            mode.value = if (allowed) AppOpsManager.MODE_ALLOWED else AppOpsManager.MODE_ERRORED
         }
 
-        override fun getMode(): Int = mode.value!!
+        override fun getMode(): Int = mode.value
     }
 
     companion object {
