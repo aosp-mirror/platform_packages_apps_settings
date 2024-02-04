@@ -25,6 +25,8 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
+import com.android.settings.flags.Flags;
+import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 
@@ -99,12 +101,22 @@ public class SavedBluetoothDeviceUpdater extends BluetoothDeviceUpdater
     @Override
     public boolean isFilterMatched(CachedBluetoothDevice cachedDevice) {
         final BluetoothDevice device = cachedDevice.getDevice();
-        Log.d(TAG, "isFilterMatched() device name : " + cachedDevice.getName() +
-                ", is connected : " + device.isConnected() + ", is profile connected : "
-                + cachedDevice.isConnected());
-        return device.getBondState() == BluetoothDevice.BOND_BONDED
-                && (mShowConnectedDevice || (!device.isConnected() && isDeviceInCachedDevicesList(
-                cachedDevice)));
+        boolean isExclusivelyManaged = BluetoothUtils.isExclusivelyManagedBluetoothDevice(mContext,
+                cachedDevice.getDevice());
+        Log.d(TAG, "isFilterMatched() device name : " + cachedDevice.getName()
+                + ", is connected : " + device.isConnected() + ", is profile connected : "
+                + cachedDevice.isConnected() + ", is exclusively managed : "
+                + isExclusivelyManaged);
+        if (Flags.enableHideExclusivelyManagedBluetoothDevice()) {
+            return device.getBondState() == BluetoothDevice.BOND_BONDED
+                    && (mShowConnectedDevice || (!device.isConnected()
+                    && isDeviceInCachedDevicesList(cachedDevice)))
+                    && !isExclusivelyManaged;
+        } else {
+            return device.getBondState() == BluetoothDevice.BOND_BONDED
+                    && (mShowConnectedDevice || (!device.isConnected()
+                    && isDeviceInCachedDevicesList(cachedDevice)));
+        }
     }
 
     @Override
