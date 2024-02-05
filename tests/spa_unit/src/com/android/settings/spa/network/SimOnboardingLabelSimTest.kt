@@ -108,7 +108,7 @@ class SimOnboardingLabelSimTest {
             on { targetSubInfo }.doReturn(SUB_INFO_1)
             on { availableSubInfoList }.doReturn(listOf(SUB_INFO_1, SUB_INFO_2, SUB_INFO_3))
             on { activeSubInfoList }.doReturn(listOf(SUB_INFO_2, SUB_INFO_3))
-            on { getSelectableSubscriptionInfo() }.doReturn(
+            on { getSelectableSubscriptionInfoList() }.doReturn(
                 listOf(
                     SUB_INFO_1,
                     SUB_INFO_2,
@@ -139,7 +139,7 @@ class SimOnboardingLabelSimTest {
             on { targetSubInfo }.doReturn(SUB_INFO_1)
             on { availableSubInfoList }.doReturn(listOf(SUB_INFO_1, SUB_INFO_2, SUB_INFO_3))
             on { activeSubInfoList }.doReturn(listOf(SUB_INFO_2, SUB_INFO_3))
-            on { getSelectableSubscriptionInfo() }.doReturn(
+            on { getSelectableSubscriptionInfoList() }.doReturn(
                 listOf(
                     SUB_INFO_1,
                     SUB_INFO_2,

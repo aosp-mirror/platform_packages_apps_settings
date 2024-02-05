@@ -48,8 +48,6 @@ import com.android.settings.network.helper.SelectableSubscriptions;
 import com.android.settings.network.helper.SubscriptionAnnotation;
 import com.android.settings.network.telephony.DeleteEuiccSubscriptionDialogActivity;
 import com.android.settings.network.telephony.ToggleSubscriptionDialogActivity;
-import com.android.settings.spa.SpaActivity;
-import com.android.settings.spa.network.SimOnboardingPageProvider;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -546,8 +544,7 @@ public class SubscriptionUtil {
             return;
         }
         if (enable && Flags.isDualSimOnboardingEnabled()) {
-            String route = SimOnboardingPageProvider.INSTANCE.getRoute(subId);
-            SpaActivity.startSpaActivity(context, route);
+            SimOnboardingActivity.startSimOnboardingActivity(context, subId);
             return;
         }
         context.startActivity(ToggleSubscriptionDialogActivity.getIntent(context, subId, enable));
