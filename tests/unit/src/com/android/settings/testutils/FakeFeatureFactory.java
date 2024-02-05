@@ -101,18 +101,20 @@ public class FakeFeatureFactory extends FeatureFactory {
     public FastPairFeatureProvider mFastPairFeatureProvider;
     public PrivateSpaceLoginFeatureProvider mPrivateSpaceLoginFeatureProvider;
 
-    /**
-     * Call this in {@code @Before} method of the test class to use fake factory.
-     */
+    /** Call this in {@code @Before} method of the test class to use fake factory. */
     public static FakeFeatureFactory setupForTest() {
         FakeFeatureFactory factory = new FakeFeatureFactory();
-        setFactory(getAppContext(), factory);
+        try {
+            setFactory(getAppContext(), factory);
+        } catch (NoSuchMethodError ex) {
+            // The getAppContext() @JvmStatic method doesn't appear to generated in AOSP. Falling
+            // back to using the companion object method instead.
+            setFactory(FeatureFactory.Companion.getAppContext(), factory);
+        }
         return factory;
     }
 
-    /**
-     * FeatureFactory constructor.
-     */
+    /** FeatureFactory constructor. */
     public FakeFeatureFactory() {
         supportFeatureProvider = mock(SupportFeatureProvider.class);
         metricsFeatureProvider = mock(MetricsFeatureProvider.class);
