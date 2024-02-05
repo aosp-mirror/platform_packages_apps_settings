@@ -1,4 +1,5 @@
 package {
+    default_team: "trendy_team_android_settings_app",
     default_applicable_licenses: ["packages_apps_Settings_license"],
 }
 
@@ -23,8 +24,8 @@ java_library {
 genrule {
     name: "statslog-settings-java-gen",
     tools: ["stats-log-api-gen"],
-    cmd: "$(location stats-log-api-gen) --java $(out) --module settings"
-        + " --javaPackage com.android.settings.core.instrumentation --javaClass SettingsStatsLog",
+    cmd: "$(location stats-log-api-gen) --java $(out) --module settings" +
+        " --javaPackage com.android.settings.core.instrumentation --javaClass SettingsStatsLog",
     out: ["com/android/settings/core/instrumentation/SettingsStatsLog.java"],
 }
 
@@ -43,7 +44,6 @@ java_library {
     ],
 }
 
-
 // Build the Settings APK
 android_library {
     name: "Settings-core",
@@ -54,7 +54,10 @@ android_library {
         "SpaPrivilegedLib-defaults",
     ],
 
-    srcs: ["src/**/*.java", "src/**/*.kt"],
+    srcs: [
+        "src/**/*.java",
+        "src/**/*.kt",
+    ],
     resource_dirs: [
         "res",
         "res-export", // for external usage
@@ -158,7 +161,10 @@ filegroup {
 // separately for different modules.
 filegroup {
     name: "Settings_srcs",
-    srcs: ["src/**/*.java", "src/**/*.kt"],
+    srcs: [
+        "src/**/*.java",
+        "src/**/*.kt",
+    ],
 }
 
 // Deprecated. Do not depend on this, only depend on Settings-core, and its manifest is also
