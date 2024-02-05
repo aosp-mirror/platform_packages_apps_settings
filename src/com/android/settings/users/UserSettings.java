@@ -1771,6 +1771,9 @@ public class UserSettings extends SettingsPreferenceFragment
                             .updateNonIndexableKeys(niks);
                     new AutoSyncWorkDataPreferenceController(context, null /* parent */)
                             .updateNonIndexableKeys(niks);
+                    if (suppressAllPage) {
+                        niks.add(KEY_ALLOW_MULTIPLE_USERS);
+                    }
                     return niks;
                 }
             };
