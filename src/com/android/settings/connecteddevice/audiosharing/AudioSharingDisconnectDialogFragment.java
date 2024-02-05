@@ -19,13 +19,17 @@ package com.android.settings.connecteddevice.audiosharing;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -33,8 +37,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class AudioSharingDisconnectDialogFragment extends InstrumentedDialogFragment {
     private static final String TAG = "AudioSharingDisconnectDialog";
@@ -56,6 +62,7 @@ public class AudioSharingDisconnectDialogFragment extends InstrumentedDialogFrag
     }
 
     private static DialogEventListener sListener;
+    @Nullable private static CachedBluetoothDevice sNewDevice;
 
     @Override
     public int getMetricsCategory() {
@@ -65,35 +72,78 @@ public class AudioSharingDisconnectDialogFragment extends InstrumentedDialogFrag
     /**
      * Display the {@link AudioSharingDisconnectDialogFragment} dialog.
      *
+     * <p>If the dialog is showing for the same group, update the dialog event listener.
+     *
      * @param host The Fragment this dialog will be hosted.
      * @param deviceItems The existing connected device items in audio sharing session.
-     * @param newDeviceName The name of the latest connected device triggered this dialog.
+     * @param newDevice The latest connected device triggered this dialog.
      * @param listener The callback to handle the user action on this dialog.
      */
     public static void show(
             Fragment host,
             ArrayList<AudioSharingDeviceItem> deviceItems,
-            String newDeviceName,
+            CachedBluetoothDevice newDevice,
             DialogEventListener listener) {
         if (!AudioSharingUtils.isFeatureEnabled()) return;
         final FragmentManager manager = host.getChildFragmentManager();
+        Fragment dialog = manager.findFragmentByTag(TAG);
+        if (dialog != null
+                && ((DialogFragment) dialog).getDialog() != null
+                && ((DialogFragment) dialog).getDialog().isShowing()) {
+            int newGroupId = AudioSharingUtils.getGroupId(newDevice);
+            if (sNewDevice != null && newGroupId == AudioSharingUtils.getGroupId(sNewDevice)) {
+                Log.d(
+                        TAG,
+                        String.format(
+                                Locale.US,
+                                "Dialog is showing for the same device group %d, "
+                                        + "update the content.",
+                                newGroupId));
+                sListener = listener;
+                sNewDevice = newDevice;
+                return;
+            } else {
+                Log.d(
+                        TAG,
+                        String.format(
+                                Locale.US,
+                                "Dialog is showing for new device group %d, "
+                                        + "dismiss current dialog.",
+                                newGroupId));
+                ((DialogFragment) dialog).dismiss();
+            }
+        }
         sListener = listener;
+        sNewDevice = newDevice;
+        Log.d(TAG, "Show up the dialog.");
         final Bundle bundle = new Bundle();
         bundle.putParcelableArrayList(BUNDLE_KEY_DEVICE_TO_DISCONNECT_ITEMS, deviceItems);
-        bundle.putString(BUNDLE_KEY_NEW_DEVICE_NAME, newDeviceName);
-        AudioSharingDisconnectDialogFragment dialog = new AudioSharingDisconnectDialogFragment();
-        dialog.setArguments(bundle);
-        dialog.show(manager, TAG);
+        bundle.putString(BUNDLE_KEY_NEW_DEVICE_NAME, newDevice.getName());
+        AudioSharingDisconnectDialogFragment dialogFrag =
+                new AudioSharingDisconnectDialogFragment();
+        dialogFrag.setArguments(bundle);
+        dialogFrag.show(manager, TAG);
+    }
+
+    /** Return the tag of {@link AudioSharingDisconnectDialogFragment} dialog. */
+    public static @NonNull String tag() {
+        return TAG;
+    }
+
+    /** Get the latest connected device which triggers the dialog. */
+    public @Nullable CachedBluetoothDevice getDevice() {
+        return sNewDevice;
     }
 
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
+    public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         Bundle arguments = requireArguments();
         ArrayList<AudioSharingDeviceItem> deviceItems =
                 arguments.getParcelableArrayList(BUNDLE_KEY_DEVICE_TO_DISCONNECT_ITEMS);
         final AlertDialog.Builder builder =
                 new AlertDialog.Builder(getActivity()).setCancelable(false);
         LayoutInflater inflater = LayoutInflater.from(builder.getContext());
+        // Set custom title for the dialog.
         View customTitle = inflater.inflate(R.layout.dialog_custom_title_audio_sharing, null);
         ImageView icon = customTitle.findViewById(R.id.title_icon);
         icon.setImageResource(R.drawable.ic_bt_audio_sharing);
@@ -115,10 +165,7 @@ public class AudioSharingDisconnectDialogFragment extends InstrumentedDialogFrag
         recyclerView.setLayoutManager(
                 new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         Button cancelBtn = rootView.findViewById(R.id.cancel_btn);
-        cancelBtn.setOnClickListener(
-                v -> {
-                    dismiss();
-                });
+        cancelBtn.setOnClickListener(v -> dismiss());
         AlertDialog dialog = builder.setCustomTitle(customTitle).setView(rootView).create();
         dialog.setCanceledOnTouchOutside(false);
         return dialog;
