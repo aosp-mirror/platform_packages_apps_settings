@@ -413,6 +413,8 @@ public class LockScreenSafetySourceTest {
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         when(mScreenLockPreferenceDetailsUtils.isPasswordQualityManaged(anyInt(), any()))
                 .thenReturn(false);
+        when(mScreenLockPreferenceDetailsUtils.isLockPatternSecure()).thenReturn(true);
+        when(mScreenLockPreferenceDetailsUtils.shouldShowGearMenu()).thenReturn(true);
 
         LockScreenSafetySource.setSafetySourceData(
                 mApplicationContext, mScreenLockPreferenceDetailsUtils, EVENT_SOURCE_STATE_CHANGED);
