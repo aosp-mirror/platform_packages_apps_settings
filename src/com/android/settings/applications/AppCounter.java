@@ -22,11 +22,14 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.ApplicationInfoFlags;
 import android.content.pm.UserInfo;
 import android.os.AsyncTask;
+import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.os.UserManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
+
+import com.android.settings.flags.Flags;
 
 import java.util.List;
 
@@ -54,7 +57,7 @@ public abstract class AppCounter extends AsyncTask<Void, Void, Integer> {
         for (UserInfo user : mUm.getProfiles(UserHandle.myUserId())) {
             long flags = PackageManager.GET_DISABLED_COMPONENTS
                     | PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS
-                    | (mFf.archiving() ? PackageManager.MATCH_ARCHIVED_PACKAGES : 0)
+                    | (isArchivingEnabled() ? PackageManager.MATCH_ARCHIVED_PACKAGES : 0)
                     | (user.isAdmin() ? PackageManager.MATCH_ANY_USER : 0);
             ApplicationInfoFlags infoFlags = ApplicationInfoFlags.of(flags);
             final List<ApplicationInfo> list =
@@ -66,6 +69,11 @@ public abstract class AppCounter extends AsyncTask<Void, Void, Integer> {
             }
         }
         return count;
+    }
+
+    private boolean isArchivingEnabled() {
+        return mFf.archiving() || SystemProperties.getBoolean("pm.archiving.enabled", false)
+                || Flags.appArchiving();
     }
 
     @Override

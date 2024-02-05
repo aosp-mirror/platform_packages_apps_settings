@@ -17,8 +17,8 @@
 package com.android.settings.spa.app.appinfo
 
 import android.content.pm.ApplicationInfo
-import android.content.pm.FeatureFlags
-import android.content.pm.FeatureFlagsImpl
+import android.content.pm.FeatureFlags as PmFeatureFlags
+import android.content.pm.FeatureFlagsImpl as PmFeatureFlagsImpl
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -34,7 +34,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 fun AppButtons(
     packageInfoPresenter: PackageInfoPresenter,
     isHibernationSwitchEnabledStateFlow: MutableStateFlow<Boolean>,
-    featureFlags: FeatureFlags = FeatureFlagsImpl()
+    featureFlags: PmFeatureFlags = PmFeatureFlagsImpl()
 ) {
     if (remember(packageInfoPresenter) { packageInfoPresenter.isMainlineModule() }) return
     val presenter = remember {
@@ -53,7 +53,7 @@ private fun PackageInfoPresenter.isMainlineModule(): Boolean =
 private class AppButtonsPresenter(
     private val packageInfoPresenter: PackageInfoPresenter,
     isHibernationSwitchEnabledStateFlow: MutableStateFlow<Boolean>,
-    private val featureFlags: FeatureFlags
+    private val featureFlags: PmFeatureFlags
 ) {
     private val appLaunchButton = AppLaunchButton(packageInfoPresenter)
     private val appInstallButton = AppInstallButton(packageInfoPresenter)
