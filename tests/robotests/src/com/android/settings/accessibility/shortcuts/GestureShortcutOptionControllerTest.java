@@ -16,9 +16,10 @@
 
 package com.android.settings.accessibility.shortcuts;
 
+import static com.android.settings.testutils.AccessibilityTestUtils.setupMockAccessibilityManager;
+
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
@@ -148,8 +149,7 @@ public class GestureShortcutOptionControllerTest {
     }
 
     private void enableTouchExploration(boolean enable) {
-        AccessibilityManager am = mock(AccessibilityManager.class);
-        when(mContext.getSystemService(AccessibilityManager.class)).thenReturn(am);
+        AccessibilityManager am = setupMockAccessibilityManager(mContext);
         when(am.isTouchExplorationEnabled()).thenReturn(enable);
     }
 }

@@ -18,22 +18,29 @@ package com.android.settings.accessibility.shortcuts;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
+
 import android.content.ComponentName;
 import android.content.Context;
 import android.icu.text.MessageFormat;
-import android.platform.test.annotations.RequiresFlagsDisabled;
-import android.platform.test.annotations.RequiresFlagsEnabled;
-import android.platform.test.flag.junit.CheckFlagsRule;
-import android.platform.test.flag.junit.DeviceFlagsValueProvider;
+import android.os.UserHandle;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
+import android.view.accessibility.AccessibilityManager;
 
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.internal.accessibility.common.ShortcutConstants;
 import com.android.server.accessibility.Flags;
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityUtil;
+import com.android.settings.testutils.AccessibilityTestUtils;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -44,26 +51,28 @@ import org.robolectric.RobolectricTestRunner;
 import java.util.Set;
 
 /**
- * Tests for {@link TwoFingersDoubleTapShortcutOptionController}
+ * Tests for {@link TwoFingerDoubleTapShortcutOptionController}
  */
 @RunWith(RobolectricTestRunner.class)
-public class TwoFingersDoubleTapShortcutOptionControllerTest {
+public class TwoFingerDoubleTapShortcutOptionControllerTest {
     private static final String PREF_KEY = "prefKey";
     private static final String TARGET_MAGNIFICATION =
             "com.android.server.accessibility.MagnificationController";
     private static final String TARGET_FAKE =
             new ComponentName("FakePackage", "FakeClass").flattenToString();
     @Rule
-    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
-    private final Context mContext = ApplicationProvider.getApplicationContext();
-    private TwoFingersDoubleTapShortcutOptionController mController;
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+    private final Context mContext = spy(ApplicationProvider.getApplicationContext());
+    private AccessibilityManager mAccessibilityManager;
+    private TwoFingerDoubleTapShortcutOptionController mController;
     private ShortcutOptionPreference mShortcutOptionPreference;
 
     private PreferenceScreen mPreferenceScreen;
 
     @Before
     public void setUp() {
-        mController = new TwoFingersDoubleTapShortcutOptionController(mContext, PREF_KEY);
+        mAccessibilityManager = AccessibilityTestUtils.setupMockAccessibilityManager(mContext);
+        mController = new TwoFingerDoubleTapShortcutOptionController(mContext, PREF_KEY);
         mController.setShortcutTargets(Set.of(TARGET_MAGNIFICATION));
         mShortcutOptionPreference = new ShortcutOptionPreference(mContext);
         mShortcutOptionPreference.setKey(PREF_KEY);
@@ -84,30 +93,30 @@ public class TwoFingersDoubleTapShortcutOptionControllerTest {
                         2));
     }
 
-    @RequiresFlagsDisabled(Flags.FLAG_ENABLE_MAGNIFICATION_MULTIPLE_FINGER_MULTIPLE_TAP_GESTURE)
     @Test
+    @DisableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_MULTIPLE_FINGER_MULTIPLE_TAP_GESTURE)
     public void isShortcutAvailable_featureFlagTurnedOff_returnFalse() {
         assertThat(mController.isShortcutAvailable()).isFalse();
     }
 
-    @RequiresFlagsEnabled(Flags.FLAG_ENABLE_MAGNIFICATION_MULTIPLE_FINGER_MULTIPLE_TAP_GESTURE)
     @Test
+    @EnableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_MULTIPLE_FINGER_MULTIPLE_TAP_GESTURE)
     public void isShortcutAvailable_multipleTargets_returnFalse() {
         mController.setShortcutTargets(Set.of(TARGET_FAKE, TARGET_MAGNIFICATION));
 
         assertThat(mController.isShortcutAvailable()).isFalse();
     }
 
-    @RequiresFlagsEnabled(Flags.FLAG_ENABLE_MAGNIFICATION_MULTIPLE_FINGER_MULTIPLE_TAP_GESTURE)
     @Test
+    @EnableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_MULTIPLE_FINGER_MULTIPLE_TAP_GESTURE)
     public void isShortcutAvailable_magnificationTargetOnly_returnTrue() {
         mController.setShortcutTargets(Set.of(TARGET_MAGNIFICATION));
 
         assertThat(mController.isShortcutAvailable()).isTrue();
     }
 
-    @RequiresFlagsEnabled(Flags.FLAG_ENABLE_MAGNIFICATION_MULTIPLE_FINGER_MULTIPLE_TAP_GESTURE)
     @Test
+    @EnableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_MULTIPLE_FINGER_MULTIPLE_TAP_GESTURE)
     public void isShortcutAvailable_nonMagnificationTarget_returnFalse() {
         mController.setShortcutTargets(Set.of(TARGET_FAKE));
 
@@ -116,19 +125,26 @@ public class TwoFingersDoubleTapShortcutOptionControllerTest {
 
     @Test
     public void isChecked_twoFingersDoubleTapConfigured_returnTrue() {
-        mController.enableShortcutForTargets(true);
+        Settings.Secure.putInt(
+                mContext.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_MAGNIFICATION_TWO_FINGER_TRIPLE_TAP_ENABLED,
+                AccessibilityUtil.State.ON);
 
         assertThat(mController.isChecked()).isTrue();
     }
 
     @Test
     public void isChecked_twoFingersDoubleTapNotConfigured_returnFalse() {
-        mController.enableShortcutForTargets(false);
+        Settings.Secure.putInt(
+                mContext.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_MAGNIFICATION_TWO_FINGER_TRIPLE_TAP_ENABLED,
+                AccessibilityUtil.State.OFF);
 
         assertThat(mController.isChecked()).isFalse();
     }
 
     @Test
+    @DisableFlags(android.view.accessibility.Flags.FLAG_A11Y_QS_SHORTCUT)
     public void enableShortcutForTargets_enableShortcut_settingUpdated() {
         mController.enableShortcutForTargets(true);
 
@@ -141,6 +157,21 @@ public class TwoFingersDoubleTapShortcutOptionControllerTest {
     }
 
     @Test
+    @EnableFlags(android.view.accessibility.Flags.FLAG_A11Y_QS_SHORTCUT)
+    public void enableShortcutForTargets_enableShortcut_callA11yManager() {
+        mController.enableShortcutForTargets(true);
+
+        verify(mAccessibilityManager).enableShortcutsForTargets(
+                /* enable= */ true,
+                ShortcutConstants.UserShortcutType.TWOFINGER_DOUBLETAP,
+                Set.of(TARGET_MAGNIFICATION),
+                UserHandle.myUserId()
+        );
+        verifyNoMoreInteractions(mAccessibilityManager);
+    }
+
+    @Test
+    @DisableFlags(android.view.accessibility.Flags.FLAG_A11Y_QS_SHORTCUT)
     public void enableShortcutForTargets_disableShortcut_settingUpdated() {
         mController.enableShortcutForTargets(false);
 
@@ -150,5 +181,19 @@ public class TwoFingersDoubleTapShortcutOptionControllerTest {
                         Settings.Secure.ACCESSIBILITY_MAGNIFICATION_TWO_FINGER_TRIPLE_TAP_ENABLED,
                         AccessibilityUtil.State.OFF)
         ).isEqualTo(AccessibilityUtil.State.OFF);
+    }
+
+    @Test
+    @EnableFlags(android.view.accessibility.Flags.FLAG_A11Y_QS_SHORTCUT)
+    public void enableShortcutForTargets_disableShortcut_callA11yManager() {
+        mController.enableShortcutForTargets(false);
+
+        verify(mAccessibilityManager).enableShortcutsForTargets(
+                /* enable= */ false,
+                ShortcutConstants.UserShortcutType.TWOFINGER_DOUBLETAP,
+                Set.of(TARGET_MAGNIFICATION),
+                UserHandle.myUserId()
+        );
+        verifyNoMoreInteractions(mAccessibilityManager);
     }
 }

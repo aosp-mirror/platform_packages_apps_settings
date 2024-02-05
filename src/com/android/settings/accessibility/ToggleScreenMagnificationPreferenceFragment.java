@@ -33,6 +33,7 @@ import android.icu.text.CaseMap;
 import android.icu.text.MessageFormat;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.provider.DeviceConfig;
 import android.provider.Settings;
 import android.text.TextUtils;
@@ -65,6 +66,7 @@ import com.google.android.setupcompat.util.WizardManagerHelper;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 import java.util.StringJoiner;
 
 /**
@@ -357,7 +359,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         }
         if (Flags.enableMagnificationMultipleFingerMultipleTapGesture()) {
             if (mTwoFingerTripleTapTypeCheckBox.isChecked()) {
-                value |= UserShortcutType.TWOFINGERTRIPLETAP;
+                value |= UserShortcutType.TWOFINGER_DOUBLETAP;
             }
         }
         return value;
@@ -419,7 +421,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                 hasShortcutType(value, UserShortcutType.TRIPLETAP));
         if (Flags.enableMagnificationMultipleFingerMultipleTapGesture()) {
             mTwoFingerTripleTapTypeCheckBox.setChecked(
-                    hasShortcutType(value, UserShortcutType.TWOFINGERTRIPLETAP));
+                    hasShortcutType(value, UserShortcutType.TWOFINGER_DOUBLETAP));
         }
     }
 
@@ -483,6 +485,13 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                 MAGNIFICATION_CONTROLLER_NAME);
 
         final List<CharSequence> list = new ArrayList<>();
+        if (android.view.accessibility.Flags.a11yQsShortcut()) {
+            if (hasShortcutType(shortcutTypes, UserShortcutType.QUICK_SETTINGS)) {
+                final CharSequence qsTitle = context.getText(
+                        R.string.accessibility_feature_shortcut_setting_summary_quick_settings);
+                list.add(qsTitle);
+            }
+        }
         if (hasShortcutType(shortcutTypes, UserShortcutType.SOFTWARE)) {
             list.add(getSoftwareShortcutTypeSummary(context));
         }
@@ -497,7 +506,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
             list.add(tripleTapTitle);
         }
         if (Flags.enableMagnificationMultipleFingerMultipleTapGesture()) {
-            if (hasShortcutType(shortcutTypes, UserShortcutType.TWOFINGERTRIPLETAP)) {
+            if (hasShortcutType(shortcutTypes, UserShortcutType.TWOFINGER_DOUBLETAP)) {
                 final CharSequence twoFingerTripleTapTitle = context.getText(
                         R.string.accessibility_shortcut_two_finger_double_tap_keyword);
                 list.add(twoFingerTripleTapTitle);
@@ -678,15 +687,34 @@ public class ToggleScreenMagnificationPreferenceFragment extends
             optInMagnificationValueToSettings(context, UserShortcutType.TRIPLETAP);
         }
         if (Flags.enableMagnificationMultipleFingerMultipleTapGesture()) {
-            if (((shortcutTypes & UserShortcutType.TWOFINGERTRIPLETAP)
-                    == UserShortcutType.TWOFINGERTRIPLETAP)) {
-                optInMagnificationValueToSettings(context, UserShortcutType.TWOFINGERTRIPLETAP);
+            if (((shortcutTypes & UserShortcutType.TWOFINGER_DOUBLETAP)
+                    == UserShortcutType.TWOFINGER_DOUBLETAP)) {
+                optInMagnificationValueToSettings(context, UserShortcutType.TWOFINGER_DOUBLETAP);
+            }
+        }
+        if (android.view.accessibility.Flags.a11yQsShortcut()) {
+            if (((shortcutTypes & UserShortcutType.QUICK_SETTINGS)
+                    == UserShortcutType.QUICK_SETTINGS)) {
+                optInMagnificationValueToSettings(context, UserShortcutType.QUICK_SETTINGS);
             }
         }
     }
 
-    private static void optInMagnificationValueToSettings(Context context,
-            @UserShortcutType int shortcutType) {
+    private static void optInMagnificationValueToSettings(
+            Context context, @UserShortcutType int shortcutType) {
+        if (android.view.accessibility.Flags.a11yQsShortcut()) {
+            AccessibilityManager a11yManager = context.getSystemService(AccessibilityManager.class);
+            if (a11yManager != null) {
+                a11yManager.enableShortcutsForTargets(
+                        /* enable= */ true,
+                        shortcutType,
+                        Set.of(MAGNIFICATION_CONTROLLER_NAME),
+                        UserHandle.myUserId()
+                );
+            }
+            return;
+        }
+
         if (shortcutType == UserShortcutType.TRIPLETAP) {
             Settings.Secure.putInt(context.getContentResolver(),
                     Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED, ON);
@@ -694,8 +722,9 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         }
 
         if (Flags.enableMagnificationMultipleFingerMultipleTapGesture()) {
-            if (shortcutType == UserShortcutType.TWOFINGERTRIPLETAP) {
-                Settings.Secure.putInt(context.getContentResolver(),
+            if (shortcutType == UserShortcutType.TWOFINGER_DOUBLETAP) {
+                Settings.Secure.putInt(
+                        context.getContentResolver(),
                         Settings.Secure.ACCESSIBILITY_MAGNIFICATION_TWO_FINGER_TRIPLE_TAP_ENABLED,
                         ON);
                 return;
@@ -743,15 +772,34 @@ public class ToggleScreenMagnificationPreferenceFragment extends
             optOutMagnificationValueFromSettings(context, UserShortcutType.TRIPLETAP);
         }
         if (Flags.enableMagnificationMultipleFingerMultipleTapGesture()) {
-            if (((shortcutTypes & UserShortcutType.TWOFINGERTRIPLETAP)
-                    == UserShortcutType.TWOFINGERTRIPLETAP)) {
-                optOutMagnificationValueFromSettings(context, UserShortcutType.TWOFINGERTRIPLETAP);
+            if (((shortcutTypes & UserShortcutType.TWOFINGER_DOUBLETAP)
+                    == UserShortcutType.TWOFINGER_DOUBLETAP)) {
+                optOutMagnificationValueFromSettings(context, UserShortcutType.TWOFINGER_DOUBLETAP);
+            }
+        }
+        if (android.view.accessibility.Flags.a11yQsShortcut()) {
+            if (((shortcutTypes & UserShortcutType.QUICK_SETTINGS)
+                    == UserShortcutType.QUICK_SETTINGS)) {
+                optOutMagnificationValueFromSettings(context, UserShortcutType.QUICK_SETTINGS);
             }
         }
     }
 
     private static void optOutMagnificationValueFromSettings(Context context,
             @UserShortcutType int shortcutType) {
+        if (android.view.accessibility.Flags.a11yQsShortcut()) {
+            AccessibilityManager a11yManager = context.getSystemService(AccessibilityManager.class);
+            if (a11yManager != null) {
+                a11yManager.enableShortcutsForTargets(
+                        /* enable= */ false,
+                        shortcutType,
+                        Set.of(MAGNIFICATION_CONTROLLER_NAME),
+                        UserHandle.myUserId()
+                );
+            }
+            return;
+        }
+
         if (shortcutType == UserShortcutType.TRIPLETAP) {
             Settings.Secure.putInt(context.getContentResolver(),
                     Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED, OFF);
@@ -759,8 +807,9 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         }
 
         if (Flags.enableMagnificationMultipleFingerMultipleTapGesture()) {
-            if (shortcutType == UserShortcutType.TWOFINGERTRIPLETAP) {
-                Settings.Secure.putInt(context.getContentResolver(),
+            if (shortcutType == UserShortcutType.TWOFINGER_DOUBLETAP) {
+                Settings.Secure.putInt(
+                        context.getContentResolver(),
                         Settings.Secure.ACCESSIBILITY_MAGNIFICATION_TWO_FINGER_TRIPLE_TAP_ENABLED,
                         OFF);
                 return;
@@ -803,10 +852,10 @@ public class ToggleScreenMagnificationPreferenceFragment extends
             exist |= hasMagnificationValueInSettings(context, UserShortcutType.TRIPLETAP);
         }
         if (Flags.enableMagnificationMultipleFingerMultipleTapGesture()) {
-            if (((shortcutTypes & UserShortcutType.TWOFINGERTRIPLETAP)
-                    == UserShortcutType.TWOFINGERTRIPLETAP)) {
+            if (((shortcutTypes & UserShortcutType.TWOFINGER_DOUBLETAP)
+                    == UserShortcutType.TWOFINGER_DOUBLETAP)) {
                 exist |= hasMagnificationValueInSettings(context,
-                        UserShortcutType.TWOFINGERTRIPLETAP);
+                        UserShortcutType.TWOFINGER_DOUBLETAP);
             }
         }
         return exist;
@@ -820,7 +869,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         }
 
         if (Flags.enableMagnificationMultipleFingerMultipleTapGesture()) {
-            if (shortcutType == UserShortcutType.TWOFINGERTRIPLETAP) {
+            if (shortcutType == UserShortcutType.TWOFINGER_DOUBLETAP) {
                 return Settings.Secure.getInt(context.getContentResolver(),
                         Settings.Secure.ACCESSIBILITY_MAGNIFICATION_TWO_FINGER_TRIPLE_TAP_ENABLED,
                         OFF) == ON;
@@ -857,8 +906,8 @@ public class ToggleScreenMagnificationPreferenceFragment extends
             shortcutTypes |= UserShortcutType.TRIPLETAP;
         }
         if (Flags.enableMagnificationMultipleFingerMultipleTapGesture()) {
-            if (hasMagnificationValuesInSettings(context, UserShortcutType.TWOFINGERTRIPLETAP)) {
-                shortcutTypes |= UserShortcutType.TWOFINGERTRIPLETAP;
+            if (hasMagnificationValuesInSettings(context, UserShortcutType.TWOFINGER_DOUBLETAP)) {
+                shortcutTypes |= UserShortcutType.TWOFINGER_DOUBLETAP;
             }
         }
         return shortcutTypes;

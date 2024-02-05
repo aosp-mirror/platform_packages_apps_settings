@@ -21,19 +21,32 @@ import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_U
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
+
 import android.content.ComponentName;
 import android.content.Context;
 import android.icu.text.MessageFormat;
+import android.os.UserHandle;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
+import android.view.accessibility.AccessibilityManager;
+import android.view.accessibility.Flags;
 
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.internal.accessibility.common.ShortcutConstants;
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityUtil;
+import com.android.settings.testutils.AccessibilityTestUtils;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -50,13 +63,17 @@ public class TripleTapShortcutOptionControllerTest {
             "com.android.server.accessibility.MagnificationController";
     private static final String TARGET_FAKE =
             new ComponentName("FakePackage", "FakeClass").flattenToString();
-    private final Context mContext = ApplicationProvider.getApplicationContext();
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+    private final Context mContext = spy(ApplicationProvider.getApplicationContext());
     private TripleTapShortcutOptionController mController;
     private ShortcutOptionPreference mShortcutOptionPreference;
+    private AccessibilityManager mAccessibilityManager;
     private PreferenceScreen mPreferenceScreen;
 
     @Before
     public void setUp() {
+        mAccessibilityManager = AccessibilityTestUtils.setupMockAccessibilityManager(mContext);
         mController = new TripleTapShortcutOptionController(mContext, PREF_KEY);
         mController.setShortcutTargets(Set.of(TARGET_MAGNIFICATION));
         mShortcutOptionPreference = new ShortcutOptionPreference(mContext);
@@ -147,19 +164,26 @@ public class TripleTapShortcutOptionControllerTest {
 
     @Test
     public void isChecked_tripleTapConfigured_returnTrue() {
-        mController.enableShortcutForTargets(true);
+        Settings.Secure.putInt(
+                mContext.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED,
+                AccessibilityUtil.State.ON);
 
         assertThat(mController.isChecked()).isTrue();
     }
 
     @Test
     public void isChecked_tripleTapNotConfigured_returnFalse() {
-        mController.enableShortcutForTargets(false);
+        Settings.Secure.putInt(
+                mContext.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED,
+                AccessibilityUtil.State.OFF);
 
         assertThat(mController.isChecked()).isFalse();
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
     public void enableShortcutForTargets_enableShortcut_settingUpdated() {
         mController.enableShortcutForTargets(true);
 
@@ -172,6 +196,21 @@ public class TripleTapShortcutOptionControllerTest {
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
+    public void enableShortcutForTargets_enableShortcut_callA11yManager() {
+        mController.enableShortcutForTargets(true);
+
+        verify(mAccessibilityManager).enableShortcutsForTargets(
+                /* enable= */ true,
+                ShortcutConstants.UserShortcutType.TRIPLETAP,
+                Set.of(TARGET_MAGNIFICATION),
+                UserHandle.myUserId()
+        );
+        verifyNoMoreInteractions(mAccessibilityManager);
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
     public void enableShortcutForTargets_disableShortcut_settingUpdated() {
         mController.enableShortcutForTargets(false);
 
@@ -181,5 +220,19 @@ public class TripleTapShortcutOptionControllerTest {
                         Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED,
                         AccessibilityUtil.State.OFF)
         ).isEqualTo(AccessibilityUtil.State.OFF);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
+    public void enableShortcutForTargets_disableShortcut_callA11yManager() {
+        mController.enableShortcutForTargets(false);
+
+        verify(mAccessibilityManager).enableShortcutsForTargets(
+                /* enable= */ false,
+                ShortcutConstants.UserShortcutType.TRIPLETAP,
+                Set.of(TARGET_MAGNIFICATION),
+                UserHandle.myUserId()
+        );
+        verifyNoMoreInteractions(mAccessibilityManager);
     }
 }
