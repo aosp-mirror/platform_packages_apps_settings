@@ -3232,7 +3232,8 @@
 
         <receiver
             android:name=".fuelgauge.batteryusage.BootBroadcastReceiver"
-            android:exported="true">
+            android:exported="true"
+            android:permission="com.android.settings.BATTERY_DATA">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
                 <action android:name="com.google.android.setupwizard.SETUP_WIZARD_FINISHED"/>
