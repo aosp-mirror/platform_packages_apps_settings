@@ -114,7 +114,7 @@ public class BiometricsSafetySourceTest {
 
     @Test
     public void setSafetySourceData_whenSafetyCenterIsEnabled_withoutBiometrics_setsNullData() {
-        when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(false);
+        when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         when(mFingerprintManager.isHardwareDetected()).thenReturn(false);
         when(mFaceManager.isHardwareDetected()).thenReturn(false);
 
