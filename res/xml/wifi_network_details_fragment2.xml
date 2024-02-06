@@ -97,6 +97,11 @@
         android:entries="@array/wifi_privacy_entries"
         android:entryValues="@array/wifi_privacy_values"/>
 
+    <com.android.settings.spa.preference.ComposePreference
+        android:key="privacy_settings"
+        android:title="@string/wifi_privacy_settings"
+        settings:controller="com.android.settings.wifi.details2.WifiPrivacyPreferenceController"/>
+
     <Preference
         android:key="subscription_detail"
         android:title="@string/wifi_subscription"
