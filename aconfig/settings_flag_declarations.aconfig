@@ -13,3 +13,10 @@ flag {
     description: "Enabling will provide an explicit package name for Intent to update mainline modules"
     bug: "278987474"
 }
+
+flag {
+    name: "app_archiving"
+    namespace: "android_settings"
+    description: "Feature flag to enable the archiving feature."
+    bug: "323164382"
+}

@@ -27,7 +27,8 @@ import android.os.PowerExemptionManager
 import androidx.compose.runtime.Composable
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settingslib.R
-import com.android.settingslib.spa.livedata.observeAsCallback
+import com.android.settingslib.spa.lifecycle.collectAsCallbackWithLifecycle
+import com.android.settingslib.spaprivileged.model.app.AppOpsController
 import com.android.settingslib.spaprivileged.model.app.AppRecord
 import com.android.settingslib.spaprivileged.model.app.IPackageManagers
 import com.android.settingslib.spaprivileged.model.app.PackageManagers
@@ -47,7 +48,7 @@ data class AlarmsAndRemindersAppRecord(
     override val app: ApplicationInfo,
     val isTrumped: Boolean,
     val isChangeable: Boolean,
-    var controller: AlarmsAndRemindersController,
+    var controller: AppOpsController,
 ) : AppRecord
 
 class AlarmsAndRemindersAppListModel(
@@ -82,7 +83,7 @@ class AlarmsAndRemindersAppListModel(
     @Composable
     override fun isAllowed(record: AlarmsAndRemindersAppRecord): () -> Boolean? = when {
         record.isTrumped -> ({ true })
-        else -> record.controller.isAllowed.observeAsCallback()
+        else -> record.controller.isAllowed.collectAsCallbackWithLifecycle()
     }
 
     override fun isChangeable(record: AlarmsAndRemindersAppRecord) = record.isChangeable
@@ -112,7 +113,12 @@ class AlarmsAndRemindersAppListModel(
             app = app,
             isTrumped = isTrumped,
             isChangeable = hasRequestPermission && !isTrumped,
-            controller = AlarmsAndRemindersController(context, app),
+            controller = AppOpsController(
+                context = context,
+                app = app,
+                op = AppOpsManager.OP_SCHEDULE_EXACT_ALARM,
+                setModeByUid = true,
+            ),
         )
     }
 
