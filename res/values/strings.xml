@@ -7306,7 +7306,7 @@
     <!-- Title for setting tile leading to saved autofill passwords, autofill, and account settings [CHAR LIMIT=40]-->
     <string name="account_dashboard_title">Passwords &amp; accounts</string>
     <!-- Summary for setting tile leading to saved autofill passwords, autofill, and account settings [CHAR LIMIT=NONE]-->
-    <string name="account_dashboard_default_summary">Saved passwords, autofill, synced accounts</string>
+    <string name="account_dashboard_default_summary">Suggestions for sign-in &amp; autofill</string>
     <!-- Title for setting tile leading to setting UI which allows user set default app to
     handle actions such as open web page, making phone calls, default SMS apps [CHAR  LIMIT=40]-->
     <string name="app_default_dashboard_title">Default apps</string>
@@ -10773,8 +10773,8 @@
     <string name="autofill_passwords">Passwords</string>
     <!-- Preference category for showing autofill and credman services with saved credentials. [CHAR LIMIT=60] -->
     <string name="credman_chosen_app_title">Preferred service</string>
-    <!-- Preference category for showing additional credential providers. [CHAR LIMIT=60] -->
-    <string name="credman_credentials">Additional providers</string>
+    <!-- Preference category for showing additional credential services. [CHAR LIMIT=60] -->
+    <string name="credman_credentials">Additional services</string>
     <!-- Summary for passwords settings that shows how many passwords are saved for each autofill
          service. [CHAR LIMIT=NONE] -->
     <string name="autofill_passwords_count">{count, plural,
@@ -10819,7 +10819,7 @@
     </string>
 
     <!-- Title of the screen where the user picks a provider. [CHAR_LIMIT=NONE] -->
-    <string name="credman_picker_title">Passwords, passkeys, and data services</string>
+    <string name="credman_picker_title">Preferred service for passwords, passkeys &amp; autofill</string>
 
     <!-- Title of the warning dialog for disabling the credential provider. [CHAR_LIMIT=NONE] -->
     <string name="credman_confirmation_message_title">Turn off %1$s\?</string>
@@ -10835,6 +10835,9 @@
         service.
         ]]>
     </string>
+
+    <!-- Title for setting tile leading to saved autofill passwords, passkeys, autofill, and account settings [CHAR LIMIT=40]-->
+    <string name="account_dashboard_title_with_passkeys">Passwords, passkeys &amp; autofill</string>
 
     <!-- Message of the warning dialog for disabling the credential provider (new strings for 24Q3). [CHAR_LIMIT=NONE] -->
     <string name="credman_confirmation_message_new_ui">
