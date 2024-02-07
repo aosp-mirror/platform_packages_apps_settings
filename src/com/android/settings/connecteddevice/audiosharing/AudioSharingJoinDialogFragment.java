@@ -18,19 +18,25 @@ package com.android.settings.connecteddevice.audiosharing;
 
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -49,6 +55,7 @@ public class AudioSharingJoinDialogFragment extends InstrumentedDialogFragment {
     }
 
     private static DialogEventListener sListener;
+    private static @Nullable CachedBluetoothDevice sNewDevice;
 
     @Override
     public int getMetricsCategory() {
@@ -58,29 +65,54 @@ public class AudioSharingJoinDialogFragment extends InstrumentedDialogFragment {
     /**
      * Display the {@link AudioSharingJoinDialogFragment} dialog.
      *
+     * <p>If the dialog is showing, update the dialog message and event listener.
+     *
      * @param host The Fragment this dialog will be hosted.
      * @param deviceItems The existing connected device items eligible for audio sharing.
-     * @param newDeviceName The name of the latest connected device triggered this dialog.
+     * @param newDevice The latest connected device triggered this dialog.
      * @param listener The callback to handle the user action on this dialog.
      */
     public static void show(
             Fragment host,
             ArrayList<AudioSharingDeviceItem> deviceItems,
-            String newDeviceName,
+            CachedBluetoothDevice newDevice,
             DialogEventListener listener) {
         if (!AudioSharingUtils.isFeatureEnabled()) return;
         final FragmentManager manager = host.getChildFragmentManager();
         sListener = listener;
-        final Bundle bundle = new Bundle();
-        bundle.putParcelableArrayList(BUNDLE_KEY_DEVICE_ITEMS, deviceItems);
-        bundle.putString(BUNDLE_KEY_NEW_DEVICE_NAME, newDeviceName);
-        final AudioSharingJoinDialogFragment dialog = new AudioSharingJoinDialogFragment();
-        dialog.setArguments(bundle);
-        dialog.show(manager, TAG);
+        sNewDevice = newDevice;
+        Fragment dialog = manager.findFragmentByTag(TAG);
+        if (dialog != null
+                && ((DialogFragment) dialog).getDialog() != null
+                && ((DialogFragment) dialog).getDialog().isShowing()) {
+            Log.d(TAG, "Dialog is showing, update the content.");
+            updateDialog(
+                    deviceItems,
+                    newDevice.getName(),
+                    (AlertDialog) ((DialogFragment) dialog).getDialog());
+        } else {
+            Log.d(TAG, "Show up the dialog.");
+            final Bundle bundle = new Bundle();
+            bundle.putParcelableArrayList(BUNDLE_KEY_DEVICE_ITEMS, deviceItems);
+            bundle.putString(BUNDLE_KEY_NEW_DEVICE_NAME, newDevice.getName());
+            final AudioSharingJoinDialogFragment dialogFrag = new AudioSharingJoinDialogFragment();
+            dialogFrag.setArguments(bundle);
+            dialogFrag.show(manager, TAG);
+        }
+    }
+
+    /** Return the tag of {@link AudioSharingJoinDialogFragment} dialog. */
+    public static @NonNull String tag() {
+        return TAG;
+    }
+
+    /** Get the latest connected device which triggers the dialog. */
+    public @Nullable CachedBluetoothDevice getDevice() {
+        return sNewDevice;
     }
 
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
+    public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         Bundle arguments = requireArguments();
         ArrayList<AudioSharingDeviceItem> deviceItems =
                 arguments.getParcelableArrayList(BUNDLE_KEY_DEVICE_ITEMS);
@@ -88,6 +120,7 @@ public class AudioSharingJoinDialogFragment extends InstrumentedDialogFragment {
         final AlertDialog.Builder builder =
                 new AlertDialog.Builder(getActivity()).setCancelable(false);
         LayoutInflater inflater = LayoutInflater.from(builder.getContext());
+        // Set custom title for the dialog.
         View customTitle =
                 inflater.inflate(R.layout.dialog_custom_title_audio_sharing, /* parent= */ null);
         ImageView icon = customTitle.findViewById(R.id.title_icon);
@@ -95,21 +128,8 @@ public class AudioSharingJoinDialogFragment extends InstrumentedDialogFragment {
         TextView title = customTitle.findViewById(R.id.title_text);
         title.setText("Share your audio");
         View rootView = inflater.inflate(R.layout.dialog_audio_sharing_join, /* parent= */ null);
-        TextView subtitle1 = rootView.findViewById(R.id.share_audio_subtitle1);
-        TextView subtitle2 = rootView.findViewById(R.id.share_audio_subtitle2);
-        if (deviceItems.isEmpty()) {
-            subtitle1.setText(newDeviceName);
-        } else {
-            subtitle1.setText(
-                    String.format(
-                            Locale.US,
-                            "%s and %s",
-                            deviceItems.stream()
-                                    .map(AudioSharingDeviceItem::getName)
-                                    .collect(Collectors.joining(", ")),
-                            newDeviceName));
-        }
-        subtitle2.setText("This device's music and videos will play on both pairs of headphones");
+        TextView subtitle = rootView.findViewById(R.id.share_audio_subtitle);
+        subtitle.setText("This device's music and videos will play on both pairs of headphones");
         Button shareBtn = rootView.findViewById(R.id.share_btn);
         Button cancelBtn = rootView.findViewById(R.id.cancel_btn);
         shareBtn.setOnClickListener(
@@ -119,8 +139,37 @@ public class AudioSharingJoinDialogFragment extends InstrumentedDialogFragment {
                 });
         shareBtn.setText("Share audio");
         cancelBtn.setOnClickListener(v -> dismiss());
-        Dialog dialog = builder.setCustomTitle(customTitle).setView(rootView).create();
+        AlertDialog dialog = builder.setCustomTitle(customTitle).setView(rootView).create();
         dialog.setCanceledOnTouchOutside(false);
+        updateDialog(deviceItems, newDeviceName, dialog);
+        dialog.show();
+        TextView messageView = (TextView) dialog.findViewById(android.R.id.message);
+        if (messageView != null) {
+            Typeface typeface = Typeface.create(Typeface.DEFAULT_FAMILY, Typeface.NORMAL);
+            messageView.setTypeface(typeface);
+            messageView.setTextDirection(View.TEXT_DIRECTION_LOCALE);
+            messageView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        } else {
+            Log.w(TAG, "Fail to update message style: message view is null");
+        }
         return dialog;
+    }
+
+    private static void updateDialog(
+            ArrayList<AudioSharingDeviceItem> deviceItems,
+            String newDeviceName,
+            @NonNull AlertDialog dialog) {
+        if (deviceItems.isEmpty()) {
+            dialog.setMessage(newDeviceName);
+        } else {
+            dialog.setMessage(
+                    String.format(
+                            Locale.US,
+                            "%s and %s",
+                            deviceItems.stream()
+                                    .map(AudioSharingDeviceItem::getName)
+                                    .collect(Collectors.joining(", ")),
+                            newDeviceName));
+        }
     }
 }
