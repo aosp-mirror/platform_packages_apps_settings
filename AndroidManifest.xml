@@ -802,6 +802,11 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".network.SimOnboardingActivity"
+            android:exported="false"
+            android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS"
+            android:theme="@style/Theme.SpaLib.BottomSheetDialog"/>
+
         <activity android:name=".network.telephony.ToggleSubscriptionDialogActivity"
                   android:exported="false"
                   android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS"
