@@ -17,27 +17,30 @@
 <com.google.android.setupdesign.GlifLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/ps_fragment_lock"
+    android:id="@+id/private_space_autoadvance_screen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:filterTouchesWhenObscured="true"
-    app:sucHeaderText="@string/private_space_lockscreen_title"
-    app:sudDescriptionText="@string/private_space_lockscreen_summary"
-    android:icon="@drawable/ic_lock">
-    <com.google.android.setupdesign.view.FillContentLayout
-        style="@style/SudContentFrame"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:maxWidth="@dimen/animation_max_size"
-        android:maxHeight="@dimen/animation_max_size">
-
+    android:icon="@drawable/ic_private_space_icon">
+    <LinearLayout style="@style/SudContentFrame"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:orientation="vertical">
         <ImageView
-            android:id="@+id/privatespace_lock_image"
+            android:id="@+id/setup_advance_image"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="fitCenter"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:contentDescription="@null"
-            android:src="@drawable/privatespace_lock_placeholder"/>
+            android:src="@null"/>
 
-    </com.google.android.setupdesign.view.FillContentLayout>
+        <TextView
+            android:id="@+id/createMessage"
+            style="@style/PrivateSpaceSetupTextFontStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:text="@string/private_space_setting_up_text"
+            android:layout_marginBottom="24dp"/>
+
+    </LinearLayout>
 </com.google.android.setupdesign.GlifLayout>

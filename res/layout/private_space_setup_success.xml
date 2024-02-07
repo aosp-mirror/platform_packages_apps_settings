@@ -24,4 +24,13 @@
     app:sucHeaderText="@string/private_space_success_title"
     app:sudDescriptionText="@string/private_space_access_text"
     android:icon="@drawable/ic_privatespace_done">
+
+    <ImageView
+        android:id="@+id/privatespace_success_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:src="@drawable/private_space_illustration"/>
+
 </com.google.android.setupdesign.GlifLayout>

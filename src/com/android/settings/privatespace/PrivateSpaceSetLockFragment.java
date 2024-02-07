@@ -56,7 +56,7 @@ public class PrivateSpaceSetLockFragment extends InstrumentedFragment {
         }
         GlifLayout rootView =
                 (GlifLayout)
-                        inflater.inflate(R.layout.privatespace_setlock_screen, container, false);
+                        inflater.inflate(R.layout.private_space_setlock_screen, container, false);
         final FooterBarMixin mixin = rootView.getMixin(FooterBarMixin.class);
         mixin.setPrimaryButton(
                 new FooterButton.Builder(getContext())
