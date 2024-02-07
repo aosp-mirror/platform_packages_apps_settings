@@ -98,7 +98,7 @@ public final class BatterySettingsMigrateCheckerTest {
 
     @Test
     public void onReceive_validScheduledLevel_notResetScheduledValue() {
-        final int validScheduledLevel = 12;
+        final int validScheduledLevel = BatterySaverScheduleRadioButtonsController.TRIGGER_LEVEL_MIN;
         setScheduledLevel(validScheduledLevel);
 
         mBatterySettingsMigrateChecker.onReceive(mContext, BOOT_COMPLETED_INTENT);
