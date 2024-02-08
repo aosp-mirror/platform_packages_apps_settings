@@ -115,6 +115,7 @@
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Hætta við"</string>
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Slökkva á Bluetooth LE-hljóði"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Slekkur á Bluetooth LE-hljóðeiginleika ef tækið styður vélbúnaðareiginleika LE-hljóðs."</string>
+    <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Bluetooth LE-hljóðstilling"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Sýna rofa LE-hljóðs í tækjaupplýsingum"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Sneiða hjá hvítum lista Bluetooth LE-hljóðs"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Nota LE-hljóð sjálfkrafa jafnvel þótt jaðartæki LE-hljóðs hafi ekki verið staðfest með tilliti til skilyrða hvíta listans."</string>
@@ -545,21 +546,27 @@
     <string name="security_header" msgid="961514795852103424">"Öryggi"</string>
     <string name="privacy_header" msgid="5526002421324257007">"Persónuvernd"</string>
     <string name="work_profile_category_header" msgid="85707750968948517">"Vinnusnið"</string>
-    <string name="private_space_title" msgid="7078627930195569767">"Einkarými"</string>
+    <!-- no translation found for private_space_title (1752064212078238723) -->
+    <skip />
     <string name="private_space_summary" msgid="2274405892301976238">"Hafðu einkaforrit lokuð og falin"</string>
     <string name="private_space_description" msgid="4059594203775816136">"Geymdu einkaforrit í aðskildu rými sem þú getur falið eða læst"</string>
-    <string name="private_space_lock_title" msgid="3006539720164938296">"Læsing einkarýmis"</string>
-    <string name="private_space_one_lock_summary" msgid="2759953747682959371">"Hægt er að taka einkarými úr lás á sama hátt og tækið en einnig er hægt að velja annan lás"</string>
+    <!-- no translation found for private_space_lock_title (7230836881433350526) -->
+    <skip />
+    <!-- no translation found for private_space_one_lock_summary (2106513606571219068) -->
+    <skip />
     <string name="private_space_screen_lock_title" msgid="8679383894967823163">"Nota skjálás tækis"</string>
     <string name="private_space_biometric_title" msgid="3934339826674553174">"Andlits- og fingrafarsopnun"</string>
     <string name="private_space_fingerprint_title" msgid="5989254643211889931">"Fingrafarskenni"</string>
     <string name="private_space_face_title" msgid="3290402865367663079">"Andlitskenni"</string>
     <string name="private_space_biometric_summary" msgid="4403837276018724581">"Ýttu til að setja upp"</string>
-    <string name="private_space_fingerprint_unlock_title" msgid="5804023571114910034">"Fingrafarskenni fyrir einkarými"</string>
-    <string name="private_space_face_unlock_title" msgid="6613018437620070183">"Andlitskenni fyrir einkarými"</string>
+    <!-- no translation found for private_space_fingerprint_unlock_title (3614016453395789051) -->
+    <skip />
+    <!-- no translation found for private_space_face_unlock_title (462248384776453613) -->
+    <skip />
     <string name="private_space_category_ways_to_unlock" msgid="4356631225316950046">"Leiðir til að taka úr lás"</string>
     <string name="private_space_screen_lock_summary" msgid="394837965365561070">"Sami skjálás og í tæki"</string>
-    <string name="private_space_new_lock_title" msgid="7306873010565337671">"Velja nýjan lás fyrir einkarými?"</string>
+    <!-- no translation found for private_space_new_lock_title (9056139964133004094) -->
+    <skip />
     <string name="private_space_auto_lock_title" msgid="4757097802686131305">"Læsa sjálfkrafa"</string>
     <string name="private_space_auto_lock_page_title" msgid="2993714305725968632">"Læsa leynirými sjálfkrafa"</string>
     <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"Þú getur valið að læsa leynirýminu þínu sjálfkrafa ef þú hefur ekki notað tækið í tiltekinn tíma"</string>
@@ -567,18 +574,32 @@
     <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"Eftir 5 mínútur af aðgerðaleysi"</string>
     <string name="private_space_auto_lock_never" msgid="595014527119778873">"Aldrei"</string>
     <string name="private_space_hide_title" msgid="8687034008994037610">"Fela þegar læst"</string>
-    <string name="privatespace_hide_page_title" msgid="972581369094289386">"Fela einkarými þegar það er læst"</string>
-    <string name="privatespace_hide_page_summary" msgid="1052569521186403642">"Til að aðrir sjái ekki einkarými tækisins geturðu falið það á forritalistanum"</string>
-    <string name="privatespace_access_header" msgid="982809349769470185">"Aðgangur að einkarými þegar það er falið"</string>
-    <string name="privatespace_search_description" msgid="983837656432484282">"Leitaðu að „Einkarými“ á leitarstikunni"</string>
-    <string name="privatespace_tap_tile_description" msgid="4146608898639668340">"Ýttu á reitinn „Einkarými“"</string>
-    <string name="privatespace_unlock_description" msgid="4132755357482447360">"Taktu einkarýmið úr lás"</string>
+    <!-- no translation found for privatespace_hide_page_title (8417507414027827566) -->
+    <skip />
+    <!-- no translation found for privatespace_hide_page_summary (5525422595477989312) -->
+    <skip />
+    <!-- no translation found for privatespace_access_header (6066826215718835041) -->
+    <skip />
+    <!-- no translation found for privatespace_search_description (3121043205513022357) -->
+    <skip />
+    <!-- no translation found for privatespace_tap_tile_description (8346440188590931635) -->
+    <skip />
+    <!-- no translation found for privatespace_unlock_description (3177710543121916413) -->
+    <skip />
     <string name="privatespace_hide_off_summary" msgid="7227778747159633671">"Slökkt"</string>
     <string name="privatespace_hide_on_summary" msgid="6136704537527640183">"Kveikt"</string>
     <string name="private_space_category_system" msgid="1286843321867285700">"Kerfi"</string>
-    <string name="private_space_delete_title" msgid="3075645119800272800">"Eyða einkarými"</string>
-    <string name="private_space_deleted" msgid="7825768516955610897">"Einkarými var eytt"</string>
-    <string name="private_space_delete_failed" msgid="8500755484258565011">"Ekki tókst að eyða einkarými"</string>
+    <string name="private_space_delete_title" msgid="636873505724100006">"Eyða leynirými"</string>
+    <string name="private_space_delete_header" msgid="4594429153176776184">"Eyða leynirými?"</string>
+    <string name="private_space_delete_summary" msgid="3344372988408565545">"Leynirýmið verður fjarlægt úr tækinu þínu. Öllum lokuðum forritum og gögnum verður eytt. Ekki er hægt að afturkalla þessa aðgerð."</string>
+    <string name="private_space_accounts" msgid="1078277762792056395">"Eftirfarandi reikningar verða fjarlægðir úr leynirýminu:"</string>
+    <string name="private_space_delete_button_label" msgid="1256981385318225002">"Eyða"</string>
+    <string name="private_space_confirm_deletion_header" msgid="3468651585498942977">"Eyðir leynirými…"</string>
+    <string name="private_space_confirm_deletion_summary" msgid="342544588554284686">"Þetta tekur smástund"</string>
+    <!-- no translation found for private_space_deleted (7692240901492540053) -->
+    <skip />
+    <!-- no translation found for private_space_delete_failed (7705795653796174741) -->
+    <skip />
     <string name="private_space_unlocked" msgid="9091600948712932046">"Einkarými var opnað"</string>
     <string name="no_device_lock_title" msgid="1078223464721029954">"Setja upp skjálás"</string>
     <string name="no_device_lock_summary" msgid="7436025227616244687">"Stilltu skjálás í tækinu til að nota einkarými"</string>
@@ -594,37 +615,32 @@
     <string name="private_space_hidden_notifications_text" msgid="1487992156742340621">"Tilkynningar forrita í einkarýminu eru faldar þegar það er læst"</string>
     <string name="private_space_apps_permission_text" msgid="7030946025253366172">"Forrit í einkarýminu þínu birtast ekki í leyfisstjóra, á persónuverndarstjórnborði og í öðrum stillingum þegar einkarýmið er læst.\n\nEkki er hægt að flytja einkarýmið yfir í annað tæki. Þú þarft að setja upp nýtt einkarými ef þú vilt nota það í öðru tæki.\n\nHver sem er sem tengir tækið þitt við tölvu eða setur upp skaðleg forrit í tækinu gæti fengið aðgang að einkarýminu."</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Setur upp einkarými…"</string>
-    <string name="private_space_notifications_hidden_title" msgid="4377296080723608107">"Tilkynningar forrita í einkarými eru faldar þegar það er læst"</string>
-    <string name="private_space_share_photos_title" msgid="2102594859384040485">"Taktu einkarými úr lás til að deila myndum eða skrám úr forritum í rýminu"</string>
+    <!-- no translation found for private_space_notifications_hidden_title (2009112565217540581) -->
+    <skip />
+    <!-- no translation found for private_space_share_photos_title (5176346349303364657) -->
+    <skip />
     <string name="private_space_apps_installed_title" msgid="2428207301009983268">"Sum forrit eru þegar sett upp í einkarýminu"</string>
-    <string name="private_space_error_screen_title" msgid="1210906480024148398">"Ekki tókst að setja upp einkarými"</string>
+    <!-- no translation found for private_space_error_screen_title (739381738044418346) -->
+    <skip />
     <string name="private_space_tryagain_label" msgid="8305362615231738367">"Reyna aftur"</string>
     <string name="private_space_lockscreen_title" msgid="6034864097861137509">"Nota skjálás til að taka einkarýmið úr lás?"</string>
     <string name="private_space_lockscreen_summary" msgid="430569465080645805">"Þú getur tekið einkarýmið úr lás á sama hátt og tækið eða valið annan lás"</string>
     <string name="private_space_use_screenlock_label" msgid="9182153443192032782">"Nota skjálás"</string>
     <string name="private_space_set_lock_label" msgid="1790408277477408475">"Velja nýjan lás"</string>
     <string name="private_space_success_title" msgid="4351904015352046118">"Allt tilbúið!"</string>
-    <string name="private_space_access_text" msgid="4258842502257201013">"Farðu í forritalistann og flettu niður til að finna einkarýmið þitt"</string>
+    <!-- no translation found for private_space_access_text (4433988836344567888) -->
+    <skip />
     <string name="private_space_done_label" msgid="1020482651595246071">"Lokið"</string>
     <string name="private_space_scrolldown_to_access" msgid="4820954877349434545">"Flettu niður til að finna einkarými"</string>
-    <!-- no translation found for private_space_retry_signin_title (8090276618867918844) -->
-    <skip />
-    <!-- no translation found for private_space_retry_summary (1920444015972648774) -->
-    <skip />
-    <!-- no translation found for private_space_skip_login_label (7078019409056628192) -->
-    <skip />
-    <!-- no translation found for private_space_continue_login_label (7779965766333065391) -->
-    <skip />
+    <string name="private_space_retry_signin_title" msgid="8090276618867918844">"Skrá inn"</string>
+    <string name="private_space_retry_summary" msgid="1920444015972648774">"Skráðu þig inn á reikning til að nota leynirýmið"</string>
+    <string name="private_space_skip_login_label" msgid="7078019409056628192">"Ekki núna"</string>
+    <string name="private_space_continue_login_label" msgid="7779965766333065391">"Halda áfram"</string>
     <string name="private_space_lock_setup_title" msgid="6541564212199510787">"Veldu hvernig þú vilt læsa einkarýminu"</string>
     <string name="private_space_lock_setup_description" msgid="423405593476300918">"Þú getur tekið einkarýmið úr lás með fingrafarinu þínu. Af öryggisástæðum krefst þessi valkostur þess að varalás sé stilltur."</string>
     <string name="private_space_choose_your_pin_header" msgid="4560802934975898265">"Stilltu PIN-númer fyrir einkarýmið þitt"</string>
     <string name="private_space_choose_your_password_header" msgid="7660259341095044434">"Stilltu aðgangsorð fyrir einkarýmið þitt"</string>
     <string name="private_space_choose_your_pattern_header" msgid="2165607102459936724">"Stilltu mynstur fyrir einkarýmið þitt"</string>
-    <string name="privatespace_unhide_header" msgid="1192011539687584004">"Til að sýna einkarými (ekki lokaupplifun notanda)"</string>
-    <string name="privatespace_open_settings" msgid="5038101805604421393">"Opnaðu forritið Stillingar"</string>
-    <string name="privatespace_tap_settings" msgid="928932826450238276">"Ýttu á Öryggi og persónuvernd &gt; Einkarými &gt; Fela einkarými þegar læst er"</string>
-    <string name="privatespace_turnoff_hide" msgid="4858511423837613842">"Slökkva á Fela einkarými þegar rofi er læstur"</string>
-    <string name="privatespace_development_note" msgid="2999992301558700721">"Athugasemd til starfsmanna Google: Þróun þessa eiginleika er enn í gangi"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Þú getur bætt við allt að <xliff:g id="COUNT">%d</xliff:g> fingraförum"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Þú hefur bætt við hámarksfjölda fingrafara"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Ekki er hægt að bæta fleiri fingraförum við"</string>
@@ -770,7 +786,7 @@
     <string name="bluetooth_settings" msgid="2967239493428695171">"Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"Bluetooth"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"Para við <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
-    <string name="bluetooth_pairing_group_late_bonding" msgid="5310869364570266209">"Bættu nýjum meðlim við fyrirliggjandi samstillt sett"</string>
+    <string name="bluetooth_pairing_group_late_bonding" msgid="3047893658902159692">"Staðfestu til að bæta við seinna hljómtækinu"</string>
     <string name="bluetooth_pairing_key_msg" msgid="1329835708475701761">"Bluetooth-pörunarkóði"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="5806420933599368592">"Sláðu inn pörunarkóðann og ýttu svo á Return eða Enter"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7256286571636950635">"PIN inniheldur bókstafi eða tákn"</string>
@@ -778,7 +794,7 @@
     <string name="bluetooth_pin_values_hint_16_digits" msgid="5603928271430883558">"Verður að vera 16 tölustafir"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="6737778699899780717">"Þú gætir einnig þurft að slá þetta PIN-númer inn í hinu tækinu."</string>
     <string name="bluetooth_enter_passkey_other_device" msgid="8270426446247344709">"Þú gætir einnig þurft að slá þennan aðgangslykil inn á hinu tækinu."</string>
-    <string name="bluetooth_paring_group_msg" msgid="4609515924670823316">"Staðfestu pörun við samstillta settið"</string>
+    <string name="bluetooth_paring_group_msg" msgid="2455293929036668131">"Staðfestu til að para hljómtækið"</string>
     <string name="bluetooth_pairing_shares_phonebook" msgid="4329325125260724843">"Veita aðgang að tengiliðum þínum og símtalaferli"</string>
     <string name="bluetooth_pairing_phonebook_toggle_text" msgid="2474015367387690034">"Veita einnig aðgang að tengiliðum og símtalaferli"</string>
     <string name="bluetooth_pairing_phonebook_toggle_details" msgid="1367197978487212581">"Upplýsingar verða notaðar fyrir símtalatilkynningar og fleira"</string>
@@ -1389,8 +1405,7 @@
     <string name="battery_level_title" msgid="1371765298786083448">"Staða rafhlöðu"</string>
     <string name="communal_settings_title" msgid="2845678473945902115">"Sameiginlegt"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"Sameiginlegar stillingar"</string>
-    <!-- no translation found for satellite_setting (706846910912477125) -->
-    <skip />
+    <string name="satellite_setting" msgid="706846910912477125">"Gervihnattarskilaboð"</string>
     <string name="apn_settings" msgid="4295467389400441299">"Aðgangsstaðir"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Breyta aðgangsstað"</string>
     <string name="apn_add" msgid="9069613192201630934">"Bæta við aðgangsstað"</string>
@@ -1425,8 +1440,7 @@
     <string name="menu_save" msgid="6611465355127483100">"Vista"</string>
     <string name="menu_cancel" msgid="1197826697950745335">"Hætta við"</string>
     <string name="error_title" msgid="7158648377702417716"></string>
-    <!-- no translation found for error_duplicate_apn_entry (7792928408935276618) -->
-    <skip />
+    <string name="error_duplicate_apn_entry" msgid="7792928408935276618">"Afritaður aðgangsstaður."</string>
     <string name="error_name_empty" msgid="1258275899283079142">"Reiturinn fyrir heiti má ekki vera auður."</string>
     <string name="error_apn_empty" msgid="7657491065443746915">"Heiti aðgangsstaðar má ekki vera autt."</string>
     <string name="error_mcc_not3" msgid="883659545640179094">"MCC-reitur verður að innihalda 3 tölustafi."</string>
@@ -1445,8 +1459,7 @@
     <string name="reset_bluetooth_wifi_button_text" msgid="3974098137045963639">"Endurstilla"</string>
     <string name="reset_bluetooth_wifi_complete_toast" msgid="5893439291030574365">"Bluetooth og Wi‑Fi hafa verið endurstillt"</string>
     <string name="reset_esim_title" msgid="4194570573425902754">"Eyða eSIM-kortum"</string>
-    <!-- no translation found for reset_esim_desc (6125192435907740751) -->
-    <skip />
+    <string name="reset_esim_desc" msgid="6125192435907740751">"Farsímaáskriftinni þinni verður ekki sagt upp. Hafðu samband við símafyrirtækið þitt til að fá nýtt SIM-kort."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"Endurstilla"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"Endurstilla allar netstillingar? Ekki er hægt að afturkalla þessa aðgerð."</string>
     <string name="reset_network_final_desc_esim" msgid="1129251284212847939">"Endurstilla allar netstillingar og eyða eSIM-kortum? Ekki er hægt að afturkalla þessa aðgerð."</string>
@@ -1454,18 +1467,15 @@
     <string name="reset_network_confirm_title" msgid="913014422184481270">"Endurstilla?"</string>
     <string name="network_reset_not_available" msgid="1966334631394607829">"Núllstilling nets er ekki í boði fyrir þennan notanda"</string>
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"Netstillingar voru endurstilltar"</string>
-    <!-- no translation found for reset_esim_error_title (6516110227665862295) -->
-    <skip />
-    <!-- no translation found for reset_esim_error_msg (8459527827897797168) -->
-    <skip />
+    <string name="reset_esim_error_title" msgid="6516110227665862295">"Ekki tókst að eyða eSIM-kortum"</string>
+    <string name="reset_esim_error_msg" msgid="8459527827897797168">"Eitthvað fór úrskeiðis og ekki tókst að eyða eSIM-kortunum.\n\nEndurræstu tækið og reyndu aftur."</string>
     <string name="main_clear_title" msgid="277664302144837723">"Eyða öllum gögnum (núllstilla)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Eyða öllum gögnum (núllstilla)"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"Tónlist"</li>\n<li>"Myndum"</li>\n<li>"Öðrum notandagögnum"</li></string>
     <string name="main_clear_desc_also_erases_esim" msgid="4553469876411831729"><li>"eSIM-kort"</li></string>
     <string name="main_clear_desc_no_cancel_mobile_plan" msgid="369883568059127035">\n\n"Þetta mun ekki segja upp farsímaáskrift þinni."</string>
     <string name="main_clear_final_desc" msgid="5800877928569039580">"Öllum persónuupplýsingunum þínum og forritum sem hafa verið sótt verður eytt. Ekki er hægt að afturkalla þessa aðgerð."</string>
-    <!-- no translation found for main_clear_final_desc_esim (6592404057237813989) -->
-    <skip />
+    <string name="main_clear_final_desc_esim" msgid="6592404057237813989">"Öllum persónuupplýsingunum þínum verður eytt, þ.m.t. sóttum forritum og eSIM-kortum. Ekki er hægt að afturkalla þessa aðgerð."</string>
     <string name="main_clear_confirm_title" msgid="6577071819657853713">"Viltu eyða öllum gögnum?"</string>
     <string name="main_clear_not_available" msgid="3433795327146684827">"Núllstilling er ekki í boði fyrir þennan notanda"</string>
     <string name="main_clear_progress_title" msgid="7239741132015617719">"Eyðir"</string>
@@ -1696,14 +1706,10 @@
     <string name="force_stop" msgid="2681771622136916280">"Þvinga lokun"</string>
     <string name="archive" msgid="9074663845068632127">"Setja í geymslu"</string>
     <string name="restore" msgid="7622486640713967157">"Endurheimta"</string>
-    <!-- no translation found for restoring_step_one (3465050101254272874) -->
-    <skip />
-    <!-- no translation found for restoring_step_two (140484846432595108) -->
-    <skip />
-    <!-- no translation found for restoring_step_three (3712883580876329811) -->
-    <skip />
-    <!-- no translation found for restoring_step_four (8966846882470446209) -->
-    <skip />
+    <string name="restoring_step_one" msgid="3465050101254272874">"Endurheimtir"</string>
+    <string name="restoring_step_two" msgid="140484846432595108">"Endurheimtir."</string>
+    <string name="restoring_step_three" msgid="3712883580876329811">"Endurheimtir.."</string>
+    <string name="restoring_step_four" msgid="8966846882470446209">"Endurheimtir..."</string>
     <string name="total_size_label" msgid="2052185048749658866">"Samtals"</string>
     <string name="application_size_label" msgid="6407051020651716729">"Stærð forrits"</string>
     <string name="external_code_size_label" msgid="7375146402660973743">"USB-geymsluforrit"</string>
@@ -1852,6 +1858,8 @@
     <string name="show_ime_summary" msgid="7293345791727205975">"Haltu því á skjánum meðan vélbúnaðarlyklaborðið er virkt"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"Endurkastslyklar"</string>
     <string name="bounce_keys_summary" msgid="6922850403920596246">"Virkjaðu endurkastslykla fyrir aukið aðgengi á vélbúnaðarlyklaborðinu"</string>
+    <string name="slow_keys" msgid="2891452895499690837">"Hægir lyklar"</string>
+    <string name="slow_keys_summary" msgid="6147992959180167575">"Virkjaðu hæga lykla fyrir aukið aðgengi á vélbúnaðarlyklaborðinu"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"Festilyklar"</string>
     <string name="sticky_keys_summary" msgid="8520909829540989765">"Virkjaðu festilykla fyrir aukið aðgengi á vélbúnaðarlyklaborðinu"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Flýtilyklar"</string>
@@ -2424,8 +2432,7 @@
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Fjarlægja"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Hætta við"</string>
     <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"Fullhlaða"</string>
-    <!-- no translation found for battery_tip_incompatible_charging_title (1567827436103364999) -->
-    <skip />
+    <string name="battery_tip_incompatible_charging_title" msgid="1567827436103364999">"Athugaðu hleðslubúnaðinn"</string>
     <string name="battery_tip_incompatible_charging_content_description" msgid="355668467640367701">"Nánar um ósamhæfa hleðslu"</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"Rafhlöðustjórnun"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"Stjórna forritum sjálfkrafa"</string>
@@ -3018,7 +3025,8 @@
     <string name="sim_status_title" msgid="6188770698037109774">"Staða SIM-korts"</string>
     <string name="sim_status_title_sim_slot" msgid="4932996839194493313">"SIM-staða (SIM-rauf %1$d)"</string>
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
-    <string name="sim_notification_title" msgid="2819551384383504031">"SIM-kortum breytt."</string>
+    <!-- no translation found for sim_notification_title (6839556577405929262) -->
+    <skip />
     <string name="sim_notification_summary" msgid="5593339846307029991">"Ýttu til að setja upp"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="3077694594349657933">"Spyrja í hvert skipti"</string>
     <string name="sim_selection_required_pref" msgid="231437651041498359">"Val er áskilið"</string>
@@ -3042,7 +3050,8 @@
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Nýleg forrit, sjálfgefin forrit"</string>
     <string name="notification_settings_work_profile" msgid="6076211850526353975">"Tilkynningaaðgangur er ekki í boði fyrir forrit í vinnusniði."</string>
     <string name="account_dashboard_title" msgid="8228773251948253914">"Aðgangsorð og reikningar"</string>
-    <string name="account_dashboard_default_summary" msgid="1730719656099599488">"Vistuð aðgangsorð, sjálfvirk útfylling, samstilltir reikningar"</string>
+    <!-- no translation found for account_dashboard_default_summary (7976899924144356939) -->
+    <skip />
     <string name="app_default_dashboard_title" msgid="4071015747629103216">"Sjálfgefin forrit"</string>
     <string name="cloned_apps_dashboard_title" msgid="5542076801222950921">"Klónuð forrit"</string>
     <string name="desc_cloned_apps_intro_text" msgid="1369621522882622476">"Búðu til annað tilvik forrits svo þú getir notað tvo reikninga samtímis."</string>
@@ -3680,7 +3689,8 @@
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Biðja um PIN-númer til að losa"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Biðja um aðgangsorð til að losa"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Læsa tækinu við losun"</string>
-    <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Staðfesta eyðingu SIM-korts"</string>
+    <!-- no translation found for confirm_sim_deletion_title (7262127071183428893) -->
+    <skip />
     <string name="confirm_sim_deletion_description" msgid="4439657901673639063">"Staðfestu að þetta sért þú áður en þú eyðir eSIM"</string>
     <string name="memtag_title" msgid="5096176296797727201">"Ítarleg minnisvernd – beta"</string>
     <string name="memtag_toggle" msgid="8695028758462939212">"Ítarleg minnisvernd"</string>
@@ -3881,8 +3891,6 @@
     <string name="voice_activation_apps_title" msgid="7130045161611529825">"Raddstýringarforrit"</string>
     <string name="permit_voice_activation_apps" msgid="9152780172988949319">"Leyfa raddstýringu"</string>
     <string name="allow_voice_activation_apps_description" msgid="6369745626995060656">"Raddvirkjun kveikir handfrjálst á samþykktum forritum með raddskipun. Innbyggð aðlögunarhæf skynjun tryggir að gögnin séu lokuð öðrum en þér.\n\n"<a href="">"Nánar um aðlögunarhæfa skynjun með vörn"</a></string>
-    <string name="permit_receive_sandboxed_detection_training_data" msgid="3929496847420108753">"Bættu raddvirkjun"</string>
-    <string name="receive_sandboxed_detection_training_data_description" msgid="1415687008184625050">"Þetta tæki notar persónuupplýsingar til að bæta raddvirkjunarlíkanið. Forrit geta fengið samanteknar uppfærslur sem er safnað frá mörgum notendum til að viðhalda persónuvernd á meðan líkanið er bætt fyrir alla.\n\n"<a href="">"Nánar um notkun persónuupplýsinga"</a></string>
     <string name="full_screen_intent_title" msgid="747270185715224130">"Tilkynningar á öllum skjánum"</string>
     <string name="permit_full_screen_intent" msgid="9035367640019960861">"Leyfa tilkynningar á öllum skjánum frá þessu forriti"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Leyfa forritinu að birta tilkynningar á öllum skjánum þegar tækið er læst. Forrit kunna að nota þennan eiginleika til að leggja áherslu á vekjara, móttekin símtöl og aðrar áríðandi tilkynningar."</string>
@@ -4304,22 +4312,23 @@
     <string name="autofill_app" msgid="7595308061826307921">"Sjálfvirk útfyllingarþjónusta"</string>
     <string name="default_autofill_app" msgid="372234803718251606">"Sjálfgefin sjálfvirk útfyllingarþjónusta"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"Aðgangsorð"</string>
-    <!-- no translation found for credman_chosen_app_title (7735183808067729319) -->
+    <string name="credman_chosen_app_title" msgid="7735183808067729319">"Valin þjónusta"</string>
+    <!-- no translation found for credman_credentials (2620352336624160642) -->
     <skip />
-    <string name="credman_credentials" msgid="4931371941253324143">"Fleiri þjónustuaðilar"</string>
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# aðgangsorð}one{# aðgangsorð}other{# aðgangsorð}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"sjálfvirk, útfylling, sjálfvirk útfylling, aðgangsorð"</string>
     <string name="credman_keywords" msgid="8305600680836806170">"gögn, aðgangslykill, aðgangsorð"</string>
     <string name="credman_autofill_keywords" msgid="701180623776848914">"sjálfvirkt, útfylling, sjálfvirk útfylling, gögn, aðgangslykill, aðgangsorð"</string>
-    <!-- no translation found for credman_button_change (4072629639218503790) -->
-    <skip />
-    <!-- no translation found for credman_button_open (7519871964170816850) -->
-    <skip />
+    <string name="credman_button_change" msgid="4072629639218503790">"Breyta"</string>
+    <string name="credman_button_open" msgid="7519871964170816850">"Opna"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Gakktu úr skugga um að þú treystir þessu forriti&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Sjálfvirk útfylling Google&gt;%1$s&lt;/xliff:g&gt; notar það sem er á skjánum til að ákvarða hvað er hægt að fylla sjálfkrafa út."</string>
     <string name="credman_autofill_confirmation_message" msgid="843829628024668466">"&lt;b&gt;Nota &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Ný aðgangsorð, aðgangslyklar og aðrar upplýsingar verða vistaðar hér framvegis. &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; kann að nota það sem er á skjánum hjá þér til að greina hvað er hægt að fylla sjálfkrafa út."</string>
-    <string name="credman_picker_title" msgid="8191267620665129205">"Aðgangsorð, aðgangslyklar og gagnaþjónustur"</string>
+    <!-- no translation found for credman_picker_title (8442086614222006564) -->
+    <skip />
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Viltu slökkva á %1$s?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Viltu slökkva á þessari þjónustu?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Vistaðar upplýsingar á borð við aðgangsorð, aðgangslykla, greiðslumáta og aðrar upplýsingar verða ekki fylltar út þegar þú skráir þig inn. Veldu aðgangsorð, aðgangslykil eða gagnaþjónustu til að nota vistuðu upplýsingarnar."</string>
+    <!-- no translation found for account_dashboard_title_with_passkeys (6214673787161409996) -->
+    <skip />
     <string name="credman_confirmation_message_new_ui" msgid="6126274509951156460">"&lt;b&gt;Slökkva á öllum þjónustum?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Aðgangsorð, aðgangslyklar og aðrar vistaðar upplýsingar verða ekki tiltækar fyrir sjálfvirka útfyllingu þegar þú skráir þig inn"</string>
     <string name="credman_autofill_confirmation_message_new_ui" msgid="6222139222478822267">"&lt;b&gt;Breyta valinni þjónustu í &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Ný aðgangsorð, aðgangslyklar og aðrar upplýsingar verða vistaðar héðan í frá. &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; kann að nota það sem er á skjánum hjá þér til að greina hvað er hægt að fylla sjálfkrafa út"</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"Nota %1$s?"</string>
@@ -4496,10 +4505,11 @@
     <string name="mobile_network_sim_name_rename" msgid="5967588549571582924">"Vista"</string>
     <string name="mobile_network_use_sim_on" msgid="5333182776279917886">"Nota þetta SIM-kort"</string>
     <string name="mobile_network_use_sim_off" msgid="6303281166199670639">"Slökkt"</string>
-    <string name="mobile_network_disable_sim_explanation" msgid="2851862257846773796">"Til að gera SIM-kort óvirkt þarftu að fjarlægja það úr símanum"</string>
-    <string name="mobile_network_tap_to_activate" msgid="4139979375717958102">"Ýttu til að virkja <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <!-- no translation found for mobile_network_erase_sim (5387971155494245850) -->
+    <!-- no translation found for mobile_network_disable_sim_explanation (7182341033728911879) -->
     <skip />
+    <!-- no translation found for mobile_network_tap_to_activate (5280456487243915465) -->
+    <skip />
+    <string name="mobile_network_erase_sim" msgid="5387971155494245850">"Eyða eSIM-korti"</string>
     <string name="preferred_network_mode_title" msgid="3083431168988535628">"Valin símkerfistegund"</string>
     <string name="preferred_network_mode_summary" msgid="537577807865497546">"Breyta virknihætti símkerfis"</string>
     <string name="preferred_network_mode_dialogtitle" msgid="4179420486180351631">"Valin símkerfistegund"</string>
@@ -4518,40 +4528,23 @@
     <string name="roaming_check_price_warning" msgid="5876977438036791361">"Upplýsingar um verð fást hjá símafyrirtækinu."</string>
     <string name="mobile_data_usage_title" msgid="2047864499317759728">"Gagnanotkun forrits"</string>
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"Ógild símkerfisstilling <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Hunsa."</string>
-    <!-- no translation found for satellite_setting_title (2543034229989047673) -->
-    <skip />
-    <!-- no translation found for satellite_setting_enabled_summary (3554127722727530845) -->
-    <skip />
-    <!-- no translation found for satellite_setting_disabled_summary (6789122487534159857) -->
-    <skip />
-    <!-- no translation found for keywords_satellite_setting (3312183289776517695) -->
-    <skip />
-    <!-- no translation found for category_name_about_satellite_messaging (3756205049485508340) -->
-    <skip />
-    <!-- no translation found for title_about_satellite_setting (9212860038048311345) -->
-    <skip />
-    <!-- no translation found for category_title_your_satellite_plan (3017895097366691841) -->
-    <skip />
-    <!-- no translation found for title_have_satellite_plan (2048372355699977947) -->
-    <skip />
-    <!-- no translation found for title_no_satellite_plan (2876056203035197505) -->
-    <skip />
-    <!-- no translation found for summary_add_satellite_setting (3815254731634052432) -->
-    <skip />
-    <!-- no translation found for category_name_how_it_works (585303230539269496) -->
-    <skip />
-    <!-- no translation found for title_satellite_connection_guide (3294802307913609072) -->
-    <skip />
-    <!-- no translation found for summary_satellite_connection_guide (3496123195218418456) -->
-    <skip />
-    <!-- no translation found for title_supported_service (4275535165812691571) -->
-    <skip />
-    <!-- no translation found for summary_supported_service (4320535903444834786) -->
-    <skip />
-    <!-- no translation found for satellite_setting_summary_more_information (4008690241760925372) -->
-    <skip />
-    <!-- no translation found for more_about_satellite_messaging (3385673133561348509) -->
-    <skip />
+    <string name="satellite_setting_title" msgid="2543034229989047673">"Gervihnattarskilaboð"</string>
+    <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"Sendu og taktu á móti SMS-skilaboðum um gervihnött. Hluti af reikningnum þínum."</string>
+    <string name="satellite_setting_disabled_summary" msgid="6789122487534159857">"Sendu og taktu á móti SMS-skilaboðum um gervihnött. Ekki hluti af reikningnum þínum."</string>
+    <string name="keywords_satellite_setting" msgid="3312183289776517695">"Gervihnattarskilaboð"</string>
+    <string name="category_name_about_satellite_messaging" msgid="3756205049485508340">"Um gervihnattarskilaboð"</string>
+    <string name="title_about_satellite_setting" msgid="9212860038048311345">"Þú getur sent og tekið á móti SMS-skilaboðum um gervihnött ef þú ert með gjaldgengann reikning hjá <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="category_title_your_satellite_plan" msgid="3017895097366691841">"Áskriftin þín hjá <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="title_have_satellite_plan" msgid="2048372355699977947">"Gervihnattarskilaboð eru hluti af reikningnum þínum"</string>
+    <string name="title_no_satellite_plan" msgid="2876056203035197505">"Gervihnattarskilaboð eru ekki hluti af reikningnum þínum"</string>
+    <string name="summary_add_satellite_setting" msgid="3815254731634052432">"Bæta við gervihnattarskilaboðum"</string>
+    <string name="category_name_how_it_works" msgid="585303230539269496">"Svona virkar þetta"</string>
+    <string name="title_satellite_connection_guide" msgid="3294802307913609072">"Þegar farsímakerfi er ekki tiltækt"</string>
+    <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"Síminn mun tengjast gervihnetti sjálfkrafa. Vertu utandyra þar sem himininn sést vel til að ná sem bestri tengingu."</string>
+    <string name="title_supported_service" msgid="4275535165812691571">"Eftir að síminn tengist gervihnetti"</string>
+    <string name="summary_supported_service" msgid="4320535903444834786">"Þú getur sent hverjum sem er skilaboð, þ.m.t. neyðarþjónustu. Síminn mun tengjast farsímakerfi aftur þegar það er tiltækt."</string>
+    <string name="satellite_setting_summary_more_information" msgid="4008690241760925372">"Gervihnattarskilaboð gætu tekið lengri tíma og eru aðeins í boði á tilteknum svæðum. Veður og ákveðin mannvirki kunna að hafa áhrif á gervihnattartenginguna. Ekki er hægt að hringja um gervihnött.\n\nÞað gæti tekið smástund þar til breytingarnar á reikningnum þínum birtast í stillingunum. Hafðu samband við <xliff:g id="CARRIER_NAME">%1$s</xliff:g> fyrir frekari upplýsingar."</string>
+    <string name="more_about_satellite_messaging" msgid="3385673133561348509">"Nánar um gervihnattarskilaboð"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Heiti aðgangsstaða"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"Aðgangsstaður"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Ekki í boði þegar tenging við <xliff:g id="CARRIER">%1$s</xliff:g> er til staðar"</string>
@@ -4561,25 +4554,28 @@
     <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"Skipta yfir í <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"Viltu skipta yfir í að nota SIM-kort?"</string>
     <string name="sim_action_switch_sub_dialog_mep_title" msgid="933856847099933004">"Viltu nota <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
-    <!-- no translation found for sim_action_switch_sub_dialog_text (7474905814976249607) -->
-    <skip />
-    <!-- no translation found for sim_action_switch_sub_dialog_text_downloaded (6415848271400253954) -->
-    <skip />
-    <!-- no translation found for sim_action_switch_sub_dialog_text_single_sim (421658355882679837) -->
-    <skip />
+    <string name="sim_action_switch_sub_dialog_text" msgid="7474905814976249607">"Aðeins er hægt að vera með eitt SIM-kort virkt í einu.\n\nÞótt þú skiptir yfir í <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> verður þjónustunni þinni hjá <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> ekki sagt upp."</string>
+    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="6415848271400253954">"Aðeins er hægt að vera með eitt eSIM-kort virkt í einu.\n\nÞótt þú skiptir yfir í <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> verður þjónustunni þinni hjá <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> ekki sagt upp."</string>
+    <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="421658355882679837">"Aðeins er hægt að vera með eitt SIM-kort virkt í einu.\n\nÞótt þú skiptir verður þjónustunni þinni hjá <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> ekki sagt upp."</string>
     <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"Þú getur notað 2 SIM-kort í einu. Slökktu á öðru SIM-kortinu til að nota <xliff:g id="CARRIER_NAME">%1$s</xliff:g>."</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"Skipta yfir í <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"Slökkva á <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"Þjónustunni verður ekki sagt upp þótt slökkt sé á SIM"</string>
-    <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"Tengist farsímakerfi…"</string>
-    <string name="sim_action_switch_sub_dialog_progress" msgid="4718412054243793310">"Skiptir yfir í <xliff:g id="CARRIER_NAME">%1$s</xliff:g> fyrir símtöl og skilaboð…"</string>
-    <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"Ekki hægt að skipta um símafyrirtæki"</string>
-    <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"Ekki er hægt að skipta um símafyrirtæki sökum villu."</string>
+    <!-- no translation found for sim_action_enabling_sim_without_carrier_name (8144175623622669136) -->
+    <skip />
+    <!-- no translation found for sim_action_switch_sub_dialog_progress (697127154780501304) -->
+    <skip />
+    <!-- no translation found for sim_action_enable_sim_fail_title (2718084141744769701) -->
+    <skip />
+    <!-- no translation found for sim_action_enable_sim_fail_text (8332742656111984482) -->
+    <skip />
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"Viltu slökkva á <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="privileged_action_disable_sub_dialog_title_without_carrier" msgid="6518373229436331608">"Slökkva á SIM-korti?"</string>
     <string name="privileged_action_disable_sub_dialog_progress" msgid="5900243067681478102">"Slekkur á SIM-korti<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
-    <string name="privileged_action_disable_fail_title" msgid="6689494935697043555">"Ekki er hægt að gera símafyrirtæki óvirkt"</string>
-    <string name="privileged_action_disable_fail_text" msgid="8404023523406091819">"Eitthvað fór úrskeiðis og ekki var hægt að gera símafyrirtækið óvirkt."</string>
+    <!-- no translation found for privileged_action_disable_fail_title (1808735136395980905) -->
+    <skip />
+    <!-- no translation found for privileged_action_disable_fail_text (6236231745255527458) -->
+    <skip />
     <string name="sim_action_enable_dsds_title" msgid="226508711751577169">"Viltu nota 2 SIM-kort?"</string>
     <string name="sim_action_enable_dsds_text" msgid="970986559326263949">"Þetta tæki getur verið með tvö SIM-kort virk í einu. Ýttu á „Nei takk“ til að halda áfram að nota aðeins eitt SIM-kort."</string>
     <string name="sim_action_restart_title" msgid="7054617569121993825">"Endurræsa tæki?"</string>
@@ -4609,39 +4605,38 @@
     <string name="sim_onboarding_phoneNumber_data_only" msgid="8158409121949373662">"Aðeins gögn"</string>
     <string name="sim_onboarding_setup" msgid="5750393553605388463">"Setja upp"</string>
     <string name="sim_onboarding_next" msgid="6415025179929475355">"Áfram"</string>
-    <!-- no translation found for sim_onboarding_progressbar_turning_sim_on (1163318788393361574) -->
-    <skip />
+    <string name="sim_onboarding_progressbar_turning_sim_on" msgid="1163318788393361574">"Virkjar <xliff:g id="CARRIER_NAME">%1$s</xliff:g>…"</string>
     <string name="mobile_network_spn_title" msgid="3053793174495329077">"Farsímakerfi"</string>
     <string name="mobile_network_phone_number_title" msgid="2090794402855021784">"Símanúmer"</string>
     <string name="mobile_network_sim_label_color_title" msgid="2401352348041132876">"Merki og litur SIM-korts"</string>
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"Virkjun símkerfis"</string>
     <string name="sim_switch_channel_id" msgid="4927038626791837861">"Skipt um símafyrirtæki"</string>
-    <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> er virkt"</string>
+    <!-- no translation found for post_dsds_reboot_notification_title_with_carrier (975447139749692794) -->
+    <skip />
     <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"Ýttu til að uppfæra stillingar SIM-korts"</string>
     <string name="switch_to_removable_notification" msgid="7640342063449806296">"Skipt yfir í <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="switch_to_removable_notification_no_carrier_name" msgid="7384856964036215338">"Skipt yfir til annars símafyrirtækis"</string>
     <string name="network_changed_notification_text" msgid="2407908598496951243">"Skipt var um farsímakerfi"</string>
     <string name="dsds_notification_after_suw_title" msgid="3738898232310273982">"Setja upp annað SIM-kort"</string>
     <string name="dsds_notification_after_suw_text" msgid="1287357774676361084">"Veldu virkt SIM-kort eða notaðu tvö SIM-kort í einu"</string>
-    <string name="choose_sim_title" msgid="4804689675237716286">"Veldu númerið sem á að nota"</string>
-    <string name="choose_sim_text" msgid="4356662002583501647">"{count,plural, =1{1 númer er tiltækt í þessu tæki en aðeins er hægt að nota eitt í einu}=2{2 númer eru tiltæk í þessu tæki en aðeins er hægt að nota eitt í einu}one{# númer er tiltækt í þessu tæki en aðeins er hægt að nota eitt í einu}other{# númer eru tiltæk í þessu tæki en aðeins er hægt að nota eitt í einu}}"</string>
+    <!-- no translation found for choose_sim_title (66509047151583877) -->
+    <skip />
+    <!-- no translation found for choose_sim_text (8992163497852069924) -->
+    <skip />
     <string name="choose_sim_activating" msgid="9035902671985449448">"Virkjar<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
-    <string name="choose_sim_could_not_activate" msgid="2154564459842291617">"Ekki er hægt að virkja eins og er"</string>
+    <!-- no translation found for choose_sim_could_not_activate (1907240714489797917) -->
+    <skip />
     <string name="switch_sim_dialog_title" msgid="5407316878973237773">"Viltu nota <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="switch_sim_dialog_text" msgid="7530186862171635464">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> verður notað fyrir farsímagögn, símtöl og SMS."</string>
     <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"Ekkert virkt SIM-kort í boði"</string>
     <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"Til að nota farsímagögn, símtalseiginleika og SMS síðar skaltu fara í netstillingar"</string>
     <string name="sim_card_label" msgid="6263064316075963775">"SIM"</string>
     <string name="erase_sim_dialog_title" msgid="4742077437653028326">"Eyða þessu eSIM?"</string>
-    <!-- no translation found for erase_sim_dialog_text (1406141218170595272) -->
-    <skip />
+    <string name="erase_sim_dialog_text" msgid="1406141218170595272">"Þetta fjarlægir þjónustu <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> úr þessu tæki en áskrift þinni hjá <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> verður ekki sagt upp."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Hreinsa"</string>
-    <!-- no translation found for erasing_sim (4237180547590463930) -->
-    <skip />
-    <!-- no translation found for erase_sim_fail_title (1445700500168357303) -->
-    <skip />
-    <!-- no translation found for erase_sim_fail_text (6898841004987411547) -->
-    <skip />
+    <string name="erasing_sim" msgid="4237180547590463930">"Eyðir eSIM-korti…"</string>
+    <string name="erase_sim_fail_title" msgid="1445700500168357303">"Ekki tókst að eyða eSIM-korti"</string>
+    <string name="erase_sim_fail_text" msgid="6898841004987411547">"Eitthvað fór úrskeiðis og ekki tókst að eyða eSIM-kortinu.\n\nEndurræstu tækið og reyndu aftur."</string>
     <string name="network_connection_request_dialog_title" msgid="1896186380874289434">"Tengjast tæki"</string>
     <string name="network_connection_request_dialog_summary" msgid="7693038309792726170">"Forritið <xliff:g id="APPNAME">%1$s</xliff:g> vill nota tímabundið Wi‑Fi net til að tengjast við tækið þitt"</string>
     <string name="network_connection_timeout_dialog_message" msgid="598509083077743772">"Engin tæki fundust. Gakktu úr skugga um að kveikt sé á tækjunum og að hægt sé að tengjast við þau."</string>
@@ -4769,6 +4764,10 @@
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Leyfa forrit sem geta birst yfir öðrum forritum að leggjast yfir stillingaskjái"</string>
     <string name="allow_mock_modem" msgid="3832264806530479214">"Leyfa gervimótald"</string>
     <string name="allow_mock_modem_summary" msgid="9097416612748005374">"Leyfðu þessu tæki að keyra gervimótaldsþjónustu fyrir prófun tækja. Ekki gera þetta virkt á meðan síminn er notaður á hefðbundinn hátt"</string>
+    <!-- no translation found for disable_screen_share_protections_for_apps_and_notifications (4987116103699222633) -->
+    <skip />
+    <!-- no translation found for disable_screen_share_protections_for_apps_and_notifications_summary (932295234626582052) -->
+    <skip />
     <string name="media_controls_title" msgid="403271085636252597">"Margmiðlunarefni"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Festa efnisspilara"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Efnisspilarinn helst opinn í flýtistillingum svo hægt sé að ræsa spilun aftur í skyndi"</string>
@@ -4806,10 +4805,8 @@
     <string name="sim_category_title" msgid="2341314000964710495">"SIM"</string>
     <string name="downloaded_sim_category_title" msgid="2876988650413179752">"eSIM"</string>
     <string name="downloaded_sims_category_title" msgid="487799905978489922">"eSIM"</string>
-    <!-- no translation found for sim_category_active_sim (3077009911935592178) -->
-    <skip />
-    <!-- no translation found for sim_category_inactive_sim (7351553344148400450) -->
-    <skip />
+    <string name="sim_category_active_sim" msgid="3077009911935592178">"Virkt"</string>
+    <string name="sim_category_inactive_sim" msgid="7351553344148400450">"Óvirkt"</string>
     <string name="sim_category_default_active_sim" msgid="1208194173387987231">" / Sjálfgefið fyrir <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="default_active_sim_calls" msgid="2390973682556353558">"símtöl"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"SMS"</string>
@@ -5087,4 +5084,6 @@
     <string name="content_protection_preference_subpage_summary" msgid="3595621220981703364"></string>
     <string name="content_protection_preference_subpage_info" msgid="6890886357653365489"></string>
     <string name="accessibility_setup_password_complete" msgid="6358749253318369077">"Aðgangsorð hefur nú verið stillt"</string>
+    <!-- no translation found for show_stylus_pointer_icon (1010583689203665786) -->
+    <skip />
 </resources>

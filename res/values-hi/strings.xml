@@ -115,6 +115,7 @@
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"अभी नहीं"</string>
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"\'ब्लूटूथ LE Audio\' को बंद करें"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"अगर डिवाइस पर LE Audio हार्डवेयर चलता है, तो \'ब्लूटूथ LE Audio\' को बंद करें."</string>
+    <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"ब्लूटूथ LE Audio मोड"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"डिवाइस डिटेल में LE Audio टॉगल दिखाएं"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"ब्लूटूथ LE Audio के लिए, जिन लोगों या संगठनों को अनुमति मिली है उनकी सूची बायपास करें"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"डिफ़ॉल्ट रूप से LE Audio का इस्तेमाल करें. भले ही, जिन लोगों या संगठनों को अनुमति मिली है उनकी सूची में शामिल करने के लिए, LE Audio के साथ काम करने वाले डिवाइस की पुष्टि न की गई हो."</string>
@@ -462,7 +463,7 @@
     <string name="skip_lock_screen_dialog_button_label" msgid="641984698150020591">"सेट अप न करें"</string>
     <string name="cancel_lock_screen_dialog_button_label" msgid="1801132985957491690">"रद्द करें"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="886085239313346000">"सेंसर को छुएं"</string>
-    <string name="security_settings_sfps_enroll_find_sensor_title" msgid="8327884364635804363">"पावर बटन को बिना दबाए हाथ से छुएं"</string>
+    <string name="security_settings_sfps_enroll_find_sensor_title" msgid="8327884364635804363">"पावर बटन को दबाने के बजाय, इसे बस उंगली से छुएं"</string>
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"फ़िंगरप्रिंट सेट अप करने का तरीका"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"यह आपके फ़ोन के पीछे दिया गया है. अपने अंगूठे के पास की उंगली का उपयोग करें."</string>
     <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"फ़िंगरप्रिंट सेंसर आपकी स्क्रीन पर मौजूद है. आपको अगली स्क्रीन पर अपना फ़िंगरप्रिंट कैप्चर करने का विकल्प मिलेगा."</string>
@@ -545,21 +546,27 @@
     <string name="security_header" msgid="961514795852103424">"सुरक्षा"</string>
     <string name="privacy_header" msgid="5526002421324257007">"निजता"</string>
     <string name="work_profile_category_header" msgid="85707750968948517">"वर्क प्रोफ़ाइल"</string>
-    <string name="private_space_title" msgid="7078627930195569767">"प्राइवेट स्पेस"</string>
+    <!-- no translation found for private_space_title (1752064212078238723) -->
+    <skip />
     <string name="private_space_summary" msgid="2274405892301976238">"निजी ऐप्लिकेशन, लॉक करें और छिपाकर रखें"</string>
     <string name="private_space_description" msgid="4059594203775816136">"निजी ऐप्लिकेशन ऐसी जगह पर रखें जिसे छिपाया या लॉक किया जा सकता है"</string>
-    <string name="private_space_lock_title" msgid="3006539720164938296">"प्राइवेट स्पेस लॉक"</string>
-    <string name="private_space_one_lock_summary" msgid="2759953747682959371">"डिवाइस की तरह ही प्राइवेट स्पेस को अनलॉक किया जा सकता है या कोई दूसरा लॉक सेट किया जा सकता है"</string>
+    <!-- no translation found for private_space_lock_title (7230836881433350526) -->
+    <skip />
+    <!-- no translation found for private_space_one_lock_summary (2106513606571219068) -->
+    <skip />
     <string name="private_space_screen_lock_title" msgid="8679383894967823163">"डिवाइस के स्क्रीन लॉक का इस्तेमाल करें"</string>
     <string name="private_space_biometric_title" msgid="3934339826674553174">"फ़ेस और फ़िंगरप्रिंट अनलॉक"</string>
     <string name="private_space_fingerprint_title" msgid="5989254643211889931">"फ़िंगरप्रिंट अनलॉक"</string>
     <string name="private_space_face_title" msgid="3290402865367663079">"फ़ेस अनलॉक"</string>
     <string name="private_space_biometric_summary" msgid="4403837276018724581">"सेट अप करने के लिए टैप करें"</string>
-    <string name="private_space_fingerprint_unlock_title" msgid="5804023571114910034">"प्राइवेट स्पेस के लिए फ़िंगरप्रिंट अनलॉक"</string>
-    <string name="private_space_face_unlock_title" msgid="6613018437620070183">"प्राइवेट स्पेस के लिए फ़ेस अनलॉक"</string>
+    <!-- no translation found for private_space_fingerprint_unlock_title (3614016453395789051) -->
+    <skip />
+    <!-- no translation found for private_space_face_unlock_title (462248384776453613) -->
+    <skip />
     <string name="private_space_category_ways_to_unlock" msgid="4356631225316950046">"फ़ोन को अनलॉक करने के तरीके"</string>
     <string name="private_space_screen_lock_summary" msgid="394837965365561070">"डिवाइस के स्क्रीन लॉक की तरह"</string>
-    <string name="private_space_new_lock_title" msgid="7306873010565337671">"प्राइवेट स्पेस के लिए नया लॉक चुनना है?"</string>
+    <!-- no translation found for private_space_new_lock_title (9056139964133004094) -->
+    <skip />
     <string name="private_space_auto_lock_title" msgid="4757097802686131305">"अपने-आप लॉक होने की सुविधा पाएं"</string>
     <string name="private_space_auto_lock_page_title" msgid="2993714305725968632">"प्राइवेट स्पेस अपने-आप लॉक होने की सुविधा पाएं"</string>
     <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"आपके पास यह विकल्प है कि डिवाइस का इस्तेमाल कुछ समय तक न होने पर, प्राइवेट स्पेस अपने-आप लॉक हो जाए"</string>
@@ -567,18 +574,32 @@
     <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"पांच मिनट तक कोई गतिविधि न होने पर"</string>
     <string name="private_space_auto_lock_never" msgid="595014527119778873">"कभी नहीं"</string>
     <string name="private_space_hide_title" msgid="8687034008994037610">"लॉक होने पर छिपाएं"</string>
-    <string name="privatespace_hide_page_title" msgid="972581369094289386">"लॉक होने पर प्राइवेट स्पेस छिपाएं"</string>
-    <string name="privatespace_hide_page_summary" msgid="1052569521186403642">"डिवाइस पर प्राइवेट स्पेस छिपाने के लिए, अपने ऐप्लिकेशन सूची से इसे छिपाएं"</string>
-    <string name="privatespace_access_header" msgid="982809349769470185">"छिपाए जाने पर प्राइवेट स्पेस ऐक्सेस करें"</string>
-    <string name="privatespace_search_description" msgid="983837656432484282">"खोज बार में \'प्राइवेट स्पेस\' को खोजें"</string>
-    <string name="privatespace_tap_tile_description" msgid="4146608898639668340">"प्राइवेट स्पेस के टाइल पर टैप करें"</string>
-    <string name="privatespace_unlock_description" msgid="4132755357482447360">"अपना प्राइवेट स्पेस अनलॉक करें"</string>
+    <!-- no translation found for privatespace_hide_page_title (8417507414027827566) -->
+    <skip />
+    <!-- no translation found for privatespace_hide_page_summary (5525422595477989312) -->
+    <skip />
+    <!-- no translation found for privatespace_access_header (6066826215718835041) -->
+    <skip />
+    <!-- no translation found for privatespace_search_description (3121043205513022357) -->
+    <skip />
+    <!-- no translation found for privatespace_tap_tile_description (8346440188590931635) -->
+    <skip />
+    <!-- no translation found for privatespace_unlock_description (3177710543121916413) -->
+    <skip />
     <string name="privatespace_hide_off_summary" msgid="7227778747159633671">"बंद है"</string>
     <string name="privatespace_hide_on_summary" msgid="6136704537527640183">"चालू है"</string>
     <string name="private_space_category_system" msgid="1286843321867285700">"सिस्टम"</string>
-    <string name="private_space_delete_title" msgid="3075645119800272800">"प्राइवेट स्पेस मिटाएं"</string>
-    <string name="private_space_deleted" msgid="7825768516955610897">"प्राइवेट स्पेस को मिटा दिया गया है"</string>
-    <string name="private_space_delete_failed" msgid="8500755484258565011">"प्राइवेट स्पेस को मिटाया नहीं जा सका"</string>
+    <string name="private_space_delete_title" msgid="636873505724100006">"प्राइवेट स्पेस मिटाएं"</string>
+    <string name="private_space_delete_header" msgid="4594429153176776184">"क्या प्राइवेट स्पेस को मिटाना है?"</string>
+    <string name="private_space_delete_summary" msgid="3344372988408565545">"आपके डिवाइस से आपका प्राइवेट स्पेस हटा दिया जाएगा. सभी निजी ऐप्लिकेशन और डेटा को मिटा दिया जाएगा. इस कार्रवाई को पहले जैसा नहीं किया जा सकता."</string>
+    <string name="private_space_accounts" msgid="1078277762792056395">"इन खातों को आपके प्राइवेट स्पेस से हटा दिया जाएगा:"</string>
+    <string name="private_space_delete_button_label" msgid="1256981385318225002">"मिटाएं"</string>
+    <string name="private_space_confirm_deletion_header" msgid="3468651585498942977">"प्राइवेट स्पेस को मिटाया जा रहा है…"</string>
+    <string name="private_space_confirm_deletion_summary" msgid="342544588554284686">"इसमें कुछ समय लगेगा"</string>
+    <!-- no translation found for private_space_deleted (7692240901492540053) -->
+    <skip />
+    <!-- no translation found for private_space_delete_failed (7705795653796174741) -->
+    <skip />
     <string name="private_space_unlocked" msgid="9091600948712932046">"प्राइवेट स्पेस अनलॉक हो गया"</string>
     <string name="no_device_lock_title" msgid="1078223464721029954">"स्क्रीन लॉक सेट करें"</string>
     <string name="no_device_lock_summary" msgid="7436025227616244687">"प्राइवेट स्पेस इस्तेमाल करने के लिए, इस डिवाइस पर स्क्रीन लॉक सेट करें"</string>
@@ -594,37 +615,32 @@
     <string name="private_space_hidden_notifications_text" msgid="1487992156742340621">"प्राइवेट स्पेस के लॉक होने पर, ऐप्लिकेशन की सूचनाएं छिपी रहती हैं"</string>
     <string name="private_space_apps_permission_text" msgid="7030946025253366172">"प्राइवेट स्पेस लॉक होने पर, उसमें मौजूद ऐप्लिकेशन, \'अनुमतियों को मैनेज करें\' सेक्शन, प्राइवसी डैशबोर्ड, और अन्य सेटिंग में नहीं दिखेंगे.\n\nआपका प्राइवेट स्पेस, किसी नए डिवाइस में नहीं भेजा जा सकता. दूसरे डिवाइस में इस्तेमाल करने के लिए, आपको दूसरा प्राइवेट स्पेस सेट अप करना होगा.\n\nअगर कोई व्यक्ति आपके डिवाइस को कंप्यूटर से कनेक्ट करता है या डिवाइस में, नुकसान पहुंचाने वाले ऐप्लिकेशन इंस्टॉल करता है, तो हो सकता है कि वह आपके प्राइवेट स्पेस को ऐक्सेस कर पाए."</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"प्राइवेट स्पेस सेट अप किया जा रहा है…"</string>
-    <string name="private_space_notifications_hidden_title" msgid="4377296080723608107">"लॉक होने पर, प्राइवेट स्पेस में ऐप्लिकेशन की सूचनाएं छिपी रहती हैं"</string>
-    <string name="private_space_share_photos_title" msgid="2102594859384040485">"प्राइवेट स्पेस में मौजूद ऐप्लिकेशन से फ़ोटो या फ़ाइलें शेयर करने के लिए, स्पेस को अनलॉक करें"</string>
+    <!-- no translation found for private_space_notifications_hidden_title (2009112565217540581) -->
+    <skip />
+    <!-- no translation found for private_space_share_photos_title (5176346349303364657) -->
+    <skip />
     <string name="private_space_apps_installed_title" msgid="2428207301009983268">"कुछ ऐप्लिकेशन पहले से ही आपके प्राइवेट स्पेस में इंस्टॉल हैं"</string>
-    <string name="private_space_error_screen_title" msgid="1210906480024148398">"प्राइवेट स्पेस को सेट अप नहीं किया जा सका"</string>
+    <!-- no translation found for private_space_error_screen_title (739381738044418346) -->
+    <skip />
     <string name="private_space_tryagain_label" msgid="8305362615231738367">"फिर से कोशिश करें"</string>
     <string name="private_space_lockscreen_title" msgid="6034864097861137509">"स्क्रीन लॉक से प्राइवेट स्पेस को अनलॉक करें?"</string>
     <string name="private_space_lockscreen_summary" msgid="430569465080645805">"डिवाइस की तरह ही प्राइवेट स्पेस को अनलॉक किया जा सकता है या कोई दूसरा लॉक सेट किया जा सकता है"</string>
     <string name="private_space_use_screenlock_label" msgid="9182153443192032782">"स्क्रीन लॉक का इस्तेमाल करें"</string>
     <string name="private_space_set_lock_label" msgid="1790408277477408475">"नया लॉक चुनें"</string>
     <string name="private_space_success_title" msgid="4351904015352046118">"हो गया!"</string>
-    <string name="private_space_access_text" msgid="4258842502257201013">"प्राइवेट स्पेस को ऐक्सेस करने के लिए, ऐप्लिकेशन लिस्ट में जाएं और नीचे की ओर स्क्रोल करें"</string>
+    <!-- no translation found for private_space_access_text (4433988836344567888) -->
+    <skip />
     <string name="private_space_done_label" msgid="1020482651595246071">"हो गया"</string>
     <string name="private_space_scrolldown_to_access" msgid="4820954877349434545">"प्राइवेट स्पेस को ढूंढने के लिए, नीचे की ओर स्क्रोल करें"</string>
-    <!-- no translation found for private_space_retry_signin_title (8090276618867918844) -->
-    <skip />
-    <!-- no translation found for private_space_retry_summary (1920444015972648774) -->
-    <skip />
-    <!-- no translation found for private_space_skip_login_label (7078019409056628192) -->
-    <skip />
-    <!-- no translation found for private_space_continue_login_label (7779965766333065391) -->
-    <skip />
+    <string name="private_space_retry_signin_title" msgid="8090276618867918844">"साइन इन करें"</string>
+    <string name="private_space_retry_summary" msgid="1920444015972648774">"प्राइवेट स्पेस का इस्तेमाल करने के लिए, किसी खाते से साइन करें"</string>
+    <string name="private_space_skip_login_label" msgid="7078019409056628192">"अभी नहीं"</string>
+    <string name="private_space_continue_login_label" msgid="7779965766333065391">"जारी रखें"</string>
     <string name="private_space_lock_setup_title" msgid="6541564212199510787">"प्राइवेट स्पेस के लिए लॉक चुनें"</string>
     <string name="private_space_lock_setup_description" msgid="423405593476300918">"फ़िंगरप्रिंट का इस्तेमाल करके, प्राइवेट स्पेस को अनलॉक किया जा सकता है. सुरक्षा की वजह से, इस सुविधा को इस्तेमाल करने के लिए एक बैकअप लॉक होना चाहिए."</string>
     <string name="private_space_choose_your_pin_header" msgid="4560802934975898265">"प्राइवेट स्पेस के लिए पिन सेट करें"</string>
     <string name="private_space_choose_your_password_header" msgid="7660259341095044434">"प्राइवेट स्पेस के लिए पासवर्ड सेट करें"</string>
     <string name="private_space_choose_your_pattern_header" msgid="2165607102459936724">"प्राइवेट स्पेस के लिए पैटर्न सेट करें"</string>
-    <string name="privatespace_unhide_header" msgid="1192011539687584004">"प्राइवेट स्पेस दिखाने के लिए (उपयोगकर्ता अनुभव फ़ाइनल नहीं)"</string>
-    <string name="privatespace_open_settings" msgid="5038101805604421393">"Settings ऐप्लिकेशन खोलें"</string>
-    <string name="privatespace_tap_settings" msgid="928932826450238276">"सुरक्षा, निजता, प्राइवेट स्पेस, और लॉक होने पर प्राइवेट स्पेस छिपाएं पर टैप करें"</string>
-    <string name="privatespace_turnoff_hide" msgid="4858511423837613842">"लॉक होने पर प्राइवेट स्पेस छिपाएं टॉगल को बंद करें"</string>
-    <string name="privatespace_development_note" msgid="2999992301558700721">"Googler के लिए नोट: इस नई सुविधा पर अभी काम चल रहा है"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"ज़्यादा से ज़्यादा <xliff:g id="COUNT">%d</xliff:g> फ़िंगरप्रिंट जोड़े जा सकते हैं"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"आप अधिकतम संख्या में फ़िंगरप्रिंट जोड़ चुके हैं"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"और ज़्यादा फ़िंगरप्रिंट नहीं जोड़े जा सकते"</string>
@@ -770,7 +786,7 @@
     <string name="bluetooth_settings" msgid="2967239493428695171">"ब्लूटूथ"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"ब्लूटूथ"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"क्या आपको <xliff:g id="DEVICE_NAME">%1$s</xliff:g> से जोड़ना है?"</string>
-    <string name="bluetooth_pairing_group_late_bonding" msgid="5310869364570266209">"मौजूदा कोऑर्डिनेटेड सेट में नया सदस्य जोड़ें"</string>
+    <string name="bluetooth_pairing_group_late_bonding" msgid="3047893658902159692">"ऑडियो डिवाइस के दूसरे हिस्से को जोड़ने के लिए पुष्टि करें"</string>
     <string name="bluetooth_pairing_key_msg" msgid="1329835708475701761">"ब्‍लूटूथ से जोड़ने के लिए कोड"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="5806420933599368592">"दूसरे डिवाइस से जोड़ना वाला कोड लिखें और फिर Return या Enter दबाएं"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7256286571636950635">"पिन में अक्षर या प्रतीक शामिल होते हैं"</string>
@@ -778,7 +794,7 @@
     <string name="bluetooth_pin_values_hint_16_digits" msgid="5603928271430883558">"16 अंक होने चाहिए"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="6737778699899780717">"आपको अन्‍य डिवाइस पर भी यह पि‍न लिखने की आवश्‍यकता हो सकती है."</string>
     <string name="bluetooth_enter_passkey_other_device" msgid="8270426446247344709">"आपको अन्‍य डिवाइस पर भी यह पासकी लिखनी होगी."</string>
-    <string name="bluetooth_paring_group_msg" msgid="4609515924670823316">"कोऑर्डिनेटेड सेट से जोड़ने के लिए पुष्टि करें"</string>
+    <string name="bluetooth_paring_group_msg" msgid="2455293929036668131">"ऑडियो डिवाइस से जोड़ने के लिए पुष्टि करें"</string>
     <string name="bluetooth_pairing_shares_phonebook" msgid="4329325125260724843">"अपने संपर्क और कॉल इतिहास देखने की मंज़ूरी दें"</string>
     <string name="bluetooth_pairing_phonebook_toggle_text" msgid="2474015367387690034">"संपर्क और कॉल इतिहास को ऐक्सेस करने की भी अनुमति दें"</string>
     <string name="bluetooth_pairing_phonebook_toggle_details" msgid="1367197978487212581">"इस जानकारी का इस्तेमाल कॉल की सूचना देने और दूसरी चीज़ों के लिए किया जाएगा"</string>
@@ -1389,8 +1405,7 @@
     <string name="battery_level_title" msgid="1371765298786083448">"बैटरी स्‍तर"</string>
     <string name="communal_settings_title" msgid="2845678473945902115">"कम्यूनिटी"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"कम्यूनिटी सेटिंग"</string>
-    <!-- no translation found for satellite_setting (706846910912477125) -->
-    <skip />
+    <string name="satellite_setting" msgid="706846910912477125">"सैटलाइट के ज़रिए मैसेज भेजने की सुविधा"</string>
     <string name="apn_settings" msgid="4295467389400441299">"ऐक्सेस पॉइंट नाम"</string>
     <string name="apn_edit" msgid="2003683641840248741">"ऐक्सेस पॉइंट में बदलाव करें"</string>
     <string name="apn_add" msgid="9069613192201630934">"ऐक्सेस पॉइंट जोड़ें"</string>
@@ -1425,8 +1440,7 @@
     <string name="menu_save" msgid="6611465355127483100">"सेव करें"</string>
     <string name="menu_cancel" msgid="1197826697950745335">"रद्द करें"</string>
     <string name="error_title" msgid="7158648377702417716"></string>
-    <!-- no translation found for error_duplicate_apn_entry (7792928408935276618) -->
-    <skip />
+    <string name="error_duplicate_apn_entry" msgid="7792928408935276618">"डाला गया एपीएन, डुप्लीकेट है."</string>
     <string name="error_name_empty" msgid="1258275899283079142">"नाम फ़ील्‍ड खाली मत छोड़िए."</string>
     <string name="error_apn_empty" msgid="7657491065443746915">"APN खाली नहीं हो सकता."</string>
     <string name="error_mcc_not3" msgid="883659545640179094">"MCC फ़ील्‍ड में 3 अंक होने चाहिए."</string>
@@ -1445,8 +1459,7 @@
     <string name="reset_bluetooth_wifi_button_text" msgid="3974098137045963639">"रीसेट करें"</string>
     <string name="reset_bluetooth_wifi_complete_toast" msgid="5893439291030574365">"ब्लूटूथ और वाई-फ़ाई को रीसेट कर दिया गया है"</string>
     <string name="reset_esim_title" msgid="4194570573425902754">"ई-सिम का डेटा हमेशा के लिए मिटाएं"</string>
-    <!-- no translation found for reset_esim_desc (6125192435907740751) -->
-    <skip />
+    <string name="reset_esim_desc" msgid="6125192435907740751">"इससे आपके मोबाइल और इंटरनेट सेवा देने वाली कंपनी का प्लान रद्द नहीं होगा. ई-सिम बदलने के लिए, मोबाइल और इंटरनेट सेवा देने वाली कंपनी से संपर्क करें."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"सेटिंग रीसेट करें"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"नेटवर्क की सभी सेटिंग रीसेट करें? इस कार्रवाई को पहले जैसा नहीं किया जा सकेगा."</string>
     <string name="reset_network_final_desc_esim" msgid="1129251284212847939">"क्या आपको नेटवर्क की सभी सेटिंग को रीसेट करना है और ई-सिम का डेटा हमेशा के लिए मिटाना है? इस कार्रवाई को पहले जैसा नहीं किया जा सकता."</string>
@@ -1454,18 +1467,15 @@
     <string name="reset_network_confirm_title" msgid="913014422184481270">"रीसेट करें?"</string>
     <string name="network_reset_not_available" msgid="1966334631394607829">"इस उपयोगकर्ता के लिए नेटवर्क रीसेट मौजूद नहीं है"</string>
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"नेटवर्क सेटिंग रीसेट कर दी गई हैं"</string>
-    <!-- no translation found for reset_esim_error_title (6516110227665862295) -->
-    <skip />
-    <!-- no translation found for reset_esim_error_msg (8459527827897797168) -->
-    <skip />
+    <string name="reset_esim_error_title" msgid="6516110227665862295">"ई-सिम नहीं मिटाया जा सका"</string>
+    <string name="reset_esim_error_msg" msgid="8459527827897797168">"कोई गड़बड़ी हुई है. इसकी वजह से, आपका ई-सिम नहीं मिटाया जा सका.\n\nअपने डिवाइस को रीस्टार्ट करके फिर से कोशिश करें."</string>
     <string name="main_clear_title" msgid="277664302144837723">"हमेशा के लिए पूरा डेटा मिटाएं (फ़ैक्ट्री रीसेट)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"हमेशा के लिए पूरा डेटा मिटाएं (फ़ैक्ट्री रीसेट)"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"संगीत"</li>\n<li>"फ़ोटो"</li>\n<li>"उपयोगकर्ता का अन्य डेटा"</li></string>
     <string name="main_clear_desc_also_erases_esim" msgid="4553469876411831729"><li>"eSIM"</li></string>
     <string name="main_clear_desc_no_cancel_mobile_plan" msgid="369883568059127035">\n\n"इससे आपका मोबाइल सेवा प्लान रद्द नहीं होगा."</string>
     <string name="main_clear_final_desc" msgid="5800877928569039580">"आपकी सारी निजी जानकारी और डाउनलोड किए गए ऐप्लिकेशन मिटा दिए जाएंगे. मिटाया गया डेटा वापस नहीं पाया जा सकेगा."</string>
-    <!-- no translation found for main_clear_final_desc_esim (6592404057237813989) -->
-    <skip />
+    <string name="main_clear_final_desc_esim" msgid="6592404057237813989">"आपकी पूरी निजी जानकारी मिटा दी जाएगी. जैसे, डाउनलोड किए गए ऐप्लिकेशन और ई-सिम. इस कार्रवाई को पहले जैसा नहीं किया जा सकता."</string>
     <string name="main_clear_confirm_title" msgid="6577071819657853713">"क्या आपको पूरा डेटा मिटाना हैं?"</string>
     <string name="main_clear_not_available" msgid="3433795327146684827">"इस उपयोगकर्ता के लिए फ़ैक्ट्री रीसेट उपलब्ध नहीं है"</string>
     <string name="main_clear_progress_title" msgid="7239741132015617719">"हमेशा के लिए मिटाया जा रहा है"</string>
@@ -1696,14 +1706,10 @@
     <string name="force_stop" msgid="2681771622136916280">"ज़बरदस्ती रोकें"</string>
     <string name="archive" msgid="9074663845068632127">"संग्रहित करें"</string>
     <string name="restore" msgid="7622486640713967157">"वापस लाएं"</string>
-    <!-- no translation found for restoring_step_one (3465050101254272874) -->
-    <skip />
-    <!-- no translation found for restoring_step_two (140484846432595108) -->
-    <skip />
-    <!-- no translation found for restoring_step_three (3712883580876329811) -->
-    <skip />
-    <!-- no translation found for restoring_step_four (8966846882470446209) -->
-    <skip />
+    <string name="restoring_step_one" msgid="3465050101254272874">"पहले जैसा किया जा रहा है"</string>
+    <string name="restoring_step_two" msgid="140484846432595108">"पहले जैसा किया जा रहा है."</string>
+    <string name="restoring_step_three" msgid="3712883580876329811">"पहले जैसा किया जा रहा है.."</string>
+    <string name="restoring_step_four" msgid="8966846882470446209">"पहले जैसा किया जा रहा है..."</string>
     <string name="total_size_label" msgid="2052185048749658866">"कुल स्टोरेज"</string>
     <string name="application_size_label" msgid="6407051020651716729">"ऐप्लिकेशन का साइज़"</string>
     <string name="external_code_size_label" msgid="7375146402660973743">"USB मेमोरी ऐप्लिकेशन"</string>
@@ -1852,6 +1858,8 @@
     <string name="show_ime_summary" msgid="7293345791727205975">"सामान्य कीबोर्ड चालू रहने के दौरान इसे स्‍क्रीन पर दिखाते रहें"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"बाउंस कुंजियां"</string>
     <string name="bounce_keys_summary" msgid="6922850403920596246">"फ़िज़िकल कीबोर्ड सुलभता के लिए बाउंस कुंजियों को चालू करें"</string>
+    <string name="slow_keys" msgid="2891452895499690837">"स्लो बटन"</string>
+    <string name="slow_keys_summary" msgid="6147992959180167575">"फ़िज़िकल कीबोर्ड वाली सुलभता के लिए स्टिकी बटन को चालू करें"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"स्टिकी बटन"</string>
     <string name="sticky_keys_summary" msgid="8520909829540989765">"फ़िज़िकल कीबोर्ड सुलभता के लिए स्टिकी बटन को चालू करें"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"कीबोर्ड शॉर्टकट"</string>
@@ -2424,8 +2432,7 @@
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"ऐप्लिकेशन से रोक हटाएं"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"अभी नहीं"</string>
     <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"पूरा चार्ज करें"</string>
-    <!-- no translation found for battery_tip_incompatible_charging_title (1567827436103364999) -->
-    <skip />
+    <string name="battery_tip_incompatible_charging_title" msgid="1567827436103364999">"चार्जिंग ऐक्सेसरी की जांच करें"</string>
     <string name="battery_tip_incompatible_charging_content_description" msgid="355668467640367701">"डिवाइस के साथ काम न करने वाले चार्जिंग सेटअप के बारे में ज़्यादा जानें"</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"बैटरी मैनेजर"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"ऐप्लिकेशन अपने आप प्रबंधित होने की सुविधा"</string>
@@ -2521,7 +2528,7 @@
     <string name="battery_usage_chart" msgid="4114747521432440017">"बैटरी खर्च दिखाने वाला चार्ट"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"हर दिन का बैटरी खर्च दिखाने वाला चार्ट"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"हर घंटे का बैटरी खर्च दिखाने वाला चार्ट"</string>
-    <string name="battery_level_percentage" msgid="1433178290838842146">"बैटरी लेवल, <xliff:g id="START_PERCENTAGE">%1$s</xliff:g> से <xliff:g id="END_PERCENTAGE">%2$s</xliff:g> प्रतिशत है"</string>
+    <string name="battery_level_percentage" msgid="1433178290838842146">"बैटरी लेवल, <xliff:g id="START_PERCENTAGE">%1$s</xliff:g> से <xliff:g id="END_PERCENTAGE">%2$s</xliff:g> है"</string>
     <string name="battery_usage_breakdown_title_since_last_full_charge" msgid="435006273323199906">"पूरा चार्ज होने के बाद से, बैटरी खर्च"</string>
     <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"<xliff:g id="SLOT">%s</xliff:g> तक का बैटरी खर्च"</string>
     <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"पूरा चार्ज होने के बाद से, किसी डिवाइस के इस्तेमाल में बीता समय"</string>
@@ -3018,7 +3025,8 @@
     <string name="sim_status_title" msgid="6188770698037109774">"सिम स्थिति"</string>
     <string name="sim_status_title_sim_slot" msgid="4932996839194493313">"सिम की स्थिति (सिम स्लॉट %1$d)"</string>
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
-    <string name="sim_notification_title" msgid="2819551384383504031">"सिम बदले गए."</string>
+    <!-- no translation found for sim_notification_title (6839556577405929262) -->
+    <skip />
     <string name="sim_notification_summary" msgid="5593339846307029991">"सेट करने के लिए टैप करें"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="3077694594349657933">"हर बार पूछें"</string>
     <string name="sim_selection_required_pref" msgid="231437651041498359">"चुना जाना ज़रूरी है"</string>
@@ -3042,7 +3050,8 @@
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"हाल ही के ऐप्लिकेशन, डिफ़ॉल्ट ऐप्लिकेशन"</string>
     <string name="notification_settings_work_profile" msgid="6076211850526353975">"वर्क प्रोफ़ाइल चालू होने पर ऐप्लिकेशन से जुड़ी सूचना नहीं देखी जा सकती है."</string>
     <string name="account_dashboard_title" msgid="8228773251948253914">"पासवर्ड और खाते"</string>
-    <string name="account_dashboard_default_summary" msgid="1730719656099599488">"सेव किए गए पासवर्ड, ऑटोमैटिक भरना, सिंक किए गए खाते"</string>
+    <!-- no translation found for account_dashboard_default_summary (7976899924144356939) -->
+    <skip />
     <string name="app_default_dashboard_title" msgid="4071015747629103216">"डिफ़ॉल्‍ट ऐप्लिकेशन"</string>
     <string name="cloned_apps_dashboard_title" msgid="5542076801222950921">"क्लोन किए गए ऐप्लिकेशन"</string>
     <string name="desc_cloned_apps_intro_text" msgid="1369621522882622476">"ऐप्लिकेशन का क्लोन बनाएं, ताकि आप एक साथ दो खाते इस्तेमाल कर पाएं."</string>
@@ -3680,7 +3689,8 @@
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"अनपिन करने से पहले पिन के लिए पूछें"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"अनपिन करने से पहले पासवर्ड के लिए पूछें"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"अनपिन करते समय डिवाइस लॉक करें"</string>
-    <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"सिम मिटाने की पुष्टि करें"</string>
+    <!-- no translation found for confirm_sim_deletion_title (7262127071183428893) -->
+    <skip />
     <string name="confirm_sim_deletion_description" msgid="4439657901673639063">"ई-सिम मिटाने से पहले, अपनी पहचान की पुष्टि करें"</string>
     <string name="memtag_title" msgid="5096176296797727201">"बेहतर मेमोरी सुरक्षा (बीटा)"</string>
     <string name="memtag_toggle" msgid="8695028758462939212">"बेहतर मेमोरी सुरक्षा"</string>
@@ -3700,7 +3710,7 @@
     <string name="memtag_learn_more" msgid="1596145970669119776">"बेहतर मेमोरी सुरक्षा की सुविधा के बारे में ज़्यादा जानें"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"यह वर्क प्रोफ़ाइल इससे मैनेज की जाती है:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"<xliff:g id="ADMIN_APP_LABEL">%s</xliff:g> द्वारा प्रबंधित"</string>
-    <string name="launch_by_default" msgid="892824422067985734">"डिफ़ॉल्ट रूप से खोलें"</string>
+    <string name="launch_by_default" msgid="892824422067985734">"डिफ़ॉल्ट रूप से खुले"</string>
     <string name="app_launch_open_domain_urls_title" msgid="4805388403977096285">"काम करने वाले लिंक खोलें"</string>
     <string name="app_launch_top_intro_message" msgid="137370923637482459">"इस ऐप्लिकेशन में वेब लिंक खोलने की अनुमति दें"</string>
     <string name="app_launch_links_category" msgid="2380467163878760037">"इस ऐप्लिकेशन में खुलने वाले लिंक"</string>
@@ -3756,7 +3766,7 @@
     <string name="domain_urls_summary_none" msgid="1132578967643384733">"काम करने वाले लिंक नहीं खोलता"</string>
     <string name="domain_urls_summary_one" msgid="3312008753802762892">"<xliff:g id="DOMAIN">%s</xliff:g> खोलता है"</string>
     <string name="domain_urls_summary_some" msgid="1197692164421314523">"<xliff:g id="DOMAIN">%s</xliff:g> और दूसरे यूआरएल खोल सकता है"</string>
-    <string name="app_link_open_always" msgid="9167065494930657503">"ऐप्लिकेशन को वे लिंक खोलने की अनुमति दें जो उस पर काम कर सकते हैं"</string>
+    <string name="app_link_open_always" msgid="9167065494930657503">"ऐप्लिकेशन को, मान्य फ़ॉर्मैट वाले लिंक खोलने की अनुमति दें."</string>
     <string name="app_link_open_ask" msgid="2422450109908936371">"हर बार पूछें"</string>
     <string name="app_link_open_never" msgid="5299808605386052350">"ऐप्लिकेशन को लिंक खोलने की अनुमति न दें"</string>
     <string name="app_link_open_always_summary" msgid="4524005594295855117">"{count,plural, =1{ऐप्लिकेशन, # लिंक को हैंडल करने का दावा करता है}one{ऐप्लिकेशन, # लिंक को हैंडल करने का दावा करता है}other{ऐप्लिकेशन, # लिंक को हैंडल करने का दावा करता है}}"</string>
@@ -3881,8 +3891,6 @@
     <string name="voice_activation_apps_title" msgid="7130045161611529825">"बोलकर चालू करने की सुविधा वाले ऐप्लिकेशन"</string>
     <string name="permit_voice_activation_apps" msgid="9152780172988949319">"बोलकर चालू करने की अनुमति दें"</string>
     <string name="allow_voice_activation_apps_description" msgid="6369745626995060656">"बोलकर चालू करने की सुविधा, मंज़ूरी पा चुके ऐप्लिकेशन को बोले गए निर्देशों की मदद से चालू कर सकती है. पहले से मौजूद अडैप्टिव सेंसिंग का इस्तेमाल करके, यह पक्का किया जाता है कि डेटा निजी बना रहे.\n\n"<a href="">"सुरक्षित अडैप्टिव सेंसिंग के बारे में ज़्यादा जानें"</a></string>
-    <string name="permit_receive_sandboxed_detection_training_data" msgid="3929496847420108753">"बोलकर चालू करने की सुविधा को बेहतर बनाएं"</string>
-    <string name="receive_sandboxed_detection_training_data_description" msgid="1415687008184625050">"बोलकर चालू करने की सुविधा वाले मॉडल को बेहतर बनाने के लिए यह डिवाइस, प्राइवेट इंटेलिजेंस का इस्तेमाल करता है. सभी लोगों के लिए इस मॉडल को बेहतर बनाने और निजता बनाए रखने के लिए, ऐप्लिकेशन को खास जानकारी वाले ऐसे अपडेट मिल सकते हैं जो अलग-अलग लोगों से इकट्ठा किए गए हैं.\n\n"<a href="">"प्राइवेट इंटेलिजेंस के बारे में ज़्यादा जानें"</a></string>
     <string name="full_screen_intent_title" msgid="747270185715224130">"फ़ुल स्क्रीन पर दिखने वाली सूचनाएं"</string>
     <string name="permit_full_screen_intent" msgid="9035367640019960861">"इस ऐप्लिकेशन से सूचनाओं को फ़ुल स्क्रीन में दिखाने की अनुमति दें"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"इस ऐप्लिकेशन को, डिवाइस लॉक होने पर सूचनाओं को फ़ुल स्क्रीन पर दिखाने की अनुमति दें. ऐसा हो सकता है कि ऐप्लिकेशन इनका इस्तेमाल अलार्म, आने वाले (इनकमिंग) कॉल या अन्य ज़रूरी सूचनाओं को हाइलाइट करने के लिए करें."</string>
@@ -4304,22 +4312,23 @@
     <string name="autofill_app" msgid="7595308061826307921">"ऑटोमैटिक भरने की सेवा"</string>
     <string name="default_autofill_app" msgid="372234803718251606">"पासवर्ड अपने-आप भरने, मैनेज करने, और सेव करने की डिफ़ॉल्ट सेवा"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"पासवर्ड"</string>
-    <!-- no translation found for credman_chosen_app_title (7735183808067729319) -->
+    <string name="credman_chosen_app_title" msgid="7735183808067729319">"पसंदीदा सेवा"</string>
+    <!-- no translation found for credman_credentials (2620352336624160642) -->
     <skip />
-    <string name="credman_credentials" msgid="4931371941253324143">"क्रेडेंशियल देने वाली अन्य सेवाएं"</string>
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# पासवर्ड}one{# पासवर्ड}other{# पासवर्ड}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"अपने-आप, भरना, अपने-आप भरने वाला, पासवर्ड"</string>
     <string name="credman_keywords" msgid="8305600680836806170">"डेटा, पासकी, पासवर्ड"</string>
     <string name="credman_autofill_keywords" msgid="701180623776848914">"अपने-आप, भरना, अपने-आप भरना, डेटा, पासकी, और पासवर्ड"</string>
-    <!-- no translation found for credman_button_change (4072629639218503790) -->
-    <skip />
-    <!-- no translation found for credman_button_open (7519871964170816850) -->
-    <skip />
+    <string name="credman_button_change" msgid="4072629639218503790">"बदलें"</string>
+    <string name="credman_button_open" msgid="7519871964170816850">"खोलें"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;पक्का करें कि आपको इस ऐप्लिकेशन पर भरोसा है&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google की मदद से, जानकारी अपने-आप भरने की सुविधा,&gt;%1$s&lt;/xliff:g&gt; ऑटोमैटिक भरी जा सकने वाली चीज़ें तय करने के लिए आपकी स्क्रीन पर मौजूद चीज़ों का इस्तेमाल करती है."</string>
     <string name="credman_autofill_confirmation_message" msgid="843829628024668466">"&lt;b&gt;Use &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; नए पासवर्ड, पासकी, और अन्य जानकारी अब से यहां सेव की जाएगी. &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; आपके डिवाइस की स्क्रीन पर दिख रहे कॉन्टेंट का इस्तेमाल करके, यह तय कर सकता है कि कौनसी जानकारी अपने-आप भरी जा सकती है."</string>
-    <string name="credman_picker_title" msgid="8191267620665129205">"पासवर्ड, पासकी, और डेटा की सेवाएं"</string>
+    <!-- no translation found for credman_picker_title (8442086614222006564) -->
+    <skip />
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"क्या आपको %1$s को बंद करना है?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;क्या इस सेवा को बंद करना है?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; साइन इन करने पर, पासवर्ड, पासकी, पेमेंट का तरीका, और सेव की गई अन्य जानकारी, पहले से भरी हुई नहीं होगी. सेव की गई जानकारी इस्तेमाल करने के लिए, कोई पासवर्ड, पासकी या डेटा सेवा को चुनें."</string>
+    <!-- no translation found for account_dashboard_title_with_passkeys (6214673787161409996) -->
+    <skip />
     <string name="credman_confirmation_message_new_ui" msgid="6126274509951156460">"&lt;b&gt;क्या आपको सभी सुविधाएं बंद करनी हैं?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; साइन इन करने के बाद पासवर्ड, पासकी, और सेव की गई अन्य जानकारी अपने-आप नहीं भरी जा सकेगी"</string>
     <string name="credman_autofill_confirmation_message_new_ui" msgid="6222139222478822267">"&lt;b&gt;अपनी पसंदीदा सेवा के तौर पर &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; को चुनें. नए पासवर्ड, पासकी, और अन्य जानकारी अब से यहां सेव होगी. ऐसा हो सकता है कि &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; आपके डिवाइस की स्क्रीन पर मौजूद कॉन्टेंट का इस्तेमाल करे. इससे यह पता लगाया जा सकेगा कि कौनसी जानकारी अपने-आप भरी जा सकती है"</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"%1$s का इस्तेमाल करना है?"</string>
@@ -4496,10 +4505,11 @@
     <string name="mobile_network_sim_name_rename" msgid="5967588549571582924">"सेव करें"</string>
     <string name="mobile_network_use_sim_on" msgid="5333182776279917886">"यह सिम इस्तेमाल करें"</string>
     <string name="mobile_network_use_sim_off" msgid="6303281166199670639">"बंद"</string>
-    <string name="mobile_network_disable_sim_explanation" msgid="2851862257846773796">"इस सिम को बंद करने के लिए, सिम कार्ड निकालें"</string>
-    <string name="mobile_network_tap_to_activate" msgid="4139979375717958102">"<xliff:g id="CARRIER">%1$s</xliff:g> चालू करने के लिए टैप करें"</string>
-    <!-- no translation found for mobile_network_erase_sim (5387971155494245850) -->
+    <!-- no translation found for mobile_network_disable_sim_explanation (7182341033728911879) -->
     <skip />
+    <!-- no translation found for mobile_network_tap_to_activate (5280456487243915465) -->
+    <skip />
+    <string name="mobile_network_erase_sim" msgid="5387971155494245850">"ई-सिम हमेशा के लिए मिटाएं"</string>
     <string name="preferred_network_mode_title" msgid="3083431168988535628">"पसंदीदा नेटवर्क टाइप"</string>
     <string name="preferred_network_mode_summary" msgid="537577807865497546">"नेटवर्क संचालन मोड बदलें"</string>
     <string name="preferred_network_mode_dialogtitle" msgid="4179420486180351631">"पसंदीदा नेटवर्क टाइप"</string>
@@ -4518,40 +4528,23 @@
     <string name="roaming_check_price_warning" msgid="5876977438036791361">"कीमतों की जानकारी के लिए आपको नेटवर्क सेवा देने वाली कंपनी से संपर्क करें."</string>
     <string name="mobile_data_usage_title" msgid="2047864499317759728">"ऐप्लिकेशन का डेटा खर्च"</string>
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"गलत नेटवर्क मोड <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. अनदेखा करें."</string>
-    <!-- no translation found for satellite_setting_title (2543034229989047673) -->
-    <skip />
-    <!-- no translation found for satellite_setting_enabled_summary (3554127722727530845) -->
-    <skip />
-    <!-- no translation found for satellite_setting_disabled_summary (6789122487534159857) -->
-    <skip />
-    <!-- no translation found for keywords_satellite_setting (3312183289776517695) -->
-    <skip />
-    <!-- no translation found for category_name_about_satellite_messaging (3756205049485508340) -->
-    <skip />
-    <!-- no translation found for title_about_satellite_setting (9212860038048311345) -->
-    <skip />
-    <!-- no translation found for category_title_your_satellite_plan (3017895097366691841) -->
-    <skip />
-    <!-- no translation found for title_have_satellite_plan (2048372355699977947) -->
-    <skip />
-    <!-- no translation found for title_no_satellite_plan (2876056203035197505) -->
-    <skip />
-    <!-- no translation found for summary_add_satellite_setting (3815254731634052432) -->
-    <skip />
-    <!-- no translation found for category_name_how_it_works (585303230539269496) -->
-    <skip />
-    <!-- no translation found for title_satellite_connection_guide (3294802307913609072) -->
-    <skip />
-    <!-- no translation found for summary_satellite_connection_guide (3496123195218418456) -->
-    <skip />
-    <!-- no translation found for title_supported_service (4275535165812691571) -->
-    <skip />
-    <!-- no translation found for summary_supported_service (4320535903444834786) -->
-    <skip />
-    <!-- no translation found for satellite_setting_summary_more_information (4008690241760925372) -->
-    <skip />
-    <!-- no translation found for more_about_satellite_messaging (3385673133561348509) -->
-    <skip />
+    <string name="satellite_setting_title" msgid="2543034229989047673">"सैटलाइट के ज़रिए मैसेज भेजने की सुविधा"</string>
+    <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"सैटलाइट के ज़रिए मैसेज भेजें और पाएं. यह सुविधा, आपके खाते के लिए उपलब्ध नहीं है."</string>
+    <string name="satellite_setting_disabled_summary" msgid="6789122487534159857">"सैटलाइट के ज़रिए मैसेज भेजें और पाएं. यह सुविधा, आपके खाते के लिए उपलब्ध नहीं है."</string>
+    <string name="keywords_satellite_setting" msgid="3312183289776517695">"सैटलाइट के ज़रिए मैसेज भेजने की सुविधा"</string>
+    <string name="category_name_about_satellite_messaging" msgid="3756205049485508340">"सैटलाइट के ज़रिए मैसेज भेजने की सुविधा के बारे में जानकारी"</string>
+    <string name="title_about_satellite_setting" msgid="9212860038048311345">"अगर आपके पास <xliff:g id="CARRIER_NAME">%1$s</xliff:g> खाता है, तो आपके लिए सैटलाइट के ज़रिए मैसेज भेजने और पाने की सुविधा उपलब्ध है"</string>
+    <string name="category_title_your_satellite_plan" msgid="3017895097366691841">"आपका <xliff:g id="CARRIER_NAME">%1$s</xliff:g> प्लान"</string>
+    <string name="title_have_satellite_plan" msgid="2048372355699977947">"आपके खाते के प्लान में सैटलाइट के ज़रिए मैसेज भेजने की सुविधा शामिल है"</string>
+    <string name="title_no_satellite_plan" msgid="2876056203035197505">"आपके खाते के प्लान में सैटलाइट के ज़रिए मैसेज भेजने की सुविधा शामिल नहीं है"</string>
+    <string name="summary_add_satellite_setting" msgid="3815254731634052432">"सैटलाइट के ज़रिए मैसेज भेजने की सुविधा जोड़ें"</string>
+    <string name="category_name_how_it_works" msgid="585303230539269496">"यह सुविधा कैसे काम करती है"</string>
+    <string name="title_satellite_connection_guide" msgid="3294802307913609072">"मोबाइल नेटवर्क न होने पर"</string>
+    <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"आपका फ़ोन, सैटलाइट से अपने-आप कनेक्ट हो जाएगा. अच्छे कनेक्शन के लिए, यह ज़रूरी है कि आप किसी खुली जगह में हों और आसमान साफ़ हो."</string>
+    <string name="title_supported_service" msgid="4275535165812691571">"फ़ोन के सैटलाइट के साथ कनेक्ट होने पर"</string>
+    <string name="summary_supported_service" msgid="4320535903444834786">"इस सुविधा के ज़रिए किसी को भी मैसेज किया जा सकता है. इसमें आपातकालीन सेवाएं भी शामिल हैं. मोबाइल नेटवर्क के उपलब्ध होने पर, आपका फ़ोन फिर से कनेक्ट हो जाएगा."</string>
+    <string name="satellite_setting_summary_more_information" msgid="4008690241760925372">"सैटलाइट के ज़रिए मैसेज भेजने या पाने में ज़्यादा समय लग सकता है. यह सुविधा, कुछ ही जगहों पर इस्तेमाल की जा सकती है. मौसम और ऊंची इमारतों, पहाड़ों वगैरह की वजह से, आपके सैटलाइट कनेक्शन पर असर पड़ सकता है. सैटलाइट के ज़रिए कॉल करने की सुविधा उपलब्ध नहीं है.\n\nआपके खाते में हुए बदलावों को सेटिंग में दिखने में थोड़ा समय लग सकता है. इस बारे में जानकारी के लिए, <xliff:g id="CARRIER_NAME">%1$s</xliff:g> से संपर्क करें."</string>
+    <string name="more_about_satellite_messaging" msgid="3385673133561348509">"सैटलाइट के ज़रिए मैसेज भेजने की सुविधा के बारे में ज़्यादा जानकारी"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"ऐक्सेस पॉइंट नेम"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"एपीएन"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"<xliff:g id="CARRIER">%1$s</xliff:g> से कनेक्ट होने पर उपलब्ध नहीं है"</string>
@@ -4561,25 +4554,28 @@
     <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"क्या आपको <xliff:g id="CARRIER_NAME">%1$s</xliff:g> पर स्विच करना है?"</string>
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"क्या आपको सिम कार्ड पर स्विच करना है?"</string>
     <string name="sim_action_switch_sub_dialog_mep_title" msgid="933856847099933004">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> का इस्तेमाल करना है?"</string>
-    <!-- no translation found for sim_action_switch_sub_dialog_text (7474905814976249607) -->
-    <skip />
-    <!-- no translation found for sim_action_switch_sub_dialog_text_downloaded (6415848271400253954) -->
-    <skip />
-    <!-- no translation found for sim_action_switch_sub_dialog_text_single_sim (421658355882679837) -->
-    <skip />
+    <string name="sim_action_switch_sub_dialog_text" msgid="7474905814976249607">"एक बार में सिर्फ़ एक सिम चालू किया जा सकता है.\n\n<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> पर स्विच करने से, आपको मिल रही <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> की सेवा रद्द नहीं की जाएगी."</string>
+    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="6415848271400253954">"एक बार में सिर्फ़ एक ई-सिम चालू किया जा सकता है.\n\n<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> पर स्विच करने से, आपको मिल रही <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> की सेवा रद्द नहीं की जाएगी."</string>
+    <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="421658355882679837">"एक बार में सिर्फ़ एक सिम चालू किया जा सकता है.\n\nस्विच करने से, आपको मिल रही <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> की सेवा रद्द नहीं की जाएगी."</string>
     <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"एक समय पर दो सिम इस्तेमाल किए जा सकते हैं. <xliff:g id="CARRIER_NAME">%1$s</xliff:g> को इस्तेमाल करने के लिए, दूसरी सिम को बंद करें."</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> पर स्विच करें"</string>
     <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> को बंद करें"</string>
     <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"सिम को बंद करने से आपकी सेवाएं बंद नहीं होंगी"</string>
-    <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"नेटवर्क से कनेक्ट किया जा रहा है…"</string>
-    <string name="sim_action_switch_sub_dialog_progress" msgid="4718412054243793310">"कॉल और मैसेज की सुविधा के लिए, <xliff:g id="CARRIER_NAME">%1$s</xliff:g> पर स्विच किया जा रहा है…"</string>
-    <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"मोबाइल और इंटरनेट सेवा देने वाली कंपनी को बदला नहीं जा सकता"</string>
-    <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"किसी गड़बड़ी की वजह से, मोबाइल और इंटरनेट सेवा देने वाली कंपनी को बदला नहीं जा सकता."</string>
+    <!-- no translation found for sim_action_enabling_sim_without_carrier_name (8144175623622669136) -->
+    <skip />
+    <!-- no translation found for sim_action_switch_sub_dialog_progress (697127154780501304) -->
+    <skip />
+    <!-- no translation found for sim_action_enable_sim_fail_title (2718084141744769701) -->
+    <skip />
+    <!-- no translation found for sim_action_enable_sim_fail_text (8332742656111984482) -->
+    <skip />
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"क्या आपको <xliff:g id="CARRIER_NAME">%1$s</xliff:g> बंद करना है?"</string>
     <string name="privileged_action_disable_sub_dialog_title_without_carrier" msgid="6518373229436331608">"क्या आप सिम बंद करना चाहते हैं?"</string>
     <string name="privileged_action_disable_sub_dialog_progress" msgid="5900243067681478102">"सिम बंद किया जा रहा है<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
-    <string name="privileged_action_disable_fail_title" msgid="6689494935697043555">"मोबाइल और इंटरनेट सेवा देने वाली कंपनी का नेटवर्क बंद नहीं किया जा सकता"</string>
-    <string name="privileged_action_disable_fail_text" msgid="8404023523406091819">"कोई गड़बड़ी हुई, जिसकी वजह से आपकी मोबाइल और इंटरनेट सेवा देने वाली कंपनी का नेटवर्क बंद नहीं किया जा सका."</string>
+    <!-- no translation found for privileged_action_disable_fail_title (1808735136395980905) -->
+    <skip />
+    <!-- no translation found for privileged_action_disable_fail_text (6236231745255527458) -->
+    <skip />
     <string name="sim_action_enable_dsds_title" msgid="226508711751577169">"क्या आपको दो सिम इस्तेमाल करने हैं?"</string>
     <string name="sim_action_enable_dsds_text" msgid="970986559326263949">"इस डिवाइस में एक साथ दाे सिम चालू रह सकते हैं. अगर आपको एक बार में एक सिम इस्तेमाल करना है, तो \"रहने दें\" पर टैप करें."</string>
     <string name="sim_action_restart_title" msgid="7054617569121993825">"क्या आप डिवाइस को रीस्टार्ट करना चाहते हैं?"</string>
@@ -4609,39 +4605,38 @@
     <string name="sim_onboarding_phoneNumber_data_only" msgid="8158409121949373662">"सिर्फ़ डेटा"</string>
     <string name="sim_onboarding_setup" msgid="5750393553605388463">"सेट अप करें"</string>
     <string name="sim_onboarding_next" msgid="6415025179929475355">"अगले पेज पर जाएं"</string>
-    <!-- no translation found for sim_onboarding_progressbar_turning_sim_on (1163318788393361574) -->
-    <skip />
+    <string name="sim_onboarding_progressbar_turning_sim_on" msgid="1163318788393361574">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> को चालू किया जा रहा है…"</string>
     <string name="mobile_network_spn_title" msgid="3053793174495329077">"मोबाइल नेटवर्क"</string>
     <string name="mobile_network_phone_number_title" msgid="2090794402855021784">"फ़ोन नंबर"</string>
     <string name="mobile_network_sim_label_color_title" msgid="2401352348041132876">"सिम का लेबल और रंग"</string>
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"नेटवर्क चालू करना"</string>
     <string name="sim_switch_channel_id" msgid="4927038626791837861">"मोबाइल और इंटरनेट सेवा देने वाली कंपनी बदली जा रही है"</string>
-    <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> चालू है"</string>
+    <!-- no translation found for post_dsds_reboot_notification_title_with_carrier (975447139749692794) -->
+    <skip />
     <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"सिम की सेटिंग अपडेट करने के लिए टैप करें"</string>
     <string name="switch_to_removable_notification" msgid="7640342063449806296">"अब <xliff:g id="CARRIER_NAME">%1$s</xliff:g> का इस्तेमाल किया जा रहा है"</string>
     <string name="switch_to_removable_notification_no_carrier_name" msgid="7384856964036215338">"मोबाइल और इंटरनेट सेवा देने वाली किसी दूसरी कंपनी का इस्तेमाल किया जा रहा है"</string>
     <string name="network_changed_notification_text" msgid="2407908598496951243">"आपका मोबाइल नेटवर्क बदल गया है"</string>
     <string name="dsds_notification_after_suw_title" msgid="3738898232310273982">"अपना दूसरा सिम सेट अप करें"</string>
     <string name="dsds_notification_after_suw_text" msgid="1287357774676361084">"चालू किया गया सिम चुनें या दोनों सिम साथ में इस्तेमाल करें"</string>
-    <string name="choose_sim_title" msgid="4804689675237716286">"इस्तेमाल करने के लिए कोई नंबर चुनें"</string>
-    <string name="choose_sim_text" msgid="4356662002583501647">"{count,plural, =1{इस डिवाइस पर 1 नंबर मौजूद है, लेकिन एक बार में सिर्फ़ एक ही नंबर का इस्तेमाल किया जा सकता है}=2{इस डिवाइस पर 2 नंबर मौजूद हैं, लेकिन एक बार में सिर्फ़ एक ही नंबर का इस्तेमाल किया जा सकता है}one{इस डिवाइस पर # नंबर मौजूद है, लेकिन एक बार में सिर्फ़ एक ही नंबर का इस्तेमाल किया जा सकता है}other{इस डिवाइस पर # नंबर मौजूद हैं, लेकिन एक बार में सिर्फ़ एक ही नंबर का इस्तेमाल किया जा सकता है}}"</string>
+    <!-- no translation found for choose_sim_title (66509047151583877) -->
+    <skip />
+    <!-- no translation found for choose_sim_text (8992163497852069924) -->
+    <skip />
     <string name="choose_sim_activating" msgid="9035902671985449448">"चालू की जा रही है<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
-    <string name="choose_sim_could_not_activate" msgid="2154564459842291617">"फ़िलहाल चालू नहीं की जा सकी"</string>
+    <!-- no translation found for choose_sim_could_not_activate (1907240714489797917) -->
+    <skip />
     <string name="switch_sim_dialog_title" msgid="5407316878973237773">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> का इस्तेमाल करना चाहते हैं?"</string>
     <string name="switch_sim_dialog_text" msgid="7530186862171635464">"मोबाइल डेटा, कॉल, और मैसेज (एसएमएस) के लिए <xliff:g id="CARRIER_NAME">%1$s</xliff:g> इस्तेमाल किया जाएगा."</string>
     <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"चालू किया गया कोई सिम उपलब्ध नहीं है"</string>
     <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"मोबाइल डेटा, कॉल से जुड़ी सुविधाएं, और मैसेज (एसएमएस) को बाद में इस्तेमाल करने के लिए, अपने नेटवर्क की सेटिंग पर जाएं"</string>
     <string name="sim_card_label" msgid="6263064316075963775">"सिम"</string>
     <string name="erase_sim_dialog_title" msgid="4742077437653028326">"क्या आपको यह ई-सिम मिटाना है?"</string>
-    <!-- no translation found for erase_sim_dialog_text (1406141218170595272) -->
-    <skip />
+    <string name="erase_sim_dialog_text" msgid="1406141218170595272">"ऐसा करने से, इस डिवाइस से <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> की सेवा खत्म हो जाएगी. हालांकि, <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> का प्लान चालू रहेगा."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"मिटाएं"</string>
-    <!-- no translation found for erasing_sim (4237180547590463930) -->
-    <skip />
-    <!-- no translation found for erase_sim_fail_title (1445700500168357303) -->
-    <skip />
-    <!-- no translation found for erase_sim_fail_text (6898841004987411547) -->
-    <skip />
+    <string name="erasing_sim" msgid="4237180547590463930">"ई-सिम हमेशा के लिए मिटाया जा रहा है…"</string>
+    <string name="erase_sim_fail_title" msgid="1445700500168357303">"ई-सिम नहीं मिटाया जा सका"</string>
+    <string name="erase_sim_fail_text" msgid="6898841004987411547">"कोई गड़बड़ी हुई है. इसकी वजह से, इस ई-सिम को नहीं मिटाया जा सका.\n\nअपने डिवाइस को रीस्टार्ट करके फिर से कोशिश करें."</string>
     <string name="network_connection_request_dialog_title" msgid="1896186380874289434">"डिवाइस से कनेक्ट करें"</string>
     <string name="network_connection_request_dialog_summary" msgid="7693038309792726170">"आपके डिवाइस से कनेक्ट होने के लिए, <xliff:g id="APPNAME">%1$s</xliff:g> ऐप्लिकेशन को किसी वाई-फ़ाई नेटवर्क से कुछ समय के लिए जुड़ना होगा"</string>
     <string name="network_connection_timeout_dialog_message" msgid="598509083077743772">"कोई डिवाइस नहीं मिला देख लें कि डिवाइस चालू हों और कनेक्ट किए जा सकते हों."</string>
@@ -4769,6 +4764,10 @@
     <string name="overlay_settings_summary" msgid="2745336273786148166">"सेटिंग ऐप स्क्रीन पर उन ऐप्लिकेशन को ओवरले करने की अनुमति दें जो दूसरे ऐप्लिकेशन के ऊपर दिख सकते हैं"</string>
     <string name="allow_mock_modem" msgid="3832264806530479214">"मॉक मॉडम की सेवा का इस्तेमाल करने की अनुमति दें"</string>
     <string name="allow_mock_modem_summary" msgid="9097416612748005374">"इंस्ट्रुमेंटेशन टेस्ट के लिए, इस डिवाइस पर मॉक मॉडम सेवा का इस्तेमाल करने की अनुमति दें. फ़ोन के सामान्य इस्तेमाल के दौरान, इस सेवा को चालू न करें"</string>
+    <!-- no translation found for disable_screen_share_protections_for_apps_and_notifications (4987116103699222633) -->
+    <skip />
+    <!-- no translation found for disable_screen_share_protections_for_apps_and_notifications_summary (932295234626582052) -->
+    <skip />
     <string name="media_controls_title" msgid="403271085636252597">"मीडिया"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"मीडिया प्लेयर को पिन करें"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"मीडिया प्लेयर \'फटाफट सेटिंग\' में खुला रहता है, ताकि आप मीडिया को तुरंत वहीं से शुरू कर सकें जहां आपने इसे छोड़ा था"</string>
@@ -4806,10 +4805,8 @@
     <string name="sim_category_title" msgid="2341314000964710495">"सिम"</string>
     <string name="downloaded_sim_category_title" msgid="2876988650413179752">"ई-सिम"</string>
     <string name="downloaded_sims_category_title" msgid="487799905978489922">"ई-सिम"</string>
-    <!-- no translation found for sim_category_active_sim (3077009911935592178) -->
-    <skip />
-    <!-- no translation found for sim_category_inactive_sim (7351553344148400450) -->
-    <skip />
+    <string name="sim_category_active_sim" msgid="3077009911935592178">"चालू है"</string>
+    <string name="sim_category_inactive_sim" msgid="7351553344148400450">"बंद है"</string>
     <string name="sim_category_default_active_sim" msgid="1208194173387987231">" / <xliff:g id="ID_1">%1$s</xliff:g> के लिए डिफ़ॉल्ट कॉन्फ़िगरेशन"</string>
     <string name="default_active_sim_calls" msgid="2390973682556353558">"कॉल"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"मैसेज (एसएमएस)"</string>
@@ -5087,4 +5084,6 @@
     <string name="content_protection_preference_subpage_summary" msgid="3595621220981703364"></string>
     <string name="content_protection_preference_subpage_info" msgid="6890886357653365489"></string>
     <string name="accessibility_setup_password_complete" msgid="6358749253318369077">"अब पासवर्ड सेट अप हो गया"</string>
+    <!-- no translation found for show_stylus_pointer_icon (1010583689203665786) -->
+    <skip />
 </resources>

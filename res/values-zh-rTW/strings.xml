@@ -115,6 +115,7 @@
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"取消"</string>
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"停用藍牙 LE Audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"如果裝置支援 LE Audio 硬體功能，就停用藍牙 LE Audio 功能。"</string>
+    <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"藍牙 LE Audio 模式"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"在「裝置詳細資料」中顯示 LE Audio 切換鈕"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"略過藍牙 LE Audio 許可清單"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"即使 LE Audio 周邊裝置未通過符合許可清單條件的驗證，系統仍會預設使用 LE Audio。"</string>
@@ -545,21 +546,27 @@
     <string name="security_header" msgid="961514795852103424">"安全性"</string>
     <string name="privacy_header" msgid="5526002421324257007">"隱私權"</string>
     <string name="work_profile_category_header" msgid="85707750968948517">"工作資料夾"</string>
-    <string name="private_space_title" msgid="7078627930195569767">"私人空間"</string>
+    <!-- no translation found for private_space_title (1752064212078238723) -->
+    <skip />
     <string name="private_space_summary" msgid="2274405892301976238">"讓私人應用程式保持鎖定及隱藏的狀態"</string>
     <string name="private_space_description" msgid="4059594203775816136">"將私人應用程式安裝在可隱藏或鎖定的獨立空間"</string>
-    <string name="private_space_lock_title" msgid="3006539720164938296">"私人空間鎖定"</string>
-    <string name="private_space_one_lock_summary" msgid="2759953747682959371">"你可以用解鎖裝置的方式來解鎖私人空間，或選擇其他鎖定設定"</string>
+    <!-- no translation found for private_space_lock_title (7230836881433350526) -->
+    <skip />
+    <!-- no translation found for private_space_one_lock_summary (2106513606571219068) -->
+    <skip />
     <string name="private_space_screen_lock_title" msgid="8679383894967823163">"使用裝置螢幕鎖定"</string>
     <string name="private_space_biometric_title" msgid="3934339826674553174">"人臉和指紋解鎖"</string>
     <string name="private_space_fingerprint_title" msgid="5989254643211889931">"指紋解鎖"</string>
     <string name="private_space_face_title" msgid="3290402865367663079">"人臉解鎖"</string>
     <string name="private_space_biometric_summary" msgid="4403837276018724581">"輕觸即可設定"</string>
-    <string name="private_space_fingerprint_unlock_title" msgid="5804023571114910034">"使用指紋解鎖私人空間"</string>
-    <string name="private_space_face_unlock_title" msgid="6613018437620070183">"使用人臉解鎖私人空間"</string>
+    <!-- no translation found for private_space_fingerprint_unlock_title (3614016453395789051) -->
+    <skip />
+    <!-- no translation found for private_space_face_unlock_title (462248384776453613) -->
+    <skip />
     <string name="private_space_category_ways_to_unlock" msgid="4356631225316950046">"解鎖方式"</string>
     <string name="private_space_screen_lock_summary" msgid="394837965365561070">"與裝置的螢幕鎖定一致"</string>
-    <string name="private_space_new_lock_title" msgid="7306873010565337671">"要選擇鎖定私人空間的新設定嗎？"</string>
+    <!-- no translation found for private_space_new_lock_title (9056139964133004094) -->
+    <skip />
     <string name="private_space_auto_lock_title" msgid="4757097802686131305">"自動鎖定"</string>
     <string name="private_space_auto_lock_page_title" msgid="2993714305725968632">"自動鎖定私人空間"</string>
     <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"裝置可在閒置一段時間後自動鎖定私人空間"</string>
@@ -567,18 +574,32 @@
     <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"閒置 5 分鐘後"</string>
     <string name="private_space_auto_lock_never" msgid="595014527119778873">"永不"</string>
     <string name="private_space_hide_title" msgid="8687034008994037610">"在鎖定時隱藏"</string>
-    <string name="privatespace_hide_page_title" msgid="972581369094289386">"隱藏鎖定的私人空間"</string>
-    <string name="privatespace_hide_page_summary" msgid="1052569521186403642">"如要防止其他使用者知道裝置上有私人空間，可以從應用程式清單中隱藏該空間"</string>
-    <string name="privatespace_access_header" msgid="982809349769470185">"存取隱藏的私人空間"</string>
-    <string name="privatespace_search_description" msgid="983837656432484282">"在搜尋列中搜尋「私人空間」"</string>
-    <string name="privatespace_tap_tile_description" msgid="4146608898639668340">"輕觸私人空間設定方塊"</string>
-    <string name="privatespace_unlock_description" msgid="4132755357482447360">"解鎖私人空間"</string>
+    <!-- no translation found for privatespace_hide_page_title (8417507414027827566) -->
+    <skip />
+    <!-- no translation found for privatespace_hide_page_summary (5525422595477989312) -->
+    <skip />
+    <!-- no translation found for privatespace_access_header (6066826215718835041) -->
+    <skip />
+    <!-- no translation found for privatespace_search_description (3121043205513022357) -->
+    <skip />
+    <!-- no translation found for privatespace_tap_tile_description (8346440188590931635) -->
+    <skip />
+    <!-- no translation found for privatespace_unlock_description (3177710543121916413) -->
+    <skip />
     <string name="privatespace_hide_off_summary" msgid="7227778747159633671">"已關閉"</string>
     <string name="privatespace_hide_on_summary" msgid="6136704537527640183">"已開啟"</string>
     <string name="private_space_category_system" msgid="1286843321867285700">"系統"</string>
-    <string name="private_space_delete_title" msgid="3075645119800272800">"刪除私人空間"</string>
-    <string name="private_space_deleted" msgid="7825768516955610897">"成功刪除私人空間"</string>
-    <string name="private_space_delete_failed" msgid="8500755484258565011">"無法刪除私人空間"</string>
+    <string name="private_space_delete_title" msgid="636873505724100006">"刪除私人空間"</string>
+    <string name="private_space_delete_header" msgid="4594429153176776184">"要刪除私人空間嗎？"</string>
+    <string name="private_space_delete_summary" msgid="3344372988408565545">"你的私人空間將從裝置上移除。所有私人應用程式和資料都會遭到刪除。這項操作無法取消。"</string>
+    <string name="private_space_accounts" msgid="1078277762792056395">"以下帳戶將從你的私人空間移除："</string>
+    <string name="private_space_delete_button_label" msgid="1256981385318225002">"刪除"</string>
+    <string name="private_space_confirm_deletion_header" msgid="3468651585498942977">"正在刪除私人空間…"</string>
+    <string name="private_space_confirm_deletion_summary" msgid="342544588554284686">"請稍候片刻"</string>
+    <!-- no translation found for private_space_deleted (7692240901492540053) -->
+    <skip />
+    <!-- no translation found for private_space_delete_failed (7705795653796174741) -->
+    <skip />
     <string name="private_space_unlocked" msgid="9091600948712932046">"私人空間已解鎖"</string>
     <string name="no_device_lock_title" msgid="1078223464721029954">"設定螢幕鎖定功能"</string>
     <string name="no_device_lock_summary" msgid="7436025227616244687">"如要使用私人空間，請在這部裝置設定螢幕鎖定功能"</string>
@@ -594,37 +615,32 @@
     <string name="private_space_hidden_notifications_text" msgid="1487992156742340621">"私人空間鎖定時，系統會隱藏來自私人空間應用程式的通知"</string>
     <string name="private_space_apps_permission_text" msgid="7030946025253366172">"私人空間鎖定時，當中的應用程式不會顯示在權限管理工具、隱私資訊主頁和其他設定。\n\n你無法將私人空間轉移到新裝置。如要在其他裝置上使用私人空間，請重新設定。\n\n如果有人將裝置接上電腦，或在裝置上安裝有害的應用程式，或許能夠存取你的私人空間。"</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"正在設定私人空間…"</string>
-    <string name="private_space_notifications_hidden_title" msgid="4377296080723608107">"私人空間鎖定時，系統會隱藏來自私人空間應用程式的通知"</string>
-    <string name="private_space_share_photos_title" msgid="2102594859384040485">"解鎖私人空間後，就能分享來自私人空間應用程式的相片或檔案"</string>
+    <!-- no translation found for private_space_notifications_hidden_title (2009112565217540581) -->
+    <skip />
+    <!-- no translation found for private_space_share_photos_title (5176346349303364657) -->
+    <skip />
     <string name="private_space_apps_installed_title" msgid="2428207301009983268">"部分應用程式已安裝在私人空間內"</string>
-    <string name="private_space_error_screen_title" msgid="1210906480024148398">"無法設定私人空間"</string>
+    <!-- no translation found for private_space_error_screen_title (739381738044418346) -->
+    <skip />
     <string name="private_space_tryagain_label" msgid="8305362615231738367">"再試一次"</string>
     <string name="private_space_lockscreen_title" msgid="6034864097861137509">"要使用螢幕鎖定功能鎖定私人空間嗎？"</string>
     <string name="private_space_lockscreen_summary" msgid="430569465080645805">"你可以用螢幕鎖定功能鎖定私人空間，也可以選擇其他鎖定方式"</string>
     <string name="private_space_use_screenlock_label" msgid="9182153443192032782">"使用螢幕鎖定功能"</string>
     <string name="private_space_set_lock_label" msgid="1790408277477408475">"選擇新的鎖定方式"</string>
     <string name="private_space_success_title" msgid="4351904015352046118">"大功告成！"</string>
-    <string name="private_space_access_text" msgid="4258842502257201013">"如要存取私人空間，請前往應用程式清單並向下捲動畫面"</string>
+    <!-- no translation found for private_space_access_text (4433988836344567888) -->
+    <skip />
     <string name="private_space_done_label" msgid="1020482651595246071">"完成"</string>
     <string name="private_space_scrolldown_to_access" msgid="4820954877349434545">"向下捲動畫面即可找到私人空間"</string>
-    <!-- no translation found for private_space_retry_signin_title (8090276618867918844) -->
-    <skip />
-    <!-- no translation found for private_space_retry_summary (1920444015972648774) -->
-    <skip />
-    <!-- no translation found for private_space_skip_login_label (7078019409056628192) -->
-    <skip />
-    <!-- no translation found for private_space_continue_login_label (7779965766333065391) -->
-    <skip />
+    <string name="private_space_retry_signin_title" msgid="8090276618867918844">"登入"</string>
+    <string name="private_space_retry_summary" msgid="1920444015972648774">"你必須登入帳戶，才能使用私人空間"</string>
+    <string name="private_space_skip_login_label" msgid="7078019409056628192">"暫時不要"</string>
+    <string name="private_space_continue_login_label" msgid="7779965766333065391">"繼續"</string>
     <string name="private_space_lock_setup_title" msgid="6541564212199510787">"選擇私人空間鎖定方式"</string>
     <string name="private_space_lock_setup_description" msgid="423405593476300918">"你可以用指紋解鎖私人空間。為了安全起見，你必須設定備用鎖定方式，才能使用這個選項。"</string>
     <string name="private_space_choose_your_pin_header" msgid="4560802934975898265">"設定私人空間的 PIN 碼"</string>
     <string name="private_space_choose_your_password_header" msgid="7660259341095044434">"設定私人空間的密碼"</string>
     <string name="private_space_choose_your_pattern_header" msgid="2165607102459936724">"設定私人空間的解鎖圖案"</string>
-    <string name="privatespace_unhide_header" msgid="1192011539687584004">"顯示私人空間 (非最終使用者體驗版本)"</string>
-    <string name="privatespace_open_settings" msgid="5038101805604421393">"開啟「設定」應用程式"</string>
-    <string name="privatespace_tap_settings" msgid="928932826450238276">"依序輕觸「安全性與隱私權」&gt;「私人空間」&gt;「隱藏鎖定的私人空間」"</string>
-    <string name="privatespace_turnoff_hide" msgid="4858511423837613842">"關閉「隱藏鎖定的私人空間」切換按鈕"</string>
-    <string name="privatespace_development_note" msgid="2999992301558700721">"Google 員工注意事項：這項功能仍在開發中"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"你最多可以新增 <xliff:g id="COUNT">%d</xliff:g> 個指紋"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"你新增的指紋數量已達上限"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"無法新增其他指紋"</string>
@@ -770,7 +786,7 @@
     <string name="bluetooth_settings" msgid="2967239493428695171">"藍牙"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"藍牙"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"要與「<xliff:g id="DEVICE_NAME">%1$s</xliff:g>」配對嗎？"</string>
-    <string name="bluetooth_pairing_group_late_bonding" msgid="5310869364570266209">"將新成員新增至現有協同組"</string>
+    <string name="bluetooth_pairing_group_late_bonding" msgid="3047893658902159692">"確認新增第二部音訊裝置"</string>
     <string name="bluetooth_pairing_key_msg" msgid="1329835708475701761">"藍牙配對碼"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="5806420933599368592">"輸入配對碼，然後按下返回鍵或 Enter 鍵"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7256286571636950635">"PIN 碼含有字母或符號"</string>
@@ -778,7 +794,7 @@
     <string name="bluetooth_pin_values_hint_16_digits" msgid="5603928271430883558">"必須是 16 位數的數字"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="6737778699899780717">"你可能也必須在另一個裝置上輸入這個 PIN。"</string>
     <string name="bluetooth_enter_passkey_other_device" msgid="8270426446247344709">"你可能也必須在另一個裝置上輸入這個密碼金鑰。"</string>
-    <string name="bluetooth_paring_group_msg" msgid="4609515924670823316">"確認與協同組配對"</string>
+    <string name="bluetooth_paring_group_msg" msgid="2455293929036668131">"確認與音訊裝置配對"</string>
     <string name="bluetooth_pairing_shares_phonebook" msgid="4329325125260724843">"允許存取你的聯絡人和通話記錄"</string>
     <string name="bluetooth_pairing_phonebook_toggle_text" msgid="2474015367387690034">"也允許存取聯絡人和通話記錄"</string>
     <string name="bluetooth_pairing_phonebook_toggle_details" msgid="1367197978487212581">"資訊將用於來電通知等用途"</string>
@@ -1389,8 +1405,7 @@
     <string name="battery_level_title" msgid="1371765298786083448">"電池電量"</string>
     <string name="communal_settings_title" msgid="2845678473945902115">"共通"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"共通設定"</string>
-    <!-- no translation found for satellite_setting (706846910912477125) -->
-    <skip />
+    <string name="satellite_setting" msgid="706846910912477125">"衛星訊息"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN"</string>
     <string name="apn_edit" msgid="2003683641840248741">"編輯存取點"</string>
     <string name="apn_add" msgid="9069613192201630934">"新增存取點"</string>
@@ -1425,8 +1440,7 @@
     <string name="menu_save" msgid="6611465355127483100">"儲存"</string>
     <string name="menu_cancel" msgid="1197826697950745335">"取消"</string>
     <string name="error_title" msgid="7158648377702417716"></string>
-    <!-- no translation found for error_duplicate_apn_entry (7792928408935276618) -->
-    <skip />
+    <string name="error_duplicate_apn_entry" msgid="7792928408935276618">"重複的 APN 項目。"</string>
     <string name="error_name_empty" msgid="1258275899283079142">"[名稱] 欄位不得留空。"</string>
     <string name="error_apn_empty" msgid="7657491065443746915">"APN 不可留空。"</string>
     <string name="error_mcc_not3" msgid="883659545640179094">"MCC 欄位必須為 3 位數。"</string>
@@ -1445,8 +1459,7 @@
     <string name="reset_bluetooth_wifi_button_text" msgid="3974098137045963639">"重設"</string>
     <string name="reset_bluetooth_wifi_complete_toast" msgid="5893439291030574365">"已重設藍牙和 Wi‑Fi"</string>
     <string name="reset_esim_title" msgid="4194570573425902754">"清除 eSIM 卡"</string>
-    <!-- no translation found for reset_esim_desc (6125192435907740751) -->
-    <skip />
+    <string name="reset_esim_desc" msgid="6125192435907740751">"這麼做不會取消行動資費方案。如需替代 SIM 卡，請洽你的電信業者。"</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"重設設定"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"要重設所有網路設定嗎？請注意，這個動作無法復原。"</string>
     <string name="reset_network_final_desc_esim" msgid="1129251284212847939">"要重設所有網路設定並清除 eSIM 卡嗎？請注意，這項操作無法復原。"</string>
@@ -1454,18 +1467,15 @@
     <string name="reset_network_confirm_title" msgid="913014422184481270">"你要重設嗎？"</string>
     <string name="network_reset_not_available" msgid="1966334631394607829">"這個使用者無法重設網路設定"</string>
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"已重設網路設定"</string>
-    <!-- no translation found for reset_esim_error_title (6516110227665862295) -->
-    <skip />
-    <!-- no translation found for reset_esim_error_msg (8459527827897797168) -->
-    <skip />
+    <string name="reset_esim_error_title" msgid="6516110227665862295">"無法清除 eSIM 卡"</string>
+    <string name="reset_esim_error_msg" msgid="8459527827897797168">"系統發生錯誤，因此未清除 eSIM 卡。\n\n請重新啟動裝置並再試一次。"</string>
     <string name="main_clear_title" msgid="277664302144837723">"清除所有資料 (恢復原廠設定)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"清除所有資料 (恢復原廠設定)"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"音樂"</li>\n<li>"相片"</li>\n<li>"其他使用者資料"</li></string>
     <string name="main_clear_desc_also_erases_esim" msgid="4553469876411831729"><li>"eSIM 卡"</li></string>
     <string name="main_clear_desc_no_cancel_mobile_plan" msgid="369883568059127035">\n\n"你目前的電信資費方案並不會因此受到任何影響。"</string>
     <string name="main_clear_final_desc" msgid="5800877928569039580">"系統將刪除你的所有個人資訊和已下載的應用程式。請注意，這項操作無法復原。"</string>
-    <!-- no translation found for main_clear_final_desc_esim (6592404057237813989) -->
-    <skip />
+    <string name="main_clear_final_desc_esim" msgid="6592404057237813989">"系統將刪除你的所有個人資訊，包括已下載的應用程式和 eSIM 卡。這項操作無法取消。"</string>
     <string name="main_clear_confirm_title" msgid="6577071819657853713">"要清除所有資料嗎？"</string>
     <string name="main_clear_not_available" msgid="3433795327146684827">"這位使用者無法將裝置恢復原廠設定"</string>
     <string name="main_clear_progress_title" msgid="7239741132015617719">"清除中"</string>
@@ -1696,14 +1706,10 @@
     <string name="force_stop" msgid="2681771622136916280">"強制停止"</string>
     <string name="archive" msgid="9074663845068632127">"封存"</string>
     <string name="restore" msgid="7622486640713967157">"還原"</string>
-    <!-- no translation found for restoring_step_one (3465050101254272874) -->
-    <skip />
-    <!-- no translation found for restoring_step_two (140484846432595108) -->
-    <skip />
-    <!-- no translation found for restoring_step_three (3712883580876329811) -->
-    <skip />
-    <!-- no translation found for restoring_step_four (8966846882470446209) -->
-    <skip />
+    <string name="restoring_step_one" msgid="3465050101254272874">"還原中"</string>
+    <string name="restoring_step_two" msgid="140484846432595108">"還原中."</string>
+    <string name="restoring_step_three" msgid="3712883580876329811">"還原中.."</string>
+    <string name="restoring_step_four" msgid="8966846882470446209">"還原中..."</string>
     <string name="total_size_label" msgid="2052185048749658866">"總共"</string>
     <string name="application_size_label" msgid="6407051020651716729">"應用程式大小"</string>
     <string name="external_code_size_label" msgid="7375146402660973743">"USB 儲存裝置應用程式"</string>
@@ -1852,6 +1858,8 @@
     <string name="show_ime_summary" msgid="7293345791727205975">"使用實體鍵盤時仍繼續顯示螢幕小鍵盤"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"篩選鍵"</string>
     <string name="bounce_keys_summary" msgid="6922850403920596246">"啟用篩選鍵可讓實體鍵盤更易於使用"</string>
+    <string name="slow_keys" msgid="2891452895499690837">"延遲感應鍵"</string>
+    <string name="slow_keys_summary" msgid="6147992959180167575">"啟用延遲感應鍵，讓實體鍵盤滿足無障礙需求"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"相黏鍵"</string>
     <string name="sticky_keys_summary" msgid="8520909829540989765">"啟用相黏鍵可讓實體鍵盤更易於使用"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"鍵盤快速鍵"</string>
@@ -2424,8 +2432,7 @@
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"移除"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"取消"</string>
     <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"將電池充飽"</string>
-    <!-- no translation found for battery_tip_incompatible_charging_title (1567827436103364999) -->
-    <skip />
+    <string name="battery_tip_incompatible_charging_title" msgid="1567827436103364999">"請檢查充電配件"</string>
     <string name="battery_tip_incompatible_charging_content_description" msgid="355668467640367701">"進一步瞭解不相容的變壓器充電"</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"Battery Manager"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"自動管理應用程式"</string>
@@ -3018,7 +3025,7 @@
     <string name="sim_status_title" msgid="6188770698037109774">"SIM 卡狀態"</string>
     <string name="sim_status_title_sim_slot" msgid="4932996839194493313">"SIM 卡狀態 (SIM 卡插槽 %1$d)"</string>
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
-    <string name="sim_notification_title" msgid="2819551384383504031">"SIM 卡已變更。"</string>
+    <string name="sim_notification_title" msgid="6839556577405929262">"SIM 卡變更完成"</string>
     <string name="sim_notification_summary" msgid="5593339846307029991">"輕觸即可進行設定"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="3077694594349657933">"每次都詢問"</string>
     <string name="sim_selection_required_pref" msgid="231437651041498359">"請選取偏好設定"</string>
@@ -3042,7 +3049,8 @@
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"最近使用的應用程式、預設應用程式"</string>
     <string name="notification_settings_work_profile" msgid="6076211850526353975">"這個工作資料夾中的應用程式無法存取通知。"</string>
     <string name="account_dashboard_title" msgid="8228773251948253914">"密碼與帳戶"</string>
-    <string name="account_dashboard_default_summary" msgid="1730719656099599488">"已儲存的密碼、自動填入、保持同步的帳戶"</string>
+    <!-- no translation found for account_dashboard_default_summary (7976899924144356939) -->
+    <skip />
     <string name="app_default_dashboard_title" msgid="4071015747629103216">"預設應用程式"</string>
     <string name="cloned_apps_dashboard_title" msgid="5542076801222950921">"副本應用程式"</string>
     <string name="desc_cloned_apps_intro_text" msgid="1369621522882622476">"你可以建立應用程式的第二個執行個體，這樣就可以同時使用兩個帳戶。"</string>
@@ -3680,7 +3688,7 @@
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"取消固定時必須輸入 PIN 碼"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"取消固定時必須輸入密碼"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"取消固定時鎖定裝置"</string>
-    <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"SIM 卡刪除確認"</string>
+    <string name="confirm_sim_deletion_title" msgid="7262127071183428893">"確認清除 eSIM 卡"</string>
     <string name="confirm_sim_deletion_description" msgid="4439657901673639063">"你必須先驗證身分，才能清除 eSIM 卡"</string>
     <string name="memtag_title" msgid="5096176296797727201">"進階記憶體保護功能 Beta 版"</string>
     <string name="memtag_toggle" msgid="8695028758462939212">"進階記憶體保護功能"</string>
@@ -3881,8 +3889,6 @@
     <string name="voice_activation_apps_title" msgid="7130045161611529825">"透過語音啟動的應用程式"</string>
     <string name="permit_voice_activation_apps" msgid="9152780172988949319">"允許使用語音啟動功能"</string>
     <string name="allow_voice_activation_apps_description" msgid="6369745626995060656">"語音啟動功能可透過語音指令開啟已核准的應用程式，不需手動操作。內建的自動調節感應功能則可確保資料不外洩。\n\n"<a href="">"進一步瞭解受保護的自動調節感應功能"</a></string>
-    <string name="permit_receive_sandboxed_detection_training_data" msgid="3929496847420108753">"提升語音啟動功能"</string>
-    <string name="receive_sandboxed_detection_training_data_description" msgid="1415687008184625050">"為提升語音啟動模型的品質，這部裝置會使用私人資料技術。應用程式可接收涵蓋多位使用者的匯總摘要更新，在維護隱私權的同時為所有使用者提升模型品質。\n\n"<a href="">"進一步瞭解私人資料技術"</a></string>
     <string name="full_screen_intent_title" msgid="747270185715224130">"全螢幕通知"</string>
     <string name="permit_full_screen_intent" msgid="9035367640019960861">"允許這個應用程式顯示全螢幕通知"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"允許這個應用程式在裝置鎖定時顯示全螢幕通知。應用程式可能會在這類通知中顯示鬧鐘、來電或其他緊急通知。"</string>
@@ -4304,22 +4310,23 @@
     <string name="autofill_app" msgid="7595308061826307921">"自動填入服務"</string>
     <string name="default_autofill_app" msgid="372234803718251606">"預設的自動填入服務"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"密碼"</string>
-    <!-- no translation found for credman_chosen_app_title (7735183808067729319) -->
+    <string name="credman_chosen_app_title" msgid="7735183808067729319">"偏好的服務"</string>
+    <!-- no translation found for credman_credentials (2620352336624160642) -->
     <skip />
-    <string name="credman_credentials" msgid="4931371941253324143">"其他提供者"</string>
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# 個密碼}other{# 個密碼}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"自動, 填寫, 自動填入, 密碼"</string>
     <string name="credman_keywords" msgid="8305600680836806170">"資料, 密碼金鑰, 密碼"</string>
     <string name="credman_autofill_keywords" msgid="701180623776848914">"自動、填入、自動填入、資料、密碼金鑰、密碼"</string>
-    <!-- no translation found for credman_button_change (4072629639218503790) -->
-    <skip />
-    <!-- no translation found for credman_button_open (7519871964170816850) -->
-    <skip />
+    <string name="credman_button_change" msgid="4072629639218503790">"變更"</string>
+    <string name="credman_button_open" msgid="7519871964170816850">"開啟"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;請確定這是你信任的應用程式&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; 會根據畫面上顯示的內容判斷要自動填入哪些資訊。"</string>
     <string name="credman_autofill_confirmation_message" msgid="843829628024668466">"&lt;b&gt;要使用「&lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;」嗎？&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; 從現在起，新的密碼、密碼金鑰和其他資訊都會儲存在這裡。「&lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;」可能會根據畫面內容判斷可自動填入的資訊。"</string>
-    <string name="credman_picker_title" msgid="8191267620665129205">"密碼、密碼金鑰和資料服務"</string>
+    <!-- no translation found for credman_picker_title (8442086614222006564) -->
+    <skip />
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"要停用「%1$s」嗎？"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;要關閉這項服務嗎？&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; 當你登入後，系統將不會填入密碼、密碼金鑰、付款方式等其他已儲存的資訊。如要使用已儲存的資訊，請選擇所需的密碼、密碼金鑰或資料服務。"</string>
+    <!-- no translation found for account_dashboard_title_with_passkeys (6214673787161409996) -->
+    <skip />
     <string name="credman_confirmation_message_new_ui" msgid="6126274509951156460">"&lt;b&gt;要關閉所有服務嗎？&lt;/b&gt; &lt;br/&gt; &lt;br/&gt;系統將無法在你登入時提供密碼、密碼金鑰和其他已儲存的資訊"</string>
     <string name="credman_autofill_confirmation_message_new_ui" msgid="6222139222478822267">"&lt;b&gt;將偏好服務變更為「&lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;」?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt;從現在起，系統會將新密碼、密碼金鑰和其他資訊儲存在這個應用程式。「&lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;」可能會根據畫面內容判斷可自動填入的資訊"</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"要使用「%1$s」嗎？"</string>
@@ -4496,10 +4503,9 @@
     <string name="mobile_network_sim_name_rename" msgid="5967588549571582924">"儲存"</string>
     <string name="mobile_network_use_sim_on" msgid="5333182776279917886">"使用這張 SIM 卡"</string>
     <string name="mobile_network_use_sim_off" msgid="6303281166199670639">"停用"</string>
-    <string name="mobile_network_disable_sim_explanation" msgid="2851862257846773796">"如要停用這張 SIM 卡，請將其移除"</string>
-    <string name="mobile_network_tap_to_activate" msgid="4139979375717958102">"輕觸即可啟用「<xliff:g id="CARRIER">%1$s</xliff:g>」"</string>
-    <!-- no translation found for mobile_network_erase_sim (5387971155494245850) -->
-    <skip />
+    <string name="mobile_network_disable_sim_explanation" msgid="7182341033728911879">"移除這張 SIM 卡即可停用"</string>
+    <string name="mobile_network_tap_to_activate" msgid="5280456487243915465">"輕觸即可啟用「<xliff:g id="CARRIER">%1$s</xliff:g>」的 SIM 卡"</string>
+    <string name="mobile_network_erase_sim" msgid="5387971155494245850">"清除 eSIM 卡"</string>
     <string name="preferred_network_mode_title" msgid="3083431168988535628">"偏好的網路類型"</string>
     <string name="preferred_network_mode_summary" msgid="537577807865497546">"變更網路操作模式"</string>
     <string name="preferred_network_mode_dialogtitle" msgid="4179420486180351631">"偏好的網路類型"</string>
@@ -4518,40 +4524,23 @@
     <string name="roaming_check_price_warning" msgid="5876977438036791361">"請向你的網路供應商洽詢定價。"</string>
     <string name="mobile_data_usage_title" msgid="2047864499317759728">"應用程式數據用量"</string>
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"網路模式 <xliff:g id="NETWORKMODEID">%1$d</xliff:g> 無效。忽略。"</string>
-    <!-- no translation found for satellite_setting_title (2543034229989047673) -->
-    <skip />
-    <!-- no translation found for satellite_setting_enabled_summary (3554127722727530845) -->
-    <skip />
-    <!-- no translation found for satellite_setting_disabled_summary (6789122487534159857) -->
-    <skip />
-    <!-- no translation found for keywords_satellite_setting (3312183289776517695) -->
-    <skip />
-    <!-- no translation found for category_name_about_satellite_messaging (3756205049485508340) -->
-    <skip />
-    <!-- no translation found for title_about_satellite_setting (9212860038048311345) -->
-    <skip />
-    <!-- no translation found for category_title_your_satellite_plan (3017895097366691841) -->
-    <skip />
-    <!-- no translation found for title_have_satellite_plan (2048372355699977947) -->
-    <skip />
-    <!-- no translation found for title_no_satellite_plan (2876056203035197505) -->
-    <skip />
-    <!-- no translation found for summary_add_satellite_setting (3815254731634052432) -->
-    <skip />
-    <!-- no translation found for category_name_how_it_works (585303230539269496) -->
-    <skip />
-    <!-- no translation found for title_satellite_connection_guide (3294802307913609072) -->
-    <skip />
-    <!-- no translation found for summary_satellite_connection_guide (3496123195218418456) -->
-    <skip />
-    <!-- no translation found for title_supported_service (4275535165812691571) -->
-    <skip />
-    <!-- no translation found for summary_supported_service (4320535903444834786) -->
-    <skip />
-    <!-- no translation found for satellite_setting_summary_more_information (4008690241760925372) -->
-    <skip />
-    <!-- no translation found for more_about_satellite_messaging (3385673133561348509) -->
-    <skip />
+    <string name="satellite_setting_title" msgid="2543034229989047673">"衛星訊息"</string>
+    <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"透過衛星收發訊息。你的帳戶支援這項功能。"</string>
+    <string name="satellite_setting_disabled_summary" msgid="6789122487534159857">"透過衛星收發訊息。你的帳戶不支援這項功能。"</string>
+    <string name="keywords_satellite_setting" msgid="3312183289776517695">"衛星訊息"</string>
+    <string name="category_name_about_satellite_messaging" msgid="3756205049485508340">"關於衛星訊息"</string>
+    <string name="title_about_satellite_setting" msgid="9212860038048311345">"適用的「<xliff:g id="CARRIER_NAME">%1$s</xliff:g>」帳戶支援透過衛星收發訊息"</string>
+    <string name="category_title_your_satellite_plan" msgid="3017895097366691841">"你的「<xliff:g id="CARRIER_NAME">%1$s</xliff:g>」方案"</string>
+    <string name="title_have_satellite_plan" msgid="2048372355699977947">"你的帳戶支援衛星訊息"</string>
+    <string name="title_no_satellite_plan" msgid="2876056203035197505">"你的帳戶不支援衛星訊息"</string>
+    <string name="summary_add_satellite_setting" msgid="3815254731634052432">"新增衛星訊息"</string>
+    <string name="category_name_how_it_works" msgid="585303230539269496">"運作方式"</string>
+    <string name="title_satellite_connection_guide" msgid="3294802307913609072">"沒有行動網路時"</string>
+    <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"手機會自動連上衛星。為獲得最佳連線品質，請在沒有物體遮住天空的地方使用。"</string>
+    <string name="title_supported_service" msgid="4275535165812691571">"手機連上衛星後"</string>
+    <string name="summary_supported_service" msgid="4320535903444834786">"你可以傳送訊息給任何人，包括緊急救援服務。如果有可用的行動網路，手機就會重新連線。"</string>
+    <string name="satellite_setting_summary_more_information" msgid="4008690241760925372">"衛星訊息可能需要比較長的時間才會送達，而且這項功能僅支援部分地區。天氣和特定結構可能會影響衛星連線的品質。系統不支援衛星電話。\n\n「設定」頁面可能要一段時間後才會顯示帳戶變動，詳情請洽「<xliff:g id="CARRIER_NAME">%1$s</xliff:g>」。"</string>
+    <string name="more_about_satellite_messaging" msgid="3385673133561348509">"進一步瞭解衛星訊息"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"存取點名稱"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"無法在連線到「<xliff:g id="CARRIER">%1$s</xliff:g>」時使用"</string>
@@ -4561,25 +4550,22 @@
     <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"要切換至「<xliff:g id="CARRIER_NAME">%1$s</xliff:g>」嗎？"</string>
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"要改為使用 SIM 卡嗎？"</string>
     <string name="sim_action_switch_sub_dialog_mep_title" msgid="933856847099933004">"要使用「<xliff:g id="CARRIER_NAME">%1$s</xliff:g>」嗎？"</string>
-    <!-- no translation found for sim_action_switch_sub_dialog_text (7474905814976249607) -->
-    <skip />
-    <!-- no translation found for sim_action_switch_sub_dialog_text_downloaded (6415848271400253954) -->
-    <skip />
-    <!-- no translation found for sim_action_switch_sub_dialog_text_single_sim (421658355882679837) -->
-    <skip />
+    <string name="sim_action_switch_sub_dialog_text" msgid="7474905814976249607">"一次只能啟用 1 張 SIM 卡。\n\n切換到「<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>」不會取消「<xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>」的服務。"</string>
+    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="6415848271400253954">"一次只能啟用 1 張 eSIM 卡。\n\n切換到「<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>」不會取消「<xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>」的服務。"</string>
+    <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="421658355882679837">"一次只能啟用 1 張 SIM 卡。\n\n切換 SIM 卡不會取消「<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>」的服務。"</string>
     <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"你可以同時使用 2 張 SIM 卡。如要使用「<xliff:g id="CARRIER_NAME">%1$s</xliff:g>」，請關閉另一張 SIM 卡。"</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"切換至「<xliff:g id="CARRIER_NAME">%1$s</xliff:g>」"</string>
     <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"關閉「<xliff:g id="CARRIER_NAME">%1$s</xliff:g>」"</string>
     <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"關閉 SIM 卡並不會取消服務"</string>
-    <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"正在連線到網路…"</string>
-    <string name="sim_action_switch_sub_dialog_progress" msgid="4718412054243793310">"正在切換到「<xliff:g id="CARRIER_NAME">%1$s</xliff:g>」以便使用通話和訊息服務…"</string>
-    <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"無法切換電信業者"</string>
-    <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"發生錯誤，因此無法切換電信業者。"</string>
+    <string name="sim_action_enabling_sim_without_carrier_name" msgid="8144175623622669136">"正在啟用 SIM 卡…"</string>
+    <string name="sim_action_switch_sub_dialog_progress" msgid="697127154780501304">"正在切換到「<xliff:g id="CARRIER_NAME">%1$s</xliff:g>」…"</string>
+    <string name="sim_action_enable_sim_fail_title" msgid="2718084141744769701">"無法切換 SIM 卡"</string>
+    <string name="sim_action_enable_sim_fail_text" msgid="8332742656111984482">"發生錯誤，無法切換 SIM 卡。"</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"要停用「<xliff:g id="CARRIER_NAME">%1$s</xliff:g>」嗎？"</string>
     <string name="privileged_action_disable_sub_dialog_title_without_carrier" msgid="6518373229436331608">"要停用 SIM 卡嗎？"</string>
     <string name="privileged_action_disable_sub_dialog_progress" msgid="5900243067681478102">"正在停用 SIM 卡<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
-    <string name="privileged_action_disable_fail_title" msgid="6689494935697043555">"無法停用電信業者"</string>
-    <string name="privileged_action_disable_fail_text" msgid="8404023523406091819">"發生錯誤，無法停用你的電信業者。"</string>
+    <string name="privileged_action_disable_fail_title" msgid="1808735136395980905">"無法停用 SIM 卡"</string>
+    <string name="privileged_action_disable_fail_text" msgid="6236231745255527458">"發生錯誤，無法停用 SIM 卡。"</string>
     <string name="sim_action_enable_dsds_title" msgid="226508711751577169">"要使用兩張 SIM 卡嗎？"</string>
     <string name="sim_action_enable_dsds_text" msgid="970986559326263949">"這部裝置可以同時使用兩張 SIM 卡。如果不想同時使用兩張 SIM 卡，請輕觸「不用了，謝謝」。"</string>
     <string name="sim_action_restart_title" msgid="7054617569121993825">"要重新啟動裝置嗎？"</string>
@@ -4609,39 +4595,34 @@
     <string name="sim_onboarding_phoneNumber_data_only" msgid="8158409121949373662">"數據傳輸專用"</string>
     <string name="sim_onboarding_setup" msgid="5750393553605388463">"設定"</string>
     <string name="sim_onboarding_next" msgid="6415025179929475355">"繼續"</string>
-    <!-- no translation found for sim_onboarding_progressbar_turning_sim_on (1163318788393361574) -->
-    <skip />
+    <string name="sim_onboarding_progressbar_turning_sim_on" msgid="1163318788393361574">"正在啟用「<xliff:g id="CARRIER_NAME">%1$s</xliff:g>」…"</string>
     <string name="mobile_network_spn_title" msgid="3053793174495329077">"行動網路"</string>
     <string name="mobile_network_phone_number_title" msgid="2090794402855021784">"電話號碼"</string>
     <string name="mobile_network_sim_label_color_title" msgid="2401352348041132876">"SIM 卡標籤和顏色"</string>
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"啟用網路"</string>
     <string name="sim_switch_channel_id" msgid="4927038626791837861">"正在切換電信業者"</string>
-    <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"「<xliff:g id="CARRIER_NAME">%1$s</xliff:g>」已啟用"</string>
+    <string name="post_dsds_reboot_notification_title_with_carrier" msgid="975447139749692794">"「<xliff:g id="CARRIER_NAME">%1$s</xliff:g>」的 SIM 卡已啟用"</string>
     <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"輕觸即可更新 SIM 卡設定"</string>
     <string name="switch_to_removable_notification" msgid="7640342063449806296">"已切換成「<xliff:g id="CARRIER_NAME">%1$s</xliff:g>」"</string>
     <string name="switch_to_removable_notification_no_carrier_name" msgid="7384856964036215338">"已切換成其他電信業者"</string>
     <string name="network_changed_notification_text" msgid="2407908598496951243">"你的行動網路已變更"</string>
     <string name="dsds_notification_after_suw_title" msgid="3738898232310273982">"設定其他 SIM 卡"</string>
     <string name="dsds_notification_after_suw_text" msgid="1287357774676361084">"選擇已啟用的 SIM 卡或同時使用 2 張 SIM 卡"</string>
-    <string name="choose_sim_title" msgid="4804689675237716286">"選擇要使用的號碼"</string>
-    <string name="choose_sim_text" msgid="4356662002583501647">"{count,plural, =1{這部裝置上有 1 個可用的號碼，但一次只能使用一個}=2{這部裝置上有 2 個可用的號碼，但一次只能使用一個}other{這部裝置上有 # 個可用的號碼，但一次只能使用一個}}"</string>
+    <string name="choose_sim_title" msgid="66509047151583877">"選擇要使用的 SIM 卡"</string>
+    <string name="choose_sim_text" msgid="8992163497852069924">"{count,plural, =1{這部裝置上有 1 張可用的 SIM 卡，但一次只能使用一張}=2{這部裝置上有 2 張可用的 SIM 卡，但一次只能使用一張}other{這部裝置上有 # 張可用的 SIM 卡，但一次只能使用一張}}"</string>
     <string name="choose_sim_activating" msgid="9035902671985449448">"正在啟用<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
-    <string name="choose_sim_could_not_activate" msgid="2154564459842291617">"目前無法啟用"</string>
+    <string name="choose_sim_could_not_activate" msgid="1907240714489797917">"目前無法啟用這張 SIM 卡"</string>
     <string name="switch_sim_dialog_title" msgid="5407316878973237773">"要使用「<xliff:g id="CARRIER_NAME">%1$s</xliff:g>」嗎？"</string>
     <string name="switch_sim_dialog_text" msgid="7530186862171635464">"系統將使用「<xliff:g id="CARRIER_NAME">%1$s</xliff:g>」的行動數據、通話和簡訊服務。"</string>
     <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"沒有可用的 SIM 卡"</string>
     <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"日後如要使用行動數據、通話和簡訊功能，請前往網路設定進行調整"</string>
     <string name="sim_card_label" msgid="6263064316075963775">"SIM 卡"</string>
     <string name="erase_sim_dialog_title" msgid="4742077437653028326">"要清除這張 eSIM 卡嗎？"</string>
-    <!-- no translation found for erase_sim_dialog_text (1406141218170595272) -->
-    <skip />
+    <string name="erase_sim_dialog_text" msgid="1406141218170595272">"這麼做會從這部裝置移除「<xliff:g id="CARRIER_NAME_A">%1$s</xliff:g>」服務，但不會取消「<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g>」方案。"</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"清除"</string>
-    <!-- no translation found for erasing_sim (4237180547590463930) -->
-    <skip />
-    <!-- no translation found for erase_sim_fail_title (1445700500168357303) -->
-    <skip />
-    <!-- no translation found for erase_sim_fail_text (6898841004987411547) -->
-    <skip />
+    <string name="erasing_sim" msgid="4237180547590463930">"正在清除 eSIM 卡…"</string>
+    <string name="erase_sim_fail_title" msgid="1445700500168357303">"無法清除 eSIM 卡"</string>
+    <string name="erase_sim_fail_text" msgid="6898841004987411547">"系統發生錯誤，因此未清除這張 eSIM 卡。\n\n請重新啟動裝置並再試一次。"</string>
     <string name="network_connection_request_dialog_title" msgid="1896186380874289434">"連線至裝置"</string>
     <string name="network_connection_request_dialog_summary" msgid="7693038309792726170">"「<xliff:g id="APPNAME">%1$s</xliff:g>」應用程式想透過臨時的 Wi-Fi 網路連線至你的裝置"</string>
     <string name="network_connection_timeout_dialog_message" msgid="598509083077743772">"找不到裝置。請確認裝置已經開啟並可進行連線。"</string>
@@ -4769,6 +4750,10 @@
     <string name="overlay_settings_summary" msgid="2745336273786148166">"允許可顯示在其他應用程式上的應用程式重疊顯示在「設定」畫面上"</string>
     <string name="allow_mock_modem" msgid="3832264806530479214">"允許模擬數據機"</string>
     <string name="allow_mock_modem_summary" msgid="9097416612748005374">"允許這部裝置執行模擬數據機服務，以進行檢測設備測試。正常使用手機時不要啟用這項服務"</string>
+    <!-- no translation found for disable_screen_share_protections_for_apps_and_notifications (4987116103699222633) -->
+    <skip />
+    <!-- no translation found for disable_screen_share_protections_for_apps_and_notifications_summary (932295234626582052) -->
+    <skip />
     <string name="media_controls_title" msgid="403271085636252597">"媒體"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"固定媒體播放器"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"讓快速設定中的媒體播放器保持開啟狀態，以便快速恢復播放"</string>
@@ -4806,10 +4791,8 @@
     <string name="sim_category_title" msgid="2341314000964710495">"SIM 卡"</string>
     <string name="downloaded_sim_category_title" msgid="2876988650413179752">"eSIM 卡"</string>
     <string name="downloaded_sims_category_title" msgid="487799905978489922">"eSIM 卡"</string>
-    <!-- no translation found for sim_category_active_sim (3077009911935592178) -->
-    <skip />
-    <!-- no translation found for sim_category_inactive_sim (7351553344148400450) -->
-    <skip />
+    <string name="sim_category_active_sim" msgid="3077009911935592178">"已啟用"</string>
+    <string name="sim_category_inactive_sim" msgid="7351553344148400450">"已停用"</string>
     <string name="sim_category_default_active_sim" msgid="1208194173387987231">" / <xliff:g id="ID_1">%1$s</xliff:g>的預設設定"</string>
     <string name="default_active_sim_calls" msgid="2390973682556353558">"通話"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"簡訊"</string>
@@ -5087,4 +5070,6 @@
     <string name="content_protection_preference_subpage_summary" msgid="3595621220981703364"></string>
     <string name="content_protection_preference_subpage_info" msgid="6890886357653365489"></string>
     <string name="accessibility_setup_password_complete" msgid="6358749253318369077">"密碼設定完成"</string>
+    <!-- no translation found for show_stylus_pointer_icon (1010583689203665786) -->
+    <skip />
 </resources>
