@@ -34,7 +34,8 @@ public class PrivateSpaceDashboardFragment extends DashboardFragment {
     public void onCreate(Bundle icicle) {
         if (android.os.Flags.allowPrivateProfile()) {
             super.onCreate(icicle);
-            if (getIntent().getBooleanExtra(EXTRA_SHOW_PRIVATE_SPACE_UNLOCKED, false)) {
+            if (icicle == null
+                    && getIntent().getBooleanExtra(EXTRA_SHOW_PRIVATE_SPACE_UNLOCKED, false)) {
                 Log.i(TAG, "Private space unlocked showing toast");
                 Toast.makeText(getContext(), R.string.private_space_unlocked, Toast.LENGTH_SHORT)
                         .show();
