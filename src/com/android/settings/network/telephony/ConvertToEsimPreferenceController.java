@@ -20,6 +20,7 @@ import static androidx.lifecycle.Lifecycle.Event.ON_START;
 import static androidx.lifecycle.Lifecycle.Event.ON_STOP;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -143,6 +144,7 @@ public class ConvertToEsimPreferenceController extends TelephonyBasePreferenceCo
         Intent intent = new Intent(EuiccManager.ACTION_CONVERT_TO_EMBEDDED_SUBSCRIPTION);
         intent.putExtra("subId", mSubId);
         mContext.startActivity(intent);
+        ((Activity) mContext).finish();
         return true;
     }
 
