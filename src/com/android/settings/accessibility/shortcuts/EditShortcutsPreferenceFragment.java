@@ -27,16 +27,21 @@ import static com.android.internal.accessibility.AccessibilityShortcutController
 import static com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_CONTROLLER_NAME;
 import static com.android.settings.SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE;
 
+import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.database.ContentObserver;
+import android.icu.text.ListFormatter;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.util.ArrayMap;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,9 +53,12 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.internal.accessibility.dialog.AccessibilityTarget;
+import com.android.internal.accessibility.dialog.AccessibilityTargetHelper;
 import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.accessibility.AccessibilitySetupWizardUtils;
+import com.android.settings.accessibility.Flags;
 import com.android.settings.accessibility.PreferredShortcuts;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
@@ -60,7 +68,10 @@ import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.GlifPreferenceLayout;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -171,6 +182,36 @@ public class EditShortcutsPreferenceFragment extends DashboardFragment {
         registerSettingsObserver();
     }
 
+    @Override
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        super.onCreatePreferences(savedInstanceState, rootKey);
+
+        Activity activity = getActivity();
+
+        if (!activity.getIntent().getAction().equals(
+                Settings.ACTION_ACCESSIBILITY_SHORTCUT_SETTINGS)
+                || !Flags.editShortcutsInFullScreen()) {
+            return;
+        }
+
+        // TODO(b/325664350): Implement shortcut type for "all shortcuts"
+        List<AccessibilityTarget> accessibilityTargets =
+                AccessibilityTargetHelper.getInstalledTargets(
+                        activity.getBaseContext(), AccessibilityManager.ACCESSIBILITY_SHORTCUT_KEY);
+
+        Pair<String, String> titles = getTitlesFromAccessibilityTargetList(
+                mShortcutTargets,
+                accessibilityTargets,
+                activity.getResources()
+        );
+
+        activity.setTitle(titles.first);
+
+        String categoryKey = activity.getResources().getString(
+                R.string.accessibility_shortcut_description_pref);
+        findPreference(categoryKey).setTitle(titles.second);
+    }
+
     @NonNull
     @Override
     public RecyclerView onCreateRecyclerView(
@@ -275,7 +316,6 @@ public class EditShortcutsPreferenceFragment extends DashboardFragment {
         }
 
         mShortcutTargets = Set.of(targets);
-        // TODO(318748373): use 'targets' to populate title when no title is given
     }
 
     @Override
@@ -355,5 +395,53 @@ public class EditShortcutsPreferenceFragment extends DashboardFragment {
 
         // A11y Nav Button
         refreshPreferenceController(NavButtonShortcutOptionController.class);
+    }
+
+    /**
+     * Generates a title & subtitle pair describing the features whose shortcuts are being edited.
+     *
+     * @param shortcutTargets string list of component names corresponding to
+     *                        the relevant shortcut targets.
+     * @param accessibilityTargets list of accessibility targets
+     *                             to try and find corresponding labels in.
+     * @return pair of strings to be used as page title and subtitle.
+     * If there is only one shortcut label, It is displayed in the title and the subtitle is null.
+     * Otherwise, the title is a generic prompt and the subtitle lists all shortcut labels.
+     */
+    @VisibleForTesting
+    static Pair<String, String> getTitlesFromAccessibilityTargetList(
+            Set<String> shortcutTargets,
+            List<AccessibilityTarget> accessibilityTargets,
+            Resources resources) {
+        ArrayList<CharSequence> featureLabels = new ArrayList<>();
+
+        Map<String, CharSequence> accessibilityTargetLabels = new ArrayMap<>();
+        accessibilityTargets.forEach((target) -> accessibilityTargetLabels.put(
+                target.getId(), target.getLabel()));
+
+        for (String target: shortcutTargets) {
+            if (accessibilityTargetLabels.containsKey(target)) {
+                featureLabels.add(accessibilityTargetLabels.get(target));
+            } else {
+                throw new IllegalStateException("Shortcut target does not have a label: " + target);
+            }
+        }
+
+        if (featureLabels.size() == 1) {
+            return new Pair<>(
+                    resources.getString(
+                            R.string.accessibility_shortcut_title, featureLabels.get(0)),
+                    null
+            );
+        } else if (featureLabels.size() == 0) {
+            throw new IllegalStateException("Found no labels for any shortcut targets.");
+        } else {
+            return new Pair<>(
+                    resources.getString(R.string.accessibility_shortcut_edit_screen_title),
+                    resources.getString(
+                            R.string.accessibility_shortcut_edit_screen_prompt,
+                            ListFormatter.getInstance().format(featureLabels))
+            );
+        }
     }
 }
