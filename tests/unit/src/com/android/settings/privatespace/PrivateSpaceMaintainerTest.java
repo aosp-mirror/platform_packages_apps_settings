@@ -16,6 +16,7 @@
 
 package com.android.settings.privatespace;
 
+import static android.provider.Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS;
 import static android.provider.Settings.Secure.PRIVATE_SPACE_AUTO_LOCK;
 
 import static com.android.settings.privatespace.PrivateSpaceMaintainer.HIDE_PRIVATE_SPACE_ENTRY_POINT_DISABLED_VAL;
@@ -137,6 +138,24 @@ public class PrivateSpaceMaintainerTest {
         privateSpaceMaintainer.createPrivateSpace();
         assertThat(privateSpaceMaintainer.getHidePrivateSpaceEntryPointSetting())
                 .isEqualTo(HIDE_PRIVATE_SPACE_ENTRY_POINT_DISABLED_VAL);
+    }
+
+    /**
+     * Tests that {@link PrivateSpaceMaintainer#createPrivateSpace()} sets the PS sensitive
+     * notifications to hidden by default.
+     */
+    @Test
+    public void createPrivateSpace_psDoesNotExist_setsDefaultPsSensitiveNotificationsValue() {
+        mSetFlagsRule.enableFlags(
+                Flags.FLAG_ALLOW_PRIVATE_PROFILE,
+                android.multiuser.Flags.FLAG_ENABLE_PS_SENSITIVE_NOTIFICATIONS_TOGGLE);
+        PrivateSpaceMaintainer privateSpaceMaintainer =
+                PrivateSpaceMaintainer.getInstance(mContext);
+        privateSpaceMaintainer.deletePrivateSpace();
+        privateSpaceMaintainer.createPrivateSpace();
+        assertThat(privateSpaceMaintainer.doesPrivateSpaceExist()).isTrue();
+        assertThat(getPsSensitiveNotificationsValue(privateSpaceMaintainer))
+                .isEqualTo(HidePrivateSpaceSensitiveNotificationsController.DISABLED);
     }
 
     /**
@@ -285,6 +304,13 @@ public class PrivateSpaceMaintainerTest {
                 mContentResolver,
                 Settings.Secure.USER_SETUP_COMPLETE,
                 0,
+                privateSpaceMaintainer.getPrivateProfileHandle().getIdentifier());
+    }
+
+    private int getPsSensitiveNotificationsValue(PrivateSpaceMaintainer privateSpaceMaintainer) {
+        return Settings.Secure.getIntForUser(mContentResolver,
+                LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS,
+                HidePrivateSpaceSensitiveNotificationsController.ENABLED,
                 privateSpaceMaintainer.getPrivateProfileHandle().getIdentifier());
     }
 }
