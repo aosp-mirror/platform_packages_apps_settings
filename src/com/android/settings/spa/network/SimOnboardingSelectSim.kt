@@ -16,24 +16,23 @@
 
 package com.android.settings.spa.network
 
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.SignalCellularAlt
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.android.settings.R
 import com.android.settings.network.SimOnboardingService
+import com.android.settings.sim.SimDialogActivity
 import com.android.settingslib.spa.framework.theme.SettingsDimension
 import com.android.settingslib.spa.widget.preference.CheckboxPreference
 import com.android.settingslib.spa.widget.preference.CheckboxPreferenceModel
-
 import com.android.settingslib.spa.widget.scaffold.BottomAppBarButton
 import com.android.settingslib.spa.widget.scaffold.SuwScaffold
 import com.android.settingslib.spa.widget.ui.SettingsBody
@@ -68,21 +67,37 @@ private fun selectSimBody(onboardingService: SimOnboardingService) {
     Column(Modifier.padding(SettingsDimension.itemPadding)) {
         SettingsBody(stringResource(id = R.string.sim_onboarding_select_sim_msg))
     }
-    for (subInfo in onboardingService.getSelectableSubscriptionInfo()) {
+    var isFinished = rememberSaveable { mutableStateOf(false) }
+    isFinished.value = onboardingService.isSimSelectionFinished
+    for (subInfo in onboardingService.getSelectableSubscriptionInfoList()) {
         var title = onboardingService.getSubscriptionInfoDisplayName(subInfo)
         var summaryNumber =
             subInfo.number // TODO using the SubscriptionUtil.getFormattedPhoneNumber
-        var changeable = subInfo.isActive
-        var checked by rememberSaveable { mutableStateOf(!subInfo.isActive) }
+        var checked = rememberSaveable {
+            mutableStateOf(
+                onboardingService.getSelectedSubscriptionInfoList().contains(subInfo)
+            )
+        }
 
         CheckboxPreference(remember {
             object : CheckboxPreferenceModel {
                 override val title = title
                 override val summary: () -> String
                     get() = { summaryNumber }
-                override val checked = { checked }
-                override val changeable = { changeable }
-                override val onCheckedChange = { newChecked: Boolean -> checked = newChecked }
+                override val checked = { checked.value }
+                override val onCheckedChange = { newChecked: Boolean ->
+                    checked.value = newChecked
+                    if (newChecked) {
+                        onboardingService.addItemForSelectedSim(subInfo)
+                    } else {
+                        onboardingService.removeItemForSelectedSim(subInfo)
+                    }
+                    isFinished.value = onboardingService.isSimSelectionFinished
+                }
+                override val changeable = {
+                    subInfo.isActive
+                        && (!isFinished.value || (isFinished.value && checked.value))
+                }
             }
         })
     }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2023 The Android Open Source Project
+<!-- Copyright (C) 2024 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -50,6 +50,13 @@
         android:title="@string/battery_saver"
         settings:keywords="@string/keywords_battery_saver"
         settings:controller="com.android.settings.fuelgauge.BatterySaverController" />
+
+    <Preference
+        android:fragment="com.android.settings.fuelgauge.SmartBatterySettings"
+        android:key="smart_battery_manager"
+        android:title="@string/smart_battery_manager_title"
+        settings:controller="com.android.settings.fuelgauge.batterytip.BatteryManagerPreferenceController"
+        settings:keywords="@string/keywords_battery_adaptive_preferences" />
 
     <SwitchPreferenceCompat
         android:key="battery_percentage"

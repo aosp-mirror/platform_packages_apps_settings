@@ -21,6 +21,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
 import android.os.Bundle
+import android.util.Log
 import androidx.annotation.VisibleForTesting
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
@@ -31,12 +32,12 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.android.settings.R
+import com.android.settings.network.SimOnboardingActivity
 import com.android.settings.network.SimOnboardingService
 import com.android.settingslib.spa.framework.common.SettingsEntryBuilder
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
 import com.android.settingslib.spa.framework.common.createSettingsPage
 import com.android.settingslib.spa.framework.compose.navigator
-
 import com.android.settingslib.spa.widget.preference.Preference
 import com.android.settingslib.spa.widget.preference.PreferenceModel
 
@@ -59,7 +60,7 @@ object SimOnboardingPageProvider : SettingsPageProvider {
 
     private val owner = createSettingsPage()
     @VisibleForTesting
-    var onboardingService: SimOnboardingService = SimOnboardingService()
+    var onboardingService: SimOnboardingService = SimOnboardingActivity.onboardingService
 
     fun buildInjectEntry() = SettingsEntryBuilder.createInject(owner = owner)
         .setUiLayoutFn {
@@ -72,18 +73,12 @@ object SimOnboardingPageProvider : SettingsPageProvider {
 
     @Composable
     override fun Page(arguments: Bundle?) {
-        initServiceData(arguments!!.getInt(SUB_ID))
         PageImpl(onboardingService,rememberNavController())
     }
 
     fun getRoute(
         subId: Int
     ): String = "${name}/$subId"
-
-    @Composable
-    fun initServiceData(targetSubId: Int) {
-        onboardingService.initData(targetSubId, LocalContext.current)
-    }
 }
 
 private fun Context.getActivity(): Activity? = when (this) {
@@ -95,7 +90,10 @@ private fun Context.getActivity(): Activity? = when (this) {
 @Composable
 fun PageImpl(onboardingService:SimOnboardingService,navHostController: NavHostController) {
     val context = LocalContext.current
-    var previousPageOfOnboarding: () -> Unit = { context.getActivity()?.finish() }
+    var finishOnboarding: () -> Unit = {
+        context.getActivity()?.finish()
+        onboardingService.callback(SimOnboardingActivity.CALLBACK_FINISH)
+    }
 
     NavHost(
         navController = navHostController,
@@ -103,31 +101,32 @@ fun PageImpl(onboardingService:SimOnboardingService,navHostController: NavHostCo
     ) {
         composable(route = SimOnboardingScreen.LabelSim.name) {
             val nextPage =
-                // Adding more conditions
-                if (onboardingService.isMultipleEnabledProfilesSupported) {
+                if (onboardingService.isMultipleEnabledProfilesSupported && onboardingService.isAllOfSlotAssigned) {
                     SimOnboardingScreen.SelectSim.name
                 } else {
+                    onboardingService.addCurrentItemForSelectedSim()
                     SimOnboardingScreen.PrimarySim.name
                 }
             SimOnboardingLabelSimImpl(
                 nextAction = { navHostController.navigate(nextPage) },
-                cancelAction = previousPageOfOnboarding,
+                cancelAction = finishOnboarding,
                 onboardingService = onboardingService
             )
         }
         composable(route = SimOnboardingScreen.PrimarySim.name) {
             SimOnboardingPrimarySimImpl(
                 nextAction = {
-                    //go back and activate sim
+                    onboardingService.callback(SimOnboardingActivity.CALLBACK_ONBOARDING_COMPLETE)
+                    context.getActivity()?.finish()
                 },
-                cancelAction = previousPageOfOnboarding,
+                cancelAction = finishOnboarding,
                 onboardingService = onboardingService
             )
         }
         composable(route = SimOnboardingScreen.SelectSim.name) {
             SimOnboardingSelectSimImpl(
                 nextAction = { navHostController.navigate(SimOnboardingScreen.PrimarySim.name) },
-                cancelAction = previousPageOfOnboarding,
+                cancelAction = finishOnboarding,
                 onboardingService = onboardingService
             )
         }

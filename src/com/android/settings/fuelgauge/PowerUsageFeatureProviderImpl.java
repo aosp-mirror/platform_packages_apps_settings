@@ -149,6 +149,16 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
+    public boolean isAdaptiveChargingSupported() {
+        return false;
+    }
+
+    @Override
+    public boolean isBatteryManagerSupported() {
+        return true;
+    }
+
+    @Override
     public Intent getResumeChargeIntent(boolean isDockDefender) {
         return null;
     }

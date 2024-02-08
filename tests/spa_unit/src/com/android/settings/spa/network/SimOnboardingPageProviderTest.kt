@@ -91,6 +91,7 @@ class SimOnboardingPageProviderTest {
     fun simOnboardingPage_nextAction_fromLabelSimToSelectSim() {
         mockSimOnboardingService.stub {
             on { isMultipleEnabledProfilesSupported }.thenReturn(true)
+            on { isAllOfSlotAssigned }.thenReturn(true)
         }
 
         composeTestRule.setContent {

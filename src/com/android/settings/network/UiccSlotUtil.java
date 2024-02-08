@@ -463,17 +463,27 @@ public class UiccSlotUtil {
         if (telMgr == null) {
             return false;
         }
-        ImmutableList<UiccSlotInfo> slotInfos = UiccSlotUtil.getSlotInfos(telMgr);
+        List<UiccSlotInfo> slotInfos = UiccSlotUtil.getSlotInfos(telMgr);
+        return isRemovableSimEnabled(slotInfos);
+    }
+
+    /**
+     * Return whether the removable psim is enabled.
+     *
+     * @param slotInfos is a List of UiccSlotInfo.
+     * @return whether the removable psim is enabled.
+     */
+    public static boolean isRemovableSimEnabled(List<UiccSlotInfo> slotInfos) {
         boolean isRemovableSimEnabled =
                 slotInfos.stream()
                         .anyMatch(
                                 slot -> slot != null
                                         && slot.isRemovable()
                                         && !slot.getIsEuicc()
-                                        && slot.getPorts().stream().anyMatch(
-                                                port -> port.isActive())
+                                        && slot.getPorts().stream()
+                                                .anyMatch(port -> port.isActive())
                                         && slot.getCardStateInfo()
-                                                == UiccSlotInfo.CARD_STATE_INFO_PRESENT);
+                                        == UiccSlotInfo.CARD_STATE_INFO_PRESENT);
         Log.i(TAG, "isRemovableSimEnabled: " + isRemovableSimEnabled);
         return isRemovableSimEnabled;
     }

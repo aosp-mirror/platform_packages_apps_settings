@@ -27,11 +27,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import com.android.settings.R
 import com.android.settings.network.SimOnboardingService
-import com.android.settings.network.SubscriptionUtil
 import com.android.settingslib.spa.framework.theme.SettingsDimension
 import com.android.settingslib.spa.widget.dialog.AlertDialogButton
 import com.android.settingslib.spa.widget.dialog.rememberAlertDialogPresenter
@@ -74,7 +72,7 @@ private fun labelSimBody(onboardingService: SimOnboardingService) {
         SettingsBody(stringResource(R.string.sim_onboarding_label_sim_msg))
     }
 
-    for (subInfo in onboardingService.getSelectableSubscriptionInfo()) {
+    for (subInfo in onboardingService.getSelectableSubscriptionInfoList()) {
         var titleSimName by remember {
             mutableStateOf(
                 onboardingService.getSubscriptionInfoDisplayName(subInfo)
