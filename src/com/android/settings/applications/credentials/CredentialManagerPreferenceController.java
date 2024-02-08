@@ -20,7 +20,6 @@ import static androidx.lifecycle.Lifecycle.Event.ON_CREATE;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -677,16 +676,8 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
 
                     @Override
                     public void onLeftSideClicked() {
-                        Intent settingsIntent =
-                                CombinedProviderInfo.createSettingsActivityIntent(
-                                        mContext, packageName, settingsActivity, getUser());
-                        if (settingsIntent != null) {
-                            try {
-                                mContext.startActivity(settingsIntent);
-                            } catch (ActivityNotFoundException e) {
-                                Log.e(TAG, "Failed to open settings activity", e);
-                            }
-                        }
+                        CombinedProviderInfo.launchSettingsActivityIntent(
+                                mContext, packageName, settingsActivity, getUser());
                     }
                 });
 

@@ -17,6 +17,7 @@
 package com.android.settings.accessibility;
 
 import static android.app.Activity.RESULT_OK;
+import static android.bluetooth.BluetoothGatt.GATT_SUCCESS;
 import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
 
 import android.app.settings.SettingsEnums;
@@ -191,7 +192,7 @@ public class HearingDevicePairingFragment extends RestrictedDashboardFragment im
     public void onDeviceBondStateChanged(@NonNull CachedBluetoothDevice cachedDevice,
             int bondState) {
         if (DEBUG) {
-            Log.d(TAG, "onDeviceBondStateChanged: " + cachedDevice.getName() + ", state = "
+            Log.d(TAG, "onDeviceBondStateChanged: " + cachedDevice.getDevice() + ", state = "
                     + bondState);
         }
         if (bondState == BluetoothDevice.BOND_BONDED) {
@@ -275,13 +276,13 @@ public class HearingDevicePairingFragment extends RestrictedDashboardFragment im
         }
         mDevicePreferenceMap.put(cachedDevice, preference);
         if (DEBUG) {
-            Log.d(TAG, "Add device. device: " + cachedDevice);
+            Log.d(TAG, "Add device. device: " + cachedDevice.getDevice());
         }
     }
 
     void removeDevice(CachedBluetoothDevice cachedDevice) {
         if (DEBUG) {
-            Log.d(TAG, "removeDevice: " + cachedDevice);
+            Log.d(TAG, "removeDevice: " + cachedDevice.getDevice());
         }
         BluetoothDevicePreference preference = mDevicePreferenceMap.remove(cachedDevice);
         if (mAvailableHearingDeviceGroup != null && preference != null) {
@@ -328,10 +329,15 @@ public class HearingDevicePairingFragment extends RestrictedDashboardFragment im
         CachedBluetoothDevice cachedDevice = mCachedDeviceManager.findDevice(device);
         if (cachedDevice == null) {
             cachedDevice = mCachedDeviceManager.addDevice(device);
+        } else if (cachedDevice.getBondState() == BluetoothDevice.BOND_BONDED) {
+            if (DEBUG) {
+                Log.d(TAG, "Skip this device, already bonded: " + cachedDevice.getDevice());
+            }
+            return;
         }
         if (cachedDevice.getHearingAidInfo() == null) {
             if (DEBUG) {
-                Log.d(TAG, "Set hearing aid info on device: " + cachedDevice);
+                Log.d(TAG, "Set hearing aid info on device: " + cachedDevice.getDevice());
             }
             cachedDevice.setHearingAidInfo(new HearingAidInfo.Builder().build());
         }
@@ -449,7 +455,7 @@ public class HearingDevicePairingFragment extends RestrictedDashboardFragment im
 
     void discoverServices(CachedBluetoothDevice cachedDevice) {
         if (DEBUG) {
-            Log.d(TAG, "connectGattToCheckCompatibility, device: " + cachedDevice);
+            Log.d(TAG, "connectGattToCheckCompatibility, device: " + cachedDevice.getDevice());
         }
         BluetoothGatt gatt = cachedDevice.getDevice().connectGatt(getContext(), false,
                 new BluetoothGattCallback() {
@@ -459,26 +465,36 @@ public class HearingDevicePairingFragment extends RestrictedDashboardFragment im
                         super.onConnectionStateChange(gatt, status, newState);
                         if (DEBUG) {
                             Log.d(TAG, "onConnectionStateChange, status: " + status + ", newState: "
-                                    + newState + ", device: " + cachedDevice);
+                                    + newState + ", device: " + cachedDevice.getDevice());
                         }
-                        if (newState == BluetoothProfile.STATE_CONNECTED) {
+                        if (status == GATT_SUCCESS
+                                && newState == BluetoothProfile.STATE_CONNECTED) {
                             gatt.discoverServices();
+                        } else {
+                            gatt.disconnect();
+                            mConnectingGattList.remove(gatt);
                         }
                     }
 
                     @Override
                     public void onServicesDiscovered(BluetoothGatt gatt, int status) {
                         super.onServicesDiscovered(gatt, status);
-                        boolean isCompatible = gatt.getService(BluetoothUuid.HEARING_AID.getUuid())
-                                != null
-                                || gatt.getService(BluetoothUuid.HAS.getUuid()) != null;
                         if (DEBUG) {
-                            Log.d(TAG,
-                                    "onServicesDiscovered, compatible with Android: " + isCompatible
-                                            + ", device: " + cachedDevice);
+                            Log.d(TAG, "onServicesDiscovered, status: " + status + ", device: "
+                                    + cachedDevice.getDevice());
                         }
-                        if (isCompatible) {
-                            addDevice(cachedDevice);
+                        if (status == GATT_SUCCESS) {
+                            if (gatt.getService(BluetoothUuid.HEARING_AID.getUuid()) != null
+                                    || gatt.getService(BluetoothUuid.HAS.getUuid()) != null) {
+                                if (DEBUG) {
+                                    Log.d(TAG, "compatible with Android, device: "
+                                            + cachedDevice.getDevice());
+                                }
+                                addDevice(cachedDevice);
+                            }
+                        } else {
+                            gatt.disconnect();
+                            mConnectingGattList.remove(gatt);
                         }
                     }
                 });

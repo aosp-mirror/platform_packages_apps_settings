@@ -87,16 +87,14 @@ public class DefaultCombinedPreferenceControllerTest {
 
     @Test
     public void ensureSettingsActivityIntentCreatedSuccessfully() {
-        DefaultCombinedPreferenceController dcpc =
-                new DefaultCombinedPreferenceController(mContext);
-
         // Ensure that the settings activity is only created if we haved the right combination
         // of package and class name.
-        assertThat(dcpc.createSettingsActivityIntent(null, null)).isNull();
-        assertThat(dcpc.createSettingsActivityIntent("", null)).isNull();
-        assertThat(dcpc.createSettingsActivityIntent("", "")).isNull();
-        assertThat(dcpc.createSettingsActivityIntent("com.test", "")).isNull();
-        assertThat(dcpc.createSettingsActivityIntent("com.test", "ClassName")).isNotNull();
+        assertThat(CombinedProviderInfo.createSettingsActivityIntent(null, null)).isNull();
+        assertThat(CombinedProviderInfo.createSettingsActivityIntent("", null)).isNull();
+        assertThat(CombinedProviderInfo.createSettingsActivityIntent("", "")).isNull();
+        assertThat(CombinedProviderInfo.createSettingsActivityIntent("com.test", "")).isNull();
+        assertThat(CombinedProviderInfo.createSettingsActivityIntent("com.test", "ClassName"))
+                .isNotNull();
     }
 
     @Test
@@ -112,13 +110,13 @@ public class DefaultCombinedPreferenceControllerTest {
 
         // Update the preference to use the provider and make sure the view
         // was updated.
-        dcpc.updatePreferenceForProvider(ppp, "App Name", "Subtitle", appIcon, null);
+        dcpc.updatePreferenceForProvider(ppp, "App Name", "Subtitle", appIcon, null, null);
         assertThat(ppp.getTitle().toString()).isEqualTo("App Name");
         assertThat(ppp.getSummary().toString()).isEqualTo("Subtitle");
         assertThat(ppp.getIcon()).isEqualTo(appIcon);
 
         // Set the preference back to none and make sure the view was updated.
-        dcpc.updatePreferenceForProvider(ppp, null, null, null, null);
+        dcpc.updatePreferenceForProvider(ppp, null, null, null, null, null);
         assertThat(ppp.getTitle().toString()).isEqualTo("None");
         assertThat(ppp.getSummary()).isNull();
         assertThat(ppp.getIcon()).isNull();

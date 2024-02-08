@@ -16,7 +16,6 @@
 
 package com.android.settings.applications.credentials;
 
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.credentials.CredentialManager;
@@ -26,11 +25,11 @@ import android.os.UserHandle;
 import android.provider.Settings;
 import android.service.autofill.AutofillService;
 import android.service.autofill.AutofillServiceInfo;
+import android.text.TextUtils;
 import android.view.autofill.AutofillManager;
-import android.util.Slog;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 
 import com.android.internal.annotations.VisibleForTesting;
@@ -83,7 +82,7 @@ public class DefaultCombinedPreferenceController extends DefaultAppPreferenceCon
         // hand side presses to align the UX.
         if (PrimaryProviderPreference.shouldUseNewSettingsUi()) {
             // We need to return an empty intent here since the class we inherit
-            // from will throw an NPE if we return null and we don't want it to 
+            // from will throw an NPE if we return null and we don't want it to
             // open anything since we added the buttons.
             return new Intent();
         }
@@ -99,10 +98,10 @@ public class DefaultCombinedPreferenceController extends DefaultAppPreferenceCon
                     topProvider.getAppName(mContext),
                     topProvider.getSettingsSubtitle(),
                     topProvider.getAppIcon(mContext, getUser()),
-                    createSettingsActivityIntent(
-                            topProvider.getPackageName(), topProvider.getSettingsActivity()));
+                    topProvider.getPackageName(),
+                    topProvider.getSettingsActivity());
         } else {
-            updatePreferenceForProvider(preference, null, null, null, null);
+            updatePreferenceForProvider(preference, null, null, null, null, null);
         }
     }
 
@@ -112,7 +111,8 @@ public class DefaultCombinedPreferenceController extends DefaultAppPreferenceCon
             @Nullable CharSequence appName,
             @Nullable String appSubtitle,
             @Nullable Drawable appIcon,
-            @Nullable Intent settingsActivityIntent) {
+            @Nullable CharSequence packageName,
+            @Nullable CharSequence settingsActivity) {
         if (appName == null) {
             preference.setTitle(R.string.app_list_preference_none);
         } else {
@@ -133,13 +133,8 @@ public class DefaultCombinedPreferenceController extends DefaultAppPreferenceCon
             primaryPref.setDelegate(
                     new PrimaryProviderPreference.Delegate() {
                         public void onOpenButtonClicked() {
-                            if (settingsActivityIntent != null) {
-                                try {
-                                    startActivity(settingsActivityIntent);
-                                } catch (ActivityNotFoundException e) {
-                                    Slog.e(TAG, "Failed to open settings activity", e);
-                                }
-                            }
+                            CombinedProviderInfo.launchSettingsActivityIntent(
+                                    mContext, packageName, settingsActivity, getUser());
                         }
 
                         public void onChangeButtonClicked() {
@@ -148,7 +143,7 @@ public class DefaultCombinedPreferenceController extends DefaultAppPreferenceCon
                     });
 
             // Hide the open button if there is no defined settings activity.
-            primaryPref.setOpenButtonVisible(settingsActivityIntent != null);
+            primaryPref.setOpenButtonVisible(!TextUtils.isEmpty(settingsActivity));
             primaryPref.setButtonsVisible(appName != null);
         }
     }
@@ -198,13 +193,8 @@ public class DefaultCombinedPreferenceController extends DefaultAppPreferenceCon
 
     /** Creates an intent to open the credential picker. */
     private Intent createIntentToOpenPicker() {
-        return new Intent(mContext, CredentialsPickerActivity.class);
-    }
-
-    /** Creates an intent to open the settings activity of the primary provider (if available). */
-    public @Nullable Intent createSettingsActivityIntent(
-            @Nullable String packageName, @Nullable String settingsActivity) {
-        return CombinedProviderInfo.createSettingsActivityIntent(
-                mContext, packageName, settingsActivity, getUser());
+        final Context context =
+                mContext.createContextAsUser(UserHandle.of(getUser()), /* flags= */ 0);
+        return new Intent(context, CredentialsPickerActivity.class);
     }
 }

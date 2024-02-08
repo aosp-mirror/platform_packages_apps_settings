@@ -1269,7 +1269,7 @@
     <!-- Header in hide Private Space settings page to access Private Space when hidden. [CHAR LIMIT=60] -->
     <string name="privatespace_access_header">Access private space when hidden</string>
     <!-- Text in hide Private Space settings page on how to search Private Space when hidden. [CHAR LIMIT=60] -->
-    <string name="privatespace_search_description">From your apps list, enter \'private space\' in the search bar</string>
+    <string name="privatespace_search_description">From your apps list, enter \"private space\" in the search bar</string>
     <!-- Text in hide Private Space settings page to tap on Private Space tile. [CHAR LIMIT=60] -->
     <string name="privatespace_tap_tile_description">Tap the private space tile</string>
     <!-- Text in hide Private Space settings page to Unlock Private Space. [CHAR LIMIT=60] -->
@@ -1372,18 +1372,6 @@
     <string name="private_space_choose_your_password_header">Set a password for your private space</string>
     <!-- Header for private space choose your pattern screen [CHAR LIMIT=40] -->
     <string name="private_space_choose_your_pattern_header">Set a pattern for your private space</string>
-
-    <!-- TODO(b/309950257): Remove below strings once QSTIle fulfillment is complete. -->
-    <!-- Header in hide Private Space settings page to unhide Private Space. [CHAR LIMIT=90] -->
-    <string name="privatespace_unhide_header">To show private space (Not final UX)</string>
-    <!-- Text in hide Private Space settings page on how to open Private Space setting. [CHAR LIMIT=NONE] -->
-    <string name="privatespace_open_settings">Open the Settings App</string>
-    <!-- Text in hide Private Space settings page on how to open Private Space setting. [CHAR LIMIT=NONE] -->
-    <string name="privatespace_tap_settings">Tap on Security &amp; privacy > private space > Hide private space when locked</string>
-    <!-- Text in hide Private Space settings page to off hide toggle. [CHAR LIMIT=90] -->
-    <string name="privatespace_turnoff_hide">Turn off \‘Hide private space when locked\’ toggle</string>
-    <!-- Note in hide Private Space settings page to inform that this is a development feature. [CHAR LIMIT=NONE] -->
-    <string name="privatespace_development_note">Note to Googlers: The development of this feature is still in progress</string>
 
     <!-- Text shown when "Add fingerprint" button is disabled -->
     <string name="fingerprint_add_max">You can add up to <xliff:g id="count" example="5">%d</xliff:g> fingerprints</string>
@@ -7318,7 +7306,7 @@
     <!-- Title for setting tile leading to saved autofill passwords, autofill, and account settings [CHAR LIMIT=40]-->
     <string name="account_dashboard_title">Passwords &amp; accounts</string>
     <!-- Summary for setting tile leading to saved autofill passwords, autofill, and account settings [CHAR LIMIT=NONE]-->
-    <string name="account_dashboard_default_summary">Saved passwords, autofill, synced accounts</string>
+    <string name="account_dashboard_default_summary">Suggestions for sign-in &amp; autofill</string>
     <!-- Title for setting tile leading to setting UI which allows user set default app to
     handle actions such as open web page, making phone calls, default SMS apps [CHAR  LIMIT=40]-->
     <string name="app_default_dashboard_title">Default apps</string>
@@ -10785,8 +10773,8 @@
     <string name="autofill_passwords">Passwords</string>
     <!-- Preference category for showing autofill and credman services with saved credentials. [CHAR LIMIT=60] -->
     <string name="credman_chosen_app_title">Preferred service</string>
-    <!-- Preference category for showing additional credential providers. [CHAR LIMIT=60] -->
-    <string name="credman_credentials">Additional providers</string>
+    <!-- Preference category for showing additional credential services. [CHAR LIMIT=60] -->
+    <string name="credman_credentials">Additional services</string>
     <!-- Summary for passwords settings that shows how many passwords are saved for each autofill
          service. [CHAR LIMIT=NONE] -->
     <string name="autofill_passwords_count">{count, plural,
@@ -10831,7 +10819,7 @@
     </string>
 
     <!-- Title of the screen where the user picks a provider. [CHAR_LIMIT=NONE] -->
-    <string name="credman_picker_title">Passwords, passkeys, and data services</string>
+    <string name="credman_picker_title">Preferred service for passwords, passkeys &amp; autofill</string>
 
     <!-- Title of the warning dialog for disabling the credential provider. [CHAR_LIMIT=NONE] -->
     <string name="credman_confirmation_message_title">Turn off %1$s\?</string>
@@ -10847,6 +10835,9 @@
         service.
         ]]>
     </string>
+
+    <!-- Title for setting tile leading to saved autofill passwords, passkeys, autofill, and account settings [CHAR LIMIT=40]-->
+    <string name="account_dashboard_title_with_passkeys">Passwords, passkeys &amp; autofill</string>
 
     <!-- Message of the warning dialog for disabling the credential provider (new strings for 24Q3). [CHAR_LIMIT=NONE] -->
     <string name="credman_confirmation_message_new_ui">
