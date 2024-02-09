@@ -62,6 +62,16 @@ public final class BiometricsSafetySource {
         }
         final Context profileParentContext =
                 context.createContextAsUser(profileParentUserHandle, 0);
+        if (android.os.Flags.allowPrivateProfile() && userManager.isPrivateProfile()) {
+            // SC always expects a response from the source if the broadcast has been sent for this
+            // source, therefore, we need to send a null SafetySourceData.
+            SafetyCenterManagerWrapper.get().setSafetySourceData(
+                    context,
+                    SAFETY_SOURCE_ID,
+                    /* safetySourceData= */ null,
+                    safetyEvent);
+            return;
+        }
 
         final BiometricNavigationUtils biometricNavigationUtils =
                 new BiometricNavigationUtils(userId);
