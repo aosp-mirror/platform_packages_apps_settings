@@ -50,6 +50,9 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.storage.StorageManager;
+import android.security.AndroidKeyStoreMaintenance;
+import android.security.GateKeeper;
+import android.security.KeyStoreException;
 import android.service.persistentdata.PersistentDataBlockManager;
 import android.text.TextUtils;
 import android.util.EventLog;
@@ -147,7 +150,6 @@ public class ChooseLockGeneric extends SettingsActivity {
          * ChooseLockGeneric can be relaunched with the same extras.
          */
         public static final String EXTRA_CHOOSE_LOCK_GENERIC_EXTRAS = "choose_lock_generic_extras";
-
         @VisibleForTesting
         static final int CONFIRM_EXISTING_REQUEST = 100;
         @VisibleForTesting
@@ -438,7 +440,7 @@ public class ChooseLockGeneric extends SettingsActivity {
             if (!isUnlockMethodSecure(key) && mLockPatternUtils.isSecure(mUserId)) {
                 // Show the disabling FRP warning only when the user is switching from a secure
                 // unlock method to an insecure one
-                showFactoryResetProtectionWarningDialog(key);
+                showFactoryResetProtectionWarningDialog(key, GateKeeper.getSecureUserId(mUserId));
                 return true;
             } else if (KEY_SKIP_FINGERPRINT.equals(key) || KEY_SKIP_FACE.equals(key)
                     || KEY_SKIP_BIOMETRICS.equals(key)) {
@@ -906,7 +908,8 @@ public class ChooseLockGeneric extends SettingsActivity {
                     : R.string.unlock_disable_frp_warning_title;
         }
 
-        private int getResIdForFactoryResetProtectionWarningMessage() {
+        private int getResIdForFactoryResetProtectionWarningMessage(
+                boolean hasAppsWithAuthBoundKeys) {
             final boolean hasFingerprints;
             final boolean hasFace;
             if (mFingerprintManager != null && mFingerprintManager.isHardwareDetected()) {
@@ -935,13 +938,24 @@ public class ChooseLockGeneric extends SettingsActivity {
                 case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC:
                 case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC_COMPLEX:
                     if (hasFingerprints && hasFace) {
-                        return R.string.unlock_disable_frp_warning_content_pin_face_fingerprint;
+                        return hasAppsWithAuthBoundKeys
+                                ?
+                                R.string.unlock_disable_frp_warning_content_pin_face_fingerprint_authbound_keys
+                                : R.string.unlock_disable_frp_warning_content_pin_face_fingerprint;
                     } else if (hasFingerprints) {
-                        return R.string.unlock_disable_frp_warning_content_pin_fingerprint;
+                        return hasAppsWithAuthBoundKeys
+                                ?
+                                R.string.unlock_disable_frp_warning_content_pin_fingerprint_authbound_keys
+                                : R.string.unlock_disable_frp_warning_content_pin_fingerprint;
                     } else if (hasFace) {
-                        return R.string.unlock_disable_frp_warning_content_pin_face;
+                        return hasAppsWithAuthBoundKeys
+                                ?
+                                R.string.unlock_disable_frp_warning_content_pin_face_authbound_keys
+                                : R.string.unlock_disable_frp_warning_content_pin_face;
                     } else {
-                        return R.string.unlock_disable_frp_warning_content_pin;
+                        return hasAppsWithAuthBoundKeys
+                                ? R.string.unlock_disable_frp_warning_content_pin_authbound_keys
+                                : R.string.unlock_disable_frp_warning_content_pin;
                     }
                 case DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC:
                 case DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC:
@@ -998,9 +1012,26 @@ public class ChooseLockGeneric extends SettingsActivity {
             return false;
         }
 
-        private void showFactoryResetProtectionWarningDialog(String unlockMethodToSet) {
+        private void showFactoryResetProtectionWarningDialog(String unlockMethodToSet,
+                long userSecureId) {
+            // Call Keystore to find out if this user has apps with authentication-bound
+            // keys associated with the userSecureId of the LSKF to be removed.
+            boolean appsAffectedByFRPRemovalExist;
+            try {
+                long[] appsAffectedByFRPRemoval =
+                        AndroidKeyStoreMaintenance.getAllAppUidsAffectedBySid(mUserId,
+                                userSecureId);
+                appsAffectedByFRPRemovalExist = appsAffectedByFRPRemoval.length > 0;
+            } catch (KeyStoreException e) {
+                Log.w(TAG, String.format("Failed to get list of apps affected by SID %d removal",
+                        userSecureId), e);
+                // Fail closed: If Settings can't reach Keystore, assume (out of caution) that
+                // there are authentication-bound keys that will be invalidated.
+                appsAffectedByFRPRemovalExist = true;
+            }
             int title = getResIdForFactoryResetProtectionWarningTitle();
-            int message = getResIdForFactoryResetProtectionWarningMessage();
+            int message = getResIdForFactoryResetProtectionWarningMessage(
+                    appsAffectedByFRPRemovalExist);
             FactoryResetProtectionWarningDialog dialog =
                     FactoryResetProtectionWarningDialog.newInstance(
                             title, message, unlockMethodToSet);
