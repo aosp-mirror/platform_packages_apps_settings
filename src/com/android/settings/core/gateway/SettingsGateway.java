@@ -29,6 +29,7 @@ import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.accessibility.AccessibilitySettingsForSetupWizard;
 import com.android.settings.accessibility.CaptioningPropertiesFragment;
 import com.android.settings.accessibility.ColorAndMotionFragment;
+import com.android.settings.accessibility.ColorContrastFragment;
 import com.android.settings.accessibility.TextReadingPreferenceFragment;
 import com.android.settings.accessibility.TextReadingPreferenceFragmentForSetupWizard;
 import com.android.settings.accessibility.ToggleColorInversionPreferenceFragment;
@@ -381,6 +382,7 @@ public class SettingsGateway {
             TurnScreenOnDetails.class.getName(),
             NfcAndPaymentFragment.class.getName(),
             ColorAndMotionFragment.class.getName(),
+            ColorContrastFragment.class.getName(),
             LongBackgroundTasksDetails.class.getName(),
             RegionalPreferencesEntriesFragment.class.getName(),
             BatteryInfoFragment.class.getName(),
