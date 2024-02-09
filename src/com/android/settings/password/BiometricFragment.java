@@ -21,6 +21,7 @@ import android.hardware.biometrics.BiometricPrompt;
 import android.hardware.biometrics.BiometricPrompt.AuthenticationCallback;
 import android.hardware.biometrics.BiometricPrompt.AuthenticationResult;
 import android.hardware.biometrics.PromptInfo;
+import android.multiuser.Flags;
 import android.os.Bundle;
 import android.os.CancellationSignal;
 
@@ -140,8 +141,14 @@ public class BiometricFragment extends InstrumentedFragment {
                 .setDisallowBiometricsIfPolicyExists(
                         promptInfo.isDisallowBiometricsIfPolicyExists())
                 .setShowEmergencyCallButton(promptInfo.isShowEmergencyCallButton())
-                .setReceiveSystemEvents(true)
-                .setAllowBackgroundAuthentication(true);
+                .setReceiveSystemEvents(true);
+
+        if (Flags.enableBiometricsToUnlockPrivateSpace()) {
+            promptBuilder = promptBuilder.setAllowBackgroundAuthentication(true /* allow */,
+                    promptInfo.shouldUseParentProfileForDeviceCredential());
+        } else {
+            promptBuilder = promptBuilder.setAllowBackgroundAuthentication(true /* allow */);
+        }
 
         // Check if the default subtitle should be used if subtitle is null/empty
         if (promptInfo.isUseDefaultSubtitle()) {
