@@ -93,6 +93,14 @@
             settings:controller=
                 "com.android.settings.sound.MediaControlsLockScreenPreferenceController" />
 
+        <!-- Allow software fallback for camera extensions -->
+        <SwitchPreference
+            android:key="privacy_camera_extensions_fallback"
+            android:title="@string/camera_extensions_fallback_title"
+            android:summary="@string/camera_extensions_fallback_description"
+            settings:controller=
+                "com.android.settings.privacy.CameraExtensionsFallbackPreferenceController" />
+
         <!-- Content Capture -->
         <!-- NOTE: content capture has a different preference, depending whether or not the
              ContentCaptureService implementations defines a custom settings activitiy on its manifest.

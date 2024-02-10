@@ -47,8 +47,8 @@
     <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"Передний экран включается при складывании устройства"</string>
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"Только игры, видео и т. п."</string>
     <string name="selective_stay_awake_summary" msgid="9055967322921984543">"Передний экран включается для приложений, которые не дают используемому экрану перейти в режим ожидания"</string>
-    <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Провести вверх, чтобы продолжить"</string>
-    <string name="stay_awake_on_lockscreen_summary" msgid="2299351813382522952">"Если вы сложите телефон, то сможете продолжить использовать приложение, проведя вверх по переднему экрану. Если ничего не делать, экран заблокируется через несколько секунд."</string>
+    <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Если провести по экрану вверх"</string>
+    <string name="stay_awake_on_lockscreen_summary" msgid="2299351813382522952">"Сложите телефон и проведите по переднему экрану вверх, чтобы продолжить использовать приложение, или подождите несколько секунд, чтобы экран заблокировался"</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"Никогда"</string>
     <string name="sleep_on_fold_summary" msgid="7737992842459588846">"Передний экран блокируется при складывании устройства"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Включить автоповорот"</string>
@@ -115,6 +115,7 @@
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Отмена"</string>
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Отключить Bluetooth LE Audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Отключить Bluetooth LE Audio, если доступны аппаратные возможности"</string>
+    <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Режим Bluetooth LE Audio"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Переключатель LE Audio в сведениях об устройстве"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Обходить белый список Bluetooth LE Audio"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Использовать LE Audio по умолчанию, даже если периферийное устройство LE Audio не соответствует критериям белого списка"</string>
@@ -545,21 +546,27 @@
     <string name="security_header" msgid="961514795852103424">"Безопасность"</string>
     <string name="privacy_header" msgid="5526002421324257007">"Конфиденциальность"</string>
     <string name="work_profile_category_header" msgid="85707750968948517">"Рабочий профиль"</string>
-    <string name="private_space_title" msgid="7078627930195569767">"Личное пространство"</string>
+    <!-- no translation found for private_space_title (1752064212078238723) -->
+    <skip />
     <string name="private_space_summary" msgid="2274405892301976238">"Спрячьте приложения в личное пространство и закройте доступ к нему"</string>
     <string name="private_space_description" msgid="4059594203775816136">"Создайте отдельное пространство для личных приложений, которое можно скрыть или защитить с помощью блокировки."</string>
-    <string name="private_space_lock_title" msgid="3006539720164938296">"Блокировка личного пространства"</string>
-    <string name="private_space_one_lock_summary" msgid="2759953747682959371">"Вы можете использовать тот же способ разблокировки, который используется для экрана, или выбрать другой."</string>
+    <!-- no translation found for private_space_lock_title (7230836881433350526) -->
+    <skip />
+    <!-- no translation found for private_space_one_lock_summary (2106513606571219068) -->
+    <skip />
     <string name="private_space_screen_lock_title" msgid="8679383894967823163">"Использовать способ блокировки, как на устройстве"</string>
     <string name="private_space_biometric_title" msgid="3934339826674553174">"Фейсконтроль и разблокировка по отпечатку пальца"</string>
     <string name="private_space_fingerprint_title" msgid="5989254643211889931">"Разблокировка по отпечатку пальца"</string>
     <string name="private_space_face_title" msgid="3290402865367663079">"Фейсконтроль"</string>
     <string name="private_space_biometric_summary" msgid="4403837276018724581">"Нажмите, чтобы настроить"</string>
-    <string name="private_space_fingerprint_unlock_title" msgid="5804023571114910034">"Разблокировка по отпечатку пальца для личного пространства"</string>
-    <string name="private_space_face_unlock_title" msgid="6613018437620070183">"Фейсконтроль для личного пространства"</string>
+    <!-- no translation found for private_space_fingerprint_unlock_title (3614016453395789051) -->
+    <skip />
+    <!-- no translation found for private_space_face_unlock_title (462248384776453613) -->
+    <skip />
     <string name="private_space_category_ways_to_unlock" msgid="4356631225316950046">"Способы разблокировки"</string>
     <string name="private_space_screen_lock_summary" msgid="394837965365561070">"Тот же способ блокировки, что и для экрана устройства"</string>
-    <string name="private_space_new_lock_title" msgid="7306873010565337671">"Изменить способ блокировки личного пространства?"</string>
+    <!-- no translation found for private_space_new_lock_title (9056139964133004094) -->
+    <skip />
     <string name="private_space_auto_lock_title" msgid="4757097802686131305">"Блокировать автоматически"</string>
     <string name="private_space_auto_lock_page_title" msgid="2993714305725968632">"Автоматическая блокировка личного пространства"</string>
     <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"Можно сделать так, чтобы личное пространство автоматически блокировалось, если вы не используете устройство какое-то время."</string>
@@ -567,18 +574,32 @@
     <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"Через 5 минут бездействия"</string>
     <string name="private_space_auto_lock_never" msgid="595014527119778873">"Никогда"</string>
     <string name="private_space_hide_title" msgid="8687034008994037610">"Скрывать, когда доступ заблокирован"</string>
-    <string name="privatespace_hide_page_title" msgid="972581369094289386">"Скрыть личное пространство, если доступ к нему заблокирован"</string>
-    <string name="privatespace_hide_page_summary" msgid="1052569521186403642">"Вы можете скрыть личное пространство из списка приложений"</string>
-    <string name="privatespace_access_header" msgid="982809349769470185">"Доступ к личному пространству, когда оно скрыто"</string>
-    <string name="privatespace_search_description" msgid="983837656432484282">"Введите запрос \"Личное пространство\" в строку поиска"</string>
-    <string name="privatespace_tap_tile_description" msgid="4146608898639668340">"Выберите параметр \"Личное пространство\""</string>
-    <string name="privatespace_unlock_description" msgid="4132755357482447360">"Разблокируйте личное пространство"</string>
+    <!-- no translation found for privatespace_hide_page_title (8417507414027827566) -->
+    <skip />
+    <!-- no translation found for privatespace_hide_page_summary (5525422595477989312) -->
+    <skip />
+    <!-- no translation found for privatespace_access_header (6066826215718835041) -->
+    <skip />
+    <!-- no translation found for privatespace_search_description (3121043205513022357) -->
+    <skip />
+    <!-- no translation found for privatespace_tap_tile_description (8346440188590931635) -->
+    <skip />
+    <!-- no translation found for privatespace_unlock_description (3177710543121916413) -->
+    <skip />
     <string name="privatespace_hide_off_summary" msgid="7227778747159633671">"Отключено"</string>
     <string name="privatespace_hide_on_summary" msgid="6136704537527640183">"Включено"</string>
     <string name="private_space_category_system" msgid="1286843321867285700">"Система"</string>
-    <string name="private_space_delete_title" msgid="3075645119800272800">"Удалить личное пространство"</string>
-    <string name="private_space_deleted" msgid="7825768516955610897">"Личное пространство удалено."</string>
-    <string name="private_space_delete_failed" msgid="8500755484258565011">"Не получилось удалить личное пространство."</string>
+    <string name="private_space_delete_title" msgid="636873505724100006">"Удалить личное пространство"</string>
+    <string name="private_space_delete_header" msgid="4594429153176776184">"Удалить личное пространство?"</string>
+    <string name="private_space_delete_summary" msgid="3344372988408565545">"Личное пространство будет удалено с устройства. Все связанные с пространством приложения и данные будут удалены. Это действие нельзя отменить."</string>
+    <string name="private_space_accounts" msgid="1078277762792056395">"Перечисленные ниже аккаунты будут удалены из вашего личного пространства."</string>
+    <string name="private_space_delete_button_label" msgid="1256981385318225002">"Удалить"</string>
+    <string name="private_space_confirm_deletion_header" msgid="3468651585498942977">"Удаление личного пространства"</string>
+    <string name="private_space_confirm_deletion_summary" msgid="342544588554284686">"Это займет некоторое время."</string>
+    <!-- no translation found for private_space_deleted (7692240901492540053) -->
+    <skip />
+    <!-- no translation found for private_space_delete_failed (7705795653796174741) -->
+    <skip />
     <string name="private_space_unlocked" msgid="9091600948712932046">"Личное пространство разблокировано."</string>
     <string name="no_device_lock_title" msgid="1078223464721029954">"Настройте блокировку экрана"</string>
     <string name="no_device_lock_summary" msgid="7436025227616244687">"Чтобы использовать личное пространство, настройте блокировку экрана на этом устройстве."</string>
@@ -594,37 +615,32 @@
     <string name="private_space_hidden_notifications_text" msgid="1487992156742340621">"Когда доступ к личному пространству заблокирован, уведомления из добавленных в него приложений скрываются"</string>
     <string name="private_space_apps_permission_text" msgid="7030946025253366172">"Приложения, добавленные в личное пространство, не показываются в разделе \"Управление разрешениями\", на панели управления разрешениями и в других настройках, когда доступ к личному пространству заблокирован.\n\nЛичное пространство нельзя перенести на другое устройство. Для этого потребуется создать новое личное пространство.\n\nДоступ к вашему личному пространству может получить человек, который установит на вашем устройстве вредоносные приложения или подключит его к компьютеру."</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Создание личного пространства…"</string>
-    <string name="private_space_notifications_hidden_title" msgid="4377296080723608107">"Когда доступ к личному пространству заблокирован, уведомления из добавленных в него приложений скрываются"</string>
-    <string name="private_space_share_photos_title" msgid="2102594859384040485">"Чтобы делиться фото и файлами из приложений, добавленных в личное пространство, разблокируйте доступ к нему"</string>
+    <!-- no translation found for private_space_notifications_hidden_title (2009112565217540581) -->
+    <skip />
+    <!-- no translation found for private_space_share_photos_title (5176346349303364657) -->
+    <skip />
     <string name="private_space_apps_installed_title" msgid="2428207301009983268">"В вашем личном пространстве уже установлены некоторые приложения"</string>
-    <string name="private_space_error_screen_title" msgid="1210906480024148398">"Не удалось создать личное пространство"</string>
+    <!-- no translation found for private_space_error_screen_title (739381738044418346) -->
+    <skip />
     <string name="private_space_tryagain_label" msgid="8305362615231738367">"Повторить попытку"</string>
     <string name="private_space_lockscreen_title" msgid="6034864097861137509">"Использовать способ, настроенный для экрана?"</string>
     <string name="private_space_lockscreen_summary" msgid="430569465080645805">"Для личного пространства можно установить тот же способ, который используется для блокировки экрана, или выбрать другой."</string>
     <string name="private_space_use_screenlock_label" msgid="9182153443192032782">"Использовать способ, настроенный для экрана"</string>
     <string name="private_space_set_lock_label" msgid="1790408277477408475">"Выбрать другой способ"</string>
     <string name="private_space_success_title" msgid="4351904015352046118">"Готово"</string>
-    <string name="private_space_access_text" msgid="4258842502257201013">"Чтобы найти личное пространство, перейдите в список приложений и прокрутите экран вниз."</string>
+    <!-- no translation found for private_space_access_text (4433988836344567888) -->
+    <skip />
     <string name="private_space_done_label" msgid="1020482651595246071">"Готово"</string>
     <string name="private_space_scrolldown_to_access" msgid="4820954877349434545">"Чтобы найти личное пространство, прокрутите экран вниз."</string>
-    <!-- no translation found for private_space_retry_signin_title (8090276618867918844) -->
-    <skip />
-    <!-- no translation found for private_space_retry_summary (1920444015972648774) -->
-    <skip />
-    <!-- no translation found for private_space_skip_login_label (7078019409056628192) -->
-    <skip />
-    <!-- no translation found for private_space_continue_login_label (7779965766333065391) -->
-    <skip />
+    <string name="private_space_retry_signin_title" msgid="8090276618867918844">"Войти"</string>
+    <string name="private_space_retry_summary" msgid="1920444015972648774">"Войдите в аккаунт, в котором хотите использовать личное пространство."</string>
+    <string name="private_space_skip_login_label" msgid="7078019409056628192">"Не сейчас"</string>
+    <string name="private_space_continue_login_label" msgid="7779965766333065391">"Продолжить"</string>
     <string name="private_space_lock_setup_title" msgid="6541564212199510787">"Выберите способ разблокировки доступа к личному пространству"</string>
     <string name="private_space_lock_setup_description" msgid="423405593476300918">"Вы можете разблокировать личное пространство с помощью отпечатка пальца. В целях безопасности потребуется установить дополнительный способ разблокировки."</string>
     <string name="private_space_choose_your_pin_header" msgid="4560802934975898265">"Задайте PIN-код для личного пространства"</string>
     <string name="private_space_choose_your_password_header" msgid="7660259341095044434">"Задайте пароль для личного пространства"</string>
     <string name="private_space_choose_your_pattern_header" msgid="2165607102459936724">"Создайте ключ для личного пространства"</string>
-    <string name="privatespace_unhide_header" msgid="1192011539687584004">"Чтобы показать личное пространство (интерфейс в разработке)"</string>
-    <string name="privatespace_open_settings" msgid="5038101805604421393">"Откройте приложение \"Настройки\"."</string>
-    <string name="privatespace_tap_settings" msgid="928932826450238276">"Выберите \"Безопасность и конфиденциальность &gt; Личное пространство &gt; Скрыть личное пространство, если доступ к нему заблокирован\"."</string>
-    <string name="privatespace_turnoff_hide" msgid="4858511423837613842">"Отключите переключатель \"Скрыть личное пространство, если доступ к нему заблокирован\"."</string>
-    <string name="privatespace_development_note" msgid="2999992301558700721">"Примечание для сотрудников Google. Разработка этой функции ещё не завершена."</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Максимальное количество отпечатков пальца, которые можно добавить: <xliff:g id="COUNT">%d</xliff:g>"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Вы уже добавили максимальное количество отпечатков"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Больше нельзя добавить отпечатки пальцев"</string>
@@ -770,7 +786,7 @@
     <string name="bluetooth_settings" msgid="2967239493428695171">"Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"Bluetooth"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"Подключить устройство <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
-    <string name="bluetooth_pairing_group_late_bonding" msgid="5310869364570266209">"Добавить участника в скоординированную группу"</string>
+    <string name="bluetooth_pairing_group_late_bonding" msgid="3047893658902159692">"Подтвердите добавление второго компонента вашего аудиоустройства."</string>
     <string name="bluetooth_pairing_key_msg" msgid="1329835708475701761">"Код подключения Bluetooth:"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="5806420933599368592">"Введите код подключения и нажмите клавишу ввода"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7256286571636950635">"PIN-код содержит буквы или символы"</string>
@@ -778,7 +794,7 @@
     <string name="bluetooth_pin_values_hint_16_digits" msgid="5603928271430883558">"Должно быть 16 цифр"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="6737778699899780717">"Возможно, потребуется ввести PIN-код на другом устройстве."</string>
     <string name="bluetooth_enter_passkey_other_device" msgid="8270426446247344709">"Возможно, потребуется ввести ключ доступа на другом устройстве."</string>
-    <string name="bluetooth_paring_group_msg" msgid="4609515924670823316">"Подтвердите, чтобы подключиться к координированному набору."</string>
+    <string name="bluetooth_paring_group_msg" msgid="2455293929036668131">"Подтвердите подключение аудиоустройства."</string>
     <string name="bluetooth_pairing_shares_phonebook" msgid="4329325125260724843">"Разрешить доступ к контактам и журналу звонков"</string>
     <string name="bluetooth_pairing_phonebook_toggle_text" msgid="2474015367387690034">"Разрешить доступ к контактам и журналу звонков"</string>
     <string name="bluetooth_pairing_phonebook_toggle_details" msgid="1367197978487212581">"Эта информация будет использоваться для оповещений о звонках и других функций"</string>
@@ -1389,8 +1405,7 @@
     <string name="battery_level_title" msgid="1371765298786083448">"Уровень заряда батареи"</string>
     <string name="communal_settings_title" msgid="2845678473945902115">"Совместные"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"Совместные настройки"</string>
-    <!-- no translation found for satellite_setting (706846910912477125) -->
-    <skip />
+    <string name="satellite_setting" msgid="706846910912477125">"Обмен сообщениями по спутниковой связи"</string>
     <string name="apn_settings" msgid="4295467389400441299">"Точки доступа"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Изменить точку доступа"</string>
     <string name="apn_add" msgid="9069613192201630934">"Добавить точку доступа"</string>
@@ -1425,8 +1440,7 @@
     <string name="menu_save" msgid="6611465355127483100">"Сохранить"</string>
     <string name="menu_cancel" msgid="1197826697950745335">"Отмена"</string>
     <string name="error_title" msgid="7158648377702417716"></string>
-    <!-- no translation found for error_duplicate_apn_entry (7792928408935276618) -->
-    <skip />
+    <string name="error_duplicate_apn_entry" msgid="7792928408935276618">"Точка доступа уже существует."</string>
     <string name="error_name_empty" msgid="1258275899283079142">"Необходимо указать имя."</string>
     <string name="error_apn_empty" msgid="7657491065443746915">"Необходимо указать APN."</string>
     <string name="error_mcc_not3" msgid="883659545640179094">"Поле MCC должно содержать 3 цифры."</string>
@@ -1445,8 +1459,7 @@
     <string name="reset_bluetooth_wifi_button_text" msgid="3974098137045963639">"Сбросить"</string>
     <string name="reset_bluetooth_wifi_complete_toast" msgid="5893439291030574365">"Настройки Bluetooth и Wi‑Fi сброшены."</string>
     <string name="reset_esim_title" msgid="4194570573425902754">"Удалить все данные eSIM"</string>
-    <!-- no translation found for reset_esim_desc (6125192435907740751) -->
-    <skip />
+    <string name="reset_esim_desc" msgid="6125192435907740751">"Мобильный тариф сохранится. Чтобы получить новую SIM-карту, обратитесь к оператору."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"Сбросить настройки"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"Сбросить все настройки сети? Это действие нельзя отменить."</string>
     <string name="reset_network_final_desc_esim" msgid="1129251284212847939">"Сбросить все настройки сети и удалить карты eSIM? Это действие нельзя отменить."</string>
@@ -1454,18 +1467,15 @@
     <string name="reset_network_confirm_title" msgid="913014422184481270">"Сбросить настройки?"</string>
     <string name="network_reset_not_available" msgid="1966334631394607829">"Этот пользователь не может сбрасывать настройки сети"</string>
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"Сетевые настройки сброшены"</string>
-    <!-- no translation found for reset_esim_error_title (6516110227665862295) -->
-    <skip />
-    <!-- no translation found for reset_esim_error_msg (8459527827897797168) -->
-    <skip />
+    <string name="reset_esim_error_title" msgid="6516110227665862295">"Не получилось удалить eSIM-карты"</string>
+    <string name="reset_esim_error_msg" msgid="8459527827897797168">"Не получилось удалить eSIM-карты.\n\nПерезапустите устройство и повторите попытку."</string>
     <string name="main_clear_title" msgid="277664302144837723">"Удалить все данные"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Удалить все данные"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"музыка;"</li>\n<li>"фото;"</li>\n<li>"другие данные."</li></string>
     <string name="main_clear_desc_also_erases_esim" msgid="4553469876411831729"><li>"eSIM"</li></string>
     <string name="main_clear_desc_no_cancel_mobile_plan" msgid="369883568059127035">\n\n"Вы не потеряете доступ к услугам оператора связи."</string>
     <string name="main_clear_final_desc" msgid="5800877928569039580">"Вся личная информация и скачанные приложения будут удалены. Это действие нельзя отменить."</string>
-    <!-- no translation found for main_clear_final_desc_esim (6592404057237813989) -->
-    <skip />
+    <string name="main_clear_final_desc_esim" msgid="6592404057237813989">"Вся личная информация, в том числе данные eSIM-карт и скачанные приложения, будет удалена. Это действие нельзя отменить."</string>
     <string name="main_clear_confirm_title" msgid="6577071819657853713">"Удалить все данные?"</string>
     <string name="main_clear_not_available" msgid="3433795327146684827">"Этот пользователь не может выполнять сброс настроек"</string>
     <string name="main_clear_progress_title" msgid="7239741132015617719">"Удаление…"</string>
@@ -1696,14 +1706,10 @@
     <string name="force_stop" msgid="2681771622136916280">"Остановить"</string>
     <string name="archive" msgid="9074663845068632127">"Отправить в архив"</string>
     <string name="restore" msgid="7622486640713967157">"Восстановить"</string>
-    <!-- no translation found for restoring_step_one (3465050101254272874) -->
-    <skip />
-    <!-- no translation found for restoring_step_two (140484846432595108) -->
-    <skip />
-    <!-- no translation found for restoring_step_three (3712883580876329811) -->
-    <skip />
-    <!-- no translation found for restoring_step_four (8966846882470446209) -->
-    <skip />
+    <string name="restoring_step_one" msgid="3465050101254272874">"Восстановление"</string>
+    <string name="restoring_step_two" msgid="140484846432595108">"Восстановление."</string>
+    <string name="restoring_step_three" msgid="3712883580876329811">"Восстановление.."</string>
+    <string name="restoring_step_four" msgid="8966846882470446209">"Восстановление..."</string>
     <string name="total_size_label" msgid="2052185048749658866">"Всего"</string>
     <string name="application_size_label" msgid="6407051020651716729">"Размер приложения"</string>
     <string name="external_code_size_label" msgid="7375146402660973743">"На USB-накопителе"</string>
@@ -1852,6 +1858,8 @@
     <string name="show_ime_summary" msgid="7293345791727205975">"Не скрывать экранную клавиатуру, когда включена физическая"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"Контроль повторного нажатия"</string>
     <string name="bounce_keys_summary" msgid="6922850403920596246">"Включите функцию специальных возможностей \"Контроль повторного нажатия\" для физической клавиатуры"</string>
+    <string name="slow_keys" msgid="2891452895499690837">"Медленные клавиши"</string>
+    <string name="slow_keys_summary" msgid="6147992959180167575">"Включите функцию специальных возможностей \"Медленные клавиши\" для физической клавиатуры."</string>
     <string name="sticky_keys" msgid="7317317044898161747">"Залипание клавиш"</string>
     <string name="sticky_keys_summary" msgid="8520909829540989765">"Включите функцию специальных возможностей \"Залипание клавиш\" для физической клавиатуры"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Быстрые клавиши"</string>
@@ -2424,8 +2432,7 @@
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Удалить"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Отмена"</string>
     <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"Зарядить полностью"</string>
-    <!-- no translation found for battery_tip_incompatible_charging_title (1567827436103364999) -->
-    <skip />
+    <string name="battery_tip_incompatible_charging_title" msgid="1567827436103364999">"Проверьте зарядное устройство"</string>
     <string name="battery_tip_incompatible_charging_content_description" msgid="355668467640367701">"Подробнее об использовании несовместимых зарядных устройств"</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"Battery Manager"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"Автоматическое управление приложениями"</string>
@@ -3018,7 +3025,8 @@
     <string name="sim_status_title" msgid="6188770698037109774">"Статус SIM-карты"</string>
     <string name="sim_status_title_sim_slot" msgid="4932996839194493313">"Статус SIM (слот SIM %1$d)"</string>
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g> дБмВт, asu: <xliff:g id="ASU">%2$d</xliff:g>"</string>
-    <string name="sim_notification_title" msgid="2819551384383504031">"SIM-карты были изменены"</string>
+    <!-- no translation found for sim_notification_title (6839556577405929262) -->
+    <skip />
     <string name="sim_notification_summary" msgid="5593339846307029991">"Нажмите, чтобы настроить"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="3077694594349657933">"Всегда спрашивать"</string>
     <string name="sim_selection_required_pref" msgid="231437651041498359">"Выберите SIM-карту"</string>
@@ -3042,7 +3050,8 @@
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Недавние приложения, приложения по умолчанию"</string>
     <string name="notification_settings_work_profile" msgid="6076211850526353975">"Приложениям в рабочем профиле нельзя предоставить доступ к уведомлениям."</string>
     <string name="account_dashboard_title" msgid="8228773251948253914">"Пароли и аккаунты"</string>
-    <string name="account_dashboard_default_summary" msgid="1730719656099599488">"Сохраненные пароли, автозаполнение, синхронизируемые аккаунты"</string>
+    <!-- no translation found for account_dashboard_default_summary (7976899924144356939) -->
+    <skip />
     <string name="app_default_dashboard_title" msgid="4071015747629103216">"Приложения по умолчанию"</string>
     <string name="cloned_apps_dashboard_title" msgid="5542076801222950921">"Клонирование приложений"</string>
     <string name="desc_cloned_apps_intro_text" msgid="1369621522882622476">"Создайте второй экземпляр приложения, чтобы одновременно использовать два аккаунта."</string>
@@ -3680,7 +3689,8 @@
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Запрашивать PIN-код"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Запрашивать пароль"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Блокировать устройство при отключении функции"</string>
-    <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Подтверждение удаления SIM-карты"</string>
+    <!-- no translation found for confirm_sim_deletion_title (7262127071183428893) -->
+    <skip />
     <string name="confirm_sim_deletion_description" msgid="4439657901673639063">"Запрашивать подтверждение личности перед удалением eSIM"</string>
     <string name="memtag_title" msgid="5096176296797727201">"Расширенная защита памяти (бета)"</string>
     <string name="memtag_toggle" msgid="8695028758462939212">"Расширенная защита памяти"</string>
@@ -3881,8 +3891,6 @@
     <string name="voice_activation_apps_title" msgid="7130045161611529825">"Приложения, включающиеся голосом"</string>
     <string name="permit_voice_activation_apps" msgid="9152780172988949319">"Разрешить активацию голосом"</string>
     <string name="allow_voice_activation_apps_description" msgid="6369745626995060656">"Вы сможете запускать выбранные приложения с помощью голосовых команд. Благодаря встроенной адаптивной системе распознавания доступ к вашим данным будет только у вас.\n\nПодробнее "<a href="">"о защищенном адаптивном распознавании"</a>"…"</string>
-    <string name="permit_receive_sandboxed_detection_training_data" msgid="3929496847420108753">"Улучшать активацию голосом"</string>
-    <string name="receive_sandboxed_detection_training_data_description" msgid="1415687008184625050">"Чтобы улучшать модель активации голосом, это устройство использует личные данные. Приложения могут получать объединенную информацию большого числа пользователей. Это позволяет обеспечивать конфиденциальность и совершенствовать модель для всех.\n\nПодробнее "<a href="">"о личных данных"</a>"…"</string>
     <string name="full_screen_intent_title" msgid="747270185715224130">"Уведомления в полноэкранном режиме"</string>
     <string name="permit_full_screen_intent" msgid="9035367640019960861">"Разрешить уведомления в полноэкранном режиме от этого приложения"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Разрешить этому приложению показывать уведомления в полноэкранном режиме, когда устройство заблокировано. Так приложение сможет сообщать о будильниках, входящих вызовах и других срочных уведомлениях."</string>
@@ -4304,22 +4312,23 @@
     <string name="autofill_app" msgid="7595308061826307921">"Автозаполнение"</string>
     <string name="default_autofill_app" msgid="372234803718251606">"Сервис автозаполнения по умолчанию"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"Пароли"</string>
-    <!-- no translation found for credman_chosen_app_title (7735183808067729319) -->
+    <string name="credman_chosen_app_title" msgid="7735183808067729319">"Предпочитаемый оператор"</string>
+    <!-- no translation found for credman_credentials (2620352336624160642) -->
     <skip />
-    <string name="credman_credentials" msgid="4931371941253324143">"Дополнительные поставщики"</string>
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# пароль}one{# пароль}few{# пароля}many{# паролей}other{# пароля}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"автозаполнение, автоматически, заполнение, пароль"</string>
     <string name="credman_keywords" msgid="8305600680836806170">"данные, ключ доступа, пароль"</string>
     <string name="credman_autofill_keywords" msgid="701180623776848914">"авто, заполнение, автозаполнение, данные, ключ доступа, пароль"</string>
-    <!-- no translation found for credman_button_change (4072629639218503790) -->
-    <skip />
-    <!-- no translation found for credman_button_open (7519871964170816850) -->
-    <skip />
+    <string name="credman_button_change" msgid="4072629639218503790">"Изменить"</string>
+    <string name="credman_button_open" msgid="7519871964170816850">"Открыть"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Подтвердите, что вы доверяете этому приложению&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; анализирует содержимое экрана и находит поля, которые можно заполнить автоматически."</string>
     <string name="credman_autofill_confirmation_message" msgid="843829628024668466">"&lt;b&gt;Использовать приложение \"&lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;\"?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; С этого момента в нем будут сохраняться новые пароли, ключи доступа и другие данные. Приложение \"&lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;\" может анализировать содержимое экрана и находить поля, для которых доступно автозаполнение."</string>
-    <string name="credman_picker_title" msgid="8191267620665129205">"Сервисы для паролей, ключей доступа и данных"</string>
+    <!-- no translation found for credman_picker_title (8442086614222006564) -->
+    <skip />
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Отключить %1$s?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Отключить этот сервис?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt;Пароли, ключи доступа, способы оплаты и другая сохраненная информация не будут подставляться при входе. Чтобы использовать эти данные, выберите пароль, ключ доступа или сервис."</string>
+    <!-- no translation found for account_dashboard_title_with_passkeys (6214673787161409996) -->
+    <skip />
     <string name="credman_confirmation_message_new_ui" msgid="6126274509951156460">"&lt;b&gt;Отключить все сервисы?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt;Пароли, ключи доступа и другая сохраненная информация не будут подставляться при входе."</string>
     <string name="credman_autofill_confirmation_message_new_ui" msgid="6222139222478822267">"&lt;b&gt;Сделать сервис \"&lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;\" предпочтительным?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt;Новые пароли, ключи доступа и другие данные будут сохраняться в нем. Приложение \"&lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;\" может анализировать содержимое экрана, чтобы находить поля, для которых доступно автозаполнение."</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"Использовать %1$s?"</string>
@@ -4496,10 +4505,11 @@
     <string name="mobile_network_sim_name_rename" msgid="5967588549571582924">"Сохранить"</string>
     <string name="mobile_network_use_sim_on" msgid="5333182776279917886">"Использовать эту SIM-карту"</string>
     <string name="mobile_network_use_sim_off" msgid="6303281166199670639">"Отключено"</string>
-    <string name="mobile_network_disable_sim_explanation" msgid="2851862257846773796">"Чтобы отключить эту SIM-карту, извлеките ее из устройства."</string>
-    <string name="mobile_network_tap_to_activate" msgid="4139979375717958102">"Нажмите, чтобы включить SIM-карту оператора \"<xliff:g id="CARRIER">%1$s</xliff:g>\""</string>
-    <!-- no translation found for mobile_network_erase_sim (5387971155494245850) -->
+    <!-- no translation found for mobile_network_disable_sim_explanation (7182341033728911879) -->
     <skip />
+    <!-- no translation found for mobile_network_tap_to_activate (5280456487243915465) -->
+    <skip />
+    <string name="mobile_network_erase_sim" msgid="5387971155494245850">"Удалить eSIM"</string>
     <string name="preferred_network_mode_title" msgid="3083431168988535628">"Предпочтительный тип сети"</string>
     <string name="preferred_network_mode_summary" msgid="537577807865497546">"Изменение режима работы сети"</string>
     <string name="preferred_network_mode_dialogtitle" msgid="4179420486180351631">"Предпочтительный тип сети"</string>
@@ -4518,40 +4528,23 @@
     <string name="roaming_check_price_warning" msgid="5876977438036791361">"Информацию о тарифах вы можете получить у интернет-провайдера."</string>
     <string name="mobile_data_usage_title" msgid="2047864499317759728">"Трафик приложений"</string>
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"Недопустимый режим сети (<xliff:g id="NETWORKMODEID">%1$d</xliff:g>). Не используется."</string>
-    <!-- no translation found for satellite_setting_title (2543034229989047673) -->
-    <skip />
-    <!-- no translation found for satellite_setting_enabled_summary (3554127722727530845) -->
-    <skip />
-    <!-- no translation found for satellite_setting_disabled_summary (6789122487534159857) -->
-    <skip />
-    <!-- no translation found for keywords_satellite_setting (3312183289776517695) -->
-    <skip />
-    <!-- no translation found for category_name_about_satellite_messaging (3756205049485508340) -->
-    <skip />
-    <!-- no translation found for title_about_satellite_setting (9212860038048311345) -->
-    <skip />
-    <!-- no translation found for category_title_your_satellite_plan (3017895097366691841) -->
-    <skip />
-    <!-- no translation found for title_have_satellite_plan (2048372355699977947) -->
-    <skip />
-    <!-- no translation found for title_no_satellite_plan (2876056203035197505) -->
-    <skip />
-    <!-- no translation found for summary_add_satellite_setting (3815254731634052432) -->
-    <skip />
-    <!-- no translation found for category_name_how_it_works (585303230539269496) -->
-    <skip />
-    <!-- no translation found for title_satellite_connection_guide (3294802307913609072) -->
-    <skip />
-    <!-- no translation found for summary_satellite_connection_guide (3496123195218418456) -->
-    <skip />
-    <!-- no translation found for title_supported_service (4275535165812691571) -->
-    <skip />
-    <!-- no translation found for summary_supported_service (4320535903444834786) -->
-    <skip />
-    <!-- no translation found for satellite_setting_summary_more_information (4008690241760925372) -->
-    <skip />
-    <!-- no translation found for more_about_satellite_messaging (3385673133561348509) -->
-    <skip />
+    <string name="satellite_setting_title" msgid="2543034229989047673">"Обмен сообщениями по спутниковой связи"</string>
+    <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"Обмен текстовыми сообщениями по спутниковой связи включен для вашего аккаунта."</string>
+    <string name="satellite_setting_disabled_summary" msgid="6789122487534159857">"Обмен текстовыми сообщениями по спутниковой связи отключен для вашего аккаунта."</string>
+    <string name="keywords_satellite_setting" msgid="3312183289776517695">"Обмен сообщениями по спутниковой связи"</string>
+    <string name="category_name_about_satellite_messaging" msgid="3756205049485508340">"Об обмене сообщениями по спутниковой связи"</string>
+    <string name="title_about_satellite_setting" msgid="9212860038048311345">"Ваш аккаунт оператора \"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>\" позволяет обмениваться текстовыми сообщениями по спутниковой связи."</string>
+    <string name="category_title_your_satellite_plan" msgid="3017895097366691841">"Ваш тарифный план оператора \"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>\""</string>
+    <string name="title_have_satellite_plan" msgid="2048372355699977947">"В вашем аккаунте есть возможность обмениваться сообщениями по спутниковой связи"</string>
+    <string name="title_no_satellite_plan" msgid="2876056203035197505">"В вашем аккаунте нет возможности обмениваться сообщениями по спутниковой связи"</string>
+    <string name="summary_add_satellite_setting" msgid="3815254731634052432">"Добавить возможность обмена сообщениями по спутниковой связи"</string>
+    <string name="category_name_how_it_works" msgid="585303230539269496">"Как это работает"</string>
+    <string name="title_satellite_connection_guide" msgid="3294802307913609072">"Если нет мобильной сети"</string>
+    <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"Ваш телефон автоматически подключится к спутниковой связи. Для оптимального качества соединения найдите место, где хорошо видно небо."</string>
+    <string name="title_supported_service" msgid="4275535165812691571">"После подключения телефона к спутниковой связи"</string>
+    <string name="summary_supported_service" msgid="4320535903444834786">"Вы можете отправлять текстовые сообщения кому угодно, в том числе экстренным службам. Ваш телефон повторно подключится к мобильной сети, когда она станет доступна."</string>
+    <string name="satellite_setting_summary_more_information" msgid="4008690241760925372">"Обмен сообщениями по спутниковой связи может занять больше времени и доступен только в некоторых регионах. На качество соединения могут влиять погода и внешние препятствия, такие как деревья, стены, мосты и здания. Звонки по спутниковой связи недоступны.\n\nМожет пройти некоторое время, прежде чем изменения в вашем аккаунте появятся в настройках. За дополнительной информацией обратитесь к оператору \"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>\"."</string>
+    <string name="more_about_satellite_messaging" msgid="3385673133561348509">"Подробнее об обмене сообщениями по спутниковой связи…"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Точки доступа"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"точка доступа"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Недоступны при подключении к <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -4561,25 +4554,28 @@
     <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"Переключиться на <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"Переключиться на SIM-карту?"</string>
     <string name="sim_action_switch_sub_dialog_mep_title" msgid="933856847099933004">"Использовать <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
-    <!-- no translation found for sim_action_switch_sub_dialog_text (7474905814976249607) -->
-    <skip />
-    <!-- no translation found for sim_action_switch_sub_dialog_text_downloaded (6415848271400253954) -->
-    <skip />
-    <!-- no translation found for sim_action_switch_sub_dialog_text_single_sim (421658355882679837) -->
-    <skip />
+    <string name="sim_action_switch_sub_dialog_text" msgid="7474905814976249607">"Одновременно можно использовать только одну SIM-карту.\n\nЕсли вы переключитесь на карту оператора \"<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>\", это не отменит ваш тарифный план оператора \"<xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>\"."</string>
+    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="6415848271400253954">"Одновременно можно использовать только одну eSIM-карту.\n\nЕсли вы переключитесь на карту оператора \"<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>\", это не отменит ваш тарифный план оператора \"<xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>\"."</string>
+    <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="421658355882679837">"Одновременно можно использовать только одну SIM-карту.\n\nЕсли вы переключитесь на карту другого оператора, это не отменит ваш тарифный план оператора \"<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>\"."</string>
     <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"Вы можете использовать две SIM-карты одновременно. Чтобы выбрать <xliff:g id="CARRIER_NAME">%1$s</xliff:g>, отключите другую SIM-карту."</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"Переключиться на <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"Отключить <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"Отключение SIM-карты не отменит ваш тарифный план."</string>
-    <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"Подключение к сети…"</string>
-    <string name="sim_action_switch_sub_dialog_progress" msgid="4718412054243793310">"Переключение на оператора \"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>\" для звонков и сообщений…"</string>
-    <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"Произошла ошибка"</string>
-    <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"Не удалось сменить оператора."</string>
+    <!-- no translation found for sim_action_enabling_sim_without_carrier_name (8144175623622669136) -->
+    <skip />
+    <!-- no translation found for sim_action_switch_sub_dialog_progress (697127154780501304) -->
+    <skip />
+    <!-- no translation found for sim_action_enable_sim_fail_title (2718084141744769701) -->
+    <skip />
+    <!-- no translation found for sim_action_enable_sim_fail_text (8332742656111984482) -->
+    <skip />
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"Отключить <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="privileged_action_disable_sub_dialog_title_without_carrier" msgid="6518373229436331608">"Отключить SIM-карту?"</string>
     <string name="privileged_action_disable_sub_dialog_progress" msgid="5900243067681478102">"Отключение SIM-карты<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
-    <string name="privileged_action_disable_fail_title" msgid="6689494935697043555">"Произошла ошибка"</string>
-    <string name="privileged_action_disable_fail_text" msgid="8404023523406091819">"Не удалось отключить оператора."</string>
+    <!-- no translation found for privileged_action_disable_fail_title (1808735136395980905) -->
+    <skip />
+    <!-- no translation found for privileged_action_disable_fail_text (6236231745255527458) -->
+    <skip />
     <string name="sim_action_enable_dsds_title" msgid="226508711751577169">"Использовать две SIM-карты?"</string>
     <string name="sim_action_enable_dsds_text" msgid="970986559326263949">"На этом устройстве можно использовать сразу две SIM-карты. Если вам достаточно одной, нажмите \"Нет, спасибо\"."</string>
     <string name="sim_action_restart_title" msgid="7054617569121993825">"Перезапустить устройство?"</string>
@@ -4609,39 +4605,38 @@
     <string name="sim_onboarding_phoneNumber_data_only" msgid="8158409121949373662">"Только доступ к интернету"</string>
     <string name="sim_onboarding_setup" msgid="5750393553605388463">"Настроить"</string>
     <string name="sim_onboarding_next" msgid="6415025179929475355">"Далее"</string>
-    <!-- no translation found for sim_onboarding_progressbar_turning_sim_on (1163318788393361574) -->
-    <skip />
+    <string name="sim_onboarding_progressbar_turning_sim_on" msgid="1163318788393361574">"Включение SIM-карты \"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>\"…"</string>
     <string name="mobile_network_spn_title" msgid="3053793174495329077">"Мобильная сеть"</string>
     <string name="mobile_network_phone_number_title" msgid="2090794402855021784">"Номер телефона"</string>
     <string name="mobile_network_sim_label_color_title" msgid="2401352348041132876">"Ярлык и цвет SIM-карты"</string>
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"Активация сети"</string>
     <string name="sim_switch_channel_id" msgid="4927038626791837861">"Переключение между операторами связи"</string>
-    <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"Сеть \"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>\" активна"</string>
+    <!-- no translation found for post_dsds_reboot_notification_title_with_carrier (975447139749692794) -->
+    <skip />
     <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"Нажмите, чтобы обновить настройки SIM-карты."</string>
     <string name="switch_to_removable_notification" msgid="7640342063449806296">"Вы переключились на сеть <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="switch_to_removable_notification_no_carrier_name" msgid="7384856964036215338">"Вы переключились на сеть другого оператора"</string>
     <string name="network_changed_notification_text" msgid="2407908598496951243">"Мобильная сеть изменена"</string>
     <string name="dsds_notification_after_suw_title" msgid="3738898232310273982">"Настройте другую SIM-карту"</string>
     <string name="dsds_notification_after_suw_text" msgid="1287357774676361084">"Выберите активную SIM-карту или используйте сразу обе."</string>
-    <string name="choose_sim_title" msgid="4804689675237716286">"Выберите номер"</string>
-    <string name="choose_sim_text" msgid="4356662002583501647">"{count,plural, =1{На это устройство добавлен один номер.}=2{На это устройство добавлено два номера, но использовать их можно только по одному.}one{На это устройство добавлено несколько номеров (#), но использовать их можно только по одному.}few{На это устройство добавлено несколько номеров (#), но использовать их можно только по одному.}many{На это устройство добавлено несколько номеров (#), но использовать их можно только по одному.}other{На это устройство добавлено несколько номеров (#), но использовать их можно только по одному.}}"</string>
+    <!-- no translation found for choose_sim_title (66509047151583877) -->
+    <skip />
+    <!-- no translation found for choose_sim_text (8992163497852069924) -->
+    <skip />
     <string name="choose_sim_activating" msgid="9035902671985449448">"Активация<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
-    <string name="choose_sim_could_not_activate" msgid="2154564459842291617">"Ошибка активации."</string>
+    <!-- no translation found for choose_sim_could_not_activate (1907240714489797917) -->
+    <skip />
     <string name="switch_sim_dialog_title" msgid="5407316878973237773">"Использовать <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="switch_sim_dialog_text" msgid="7530186862171635464">"Сеть \"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>\" будет использоваться для звонков, SMS и доступа к мобильному интернету."</string>
     <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"Нет активных SIM-карт"</string>
     <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"Чтобы использовать мобильный интернет, звонки и SMS, измените настройки сети."</string>
     <string name="sim_card_label" msgid="6263064316075963775">"SIM-карта"</string>
     <string name="erase_sim_dialog_title" msgid="4742077437653028326">"Удалить эту eSIM?"</string>
-    <!-- no translation found for erase_sim_dialog_text (1406141218170595272) -->
-    <skip />
+    <string name="erase_sim_dialog_text" msgid="1406141218170595272">"Вы больше не сможете пользоваться услугами оператора \"<xliff:g id="CARRIER_NAME_A">%1$s</xliff:g>\" на этом устройстве, но тарифный план оператора \"<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g>\" останется."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Стереть"</string>
-    <!-- no translation found for erasing_sim (4237180547590463930) -->
-    <skip />
-    <!-- no translation found for erase_sim_fail_title (1445700500168357303) -->
-    <skip />
-    <!-- no translation found for erase_sim_fail_text (6898841004987411547) -->
-    <skip />
+    <string name="erasing_sim" msgid="4237180547590463930">"Удаление eSIM…"</string>
+    <string name="erase_sim_fail_title" msgid="1445700500168357303">"Не получилось удалить eSIM"</string>
+    <string name="erase_sim_fail_text" msgid="6898841004987411547">"Не получилось удалить eSIM.\n\nПерезапустите устройство и повторите попытку."</string>
     <string name="network_connection_request_dialog_title" msgid="1896186380874289434">"Подключение к устройству"</string>
     <string name="network_connection_request_dialog_summary" msgid="7693038309792726170">"Приложение \"<xliff:g id="APPNAME">%1$s</xliff:g>\" хочет использовать временную сеть Wi‑Fi для подключения к устройству."</string>
     <string name="network_connection_timeout_dialog_message" msgid="598509083077743772">"Устройства не найдены. Убедитесь, что они включены и доступны для подключения."</string>
@@ -4771,6 +4766,10 @@
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Разрешить приложениям, которые могут показываться поверх других, накладываться на экраны настроек"</string>
     <string name="allow_mock_modem" msgid="3832264806530479214">"Разрешить имитацию модема"</string>
     <string name="allow_mock_modem_summary" msgid="9097416612748005374">"Разрешить этому устройству запускать сервис, имитирующий модем, для инструментального теста. Не включайте этот параметр, когда пользуетесь телефоном в обычном режиме."</string>
+    <!-- no translation found for disable_screen_share_protections_for_apps_and_notifications (4987116103699222633) -->
+    <skip />
+    <!-- no translation found for disable_screen_share_protections_for_apps_and_notifications_summary (932295234626582052) -->
+    <skip />
     <string name="media_controls_title" msgid="403271085636252597">"Медиа"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Закрепить медиапроигрыватель"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Медиапроигрыватель остается открытым в Быстрых настройках, чтобы вы могли легко продолжить воспроизведение"</string>
@@ -4808,10 +4807,8 @@
     <string name="sim_category_title" msgid="2341314000964710495">"SIM-карта"</string>
     <string name="downloaded_sim_category_title" msgid="2876988650413179752">"eSIM"</string>
     <string name="downloaded_sims_category_title" msgid="487799905978489922">"Карты eSIM"</string>
-    <!-- no translation found for sim_category_active_sim (3077009911935592178) -->
-    <skip />
-    <!-- no translation found for sim_category_inactive_sim (7351553344148400450) -->
-    <skip />
+    <string name="sim_category_active_sim" msgid="3077009911935592178">"Включена"</string>
+    <string name="sim_category_inactive_sim" msgid="7351553344148400450">"Отключена"</string>
     <string name="sim_category_default_active_sim" msgid="1208194173387987231">" /По умолчанию для категорий: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="default_active_sim_calls" msgid="2390973682556353558">"Звонки"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"SMS"</string>
@@ -5089,4 +5086,6 @@
     <string name="content_protection_preference_subpage_summary" msgid="3595621220981703364"></string>
     <string name="content_protection_preference_subpage_info" msgid="6890886357653365489"></string>
     <string name="accessibility_setup_password_complete" msgid="6358749253318369077">"Пароль установлен"</string>
+    <!-- no translation found for show_stylus_pointer_icon (1010583689203665786) -->
+    <skip />
 </resources>
