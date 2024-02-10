@@ -18,6 +18,7 @@ package com.android.settings.wifi;
 
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+import static android.os.UserManager.DISALLOW_ADD_WIFI_CONFIG;
 import static android.os.UserManager.DISALLOW_CONFIG_WIFI;
 
 import static com.android.settings.wifi.WifiDialogActivity.REQUEST_CODE_WIFI_DPP_ENROLLEE_QR_CODE_SCANNER;
@@ -238,6 +239,20 @@ public class WifiDialogActivityTest {
         when(mUserManager.hasUserRestriction(DISALLOW_CONFIG_WIFI)).thenReturn(true);
 
         assertThat(mActivity.isConfigWifiAllowed()).isFalse();
+    }
+
+    @Test
+    public void isAddWifiConfigAllowed_hasNoUserRestriction_returnTrue() {
+        when(mUserManager.hasUserRestriction(DISALLOW_ADD_WIFI_CONFIG)).thenReturn(false);
+
+        assertThat(mActivity.isAddWifiConfigAllowed()).isTrue();
+    }
+
+    @Test
+    public void isAddWifiConfigAllowed_hasUserRestriction_returnFalse() {
+        when(mUserManager.hasUserRestriction(DISALLOW_ADD_WIFI_CONFIG)).thenReturn(true);
+
+        assertThat(mActivity.isAddWifiConfigAllowed()).isFalse();
     }
 
     @Test
