@@ -115,6 +115,7 @@
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Cancel"</string>
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Disable Bluetooth LE audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Disables Bluetooth LE audio feature if the device supports LE audio hardware capabilities."</string>
+    <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Bluetooth LE Audio mode"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Show LE audio toggle in Device Details"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Bypass Bluetooth LE Audio Allowlist"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Use LE Audio by default even if LE Audio peripheral hasn\'t been verified to meet Allowlist criteria."</string>
@@ -545,21 +546,21 @@
     <string name="security_header" msgid="961514795852103424">"Security"</string>
     <string name="privacy_header" msgid="5526002421324257007">"Privacy"</string>
     <string name="work_profile_category_header" msgid="85707750968948517">"Work profile"</string>
-    <string name="private_space_title" msgid="7078627930195569767">"Private Space"</string>
+    <string name="private_space_title" msgid="1752064212078238723">"Private space"</string>
     <string name="private_space_summary" msgid="2274405892301976238">"Keep private apps locked and hidden"</string>
     <string name="private_space_description" msgid="4059594203775816136">"Keep private apps in a separate space that you can hide or lock"</string>
-    <string name="private_space_lock_title" msgid="3006539720164938296">"Private Space lock"</string>
-    <string name="private_space_one_lock_summary" msgid="2759953747682959371">"You can unlock Private Space the same way you unlock your device, or choose a different lock"</string>
+    <string name="private_space_lock_title" msgid="7230836881433350526">"Private space lock"</string>
+    <string name="private_space_one_lock_summary" msgid="2106513606571219068">"You can unlock your private space the same way you unlock your device, or choose a different lock"</string>
     <string name="private_space_screen_lock_title" msgid="8679383894967823163">"Use device screen lock"</string>
     <string name="private_space_biometric_title" msgid="3934339826674553174">"Face &amp; Fingerprint Unlock"</string>
     <string name="private_space_fingerprint_title" msgid="5989254643211889931">"Fingerprint Unlock"</string>
     <string name="private_space_face_title" msgid="3290402865367663079">"Face Unlock"</string>
     <string name="private_space_biometric_summary" msgid="4403837276018724581">"Tap to set up"</string>
-    <string name="private_space_fingerprint_unlock_title" msgid="5804023571114910034">"Fingerprint Unlock for Private Space"</string>
-    <string name="private_space_face_unlock_title" msgid="6613018437620070183">"Face Unlock for Private Space"</string>
+    <string name="private_space_fingerprint_unlock_title" msgid="3614016453395789051">"Fingerprint Unlock for private space"</string>
+    <string name="private_space_face_unlock_title" msgid="462248384776453613">"Face Unlock for private space"</string>
     <string name="private_space_category_ways_to_unlock" msgid="4356631225316950046">"Ways to unlock"</string>
     <string name="private_space_screen_lock_summary" msgid="394837965365561070">"Same as device screen lock"</string>
-    <string name="private_space_new_lock_title" msgid="7306873010565337671">"Choose a new lock for Private Space?"</string>
+    <string name="private_space_new_lock_title" msgid="9056139964133004094">"Choose a new lock for private space?"</string>
     <string name="private_space_auto_lock_title" msgid="4757097802686131305">"Lock automatically"</string>
     <string name="private_space_auto_lock_page_title" msgid="2993714305725968632">"Lock private space automatically"</string>
     <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"You can lock your private space automatically if you havent used your device for a period of time"</string>
@@ -567,18 +568,25 @@
     <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"After 5 minutes of inactivity"</string>
     <string name="private_space_auto_lock_never" msgid="595014527119778873">"Never"</string>
     <string name="private_space_hide_title" msgid="8687034008994037610">"Hide when locked"</string>
-    <string name="privatespace_hide_page_title" msgid="972581369094289386">"Hide Private Space when locked"</string>
-    <string name="privatespace_hide_page_summary" msgid="1052569521186403642">"To stop other people knowing Private Space is on your device, you can hide it from your apps list"</string>
-    <string name="privatespace_access_header" msgid="982809349769470185">"Access Private Space when hidden"</string>
-    <string name="privatespace_search_description" msgid="983837656432484282">"Search for \'Private Space\' in the search bar"</string>
-    <string name="privatespace_tap_tile_description" msgid="4146608898639668340">"Tap the Private Space tile"</string>
-    <string name="privatespace_unlock_description" msgid="4132755357482447360">"Unlock your Private Space"</string>
+    <string name="privatespace_hide_page_title" msgid="8417507414027827566">"Hide private space when locked"</string>
+    <string name="privatespace_hide_page_summary" msgid="5525422595477989312">"To stop other people knowing you have a private space on your device, you can hide it from your apps list"</string>
+    <string name="privatespace_access_header" msgid="6066826215718835041">"Access private space when hidden"</string>
+    <!-- no translation found for privatespace_search_description (3121043205513022357) -->
+    <skip />
+    <string name="privatespace_tap_tile_description" msgid="8346440188590931635">"Tap the private space tile"</string>
+    <string name="privatespace_unlock_description" msgid="3177710543121916413">"Unlock your private space"</string>
     <string name="privatespace_hide_off_summary" msgid="7227778747159633671">"Off"</string>
     <string name="privatespace_hide_on_summary" msgid="6136704537527640183">"On"</string>
     <string name="private_space_category_system" msgid="1286843321867285700">"System"</string>
-    <string name="private_space_delete_title" msgid="3075645119800272800">"Delete Private Space"</string>
-    <string name="private_space_deleted" msgid="7825768516955610897">"Private Space successfully deleted"</string>
-    <string name="private_space_delete_failed" msgid="8500755484258565011">"Private Space could not be deleted"</string>
+    <string name="private_space_delete_title" msgid="636873505724100006">"Delete private space"</string>
+    <string name="private_space_delete_header" msgid="4594429153176776184">"Delete private space?"</string>
+    <string name="private_space_delete_summary" msgid="3344372988408565545">"Your private space will be removed from your device. All private apps and data will be deleted. You can’t undo this action."</string>
+    <string name="private_space_accounts" msgid="1078277762792056395">"The following accounts will be removed from your private space:"</string>
+    <string name="private_space_delete_button_label" msgid="1256981385318225002">"Delete"</string>
+    <string name="private_space_confirm_deletion_header" msgid="3468651585498942977">"Deleting private space…"</string>
+    <string name="private_space_confirm_deletion_summary" msgid="342544588554284686">"This will take a few moments"</string>
+    <string name="private_space_deleted" msgid="7692240901492540053">"Private space deleted"</string>
+    <string name="private_space_delete_failed" msgid="7705795653796174741">"Private space could not be deleted"</string>
     <string name="private_space_unlocked" msgid="9091600948712932046">"Private space unlocked"</string>
     <string name="no_device_lock_title" msgid="1078223464721029954">"Set a screen lock"</string>
     <string name="no_device_lock_summary" msgid="7436025227616244687">"To use your private space, set a screen lock on this device"</string>
@@ -594,17 +602,17 @@
     <string name="private_space_hidden_notifications_text" msgid="1487992156742340621">"Notifications from apps in your private space are hidden when it’s locked"</string>
     <string name="private_space_apps_permission_text" msgid="7030946025253366172">"Apps in your private space won\'t appear in permission manager, privacy dashboard, and other settings when your private space is locked.\n\nYour private space can\'t be moved to a new device. You\'ll need to set up another private space if you want to use it on another device.\n\nAnyone that connects your device to a computer or installs harmful apps on your device may be able to access your private space."</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Setting up private space…"</string>
-    <string name="private_space_notifications_hidden_title" msgid="4377296080723608107">"Notifications from apps in private space are hidden when it’s locked"</string>
-    <string name="private_space_share_photos_title" msgid="2102594859384040485">"Unlock private space to share photos or files from private space apps"</string>
+    <string name="private_space_notifications_hidden_title" msgid="2009112565217540581">"Notifications from private space apps are hidden when it’s locked"</string>
+    <string name="private_space_share_photos_title" msgid="5176346349303364657">"Unlock private space to share photos or files"</string>
     <string name="private_space_apps_installed_title" msgid="2428207301009983268">"Some apps are already installed in your private space"</string>
-    <string name="private_space_error_screen_title" msgid="1210906480024148398">"Couldn’t set up private space"</string>
+    <string name="private_space_error_screen_title" msgid="739381738044418346">"Couldn’t set up a private space"</string>
     <string name="private_space_tryagain_label" msgid="8305362615231738367">"Try Again"</string>
     <string name="private_space_lockscreen_title" msgid="6034864097861137509">"Use screen lock to unlock private space?"</string>
     <string name="private_space_lockscreen_summary" msgid="430569465080645805">"You can unlock your private space the same way you unlock your device, or choose a different lock"</string>
     <string name="private_space_use_screenlock_label" msgid="9182153443192032782">"Use screen lock"</string>
     <string name="private_space_set_lock_label" msgid="1790408277477408475">"Choose new lock"</string>
     <string name="private_space_success_title" msgid="4351904015352046118">"All set!"</string>
-    <string name="private_space_access_text" msgid="4258842502257201013">"To access your private space, go to your apps list then scroll down"</string>
+    <string name="private_space_access_text" msgid="4433988836344567888">"To find your private space, go to your apps list then scroll down"</string>
     <string name="private_space_done_label" msgid="1020482651595246071">"Done"</string>
     <string name="private_space_scrolldown_to_access" msgid="4820954877349434545">"Scroll down to find private space"</string>
     <string name="private_space_retry_signin_title" msgid="8090276618867918844">"Sign in"</string>
@@ -616,11 +624,6 @@
     <string name="private_space_choose_your_pin_header" msgid="4560802934975898265">"Set a PIN for your private space"</string>
     <string name="private_space_choose_your_password_header" msgid="7660259341095044434">"Set a password for your private space"</string>
     <string name="private_space_choose_your_pattern_header" msgid="2165607102459936724">"Set a pattern for your private space"</string>
-    <string name="privatespace_unhide_header" msgid="1192011539687584004">"To show Private Space (Not final UX)"</string>
-    <string name="privatespace_open_settings" msgid="5038101805604421393">"Open the Settings App"</string>
-    <string name="privatespace_tap_settings" msgid="928932826450238276">"Tap on Security &amp; privacy &gt; Private Space &gt; Hide Private Space when locked"</string>
-    <string name="privatespace_turnoff_hide" msgid="4858511423837613842">"Turn off Hide Private Space when locked toggle"</string>
-    <string name="privatespace_development_note" msgid="2999992301558700721">"Note to Googlers: The development of this feature is still in progress"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"You can add up to <xliff:g id="COUNT">%d</xliff:g> fingerprints"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"You’ve added the maximum number of fingerprints"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Can’t add more fingerprints"</string>
@@ -766,7 +769,7 @@
     <string name="bluetooth_settings" msgid="2967239493428695171">"Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"Bluetooth"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"Pair with <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
-    <string name="bluetooth_pairing_group_late_bonding" msgid="5310869364570266209">"Add new member to the existing coordinated set"</string>
+    <string name="bluetooth_pairing_group_late_bonding" msgid="3047893658902159692">"Confirm to add the second piece of your audio device"</string>
     <string name="bluetooth_pairing_key_msg" msgid="1329835708475701761">"Bluetooth pairing code"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="5806420933599368592">"Type the pairing code then press Return or Enter"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7256286571636950635">"PIN contains letters or symbols"</string>
@@ -774,7 +777,7 @@
     <string name="bluetooth_pin_values_hint_16_digits" msgid="5603928271430883558">"Must be 16 digits"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="6737778699899780717">"You may also need to type this PIN on the other device."</string>
     <string name="bluetooth_enter_passkey_other_device" msgid="8270426446247344709">"You may also need to type this passkey on the other device."</string>
-    <string name="bluetooth_paring_group_msg" msgid="4609515924670823316">"Confirm to pair with the coordinated set"</string>
+    <string name="bluetooth_paring_group_msg" msgid="2455293929036668131">"Confirm to pair with the audio device"</string>
     <string name="bluetooth_pairing_shares_phonebook" msgid="4329325125260724843">"Allow access to your contacts and call history"</string>
     <string name="bluetooth_pairing_phonebook_toggle_text" msgid="2474015367387690034">"Also allow access to contacts and call history"</string>
     <string name="bluetooth_pairing_phonebook_toggle_details" msgid="1367197978487212581">"Info will be used for call announcements and more"</string>
@@ -1838,6 +1841,8 @@
     <string name="show_ime_summary" msgid="7293345791727205975">"Keep it on screen while physical keyboard is active"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"Bounce keys"</string>
     <string name="bounce_keys_summary" msgid="6922850403920596246">"Enable Bounce keys for physical keyboard accessibility"</string>
+    <string name="slow_keys" msgid="2891452895499690837">"Slow keys"</string>
+    <string name="slow_keys_summary" msgid="6147992959180167575">"Enable Slow keys for physical keyboard accessibility"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"Sticky keys"</string>
     <string name="sticky_keys_summary" msgid="8520909829540989765">"Enable Sticky keys for physical keyboard accessibility"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Keyboard shortcuts"</string>
@@ -3003,7 +3008,7 @@
     <string name="sim_status_title" msgid="6188770698037109774">"SIM status"</string>
     <string name="sim_status_title_sim_slot" msgid="4932996839194493313">"SIM status (sim slot %1$d)"</string>
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
-    <string name="sim_notification_title" msgid="2819551384383504031">"SIMs changed."</string>
+    <string name="sim_notification_title" msgid="6839556577405929262">"Your SIMs changed"</string>
     <string name="sim_notification_summary" msgid="5593339846307029991">"Tap to set up"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="3077694594349657933">"Ask every time"</string>
     <string name="sim_selection_required_pref" msgid="231437651041498359">"Selection required"</string>
@@ -3027,7 +3032,8 @@
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Recent apps, default apps"</string>
     <string name="notification_settings_work_profile" msgid="6076211850526353975">"Notification access is not available for apps in the work profile."</string>
     <string name="account_dashboard_title" msgid="8228773251948253914">"Passwords and accounts"</string>
-    <string name="account_dashboard_default_summary" msgid="1730719656099599488">"Saved passwords, autofill, synced accounts"</string>
+    <!-- no translation found for account_dashboard_default_summary (7976899924144356939) -->
+    <skip />
     <string name="app_default_dashboard_title" msgid="4071015747629103216">"Default apps"</string>
     <string name="cloned_apps_dashboard_title" msgid="5542076801222950921">"Cloned Apps"</string>
     <string name="desc_cloned_apps_intro_text" msgid="1369621522882622476">"Create a second instance of an app so that you can use two accounts at the same time."</string>
@@ -3665,7 +3671,7 @@
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Ask for PIN before unpinning"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Ask for password before unpinning"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Lock device when unpinning"</string>
-    <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Confirm SIM deletion"</string>
+    <string name="confirm_sim_deletion_title" msgid="7262127071183428893">"Confirm you want to erase your eSIM"</string>
     <string name="confirm_sim_deletion_description" msgid="4439657901673639063">"Verify it\'s you before erasing an eSIM"</string>
     <string name="memtag_title" msgid="5096176296797727201">"Advanced memory protection beta"</string>
     <string name="memtag_toggle" msgid="8695028758462939212">"Advanced memory protection"</string>
@@ -3866,8 +3872,6 @@
     <string name="voice_activation_apps_title" msgid="7130045161611529825">"Voice activation apps"</string>
     <string name="permit_voice_activation_apps" msgid="9152780172988949319">"Allow voice activation"</string>
     <string name="allow_voice_activation_apps_description" msgid="6369745626995060656">"Voice activation turns-on approved apps, hands-free, using voice command. Built-in adaptive sensing ensures data stays private only to you.\n\n"<a href="">"More about protected adaptive sensing"</a></string>
-    <string name="permit_receive_sandboxed_detection_training_data" msgid="3929496847420108753">"Improve voice activation"</string>
-    <string name="receive_sandboxed_detection_training_data_description" msgid="1415687008184625050">"This device uses private intelligence to improve the voice activation model. Apps can receive summarized updates that are aggregated across many users to maintain privacy while improving the model for everyone.\n\n"<a href="">"More about private intelligence"</a></string>
     <string name="full_screen_intent_title" msgid="747270185715224130">"Full screen notifications"</string>
     <string name="permit_full_screen_intent" msgid="9035367640019960861">"Allow full screen notifications from this app"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Allow this app to show notifications that take up the full screen when the device is locked. Apps may use these to highlight alarms, incoming calls, or other urgent notifications."</string>
@@ -4290,7 +4294,8 @@
     <string name="default_autofill_app" msgid="372234803718251606">"Default autofill service"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"Passwords"</string>
     <string name="credman_chosen_app_title" msgid="7735183808067729319">"Preferred service"</string>
-    <string name="credman_credentials" msgid="4931371941253324143">"Additional providers"</string>
+    <!-- no translation found for credman_credentials (2620352336624160642) -->
+    <skip />
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# password}other{# passwords}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"auto, fill, autofill, password"</string>
     <string name="credman_keywords" msgid="8305600680836806170">"data, passkey, password"</string>
@@ -4299,9 +4304,12 @@
     <string name="credman_button_open" msgid="7519871964170816850">"Open"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Make sure you trust this app&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; uses what\'s on your screen to determine what can be autofilled."</string>
     <string name="credman_autofill_confirmation_message" msgid="843829628024668466">"&lt;b&gt;Use &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; New passwords, passkeys, and other info will be saved here from now on. &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; may use what\'s on your screen to determine what can be autofilled."</string>
-    <string name="credman_picker_title" msgid="8191267620665129205">"Passwords, passkeys, and data services"</string>
+    <!-- no translation found for credman_picker_title (8442086614222006564) -->
+    <skip />
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Turn off %1$s?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Turn off this service?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Saved info like passwords, passkeys, payment methods, and other info won\'t be filled in when you sign in. To use your saved info, choose a password, passkey, or data service."</string>
+    <!-- no translation found for account_dashboard_title_with_passkeys (6214673787161409996) -->
+    <skip />
     <string name="credman_confirmation_message_new_ui" msgid="6126274509951156460">"&lt;b&gt;Turn off all services?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Passwords, passkeys, and other saved info won\'t be available for autofill when you sign in"</string>
     <string name="credman_autofill_confirmation_message_new_ui" msgid="6222139222478822267">"&lt;b&gt;Change your preferred service to &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; New passwords, passkeys, and other info will be saved here from now on. &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; may use what\'s on your screen to determine what can be autofilled"</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"Use %1$s?"</string>
@@ -4478,8 +4486,8 @@
     <string name="mobile_network_sim_name_rename" msgid="5967588549571582924">"Save"</string>
     <string name="mobile_network_use_sim_on" msgid="5333182776279917886">"Use this SIM"</string>
     <string name="mobile_network_use_sim_off" msgid="6303281166199670639">"Off"</string>
-    <string name="mobile_network_disable_sim_explanation" msgid="2851862257846773796">"To disable this SIM, remove the SIM card"</string>
-    <string name="mobile_network_tap_to_activate" msgid="4139979375717958102">"Tap to activate <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
+    <string name="mobile_network_disable_sim_explanation" msgid="7182341033728911879">"To turn off this SIM, remove the SIM card"</string>
+    <string name="mobile_network_tap_to_activate" msgid="5280456487243915465">"Tap to activate your <xliff:g id="CARRIER">%1$s</xliff:g> SIM"</string>
     <string name="mobile_network_erase_sim" msgid="5387971155494245850">"Erase eSIM"</string>
     <string name="preferred_network_mode_title" msgid="3083431168988535628">"Preferred network type"</string>
     <string name="preferred_network_mode_summary" msgid="537577807865497546">"Change the network operating mode"</string>
@@ -4532,15 +4540,15 @@
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"Switch to <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"Turn off <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"Turning off a SIM won’t cancel your service"</string>
-    <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"Connecting to network…"</string>
-    <string name="sim_action_switch_sub_dialog_progress" msgid="4718412054243793310">"Switching to <xliff:g id="CARRIER_NAME">%1$s</xliff:g> for calls and messages…"</string>
-    <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"Can’t switch carrier"</string>
-    <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"The carrier can’t be switched due to an error."</string>
+    <string name="sim_action_enabling_sim_without_carrier_name" msgid="8144175623622669136">"Activating your SIM…"</string>
+    <string name="sim_action_switch_sub_dialog_progress" msgid="697127154780501304">"Switching to <xliff:g id="CARRIER_NAME">%1$s</xliff:g>…"</string>
+    <string name="sim_action_enable_sim_fail_title" msgid="2718084141744769701">"Can’t switch SIMs"</string>
+    <string name="sim_action_enable_sim_fail_text" msgid="8332742656111984482">"Something went wrong. Can’t switch SIMs."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"Turn off <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="privileged_action_disable_sub_dialog_title_without_carrier" msgid="6518373229436331608">"Turn off SIM?"</string>
     <string name="privileged_action_disable_sub_dialog_progress" msgid="5900243067681478102">"Turning off SIM<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
-    <string name="privileged_action_disable_fail_title" msgid="6689494935697043555">"Can’t disable carrier"</string>
-    <string name="privileged_action_disable_fail_text" msgid="8404023523406091819">"Something went wrong and your carrier could not be disabled."</string>
+    <string name="privileged_action_disable_fail_title" msgid="1808735136395980905">"Can’t turn off SIM"</string>
+    <string name="privileged_action_disable_fail_text" msgid="6236231745255527458">"Something went wrong and your SIM could not be turned off."</string>
     <string name="sim_action_enable_dsds_title" msgid="226508711751577169">"Use 2 SIMs?"</string>
     <string name="sim_action_enable_dsds_text" msgid="970986559326263949">"This device can have 2 SIMs active at once. To continue using 1 SIM at a time, tap \"No thanks\"."</string>
     <string name="sim_action_restart_title" msgid="7054617569121993825">"Restart device?"</string>
@@ -4576,17 +4584,17 @@
     <string name="mobile_network_sim_label_color_title" msgid="2401352348041132876">"SIM label and color"</string>
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"Network activation"</string>
     <string name="sim_switch_channel_id" msgid="4927038626791837861">"Carrier switching"</string>
-    <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> is active"</string>
+    <string name="post_dsds_reboot_notification_title_with_carrier" msgid="975447139749692794">"Your <xliff:g id="CARRIER_NAME">%1$s</xliff:g> SIM is active"</string>
     <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"Tap to update SIM settings"</string>
     <string name="switch_to_removable_notification" msgid="7640342063449806296">"Switched to <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="switch_to_removable_notification_no_carrier_name" msgid="7384856964036215338">"Switched to another carrier"</string>
     <string name="network_changed_notification_text" msgid="2407908598496951243">"Your mobile network has changed"</string>
     <string name="dsds_notification_after_suw_title" msgid="3738898232310273982">"Set up your other SIM"</string>
     <string name="dsds_notification_after_suw_text" msgid="1287357774676361084">"Choose your active SIM or use 2 SIMs at once"</string>
-    <string name="choose_sim_title" msgid="4804689675237716286">"Choose a number to use"</string>
-    <string name="choose_sim_text" msgid="4356662002583501647">"{count,plural, =1{1 number is available on this device, but only one can be used at a time}=2{2 numbers are available on this device, but only one can be used at a time}other{# numbers are available on this device, but only one can be used at a time}}"</string>
+    <string name="choose_sim_title" msgid="66509047151583877">"Choose a SIM to use"</string>
+    <string name="choose_sim_text" msgid="8992163497852069924">"{count,plural, =1{1 SIM is available on this device, but only one can be used at a time}=2{2 SIMs are available on this device, but only one can be used at a time}other{# SIMs are available on this device, but only one can be used at a time}}"</string>
     <string name="choose_sim_activating" msgid="9035902671985449448">"Activating<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
-    <string name="choose_sim_could_not_activate" msgid="2154564459842291617">"Couldn’t be activated right now"</string>
+    <string name="choose_sim_could_not_activate" msgid="1907240714489797917">"Couldn’t activate this SIM right now"</string>
     <string name="switch_sim_dialog_title" msgid="5407316878973237773">"Use <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="switch_sim_dialog_text" msgid="7530186862171635464">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> will be used for mobile data, calls, and SMS."</string>
     <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"No active SIMs available"</string>
@@ -4725,6 +4733,8 @@
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Allow apps that can display over other apps to overlay Settings screens"</string>
     <string name="allow_mock_modem" msgid="3832264806530479214">"Allow Mock Modem"</string>
     <string name="allow_mock_modem_summary" msgid="9097416612748005374">"Allow this device to run Mock Modem service for instrumentation testing. Do not enable this during normal usage of the phone"</string>
+    <string name="disable_screen_share_protections_for_apps_and_notifications" msgid="4987116103699222633">"Disable screen share protections"</string>
+    <string name="disable_screen_share_protections_for_apps_and_notifications_summary" msgid="932295234626582052">"Disables system applied app and notifications protections during screen sharing"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Media"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Pin media player"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"To quickly resume playback, media player stays open in Quick Settings"</string>
@@ -5041,4 +5051,6 @@
     <string name="content_protection_preference_subpage_summary" msgid="3595621220981703364"></string>
     <string name="content_protection_preference_subpage_info" msgid="6890886357653365489"></string>
     <string name="accessibility_setup_password_complete" msgid="6358749253318369077">"Password is now set up"</string>
+    <!-- no translation found for show_stylus_pointer_icon (1010583689203665786) -->
+    <skip />
 </resources>
