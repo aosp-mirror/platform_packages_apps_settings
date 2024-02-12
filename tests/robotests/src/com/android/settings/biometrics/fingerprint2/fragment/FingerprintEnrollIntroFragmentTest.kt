@@ -33,16 +33,20 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.runner.AndroidJUnit4
 import com.android.settings.R
-import com.android.settings.biometrics.fingerprint2.shared.model.Default
+import com.android.settings.biometrics.fingerprint2.lib.model.Default
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintNavigationStep.Introduction
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.NavigationState
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.fragment.FingerprintEnrollIntroV2Fragment
-import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollNavigationViewModel
-import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollViewModel
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollIntroViewModel
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintFlowViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintGatekeeperViewModel
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintNavigationViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintScrollViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.GatekeeperInfo
-import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.Intro
-import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.NavState
 import com.android.settings.testutils2.FakeFingerprintManagerInteractor
+import com.android.systemui.biometrics.shared.model.FingerprintSensor
+import com.android.systemui.biometrics.shared.model.FingerprintSensorType
+import com.android.systemui.biometrics.shared.model.SensorStrength
 import com.google.android.setupdesign.GlifLayout
 import com.google.android.setupdesign.template.RequireScrollMixin
 import kotlinx.coroutines.test.StandardTestDispatcher
@@ -62,18 +66,27 @@ class FingerprintEnrollIntroFragmentTest {
     )
   private val backgroundDispatcher = StandardTestDispatcher()
   private lateinit var fragmentScenario: FragmentScenario<FingerprintEnrollIntroV2Fragment>
+  private val fingerprintSensor =
+    FingerprintSensor(1, SensorStrength.STRONG, 5, FingerprintSensorType.POWER_BUTTON)
+
+  var enrollFlow = Default
+  val flowViewModel = FingerprintFlowViewModel(enrollFlow)
 
   private val navigationViewModel =
-    FingerprintEnrollNavigationViewModel(
-      backgroundDispatcher,
-      interactor,
-      gatekeeperViewModel,
-      Intro,
-      NavState(true),
-      Default,
+    FingerprintNavigationViewModel(
+      Introduction,
+      false,
+      flowViewModel,
+      interactor
     )
+
   private var fingerprintViewModel =
-    FingerprintEnrollViewModel(interactor, gatekeeperViewModel, navigationViewModel)
+    FingerprintEnrollIntroViewModel(
+      navigationViewModel,
+      flowViewModel,
+      interactor,
+    )
+
   private var fingerprintScrollViewModel = FingerprintScrollViewModel()
 
   @Before
@@ -85,9 +98,9 @@ class FingerprintEnrollIntroFragmentTest {
           modelClass: Class<T>,
         ): T {
           return when (modelClass) {
-            FingerprintEnrollViewModel::class.java -> fingerprintViewModel
+            FingerprintEnrollIntroViewModel::class.java -> fingerprintViewModel
             FingerprintScrollViewModel::class.java -> fingerprintScrollViewModel
-            FingerprintEnrollNavigationViewModel::class.java -> navigationViewModel
+            FingerprintNavigationViewModel::class.java -> navigationViewModel
             FingerprintGatekeeperViewModel::class.java -> gatekeeperViewModel
             else -> null
           }

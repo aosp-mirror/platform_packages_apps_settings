@@ -21,16 +21,17 @@ import android.content.res.Configuration
 import android.view.accessibility.AccessibilityManager
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.core.app.ApplicationProvider
-import com.android.settings.biometrics.fingerprint2.shared.model.Default
+import com.android.settings.biometrics.fingerprint2.lib.model.Default
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.AccessibilityViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.BackgroundViewModel
-import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.Education
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollFindSensorViewModel
-import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollNavigationViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollViewModel
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintFlowViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintGatekeeperViewModel
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintNavigationStep.Education
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintNavigationViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FoldStateViewModel
-import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.NextStepViewModel
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.NavigationState
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.OrientationStateViewModel
 import com.android.settings.testutils2.FakeFingerprintManagerInteractor
 import com.android.systemui.biometrics.shared.model.FingerprintSensor
@@ -38,7 +39,6 @@ import com.android.systemui.biometrics.shared.model.FingerprintSensorType
 import com.android.systemui.biometrics.shared.model.SensorStrength
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestScope
@@ -67,7 +67,7 @@ class FingerprintEnrollFindSensorViewModelV2Test {
   private lateinit var fakeFingerprintManagerInteractor: FakeFingerprintManagerInteractor
   private lateinit var gatekeeperViewModel: FingerprintGatekeeperViewModel
   private lateinit var enrollViewModel: FingerprintEnrollViewModel
-  private lateinit var navigationViewModel: FingerprintEnrollNavigationViewModel
+  private lateinit var navigationViewModel: FingerprintNavigationViewModel
   private lateinit var accessibilityViewModel: AccessibilityViewModel
   private lateinit var foldStateViewModel: FoldStateViewModel
   private lateinit var orientationStateViewModel: OrientationStateViewModel
@@ -87,18 +87,19 @@ class FingerprintEnrollFindSensorViewModelV2Test {
     gatekeeperViewModel =
       FingerprintGatekeeperViewModel.FingerprintGatekeeperViewModelFactory(
           null,
-          fakeFingerprintManagerInteractor
+          fakeFingerprintManagerInteractor,
         )
         .create(FingerprintGatekeeperViewModel::class.java)
+
+    val sensor = FingerprintSensor(1, SensorStrength.STRONG, 5, FingerprintSensorType.POWER_BUTTON)
+    val fingerprintFlowViewModel = FingerprintFlowViewModel(Default)
     navigationViewModel =
-      FingerprintEnrollNavigationViewModel.FingerprintEnrollNavigationViewModelFactory(
-          backgroundDispatcher,
-          fakeFingerprintManagerInteractor,
-          gatekeeperViewModel,
-          canSkipConfirm = true,
-          Default,
-        )
-        .create(FingerprintEnrollNavigationViewModel::class.java)
+      FingerprintNavigationViewModel(
+        Education(sensor),
+        false,
+        fingerprintFlowViewModel,
+        fakeFingerprintManagerInteractor,
+      )
 
     backgroundViewModel =
       BackgroundViewModel.BackgroundViewModelFactory().create(BackgroundViewModel::class.java)
@@ -126,12 +127,10 @@ class FingerprintEnrollFindSensorViewModelV2Test {
           backgroundViewModel,
           accessibilityViewModel,
           foldStateViewModel,
-          orientationStateViewModel
+          orientationStateViewModel,
+          fingerprintFlowViewModel,
         )
         .create(FingerprintEnrollFindSensorViewModel::class.java)
-
-    // Navigate to Education page
-    navigationViewModel.nextStep()
   }
 
   @After
@@ -142,18 +141,6 @@ class FingerprintEnrollFindSensorViewModelV2Test {
   // TODO(b/305094585): test enroll() logic
 
   @Test
-  fun currentStepIsEducation() =
-    testScope.runTest {
-      var step: NextStepViewModel? = null
-      val job = launch {
-        navigationViewModel.navigationViewModel.collectLatest { step = it.currStep }
-      }
-      advanceUntilIdle()
-      assertThat(step).isEqualTo(Education)
-      job.cancel()
-    }
-
-  @Test
   fun udfpsLottieInfo() =
     testScope.runTest {
       fakeFingerprintManagerInteractor.sensorProp =
@@ -161,7 +148,7 @@ class FingerprintEnrollFindSensorViewModelV2Test {
           0 /* sensorId */,
           SensorStrength.STRONG,
           5,
-          FingerprintSensorType.UDFPS_OPTICAL
+          FingerprintSensorType.UDFPS_OPTICAL,
         )
 
       var udfpsLottieInfo: Boolean? = null
@@ -234,7 +221,7 @@ class FingerprintEnrollFindSensorViewModelV2Test {
           0 /* sensorId */,
           SensorStrength.STRONG,
           5,
-          FingerprintSensorType.UDFPS_OPTICAL
+          FingerprintSensorType.UDFPS_OPTICAL,
         )
 
       var showPrimaryButton: Boolean? = null

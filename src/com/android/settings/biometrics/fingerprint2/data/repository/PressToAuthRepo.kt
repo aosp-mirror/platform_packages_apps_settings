@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 The Android Open Source Project
+ * Copyright (C) 2024 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +14,24 @@
  * limitations under the License.
  */
 
-package com.android.settings.biometrics.fingerprint2.repository
+package com.android.settings.biometrics.fingerprint2.data.repository
 
 import android.content.Context
 import android.provider.Settings
-import com.android.settings.biometrics.fingerprint2.shared.data.repository.PressToAuthProvider
 
-class PressToAuthProviderImpl(val context: Context) : PressToAuthProvider {
+/** Interface that indicates if press to auth is on or off. */
+interface PressToAuthRepo {
+  /** Indicates true if the PressToAuth feature is enabled, false otherwise. */
+  val isEnabled: Boolean
+}
+
+/** Indicates whether or not the press to auth feature is enabled. */
+class PressToAuthRepoImpl(private val context: Context) : PressToAuthRepo {
+  /**
+   * Gets the status of the press to auth feature.
+   *
+   * Returns whether or not the press to auth feature is enabled.
+   */
   override val isEnabled: Boolean
     get() {
       var toReturn: Int =
@@ -43,7 +54,7 @@ class PressToAuthProviderImpl(val context: Context) : PressToAuthProvider {
           context.contentResolver,
           Settings.Secure.SFPS_PERFORMANT_AUTH_ENABLED,
           toReturn,
-          context.userId
+          context.userId,
         )
       }
       return (toReturn == 1)

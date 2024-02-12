@@ -50,7 +50,7 @@ private const val TAG = "FingerprintEnrollFindSensorV2Fragment"
  * 2. Explain to the user how the enrollment process shown by [FingerprintEnrollEnrollingV2Fragment]
  *    will work.
  */
-class FingerprintEnrollFindSensorV2Fragment : Fragment() {
+class FingerprintEnrollFindSensorV2Fragment(val sensorType: FingerprintSensorType) : Fragment() {
   // This is only for non-udfps or non-sfps sensor. For udfps and sfps, we show lottie.
   private var animation: FingerprintFindSensorAnimation? = null
 
@@ -62,7 +62,7 @@ class FingerprintEnrollFindSensorV2Fragment : Fragment() {
   override fun onCreateView(
     inflater: LayoutInflater,
     container: ViewGroup?,
-    savedInstanceState: Bundle?
+    savedInstanceState: Bundle?,
   ): View? {
 
     val sensorType =
@@ -104,8 +104,7 @@ class FingerprintEnrollFindSensorV2Fragment : Fragment() {
       }
       lifecycleScope.launch {
         viewModel.showRfpsAnimation.collect {
-          animation =
-            view.findViewById(R.id.fingerprint_sensor_location_animation)
+          animation = view.findViewById(R.id.fingerprint_sensor_location_animation)
           animation!!.startAnimation()
         }
       }
@@ -128,14 +127,7 @@ class FingerprintEnrollFindSensorV2Fragment : Fragment() {
     footerBarMixin.secondaryButton =
       FooterButton.Builder(requireActivity())
         .setText(R.string.security_settings_fingerprint_enroll_enrolling_skip)
-        .setListener {
-          run {
-            // TODO: Show the dialog for suw
-            Log.d(TAG, "onSkipClicked")
-            // TODO: Finish activity in the root activity instead.
-            requireActivity().finish()
-          }
-        }
+        .setListener { viewModel.secondaryButtonClicked() }
         .setButtonType(FooterButton.ButtonType.SKIP)
         .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Secondary)
         .build()
@@ -146,10 +138,8 @@ class FingerprintEnrollFindSensorV2Fragment : Fragment() {
       FooterButton.Builder(requireActivity())
         .setText(R.string.security_settings_udfps_enroll_find_sensor_start_button)
         .setListener {
-          run {
-            Log.d(TAG, "onStartButtonClick")
-            viewModel.proceedToEnrolling()
-          }
+          Log.d(TAG, "onStartButtonClick")
+          viewModel.proceedToEnrolling()
         }
         .setButtonType(FooterButton.ButtonType.NEXT)
         .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Primary)
@@ -159,7 +149,7 @@ class FingerprintEnrollFindSensorV2Fragment : Fragment() {
   private fun setupLottie(
     view: View,
     lottieAnimation: Int,
-    lottieClickListener: View.OnClickListener? = null
+    lottieClickListener: View.OnClickListener? = null,
   ) {
     val illustrationLottie: LottieAnimationView? = view.findViewById(R.id.illustration_lottie)
     illustrationLottie?.setAnimation(lottieAnimation)

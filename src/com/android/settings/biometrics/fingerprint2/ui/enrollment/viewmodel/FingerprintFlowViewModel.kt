@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 The Android Open Source Project
+ * Copyright (C) 2024 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,29 +18,22 @@ package com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
+import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintFlow
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.shareIn
 
-/** This class is responsible for ensuring a users consent to use FingerprintEnrollment. */
-class FingerprintScrollViewModel : ViewModel() {
+class FingerprintFlowViewModel(private val fingerprintFlowType: FingerprintFlow) : ViewModel() {
+  val fingerprintFlow: Flow<FingerprintFlow> =
+    flowOf(fingerprintFlowType).shareIn(viewModelScope, SharingStarted.Eagerly, 1)
 
-  private val _hasReadConsentScreen: MutableStateFlow<Boolean> = MutableStateFlow(false)
-
-  /** Indicates if a user has consented to FingerprintEnrollment */
-  val hasReadConsentScreen: Flow<Boolean> = _hasReadConsentScreen.asStateFlow()
-
-  /** Indicates that a user has consented to FingerprintEnrollment */
-  fun userConsented() {
-    _hasReadConsentScreen.update { true }
-  }
-
-  class FingerprintScrollViewModelFactory : ViewModelProvider.Factory {
+  class FingerprintFlowViewModelFactory(val flowType: FingerprintFlow) : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-      return FingerprintScrollViewModel() as T
+      return FingerprintFlowViewModel(flowType) as T
     }
   }
 }
