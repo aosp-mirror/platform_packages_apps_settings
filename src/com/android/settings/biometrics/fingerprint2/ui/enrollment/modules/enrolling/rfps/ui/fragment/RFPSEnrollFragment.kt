@@ -32,13 +32,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.android.settings.R
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerEnrollState
+import com.android.settings.biometrics.fingerprint2.lib.model.FingerEnrollState
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.rfps.ui.viewmodel.RFPSIconTouchViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.rfps.ui.viewmodel.RFPSViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.rfps.ui.widget.FingerprintErrorDialog
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.rfps.ui.widget.IconTouchDialog
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.rfps.ui.widget.RFPSProgressBar
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.BackgroundViewModel
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintNavigationStep
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintNavigationViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.OrientationStateViewModel
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment
 import com.google.android.setupcompat.template.FooterBarMixin
@@ -48,8 +50,6 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
-
-private const val TAG = "RFPSEnrollFragment"
 
 /** This fragment is responsible for taking care of rear fingerprint enrollment. */
 class RFPSEnrollFragment : Fragment(R.layout.fingerprint_v2_rfps_enroll_enrolling) {
@@ -74,11 +74,14 @@ class RFPSEnrollFragment : Fragment(R.layout.fingerprint_v2_rfps_enroll_enrollin
   private val backgroundViewModel: BackgroundViewModel by lazy {
     ViewModelProvider(requireActivity())[BackgroundViewModel::class.java]
   }
+  private val navigationViewModel: FingerprintNavigationViewModel by lazy {
+    ViewModelProvider(requireActivity())[FingerprintNavigationViewModel::class.java]
+  }
 
   override fun onCreateView(
     inflater: LayoutInflater,
     container: ViewGroup?,
-    savedInstanceState: Bundle?
+    savedInstanceState: Bundle?,
   ): View? {
     val view = super.onCreateView(inflater, container, savedInstanceState)!!
     val fragment = this
@@ -99,7 +102,7 @@ class RFPSEnrollFragment : Fragment(R.layout.fingerprint_v2_rfps_enroll_enrollin
     footerBarMixin.secondaryButton =
       FooterButton.Builder(context)
         .setText(R.string.security_settings_fingerprint_enroll_enrolling_skip)
-        .setListener { Log.e(TAG, "skip enrollment!") }
+        .setListener { rfpsViewModel.negativeButtonClicked() }
         .setButtonType(FooterButton.ButtonType.SKIP)
         .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Secondary)
         .build()
@@ -150,7 +153,7 @@ class RFPSEnrollFragment : Fragment(R.layout.fingerprint_v2_rfps_enroll_enrollin
     viewLifecycleOwner.lifecycleScope.launch {
       backgroundViewModel.background
         .filter { inBackground -> inBackground }
-        .collect { rfpsViewModel.stopEnrollment() }
+        .collect { rfpsViewModel.didGoToBackground() }
     }
 
     viewLifecycleOwner.lifecycleScope.launch {
@@ -171,7 +174,6 @@ class RFPSEnrollFragment : Fragment(R.layout.fingerprint_v2_rfps_enroll_enrollin
           .setDuration(200)
           .setInterpolator(linearOutSlowInInterpolator)
           .start()
-
       }
     }
 
@@ -207,6 +209,12 @@ class RFPSEnrollFragment : Fragment(R.layout.fingerprint_v2_rfps_enroll_enrollin
         dismissDialogs()
       }
     }
+
+    viewLifecycleOwner.lifecycleScope.launch {
+      rfpsViewModel.didCompleteEnrollment
+        .filter { it }
+        .collect { rfpsViewModel.finishedSuccessfully() }
+    }
     return view
   }
 
@@ -215,28 +223,18 @@ class RFPSEnrollFragment : Fragment(R.layout.fingerprint_v2_rfps_enroll_enrollin
     viewLifecycleOwner.lifecycleScope.launch {
       try {
         val shouldRestartEnrollment = FingerprintErrorDialog.showInstance(error, fragment)
+        rfpsViewModel.userClickedStopEnrollDialog()
       } catch (exception: Exception) {
         Log.e(TAG, "Exception occurred $exception")
       }
-      onEnrollmentFailed()
     }
-  }
-
-  private fun onEnrollmentFailed() {
-    rfpsViewModel.stopEnrollment()
   }
 
   private fun handleEnrollProgress(progress: FingerEnrollState.EnrollProgress) {
     progressBar.updateProgress(
       progress.remainingSteps.toFloat() / progress.totalStepsRequired.toFloat()
     )
-
-    if (progress.remainingSteps == 0) {
-      performNextStepSuccess()
-    }
   }
-
-  private fun performNextStepSuccess() {}
 
   private fun dismissDialogs() {
     val transaction = parentFragmentManager.beginTransaction()
@@ -248,5 +246,10 @@ class RFPSEnrollFragment : Fragment(R.layout.fingerprint_v2_rfps_enroll_enrollin
       }
     }
     transaction.commitAllowingStateLoss()
+  }
+
+  companion object {
+    private const val TAG = "RFPSEnrollFragment"
+    private val navStep = FingerprintNavigationStep.Enrollment::class
   }
 }

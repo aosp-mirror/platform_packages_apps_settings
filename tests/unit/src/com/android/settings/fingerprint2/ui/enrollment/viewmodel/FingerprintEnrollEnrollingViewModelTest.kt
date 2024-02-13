@@ -17,16 +17,20 @@
 package com.android.settings.fingerprint2.ui.enrollment.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.android.settings.biometrics.fingerprint2.shared.model.Default
+import com.android.settings.biometrics.fingerprint2.lib.model.Default
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.BackgroundViewModel
-import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.Enrollment
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollEnrollingViewModel
-import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollNavigationViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollViewModel
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintFlowViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintGatekeeperViewModel
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintNavigationStep.Enrollment
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintNavigationViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.GatekeeperInfo
-import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.NavState
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.NavigationState
 import com.android.settings.testutils2.FakeFingerprintManagerInteractor
+import com.android.systemui.biometrics.shared.model.FingerprintSensor
+import com.android.systemui.biometrics.shared.model.FingerprintSensorType
+import com.android.systemui.biometrics.shared.model.SensorStrength
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -54,7 +58,7 @@ class FingerprintEnrollEnrollingViewModelTest {
   private lateinit var enrollEnrollingViewModel: FingerprintEnrollEnrollingViewModel
   private lateinit var backgroundViewModel: BackgroundViewModel
   private lateinit var gateKeeperViewModel: FingerprintGatekeeperViewModel
-  private lateinit var navigationViewModel: FingerprintEnrollNavigationViewModel
+  private lateinit var navigationViewModel: FingerprintNavigationViewModel
   private val defaultGatekeeperInfo = GatekeeperInfo.GatekeeperPasswordInfo(byteArrayOf(1, 3), 3)
   private var testScope = TestScope(backgroundDispatcher)
 
@@ -65,18 +69,18 @@ class FingerprintEnrollEnrollingViewModelTest {
     gateKeeperViewModel =
       FingerprintGatekeeperViewModel.FingerprintGatekeeperViewModelFactory(
           gatekeeperInfo,
-          fakeFingerprintManagerInteractor
+          fakeFingerprintManagerInteractor,
         )
         .create(FingerprintGatekeeperViewModel::class.java)
+    val sensor = FingerprintSensor(1, SensorStrength.STRONG, 5, FingerprintSensorType.POWER_BUTTON)
+    val fingerprintFlowViewModel = FingerprintFlowViewModel(Default)
 
     navigationViewModel =
-      FingerprintEnrollNavigationViewModel(
-        backgroundDispatcher,
+      FingerprintNavigationViewModel(
+        Enrollment(sensor),
+        false,
+        fingerprintFlowViewModel,
         fakeFingerprintManagerInteractor,
-        gateKeeperViewModel,
-        Enrollment,
-        NavState(true),
-        Default,
       )
 
     backgroundViewModel =

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.biometrics.fingerprint2.shared.model
+package com.android.settings.biometrics.fingerprint2.lib.model
 
 import android.annotation.StringRes
 
@@ -28,16 +28,12 @@ sealed class FingerEnrollState {
    *
    * Progress is obtained by (totalStepsRequired - remainingSteps) / totalStepsRequired
    */
-  data class EnrollProgress(
-    val remainingSteps: Int,
-    val totalStepsRequired: Int,
-  ) : FingerEnrollState()
+  data class EnrollProgress(val remainingSteps: Int, val totalStepsRequired: Int) :
+    FingerEnrollState()
 
   /** Represents that recoverable error has been encountered during enrollment. */
-  data class EnrollHelp(
-    @StringRes val helpMsgId: Int,
-    val helpString: String,
-  ) : FingerEnrollState()
+  data class EnrollHelp(@StringRes val helpMsgId: Int, val helpString: String) :
+    FingerEnrollState()
 
   /** Represents that an unrecoverable error has been encountered and the operation is complete. */
   data class EnrollError(

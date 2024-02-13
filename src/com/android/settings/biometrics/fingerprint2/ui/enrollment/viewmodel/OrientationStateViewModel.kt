@@ -58,7 +58,7 @@ class OrientationStateViewModel(private val context: Context) : ViewModel() {
       .stateIn(
         viewModelScope, // This is going to tied to the view model scope
         SharingStarted.WhileSubscribed(), // When no longer subscribed, we removeTheListener
-        context.display!!.rotation
+        context.display!!.rotation,
       )
 
   fun getRotationFromDefault(rotation: Int): Int {
@@ -73,9 +73,7 @@ class OrientationStateViewModel(private val context: Context) : ViewModel() {
 
   class OrientationViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel> create(
-      modelClass: Class<T>,
-    ): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
       return OrientationStateViewModel(context) as T
     }
   }
