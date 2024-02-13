@@ -26,17 +26,23 @@ import android.os.CancellationSignal
 import android.os.Handler
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.biometrics.GatekeeperPasswordProvider
+import com.android.settings.biometrics.fingerprint2.data.repository.FingerprintSensorRepo
 import com.android.settings.biometrics.fingerprint2.domain.interactor.FingerprintManagerInteractorImpl
-import com.android.settings.biometrics.fingerprint2.shared.data.repository.PressToAuthProvider
-import com.android.settings.biometrics.fingerprint2.shared.domain.interactor.FingerprintManagerInteractor
-import com.android.settings.biometrics.fingerprint2.shared.model.Default
-import com.android.settings.biometrics.fingerprint2.shared.model.EnrollReason
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerEnrollState
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintAuthAttemptModel
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintData
+import com.android.settings.biometrics.fingerprint2.data.repository.PressToAuthRepo
+import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.FingerprintManagerInteractor
+import com.android.settings.biometrics.fingerprint2.lib.model.Default
+import com.android.settings.biometrics.fingerprint2.lib.model.EnrollReason
+import com.android.settings.biometrics.fingerprint2.lib.model.FingerEnrollState
+import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintAuthAttemptModel
+import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintData
 import com.android.settings.password.ChooseLockSettingsHelper
+import com.android.systemui.biometrics.shared.model.FingerprintSensor
+import com.android.systemui.biometrics.shared.model.FingerprintSensorType
+import com.android.systemui.biometrics.shared.model.SensorStrength
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.cancelAndJoin
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.last
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.StandardTestDispatcher
@@ -71,21 +77,28 @@ class FingerprintManagerInteractorTest {
   @Mock private lateinit var gateKeeperPasswordProvider: GatekeeperPasswordProvider
 
   private var testScope = TestScope(backgroundDispatcher)
-  private var pressToAuthProvider =
-    object : PressToAuthProvider {
+  private var pressToAuthRepo =
+    object : PressToAuthRepo {
       override val isEnabled: Boolean
         get() = false
     }
 
   @Before
   fun setup() {
+    val sensor = FingerprintSensor(1, SensorStrength.STRONG, 5, FingerprintSensorType.POWER_BUTTON)
+    val fingerprintSensorRepo =
+      object : FingerprintSensorRepo {
+        override val fingerprintSensor: Flow<FingerprintSensor> = flowOf(sensor)
+      }
+
     underTest =
       FingerprintManagerInteractorImpl(
         context,
         backgroundDispatcher,
         fingerprintManager,
+        fingerprintSensorRepo,
         gateKeeperPasswordProvider,
-        pressToAuthProvider,
+        pressToAuthRepo,
         Default,
       )
   }

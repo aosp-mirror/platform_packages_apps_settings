@@ -16,11 +16,11 @@
 
 package com.android.settings.testutils2
 
-import com.android.settings.biometrics.fingerprint2.shared.domain.interactor.FingerprintManagerInteractor
-import com.android.settings.biometrics.fingerprint2.shared.model.EnrollReason
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerEnrollState
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintAuthAttemptModel
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintData
+import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.FingerprintManagerInteractor
+import com.android.settings.biometrics.fingerprint2.lib.model.EnrollReason
+import com.android.settings.biometrics.fingerprint2.lib.model.FingerEnrollState
+import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintAuthAttemptModel
+import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintData
 import com.android.systemui.biometrics.shared.model.FingerprintSensor
 import com.android.systemui.biometrics.shared.model.FingerprintSensorType
 import com.android.systemui.biometrics.shared.model.SensorStrength

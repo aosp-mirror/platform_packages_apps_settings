@@ -76,7 +76,8 @@ public class AppStateClonedAppsBridge extends AppStateBaseBridge{
     protected void updateExtraInfo(AppEntry app, String pkg, int uid) {
         // Display package if allowlisted but not yet cloned.
         // Or if the app is present in clone profile alongwith being in allowlist.
-        if (mAllowedApps.contains(pkg) && ((!mCloneProfileApps.contains(pkg) || (app.isCloned)))) {
+        if (mAllowedApps.contains(pkg)
+                && ((!mCloneProfileApps.contains(pkg) || (app.isClonedProfile())))) {
             app.extraInfo = Boolean.TRUE;
         } else {
             app.extraInfo = Boolean.FALSE;
