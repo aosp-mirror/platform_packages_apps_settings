@@ -30,16 +30,19 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.android.settings.R
-import com.android.settings.biometrics.fingerprint2.shared.model.Default
+import com.android.settings.biometrics.fingerprint2.lib.model.Default
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.fragment.FingerprintEnrollIntroV2Fragment
-import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollNavigationViewModel
-import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollViewModel
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollIntroViewModel
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintFlowViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintGatekeeperViewModel
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintNavigationStep
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintNavigationViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintScrollViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.GatekeeperInfo
-import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.NavState
-import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.Start
 import com.android.settings.testutils2.FakeFingerprintManagerInteractor
+import com.android.systemui.biometrics.shared.model.FingerprintSensor
+import com.android.systemui.biometrics.shared.model.FingerprintSensorType
+import com.android.systemui.biometrics.shared.model.SensorStrength
 import kotlinx.coroutines.test.StandardTestDispatcher
 import org.junit.Before
 import org.junit.Rule
@@ -60,7 +63,7 @@ class BasicScreenshotTest {
         InstrumentationRegistry.getInstrumentation()
           .getTargetContext()
           .getFilesDir()
-          .getAbsolutePath() + "/settings_screenshots"
+          .getAbsolutePath() + "/settings_screenshots",
       )
     )
 
@@ -70,24 +73,27 @@ class BasicScreenshotTest {
   private val gatekeeperViewModel =
     FingerprintGatekeeperViewModel(
       GatekeeperInfo.GatekeeperPasswordInfo(byteArrayOf(1, 2, 3), 100L),
-      interactor
+      interactor,
     )
 
   private val backgroundDispatcher = StandardTestDispatcher()
   private lateinit var fragmentScenario: FragmentScenario<FingerprintEnrollIntroV2Fragment>
-  val navState = NavState(true)
+  private val fingerprintSensor =
+    FingerprintSensor(1, SensorStrength.STRONG, 5, FingerprintSensorType.POWER_BUTTON)
 
-  private val navigationViewModel = FingerprintEnrollNavigationViewModel(
-      backgroundDispatcher,
+  var enrollFlow = Default
+  val flowViewModel = FingerprintFlowViewModel(enrollFlow)
+
+  private val navigationViewModel =
+    FingerprintNavigationViewModel(
+      FingerprintNavigationStep.Introduction,
+      false,
+      flowViewModel,
       interactor,
-      gatekeeperViewModel,
-      Start.next(navState),
-      navState,
-      Default,
     )
-  private var fingerprintViewModel = FingerprintEnrollViewModel(
-      interactor, gatekeeperViewModel, navigationViewModel,
-    )
+
+  private var fingerprintViewModel =
+    FingerprintEnrollIntroViewModel(navigationViewModel, flowViewModel, interactor)
   private var fingerprintScrollViewModel = FingerprintScrollViewModel()
 
   @Before
@@ -95,13 +101,11 @@ class BasicScreenshotTest {
     val factory =
       object : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
-        override fun <T : ViewModel> create(
-          modelClass: Class<T>,
-        ): T {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
           return when (modelClass) {
-            FingerprintEnrollViewModel::class.java -> fingerprintViewModel
+            FingerprintEnrollIntroViewModel::class.java -> fingerprintViewModel
             FingerprintScrollViewModel::class.java -> fingerprintScrollViewModel
-            FingerprintEnrollNavigationViewModel::class.java -> navigationViewModel
+            FingerprintNavigationViewModel::class.java -> navigationViewModel
             FingerprintGatekeeperViewModel::class.java -> gatekeeperViewModel
             else -> null
           }
@@ -118,11 +122,7 @@ class BasicScreenshotTest {
   /** Renders a [view] into a [Bitmap]. */
   private fun viewToBitmap(view: View): Bitmap {
     val bitmap =
-      Bitmap.createBitmap(
-        view.measuredWidth,
-        view.measuredHeight,
-        Bitmap.Config.ARGB_8888,
-      )
+      Bitmap.createBitmap(view.measuredWidth, view.measuredHeight, Bitmap.Config.ARGB_8888)
     val canvas = Canvas(bitmap)
     view.draw(canvas)
     return bitmap
@@ -136,12 +136,7 @@ class BasicScreenshotTest {
     }
     fragmentScenario.onFragment { fragment ->
       val view = fragment.requireView().findViewById<View>(R.id.enroll_intro_content_view)!!
-      rule.assertBitmapAgainstGolden(
-        viewToBitmap(view),
-        "fp_enroll_intro",
-        MSSIMMatcher()
-      )
+      rule.assertBitmapAgainstGolden(viewToBitmap(view), "fp_enroll_intro", MSSIMMatcher())
     }
-
   }
 }

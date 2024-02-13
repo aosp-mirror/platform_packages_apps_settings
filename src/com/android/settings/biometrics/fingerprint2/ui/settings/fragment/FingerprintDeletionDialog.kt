@@ -26,7 +26,7 @@ import android.os.Bundle
 import android.os.UserManager
 import androidx.appcompat.app.AlertDialog
 import com.android.settings.R
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintData
+import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintData
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment
 import kotlin.coroutines.resume
 import kotlinx.coroutines.suspendCancellableCoroutine
@@ -75,8 +75,7 @@ class FingerprintDeletionDialog : InstrumentedDialogFragment() {
       message =
         devicePolicyManager?.resources?.getString(messageId) {
           message + "\n\n" + context.getString(defaultMessageId)
-        }
-          ?: ""
+        } ?: ""
     }
 
     alertDialog =
@@ -85,7 +84,7 @@ class FingerprintDeletionDialog : InstrumentedDialogFragment() {
         .setMessage(message)
         .setPositiveButton(
           R.string.security_settings_fingerprint_enroll_dialog_delete,
-          onClickListener
+          onClickListener,
         )
         .setNegativeButton(R.string.cancel, onNegativeClickListener)
         .create()
@@ -94,10 +93,11 @@ class FingerprintDeletionDialog : InstrumentedDialogFragment() {
 
   companion object {
     private const val KEY_FINGERPRINT = "fingerprint"
+
     suspend fun showInstance(
-        fp: FingerprintData,
-        lastFingerprint: Boolean,
-        target: FingerprintSettingsV2Fragment,
+      fp: FingerprintData,
+      lastFingerprint: Boolean,
+      target: FingerprintSettingsV2Fragment,
     ) = suspendCancellableCoroutine { continuation ->
       val dialog = FingerprintDeletionDialog()
       dialog.onClickListener = DialogInterface.OnClickListener { _, _ -> continuation.resume(true) }
@@ -109,7 +109,7 @@ class FingerprintDeletionDialog : InstrumentedDialogFragment() {
       val bundle = Bundle()
       bundle.putObject(
         KEY_FINGERPRINT,
-        android.hardware.fingerprint.Fingerprint(fp.name, fp.fingerId, fp.deviceId)
+        android.hardware.fingerprint.Fingerprint(fp.name, fp.fingerId, fp.deviceId),
       )
       bundle.putBoolean(KEY_IS_LAST_FINGERPRINT, lastFingerprint)
       dialog.arguments = bundle

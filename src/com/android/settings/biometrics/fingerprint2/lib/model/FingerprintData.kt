@@ -14,14 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.biometrics.fingerprint2.shared.data.repository
+package com.android.settings.biometrics.fingerprint2.lib.model
 
-/**
- * Interface that indicates if press to auth is on or off.
- */
-interface PressToAuthProvider {
-    /**
-     * Indicates true if the PressToAuth feature is enabled, false otherwise.
-     */
-    val isEnabled: Boolean
-}
+/** Basic information about an enrolled fingerprint */
+data class FingerprintData(val name: String, val fingerId: Int, val deviceId: Long)

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 The Android Open Source Project
+ * Copyright (C) 2024 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,21 +14,13 @@
  * limitations under the License.
  */
 
-package com.android.settings.biometrics.fingerprint2.shared.model
+package com.android.settings.biometrics.fingerprint2.lib.model
 
-data class FingerprintData(
-  val name: String,
-  val fingerId: Int,
-  val deviceId: Long,
-)
-
+/** Information indicating whether an auth was successful or not */
 sealed class FingerprintAuthAttemptModel {
-  data class Success(
-    val fingerId: Int,
-  ) : FingerprintAuthAttemptModel()
+  /** Indicates a successful auth attempt has occurred for [fingerId] */
+  data class Success(val fingerId: Int) : FingerprintAuthAttemptModel()
 
-  data class Error(
-    val error: Int,
-    val message: String,
-  ) : FingerprintAuthAttemptModel()
+  /** Indicates a failed auth attempt has occurred. */
+  data class Error(val error: Int, val message: String) : FingerprintAuthAttemptModel()
 }

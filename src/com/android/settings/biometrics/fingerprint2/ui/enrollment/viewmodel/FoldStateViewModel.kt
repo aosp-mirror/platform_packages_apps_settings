@@ -49,9 +49,7 @@ class FoldStateViewModel(context: Context) : ViewModel() {
 
   class FoldStateViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel> create(
-      modelClass: Class<T>,
-    ): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
       return FoldStateViewModel(context) as T
     }
   }
