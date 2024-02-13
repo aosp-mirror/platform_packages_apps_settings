@@ -568,7 +568,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
      */
     @VisibleForTesting
     public boolean togglePackageNameEnabled(String packageName) {
-        if (mEnabledPackageNames.size() >= MAX_SELECTABLE_PROVIDERS) {
+        if (hasProviderLimitBeenReached()) {
             return false;
         } else {
             mEnabledPackageNames.add(packageName);
@@ -623,6 +623,19 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         return mIconResizer.createIconThumbnail(providerIcon);
     }
 
+    private boolean hasProviderLimitBeenReached() {
+        return hasProviderLimitBeenReached(mEnabledPackageNames.size());
+    }
+
+    @VisibleForTesting
+    public static boolean hasProviderLimitBeenReached(int enabledAdditionalProviderCount) {
+        // If the number of package names has reached the maximum limit then
+        // we should stop any new packages from being added. We will also
+        // reserve one place for the primary provider so if the max limit is
+        // five providers this will be four additional plus the primary.
+        return (enabledAdditionalProviderCount + 1) >= MAX_SELECTABLE_PROVIDERS;
+    }
+
     private CombiPreference addProviderPreference(
             @NonNull Context prefContext,
             @NonNull CharSequence title,
@@ -648,19 +661,18 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         pref.setPreferenceListener(
                 new CombiPreference.OnCombiPreferenceClickListener() {
                     @Override
-                    public void onCheckChanged(CombiPreference p, boolean isChecked) {
+                    public boolean onCheckChanged(CombiPreference p, boolean isChecked) {
                         if (isChecked) {
-                            if (mEnabledPackageNames.size() >= MAX_SELECTABLE_PROVIDERS) {
+                            if (hasProviderLimitBeenReached()) {
                                 // Show the error if too many enabled.
-                                pref.setChecked(false);
                                 final DialogFragment fragment = newErrorDialogFragment();
 
                                 if (fragment == null || mFragmentManager == null) {
-                                    return;
+                                    return false;
                                 }
 
                                 fragment.show(mFragmentManager, ErrorDialogFragment.TAG);
-                                return;
+                                return false;
                             }
 
                             togglePackageNameEnabled(packageName);
@@ -672,6 +684,8 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
                         } else {
                             togglePackageNameDisabled(packageName);
                         }
+
+                        return true;
                     }
 
                     @Override
@@ -989,8 +1003,13 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
             @Override
             public void onClick(View buttonView) {
                 // Forward the event.
-                if (mSwitch != null) {
-                    mOnClickListener.onCheckChanged(CombiPreference.this, mSwitch.isChecked());
+                if (mSwitch != null && mOnClickListener != null) {
+                    if (!mOnClickListener.onCheckChanged(CombiPreference.this, mSwitch.isChecked())) {
+                      // The update was not successful since there were too
+                      // many enabled providers to manually reset any state.
+                      mChecked = false;
+                      mSwitch.setChecked(false);
+                    }
                 }
             }
         }
@@ -1004,7 +1023,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
 
         public interface OnCombiPreferenceClickListener {
             /** Called when the check is updated */
-            void onCheckChanged(CombiPreference p, boolean isChecked);
+            boolean onCheckChanged(CombiPreference p, boolean isChecked);
 
             /** Called when the left side is clicked. */
             void onLeftSideClicked();
