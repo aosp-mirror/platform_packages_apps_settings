@@ -45,6 +45,8 @@ import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProviderImpl
 import com.android.settings.deviceinfo.hardwareinfo.HardwareInfoFeatureProvider
 import com.android.settings.deviceinfo.hardwareinfo.HardwareInfoFeatureProviderImpl
+import com.android.settings.display.DisplayFeatureProvider
+import com.android.settings.display.DisplayFeatureProviderImpl
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProviderImpl
 import com.android.settings.fuelgauge.BatterySettingsFeatureProviderImpl
 import com.android.settings.fuelgauge.BatteryStatusFeatureProviderImpl
@@ -189,5 +191,8 @@ open class FeatureFactoryImpl : FeatureFactory() {
 
     override val privateSpaceLoginFeatureProvider: PrivateSpaceLoginFeatureProvider by lazy {
         PrivateSpaceLoginFeatureProviderImpl()
+    }
+    override val displayFeatureProvider: DisplayFeatureProvider by lazy {
+        DisplayFeatureProviderImpl()
     }
 }

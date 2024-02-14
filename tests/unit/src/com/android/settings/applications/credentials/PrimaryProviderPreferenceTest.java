@@ -114,50 +114,21 @@ public class PrimaryProviderPreferenceTest {
     }
 
     @Test
-    public void ensureButtonsClicksCallDelegate_newDesign_buttonsHidden() {
+    public void ensureButtonsClicksCallDelegate_newDesign_buttonsCompactMode() {
         if (!PrimaryProviderPreference.shouldUseNewSettingsUi()) {
             return;
         }
 
         PrimaryProviderPreference ppp = createTestPreferenceWithNewLayout();
+        int initialPaddingLeft = ppp.getButtonFrameView().getPaddingLeft();
 
-        // Test that the buttons are visible.
-        assertThat(ppp.getButtonFrameView()).isNotNull();
-        assertThat(ppp.getButtonFrameView().getVisibility()).isEqualTo(View.GONE);
-        assertThat(mReceivedChangeButtonClicked).isFalse();
+        // If we show the buttons the left padding should be updated.
+        ppp.setButtonsCompactMode(true);
+        assertThat(ppp.getButtonFrameView().getPaddingLeft()).isNotEqualTo(initialPaddingLeft);
 
-        // If we show the buttons the visiblility should be updated.
-        ppp.setButtonsVisible(true);
-        assertThat(ppp.getButtonFrameView().getVisibility()).isEqualTo(View.VISIBLE);
-
-        // If we hide the buttons the visibility should be updated.
-        ppp.setButtonsVisible(false);
-        assertThat(ppp.getButtonFrameView().getVisibility()).isEqualTo(View.GONE);
-    }
-
-    @Test
-    public void ensureButtonsClicksCallDelegate_oldDesign() {
-        if (PrimaryProviderPreference.shouldUseNewSettingsUi()) {
-            return;
-        }
-
-        PrimaryProviderPreference ppp = createTestPreference("preference_widget_gear");
-
-        // Test that clicking the preference results in the delegate being
-        // called.
-        assertThat(mReceivedOpenButtonClicked).isFalse();
-        ppp.getOnPreferenceClickListener().onPreferenceClick(ppp);
-        assertThat(mReceivedOpenButtonClicked).isTrue();
-
-        // Test that the gear button is present and visible.
-        assertThat(ppp.getGearView()).isNotNull();
-        assertThat(ppp.getGearView().getVisibility()).isEqualTo(View.VISIBLE);
-
-        // Test that clicking the gear button results in the delegate being
-        // called.
-        assertThat(mReceivedChangeButtonClicked).isFalse();
-        ppp.getGearView().performClick();
-        assertThat(mReceivedChangeButtonClicked).isTrue();
+        // If we hide the buttons the left padding should be updated.
+        ppp.setButtonsCompactMode(false);
+        assertThat(ppp.getButtonFrameView().getPaddingLeft()).isEqualTo(initialPaddingLeft);
     }
 
     private PrimaryProviderPreference createTestPreferenceWithNewLayout() {

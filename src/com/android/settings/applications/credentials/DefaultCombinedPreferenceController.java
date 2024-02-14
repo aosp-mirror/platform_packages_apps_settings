@@ -114,7 +114,7 @@ public class DefaultCombinedPreferenceController extends DefaultAppPreferenceCon
             @Nullable CharSequence packageName,
             @Nullable CharSequence settingsActivity) {
         if (appName == null) {
-            preference.setTitle(R.string.app_list_preference_none);
+            preference.setTitle(R.string.credman_app_list_preference_none);
         } else {
             preference.setTitle(appName);
         }
@@ -144,7 +144,7 @@ public class DefaultCombinedPreferenceController extends DefaultAppPreferenceCon
 
             // Hide the open button if there is no defined settings activity.
             primaryPref.setOpenButtonVisible(!TextUtils.isEmpty(settingsActivity));
-            primaryPref.setButtonsVisible(appName != null);
+            primaryPref.setButtonsCompactMode(appName != null);
         }
     }
 

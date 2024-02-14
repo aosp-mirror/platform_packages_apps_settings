@@ -20,18 +20,18 @@
     android:id="@+id/private_space_autoadvance_screen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:icon="@drawable/ic_privatespace_icon">
+    android:icon="@drawable/ic_private_space_icon">
     <LinearLayout style="@style/SudContentFrame"
                   android:layout_width="match_parent"
                   android:layout_height="match_parent"
                   android:orientation="vertical">
         <ImageView
-            android:id="@+id/placeholder_image"
+            android:id="@+id/setup_advance_image"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:contentDescription="@null"
-            android:src="@drawable/privatespace_setup_flow_placeholder"/>
+            android:src="@null"/>
 
         <TextView
             android:id="@+id/createMessage"

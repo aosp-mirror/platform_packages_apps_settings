@@ -52,7 +52,7 @@ public class SetupSuccessFragment extends InstrumentedFragment {
         }
         GlifLayout rootView =
                 (GlifLayout)
-                        inflater.inflate(R.layout.privatespace_setup_success, container, false);
+                        inflater.inflate(R.layout.private_space_setup_success, container, false);
         final FooterBarMixin mixin = rootView.getMixin(FooterBarMixin.class);
         mixin.setPrimaryButton(
                 new FooterButton.Builder(getContext())

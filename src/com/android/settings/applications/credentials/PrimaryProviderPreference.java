@@ -46,7 +46,7 @@ public class PrimaryProviderPreference extends GearPreference {
     private @Nullable View mButtonFrameView = null;
     private @Nullable View mGearView = null;
     private @Nullable Delegate mDelegate = null;
-    private boolean mButtonsVisible = false;
+    private boolean mButtonsCompactMode = false;
     private boolean mOpenButtonVisible = false;
 
     /** Called to send messages back to the parent controller. */
@@ -141,26 +141,7 @@ public class PrimaryProviderPreference extends GearPreference {
                 });
 
         mButtonFrameView = holder.findViewById(R.id.credman_button_frame);
-        mButtonFrameView.setVisibility(mButtonsVisible ? View.VISIBLE : View.GONE);
-
-        // There is a special case where if the provider == none then we should
-        // hide the buttons and when the preference is tapped we can open the
-        // provider selection dialog.
-        setOnPreferenceClickListener(
-                new Preference.OnPreferenceClickListener() {
-                    public boolean onPreferenceClick(@NonNull Preference preference) {
-                        return handlePreferenceClickNewSettingsUi();
-                    }
-                });
-    }
-
-    private boolean handlePreferenceClickNewSettingsUi() {
-        if (mDelegate != null && !mButtonsVisible) {
-            mDelegate.onChangeButtonClicked();
-            return true;
-        }
-
-        return false;
+        updateButtonFramePadding();
     }
 
     public void setOpenButtonVisible(boolean isVisible) {
@@ -172,12 +153,27 @@ public class PrimaryProviderPreference extends GearPreference {
         mOpenButtonVisible = isVisible;
     }
 
-    public void setButtonsVisible(boolean isVisible) {
-        if (mButtonFrameView != null) {
-            setVisibility(mButtonFrameView, isVisible);
+    private void updateButtonFramePadding() {
+        if (mButtonFrameView == null) {
+          return;
         }
 
-        mButtonsVisible = isVisible;
+        int paddingLeft = mButtonsCompactMode ?
+            getContext().getResources().getDimensionPixelSize(
+                R.dimen.credman_primary_provider_pref_left_padding) :
+            getContext().getResources().getDimensionPixelSize(
+                R.dimen.credman_primary_provider_pref_left_padding_compact);
+
+        mButtonFrameView.setPadding(
+            paddingLeft,
+            mButtonFrameView.getPaddingTop(),
+            mButtonFrameView.getPaddingRight(),
+            mButtonFrameView.getPaddingBottom());
+    }
+
+    public void setButtonsCompactMode(boolean isCompactMode) {
+        mButtonsCompactMode = isCompactMode;
+        updateButtonFramePadding();
     }
 
     public void setDelegate(@NonNull Delegate delegate) {
