@@ -217,33 +217,33 @@ public class CredentialManagerPreferenceControllerTest {
         assertThat(controller.isHiddenDueToNoProviderSet()).isFalse();
         assertThat(controller.getAvailabilityStatus()).isEqualTo(AVAILABLE);
 
-        // Ensure that we stay under 5 providers.
+        // Ensure that we stay under 5 providers (one is reserved for primary).
         assertThat(controller.togglePackageNameEnabled("com.android.provider1")).isTrue();
         assertThat(controller.togglePackageNameEnabled("com.android.provider2")).isTrue();
         assertThat(controller.togglePackageNameEnabled("com.android.provider3")).isTrue();
         assertThat(controller.togglePackageNameEnabled("com.android.provider4")).isTrue();
-        assertThat(controller.togglePackageNameEnabled("com.android.provider5")).isTrue();
+        assertThat(controller.togglePackageNameEnabled("com.android.provider5")).isFalse();
         assertThat(controller.togglePackageNameEnabled("com.android.provider6")).isFalse();
 
         // Check that they are all actually registered.
         Set<String> enabledProviders = controller.getEnabledProviders();
-        assertThat(enabledProviders.size()).isEqualTo(5);
+        assertThat(enabledProviders.size()).isEqualTo(4);
         assertThat(enabledProviders.contains("com.android.provider1")).isTrue();
         assertThat(enabledProviders.contains("com.android.provider2")).isTrue();
         assertThat(enabledProviders.contains("com.android.provider3")).isTrue();
         assertThat(enabledProviders.contains("com.android.provider4")).isTrue();
-        assertThat(enabledProviders.contains("com.android.provider5")).isTrue();
+        assertThat(enabledProviders.contains("com.android.provider5")).isFalse();
         assertThat(enabledProviders.contains("com.android.provider6")).isFalse();
 
         // Check that the settings string has the right component names.
         List<String> enabledServices = controller.getEnabledSettings();
-        assertThat(enabledServices.size()).isEqualTo(6);
+        assertThat(enabledServices.size()).isEqualTo(5);
         assertThat(enabledServices.contains("com.android.provider1/ClassA")).isTrue();
         assertThat(enabledServices.contains("com.android.provider1/ClassB")).isTrue();
         assertThat(enabledServices.contains("com.android.provider2/ClassA")).isTrue();
         assertThat(enabledServices.contains("com.android.provider3/ClassA")).isTrue();
         assertThat(enabledServices.contains("com.android.provider4/ClassA")).isTrue();
-        assertThat(enabledServices.contains("com.android.provider5/ClassA")).isTrue();
+        assertThat(enabledServices.contains("com.android.provider5/ClassA")).isFalse();
         assertThat(enabledServices.contains("com.android.provider6/ClassA")).isFalse();
 
         // Toggle the provider disabled.
@@ -251,22 +251,22 @@ public class CredentialManagerPreferenceControllerTest {
 
         // Check that the provider was removed from the list of providers.
         Set<String> currentlyEnabledProviders = controller.getEnabledProviders();
-        assertThat(currentlyEnabledProviders.size()).isEqualTo(4);
+        assertThat(currentlyEnabledProviders.size()).isEqualTo(3);
         assertThat(currentlyEnabledProviders.contains("com.android.provider1")).isTrue();
         assertThat(currentlyEnabledProviders.contains("com.android.provider2")).isFalse();
         assertThat(currentlyEnabledProviders.contains("com.android.provider3")).isTrue();
         assertThat(currentlyEnabledProviders.contains("com.android.provider4")).isTrue();
-        assertThat(currentlyEnabledProviders.contains("com.android.provider5")).isTrue();
+        assertThat(currentlyEnabledProviders.contains("com.android.provider5")).isFalse();
         assertThat(currentlyEnabledProviders.contains("com.android.provider6")).isFalse();
 
         // Check that the provider was removed from the list of services stored in the setting.
         List<String> currentlyEnabledServices = controller.getEnabledSettings();
-        assertThat(currentlyEnabledServices.size()).isEqualTo(5);
+        assertThat(currentlyEnabledServices.size()).isEqualTo(4);
         assertThat(currentlyEnabledServices.contains("com.android.provider1/ClassA")).isTrue();
         assertThat(currentlyEnabledServices.contains("com.android.provider1/ClassB")).isTrue();
         assertThat(currentlyEnabledServices.contains("com.android.provider3/ClassA")).isTrue();
         assertThat(currentlyEnabledServices.contains("com.android.provider4/ClassA")).isTrue();
-        assertThat(currentlyEnabledServices.contains("com.android.provider5/ClassA")).isTrue();
+        assertThat(currentlyEnabledServices.contains("com.android.provider5/ClassA")).isFalse();
         assertThat(currentlyEnabledServices.contains("com.android.provider6/ClassA")).isFalse();
     }
 
@@ -526,6 +526,17 @@ public class CredentialManagerPreferenceControllerTest {
         assertThat(thumbnail).isNotNull();
         assertThat(thumbnail.getIntrinsicHeight()).isEqualTo(getIconSize());
         assertThat(thumbnail.getIntrinsicWidth()).isEqualTo(getIconSize());
+    }
+
+    @Test
+    public void testProviderLimitReached() {
+        // The limit is 5 with one slot reserved for primary.
+        assertThat(CredentialManagerPreferenceController.hasProviderLimitBeenReached(0)).isFalse();
+        assertThat(CredentialManagerPreferenceController.hasProviderLimitBeenReached(1)).isFalse();
+        assertThat(CredentialManagerPreferenceController.hasProviderLimitBeenReached(2)).isFalse();
+        assertThat(CredentialManagerPreferenceController.hasProviderLimitBeenReached(3)).isFalse();
+        assertThat(CredentialManagerPreferenceController.hasProviderLimitBeenReached(4)).isTrue();
+        assertThat(CredentialManagerPreferenceController.hasProviderLimitBeenReached(5)).isTrue();
     }
 
     private int getIconSize() {
