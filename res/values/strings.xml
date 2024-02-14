@@ -11660,6 +11660,16 @@
     <!-- Body text of error message indicating the device could not erase the SIM due to an error. [CHAR_LIMIT=NONE] -->
     <string name="erase_sim_fail_text">Something went wrong and this eSIM wasn\'t erased.\n\nRestart your device and try again.</string>
 
+    <!-- Strings for to use Wi-Fi before deleting eUICC subscriptions -->
+    <!-- Title on confirmation dialog asking the user to have Wi-Fi. [CHAR_LIMIT=NONE] -->
+    <string name="wifi_warning_dialog_title">Connect to Wi\u2011Fi before erasing</string>
+    <!-- Body text in confirmation dialog indicating why having Wi-Fi is recommended. [CHAR_LIMIT=NONE] -->
+    <string name="wifi_warning_dialog_text">This makes it easier to use your eSIM again in the future without needing to contact your carrier</string>
+    <!-- Button label to continue with erasing [CHAR_LIMIT=20] -->
+    <string name="wifi_warning_continue_button">Erase anyway</string>
+    <!-- Button label to return to settings [CHAR_LIMIT=20] -->
+    <string name="wifi_warning_return_button">OK</string>
+
     <!-- Title for Network connection request Dialog [CHAR LIMIT=60] -->
     <string name="network_connection_request_dialog_title">Connect to device</string>
     <!-- Summary for Network connection request Dialog [CHAR LIMIT=NONE] -->
