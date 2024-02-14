@@ -18,6 +18,8 @@ package com.android.settings.privatespace;
 
 import static android.app.admin.DevicePolicyManager.ACTION_SET_NEW_PASSWORD;
 
+import static com.android.internal.app.SetScreenLockDialogActivity.LAUNCH_REASON_PRIVATE_SPACE_SETTINGS_ACCESS;
+
 import android.app.ActivityOptions;
 import android.app.AlertDialog;
 import android.app.KeyguardManager;
@@ -37,6 +39,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.internal.annotations.VisibleForTesting;
+import com.android.internal.app.SetScreenLockDialogActivity;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.transition.SettingsTransitionHelper;
@@ -112,23 +115,31 @@ public class PrivateSpaceAuthenticationActivity extends FragmentActivity {
 
     private void promptToSetDeviceLock() {
         Log.d(TAG, "Show prompt to set device lock before using private space feature");
-        new AlertDialog.Builder(this)
-                .setTitle(R.string.no_device_lock_title)
-                .setMessage(R.string.no_device_lock_summary)
-                .setPositiveButton(
-                        R.string.no_device_lock_action_label,
-                        (DialogInterface dialog, int which) -> {
-                            Log.d(TAG, "Start activity to set new device lock");
-                            mSetDeviceLock.launch(new Intent(ACTION_SET_NEW_PASSWORD));
-                        })
-                .setNegativeButton(
-                        R.string.no_device_lock_cancel,
-                        (DialogInterface dialog, int which) -> finish())
-                .setOnCancelListener(
-                        (DialogInterface dialog) -> {
-                            finish();
-                        })
-                .show();
+        if (android.multiuser.Flags.showSetScreenLockDialog()) {
+            Intent setScreenLockPromptIntent =
+                    SetScreenLockDialogActivity
+                            .createBaseIntent(LAUNCH_REASON_PRIVATE_SPACE_SETTINGS_ACCESS);
+            startActivity(setScreenLockPromptIntent);
+            finish();
+        } else {
+            new AlertDialog.Builder(this)
+                    .setTitle(R.string.no_device_lock_title)
+                    .setMessage(R.string.no_device_lock_summary)
+                    .setPositiveButton(
+                            R.string.no_device_lock_action_label,
+                            (DialogInterface dialog, int which) -> {
+                                Log.d(TAG, "Start activity to set new device lock");
+                                mSetDeviceLock.launch(new Intent(ACTION_SET_NEW_PASSWORD));
+                            })
+                    .setNegativeButton(
+                            R.string.no_device_lock_cancel,
+                            (DialogInterface dialog, int which) -> finish())
+                    .setOnCancelListener(
+                            (DialogInterface dialog) -> {
+                                finish();
+                            })
+                    .show();
+        }
     }
 
     private KeyguardManager getKeyguardManager() {
