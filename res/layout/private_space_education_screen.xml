@@ -23,7 +23,7 @@
     android:filterTouchesWhenObscured="true"
     app:sucHeaderText="@string/private_space_setup_title"
     app:sudDescriptionText="@string/private_space_hide_apps_summary"
-    android:icon="@drawable/ic_privatespace_icon">
+    android:icon="@drawable/ic_private_space_icon">
     <ScrollView
         android:id="@+id/main_clear_scrollview"
         android:layout_width="match_parent"
@@ -34,13 +34,13 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <ImageView
-            android:id="@+id/placeholder_image"
+            android:id="@+id/setup_education_image"
             style="@style/SudContentIllustration"
             android:layout_width="match_parent"
             android:layout_marginLeft="24dp"
             android:layout_marginRight="24dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/privatespace_placeholder_image"/>
+            android:src="@drawable/private_space_illustration"/>
         <TextView
             style="@style/PrivateSpaceSetupSubHeaderStyle"
             android:text="@string/private_space_how_title"/>

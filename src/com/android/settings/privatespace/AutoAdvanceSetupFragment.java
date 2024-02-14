@@ -59,11 +59,11 @@ public class AutoAdvanceSetupFragment extends InstrumentedFragment {
     private static final List<Pair<Integer, Integer>> HEADER_IMAGE_PAIRS =
             ImmutableList.of(
                     new Pair(R.string.private_space_notifications_hidden_title,
-                            R.drawable.privatespace_setup_flow_placeholder),
+                            R.drawable.private_space_setup_notification_illustration),
                     new Pair(R.string.private_space_share_photos_title,
-                            R.drawable.privatespace_setup_flow_placeholder),
+                            R.drawable.private_space_setup_sharing_illustration),
                     new Pair(R.string.private_space_apps_installed_title,
-                            R.drawable.privatespace_setup_flow_placeholder));
+                            R.drawable.private_space_setup_preinstalled_illustration));
 
     private Runnable mUpdateScreenResources =
             new Runnable() {
@@ -116,7 +116,7 @@ public class AutoAdvanceSetupFragment extends InstrumentedFragment {
         }
         mRootView =
                 (GlifLayout)
-                        inflater.inflate(R.layout.privatespace_advancing_screen, container, false);
+                        inflater.inflate(R.layout.private_space_advancing_screen, container, false);
         mRootView.getHeaderTextView().setMaxLines(HEADER_TEXT_MAX_LINES);
         updateHeaderAndImage();
         mHandler = new Handler(Looper.getMainLooper());
@@ -157,7 +157,7 @@ public class AutoAdvanceSetupFragment extends InstrumentedFragment {
 
     private void updateHeaderAndImage() {
         mRootView.setHeaderText(HEADER_IMAGE_PAIRS.get(mScreenTitleIndex).first);
-        ((ImageView) mRootView.findViewById(R.id.placeholder_image))
+        ((ImageView) mRootView.findViewById(R.id.setup_advance_image))
                 .setImageResource(HEADER_IMAGE_PAIRS.get(mScreenTitleIndex).second);
         startFadeInAnimation();
     }
@@ -166,7 +166,7 @@ public class AutoAdvanceSetupFragment extends InstrumentedFragment {
         ValueAnimator textView =  ObjectAnimator.ofFloat(
                 mRootView.getHeaderTextView(), View.ALPHA, 0f, 1f);
         ValueAnimator imageView = ObjectAnimator.ofFloat(
-                mRootView.findViewById(R.id.placeholder_image), View.ALPHA, 0, 1f);
+                mRootView.findViewById(R.id.setup_advance_image), View.ALPHA, 0, 1f);
         AnimatorSet fadeIn = new AnimatorSet();
         fadeIn.playTogether(textView, imageView);
         fadeIn.setDuration(ANIMATION_DURATION_MILLIS).start();
@@ -177,7 +177,7 @@ public class AutoAdvanceSetupFragment extends InstrumentedFragment {
         ValueAnimator textView =  ObjectAnimator.ofFloat(
                 mRootView.getHeaderTextView(), View.ALPHA, 1f, 0f);
         ValueAnimator imageView = ObjectAnimator.ofFloat(
-                mRootView.findViewById(R.id.placeholder_image), View.ALPHA, 1f, 0f);
+                mRootView.findViewById(R.id.setup_advance_image), View.ALPHA, 1f, 0f);
         fadeOut.playTogether(textView, imageView);
         fadeOut.setDuration(ANIMATION_DURATION_MILLIS).start();
         fadeOut.addListener(new AnimatorListenerAdapter() {

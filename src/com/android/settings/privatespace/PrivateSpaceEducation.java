@@ -48,7 +48,7 @@ public class PrivateSpaceEducation extends InstrumentedFragment {
         }
         GlifLayout rootView =
                 (GlifLayout)
-                        inflater.inflate(R.layout.privatespace_education_screen, container, false);
+                        inflater.inflate(R.layout.private_space_education_screen, container, false);
         final FooterBarMixin mixin = rootView.getMixin(FooterBarMixin.class);
         mixin.setPrimaryButton(
                 new FooterButton.Builder(getContext())

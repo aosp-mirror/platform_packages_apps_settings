@@ -33,6 +33,7 @@ import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.deviceinfo.hardwareinfo.HardwareInfoFeatureProvider;
 import com.android.settings.deviceinfo.hardwareinfo.HardwareInfoFeatureProviderImpl;
+import com.android.settings.display.DisplayFeatureProvider;
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider;
 import com.android.settings.fuelgauge.BatterySettingsFeatureProvider;
 import com.android.settings.fuelgauge.BatteryStatusFeatureProvider;
@@ -100,6 +101,7 @@ public class FakeFeatureFactory extends FeatureFactory {
     public OnboardingFeatureProvider mOnboardingFeatureProvider;
     public FastPairFeatureProvider mFastPairFeatureProvider;
     public PrivateSpaceLoginFeatureProvider mPrivateSpaceLoginFeatureProvider;
+    public DisplayFeatureProvider mDisplayFeatureProvider;
 
     /** Call this in {@code @Before} method of the test class to use fake factory. */
     public static FakeFeatureFactory setupForTest() {
@@ -150,6 +152,7 @@ public class FakeFeatureFactory extends FeatureFactory {
         mOnboardingFeatureProvider = mock(OnboardingFeatureProvider.class);
         mFastPairFeatureProvider = mock(FastPairFeatureProvider.class);
         mPrivateSpaceLoginFeatureProvider = mock(PrivateSpaceLoginFeatureProvider.class);
+        mDisplayFeatureProvider = mock(DisplayFeatureProvider.class);
     }
 
     @Override
@@ -331,5 +334,10 @@ public class FakeFeatureFactory extends FeatureFactory {
     @Override
     public PrivateSpaceLoginFeatureProvider getPrivateSpaceLoginFeatureProvider() {
         return mPrivateSpaceLoginFeatureProvider;
+    }
+
+    @Override
+    public DisplayFeatureProvider getDisplayFeatureProvider() {
+        return mDisplayFeatureProvider;
     }
 }
