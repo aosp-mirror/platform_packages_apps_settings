@@ -19,6 +19,7 @@ package com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrol
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.android.settings.biometrics.fingerprint2.domain.interactor.OrientationInteractor
 import com.android.settings.biometrics.fingerprint2.lib.model.FingerEnrollState
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintAction
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollEnrollingViewModel
@@ -39,10 +40,11 @@ import kotlinx.coroutines.flow.update
 class RFPSViewModel(
   private val fingerprintEnrollViewModel: FingerprintEnrollEnrollingViewModel,
   private val navigationViewModel: FingerprintNavigationViewModel,
+  orientationInteractor: OrientationInteractor,
 ) : ViewModel() {
 
-  /** Value to indicate if the text view is visible or not */
   private val _textViewIsVisible = MutableStateFlow<Boolean>(false)
+  /** Value to indicate if the text view is visible or not */
   val textViewIsVisible: Flow<Boolean> = _textViewIsVisible.asStateFlow()
 
   /** Indicates if the icon should be animating or not */
@@ -78,7 +80,11 @@ class RFPSViewModel(
       .filterIsInstance<FingerEnrollState.EnrollError>()
       .shareIn(viewModelScope, SharingStarted.Eagerly, 0)
 
+  /** Indicates that enrollment was completed. */
   val didCompleteEnrollment: Flow<Boolean> = progress.filterNotNull().map { it.remainingSteps == 0 }
+
+  /** Indicates if the fragment should dismiss a dialog if one was shown. */
+  val shouldDismissDialog = orientationInteractor.orientation.map { true }
 
   /** Indicates if the consumer is ready for enrollment */
   fun readyForEnrollment() {
@@ -90,6 +96,7 @@ class RFPSViewModel(
     fingerprintEnrollViewModel.stopEnroll()
   }
 
+  /** Set the visibility of the text view */
   fun setVisibility(isVisible: Boolean) {
     _textViewIsVisible.update { isVisible }
   }
@@ -122,6 +129,7 @@ class RFPSViewModel(
     )
   }
 
+  /** Indicates that enrollment has been finished and we can proceed to the next step. */
   fun finishedSuccessfully() {
     navigationViewModel.update(FingerprintAction.NEXT, navStep, "${TAG}#progressFinished")
   }
@@ -129,11 +137,17 @@ class RFPSViewModel(
   class RFPSViewModelFactory(
     private val fingerprintEnrollEnrollingViewModel: FingerprintEnrollEnrollingViewModel,
     private val navigationViewModel: FingerprintNavigationViewModel,
+    private val orientationInteractor: OrientationInteractor,
   ) : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-      return RFPSViewModel(fingerprintEnrollEnrollingViewModel, navigationViewModel) as T
+      return RFPSViewModel(
+        fingerprintEnrollEnrollingViewModel,
+        navigationViewModel,
+        orientationInteractor,
+      )
+        as T
     }
   }
 
