@@ -16,11 +16,12 @@
 
 package com.android.settings.testutils.shadow;
 
-import android.annotation.NonNull;
 import android.os.storage.DiskInfo;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
 import android.os.storage.VolumeRecord;
+
+import androidx.annotation.NonNull;
 
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
@@ -30,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Implements(StorageManager.class)
-public class ShadowStorageManager {
+public class ShadowStorageManager extends org.robolectric.shadows.ShadowStorageManager {
 
     private static boolean sIsUnmountCalled;
     private static boolean sIsForgetCalled;

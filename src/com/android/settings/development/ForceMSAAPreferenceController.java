@@ -20,7 +20,7 @@ import android.content.Context;
 import android.sysprop.DisplayProperties;
 
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
@@ -51,13 +51,13 @@ public class ForceMSAAPreferenceController extends DeveloperOptionsPreferenceCon
     @Override
     public void updateState(Preference preference) {
         final boolean isEnabled = DisplayProperties.debug_force_msaa().orElse(false);
-        ((SwitchPreference) mPreference).setChecked(isEnabled);
+        ((TwoStatePreference) mPreference).setChecked(isEnabled);
     }
 
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
         super.onDeveloperOptionsSwitchDisabled();
         DisplayProperties.debug_force_msaa(false);
-        ((SwitchPreference) mPreference).setChecked(false);
+        ((TwoStatePreference) mPreference).setChecked(false);
     }
 }

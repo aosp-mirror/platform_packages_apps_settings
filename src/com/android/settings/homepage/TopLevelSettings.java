@@ -178,7 +178,7 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
     public void onStart() {
         if (mFirstStarted) {
             mFirstStarted = false;
-            FeatureFactory.getFactory(getContext()).getSearchFeatureProvider().sendPreIndexIntent(
+            FeatureFactory.getFeatureFactory().getSearchFeatureProvider().sendPreIndexIntent(
                     getContext());
         } else if (mIsEmbeddingActivityEnabled && isOnlyOneActivityInTask()
                 && !isActivityEmbedded()) {

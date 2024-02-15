@@ -32,10 +32,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settings.R
 import com.android.settings.Utils
-import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settingslib.spa.framework.theme.SettingsDimension
 import com.android.settingslib.spa.widget.preference.Preference
 import com.android.settingslib.spa.widget.preference.PreferenceModel
@@ -46,7 +45,6 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 
-@OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun InstantAppDomainsPreference(app: ApplicationInfo) {
     val context = LocalContext.current
@@ -55,11 +53,12 @@ fun InstantAppDomainsPreference(app: ApplicationInfo) {
     val presenter = remember { InstantAppDomainsPresenter(context, app) }
     var openDialog by rememberSaveable { mutableStateOf(false) }
 
+    val summary by presenter.summaryFlow.collectAsStateWithLifecycle(
+        initialValue = stringResource(R.string.summary_placeholder),
+    )
     Preference(object : PreferenceModel {
         override val title = stringResource(R.string.app_launch_supported_domain_urls_title)
-        override val summary = presenter.summaryFlow.collectAsStateWithLifecycle(
-            initialValue = stringResource(R.string.summary_placeholder),
-        )
+        override val summary = { summary }
         override val onClick = { openDialog = true }
     })
 

@@ -48,11 +48,29 @@ public class ResetNetworkRequest {
     /* Reset option - reset BluetoothManager */
     public static final int RESET_BLUETOOTH_MANAGER = 0x10;
 
-    /* Subscription ID for not performing reset TelephonyAndNetworkPolicy or reset APN */
+    /* Reset option - reset IMS stack */
+    public static final int RESET_IMS_STACK = 0x20;
+
+    /* Reset option - reset phone process */
+    public static final int RESET_PHONE_PROCESS = 0x40;
+
+    /* Reset option - reset RILD */
+    public static final int RESET_RILD = 0x80;
+
+    /**
+     *  Subscription ID indicates NOT resetting any of the components below:
+     *  - TelephonyAndNetworkPolicy
+     *  - APN
+     *  - IMS
+     */
     public static final int INVALID_SUBSCRIPTION_ID = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
 
-    /* Subscription ID for performing reset TelephonyAndNetworkPolicy or reset APN
-        on all subscriptions */
+    /**
+     *  Subscription ID indicates resetting components below for ALL subscriptions:
+     *  - TelephonyAndNetworkPolicy
+     *  - APN
+     *  - IMS
+     */
     public static final int ALL_SUBSCRIPTION_ID = SubscriptionManager.DEFAULT_SUBSCRIPTION_ID;
 
     /* Key within Bundle. To store some connectivity options for reset */
@@ -75,10 +93,14 @@ public class ResetNetworkRequest {
     @VisibleForTesting
     protected static final String KEY_APN_SUBID = "resetApnSubId";
 
+    /** Key within Bundle. To store subscription ID for resetting IMS. */
+    protected  static final String KEY_RESET_IMS_SUBID = "resetImsSubId";
+
     private int mResetOptions = RESET_NONE;
     private String mResetEsimPackageName;
     private int mResetTelephonyManager = INVALID_SUBSCRIPTION_ID;
     private int mResetApn = INVALID_SUBSCRIPTION_ID;
+    private int mSubscriptionIdToResetIms = INVALID_SUBSCRIPTION_ID;
 
     /**
      * Reconstruct based on keys stored within Bundle.
@@ -93,6 +115,8 @@ public class ResetNetworkRequest {
         mResetTelephonyManager = optionsFromBundle.getInt(
                 KEY_TELEPHONY_NET_POLICY_MANAGER_SUBID, INVALID_SUBSCRIPTION_ID);
         mResetApn = optionsFromBundle.getInt(KEY_APN_SUBID, INVALID_SUBSCRIPTION_ID);
+        mSubscriptionIdToResetIms = optionsFromBundle.getInt(KEY_RESET_IMS_SUBID,
+                INVALID_SUBSCRIPTION_ID);
     }
 
     /**
@@ -173,6 +197,29 @@ public class ResetNetworkRequest {
     }
 
     /**
+     * Get the subscription ID applied for resetting IMS.
+     * @return subscription ID.
+     *         {@code ALL_SUBSCRIPTION_ID} for applying to all subscriptions.
+     *         {@code INVALID_SUBSCRIPTION_ID} means resetting IMS
+     *         is not part of the option within this request.
+     */
+    public int getResetImsSubId() {
+        return mSubscriptionIdToResetIms;
+    }
+
+    /**
+     * Set the subscription ID applied for resetting APN.
+     * @param subId is the subscription ID referenced from SubscriptionManager.
+     *         {@code ALL_SUBSCRIPTION_ID} for applying to all subscriptions.
+     *         {@code INVALID_SUBSCRIPTION_ID} means resetting IMS will not take place.
+     * @return this
+     */
+    public ResetNetworkRequest setResetImsSubId(int subId) {
+        mSubscriptionIdToResetIms = subId;
+        return this;
+    }
+
+    /**
      * Store a copy of this request into Bundle given.
      * @param writeToBundle is a Bundle for storing configurations of this request.
      * @return this request
@@ -182,6 +229,7 @@ public class ResetNetworkRequest {
         writeToBundle.putString(KEY_ESIM_PACKAGE, mResetEsimPackageName);
         writeToBundle.putInt(KEY_TELEPHONY_NET_POLICY_MANAGER_SUBID, mResetTelephonyManager);
         writeToBundle.putInt(KEY_APN_SUBID, mResetApn);
+        writeToBundle.putInt(KEY_RESET_IMS_SUBID, mSubscriptionIdToResetIms);
         return this;
     }
 
@@ -218,6 +266,15 @@ public class ResetNetworkRequest {
         }
         if (mResetApn != INVALID_SUBSCRIPTION_ID) {
             builder.resetApn(mResetApn);
+        }
+        if ((mResetOptions & RESET_IMS_STACK) != 0) {
+            builder.resetIms(mSubscriptionIdToResetIms);
+        }
+        if ((mResetOptions & RESET_PHONE_PROCESS) != 0) {
+            builder.restartPhoneProcess();
+        }
+        if ((mResetOptions & RESET_RILD) != 0) {
+            builder.restartRild();
         }
         return builder;
     }

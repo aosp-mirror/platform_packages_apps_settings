@@ -24,6 +24,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.robolectric.Shadows.shadowOf;
 
 import android.content.Context;
 import android.content.Intent;
@@ -31,6 +32,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.os.Bundle;
+import android.os.Looper;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.TtsEngines;
 
@@ -43,6 +45,7 @@ import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.annotation.Implements;
 import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowPackageManager;
 import org.robolectric.shadows.androidx.fragment.FragmentController;
@@ -50,12 +53,15 @@ import org.robolectric.shadows.androidx.fragment.FragmentController;
 @RunWith(RobolectricTestRunner.class)
 public class TtsEnginePreferenceFragmentTest {
 
+    @Implements(TextToSpeech.class)
+    public static class NoOpShadowTextToSpeech {}
+
     private Context mContext;
     private TtsEnginePreferenceFragment mTtsEnginePreferenceFragment;
 
     @Before
     public void setUp() {
-        mContext = RuntimeEnvironment.application;
+        mContext = RuntimeEnvironment.systemContext;
 
         final ResolveInfo info = new ResolveInfo();
         final ServiceInfo serviceInfo = spy(new ServiceInfo());
@@ -76,17 +82,19 @@ public class TtsEnginePreferenceFragmentTest {
     }
 
     @Test
+    @Config(shadows = {NoOpShadowTextToSpeech.class})
     public void getCandidates_AddEngines_returnCorrectEngines() {
         mTtsEnginePreferenceFragment = FragmentController.of(new TtsEnginePreferenceFragment(),
                 new Bundle())
                 .create()
                 .get();
+        shadowOf(Looper.getMainLooper()).idle();
 
         assertThat(mTtsEnginePreferenceFragment.getCandidates().size()).isEqualTo(1);
     }
 
     @Test
-    @Config(shadows = {ShadowTtsEngines.class})
+    @Config(shadows = {ShadowTtsEngines.class, NoOpShadowTextToSpeech.class})
     public void getDefaultKey_validKey_returnCorrectKey() {
         final String TEST_ENGINE = "test_engine";
         final TtsEngines engine = mock(TtsEngines.class);
@@ -95,13 +103,14 @@ public class TtsEnginePreferenceFragmentTest {
                 new Bundle())
                 .create()
                 .get();
+        shadowOf(Looper.getMainLooper()).idle();
         when(engine.getDefaultEngine()).thenReturn(TEST_ENGINE);
 
         assertThat(mTtsEnginePreferenceFragment.getDefaultKey()).isEqualTo(TEST_ENGINE);
     }
 
     @Test
-    @Config(shadows = {ShadowTtsEngines.class})
+    @Config(shadows = {ShadowTtsEngines.class, NoOpShadowTextToSpeech.class})
     public void setDefaultKey_validKey_callingTtsEngineFunction() {
         final TtsEngines engine = mock(TtsEngines.class);
         ShadowTtsEngines.setInstance(engine);
@@ -109,6 +118,7 @@ public class TtsEnginePreferenceFragmentTest {
                 new Bundle())
                 .create()
                 .get();
+        shadowOf(Looper.getMainLooper()).idle();
 
         mTtsEnginePreferenceFragment.setDefaultKey(mContext.getPackageName());
 
@@ -116,14 +126,17 @@ public class TtsEnginePreferenceFragmentTest {
     }
 
     @Test
+    @Config(shadows = {NoOpShadowTextToSpeech.class})
     public void setDefaultKey_validKey_updateCheckedState() {
-        mTtsEnginePreferenceFragment = spy(FragmentController.of(new TtsEnginePreferenceFragment(),
+        mTtsEnginePreferenceFragment = FragmentController.of(new TtsEnginePreferenceFragment(),
                 new Bundle())
                 .create()
-                .get());
+                .get();
+        shadowOf(Looper.getMainLooper()).idle();
+        TtsEnginePreferenceFragment fragmentSpy = spy(mTtsEnginePreferenceFragment);
 
-        mTtsEnginePreferenceFragment.setDefaultKey(mContext.getPackageName());
+        fragmentSpy.setDefaultKey(mContext.getPackageName());
 
-        verify(mTtsEnginePreferenceFragment).updateCheckedState(mContext.getPackageName());
+        verify(fragmentSpy).updateCheckedState(mContext.getPackageName());
     }
 }

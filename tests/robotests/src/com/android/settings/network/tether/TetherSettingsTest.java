@@ -48,7 +48,6 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.util.FeatureFlagUtils;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
@@ -56,7 +55,6 @@ import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
 import com.android.settings.RestrictedSettingsFragment;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.wifi.tether.WifiTetherPreferenceController;
 import com.android.settingslib.RestrictedSwitchPreference;
 
@@ -76,6 +74,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class TetherSettingsTest {
 
     private Context mContext;
@@ -131,16 +132,17 @@ public class TetherSettingsTest {
     @Test
     @Config(shadows = ShadowRestrictedSettingsFragment.class)
     public void onCreate_isUiRestricted_doNotSetupViewModel() {
+        doNothing().when(mTetherSettings).addPreferencesFromResource(anyInt());
         when(mTetherSettings.isUiRestricted()).thenReturn(true);
 
         mTetherSettings.onCreate(null);
 
+        verify(mTetherSettings).addPreferencesFromResource(anyInt());
         verify(mTetherSettings, never()).setupViewModel();
     }
 
     @Test
     public void testTetherNonIndexableKeys_tetherAvailable_keysNotReturned() {
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.TETHER_ALL_IN_ONE, false);
         // To let TetherUtil.isTetherAvailable return true, select one of the combinations
         setupIsTetherAvailable(true);
 
@@ -185,7 +187,6 @@ public class TetherSettingsTest {
 
     @Test
     public void testTetherNonIndexableKeys_usbAvailable_usbKeyNotReturned() {
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.TETHER_ALL_IN_ONE, false);
         // We can ignore the condition of Utils.isMonkeyRunning()
         // In normal case, monkey and robotest should not execute at the same time
         when(mTetheringManager.getTetherableUsbRegexs()).thenReturn(new String[]{"fakeRegex"});
@@ -208,7 +209,6 @@ public class TetherSettingsTest {
 
     @Test
     public void testTetherNonIndexableKeys_bluetoothAvailable_bluetoothKeyNotReturned() {
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.TETHER_ALL_IN_ONE, false);
         when(mTetheringManager.getTetherableBluetoothRegexs())
                 .thenReturn(new String[]{"fakeRegex"});
 

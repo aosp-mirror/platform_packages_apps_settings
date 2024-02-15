@@ -103,7 +103,8 @@ public abstract class BaseBluetoothDialogPreference extends CustomDialogPreferen
             // View will be invisible when all options are enabled.
             helpTextView.setVisibility(View.GONE);
         } else {
-            helpTextView.setText(R.string.bluetooth_select_a2dp_codec_type_help_info);
+            helpTextView.setText(
+                    com.android.settingslib.R.string.bluetooth_select_a2dp_codec_type_help_info);
             helpTextView.setVisibility(View.VISIBLE);
         }
     }
@@ -135,7 +136,8 @@ public abstract class BaseBluetoothDialogPreference extends CustomDialogPreferen
         }
         return index == getDefaultIndex() ? mSummaryStrings.get(getDefaultIndex()) :
                 String.format(getContext().getResources().getString(
-                        R.string.bluetooth_select_a2dp_codec_streaming_label),
+                        com.android.settingslib.R
+                                .string.bluetooth_select_a2dp_codec_streaming_label),
                         mSummaryStrings.get(index));
     }
 

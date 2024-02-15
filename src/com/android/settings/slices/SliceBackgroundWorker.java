@@ -17,7 +17,6 @@
 package com.android.settings.slices;
 
 import android.annotation.MainThread;
-import android.annotation.Nullable;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Handler;
@@ -28,6 +27,9 @@ import android.os.Process;
 import android.os.SystemClock;
 import android.util.ArrayMap;
 import android.util.Log;
+
+import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -172,7 +174,8 @@ public abstract class SliceBackgroundWorker<E> implements Closeable {
     /**
      * Notify that data was updated and attempt to sync changes to the Slice.
      */
-    protected final void notifySliceChange() {
+    @VisibleForTesting
+    public final void notifySliceChange() {
         NotifySliceChangeHandler.getInstance().updateSlice(this);
     }
 

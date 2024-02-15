@@ -77,6 +77,15 @@ public class NewKeyboardLayoutEnabledLocalesFragment extends DashboardFragment
                         ? currentUserId : Utils.getManagedProfileId(userManager, currentUserId);
                 break;
             }
+            case ProfileSelectFragment.ProfileType.PRIVATE: {
+                // If the user is a private profile user, use currentUserId directly. Or get the
+                // private profile userId instead.
+                newUserId = userManager.isPrivateProfile()
+                        ? currentUserId
+                        : Utils.getCurrentUserIdOfType(
+                                userManager, ProfileSelectFragment.ProfileType.PRIVATE);
+                break;
+            }
             case ProfileSelectFragment.ProfileType.PERSONAL: {
                 final UserHandle primaryUser = userManager.getPrimaryUser().getUserHandle();
                 newUserId = primaryUser.getIdentifier();
@@ -96,8 +105,13 @@ public class NewKeyboardLayoutEnabledLocalesFragment extends DashboardFragment
     public void onActivityCreated(final Bundle icicle) {
         super.onActivityCreated(icicle);
         Bundle arguments = getArguments();
+        if (arguments == null) {
+            Log.e(TAG, "Arguments should not be null");
+            return;
+        }
         mInputDeviceIdentifier =
-                arguments.getParcelable(NewKeyboardSettingsUtils.EXTRA_INPUT_DEVICE_IDENTIFIER);
+                arguments.getParcelable(NewKeyboardSettingsUtils.EXTRA_INPUT_DEVICE_IDENTIFIER,
+                        InputDeviceIdentifier.class);
         if (mInputDeviceIdentifier == null) {
             Log.e(TAG, "The inputDeviceIdentifier should not be null");
             return;
@@ -119,6 +133,7 @@ public class NewKeyboardLayoutEnabledLocalesFragment extends DashboardFragment
         InputDevice inputDevice =
                 NewKeyboardSettingsUtils.getInputDevice(mIm, mInputDeviceIdentifier);
         if (inputDevice == null) {
+            Log.e(TAG, "Unable to start: input device is null");
             getActivity().finish();
             return;
         }
@@ -145,7 +160,8 @@ public class NewKeyboardLayoutEnabledLocalesFragment extends DashboardFragment
 
         PreferenceScreen preferenceScreen = getPreferenceScreen();
         preferenceScreen.removeAll();
-        List<InputMethodInfo> infoList = mImm.getEnabledInputMethodListAsUser(mUserId);
+        List<InputMethodInfo> infoList =
+                mImm.getEnabledInputMethodListAsUser(UserHandle.of(mUserId));
         Collections.sort(infoList, new Comparator<InputMethodInfo>() {
             public int compare(InputMethodInfo o1, InputMethodInfo o2) {
                 String s1 = o1.loadLabel(mContext.getPackageManager()).toString();
@@ -157,7 +173,8 @@ public class NewKeyboardLayoutEnabledLocalesFragment extends DashboardFragment
         for (InputMethodInfo info : infoList) {
             mKeyboardInfoList.clear();
             List<InputMethodSubtype> subtypes =
-                    mImm.getEnabledInputMethodSubtypeListAsUser(info.getId(), true, mUserId);
+                    mImm.getEnabledInputMethodSubtypeListAsUser(info.getId(), true,
+                            UserHandle.of(mUserId));
             for (InputMethodSubtype subtype : subtypes) {
                 if (subtype.isSuitableForPhysicalKeyboardLayoutMapping()) {
                     mapLanguageWithLayout(info, subtype);

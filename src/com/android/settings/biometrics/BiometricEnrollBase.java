@@ -18,7 +18,6 @@ package com.android.settings.biometrics;
 
 import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
 
-import android.annotation.Nullable;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -32,6 +31,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.Nullable;
 
 import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
@@ -40,6 +40,7 @@ import com.android.settings.biometrics.fingerprint.FingerprintEnrollEnrolling;
 import com.android.settings.core.InstrumentedActivity;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockSettingsHelper;
+import com.android.settingslib.activityembedding.ActivityEmbeddingUtils;
 import com.android.systemui.unfold.compat.ScreenSizeFoldProvider;
 import com.android.systemui.unfold.updates.FoldProvider;
 
@@ -133,6 +134,7 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
     protected long mChallenge;
     protected boolean mFromSettingsSummary;
     protected FooterBarMixin mFooterBarMixin;
+    protected boolean mShouldSetFooterBarBackground = true;
     @Nullable
     protected ScreenSizeFoldProvider mScreenSizeFoldProvider;
     @Nullable
@@ -170,8 +172,16 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
             mNextLaunched = savedInstanceState.getBoolean(EXTRA_KEY_NEXT_LAUNCHED);
         }
         mUserId = getIntent().getIntExtra(Intent.EXTRA_USER_ID, UserHandle.myUserId());
-        mPostureGuidanceIntent = FeatureFactory.getFactory(getApplicationContext())
+        mPostureGuidanceIntent = FeatureFactory.getFeatureFactory()
                 .getFaceFeatureProvider().getPostureGuidanceIntent(getApplicationContext());
+
+        // Remove the existing split screen dialog.
+        BiometricsSplitScreenDialog dialog =
+                (BiometricsSplitScreenDialog) getSupportFragmentManager()
+                        .findFragmentByTag(BiometricsSplitScreenDialog.class.getName());
+        if (dialog != null) {
+            getSupportFragmentManager().beginTransaction().remove(dialog).commit();
+        }
     }
 
     @Override
@@ -191,12 +201,14 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
         super.onPostCreate(savedInstanceState);
         initViews();
 
-        @SuppressLint("VisibleForTests")
-        final LinearLayout buttonContainer = mFooterBarMixin != null
-                ? mFooterBarMixin.getButtonContainer()
-                : null;
-        if (buttonContainer != null) {
-            buttonContainer.setBackgroundColor(getBackgroundColor());
+        if (mShouldSetFooterBarBackground) {
+            @SuppressLint("VisibleForTests")
+            final LinearLayout buttonContainer = mFooterBarMixin != null
+                    ? mFooterBarMixin.getButtonContainer()
+                    : null;
+            if (buttonContainer != null) {
+                buttonContainer.setBackgroundColor(getBackgroundColor());
+            }
         }
     }
 
@@ -331,8 +343,12 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
     }
 
     @ColorInt
-    private int getBackgroundColor() {
+    public int getBackgroundColor() {
         final ColorStateList stateList = Utils.getColorAttr(this, android.R.attr.windowBackground);
         return stateList != null ? stateList.getDefaultColor() : Color.TRANSPARENT;
+    }
+
+    protected boolean shouldShowSplitScreenDialog() {
+        return isInMultiWindowMode() && !ActivityEmbeddingUtils.isActivityEmbedded(this);
     }
 }

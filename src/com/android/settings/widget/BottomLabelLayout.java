@@ -16,16 +16,14 @@
 
 package com.android.settings.widget;
 
-import android.annotation.Nullable;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
-
-import com.android.settingslib.R;
 
 /**
  * An extension of LinearLayout that automatically switches to vertical
@@ -85,7 +83,7 @@ public class BottomLabelLayout extends LinearLayout {
         setOrientation(stacked ? LinearLayout.VERTICAL : LinearLayout.HORIZONTAL);
         setGravity(stacked ? Gravity.START : Gravity.BOTTOM);
 
-        final View spacer = findViewById(R.id.spacer);
+        final View spacer = findViewById(com.android.settings.R.id.spacer);
         if (spacer != null) {
             spacer.setVisibility(stacked ? View.GONE : View.VISIBLE);
         }

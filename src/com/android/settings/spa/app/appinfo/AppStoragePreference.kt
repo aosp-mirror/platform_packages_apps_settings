@@ -19,9 +19,6 @@ package com.android.settings.spa.app.appinfo
 import android.content.Context
 import android.content.pm.ApplicationInfo
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
-import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import com.android.settings.R
@@ -47,12 +44,13 @@ fun AppStoragePreference(app: ApplicationInfo) {
 }
 
 @Composable
-private fun getSummary(context: Context, app: ApplicationInfo): State<String> {
+private fun getSummary(context: Context, app: ApplicationInfo): () -> String {
     val sizeState = app.getStorageSize()
-    return remember {
-        derivedStateOf {
-            val size = sizeState.value
-            if (size.isBlank()) return@derivedStateOf context.getString(R.string.computing_size)
+    return {
+        val size = sizeState.value
+        if (size.isBlank()) {
+            context.getString(R.string.computing_size)
+        } else {
             val storageType = context.getString(
                 when (app.hasFlag(ApplicationInfo.FLAG_EXTERNAL_STORAGE)) {
                     true -> R.string.storage_type_external

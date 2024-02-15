@@ -16,6 +16,7 @@ package com.android.settings.nfc;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.permission.flags.Flags;
 
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
@@ -43,7 +44,7 @@ public class NfcForegroundPreferenceController extends BasePreferenceController 
 
     public NfcForegroundPreferenceController(Context context, String key) {
         super(context, key);
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
         mListValues = context.getResources().getStringArray(R.array.nfc_payment_favor_values);
         mListEntries = context.getResources().getStringArray(R.array.nfc_payment_favor);
     }
@@ -68,6 +69,9 @@ public class NfcForegroundPreferenceController extends BasePreferenceController 
 
     @Override
     public int getAvailabilityStatus() {
+        if (Flags.walletRoleEnabled()) {
+            return UNSUPPORTED_ON_DEVICE;
+        }
         final PackageManager pm = mContext.getPackageManager();
         if (!pm.hasSystemFeature(PackageManager.FEATURE_NFC)) {
             return UNSUPPORTED_ON_DEVICE;

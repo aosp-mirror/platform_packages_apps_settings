@@ -13,7 +13,7 @@
  */
 package com.android.settings.datausage;
 
-import static com.android.settingslib.RestrictedLockUtilsInternal.checkIfMeteredDataRestricted;
+import static com.android.settingslib.RestrictedLockUtilsInternal.checkIfMeteredDataUsageUserControlDisabled;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -56,8 +56,8 @@ public class UnrestrictedDataAccessPreference extends AppSwitchPreference implem
         mApplicationsState = applicationsState;
         mDataSaverBackend = dataSaverBackend;
         mParentFragment = parentFragment;
-        setDisabledByAdmin(checkIfMeteredDataRestricted(context, entry.info.packageName,
-                UserHandle.getUserId(entry.info.uid)));
+        setDisabledByAdmin(checkIfMeteredDataUsageUserControlDisabled(
+                context, entry.info.packageName, UserHandle.getUserId(entry.info.uid)));
         updateState();
         setKey(generateKey(mEntry));
 
@@ -176,7 +176,7 @@ public class UnrestrictedDataAccessPreference extends AppSwitchPreference implem
         if (mDataUsageState != null) {
             setChecked(mDataUsageState.isDataSaverAllowlisted);
             if (isDisabledByAdmin()) {
-                setSummary(R.string.disabled_by_admin);
+                setSummary(com.android.settingslib.widget.restricted.R.string.disabled_by_admin);
             } else if (mDataUsageState.isDataSaverDenylisted) {
                 setSummary(R.string.restrict_background_blocklisted);
             } else {

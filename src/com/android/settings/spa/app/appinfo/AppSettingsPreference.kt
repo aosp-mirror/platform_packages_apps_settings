@@ -27,9 +27,8 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import com.android.settings.R
-import com.android.settings.overlay.FeatureFactory
-import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settingslib.spa.widget.preference.Preference
 import com.android.settingslib.spa.widget.preference.PreferenceModel
 import com.android.settingslib.spaprivileged.model.app.resolveActionForApp
@@ -44,7 +43,6 @@ import kotlinx.coroutines.flow.shareIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.plus
 
-@OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun AppSettingsPreference(app: ApplicationInfo) {
     val context = LocalContext.current
@@ -78,7 +76,7 @@ private class AppSettingsPresenter(
     }
 
     private fun startActivity(activityInfo: ActivityInfo) {
-        FeatureFactory.getFactory(context).metricsFeatureProvider.action(
+        featureFactory.metricsFeatureProvider.action(
             SettingsEnums.PAGE_UNKNOWN,
             SettingsEnums.ACTION_OPEN_APP_SETTING,
             AppInfoSettingsProvider.METRICS_CATEGORY,

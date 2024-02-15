@@ -31,8 +31,9 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import android.test.AndroidTestCase;
-import android.test.suitebuilder.annotation.SmallTest;
 import android.text.TextUtils;
+
+import androidx.test.filters.SmallTest;
 
 import com.android.internal.net.LegacyVpnInfo;
 import com.android.internal.net.VpnProfile;

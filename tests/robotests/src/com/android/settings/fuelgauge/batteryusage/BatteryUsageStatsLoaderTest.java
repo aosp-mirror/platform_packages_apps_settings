@@ -39,25 +39,23 @@ import org.robolectric.RuntimeEnvironment;
 @RunWith(RobolectricTestRunner.class)
 public class BatteryUsageStatsLoaderTest {
     private Context mContext;
-    @Mock
-    private BatteryStatsManager mBatteryStatsManager;
-    @Mock
-    private BatteryUsageStats mBatteryUsageStats;
-    @Captor
-    private ArgumentCaptor<BatteryUsageStatsQuery> mUsageStatsQueryCaptor;
+    @Mock private BatteryStatsManager mBatteryStatsManager;
+    @Mock private BatteryUsageStats mBatteryUsageStats;
+    @Captor private ArgumentCaptor<BatteryUsageStatsQuery> mUsageStatsQueryCaptor;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
-        doReturn(mBatteryStatsManager).when(mContext).getSystemService(
-                Context.BATTERY_STATS_SERVICE);
+        doReturn(mBatteryStatsManager)
+                .when(mContext)
+                .getSystemService(Context.BATTERY_STATS_SERVICE);
     }
 
     @Test
     public void testLoadInBackground_loadWithoutHistory() {
-        BatteryUsageStatsLoader loader = new BatteryUsageStatsLoader(
-                mContext, /* includeBatteryHistory */ false);
+        BatteryUsageStatsLoader loader =
+                new BatteryUsageStatsLoader(mContext, /* includeBatteryHistory */ false);
 
         when(mBatteryStatsManager.getBatteryUsageStats(mUsageStatsQueryCaptor.capture()))
                 .thenReturn(mBatteryUsageStats);
@@ -65,14 +63,14 @@ public class BatteryUsageStatsLoaderTest {
         loader.loadInBackground();
 
         final int queryFlags = mUsageStatsQueryCaptor.getValue().getFlags();
-        assertThat(queryFlags
-                & BatteryUsageStatsQuery.FLAG_BATTERY_USAGE_STATS_INCLUDE_HISTORY).isEqualTo(0);
+        assertThat(queryFlags & BatteryUsageStatsQuery.FLAG_BATTERY_USAGE_STATS_INCLUDE_HISTORY)
+                .isEqualTo(0);
     }
 
     @Test
     public void testLoadInBackground_loadWithHistory() {
-        BatteryUsageStatsLoader loader = new BatteryUsageStatsLoader(
-                mContext, /* includeBatteryHistory */ true);
+        BatteryUsageStatsLoader loader =
+                new BatteryUsageStatsLoader(mContext, /* includeBatteryHistory */ true);
 
         when(mBatteryStatsManager.getBatteryUsageStats(mUsageStatsQueryCaptor.capture()))
                 .thenReturn(mBatteryUsageStats);
@@ -80,7 +78,7 @@ public class BatteryUsageStatsLoaderTest {
         loader.loadInBackground();
 
         final int queryFlags = mUsageStatsQueryCaptor.getValue().getFlags();
-        assertThat(queryFlags
-                & BatteryUsageStatsQuery.FLAG_BATTERY_USAGE_STATS_INCLUDE_HISTORY).isNotEqualTo(0);
+        assertThat(queryFlags & BatteryUsageStatsQuery.FLAG_BATTERY_USAGE_STATS_INCLUDE_HISTORY)
+                .isNotEqualTo(0);
     }
 }

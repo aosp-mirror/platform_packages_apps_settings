@@ -25,7 +25,8 @@ import android.os.SystemProperties;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.SwitchPreferenceCompat;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -41,7 +42,7 @@ public class UsbDetailsTranscodeMtpController extends UsbDetailsController
     private static final String KEY_USB_TRANSCODE_FILES = "usb_transcode_files";
 
     private PreferenceCategory mPreferenceCategory;
-    private SwitchPreference mSwitchPreference;
+    private TwoStatePreference mSwitchPreference;
 
     public UsbDetailsTranscodeMtpController(Context context, UsbDetailsFragment fragment,
             UsbBackend backend) {
@@ -53,7 +54,7 @@ public class UsbDetailsTranscodeMtpController extends UsbDetailsController
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreferenceCategory = screen.findPreference(getPreferenceKey());
-        mSwitchPreference = new SwitchPreference(mPreferenceCategory.getContext());
+        mSwitchPreference = new SwitchPreferenceCompat(mPreferenceCategory.getContext());
         mSwitchPreference.setTitle(R.string.usb_transcode_files);
         mSwitchPreference.setKey(KEY_USB_TRANSCODE_FILES);
         mSwitchPreference.setOnPreferenceClickListener(this);
@@ -77,13 +78,15 @@ public class UsbDetailsTranscodeMtpController extends UsbDetailsController
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
-        SystemProperties.set(TRANSCODE_MTP_SYS_PROP_KEY,
-                Boolean.toString(mSwitchPreference.isChecked()));
+        requireAuthAndExecute(() -> {
+            SystemProperties.set(TRANSCODE_MTP_SYS_PROP_KEY,
+                    Boolean.toString(mSwitchPreference.isChecked()));
 
-        final long previousFunctions = mUsbBackend.getCurrentFunctions();
-        // Toggle the MTP connection to reload file sizes for files shared via MTP clients
-        mUsbBackend.setCurrentFunctions(previousFunctions & ~UsbManager.FUNCTION_MTP);
-        mUsbBackend.setCurrentFunctions(previousFunctions);
+            final long previousFunctions = mUsbBackend.getCurrentFunctions();
+            // Toggle the MTP connection to reload file sizes for files shared via MTP clients
+            mUsbBackend.setCurrentFunctions(previousFunctions & ~UsbManager.FUNCTION_MTP);
+            mUsbBackend.setCurrentFunctions(previousFunctions);
+        });
 
         return true;
     }

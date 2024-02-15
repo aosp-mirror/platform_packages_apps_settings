@@ -22,6 +22,8 @@ import android.safetycenter.SafetyEvent;
 import android.safetycenter.SafetySourceData;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
+
 import com.android.internal.annotations.VisibleForTesting;
 
 /** A wrapper for the SafetyCenterManager system service. */
@@ -49,7 +51,7 @@ public class SafetyCenterManagerWrapper {
 
     /** Sets the latest safety source data for Safety Center. */
     public void setSafetySourceData(Context context, String safetySourceId,
-            SafetySourceData safetySourceData,
+            @Nullable SafetySourceData safetySourceData,
             SafetyEvent safetyEvent) {
         SafetyCenterManager safetyCenterManager =
                 context.getSystemService(SafetyCenterManager.class);

@@ -24,8 +24,8 @@ import android.os.Bundle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentManager;
 
-import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settingslib.R;
 
 public class EnableDevelopmentSettingWarningDialog extends InstrumentedDialogFragment
         implements DialogInterface.OnClickListener {

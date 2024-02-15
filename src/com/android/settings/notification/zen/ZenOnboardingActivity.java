@@ -17,6 +17,7 @@
 package com.android.settings.notification.zen;
 
 import android.app.Activity;
+import android.app.Flags;
 import android.app.NotificationManager;
 import android.app.NotificationManager.Policy;
 import android.app.settings.SettingsEnums;
@@ -129,7 +130,11 @@ public class ZenOnboardingActivity extends Activity {
                     Policy.PRIORITY_SENDERS_STARRED,
                     policy.priorityMessageSenders,
                     NotificationManager.Policy.getAllSuppressedVisualEffects());
-            mNm.setNotificationPolicy(newPolicy);
+            if (Flags.modesApi()) {
+                mNm.setNotificationPolicy(newPolicy, /* fromUser= */ true);
+            } else {
+                mNm.setNotificationPolicy(newPolicy);
+            }
             mMetrics.action(SettingsEnums.ACTION_ZEN_ONBOARDING_OK);
         } else {
             mMetrics.action(SettingsEnums.ACTION_ZEN_ONBOARDING_KEEP_CURRENT_SETTINGS);
@@ -180,7 +185,7 @@ public class ZenOnboardingActivity extends Activity {
 
     private static boolean withinShowTimeThreshold(Context context) {
         final SuggestionFeatureProvider featureProvider =
-                FeatureFactory.getFactory(context).getSuggestionFeatureProvider();
+                FeatureFactory.getFeatureFactory().getSuggestionFeatureProvider();
         final SharedPreferences prefs = featureProvider.getSharedPrefs(context);
         final long currentTimeMs = System.currentTimeMillis();
         final long firstDisplayTimeMs;

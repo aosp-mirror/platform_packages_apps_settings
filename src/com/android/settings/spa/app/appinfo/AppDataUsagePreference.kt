@@ -18,45 +18,63 @@ package com.android.settings.spa.app.appinfo
 
 import android.content.Context
 import android.content.pm.ApplicationInfo
-import android.net.NetworkStats
 import android.net.NetworkTemplate
-import android.os.Process
-import android.text.format.DateUtils
-import android.text.format.Formatter
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settings.R
 import com.android.settings.Utils
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment
 import com.android.settings.datausage.AppDataUsage
-import com.android.settings.datausage.DataUsageUtils
-import com.android.settingslib.net.NetworkCycleDataForUid
-import com.android.settingslib.net.NetworkCycleDataForUidLoader
-import com.android.settingslib.spa.framework.compose.toState
+import com.android.settings.datausage.lib.AppDataUsageSummaryRepository
+import com.android.settings.datausage.lib.IAppDataUsageSummaryRepository
+import com.android.settings.datausage.lib.INetworkTemplates
+import com.android.settings.datausage.lib.NetworkTemplates
+import com.android.settings.datausage.lib.NetworkTemplates.getTitleResId
 import com.android.settingslib.spa.widget.preference.Preference
 import com.android.settingslib.spa.widget.preference.PreferenceModel
 import com.android.settingslib.spaprivileged.model.app.hasFlag
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.shareIn
 import kotlinx.coroutines.withContext
 
-@OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
-fun AppDataUsagePreference(app: ApplicationInfo) {
+fun AppDataUsagePreference(
+    app: ApplicationInfo,
+    networkTemplates: INetworkTemplates = NetworkTemplates,
+    repositoryFactory: (
+        context: Context,
+        networkTemplate: NetworkTemplate,
+    ) -> IAppDataUsageSummaryRepository = { context, networkTemplate ->
+        AppDataUsageSummaryRepository(context, networkTemplate)
+    }
+) {
     val context = LocalContext.current
-    val presenter = remember { AppDataUsagePresenter(context, app) }
+    val coroutineScope = rememberCoroutineScope()
+    val presenter = remember(app) {
+        AppDataUsagePresenter(context, app, coroutineScope, networkTemplates, repositoryFactory)
+    }
     if (!presenter.isAvailableFlow.collectAsStateWithLifecycle(initialValue = false).value) return
 
+    val summary by presenter.summaryFlow.collectAsStateWithLifecycle(
+        initialValue = stringResource(R.string.computing_size),
+    )
     Preference(object : PreferenceModel {
-        override val title = stringResource(R.string.data_usage_app_summary_title)
-        override val summary = presenter.summaryFlow.collectAsStateWithLifecycle(
-            initialValue = stringResource(R.string.computing_size),
+        override val title = stringResource(
+            presenter.titleResIdFlow.collectAsStateWithLifecycle(
+                initialValue = R.string.summary_placeholder,
+            ).value
         )
-        override val enabled = presenter.isEnabled().toState()
+        override val summary = { summary }
+        override val enabled = { presenter.isEnabled() }
         override val onClick = presenter::startActivity
     })
 }
@@ -64,6 +82,12 @@ fun AppDataUsagePreference(app: ApplicationInfo) {
 private class AppDataUsagePresenter(
     private val context: Context,
     private val app: ApplicationInfo,
+    coroutineScope: CoroutineScope,
+    networkTemplates: INetworkTemplates,
+    private val repositoryFactory: (
+        context: Context,
+        networkTemplate: NetworkTemplate,
+    ) -> IAppDataUsageSummaryRepository,
 ) {
     val isAvailableFlow = flow { emit(isAvailable()) }
 
@@ -73,49 +97,26 @@ private class AppDataUsagePresenter(
 
     fun isEnabled() = app.hasFlag(ApplicationInfo.FLAG_INSTALLED)
 
-    val summaryFlow = flow { emit(getSummary()) }
+    private val templateFlow = flow {
+        emit(withContext(Dispatchers.IO) {
+            networkTemplates.getDefaultTemplate(context)
+        })
+    }.shareIn(coroutineScope, SharingStarted.WhileSubscribed(), 1)
 
-    private suspend fun getSummary() = withContext(Dispatchers.IO) {
-        val appUsageData = getAppUsageData()
-        val totalBytes = appUsageData.sumOf { it.totalUsage }
-        if (totalBytes == 0L) {
+    val titleResIdFlow = templateFlow.map { it.getTitleResId() }
+    val summaryFlow = templateFlow.map { getSummary(it) }
+
+    private suspend fun getSummary(template: NetworkTemplate) = withContext(Dispatchers.IO) {
+        val appUsageData = repositoryFactory(context, template).querySummary(app.uid)
+        if (appUsageData == null || appUsageData.usage == 0L) {
             context.getString(R.string.no_data_usage)
         } else {
-            val startTime = appUsageData.minOfOrNull { it.startTime } ?: System.currentTimeMillis()
             context.getString(
                 R.string.data_summary_format,
-                Formatter.formatFileSize(context, totalBytes, Formatter.FLAG_IEC_UNITS),
-                DateUtils.formatDateTime(context, startTime, DATE_FORMAT),
+                appUsageData.formatUsage(context),
+                appUsageData.formatStartDate(context),
             )
         }
-    }
-
-    private suspend fun getAppUsageData(): List<NetworkCycleDataForUid> =
-        withContext(Dispatchers.IO) {
-            createLoader().loadInBackground() ?: emptyList()
-        }
-
-    private fun createLoader(): NetworkCycleDataForUidLoader =
-        NetworkCycleDataForUidLoader.builder(context).apply {
-            setRetrieveDetail(false)
-            setNetworkTemplate(getTemplate())
-            addUid(app.uid)
-            if (Process.isApplicationUid(app.uid)) {
-                // Also add in network usage for the app's SDK sandbox
-                addUid(Process.toSdkSandboxUid(app.uid))
-            }
-        }.build()
-
-    private fun getTemplate(): NetworkTemplate = when {
-        DataUsageUtils.hasReadyMobileRadio(context) -> {
-            NetworkTemplate.Builder(NetworkTemplate.MATCH_MOBILE)
-                .setMeteredness(NetworkStats.METERED_YES)
-                .build()
-        }
-        DataUsageUtils.hasWifiRadio(context) -> {
-            NetworkTemplate.Builder(NetworkTemplate.MATCH_WIFI).build()
-        }
-        else -> NetworkTemplate.Builder(NetworkTemplate.MATCH_ETHERNET).build()
     }
 
     fun startActivity() {
@@ -125,9 +126,5 @@ private class AppDataUsagePresenter(
             context,
             AppInfoSettingsProvider.METRICS_CATEGORY,
         )
-    }
-
-    private companion object {
-        const val DATE_FORMAT = DateUtils.FORMAT_SHOW_DATE or DateUtils.FORMAT_ABBREV_MONTH
     }
 }

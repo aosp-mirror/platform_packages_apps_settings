@@ -18,7 +18,6 @@ package com.android.settings.vpn2;
 import static android.app.AppOpsManager.OP_ACTIVATE_PLATFORM_VPN;
 import static android.app.AppOpsManager.OP_ACTIVATE_VPN;
 
-import android.annotation.NonNull;
 import android.app.AppOpsManager;
 import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
@@ -35,6 +34,7 @@ import android.os.UserManager;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
@@ -123,7 +123,7 @@ public class AppManagementFragment extends SettingsPreferenceFragment
         mPackageManager = getContext().getPackageManager();
         mDevicePolicyManager = getContext().getSystemService(DevicePolicyManager.class);
         mVpnManager = getContext().getSystemService(VpnManager.class);
-        mFeatureProvider = FeatureFactory.getFactory(getContext()).getAdvancedVpnFeatureProvider();
+        mFeatureProvider = FeatureFactory.getFeatureFactory().getAdvancedVpnFeatureProvider();
 
         mPreferenceVersion = findPreference(KEY_VERSION);
         mPreferenceAlwaysOn = (RestrictedSwitchPreference) findPreference(KEY_ALWAYS_ON_VPN);

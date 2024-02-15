@@ -22,13 +22,13 @@ import static junit.framework.TestCase.fail;
 import android.app.Instrumentation;
 import android.os.Bundle;
 import android.util.Log;
-import android.support.test.uiautomator.By;
-import android.support.test.uiautomator.UiDevice;
-import android.support.test.uiautomator.UiSelector;
-import android.support.test.uiautomator.Until;
 
 import androidx.test.InstrumentationRegistry;
 import androidx.test.runner.AndroidJUnit4;
+import androidx.test.uiautomator.By;
+import androidx.test.uiautomator.UiDevice;
+import androidx.test.uiautomator.UiSelector;
+import androidx.test.uiautomator.Until;
 
 import org.junit.After;
 import org.junit.Before;

@@ -17,6 +17,7 @@
 package com.android.settings.wifi;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+import static android.os.UserManager.DISALLOW_ADD_WIFI_CONFIG;
 import static android.os.UserManager.DISALLOW_CONFIG_WIFI;
 
 import android.app.KeyguardManager;
@@ -122,7 +123,7 @@ public class WifiDialogActivity extends ObservableActivity implements WifiDialog
         }
 
         super.onCreate(savedInstanceState);
-        if (!isConfigWifiAllowed()) {
+        if (!isConfigWifiAllowed() || !isAddWifiConfigAllowed()) {
             finish();
             return;
         }
@@ -140,7 +141,7 @@ public class WifiDialogActivity extends ObservableActivity implements WifiDialog
                     return SystemClock.elapsedRealtime();
                 }
             };
-            mNetworkDetailsTracker = FeatureFactory.getFactory(this)
+            mNetworkDetailsTracker = FeatureFactory.getFeatureFactory()
                     .getWifiTrackerLibProvider()
                     .createNetworkDetailsTracker(
                             getLifecycle(),
@@ -170,7 +171,7 @@ public class WifiDialogActivity extends ObservableActivity implements WifiDialog
             createDialogWithSuwTheme();
         } else {
             if (mIsWifiTrackerLib) {
-                mDialog2 = WifiDialog2.createModal(this, this,
+                mDialog2 = new WifiDialog2(this, this,
                         mNetworkDetailsTracker.getWifiEntry(), WifiConfigUiBase2.MODE_CONNECT);
             } else {
                 mDialog = WifiDialog.createModal(
@@ -201,7 +202,7 @@ public class WifiDialogActivity extends ObservableActivity implements WifiDialog
                 ? R.style.SuwAlertDialogThemeCompat_DayNight :
                 R.style.SuwAlertDialogThemeCompat_Light;
         if (mIsWifiTrackerLib) {
-            mDialog2 = WifiDialog2.createModal(this, this,
+            mDialog2 = new WifiDialog2(this, this,
                     mNetworkDetailsTracker.getWifiEntry(),
                     WifiConfigUiBase2.MODE_CONNECT, targetStyle);
         } else {
@@ -391,6 +392,16 @@ public class WifiDialogActivity extends ObservableActivity implements WifiDialog
                     "The user is not allowed to configure Wi-Fi.");
         }
         return isConfigWifiAllowed;
+    }
+
+    @VisibleForTesting
+    boolean isAddWifiConfigAllowed() {
+        UserManager userManager = getSystemService(UserManager.class);
+        if (userManager != null && userManager.hasUserRestriction(DISALLOW_ADD_WIFI_CONFIG)) {
+            Log.e(TAG, "The user is not allowed to add Wi-Fi configuration.");
+            return false;
+        }
+        return true;
     }
 
     private boolean hasWifiManager() {

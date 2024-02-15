@@ -30,4 +30,7 @@
     <PreferenceCategory
         android:key="device_stylus"/>
 
+    <PreferenceCategory
+        android:key="stylus_usb_firmware"
+        settings:controller="com.android.settings.connecteddevice.stylus.StylusUsbFirmwareController"/>
 </PreferenceScreen>

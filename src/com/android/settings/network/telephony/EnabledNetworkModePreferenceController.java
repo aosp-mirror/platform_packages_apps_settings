@@ -29,12 +29,16 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.ListPreference;
+import androidx.preference.ListPreferenceDialogFragmentCompat;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.internal.telephony.flags.Flags;
 import com.android.settings.R;
 import com.android.settings.network.AllowedNetworkTypesListener;
 import com.android.settings.network.CarrierConfigCache;
@@ -67,6 +71,7 @@ public class EnabledNetworkModePreferenceController extends
     private SubscriptionsChangeListener mSubscriptionsListener;
     private int mCallState = TelephonyManager.CALL_STATE_IDLE;
     private PhoneCallStateTelephonyCallback mTelephonyCallback;
+    private FragmentManager mFragmentManager;
 
     public EnabledNetworkModePreferenceController(Context context, String key) {
         super(context, key);
@@ -151,7 +156,16 @@ public class EnabledNetworkModePreferenceController extends
         listPreference.setEntryValues(mBuilder.getEntryValues());
         listPreference.setValue(Integer.toString(mBuilder.getSelectedEntryValue()));
         listPreference.setSummary(mBuilder.getSummary());
-        listPreference.setEnabled(isCallStateIdle());
+        boolean listPreferenceEnabled = isCallStateIdle();
+        listPreference.setEnabled(listPreferenceEnabled);
+        if (!listPreferenceEnabled) {
+            // If dialog is already opened when ListPreference disabled, dismiss them.
+            for (Fragment fragment : mFragmentManager.getFragments()) {
+                if (fragment instanceof ListPreferenceDialogFragmentCompat) {
+                    ((ListPreferenceDialogFragmentCompat) fragment).dismiss();
+                }
+            }
+        }
     }
 
     @Override
@@ -169,8 +183,9 @@ public class EnabledNetworkModePreferenceController extends
         return false;
     }
 
-    void init(int subId) {
+    void init(int subId, FragmentManager fragmentManager) {
         mSubId = subId;
+        mFragmentManager = fragmentManager;
         mTelephonyManager = mContext.getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(mSubId);
         mBuilder = new PreferenceEntriesBuilder(mContext, mSubId);
@@ -227,6 +242,7 @@ public class EnabledNetworkModePreferenceController extends
         public void updateConfig() {
             mTelephonyManager = mTelephonyManager.createForSubscriptionId(mSubId);
             final PersistableBundle carrierConfig = mCarrierConfigCache.getConfigForSubId(mSubId);
+            final boolean flagHidePrefer3gItem = Flags.hidePrefer3gItem();
             mAllowed5gNetworkType = checkSupportedRadioBitmask(
                     mTelephonyManager.getAllowedNetworkTypesForReason(
                             TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_CARRIER),
@@ -242,22 +258,28 @@ public class EnabledNetworkModePreferenceController extends
                         CarrierConfigManager.KEY_SHOW_4G_FOR_LTE_DATA_ICON_BOOL);
                 mDisplay2gOptions = carrierConfig.getBoolean(
                         CarrierConfigManager.KEY_PREFER_2G_BOOL);
-                // TODO: Using the carrier config.
-                mDisplay3gOptions = getResourcesForSubId().getBoolean(
-                        R.bool.config_display_network_mode_3g_option);
 
-                int[] carriersWithout3gMenu = getResourcesForSubId().getIntArray(
-                        R.array.network_mode_3g_deprecated_carrier_id);
-                if ((carriersWithout3gMenu != null) && (carriersWithout3gMenu.length > 0)) {
-                    SubscriptionManager sm = mContext.getSystemService(SubscriptionManager.class);
-                    SubscriptionInfo subInfo = sm.getActiveSubscriptionInfo(mSubId);
-                    if (subInfo != null) {
-                        int carrierId = subInfo.getCarrierId();
+                if (flagHidePrefer3gItem) {
+                    mDisplay3gOptions = carrierConfig.getBoolean(
+                        CarrierConfigManager.KEY_PREFER_3G_VISIBILITY_BOOL);
+                } else {
+                    mDisplay3gOptions = getResourcesForSubId().getBoolean(
+                            R.bool.config_display_network_mode_3g_option);
 
-                        for (int idx = 0; idx < carriersWithout3gMenu.length; idx++) {
-                            if (carrierId == carriersWithout3gMenu[idx]) {
-                                mDisplay3gOptions = false;
-                                break;
+                    int[] carriersWithout3gMenu = getResourcesForSubId().getIntArray(
+                            R.array.network_mode_3g_deprecated_carrier_id);
+                    if ((carriersWithout3gMenu != null) && (carriersWithout3gMenu.length > 0)) {
+                        SubscriptionManager sm = mContext.getSystemService(
+                                SubscriptionManager.class);
+                        SubscriptionInfo subInfo = sm.getActiveSubscriptionInfo(mSubId);
+                        if (subInfo != null) {
+                            int carrierId = subInfo.getCarrierId();
+
+                            for (int idx = 0; idx < carriersWithout3gMenu.length; idx++) {
+                                if (carrierId == carriersWithout3gMenu[idx]) {
+                                    mDisplay3gOptions = false;
+                                    break;
+                                }
                             }
                         }
                     }
@@ -902,7 +924,16 @@ public class EnabledNetworkModePreferenceController extends
 
             // assign current call state so that it helps to show correct preference state even
             // before first onCallStateChanged() by initial registration.
-            mCallState = mTelephonyManager.getCallState(subId);
+            if (Flags.enforceTelephonyFeatureMappingForPublicApis()) {
+                try {
+                    mCallState = mTelephonyManager.getCallState(subId);
+                } catch (UnsupportedOperationException e) {
+                    // Device doesn't support FEATURE_TELEPHONY_CALLING
+                    mCallState = TelephonyManager.CALL_STATE_IDLE;
+                }
+            } else {
+                mCallState = mTelephonyManager.getCallState(subId);
+            }
             mTelephonyManager.registerTelephonyCallback(
                     mContext.getMainExecutor(), mTelephonyCallback);
         }

@@ -33,12 +33,12 @@ import com.android.settings.R;
 public class AppCheckBoxPreference extends CheckBoxPreference {
     public AppCheckBoxPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
-        setLayoutResource(R.layout.preference_app);
+        setLayoutResource(com.android.settingslib.widget.preference.app.R.layout.preference_app);
     }
 
     public AppCheckBoxPreference(Context context) {
         super(context);
-        setLayoutResource(R.layout.preference_app);
+        setLayoutResource(com.android.settingslib.widget.preference.app.R.layout.preference_app);
     }
 
     @Override

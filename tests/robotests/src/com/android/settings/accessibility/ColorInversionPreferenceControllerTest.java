@@ -16,10 +16,14 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.internal.accessibility.AccessibilityShortcutController.COLOR_INVERSION_COMPONENT_NAME;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 import android.provider.Settings;
+
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
 
@@ -27,7 +31,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -39,29 +42,60 @@ public class ColorInversionPreferenceControllerTest {
             Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED;
     private Context mContext;
     private ColorInversionPreferenceController mController;
+    private String mColorInversionSummary;
 
     @Before
     public void setUp() {
-        mContext = RuntimeEnvironment.application;
+        mContext = ApplicationProvider.getApplicationContext();
         mController = new ColorInversionPreferenceController(mContext, PREF_KEY);
+        mColorInversionSummary = mContext.getString(R.string.color_inversion_feature_summary);
     }
 
     @Test
-    public void getSummary_enabledColorInversion_shouldReturnOnSummary() {
-        Settings.Secure.putInt(mContext.getContentResolver(),
-                DISPLAY_INVERSION_ENABLED, State.ON);
+    public void getSummary_enabledColorInversionShortcutOff_shouldReturnOnSummary() {
+        setColorInversionEnabled(true);
+        setColorInversionShortcutEnabled(false);
 
-        assertThat(mController.getSummary().toString().contains(
-                mContext.getText(R.string.accessibility_feature_state_on))).isTrue();
+        assertThat(mController.getSummary().toString()).isEqualTo(
+                mContext.getString(R.string.color_inversion_state_on));
     }
 
     @Test
-    public void getSummary_disabledColorInversion_shouldReturnOffSummary() {
-        Settings.Secure.putInt(mContext.getContentResolver(),
-                DISPLAY_INVERSION_ENABLED, State.OFF);
+    public void getSummary_enabledColorInversionShortcutOn_shouldReturnOnSummary() {
+        setColorInversionEnabled(true);
+        setColorInversionShortcutEnabled(true);
 
-        assertThat(mController.getSummary().toString().contains(
-                mContext.getText(R.string.accessibility_feature_state_off))).isTrue();
+        assertThat(mController.getSummary().toString()).isEqualTo(
+                mContext.getString(R.string.color_inversion_state_on));
+    }
+
+    @Test
+    public void getSummary_disabledColorInversionShortcutOff_shouldReturnOffSummary() {
+        setColorInversionEnabled(false);
+        setColorInversionShortcutEnabled(false);
+
+        assertThat(mController.getSummary().toString()).isEqualTo(
+                mContext.getString(R.string.color_inversion_state_off));
+    }
+
+    @Test
+    public void getSummary_disabledColorInversionShortcutOn_shouldReturnOffSummary() {
+        setColorInversionEnabled(false);
+        setColorInversionShortcutEnabled(true);
+
+        assertThat(mController.getSummary().toString()).isEqualTo(
+                mContext.getString(R.string.color_inversion_state_off));
+    }
+
+    private void setColorInversionShortcutEnabled(boolean enabled) {
+        Settings.Secure.putString(mContext.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS,
+                enabled ? COLOR_INVERSION_COMPONENT_NAME.flattenToString() : "");
+    }
+
+    private void setColorInversionEnabled(boolean enabled) {
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                DISPLAY_INVERSION_ENABLED, enabled ? State.ON : State.OFF);
     }
 
     @Retention(RetentionPolicy.SOURCE)

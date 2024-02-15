@@ -24,6 +24,8 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
+import com.android.settings.fuelgauge.BatteryUsageHistoricalLogEntry.Action;
+import com.android.settings.fuelgauge.batteryusage.bugreport.BatteryUsageLogUtils;
 import com.android.settings.overlay.FeatureFactory;
 
 import java.time.Clock;
@@ -39,11 +41,9 @@ public final class PeriodicJobManager {
     private final Context mContext;
     private final AlarmManager mAlarmManager;
 
-    @VisibleForTesting
-    static final int DATA_FETCH_INTERVAL_MINUTE = 60;
+    @VisibleForTesting static final int DATA_FETCH_INTERVAL_MINUTE = 60;
 
-    @VisibleForTesting
-    static long sBroadcastDelayFromBoot = Duration.ofMinutes(40).toMillis();
+    @VisibleForTesting static long sBroadcastDelayFromBoot = Duration.ofMinutes(40).toMillis();
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     void reset() {
@@ -66,6 +66,10 @@ public final class PeriodicJobManager {
     /** Schedules the next alarm job if it is available. */
     public void refreshJob(final boolean fromBoot) {
         if (mAlarmManager == null) {
+            BatteryUsageLogUtils.writeLog(
+                    mContext,
+                    Action.SCHEDULE_JOB,
+                    "cannot schedule next alarm job due to AlarmManager is null");
             Log.e(TAG, "cannot schedule next alarm job");
             return;
         }
@@ -76,8 +80,13 @@ public final class PeriodicJobManager {
         final long triggerAtMillis = getTriggerAtMillis(mContext, Clock.systemUTC(), fromBoot);
         mAlarmManager.setExactAndAllowWhileIdle(
                 AlarmManager.RTC_WAKEUP, triggerAtMillis, pendingIntent);
-        Log.d(TAG, "schedule next alarm job at "
-                + ConvertUtils.utcToLocalTimeForLogging(triggerAtMillis));
+
+        final String utcToLocalTime = ConvertUtils.utcToLocalTimeForLogging(triggerAtMillis);
+        BatteryUsageLogUtils.writeLog(
+                mContext,
+                Action.SCHEDULE_JOB,
+                String.format("triggerTime=%s, fromBoot=%b", utcToLocalTime, fromBoot));
+        Log.d(TAG, "schedule next alarm job at " + utcToLocalTime);
     }
 
     void cancelJob(PendingIntent pendingIntent) {
@@ -92,8 +101,8 @@ public final class PeriodicJobManager {
     static long getTriggerAtMillis(Context context, Clock clock, final boolean fromBoot) {
         long currentTimeMillis = clock.millis();
         final boolean delayHourlyJobWhenBooting =
-                FeatureFactory.getFactory(context)
-                        .getPowerUsageFeatureProvider(context)
+                FeatureFactory.getFeatureFactory()
+                        .getPowerUsageFeatureProvider()
                         .delayHourlyJobWhenBooting();
         // Rounds to the previous nearest time slot and shifts to the next one.
         long timeSlotUnit = Duration.ofMinutes(DATA_FETCH_INTERVAL_MINUTE).toMillis();

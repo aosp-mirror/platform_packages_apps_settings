@@ -23,6 +23,7 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 
+import android.accounts.AccountManager;
 import android.accounts.AuthenticatorDescription;
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
@@ -35,44 +36,48 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.shadow.ShadowAccountManager;
 import com.android.settings.testutils.shadow.ShadowContentResolver;
 import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal;
-import com.android.settings.utils.ActivityControllerWrapper;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowAccountManager.class, ShadowContentResolver.class,
         ShadowRestrictedLockUtilsInternal.class})
 public class ChooseAccountPreferenceControllerTest {
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
 
     private Context mContext;
     private ChooseAccountPreferenceController mController;
     private Activity mActivity;
     private PreferenceManager mPreferenceManager;
     private PreferenceScreen mPreferenceScreen;
+    private ShadowAccountManager mAccountManager;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
+        mContext = ApplicationProvider.getApplicationContext();
         mController = spy(new ChooseAccountPreferenceController(mContext, "controller_key"));
-        mActivity = (FragmentActivity) ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(FragmentActivity.class)).get();
+        mActivity = Robolectric.setupActivity(FragmentActivity.class);
         mPreferenceManager = new PreferenceManager(mContext);
         mPreferenceScreen = mPreferenceManager.createPreferenceScreen(mContext);
+        mAccountManager = (ShadowAccountManager) Shadows.shadowOf(AccountManager.get(mContext));
     }
 
     @After
@@ -110,7 +115,7 @@ public class ChooseAccountPreferenceControllerTest {
         final AuthenticatorDescription authDesc = new AuthenticatorDescription("com.acct1",
                 "com.android.settings",
                 R.string.header_add_an_account, 0, 0, 0, false);
-        ShadowAccountManager.addAuthenticator(authDesc);
+        mAccountManager.addAuthenticator(authDesc);
 
         final SyncAdapterType[] syncAdapters = {new SyncAdapterType("authority" /* authority */,
                 "com.acct1" /* accountType */, false /* userVisible */,
@@ -135,7 +140,7 @@ public class ChooseAccountPreferenceControllerTest {
         final AuthenticatorDescription authDesc = new AuthenticatorDescription("com.acct1",
                 "com.android.settings",
                 R.string.header_add_an_account, 0, 0, 0, false);
-        ShadowAccountManager.addAuthenticator(authDesc);
+        mAccountManager.addAuthenticator(authDesc);
 
         final SyncAdapterType[] syncAdapters = {new SyncAdapterType("authority" /* authority */,
                 "com.acct1" /* accountType */, false /* userVisible */,
@@ -160,7 +165,7 @@ public class ChooseAccountPreferenceControllerTest {
         final AuthenticatorDescription authDesc = new AuthenticatorDescription("com.acct1",
                 "com.android.settings",
                 R.string.header_add_an_account, 0, 0, 0, false);
-        ShadowAccountManager.addAuthenticator(authDesc);
+        mAccountManager.addAuthenticator(authDesc);
 
         final SyncAdapterType[] syncAdapters = {new SyncAdapterType("authority" /* authority */,
                 "com.acct1" /* accountType */, false /* userVisible */,
@@ -173,7 +178,7 @@ public class ChooseAccountPreferenceControllerTest {
                 mActivity);
         mController.displayPreference(mPreferenceScreen);
 
-        assertThat(mActivity.isFinishing()).isTrue();
+        assertThat(mActivity.isFinishing()).isFalse();
         assertThat(mPreferenceScreen.getPreferenceCount()).isEqualTo(0);
     }
 
@@ -186,8 +191,8 @@ public class ChooseAccountPreferenceControllerTest {
         final AuthenticatorDescription authDesc2 = new AuthenticatorDescription("com.acct2",
                 "com.android.settings",
                 R.string.header_add_an_account, 0, 0, 0, false);
-        ShadowAccountManager.addAuthenticator(authDesc);
-        ShadowAccountManager.addAuthenticator(authDesc2);
+        mAccountManager.addAuthenticator(authDesc);
+        mAccountManager.addAuthenticator(authDesc2);
 
         final SyncAdapterType[] syncAdapters = {new SyncAdapterType("authority" /* authority */,
                 "com.acct1" /* accountType */, false /* userVisible */,

@@ -25,6 +25,9 @@ import static org.mockito.Mockito.when;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.platform.test.annotations.RequiresFlagsDisabled;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 
 import androidx.preference.ListPreference;
 import androidx.preference.PreferenceScreen;
@@ -33,6 +36,7 @@ import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -43,9 +47,13 @@ import org.robolectric.RuntimeEnvironment;
 import java.util.ArrayList;
 
 @RunWith(RobolectricTestRunner.class)
+@RequiresFlagsDisabled(android.permission.flags.Flags.FLAG_WALLET_ROLE_ENABLED)
 public class NfcForegroundPreferenceControllerTest {
 
     private static final String PREF_KEY = PaymentSettingsTest.FOREGROUND_KEY;
+
+    @Rule
+    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
 
     @Mock
     private PaymentBackend mPaymentBackend;

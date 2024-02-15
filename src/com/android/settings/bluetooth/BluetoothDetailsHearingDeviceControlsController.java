@@ -18,7 +18,6 @@ package com.android.settings.bluetooth;
 
 import android.content.Context;
 import android.text.TextUtils;
-import android.util.FeatureFlagUtils;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
@@ -39,7 +38,8 @@ import com.google.common.annotations.VisibleForTesting;
 public class BluetoothDetailsHearingDeviceControlsController extends BluetoothDetailsController
         implements Preference.OnPreferenceClickListener {
 
-    private static final String KEY_DEVICE_CONTROLS_GENERAL_GROUP = "device_controls_general";
+    @VisibleForTesting
+    static final String KEY_DEVICE_CONTROLS_GENERAL_GROUP = "device_controls_general";
     @VisibleForTesting
     static final String KEY_HEARING_DEVICE_CONTROLS = "hearing_device_controls";
 
@@ -51,8 +51,7 @@ public class BluetoothDetailsHearingDeviceControlsController extends BluetoothDe
 
     @Override
     public boolean isAvailable() {
-        return mCachedDevice.isHearingAidDevice() && FeatureFlagUtils.isEnabled(mContext,
-                FeatureFlagUtils.SETTINGS_ACCESSIBILITY_HEARING_AID_PAGE);
+        return mCachedDevice.isHearingAidDevice();
     }
 
     @Override

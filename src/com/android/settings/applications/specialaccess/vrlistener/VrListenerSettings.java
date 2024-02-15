@@ -69,7 +69,7 @@ public class VrListenerSettings extends ManagedServiceSettings {
         int logCategory = enable ? SettingsEnums.APP_SPECIAL_PERMISSION_VRHELPER_ALLOW
                 : SettingsEnums.APP_SPECIAL_PERMISSION_VRHELPER_DENY;
         final MetricsFeatureProvider metricsFeatureProvider =
-                FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider();
+                FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
         metricsFeatureProvider.action(
                 metricsFeatureProvider.getAttribution(getActivity()),
                 logCategory,

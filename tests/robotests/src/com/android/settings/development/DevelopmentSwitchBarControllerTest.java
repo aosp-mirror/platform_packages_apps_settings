@@ -24,6 +24,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import androidx.lifecycle.LifecycleOwner;
 
@@ -31,7 +32,6 @@ import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 import org.junit.After;
 import org.junit.Before;
@@ -78,7 +78,7 @@ public class DevelopmentSwitchBarControllerTest {
         ShadowUtils.setIsUserAMonkey(true);
         new DevelopmentSwitchBarController(mSettings, mSwitchBar,
                 true /* isAvailable */, mLifecycle);
-        final List<OnMainSwitchChangeListener> listeners =
+        final List<OnCheckedChangeListener> listeners =
                 ReflectionHelpers.getField(mSwitchBar, "mSwitchChangeListeners");
 
         mLifecycle.handleLifecycleEvent(ON_START);
@@ -93,7 +93,7 @@ public class DevelopmentSwitchBarControllerTest {
         ShadowUtils.setIsUserAMonkey(false);
         new DevelopmentSwitchBarController(mSettings, mSwitchBar,
                 true /* isAvailable */, mLifecycle);
-        final List<OnMainSwitchChangeListener> listeners =
+        final List<OnCheckedChangeListener> listeners =
                 ReflectionHelpers.getField(mSwitchBar, "mSwitchChangeListeners");
 
         mLifecycle.handleLifecycleEvent(ON_START);
@@ -109,7 +109,7 @@ public class DevelopmentSwitchBarControllerTest {
         ShadowUtils.setIsUserAMonkey(false);
         new DevelopmentSwitchBarController(mSettings, mSwitchBar,
                 true /* isAvailable */, mLifecycle);
-        final List<OnMainSwitchChangeListener> listeners =
+        final List<OnCheckedChangeListener> listeners =
                 ReflectionHelpers.getField(mSwitchBar, "mSwitchChangeListeners");
 
         mLifecycle.handleLifecycleEvent(ON_START);

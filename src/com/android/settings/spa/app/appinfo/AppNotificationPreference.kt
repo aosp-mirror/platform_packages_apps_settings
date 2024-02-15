@@ -19,10 +19,10 @@ package com.android.settings.spa.app.appinfo
 import android.content.Context
 import android.content.pm.ApplicationInfo
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settings.R
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment
@@ -30,7 +30,6 @@ import com.android.settings.notification.app.AppNotificationSettings
 import com.android.settings.spa.notification.AppNotificationRepository
 import com.android.settings.spa.notification.IAppNotificationRepository
 import com.android.settingslib.spa.framework.compose.rememberContext
-import com.android.settingslib.spa.framework.compose.stateOf
 import com.android.settingslib.spa.widget.preference.Preference
 import com.android.settingslib.spa.widget.preference.PreferenceModel
 import com.android.settingslib.spaprivileged.model.app.installed
@@ -38,24 +37,23 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
-@OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun AppNotificationPreference(
     app: ApplicationInfo,
     repository: IAppNotificationRepository = rememberContext(::AppNotificationRepository),
 ) {
     val context = LocalContext.current
-    val summaryFlow = remember(app) {
+    val summary by remember(app) {
         flow {
             emit(repository.getNotificationSummary(app))
-        }.flowOn(Dispatchers.IO)
-    }
+        }.flowOn(Dispatchers.Default)
+    }.collectAsStateWithLifecycle(
+        initialValue = stringResource(R.string.summary_placeholder)
+    )
     Preference(object : PreferenceModel {
         override val title = stringResource(R.string.notifications_label)
-        override val summary = summaryFlow.collectAsStateWithLifecycle(
-            initialValue = stringResource(R.string.summary_placeholder)
-        )
-        override val enabled = stateOf(app.installed)
+        override val summary = { summary }
+        override val enabled = { app.installed }
         override val onClick = { navigateToAppNotificationSettings(context, app) }
     })
 }

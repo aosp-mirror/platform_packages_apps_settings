@@ -21,10 +21,11 @@ import android.bluetooth.BluetoothManager;
 import android.bluetooth.BluetoothStatusCodes;
 import android.content.Context;
 import android.os.SystemProperties;
+import android.sysprop.BluetoothProperties;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
@@ -65,6 +66,12 @@ public class BluetoothLeAudioPreferenceController
     }
 
     @Override
+    public boolean isAvailable() {
+        return BluetoothProperties.isProfileBapUnicastClientEnabled().orElse(false)
+                && !BluetoothProperties.isProfileBapBroadcastSourceEnabled().orElse(false);
+    }
+
+    @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         BluetoothRebootDialog.show(mFragment);
         mChanged = true;
@@ -84,7 +91,7 @@ public class BluetoothLeAudioPreferenceController
         final boolean leAudioEnabled =
                 (isLeAudioSupportedStatus == BluetoothStatusCodes.FEATURE_SUPPORTED);
 
-        ((SwitchPreference) mPreference).setChecked(!leAudioEnabled);
+        ((TwoStatePreference) mPreference).setChecked(!leAudioEnabled);
 
         // Disable option if Bluetooth is disabled or if switch is not supported
         if (isLeAudioSupportedStatus == BluetoothStatusCodes.ERROR_BLUETOOTH_NOT_ENABLED

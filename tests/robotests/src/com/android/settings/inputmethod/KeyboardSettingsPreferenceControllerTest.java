@@ -44,13 +44,20 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /** Tests for {@link KeyboardSettingsPreferenceController} */
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowInputManager.class,
+})
 public class KeyboardSettingsPreferenceControllerTest {
+
+    private static final int VENDOR_ID = 123;
+    private static final int PRODUCT_ID = 456;
 
     @Rule
     public MockitoRule mMockitoRule = MockitoJUnit.rule();
@@ -84,7 +91,9 @@ public class KeyboardSettingsPreferenceControllerTest {
                         "TEST_DEVICE",
                         mInputDeviceIdentifier,
                         "TEST_DEVICE_LABEL",
-                        address);
+                        address,
+                        VENDOR_ID,
+                        PRODUCT_ID);
         List<HardKeyboardDeviceInfo> keyboards = new ArrayList<>();
         keyboards.add(deviceInfo);
         when(mController.getHardKeyboardList()).thenReturn(keyboards);

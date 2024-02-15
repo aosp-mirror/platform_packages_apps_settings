@@ -23,16 +23,16 @@ import android.content.pm.PackageManager
 import android.content.pm.PackageManager.ResolveInfoFlags
 import android.net.Uri
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settings.R
 import com.android.settings.applications.AppInfoBase
 import com.android.settings.applications.AppLocaleUtil
 import com.android.settings.applications.appinfo.AppLocaleDetails
 import com.android.settings.localepicker.AppLocalePickerActivity
-import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settingslib.spa.widget.preference.Preference
 import com.android.settingslib.spa.widget.preference.PreferenceModel
 import com.android.settingslib.spaprivileged.model.app.userHandle
@@ -41,18 +41,18 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext
 
-@OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun AppLocalePreference(app: ApplicationInfo) {
     val context = LocalContext.current
     val presenter = remember { AppLocalePresenter(context, app) }
     if (!presenter.isAvailableFlow.collectAsStateWithLifecycle(initialValue = false).value) return
 
+    val summary by presenter.summaryFlow.collectAsStateWithLifecycle(
+        initialValue = stringResource(R.string.summary_placeholder),
+    )
     Preference(object : PreferenceModel {
         override val title = stringResource(R.string.app_locale_preference_title)
-        override val summary = presenter.summaryFlow.collectAsStateWithLifecycle(
-            initialValue = stringResource(R.string.summary_placeholder),
-        )
+        override val summary = { summary }
         override val onClick = presenter::startActivity
     })
 }

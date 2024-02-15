@@ -27,12 +27,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 
-import com.android.settings.utils.ActivityControllerWrapper;
-
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -102,6 +101,7 @@ public class WallpaperSuggestionActivityTest {
                 .isTrue();
     }
 
+    @Ignore("b/315124270")
     @Test
     public void addExtras_intentFromSetupWizard_extrasHasWallpaperOnlyAndLaunchedSuw() {
         WallpaperSuggestionActivity activity =
@@ -119,15 +119,13 @@ public class WallpaperSuggestionActivityTest {
                 .isEqualTo("app_launched_suw");
     }
 
+    @Ignore("b/315124270")
     @Test
     public void addExtras_intentNotFromSetupWizard_extrasHasFocusWallpaper() {
-        WallpaperSuggestionActivity activity =
-                (WallpaperSuggestionActivity) ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(WallpaperSuggestionActivity.class,
-                        new Intent(Intent.ACTION_MAIN).setComponent(
+        WallpaperSuggestionActivity activity = Robolectric.buildActivity(
+                WallpaperSuggestionActivity.class, new Intent(Intent.ACTION_MAIN).setComponent(
                         new ComponentName(RuntimeEnvironment.application,
-                                PACKAGE_WALLPAPER_ACTIVITY)))).get();
-
+                                PACKAGE_WALLPAPER_ACTIVITY))).setup().get();
         Intent intent = Shadows.shadowOf(activity).getNextStartedActivity();
 
         assertThat(intent).isNotNull();

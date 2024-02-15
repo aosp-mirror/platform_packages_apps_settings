@@ -42,6 +42,7 @@ import com.android.settings.testutils.ResolveInfoBuilder;
 import com.android.settings.testutils.shadow.ShadowDeviceStateRotationLockSettingsManager;
 import com.android.settings.testutils.shadow.ShadowRotationPolicy;
 import com.android.settings.testutils.shadow.ShadowSensorPrivacyManager;
+import com.android.settings.testutils.shadow.ShadowSystemSettings;
 import com.android.settingslib.devicestate.DeviceStateRotationLockSettingsManager;
 
 import org.junit.Before;
@@ -56,7 +57,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = ShadowSensorPrivacyManager.class)
+@Config(shadows = {ShadowSensorPrivacyManager.class, ShadowSystemSettings.class})
 public class SmartAutoRotateControllerTest {
 
     private static final String PACKAGE_NAME = "package_name";

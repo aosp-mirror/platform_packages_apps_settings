@@ -53,7 +53,6 @@ public class GestureSettings extends DashboardFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        use(AssistGestureSettingsPreferenceController.class).setAssistOnly(false);
         use(PickupGesturePreferenceController.class).setConfig(getConfig(context));
         use(DoubleTapScreenPreferenceController.class).setConfig(getConfig(context));
     }

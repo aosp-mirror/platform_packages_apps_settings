@@ -53,9 +53,13 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class HighlightablePreferenceGroupAdapterTest {
 
     private static final String TEST_KEY = "key";
@@ -83,7 +87,7 @@ public class HighlightablePreferenceGroupAdapterTest {
                 false /* highlighted*/));
         when(mAdapter.getItem(anyInt())).thenReturn(mPreference);
         mViewHolder = PreferenceViewHolder.createInstanceForTests(
-                View.inflate(mContext, R.layout.preference, null));
+                View.inflate(mContext, androidx.preference.R.layout.preference, null));
     }
 
     @Test
@@ -172,6 +176,20 @@ public class HighlightablePreferenceGroupAdapterTest {
         mAdapter.updateBackground(mViewHolder, 0);
 
         assertThat(mViewHolder.itemView.getTag(R.id.preference_highlighted)).isNull();
+    }
+
+    /**
+     * When background is being updated, we also request the a11y focus on the preference
+     */
+    @Test
+    public void updateBackground_shouldRequestAccessibilityFocus() {
+        View viewItem = mock(View.class);
+        mViewHolder = PreferenceViewHolder.createInstanceForTests(viewItem);
+        ReflectionHelpers.setField(mAdapter, "mHighlightPosition", 10);
+
+        mAdapter.updateBackground(mViewHolder, 10);
+
+        verify(viewItem).requestAccessibilityFocus();
     }
 
     @Test

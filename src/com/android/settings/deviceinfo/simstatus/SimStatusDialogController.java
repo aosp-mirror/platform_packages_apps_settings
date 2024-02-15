@@ -18,7 +18,6 @@ package com.android.settings.deviceinfo.simstatus;
 
 import static androidx.lifecycle.Lifecycle.Event;
 
-import android.annotation.Nullable;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -54,6 +53,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
@@ -630,24 +630,24 @@ public class SimStatusDialogController implements LifecycleObserver {
         @Override
         public void onRegistered(@AccessNetworkConstants.TransportType int imsTransportType) {
             mDialog.setText(IMS_REGISTRATION_STATE_VALUE_ID, mRes.getString(
-                    R.string.ims_reg_status_registered));
+                    com.android.settingslib.R.string.ims_reg_status_registered));
         }
         @Override
         public void onRegistering(@AccessNetworkConstants.TransportType int imsTransportType) {
             mDialog.setText(IMS_REGISTRATION_STATE_VALUE_ID, mRes.getString(
-                    R.string.ims_reg_status_not_registered));
+                    com.android.settingslib.R.string.ims_reg_status_not_registered));
         }
         @Override
         public void onUnregistered(@Nullable ImsReasonInfo info) {
             mDialog.setText(IMS_REGISTRATION_STATE_VALUE_ID, mRes.getString(
-                    R.string.ims_reg_status_not_registered));
+                    com.android.settingslib.R.string.ims_reg_status_not_registered));
         }
         @Override
         public void onTechnologyChangeFailed(
                 @AccessNetworkConstants.TransportType int imsTransportType,
                 @Nullable ImsReasonInfo info) {
             mDialog.setText(IMS_REGISTRATION_STATE_VALUE_ID, mRes.getString(
-                    R.string.ims_reg_status_not_registered));
+                    com.android.settingslib.R.string.ims_reg_status_not_registered));
         }
     };
 

@@ -14,13 +14,14 @@
 
 package com.android.settings.fuelgauge;
 
-import android.annotation.Nullable;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.SparseIntArray;
 import android.view.View;
+
+import androidx.annotation.Nullable;
 
 public class BatteryActiveView extends View {
 
@@ -63,13 +64,15 @@ public class BatteryActiveView extends View {
             return;
         }
         mPaint.setColor(color);
-        canvas.drawRect(start / period * getWidth(), 0, end / period * getWidth(), getHeight(),
-                mPaint);
+        canvas.drawRect(
+                start / period * getWidth(), 0, end / period * getWidth(), getHeight(), mPaint);
     }
 
     public interface BatteryActiveProvider {
         boolean hasData();
+
         long getPeriod();
+
         SparseIntArray getColorArray();
     }
 }

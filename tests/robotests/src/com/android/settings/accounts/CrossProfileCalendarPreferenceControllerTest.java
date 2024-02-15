@@ -26,34 +26,31 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.robolectric.RuntimeEnvironment.application;
 
-import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.os.UserHandle;
 import android.provider.Settings;
-import android.util.ArraySet;
 
+import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settingslib.RestrictedSwitchPreference;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.Shadows;
-import org.robolectric.shadows.ShadowDevicePolicyManager;
+import org.robolectric.annotation.Config;
 
-import java.util.Arrays;
 import java.util.Collections;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        ShadowDevicePolicyManager.class,
+})
 public class CrossProfileCalendarPreferenceControllerTest {
 
     private static final String PREF_KEY = "cross_profile_calendar";
@@ -76,7 +73,7 @@ public class CrossProfileCalendarPreferenceControllerTest {
         mController = new CrossProfileCalendarPreferenceController(mContext, PREF_KEY);
         mController.setManagedUser(mManagedUser);
         mPreference = spy(new RestrictedSwitchPreference(mContext));
-        dpm = Shadows.shadowOf(application.getSystemService(DevicePolicyManager.class));
+        dpm = ShadowDevicePolicyManager.getShadow();
 
         when(mManagedUser.getIdentifier()).thenReturn(MANAGED_USER_ID);
         doReturn(mContext).when(mContext).createPackageContextAsUser(

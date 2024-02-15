@@ -20,12 +20,13 @@ import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_CONTRO
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_FOR_WORK;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_KEY;
 
-import android.annotation.NonNull;
 import android.annotation.XmlRes;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+
+import androidx.annotation.NonNull;
 
 import com.android.settings.core.PreferenceXmlParserUtils.MetadataFlag;
 import com.android.settingslib.core.AbstractPreferenceController;

@@ -26,14 +26,14 @@
         android:key="auto_awesome_battery"
         settings:lottie_rawRes="@raw/auto_awesome_battery_lottie" />
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="smart_battery"
         android:title="@string/smart_battery_title"
         android:summary="@string/smart_battery_summary"
         settings:controller="com.android.settings.fuelgauge.SmartBatteryPreferenceController"
         settings:allowDividerAbove="true"/>
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="auto_restriction"
         android:title="@string/battery_auto_restriction_title"
         android:summary="@string/battery_auto_restriction_summary"

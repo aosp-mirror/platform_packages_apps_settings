@@ -28,8 +28,6 @@ import android.view.ThreadedRenderer;
 import androidx.preference.ListPreference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.R;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -60,8 +58,10 @@ public class DebugNonRectClipOperationsPreferenceControllerTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mListValues = mContext.getResources().getStringArray(R.array.show_non_rect_clip_values);
-        mListSummaries = mContext.getResources().getStringArray(R.array.show_non_rect_clip_entries);
+        mListValues = mContext.getResources().getStringArray(
+                com.android.settingslib.R.array.show_non_rect_clip_values);
+        mListSummaries = mContext.getResources().getStringArray(
+                com.android.settingslib.R.array.show_non_rect_clip_entries);
         mController = new DebugNonRectClipOperationsPreferenceController(mContext);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         mController.displayPreference(mScreen);

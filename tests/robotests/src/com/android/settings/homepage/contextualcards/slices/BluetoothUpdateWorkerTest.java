@@ -16,12 +16,9 @@
 
 package com.android.settings.homepage.contextualcards.slices;
 
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
-import android.content.ContentResolver;
 import android.content.Context;
 import android.net.Uri;
 
@@ -42,49 +39,46 @@ public class BluetoothUpdateWorkerTest {
     private static final Uri URI = Uri.parse("content://com.android.settings.slices/test");
 
     private BluetoothUpdateWorker mBluetoothUpdateWorker;
-    private ContentResolver mResolver;
     private Context mContext;
 
     @Before
     public void setUp() {
-        mContext = spy(RuntimeEnvironment.application);
-        mBluetoothUpdateWorker = new BluetoothUpdateWorker(mContext, URI);
-        mResolver = mock(ContentResolver.class);
-        doReturn(mResolver).when(mContext).getContentResolver();
+        mContext = RuntimeEnvironment.getApplication();
+        mBluetoothUpdateWorker = spy(new BluetoothUpdateWorker(mContext, URI));
     }
 
     @Test
     public void onAclConnectionStateChanged_shouldNotifyChange() {
         mBluetoothUpdateWorker.onAclConnectionStateChanged(null, 0);
 
-        verify(mResolver).notifyChange(URI, null);
+        verify(mBluetoothUpdateWorker).notifySliceChange();
     }
 
     @Test
     public void onActiveDeviceChanged_shouldNotifyChange() {
         mBluetoothUpdateWorker.onActiveDeviceChanged(null, 0);
 
-        verify(mResolver).notifyChange(URI, null);
+        verify(mBluetoothUpdateWorker).notifySliceChange();
     }
 
     @Test
     public void onBluetoothStateChanged_shouldNotifyChange() {
         mBluetoothUpdateWorker.onBluetoothStateChanged(0);
 
-        verify(mResolver).notifyChange(URI, null);
+        verify(mBluetoothUpdateWorker).notifySliceChange();
     }
 
     @Test
     public void onConnectionStateChanged_shouldNotifyChange() {
         mBluetoothUpdateWorker.onConnectionStateChanged(null, 0);
 
-        verify(mResolver).notifyChange(URI, null);
+        verify(mBluetoothUpdateWorker).notifySliceChange();
     }
 
     @Test
     public void onProfileConnectionStateChanged_shouldNotifyChange() {
         mBluetoothUpdateWorker.onProfileConnectionStateChanged(null, 0, 0);
 
-        verify(mResolver).notifyChange(URI, null);
+        verify(mBluetoothUpdateWorker).notifySliceChange();
     }
 }

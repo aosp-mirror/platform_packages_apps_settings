@@ -59,9 +59,7 @@ public class DeviceRotationViewModel extends AndroidViewModel {
         @Override
         public void onDisplayChanged(int displayId) {
             final int rotation = getRotation();
-            if (DEBUG) {
-                Log.d(TAG, "onDisplayChanged(" + displayId + "), rotation:" + rotation);
-            }
+            Log.d(TAG, "onDisplayChanged(" + displayId + "), rotation:" + rotation);
             mLiveData.postValue(rotation);
         }
     };
@@ -98,10 +96,11 @@ public class DeviceRotationViewModel extends AndroidViewModel {
      * Returns RotationLiveData
      */
     public LiveData<Integer> getLiveData() {
-        if (mLiveData.getValue() == null) {
-            // Init data here because if we set it through getDisplay().getRotation() or through
-            // getDisplay().getDisplayInfo() in constructor(), we always get incorrect value.
-            mLiveData.setValue(getRotation());
+        final Integer lastRotation = mLiveData.getValue();
+        @Surface.Rotation int newRotation = getRotation();
+        if (lastRotation == null || lastRotation != newRotation) {
+            Log.d(TAG, "getLiveData, update rotation from " + lastRotation + " to " + newRotation);
+            mLiveData.setValue(newRotation);
         }
         return mLiveData;
     }

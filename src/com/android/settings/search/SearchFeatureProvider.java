@@ -18,7 +18,6 @@ package com.android.settings.search;
 
 import static android.view.View.IMPORTANT_FOR_ACCESSIBILITY_NO;
 
-import android.annotation.NonNull;
 import android.app.ActivityOptions;
 import android.content.ComponentName;
 import android.content.Context;
@@ -30,6 +29,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toolbar;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
@@ -136,10 +136,10 @@ public interface SearchFeatureProvider {
     /** Start the search activity. */
     private static void startSearchActivity(
             Context context, FragmentActivity activity, int pageId, Intent intent) {
-        FeatureFactory.getFactory(context).getSlicesFeatureProvider()
+        FeatureFactory.getFeatureFactory().getSlicesFeatureProvider()
                 .indexSliceDataAsync(context);
 
-        FeatureFactory.getFactory(context).getMetricsFeatureProvider()
+        FeatureFactory.getFeatureFactory().getMetricsFeatureProvider()
                 .logSettingsTileClick(KEY_HOMEPAGE_SEARCH_BAR, pageId);
 
         final Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(activity).toBundle();

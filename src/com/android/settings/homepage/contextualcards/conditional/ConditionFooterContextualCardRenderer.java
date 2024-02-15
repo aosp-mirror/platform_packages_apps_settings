@@ -50,8 +50,8 @@ public class ConditionFooterContextualCardRenderer implements ContextualCardRend
 
     @Override
     public void bindView(RecyclerView.ViewHolder holder, ContextualCard card) {
-        final MetricsFeatureProvider metricsFeatureProvider = FeatureFactory.getFactory(
-                mContext).getMetricsFeatureProvider();
+        final MetricsFeatureProvider metricsFeatureProvider =
+                FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
         holder.itemView.setOnClickListener(v -> {
             metricsFeatureProvider.action(SettingsEnums.PAGE_UNKNOWN,
                     SettingsEnums.ACTION_SETTINGS_CONDITION_EXPAND,

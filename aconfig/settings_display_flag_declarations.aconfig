@@ -1,0 +1,10 @@
+package: "com.android.settings.flags"
+container: "system"
+
+flag {
+    name: "protect_screen_timeout_with_auth"
+    namespace: "safety_center"
+    description: "Require an auth challenge for increasing screen timeout."
+    bug: "315937886"
+}
+

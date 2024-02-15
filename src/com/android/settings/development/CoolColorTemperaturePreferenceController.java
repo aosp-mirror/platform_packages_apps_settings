@@ -22,7 +22,7 @@ import android.widget.Toast;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
@@ -65,14 +65,14 @@ public class CoolColorTemperaturePreferenceController extends DeveloperOptionsPr
     public void updateState(Preference preference) {
         final boolean enableColorTemperature = SystemProperties.getBoolean(
                 COLOR_TEMPERATURE_PROPERTY, false /* default */);
-        ((SwitchPreference) mPreference).setChecked(enableColorTemperature);
+        ((TwoStatePreference) mPreference).setChecked(enableColorTemperature);
     }
 
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
         super.onDeveloperOptionsSwitchDisabled();
         SystemProperties.set(COLOR_TEMPERATURE_PROPERTY, Boolean.toString(false));
-        ((SwitchPreference) mPreference).setChecked(false);
+        ((TwoStatePreference) mPreference).setChecked(false);
     }
 
     @VisibleForTesting

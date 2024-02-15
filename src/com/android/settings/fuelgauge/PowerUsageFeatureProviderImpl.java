@@ -27,6 +27,8 @@ import android.util.ArraySet;
 import android.util.SparseIntArray;
 
 import com.android.internal.util.ArrayUtils;
+import com.android.settings.fuelgauge.batteryusage.DetectRequestSourceType;
+import com.android.settings.fuelgauge.batteryusage.PowerAnomalyEventList;
 import com.android.settingslib.fuelgauge.Estimate;
 
 import java.util.ArrayList;
@@ -38,8 +40,9 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
 
     private static final String PACKAGE_CALENDAR_PROVIDER = "com.android.providers.calendar";
     private static final String PACKAGE_MEDIA_PROVIDER = "com.android.providers.media";
-    private static final String[] PACKAGES_SYSTEM = {PACKAGE_MEDIA_PROVIDER,
-            PACKAGE_CALENDAR_PROVIDER, SYSTEMUI_PACKAGE_NAME};
+    private static final String[] PACKAGES_SYSTEM = {
+        PACKAGE_MEDIA_PROVIDER, PACKAGE_CALENDAR_PROVIDER, SYSTEMUI_PACKAGE_NAME
+    };
 
     protected PackageManager mPackageManager;
     protected Context mContext;
@@ -72,6 +75,11 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     @Override
     public boolean isBatteryUsageEnabled() {
         return true;
+    }
+
+    @Override
+    public boolean isBatteryTipsEnabled() {
+        return false;
     }
 
     @Override
@@ -131,13 +139,23 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
 
     @Override
     public boolean isSmartBatterySupported() {
-        return mContext.getResources().getBoolean(
-                com.android.internal.R.bool.config_smart_battery_available);
+        return mContext.getResources()
+                .getBoolean(com.android.internal.R.bool.config_smart_battery_available);
     }
 
     @Override
     public boolean isChartGraphSlotsEnabled(Context context) {
         return false;
+    }
+
+    @Override
+    public boolean isAdaptiveChargingSupported() {
+        return false;
+    }
+
+    @Override
+    public boolean isBatteryManagerSupported() {
+        return true;
     }
 
     @Override
@@ -158,6 +176,12 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     @Override
     public boolean delayHourlyJobWhenBooting() {
         return true;
+    }
+
+    @Override
+    public PowerAnomalyEventList detectSettingsAnomaly(
+            Context context, double displayDrain, DetectRequestSourceType detectRequestSourceType) {
+        return null;
     }
 
     @Override

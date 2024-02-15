@@ -23,7 +23,6 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.ParceledListSlice;
-import android.os.AsyncTask;
 import android.os.RemoteException;
 import android.util.ArraySet;
 import android.util.Log;
@@ -102,15 +101,19 @@ public class ZenAccessController extends BasePreferenceController {
     }
 
     public static void deleteRules(final Context context, final String pkg) {
-       final NotificationManager mgr = context.getSystemService(NotificationManager.class);
-       mgr.removeAutomaticZenRules(pkg);
+        final NotificationManager mgr = context.getSystemService(NotificationManager.class);
+        if (android.app.Flags.modesApi()) {
+            mgr.removeAutomaticZenRules(pkg, /* fromUser= */ true);
+        } else {
+            mgr.removeAutomaticZenRules(pkg);
+        }
     }
 
     @VisibleForTesting
     static void logSpecialPermissionChange(boolean enable, String packageName, Context context) {
         int logCategory = enable ? SettingsEnums.APP_SPECIAL_PERMISSION_DND_ALLOW
                 : SettingsEnums.APP_SPECIAL_PERMISSION_DND_DENY;
-        FeatureFactory.getFactory(context).getMetricsFeatureProvider().action(context,
+        FeatureFactory.getFeatureFactory().getMetricsFeatureProvider().action(context,
                 logCategory, packageName);
     }
 }

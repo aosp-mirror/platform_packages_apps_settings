@@ -24,7 +24,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoWithHeader;
@@ -41,7 +41,7 @@ public class ChangeWifiStateDetails extends AppInfoWithHeader
 
     private AppStateChangeWifiStateBridge mAppBridge;
     private AppOpsManager mAppOpsManager;
-    private SwitchPreference mSwitchPref;
+    private TwoStatePreference mSwitchPref;
     private WifiSettingsState mWifiSettingsState;
 
     @Override
@@ -53,7 +53,7 @@ public class ChangeWifiStateDetails extends AppInfoWithHeader
 
         // find preferences
         addPreferencesFromResource(R.xml.change_wifi_state_details);
-        mSwitchPref = (SwitchPreference) findPreference(KEY_APP_OPS_SETTINGS_SWITCH);
+        mSwitchPref = (TwoStatePreference) findPreference(KEY_APP_OPS_SETTINGS_SWITCH);
 
         // set title/summary for all of them
         mSwitchPref.setTitle(R.string.change_wifi_state_app_detail_switch);
@@ -95,7 +95,7 @@ public class ChangeWifiStateDetails extends AppInfoWithHeader
     protected void logSpecialPermissionChange(boolean newState, String packageName) {
         int logCategory = newState ? SettingsEnums.APP_SPECIAL_PERMISSION_SETTINGS_CHANGE_ALLOW
                 : SettingsEnums.APP_SPECIAL_PERMISSION_SETTINGS_CHANGE_DENY;
-        FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider().action(getContext(),
+        FeatureFactory.getFeatureFactory().getMetricsFeatureProvider().action(getContext(),
                 logCategory, packageName);
     }
 

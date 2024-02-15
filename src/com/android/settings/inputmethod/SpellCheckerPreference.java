@@ -25,6 +25,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.textservice.SpellCheckerInfo;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog.Builder;
 import androidx.preference.PreferenceViewHolder;
 
@@ -41,12 +42,19 @@ import com.android.settings.R;
 class SpellCheckerPreference extends CustomListPreference {
 
     private final SpellCheckerInfo[] mScis;
-    private Intent mIntent;
+    @VisibleForTesting
+    Intent mIntent;
 
     public SpellCheckerPreference(final Context context, final SpellCheckerInfo[] scis) {
         super(context, null);
         mScis = scis;
+        setLayoutResource(
+                com.android.settingslib.widget.preference.twotarget.R.layout.preference_two_target);
+
         setWidgetLayoutResource(R.layout.preference_widget_gear);
+        if (scis == null) {
+            return;
+        }
         CharSequence[] labels = new CharSequence[scis.length];
         CharSequence[] values = new CharSequence[scis.length];
         for (int i = 0 ; i < scis.length; i++) {
@@ -105,14 +113,26 @@ class SpellCheckerPreference extends CustomListPreference {
     @Override
     public void onBindViewHolder(PreferenceViewHolder view) {
         super.onBindViewHolder(view);
+        final View divider = view.findViewById(
+                com.android.settingslib.widget.preference.twotarget.R.id.two_target_divider);
+        final View widgetFrame = view.findViewById(android.R.id.widget_frame);
+        if (divider != null) {
+            divider.setVisibility(mIntent != null ? View.VISIBLE : View.GONE);
+        }
+        if (widgetFrame != null) {
+            widgetFrame.setVisibility(mIntent != null ? View.VISIBLE : View.GONE);
+        }
+
         View settingsButton = view.findViewById(R.id.settings_button);
-        settingsButton.setVisibility(mIntent != null ? View.VISIBLE : View.INVISIBLE);
-        settingsButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onSettingsButtonClicked();
-            }
-        });
+        if (settingsButton != null) {
+            settingsButton.setVisibility(mIntent != null ? View.VISIBLE : View.INVISIBLE);
+            settingsButton.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onSettingsButtonClicked();
+                }
+            });
+        }
     }
 
     private void onSettingsButtonClicked() {

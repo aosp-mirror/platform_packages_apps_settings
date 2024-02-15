@@ -385,6 +385,9 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
                 .thenReturn("true".getBytes());
         Set<CachedBluetoothDevice> cacheBluetoothDevices = new HashSet<>();
         when(mCachedDevice.getMemberDevice()).thenReturn(cacheBluetoothDevices);
+        when(mBluetoothAdapter.addOnMetadataChangedListener(
+                mBluetoothDevice, mContext.getMainExecutor(), mController.mMetadataListener))
+                .thenReturn(true);
 
         mController.onStart();
 

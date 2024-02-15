@@ -43,7 +43,6 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.utils.ActivityControllerWrapper;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiPickerTracker;
 
@@ -56,12 +55,16 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 import org.robolectric.shadows.androidx.fragment.FragmentController;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class AddAppNetworksFragmentTest {
 
     private static final String FAKE_APP_NAME = "fake_app_name";
@@ -100,8 +103,7 @@ public class AddAppNetworksFragmentTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mAddAppNetworksFragment = spy(new AddAppNetworksFragment());
-        mActivity = spy((FragmentActivity) ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(FragmentActivity.class)).get());
+        mActivity = spy(Robolectric.setupActivity(FragmentActivity.class));
         doReturn(mActivity).when(mAddAppNetworksFragment).getActivity();
         when(mWifiManager.isWifiEnabled()).thenReturn(true);
         when(mActivity.getSystemService(WifiManager.class)).thenReturn(mWifiManager);

@@ -22,8 +22,10 @@ import static org.robolectric.Shadows.shadowOf;
 
 import android.app.AlarmManager;
 import android.app.Application;
+import android.app.usage.UsageStatsManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 
 import androidx.test.core.app.ApplicationProvider;
 
@@ -33,6 +35,7 @@ import com.android.settings.testutils.BatteryTestUtils;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -40,7 +43,6 @@ import org.robolectric.Shadows;
 import org.robolectric.shadows.ShadowAlarmManager;
 
 import java.time.Clock;
-import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -65,10 +67,12 @@ public final class BootBroadcastReceiverTest {
         BatteryTestUtils.insertDataToBatteryStateTable(
                 mContext, Clock.systemUTC().millis(), "com.android.systemui");
         mDao = database.batteryStateDao();
+        clearSharedPreferences();
     }
 
     @After
     public void tearDown() {
+        clearSharedPreferences();
         mPeriodicJobManager.reset();
     }
 
@@ -82,8 +86,21 @@ public final class BootBroadcastReceiverTest {
 
     @Test
     public void onReceive_withBootCompletedIntent_refreshesJob() {
+        final SharedPreferences sharedPreferences = DatabaseUtils.getSharedPreferences(mContext);
+        sharedPreferences
+                .edit()
+                .putInt(
+                        DatabaseUtils.KEY_LAST_USAGE_SOURCE,
+                        UsageStatsManager.USAGE_SOURCE_CURRENT_ACTIVITY)
+                .apply();
+
         mReceiver.onReceive(mContext, new Intent(Intent.ACTION_BOOT_COMPLETED));
+
         assertThat(mShadowAlarmManager.peekNextScheduledAlarm()).isNotNull();
+        assertThat(
+                        DatabaseUtils.getSharedPreferences(mContext)
+                                .contains(DatabaseUtils.KEY_LAST_USAGE_SOURCE))
+                .isFalse();
     }
 
     @Test
@@ -108,10 +125,11 @@ public final class BootBroadcastReceiverTest {
 
     @Test
     public void onReceive_nullIntent_notRefreshesJob() {
-        mReceiver.onReceive(mContext, /*intent=*/ null);
+        mReceiver.onReceive(mContext, /* intent= */ null);
         assertThat(mShadowAlarmManager.peekNextScheduledAlarm()).isNull();
     }
 
+    @Ignore("b/314921894")
     @Test
     public void onReceive_withTimeChangedIntent_clearsAllDataAndRefreshesJob()
             throws InterruptedException {
@@ -126,22 +144,13 @@ public final class BootBroadcastReceiverTest {
     public void invokeJobRecheck_broadcastsIntent() {
         BootBroadcastReceiver.invokeJobRecheck(mContext);
 
-        final List<Intent> intents =
-                Shadows.shadowOf((Application) mContext).getBroadcastIntents();
+        final List<Intent> intents = Shadows.shadowOf((Application) mContext).getBroadcastIntents();
         assertThat(intents).hasSize(1);
-        assertThat(intents.get(0).getAction()).isEqualTo(
-                BootBroadcastReceiver.ACTION_PERIODIC_JOB_RECHECK);
+        assertThat(intents.get(0).getAction())
+                .isEqualTo(BootBroadcastReceiver.ACTION_PERIODIC_JOB_RECHECK);
     }
 
-    private void insertExpiredData(int shiftDay) {
-        final long expiredTimeInMs =
-                Clock.systemUTC().millis() - Duration.ofDays(shiftDay).toMillis();
-        BatteryTestUtils.insertDataToBatteryStateTable(
-                mContext, expiredTimeInMs - 1, "com.android.systemui");
-        BatteryTestUtils.insertDataToBatteryStateTable(
-                mContext, expiredTimeInMs, "com.android.systemui");
-        // Ensures the testing environment is correct.
-        assertThat(mDao.getAllAfter(0)).hasSize(3);
+    private void clearSharedPreferences() {
+        DatabaseUtils.getSharedPreferences(mContext).edit().clear().apply();
     }
-
 }

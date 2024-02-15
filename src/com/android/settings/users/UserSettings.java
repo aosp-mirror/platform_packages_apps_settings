@@ -35,6 +35,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.BlendMode;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
+import android.multiuser.Flags;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -885,7 +886,6 @@ public class UserSettings extends SettingsPreferenceFragment
                 this::startActivityForResult,
                 userIcon,
                 user.name,
-                getString(com.android.settingslib.R.string.profile_info_settings_title),
                 (newUserName, newUserIcon) -> {
                     if (newUserIcon != userIcon) {
                         ThreadUtils.postOnBackgroundThread(() ->
@@ -893,13 +893,24 @@ public class UserSettings extends SettingsPreferenceFragment
                                         UserIcons.convertToBitmapAtUserIconSize(
                                                 activity.getResources(), newUserIcon)));
                         mMePreference.setIcon(newUserIcon);
+                        if (Flags.avatarSync()) {
+                            final String pkg = getString(R.string.config_avatar_picker_package);
+                            final String action = pkg + ".set.confirm";
+                            activity.sendBroadcast(new Intent(action).setPackage(pkg));
+                        }
                     }
 
                     if (!TextUtils.isEmpty(newUserName) && !newUserName.equals(user.name)) {
                         mMePreference.setTitle(newUserName);
                         mUserManager.setUserName(user.id, newUserName);
                     }
-                }, null);
+                }, () -> {
+                    if (Flags.avatarSync()) {
+                        final String pkg = getString(R.string.config_avatar_picker_package);
+                        final String action = pkg + ".set.cancel";
+                        activity.sendBroadcast(new Intent(action).setPackage(pkg));
+                    }
+                });
     }
 
     private Dialog buildAddUserDialog(int userType) {
@@ -978,10 +989,10 @@ public class UserSettings extends SettingsPreferenceFragment
             return;
         }
         try {
-            getContext().getSystemService(UserManager.class)
-                    .removeUserWhenPossible(UserHandle.of(UserHandle.myUserId()),
-                            /* overrideDevicePolicy= */ false);
-            ActivityManager.getService().switchUser(UserHandle.USER_SYSTEM);
+            mUserManager.removeUserWhenPossible(
+                    UserHandle.of(UserHandle.myUserId()), /* overrideDevicePolicy= */ false);
+            ActivityManager.getService().switchUser(
+                    mUserManager.getPreviousForegroundUser().getIdentifier());
         } catch (RemoteException re) {
             Log.e(TAG, "Unable to remove self user");
         }
@@ -1005,9 +1016,9 @@ public class UserSettings extends SettingsPreferenceFragment
             mAddingUser = true;
             mAddingUserName = userType == USER_TYPE_USER
                     ? (mPendingUserName != null ? mPendingUserName.toString()
-                    : getString(R.string.user_new_user_name))
+                    : getString(com.android.settingslib.R.string.user_new_user_name))
                     : (mPendingUserName != null ? mPendingUserName.toString()
-                            : getString(R.string.user_new_profile_name));
+                            : getString(com.android.settingslib.R.string.user_new_profile_name));
         }
 
         mUserCreatingDialog = new UserCreatingDialog(getActivity());
@@ -1100,7 +1111,7 @@ public class UserSettings extends SettingsPreferenceFragment
         }
         mMetricsFeatureProvider.action(getActivity(),
                 SettingsEnums.ACTION_USER_GUEST_EXIT_CONFIRMED);
-        switchToUserId(UserHandle.USER_SYSTEM);
+        switchToUserId(mUserManager.getPreviousForegroundUser().getIdentifier());
     }
 
     private int createGuest() {
@@ -1140,8 +1151,8 @@ public class UserSettings extends SettingsPreferenceFragment
             // Create a new guest in the foreground, and then immediately switch to it
             int newGuestUserId = createGuest();
             if (newGuestUserId == UserHandle.USER_NULL) {
-                Log.e(TAG, "Could not create new guest, switching back to system user");
-                switchToUserId(UserHandle.USER_SYSTEM);
+                Log.e(TAG, "Could not create new guest, switching back to previous user");
+                switchToUserId(mUserManager.getPreviousForegroundUser().getIdentifier());
                 mUserManager.removeUser(oldGuestUserId);
                 WindowManagerGlobal.getWindowManagerService().lockNow(/* options= */ null);
                 return;
@@ -1358,13 +1369,14 @@ public class UserSettings extends SettingsPreferenceFragment
         String guestExitSummary;
         if (mUserCaps.mIsEphemeral) {
             guestExitSummary = getContext().getString(
-                    R.string.guest_notification_ephemeral);
+                    com.android.settingslib.R.string.guest_notification_ephemeral);
         } else if (isGuestFirstLogin) {
             guestExitSummary = getContext().getString(
-                    R.string.guest_notification_non_ephemeral);
+                    com.android.settingslib.R.string.guest_notification_non_ephemeral);
         } else {
             guestExitSummary = getContext().getString(
-                    R.string.guest_notification_non_ephemeral_non_first_login);
+                    com.android.settingslib.R
+                            .string.guest_notification_non_ephemeral_non_first_login);
         }
         mGuestExitPreference.setSummary(guestExitSummary);
     }
@@ -1395,7 +1407,8 @@ public class UserSettings extends SettingsPreferenceFragment
             pref.setOnPreferenceClickListener(this);
             pref.setEnabled(canOpenUserDetails);
             pref.setSelectable(true);
-            Drawable icon = getContext().getDrawable(R.drawable.ic_account_circle_outline);
+            Drawable icon = getContext().getDrawable(
+                    com.android.settingslib.R.drawable.ic_account_circle_outline);
             icon.setTint(
                     getColorAttrDefaultColor(getContext(), android.R.attr.colorControlNormal));
             pref.setIcon(encircleUserIcon(
@@ -1440,14 +1453,15 @@ public class UserSettings extends SettingsPreferenceFragment
                 && mUserManager.canAddMoreUsers(UserManager.USER_TYPE_FULL_GUEST)
                 && WizardManagerHelper.isDeviceProvisioned(context)
                 && mUserCaps.mUserSwitcherEnabled) {
-            Drawable icon = context.getDrawable(R.drawable.ic_account_circle);
+            Drawable icon = context.getDrawable(
+                    com.android.settingslib.R.drawable.ic_account_circle);
             mAddGuest.setIcon(centerAndTint(icon));
             isVisible = true;
             mAddGuest.setVisible(true);
             mAddGuest.setSelectable(true);
             if (mGuestUserAutoCreated && mGuestCreationScheduled.get()) {
                 mAddGuest.setTitle(com.android.internal.R.string.guest_name);
-                mAddGuest.setSummary(R.string.guest_resetting);
+                mAddGuest.setSummary(com.android.settingslib.R.string.guest_resetting);
                 mAddGuest.setEnabled(false);
             } else {
                 mAddGuest.setTitle(com.android.settingslib.R.string.guest_new_guest);
@@ -1461,14 +1475,16 @@ public class UserSettings extends SettingsPreferenceFragment
 
     private void updateAddUser(Context context) {
         updateAddUserCommon(context, mAddUser, mUserCaps.mCanAddRestrictedProfile);
-        Drawable icon = context.getDrawable(R.drawable.ic_account_circle_filled);
+        Drawable icon = context.getDrawable(
+                com.android.settingslib.R.drawable.ic_account_circle_filled);
         mAddUser.setIcon(centerAndTint(icon));
     }
 
     private void updateAddSupervisedUser(Context context) {
         if (!TextUtils.isEmpty(mConfigSupervisedUserCreationPackage)) {
             updateAddUserCommon(context, mAddSupervisedUser, false);
-            Drawable icon = context.getDrawable(R.drawable.ic_add_supervised_user);
+            Drawable icon = context.getDrawable(
+                    com.android.settingslib.R.drawable.ic_add_supervised_user);
             mAddSupervisedUser.setIcon(centerAndTint(icon));
         } else {
             mAddSupervisedUser.setVisible(false);
@@ -1506,7 +1522,8 @@ public class UserSettings extends SettingsPreferenceFragment
         icon.setTintBlendMode(BlendMode.SRC_IN);
         icon.setTint(getColorAttrDefaultColor(getContext(), android.R.attr.textColorPrimary));
 
-        Drawable bg = getContext().getDrawable(R.drawable.user_avatar_bg).mutate();
+        Drawable bg = getContext().getDrawable(com.android.settingslib.R.drawable.user_avatar_bg)
+                .mutate();
         LayerDrawable ld = new LayerDrawable(new Drawable[] {bg, icon});
         int size = getContext().getResources().getDimensionPixelSize(
                 R.dimen.multiple_users_avatar_size);
@@ -1629,7 +1646,7 @@ public class UserSettings extends SettingsPreferenceFragment
             mRemovingUserId = -1;
             updateUserList();
             if (mCreateUserDialogController.isActive()) {
-                mCreateUserDialogController.clear();
+                mCreateUserDialogController.finish();
             }
         }
     }
@@ -1719,6 +1736,9 @@ public class UserSettings extends SettingsPreferenceFragment
                 public List<SearchIndexableRaw> getRawDataToIndex(Context context,
                         boolean enabled) {
                     final List<SearchIndexableRaw> rawData = new ArrayList<>();
+                    if (!UserManager.supportsMultipleUsers()) {
+                        return rawData;
+                    }
 
                     SearchIndexableRaw allowMultipleUsersResult = new SearchIndexableRaw(context);
 
@@ -1751,6 +1771,9 @@ public class UserSettings extends SettingsPreferenceFragment
                             .updateNonIndexableKeys(niks);
                     new AutoSyncWorkDataPreferenceController(context, null /* parent */)
                             .updateNonIndexableKeys(niks);
+                    if (suppressAllPage) {
+                        niks.add(KEY_ALLOW_MULTIPLE_USERS);
+                    }
                     return niks;
                 }
             };

@@ -22,7 +22,6 @@ import android.sysprop.BluetoothProperties;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
 /** A {@link BasePreferenceController} used in {@link SnoopLoggerFiltersDashboard} */
@@ -35,9 +34,11 @@ public class SnoopLoggerFiltersPreferenceController extends BasePreferenceContro
     public SnoopLoggerFiltersPreferenceController(Context context, String key) {
         super(context, key);
         mListValues =
-                context.getResources().getStringArray(R.array.bt_hci_snoop_log_filters_values);
+                context.getResources().getStringArray(
+                        com.android.settingslib.R.array.bt_hci_snoop_log_filters_values);
         mListEntries =
-                context.getResources().getStringArray(R.array.bt_hci_snoop_log_filters_entries);
+                context.getResources().getStringArray(
+                        com.android.settingslib.R.array.bt_hci_snoop_log_filters_entries);
     }
 
     @Override

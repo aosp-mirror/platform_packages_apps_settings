@@ -44,6 +44,8 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.Settings.MobileNetworkActivity;
+import com.android.settings.network.helper.SubscriptionAnnotation;
+import com.android.settings.network.helper.SubscriptionGrouping;
 import com.android.settings.widget.AddPreference;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.core.lifecycle.Lifecycle;

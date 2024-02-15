@@ -23,9 +23,7 @@ import com.android.settings.fuelgauge.batterytip.AppInfo;
 
 import java.util.function.Predicate;
 
-/**
- * {@link Predicate} for {@link AppInfo} to check whether it has label
- */
+/** {@link Predicate} for {@link AppInfo} to check whether it has label */
 public class AppLabelPredicate implements Predicate<AppInfo> {
 
     private static AppLabelPredicate sInstance;

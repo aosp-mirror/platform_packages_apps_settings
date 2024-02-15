@@ -95,9 +95,21 @@
         settings:controller="com.android.settings.applications.specialaccess.notificationaccess.NotificationAccessController" />
 
     <Preference
+        android:key="media_routing_control"
+        android:title="@string/media_routing_control_title"
+        android:order="-1100"
+        settings:controller="com.android.settings.applications.specialaccess.MediaRoutingControlPreferenceController" >
+    </Preference>
+
+    <Preference
         android:key="use_full_screen_intent"
         android:title="@string/full_screen_intent_title"
         settings:controller="com.android.settings.spa.app.specialaccess.UseFullScreenIntentPreferenceController" />
+
+    <Preference
+        android:key="voice_activation_apps"
+        android:title="@string/voice_activation_apps_title"
+        settings:controller="com.android.settings.spa.app.specialaccess.VoiceActivationAppsPreferenceController" />
 
     <Preference
         android:key="picture_in_picture"

@@ -24,29 +24,29 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 
-import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.wifi.WifiEntryPreference;
 import com.android.wifitrackerlib.WifiEntry;
 
 import org.junit.Before;
-import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -55,26 +55,38 @@ import java.util.List;
 @RunWith(RobolectricTestRunner.class)
 public class SavedAccessPointsPreferenceController2Test {
 
+    private static final String PREFERENCE_KEY = "preference_key";
+    private static final String TEST_KEY = "key";
+    private static final String TEST_TITLE = "ssid_title";
+
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+    @Spy
+    private Context mContext = ApplicationProvider.getApplicationContext();
     @Mock
     private PreferenceScreen mPreferenceScreen;
     @Mock
-    private PreferenceCategory mPreferenceCategory;
+    private PreferenceGroup mPreferenceGroup;
+    @Mock
+    private WifiEntryPreference mWifiEntryPreference;
+    @Mock
+    private WifiEntry mWifiEntry;
 
-    private Context mContext;
     private SavedAccessPointsWifiSettings2 mSettings;
     private SavedAccessPointsPreferenceController2 mController;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
-        mSettings = spy(new SavedAccessPointsWifiSettings2());
-        mController = spy(new SavedAccessPointsPreferenceController2(mContext, "test_key"));
-        mController.setHost(mSettings);
+        when(mPreferenceScreen.findPreference(PREFERENCE_KEY)).thenReturn(mPreferenceGroup);
+        when(mPreferenceGroup.getContext()).thenReturn(mContext);
+        when(mWifiEntryPreference.getKey()).thenReturn(TEST_KEY);
+        when(mWifiEntryPreference.getTitle()).thenReturn(TEST_TITLE);
+        when(mWifiEntry.getKey()).thenReturn(TEST_KEY);
+        when(mWifiEntry.getTitle()).thenReturn(TEST_TITLE);
 
-        when(mPreferenceScreen.findPreference(mController.getPreferenceKey()))
-                .thenReturn(mPreferenceCategory);
-        when(mPreferenceCategory.getContext()).thenReturn(mContext);
+        mSettings = spy(new SavedAccessPointsWifiSettings2());
+        mController = spy(new SavedAccessPointsPreferenceController2(mContext, PREFERENCE_KEY));
+        mController.setHost(mSettings);
     }
 
     @Test
@@ -86,64 +98,52 @@ public class SavedAccessPointsPreferenceController2Test {
 
     @Test
     public void getAvailability_oneSavedAccessPoint_shouldAvailable() {
-        final WifiEntry mockWifiEntry = mock(WifiEntry.class);
-        mController.mWifiEntries = Arrays.asList(mockWifiEntry);
+        mController.mWifiEntries = Arrays.asList(mWifiEntry);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
-    @Ignore
     @Test
-    public void displayPreference_oneAccessPoint_shouldListIt() {
-        final String title = "ssid_title";
-        final WifiEntry mockWifiEntry = mock(WifiEntry.class);
-        when(mockWifiEntry.getTitle()).thenReturn(title);
-        final ArgumentCaptor<WifiEntryPreference> captor =
+    public void displayPreference_newWifiEntry_addPreference() {
+        when(mPreferenceGroup.getPreferenceCount()).thenReturn(0);
+
+        mController.displayPreference(mPreferenceScreen, Arrays.asList(mWifiEntry));
+
+        ArgumentCaptor<WifiEntryPreference> captor =
                 ArgumentCaptor.forClass(WifiEntryPreference.class);
-
-        mController.displayPreference(mPreferenceScreen, Arrays.asList(mockWifiEntry));
-
-        verify(mPreferenceCategory).addPreference(captor.capture());
-
-        final List<WifiEntryPreference> prefs = captor.getAllValues();
+        verify(mPreferenceGroup).addPreference(captor.capture());
+        List<WifiEntryPreference> prefs = captor.getAllValues();
         assertThat(prefs.size()).isEqualTo(1);
-        assertThat(prefs.get(0).getTitle()).isEqualTo(title);
+        assertThat(prefs.get(0).getTitle()).isEqualTo(TEST_TITLE);
     }
 
-    @Ignore
     @Test
-    public void displayPreference_noAccessPoint_shouldRemoveIt() {
-        final String title = "ssid_title";
-        final String key = "key";
-        final WifiEntry mockWifiEntry = mock(WifiEntry.class);
-        when(mockWifiEntry.getTitle()).thenReturn(title);
-        when(mockWifiEntry.getKey()).thenReturn(key);
-        final WifiEntryPreference preference = new WifiEntryPreference(mContext, mockWifiEntry);
-        preference.setKey(key);
-        mPreferenceCategory.addPreference(preference);
+    public void displayPreference_sameWifiEntry_preferenceSetWifiEntry() {
+        when(mPreferenceGroup.getPreferenceCount()).thenReturn(1);
+        when(mPreferenceGroup.getPreference(0)).thenReturn(mWifiEntryPreference);
+
+        mController.displayPreference(mPreferenceScreen, Arrays.asList(mWifiEntry));
+
+        verify(mWifiEntryPreference).setWifiEntry(mWifiEntry);
+    }
+
+    @Test
+    public void displayPreference_removedWifiEntry_removePreference() {
+        when(mPreferenceGroup.getPreferenceCount()).thenReturn(1);
+        when(mPreferenceGroup.getPreference(0)).thenReturn(mWifiEntryPreference);
 
         mController.displayPreference(mPreferenceScreen, new ArrayList<>());
 
-        assertThat(mPreferenceCategory.getPreferenceCount()).isEqualTo(0);
+        verify(mPreferenceGroup).removePreference(any());
     }
 
-    @Ignore
     @Test
     public void onPreferenceClick_shouldCallShowWifiPage() {
-        mContext = spy(RuntimeEnvironment.application);
         doNothing().when(mContext).startActivity(any());
         doReturn(mContext).when(mSettings).getContext();
 
-        final String title = "ssid_title";
-        final String key = "key";
-        final WifiEntry mockWifiEntry = mock(WifiEntry.class);
-        when(mockWifiEntry.getTitle()).thenReturn(title);
-        when(mockWifiEntry.getKey()).thenReturn(key);
-        final WifiEntryPreference preference = new WifiEntryPreference(mContext, mockWifiEntry);
-        preference.setKey(key);
+        mController.onPreferenceClick(mWifiEntryPreference);
 
-        mController.onPreferenceClick(preference);
-
-        verify(mSettings, times(1)).showWifiPage(key, title);
+        verify(mSettings).showWifiPage(TEST_KEY, TEST_TITLE);
     }
 }

@@ -32,19 +32,22 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.preference.PreferenceViewHolder;
+import androidx.test.core.app.ApplicationProvider;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.mockito.Spy;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
 public class LinkifySummaryPreferenceTest {
-    @Spy
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+
     private PreferenceViewHolder mViewHolder;
     @Mock
     private TextView mSummaryTextView;
@@ -52,9 +55,7 @@ public class LinkifySummaryPreferenceTest {
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-
-        final Context context = RuntimeEnvironment.application;
+        final Context context = ApplicationProvider.getApplicationContext();
         mPreference = new LinkifySummaryPreference(context, null /* attrs */);
 
         final View view = spy(View.inflate(context, mPreference.getLayoutResource(),

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 The Android Open Source Project
+ * Copyright (C) 2023 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,6 +35,8 @@ import android.view.View;
 import android.widget.ImageView;
 
 import androidx.annotation.IntDef;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
@@ -52,6 +54,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.RejectedExecutionException;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * BluetoothDevicePreference is the preference type used to display each remote
@@ -79,7 +82,9 @@ public final class BluetoothDevicePreference extends GearPreference {
     @VisibleForTesting
     BluetoothAdapter mBluetoothAdapter;
     private final boolean mShowDevicesWithoutNames;
-    private final long mCurrentTime;
+    @NonNull
+    private static final AtomicInteger sNextId = new AtomicInteger();
+    private final int mId;
     private final int mType;
 
     private AlertDialog mDisconnectDialog;
@@ -127,8 +132,9 @@ public final class BluetoothDevicePreference extends GearPreference {
 
         mCachedDevice = cachedDevice;
         mCallback = new BluetoothDevicePreferenceCallback();
-        mCurrentTime = System.currentTimeMillis();
+        mId = sNextId.getAndIncrement();
         mType = type;
+        setVisible(false);
 
         onPreferenceAttributesChanged();
     }
@@ -150,7 +156,7 @@ public final class BluetoothDevicePreference extends GearPreference {
         return R.layout.preference_widget_gear;
     }
 
-    CachedBluetoothDevice getCachedDevice() {
+    public CachedBluetoothDevice getCachedDevice() {
         return mCachedDevice;
     }
 
@@ -190,6 +196,10 @@ public final class BluetoothDevicePreference extends GearPreference {
     }
 
     private void registerMetadataChangedListener() {
+        if (mBluetoothAdapter == null) {
+            Log.d(TAG, "No mBluetoothAdapter");
+            return;
+        }
         if (mBluetoothDevices == null) {
             mBluetoothDevices = new HashSet<>();
         }
@@ -204,18 +214,47 @@ public final class BluetoothDevicePreference extends GearPreference {
             Log.d(TAG, "No BT device to register.");
             return;
         }
-        mBluetoothDevices.forEach(bd ->
-                mBluetoothAdapter.addOnMetadataChangedListener(bd,
-                        getContext().getMainExecutor(), mMetadataListener));
+        Set<BluetoothDevice> errorDevices = new HashSet<>();
+        mBluetoothDevices.forEach(bd -> {
+            try {
+                boolean isSuccess = mBluetoothAdapter.addOnMetadataChangedListener(bd,
+                        getContext().getMainExecutor(), mMetadataListener);
+                if (!isSuccess) {
+                    Log.e(TAG, bd.getAnonymizedAddress() + ": add into Listener failed");
+                    errorDevices.add(bd);
+                }
+            } catch (NullPointerException e) {
+                errorDevices.add(bd);
+                Log.e(TAG, bd.getAnonymizedAddress() + ":" + e.toString());
+            } catch (IllegalArgumentException e) {
+                errorDevices.add(bd);
+                Log.e(TAG, bd.getAnonymizedAddress() + ":" + e.toString());
+            }
+        });
+        for (BluetoothDevice errorDevice : errorDevices) {
+            mBluetoothDevices.remove(errorDevice);
+            Log.d(TAG, "mBluetoothDevices remove " + errorDevice.getAnonymizedAddress());
+        }
     }
 
     private void unregisterMetadataChangedListener() {
+        if (mBluetoothAdapter == null) {
+            Log.d(TAG, "No mBluetoothAdapter");
+            return;
+        }
         if (mBluetoothDevices == null || mBluetoothDevices.isEmpty()) {
             Log.d(TAG, "No BT device to unregister.");
             return;
         }
-        mBluetoothDevices.forEach(
-                bd -> mBluetoothAdapter.removeOnMetadataChangedListener(bd, mMetadataListener));
+        mBluetoothDevices.forEach(bd -> {
+            try {
+                mBluetoothAdapter.removeOnMetadataChangedListener(bd, mMetadataListener);
+            } catch (NullPointerException e) {
+                Log.e(TAG, bd.getAnonymizedAddress() + ":" + e.toString());
+            } catch (IllegalArgumentException e) {
+                Log.e(TAG, bd.getAnonymizedAddress() + ":" + e.toString());
+            }
+        });
         mBluetoothDevices.clear();
     }
 
@@ -229,34 +268,40 @@ public final class BluetoothDevicePreference extends GearPreference {
 
     @SuppressWarnings("FutureReturnValueIgnored")
     void onPreferenceAttributesChanged() {
-        Pair<Drawable, String> pair = mCachedDevice.getDrawableWithDescription();
-        setIcon(pair.first);
-        contentDescription = pair.second;
-
-        /*
-         * The preference framework takes care of making sure the value has
-         * changed before proceeding. It will also call notifyChanged() if
-         * any preference info has changed from the previous value.
-         */
-        setTitle(mCachedDevice.getName());
         try {
             ThreadUtils.postOnBackgroundThread(() -> {
+                @Nullable String name = mCachedDevice.getName();
                 // Null check is done at the framework
-                ThreadUtils.postOnMainThread(() -> setSummary(getConnectionSummary()));
+                @Nullable String connectionSummary = getConnectionSummary();
+                @NonNull Pair<Drawable, String> pair = mCachedDevice.getDrawableWithDescription();
+                boolean isBusy = mCachedDevice.isBusy();
+                // Device is only visible in the UI if it has a valid name besides MAC address or
+                // when user allows showing devices without user-friendly name in developer settings
+                boolean isVisible =
+                        mShowDevicesWithoutNames || mCachedDevice.hasHumanReadableName();
+
+                ThreadUtils.postOnMainThread(() -> {
+                    /*
+                     * The preference framework takes care of making sure the value has
+                     * changed before proceeding. It will also call notifyChanged() if
+                     * any preference info has changed from the previous value.
+                     */
+                    setTitle(name);
+                    setSummary(connectionSummary);
+                    setIcon(pair.first);
+                    contentDescription = pair.second;
+                    // Used to gray out the item
+                    setEnabled(!isBusy);
+                    setVisible(isVisible);
+
+                    // This could affect ordering, so notify that
+                    if (mNeedNotifyHierarchyChanged) {
+                        notifyHierarchyChanged();
+                    }
+                });
             });
         } catch (RejectedExecutionException e) {
             Log.w(TAG, "Handler thread unavailable, skipping getConnectionSummary!");
-        }
-        // Used to gray out the item
-        setEnabled(!mCachedDevice.isBusy());
-
-        // Device is only visible in the UI if it has a valid name besides MAC address or when user
-        // allows showing devices without user-friendly name in developer settings
-        setVisible(mShowDevicesWithoutNames || mCachedDevice.hasHumanReadableName());
-
-        // This could affect ordering, so notify that
-        if (mNeedNotifyHierarchyChanged) {
-            notifyHierarchyChanged();
         }
     }
 
@@ -311,18 +356,22 @@ public final class BluetoothDevicePreference extends GearPreference {
                 return mCachedDevice
                         .compareTo(((BluetoothDevicePreference) another).mCachedDevice);
             case SortType.TYPE_FIFO:
-                return mCurrentTime > ((BluetoothDevicePreference) another).mCurrentTime ? 1 : -1;
+                return mId > ((BluetoothDevicePreference) another).mId ? 1 : -1;
             default:
                 return super.compareTo(another);
         }
     }
 
-    void onClicked() {
+    /**
+     * Performs different actions according to the device connected and bonded state after
+     * clicking on the preference.
+     */
+    public void onClicked() {
         Context context = getContext();
         int bondState = mCachedDevice.getBondState();
 
         final MetricsFeatureProvider metricsFeatureProvider =
-                FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+                FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
 
         if (mCachedDevice.isConnected()) {
             metricsFeatureProvider.action(context,
@@ -366,7 +415,7 @@ public final class BluetoothDevicePreference extends GearPreference {
     private void pair() {
         if (!mCachedDevice.startPairing()) {
             Utils.showError(getContext(), mCachedDevice.getName(),
-                    R.string.bluetooth_pairing_error_message);
+                    com.android.settingslib.R.string.bluetooth_pairing_error_message);
         }
     }
 

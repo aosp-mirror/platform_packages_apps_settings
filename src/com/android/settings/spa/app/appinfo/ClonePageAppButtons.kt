@@ -22,7 +22,6 @@ import androidx.compose.material.icons.outlined.Launch
 import androidx.compose.material.icons.outlined.WarningAmber
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settings.R
 import com.android.settingslib.spa.widget.button.ActionButton
@@ -39,11 +38,10 @@ private class CloneAppButtonsPresenter(private val packageInfoPresenter: Package
     private val appCreateButton = AppCreateButton(packageInfoPresenter)
     private val appForceStopButton = FakeAppForceStopButton(packageInfoPresenter)
 
-    @OptIn(ExperimentalLifecycleComposeApi::class)
     @Composable
     fun getActionButtons() =
         packageInfoPresenter.flow.collectAsStateWithLifecycle(initialValue = null).value?.let {
-            getActionButtons(it.applicationInfo)
+            getActionButtons(checkNotNull(it.applicationInfo))
         } ?: emptyList()
 
     @Composable

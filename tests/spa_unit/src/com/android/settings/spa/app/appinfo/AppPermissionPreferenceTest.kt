@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 The Android Open Source Project
+ * Copyright (C) 2024 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,35 +26,32 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
-import androidx.lifecycle.MutableLiveData
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settingslib.spa.testutils.delay
 import com.android.settingslib.spaprivileged.model.app.userHandle
 import com.google.common.truth.Truth.assertThat
+import kotlinx.coroutines.flow.flowOf
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.ArgumentCaptor
-import org.mockito.Mockito.any
-import org.mockito.Mockito.doNothing
-import org.mockito.Mockito.eq
-import org.mockito.Mockito.verify
-import org.mockito.Spy
-import org.mockito.junit.MockitoJUnit
-import org.mockito.junit.MockitoRule
+import org.mockito.kotlin.any
+import org.mockito.kotlin.argumentCaptor
+import org.mockito.kotlin.doNothing
+import org.mockito.kotlin.eq
+import org.mockito.kotlin.spy
+import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 
 @RunWith(AndroidJUnit4::class)
 class AppPermissionPreferenceTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
-    @get:Rule
-    val mockito: MockitoRule = MockitoJUnit.rule()
-
-    @Spy
-    private val context: Context = ApplicationProvider.getApplicationContext()
+    private val context: Context = spy(ApplicationProvider.getApplicationContext()) {
+        doNothing().whenever(mock).startActivityAsUser(any(), any())
+    }
 
     @Test
     fun title_display() {
@@ -66,15 +63,13 @@ class AppPermissionPreferenceTest {
 
     @Test
     fun whenClick_startActivity() {
-        doNothing().`when`(context).startActivityAsUser(any(), any())
-
         setContent()
         composeTestRule.onRoot().performClick()
         composeTestRule.delay()
 
-        val intentCaptor = ArgumentCaptor.forClass(Intent::class.java)
-        verify(context).startActivityAsUser(intentCaptor.capture(), eq(APP.userHandle))
-        val intent = intentCaptor.value
+        val intent = argumentCaptor {
+            verify(context).startActivityAsUser(capture(), eq(APP.userHandle))
+        }.firstValue
         assertThat(intent.action).isEqualTo(Intent.ACTION_MANAGE_APP_PERMISSIONS)
         assertThat(intent.getStringExtra(Intent.EXTRA_PACKAGE_NAME)).isEqualTo(PACKAGE_NAME)
         assertThat(intent.getBooleanExtra(EXTRA_HIDE_INFO_BUTTON, false)).isEqualTo(true)
@@ -85,7 +80,7 @@ class AppPermissionPreferenceTest {
             CompositionLocalProvider(LocalContext provides context) {
                 AppPermissionPreference(
                     app = APP,
-                    summaryLiveData = MutableLiveData(
+                    summaryFlow = flowOf(
                         AppPermissionSummaryState(summary = SUMMARY, enabled = true)
                     ),
                 )

@@ -24,11 +24,11 @@ import android.content.res.Resources
 import android.os.Bundle
 import android.util.Log
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settings.R
 import com.android.settingslib.spa.widget.preference.Preference
@@ -46,7 +46,6 @@ import kotlinx.coroutines.flow.shareIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.plus
 
-@OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun AppAllServicesPreference(app: ApplicationInfo) {
     val context = LocalContext.current
@@ -54,11 +53,12 @@ fun AppAllServicesPreference(app: ApplicationInfo) {
     val presenter = remember { AppAllServicesPresenter(context, app, coroutineScope) }
     if (!presenter.isAvailableFlow.collectAsStateWithLifecycle(initialValue = false).value) return
 
+    val summary by presenter.summaryFlow.collectAsStateWithLifecycle(
+        initialValue = stringResource(R.string.summary_placeholder),
+    )
     Preference(object : PreferenceModel {
         override val title = stringResource(R.string.app_info_all_services_label)
-        override val summary = presenter.summaryFlow.collectAsStateWithLifecycle(
-            initialValue = stringResource(R.string.summary_placeholder),
-        )
+        override val summary = { summary }
         override val onClick = presenter::startActivity
     })
 }

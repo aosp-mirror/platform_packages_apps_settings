@@ -37,9 +37,10 @@ import java.util.List;
 @RunWith(RobolectricTestRunner.class)
 public final class BatteryStateDaoTest {
     private static final int CURSOR_COLUMN_SIZE = 9;
-    private static final long TIMESTAMP1 = System.currentTimeMillis();
-    private static final long TIMESTAMP2 = System.currentTimeMillis() + 2;
-    private static final long TIMESTAMP3 = System.currentTimeMillis() + 4;
+    private static final long CURRENT = System.currentTimeMillis();
+    private static final long TIMESTAMP1 = CURRENT;
+    private static final long TIMESTAMP2 = CURRENT + 2;
+    private static final long TIMESTAMP3 = CURRENT + 4;
     private static final String PACKAGE_NAME1 = "com.android.apps.settings";
     private static final String PACKAGE_NAME2 = "com.android.apps.calendar";
     private static final String PACKAGE_NAME3 = "com.android.apps.gmail";
@@ -56,18 +57,21 @@ public final class BatteryStateDaoTest {
         BatteryTestUtils.insertDataToBatteryStateTable(mContext, TIMESTAMP3, PACKAGE_NAME3);
         BatteryTestUtils.insertDataToBatteryStateTable(mContext, TIMESTAMP2, PACKAGE_NAME2);
         BatteryTestUtils.insertDataToBatteryStateTable(
-                mContext, TIMESTAMP1, PACKAGE_NAME1, /*multiple=*/ true,
-                /*isFullChargeStart=*/ true);
+                mContext,
+                TIMESTAMP1,
+                PACKAGE_NAME1,
+                /* multiple= */ true,
+                /* isFullChargeStart= */ true);
     }
 
     @After
     public void closeDb() {
         mDatabase.close();
-        BatteryStateDatabase.setBatteryStateDatabase(/*database=*/ null);
+        BatteryStateDatabase.setBatteryStateDatabase(/* database= */ null);
     }
 
     @Test
-    public void batteryStateDao_insertAll() throws Exception {
+    public void insertAll_normalFlow_expectedBehavior() throws Exception {
         final List<BatteryState> states = mBatteryStateDao.getAllAfter(TIMESTAMP1);
         assertThat(states).hasSize(2);
         // Verifies the queried battery states.
@@ -76,8 +80,26 @@ public final class BatteryStateDaoTest {
     }
 
     @Test
-    public void batteryStateDao_getCursorSinceLastFullCharge() throws Exception {
-        final Cursor cursor1 = mBatteryStateDao.getCursorSinceLastFullCharge(TIMESTAMP1);
+    public void getLatestTimestamp_normalFlow_expectedBehavior() throws Exception {
+        final Cursor cursor1 = mBatteryStateDao.getLatestTimestampBefore(TIMESTAMP1 - 1);
+        assertThat(cursor1.getCount()).isEqualTo(1);
+        cursor1.moveToFirst();
+        assertThat(cursor1.getLong(0)).isEqualTo(0L);
+
+        final Cursor cursor2 = mBatteryStateDao.getLatestTimestampBefore(TIMESTAMP2);
+        assertThat(cursor2.getCount()).isEqualTo(1);
+        cursor2.moveToFirst();
+        assertThat(cursor2.getLong(0)).isEqualTo(TIMESTAMP2);
+
+        final Cursor cursor3 = mBatteryStateDao.getLatestTimestampBefore(TIMESTAMP3 + 1);
+        assertThat(cursor3.getCount()).isEqualTo(1);
+        cursor3.moveToFirst();
+        assertThat(cursor3.getLong(0)).isEqualTo(TIMESTAMP3);
+    }
+
+    @Test
+    public void getBatteryStatesAfter_normalFlow_expectedBehavior() throws Exception {
+        final Cursor cursor1 = mBatteryStateDao.getBatteryStatesAfter(TIMESTAMP1);
         assertThat(cursor1.getCount()).isEqualTo(3);
         assertThat(cursor1.getColumnCount()).isEqualTo(CURSOR_COLUMN_SIZE);
         // Verifies the queried first battery state.
@@ -90,7 +112,7 @@ public final class BatteryStateDaoTest {
         cursor1.moveToNext();
         assertThat(cursor1.getString(3 /*packageName*/)).isEqualTo(PACKAGE_NAME3);
 
-        final Cursor cursor2 = mBatteryStateDao.getCursorSinceLastFullCharge(TIMESTAMP3);
+        final Cursor cursor2 = mBatteryStateDao.getBatteryStatesAfter(TIMESTAMP3);
         assertThat(cursor2.getCount()).isEqualTo(1);
         assertThat(cursor2.getColumnCount()).isEqualTo(CURSOR_COLUMN_SIZE);
         // Verifies the queried first battery state.
@@ -99,25 +121,7 @@ public final class BatteryStateDaoTest {
     }
 
     @Test
-    public void batteryStateDao_getCursorSinceLastFullCharge_noFullChargeData_returnSevenDaysData()
-            throws Exception {
-        mBatteryStateDao.clearAll();
-        BatteryTestUtils.insertDataToBatteryStateTable(mContext, TIMESTAMP3, PACKAGE_NAME3);
-        BatteryTestUtils.insertDataToBatteryStateTable(mContext, TIMESTAMP2, PACKAGE_NAME2);
-        BatteryTestUtils.insertDataToBatteryStateTable(mContext, TIMESTAMP1, PACKAGE_NAME1);
-        final Cursor cursor = mBatteryStateDao.getCursorSinceLastFullCharge(TIMESTAMP2);
-        assertThat(cursor.getCount()).isEqualTo(2);
-        assertThat(cursor.getColumnCount()).isEqualTo(CURSOR_COLUMN_SIZE);
-        // Verifies the queried first battery state.
-        cursor.moveToFirst();
-        assertThat(cursor.getString(3 /*packageName*/)).isEqualTo(PACKAGE_NAME2);
-        // Verifies the queried third battery state.
-        cursor.moveToNext();
-        assertThat(cursor.getString(3 /*packageName*/)).isEqualTo(PACKAGE_NAME3);
-    }
-
-    @Test
-    public void batteryStateDao_clearAllBefore() throws Exception {
+    public void clearAllBefore_normalFlow_expectedBehavior() throws Exception {
         mBatteryStateDao.clearAllBefore(TIMESTAMP2);
 
         final List<BatteryState> states = mBatteryStateDao.getAllAfter(0);
@@ -127,37 +131,33 @@ public final class BatteryStateDaoTest {
     }
 
     @Test
-    public void batteryStateDao_clearAll() throws Exception {
+    public void clearAll_normalFlow_expectedBehavior() throws Exception {
         assertThat(mBatteryStateDao.getAllAfter(0)).hasSize(3);
         mBatteryStateDao.clearAll();
         assertThat(mBatteryStateDao.getAllAfter(0)).isEmpty();
     }
 
     @Test
-    public void getInstance_createNewInstance() throws Exception {
-        BatteryStateDatabase.setBatteryStateDatabase(/*database=*/ null);
+    public void getInstance_createNewInstance_returnsExpectedResult() throws Exception {
+        BatteryStateDatabase.setBatteryStateDatabase(/* database= */ null);
         assertThat(BatteryStateDatabase.getInstance(mContext)).isNotNull();
     }
 
     @Test
-    public void getDistinctTimestampCount_returnsExpectedResult() {
-        assertThat(mBatteryStateDao.getDistinctTimestampCount(/*timestamp=*/ 0))
-                .isEqualTo(3);
-        assertThat(mBatteryStateDao.getDistinctTimestampCount(TIMESTAMP1))
-                .isEqualTo(2);
+    public void getDistinctTimestampCount_normalFlow_returnsExpectedResult() {
+        assertThat(mBatteryStateDao.getDistinctTimestampCount(/* timestamp= */ 0)).isEqualTo(3);
+        assertThat(mBatteryStateDao.getDistinctTimestampCount(TIMESTAMP1)).isEqualTo(2);
     }
 
     @Test
-    public void getDistinctTimestamps_returnsExpectedResult() {
-        final List<Long> timestamps =
-                mBatteryStateDao.getDistinctTimestamps(/*timestamp=*/ 0);
+    public void getDistinctTimestamps_normalFlow_returnsExpectedResult() {
+        final List<Long> timestamps = mBatteryStateDao.getDistinctTimestamps(/* timestamp= */ 0);
 
         assertThat(timestamps).hasSize(3);
         assertThat(timestamps).containsExactly(TIMESTAMP1, TIMESTAMP2, TIMESTAMP3);
     }
 
-    private static void assertBatteryState(
-            BatteryState state, long timestamp, String packageName) {
+    private static void assertBatteryState(BatteryState state, long timestamp, String packageName) {
         assertThat(state.timestamp).isEqualTo(timestamp);
         assertThat(state.packageName).isEqualTo(packageName);
     }

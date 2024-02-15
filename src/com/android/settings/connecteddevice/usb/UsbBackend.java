@@ -22,7 +22,6 @@ import static android.service.usb.UsbPortStatusProto.DATA_ROLE_HOST;
 import static android.service.usb.UsbPortStatusProto.DATA_ROLE_NONE;
 import static android.service.usb.UsbPortStatusProto.POWER_ROLE_SINK;
 
-import android.annotation.Nullable;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.hardware.usb.UsbManager;
@@ -32,6 +31,7 @@ import android.net.TetheringManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 
 import java.util.List;

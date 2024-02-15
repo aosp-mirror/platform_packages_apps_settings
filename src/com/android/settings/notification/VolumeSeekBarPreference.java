@@ -37,6 +37,8 @@ import com.android.internal.jank.InteractionJankMonitor;
 import com.android.settings.R;
 import com.android.settings.widget.SeekBarPreference;
 
+import java.text.NumberFormat;
+import java.util.Locale;
 import java.util.Objects;
 
 /** A slider preference that directly controls an audio stream volume (no dialog) **/
@@ -48,9 +50,13 @@ public class VolumeSeekBarPreference extends SeekBarPreference {
     protected SeekBar mSeekBar;
     private int mStream;
     private SeekBarVolumizer mVolumizer;
+    @VisibleForTesting
+    SeekBarVolumizerFactory mSeekBarVolumizerFactory;
     private Callback mCallback;
+    private Listener mListener;
     private ImageView mIconView;
     private TextView mSuppressionTextView;
+    private TextView mTitle;
     private String mSuppressionText;
     private boolean mMuted;
     private boolean mZenMuted;
@@ -59,30 +65,36 @@ public class VolumeSeekBarPreference extends SeekBarPreference {
     private boolean mStopped;
     @VisibleForTesting
     AudioManager mAudioManager;
+    private Locale mLocale;
+    private NumberFormat mNumberFormat;
 
     public VolumeSeekBarPreference(Context context, AttributeSet attrs, int defStyleAttr,
             int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         setLayoutResource(R.layout.preference_volume_slider);
         mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+        mSeekBarVolumizerFactory = new SeekBarVolumizerFactory(context);
     }
 
     public VolumeSeekBarPreference(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         setLayoutResource(R.layout.preference_volume_slider);
         mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+        mSeekBarVolumizerFactory = new SeekBarVolumizerFactory(context);
     }
 
     public VolumeSeekBarPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         setLayoutResource(R.layout.preference_volume_slider);
         mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+        mSeekBarVolumizerFactory = new SeekBarVolumizerFactory(context);
     }
 
     public VolumeSeekBarPreference(Context context) {
         super(context);
         setLayoutResource(R.layout.preference_volume_slider);
         mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+        mSeekBarVolumizerFactory = new SeekBarVolumizerFactory(context);
     }
 
     public void setStream(int stream) {
@@ -96,6 +108,10 @@ public class VolumeSeekBarPreference extends SeekBarPreference {
 
     public void setCallback(Callback callback) {
         mCallback = callback;
+    }
+
+    public void setListener(Listener listener) {
+        mListener = listener;
     }
 
     public void onActivityResume() {
@@ -118,11 +134,17 @@ public class VolumeSeekBarPreference extends SeekBarPreference {
         mSeekBar = (SeekBar) view.findViewById(com.android.internal.R.id.seekbar);
         mIconView = (ImageView) view.findViewById(com.android.internal.R.id.icon);
         mSuppressionTextView = (TextView) view.findViewById(R.id.suppression_text);
+        mTitle = (TextView) view.findViewById(com.android.internal.R.id.title);
         init();
     }
 
     protected void init() {
         if (mSeekBar == null) return;
+        // It's unnecessary to set up relevant volumizer configuration if preference is disabled.
+        if (!isEnabled()) {
+            mSeekBar.setEnabled(false);
+            return;
+        }
         final SeekBarVolumizer.Callback sbvc = new SeekBarVolumizer.Callback() {
             @Override
             public void onSampleStarting(SeekBarVolumizer sbv) {
@@ -135,6 +157,7 @@ public class VolumeSeekBarPreference extends SeekBarPreference {
                 if (mCallback != null) {
                     mCallback.onStreamValueChanged(mStream, progress);
                 }
+                overrideSeekBarStateDescription(formatStateDescription(progress));
             }
             @Override
             public void onMuted(boolean muted, boolean zenMuted) {
@@ -142,6 +165,9 @@ public class VolumeSeekBarPreference extends SeekBarPreference {
                 mMuted = muted;
                 mZenMuted = zenMuted;
                 updateIconView();
+                if (mListener != null) {
+                    mListener.onUpdateMuteState();
+                }
             }
             @Override
             public void onStartTrackingTouch(SeekBarVolumizer sbv) {
@@ -159,15 +185,14 @@ public class VolumeSeekBarPreference extends SeekBarPreference {
         };
         final Uri sampleUri = mStream == AudioManager.STREAM_MUSIC ? getMediaVolumeUri() : null;
         if (mVolumizer == null) {
-            mVolumizer = new SeekBarVolumizer(getContext(), mStream, sampleUri, sbvc);
+            mVolumizer = mSeekBarVolumizerFactory.create(mStream, sampleUri, sbvc);
         }
         mVolumizer.start();
         mVolumizer.setSeekBar(mSeekBar);
         updateIconView();
         updateSuppressionText();
-        if (!isEnabled()) {
-            mSeekBar.setEnabled(false);
-            mVolumizer.stop();
+        if (mListener != null) {
+            mListener.onUpdateMuteState();
         }
     }
 
@@ -175,7 +200,7 @@ public class VolumeSeekBarPreference extends SeekBarPreference {
         if (mIconView == null) return;
         if (mIconResId != 0) {
             mIconView.setImageResource(mIconResId);
-        } else if (mMuteIconResId != 0 && mMuted && !mZenMuted) {
+        } else if (mMuteIconResId != 0 && isMuted()) {
             mIconView.setImageResource(mMuteIconResId);
         } else {
             mIconView.setImageDrawable(getIcon());
@@ -202,10 +227,41 @@ public class VolumeSeekBarPreference extends SeekBarPreference {
                 + "/" + R.raw.media_volume);
     }
 
+    @VisibleForTesting
+    CharSequence formatStateDescription(int progress) {
+        // This code follows the same approach in ProgressBar.java, but it rounds down the percent
+        // to match it with what the talkback feature says after any progress change. (b/285458191)
+        // Cache the locale-appropriate NumberFormat.  Configuration locale is guaranteed
+        // non-null, so the first time this is called we will always get the appropriate
+        // NumberFormat, then never regenerate it unless the locale changes on the fly.
+        Locale curLocale = getContext().getResources().getConfiguration().getLocales().get(0);
+        if (mLocale == null || !mLocale.equals(curLocale)) {
+            mLocale = curLocale;
+            mNumberFormat = NumberFormat.getPercentInstance(mLocale);
+        }
+        return mNumberFormat.format(getPercent(progress));
+    }
+
+    @VisibleForTesting
+    double getPercent(float progress) {
+        final float maxProgress = getMax();
+        final float minProgress = getMin();
+        final float diffProgress = maxProgress - minProgress;
+        if (diffProgress <= 0.0f) {
+            return 0.0f;
+        }
+        final float percent = (progress - minProgress) / diffProgress;
+        return Math.floor(Math.max(0.0f, Math.min(1.0f, percent)) * 100) / 100;
+    }
+
     public void setSuppressionText(String text) {
         if (Objects.equals(text, mSuppressionText)) return;
         mSuppressionText = text;
         updateSuppressionText();
+    }
+
+    protected boolean isMuted() {
+        return mMuted && !mZenMuted;
     }
 
     protected void updateSuppressionText() {
@@ -216,6 +272,19 @@ public class VolumeSeekBarPreference extends SeekBarPreference {
         }
     }
 
+    /**
+     * Update content description of title to improve talkback announcements.
+     */
+    protected void updateContentDescription(CharSequence contentDescription) {
+        if (mTitle == null) return;
+        mTitle.setContentDescription(contentDescription);
+    }
+
+    protected void setAccessibilityLiveRegion(int mode) {
+        if (mTitle == null) return;
+        mTitle.setAccessibilityLiveRegion(mode);
+    }
+
     public interface Callback {
         void onSampleStarting(SeekBarVolumizer sbv);
         void onStreamValueChanged(int stream, int progress);
@@ -224,5 +293,16 @@ public class VolumeSeekBarPreference extends SeekBarPreference {
          * Callback reporting that the seek bar is start tracking.
          */
         void onStartTrackingTouch(SeekBarVolumizer sbv);
+    }
+
+    /**
+     * Listener to view updates in volumeSeekbarPreference.
+     */
+    public interface Listener {
+
+        /**
+         * Listener to mute state updates.
+         */
+        void onUpdateMuteState();
     }
 }

@@ -16,7 +16,6 @@
 
 package com.android.settings.inputmethod;
 
-import android.annotation.Nullable;
 import android.app.ActionBar;
 import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
@@ -39,6 +38,7 @@ import android.widget.SectionIndexer;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.ListFragment;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
@@ -76,7 +76,7 @@ public class UserDictionarySettings extends ListFragment implements Instrumentab
         super.onCreate(savedInstanceState);
 
         mVisibilityLoggerMixin = new VisibilityLoggerMixin(getMetricsCategory(),
-                FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider());
+                FeatureFactory.getFeatureFactory().getMetricsFeatureProvider());
 
         final Intent intent = getActivity().getIntent();
         final String localeFromIntent =

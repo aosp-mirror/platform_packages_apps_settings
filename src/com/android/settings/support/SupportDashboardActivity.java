@@ -42,8 +42,8 @@ public class SupportDashboardActivity extends Activity implements Indexable {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SupportFeatureProvider supportFeatureProvider = FeatureFactory.getFactory(this)
-                .getSupportFeatureProvider(this);
+        SupportFeatureProvider supportFeatureProvider = FeatureFactory.getFeatureFactory()
+                .getSupportFeatureProvider();
 
         // try to launch support if we have the feature provider
         if (supportFeatureProvider != null) {

@@ -1,0 +1,9 @@
+package: "com.android.settings.flags"
+container: "system"
+
+flag {
+  name: "protect_lock_after_timeout_with_auth"
+  namespace: "safety_center"
+  description: "Require an auth challenge to open Lock after timeout page"
+  bug: "315937886"
+}

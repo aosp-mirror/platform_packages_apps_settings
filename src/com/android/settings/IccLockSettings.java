@@ -52,8 +52,9 @@ import android.widget.TabWidget;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.network.ProxySubscriptionManager;
 import com.android.settings.network.SubscriptionUtil;
@@ -122,7 +123,7 @@ public class IccLockSettings extends SettingsPreferenceFragment
     private ProxySubscriptionManager mProxySubscriptionMgr;
 
     private EditPinPreference mPinDialog;
-    private SwitchPreference mPinToggle;
+    private TwoStatePreference mPinToggle;
 
     private Resources mRes;
 
@@ -193,7 +194,7 @@ public class IccLockSettings extends SettingsPreferenceFragment
         addPreferencesFromResource(R.xml.sim_lock_settings);
 
         mPinDialog = (EditPinPreference) findPreference(PIN_DIALOG);
-        mPinToggle = (SwitchPreference) findPreference(PIN_TOGGLE);
+        mPinToggle = (TwoStatePreference) findPreference(PIN_TOGGLE);
         if (savedInstanceState != null) {
             if (savedInstanceState.containsKey(DIALOG_STATE)
                     && restoreDialogStates(savedInstanceState)) {
@@ -716,13 +717,18 @@ public class IccLockSettings extends SettingsPreferenceFragment
         return slotId;
     }
 
+    @Nullable
     private SubscriptionInfo getVisibleSubscriptionInfoForSimSlotIndex(int slotId) {
         final List<SubscriptionInfo> subInfoList =
                 mProxySubscriptionMgr.getActiveSubscriptionsInfo();
         if (subInfoList == null) {
             return null;
         }
-        final CarrierConfigManager carrierConfigManager = getContext().getSystemService(
+        Context context = getContext();
+        if (context == null) {
+            return null;
+        }
+        final CarrierConfigManager carrierConfigManager = context.getSystemService(
                 CarrierConfigManager.class);
         for (SubscriptionInfo subInfo : subInfoList) {
             if ((isSubscriptionVisible(carrierConfigManager, subInfo)

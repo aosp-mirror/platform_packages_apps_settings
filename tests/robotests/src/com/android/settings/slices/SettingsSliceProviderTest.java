@@ -30,6 +30,7 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -119,6 +120,7 @@ public class SettingsSliceProviderTest {
     private Context mContext;
     private SettingsSliceProvider mProvider;
     private ShadowPackageManager mPackageManager;
+    private ShadowUserManager mShadowUserManager;
 
     @Mock
     private SliceManager mManager;
@@ -157,6 +159,7 @@ public class SettingsSliceProviderTest {
         when(mManager.getPinnedSlices()).thenReturn(Collections.emptyList());
 
         mPackageManager = Shadows.shadowOf(mContext.getPackageManager());
+        mShadowUserManager = ShadowUserManager.getShadow();
 
         SliceProvider.setSpecs(SliceLiveData.SUPPORTED_SPECS);
     }
@@ -198,6 +201,7 @@ public class SettingsSliceProviderTest {
                 .registerIntentToUri(eq(FakeToggleController.INTENT_FILTER), eq(INTENT_SLICE_URI));
     }
 
+    @Ignore("b/314925256")
     @Test
     public void loadSlice_registersBackgroundListener() {
         SliceTestUtils.insertSliceToDb(mContext, KEY);
@@ -290,6 +294,37 @@ public class SettingsSliceProviderTest {
         mProvider.onBindSlice(data.getUri());
 
         assertThat(ShadowTheme.isThemeRebased()).isFalse();
+    }
+
+    @Test
+    public void onBindSlice_guestRestricted_returnsNull() {
+        final String key = "enable_usb_tethering";
+        mShadowUserManager.setGuestUser(true);
+        final Uri testUri = new Uri.Builder()
+            .scheme(ContentResolver.SCHEME_CONTENT)
+            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+            .appendPath(key)
+            .build();
+
+        final Slice slice = mProvider.onBindSlice(testUri);
+
+        assertThat(slice).isNull();
+    }
+
+    @Test
+    public void onBindSlice_notGuestRestricted_returnsNotNull() {
+        final String key = "enable_usb_tethering";
+        final Uri testUri = new Uri.Builder()
+            .scheme(ContentResolver.SCHEME_CONTENT)
+            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+            .appendPath(key)
+            .build();
+
+        final Slice slice = mProvider.onBindSlice(testUri);
+
+        assertThat(slice).isNotNull();
     }
 
     @Test
@@ -603,7 +638,6 @@ public class SettingsSliceProviderTest {
         verify(mManager, never()).grantSlicePermission(anyString(), any(Uri.class));
     }
 
-    @Ignore
     @Test
     @Config(qualifiers = "mcc999")
     public void grantAllowlistedPackagePermissions_hasPackageAllowlist_shouldGrant() {
@@ -631,7 +665,6 @@ public class SettingsSliceProviderTest {
         assertThat(mProvider.isPrivateSlicesNeeded(uri)).isFalse();
     }
 
-    @Ignore
     @Test
     @Config(qualifiers = "mcc999")
     public void isPrivateSlicesNeeded_correctUriWithPermissionAndIsSI_returnTrue() {

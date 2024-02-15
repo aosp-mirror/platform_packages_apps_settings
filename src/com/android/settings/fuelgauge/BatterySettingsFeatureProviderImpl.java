@@ -18,12 +18,36 @@ package com.android.settings.fuelgauge;
 
 import android.content.Context;
 
+import com.android.settings.fuelgauge.batterytip.BatteryTipPolicy;
+import com.android.settings.fuelgauge.batterytip.detectors.LowBatteryDetector;
+import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
+
+import java.util.List;
+
 /** Feature provider implementation for battery settings usage. */
 public class BatterySettingsFeatureProviderImpl implements BatterySettingsFeatureProvider {
 
-    protected Context mContext;
+    @Override
+    public boolean isManufactureDateAvailable(Context context, long manufactureDateMs) {
+        return false;
+    }
 
-    public BatterySettingsFeatureProviderImpl(Context context) {
-        mContext = context.getApplicationContext();
+    @Override
+    public boolean isFirstUseDateAvailable(Context context, long firstUseDateMs) {
+        return false;
+    }
+
+    @Override
+    public boolean isBatteryInfoEnabled(Context context) {
+        return false;
+    }
+
+    @Override
+    public void addBatteryTipDetector(
+            Context context,
+            List<BatteryTip> batteryTips,
+            BatteryInfo batteryInfo,
+            BatteryTipPolicy batteryTipPolicy) {
+        batteryTips.add(new LowBatteryDetector(context, batteryTipPolicy, batteryInfo).detect());
     }
 }

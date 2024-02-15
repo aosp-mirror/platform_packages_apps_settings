@@ -61,7 +61,7 @@ public class DreamPickerController extends BasePreferenceController {
         mBackend = backend;
         mDreamInfos = mBackend.getDreamInfos();
         mActiveDream = getActiveDreamInfo(mDreamInfos);
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     @Override

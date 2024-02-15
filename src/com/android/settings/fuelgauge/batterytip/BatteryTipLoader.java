@@ -18,21 +18,16 @@ package com.android.settings.fuelgauge.batterytip;
 
 import android.content.Context;
 import android.os.BatteryUsageStats;
-import android.os.PowerManager;
 
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.fuelgauge.BatteryInfo;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.batterytip.detectors.BatteryDefenderDetector;
-import com.android.settings.fuelgauge.batterytip.detectors.DockDefenderDetector;
 import com.android.settings.fuelgauge.batterytip.detectors.HighUsageDetector;
 import com.android.settings.fuelgauge.batterytip.detectors.IncompatibleChargerDetector;
-import com.android.settings.fuelgauge.batterytip.detectors.LowBatteryDetector;
-import com.android.settings.fuelgauge.batterytip.detectors.SmartBatteryDetector;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
-import com.android.settings.fuelgauge.batterytip.tips.LowBatteryTip;
-import com.android.settingslib.fuelgauge.EstimateKt;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.utils.AsyncLoaderCompat;
 
 import java.util.ArrayList;
@@ -47,8 +42,8 @@ public class BatteryTipLoader extends AsyncLoaderCompat<List<BatteryTip>> {
     private static final String TAG = "BatteryTipLoader";
 
     private BatteryUsageStats mBatteryUsageStats;
-    @VisibleForTesting
-    BatteryUtils mBatteryUtils;
+
+    @VisibleForTesting BatteryUtils mBatteryUtils;
 
     public BatteryTipLoader(Context context, BatteryUsageStats batteryUsageStats) {
         super(context);
@@ -59,22 +54,22 @@ public class BatteryTipLoader extends AsyncLoaderCompat<List<BatteryTip>> {
     @Override
     public List<BatteryTip> loadInBackground() {
         final List<BatteryTip> tips = new ArrayList<>();
-        final BatteryTipPolicy policy = new BatteryTipPolicy(getContext());
+        final BatteryTipPolicy batteryTipPolicy = new BatteryTipPolicy(getContext());
         final BatteryInfo batteryInfo = mBatteryUtils.getBatteryInfo(TAG);
         final Context context = getContext().getApplicationContext();
-        final boolean isPowerSaveMode =
-                context.getSystemService(PowerManager.class).isPowerSaveMode();
 
-        tips.add(new LowBatteryDetector(context, policy, batteryInfo, isPowerSaveMode).detect());
-        tips.add(new HighUsageDetector(context, policy, mBatteryUsageStats, batteryInfo).detect());
+        tips.add(
+                new HighUsageDetector(context, batteryTipPolicy, mBatteryUsageStats, batteryInfo)
+                        .detect());
         tips.add(new BatteryDefenderDetector(batteryInfo, context).detect());
-        tips.add(new DockDefenderDetector(batteryInfo, context).detect());
         tips.add(new IncompatibleChargerDetector(context).detect());
+        FeatureFactory.getFeatureFactory()
+                .getBatterySettingsFeatureProvider()
+                .addBatteryTipDetector(context, tips, batteryInfo, batteryTipPolicy);
         Collections.sort(tips);
         return tips;
     }
 
     @Override
-    protected void onDiscardResult(List<BatteryTip> result) {
-    }
+    protected void onDiscardResult(List<BatteryTip> result) {}
 }

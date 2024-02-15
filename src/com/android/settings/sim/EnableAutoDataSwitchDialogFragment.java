@@ -195,7 +195,7 @@ public class EnableAutoDataSwitchDialogFragment extends SimDialogFragment implem
     }
 
     private SubscriptionManager getSubscriptionManager() {
-        return getContext().getSystemService(SubscriptionManager.class);
+        return getContext().getSystemService(SubscriptionManager.class).createForAllUserProfiles();
     }
 
     @VisibleForTesting

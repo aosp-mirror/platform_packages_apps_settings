@@ -53,6 +53,7 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
+import org.robolectric.annotation.LooperMode;
 import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowApplication;
 
@@ -60,6 +61,7 @@ import org.robolectric.shadows.ShadowApplication;
  * Tests for {@link AccessibilityQuickSettingsPrimarySwitchPreferenceController}.
  */
 @RunWith(RobolectricTestRunner.class)
+@LooperMode(LooperMode.Mode.LEGACY)
 public class AccessibilityQuickSettingsPrimarySwitchPreferenceControllerTest {
 
     private static final String PLACEHOLDER_PACKAGE_NAME = "com.placeholder.example";
@@ -96,7 +98,7 @@ public class AccessibilityQuickSettingsPrimarySwitchPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mContext.setTheme(R.style.Theme_AppCompat);
+        mContext.setTheme(androidx.appcompat.R.style.Theme_AppCompat);
         mFragment = spy(new TestFragment());
         when(mFragment.getPreferenceManager()).thenReturn(mPreferenceManager);
         when(mFragment.getPreferenceManager().getContext()).thenReturn(mContext);
@@ -110,7 +112,7 @@ public class AccessibilityQuickSettingsPrimarySwitchPreferenceControllerTest {
         mPreference.setTitle(TEST_TITLE);
         LayoutInflater inflater = LayoutInflater.from(mContext);
         mHolder = PreferenceViewHolder.createInstanceForTests(inflater.inflate(
-                com.android.settingslib.R.layout.preference_two_target, null));
+                com.android.settingslib.widget.preference.twotarget.R.layout.preference_two_target, null));
         LinearLayout mWidgetView = mHolder.itemView.findViewById(android.R.id.widget_frame);
         inflater.inflate(R.layout.preference_widget_primary_switch, mWidgetView, true);
         mPreference.onBindViewHolder(mHolder);

@@ -75,11 +75,6 @@ public class FaceSettingsEnrollButtonPreferenceController extends BasePreference
 
     @Override
     public void onClick(View v) {
-        // If it's in multi window mode, do not start the introduction intent.
-        if (mListener != null && mListener.onShowSplitScreenDialog()) {
-            return;
-        }
-
         mIsClicked = true;
         final Intent intent = new Intent();
         intent.setClassName(SETTINGS_PACKAGE_NAME, FaceEnrollIntroduction.class.getName());
@@ -120,12 +115,6 @@ public class FaceSettingsEnrollButtonPreferenceController extends BasePreference
      * Interface for registering callbacks related to the face enroll preference button.
      */
     public interface Listener {
-        /**
-         * Called to check whether to show dialog in split screen mode
-         * @return Whether split screen warning dialog shown.
-         */
-        boolean onShowSplitScreenDialog();
-
         /**
          * Called when the user has indicated an intent to begin enrolling a new face.
          * @param intent The Intent that should be used to launch face enrollment.

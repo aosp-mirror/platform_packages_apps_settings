@@ -56,7 +56,7 @@ public class EligibleCardChecker implements Callable<ContextualCard> {
     public ContextualCard call() {
         final long startTime = System.currentTimeMillis();
         final MetricsFeatureProvider metricsFeatureProvider =
-                FeatureFactory.getFactory(mContext).getMetricsFeatureProvider();
+                FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
         ContextualCard result;
 
         if (isCardEligibleToDisplay(mCard)) {

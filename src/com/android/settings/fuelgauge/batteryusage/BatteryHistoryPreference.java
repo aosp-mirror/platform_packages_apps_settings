@@ -17,27 +17,18 @@
 package com.android.settings.fuelgauge.batteryusage;
 
 import android.content.Context;
-import android.os.BatteryUsageStats;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
-import com.android.settings.fuelgauge.BatteryInfo;
 import com.android.settings.fuelgauge.BatteryUtils;
 
-/**
- * Custom preference for displaying the battery level as chart graph.
- */
+/** Custom preference for displaying the battery level as chart graph. */
 public class BatteryHistoryPreference extends Preference {
     private static final String TAG = "BatteryHistoryPreference";
-
-    @VisibleForTesting
-    BatteryInfo mBatteryInfo;
 
     private BatteryChartView mDailyChartView;
     private BatteryChartView mHourlyChartView;
@@ -47,13 +38,6 @@ public class BatteryHistoryPreference extends Preference {
         super(context, attrs);
         setLayoutResource(R.layout.battery_chart_graph);
         setSelectable(false);
-    }
-
-    void setBatteryUsageStats(@NonNull BatteryUsageStats batteryUsageStats) {
-        BatteryInfo.getBatteryInfo(getContext(), info -> {
-            mBatteryInfo = info;
-            notifyChanged();
-        }, batteryUsageStats, false);
     }
 
     void setChartPreferenceController(BatteryChartPreferenceController controller) {
@@ -67,9 +51,6 @@ public class BatteryHistoryPreference extends Preference {
     public void onBindViewHolder(PreferenceViewHolder view) {
         super.onBindViewHolder(view);
         final long startTime = System.currentTimeMillis();
-        if (mBatteryInfo == null) {
-            return;
-        }
         final TextView companionTextView = (TextView) view.findViewById(R.id.companion_text);
         mDailyChartView = (BatteryChartView) view.findViewById(R.id.daily_battery_chart);
         mDailyChartView.setCompanionTextView(companionTextView);

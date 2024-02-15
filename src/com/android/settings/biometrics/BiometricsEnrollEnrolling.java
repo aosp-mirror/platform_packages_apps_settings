@@ -16,10 +16,11 @@
 
 package com.android.settings.biometrics;
 
-import android.annotation.Nullable;
 import android.content.Intent;
 import android.os.UserHandle;
 import android.view.View;
+
+import androidx.annotation.Nullable;
 
 import com.android.settings.password.ChooseLockSettingsHelper;
 
@@ -96,6 +97,14 @@ public abstract class BiometricsEnrollEnrolling extends BiometricEnrollBase
     }
 
     public void startEnrollment() {
+        // If it's in multi window mode, dialog is shown, do not start enrollment.
+        if (shouldShowSplitScreenDialog()) {
+            return;
+        }
+        startEnrollmentInternal();
+    }
+
+    protected void startEnrollmentInternal() {
         mSidecar = (BiometricEnrollSidecar) getSupportFragmentManager()
                 .findFragmentByTag(TAG_SIDECAR);
         if (mSidecar == null) {

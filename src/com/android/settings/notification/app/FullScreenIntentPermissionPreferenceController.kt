@@ -21,6 +21,7 @@ import android.app.AppOpsManager
 import android.app.AppOpsManager.OP_USE_FULL_SCREEN_INTENT
 import android.content.AttributionSource
 import android.content.Context
+import android.content.pm.PackageManager.NameNotFoundException
 import android.content.pm.PackageManager.FLAG_PERMISSION_USER_SET
 import android.content.pm.PackageManager.GET_PERMISSIONS
 import android.os.UserHandle
@@ -79,12 +80,16 @@ class FullScreenIntentPermissionPreferenceController(
     }
 
     private fun isPermissionRequested(): Boolean {
-        val packageInfo = packageManager.getPackageInfo(packageName, GET_PERMISSIONS)
+        try {
+            val packageInfo = packageManager.getPackageInfo(packageName, GET_PERMISSIONS)
 
-        for (requestedPermission in packageInfo.requestedPermissions) {
-            if (USE_FULL_SCREEN_INTENT.equals(requestedPermission)) {
-                return true
+            for (requestedPermission in packageInfo.requestedPermissions.orEmpty()) {
+                if (USE_FULL_SCREEN_INTENT.equals(requestedPermission)) {
+                    return true
+                }
             }
+        } catch (exception: NameNotFoundException) {
+            Log.e(TAG, "isPermissionRequested failed: $exception")
         }
 
         return false

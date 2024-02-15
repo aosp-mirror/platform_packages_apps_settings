@@ -1,0 +1,18 @@
+// This  library is mainly used for fakes which will be shared across are various types of tests
+// unit/robo/screenshot etc.
+//
+// This library shouldn't have many dependencies.
+package {
+    default_team: "trendy_team_android_settings_app",
+}
+
+android_library {
+    name: "FingerprintManagerInteractor",
+    srcs: [
+        "**/*.kt",
+    ],
+    static_libs: [
+        "BiometricsSharedLib",
+        "kotlinx-coroutines-android",
+    ],
+}

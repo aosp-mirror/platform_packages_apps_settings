@@ -23,9 +23,7 @@ import com.android.settings.fuelgauge.batterytip.AppInfo;
 
 import java.util.function.Predicate;
 
-/**
- * {@link Predicate} for {@link AppInfo} to check whether it is restricted.
- */
+/** {@link Predicate} for {@link AppInfo} to check whether it is restricted. */
 public class AppRestrictionPredicate implements Predicate<AppInfo> {
 
     private static AppRestrictionPredicate sInstance;
@@ -46,7 +44,8 @@ public class AppRestrictionPredicate implements Predicate<AppInfo> {
     @Override
     public boolean test(AppInfo appInfo) {
         // Return true if app already been restricted
-        return mAppOpsManager.checkOpNoThrow(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND,
-                appInfo.uid, appInfo.packageName) == AppOpsManager.MODE_IGNORED;
+        return mAppOpsManager.checkOpNoThrow(
+                        AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, appInfo.uid, appInfo.packageName)
+                == AppOpsManager.MODE_IGNORED;
     }
 }

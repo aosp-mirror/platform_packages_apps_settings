@@ -16,6 +16,8 @@
 
 package com.android.settings.network.apn;
 
+import static com.android.settings.network.apn.ApnEditPageProviderKt.EDIT_URL;
+
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
@@ -34,15 +36,21 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
+import com.android.settings.flags.Flags;
+import com.android.settings.spa.SpaActivity;
 
 /**
  * Preference of APN UI entry
  */
-public class ApnPreference extends Preference implements CompoundButton.OnCheckedChangeListener,
-        View.OnClickListener {
-    private static final  String TAG = "ApnPreference";
-
+public class ApnPreference extends Preference
+        implements CompoundButton.OnCheckedChangeListener, View.OnClickListener {
+    private static final String TAG = "ApnPreference";
+    private static String sSelectedKey = null;
+    private static CompoundButton sCurrentChecked = null;
     private int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
+    private boolean mProtectFromCheckedChange = false;
+    private boolean mSelectable = true;
+    private boolean mHideDetails = false;
 
     /**
      * Constructor of Preference
@@ -64,12 +72,6 @@ public class ApnPreference extends Preference implements CompoundButton.OnChecke
     public ApnPreference(Context context) {
         this(context, null);
     }
-
-    private static String sSelectedKey = null;
-    private static CompoundButton sCurrentChecked = null;
-    private boolean mProtectFromCheckedChange = false;
-    private boolean mSelectable = true;
-    private boolean mHideDetails = false;
 
     @Override
     public void onBindViewHolder(PreferenceViewHolder view) {
@@ -147,23 +149,30 @@ public class ApnPreference extends Preference implements CompoundButton.OnChecke
         }
 
         if (mHideDetails) {
-            Toast.makeText(context, context.getString(
-                    R.string.cannot_change_apn_toast), Toast.LENGTH_LONG).show();
+            Toast.makeText(context, context.getString(R.string.cannot_change_apn_toast),
+                    Toast.LENGTH_LONG).show();
             return;
         }
-        final Uri url = ContentUris.withAppendedId(Telephony.Carriers.CONTENT_URI, pos);
-        final Intent editIntent = new Intent(Intent.ACTION_EDIT, url);
-        editIntent.putExtra(ApnSettings.SUB_ID, mSubId);
-        editIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        context.startActivity(editIntent);
-    }
 
-    public void setSelectable(boolean selectable) {
-        mSelectable = selectable;
+        final Uri url = ContentUris.withAppendedId(Telephony.Carriers.CONTENT_URI, pos);
+
+        if (Flags.newApnPageEnabled()) {
+            String route = ApnEditPageProvider.INSTANCE.getRoute(EDIT_URL, url, mSubId);
+            SpaActivity.startSpaActivity(context, route);
+        } else {
+            final Intent editIntent = new Intent(Intent.ACTION_EDIT, url);
+            editIntent.putExtra(ApnSettings.SUB_ID, mSubId);
+            editIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            context.startActivity(editIntent);
+        }
     }
 
     public boolean getSelectable() {
         return mSelectable;
+    }
+
+    public void setSelectable(boolean selectable) {
+        mSelectable = selectable;
     }
 
     public void setSubId(int subId) {

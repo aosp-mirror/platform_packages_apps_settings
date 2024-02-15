@@ -25,6 +25,8 @@ import static org.mockito.Mockito.spy;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
@@ -36,6 +38,7 @@ import com.android.settings.testutils.shadow.ShadowConnectivityManager;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -47,22 +50,31 @@ import org.robolectric.annotation.Config;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowUserManager.class,
-        ShadowConnectivityManager.class, ShadowBluetoothAdapter.class})
+@Config(
+        shadows = {
+            ShadowUserManager.class,
+            ShadowConnectivityManager.class,
+            ShadowBluetoothAdapter.class
+        })
 public class ConnectedDeviceDashboardFragmentTest {
+    @Rule
+    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
+
     private static final String KEY_NEARBY_DEVICES = "bt_nearby_slice";
     private static final String KEY_DISCOVERABLE_FOOTER = "discoverable_footer";
-    private static final String KEY_SEE_ALL = "previously_connected_devices_see_all";
+    private static final String KEY_SAVED_DEVICE_SEE_ALL = "previously_connected_devices_see_all";
+    private static final String KEY_FAST_PAIR_DEVICE_SEE_ALL = "fast_pair_devices_see_all";
     private static final String KEY_ADD_BT_DEVICES = "add_bt_devices";
+    private static final String KEY_AUDIO_SHARING_DEVICE_LIST = "audio_sharing_device_list";
+    private static final String KEY_AUDIO_SHARING_SETTINGS =
+            "connected_device_audio_sharing_settings";
     private static final String SETTINGS_PACKAGE_NAME = "com.android.settings";
     private static final String SYSTEMUI_PACKAGE_NAME = "com.android.systemui";
     private static final String SLICE_ACTION = "com.android.settings.SEARCH_RESULT_TRAMPOLINE";
     private static final String TEST_APP_NAME = "com.testapp.settings";
     private static final String TEST_ACTION = "com.testapp.settings.ACTION_START";
 
-
-    @Mock
-    private PackageManager mPackageManager;
+    @Mock private PackageManager mPackageManager;
     private Context mContext;
     private ConnectedDeviceDashboardFragment mFragment;
 
@@ -79,8 +91,8 @@ public class ConnectedDeviceDashboardFragmentTest {
     @Test
     public void searchIndexProvider_shouldIndexResource() {
         final List<SearchIndexableResource> indexRes =
-                ConnectedDeviceDashboardFragment.SEARCH_INDEX_DATA_PROVIDER
-                        .getXmlResourcesToIndex(mContext, true /* enabled */);
+                ConnectedDeviceDashboardFragment.SEARCH_INDEX_DATA_PROVIDER.getXmlResourcesToIndex(
+                        mContext, true /* enabled */);
 
         assertThat(indexRes).isNotNull();
         assertThat(indexRes.get(0).xmlResId).isEqualTo(R.xml.connected_devices);
@@ -88,11 +100,20 @@ public class ConnectedDeviceDashboardFragmentTest {
 
     @Test
     public void nonIndexableKeys_existInXmlLayout() {
-        final List<String> niks = ConnectedDeviceDashboardFragment.SEARCH_INDEX_DATA_PROVIDER
-                .getNonIndexableKeys(mContext);
+        final List<String> niks =
+                ConnectedDeviceDashboardFragment.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(
+                        mContext);
 
-        assertThat(niks).containsExactly(KEY_CONNECTED_DEVICES, KEY_AVAILABLE_DEVICES,
-                KEY_NEARBY_DEVICES, KEY_DISCOVERABLE_FOOTER, KEY_SEE_ALL);
+        assertThat(niks)
+                .containsExactly(
+                        KEY_CONNECTED_DEVICES,
+                        KEY_AVAILABLE_DEVICES,
+                        KEY_NEARBY_DEVICES,
+                        KEY_DISCOVERABLE_FOOTER,
+                        KEY_SAVED_DEVICE_SEE_ALL,
+                        KEY_FAST_PAIR_DEVICE_SEE_ALL,
+                        KEY_AUDIO_SHARING_DEVICE_LIST,
+                        KEY_AUDIO_SHARING_SETTINGS);
     }
 
     @Test
@@ -118,13 +139,15 @@ public class ConnectedDeviceDashboardFragmentTest {
     @Test
     public void getPreferenceControllers_containSlicePrefController() {
         final List<BasePreferenceController> controllers =
-                PreferenceControllerListHelper.getPreferenceControllersFromXml(mContext,
-                        R.xml.connected_devices);
+                PreferenceControllerListHelper.getPreferenceControllersFromXml(
+                        mContext, R.xml.connected_devices);
 
-        assertThat(controllers
-                .stream()
-                .filter(controller -> controller instanceof SlicePreferenceController)
-                .count())
+        assertThat(
+                        controllers.stream()
+                                .filter(
+                                        controller ->
+                                                controller instanceof SlicePreferenceController)
+                                .count())
                 .isEqualTo(1);
     }
 }

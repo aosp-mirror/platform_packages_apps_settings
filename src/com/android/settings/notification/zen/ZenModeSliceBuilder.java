@@ -19,6 +19,7 @@ package com.android.settings.notification.zen;
 import static android.app.slice.Slice.EXTRA_TOGGLE_STATE;
 
 import android.annotation.ColorInt;
+import android.app.Flags;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.settings.SettingsEnums;
@@ -26,6 +27,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.Settings;
 
 import androidx.core.graphics.drawable.IconCompat;
@@ -40,6 +43,8 @@ import com.android.settings.Utils;
 import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.slices.SliceBroadcastReceiver;
 import com.android.settings.slices.SliceBuilderUtils;
+import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 
 public class ZenModeSliceBuilder {
 
@@ -84,8 +89,11 @@ public class ZenModeSliceBuilder {
                 isZenModeEnabled);
         final RowBuilder rowBuilder = new RowBuilder()
                 .setTitle(title)
-                .addEndItem(toggleSliceAction)
                 .setPrimaryAction(primarySliceAction);
+        if (!isManagedByAdmin(context)) {
+            rowBuilder.addEndItem(toggleSliceAction);
+        }
+
         if (!Utils.isSettingsIntelligence(context)) {
             rowBuilder.setSubtitle(subtitle);
         }
@@ -109,7 +117,12 @@ public class ZenModeSliceBuilder {
         } else {
             zenMode = Settings.Global.ZEN_MODE_OFF;
         }
-        NotificationManager.from(context).setZenMode(zenMode, null /* conditionId */, TAG);
+        if (Flags.modesApi()) {
+            NotificationManager.from(context).setZenMode(zenMode, /* conditionId= */ null, TAG,
+                    /* fromUser= */ true);
+        } else {
+            NotificationManager.from(context).setZenMode(zenMode, null /* conditionId */, TAG);
+        }
         // Do not notifyChange on Uri. The service takes longer to update the current value than it
         // does for the Slice to check the current value again. Let {@link SliceBroadcastRelay}
         // handle it.
@@ -151,5 +164,11 @@ public class ZenModeSliceBuilder {
                 .setClass(context, SliceBroadcastReceiver.class);
         return PendingIntent.getBroadcast(context, 0 /* requestCode */, intent,
                 PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_MUTABLE);
+    }
+
+    private static boolean isManagedByAdmin(Context context) {
+        EnforcedAdmin enforcedAdmin = RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
+                context, UserManager.DISALLOW_ADJUST_VOLUME, UserHandle.myUserId());
+        return enforcedAdmin != null;
     }
 }

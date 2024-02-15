@@ -120,6 +120,8 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     protected void onCreate(Bundle savedInstanceState) {
         mFaceManager = getFaceManager();
 
+        super.onCreate(savedInstanceState);
+
         if (savedInstanceState == null
                 && !WizardManagerHelper.isAnySetupWizard(getIntent())
                 && !getIntent().getBooleanExtra(EXTRA_FROM_SETTINGS_SUMMARY, false)
@@ -129,8 +131,6 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
             launchFaceSettingsActivity();
             finish();
         }
-
-        super.onCreate(savedInstanceState);
 
         // Wait super::onCreated() then return because SuperNotCalledExceptio will be thrown
         // if we don't wait for it.
@@ -537,7 +537,7 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
                     .setText(R.string.security_settings_face_enroll_introduction_agree)
                     .setButtonType(FooterButton.ButtonType.OPT_IN)
                     .setListener(this::onNextButtonClick)
-                    .setTheme(R.style.SudGlifButton_Primary)
+                    .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Primary)
                     .build();
         }
         return mPrimaryFooterButton;
@@ -551,7 +551,7 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
                     .setText(R.string.security_settings_face_enroll_introduction_no_thanks)
                     .setListener(this::onSkipButtonClick)
                     .setButtonType(FooterButton.ButtonType.NEXT)
-                    .setTheme(R.style.SudGlifButton_Primary)
+                    .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Primary)
                     .build();
         }
         return mSecondaryFooterButton;

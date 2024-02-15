@@ -22,6 +22,8 @@
     <uses-permission android:name="android.permission.MANAGE_APPOPS" />
     <uses-permission android:name="android.permission.UPDATE_APP_OPS_STATS" />
     <uses-permission android:name="android.permission.WRITE_DEVICE_CONFIG" />
+    <uses-permission android:name="android.permission.READ_COMPAT_CHANGE_CONFIG" />
+    <uses-permission android:name="android.permission.LOG_COMPAT_CHANGE" />
 
     <application android:debuggable="true">
         <provider android:name="com.android.settings.slices.SettingsSliceProvider"

@@ -16,6 +16,8 @@
 
 package com.android.settings.applications;
 
+import static android.webkit.Flags.updateServiceV2;
+
 import android.Manifest;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
@@ -30,6 +32,7 @@ import android.content.pm.ServiceInfo;
 import android.content.pm.UserInfo;
 import android.location.LocationManager;
 import android.os.RemoteException;
+import android.os.SystemConfigManager;
 import android.os.UserManager;
 import android.service.euicc.EuiccService;
 import android.telecom.DefaultDialerManager;
@@ -41,6 +44,7 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.telephony.SmsApplication;
 import com.android.settings.R;
+import com.android.settings.webview.WebViewUpdateServiceWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +58,9 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
     private final IPackageManager mPms;
     private final DevicePolicyManager mDpm;
     private final UserManager mUm;
+    private final WebViewUpdateServiceWrapper mWebViewUpdateServiceWrapper;
+    private final SystemConfigManager mSystemConfigManager;
+
     /** Flags to use when querying PackageManager for Euicc component implementations. */
     private static final int EUICC_QUERY_FLAGS =
             PackageManager.MATCH_SYSTEM_ONLY | PackageManager.MATCH_DEBUG_TRIAGED_MISSING
@@ -61,11 +68,17 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
 
     public ApplicationFeatureProviderImpl(Context context, PackageManager pm,
             IPackageManager pms, DevicePolicyManager dpm) {
+        this(context, pm, pms, dpm, new WebViewUpdateServiceWrapper());
+    }
+    public ApplicationFeatureProviderImpl(Context context, PackageManager pm,
+            IPackageManager pms, DevicePolicyManager dpm, WebViewUpdateServiceWrapper wvusWrapper) {
         mContext = context.getApplicationContext();
         mPm = pm;
         mPms = pms;
         mDpm = dpm;
         mUm = UserManager.get(mContext);
+        mWebViewUpdateServiceWrapper = wvusWrapper;
+        mSystemConfigManager = context.getSystemService(SystemConfigManager.class);
     }
 
     @Override
@@ -159,6 +172,14 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
             keepEnabledPackages.add(euicc.packageName);
         }
 
+        // Keep WebView default package enabled.
+        if (updateServiceV2()) {
+            String packageName = mWebViewUpdateServiceWrapper.getDefaultWebViewPackageName();
+            if (packageName != null) {
+                keepEnabledPackages.add(packageName);
+            }
+        }
+
         keepEnabledPackages.addAll(getEnabledPackageAllowlist());
 
         final LocationManager locationManager =
@@ -167,6 +188,7 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
         if (locationHistoryPackage != null) {
             keepEnabledPackages.add(locationHistoryPackage);
         }
+        keepEnabledPackages.addAll(mSystemConfigManager.getPreventUserDisablePackages());
         return keepEnabledPackages;
     }
 

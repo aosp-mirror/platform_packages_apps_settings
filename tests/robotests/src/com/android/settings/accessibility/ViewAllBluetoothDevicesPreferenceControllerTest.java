@@ -30,8 +30,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
-import com.android.settings.utils.ActivityControllerWrapper;
-
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -42,9 +40,13 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 /** Tests for {@link ViewAllBluetoothDevicesPreferenceController}. */
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class ViewAllBluetoothDevicesPreferenceControllerTest {
 
     @Rule
@@ -62,8 +64,7 @@ public class ViewAllBluetoothDevicesPreferenceControllerTest {
 
     @Before
     public void setUp() {
-        mActivity = (FragmentActivity) ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(FragmentActivity.class)).get();
+        mActivity = Robolectric.setupActivity(FragmentActivity.class);
         when(mFragment.getContext()).thenReturn(mContext);
         when(mFragment.getActivity()).thenReturn(mActivity);
 

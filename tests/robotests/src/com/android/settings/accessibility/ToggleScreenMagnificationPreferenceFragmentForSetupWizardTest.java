@@ -20,6 +20,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -27,10 +28,11 @@ import static org.mockito.Mockito.when;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 
+import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.SwitchPreferenceCompat;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
@@ -54,7 +56,10 @@ import org.robolectric.annotation.Config;
 
 /** Tests for {@link ToggleScreenMagnificationPreferenceFragmentForSetupWizard}. */
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowSettingsPreferenceFragment.class})
+@Config(shadows = {
+        ShadowSettingsPreferenceFragment.class,
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class ToggleScreenMagnificationPreferenceFragmentForSetupWizardTest {
 
     private final Context mContext = ApplicationProvider.getApplicationContext();
@@ -75,6 +80,7 @@ public class ToggleScreenMagnificationPreferenceFragmentForSetupWizardTest {
         mFragment =
                 spy(new TestToggleScreenMagnificationPreferenceFragmentForSetupWizard(mContext));
         doReturn(mActivity).when(mFragment).getActivity();
+        doReturn(mock(LifecycleOwner.class)).when(mFragment).getViewLifecycleOwner();
         when(mActivity.getSwitchBar()).thenReturn(mSwitchBar);
         doReturn(mFooterBarMixin).when(mGlifLayoutView).getMixin(FooterBarMixin.class);
     }
@@ -118,7 +124,7 @@ public class ToggleScreenMagnificationPreferenceFragmentForSetupWizardTest {
             mPreferenceManager.setPreferences(mPreferenceManager.createPreferenceScreen(context));
             mTopIntroPreference = new TopIntroPreference(context);
             mSettingsPreference = new Preference(context);
-            mFollowingTypingSwitchPreference = new SwitchPreference(context);
+            mFollowingTypingSwitchPreference = new SwitchPreferenceCompat(context);
         }
 
         @Override

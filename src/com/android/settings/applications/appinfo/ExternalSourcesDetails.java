@@ -88,9 +88,9 @@ public class ExternalSourcesDetails extends AppInfoWithHeader
                         UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES_GLOBALLY,
                         userHandle);
         if ((userRestrictionSource & UserManager.RESTRICTION_SOURCE_SYSTEM) != 0) {
-            return context.getString(R.string.disabled_by_admin);
+            return context.getString(com.android.settingslib.widget.restricted.R.string.disabled_by_admin);
         } else if (userRestrictionSource != 0) {
-            return context.getString(R.string.disabled);
+            return context.getString(com.android.settingslib.R.string.disabled);
         }
         final InstallAppsState appsState = new AppStateInstallAppsBridge(context, null, null)
                 .createInstallAppsStateFor(entry.info.packageName, entry.info.uid);
@@ -113,7 +113,7 @@ public class ExternalSourcesDetails extends AppInfoWithHeader
         if (mUserManager.hasBaseUserRestriction(UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES,
                 UserHandle.of(UserHandle.myUserId()))) {
             mSwitchPref.setChecked(false);
-            mSwitchPref.setSummary(R.string.disabled);
+            mSwitchPref.setSummary(com.android.settingslib.R.string.disabled);
             mSwitchPref.setEnabled(false);
             return true;
         }

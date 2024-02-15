@@ -17,7 +17,6 @@
 
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:androidprv="http://schemas.android.com/apk/prv/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -26,36 +25,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="3"
-        android:layout_marginBottom="35dp">
+        android:layout_marginBottom="55dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingStart="40dp"
+            android:paddingEnd="40dp"
             android:layout_gravity="bottom"
             android:gravity="center"
             android:orientation="vertical">
-            <ImageView
-                android:src="@drawable/ic_qr_code_scanner"
-                android:tint="?androidprv:attr/materialColorPrimaryContainer"
-                android:layout_width="@dimen/qrcode_icon_size"
-                android:layout_height="@dimen/qrcode_icon_size"
-                android:contentDescription="@null"/>
-
             <TextView
                 style="@style/QrCodeScanner"
-                android:textSize="24sp"
-                android:text="@string/bluetooth_find_broadcast_button_scan"
+                android:text="Scan an audio stream QR code to listen with the active LE device"
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="19dp"/>
-
-            <TextView
-                style="@style/QrCodeScanner"
-                android:text="@string/bt_le_audio_scan_qr_code_scanner"
-                android:gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"/>
+                android:layout_marginTop="20dp"/>
         </LinearLayout>
     </LinearLayout>
 
