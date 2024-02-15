@@ -2,13 +2,17 @@
 // unit/robo/screenshot etc.
 //
 // This library shouldn't have many dependencies.
+package {
+    default_team: "trendy_team_android_settings_app",
+}
+
 android_library {
     name: "FingerprintManagerInteractor",
     srcs: [
-      "**/*.kt"
+        "**/*.kt",
     ],
     static_libs: [
-      "BiometricsSharedLib",
-      "kotlinx-coroutines-android",
+        "BiometricsSharedLib",
+        "kotlinx-coroutines-android",
     ],
 }
