@@ -1,7 +1,11 @@
+package {
+    default_team: "trendy_team_android_settings_app",
+}
+
 android_library {
     name: "Settings-testutils2",
     srcs: [
-        "src/**/*.kt"
+        "src/**/*.kt",
     ],
     libs: [
         "BiometricsSharedLib",

@@ -108,6 +108,9 @@ public class StylusDevicesControllerTest {
         MockitoAnnotations.initMocks(this);
 
         mContext = spy(ApplicationProvider.getApplicationContext());
+        final var spiedResources = spy(mContext.getResources());
+        when(mContext.getResources()).thenReturn(spiedResources);
+
         PreferenceManager preferenceManager = new PreferenceManager(mContext);
         mScreen = preferenceManager.createPreferenceScreen(mContext);
         mPreferenceContainer = new PreferenceCategory(mContext);
@@ -143,6 +146,9 @@ public class StylusDevicesControllerTest {
         when(mInputDevice.getBluetoothAddress()).thenReturn("SOME:ADDRESS");
         when(mInputDevice.hasKeys(KEYCODE_STYLUS_BUTTON_TAIL)).thenReturn(
                 new boolean[]{true});
+
+        when(spiedResources.getBoolean(
+                com.android.internal.R.bool.config_enableStylusPointerIcon)).thenReturn(true);
 
         mController = new StylusDevicesController(mContext, mInputDevice, null, mLifecycle);
     }
@@ -237,7 +243,7 @@ public class StylusDevicesControllerTest {
         Preference handwritingPref = mPreferenceContainer.getPreference(0);
         Preference buttonPref = mPreferenceContainer.getPreference(1);
 
-        assertThat(mPreferenceContainer.getPreferenceCount()).isEqualTo(2);
+        assertThat(mPreferenceContainer.getPreferenceCount()).isEqualTo(3);
         assertThat(handwritingPref.getTitle().toString()).isEqualTo(
                 mContext.getString(R.string.stylus_textfield_handwriting));
         assertThat(handwritingPref.isVisible()).isTrue();
