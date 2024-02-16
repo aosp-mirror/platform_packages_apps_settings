@@ -30,16 +30,20 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.android.internal.widget.LockPatternUtils
 import com.android.settings.R
-import com.android.settings.SettingsApplication
 import com.android.settings.SetupWizardUtils
 import com.android.settings.Utils.SETTINGS_PACKAGE_NAME
 import com.android.settings.biometrics.BiometricEnrollBase
 import com.android.settings.biometrics.BiometricEnrollBase.CONFIRM_REQUEST
 import com.android.settings.biometrics.BiometricEnrollBase.RESULT_FINISHED
 import com.android.settings.biometrics.GatekeeperPasswordProvider
-import com.android.settings.biometrics.fingerprint2.data.repository.FingerprintSensorRepoImpl
-import com.android.settings.biometrics.fingerprint2.data.repository.PressToAuthRepoImpl
+import com.android.settings.biometrics.fingerprint2.data.repository.FingerprintSensorRepositoryImpl
+import com.android.settings.biometrics.fingerprint2.domain.interactor.PressToAuthInteractorImpl
+import com.android.settings.biometrics.fingerprint2.domain.interactor.AccessibilityInteractorImpl
 import com.android.settings.biometrics.fingerprint2.domain.interactor.FingerprintManagerInteractorImpl
+import com.android.settings.biometrics.fingerprint2.domain.interactor.FoldStateInteractor
+import com.android.settings.biometrics.fingerprint2.domain.interactor.FoldStateInteractorImpl
+import com.android.settings.biometrics.fingerprint2.domain.interactor.OrientationInteractor
+import com.android.settings.biometrics.fingerprint2.domain.interactor.OrientationInteractorImpl
 import com.android.settings.biometrics.fingerprint2.lib.model.Default
 import com.android.settings.biometrics.fingerprint2.lib.model.SetupWizard
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.fragment.FingerprintEnrollConfirmationV2Fragment
@@ -48,7 +52,6 @@ import com.android.settings.biometrics.fingerprint2.ui.enrollment.fragment.Finge
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.fragment.FingerprintEnrollIntroV2Fragment
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.rfps.ui.fragment.RFPSEnrollFragment
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.rfps.ui.viewmodel.RFPSViewModel
-import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.AccessibilityViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.BackgroundViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintAction
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollEnrollingViewModel
@@ -66,9 +69,7 @@ import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.Fing
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintNavigationStep.TransitionStep
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintNavigationViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintScrollViewModel
-import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FoldStateViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.GatekeeperInfo
-import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.OrientationStateViewModel
 import com.android.settings.password.ChooseLockGeneric
 import com.android.settings.password.ChooseLockSettingsHelper
 import com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE
@@ -90,9 +91,8 @@ class FingerprintEnrollmentV2Activity : FragmentActivity() {
   private lateinit var navigationViewModel: FingerprintNavigationViewModel
   private lateinit var gatekeeperViewModel: FingerprintGatekeeperViewModel
   private lateinit var fingerprintEnrollViewModel: FingerprintEnrollViewModel
-  private lateinit var accessibilityViewModel: AccessibilityViewModel
-  private lateinit var foldStateViewModel: FoldStateViewModel
-  private lateinit var orientationStateViewModel: OrientationStateViewModel
+  private lateinit var foldStateInteractor: FoldStateInteractor
+  private lateinit var orientationInteractor: OrientationInteractor
   private lateinit var fingerprintScrollViewModel: FingerprintScrollViewModel
   private lateinit var backgroundViewModel: BackgroundViewModel
   private lateinit var fingerprintFlowViewModel: FingerprintFlowViewModel
@@ -127,7 +127,7 @@ class FingerprintEnrollmentV2Activity : FragmentActivity() {
 
   override fun onConfigurationChanged(newConfig: Configuration) {
     super.onConfigurationChanged(newConfig)
-    foldStateViewModel.onConfigurationChange(newConfig)
+    foldStateInteractor.onConfigurationChange(newConfig)
   }
 
   private fun onConfirmDevice(resultCode: Int, data: Intent?) {
@@ -179,7 +179,8 @@ class FingerprintEnrollmentV2Activity : FragmentActivity() {
         FingerprintFlowViewModel::class.java]
 
     val fingerprintSensorRepo =
-      FingerprintSensorRepoImpl(fingerprintManager, backgroundDispatcher, lifecycleScope)
+      FingerprintSensorRepositoryImpl(fingerprintManager, backgroundDispatcher, lifecycleScope)
+    val pressToAuthInteractor = PressToAuthInteractorImpl(context, backgroundDispatcher)
 
     val fingerprintManagerInteractor =
       FingerprintManagerInteractorImpl(
@@ -188,7 +189,7 @@ class FingerprintEnrollmentV2Activity : FragmentActivity() {
         fingerprintManager,
         fingerprintSensorRepo,
         GatekeeperPasswordProvider(LockPatternUtils(context)),
-        PressToAuthRepoImpl(context),
+        pressToAuthInteractor,
         enrollType,
       )
 
@@ -197,6 +198,12 @@ class FingerprintEnrollmentV2Activity : FragmentActivity() {
     val gatekeeperInfo = FingerprintGatekeeperViewModel.toGateKeeperInfo(challenge, token)
 
     val hasConfirmedDeviceCredential = gatekeeperInfo is GatekeeperInfo.GatekeeperPasswordInfo
+
+    val accessibilityInteractor =
+      AccessibilityInteractorImpl(
+        getSystemService(AccessibilityManager::class.java)!!,
+        lifecycleScope,
+      )
 
     navigationViewModel =
       ViewModelProvider(
@@ -228,10 +235,10 @@ class FingerprintEnrollmentV2Activity : FragmentActivity() {
       )[FingerprintGatekeeperViewModel::class.java]
 
     // Initialize FoldStateViewModel
-    foldStateViewModel =
-      ViewModelProvider(this, FoldStateViewModel.FoldStateViewModelFactory(context))[
-        FoldStateViewModel::class.java]
-    foldStateViewModel.onConfigurationChange(resources.configuration)
+    foldStateInteractor = FoldStateInteractorImpl(context)
+    foldStateInteractor.onConfigurationChange(resources.configuration)
+
+    orientationInteractor = OrientationInteractorImpl(context, lifecycleScope)
 
     // Initialize FingerprintViewModel
     fingerprintEnrollViewModel =
@@ -248,20 +255,6 @@ class FingerprintEnrollmentV2Activity : FragmentActivity() {
     fingerprintScrollViewModel =
       ViewModelProvider(this, FingerprintScrollViewModel.FingerprintScrollViewModelFactory())[
         FingerprintScrollViewModel::class.java]
-
-    // Initialize AccessibilityViewModel
-    accessibilityViewModel =
-      ViewModelProvider(
-        this,
-        AccessibilityViewModel.AccessibilityViewModelFactory(
-          getSystemService(AccessibilityManager::class.java)!!
-        ),
-      )[AccessibilityViewModel::class.java]
-
-    // Initialize OrientationViewModel
-    orientationStateViewModel =
-      ViewModelProvider(this, OrientationStateViewModel.OrientationViewModelFactory(context))[
-        OrientationStateViewModel::class.java]
 
     // Initialize FingerprintEnrollEnrollingViewModel
     fingerprintEnrollEnrollingViewModel =
@@ -281,18 +274,24 @@ class FingerprintEnrollmentV2Activity : FragmentActivity() {
         fingerprintEnrollViewModel,
         gatekeeperViewModel,
         backgroundViewModel,
-        accessibilityViewModel,
-        foldStateViewModel,
-        orientationStateViewModel,
+        accessibilityInteractor,
+        foldStateInteractor,
+        orientationInteractor,
         fingerprintFlowViewModel,
+        fingerprintManagerInteractor,
       ),
     )[FingerprintEnrollFindSensorViewModel::class.java]
 
     // Initialize RFPS View Model
     ViewModelProvider(
       this,
-      RFPSViewModel.RFPSViewModelFactory(fingerprintEnrollEnrollingViewModel, navigationViewModel),
+      RFPSViewModel.RFPSViewModelFactory(
+        fingerprintEnrollEnrollingViewModel,
+        navigationViewModel,
+        orientationInteractor,
+      ),
     )[RFPSViewModel::class.java]
+
     lifecycleScope.launch {
       navigationViewModel.currentStep.collect { step ->
         if (step is Init) {

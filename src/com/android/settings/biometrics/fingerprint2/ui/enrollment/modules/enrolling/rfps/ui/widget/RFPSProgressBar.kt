@@ -24,14 +24,14 @@ import android.graphics.drawable.AnimatedVectorDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.LayerDrawable
 import android.util.AttributeSet
+import android.util.Log
 import android.view.animation.AnimationUtils
 import android.view.animation.Interpolator
 import com.android.settings.R
 import com.android.settings.widget.RingProgressBar
 
 /** Progress bar for rear fingerprint enrollment. */
-class RFPSProgressBar(context: Context, attributeSet: AttributeSet) :
-  RingProgressBar(context, attributeSet) {
+class RFPSProgressBar : RingProgressBar {
 
   private val fastOutSlowInInterpolator: Interpolator
 
@@ -42,9 +42,9 @@ class RFPSProgressBar(context: Context, attributeSet: AttributeSet) :
 
   private var progressAnimation: ObjectAnimator? = null
 
-  private var shouldAnimateInternal: Boolean = true
+  private var shouldAnimateInternal: Boolean = false
 
-  init {
+  constructor(context: Context, attributeSet: AttributeSet) : super(context, attributeSet) {
     val fingerprintDrawable = background as LayerDrawable
     iconAnimationDrawable =
       fingerprintDrawable.findDrawableByLayerId(R.id.fingerprint_animation)
@@ -52,10 +52,8 @@ class RFPSProgressBar(context: Context, attributeSet: AttributeSet) :
     iconBackgroundBlinksDrawable =
       fingerprintDrawable.findDrawableByLayerId(R.id.fingerprint_background)
         as AnimatedVectorDrawable
-
     fastOutSlowInInterpolator =
       AnimationUtils.loadInterpolator(context, android.R.interpolator.fast_out_slow_in)
-
     iconAnimationDrawable.registerAnimationCallback(
       object : Animatable2.AnimationCallback() {
         override fun onAnimationEnd(drawable: Drawable?) {
@@ -66,7 +64,6 @@ class RFPSProgressBar(context: Context, attributeSet: AttributeSet) :
         }
       }
     )
-    animateIconAnimationInternal()
 
     progressBackgroundTintMode = PorterDuff.Mode.SRC
 
@@ -85,8 +82,8 @@ class RFPSProgressBar(context: Context, attributeSet: AttributeSet) :
     }
 
     shouldAnimateInternal = shouldAnimate
-  }
 
+  }
   /** This function should only be called when actual progress has been made. */
   fun updateProgress(percentComplete: Float) {
     val progress = maxProgress - (percentComplete.coerceIn(0.0f, 100.0f) * maxProgress).toInt()

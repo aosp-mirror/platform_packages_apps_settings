@@ -37,13 +37,14 @@ import java.util.List;
 import java.util.Set;
 
 /** A class to dynamically manage per apps {@link NetworkPolicyManager} POLICY_ flags. */
-public final class DynamicDenylistManager {
+public class DynamicDenylistManager {
 
     private static final String TAG = "DynamicDenylistManager";
     private static final String PREF_KEY_MANUAL_DENY = "manual_denylist_preference";
     private static final String PREF_KEY_DYNAMIC_DENY = "dynamic_denylist_preference";
 
-    private static DynamicDenylistManager sInstance;
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    public static DynamicDenylistManager sInstance = null;
 
     private final Context mContext;
     private final NetworkPolicyManager mNetworkPolicyManager;
@@ -115,7 +116,11 @@ public final class DynamicDenylistManager {
         final ArraySet<Integer> failedUids = new ArraySet<>();
         synchronized (mLock) {
             // Set new added UIDs into REJECT policy.
-            for (int uid : denylistTargetUids) {
+            for (Integer uidInteger : denylistTargetUids) {
+                if (uidInteger == null) {
+                    continue;
+                }
+                final int uid = uidInteger.intValue();
                 if (!lastDynamicDenylistUids.contains(uid)) {
                     try {
                         mNetworkPolicyManager.setUidPolicy(uid, POLICY_REJECT_METERED_BACKGROUND);
