@@ -26,12 +26,14 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.view.animation.Interpolator
 import android.widget.TextView
+import androidx.annotation.VisibleForTesting
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.android.settings.R
+import com.android.settings.biometrics.fingerprint2.domain.interactor.OrientationInteractor
 import com.android.settings.biometrics.fingerprint2.lib.model.FingerEnrollState
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.rfps.ui.viewmodel.RFPSIconTouchViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.rfps.ui.viewmodel.RFPSViewModel
@@ -41,18 +43,34 @@ import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enroll
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.BackgroundViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintNavigationStep
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintNavigationViewModel
-import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.OrientationStateViewModel
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment
 import com.google.android.setupcompat.template.FooterBarMixin
 import com.google.android.setupcompat.template.FooterButton
 import com.google.android.setupdesign.GlifLayout
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 
 /** This fragment is responsible for taking care of rear fingerprint enrollment. */
-class RFPSEnrollFragment : Fragment(R.layout.fingerprint_v2_rfps_enroll_enrolling) {
+class RFPSEnrollFragment() : Fragment(R.layout.fingerprint_v2_rfps_enroll_enrolling) {
+
+  /** Used for testing purposes */
+  private var factory: ViewModelProvider.Factory? = null
+
+  @VisibleForTesting
+  constructor(theFactory: ViewModelProvider.Factory) : this() {
+    factory = theFactory
+  }
+
+  private val viewModelProvider: ViewModelProvider by lazy {
+    if (factory != null) {
+      ViewModelProvider(requireActivity(), factory!!)
+    } else {
+      ViewModelProvider(requireActivity())
+    }
+  }
 
   private lateinit var linearOutSlowInInterpolator: Interpolator
   private lateinit var fastOutLinearInInterpolator: Interpolator
@@ -60,24 +78,14 @@ class RFPSEnrollFragment : Fragment(R.layout.fingerprint_v2_rfps_enroll_enrollin
   private lateinit var progressBar: RFPSProgressBar
 
   private val iconTouchViewModel: RFPSIconTouchViewModel by lazy {
-    ViewModelProvider(requireActivity())[RFPSIconTouchViewModel::class.java]
+    viewModelProvider[RFPSIconTouchViewModel::class.java]
   }
 
-  private val orientationViewModel: OrientationStateViewModel by lazy {
-    ViewModelProvider(requireActivity())[OrientationStateViewModel::class.java]
-  }
-
-  private val rfpsViewModel: RFPSViewModel by lazy {
-    ViewModelProvider(requireActivity())[RFPSViewModel::class.java]
-  }
+  private val rfpsViewModel: RFPSViewModel by lazy { viewModelProvider[RFPSViewModel::class.java] }
 
   private val backgroundViewModel: BackgroundViewModel by lazy {
-    ViewModelProvider(requireActivity())[BackgroundViewModel::class.java]
+    viewModelProvider[BackgroundViewModel::class.java]
   }
-  private val navigationViewModel: FingerprintNavigationViewModel by lazy {
-    ViewModelProvider(requireActivity())[FingerprintNavigationViewModel::class.java]
-  }
-
   override fun onCreateView(
     inflater: LayoutInflater,
     container: ViewGroup?,
@@ -115,9 +123,8 @@ class RFPSEnrollFragment : Fragment(R.layout.fingerprint_v2_rfps_enroll_enrollin
       true
     }
 
-    // On any orientation event, dismiss dialogs.
     viewLifecycleOwner.lifecycleScope.launch {
-      orientationViewModel.orientation.collect { dismissDialogs() }
+      rfpsViewModel.shouldDismissDialog.collect { dismissDialogs() }
     }
 
     // Signal we are ready for enrollment.
@@ -127,6 +134,8 @@ class RFPSEnrollFragment : Fragment(R.layout.fingerprint_v2_rfps_enroll_enrollin
       repeatOnLifecycle(Lifecycle.State.RESUMED) {
         // Icon animation  update
         viewLifecycleOwner.lifecycleScope.launch {
+          // TODO(b/324427704): Fix this delay
+          delay(100)
           rfpsViewModel.shouldAnimateIcon.collect { animate ->
             progressBar.updateIconAnimation(animate)
           }

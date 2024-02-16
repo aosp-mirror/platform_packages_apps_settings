@@ -26,8 +26,7 @@ import android.util.Log
 import com.android.settings.biometrics.GatekeeperPasswordProvider
 import com.android.settings.biometrics.fingerprint2.conversion.Util.toEnrollError
 import com.android.settings.biometrics.fingerprint2.conversion.Util.toOriginalReason
-import com.android.settings.biometrics.fingerprint2.data.repository.FingerprintSensorRepo
-import com.android.settings.biometrics.fingerprint2.data.repository.PressToAuthRepo
+import com.android.settings.biometrics.fingerprint2.data.repository.FingerprintSensorRepository
 import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.FingerprintManagerInteractor
 import com.android.settings.biometrics.fingerprint2.lib.model.EnrollReason
 import com.android.settings.biometrics.fingerprint2.lib.model.FingerEnrollState
@@ -57,9 +56,9 @@ class FingerprintManagerInteractorImpl(
   applicationContext: Context,
   private val backgroundDispatcher: CoroutineDispatcher,
   private val fingerprintManager: FingerprintManager,
-  fingerprintSensorRepo: FingerprintSensorRepo,
+  fingerprintSensorRepository: FingerprintSensorRepository,
   private val gatekeeperPasswordProvider: GatekeeperPasswordProvider,
-  private val pressToAuthRepo: PressToAuthRepo,
+  private val pressToAuthInteractor: PressToAuthInteractor,
   private val fingerprintFlow: FingerprintFlow,
 ) : FingerprintManagerInteractor {
 
@@ -101,7 +100,7 @@ class FingerprintManagerInteractorImpl(
     )
   }
 
-  override val sensorPropertiesInternal = fingerprintSensorRepo.fingerprintSensor
+  override val sensorPropertiesInternal = fingerprintSensorRepository.fingerprintSensor
 
   override val maxEnrollableFingerprints = flow { emit(maxFingerprints) }
 
@@ -209,10 +208,6 @@ class FingerprintManagerInteractorImpl(
 
   override suspend fun hasSideFps(): Boolean = suspendCancellableCoroutine {
     it.resume(fingerprintManager.isPowerbuttonFps)
-  }
-
-  override suspend fun pressToAuthEnabled(): Boolean = suspendCancellableCoroutine {
-    it.resume(pressToAuthRepo.isEnabled)
   }
 
   override suspend fun authenticate(): FingerprintAuthAttemptModel =

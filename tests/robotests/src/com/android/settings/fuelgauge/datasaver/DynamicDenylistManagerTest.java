@@ -177,8 +177,11 @@ public class DynamicDenylistManagerTest {
     @Test
     public void setDenylist_uidDeniedAlready_doNothing() {
         initDynamicDenylistManager(new int[] {FAKE_UID_1_INT});
+        final ArraySet uids = new ArraySet<>();
+        uids.add(FAKE_UID_1_INT);
+        uids.add(null);
 
-        setDenylist(new ArraySet<>(List.of(FAKE_UID_1_INT)));
+        setDenylist(uids);
 
         verify(mNetworkPolicyManager, never()).setUidPolicy(anyInt(), anyInt());
     }
