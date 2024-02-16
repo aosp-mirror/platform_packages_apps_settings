@@ -39,16 +39,16 @@ import kotlinx.coroutines.withContext
  *
  * TODO(b/313493336): Move this to systemui
  */
-interface FingerprintSensorRepo {
+interface FingerprintSensorRepository {
   /** Get the [FingerprintSensor] */
   val fingerprintSensor: Flow<FingerprintSensor>
 }
 
-class FingerprintSensorRepoImpl(
+class FingerprintSensorRepositoryImpl(
     fingerprintManager: FingerprintManager,
     backgroundDispatcher: CoroutineDispatcher,
     activityScope: CoroutineScope,
-) : FingerprintSensorRepo {
+) : FingerprintSensorRepository {
 
   override val fingerprintSensor: Flow<FingerprintSensor> =
     callbackFlow {
