@@ -34,13 +34,13 @@ import androidx.preference.PreferenceCategory
 import androidx.preference.PreferenceGroup
 import com.android.settings.R
 import com.android.settings.dashboard.RestrictedDashboardFragment
-import com.android.settings.flags.Flags
 import com.android.settingslib.bluetooth.BluetoothCallback
 import com.android.settingslib.bluetooth.BluetoothDeviceFilter
 import com.android.settingslib.bluetooth.BluetoothUtils
 import com.android.settingslib.bluetooth.CachedBluetoothDevice
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager
 import com.android.settingslib.bluetooth.LocalBluetoothManager
+import com.android.settingslib.flags.Flags
 import java.util.concurrent.ConcurrentHashMap
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

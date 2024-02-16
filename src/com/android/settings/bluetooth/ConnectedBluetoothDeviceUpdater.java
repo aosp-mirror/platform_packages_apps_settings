@@ -24,9 +24,9 @@ import android.util.Log;
 import androidx.preference.Preference;
 
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
-import com.android.settings.flags.Flags;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.flags.Flags;
 
 /**
  * Controller to maintain connected bluetooth devices
