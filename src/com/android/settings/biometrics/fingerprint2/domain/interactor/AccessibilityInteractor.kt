@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 The Android Open Source Project
+ * Copyright (C) 2024 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,12 +14,10 @@
  * limitations under the License.
  */
 
-package com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel
+package com.android.settings.biometrics.fingerprint2.domain.interactor
 
 import android.view.accessibility.AccessibilityManager
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.LifecycleCoroutineScope
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
@@ -27,28 +25,28 @@ import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.stateIn
 
 /** Represents all of the information on accessibility state. */
-class AccessibilityViewModel(accessibilityManager: AccessibilityManager) : ViewModel() {
+interface AccessibilityInteractor {
+    /** A flow that contains whether or not accessibility is enabled */
+    val isAccessibilityEnabled: Flow<Boolean>
+}
+
+class AccessibilityInteractorImpl(
+    accessibilityManager: AccessibilityManager,
+    activityScope: LifecycleCoroutineScope
+) : AccessibilityInteractor {
   /** A flow that contains whether or not accessibility is enabled */
-  val isAccessibilityEnabled: Flow<Boolean> =
+  override val isAccessibilityEnabled: Flow<Boolean> =
     callbackFlow {
         val listener =
-          AccessibilityManager.AccessibilityStateChangeListener { enabled -> trySend(enabled) }
+            AccessibilityManager.AccessibilityStateChangeListener { enabled -> trySend(enabled) }
         accessibilityManager.addAccessibilityStateChangeListener(listener)
 
         // This clause will be called when no one is listening to the flow
         awaitClose { accessibilityManager.removeAccessibilityStateChangeListener(listener) }
-      }
-      .stateIn(
-        viewModelScope, // This is going to tied to the view model scope
-        SharingStarted.WhileSubscribed(), // When no longer subscribed, we removeTheListener
-        false,
-      )
-
-  class AccessibilityViewModelFactory(private val accessibilityManager: AccessibilityManager) :
-    ViewModelProvider.Factory {
-    @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-      return AccessibilityViewModel(accessibilityManager) as T
     }
-  }
+      .stateIn(
+        activityScope, // This is going to tied to the activity scope
+          SharingStarted.WhileSubscribed(), // When no longer subscribed, we removeTheListener
+        false
+      )
 }
