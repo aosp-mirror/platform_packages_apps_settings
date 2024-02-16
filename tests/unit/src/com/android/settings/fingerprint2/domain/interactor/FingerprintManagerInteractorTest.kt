@@ -26,9 +26,9 @@ import android.os.CancellationSignal
 import android.os.Handler
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.biometrics.GatekeeperPasswordProvider
-import com.android.settings.biometrics.fingerprint2.data.repository.FingerprintSensorRepo
+import com.android.settings.biometrics.fingerprint2.data.repository.FingerprintSensorRepository
+import com.android.settings.biometrics.fingerprint2.domain.interactor.PressToAuthInteractor
 import com.android.settings.biometrics.fingerprint2.domain.interactor.FingerprintManagerInteractorImpl
-import com.android.settings.biometrics.fingerprint2.data.repository.PressToAuthRepo
 import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.FingerprintManagerInteractor
 import com.android.settings.biometrics.fingerprint2.lib.model.Default
 import com.android.settings.biometrics.fingerprint2.lib.model.EnrollReason
@@ -77,17 +77,16 @@ class FingerprintManagerInteractorTest {
   @Mock private lateinit var gateKeeperPasswordProvider: GatekeeperPasswordProvider
 
   private var testScope = TestScope(backgroundDispatcher)
-  private var pressToAuthRepo =
-    object : PressToAuthRepo {
-      override val isEnabled: Boolean
-        get() = false
+  private var pressToAuthInteractor =
+    object : PressToAuthInteractor {
+      override val isEnabled = flowOf(false)
     }
 
   @Before
   fun setup() {
     val sensor = FingerprintSensor(1, SensorStrength.STRONG, 5, FingerprintSensorType.POWER_BUTTON)
-    val fingerprintSensorRepo =
-      object : FingerprintSensorRepo {
+    val fingerprintSensorRepository =
+      object : FingerprintSensorRepository {
         override val fingerprintSensor: Flow<FingerprintSensor> = flowOf(sensor)
       }
 
@@ -96,9 +95,9 @@ class FingerprintManagerInteractorTest {
         context,
         backgroundDispatcher,
         fingerprintManager,
-        fingerprintSensorRepo,
+        fingerprintSensorRepository,
         gateKeeperPasswordProvider,
-        pressToAuthRepo,
+        pressToAuthInteractor,
         Default,
       )
   }

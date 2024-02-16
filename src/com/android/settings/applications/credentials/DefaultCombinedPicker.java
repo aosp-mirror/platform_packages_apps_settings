@@ -114,6 +114,18 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
             setCancelListener(target.mCancelListener);
             super.onCreate(savedInstanceState);
         }
+
+        @Override
+        protected CharSequence getPositiveButtonText() {
+            final Bundle bundle = getArguments();
+            if (TextUtils.isEmpty(bundle.getString(EXTRA_KEY))) {
+                return getContext().getString(
+                    R.string.credman_confirmation_turn_off_positive_button);
+            }
+
+            return getContext().getString(
+                R.string.credman_confirmation_change_provider_positive_button);
+        }
     }
 
     @Override
