@@ -16,6 +16,8 @@
 
 package com.android.settings.development;
 
+import static android.hardware.display.DisplayManager.DISPLAY_CATEGORY_ALL_INCLUDING_DISABLED;
+
 import static com.android.internal.display.RefreshRateSettingsUtils.DEFAULT_REFRESH_RATE;
 import static com.android.settings.development.ForcePeakRefreshRatePreferenceController.NO_CONFIG;
 
@@ -24,15 +26,18 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.content.Context;
+import android.hardware.display.DisplayManager;
 import android.platform.test.annotations.RequiresFlagsDisabled;
 import android.platform.test.annotations.RequiresFlagsEnabled;
 import android.platform.test.flag.junit.CheckFlagsRule;
 import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.provider.Settings;
+import android.testing.TestableContext;
+import android.view.Display;
 
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
+import androidx.test.platform.app.InstrumentationRegistry;
 
 import com.android.server.display.feature.flags.Flags;
 
@@ -43,7 +48,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
@@ -53,17 +57,51 @@ public class ForcePeakRefreshRatePreferenceControllerTest {
     private SwitchPreference mPreference;
     @Mock
     private PreferenceScreen mScreen;
+    @Mock
+    private DisplayManager mDisplayManagerMock;
+    @Mock
+    private Display mDisplayMock;
+    @Mock
+    private Display mDisplayMock2;
 
-    private Context mContext;
     private ForcePeakRefreshRatePreferenceController mController;
 
     @Rule
     public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
+    @Rule
+    public final TestableContext mContext = new TestableContext(
+            InstrumentationRegistry.getInstrumentation().getContext());
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
+        mContext.addMockSystemService(DisplayManager.class, mDisplayManagerMock);
+
+        Display.Mode[] modes = new Display.Mode[]{
+                new Display.Mode(/* modeId= */ 0, /* width= */ 800, /* height= */ 600,
+                        /* refreshRate= */ 60),
+                new Display.Mode(/* modeId= */ 0, /* width= */ 800, /* height= */ 600,
+                        /* refreshRate= */ 120),
+                new Display.Mode(/* modeId= */ 0, /* width= */ 800, /* height= */ 600,
+                        /* refreshRate= */ 90)
+        };
+        when(mDisplayManagerMock.getDisplay(Display.DEFAULT_DISPLAY)).thenReturn(mDisplayMock);
+        when(mDisplayMock.getSupportedModes()).thenReturn(modes);
+
+        Display.Mode[] modes2 = new Display.Mode[]{
+                new Display.Mode(/* modeId= */ 0, /* width= */ 800, /* height= */ 600,
+                        /* refreshRate= */ 70),
+                new Display.Mode(/* modeId= */ 0, /* width= */ 800, /* height= */ 600,
+                        /* refreshRate= */ 130),
+                new Display.Mode(/* modeId= */ 0, /* width= */ 800, /* height= */ 600,
+                        /* refreshRate= */ 80)
+        };
+        when(mDisplayManagerMock.getDisplay(Display.DEFAULT_DISPLAY + 1)).thenReturn(mDisplayMock2);
+        when(mDisplayMock2.getSupportedModes()).thenReturn(modes2);
+
+        when(mDisplayManagerMock.getDisplays(DISPLAY_CATEGORY_ALL_INCLUDING_DISABLED))
+                .thenReturn(new Display[]{ mDisplayMock, mDisplayMock2 });
+
         mController = new ForcePeakRefreshRatePreferenceController(mContext);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         when(mPreference.getKey()).thenReturn(mController.getPreferenceKey());
@@ -152,5 +190,17 @@ public class ForcePeakRefreshRatePreferenceControllerTest {
                 Settings.System.MIN_REFRESH_RATE, -1f)).isEqualTo(NO_CONFIG);
         assertThat(mPreference.isChecked()).isFalse();
         assertThat(mPreference.isEnabled()).isFalse();
+    }
+
+    @Test
+    @RequiresFlagsDisabled(Flags.FLAG_BACK_UP_SMOOTH_DISPLAY_AND_FORCE_PEAK_REFRESH_RATE)
+    public void peakRefreshRate_highestOfDefaultDisplay_featureFlagOff() {
+        assertThat(mController.mPeakRefreshRate).isEqualTo(120);
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_BACK_UP_SMOOTH_DISPLAY_AND_FORCE_PEAK_REFRESH_RATE)
+    public void peakRefreshRate_highestOfAllDisplays_featureFlagOn() {
+        assertThat(mController.mPeakRefreshRate).isEqualTo(130);
     }
 }
