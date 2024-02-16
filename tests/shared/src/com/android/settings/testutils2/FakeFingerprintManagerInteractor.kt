@@ -37,7 +37,6 @@ class FakeFingerprintManagerInteractor : FingerprintManagerInteractor {
   var authenticateAttempt = FingerprintAuthAttemptModel.Success(1)
   var enrollStateViewModel: List<FingerEnrollState> =
     listOf(FingerEnrollState.EnrollProgress(5, 5))
-  var pressToAuthEnabled = true
 
   var sensorProp =
     FingerprintSensor(
@@ -86,7 +85,4 @@ class FakeFingerprintManagerInteractor : FingerprintManagerInteractor {
     return sensorProp.sensorType == FingerprintSensorType.POWER_BUTTON
   }
 
-  override suspend fun pressToAuthEnabled(): Boolean {
-    return pressToAuthEnabled
-  }
 }

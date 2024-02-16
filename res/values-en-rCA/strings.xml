@@ -571,8 +571,7 @@
     <string name="privatespace_hide_page_title" msgid="8417507414027827566">"Hide private space when locked"</string>
     <string name="privatespace_hide_page_summary" msgid="5525422595477989312">"To stop other people knowing you have a private space on your device, you can hide it from your apps list"</string>
     <string name="privatespace_access_header" msgid="6066826215718835041">"Access private space when hidden"</string>
-    <!-- no translation found for privatespace_search_description (3121043205513022357) -->
-    <skip />
+    <string name="privatespace_search_description" msgid="3121043205513022357">"From your apps list, enter \"private space\" in the search bar"</string>
     <string name="privatespace_tap_tile_description" msgid="8346440188590931635">"Tap the private space tile"</string>
     <string name="privatespace_unlock_description" msgid="3177710543121916413">"Unlock your private space"</string>
     <string name="privatespace_hide_off_summary" msgid="7227778747159633671">"Off"</string>
@@ -679,7 +678,7 @@
     <string name="unlock_set_unlock_mode_pattern" msgid="1926480143883094896">"Pattern"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="9028659554829888373">"PIN"</string>
     <string name="unlock_set_unlock_mode_password" msgid="8810609692771987513">"Password"</string>
-    <string name="unlock_disable_frp_warning_title" msgid="3606280046362811229">"Delete screen lock?"</string>
+    <string name="unlock_disable_frp_warning_title" msgid="2545569051372893686">"Remove all types of device unlock?"</string>
     <string name="unlock_disable_frp_warning_title_profile" msgid="1005284289723910461">"Remove profile protection?"</string>
     <string name="unlock_disable_frp_warning_content_pattern" msgid="6246242612158828147">"A pattern protects your phone if it\'s lost or stolen"</string>
     <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="2259825377085781801">"A pattern protects your phone if it\'s lost or stolen.<xliff:g id="EMPTY_LINE">
@@ -692,15 +691,35 @@
 
 </xliff:g>This deletes the fingerprint model stored on your device. Your face model will also be permanently and securely deleted. You won\'t be able to use your face or fingerprint for authentication in apps."</string>
     <string name="unlock_disable_frp_warning_content_pin" msgid="122154942944422284">"A PIN protects your phone if it\'s lost or stolen"</string>
+    <string name="unlock_disable_frp_warning_content_pin_authbound_keys" msgid="6497861740382402784">"You will lose saved data like your PIN.<xliff:g id="EMPTY_LINE_0">
+
+</xliff:g>Cards set up for tap to pay will be removed.<xliff:g id="EMPTY_LINE_1">
+
+</xliff:g>Wallets and other apps that require device unlock may not work properly."</string>
     <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="983373874470746066">"A PIN protects your phone if it\'s lost or stolen.<xliff:g id="EMPTY_LINE">
 
 </xliff:g>This also deletes the fingerprint model stored on your device. You won\'t be able to use your fingerprint for authentication in apps."</string>
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint_authbound_keys" msgid="8930057076658360799">"You will lose saved data like your PIN and fingerprint model.<xliff:g id="EMPTY_LINE_0">
+
+</xliff:g>Cards set up for tap to pay will be removed.<xliff:g id="EMPTY_LINE_1">
+
+</xliff:g>Wallets and other apps that require device unlock may not work properly."</string>
     <string name="unlock_disable_frp_warning_content_pin_face" msgid="5607150515413131761">"A PIN protects your phone if it\'s lost or stolen.<xliff:g id="EMPTY_LINE">
 
 </xliff:g>Your face model will also be permanently and securely deleted. You won\'t be able to use your face for authentication in apps."</string>
+    <string name="unlock_disable_frp_warning_content_pin_face_authbound_keys" msgid="979399855891561038">"You will lose saved data like your PIN and face model.<xliff:g id="EMPTY_LINE_0">
+
+</xliff:g>Cards set up for tap to pay will be removed.<xliff:g id="EMPTY_LINE_1">
+
+</xliff:g>Wallets and other apps that require device unlock may not work properly."</string>
     <string name="unlock_disable_frp_warning_content_pin_face_fingerprint" msgid="1821792325159866312">"A PIN protects your phone if it\'s lost or stolen.<xliff:g id="EMPTY_LINE">
 
 </xliff:g>This deletes the fingerprint model stored on your device. Your face model will also be permanently and securely deleted. You won\'t be able to use your face or fingerprint for authentication in apps."</string>
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint_authbound_keys" msgid="7019955731206729909">"You will lose saved data like your PIN, face and fingerprint models.<xliff:g id="EMPTY_LINE_0">
+
+</xliff:g>Cards set up for tap to pay will be removed.<xliff:g id="EMPTY_LINE_1">
+
+</xliff:g>Wallets and other apps that require device unlock may not work properly."</string>
     <string name="unlock_disable_frp_warning_content_password" msgid="6422723907917376210">"A password protects your phone if it\'s lost or stolen"</string>
     <string name="unlock_disable_frp_warning_content_password_fingerprint" msgid="8899452884016354856">"A password protects your phone if it\'s lost or stolen.<xliff:g id="EMPTY_LINE">
 
@@ -3032,8 +3051,7 @@
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Recent apps, default apps"</string>
     <string name="notification_settings_work_profile" msgid="6076211850526353975">"Notification access is not available for apps in the work profile."</string>
     <string name="account_dashboard_title" msgid="8228773251948253914">"Passwords and accounts"</string>
-    <!-- no translation found for account_dashboard_default_summary (7976899924144356939) -->
-    <skip />
+    <string name="account_dashboard_default_summary" msgid="7976899924144356939">"Suggestions for sign-in &amp; autofill"</string>
     <string name="app_default_dashboard_title" msgid="4071015747629103216">"Default apps"</string>
     <string name="cloned_apps_dashboard_title" msgid="5542076801222950921">"Cloned Apps"</string>
     <string name="desc_cloned_apps_intro_text" msgid="1369621522882622476">"Create a second instance of an app so that you can use two accounts at the same time."</string>
@@ -4294,22 +4312,20 @@
     <string name="default_autofill_app" msgid="372234803718251606">"Default autofill service"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"Passwords"</string>
     <string name="credman_chosen_app_title" msgid="7735183808067729319">"Preferred service"</string>
-    <!-- no translation found for credman_credentials (2620352336624160642) -->
-    <skip />
+    <string name="credman_credentials" msgid="2620352336624160642">"Additional services"</string>
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# password}other{# passwords}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"auto, fill, autofill, password"</string>
     <string name="credman_keywords" msgid="8305600680836806170">"data, passkey, password"</string>
     <string name="credman_autofill_keywords" msgid="701180623776848914">"auto, fill, autofill, data, passkey, password"</string>
     <string name="credman_button_change" msgid="4072629639218503790">"Change"</string>
     <string name="credman_button_open" msgid="7519871964170816850">"Open"</string>
+    <string name="credman_app_list_preference_none" msgid="2509646651254971448">"None selected"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Make sure you trust this app&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; uses what\'s on your screen to determine what can be autofilled."</string>
     <string name="credman_autofill_confirmation_message" msgid="843829628024668466">"&lt;b&gt;Use &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; New passwords, passkeys, and other info will be saved here from now on. &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; may use what\'s on your screen to determine what can be autofilled."</string>
-    <!-- no translation found for credman_picker_title (8442086614222006564) -->
-    <skip />
+    <string name="credman_picker_title" msgid="8442086614222006564">"Preferred service for passwords, passkeys &amp; autofill"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Turn off %1$s?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Turn off this service?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Saved info like passwords, passkeys, payment methods, and other info won\'t be filled in when you sign in. To use your saved info, choose a password, passkey, or data service."</string>
-    <!-- no translation found for account_dashboard_title_with_passkeys (6214673787161409996) -->
-    <skip />
+    <string name="account_dashboard_title_with_passkeys" msgid="6214673787161409996">"Passwords, passkeys &amp; autofill"</string>
     <string name="credman_confirmation_message_new_ui" msgid="6126274509951156460">"&lt;b&gt;Turn off all services?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Passwords, passkeys, and other saved info won\'t be available for autofill when you sign in"</string>
     <string name="credman_autofill_confirmation_message_new_ui" msgid="6222139222478822267">"&lt;b&gt;Change your preferred service to &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; New passwords, passkeys, and other info will be saved here from now on. &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; may use what\'s on your screen to determine what can be autofilled"</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"Use %1$s?"</string>
@@ -4593,8 +4609,8 @@
     <string name="dsds_notification_after_suw_text" msgid="1287357774676361084">"Choose your active SIM or use 2 SIMs at once"</string>
     <string name="choose_sim_title" msgid="66509047151583877">"Choose a SIM to use"</string>
     <string name="choose_sim_text" msgid="8992163497852069924">"{count,plural, =1{1 SIM is available on this device, but only one can be used at a time}=2{2 SIMs are available on this device, but only one can be used at a time}other{# SIMs are available on this device, but only one can be used at a time}}"</string>
-    <string name="choose_sim_activating" msgid="9035902671985449448">"Activating<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
-    <string name="choose_sim_could_not_activate" msgid="1907240714489797917">"Couldn’t activate this SIM right now"</string>
+    <string name="choose_sim_activating" msgid="6485547671356386998">"Turning on<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
+    <string name="choose_sim_could_not_activate" msgid="866488735834045525">"Couldn’t turn on this SIM right now"</string>
     <string name="switch_sim_dialog_title" msgid="5407316878973237773">"Use <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="switch_sim_dialog_text" msgid="7530186862171635464">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> will be used for mobile data, calls, and SMS."</string>
     <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"No active SIMs available"</string>
@@ -4745,6 +4761,8 @@
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Hide player"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"Show player"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"media"</string>
+    <string name="camera_extensions_fallback_title" msgid="3604579046777004989">"Allow camera software extensions"</string>
+    <string name="camera_extensions_fallback_description" msgid="6939818294458854536">"Enables the default software implementation of advanced camera features, such as Eyes Free videography."</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth will turn on"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"Internet"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"SIMs"</string>
@@ -5051,6 +5069,5 @@
     <string name="content_protection_preference_subpage_summary" msgid="3595621220981703364"></string>
     <string name="content_protection_preference_subpage_info" msgid="6890886357653365489"></string>
     <string name="accessibility_setup_password_complete" msgid="6358749253318369077">"Password is now set up"</string>
-    <!-- no translation found for show_stylus_pointer_icon (1010583689203665786) -->
-    <skip />
+    <string name="show_stylus_pointer_icon" msgid="1010583689203665786">"Show pointer while hovering"</string>
 </resources>

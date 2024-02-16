@@ -45,8 +45,8 @@ import com.android.settings.biometrics.BiometricEnrollBase.RESULT_FINISHED
 import com.android.settings.biometrics.GatekeeperPasswordProvider
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollEnrolling
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollIntroductionInternal
-import com.android.settings.biometrics.fingerprint2.data.repository.FingerprintSensorRepoImpl
-import com.android.settings.biometrics.fingerprint2.data.repository.PressToAuthRepoImpl
+import com.android.settings.biometrics.fingerprint2.data.repository.FingerprintSensorRepositoryImpl
+import com.android.settings.biometrics.fingerprint2.domain.interactor.PressToAuthInteractorImpl
 import com.android.settings.biometrics.fingerprint2.domain.interactor.FingerprintManagerInteractorImpl
 import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintAuthAttemptModel
 import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintData
@@ -220,7 +220,8 @@ class FingerprintSettingsV2Fragment :
       toReturn == 1
     }
     val fingerprintSensorProvider =
-      FingerprintSensorRepoImpl(fingerprintManager, backgroundDispatcher, lifecycleScope)
+      FingerprintSensorRepositoryImpl(fingerprintManager, backgroundDispatcher, lifecycleScope)
+    val pressToAuthInteractor = PressToAuthInteractorImpl(context, backgroundDispatcher)
 
     val interactor =
       FingerprintManagerInteractorImpl(
@@ -229,7 +230,7 @@ class FingerprintSettingsV2Fragment :
         fingerprintManager,
         fingerprintSensorProvider,
         GatekeeperPasswordProvider(LockPatternUtils(context.applicationContext)),
-        PressToAuthRepoImpl(context),
+        pressToAuthInteractor,
         Settings,
       )
 

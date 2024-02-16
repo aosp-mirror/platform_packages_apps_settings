@@ -16,6 +16,7 @@
 package com.android.settings.development
 
 import android.content.Context
+import android.permission.flags.Flags.FLAG_SENSITIVE_NOTIFICATION_APP_PROTECTION
 import android.platform.test.annotations.RequiresFlagsDisabled
 import android.platform.test.annotations.RequiresFlagsEnabled
 import android.platform.test.flag.junit.DeviceFlagsValueProvider
@@ -27,7 +28,6 @@ import androidx.preference.SwitchPreference
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.android.server.notification.Flags.FLAG_SCREENSHARE_NOTIFICATION_HIDING
-import com.android.server.notification.Flags.FLAG_SENSITIVE_NOTIFICATION_APP_PROTECTION
 import com.android.settings.development.SensitiveContentProtectionPreferenceController.Companion.SETTING_VALUE_OFF
 import com.android.settings.development.SensitiveContentProtectionPreferenceController.Companion.SETTING_VALUE_ON
 import org.junit.Assert.assertEquals
