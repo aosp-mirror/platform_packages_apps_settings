@@ -16,11 +16,11 @@
 package com.android.settings.development
 
 import android.content.Context
+import android.permission.flags.Flags.sensitiveNotificationAppProtection
 import android.provider.Settings
 import androidx.annotation.VisibleForTesting
 import androidx.preference.Preference
 import androidx.preference.TwoStatePreference
-import com.android.server.notification.Flags.sensitiveNotificationAppProtection
 import com.android.server.notification.Flags.screenshareNotificationHiding
 import com.android.settings.core.PreferenceControllerMixin
 import com.android.settingslib.development.DeveloperOptionsPreferenceController
