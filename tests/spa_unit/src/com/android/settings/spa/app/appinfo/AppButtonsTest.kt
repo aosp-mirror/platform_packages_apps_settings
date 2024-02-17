@@ -24,6 +24,7 @@ import android.content.pm.Flags
 import android.content.pm.PackageInfo
 import android.content.pm.PackageInstaller
 import android.content.pm.PackageManager
+import android.platform.test.flag.junit.SetFlagsRule
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotDisplayed
@@ -34,6 +35,7 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.dx.mockito.inline.extended.ExtendedMockito
 import com.android.settings.R
+import com.android.settings.flags.Flags as SettingsFlags
 import com.android.settingslib.applications.AppUtils
 import com.android.settingslib.spa.testutils.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -53,6 +55,8 @@ import org.mockito.Mockito.`when` as whenever
 class AppButtonsTest {
     @get:Rule
     val composeTestRule = createComposeRule()
+
+    @get:Rule val setFlagsRule: SetFlagsRule = SetFlagsRule()
 
     private lateinit var mockSession: MockitoSession
 
@@ -113,6 +117,7 @@ class AppButtonsTest {
     fun launchButton_displayed_archivingDisabled() {
         whenever(packageManager.getLaunchIntentForPackage(PACKAGE_NAME)).thenReturn(Intent())
         featureFlags.setFlag(Flags.FLAG_ARCHIVING, false)
+        setFlagsRule.disableFlags(SettingsFlags.FLAG_APP_ARCHIVING)
         setContent()
 
         composeTestRule.onNodeWithText(context.getString(R.string.launch_instant_app))
