@@ -44,6 +44,7 @@ public class NetworkProviderSimListController extends BasePreferenceController i
         DefaultLifecycleObserver, MobileNetworkRepository.MobileNetworkCallback,
         DefaultSubscriptionReceiver.DefaultSubscriptionListener {
 
+    private static final String TAG = "NetworkProviderSimListController";
     private final SubscriptionManager mSubscriptionManager;
     @Nullable
     private PreferenceCategory mPreferenceCategory;
@@ -104,16 +105,21 @@ public class NetworkProviderSimListController extends BasePreferenceController i
             final Drawable drawable = mContext.getDrawable(
                     info.isEmbedded ? R.drawable.ic_sim_card_download : R.drawable.ic_sim_card);
             pref.setIcon(drawable);
-            pref.setOnPreferenceClickListener(clickedPref -> {
-                if (!info.isEmbedded && !isActiveSubscriptionId
-                        && !SubscriptionUtil.showToggleForPhysicalSim(mSubscriptionManager)) {
-                    SubscriptionUtil.startToggleSubscriptionDialogActivity(mContext, subId,
-                            true);
-                } else {
-                    MobileNetworkUtils.launchMobileNetworkSettings(mContext, info);
-                }
-                return true;
-            });
+            if (SubscriptionUtil.isConvertedPsimSubscription(mContext, subId)) {
+                // If the subscription has been converted, disable the profile menu.
+                pref.setEnabled(false);
+            } else {
+                pref.setOnPreferenceClickListener(clickedPref -> {
+                    if (!info.isEmbedded && !isActiveSubscriptionId
+                            && !SubscriptionUtil.showToggleForPhysicalSim(mSubscriptionManager)) {
+                        SubscriptionUtil.startToggleSubscriptionDialogActivity(mContext, subId,
+                                true);
+                    } else {
+                        MobileNetworkUtils.launchMobileNetworkSettings(mContext, info);
+                    }
+                    return true;
+                });
+            }
             mPreferences.put(subId, pref);
         }
         for (RestrictedPreference pref : existingPreferences.values()) {
@@ -122,6 +128,10 @@ public class NetworkProviderSimListController extends BasePreferenceController i
     }
 
     public CharSequence getSummary(SubscriptionInfoEntity subInfo, CharSequence displayName) {
+        if (!subInfo.isEmbedded
+                && SubscriptionUtil.isConvertedPsimSubscription(mContext, subInfo.getSubId())) {
+            return mContext.getString(R.string.sim_category_converted_sim);
+        }
         if (subInfo.isActiveSubscriptionId) {
             CharSequence config = SubscriptionUtil.getDefaultSimConfig(mContext,
                     subInfo.getSubId());

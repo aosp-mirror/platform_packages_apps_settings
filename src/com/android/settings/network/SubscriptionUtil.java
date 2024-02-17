@@ -18,6 +18,7 @@ package com.android.settings.network;
 
 import static android.telephony.SubscriptionManager.INVALID_SIM_SLOT_INDEX;
 import static android.telephony.SubscriptionManager.PROFILE_CLASS_PROVISIONING;
+import static android.telephony.SubscriptionManager.TRANSFER_STATUS_CONVERTED;
 import static android.telephony.UiccSlotInfo.CARD_STATE_INFO_PRESENT;
 
 import static com.android.internal.util.CollectionUtils.emptyIfNull;
@@ -904,5 +905,28 @@ public class SubscriptionUtil {
         ConnectivityManager connectivityManager =
                 context.getSystemService(ConnectivityManager.class);
         return connectivityManager.getNetworkCapabilities(connectivityManager.getActiveNetwork());
+    }
+
+    /**
+     * Checks if the subscription with the given subId is converted pSIM.
+     *
+     * @param context {@code Context}
+     * @param subId The subscription ID.
+     */
+    static boolean isConvertedPsimSubscription(@NonNull Context context, int subId) {
+        SubscriptionManager subscriptionManager = context.getSystemService(
+                SubscriptionManager.class);
+        List<SubscriptionInfo> allSubInofs = subscriptionManager.getAllSubscriptionInfoList();
+        for (SubscriptionInfo subInfo : allSubInofs) {
+            if (subInfo != null) {
+                if (com.android.internal.telephony.flags.Flags.supportPsimToEsimConversion()
+                        && subInfo.getSubscriptionId() == subId
+                        && !subInfo.isEmbedded()
+                        && subInfo.getTransferStatus() == TRANSFER_STATUS_CONVERTED) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

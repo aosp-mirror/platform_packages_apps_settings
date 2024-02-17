@@ -33,7 +33,6 @@ import static android.telephony.TelephonyManager.EXTRA_SUBSCRIPTION_ID;
 import static android.telephony.data.ApnSetting.TYPE_MMS;
 
 import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
-import static com.android.settings.sim.SimDialogActivity.PICK_DISMISS;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
