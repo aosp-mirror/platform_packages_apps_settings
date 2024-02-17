@@ -311,6 +311,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
             mForceVerifyPath = userProperties.isCredentialShareableWithParent();
             if (android.multiuser.Flags.enableBiometricsToUnlockPrivateSpace()
                     && isBiometricAllowed(effectiveUserId, mUserId)) {
+                promptInfo.setUseParentProfileForDeviceCredential(true);
                 showBiometricPrompt(promptInfo, effectiveUserId);
                 launchedBiometric = true;
             } else {
