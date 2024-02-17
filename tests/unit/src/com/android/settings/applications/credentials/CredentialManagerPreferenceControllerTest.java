@@ -529,6 +529,23 @@ public class CredentialManagerPreferenceControllerTest {
     }
 
     @Test
+    public void hasNonPrimaryServices_allServicesArePrimary() {
+        CredentialManagerPreferenceController controller =
+                createControllerWithServices(
+                    Lists.newArrayList(createCredentialProviderPrimary()));
+        assertThat(controller.hasNonPrimaryServices()).isFalse();
+    }
+
+    @Test
+    public void hasNonPrimaryServices_mixtureOfServices() {
+        CredentialManagerPreferenceController controller =
+                createControllerWithServices(
+                    Lists.newArrayList(createCredentialProviderInfo(),
+                        createCredentialProviderPrimary()));
+        assertThat(controller.hasNonPrimaryServices()).isTrue();
+    }
+
+    @Test
     public void testProviderLimitReached() {
         // The limit is 5 with one slot reserved for primary.
         assertThat(CredentialManagerPreferenceController.hasProviderLimitBeenReached(0)).isFalse();
@@ -577,6 +594,13 @@ public class CredentialManagerPreferenceControllerTest {
             String packageName, String className, CharSequence serviceLabel, boolean isEnabled) {
         return createCredentialProviderInfoBuilder(packageName, className, serviceLabel, "App Name")
                 .setEnabled(isEnabled)
+                .build();
+    }
+
+    private CredentialProviderInfo createCredentialProviderPrimary() {
+        return createCredentialProviderInfoBuilder(
+            "com.android.primary", "CredManProvider", "Service Label", "App Name")
+                .setPrimary(true)
                 .build();
     }
 
