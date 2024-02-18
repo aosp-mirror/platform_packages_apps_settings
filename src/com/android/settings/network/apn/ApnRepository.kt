@@ -20,6 +20,8 @@ import android.content.ContentValues
 import android.content.Context
 import android.net.Uri
 import android.provider.Telephony
+import android.telephony.SubscriptionManager
+import android.telephony.TelephonyManager
 import android.util.Log
 import com.android.settings.R
 import com.android.settingslib.utils.ThreadUtils
@@ -43,7 +45,6 @@ const val NETWORK_TYPE_INDEX = 15
 const val ROAMING_PROTOCOL_INDEX = 16
 const val EDITED_INDEX = 17
 const val USER_EDITABLE_INDEX = 18
-const val CARRIER_ID_INDEX = 19
 
 val sProjection = arrayOf(
     Telephony.Carriers._ID,  // 0
@@ -65,7 +66,6 @@ val sProjection = arrayOf(
     Telephony.Carriers.ROAMING_PROTOCOL,  // 16
     Telephony.Carriers.EDITED_STATUS,  // 17
     Telephony.Carriers.USER_EDITABLE,  // 18
-    Telephony.Carriers.CARRIER_ID // 19
 )
 
 const val TAG = "ApnRepository"
@@ -109,7 +109,6 @@ fun getApnDataFromUri(uri: Uri, context: Context): ApnData {
 
             val edited = cursor.getInt(EDITED_INDEX)
             val userEditable = cursor.getInt(USER_EDITABLE_INDEX)
-            val carrierId = cursor.getInt(CARRIER_ID_INDEX)
 
             apnData = apnData.copy(
                 name = name,
@@ -130,7 +129,6 @@ fun getApnDataFromUri(uri: Uri, context: Context): ApnData {
                 networkType = networkType,
                 edited = edited,
                 userEditable = userEditable,
-                carrierId = carrierId
             )
         }
     }
@@ -199,29 +197,44 @@ fun updateApnDataToDatabase(
     }
 }
 
+/** Not allowing add duplicated items, if the values of the following keys are all identical. */
+private val NonDuplicatedKeys = setOf(
+    Telephony.Carriers.APN,
+    Telephony.Carriers.PROXY,
+    Telephony.Carriers.PORT,
+    Telephony.Carriers.MMSC,
+    Telephony.Carriers.MMSPROXY,
+    Telephony.Carriers.MMSPORT,
+    Telephony.Carriers.PROTOCOL,
+    Telephony.Carriers.ROAMING_PROTOCOL,
+)
+
 fun isItemExist(apnData: ApnData, context: Context): String? {
-    var contentValueMap = apnData.getContentValueMap(context)
-    val removedList = arrayListOf(
-        Telephony.Carriers.NAME, Telephony.Carriers.USER,
-        Telephony.Carriers.SERVER, Telephony.Carriers.PASSWORD, Telephony.Carriers.AUTH_TYPE,
-        Telephony.Carriers.TYPE, Telephony.Carriers.NETWORK_TYPE_BITMASK,
-        Telephony.Carriers.CARRIER_ENABLED
-    )
-    contentValueMap =
-        contentValueMap.filterNot { removedList.contains(it.key) } as MutableMap<String, Any>
+    val contentValueMap = apnData.getContentValueMap(context).filterKeys { it in NonDuplicatedKeys }
     val list = contentValueMap.entries.toList()
     val selection = list.joinToString(" AND ") { "${it.key} = ?" }
     val selectionArgs: Array<String> = list.map { it.value.toString() }.toTypedArray()
     context.contentResolver.query(
-        Telephony.Carriers.CONTENT_URI,
-        sProjection,
-        selection /* selection */,
-        selectionArgs /* selectionArgs */,
-        null /* sortOrder */
+        Uri.withAppendedPath(Telephony.Carriers.SIM_APN_URI, apnData.subId.toString()),
+        /* projection = */ emptyArray(),
+        selection,
+        selectionArgs,
+        /* sortOrder = */ null,
     )?.use { cursor ->
         if (cursor.count > 0) {
             return context.resources.getString(R.string.error_duplicate_apn_entry)
         }
     }
     return null
+}
+
+fun Context.getApnIdMap(subId: Int): Map<String, Any> {
+    val subInfo = getSystemService(SubscriptionManager::class.java)!!
+        .getActiveSubscriptionInfo(subId)
+    val carrierId = subInfo.carrierId
+    return if (carrierId != TelephonyManager.UNKNOWN_CARRIER_ID) {
+        mapOf(Telephony.Carriers.CARRIER_ID to carrierId)
+    } else {
+        mapOf(Telephony.Carriers.NUMERIC to subInfo.mccString + subInfo.mncString)
+    }.also { Log.d(TAG, "[$subId] New APN item with id: $it") }
 }
