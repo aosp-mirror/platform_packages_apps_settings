@@ -110,18 +110,6 @@ public class PowerBackgroundUsageDetail extends DashboardFragment
         initHeader();
         mOptimizationMode = mBatteryOptimizeUtils.getAppOptimizationMode();
         initFooter();
-        mExecutor.execute(
-                () -> {
-                    String packageName =
-                            BatteryUtils.getLoggingPackageName(
-                                    getContext(), mBatteryOptimizeUtils.getPackageName());
-                    FeatureFactory.getFeatureFactory()
-                            .getMetricsFeatureProvider()
-                            .action(
-                                    getContext(),
-                                    SettingsEnums.OPEN_POWER_USAGE_MANAGE_BACKGROUND,
-                                    packageName);
-                });
         mLogStringBuilder = new StringBuilder("onResume mode = ").append(mOptimizationMode);
     }
 
