@@ -33,11 +33,14 @@ import android.view.animation.AccelerateInterpolator;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 
 import java.util.function.Function;
 
 public class SfpsEnrollmentFeatureImpl implements SfpsEnrollmentFeature {
+    @VisibleForTesting
+    public static final int HELP_ANIMATOR_DURATION = 550;
 
     @Nullable
     private FingerprintManager mFingerprintManager = null;
@@ -96,12 +99,11 @@ public class SfpsEnrollmentFeatureImpl implements SfpsEnrollmentFeature {
     @Override
     public Animator getHelpAnimator(@NonNull View target) {
         final float translationX = 40;
-        final int duration = 550;
         final ObjectAnimator help = ObjectAnimator.ofFloat(target,
                 "translationX" /* propertyName */,
                 0, translationX, -1 * translationX, translationX, 0f);
         help.setInterpolator(new AccelerateInterpolator());
-        help.setDuration(duration);
+        help.setDuration(HELP_ANIMATOR_DURATION);
         help.setAutoCancel(false);
         return help;
     }
