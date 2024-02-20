@@ -166,7 +166,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
             return CONDITIONALLY_UNAVAILABLE;
         }
 
-        if (mServices.isEmpty()) {
+        if (!hasNonPrimaryServices()) {
             return CONDITIONALLY_UNAVAILABLE;
         }
 
@@ -426,6 +426,17 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         for (String packageName : mPrefs.keySet()) {
             mPrefs.get(packageName).setChecked(mEnabledPackageNames.contains(packageName));
         }
+    }
+
+    @VisibleForTesting
+    public boolean hasNonPrimaryServices() {
+        for (CredentialProviderInfo availableService : mServices) {
+            if (!availableService.isPrimary()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     @Override

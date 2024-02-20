@@ -75,7 +75,4 @@ interface FingerprintManagerInteractor {
 
   /** Indicates if the device has side fingerprint */
   suspend fun hasSideFps(): Boolean
-
-  /** Indicates if the press to auth feature has been enabled */
-  suspend fun pressToAuthEnabled(): Boolean
 }

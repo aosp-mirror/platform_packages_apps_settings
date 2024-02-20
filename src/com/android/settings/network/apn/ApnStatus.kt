@@ -22,13 +22,10 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.Telephony
 import android.telephony.CarrierConfigManager
-import android.telephony.TelephonyManager
 import android.text.TextUtils
 import android.util.Log
-import androidx.compose.runtime.snapshots.SnapshotStateList
 import com.android.internal.util.ArrayUtils
 import com.android.settings.R
-import com.android.settings.network.apn.ApnNetworkTypes.getNetworkType
 import com.android.settings.network.apn.ApnTypes.APN_TYPES
 import com.android.settings.network.apn.ApnTypes.APN_TYPE_ALL
 import com.android.settings.network.apn.ApnTypes.APN_TYPE_EMERGENCY
@@ -56,7 +53,6 @@ data class ApnData(
     val networkType: Long = 0,
     val edited: Int = Telephony.Carriers.USER_EDITED,
     val userEditable: Int = 1,
-    val carrierId: Int = TelephonyManager.UNKNOWN_CARRIER_ID,
     val nameEnabled: Boolean = true,
     val apnEnabled: Boolean = true,
     val proxyEnabled: Boolean = true,
@@ -78,34 +74,29 @@ data class ApnData(
     val validEnabled: Boolean = false,
     val customizedConfig: CustomizedConfig = CustomizedConfig()
 ) {
-    fun getContentValueMap(context: Context): MutableMap<String, Any> {
-        val simCarrierId =
-            context.getSystemService(TelephonyManager::class.java)!!
-                .createForSubscriptionId(subId)
-                .getSimCarrierId()
-        return mutableMapOf(
-            Telephony.Carriers.NAME to name, Telephony.Carriers.APN to apn,
-            Telephony.Carriers.PROXY to proxy, Telephony.Carriers.PORT to port,
-            Telephony.Carriers.MMSPROXY to mmsProxy, Telephony.Carriers.MMSPORT to mmsPort,
-            Telephony.Carriers.USER to userName, Telephony.Carriers.SERVER to server,
-            Telephony.Carriers.PASSWORD to passWord, Telephony.Carriers.MMSC to mmsc,
-            Telephony.Carriers.AUTH_TYPE to authType,
-            Telephony.Carriers.PROTOCOL to convertOptions2Protocol(apnProtocol, context),
-            Telephony.Carriers.ROAMING_PROTOCOL to convertOptions2Protocol(apnRoaming, context),
-            Telephony.Carriers.TYPE to apnType,
-            Telephony.Carriers.NETWORK_TYPE_BITMASK to networkType,
-            Telephony.Carriers.CARRIER_ENABLED to apnEnable,
-            Telephony.Carriers.EDITED_STATUS to Telephony.Carriers.USER_EDITED,
-            Telephony.Carriers.CARRIER_ID to simCarrierId
-        )
-    }
+    fun getContentValueMap(context: Context): Map<String, Any> = mapOf(
+        Telephony.Carriers.NAME to name,
+        Telephony.Carriers.APN to apn,
+        Telephony.Carriers.PROXY to proxy,
+        Telephony.Carriers.PORT to port,
+        Telephony.Carriers.USER to userName,
+        Telephony.Carriers.SERVER to server,
+        Telephony.Carriers.PASSWORD to passWord,
+        Telephony.Carriers.MMSC to mmsc,
+        Telephony.Carriers.MMSPROXY to mmsProxy,
+        Telephony.Carriers.MMSPORT to mmsPort,
+        Telephony.Carriers.AUTH_TYPE to authType,
+        Telephony.Carriers.PROTOCOL to convertOptions2Protocol(apnProtocol, context),
+        Telephony.Carriers.ROAMING_PROTOCOL to convertOptions2Protocol(apnRoaming, context),
+        Telephony.Carriers.TYPE to apnType,
+        Telephony.Carriers.NETWORK_TYPE_BITMASK to networkType,
+        Telephony.Carriers.CARRIER_ENABLED to apnEnable,
+        Telephony.Carriers.EDITED_STATUS to Telephony.Carriers.USER_EDITED,
+    )
 
-    fun getContentValues(context: Context): ContentValues {
-        val values = ContentValues()
-        val contentValueMap = getContentValueMap(context)
-        if (!newApn) contentValueMap.remove(Telephony.Carriers.CARRIER_ID)
-        contentValueMap.forEach { (key, value) -> values.putObject(key, value) }
-        return values
+    fun getContentValues(context: Context) = ContentValues().apply {
+        if (newApn) context.getApnIdMap(subId).forEach(::putObject)
+        getContentValueMap(context).forEach(::putObject)
     }
 }
 

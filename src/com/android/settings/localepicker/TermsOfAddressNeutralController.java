@@ -35,7 +35,7 @@ public class TermsOfAddressNeutralController extends TermsOfAddressBaseControlle
 
     @Override
     protected int getMetricsActionKey() {
-        return 0;
+        return SettingsEnums.ACTION_TERMS_OF_ADDRESS_SPECIFIED;
     }
 
     @Override

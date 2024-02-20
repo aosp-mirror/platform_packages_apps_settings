@@ -97,6 +97,7 @@ public class TermsOfAddressMasculineControllerTest {
 
         selectedPreference.performClick();
 
+        assertThat(selectedPreference.getKey()).isEqualTo(KEY_MASCULINE);
         assertThat(selectedPreference.isSelected()).isTrue();
         assertThat(pref.isSelected()).isFalse();
     }

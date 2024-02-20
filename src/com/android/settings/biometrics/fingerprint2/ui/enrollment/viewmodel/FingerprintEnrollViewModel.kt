@@ -56,7 +56,7 @@ class FingerprintEnrollViewModel(
     }
 
   /** Represents the stream of [FingerprintSensorType] */
-  val sensorType: Flow<FingerprintSensorType> =
+  val sensorType: Flow<FingerprintSensorType?> =
     fingerprintManagerInteractor.sensorPropertiesInternal.filterNotNull().map { it.sensorType }
 
   /**
