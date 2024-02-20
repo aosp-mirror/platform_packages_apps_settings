@@ -4328,16 +4328,16 @@
     <string name="show_ime_summary">Keep it on screen while physical keyboard is active</string>
     <!-- Title for the 'Bounce keys' preference switch. [CHAR LIMIT=35] -->
     <string name="bounce_keys">Bounce keys</string>
-    <!-- Summary text for the 'Bounce keys' preference sub-screen. [CHAR LIMIT=100] -->
-    <string name="bounce_keys_summary">Enable Bounce keys for physical keyboard accessibility</string>
+    <!-- Summary text for the 'Bounce keys' preference sub-screen. [CHAR LIMIT=300] -->
+    <string name="bounce_keys_summary">The keyboard ignores quickly repeated presses of the same key within <xliff:g id="bounce_keys_threshold" example="500">%1$d</xliff:g> ms</string>
     <!-- Title for the 'Slow keys' preference switch. [CHAR LIMIT=35] -->
     <string name="slow_keys">Slow keys</string>
-    <!-- Summary text for the 'Slow keys' preference sub-screen. [CHAR LIMIT=100] -->
-    <string name="slow_keys_summary">Enable Slow keys for physical keyboard accessibility</string>
+    <!-- Summary text for the 'Slow keys' preference sub-screen. [CHAR LIMIT=300] -->
+    <string name="slow_keys_summary">Adjusts the time it takes for a key press to activate to <xliff:g id="slow_keys_threshold" example="500">%1$d</xliff:g> ms</string>
     <!-- Title for the 'Sticky keys' preference switch. [CHAR LIMIT=35] -->
     <string name="sticky_keys">Sticky keys</string>
-    <!-- Summary text for the 'Sticky keys' preference sub-screen. [CHAR LIMIT=100] -->
-    <string name="sticky_keys_summary">Enable Sticky keys for physical keyboard accessibility</string>
+    <!-- Summary text for the 'Sticky keys' preference sub-screen. [CHAR LIMIT=300] -->
+    <string name="sticky_keys_summary">Press one key at a time for shortcuts instead of holding keys down together</string>
     <!-- Title for the button to trigger the 'keyboard shortcuts helper' dialog. [CHAR LIMIT=35] -->
     <string name="keyboard_shortcuts_helper">Keyboard shortcuts</string>
     <!-- Summary text for the 'keyboard shortcuts helper' dialog. [CHAR LIMIT=100] -->
@@ -4601,6 +4601,8 @@
     <string name="vision_settings_suggestion_title">Change font size</string>
     <!-- Title for the accessibility preference category of screen reader services and settings. [CHAR LIMIT=50] -->
     <string name="screen_reader_category_title">Screen reader</string>
+    <!-- Title for the accessibility preference category of physical keyboard options. [CHAR LIMIT=50] -->
+    <string name="keyboard_category_title">Physical keyboard options</string>
     <!-- Title for the accessibility preference category of caption services and settings. [CHAR LIMIT=50] -->
     <string name="captions_category_title">Captions</string>
     <!-- Title for the accessibility preference category of audio services and settings. [CHAR LIMIT=50] -->
