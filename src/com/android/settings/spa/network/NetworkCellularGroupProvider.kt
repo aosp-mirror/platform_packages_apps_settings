@@ -318,7 +318,8 @@ fun PrimarySimImpl(
         for (info in subscriptionInfoList) {
             var item = ListPreferenceOption(
                     id = info.subscriptionId,
-                    text = "${info.displayName}"
+                    text = "${info.displayName}",
+                    summary = "${info.number}"
             )
             callsAndSmsList.add(item)
             dataList.add(item)
