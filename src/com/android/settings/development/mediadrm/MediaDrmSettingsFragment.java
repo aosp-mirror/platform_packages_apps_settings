@@ -14,7 +14,7 @@
 * limitations under the License.
 */
 
-package com.android.settings.development.widevine;
+package com.android.settings.development.mediadrm;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -27,12 +27,12 @@ import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.search.SearchIndexable;
 
 /**
- * Fragment for native widevine settings in Developer options.
+ * Fragment for native mediadrm settings in Developer options.
 */
 @SearchIndexable
-public class WidevineSettingsFragment extends DashboardFragment implements
+public class MediaDrmSettingsFragment extends DashboardFragment implements
         DeveloperOptionAwareMixin {
-    private static final String TAG = "WidevineSettings";
+    private static final String TAG = "MediaDrmSettings";
 
     @Override
     protected String getLogTag() {
@@ -41,16 +41,16 @@ public class WidevineSettingsFragment extends DashboardFragment implements
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.widevine_settings;
+        return R.xml.media_drm_settings;
     }
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.WIDEVINE_SETTINGS;
+        return SettingsEnums.MEDIA_DRM_SETTINGS;
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-        new BaseSearchIndexProvider(R.xml.widevine_settings) {
+        new BaseSearchIndexProvider(R.xml.media_drm_settings) {
 
             @Override
             protected boolean isPageSearchEnabled(Context context) {

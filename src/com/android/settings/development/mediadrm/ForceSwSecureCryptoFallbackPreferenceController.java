@@ -14,9 +14,10 @@
 * limitations under the License.
 */
 
-package com.android.settings.development.widevine;
+package com.android.settings.development.mediadrm;
 
 import android.content.Context;
+import android.media.MediaDrm;
 import android.sysprop.WidevineProperties;
 import android.util.Log;
 
@@ -29,13 +30,12 @@ import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settings.media_drm.Flags;
 
 /**
- * The controller (in the Media Widevine settings) enforces L3 security level
-* of Widevine CDM.
+ * The controller (in the Media Drm settings) enforces software secure crypto.
 */
-public class ForceL3FallbackPreferenceController extends TogglePreferenceController {
-    private static final String TAG = "ForceL3FallbackPreferenceController";
+public class ForceSwSecureCryptoFallbackPreferenceController extends TogglePreferenceController {
+    private static final String TAG = "ForceSwSecureCryptoFallbackPreferenceController";
 
-    public ForceL3FallbackPreferenceController(Context context, String preferenceKey) {
+    public ForceSwSecureCryptoFallbackPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
     }
 
