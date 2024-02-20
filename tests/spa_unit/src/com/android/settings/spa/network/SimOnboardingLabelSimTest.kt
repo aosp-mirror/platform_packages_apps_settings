@@ -47,7 +47,6 @@ class SimOnboardingLabelSimTest {
         on { activeSubInfoList }.doReturn(listOf())
         on { slotInfoList }.doReturn(listOf())
         on { uiccCardInfoList }.doReturn(listOf())
-        on { selectedSubInfoList }.doReturn(mutableListOf())
 
         on { targetPrimarySimCalls }.doReturn(PRIMARY_SIM_ASK_EVERY_TIME)
         on { targetPrimarySimTexts }.doReturn(PRIMARY_SIM_ASK_EVERY_TIME)
