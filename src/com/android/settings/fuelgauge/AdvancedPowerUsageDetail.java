@@ -266,18 +266,6 @@ public class AdvancedPowerUsageDetail extends DashboardFragment
         initHeader();
         mOptimizationMode = mBatteryOptimizeUtils.getAppOptimizationMode();
         initFooter();
-        mExecutor.execute(
-                () -> {
-                    final String packageName =
-                            BatteryUtils.getLoggingPackageName(
-                                    getContext(), mBatteryOptimizeUtils.getPackageName());
-                    FeatureFactory.getFeatureFactory()
-                            .getMetricsFeatureProvider()
-                            .action(
-                                    getContext(),
-                                    SettingsEnums.OPEN_APP_BATTERY_USAGE,
-                                    packageName);
-                });
         mLogStringBuilder = new StringBuilder("onResume mode = ").append(mOptimizationMode);
     }
 
