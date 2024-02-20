@@ -32,6 +32,7 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.IPackageManager;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.pm.UserProperties;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -156,10 +157,21 @@ public class DeviceAdminListPreferenceController extends BasePreferenceControlle
         mAdmins.clear();
         final List<UserHandle> profiles = mUm.getUserProfiles();
         for (UserHandle profile : profiles) {
+            if (shouldSkipProfile(profile)) {
+                continue;
+            }
             final int profileId = profile.getIdentifier();
             updateAvailableAdminsForProfile(profileId);
         }
         Collections.sort(mAdmins);
+    }
+
+    private boolean shouldSkipProfile(UserHandle profile) {
+        return  android.os.Flags.allowPrivateProfile()
+                && android.multiuser.Flags.handleInterleavedSettingsForPrivateSpace()
+                && mUm.isQuietModeEnabled(profile)
+                && mUm.getUserProperties(profile).getShowInQuietMode()
+                        == UserProperties.SHOW_IN_QUIET_MODE_HIDDEN;
     }
 
     private void refreshUI() {
