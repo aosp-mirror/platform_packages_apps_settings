@@ -22,17 +22,9 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.Telephony
 import android.telephony.CarrierConfigManager
-import android.text.TextUtils
 import android.util.Log
-import com.android.internal.util.ArrayUtils
 import com.android.settings.R
-import com.android.settings.network.apn.ApnTypes.APN_TYPES
-import com.android.settings.network.apn.ApnTypes.APN_TYPE_ALL
-import com.android.settings.network.apn.ApnTypes.APN_TYPE_EMERGENCY
-import com.android.settings.network.apn.ApnTypes.APN_TYPE_IA
-import com.android.settings.network.apn.ApnTypes.APN_TYPE_IMS
-import com.android.settings.network.apn.ApnTypes.APN_TYPE_MCX
-import java.util.Locale
+import com.android.settings.network.apn.ApnTypes.getPreSelectedApnType
 
 private const val TAG = "ApnStatus"
 
@@ -108,7 +100,7 @@ data class CustomizedConfig(
     val isAddApnAllowed: Boolean = true,
     val readOnlyApnTypes: List<String> = emptyList(),
     val readOnlyApnFields: List<String> = emptyList(),
-    val defaultApnTypes: List<String> = emptyList(),
+    val defaultApnTypes: List<String>? = null,
     val defaultApnProtocol: String = "",
     val defaultApnRoamingProtocol: String = "",
 )
@@ -121,19 +113,18 @@ data class CustomizedConfig(
  *
  * @return Initialized CustomizedConfig information.
  */
-fun getApnDataInit(arguments: Bundle, context: Context, uriInit: Uri, subId: Int): ApnData {
-
-    val uriType = arguments.getString(URI_TYPE)!!
+fun getApnDataInit(arguments: Bundle, context: Context, uriInit: Uri, subId: Int): ApnData? {
+    val uriType = arguments.getString(URI_TYPE) ?: return null
 
     if (!uriInit.isPathPrefixMatch(Telephony.Carriers.CONTENT_URI)) {
         Log.e(TAG, "Insert request not for carrier table. Uri: $uriInit")
-        return ApnData() //TODO: finish
+        return null
     }
 
     var apnDataInit = when (uriType) {
         EDIT_URL -> getApnDataFromUri(uriInit, context)
         INSERT_URL -> ApnData()
-        else -> ApnData() //TODO: finish
+        else -> return null
     }
 
     if (uriType == INSERT_URL) {
@@ -146,13 +137,18 @@ fun getApnDataInit(arguments: Bundle, context: Context, uriInit: Uri, subId: Int
     apnDataInit =
         apnDataInit.copy(customizedConfig = getCarrierCustomizedConfig(apnDataInit, configManager))
 
+    if (apnDataInit.newApn) {
+        apnDataInit = apnDataInit.copy(
+            apnType = getPreSelectedApnType(apnDataInit.customizedConfig)
+        )
+    }
+
     apnDataInit = apnDataInit.copy(
         apnEnableEnabled =
         context.resources.getBoolean(R.bool.config_allow_edit_carrier_enabled)
     )
     // TODO: mIsCarrierIdApn
-    disableInit(apnDataInit)
-    return apnDataInit
+    return disableInit(apnDataInit)
 }
 
 /**
@@ -202,53 +198,7 @@ fun validateApnData(apnData: ApnData, context: Context): String? {
     if (errorMsg == null) {
         errorMsg = isItemExist(apnData, context)
     }
-    if (errorMsg == null) {
-        errorMsg = validateAPNType(
-            true,
-            apnData.apnType,
-            apnData.customizedConfig.readOnlyApnTypes,
-            context
-        )
-    }
     return errorMsg?.apply { Log.d(TAG, "APN data not valid, reason: $this") }
-}
-
-private fun getUserEnteredApnType(apnType: String, readOnlyApnTypes: List<String>): String {
-    // if user has not specified a type, map it to "ALL APN TYPES THAT ARE NOT READ-ONLY"
-    // but if user enter empty type, map it just for default
-    var userEnteredApnType = apnType
-    if (userEnteredApnType != "") userEnteredApnType =
-        userEnteredApnType.trim { it <= ' ' }
-    if (TextUtils.isEmpty(userEnteredApnType) || APN_TYPE_ALL == userEnteredApnType) {
-        userEnteredApnType = getEditableApnType(readOnlyApnTypes)
-    }
-    Log.d(
-        TAG, "getUserEnteredApnType: changed apn type to editable apn types: "
-            + userEnteredApnType
-    )
-    return userEnteredApnType
-}
-
-private fun getEditableApnType(readOnlyApnTypes: List<String>): String {
-    val editableApnTypes = StringBuilder()
-    var first = true
-    for (apnType in APN_TYPES) {
-        // add APN type if it is not read-only and is not wild-cardable
-        if (!readOnlyApnTypes.contains(apnType)
-            && apnType != APN_TYPE_IA
-            && apnType != APN_TYPE_EMERGENCY
-            && apnType != APN_TYPE_MCX
-            && apnType != APN_TYPE_IMS
-        ) {
-            if (first) {
-                first = false
-            } else {
-                editableApnTypes.append(",")
-            }
-            editableApnTypes.append(apnType)
-        }
-    }
-    return editableApnTypes.toString()
 }
 
 /**
@@ -261,6 +211,10 @@ fun getCarrierCustomizedConfig(
     apnInit: ApnData,
     configManager: CarrierConfigManager
 ): CustomizedConfig {
+    fun log(message: String) {
+        Log.d(TAG, "getCarrierCustomizedConfig: $message")
+    }
+
     val b = configManager.getConfigForSubId(
         apnInit.subId,
         CarrierConfigManager.KEY_READ_ONLY_APN_TYPES_STRING_ARRAY,
@@ -273,72 +227,61 @@ fun getCarrierCustomizedConfig(
     val customizedConfig = CustomizedConfig(
         readOnlyApnTypes = b.getStringArray(
             CarrierConfigManager.KEY_READ_ONLY_APN_TYPES_STRING_ARRAY
-        )?.toList() ?: emptyList(), readOnlyApnFields = b.getStringArray(
+        )?.toList() ?: emptyList(),
+        readOnlyApnFields = b.getStringArray(
             CarrierConfigManager.KEY_READ_ONLY_APN_FIELDS_STRING_ARRAY
-        )?.toList() ?: emptyList(), defaultApnTypes = b.getStringArray(
+        )?.toList() ?: emptyList(),
+        defaultApnTypes = b.getStringArray(
             CarrierConfigManager.KEY_APN_SETTINGS_DEFAULT_APN_TYPES_STRING_ARRAY
-        )?.toList() ?: emptyList(), defaultApnProtocol = b.getString(
+        )?.toList(),
+        defaultApnProtocol = b.getString(
             CarrierConfigManager.Apn.KEY_SETTINGS_DEFAULT_PROTOCOL_STRING
-        ) ?: "", defaultApnRoamingProtocol = b.getString(
+        ) ?: "",
+        defaultApnRoamingProtocol = b.getString(
             CarrierConfigManager.Apn.KEY_SETTINGS_DEFAULT_ROAMING_PROTOCOL_STRING
-        ) ?: "", isAddApnAllowed = b.getBoolean(CarrierConfigManager.KEY_ALLOW_ADDING_APNS_BOOL)
+        ) ?: "",
+        isAddApnAllowed = b.getBoolean(CarrierConfigManager.KEY_ALLOW_ADDING_APNS_BOOL),
     )
-    if (!ArrayUtils.isEmpty(customizedConfig.readOnlyApnTypes)) {
-        Log.d(
-            TAG,
-            "getCarrierCustomizedConfig: read only APN type: " + customizedConfig.readOnlyApnTypes.joinToString(
-                ", "
-            )
-        )
+    if (customizedConfig.readOnlyApnTypes.isNotEmpty()) {
+        log("read only APN type: " + customizedConfig.readOnlyApnTypes)
     }
-    if (!ArrayUtils.isEmpty(customizedConfig.defaultApnTypes)) {
-        Log.d(
-            TAG,
-            "getCarrierCustomizedConfig: default apn types: " + customizedConfig.defaultApnTypes.joinToString(
-                ", "
-            )
-        )
+    customizedConfig.defaultApnTypes?.takeIf { it.isNotEmpty() }?.let {
+        log("default apn types: $it")
     }
-    if (!TextUtils.isEmpty(customizedConfig.defaultApnProtocol)) {
-        Log.d(
-            TAG,
-            "getCarrierCustomizedConfig: default apn protocol: ${customizedConfig.defaultApnProtocol}"
-        )
+    if (customizedConfig.defaultApnProtocol.isNotEmpty()) {
+        log("default apn protocol: ${customizedConfig.defaultApnProtocol}")
     }
-    if (!TextUtils.isEmpty(customizedConfig.defaultApnRoamingProtocol)) {
-        Log.d(
-            TAG,
-            "getCarrierCustomizedConfig: default apn roaming protocol: ${customizedConfig.defaultApnRoamingProtocol}"
-        )
+    if (customizedConfig.defaultApnRoamingProtocol.isNotEmpty()) {
+        log("default apn roaming protocol: ${customizedConfig.defaultApnRoamingProtocol}")
     }
     if (!customizedConfig.isAddApnAllowed) {
-        Log.d(TAG, "getCarrierCustomizedConfig: not allow to add new APN")
+        log("not allow to add new APN")
     }
     return customizedConfig
 }
 
-fun disableInit(apnDataInit: ApnData): ApnData {
-    var apnData = apnDataInit
-    val isUserEdited = apnDataInit.edited == Telephony.Carriers.USER_EDITED
-    Log.d(TAG, "disableInit: EDITED $isUserEdited")
+private fun ApnData.isReadOnly(): Boolean {
+    Log.d(TAG, "isReadOnly: edited $edited")
+    if (edited == Telephony.Carriers.USER_EDITED) return false
     // if it's not a USER_EDITED apn, check if it's read-only
-    if (!isUserEdited && (apnDataInit.userEditable == 0
-            || apnTypesMatch(apnDataInit.customizedConfig.readOnlyApnTypes, apnDataInit.apnType))
-    ) {
+    return userEditable == 0 ||
+        ApnTypes.isApnTypeReadOnly(apnType, customizedConfig.readOnlyApnTypes)
+}
+
+fun disableInit(apnDataInit: ApnData): ApnData {
+    if (apnDataInit.isReadOnly()) {
         Log.d(TAG, "disableInit: read-only APN")
-        apnData =
-            apnDataInit.copy(customizedConfig = apnDataInit.customizedConfig.copy(readOnlyApn = true))
-        apnData = disableAllFields(apnData)
-    } else if (!ArrayUtils.isEmpty(apnData.customizedConfig.readOnlyApnFields)) {
-        Log.d(
-            TAG,
-            "disableInit: mReadOnlyApnFields ${
-                apnData.customizedConfig.readOnlyApnFields.joinToString(", ")
-            })"
+        val apnData = apnDataInit.copy(
+            customizedConfig = apnDataInit.customizedConfig.copy(readOnlyApn = true)
         )
-        apnData = disableFields(apnData.customizedConfig.readOnlyApnFields, apnData)
+        return disableAllFields(apnData)
     }
-    return apnData
+    val readOnlyApnFields = apnDataInit.customizedConfig.readOnlyApnFields
+    if (readOnlyApnFields.isNotEmpty()) {
+        Log.d(TAG, "disableInit: readOnlyApnFields $readOnlyApnFields)")
+        return disableFields(readOnlyApnFields, apnDataInit)
+    }
+    return apnDataInit
 }
 
 /**
@@ -405,23 +348,6 @@ private fun disableByFieldName(apnField: String, apnDataInit: ApnData): ApnData 
     return apnData
 }
 
-private fun apnTypesMatch(apnTypeList: List<String>, apnType: String): Boolean {
-    val normalizeApnTypeList = apnTypeList.map(::normalizeApnType)
-    return hasAllApns(normalizeApnTypeList) ||
-        apnType.split(",").map(::normalizeApnType).all { it in normalizeApnTypeList }
-}
-
-fun hasAllApns(apnTypes: List<String>): Boolean {
-    if (APN_TYPE_ALL in apnTypes) {
-        Log.d(TAG, "hasAllApns: true because apnTypes.contains(APN_TYPE_ALL)")
-        return true
-    }
-    return APN_TYPES.all { it in apnTypes }
-}
-
-private fun normalizeApnType(apnType: String): String =
-    apnType.trim().lowercase(Locale.getDefault())
-
 fun deleteApn(uri: Uri, context: Context) {
     val contentResolver = context.contentResolver
     contentResolver.delete(uri, null, null)
@@ -441,25 +367,4 @@ fun validateName(validEnabled: Boolean, name: String, context: Context): String?
 fun validateAPN(validEnabled: Boolean, apn: String, context: Context): String? {
     return if (validEnabled && (apn == "")) context.resources.getString(R.string.error_apn_empty)
     else null
-}
-
-fun validateAPNType(
-    validEnabled: Boolean,
-    apnType: String,
-    readOnlyApnTypes: List<String>,
-    context: Context
-): String? {
-    // if carrier does not allow editing certain apn types, make sure type does not include those
-    if (validEnabled && !ArrayUtils.isEmpty(readOnlyApnTypes)
-        && apnTypesMatch(
-            readOnlyApnTypes,
-            getUserEnteredApnType(apnType, readOnlyApnTypes)
-        )
-    ) {
-        return String.format(
-            context.resources.getString(R.string.error_adding_apn_type),
-            readOnlyApnTypes.joinToString(", ")
-        )
-    }
-    return null
 }
