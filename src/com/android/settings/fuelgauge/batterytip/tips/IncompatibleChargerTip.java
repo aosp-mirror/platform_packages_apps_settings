@@ -81,6 +81,7 @@ public final class IncompatibleChargerTip extends BatteryTip {
         }
 
         cardPreference.setSelectable(false);
+        cardPreference.enableDismiss(false);
         cardPreference.setIconResId(getIconId());
         cardPreference.setPrimaryButtonText(context.getString(R.string.learn_more));
         cardPreference.setPrimaryButtonAction(

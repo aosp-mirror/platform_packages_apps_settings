@@ -62,7 +62,7 @@ public class BatteryDefenderTip extends BatteryTip {
 
     @Override
     public int getIconId() {
-        return R.drawable.ic_battery_status_good_theme;
+        return R.drawable.ic_battery_defender_tip_shield;
     }
 
     @Override
