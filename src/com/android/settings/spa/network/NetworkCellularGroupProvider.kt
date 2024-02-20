@@ -219,24 +219,24 @@ fun SimsSectionImpl(
             mutableStateOf(false)
         }
         //TODO: Add the Restricted TwoTargetSwitchPreference in SPA
-        TwoTargetSwitchPreference(remember {
-            object : SwitchPreferenceModel {
-                override val title = subInfo.displayName.toString()
-                override val summary = { subInfo.number }
-                override val checked = {
-                    coroutineScope.launch {
-                        withContext(Dispatchers.Default) {
-                            checked.value = subscriptionManager?.isSubscriptionEnabled(
+        TwoTargetSwitchPreference(
+                object : SwitchPreferenceModel {
+                    override val title = subInfo.displayName.toString()
+                    override val summary = { subInfo.number }
+                    override val checked = {
+                        coroutineScope.launch {
+                            withContext(Dispatchers.Default) {
+                                checked.value = subscriptionManager?.isSubscriptionEnabled(
                                     subInfo.subscriptionId)?:false
+                            }
                         }
+                        checked.value
                     }
-                    checked.value
+                    override val onCheckedChange = { newChecked: Boolean ->
+                        startToggleSubscriptionDialog(context, subInfo, newChecked)
+                    }
                 }
-                override val onCheckedChange = { newChecked: Boolean ->
-                    startToggleSubscriptionDialog(context, subInfo, newChecked)
-                }
-            }
-        }) {
+        ) {
             startMobileNetworkSettings(context, subInfo)
         }
     }
@@ -258,7 +258,7 @@ fun SimsSectionImpl(
 }
 
 @Composable
-fun PrimarySimSectionImpl(
+fun PrimarySimImpl(
     subscriptionInfoList: List<SubscriptionInfo>,
     callsSelectedId: MutableIntState,
     textsSelectedId: MutableIntState,
@@ -323,10 +323,12 @@ fun PrimarySimSectionImpl(
             callsAndSmsList.add(item)
             dataList.add(item)
         }
-        callsAndSmsList.add(ListPreferenceOption(
+        callsAndSmsList.add(
+            ListPreferenceOption(
                 id = SubscriptionManager.INVALID_SUBSCRIPTION_ID,
                 text = stringResource(id = R.string.sim_calls_ask_first_prefs_title)
-        ))
+            )
+        )
     } else {
         // hide the primary sim
         state.value = false
@@ -341,33 +343,31 @@ fun PrimarySimSectionImpl(
             mutableStateOf(false)
         }
 
-        Category(title = stringResource(id = R.string.primary_sim_title)) {
-            CreatePrimarySimListPreference(
-                    stringResource(id = R.string.primary_sim_calls_title),
-                    callsAndSmsList,
-                    callsSelectedId,
-                    ImageVector.vectorResource(R.drawable.ic_phone),
-                    actionSetCalls
-            )
-            CreatePrimarySimListPreference(
-                    stringResource(id = R.string.primary_sim_texts_title),
-                    callsAndSmsList,
-                    textsSelectedId,
-                    Icons.AutoMirrored.Outlined.Message,
-                    actionSetTexts
-            )
-            CreatePrimarySimListPreference(
-                    stringResource(id = R.string.mobile_data_settings_title),
-                    dataList,
-                    mobileDataSelectedId,
-                    Icons.Outlined.DataUsage,
-                    actionSetMobileData
-            )
-        }
+        CreatePrimarySimListPreference(
+            stringResource(id = R.string.primary_sim_calls_title),
+            callsAndSmsList,
+            callsSelectedId,
+            ImageVector.vectorResource(R.drawable.ic_phone),
+            actionSetCalls
+        )
+        CreatePrimarySimListPreference(
+            stringResource(id = R.string.primary_sim_texts_title),
+            callsAndSmsList,
+            textsSelectedId,
+            Icons.AutoMirrored.Outlined.Message,
+            actionSetTexts
+        )
+        CreatePrimarySimListPreference(
+            stringResource(id = R.string.mobile_data_settings_title),
+            dataList,
+            mobileDataSelectedId,
+            Icons.Outlined.DataUsage,
+            actionSetMobileData
+        )
 
         val autoDataTitle = stringResource(id = R.string.primary_sim_automatic_data_title)
         val autoDataSummary = stringResource(id = R.string.primary_sim_automatic_data_msg)
-        SwitchPreference(remember {
+        SwitchPreference(
             object : SwitchPreferenceModel {
                 override val title = autoDataTitle
                 override val summary = { autoDataSummary }
@@ -375,6 +375,11 @@ fun PrimarySimSectionImpl(
                     if (nonDds.intValue != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
                         coroutineScope.launch {
                             automaticDataChecked.value = getAutomaticData(telephonyManagerForNonDds)
+                            Log.d(
+                                NetworkCellularGroupProvider.name,
+                                "NonDds:${nonDds.intValue}" +
+                                    "getAutomaticData:${automaticDataChecked.value}"
+                            )
                         }
                     }
                     automaticDataChecked.value
@@ -384,7 +389,26 @@ fun PrimarySimSectionImpl(
                     actionSetAutoDataSwitch(it)
                 }
             }
-        })
+        )
+    }
+}
+
+@Composable
+fun PrimarySimSectionImpl(
+    subscriptionInfoList: List<SubscriptionInfo>,
+    callsSelectedId: MutableIntState,
+    textsSelectedId: MutableIntState,
+    mobileDataSelectedId: MutableIntState,
+    nonDds: MutableIntState,
+) {
+    Category(title = stringResource(id = R.string.primary_sim_title)) {
+        PrimarySimImpl(
+            subscriptionInfoList,
+            callsSelectedId,
+            textsSelectedId,
+            mobileDataSelectedId,
+            nonDds
+        )
     }
 }
 
@@ -442,32 +466,42 @@ private fun showEuiccSettings(context: Context): Boolean {
 }
 
 suspend fun setDefaultVoice(
-        subscriptionManager: SubscriptionManager?,
-        subId: Int): Unit = withContext(Dispatchers.Default) {
-    subscriptionManager?.setDefaultVoiceSubscriptionId(subId)
-}
+    subscriptionManager: SubscriptionManager?,
+    subId: Int
+): Unit =
+    withContext(Dispatchers.Default) {
+        subscriptionManager?.setDefaultVoiceSubscriptionId(subId)
+    }
 
 suspend fun setDefaultSms(
-        subscriptionManager: SubscriptionManager?,
-        subId: Int): Unit = withContext(Dispatchers.Default) {
-    subscriptionManager?.setDefaultSmsSubId(subId)
-}
+    subscriptionManager: SubscriptionManager?,
+    subId: Int
+): Unit =
+    withContext(Dispatchers.Default) {
+        subscriptionManager?.setDefaultSmsSubId(subId)
+    }
 
-suspend fun setDefaultData(context: Context,
-                                   subscriptionManager: SubscriptionManager?,
-                                   wifiPickerTrackerHelper: WifiPickerTrackerHelper?,
-                                   subId: Int): Unit = withContext(Dispatchers.Default) {
-    subscriptionManager?.setDefaultDataSubId(subId)
-    MobileNetworkUtils.setMobileDataEnabled(
+suspend fun setDefaultData(
+    context: Context,
+    subscriptionManager: SubscriptionManager?,
+    wifiPickerTrackerHelper: WifiPickerTrackerHelper?,
+    subId: Int
+): Unit =
+    withContext(Dispatchers.Default) {
+        subscriptionManager?.setDefaultDataSubId(subId)
+        MobileNetworkUtils.setMobileDataEnabled(
             context,
             subId,
             true /* enabled */,
-            true /* disableOtherSubscriptions */)
-    if (wifiPickerTrackerHelper != null
-            && !wifiPickerTrackerHelper.isCarrierNetworkProvisionEnabled(subId)) {
-        wifiPickerTrackerHelper.setCarrierNetworkEnabled(true)
+            true /* disableOtherSubscriptions */
+        )
+        if (wifiPickerTrackerHelper != null
+            && !wifiPickerTrackerHelper.isCarrierNetworkProvisionEnabled(subId)
+        ) {
+            wifiPickerTrackerHelper.setCarrierNetworkEnabled(true)
+        }
     }
-}
+
 suspend fun getAutomaticData(telephonyManagerForNonDds: TelephonyManager?): Boolean =
     withContext(Dispatchers.Default) {
         telephonyManagerForNonDds != null
@@ -478,7 +512,7 @@ suspend fun getAutomaticData(telephonyManagerForNonDds: TelephonyManager?): Bool
 suspend fun setAutomaticData(telephonyManager: TelephonyManager?, newState: Boolean): Unit =
     withContext(Dispatchers.Default) {
         Log.d(
-            "NetworkCellularGroupProvider",
+            NetworkCellularGroupProvider.name,
             "setAutomaticData: MOBILE_DATA_POLICY_AUTO_DATA_SWITCH as $newState"
         )
         telephonyManager?.setMobileDataPolicyEnabled(
