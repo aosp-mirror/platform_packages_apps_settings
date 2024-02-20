@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.SignalCellularAlt
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -91,11 +92,13 @@ private fun labelSimBody(onboardingService: SimOnboardingService) {
             },
             title = stringResource(R.string.sim_onboarding_label_sim_dialog_title),
             text = {
-                Text(summaryNumber)
+                Text(summaryNumber,
+                    modifier = Modifier.padding(bottom = SettingsDimension.itemPaddingVertical))
                 SettingsOutlinedTextField(
                     value = titleSimName,
                     label = stringResource(R.string.sim_onboarding_label_sim_dialog_label),
-                    enabled = true
+                    enabled = true,
+                    shape = MaterialTheme.shapes.extraLarge
                 ) {
                     titleSimName = it
                 }
