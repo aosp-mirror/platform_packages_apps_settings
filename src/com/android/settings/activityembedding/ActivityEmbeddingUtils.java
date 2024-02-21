@@ -33,11 +33,6 @@ import com.google.android.setupcompat.util.WizardManagerHelper;
 
 /** An util class collecting all common methods for the embedding activity features. */
 public class ActivityEmbeddingUtils {
-    // The smallest value of current width of the window when the split should be used.
-    private static final int MIN_CURRENT_SCREEN_SPLIT_WIDTH_DP = 720;
-    // The smallest value of the smallest-width (sw) of the window in any rotation when
-    // the split should be used.
-    private static final int MIN_SMALLEST_SCREEN_SPLIT_WIDTH_DP = 600;
     // The minimum width of the activity to show the regular homepage layout.
     private static final float MIN_REGULAR_HOMEPAGE_LAYOUT_WIDTH_DP = 380f;
 
@@ -58,16 +53,16 @@ public class ActivityEmbeddingUtils {
     private static final String TAG = "ActivityEmbeddingUtils";
 
     /** Get the smallest width dp of the window when the split should be used. */
-    public static int getMinCurrentScreenSplitWidthDp() {
-        return MIN_CURRENT_SCREEN_SPLIT_WIDTH_DP;
+    public static int getMinCurrentScreenSplitWidthDp(Context context) {
+        return context.getResources().getInteger(R.integer.config_activity_embed_split_min_cur_dp);
     }
 
     /**
      * Get the smallest dp value of the smallest-width (sw) of the window in any rotation when
      * the split should be used.
      */
-    public static int getMinSmallestScreenSplitWidthDp() {
-        return MIN_SMALLEST_SCREEN_SPLIT_WIDTH_DP;
+    public static int getMinSmallestScreenSplitWidthDp(Context context) {
+        return context.getResources().getInteger(R.integer.config_activity_embed_split_min_sw_dp);
     }
 
     /**
