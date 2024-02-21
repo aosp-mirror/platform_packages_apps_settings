@@ -200,6 +200,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         final PreferenceCategory generalCategory = findPreference(KEY_GENERAL_CATEGORY);
         generalCategory.addPreference(mSettingsPreference);
 
+        addOneFingerPanningSetting(generalCategory);
         final MagnificationModePreferenceController magnificationModePreferenceController =
                 new MagnificationModePreferenceController(getContext(),
                         MagnificationModePreferenceController.PREF_KEY);
@@ -281,6 +282,24 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                 getContext(), MagnificationAlwaysOnPreferenceController.PREF_KEY);
         alwaysOnPreferenceController.displayPreference(getPreferenceScreen());
         addPreferenceController(alwaysOnPreferenceController);
+    }
+
+    private void addOneFingerPanningSetting(PreferenceCategory generalCategory) {
+        if (!Flags.enableMagnificationOneFingerPanningGesture()) {
+            return;
+        }
+
+        var oneFingerPanningPreference = new SwitchPreferenceCompat(getPrefContext());
+        oneFingerPanningPreference.setTitle(
+                R.string.accessibility_magnification_one_finger_panning_title);
+        oneFingerPanningPreference.setKey(
+                MagnificationOneFingerPanningPreferenceController.PREF_KEY);
+        generalCategory.addPreference(oneFingerPanningPreference);
+
+        var oneFingerPanningPreferenceController =
+                new MagnificationOneFingerPanningPreferenceController(getContext());
+        oneFingerPanningPreferenceController.displayPreference(getPreferenceScreen());
+        addPreferenceController(oneFingerPanningPreferenceController);
     }
 
     private void addJoystickSetting(PreferenceCategory generalCategory) {
