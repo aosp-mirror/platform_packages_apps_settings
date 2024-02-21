@@ -58,7 +58,7 @@ class ApnRepositoryTest {
     @Test
     fun getApnDataFromUri() {
         // mock out resources and the feature provider
-        val cursor = MatrixCursor(sProjection)
+        val cursor = MatrixCursor(Projection)
         cursor.addRow(
             arrayOf<Any>(
                 0,
@@ -82,7 +82,7 @@ class ApnRepositoryTest {
                 1,
             )
         )
-        whenever(contentResolver.query(uri, sProjection, null, null, null)).thenReturn(cursor)
+        whenever(contentResolver.query(uri, Projection, null, null, null)).thenReturn(cursor)
 
         val apnData = getApnDataFromUri(uri, context)
 
