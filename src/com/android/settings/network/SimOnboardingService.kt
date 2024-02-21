@@ -45,7 +45,6 @@ class SimOnboardingService {
     var activeSubInfoList: List<SubscriptionInfo> = listOf()
     var slotInfoList: List<UiccSlotInfo> = listOf()
     var uiccCardInfoList: List<UiccCardInfo> = listOf()
-    var selectedSubInfoList: MutableList<SubscriptionInfo> = mutableListOf()
     var targetPrimarySimCalls: Int = SubscriptionManager.INVALID_SUBSCRIPTION_ID
     var targetPrimarySimTexts: Int = SubscriptionManager.INVALID_SUBSCRIPTION_ID
     var targetPrimarySimMobileData: Int = SubscriptionManager.INVALID_SUBSCRIPTION_ID
@@ -56,10 +55,8 @@ class SimOnboardingService {
                 Log.w(TAG, "No DDS")
                 return SubscriptionManager.INVALID_SUBSCRIPTION_ID
             }
-            return selectedSubInfoList
-                .filter { info ->
-                    (info.simSlotIndex != -1) && (info.subscriptionId != targetPrimarySimMobileData)
-                }
+            return userSelectedSubInfoList
+                .filter { info -> info.subscriptionId != targetPrimarySimMobileData }
                 .map { it.subscriptionId }
                 .firstOrNull() ?: SubscriptionManager.INVALID_SUBSCRIPTION_ID
         }
@@ -118,7 +115,6 @@ class SimOnboardingService {
             && targetSubInfo != null
             && activeSubInfoList.isNotEmpty()
             && slotInfoList.isNotEmpty()
-            && selectedSubInfoList.isNotEmpty()
     }
 
     fun clear() {
@@ -128,7 +124,6 @@ class SimOnboardingService {
         activeSubInfoList = listOf()
         slotInfoList = listOf()
         uiccCardInfoList = listOf()
-        selectedSubInfoList = mutableListOf()
         targetPrimarySimCalls = -1
         targetPrimarySimTexts = -1
         targetPrimarySimMobileData = -1
@@ -151,7 +146,8 @@ class SimOnboardingService {
         ThreadUtils.postOnBackgroundThread {
             activeSubInfoList = SubscriptionUtil.getActiveSubscriptions(subscriptionManager)
             availableSubInfoList = SubscriptionUtil.getAvailableSubscriptions(context)
-            targetSubInfo = availableSubInfoList.find { subInfo -> subInfo.subscriptionId == targetSubId }
+            targetSubInfo =
+                availableSubInfoList.find { subInfo -> subInfo.subscriptionId == targetSubId }
             targetSubInfo?.let { userSelectedSubInfoList.add(it) }
             Log.d(
                 TAG, "targetSubId: $targetSubId" + ", targetSubInfo: $targetSubInfo" +
@@ -186,7 +182,6 @@ class SimOnboardingService {
             targetSubInfo?.let { list.add(it) }
         }
 
-        Log.d(TAG, "list: $list")
         return list.toList()
     }
 
@@ -206,7 +201,10 @@ class SimOnboardingService {
             return
         }
         renameMutableMap[subInfo.subscriptionId] = newName
-        Log.d(TAG, "renameMutableMap add ${subInfo.subscriptionId} & $newName into: $renameMutableMap")
+        Log.d(
+            TAG,
+            "renameMutableMap add ${subInfo.subscriptionId} & $newName into: $renameMutableMap"
+        )
     }
 
     fun getSubscriptionInfoDisplayName(subInfo: SubscriptionInfo): String {
@@ -278,11 +276,18 @@ class SimOnboardingService {
                 targetPrimarySimMobileData
             )
 
-
-            val telephonyManagerForNonDds: TelephonyManager? =
-                context.getSystemService(TelephonyManager::class.java)
-                    ?.createForSubscriptionId(targetNonDds)
-            setAutomaticData(telephonyManagerForNonDds, targetPrimarySimAutoDataSwitch)
+            var nonDds = targetNonDds
+            Log.d(
+                TAG,
+                "setAutomaticData: targetNonDds: $nonDds," +
+                    " targetPrimarySimAutoDataSwitch: $targetPrimarySimAutoDataSwitch"
+            )
+            if (nonDds != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+                val telephonyManagerForNonDds: TelephonyManager? =
+                    context.getSystemService(TelephonyManager::class.java)
+                        ?.createForSubscriptionId(nonDds)
+                setAutomaticData(telephonyManagerForNonDds, targetPrimarySimAutoDataSwitch)
+            }
 
             // no next action, send finish
             callback(SimOnboardingActivity.CALLBACK_FINISH)

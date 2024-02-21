@@ -22,19 +22,25 @@ import android.content.Intent
 import android.os.Bundle
 import android.telephony.SubscriptionManager
 import android.util.Log
-import android.view.MotionEvent
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.SignalCellularAlt
+import androidx.compose.material3.AlertDialogDefaults
+import androidx.compose.material3.BasicAlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.SheetState
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
@@ -58,6 +64,7 @@ import com.android.settings.spa.network.SimOnboardingPageProvider.getRoute
 import com.android.settingslib.spa.SpaBaseDialogActivity
 import com.android.settingslib.spa.framework.theme.SettingsDimension
 import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
+import com.android.settingslib.spa.widget.dialog.getDialogWidth
 import com.android.settingslib.spa.widget.ui.SettingsTitle
 import com.android.settingslib.spaprivileged.framework.common.userManager
 import kotlinx.coroutines.CoroutineScope
@@ -193,26 +200,43 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
         }
     }
 
+    @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     fun ProgressDialogImpl() {
-        // TODO: 1. Create the SPA's ProgressDialog and using SPA's widget
-        val dialog: ProgressDialog = object : ProgressDialog(this) {
-            override fun onTouchEvent(event: MotionEvent): Boolean {
-                return true
+        if(showDialog.value) {
+            // TODO: Create the SPA's ProgressDialog and using SPA's widget
+            BasicAlertDialog(
+                onDismissRequest = {},
+                modifier = Modifier.width(
+                    getDialogWidth()
+                ),
+            ) {
+                Surface(
+                    color = AlertDialogDefaults.containerColor,
+                    shape = AlertDialogDefaults.shape
+                ) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(SettingsDimension.itemPaddingStart),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        CircularProgressIndicator()
+                        Column(modifier = Modifier
+                                .padding(start = SettingsDimension.itemPaddingStart)) {
+                            SettingsTitle(
+                                stringResource(
+                                    R.string.sim_onboarding_progressbar_turning_sim_on,
+                                    onboardingService.targetSubInfo?.displayName ?: ""
+                                )
+                            )
+                        }
+                    }
+                }
             }
         }
-        dialog.setMessage(
-            stringResource(
-                R.string.sim_onboarding_progressbar_turning_sim_on,
-                onboardingService.targetSubInfo?.displayName ?: ""
-            )
-        )
-        dialog.setCancelable(false)
-
-        if(showDialog.value) {
-            dialog.show()
-        }
     }
+
     @Composable
     fun registerSidecarReceiverFlow(){
         switchToEuiccSubscriptionSidecar?.sidecarReceiverFlow()
