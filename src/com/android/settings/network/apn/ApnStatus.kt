@@ -34,7 +34,10 @@ import com.android.settings.network.apn.ApnTypes.APN_TYPE_IMS
 import com.android.settings.network.apn.ApnTypes.APN_TYPE_MCX
 import java.util.Locale
 
+private const val TAG = "ApnStatus"
+
 data class ApnData(
+    val id: Int = -1,
     val name: String = "",
     val apn: String = "",
     val proxy: String = "",
@@ -86,8 +89,8 @@ data class ApnData(
         Telephony.Carriers.MMSPROXY to mmsProxy,
         Telephony.Carriers.MMSPORT to mmsPort,
         Telephony.Carriers.AUTH_TYPE to authType,
-        Telephony.Carriers.PROTOCOL to convertOptions2Protocol(apnProtocol, context),
-        Telephony.Carriers.ROAMING_PROTOCOL to convertOptions2Protocol(apnRoaming, context),
+        Telephony.Carriers.PROTOCOL to context.convertOptions2Protocol(apnProtocol),
+        Telephony.Carriers.ROAMING_PROTOCOL to context.convertOptions2Protocol(apnRoaming),
         Telephony.Carriers.TYPE to apnType,
         Telephony.Carriers.NETWORK_TYPE_BITMASK to networkType,
         Telephony.Carriers.CARRIER_ENABLED to apnEnable,
@@ -207,7 +210,7 @@ fun validateApnData(apnData: ApnData, context: Context): String? {
             context
         )
     }
-    return errorMsg
+    return errorMsg?.apply { Log.d(TAG, "APN data not valid, reason: $this") }
 }
 
 private fun getUserEnteredApnType(apnType: String, readOnlyApnTypes: List<String>): String {
