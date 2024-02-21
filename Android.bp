@@ -47,7 +47,6 @@ java_library {
 // Build the Settings APK
 android_library {
     name: "Settings-core",
-    platform_apis: true,
     defaults: [
         "SettingsLibDefaults",
         "SettingsLib-search-defaults",
