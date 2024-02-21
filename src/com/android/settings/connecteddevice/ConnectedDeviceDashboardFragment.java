@@ -22,12 +22,13 @@ import android.provider.DeviceConfig;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
+import androidx.lifecycle.Lifecycle;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
-import com.android.settings.connecteddevice.audiosharing.AudioSharingDevicePreferenceController;
 import com.android.settings.connecteddevice.audiosharing.AudioSharingUtils;
 import com.android.settings.core.SettingsUIDeviceConfig;
 import com.android.settings.dashboard.DashboardFragment;
@@ -36,7 +37,11 @@ import com.android.settings.overlay.SurveyFeatureProvider;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.slices.SlicePreferenceController;
 import com.android.settingslib.bluetooth.HearingAidStatsLogUtils;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class ConnectedDeviceDashboardFragment extends DashboardFragment {
@@ -87,9 +92,6 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
                             + ", action : "
                             + action);
         }
-        if (AudioSharingUtils.isFeatureEnabled()) {
-            use(AudioSharingDevicePreferenceController.class).init(this);
-        }
         use(AvailableMediaDeviceGroupController.class).init(this);
         use(ConnectedDeviceGroupController.class).init(this);
         use(PreviouslyConnectedDevicePreferenceController.class).init(this);
@@ -112,6 +114,29 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
         }
     }
 
+    @Override
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
+        return buildPreferenceControllers(context, /* fragment= */ this, getSettingsLifecycle());
+    }
+
+    private static List<AbstractPreferenceController> buildPreferenceControllers(
+            Context context,
+            @Nullable ConnectedDeviceDashboardFragment fragment,
+            @Nullable Lifecycle lifecycle) {
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        if (AudioSharingUtils.isFeatureEnabled()) {
+            AbstractPreferenceController audioSharingController =
+                    FeatureFactory.getFeatureFactory()
+                            .getAudioSharingFeatureProvider()
+                            .createAudioSharingDevicePreferenceController(
+                                    context, fragment, lifecycle);
+            if (audioSharingController != null) {
+                controllers.add(audioSharingController);
+            }
+        }
+        return controllers;
+    }
+
     @VisibleForTesting
     boolean isAlwaysDiscoverable(String callingAppPackageName, String action) {
         return TextUtils.equals(SLICE_ACTION, action)
@@ -122,5 +147,12 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
 
     /** For Search. */
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.connected_devices);
+            new BaseSearchIndexProvider(R.xml.connected_devices) {
+                @Override
+                public List<AbstractPreferenceController> createPreferenceControllers(
+                        Context context) {
+                    return buildPreferenceControllers(
+                            context, /* fragment= */ null, /* lifecycle= */ null);
+                }
+            };
 }
