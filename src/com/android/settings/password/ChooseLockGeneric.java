@@ -33,6 +33,7 @@ import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_C
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_CHOOSE_LOCK_SCREEN_DESCRIPTION;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_CHOOSE_LOCK_SCREEN_TITLE;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_DEVICE_PASSWORD_REQUIREMENT_ONLY;
+import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_FINGERPRINT_ENROLLMENT_ONLY;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_IS_CALLING_APP_ADMIN;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_REQUESTED_MIN_COMPLEXITY;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_WRITE_REPAIR_MODE_PW;
@@ -63,6 +64,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
@@ -167,7 +169,7 @@ public class ChooseLockGeneric extends SettingsActivity {
         private boolean mWaitingForActivityResult = false;
         private LockscreenCredential mUserPassword;
         private FingerprintManager mFingerprintManager;
-        private FaceManager mFaceManager;
+        @Nullable private FaceManager mFaceManager;
         private int mUserId;
         private boolean mIsManagedProfile;
         private ManagedLockPasswordProvider mManagedPasswordProvider;
@@ -206,6 +208,7 @@ public class ChooseLockGeneric extends SettingsActivity {
         private int mExtraLockScreenTitleResId;
         private int mExtraLockScreenDescriptionResId;
         private boolean mWaitingForBiometricEnrollment = false;
+        private boolean mEnrollFingerPrintOnly = false;
 
         @Override
         public int getMetricsCategory() {
@@ -225,8 +228,10 @@ public class ChooseLockGeneric extends SettingsActivity {
             }
             final Intent intent = activity.getIntent();
             String chooseLockAction = intent.getAction();
+            mEnrollFingerPrintOnly =
+                    intent.getBooleanExtra(EXTRA_KEY_FINGERPRINT_ENROLLMENT_ONLY, false);
             mFingerprintManager = Utils.getFingerprintManagerOrNull(activity);
-            mFaceManager = Utils.getFaceManagerOrNull(activity);
+            mFaceManager = !mEnrollFingerPrintOnly ? Utils.getFaceManagerOrNull(activity) : null;
             mDpm = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
             mLockPatternUtils = new LockPatternUtils(activity);
             mIsSetNewPassword = ACTION_SET_NEW_PARENT_PROFILE_PASSWORD.equals(chooseLockAction)
@@ -530,6 +535,9 @@ public class ChooseLockGeneric extends SettingsActivity {
             final Intent intent =
                     new Intent(context, BiometricEnrollActivity.InternalActivity.class);
             intent.putExtra(BiometricEnrollActivity.EXTRA_SKIP_INTRO, true);
+            if (mEnrollFingerPrintOnly) {
+                intent.putExtra(BiometricEnrollActivity.EXTRA_FINGERPRINT_ENROLLMENT_ONLY, true);
+            }
             return intent;
         }
 
