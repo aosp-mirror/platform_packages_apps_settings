@@ -112,6 +112,10 @@
         android:title="@string/wifi_auto_connect_title"
         android:summary="@string/wifi_auto_connect_summary"/>
 
+    <com.android.settings.spa.preference.ComposePreference
+        android:key="certificate_details"
+        settings:controller="com.android.settings.wifi.details2.CertificateDetailsPreferenceController"/>
+
     <!-- Add device Preference -->
     <Preference
         android:key="add_device_to_network"
