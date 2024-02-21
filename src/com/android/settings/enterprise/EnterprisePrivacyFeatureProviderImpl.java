@@ -26,6 +26,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
+import android.content.pm.UserProperties;
 import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.VpnManager;
@@ -220,6 +221,9 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
     public int getNumberOfActiveDeviceAdminsForCurrentUserAndManagedProfile() {
         int activeAdmins = 0;
         for (final UserInfo userInfo : mUm.getProfiles(MY_USER_ID)) {
+            if (shouldSkipProfile(userInfo)) {
+                continue;
+            }
             final List<ComponentName> activeAdminsForUser
                     = mDpm.getActiveAdminsAsUser(userInfo.id);
             if (activeAdminsForUser != null) {
@@ -248,6 +252,14 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
         }
 
         return false;
+    }
+
+    private boolean shouldSkipProfile(UserInfo userInfo) {
+        return android.os.Flags.allowPrivateProfile()
+                && android.multiuser.Flags.handleInterleavedSettingsForPrivateSpace()
+                && userInfo.isQuietModeEnabled()
+                && mUm.getUserProperties(userInfo.getUserHandle()).getShowInQuietMode()
+                        == UserProperties.SHOW_IN_QUIET_MODE_HIDDEN;
     }
 
     private Intent getParentalControlsIntent() {
