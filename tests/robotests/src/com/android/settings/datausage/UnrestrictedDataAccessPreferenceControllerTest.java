@@ -25,6 +25,7 @@ import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -161,6 +162,81 @@ public class UnrestrictedDataAccessPreferenceControllerTest {
         }).when(mPreferenceScreen).addPreference(any(UnrestrictedDataAccessPreference.class));
 
         mController.onRebuildComplete(createAppEntries(testPkg1, testPkg2));
+    }
+
+    @Test
+    public void onRebuildComplete_ecmRestricted_shouldBeDisabled() {
+        mFragment = spy(new UnrestrictedDataAccess());
+        mContext = spy(mContext);
+        doNothing().when(mFragment).setLoading(anyBoolean(), anyBoolean());
+        mController.setParentFragment(mFragment);
+        mPreferenceManager = new PreferenceManager(mContext);
+        mPreferenceScreen = spy(mPreferenceManager.createPreferenceScreen(mContext));
+        doReturn(mPreferenceManager).when(mFragment).getPreferenceManager();
+        doReturn(mPreferenceScreen).when(mFragment).getPreferenceScreen();
+        doReturn(0).when(mPreferenceScreen).getPreferenceCount();
+        final DataSaverBackend dataSaverBackend = mock(DataSaverBackend.class);
+        ReflectionHelpers.setField(mController, "mDataSaverBackend", dataSaverBackend);
+        ReflectionHelpers.setField(mController, "mScreen", mPreferenceScreen);
+
+        final String testPkg = "com.example.disabled";
+        doNothing().when(mContext).startActivity(any());
+        ShadowRestrictedLockUtilsInternal.setEcmRestrictedPkgs(testPkg);
+
+        doAnswer((invocation) -> {
+            final UnrestrictedDataAccessPreference preference = invocation.getArgument(0);
+            // Verify preference is disabled by ecm and the summary is changed accordingly.
+            assertThat(preference.isDisabledByEcm()).isTrue();
+            assertThat(preference.getSummary().toString()).isEqualTo(
+                    mContext.getString(
+                            com.android.settingslib.R.string.disabled_by_app_ops_text));
+            assertThat(preference.isChecked()).isFalse();
+            preference.performClick();
+            // Verify that when the preference is clicked, ecm details intent is launched
+            assertThat(preference.isChecked()).isFalse();
+            verify(mContext).startActivity(any());
+
+            return null;
+        }).when(mPreferenceScreen).addPreference(any(UnrestrictedDataAccessPreference.class));
+
+        mController.onRebuildComplete(createAppEntries(testPkg));
+        verify(mPreferenceScreen).addPreference(any(UnrestrictedDataAccessPreference.class));
+    }
+
+    @Test
+    public void onRebuildComplete_ecmNotRestricted_notDisabled() {
+        mFragment = spy(new UnrestrictedDataAccess());
+        mContext = spy(mContext);
+        doNothing().when(mFragment).setLoading(anyBoolean(), anyBoolean());
+        mController.setParentFragment(mFragment);
+        mPreferenceManager = new PreferenceManager(mContext);
+        mPreferenceScreen = spy(mPreferenceManager.createPreferenceScreen(mContext));
+        doReturn(mPreferenceManager).when(mFragment).getPreferenceManager();
+        doReturn(mPreferenceScreen).when(mFragment).getPreferenceScreen();
+        doReturn(0).when(mPreferenceScreen).getPreferenceCount();
+        final DataSaverBackend dataSaverBackend = mock(DataSaverBackend.class);
+        ReflectionHelpers.setField(mController, "mDataSaverBackend", dataSaverBackend);
+        ReflectionHelpers.setField(mController, "mScreen", mPreferenceScreen);
+
+        final String testPkg = "com.example.enabled";
+        doNothing().when(mContext).startActivity(any());
+        ShadowRestrictedLockUtilsInternal.setEcmRestrictedPkgs();
+
+        doAnswer((invocation) -> {
+            final UnrestrictedDataAccessPreference preference = invocation.getArgument(0);
+            assertThat(preference.isDisabledByEcm()).isFalse();
+            assertThat(preference.getSummary()).isEqualTo("");
+            assertThat(preference.isChecked()).isFalse();
+            preference.performClick();
+            // Verify that when the preference is clicked, ecm details intent is not launched
+            assertThat(preference.isChecked()).isTrue();
+            verify(mContext, never()).startActivity(any());
+
+            return null;
+        }).when(mPreferenceScreen).addPreference(any(UnrestrictedDataAccessPreference.class));
+
+        mController.onRebuildComplete(createAppEntries(testPkg));
+        verify(mPreferenceScreen).addPreference(any(UnrestrictedDataAccessPreference.class));
     }
 
     private ArrayList<AppEntry> createAppEntries(String... packageNames) {

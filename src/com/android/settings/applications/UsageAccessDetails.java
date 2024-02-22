@@ -174,7 +174,7 @@ public class UsageAccessDetails extends AppInfoWithHeader implements OnPreferenc
 
         if (shouldEnable && !hasAccess) {
             mSwitchPref.checkEcmRestrictionAndSetDisabled(AppOpsManager.OPSTR_GET_USAGE_STATS,
-                    mPackageName, mPackageInfo.applicationInfo.uid);
+                    mPackageName);
             shouldEnable = !mSwitchPref.isDisabledByEcm();
         }
 

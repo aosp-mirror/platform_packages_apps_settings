@@ -222,7 +222,7 @@ public class DeviceAdminListPreferenceController extends BasePreferenceControlle
         pref.setOnPreferenceChangeListener((preference, newValue) -> false);
         pref.setSingleLineTitle(true);
         pref.checkEcmRestrictionAndSetDisabled(Manifest.permission.BIND_DEVICE_ADMIN,
-                item.getPackageName(), item.getUid());
+                item.getPackageName());
     }
 
     /**

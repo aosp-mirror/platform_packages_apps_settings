@@ -103,7 +103,7 @@ public class NotificationAccessDetails extends DashboardFragment {
                 .setCn(mComponentName)
                 .setNm(context.getSystemService(NotificationManager.class))
                 .setPm(mPm)
-                .setAppOpStr(AppOpsManager.OPSTR_ACCESS_NOTIFICATIONS)
+                .setSettingIdentifier(AppOpsManager.OPSTR_ACCESS_NOTIFICATIONS)
                 .setParent(this);
         use(HeaderPreferenceController.class)
                 .setFragment(this)

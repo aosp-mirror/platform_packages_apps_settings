@@ -38,17 +38,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import com.android.settings.R
-import com.android.settings.network.apn.ApnNetworkTypes.getNetworkTypeDisplayNames
-import com.android.settings.network.apn.ApnNetworkTypes.getNetworkTypeSelectedOptionsState
-import com.android.settings.network.apn.ApnTypes.APN_TYPES_OPTIONS
-import com.android.settings.network.apn.ApnTypes.APN_TYPE_MMS
-import com.android.settings.network.apn.ApnTypes.getApnTypeSelectedOptionsState
-import com.android.settings.network.apn.ApnTypes.updateApnType
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
 import com.android.settingslib.spa.framework.compose.LocalNavController
 import com.android.settingslib.spa.framework.theme.SettingsDimension
 import com.android.settingslib.spa.widget.editor.SettingsExposedDropdownMenuBox
-import com.android.settingslib.spa.widget.editor.SettingsExposedDropdownMenuCheckBox
 import com.android.settingslib.spa.widget.editor.SettingsOutlinedTextField
 import com.android.settingslib.spa.widget.editor.SettingsTextFieldPassword
 import com.android.settingslib.spa.widget.preference.SwitchPreference
@@ -79,7 +72,7 @@ object ApnEditPageProvider : SettingsPageProvider {
         val uriString = arguments!!.getString(URI)
         val uriInit = Uri.parse(String(Base64.getDecoder().decode(uriString)))
         val subId = arguments.getInt(SUB_ID)
-        val apnDataInit = getApnDataInit(arguments, LocalContext.current, uriInit, subId)
+        val apnDataInit = getApnDataInit(arguments, LocalContext.current, uriInit, subId) ?: return
         val apnDataCur = remember {
             mutableStateOf(apnDataInit)
         }
@@ -101,12 +94,7 @@ fun ApnPage(apnDataInit: ApnData, apnDataCur: MutableState<ApnData>, uriInit: Ur
     val context = LocalContext.current
     val authTypeOptions = stringArrayResource(R.array.apn_auth_entries).toList()
     val apnProtocolOptions = stringArrayResource(R.array.apn_protocol_entries).toList()
-    val networkTypeSelectedOptionsState = remember {
-        getNetworkTypeSelectedOptionsState(apnData.networkType)
-    }
-    var apnTypeSelectedOptionsState = remember {
-        getApnTypeSelectedOptionsState(apnData.apnType)
-    }
+    var apnTypeMmsSelected by remember { mutableStateOf(false) }
     val navController = LocalNavController.current
     var valid: String?
     RegularScaffold(
@@ -114,11 +102,6 @@ fun ApnPage(apnDataInit: ApnData, apnDataCur: MutableState<ApnData>, uriInit: Ur
         actions = {
             if (!apnData.customizedConfig.readOnlyApn) {
                 Button(onClick = {
-                    apnData = apnData.copy(
-                        networkType = ApnNetworkTypes.getNetworkType(
-                            networkTypeSelectedOptionsState
-                        )
-                    )
                     valid = validateAndSaveApnData(
                         apnDataInit,
                         apnData,
@@ -193,27 +176,12 @@ fun ApnPage(apnDataInit: ApnData, apnDataCur: MutableState<ApnData>, uriInit: Ur
                 label = stringResource(R.string.apn_server),
                 enabled = apnData.serverEnabled
             ) { apnData = apnData.copy(server = it) }
-            SettingsExposedDropdownMenuCheckBox(
-                label = stringResource(R.string.apn_type),
-                options = APN_TYPES_OPTIONS,
-                selectedOptionsState = apnTypeSelectedOptionsState,
-                enabled = apnData.apnTypeEnabled,
-                errorMessage = validateAPNType(
-                    apnData.validEnabled, apnData.apnType,
-                    apnData.customizedConfig.readOnlyApnTypes, context
-                )
-            ) {
-                val apnType = updateApnType(
-                    apnTypeSelectedOptionsState,
-                    apnData.customizedConfig.defaultApnTypes,
-                    apnData.customizedConfig.readOnlyApnTypes
-                )
-                apnTypeSelectedOptionsState = getApnTypeSelectedOptionsState(apnType)
-                apnData = apnData.copy(
-                    apnType = apnType
-                )
-            }
-            if (apnTypeSelectedOptionsState.contains(APN_TYPES_OPTIONS.indexOf(APN_TYPE_MMS))) {
+            ApnTypeCheckBox(
+                apnData = apnData,
+                onTypeChanged = { apnData = apnData.copy(apnType = it) },
+                onMmsSelectedChanged = { apnTypeMmsSelected = it },
+            )
+            if (apnTypeMmsSelected) {
                 SettingsOutlinedTextField(
                     value = apnData.mmsc,
                     label = stringResource(R.string.apn_mmsc),
@@ -249,13 +217,7 @@ fun ApnPage(apnDataInit: ApnData, apnDataCur: MutableState<ApnData>, uriInit: Ur
                 selectedOptionIndex = apnData.apnRoaming,
                 enabled = apnData.apnRoamingEnabled
             ) { apnData = apnData.copy(apnRoaming = it) }
-            SettingsExposedDropdownMenuCheckBox(
-                label = stringResource(R.string.network_type),
-                options = getNetworkTypeDisplayNames(),
-                selectedOptionsState = networkTypeSelectedOptionsState,
-                emptyVal = stringResource(R.string.network_type_unspecified),
-                enabled = apnData.networkTypeEnabled
-            ) {}
+            ApnNetworkTypeCheckBox(apnData) { apnData = apnData.copy(networkType = it) }
             SwitchPreference(
                 object : SwitchPreferenceModel {
                     override val title = context.resources.getString(R.string.carrier_enabled)
