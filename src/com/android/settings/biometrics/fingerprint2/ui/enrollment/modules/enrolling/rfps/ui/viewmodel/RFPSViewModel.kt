@@ -47,10 +47,12 @@ class RFPSViewModel(
   /** Value to indicate if the text view is visible or not */
   val textViewIsVisible: Flow<Boolean> = _textViewIsVisible.asStateFlow()
 
+  private var _shouldAnimateIcon: Flow<Boolean> =
+    fingerprintEnrollViewModel.enrollFlowShouldBeRunning
   /** Indicates if the icon should be animating or not */
-  val shouldAnimateIcon = fingerprintEnrollViewModel.enrollFlowShouldBeRunning
+  val shouldAnimateIcon = _shouldAnimateIcon
 
-  private val enrollFlow: Flow<FingerEnrollState?> = fingerprintEnrollViewModel.enrollFLow
+  private var enrollFlow: Flow<FingerEnrollState?> = fingerprintEnrollViewModel.enrollFLow
 
   /**
    * Enroll progress message with a replay of size 1 allowing for new subscribers to get the most
@@ -59,7 +61,7 @@ class RFPSViewModel(
   val progress: Flow<FingerEnrollState.EnrollProgress?> =
     enrollFlow
       .filterIsInstance<FingerEnrollState.EnrollProgress>()
-      .shareIn(viewModelScope, SharingStarted.Eagerly, 1)
+      .shareIn(viewModelScope, SharingStarted.Eagerly, 0)
 
   /** Clear help message on enroll progress */
   val clearHelpMessage: Flow<Boolean> = progress.map { it != null }
@@ -122,6 +124,7 @@ class RFPSViewModel(
 
   /** Indicates the negative button has been clicked */
   fun negativeButtonClicked() {
+    doReset()
     navigationViewModel.update(
       FingerprintAction.NEGATIVE_BUTTON_PRESSED,
       navStep,
@@ -129,9 +132,17 @@ class RFPSViewModel(
     )
   }
 
-  /** Indicates that enrollment has been finished and we can proceed to the next step. */
+  /** Indicates that an enrollment was completed */
   fun finishedSuccessfully() {
+    doReset()
     navigationViewModel.update(FingerprintAction.NEXT, navStep, "${TAG}#progressFinished")
+  }
+
+  private fun doReset() {
+    _textViewIsVisible.update { false }
+    _shouldAnimateIcon = fingerprintEnrollViewModel.enrollFlowShouldBeRunning
+    /** Indicates if the icon should be animating or not */
+    enrollFlow = fingerprintEnrollViewModel.enrollFLow
   }
 
   class RFPSViewModelFactory(

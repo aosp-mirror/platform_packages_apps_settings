@@ -89,7 +89,7 @@ class FingerprintNavigationViewModel(
   fun update(action: FingerprintAction, caller: KClass<*>, debugStr: String) {
     Log.d(TAG, "$caller.update($action) $debugStr")
     val currentStep = _currentStep.value
-    val isUiStep = currentStep is UiStep
+    val isUiStep = currentStep is UiStep && caller is UiStep
     if (currentStep == null) {
       throw NullPointerException("current step is null")
     }

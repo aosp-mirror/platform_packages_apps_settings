@@ -40,6 +40,7 @@ import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -119,21 +120,18 @@ class FingerprintEnrollFindSensorViewModelV2Test {
       }
     foldStateInteractor =
       object : FoldStateInteractor {
-        override val isFolded: Flow<Boolean> = foldState
+        override val isFolded: Flow<Boolean> = foldState.asStateFlow()
+
         override fun onConfigurationChange(newConfig: Configuration) {
-          TODO("Not yet implemented")
+          foldState.update { false }
         }
       }
+
     orientationInteractor =
-      object: OrientationInteractor {
-        override val orientation: Flow<Int>
-          get() = TODO("Not yet implemented")
+      object : OrientationInteractor {
+        override val orientation: Flow<Int> = flowOf(Configuration.ORIENTATION_LANDSCAPE)
         override val rotation: Flow<Int> = flowOf(Surface.ROTATION_0)
-
-        override fun getRotationFromDefault(rotation: Int): Int {
-          TODO("Not yet implemented")
-        }
-
+        override fun getRotationFromDefault(rotation: Int): Int = rotation
       }
     underTest =
       FingerprintEnrollFindSensorViewModel.FingerprintEnrollFindSensorViewModelFactory(
