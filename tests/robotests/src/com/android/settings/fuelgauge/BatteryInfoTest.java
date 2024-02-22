@@ -64,7 +64,7 @@ public class BatteryInfoTest {
     private static final String STATUS_CHARGING_NO_TIME = "50% - charging";
     private static final String STATUS_CHARGING_TIME = "50% - 0 min left until full";
     private static final String STATUS_NOT_CHARGING = "Not charging";
-    private static final String STATUS_CHARGING_FUTURE_BYPASS = "50% - Charging optimized";
+    private static final String STATUS_CHARGING_FUTURE_BYPASS = "50% - Charging";
     private static final String STATUS_CHARGING_PAUSED = "50% - Charging optimized";
     private static final long REMAINING_TIME_NULL = -1;
     private static final long REMAINING_TIME = 2;
