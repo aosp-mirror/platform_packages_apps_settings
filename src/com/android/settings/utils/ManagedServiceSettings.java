@@ -37,14 +37,14 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.widget.EmptyTextSettings;
+import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.applications.ServiceListing;
-import com.android.settingslib.widget.AppSwitchPreference;
+import com.android.settingslib.widget.TwoTargetPreference;
 
 import java.util.List;
 
@@ -121,10 +121,12 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
             }
             final CharSequence finalTitle = title;
             final String summary = service.loadLabel(mPm).toString();
-            final TwoStatePreference pref = new AppSwitchPreference(getPrefContext());
+            final RestrictedSwitchPreference pref =
+                    new RestrictedSwitchPreference(getPrefContext());
             pref.setPersistent(false);
             pref.setIcon(mIconDrawableFactory.getBadgedIcon(service, service.applicationInfo,
                     UserHandle.getUserId(service.applicationInfo.uid)));
+            pref.setIconSize(TwoTargetPreference.ICON_SIZE_MEDIUM);
             if (title != null && !title.equals(summary)) {
                 pref.setTitle(title);
                 pref.setSummary(summary);
@@ -150,6 +152,9 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
                 }
             });
             pref.setKey(cn.flattenToString());
+            if (!pref.isChecked()) {
+                pref.checkEcmRestrictionAndSetDisabled(mConfig.permission, service.packageName);
+            }
             screen.addPreference(pref);
         }
         highlightPreferenceIfNeeded();

@@ -21,6 +21,7 @@ import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 
+import androidx.annotation.NonNull;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceViewHolder;
 
@@ -72,10 +73,18 @@ public class RestrictedAppPreference extends AppPreference {
 
     @Override
     public void setEnabled(boolean enabled) {
-        if (isDisabledByAdmin() && enabled) {
-            return;
+        boolean changed = false;
+        if (enabled && isDisabledByAdmin()) {
+            mHelper.setDisabledByAdmin(null);
+            changed = true;
         }
-        super.setEnabled(enabled);
+        if (enabled && isDisabledByEcm()) {
+            mHelper.setDisabledByEcm(null);
+            changed = true;
+        }
+        if (!changed) {
+            super.setEnabled(enabled);
+        }
     }
 
     public void setDisabledByAdmin(RestrictedLockUtils.EnforcedAdmin admin) {
@@ -86,6 +95,10 @@ public class RestrictedAppPreference extends AppPreference {
 
     public boolean isDisabledByAdmin() {
         return mHelper.isDisabledByAdmin();
+    }
+
+    public boolean isDisabledByEcm() {
+        return mHelper.isDisabledByEcm();
     }
 
     public void useAdminDisabledSummary(boolean useSummary) {
@@ -111,5 +124,16 @@ public class RestrictedAppPreference extends AppPreference {
 
     public void checkRestrictionAndSetDisabled(String userRestriction, int userId) {
         mHelper.checkRestrictionAndSetDisabled(userRestriction, userId);
+    }
+
+    /**
+     * Checks if the given setting is subject to Enhanced Confirmation Mode restrictions for this
+     * package. Marks the preference as disabled if so.
+     * @param settingIdentifier The key identifying the setting
+     * @param packageName the package to check the settingIdentifier for
+     */
+    public void checkEcmRestrictionAndSetDisabled(@NonNull String settingIdentifier,
+                                                  @NonNull String packageName) {
+        mHelper.checkEcmRestrictionAndSetDisabled(settingIdentifier, packageName);
     }
 }

@@ -18,6 +18,7 @@ package com.android.settings.network.apn
 
 import android.content.ContentValues
 import android.content.Context
+import android.database.Cursor
 import android.net.Uri
 import android.provider.Telephony
 import android.telephony.SubscriptionManager
@@ -27,26 +28,7 @@ import com.android.settings.R
 import com.android.settingslib.utils.ThreadUtils
 import java.util.Locale
 
-const val NAME_INDEX = 1
-const val APN_INDEX = 2
-const val PROXY_INDEX = 3
-const val PORT_INDEX = 4
-const val USER_INDEX = 5
-const val SERVER_INDEX = 6
-const val PASSWORD_INDEX = 7
-const val MMSC_INDEX = 8
-const val MMSPROXY_INDEX = 9
-const val MMSPORT_INDEX = 10
-const val AUTH_TYPE_INDEX = 11
-const val TYPE_INDEX = 12
-const val PROTOCOL_INDEX = 13
-const val CARRIER_ENABLED_INDEX = 14
-const val NETWORK_TYPE_INDEX = 15
-const val ROAMING_PROTOCOL_INDEX = 16
-const val EDITED_INDEX = 17
-const val USER_EDITABLE_INDEX = 18
-
-val sProjection = arrayOf(
+val Projection = arrayOf(
     Telephony.Carriers._ID,  // 0
     Telephony.Carriers.NAME,  // 1
     Telephony.Carriers.APN,  // 2
@@ -68,7 +50,7 @@ val sProjection = arrayOf(
     Telephony.Carriers.USER_EDITABLE,  // 18
 )
 
-const val TAG = "ApnRepository"
+private const val TAG = "ApnRepository"
 
 /**
  * Query apn related information based on uri.
@@ -79,56 +61,39 @@ const val TAG = "ApnRepository"
 fun getApnDataFromUri(uri: Uri, context: Context): ApnData {
     var apnData = ApnData()
     val contentResolver = context.contentResolver
-    val apnProtocolOptions = context.resources.getStringArray(R.array.apn_protocol_entries).toList()
 
     contentResolver.query(
         uri,
-        sProjection,
+        Projection,
         null /* selection */,
         null /* selectionArgs */,
         null /* sortOrder */
     ).use { cursor ->
         if (cursor != null && cursor.moveToFirst()) {
-            val name = cursor.getString(NAME_INDEX)
-            val apn = cursor.getString(APN_INDEX)
-            val proxy = cursor.getString(PROXY_INDEX)
-            val port = cursor.getString(PORT_INDEX)
-            val userName = cursor.getString(USER_INDEX)
-            val server = cursor.getString(SERVER_INDEX)
-            val passWord = cursor.getString(PASSWORD_INDEX)
-            val mmsc = cursor.getString(MMSC_INDEX)
-            val mmsProxy = cursor.getString(MMSPROXY_INDEX)
-            val mmsPort = cursor.getString(MMSPORT_INDEX)
-            val authType = cursor.getInt(AUTH_TYPE_INDEX)
-            val apnType = cursor.getString(TYPE_INDEX)
-            val apnProtocol = convertProtocol2Options(cursor.getString(PROTOCOL_INDEX), context)
-            val apnRoaming =
-                convertProtocol2Options(cursor.getString(ROAMING_PROTOCOL_INDEX), context)
-            val apnEnable = cursor.getInt(CARRIER_ENABLED_INDEX) == 1
-            val networkType = cursor.getLong(NETWORK_TYPE_INDEX)
-
-            val edited = cursor.getInt(EDITED_INDEX)
-            val userEditable = cursor.getInt(USER_EDITABLE_INDEX)
-
-            apnData = apnData.copy(
-                name = name,
-                apn = apn,
-                proxy = proxy,
-                port = port,
-                userName = userName,
-                passWord = passWord,
-                server = server,
-                mmsc = mmsc,
-                mmsProxy = mmsProxy,
-                mmsPort = mmsPort,
-                authType = authType,
-                apnType = apnType,
-                apnProtocol = apnProtocolOptions.indexOf(apnProtocol),
-                apnRoaming = apnProtocolOptions.indexOf(apnRoaming),
-                apnEnable = apnEnable,
-                networkType = networkType,
-                edited = edited,
-                userEditable = userEditable,
+            apnData = ApnData(
+                id = cursor.getInt(Telephony.Carriers._ID),
+                name = cursor.getString(Telephony.Carriers.NAME),
+                apn = cursor.getString(Telephony.Carriers.APN),
+                proxy = cursor.getString(Telephony.Carriers.PROXY),
+                port = cursor.getString(Telephony.Carriers.PORT),
+                userName = cursor.getString(Telephony.Carriers.USER),
+                passWord = cursor.getString(Telephony.Carriers.PASSWORD),
+                server = cursor.getString(Telephony.Carriers.SERVER),
+                mmsc = cursor.getString(Telephony.Carriers.MMSC),
+                mmsProxy = cursor.getString(Telephony.Carriers.MMSPROXY),
+                mmsPort = cursor.getString(Telephony.Carriers.MMSPORT),
+                authType = cursor.getInt(Telephony.Carriers.AUTH_TYPE),
+                apnType = cursor.getString(Telephony.Carriers.TYPE),
+                apnProtocol = context.convertProtocol2Options(
+                    cursor.getString(Telephony.Carriers.PROTOCOL)
+                ),
+                apnRoaming = context.convertProtocol2Options(
+                    cursor.getString(Telephony.Carriers.ROAMING_PROTOCOL)
+                ),
+                apnEnable = cursor.getInt(Telephony.Carriers.CARRIER_ENABLED) == 1,
+                networkType = cursor.getLong(Telephony.Carriers.NETWORK_TYPE_BITMASK),
+                edited = cursor.getInt(Telephony.Carriers.EDITED_STATUS),
+                userEditable = cursor.getInt(Telephony.Carriers.USER_EDITABLE),
             )
         }
     }
@@ -138,42 +103,23 @@ fun getApnDataFromUri(uri: Uri, context: Context): ApnData {
     return apnData
 }
 
+private fun Cursor.getString(columnName: String) = getString(getColumnIndexOrThrow(columnName))
+private fun Cursor.getInt(columnName: String) = getInt(getColumnIndexOrThrow(columnName))
+private fun Cursor.getLong(columnName: String) = getLong(getColumnIndexOrThrow(columnName))
+
 /**
- * Returns The UI choice (e.g., "IPv4/IPv6") corresponding to the given
- * raw value of the protocol preference (e.g., "IPV4V6"). If unknown,
- * return null.
- *
- * @return UI choice
+ * Returns The UI choice index corresponding to the given raw value of the protocol preference
+ * (e.g., "IPV4V6").
+ * If unknown, return -1.
  */
-private fun convertProtocol2Options(raw: String, context: Context): String {
-    val apnProtocolOptions = context.resources.getStringArray(R.array.apn_protocol_entries).toList()
-    val apnProtocolValues = context.resources.getStringArray(R.array.apn_protocol_values).toList()
-    var uRaw = raw.uppercase(Locale.getDefault())
-    uRaw = if (uRaw == "IPV4") "IP" else uRaw
-    val protocolIndex = apnProtocolValues.indexOf(uRaw)
-    return if (protocolIndex == -1) {
-        ""
-    } else {
-        try {
-            apnProtocolOptions[protocolIndex]
-        } catch (e: ArrayIndexOutOfBoundsException) {
-            ""
-        }
-    }
+private fun Context.convertProtocol2Options(protocol: String): Int {
+    var normalizedProtocol = protocol.uppercase(Locale.getDefault())
+    if (normalizedProtocol == "IPV4") normalizedProtocol = "IP"
+    return resources.getStringArray(R.array.apn_protocol_values).indexOf(normalizedProtocol)
 }
 
-fun convertOptions2Protocol(protocolIndex: Int, context: Context): String {
-    val apnProtocolValues = context.resources.getStringArray(R.array.apn_protocol_values).toList()
-    return if (protocolIndex == -1) {
-        ""
-    } else {
-        try {
-            apnProtocolValues[protocolIndex]
-        } catch (e: ArrayIndexOutOfBoundsException) {
-            ""
-        }
-    }
-}
+fun Context.convertOptions2Protocol(protocolIndex: Int): String =
+    resources.getStringArray(R.array.apn_protocol_values).getOrElse(protocolIndex) { "" }
 
 fun updateApnDataToDatabase(
     newApn: Boolean,
@@ -183,13 +129,13 @@ fun updateApnDataToDatabase(
 ) {
     ThreadUtils.postOnBackgroundThread {
         if (newApn) {
-            // Add a new apn to the database
+            Log.d(TAG, "Adding an new APN to the database $uriInit $values")
             val newUri = context.contentResolver.insert(uriInit, values)
             if (newUri == null) {
                 Log.e(TAG, "Can't add a new apn to database $uriInit")
             }
         } else {
-            // Update the existing apn
+            Log.d(TAG, "Updating an existing APN to the database $uriInit $values")
             context.contentResolver.update(
                 uriInit, values, null /* where */, null /* selection Args */
             )
@@ -210,9 +156,12 @@ private val NonDuplicatedKeys = setOf(
 )
 
 fun isItemExist(apnData: ApnData, context: Context): String? {
-    val contentValueMap = apnData.getContentValueMap(context).filterKeys { it in NonDuplicatedKeys }
-    val list = contentValueMap.entries.toList()
-    val selection = list.joinToString(" AND ") { "${it.key} = ?" }
+    val selectionMap = apnData.getContentValueMap(context).filterKeys { it in NonDuplicatedKeys }
+        .mapKeys { "${it.key} = ?" }
+        .toMutableMap()
+    if (apnData.id != -1) selectionMap += "${Telephony.Carriers._ID} != ?" to apnData.id
+    val list = selectionMap.entries.toList()
+    val selection = list.joinToString(" AND ") { it.key }
     val selectionArgs: Array<String> = list.map { it.value.toString() }.toTypedArray()
     context.contentResolver.query(
         Uri.withAppendedPath(Telephony.Carriers.SIM_APN_URI, apnData.subId.toString()),

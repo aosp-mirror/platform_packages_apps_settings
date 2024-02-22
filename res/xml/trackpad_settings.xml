@@ -49,7 +49,8 @@
         android:summary="@string/trackpad_bottom_right_tap_summary"
         android:icon="@drawable/ic_trackpad_bottom_right_click"
         settings:controller="com.android.settings.inputmethod.TrackpadBottomPreferenceController"
-        android:order="30"/>
+        android:order="30"
+        settings:keywords="@string/keywords_trackpad_bottom_right_tap"/>
 
     <com.android.settings.widget.SeekBarPreference
         android:key="trackpad_pointer_speed"
