@@ -24,6 +24,9 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.app.settings.SettingsEnums;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -81,8 +84,13 @@ public class AutoAdvanceSetupFragment extends InstrumentedFragment {
                                     getContext(),
                                     SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_SPACE_CREATED,
                                     true);
-                            NavHostFragment.findNavController(AutoAdvanceSetupFragment.this)
-                                    .navigate(R.id.action_set_lock_fragment);
+                            if (isConnectedToInternet()) {
+                                NavHostFragment.findNavController(AutoAdvanceSetupFragment.this)
+                                        .navigate(R.id.action_account_intro_fragment);
+                            } else {
+                                NavHostFragment.findNavController(AutoAdvanceSetupFragment.this)
+                                        .navigate(R.id.action_set_lock_fragment);
+                            }
                         } else {
                             mMetricsFeatureProvider.action(
                                     getContext(),
@@ -189,5 +197,14 @@ public class AutoAdvanceSetupFragment extends InstrumentedFragment {
                 updateHeaderAndImage();
             }
         });
+    }
+
+    /** Returns true if device has an active internet connection, false otherwise. */
+    private boolean isConnectedToInternet() {
+        ConnectivityManager cm =
+                (ConnectivityManager)
+                        getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
     }
 }
