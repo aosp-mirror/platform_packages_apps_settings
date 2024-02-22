@@ -196,6 +196,16 @@ class SimOnboardingService {
         return userSelectedSubInfoList.toList()
     }
 
+    fun getSelectedSubscriptionInfoListWithRenaming(): List<SubscriptionInfo> {
+        if (userSelectedSubInfoList.isEmpty()){
+            Log.d(TAG, "userSelectedSubInfoList is empty")
+            return activeSubInfoList
+        }
+        return userSelectedSubInfoList.map {
+            SubscriptionInfo.Builder(it).setDisplayName(getSubscriptionInfoDisplayName(it)).build()
+        }.toList()
+    }
+
     fun addItemForRenaming(subInfo: SubscriptionInfo, newName: String) {
         if (subInfo.displayName == newName) {
             return
