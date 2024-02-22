@@ -232,6 +232,7 @@ class FingerprintSettingsV2Fragment :
         GatekeeperPasswordProvider(LockPatternUtils(context.applicationContext)),
         pressToAuthInteractor,
         Settings,
+        getIntent()
       )
 
     val token = intent.getByteArrayExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN)

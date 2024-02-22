@@ -21,6 +21,8 @@ import static android.hardware.fingerprint.FingerprintManager.ENROLL_ENROLL;
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.Intent;
+import android.hardware.fingerprint.FingerprintEnrollOptions;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.SystemClock;
 import android.util.Log;
@@ -28,6 +30,9 @@ import android.util.Log;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.biometrics.BiometricEnrollSidecar;
+import com.android.settings.biometrics.BiometricUtils;
+
+import com.google.android.setupcompat.util.WizardManagerHelper;
 
 /**
  * Sidecar fragment to handle the state around fingerprint enrollment.
@@ -39,15 +44,18 @@ public class FingerprintEnrollSidecar extends BiometricEnrollSidecar {
     private @FingerprintManager.EnrollReason int mEnrollReason;
     private final MessageDisplayController mMessageDisplayController;
     private final boolean mMessageDisplayControllerFlag;
+    private final Intent mIntent;
 
     /**
      * Create a new FingerprintEnrollSidecar object.
-     * @param context associated context
+     *
+     * @param context      associated context
      * @param enrollReason reason for enrollment
      */
     public FingerprintEnrollSidecar(Context context,
-            @FingerprintManager.EnrollReason int enrollReason) {
+            @FingerprintManager.EnrollReason int enrollReason, Intent intent) {
         mEnrollReason = enrollReason;
+        mIntent = intent;
 
         int helpMinimumDisplayTime = context.getResources().getInteger(
                 R.integer.enrollment_help_minimum_time_display);
@@ -85,14 +93,21 @@ public class FingerprintEnrollSidecar extends BiometricEnrollSidecar {
             return;
         }
 
+        if (mIntent.getIntExtra(BiometricUtils.EXTRA_ENROLL_REASON, -1) == -1) {
+            final boolean isSuw = WizardManagerHelper.isAnySetupWizard(mIntent);
+            mIntent.putExtra(BiometricUtils.EXTRA_ENROLL_REASON,
+                    isSuw ? FingerprintEnrollOptions.ENROLL_REASON_SUW :
+                            FingerprintEnrollOptions.ENROLL_REASON_SETTINGS);
+        }
+
         if (mEnrollReason == ENROLL_ENROLL && mMessageDisplayControllerFlag) {
             //API calls need to be processed for {@link FingerprintEnrollEnrolling}
             mFingerprintUpdater.enroll(mToken, mEnrollmentCancel, mUserId,
-                    mMessageDisplayController, mEnrollReason);
+                    mMessageDisplayController, mEnrollReason, mIntent);
         } else {
             //No processing required for {@link FingerprintEnrollFindSensor}
             mFingerprintUpdater.enroll(mToken, mEnrollmentCancel, mUserId, mEnrollmentCallback,
-                    mEnrollReason);
+                    mEnrollReason, mIntent);
         }
     }
 
@@ -100,7 +115,8 @@ public class FingerprintEnrollSidecar extends BiometricEnrollSidecar {
         mEnrollReason = enrollReason;
     }
 
-    @VisibleForTesting FingerprintManager.EnrollmentCallback mEnrollmentCallback
+    @VisibleForTesting
+    FingerprintManager.EnrollmentCallback mEnrollmentCallback
             = new FingerprintManager.EnrollmentCallback() {
 
         @Override
