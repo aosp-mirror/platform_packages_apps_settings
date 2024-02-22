@@ -300,7 +300,7 @@ public class FingerprintEnrollIntroductionTest {
 
         final Intent enrollingIntent = mFingerprintEnrollIntroduction.getEnrollingIntent();
         assertThat(enrollingIntent.getIntExtra(BiometricUtils.EXTRA_ENROLL_REASON, -1))
-                .isEqualTo(FingerprintEnrollOptions.ENROLL_REASON_SUW);
+                .isEqualTo(FingerprintEnrollOptions.ENROLL_REASON_SETTINGS);
     }
 
     private Intent newTokenOnlyIntent() {
