@@ -34,6 +34,8 @@ import com.android.settings.biometrics.fingerprint.FingerprintFeatureProviderImp
 import com.android.settings.biometrics2.factory.BiometricsRepositoryProviderImpl
 import com.android.settings.bluetooth.BluetoothFeatureProvider
 import com.android.settings.bluetooth.BluetoothFeatureProviderImpl
+import com.android.settings.connecteddevice.audiosharing.AudioSharingFeatureProvider
+import com.android.settings.connecteddevice.audiosharing.AudioSharingFeatureProviderImpl
 import com.android.settings.connecteddevice.dock.DockUpdaterFeatureProviderImpl
 import com.android.settings.connecteddevice.fastpair.FastPairFeatureProvider
 import com.android.settings.connecteddevice.fastpair.FastPairFeatureProviderImpl
@@ -192,7 +194,12 @@ open class FeatureFactoryImpl : FeatureFactory() {
     override val privateSpaceLoginFeatureProvider: PrivateSpaceLoginFeatureProvider by lazy {
         PrivateSpaceLoginFeatureProviderImpl()
     }
+
     override val displayFeatureProvider: DisplayFeatureProvider by lazy {
         DisplayFeatureProviderImpl()
+    }
+
+    override val audioSharingFeatureProvider: AudioSharingFeatureProvider by lazy {
+        AudioSharingFeatureProviderImpl()
     }
 }
