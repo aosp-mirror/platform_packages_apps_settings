@@ -679,6 +679,13 @@
     <!-- The ratio to use when using the two-pane settings layout -->
     <item name="config_activity_embed_split_ratio" format="float" type="dimen">0.3636</item>
 
+    <!-- The smallest value of the smallest-width (sw) of the window in any rotation when the split
+         should be used. -->
+    <integer name="config_activity_embed_split_min_sw_dp">600</integer>
+
+    <!-- The smallest value of current width of the window when the split should be used. -->
+    <integer name="config_activity_embed_split_min_cur_dp">720</integer>
+
     <!-- The number of visible app icons while entering app list related pages for preloading.
          Take the "Unrestricted data" page as the example, the visible app icons could be 15
          on 6.4 inches screen size whether the font size and display size are both small. -->

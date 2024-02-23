@@ -132,6 +132,8 @@
     <string name="bluetooth_pairing_pref_title">Pair new device</string>
     <!-- Keywords for bluetooth pairing item [CHAR LIMIT=30] -->
     <string name="keywords_add_bt_device">bluetooth</string>
+    <!-- Title for bluetooth auto on toggle [CHAR LIMIT=60] -->
+    <string name="bluetooth_screen_auto_on_title">Automatically turn on again tomorrow</string>
 
 
     <!-- Button to help user to pair right ear of the hearing aid device. It will show when only one of the hearing aid device set is connected. [CHAR LIMIT=20] -->
@@ -1370,6 +1372,12 @@
     <string name="private_space_choose_your_password_header">Set a password for your private space</string>
     <!-- Header for private space choose your pattern screen [CHAR LIMIT=40] -->
     <string name="private_space_choose_your_pattern_header">Set a pattern for your private space</string>
+    <!-- Header for private space apps and notifications section [CHAR LIMIT=40] -->
+    <string name="private_space_apps_and_notifications_header">Apps and notifications</string>
+    <!-- Title for private space sensitive notifications toggle [CHAR LIMIT=80] -->
+    <string name="private_space_notifications_title">Sensitive notifications on lock screen</string>
+    <!-- Summary description for private space sensitive notifications toggle [CHAR LIMIT=200] -->
+    <string name="private_space_sensitive_notifications_description">Show sensitive content when private space is unlocked</string>
 
     <!-- Text shown when "Add fingerprint" button is disabled -->
     <string name="fingerprint_add_max">You can add up to <xliff:g id="count" example="5">%d</xliff:g> fingerprints</string>
@@ -1800,8 +1808,12 @@
     <string name="bluetooth_device_context_pair_connect">Pair &amp; connect</string>
     <!-- Bluetooth settings. Text displayed when Bluetooth is off and device list is empty [CHAR LIMIT=NONE]-->
     <string name="bluetooth_empty_list_bluetooth_off">When Bluetooth is turned on, your device can communicate with other nearby Bluetooth devices</string>
+    <!-- Bluetooth settings. Text displayed when Bluetooth is off and device list is empty when auto-on feature is enabled [CHAR LIMIT=NONE]-->
+    <string name="bluetooth_empty_list_bluetooth_off_auto_on_available">When Bluetooth is on, your device can communicate with other nearby Bluetooth devices. Features like Quick Share, Find My Device, and device location use Bluetooth.</string>
     <!-- Bluetooth settings. Text displayed when Bluetooth is off and bluetooth scanning is turned on [CHAR LIMIT=NONE] -->
     <string name="bluetooth_scanning_on_info_message">When Bluetooth is turned on, your device can communicate with other nearby Bluetooth devices.\n\nTo improve device experience, apps and services can still scan for nearby devices at any time, even when Bluetooth is off. This can be used, for example, to improve location-based features and services. You can change this in Bluetooth scanning settings.</string>
+    <!-- Bluetooth settings. Text displayed when Bluetooth is off and bluetooth scanning is turned on [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_scanning_on_info_message_auto_on_available">When Bluetooth is on, your device can communicate with other nearby Bluetooth devices. Features like Quick Share, Find My Device, and device location use Bluetooth.\n\nApps and services can still scan for nearby devices at any time, even when Bluetooth is off. This can be used, for example, to improve location-based features and services. You can change this in Bluetooth scanning settings.</string>
     <!-- Bluetooth settings. Link text to bring the user to "scanning settings" screen. [CHAR LIMIT=NONE]-->
     <string name="bluetooth_scan_change">Change</string>
 
@@ -5144,7 +5156,7 @@
     <!-- Title for accessibility hearing device page footer. [CHAR LIMIT=40] -->
     <string name="accessibility_hearing_device_about_title">About hearing devices</string>
     <!-- Description for text in accessibility hearing aids footer. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_hearing_device_footer_summary">Make sure your hearing device is turned on and ready to pair</string>
+    <string name="accessibility_hearing_device_footer_summary">Make sure your hearing device is turned on and ready to pair. Only ASHA and LE Audio hearing devices show on this page.</string>
     <!-- Title for the pair hearing device page. [CHAR LIMIT=25] -->
     <string name="accessibility_hearing_device_pairing_page_title">Pair hearing device</string>
     <!-- Title for the preference category containing the list of the available hearing during and after bluetooth scanning devices. [CHAR LIMIT=30] -->
@@ -11580,7 +11592,7 @@
     <string name="primary_sim_calls_title">Calls</string>
     <!-- Title of Texts item/dialog at dual sim onboarding's primary sim page or SIMs page. [CHAR LIMIT=30] -->
     <string name="primary_sim_texts_title">Texts</string>
-    <!-- Title of automatic data switching at dual sim onboarding's primary sim page or SIMs page. [CHAR LIMIT=30] -->
+    <!-- Title of automatic data switching at dual sim onboarding's primary sim page or SIMs page. [CHAR LIMIT=60] -->
     <string name="primary_sim_automatic_data_title">Automatic data switching</string>
     <!-- Body text of automatic data switching at dual sim onboarding's primary sim page or SIMs page. [CHAR LIMIT=NONE] -->
     <string name="primary_sim_automatic_data_msg">Use data from either SIM depending on coverage and availability</string>

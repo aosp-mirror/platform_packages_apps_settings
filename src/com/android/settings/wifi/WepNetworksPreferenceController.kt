@@ -48,7 +48,7 @@ class WepNetworksPreferenceController(context: Context, preferenceKey: String) :
         preference = screen.findPreference(preferenceKey)!!
     }
 
-    override fun getAvailabilityStatus() = if (Flags.wepUsage()) AVAILABLE
+    override fun getAvailabilityStatus() = if (Flags.androidVWifiApi()) AVAILABLE
     else UNSUPPORTED_ON_DEVICE
 
     @Composable

@@ -19,6 +19,7 @@ package com.android.settings.fingerprint2.domain.interactor
 import android.content.Context
 import android.content.Intent
 import android.hardware.fingerprint.Fingerprint
+import android.hardware.fingerprint.FingerprintEnrollOptions
 import android.hardware.fingerprint.FingerprintManager
 import android.hardware.fingerprint.FingerprintManager.CryptoObject
 import android.hardware.fingerprint.FingerprintManager.FINGERPRINT_ERROR_LOCKOUT_PERMANENT
@@ -99,6 +100,7 @@ class FingerprintManagerInteractorTest {
         gateKeeperPasswordProvider,
         pressToAuthInteractor,
         Default,
+        Intent(),
       )
   }
 
@@ -312,7 +314,8 @@ class FingerprintManagerInteractorTest {
           any(CancellationSignal::class.java),
           anyInt(),
           capture(enrollCallback),
-          eq(FingerprintManager.ENROLL_FIND_SENSOR)
+          eq(FingerprintManager.ENROLL_FIND_SENSOR),
+          any(FingerprintEnrollOptions::class.java),
         )
       enrollCallback.value.onEnrollmentProgress(1)
       runCurrent()
@@ -336,7 +339,8 @@ class FingerprintManagerInteractorTest {
           any(CancellationSignal::class.java),
           anyInt(),
           capture(enrollCallback),
-          eq(FingerprintManager.ENROLL_FIND_SENSOR)
+          eq(FingerprintManager.ENROLL_FIND_SENSOR),
+          any(FingerprintEnrollOptions::class.java),
         )
       enrollCallback.value.onEnrollmentHelp(-1, "help")
       runCurrent()
@@ -360,7 +364,8 @@ class FingerprintManagerInteractorTest {
           any(CancellationSignal::class.java),
           anyInt(),
           capture(enrollCallback),
-          eq(FingerprintManager.ENROLL_FIND_SENSOR)
+          eq(FingerprintManager.ENROLL_FIND_SENSOR),
+          any(FingerprintEnrollOptions::class.java),
         )
       enrollCallback.value.onEnrollmentError(-1, "error")
       runCurrent()

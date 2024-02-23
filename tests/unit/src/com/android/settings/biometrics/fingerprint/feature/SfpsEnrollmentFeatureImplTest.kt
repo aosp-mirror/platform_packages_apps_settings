@@ -44,15 +44,23 @@ import org.mockito.Mockito.`when` as whenever
 
 @RunWith(AndroidJUnit4::class)
 class SfpsEnrollmentFeatureImplTest {
+    private val STAGE_0 = 0
+    private val STAGE_1 = 1
+    private val STAGE_2 = 2
+    private val STAGE_3 = 3
+    private val STAGE_4 = 4
+
+    private val THRESHOLD_0 = 0f
+    private val THRESHOLD_1 = .36f
+    private val THRESHOLD_2 = .52f
+    private val THRESHOLD_3 = .76f
+    private val THRESHOLD_4 = 1f
+
     @get:Rule
     val mockito: MockitoRule = MockitoJUnit.rule()
 
     @Spy
     private val context: Context = ApplicationProvider.getApplicationContext()
-
-    private val settingsPackageName = "com.android.settings"
-
-    private lateinit var settingsContext: Context
 
     @Mock
     private lateinit var mockFingerprintManager: FingerprintManager
@@ -61,31 +69,34 @@ class SfpsEnrollmentFeatureImplTest {
 
     @Before
     fun setUp() {
-        assertThat(mSfpsEnrollmentFeatureImpl).isInstanceOf(SfpsEnrollmentFeatureImpl::class.java)
         whenever(context.getSystemService(FingerprintManager::class.java))
             .thenReturn(mockFingerprintManager)
-        doReturn(0f).`when`(mockFingerprintManager).getEnrollStageThreshold(0)
-        doReturn(0.36f).`when`(mockFingerprintManager).getEnrollStageThreshold(1)
-        doReturn(0.52f).`when`(mockFingerprintManager).getEnrollStageThreshold(2)
-        doReturn(0.76f).`when`(mockFingerprintManager).getEnrollStageThreshold(3)
-        doReturn(1f).`when`(mockFingerprintManager).getEnrollStageThreshold(4)
-        settingsContext = context.createPackageContext(settingsPackageName, 0)
+        doReturn(THRESHOLD_0).`when`(mockFingerprintManager).getEnrollStageThreshold(STAGE_0)
+        doReturn(THRESHOLD_1).`when`(mockFingerprintManager).getEnrollStageThreshold(STAGE_1)
+        doReturn(THRESHOLD_2).`when`(mockFingerprintManager).getEnrollStageThreshold(STAGE_2)
+        doReturn(THRESHOLD_3).`when`(mockFingerprintManager).getEnrollStageThreshold(STAGE_3)
+        doReturn(THRESHOLD_4).`when`(mockFingerprintManager).getEnrollStageThreshold(STAGE_4)
     }
 
     @Test
     fun testGetEnrollStageThreshold() {
-        assertThat(mSfpsEnrollmentFeatureImpl.getEnrollStageThreshold(context, 0)).isEqualTo(0f)
-        assertThat(mSfpsEnrollmentFeatureImpl.getEnrollStageThreshold(context, 1)).isEqualTo(0.36f)
-        assertThat(mSfpsEnrollmentFeatureImpl.getEnrollStageThreshold(context, 2)).isEqualTo(0.52f)
-        assertThat(mSfpsEnrollmentFeatureImpl.getEnrollStageThreshold(context, 3)).isEqualTo(0.76f)
-        assertThat(mSfpsEnrollmentFeatureImpl.getEnrollStageThreshold(context, 4)).isEqualTo(1f)
+        assertThat(mSfpsEnrollmentFeatureImpl.getEnrollStageThreshold(context, STAGE_0))
+            .isEqualTo(THRESHOLD_0)
+        assertThat(mSfpsEnrollmentFeatureImpl.getEnrollStageThreshold(context, STAGE_1))
+            .isEqualTo(THRESHOLD_1)
+        assertThat(mSfpsEnrollmentFeatureImpl.getEnrollStageThreshold(context, STAGE_2))
+            .isEqualTo(THRESHOLD_2)
+        assertThat(mSfpsEnrollmentFeatureImpl.getEnrollStageThreshold(context, STAGE_3))
+            .isEqualTo(THRESHOLD_3)
+        assertThat(mSfpsEnrollmentFeatureImpl.getEnrollStageThreshold(context, STAGE_4))
+            .isEqualTo(THRESHOLD_4)
     }
 
     @Test
     fun testGetHelpAnimator() {
         val mockView: View = mock(View::class.java)
         val animator: Animator = mSfpsEnrollmentFeatureImpl.getHelpAnimator(mockView)
-        assertThat(animator.duration).isEqualTo(550)
+        assertThat(animator.duration).isEqualTo(SfpsEnrollmentFeatureImpl.HELP_ANIMATOR_DURATION)
     }
 
     @Test
@@ -115,42 +126,27 @@ class SfpsEnrollmentFeatureImplTest {
         assertThat(
             mSfpsEnrollmentFeatureImpl.getFeaturedStageHeaderResource(SFPS_STAGE_NO_ANIMATION)
         ).isEqualTo(
-            settingsContext.resources.getIdentifier(
-                "security_settings_fingerprint_enroll_repeat_title",
-                type,
-                settingsPackageName)
+            getSettingsResourcesId(type, "security_settings_fingerprint_enroll_repeat_title")
         )
         assertThat(
             mSfpsEnrollmentFeatureImpl.getFeaturedStageHeaderResource(SFPS_STAGE_CENTER)
         ).isEqualTo(
-            settingsContext.resources.getIdentifier(
-                "security_settings_sfps_enroll_finger_center_title",
-                type,
-                settingsPackageName)
+            getSettingsResourcesId(type, "security_settings_sfps_enroll_finger_center_title")
         )
         assertThat(
             mSfpsEnrollmentFeatureImpl.getFeaturedStageHeaderResource(SFPS_STAGE_FINGERTIP)
         ).isEqualTo(
-            settingsContext.resources.getIdentifier(
-                "security_settings_sfps_enroll_fingertip_title",
-                type,
-                settingsPackageName)
+            getSettingsResourcesId(type, "security_settings_sfps_enroll_fingertip_title")
         )
         assertThat(
             mSfpsEnrollmentFeatureImpl.getFeaturedStageHeaderResource(SFPS_STAGE_LEFT_EDGE)
         ).isEqualTo(
-            settingsContext.resources.getIdentifier(
-                "security_settings_sfps_enroll_left_edge_title",
-                type,
-                settingsPackageName)
+            getSettingsResourcesId(type, "security_settings_sfps_enroll_left_edge_title")
         )
         assertThat(
             mSfpsEnrollmentFeatureImpl.getFeaturedStageHeaderResource(SFPS_STAGE_RIGHT_EDGE)
         ).isEqualTo(
-            settingsContext.resources.getIdentifier(
-                "security_settings_sfps_enroll_right_edge_title",
-                type,
-                settingsPackageName)
+            getSettingsResourcesId(type, "security_settings_sfps_enroll_right_edge_title")
         )
     }
 
@@ -159,43 +155,22 @@ class SfpsEnrollmentFeatureImplTest {
         val type = "raw"
         assertThat(
             mSfpsEnrollmentFeatureImpl.getSfpsEnrollLottiePerStage(SFPS_STAGE_NO_ANIMATION)
-        ).isEqualTo(
-            settingsContext.resources.getIdentifier(
-                "sfps_lottie_no_animation",
-                type,
-                settingsPackageName)
-        )
+        ).isEqualTo(getSettingsResourcesId(type, "sfps_lottie_no_animation"))
         assertThat(
             mSfpsEnrollmentFeatureImpl.getSfpsEnrollLottiePerStage(SFPS_STAGE_CENTER)
-        ).isEqualTo(
-            settingsContext.resources.getIdentifier(
-                "sfps_lottie_pad_center",
-                type,
-                settingsPackageName)
-        )
+        ).isEqualTo(getSettingsResourcesId(type, "sfps_lottie_pad_center"))
         assertThat(
             mSfpsEnrollmentFeatureImpl.getSfpsEnrollLottiePerStage(SFPS_STAGE_FINGERTIP)
-        ).isEqualTo(
-            settingsContext.resources.getIdentifier(
-                "sfps_lottie_tip",
-                type,
-                settingsPackageName)
-        )
+        ).isEqualTo(getSettingsResourcesId(type, "sfps_lottie_tip"))
         assertThat(
             mSfpsEnrollmentFeatureImpl.getSfpsEnrollLottiePerStage(SFPS_STAGE_LEFT_EDGE)
-        ).isEqualTo(
-            settingsContext.resources.getIdentifier(
-                "sfps_lottie_left_edge",
-                type,
-                settingsPackageName)
-        )
+        ).isEqualTo(getSettingsResourcesId(type, "sfps_lottie_left_edge"))
         assertThat(
             mSfpsEnrollmentFeatureImpl.getSfpsEnrollLottiePerStage(SFPS_STAGE_RIGHT_EDGE)
-        ).isEqualTo(
-            settingsContext.resources.getIdentifier(
-                "sfps_lottie_right_edge",
-                type,
-                settingsPackageName)
-        )
+        ).isEqualTo(getSettingsResourcesId(type, "sfps_lottie_right_edge"))
+    }
+
+    private fun getSettingsResourcesId(type: String, name: String) : Int {
+        return context.resources.getIdentifier(name, type, context.packageName)
     }
 }

@@ -17,13 +17,16 @@
 package com.android.settings.biometrics.fingerprint;
 
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.fingerprint.Fingerprint;
+import android.hardware.fingerprint.FingerprintEnrollOptions;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.CancellationSignal;
 
 import androidx.annotation.Nullable;
 
 import com.android.settings.Utils;
+import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.safetycenter.BiometricsSafetySource;
 
 /**
@@ -48,9 +51,10 @@ public class FingerprintUpdater {
     /** Wrapper around the {@link FingerprintManager#enroll} method. */
     public void enroll(byte [] hardwareAuthToken, CancellationSignal cancel, int userId,
             FingerprintManager.EnrollmentCallback callback,
-            @FingerprintManager.EnrollReason int enrollReason) {
+            @FingerprintManager.EnrollReason int enrollReason, Intent intent) {
         mFingerprintManager.enroll(hardwareAuthToken, cancel, userId,
-                new NotifyingEnrollmentCallback(mContext, callback), enrollReason);
+                new NotifyingEnrollmentCallback(mContext, callback), enrollReason,
+                toFingerprintEnrollOptions(intent));
     }
 
     /** Wrapper around the {@link FingerprintManager#remove} method. */
@@ -137,5 +141,15 @@ public class FingerprintUpdater {
             mCallback.onRemovalSucceeded(fp, remaining);
             BiometricsSafetySource.onBiometricsChanged(mContext); // biometrics data changed
         }
+    }
+
+    private FingerprintEnrollOptions toFingerprintEnrollOptions(Intent intent) {
+        final int reason = intent.getIntExtra(BiometricUtils.EXTRA_ENROLL_REASON, -1);
+        final FingerprintEnrollOptions.Builder builder = new FingerprintEnrollOptions.Builder();
+        builder.setEnrollReason(FingerprintEnrollOptions.ENROLL_REASON_UNKNOWN);
+        if (reason != -1) {
+            builder.setEnrollReason(reason);
+        }
+        return builder.build();
     }
 }

@@ -98,7 +98,7 @@ public class FingerprintEnrollProgressViewModelTest {
             mCallbackWrapper.mValue = invocation.getArgument(3);
             return null;
         }).when(mFingerprintUpdater).enroll(any(byte[].class), any(CancellationSignal.class),
-                eq(TEST_USER_ID), any(EnrollmentCallback.class), anyInt());
+                eq(TEST_USER_ID), any(EnrollmentCallback.class), anyInt(), any());
     }
 
     @Test
@@ -112,7 +112,7 @@ public class FingerprintEnrollProgressViewModelTest {
 
         assertThat(ret).isNotNull();
         verify(mFingerprintUpdater, only()).enroll(eq(token), any(CancellationSignal.class),
-                eq(TEST_USER_ID), any(EnrollmentCallback.class), eq(enrollReason));
+                eq(TEST_USER_ID), any(EnrollmentCallback.class), eq(enrollReason), any());
         assertThat(mCallbackWrapper.mValue instanceof MessageDisplayController).isFalse();
     }
 
@@ -127,7 +127,7 @@ public class FingerprintEnrollProgressViewModelTest {
 
         assertThat(ret).isNotNull();
         verify(mFingerprintUpdater, only()).enroll(eq(token), any(CancellationSignal.class),
-                eq(TEST_USER_ID), any(EnrollmentCallback.class), eq(enrollReason));
+                eq(TEST_USER_ID), any(EnrollmentCallback.class), eq(enrollReason), any());
         assertThat(mCallbackWrapper.mValue instanceof MessageDisplayController).isFalse();
     }
 
@@ -146,7 +146,7 @@ public class FingerprintEnrollProgressViewModelTest {
 
         assertThat(ret).isNotNull();
         verify(mFingerprintUpdater, only()).enroll(eq(token), any(CancellationSignal.class),
-                eq(TEST_USER_ID), any(MessageDisplayController.class), eq(enrollReason));
+                eq(TEST_USER_ID), any(MessageDisplayController.class), eq(enrollReason), any());
         assertThat(mCallbackWrapper.mValue).isNotNull();
 
         assertThat(mCallbackWrapper.mValue instanceof MessageDisplayController).isTrue();
@@ -158,7 +158,7 @@ public class FingerprintEnrollProgressViewModelTest {
 
         // Shall not use the same MessageDisplayController
         verify(mFingerprintUpdater, times(2)).enroll(eq(token), any(CancellationSignal.class),
-                eq(TEST_USER_ID), any(MessageDisplayController.class), eq(enrollReason));
+                eq(TEST_USER_ID), any(MessageDisplayController.class), eq(enrollReason), any());
         assertThat(mCallbackWrapper.mValue).isNotNull();
         assertThat(callback1).isNotEqualTo(mCallbackWrapper.mValue);
     }
@@ -170,7 +170,8 @@ public class FingerprintEnrollProgressViewModelTest {
 
         assertThat(ret).isNull();
         verify(mFingerprintUpdater, never()).enroll(any(byte[].class),
-                any(CancellationSignal.class), anyInt(), any(EnrollmentCallback.class), anyInt());
+                any(CancellationSignal.class), anyInt(), any(EnrollmentCallback.class), anyInt(),
+                any());
     }
 
     @Test
