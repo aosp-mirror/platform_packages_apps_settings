@@ -265,6 +265,8 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
         }
 
         intent.putExtra(EXTRA_KEY_REQUIRE_DIVERSITY, !mSwitchDiversity.isChecked());
+        intent.putExtra(BiometricUtils.EXTRA_ENROLL_REASON,
+                getIntent().getIntExtra(BiometricUtils.EXTRA_ENROLL_REASON, -1));
 
         if (!mSwitchDiversity.isChecked() && mAccessibilityEnabled) {
             FaceEnrollAccessibilityDialog dialog = FaceEnrollAccessibilityDialog.newInstance();

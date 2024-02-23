@@ -15,8 +15,13 @@
  */
 package com.android.settings.bluetooth;
 
+import static com.android.settings.bluetooth.BluetoothAutoOnPreferenceController.SETTING_NAME;
+import static com.android.settings.bluetooth.BluetoothAutoOnPreferenceController.UNSET;
+
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.os.UserHandle;
+import android.provider.Settings;
 import android.view.View;
 
 import androidx.annotation.VisibleForTesting;
@@ -29,6 +34,7 @@ import com.android.settings.widget.SwitchWidgetController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
+import com.android.settingslib.flags.Flags;
 import com.android.settingslib.widget.FooterPreference;
 
 /**
@@ -36,8 +42,11 @@ import com.android.settingslib.widget.FooterPreference;
  * is delegated to the SwitchWidgetController it uses.
  */
 public class BluetoothSwitchPreferenceController
-        implements LifecycleObserver, OnStart, OnStop,
-        SwitchWidgetController.OnSwitchChangeListener, View.OnClickListener {
+        implements LifecycleObserver,
+                OnStart,
+                OnStop,
+                SwitchWidgetController.OnSwitchChangeListener,
+                View.OnClickListener {
 
     private BluetoothEnabler mBluetoothEnabler;
     private RestrictionUtils mRestrictionUtils;
@@ -46,18 +55,21 @@ public class BluetoothSwitchPreferenceController
     private FooterPreference mFooterPreference;
     private boolean mIsAlwaysDiscoverable;
 
-    @VisibleForTesting
-    AlwaysDiscoverable mAlwaysDiscoverable;
+    @VisibleForTesting AlwaysDiscoverable mAlwaysDiscoverable;
 
-    public BluetoothSwitchPreferenceController(Context context,
+    public BluetoothSwitchPreferenceController(
+            Context context,
             SwitchWidgetController switchController,
             FooterPreference footerPreference) {
         this(context, new RestrictionUtils(), switchController, footerPreference);
     }
 
     @VisibleForTesting
-    public BluetoothSwitchPreferenceController(Context context, RestrictionUtils restrictionUtils,
-            SwitchWidgetController switchController, FooterPreference footerPreference) {
+    public BluetoothSwitchPreferenceController(
+            Context context,
+            RestrictionUtils restrictionUtils,
+            SwitchWidgetController switchController,
+            FooterPreference footerPreference) {
         mRestrictionUtils = restrictionUtils;
         mSwitch = switchController;
         mContext = context;
@@ -66,11 +78,13 @@ public class BluetoothSwitchPreferenceController
         mSwitch.setupView();
         updateText(mSwitch.isChecked());
 
-        mBluetoothEnabler = new BluetoothEnabler(context,
-                switchController,
-                FeatureFactory.getFeatureFactory().getMetricsFeatureProvider(),
-                SettingsEnums.ACTION_SETTINGS_MASTER_SWITCH_BLUETOOTH_TOGGLE,
-                mRestrictionUtils);
+        mBluetoothEnabler =
+                new BluetoothEnabler(
+                        context,
+                        switchController,
+                        FeatureFactory.getFeatureFactory().getMetricsFeatureProvider(),
+                        SettingsEnums.ACTION_SETTINGS_MASTER_SWITCH_BLUETOOTH_TOGGLE,
+                        mRestrictionUtils);
         mBluetoothEnabler.setToggleCallback(this);
         mAlwaysDiscoverable = new AlwaysDiscoverable(context);
     }
@@ -97,8 +111,8 @@ public class BluetoothSwitchPreferenceController
     /**
      * Set whether the device can be discovered. By default the value will be {@code false}.
      *
-     * @param isAlwaysDiscoverable {@code true} if the device can be discovered,
-     *     otherwise {@code false}
+     * @param isAlwaysDiscoverable {@code true} if the device can be discovered, otherwise {@code
+     *     false}
      */
     public void setAlwaysDiscoverable(boolean isAlwaysDiscoverable) {
         mIsAlwaysDiscoverable = isAlwaysDiscoverable;
@@ -119,15 +133,35 @@ public class BluetoothSwitchPreferenceController
                 .launch();
     }
 
-    @VisibleForTesting void updateText(boolean isChecked) {
+    @VisibleForTesting
+    void updateText(boolean isChecked) {
         if (!isChecked && Utils.isBluetoothScanningEnabled(mContext)) {
-            mFooterPreference.setTitle(R.string.bluetooth_scanning_on_info_message);
+            if (isAutoOnFeatureAvailable()) {
+                mFooterPreference.setTitle(
+                        R.string.bluetooth_scanning_on_info_message_auto_on_available);
+            } else {
+                mFooterPreference.setTitle(R.string.bluetooth_scanning_on_info_message);
+            }
             mFooterPreference.setLearnMoreText(mContext.getString(R.string.bluetooth_scan_change));
             mFooterPreference.setLearnMoreAction(v -> onClick(v));
         } else {
-            mFooterPreference.setTitle(R.string.bluetooth_empty_list_bluetooth_off);
+            if (isAutoOnFeatureAvailable()) {
+                mFooterPreference.setTitle(
+                        R.string.bluetooth_empty_list_bluetooth_off_auto_on_available);
+            } else {
+                mFooterPreference.setTitle(R.string.bluetooth_empty_list_bluetooth_off);
+            }
             mFooterPreference.setLearnMoreText("");
             mFooterPreference.setLearnMoreAction(null);
         }
+    }
+
+    private boolean isAutoOnFeatureAvailable() {
+        if (!Flags.bluetoothQsTileDialogAutoOnToggle()) {
+            return false;
+        }
+        return Settings.Secure.getIntForUser(
+                        mContext.getContentResolver(), SETTING_NAME, UNSET, UserHandle.myUserId())
+                != UNSET;
     }
 }

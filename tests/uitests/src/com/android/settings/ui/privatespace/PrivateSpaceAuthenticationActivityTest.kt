@@ -18,9 +18,11 @@ package com.android.settings.ui.privatespace
 
 
 import android.os.Flags
+import android.platform.test.annotations.RequiresFlagsDisabled
 import android.platform.test.annotations.RequiresFlagsEnabled
 import android.platform.test.flag.junit.DeviceFlagsValueProvider
 import android.provider.Settings
+import android.util.Log
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.By
@@ -77,15 +79,18 @@ class PrivateSpaceAuthenticationActivityTest {
         Thread.sleep(1000)
         device.assertHasTexts(listOf(SET_LOCK_BUTTON,CANCEL_TEXT))
         device.clickObject(By.text(SET_LOCK_BUTTON))
-        device.assertHasTexts(listOf(LOCK_SCREEN_TITLE))
+        Thread.sleep(1000)
+        device.assertHasTexts(listOf(PATTERN_TEXT, PIN_TEXT, PASSWORD_TEXT))
     }
 
     private companion object {
         // Items we really want to always show
-        val PRIVATE_SPACE_SETTING = "Private Space"
+        val PRIVATE_SPACE_SETTING = "Private space"
         const val SET_LOCK_BUTTON = "Set screen lock"
         val CANCEL_TEXT = "Cancel"
         val DIALOG_TITLE = "Set a screen lock"
-        val LOCK_SCREEN_TITLE = "Choose screen lock"
+        val PATTERN_TEXT = "Pattern"
+        val PIN_TEXT = "PIN"
+        val PASSWORD_TEXT = "Password"
     }
 }

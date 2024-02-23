@@ -17,8 +17,10 @@
 package com.android.settings.biometrics.face;
 
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.face.Face;
 import android.hardware.face.FaceEnrollCell;
+import android.hardware.face.FaceEnrollOptions;
 import android.hardware.face.FaceManager;
 import android.os.CancellationSignal;
 import android.view.Surface;
@@ -26,6 +28,7 @@ import android.view.Surface;
 import androidx.annotation.Nullable;
 
 import com.android.settings.Utils;
+import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.safetycenter.BiometricsSafetySource;
 
 /**
@@ -49,19 +52,19 @@ public class FaceUpdater {
 
     /** Wrapper around the {@link FaceManager#enroll} method. */
     public void enroll(int userId, byte[] hardwareAuthToken, CancellationSignal cancel,
-            FaceManager.EnrollmentCallback callback, int[] disabledFeatures) {
+            FaceManager.EnrollmentCallback callback, int[] disabledFeatures, Intent intent) {
         this.enroll(userId, hardwareAuthToken, cancel,
                 new NotifyingEnrollmentCallback(mContext, callback), disabledFeatures,
-                null, false);
+                null, false, intent);
     }
 
     /** Wrapper around the {@link FaceManager#enroll} method. */
     public void enroll(int userId, byte[] hardwareAuthToken, CancellationSignal cancel,
             FaceManager.EnrollmentCallback callback, int[] disabledFeatures,
-            @Nullable Surface previewSurface, boolean debugConsent) {
+            @Nullable Surface previewSurface, boolean debugConsent, Intent intent) {
         mFaceManager.enroll(userId, hardwareAuthToken, cancel,
                 new NotifyingEnrollmentCallback(mContext, callback), disabledFeatures,
-                previewSurface, debugConsent);
+                previewSurface, debugConsent, toFaceEnrollOptions(intent));
     }
 
     /** Wrapper around the {@link FaceManager#remove} method. */
@@ -134,5 +137,15 @@ public class FaceUpdater {
             mCallback.onRemovalSucceeded(fp, remaining);
             BiometricsSafetySource.onBiometricsChanged(mContext); // biometrics data changed
         }
+    }
+
+    private FaceEnrollOptions toFaceEnrollOptions(Intent intent) {
+        final int reason = intent.getIntExtra(BiometricUtils.EXTRA_ENROLL_REASON, -1);
+        final FaceEnrollOptions.Builder builder = new FaceEnrollOptions.Builder();
+        builder.setEnrollReason(FaceEnrollOptions.ENROLL_REASON_UNKNOWN);
+        if (reason != -1) {
+            builder.setEnrollReason(reason);
+        }
+        return builder.build();
     }
 }
