@@ -1261,7 +1261,8 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         WifiEntryConnectCallback callback =
                 new WifiEntryConnectCallback(wifiEntry, editIfNoConfig, fullScreenEdit);
 
-        if (Flags.wepUsage() && wifiEntry.getSecurityTypes().contains(WifiEntry.SECURITY_WEP)) {
+        if (Flags.androidVWifiApi() && wifiEntry.getSecurityTypes()
+                .contains(WifiEntry.SECURITY_WEP)) {
             WepNetworkDialogActivity.checkWepAllowed(
                     getContext(), getViewLifecycleOwner(), wifiEntry.getSsid(), () -> {
                         wifiEntry.connect(callback);

@@ -191,6 +191,7 @@ class FingerprintEnrollmentV2Activity : FragmentActivity() {
         GatekeeperPasswordProvider(LockPatternUtils(context)),
         pressToAuthInteractor,
         enrollType,
+        getIntent(),
       )
 
     var challenge: Long? = intent.getExtra(BiometricEnrollBase.EXTRA_KEY_CHALLENGE) as Long?
