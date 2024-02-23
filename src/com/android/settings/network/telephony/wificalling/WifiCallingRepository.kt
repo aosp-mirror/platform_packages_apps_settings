@@ -17,12 +17,24 @@
 package com.android.settings.network.telephony.wificalling
 
 import android.content.Context
+import android.telephony.AccessNetworkConstants
 import android.telephony.CarrierConfigManager
 import android.telephony.CarrierConfigManager.KEY_USE_WFC_HOME_NETWORK_MODE_IN_ROAMING_NETWORK_BOOL
+import android.telephony.SubscriptionManager
 import android.telephony.TelephonyManager
 import android.telephony.ims.ImsMmTelManager.WiFiCallingMode
+import android.telephony.ims.feature.MmTelFeature
+import android.telephony.ims.stub.ImsRegistrationImplBase
 import com.android.settings.network.telephony.ims.ImsMmTelRepository
 import com.android.settings.network.telephony.ims.ImsMmTelRepositoryImpl
+import com.android.settings.network.telephony.ims.imsFeatureProvisionedFlow
+import com.android.settings.network.telephony.subscriptionsChangedFlow
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.map
 
 class WifiCallingRepository(
     private val context: Context,
@@ -44,4 +56,30 @@ class WifiCallingRepository(
         carrierConfigManager
             .getConfigForSubId(subId, KEY_USE_WFC_HOME_NETWORK_MODE_IN_ROAMING_NETWORK_BOOL)
             .getBoolean(KEY_USE_WFC_HOME_NETWORK_MODE_IN_ROAMING_NETWORK_BOOL)
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    fun wifiCallingReadyFlow(): Flow<Boolean> {
+        if (!SubscriptionManager.isValidSubscriptionId(subId)) return flowOf(false)
+        return context.subscriptionsChangedFlow().flatMapLatest {
+            combine(
+                imsFeatureProvisionedFlow(
+                    subId = subId,
+                    capability = MmTelFeature.MmTelCapabilities.CAPABILITY_TYPE_VOICE,
+                    tech = ImsRegistrationImplBase.REGISTRATION_TECH_IWLAN,
+                ),
+                isWifiCallingSupportedFlow(),
+            ) { imsFeatureProvisioned, isWifiCallingSupported ->
+                imsFeatureProvisioned && isWifiCallingSupported
+            }
+        }
+    }
+
+    private fun isWifiCallingSupportedFlow(): Flow<Boolean> {
+        return imsMmTelRepository.imsReadyFlow().map { imsReady ->
+            imsReady && imsMmTelRepository.isSupported(
+                capability = MmTelFeature.MmTelCapabilities.CAPABILITY_TYPE_VOICE,
+                transportType = AccessNetworkConstants.TRANSPORT_TYPE_WLAN,
+            )
+        }
+    }
 }
