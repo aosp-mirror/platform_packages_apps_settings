@@ -11340,6 +11340,12 @@
     <!-- Toast message when 16k OTA update fails -->
     <string name="toast_16k_update_failed_text">Failed to update kernel to 16KB pages compatible kernel.</string>
     <string name="progress_16k_ota_title">Applying change</string>
+    <!-- Confirmation dialog title and text to reformat data to ext4 -->
+    <string name="confirm_format_ext4_title">Reformat device to ext4?</string>
+    <string name="confirm_format_ext4_text">16K developer option is supported with ext4 filesystem. Device will be wiped and filesystem will be changed to ext4 after confirmation.</string>
+    <!-- Toast on failure to reformat data to ext4 -->
+    <string name="format_ext4_failure_toast">Failed to reformat and wipe the data partiton to ext4.</string>
+
     <!-- DSU Loader. Do not translate. -->
 
     <string name="dsu_loader_title" translatable="false">DSU Loader</string>
