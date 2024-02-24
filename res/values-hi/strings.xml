@@ -443,7 +443,7 @@
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"सेटअप करना होगा"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"चेहरे का मॉडल और फ़िंगरप्रिंट जोड़े गए"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"चेहरे का मॉडल और फ़िंगरप्रिंट जोड़ा गया"</string>
-    <string name="biometric_settings_intro" msgid="4263069383955676756">"अगर आपके फ़ोन में \'फ़िंगरप्रिंट अनलॉक\' और \'फ़ेस अनलॉक\' की सुविधा सेट है, तो चेहरे पर मास्क लगा होने या आस-पास रोशनी न होने पर, फ़ोन आपका फ़िंगरप्रिंट मांगेगा"</string>
+    <string name="biometric_settings_intro" msgid="4263069383955676756">"अगर आपके फ़ोन में फ़िंगरप्रिंट अनलॉक और फ़ेस अनलॉक की सुविधा सेट अप है, तो चेहरे पर मास्क लगा होने पर या आस-पास रोशनी न होने पर, फ़ोन आपका फ़िंगरप्रिंट मांगेगा"</string>
     <string name="biometric_settings_category_ways_to_unlock" msgid="3384767901580915266">"फ़ोन को अनलॉक करने के तरीके"</string>
     <string name="biometric_settings_category_use_face_fingerprint" msgid="4377659744376863913">"चेहरे या फ़िंगरप्रिंट का इस्तेमाल करके:"</string>
     <string name="biometric_settings_use_biometric_unlock_phone" msgid="8180914579885804358">"अपना फ़ोन अनलॉक करें"</string>
@@ -561,8 +561,7 @@
     <string name="private_space_category_ways_to_unlock" msgid="4356631225316950046">"फ़ोन को अनलॉक करने के तरीके"</string>
     <string name="private_space_screen_lock_summary" msgid="394837965365561070">"डिवाइस के स्क्रीन लॉक की तरह"</string>
     <string name="private_space_new_lock_title" msgid="9056139964133004094">"प्राइवेट स्पेस के लिए नया लॉक चुनना है?"</string>
-    <string name="private_space_auto_lock_title" msgid="4757097802686131305">"अपने-आप लॉक होने की सुविधा पाएं"</string>
-    <string name="private_space_auto_lock_page_title" msgid="2993714305725968632">"प्राइवेट स्पेस अपने-आप लॉक होने की सुविधा पाएं"</string>
+    <string name="private_space_auto_lock_title" msgid="8663409382910601261">"प्राइवेट स्पेस अपने-आप लॉक होने की सुविधा पाएं"</string>
     <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"आपके पास यह विकल्प है कि डिवाइस का इस्तेमाल कुछ समय तक न होने पर, प्राइवेट स्पेस अपने-आप लॉक हो जाए"</string>
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"हर बार डिवाइस लॉक होने पर"</string>
     <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"पांच मिनट तक कोई गतिविधि न होने पर"</string>
@@ -678,8 +677,7 @@
     <string name="unlock_set_unlock_mode_pattern" msgid="1926480143883094896">"पैटर्न"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="9028659554829888373">"पिन"</string>
     <string name="unlock_set_unlock_mode_password" msgid="8810609692771987513">"पासवर्ड"</string>
-    <!-- no translation found for unlock_disable_frp_warning_title (2545569051372893686) -->
-    <skip />
+    <string name="unlock_disable_frp_warning_title" msgid="2545569051372893686">"क्या डिवाइस अनलॉक करने की सभी सुविधाएं हटानी हैं?"</string>
     <string name="unlock_disable_frp_warning_title_profile" msgid="1005284289723910461">"प्रोफ़ाइल सुरक्षा निकालें?"</string>
     <string name="unlock_disable_frp_warning_content_pattern" msgid="6246242612158828147">"अगर आपका फ़ोन खो जाता है या चोरी हो जाता है, तो पैटर्न आपके फ़ोन की सुरक्षा करता है"</string>
     <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="2259825377085781801">"अगर आपका फ़ोन खो जाता है या चोरी हो जाता है, तो पैटर्न आपके फ़ोन की सुरक्षा करता है.<xliff:g id="EMPTY_LINE">
@@ -692,23 +690,35 @@
 
 </xliff:g>फ़ोन को पैटर्न का इस्तेमाल करके सुरक्षित करने पर, डिवाइस पर सेव किया गया फ़िंगरप्रिंट का मॉडल मिट जाता है. इसके अलावा, आपके चेहरे का मॉडल भी सुरक्षित तरीके से हमेशा के लिए मिटा दिया जाएगा. ऐप्लिकेशन में अपनी पहचान की पुष्टि करने के लिए, आप अपने चेहरे के माॅडल या फ़िंगरप्रिंट का इस्तेमाल नहीं कर पाएंगे."</string>
     <string name="unlock_disable_frp_warning_content_pin" msgid="122154942944422284">"अगर आपका फ़ोन खो जाता है या चोरी हो जाता है, तो पिन आपके फ़ोन की सुरक्षा करता है"</string>
-    <!-- no translation found for unlock_disable_frp_warning_content_pin_authbound_keys (6497861740382402784) -->
-    <skip />
+    <string name="unlock_disable_frp_warning_content_pin_authbound_keys" msgid="6497861740382402784">"आपके पास सेव किया डेटा नहीं रहेगा. जैसे, पिन.<xliff:g id="EMPTY_LINE_0">
+
+</xliff:g>टैप करके पेमेंट करने की सुविधा के लिए सेट किए गए कार्ड हटा दिए जाएंगे.<xliff:g id="EMPTY_LINE_1">
+
+</xliff:g>वॉलेट और अन्य ऐप्लिकेशन, जिन्हें अनलॉक करने की ज़रूरत होती है वे ठीक से काम नहीं करेंगे."</string>
     <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="983373874470746066">"अगर आपका फ़ोन खो जाता है या चोरी हो जाता है, तो पिन आपके फ़ोन की सुरक्षा करता है.<xliff:g id="EMPTY_LINE">
 
 </xliff:g>इससे, डिवाइस पर सेव किया गया फ़िंगरप्रिंट का मॉडल भी मिट जाता है. ऐप्लिकेशन में अपनी पहचान की पुष्टि करने के लिए, अपने फ़िंगरप्रिंट का इस्तेमाल नहीं किया जा सकेगा."</string>
-    <!-- no translation found for unlock_disable_frp_warning_content_pin_fingerprint_authbound_keys (8930057076658360799) -->
-    <skip />
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint_authbound_keys" msgid="8930057076658360799">"आपके पास सेव किया डेटा नहीं रहेगा. जैसे, पिन और फ़िंगरप्रिंट का मॉडल.<xliff:g id="EMPTY_LINE_0">
+
+</xliff:g>टैप करके पेमेंट करने की सुविधा के लिए सेट किए गए कार्ड हटा दिए जाएंगे.<xliff:g id="EMPTY_LINE_1">
+
+</xliff:g>वॉलेट और अन्य ऐप्लिकेशन, जिन्हें अनलॉक करने की ज़रूरत होती है वे ठीक से काम नहीं करेंगे."</string>
     <string name="unlock_disable_frp_warning_content_pin_face" msgid="5607150515413131761">"अगर आपका फ़ोन खो जाता है या चोरी हो जाता है, तो पिन आपके फ़ोन की सुरक्षा करता है.<xliff:g id="EMPTY_LINE">
 
 </xliff:g>इसके अलावा, आपके चेहरे का मॉडल भी सुरक्षित तरीके से हमेशा के लिए मिटा दिया जाएगा. ऐप्लिकेशन में अपनी पहचान की पुष्टि करने के लिए, आप अपने चेहरे के मॉडल का इस्तेमाल नहीं कर पाएंगे."</string>
-    <!-- no translation found for unlock_disable_frp_warning_content_pin_face_authbound_keys (979399855891561038) -->
-    <skip />
+    <string name="unlock_disable_frp_warning_content_pin_face_authbound_keys" msgid="979399855891561038">"आपके पास सेव किया डेटा नहीं रहेगा. जैसे, पिन और चेहरे का मॉडल.<xliff:g id="EMPTY_LINE_0">
+
+</xliff:g>टैप करके पेमेंट करने की सुविधा के लिए सेट किए गए कार्ड हटा दिए जाएंगे.<xliff:g id="EMPTY_LINE_1">
+
+</xliff:g>वॉलेट और अन्य ऐप्लिकेशन, जिन्हें अनलॉक करने की ज़रूरत होती है वे ठीक से काम नहीं करेंगे."</string>
     <string name="unlock_disable_frp_warning_content_pin_face_fingerprint" msgid="1821792325159866312">"अगर आपका फ़ोन खो जाता है या चोरी हो जाता है, तो पिन आपके फ़ोन की सुरक्षा करता है.<xliff:g id="EMPTY_LINE">
 
 </xliff:g>फ़ोन को पिन का इस्तेमाल करके सुरक्षित करने पर, डिवाइस पर सेव किया गया फ़िंगरप्रिंट का मॉडल मिट जाता है. इसके अलावा, आपके चेहरे का मॉडल भी सुरक्षित तरीके से हमेशा के लिए मिटा दिया जाएगा. ऐप्लिकेशन में अपनी पहचान की पुष्टि करने के लिए, आप अपने चेहरे के माॅडल या फ़िंगरप्रिंट का इस्तेमाल नहीं कर पाएंगे."</string>
-    <!-- no translation found for unlock_disable_frp_warning_content_pin_face_fingerprint_authbound_keys (7019955731206729909) -->
-    <skip />
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint_authbound_keys" msgid="7019955731206729909">"आपके पास सेव किया डेटा नहीं रहेगा. जैसे, पिन, चेहरे और फ़िंगरप्रिंट का मॉडल.<xliff:g id="EMPTY_LINE_0">
+
+</xliff:g>टैप करके पेमेंट करने की सुविधा के लिए सेट किए गए कार्ड हटा दिए जाएंगे.<xliff:g id="EMPTY_LINE_1">
+
+</xliff:g>वॉलेट और अन्य ऐप्लिकेशन, जिन्हें अनलॉक करने की ज़रूरत होती है वे ठीक से काम नहीं करेंगे."</string>
     <string name="unlock_disable_frp_warning_content_password" msgid="6422723907917376210">"अगर आपका फ़ोन खो जाता है या चोरी हो जाता है, तो पासवर्ड आपके फ़ोन की सुरक्षा करता है"</string>
     <string name="unlock_disable_frp_warning_content_password_fingerprint" msgid="8899452884016354856">"अगर आपका फ़ोन खो जाता है या चोरी हो जाता है, तो पासवर्ड आपके फ़ोन की सुरक्षा करता है.<xliff:g id="EMPTY_LINE">
 
@@ -1757,7 +1767,7 @@
     <string name="archiving_failed" msgid="2037798988961634978">"संग्रहित नहीं किया जा सका"</string>
     <string name="archiving_succeeded" msgid="7891249456483297845">"<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> को संग्रहित किया गया"</string>
     <string name="restoring_failed" msgid="3390531747355943533">"वापस नहीं लाया जा सका"</string>
-    <string name="restoring_in_progress" msgid="7787443682651146115">"<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> को वापस लाया जा रहा है"</string>
+    <string name="restoring_in_progress" msgid="7787443682651146115">"<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> को पहले जैसा किया जा रहा है"</string>
     <string name="another_migration_already_in_progress" msgid="6550546307856052261">"कोई और डेटा दूसरी जगह भेजा जा रहा है."</string>
     <string name="insufficient_storage" msgid="8115088042669030558">"मेमोरी में ज़रुरत के मोताबिक जगह नहीं बची है"</string>
     <string name="does_not_exist" msgid="6499163879348776120">"ऐप्लिकेशन मौजूद नहीं है."</string>
@@ -1870,6 +1880,10 @@
     <string name="trackpad_bottom_right_tap_summary" msgid="8734094086900680674">"ज़्यादा विकल्पों के लिए टचपैड के सबसे नीचे दाएं कोने पर टैप करें"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"पॉइंटर की स्पीड"</string>
     <string name="trackpad_touch_gesture" msgid="8641725062131922497">"टचपैड पर हाथ के जेस्चर जानें"</string>
+    <!-- no translation found for keywords_touchpad (8159846254066666032) -->
+    <skip />
+    <!-- no translation found for keywords_trackpad_bottom_right_tap (1285062446073929305) -->
+    <skip />
     <string name="gesture_title_go_home" msgid="3682238648647225933">"होम स्क्रीन पर जाएं"</string>
     <string name="gesture_summary_go_home" msgid="6409031586904205741">"टचपैड पर तीन उंगलियों से कहीं भी ऊपर की ओर स्वाइप करें"</string>
     <string name="gesture_title_go_back" msgid="6619462058488419802">"वापस जाएं"</string>
@@ -2422,7 +2436,8 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"यह ऐप्लिकेशन, बैकग्राउंड में बैटरी का इस्तेमाल कर पाएगा. ऐसा हो सकता है कि आपके डिवाइस की बैटरी समय से पहले ही खत्म हो जाए."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"ऐप्लिकेशन से रोक हटाएं"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"अभी नहीं"</string>
-    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"पूरा चार्ज करें"</string>
+    <!-- no translation found for battery_tip_charge_to_full_button (9172893341338732733) -->
+    <skip />
     <string name="battery_tip_incompatible_charging_title" msgid="1567827436103364999">"चार्जिंग ऐक्सेसरी की जांच करें"</string>
     <string name="battery_tip_incompatible_charging_content_description" msgid="355668467640367701">"डिवाइस के साथ काम न करने वाले चार्जिंग सेटअप के बारे में ज़्यादा जानें"</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"बैटरी मैनेजर"</string>
@@ -3832,7 +3847,7 @@
     <string name="assist_access_screenshot_summary" msgid="5276593070956201863">"सहायक ऐप्लिकेशन को स्क्रीन पर मौजूद इमेज को ऐक्सेस करने की अनुमति दें"</string>
     <string name="assist_flash_title" msgid="5449512572885550108">"स्क्रीन फ़्लैश करें"</string>
     <string name="assist_flash_summary" msgid="3032289860177784594">"जब सहायक ऐप्लिकेशन, स्क्रीन पर मौजूद टेक्स्ट या स्क्रीनशॉट को ऐक्सेस करे, तो स्क्रीन के किनारों पर रोशनी चमकाएं"</string>
-    <string name="assist_footer" msgid="8248015363806299068">"स्क्रीन पर दिख रही जानकारी के आधार पर, सहायक ऐप्लिकेशन आपकी मदद कर सकते हैं. आपकी पूरी मदद करने के लिए, कुछ ऐप्लिकेशन पर लॉन्चर और बोलकर फ़ोन को निर्देश देने वाली सेवाएं काम करती हैं."</string>
+    <string name="assist_footer" msgid="8248015363806299068">"स्क्रीन पर दिख रही जानकारी के आधार पर, सहायक ऐप्लिकेशन आपकी मदद कर सकते हैं. आपकी पूरी मदद करने के लिए, कुछ ऐप्लिकेशन पर लॉन्चर और बोलकर फ़ोन को निर्देश देने वाली सेवाएँ काम करती हैं."</string>
     <string name="average_memory_use" msgid="717313706368825388">"औसत मेमोरी उपयोग"</string>
     <string name="maximum_memory_use" msgid="2171779724001152933">"अधिकतम मेमोरी उपयोग"</string>
     <string name="memory_usage" msgid="5594133403819880617">"मेमोरी का उपयोग"</string>
@@ -4308,8 +4323,7 @@
     <string name="credman_autofill_keywords" msgid="701180623776848914">"अपने-आप, भरना, अपने-आप भरना, डेटा, पासकी, और पासवर्ड"</string>
     <string name="credman_button_change" msgid="4072629639218503790">"बदलें"</string>
     <string name="credman_button_open" msgid="7519871964170816850">"खोलें"</string>
-    <!-- no translation found for credman_app_list_preference_none (2509646651254971448) -->
-    <skip />
+    <string name="credman_app_list_preference_none" msgid="2509646651254971448">"कोई आइटम नहीं चुना गया"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;पक्का करें कि आपको इस ऐप्लिकेशन पर भरोसा है&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google की मदद से, जानकारी अपने-आप भरने की सुविधा,&gt;%1$s&lt;/xliff:g&gt; ऑटोमैटिक भरी जा सकने वाली चीज़ें तय करने के लिए आपकी स्क्रीन पर मौजूद चीज़ों का इस्तेमाल करती है."</string>
     <string name="credman_autofill_confirmation_message" msgid="843829628024668466">"&lt;b&gt;Use &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; नए पासवर्ड, पासकी, और अन्य जानकारी अब से यहां सेव की जाएगी. &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; आपके डिवाइस की स्क्रीन पर दिख रहे कॉन्टेंट का इस्तेमाल करके, यह तय कर सकता है कि कौनसी जानकारी अपने-आप भरी जा सकती है."</string>
     <string name="credman_picker_title" msgid="8442086614222006564">"पासवर्ड, पासकी, और ऑटोमैटिक जानकारी भरने की सुविधा के लिए सेवा देने वाली पसंदीदा कंपनी"</string>
@@ -4319,6 +4333,8 @@
     <string name="credman_confirmation_message_new_ui" msgid="6126274509951156460">"&lt;b&gt;क्या आपको सभी सुविधाएं बंद करनी हैं?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; साइन इन करने के बाद पासवर्ड, पासकी, और सेव की गई अन्य जानकारी अपने-आप नहीं भरी जा सकेगी"</string>
     <string name="credman_autofill_confirmation_message_new_ui" msgid="6222139222478822267">"&lt;b&gt;अपनी पसंदीदा सेवा के तौर पर &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; को चुनें. नए पासवर्ड, पासकी, और अन्य जानकारी अब से यहां सेव होगी. ऐसा हो सकता है कि &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; आपके डिवाइस की स्क्रीन पर मौजूद कॉन्टेंट का इस्तेमाल करे. इससे यह पता लगाया जा सकेगा कि कौनसी जानकारी अपने-आप भरी जा सकती है"</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"%1$s का इस्तेमाल करना है?"</string>
+    <string name="credman_confirmation_turn_off_positive_button" msgid="5678773011513369161">"बंद करें"</string>
+    <string name="credman_confirmation_change_provider_positive_button" msgid="7732302992885116967">"बदलें"</string>
     <string name="credman_limit_error_msg_title" msgid="1525814645803612135">"सिर्फ़ पांच सेवाएं जोड़ी जा सकती हैं"</string>
     <string name="credman_limit_error_msg" msgid="2521803280130310063">"दूसरी सेवा जोड़ने के लिए, कम से कम एक सेवा बंद करें"</string>
     <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"%1$s आपकी स्क्रीन पर मौजूद जानकारी का इस्तेमाल करता है, ताकि अपने-आप भरने वाली जानकारी तय की जा सके."</string>
@@ -4751,10 +4767,8 @@
     <string name="media_controls_hide_player" msgid="2751439192580884015">"मीडिया प्लेयर को छिपाएं"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"मीडिया प्लेयर दिखाएं"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"मीडिया"</string>
-    <!-- no translation found for camera_extensions_fallback_title (3604579046777004989) -->
-    <skip />
-    <!-- no translation found for camera_extensions_fallback_description (6939818294458854536) -->
-    <skip />
+    <string name="camera_extensions_fallback_title" msgid="3604579046777004989">"कैमरा सॉफ़्टवेयर एक्सटेंशन को अनुमति दें"</string>
+    <string name="camera_extensions_fallback_description" msgid="6939818294458854536">"इससे ऐडवांस कैमरे की सुविधाओं के लिए डिफ़ॉल्ट सॉफ़्टवेयर को लागू करने की प्रोसेस चालू होती है. जैसे, आई फ़्री वीडियोग्राफ़ी."</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"ब्लूटूथ चालू हो जाएगा"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"इंटरनेट"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"सिम"</string>

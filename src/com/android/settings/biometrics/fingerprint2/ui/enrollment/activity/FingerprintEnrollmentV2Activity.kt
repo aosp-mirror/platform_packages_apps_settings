@@ -37,13 +37,13 @@ import com.android.settings.biometrics.BiometricEnrollBase.CONFIRM_REQUEST
 import com.android.settings.biometrics.BiometricEnrollBase.RESULT_FINISHED
 import com.android.settings.biometrics.GatekeeperPasswordProvider
 import com.android.settings.biometrics.fingerprint2.data.repository.FingerprintSensorRepositoryImpl
-import com.android.settings.biometrics.fingerprint2.domain.interactor.PressToAuthInteractorImpl
 import com.android.settings.biometrics.fingerprint2.domain.interactor.AccessibilityInteractorImpl
 import com.android.settings.biometrics.fingerprint2.domain.interactor.FingerprintManagerInteractorImpl
 import com.android.settings.biometrics.fingerprint2.domain.interactor.FoldStateInteractor
 import com.android.settings.biometrics.fingerprint2.domain.interactor.FoldStateInteractorImpl
 import com.android.settings.biometrics.fingerprint2.domain.interactor.OrientationInteractor
 import com.android.settings.biometrics.fingerprint2.domain.interactor.OrientationInteractorImpl
+import com.android.settings.biometrics.fingerprint2.domain.interactor.PressToAuthInteractorImpl
 import com.android.settings.biometrics.fingerprint2.lib.model.Default
 import com.android.settings.biometrics.fingerprint2.lib.model.SetupWizard
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.fragment.FingerprintEnrollConfirmationV2Fragment
@@ -54,6 +54,7 @@ import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enroll
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.rfps.ui.viewmodel.RFPSViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.BackgroundViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintAction
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollConfirmationViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollEnrollingViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollFindSensorViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollIntroViewModel
@@ -70,6 +71,7 @@ import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.Fing
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintNavigationViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintScrollViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.GatekeeperInfo
+import com.android.settings.flags.Flags
 import com.android.settings.password.ChooseLockGeneric
 import com.android.settings.password.ChooseLockSettingsHelper
 import com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE
@@ -96,6 +98,8 @@ class FingerprintEnrollmentV2Activity : FragmentActivity() {
   private lateinit var fingerprintScrollViewModel: FingerprintScrollViewModel
   private lateinit var backgroundViewModel: BackgroundViewModel
   private lateinit var fingerprintFlowViewModel: FingerprintFlowViewModel
+  private lateinit var fingerprintEnrollConfirmationViewModel:
+    FingerprintEnrollConfirmationViewModel
   private val coroutineDispatcher = Dispatchers.Default
 
   /** Result listener for ChooseLock activity flow. */
@@ -154,6 +158,15 @@ class FingerprintEnrollmentV2Activity : FragmentActivity() {
     super.onCreate(savedInstanceState)
     // TODO(b/299573056): Show split screen dialog when it's in multi window mode.
     setContentView(R.layout.fingerprint_v2_enroll_main)
+
+    if (!Flags.fingerprintV2Enrollment()) {
+      check(false) {
+        "fingerprint enrollment v2 is not enabled, " +
+          "please run adb shell device_config put " +
+          "biometrics_framework com.android.settings.flags.fingerprint_v2_enrollment true"
+      }
+      finish()
+    }
 
     setTheme(SetupWizardUtils.getTheme(applicationContext, intent))
     ThemeHelper.trySetDynamicColor(applicationContext)
@@ -293,6 +306,15 @@ class FingerprintEnrollmentV2Activity : FragmentActivity() {
       ),
     )[RFPSViewModel::class.java]
 
+    fingerprintEnrollConfirmationViewModel =
+      ViewModelProvider(
+        this,
+        FingerprintEnrollConfirmationViewModel.FingerprintEnrollConfirmationViewModelFactory(
+          navigationViewModel,
+          fingerprintManagerInteractor,
+        ),
+      )[FingerprintEnrollConfirmationViewModel::class.java]
+
     lifecycleScope.launch {
       navigationViewModel.currentStep.collect { step ->
         if (step is Init) {
@@ -304,6 +326,7 @@ class FingerprintEnrollmentV2Activity : FragmentActivity() {
 
     lifecycleScope.launch {
       navigationViewModel.navigateTo.filterNotNull().collect { step ->
+        Log.d(TAG, "navigateTo: $step")
         if (step is ConfirmDeviceCredential) {
           launchConfirmOrChooseLock(userId)
           navigationViewModel.update(

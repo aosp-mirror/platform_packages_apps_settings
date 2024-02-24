@@ -29,7 +29,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+import android.window.OnBackInvokedCallback;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
@@ -57,9 +59,14 @@ public class FaceSettingsRemoveButtonPreferenceController extends BasePreference
     private static final String TAG = "FaceSettings/Remove";
     static final String KEY = "security_settings_face_delete_faces_container";
 
-    public static class ConfirmRemoveDialog extends InstrumentedDialogFragment {
+    public static class ConfirmRemoveDialog extends InstrumentedDialogFragment
+            implements OnBackInvokedCallback {
         private static final String KEY_IS_CONVENIENCE = "is_convenience";
         private DialogInterface.OnClickListener mOnClickListener;
+        @Nullable
+        private AlertDialog mDialog = null;
+        @Nullable
+        private Preference mFaceUnlockPreference = null;
 
         /** Returns the new instance of the class */
         public static ConfirmRemoveDialog newInstance(boolean isConvenience) {
@@ -99,13 +106,40 @@ public class FaceSettingsRemoveButtonPreferenceController extends BasePreference
                     .setMessage(dialogMessageRes)
                     .setPositiveButton(R.string.delete, mOnClickListener)
                     .setNegativeButton(R.string.cancel, mOnClickListener);
-            AlertDialog dialog = builder.create();
-            dialog.setCanceledOnTouchOutside(false);
-            return dialog;
+            mDialog = builder.create();
+            mDialog.setCanceledOnTouchOutside(false);
+            mDialog.getOnBackInvokedDispatcher().registerOnBackInvokedCallback(0, this);
+            return mDialog;
         }
 
         public void setOnClickListener(DialogInterface.OnClickListener listener) {
             mOnClickListener = listener;
+        }
+
+        public void setPreference(@Nullable Preference preference) {
+            mFaceUnlockPreference = preference;
+        }
+
+        public void unregisterOnBackInvokedCallback() {
+            if (mDialog != null) {
+                mDialog.getOnBackInvokedDispatcher().unregisterOnBackInvokedCallback(this);
+            }
+        }
+
+        @Override
+        public void onBackInvoked() {
+            if (mDialog != null) {
+                mDialog.cancel();
+            }
+            unregisterOnBackInvokedCallback();
+
+            if (mFaceUnlockPreference != null) {
+                final Button removeButton = ((LayoutPreference) mFaceUnlockPreference)
+                        .findViewById(R.id.security_settings_face_settings_remove_button);
+                if (removeButton != null) {
+                    removeButton.setEnabled(true);
+                }
+            }
         }
     }
 
@@ -171,6 +205,13 @@ public class FaceSettingsRemoveButtonPreferenceController extends BasePreference
                 mButton.setEnabled(true);
                 mRemoving = false;
             }
+
+            final ConfirmRemoveDialog removeDialog =
+                    (ConfirmRemoveDialog) mActivity.getSupportFragmentManager()
+                            .findFragmentByTag(ConfirmRemoveDialog.class.getName());
+            if (removeDialog != null) {
+                removeDialog.unregisterOnBackInvokedCallback();
+            }
         }
     };
 
@@ -210,6 +251,7 @@ public class FaceSettingsRemoveButtonPreferenceController extends BasePreference
                 (ConfirmRemoveDialog) mActivity.getSupportFragmentManager()
                         .findFragmentByTag(ConfirmRemoveDialog.class.getName());
         if (removeDialog != null) {
+            removeDialog.setPreference(mPreference);
             mRemoving = true;
             removeDialog.setOnClickListener(mOnConfirmDialogClickListener);
         }

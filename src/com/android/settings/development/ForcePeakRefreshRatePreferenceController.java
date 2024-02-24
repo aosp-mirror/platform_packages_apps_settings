@@ -17,6 +17,7 @@
 package com.android.settings.development;
 
 import static com.android.internal.display.RefreshRateSettingsUtils.DEFAULT_REFRESH_RATE;
+import static com.android.internal.display.RefreshRateSettingsUtils.findHighestRefreshRateAmongAllDisplays;
 import static com.android.internal.display.RefreshRateSettingsUtils.findHighestRefreshRateForDefaultDisplay;
 
 import android.content.Context;
@@ -47,7 +48,9 @@ public class ForcePeakRefreshRatePreferenceController extends DeveloperOptionsPr
 
     public ForcePeakRefreshRatePreferenceController(Context context) {
         super(context);
-        mPeakRefreshRate = findHighestRefreshRateForDefaultDisplay(context);
+        mPeakRefreshRate = Flags.backUpSmoothDisplayAndForcePeakRefreshRate()
+                ? findHighestRefreshRateAmongAllDisplays(context)
+                : findHighestRefreshRateForDefaultDisplay(context);
         Log.d(TAG, "DEFAULT_REFRESH_RATE : " + DEFAULT_REFRESH_RATE
             + " mPeakRefreshRate : " + mPeakRefreshRate);
     }
