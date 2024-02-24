@@ -37,6 +37,7 @@ enum class FingerprintAction {
   ACTIVITY_CREATED,
   NEGATIVE_BUTTON_PRESSED,
   USER_CLICKED_FINISH,
+  ADD_ANOTHER,
 }
 
 /** State that can be used to help a [FingerprintNavigationStep] determine the next step to take. */
@@ -179,6 +180,7 @@ sealed interface FingerprintNavigationStep {
       return when (action) {
         FingerprintAction.NEXT -> Finish(null)
         FingerprintAction.PREV -> TransitionStep(Education(state.fingerprintSensor!!))
+        FingerprintAction.ADD_ANOTHER -> TransitionStep(Enrollment(state.fingerprintSensor!!))
         else -> null
       }
     }

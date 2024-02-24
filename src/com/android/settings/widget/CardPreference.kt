@@ -61,6 +61,9 @@ constructor(
     /** The visibility of secondary button on tips card. The default value is `false`. */
     var secondaryButtonVisibility: Boolean = false
 
+    var onClick: (() -> Unit)? = null
+
+    /** The callback for click on card preference itself. */
     private var onDismiss: (() -> Unit)? = null
 
     /** Enable the dismiss button on tips card. */
@@ -84,9 +87,10 @@ constructor(
                     buttons = listOfNotNull(configPrimaryButton(), configSecondaryButton()),
                     onDismiss = onDismiss,
                     imageVector =
-                        iconResId
-                            ?.takeIf { it != Resources.ID_NULL }
-                            ?.let { ImageVector.vectorResource(it) },
+                    iconResId
+                        ?.takeIf { it != Resources.ID_NULL }
+                        ?.let { ImageVector.vectorResource(it) },
+                    onClick = onClick,
                 )
             )
         }

@@ -5112,6 +5112,10 @@
     <string name="accessibility_shortcut_type_hardware">Hold volume keys</string>
     <!-- Summary for accessibility shortcut preference for magnification triple tap shortcut type. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_type_triple_tap">Triple tap screen</string>
+    <!-- Generic title for editing the shortcuts of multiple accessibility features. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_shortcut_edit_screen_title">Edit accessibility shortcuts</string>
+    <!-- Prompt for editing the shortcuts of multiple accessibility features. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_shortcut_edit_screen_prompt">Chose your shortcut for %1$s</string>
 
     <!-- Button text for the accessibility dialog continue to the next screen for hearing aid. [CHAR LIMIT=32] -->
     <string name="accessibility_hearingaid_instruction_continue_button">Continue</string>
@@ -8608,6 +8612,14 @@
     <!-- [CHAR LIMIT=NONE] App notification settings: link to app notification settings-->
     <string name="app_settings_link">Additional settings in the app</string>
 
+    <!-- [CHAR LIMIT=20] 3-dot menu option, reloads the screen to show channels that have not
+    received notifications in the last two week -->
+    <string name="show_unused_channels">Show unused channels</string>
+
+    <!-- [CHAR LIMIT=20] 3-dot menu option, reloads the screen to hide channels that have not
+    received notifications in the last two week -->
+    <string name="hide_unused_channels">Hide unused channels</string>
+
     <!-- [CHAR LIMIT=NONE] Footer listing a count of deleted channels. -->
     <string name="deleted_channels">{count, plural,
       =1      {# category deleted}
@@ -10231,6 +10243,21 @@
     </string>
     <!-- Keywords for settings screen for controlling apps that can run long background tasks [CHAR LIMIT=NONE] -->
     <string name="keywords_long_background_tasks">long jobs, data transfer, background tasks</string>
+
+    <!-- Title for the settings screen for controlling apps that hold the run backup jobs permission [CHAR LIMIT=60] -->
+    <string name="run_backup_tasks_title">Perform backup tasks in background</string>
+    <!-- Label for the switch to toggle the run backup jobs permission [CHAR LIMIT=100] -->
+    <string name="run_backup_tasks_switch_title">Allow app to run backup-related background tasks</string>
+    <!-- Description that appears below the run_backup_tasks switch [CHAR LIMIT=NONE] -->
+    <string name="run_backup_tasks_footer_title">
+        Indicates that this app has a major use-case where it needs to backup or sync content.
+        Granting this permission allows the app to run in the background for a slightly longer time
+        in order to complete the backup-related work.
+        \n\nIf this permission is denied, the system will not give any special exemption to this
+        app to complete backup-related work in the background.
+    </string>
+    <!-- Keywords for settings screen for controlling apps that hold the run backup tasks permission [CHAR LIMIT=NONE] -->
+    <string name="keywords_run_backup_tasks">backup tasks, backup jobs</string>
 
     <!-- Reset rate-limiting in the system service ShortcutManager.  "ShortcutManager" is the name of a system service and not translatable.
     If the word "rate-limit" is hard to translate, use "Reset ShortcutManager API call limit" as the source text, which means
