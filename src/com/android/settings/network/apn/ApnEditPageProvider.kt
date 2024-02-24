@@ -41,7 +41,7 @@ import com.android.settings.R
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
 import com.android.settingslib.spa.framework.compose.LocalNavController
 import com.android.settingslib.spa.framework.theme.SettingsDimension
-import com.android.settingslib.spa.widget.editor.SettingsExposedDropdownMenuBox
+import com.android.settingslib.spa.widget.editor.SettingsDropdownBox
 import com.android.settingslib.spa.widget.editor.SettingsOutlinedTextField
 import com.android.settingslib.spa.widget.editor.SettingsTextFieldPassword
 import com.android.settingslib.spa.widget.preference.SwitchPreference
@@ -199,19 +199,19 @@ fun ApnPage(apnDataInit: ApnData, apnDataCur: MutableState<ApnData>, uriInit: Ur
                     enabled = apnData.mmsPortEnabled
                 ) { apnData = apnData.copy(mmsPort = it) }
             }
-            SettingsExposedDropdownMenuBox(
+            SettingsDropdownBox(
                 label = stringResource(R.string.apn_auth_type),
                 options = authTypeOptions,
                 selectedOptionIndex = apnData.authType,
                 enabled = apnData.authTypeEnabled,
             ) { apnData = apnData.copy(authType = it) }
-            SettingsExposedDropdownMenuBox(
+            SettingsDropdownBox(
                 label = stringResource(R.string.apn_protocol),
                 options = apnProtocolOptions,
                 selectedOptionIndex = apnData.apnProtocol,
                 enabled = apnData.apnProtocolEnabled
             ) { apnData = apnData.copy(apnProtocol = it) }
-            SettingsExposedDropdownMenuBox(
+            SettingsDropdownBox(
                 label = stringResource(R.string.apn_roaming_protocol),
                 options = apnProtocolOptions,
                 selectedOptionIndex = apnData.apnRoaming,

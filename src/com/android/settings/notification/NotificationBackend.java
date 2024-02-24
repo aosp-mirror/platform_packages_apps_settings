@@ -272,6 +272,16 @@ public class NotificationBackend {
         }
     }
 
+    public ParceledListSlice<NotificationChannelGroup> getGroupsWithRecentBlockedFilter(String pkg,
+            int uid) {
+        try {
+            return sINM.getRecentBlockedNotificationChannelGroupsForPackage(pkg, uid);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return ParceledListSlice.emptyList();
+        }
+    }
+
     public ParceledListSlice<ConversationChannelWrapper> getConversations(String pkg, int uid) {
         try {
             return sINM.getConversationsForPackage(pkg, uid);

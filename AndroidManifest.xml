@@ -949,6 +949,39 @@
                        android:value="@string/menu_key_apps"/>
         </activity>
 
+        <activity-alias
+            android:name="BackupTasksActivity"
+            android:knownActivityEmbeddingCerts="@array/config_known_host_certs"
+            android:exported="true"
+            android:targetActivity=".spa.SpaBridgeActivity"
+            android:label="@string/run_backup_tasks_title">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.REQUEST_RUN_BACKUP_JOBS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.spa.DESTINATION"
+                       android:value="TogglePermissionAppList/BackupTasksApps"/>
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_apps"/>
+        </activity-alias>
+
+        <activity-alias
+            android:name="AppBackupTasksActivity"
+            android:knownActivityEmbeddingCerts="@array/config_known_host_certs"
+            android:exported="true"
+            android:targetActivity=".spa.SpaAppBridgeActivity"
+            android:label="@string/run_backup_tasks_title">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.REQUEST_RUN_BACKUP_JOBS" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="package" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.spa.DESTINATION"
+                       android:value="TogglePermissionAppInfoPage/BackupTasksApps"/>
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_apps"/>
+        </activity-alias>
+
         <activity
             android:name="Settings$DateTimeSettingsActivity"
             android:label="@string/date_and_time"
