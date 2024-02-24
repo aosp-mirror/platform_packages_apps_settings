@@ -22,6 +22,7 @@ import android.platform.test.annotations.RequiresFlagsEnabled
 import android.platform.test.flag.junit.DeviceFlagsValueProvider
 import android.provider.Settings
 import android.provider.Settings.Global.DISABLE_SCREEN_SHARE_PROTECTIONS_FOR_APPS_AND_NOTIFICATIONS
+import android.view.flags.Flags.FLAG_SENSITIVE_CONTENT_APP_PROTECTION
 import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
 import androidx.preference.SwitchPreference
@@ -132,7 +133,8 @@ class SensitiveContentProtectionPreferenceControllerTest {
     @Test
     @RequiresFlagsDisabled(
         FLAG_SENSITIVE_NOTIFICATION_APP_PROTECTION,
-        FLAG_SCREENSHARE_NOTIFICATION_HIDING)
+        FLAG_SCREENSHARE_NOTIFICATION_HIDING,
+        FLAG_SENSITIVE_CONTENT_APP_PROTECTION)
     fun isAvailable_flagsDisabled_returnFalse() {
         assertFalse(controller.isAvailable)
     }
@@ -146,6 +148,12 @@ class SensitiveContentProtectionPreferenceControllerTest {
     @Test
     @RequiresFlagsEnabled(FLAG_SCREENSHARE_NOTIFICATION_HIDING)
     fun isAvailable_screenshareNotificationHidingEnabled_returnTrue() {
+        assertTrue(controller.isAvailable)
+    }
+
+    @Test
+    @RequiresFlagsEnabled(FLAG_SENSITIVE_CONTENT_APP_PROTECTION)
+    fun isAvailable_screenshareSensitiveContentHidingEnabled_returnTrue() {
         assertTrue(controller.isAvailable)
     }
 }
