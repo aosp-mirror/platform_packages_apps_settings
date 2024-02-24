@@ -18,6 +18,7 @@ package com.android.settings.development
 import android.content.Context
 import android.permission.flags.Flags.sensitiveNotificationAppProtection
 import android.provider.Settings
+import android.view.flags.Flags.sensitiveContentAppProtection
 import androidx.annotation.VisibleForTesting
 import androidx.preference.Preference
 import androidx.preference.TwoStatePreference
@@ -64,6 +65,7 @@ class SensitiveContentProtectionPreferenceController(val context: Context) :
 
     override fun isAvailable(): Boolean {
         return sensitiveNotificationAppProtection() || screenshareNotificationHiding()
+            || sensitiveContentAppProtection()
     }
 
     companion object {
