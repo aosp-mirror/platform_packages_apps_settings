@@ -71,10 +71,12 @@ android_robolectric_test {
         "Settings-testutils2",
         "notification_flags_lib",
         "com_android_server_accessibility_flags_lib",
+        "testables",
     ],
 
     libs: [
         "ims-common",
+        "android.test.mock",
     ],
 
     java_resource_dirs: [

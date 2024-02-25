@@ -28,6 +28,9 @@ import static com.google.android.setupcompat.util.WizardManagerHelper.EXTRA_IS_P
 import static com.google.android.setupcompat.util.WizardManagerHelper.EXTRA_IS_SETUP_FLOW;
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.junit.Assert.assertThrows;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
 
 import android.content.ComponentName;
@@ -35,7 +38,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
+import android.util.Pair;
 import android.view.accessibility.AccessibilityManager;
 
 import androidx.fragment.app.FragmentActivity;
@@ -46,6 +51,7 @@ import androidx.preference.TwoStatePreference;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.internal.accessibility.common.ShortcutConstants;
+import com.android.internal.accessibility.dialog.AccessibilityTarget;
 import com.android.internal.accessibility.util.ShortcutUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -60,6 +66,7 @@ import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
@@ -88,6 +95,9 @@ public class EditShortcutsPreferenceFragmentTest {
             new ComponentName("FakePackage", "FakeClass");
     private static final String TARGET = MAGNIFICATION_CONTROLLER_NAME;
     private static final Set<String> TARGETS = Set.of(TARGET);
+
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     private final Context mContext = ApplicationProvider.getApplicationContext();
     private FragmentActivity mActivity;
@@ -414,6 +424,60 @@ public class EditShortcutsPreferenceFragmentTest {
 
     }
 
+    @Test
+    public void findTitles_withSingleTarget_hasNullSubtitle() {
+        final String fake_label = "FAKE";
+        List<AccessibilityTarget> accessibilityTargets = List.of(
+                generateAccessibilityTargetMock(TARGET_FAKE_COMPONENT, fake_label));
+
+        Pair<String, String> titles = EditShortcutsPreferenceFragment
+                .getTitlesFromAccessibilityTargetList(
+                        Set.of(TARGET_FAKE_COMPONENT.flattenToString()),
+                        accessibilityTargets, mActivity.getResources()
+                );
+
+        assertThat(titles.first).isNotNull();
+        assertThat(titles.first).contains(fake_label);
+        assertThat(titles.second).isNull();
+    }
+
+    @Test
+    public void findTitles_withMoreTargets_hasSubtitle() {
+        final String fake_label = "FAKE";
+        final String magnification_label = "MAGNIFICATION";
+        List<AccessibilityTarget> accessibilityTargets = List.of(
+                generateAccessibilityTargetMock(TARGET_FAKE_COMPONENT, fake_label),
+                generateAccessibilityTargetMock(MAGNIFICATION_COMPONENT_NAME, magnification_label));
+
+        Pair<String, String> titles = EditShortcutsPreferenceFragment
+                .getTitlesFromAccessibilityTargetList(
+                        Set.of(TARGET_FAKE_COMPONENT.flattenToString(),
+                                MAGNIFICATION_COMPONENT_NAME.flattenToString()),
+                        accessibilityTargets, mActivity.getResources()
+                );
+
+        assertThat(titles.first).isNotNull();
+        assertThat(titles.second).isNotNull();
+        assertThat(titles.second).contains(fake_label);
+        assertThat(titles.second).contains(magnification_label);
+    }
+
+    @Test
+    public void findTitles_targetMissing_labelNotInTitles() {
+        final String fake_label = "FAKE";
+        List<AccessibilityTarget> accessibilityTargets = List.of(
+                generateAccessibilityTargetMock(TARGET_FAKE_COMPONENT, fake_label));
+
+        assertThrows(IllegalStateException.class,
+                () -> EditShortcutsPreferenceFragment
+                        .getTitlesFromAccessibilityTargetList(
+                                Set.of(MAGNIFICATION_COMPONENT_NAME.flattenToString()),
+                                accessibilityTargets, mActivity.getResources()
+                        ));
+    }
+
+
+
     private void assertLaunchSubSettingWithCurrentTargetComponents(
             String componentName, boolean isInSuw) {
         Intent intent = shadowOf(mActivity.getApplication()).getNextStartedActivity();
@@ -479,5 +543,13 @@ public class EditShortcutsPreferenceFragmentTest {
         intent.putExtra(EXTRA_IS_PRE_DEFERRED_SETUP, isInSuw);
         intent.putExtra(EXTRA_IS_DEFERRED_SETUP, isInSuw);
         return intent;
+    }
+
+    private AccessibilityTarget generateAccessibilityTargetMock(
+            ComponentName componentName, String label) {
+        AccessibilityTarget target = mock(AccessibilityTarget.class);
+        when(target.getComponentName()).thenReturn(componentName);
+        when(target.getLabel()).thenReturn(label);
+        return target;
     }
 }
