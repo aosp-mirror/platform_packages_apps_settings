@@ -86,7 +86,8 @@ public class PrivateSpaceSafetySourceTest {
     @Test
     public void onDeviceRebootedEvent_whenSafetyCenterEnabled_setsData() {
         when(mSafetyCenterManagerWrapper.isEnabled(mContext)).thenReturn(true);
-        mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE);
+        mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE,
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
 
         PrivateSpaceSafetySource.setSafetySourceData(mContext, EVENT_TYPE_DEVICE_REBOOTED);
 
@@ -98,7 +99,8 @@ public class PrivateSpaceSafetySourceTest {
     @Test
     public void setSafetySourceData_whenFeatureDisabled_setsNullData() {
         when(mSafetyCenterManagerWrapper.isEnabled(mContext)).thenReturn(true);
-        mSetFlagsRule.disableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE);
+        mSetFlagsRule.disableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE,
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
 
         PrivateSpaceSafetySource.setSafetySourceData(mContext, EVENT_TYPE_DEVICE_REBOOTED);
 
@@ -113,7 +115,8 @@ public class PrivateSpaceSafetySourceTest {
     @Test
     public void setSafetySourceData_setsEnabled() {
         when(mSafetyCenterManagerWrapper.isEnabled(mContext)).thenReturn(true);
-        mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE);
+        mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE,
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
 
         PrivateSpaceSafetySource.setSafetySourceData(mContext, EVENT_TYPE_DEVICE_REBOOTED);
 
@@ -129,7 +132,8 @@ public class PrivateSpaceSafetySourceTest {
     @Test
     public void setSafetySourceData_setsPsAuthenticatorIntent() {
         when(mSafetyCenterManagerWrapper.isEnabled(mContext)).thenReturn(true);
-        mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE);
+        mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE,
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
 
         PrivateSpaceSafetySource.setSafetySourceData(mContext, EVENT_TYPE_DEVICE_REBOOTED);
 

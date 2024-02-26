@@ -67,7 +67,8 @@ public class HidePrivateSpaceSensitiveNotificationsControllerTest {
 
         mSetFlagsRule.enableFlags(
                 android.multiuser.Flags.FLAG_ENABLE_PS_SENSITIVE_NOTIFICATIONS_TOGGLE);
-        mSetFlagsRule.enableFlags(android.os.Flags.FLAG_ALLOW_PRIVATE_PROFILE);
+        mSetFlagsRule.enableFlags(android.os.Flags.FLAG_ALLOW_PRIVATE_PROFILE,
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
 
         mPrivateProfileId = PrivateSpaceMaintainer.getInstance(
                 mContext).getPrivateProfileHandle().getIdentifier();
@@ -143,7 +144,8 @@ public class HidePrivateSpaceSensitiveNotificationsControllerTest {
     public void getAvailabilityStatus_flagDisabled() {
         mSetFlagsRule.disableFlags(
                 android.multiuser.Flags.FLAG_ENABLE_PS_SENSITIVE_NOTIFICATIONS_TOGGLE);
-        mSetFlagsRule.disableFlags(android.os.Flags.FLAG_ALLOW_PRIVATE_PROFILE);
+        mSetFlagsRule.disableFlags(android.os.Flags.FLAG_ALLOW_PRIVATE_PROFILE,
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
         Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.LOCK_SCREEN_SHOW_NOTIFICATIONS, 1);
         Settings.Secure.putInt(mContext.getContentResolver(),

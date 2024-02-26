@@ -77,7 +77,8 @@ public class PrivateSpaceDeletionProgressFragmentTest {
     @Test
     @UiThreadTest
     public void verifyMetricsConstant() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE);
+        mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE,
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
         assertThat(mFragment.getMetricsCategory()).isEqualTo(SettingsEnums.PRIVATE_SPACE_SETTINGS);
     }
 
@@ -87,7 +88,8 @@ public class PrivateSpaceDeletionProgressFragmentTest {
     public void deletePrivateSpace_deletesPS() {
         PrivateSpaceDeletionProgressFragment spyFragment = spy(mFragment);
         doNothing().when(spyFragment).showSuccessfulDeletionToast();
-        mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE);
+        mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE,
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
 
         mPrivateSpaceMaintainer.createPrivateSpace();
         spyFragment.deletePrivateSpace();
@@ -100,7 +102,8 @@ public class PrivateSpaceDeletionProgressFragmentTest {
     public void deletePrivateSpace_onDeletion_showsDeletedToast() {
         PrivateSpaceDeletionProgressFragment spyFragment = spy(mFragment);
         doNothing().when(spyFragment).showSuccessfulDeletionToast();
-        mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE);
+        mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE,
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
 
         mPrivateSpaceMaintainer.createPrivateSpace();
         spyFragment.deletePrivateSpace();
@@ -123,7 +126,8 @@ public class PrivateSpaceDeletionProgressFragmentTest {
         spyFragment.setPrivateSpaceMaintainer(injector);
         doReturn(DELETE_PS_ERROR_INTERNAL).when(mPrivateSpaceMaintainerMock).deletePrivateSpace();
         doNothing().when(spyFragment).showDeletionInternalErrorToast();
-        mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE);
+        mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE,
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
 
         spyFragment.deletePrivateSpace();
 
