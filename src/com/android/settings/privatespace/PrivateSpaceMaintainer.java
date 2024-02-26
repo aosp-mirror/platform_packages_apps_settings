@@ -78,7 +78,8 @@ public class PrivateSpaceMaintainer {
      */
     @VisibleForTesting
     public final synchronized boolean createPrivateSpace() {
-        if (!Flags.allowPrivateProfile()) {
+        if (!Flags.allowPrivateProfile()
+                || !android.multiuser.Flags.enablePrivateSpaceFeatures()) {
             return false;
         }
         // Check if Private space already exists
@@ -146,7 +147,8 @@ public class PrivateSpaceMaintainer {
 
     /** Returns true if the Private space exists. */
     public synchronized boolean doesPrivateSpaceExist() {
-        if (!Flags.allowPrivateProfile()) {
+        if (!Flags.allowPrivateProfile()
+                || !android.multiuser.Flags.enablePrivateSpaceFeatures()) {
             return false;
         }
         if (mUserHandle != null) {
@@ -322,6 +324,7 @@ public class PrivateSpaceMaintainer {
 
     private boolean isPrivateSpaceAutoLockSupported() {
         return android.os.Flags.allowPrivateProfile()
-                && android.multiuser.Flags.supportAutolockForPrivateSpace();
+                && android.multiuser.Flags.supportAutolockForPrivateSpace()
+                && android.multiuser.Flags.enablePrivateSpaceFeatures();
     }
 }

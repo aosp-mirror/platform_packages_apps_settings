@@ -77,7 +77,8 @@ public class PrivateSpaceAuthenticationActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (Flags.allowPrivateProfile()) {
+        if (Flags.allowPrivateProfile()
+                && android.multiuser.Flags.enablePrivateSpaceFeatures()) {
             ThemeHelper.trySetDynamicColor(this);
             mPrivateSpaceMaintainer =
                     new Injector().injectPrivateSpaceMaintainer(getApplicationContext());

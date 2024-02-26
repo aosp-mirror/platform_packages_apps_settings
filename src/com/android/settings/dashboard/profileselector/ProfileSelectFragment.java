@@ -238,7 +238,9 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
                 return WORK_TAB;
             }
             UserInfo userInfo = UserManager.get(activity).getUserInfo(userId);
-            if (Flags.allowPrivateProfile() && userInfo != null && userInfo.isPrivateProfile()) {
+            if (Flags.allowPrivateProfile()
+                    && android.multiuser.Flags.enablePrivateSpaceFeatures()
+                    && userInfo != null && userInfo.isPrivateProfile()) {
                 return PRIVATE_TAB;
             }
         }
@@ -248,7 +250,9 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
             return WORK_TAB;
         }
         UserInfo userInfo = UserManager.get(activity).getUserInfo(intentUser);
-        if (Flags.allowPrivateProfile() && userInfo != null && userInfo.isPrivateProfile()) {
+        if (Flags.allowPrivateProfile()
+                && android.multiuser.Flags.enablePrivateSpaceFeatures()
+                && userInfo != null && userInfo.isPrivateProfile()) {
             return PRIVATE_TAB;
         }
 
@@ -259,7 +263,7 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
         final DevicePolicyManager devicePolicyManager =
                 getContext().getSystemService(DevicePolicyManager.class);
 
-        if (Flags.allowPrivateProfile()) {
+        if (Flags.allowPrivateProfile() && android.multiuser.Flags.enablePrivateSpaceFeatures()) {
             int tabForPosition =
                     ((ViewPagerAdapter) mViewPager.getAdapter()).getTabForPosition(position);
 
@@ -330,7 +334,9 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
                             ProfileType.WORK,
                             bundle != null ? bundle.deepCopy() : new Bundle(),
                             workFragmentConstructor));
-                } else if (Flags.allowPrivateProfile() && userInfo.isPrivateProfile()) {
+                } else if (Flags.allowPrivateProfile()
+                        && android.multiuser.Flags.enablePrivateSpaceFeatures()
+                        && userInfo.isPrivateProfile()) {
                     if (!privateSpaceInfoProvider.isPrivateSpaceLocked(context)) {
                         fragments.add(createAndGetFragment(
                                 ProfileType.PRIVATE,

@@ -42,6 +42,7 @@ public class FaceFingerprintUnlockController extends CombinedBiometricStatusPref
     protected boolean isUserSupported() {
         return android.os.Flags.allowPrivateProfile()
                 && android.multiuser.Flags.enableBiometricsToUnlockPrivateSpace()
+                && android.multiuser.Flags.enablePrivateSpaceFeatures()
                 && mProfileUserId != UserHandle.USER_NULL;
     }
 

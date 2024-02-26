@@ -87,6 +87,7 @@ public class UserAdapter extends BaseAdapter {
                 return resources.getString(WORK_CATEGORY_HEADER,
                         () -> context.getString(com.android.settingslib.R.string.category_work));
             } else if (android.os.Flags.allowPrivateProfile()
+                    && android.multiuser.Flags.enablePrivateSpaceFeatures()
                     && mUserManager.getUserInfo(userId).isPrivateProfile()) {
                 return resources.getString(PRIVATE_CATEGORY_HEADER,
                         () -> context.getString(com.android.settingslib.R.string.category_private));

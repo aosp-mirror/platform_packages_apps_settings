@@ -32,7 +32,8 @@ public class PrivateSpaceDashboardFragment extends DashboardFragment {
 
     @Override
     public void onCreate(Bundle icicle) {
-        if (android.os.Flags.allowPrivateProfile()) {
+        if (android.os.Flags.allowPrivateProfile()
+                && android.multiuser.Flags.enablePrivateSpaceFeatures()) {
             super.onCreate(icicle);
             if (icicle == null
                     && getIntent().getBooleanExtra(EXTRA_SHOW_PRIVATE_SPACE_UNLOCKED, false)) {
