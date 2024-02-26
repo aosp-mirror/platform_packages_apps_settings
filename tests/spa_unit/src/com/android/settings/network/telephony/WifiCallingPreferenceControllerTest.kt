@@ -29,7 +29,7 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceManager
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.android.settings.network.telephony.ims.ImsMmTelRepository
+import com.android.settings.network.telephony.wificalling.WifiCallingRepository
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flowOf
@@ -60,9 +60,8 @@ class WifiCallingPreferenceControllerTest {
 
     private var callState = TelephonyManager.CALL_STATE_IDLE
 
-    private object FakeImsMmTelRepository : ImsMmTelRepository {
-        var wiFiMode = ImsMmTelManager.WIFI_MODE_UNKNOWN
-        override fun getWiFiCallingMode() = wiFiMode
+    private val mockWifiCallingRepository = mock<WifiCallingRepository> {
+        on { getWiFiCallingMode() } doReturn ImsMmTelManager.WIFI_MODE_UNKNOWN
     }
 
     private val callingPreferenceCategoryController =
@@ -72,7 +71,7 @@ class WifiCallingPreferenceControllerTest {
         context = context,
         key = TEST_KEY,
         callStateFlowFactory = { flowOf(callState) },
-        imsMmTelRepositoryFactory = { FakeImsMmTelRepository },
+        wifiCallingRepository = { mockWifiCallingRepository },
     ).init(subId = SUB_ID, callingPreferenceCategoryController)
 
     @Before
@@ -86,7 +85,9 @@ class WifiCallingPreferenceControllerTest {
         mockTelecomManager.stub {
             on { getSimCallManagerForSubscription(SUB_ID) } doReturn null
         }
-        FakeImsMmTelRepository.wiFiMode = ImsMmTelManager.WIFI_MODE_WIFI_ONLY
+        mockWifiCallingRepository.stub {
+            on { getWiFiCallingMode() } doReturn ImsMmTelManager.WIFI_MODE_WIFI_ONLY
+        }
 
         controller.onViewCreated(TestLifecycleOwner())
         delay(100)

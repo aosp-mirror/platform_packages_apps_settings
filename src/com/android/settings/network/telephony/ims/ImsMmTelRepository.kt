@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 The Android Open Source Project
+ * Copyright (C) 2024 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,9 +17,6 @@
 package com.android.settings.network.telephony.ims
 
 import android.content.Context
-import android.telephony.CarrierConfigManager
-import android.telephony.CarrierConfigManager.KEY_USE_WFC_HOME_NETWORK_MODE_IN_ROAMING_NETWORK_BOOL
-import android.telephony.TelephonyManager
 import android.telephony.ims.ImsManager
 import android.telephony.ims.ImsMmTelManager
 import android.telephony.ims.ImsMmTelManager.WiFiCallingMode
@@ -27,7 +24,7 @@ import android.util.Log
 
 interface ImsMmTelRepository {
     @WiFiCallingMode
-    fun getWiFiCallingMode(): Int
+    fun getWiFiCallingMode(useRoamingMode: Boolean): Int
 }
 
 class ImsMmTelRepositoryImpl(
@@ -36,30 +33,17 @@ class ImsMmTelRepositoryImpl(
     private val imsMmTelManager: ImsMmTelManager = ImsManager(context).getImsMmTelManager(subId),
 ) : ImsMmTelRepository {
 
-    private val telephonyManager = context.getSystemService(TelephonyManager::class.java)!!
-        .createForSubscriptionId(subId)
-
-    private val carrierConfigManager = context.getSystemService(CarrierConfigManager::class.java)!!
-
     @WiFiCallingMode
-    override fun getWiFiCallingMode(): Int = try {
+    override fun getWiFiCallingMode(useRoamingMode: Boolean): Int = try {
         when {
             !imsMmTelManager.isVoWiFiSettingEnabled -> ImsMmTelManager.WIFI_MODE_UNKNOWN
-
-            telephonyManager.isNetworkRoaming && !useWfcHomeModeForRoaming() ->
-                imsMmTelManager.getVoWiFiRoamingModeSetting()
-
+            useRoamingMode -> imsMmTelManager.getVoWiFiRoamingModeSetting()
             else -> imsMmTelManager.getVoWiFiModeSetting()
         }
     } catch (e: IllegalArgumentException) {
-        Log.w(TAG, "getWiFiCallingMode failed subId=$subId", e)
+        Log.w(TAG, "[$subId] getWiFiCallingMode failed useRoamingMode=$useRoamingMode", e)
         ImsMmTelManager.WIFI_MODE_UNKNOWN
     }
-
-    private fun useWfcHomeModeForRoaming(): Boolean =
-        carrierConfigManager
-            .getConfigForSubId(subId, KEY_USE_WFC_HOME_NETWORK_MODE_IN_ROAMING_NETWORK_BOOL)
-            .getBoolean(KEY_USE_WFC_HOME_NETWORK_MODE_IN_ROAMING_NETWORK_BOOL)
 
     private companion object {
         private const val TAG = "ImsMmTelRepository"
