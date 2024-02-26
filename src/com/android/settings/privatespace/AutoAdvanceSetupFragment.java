@@ -16,6 +16,8 @@
 
 package com.android.settings.privatespace;
 
+import static android.text.Layout.BREAK_STRATEGY_SIMPLE;
+
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
@@ -60,10 +62,10 @@ public class AutoAdvanceSetupFragment extends InstrumentedFragment {
             ImmutableList.of(
                     new Pair(R.string.private_space_notifications_hidden_title,
                             R.drawable.private_space_setup_notification_illustration),
-                    new Pair(R.string.private_space_share_photos_title,
-                            R.drawable.private_space_setup_sharing_illustration),
                     new Pair(R.string.private_space_apps_installed_title,
-                            R.drawable.private_space_setup_preinstalled_illustration));
+                            R.drawable.private_space_setup_preinstalled_illustration),
+                    new Pair(R.string.private_space_explore_settings_title,
+                            R.drawable.private_space_setup_sharing_illustration));
 
     private Runnable mUpdateScreenResources =
             new Runnable() {
@@ -118,6 +120,7 @@ public class AutoAdvanceSetupFragment extends InstrumentedFragment {
                 (GlifLayout)
                         inflater.inflate(R.layout.private_space_advancing_screen, container, false);
         mRootView.getHeaderTextView().setMaxLines(HEADER_TEXT_MAX_LINES);
+        mRootView.getHeaderTextView().setBreakStrategy(BREAK_STRATEGY_SIMPLE);
         updateHeaderAndImage();
         mHandler = new Handler(Looper.getMainLooper());
         mHandler.postDelayed(mUpdateScreenResources, DELAY_BETWEEN_SCREENS);
