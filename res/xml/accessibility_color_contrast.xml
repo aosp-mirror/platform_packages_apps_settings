@@ -30,6 +30,14 @@
         android:layout="@layout/accessibility_color_contrast_selector"
         settings:controller="com.android.settings.accessibility.ContrastSelectorPreferenceController"/>
 
+    <SwitchPreferenceCompat
+        android:key="toggle_high_text_contrast_preference"
+        android:persistent="false"
+        android:summary="@string/accessibility_toggle_maximize_text_contrast_preference_summary"
+        android:title="@string/accessibility_toggle_maximize_text_contrast_preference_title"
+        settings:controller=
+            "com.android.settings.accessibility.HighTextContrastPreferenceController" />
+
     <com.android.settings.accessibility.AccessibilityFooterPreference
         android:title="@string/color_contrast_note"
         android:selectable="false"
