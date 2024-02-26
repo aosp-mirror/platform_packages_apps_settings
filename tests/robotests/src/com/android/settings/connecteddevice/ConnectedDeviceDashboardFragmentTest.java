@@ -20,19 +20,25 @@ import static com.android.settings.connecteddevice.ConnectedDeviceDashboardFragm
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.platform.test.flag.junit.CheckFlagsRule;
 import android.platform.test.flag.junit.DeviceFlagsValueProvider;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
+import com.android.settings.connecteddevice.fastpair.FastPairDeviceUpdater;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerListHelper;
+import com.android.settings.flags.Flags;
 import com.android.settings.slices.SlicePreferenceController;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
 import com.android.settings.testutils.shadow.ShadowUserManager;
@@ -60,6 +66,8 @@ public class ConnectedDeviceDashboardFragmentTest {
     @Rule
     public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
 
+    @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+
     private static final String KEY_NEARBY_DEVICES = "bt_nearby_slice";
     private static final String KEY_DISCOVERABLE_FOOTER = "discoverable_footer";
     private static final String KEY_SAVED_DEVICE_SEE_ALL = "previously_connected_devices_see_all";
@@ -75,8 +83,11 @@ public class ConnectedDeviceDashboardFragmentTest {
     private static final String TEST_ACTION = "com.testapp.settings.ACTION_START";
 
     @Mock private PackageManager mPackageManager;
+    @Mock private FastPairDeviceUpdater mFastPairDeviceUpdater;
     private Context mContext;
     private ConnectedDeviceDashboardFragment mFragment;
+    private FakeFeatureFactory mFeatureFactory;
+    private AvailableMediaDeviceGroupController mMediaDeviceGroupController;
 
     @Before
     public void setUp() {
@@ -84,6 +95,22 @@ public class ConnectedDeviceDashboardFragmentTest {
 
         mContext = spy(RuntimeEnvironment.application);
         mFragment = new ConnectedDeviceDashboardFragment();
+        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_SUBSEQUENT_PAIR_SETTINGS_INTEGRATION);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
+        when(mFeatureFactory
+                        .getFastPairFeatureProvider()
+                        .getFastPairDeviceUpdater(
+                                any(Context.class), any(DevicePreferenceCallback.class)))
+                .thenReturn(mFastPairDeviceUpdater);
+        when(mFeatureFactory
+                        .getAudioSharingFeatureProvider()
+                        .createAudioSharingDevicePreferenceController(mContext, null, null))
+                .thenReturn(null);
+        mMediaDeviceGroupController = new AvailableMediaDeviceGroupController(mContext, null, null);
+        when(mFeatureFactory
+                        .getAudioSharingFeatureProvider()
+                        .createAvailableMediaDeviceGroupController(mContext, null, null))
+                .thenReturn(mMediaDeviceGroupController);
         doReturn(mPackageManager).when(mContext).getPackageManager();
         doReturn(true).when(mPackageManager).hasSystemFeature(PackageManager.FEATURE_BLUETOOTH);
     }
