@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 The Android Open Source Project
+ * Copyright (C) 2024 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,6 +38,7 @@ import org.robolectric.shadow.api.Shadow;
 import java.util.ArrayList;
 import java.util.List;
 
+/** Robolectric shadow for the AudioManager. */
 @Implements(value = AudioManager.class)
 public class ShadowAudioManager extends org.robolectric.shadows.ShadowAudioManager {
     private int mRingerMode;
@@ -58,11 +59,13 @@ public class ShadowAudioManager extends org.robolectric.shadows.ShadowAudioManag
         mRingerMode = mode;
     }
 
+    /** Register audio device callback. */
     @Implementation
     public void registerAudioDeviceCallback(AudioDeviceCallback callback, Handler handler) {
         mDeviceCallbacks.add(callback);
     }
 
+    /** Unregister audio device callback. */
     @Implementation
     public void unregisterAudioDeviceCallback(AudioDeviceCallback callback) {
         if (mDeviceCallbacks.contains(callback)) {
@@ -79,10 +82,12 @@ public class ShadowAudioManager extends org.robolectric.shadows.ShadowAudioManag
         return mMusicActiveRemotely;
     }
 
+    /** Set output device. */
     public void setOutputDevice(int deviceCodes) {
         mDeviceCodes = deviceCodes;
     }
 
+    /** Get devices for stream. */
     @Implementation
     public int getDevicesForStream(int streamType) {
         switch (streamType) {
