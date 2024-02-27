@@ -288,19 +288,11 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
             final Preference pref = new Preference(getPrefContext());
             pref.setTitle(hardKeyboardDeviceInfo.mDeviceName);
             if (mIsNewKeyboardSettings) {
-                List<String> suitableImes = new ArrayList<>();
-                suitableImes.addAll(
-                        NewKeyboardSettingsUtils.getSuitableImeLabels(
-                                getContext(), mImm, UserHandle.myUserId()));
-                if (!suitableImes.isEmpty()) {
-                    String summary = suitableImes.get(0);
-                    StringBuilder result = new StringBuilder(summary);
-                    for (int i = 1; i < suitableImes.size(); i++) {
-                        result.append(", ").append(suitableImes.get(i));
-                    }
-                    pref.setSummary(result.toString());
-                } else {
-                    pref.setSummary(hardKeyboardDeviceInfo.mLayoutLabel);
+                String currentLayout =
+                        NewKeyboardSettingsUtils.getSelectedKeyboardLayoutLabelForUser(getContext(),
+                                UserHandle.myUserId(), hardKeyboardDeviceInfo.mDeviceIdentifier);
+                if (currentLayout != null) {
+                    pref.setSummary(currentLayout);
                 }
                 pref.setOnPreferenceClickListener(
                         preference -> {
