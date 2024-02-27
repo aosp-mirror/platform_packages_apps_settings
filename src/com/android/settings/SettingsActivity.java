@@ -38,6 +38,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.permission.flags.Flags;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -828,10 +829,27 @@ public class SettingsActivity extends SettingsBaseActivity
             if (ai == null || ai.metaData == null) return;
             mFragmentClass = ai.metaData.getString(META_DATA_KEY_FRAGMENT_CLASS);
             mHighlightMenuKey = ai.metaData.getString(META_DATA_KEY_HIGHLIGHT_MENU_KEY);
+            /* TODO(b/327036144) Once the Flags.walletRoleEnabled() is rolled out, we will replace
+            value for the fragment class within the com.android.settings.nfc.PaymentSettings
+            activity with com.android.settings.connecteddevice.NfcAndPaymentFragment so that this
+            code can be removed.
+            */
+            if (shouldOverrideContactlessPaymentRouting()) {
+                overrideContactlessPaymentRouting();
+            }
         } catch (NameNotFoundException nnfe) {
             // No recovery
             Log.d(LOG_TAG, "Cannot get Metadata for: " + getComponentName().toString());
         }
+    }
+
+    private boolean shouldOverrideContactlessPaymentRouting() {
+        return Flags.walletRoleEnabled()
+                && mFragmentClass.equals("com.android.settings.nfc.PaymentSettings");
+    }
+
+    private void overrideContactlessPaymentRouting() {
+        mFragmentClass = "com.android.settings.connecteddevice.NfcAndPaymentFragment";
     }
 
     // give subclasses access to the Next button
