@@ -47,7 +47,6 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.utils.AnnotationSpan;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnCreate;
-import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
 
 import java.util.ArrayList;
@@ -55,7 +54,7 @@ import java.util.List;
 
 /** Controller that shows the magnification area mode summary and the preference click behavior. */
 public class MagnificationModePreferenceController extends BasePreferenceController implements
-        DialogCreatable, LifecycleObserver, OnCreate, OnResume, OnSaveInstanceState {
+        DialogCreatable, LifecycleObserver, OnCreate, OnSaveInstanceState {
 
     static final String PREF_KEY = "screen_magnification_mode";
     private static final int DIALOG_ID_BASE = 10;
@@ -295,12 +294,6 @@ public class MagnificationModePreferenceController extends BasePreferenceControl
     void onMagnificationTripleTapWarningDialogPositiveButtonClicked(
             DialogInterface dialogInterface, int which) {
         updateCapabilitiesAndSummary(mModeCache);
-    }
-
-    // TODO(b/186731461): Remove it when this controller is used in DashBoardFragment only.
-    @Override
-    public void onResume() {
-        updateState(mModePreference);
     }
 
     /**
