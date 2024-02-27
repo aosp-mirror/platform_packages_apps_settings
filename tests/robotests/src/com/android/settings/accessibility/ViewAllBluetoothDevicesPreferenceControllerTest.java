@@ -74,13 +74,13 @@ public class ViewAllBluetoothDevicesPreferenceControllerTest {
     }
 
     @Test
-    public void handlePreferenceTreeClick_expectedPreference_launchBluetoothPairingDetail() {
-        doNothing().when(mController).launchBluetoothPairingDetail();
+    public void handlePreferenceTreeClick_expectedPreference_launchConnectedDevicePage() {
+        doNothing().when(mController).launchConnectedDevicePage();
         mPreference.setKey(TEST_KEY);
 
         boolean status = mController.handlePreferenceTreeClick(mPreference);
 
-        verify(mController).launchBluetoothPairingDetail();
+        verify(mController).launchConnectedDevicePage();
         assertThat(status).isTrue();
     }
 }
