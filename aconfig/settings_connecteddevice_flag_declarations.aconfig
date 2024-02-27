@@ -9,20 +9,6 @@ flag {
 }
 
 flag {
-  name: "enable_le_audio_sharing"
-  namespace: "pixel_cross_device_control"
-  description: "Gates whether to enable LE audio sharing"
-  bug: "305620450"
-}
-
-flag {
-  name: "enable_le_audio_qr_code_private_broadcast_sharing"
-  namespace: "pixel_cross_device_control"
-  description: "Gates whether to enable LE audio private broadcast sharing via QR code"
-  bug: "308368124"
-}
-
-flag {
   name: "enable_auth_challenge_for_usb_preferences"
   namespace: "safety_center"
   description: "Gates whether to require an auth challenge for changing USB preferences"
