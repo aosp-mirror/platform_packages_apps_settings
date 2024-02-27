@@ -331,8 +331,8 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
             controllers.add(new BluetoothDetailsExtraOptionsController(context, this, mCachedDevice,
                     lifecycle));
             BluetoothDetailsHearingDeviceController hearingDeviceController =
-                    new BluetoothDetailsHearingDeviceController(context, this, mCachedDevice,
-                            lifecycle);
+                    new BluetoothDetailsHearingDeviceController(context, this, mManager,
+                            mCachedDevice, lifecycle);
             controllers.add(hearingDeviceController);
             hearingDeviceController.initSubControllers(isLaunchFromHearingDevicePage());
             controllers.addAll(hearingDeviceController.getSubControllers());

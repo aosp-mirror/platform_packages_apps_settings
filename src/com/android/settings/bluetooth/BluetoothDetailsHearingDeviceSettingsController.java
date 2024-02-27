@@ -17,6 +17,7 @@
 package com.android.settings.bluetooth;
 
 import static com.android.settings.bluetooth.BluetoothDetailsHearingDeviceController.KEY_HEARING_DEVICE_GROUP;
+import static com.android.settings.bluetooth.BluetoothDetailsHearingDeviceController.ORDER_HEARING_DEVICE_SETTINGS;
 
 import android.content.Context;
 import android.text.TextUtils;
@@ -87,6 +88,7 @@ public class BluetoothDetailsHearingDeviceSettingsController extends BluetoothDe
     private Preference createHearingDeviceSettingsPreference(Context context) {
         final ArrowPreference preference = new ArrowPreference(context);
         preference.setKey(KEY_HEARING_DEVICE_SETTINGS);
+        preference.setOrder(ORDER_HEARING_DEVICE_SETTINGS);
         preference.setTitle(context.getString(R.string.bluetooth_hearing_device_settings_title));
         preference.setSummary(
                 context.getString(R.string.bluetooth_hearing_device_settings_summary));

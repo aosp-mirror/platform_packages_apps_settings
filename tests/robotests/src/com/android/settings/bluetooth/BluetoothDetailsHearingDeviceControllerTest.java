@@ -20,6 +20,15 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.when;
 
+import android.platform.test.annotations.RequiresFlagsDisabled;
+import android.platform.test.annotations.RequiresFlagsEnabled;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
+
+import com.android.settings.accessibility.Flags;
+import com.android.settingslib.bluetooth.LocalBluetoothManager;
+import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,10 +43,19 @@ public class BluetoothDetailsHearingDeviceControllerTest extends
         BluetoothDetailsControllerTestBase {
 
     @Rule
+    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
+
+    @Rule
     public final MockitoRule mockito = MockitoJUnit.rule();
 
+    @Mock
+    private LocalBluetoothManager mLocalManager;
+    @Mock
+    private LocalBluetoothProfileManager mProfileManager;
+    @Mock
     private BluetoothDetailsHearingDeviceController mHearingDeviceController;
-
+    @Mock
+    private BluetoothDetailsHearingAidsPresetsController mPresetsController;
     @Mock
     private BluetoothDetailsHearingDeviceSettingsController mHearingDeviceSettingsController;
 
@@ -45,9 +63,11 @@ public class BluetoothDetailsHearingDeviceControllerTest extends
     public void setUp() {
         super.setUp();
 
+        when(mLocalManager.getProfileManager()).thenReturn(mProfileManager);
         mHearingDeviceController = new BluetoothDetailsHearingDeviceController(mContext,
-                mFragment, mCachedDevice, mLifecycle);
-        mHearingDeviceController.setSubControllers(mHearingDeviceSettingsController);
+                mFragment, mLocalManager, mCachedDevice, mLifecycle);
+        mHearingDeviceController.setSubControllers(mHearingDeviceSettingsController,
+                mPresetsController);
     }
 
     @Test
@@ -58,8 +78,16 @@ public class BluetoothDetailsHearingDeviceControllerTest extends
     }
 
     @Test
+    public void isAvailable_presetsControlsAvailable_returnTrue() {
+        when(mPresetsController.isAvailable()).thenReturn(true);
+
+        assertThat(mHearingDeviceController.isAvailable()).isTrue();
+    }
+
+    @Test
     public void isAvailable_noControllersAvailable_returnFalse() {
         when(mHearingDeviceSettingsController.isAvailable()).thenReturn(false);
+        when(mPresetsController.isAvailable()).thenReturn(false);
 
         assertThat(mHearingDeviceController.isAvailable()).isFalse();
     }
@@ -79,5 +107,23 @@ public class BluetoothDetailsHearingDeviceControllerTest extends
 
         assertThat(mHearingDeviceController.getSubControllers().stream().anyMatch(
                 c -> c instanceof BluetoothDetailsHearingDeviceSettingsController)).isTrue();
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_ENABLE_HEARING_AID_PRESET_CONTROL)
+    public void initSubControllers_flagEnabled_presetControllerExist() {
+        mHearingDeviceController.initSubControllers(false);
+
+        assertThat(mHearingDeviceController.getSubControllers().stream().anyMatch(
+                c -> c instanceof BluetoothDetailsHearingAidsPresetsController)).isTrue();
+    }
+
+    @Test
+    @RequiresFlagsDisabled(Flags.FLAG_ENABLE_HEARING_AID_PRESET_CONTROL)
+    public void initSubControllers_flagDisabled_presetControllerNotExist() {
+        mHearingDeviceController.initSubControllers(false);
+
+        assertThat(mHearingDeviceController.getSubControllers().stream().anyMatch(
+                c -> c instanceof BluetoothDetailsHearingAidsPresetsController)).isFalse();
     }
 }

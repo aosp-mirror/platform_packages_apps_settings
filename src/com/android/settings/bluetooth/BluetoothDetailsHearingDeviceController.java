@@ -22,7 +22,9 @@ import androidx.annotation.NonNull;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.accessibility.Flags;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import com.google.common.annotations.VisibleForTesting;
@@ -37,24 +39,32 @@ import java.util.List;
  * category controller.
  */
 public class BluetoothDetailsHearingDeviceController extends BluetoothDetailsController {
+
+    public static final int ORDER_HEARING_DEVICE_SETTINGS = 1;
+    public static final int ORDER_HEARING_AIDS_PRESETS = 2;
     static final String KEY_HEARING_DEVICE_GROUP = "hearing_device_group";
 
     private final List<BluetoothDetailsController> mControllers = new ArrayList<>();
     private Lifecycle mLifecycle;
+    private LocalBluetoothManager mManager;
 
     public BluetoothDetailsHearingDeviceController(@NonNull Context context,
             @NonNull PreferenceFragmentCompat fragment,
+            @NonNull LocalBluetoothManager manager,
             @NonNull CachedBluetoothDevice device,
             @NonNull Lifecycle lifecycle) {
         super(context, fragment, device, lifecycle);
+        mManager = manager;
         mLifecycle = lifecycle;
     }
 
     @VisibleForTesting
     void setSubControllers(
-            BluetoothDetailsHearingDeviceSettingsController hearingDeviceSettingsController) {
+            BluetoothDetailsHearingDeviceSettingsController hearingDeviceSettingsController,
+            BluetoothDetailsHearingAidsPresetsController presetsController) {
         mControllers.clear();
         mControllers.add(hearingDeviceSettingsController);
+        mControllers.add(presetsController);
     }
 
     @Override
@@ -92,6 +102,10 @@ public class BluetoothDetailsHearingDeviceController extends BluetoothDetailsCon
         if (!isLaunchFromHearingDevicePage) {
             mControllers.add(new BluetoothDetailsHearingDeviceSettingsController(mContext,
                     mFragment, mCachedDevice, mLifecycle));
+        }
+        if (Flags.enableHearingAidPresetControl()) {
+            mControllers.add(new BluetoothDetailsHearingAidsPresetsController(mContext, mFragment,
+                    mManager, mCachedDevice, mLifecycle));
         }
     }
 
