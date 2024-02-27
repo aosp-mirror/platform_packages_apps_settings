@@ -326,16 +326,16 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
                     lifecycle));
             controllers.add(new BluetoothDetailsPairOtherController(context, this, mCachedDevice,
                     lifecycle));
-            // Don't need to show hearing device again when launched from the same page.
-            if (!isLaunchFromHearingDevicePage()) {
-                controllers.add(new BluetoothDetailsHearingDeviceControlsController(context, this,
-                        mCachedDevice, lifecycle));
-            }
-            controllers.add(new BluetoothDetailsDataSyncController(context, this,
-                    mCachedDevice, lifecycle));
-            controllers.add(
-                    new BluetoothDetailsExtraOptionsController(
-                            context, this, mCachedDevice, lifecycle));
+            controllers.add(new BluetoothDetailsDataSyncController(context, this, mCachedDevice,
+                    lifecycle));
+            controllers.add(new BluetoothDetailsExtraOptionsController(context, this, mCachedDevice,
+                    lifecycle));
+            BluetoothDetailsHearingDeviceController hearingDeviceController =
+                    new BluetoothDetailsHearingDeviceController(context, this, mCachedDevice,
+                            lifecycle);
+            controllers.add(hearingDeviceController);
+            hearingDeviceController.initSubControllers(isLaunchFromHearingDevicePage());
+            controllers.addAll(hearingDeviceController.getSubControllers());
         }
         return controllers;
     }

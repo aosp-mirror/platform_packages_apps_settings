@@ -39,23 +39,24 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 
-/** Tests for {@link BluetoothDetailsHearingDeviceControlsController}. */
+/** Tests for {@link BluetoothDetailsHearingDeviceSettingsController}. */
 @RunWith(RobolectricTestRunner.class)
-public class BluetoothDetailsHearingDeviceControlsControllerTest extends
+public class BluetoothDetailsHearingDeviceSettingsControllerTest extends
         BluetoothDetailsControllerTestBase {
+
     @Rule
     public final MockitoRule mockito = MockitoJUnit.rule();
 
     @Captor
     private ArgumentCaptor<Intent> mIntentArgumentCaptor;
-    private BluetoothDetailsHearingDeviceControlsController mController;
+    private BluetoothDetailsHearingDeviceSettingsController mController;
 
     @Override
     public void setUp() {
         super.setUp();
 
         FakeFeatureFactory.setupForTest();
-        mController = new BluetoothDetailsHearingDeviceControlsController(mActivity, mFragment,
+        mController = new BluetoothDetailsHearingDeviceSettingsController(mActivity, mFragment,
                 mCachedDevice, mLifecycle);
         when(mCachedDevice.isHearingAidDevice()).thenReturn(true);
     }
@@ -75,12 +76,12 @@ public class BluetoothDetailsHearingDeviceControlsControllerTest extends
     }
 
     @Test
-    public void onPreferenceClick_hearingDeviceControlsKey_LaunchExpectedFragment() {
-        final Preference hearingControlsKeyPreference = new Preference(mContext);
-        hearingControlsKeyPreference.setKey(
-                BluetoothDetailsHearingDeviceControlsController.KEY_HEARING_DEVICE_CONTROLS);
+    public void onPreferenceClick_hearingDeviceSettingsKey_launchExpectedFragment() {
+        final Preference hearingDeviceSettingsPreference = new Preference(mContext);
+        hearingDeviceSettingsPreference.setKey(
+                BluetoothDetailsHearingDeviceSettingsController.KEY_HEARING_DEVICE_SETTINGS);
 
-        mController.onPreferenceClick(hearingControlsKeyPreference);
+        mController.onPreferenceClick(hearingDeviceSettingsPreference);
 
         assertStartActivityWithExpectedFragment(mActivity,
                 AccessibilityHearingAidsFragment.class.getName());

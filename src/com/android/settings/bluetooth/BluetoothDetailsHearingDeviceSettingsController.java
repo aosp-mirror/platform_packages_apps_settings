@@ -16,6 +16,8 @@
 
 package com.android.settings.bluetooth;
 
+import static com.android.settings.bluetooth.BluetoothDetailsHearingDeviceController.KEY_HEARING_DEVICE_GROUP;
+
 import android.content.Context;
 import android.text.TextUtils;
 
@@ -36,15 +38,13 @@ import com.google.common.annotations.VisibleForTesting;
 /**
  * The controller of the hearing device settings to launch Hearing device page.
  */
-public class BluetoothDetailsHearingDeviceControlsController extends BluetoothDetailsController
+public class BluetoothDetailsHearingDeviceSettingsController extends BluetoothDetailsController
         implements Preference.OnPreferenceClickListener {
 
     @VisibleForTesting
-    static final String KEY_DEVICE_CONTROLS_GENERAL_GROUP = "device_controls_general";
-    @VisibleForTesting
-    static final String KEY_HEARING_DEVICE_CONTROLS = "hearing_device_controls";
+    static final String KEY_HEARING_DEVICE_SETTINGS = "hearing_device_settings";
 
-    public BluetoothDetailsHearingDeviceControlsController(Context context,
+    public BluetoothDetailsHearingDeviceSettingsController(Context context,
             PreferenceFragmentCompat fragment, CachedBluetoothDevice device, Lifecycle lifecycle) {
         super(context, fragment, device, lifecycle);
         lifecycle.addObserver(this);
@@ -57,37 +57,39 @@ public class BluetoothDetailsHearingDeviceControlsController extends BluetoothDe
 
     @Override
     protected void init(PreferenceScreen screen) {
-        if (!mCachedDevice.isHearingAidDevice()) {
+        if (!isAvailable()) {
             return;
         }
-
-        final PreferenceCategory prefCategory = screen.findPreference(getPreferenceKey());
-        final Preference pref = createHearingDeviceControlsPreference(prefCategory.getContext());
-        prefCategory.addPreference(pref);
+        final PreferenceCategory group = screen.findPreference(KEY_HEARING_DEVICE_GROUP);
+        final Preference pref = createHearingDeviceSettingsPreference(group.getContext());
+        group.addPreference(pref);
     }
 
     @Override
-    protected void refresh() {}
+    protected void refresh() {
+
+    }
 
     @Override
     public String getPreferenceKey() {
-        return KEY_DEVICE_CONTROLS_GENERAL_GROUP;
+        return KEY_HEARING_DEVICE_SETTINGS;
     }
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
-        if (TextUtils.equals(preference.getKey(), KEY_HEARING_DEVICE_CONTROLS)) {
+        if (TextUtils.equals(preference.getKey(), KEY_HEARING_DEVICE_SETTINGS)) {
             launchAccessibilityHearingDeviceSettings();
             return true;
         }
         return false;
     }
 
-    private Preference createHearingDeviceControlsPreference(Context context) {
+    private Preference createHearingDeviceSettingsPreference(Context context) {
         final ArrowPreference preference = new ArrowPreference(context);
-        preference.setKey(KEY_HEARING_DEVICE_CONTROLS);
-        preference.setTitle(context.getString(R.string.bluetooth_device_controls_title));
-        preference.setSummary(context.getString(R.string.bluetooth_device_controls_summary));
+        preference.setKey(KEY_HEARING_DEVICE_SETTINGS);
+        preference.setTitle(context.getString(R.string.bluetooth_hearing_device_settings_title));
+        preference.setSummary(
+                context.getString(R.string.bluetooth_hearing_device_settings_summary));
         preference.setOnPreferenceClickListener(this);
 
         return preference;
