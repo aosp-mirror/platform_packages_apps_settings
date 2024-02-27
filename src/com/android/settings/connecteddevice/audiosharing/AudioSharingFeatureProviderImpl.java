@@ -20,12 +20,13 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.lifecycle.Lifecycle;
 
+import com.android.settings.connecteddevice.AvailableMediaDeviceGroupController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 public class AudioSharingFeatureProviderImpl implements AudioSharingFeatureProvider {
 
@@ -36,6 +37,14 @@ public class AudioSharingFeatureProviderImpl implements AudioSharingFeatureProvi
             @Nullable DashboardFragment fragment,
             @Nullable Lifecycle lifecycle) {
         return null;
+    }
+
+    @Override
+    public AbstractPreferenceController createAvailableMediaDeviceGroupController(
+            @NonNull Context context,
+            @Nullable DashboardFragment fragment,
+            @Nullable Lifecycle lifecycle) {
+        return new AvailableMediaDeviceGroupController(context, fragment, lifecycle);
     }
 
     @Override

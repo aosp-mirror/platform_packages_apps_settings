@@ -22,6 +22,7 @@ import android.content.Context;
 
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.connecteddevice.AvailableMediaDeviceGroupController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
@@ -57,6 +58,14 @@ public class AudioSharingFeatureProviderImplTest {
                         mFeatureProvider.createAudioSharingDevicePreferenceController(
                                 mContext, mFragment, /* lifecycle= */ null))
                 .isNull();
+    }
+
+    @Test
+    public void createAvailableMediaDeviceGroupController_returnsNull() {
+        assertThat(
+                        mFeatureProvider.createAvailableMediaDeviceGroupController(
+                                mContext, /* fragment= */ null, /* lifecycle= */ null))
+                .isInstanceOf(AvailableMediaDeviceGroupController.class);
     }
 
     @Test

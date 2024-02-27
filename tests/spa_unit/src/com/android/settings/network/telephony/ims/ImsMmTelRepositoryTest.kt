@@ -17,11 +17,7 @@
 package com.android.settings.network.telephony.ims
 
 import android.content.Context
-import android.telephony.CarrierConfigManager
-import android.telephony.CarrierConfigManager.KEY_USE_WFC_HOME_NETWORK_MODE_IN_ROAMING_NETWORK_BOOL
-import android.telephony.TelephonyManager
 import android.telephony.ims.ImsMmTelManager
-import androidx.core.os.persistableBundleOf
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth.assertThat
@@ -30,21 +26,11 @@ import org.junit.runner.RunWith
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.doThrow
 import org.mockito.kotlin.mock
-import org.mockito.kotlin.spy
 import org.mockito.kotlin.stub
 
 @RunWith(AndroidJUnit4::class)
 class ImsMmTelRepositoryTest {
-    private val mockTelephonyManager = mock<TelephonyManager> {
-        on { createForSubscriptionId(SUB_ID) } doReturn mock
-    }
-
-    private val mockCarrierConfigManager = mock<CarrierConfigManager>()
-
-    private val context: Context = spy(ApplicationProvider.getApplicationContext()) {
-        on { getSystemService(TelephonyManager::class.java) } doReturn mockTelephonyManager
-        on { getSystemService(CarrierConfigManager::class.java) } doReturn mockCarrierConfigManager
-    }
+    private val context: Context = ApplicationProvider.getApplicationContext()
 
     private val mockImsMmTelManager = mock<ImsMmTelManager> {
         on { isVoWiFiSettingEnabled } doReturn true
@@ -60,42 +46,21 @@ class ImsMmTelRepositoryTest {
             on { isVoWiFiSettingEnabled } doReturn false
         }
 
-        val wiFiCallingMode = repository.getWiFiCallingMode()
+        val wiFiCallingMode = repository.getWiFiCallingMode(false)
 
         assertThat(wiFiCallingMode).isEqualTo(ImsMmTelManager.WIFI_MODE_UNKNOWN)
     }
 
     @Test
-    fun getWiFiCallingMode_roamingAndNotUseWfcHomeModeForRoaming_returnRoamingSetting() {
-        mockTelephonyManager.stub {
-            on { isNetworkRoaming } doReturn true
-        }
-        mockUseWfcHomeModeForRoaming(false)
-
-        val wiFiCallingMode = repository.getWiFiCallingMode()
+    fun getWiFiCallingMode_useRoamingMode_returnRoamingSetting() {
+        val wiFiCallingMode = repository.getWiFiCallingMode(true)
 
         assertThat(wiFiCallingMode).isEqualTo(mockImsMmTelManager.getVoWiFiRoamingModeSetting())
     }
 
     @Test
-    fun getWiFiCallingMode_roamingAndUseWfcHomeModeForRoaming_returnHomeSetting() {
-        mockTelephonyManager.stub {
-            on { isNetworkRoaming } doReturn true
-        }
-        mockUseWfcHomeModeForRoaming(true)
-
-        val wiFiCallingMode = repository.getWiFiCallingMode()
-
-        assertThat(wiFiCallingMode).isEqualTo(mockImsMmTelManager.getVoWiFiModeSetting())
-    }
-
-    @Test
-    fun getWiFiCallingMode_notRoaming_returnHomeSetting() {
-        mockTelephonyManager.stub {
-            on { isNetworkRoaming } doReturn false
-        }
-
-        val wiFiCallingMode = repository.getWiFiCallingMode()
+    fun getWiFiCallingMode_notSseRoamingMode_returnHomeSetting() {
+        val wiFiCallingMode = repository.getWiFiCallingMode(false)
 
         assertThat(wiFiCallingMode).isEqualTo(mockImsMmTelManager.getVoWiFiModeSetting())
     }
@@ -106,19 +71,9 @@ class ImsMmTelRepositoryTest {
             on { isVoWiFiSettingEnabled } doThrow IllegalArgumentException()
         }
 
-        val wiFiCallingMode = repository.getWiFiCallingMode()
+        val wiFiCallingMode = repository.getWiFiCallingMode(false)
 
         assertThat(wiFiCallingMode).isEqualTo(ImsMmTelManager.WIFI_MODE_UNKNOWN)
-    }
-
-    private fun mockUseWfcHomeModeForRoaming(config: Boolean) {
-        mockCarrierConfigManager.stub {
-            on {
-                getConfigForSubId(SUB_ID, KEY_USE_WFC_HOME_NETWORK_MODE_IN_ROAMING_NETWORK_BOOL)
-            } doReturn persistableBundleOf(
-                KEY_USE_WFC_HOME_NETWORK_MODE_IN_ROAMING_NETWORK_BOOL to config,
-            )
-        }
     }
 
     private companion object {
