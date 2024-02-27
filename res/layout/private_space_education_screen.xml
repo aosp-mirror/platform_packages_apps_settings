@@ -43,28 +43,28 @@
             android:src="@drawable/private_space_illustration"/>
         <TextView
             style="@style/PrivateSpaceSetupSubHeaderStyle"
-            android:text="@string/private_space_how_title"/>
+            android:text="@string/private_space_setup_sub_header"/>
         <RelativeLayout
             style="@style/PrivateSpaceSetupBulletPointLayoutStyle">
             <ImageView
                 android:id="@+id/lockIcon"
                 style="@style/PrivateSpaceBulletPointIconStyle"
-                android:src="@drawable/ic_lock_closed" />
+                android:src="@drawable/counter_1_24dp" />
             <TextView
                 style="@style/PrivateSpaceBulletPointTextFontStyle"
                 android:layout_toRightOf="@+id/lockIcon"
-                android:text="@string/private_space_protected_lock_text"/>
+                android:text="@string/private_space_separate_account_text"/>
         </RelativeLayout>
         <RelativeLayout
             style="@style/PrivateSpaceSetupBulletPointLayoutStyle">
             <ImageView
                 android:id="@+id/bellIcon"
                 style="@style/PrivateSpaceBulletPointIconStyle"
-                android:src="@drawable/ic_notifications" />
+                android:src="@drawable/counter_2_24dp" />
             <TextView
                 style="@style/PrivateSpaceBulletPointTextFontStyle"
                 android:layout_toRightOf="@+id/bellIcon"
-                android:text="@string/private_space_hidden_notifications_text"/>
+                android:text="@string/private_space_protected_lock_text"/>
         </RelativeLayout>
         <RelativeLayout
             style="@style/PrivateSpaceSetupBulletPointLayoutStyle"
@@ -73,11 +73,11 @@
             <ImageView
                 android:id="@+id/appsIcon"
                 style="@style/PrivateSpaceBulletPointIconStyle"
-                android:src="@drawable/ic_apps" />
+                android:src="@drawable/counter_3_24dp" />
             <TextView
                 style="@style/PrivateSpaceBulletPointTextFontStyle"
                 android:layout_toRightOf="@+id/appsIcon"
-                android:text="@string/private_space_access_bottom_text"/>
+                android:text="@string/private_space_install_apps_text"/>
         </RelativeLayout>
         <Space
             android:layout_width="wrap_content"

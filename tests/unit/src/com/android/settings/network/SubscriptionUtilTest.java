@@ -18,9 +18,13 @@ package com.android.settings.network;
 
 import static com.android.settings.network.SubscriptionUtil.KEY_UNIQUE_SUBSCRIPTION_DISPLAYNAME;
 import static com.android.settings.network.SubscriptionUtil.SUB_ID;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
@@ -30,6 +34,8 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.net.ConnectivityManager;
+import android.net.NetworkCapabilities;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -61,13 +67,15 @@ public class SubscriptionUtilTest {
     private static final CharSequence CARRIER_2 = "carrier2";
 
     private Context mContext;
+    private NetworkCapabilities mNetworkCapabilities;
+
     @Mock
     private SubscriptionManager mSubMgr;
     @Mock
     private TelephonyManager mTelMgr;
     @Mock
     private Resources mResources;
-
+    @Mock private ConnectivityManager mConnectivityManager;
 
     @Before
     public void setUp() {
@@ -75,6 +83,7 @@ public class SubscriptionUtilTest {
         mContext = spy(ApplicationProvider.getApplicationContext());
         when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubMgr);
         when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelMgr);
+        when(mContext.getSystemService(ConnectivityManager.class)).thenReturn(mConnectivityManager);
         when(mTelMgr.getUiccSlotsInfo()).thenReturn(null);
     }
 
@@ -587,5 +596,25 @@ public class SubscriptionUtilTest {
         String cacheString = originalName;
 
         assertThat(SubscriptionUtil.isValidCachedDisplayName(cacheString, originalName)).isFalse();
+    }
+
+    @Test
+    public void isConnectedToWifiOrDifferentSubId_hasWiFi_returnTrue() {
+        addNetworkTransportType(NetworkCapabilities.TRANSPORT_WIFI);
+
+        assertTrue(SubscriptionUtil.isConnectedToWifiOrDifferentSubId(mContext, SUBID_1));
+    }
+
+    @Test
+    public void isConnectedToWifiOrDifferentSubId_noData_and_noWiFi_returnFalse() {
+        addNetworkTransportType(NetworkCapabilities.TRANSPORT_BLUETOOTH);
+
+        assertFalse(SubscriptionUtil.isConnectedToWifiOrDifferentSubId(mContext, SUBID_1));
+    }
+
+    private void addNetworkTransportType(int networkType) {
+        mNetworkCapabilities =
+                new NetworkCapabilities.Builder().addTransportType(networkType).build();
+        when(mConnectivityManager.getNetworkCapabilities(any())).thenReturn(mNetworkCapabilities);
     }
 }

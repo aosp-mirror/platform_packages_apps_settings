@@ -17,13 +17,15 @@
 package com.android.settings.network;
 
 import static android.telephony.SubscriptionManager.INVALID_SIM_SLOT_INDEX;
-import static android.telephony.UiccSlotInfo.CARD_STATE_INFO_PRESENT;
 import static android.telephony.SubscriptionManager.PROFILE_CLASS_PROVISIONING;
+import static android.telephony.UiccSlotInfo.CARD_STATE_INFO_PRESENT;
 
 import static com.android.internal.util.CollectionUtils.emptyIfNull;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkCapabilities;
 import android.os.ParcelUuid;
 import android.provider.Settings;
 import android.telephony.PhoneNumberUtils;
@@ -560,6 +562,7 @@ public class SubscriptionUtil {
             Log.i(TAG, "Unable to delete subscription due to invalid subscription ID.");
             return;
         }
+        // TODO(b/325693582): Add verification if carrier is RAC and logic for new dialog
         context.startActivity(DeleteEuiccSubscriptionDialogActivity.getIntent(context, subId));
     }
 
@@ -831,5 +834,30 @@ public class SubscriptionUtil {
             return false;
         }
         return true;
+    }
+
+    /**
+     * Returns {@code true} if device is connected to Wi-Fi or mobile data provided by a different
+     * subId.
+     *
+     * @param context context
+     * @param targetSubId subscription that is going to be deleted
+     */
+    @VisibleForTesting
+    static boolean isConnectedToWifiOrDifferentSubId(@NonNull Context context, int targetSubId) {
+        ConnectivityManager connectivityManager =
+                context.getSystemService(ConnectivityManager.class);
+        NetworkCapabilities capabilities =
+                connectivityManager.getNetworkCapabilities(connectivityManager.getActiveNetwork());
+
+        if (capabilities != null) {
+            if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+                // Connected to WiFi
+                return true;
+            } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
+                return targetSubId != SubscriptionManager.getActiveDataSubscriptionId();
+            }
+        }
+        return false;
     }
 }

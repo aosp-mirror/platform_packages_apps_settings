@@ -24,12 +24,10 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
-import androidx.lifecycle.Lifecycle;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
-import com.android.settings.connecteddevice.audiosharing.AudioSharingUtils;
 import com.android.settings.core.SettingsUIDeviceConfig;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
@@ -38,6 +36,7 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.slices.SlicePreferenceController;
 import com.android.settingslib.bluetooth.HearingAidStatsLogUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
@@ -92,7 +91,6 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
                             + ", action : "
                             + action);
         }
-        use(AvailableMediaDeviceGroupController.class).init(this);
         use(ConnectedDeviceGroupController.class).init(this);
         use(PreviouslyConnectedDevicePreferenceController.class).init(this);
         use(SlicePreferenceController.class)
@@ -124,15 +122,17 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
             @Nullable ConnectedDeviceDashboardFragment fragment,
             @Nullable Lifecycle lifecycle) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        if (AudioSharingUtils.isFeatureEnabled()) {
-            AbstractPreferenceController audioSharingController =
-                    FeatureFactory.getFeatureFactory()
-                            .getAudioSharingFeatureProvider()
-                            .createAudioSharingDevicePreferenceController(
-                                    context, fragment, lifecycle);
-            if (audioSharingController != null) {
-                controllers.add(audioSharingController);
-            }
+        AbstractPreferenceController availableMediaController =
+                FeatureFactory.getFeatureFactory()
+                        .getAudioSharingFeatureProvider()
+                        .createAvailableMediaDeviceGroupController(context, fragment, lifecycle);
+        controllers.add(availableMediaController);
+        AbstractPreferenceController audioSharingController =
+                FeatureFactory.getFeatureFactory()
+                        .getAudioSharingFeatureProvider()
+                        .createAudioSharingDevicePreferenceController(context, fragment, lifecycle);
+        if (audioSharingController != null) {
+            controllers.add(audioSharingController);
         }
         return controllers;
     }

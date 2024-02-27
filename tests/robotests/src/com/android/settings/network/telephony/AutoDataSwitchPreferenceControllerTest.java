@@ -30,12 +30,19 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.platform.test.annotations.RequiresFlagsDisabled;
+import android.platform.test.annotations.RequiresFlagsEnabled;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.telephony.TelephonyManager;
 
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
+import com.android.settings.flags.Flags;
+
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -51,6 +58,9 @@ public class AutoDataSwitchPreferenceControllerTest {
     private static final String PREF_KEY = "pref_key";
     private static final int SUB_ID_1 = 111;
     private static final int SUB_ID_2 = 222;
+
+    @Rule
+    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
 
     @Mock
     private TelephonyManager mTelephonyManager;
@@ -79,6 +89,7 @@ public class AutoDataSwitchPreferenceControllerTest {
     }
 
     @Test
+    @RequiresFlagsDisabled(Flags.FLAG_IS_DUAL_SIM_ONBOARDING_ENABLED)
     public void getAvailabilityStatus_noInit_notAvailable() {
         ShadowSubscriptionManager.setDefaultDataSubscriptionId(SUB_ID_1);
         AutoDataSwitchPreferenceController controller =
@@ -90,6 +101,7 @@ public class AutoDataSwitchPreferenceControllerTest {
     }
 
     @Test
+    @RequiresFlagsDisabled(Flags.FLAG_IS_DUAL_SIM_ONBOARDING_ENABLED)
     public void displayPreference_defaultForData_notAvailable() {
         ShadowSubscriptionManager.setDefaultDataSubscriptionId(SUB_ID_1);
 
@@ -100,6 +112,7 @@ public class AutoDataSwitchPreferenceControllerTest {
     }
 
     @Test
+    @RequiresFlagsDisabled(Flags.FLAG_IS_DUAL_SIM_ONBOARDING_ENABLED)
     public void  displayPreference_notDefaultForData_available() {
         ShadowSubscriptionManager.setDefaultDataSubscriptionId(SUB_ID_2);
 
@@ -110,6 +123,7 @@ public class AutoDataSwitchPreferenceControllerTest {
     }
 
     @Test
+    @RequiresFlagsDisabled(Flags.FLAG_IS_DUAL_SIM_ONBOARDING_ENABLED)
     public void onSubscriptionsChanged_becomesDefaultForData_notAvailable() {
         ShadowSubscriptionManager.setDefaultDataSubscriptionId(SUB_ID_2);
 
@@ -122,6 +136,7 @@ public class AutoDataSwitchPreferenceControllerTest {
     }
 
     @Test
+    @RequiresFlagsDisabled(Flags.FLAG_IS_DUAL_SIM_ONBOARDING_ENABLED)
     public void onSubscriptionsChanged_noLongerDefaultForData_available() {
         ShadowSubscriptionManager.setDefaultDataSubscriptionId(SUB_ID_1);
 
@@ -134,6 +149,7 @@ public class AutoDataSwitchPreferenceControllerTest {
     }
 
     @Test
+    @RequiresFlagsDisabled(Flags.FLAG_IS_DUAL_SIM_ONBOARDING_ENABLED)
     public void getAvailabilityStatus_mobileDataChangWithDefaultDataSubId_returnUnavailable() {
         ShadowSubscriptionManager.setDefaultDataSubscriptionId(SUB_ID_1);
 
@@ -144,6 +160,7 @@ public class AutoDataSwitchPreferenceControllerTest {
     }
 
     @Test
+    @RequiresFlagsDisabled(Flags.FLAG_IS_DUAL_SIM_ONBOARDING_ENABLED)
     public void getAvailabilityStatus_mobileDataChangWithoutDefaultDataSubId_returnAvailable() {
         ShadowSubscriptionManager.setDefaultDataSubscriptionId(SUB_ID_1);
 
@@ -151,5 +168,17 @@ public class AutoDataSwitchPreferenceControllerTest {
         mController.refreshPreference();
 
         assertThat(mController.getAvailabilityStatus(SUB_ID_2)).isEqualTo(AVAILABLE);
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_IS_DUAL_SIM_ONBOARDING_ENABLED)
+    public void getAvailabilityStatus_flagIsDualSimOnboardingEnabledOn_returnUnavailable() {
+        ShadowSubscriptionManager.setDefaultDataSubscriptionId(SUB_ID_1);
+
+        mController.displayPreference(mPreferenceScreen);
+        mController.refreshPreference();
+
+        assertThat(mController.getAvailabilityStatus(SUB_ID_1))
+                .isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 }
