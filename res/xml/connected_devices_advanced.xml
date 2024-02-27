@@ -26,15 +26,6 @@
         android:order="-10"
         android:title="@string/bluetooth_settings_title" />
 
-    <Preference
-        android:fragment="com.android.settings.connecteddevice.audiosharing.AudioSharingDashboardFragment"
-        android:icon="@drawable/ic_bt_audio_sharing"
-        android:key="audio_sharing_settings"
-        android:order="-9"
-        android:title="@string/audio_sharing_title"
-        settings:controller="com.android.settings.connecteddevice.audiosharing.AudioSharingPreferenceController"
-        settings:searchable="true" />
-
     <com.android.settingslib.RestrictedPreference
         android:fragment="com.android.settings.connecteddevice.NfcAndPaymentFragment"
         android:icon="@drawable/ic_nfc"
