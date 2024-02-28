@@ -33,6 +33,7 @@ import com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE
 import com.android.settings.datausage.DataUsageUtils
 import com.android.settings.datausage.lib.DataUsageLib
 import com.android.settings.datausage.lib.NetworkCycleDataRepository
+import com.android.settings.datausage.lib.NetworkStatsRepository.Companion.AllTimeRange
 import com.android.settings.datausage.lib.NetworkUsageData
 import com.android.settingslib.spa.testutils.waitUntil
 import com.google.common.truth.Truth.assertThat
@@ -140,15 +141,34 @@ class DataUsagePreferenceControllerTest {
     }
 
     @Test
-    fun updateState_noUsageData_shouldEnablePreference() = runBlocking {
+    fun updateState_noFistCycleUsageButOtherUsage_shouldEnablePreference() = runBlocking {
         val usageData = NetworkUsageData(START_TIME, END_TIME, 0L)
         repository.stub {
             on { loadFirstCycle() } doReturn usageData
+            on { queryUsage(AllTimeRange) } doReturn
+                NetworkUsageData(AllTimeRange.lower, AllTimeRange.upper, 1L)
         }
+        preference.isEnabled = false
 
         controller.onViewCreated(TestLifecycleOwner())
 
         waitUntil { preference.isEnabled }
+        waitUntil { preference.summary?.contains("0 B used") == true }
+    }
+
+    @Test
+    fun updateState_noDataUsage_shouldDisablePreference() = runBlocking {
+        val usageData = NetworkUsageData(START_TIME, END_TIME, 0L)
+        repository.stub {
+            on { loadFirstCycle() } doReturn usageData
+            on { queryUsage(AllTimeRange) } doReturn
+                NetworkUsageData(AllTimeRange.lower, AllTimeRange.upper, 0L)
+        }
+        preference.isEnabled = true
+
+        controller.onViewCreated(TestLifecycleOwner())
+
+        waitUntil { !preference.isEnabled }
         waitUntil { preference.summary?.contains("0 B used") == true }
     }
 
