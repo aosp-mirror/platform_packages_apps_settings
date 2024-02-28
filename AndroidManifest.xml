@@ -4682,22 +4682,6 @@
         </activity>
 
         <activity
-            android:name="Settings$AudioStreamConfirmDialogActivity"
-            android:exported="true"
-            android:theme="@style/Transparent"
-            android:permission="android.permission.BLUETOOTH_CONNECT"
-            android:configChanges="orientation|keyboardHidden|screenSize">
-            <intent-filter android:priority="1">
-                <action android:name="android.settings.AUDIO_STREAM_DIALOG" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamConfirmDialog" />
-            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-                android:value="true" />
-        </activity>
-
-        <activity
             android:name=".Settings$PreviouslyConnectedDeviceActivity"
             android:label="@string/connected_device_saved_title"
             android:exported="true"
@@ -5045,16 +5029,6 @@
             android:name="com.android.settings.bluetooth.QrCodeScanModeActivity"
             android:permission="android.permission.BLUETOOTH_CONNECT"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.settings.BLUETOOTH_LE_AUDIO_QR_CODE_SCANNER"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
-        </activity>
-
-        <activity
-            android:name="com.android.settings.connecteddevice.audiosharing.audiostreams.qrcode.QrCodeScanModeActivity"
-            android:permission="android.permission.BLUETOOTH_CONNECT"
-            android:exported="false">
             <intent-filter>
                 <action android:name="android.settings.BLUETOOTH_LE_AUDIO_QR_CODE_SCANNER"/>
                 <category android:name="android.intent.category.DEFAULT"/>
