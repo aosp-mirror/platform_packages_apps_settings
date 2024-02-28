@@ -16,6 +16,7 @@
 
 package com.android.settings.biometrics.fingerprint2.lib.domain.interactor
 
+import android.hardware.fingerprint.FingerprintSensorPropertiesInternal
 import com.android.settings.biometrics.fingerprint2.lib.model.EnrollReason
 import com.android.settings.biometrics.fingerprint2.lib.model.FingerEnrollState
 import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintAuthAttemptModel

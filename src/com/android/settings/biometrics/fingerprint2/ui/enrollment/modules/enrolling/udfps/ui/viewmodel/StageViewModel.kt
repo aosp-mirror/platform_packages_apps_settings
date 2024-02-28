@@ -22,15 +22,30 @@ package com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrol
  * of the where the user should press their fingerprint
  */
 sealed class StageViewModel {
+  /** Unknown stage */
   data object Unknown : StageViewModel()
 
+  /** This is the stage that moves the fingerprint icon around during enrollment. */
   data object Guided : StageViewModel()
 
+  /** The center stage is the initial stage of enrollment. */
   data object Center : StageViewModel()
 
+  /**
+   * Fingerprint stage of enrollment. Typically there is some sort of indication that a user should
+   * be using their finger tip to enroll.
+   */
   data object Fingertip : StageViewModel()
 
+  /**
+   * Left edge stage of enrollment. Typically there is an indication that a user should be using the
+   * left edge of their fingerprint.
+   */
   data object LeftEdge : StageViewModel()
 
+  /**
+   * Right edge stage of enrollment. Typically there is an indication that a user should be using
+   * the right edge of their fingerprint.
+   */
   data object RightEdge : StageViewModel()
 }

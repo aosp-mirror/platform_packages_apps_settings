@@ -20,10 +20,12 @@ import android.content.Context
 import android.content.Intent
 import android.hardware.biometrics.BiometricConstants;
 import android.hardware.biometrics.BiometricFingerprintConstants
+import android.hardware.biometrics.SensorLocationInternal
 import android.hardware.fingerprint.FingerprintEnrollOptions;
 import android.hardware.fingerprint.FingerprintManager
 import android.hardware.fingerprint.FingerprintManager.GenerateChallengeCallback
 import android.hardware.fingerprint.FingerprintManager.RemovalCallback
+import android.hardware.fingerprint.FingerprintSensorPropertiesInternal
 import android.os.CancellationSignal
 import android.util.Log
 import com.android.settings.biometrics.GatekeeperPasswordProvider
