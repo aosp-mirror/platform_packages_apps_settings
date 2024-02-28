@@ -30,3 +30,10 @@ flag {
   description: "Don't show quick settings tooltip in SUW, since the user can't use quick settings there."
   bug: "294560581"
 }
+
+flag {
+  name: "enable_color_contrast_control"
+  namespace: "accessibility"
+  description: "Allows users to control color contrast in the Accessibility settings page."
+  bug: "246577325"
+}
