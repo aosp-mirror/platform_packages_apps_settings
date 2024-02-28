@@ -24,6 +24,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.annotation.VisibleForTesting
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -101,10 +102,13 @@ fun PageImpl(onboardingService:SimOnboardingService,navHostController: NavHostCo
     ) {
         composable(route = SimOnboardingScreen.LabelSim.name) {
             val nextPage =
-                if (onboardingService.isMultipleEnabledProfilesSupported && onboardingService.isAllOfSlotAssigned) {
+                if (onboardingService.isMultipleEnabledProfilesSupported
+                            && onboardingService.isAllOfSlotAssigned) {
                     SimOnboardingScreen.SelectSim.name
                 } else {
-                    onboardingService.addCurrentItemForSelectedSim()
+                    LaunchedEffect(Unit) {
+                        onboardingService.addCurrentItemForSelectedSim()
+                    }
                     SimOnboardingScreen.PrimarySim.name
                 }
             SimOnboardingLabelSimImpl(

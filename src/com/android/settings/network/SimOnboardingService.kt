@@ -219,8 +219,12 @@ class SimOnboardingService {
         return renameMutableMap[subInfo.subscriptionId] ?: subInfo.displayName.toString()
     }
 
-    fun addCurrentItemForSelectedSim(){
-        userSelectedSubInfoList.addAll(activeSubInfoList)
+    fun addCurrentItemForSelectedSim() {
+        if (userSelectedSubInfoList.size < getActiveModemCount) {
+            userSelectedSubInfoList.addAll(activeSubInfoList)
+            Log.d(TAG, "addCurrentItemForSelectedSim: userSelectedSubInfoList:" +
+                    ", $userSelectedSubInfoList")
+        }
     }
 
     fun addItemForSelectedSim(selectedSubInfo: SubscriptionInfo) {
