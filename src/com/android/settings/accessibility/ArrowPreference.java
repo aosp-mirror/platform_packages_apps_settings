@@ -22,17 +22,25 @@ import android.util.AttributeSet;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.res.TypedArrayUtils;
-import androidx.preference.Preference;
 
 import com.android.settings.R;
 
 /**
- * A settings preference with colored rounded rectangle background and an arrow icon on the right
+ * A settings preference with colored rounded rectangle background and an arrow icon on the right.
  */
-public class ArrowPreference extends Preference {
+public class ArrowPreference extends BackgroundPreference {
 
-    public ArrowPreference(@NonNull Context context) {
-        this(context, null);
+    public ArrowPreference(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr,
+            int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+        setBackground(
+                com.android.settingslib.widget.mainswitch.R.drawable.settingslib_switch_bar_bg_on);
+        setWidgetLayoutResource(R.layout.preference_widget_arrow);
+    }
+
+    public ArrowPreference(@NonNull Context context, @Nullable AttributeSet attrs,
+            int defStyleAttr) {
+        this(context, attrs, defStyleAttr, 0);
     }
 
     public ArrowPreference(@NonNull Context context, @Nullable AttributeSet attrs) {
@@ -41,18 +49,7 @@ public class ArrowPreference extends Preference {
                 android.R.attr.preferenceStyle));
     }
 
-    public ArrowPreference(@NonNull Context context, @Nullable AttributeSet attrs,
-            int defStyleAttr) {
-        this(context, attrs, defStyleAttr, 0);
-    }
-
-    public ArrowPreference(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr,
-            int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-        init();
-    }
-
-    private void init() {
-        setLayoutResource(R.layout.arrow_preference);
+    public ArrowPreference(@NonNull Context context) {
+        this(context, null);
     }
 }
