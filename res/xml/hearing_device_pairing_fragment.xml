@@ -19,6 +19,10 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/bluetooth_pairing_pref_title">
 
+    <com.android.settingslib.widget.TopIntroPreference
+        settings:searchable="false"
+        android:title="@string/accessibility_hearing_device_pairing_intro" />
+
     <com.android.settings.bluetooth.BluetoothProgressCategory
         android:key="available_hearing_devices"
         android:title="@string/accessibility_found_hearing_devices" />
@@ -34,12 +38,5 @@
             settings:useAdminDisabledSummary="true"
             settings:controller="com.android.settings.accessibility.ViewAllBluetoothDevicesPreferenceController"/>
     </PreferenceCategory>
-
-    <com.android.settings.accessibility.AccessibilityFooterPreference
-        android:key="hearing_device_footer"
-        android:title="@string/accessibility_hearing_device_footer_summary"
-        android:selectable="false"
-        settings:searchable="false"
-        settings:controller="com.android.settings.accessibility.PairHearingDeviceFooterPreferenceController"/>
 
 </PreferenceScreen>

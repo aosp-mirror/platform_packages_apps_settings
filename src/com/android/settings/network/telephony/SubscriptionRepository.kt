@@ -18,12 +18,16 @@ package com.android.settings.network.telephony
 
 import android.content.Context
 import android.telephony.SubscriptionManager
+import android.util.Log
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.asExecutor
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.conflate
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.onEach
+
+private const val TAG = "SubscriptionRepository"
 
 fun Context.subscriptionsChangedFlow() = callbackFlow {
     val subscriptionManager = getSystemService(SubscriptionManager::class.java)!!
@@ -40,4 +44,4 @@ fun Context.subscriptionsChangedFlow() = callbackFlow {
     )
 
     awaitClose { subscriptionManager.removeOnSubscriptionsChangedListener(listener) }
-}.conflate().flowOn(Dispatchers.Default)
+}.conflate().onEach { Log.d(TAG, "subscriptions changed") }.flowOn(Dispatchers.Default)

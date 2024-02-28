@@ -27,19 +27,6 @@
         settings:controller="com.android.settings.slices.SlicePreferenceController" />
 
     <PreferenceCategory
-        android:key="audio_sharing_device_list"
-        android:title="@string/audio_sharing_title"
-        settings:controller="com.android.settings.connecteddevice.audiosharing.AudioSharingDevicePreferenceController">
-        <Preference
-            android:fragment="com.android.settings.connecteddevice.audiosharing.AudioSharingDashboardFragment"
-            android:icon="@drawable/ic_bt_audio_sharing"
-            android:key="connected_device_audio_sharing_settings"
-            android:order="10"
-            android:title="@string/audio_sharing_title"
-            settings:searchable="false" />
-    </PreferenceCategory>
-
-    <PreferenceCategory
         android:key="available_device_list"
         android:title="@string/connected_device_media_device_title"/>
 

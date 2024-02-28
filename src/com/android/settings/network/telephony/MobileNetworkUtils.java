@@ -80,6 +80,7 @@ import com.android.settings.network.CarrierConfigCache;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.ims.WifiCallingQueryImsState;
 import com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants;
+import com.android.settings.network.telephony.wificalling.WifiCallingRepository;
 import com.android.settingslib.core.instrumentation.Instrumentable;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.graph.SignalDrawable;
@@ -928,7 +929,10 @@ public class MobileNetworkUtils {
 
     /**
      * Copied from WifiCallingPreferenceController#isWifiCallingEnabled()
+     *
+     * @deprecated Use {@link WifiCallingRepository#wifiCallingReadyFlow()} instead.
      */
+    @Deprecated
     public static boolean isWifiCallingEnabled(Context context, int subId,
             @Nullable WifiCallingQueryImsState queryImsState) {
         if (queryImsState == null) {

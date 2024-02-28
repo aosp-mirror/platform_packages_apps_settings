@@ -86,7 +86,6 @@ import com.android.settings.connecteddevice.AdvancedConnectedDeviceDashboardFrag
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
 import com.android.settings.connecteddevice.NfcAndPaymentFragment;
 import com.android.settings.connecteddevice.PreviouslyConnectedDeviceDashboardFragment;
-import com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamConfirmDialog;
 import com.android.settings.connecteddevice.stylus.StylusUsiDetailsFragment;
 import com.android.settings.connecteddevice.usb.UsbDetailsFragment;
 import com.android.settings.datausage.DataSaverSummary;
@@ -359,7 +358,6 @@ public class SettingsGateway {
             DataUsageList.class.getName(),
             ToggleBackupSettingFragment.class.getName(),
             PreviouslyConnectedDeviceDashboardFragment.class.getName(),
-            AudioStreamConfirmDialog.class.getName(),
             BatterySaverScheduleSettings.class.getName(),
             MobileNetworkListFragment.class.getName(),
             PowerMenuSettings.class.getName(),
