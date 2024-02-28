@@ -32,7 +32,7 @@ public class SecurityPatchLevelPreferenceController extends BasePreferenceContro
 
     private static final String TAG = "SecurityPatchCtrl";
     private static final Uri INTENT_URI_DATA = Uri.parse(
-            "https://source.android.com/security/bulletin/");
+            "https://source.android.com/docs/security/bulletin/");
 
     private final PackageManager mPackageManager;
     private final String mCurrentPatch;

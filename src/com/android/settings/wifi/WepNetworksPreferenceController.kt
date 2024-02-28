@@ -39,14 +39,7 @@ import kotlinx.coroutines.flow.callbackFlow
 class WepNetworksPreferenceController(context: Context, preferenceKey: String) :
     ComposePreferenceController(context, preferenceKey) {
 
-    private lateinit var preference: Preference
-
     var wifiManager = context.getSystemService(WifiManager::class.java)!!
-
-    override fun displayPreference(screen: PreferenceScreen) {
-        super.displayPreference(screen)
-        preference = screen.findPreference(preferenceKey)!!
-    }
 
     override fun getAvailabilityStatus() = if (Flags.androidVWifiApi()) AVAILABLE
     else UNSUPPORTED_ON_DEVICE

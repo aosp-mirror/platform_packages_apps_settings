@@ -16,27 +16,19 @@
 
 package com.android.settings.accessibility;
 
-import static android.app.Activity.RESULT_OK;
-
 import android.content.Context;
-import android.content.Intent;
-import android.preference.PreferenceManager;
 import android.text.TextUtils;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
-import com.android.settings.bluetooth.BluetoothPairingDetail;
+import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
 
-import androidx.annotation.VisibleForTesting;
-
 /** Preference controller for all bluetooth device preference. */
-public class ViewAllBluetoothDevicesPreferenceController extends BasePreferenceController implements
-        PreferenceManager.OnActivityResultListener {
-
-    private static final int REQUEST_CODE_BONDED_DEVICE = 270;
+public class ViewAllBluetoothDevicesPreferenceController extends BasePreferenceController {
     private DashboardFragment mFragment;
 
     public ViewAllBluetoothDevicesPreferenceController(Context context, String preferenceKey) {
@@ -60,29 +52,18 @@ public class ViewAllBluetoothDevicesPreferenceController extends BasePreferenceC
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (TextUtils.equals(preference.getKey(), getPreferenceKey())) {
-            launchBluetoothPairingDetail();
+            launchConnectedDevicePage();
             return true;
         }
 
         return false;
     }
 
-    @Override
-    public boolean onActivityResult(int requestCode, int resultCode, Intent data) {
-        // If back from BONDED device page, then no need to show scan result again.
-        // Finish the fragment.
-        if (requestCode == REQUEST_CODE_BONDED_DEVICE && resultCode == RESULT_OK) {
-            mFragment.finish();
-        }
-        return false;
-    }
-
     @VisibleForTesting
-    void launchBluetoothPairingDetail() {
+    void launchConnectedDevicePage() {
         new SubSettingLauncher(mContext)
-                .setDestination(BluetoothPairingDetail.class.getName())
+                .setDestination(ConnectedDeviceDashboardFragment.class.getName())
                 .setSourceMetricsCategory(mFragment.getMetricsCategory())
-                .setResultListener(mFragment, REQUEST_CODE_BONDED_DEVICE)
                 .launch();
     }
 }
