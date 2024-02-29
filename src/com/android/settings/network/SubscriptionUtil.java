@@ -49,9 +49,11 @@ import com.android.settings.flags.Flags;
 import com.android.settings.network.helper.SelectableSubscriptions;
 import com.android.settings.network.helper.SubscriptionAnnotation;
 import com.android.settings.network.telephony.DeleteEuiccSubscriptionDialogActivity;
+import com.android.settings.network.telephony.EuiccRacConnectivityDialogActivity;
 import com.android.settings.network.telephony.ToggleSubscriptionDialogActivity;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -557,13 +559,21 @@ public class SubscriptionUtil {
      * @param context {@code Context}
      * @param subId The id of subscription need to be deleted.
      */
-    public static void startDeleteEuiccSubscriptionDialogActivity(Context context, int subId) {
+    public static void startDeleteEuiccSubscriptionDialogActivity(Context context, int subId,
+            int carrierId) {
         if (!SubscriptionManager.isUsableSubscriptionId(subId)) {
             Log.i(TAG, "Unable to delete subscription due to invalid subscription ID.");
             return;
         }
-        // TODO(b/325693582): Add verification if carrier is RAC and logic for new dialog
-        context.startActivity(DeleteEuiccSubscriptionDialogActivity.getIntent(context, subId));
+        final int[] carriersThatUseRAC = context.getResources().getIntArray(
+                R.array.config_carrier_use_rac);
+        boolean isCarrierRac = Arrays.stream(carriersThatUseRAC).anyMatch(cid -> cid == carrierId);
+
+        if (isCarrierRac && !isConnectedToWifiOrDifferentSubId(context, subId)) {
+            context.startActivity(EuiccRacConnectivityDialogActivity.getIntent(context, subId));
+        } else {
+            context.startActivity(DeleteEuiccSubscriptionDialogActivity.getIntent(context, subId));
+        }
     }
 
     /**
