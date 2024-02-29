@@ -47,7 +47,7 @@ public class HidePrivateSpaceSettings extends DashboardFragment{
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.privatespace_hide_locked;
+        return R.xml.private_space_hide_locked;
     }
 
     @Override

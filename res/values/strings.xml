@@ -152,10 +152,10 @@
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button">Pair left ear</string>
     <!-- Title for all hearing devices related controls section. [CHAR LIMIT=60] -->
     <string name="bluetooth_device_controls_general">For all available hearing devices</string>
-    <!-- Connected devices settings. Title of the preference to show the entrance of the hearing device controls related page. [CHAR LIMIT=65] -->
-    <string name="bluetooth_device_controls_title">Hearing device settings</string>
-    <!-- Connected devices settings. Title of the preference to show the entrance of the hearing device controls related page. [CHAR LIMIT=65] -->
-    <string name="bluetooth_device_controls_summary">Shortcut, hearing aid compatibility</string>
+    <!-- Connected devices settings. Title of the preference to show the entrance of the hearing device settings related page. [CHAR LIMIT=65] -->
+    <string name="bluetooth_device_controls_title">More hearing device settings</string>
+    <!-- Connected devices settings. Summary of the preference to show the item in the hearing device settings related page. [CHAR LIMIT=120] -->
+    <string name="bluetooth_device_controls_summary">Change cross-device settings like shortcut, and telecoil controls</string>
     <!-- Title for this device specific controls section. [CHAR LIMIT=30] -->
     <string name="bluetooth_device_controls_specific">For this device</string>
     <!-- Connected devices settings. Title of the preference to show the entrance of the audio output page. It can change different types of audio are played on phone or other bluetooth devices. [CHAR LIMIT=35] -->
@@ -1318,7 +1318,7 @@
     <!-- Title for private space setup in auto advancing screen informing to explore private space settings for hide and auto lock. [CHAR LIMIT=NONE] -->
     <string name="private_space_explore_settings_title">Explore private space settings to hide private space and set up automatic locking</string>
     <!-- Title for private space setup in auto advancing screen informing some system apps are already installed in private space. [CHAR LIMIT=NONE] -->
-    <string name="private_space_apps_installed_title">Some apps are already installed in your private space</string>
+    <string name="private_space_apps_installed_title">Required apps are already installed in your private space</string>
     <!-- Title for private space creation error screen. [CHAR LIMIT=60] -->
     <string name="private_space_error_screen_title">Couldn\u2019t set up a private space</string>
     <!-- Label for button to retry creating private space again on creation error. [CHAR LIMIT=30] -->
@@ -1363,6 +1363,22 @@
     <string name="private_space_notifications_title">Sensitive notifications on lock screen</string>
     <!-- Summary description for private space sensitive notifications toggle [CHAR LIMIT=200] -->
     <string name="private_space_sensitive_notifications_description">Show sensitive content when private space is unlocked</string>
+    <!-- Title for private space GAIA education screen [CHAR LIMIT=90] -->
+    <string name="private_space_gaia_education_title">Create a Google Account to help keep your data private</string>
+    <!-- Description for private space GAIA education screen [CHAR LIMIT=120] -->
+    <string name="private_space_gaia_education_description">On the next screen you can sign in to an account to use with your private space</string>
+    <!-- Sub header for private space GAIA education screen [CHAR LIMIT=120] -->
+    <string name="private_space_gaia_education_header"><b>Create a dedicated account to help stop data appearing outside private space, such as:</b></string>
+    <!-- Text for private space GAIA education screen [CHAR LIMIT=90] -->
+    <string name="private_space_gaia_education_bullet1">Synced photos, files, emails, contacts, calendar events, and other data</string>
+    <!-- Text for private space GAIA education screen [CHAR LIMIT=60] -->
+    <string name="private_space_gaia_education_bullet2">App download history and recommendations</string>
+    <!-- Text for private space GAIA education screen [CHAR LIMIT=60] -->
+    <string name="private_space_gaia_education_bullet3">Browsing history, bookmarks, and saved passwords</string>
+    <!-- Text for private space GAIA education screen [CHAR LIMIT=90] -->
+    <string name="private_space_gaia_education_bullet4">Suggested content related to your activity in private space apps</string>
+    <!-- Text for button in private space GAIA education screen to start login [CHAR LIMIT=20] -->
+    <string name="private_space_gaia_education_got_it">Got it</string>
 
     <!-- Text shown when "Add fingerprint" button is disabled -->
     <string name="fingerprint_add_max">You can add up to <xliff:g id="count" example="5">%d</xliff:g> fingerprints</string>
@@ -4608,6 +4624,28 @@
     <string name="display_category_title">Display</string>
     <!-- Title for the accessibility color and motion page. [CHAR LIMIT=50] -->
     <string name="accessibility_color_and_motion_title">Color and motion</string>
+    <!-- Title for the accessibility color contrast page. [CHAR LIMIT=50] -->
+    <string name="accessibility_color_contrast_title">Color contrast</string>
+    <!-- Intro for the accessibility color contrast page. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_color_contrast_intro">Higher contrast makes text, buttons, and icons stand out more. Choose the contrast that looks best to you.</string>
+    <!-- Notes in color contrast page footer for something should be aware. [CHAR LIMIT=NONE]  -->
+    <string name="color_contrast_note">Some apps may not support all color and text contrast settings</string>
+    <!-- Summary for the accessibility color setting. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_color_contrast_summary">Adjust how colors and text look against your screen\'s background color</string>
+    <!-- Preview screen title on the color contrast page. [CHAR LIMIT=20]  -->
+    <string name="color_contrast_preview">Preview</string>
+    <!-- Preview screen email sender's name on the color contrast page. [CHAR LIMIT=15]  -->
+    <string name="color_contrast_preview_sender_name">Helen, Adam</string>
+    <!-- Preview screen email sent date on the color contrast page. [CHAR LIMIT=15]  -->
+    <string name="color_contrast_preview_email_send_date">2 days ago</string>
+    <!-- Preview screen email badge on the contrast page. [CHAR LIMIT=15]  -->
+    <string name="color_contrast_preview_email_badge">Follow up?</string>
+    <!-- Preview screen email title on the contrast page. [CHAR LIMIT=30]  -->
+    <string name="color_contrast_preview_email_title">Business trip report</string>
+    <!-- Preview screen email body on the contrast page. [CHAR LIMIT=NONE]  -->
+    <string name="color_contrast_preview_email_body">For further assistance, please reach out to \nmyself or Helen. This report will be</string>
+    <!-- Preview screen email attachment name on the contrast page. [CHAR LIMIT=30]  -->
+    <string name="color_contrast_preview_email_attachment_name">Client Expenses</string>
     <!-- Title for the accessibility text options page. [CHAR LIMIT=50] -->
     <string name="accessibility_turn_screen_darker_title">Turn screen darker</string>
     <!-- Title for the accessibility preference category of interaction control services and settings. [CHAR LIMIT=50] -->
@@ -4909,6 +4947,10 @@
     <string name="accessibility_toggle_high_text_contrast_preference_title">High contrast text</string>
     <!-- Summary for the accessibility preference to high contrast text. [CHAR LIMIT=NONE] -->
     <string name="accessibility_toggle_high_text_contrast_preference_summary">Change text color to black or white. Maximizes contrast with the background.</string>
+    <!-- Title for the accessibility preference to high contrast text. [CHAR LIMIT=35] -->
+    <string name="accessibility_toggle_maximize_text_contrast_preference_title">Maximize text contrast</string>
+    <!-- Summary for the accessibility preference to high contrast text. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_toggle_maximize_text_contrast_preference_summary">Change text color to black or white to increase contrast with the background.</string>
     <!-- Title for the accessibility preference to auto update screen magnification. [CHAR LIMIT=35] -->
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title">Auto
         update screen magnification</string>
@@ -11467,8 +11509,6 @@
     <!-- Mobile network settings screen, message asking the user to check their pricing with their Carrier, when enabling Data roaming. [CHAR LIMIT=NONE] -->
     <string name="roaming_check_price_warning">Check with your network provider for pricing.</string>
 
-    <!-- Title for mobile data preference, to display the mobile data usage for each app. [CHAR LIMIT=NONE]-->
-    <string name="mobile_data_usage_title">App data usage</string>
     <!-- Summary to show the current network mode is invalid. [CHAR LIMIT=NONE]-->
     <string name="mobile_network_mode_error">Invalid Network Mode <xliff:g id="networkModeId" example="0">%1$d</xliff:g>. Ignore.</string>
     <!-- Title for _satellite_setting_preference_layout in mobile network settings [CHAR LIMIT=60] -->
@@ -12872,6 +12912,8 @@
     <string name="contrast_title">Contrast</string>
     <!-- 'Standard' contrast option [CHAR LIMIT=20] -->
     <string name="contrast_standard">Standard</string>
+    <!-- 'Default' contrast option [CHAR LIMIT=20] -->
+    <string name="contrast_default">Default</string>
     <!-- 'Medium' contrast option [CHAR LIMIT=20] -->
     <string name="contrast_medium">Medium</string>
     <!-- 'High' contrast option [CHAR LIMIT=20] -->

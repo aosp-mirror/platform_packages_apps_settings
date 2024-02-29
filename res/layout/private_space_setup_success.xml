@@ -24,13 +24,21 @@
     app:sucHeaderText="@string/private_space_success_title"
     app:sudDescriptionText="@string/private_space_access_text"
     android:icon="@drawable/ic_privatespace_done">
-
-    <ImageView
-        android:id="@+id/privatespace_success_image"
+    <com.google.android.setupdesign.view.FillContentLayout
+        style="@style/SudContentFrame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="24dp"
-        android:layout_marginRight="24dp"
-        android:src="@drawable/private_space_illustration"/>
+        android:maxWidth="@dimen/animation_max_size"
+        android:maxHeight="@dimen/animation_max_size">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottie_animation"
+            style="@style/SudContentIllustration"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/private_space_illustration"/>
+    </com.google.android.setupdesign.view.FillContentLayout>
 
 </com.google.android.setupdesign.GlifLayout>
