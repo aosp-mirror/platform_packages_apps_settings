@@ -41,12 +41,12 @@ import android.util.Pair;
 
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.flags.Flags;
 import com.android.settings.testutils.shadow.ShadowAudioManager;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowCachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.flags.Flags;
 
 import org.junit.Before;
 import org.junit.Rule;

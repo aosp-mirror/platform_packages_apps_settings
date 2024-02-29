@@ -549,6 +549,7 @@ public class EditShortcutsPreferenceFragmentTest {
             ComponentName componentName, String label) {
         AccessibilityTarget target = mock(AccessibilityTarget.class);
         when(target.getComponentName()).thenReturn(componentName);
+        when(target.getId()).thenReturn(componentName.flattenToString());
         when(target.getLabel()).thenReturn(label);
         return target;
     }
