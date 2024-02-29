@@ -102,7 +102,7 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
 
         if (onboardingService.activeSubInfoList.isEmpty()) {
             // TODO: refactor and replace the ToggleSubscriptionDialogActivity
-            Log.e(TAG, "onboardingService.activeSubInfoList is empty" +
+            Log.d(TAG, "onboardingService.activeSubInfoList is empty" +
                     ", start ToggleSubscriptionDialogActivity")
             this.startActivity(ToggleSubscriptionDialogActivity
                     .getIntent(this.applicationContext, targetSubId, true))
