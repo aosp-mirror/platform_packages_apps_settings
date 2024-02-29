@@ -31,13 +31,14 @@
         android:maxWidth="@dimen/animation_max_size"
         android:maxHeight="@dimen/animation_max_size">
 
-        <ImageView
-            android:id="@+id/privatespace_lock_image"
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottie_animation"
+            style="@style/SudContentIllustration"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="fitCenter"
-            android:contentDescription="@null"
-            android:src="@drawable/private_space_choose_lock_illustration"/>
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/private_space_use_screen_lock_illustration"/>
 
     </com.google.android.setupdesign.view.FillContentLayout>
 </com.google.android.setupdesign.GlifLayout>
