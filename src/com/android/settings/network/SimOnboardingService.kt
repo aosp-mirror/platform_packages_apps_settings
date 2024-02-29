@@ -23,6 +23,7 @@ import android.telephony.TelephonyManager
 import android.telephony.UiccCardInfo
 import android.telephony.UiccSlotInfo
 import android.util.Log
+import com.android.settings.network.SimOnboardingActivity.Companion.CallbackType
 import com.android.settings.spa.network.setAutomaticData
 import com.android.settings.spa.network.setDefaultData
 import com.android.settings.spa.network.setDefaultSms
@@ -30,7 +31,6 @@ import com.android.settings.spa.network.setDefaultVoice
 import com.android.settingslib.utils.ThreadUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-
 
 private const val TAG = "SimOnboardingService"
 private const val INVALID = SubscriptionManager.INVALID_SUBSCRIPTION_ID
@@ -60,7 +60,7 @@ class SimOnboardingService {
                 .map { it.subscriptionId }
                 .firstOrNull() ?: SubscriptionManager.INVALID_SUBSCRIPTION_ID
         }
-    var callback: (Int) -> Unit = {}
+    var callback: (CallbackType) -> Unit = {}
 
     var isMultipleEnabledProfilesSupported: Boolean = false
         get() {
@@ -135,7 +135,9 @@ class SimOnboardingService {
         userSelectedSubInfoList.clear()
     }
 
-    fun initData(inputTargetSubId:Int,context: Context, callback: (Int) -> Unit) {
+    fun initData(inputTargetSubId: Int,
+                 context: Context,
+                 callback: (CallbackType) -> Unit) {
         this.callback = callback
         targetSubId = inputTargetSubId
         subscriptionManager = context.getSystemService(SubscriptionManager::class.java)
@@ -261,7 +263,7 @@ class SimOnboardingService {
 
     fun startActivatingSim(){
         // TODO: start to activate sim
-        callback(SimOnboardingActivity.CALLBACK_FINISH)
+        callback(CallbackType.CALLBACK_FINISH)
     }
 
     suspend fun startSetupName() {
@@ -273,7 +275,7 @@ class SimOnboardingService {
                 )
             }
             // next action is SETUP_PRIMARY_SIM
-            callback(SimOnboardingActivity.CALLBACK_SETUP_PRIMARY_SIM)
+            callback(CallbackType.CALLBACK_SETUP_PRIMARY_SIM)
         }
     }
 
@@ -302,7 +304,7 @@ class SimOnboardingService {
             }
 
             // no next action, send finish
-            callback(SimOnboardingActivity.CALLBACK_FINISH)
+            callback(CallbackType.CALLBACK_FINISH)
         }
     }
 }
