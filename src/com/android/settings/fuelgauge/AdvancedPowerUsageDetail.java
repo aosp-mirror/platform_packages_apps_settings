@@ -20,7 +20,6 @@ import static com.android.settings.fuelgauge.batteryusage.ConvertUtils.isUserCon
 
 import android.app.Activity;
 import android.app.ActivityManager;
-import android.app.backup.BackupManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
@@ -53,6 +52,7 @@ import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.Instrumentable;
+import com.android.settingslib.datastore.ChangeReason;
 import com.android.settingslib.widget.LayoutPreference;
 
 import java.util.ArrayList;
@@ -105,7 +105,6 @@ public class AdvancedPowerUsageDetail extends DashboardFragment
     @VisibleForTesting @BatteryOptimizeUtils.OptimizationMode
     int mOptimizationMode = BatteryOptimizeUtils.MODE_UNKNOWN;
 
-    @VisibleForTesting BackupManager mBackupManager;
     @VisibleForTesting StringBuilder mLogStringBuilder;
 
     // A wrapper class to carry LaunchBatteryDetailPage required arguments.
@@ -293,9 +292,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment
     @VisibleForTesting
     void notifyBackupManager() {
         if (mOptimizationMode != mBatteryOptimizeUtils.getAppOptimizationMode()) {
-            final BackupManager backupManager =
-                    mBackupManager != null ? mBackupManager : new BackupManager(getContext());
-            backupManager.dataChanged();
+            BatterySettingsStorage.get(getContext()).notifyChange(ChangeReason.UPDATE);
         }
     }
 
