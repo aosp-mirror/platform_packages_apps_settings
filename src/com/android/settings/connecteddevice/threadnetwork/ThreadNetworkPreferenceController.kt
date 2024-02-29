@@ -156,7 +156,7 @@ class ThreadNetworkPreferenceController @VisibleForTesting constructor(
         return true
     }
 
-    override fun onStateChanged(lifecycleOwner: LifecycleOwner, event: Lifecycle.Event) {
+    override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
         if (threadController == null) {
             return
         }
