@@ -113,10 +113,6 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
         switchToEuiccSubscriptionSidecar = SwitchToEuiccSubscriptionSidecar.get(fragmentManager)
         switchToRemovableSlotSidecar = SwitchToRemovableSlotSidecar.get(fragmentManager)
         enableMultiSimSidecar = EnableMultiSimSidecar.get(fragmentManager)
-
-        setContent {
-            Content()
-        }
     }
 
     override fun finish() {
