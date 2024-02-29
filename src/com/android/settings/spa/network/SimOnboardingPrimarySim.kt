@@ -24,7 +24,6 @@ import androidx.compose.material.icons.outlined.SignalCellularAlt
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableIntState
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -82,7 +81,7 @@ fun SimOnboardingPrimarySimImpl(
         callsSelectedId.intValue = onboardingService.targetPrimarySimCalls
         textsSelectedId.intValue = onboardingService.targetPrimarySimTexts
         mobileDataSelectedId.intValue = onboardingService.targetPrimarySimMobileData
-        PrimarySimSectionImpl(
+        PrimarySimImpl(
             subscriptionInfoList = selectedSubscriptionInfoList,
             callsSelectedId = callsSelectedId,
             textsSelectedId = textsSelectedId,
@@ -110,7 +109,7 @@ fun CreatePrimarySimListPreference(
         selectedId: MutableIntState,
         icon: ImageVector,
         onIdSelected: (id: Int) -> Unit
-) = ListPreference(remember {
+) = ListPreference(
     object : ListPreferenceModel {
         override val title = title
         override val options = list
@@ -119,5 +118,4 @@ fun CreatePrimarySimListPreference(
         override val icon = @Composable {
             SettingsIcon(icon)
         }
-    }
 })

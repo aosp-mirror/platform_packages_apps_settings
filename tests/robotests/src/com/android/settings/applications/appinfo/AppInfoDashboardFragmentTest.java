@@ -35,6 +35,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.admin.DevicePolicyManager;
+import android.app.ecm.EnhancedConfirmationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -90,7 +91,8 @@ public final class AppInfoDashboardFragmentTest {
     private DevicePolicyManager mDevicePolicyManager;
     @Mock
     private PackageManager mPackageManager;
-
+    @Mock
+    private EnhancedConfirmationManager mEcManager;
     private AppInfoDashboardFragment mFragment;
     private Context mShadowContext;
 
@@ -102,6 +104,7 @@ public final class AppInfoDashboardFragmentTest {
         doReturn(mActivity).when(mFragment).getActivity();
         doReturn(mShadowContext).when(mFragment).getContext();
         doReturn(mPackageManager).when(mActivity).getPackageManager();
+        doReturn(mEcManager).when(mActivity).getSystemService(EnhancedConfirmationManager.class);
         when(mUserManager.isAdminUser()).thenReturn(true);
 
         ReflectionHelpers.setField(mFragment, "mUserManager", mUserManager);

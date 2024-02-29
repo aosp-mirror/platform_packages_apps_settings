@@ -18,12 +18,16 @@ package com.android.settings.biometrics.fingerprint2.domain.interactor
 
 import android.content.Context
 import android.content.Intent
+import android.hardware.biometrics.BiometricConstants;
+import android.hardware.biometrics.BiometricFingerprintConstants
+import android.hardware.fingerprint.FingerprintEnrollOptions;
 import android.hardware.fingerprint.FingerprintManager
 import android.hardware.fingerprint.FingerprintManager.GenerateChallengeCallback
 import android.hardware.fingerprint.FingerprintManager.RemovalCallback
 import android.os.CancellationSignal
 import android.util.Log
 import com.android.settings.biometrics.GatekeeperPasswordProvider
+import com.android.settings.biometrics.BiometricUtils
 import com.android.settings.biometrics.fingerprint2.conversion.Util.toEnrollError
 import com.android.settings.biometrics.fingerprint2.conversion.Util.toOriginalReason
 import com.android.settings.biometrics.fingerprint2.data.repository.FingerprintSensorRepository
@@ -35,6 +39,8 @@ import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintData
 import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintFlow
 import com.android.settings.biometrics.fingerprint2.lib.model.SetupWizard
 import com.android.settings.password.ChooseLockSettingsHelper
+import com.android.systemui.biometrics.shared.model.toFingerprintSensor
+import com.google.android.setupcompat.util.WizardManagerHelper
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 import kotlinx.coroutines.CancellableContinuation
@@ -60,6 +66,7 @@ class FingerprintManagerInteractorImpl(
   private val gatekeeperPasswordProvider: GatekeeperPasswordProvider,
   private val pressToAuthInteractor: PressToAuthInteractor,
   private val fingerprintFlow: FingerprintFlow,
+  private val intent: Intent,
 ) : FingerprintManagerInteractor {
 
   private val maxFingerprints =
@@ -158,12 +165,21 @@ class FingerprintManagerInteractorImpl(
       }
 
     val cancellationSignal = CancellationSignal()
+
+    if (intent.getIntExtra(BiometricUtils.EXTRA_ENROLL_REASON, -1) === -1) {
+      val isSuw: Boolean = WizardManagerHelper.isAnySetupWizard(intent)
+      intent.putExtra(BiometricUtils.EXTRA_ENROLL_REASON,
+      if (isSuw) FingerprintEnrollOptions.ENROLL_REASON_SUW else
+        FingerprintEnrollOptions.ENROLL_REASON_SETTINGS)
+    }
+
     fingerprintManager.enroll(
       hardwareAuthToken,
       cancellationSignal,
       applicationContext.userId,
       enrollmentCallback,
       enrollReason.toOriginalReason(),
+      toFingerprintEnrollOptions(intent)
     )
     awaitClose {
       // If the stream has not been ended, and the user has stopped collecting the flow
@@ -244,4 +260,15 @@ class FingerprintManagerInteractorImpl(
         applicationContext.userId,
       )
     }
+
+  private fun toFingerprintEnrollOptions(intent: Intent): FingerprintEnrollOptions {
+    val reason: Int =
+      intent.getIntExtra(BiometricUtils.EXTRA_ENROLL_REASON, -1)
+    val builder: FingerprintEnrollOptions.Builder = FingerprintEnrollOptions.Builder()
+    builder.setEnrollReason(FingerprintEnrollOptions.ENROLL_REASON_UNKNOWN)
+    if (reason != -1) {
+      builder.setEnrollReason(reason)
+    }
+    return builder.build()
+  }
 }

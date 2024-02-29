@@ -38,6 +38,7 @@ import com.android.settings.flags.Flags
 import com.android.settings.spa.SpaActivity.Companion.startSpaActivity
 import com.android.settings.spa.app.appcompat.UserAspectRatioAppPreference
 import com.android.settings.spa.app.specialaccess.AlarmsAndRemindersAppListProvider
+import com.android.settings.spa.app.specialaccess.BackupTasksAppsListProvider
 import com.android.settings.spa.app.specialaccess.DisplayOverOtherAppsAppListProvider
 import com.android.settings.spa.app.specialaccess.InstallUnknownAppsListProvider
 import com.android.settings.spa.app.specialaccess.ModifySystemSettingsAppListProvider
@@ -168,6 +169,9 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
             AlarmsAndRemindersAppListProvider.InfoPageEntryItem(app)
             if (Flags.enableVoiceActivationAppsInSettings()) {
                 VoiceActivationAppsListProvider.InfoPageEntryItem(app)
+            }
+            if (Flags.enablePerformBackupTasksInSettings()) {
+                BackupTasksAppsListProvider.InfoPageEntryItem(app)
             }
         }
 

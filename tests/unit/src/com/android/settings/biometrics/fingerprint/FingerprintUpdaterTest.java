@@ -24,6 +24,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.fingerprint.Fingerprint;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.CancellationSignal;
@@ -78,13 +79,14 @@ public class FingerprintUpdaterTest {
         ArgumentCaptor<FingerprintManager.EnrollmentCallback> callbackCaptor =
                 ArgumentCaptor.forClass(FingerprintManager.EnrollmentCallback.class);
         mFingerprintUpdater.enroll(HARDWARE_AUTH_TOKEN, CANCELLATION_SIGNAL, USER_ID,
-                mEnrollmentCallback, ENROLL_REASON);
+                mEnrollmentCallback, ENROLL_REASON, new Intent());
         verify(mFingerprintManager).enroll(
                 same(HARDWARE_AUTH_TOKEN),
                 same(CANCELLATION_SIGNAL),
                 eq(USER_ID),
                 callbackCaptor.capture(),
-                eq(ENROLL_REASON));
+                eq(ENROLL_REASON),
+                any());
         FingerprintManager.EnrollmentCallback callback = callbackCaptor.getValue();
 
         callback.onEnrollmentError(ERR_MSG_ID, ERR_STRING);
@@ -101,13 +103,14 @@ public class FingerprintUpdaterTest {
         ArgumentCaptor<FingerprintManager.EnrollmentCallback> callbackCaptor =
                 ArgumentCaptor.forClass(FingerprintManager.EnrollmentCallback.class);
         mFingerprintUpdater.enroll(HARDWARE_AUTH_TOKEN, CANCELLATION_SIGNAL, USER_ID,
-                mEnrollmentCallback, ENROLL_REASON);
+                mEnrollmentCallback, ENROLL_REASON, new Intent());
         verify(mFingerprintManager).enroll(
                 same(HARDWARE_AUTH_TOKEN),
                 same(CANCELLATION_SIGNAL),
                 eq(USER_ID),
                 callbackCaptor.capture(),
-                eq(ENROLL_REASON));
+                eq(ENROLL_REASON),
+                any());
         FingerprintManager.EnrollmentCallback callback = callbackCaptor.getValue();
 
         callback.onEnrollmentProgress(/* remaining= */ 0);
@@ -120,13 +123,14 @@ public class FingerprintUpdaterTest {
         ArgumentCaptor<FingerprintManager.EnrollmentCallback> callbackCaptor =
                 ArgumentCaptor.forClass(FingerprintManager.EnrollmentCallback.class);
         mFingerprintUpdater.enroll(HARDWARE_AUTH_TOKEN, CANCELLATION_SIGNAL, USER_ID,
-                mEnrollmentCallback, ENROLL_REASON);
+                mEnrollmentCallback, ENROLL_REASON, new Intent());
         verify(mFingerprintManager).enroll(
                 same(HARDWARE_AUTH_TOKEN),
                 same(CANCELLATION_SIGNAL),
                 eq(USER_ID),
                 callbackCaptor.capture(),
-                eq(ENROLL_REASON));
+                eq(ENROLL_REASON),
+                any());
         FingerprintManager.EnrollmentCallback callback = callbackCaptor.getValue();
 
         callback.onEnrollmentProgress(/* remaining= */ 1);

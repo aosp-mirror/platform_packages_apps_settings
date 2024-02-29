@@ -165,7 +165,7 @@ public class FaceEnrollEnrolling extends BiometricsEnrollEnrolling {
             disabledFeatures[i] = mDisabledFeatures.get(i);
         }
 
-        return new FaceEnrollSidecar(disabledFeatures);
+        return new FaceEnrollSidecar(disabledFeatures, getIntent());
     }
 
     @Override

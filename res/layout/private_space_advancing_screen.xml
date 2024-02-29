@@ -25,13 +25,13 @@
                   android:layout_width="match_parent"
                   android:layout_height="match_parent"
                   android:orientation="vertical">
-        <ImageView
-            android:id="@+id/setup_advance_image"
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottie_animation"
+            style="@style/SudContentIllustration"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:contentDescription="@null"
-            android:src="@null"/>
+            app:lottie_rawRes="@null"/>
 
         <TextView
             android:id="@+id/createMessage"

@@ -17,6 +17,7 @@
 package com.android.settings.display;
 
 import static com.android.internal.display.RefreshRateSettingsUtils.DEFAULT_REFRESH_RATE;
+import static com.android.internal.display.RefreshRateSettingsUtils.findHighestRefreshRateAmongAllDisplays;
 import static com.android.internal.display.RefreshRateSettingsUtils.findHighestRefreshRateForDefaultDisplay;
 
 import android.content.Context;
@@ -66,7 +67,9 @@ public class PeakRefreshRatePreferenceController extends TogglePreferenceControl
                         updateState(mPreference);
                     }
                 };
-        mPeakRefreshRate = Math.round(findHighestRefreshRateForDefaultDisplay(context));
+        mPeakRefreshRate = Math.round(Flags.backUpSmoothDisplayAndForcePeakRefreshRate()
+                ? findHighestRefreshRateAmongAllDisplays(context)
+                : findHighestRefreshRateForDefaultDisplay(context));
         Log.d(
                 TAG,
                 "DEFAULT_REFRESH_RATE : "

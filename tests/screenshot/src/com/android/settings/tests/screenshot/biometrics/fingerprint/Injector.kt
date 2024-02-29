@@ -27,6 +27,7 @@ import com.android.settings.biometrics.fingerprint2.lib.model.Default
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.rfps.ui.viewmodel.RFPSIconTouchViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.rfps.ui.viewmodel.RFPSViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.BackgroundViewModel
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollConfirmationViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollEnrollingViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollFindSensorViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollIntroViewModel
@@ -103,6 +104,9 @@ class Injector(step: FingerprintNavigationStep.UiStep) {
   var rfpsViewModel =
     RFPSViewModel(fingerprintEnrollEnrollingViewModel, navigationViewModel, orientationInteractor)
 
+  val fingerprintEnrollConfirmationViewModel =
+    FingerprintEnrollConfirmationViewModel(navigationViewModel, interactor)
+
   var fingerprintFindSensorViewModel =
     FingerprintEnrollFindSensorViewModel(
       navigationViewModel,
@@ -131,6 +135,7 @@ class Injector(step: FingerprintNavigationStep.UiStep) {
           BackgroundViewModel::class.java -> backgroundViewModel
           RFPSIconTouchViewModel::class.java -> rfpsIconTouchViewModel
           FingerprintEnrollEnrollingViewModel::class.java -> fingerprintEnrollEnrollingViewModel
+          FingerprintEnrollConfirmationViewModel::class.java -> fingerprintEnrollConfirmationViewModel
           else -> null
         }
           as T

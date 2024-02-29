@@ -227,7 +227,8 @@ public class FingerprintEnrollFindSensorTest {
                 any(CancellationSignal.class),
                 anyInt(),
                 callbackCaptor.capture(),
-                eq(FingerprintManager.ENROLL_FIND_SENSOR));
+                eq(FingerprintManager.ENROLL_FIND_SENSOR),
+                any());
 
         return callbackCaptor.getValue();
     }

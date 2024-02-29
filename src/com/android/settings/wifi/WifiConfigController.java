@@ -276,7 +276,7 @@ public class WifiConfigController implements TextWatcher,
         mDoNotProvideEapUserCertString =
             mContext.getString(R.string.wifi_do_not_provide_eap_user_cert);
 
-        if (Flags.wepUsage() && mAccessPointSecurity == WifiEntry.SECURITY_WEP) {
+        if (Flags.androidVWifiApi() && mAccessPointSecurity == WifiEntry.SECURITY_WEP) {
             LinearLayout wepWarningLayout =
                     (LinearLayout) mView.findViewById(R.id.wep_warning_layout);
             wepWarningLayout.setVisibility(View.VISIBLE);

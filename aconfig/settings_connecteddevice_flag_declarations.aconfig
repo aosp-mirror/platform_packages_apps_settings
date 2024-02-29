@@ -9,20 +9,6 @@ flag {
 }
 
 flag {
-  name: "enable_le_audio_sharing"
-  namespace: "pixel_cross_device_control"
-  description: "Gates whether to enable LE audio sharing"
-  bug: "305620450"
-}
-
-flag {
-  name: "enable_le_audio_qr_code_private_broadcast_sharing"
-  namespace: "pixel_cross_device_control"
-  description: "Gates whether to enable LE audio private broadcast sharing via QR code"
-  bug: "308368124"
-}
-
-flag {
   name: "enable_auth_challenge_for_usb_preferences"
   namespace: "safety_center"
   description: "Gates whether to require an auth challenge for changing USB preferences"
@@ -34,11 +20,4 @@ flag {
   namespace: "pixel_cross_device_control"
   description: "Order the saved bluetooth devices by most recently connected."
   bug: "306160434"
-}
-
-flag {
-  name: "enable_hide_exclusively_managed_bluetooth_device"
-  namespace: "dck_framework"
-  description: "Hide exclusively managed Bluetooth devices in BT settings menu."
-  bug: "322285078"
 }

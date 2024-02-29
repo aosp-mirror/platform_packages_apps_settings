@@ -16,128 +16,112 @@
 
 package com.android.settings.network.apn
 
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.snapshots.SnapshotStateList
+import android.content.Context
+import android.telephony.data.ApnSetting
+import android.util.Log
+import android.widget.Toast
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.text.intl.Locale
+import androidx.compose.ui.text.toLowerCase
+import com.android.settings.R
+import com.android.settingslib.spa.widget.editor.SettingsDropdownCheckOption
 
 object ApnTypes {
-    /**
-     * APN types for data connections.  These are usage categories for an APN
-     * entry.  One APN entry may support multiple APN types, eg, a single APN
-     * may service regular internet traffic ("default") as well as MMS-specific
-     * connections.<br></br>
-     * APN_TYPE_ALL is a special type to indicate that this APN entry can
-     * service all data connections.
-     */
-    const val APN_TYPE_ALL = "*"
+    private const val TAG = "ApnTypes"
 
-    /** APN type for default data traffic  */
-    const val APN_TYPE_DEFAULT = "default"
-
-    /** APN type for MMS traffic  */
-    const val APN_TYPE_MMS = "mms"
-
-    /** APN type for SUPL assisted GPS  */
-    const val APN_TYPE_SUPL = "supl"
-
-    /** APN type for DUN traffic  */
-    const val APN_TYPE_DUN = "dun"
-
-    /** APN type for HiPri traffic  */
-    const val APN_TYPE_HIPRI = "hipri"
-
-    /** APN type for FOTA  */
-    const val APN_TYPE_FOTA = "fota"
-
-    /** APN type for IMS  */
-    const val APN_TYPE_IMS = "ims"
-
-    /** APN type for CBS  */
-    const val APN_TYPE_CBS = "cbs"
-
-    /** APN type for IA Initial Attach APN  */
-    const val APN_TYPE_IA = "ia"
-
-    /** APN type for Emergency PDN. This is not an IA apn, but is used
-     * for access to carrier services in an emergency call situation.  */
-    const val APN_TYPE_EMERGENCY = "emergency"
-
-    /** APN type for Mission Critical Services  */
-    const val APN_TYPE_MCX = "mcx"
-
-    /** APN type for XCAP  */
-    const val APN_TYPE_XCAP = "xcap"
-
-    /** APN type for VSIM  */
-    const val APN_TYPE_VSIM = "vsim"
-
-    /** APN type for BIP  */
-    const val APN_TYPE_BIP = "bip"
-
-    /** APN type for ENTERPRISE  */
-    const val APN_TYPE_ENTERPRISE = "enterprise"
-
-    val APN_TYPES = arrayOf(
-        APN_TYPE_DEFAULT,
-        APN_TYPE_MMS,
-        APN_TYPE_SUPL,
-        APN_TYPE_DUN,
-        APN_TYPE_HIPRI,
-        APN_TYPE_FOTA,
-        APN_TYPE_IMS,
-        APN_TYPE_CBS,
-        APN_TYPE_IA,
-        APN_TYPE_EMERGENCY,
-        APN_TYPE_MCX,
-        APN_TYPE_XCAP,
-        APN_TYPE_VSIM,
-        APN_TYPE_BIP,
-        APN_TYPE_ENTERPRISE
+    private val APN_TYPES = arrayOf(
+        ApnSetting.TYPE_DEFAULT_STRING,
+        ApnSetting.TYPE_MMS_STRING,
+        ApnSetting.TYPE_SUPL_STRING,
+        ApnSetting.TYPE_DUN_STRING,
+        ApnSetting.TYPE_HIPRI_STRING,
+        ApnSetting.TYPE_FOTA_STRING,
+        ApnSetting.TYPE_IMS_STRING,
+        ApnSetting.TYPE_CBS_STRING,
+        ApnSetting.TYPE_IA_STRING,
+        ApnSetting.TYPE_EMERGENCY_STRING,
+        ApnSetting.TYPE_MCX_STRING,
+        ApnSetting.TYPE_XCAP_STRING,
+        ApnSetting.TYPE_VSIM_STRING,
+        ApnSetting.TYPE_BIP_STRING,
+        ApnSetting.TYPE_ENTERPRISE_STRING,
     )
 
-    val APN_TYPES_OPTIONS = listOf(APN_TYPE_ALL) + APN_TYPES
-
-    fun getApnTypeSelectedOptionsState(apnType: String): SnapshotStateList<Int> {
-        val apnTypeSelectedOptionsState = mutableStateListOf<Int>()
-        if (apnType.contains(APN_TYPE_ALL))
-            APN_TYPES_OPTIONS.forEachIndexed { index, _ ->
-                apnTypeSelectedOptionsState.add(index)
-            }
-        else {
-            APN_TYPES_OPTIONS.forEachIndexed { index, type ->
-                if (apnType.contains(type)) {
-                    apnTypeSelectedOptionsState.add(index)
-                }
-            }
-            if (apnTypeSelectedOptionsState.size == APN_TYPES.size)
-                apnTypeSelectedOptionsState.add(APN_TYPES_OPTIONS.indexOf(APN_TYPE_ALL))
+    private fun splitToList(apnType: String): List<String> {
+        val types = apnType.split(',').map { it.trim().toLowerCase(Locale.current) }
+        if (ApnSetting.TYPE_ALL_STRING in types || APN_TYPES.all { it in types }) {
+            return listOf(ApnSetting.TYPE_ALL_STRING)
         }
-        return apnTypeSelectedOptionsState
+        return APN_TYPES.filter { it in types }
     }
 
-    fun updateApnType(
-        apnTypeSelectedOptionsState: SnapshotStateList<Int>,
-        defaultApnTypes: List<String>,
-        readOnlyApnTypes: List<String>
-    ): String {
-        val apnType = apnTypeSelectedOptionsState.joinToString { APN_TYPES_OPTIONS[it] }
-        if (apnType.contains(APN_TYPE_ALL)) return APN_TYPE_ALL
-        return if (apnType == "" && defaultApnTypes.isNotEmpty())
-            getEditableApnType(defaultApnTypes, readOnlyApnTypes)
-        else
-            apnType
+    fun isApnTypeReadOnly(apnType: String, readOnlyTypes: List<String>): Boolean {
+        val apnTypes = splitToList(apnType)
+        return ApnSetting.TYPE_ALL_STRING in readOnlyTypes ||
+            ApnSetting.TYPE_ALL_STRING in apnTypes && readOnlyTypes.isNotEmpty() ||
+            apnTypes.any { it in readOnlyTypes }
     }
 
-    private fun getEditableApnType(
-        defaultApnTypes: List<String>,
-        readOnlyApnTypes: List<String>
-    ): String {
-        return defaultApnTypes.filterNot { apnType ->
-            readOnlyApnTypes.contains(apnType) || apnType in listOf(
-                APN_TYPE_IA,
-                APN_TYPE_EMERGENCY,
-                APN_TYPE_MCX,
-                APN_TYPE_IMS,
+    fun getOptions(context: Context, apnType: String, readOnlyTypes: List<String>) = buildList {
+        val apnTypes = splitToList(apnType)
+        add(
+            context.createSettingsDropdownCheckOption(
+                text = ApnSetting.TYPE_ALL_STRING,
+                isSelectAll = true,
+                changeable = readOnlyTypes.isEmpty(),
+                selected = ApnSetting.TYPE_ALL_STRING in apnTypes,
             )
-        }.joinToString()
+        )
+        for (type in APN_TYPES) {
+            add(
+                context.createSettingsDropdownCheckOption(
+                    text = type,
+                    changeable = ApnSetting.TYPE_ALL_STRING !in readOnlyTypes &&
+                        type !in readOnlyTypes,
+                    selected = ApnSetting.TYPE_ALL_STRING in apnTypes || type in apnTypes,
+                )
+            )
+        }
+    }.also { Log.d(TAG, "APN Type options: $it") }
+
+    private fun Context.createSettingsDropdownCheckOption(
+        text: String,
+        isSelectAll: Boolean = false,
+        changeable: Boolean,
+        selected: Boolean,
+    ) = SettingsDropdownCheckOption(
+        text = text,
+        isSelectAll = isSelectAll,
+        changeable = changeable,
+        selected = mutableStateOf(selected),
+    ) {
+        if (!changeable) {
+            val message = resources.getString(R.string.error_adding_apn_type, text)
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        }
     }
+
+    fun List<SettingsDropdownCheckOption>.toApnType(): String {
+        val (selectAllOptions, regularOptions) = partition { it.isSelectAll }
+        for (selectAllOption in selectAllOptions) {
+            if (selectAllOption.selected.value) return ApnSetting.TYPE_ALL_STRING
+        }
+        return regularOptions.filter { it.selected.value }.joinToString(",") { it.text }
+    }
+
+    private val NotPreSelectedTypes = setOf(
+        ApnSetting.TYPE_IMS_STRING,
+        ApnSetting.TYPE_IA_STRING,
+        ApnSetting.TYPE_EMERGENCY_STRING,
+        ApnSetting.TYPE_MCX_STRING,
+    )
+
+    fun getPreSelectedApnType(customizedConfig: CustomizedConfig): String =
+        (customizedConfig.defaultApnTypes
+            ?: defaultPreSelectedApnTypes(customizedConfig.readOnlyApnTypes))
+            .joinToString(",")
+
+    private fun defaultPreSelectedApnTypes(readOnlyApnTypes: List<String>) =
+        if (ApnSetting.TYPE_ALL_STRING in readOnlyApnTypes) emptyList()
+        else APN_TYPES.filter { it !in readOnlyApnTypes + NotPreSelectedTypes }
 }

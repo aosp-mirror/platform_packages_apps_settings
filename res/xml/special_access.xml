@@ -20,6 +20,14 @@
     android:title="@string/special_access">
 
     <Preference
+        android:key="run_backup_tasks"
+        android:title="@string/run_backup_tasks_title"
+        android:order="-2000"
+        settings:keywords="@string/keywords_run_backup_tasks"
+        settings:controller="com.android.settings.spa.app.specialaccess.BackupTasksAppsPreferenceController">
+    </Preference>
+
+    <Preference
         android:key="manage_external_storage"
         android:title="@string/manage_external_storage_title"
         android:order="-1900"

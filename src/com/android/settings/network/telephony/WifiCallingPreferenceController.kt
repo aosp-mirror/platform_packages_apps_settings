@@ -29,8 +29,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
 import com.android.settings.R
-import com.android.settings.network.telephony.ims.ImsMmTelRepository
-import com.android.settings.network.telephony.ims.ImsMmTelRepositoryImpl
+import com.android.settings.network.telephony.wificalling.WifiCallingRepository
 import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -46,8 +45,8 @@ open class WifiCallingPreferenceController @JvmOverloads constructor(
     context: Context,
     key: String,
     private val callStateFlowFactory: (subId: Int) -> Flow<Int> = context::callStateFlow,
-    private val imsMmTelRepositoryFactory: (subId: Int) -> ImsMmTelRepository = { subId ->
-        ImsMmTelRepositoryImpl(context, subId)
+    private val wifiCallingRepositoryFactory: (subId: Int) -> WifiCallingRepository = { subId ->
+        WifiCallingRepository(context, subId)
     },
 ) : TelephonyBasePreferenceController(context, key) {
 
@@ -81,15 +80,11 @@ open class WifiCallingPreferenceController @JvmOverloads constructor(
     }
 
     override fun onViewCreated(viewLifecycleOwner: LifecycleOwner) {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                val isVisible = withContext(Dispatchers.Default) {
-                    MobileNetworkUtils.isWifiCallingEnabled(mContext, mSubId, null)
-                }
-                preference.isVisible = isVisible
-                callingPreferenceCategoryController.updateChildVisible(preferenceKey, isVisible)
+        wifiCallingRepositoryFactory(mSubId).wifiCallingReadyFlow()
+            .collectLatestWithLifecycle(viewLifecycleOwner) {
+                preference.isVisible = it
+                callingPreferenceCategoryController.updateChildVisible(preferenceKey, it)
             }
-        }
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -123,7 +118,7 @@ open class WifiCallingPreferenceController @JvmOverloads constructor(
     }
 
     private fun getSummaryForWfcMode(): String {
-        val resId = when (imsMmTelRepositoryFactory(mSubId).getWiFiCallingMode()) {
+        val resId = when (wifiCallingRepositoryFactory(mSubId).getWiFiCallingMode()) {
             ImsMmTelManager.WIFI_MODE_WIFI_ONLY ->
                 com.android.internal.R.string.wfc_mode_wifi_only_summary
 

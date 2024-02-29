@@ -29,6 +29,7 @@ import com.android.settings.spa.app.appinfo.CloneAppInfoSettingsProvider
 import com.android.settings.spa.app.backgroundinstall.BackgroundInstalledAppsPageProvider
 import com.android.settings.spa.app.specialaccess.AlarmsAndRemindersAppListProvider
 import com.android.settings.spa.app.specialaccess.AllFilesAccessAppListProvider
+import com.android.settings.spa.app.specialaccess.BackupTasksAppsListProvider
 import com.android.settings.spa.app.specialaccess.DisplayOverOtherAppsAppListProvider
 import com.android.settings.spa.app.specialaccess.InstallUnknownAppsListProvider
 import com.android.settings.spa.app.specialaccess.LongBackgroundTasksAppListProvider
@@ -55,6 +56,7 @@ import com.android.settings.spa.notification.NotificationMainPageProvider
 import com.android.settings.spa.system.AppLanguagesPageProvider
 import com.android.settings.spa.system.LanguageAndInputPageProvider
 import com.android.settings.spa.system.SystemMainPageProvider
+import com.android.settings.wifi.details2.WifiPrivacyPageProvider
 import com.android.settingslib.spa.framework.common.SettingsPageProviderRepository
 import com.android.settingslib.spa.framework.common.SpaEnvironment
 import com.android.settingslib.spa.framework.common.SpaLogger
@@ -79,6 +81,7 @@ open class SettingsSpaEnvironment(context: Context) : SpaEnvironment(context) {
             NfcTagAppsSettingsProvider,
             LongBackgroundTasksAppListProvider,
             TurnScreenOnAppsAppListProvider,
+            BackupTasksAppsListProvider,
         )
     }
 
@@ -120,6 +123,7 @@ open class SettingsSpaEnvironment(context: Context) : SpaEnvironment(context) {
         SimOnboardingPageProvider,
         BatteryOptimizationModeAppListPageProvider,
         NetworkCellularGroupProvider,
+        WifiPrivacyPageProvider,
     )
 
     override val logger = if (FeatureFlagUtils.isEnabled(

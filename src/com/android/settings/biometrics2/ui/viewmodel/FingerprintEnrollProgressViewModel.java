@@ -23,6 +23,7 @@ import static com.android.settings.biometrics2.ui.model.EnrollmentProgress.INITI
 import static com.android.settings.biometrics2.ui.model.EnrollmentProgress.INITIAL_STEPS;
 
 import android.app.Application;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.hardware.fingerprint.FingerprintManager.EnrollReason;
 import android.hardware.fingerprint.FingerprintManager.EnrollmentCallback;
@@ -212,10 +213,11 @@ public class FingerprintEnrollProgressViewModel extends AndroidViewModel {
                     res.getBoolean(R.bool.enrollment_progress_priority_over_help),
                     res.getBoolean(R.bool.enrollment_prioritize_acquire_messages),
                     res.getInteger(R.integer.enrollment_collect_time));
-            mFingerprintUpdater.enroll(mToken, mCancellationSignal, mUserId, callback, reason);
+            mFingerprintUpdater.enroll(mToken, mCancellationSignal, mUserId, callback, reason,
+                    new Intent());
         } else {
             mFingerprintUpdater.enroll(mToken, mCancellationSignal, mUserId, mEnrollmentCallback,
-                    reason);
+                    reason, new Intent());
         }
         return mCancellationSignal;
     }
