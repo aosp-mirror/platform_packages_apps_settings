@@ -16,7 +16,6 @@
 
 package com.android.settings.network
 
-import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -51,7 +50,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -59,6 +57,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import com.android.settings.R
 import com.android.settings.SidecarFragment
 import com.android.settings.network.telephony.SubscriptionActionDialogActivity
+import com.android.settings.network.telephony.ToggleSubscriptionDialogActivity
 import com.android.settings.spa.SpaActivity.Companion.startSpaActivity
 import com.android.settings.spa.network.SimOnboardingPageProvider.getRoute
 import com.android.settingslib.spa.SpaBaseDialogActivity
@@ -79,7 +78,7 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
     lateinit var scope: CoroutineScope
     lateinit var showBottomSheet: MutableState<Boolean>
     lateinit var showError: MutableState<Boolean>
-    lateinit var showDialog: MutableState<Boolean>
+    lateinit var showProgressDialog: MutableState<Boolean>
 
     private var switchToEuiccSubscriptionSidecar: SwitchToEuiccSubscriptionSidecar? = null
     private var switchToRemovableSlotSidecar: SwitchToRemovableSlotSidecar? = null
@@ -97,6 +96,16 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
         initServiceData(this, targetSubId, callbackListener)
         if (!onboardingService.isUsableTargetSubscriptionId) {
             Log.e(TAG, "The subscription id is not usable.")
+            finish()
+            return
+        }
+
+        if (onboardingService.activeSubInfoList.isEmpty()) {
+            // TODO: refactor and replace the ToggleSubscriptionDialogActivity
+            Log.e(TAG, "onboardingService.activeSubInfoList is empty" +
+                    ", start ToggleSubscriptionDialogActivity")
+            this.startActivity(ToggleSubscriptionDialogActivity
+                    .getIntent(this.applicationContext, targetSubId, true))
             finish()
             return
         }
@@ -153,7 +162,10 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
     }
 
     fun setProgressDialog(enable: Boolean) {
-        showDialog.value = enable
+        if (!this::showProgressDialog.isInitialized) {
+            return
+        }
+        showProgressDialog.value = enable
         val progressState = if (enable) {
             SubscriptionActionDialogActivity.PROGRESS_IS_SHOWING
         } else {
@@ -165,9 +177,9 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     override fun Content() {
-        showBottomSheet = remember { mutableStateOf(true) }
+        showBottomSheet = remember { mutableStateOf(false) }
         showError = remember { mutableStateOf(false) }
-        showDialog = remember { mutableStateOf(false) }
+        showProgressDialog = remember { mutableStateOf(false) }
         scope = rememberCoroutineScope()
 
         registerSidecarReceiverFlow()
@@ -175,6 +187,11 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
         if(showError.value){
             // show error
             return
+        }
+        LaunchedEffect(Unit) {
+            if (onboardingService.activeSubInfoList.isNotEmpty()) {
+                showBottomSheet.value = true
+            }
         }
 
         if (showBottomSheet.value) {
@@ -195,7 +212,9 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
                 },
                 cancelAction = { finish() },
             )
-        } else {
+        }
+
+        if(showProgressDialog.value) {
             ProgressDialogImpl()
         }
     }
@@ -203,34 +222,32 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     fun ProgressDialogImpl() {
-        if(showDialog.value) {
-            // TODO: Create the SPA's ProgressDialog and using SPA's widget
-            BasicAlertDialog(
-                onDismissRequest = {},
-                modifier = Modifier.width(
-                    getDialogWidth()
-                ),
+        // TODO: Create the SPA's ProgressDialog and using SPA's widget
+        BasicAlertDialog(
+            onDismissRequest = {},
+            modifier = Modifier.width(
+                getDialogWidth()
+            ),
+        ) {
+            Surface(
+                color = AlertDialogDefaults.containerColor,
+                shape = AlertDialogDefaults.shape
             ) {
-                Surface(
-                    color = AlertDialogDefaults.containerColor,
-                    shape = AlertDialogDefaults.shape
-                ) {
-                    Row(
-                        modifier = Modifier
+                Row(
+                    modifier = Modifier
                             .fillMaxWidth()
                             .padding(SettingsDimension.itemPaddingStart),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        CircularProgressIndicator()
-                        Column(modifier = Modifier
-                                .padding(start = SettingsDimension.itemPaddingStart)) {
-                            SettingsTitle(
-                                stringResource(
-                                    R.string.sim_onboarding_progressbar_turning_sim_on,
-                                    onboardingService.targetSubInfo?.displayName ?: ""
-                                )
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    CircularProgressIndicator()
+                    Column(modifier = Modifier
+                            .padding(start = SettingsDimension.itemPaddingStart)) {
+                        SettingsTitle(
+                            stringResource(
+                                R.string.sim_onboarding_progressbar_turning_sim_on,
+                                onboardingService.targetSubInfo?.displayName ?: ""
                             )
-                        }
+                        )
                     }
                 }
             }
