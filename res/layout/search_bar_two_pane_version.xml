@@ -29,8 +29,7 @@
         android:paddingStart="@dimen/search_bar_padding_start_two_pane"
         android:paddingEnd="@dimen/search_bar_padding_end_two_pane"
         android:background="@drawable/search_bar_selected_background"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
+        android:touchscreenBlocksFocus="false"
         android:nextFocusForward="@+id/homepage_container"
         android:contentInsetStartWithNavigation="@dimen/search_bar_content_inset"
         android:navigationIcon="@drawable/ic_homepage_search">
