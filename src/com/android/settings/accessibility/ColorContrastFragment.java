@@ -16,6 +16,8 @@
 
 package com.android.settings.accessibility;
 
+import android.app.settings.SettingsEnums;
+
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -40,8 +42,7 @@ public class ColorContrastFragment extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        // TODO(b/326539398): Add metrics tracking for color contrast.
-        return 0;
+        return SettingsEnums.ACCESSIBILITY_COLOR_CONTRAST;
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

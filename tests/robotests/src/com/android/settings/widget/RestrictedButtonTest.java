@@ -34,7 +34,6 @@ import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
@@ -44,7 +43,6 @@ import org.robolectric.annotation.Config;
 import java.util.ArrayList;
 import java.util.List;
 
-@Ignore("b/315133235")
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowUserManager.class, ShadowDevicePolicyManager.class})
 public class RestrictedButtonTest {
