@@ -23,6 +23,7 @@ import android.telephony.TelephonyManager
 import android.telephony.UiccCardInfo
 import android.telephony.UiccSlotInfo
 import android.util.Log
+import com.android.settings.network.SimOnboardingActivity.Companion.CallbackType
 import com.android.settings.spa.network.setAutomaticData
 import com.android.settings.spa.network.setDefaultData
 import com.android.settings.spa.network.setDefaultSms
@@ -30,7 +31,6 @@ import com.android.settings.spa.network.setDefaultVoice
 import com.android.settingslib.utils.ThreadUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-
 
 private const val TAG = "SimOnboardingService"
 private const val INVALID = SubscriptionManager.INVALID_SUBSCRIPTION_ID
@@ -60,7 +60,7 @@ class SimOnboardingService {
                 .map { it.subscriptionId }
                 .firstOrNull() ?: SubscriptionManager.INVALID_SUBSCRIPTION_ID
         }
-    var callback: (Int) -> Unit = {}
+    var callback: (CallbackType) -> Unit = {}
 
     var isMultipleEnabledProfilesSupported: Boolean = false
         get() {
@@ -135,24 +135,24 @@ class SimOnboardingService {
         userSelectedSubInfoList.clear()
     }
 
-    fun initData(inputTargetSubId:Int,context: Context, callback: (Int) -> Unit) {
+    fun initData(inputTargetSubId: Int,
+                 context: Context,
+                 callback: (CallbackType) -> Unit) {
         this.callback = callback
         targetSubId = inputTargetSubId
         subscriptionManager = context.getSystemService(SubscriptionManager::class.java)
         telephonyManager = context.getSystemService(TelephonyManager::class.java)
         Log.d(
-            TAG, "startInit: targetSubId:$targetSubId"
+            TAG, "startInit: targetSubId:$targetSubId, activeSubInfoList: $activeSubInfoList"
         )
+        activeSubInfoList = SubscriptionUtil.getActiveSubscriptions(subscriptionManager)
+
         ThreadUtils.postOnBackgroundThread {
-            activeSubInfoList = SubscriptionUtil.getActiveSubscriptions(subscriptionManager)
             availableSubInfoList = SubscriptionUtil.getAvailableSubscriptions(context)
             targetSubInfo =
                 availableSubInfoList.find { subInfo -> subInfo.subscriptionId == targetSubId }
             targetSubInfo?.let { userSelectedSubInfoList.add(it) }
-            Log.d(
-                TAG, "targetSubId: $targetSubId" + ", targetSubInfo: $targetSubInfo" +
-                    ". activeSubInfoList: $activeSubInfoList"
-            )
+            Log.d(TAG, "targetSubId: $targetSubId , targetSubInfo: $targetSubInfo")
             slotInfoList = telephonyManager?.uiccSlotsInfo?.toList() ?: listOf()
             Log.d(TAG, "slotInfoList: $slotInfoList.")
             uiccCardInfoList = telephonyManager?.uiccCardsInfo!!
@@ -196,6 +196,16 @@ class SimOnboardingService {
         return userSelectedSubInfoList.toList()
     }
 
+    fun getSelectedSubscriptionInfoListWithRenaming(): List<SubscriptionInfo> {
+        if (userSelectedSubInfoList.isEmpty()){
+            Log.d(TAG, "userSelectedSubInfoList is empty")
+            return activeSubInfoList
+        }
+        return userSelectedSubInfoList.map {
+            SubscriptionInfo.Builder(it).setDisplayName(getSubscriptionInfoDisplayName(it)).build()
+        }.toList()
+    }
+
     fun addItemForRenaming(subInfo: SubscriptionInfo, newName: String) {
         if (subInfo.displayName == newName) {
             return
@@ -211,8 +221,12 @@ class SimOnboardingService {
         return renameMutableMap[subInfo.subscriptionId] ?: subInfo.displayName.toString()
     }
 
-    fun addCurrentItemForSelectedSim(){
-        userSelectedSubInfoList.addAll(activeSubInfoList)
+    fun addCurrentItemForSelectedSim() {
+        if (userSelectedSubInfoList.size < getActiveModemCount) {
+            userSelectedSubInfoList.addAll(activeSubInfoList)
+            Log.d(TAG, "addCurrentItemForSelectedSim: userSelectedSubInfoList:" +
+                    ", $userSelectedSubInfoList")
+        }
     }
 
     fun addItemForSelectedSim(selectedSubInfo: SubscriptionInfo) {
@@ -249,7 +263,7 @@ class SimOnboardingService {
 
     fun startActivatingSim(){
         // TODO: start to activate sim
-        callback(SimOnboardingActivity.CALLBACK_FINISH)
+        callback(CallbackType.CALLBACK_FINISH)
     }
 
     suspend fun startSetupName() {
@@ -261,7 +275,7 @@ class SimOnboardingService {
                 )
             }
             // next action is SETUP_PRIMARY_SIM
-            callback(SimOnboardingActivity.CALLBACK_SETUP_PRIMARY_SIM)
+            callback(CallbackType.CALLBACK_SETUP_PRIMARY_SIM)
         }
     }
 
@@ -290,7 +304,7 @@ class SimOnboardingService {
             }
 
             // no next action, send finish
-            callback(SimOnboardingActivity.CALLBACK_FINISH)
+            callback(CallbackType.CALLBACK_FINISH)
         }
     }
 }
