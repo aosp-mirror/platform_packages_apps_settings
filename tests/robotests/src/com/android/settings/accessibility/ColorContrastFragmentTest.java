@@ -22,6 +22,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.app.UiModeManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 
 import androidx.test.core.app.ApplicationProvider;
@@ -59,7 +60,8 @@ public class ColorContrastFragmentTest {
 
     @Test
     public void getMetricsCategory_returnsCorrectCategory() {
-        assertThat(mFragment.getMetricsCategory()).isEqualTo(0);
+        assertThat(mFragment.getMetricsCategory()).isEqualTo(
+                SettingsEnums.ACCESSIBILITY_COLOR_CONTRAST);
     }
 
     @Test

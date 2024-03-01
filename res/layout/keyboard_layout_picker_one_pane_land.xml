@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (C) 2024 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/keyboard_layout_picker_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/keyboard_picker_margin_one_pane"
+    android:layout_marginVertical="@dimen/keyboard_picker_margin_one_pane_large"
+    android:orientation="horizontal">
+
+    <FrameLayout
+        android:id="@+id/keyboard_layout_preview_container"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="@dimen/keyboard_picker_margin_one_pane"
+        android:background="@drawable/keyboard_review_layout_background">
+
+        <ImageView
+            android:id="@+id/keyboard_layout_preview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/keyboard_picker_margin_small"
+            android:layout_marginTop="@dimen/keyboard_picker_margin_small"
+            android:layout_marginBottom="@dimen/keyboard_picker_margin_large"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter" />
+
+        <TextView
+            android:id="@+id/keyboard_layout_preview_name"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/keyboard_picker_margin_large"
+            android:layout_gravity="bottom"
+            android:gravity="center"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="@dimen/keyboard_picker_text_size" />
+    </FrameLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/keyboard_picker_margin_one_pane"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:id="@+id/keyboard_layout_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/colorBackground"
+            android:elevation="1dp"
+            android:outlineAmbientShadowColor="@android:color/transparent"
+            android:outlineSpotShadowColor="@android:color/transparent" />
+
+        <FrameLayout
+            android:id="@+id/keyboard_layouts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/keyboard_picker_margin_small"
+            android:background="?android:attr/colorBackground" />
+    </LinearLayout>
+
+</LinearLayout>

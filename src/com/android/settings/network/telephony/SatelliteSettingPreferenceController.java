@@ -29,6 +29,7 @@ import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.internal.telephony.flags.Flags;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.network.CarrierConfigCache;
@@ -58,6 +59,11 @@ public class SatelliteSettingPreferenceController extends
 
     @Override
     public int getAvailabilityStatus(int subId) {
+        if (!Flags.carrierEnabledSatelliteFlag()) {
+            logd("getAvailabilityStatus() : carrierEnabledSatelliteFlag is disabled");
+            return UNSUPPORTED_ON_DEVICE;
+        }
+
         final PersistableBundle carrierConfig = mCarrierConfigCache.getConfigForSubId(subId);
         final boolean isSatelliteAttachSupported = carrierConfig.getBoolean(
                 CarrierConfigManager.KEY_SATELLITE_ATTACH_SUPPORTED_BOOL);
