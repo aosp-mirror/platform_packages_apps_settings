@@ -24,6 +24,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
@@ -90,6 +91,13 @@ public class SmartBatterySettings extends DashboardFragment {
                 public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
                     return buildPreferenceControllers(context, null, null);
+                }
+
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    return FeatureFactory.getFeatureFactory()
+                            .getPowerUsageFeatureProvider()
+                            .isSmartBatterySupported();
                 }
             };
 }
