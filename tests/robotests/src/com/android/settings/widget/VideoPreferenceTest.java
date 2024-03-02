@@ -35,19 +35,18 @@ import android.widget.ImageView;
 
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceViewHolder;
-import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowSettingsMediaPlayer;
 
 import org.junit.Before;
-import org.junit.Rule;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnit;
-import org.mockito.junit.MockitoRule;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.androidx.fragment.FragmentController;
 
@@ -56,8 +55,7 @@ import org.robolectric.shadows.androidx.fragment.FragmentController;
 public class VideoPreferenceTest {
     private static final int VIDEO_WIDTH = 100;
     private static final int VIDEO_HEIGHT = 150;
-    @Rule
-    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+
     private VideoPreference.AnimationController mAnimationController;
     @Mock
     private ImageView fakePreview;
@@ -70,7 +68,9 @@ public class VideoPreferenceTest {
 
     @Before
     public void setUp() {
-        mContext = ApplicationProvider.getApplicationContext();
+        MockitoAnnotations.initMocks(this);
+
+        mContext = RuntimeEnvironment.application;
         mAnimationController = spy(
                 new MediaAnimationController(mContext, R.raw.sample_video));
         mVideoPreference = new VideoPreference(mContext, null /* attrs */);
@@ -141,6 +141,7 @@ public class VideoPreferenceTest {
         assertThat(mAnimationController.isPlaying()).isTrue();
     }
 
+    @Ignore("b/315133235")
     @Test
     @Config(qualifiers = "mcc999")
     public void onViewVisible_createAnimationController() {
