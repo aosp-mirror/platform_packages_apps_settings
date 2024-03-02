@@ -61,6 +61,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+// TODO(b/327638540): Update implementation of preference here and reuse key preferences and
+//  controllers between here and A11y Setting page.
 @SearchIndexable
 public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
         implements InputManager.InputDeviceListener,
@@ -83,6 +85,8 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
             Secure.ACCESSIBILITY_SLOW_KEYS);
     private static final Uri sAccessibilityStickyKeysUri = Secure.getUriFor(
             Secure.ACCESSIBILITY_STICKY_KEYS);
+    public static final int BOUNCE_KEYS_THRESHOLD = 500;
+    public static final int SLOW_KEYS_THRESHOLD = 500;
 
     @NonNull
     private final ArrayList<HardKeyboardDeviceInfo> mLastHardKeyboards = new ArrayList<>();
@@ -132,8 +136,12 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
         mKeyboardA11yCategory = Objects.requireNonNull(findPreference(KEYBOARD_A11Y_CATEGORY));
         mAccessibilityBounceKeys = Objects.requireNonNull(
                 mKeyboardA11yCategory.findPreference(ACCESSIBILITY_BOUNCE_KEYS));
+        mAccessibilityBounceKeys.setSummary(
+                getContext().getString(R.string.bounce_keys_summary, BOUNCE_KEYS_THRESHOLD));
         mAccessibilitySlowKeys = Objects.requireNonNull(
                 mKeyboardA11yCategory.findPreference(ACCESSIBILITY_SLOW_KEYS));
+        mAccessibilitySlowKeys.setSummary(
+                getContext().getString(R.string.slow_keys_summary, SLOW_KEYS_THRESHOLD));
         mAccessibilityStickyKeys = Objects.requireNonNull(
                 mKeyboardA11yCategory.findPreference(ACCESSIBILITY_STICKY_KEYS));
 
