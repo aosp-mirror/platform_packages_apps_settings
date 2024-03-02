@@ -16,37 +16,33 @@
 
 package com.android.settings.spa.network
 
-import android.app.Application
 import android.content.Context
-import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
-import android.os.UserManager
 import android.telephony.SubscriptionInfo
 import android.telephony.SubscriptionManager
 import android.telephony.TelephonyManager
-import android.telephony.euicc.EuiccManager
 import android.util.Log
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.Message
-import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.DataUsage
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableIntState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.android.settings.R
 import com.android.settings.network.SubscriptionInfoListViewModel
-import com.android.settings.network.SubscriptionUtil
 import com.android.settings.network.telephony.MobileNetworkUtils
 import com.android.settings.wifi.WifiPickerTrackerHelper
 import com.android.settingslib.spa.framework.common.SettingsEntryBuilder
@@ -59,17 +55,13 @@ import com.android.settingslib.spa.widget.preference.Preference
 import com.android.settingslib.spa.widget.preference.PreferenceModel
 import com.android.settingslib.spa.widget.preference.SwitchPreference
 import com.android.settingslib.spa.widget.preference.SwitchPreferenceModel
-import com.android.settingslib.spa.widget.preference.TwoTargetSwitchPreference
 import com.android.settingslib.spa.widget.scaffold.RegularScaffold
 import com.android.settingslib.spa.widget.ui.Category
-import com.android.settingslib.spa.widget.ui.SettingsIcon
 import com.android.settingslib.spaprivileged.framework.common.broadcastReceiverFlow
-
-import com.android.settingslib.spaprivileged.model.enterprise.Restrictions
-import com.android.settingslib.spaprivileged.template.preference.RestrictedPreference
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.conflate
 import kotlinx.coroutines.flow.flowOf
@@ -85,10 +77,8 @@ import kotlinx.coroutines.withContext
 object NetworkCellularGroupProvider : SettingsPageProvider {
     override val name = "NetworkCellularGroupProvider"
 
-    private lateinit var subscriptionViewModel: SubscriptionInfoListViewModel
     private val owner = createSettingsPage()
 
-    var selectableSubscriptionInfoList: List<SubscriptionInfo> = listOf()
     var defaultVoiceSubId: Int = SubscriptionManager.INVALID_SUBSCRIPTION_ID
     var defaultSmsSubId: Int = SubscriptionManager.INVALID_SUBSCRIPTION_ID
     var defaultDataSubId: Int = SubscriptionManager.INVALID_SUBSCRIPTION_ID
@@ -106,9 +96,6 @@ object NetworkCellularGroupProvider : SettingsPageProvider {
     @Composable
     override fun Page(arguments: Bundle?) {
         val context = LocalContext.current
-        var selectableSubscriptionInfoListRemember = remember {
-            mutableListOf<SubscriptionInfo>().toMutableStateList()
-        }
         var callsSelectedId = rememberSaveable {
             mutableIntStateOf(SubscriptionManager.INVALID_SUBSCRIPTION_ID)
         }
@@ -122,24 +109,24 @@ object NetworkCellularGroupProvider : SettingsPageProvider {
             mutableIntStateOf(SubscriptionManager.INVALID_SUBSCRIPTION_ID)
         }
 
-        subscriptionViewModel = SubscriptionInfoListViewModel(
-                context.applicationContext as Application)
+        val subscriptionViewModel = viewModel<SubscriptionInfoListViewModel>()
 
-        allOfFlows(context, subscriptionViewModel.selectableSubscriptionInfoListFlow)
-                .collectLatestWithLifecycle(LocalLifecycleOwner.current) {
-                    selectableSubscriptionInfoListRemember.clear()
-                    selectableSubscriptionInfoListRemember.addAll(selectableSubscriptionInfoList)
-                    callsSelectedId.intValue = defaultVoiceSubId
-                    textsSelectedId.intValue = defaultSmsSubId
-                    mobileDataSelectedId.intValue = defaultDataSubId
-                    nonDdsRemember.intValue = nonDds
-                }
+        remember {
+            allOfFlows(context, subscriptionViewModel.selectableSubscriptionInfoListFlow)
+        }.collectLatestWithLifecycle(LocalLifecycleOwner.current) {
+            callsSelectedId.intValue = defaultVoiceSubId
+            textsSelectedId.intValue = defaultSmsSubId
+            mobileDataSelectedId.intValue = defaultDataSubId
+            nonDdsRemember.intValue = nonDds
+        }
 
-        PageImpl(selectableSubscriptionInfoListRemember,
-                callsSelectedId,
-                textsSelectedId,
-                mobileDataSelectedId,
-                nonDdsRemember)
+        PageImpl(
+            subscriptionViewModel.selectableSubscriptionInfoListFlow,
+            callsSelectedId,
+            textsSelectedId,
+            mobileDataSelectedId,
+            nonDdsRemember
+        )
     }
 
     private fun allOfFlows(context: Context,
@@ -152,13 +139,12 @@ object NetworkCellularGroupProvider : SettingsPageProvider {
                     NetworkCellularGroupProvider::refreshUiStates,
             ).flowOn(Dispatchers.Default)
 
-    fun refreshUiStates(
-            inputSelectableSubscriptionInfoList: List<SubscriptionInfo>,
-            inputDefaultVoiceSubId: Int,
-            inputDefaultSmsSubId: Int,
-            inputDefaultDateSubId: Int
-    ): Unit {
-        selectableSubscriptionInfoList = inputSelectableSubscriptionInfoList
+    private fun refreshUiStates(
+        selectableSubscriptionInfoList: List<SubscriptionInfo>,
+        inputDefaultVoiceSubId: Int,
+        inputDefaultSmsSubId: Int,
+        inputDefaultDateSubId: Int
+    ) {
         defaultVoiceSubId = inputDefaultVoiceSubId
         defaultSmsSubId = inputDefaultSmsSubId
         defaultDataSubId = inputDefaultDateSubId
@@ -178,81 +164,29 @@ object NetworkCellularGroupProvider : SettingsPageProvider {
 }
 
 @Composable
-fun PageImpl(selectableSubscriptionInfoList: List<SubscriptionInfo>,
-             defaultVoiceSubId: MutableIntState,
-             defaultSmsSubId: MutableIntState,
-             defaultDataSubId: MutableIntState,
-             nonDds: MutableIntState) {
-    val context = LocalContext.current
-    var activeSubscriptionInfoList: List<SubscriptionInfo> =
-            selectableSubscriptionInfoList.filter { subscriptionInfo ->
-                subscriptionInfo.simSlotIndex != -1
-            }
-    var subscriptionManager = context.getSystemService(SubscriptionManager::class.java)
+fun PageImpl(
+    selectableSubscriptionInfoListFlow: StateFlow<List<SubscriptionInfo>>,
+    defaultVoiceSubId: MutableIntState,
+    defaultSmsSubId: MutableIntState,
+    defaultDataSubId: MutableIntState,
+    nonDds: MutableIntState
+) {
+    val selectableSubscriptionInfoList by selectableSubscriptionInfoListFlow
+        .collectAsStateWithLifecycle(initialValue = emptyList())
+    val activeSubscriptionInfoList: List<SubscriptionInfo> =
+        selectableSubscriptionInfoList.filter { subscriptionInfo ->
+            subscriptionInfo.simSlotIndex != -1
+        }
 
     val stringSims = stringResource(R.string.provider_network_settings_title)
     RegularScaffold(title = stringSims) {
-        SimsSectionImpl(
-                context,
-                subscriptionManager,
-                selectableSubscriptionInfoList
-        )
+        SimsSection(selectableSubscriptionInfoList)
         PrimarySimSectionImpl(
                 activeSubscriptionInfoList,
                 defaultVoiceSubId,
                 defaultSmsSubId,
                 defaultDataSubId,
                 nonDds
-        )
-    }
-}
-
-@Composable
-fun SimsSectionImpl(
-        context: Context,
-        subscriptionManager: SubscriptionManager?,
-        subscriptionInfoList: List<SubscriptionInfo>
-) {
-    val coroutineScope = rememberCoroutineScope()
-    for (subInfo in subscriptionInfoList) {
-        val checked = rememberSaveable() {
-            mutableStateOf(false)
-        }
-        //TODO: Add the Restricted TwoTargetSwitchPreference in SPA
-        TwoTargetSwitchPreference(
-                object : SwitchPreferenceModel {
-                    override val title = subInfo.displayName.toString()
-                    override val summary = { subInfo.number }
-                    override val checked = {
-                        coroutineScope.launch {
-                            withContext(Dispatchers.Default) {
-                                checked.value = subscriptionManager?.isSubscriptionEnabled(
-                                    subInfo.subscriptionId)?:false
-                            }
-                        }
-                        checked.value
-                    }
-                    override val onCheckedChange = { newChecked: Boolean ->
-                        startToggleSubscriptionDialog(context, subInfo, newChecked)
-                    }
-                }
-        ) {
-            startMobileNetworkSettings(context, subInfo)
-        }
-    }
-
-    // + add sim
-    if (showEuiccSettings(context)) {
-        RestrictedPreference(
-                model = object : PreferenceModel {
-                    override val title = stringResource(id = R.string.mobile_network_list_add_more)
-                    override val icon = @Composable { SettingsIcon(Icons.Outlined.Add) }
-                    override val onClick = {
-                        startAddSimFlow(context)
-                    }
-                },
-                restrictions = Restrictions(keys =
-                        listOf(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS)),
         )
     }
 }
@@ -439,32 +373,6 @@ private fun Context.defaultDefaultDataSubscriptionFlow(): Flow<Int> =
                 ),
         ).map { SubscriptionManager.getDefaultDataSubscriptionId() }
                 .conflate().flowOn(Dispatchers.Default)
-
-private fun startToggleSubscriptionDialog(
-        context: Context,
-        subInfo: SubscriptionInfo,
-        newStatus: Boolean
-) {
-    SubscriptionUtil.startToggleSubscriptionDialogActivity(
-            context,
-            subInfo.subscriptionId,
-            newStatus
-    )
-}
-
-private fun startMobileNetworkSettings(context: Context, subInfo: SubscriptionInfo) {
-    MobileNetworkUtils.launchMobileNetworkSettings(context, subInfo)
-}
-
-private fun startAddSimFlow(context: Context) {
-    val intent = Intent(EuiccManager.ACTION_PROVISION_EMBEDDED_SUBSCRIPTION)
-    intent.putExtra(EuiccManager.EXTRA_FORCE_PROVISION, true)
-    context.startActivity(intent)
-}
-
-private fun showEuiccSettings(context: Context): Boolean {
-    return MobileNetworkUtils.showEuiccSettings(context)
-}
 
 suspend fun setDefaultVoice(
     subscriptionManager: SubscriptionManager?,

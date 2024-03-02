@@ -33,6 +33,7 @@ import org.mockito.kotlin.doAnswer
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.spy
+import org.mockito.kotlin.stub
 
 @RunWith(AndroidJUnit4::class)
 class SubscriptionRepositoryTest {
@@ -47,6 +48,17 @@ class SubscriptionRepositoryTest {
 
     private val context: Context = spy(ApplicationProvider.getApplicationContext()) {
         on { getSystemService(SubscriptionManager::class.java) } doReturn mockSubscriptionManager
+    }
+
+    @Test
+    fun isSubscriptionEnabledFlow() = runBlocking {
+        mockSubscriptionManager.stub {
+            on { isSubscriptionEnabled(SUB_ID) } doReturn true
+        }
+
+        val isEnabled = context.isSubscriptionEnabledFlow(SUB_ID).firstWithTimeoutOrNull()
+
+        assertThat(isEnabled).isTrue()
     }
 
     @Test
@@ -66,5 +78,9 @@ class SubscriptionRepositoryTest {
         subInfoListener?.onSubscriptionsChanged()
 
         assertThat(listDeferred.await()).hasSize(2)
+    }
+
+    private companion object {
+        const val SUB_ID = 1
     }
 }
