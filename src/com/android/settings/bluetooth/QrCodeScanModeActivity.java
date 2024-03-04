@@ -18,6 +18,7 @@ package com.android.settings.bluetooth;
 
 import static com.android.settingslib.bluetooth.BluetoothBroadcastUtils.EXTRA_BLUETOOTH_DEVICE_SINK;
 import static com.android.settingslib.bluetooth.BluetoothBroadcastUtils.EXTRA_BLUETOOTH_SINK_IS_GROUP;
+import static com.android.settingslib.flags.Flags.legacyLeAudioSharing;
 
 import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
@@ -53,6 +54,10 @@ public class QrCodeScanModeActivity extends QrCodeScanModeBaseActivity {
 
     @Override
     protected void handleIntent(Intent intent) {
+        if (!legacyLeAudioSharing()) {
+            finish();
+        }
+
         String action = intent != null ? intent.getAction() : null;
         if (DEBUG) {
             Log.d(TAG, "handleIntent(), action = " + action);
