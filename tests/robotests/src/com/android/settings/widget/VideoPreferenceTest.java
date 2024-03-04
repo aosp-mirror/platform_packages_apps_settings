@@ -40,7 +40,6 @@ import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowSettingsMediaPlayer;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -48,6 +47,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.annotation.LooperMode;
 import org.robolectric.shadows.androidx.fragment.FragmentController;
 
 @RunWith(RobolectricTestRunner.class)
@@ -141,7 +141,7 @@ public class VideoPreferenceTest {
         assertThat(mAnimationController.isPlaying()).isTrue();
     }
 
-    @Ignore("b/315133235")
+    @LooperMode(LooperMode.Mode.LEGACY)
     @Test
     @Config(qualifiers = "mcc999")
     public void onViewVisible_createAnimationController() {
