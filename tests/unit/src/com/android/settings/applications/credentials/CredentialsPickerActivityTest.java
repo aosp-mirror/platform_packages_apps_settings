@@ -19,21 +19,21 @@ package com.android.settings.applications.credentials;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.UserInfo;
-import android.os.UserHandle;
+import android.os.Flags;
 import android.os.UserManager;
+import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import com.google.common.collect.Lists;
-
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -41,6 +41,7 @@ import org.mockito.MockitoAnnotations;
 
 @RunWith(AndroidJUnit4.class)
 public class CredentialsPickerActivityTest {
+    @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     @Mock private UserManager mUserManager;
 
@@ -76,13 +77,11 @@ public class CredentialsPickerActivityTest {
 
     @Test
     public void testInjectFragmentIntoIntent_privateProfile() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE);
         Intent intent = new Intent();
 
         // Simulate private profile.
-        UserHandle privateUser = new UserHandle(100);
-        when(mUserManager.getUserInfo(100))
-                .thenReturn(new UserInfo(100, "", "", 0, UserManager.USER_TYPE_PROFILE_PRIVATE));
-        when(mUserManager.getUserProfiles()).thenReturn(Lists.newArrayList(privateUser));
+        doReturn(true).when(mUserManager).isPrivateProfile();
         assertThat(DefaultCombinedPickerPrivate.isUserHandledByFragment(mUserManager)).isTrue();
 
         CredentialsPickerActivity.injectFragmentIntoIntent(mMockContext, intent);
