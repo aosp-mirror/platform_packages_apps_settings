@@ -274,8 +274,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         if (!isResumed() || anomalyEventList == null) {
             return;
         }
-        Log.d(TAG, "anomalyEventList = " + anomalyEventList);
-
+        logPowerAnomalyEventList(anomalyEventList);
         final Set<String> dismissedPowerAnomalyKeys =
                 DatabaseUtils.getDismissedPowerAnomalyKeys(getContext());
         Log.d(TAG, "dismissedPowerAnomalyKeys = " + dismissedPowerAnomalyKeys);
@@ -429,8 +428,17 @@ public class PowerUsageAdvanced extends PowerUsageBase {
                         .filter(predicate)
                         .max(Comparator.comparing(PowerAnomalyEvent::getScore))
                         .orElse(null);
-        Log.d(TAG, "filterAnomalyEvent = " + filterAnomalyEvent);
+        Log.d(TAG, "filterAnomalyEvent = "
+                + (filterAnomalyEvent == null ? null : filterAnomalyEvent.getEventId()));
         return filterAnomalyEvent;
+    }
+
+    private static void logPowerAnomalyEventList(PowerAnomalyEventList anomalyEventList) {
+        final StringBuilder stringBuilder = new StringBuilder();
+        for (PowerAnomalyEvent anomalyEvent : anomalyEventList.getPowerAnomalyEventsList()) {
+            stringBuilder.append(anomalyEvent.getEventId()).append(", ");
+        }
+        Log.d(TAG, "anomalyEventList = [" + stringBuilder + "]");
     }
 
     private static BatteryDiffData getAllBatteryDiffData(
