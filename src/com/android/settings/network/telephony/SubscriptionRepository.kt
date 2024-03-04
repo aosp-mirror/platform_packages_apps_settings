@@ -17,8 +17,10 @@
 package com.android.settings.network.telephony
 
 import android.content.Context
+import android.telephony.SubscriptionInfo
 import android.telephony.SubscriptionManager
 import android.util.Log
+import com.android.settings.network.SubscriptionUtil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.asExecutor
 import kotlinx.coroutines.channels.awaitClose
@@ -34,6 +36,10 @@ fun Context.isSubscriptionEnabledFlow(subId: Int) = subscriptionsChangedFlow().m
     val subscriptionManager = getSystemService(SubscriptionManager::class.java)
 
     subscriptionManager?.isSubscriptionEnabled(subId) ?: false
+}.flowOn(Dispatchers.Default)
+
+fun Context.phoneNumberFlow(subscriptionInfo: SubscriptionInfo) = subscriptionsChangedFlow().map {
+    SubscriptionUtil.getFormattedPhoneNumber(this, subscriptionInfo)
 }.flowOn(Dispatchers.Default)
 
 fun Context.subscriptionsChangedFlow() = callbackFlow {

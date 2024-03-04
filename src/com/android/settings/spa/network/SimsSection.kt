@@ -33,6 +33,7 @@ import com.android.settings.R
 import com.android.settings.network.SubscriptionUtil
 import com.android.settings.network.telephony.MobileNetworkUtils
 import com.android.settings.network.telephony.isSubscriptionEnabledFlow
+import com.android.settings.network.telephony.phoneNumberFlow
 import com.android.settingslib.spa.widget.preference.PreferenceModel
 import com.android.settingslib.spa.widget.preference.SwitchPreferenceModel
 import com.android.settingslib.spa.widget.preference.TwoTargetSwitchPreference
@@ -57,11 +58,14 @@ private fun SimPreference(subInfo: SubscriptionInfo) {
     val checked = remember(subInfo.subscriptionId) {
         context.isSubscriptionEnabledFlow(subInfo.subscriptionId)
     }.collectAsStateWithLifecycle(initialValue = false)
+    val phoneNumber = remember(subInfo) {
+        context.phoneNumberFlow(subInfo)
+    }.collectAsStateWithLifecycle(initialValue = null)
     //TODO: Add the Restricted TwoTargetSwitchPreference in SPA
     TwoTargetSwitchPreference(
         object : SwitchPreferenceModel {
             override val title = subInfo.displayName.toString()
-            override val summary = { subInfo.number }
+            override val summary = { phoneNumber.value ?: "" }
             override val checked = { checked.value }
             override val onCheckedChange = { newChecked: Boolean ->
                 SubscriptionUtil.startToggleSubscriptionDialogActivity(
