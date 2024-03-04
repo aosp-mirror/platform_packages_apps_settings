@@ -63,6 +63,15 @@
         settings:userRestriction="no_ultra_wideband_radio"
         settings:useAdminDisabledSummary="true"/>
 
+    <com.android.settingslib.RestrictedSwitchPreference
+        android:key="thread_network_settings"
+        android:title="@string/thread_network_settings_title"
+        android:order="110"
+        android:summary="@string/summary_placeholder"
+        settings:controller="com.android.settings.connecteddevice.threadnetwork.ThreadNetworkPreferenceController"
+        settings:userRestriction="no_thread_network"
+        settings:useAdminDisabledSummary="true"/>
+
     <PreferenceCategory
         android:key="dashboard_tile_placeholder"
         android:order="-8"/>
