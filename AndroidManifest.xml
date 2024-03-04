@@ -5127,8 +5127,9 @@
 
         <activity
             android:name="com.android.settings.network.WepNetworkDialogActivity"
-            android:exported="false"
-            android:theme="@style/Theme.SpaLib.Dialog">
+            android:exported="true"
+            android:theme="@style/Theme.SpaLib.Dialog"
+            android:permission="android.permission.NETWORK_SETTINGS">
         </activity>
 
         <!-- This is the longest AndroidManifest.xml ever. -->

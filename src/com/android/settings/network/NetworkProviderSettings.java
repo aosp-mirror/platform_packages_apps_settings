@@ -1263,7 +1263,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
 
         if (Flags.androidVWifiApi() && wifiEntry.getSecurityTypes()
                 .contains(WifiEntry.SECURITY_WEP)) {
-            WepNetworkDialogActivity.checkWepAllowed(
+            WifiUtils.checkWepAllowed(
                     getContext(), getViewLifecycleOwner(), wifiEntry.getSsid(), () -> {
                         wifiEntry.connect(callback);
                         return null;
