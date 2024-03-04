@@ -33,6 +33,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Looper;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyCallback;
@@ -47,6 +48,7 @@ import androidx.preference.PreferenceViewHolder;
 import androidx.test.annotation.UiThreadTest;
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.flags.Flags;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.widget.SettingsMainSwitchPreference;
 
@@ -63,6 +65,8 @@ import java.util.Arrays;
 import java.util.concurrent.Executor;
 
 public class MobileNetworkSwitchControllerTest {
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     @Rule
     public final MockitoRule mMockitoRule = MockitoJUnit.rule();
 
@@ -82,6 +86,8 @@ public class MobileNetworkSwitchControllerTest {
 
     @Before
     public void setUp() {
+        mSetFlagsRule.disableFlags(Flags.FLAG_IS_DUAL_SIM_ONBOARDING_ENABLED);
+
         if (Looper.myLooper() == null) {
             Looper.prepare();
         }

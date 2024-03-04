@@ -28,6 +28,7 @@ import static org.mockito.Mockito.when;
 import android.app.Instrumentation;
 import android.content.Context;
 import android.os.Looper;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -41,12 +42,14 @@ import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 
+import com.android.settings.flags.Flags;
 import com.android.settings.testutils.ResourcesUtils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.mobile.dataservice.MobileNetworkInfoEntity;
 import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -54,6 +57,8 @@ import org.mockito.MockitoAnnotations;
 
 @RunWith(AndroidJUnit4.class)
 public class MobileDataPreferenceControllerTest {
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     private static final String SUB_ID_1 = "1";
     private static final String SUB_ID_2 = "2";
     private static final String DISPLAY_NAME_1 = "Sub 1";
@@ -93,6 +98,7 @@ public class MobileDataPreferenceControllerTest {
         if (Looper.myLooper() == null) {
             Looper.prepare();
         }
+        mSetFlagsRule.disableFlags(Flags.FLAG_IS_DUAL_SIM_ONBOARDING_ENABLED);
 
         mContext = spy(ApplicationProvider.getApplicationContext());
         doReturn(mTelephonyManager).when(mContext).getSystemService(Context.TELEPHONY_SERVICE);

@@ -109,7 +109,9 @@ public class NetworkSelectSettingsTest {
 
         PersistableBundle config = new PersistableBundle();
         config.putBoolean(CarrierConfigManager.KEY_SHOW_4G_FOR_LTE_DATA_ICON_BOOL, true);
-        doReturn(config).when(mCarrierConfigManager).getConfigForSubId(SUB_ID);
+        doReturn(config).when(mCarrierConfigManager).getConfigForSubId(SUB_ID,
+                CarrierConfigManager.KEY_SHOW_4G_FOR_LTE_DATA_ICON_BOOL,
+                CarrierConfigManager.KEY_REMOVE_SATELLITE_PLMN_IN_MANUAL_NETWORK_SCAN_BOOL);
 
         doReturn(TelephonyManager.DATA_CONNECTED).when(mTelephonyManager).getDataState();
     }
@@ -267,6 +269,13 @@ public class NetworkSelectSettingsTest {
 
     @Test
     public void doAggregation_hasDuplicateItemsDiffMccMncCase3_removeSamePlmnRatItem() {
+        PersistableBundle config = new PersistableBundle();
+        config.putBoolean(
+                CarrierConfigManager.KEY_REMOVE_SATELLITE_PLMN_IN_MANUAL_NETWORK_SCAN_BOOL, false);
+        doReturn(config).when(mCarrierConfigManager).getConfigForSubId(eq(SUB_ID),
+                eq(CarrierConfigManager.KEY_SHOW_4G_FOR_LTE_DATA_ICON_BOOL),
+                eq(CarrierConfigManager.KEY_REMOVE_SATELLITE_PLMN_IN_MANUAL_NETWORK_SCAN_BOOL));
+
         mNetworkSelectSettings.onCreateInitialization();
         List<CellInfo> testList = Arrays.asList(
                 createLteCellInfo(false, 123, "123", "232", "CarrierA"),

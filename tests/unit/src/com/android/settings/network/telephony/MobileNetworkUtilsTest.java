@@ -134,6 +134,10 @@ public class MobileNetworkUtilsTest {
 
         when(mSubscriptionManager.getActiveSubscriptionInfoList()).thenReturn(
                 Arrays.asList(mSubscriptionInfo1, mSubscriptionInfo2));
+        when(mSubscriptionManager.getActiveSubscriptionInfo(SUB_ID_1)).thenReturn(
+                mSubscriptionInfo1);
+        when(mSubscriptionManager.getActiveSubscriptionInfo(SUB_ID_2)).thenReturn(
+                mSubscriptionInfo2);
 
         when(mTelephonyManager.getNetworkOperatorName()).thenReturn(
                 PLMN_FROM_TELEPHONY_MANAGER_API);
