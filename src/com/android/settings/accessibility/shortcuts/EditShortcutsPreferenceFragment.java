@@ -207,9 +207,9 @@ public class EditShortcutsPreferenceFragment extends DashboardFragment {
 
         activity.setTitle(titles.first);
 
-        String categoryKey = activity.getResources().getString(
+        String screenDescriptionPrefKey = getString(
                 R.string.accessibility_shortcut_description_pref);
-        findPreference(categoryKey).setTitle(titles.second);
+        findPreference(screenDescriptionPrefKey).setSummary(titles.second);
     }
 
     @NonNull
