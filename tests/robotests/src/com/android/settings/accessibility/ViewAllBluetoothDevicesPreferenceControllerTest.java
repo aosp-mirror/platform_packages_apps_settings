@@ -56,7 +56,7 @@ public class ViewAllBluetoothDevicesPreferenceControllerTest {
     private final String TEST_KEY = "test_key";
 
     @Spy
-    private HearingDevicePairingDetail mFragment = new HearingDevicePairingDetail();
+    private HearingDevicePairingFragment mFragment = new HearingDevicePairingFragment();
     private FragmentActivity mActivity;
     @Mock
     private PreferenceScreen mScreen;

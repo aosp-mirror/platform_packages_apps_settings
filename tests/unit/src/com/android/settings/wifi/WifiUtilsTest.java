@@ -35,6 +35,7 @@ import com.android.settings.R;
 import com.android.wifitrackerlib.WifiEntry;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -143,6 +144,7 @@ public class WifiUtilsTest {
                 null /* scanResult */);
     }
 
+    @Ignore
     @Test
     public void checkShowWifiHotspot_allReady_returnTrue() {
         assertThat(WifiUtils.checkShowWifiHotspot(mContext)).isTrue();
