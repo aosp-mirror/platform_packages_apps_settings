@@ -28,11 +28,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.R;
-import com.android.settings.accessibility.HearingDevicePairingDetail;
 import com.android.settings.accessibility.HearingDevicePairingFragment;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
-import com.android.settings.flags.Flags;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.HearingAidInfo;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
@@ -125,11 +123,8 @@ public class HearingAidPairingDialogFragment extends InstrumentedDialogFragment 
         final int launchPage = getArguments().getInt(KEY_LAUNCH_PAGE);
         final boolean launchFromA11y = (launchPage == SettingsEnums.ACCESSIBILITY)
                 || (launchPage == SettingsEnums.ACCESSIBILITY_HEARING_AID_SETTINGS);
-        final String a11yDestination = Flags.newHearingDevicePairingPage()
-                ? HearingDevicePairingFragment.class.getName()
-                : HearingDevicePairingDetail.class.getName();
         final String destination = launchFromA11y
-                ? a11yDestination
+                ? HearingDevicePairingFragment.class.getName()
                 : BluetoothPairingDetail.class.getName();
         new SubSettingLauncher(getActivity())
                 .setDestination(destination)

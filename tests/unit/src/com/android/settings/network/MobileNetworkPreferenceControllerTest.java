@@ -78,6 +78,7 @@ public class MobileNetworkPreferenceControllerTest {
         mContext = spy(ApplicationProvider.getApplicationContext());
         when(mContext.getSystemService(Context.TELEPHONY_SERVICE)).thenReturn(mTelephonyManager);
         when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
+        when(mSubscriptionManager.createForAllUserProfiles()).thenReturn(mSubscriptionManager);
         when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
         if (Looper.myLooper() == null) {
             Looper.prepare();

@@ -22,10 +22,10 @@ import android.app.backup.BackupAgentHelper;
 import android.app.backup.SharedPreferencesBackupHelper;
 
 import com.android.settings.flags.Flags;
-import com.android.settings.fuelgauge.BatteryBackupHelper;
 import com.android.settings.onboarding.OnboardingFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.shortcut.CreateShortcutPreferenceController;
+import com.android.settingslib.datastore.BackupRestoreStorageManager;
 
 /** Backup agent for Settings APK */
 public class SettingsBackupHelper extends BackupAgentHelper {
@@ -35,7 +35,7 @@ public class SettingsBackupHelper extends BackupAgentHelper {
     @Override
     public void onCreate() {
         super.onCreate();
-        addHelper(BatteryBackupHelper.TAG, new BatteryBackupHelper(this));
+        BackupRestoreStorageManager.getInstance(this).addBackupAgentHelpers(this);
         addHelper(PREF_LOCALE_NOTIFICATION,
                 new SharedPreferencesBackupHelper(this, LOCALE_NOTIFICATION));
         if (Flags.enableSoundBackup()) {
@@ -51,6 +51,7 @@ public class SettingsBackupHelper extends BackupAgentHelper {
     @Override
     public void onRestoreFinished() {
         super.onRestoreFinished();
+        BackupRestoreStorageManager.getInstance(this).onRestoreFinished();
         CreateShortcutPreferenceController.updateRestoredShortcuts(this);
     }
 }

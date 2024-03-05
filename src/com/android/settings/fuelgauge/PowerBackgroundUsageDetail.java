@@ -19,7 +19,6 @@ package com.android.settings.fuelgauge;
 import static com.android.settings.fuelgauge.BatteryOptimizeHistoricalLogEntry.Action;
 
 import android.app.Activity;
-import android.app.backup.BackupManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
@@ -42,6 +41,7 @@ import com.android.settingslib.HelpUtils;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.datastore.ChangeReason;
 import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.LayoutPreference;
 import com.android.settingslib.widget.MainSwitchPreference;
@@ -78,7 +78,6 @@ public class PowerBackgroundUsageDetail extends DashboardFragment
     @VisibleForTesting SelectorWithWidgetPreference mUnrestrictedPreference;
     @VisibleForTesting MainSwitchPreference mMainSwitchPreference;
     @VisibleForTesting FooterPreference mFooterPreference;
-    @VisibleForTesting BackupManager mBackupManager;
     @VisibleForTesting StringBuilder mLogStringBuilder;
 
     @VisibleForTesting @BatteryOptimizeUtils.OptimizationMode
@@ -187,9 +186,7 @@ public class PowerBackgroundUsageDetail extends DashboardFragment
     @VisibleForTesting
     void notifyBackupManager() {
         if (mOptimizationMode != mBatteryOptimizeUtils.getAppOptimizationMode()) {
-            final BackupManager backupManager =
-                    mBackupManager != null ? mBackupManager : new BackupManager(getContext());
-            backupManager.dataChanged();
+            BatterySettingsStorage.get(getContext()).notifyChange(ChangeReason.UPDATE);
         }
     }
 
