@@ -556,20 +556,21 @@ public class SubscriptionUtil {
 
     /**
      * Starts a dialog activity to handle eSIM deletion.
+     *
      * @param context {@code Context}
      * @param subId The id of subscription need to be deleted.
+     * @param carrierId The carrier id of the subscription.
      */
-    public static void startDeleteEuiccSubscriptionDialogActivity(Context context, int subId,
-            int carrierId) {
+    public static void startDeleteEuiccSubscriptionDialogActivity(
+            @NonNull Context context, int subId, int carrierId) {
         if (!SubscriptionManager.isUsableSubscriptionId(subId)) {
             Log.i(TAG, "Unable to delete subscription due to invalid subscription ID.");
             return;
         }
-        final int[] carriersThatUseRAC = context.getResources().getIntArray(
-                R.array.config_carrier_use_rac);
-        boolean isCarrierRac = Arrays.stream(carriersThatUseRAC).anyMatch(cid -> cid == carrierId);
 
-        if (isCarrierRac && !isConnectedToWifiOrDifferentSubId(context, subId)) {
+        if (isCarrierRac(context, carrierId)
+                && (!isConnectedToWifi(context)
+                        || isConnectedToMobileDataWithDifferentSubId(context, subId))) {
             context.startActivity(EuiccRacConnectivityDialogActivity.getIntent(context, subId));
         } else {
             context.startActivity(DeleteEuiccSubscriptionDialogActivity.getIntent(context, subId));
@@ -847,27 +848,75 @@ public class SubscriptionUtil {
     }
 
     /**
-     * Returns {@code true} if device is connected to Wi-Fi or mobile data provided by a different
-     * subId.
+     * Checks if the device is connected to Wi-Fi.
+     *
+     * @param context context
+     * @return {@code true} if connected to Wi-Fi
+     */
+    static boolean isConnectedToWifi(@NonNull Context context) {
+        NetworkCapabilities capabilities = getNetworkCapabilities(context);
+
+        return capabilities != null
+                && capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI);
+    }
+
+    /**
+     * Checks if the device is connected to mobile data provided by a different subId.
      *
      * @param context context
      * @param targetSubId subscription that is going to be deleted
+     * @return {@code true} if connected to mobile data provided by a different subId
      */
     @VisibleForTesting
-    static boolean isConnectedToWifiOrDifferentSubId(@NonNull Context context, int targetSubId) {
+    static boolean isConnectedToMobileDataWithDifferentSubId(
+            @NonNull Context context, int targetSubId) {
+        NetworkCapabilities capabilities = getNetworkCapabilities(context);
+
+        return capabilities != null
+                && capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)
+                && targetSubId != SubscriptionManager.getActiveDataSubscriptionId();
+    }
+
+    /**
+     * Checks if any subscription carrier use reusable activation codes.
+     *
+     * @param context The context used to retrieve carriers that uses reusable activation codes.
+     * @return {@code true} if any subscription has a matching carrier that uses reusable activation
+     *     codes
+     */
+    static boolean hasSubscriptionWithRacCarrier(@NonNull Context context) {
+        List<SubscriptionInfo> subs = getAvailableSubscriptions(context);
+        final int[] carriersThatUseRac =
+                context.getResources().getIntArray(R.array.config_carrier_use_rac);
+
+        return Arrays.stream(carriersThatUseRac)
+                .anyMatch(cid -> subs.stream().anyMatch(sub -> sub.getCarrierId() == cid));
+    }
+
+    /**
+     * Checks if a carrier use reusable activation codes.
+     *
+     * @param context The context used to retrieve carriers that uses reusable activation codes.
+     * @param carrierId The carrier id to check if it use reusable activation codes.
+     * @return {@code true} if carrier id use reusable activation codes.
+     */
+    @VisibleForTesting
+    static boolean isCarrierRac(@NonNull Context context, int carrierId) {
+        final int[] carriersThatUseRAC =
+                context.getResources().getIntArray(R.array.config_carrier_use_rac);
+
+        return Arrays.stream(carriersThatUseRAC).anyMatch(cid -> cid == carrierId);
+    }
+
+    /**
+     * Retrieves NetworkCapabilities for the active network.
+     *
+     * @param context context
+     * @return NetworkCapabilities or null if not available
+     */
+    private static NetworkCapabilities getNetworkCapabilities(@NonNull Context context) {
         ConnectivityManager connectivityManager =
                 context.getSystemService(ConnectivityManager.class);
-        NetworkCapabilities capabilities =
-                connectivityManager.getNetworkCapabilities(connectivityManager.getActiveNetwork());
-
-        if (capabilities != null) {
-            if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
-                // Connected to WiFi
-                return true;
-            } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
-                return targetSubId != SubscriptionManager.getActiveDataSubscriptionId();
-            }
-        }
-        return false;
+        return connectivityManager.getNetworkCapabilities(connectivityManager.getActiveNetwork());
     }
 }
