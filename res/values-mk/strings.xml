@@ -74,10 +74,8 @@
     <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"Спари го десното уво"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"Спари го левото уво"</string>
     <string name="bluetooth_device_controls_general" msgid="1399214835599665488">"За сите достапни слушни апарати"</string>
-    <!-- no translation found for bluetooth_device_controls_title (659009912978022189) -->
-    <skip />
-    <!-- no translation found for bluetooth_device_controls_summary (5387400497394163925) -->
-    <skip />
+    <string name="bluetooth_device_controls_title" msgid="659009912978022189">"Повеќе поставки на слушен апарат"</string>
+    <string name="bluetooth_device_controls_summary" msgid="5387400497394163925">"Променете ги поставките на повеќе уреди, како што се контролите на кратенките и телекалемите"</string>
     <string name="bluetooth_device_controls_specific" msgid="7706863288754077107">"За овој уред"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Аудиоизлез"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"За аудио-излезот"</string>
@@ -598,8 +596,7 @@
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Се поставува „Приватен простор“…"</string>
     <string name="private_space_notifications_hidden_title" msgid="2009112565217540581">"Известувањата од апликациите во „Приватниот простор“ се скриени кога е заклучен"</string>
     <string name="private_space_explore_settings_title" msgid="1448128245941571654">"Истражете ги поставките за „Приватен простор“ за да го скриете „Приватниот простор“ и да поставите автоматско заклучување"</string>
-    <!-- no translation found for private_space_apps_installed_title (4781838023423527730) -->
-    <skip />
+    <string name="private_space_apps_installed_title" msgid="4781838023423527730">"Задолжителните апликации се веќе инсталирани во вашиот „Приватен простор“"</string>
     <string name="private_space_error_screen_title" msgid="739381738044418346">"Не можеше да се постави „Приватен простор“"</string>
     <string name="private_space_tryagain_label" msgid="8305362615231738367">"Обиди се пак"</string>
     <string name="private_space_lockscreen_title" msgid="6034864097861137509">"Да се користи закл. екран за откл. „Прив. прост.“?"</string>
@@ -622,22 +619,14 @@
     <string name="private_space_apps_and_notifications_header" msgid="7493922100321972687">"Апликации и известувања"</string>
     <string name="private_space_notifications_title" msgid="3456249671149740404">"Чувствителни известувања на заклучениот екран"</string>
     <string name="private_space_sensitive_notifications_description" msgid="1466031201599700985">"Прикажување на чувствителните содржини кога „Приватниот простор“ е отклучен"</string>
-    <!-- no translation found for private_space_gaia_education_title (3787414895669666563) -->
-    <skip />
-    <!-- no translation found for private_space_gaia_education_description (1592753570023264559) -->
-    <skip />
-    <!-- no translation found for private_space_gaia_education_header (7835879839637613495) -->
-    <skip />
-    <!-- no translation found for private_space_gaia_education_bullet1 (641701340908301992) -->
-    <skip />
-    <!-- no translation found for private_space_gaia_education_bullet2 (3679859681253672976) -->
-    <skip />
-    <!-- no translation found for private_space_gaia_education_bullet3 (1703614225321289717) -->
-    <skip />
-    <!-- no translation found for private_space_gaia_education_bullet4 (515761604505366164) -->
-    <skip />
-    <!-- no translation found for private_space_gaia_education_got_it (7824029819615566806) -->
-    <skip />
+    <string name="private_space_gaia_education_title" msgid="3787414895669666563">"Создајте сметка на Google за да ви помогне да ја зачувате приватноста на вашите податоци"</string>
+    <string name="private_space_gaia_education_description" msgid="1592753570023264559">"На следниот екран, може да се најавите на сметка за да ја користите со вашиот „Приватен простор“"</string>
+    <string name="private_space_gaia_education_header" msgid="7835879839637613495"><b>"Создајте посебна сметка за да спречите податоците да излезат од „Приватниот простор“, како:"</b></string>
+    <string name="private_space_gaia_education_bullet1" msgid="641701340908301992">"Синхронизирани фотографии, датотеки, е-пораки, контакти, настани во календарот и друго"</string>
+    <string name="private_space_gaia_education_bullet2" msgid="3679859681253672976">"Историја на преземање апликации и препораки"</string>
+    <string name="private_space_gaia_education_bullet3" msgid="1703614225321289717">"Историја на прелистување, обележувачи и зачувани лозинки"</string>
+    <string name="private_space_gaia_education_bullet4" msgid="515761604505366164">"Предложени содржини поврзани со вашата активност во апликациите во „Приватниот простор“"</string>
+    <string name="private_space_gaia_education_got_it" msgid="7824029819615566806">"Сфатив"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Може да додадете до <xliff:g id="COUNT">%d</xliff:g> отпечатоци"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Додадовте максимален број на отпечатоци"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Не може да се додадат повеќе отпечатоци"</string>
@@ -1553,6 +1542,8 @@
     <string name="network_scorer_change_active_no_previous_dialog_text" msgid="680685773455072321">"Да се користи <xliff:g id="NEW_APP">%s</xliff:g> за управување на вашите мрежни врски?"</string>
     <string name="location_category_recent_location_requests" msgid="2205900488782832082">"Последни барања за локација"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Локација за работен профил"</string>
+    <!-- no translation found for private_profile_location_switch_title (4127119143109855789) -->
+    <skip />
     <string name="location_app_level_permissions" msgid="907206607664629759">"Дозволи за локација за апликации"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"Локацијата е исклучена"</string>
     <string name="location_app_permission_summary_location_on" msgid="7552095451731948984">"{count,plural, =1{# од {total} апликации има пристап до локацијата}one{# од {total} апликации имаат пристап до локацијата}other{# од {total} апликации имаат пристап до локацијата}}"</string>
@@ -1947,7 +1938,13 @@
     <string name="modifier_keys_reset" msgid="551170906710422041">"Ресетирај"</string>
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"Изберете го копчето модификатор"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Изберете ново копче за <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>:"</string>
+    <!-- no translation found for ime_label_title (8994569521516807168) -->
+    <skip />
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Стандардно"</string>
+    <!-- no translation found for automatic_keyboard_layout_label (9138088156046198913) -->
+    <skip />
+    <!-- no translation found for user_selected_keyboard_layout_label (154742505924555156) -->
+    <skip />
     <string name="speech_category_title" msgid="5995161659186229742">"Говор"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"Брзина на покажувач"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Контролор на игра"</string>
@@ -2010,28 +2007,17 @@
     <string name="general_category_title" msgid="6298579528716834157">"Општи"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Приказ"</string>
     <string name="accessibility_color_and_motion_title" msgid="2323301706545305874">"Боја и движење"</string>
-    <!-- no translation found for accessibility_color_contrast_title (5757724357142452378) -->
-    <skip />
-    <!-- no translation found for accessibility_color_contrast_intro (7795090401101214930) -->
-    <skip />
-    <!-- no translation found for color_contrast_note (7592686603372566198) -->
-    <skip />
-    <!-- no translation found for accessibility_color_contrast_summary (7563237683500106632) -->
-    <skip />
-    <!-- no translation found for color_contrast_preview (6791430227535363883) -->
-    <skip />
-    <!-- no translation found for color_contrast_preview_sender_name (8641943417589238147) -->
-    <skip />
-    <!-- no translation found for color_contrast_preview_email_send_date (2108702726171600080) -->
-    <skip />
-    <!-- no translation found for color_contrast_preview_email_badge (4845484039428505392) -->
-    <skip />
-    <!-- no translation found for color_contrast_preview_email_title (198712116139754823) -->
-    <skip />
-    <!-- no translation found for color_contrast_preview_email_body (4139331665325624199) -->
-    <skip />
-    <!-- no translation found for color_contrast_preview_email_attachment_name (852407311884814746) -->
-    <skip />
+    <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"Контраст на бои"</string>
+    <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"Повисокиот контраст прави текстот, копчињата и иконите да се истакнуваат повеќе. Изберете го контрастот што ви изгледа најдобро."</string>
+    <string name="color_contrast_note" msgid="7592686603372566198">"Некои апликации можеби не ги поддржуваат сите поставки за контраст на бои и текст"</string>
+    <string name="accessibility_color_contrast_summary" msgid="7563237683500106632">"Приспособете како да изгледаат боите и текстот во однос на бојата на заднината на вашиот екран"</string>
+    <string name="color_contrast_preview" msgid="6791430227535363883">"Преглед"</string>
+    <string name="color_contrast_preview_sender_name" msgid="8641943417589238147">"Хелен, Адам"</string>
+    <string name="color_contrast_preview_email_send_date" msgid="2108702726171600080">"Пред 2 дена"</string>
+    <string name="color_contrast_preview_email_badge" msgid="4845484039428505392">"Ќе проверите?"</string>
+    <string name="color_contrast_preview_email_title" msgid="198712116139754823">"Извештај за бизнис патувањето"</string>
+    <string name="color_contrast_preview_email_body" msgid="4139331665325624199">"За дополнителна помош, контактирајте со \nмене или Хелен. Извештајов ќе биде"</string>
+    <string name="color_contrast_preview_email_attachment_name" msgid="852407311884814746">"Трошоци на клиентот"</string>
     <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"Затемнете го екранот"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Контроли за интеракција"</string>
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"Контроли за тајминг"</string>
@@ -2168,10 +2154,8 @@
     <string name="accessibility_button_high_label" msgid="9138077512008190896">"Непровидно"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Текст со висок контраст"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Променете ја бојата на текстот во црна или бела. Го максимизира контрастот со заднината."</string>
-    <!-- no translation found for accessibility_toggle_maximize_text_contrast_preference_title (8737272017343509753) -->
-    <skip />
-    <!-- no translation found for accessibility_toggle_maximize_text_contrast_preference_summary (5493999083693403489) -->
-    <skip />
+    <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"Максимиз. го контрастот на текстот"</string>
+    <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="5493999083693403489">"Променете ја бојата на текстот во црна или бела за да го зголемите контрастот со заднината."</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Автоматско ажурирање на зголемување на екран"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Ажурирај зголемување екран при премини меѓу аплик."</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Прекини повик со копче за вклучување"</string>
@@ -5123,8 +5107,7 @@
     <string name="color_selector_dialog_cancel" msgid="8667350644753900701">"Откажи"</string>
     <string name="contrast_title" msgid="6885768151336508075">"Контраст"</string>
     <string name="contrast_standard" msgid="1097297089917185235">"Стандарден"</string>
-    <!-- no translation found for contrast_default (8918545965525226966) -->
-    <skip />
+    <string name="contrast_default" msgid="8918545965525226966">"Стандардно"</string>
     <string name="contrast_medium" msgid="384414510709285811">"Среден"</string>
     <string name="contrast_high" msgid="3988567609694797696">"Висок"</string>
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"Апликацијава може да се отвори само во еден прозорец"</string>
