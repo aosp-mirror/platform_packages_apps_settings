@@ -39,7 +39,6 @@ import com.android.settings.Settings;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SubSettings;
 import com.android.settings.biometrics.face.FaceEnrollIntroduction;
-import com.android.settings.biometrics.face.FaceEnrollIntroductionInternal;
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollEnrolling;
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollIntroduction;
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollIntroductionInternal;
@@ -260,7 +259,6 @@ public class ActivityEmbeddingRulesController {
         addActivityFilter(activityFilters, FingerprintEnrollIntroduction.class);
         addActivityFilter(activityFilters, FingerprintEnrollIntroductionInternal.class);
         addActivityFilter(activityFilters, FingerprintEnrollEnrolling.class);
-        addActivityFilter(activityFilters, FaceEnrollIntroductionInternal.class);
         addActivityFilter(activityFilters, FaceEnrollIntroduction.class);
         addActivityFilter(activityFilters, RemoteAuthActivity.class);
         addActivityFilter(activityFilters, RemoteAuthActivityInternal.class);
