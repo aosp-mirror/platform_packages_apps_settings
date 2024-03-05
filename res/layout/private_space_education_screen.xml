@@ -93,10 +93,19 @@
                 android:layout_height="18dp"
                 android:src="@drawable/ic_info_outline_24dp" />
             <TextView
+                android:id="@+id/info"
                 style="@style/PrivateSpaceBulletPointTextFontStyle"
                 android:textSize = "14sp"
                 android:layout_toRightOf="@+id/infoIcon"
                 android:text="@string/private_space_apps_permission_text"/>
+            <TextView
+                android:id="@+id/learn_more"
+                style="@style/PrivateSpaceSetupSubHeaderStyle"
+                android:layout_below="@id/info"
+                android:layout_alignLeft="@+id/info"
+                android:paddingTop="24dp"
+                android:paddingLeft="16dp"
+                android:text="@string/private_space_learn_more_text"/>
         </RelativeLayout>
     </LinearLayout>
     </ScrollView>
