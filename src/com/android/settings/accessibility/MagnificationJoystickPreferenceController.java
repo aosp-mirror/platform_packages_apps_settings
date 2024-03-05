@@ -22,26 +22,17 @@ import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
 import android.content.Context;
 import android.provider.Settings;
 
-import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.LifecycleObserver;
-import androidx.lifecycle.OnLifecycleEvent;
-import androidx.preference.PreferenceScreen;
-import androidx.preference.TwoStatePreference;
-
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 
 /**
  * Controller that accesses and switches the preference status of the magnification joystick feature
  */
-public class MagnificationJoystickPreferenceController extends TogglePreferenceController
-        implements LifecycleObserver {
+public class MagnificationJoystickPreferenceController extends TogglePreferenceController {
 
     private static final String TAG =
             MagnificationJoystickPreferenceController.class.getSimpleName();
     static final String PREF_KEY = Settings.Secure.ACCESSIBILITY_MAGNIFICATION_JOYSTICK_ENABLED;
-
-    private TwoStatePreference mSwitchPreference;
 
     public MagnificationJoystickPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -68,25 +59,5 @@ public class MagnificationJoystickPreferenceController extends TogglePreferenceC
     @Override
     public int getSliceHighlightMenuRes() {
         return R.string.menu_key_accessibility;
-    }
-
-    @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-        mSwitchPreference = screen.findPreference(getPreferenceKey());
-    }
-
-    // TODO(b/186731461): Remove it when this controller is used in DashBoardFragment only.
-    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-    void onResume() {
-        updateState();
-    }
-
-    /**
-     * Updates the state of preference components which has been displayed by
-     * {@link MagnificationJoystickPreferenceController#displayPreference}.
-     */
-    void updateState() {
-        updateState(mSwitchPreference);
     }
 }

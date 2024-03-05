@@ -22,12 +22,6 @@ import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
 import android.content.Context;
 import android.provider.Settings;
 
-import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.LifecycleObserver;
-import androidx.lifecycle.OnLifecycleEvent;
-import androidx.preference.PreferenceScreen;
-import androidx.preference.TwoStatePreference;
-
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 
@@ -36,14 +30,11 @@ import com.android.settings.core.TogglePreferenceController;
  * feature, where the magnifier will not deactivate on Activity transitions; it will only zoom out
  * to 100%.
  */
-public class MagnificationAlwaysOnPreferenceController extends TogglePreferenceController
-        implements LifecycleObserver {
+public class MagnificationAlwaysOnPreferenceController extends TogglePreferenceController {
 
     private static final String TAG =
             MagnificationAlwaysOnPreferenceController.class.getSimpleName();
     static final String PREF_KEY = Settings.Secure.ACCESSIBILITY_MAGNIFICATION_ALWAYS_ON_ENABLED;
-
-    private TwoStatePreference mSwitchPreference;
 
     public MagnificationAlwaysOnPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -70,25 +61,5 @@ public class MagnificationAlwaysOnPreferenceController extends TogglePreferenceC
     @Override
     public int getSliceHighlightMenuRes() {
         return R.string.menu_key_accessibility;
-    }
-
-    @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-        mSwitchPreference = screen.findPreference(getPreferenceKey());
-    }
-
-    // TODO(b/186731461): Remove it when this controller is used in DashBoardFragment only.
-    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-    void onResume() {
-        updateState();
-    }
-
-    /**
-     * Updates the state of preference components which has been displayed by
-     * {@link MagnificationAlwaysOnPreferenceController#displayPreference}.
-     */
-    void updateState() {
-        updateState(mSwitchPreference);
     }
 }

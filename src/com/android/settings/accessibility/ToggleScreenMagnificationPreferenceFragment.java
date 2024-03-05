@@ -206,22 +206,9 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         magnificationModePreferenceController.setDialogHelper(this);
         getSettingsLifecycle().addObserver(magnificationModePreferenceController);
         magnificationModePreferenceController.displayPreference(getPreferenceScreen());
+        addPreferenceController(magnificationModePreferenceController);
 
-        mFollowingTypingSwitchPreference = new SwitchPreferenceCompat(getPrefContext());
-        mFollowingTypingSwitchPreference.setTitle(
-                R.string.accessibility_screen_magnification_follow_typing_title);
-        mFollowingTypingSwitchPreference.setSummary(
-                R.string.accessibility_screen_magnification_follow_typing_summary);
-        mFollowingTypingSwitchPreference.setKey(
-                MagnificationFollowTypingPreferenceController.PREF_KEY);
-        generalCategory.addPreference(mFollowingTypingSwitchPreference);
-
-        mFollowTypingPreferenceController = new MagnificationFollowTypingPreferenceController(
-                getContext(), MagnificationFollowTypingPreferenceController.PREF_KEY);
-        getSettingsLifecycle().addObserver(mFollowTypingPreferenceController);
-        mFollowTypingPreferenceController.displayPreference(getPreferenceScreen());
-        addPreferenceController(mFollowTypingPreferenceController);
-
+        addFollowTypingSetting(generalCategory);
         addAlwaysOnSetting(generalCategory);
         addJoystickSetting(generalCategory);
     }
@@ -250,6 +237,22 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         super.onProcessArguments(arguments);
     }
 
+    private void addFollowTypingSetting(PreferenceCategory generalCategory) {
+        var followTypingSwitchPreference = new SwitchPreferenceCompat(getPrefContext());
+        followTypingSwitchPreference.setTitle(
+                R.string.accessibility_screen_magnification_follow_typing_title);
+        followTypingSwitchPreference.setSummary(
+                R.string.accessibility_screen_magnification_follow_typing_summary);
+        followTypingSwitchPreference.setKey(
+                MagnificationFollowTypingPreferenceController.PREF_KEY);
+        generalCategory.addPreference(followTypingSwitchPreference);
+
+        var followTypingPreferenceController = new MagnificationFollowTypingPreferenceController(
+                getContext(), MagnificationFollowTypingPreferenceController.PREF_KEY);
+        followTypingPreferenceController.displayPreference(getPreferenceScreen());
+        addPreferenceController(followTypingPreferenceController);
+    }
+
     private boolean isAlwaysOnSettingEnabled() {
         final boolean defaultValue = getContext().getResources().getBoolean(
                 com.android.internal.R.bool.config_magnification_always_on_enabled);
@@ -276,7 +279,6 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
         var alwaysOnPreferenceController = new MagnificationAlwaysOnPreferenceController(
                 getContext(), MagnificationAlwaysOnPreferenceController.PREF_KEY);
-        getSettingsLifecycle().addObserver(alwaysOnPreferenceController);
         alwaysOnPreferenceController.displayPreference(getPreferenceScreen());
         addPreferenceController(alwaysOnPreferenceController);
     }
@@ -304,7 +306,6 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                         getContext(),
                         MagnificationJoystickPreferenceController.PREF_KEY
                 );
-        getSettingsLifecycle().addObserver(joystickPreferenceController);
         joystickPreferenceController.displayPreference(getPreferenceScreen());
         addPreferenceController(joystickPreferenceController);
     }

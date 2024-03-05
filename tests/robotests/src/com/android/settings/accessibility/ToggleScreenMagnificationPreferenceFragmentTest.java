@@ -19,6 +19,7 @@ package com.android.settings.accessibility;
 import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
 import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
 import static com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
+import static com.android.settings.accessibility.MagnificationCapabilities.MagnificationMode;
 import static com.android.settings.accessibility.ToggleFeaturePreferenceFragment.KEY_SAVED_USER_SHORTCUT_TYPE;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -43,9 +44,11 @@ import android.os.Bundle;
 import android.platform.test.annotations.RequiresFlagsEnabled;
 import android.platform.test.flag.junit.CheckFlagsRule;
 import android.platform.test.flag.junit.DeviceFlagsValueProvider;
+import android.provider.DeviceConfig;
 import android.provider.Settings;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.preference.Preference;
 import androidx.preference.TwoStatePreference;
 import androidx.test.core.app.ApplicationProvider;
 
@@ -54,12 +57,14 @@ import com.android.settings.DialogCreatable;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.accessibility.AccessibilityDialogUtils.DialogType;
+import com.android.settings.testutils.shadow.ShadowDeviceConfig;
 import com.android.settings.testutils.shadow.ShadowStorageManager;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 
 import com.google.common.truth.Correspondence;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -82,6 +87,7 @@ import java.util.List;
         ShadowUserManager.class,
         ShadowStorageManager.class,
         ShadowSettings.ShadowSecure.class,
+        ShadowDeviceConfig.class,
 })
 public class ToggleScreenMagnificationPreferenceFragmentTest {
 
@@ -109,6 +115,11 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
 
     private static final String KEY_FOLLOW_TYPING =
             Settings.Secure.ACCESSIBILITY_MAGNIFICATION_FOLLOW_TYPING_ENABLED;
+    private static final String KEY_ALWAYS_ON =
+            Settings.Secure.ACCESSIBILITY_MAGNIFICATION_ALWAYS_ON_ENABLED;
+    private static final String KEY_JOYSTICK =
+            Settings.Secure.ACCESSIBILITY_MAGNIFICATION_JOYSTICK_ENABLED;
+
     private FragmentController<ToggleScreenMagnificationPreferenceFragment> mFragController;
     private Context mContext;
     private Resources mSpyResources;
@@ -137,15 +148,48 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
         mFragController = FragmentController.of(fragment, SettingsActivity.class);
     }
 
+    @After
+    public void tearDown() {
+        ShadowDeviceConfig.reset();
+    }
+
+    @Test
+    public void onResume_defaultStateForMagnificationMode_preferenceShouldReturnFullScreen() {
+        mFragController.create(R.id.main_content, /* bundle= */ null).start().resume();
+
+        // Default is MagnificationMode.FULLSCREEN
+        final String expected =
+                MagnificationCapabilities.getSummary(mContext, MagnificationMode.FULLSCREEN);
+
+        final Preference preference = mFragController.get().findPreference(
+                MagnificationModePreferenceController.PREF_KEY);
+        assertThat(preference).isNotNull();
+        assertThat(preference.getSummary()).isEqualTo(expected);
+    }
+
+    @Test
+    public void onResume_setMagnificationModeToAll_preferenceShouldReturnAll() {
+        setKeyMagnificationMode(MagnificationMode.ALL);
+
+        mFragController.create(R.id.main_content, /* bundle= */ null).start().resume();
+
+        final String expected =
+                MagnificationCapabilities.getSummary(mContext, MagnificationMode.ALL);
+
+        final Preference preference = mFragController.get().findPreference(
+                MagnificationModePreferenceController.PREF_KEY);
+        assertThat(preference).isNotNull();
+        assertThat(preference.getSummary()).isEqualTo(expected);
+    }
+
     @Test
     public void onResume_defaultStateForFollowingTyping_switchPreferenceShouldReturnTrue() {
         setKeyFollowTypingEnabled(true);
 
         mFragController.create(R.id.main_content, /* bundle= */ null).start().resume();
 
-        final TwoStatePreference switchPreference =
-                mFragController.get().findPreference(
-                        MagnificationFollowTypingPreferenceController.PREF_KEY);
+        final TwoStatePreference switchPreference = mFragController.get().findPreference(
+                MagnificationFollowTypingPreferenceController.PREF_KEY);
         assertThat(switchPreference).isNotNull();
         assertThat(switchPreference.isChecked()).isTrue();
     }
@@ -156,9 +200,84 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
 
         mFragController.create(R.id.main_content, /* bundle= */ null).start().resume();
 
-        final TwoStatePreference switchPreference =
-                mFragController.get().findPreference(
-                        MagnificationFollowTypingPreferenceController.PREF_KEY);
+        final TwoStatePreference switchPreference = mFragController.get().findPreference(
+                MagnificationFollowTypingPreferenceController.PREF_KEY);
+        assertThat(switchPreference).isNotNull();
+        assertThat(switchPreference.isChecked()).isFalse();
+    }
+
+    @Test
+    public void onResume_defaultStateForAlwaysOn_switchPreferenceShouldReturnTrue() {
+        setAlwaysOnSupported(true);
+
+        mFragController.create(R.id.main_content, /* bundle= */ null).start().resume();
+
+        final TwoStatePreference switchPreference = mFragController.get().findPreference(
+                MagnificationAlwaysOnPreferenceController.PREF_KEY);
+        assertThat(switchPreference).isNotNull();
+        assertThat(switchPreference.isChecked()).isTrue();
+    }
+
+    @Test
+    public void onResume_enableAlwaysOn_switchPreferenceShouldReturnTrue() {
+        setAlwaysOnSupported(true);
+        setKeyAlwaysOnEnabled(true);
+
+        mFragController.create(R.id.main_content, /* bundle= */ null).start().resume();
+
+        final TwoStatePreference switchPreference = mFragController.get().findPreference(
+                MagnificationAlwaysOnPreferenceController.PREF_KEY);
+        assertThat(switchPreference).isNotNull();
+        assertThat(switchPreference.isChecked()).isTrue();
+    }
+
+    @Test
+    public void onResume_disableAlwaysOn_switchPreferenceShouldReturnFalse() {
+        setAlwaysOnSupported(true);
+        setKeyAlwaysOnEnabled(false);
+
+        mFragController.create(R.id.main_content, /* bundle= */ null).start().resume();
+
+        final TwoStatePreference switchPreference = mFragController.get().findPreference(
+                MagnificationAlwaysOnPreferenceController.PREF_KEY);
+        assertThat(switchPreference).isNotNull();
+        assertThat(switchPreference.isChecked()).isFalse();
+    }
+
+    @Test
+    public void onResume_defaultStateForJoystick_switchPreferenceShouldReturnFalse() {
+        setJoystickSupported(true);
+
+        mFragController.create(R.id.main_content, /* bundle= */ null).start().resume();
+
+        final TwoStatePreference switchPreference = mFragController.get().findPreference(
+                MagnificationJoystickPreferenceController.PREF_KEY);
+        assertThat(switchPreference).isNotNull();
+        assertThat(switchPreference.isChecked()).isFalse();
+    }
+
+    @Test
+    public void onResume_enableJoystick_switchPreferenceShouldReturnTrue() {
+        setJoystickSupported(true);
+        setKeyJoystickEnabled(true);
+
+        mFragController.create(R.id.main_content, /* bundle= */ null).start().resume();
+
+        final TwoStatePreference switchPreference = mFragController.get().findPreference(
+                MagnificationJoystickPreferenceController.PREF_KEY);
+        assertThat(switchPreference).isNotNull();
+        assertThat(switchPreference.isChecked()).isTrue();
+    }
+
+    @Test
+    public void onResume_disableJoystick_switchPreferenceShouldReturnFalse() {
+        setJoystickSupported(true);
+        setKeyJoystickEnabled(false);
+
+        mFragController.create(R.id.main_content, /* bundle= */ null).start().resume();
+
+        final TwoStatePreference switchPreference = mFragController.get().findPreference(
+                MagnificationJoystickPreferenceController.PREF_KEY);
         assertThat(switchPreference).isNotNull();
         assertThat(switchPreference.isChecked()).isFalse();
     }
@@ -557,6 +676,28 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
     }
 
     @Test
+    public void onCreateView_alwaysOnNotSupported_settingsPreferenceIsNull() {
+        setAlwaysOnSupported(false);
+
+        mFragController.create(R.id.main_content, /* bundle= */ null).start().resume();
+
+        final TwoStatePreference switchPreference = mFragController.get().findPreference(
+                MagnificationAlwaysOnPreferenceController.PREF_KEY);
+        assertThat(switchPreference).isNull();
+    }
+
+    @Test
+    public void onCreateView_joystickNotSupported_settingsPreferenceIsNull() {
+        setJoystickSupported(false);
+
+        mFragController.create(R.id.main_content, /* bundle= */ null).start().resume();
+
+        final TwoStatePreference switchPreference = mFragController.get().findPreference(
+                MagnificationJoystickPreferenceController.PREF_KEY);
+        assertThat(switchPreference).isNull();
+    }
+
+    @Test
     public void onCreateView_setDialogDelegateAndAddTheControllerToLifeCycleObserver() {
         Correspondence instanceOf = Correspondence.transforming(
                 observer -> (observer instanceof MagnificationModePreferenceController),
@@ -690,8 +831,38 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
                 enabled ? ON : OFF);
     }
 
+    private void setKeyMagnificationMode(@MagnificationMode int mode) {
+        MagnificationCapabilities.setCapabilities(mContext, mode);
+    }
+
     private void setKeyFollowTypingEnabled(boolean enabled) {
         Settings.Secure.putInt(mContext.getContentResolver(), KEY_FOLLOW_TYPING,
+                enabled ? ON : OFF);
+    }
+
+    private void setAlwaysOnSupported(boolean supported) {
+        ShadowDeviceConfig.setProperty(
+                DeviceConfig.NAMESPACE_WINDOW_MANAGER,
+                "AlwaysOnMagnifier__enable_always_on_magnifier",
+                supported ? "true" : "false",
+                /* makeDefault= */ false);
+    }
+
+    private void setKeyAlwaysOnEnabled(boolean enabled) {
+        Settings.Secure.putInt(mContext.getContentResolver(), KEY_ALWAYS_ON,
+                enabled ? ON : OFF);
+    }
+
+    private void setJoystickSupported(boolean supported) {
+        ShadowDeviceConfig.setProperty(
+                DeviceConfig.NAMESPACE_WINDOW_MANAGER,
+                "MagnificationJoystick__enable_magnification_joystick",
+                supported ? "true" : "false",
+                /* makeDefault= */ false);
+    }
+
+    private void setKeyJoystickEnabled(boolean enabled) {
+        Settings.Secure.putInt(mContext.getContentResolver(), KEY_JOYSTICK,
                 enabled ? ON : OFF);
     }
 
