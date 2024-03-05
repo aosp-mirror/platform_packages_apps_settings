@@ -230,7 +230,8 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
         if (bundle != null) {
             final int extraTab = bundle.getInt(SettingsActivity.EXTRA_SHOW_FRAGMENT_TAB, -1);
             if (extraTab != -1) {
-                return ((ViewPagerAdapter) mViewPager.getAdapter()).getTabForPosition(extraTab);
+                return ((ViewPagerAdapter) mViewPager.getAdapter())
+                        .getPositionForProfileTab(extraTab);
             }
             final int userId = bundle.getInt(EXTRA_USER_ID, UserHandle.SYSTEM.getIdentifier());
             final boolean isWorkProfile = UserManager.get(activity).isManagedProfile(userId);
@@ -410,7 +411,22 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
             }
             @ProfileType
             int profileType = mChildFragments[position].getArguments().getInt(EXTRA_PROFILE);
+            return profileTypeToTab(profileType);
+        }
 
+        private int getPositionForProfileTab(int profileTab) {
+            for (int i = 0; i < mChildFragments.length; ++i) {
+                Bundle arguments = mChildFragments[i].getArguments();
+                if (arguments != null
+                        && profileTypeToTab(arguments.getInt(EXTRA_PROFILE)) == profileTab) {
+                    return i;
+                }
+            }
+            Log.e(TAG, "position requested for an unknown profile tab " + profileTab);
+            return 0;
+        }
+
+        private int profileTypeToTab(@ProfileType int profileType) {
             if (profileType == ProfileType.WORK) {
                 return WORK_TAB;
             }

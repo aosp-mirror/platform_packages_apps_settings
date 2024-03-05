@@ -118,7 +118,9 @@ public class ProfileSelectFragmentTest {
         profileSelectFragment.setViewPager(viewPager);
         mFragmentManager.beginTransaction().add(profileSelectFragment, "tag");
 
-        assertThat(mFragment.getTabId(mActivity, bundle)).isEqualTo(WORK_TAB);
+        // The expected position '2' comes from the order in which fragments are added in
+        // TestProfileSelectFragment#getFragments()
+        assertThat(mFragment.getTabId(mActivity, bundle)).isEqualTo(2);
     }
 
     @Test
@@ -136,7 +138,9 @@ public class ProfileSelectFragmentTest {
         profileSelectFragment.setViewPager(viewPager);
         mFragmentManager.beginTransaction().add(profileSelectFragment, "tag");
 
-        assertThat(mFragment.getTabId(mActivity, bundle)).isEqualTo(PRIVATE_TAB);
+        // The expected position '1' comes from the order in which fragments are added in
+        // TestProfileSelectFragment#getFragments()
+        assertThat(mFragment.getTabId(mActivity, bundle)).isEqualTo(1);
     }
 
     @Test
@@ -343,10 +347,25 @@ public class ProfileSelectFragmentTest {
 
         @Override
         public Fragment[] getFragments() {
+            Fragment personalFragment = new SettingsPreferenceFragmentTest.TestFragment();
+            Bundle personalBundle = new Bundle();
+            personalBundle.putInt(EXTRA_PROFILE, ProfileType.PERSONAL);
+            personalFragment.setArguments(personalBundle);
+
+            Fragment workFragment = new SettingsPreferenceFragmentTest.TestFragment();
+            Bundle workBundle = new Bundle();
+            workBundle.putInt(EXTRA_PROFILE, ProfileType.WORK);
+            workFragment.setArguments(workBundle);
+
+            Fragment privateFragment = new SettingsPreferenceFragmentTest.TestFragment();
+            Bundle privateBundle = new Bundle();
+            privateBundle.putInt(EXTRA_PROFILE, ProfileType.PRIVATE);
+            privateFragment.setArguments(privateBundle);
+
             return new Fragment[]{
-                    new SettingsPreferenceFragmentTest.TestFragment(), //0
-                    new SettingsPreferenceFragmentTest.TestFragment(),
-                    new SettingsPreferenceFragmentTest.TestFragment()
+                    personalFragment, //0
+                    privateFragment,
+                    workFragment
             };
         }
     }
