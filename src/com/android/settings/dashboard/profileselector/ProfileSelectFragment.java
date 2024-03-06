@@ -232,7 +232,12 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
             if (extraTab != -1) {
                 return ((ViewPagerAdapter) mViewPager.getAdapter()).getTabForPosition(extraTab);
             }
-            final int userId = bundle.getInt(EXTRA_USER_ID, UserHandle.SYSTEM.getIdentifier());
+            final UserManager userManager = getSystemService(UserManager.class);
+            UserHandle mainUser = userManager.getMainUser();
+            if (mainUser == null) {
+                mainUser = UserHandle.SYSTEM;
+            }
+            final int userId = bundle.getInt(EXTRA_USER_ID, mainUser.getIdentifier());
             final boolean isWorkProfile = UserManager.get(activity).isManagedProfile(userId);
             if (isWorkProfile) {
                 return WORK_TAB;
@@ -320,7 +325,7 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
             List<UserInfo> userInfos = userManager.getProfiles(UserHandle.myUserId());
 
             for (UserInfo userInfo : userInfos) {
-                if (userInfo.getUserHandle().isSystem()) {
+                if (userInfo.isMain()) {
                     fragments.add(createAndGetFragment(
                             ProfileType.PERSONAL,
                             bundle != null ? bundle : new Bundle(),
@@ -338,7 +343,7 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
                                 privateFragmentConstructor));
                     }
                 } else {
-                    Log.d(TAG, "Not showing tab for unsupported user");
+                    Log.d(TAG, "Not showing tab for unsupported user " + userInfo);
                 }
             }
 
