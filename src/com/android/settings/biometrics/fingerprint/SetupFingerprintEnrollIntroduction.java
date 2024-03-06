@@ -49,7 +49,7 @@ public class SetupFingerprintEnrollIntroduction extends FingerprintEnrollIntrodu
         SetupWizardUtils.copySetupExtras(getIntent(), intent);
         if (Flags.udfpsEnrollCalibration()) {
             if (mCalibrator != null) {
-                intent.putExtras(mCalibrator.getExtrasForNextIntent(false));
+                intent.putExtras(mCalibrator.getExtrasForNextIntent());
             }
         }
         return intent;
