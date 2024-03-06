@@ -39,6 +39,7 @@ import androidx.annotation.Nullable;
 
 import com.android.settings.fuelgauge.BatteryOptimizeHistoricalLogEntry.Action;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.datastore.BackupCodec;
 import com.android.settingslib.datastore.BackupContext;
 import com.android.settingslib.datastore.BackupRestoreEntity;
 import com.android.settingslib.datastore.BackupRestoreStorageManager;
@@ -157,6 +158,22 @@ public final class BatterySettingsStorage extends ObservableBackupRestoreStorage
                         "getFullPowerList() size=%d in %d/ms",
                         allowlistedApps.length, (System.currentTimeMillis() - timestamp)));
         return Arrays.asList(allowlistedApps);
+    }
+
+    @NonNull
+    @Override
+    public OutputStream wrapBackupOutputStream(
+            @NonNull BackupCodec codec, @NonNull OutputStream outputStream) {
+        // not using any codec for backward compatibility
+        return outputStream;
+    }
+
+    @NonNull
+    @Override
+    public InputStream wrapRestoreInputStream(
+            @NonNull BackupCodec codec, @NonNull InputStream inputStream) {
+        // not using any codec for backward compatibility
+        return inputStream;
     }
 
     @Override
