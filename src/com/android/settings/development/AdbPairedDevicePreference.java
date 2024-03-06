@@ -75,11 +75,11 @@ public class AdbPairedDevicePreference extends Preference {
         gearNoBg.setVisibility(View.VISIBLE);
     }
 
-    static void setTitle(AdbPairedDevicePreference preference,
-                         PairDevice pairedDevice) {
+    static void setTitle(AdbPairedDevicePreference preference, PairDevice pairedDevice) {
         preference.setTitle(pairedDevice.name);
         preference.setSummary(pairedDevice.connected
-                ? preference.getContext().getText(R.string.adb_wireless_device_connected_summary)
+                ? preference.getContext()
+                .getText(com.android.settingslib.R.string.adb_wireless_device_connected_summary)
                 : "");
     }
 

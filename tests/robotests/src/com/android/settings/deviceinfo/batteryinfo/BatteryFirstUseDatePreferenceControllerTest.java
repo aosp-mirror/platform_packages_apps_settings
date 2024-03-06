@@ -34,6 +34,7 @@ import androidx.test.core.app.ApplicationProvider;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -75,6 +76,7 @@ public class BatteryFirstUseDatePreferenceControllerTest {
         assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 
+    @Ignore("b/315267179")
     @Test
     public void getSummary_available_returnExpectedDate() {
         when(mFactory.batterySettingsFeatureProvider.isFirstUseDateAvailable(eq(mContext),

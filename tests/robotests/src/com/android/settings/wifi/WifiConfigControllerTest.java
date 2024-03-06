@@ -351,15 +351,18 @@ public class WifiConfigControllerTest {
         for (int i = 0; i < adapter.getCount(); i++) {
             String val = adapter.getItem(i);
 
-            if (val.compareTo(mContext.getString(R.string.wifi_security_sae)) == 0) {
+            if (val.compareTo(mContext.getString(
+                    com.android.settingslib.R.string.wifi_security_sae)) == 0) {
                 saeFound = true;
             }
 
-            if (val.compareTo(mContext.getString(R.string.wifi_security_eap_suiteb)) == 0) {
+            if (val.compareTo(mContext.getString(
+                    com.android.settingslib.R.string.wifi_security_eap_suiteb)) == 0) {
                 suitebFound = true;
             }
 
-            if (val.compareTo(mContext.getString(R.string.wifi_security_owe)) == 0) {
+            if (val.compareTo(mContext.getString(
+                    com.android.settingslib.R.string.wifi_security_owe)) == 0) {
                 oweFound = true;
             }
         }

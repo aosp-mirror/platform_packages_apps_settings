@@ -57,14 +57,17 @@ public final class BatteryStateDaoTest {
         BatteryTestUtils.insertDataToBatteryStateTable(mContext, TIMESTAMP3, PACKAGE_NAME3);
         BatteryTestUtils.insertDataToBatteryStateTable(mContext, TIMESTAMP2, PACKAGE_NAME2);
         BatteryTestUtils.insertDataToBatteryStateTable(
-                mContext, TIMESTAMP1, PACKAGE_NAME1, /*multiple=*/ true,
-                /*isFullChargeStart=*/ true);
+                mContext,
+                TIMESTAMP1,
+                PACKAGE_NAME1,
+                /* multiple= */ true,
+                /* isFullChargeStart= */ true);
     }
 
     @After
     public void closeDb() {
         mDatabase.close();
-        BatteryStateDatabase.setBatteryStateDatabase(/*database=*/ null);
+        BatteryStateDatabase.setBatteryStateDatabase(/* database= */ null);
     }
 
     @Test
@@ -136,29 +139,25 @@ public final class BatteryStateDaoTest {
 
     @Test
     public void getInstance_createNewInstance_returnsExpectedResult() throws Exception {
-        BatteryStateDatabase.setBatteryStateDatabase(/*database=*/ null);
+        BatteryStateDatabase.setBatteryStateDatabase(/* database= */ null);
         assertThat(BatteryStateDatabase.getInstance(mContext)).isNotNull();
     }
 
     @Test
     public void getDistinctTimestampCount_normalFlow_returnsExpectedResult() {
-        assertThat(mBatteryStateDao.getDistinctTimestampCount(/*timestamp=*/ 0))
-                .isEqualTo(3);
-        assertThat(mBatteryStateDao.getDistinctTimestampCount(TIMESTAMP1))
-                .isEqualTo(2);
+        assertThat(mBatteryStateDao.getDistinctTimestampCount(/* timestamp= */ 0)).isEqualTo(3);
+        assertThat(mBatteryStateDao.getDistinctTimestampCount(TIMESTAMP1)).isEqualTo(2);
     }
 
     @Test
     public void getDistinctTimestamps_normalFlow_returnsExpectedResult() {
-        final List<Long> timestamps =
-                mBatteryStateDao.getDistinctTimestamps(/*timestamp=*/ 0);
+        final List<Long> timestamps = mBatteryStateDao.getDistinctTimestamps(/* timestamp= */ 0);
 
         assertThat(timestamps).hasSize(3);
         assertThat(timestamps).containsExactly(TIMESTAMP1, TIMESTAMP2, TIMESTAMP3);
     }
 
-    private static void assertBatteryState(
-            BatteryState state, long timestamp, String packageName) {
+    private static void assertBatteryState(BatteryState state, long timestamp, String packageName) {
         assertThat(state.timestamp).isEqualTo(timestamp);
         assertThat(state.packageName).isEqualTo(packageName);
     }

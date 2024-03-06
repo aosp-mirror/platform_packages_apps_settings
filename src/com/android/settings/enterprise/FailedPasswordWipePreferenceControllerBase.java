@@ -31,8 +31,8 @@ public abstract class FailedPasswordWipePreferenceControllerBase
 
     public FailedPasswordWipePreferenceControllerBase(Context context) {
         super(context);
-        mFeatureProvider = FeatureFactory.getFactory(context)
-                .getEnterprisePrivacyFeatureProvider(context);
+        mFeatureProvider = FeatureFactory.getFeatureFactory()
+                .getEnterprisePrivacyFeatureProvider();
     }
 
     protected abstract int getMaximumFailedPasswordsBeforeWipe();

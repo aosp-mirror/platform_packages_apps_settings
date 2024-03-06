@@ -17,29 +17,26 @@
 package com.android.settings.wifi.details2;
 
 import android.content.Context;
-import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.wifi.WifiDialog2;
 import com.android.wifitrackerlib.WifiEntry;
 
 /**
  * A controller that controls whether the Wi-Fi network is mac randomized or not.
  */
 public class WifiPrivacyPreferenceController2 extends BasePreferenceController implements
-        Preference.OnPreferenceChangeListener, WifiDialog2.WifiDialog2Listener {
+        Preference.OnPreferenceChangeListener {
 
     private static final String KEY_WIFI_PRIVACY = "privacy";
     private final WifiManager mWifiManager;
     private WifiEntry mWifiEntry;
-    private Preference mPreference;
 
     public WifiPrivacyPreferenceController2(Context context) {
         super(context, KEY_WIFI_PRIVACY);
@@ -58,12 +55,6 @@ public class WifiPrivacyPreferenceController2 extends BasePreferenceController i
     }
 
     @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-        mPreference = screen.findPreference(getPreferenceKey());
-    }
-
-    @Override
     public void updateState(Preference preference) {
         final ListPreference listPreference = (ListPreference) preference;
         final int randomizationLevel = getRandomizationValue();
@@ -79,8 +70,12 @@ public class WifiPrivacyPreferenceController2 extends BasePreferenceController i
     }
 
     @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
+    public boolean onPreferenceChange(@NonNull Preference preference, Object newValue) {
         final int privacy = Integer.parseInt((String) newValue);
+        if (mWifiEntry.getPrivacy() == privacy) {
+            // Prevent disconnection + reconnection if settings not changed.
+            return true;
+        }
         mWifiEntry.setPrivacy(privacy);
 
         // To activate changing, we need to reconnect network. WiFi will auto connect to
@@ -127,31 +122,5 @@ public class WifiPrivacyPreferenceController2 extends BasePreferenceController i
         // Translates value here to set RANDOMIZATION_PERSISTENT as first item in UI for better UX.
         final int prefMacRandomized = translateMacRandomizedValueToPrefValue(macRandomized);
         preference.setSummary(preference.getEntries()[prefMacRandomized]);
-    }
-
-    @Override
-    public void onSubmit(WifiDialog2 dialog) {
-        if (dialog.getController() != null) {
-            final WifiConfiguration newConfig = dialog.getController().getConfig();
-            if (newConfig == null) {
-                return;
-            }
-
-            if (getWifiEntryPrivacy(newConfig) != mWifiEntry.getPrivacy()) {
-                mWifiEntry.setPrivacy(getWifiEntryPrivacy(newConfig));
-                onPreferenceChange(mPreference, String.valueOf(newConfig.macRandomizationSetting));
-            }
-        }
-    }
-
-    private int getWifiEntryPrivacy(WifiConfiguration wifiConfiguration) {
-        switch (wifiConfiguration.macRandomizationSetting) {
-            case WifiConfiguration.RANDOMIZATION_NONE:
-                return WifiEntry.PRIVACY_DEVICE_MAC;
-            case WifiConfiguration.RANDOMIZATION_PERSISTENT:
-                return WifiEntry.PRIVACY_RANDOMIZED_MAC;
-            default:
-                return WifiEntry.PRIVACY_UNKNOWN;
-        }
     }
 }

@@ -43,7 +43,7 @@ public class FaceEnrollFinish extends BiometricEnrollBase {
                         .setText(R.string.security_settings_face_enroll_done)
                         .setListener(this::onNextButtonClick)
                         .setButtonType(FooterButton.ButtonType.NEXT)
-                        .setTheme(R.style.SudGlifButton_Primary)
+                        .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Primary)
                         .build()
         );
     }

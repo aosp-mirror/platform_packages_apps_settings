@@ -20,6 +20,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.spy;
@@ -44,7 +45,6 @@ import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -147,7 +147,6 @@ public class ControlsTrivialPrivacyPreferenceControllerTest {
         verify(mPreference, atLeastOnce()).setSummary(mController.getSummary());
     }
 
-    @Ignore
     @Test
     public void updateStateWithCustomizableLockScreenQuickAffordancesEnabled() {
         setCustomizableLockScreenQuickAffordancesEnabled(true);
@@ -168,7 +167,6 @@ public class ControlsTrivialPrivacyPreferenceControllerTest {
                 BasePreferenceController.DISABLED_DEPENDENT_SETTING);
     }
 
-    @Ignore
     @Test
     public void getAvailabilityStatusWithCustomizableLockScreenQuickAffordancesEnabled() {
         setCustomizableLockScreenQuickAffordancesEnabled(true);
@@ -223,7 +221,7 @@ public class ControlsTrivialPrivacyPreferenceControllerTest {
             final ResolveInfo resolveInfo = new ResolveInfo();
             resolveInfo.activityInfo = activityInfo;
 
-            when(mPackageManager.resolveActivity(any(), any())).thenReturn(resolveInfo);
+            when(mPackageManager.resolveActivity(any(), anyInt())).thenReturn(resolveInfo);
         }
     }
 }

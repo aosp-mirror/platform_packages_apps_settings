@@ -24,8 +24,8 @@ import android.app.AppOpsManager.OP_AUTO_REVOKE_PERMISSIONS_IF_UNUSED
 import android.apphibernation.AppHibernationManager
 import android.content.Context
 import android.content.pm.ApplicationInfo
+import android.content.pm.Flags
 import android.os.Build
-import android.os.UserHandle
 import android.permission.PermissionControllerManager
 import android.permission.PermissionControllerManager.HIBERNATION_ELIGIBILITY_ELIGIBLE
 import android.permission.PermissionControllerManager.HIBERNATION_ELIGIBILITY_EXEMPT_BY_SYSTEM
@@ -63,7 +63,6 @@ import org.mockito.Mockito.any
 import org.mockito.Mockito.anyBoolean
 import org.mockito.Mockito.anyString
 import org.mockito.Mockito.doAnswer
-import org.mockito.Mockito.doReturn
 import org.mockito.Mockito.eq
 import org.mockito.Mockito.never
 import org.mockito.Mockito.verify
@@ -147,11 +146,19 @@ class HibernationSwitchPreferenceTest {
 
         setContent()
 
-        composeTestRule.onNodeWithText(context.getString(R.string.unused_apps_switch))
+        val text = if (isArchivingEnabled()) {
+            context.getString(R.string.unused_apps_switch_v2)
+        } else {
+            context.getString(R.string.unused_apps_switch)
+        }
+        composeTestRule.onNodeWithText(text)
             .assertIsDisplayed()
             .assertIsNotEnabled()
             .assertIsOff()
     }
+
+    private fun isArchivingEnabled() =
+            Flags.archiving() || "true" == System.getProperty("pm.archiving.enabled")
 
     @Test
     fun `An app targets Q with ops mode default when hibernation targets pre S - not exempted`() {

@@ -73,34 +73,10 @@ public class FingerprintEnrollEnrollingViewModel extends AndroidViewModel {
     @IntDef(prefix = { "FINGERPRINT_ENROLL_ENROLLING_ACTION_" }, value = {
             FINGERPRINT_ENROLL_ENROLLING_ACTION_DONE,
             FINGERPRINT_ENROLL_ENROLLING_ACTION_SHOW_ICON_TOUCH_DIALOG,
-            FINGERPRINT_ENROLL_ENROLLING_CANCELED_BECAUSE_USER_SKIP,
-            FINGERPRINT_ENROLL_ENROLLING_CANCELED_BECAUSE_BACK_PRESSED
+            FINGERPRINT_ENROLL_ENROLLING_CANCELED_BECAUSE_USER_SKIP
     })
     @Retention(RetentionPolicy.SOURCE)
     public @interface FingerprintEnrollEnrollingAction {}
-
-    /**
-     * Enrolling skipped
-     */
-    public static final int FINGERPRINT_ERROR_DIALOG_ACTION_SET_RESULT_FINISH = 0;
-
-    /**
-     * Enrolling finished
-     */
-    public static final int FINGERPRINT_ERROR_DIALOG_ACTION_SET_RESULT_TIMEOUT = 1;
-
-    /**
-     * Icon touch dialog show
-     */
-    public static final int FINGERPRINT_ERROR_DIALOG_ACTION_RESTART = 2;
-
-    @IntDef(prefix = { "FINGERPRINT_ERROR_DIALOG_ACTION_" }, value = {
-            FINGERPRINT_ERROR_DIALOG_ACTION_SET_RESULT_FINISH,
-            FINGERPRINT_ERROR_DIALOG_ACTION_SET_RESULT_TIMEOUT,
-            FINGERPRINT_ERROR_DIALOG_ACTION_RESTART
-    })
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface FingerprintErrorDialogAction {}
 
     private final int mUserId;
     private boolean mOnBackPressed;
@@ -110,31 +86,17 @@ public class FingerprintEnrollEnrollingViewModel extends AndroidViewModel {
     private final Vibrator mVibrator;
 
     private final MutableLiveData<Integer> mActionLiveData = new MutableLiveData<>();
-    private final MutableLiveData<ErrorDialogData> mErrorDialogLiveData = new MutableLiveData<>();
-    private final MutableLiveData<Integer> mErrorDialogActionLiveData = new MutableLiveData<>();
 
-    public FingerprintEnrollEnrollingViewModel(@NonNull Application application,
-            int userId, @NonNull FingerprintRepository fingerprintRepository) {
+    public FingerprintEnrollEnrollingViewModel(
+            @NonNull Application application,
+            int userId,
+            @NonNull FingerprintRepository fingerprintRepository
+    ) {
         super(application);
         mUserId = userId;
         mFingerprintRepository = fingerprintRepository;
         mAccessibilityManager = application.getSystemService(AccessibilityManager.class);
         mVibrator = application.getSystemService(Vibrator.class);
-    }
-
-    /**
-     * Notifies activity to show error dialog
-     */
-    public void showErrorDialog(@NonNull ErrorDialogData errorDialogData) {
-        mErrorDialogLiveData.postValue(errorDialogData);
-    }
-
-    public LiveData<ErrorDialogData> getErrorDialogLiveData() {
-        return mErrorDialogLiveData;
-    }
-
-    public LiveData<Integer> getErrorDialogActionLiveData() {
-        return mErrorDialogActionLiveData;
     }
 
     public LiveData<Integer> getActionLiveData() {
@@ -146,16 +108,6 @@ public class FingerprintEnrollEnrollingViewModel extends AndroidViewModel {
      */
     public void clearActionLiveData() {
         mActionLiveData.setValue(null);
-    }
-
-    /**
-     * Saves new user dialog action to mErrorDialogActionLiveData
-     */
-    public void onErrorDialogAction(@FingerprintErrorDialogAction int action) {
-        if (DEBUG) {
-            Log.d(TAG, "onErrorDialogAction(" + action + ")");
-        }
-        mErrorDialogActionLiveData.postValue(action);
     }
 
     public boolean getOnSkipPressed() {
@@ -170,7 +122,7 @@ public class FingerprintEnrollEnrollingViewModel extends AndroidViewModel {
     }
 
     /**
-     * Enrolling is cacelled because user clicks skip
+     * Enrolling is cancelled because user clicks skip
      */
     public void onCancelledDueToOnSkipPressed() {
         final int action = FINGERPRINT_ENROLL_ENROLLING_CANCELED_BECAUSE_USER_SKIP;
@@ -292,46 +244,5 @@ public class FingerprintEnrollEnrollingViewModel extends AndroidViewModel {
     @Nullable
     public FingerprintSensorPropertiesInternal getFirstFingerprintSensorPropertiesInternal() {
         return mFingerprintRepository.getFirstFingerprintSensorPropertiesInternal();
-    }
-
-    /**
-     * The first sensor type is UDFPS sensor or not
-     */
-    public boolean canAssumeUdfps() {
-        return mFingerprintRepository.canAssumeUdfps();
-    }
-
-    /**
-     * Data for passing to FingerprintEnrollEnrollingErrorDialog
-     */
-    public static class ErrorDialogData {
-        @NonNull private final CharSequence mErrMsg;
-        @NonNull private final CharSequence mErrTitle;
-        @NonNull private final int mErrMsgId;
-
-        public ErrorDialogData(@NonNull CharSequence errMsg, @NonNull CharSequence errTitle,
-                int errMsgId) {
-            mErrMsg = errMsg;
-            mErrTitle = errTitle;
-            mErrMsgId = errMsgId;
-        }
-
-        public CharSequence getErrMsg() {
-            return mErrMsg;
-        }
-
-        public CharSequence getErrTitle() {
-            return mErrTitle;
-        }
-
-        public int getErrMsgId() {
-            return mErrMsgId;
-        }
-
-        @Override
-        public String toString() {
-            return getClass().getSimpleName() + "@" + Integer.toHexString(hashCode())
-                    + "{id:" + mErrMsgId + "}";
-        }
     }
 }

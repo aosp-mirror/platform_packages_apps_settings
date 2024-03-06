@@ -21,7 +21,6 @@ import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.Switch;
 
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.RestrictedLockUtils;
@@ -39,10 +38,9 @@ public class SettingsMainSwitchBar extends MainSwitchBar {
     public interface OnBeforeCheckedChangeListener {
 
         /**
-         * @param switchView The Switch view whose state has changed.
-         * @param isChecked  The new checked state of switchView.
+         * @param isChecked The new checked state of switchView.
          */
-        boolean onBeforeCheckedChanged(Switch switchView, boolean isChecked);
+        boolean onBeforeCheckedChanged(boolean isChecked);
     }
 
     private EnforcedAdmin mEnforcedAdmin;
@@ -68,7 +66,7 @@ public class SettingsMainSwitchBar extends MainSwitchBar {
     public SettingsMainSwitchBar(Context context, AttributeSet attrs, int defStyleAttr,
             int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
 
         addOnSwitchChangeListener((switchView, isChecked) -> logMetrics(isChecked));
     }
@@ -117,7 +115,7 @@ public class SettingsMainSwitchBar extends MainSwitchBar {
     @Override
     public void setChecked(boolean checked) {
         if (mOnBeforeListener != null
-                && mOnBeforeListener.onBeforeCheckedChanged(mSwitch, checked)) {
+                && mOnBeforeListener.onBeforeCheckedChanged(checked)) {
             return;
         }
         super.setChecked(checked);

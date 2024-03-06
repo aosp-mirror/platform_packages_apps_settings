@@ -45,8 +45,7 @@ public class GenericSwitchController extends SwitchWidgetController implements
 
     private void setPreference(Preference preference) {
         mPreference = preference;
-        mMetricsFeatureProvider =
-                FeatureFactory.getFactory(preference.getContext()).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     @Override

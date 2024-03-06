@@ -21,10 +21,11 @@ import android.bluetooth.BluetoothManager;
 import android.bluetooth.BluetoothStatusCodes;
 import android.content.Context;
 import android.os.SystemProperties;
+import android.sysprop.BluetoothProperties;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
@@ -36,27 +37,27 @@ public class BluetoothLeAudioAllowListPreferenceController
         extends DeveloperOptionsPreferenceController
         implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
 
-    private static final String PREFERENCE_KEY = "bluetooth_enable_leaudio_allow_list";
+    private static final String PREFERENCE_KEY = "bluetooth_bypass_leaudio_allowlist";
 
-    private static final String LE_AUDIO_ALLOW_LIST_SWITCH_SUPPORT_PROPERTY =
-            "ro.bluetooth.leaudio_allow_list.supported";
+    static final String LE_AUDIO_CONNECTION_BY_DEFAULT_PROPERTY =
+            "ro.bluetooth.leaudio.le_audio_connection_by_default";
     @VisibleForTesting
-    static final String LE_AUDIO_ALLOW_LIST_ENABLED_PROPERTY =
-            "persist.bluetooth.leaudio.enable_allow_list";
+    static final String BYPASS_LE_AUDIO_ALLOWLIST_PROPERTY =
+            "persist.bluetooth.leaudio.bypass_allow_list";
 
     @VisibleForTesting
     BluetoothAdapter mBluetoothAdapter;
+    @VisibleForTesting boolean mLeAudioConnectionByDefault;
 
     private final DevelopmentSettingsDashboardFragment mFragment;
-
-    @VisibleForTesting
-    boolean mChanged = false;
 
     public BluetoothLeAudioAllowListPreferenceController(Context context,
             DevelopmentSettingsDashboardFragment fragment) {
         super(context);
         mFragment = fragment;
         mBluetoothAdapter = context.getSystemService(BluetoothManager.class).getAdapter();
+        mLeAudioConnectionByDefault =
+                SystemProperties.getBoolean(LE_AUDIO_CONNECTION_BY_DEFAULT_PROPERTY, true);
     }
 
     @Override
@@ -65,52 +66,48 @@ public class BluetoothLeAudioAllowListPreferenceController
     }
 
     @Override
+    public boolean isAvailable() {
+        return BluetoothProperties.isProfileBapUnicastClientEnabled().orElse(false)
+                && mLeAudioConnectionByDefault;
+    }
+
+    @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        BluetoothRebootDialog.show(mFragment);
-        mChanged = true;
-        return false;
+        final boolean isBypassed = (Boolean) newValue;
+        SystemProperties.set(BYPASS_LE_AUDIO_ALLOWLIST_PROPERTY,
+                isBypassed ? "true" : "false");
+        return true;
     }
 
     @Override
     public void updateState(Preference preference) {
         if (mBluetoothAdapter == null) {
-            return;
-        }
-
-        final int leAudioSupportedState = mBluetoothAdapter.isLeAudioSupported();
-        final boolean leAudioEnabled =
-                (leAudioSupportedState == BluetoothStatusCodes.FEATURE_SUPPORTED);
-        final boolean leAudioAllowListSupport =
-                SystemProperties.getBoolean(LE_AUDIO_ALLOW_LIST_SWITCH_SUPPORT_PROPERTY, false);
-
-        if (leAudioEnabled && leAudioAllowListSupport) {
-            final boolean leAudioAllowListEnabled =
-                    SystemProperties.getBoolean(LE_AUDIO_ALLOW_LIST_ENABLED_PROPERTY, false);
-            ((SwitchPreference) mPreference).setChecked(leAudioAllowListEnabled);
-        } else {
             mPreference.setEnabled(false);
-            ((SwitchPreference) mPreference).setChecked(false);
-        }
-    }
-
-    /**
-     * Called when the RebootDialog confirm is clicked.
-     */
-    public void onRebootDialogConfirmed() {
-        if (!mChanged) {
             return;
         }
 
-        final boolean leAudioAllowListEnabled =
-                SystemProperties.getBoolean(LE_AUDIO_ALLOW_LIST_ENABLED_PROPERTY, false);
-        SystemProperties.set(LE_AUDIO_ALLOW_LIST_ENABLED_PROPERTY,
-                Boolean.toString(!leAudioAllowListEnabled));
+        final boolean isLeAudioSupported =
+                (mBluetoothAdapter.isLeAudioSupported() == BluetoothStatusCodes.FEATURE_SUPPORTED);
+        if (!isLeAudioSupported) {
+            mPreference.setEnabled(false);
+            ((TwoStatePreference) mPreference).setChecked(false);
+            return;
+        }
+
+        mPreference.setEnabled(true);
+        final boolean isLeAudioAllowlistBypassed =
+                SystemProperties.getBoolean(BYPASS_LE_AUDIO_ALLOWLIST_PROPERTY, false);
+        ((TwoStatePreference) mPreference).setChecked(isLeAudioAllowlistBypassed);
     }
 
-    /**
-     * Called when the RebootDialog cancel is clicked.
-     */
-    public void onRebootDialogCanceled() {
-        mChanged = false;
+    @Override
+    protected void onDeveloperOptionsSwitchDisabled() {
+        super.onDeveloperOptionsSwitchDisabled();
+        final boolean isBypassed =
+                SystemProperties.getBoolean(BYPASS_LE_AUDIO_ALLOWLIST_PROPERTY, false);
+        if (isBypassed) {
+            SystemProperties.set(BYPASS_LE_AUDIO_ALLOWLIST_PROPERTY, Boolean.toString(false));
+            ((TwoStatePreference) mPreference).setChecked(false);
+        }
     }
 }

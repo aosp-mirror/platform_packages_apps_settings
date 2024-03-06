@@ -58,11 +58,14 @@ public class WifiTetherViewModel extends AndroidViewModel {
     static Map<Integer, Integer> sSecuritySummaryResMap = new HashMap<>();
 
     static {
-        sSecuritySummaryResMap.put(SECURITY_TYPE_WPA3_SAE, R.string.wifi_security_sae);
+        sSecuritySummaryResMap.put(
+                SECURITY_TYPE_WPA3_SAE, com.android.settingslib.R.string.wifi_security_sae);
         sSecuritySummaryResMap.put(SECURITY_TYPE_WPA3_SAE_TRANSITION,
-                R.string.wifi_security_psk_sae);
-        sSecuritySummaryResMap.put(SECURITY_TYPE_WPA2_PSK, R.string.wifi_security_wpa2);
-        sSecuritySummaryResMap.put(SECURITY_TYPE_OPEN, R.string.wifi_security_none);
+                com.android.settingslib.R.string.wifi_security_psk_sae);
+        sSecuritySummaryResMap.put(
+                SECURITY_TYPE_WPA2_PSK, com.android.settingslib.R.string.wifi_security_wpa2);
+        sSecuritySummaryResMap.put(
+                SECURITY_TYPE_OPEN, com.android.settingslib.R.string.wifi_security_none);
     }
 
     static Map<Integer, Integer> sSpeedSummaryResMap = new HashMap<>();
@@ -90,7 +93,7 @@ public class WifiTetherViewModel extends AndroidViewModel {
 
     public WifiTetherViewModel(@NotNull Application application) {
         super(application);
-        WifiFeatureProvider featureProvider = FeatureFactory.getFactory(application)
+        WifiFeatureProvider featureProvider = FeatureFactory.getFeatureFactory()
                 .getWifiFeatureProvider();
         mWifiHotspotRepository = featureProvider.getWifiHotspotRepository();
         mSharedConnectivityRepository = featureProvider.getSharedConnectivityRepository();
@@ -232,7 +235,6 @@ public class WifiTetherViewModel extends AndroidViewModel {
     }
 
     private void log(String msg) {
-        FeatureFactory.getFactory(getApplication().getApplicationContext()).getWifiFeatureProvider()
-                .verboseLog(TAG, msg);
+        FeatureFactory.getFeatureFactory().getWifiFeatureProvider().verboseLog(TAG, msg);
     }
 }

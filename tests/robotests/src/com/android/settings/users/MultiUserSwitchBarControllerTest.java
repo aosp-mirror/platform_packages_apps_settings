@@ -17,8 +17,8 @@
 package com.android.settings.users;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
 import android.content.Context;
@@ -26,8 +26,7 @@ import android.os.UserHandle;
 import android.os.UserManager;
 
 import com.android.settings.testutils.shadow.ShadowUserManager;
-import com.android.settings.widget.SwitchBar;
-import com.android.settings.widget.SwitchBarController;
+import com.android.settings.widget.SwitchWidgetController;
 
 import org.junit.After;
 import org.junit.Before;
@@ -43,14 +42,14 @@ public class MultiUserSwitchBarControllerTest {
 
     private Context mContext;
     private ShadowUserManager mUserManager;
-    private SwitchBarController mSwitchBarController;
+    private SwitchWidgetController mSwitchWidgetController;
 
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
         mUserManager = ShadowUserManager.getShadow();
-        mSwitchBarController = spy(new SwitchBarController(new SwitchBar(mContext)));
+        mSwitchWidgetController = mock(SwitchWidgetController.class);
         mUserManager.setSupportsMultipleUsers(true);
     }
 
@@ -65,9 +64,9 @@ public class MultiUserSwitchBarControllerTest {
                 UserManager.DISALLOW_USER_SWITCH, true);
 
         final MultiUserSwitchBarController controller = new MultiUserSwitchBarController(mContext,
-                mSwitchBarController, null);
+                mSwitchWidgetController, null);
 
-        verify(mSwitchBarController).setDisabledByAdmin(any());
+        verify(mSwitchWidgetController).setDisabledByAdmin(any());
     }
 
     @Test
@@ -76,8 +75,8 @@ public class MultiUserSwitchBarControllerTest {
                 UserManager.DISALLOW_USER_SWITCH, false);
 
         final MultiUserSwitchBarController controller = new MultiUserSwitchBarController(mContext,
-                mSwitchBarController, null);
+                mSwitchWidgetController, null);
 
-        verify(mSwitchBarController, never()).setDisabledByAdmin(any());
+        verify(mSwitchWidgetController, never()).setDisabledByAdmin(any());
     }
 }

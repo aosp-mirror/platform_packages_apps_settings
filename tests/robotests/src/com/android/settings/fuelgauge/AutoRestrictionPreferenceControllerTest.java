@@ -91,26 +91,25 @@ public class AutoRestrictionPreferenceControllerTest {
     public void testGetAvailabilityStatus_smartBatterySupported_returnDisabled() {
         doReturn(true).when(mFeatureFactory.powerUsageFeatureProvider).isSmartBatterySupported();
 
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(
-                BasePreferenceController.UNSUPPORTED_ON_DEVICE);
+        assertThat(mController.getAvailabilityStatus())
+                .isEqualTo(BasePreferenceController.UNSUPPORTED_ON_DEVICE);
     }
 
     @Test
     public void testGetAvailabilityStatus_smartBatteryUnSupported_returnAvailable() {
         doReturn(false).when(mFeatureFactory.powerUsageFeatureProvider).isSmartBatterySupported();
 
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(
-                BasePreferenceController.AVAILABLE);
+        assertThat(mController.getAvailabilityStatus())
+                .isEqualTo(BasePreferenceController.AVAILABLE);
     }
 
     private void putAutoRestrictionValue(int value) {
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.APP_AUTO_RESTRICTION_ENABLED,
-                value);
+        Settings.Global.putInt(
+                mContext.getContentResolver(), Settings.Global.APP_AUTO_RESTRICTION_ENABLED, value);
     }
 
     private int getAutoRestrictionValue() {
-        return Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.APP_AUTO_RESTRICTION_ENABLED, ON);
+        return Settings.Global.getInt(
+                mContext.getContentResolver(), Settings.Global.APP_AUTO_RESTRICTION_ENABLED, ON);
     }
 }

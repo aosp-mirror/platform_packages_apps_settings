@@ -38,7 +38,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.Preference.OnPreferenceClickListener;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.applications.AppStateUsageBridge.UsageState;
@@ -57,7 +57,7 @@ public class UsageAccessDetails extends AppInfoWithHeader implements OnPreferenc
     // TODO: Break out this functionality into its own class.
     private AppStateUsageBridge mUsageBridge;
     private AppOpsManager mAppOpsManager;
-    private SwitchPreference mSwitchPref;
+    private TwoStatePreference mSwitchPref;
     private Preference mUsageDesc;
     private Intent mSettingsIntent;
     private UsageState mUsageState;
@@ -78,7 +78,7 @@ public class UsageAccessDetails extends AppInfoWithHeader implements OnPreferenc
         mDpm = context.getSystemService(DevicePolicyManager.class);
 
         addPreferencesFromResource(R.xml.app_ops_permissions_details);
-        mSwitchPref = (SwitchPreference) findPreference(KEY_APP_OPS_SETTINGS_SWITCH);
+        mSwitchPref = (TwoStatePreference) findPreference(KEY_APP_OPS_SETTINGS_SWITCH);
         mUsageDesc = findPreference(KEY_APP_OPS_SETTINGS_DESC);
 
         getPreferenceScreen().setTitle(R.string.usage_access);
@@ -148,7 +148,7 @@ public class UsageAccessDetails extends AppInfoWithHeader implements OnPreferenc
         int logCategory = newState ? SettingsEnums.APP_SPECIAL_PERMISSION_USAGE_VIEW_ALLOW
                 : SettingsEnums.APP_SPECIAL_PERMISSION_USAGE_VIEW_DENY;
         final MetricsFeatureProvider metricsFeatureProvider =
-                FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider();
+                FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
         metricsFeatureProvider.action(
                 metricsFeatureProvider.getAttribution(getActivity()),
                 logCategory,

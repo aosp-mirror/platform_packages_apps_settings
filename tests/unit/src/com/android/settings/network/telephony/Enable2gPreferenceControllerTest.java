@@ -29,19 +29,23 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.os.Looper;
 import android.os.PersistableBundle;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
+import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import com.android.settings.flags.Flags;
 import com.android.settings.network.CarrierConfigCache;
 import com.android.settingslib.RestrictedSwitchPreference;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -49,6 +53,8 @@ import org.mockito.MockitoAnnotations;
 
 @RunWith(AndroidJUnit4.class)
 public final class Enable2gPreferenceControllerTest {
+    @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+
     private static final int SUB_ID = 2;
     private static final String PREFERENCE_KEY = "TEST_2G_PREFERENCE";
 
@@ -103,30 +109,9 @@ public final class Enable2gPreferenceControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_hideEnable2g_returnUnavailable() {
-        mPersistableBundle.putBoolean(CarrierConfigManager.KEY_HIDE_ENABLE_2G,
-                true);
-
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
-    }
-
-    @Test
-    public void getAvailabilityStatus_nullCarrierConfig_returnUnavailable() {
-        doReturn(true).when(mTelephonyManager).isRadioInterfaceCapabilitySupported(
-                mTelephonyManager.CAPABILITY_USES_ALLOWED_NETWORK_TYPES_BITMASK);
-        mPersistableBundle.putBoolean(CarrierConfigManager.KEY_HIDE_ENABLE_2G,
-                false);
-        doReturn(null).when(mCarrierConfigCache).getConfigForSubId(SUB_ID);
-
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
-    }
-
-    @Test
     public void getAvailabilityStatus_capabilityNotSupported_returnUnavailable() {
         doReturn(false).when(mTelephonyManager).isRadioInterfaceCapabilitySupported(
                 mTelephonyManager.CAPABILITY_USES_ALLOWED_NETWORK_TYPES_BITMASK);
-        mPersistableBundle.putBoolean(CarrierConfigManager.KEY_HIDE_ENABLE_2G,
-                false);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
@@ -135,8 +120,6 @@ public final class Enable2gPreferenceControllerTest {
     public void getAvailabilityStatus_returnAvailable() {
         doReturn(true).when(mTelephonyManager).isRadioInterfaceCapabilitySupported(
                 mTelephonyManager.CAPABILITY_USES_ALLOWED_NETWORK_TYPES_BITMASK);
-        mPersistableBundle.putBoolean(CarrierConfigManager.KEY_HIDE_ENABLE_2G,
-                false);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
@@ -160,14 +143,8 @@ public final class Enable2gPreferenceControllerTest {
     }
 
     @Test
-    public void onPreferenceChange_update() {
+    public void setChecked_disable2G() {
         when2gIsEnabledForReasonEnable2g();
-
-        // Setup state to allow disabling
-        doReturn(true).when(mTelephonyManager).isRadioInterfaceCapabilitySupported(
-                mTelephonyManager.CAPABILITY_USES_ALLOWED_NETWORK_TYPES_BITMASK);
-        mPersistableBundle.putBoolean(CarrierConfigManager.KEY_HIDE_ENABLE_2G,
-                false);
 
         // Disable 2G
         boolean changed = mController.setChecked(false);
@@ -199,6 +176,43 @@ public final class Enable2gPreferenceControllerTest {
         // If the preference is re-enabled by an admin, former state should hold
         when2gIsDisabledByAdmin(false);
         assertThat(mController.isChecked()).isTrue();
+    }
+
+    @Test
+    public void updateState_carrierDisablementSupported_carrierHidesToggle() {
+        mSetFlagsRule.disableFlags(Flags.FLAG_REMOVE_KEY_HIDE_ENABLE_2G);
+        when2gIsDisabledByAdmin(false);
+        mPersistableBundle.putBoolean(CarrierConfigManager.KEY_HIDE_ENABLE_2G, true);
+        mPreference.setEnabled(true);
+
+        mController.updateState((Preference) mPreference);
+
+        assertThat(mPreference.isEnabled()).isFalse();
+    }
+
+    @Test
+    public void updateState_carrierDisablementSupported_carrierShowsToggle() {
+        mSetFlagsRule.disableFlags(Flags.FLAG_REMOVE_KEY_HIDE_ENABLE_2G);
+        when2gIsDisabledByAdmin(false);
+        mPersistableBundle.putBoolean(CarrierConfigManager.KEY_HIDE_ENABLE_2G, false);
+        mPreference.setEnabled(true);
+
+        mController.updateState((Preference) mPreference);
+
+        assertThat(mPreference.isEnabled()).isTrue();
+    }
+
+    @Test
+    public void updateState_carrierDisablementRemoved() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_REMOVE_KEY_HIDE_ENABLE_2G);
+        mPreference.setEnabled(true);
+        when2gIsDisabledByAdmin(false);
+        // Set the config, so that we can later assert it was ignored
+        mPersistableBundle.putBoolean(CarrierConfigManager.KEY_HIDE_ENABLE_2G, true);
+
+        mController.updateState((Preference) mPreference);
+
+        assertThat(mPreference.isEnabled()).isTrue();
     }
 
     private void when2gIsEnabledForReasonEnable2g() {

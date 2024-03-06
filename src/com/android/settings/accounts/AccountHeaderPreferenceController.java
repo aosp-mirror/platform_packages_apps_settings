@@ -95,6 +95,6 @@ public class AccountHeaderPreferenceController extends AbstractPreferenceControl
                 .newInstance(mActivity, mHost, mHeaderPreference.findViewById(R.id.entity_header))
                 .setLabel(mAccount.name)
                 .setIcon(helper.getDrawableForType(mContext, mAccount.type))
-                .done(mActivity, true /* rebindButtons */);
+                .done(true /* rebindButtons */);
     }
 }

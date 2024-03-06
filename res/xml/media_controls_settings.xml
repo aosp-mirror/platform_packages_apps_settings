@@ -20,20 +20,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title="@string/media_controls_title">
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="media_controls_resume_switch"
         android:title="@string/media_controls_resume_title"
         android:summary="@string/media_controls_resume_description"
         app:keywords="@string/keywords_media_controls"
         app:controller="com.android.settings.sound.MediaControlsPreferenceController" />
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="media_controls_lockscreen"
         android:title="@string/media_controls_lockscreen_title"
         android:summary="@string/media_controls_lockscreen_description"
         app:controller="com.android.settings.sound.MediaControlsLockScreenPreferenceController" />
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="media_controls_recommendations"
         android:title="@string/media_controls_recommendations_title"
         android:summary="@string/media_controls_recommendations_description"

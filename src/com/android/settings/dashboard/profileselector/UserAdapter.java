@@ -17,7 +17,6 @@
 package com.android.settings.dashboard.profileselector;
 
 import static android.app.admin.DevicePolicyResources.Strings.Settings.PERSONAL_CATEGORY_HEADER;
-import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_CATEGORY_HEADER;
 
 import android.app.ActivityManager;
 import android.app.admin.DevicePolicyManager;
@@ -51,14 +50,16 @@ public class UserAdapter extends BaseAdapter {
     /** Holder for user details */
     public static class UserDetails {
         private final UserHandle mUserHandle;
+        private final UserManager mUserManager;
         private final Drawable mIcon;
         private final String mTitle;
 
         public UserDetails(UserHandle userHandle, UserManager um, Context context) {
             mUserHandle = userHandle;
+            mUserManager = um;
             UserInfo userInfo = um.getUserInfo(mUserHandle.getIdentifier());
             int tintColor = Utils.getColorAttrDefaultColor(context,
-                    com.android.internal.R.attr.materialColorPrimaryContainer);
+                    com.android.internal.R.attr.materialColorPrimary);
             if (userInfo.isManagedProfile()) {
                 mIcon = context.getPackageManager().getUserBadgeForDensityNoBackground(
                         userHandle, /* density= */ 0);
@@ -73,15 +74,13 @@ public class UserAdapter extends BaseAdapter {
             DevicePolicyManager devicePolicyManager =
                     Objects.requireNonNull(context.getSystemService(DevicePolicyManager.class));
             DevicePolicyResourcesManager resources = devicePolicyManager.getResources();
-            int userHandle = mUserHandle.getIdentifier();
-            if (userHandle == UserHandle.USER_CURRENT
-                    || userHandle == ActivityManager.getCurrentUser()) {
+            int userId = mUserHandle.getIdentifier();
+            if (userId == UserHandle.USER_CURRENT || userId == ActivityManager.getCurrentUser()) {
                 return resources.getString(PERSONAL_CATEGORY_HEADER,
-                        () -> context.getString(R.string.category_personal));
-            } else {
-                return resources.getString(WORK_CATEGORY_HEADER,
-                        () -> context.getString(R.string.category_work));
+                        () -> context.getString(
+                                com.android.settingslib.R.string.category_personal));
             }
+            return (String) mUserManager.getBadgedLabelForUser(/* label= */ "", mUserHandle);
         }
     }
 

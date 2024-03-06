@@ -19,14 +19,13 @@ package com.android.settings.deviceinfo;
 import android.accounts.Account;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.os.Bundle;
 import android.text.TextUtils;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.accounts.AccountDetailDashboardFragment;
+import com.android.settings.accounts.AccountDashboardFragment;
 import com.android.settings.accounts.AccountFeatureProvider;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.SubSettingLauncher;
@@ -38,7 +37,7 @@ public class BrandedAccountPreferenceController extends BasePreferenceController
 
     public BrandedAccountPreferenceController(Context context, String key) {
         super(context, key);
-        mAccountFeatureProvider = FeatureFactory.getFactory(mContext).getAccountFeatureProvider();
+        mAccountFeatureProvider = FeatureFactory.getFeatureFactory().getAccountFeatureProvider();
         mAccounts = mAccountFeatureProvider.getAccounts(mContext);
     }
 
@@ -63,7 +62,11 @@ public class BrandedAccountPreferenceController extends BasePreferenceController
             return;
         }
 
-        accountPreference.setSummary(mAccounts[0].name);
+        if (mAccounts.length == 1) {
+            accountPreference.setSummary(mAccounts[0].name);
+        } else {
+            accountPreference.setSummary(getAccountSummary(mAccounts.length));
+        }
     }
 
     @Override
@@ -72,18 +75,9 @@ public class BrandedAccountPreferenceController extends BasePreferenceController
             return false;
         }
 
-        final Bundle args = new Bundle();
-        args.putParcelable(AccountDetailDashboardFragment.KEY_ACCOUNT,
-                mAccounts[0]);
-        args.putParcelable(AccountDetailDashboardFragment.KEY_USER_HANDLE,
-                android.os.Process.myUserHandle());
-        args.putString(AccountDetailDashboardFragment.KEY_ACCOUNT_TYPE,
-                mAccountFeatureProvider.getAccountType());
-
         new SubSettingLauncher(mContext)
-                .setDestination(AccountDetailDashboardFragment.class.getName())
-                .setTitleRes(R.string.account_sync_title)
-                .setArguments(args)
+                .setDestination(AccountDashboardFragment.class.getName())
+                .setTitleRes(R.string.account_dashboard_title)
                 .setSourceMetricsCategory(SettingsEnums.DEVICEINFO)
                 .launch();
         return true;
@@ -96,5 +90,10 @@ public class BrandedAccountPreferenceController extends BasePreferenceController
         if (mAccounts == null || mAccounts.length == 0) {
             preference.setVisible(false);
         }
+    }
+
+    private String getAccountSummary(int accountNo) {
+        return mContext.getResources()
+            .getString(R.string.my_device_info_account_preference_summary, accountNo);
     }
 }

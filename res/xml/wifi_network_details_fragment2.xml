@@ -102,7 +102,7 @@
         android:title="@string/wifi_subscription"
         android:summary="@string/wifi_subscription_summary"/>
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="auto_connect"
         android:title="@string/wifi_auto_connect_title"
         android:summary="@string/wifi_auto_connect_summary"/>
@@ -169,15 +169,11 @@
                 settings:enableCopying="true"/>
     </PreferenceCategory>
 
-    <!-- IPv6 Details -->
-    <PreferenceCategory
-            android:key="ipv6_category"
-            android:title="@string/wifi_details_ipv6_address_header"
-            android:selectable="false">
-        <Preference
-                android:key="ipv6_addresses"
-                android:selectable="false"
-                settings:enableCopying="true"/>
-    </PreferenceCategory>
+    <!-- IPv6 address -->
+    <Preference
+        android:title="@string/wifi_details_ipv6_address_header"
+        android:key="ipv6_addresses"
+        android:selectable="false"
+        settings:enableCopying="true"/>
 
 </PreferenceScreen>

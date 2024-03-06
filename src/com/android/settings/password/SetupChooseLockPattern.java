@@ -85,7 +85,7 @@ public class SetupChooseLockPattern extends ChooseLockPattern {
             View view = super.onCreateView(inflater, container, savedInstanceState);
             if (!getResources().getBoolean(R.bool.config_lock_pattern_minimal_ui)) {
                 mOptionsButton = new Button(new ContextThemeWrapper(getActivity(),
-                        R.style.SudGlifButton_Tertiary));
+                        com.google.android.setupdesign.R.style.SudGlifButton_Tertiary));
                 mOptionsButton.setId(R.id.screen_lock_options);
                 PasswordUtils.setupScreenLockOptionsButton(getActivity(), view, mOptionsButton);
                 mOptionsButton.setOnClickListener((btn) ->

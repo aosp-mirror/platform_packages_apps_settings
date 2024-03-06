@@ -18,6 +18,8 @@ package com.android.settings.spa
 
 import android.content.Context
 import android.util.FeatureFlagUtils
+import com.android.settings.network.apn.ApnEditPageProvider
+import com.android.settings.spa.about.AboutPhonePageProvider
 import com.android.settings.spa.app.AllAppListPageProvider
 import com.android.settings.spa.app.AppsMainPageProvider
 import com.android.settings.spa.app.appcompat.UserAspectRatioAppsPageProvider
@@ -28,13 +30,18 @@ import com.android.settings.spa.app.specialaccess.AlarmsAndRemindersAppListProvi
 import com.android.settings.spa.app.specialaccess.AllFilesAccessAppListProvider
 import com.android.settings.spa.app.specialaccess.DisplayOverOtherAppsAppListProvider
 import com.android.settings.spa.app.specialaccess.InstallUnknownAppsListProvider
+import com.android.settings.spa.app.specialaccess.LongBackgroundTasksAppListProvider
 import com.android.settings.spa.app.specialaccess.MediaManagementAppsAppListProvider
+import com.android.settings.spa.app.specialaccess.MediaRoutingControlAppListProvider
 import com.android.settings.spa.app.specialaccess.ModifySystemSettingsAppListProvider
 import com.android.settings.spa.app.specialaccess.NfcTagAppsSettingsProvider
 import com.android.settings.spa.app.specialaccess.PictureInPictureListProvider
 import com.android.settings.spa.app.specialaccess.SpecialAppAccessPageProvider
-import com.android.settings.spa.app.specialaccess.WifiControlAppListProvider
+import com.android.settings.spa.app.specialaccess.TurnScreenOnAppsAppListProvider
 import com.android.settings.spa.app.specialaccess.UseFullScreenIntentAppListProvider
+import com.android.settings.spa.app.specialaccess.VoiceActivationAppsListProvider
+import com.android.settings.spa.app.specialaccess.WifiControlAppListProvider
+import com.android.settings.spa.app.storage.StorageAppListPageProvider
 import com.android.settings.spa.core.instrumentation.SpaLogProvider
 import com.android.settings.spa.development.UsageStatsPageProvider
 import com.android.settings.spa.development.compat.PlatformCompatAppListPageProvider
@@ -58,13 +65,17 @@ open class SettingsSpaEnvironment(context: Context) : SpaEnvironment(context) {
             AllFilesAccessAppListProvider,
             DisplayOverOtherAppsAppListProvider,
             MediaManagementAppsAppListProvider,
+            MediaRoutingControlAppListProvider,
             ModifySystemSettingsAppListProvider,
             UseFullScreenIntentAppListProvider,
             PictureInPictureListProvider,
             InstallUnknownAppsListProvider,
             AlarmsAndRemindersAppListProvider,
+            VoiceActivationAppsListProvider,
             WifiControlAppListProvider,
             NfcTagAppsSettingsProvider,
+            LongBackgroundTasksAppListProvider,
+            TurnScreenOnAppsAppListProvider,
         )
     }
 
@@ -73,31 +84,41 @@ open class SettingsSpaEnvironment(context: Context) : SpaEnvironment(context) {
             allProviders = getTogglePermissionAppListProviders()
         )
         SettingsPageProviderRepository(
-            allPageProviders = listOf(
-                HomePageProvider,
-                AppsMainPageProvider,
-                AllAppListPageProvider,
-                AppInfoSettingsProvider,
-                SpecialAppAccessPageProvider,
-                NotificationMainPageProvider,
-                AppListNotificationsPageProvider,
-                SystemMainPageProvider,
-                LanguageAndInputPageProvider,
-                AppLanguagesPageProvider,
-                UsageStatsPageProvider,
-                PlatformCompatAppListPageProvider,
-                BackgroundInstalledAppsPageProvider,
-                UserAspectRatioAppsPageProvider,
-                CloneAppInfoSettingsProvider,
-                NetworkAndInternetPageProvider,
-                ) + togglePermissionAppListTemplate.createPageProviders(),
+            allPageProviders = settingsPageProviders()
+                + togglePermissionAppListTemplate.createPageProviders(),
             rootPages = listOf(
                 HomePageProvider.createSettingsPage()
             ),
         )
     }
-    override val logger =
-        if (FeatureFlagUtils.isEnabled(context, FeatureFlagUtils.SETTINGS_ENABLE_SPA_METRICS))
-            SpaLogProvider
-        else object : SpaLogger {}
+
+
+    open fun settingsPageProviders() = listOf(
+        HomePageProvider,
+        AppsMainPageProvider,
+        AllAppListPageProvider,
+        AppInfoSettingsProvider,
+        SpecialAppAccessPageProvider,
+        NotificationMainPageProvider,
+        AppListNotificationsPageProvider,
+        SystemMainPageProvider,
+        LanguageAndInputPageProvider,
+        AppLanguagesPageProvider,
+        UsageStatsPageProvider,
+        PlatformCompatAppListPageProvider,
+        BackgroundInstalledAppsPageProvider,
+        UserAspectRatioAppsPageProvider,
+        CloneAppInfoSettingsProvider,
+        NetworkAndInternetPageProvider,
+        AboutPhonePageProvider,
+        StorageAppListPageProvider.Apps,
+        StorageAppListPageProvider.Games,
+        ApnEditPageProvider,
+    )
+
+    override val logger = if (FeatureFlagUtils.isEnabled(
+            context, FeatureFlagUtils.SETTINGS_ENABLE_SPA_METRICS
+        )
+    ) SpaLogProvider
+    else object : SpaLogger {}
 }

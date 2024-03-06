@@ -32,7 +32,8 @@ import android.net.wifi.WifiManager;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
-import android.widget.Switch;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import androidx.annotation.VisibleForTesting;
 
@@ -41,20 +42,18 @@ import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
-import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 /**
  * Controller for logic pertaining to switch Wi-Fi tethering.
  */
 public class WifiTetherSwitchBarController implements
-        LifecycleObserver, OnStart, OnStop, DataSaverBackend.Listener, OnMainSwitchChangeListener {
+        LifecycleObserver, OnStart, OnStop, DataSaverBackend.Listener, OnCheckedChangeListener {
 
     private static final String TAG = "WifiTetherSBC";
     private static final IntentFilter WIFI_INTENT_FILTER;
 
     private final Context mContext;
     private final SettingsMainSwitchBar mSwitchBar;
-    private final Switch mSwitch;
     private final ConnectivityManager mConnectivityManager;
     private final WifiManager mWifiManager;
 
@@ -78,7 +77,6 @@ public class WifiTetherSwitchBarController implements
     WifiTetherSwitchBarController(Context context, SettingsMainSwitchBar switchBar) {
         mContext = context;
         mSwitchBar = switchBar;
-        mSwitch = mSwitchBar.getSwitch();
         mDataSaverBackend = new DataSaverBackend(context);
         mConnectivityManager =
                 (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -103,9 +101,9 @@ public class WifiTetherSwitchBarController implements
     }
 
     @Override
-    public void onSwitchChanged(Switch switchView, boolean isChecked) {
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         // Filter out unnecessary callbacks when switch is disabled.
-        if (!switchView.isEnabled()) return;
+        if (!buttonView.isEnabled()) return;
 
         if (isChecked) {
             startTether();
@@ -153,8 +151,8 @@ public class WifiTetherSwitchBarController implements
         if (state == WIFI_AP_STATE_ENABLING || state == WIFI_AP_STATE_DISABLING) return;
 
         final boolean shouldBeChecked = (state == WIFI_AP_STATE_ENABLED);
-        if (mSwitch.isChecked() != shouldBeChecked) {
-            mSwitch.setChecked(shouldBeChecked);
+        if (mSwitchBar.isChecked() != shouldBeChecked) {
+            mSwitchBar.setChecked(shouldBeChecked);
         }
         updateWifiSwitch();
     }

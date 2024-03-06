@@ -99,8 +99,8 @@ public abstract class BluetoothDevicePairingDetailBase extends DeviceListPrefere
             return;
         } else if (bondState == BluetoothDevice.BOND_BONDING) {
             // Set the bond entry where binding process starts for logging hearing aid device info
-            final int pageId = FeatureFactory.getFactory(
-                    getContext()).getMetricsFeatureProvider().getAttribution(getActivity());
+            final int pageId = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider()
+                    .getAttribution(getActivity());
             final int bondEntry = AccessibilityStatsLogUtils.convertToHearingAidInfoBondEntry(
                     pageId);
             HearingAidStatsLogUtils.setBondEntryForDevice(bondEntry, cachedDevice);

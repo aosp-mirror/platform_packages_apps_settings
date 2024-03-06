@@ -19,7 +19,8 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="accessibility_settings_screen"
     android:persistent="false"
-    android:title="@string/accessibility_settings">
+    android:title="@string/accessibility_settings"
+    settings:keywords="@string/keywords_accessibility">
 
     <PreferenceCategory
         android:key="user_installed_services_category"
@@ -62,7 +63,7 @@
             settings:controller="com.android.settings.accessibility.ReduceBrightColorsPreferenceController"/>
 
         <Preference
-            android:fragment="com.android.settings.accessibility.MagnificationPreferenceFragment"
+            android:fragment="com.android.settings.accessibility.ToggleScreenMagnificationPreferenceFragment"
             android:key="magnification_preference_screen"
             android:icon="@drawable/ic_accessibility_magnification"
             android:persistent="false"
@@ -140,7 +141,7 @@
         android:persistent="false"
         android:title="@string/audio_category_title">
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="toggle_audio_description"
             android:persistent="false"
             android:icon="@drawable/ic_audio_description"

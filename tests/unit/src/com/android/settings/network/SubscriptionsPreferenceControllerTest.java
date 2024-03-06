@@ -53,7 +53,6 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyDisplayInfo;
 import android.telephony.TelephonyManager;
-import android.text.Html;
 
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LifecycleRegistry;
@@ -266,8 +265,6 @@ public class SubscriptionsPreferenceControllerTest {
     @Test
     @UiThreadTest
     public void displayPreference_providerAndHasMultiSimAndActive_connectedAndRat() {
-        final CharSequence expectedSummary =
-                Html.fromHtml("Connected / 5G", Html.FROM_HTML_MODE_LEGACY);
         final String networkType = "5G";
         final List<SubscriptionInfo> sub = setupMockSubscriptions(2);
         doReturn(sub.get(0)).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
@@ -281,14 +278,12 @@ public class SubscriptionsPreferenceControllerTest {
         mController.onResume();
         mController.displayPreference(mPreferenceScreen);
 
-        assertThat(mPreferenceCategory.getPreference(0).getSummary()).isEqualTo(expectedSummary);
+        assertThat(mPreferenceCategory.getPreference(0).getSummary()).isEqualTo("Connected / 5G");
     }
 
     @Test
     @UiThreadTest
     public void displayPreference_providerAndHasMultiSimAndActiveCarrierWifi_connectedAndWPlus() {
-        final CharSequence expectedSummary =
-                Html.fromHtml("Connected / W+", Html.FROM_HTML_MODE_LEGACY);
         final String networkType = "W+";
         final List<SubscriptionInfo> sub = setupMockSubscriptions(2);
         doReturn(sub.get(0)).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
@@ -302,7 +297,7 @@ public class SubscriptionsPreferenceControllerTest {
         mController.onResume();
         mController.displayPreference(mPreferenceScreen);
 
-        assertThat(mPreferenceCategory.getPreference(0).getSummary()).isEqualTo(expectedSummary);
+        assertThat(mPreferenceCategory.getPreference(0).getSummary()).isEqualTo("Connected / W+");
     }
 
     @Test
@@ -310,8 +305,6 @@ public class SubscriptionsPreferenceControllerTest {
     public void displayPreference_providerAndHasMultiSimButMobileDataOff_notAutoConnect() {
         final String dataOffSummary =
                 ResourcesUtils.getResourcesString(mContext, "mobile_data_off_summary");
-        final CharSequence expectedSummary =
-                Html.fromHtml(dataOffSummary, Html.FROM_HTML_MODE_LEGACY);
         final String networkType = "5G";
         final List<SubscriptionInfo> sub = setupMockSubscriptions(2);
         doReturn(sub.get(0)).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
@@ -324,14 +317,12 @@ public class SubscriptionsPreferenceControllerTest {
         mController.onResume();
         mController.displayPreference(mPreferenceScreen);
 
-        assertThat(mPreferenceCategory.getPreference(0).getSummary())
-            .isEqualTo(expectedSummary.toString());
+        assertThat(mPreferenceCategory.getPreference(0).getSummary()).isEqualTo(dataOffSummary);
     }
 
     @Test
     @UiThreadTest
     public void displayPreference_providerAndHasMultiSimAndNotActive_showRatOnly() {
-        final CharSequence expectedSummary = Html.fromHtml("5G", Html.FROM_HTML_MODE_LEGACY);
         final String networkType = "5G";
         final List<SubscriptionInfo> sub = setupMockSubscriptions(2);
         doReturn(sub.get(0)).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
@@ -345,7 +336,7 @@ public class SubscriptionsPreferenceControllerTest {
         mController.onResume();
         mController.displayPreference(mPreferenceScreen);
 
-        assertThat(mPreferenceCategory.getPreference(0).getSummary()).isEqualTo(expectedSummary);
+        assertThat(mPreferenceCategory.getPreference(0).getSummary()).isEqualTo(networkType);
     }
 
     @Test
@@ -362,8 +353,6 @@ public class SubscriptionsPreferenceControllerTest {
     @Test
     @UiThreadTest
     public void onTelephonyDisplayInfoChanged_providerAndHasMultiSimAndActive_connectedAndRat() {
-        final CharSequence expectedSummary =
-                Html.fromHtml("Connected / LTE", Html.FROM_HTML_MODE_LEGACY);
         final String networkType = "LTE";
         final List<SubscriptionInfo> sub = setupMockSubscriptions(2);
         final TelephonyDisplayInfo telephonyDisplayInfo =
@@ -383,14 +372,12 @@ public class SubscriptionsPreferenceControllerTest {
         mController.onTelephonyDisplayInfoChanged(sub.get(0).getSubscriptionId(),
                 telephonyDisplayInfo);
 
-        assertThat(mPreferenceCategory.getPreference(0).getSummary()).isEqualTo(expectedSummary);
+        assertThat(mPreferenceCategory.getPreference(0).getSummary()).isEqualTo("Connected / LTE");
     }
 
     @Test
     @UiThreadTest
     public void onTelephonyDisplayInfoChanged_providerAndHasMultiSimAndNotActive_showRat() {
-        final CharSequence expectedSummary =
-                Html.fromHtml("LTE", Html.FROM_HTML_MODE_LEGACY);
         final String networkType = "LTE";
         final List<SubscriptionInfo> sub = setupMockSubscriptions(2);
         final TelephonyDisplayInfo telephonyDisplayInfo =
@@ -409,7 +396,7 @@ public class SubscriptionsPreferenceControllerTest {
         mController.onTelephonyDisplayInfoChanged(sub.get(0).getSubscriptionId(),
                 telephonyDisplayInfo);
 
-        assertThat(mPreferenceCategory.getPreference(0).getSummary()).isEqualTo(expectedSummary);
+        assertThat(mPreferenceCategory.getPreference(0).getSummary()).isEqualTo(networkType);
     }
 
     @Test
@@ -417,8 +404,6 @@ public class SubscriptionsPreferenceControllerTest {
     public void onTelephonyDisplayInfoChanged_providerAndHasMultiSimAndOutOfService_noConnection() {
         final String noConnectionSummary =
                 ResourcesUtils.getResourcesString(mContext, "mobile_data_no_connection");
-        final CharSequence expectedSummary =
-                Html.fromHtml(noConnectionSummary, Html.FROM_HTML_MODE_LEGACY);
         final String networkType = "LTE";
         final List<SubscriptionInfo> sub = setupMockSubscriptions(2);
         final TelephonyDisplayInfo telephonyDisplayInfo =
@@ -437,7 +422,8 @@ public class SubscriptionsPreferenceControllerTest {
         mController.onTelephonyDisplayInfoChanged(sub.get(0).getSubscriptionId(),
                 telephonyDisplayInfo);
 
-        assertThat(mPreferenceCategory.getPreference(0).getSummary()).isEqualTo(expectedSummary);
+        assertThat(mPreferenceCategory.getPreference(0).getSummary())
+                .isEqualTo(noConnectionSummary);
     }
 
     @Test

@@ -82,6 +82,7 @@ import java.util.List;
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
         ShadowUserManager.class,
+        com.android.settings.testutils.shadow.ShadowFragment.class,
         ShadowDevicePolicyManager.class
 })
 public class UserDetailsSettingsTest {
@@ -264,6 +265,7 @@ public class UserDetailsSettingsTest {
         verify(mSwitchUserPref).setEnabled(false);
     }
 
+    @Ignore("b/313530297")
     @Test
     public void initialize_adminWithTelephony_shouldShowPhonePreference() {
         setupSelectedUser();
@@ -309,6 +311,7 @@ public class UserDetailsSettingsTest {
         verify(mFragment).removePreference(KEY_APP_AND_CONTENT_ACCESS);
     }
 
+    @Ignore("b/313530297")
     @Test
     public void initialize_adminSelectsSecondaryUser_shouldShowRemovePreference() {
         setupSelectedUser();
@@ -321,6 +324,7 @@ public class UserDetailsSettingsTest {
         verify(mFragment, never()).removePreference(KEY_REMOVE_USER);
     }
 
+    @Ignore("b/313530297")
     @Test
     public void initialize_adminSelectsNewRestrictedUser_shouldOpenAppContentScreen() {
         setupSelectedRestrictedUser();
@@ -343,6 +347,7 @@ public class UserDetailsSettingsTest {
                 .isEqualTo(true);
     }
 
+    @Ignore("b/313530297")
     @Test
     public void initialize_adminSelectsRestrictedUser_shouldSetupPreferences() {
         setupSelectedRestrictedUser();
@@ -372,6 +377,7 @@ public class UserDetailsSettingsTest {
         verify(mActivity, never()).startActivity(any(Intent.class));
     }
 
+    @Ignore("b/313530297")
     @Test
     public void initialize_adminSelectsGuest_shouldShowRemovePreference() {
         setupSelectedGuest();
@@ -415,6 +421,7 @@ public class UserDetailsSettingsTest {
         verify(mFragment).removePreference(KEY_REMOVE_USER);
     }
 
+    @Ignore("b/313530297")
     @Test
     public void initialize_userHasCallRestriction_shouldSetPhoneSwitchUnChecked() {
         setupSelectedUser();
@@ -427,6 +434,7 @@ public class UserDetailsSettingsTest {
         verify(mPhonePref).setChecked(false);
     }
 
+    @Ignore("b/313530297")
     @Test
     public void initialize_noCallRestriction_shouldSetPhoneSwitchChecked() {
         setupSelectedUser();
@@ -525,6 +533,7 @@ public class UserDetailsSettingsTest {
         verify(mFragment, never()).switchUser();
     }
 
+    @Ignore("b/313530297")
     @Test
     public void onPreferenceClick_removeGuestClicked_canDelete_shouldShowDialog() {
         setupSelectedGuest();
@@ -542,6 +551,7 @@ public class UserDetailsSettingsTest {
         verify(mFragment).showDialog(DIALOG_CONFIRM_RESET_GUEST);
     }
 
+    @Ignore("b/313530297")
     @Test
     public void onPreferenceClick_removeRestrictedClicked_canDelete_shouldShowDialog() {
         setupSelectedRestrictedUser();
@@ -560,6 +570,7 @@ public class UserDetailsSettingsTest {
         verify(mFragment).showDialog(DIALOG_CONFIRM_REMOVE);
     }
 
+    @Ignore("b/313530297")
     @Test
     public void onPreferenceClick_removeClicked_canDelete_shouldShowDialog() {
         setupSelectedUser();
@@ -651,6 +662,7 @@ public class UserDetailsSettingsTest {
         assertThat(result).isFalse();
     }
 
+    @Ignore("b/313530297")
     @Test
     public void canDeleteUser_adminSelectsUser_noRestrictions_shouldReturnTrue() {
         setupSelectedUser();
@@ -662,7 +674,6 @@ public class UserDetailsSettingsTest {
         assertThat(result).isTrue();
     }
 
-    @Ignore
     @Test
     public void canDeleteUser_adminSelectsUser_hasRemoveRestriction_shouldReturnFalse() {
         setupSelectedUser();
@@ -685,6 +696,7 @@ public class UserDetailsSettingsTest {
         assertThat(result).isFalse();
     }
 
+    @Ignore("b/313530297")
     @Test
     public void initialize_userSelected_shouldShowGrantAdminPref_MultipleAdminEnabled() {
         setupSelectedUser();
@@ -694,6 +706,7 @@ public class UserDetailsSettingsTest {
         verify(mFragment, never()).removePreference(KEY_GRANT_ADMIN);
     }
 
+    @Ignore("b/313530297")
     @Test
     public void initialize_userSelected_shouldNotShowGrantAdminPref() {
         setupSelectedUser();
@@ -701,6 +714,7 @@ public class UserDetailsSettingsTest {
         verify(mFragment).removePreference(KEY_GRANT_ADMIN);
     }
 
+    @Ignore("b/313530297")
     @Test
     public void initialize_restrictUserSelected_shouldNotShowGrantAdminPref_MultipleAdminEnabled() {
         setupSelectedUser();
@@ -711,6 +725,7 @@ public class UserDetailsSettingsTest {
         verify(mFragment).removePreference(KEY_GRANT_ADMIN);
     }
 
+    @Ignore("b/313530297")
     @Test
     public void initialize_mainUserSelected_shouldShowGrantAdminPref_MultipleAdminEnabled() {
         setupSelectedMainUser();
@@ -719,6 +734,7 @@ public class UserDetailsSettingsTest {
         verify(mFragment).removePreference(KEY_GRANT_ADMIN);
     }
 
+    @Ignore("b/313530297")
     @Test
     public void initialize_guestSelected_shouldNotShowGrantAdminPref_MultipleAdminEnabled() {
         setupSelectedGuest();

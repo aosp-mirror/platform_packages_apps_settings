@@ -1,0 +1,13 @@
+package: "com.android.settings.flags"
+
+# NOTE: Keep alphabetized to help limit merge conflicts from multiple simultaneous editors.
+
+# NOTE: All Settings flags share the same Flags class, so prefix our
+# flags with 'development' to prevent naming collision.
+
+flag {
+  name: "development_hdr_sdr_ratio"
+  namespace: "core_graphics"
+  description: "Shows hdr/sdr dev opton on the development options page from aconfig"
+  bug: "291863102"
+}

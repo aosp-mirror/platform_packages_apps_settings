@@ -88,7 +88,7 @@ public class ControlsPrivacyPreferenceController extends TogglePreferenceControl
     }
 
     private boolean isSecure() {
-        final LockPatternUtils utils = FeatureFactory.getFactory(mContext)
+        final LockPatternUtils utils = FeatureFactory.getFeatureFactory()
                 .getSecurityFeatureProvider()
                 .getLockPatternUtils(mContext);
         final int userId = UserHandle.myUserId();

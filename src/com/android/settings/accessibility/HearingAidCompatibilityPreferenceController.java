@@ -73,6 +73,6 @@ public class HearingAidCompatibilityPreferenceController extends TogglePreferenc
     }
 
     private void setAudioParameterHacEnabled(boolean enabled) {
-        mAudioManager.setParameters(HAC_KEY + "=" + (enabled ? HAC_VAL_ON : HAC_VAL_OFF));
+        mAudioManager.setParameters(HAC_KEY + "=" + (enabled ? HAC_VAL_ON : HAC_VAL_OFF) + ";");
     }
 }

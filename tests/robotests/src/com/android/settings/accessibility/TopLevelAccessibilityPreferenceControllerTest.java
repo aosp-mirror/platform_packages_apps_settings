@@ -21,25 +21,33 @@ import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
+import android.content.res.Resources;
+
+import androidx.test.core.app.ApplicationProvider;
+
+import com.android.settings.R;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
 public class TopLevelAccessibilityPreferenceControllerTest {
 
     private Context mContext;
+    private Resources mResources;
     private TopLevelAccessibilityPreferenceController mController;
 
     @Before
     public void setUp() {
-        mContext = RuntimeEnvironment.application;
+        mContext = spy(ApplicationProvider.getApplicationContext());
+        mResources = spy(mContext.getResources());
+        when(mContext.getResources()).thenReturn(mResources);
         mController = new TopLevelAccessibilityPreferenceController(mContext, "test_key");
     }
 
@@ -48,10 +56,10 @@ public class TopLevelAccessibilityPreferenceControllerTest {
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
-    @Ignore
     @Test
-    @Config(qualifiers = "mcc999")
     public void getAvailabilityStatus_unsupportedWhenSet() {
+        when(mResources.getBoolean(R.bool.config_show_top_level_accessibility)).thenReturn(false);
+
         assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 }

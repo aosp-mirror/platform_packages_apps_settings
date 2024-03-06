@@ -27,6 +27,13 @@
         android:order="-9"/>
 
     <Preference
+        android:fragment="com.android.settings.connecteddevice.audiosharing.AudioSharingDashboardFragment"
+        android:key="audio_sharing_settings"
+        android:title="@string/audio_sharing_title"
+        android:icon="@drawable/ic_bt_audio_sharing"
+        settings:controller="com.android.settings.connecteddevice.audiosharing.AudioSharingPreferenceController"/>
+
+    <Preference
         android:fragment="com.android.settings.connecteddevice.NfcAndPaymentFragment"
         android:key="nfc_and_payment_settings"
         android:title="@string/nfc_quick_toggle_title"
@@ -54,7 +61,7 @@
         android:fragment="com.android.settings.print.PrintSettingsFragment"
         android:order="-3"/>
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="uwb_settings"
         android:title="@string/uwb_settings_title"
         android:order="100"

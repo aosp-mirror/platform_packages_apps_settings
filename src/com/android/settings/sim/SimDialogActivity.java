@@ -90,7 +90,7 @@ public class SimDialogActivity extends FragmentActivity {
         }
         SimDialogProhibitService.supportDismiss(this);
 
-        mMetricsFeatureProvider = FeatureFactory.getFactory(this).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
         getWindow().addSystemFlags(
                 WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
         showOrUpdateDialog();

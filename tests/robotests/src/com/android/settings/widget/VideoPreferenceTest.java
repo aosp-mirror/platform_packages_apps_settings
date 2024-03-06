@@ -72,7 +72,7 @@ public class VideoPreferenceTest {
 
         mContext = RuntimeEnvironment.application;
         mAnimationController = spy(
-                new MediaAnimationController(mContext, R.raw.accessibility_screen_magnification));
+                new MediaAnimationController(mContext, R.raw.sample_video));
         mVideoPreference = new VideoPreference(mContext, null /* attrs */);
         mVideoPreference.mAnimationController = mAnimationController;
         when(mAnimationController.getVideoWidth()).thenReturn(VIDEO_WIDTH);
@@ -141,7 +141,7 @@ public class VideoPreferenceTest {
         assertThat(mAnimationController.isPlaying()).isTrue();
     }
 
-    @Ignore
+    @Ignore("b/315133235")
     @Test
     @Config(qualifiers = "mcc999")
     public void onViewVisible_createAnimationController() {

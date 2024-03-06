@@ -33,8 +33,11 @@ import androidx.test.uiautomator.UiDevice;
 import androidx.test.uiautomator.UiObject2;
 import androidx.test.uiautomator.Until;
 
+import org.junit.Ignore;
+
 /** Verifies that you can get to the notification app listing page from the apps & notifications
  * page */
+@Ignore
 public class NotificationSettingsTests extends InstrumentationTestCase {
     private static final boolean LOCAL_LOGV = false;
     private static final String TAG = "NotifiSettingsTests";

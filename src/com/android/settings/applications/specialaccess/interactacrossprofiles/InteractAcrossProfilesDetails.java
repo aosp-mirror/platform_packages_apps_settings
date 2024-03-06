@@ -208,7 +208,8 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
             title.setText(appLabel);
         }
 
-        final ImageView personalIconView = mHeader.findViewById(R.id.entity_header_icon_personal);
+        final ImageView personalIconView = mHeader.findViewById(
+                com.android.settingslib.widget.preference.layout.R.id.entity_header_icon_personal);
         if (personalIconView != null) {
             Drawable icon = IconDrawableFactory.newInstance(mContext)
                     .getBadgedIcon(mPackageInfo.applicationInfo, personalProfile.getIdentifier())
@@ -219,7 +220,8 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
             personalIconView.setImageDrawable(icon);
         }
 
-        final ImageView workIconView = mHeader.findViewById(R.id.entity_header_icon_work);
+        final ImageView workIconView = mHeader.findViewById(
+                com.android.settingslib.widget.preference.layout.R.id.entity_header_icon_work);
         if (workIconView != null) {
             Drawable icon = IconDrawableFactory.newInstance(mContext)
                     .getBadgedIcon(mPackageInfo.applicationInfo, workProfile.getIdentifier())
@@ -499,20 +501,24 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
     private void enableSwitchPref() {
         mSwitchPref.setChecked(true);
         mSwitchPref.setTitle(R.string.interact_across_profiles_switch_enabled);
-        final ImageView horizontalArrowIcon = mHeader.findViewById(R.id.entity_header_swap_horiz);
+        final ImageView horizontalArrowIcon =
+                mHeader.findViewById(com.android.settingslib.widget.preference.layout.R.id.entity_header_swap_horiz);
         if (horizontalArrowIcon != null) {
             horizontalArrowIcon.setImageDrawable(
-                    mContext.getDrawable(R.drawable.ic_swap_horiz_blue));
+                    mContext.getDrawable(
+                            com.android.settingslib.widget.preference.layout.R.drawable.ic_swap_horiz_blue));
         }
     }
 
     private void disableSwitchPref() {
         mSwitchPref.setChecked(false);
         mSwitchPref.setTitle(R.string.interact_across_profiles_switch_disabled);
-        final ImageView horizontalArrowIcon = mHeader.findViewById(R.id.entity_header_swap_horiz);
+        final ImageView horizontalArrowIcon =
+                mHeader.findViewById(com.android.settingslib.widget.preference.layout.R.id.entity_header_swap_horiz);
         if (horizontalArrowIcon != null) {
             horizontalArrowIcon.setImageDrawable(
-                    mContext.getDrawable(R.drawable.ic_swap_horiz_grey));
+                    mContext.getDrawable(
+                            com.android.settingslib.widget.preference.layout.R.drawable.ic_swap_horiz_grey));
         }
     }
 

@@ -164,7 +164,12 @@ public final class BiometricsSafetySource {
                     disablingAdmin == null /* enabled */,
                     fingerprintStatusUtils.hasEnrolled(),
                     safetyEvent);
+            return;
         }
+
+        SafetyCenterManagerWrapper.get()
+                .setSafetySourceData(
+                        context, SAFETY_SOURCE_ID, /* safetySourceData= */ null, safetyEvent);
     }
 
     /** Notifies Safety Center of a change in biometrics settings. */

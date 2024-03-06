@@ -38,9 +38,6 @@
     <!-- Whether to show Camera laser sensor switch in Developer Options -->
     <bool name="config_show_camera_laser_sensor">false</bool>
 
-    <!-- Fully-qualified class name for the implementation of the FeatureFactory to be instantiated. -->
-    <string name="config_featureFactory" translatable="false">com.android.settings.overlay.FeatureFactoryImpl</string>
-
     <!-- Package name and fully-qualified class name for the wallpaper picker activity. -->
     <string name="config_wallpaper_picker_package" translatable="false">com.android.settings</string>
     <string name="config_wallpaper_picker_class" translatable="false">com.android.settings.Settings$WallpaperSettingsActivity</string>
@@ -229,6 +226,9 @@
          Can be overridden for specific product builds if the target device does not support it -->
     <bool name="config_media_vibration_supported">true</bool>
 
+    <!-- Whether to show Keyboard vibration settings in the vibration and haptics screen. -->
+    <bool name="config_keyboard_vibration_supported">false</bool>
+
     <!--
         Whether or not the homepage should be powered by legacy suggestion (versus contextual cards)
         Default to true as not all devices support contextual cards.
@@ -257,9 +257,6 @@
     <string name="config_settingsintelligence_package_name" translatable="false">
         com.android.settings.intelligence
     </string>
-
-    <!-- Whether the confirmation for sim deletion is defaulted to be on or off-->
-    <bool name="config_sim_deletion_confirmation_default_on">false</bool>
 
     <!-- Package Installer package name -->
     <string name="config_package_installer_package_name" translatable="false">
@@ -348,9 +345,6 @@
     <!-- Package name of regulatory information overlay which provides mapping and contents.
          Fetch resource from overlay package directly if this is set. -->
     <string name="config_regulatory_info_overlay_package_name" translatable="false" />
-
-    <!-- Whether to show a preference item for mobile plan -->
-    <bool name="config_show_mobile_plan">true</bool>
 
     <!-- Whether none security option is hide or not  (country specific). -->
     <bool name="config_hide_none_security_option">false</bool>
@@ -529,8 +523,12 @@
         <item>content://com.android.settings.slices/intent/media_output_indicator</item>
     </string-array>
 
-    <!-- List containing the apps cannot be changed the battery optimize modes -->
-    <string-array name="config_disable_optimization_mode_apps" translatable="false">
+    <!-- List containing the apps keep in battery mode = "Optimized" -->
+    <string-array name="config_force_battery_optimize_mode_apps" translatable="false">
+    </string-array>
+
+    <!-- List containing the apps keep in battery mode = "Unrestricted" -->
+    <string-array name="config_force_battery_unrestrict_mode_apps" translatable="false">
     </string-array>
 
     <!-- Uri to query non-public Slice Uris. -->
@@ -749,6 +747,9 @@
     <!-- Whether to display Cloned Apps page in Settings (Settings > Apps > Cloned Apps).-->
     <bool name="config_cloned_apps_page_enabled">false</bool>
 
+    <!-- Whether to initiate Account login during Private Space setup.-->
+    <bool name="config_privatespace_account_login_enabled">false</bool>
+
     <!-- Certificates of apps which are allowed to use activity embedding with Settings.-->
     <string-array name="config_known_host_certs" translatable="false">
         <item></item>
@@ -762,4 +763,20 @@
 
     <!-- List of MVNO. Do not translate -->
     <integer-array name="datausage_hiding_carrier_service_carrier_id" translatable="false"/>
+
+    <!-- App locale change intent action-->
+    <string name ="config_app_locale_intent_action" translatable="false" />
+
+    <!-- Allowed packages to show the confirmation dialog for a system locale suggestion  -->
+    <string-array name="allowed_packages_for_locale_confirmation_diallog" translatable="false"/>
+
+    <!-- Array of text reading preview layouts. Must contain at least 1 layout -->
+    <array name="config_text_reading_preview_samples">
+        <item>@layout/accessibility_text_reading_preview_app_grid</item>
+        <item>@layout/screen_zoom_preview_1</item>
+        <item>@layout/accessibility_text_reading_preview_mail_content</item>
+    </array>
+
+    <!-- Package responsible for updating Mainline Modules -->
+    <string name="config_mainline_module_update_package" translatable="false">com.android.vending</string>
 </resources>

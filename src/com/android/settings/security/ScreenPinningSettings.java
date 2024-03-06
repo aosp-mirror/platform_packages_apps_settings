@@ -15,22 +15,26 @@
  */
 package com.android.settings.security;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.icu.text.MessageFormat;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
-import android.widget.Switch;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
@@ -42,13 +46,12 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.FooterPreference;
-import com.android.settingslib.widget.OnMainSwitchChangeListener;
 /**
  * Screen pinning settings.
  */
 @SearchIndexable
 public class ScreenPinningSettings extends SettingsPreferenceFragment
-        implements OnMainSwitchChangeListener, DialogInterface.OnClickListener {
+        implements OnCheckedChangeListener, DialogInterface.OnClickListener {
 
     private static final String KEY_USE_SCREEN_LOCK = "use_screen_lock";
     private static final String KEY_FOOTER = "screen_pinning_settings_screen_footer";
@@ -56,7 +59,7 @@ public class ScreenPinningSettings extends SettingsPreferenceFragment
     private static final int CONFIRM_REQUEST = 1000;
 
     private SettingsMainSwitchBar mSwitchBar;
-    private SwitchPreference mUseScreenLock;
+    private TwoStatePreference mUseScreenLock;
     private FooterPreference mFooterPreference;
     private LockPatternUtils mLockPatternUtils;
     private UserManager mUserManager;
@@ -166,7 +169,7 @@ public class ScreenPinningSettings extends SettingsPreferenceFragment
             setScreenLockUsed(validPassQuality);
             // Make sure the screen updates.
             mUseScreenLock.setChecked(validPassQuality);
-        } else if (requestCode == CONFIRM_REQUEST) {
+        } else if (requestCode == CONFIRM_REQUEST && resultCode == RESULT_OK) {
             setScreenLockUsedSetting(false);
         }
     }
@@ -195,7 +198,7 @@ public class ScreenPinningSettings extends SettingsPreferenceFragment
      * Listens to the state change of the overall lock-to-app switch.
      */
     @Override
-    public void onSwitchChanged(Switch switchView, boolean isChecked) {
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (isChecked) {
             new AlertDialog.Builder(getContext())
                     .setMessage(R.string.screen_pinning_dialog_message)
@@ -242,9 +245,10 @@ public class ScreenPinningSettings extends SettingsPreferenceFragment
     }
 
     private CharSequence getAppPinningContent() {
-        return isGuestModeSupported()
-                ? getActivity().getText(R.string.screen_pinning_guest_user_description)
-                : getActivity().getText(R.string.screen_pinning_description);
+        final int stringResource = isGuestModeSupported()
+                ? R.string.screen_pinning_guest_user_description
+                : R.string.screen_pinning_description;
+        return MessageFormat.format(getActivity().getString(stringResource), 1, 2, 3);
     }
 
     /**

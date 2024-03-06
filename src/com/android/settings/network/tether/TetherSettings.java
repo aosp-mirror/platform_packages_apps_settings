@@ -45,19 +45,17 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 import android.text.TextUtils;
-import android.util.FeatureFlagUtils;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.RestrictedSettingsFragment;
 import com.android.settings.Utils;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.datausage.DataSaverBackend;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.wifi.tether.WifiTetherPreferenceController;
@@ -99,9 +97,9 @@ public class TetherSettings extends RestrictedSettingsFragment
     @VisibleForTesting
     RestrictedSwitchPreference mUsbTether;
     @VisibleForTesting
-    SwitchPreference mBluetoothTether;
+    TwoStatePreference mBluetoothTether;
     @VisibleForTesting
-    SwitchPreference mEthernetTether;
+    TwoStatePreference mEthernetTether;
 
     private BroadcastReceiver mTetherChangeReceiver;
     private BroadcastReceiver mBluetoothStateReceiver;
@@ -247,8 +245,8 @@ public class TetherSettings extends RestrictedSettingsFragment
     @VisibleForTesting
     void setupTetherPreference() {
         mUsbTether = (RestrictedSwitchPreference) findPreference(KEY_USB_TETHER_SETTINGS);
-        mBluetoothTether = (SwitchPreference) findPreference(KEY_ENABLE_BLUETOOTH_TETHERING);
-        mEthernetTether = (SwitchPreference) findPreference(KEY_ENABLE_ETHERNET_TETHERING);
+        mBluetoothTether = (TwoStatePreference) findPreference(KEY_ENABLE_BLUETOOTH_TETHERING);
+        mEthernetTether = (TwoStatePreference) findPreference(KEY_ENABLE_ETHERNET_TETHERING);
     }
 
     @Override
@@ -365,7 +363,8 @@ public class TetherSettings extends RestrictedSettingsFragment
 
         if (isUiRestricted()) {
             if (!isUiRestrictedByOnlyAdmin()) {
-                getEmptyTextView().setText(R.string.tethering_settings_not_available);
+                getEmptyTextView().setText(
+                        com.android.settingslib.R.string.tethering_settings_not_available);
             }
             getPreferenceScreen().removeAll();
             return;
@@ -626,11 +625,6 @@ public class TetherSettings extends RestrictedSettingsFragment
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
                     sir.xmlResId = R.xml.tether_prefs;
                     return Arrays.asList(sir);
-                }
-
-                @Override
-                protected boolean isPageSearchEnabled(Context context) {
-                    return !FeatureFlagUtils.isEnabled(context, FeatureFlags.TETHER_ALL_IN_ONE);
                 }
 
                 @Override

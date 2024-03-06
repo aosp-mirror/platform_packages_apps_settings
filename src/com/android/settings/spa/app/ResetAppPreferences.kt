@@ -16,7 +16,6 @@
 
 package com.android.settings.spa.app
 
-import android.os.UserHandle
 import android.os.UserManager
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -37,10 +36,7 @@ fun MoreOptionsScope.ResetAppPreferences(onClick: () -> Unit) {
     RestrictedMenuItem(
         text = stringResource(R.string.reset_app_preferences),
         restrictions = remember {
-            Restrictions(
-                userId = UserHandle.myUserId(),
-                keys = listOf(UserManager.DISALLOW_APPS_CONTROL),
-            )
+            Restrictions(keys = listOf(UserManager.DISALLOW_APPS_CONTROL))
         },
         onClick = onClick,
     )

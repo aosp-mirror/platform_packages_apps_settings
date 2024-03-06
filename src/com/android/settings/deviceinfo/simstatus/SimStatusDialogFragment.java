@@ -111,10 +111,7 @@ public class SimStatusDialogFragment extends InstrumentedDialogFragment {
             Log.d(TAG, "Fragment not attached yet.");
             return;
         }
-        setText(viewId, text, true);
-    }
 
-    public void setText(int viewId, CharSequence text, boolean enableCopy) {
         final TextView textView = mRootView.findViewById(viewId);
         if (textView == null) {
             return;
@@ -125,6 +122,5 @@ public class SimStatusDialogFragment extends InstrumentedDialogFragment {
             text = PhoneNumberUtil.expandByTts(text);
         }
         textView.setText(text);
-        textView.setTextIsSelectable(enableCopy);
     }
 }

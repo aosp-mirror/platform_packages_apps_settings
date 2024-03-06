@@ -57,8 +57,7 @@ public class AnomalyConfigJobServiceTest {
 
     private static final int ANOMALY_CONFIG_VERSION = 1;
     private static final String ANOMALY_CONFIG = "X64s";
-    @Mock
-    private StatsManager mStatsManager;
+    @Mock private StatsManager mStatsManager;
 
     private Context mContext;
     private JobScheduler mJobScheduler;
@@ -69,14 +68,16 @@ public class AnomalyConfigJobServiceTest {
         MockitoAnnotations.initMocks(this);
 
         mContext = spy(RuntimeEnvironment.application);
-        mJobScheduler = spy(new JobSchedulerImpl(mContext,
-                IJobScheduler.Stub.asInterface(new Binder())));
+        mJobScheduler =
+                spy(new JobSchedulerImpl(mContext, IJobScheduler.Stub.asInterface(new Binder())));
         when(mContext.getSystemService(JobScheduler.class)).thenReturn(mJobScheduler);
 
         mJobService = spy(new AnomalyConfigJobService());
-        doReturn(application.getSharedPreferences(AnomalyConfigJobService.PREF_DB,
-                Context.MODE_PRIVATE)).when(mJobService).getSharedPreferences(anyString(),
-                anyInt());
+        doReturn(
+                        application.getSharedPreferences(
+                                AnomalyConfigJobService.PREF_DB, Context.MODE_PRIVATE))
+                .when(mJobService)
+                .getSharedPreferences(anyString(), anyInt());
         doReturn(application.getContentResolver()).when(mJobService).getContentResolver();
     }
 
@@ -105,11 +106,13 @@ public class AnomalyConfigJobServiceTest {
 
     @Test
     public void checkAnomalyConfig_newConfigExist_removeOldConfig()
-            throws StatsManager.StatsUnavailableException{
-        Settings.Global.putInt(application.getContentResolver(),
-                Settings.Global.ANOMALY_CONFIG_VERSION, ANOMALY_CONFIG_VERSION);
-        Settings.Global.putString(application.getContentResolver(), Settings.Global.ANOMALY_CONFIG,
-                ANOMALY_CONFIG);
+            throws StatsManager.StatsUnavailableException {
+        Settings.Global.putInt(
+                application.getContentResolver(),
+                Settings.Global.ANOMALY_CONFIG_VERSION,
+                ANOMALY_CONFIG_VERSION);
+        Settings.Global.putString(
+                application.getContentResolver(), Settings.Global.ANOMALY_CONFIG, ANOMALY_CONFIG);
 
         mJobService.checkAnomalyConfig(mStatsManager);
 
@@ -118,11 +121,13 @@ public class AnomalyConfigJobServiceTest {
 
     @Test
     public void checkAnomalyConfig_newConfigExist_uploadNewConfig()
-            throws StatsManager.StatsUnavailableException{
-        Settings.Global.putInt(application.getContentResolver(),
-                Settings.Global.ANOMALY_CONFIG_VERSION, ANOMALY_CONFIG_VERSION);
-        Settings.Global.putString(application.getContentResolver(), Settings.Global.ANOMALY_CONFIG,
-                ANOMALY_CONFIG);
+            throws StatsManager.StatsUnavailableException {
+        Settings.Global.putInt(
+                application.getContentResolver(),
+                Settings.Global.ANOMALY_CONFIG_VERSION,
+                ANOMALY_CONFIG_VERSION);
+        Settings.Global.putString(
+                application.getContentResolver(), Settings.Global.ANOMALY_CONFIG, ANOMALY_CONFIG);
 
         mJobService.checkAnomalyConfig(mStatsManager);
 

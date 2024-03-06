@@ -30,7 +30,6 @@ import android.content.IntentFilter;
 import android.net.wifi.SoftApConfiguration;
 import android.os.Bundle;
 import android.os.UserManager;
-import android.util.FeatureFlagUtils;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
@@ -39,7 +38,6 @@ import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -148,7 +146,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
             return;
         }
 
-        mWifiTetherViewModel = FeatureFactory.getFactory(getContext()).getWifiFeatureProvider()
+        mWifiTetherViewModel = FeatureFactory.getFeatureFactory().getWifiFeatureProvider()
                 .getWifiTetherViewModel(this);
         if (mWifiTetherViewModel != null) {
             setupSpeedFeature(mWifiTetherViewModel.isSpeedFeatureAvailable());
@@ -229,7 +227,8 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         }
         if (mUnavailable) {
             if (!isUiRestrictedByOnlyAdmin()) {
-                getEmptyTextView().setText(R.string.tethering_settings_not_available);
+                getEmptyTextView()
+                        .setText(com.android.settingslib.R.string.tethering_settings_not_available);
             }
             getPreferenceScreen().removeAll();
             return;
@@ -386,10 +385,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
             if (userManager == null || !userManager.isAdminUser()) {
                 return false;
             }
-            if (!WifiUtils.canShowWifiHotspot(context)) {
-                return false;
-            }
-            return !FeatureFlagUtils.isEnabled(context, FeatureFlags.TETHER_ALL_IN_ONE);
+            return WifiUtils.canShowWifiHotspot(context);
         }
 
         @Override

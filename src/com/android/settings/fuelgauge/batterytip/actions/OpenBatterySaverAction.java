@@ -22,23 +22,18 @@ import android.content.Context;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.fuelgauge.batterysaver.BatterySaverSettings;
 
-/**
- *
- * Action to open the {@link com.android.settings.fuelgauge.batterysaver.BatterySaverSettings}
- */
+/** Action to open the {@link com.android.settings.fuelgauge.batterysaver.BatterySaverSettings} */
 public class OpenBatterySaverAction extends BatteryTipAction {
 
     public OpenBatterySaverAction(Context context) {
         super(context);
     }
 
-    /**
-     * Handle the action when user clicks positive button
-     */
+    /** Handle the action when user clicks positive button */
     @Override
     public void handlePositiveAction(int metricsKey) {
-        mMetricsFeatureProvider.action(mContext,
-                SettingsEnums.ACTION_TIP_OPEN_BATTERY_SAVER_PAGE, metricsKey);
+        mMetricsFeatureProvider.action(
+                mContext, SettingsEnums.ACTION_TIP_OPEN_BATTERY_SAVER_PAGE, metricsKey);
         new SubSettingLauncher(mContext)
                 .setDestination(BatterySaverSettings.class.getName())
                 .setSourceMetricsCategory(metricsKey)

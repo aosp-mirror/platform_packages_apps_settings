@@ -51,6 +51,7 @@ public class SlicesDatabaseAccessor {
             IndexColumns.SLICE_TYPE,
             IndexColumns.UNAVAILABLE_SLICE_SUBTITLE,
             IndexColumns.HIGHLIGHT_MENU_RESOURCE,
+            IndexColumns.USER_RESTRICTION,
     };
 
     private final Context mContext;
@@ -166,6 +167,8 @@ public class SlicesDatabaseAccessor {
                 cursor.getColumnIndex(IndexColumns.UNAVAILABLE_SLICE_SUBTITLE));
         final int highlightMenuRes = cursor.getInt(
                 cursor.getColumnIndex(IndexColumns.HIGHLIGHT_MENU_RESOURCE));
+        final String userRestriction = cursor.getString(
+                cursor.getColumnIndex(IndexColumns.USER_RESTRICTION));
 
         if (isIntentOnly) {
             sliceType = SliceData.SliceType.INTENT;
@@ -184,14 +187,14 @@ public class SlicesDatabaseAccessor {
                 .setSliceType(sliceType)
                 .setUnavailableSliceSubtitle(unavailableSliceSubtitle)
                 .setHighlightMenuRes(highlightMenuRes)
+                .setUserRestriction(userRestriction)
                 .build();
     }
 
     private void verifyIndexing() {
         final long uidToken = Binder.clearCallingIdentity();
         try {
-            FeatureFactory.getFactory(
-                    mContext).getSlicesFeatureProvider().indexSliceData(mContext);
+            FeatureFactory.getFeatureFactory().getSlicesFeatureProvider().indexSliceData(mContext);
         } finally {
             Binder.restoreCallingIdentity(uidToken);
         }

@@ -57,10 +57,14 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class ScreenTimeoutSettingsTest {
     private static final String[] TIMEOUT_ENTRIES = new String[]{"15 secs", "30 secs"};
     private static final String[] TIMEOUT_VALUES = new String[]{"15000", "30000"};
@@ -87,6 +91,9 @@ public class ScreenTimeoutSettingsTest {
 
     @Mock
     FooterPreference mDisableOptionsPreference;
+
+    @Mock
+    FooterPreference mPowerConsumptionPreference;
 
     @Mock
     private PackageManager mPackageManager;
@@ -178,11 +185,28 @@ public class ScreenTimeoutSettingsTest {
     public void updateCandidates_enforcedAdmin_showDisabledByAdminPreference() {
         mSettings.mAdmin = new RestrictedLockUtils.EnforcedAdmin();
         mSettings.mDisableOptionsPreference = mDisableOptionsPreference;
+        mSettings.mPowerConsumptionPreference = mPowerConsumptionPreference;
         doNothing().when(mSettings).setupDisabledFooterPreference();
+        doNothing().when(mSettings).setupPowerConsumptionFooterPreference();
 
         mSettings.updateCandidates();
 
         verify(mPreferenceScreen, atLeast(1)).addPreference(mDisableOptionsPreference);
+        verify(mPreferenceScreen, never()).addPreference(mPowerConsumptionPreference);
+    }
+
+    @Test
+    public void updateCandidates_withoutAdmin_showPowerConsumptionPreference() {
+        mSettings.mAdmin = null;
+        mSettings.mDisableOptionsPreference = mDisableOptionsPreference;
+        mSettings.mPowerConsumptionPreference = mPowerConsumptionPreference;
+        doNothing().when(mSettings).setupDisabledFooterPreference();
+        doNothing().when(mSettings).setupPowerConsumptionFooterPreference();
+
+        mSettings.updateCandidates();
+
+        verify(mPreferenceScreen, never()).addPreference(mDisableOptionsPreference);
+        verify(mPreferenceScreen, atLeast(1)).addPreference(mPowerConsumptionPreference);
     }
 
     @Test

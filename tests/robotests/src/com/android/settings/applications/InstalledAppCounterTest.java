@@ -32,7 +32,11 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.FakeFeatureFlagsImpl;
+import android.content.pm.FeatureFlags;
+import android.content.pm.Flags;
 import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.ApplicationInfoFlags;
 import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
 import android.os.UserHandle;
@@ -45,22 +49,26 @@ import org.mockito.ArgumentMatcher;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.LooperMode;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 @RunWith(RobolectricTestRunner.class)
+@LooperMode(LooperMode.Mode.LEGACY)
 public final class InstalledAppCounterTest {
 
-    private final String APP_1 = "app1";
-    private final String APP_2 = "app2";
-    private final String APP_3 = "app3";
-    private final String APP_4 = "app4";
-    private final String APP_5 = "app5";
-    private final String APP_6 = "app6";
+    private static final String APP_1 = "app1";
+    private static final String APP_2 = "app2";
+    private static final String APP_3 = "app3";
+    private static final String APP_4 = "app4";
+    private static final String APP_5 = "app5";
+    private static final String APP_6 = "app6";
+    private static final String APP_7 = "app7";
 
     private final int MAIN_USER_ID = 0;
     private final int MANAGED_PROFILE_ID = 10;
@@ -83,11 +91,16 @@ public final class InstalledAppCounterTest {
     private ApplicationInfo mApp4;
     private ApplicationInfo mApp5;
     private ApplicationInfo mApp6;
+    private ApplicationInfo mApp7;
+
+    private FakeFeatureFlagsImpl mFakeFeatureFlags;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
+        when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
+        mFakeFeatureFlags = new FakeFeatureFlagsImpl();
+        mFakeFeatureFlags.setFlag(Flags.FLAG_ARCHIVING, true);
 
         mApp1 = buildInfo(MAIN_USER_APP_UID, APP_1,
                 ApplicationInfo.FLAG_UPDATED_SYSTEM_APP, 0 /* targetSdkVersion */);
@@ -101,6 +114,9 @@ public final class InstalledAppCounterTest {
                 0 /* targetSdkVersion */);
         mApp6 = buildInfo(MANAGED_PROFILE_APP_UID, APP_6, ApplicationInfo.FLAG_SYSTEM,
                 0 /* targetSdkVersion */);
+        mApp7 = buildInfo(MAIN_USER_APP_UID, APP_7, 0 /* flags */,
+                0 /* targetSdkVersion */);
+        mApp7.isArchived = true;
     }
 
     private void expectQueryIntentActivities(int userId, String packageName, boolean launchable) {
@@ -126,8 +142,14 @@ public final class InstalledAppCounterTest {
 
         // Verify that installed packages were retrieved the current user and the user's managed
         // profile only.
-        verify(mPackageManager).getInstalledApplicationsAsUser(anyInt(), eq(MAIN_USER_ID));
-        verify(mPackageManager).getInstalledApplicationsAsUser(anyInt(), eq(MANAGED_PROFILE_ID));
+        verify(mPackageManager)
+                .getInstalledApplicationsAsUser(
+                        any(ApplicationInfoFlags.class),
+                        eq(MAIN_USER_ID));
+        verify(mPackageManager)
+                .getInstalledApplicationsAsUser(
+                        any(ApplicationInfoFlags.class),
+                        eq(MANAGED_PROFILE_ID));
         verify(mPackageManager, atLeast(0))
             .queryIntentActivitiesAsUser(any(Intent.class), anyInt(), anyInt());
         verifyNoMoreInteractions(mPackageManager);
@@ -177,6 +199,48 @@ public final class InstalledAppCounterTest {
         testCountInstalledAppsAcrossAllUsers(true /* async */);
     }
 
+    @Test
+    public void testCountInstalledApps_archivingDisabled() {
+        when(mUserManager.getProfiles(UserHandle.myUserId())).thenReturn(List.of(
+                new UserInfo(MAIN_USER_ID, "main", UserInfo.FLAG_ADMIN)));
+        // The user has four apps installed:
+        // * app2 is a user-installed app. It should be counted.
+        // * app7 is a user-archived app. It should not be counted.
+        when(mPackageManager.getInstalledApplicationsAsUser(
+                argThat(isApplicationInfoFlagsEqualTo(
+                        ApplicationInfoFlags.of(
+                                PackageManager.GET_DISABLED_COMPONENTS
+                                        | PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS
+                                        | PackageManager.MATCH_ANY_USER))),
+                eq(MAIN_USER_ID))).thenReturn(Arrays.asList(mApp2));
+
+        mFakeFeatureFlags.setFlag(Flags.FLAG_ARCHIVING, false);
+        // Count the number of all apps installed, irrespective of install reason.
+        count(InstalledAppCounter.IGNORE_INSTALL_REASON, mFakeFeatureFlags);
+        assertThat(mInstalledAppCount).isEqualTo(1);
+    }
+
+    @Test
+    public void testCountInstalledApps_archivingEnabled() {
+        when(mUserManager.getProfiles(UserHandle.myUserId())).thenReturn(List.of(
+                new UserInfo(MAIN_USER_ID, "main", UserInfo.FLAG_ADMIN)));
+        // The user has four apps installed:
+        // * app2 is a user-installed app. It should be counted.
+        // * app7 is a user-archived app. It should be counted.
+        when(mPackageManager.getInstalledApplicationsAsUser(
+                argThat(isApplicationInfoFlagsEqualTo(
+                        ApplicationInfoFlags.of(
+                                PackageManager.GET_DISABLED_COMPONENTS
+                                        | PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS
+                                        | PackageManager.MATCH_ANY_USER
+                                        | PackageManager.MATCH_ARCHIVED_PACKAGES))),
+                eq(MAIN_USER_ID))).thenReturn(Arrays.asList(mApp2, mApp7));
+
+        // Count the number of all apps installed, irrespective of install reason.
+        count(InstalledAppCounter.IGNORE_INSTALL_REASON, mFakeFeatureFlags);
+        assertThat(mInstalledAppCount).isEqualTo(2);
+    }
+
     private void count(int installReason, boolean async) {
         mInstalledAppCount = -1;
         final InstalledAppCounterTestable counter = new InstalledAppCounterTestable(installReason);
@@ -189,16 +253,27 @@ public final class InstalledAppCounterTest {
         }
     }
 
+    private void count(int installReason, FeatureFlags featureFlags) {
+        mInstalledAppCount = -1;
+        final InstalledAppCounterTestable counter =
+                new InstalledAppCounterTestable(installReason, featureFlags);
+        counter.executeInForeground();
+    }
+
     private void configurePackageManager() {
         // The first user has four apps installed:
         // * app1 is an updated system app. It should be counted.
         // * app2 is a user-installed app. It should be counted.
         // * app3 is a system app that provides a launcher icon. It should be counted.
         // * app4 is a system app that provides no launcher icon. It should not be counted.
-        when(mPackageManager.getInstalledApplicationsAsUser(PackageManager.GET_DISABLED_COMPONENTS
-                | PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS
-                | PackageManager.MATCH_ANY_USER,
-                MAIN_USER_ID)).thenReturn(Arrays.asList(mApp1, mApp2, mApp3, mApp4));
+        ApplicationInfoFlags infoFlags1 = ApplicationInfoFlags.of(
+                PackageManager.GET_DISABLED_COMPONENTS
+                        | PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS
+                        | PackageManager.MATCH_ANY_USER);
+        when(mPackageManager.getInstalledApplicationsAsUser(
+                argThat(isApplicationInfoFlagsEqualTo(infoFlags1)),
+                eq(MAIN_USER_ID))
+        ).thenReturn(Arrays.asList(mApp1, mApp2, mApp3, mApp4));
         // For system apps, InstalledAppCounter checks whether they handle the default launcher
         // intent to decide whether to include them in the count of installed apps or not.
         expectQueryIntentActivities(MAIN_USER_ID, APP_3, true /* launchable */);
@@ -218,9 +293,12 @@ public final class InstalledAppCounterTest {
         // The second user has two apps installed:
         // * app5 is a user-installed app. It should be counted.
         // * app6 is a system app that provides a launcher icon. It should be counted.
-        when(mPackageManager.getInstalledApplicationsAsUser(PackageManager.GET_DISABLED_COMPONENTS
-                | PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS,MANAGED_PROFILE_ID))
-                .thenReturn(Arrays.asList(mApp5, mApp6));
+        ApplicationInfoFlags infoFlags2 = ApplicationInfoFlags.of(
+                PackageManager.GET_DISABLED_COMPONENTS
+                        | PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS);
+        when(mPackageManager.getInstalledApplicationsAsUser(
+                argThat(isApplicationInfoFlagsEqualTo(infoFlags2)), eq(MANAGED_PROFILE_ID))
+        ).thenReturn(Arrays.asList(mApp5, mApp6));
         expectQueryIntentActivities(MANAGED_PROFILE_ID, APP_6, true /* launchable */);
 
         // app5 is installed by enterprise policy.
@@ -234,6 +312,10 @@ public final class InstalledAppCounterTest {
     private class InstalledAppCounterTestable extends InstalledAppCounter {
         private InstalledAppCounterTestable(int installReason) {
             super(mContext, installReason, mPackageManager);
+        }
+
+        private InstalledAppCounterTestable(int installReason, FeatureFlags featureFlags) {
+            super(mContext, installReason, mPackageManager, featureFlags);
         }
 
         @Override
@@ -259,6 +341,16 @@ public final class InstalledAppCounterTest {
                 return false;
             }
             return true;
+        };
+    }
+
+    private ArgumentMatcher<ApplicationInfoFlags> isApplicationInfoFlagsEqualTo(
+            ApplicationInfoFlags infoFlags) {
+        return flags -> {
+            if (flags == null) {
+                return false;
+            }
+            return flags.getValue() == infoFlags.getValue();
         };
     }
 }

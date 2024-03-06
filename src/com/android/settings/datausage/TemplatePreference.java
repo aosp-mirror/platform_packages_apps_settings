@@ -16,23 +16,16 @@ package com.android.settings.datausage;
 
 import android.net.NetworkPolicyManager;
 import android.net.NetworkTemplate;
-import android.os.INetworkManagementService;
-import android.os.UserManager;
-import android.telephony.SubscriptionManager;
-import android.telephony.TelephonyManager;
 
 import com.android.settingslib.NetworkPolicyEditor;
 
 public interface TemplatePreference {
 
-    void setTemplate(NetworkTemplate template, int subId, NetworkServices services);
+    /** Sets the network template. */
+    void setTemplate(NetworkTemplate template, int subId);
 
     class NetworkServices {
-        INetworkManagementService mNetworkService;
         NetworkPolicyManager mPolicyManager;
-        TelephonyManager mTelephonyManager;
-        SubscriptionManager mSubscriptionManager;
-        UserManager mUserManager;
         NetworkPolicyEditor mPolicyEditor;
     }
 

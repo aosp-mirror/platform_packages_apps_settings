@@ -45,8 +45,7 @@ public class HighUsageTipTest {
     private static final long SCREEN_TIME = 30 * DateUtils.MINUTE_IN_MILLIS;
     private static final long LAST_FULL_CHARGE_TIME = 20 * DateUtils.MINUTE_IN_MILLIS;
 
-    @Mock
-    private MetricsFeatureProvider mMetricsFeatureProvider;
+    @Mock private MetricsFeatureProvider mMetricsFeatureProvider;
     private Context mContext;
     private HighUsageTip mBatteryTip;
     private List<AppInfo> mUsageAppList;
@@ -57,10 +56,11 @@ public class HighUsageTipTest {
 
         mContext = RuntimeEnvironment.application;
         mUsageAppList = new ArrayList<>();
-        mUsageAppList.add(new AppInfo.Builder()
-                .setPackageName(PACKAGE_NAME)
-                .setScreenOnTimeMs(SCREEN_TIME)
-                .build());
+        mUsageAppList.add(
+                new AppInfo.Builder()
+                        .setPackageName(PACKAGE_NAME)
+                        .setScreenOnTimeMs(SCREEN_TIME)
+                        .build());
         mBatteryTip = new HighUsageTip(LAST_FULL_CHARGE_TIME, mUsageAppList);
     }
 
@@ -86,19 +86,25 @@ public class HighUsageTipTest {
 
     @Test
     public void toString_containsAppData() {
-        assertThat(mBatteryTip.toString()).isEqualTo(
-                "type=2 state=0 { packageName=com.android.app,anomalyTypes={},screenTime=1800000 "
-                        + "}");
+        assertThat(mBatteryTip.toString())
+                .isEqualTo(
+                        "type=2 state=0 {"
+                            + " packageName=com.android.app,anomalyTypes={},screenTime=1800000 }");
     }
 
     @Test
     public void testLog_logAppInfo() {
         mBatteryTip.log(mContext, mMetricsFeatureProvider);
-        verify(mMetricsFeatureProvider).action(mContext,
-                MetricsProto.MetricsEvent.ACTION_HIGH_USAGE_TIP, BatteryTip.StateType.NEW);
+        verify(mMetricsFeatureProvider)
+                .action(
+                        mContext,
+                        MetricsProto.MetricsEvent.ACTION_HIGH_USAGE_TIP,
+                        BatteryTip.StateType.NEW);
 
-        verify(mMetricsFeatureProvider).action(mContext,
-                MetricsProto.MetricsEvent.ACTION_HIGH_USAGE_TIP_LIST,
-                PACKAGE_NAME);
+        verify(mMetricsFeatureProvider)
+                .action(
+                        mContext,
+                        MetricsProto.MetricsEvent.ACTION_HIGH_USAGE_TIP_LIST,
+                        PACKAGE_NAME);
     }
 }

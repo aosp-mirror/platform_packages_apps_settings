@@ -18,83 +18,44 @@ package com.android.settings.spa.app.appinfo
 
 import android.app.settings.SettingsEnums
 import android.content.Intent
-import android.content.om.OverlayManager
 import android.content.pm.ApplicationInfo
 import android.os.UserHandle
 import android.os.UserManager
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settings.R
-import com.android.settings.Utils
 import com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminAdd
 import com.android.settingslib.spa.widget.button.ActionButton
-import com.android.settingslib.spaprivileged.framework.common.devicePolicyManager
-import com.android.settingslib.spaprivileged.model.app.hasFlag
 import com.android.settingslib.spaprivileged.model.app.isActiveAdmin
 import com.android.settingslib.spaprivileged.model.app.userHandle
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 
 class AppUninstallButton(private val packageInfoPresenter: PackageInfoPresenter) {
     private val context = packageInfoPresenter.context
     private val appButtonRepository = AppButtonRepository(context)
-    private val overlayManager = context.getSystemService(OverlayManager::class.java)!!
     private val userManager = context.getSystemService(UserManager::class.java)!!
 
     @Composable
     fun getActionButton(app: ApplicationInfo): ActionButton? {
         if (app.isSystemApp || app.isInstantApp) return null
-        return uninstallButton(app = app, enabled = isUninstallButtonEnabled(app))
+        return uninstallButton(app)
     }
-
-    /** Gets whether a package can be uninstalled. */
-    private fun isUninstallButtonEnabled(app: ApplicationInfo): Boolean = when {
-        !app.hasFlag(ApplicationInfo.FLAG_INSTALLED) -> false
-
-        Utils.isProfileOrDeviceOwner(
-            context.devicePolicyManager, app.packageName, packageInfoPresenter.userId) -> false
-
-        appButtonRepository.isDisallowControl(app) -> false
-
-        uninstallDisallowedDueToHomeApp(app.packageName) -> false
-
-        // Resource overlays can be uninstalled iff they are public (installed on /data) and
-        // disabled. ("Enabled" means they are in use by resource management.)
-        app.isEnabledResourceOverlay() -> false
-
-        else -> true
-    }
-
-    /**
-     * Checks whether the given package cannot be uninstalled due to home app restrictions.
-     *
-     * Home launcher apps need special handling, we can't allow uninstallation of the only home
-     * app, and we don't want to allow uninstallation of an explicitly preferred one -- the user
-     * can go to Home settings and pick a different one, after which we'll permit uninstallation
-     * of the now-not-default one.
-     */
-    private fun uninstallDisallowedDueToHomeApp(packageName: String): Boolean {
-        val homePackageInfo = appButtonRepository.getHomePackageInfo()
-        return when {
-            packageName !in homePackageInfo.homePackages -> false
-
-            // Disallow uninstall when this is the only home app.
-            homePackageInfo.homePackages.size == 1 -> true
-
-            // Disallow if this is the explicit default home app.
-            else -> packageName == homePackageInfo.currentDefaultHome?.packageName
-        }
-    }
-
-    private fun ApplicationInfo.isEnabledResourceOverlay(): Boolean =
-        isResourceOverlay &&
-            overlayManager.getOverlayInfo(packageName, userHandle)?.isEnabled == true
 
     @Composable
-    private fun uninstallButton(app: ApplicationInfo, enabled: Boolean) = ActionButton(
+    private fun uninstallButton(app: ApplicationInfo) = ActionButton(
         text = if (isCloneApp(app)) context.getString(R.string.delete) else
             context.getString(R.string.uninstall_text),
         imageVector = ImageVector.vectorResource(R.drawable.ic_settings_delete),
-        enabled = enabled,
+        enabled = remember(app) {
+            flow {
+                emit(appButtonRepository.isAllowUninstallOrArchive(context, app))
+            }.flowOn(Dispatchers.Default)
+        }.collectAsStateWithLifecycle(false).value,
     ) { onUninstallClicked(app) }
 
     private fun onUninstallClicked(app: ApplicationInfo) {

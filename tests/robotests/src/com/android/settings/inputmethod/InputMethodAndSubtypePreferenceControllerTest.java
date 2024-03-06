@@ -47,7 +47,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = ShadowInputMethodManagerWithMethodList.class)
+@Config(shadows = {
+        ShadowInputMethodManagerWithMethodList.class,
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class InputMethodAndSubtypePreferenceControllerTest {
 
     @Mock

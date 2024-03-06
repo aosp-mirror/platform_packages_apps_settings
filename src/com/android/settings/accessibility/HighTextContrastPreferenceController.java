@@ -20,7 +20,7 @@ import android.content.Context;
 import android.provider.Settings;
 
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.accessibility.TextReadingPreferenceFragment.EntryPoint;
@@ -32,7 +32,7 @@ import com.android.settings.core.instrumentation.SettingsStatsLog;
  */
 public class HighTextContrastPreferenceController extends TogglePreferenceController implements
         TextReadingResetController.ResetStateListener {
-    private SwitchPreference mSwitchPreference;
+    private TwoStatePreference mSwitchPreference;
 
     @EntryPoint
     private int mEntryPoint;

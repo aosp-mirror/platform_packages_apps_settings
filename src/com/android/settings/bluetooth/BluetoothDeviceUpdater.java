@@ -82,7 +82,7 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
         mPreferenceMap = new HashMap<>();
         mLocalManager = localManager;
         mMetricsCategory = metricsCategory;
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     /**

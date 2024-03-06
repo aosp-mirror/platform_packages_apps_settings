@@ -178,7 +178,7 @@ public class FaceSettingsRemoveButtonPreferenceController extends BasePreference
         super(context, preferenceKey);
         mContext = context;
         mFaceManager = context.getSystemService(FaceManager.class);
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
         mFaceUpdater = new FaceUpdater(context, mFaceManager);
     }
 

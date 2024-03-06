@@ -140,7 +140,7 @@ public class WifiDialogActivity extends ObservableActivity implements WifiDialog
                     return SystemClock.elapsedRealtime();
                 }
             };
-            mNetworkDetailsTracker = FeatureFactory.getFactory(this)
+            mNetworkDetailsTracker = FeatureFactory.getFeatureFactory()
                     .getWifiTrackerLibProvider()
                     .createNetworkDetailsTracker(
                             getLifecycle(),
@@ -170,7 +170,7 @@ public class WifiDialogActivity extends ObservableActivity implements WifiDialog
             createDialogWithSuwTheme();
         } else {
             if (mIsWifiTrackerLib) {
-                mDialog2 = WifiDialog2.createModal(this, this,
+                mDialog2 = new WifiDialog2(this, this,
                         mNetworkDetailsTracker.getWifiEntry(), WifiConfigUiBase2.MODE_CONNECT);
             } else {
                 mDialog = WifiDialog.createModal(
@@ -201,7 +201,7 @@ public class WifiDialogActivity extends ObservableActivity implements WifiDialog
                 ? R.style.SuwAlertDialogThemeCompat_DayNight :
                 R.style.SuwAlertDialogThemeCompat_Light;
         if (mIsWifiTrackerLib) {
-            mDialog2 = WifiDialog2.createModal(this, this,
+            mDialog2 = new WifiDialog2(this, this,
                     mNetworkDetailsTracker.getWifiEntry(),
                     WifiConfigUiBase2.MODE_CONNECT, targetStyle);
         } else {

@@ -29,9 +29,12 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.ListPreference;
+import androidx.preference.ListPreferenceDialogFragmentCompat;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
@@ -67,6 +70,7 @@ public class EnabledNetworkModePreferenceController extends
     private SubscriptionsChangeListener mSubscriptionsListener;
     private int mCallState = TelephonyManager.CALL_STATE_IDLE;
     private PhoneCallStateTelephonyCallback mTelephonyCallback;
+    private FragmentManager mFragmentManager;
 
     public EnabledNetworkModePreferenceController(Context context, String key) {
         super(context, key);
@@ -151,7 +155,16 @@ public class EnabledNetworkModePreferenceController extends
         listPreference.setEntryValues(mBuilder.getEntryValues());
         listPreference.setValue(Integer.toString(mBuilder.getSelectedEntryValue()));
         listPreference.setSummary(mBuilder.getSummary());
-        listPreference.setEnabled(isCallStateIdle());
+        boolean listPreferenceEnabled = isCallStateIdle();
+        listPreference.setEnabled(listPreferenceEnabled);
+        if (!listPreferenceEnabled) {
+            // If dialog is already opened when ListPreference disabled, dismiss them.
+            for (Fragment fragment : mFragmentManager.getFragments()) {
+                if (fragment instanceof ListPreferenceDialogFragmentCompat) {
+                    ((ListPreferenceDialogFragmentCompat) fragment).dismiss();
+                }
+            }
+        }
     }
 
     @Override
@@ -169,8 +182,9 @@ public class EnabledNetworkModePreferenceController extends
         return false;
     }
 
-    void init(int subId) {
+    void init(int subId, FragmentManager fragmentManager) {
         mSubId = subId;
+        mFragmentManager = fragmentManager;
         mTelephonyManager = mContext.getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(mSubId);
         mBuilder = new PreferenceEntriesBuilder(mContext, mSubId);

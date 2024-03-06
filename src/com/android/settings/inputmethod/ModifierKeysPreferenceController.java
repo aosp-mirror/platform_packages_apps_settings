@@ -90,7 +90,7 @@ public class ModifierKeysPreferenceController extends BasePreferenceController {
         mIm = context.getSystemService(InputManager.class);
         Objects.requireNonNull(mIm, "InputManager service cannot be null");
         KeyboardSettingsFeatureProvider featureProvider =
-                FeatureFactory.getFactory(context).getKeyboardSettingsFeatureProvider();
+                FeatureFactory.getFeatureFactory().getKeyboardSettingsFeatureProvider();
         mDrawable = featureProvider.getActionKeyIcon(context);
     }
 

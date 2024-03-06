@@ -45,8 +45,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Switch;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
@@ -80,7 +83,6 @@ import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.development.SystemPropPoker;
 import com.android.settingslib.search.SearchIndexable;
-import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
@@ -89,7 +91,7 @@ import java.util.List;
 
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFragment
-        implements OnMainSwitchChangeListener, OemUnlockDialogHost, AdbDialogHost,
+        implements OnCheckedChangeListener, OemUnlockDialogHost, AdbDialogHost,
         AdbClearKeysDialogHost, LogPersistDialogHost,
         BluetoothRebootDialog.OnRebootDialogListener,
         AbstractBluetoothPreferenceController.Callback,
@@ -230,6 +232,12 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
             getActivity().finish();
             return;
         }
+        Context context = requireContext();
+        if (!DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(context)) {
+            Toast.makeText(context, R.string.dev_settings_disabled_warning, Toast.LENGTH_SHORT)
+                    .show();
+            finish();
+        }
     }
 
     @Override
@@ -243,7 +251,8 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
             mIsAvailable = false;
             // Show error message
             if (!isUiRestrictedByOnlyAdmin()) {
-                getEmptyTextView().setText(R.string.development_settings_not_available);
+                getEmptyTextView().setText(
+                        com.android.settingslib.R.string.development_settings_not_available);
             }
             getPreferenceScreen().removeAll();
             return;
@@ -332,10 +341,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
     }
 
     @Override
-    public void onSwitchChanged(Switch switchView, boolean isChecked) {
-        if (switchView != mSwitchBar.getSwitch()) {
-            return;
-        }
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         final boolean developmentEnabledState =
                 DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(getContext());
         if (isChecked != developmentEnabledState) {
@@ -371,8 +377,8 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                     DisableDevSettingsDialogFragment.show(this /* host */);
                 }
             }
-            FeatureFactory.getFactory(
-                    getContext()).getSearchFeatureProvider().sendPreIndexIntent(getContext());
+            FeatureFactory.getFeatureFactory().getSearchFeatureProvider()
+                    .sendPreIndexIntent(getContext());
         }
     }
 
@@ -441,11 +447,6 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                 getDevelopmentOptionsController(
                         BluetoothLeAudioPreferenceController.class);
         leAudioFeatureController.onRebootDialogConfirmed();
-
-        final BluetoothLeAudioAllowListPreferenceController leAudioAllowListController =
-                getDevelopmentOptionsController(
-                    BluetoothLeAudioAllowListPreferenceController.class);
-        leAudioAllowListController.onRebootDialogConfirmed();
     }
 
     @Override
@@ -463,11 +464,6 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                 getDevelopmentOptionsController(
                         BluetoothLeAudioPreferenceController.class);
         leAudioFeatureController.onRebootDialogCanceled();
-
-        final BluetoothLeAudioAllowListPreferenceController leAudioAllowListController =
-                getDevelopmentOptionsController(
-                    BluetoothLeAudioAllowListPreferenceController.class);
-        leAudioAllowListController.onRebootDialogCanceled();
     }
 
     @Override
@@ -611,8 +607,9 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
-            Activity activity, Lifecycle lifecycle, DevelopmentSettingsDashboardFragment fragment,
-            BluetoothA2dpConfigStore bluetoothA2dpConfigStore) {
+            @Nullable Activity activity, @Nullable Lifecycle lifecycle,
+            @Nullable DevelopmentSettingsDashboardFragment fragment,
+            @Nullable BluetoothA2dpConfigStore bluetoothA2dpConfigStore) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new MemoryUsagePreferenceController(context));
         controllers.add(new BugReportPreferenceController(context));
@@ -679,6 +676,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new ShowKeyPressesPreferenceController(context));
         controllers.add(new ShowSurfaceUpdatesPreferenceController(context));
         controllers.add(new ShowLayoutBoundsPreferenceController(context));
+        controllers.add(new ShowHdrSdrRatioPreferenceController(context));
         controllers.add(new ShowRefreshRatePreferenceController(context));
         controllers.add(new RtlLayoutPreferenceController(context));
         controllers.add(new WindowAnimationScalePreferenceController(context));
@@ -745,6 +743,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new ContrastPreferenceController(
                 context, context.getSystemService(UiModeManager.class)));
         controllers.add(new ForceEnableNotesRolePreferenceController(context));
+        controllers.add(new GrammaticalGenderPreferenceController(context));
 
         return controllers;
     }

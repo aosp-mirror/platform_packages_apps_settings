@@ -18,10 +18,7 @@ package com.android.settings.applications.credentials;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
-
 import static com.google.common.truth.Truth.assertThat;
-
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 
 import android.app.Activity;
@@ -33,15 +30,12 @@ import android.content.pm.ServiceInfo;
 import android.credentials.CredentialProviderInfo;
 import android.net.Uri;
 import android.os.Looper;
-import android.os.UserHandle;
 import android.provider.Settings;
 
-import androidx.lifecycle.Lifecycle;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
@@ -86,12 +80,14 @@ public class CredentialManagerPreferenceControllerTest {
         mCredentialsPreferenceCategory.setKey("credentials_test");
         mScreen.addPreference(mCredentialsPreferenceCategory);
         mReceivedResultCode = Optional.empty();
-        mDelegate = new CredentialManagerPreferenceController.Delegate() {
-                public void setActivityResult(int resultCode) {
-                    mReceivedResultCode = Optional.of(resultCode);
-                }
-                public void forceDelegateRefresh() {}
-            };
+        mDelegate =
+                new CredentialManagerPreferenceController.Delegate() {
+                    public void setActivityResult(int resultCode) {
+                        mReceivedResultCode = Optional.of(resultCode);
+                    }
+
+                    public void forceDelegateRefresh() {}
+                };
     }
 
     @Test
@@ -134,7 +130,7 @@ public class CredentialManagerPreferenceControllerTest {
     }
 
     @Test
-    public void buildSwitchPreference() {
+    public void buildPreference() {
         CredentialProviderInfo providerInfo1 =
                 createCredentialProviderInfoWithSubtitle(
                         "com.android.provider1", "ClassA", "Service Title", null);
@@ -158,13 +154,15 @@ public class CredentialManagerPreferenceControllerTest {
         assertThat(enabledProviders.contains("com.android.provider1")).isTrue();
 
         // Create the pref (checked).
-        SwitchPreference pref = controller.createPreference(mContext, providerInfo1);
+        CredentialManagerPreferenceController.CombiPreference pref =
+                controller.createPreference(mContext, providerInfo1);
         assertThat(pref.getTitle().toString()).isEqualTo("Service Title");
         assertThat(pref.isChecked()).isTrue();
         assertThat(pref.getSummary()).isNull();
 
         // Create the pref (not checked).
-        SwitchPreference pref2 = controller.createPreference(mContext, providerInfo2);
+        CredentialManagerPreferenceController.CombiPreference pref2 =
+                controller.createPreference(mContext, providerInfo2);
         assertThat(pref2.getTitle().toString()).isEqualTo("Service Title");
         assertThat(pref2.isChecked()).isFalse();
         assertThat(pref2.getSummary().toString()).isEqualTo("Summary Text");
@@ -311,7 +309,7 @@ public class CredentialManagerPreferenceControllerTest {
         assertThat(controller.isConnected()).isFalse();
         assertThat(mCredentialsPreferenceCategory.getPreferenceCount()).isEqualTo(3);
 
-        Map<String, SwitchPreference> prefs =
+        Map<String, CredentialManagerPreferenceController.CombiPreference> prefs =
                 controller.buildPreferenceList(mContext, mCredentialsPreferenceCategory);
         assertThat(prefs.keySet())
                 .containsExactly(TEST_PACKAGE_NAME_A, TEST_PACKAGE_NAME_B, TEST_PACKAGE_NAME_C);
@@ -349,7 +347,8 @@ public class CredentialManagerPreferenceControllerTest {
         Intent intent = new Intent(PRIMARY_INTENT);
         intent.setData(Uri.parse("package:" + packageName));
         assertThat(controller.verifyReceivedIntent(intent)).isTrue();
-        controller.completeEnableProviderDialogBox(DialogInterface.BUTTON_POSITIVE, packageName, true);
+        controller.completeEnableProviderDialogBox(
+                DialogInterface.BUTTON_POSITIVE, packageName, true);
         assertThat(mReceivedResultCode.get()).isEqualTo(Activity.RESULT_OK);
     }
 
@@ -364,7 +363,8 @@ public class CredentialManagerPreferenceControllerTest {
         Intent intent = new Intent(PRIMARY_INTENT);
         intent.setData(Uri.parse("package:" + packageName));
         assertThat(controller.verifyReceivedIntent(intent)).isTrue();
-        controller.completeEnableProviderDialogBox(DialogInterface.BUTTON_NEGATIVE, packageName, true);
+        controller.completeEnableProviderDialogBox(
+                DialogInterface.BUTTON_NEGATIVE, packageName, true);
         assertThat(mReceivedResultCode.get()).isEqualTo(Activity.RESULT_CANCELED);
     }
 
@@ -390,7 +390,8 @@ public class CredentialManagerPreferenceControllerTest {
         Intent intent = new Intent(ALTERNATE_INTENT);
         intent.setData(Uri.parse("package:" + packageName));
         assertThat(controller.verifyReceivedIntent(intent)).isTrue();
-        controller.completeEnableProviderDialogBox(DialogInterface.BUTTON_POSITIVE, packageName, true);
+        controller.completeEnableProviderDialogBox(
+                DialogInterface.BUTTON_POSITIVE, packageName, true);
         assertThat(mReceivedResultCode.get()).isEqualTo(Activity.RESULT_OK);
     }
 
@@ -405,7 +406,8 @@ public class CredentialManagerPreferenceControllerTest {
         Intent intent = new Intent(ALTERNATE_INTENT);
         intent.setData(Uri.parse("package:" + packageName));
         assertThat(controller.verifyReceivedIntent(intent)).isTrue();
-        controller.completeEnableProviderDialogBox(DialogInterface.BUTTON_NEGATIVE, packageName, true);
+        controller.completeEnableProviderDialogBox(
+                DialogInterface.BUTTON_NEGATIVE, packageName, true);
         assertThat(mReceivedResultCode.get()).isEqualTo(Activity.RESULT_CANCELED);
     }
 
