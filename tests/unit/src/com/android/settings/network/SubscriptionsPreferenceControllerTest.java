@@ -148,6 +148,7 @@ public class SubscriptionsPreferenceControllerTest {
         when(mUserManager.isAdminUser()).thenReturn(true);
         when(mContext.getSystemService(WifiManager.class)).thenReturn(mWifiManager);
         when(mLifecycleOwner.getLifecycle()).thenReturn(mLifecycleRegistry);
+        when(mSubscriptionManager.createForAllUserProfiles()).thenReturn(mSubscriptionManager);
 
         mPreferenceManager = new PreferenceManager(mContext);
         mPreferenceScreen = mPreferenceManager.createPreferenceScreen(mContext);

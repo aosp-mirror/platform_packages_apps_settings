@@ -57,6 +57,8 @@ public class DisableSimFooterPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = spy(ApplicationProvider.getApplicationContext());
         when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
+        when(mSubscriptionManager.createForAllUserProfiles()).thenReturn(mSubscriptionManager);
+
         when(mInfo.getSubscriptionId()).thenReturn(SUB_ID);
         SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(mInfo));
         mController = new DisableSimFooterPreferenceController(mContext, PREF_KEY);

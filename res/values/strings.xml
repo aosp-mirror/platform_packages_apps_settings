@@ -3562,6 +3562,8 @@
 
     <!-- [CHAR LIMIT=30] Title for managed profile location switch  -->
     <string name="managed_profile_location_switch_title">Location for work profile</string>
+    <!-- [CHAR LIMIT=60] Title for private profile location switch  -->
+    <string name="private_profile_location_switch_title">Location for private space</string>
     <!-- [CHAR LIMIT=30] Location settings screen. It's a link that directs the user to a page that
       shows the location permission setting for each installed app -->
     <string name="location_app_level_permissions">App location permissions</string>
@@ -4375,6 +4377,8 @@
 
     <!-- Title text for 'Tap to click'. [CHAR LIMIT=35] -->
     <string name="trackpad_tap_to_click">Tap to click</string>
+    <!-- TODO(b/321978150): mark as translatable once we have finalized text from UX. -->
+    <string name="trackpad_tap_dragging" translatable="false">Tap dragging</string>
     <!-- Title text for 'Touchpad gestures' [CHAR LIMIT=35] -->
     <string name="trackpad_touchpad_gesture_title">Touchpad gestures</string>
     <!-- Summary text for 'Touchpad gestures' [CHAR LIMIT=60] -->
@@ -4478,8 +4482,14 @@
     <!-- Summary for the modifier key picker dialog page [CHAR LIMIT=35] -->
     <string name="modifier_keys_picker_summary">Choose a new key for <xliff:g id="modifier_key_default_name">%1$s</xliff:g>:</string>
 
+    <!-- Title text for per IME subtype keyboard layout. [CHAR LIMIT=35] -->
+    <string name="ime_label_title"><xliff:g id="ime_label" example="Gboard">%s</xliff:g> layout</string>
     <!-- Summary text for keyboards when no layout has been selected. [CHAR LIMIT=35] -->
     <string name="default_keyboard_layout">Default</string>
+    <!-- Summary text for keyboards when a layout is automatically selected. [CHAR LIMIT=35] -->
+    <string name="automatic_keyboard_layout_label">Automatic: <xliff:g id="layout_label" example="English(US)">%s</xliff:g></string>
+    <!-- Summary text for keyboards when a layout is user selected. [CHAR LIMIT=35] -->
+    <string name="user_selected_keyboard_layout_label">User selected: <xliff:g id="layout_label" example="English(US)">%s</xliff:g></string>
 
     <!-- Title for the 'Speech' preference category. [CHAR LIMIT=45] -->
     <string name="speech_category_title">Speech</string>

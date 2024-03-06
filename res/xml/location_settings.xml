@@ -49,6 +49,14 @@
             settings:forWork="true"
             settings:useAdminDisabledSummary="true"/>
 
+        <!-- This preference gets removed if there is no private profile -->
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:enabled="false"
+            android:key="private_profile_location_switch"
+            android:selectable="true"
+            android:title="@string/private_profile_location_switch_title"
+            settings:controller="com.android.settings.location.LocationForPrivateProfilePreferenceController"/>
+
         <!-- This preference category gets removed if new_recent_location_ui is disabled -->
         <Preference
             android:key="app_level_permissions"

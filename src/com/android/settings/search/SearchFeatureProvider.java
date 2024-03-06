@@ -100,6 +100,7 @@ public interface SearchFeatureProvider {
         // and goes to the search UI. Also set the background to null so there's no ripple.
         final View navView = toolbar.getNavigationView();
         navView.setClickable(false);
+        navView.setFocusable(false);
         navView.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
         navView.setBackground(null);
 

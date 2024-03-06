@@ -30,6 +30,7 @@ import android.icu.text.MessageFormat;
 import android.net.Uri;
 import android.provider.ContactsContract;
 import android.provider.Settings;
+import android.service.notification.ZenAdapters;
 import android.service.notification.ZenModeConfig;
 import android.service.notification.ZenPolicy;
 import android.util.Log;
@@ -399,14 +400,16 @@ public class ZenModeBackend {
     ZenPolicy setDefaultZenPolicy(ZenPolicy zenPolicy) {
         int calls;
         if (mPolicy.allowCalls()) {
-            calls = ZenModeConfig.getZenPolicySenders(mPolicy.allowCallsFrom());
+            calls = ZenAdapters.notificationPolicySendersToZenPolicyPeopleType(
+                    mPolicy.allowCallsFrom());
         } else {
             calls = ZenPolicy.PEOPLE_TYPE_NONE;
         }
 
         int messages;
         if (mPolicy.allowMessages()) {
-            messages = ZenModeConfig.getZenPolicySenders(mPolicy.allowMessagesFrom());
+            messages = ZenAdapters.notificationPolicySendersToZenPolicyPeopleType(
+                    mPolicy.allowMessagesFrom());
         } else {
             messages = ZenPolicy.PEOPLE_TYPE_NONE;
         }
