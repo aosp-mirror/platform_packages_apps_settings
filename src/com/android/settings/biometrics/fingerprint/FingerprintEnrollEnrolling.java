@@ -71,7 +71,6 @@ import com.android.settings.biometrics.BiometricsEnrollEnrolling;
 import com.android.settings.biometrics.BiometricsSplitScreenDialog;
 import com.android.settings.biometrics.fingerprint.feature.SfpsEnrollmentFeature;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
-import com.android.settings.flags.Flags;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.display.DisplayDensityUtils;
 
@@ -252,12 +251,6 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
 
             setContentView(layout);
             setDescriptionText(R.string.security_settings_udfps_enroll_start_message);
-
-            if (Flags.udfpsEnrollCalibration()) {
-                mCalibrator = FeatureFactory.getFeatureFactory().getFingerprintFeatureProvider()
-                        .getUdfpsEnrollCalibrator(getApplicationContext(), savedInstanceState,
-                                getIntent());
-            }
         } else if (mCanAssumeSfps) {
             mSfpsEnrollmentFeature = FeatureFactory.getFeatureFactory()
                     .getFingerprintFeatureProvider().getSfpsEnrollmentFeature();
@@ -342,6 +335,15 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
 
         final Configuration config = getApplicationContext().getResources().getConfiguration();
         maybeHideSfpsText(config);
+
+        if (!mIsSetupWizard) {
+            mCalibrator = FeatureFactory.getFeatureFactory().getFingerprintFeatureProvider()
+                    .getUdfpsEnrollCalibrator(getApplicationContext(), null, getIntent());
+            if (mCalibrator != null) {
+                mCalibrator.onWaitingPage(getLifecycle(),
+                        getSupportFragmentManager(), null);
+            }
+        }
     }
 
     private void setHelpAnimation() {
@@ -371,11 +373,6 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         super.onSaveInstanceState(outState);
         outState.putBoolean(KEY_STATE_CANCELED, mIsCanceled);
         outState.putInt(KEY_STATE_PREVIOUS_ROTATION, mPreviousRotation);
-        if (Flags.udfpsEnrollCalibration()) {
-            if (mCalibrator != null) {
-                mCalibrator.onSaveInstanceState(outState);
-            }
-        }
     }
 
     private void restoreSavedState(Bundle savedInstanceState) {
