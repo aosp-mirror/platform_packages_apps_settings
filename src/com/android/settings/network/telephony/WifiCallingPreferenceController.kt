@@ -22,10 +22,7 @@ import android.telecom.TelecomManager
 import android.telephony.SubscriptionManager
 import android.telephony.TelephonyManager
 import android.telephony.ims.ImsMmTelManager
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
 import com.android.settings.R
@@ -33,7 +30,6 @@ import com.android.settings.network.telephony.wificalling.WifiCallingRepository
 import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 /**
@@ -81,16 +77,11 @@ open class WifiCallingPreferenceController @JvmOverloads constructor(
 
     override fun onViewCreated(viewLifecycleOwner: LifecycleOwner) {
         wifiCallingRepositoryFactory(mSubId).wifiCallingReadyFlow()
-            .collectLatestWithLifecycle(viewLifecycleOwner) {
-                preference.isVisible = it
-                callingPreferenceCategoryController.updateChildVisible(preferenceKey, it)
+            .collectLatestWithLifecycle(viewLifecycleOwner) { isReady ->
+                preference.isVisible = isReady
+                callingPreferenceCategoryController.updateChildVisible(preferenceKey, isReady)
+                if (isReady) update()
             }
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                update()
-            }
-        }
 
         callStateFlowFactory(mSubId).collectLatestWithLifecycle(viewLifecycleOwner) {
             preference.isEnabled = (it == TelephonyManager.CALL_STATE_IDLE)
