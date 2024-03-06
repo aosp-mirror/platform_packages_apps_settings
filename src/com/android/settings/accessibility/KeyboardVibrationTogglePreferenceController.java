@@ -47,7 +47,7 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 
 /**
- *  A preference controller to turn on/off keyboard vibration state with a single toggle.
+ * A preference controller to turn on/off keyboard vibration state with a single toggle.
  */
 public class KeyboardVibrationTogglePreferenceController extends TogglePreferenceController
         implements DefaultLifecycleObserver {
@@ -110,7 +110,9 @@ public class KeyboardVibrationTogglePreferenceController extends TogglePreferenc
     @Override
     public int getAvailabilityStatus() {
         if (Flags.keyboardCategoryEnabled()
-                && mContext.getResources().getBoolean(R.bool.config_keyboard_vibration_supported)) {
+                && mContext.getResources().getBoolean(R.bool.config_keyboard_vibration_supported)
+                && mContext.getResources().getFloat(
+                com.android.internal.R.dimen.config_keyboardHapticFeedbackFixedAmplitude) > 0) {
             return AVAILABLE;
         }
         return UNSUPPORTED_ON_DEVICE;
