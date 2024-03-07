@@ -84,6 +84,9 @@ public class KeyboardVibrationTogglePreferenceControllerTest {
     public void getAvailabilityStatus_featureSupported_available() {
         mSetFlagsRule.enableFlags(Flags.FLAG_KEYBOARD_CATEGORY_ENABLED);
         when(mResources.getBoolean(R.bool.config_keyboard_vibration_supported)).thenReturn(true);
+        when(mResources.getFloat(
+                com.android.internal.R.dimen.config_keyboardHapticFeedbackFixedAmplitude))
+                .thenReturn(0.8f);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
