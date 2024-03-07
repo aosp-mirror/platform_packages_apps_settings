@@ -118,7 +118,8 @@ public class SettingsInitialize extends BroadcastReceiver {
     }
 
     private void privateProfileSetup(Context context, PackageManager pm, UserInfo userInfo) {
-        if (Flags.allowPrivateProfile()) {
+        if (Flags.allowPrivateProfile()
+                && android.multiuser.Flags.enablePrivateSpaceFeatures()) {
             if (userInfo == null || !userInfo.isPrivateProfile()) {
                 return;
             }

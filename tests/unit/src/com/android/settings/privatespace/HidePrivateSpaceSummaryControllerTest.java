@@ -40,7 +40,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(AndroidJUnit4.class)
-@RequiresFlagsEnabled(Flags.FLAG_ALLOW_PRIVATE_PROFILE)
+@RequiresFlagsEnabled({Flags.FLAG_ALLOW_PRIVATE_PROFILE,
+        android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES})
 public class HidePrivateSpaceSummaryControllerTest {
     @Rule
     public final CheckFlagsRule mCheckFlagsRule =

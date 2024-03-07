@@ -148,7 +148,8 @@ public class PrivateSpaceMaintainerTest {
     public void createPrivateSpace_psDoesNotExist_setsDefaultPsSensitiveNotificationsValue() {
         mSetFlagsRule.enableFlags(
                 Flags.FLAG_ALLOW_PRIVATE_PROFILE,
-                android.multiuser.Flags.FLAG_ENABLE_PS_SENSITIVE_NOTIFICATIONS_TOGGLE);
+                android.multiuser.Flags.FLAG_ENABLE_PS_SENSITIVE_NOTIFICATIONS_TOGGLE,
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
         PrivateSpaceMaintainer privateSpaceMaintainer =
                 PrivateSpaceMaintainer.getInstance(mContext);
         privateSpaceMaintainer.deletePrivateSpace();
@@ -259,7 +260,8 @@ public class PrivateSpaceMaintainerTest {
     public void createPrivateSpace_psDoesNotExist_resetsPSAutoLockSettings() {
         mSetFlagsRule.enableFlags(
                 Flags.FLAG_ALLOW_PRIVATE_PROFILE,
-                android.multiuser.Flags.FLAG_SUPPORT_AUTOLOCK_FOR_PRIVATE_SPACE);
+                android.multiuser.Flags.FLAG_SUPPORT_AUTOLOCK_FOR_PRIVATE_SPACE,
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
         final int autoLockOption = 2;
         PrivateSpaceMaintainer privateSpaceMaintainer =
                 PrivateSpaceMaintainer.getInstance(mContext);
@@ -282,7 +284,8 @@ public class PrivateSpaceMaintainerTest {
     public void createPrivateSpace_psExists_doesNotResetPSAutoLockSettings() {
         mSetFlagsRule.enableFlags(
                 Flags.FLAG_ALLOW_PRIVATE_PROFILE,
-                android.multiuser.Flags.FLAG_SUPPORT_AUTOLOCK_FOR_PRIVATE_SPACE);
+                android.multiuser.Flags.FLAG_SUPPORT_AUTOLOCK_FOR_PRIVATE_SPACE,
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
         final int privateSpaceAutLockValue = 1;
         PrivateSpaceMaintainer privateSpaceMaintainer =
                 PrivateSpaceMaintainer.getInstance(mContext);

@@ -51,7 +51,8 @@ public final class PrivateSpaceSafetySource {
             return;
         }
 
-        if (!Flags.allowPrivateProfile()) {
+        if (!Flags.allowPrivateProfile()
+                || !android.multiuser.Flags.enablePrivateSpaceFeatures()) {
             // Setting null safetySourceData so that an old entry gets cleared out and this way
             // provide a response since SC always expects one on rescan.
             SafetyCenterManagerWrapper.get().setSafetySourceData(

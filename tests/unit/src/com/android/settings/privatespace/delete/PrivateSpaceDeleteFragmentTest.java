@@ -39,7 +39,8 @@ public class PrivateSpaceDeleteFragmentTest {
     @Test
     @UiThreadTest
     public void verifyMetricsConstant() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE);
+        mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE,
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
         mFragment = spy(new PrivateSpaceDeleteFragment());
         assertThat(mFragment.getMetricsCategory()).isEqualTo(SettingsEnums.PRIVATE_SPACE_SETTINGS);
     }

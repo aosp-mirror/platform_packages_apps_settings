@@ -88,7 +88,8 @@ public class PrivateSpaceAuthenticationActivityTest {
     /** Tests that when Private does not exist setup flow is started. */
     //TODO(b/307729746) Plan to add more tests for complete setup flow
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_ALLOW_PRIVATE_PROFILE)
+    @RequiresFlagsEnabled({Flags.FLAG_ALLOW_PRIVATE_PROFILE,
+            android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES})
     public void whenPrivateProfileDoesNotExist_triggersSetupFlow() {
         when(mPrivateSpaceMaintainer.doesPrivateSpaceExist()).thenReturn(false);
 

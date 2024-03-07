@@ -51,7 +51,8 @@ public class PrivateSpaceSetLockFragment extends InstrumentedFragment {
             LayoutInflater inflater,
             @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
-        if (!android.os.Flags.allowPrivateProfile()) {
+        if (!android.os.Flags.allowPrivateProfile()
+                || !android.multiuser.Flags.enablePrivateSpaceFeatures()) {
             return null;
         }
         GlifLayout rootView =

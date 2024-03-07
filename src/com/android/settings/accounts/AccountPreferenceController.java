@@ -311,11 +311,10 @@ public class AccountPreferenceController extends AbstractPreferenceController
                 // should be shown or not.
                 if (((profile.isManagedProfile()
                         && (mType & ProfileSelectFragment.ProfileType.WORK) != 0)
-                        || (Flags.allowPrivateProfile()
-                            && profile.isPrivateProfile()
+                        || (isPrivateProfile(profile)
                             && (mType & ProfileSelectFragment.ProfileType.PRIVATE) != 0)
                         || (!profile.isManagedProfile()
-                            && !(Flags.allowPrivateProfile() && profile.isPrivateProfile())
+                            && !isPrivateProfile(profile)
                             && (mType & ProfileSelectFragment.ProfileType.PERSONAL) != 0))
                         && !(mUm.getUserProperties(profile.getUserHandle())
                             .getShowInQuietMode() == UserProperties.SHOW_IN_QUIET_MODE_HIDDEN
@@ -336,6 +335,12 @@ public class AccountPreferenceController extends AbstractPreferenceController
 
         // Refresh for the auto-sync preferences
         mFragment.forceUpdatePreferences();
+    }
+
+    private static boolean isPrivateProfile(UserInfo profile) {
+        return Flags.allowPrivateProfile()
+                && android.multiuser.Flags.enablePrivateSpaceFeatures()
+                && profile.isPrivateProfile();
     }
 
     private void updateProfileUi(final UserInfo userInfo) {
