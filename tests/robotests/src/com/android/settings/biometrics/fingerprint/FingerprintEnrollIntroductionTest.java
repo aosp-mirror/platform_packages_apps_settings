@@ -253,6 +253,24 @@ public class FingerprintEnrollIntroductionTest {
     }
 
     @Test
+    public void intro_CheckNullPropsReturnsErrorString() {
+        setupFingerprintEnrollIntroWith(newTokenOnlyIntent());
+        when(mFingerprintManager.getSensorPropertiesInternal()).thenReturn(null);
+        final int result = mFingerprintEnrollIntroduction.checkMaxEnrolled();
+
+        assertThat(result).isEqualTo(R.string.fingerprint_intro_error_unknown);
+    }
+
+    @Test
+    public void intro_CheckEmptyPropsReturnsErrorString() {
+        setupFingerprintEnrollIntroWith(newTokenOnlyIntent());
+        when(mFingerprintManager.getSensorPropertiesInternal()).thenReturn(List.of());
+        final int result = mFingerprintEnrollIntroduction.checkMaxEnrolled();
+
+        assertThat(result).isEqualTo(R.string.fingerprint_intro_error_unknown);
+    }
+
+    @Test
     public void intro_CheckGenerateChallenge() {
         setupFingerprintEnrollIntroWith(newGkPwHandleAndFromSettingsIntent());
 
