@@ -33,6 +33,7 @@ import com.android.settings.datausage.DataUsageUtils
 import com.android.settings.datausage.lib.DataUsageLib
 import com.android.settings.datausage.lib.NetworkCycleDataRepository
 import com.android.settings.datausage.lib.NetworkStatsRepository.Companion.AllTimeRange
+import com.android.settingslib.spaprivileged.framework.compose.getPlaceholder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -63,6 +64,7 @@ class DataUsagePreferenceController(context: Context, key: String) :
     }
 
     override fun onViewCreated(viewLifecycleOwner: LifecycleOwner) {
+        preference.summary = mContext.getPlaceholder()
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 update()
@@ -113,7 +115,6 @@ class DataUsagePreferenceController(context: Context, key: String) :
         }
 
         val allTimeUsage = repository.queryUsage(AllTimeRange)
-        if (allTimeUsage.usage > 0) return allTimeUsage.getDataUsedString(mContext) to true
-        return null to false
+        return allTimeUsage.getDataUsedString(mContext) to (allTimeUsage.usage > 0)
     }
 }
