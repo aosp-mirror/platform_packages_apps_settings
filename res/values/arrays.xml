@@ -1411,7 +1411,7 @@
 
     <string-array name="battery_tips_card_colors" translatable="false">
         <item>color_accent_selector</item>
-        <item>color_battery_anomaly_yellow_selector</item>
+        <item>color_battery_anomaly_app_warning_selector</item>
     </string-array>
 
     <!-- The following 4 arrays are for power anomaly tips card. Please keep them the same size. -->
@@ -1457,6 +1457,30 @@
         <item>@string/battery_app_item_hint_in_bg</item>
         <item>@string/battery_app_item_hint_in_fg</item>
         <item>@string/battery_app_item_hint_in_fg</item>
+    </string-array>
+
+    <!-- A locale list of not supporting Terms of Address. [DO NOT TRANSLATE] -->
+    <string-array name="terms_of_address_unsupported_locales">
+        <item>fr-CA</item> <!-- French (Canada) -->
+    </string-array>
+
+    <!-- A language list of supporting Terms of Address. [DO NOT TRANSLATE] -->
+    <string-array name="terms_of_address_supported_languages">
+        <item>fr</item> <!-- French -->
+    </string-array>
+
+    <!-- Values for notification cooldown -->
+    <string-array name="notification_polite_options">
+        <item>@string/notification_polite_all_apps</item>
+        <item>@string/notification_polite_conversations</item>
+        <item>@string/notification_polite_disabled</item>
+    </string-array>
+
+    <!-- Values for notification cooldown -->
+    <string-array name="notification_polite_options_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
     </string-array>
 
 </resources>

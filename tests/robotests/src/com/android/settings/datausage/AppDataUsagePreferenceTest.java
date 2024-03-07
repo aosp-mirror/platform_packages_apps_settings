@@ -91,7 +91,7 @@ public class AppDataUsagePreferenceTest {
         mPreference = new AppDataUsagePreference(RuntimeEnvironment.application, mAppItem,
                 50 /* percent */, mUidDetailProvider);
         final View view = LayoutInflater.from(RuntimeEnvironment.application).inflate(
-                com.android.settingslib.R.layout.preference_app, null);
+                com.android.settingslib.widget.preference.app.R.layout.preference_app, null);
         final PreferenceViewHolder preferenceViewHolder =
                 PreferenceViewHolder.createInstanceForTests(view);
         final ProgressBar progressBar = (ProgressBar) preferenceViewHolder.findViewById(

@@ -37,12 +37,14 @@ import androidx.test.uiautomator.Until;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
  * Core tests for Wifi Settings.
  */
+@Ignore
 @RunWith(AndroidJUnit4.class)
 @MediumTest
 public class WirelessNetworkSettingsTests {

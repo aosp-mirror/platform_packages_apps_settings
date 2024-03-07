@@ -15,8 +15,8 @@
  */
 package com.android.settings.wifi.details;
 
+import static com.android.settings.network.NetworkProviderSettings.WIFI_DIALOG_ID;
 import static com.android.settings.network.telephony.MobileNetworkUtils.NO_CELL_DATA_TYPE_ICON;
-import static com.android.settings.wifi.WifiSettings.WIFI_DIALOG_ID;
 import static com.android.settingslib.Utils.formatPercentage;
 
 import android.app.Dialog;
@@ -41,6 +41,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -178,8 +179,14 @@ public class WifiNetworkDetailsFragment extends RestrictedDashboardFragment impl
         }
 
         final WifiEntry wifiEntry = mNetworkDetailsTracker.getWifiEntry();
-        return WifiDialog2.createModal(getActivity(), this, wifiEntry,
-                WifiConfigUiBase2.MODE_MODIFY);
+        return new WifiDialog2(
+                getActivity(),
+                this,
+                wifiEntry,
+                WifiConfigUiBase2.MODE_MODIFY,
+                0,
+                false,
+                true);
     }
 
     @Override
@@ -274,14 +281,12 @@ public class WifiNetworkDetailsFragment extends RestrictedDashboardFragment impl
 
         // Sets callback listener for wifi dialog.
         mWifiDialogListeners.add(mWifiDetailPreferenceController2);
-        mWifiDialogListeners.add(privacyController2);
-        mWifiDialogListeners.add(meteredPreferenceController2);
 
         return mControllers;
     }
 
     @Override
-    public void onSubmit(WifiDialog2 dialog) {
+    public void onSubmit(@NonNull WifiDialog2 dialog) {
         for (WifiDialog2.WifiDialog2Listener listener : mWifiDialogListeners) {
             listener.onSubmit(dialog);
         }
@@ -304,7 +309,7 @@ public class WifiNetworkDetailsFragment extends RestrictedDashboardFragment impl
             }
         };
 
-        mNetworkDetailsTracker = FeatureFactory.getFactory(context)
+        mNetworkDetailsTracker = FeatureFactory.getFeatureFactory()
                 .getWifiTrackerLibProvider()
                 .createNetworkDetailsTracker(
                         getSettingsLifecycle(),
@@ -366,7 +371,7 @@ public class WifiNetworkDetailsFragment extends RestrictedDashboardFragment impl
 
     private WifiNetworkDetailsViewModel getWifiNetworkDetailsViewModel() {
         if (mWifiNetworkDetailsViewModel == null) {
-            mWifiNetworkDetailsViewModel = FeatureFactory.getFactory(getContext())
+            mWifiNetworkDetailsViewModel = FeatureFactory.getFeatureFactory()
                     .getWifiFeatureProvider().getWifiNetworkDetailsViewModel(this);
             mWifiNetworkDetailsViewModel.getHotspotNetworkData()
                     .observe(this, this::onHotspotNetworkChanged);

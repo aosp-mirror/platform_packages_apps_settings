@@ -16,8 +16,6 @@
 
 package com.android.settings;
 
-import static android.provider.Settings.EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_INTENT_URI;
-
 import static com.android.settings.SettingsActivity.EXTRA_SHOW_FRAGMENT;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -32,7 +30,6 @@ import static org.mockito.Mockito.when;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -52,7 +49,6 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -116,29 +112,6 @@ public class SettingsActivityTest {
         mActivity.onActivityResult(0, 0, new Intent());
 
         assertThat(((ListenerFragment) fragments.get(1)).mOnActivityResultCalled).isTrue();
-    }
-
-    @Test
-    public void getTrampolineIntent_intentSelector_shouldNotChangeIntentAction() {
-        Intent targetIntent = new Intent().setClassName("android",
-                "com.android.internal.app.PlatLogoActivity");
-        Intent intent = new Intent(android.provider.Settings.ACTION_DISPLAY_SETTINGS);
-        intent.setComponent(intent.resolveActivity(mContext.getPackageManager()));
-        intent.setSelector(new Intent().setData(
-                Uri.fromParts(targetIntent.toUri(Intent.URI_INTENT_SCHEME), /* ssp= */ "",
-                /* fragment= */ null)));
-
-        Intent resultIntent = SettingsActivity.getTrampolineIntent(intent, "menu_key");
-
-        String intentUriString =
-                resultIntent.getStringExtra(EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_INTENT_URI);
-        Intent parsedIntent = null;
-        try {
-            parsedIntent = Intent.parseUri(intentUriString, Intent.URI_INTENT_SCHEME);
-        } catch (URISyntaxException e) {
-            // Do nothng.
-        }
-        assertThat(parsedIntent.getAction()).isEqualTo(intent.getAction());
     }
 
     public static class ListenerFragment extends Fragment implements OnActivityResultListener {

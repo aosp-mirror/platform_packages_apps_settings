@@ -31,7 +31,8 @@ import androidx.preference.PreferenceScreen
 import com.android.settings.R
 import com.android.settings.datausage.DataUsageUtils
 import com.android.settings.datausage.lib.DataUsageLib
-import com.android.settingslib.net.DataUsageController
+import com.android.settings.datausage.lib.NetworkCycleDataRepository
+import com.android.settings.datausage.lib.NetworkStatsRepository.Companion.AllTimeRange
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -44,9 +45,6 @@ class DataUsagePreferenceController(context: Context, key: String) :
 
     private lateinit var preference: Preference
     private var networkTemplate: NetworkTemplate? = null
-
-    @VisibleForTesting
-    var dataUsageControllerFactory: (Context) -> DataUsageController = { DataUsageController(it) }
 
     fun init(subId: Int) {
         mSubId = subId
@@ -64,7 +62,7 @@ class DataUsagePreferenceController(context: Context, key: String) :
         preference = screen.findPreference(preferenceKey)!!
     }
 
-    fun whenViewCreated(viewLifecycleOwner: LifecycleOwner) {
+    override fun onViewCreated(viewLifecycleOwner: LifecycleOwner) {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 update()
@@ -103,25 +101,21 @@ class DataUsagePreferenceController(context: Context, key: String) :
         else -> null
     }
 
+    @VisibleForTesting
+    fun createNetworkCycleDataRepository(): NetworkCycleDataRepository? =
+        networkTemplate?.let { NetworkCycleDataRepository(mContext, it) }
+
     private fun getDataUsageSummary(): String? {
-        val networkTemplate = networkTemplate ?: return null
-        val controller = dataUsageControllerFactory(mContext).apply {
-            setSubscriptionId(mSubId)
-        }
-        val usageInfo = controller.getDataUsageInfo(networkTemplate)
-        if (usageInfo != null && usageInfo.usageLevel > 0) {
+        val repository = createNetworkCycleDataRepository() ?: return null
+        repository.loadFirstCycle()?.takeIf { it.usage > 0 }?.let { usageData ->
             return mContext.getString(
                 R.string.data_usage_template,
-                DataUsageUtils.formatDataUsage(mContext, usageInfo.usageLevel),
-                usageInfo.period,
+                usageData.formatUsage(mContext),
+                usageData.formatDateRange(mContext),
             )
         }
 
-        return controller.getHistoricalUsageLevel(networkTemplate).takeIf { it > 0 }?.let {
-            mContext.getString(
-                R.string.data_used_template,
-                DataUsageUtils.formatDataUsage(mContext, it),
-            )
-        }
+        return repository.queryUsage(AllTimeRange).takeIf { it.usage > 0 }
+            ?.getDataUsedString(mContext)
     }
 }

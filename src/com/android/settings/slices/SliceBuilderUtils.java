@@ -28,6 +28,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.provider.SettingsSlicesContract;
 import android.text.TextUtils;
 import android.util.ArraySet;
@@ -50,6 +51,8 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.SliderPreferenceController;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.TogglePreferenceController;
+import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.Arrays;
@@ -84,6 +87,16 @@ public class SliceBuilderUtils {
 
         if (controller.getAvailabilityStatus() == DISABLED_DEPENDENT_SETTING) {
             return buildUnavailableSlice(context, sliceData);
+        }
+
+        String userRestriction = sliceData.getUserRestriction();
+        if (!TextUtils.isEmpty(userRestriction)) {
+            RestrictedLockUtils.EnforcedAdmin admin =
+                    RestrictedLockUtilsInternal.checkIfRestrictionEnforced(context,
+                            userRestriction, UserHandle.myUserId());
+            if (admin != null) {
+                return buildIntentSlice(context, sliceData, controller);
+            }
         }
 
         switch (sliceData.getSliceType()) {

@@ -19,6 +19,7 @@ package com.android.settings.spa.app.appinfo
 import android.app.ActivityManager
 import android.content.ComponentName
 import android.content.Context
+import android.content.om.OverlayManager
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
@@ -26,7 +27,9 @@ import com.android.settingslib.RestrictedLockUtils
 import com.android.settingslib.RestrictedLockUtilsInternal
 import com.android.settingslib.Utils
 import com.android.settingslib.spaprivileged.framework.common.devicePolicyManager
+import com.android.settingslib.spaprivileged.model.app.hasFlag
 import com.android.settingslib.spaprivileged.model.app.isDisallowControl
+import com.android.settingslib.spaprivileged.model.app.userHandle
 import com.android.settingslib.spaprivileged.model.app.userId
 
 class AppButtonRepository(private val context: Context) {
@@ -76,6 +79,55 @@ class AppButtonRepository(private val context: Context) {
         // e.g. named alternate package not found during lookup; this is an expected case sometimes
         false
     }
+
+    /** Gets whether a package can be uninstalled or archived. */
+    fun isAllowUninstallOrArchive(
+        context: Context, app: ApplicationInfo
+    ): Boolean {
+        val overlayManager = checkNotNull(context.getSystemService(OverlayManager::class.java))
+        when {
+            !app.hasFlag(ApplicationInfo.FLAG_INSTALLED) && !app.isArchived -> return false
+
+            com.android.settings.Utils.isProfileOrDeviceOwner(
+                context.devicePolicyManager, app.packageName, app.userId
+            ) -> return false
+
+            isDisallowControl(app) -> return false
+
+            uninstallDisallowedDueToHomeApp(app.packageName) -> return false
+
+            // Resource overlays can be uninstalled iff they are public (installed on /data) and
+            // disabled. ("Enabled" means they are in use by resource management.)
+            app.isEnabledResourceOverlay(overlayManager) -> return false
+
+            else -> return true
+        }
+    }
+
+    /**
+     * Checks whether the given package cannot be uninstalled due to home app restrictions.
+     *
+     * Home launcher apps need special handling, we can't allow uninstallation of the only home
+     * app, and we don't want to allow uninstallation of an explicitly preferred one -- the user
+     * can go to Home settings and pick a different one, after which we'll permit uninstallation
+     * of the now-not-default one.
+     */
+    private fun uninstallDisallowedDueToHomeApp(packageName: String): Boolean {
+        val homePackageInfo = getHomePackageInfo()
+        return when {
+            packageName !in homePackageInfo.homePackages -> false
+
+            // Disallow uninstall when this is the only home app.
+            homePackageInfo.homePackages.size == 1 -> true
+
+            // Disallow if this is the explicit default home app.
+            else -> packageName == homePackageInfo.currentDefaultHome?.packageName
+        }
+    }
+
+    private fun ApplicationInfo.isEnabledResourceOverlay(overlayManager: OverlayManager): Boolean =
+        isResourceOverlay &&
+            overlayManager.getOverlayInfo(packageName, userHandle)?.isEnabled == true
 
     data class HomePackages(
         val homePackages: Set<String>,

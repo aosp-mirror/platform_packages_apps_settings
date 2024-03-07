@@ -24,6 +24,7 @@ import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Process;
 import android.os.UserHandle;
 import android.view.LayoutInflater;
@@ -88,10 +89,11 @@ public final class ActionDisabledByAdminDialogHelper {
 
     public AlertDialog.Builder prepareDialogBuilder(String restriction,
             EnforcedAdmin enforcedAdmin) {
+        DialogInterface.OnClickListener listener = mActionDisabledByAdminController
+                .getPositiveButtonListener(mActivity, enforcedAdmin);
         AlertDialog.Builder builder = new AlertDialog.Builder(mActivity)
-                .setPositiveButton(R.string.suggestion_button_close,
-                        mActionDisabledByAdminController
-                                .getPositiveButtonListener(mActivity, enforcedAdmin))
+                .setPositiveButton(listener == null
+                        ? R.string.suggestion_button_close : R.string.okay, listener)
                 .setView(mDialogView);
         prepareDialogBuilder(builder, restriction, enforcedAdmin);
         return builder;

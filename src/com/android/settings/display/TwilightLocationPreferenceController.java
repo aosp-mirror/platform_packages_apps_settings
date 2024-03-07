@@ -39,7 +39,7 @@ public class TwilightLocationPreferenceController extends BasePreferenceControll
     public TwilightLocationPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         mLocationManager = context.getSystemService(LocationManager.class);
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     @Override

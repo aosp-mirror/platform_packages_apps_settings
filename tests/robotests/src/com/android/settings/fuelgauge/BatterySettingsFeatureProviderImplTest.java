@@ -47,4 +47,9 @@ public class BatterySettingsFeatureProviderImplTest {
     public void isFirstUseDateAvailable_returnFalse() {
         assertThat(mImpl.isFirstUseDateAvailable(mContext, 1000L)).isFalse();
     }
+
+    @Test
+    public void isBatteryInfoEnabled_returnFalse() {
+        assertThat(mImpl.isBatteryInfoEnabled(mContext)).isFalse();
+    }
 }

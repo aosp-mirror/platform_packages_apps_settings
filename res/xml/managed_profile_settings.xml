@@ -31,7 +31,7 @@
         settings:useAdditionalSummary="true"
         settings:controller="com.android.settings.accounts.ContactSearchPreferenceController"/>
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="cross_profile_calendar"
         android:summary="@string/cross_profile_calendar_summary"
         android:title="@string/cross_profile_calendar_title"

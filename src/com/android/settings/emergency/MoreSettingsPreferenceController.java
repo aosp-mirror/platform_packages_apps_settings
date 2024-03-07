@@ -111,7 +111,7 @@ public class MoreSettingsPreferenceController extends BasePreferenceController i
 
     @Override
     public void onClick(View v) {
-        FeatureFactory.getFactory(mContext).getMetricsFeatureProvider()
+        FeatureFactory.getFeatureFactory().getMetricsFeatureProvider()
                 .logClickedPreference(mPreference, getMetricsCategory());
         final Intent intent = new Intent(mIntent)
                 .addCategory(Intent.CATEGORY_LAUNCHER)

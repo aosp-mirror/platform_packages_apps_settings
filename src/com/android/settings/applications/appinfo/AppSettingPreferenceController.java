@@ -59,7 +59,7 @@ public class AppSettingPreferenceController extends AppInfoPreferenceControllerB
         if (intent == null) {
             return false;
         }
-        FeatureFactory.getFactory(mContext).getMetricsFeatureProvider()
+        FeatureFactory.getFeatureFactory().getMetricsFeatureProvider()
                 .action(SettingsEnums.PAGE_UNKNOWN,
                         SettingsEnums.ACTION_OPEN_APP_SETTING,
                         mParent.getMetricsCategory(),

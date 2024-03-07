@@ -33,19 +33,24 @@ import androidx.lifecycle.LifecycleObserver;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.flags.Flags;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settingslib.PrimarySwitchPreference;
 import com.android.settingslib.RestrictedSwitchPreference;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Populates the PreferenceCategory with notification channels associated with the given app.
@@ -61,6 +66,9 @@ public class AppChannelsBypassingDndPreferenceController extends NotificationPre
     private RestrictedSwitchPreference mAllNotificationsToggle;
     private PreferenceCategory mPreferenceCategory;
     private List<NotificationChannel> mChannels = new ArrayList<>();
+    private Set<String> mDuplicateChannelNames = new HashSet<>();
+    private Map<NotificationChannel, String> mChannelGroupNames =
+            new HashMap<NotificationChannel, String>();
 
     public AppChannelsBypassingDndPreferenceController(
             Context context,
@@ -81,7 +89,7 @@ public class AppChannelsBypassingDndPreferenceController extends NotificationPre
                 new Preference.OnPreferenceClickListener() {
                     @Override
                     public boolean onPreferenceClick(Preference pref) {
-                        SwitchPreference preference = (SwitchPreference) pref;
+                        TwoStatePreference preference = (TwoStatePreference) pref;
                         final boolean bypassDnd = preference.isChecked();
                         for (NotificationChannel channel : mChannels) {
                             if (showNotification(channel) && isChannelConfigurable(channel)) {
@@ -135,10 +143,20 @@ public class AppChannelsBypassingDndPreferenceController extends NotificationPre
                 List<NotificationChannel> newChannelList = new ArrayList<>();
                 List<NotificationChannelGroup> mChannelGroupList = mBackend.getGroups(mAppRow.pkg,
                         mAppRow.uid).getList();
+                Set<String> allChannelNames = new HashSet<>();
                 for (NotificationChannelGroup channelGroup : mChannelGroupList) {
                     for (NotificationChannel channel : channelGroup.getChannels()) {
                         if (!isConversation(channel)) {
                             newChannelList.add(channel);
+                            if (Flags.dedupeDndSettingsChannels()) {
+                                mChannelGroupNames.put(channel, channelGroup.getName().toString());
+                                // Check if channel name is unique on this page; if not, save it.
+                                if (allChannelNames.contains(channel.getName())) {
+                                    mDuplicateChannelNames.add(channel.getName().toString());
+                                } else {
+                                    allChannelNames.add(channel.getName().toString());
+                                }
+                            }
                         }
                     }
                 }
@@ -172,6 +190,17 @@ public class AppChannelsBypassingDndPreferenceController extends NotificationPre
                             && isChannelConfigurable(channel)
                             && showNotification(channel));
             channelPreference.setTitle(BidiFormatter.getInstance().unicodeWrap(channel.getName()));
+            if (Flags.dedupeDndSettingsChannels()) {
+                // If the channel shares its name with another channel, set group name as summary
+                // to disambiguate in the list.
+                if (mDuplicateChannelNames.contains(channel.getName().toString())
+                        && mChannelGroupNames.containsKey(channel)
+                        && mChannelGroupNames.get(channel) != null
+                        && !mChannelGroupNames.get(channel).isEmpty()) {
+                    channelPreference.setSummary(BidiFormatter.getInstance().unicodeWrap(
+                            mChannelGroupNames.get(channel)));
+                }
+            }
             channelPreference.setChecked(showNotificationInDnd(channel));
             channelPreference.setOnPreferenceChangeListener(
                     new Preference.OnPreferenceChangeListener() {

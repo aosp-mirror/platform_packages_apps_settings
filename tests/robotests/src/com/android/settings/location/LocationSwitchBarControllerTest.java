@@ -85,14 +85,14 @@ public class LocationSwitchBarControllerTest {
 
     @Test
     public void onSwitchChanged_switchChecked_shouldSetLocationEnabled() {
-        mController.onSwitchChanged(mSwitch, true);
+        mController.onCheckedChanged(mSwitch, true);
 
         verify(mEnabler).setLocationEnabled(true);
     }
 
     @Test
     public void onSwitchChanged_switchUnchecked_shouldSetLocationDisabled() {
-        mController.onSwitchChanged(mSwitch, false);
+        mController.onCheckedChanged(mSwitch, false);
 
         verify(mEnabler).setLocationEnabled(false);
     }

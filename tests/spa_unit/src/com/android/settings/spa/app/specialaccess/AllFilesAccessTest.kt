@@ -33,33 +33,12 @@ class AllFilesAccessTest {
     private val listModel = AllFilesAccessListModel(context)
 
     @Test
-    fun pageTitleResId() {
+    fun modelResourceIdAndProperties() {
         assertThat(listModel.pageTitleResId).isEqualTo(R.string.manage_external_storage_title)
-    }
-
-    @Test
-    fun switchTitleResId() {
         assertThat(listModel.switchTitleResId).isEqualTo(R.string.permit_manage_external_storage)
-    }
-
-    @Test
-    fun footerResId() {
-        assertThat(listModel.footerResId)
-            .isEqualTo(R.string.allow_manage_external_storage_description)
-    }
-
-    @Test
-    fun appOp() {
+        assertThat(listModel.footerResId).isEqualTo(R.string.allow_manage_external_storage_description)
         assertThat(listModel.appOp).isEqualTo(AppOpsManager.OP_MANAGE_EXTERNAL_STORAGE)
-    }
-
-    @Test
-    fun permission() {
         assertThat(listModel.permission).isEqualTo(Manifest.permission.MANAGE_EXTERNAL_STORAGE)
-    }
-
-    @Test
-    fun setModeByUid() {
         assertThat(listModel.setModeByUid).isTrue()
     }
 }

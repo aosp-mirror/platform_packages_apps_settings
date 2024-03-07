@@ -51,7 +51,10 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = ShadowSettingsLibUtils.class)
+@Config(shadows = {
+        ShadowSettingsLibUtils.class,
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class AppHeaderViewPreferenceControllerTest {
 
     @Mock
@@ -76,7 +79,8 @@ public class AppHeaderViewPreferenceControllerTest {
         mActivity = spy(Robolectric.buildActivity(FragmentActivity.class).get());
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
-        mHeader = LayoutInflater.from(mContext).inflate(R.layout.settings_entity_header, null);
+        mHeader = LayoutInflater.from(mContext).inflate(
+                com.android.settingslib.widget.preference.layout.R.layout.settings_entity_header, null);
 
         when(mFragment.getActivity()).thenReturn(mActivity);
         when(mScreen.findPreference(anyString())).thenReturn(mPreference);

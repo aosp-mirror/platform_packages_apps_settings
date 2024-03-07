@@ -45,19 +45,18 @@ public class AnomalyEventWrapperTest {
 
     @Test
     public void getDismissRecordKey_returnExpectedResult() {
-        mAnomalyEventWrapper = new AnomalyEventWrapper(mContext,
-                BatteryTestUtils.createAdaptiveBrightnessAnomalyEvent());
-        assertThat(mAnomalyEventWrapper.getDismissRecordKey())
-                .isEqualTo("KEY_BRIGHTNESS");
+        mAnomalyEventWrapper =
+                new AnomalyEventWrapper(
+                        mContext, BatteryTestUtils.createAdaptiveBrightnessAnomalyEvent());
+        assertThat(mAnomalyEventWrapper.getDismissRecordKey()).isEqualTo("KEY_BRIGHTNESS");
 
-        mAnomalyEventWrapper = new AnomalyEventWrapper(mContext,
-                BatteryTestUtils.createScreenTimeoutAnomalyEvent());
-        assertThat(mAnomalyEventWrapper.getDismissRecordKey())
-                .isEqualTo("KEY_SCREEN_TIMEOUT");
+        mAnomalyEventWrapper =
+                new AnomalyEventWrapper(
+                        mContext, BatteryTestUtils.createScreenTimeoutAnomalyEvent());
+        assertThat(mAnomalyEventWrapper.getDismissRecordKey()).isEqualTo("KEY_SCREEN_TIMEOUT");
 
-        mAnomalyEventWrapper = new AnomalyEventWrapper(mContext,
-                BatteryTestUtils.createAppAnomalyEvent());
-        assertThat(mAnomalyEventWrapper.getDismissRecordKey())
-                .isEqualTo("KEY_APP_1");
+        mAnomalyEventWrapper =
+                new AnomalyEventWrapper(mContext, BatteryTestUtils.createAppAnomalyEvent());
+        assertThat(mAnomalyEventWrapper.getDismissRecordKey()).isEqualTo("KEY_APP_1");
     }
 }

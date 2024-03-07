@@ -104,7 +104,7 @@ public class NightDisplayActivationPreferenceControllerTest {
 
         final NightDisplayActivationPreferenceController controller =
                 new NightDisplayActivationPreferenceController(mContext, "night_display_activated");
-        controller.onSwitchChanged(null, true);
+        controller.onCheckedChanged(null, true);
 
         assertThat(mColorDisplayManager.isNightDisplayActivated()).isEqualTo(true);
     }
@@ -115,7 +115,7 @@ public class NightDisplayActivationPreferenceControllerTest {
 
         final NightDisplayActivationPreferenceController controller =
                 new NightDisplayActivationPreferenceController(mContext, "night_display_activated");
-        controller.onSwitchChanged(null, false);
+        controller.onCheckedChanged(null, false);
 
         assertThat(mColorDisplayManager.isNightDisplayActivated()).isEqualTo(false);
     }

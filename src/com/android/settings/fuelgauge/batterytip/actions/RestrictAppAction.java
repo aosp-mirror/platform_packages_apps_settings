@@ -31,15 +31,11 @@ import com.android.settings.fuelgauge.batterytip.tips.RestrictAppTip;
 
 import java.util.List;
 
-/**
- * Action to restrict the apps, then app is not allowed to run in the background.
- */
+/** Action to restrict the apps, then app is not allowed to run in the background. */
 public class RestrictAppAction extends BatteryTipAction {
     private RestrictAppTip mRestrictAppTip;
-    @VisibleForTesting
-    BatteryDatabaseManager mBatteryDatabaseManager;
-    @VisibleForTesting
-    BatteryUtils mBatteryUtils;
+    @VisibleForTesting BatteryDatabaseManager mBatteryDatabaseManager;
+    @VisibleForTesting BatteryUtils mBatteryUtils;
 
     public RestrictAppAction(Context context, RestrictAppTip tip) {
         super(context);
@@ -48,9 +44,7 @@ public class RestrictAppAction extends BatteryTipAction {
         mBatteryDatabaseManager = BatteryDatabaseManager.getInstance(context);
     }
 
-    /**
-     * Handle the action when user clicks positive button
-     */
+    /** Handle the action when user clicks positive button */
     @Override
     public void handlePositiveAction(int metricsKey) {
         final List<AppInfo> appInfos = mRestrictAppTip.getRestrictAppList();
@@ -59,18 +53,19 @@ public class RestrictAppAction extends BatteryTipAction {
             final AppInfo appInfo = appInfos.get(i);
             final String packageName = appInfo.packageName;
             // Force app standby, then app can't run in the background
-            mBatteryUtils.setForceAppStandby(appInfo.uid, packageName,
-                    AppOpsManager.MODE_IGNORED);
+            mBatteryUtils.setForceAppStandby(appInfo.uid, packageName, AppOpsManager.MODE_IGNORED);
             if (CollectionUtils.isEmpty(appInfo.anomalyTypes)) {
                 // Only log context if there is no anomaly type
-                mMetricsFeatureProvider.action(SettingsEnums.PAGE_UNKNOWN,
+                mMetricsFeatureProvider.action(
+                        SettingsEnums.PAGE_UNKNOWN,
                         SettingsEnums.ACTION_TIP_RESTRICT_APP,
                         metricsKey,
                         packageName,
                         0);
             } else {
                 for (int type : appInfo.anomalyTypes) {
-                    mMetricsFeatureProvider.action(SettingsEnums.PAGE_UNKNOWN,
+                    mMetricsFeatureProvider.action(
+                            SettingsEnums.PAGE_UNKNOWN,
                             SettingsEnums.ACTION_TIP_RESTRICT_APP,
                             metricsKey,
                             packageName,

@@ -39,6 +39,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 
+import com.android.internal.telephony.flags.Flags;
 import com.android.settings.R;
 import com.android.settings.network.SubscriptionUtil;
 
@@ -56,7 +57,8 @@ public class SimListDialogFragment extends SimDialogFragment {
 
     protected SelectSubscriptionAdapter mAdapter;
     @VisibleForTesting
-    List<SubscriptionInfo> mSubscriptions;
+    @NonNull
+    List<SubscriptionInfo> mSubscriptions = new ArrayList<>();
 
     public static SimListDialogFragment newInstance(int dialogType, int titleResId,
             boolean includeAskEveryTime, boolean isCancelItemShowed) {
@@ -71,8 +73,6 @@ public class SimListDialogFragment extends SimDialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        mSubscriptions = new ArrayList<>();
-
         final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         View titleView = LayoutInflater.from(getContext()).inflate(
                 R.layout.sim_confirm_dialog_title_multiple_enabled_profiles_supported, null);
@@ -142,9 +142,10 @@ public class SimListDialogFragment extends SimDialogFragment {
             return;
         }
 
-        // Remove the provision eSIM from the subscription list.
+        // Remove the provisioning or satellite eSIM from the subscription list.
         currentSubscriptions.removeIf(info -> info.isEmbedded()
-                && info.getProfileClass() == PROFILE_CLASS_PROVISIONING);
+            && (info.getProfileClass() == PROFILE_CLASS_PROVISIONING
+                || (Flags.oemEnabledSatelliteFlag() && info.isOnlyNonTerrestrialNetwork())));
 
         boolean includeAskEveryTime = getArguments().getBoolean(KEY_INCLUDE_ASK_EVERY_TIME);
         boolean isCancelItemShowed = getArguments().getBoolean(KEY_SHOW_CANCEL_ITEM);

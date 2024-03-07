@@ -23,7 +23,6 @@ import static org.mockito.Mockito.spy;
 import android.content.Context;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
@@ -34,25 +33,24 @@ import org.robolectric.annotation.Config;
 @RunWith(RobolectricTestRunner.class)
 public class PointerSpeedControllerTest {
 
-    private Context mContext;
-    private PointerSpeedController mController;
+  private Context mContext;
+  private PointerSpeedController mController;
 
-    @Before
-    public void setUp() {
-        MockitoAnnotations.initMocks(this);
-        mContext = spy(RuntimeEnvironment.application.getApplicationContext());
-        mController = new PointerSpeedController(mContext);
-    }
+  @Before
+  public void setUp() {
+    MockitoAnnotations.initMocks(this);
+    mContext = spy(RuntimeEnvironment.application.getApplicationContext());
+    mController = new PointerSpeedController(mContext);
+  }
 
-    @Test
-    public void testDeviceAdministrators_byDefault_shouldBeShown() {
-        assertThat(mController.isAvailable()).isTrue();
-    }
+  @Test
+  public void testDeviceAdministrators_byDefault_shouldBeShown() {
+    assertThat(mController.isAvailable()).isTrue();
+  }
 
-    @Ignore
-    @Test
-    @Config(qualifiers = "mcc999")
-    public void testDeviceAdministrators_ifDisabled_shouldNotBeShown() {
-        assertThat(mController.isAvailable()).isFalse();
-    }
+  @Test
+  @Config(qualifiers = "mcc999")
+  public void testDeviceAdministrators_ifDisabled_shouldNotBeShown() {
+    assertThat(mController.isAvailable()).isFalse();
+  }
 }

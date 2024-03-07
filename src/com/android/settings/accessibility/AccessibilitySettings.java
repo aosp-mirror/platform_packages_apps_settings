@@ -79,7 +79,6 @@ public class AccessibilitySettings extends DashboardFragment {
     static final String EXTRA_PREFERENCE_KEY = "preference_key";
     static final String EXTRA_CHECKED = "checked";
     static final String EXTRA_TITLE = "title";
-    static final String EXTRA_TITLE_RES = "title_res";
     static final String EXTRA_RESOLVE_INFO = "resolve_info";
     static final String EXTRA_SUMMARY = "summary";
     static final String EXTRA_INTRO = "intro";
@@ -87,7 +86,6 @@ public class AccessibilitySettings extends DashboardFragment {
     static final String EXTRA_COMPONENT_NAME = "component_name";
     static final String EXTRA_SETTINGS_COMPONENT_NAME = "settings_component_name";
     static final String EXTRA_TILE_SERVICE_COMPONENT_NAME = "tile_service_component_name";
-    static final String EXTRA_VIDEO_RAW_RESOURCE_ID = "video_resource";
     static final String EXTRA_LAUNCHED_FROM_SUW = "from_suw";
     static final String EXTRA_ANIMATED_IMAGE_RES = "animated_image_res";
     static final String EXTRA_HTML_DESCRIPTION = "html_description";
@@ -248,7 +246,7 @@ public class AccessibilitySettings extends DashboardFragment {
      * @return The service summary
      */
     public static CharSequence getServiceSummary(Context context, AccessibilityServiceInfo info,
-            boolean serviceEnabled) {
+                                                 boolean serviceEnabled) {
         if (serviceEnabled && info.crashed) {
             return context.getText(R.string.accessibility_summary_state_stopped);
         }
@@ -263,11 +261,11 @@ public class AccessibilitySettings extends DashboardFragment {
                     context, componentName) != AccessibilityUtil.UserShortcutType.EMPTY;
             serviceState = shortcutEnabled
                     ? context.getText(R.string.accessibility_summary_shortcut_enabled)
-                    : context.getText(R.string.accessibility_summary_shortcut_disabled);
+                    : context.getText(R.string.generic_accessibility_feature_shortcut_off);
         } else {
             serviceState = serviceEnabled
-                    ? context.getText(R.string.accessibility_summary_state_enabled)
-                    : context.getText(R.string.accessibility_summary_state_disabled);
+                    ? context.getText(R.string.generic_accessibility_service_on)
+                    : context.getText(R.string.generic_accessibility_service_off);
         }
 
         final CharSequence serviceSummary = info.loadSummary(context.getPackageManager());
@@ -516,7 +514,7 @@ public class AccessibilitySettings extends DashboardFragment {
                 @Override
                 public List<SearchIndexableRaw> getRawDataToIndex(Context context,
                         boolean enabled) {
-                    return FeatureFactory.getFactory(context)
+                    return FeatureFactory.getFeatureFactory()
                             .getAccessibilitySearchFeatureProvider().getSearchIndexableRawData(
                                     context);
                 }

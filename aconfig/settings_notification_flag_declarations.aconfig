@@ -1,0 +1,9 @@
+package: "com.android.settings.flags"
+
+flag {
+  name: "dedupe_dnd_settings_channels"
+  namespace: "systemui"
+  description: "Controls adding group names to channel names in the DND>Apps settings page"
+  bug: "294333850"
+}
+

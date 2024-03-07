@@ -34,7 +34,7 @@ public class WorkPolicyInfoPreferenceController extends BasePreferenceController
     public WorkPolicyInfoPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         mEnterpriseProvider =
-                FeatureFactory.getFactory(context).getEnterprisePrivacyFeatureProvider(context);
+                FeatureFactory.getFeatureFactory().getEnterprisePrivacyFeatureProvider();
     }
 
     @Override

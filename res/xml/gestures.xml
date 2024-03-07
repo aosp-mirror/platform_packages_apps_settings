@@ -21,12 +21,6 @@
     android:title="@string/gesture_preference_title">
 
     <Preference
-        android:key="gesture_assist_input_summary"
-        android:title="@string/assist_gesture_title"
-        android:fragment="com.android.settings.gestures.AssistGestureSettings"
-        settings:controller="com.android.settings.gestures.AssistGestureSettingsPreferenceController" />
-
-    <Preference
         android:key="gesture_swipe_down_fingerprint_input_summary"
         android:title="@string/fingerprint_swipe_for_notifications_title"
         android:fragment="com.android.settings.gestures.SwipeToNotificationSettings"

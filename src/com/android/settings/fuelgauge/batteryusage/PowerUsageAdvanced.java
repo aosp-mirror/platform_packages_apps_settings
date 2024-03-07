@@ -61,8 +61,8 @@ public class PowerUsageAdvanced extends PowerUsageBase {
     private static final String KEY_REFRESH_TYPE = "refresh_type";
     private static final String KEY_BATTERY_CHART = "battery_chart";
 
-    @VisibleForTesting
-    BatteryHistoryPreference mHistPref;
+    @VisibleForTesting BatteryHistoryPreference mHistPref;
+
     @VisibleForTesting
     final BatteryLevelDataLoaderCallbacks mBatteryLevelDataLoaderCallbacks =
             new BatteryLevelDataLoaderCallbacks();
@@ -79,23 +79,16 @@ public class PowerUsageAdvanced extends PowerUsageBase {
                 public void onChange(boolean selfChange) {
                     Log.d(TAG, "onBatteryContentChange: " + selfChange);
                     mIsChartDataLoaded = false;
-                    restartBatteryStatsLoader(
-                            BatteryBroadcastReceiver.BatteryUpdateType.MANUAL);
+                    restartBatteryStatsLoader(BatteryBroadcastReceiver.BatteryUpdateType.MANUAL);
                 }
             };
 
-    @VisibleForTesting
-    BatteryTipsController mBatteryTipsController;
-    @VisibleForTesting
-    BatteryChartPreferenceController mBatteryChartPreferenceController;
-    @VisibleForTesting
-    ScreenOnTimeController mScreenOnTimeController;
-    @VisibleForTesting
-    BatteryUsageBreakdownController mBatteryUsageBreakdownController;
-    @VisibleForTesting
-    Optional<BatteryLevelData> mBatteryLevelData;
-    @VisibleForTesting
-    Optional<AnomalyEventWrapper> mHighlightEventWrapper;
+    @VisibleForTesting BatteryTipsController mBatteryTipsController;
+    @VisibleForTesting BatteryChartPreferenceController mBatteryChartPreferenceController;
+    @VisibleForTesting ScreenOnTimeController mScreenOnTimeController;
+    @VisibleForTesting BatteryUsageBreakdownController mBatteryUsageBreakdownController;
+    @VisibleForTesting Optional<BatteryLevelData> mBatteryLevelData;
+    @VisibleForTesting Optional<AnomalyEventWrapper> mHighlightEventWrapper;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -146,8 +139,9 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         mResumeTimestamp = System.currentTimeMillis();
         final Uri uri = DatabaseUtils.BATTERY_CONTENT_URI;
         if (uri != null) {
-            getContext().getContentResolver().registerContentObserver(
-                    uri, /*notifyForDescendants*/ true, mBatteryObserver);
+            getContext()
+                    .getContentResolver()
+                    .registerContentObserver(uri, /*notifyForDescendants*/ true, mBatteryObserver);
         }
     }
 
@@ -190,7 +184,9 @@ public class PowerUsageAdvanced extends PowerUsageBase {
             mBatteryLevelData = null;
             mBatteryUsageMap = null;
             mHighlightEventWrapper = null;
-            restartLoader(LoaderIndex.BATTERY_LEVEL_DATA_LOADER, bundle,
+            restartLoader(
+                    LoaderIndex.BATTERY_LEVEL_DATA_LOADER,
+                    bundle,
                     mBatteryLevelDataLoaderCallbacks);
         }
     }
@@ -202,8 +198,11 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         mBatteryLevelData = Optional.ofNullable(batteryLevelData);
         if (mBatteryChartPreferenceController != null) {
             mBatteryChartPreferenceController.onBatteryLevelDataUpdate(batteryLevelData);
-            Log.d(TAG, String.format("Battery chart shows in %d millis",
-                    System.currentTimeMillis() - mResumeTimestamp));
+            Log.d(
+                    TAG,
+                    String.format(
+                            "Battery chart shows in %d millis",
+                            System.currentTimeMillis() - mResumeTimestamp));
         }
     }
 
@@ -211,15 +210,17 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         if (!isResumed() || mBatteryLevelData == null) {
             return;
         }
-        mBatteryUsageMap = DataProcessor.generateBatteryUsageMap(
-                getContext(), batteryDiffDataMap, mBatteryLevelData.orElse(null));
+        mBatteryUsageMap =
+                DataProcessor.generateBatteryUsageMap(
+                        getContext(), batteryDiffDataMap, mBatteryLevelData.orElse(null));
         Log.d(TAG, "onBatteryDiffDataMapUpdate: " + mBatteryUsageMap);
         DataProcessor.loadLabelAndIcon(mBatteryUsageMap);
         onSelectedSlotDataUpdated();
         detectAnomaly();
         logScreenUsageTime();
         if (mBatteryChartPreferenceController != null
-                && mBatteryLevelData.isEmpty() && isBatteryUsageMapNullOrEmpty()) {
+                && mBatteryLevelData.isEmpty()
+                && isBatteryUsageMapNullOrEmpty()) {
             // No available battery usage and battery level data.
             mBatteryChartPreferenceController.showEmptyChart();
         }
@@ -236,31 +237,37 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         final int hourlyIndex = mBatteryChartPreferenceController.getHourlyChartIndex();
         final String slotInformation = mBatteryChartPreferenceController.getSlotInformation();
         final BatteryDiffData slotUsageData = mBatteryUsageMap.get(dailyIndex).get(hourlyIndex);
-        if (slotUsageData != null) {
-            mScreenOnTimeController.handleSceenOnTimeUpdated(
-                    slotUsageData.getScreenOnTime(), slotInformation);
-        }
+        mScreenOnTimeController.handleSceenOnTimeUpdated(
+                slotUsageData != null ? slotUsageData.getScreenOnTime() : 0L, slotInformation);
         // Hide card tips if the related highlight slot was clicked.
         if (isAppsAnomalyEventFocused()) {
             mBatteryTipsController.acceptTipsCard();
         }
         mBatteryUsageBreakdownController.handleBatteryUsageUpdated(
-                slotUsageData, slotInformation, isBatteryUsageMapNullOrEmpty(),
-                isAppsAnomalyEventFocused(), mHighlightEventWrapper);
-        Log.d(TAG, String.format("Battery usage list shows in %d millis",
-                System.currentTimeMillis() - mResumeTimestamp));
+                slotUsageData,
+                slotInformation,
+                isBatteryUsageMapNullOrEmpty(),
+                isAppsAnomalyEventFocused(),
+                mHighlightEventWrapper);
+        Log.d(
+                TAG,
+                String.format(
+                        "Battery usage list shows in %d millis",
+                        System.currentTimeMillis() - mResumeTimestamp));
     }
 
     private void detectAnomaly() {
-        mExecutor.execute(() -> {
-            final PowerUsageFeatureProvider powerUsageFeatureProvider =
-                    FeatureFactory.getFactory(getContext())
-                            .getPowerUsageFeatureProvider(getContext());
-            final PowerAnomalyEventList anomalyEventList =
-                    powerUsageFeatureProvider.detectSettingsAnomaly(
-                            getContext(), /* displayDrain= */ 0);
-            mHandler.post(() -> onAnomalyDetected(anomalyEventList));
-        });
+        mExecutor.execute(
+                () -> {
+                    final PowerUsageFeatureProvider powerUsageFeatureProvider =
+                            FeatureFactory.getFeatureFactory().getPowerUsageFeatureProvider();
+                    final PowerAnomalyEventList anomalyEventList =
+                            powerUsageFeatureProvider.detectSettingsAnomaly(
+                                    getContext(),
+                                    /* displayDrain= */ 0,
+                                    DetectRequestSourceType.TYPE_USAGE_UI);
+                    mHandler.post(() -> onAnomalyDetected(anomalyEventList));
+                });
     }
 
     private void onAnomalyDetected(PowerAnomalyEventList anomalyEventList) {
@@ -280,9 +287,12 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         // If the slot is already highlighted, the tips card should be the corresponding app
         // or settings anomaly event.
         final PowerAnomalyEvent tipsCardEvent =
-                getAnomalyEvent(anomalyEventList,
-                        event -> !dismissedPowerAnomalyKeys.contains(event.getDismissRecordKey())
-                                && (event.equals(highlightEvent) || !event.hasWarningItemInfo()));
+                getAnomalyEvent(
+                        anomalyEventList,
+                        event ->
+                                !dismissedPowerAnomalyKeys.contains(event.getDismissRecordKey())
+                                        && (event.equals(highlightEvent)
+                                                || !event.hasWarningItemInfo()));
         onDisplayAnomalyEventUpdated(tipsCardEvent, highlightEvent);
     }
 
@@ -299,8 +309,10 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         // Update battery tips card preference & behaviour
         mBatteryTipsController.setOnAnomalyConfirmListener(null);
         mBatteryTipsController.setOnAnomalyRejectListener(null);
-        final AnomalyEventWrapper tipsCardEventWrapper = (tipsCardEvent == null) ? null :
-                new AnomalyEventWrapper(getContext(), tipsCardEvent);
+        final AnomalyEventWrapper tipsCardEventWrapper =
+                (tipsCardEvent == null)
+                        ? null
+                        : new AnomalyEventWrapper(getContext(), tipsCardEvent);
         if (tipsCardEventWrapper != null) {
             tipsCardEventWrapper.setRelatedBatteryDiffEntry(
                     findRelatedBatteryDiffEntry(tipsCardEventWrapper));
@@ -309,23 +321,30 @@ public class PowerUsageAdvanced extends PowerUsageBase {
                 tipsCardEventWrapper, isSameAnomalyEvent);
 
         // Update highlight slot effect in battery chart view
-        Pair<Integer, Integer> highlightSlotIndexPair = Pair.create(
-                BatteryChartViewModel.SELECTED_INDEX_INVALID,
-                BatteryChartViewModel.SELECTED_INDEX_INVALID);
-        mHighlightEventWrapper = Optional.ofNullable(isSameAnomalyEvent ? tipsCardEventWrapper :
-                ((highlightEvent != null)
-                        ? new AnomalyEventWrapper(getContext(), highlightEvent) : null));
-        if (mBatteryLevelData != null && mBatteryLevelData.isPresent()
+        Pair<Integer, Integer> highlightSlotIndexPair =
+                Pair.create(
+                        BatteryChartViewModel.SELECTED_INDEX_INVALID,
+                        BatteryChartViewModel.SELECTED_INDEX_INVALID);
+        mHighlightEventWrapper =
+                Optional.ofNullable(
+                        isSameAnomalyEvent
+                                ? tipsCardEventWrapper
+                                : ((highlightEvent != null)
+                                        ? new AnomalyEventWrapper(getContext(), highlightEvent)
+                                        : null));
+        if (mBatteryLevelData != null
+                && mBatteryLevelData.isPresent()
                 && mHighlightEventWrapper.isPresent()
                 && mHighlightEventWrapper.get().hasHighlightSlotPair(mBatteryLevelData.get())) {
-            highlightSlotIndexPair = mHighlightEventWrapper.get()
-                    .getHighlightSlotPair(mBatteryLevelData.get());
+            highlightSlotIndexPair =
+                    mHighlightEventWrapper.get().getHighlightSlotPair(mBatteryLevelData.get());
             if (isSameAnomalyEvent) {
                 // For main button, focus on highlight slot when clicked
-                mBatteryTipsController.setOnAnomalyConfirmListener(() -> {
-                    mBatteryChartPreferenceController.selectHighlightSlotIndex();
-                    mBatteryTipsController.acceptTipsCard();
-                });
+                mBatteryTipsController.setOnAnomalyConfirmListener(
+                        () -> {
+                            mBatteryChartPreferenceController.selectHighlightSlotIndex();
+                            mBatteryTipsController.acceptTipsCard();
+                        });
             }
         }
         mBatteryChartPreferenceController.onHighlightSlotIndexUpdate(
@@ -335,7 +354,8 @@ public class PowerUsageAdvanced extends PowerUsageBase {
     @VisibleForTesting
     BatteryDiffEntry findRelatedBatteryDiffEntry(AnomalyEventWrapper eventWrapper) {
         if (eventWrapper == null
-                || mBatteryLevelData == null || mBatteryLevelData.isEmpty()
+                || mBatteryLevelData == null
+                || mBatteryLevelData.isEmpty()
                 || !eventWrapper.hasHighlightSlotPair(mBatteryLevelData.get())
                 || !eventWrapper.hasAnomalyEntryKey()
                 || mBatteryUsageMap == null) {
@@ -343,8 +363,10 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         }
         final Pair<Integer, Integer> highlightSlotIndexPair =
                 eventWrapper.getHighlightSlotPair(mBatteryLevelData.get());
-        final BatteryDiffData relatedDiffData = mBatteryUsageMap
-                .get(highlightSlotIndexPair.first).get(highlightSlotIndexPair.second);
+        final BatteryDiffData relatedDiffData =
+                mBatteryUsageMap
+                        .get(highlightSlotIndexPair.first)
+                        .get(highlightSlotIndexPair.second);
         final String anomalyEntryKey = eventWrapper.getAnomalyEntryKey();
         if (relatedDiffData == null || anomalyEntryKey == null) {
             return null;
@@ -368,7 +390,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         // If all data is null or empty, each slot must be null or empty.
         return allBatteryDiffData == null
                 || (allBatteryDiffData.getAppDiffEntryList().isEmpty()
-                && allBatteryDiffData.getSystemDiffEntryList().isEmpty());
+                        && allBatteryDiffData.getSystemDiffEntryList().isEmpty());
     }
 
     private boolean isAppsAnomalyEventFocused() {
@@ -402,21 +424,22 @@ public class PowerUsageAdvanced extends PowerUsageBase {
             return null;
         }
 
-        final PowerAnomalyEvent filterAnomalyEvent = anomalyEventList.getPowerAnomalyEventsList()
-                .stream()
-                .filter(predicate)
-                .max(Comparator.comparing(PowerAnomalyEvent::getScore))
-                .orElse(null);
+        final PowerAnomalyEvent filterAnomalyEvent =
+                anomalyEventList.getPowerAnomalyEventsList().stream()
+                        .filter(predicate)
+                        .max(Comparator.comparing(PowerAnomalyEvent::getScore))
+                        .orElse(null);
         Log.d(TAG, "filterAnomalyEvent = " + filterAnomalyEvent);
         return filterAnomalyEvent;
     }
 
-
     private static BatteryDiffData getAllBatteryDiffData(
             Map<Integer, Map<Integer, BatteryDiffData>> batteryUsageMap) {
-        return batteryUsageMap == null ? null : batteryUsageMap
-                .get(BatteryChartViewModel.SELECTED_INDEX_ALL)
-                .get(BatteryChartViewModel.SELECTED_INDEX_ALL);
+        return batteryUsageMap == null
+                ? null
+                : batteryUsageMap
+                        .get(BatteryChartViewModel.SELECTED_INDEX_ALL)
+                        .get(BatteryChartViewModel.SELECTED_INDEX_ALL);
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
@@ -433,12 +456,16 @@ public class PowerUsageAdvanced extends PowerUsageBase {
                 public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
                     final List<AbstractPreferenceController> controllers = new ArrayList<>();
-                    controllers.add(new BatteryChartPreferenceController(
-                            context, null /* lifecycle */, null /* activity */));
+                    controllers.add(
+                            new BatteryChartPreferenceController(
+                                    context, null /* lifecycle */, null /* activity */));
                     controllers.add((new ScreenOnTimeController(context)));
-                    controllers.add(new BatteryUsageBreakdownController(
-                            context, null /* lifecycle */, null /* activity */,
-                            null /* fragment */));
+                    controllers.add(
+                            new BatteryUsageBreakdownController(
+                                    context,
+                                    null /* lifecycle */,
+                                    null /* activity */,
+                                    null /* fragment */));
                     controllers.add(new BatteryTipsController(context));
                     return controllers;
                 }
@@ -455,20 +482,21 @@ public class PowerUsageAdvanced extends PowerUsageBase {
                 @Override
                 public BatteryLevelData loadInBackground() {
                     return DataProcessManager.getBatteryLevelData(
-                            getContext(), mHandler, /*isFromPeriodJob=*/ false,
+                            getContext(),
+                            mHandler,
+                            /* isFromPeriodJob= */ false,
                             PowerUsageAdvanced.this::onBatteryDiffDataMapUpdate);
                 }
             };
         }
 
         @Override
-        public void onLoadFinished(Loader<BatteryLevelData> loader,
-                BatteryLevelData batteryLevelData) {
+        public void onLoadFinished(
+                Loader<BatteryLevelData> loader, BatteryLevelData batteryLevelData) {
             PowerUsageAdvanced.this.onBatteryLevelDataUpdate(batteryLevelData);
         }
 
         @Override
-        public void onLoaderReset(Loader<BatteryLevelData> loader) {
-        }
+        public void onLoaderReset(Loader<BatteryLevelData> loader) {}
     }
 }

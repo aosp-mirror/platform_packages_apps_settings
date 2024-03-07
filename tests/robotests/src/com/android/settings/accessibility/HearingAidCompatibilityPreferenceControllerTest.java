@@ -46,9 +46,13 @@ import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 /** Tests for {@link HearingAidCompatibilityPreferenceControllerTest}. */
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowAudioManager.class,
+})
 public class HearingAidCompatibilityPreferenceControllerTest {
 
     @Rule
@@ -115,7 +119,7 @@ public class HearingAidCompatibilityPreferenceControllerTest {
 
         assertThat(Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.HEARING_AID, HAC_DISABLED)).isEqualTo(HAC_ENABLED);
-        verify(mAudioManager).setParameters("HACSetting=ON");
+        verify(mAudioManager).setParameters("HACSetting=ON;");
     }
 
     @Test
@@ -124,7 +128,7 @@ public class HearingAidCompatibilityPreferenceControllerTest {
 
         assertThat(Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.HEARING_AID, HAC_DISABLED)).isEqualTo(HAC_DISABLED);
-        verify(mAudioManager).setParameters("HACSetting=OFF");
+        verify(mAudioManager).setParameters("HACSetting=OFF;");
     }
 
 }

@@ -84,6 +84,16 @@ public class AvailableVirtualKeyboardFragment extends DashboardFragment
                 newUserAwareContext = context.createContextAsUser(UserHandle.of(newUserId), 0);
                 break;
             }
+            case ProfileSelectFragment.ProfileType.PRIVATE: {
+                // If the user is a private profile user, use currentUserId directly. Or get the
+                // private profile userId instead.
+                newUserId = userManager.isPrivateProfile()
+                        ? currentUserId
+                        : Utils.getCurrentUserIdOfType(
+                                userManager, ProfileSelectFragment.ProfileType.PRIVATE);
+                newUserAwareContext = context.createContextAsUser(UserHandle.of(newUserId), 0);
+                break;
+            }
             case ProfileSelectFragment.ProfileType.PERSONAL: {
                 // Use the parent user of the current user if the current user is profile.
                 final UserHandle currentUser = UserHandle.of(currentUserId);
@@ -155,7 +165,7 @@ public class AvailableVirtualKeyboardFragment extends DashboardFragment
         final Context prefContext = getPrefContext();
         final List<InputMethodInfo> imis = mInputMethodSettingValues.getInputMethodList();
         final List<InputMethodInfo> enabledImis = getContext().getSystemService(
-                InputMethodManager.class).getEnabledInputMethodListAsUser(mUserId);
+                InputMethodManager.class).getEnabledInputMethodListAsUser(UserHandle.of(mUserId));
         final int numImis = (imis == null ? 0 : imis.size());
         for (int i = 0; i < numImis; ++i) {
             final InputMethodInfo imi = imis.get(i);

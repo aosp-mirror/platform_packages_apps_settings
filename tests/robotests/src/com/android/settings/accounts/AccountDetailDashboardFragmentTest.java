@@ -63,7 +63,12 @@ import org.robolectric.shadow.api.Shadow;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowAccountManager.class, ShadowUserManager.class})
+@Config(shadows = {
+        ShadowAccountManager.class,
+        ShadowUserManager.class,
+        com.android.settings.testutils.shadow.ShadowDashboardFragment.class,
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class AccountDetailDashboardFragmentTest {
 
     private static final String METADATA_CATEGORY = "com.android.settings.category";

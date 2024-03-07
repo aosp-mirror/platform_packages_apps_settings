@@ -30,7 +30,6 @@ import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -45,7 +44,8 @@ public abstract class AbstractBluetoothA2dpPreferenceController extends
         OnDestroy {
 
     @VisibleForTesting
-    static final int STREAMING_LABEL_ID = R.string.bluetooth_select_a2dp_codec_streaming_label;
+    static final int STREAMING_LABEL_ID =
+            com.android.settingslib.R.string.bluetooth_select_a2dp_codec_streaming_label;
 
     protected final BluetoothA2dpConfigStore mBluetoothA2dpConfigStore;
     protected BluetoothA2dp mBluetoothA2dp;

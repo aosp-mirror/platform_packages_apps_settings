@@ -32,6 +32,7 @@ import android.provider.Settings.Secure;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.InputDevice;
+import android.view.KeyEvent;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 
@@ -40,7 +41,8 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.SwitchPreferenceCompat;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.profileselector.ProfileSelectDialog;
@@ -106,6 +108,17 @@ public class StylusDevicesController extends AbstractPreferenceController implem
             return null;
         }
 
+        // Check if the connected stylus supports the tail button. A connected device is when input
+        // device is available (mInputDevice != null). For a cached device (mInputDevice == null)
+        // there isn't way to check if the device supports the button so assume it does.
+        if (mInputDevice != null) {
+            boolean doesStylusSupportTailButton =
+                    mInputDevice.hasKeys(KeyEvent.KEYCODE_STYLUS_BUTTON_TAIL)[0];
+            if (!doesStylusSupportTailButton) {
+                return null;
+            }
+        }
+
         Preference pref = preference == null ? new Preference(mContext) : preference;
         pref.setKey(KEY_DEFAULT_NOTES);
         pref.setTitle(mContext.getString(R.string.stylus_default_notes_app));
@@ -157,8 +170,8 @@ public class StylusDevicesController extends AbstractPreferenceController implem
         return pref;
     }
 
-    private SwitchPreference createButtonPressPreference() {
-        SwitchPreference pref = new SwitchPreference(mContext);
+    private TwoStatePreference createButtonPressPreference() {
+        TwoStatePreference pref = new SwitchPreferenceCompat(mContext);
         pref.setKey(KEY_IGNORE_BUTTON);
         pref.setTitle(mContext.getString(R.string.stylus_ignore_button));
         pref.setIcon(R.drawable.ic_block);
@@ -198,7 +211,7 @@ public class StylusDevicesController extends AbstractPreferenceController implem
             case KEY_IGNORE_BUTTON:
                 Settings.Secure.putInt(mContext.getContentResolver(),
                         Secure.STYLUS_BUTTONS_ENABLED,
-                        ((SwitchPreference) preference).isChecked() ? 0 : 1);
+                        ((TwoStatePreference) preference).isChecked() ? 0 : 1);
                 break;
         }
         return true;

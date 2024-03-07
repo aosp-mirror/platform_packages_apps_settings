@@ -16,21 +16,24 @@
 
 package com.android.settings.display;
 
+import static com.android.internal.display.RefreshRateSettingsUtils.DEFAULT_REFRESH_RATE;
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
-import static com.android.settings.display.PeakRefreshRatePreferenceController.DEFAULT_REFRESH_RATE;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.provider.Settings;
-import android.view.Display;
 
 import androidx.preference.SwitchPreference;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
@@ -42,10 +45,16 @@ public class PeakRefreshRatePreferenceControllerTest {
     private PeakRefreshRatePreferenceController mController;
     private SwitchPreference mPreference;
 
+    @Mock
+    private PeakRefreshRatePreferenceController.DeviceConfigDisplaySettings
+            mDeviceConfigDisplaySettings;
+
     @Before
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
         mController = new PeakRefreshRatePreferenceController(mContext, "key");
+        mController.injectDeviceConfigDisplaySettings(mDeviceConfigDisplaySettings);
         mPreference = new SwitchPreference(RuntimeEnvironment.application);
     }
 
@@ -70,13 +79,13 @@ public class PeakRefreshRatePreferenceControllerTest {
     }
 
     @Test
-    public void setChecked_enableSmoothDisplay_setCurrentRefreshRate() {
+    public void setChecked_enableSmoothDisplay_setRefreshRateToInfinity() {
         mController.mPeakRefreshRate = 88f;
         mController.setChecked(true);
 
         assertThat(Settings.System.getFloat(mContext.getContentResolver(),
                 Settings.System.PEAK_REFRESH_RATE, DEFAULT_REFRESH_RATE))
-                .isEqualTo(88.0f);
+                .isPositiveInfinity();
     }
 
     @Test
@@ -104,18 +113,20 @@ public class PeakRefreshRatePreferenceControllerTest {
     }
 
     @Test
-    public void findPeakRefreshRate_moreThanOneHigherThanDefault() {
-        Display.Mode lower = new Display.Mode(0, 0, 0, DEFAULT_REFRESH_RATE - 1);
-        Display.Mode def = new Display.Mode(0, 0, 0, DEFAULT_REFRESH_RATE);
-        Display.Mode higher = new Display.Mode(0, 0, 0, DEFAULT_REFRESH_RATE + 1);
-        Display.Mode higher1 = new Display.Mode(0, 0, 0, DEFAULT_REFRESH_RATE + 2);
+    public void isChecked_default_returnTrue() {
+        mController.mPeakRefreshRate = 88f;
+        when(mDeviceConfigDisplaySettings.getDefaultPeakRefreshRate())
+                .thenReturn(mController.mPeakRefreshRate);
 
-        assertThat(mController.findPeakRefreshRate(
-                new Display.Mode[] {lower, def, higher, higher1}))
-                .isEqualTo(DEFAULT_REFRESH_RATE + 2);
-        assertThat(mController.findPeakRefreshRate(
-                new Display.Mode[] {lower, def, higher1, higher}))
-                .isEqualTo(DEFAULT_REFRESH_RATE + 2);
+        assertThat(mController.isChecked()).isTrue();
+    }
+
+    @Test
+    public void isChecked_default_returnFalse() {
+        mController.mPeakRefreshRate = 88f;
+        when(mDeviceConfigDisplaySettings.getDefaultPeakRefreshRate()).thenReturn(60f);
+
+        assertThat(mController.isChecked()).isFalse();
     }
 
     private void enableSmoothDisplayPreference() {

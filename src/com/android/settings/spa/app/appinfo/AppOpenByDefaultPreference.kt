@@ -19,6 +19,7 @@ package com.android.settings.spa.app.appinfo
 import android.content.Context
 import android.content.pm.ApplicationInfo
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -28,7 +29,6 @@ import com.android.settings.applications.appinfo.AppInfoDashboardFragment
 import com.android.settings.applications.intentpicker.AppLaunchSettings
 import com.android.settings.applications.intentpicker.IntentPickerUtils
 import com.android.settingslib.applications.AppUtils
-import com.android.settingslib.spa.framework.compose.stateOf
 import com.android.settingslib.spa.widget.preference.Preference
 import com.android.settingslib.spa.widget.preference.PreferenceModel
 import com.android.settingslib.spaprivileged.framework.common.asUser
@@ -46,12 +46,13 @@ fun AppOpenByDefaultPreference(app: ApplicationInfo) {
     val presenter = remember(app) { AppOpenByDefaultPresenter(context, app) }
     if (remember(presenter) { !presenter.isAvailable() }) return
 
+    val summary by presenter.summaryFlow.collectAsStateWithLifecycle(
+        initialValue = stringResource(R.string.summary_placeholder),
+    )
     Preference(object : PreferenceModel {
         override val title = stringResource(R.string.launch_by_default)
-        override val summary = presenter.summaryFlow.collectAsStateWithLifecycle(
-            initialValue = stringResource(R.string.summary_placeholder),
-        )
-        override val enabled = stateOf(presenter.isEnabled())
+        override val summary = { summary }
+        override val enabled = { presenter.isEnabled() }
         override val onClick = presenter::startActivity
     })
 }

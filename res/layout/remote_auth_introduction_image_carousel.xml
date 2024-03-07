@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (C) 2023 The Android Open Source Project
+
+    Licensed under the Apache License, Version 2.0 (the "License")
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="@dimen/remoteauth_introduction_fragment_padding_horizontal"
+    app:layout_optimizationLevel="barrier">
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/image_carousel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/carousel_back_arrow"
+        app:layout_constraintStart_toStartOf="parent"
+        android:contentDescription="@string/wizard_back"
+        android:layout_width="@dimen/remoteauth_touchable_area_minimum_span"
+        android:layout_height="@dimen/remoteauth_touchable_area_minimum_span"
+        android:scaleType="center"
+        android:tintMode="src_in"
+        app:layout_constraintEnd_toStartOf="@id/carousel_progress_indicator"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintTop_toTopOf="@id/carousel_progress_indicator"
+        app:layout_constraintBottom_toBottomOf="@id/carousel_progress_indicator"
+        android:background="@drawable/ic_arrow_back" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/carousel_progress_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:importantForAccessibility="no"
+        app:layout_constraintStart_toEndOf="@id/carousel_back_arrow"
+        app:layout_constraintEnd_toStartOf="@id/carousel_forward_arrow"
+        app:layout_constraintTop_toBottomOf="@id/image_carousel"
+        android:layout_marginTop="@dimen/remoteauth_carousel_progress_margin" />
+
+    <ImageView
+        android:id="@+id/carousel_forward_arrow"
+        android:contentDescription="@string/wizard_next"
+        android:layout_width="@dimen/remoteauth_touchable_area_minimum_span"
+        android:layout_height="@dimen/remoteauth_touchable_area_minimum_span"
+        android:scaleType="center"
+        android:tintMode="src_in"
+        app:layout_constraintStart_toEndOf="@id/carousel_progress_indicator"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/carousel_progress_indicator"
+        app:layout_constraintBottom_toBottomOf="@id/carousel_progress_indicator"
+        android:background="@drawable/ic_arrow_forward" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierMargin="@dimen/remoteauth_carousel_progress_margin"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="carousel_back_arrow,carousel_forward_arrow" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

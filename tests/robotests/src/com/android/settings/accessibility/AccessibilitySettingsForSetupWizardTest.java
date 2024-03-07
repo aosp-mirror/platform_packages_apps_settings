@@ -58,6 +58,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,6 +67,9 @@ import java.util.List;
  * Tests for {@link AccessibilitySettingsForSetupWizard}.
  */
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class AccessibilitySettingsForSetupWizardTest {
 
     private static final ComponentName TEST_SCREEN_READER_COMPONENT_NAME = new ComponentName(

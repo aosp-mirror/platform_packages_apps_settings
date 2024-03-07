@@ -38,7 +38,7 @@ public class BluetoothDeviceRenamePreferenceController extends
      */
     public BluetoothDeviceRenamePreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     @Override

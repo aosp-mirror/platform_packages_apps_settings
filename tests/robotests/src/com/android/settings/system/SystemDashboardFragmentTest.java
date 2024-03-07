@@ -18,17 +18,11 @@ package com.android.settings.system;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.os.Bundle;
 
-import com.android.settings.aware.AwareFeatureProvider;
-import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.XmlTestUtils;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowUserManager;
@@ -74,28 +68,5 @@ public class SystemDashboardFragmentTest {
         final List<String> keys = XmlTestUtils.getKeysFromPreferenceXml(mContext, xmlId);
 
         assertThat(keys).containsAtLeastElementsIn(niks);
-    }
-
-    @Test
-    public void showRestrictionDialog_hasValidExtra_shouldShowDialog() {
-        final AwareFeatureProvider mProvider =
-                FakeFeatureFactory.setupForTest().mAwareFeatureProvider;
-        final Bundle bundle = new Bundle();
-        bundle.putBoolean(SystemDashboardFragment.EXTRA_SHOW_AWARE_DISABLED, true);
-        when(mFragment.getArguments()).thenReturn(bundle);
-
-        mFragment.showRestrictionDialog();
-
-        verify(mProvider).showRestrictionDialog(any());
-    }
-
-    @Test
-    public void showRestrictionDialog_hasInvalidExtra_shouldNotShowDialog() {
-        final AwareFeatureProvider mProvider =
-                FakeFeatureFactory.setupForTest().mAwareFeatureProvider;
-
-        mFragment.showRestrictionDialog();
-
-        verify(mProvider, never()).showRestrictionDialog(any());
     }
 }

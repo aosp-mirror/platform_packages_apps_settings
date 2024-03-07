@@ -1,0 +1,74 @@
+//
+// Copyright (C) 2023 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+android_app {
+    name: "ScreenshotTestStub",
+    defaults: [
+        "SettingsLibDefaults",
+    ],
+    platform_apis: true,
+    certificate: "platform",
+    privileged: true,
+    use_resource_processor: true,
+
+    static_libs: [
+        "Settings-core",
+        "androidx.fragment_fragment-testing",
+        "androidx.fragment_fragment",
+        "androidx.test.runner",
+        "androidx.test.core",
+        "androidx.test.rules",
+        "androidx.test.ext.junit",
+        "platform-screenshot-diff-core",
+        "Settings-testutils2",
+        "androidx.test.espresso.core",
+        "kotlinx-coroutines-android",
+        "androidx.lifecycle_lifecycle-runtime-testing",
+        "kotlinx_coroutines_test",
+    ],
+    uses_libs: ["org.apache.http.legacy"],
+    aaptflags: ["--extra-packages com.android.settings"],
+    manifest: "AndroidManifest.xml",
+}
+
+// This is a RNG (Robolectric native graphics) test target.
+android_robolectric_test {
+    name: "SettingsScreenshotRNGTests",
+    srcs: [
+        "src/**/*.kt",
+    ],
+    test_suites: ["general-tests"],
+
+    // Do not add any libraries here, instead add them to the ScreenshotTestStub
+    static_libs: [
+        "androidx.compose.runtime_runtime",
+        "androidx.test.uiautomator_uiautomator",
+        "androidx.test.ext.junit",
+        "inline-mockito-robolectric-prebuilt",
+        "platform-parametric-runner-lib",
+        "uiautomator-helpers",
+
+    ],
+    libs: [
+        "android.test.runner",
+        "android.test.base",
+        "android.test.mock",
+        "truth",
+    ],
+
+    upstream: true,
+    instrumentation_for: "ScreenshotTestStub",
+    java_resource_dirs: ["config"],
+}

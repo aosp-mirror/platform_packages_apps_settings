@@ -41,7 +41,6 @@ import android.net.LinkAddress;
 import android.net.LinkProperties;
 import android.net.Network;
 import android.net.NetworkCapabilities;
-import android.net.NetworkInfo;
 import android.net.NetworkRequest;
 import android.net.RouteInfo;
 import android.net.Uri;
@@ -53,7 +52,6 @@ import android.provider.Telephony.CarrierId;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.text.TextUtils;
-import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -61,7 +59,6 @@ import android.widget.Toast;
 import androidx.annotation.VisibleForTesting;
 import androidx.core.text.BidiFormatter;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.RecyclerView;
@@ -69,9 +66,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.net.module.util.Inet4AddressUtils;
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.datausage.WifiDataUsageSummaryPreferenceController;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settings.wifi.WifiDialog2;
@@ -164,12 +159,10 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
     private final Handler mHandler;
     private LinkProperties mLinkProperties;
     private Network mNetwork;
-    private NetworkInfo mNetworkInfo;
     private NetworkCapabilities mNetworkCapabilities;
     private int mRssiSignalLevel = -1;
     @VisibleForTesting boolean mShowX; // Shows the Wi-Fi signal icon of Pie+x when it's true.
     private String[] mSignalStr;
-    private WifiInfo mWifiInfo;
     private final WifiManager mWifiManager;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
 
@@ -190,12 +183,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
     private Preference mSubnetPref;
     private Preference mDnsPref;
     private Preference mTypePref;
-    private PreferenceCategory mIpv6Category;
     private Preference mIpv6AddressPref;
-    private Lifecycle mLifecycle;
-    Preference mDataUsageSummaryPref;
-    WifiDataUsageSummaryPreferenceController mSummaryHeaderController;
-
     private final IconInjector mIconInjector;
     private final Clock mClock;
 
@@ -337,7 +325,6 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
         mIconInjector = injector;
         mClock = clock;
 
-        mLifecycle = lifecycle;
         lifecycle.addObserver(this);
     }
 
@@ -387,8 +374,6 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
         mSubnetPref = screen.findPreference(KEY_SUBNET_MASK_PREF);
         mDnsPref = screen.findPreference(KEY_DNS_PREF);
         mTypePref = screen.findPreference(KEY_WIFI_TYPE_PREF);
-
-        mIpv6Category = screen.findPreference(KEY_IPV6_CATEGORY);
         mIpv6AddressPref = screen.findPreference(KEY_IPV6_ADDRESSES_PREF);
     }
 
@@ -432,17 +417,6 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
     private void setupEntityHeader(PreferenceScreen screen) {
         LayoutPreference headerPref = screen.findPreference(KEY_HEADER);
 
-        if (usingDataUsageHeader(mContext)) {
-            headerPref.setVisible(false);
-            mDataUsageSummaryPref = screen.findPreference(KEY_DATA_USAGE_HEADER);
-            mDataUsageSummaryPref.setVisible(true);
-            mSummaryHeaderController =
-                    new WifiDataUsageSummaryPreferenceController(mFragment.getActivity(),
-                            mLifecycle, (PreferenceFragmentCompat) mFragment,
-                            mWifiEntry.getWifiConfiguration().getAllNetworkKeys());
-            return;
-        }
-
         mEntityHeaderController =
                 EntityHeaderController.newInstance(
                         mFragment.getActivity(), mFragment,
@@ -485,16 +459,11 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
     }
 
     private void refreshEntityHeader() {
-        if (usingDataUsageHeader(mContext)) {
-            mSummaryHeaderController.updateState(mDataUsageSummaryPref);
-        } else {
-            mEntityHeaderController
-                    .setLabel(mWifiEntry.getTitle())
-                    .setSummary(mWifiEntry.getSummary())
-                    .setSecondSummary(getExpiryTimeSummary())
-                    .setRecyclerView(mFragment.getListView(), mLifecycle)
-                    .done(mFragment.getActivity(), true /* rebind */);
-        }
+        mEntityHeaderController
+                .setLabel(mWifiEntry.getTitle())
+                .setSummary(mWifiEntry.getSummary())
+                .setSecondSummary(getExpiryTimeSummary())
+                .done(true /* rebind */);
     }
 
     @VisibleForTesting
@@ -503,14 +472,10 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
             mNetwork = mWifiManager.getCurrentNetwork();
             mLinkProperties = mConnectivityManager.getLinkProperties(mNetwork);
             mNetworkCapabilities = mConnectivityManager.getNetworkCapabilities(mNetwork);
-            mNetworkInfo = mConnectivityManager.getNetworkInfo(mNetwork);
-            mWifiInfo = mWifiManager.getConnectionInfo();
         } else {
             mNetwork = null;
             mLinkProperties = null;
             mNetworkCapabilities = null;
-            mNetworkInfo = null;
-            mWifiInfo = null;
         }
     }
 
@@ -576,7 +541,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
         Drawable drawable = getWifiDrawable(mWifiEntry);
         mEntityHeaderController
                 .setIcon(redrawIconForHeader(drawable))
-                .done(mFragment.getActivity(), true /* rebind */);
+                .done(true /* rebind */);
     }
 
     /**
@@ -595,6 +560,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
 
     private void refreshRssiViews() {
         int signalLevel = mWifiEntry.getLevel();
+
         // Disappears signal view if not in range. e.g. for saved networks.
         if (signalLevel == WifiEntry.WIFI_LEVEL_UNREACHABLE) {
             mSignalStrengthPref.setVisible(false);
@@ -678,7 +644,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
     }
 
     private void refreshSsid() {
-        if (mWifiEntry.isSubscription() && mWifiEntry.getSsid() != null) {
+        if (mWifiEntry.shouldShowSsid() && mWifiEntry.getSsid() != null) {
             mSsidPref.setVisible(true);
             mSsidPref.setSummary(mWifiEntry.getSsid());
         } else {
@@ -854,7 +820,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
             mSubnetPref.setVisible(false);
             mGatewayPref.setVisible(false);
             mDnsPref.setVisible(false);
-            mIpv6Category.setVisible(false);
+            mIpv6AddressPref.setVisible(false);
             return;
         }
 
@@ -894,11 +860,11 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
         updatePreference(mDnsPref, dnsServers);
 
         if (ipv6Addresses.length() > 0) {
+            mIpv6AddressPref.setVisible(true);
             mIpv6AddressPref.setSummary(
                     BidiFormatter.getInstance().unicodeWrap(ipv6Addresses.toString()));
-            mIpv6Category.setVisible(true);
         } else {
-            mIpv6Category.setVisible(false);
+            mIpv6AddressPref.setVisible(false);
         }
     }
 
@@ -1057,10 +1023,6 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
         public ZonedDateTime now() {
             return ZonedDateTime.now();
         }
-    }
-
-    private boolean usingDataUsageHeader(Context context) {
-        return FeatureFlagUtils.isEnabled(context, FeatureFlags.WIFI_DETAILS_DATAUSAGE_HEADER);
     }
 
     @VisibleForTesting

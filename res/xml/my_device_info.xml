@@ -114,7 +114,7 @@
             settings:controller="com.android.settings.deviceinfo.HardwareInfoPreferenceController"/>
 
         <!-- EID -->
-        <com.android.settings.network.telephony.TelephonyPreferenceDialog
+        <com.android.settingslib.CustomDialogPreferenceCompat
             android:key="eid_info"
             android:order="31"
             android:title="@string/status_eid"
@@ -151,7 +151,8 @@
             android:order="43"
             android:title="@string/battery_info"
             android:fragment="com.android.settings.deviceinfo.batteryinfo.BatteryInfoFragment"
-            settings:keywords="@string/keywords_battery_info"/>
+            settings:keywords="@string/keywords_battery_info"
+            settings:controller="com.android.settings.deviceinfo.batteryinfo.BatteryInfoPreferenceController"/>
     </PreferenceCategory>
 
     <PreferenceCategory

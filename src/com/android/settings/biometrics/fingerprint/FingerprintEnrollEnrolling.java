@@ -59,7 +59,6 @@ import android.view.animation.Interpolator;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.IdRes;
 import androidx.appcompat.app.AlertDialog;
@@ -69,10 +68,14 @@ import com.android.settings.R;
 import com.android.settings.biometrics.BiometricEnrollSidecar;
 import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.biometrics.BiometricsEnrollEnrolling;
+import com.android.settings.biometrics.fingerprint.feature.SfpsEnrollmentFeature;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.flags.Flags;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.display.DisplayDensityUtils;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.airbnb.lottie.LottieComposition;
 import com.airbnb.lottie.LottieCompositionFactory;
 import com.airbnb.lottie.LottieProperty;
 import com.airbnb.lottie.model.KeyPath;
@@ -85,6 +88,7 @@ import com.google.android.setupdesign.template.HeaderMixin;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.List;
+import java.util.function.Function;
 
 /**
  * Activity which handles the actual enrolling for fingerprint.
@@ -100,27 +104,22 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
 
     private static final int PROGRESS_BAR_MAX = 10000;
 
-    private static final int STAGE_UNKNOWN = -1;
+    public static final int STAGE_UNKNOWN = -1;
     private static final int STAGE_CENTER = 0;
     private static final int STAGE_GUIDED = 1;
     private static final int STAGE_FINGERTIP = 2;
     private static final int STAGE_LEFT_EDGE = 3;
     private static final int STAGE_RIGHT_EDGE = 4;
 
-    @VisibleForTesting
-    protected static final int SFPS_STAGE_NO_ANIMATION = 0;
+    public static final int SFPS_STAGE_NO_ANIMATION = 0;
 
-    @VisibleForTesting
-    protected static final int SFPS_STAGE_CENTER = 1;
+    public static final int SFPS_STAGE_CENTER = 1;
 
-    @VisibleForTesting
-    protected static final int SFPS_STAGE_FINGERTIP = 2;
+    public static final int SFPS_STAGE_FINGERTIP = 2;
 
-    @VisibleForTesting
-    protected static final int SFPS_STAGE_LEFT_EDGE = 3;
+    public static final int SFPS_STAGE_LEFT_EDGE = 3;
 
-    @VisibleForTesting
-    protected static final int SFPS_STAGE_RIGHT_EDGE = 4;
+    public static final int SFPS_STAGE_RIGHT_EDGE = 4;
 
     @IntDef({STAGE_UNKNOWN, STAGE_CENTER, STAGE_GUIDED, STAGE_FINGERTIP, STAGE_LEFT_EDGE,
             STAGE_RIGHT_EDGE})
@@ -197,6 +196,11 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     private OrientationEventListener mOrientationEventListener;
     private int mPreviousRotation = 0;
 
+    @NonNull
+    private SfpsEnrollmentFeature mSfpsEnrollmentFeature = new EmptySfpsEnrollmentFeature();
+    @Nullable
+    private UdfpsEnrollCalibrator mCalibrator;
+
     @VisibleForTesting
     protected boolean shouldShowLottie() {
         DisplayDensityUtils displayDensity = new DisplayDensityUtils(getApplicationContext());
@@ -204,6 +208,10 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         final int currentDensity = displayDensity.getDefaultDisplayDensityValues()
                 [currentDensityIndex];
         final int defaultDensity = displayDensity.getDefaultDensityForDefaultDisplay();
+
+        if (getResources().getConfiguration().fontScale > 1) {
+            return false;
+        }
         return defaultDensity == currentDensity;
     }
 
@@ -216,14 +224,6 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if (isInMultiWindowMode()) {
-            final Toast splitUnsupportedToast = Toast.makeText(this,
-                    R.string.dock_multi_instances_not_supported_text, Toast.LENGTH_SHORT);
-            splitUnsupportedToast.show();
-            finish();
-            return;
-        }
 
         if (savedInstanceState != null) {
             restoreSavedState(savedInstanceState);
@@ -248,7 +248,15 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
 
             setContentView(layout);
             setDescriptionText(R.string.security_settings_udfps_enroll_start_message);
+
+            if (Flags.udfpsEnrollCalibration()) {
+                mCalibrator = FeatureFactory.getFeatureFactory().getFingerprintFeatureProvider()
+                        .getUdfpsEnrollCalibrator(getApplicationContext(), savedInstanceState,
+                                getIntent());
+            }
         } else if (mCanAssumeSfps) {
+            mSfpsEnrollmentFeature = FeatureFactory.getFeatureFactory()
+                    .getFingerprintFeatureProvider().getSfpsEnrollmentFeature();
             setContentView(R.layout.sfps_enroll_enrolling);
             setHelpAnimation();
         } else {
@@ -282,7 +290,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
                         .setText(R.string.security_settings_fingerprint_enroll_enrolling_skip)
                         .setListener(this::onSkipButtonClick)
                         .setButtonType(FooterButton.ButtonType.SKIP)
-                        .setTheme(R.style.SudGlifButton_Secondary)
+                        .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Secondary)
                         .build()
         );
 
@@ -365,6 +373,11 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         super.onSaveInstanceState(outState);
         outState.putBoolean(KEY_STATE_CANCELED, mIsCanceled);
         outState.putInt(KEY_STATE_PREVIOUS_ROTATION, mPreviousRotation);
+        if (Flags.udfpsEnrollCalibration()) {
+            if (mCalibrator != null) {
+                mCalibrator.onSaveInstanceState(outState);
+            }
+        }
     }
 
     private void restoreSavedState(Bundle savedInstanceState) {
@@ -604,7 +617,8 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         }
         switch (getCurrentSfpsStage()) {
             case SFPS_STAGE_NO_ANIMATION:
-                setHeaderText(R.string.security_settings_fingerprint_enroll_repeat_title);
+                setHeaderText(mSfpsEnrollmentFeature
+                        .getFeaturedStageHeaderResource(SFPS_STAGE_NO_ANIMATION));
                 if (!mHaveShownSfpsNoAnimationLottie && mIllustrationLottie != null) {
                     mHaveShownSfpsNoAnimationLottie = true;
                     mIllustrationLottie.setContentDescription(
@@ -613,39 +627,48 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
                                     0
                             )
                     );
-                    configureEnrollmentStage(R.raw.sfps_lottie_no_animation);
+                    configureEnrollmentStage(mSfpsEnrollmentFeature
+                            .getSfpsEnrollLottiePerStage(SFPS_STAGE_NO_ANIMATION));
                 }
                 break;
 
             case SFPS_STAGE_CENTER:
-                setHeaderText(R.string.security_settings_sfps_enroll_finger_center_title);
+                setHeaderText(mSfpsEnrollmentFeature
+                        .getFeaturedStageHeaderResource(SFPS_STAGE_CENTER));
                 if (!mHaveShownSfpsCenterLottie && mIllustrationLottie != null) {
                     mHaveShownSfpsCenterLottie = true;
-                    configureEnrollmentStage(R.raw.sfps_lottie_pad_center);
+                    configureEnrollmentStage(mSfpsEnrollmentFeature
+                            .getSfpsEnrollLottiePerStage(SFPS_STAGE_CENTER));
                 }
                 break;
 
             case SFPS_STAGE_FINGERTIP:
-                setHeaderText(R.string.security_settings_sfps_enroll_fingertip_title);
+                setHeaderText(mSfpsEnrollmentFeature
+                        .getFeaturedStageHeaderResource(SFPS_STAGE_FINGERTIP));
                 if (!mHaveShownSfpsTipLottie && mIllustrationLottie != null) {
                     mHaveShownSfpsTipLottie = true;
-                    configureEnrollmentStage(R.raw.sfps_lottie_tip);
+                    configureEnrollmentStage(mSfpsEnrollmentFeature
+                            .getSfpsEnrollLottiePerStage(SFPS_STAGE_FINGERTIP));
                 }
                 break;
 
             case SFPS_STAGE_LEFT_EDGE:
-                setHeaderText(R.string.security_settings_sfps_enroll_left_edge_title);
+                setHeaderText(mSfpsEnrollmentFeature
+                        .getFeaturedStageHeaderResource(SFPS_STAGE_LEFT_EDGE));
                 if (!mHaveShownSfpsLeftEdgeLottie && mIllustrationLottie != null) {
                     mHaveShownSfpsLeftEdgeLottie = true;
-                    configureEnrollmentStage(R.raw.sfps_lottie_left_edge);
+                    configureEnrollmentStage(mSfpsEnrollmentFeature
+                            .getSfpsEnrollLottiePerStage(SFPS_STAGE_LEFT_EDGE));
                 }
                 break;
 
             case SFPS_STAGE_RIGHT_EDGE:
-                setHeaderText(R.string.security_settings_sfps_enroll_right_edge_title);
+                setHeaderText(mSfpsEnrollmentFeature
+                        .getFeaturedStageHeaderResource(SFPS_STAGE_RIGHT_EDGE));
                 if (!mHaveShownSfpsRightEdgeLottie && mIllustrationLottie != null) {
                     mHaveShownSfpsRightEdgeLottie = true;
-                    configureEnrollmentStage(R.raw.sfps_lottie_right_edge);
+                    configureEnrollmentStage(mSfpsEnrollmentFeature
+                            .getSfpsEnrollLottiePerStage(SFPS_STAGE_RIGHT_EDGE));
                 }
                 break;
 
@@ -670,11 +693,16 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
             setDescriptionText("");
         }
         LottieCompositionFactory.fromRawRes(this, lottie)
-                .addListener((c) -> {
-                    mIllustrationLottie.setComposition(c);
-                    mIllustrationLottie.setVisibility(View.VISIBLE);
-                    mIllustrationLottie.playAnimation();
-                });
+                .addListener((c) -> onLottieComposition(mIllustrationLottie, c));
+    }
+
+    private void onLottieComposition(LottieAnimationView view, LottieComposition composition) {
+        if (view == null || composition == null) {
+            return;
+        }
+        view.setComposition(composition);
+        view.setVisibility(View.VISIBLE);
+        view.playAnimation();
     }
 
     @EnrollStage
@@ -704,17 +732,8 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         }
 
         final int progressSteps = mSidecar.getEnrollmentSteps() - mSidecar.getEnrollmentRemaining();
-        if (progressSteps < getStageThresholdSteps(0)) {
-            return SFPS_STAGE_NO_ANIMATION;
-        } else if (progressSteps < getStageThresholdSteps(1)) {
-            return SFPS_STAGE_CENTER;
-        } else if (progressSteps < getStageThresholdSteps(2)) {
-            return SFPS_STAGE_FINGERTIP;
-        } else if (progressSteps < getStageThresholdSteps(3)) {
-            return SFPS_STAGE_LEFT_EDGE;
-        } else {
-            return SFPS_STAGE_RIGHT_EDGE;
-        }
+        return mSfpsEnrollmentFeature
+                .getCurrentSfpsEnrollStage(progressSteps, this::getStageThresholdSteps);
     }
 
     private boolean isStageHalfCompleted() {
@@ -745,22 +764,31 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
             Log.w(TAG, "getStageThresholdSteps: Enrollment not started yet");
             return 1;
         }
-        return Math.round(mSidecar.getEnrollmentSteps()
-                * mFingerprintManager.getEnrollStageThreshold(index));
+        final float threshold = mCanAssumeSfps
+                ? mSfpsEnrollmentFeature.getEnrollStageThreshold(this, index)
+                : mFingerprintManager.getEnrollStageThreshold(index);
+        return Math.round(mSidecar.getEnrollmentSteps() * threshold);
     }
 
     @Override
     public void onEnrollmentHelp(int helpMsgId, CharSequence helpString) {
-        if (!TextUtils.isEmpty(helpString)) {
+        final CharSequence featuredString = mCanAssumeSfps
+                ? mSfpsEnrollmentFeature.getFeaturedVendorString(this, helpMsgId, helpString)
+                : helpString;
+
+        if (!TextUtils.isEmpty(featuredString)) {
             if (!(mCanAssumeUdfps || mCanAssumeSfps)) {
                 mErrorText.removeCallbacks(mTouchAgainRunnable);
             }
-            showError(helpString);
+            showError(featuredString);
 
             if (mUdfpsEnrollHelper != null) mUdfpsEnrollHelper.onEnrollmentHelp();
         }
 
         dismissTouchDialogIfSfps();
+        if (mCanAssumeSfps) {
+            mSfpsEnrollmentFeature.handleOnEnrollmentHelp(helpMsgId, featuredString, () -> this);
+        }
     }
 
     @Override
@@ -1173,6 +1201,30 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         @Override
         public int getMetricsCategory() {
             return SettingsEnums.DIALOG_FINGERPRINT_ICON_TOUCH;
+        }
+    }
+
+    private static class EmptySfpsEnrollmentFeature implements SfpsEnrollmentFeature {
+        private final String exceptionStr = "Assume sfps but no SfpsEnrollmentFeature impl.";
+
+        @Override
+        public int getCurrentSfpsEnrollStage(int progressSteps, Function<Integer, Integer> mapper) {
+            throw new IllegalStateException(exceptionStr);
+        }
+
+        @Override
+        public int getFeaturedStageHeaderResource(int stage) {
+            throw new IllegalStateException(exceptionStr);
+        }
+
+        @Override
+        public int getSfpsEnrollLottiePerStage(int stage) {
+            throw new IllegalStateException(exceptionStr);
+        }
+
+        @Override
+        public float getEnrollStageThreshold(@NonNull Context context, int index) {
+            throw new IllegalStateException(exceptionStr);
         }
     }
 }

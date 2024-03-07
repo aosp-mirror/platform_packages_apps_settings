@@ -19,6 +19,7 @@ package com.android.settings.accessibility;
 import android.content.Context;
 import android.provider.Settings;
 
+import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
 /** Controller that shows the color inversion summary. */
@@ -33,7 +34,10 @@ public class ColorInversionPreferenceController extends BasePreferenceController
 
     @Override
     public CharSequence getSummary() {
-        return AccessibilityUtil.getSummary(mContext, DISPLAY_INVERSION_ENABLED);
+        return AccessibilityUtil.getSummary(
+                mContext,
+                DISPLAY_INVERSION_ENABLED,
+                R.string.color_inversion_state_on, R.string.color_inversion_state_off);
     }
 
     @Override

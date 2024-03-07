@@ -109,7 +109,6 @@ public class HeaderPreferenceController extends BasePreferenceController
         mHeaderController = EntityHeaderController.newInstance(
                 mFragment.getActivity(), mFragment, pref.findViewById(R.id.entity_header));
         pref = mHeaderController
-                .setRecyclerView(mFragment.getListView(), mFragment.getSettingsLifecycle())
                 .setIcon(IconDrawableFactory.newInstance(mFragment.getActivity())
                         .getBadgedIcon(mPackageInfo.applicationInfo))
                 .setLabel(mPackageInfo.applicationInfo.loadLabel(mPm))
@@ -122,7 +121,7 @@ public class HeaderPreferenceController extends BasePreferenceController
                 .setHasAppInfoLink(true)
                 .setButtonActions(EntityHeaderController.ActionType.ACTION_NONE,
                         EntityHeaderController.ActionType.ACTION_NONE)
-                .done(mFragment.getActivity(), mContext);
+                .done(mContext);
         pref.findViewById(R.id.entity_header).setVisibility(View.VISIBLE);
     }
 }

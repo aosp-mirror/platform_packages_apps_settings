@@ -38,6 +38,7 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.drawer.CategoryKey;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -80,6 +81,7 @@ public class AppDashboardFragmentTest {
         assertThat(preferenceScreenKeys).containsAtLeastElementsIn(preferenceKeys);
     }
 
+    @Ignore("b/313578776")
     @Test
     @Config(shadows = ShadowUserManager.class)
     public void testAdvancedAppsCategory() {

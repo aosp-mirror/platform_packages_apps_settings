@@ -16,6 +16,8 @@
 
 package com.android.settings.network.telephony;
 
+import static com.android.settings.network.MobileNetworkListFragment.collectAirplaneModeAndFinishIfOn;
+
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -170,8 +172,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         });
 
         return Arrays.asList(
-                new DataUsageSummaryPreferenceController(getActivity(), getSettingsLifecycle(),
-                        this, mSubId),
+                new DataUsageSummaryPreferenceController(getActivity(), mSubId),
                 new RoamingPreferenceController(context, KEY_ROAMING_PREF, getSettingsLifecycle(),
                         this, mSubId),
                 new CallsDefaultSubscriptionController(context, KEY_CALLS_PREF,
@@ -239,8 +240,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         use(MmsMessagePreferenceController.class).init(mSubId);
         use(AutoDataSwitchPreferenceController.class).init(mSubId);
         use(DisabledSubscriptionController.class).init(mSubId);
-        use(DeleteSimProfilePreferenceController.class).init(mSubId, this,
-                REQUEST_CODE_DELETE_SUBSCRIPTION);
+        use(DeleteSimProfilePreferenceController.class).init(mSubId);
         use(DisableSimFooterPreferenceController.class).init(mSubId);
         use(NrDisabledInDsdsFooterPreferenceController.class).init(mSubId);
 
@@ -264,7 +264,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         use(CarrierPreferenceController.class).init(mSubId);
         use(DataUsagePreferenceController.class).init(mSubId);
         use(PreferredNetworkModePreferenceController.class).init(mSubId);
-        use(EnabledNetworkModePreferenceController.class).init(mSubId);
+        use(EnabledNetworkModePreferenceController.class).init(mSubId, getParentFragmentManager());
         use(DataServiceSetupPreferenceController.class).init(mSubId);
         use(Enable2gPreferenceController.class).init(mSubId);
         use(CarrierWifiTogglePreferenceController.class).init(getLifecycle(), mSubId);
@@ -333,7 +333,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        use(DataUsagePreferenceController.class).whenViewCreated(getViewLifecycleOwner());
+        collectAirplaneModeAndFinishIfOn(this);
     }
 
     @Override
@@ -369,11 +369,6 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     public void onPause() {
         mMobileNetworkRepository.removeRegister(this);
         super.onPause();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
     }
 
     @VisibleForTesting

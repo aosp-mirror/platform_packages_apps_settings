@@ -22,13 +22,9 @@ import static com.android.internal.accessibility.AccessibilityShortcutController
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-
 import android.accessibilityservice.AccessibilityServiceInfo;
+import android.app.Activity;
+import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
@@ -36,27 +32,24 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
-import android.os.Bundle;
-import android.util.FeatureFlagUtils;
 import android.view.accessibility.AccessibilityManager;
 
-import androidx.fragment.app.FragmentActivity;
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.SettingsActivity;
-import com.android.settings.testutils.shadow.ShadowFragment;
+import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
+
+import com.google.common.collect.ImmutableList;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Captor;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowAccessibilityManager;
+import org.robolectric.shadows.androidx.fragment.FragmentController;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
@@ -64,134 +57,132 @@ import java.util.ArrayList;
 import java.util.List;
 
 /** Tests for {@link AccessibilityDetailsSettingsFragment}. */
-@Config(shadows = ShadowFragment.class)
+@Config(shadows = ShadowDevicePolicyManager.class)
 @RunWith(RobolectricTestRunner.class)
 public class AccessibilityDetailsSettingsFragmentTest {
-    private final static String PACKAGE_NAME = "com.foo.bar";
-    private final static String CLASS_NAME = PACKAGE_NAME + ".fake_a11y_service";
-    private final static String COMPONENT_NAME = PACKAGE_NAME + "/" + CLASS_NAME;
+    private static final String PACKAGE_NAME = "com.foo.bar";
+    private static final String CLASS_NAME = PACKAGE_NAME + ".fake_a11y_service";
+    private static final String COMPONENT_NAME = PACKAGE_NAME + "/" + CLASS_NAME;
 
     private Context mContext;
-    private AccessibilityDetailsSettingsFragment mFragment;
-    private ShadowAccessibilityManager mShadowAccessibilityManager;
-    @Captor
-    private ArgumentCaptor<Intent> mIntentArgumentCaptor;
-    @Mock private FragmentActivity mActivity;
+
+    private FragmentController<AccessibilityDetailsSettingsFragment> mFragmentController;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-        mContext = spy(RuntimeEnvironment.application);
-        mFragment = spy(new AccessibilityDetailsSettingsFragment());
-        mShadowAccessibilityManager = Shadow.extract(AccessibilityManager.getInstance(mContext));
-        mShadowAccessibilityManager.setInstalledAccessibilityServiceList(getMockServiceList());
-
-        doReturn(mActivity).when(mFragment).getActivity();
-        doReturn(mContext).when(mFragment).getContext();
+        mContext = ApplicationProvider.getApplicationContext();
+        ShadowAccessibilityManager shadowAccessibilityManager = Shadow.extract(
+                AccessibilityManager.getInstance(mContext));
+        shadowAccessibilityManager.setInstalledAccessibilityServiceList(getMockServiceList());
     }
 
     @Test
     public void onCreate_afterSuccessfullyLaunch_shouldBeFinished() {
         final Intent intent = new Intent();
         intent.putExtra(Intent.EXTRA_COMPONENT_NAME, COMPONENT_NAME);
-        doReturn(intent).when(mActivity).getIntent();
 
-        mFragment.onCreate(Bundle.EMPTY);
+        AccessibilityDetailsSettingsFragment fragment = startFragment(intent);
 
-        verify(mActivity).finish();
+        assertThat(fragment.getActivity().isFinishing()).isTrue();
     }
 
     @Test
     public void onCreate_hasValidExtraComponentName_launchExpectedFragment() {
-        final Intent intent = new Intent();
+        Intent intent = new Intent();
         intent.putExtra(Intent.EXTRA_COMPONENT_NAME, COMPONENT_NAME);
-        doReturn(intent).when(mActivity).getIntent();
 
-        mFragment.onCreate(Bundle.EMPTY);
+        AccessibilityDetailsSettingsFragment fragment = startFragment(intent);
 
-        assertStartActivityWithExpectedFragment(mActivity,
+        assertStartActivityWithExpectedFragment(fragment.getActivity(),
                 ToggleAccessibilityServicePreferenceFragment.class.getName());
     }
 
     @Test
     public void onCreate_hasInvalidExtraComponentName_launchAccessibilitySettings() {
-        final Intent intent = new Intent();
+        Intent intent = new Intent();
         intent.putExtra(Intent.EXTRA_COMPONENT_NAME, PACKAGE_NAME + "/.service");
-        doReturn(intent).when(mActivity).getIntent();
 
-        mFragment.onCreate(Bundle.EMPTY);
+        AccessibilityDetailsSettingsFragment fragment = startFragment(intent);
 
-        assertStartActivityWithExpectedFragment(mActivity, AccessibilitySettings.class.getName());
+        assertStartActivityWithExpectedFragment(fragment.getActivity(),
+                AccessibilitySettings.class.getName());
     }
 
     @Test
     public void onCreate_hasNoExtraComponentName_launchAccessibilitySettings() {
-        final Intent intent = new Intent();
-        doReturn(intent).when(mActivity).getIntent();
+        AccessibilityDetailsSettingsFragment fragment = startFragment(/* intent= */ null);
 
-        mFragment.onCreate(Bundle.EMPTY);
-
-        assertStartActivityWithExpectedFragment(mActivity, AccessibilitySettings.class.getName());
+        assertStartActivityWithExpectedFragment(fragment.getActivity(),
+                AccessibilitySettings.class.getName());
     }
 
     @Test
     public void onCreate_extraComponentNameIsDisallowed_launchAccessibilitySettings() {
-        final Intent intent = new Intent();
+        Intent intent = new Intent();
         intent.putExtra(Intent.EXTRA_COMPONENT_NAME, COMPONENT_NAME);
-        doReturn(intent).when(mActivity).getIntent();
-        doReturn(false).when(mFragment).isServiceAllowed(anyInt(), any());
+        DevicePolicyManager dpm = mContext.getSystemService(
+                DevicePolicyManager.class);
+        ((ShadowDevicePolicyManager) Shadows.shadowOf(dpm)).setPermittedAccessibilityServices(
+                ImmutableList.of());
 
-        mFragment.onCreate(Bundle.EMPTY);
+        AccessibilityDetailsSettingsFragment fragment = startFragment(intent);
 
-        assertStartActivityWithExpectedFragment(mActivity, AccessibilitySettings.class.getName());
+        assertStartActivityWithExpectedFragment(fragment.getActivity(),
+                AccessibilitySettings.class.getName());
     }
 
     @Test
     public void onCreate_magnificationComponentName_launchMagnificationFragment() {
-        final Intent intent = new Intent();
+        Intent intent = new Intent();
         intent.putExtra(Intent.EXTRA_COMPONENT_NAME,
                 MAGNIFICATION_COMPONENT_NAME.flattenToString());
-        doReturn(intent).when(mActivity).getIntent();
 
-        mFragment.onCreate(Bundle.EMPTY);
+        AccessibilityDetailsSettingsFragment fragment = startFragment(intent);
 
-
-        assertStartActivityWithExpectedFragment(mActivity,
+        assertStartActivityWithExpectedFragment(fragment.getActivity(),
                 ToggleScreenMagnificationPreferenceFragment.class.getName());
     }
 
     @Test
     public void onCreate_accessibilityButton_launchAccessibilityButtonFragment() {
-        final Intent intent = new Intent();
+        Intent intent = new Intent();
         intent.putExtra(Intent.EXTRA_COMPONENT_NAME,
                 ACCESSIBILITY_BUTTON_COMPONENT_NAME.flattenToString());
-        doReturn(intent).when(mActivity).getIntent();
 
-        mFragment.onCreate(Bundle.EMPTY);
+        AccessibilityDetailsSettingsFragment fragment = startFragment(intent);
 
-        assertStartActivityWithExpectedFragment(mActivity,
+        assertStartActivityWithExpectedFragment(fragment.getActivity(),
                 AccessibilityButtonFragment.class.getName());
     }
 
     @Test
     public void onCreate_hearingAidsComponentName_launchAccessibilityHearingAidsFragment() {
-        FeatureFlagUtils.setEnabled(mContext,
-                FeatureFlagUtils.SETTINGS_ACCESSIBILITY_HEARING_AID_PAGE, true);
-        final Intent intent = new Intent();
+        Intent intent = new Intent();
         intent.putExtra(Intent.EXTRA_COMPONENT_NAME,
                 ACCESSIBILITY_HEARING_AIDS_COMPONENT_NAME.flattenToString());
-        doReturn(intent).when(mActivity).getIntent();
 
-        mFragment.onCreate(Bundle.EMPTY);
+        AccessibilityDetailsSettingsFragment fragment = startFragment(intent);
 
-        assertStartActivityWithExpectedFragment(mActivity,
+        assertStartActivityWithExpectedFragment(fragment.getActivity(),
                 AccessibilityHearingAidsFragment.class.getName());
     }
 
     @Test
     public void getMetricsCategory_returnsCorrectCategory() {
-        assertThat(mFragment.getMetricsCategory()).isEqualTo(
+
+        AccessibilityDetailsSettingsFragment fragment = startFragment(/* intent= */ null);
+
+        assertThat(fragment.getMetricsCategory()).isEqualTo(
                 SettingsEnums.ACCESSIBILITY_DETAILS_SETTINGS);
+    }
+
+    private AccessibilityDetailsSettingsFragment startFragment(Intent intent) {
+        mFragmentController = FragmentController.of(
+                new AccessibilityDetailsSettingsFragment(), intent)
+                .create()
+                .visible();
+
+        return mFragmentController.get();
     }
 
     private AccessibilityServiceInfo getMockAccessibilityServiceInfo() {
@@ -224,10 +215,9 @@ public class AccessibilityDetailsSettingsFragmentTest {
         return infoList;
     }
 
-    private void assertStartActivityWithExpectedFragment(Context mockContext, String fragmentName) {
-        verify(mockContext).startActivity(mIntentArgumentCaptor.capture());
-        assertThat(mIntentArgumentCaptor.getValue()
-                .getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT))
-                .isEqualTo(fragmentName);
+    private void assertStartActivityWithExpectedFragment(Activity activity, String fragmentName) {
+        Intent intent = Shadows.shadowOf(activity).getNextStartedActivity();
+        assertThat(intent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT)).isEqualTo(
+                fragmentName);
     }
 }

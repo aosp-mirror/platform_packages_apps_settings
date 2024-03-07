@@ -1,0 +1,8 @@
+package: "com.android.settings.flags"
+
+flag {
+  name: "enable_offload_bluetooth_operations_to_background_thread"
+  namespace: "pixel_cross_device_control"
+  description: "Gates whether to offload bluetooth operations to background thread"
+  bug: "305636727"
+}

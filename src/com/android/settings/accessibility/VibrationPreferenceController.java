@@ -21,9 +21,15 @@ import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
 import android.content.Context;
 import android.os.Vibrator;
 import android.provider.Settings;
+import android.text.TextUtils;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.flags.Flags;
 
 /** Controller for "Vibration & haptics" settings page. */
 public class VibrationPreferenceController extends BasePreferenceController {
@@ -49,4 +55,29 @@ public class VibrationPreferenceController extends BasePreferenceController {
                         ? R.string.accessibility_vibration_settings_state_on
                         : R.string.accessibility_vibration_settings_state_off);
     }
+
+    @VisibleForTesting
+    void launchVibrationSettingsFragment(Class klass) {
+        new SubSettingLauncher(mContext)
+                .setSourceMetricsCategory(getMetricsCategory())
+                .setDestination(klass.getName())
+                .launch();
+    }
+
+    @Override
+    public boolean handlePreferenceTreeClick(Preference preference) {
+        if (Flags.separateAccessibilityVibrationSettingsFragments()
+                && TextUtils.equals(preference.getKey(), getPreferenceKey())) {
+            if (mContext.getResources().getInteger(
+                    R.integer.config_vibration_supported_intensity_levels) > 1) {
+                launchVibrationSettingsFragment(VibrationIntensitySettingsFragment.class);
+            } else {
+                launchVibrationSettingsFragment(VibrationSettings.class);
+            }
+            return true;
+        }
+        return super.handlePreferenceTreeClick(preference);
+    }
+
+
 }

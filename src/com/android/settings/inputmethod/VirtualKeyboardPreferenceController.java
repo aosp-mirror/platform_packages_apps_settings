@@ -61,7 +61,7 @@ public class VirtualKeyboardPreferenceController extends AbstractPreferenceContr
     public void updateState(Preference preference) {
         final List<InputMethodInfo> imis = mImm.getEnabledInputMethodList();
         if (imis == null) {
-            preference.setSummary(R.string.summary_empty);
+            preference.setSummary(com.android.settingslib.R.string.summary_empty);
             return;
         }
 
@@ -77,7 +77,7 @@ public class VirtualKeyboardPreferenceController extends AbstractPreferenceContr
             labels.add(imi.loadLabel(mPm).toString());
         }
         if (labels.isEmpty()) {
-            preference.setSummary(R.string.summary_empty);
+            preference.setSummary(com.android.settingslib.R.string.summary_empty);
             return;
         }
 

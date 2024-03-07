@@ -42,7 +42,6 @@ import android.telephony.ServiceState;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
-import android.text.Html;
 
 import androidx.slice.Slice;
 import androidx.slice.builders.ListBuilder;
@@ -56,7 +55,6 @@ import com.android.settings.wifi.slice.WifiSliceItem;
 import com.android.wifitrackerlib.WifiEntry;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -166,11 +164,9 @@ public class ProviderModelSliceHelperTest {
         assertThat(testItem).isNull();
     }
 
-    @Ignore
     @Test
     public void createCarrierRow_hasDdsAndActiveNetworkIsNotCellular_verifyTitleAndSummary() {
         String expectDisplayName = "Name1";
-        CharSequence expectedSubtitle = Html.fromHtml("5G", Html.FROM_HTML_MODE_LEGACY);
         String networkType = "5G";
         mockConnections(true, ServiceState.STATE_IN_SERVICE, expectDisplayName,
                 true, true);
@@ -180,19 +176,17 @@ public class ProviderModelSliceHelperTest {
                 networkType);
 
         assertThat(testRowBuild.getTitle()).isEqualTo(expectDisplayName);
-        assertThat(testRowBuild.getSubtitle()).isEqualTo(expectedSubtitle);
+        assertThat(testRowBuild.getSubtitle()).isEqualTo("5G");
     }
 
-    @Ignore
     @Test
     public void createCarrierRow_wifiOnhasDdsAndActiveNetworkIsCellular_verifyTitleAndSummary() {
         String expectDisplayName = "Name1";
         String networkType = "5G";
         String connectedText = ResourcesUtils.getResourcesString(mContext,
                 "mobile_data_connection_active");
-        CharSequence expectedSubtitle = Html.fromHtml(ResourcesUtils.getResourcesString(mContext,
-                "preference_summary_default_combination", connectedText, networkType),
-                Html.FROM_HTML_MODE_LEGACY);
+        CharSequence expectedSubtitle = ResourcesUtils.getResourcesString(mContext,
+                "preference_summary_default_combination", connectedText, networkType);
         mockConnections(true, ServiceState.STATE_IN_SERVICE, expectDisplayName,
                 true, true);
         addNetworkTransportType(NetworkCapabilities.TRANSPORT_CELLULAR);
@@ -204,13 +198,11 @@ public class ProviderModelSliceHelperTest {
         assertThat(testRowBuild.getSubtitle()).isEqualTo(expectedSubtitle);
     }
 
-    @Ignore
     @Test
     public void createCarrierRow_noNetworkAvailable_verifyTitleAndSummary() {
         String expectDisplayName = "Name1";
-        CharSequence expectedSubtitle = Html.fromHtml(
-                ResourcesUtils.getResourcesString(mContext, "mobile_data_no_connection"),
-                Html.FROM_HTML_MODE_LEGACY);
+        CharSequence expectedSubtitle =
+                ResourcesUtils.getResourcesString(mContext, "mobile_data_no_connection");
         String networkType = "";
 
         mockConnections(true, ServiceState.STATE_OUT_OF_SERVICE, expectDisplayName,

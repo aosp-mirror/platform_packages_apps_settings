@@ -52,6 +52,7 @@ import androidx.annotation.RawRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 
+import com.android.server.accessibility.Flags;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.utils.AnnotationSpan;
@@ -247,6 +248,9 @@ public class AccessibilityDialogUtils {
                         R.layout.accessibility_edit_shortcut_magnification, null);
                 initSoftwareShortcut(context, contentView);
                 initHardwareShortcut(context, contentView);
+                if (Flags.enableMagnificationMultipleFingerMultipleTapGesture()) {
+                    initTwoFingerDoubleTapMagnificationShortcut(context, contentView);
+                }
                 initMagnifyShortcut(context, contentView);
                 initAdvancedWidget(contentView);
                 break;
@@ -255,6 +259,9 @@ public class AccessibilityDialogUtils {
                         R.layout.accessibility_edit_shortcut_magnification, null);
                 initSoftwareShortcutForSUW(context, contentView);
                 initHardwareShortcut(context, contentView);
+                if (Flags.enableMagnificationMultipleFingerMultipleTapGesture()) {
+                    initTwoFingerDoubleTapMagnificationShortcut(context, contentView);
+                }
                 initMagnifyShortcut(context, contentView);
                 initAdvancedWidget(contentView);
                 break;
@@ -356,6 +363,23 @@ public class AccessibilityDialogUtils {
 
         setupShortcutWidgetWithImageRawResource(context, dialogView, title, summary,
                 R.raw.a11y_shortcut_type_triple_tap);
+    }
+
+    private static void initTwoFingerDoubleTapMagnificationShortcut(Context context, View view) {
+        // TODO(b/306153204): Update shortcut string and image when UX provides them
+        final View dialogView = view.findViewById(R.id.two_finger_triple_tap_shortcut);
+        final CharSequence title = context.getText(
+                R.string.accessibility_shortcut_edit_dialog_title_two_finger_double_tap);
+        String summary = context.getString(
+                R.string.accessibility_shortcut_edit_dialog_summary_two_finger_double_tap);
+        // Format the number '2' in the summary.
+        final Object[] arguments = {2};
+        summary = MessageFormat.format(summary, arguments);
+
+        setupShortcutWidgetWithImageRawResource(context, dialogView, title, summary,
+                R.raw.a11y_shortcut_type_triple_tap);
+
+        dialogView.setVisibility(View.VISIBLE);
     }
 
     private static void initAdvancedWidget(View view) {

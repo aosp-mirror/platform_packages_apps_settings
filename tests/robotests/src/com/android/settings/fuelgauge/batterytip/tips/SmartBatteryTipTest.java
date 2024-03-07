@@ -33,8 +33,7 @@ import org.robolectric.RuntimeEnvironment;
 @RunWith(RobolectricTestRunner.class)
 public class SmartBatteryTipTest {
 
-    @Mock
-    private MetricsFeatureProvider mMetricsFeatureProvider;
+    @Mock private MetricsFeatureProvider mMetricsFeatureProvider;
     private Context mContext;
     private SmartBatteryTip mSmartBatteryTip;
 
@@ -50,7 +49,10 @@ public class SmartBatteryTipTest {
     public void testLog() {
         mSmartBatteryTip.log(mContext, mMetricsFeatureProvider);
 
-        verify(mMetricsFeatureProvider).action(mContext,
-                MetricsProto.MetricsEvent.ACTION_SMART_BATTERY_TIP, BatteryTip.StateType.NEW);
+        verify(mMetricsFeatureProvider)
+                .action(
+                        mContext,
+                        MetricsProto.MetricsEvent.ACTION_SMART_BATTERY_TIP,
+                        BatteryTip.StateType.NEW);
     }
 }

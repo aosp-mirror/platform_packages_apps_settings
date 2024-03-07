@@ -88,7 +88,7 @@ class SlicesIndexer implements Runnable {
 
     @VisibleForTesting
     List<SliceData> getSliceData() {
-        return FeatureFactory.getFactory(mContext)
+        return FeatureFactory.getFeatureFactory()
                 .getSlicesFeatureProvider()
                 .getSliceDataConverter(mContext)
                 .getSliceData();
@@ -117,6 +117,7 @@ class SlicesIndexer implements Runnable {
                     dataRow.getUnavailableSliceSubtitle());
             values.put(IndexColumns.PUBLIC_SLICE, dataRow.isPublicSlice());
             values.put(IndexColumns.HIGHLIGHT_MENU_RESOURCE, dataRow.getHighlightMenuRes());
+            values.put(IndexColumns.USER_RESTRICTION, dataRow.getUserRestriction());
 
             database.replaceOrThrow(Tables.TABLE_SLICES_INDEX, null /* nullColumnHack */,
                     values);

@@ -20,12 +20,15 @@ import android.content.Context;
 import android.hardware.input.InputDeviceIdentifier;
 import android.hardware.input.InputManager;
 import android.hardware.input.KeyboardLayout;
+import android.os.UserHandle;
 import android.view.InputDevice;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.view.inputmethod.InputMethodSubtype;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -55,7 +58,7 @@ public class NewKeyboardSettingsUtils {
 
     static List<String> getSuitableImeLabels(Context context, InputMethodManager imm, int userId) {
         List<String> suitableInputMethodInfoLabels = new ArrayList<>();
-        List<InputMethodInfo> infoList = imm.getEnabledInputMethodListAsUser(userId);
+        List<InputMethodInfo> infoList = imm.getEnabledInputMethodListAsUser(UserHandle.of(userId));
         for (InputMethodInfo info : infoList) {
             List<InputMethodSubtype> subtypes =
                     imm.getEnabledInputMethodSubtypeList(info, true);
@@ -109,7 +112,8 @@ public class NewKeyboardSettingsUtils {
     }
 
     static InputDevice getInputDevice(InputManager im, InputDeviceIdentifier identifier) {
-        return im.getInputDeviceByDescriptor(identifier.getDescriptor());
+        return identifier == null ? null : im.getInputDeviceByDescriptor(
+                identifier.getDescriptor());
     }
 
     static KeyboardLayout[] getKeyboardLayouts(InputManager inputManager, int userId,
@@ -120,5 +124,12 @@ public class NewKeyboardSettingsUtils {
     static String getKeyboardLayout(InputManager inputManager, int userId,
             InputDeviceIdentifier identifier, InputMethodInfo info, InputMethodSubtype subtype) {
         return inputManager.getKeyboardLayoutForInputDevice(identifier, userId, info, subtype);
+    }
+
+    static void sortKeyboardLayoutsByLabel(KeyboardLayout[] keyboardLayouts) {
+        Arrays.sort(
+                keyboardLayouts,
+                Comparator.comparing(KeyboardLayout::getLabel)
+        );
     }
 }

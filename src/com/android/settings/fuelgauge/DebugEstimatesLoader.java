@@ -40,40 +40,48 @@ public class DebugEstimatesLoader extends AsyncLoaderCompat<List<BatteryInfo>> {
     }
 
     @Override
-    protected void onDiscardResult(List<BatteryInfo> result) {
-
-    }
+    protected void onDiscardResult(List<BatteryInfo> result) {}
 
     @Override
     public List<BatteryInfo> loadInBackground() {
         Context context = getContext();
         PowerUsageFeatureProvider powerUsageFeatureProvider =
-                FeatureFactory.getFactory(context).getPowerUsageFeatureProvider(context);
+                FeatureFactory.getFeatureFactory().getPowerUsageFeatureProvider();
 
         // get stuff we'll need for both BatteryInfo
-        final long elapsedRealtimeUs = PowerUtil.convertMsToUs(
-                SystemClock.elapsedRealtime());
-        Intent batteryBroadcast = getContext().registerReceiver(null,
-                new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        final long elapsedRealtimeUs = PowerUtil.convertMsToUs(SystemClock.elapsedRealtime());
+        Intent batteryBroadcast =
+                getContext()
+                        .registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
         BatteryUsageStats batteryUsageStats;
         try {
-            batteryUsageStats = context.getSystemService(BatteryStatsManager.class)
-                    .getBatteryUsageStats();
+            batteryUsageStats =
+                    context.getSystemService(BatteryStatsManager.class).getBatteryUsageStats();
         } catch (RuntimeException e) {
             Log.e(TAG, "getBatteryInfo() from getBatteryUsageStats()", e);
             // Use default BatteryUsageStats.
             batteryUsageStats = new BatteryUsageStats.Builder(new String[0]).build();
         }
-        BatteryInfo oldinfo = BatteryInfo.getBatteryInfoOld(getContext(), batteryBroadcast,
-                batteryUsageStats, elapsedRealtimeUs, false);
+        BatteryInfo oldinfo =
+                BatteryInfo.getBatteryInfoOld(
+                        getContext(),
+                        batteryBroadcast,
+                        batteryUsageStats,
+                        elapsedRealtimeUs,
+                        false);
 
         Estimate estimate = powerUsageFeatureProvider.getEnhancedBatteryPrediction(context);
         if (estimate == null) {
             estimate = new Estimate(0, false, EstimateKt.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN);
         }
-        BatteryInfo newInfo = BatteryInfo.getBatteryInfo(getContext(), batteryBroadcast,
-                batteryUsageStats,
-                estimate, elapsedRealtimeUs, false);
+        BatteryInfo newInfo =
+                BatteryInfo.getBatteryInfo(
+                        getContext(),
+                        batteryBroadcast,
+                        batteryUsageStats,
+                        estimate,
+                        elapsedRealtimeUs,
+                        false);
 
         List<BatteryInfo> infos = new ArrayList<>();
         infos.add(oldinfo);

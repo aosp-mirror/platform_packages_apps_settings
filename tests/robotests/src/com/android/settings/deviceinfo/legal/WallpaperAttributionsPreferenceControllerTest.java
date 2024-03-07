@@ -22,7 +22,6 @@ import android.content.Context;
 import com.android.settings.core.BasePreferenceController;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
@@ -49,7 +48,6 @@ public class WallpaperAttributionsPreferenceControllerTest {
                 .isEqualTo(BasePreferenceController.AVAILABLE);
     }
 
-    @Ignore
     @Test
     @Config(qualifiers = "mcc999")
     public void getAvailabilityStatus_ifNotVisible_false() {

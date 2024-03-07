@@ -36,4 +36,5 @@ message BatteryInformation {
   optional double foreground_service_usage_consume_power = 17;
   optional double background_usage_consume_power = 18;
   optional double cached_usage_consume_power = 19;
+  optional int64 foreground_service_usage_time_in_ms = 20;
 }

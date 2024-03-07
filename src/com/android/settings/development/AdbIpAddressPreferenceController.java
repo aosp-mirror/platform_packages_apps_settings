@@ -29,7 +29,6 @@ import android.util.Log;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.R;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.deviceinfo.AbstractConnectivityPreferenceController;
 
@@ -110,13 +109,13 @@ public class AdbIpAddressPreferenceController extends AbstractConnectivityPrefer
         if (ipAddress != null) {
             int port = getPort();
             if (port <= 0) {
-                mAdbIpAddrPref.setSummary(R.string.status_unavailable);
+                mAdbIpAddrPref.setSummary(com.android.settingslib.R.string.status_unavailable);
             } else {
                 ipAddress += ":" + port;
             }
             mAdbIpAddrPref.setSummary(ipAddress);
         } else {
-            mAdbIpAddrPref.setSummary(R.string.status_unavailable);
+            mAdbIpAddrPref.setSummary(com.android.settingslib.R.string.status_unavailable);
         }
     }
 

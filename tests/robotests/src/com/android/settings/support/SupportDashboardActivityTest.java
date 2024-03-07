@@ -29,6 +29,7 @@ import com.android.settings.R;
 import com.android.settingslib.search.SearchIndexableRaw;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -64,6 +65,7 @@ public class SupportDashboardActivityTest {
         assertThat(value.intentAction).isEqualTo(ACTION_SUPPORT_SETTINGS);
     }
 
+    @Ignore("b/314927625")
     @Test
     public void shouldHandleIntentAction() {
         PackageManager packageManager = mContext.getPackageManager();

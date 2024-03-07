@@ -25,11 +25,14 @@ import androidx.preference.Preference;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.Utils;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.search.SearchIndexable;
 
 /**
  * Preference controller that controls whether a SFPS device is required to be interactive for
  * fingerprint authentication to unlock the device.
  */
+@SearchIndexable
 public class FingerprintSettingsRequireScreenOnToAuthPreferenceController
         extends FingerprintSettingsPreferenceController {
     private static final String TAG =
@@ -103,5 +106,11 @@ public class FingerprintSettingsRequireScreenOnToAuthPreferenceController
     private int getUserHandle() {
         return UserHandle.of(getUserId()).getIdentifier();
     }
+
+    /**
+     * This feature is not directly searchable.
+     */
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {};
 
 }

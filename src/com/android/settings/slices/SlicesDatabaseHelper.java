@@ -36,7 +36,7 @@ public class SlicesDatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "slices_index.db";
     private static final String SHARED_PREFS_TAG = "slices_shared_prefs";
 
-    private static final int DATABASE_VERSION = 9;
+    private static final int DATABASE_VERSION = 10;
 
     public interface Tables {
         String TABLE_SLICES_INDEX = "slices_index";
@@ -108,6 +108,11 @@ public class SlicesDatabaseHelper extends SQLiteOpenHelper {
          * Resource ID for the menu entry of the setting.
          */
         String HIGHLIGHT_MENU_RESOURCE = "highlight_menu";
+
+        /**
+         * The name of user restriction for the setting.
+         */
+        String USER_RESTRICTION = "user_restriction";
     }
 
     private static final String CREATE_SLICES_TABLE =
@@ -138,6 +143,8 @@ public class SlicesDatabaseHelper extends SQLiteOpenHelper {
                     + IndexColumns.PUBLIC_SLICE
                     + ", "
                     + IndexColumns.HIGHLIGHT_MENU_RESOURCE
+                    + ", "
+                    + IndexColumns.USER_RESTRICTION
                     + " INTEGER DEFAULT 0 "
                     + ");";
 

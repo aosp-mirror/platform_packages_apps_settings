@@ -16,12 +16,20 @@
 
 package com.android.settings.localepicker;
 
+import static com.android.settings.flags.Flags.localeNotificationEnabled;
+
 import android.app.FragmentTransaction;
 import android.app.LocaleManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.settings.SettingsEnums;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.LocaleList;
+import android.os.SystemClock;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
@@ -29,6 +37,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 
+import androidx.core.app.NotificationCompat;
 import androidx.core.view.ViewCompat;
 
 import com.android.internal.app.LocalePickerWithRegion;
@@ -37,15 +46,27 @@ import com.android.settings.R;
 import com.android.settings.applications.AppLocaleUtil;
 import com.android.settings.applications.appinfo.AppLocaleDetails;
 import com.android.settings.core.SettingsBaseActivity;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 public class AppLocalePickerActivity extends SettingsBaseActivity
         implements LocalePickerWithRegion.LocaleSelectedListener, MenuItem.OnActionExpandListener {
     private static final String TAG = AppLocalePickerActivity.class.getSimpleName();
+    private static final String CHANNEL_ID_SUGGESTION = "suggestion";
+    private static final String CHANNEL_ID_SUGGESTION_TO_USER = "Locale suggestion";
+    private static final int SIM_LOCALE = 1 << 0;
+    private static final int SYSTEM_LOCALE = 1 << 1;
+    private static final int APP_LOCALE = 1 << 2;
+    private static final int IME_LOCALE = 1 << 3;
+    static final String EXTRA_APP_LOCALE = "app_locale";
+    static final String EXTRA_NOTIFICATION_ID = "notification_id";
 
     private String mPackageName;
     private LocalePickerWithRegion mLocalePickerWithRegion;
     private AppLocaleDetails mAppLocaleDetails;
     private View mAppLocaleDetailContainer;
+    private NotificationController mNotificationController;
+    private MetricsFeatureProvider mMetricsFeatureProvider;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -71,6 +92,8 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
 
         setTitle(R.string.app_locale_picker_title);
         getActionBar().setDisplayHomeAsUpEnabled(true);
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
+        mNotificationController = NotificationController.getInstance(this);
 
         mLocalePickerWithRegion = LocalePickerWithRegion.createLanguagePicker(
                 this,
@@ -99,7 +122,9 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
         if (localeInfo == null || localeInfo.getLocale() == null || localeInfo.isSystemLocale()) {
             setAppDefaultLocale("");
         } else {
+            logLocaleSource(localeInfo);
             setAppDefaultLocale(localeInfo.getLocale().toLanguageTag());
+            broadcastAppLocaleChange(localeInfo);
         }
         finish();
     }
@@ -129,6 +154,82 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
             return;
         }
         localeManager.setApplicationLocales(mPackageName, LocaleList.forLanguageTags(languageTag));
+    }
+
+    private void broadcastAppLocaleChange(LocaleStore.LocaleInfo localeInfo) {
+        if (!localeNotificationEnabled()) {
+            return;
+        }
+        String localeTag = localeInfo.getLocale().toLanguageTag();
+        if (LocaleUtils.isInSystemLocale(localeTag) || localeInfo.isAppCurrentLocale()) {
+            return;
+        }
+        try {
+            int uid = getPackageManager().getApplicationInfo(mPackageName,
+                    PackageManager.GET_META_DATA).uid;
+            boolean launchNotification = mNotificationController.shouldTriggerNotification(
+                    uid, localeTag);
+            if (launchNotification) {
+                triggerNotification(
+                        mNotificationController.getNotificationId(localeTag),
+                        getString(R.string.title_system_locale_addition,
+                                localeInfo.getFullNameNative()),
+                        getString(R.string.desc_system_locale_addition),
+                        localeTag);
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.e(TAG, "Unable to find info for package: " + mPackageName);
+        }
+    }
+
+    private void triggerNotification(
+            int notificationId,
+            String title,
+            String description,
+            String localeTag) {
+        NotificationManager notificationManager = getSystemService(NotificationManager.class);
+        final boolean channelExist =
+                notificationManager.getNotificationChannel(CHANNEL_ID_SUGGESTION) != null;
+
+        // Create an alert channel if it does not exist
+        if (!channelExist) {
+            NotificationChannel channel =
+                    new NotificationChannel(
+                            CHANNEL_ID_SUGGESTION,
+                            CHANNEL_ID_SUGGESTION_TO_USER,
+                            NotificationManager.IMPORTANCE_DEFAULT);
+            channel.setSound(/* sound */ null, /* audioAttributes */ null); // silent notification
+            notificationManager.createNotificationChannel(channel);
+        }
+        final NotificationCompat.Builder builder =
+                new NotificationCompat.Builder(this, CHANNEL_ID_SUGGESTION)
+                        .setSmallIcon(R.drawable.ic_settings_language)
+                        .setAutoCancel(true)
+                        .setContentTitle(title)
+                        .setContentText(description)
+                        .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                        .setContentIntent(
+                                createPendingIntent(localeTag, notificationId, false))
+                        .setDeleteIntent(
+                                createPendingIntent(localeTag, notificationId, true));
+        notificationManager.notify(notificationId, builder.build());
+    }
+
+    private PendingIntent createPendingIntent(String locale, int notificationId,
+            boolean isDeleteIntent) {
+        Intent intent = isDeleteIntent
+                ? new Intent(this, NotificationCancelReceiver.class)
+                : new Intent(this, NotificationActionActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+        intent.putExtra(EXTRA_APP_LOCALE, locale)
+                .putExtra(EXTRA_NOTIFICATION_ID, notificationId);
+        int flag = PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT;
+        int elapsedTime = (int) SystemClock.elapsedRealtimeNanos();
+
+        return isDeleteIntent
+                ? PendingIntent.getBroadcast(this, elapsedTime, intent, flag)
+                : PendingIntent.getActivity(this, elapsedTime, intent, flag);
     }
 
     private View launchAppLocaleDetailsPage() {
@@ -176,5 +277,33 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
         }
 
         return false;
+    }
+
+    private void logLocaleSource(LocaleStore.LocaleInfo localeInfo) {
+        if (!localeInfo.isSuggested() || localeInfo.isAppCurrentLocale()) {
+            return;
+        }
+        int localeSource = 0;
+        if (hasSuggestionType(localeInfo,
+                LocaleStore.LocaleInfo.SUGGESTION_TYPE_SYSTEM_AVAILABLE_LANGUAGE)) {
+            localeSource |= SYSTEM_LOCALE;
+        }
+        if (hasSuggestionType(localeInfo,
+                LocaleStore.LocaleInfo.SUGGESTION_TYPE_OTHER_APP_LANGUAGE)) {
+            localeSource |= APP_LOCALE;
+        }
+        if (hasSuggestionType(localeInfo, LocaleStore.LocaleInfo.SUGGESTION_TYPE_IME_LANGUAGE)) {
+            localeSource |= IME_LOCALE;
+        }
+        if (hasSuggestionType(localeInfo, LocaleStore.LocaleInfo.SUGGESTION_TYPE_SIM)) {
+            localeSource |= SIM_LOCALE;
+        }
+        mMetricsFeatureProvider.action(this,
+                SettingsEnums.ACTION_CHANGE_APP_LANGUAGE_FROM_SUGGESTED, localeSource);
+    }
+
+    private static boolean hasSuggestionType(LocaleStore.LocaleInfo localeInfo,
+            int suggestionType) {
+        return localeInfo.isSuggestionOfType(suggestionType);
     }
 }

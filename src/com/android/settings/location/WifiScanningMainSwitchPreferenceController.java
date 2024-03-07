@@ -17,21 +17,21 @@ package com.android.settings.location;
 
 import android.content.Context;
 import android.net.wifi.WifiManager;
-import android.widget.Switch;
 import android.os.UserManager;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settingslib.widget.MainSwitchPreference;
-import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 /**
  * Preference controller for Wi-Fi scanning main switch.
  */
 public class WifiScanningMainSwitchPreferenceController extends TogglePreferenceController
-        implements OnMainSwitchChangeListener {
+        implements OnCheckedChangeListener {
 
     private static final String KEY_WIFI_SCANNING_SWITCH = "wifi_always_scanning_switch";
     private final WifiManager mWifiManager;
@@ -79,7 +79,7 @@ public class WifiScanningMainSwitchPreferenceController extends TogglePreference
     }
 
     @Override
-    public void onSwitchChanged(Switch switchView, boolean isChecked) {
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (isChecked != isChecked()) {
             setChecked(isChecked);
         }

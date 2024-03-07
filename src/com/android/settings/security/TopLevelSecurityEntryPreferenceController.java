@@ -32,7 +32,7 @@ public class TopLevelSecurityEntryPreferenceController extends BasePreferenceCon
 
     public TopLevelSecurityEntryPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
-        mSecuritySettingsFeatureProvider = FeatureFactory.getFactory(mContext)
+        mSecuritySettingsFeatureProvider = FeatureFactory.getFeatureFactory()
                 .getSecuritySettingsFeatureProvider();
     }
 

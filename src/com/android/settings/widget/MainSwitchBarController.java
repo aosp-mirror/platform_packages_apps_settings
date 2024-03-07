@@ -16,16 +16,16 @@
 
 package com.android.settings.widget;
 
-import android.widget.Switch;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import com.android.settingslib.RestrictedLockUtils;
-import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 /**
  * The switch controller that is used to update the switch widget in the SettingsMainSwitchBar.
  */
 public class MainSwitchBarController extends SwitchWidgetController implements
-        OnMainSwitchChangeListener {
+        OnCheckedChangeListener {
 
     private final SettingsMainSwitchBar mMainSwitch;
 
@@ -74,7 +74,7 @@ public class MainSwitchBarController extends SwitchWidgetController implements
     }
 
     @Override
-    public void onSwitchChanged(Switch switchView, boolean isChecked) {
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (mListener != null) {
             mListener.onSwitchToggled(isChecked);
         }

@@ -19,78 +19,93 @@ package com.android.settings.datetime;
 import android.content.Context;
 import android.content.Intent;
 import android.provider.Settings;
-import android.text.TextUtils;
 import android.text.format.DateFormat;
 
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
-import androidx.preference.TwoStatePreference;
 
-import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settings.R;
+import com.android.settings.core.TogglePreferenceController;
 
 import java.util.Calendar;
 import java.util.Date;
 
-public class TimeFormatPreferenceController extends AbstractPreferenceController
-        implements PreferenceControllerMixin {
+public class TimeFormatPreferenceController extends TogglePreferenceController {
 
     static final String HOURS_12 = "12";
     static final String HOURS_24 = "24";
 
-    private static final String KEY_TIME_FORMAT = "24 hour";
-
     // Used for showing the current date format, which looks like "12/31/2010", "2010/12/13", etc.
     // The date value is stubs (independent of actual date).
     private final Calendar mDummyDate;
-    private final boolean mIsFromSUW;
-    private final UpdateTimeAndDateCallback mUpdateTimeAndDateCallback;
+    private boolean mIsFromSUW;
+    private UpdateTimeAndDateCallback mUpdateTimeAndDateCallback;
 
-    public TimeFormatPreferenceController(Context context, UpdateTimeAndDateCallback callback,
-            boolean isFromSUW) {
-        super(context);
-        mIsFromSUW = isFromSUW;
+    public TimeFormatPreferenceController(Context context, String key) {
+        super(context, key);
         mDummyDate = Calendar.getInstance();
+    }
+
+    /**
+     * Set the Time and Date callback
+     */
+    public TimeFormatPreferenceController setTimeAndDateCallback(
+            UpdateTimeAndDateCallback callback) {
         mUpdateTimeAndDateCallback = callback;
+        return this;
+    }
+
+    /**
+     * Set if current fragment is launched via SUW
+     */
+    public TimeFormatPreferenceController setFromSUW(boolean isFromSUW) {
+        mIsFromSUW = isFromSUW;
+        return this;
     }
 
     @Override
-    public boolean isAvailable() {
-        return !mIsFromSUW;
+    public int getAvailabilityStatus() {
+        if (mIsFromSUW) {
+            return DISABLED_DEPENDENT_SETTING;
+        }
+        if (AutoTimeFormatPreferenceController.isAutoTimeFormatSelection(mContext)) {
+            return DISABLED_DEPENDENT_SETTING;
+        }
+        return AVAILABLE;
     }
 
     @Override
     public void updateState(Preference preference) {
-        if (!(preference instanceof TwoStatePreference)) {
-            return;
-        }
-        preference.setEnabled(
-            !AutoTimeFormatPreferenceController.isAutoTimeFormatSelection(mContext));
-        ((TwoStatePreference) preference).setChecked(is24Hour());
+        super.updateState(preference);
+        preference.setEnabled(getAvailabilityStatus() == AVAILABLE);
+        refreshSummary(preference);
+    }
+
+    @Override
+    public boolean isChecked() {
+        return is24Hour();
+    }
+
+    @Override
+    public boolean setChecked(boolean isChecked) {
+        update24HourFormat(mContext, isChecked);
+        mUpdateTimeAndDateCallback.updateTimeAndDateDisplay(mContext);
+        return true;
+    }
+
+    @Override
+    public CharSequence getSummary() {
         final Calendar now = Calendar.getInstance();
         mDummyDate.setTimeZone(now.getTimeZone());
         // We use December 31st because it's unambiguous when demonstrating the date format.
         // We use 13:00 so we can demonstrate the 12/24 hour options.
         mDummyDate.set(now.get(Calendar.YEAR), 11, 31, 13, 0, 0);
         final Date dummyDate = mDummyDate.getTime();
-        preference.setSummary(DateFormat.getTimeFormat(mContext).format(dummyDate));
+        return DateFormat.getTimeFormat(mContext).format(dummyDate);
     }
 
     @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        if (!(preference instanceof TwoStatePreference)
-                || !TextUtils.equals(KEY_TIME_FORMAT, preference.getKey())) {
-            return false;
-        }
-        final boolean is24Hour = ((SwitchPreference) preference).isChecked();
-        update24HourFormat(mContext, is24Hour);
-        mUpdateTimeAndDateCallback.updateTimeAndDateDisplay(mContext);
-        return true;
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return KEY_TIME_FORMAT;
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_system;
     }
 
     private boolean is24Hour() {

@@ -19,7 +19,9 @@ package com.android.settings.accessibility;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.verify;
+import static org.robolectric.Shadows.shadowOf;
 
+import android.app.Application;
 import android.content.Context;
 import android.view.View;
 import android.view.accessibility.AccessibilityNodeInfo;
@@ -37,8 +39,6 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
-import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.shadows.ShadowLooper;
 
@@ -61,7 +61,7 @@ public class AccessibilityQuickSettingsTooltipWindowTest {
     @Before
     public void setUp() {
         mTooltipView = new AccessibilityQuickSettingsTooltipWindow(mContext);
-        mView = new View(RuntimeEnvironment.application);
+        mView = new View(mContext);
     }
 
     @Test
@@ -92,7 +92,7 @@ public class AccessibilityQuickSettingsTooltipWindowTest {
 
         final boolean isActionPerformed =
                 mTooltipView.getContentView().performAccessibilityAction(
-                        AccessibilityNodeInfo.AccessibilityAction.ACTION_CLICK.getId(),
+                        AccessibilityNodeInfo.ACTION_CLICK,
                         /* arguments= */ null);
 
         assertThat(isActionPerformed).isTrue();
@@ -125,7 +125,8 @@ public class AccessibilityQuickSettingsTooltipWindowTest {
     }
 
     private static PopupWindow getLatestPopupWindow() {
-        final ShadowApplication shadowApplication = Shadow.extract(RuntimeEnvironment.application);
+        final ShadowApplication shadowApplication = shadowOf(
+                (Application) ApplicationProvider.getApplicationContext());
         return shadowApplication.getLatestPopupWindow();
     }
 }

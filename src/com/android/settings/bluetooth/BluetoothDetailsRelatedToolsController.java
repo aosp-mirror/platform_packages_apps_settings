@@ -75,8 +75,8 @@ public class BluetoothDetailsRelatedToolsController extends BluetoothDetailsCont
             mPreferenceCategory.removePreference(liveCaptionPreference);
         }
 
-        final List<ComponentName> relatedToolsList = FeatureFactory.getFactory(
-                mContext).getBluetoothFeatureProvider().getRelatedTools();
+        final List<ComponentName> relatedToolsList =
+                FeatureFactory.getFeatureFactory().getBluetoothFeatureProvider().getRelatedTools();
         if (!CollectionUtils.isEmpty(relatedToolsList)) {
             addAccessibilityInstalledRelatedPreference(relatedToolsList);
         }

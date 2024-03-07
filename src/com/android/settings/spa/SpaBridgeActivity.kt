@@ -17,10 +17,13 @@
 package com.android.settings.spa
 
 import android.app.Activity
-import android.content.pm.PackageManager
-import android.content.pm.PackageManager.ComponentInfoFlags
+import android.content.Intent
 import android.os.Bundle
-import com.android.settings.spa.SpaActivity.Companion.startSpaActivity
+import com.android.settings.activityembedding.ActivityEmbeddingUtils
+import com.android.settings.activityembedding.EmbeddedDeepLinkUtils.tryStartMultiPaneDeepLink
+import com.android.settings.spa.SpaDestination.Companion.getDestination
+import com.android.settingslib.spa.framework.util.SESSION_EXTERNAL
+import com.android.settingslib.spa.framework.util.appendSpaParams
 
 /**
  * Activity used as a bridge to [SpaActivity].
@@ -32,18 +35,23 @@ import com.android.settings.spa.SpaActivity.Companion.startSpaActivity
 class SpaBridgeActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        getDestination()?.let { destination ->
-            startSpaActivity(destination)
-        }
+        startSpaActivityFromBridge()
         finish()
     }
 
     companion object {
-        fun Activity.getDestination(): String? =
-            packageManager.getActivityInfo(
-                componentName, ComponentInfoFlags.of(PackageManager.GET_META_DATA.toLong())
-            ).metaData.getString(META_DATA_KEY_DESTINATION)
-
-        private const val META_DATA_KEY_DESTINATION = "com.android.settings.spa.DESTINATION"
+        fun Activity.startSpaActivityFromBridge(destinationFactory: (String) -> String? = { it }) {
+            val (destination, highlightMenuKey) = getDestination(destinationFactory) ?: return
+            val intent = Intent(this, SpaActivity::class.java)
+                .appendSpaParams(
+                    destination = destination,
+                    sessionName = SESSION_EXTERNAL,
+                )
+            if (!ActivityEmbeddingUtils.isEmbeddingActivityEnabled(this) ||
+                !tryStartMultiPaneDeepLink(intent, highlightMenuKey)
+            ) {
+                startActivity(intent)
+            }
+        }
     }
 }

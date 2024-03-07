@@ -32,7 +32,6 @@ import android.hardware.input.InputManager;
 import android.view.InputDevice;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -111,7 +110,6 @@ public class GameControllerPreferenceControllerTest {
         assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 
-    @Ignore
     @Test
     @Config(qualifiers = "mcc999")
     public void getAvailabilityStatus_ifDisabled_shouldReturnDisabled() {

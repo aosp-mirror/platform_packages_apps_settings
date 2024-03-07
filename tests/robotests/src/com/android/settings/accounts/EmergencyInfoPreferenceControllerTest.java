@@ -40,7 +40,6 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowAccountManager;
 import com.android.settings.testutils.shadow.ShadowContentResolver;
-import com.android.settings.utils.ActivityControllerWrapper;
 import com.android.settingslib.search.SearchIndexableRaw;
 
 import org.junit.After;
@@ -76,8 +75,7 @@ public class EmergencyInfoPreferenceControllerTest {
         doReturn(mock(DevicePolicyManager.class)).when(mContext)
                 .getSystemService(Context.DEVICE_POLICY_SERVICE);
         mController = new EmergencyInfoPreferenceController(mContext, "test_key");
-        mPreference = new Preference((Context) ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(Activity.class)).get());
+        mPreference = new Preference(Robolectric.setupActivity(Activity.class));
         mPreference.setKey(mController.getPreferenceKey());
         when(mScreen.findPreference(mPreference.getKey())).thenReturn(mPreference);
         when(mContext.getResources().getBoolean(R.bool.config_show_emergency_info_in_device_info))

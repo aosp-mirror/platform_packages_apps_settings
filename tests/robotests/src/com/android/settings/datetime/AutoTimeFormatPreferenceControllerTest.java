@@ -53,13 +53,13 @@ public class AutoTimeFormatPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mApplication = ShadowApplication.getInstance();
         mContext = RuntimeEnvironment.application;
+        mController = new TestAutoTimeFormatPreferenceController(mContext, "test_key");
+        mPreference = new SwitchPreference(mContext);
+        mPreference.setKey("test_key");
     }
 
     @Test
     public void updateState_24HourSet_shouldCheckPreference() {
-        mController = new TestAutoTimeFormatPreferenceController(mContext, mCallback);
-        mPreference = new SwitchPreference(mContext);
-        mPreference.setKey(mController.getPreferenceKey());
         Settings.System.putString(mContext.getContentResolver(), Settings.System.TIME_12_24,
                 TimeFormatPreferenceController.HOURS_24);
 
@@ -70,9 +70,6 @@ public class AutoTimeFormatPreferenceControllerTest {
 
     @Test
     public void updateState_12HourSet_shouldCheckPreference() {
-        mController = new TestAutoTimeFormatPreferenceController(mContext, mCallback);
-        mPreference = new SwitchPreference(mContext);
-        mPreference.setKey(mController.getPreferenceKey());
         Settings.System.putString(mContext.getContentResolver(), Settings.System.TIME_12_24,
                 TimeFormatPreferenceController.HOURS_12);
 
@@ -83,9 +80,6 @@ public class AutoTimeFormatPreferenceControllerTest {
 
     @Test
     public void updateState_autoSet_shouldNotCheckPreference() {
-        mController = new TestAutoTimeFormatPreferenceController(mContext, mCallback);
-        mPreference = new SwitchPreference(mContext);
-        mPreference.setKey(mController.getPreferenceKey());
         Settings.System.putString(mContext.getContentResolver(), Settings.System.TIME_12_24, null);
 
         mController.updateState(mPreference);
@@ -95,14 +89,7 @@ public class AutoTimeFormatPreferenceControllerTest {
 
     @Test
     public void updatePreference_autoSet_shouldSendIntent_12HourLocale() {
-        mController = new TestAutoTimeFormatPreferenceController(mContext, mCallback);
-        mPreference = new SwitchPreference(mContext);
-        mPreference.setKey(mController.getPreferenceKey());
-        mPreference.setChecked(false);
-
-        boolean result = mController.handlePreferenceTreeClick(mPreference);
-
-        assertThat(result).isTrue();
+        mController.setChecked(false);
 
         List<Intent> intentsFired = mApplication.getBroadcastIntents();
         assertThat(intentsFired.size()).isEqualTo(1);
@@ -114,15 +101,9 @@ public class AutoTimeFormatPreferenceControllerTest {
 
     @Test
     public void updatePreference_autoSet_shouldSendIntent_24HourLocale() {
-        mController = new TestAutoTimeFormatPreferenceController(mContext, mCallback);
-        mPreference = new SwitchPreference(mContext);
-        mPreference.setKey(mController.getPreferenceKey());
-        mPreference.setChecked(false);
-
         mController.setIs24HourLocale(true);
-        boolean result = mController.handlePreferenceTreeClick(mPreference);
 
-        assertThat(result).isTrue();
+        mController.setChecked(false);
 
         List<Intent> intentsFired = mApplication.getBroadcastIntents();
         assertThat(intentsFired.size()).isEqualTo(1);
@@ -134,15 +115,9 @@ public class AutoTimeFormatPreferenceControllerTest {
 
     @Test
     public void updatePreference_24HourSet_shouldSendIntent() {
-        mController = new TestAutoTimeFormatPreferenceController(mContext, mCallback);
-        mPreference = new SwitchPreference(mContext);
-        mPreference.setKey(mController.getPreferenceKey());
-        mPreference.setChecked(true);
-
         mController.setIs24HourLocale(false);
-        boolean result = mController.handlePreferenceTreeClick(mPreference);
 
-        assertThat(result).isTrue();
+        mController.setChecked(true);
 
         List<Intent> intentsFired = mApplication.getBroadcastIntents();
         assertThat(intentsFired.size()).isEqualTo(1);
@@ -161,9 +136,8 @@ public class AutoTimeFormatPreferenceControllerTest {
 
         private boolean is24HourLocale = false;
 
-        private TestAutoTimeFormatPreferenceController(Context context,
-              UpdateTimeAndDateCallback callback) {
-            super(context, callback);
+        TestAutoTimeFormatPreferenceController(Context context, String preferenceKey) {
+            super(context, preferenceKey);
         }
 
         void setIs24HourLocale(boolean value) {

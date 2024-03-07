@@ -30,7 +30,6 @@ import com.android.settings.testutils.XmlTestUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -46,6 +45,9 @@ import org.robolectric.annotation.Implements;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class ConfigureWifiSettingsTest {
 
     @Rule
@@ -69,7 +71,6 @@ public class ConfigureWifiSettingsTest {
 
     TestConfigureWifiSettings mSettings;
 
-    @Ignore
     @Before
     public void setUp() {
         when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
@@ -148,7 +149,6 @@ public class ConfigureWifiSettingsTest {
         verify(mPreferenceScreen).removeAll();
     }
 
-    @Ignore
     @Test
     @Config(qualifiers = "mcc999")
     public void getNonIndexableKeys_ifPageDisabled_shouldNotIndexResource() {

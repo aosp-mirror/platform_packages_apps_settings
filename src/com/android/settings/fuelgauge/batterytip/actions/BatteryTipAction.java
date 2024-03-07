@@ -30,11 +30,9 @@ public abstract class BatteryTipAction {
 
     public BatteryTipAction(Context context) {
         mContext = context;
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
-    /**
-     * Handle the action when user clicks positive button
-     */
+    /** Handle the action when user clicks positive button */
     public abstract void handlePositiveAction(int metricsKey);
 }

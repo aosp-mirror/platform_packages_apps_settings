@@ -113,7 +113,7 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
             layout.setDescriptionText(loadDescriptionText());
             layout.setDividerItemDecoration(new SettingsDividerItemDecoration(getContext()));
             layout.setDividerInset(getContext().getResources().getDimensionPixelSize(
-                    R.dimen.sud_items_glif_text_divider_inset));
+                    com.google.android.setupdesign.R.dimen.sud_items_glif_text_divider_inset));
 
             layout.setIcon(getContext().getDrawable(R.drawable.ic_lock));
 

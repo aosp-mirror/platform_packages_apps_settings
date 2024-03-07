@@ -23,6 +23,7 @@ import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.RotationUtils;
 import android.view.DisplayInfo;
 import android.view.Surface;
@@ -36,8 +37,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.android.settings.R;
-import com.android.settingslib.udfps.UdfpsOverlayParams;
-import com.android.settingslib.udfps.UdfpsUtils;
+import com.android.systemui.biometrics.UdfpsUtils;
+import com.android.systemui.biometrics.shared.model.UdfpsOverlayParams;
 
 /**
  * View corresponding with udfps_enroll_view.xml
@@ -130,18 +131,26 @@ public class UdfpsEnrollView extends FrameLayout {
         onFingerUp();
     }
 
+    private final ViewTreeObserver.OnDrawListener mOnDrawListener = this::updateOverlayParams;
+
     /**
      * setup SensorProperties
      */
     public void setSensorProperties(FingerprintSensorPropertiesInternal properties) {
         mSensorProperties = properties;
-        ((ViewGroup) getParent()).getViewTreeObserver().addOnDrawListener(
-                new ViewTreeObserver.OnDrawListener() {
-                    @Override
-                    public void onDraw() {
-                        updateOverlayParams();
-                    }
-                });
+        ((ViewGroup) getParent()).getViewTreeObserver().addOnDrawListener(mOnDrawListener);
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        final ViewGroup parent = (ViewGroup) getParent();
+        if (parent != null) {
+            final ViewTreeObserver observer = parent.getViewTreeObserver();
+            if (observer != null) {
+                observer.removeOnDrawListener(mOnDrawListener);
+            }
+        }
+        super.onDetachedFromWindow();
     }
 
     private void onSensorRectUpdated() {
@@ -168,6 +177,10 @@ public class UdfpsEnrollView extends FrameLayout {
         }
 
         RelativeLayout parent = ((RelativeLayout) getParent());
+        if (parent == null) {
+            Log.e(TAG, "Fail to updateDimensions for " + this + ", parent null");
+            return;
+        }
         final int[] coords = parent.getLocationOnScreen();
         final int parentLeft = coords[0];
         final int parentTop = coords[1];

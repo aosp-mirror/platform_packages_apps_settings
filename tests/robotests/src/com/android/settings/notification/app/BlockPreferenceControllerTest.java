@@ -101,7 +101,7 @@ public class BlockPreferenceControllerTest {
     @Test
     public void testNoCrashIfNoOnResume() {
         mController.isAvailable();
-        mController.onSwitchChanged(null, false);
+        mController.onCheckedChanged(null, false);
     }
 
     @Test
@@ -355,11 +355,11 @@ public class BlockPreferenceControllerTest {
         mController.onResume(appRow, channel, null, null, null, null, null);
         mController.updateState(mPreference);
 
-        mController.onSwitchChanged(null, false);
+        mController.onCheckedChanged(null, false);
         assertEquals(IMPORTANCE_NONE, channel.getImportance());
         assertTrue(appRow.banned);
 
-        mController.onSwitchChanged(null, true);
+        mController.onCheckedChanged(null, true);
         assertEquals(IMPORTANCE_UNSPECIFIED, channel.getImportance());
         assertFalse(appRow.banned);
 
@@ -377,10 +377,10 @@ public class BlockPreferenceControllerTest {
         mController.onResume(appRow, channel, null, null, null, null, null);
         mController.updateState(mPreference);
 
-        mController.onSwitchChanged(null, false);
+        mController.onCheckedChanged(null, false);
         assertEquals(IMPORTANCE_NONE, channel.getImportance());
 
-        mController.onSwitchChanged(null, true);
+        mController.onCheckedChanged(null, true);
         assertEquals(IMPORTANCE_HIGH, channel.getImportance());
 
         verify(mBackend, times(2)).updateChannel(any(), anyInt(), any());

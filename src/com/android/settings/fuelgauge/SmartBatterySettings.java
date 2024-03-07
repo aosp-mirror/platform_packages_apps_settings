@@ -32,9 +32,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * Fragment to show smart battery and restricted app controls
- */
+/** Fragment to show smart battery and restricted app controls */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class SmartBatterySettings extends DashboardFragment {
     public static final String TAG = "SmartBatterySettings";
@@ -65,12 +63,12 @@ public class SmartBatterySettings extends DashboardFragment {
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(
-            Context context, SettingsActivity settingsActivity,
+            Context context,
+            SettingsActivity settingsActivity,
             InstrumentedPreferenceFragment fragment) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         if (settingsActivity != null && fragment != null) {
-            controllers.add(
-                    new RestrictAppPreferenceController(fragment));
+            controllers.add(new RestrictAppPreferenceController(fragment));
         } else {
             controllers.add(new RestrictAppPreferenceController(context));
         }

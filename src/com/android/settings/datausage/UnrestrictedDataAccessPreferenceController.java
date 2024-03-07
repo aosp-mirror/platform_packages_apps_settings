@@ -233,7 +233,7 @@ public class UnrestrictedDataAccessPreferenceController extends BasePreferenceCo
     void logSpecialPermissionChange(boolean allowlisted, String packageName) {
         final int logCategory = allowlisted ? SettingsEnums.APP_SPECIAL_PERMISSION_UNL_DATA_ALLOW
                 : SettingsEnums.APP_SPECIAL_PERMISSION_UNL_DATA_DENY;
-        FeatureFactory.getFactory(mContext).getMetricsFeatureProvider().action(mContext,
+        FeatureFactory.getFeatureFactory().getMetricsFeatureProvider().action(mContext,
                 logCategory, packageName);
     }
 
