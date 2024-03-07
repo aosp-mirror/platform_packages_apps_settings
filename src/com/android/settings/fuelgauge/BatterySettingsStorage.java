@@ -26,7 +26,6 @@ import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.os.Build;
 import android.os.IDeviceIdleController;
-import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
@@ -39,6 +38,7 @@ import androidx.annotation.Nullable;
 
 import com.android.settings.fuelgauge.BatteryOptimizeHistoricalLogEntry.Action;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.datastore.BackupCodec;
 import com.android.settingslib.datastore.BackupContext;
 import com.android.settingslib.datastore.BackupRestoreEntity;
 import com.android.settingslib.datastore.BackupRestoreStorageManager;
@@ -159,8 +159,24 @@ public final class BatterySettingsStorage extends ObservableBackupRestoreStorage
         return Arrays.asList(allowlistedApps);
     }
 
+    @NonNull
     @Override
-    public void writeNewStateDescription(@NonNull ParcelFileDescriptor newState) {
+    public OutputStream wrapBackupOutputStream(
+            @NonNull BackupCodec codec, @NonNull OutputStream outputStream) {
+        // not using any codec for backward compatibility
+        return outputStream;
+    }
+
+    @NonNull
+    @Override
+    public InputStream wrapRestoreInputStream(
+            @NonNull BackupCodec codec, @NonNull InputStream inputStream) {
+        // not using any codec for backward compatibility
+        return inputStream;
+    }
+
+    @Override
+    public void onRestoreFinished() {
         BatterySettingsMigrateChecker.verifySaverConfiguration(mApplication);
         performRestoreIfNeeded();
     }
