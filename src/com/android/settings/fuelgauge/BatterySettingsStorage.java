@@ -26,7 +26,6 @@ import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.os.Build;
 import android.os.IDeviceIdleController;
-import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
@@ -177,7 +176,7 @@ public final class BatterySettingsStorage extends ObservableBackupRestoreStorage
     }
 
     @Override
-    public void writeNewStateDescription(@NonNull ParcelFileDescriptor newState) {
+    public void onRestoreFinished() {
         BatterySettingsMigrateChecker.verifySaverConfiguration(mApplication);
         performRestoreIfNeeded();
     }
