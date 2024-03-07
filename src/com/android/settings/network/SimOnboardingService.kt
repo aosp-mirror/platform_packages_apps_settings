@@ -24,6 +24,7 @@ import android.telephony.UiccCardInfo
 import android.telephony.UiccSlotInfo
 import android.util.Log
 import com.android.settings.network.SimOnboardingActivity.Companion.CallbackType
+import com.android.settings.sim.SimActivationNotifier
 import com.android.settings.spa.network.setAutomaticData
 import com.android.settings.spa.network.setDefaultData
 import com.android.settings.spa.network.setDefaultSms
@@ -31,9 +32,6 @@ import com.android.settings.spa.network.setDefaultVoice
 import com.android.settingslib.utils.ThreadUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-
-private const val TAG = "SimOnboardingService"
-private const val INVALID = SubscriptionManager.INVALID_SUBSCRIPTION_ID
 
 class SimOnboardingService {
     var subscriptionManager:SubscriptionManager? = null
@@ -70,7 +68,7 @@ class SimOnboardingService {
             }
             return  uiccCardInfoList.any { it.isMultipleEnabledProfilesSupported }
         }
-    var isRemovableSimEnabled: Boolean = false
+    var isRemovablePsimProfileEnabled: Boolean = false
         get() {
             if(slotInfoList.isEmpty()) {
                 Log.w(TAG, "UICC Slot info list is empty.")
@@ -78,7 +76,11 @@ class SimOnboardingService {
             }
             return UiccSlotUtil.isRemovableSimEnabled(slotInfoList)
         }
-
+    var isEsimProfileEnabled: Boolean = false
+        get() {
+            activeSubInfoList.stream().anyMatch { it.isEmbedded }
+            return false
+        }
     var doesTargetSimHaveEsimOperation = false
         get() {
             return targetSubInfo?.isEmbedded ?: false
@@ -108,6 +110,19 @@ class SimOnboardingService {
                 return true
             }
             return getActiveModemCount != 0 && activeSubInfoList.size == getActiveModemCount
+        }
+    var isMultiSimEnabled = false
+        get() {
+            return getActiveModemCount > 1
+        }
+    var isMultiSimSupported = false
+        get() {
+            return telephonyManager?.isMultiSimSupported == TelephonyManager.MULTISIM_ALLOWED
+        }
+
+    var doesSwitchMultiSimConfigTriggerReboot = false
+        get() {
+            return telephonyManager?.doesSwitchMultiSimConfigTriggerReboot() ?: false
         }
 
     fun isValid(): Boolean {
@@ -161,9 +176,10 @@ class SimOnboardingService {
             targetPrimarySimCalls = SubscriptionManager.getDefaultVoiceSubscriptionId()
             targetPrimarySimTexts = SubscriptionManager.getDefaultSmsSubscriptionId()
             targetPrimarySimMobileData = SubscriptionManager.getDefaultDataSubscriptionId()
+
             Log.d(
                 TAG,"doesTargetSimHaveEsimOperation: $doesTargetSimHaveEsimOperation" +
-                    ", isRemovableSimEnabled: $isRemovableSimEnabled" +
+                    ", isRemovableSimEnabled: $isRemovablePsimProfileEnabled" +
                     ", isMultipleEnabledProfilesSupported: $isMultipleEnabledProfilesSupported" +
                     ", targetPrimarySimCalls: $targetPrimarySimCalls" +
                     ", targetPrimarySimTexts: $targetPrimarySimTexts" +
@@ -261,6 +277,45 @@ class SimOnboardingService {
         }
     }
 
+    fun isDsdsConditionSatisfied(): Boolean {
+        if (isMultiSimEnabled) {
+            Log.d(
+                TAG,
+                "DSDS is already enabled. Condition not satisfied."
+            )
+            return false
+        }
+        if (!isMultiSimSupported) {
+            Log.d(TAG, "Hardware does not support DSDS.")
+            return false
+        }
+        val isActiveSim = activeSubInfoList.isNotEmpty()
+        if (isMultipleEnabledProfilesSupported && isActiveSim) {
+            Log.d(TAG,
+                "Device supports MEP and eSIM operation and eSIM profile is enabled."
+                        + " DSDS condition satisfied."
+            )
+            return true
+        }
+
+        if (doesTargetSimHaveEsimOperation && isRemovablePsimProfileEnabled) {
+            Log.d(TAG,
+                "eSIM operation and removable PSIM is enabled. DSDS condition satisfied."
+            )
+            return true
+        }
+
+        if (!doesTargetSimHaveEsimOperation && isEsimProfileEnabled) {
+            Log.d(TAG,
+                "Removable SIM operation and eSIM profile is enabled. DSDS condition"
+                        + " satisfied."
+            )
+            return true
+        }
+        Log.d(TAG, "DSDS condition not satisfied.")
+        return false
+    }
+
     fun startActivatingSim(){
         // TODO: start to activate sim
         callback(CallbackType.CALLBACK_FINISH)
@@ -281,30 +336,50 @@ class SimOnboardingService {
 
     suspend fun startSetupPrimarySim(context: Context) {
         withContext(Dispatchers.Default) {
-            setDefaultVoice(subscriptionManager,targetPrimarySimCalls)
-            setDefaultSms(subscriptionManager,targetPrimarySimTexts)
-            setDefaultData(
-                context,
-                subscriptionManager,
-                null,
-                targetPrimarySimMobileData
-            )
+            if (SubscriptionUtil.getActiveSubscriptions(subscriptionManager).size <= 1) {
+                Log.d(TAG,
+                    "startSetupPrimarySim: number of active subscriptionInfo is less than 2"
+                )
+            } else {
+                setDefaultVoice(subscriptionManager, targetPrimarySimCalls)
+                setDefaultSms(subscriptionManager, targetPrimarySimTexts)
+                setDefaultData(
+                    context,
+                    subscriptionManager,
+                    null,
+                    targetPrimarySimMobileData
+                )
 
-            var nonDds = targetNonDds
-            Log.d(
-                TAG,
-                "setAutomaticData: targetNonDds: $nonDds," +
-                    " targetPrimarySimAutoDataSwitch: $targetPrimarySimAutoDataSwitch"
-            )
-            if (nonDds != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-                val telephonyManagerForNonDds: TelephonyManager? =
-                    context.getSystemService(TelephonyManager::class.java)
-                        ?.createForSubscriptionId(nonDds)
-                setAutomaticData(telephonyManagerForNonDds, targetPrimarySimAutoDataSwitch)
+                var nonDds = targetNonDds
+                Log.d(
+                    TAG,
+                    "setAutomaticData: targetNonDds: $nonDds," +
+                            " targetPrimarySimAutoDataSwitch: $targetPrimarySimAutoDataSwitch"
+                )
+                if (nonDds != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+                    val telephonyManagerForNonDds: TelephonyManager? =
+                        context.getSystemService(TelephonyManager::class.java)
+                            ?.createForSubscriptionId(nonDds)
+                    setAutomaticData(telephonyManagerForNonDds, targetPrimarySimAutoDataSwitch)
+                }
             }
-
             // no next action, send finish
             callback(CallbackType.CALLBACK_FINISH)
         }
+    }
+
+    suspend fun startEnableDsds(context: Context) {
+        withContext(Dispatchers.Default) {
+            Log.d(TAG, "User confirmed reboot to enable DSDS.")
+            SimActivationNotifier.setShowSimSettingsNotification(context, true)
+            telephonyManager?.switchMultiSimConfig(NUM_OF_SIMS_FOR_DSDS)
+            callback(CallbackType.CALLBACK_FINISH)
+        }
+    }
+
+    companion object{
+        private const val TAG = "SimOnboardingService"
+        private const val INVALID = SubscriptionManager.INVALID_SUBSCRIPTION_ID
+        const val NUM_OF_SIMS_FOR_DSDS = 2
     }
 }
