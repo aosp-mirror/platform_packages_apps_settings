@@ -32,6 +32,18 @@ import kotlinx.coroutines.flow.onEach
 
 private const val TAG = "SubscriptionRepository"
 
+class SubscriptionRepository(private val context: Context) {
+    /**
+     * Return a list of subscriptions that are available and visible to the user.
+     *
+     * @return list of user selectable subscriptions.
+     */
+    fun getSelectableSubscriptionInfoList(): List<SubscriptionInfo> =
+        context.getSelectableSubscriptionInfoList()
+
+    fun isSubscriptionEnabledFlow(subId: Int) = context.isSubscriptionEnabledFlow(subId)
+}
+
 val Context.subscriptionManager: SubscriptionManager?
     get() = getSystemService(SubscriptionManager::class.java)
 
