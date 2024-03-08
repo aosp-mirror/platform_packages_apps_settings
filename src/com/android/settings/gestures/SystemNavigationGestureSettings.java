@@ -43,6 +43,8 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityGestureNavigationTutorial;
+import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.PreferenceControllerListHelper;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
@@ -147,14 +149,20 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
         final PreferenceScreen screen = getPreferenceScreen();
         screen.removeAll();
         screen.addPreference(mVideoPreference);
+        addPreferencesFromResource(getPreferenceScreenResId());
+        final List<BasePreferenceController> preferenceControllers = PreferenceControllerListHelper
+                .getPreferenceControllersFromXml(getContext(), getPreferenceScreenResId());
+        preferenceControllers.forEach(controller -> {
+            controller.updateState(findPreference(controller.getPreferenceKey()));
+            controller.displayPreference(screen);
+        });
 
         final List<? extends CandidateInfo> candidateList = getCandidates();
         if (candidateList == null) {
             return;
         }
         for (CandidateInfo info : candidateList) {
-            SelectorWithWidgetPreference pref =
-                    new SelectorWithWidgetPreference(getPrefContext());
+            SelectorWithWidgetPreference pref = new SelectorWithWidgetPreference(getPrefContext());
             bindPreference(pref, info.getKey(), info, defaultKey);
             bindPreferenceExtra(pref, info.getKey(), info, defaultKey, systemDefaultKey);
             screen.addPreference(pref);
@@ -176,8 +184,11 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
                     GestureNavigationSettingsFragment.GESTURE_NAVIGATION_SETTINGS)));
         }
 
-        if (KEY_SYSTEM_NAV_2BUTTONS.equals(info.getKey()) || KEY_SYSTEM_NAV_3BUTTONS.equals(
-                info.getKey())) {
+        if ((KEY_SYSTEM_NAV_2BUTTONS.equals(info.getKey())
+                || KEY_SYSTEM_NAV_3BUTTONS.equals(info.getKey()))
+                // Don't add the settings button if that page will be blank.
+                && !PreferenceControllerListHelper.areAllPreferencesUnavailable(
+                        getContext(), getPreferenceManager(), R.xml.button_navigation_settings)) {
             pref.setExtraWidgetOnClickListener((v) ->
                     new SubSettingLauncher(getContext())
                             .setDestination(ButtonNavigationSettingsFragment.class.getName())
