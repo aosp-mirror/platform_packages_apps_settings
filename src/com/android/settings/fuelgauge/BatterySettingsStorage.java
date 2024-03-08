@@ -52,6 +52,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /** An implementation to backup and restore battery configurations. */
@@ -321,8 +322,8 @@ public final class BatterySettingsStorage extends ObservableBackupRestoreStorage
                 @NonNull BackupContext backupContext, @NonNull OutputStream outputStream)
                 throws IOException {
             final long timestamp = System.currentTimeMillis();
-            final ArraySet<ApplicationInfo> applications = getInstalledApplications();
-            if (applications == null || applications.isEmpty()) {
+            final ApplicationInfo[] applications = getInstalledApplications();
+            if (applications.length == 0) {
                 Log.w(TAG, "no data found in the getInstalledApplications()");
                 return EntityBackupResult.DELETE;
             }
@@ -360,15 +361,24 @@ public final class BatterySettingsStorage extends ObservableBackupRestoreStorage
                     TAG,
                     String.format(
                             "backup getInstalledApplications():%d count=%d in %d/ms",
-                            applications.size(),
+                            applications.length,
                             backupCount,
                             (System.currentTimeMillis() - timestamp)));
             return EntityBackupResult.UPDATE;
         }
 
-        private @Nullable ArraySet<ApplicationInfo> getInstalledApplications() {
-            return BatteryOptimizeUtils.getInstalledApplications(
-                    mApplication, AppGlobals.getPackageManager());
+        private ApplicationInfo[] getInstalledApplications() {
+            ArraySet<ApplicationInfo> installedApplications =
+                    BatteryOptimizeUtils.getInstalledApplications(
+                            mApplication, AppGlobals.getPackageManager());
+            ApplicationInfo[] applicationInfos = new ApplicationInfo[0];
+            if (installedApplications == null || installedApplications.isEmpty()) {
+                return applicationInfos;
+            }
+            applicationInfos = installedApplications.toArray(applicationInfos);
+            // sort the list to ensure backup data is stable
+            Arrays.sort(applicationInfos, Comparator.comparing(info -> info.packageName));
+            return applicationInfos;
         }
 
         static @NonNull SharedPreferences getSharedPreferences(Context context) {
