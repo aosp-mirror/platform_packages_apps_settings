@@ -25,16 +25,22 @@ import static com.google.common.truth.Truth.assertThat;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
+import android.view.accessibility.Flags;
 
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.internal.accessibility.common.ShortcutConstants;
+import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType;
 import com.android.internal.accessibility.util.ShortcutUtils;
 
 import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -54,7 +60,8 @@ public class PreferredShortcutsTest {
             CLASS_NAME_2);
     private static final ContentResolver sContentResolver =
             ApplicationProvider.getApplicationContext().getContentResolver();
-
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     private final Context mContext = ApplicationProvider.getApplicationContext();
 
     @Before
@@ -166,11 +173,48 @@ public class PreferredShortcutsTest {
                 .isEqualTo(target2ShortcutTypes);
     }
 
+    @Test
+    @EnableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
+    public void updatePreferredShortcutFromSettings_colorInversionWithQsAndSoftwareShortcut_preferredShortcutsMatches() {
+        String target = COLOR_INVERSION_COMPONENT_NAME.flattenToString();
+        Settings.Secure.putString(sContentResolver,
+                Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS, target);
+        Settings.Secure.putString(sContentResolver,
+                Settings.Secure.ACCESSIBILITY_QS_TARGETS, target);
+
+        PreferredShortcuts.updatePreferredShortcutsFromSettings(mContext, Set.of(target));
+
+        int savedPreferredShortcut = PreferredShortcuts.retrieveUserShortcutType(
+                mContext, target);
+        assertThat(savedPreferredShortcut).isEqualTo(
+                UserShortcutType.SOFTWARE | UserShortcutType.QUICK_SETTINGS);
+
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
+    public void updatePreferredShortcutFromSettings_colorInversionWithQsAndHardwareShortcut_qsShortcutNotSaved() {
+        String target = COLOR_INVERSION_COMPONENT_NAME.flattenToString();
+        Settings.Secure.putString(sContentResolver,
+                Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE, target);
+        Settings.Secure.putString(sContentResolver,
+                Settings.Secure.ACCESSIBILITY_QS_TARGETS, target);
+        assertThat(!android.view.accessibility.Flags.a11yQsShortcut()).isTrue();
+
+        PreferredShortcuts.updatePreferredShortcutsFromSettings(mContext, Set.of(target));
+
+        int savedPreferredShortcut = PreferredShortcuts.retrieveUserShortcutType(
+                mContext, target);
+        assertThat(savedPreferredShortcut).isEqualTo(UserShortcutType.HARDWARE);
+    }
+
     private static void clearShortcuts() {
         Settings.Secure.putString(sContentResolver,
                 Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS, "");
         Settings.Secure.putString(sContentResolver,
                 Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE, "");
+        Settings.Secure.putString(sContentResolver,
+                Settings.Secure.ACCESSIBILITY_QS_TARGETS, "");
         Settings.Secure.putInt(
                 sContentResolver,
                 Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED,
@@ -179,5 +223,7 @@ public class PreferredShortcutsTest {
                 sContentResolver,
                 Settings.Secure.ACCESSIBILITY_MAGNIFICATION_TWO_FINGER_TRIPLE_TAP_ENABLED,
                 AccessibilityUtil.State.OFF);
+
+        PreferredShortcuts.clearPreferredShortcuts(ApplicationProvider.getApplicationContext());
     }
 }

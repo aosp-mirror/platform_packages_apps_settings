@@ -452,7 +452,13 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
                 getComponentName().flattenToString());
 
         final List<CharSequence> list = new ArrayList<>();
-
+        if (android.view.accessibility.Flags.a11yQsShortcut()) {
+            if (hasShortcutType(shortcutTypes, AccessibilityUtil.UserShortcutType.QUICK_SETTINGS)) {
+                final CharSequence qsTitle = context.getText(
+                        R.string.accessibility_feature_shortcut_setting_summary_quick_settings);
+                list.add(qsTitle);
+            }
+        }
         if (hasShortcutType(shortcutTypes, AccessibilityUtil.UserShortcutType.SOFTWARE)) {
             list.add(getSoftwareShortcutTypeSummary(context));
         }
@@ -538,6 +544,10 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
     }
 
     private void showQuickSettingsTooltipIfNeeded() {
+        if (android.view.accessibility.Flags.a11yQsShortcut()) {
+            // Don't show Quick Settings tooltip
+            return;
+        }
         final ComponentName tileComponentName = getTileComponentName();
         if (tileComponentName == null) {
             // Returns if no tile service assigned.

@@ -21,6 +21,7 @@ import static android.provider.Settings.Secure.ACCESSIBILITY_BUTTON_MODE;
 import static android.provider.Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS;
 import static android.provider.Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED;
 import static android.provider.Settings.Secure.ACCESSIBILITY_MAGNIFICATION_TWO_FINGER_TRIPLE_TAP_ENABLED;
+import static android.provider.Settings.Secure.ACCESSIBILITY_QS_TARGETS;
 import static android.provider.Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE;
 
 import static com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_COMPONENT_NAME;
@@ -98,6 +99,9 @@ public class EditShortcutsPreferenceFragment extends DashboardFragment {
     private static final Uri TWO_FINGERS_DOUBLE_TAP_SHORTCUT_SETTING =
             Settings.Secure.getUriFor(ACCESSIBILITY_MAGNIFICATION_TWO_FINGER_TRIPLE_TAP_ENABLED);
 
+    private static final Uri QUICK_SETTINGS_SHORTCUT_SETTING =
+            Settings.Secure.getUriFor(ACCESSIBILITY_QS_TARGETS);
+
     @VisibleForTesting
     static final Uri[] SHORTCUT_SETTINGS = {
             VOLUME_KEYS_SHORTCUT_SETTING,
@@ -105,6 +109,7 @@ public class EditShortcutsPreferenceFragment extends DashboardFragment {
             BUTTON_SHORTCUT_SETTING,
             TRIPLE_TAP_SHORTCUT_SETTING,
             TWO_FINGERS_DOUBLE_TAP_SHORTCUT_SETTING,
+            QUICK_SETTINGS_SHORTCUT_SETTING,
     };
 
     private Set<String> mShortcutTargets;
@@ -171,7 +176,9 @@ public class EditShortcutsPreferenceFragment extends DashboardFragment {
                 } else if (TRIPLE_TAP_SHORTCUT_SETTING.equals(uri)) {
                     refreshPreferenceController(TripleTapShortcutOptionController.class);
                 } else if (TWO_FINGERS_DOUBLE_TAP_SHORTCUT_SETTING.equals(uri)) {
-                    refreshPreferenceController(TwoFingersDoubleTapShortcutOptionController.class);
+                    refreshPreferenceController(TwoFingerDoubleTapShortcutOptionController.class);
+                } else if (QUICK_SETTINGS_SHORTCUT_SETTING.equals(uri)) {
+                    refreshPreferenceController(QuickSettingsShortcutOptionController.class);
                 }
 
                 PreferredShortcuts.updatePreferredShortcutsFromSettings(
