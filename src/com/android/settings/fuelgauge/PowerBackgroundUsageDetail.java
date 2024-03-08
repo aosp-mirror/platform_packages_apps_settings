@@ -41,7 +41,6 @@ import com.android.settingslib.HelpUtils;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.datastore.ChangeReason;
 import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.LayoutPreference;
 import com.android.settingslib.widget.MainSwitchPreference;
@@ -116,7 +115,6 @@ public class PowerBackgroundUsageDetail extends DashboardFragment
     public void onPause() {
         super.onPause();
 
-        notifyBackupManager();
         final int currentOptimizeMode = mBatteryOptimizeUtils.getAppOptimizationMode();
         mLogStringBuilder.append(", onPause mode = ").append(currentOptimizeMode);
         logMetricCategory(currentOptimizeMode);
@@ -181,13 +179,6 @@ public class PowerBackgroundUsageDetail extends DashboardFragment
         mOptimizePreference.setEnabled(isEnabled);
         mUnrestrictedPreference.setEnabled(isEnabled);
         onRadioButtonClicked(isEnabled ? mOptimizePreference : null);
-    }
-
-    @VisibleForTesting
-    void notifyBackupManager() {
-        if (mOptimizationMode != mBatteryOptimizeUtils.getAppOptimizationMode()) {
-            BatterySettingsStorage.get(getContext()).notifyChange(ChangeReason.UPDATE);
-        }
     }
 
     @VisibleForTesting
