@@ -52,7 +52,6 @@ import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.Instrumentable;
-import com.android.settingslib.datastore.ChangeReason;
 import com.android.settingslib.widget.LayoutPreference;
 
 import java.util.ArrayList;
@@ -272,7 +271,6 @@ public class AdvancedPowerUsageDetail extends DashboardFragment
     public void onPause() {
         super.onPause();
 
-        notifyBackupManager();
         final int currentOptimizeMode = mBatteryOptimizeUtils.getAppOptimizationMode();
         mLogStringBuilder.append(", onPause mode = ").append(currentOptimizeMode);
         logMetricCategory(currentOptimizeMode);
@@ -287,13 +285,6 @@ public class AdvancedPowerUsageDetail extends DashboardFragment
                             mLogStringBuilder.toString());
                 });
         Log.d(TAG, "Leave with mode: " + currentOptimizeMode);
-    }
-
-    @VisibleForTesting
-    void notifyBackupManager() {
-        if (mOptimizationMode != mBatteryOptimizeUtils.getAppOptimizationMode()) {
-            BatterySettingsStorage.get(getContext()).notifyChange(ChangeReason.UPDATE);
-        }
     }
 
     @VisibleForTesting
