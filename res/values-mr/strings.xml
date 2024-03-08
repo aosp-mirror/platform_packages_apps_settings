@@ -915,10 +915,8 @@
     <string name="wifi_settings_wep_networks_summary_blocked_by_carrier" msgid="6085673947156094523">"नेटवर्क कमी सुरक्षित असलेला जुना सुरक्षा प्रोटोकॉल वापरते, त्यामुळे तुमचा वाहक तुम्हाला या नेटवर्कशी कनेक्ट करण्याची अनुमती देत नाही"</string>
     <string name="wifi_settings_wep_networks_button_allow" msgid="2807926329019873706">"WEP ला अनुमती द्या"</string>
     <string name="wifi_settings_ssid_block_button_close" msgid="3013886895576949908">"बंद करा"</string>
-    <!-- no translation found for wifi_settings_wep_networks_disconnect_title (2158070405309246888) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_disconnect_summary (643132352152685538) -->
-    <skip />
+    <string name="wifi_settings_wep_networks_disconnect_title" msgid="2158070405309246888">"<xliff:g id="NAME">%1$s</xliff:g> वरून डिस्कनेक्ट करायचे आहे का?"</string>
+    <string name="wifi_settings_wep_networks_disconnect_summary" msgid="643132352152685538">"तुम्ही WEP नेटवर्कशी कनेक्ट केलेले आहे. तुम्ही ही नेटवर्क ब्लॉक केल्यास, तुम्हाला डिस्कनेक्ट केले जाईल."</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"प्रगत पर्याय"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"ड्रॉप-डाउन सूचीचे प्रगत पर्याय"</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"विस्तार करा"</string>
@@ -1877,14 +1875,11 @@
     <string name="show_ime" msgid="4334255501724746849">"ऑन-स्क्रीन कीबोर्ड वापरा"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"वास्तविक कीबोर्ड अ‍ॅक्टिव्ह असताना त्यास स्क्रीनवर ठेवा"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"बाउन्स की"</string>
-    <!-- no translation found for bounce_keys_summary (7347050868868080302) -->
-    <skip />
+    <string name="bounce_keys_summary" msgid="7347050868868080302">"कीबोर्ड <xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> मिसेमध्ये एकच की वारंवार प्रेस करण्याकडे दुर्लक्ष करतो"</string>
     <string name="slow_keys" msgid="2891452895499690837">"स्लो की"</string>
-    <!-- no translation found for slow_keys_summary (1784371292745423292) -->
-    <skip />
+    <string name="slow_keys_summary" msgid="1784371292745423292">"<xliff:g id="SLOW_KEYS_THRESHOLD">%1$d</xliff:g> मिसेपर्यंत अ‍ॅक्टिव्हेट होण्यासाठी की प्रेसकरण्याकरिता लागणारा वेळ अ‍ॅडजस्ट करा"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"स्टिकी की"</string>
-    <!-- no translation found for sticky_keys_summary (1844953803625480623) -->
-    <skip />
+    <string name="sticky_keys_summary" msgid="1844953803625480623">"की एकत्र धरून ठेवण्याऐवजी शॉर्टकटसाठी एकावेळी एक की प्रेस करा"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"कीबोर्ड शॉर्टकट"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"शॉर्टकटची सूची दाखवा"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"कार्य प्रोफाइल कीबोर्ड आणि टूल"</string>
@@ -2000,8 +1995,7 @@
     <string name="vision_settings_description" msgid="7614894785054441991">"तुम्ही तुमच्या गरजेनुसार हे डिव्हाइस कस्टमाइझ करू शकता. ही अ‍ॅक्सेसिबिलिटी वैशिष्ट्ये नंतर सेटिंग्जमध्ये बदलता येतात."</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"फाँटचा आकार बदला"</string>
     <string name="screen_reader_category_title" msgid="5825700839731107803">"स्क्रीन रीडर"</string>
-    <!-- no translation found for keyboard_category_title (6841712758039893220) -->
-    <skip />
+    <string name="keyboard_category_title" msgid="6841712758039893220">"वास्तविक कीबोर्ड पर्याय"</string>
     <string name="captions_category_title" msgid="574490148949400274">"कॅप्शन"</string>
     <string name="audio_category_title" msgid="5283853679967605826">"ऑडिओ"</string>
     <string name="general_category_title" msgid="6298579528716834157">"सर्वसाधारण"</string>
@@ -2067,6 +2061,12 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"तरीही पुढे सुरू ठेवा"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"रद्द करा"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"मॅग्निफिकेशन सेटिंग्ज"</string>
+    <!-- no translation found for accessibility_magnification_one_finger_panning_title (4503949739883092989) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_on (9133125894310777539) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_off (8979146350396559805) -->
+    <skip />
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"शॉर्टकटद्वारे मॅग्निफाय करा"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"शॉर्टकट वापरून आणि तीन वेळा टॅप करून मॅग्निफाय करा"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"<xliff:g id="SERVICE">%1$s</xliff:g> बद्दल"</string>
@@ -2251,12 +2251,10 @@
     <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"व्हॉल्यूम की प्रेस करून ठेवा"</string>
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"स्क्रीनवर तीन वेळा टॅप करा"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"ॲक्सेसिबिलिटी शॉर्टकट संपादित करा"</string>
-    <!-- no translation found for accessibility_shortcut_edit_screen_prompt (5966054283114856682) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"%1$s साठी तुमचा शॉर्टकट निवडा"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"सुरू ठेवा"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"श्रवणयंत्रे"</string>
-    <!-- no translation found for accessibility_hearingaid_intro (6686620444104350629) -->
-    <skip />
+    <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"ASHA आणि LE ऑडिओ श्रवणयंत्रे, कॉक्लियर इंप्लांट आणि इतर अँप्लिफिकेशन डिव्हाइस सेट करा व व्यवस्थापित करा"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="7438018718889849521">"कोणतीही श्रवणयंत्रे कनेक्ट केलेली नाहीत"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"श्रवणयंत्रे जोडा"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"श्रवणयंत्रे पेअर करा"</string>
@@ -2274,8 +2272,7 @@
     <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"श्रवणयंत्राची कंपॅटिबिलिटी"</string>
     <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"टेलीकॉइलसह कंपॅटिबिलिटीमध्ये सुधारणा करते आणि नकोसा आवाज कमी करते"</string>
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"ऐकण्याच्या डिव्हाइसबद्दल"</string>
-    <!-- no translation found for accessibility_hearing_device_footer_summary (256061045064940818) -->
-    <skip />
+    <string name="accessibility_hearing_device_footer_summary" msgid="256061045064940818">"ASHA किंवा LE ऑडिओ सोपोर्ट करत नसलेली श्रवणयंत्रे शोधण्यासाठी, "<b>"नवीन डिव्हाइस पेअर करा"</b>" &gt; "<b>"आणखी डिव्हाइस पहा"</b>" वर टॅप करा"</string>
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"श्रवणयंत्र डिव्हाइस पेअर करा"</string>
     <string name="accessibility_hearing_device_pairing_intro" msgid="7022201665808166517">"तुम्ही या पेजवर ASHA आणि LE ऑडिओ श्रवणयंत्रे पेअर करू शकता. तुमचे श्रवणयंत्र सुरू केले असून, ते पेअर करण्यासाठी तयार असल्याची खात्री करा."</string>
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"उपलब्ध श्रवणयंत्रे"</string>
@@ -4647,6 +4644,12 @@
     <string name="primary_sim_texts_title" msgid="1287584042733097749">"एसएमएस"</string>
     <string name="primary_sim_automatic_data_title" msgid="1265528923229642480">"डेटा आपोआप स्विच करणे"</string>
     <string name="primary_sim_automatic_data_msg" msgid="1612203837010785203">"कव्हरेज आणि उपलब्धतेनुसार कोणत्याही एका सिममधील डेटा वापरा"</string>
+    <!-- no translation found for sim_action_restart_dialog_title (3507413479633430120) -->
+    <skip />
+    <!-- no translation found for sim_action_restart_dialog_msg (4737611046767629774) -->
+    <skip />
+    <!-- no translation found for sim_action_restart_dialog_cancel (665560106686565624) -->
+    <skip />
     <string name="sim_onboarding_phoneNumber_data_only" msgid="8158409121949373662">"फक्त डेटा"</string>
     <string name="sim_onboarding_setup" msgid="5750393553605388463">"सेट करा"</string>
     <string name="sim_onboarding_next" msgid="6415025179929475355">"पुढील"</string>
@@ -4925,12 +4928,9 @@
     <string name="uwb_settings_summary" msgid="3074271396764672268">"जवळपासच्या UWB असलेल्या डिव्हाइसचे संबंधित स्थान ओळखण्यात मदत करते"</string>
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"UWB वापरण्यासाठी विमान मोड बंद करा"</string>
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"सध्याच्या स्थानावर UWB उपलब्ध नाही"</string>
-    <!-- no translation found for thread_network_settings_title (4212301030523859220) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_summary (8065599651021748339) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_summary_airplane_mode (7207252895832446979) -->
-    <skip />
+    <string name="thread_network_settings_title" msgid="4212301030523859220">"थ्रेड"</string>
+    <string name="thread_network_settings_summary" msgid="8065599651021748339">"विनाव्यत्यय स्‍मार्ट होम अनुभवासाठी थ्रेड वापरून कंपॅटिबल डिव्हाइसशी कनेक्ट करा"</string>
+    <string name="thread_network_settings_summary_airplane_mode" msgid="7207252895832446979">"थ्रेड वापरण्यासाठी विमान मोड बंद करा"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"कॅमेराचा अ‍ॅक्सेस"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"मायक्रोफोनचा अ‍ॅक्सेस"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"ॲप्स आणि सेवांसाठी"</string>

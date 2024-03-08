@@ -915,10 +915,8 @@
     <string name="wifi_settings_wep_networks_summary_blocked_by_carrier" msgid="6085673947156094523">"আপনার পরিষেবা প্রদানকারী এই নেটওয়ার্কের সাথে কানেক্ট করার অনুমতি আপনাকে দেয় না, কারণ এটি এমন এক পুরনো সুরক্ষা প্রোটোকল ব্যবহার করে যেটি কম সুরক্ষিত"</string>
     <string name="wifi_settings_wep_networks_button_allow" msgid="2807926329019873706">"WEP-কে অনুমতি দিন"</string>
     <string name="wifi_settings_ssid_block_button_close" msgid="3013886895576949908">"বন্ধ করুন"</string>
-    <!-- no translation found for wifi_settings_wep_networks_disconnect_title (2158070405309246888) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_disconnect_summary (643132352152685538) -->
-    <skip />
+    <string name="wifi_settings_wep_networks_disconnect_title" msgid="2158070405309246888">"<xliff:g id="NAME">%1$s</xliff:g> নেটওয়ার্ক থেকে ডিসকানেক্ট করবেন?"</string>
+    <string name="wifi_settings_wep_networks_disconnect_summary" msgid="643132352152685538">"আপনি WEP নেটওয়ার্কে কানেক্ট করে আছেন। এইসব নেটওয়ার্ক ব্লক করলে, আপনি ডিসকানেক্ট হয়ে যাবেন।"</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"উন্নত বিকল্প"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"ড্রপ-ডাউন তালিকায় থাকা উন্নত বিকল্প"</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"বড় করুন"</string>
@@ -1877,14 +1875,11 @@
     <string name="show_ime" msgid="4334255501724746849">"অন-স্ক্রিন কীবোর্ড ব্যবহার করুন"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"ফিজিক্যাল কীবোর্ড সক্রিয় থাকার সময় এটিকে স্ক্রীনে রাখুন"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"বাউন্স \'কী\'"</string>
-    <!-- no translation found for bounce_keys_summary (7347050868868080302) -->
-    <skip />
+    <string name="bounce_keys_summary" msgid="7347050868868080302">"<xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> মিলি সেকেন্ডের মধ্যে একই কী বারবার প্রেস করলে তা কীবোর্ড উপেক্ষা করে"</string>
     <string name="slow_keys" msgid="2891452895499690837">"স্লো কী"</string>
-    <!-- no translation found for slow_keys_summary (1784371292745423292) -->
-    <skip />
+    <string name="slow_keys_summary" msgid="1784371292745423292">"কোনও কী প্রেস করলে সেটি অ্যাক্টিভেট হতে যে সময় লাগে তা <xliff:g id="SLOW_KEYS_THRESHOLD">%1$d</xliff:g> মিলি সেকেন্ডে অ্যাডজাস্ট হয়"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"স্টিকি \'কী\'"</string>
-    <!-- no translation found for sticky_keys_summary (1844953803625480623) -->
-    <skip />
+    <string name="sticky_keys_summary" msgid="1844953803625480623">"শর্টকাটের জন্য কীগুলি একসাথে ধরে রাখার পরিবর্তে একবারে একটি কী প্রেস করুন"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"কীবোর্ড শর্টকাট"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"শর্টকাটের তালিকা দেখান"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"অফিসের প্রোফাইলের কীবোর্ড ও টুল"</string>
@@ -2000,8 +1995,7 @@
     <string name="vision_settings_description" msgid="7614894785054441991">"আপনি ডিভাইসটি নিজের পছন্দমতো সেট করতে পারেন৷ এই অ্যাক্সেসিবিলিটি ফিচারগুলি পরে সেটিংসে গিয়ে পরিবর্তন করা যাবে৷"</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"হরফের মাপ পরিবর্তন করুন"</string>
     <string name="screen_reader_category_title" msgid="5825700839731107803">"স্ক্রিন রিডার"</string>
-    <!-- no translation found for keyboard_category_title (6841712758039893220) -->
-    <skip />
+    <string name="keyboard_category_title" msgid="6841712758039893220">"ফিজিক্যাল কীবোর্ড সংক্রান্ত বিকল্প"</string>
     <string name="captions_category_title" msgid="574490148949400274">"ক্যাপশন"</string>
     <string name="audio_category_title" msgid="5283853679967605826">"অডিও"</string>
     <string name="general_category_title" msgid="6298579528716834157">"সাধারণ"</string>
@@ -2067,6 +2061,12 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"তা সত্ত্বেও চালিয়ে যান"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"বাতিল করুন"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"বড় করে দেখার সেটিংস"</string>
+    <!-- no translation found for accessibility_magnification_one_finger_panning_title (4503949739883092989) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_on (9133125894310777539) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_off (8979146350396559805) -->
+    <skip />
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"শর্টকাটের সাহায্যে বড় করে দেখা"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"শর্টকাটের মাধ্যমে ও তিনবার ট্যাপ করে বড় করুন"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"\'<xliff:g id="SERVICE">%1$s</xliff:g>\' সম্পর্কে"</string>
@@ -2251,12 +2251,10 @@
     <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"ভলিউম কী ধরে থাকুন"</string>
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"ট্রিপল ট্যাপ স্ক্রিন"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"অ্যাক্সেসিবিলিটি শর্টকাট এডিট করুন"</string>
-    <!-- no translation found for accessibility_shortcut_edit_screen_prompt (5966054283114856682) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"%1$s-এর জন্য আপনার শর্টকাট বেছে নিন"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"এগিয়ে যান"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"হিয়ারিং ডিভাইস"</string>
-    <!-- no translation found for accessibility_hearingaid_intro (6686620444104350629) -->
-    <skip />
+    <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"ASHA এবং LE অডিও হিয়ারিং এড, কক্লিয়ার ইমপ্ল্যান্ট এবং আওয়াজ বাড়ানোর অন্যান্য ডিভাইস সেট-আপ ও ম্যানেজ করুন"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="7438018718889849521">"কোনও হিয়ারিং ডিভাইস কানেক্ট করা নেই"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"হিয়ারিং এড যোগ করুন"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"হিয়ারিং এড পেয়ার করুন"</string>
@@ -2274,8 +2272,7 @@
     <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"হিয়ারিং এইড কম্প্যাটিবিলিটি"</string>
     <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"টেলিকয়েলের সাহায্যে কম্প্যাটিবিলিটি উন্নত করে এবং অপ্রয়োজনীয় শব্দ কমিয়ে দেয়"</string>
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"হিয়ারিং ডিভাইস সম্পর্কে"</string>
-    <!-- no translation found for accessibility_hearing_device_footer_summary (256061045064940818) -->
-    <skip />
+    <string name="accessibility_hearing_device_footer_summary" msgid="256061045064940818">"ASHA বা LE অডিও কাজ করে না এমন অন্যান্য হিয়ারিং ডিভাইস খুঁজে পেতে, "<b>"নতুন ডিভাইস পেয়ার করুন"</b>" &gt; "<b>"আরও ডিভাইস দেখুন"</b>" বিকল্পে ট্যাপ করুন"</string>
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"হিয়ারিং ডিভাইস পেয়ার করা"</string>
     <string name="accessibility_hearing_device_pairing_intro" msgid="7022201665808166517">"আপনি এই পৃষ্ঠায় ASHA এবং LE Audio হিয়ারিং ডিভাইসের সাথে পেয়ার করতে পারেন। আপনার হিয়ারিং ডিভাইস চালু আছে কিনা এবং পেয়ার করার জন্য রেডি কিনা তা ভালোভাবে দেখে নিন।"</string>
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"উপলভ্য হিয়ারিং ডিভাইস"</string>
@@ -4647,6 +4644,12 @@
     <string name="primary_sim_texts_title" msgid="1287584042733097749">"টেক্সট"</string>
     <string name="primary_sim_automatic_data_title" msgid="1265528923229642480">"অটোমেটিক ডেটা পরিবর্তন করা"</string>
     <string name="primary_sim_automatic_data_msg" msgid="1612203837010785203">"কভারেজ ও উপলভ্যতার উপর নির্ভর করে কোনও একটি সিমের ডেটা ব্যবহার করুন"</string>
+    <!-- no translation found for sim_action_restart_dialog_title (3507413479633430120) -->
+    <skip />
+    <!-- no translation found for sim_action_restart_dialog_msg (4737611046767629774) -->
+    <skip />
+    <!-- no translation found for sim_action_restart_dialog_cancel (665560106686565624) -->
+    <skip />
     <string name="sim_onboarding_phoneNumber_data_only" msgid="8158409121949373662">"শুধু ডেটা"</string>
     <string name="sim_onboarding_setup" msgid="5750393553605388463">"সেট-আপ করুন"</string>
     <string name="sim_onboarding_next" msgid="6415025179929475355">"পরবর্তী"</string>
@@ -4925,12 +4928,9 @@
     <string name="uwb_settings_summary" msgid="3074271396764672268">"কাছাকাছি UWB ডিভাইসের আপেক্ষিক অবস্থান শনাক্ত করতে সহায়তা করে"</string>
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"ইউডব্লুউবি ব্যবহার করতে \'বিমান মোড\' বন্ধ করুন"</string>
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"বর্তমান লোকেশনে UWB উপলভ্য নেই"</string>
-    <!-- no translation found for thread_network_settings_title (4212301030523859220) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_summary (8065599651021748339) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_summary_airplane_mode (7207252895832446979) -->
-    <skip />
+    <string name="thread_network_settings_title" msgid="4212301030523859220">"থ্রেড"</string>
+    <string name="thread_network_settings_summary" msgid="8065599651021748339">"নির্বিঘ্নে স্মার্ট হোম অভিজ্ঞতা পেতে থ্রেড ব্যবহার করে মানানসই ডিভাইসের সাথে কানেক্ট করুন"</string>
+    <string name="thread_network_settings_summary_airplane_mode" msgid="7207252895832446979">"থ্রেড ব্যবহার করতে \'বিমান মোড\' বন্ধ করুন"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"ক্যামেরার অ্যাক্সেস"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"মাইক্রোফোনের অ্যাক্সেস"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"অ্যাপ ও পরিষেবার জন্য"</string>

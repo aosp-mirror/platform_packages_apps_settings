@@ -915,10 +915,8 @@
     <string name="wifi_settings_wep_networks_summary_blocked_by_carrier" msgid="6085673947156094523">"Votre opérateur ne vous permet pas de vous connecter à ce réseau parce qu\'il utilise un ancien protocole moins sécurisé"</string>
     <string name="wifi_settings_wep_networks_button_allow" msgid="2807926329019873706">"Autoriser le WEP"</string>
     <string name="wifi_settings_ssid_block_button_close" msgid="3013886895576949908">"Fermer"</string>
-    <!-- no translation found for wifi_settings_wep_networks_disconnect_title (2158070405309246888) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_disconnect_summary (643132352152685538) -->
-    <skip />
+    <string name="wifi_settings_wep_networks_disconnect_title" msgid="2158070405309246888">"Se déconnecter de <xliff:g id="NAME">%1$s</xliff:g> ?"</string>
+    <string name="wifi_settings_wep_networks_disconnect_summary" msgid="643132352152685538">"Vous êtes connecté à un réseau WEP. Si vous bloquez ces réseaux, vous serez déconnecté."</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Options avancées"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Liste déroulante \"Options avancées\""</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"développer"</string>
@@ -1877,14 +1875,11 @@
     <string name="show_ime" msgid="4334255501724746849">"Utiliser le clavier à l\'écran"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"Afficher le clavier virtuel même lorsque le clavier physique est actif"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"Touches à rebonds"</string>
-    <!-- no translation found for bounce_keys_summary (7347050868868080302) -->
-    <skip />
+    <string name="bounce_keys_summary" msgid="7347050868868080302">"Le clavier ignore les frappes rapides et consécutives d\'une même touche dans un intervalle de <xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> ms"</string>
     <string name="slow_keys" msgid="2891452895499690837">"Touches lentes"</string>
-    <!-- no translation found for slow_keys_summary (1784371292745423292) -->
-    <skip />
+    <string name="slow_keys_summary" msgid="1784371292745423292">"Ajuste le temps qu\'il faut pour appuyer sur une touche afin d\'activer <xliff:g id="SLOW_KEYS_THRESHOLD">%1$d</xliff:g> ms"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"Touches persistantes"</string>
-    <!-- no translation found for sticky_keys_summary (1844953803625480623) -->
-    <skip />
+    <string name="sticky_keys_summary" msgid="1844953803625480623">"Pour les raccourcis, appuyez sur une touche à la fois au lieu de maintenir les touches enfoncées"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Raccourcis clavier"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Afficher la liste des raccourcis"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Claviers et outils du profil professionnel"</string>
@@ -1938,13 +1933,10 @@
     <string name="modifier_keys_reset" msgid="551170906710422041">"Réinitialiser"</string>
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"Choisir une touche de modification"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Choisir une nouvelle touche pour <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g> :"</string>
-    <!-- no translation found for ime_label_title (8994569521516807168) -->
-    <skip />
+    <string name="ime_label_title" msgid="8994569521516807168">"Mise en page <xliff:g id="IME_LABEL">%s</xliff:g>"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Par défaut"</string>
-    <!-- no translation found for automatic_keyboard_layout_label (9138088156046198913) -->
-    <skip />
-    <!-- no translation found for user_selected_keyboard_layout_label (154742505924555156) -->
-    <skip />
+    <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"Automatique : <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
+    <string name="user_selected_keyboard_layout_label" msgid="154742505924555156">"Utilisateur sélectionné : <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"Voix"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"Vitesse du pointeur"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Manette de jeu"</string>
@@ -2000,8 +1992,7 @@
     <string name="vision_settings_description" msgid="7614894785054441991">"Vous pouvez personnaliser cet appareil en fonction de vos besoins et modifier ces fonctionnalités d\'accessibilité ultérieurement dans les paramètres."</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"Modifier la taille de la police"</string>
     <string name="screen_reader_category_title" msgid="5825700839731107803">"Lecteur d\'écran"</string>
-    <!-- no translation found for keyboard_category_title (6841712758039893220) -->
-    <skip />
+    <string name="keyboard_category_title" msgid="6841712758039893220">"Options du clavier physique"</string>
     <string name="captions_category_title" msgid="574490148949400274">"Sous-titres"</string>
     <string name="audio_category_title" msgid="5283853679967605826">"Audio"</string>
     <string name="general_category_title" msgid="6298579528716834157">"Général"</string>
@@ -2067,6 +2058,12 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Continuer"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Annuler"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Paramètres d\'agrandissement"</string>
+    <!-- no translation found for accessibility_magnification_one_finger_panning_title (4503949739883092989) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_on (9133125894310777539) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_off (8979146350396559805) -->
+    <skip />
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Agrandir avec un raccourci"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Agrandir avec un raccourci et trois tapotements"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"À propos de <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
@@ -2251,12 +2248,10 @@
     <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"Maintenir enfoncés les boutons de volume"</string>
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Appuyer trois fois sur l\'écran"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"Modifier les raccourcis d\'accessibilité"</string>
-    <!-- no translation found for accessibility_shortcut_edit_screen_prompt (5966054283114856682) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"Choisissez votre raccourci pour %1$s"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Continuer"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Appareils auditifs"</string>
-    <!-- no translation found for accessibility_hearingaid_intro (6686620444104350629) -->
-    <skip />
+    <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"Configurez et gérez les appareils auditifs ASHA et LE Audio, les implants cochléaires ainsi que d\'autres amplificateurs auditifs"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="7438018718889849521">"Aucun appareil auditif connecté"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"Ajouter des appareils auditifs"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Associer les appareils"</string>
@@ -2274,8 +2269,7 @@
     <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"Compatibilité avec appareils auditifs"</string>
     <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"Améliore la compatibilité avec les phonocapteurs et réduit les bruits indésirables"</string>
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"À propos des appareils auditifs"</string>
-    <!-- no translation found for accessibility_hearing_device_footer_summary (256061045064940818) -->
-    <skip />
+    <string name="accessibility_hearing_device_footer_summary" msgid="256061045064940818">"Pour détecter d\'autres appareils auditifs qui ne sont pas pris en charge par ASHA ou LE Audio, appuyez sur "<b>"Associer un nouvel appareil"</b>" &gt; "<b>"Voir d\'autres appareils"</b></string>
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"Associer appareil auditif"</string>
     <string name="accessibility_hearing_device_pairing_intro" msgid="7022201665808166517">"Sur cette page, vous avez la possibilité d\'associer des appareils auditifs de type ASHA et LE Audio. Vérifiez que votre appareil auditif est allumé et prêt à être associé."</string>
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"Appareils auditifs dispos"</string>
@@ -4647,6 +4641,12 @@
     <string name="primary_sim_texts_title" msgid="1287584042733097749">"SMS"</string>
     <string name="primary_sim_automatic_data_title" msgid="1265528923229642480">"Migration automatique des données"</string>
     <string name="primary_sim_automatic_data_msg" msgid="1612203837010785203">"Utiliser les données de l\'une ou l\'autre des cartes SIM en fonction de la couverture et de la disponibilité"</string>
+    <!-- no translation found for sim_action_restart_dialog_title (3507413479633430120) -->
+    <skip />
+    <!-- no translation found for sim_action_restart_dialog_msg (4737611046767629774) -->
+    <skip />
+    <!-- no translation found for sim_action_restart_dialog_cancel (665560106686565624) -->
+    <skip />
     <string name="sim_onboarding_phoneNumber_data_only" msgid="8158409121949373662">"Données uniquement"</string>
     <string name="sim_onboarding_setup" msgid="5750393553605388463">"Configuration"</string>
     <string name="sim_onboarding_next" msgid="6415025179929475355">"Suivant"</string>
@@ -4925,12 +4925,9 @@
     <string name="uwb_settings_summary" msgid="3074271396764672268">"Aide à identifier la position relative des appareils à proximité disposant de l\'UWB"</string>
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Désactiver le mode Avion pour utiliser l\'UWB"</string>
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"UWB n\'est pas disponible dans le lieu actuel"</string>
-    <!-- no translation found for thread_network_settings_title (4212301030523859220) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_summary (8065599651021748339) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_summary_airplane_mode (7207252895832446979) -->
-    <skip />
+    <string name="thread_network_settings_title" msgid="4212301030523859220">"Thread"</string>
+    <string name="thread_network_settings_summary" msgid="8065599651021748339">"Se connecter à des appareils compatibles à l\'aide de Thread pour une expérience de maison connectée fluide"</string>
+    <string name="thread_network_settings_summary_airplane_mode" msgid="7207252895832446979">"Désactiver le mode Avion pour utiliser Thread"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"Accès à la caméra"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Accès au micro"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"Pour les applis et services"</string>
@@ -5047,7 +5044,7 @@
     <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"Le format de code QR n\'est pas valide"</string>
     <string name="convert_to_esim_title" msgid="71037864129009206">"Convertir en eSIM"</string>
     <string name="transfer_esim_to_another_device_title" msgid="5286117866086383192">"Transférer l\'eSIM à un autre appareil"</string>
-    <string name="background_install_preference_summary" msgid="3065219346519340364">"{count,plural, =1{# appli}one{# applis}other{# applis}}"</string>
+    <string name="background_install_preference_summary" msgid="3065219346519340364">"{count,plural, =1{# appli}one{# appli}other{# applis}}"</string>
     <string name="background_install_title" msgid="607913515188276168">"Applis installées en arrière-plan"</string>
     <string name="background_install_summary" msgid="3890296129543309666">"Le fabricant de votre appareil peut y installer des applis en arrière-plan ou autoriser votre opérateur et d\'autres partenaires à le faire.\n\nAucune des applis listées ici n\'est nécessaire au fonctionnement normal de votre appareil. Vous pouvez désinstaller celles dont vous ne voulez pas."</string>
     <string name="background_install_feature_list_no_entry" msgid="2071343281272266154">"Aucune appli installée en arrière-plan"</string>

@@ -915,10 +915,8 @@
     <string name="wifi_settings_wep_networks_summary_blocked_by_carrier" msgid="6085673947156094523">"Váš operátor vám nepovoľuje pripojiť sa k tejto sieti, pretože používa starší bezpečnostný protokol s nižšou úrovňou zabezpečenia"</string>
     <string name="wifi_settings_wep_networks_button_allow" msgid="2807926329019873706">"Povoliť WEP"</string>
     <string name="wifi_settings_ssid_block_button_close" msgid="3013886895576949908">"Zavrieť"</string>
-    <!-- no translation found for wifi_settings_wep_networks_disconnect_title (2158070405309246888) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_disconnect_summary (643132352152685538) -->
-    <skip />
+    <string name="wifi_settings_wep_networks_disconnect_title" msgid="2158070405309246888">"Chcete sa odpojiť od siete <xliff:g id="NAME">%1$s</xliff:g>?"</string>
+    <string name="wifi_settings_wep_networks_disconnect_summary" msgid="643132352152685538">"Máte pripojenie k sieti WEP. Ak tieto siete zablokujete, pripojenie sa preruší."</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Rozšírené možnosti"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Rozbaľovací zoznam Pokročilé možnosti"</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"rozbaliť"</string>
@@ -1877,14 +1875,11 @@
     <string name="show_ime" msgid="4334255501724746849">"Používať klávesnicu na obrazovke"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"Ponechať na obrazovke, keď je aktívna fyzická klávesnica"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"Klávesy jedného stlačenia"</string>
-    <!-- no translation found for bounce_keys_summary (7347050868868080302) -->
-    <skip />
+    <string name="bounce_keys_summary" msgid="7347050868868080302">"Klávesnica ignoruje rýchle opakované stlačenia rovnakého klávesa rýchlosťou do <xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> ms"</string>
     <string name="slow_keys" msgid="2891452895499690837">"Pomalé klávesy"</string>
-    <!-- no translation found for slow_keys_summary (1784371292745423292) -->
-    <skip />
+    <string name="slow_keys_summary" msgid="1784371292745423292">"Upravte čas aktivácie klávesa stlačením na <xliff:g id="SLOW_KEYS_THRESHOLD">%1$d</xliff:g> ms"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"Režim uzamknutia klávesa"</string>
-    <!-- no translation found for sticky_keys_summary (1844953803625480623) -->
-    <skip />
+    <string name="sticky_keys_summary" msgid="1844953803625480623">"Používajte skratky stlačením jedného klávesa namiesto viacerých"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Klávesové skratky"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Zobrazenie zoznamu skratiek"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Klávesnice a nástroje pracovného profilu"</string>
@@ -2000,8 +1995,7 @@
     <string name="vision_settings_description" msgid="7614894785054441991">"Zariadenie môžete prispôsobiť, aby zodpovedalo vašim potrebám. Tieto funkcie dostupnosti môžete neskôr zmeniť v Nastaveniach."</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"Zmeniť veľkosť písma"</string>
     <string name="screen_reader_category_title" msgid="5825700839731107803">"Čítačka obrazovky"</string>
-    <!-- no translation found for keyboard_category_title (6841712758039893220) -->
-    <skip />
+    <string name="keyboard_category_title" msgid="6841712758039893220">"Možnosti fyzickej klávesnice"</string>
     <string name="captions_category_title" msgid="574490148949400274">"Titulky"</string>
     <string name="audio_category_title" msgid="5283853679967605826">"Zvuk"</string>
     <string name="general_category_title" msgid="6298579528716834157">"Všeobecné"</string>
@@ -2067,6 +2061,12 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Aj tak pokračovať"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Zrušiť"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Nastavenia priblíženia"</string>
+    <!-- no translation found for accessibility_magnification_one_finger_panning_title (4503949739883092989) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_on (9133125894310777539) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_off (8979146350396559805) -->
+    <skip />
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Priblíženie skratkou"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Priblíženie skratkou a trojitým klepnutím"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"<xliff:g id="SERVICE">%1$s</xliff:g>"</string>
@@ -2251,12 +2251,10 @@
     <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"Pridržanie tlačidiel hlasitosti"</string>
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Trojité klepnutie na obrazovku"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"Úprava skratiek dostupnosti"</string>
-    <!-- no translation found for accessibility_shortcut_edit_screen_prompt (5966054283114856682) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"Vyberte skratku pre %1$s"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Ďalej"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Načúvacie zariadenia"</string>
-    <!-- no translation found for accessibility_hearingaid_intro (6686620444104350629) -->
-    <skip />
+    <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"Nastavte a spravujte načúvadlá podporujúce protokol ASHA a aplikáciu LE Audio, kochleárne implantáty a ďalšie zosilňovacie zariadenia"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="7438018718889849521">"Nie sú pripojené žiadne načúvacie zariadenia"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"Pridať načúvadlá"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Párovanie načúvadiel"</string>
@@ -2274,8 +2272,7 @@
     <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"Kompatibilita s načúvadlami"</string>
     <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"Zlepšuje kompatibilitu s telecievkami a znižuje úroveň nežiaduceho hluku"</string>
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"Načúvacie zariadenia"</string>
-    <!-- no translation found for accessibility_hearing_device_footer_summary (256061045064940818) -->
-    <skip />
+    <string name="accessibility_hearing_device_footer_summary" msgid="256061045064940818">"Ak chcete nájsť iné načúvacie zariadenia, ktoré ASHA alebo LE Audio nepodporuje, klepnite na "<b>"Párovať nové zariadenie"</b>" a "<b>"Zobraziť ďalšie zariadenia"</b></string>
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"Párovanie načúvadla"</string>
     <string name="accessibility_hearing_device_pairing_intro" msgid="7022201665808166517">"Na tejto stránke môžete spárovať načúvacie zariadenia ASHA a LE Audio. Skontrolujte, či je načúvacie zariadenie zapnuté a pripravené na párovanie."</string>
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"Dostupné načúvacie zariadenia"</string>
@@ -4647,6 +4644,12 @@
     <string name="primary_sim_texts_title" msgid="1287584042733097749">"Textové správy"</string>
     <string name="primary_sim_automatic_data_title" msgid="1265528923229642480">"Automatické prepínanie dát"</string>
     <string name="primary_sim_automatic_data_msg" msgid="1612203837010785203">"V závislosti od pokrytia a dostupnosti môžete používať dáta oboch SIM kariet"</string>
+    <!-- no translation found for sim_action_restart_dialog_title (3507413479633430120) -->
+    <skip />
+    <!-- no translation found for sim_action_restart_dialog_msg (4737611046767629774) -->
+    <skip />
+    <!-- no translation found for sim_action_restart_dialog_cancel (665560106686565624) -->
+    <skip />
     <string name="sim_onboarding_phoneNumber_data_only" msgid="8158409121949373662">"Iba dáta"</string>
     <string name="sim_onboarding_setup" msgid="5750393553605388463">"Nastaviť"</string>
     <string name="sim_onboarding_next" msgid="6415025179929475355">"Ďalej"</string>
@@ -4927,12 +4930,9 @@
     <string name="uwb_settings_summary" msgid="3074271396764672268">"Pomáha zistiť relatívnu pozíciu zariadení v okolí, ktoré majú UWB"</string>
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Ak chcete používať UWB, vypnite režim v lietadle"</string>
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"Technológia UWB nie je v aktuálnej oblasti k dispozícii"</string>
-    <!-- no translation found for thread_network_settings_title (4212301030523859220) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_summary (8065599651021748339) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_summary_airplane_mode (7207252895832446979) -->
-    <skip />
+    <string name="thread_network_settings_title" msgid="4212301030523859220">"Thread"</string>
+    <string name="thread_network_settings_summary" msgid="8065599651021748339">"Pripojte sa ku kompatibilným zariadeniam pomocou siete Thread, aby ste mali k dispozícii plynulé prostredie inteligentnej domácnosti"</string>
+    <string name="thread_network_settings_summary_airplane_mode" msgid="7207252895832446979">"Ak chcete používať Thread, vypnite režim v lietadle"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"Prístup ku kamere"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Prístup k mikrofónu"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"Pre aplikácie a služby"</string>
