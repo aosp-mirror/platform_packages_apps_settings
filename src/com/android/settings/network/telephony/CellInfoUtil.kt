@@ -82,7 +82,7 @@ object CellInfoUtil {
      */
     @JvmStatic
     fun cellInfoListToString(cellInfos: List<CellInfo>): String =
-        cellInfos.joinToString { cellInfo -> cellInfo.readableString() }
+        cellInfos.joinToString(System.lineSeparator()) { cellInfo -> cellInfo.readableString() }
 
     /**
      * Convert [CellInfo] to a readable string without sensitive info.

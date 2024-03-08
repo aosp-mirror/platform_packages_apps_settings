@@ -28,7 +28,8 @@
         settings:searchable="false"/>
 
     <com.android.settingslib.widget.ActionButtonsPreference
-        android:key="header_view" />
+        android:key="header_view"
+        android:order="-999"/>
 
     <com.android.settings.applications.appcompat.RadioWithImagePreference
         android:key="app_default_pref"

@@ -74,7 +74,8 @@ public class UseOneLockControllerTest {
     /** Tests that the controller is always available. */
     @Test
     public void getAvailabilityStatus_returnsAvailable() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE);
+        mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE,
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
 
         assertThat(mUseOneLockController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
@@ -87,7 +88,8 @@ public class UseOneLockControllerTest {
                 .when(mLockPatternUtils).isSeparateProfileChallengeEnabled(anyInt());
         doReturn(CREDENTIAL_TYPE_PATTERN)
                 .when(mLockPatternUtils).getCredentialTypeForUser(anyInt());
-        mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE);
+        mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE,
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
 
         mUseOneLockController.updateState(mPreference);
         assertThat(mUseOneLockController.getSummary().toString()).isEqualTo("Pattern");
@@ -99,7 +101,8 @@ public class UseOneLockControllerTest {
         doReturn(true)
                 .when(mLockPatternUtils).isSeparateProfileChallengeEnabled(anyInt());
         doReturn(CREDENTIAL_TYPE_PIN).when(mLockPatternUtils).getCredentialTypeForUser(anyInt());
-        mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE);
+        mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE,
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
 
         mUseOneLockController.updateState(mPreference);
         assertThat(mUseOneLockController.getSummary().toString()).isEqualTo("PIN");
@@ -112,7 +115,8 @@ public class UseOneLockControllerTest {
                 .when(mLockPatternUtils).isSeparateProfileChallengeEnabled(anyInt());
         doReturn(CREDENTIAL_TYPE_PASSWORD)
                 .when(mLockPatternUtils).getCredentialTypeForUser(anyInt());
-        mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE);
+        mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE,
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
 
         mUseOneLockController.updateState(mPreference);
         assertThat(mUseOneLockController.getSummary().toString()).isEqualTo("Password");

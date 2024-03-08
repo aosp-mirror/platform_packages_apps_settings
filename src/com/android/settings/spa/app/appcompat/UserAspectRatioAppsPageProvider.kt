@@ -62,6 +62,7 @@ import com.android.settingslib.spaprivileged.template.app.AppListItem
 import com.android.settingslib.spaprivileged.template.app.AppListItemModel
 import com.android.settingslib.spaprivileged.template.app.AppListPage
 import com.google.common.annotations.VisibleForTesting
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
@@ -130,8 +131,10 @@ data class UserAspectRatioAppListItemModel(
     val canDisplay: Boolean,
 ) : AppRecord
 
-class UserAspectRatioAppListModel(private val context: Context)
-    : AppListModel<UserAspectRatioAppListItemModel> {
+class UserAspectRatioAppListModel(
+    private val context: Context,
+    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
+) : AppListModel<UserAspectRatioAppListItemModel> {
 
     private val packageManager = context.packageManager
     private val userAspectRatioManager = UserAspectRatioManager(context)
@@ -203,7 +206,7 @@ class UserAspectRatioAppListModel(private val context: Context)
             flow {
                 emit(userAspectRatioManager.getUserMinAspectRatioEntry(record.userOverride,
                     record.app.packageName, record.app.userId))
-            }.flowOn(Dispatchers.IO)
+            }.flowOn(ioDispatcher)
         }.collectAsStateWithLifecycle(initialValue = stringResource(R.string.summary_placeholder))
         return { summary }
     }
