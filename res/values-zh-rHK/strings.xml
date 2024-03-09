@@ -915,10 +915,8 @@
     <string name="wifi_settings_wep_networks_summary_blocked_by_carrier" msgid="6085673947156094523">"此網絡使用較舊的安全通訊協定，安全性較低，因此你的流動網絡供應商不允許使用"</string>
     <string name="wifi_settings_wep_networks_button_allow" msgid="2807926329019873706">"允許使用 WEP"</string>
     <string name="wifi_settings_ssid_block_button_close" msgid="3013886895576949908">"關閉"</string>
-    <!-- no translation found for wifi_settings_wep_networks_disconnect_title (2158070405309246888) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_disconnect_summary (643132352152685538) -->
-    <skip />
+    <string name="wifi_settings_wep_networks_disconnect_title" msgid="2158070405309246888">"要中斷與<xliff:g id="NAME">%1$s</xliff:g>的連線嗎？"</string>
+    <string name="wifi_settings_wep_networks_disconnect_summary" msgid="643132352152685538">"你已連線至 WEP 網絡。封鎖這些網絡便會中斷連線。"</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"進階選項"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"下拉式清單進階選項"</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"展開"</string>
@@ -1877,14 +1875,11 @@
     <string name="show_ime" msgid="4334255501724746849">"使用屏幕鍵盤"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"當實體鍵盤處於連接狀態時，保持在畫面上顯示"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"篩選鍵"</string>
-    <!-- no translation found for bounce_keys_summary (7347050868868080302) -->
-    <skip />
+    <string name="bounce_keys_summary" msgid="7347050868868080302">"鍵盤會忽略在 <xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> 毫秒內快速重覆按下同一按鍵的動作"</string>
     <string name="slow_keys" msgid="2891452895499690837">"緩慢鍵"</string>
-    <!-- no translation found for slow_keys_summary (1784371292745423292) -->
-    <skip />
+    <string name="slow_keys_summary" msgid="1784371292745423292">"將按鍵啟動時間調整為 <xliff:g id="SLOW_KEYS_THRESHOLD">%1$d</xliff:g> 毫秒"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"相黏鍵"</string>
-    <!-- no translation found for sticky_keys_summary (1844953803625480623) -->
-    <skip />
+    <string name="sticky_keys_summary" msgid="1844953803625480623">"一次按下快速鍵中的一個鍵，而非同時按住多個鍵"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"鍵盤快速鍵"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"顯示快速鍵清單"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"工作設定檔鍵盤與工具"</string>
@@ -1938,13 +1933,10 @@
     <string name="modifier_keys_reset" msgid="551170906710422041">"重設"</string>
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"選擇輔助鍵"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"為「<xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>」選擇新的輔助鍵："</string>
-    <!-- no translation found for ime_label_title (8994569521516807168) -->
-    <skip />
+    <string name="ime_label_title" msgid="8994569521516807168">"<xliff:g id="IME_LABEL">%s</xliff:g> 版面配置"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"預設"</string>
-    <!-- no translation found for automatic_keyboard_layout_label (9138088156046198913) -->
-    <skip />
-    <!-- no translation found for user_selected_keyboard_layout_label (154742505924555156) -->
-    <skip />
+    <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"自動：<xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
+    <string name="user_selected_keyboard_layout_label" msgid="154742505924555156">"已選取使用者：<xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"語音"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"游標速度"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"遊戲控制器"</string>
@@ -2000,8 +1992,7 @@
     <string name="vision_settings_description" msgid="7614894785054441991">"你可視乎個人需要自訂此裝置，日後也可前往「設定」變更這些無障礙功能。"</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"變更字型大小"</string>
     <string name="screen_reader_category_title" msgid="5825700839731107803">"螢幕閱讀器"</string>
-    <!-- no translation found for keyboard_category_title (6841712758039893220) -->
-    <skip />
+    <string name="keyboard_category_title" msgid="6841712758039893220">"實體鍵盤選項"</string>
     <string name="captions_category_title" msgid="574490148949400274">"字幕"</string>
     <string name="audio_category_title" msgid="5283853679967605826">"音訊"</string>
     <string name="general_category_title" msgid="6298579528716834157">"一般"</string>
@@ -2067,6 +2058,12 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"仍要繼續"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"取消"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"放大設定"</string>
+    <!-- no translation found for accessibility_magnification_one_finger_panning_title (4503949739883092989) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_on (9133125894310777539) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_off (8979146350396559805) -->
+    <skip />
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"使用快速鍵來放大"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"使用快速鍵和輕按三下來放大"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"關於「<xliff:g id="SERVICE">%1$s</xliff:g>」"</string>
@@ -2251,12 +2248,10 @@
     <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"按住音量鍵"</string>
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"輕按三下螢幕"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"編輯無障礙功能捷徑"</string>
-    <!-- no translation found for accessibility_shortcut_edit_screen_prompt (5966054283114856682) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"選擇 %1$s 的捷徑"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"繼續"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"助聽器"</string>
-    <!-- no translation found for accessibility_hearingaid_intro (6686620444104350629) -->
-    <skip />
+    <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"設定並管理 ASHA 和 LE Audio 助聽器、人工耳蝸和其他擴音裝置"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="7438018718889849521">"沒有連接任何助聽器"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"新增助聽器"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"配對助聽器"</string>
@@ -2274,8 +2269,7 @@
     <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"助聽器兼容性"</string>
     <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"改善 T 掣兼容性及降低噪音"</string>
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"關於助聽器"</string>
-    <!-- no translation found for accessibility_hearing_device_footer_summary (256061045064940818) -->
-    <skip />
+    <string name="accessibility_hearing_device_footer_summary" msgid="256061045064940818">"如要找到 ASHA 或 LE Audio 不支援的其他助聽器，請輕按 [配對新裝置] &gt; [查看更多裝置]"<b></b><b></b></string>
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"配對助聽器"</string>
     <string name="accessibility_hearing_device_pairing_intro" msgid="7022201665808166517">"你可在此頁面配對 ASHA 和 LE Audio 助聽器。請確保助聽器已開啟並已準備好配對。"</string>
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"可供使用的助聽器"</string>
@@ -4647,6 +4641,12 @@
     <string name="primary_sim_texts_title" msgid="1287584042733097749">"短訊"</string>
     <string name="primary_sim_automatic_data_title" msgid="1265528923229642480">"自動切換數據"</string>
     <string name="primary_sim_automatic_data_msg" msgid="1612203837010785203">"按流動網絡的覆蓋範圍和適用範圍，選擇要使用哪張 SIM 卡的數據"</string>
+    <!-- no translation found for sim_action_restart_dialog_title (3507413479633430120) -->
+    <skip />
+    <!-- no translation found for sim_action_restart_dialog_msg (4737611046767629774) -->
+    <skip />
+    <!-- no translation found for sim_action_restart_dialog_cancel (665560106686565624) -->
+    <skip />
     <string name="sim_onboarding_phoneNumber_data_only" msgid="8158409121949373662">"數據專用"</string>
     <string name="sim_onboarding_setup" msgid="5750393553605388463">"設定"</string>
     <string name="sim_onboarding_next" msgid="6415025179929475355">"下一頁"</string>
@@ -4678,7 +4678,7 @@
     <string name="erasing_sim" msgid="4237180547590463930">"正在清除 eSIM 卡…"</string>
     <string name="erase_sim_fail_title" msgid="1445700500168357303">"無法清除 eSIM 卡"</string>
     <string name="erase_sim_fail_text" msgid="6898841004987411547">"發生問題，未清除此 eSIM 卡。\n\n請重新啟動裝置並再試一次。"</string>
-    <string name="wifi_warning_dialog_title" msgid="7328515476966592390">"清除前連線至 Wi-Fi"</string>
+    <string name="wifi_warning_dialog_title" msgid="7328515476966592390">"清除資料前請連線至 Wi-Fi"</string>
     <string name="wifi_warning_dialog_text" msgid="6584060137703953174">"這讓你日後再次使用 eSIM 卡時更方便，不用聯絡流動網絡供應商"</string>
     <string name="wifi_warning_continue_button" msgid="8171574741789688214">"仍要清除"</string>
     <string name="wifi_warning_return_button" msgid="6226063181583906340">"確定"</string>
@@ -4925,12 +4925,9 @@
     <string name="uwb_settings_summary" msgid="3074271396764672268">"協助判斷附近採用超寬頻的裝置的相對位置"</string>
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"請關閉飛行模式，以便使用 UWB"</string>
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"目前位置無法使用 UWB"</string>
-    <!-- no translation found for thread_network_settings_title (4212301030523859220) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_summary (8065599651021748339) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_summary_airplane_mode (7207252895832446979) -->
-    <skip />
+    <string name="thread_network_settings_title" msgid="4212301030523859220">"Thread"</string>
+    <string name="thread_network_settings_summary" msgid="8065599651021748339">"使用 Thread 與兼容裝置連線，享受流暢的智能家居體驗"</string>
+    <string name="thread_network_settings_summary_airplane_mode" msgid="7207252895832446979">"請關閉飛行模式，以便使用 Thread"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"相機存取權"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"麥克風存取權"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"應用程式和服務"</string>

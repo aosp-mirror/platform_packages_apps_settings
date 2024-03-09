@@ -915,10 +915,8 @@
     <string name="wifi_settings_wep_networks_summary_blocked_by_carrier" msgid="6085673947156094523">"Nhà mạng của bạn không cho phép kết nối với mạng này vì mạng này dùng một giao thức bảo mật cũ và kém an toàn hơn"</string>
     <string name="wifi_settings_wep_networks_button_allow" msgid="2807926329019873706">"Cho phép WEP"</string>
     <string name="wifi_settings_ssid_block_button_close" msgid="3013886895576949908">"Đóng"</string>
-    <!-- no translation found for wifi_settings_wep_networks_disconnect_title (2158070405309246888) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_disconnect_summary (643132352152685538) -->
-    <skip />
+    <string name="wifi_settings_wep_networks_disconnect_title" msgid="2158070405309246888">"Ngắt kết nối khỏi <xliff:g id="NAME">%1$s</xliff:g>?"</string>
+    <string name="wifi_settings_wep_networks_disconnect_summary" msgid="643132352152685538">"Bạn đang kết nối với một mạng WEP. Nếu chặn các mạng này, bạn sẽ bị ngắt kết nối."</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Tùy chọn nâng cao"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Danh sách thả xuống của Tùy chọn nâng cao"</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"mở rộng"</string>
@@ -1579,7 +1577,7 @@
     <string name="about_settings_summary" msgid="4831942939227432513">"Xem thông tin pháp lý, trạng thái, phiên bản phần mềm"</string>
     <string name="legal_information" msgid="7509900979811934843">"Thông tin pháp lý"</string>
     <string name="manual" msgid="3651593989906084868">"Hướng dẫn sử dụng"</string>
-    <string name="regulatory_labels" msgid="5960251403367154270">"Nhãn theo quy định"</string>
+    <string name="regulatory_labels" msgid="5960251403367154270">"Nhãn thông tin quy định"</string>
     <string name="safety_and_regulatory_info" msgid="8285048080439298528">"Hướng dẫn về an toàn và quy định"</string>
     <string name="copyright_title" msgid="83245306827757857">"Bản quyền"</string>
     <string name="license_title" msgid="8745742085916617540">"Giấy phép"</string>
@@ -1877,14 +1875,11 @@
     <string name="show_ime" msgid="4334255501724746849">"Sử dụng bàn phím ảo"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"Hiện bàn phím ảo trên màn hình trong khi bàn phím vật lý đang hoạt động"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"Phím nảy"</string>
-    <!-- no translation found for bounce_keys_summary (7347050868868080302) -->
-    <skip />
+    <string name="bounce_keys_summary" msgid="7347050868868080302">"Bàn phím sẽ bỏ qua các lần nhấn nhanh liên tục cùng một phím trong <xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> mili giây"</string>
     <string name="slow_keys" msgid="2891452895499690837">"Phím chậm"</string>
-    <!-- no translation found for slow_keys_summary (1784371292745423292) -->
-    <skip />
+    <string name="slow_keys_summary" msgid="1784371292745423292">"Điều chỉnh thời gian cần để kích hoạt lượt nhấn phím thành <xliff:g id="SLOW_KEYS_THRESHOLD">%1$d</xliff:g> mili giây"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"Phím cố định"</string>
-    <!-- no translation found for sticky_keys_summary (1844953803625480623) -->
-    <skip />
+    <string name="sticky_keys_summary" msgid="1844953803625480623">"Nhấn từng phím một để dùng phím tắt thay vì giữ các phím cùng lúc"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Phím tắt"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Hiện danh sách phím tắt"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Công cụ và bàn phím hồ sơ công việc"</string>
@@ -2000,8 +1995,7 @@
     <string name="vision_settings_description" msgid="7614894785054441991">"Bạn có thể tùy chỉnh thiết bị này cho phù hợp với nhu cầu của mình. Bạn có thể thay đổi các tính năng hỗ trợ tiếp cận này trong phần Cài đặt."</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"Thay đổi cỡ chữ"</string>
     <string name="screen_reader_category_title" msgid="5825700839731107803">"Trình đọc màn hình"</string>
-    <!-- no translation found for keyboard_category_title (6841712758039893220) -->
-    <skip />
+    <string name="keyboard_category_title" msgid="6841712758039893220">"Các lựa chọn bàn phím thực"</string>
     <string name="captions_category_title" msgid="574490148949400274">"Phụ đề"</string>
     <string name="audio_category_title" msgid="5283853679967605826">"Âm thanh"</string>
     <string name="general_category_title" msgid="6298579528716834157">"Chung"</string>
@@ -2067,6 +2061,12 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Vẫn tiếp tục"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Huỷ"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Cài đặt phóng to"</string>
+    <!-- no translation found for accessibility_magnification_one_finger_panning_title (4503949739883092989) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_on (9133125894310777539) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_off (8979146350396559805) -->
+    <skip />
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Phóng to bằng phím tắt"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Phóng to bằng phím tắt và nhấn 3 lần"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"Giới thiệu về <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
@@ -2251,12 +2251,10 @@
     <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"Giữ phím âm lượng"</string>
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Nhấn 3 lần vào màn hình"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"Chỉnh sửa lối tắt hỗ trợ tiếp cận"</string>
-    <!-- no translation found for accessibility_shortcut_edit_screen_prompt (5966054283114856682) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"Chọn phím tắt của bạn cho %1$s"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Tiếp tục"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Thiết bị trợ thính"</string>
-    <!-- no translation found for accessibility_hearingaid_intro (6686620444104350629) -->
-    <skip />
+    <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"Thiết lập và quản lý các thiết bị trợ thính ASHA và Âm thanh năng lượng thấp, ốc tai điện tử và các thiết bị khuếch đại âm thanh khác"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="7438018718889849521">"Chưa kết nối với thiết bị trợ thính nào"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"Thêm thiết bị trợ thính"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Ghép nối máy trợ thính"</string>
@@ -2274,8 +2272,7 @@
     <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"Khả năng tương thích với thiết bị trợ thính"</string>
     <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"Cải thiện khả năng tương thích với các cuộn dây cảm ứng và giảm tiếng ồn không mong muốn"</string>
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"Giới thiệu về thiết bị nghe"</string>
-    <!-- no translation found for accessibility_hearing_device_footer_summary (256061045064940818) -->
-    <skip />
+    <string name="accessibility_hearing_device_footer_summary" msgid="256061045064940818">"Để tìm những thiết bị trợ thính khác mà các giao thức ASHA hoặc Âm thanh năng lượng thấp không hỗ trợ, hãy nhấn vào "<b>"Ghép nối thiết bị mới"</b>" &gt; "<b>"Xem thêm thiết bị"</b></string>
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"Ghép nối thiết bị trợ thính"</string>
     <string name="accessibility_hearing_device_pairing_intro" msgid="7022201665808166517">"Bạn có thể ghép nối với thiết bị trợ thính ASHA và Âm thanh năng lượng thấp trên trang này. Hãy đảm bảo rằng thiết bị trợ thính của bạn đang bật và sẵn sàng ghép nối."</string>
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"Thiết bị trợ thính hiện có"</string>
@@ -4647,6 +4644,12 @@
     <string name="primary_sim_texts_title" msgid="1287584042733097749">"Tin nhắn văn bản"</string>
     <string name="primary_sim_automatic_data_title" msgid="1265528923229642480">"Tự động chuyển đổi dữ liệu"</string>
     <string name="primary_sim_automatic_data_msg" msgid="1612203837010785203">"Dùng dữ liệu từ 1 trong 2 SIM tuỳ theo phạm vi phủ sóng và tình trạng mạng"</string>
+    <!-- no translation found for sim_action_restart_dialog_title (3507413479633430120) -->
+    <skip />
+    <!-- no translation found for sim_action_restart_dialog_msg (4737611046767629774) -->
+    <skip />
+    <!-- no translation found for sim_action_restart_dialog_cancel (665560106686565624) -->
+    <skip />
     <string name="sim_onboarding_phoneNumber_data_only" msgid="8158409121949373662">"Chỉ dữ liệu"</string>
     <string name="sim_onboarding_setup" msgid="5750393553605388463">"Thiết lập"</string>
     <string name="sim_onboarding_next" msgid="6415025179929475355">"Tiếp theo"</string>
@@ -4925,12 +4928,9 @@
     <string name="uwb_settings_summary" msgid="3074271396764672268">"Giúp xác định vị trí tương đối của các thiết bị ở gần có băng tần siêu rộng (UWB)"</string>
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Tắt chế độ trên máy bay để dùng UWB"</string>
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"UWB (băng tần siêu rộng) không sử dụng được ở vị trí hiện tại"</string>
-    <!-- no translation found for thread_network_settings_title (4212301030523859220) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_summary (8065599651021748339) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_summary_airplane_mode (7207252895832446979) -->
-    <skip />
+    <string name="thread_network_settings_title" msgid="4212301030523859220">"Giao thức Thread"</string>
+    <string name="thread_network_settings_summary" msgid="8065599651021748339">"Kết nối với các thiết bị tương thích bằng giao thức Thread để có được một trải nghiệm nhà thông minh liền mạch"</string>
+    <string name="thread_network_settings_summary_airplane_mode" msgid="7207252895832446979">"Tắt chế độ trên máy bay để dùng giao thức Thread"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"Quyền truy cập camera"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Quyền truy cập vào micrô"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"Áp dụng cho các ứng dụng và dịch vụ"</string>

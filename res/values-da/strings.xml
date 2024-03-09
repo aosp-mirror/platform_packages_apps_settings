@@ -915,10 +915,8 @@
     <string name="wifi_settings_wep_networks_summary_blocked_by_carrier" msgid="6085673947156094523">"Dit mobilselskab tillader ikke, at du opretter forbindelse til dette netværk, da det bruger en ældre og mindre sikker sikkerhedsprotokol"</string>
     <string name="wifi_settings_wep_networks_button_allow" msgid="2807926329019873706">"Tillad WEP"</string>
     <string name="wifi_settings_ssid_block_button_close" msgid="3013886895576949908">"Luk"</string>
-    <!-- no translation found for wifi_settings_wep_networks_disconnect_title (2158070405309246888) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_disconnect_summary (643132352152685538) -->
-    <skip />
+    <string name="wifi_settings_wep_networks_disconnect_title" msgid="2158070405309246888">"Vil du afbryde forbindelsen til <xliff:g id="NAME">%1$s</xliff:g>?"</string>
+    <string name="wifi_settings_wep_networks_disconnect_summary" msgid="643132352152685538">"Du har forbindelse til et WEP-netværk. Hvis du blokerer disse netværk, afbrydes din forbindelse."</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Avancerede valgmuligheder"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Rulleliste med avancerede valgmuligheder"</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"udvid"</string>
@@ -1877,14 +1875,11 @@
     <string name="show_ime" msgid="4334255501724746849">"Brug skærmtastaturet"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"Behold det på skærmen, mens det fysiske tastatur er aktivt"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"Elastiktaster"</string>
-    <!-- no translation found for bounce_keys_summary (7347050868868080302) -->
-    <skip />
+    <string name="bounce_keys_summary" msgid="7347050868868080302">"Tastaturet ignorerer gentagende, hurtige tryk på den samme tast inden for <xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> ms"</string>
     <string name="slow_keys" msgid="2891452895499690837">"Træge taster"</string>
-    <!-- no translation found for slow_keys_summary (1784371292745423292) -->
-    <skip />
+    <string name="slow_keys_summary" msgid="1784371292745423292">"Juster tiden det tager, inden et tryk på en tast aktiveres, til <xliff:g id="SLOW_KEYS_THRESHOLD">%1$d</xliff:g> ms"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"Træge taster"</string>
-    <!-- no translation found for sticky_keys_summary (1844953803625480623) -->
-    <skip />
+    <string name="sticky_keys_summary" msgid="1844953803625480623">"Tryk på én tast ad gangen for at bruge genveje i stedet for at holde flere taster nede på samme tid"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Tastaturgenveje"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Vis liste over genveje"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Tastatur og værktøjer for arbejdsprofil"</string>
@@ -2000,8 +1995,7 @@
     <string name="vision_settings_description" msgid="7614894785054441991">"Du kan tilpasse denne enhed, så den passer til dine behov. Disse hjælpefunktioner kan ændres senere under Indstillinger."</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"Skift skriftstørrelse"</string>
     <string name="screen_reader_category_title" msgid="5825700839731107803">"Skærmlæser"</string>
-    <!-- no translation found for keyboard_category_title (6841712758039893220) -->
-    <skip />
+    <string name="keyboard_category_title" msgid="6841712758039893220">"Valgmuligheder for det fysiske tastatur"</string>
     <string name="captions_category_title" msgid="574490148949400274">"Undertekster"</string>
     <string name="audio_category_title" msgid="5283853679967605826">"Lyd"</string>
     <string name="general_category_title" msgid="6298579528716834157">"Generelt"</string>
@@ -2067,6 +2061,12 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Fortsæt alligevel"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Annuller"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Indstillinger for forstørrelse"</string>
+    <!-- no translation found for accessibility_magnification_one_finger_panning_title (4503949739883092989) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_on (9133125894310777539) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_off (8979146350396559805) -->
+    <skip />
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Brug en genvej til forstørrelse"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Brug en genvej til forstørrelse med tre tryk"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"Om <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
@@ -2251,12 +2251,10 @@
     <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"Hold lydstyrketasterne inde"</string>
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Tryk tre gange på skærmen"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"Rediger genveje til hjælpefunktioner"</string>
-    <!-- no translation found for accessibility_shortcut_edit_screen_prompt (5966054283114856682) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"Vælg din genvej til %1$s"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Fortsæt"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Høreapparater"</string>
-    <!-- no translation found for accessibility_hearingaid_intro (6686620444104350629) -->
-    <skip />
+    <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"Konfigurer og administrer høreapparater, der understøtter ASHA og LE-lyd, cochlear-implantater og andre enheder til lydforstærkning"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="7438018718889849521">"Ingen høreapparater er tilsluttet"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"Tilføj høreapparater"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Par høreapparater"</string>
@@ -2274,8 +2272,7 @@
     <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"Høreapparatskompatibilitet"</string>
     <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"Forbedrer kompatibiliteten med teleslynge og reducerer uønsket støj"</string>
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"Om høreapparater"</string>
-    <!-- no translation found for accessibility_hearing_device_footer_summary (256061045064940818) -->
-    <skip />
+    <string name="accessibility_hearing_device_footer_summary" msgid="256061045064940818">"Hvis du vil finde andre høreapparater, der ikke understøttes af ASHA eller LE-lyd, skal du trykke på "<b>"Par ny enhed"</b>" &gt; "<b>"Se flere enheder"</b></string>
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"Par høreapparat"</string>
     <string name="accessibility_hearing_device_pairing_intro" msgid="7022201665808166517">"Du kan parre høreapparater med ASHA og LE-lyd på denne side. Sørg for, at dit høreapparat er tændt og klar til at blive parret."</string>
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"Tilgængelige høreapparater"</string>
@@ -4647,6 +4644,12 @@
     <string name="primary_sim_texts_title" msgid="1287584042733097749">"Beskeder"</string>
     <string name="primary_sim_automatic_data_title" msgid="1265528923229642480">"Automatisk dataskift"</string>
     <string name="primary_sim_automatic_data_msg" msgid="1612203837010785203">"Brug data fra begge SIM-kort afhængigt af dækning og tilgængelighed"</string>
+    <!-- no translation found for sim_action_restart_dialog_title (3507413479633430120) -->
+    <skip />
+    <!-- no translation found for sim_action_restart_dialog_msg (4737611046767629774) -->
+    <skip />
+    <!-- no translation found for sim_action_restart_dialog_cancel (665560106686565624) -->
+    <skip />
     <string name="sim_onboarding_phoneNumber_data_only" msgid="8158409121949373662">"Kun data"</string>
     <string name="sim_onboarding_setup" msgid="5750393553605388463">"Konfigurer"</string>
     <string name="sim_onboarding_next" msgid="6415025179929475355">"Næste"</string>
@@ -4925,12 +4928,9 @@
     <string name="uwb_settings_summary" msgid="3074271396764672268">"Hjælper med at identificere den relative position af enheder i nærheden, som har UWB"</string>
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Deaktiver flytilstand for at bruge UWB"</string>
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"UWB er ikke tilgængelig på den nuværende lokation"</string>
-    <!-- no translation found for thread_network_settings_title (4212301030523859220) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_summary (8065599651021748339) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_summary_airplane_mode (7207252895832446979) -->
-    <skip />
+    <string name="thread_network_settings_title" msgid="4212301030523859220">"Thread"</string>
+    <string name="thread_network_settings_summary" msgid="8065599651021748339">"Opret forbindelse til kompatible enheder via Thread for at få en ensartet brugeroplevelse i dit smarthjem"</string>
+    <string name="thread_network_settings_summary_airplane_mode" msgid="7207252895832446979">"Deaktiver flytilstand for at bruge Thread"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"Kameraadgang"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Mikrofonadgang"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"For apps og tjenester"</string>

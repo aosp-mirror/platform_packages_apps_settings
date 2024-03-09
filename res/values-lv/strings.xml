@@ -915,10 +915,8 @@
     <string name="wifi_settings_wep_networks_summary_blocked_by_carrier" msgid="6085673947156094523">"Jūsu mobilo sakaru operators neatļauj jums izveidot savienojumu ar šo tīklu, jo šis tīkls izmanto vecāku drošības protokolu, kas ir mazāk drošs."</string>
     <string name="wifi_settings_wep_networks_button_allow" msgid="2807926329019873706">"Atļaut WEP"</string>
     <string name="wifi_settings_ssid_block_button_close" msgid="3013886895576949908">"Aizvērt"</string>
-    <!-- no translation found for wifi_settings_wep_networks_disconnect_title (2158070405309246888) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_disconnect_summary (643132352152685538) -->
-    <skip />
+    <string name="wifi_settings_wep_networks_disconnect_title" msgid="2158070405309246888">"Vai pārtraukt savienojumu ar <xliff:g id="NAME">%1$s</xliff:g>?"</string>
+    <string name="wifi_settings_wep_networks_disconnect_summary" msgid="643132352152685538">"Jūs esat izveidojis savienojumu ar WEP tīklu. Ja bloķēsiet šos tīklus, savienojums tiks pārtraukts."</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Papildu opcijas"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Nolaižamais saraksts “Papildu opcijas”"</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"izvērst"</string>
@@ -1877,14 +1875,11 @@
     <string name="show_ime" msgid="4334255501724746849">"Izmantot ekrāna tastatūru"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"Paturēt ekrānā, kamēr ir aktīva fiziskā tastatūra"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"Atlēcienu taustiņi"</string>
-    <!-- no translation found for bounce_keys_summary (7347050868868080302) -->
-    <skip />
+    <string name="bounce_keys_summary" msgid="7347050868868080302">"Tastatūra ignorē ātru taustiņa nospiešanu vairākas reizes, ja tas tiek atkārtoti nospiests <xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> ms laikā."</string>
     <string name="slow_keys" msgid="2891452895499690837">"Lēnie taustiņi"</string>
-    <!-- no translation found for slow_keys_summary (1784371292745423292) -->
-    <skip />
+    <string name="slow_keys_summary" msgid="1784371292745423292">"Laiks, kas nepieciešams, lai aktivizētu nospiestu taustiņu, tiek pielāgots uz <xliff:g id="SLOW_KEYS_THRESHOLD">%1$d</xliff:g> ms."</string>
     <string name="sticky_keys" msgid="7317317044898161747">"Taustiņu ķēde"</string>
-    <!-- no translation found for sticky_keys_summary (1844953803625480623) -->
-    <skip />
+    <string name="sticky_keys_summary" msgid="1844953803625480623">"Izmantojot īsinājumtaustiņus, vienlaikus nospiediet tikai vienu taustiņu, nevis turiet nospiestus vairākus taustiņus."</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Īsinājumtaustiņi"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Rādīt īsinājumtaustiņu sarakstu"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Tastatūras un rīki darba profilā"</string>
@@ -2000,8 +1995,7 @@
     <string name="vision_settings_description" msgid="7614894785054441991">"Varat pielāgot šo ierīci savām vajadzībām. Šīs pieejamības funkcijas var mainīt vēlāk sadaļā Iestatījumi."</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"Mainīt fonta lielumu"</string>
     <string name="screen_reader_category_title" msgid="5825700839731107803">"Ekrāna lasītājs"</string>
-    <!-- no translation found for keyboard_category_title (6841712758039893220) -->
-    <skip />
+    <string name="keyboard_category_title" msgid="6841712758039893220">"Fiziskās tastatūras opcijas"</string>
     <string name="captions_category_title" msgid="574490148949400274">"Subtitri"</string>
     <string name="audio_category_title" msgid="5283853679967605826">"Audio"</string>
     <string name="general_category_title" msgid="6298579528716834157">"Vispārīgi"</string>
@@ -2067,6 +2061,12 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Tomēr turpināt"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Atcelt"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Palielināšanas iestatījumi"</string>
+    <!-- no translation found for accessibility_magnification_one_finger_panning_title (4503949739883092989) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_on (9133125894310777539) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_off (8979146350396559805) -->
+    <skip />
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Palielināšana ar saīsni"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Palieliniet, lietojot saīsni un trīskāršu skārienu"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"Par pakalpojumu <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
@@ -2251,12 +2251,10 @@
     <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"Turēt nospiestas skaļuma pogas"</string>
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Trīsreiz pieskarieties ekrānam"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"Pieejamības saīšņu rediģēšana"</string>
-    <!-- no translation found for accessibility_shortcut_edit_screen_prompt (5966054283114856682) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"Izvēlieties saīsni funkcijai %1$s"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Turpināt"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Dzirdes aparāti"</string>
-    <!-- no translation found for accessibility_hearingaid_intro (6686620444104350629) -->
-    <skip />
+    <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"Iestatiet un pārvaldiet ASHA un LE Audio dzirdes aparātus, kohleāros implantus un citas skaņas pastiprināšanas ierīces."</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="7438018718889849521">"Nav pievienots neviens dzirdes aparāts"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"Pievienot dzirdes aparātus"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Dzirdes aparātu sav. pārī"</string>
@@ -2274,8 +2272,7 @@
     <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"Saderība ar dzirdes aparātiem"</string>
     <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"Uzlabo saderību ar indukcijas spolēm un samazina nevēlamo trokšņu skaļumu"</string>
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"Par dzirdes aparātiem"</string>
-    <!-- no translation found for accessibility_hearing_device_footer_summary (256061045064940818) -->
-    <skip />
+    <string name="accessibility_hearing_device_footer_summary" msgid="256061045064940818">"Lai atrastu citus dzirdes aparātus, ko neatbalsta ASHA vai LE Audio, pieskarieties vienumam "<b>"Savienot pārī ar jaunu ierīci"</b>" &gt; "<b>"Skatīt citas ierīces"</b>"."</string>
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"Savienošana pārī"</string>
     <string name="accessibility_hearing_device_pairing_intro" msgid="7022201665808166517">"Šajā lapā varat veidot savienojumus pārī ar ASHA un LE Audio dzirdes aparātiem. Dzirdes aparātam jābūt ieslēgtam un gatavam izveidot savienojumu pārī."</string>
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"Pieejamie dzirdes aparāti"</string>
@@ -4647,6 +4644,12 @@
     <string name="primary_sim_texts_title" msgid="1287584042733097749">"Īsziņas"</string>
     <string name="primary_sim_automatic_data_title" msgid="1265528923229642480">"Automātiska datu pārslēgšana"</string>
     <string name="primary_sim_automatic_data_msg" msgid="1612203837010785203">"Izmantojiet jebkuras SIM kartes nodrošinātos datus — atkarībā no pārklājuma un pieejamības."</string>
+    <!-- no translation found for sim_action_restart_dialog_title (3507413479633430120) -->
+    <skip />
+    <!-- no translation found for sim_action_restart_dialog_msg (4737611046767629774) -->
+    <skip />
+    <!-- no translation found for sim_action_restart_dialog_cancel (665560106686565624) -->
+    <skip />
     <string name="sim_onboarding_phoneNumber_data_only" msgid="8158409121949373662">"Tikai dati"</string>
     <string name="sim_onboarding_setup" msgid="5750393553605388463">"Iestatīt"</string>
     <string name="sim_onboarding_next" msgid="6415025179929475355">"Tālāk"</string>
@@ -4926,12 +4929,9 @@
     <string name="uwb_settings_summary" msgid="3074271396764672268">"Palīdz noteikt tuvumā esošo ierīču relatīvo pozīciju, ja šīs ierīces izmanto UWB"</string>
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Izslēdziet lidojuma režīmu, lai izmantotu UWB."</string>
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"UWB nav pieejama pašreizējā atrašanās vietā."</string>
-    <!-- no translation found for thread_network_settings_title (4212301030523859220) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_summary (8065599651021748339) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_summary_airplane_mode (7207252895832446979) -->
-    <skip />
+    <string name="thread_network_settings_title" msgid="4212301030523859220">"Thread"</string>
+    <string name="thread_network_settings_summary" msgid="8065599651021748339">"Izveidojiet savienojumu ar saderīgām ierīcēm, izmantojot protokolu Thread, lai mājas viedierīču lietošanas pieredze būtu nevainojama."</string>
+    <string name="thread_network_settings_summary_airplane_mode" msgid="7207252895832446979">"Izslēdziet lidojuma režīmu, lai varētu izmantot protokolu Thread."</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"Piekļuve kamerai"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Piekļuve mikrofonam"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"Lietotnēm un pakalpojumiem"</string>

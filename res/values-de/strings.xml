@@ -308,7 +308,7 @@
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7700394302162170363"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="7551159644361639436">"Abbrechen"</string>
-    <string name="security_settings_face_enroll_introduction_no_thanks" msgid="1820618982738898717">"Nein danke"</string>
+    <string name="security_settings_face_enroll_introduction_no_thanks" msgid="1820618982738898717">"Nein, danke"</string>
     <string name="security_settings_face_enroll_introduction_agree" msgid="6319476573697497750">"Ich stimme zu"</string>
     <string name="security_settings_face_enroll_introduction_more" msgid="1970820298889710532">"Mehr"</string>
     <string name="security_settings_face_enroll_introduction_title" msgid="7061610077237098046">"Per Gesicht entsperren"</string>
@@ -491,7 +491,7 @@
     <string name="security_settings_sfps_animation_a11y_label" msgid="8808819903730940446">"Zu <xliff:g id="PERCENTAGE">%d</xliff:g> %% eingerichtet"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Fingerabdruck zu <xliff:g id="PERCENTAGE">%d</xliff:g> %% eingerichtet"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Fingerabdruck hinzugefügt"</string>
-    <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"Jederzeit durch Berühren entsperren"</string>
+    <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"Fingerabdruck entsperrt auch bei ausgeschaltetem Display"</string>
     <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"Du kannst dein Gerät auch bei ausgeschaltetem Display per Fingerabdruck entsperren. Das erhöht allerdings die Gefahr eines versehentlichen Entsperrens."</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Display, entsperren"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Später"</string>
@@ -915,10 +915,8 @@
     <string name="wifi_settings_wep_networks_summary_blocked_by_carrier" msgid="6085673947156094523">"Dein Mobilfunkanbieter lässt nicht zu, dass du dich mit diesem Netzwerk verbindest, da es ein älteres Sicherheitsprotokoll verwendet, das weniger sicher ist"</string>
     <string name="wifi_settings_wep_networks_button_allow" msgid="2807926329019873706">"WEP zulassen"</string>
     <string name="wifi_settings_ssid_block_button_close" msgid="3013886895576949908">"Schließen"</string>
-    <!-- no translation found for wifi_settings_wep_networks_disconnect_title (2158070405309246888) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_disconnect_summary (643132352152685538) -->
-    <skip />
+    <string name="wifi_settings_wep_networks_disconnect_title" msgid="2158070405309246888">"Verbindung mit <xliff:g id="NAME">%1$s</xliff:g> trennen?"</string>
+    <string name="wifi_settings_wep_networks_disconnect_summary" msgid="643132352152685538">"Du bist mit einem WEP-Netzwerk verbunden. Wenn du diese Netzwerke blockierst, wirst du getrennt."</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Erweiterte Optionen"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Drop-down-Liste \"Erweiterte Optionen\""</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"maximieren"</string>
@@ -1877,14 +1875,11 @@
     <string name="show_ime" msgid="4334255501724746849">"Bildschirmtastatur verwenden"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"Bildschirmtastatur auch dann anzeigen, wenn physische Tastatur aktiv ist"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"Bounce-Tasten"</string>
-    <!-- no translation found for bounce_keys_summary (7347050868868080302) -->
-    <skip />
+    <string name="bounce_keys_summary" msgid="7347050868868080302">"Schnell aufeinanderfolgende Betätigungen derselben Taste innerhalb von <xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> ms werden auf der Tastatur ignoriert"</string>
     <string name="slow_keys" msgid="2891452895499690837">"Anschlagverzögerung"</string>
-    <!-- no translation found for slow_keys_summary (1784371292745423292) -->
-    <skip />
+    <string name="slow_keys_summary" msgid="1784371292745423292">"Zeit zum Aktivieren eines Tastendrucks wird auf <xliff:g id="SLOW_KEYS_THRESHOLD">%1$d</xliff:g> ms festgelegt"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"Einfingerbedienung"</string>
-    <!-- no translation found for sticky_keys_summary (1844953803625480623) -->
-    <skip />
+    <string name="sticky_keys_summary" msgid="1844953803625480623">"Bei Tastenkombinationen Tasten einzeln drücken, statt sie zusammen gedrückt zu halten"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Tastenkürzel"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Liste der Tastenkombinationen anzeigen"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Tastaturen und Tools für das Arbeitsprofil"</string>
@@ -2000,8 +1995,7 @@
     <string name="vision_settings_description" msgid="7614894785054441991">"Du kannst dieses Gerät an deine Bedürfnisse anpassen. Die Bedienungshilfen kannst du später in den Einstellungen ändern."</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"Schriftgröße ändern"</string>
     <string name="screen_reader_category_title" msgid="5825700839731107803">"Screenreader"</string>
-    <!-- no translation found for keyboard_category_title (6841712758039893220) -->
-    <skip />
+    <string name="keyboard_category_title" msgid="6841712758039893220">"Optionen für physische Tastaturen"</string>
     <string name="captions_category_title" msgid="574490148949400274">"Untertitel"</string>
     <string name="audio_category_title" msgid="5283853679967605826">"Audio"</string>
     <string name="general_category_title" msgid="6298579528716834157">"Allgemein"</string>
@@ -2067,6 +2061,12 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Trotzdem fortfahren"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Abbrechen"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Vergrößerungseinstellungen"</string>
+    <!-- no translation found for accessibility_magnification_one_finger_panning_title (4503949739883092989) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_on (9133125894310777539) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_off (8979146350396559805) -->
+    <skip />
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Mit Tastenkombination vergrößern"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Mit Tastenkombination und 3-mal Tippen vergrößern"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"Die Bedienungshilfe „<xliff:g id="SERVICE">%1$s</xliff:g>“"</string>
@@ -2251,12 +2251,10 @@
     <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"Lautstärketasten gedrückt halten"</string>
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Dreimal auf den Bildschirm tippen"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"Kurzbefehl für Bedienungshilfen bearbeiten"</string>
-    <!-- no translation found for accessibility_shortcut_edit_screen_prompt (5966054283114856682) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"Tastenkombination für %1$s auswählen"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Weiter"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Hörgeräte"</string>
-    <!-- no translation found for accessibility_hearingaid_intro (6686620444104350629) -->
-    <skip />
+    <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"Du kannst Hörgeräte, Cochlea-Implantate und andere Verstärker, die mit ASHA und LE Audio kompatibel sind, einrichten und verwalten"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="7438018718889849521">"Keine Hörgeräte verbunden"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"Hörgeräte hinzufügen"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Hörgeräte koppeln"</string>
@@ -2274,8 +2272,7 @@
     <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"Kompatibilität mit Hörgeräten"</string>
     <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"Bessere Kompatibilität mit Telefonspulen und Reduzierung unerwünschter Geräusche"</string>
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"Informationen zu Hörgeräten"</string>
-    <!-- no translation found for accessibility_hearing_device_footer_summary (256061045064940818) -->
-    <skip />
+    <string name="accessibility_hearing_device_footer_summary" msgid="256061045064940818">"Tippe zum Suchen nach anderen Hörgeräten, die nicht mit ASHA oder LE Audio kompatibel sind, auf "<b>"Neues Gerät koppeln"</b>" &gt; "<b>"Mehr Geräte ansehen"</b></string>
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"Hörgerät koppeln"</string>
     <string name="accessibility_hearing_device_pairing_intro" msgid="7022201665808166517">"Auf dieser Seite kannst du ASHA- und LE Audio-Hörgeräte koppeln. Dein Hörgerät muss eingeschaltet und bereit zum Koppeln sein."</string>
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"Verfügbare Hörgeräte"</string>
@@ -3421,7 +3418,7 @@
     <string name="notification_pulse_title" msgid="8013178454646671529">"Benachrichtigungslicht blinkt"</string>
     <string name="lock_screen_notifications_title" msgid="2876323153692406203">"Datenschutz"</string>
     <string name="lockscreen_bypass_title" msgid="6519964196744088573">"Sperrbildschirm überspringen"</string>
-    <string name="lockscreen_bypass_summary" msgid="4578154430436224161">"Nach Entsperrung wird direkt der letzte Bildschirm angezeigt. Sperrbildschirm zeigt keine Benachrichtigungen. Um diese zu sehen, von oben wischen."</string>
+    <string name="lockscreen_bypass_summary" msgid="4578154430436224161">"Nach dem Entsperren wird direkt der zuletzt genutzte Bildschirm angezeigt. Um Benachrichtigungen auf dem Sperrbildschirm zu sehen, von oben wischen."</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Sperrbildschirm, überspringen, umgehen"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Wenn das Arbeitsprofil gesperrt ist"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Nur neue Benachrichtigungen auf dem Sperrbildschirm anzeigen"</string>
@@ -4647,6 +4644,12 @@
     <string name="primary_sim_texts_title" msgid="1287584042733097749">"SMS"</string>
     <string name="primary_sim_automatic_data_title" msgid="1265528923229642480">"Daten automatisch wechseln"</string>
     <string name="primary_sim_automatic_data_msg" msgid="1612203837010785203">"Du kannst je nach Abdeckung und Verfügbarkeit Daten von beiden SIM-Karten verwenden"</string>
+    <!-- no translation found for sim_action_restart_dialog_title (3507413479633430120) -->
+    <skip />
+    <!-- no translation found for sim_action_restart_dialog_msg (4737611046767629774) -->
+    <skip />
+    <!-- no translation found for sim_action_restart_dialog_cancel (665560106686565624) -->
+    <skip />
     <string name="sim_onboarding_phoneNumber_data_only" msgid="8158409121949373662">"Nur für Daten"</string>
     <string name="sim_onboarding_setup" msgid="5750393553605388463">"Einrichten"</string>
     <string name="sim_onboarding_next" msgid="6415025179929475355">"Weiter"</string>
@@ -4925,12 +4928,9 @@
     <string name="uwb_settings_summary" msgid="3074271396764672268">"Zur Ermittlung der relativen Position von Geräten mit UWB in der Nähe"</string>
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Flugmodus deaktivieren, um UWB zu verwenden"</string>
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"UWB ist an deinem derzeitigen Standort nicht verfügbar"</string>
-    <!-- no translation found for thread_network_settings_title (4212301030523859220) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_summary (8065599651021748339) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_summary_airplane_mode (7207252895832446979) -->
-    <skip />
+    <string name="thread_network_settings_title" msgid="4212301030523859220">"Thread"</string>
+    <string name="thread_network_settings_summary" msgid="8065599651021748339">"Verbindung mit kompatiblen Geräten für eine nahtlose Smart-Home-Nutzung mit Thread herstellen"</string>
+    <string name="thread_network_settings_summary_airplane_mode" msgid="7207252895832446979">"Flugmodus deaktivieren, um Thread zu verwenden"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"Kamerazugriff"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Mikrofonzugriff"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"Für Apps und Dienste"</string>

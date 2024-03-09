@@ -915,10 +915,8 @@
     <string name="wifi_settings_wep_networks_summary_blocked_by_carrier" msgid="6085673947156094523">"Your operator doesn\'t allow you to connect to this network because it uses an older security protocol that’s less secure"</string>
     <string name="wifi_settings_wep_networks_button_allow" msgid="2807926329019873706">"Allow WEP"</string>
     <string name="wifi_settings_ssid_block_button_close" msgid="3013886895576949908">"Close"</string>
-    <!-- no translation found for wifi_settings_wep_networks_disconnect_title (2158070405309246888) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_disconnect_summary (643132352152685538) -->
-    <skip />
+    <string name="wifi_settings_wep_networks_disconnect_title" msgid="2158070405309246888">"Disconnect from <xliff:g id="NAME">%1$s</xliff:g>?"</string>
+    <string name="wifi_settings_wep_networks_disconnect_summary" msgid="643132352152685538">"You\'re connected to a WEP network. If you block these networks, you\'ll be disconnected."</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Advanced options"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Drop-down list Advanced Options"</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"expand"</string>
@@ -1877,14 +1875,11 @@
     <string name="show_ime" msgid="4334255501724746849">"Use on-screen keyboard"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"Keep it on screen while physical keyboard is active"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"Bounce keys"</string>
-    <!-- no translation found for bounce_keys_summary (7347050868868080302) -->
-    <skip />
+    <string name="bounce_keys_summary" msgid="7347050868868080302">"The keyboard ignores quickly repeated presses of the same key within <xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> ms"</string>
     <string name="slow_keys" msgid="2891452895499690837">"Slow keys"</string>
-    <!-- no translation found for slow_keys_summary (1784371292745423292) -->
-    <skip />
+    <string name="slow_keys_summary" msgid="1784371292745423292">"Adjusts the time that it takes for a key press to activate to <xliff:g id="SLOW_KEYS_THRESHOLD">%1$d</xliff:g> ms"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"Sticky keys"</string>
-    <!-- no translation found for sticky_keys_summary (1844953803625480623) -->
-    <skip />
+    <string name="sticky_keys_summary" msgid="1844953803625480623">"Press one key at a time for shortcuts instead of holding keys down together"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Keyboard shortcuts"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Show list of shortcuts"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Work profile keyboards &amp; tools"</string>
@@ -1938,13 +1933,10 @@
     <string name="modifier_keys_reset" msgid="551170906710422041">"Reset"</string>
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"Choose modifier key"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Choose a new key for <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>:"</string>
-    <!-- no translation found for ime_label_title (8994569521516807168) -->
-    <skip />
+    <string name="ime_label_title" msgid="8994569521516807168">"<xliff:g id="IME_LABEL">%s</xliff:g> layout"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Default"</string>
-    <!-- no translation found for automatic_keyboard_layout_label (9138088156046198913) -->
-    <skip />
-    <!-- no translation found for user_selected_keyboard_layout_label (154742505924555156) -->
-    <skip />
+    <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"Automatic: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
+    <string name="user_selected_keyboard_layout_label" msgid="154742505924555156">"User selected: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"Speech"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"Pointer speed"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Game Controller"</string>
@@ -2000,8 +1992,7 @@
     <string name="vision_settings_description" msgid="7614894785054441991">"You can customise this device to fit your needs. These accessibility features can be changed later in Settings."</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"Change font size"</string>
     <string name="screen_reader_category_title" msgid="5825700839731107803">"Screen reader"</string>
-    <!-- no translation found for keyboard_category_title (6841712758039893220) -->
-    <skip />
+    <string name="keyboard_category_title" msgid="6841712758039893220">"Physical keyboard options"</string>
     <string name="captions_category_title" msgid="574490148949400274">"Captions"</string>
     <string name="audio_category_title" msgid="5283853679967605826">"Audio"</string>
     <string name="general_category_title" msgid="6298579528716834157">"General"</string>
@@ -2067,6 +2058,12 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Continue anyway"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Cancel"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Magnification settings"</string>
+    <!-- no translation found for accessibility_magnification_one_finger_panning_title (4503949739883092989) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_on (9133125894310777539) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_off (8979146350396559805) -->
+    <skip />
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Magnify with shortcut"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Magnify with shortcut &amp; triple-tap"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"About <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
@@ -2251,12 +2248,10 @@
     <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"Hold volume keys"</string>
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Triple-tap screen"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"Edit accessibility shortcuts"</string>
-    <!-- no translation found for accessibility_shortcut_edit_screen_prompt (5966054283114856682) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"Choose your shortcut for %1$s"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Continue"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Hearing devices"</string>
-    <!-- no translation found for accessibility_hearingaid_intro (6686620444104350629) -->
-    <skip />
+    <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"Set up and manage ASHA and LE Audio hearing aids, cochlear implants and other amplification devices"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="7438018718889849521">"No hearing devices connected"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"Add hearing aids"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Pair hearing aids"</string>
@@ -2274,8 +2269,7 @@
     <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"Hearing aid compatibility"</string>
     <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"Improves compatibility with telecoils and reduces unwanted noise"</string>
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"About hearing devices"</string>
-    <!-- no translation found for accessibility_hearing_device_footer_summary (256061045064940818) -->
-    <skip />
+    <string name="accessibility_hearing_device_footer_summary" msgid="256061045064940818">"To find other hearing devices that aren\'t supported by ASHA or LE Audio, tap "<b>"Pair new device"</b>" &gt; "<b>"See more devices"</b></string>
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"Pair hearing device"</string>
     <string name="accessibility_hearing_device_pairing_intro" msgid="7022201665808166517">"You can pair ASHA and LE Audio hearing devices on this page. Make sure that your hearing device is turned on and ready to pair."</string>
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"Available hearing devices"</string>
@@ -4647,6 +4641,12 @@
     <string name="primary_sim_texts_title" msgid="1287584042733097749">"Texts"</string>
     <string name="primary_sim_automatic_data_title" msgid="1265528923229642480">"Automatic data switching"</string>
     <string name="primary_sim_automatic_data_msg" msgid="1612203837010785203">"Use data from either SIM depending on coverage and availability"</string>
+    <!-- no translation found for sim_action_restart_dialog_title (3507413479633430120) -->
+    <skip />
+    <!-- no translation found for sim_action_restart_dialog_msg (4737611046767629774) -->
+    <skip />
+    <!-- no translation found for sim_action_restart_dialog_cancel (665560106686565624) -->
+    <skip />
     <string name="sim_onboarding_phoneNumber_data_only" msgid="8158409121949373662">"Data only"</string>
     <string name="sim_onboarding_setup" msgid="5750393553605388463">"Set up"</string>
     <string name="sim_onboarding_next" msgid="6415025179929475355">"Next"</string>
@@ -4925,12 +4925,9 @@
     <string name="uwb_settings_summary" msgid="3074271396764672268">"Helps identify the relative position of nearby devices that have UWB"</string>
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Turn off aeroplane mode to use UWB"</string>
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"UWB is unavailable in the current location"</string>
-    <!-- no translation found for thread_network_settings_title (4212301030523859220) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_summary (8065599651021748339) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_summary_airplane_mode (7207252895832446979) -->
-    <skip />
+    <string name="thread_network_settings_title" msgid="4212301030523859220">"Thread"</string>
+    <string name="thread_network_settings_summary" msgid="8065599651021748339">"Connect to compatible devices using Thread for a seamless smart home experience"</string>
+    <string name="thread_network_settings_summary_airplane_mode" msgid="7207252895832446979">"Turn off aeroplane mode to use Thread"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"Camera access"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Microphone access"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"For apps and services"</string>
