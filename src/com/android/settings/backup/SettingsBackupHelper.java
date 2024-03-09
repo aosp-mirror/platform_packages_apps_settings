@@ -16,10 +16,8 @@
 
 package com.android.settings.backup;
 
-import static com.android.settings.localepicker.LocaleNotificationDataManager.LOCALE_NOTIFICATION;
 
 import android.app.backup.BackupAgentHelper;
-import android.app.backup.SharedPreferencesBackupHelper;
 
 import com.android.settings.flags.Flags;
 import com.android.settings.onboarding.OnboardingFeatureProvider;
@@ -29,15 +27,12 @@ import com.android.settingslib.datastore.BackupRestoreStorageManager;
 
 /** Backup agent for Settings APK */
 public class SettingsBackupHelper extends BackupAgentHelper {
-    private static final String PREF_LOCALE_NOTIFICATION = "localeNotificationSharedPref";
     public static final String SOUND_BACKUP_HELPER = "SoundSettingsBackup";
 
     @Override
     public void onCreate() {
         super.onCreate();
         BackupRestoreStorageManager.getInstance(this).addBackupAgentHelpers(this);
-        addHelper(PREF_LOCALE_NOTIFICATION,
-                new SharedPreferencesBackupHelper(this, LOCALE_NOTIFICATION));
         if (Flags.enableSoundBackup()) {
             OnboardingFeatureProvider onboardingFeatureProvider =
                     FeatureFactory.getFeatureFactory().getOnboardingFeatureProvider();

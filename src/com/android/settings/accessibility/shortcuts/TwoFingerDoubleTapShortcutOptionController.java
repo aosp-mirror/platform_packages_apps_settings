@@ -36,17 +36,17 @@ import java.util.Set;
  * A controller handles displaying the two fingers double tap shortcut option preference and
  * configuring the shortcut.
  */
-public class TwoFingersDoubleTapShortcutOptionController
+public class TwoFingerDoubleTapShortcutOptionController
         extends ShortcutOptionPreferenceController {
 
-    public TwoFingersDoubleTapShortcutOptionController(Context context, String preferenceKey) {
+    public TwoFingerDoubleTapShortcutOptionController(Context context, String preferenceKey) {
         super(context, preferenceKey);
     }
 
     @ShortcutConstants.UserShortcutType
     @Override
     protected int getShortcutType() {
-        return ShortcutConstants.UserShortcutType.TRIPLETAP;
+        return ShortcutConstants.UserShortcutType.TWOFINGER_DOUBLETAP;
     }
 
     @Override
@@ -90,6 +90,10 @@ public class TwoFingersDoubleTapShortcutOptionController
 
     @Override
     protected void enableShortcutForTargets(boolean enable) {
+        if (android.view.accessibility.Flags.a11yQsShortcut()) {
+            super.enableShortcutForTargets(enable);
+            return;
+        }
         Settings.Secure.putInt(
                 mContext.getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_MAGNIFICATION_TWO_FINGER_TRIPLE_TAP_ENABLED,

@@ -21,6 +21,7 @@ import static com.android.internal.accessibility.AccessibilityShortcutController
 import android.content.Context;
 import android.provider.Settings;
 import android.view.View;
+import android.view.accessibility.Flags;
 
 import com.android.internal.accessibility.common.ShortcutConstants;
 import com.android.settings.R;
@@ -65,6 +66,9 @@ public abstract class SoftwareShortcutOptionPreferenceController
     @Override
     protected void enableShortcutForTargets(boolean enable) {
         super.enableShortcutForTargets(enable);
+        if (Flags.a11yQsShortcut()) {
+            return;
+        }
 
         if (enable) {
             // Update the A11y FAB size to large when the Magnification shortcut is enabled

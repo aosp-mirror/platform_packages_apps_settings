@@ -20,10 +20,24 @@ import static android.provider.Settings.Secure.ACCESSIBILITY_BUTTON_MODE_FLOATIN
 import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_3BUTTON;
 import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+import android.accessibilityservice.AccessibilityServiceInfo;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.ResolveInfo;
+import android.content.pm.ServiceInfo;
+import android.os.Build;
 import android.provider.Settings;
+import android.view.accessibility.AccessibilityManager;
 
 import com.android.settings.testutils.shadow.SettingsShadowResources;
+
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
 
 /**
  * Utility class for common methods used in the accessibility feature related tests
@@ -46,5 +60,40 @@ public class AccessibilityTestUtils {
                     com.android.internal.R.integer.config_navBarInteractionMode,
                     NAV_BAR_MODE_3BUTTON);
         }
+    }
+
+    /**
+     * Returns a mock {@link AccessibilityManager}
+     */
+    public static AccessibilityManager setupMockAccessibilityManager(Context mockContext) {
+        AccessibilityManager am = mock(AccessibilityManager.class);
+        when(mockContext.getSystemService(AccessibilityManager.class)).thenReturn(am);
+        return am;
+    }
+
+    public static AccessibilityServiceInfo createAccessibilityServiceInfo(
+            Context context, ComponentName componentName, boolean isAlwaysOnService) {
+        final ApplicationInfo applicationInfo = new ApplicationInfo();
+        applicationInfo.targetSdkVersion = Build.VERSION_CODES.R;
+        final ServiceInfo serviceInfo = new ServiceInfo();
+        applicationInfo.packageName = componentName.getPackageName();
+        serviceInfo.packageName = componentName.getPackageName();
+        serviceInfo.name = componentName.getClassName();
+        serviceInfo.applicationInfo = applicationInfo;
+
+        final ResolveInfo resolveInfo = new ResolveInfo();
+        resolveInfo.serviceInfo = serviceInfo;
+        try {
+            final AccessibilityServiceInfo info = new AccessibilityServiceInfo(resolveInfo,
+                    context);
+            info.setComponentName(componentName);
+            if (isAlwaysOnService) {
+                info.flags |= AccessibilityServiceInfo.FLAG_REQUEST_ACCESSIBILITY_BUTTON;
+            }
+            return info;
+        } catch (XmlPullParserException | IOException e) {
+            // Do nothing
+        }
+        return null;
     }
 }

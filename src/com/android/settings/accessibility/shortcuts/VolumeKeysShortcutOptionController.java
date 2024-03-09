@@ -17,6 +17,7 @@
 package com.android.settings.accessibility.shortcuts;
 
 import android.content.Context;
+import android.view.accessibility.Flags;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -64,6 +65,10 @@ public class VolumeKeysShortcutOptionController extends ShortcutOptionPreference
     @Override
     protected void enableShortcutForTargets(boolean enable) {
         super.enableShortcutForTargets(enable);
+        if (Flags.a11yQsShortcut()) {
+            return;
+        }
+
         if (enable) {
             AccessibilityUtil.skipVolumeShortcutDialogTimeoutRestriction(mContext);
         }

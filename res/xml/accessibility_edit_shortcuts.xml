@@ -26,6 +26,14 @@
         settings:allowDividerBelow="false"/>
 
     <com.android.settings.accessibility.shortcuts.ShortcutOptionPreference
+        android:key="@string/accessibility_shortcut_quick_settings_pref"
+        android:persistent="false"
+        android:selectable="true"
+        settings:allowDividerAbove="false"
+        settings:allowDividerBelow="false"
+        settings:controller="com.android.settings.accessibility.shortcuts.QuickSettingsShortcutOptionController" />
+
+    <com.android.settings.accessibility.shortcuts.ShortcutOptionPreference
         android:key="@string/accessibility_shortcut_fab_pref"
         android:persistent="false"
         android:selectable="true"
@@ -58,12 +66,12 @@
         settings:controller="com.android.settings.accessibility.shortcuts.VolumeKeysShortcutOptionController" />
 
     <com.android.settings.accessibility.shortcuts.ShortcutOptionPreference
-        android:key="@string/accessibility_shortcut_two_fingers_double_tap_pref"
+        android:key="@string/accessibility_shortcut_two_finger_double_tap_pref"
         android:persistent="false"
         android:selectable="true"
         settings:allowDividerAbove="false"
         settings:allowDividerBelow="false"
-        settings:controller="com.android.settings.accessibility.shortcuts.TwoFingersDoubleTapShortcutOptionController" />
+        settings:controller="com.android.settings.accessibility.shortcuts.TwoFingerDoubleTapShortcutOptionController" />
 
     <Preference
         android:icon="@drawable/ic_keyboard_arrow_down"
