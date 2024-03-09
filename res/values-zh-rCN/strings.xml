@@ -915,10 +915,8 @@
     <string name="wifi_settings_wep_networks_summary_blocked_by_carrier" msgid="6085673947156094523">"您的运营商不允许连接此网络，因为它采用较旧的安全协议，安全性较低"</string>
     <string name="wifi_settings_wep_networks_button_allow" msgid="2807926329019873706">"允许连接 WEP"</string>
     <string name="wifi_settings_ssid_block_button_close" msgid="3013886895576949908">"关闭"</string>
-    <!-- no translation found for wifi_settings_wep_networks_disconnect_title (2158070405309246888) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_disconnect_summary (643132352152685538) -->
-    <skip />
+    <string name="wifi_settings_wep_networks_disconnect_title" msgid="2158070405309246888">"要断开与<xliff:g id="NAME">%1$s</xliff:g>的连接吗？"</string>
+    <string name="wifi_settings_wep_networks_disconnect_summary" msgid="643132352152685538">"您已连接到 WEP 网络。如果您阻止使用这些网络，则会断开连接。"</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"高级选项"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"下拉列表高级选项"</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"展开"</string>
@@ -1877,14 +1875,11 @@
     <string name="show_ime" msgid="4334255501724746849">"使用屏幕键盘"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"开启后，连接到实体键盘时，它会一直显示在屏幕上"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"返回键"</string>
-    <!-- no translation found for bounce_keys_summary (7347050868868080302) -->
-    <skip />
+    <string name="bounce_keys_summary" msgid="7347050868868080302">"键盘会忽略 <xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> 毫秒内快速重复按同一键的操作"</string>
     <string name="slow_keys" msgid="2891452895499690837">"慢速键"</string>
-    <!-- no translation found for slow_keys_summary (1784371292745423292) -->
-    <skip />
+    <string name="slow_keys_summary" msgid="1784371292745423292">"将按键启用时长调整为 <xliff:g id="SLOW_KEYS_THRESHOLD">%1$d</xliff:g> 毫秒"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"粘滞键"</string>
-    <!-- no translation found for sticky_keys_summary (1844953803625480623) -->
-    <skip />
+    <string name="sticky_keys_summary" msgid="1844953803625480623">"一次按下快捷键中的一个键，而非同时按住多个键"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"键盘快捷键"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"显示快捷键列表"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"工作资料键盘和工具"</string>
@@ -1938,13 +1933,10 @@
     <string name="modifier_keys_reset" msgid="551170906710422041">"重置"</string>
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"选择辅助键"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"为<xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>选择新的辅助键："</string>
-    <!-- no translation found for ime_label_title (8994569521516807168) -->
-    <skip />
+    <string name="ime_label_title" msgid="8994569521516807168">"“<xliff:g id="IME_LABEL">%s</xliff:g>”布局"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"默认"</string>
-    <!-- no translation found for automatic_keyboard_layout_label (9138088156046198913) -->
-    <skip />
-    <!-- no translation found for user_selected_keyboard_layout_label (154742505924555156) -->
-    <skip />
+    <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"自动选择的布局：<xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
+    <string name="user_selected_keyboard_layout_label" msgid="154742505924555156">"用户选择的布局：<xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"语音"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"指针速度"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"游戏控制器"</string>
@@ -2000,8 +1992,7 @@
     <string name="vision_settings_description" msgid="7614894785054441991">"您可以根据自己的需求对此设备进行自定义，也可以稍后在“设置”中更改这些无障碍功能的设置。"</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"更改字体大小"</string>
     <string name="screen_reader_category_title" msgid="5825700839731107803">"屏幕阅读器"</string>
-    <!-- no translation found for keyboard_category_title (6841712758039893220) -->
-    <skip />
+    <string name="keyboard_category_title" msgid="6841712758039893220">"实体键盘选项"</string>
     <string name="captions_category_title" msgid="574490148949400274">"字幕"</string>
     <string name="audio_category_title" msgid="5283853679967605826">"音频"</string>
     <string name="general_category_title" msgid="6298579528716834157">"常规"</string>
@@ -2067,6 +2058,12 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"仍然继续"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"取消"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"放大设置"</string>
+    <!-- no translation found for accessibility_magnification_one_finger_panning_title (4503949739883092989) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_on (9133125894310777539) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_off (8979146350396559805) -->
+    <skip />
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"使用快捷手势进行放大"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"通过“快捷手势”和“点按屏幕三次”进行放大"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"<xliff:g id="SERVICE">%1$s</xliff:g>简介"</string>
@@ -2251,12 +2248,10 @@
     <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"按住两个音量键"</string>
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"点按屏幕三次"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"修改无障碍快捷方式"</string>
-    <!-- no translation found for accessibility_shortcut_edit_screen_prompt (5966054283114856682) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"为%1$s选择快捷键"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"继续"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"助听装置"</string>
-    <!-- no translation found for accessibility_hearingaid_intro (6686620444104350629) -->
-    <skip />
+    <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"设置和管理 ASHA 和 LE 音频助听器、人工耳蜗及其他放大设备"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="7438018718889849521">"未连接任何助听装置"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"添加助听器"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"为助听器进行配对"</string>
@@ -2274,8 +2269,7 @@
     <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"助听器兼容性"</string>
     <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"通过拾音线圈提高兼容性并减少杂音"</string>
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"助听设备简介"</string>
-    <!-- no translation found for accessibility_hearing_device_footer_summary (256061045064940818) -->
-    <skip />
+    <string name="accessibility_hearing_device_footer_summary" msgid="256061045064940818">"如需查找 ASHA 或 LE 音频不支持的其他助听装置，请依次点按"<b>"与新设备配对"</b>" &gt; "<b>"查看更多设备"</b></string>
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"与助听设备配对"</string>
     <string name="accessibility_hearing_device_pairing_intro" msgid="7022201665808166517">"您可以在此页面上配对 ASHA 和 LE Audio 助听装置。请确保您的助听装置已开启且可随时配对。"</string>
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"可用的助听装置"</string>
@@ -4647,6 +4641,12 @@
     <string name="primary_sim_texts_title" msgid="1287584042733097749">"短信"</string>
     <string name="primary_sim_automatic_data_title" msgid="1265528923229642480">"自动切换数据网络"</string>
     <string name="primary_sim_automatic_data_msg" msgid="1612203837010785203">"根据信号覆盖率和可用性，选择要使用哪张 SIM 卡的移动网络"</string>
+    <!-- no translation found for sim_action_restart_dialog_title (3507413479633430120) -->
+    <skip />
+    <!-- no translation found for sim_action_restart_dialog_msg (4737611046767629774) -->
+    <skip />
+    <!-- no translation found for sim_action_restart_dialog_cancel (665560106686565624) -->
+    <skip />
     <string name="sim_onboarding_phoneNumber_data_only" msgid="8158409121949373662">"上网专用"</string>
     <string name="sim_onboarding_setup" msgid="5750393553605388463">"设置"</string>
     <string name="sim_onboarding_next" msgid="6415025179929475355">"继续"</string>
@@ -4925,12 +4925,9 @@
     <string name="uwb_settings_summary" msgid="3074271396764672268">"有助于确定附近支持超宽带 (UWB) 的设备的相对位置"</string>
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"会关闭飞行模式，以使用超宽带 (UWB)"</string>
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"UWB 在当前位置不可用"</string>
-    <!-- no translation found for thread_network_settings_title (4212301030523859220) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_summary (8065599651021748339) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_summary_airplane_mode (7207252895832446979) -->
-    <skip />
+    <string name="thread_network_settings_title" msgid="4212301030523859220">"Thread"</string>
+    <string name="thread_network_settings_summary" msgid="8065599651021748339">"使用 Thread 连接到兼容的设备，享受顺畅的智能家居体验"</string>
+    <string name="thread_network_settings_summary_airplane_mode" msgid="7207252895832446979">"关闭飞行模式，以使用 Thread"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"摄像头使用权限"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"麦克风使用权限"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"会影响应用和服务"</string>

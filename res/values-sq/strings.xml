@@ -915,10 +915,8 @@
     <string name="wifi_settings_wep_networks_summary_blocked_by_carrier" msgid="6085673947156094523">"Operatori celular nuk të lejon që të lidhesh me këtë rrjet sepse ai përdor një protokoll më të vjetër të sigurisë që është më pak i sigurt"</string>
     <string name="wifi_settings_wep_networks_button_allow" msgid="2807926329019873706">"Lejo WEP"</string>
     <string name="wifi_settings_ssid_block_button_close" msgid="3013886895576949908">"Mbyll"</string>
-    <!-- no translation found for wifi_settings_wep_networks_disconnect_title (2158070405309246888) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_disconnect_summary (643132352152685538) -->
-    <skip />
+    <string name="wifi_settings_wep_networks_disconnect_title" msgid="2158070405309246888">"Do të shkëputesh nga <xliff:g id="NAME">%1$s</xliff:g>?"</string>
+    <string name="wifi_settings_wep_networks_disconnect_summary" msgid="643132352152685538">"Je lidhur me një rrjet WEP. Nëse i bllokon këto rrjete, do të shkëputesh."</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Opsionet e përparuara"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Opsionet e përparuara të listës me lëshim poshtë"</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"zgjero"</string>
@@ -1877,14 +1875,11 @@
     <string name="show_ime" msgid="4334255501724746849">"Përdor tastierën në ekran"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"Mbaje në ekran ndërsa tastiera fizike është aktive"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"Tastet e kërcimit"</string>
-    <!-- no translation found for bounce_keys_summary (7347050868868080302) -->
-    <skip />
+    <string name="bounce_keys_summary" msgid="7347050868868080302">"Tastiera i shpërfill shtypjet e shpejta të përsëritura të të njëjtit tast brenda <xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> ms"</string>
     <string name="slow_keys" msgid="2891452895499690837">"Tastet e ngadalta"</string>
-    <!-- no translation found for slow_keys_summary (1784371292745423292) -->
-    <skip />
+    <string name="slow_keys_summary" msgid="1784371292745423292">"Rregullon kohën që duhet për aktivizimin e një shtypjeje tasti në <xliff:g id="SLOW_KEYS_THRESHOLD">%1$d</xliff:g> ms"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"Tastet e përhershme"</string>
-    <!-- no translation found for sticky_keys_summary (1844953803625480623) -->
-    <skip />
+    <string name="sticky_keys_summary" msgid="1844953803625480623">"Shtyp vetëm një tast në një moment për shkurtoret në vend që t\'i mbash shtypur bashkë tastet"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Shkurtoret e tastierës"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Shfaq listën e shkurtoreve"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Tastierat dhe veglat e profilit të punës"</string>
@@ -2000,8 +1995,7 @@
     <string name="vision_settings_description" msgid="7614894785054441991">"Mund ta personalizosh këtë pajisje për t\'iu përshtatur nevojave të tua. Këto veçori të qasshmërisë mund të ndryshohen më vonë te \"Cilësimet\"."</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"Ndrysho madhësinë e shkrimit"</string>
     <string name="screen_reader_category_title" msgid="5825700839731107803">"Lexuesi i ekranit"</string>
-    <!-- no translation found for keyboard_category_title (6841712758039893220) -->
-    <skip />
+    <string name="keyboard_category_title" msgid="6841712758039893220">"Opsionet e tastierës fizike"</string>
     <string name="captions_category_title" msgid="574490148949400274">"Titrat"</string>
     <string name="audio_category_title" msgid="5283853679967605826">"Audio"</string>
     <string name="general_category_title" msgid="6298579528716834157">"Të përgjithshme"</string>
@@ -2067,6 +2061,12 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Vazhdo gjithsesi"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Anulo"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Cilësimet e zmadhimit"</string>
+    <!-- no translation found for accessibility_magnification_one_finger_panning_title (4503949739883092989) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_on (9133125894310777539) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_off (8979146350396559805) -->
+    <skip />
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Zmadho me shkurtore"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Zmadho me shkurtore dhe tri trokitje"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"Rreth \"<xliff:g id="SERVICE">%1$s</xliff:g>\""</string>
@@ -2251,12 +2251,10 @@
     <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"Mbaj butonat e volumit"</string>
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Trokit tri herë tek ekrani"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"Zgjidh shkurtoret e qasshmërisë"</string>
-    <!-- no translation found for accessibility_shortcut_edit_screen_prompt (5966054283114856682) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"Zgjidh shkurtoren tënde për %1$s"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Vazhdo"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Pajisjet e dëgjimit"</string>
-    <!-- no translation found for accessibility_hearingaid_intro (6686620444104350629) -->
-    <skip />
+    <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"Konfiguro dhe menaxho aparatet e dëgjimit, implantet kokleare dhe pajisje të tjera amplifikimi me ASHA dhe LE Audio"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="7438018718889849521">"Nuk ka pajisje dëgjimi të lidhura"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"Shto aparate dëgjimi"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Çifto aparatin e dëgjimit"</string>
@@ -2274,8 +2272,7 @@
     <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"Përputhshmëria me aparate dëgjimi"</string>
     <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"Përmirëson përputhshmërinë me kapësit e tingujve dhe redukton zhurmën e padëshiruar"</string>
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"Rreth pajisjeve të dëgjimit"</string>
-    <!-- no translation found for accessibility_hearing_device_footer_summary (256061045064940818) -->
-    <skip />
+    <string name="accessibility_hearing_device_footer_summary" msgid="256061045064940818">"Për të gjetur pajisje të tjera ndihmëse për dëgjimin që nuk mbështetet nga ASHA ose LE Audio, trokit te "<b>"Çifto pajisjen e re"</b>" &gt; "<b>"Shiko pajisje të tjera"</b></string>
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"Çifto pajisjet e dëgjimit"</string>
     <string name="accessibility_hearing_device_pairing_intro" msgid="7022201665808166517">"Mund t\'i çiftosh pajisjet ndihmëse për dëgjimin me ASHA dhe LE Audio në këtë faqe. Sigurohu që pajisja jote ndihmëse për dëgjimin të jetë e aktivizuar dhe gati për çiftim."</string>
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"Pajisjet e dëgjimit që ofrohen"</string>
@@ -4647,6 +4644,12 @@
     <string name="primary_sim_texts_title" msgid="1287584042733097749">"Mesazhet me tekst"</string>
     <string name="primary_sim_automatic_data_title" msgid="1265528923229642480">"Ndërrimi automatik për të dhënat"</string>
     <string name="primary_sim_automatic_data_msg" msgid="1612203837010785203">"Përdor të dhënat nga cilado kartë SIM në varësi të mbulimit dhe disponueshmërisë"</string>
+    <!-- no translation found for sim_action_restart_dialog_title (3507413479633430120) -->
+    <skip />
+    <!-- no translation found for sim_action_restart_dialog_msg (4737611046767629774) -->
+    <skip />
+    <!-- no translation found for sim_action_restart_dialog_cancel (665560106686565624) -->
+    <skip />
     <string name="sim_onboarding_phoneNumber_data_only" msgid="8158409121949373662">"Vetëm për të dhënat"</string>
     <string name="sim_onboarding_setup" msgid="5750393553605388463">"Konfiguro"</string>
     <string name="sim_onboarding_next" msgid="6415025179929475355">"Para"</string>
@@ -4925,12 +4928,9 @@
     <string name="uwb_settings_summary" msgid="3074271396764672268">"Ndihmon për të identifikuar pozicionin e përafërt të pajisjeve në afërsi që kanë UWB"</string>
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Çaktivizo \"Modalitetin e aeroplanit\" për të përdorur UWB."</string>
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"Veçoria UWB nuk ofrohet në vendndodhjen aktuale"</string>
-    <!-- no translation found for thread_network_settings_title (4212301030523859220) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_summary (8065599651021748339) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_summary_airplane_mode (7207252895832446979) -->
-    <skip />
+    <string name="thread_network_settings_title" msgid="4212301030523859220">"Thread"</string>
+    <string name="thread_network_settings_summary" msgid="8065599651021748339">"Lidhu me pajisjet e përputhshme duke përdorur Thread për një përvojë pa ndërprerje me shtëpinë inteligjente"</string>
+    <string name="thread_network_settings_summary_airplane_mode" msgid="7207252895832446979">"Çaktivizo modalitetin e aeroplanit për të përdorur Thread."</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"Qasja te kamera"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Qasja te mikrofoni"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"Për aplikacionet dhe shërbimet"</string>
