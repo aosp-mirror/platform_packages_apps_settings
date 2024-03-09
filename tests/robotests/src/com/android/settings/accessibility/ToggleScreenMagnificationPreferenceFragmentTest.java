@@ -292,7 +292,39 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
     }
 
     @Test
-    public void onResume_haveRegisterToSpecificUris() {
+    @EnableFlags(android.view.accessibility.Flags.FLAG_A11Y_QS_SHORTCUT)
+    public void onResume_flagEnabled_haveRegisterToSpecificUris() {
+        ShadowContentResolver shadowContentResolver = Shadows.shadowOf(
+                mContext.getContentResolver());
+        Uri[] observedUri = new Uri[]{
+                Settings.Secure.getUriFor(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS),
+                Settings.Secure.getUriFor(
+                        Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE),
+                Settings.Secure.getUriFor(
+                        Settings.Secure.ACCESSIBILITY_QS_TARGETS),
+                Settings.Secure.getUriFor(
+                        Settings.Secure.ACCESSIBILITY_MAGNIFICATION_FOLLOW_TYPING_ENABLED),
+                Settings.Secure.getUriFor(
+                        Settings.Secure.ACCESSIBILITY_MAGNIFICATION_ALWAYS_ON_ENABLED)
+        };
+        for (Uri uri : observedUri) {
+            // verify no observer registered before launching the fragment
+            assertThat(shadowContentResolver.getContentObservers(uri)).isEmpty();
+        }
+
+        mFragController.create(R.id.main_content, /* bundle= */ null).start().resume();
+
+        for (Uri uri : observedUri) {
+            Collection<ContentObserver> observers = shadowContentResolver.getContentObservers(uri);
+            assertThat(observers.size()).isEqualTo(1);
+            assertThat(observers.stream().findFirst().get()).isInstanceOf(
+                    AccessibilitySettingsContentObserver.class);
+        }
+    }
+
+    @Test
+    @DisableFlags(android.view.accessibility.Flags.FLAG_A11Y_QS_SHORTCUT)
+    public void onResume_flagDisabled_haveRegisterToSpecificUris() {
         ShadowContentResolver shadowContentResolver = Shadows.shadowOf(
                 mContext.getContentResolver());
         Uri[] observedUri = new Uri[]{
@@ -317,6 +349,9 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
             assertThat(observers.stream().findFirst().get()).isInstanceOf(
                     AccessibilitySettingsContentObserver.class);
         }
+        assertThat(shadowContentResolver.getContentObservers(
+                Settings.Secure.getUriFor(
+                        Settings.Secure.ACCESSIBILITY_QS_TARGETS))).hasSize(0);
     }
 
     @Test
