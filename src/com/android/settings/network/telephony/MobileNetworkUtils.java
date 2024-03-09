@@ -308,7 +308,7 @@ public class MobileNetworkUtils {
     public static Boolean showEuiccSettingsDetecting(Context context) {
         final EuiccManager euiccManager =
                 (EuiccManager) context.getSystemService(EuiccManager.class);
-        if (!euiccManager.isEnabled()) {
+        if (euiccManager == null || !euiccManager.isEnabled()) {
             Log.w(TAG, "EuiccManager is not enabled.");
             return false;
         }

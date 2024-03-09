@@ -426,7 +426,7 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
     @VisibleForTesting
     protected boolean isEuiccEnabled(Context context) {
         EuiccManager euiccManager = (EuiccManager) context.getSystemService(Context.EUICC_SERVICE);
-        return euiccManager.isEnabled();
+        return euiccManager != null && euiccManager.isEnabled();
     }
 
     @VisibleForTesting
