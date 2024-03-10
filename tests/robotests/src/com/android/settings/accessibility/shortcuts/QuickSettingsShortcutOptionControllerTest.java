@@ -16,6 +16,8 @@
 
 package com.android.settings.accessibility.shortcuts;
 
+import static com.android.settings.testutils.AccessibilityTestUtils.setupMockAccessibilityManager;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.spy;
@@ -40,12 +42,14 @@ import com.android.internal.accessibility.util.ShortcutUtils;
 import com.android.settings.R;
 import com.android.settings.testutils.AccessibilityTestUtils;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
+import com.android.settingslib.utils.StringUtil;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 import java.util.Collections;
 import java.util.List;
@@ -55,6 +59,7 @@ import java.util.Set;
 /**
  * Tests for {@link QuickSettingsShortcutOptionController}
  */
+@Config(shadows = SettingsShadowResources.class)
 @RunWith(RobolectricTestRunner.class)
 public class QuickSettingsShortcutOptionControllerTest {
     private static final String PREF_KEY = "prefKey";
@@ -87,15 +92,60 @@ public class QuickSettingsShortcutOptionControllerTest {
     }
 
     @Test
-    public void displayPreference_verifyScreenTextSet() {
+    public void displayPreference_verifyScreenTitleSet() {
         mController.displayPreference(mPreferenceScreen);
 
         assertThat(mShortcutOptionPreference.getTitle().toString()).isEqualTo(
                 mContext.getString(
                         R.string.accessibility_shortcut_edit_dialog_title_quick_settings));
-        assertThat(mShortcutOptionPreference.getSummary().toString()).isEqualTo(
-                mContext.getString(
-                        R.string.accessibility_shortcut_edit_dialog_summary_quick_settings));
+    }
+
+    @Test
+    public void getSummary_touchExplorationDisabled_inSuw_verifySummary() {
+        enableTouchExploration(false);
+        mController.setInSetupWizard(true);
+        String expected = StringUtil.getIcuPluralsString(
+                mContext,
+                /* count= */ 1,
+                R.string.accessibility_shortcut_edit_dialog_summary_quick_settings_suw);
+
+        assertThat(mController.getSummary().toString()).isEqualTo(expected);
+    }
+
+    @Test
+    public void getSummary_touchExplorationDisabled_notInSuw_verifySummary() {
+        enableTouchExploration(false);
+        mController.setInSetupWizard(false);
+        String expected = StringUtil.getIcuPluralsString(
+                mContext,
+                /* count= */ 1,
+                R.string.accessibility_shortcut_edit_dialog_summary_quick_settings);
+
+        assertThat(mController.getSummary().toString()).isEqualTo(expected);
+    }
+
+    @Test
+    public void getSummary_touchExplorationEnabled_inSuw_verifySummary() {
+        enableTouchExploration(true);
+        mController.setInSetupWizard(true);
+        String expected = StringUtil.getIcuPluralsString(
+                mContext,
+                /* count= */ 2,
+                R.string.accessibility_shortcut_edit_dialog_summary_quick_settings_suw);
+
+        assertThat(mController.getSummary().toString()).isEqualTo(expected);
+    }
+
+    @Test
+    public void getSummary_touchExplorationEnabled_notInSuw_verifySummary() {
+        enableTouchExploration(true);
+        mController.setInSetupWizard(false);
+        String expected = StringUtil.getIcuPluralsString(
+                mContext,
+                /* count= */ 2,
+                R.string.accessibility_shortcut_edit_dialog_summary_quick_settings);
+
+        assertThat(mController.getSummary().toString()).isEqualTo(expected);
     }
 
     @Test
@@ -176,5 +226,10 @@ public class QuickSettingsShortcutOptionControllerTest {
                 mContext, ShortcutConstants.UserShortcutType.QUICK_SETTINGS, TARGET_FLATTEN);
 
         assertThat(mController.isChecked()).isFalse();
+    }
+
+    private void enableTouchExploration(boolean enable) {
+        AccessibilityManager am = setupMockAccessibilityManager(mContext);
+        when(am.isTouchExplorationEnabled()).thenReturn(enable);
     }
 }

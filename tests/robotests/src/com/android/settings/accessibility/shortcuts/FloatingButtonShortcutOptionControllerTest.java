@@ -24,7 +24,6 @@ import static com.google.common.truth.Truth.assertThat;
 import android.content.ComponentName;
 import android.content.Context;
 import android.provider.Settings;
-import android.text.TextUtils;
 
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
@@ -74,19 +73,24 @@ public class FloatingButtonShortcutOptionControllerTest {
     }
 
     @Test
-    public void getSummary_inSuw_verifySummaryEmpty() {
+    public void getSummary_inSuw_verifySummary() {
+        String expectedSummary = mContext.getString(
+                R.string.accessibility_shortcut_edit_dialog_summary_floating_button);
         mController.setInSetupWizard(true);
 
-        assertThat(TextUtils.isEmpty(mController.getSummary())).isTrue();
+        assertThat(mController.getSummary().toString()).isEqualTo(expectedSummary);
     }
 
     @Test
     public void getSummary_notInSuw_verifySummary() {
+        String expectedSummary = mContext.getText(
+                R.string.accessibility_shortcut_edit_dialog_summary_floating_button)
+                + "\n\n"
+                + mContext.getString(
+                R.string.accessibility_shortcut_edit_dialog_summary_software_floating);
         mController.setInSetupWizard(false);
 
-        assertThat(mController.getSummary().toString()).isEqualTo(
-                mContext.getString(
-                        R.string.accessibility_shortcut_edit_dialog_summary_software_floating));
+        assertThat(mController.getSummary().toString()).isEqualTo(expectedSummary);
     }
 
     @Test

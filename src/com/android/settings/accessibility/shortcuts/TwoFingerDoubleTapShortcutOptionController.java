@@ -19,7 +19,6 @@ package com.android.settings.accessibility.shortcuts;
 import static com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_CONTROLLER_NAME;
 
 import android.content.Context;
-import android.icu.text.MessageFormat;
 import android.provider.Settings;
 
 import androidx.preference.Preference;
@@ -54,16 +53,17 @@ public class TwoFingerDoubleTapShortcutOptionController
         super.displayPreference(screen);
         final Preference preference = screen.findPreference(getPreferenceKey());
         if (preference instanceof ShortcutOptionPreference shortcutOptionPreference) {
-            // TODO (b/306153204): Update shortcut string and image when UX provides them
-            shortcutOptionPreference.setTitle(
-                    R.string.accessibility_shortcut_edit_dialog_title_two_finger_double_tap);
+            int numFingers = 2;
+            String title = mContext.getString(
+                    R.string.accessibility_shortcut_edit_screen_title_two_finger_double_tap,
+                    numFingers);
+            shortcutOptionPreference.setTitle(title);
             String summary = mContext.getString(
-                    R.string.accessibility_shortcut_edit_dialog_summary_two_finger_double_tap);
-            // Format the number '2' in the summary.
-            final Object[] arguments = {2};
-            summary = MessageFormat.format(summary, arguments);
+                    R.string.accessibility_shortcut_edit_screen_summary_two_finger_double_tap,
+                    numFingers);
 
             shortcutOptionPreference.setSummary(summary);
+            // TODO (b/306153204): Update shortcut image when UX provides them
             shortcutOptionPreference.setIntroImageRawResId(
                     R.raw.a11y_shortcut_type_triple_tap);
         }
