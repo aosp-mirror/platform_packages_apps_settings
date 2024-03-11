@@ -44,13 +44,13 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.android.settings.R
 import com.android.settings.network.SubscriptionInfoListViewModel
 import com.android.settings.network.telephony.MobileNetworkUtils
+import com.android.settings.spa.network.PrimarySimRepository.PrimarySimInfo
 import com.android.settings.wifi.WifiPickerTrackerHelper
 import com.android.settingslib.spa.framework.common.SettingsEntryBuilder
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
 import com.android.settingslib.spa.framework.common.createSettingsPage
 import com.android.settingslib.spa.framework.compose.navigator
 import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
-import com.android.settingslib.spa.widget.preference.ListPreferenceOption
 import com.android.settingslib.spa.widget.preference.Preference
 import com.android.settingslib.spa.widget.preference.PreferenceModel
 import com.android.settingslib.spa.widget.preference.SwitchPreference
@@ -173,27 +173,23 @@ fun PageImpl(
 ) {
     val selectableSubscriptionInfoList by selectableSubscriptionInfoListFlow
         .collectAsStateWithLifecycle(initialValue = emptyList())
-    val activeSubscriptionInfoList: List<SubscriptionInfo> =
-        selectableSubscriptionInfoList.filter { subscriptionInfo ->
-            subscriptionInfo.simSlotIndex != -1
-        }
 
     val stringSims = stringResource(R.string.provider_network_settings_title)
     RegularScaffold(title = stringSims) {
         SimsSection(selectableSubscriptionInfoList)
         PrimarySimSectionImpl(
-                activeSubscriptionInfoList,
-                defaultVoiceSubId,
-                defaultSmsSubId,
-                defaultDataSubId,
-                nonDds
+            selectableSubscriptionInfoListFlow,
+            defaultVoiceSubId,
+            defaultSmsSubId,
+            defaultDataSubId,
+            nonDds
         )
     }
 }
 
 @Composable
 fun PrimarySimImpl(
-    subscriptionInfoList: List<SubscriptionInfo>,
+    primarySimInfo: PrimarySimInfo,
     callsSelectedId: MutableIntState,
     textsSelectedId: MutableIntState,
     mobileDataSelectedId: MutableIntState,
@@ -237,108 +233,83 @@ fun PrimarySimImpl(
         }
     },
 ) {
-    var state = rememberSaveable { mutableStateOf(false) }
-    var callsAndSmsList = remember {
-        mutableListOf(ListPreferenceOption(id = -1, text = "Loading"))
-    }
-    var dataList = remember {
-        mutableListOf(ListPreferenceOption(id = -1, text = "Loading"))
-    }
-
-    if (subscriptionInfoList.size >= 2) {
-        state.value = true
-        callsAndSmsList.clear()
-        dataList.clear()
-        for (info in subscriptionInfoList) {
-            var item = ListPreferenceOption(
-                    id = info.subscriptionId,
-                    text = "${info.displayName}",
-                    summary = "${info.number}"
-            )
-            callsAndSmsList.add(item)
-            dataList.add(item)
-        }
-        callsAndSmsList.add(
-            ListPreferenceOption(
-                id = SubscriptionManager.INVALID_SUBSCRIPTION_ID,
-                text = stringResource(id = R.string.sim_calls_ask_first_prefs_title)
-            )
-        )
-    } else {
-        // hide the primary sim
-        state.value = false
-        Log.d(NetworkCellularGroupProvider.name, "Hide primary sim")
+    val telephonyManagerForNonDds: TelephonyManager? =
+            context.getSystemService(TelephonyManager::class.java)
+                    ?.createForSubscriptionId(nonDds.intValue)
+    val automaticDataChecked = rememberSaveable() {
+        mutableStateOf(false)
     }
 
-    if (state.value) {
-        val telephonyManagerForNonDds: TelephonyManager? =
-                context.getSystemService(TelephonyManager::class.java)
-                        ?.createForSubscriptionId(nonDds.intValue)
-        val automaticDataChecked = rememberSaveable() {
-            mutableStateOf(false)
-        }
+    CreatePrimarySimListPreference(
+        stringResource(id = R.string.primary_sim_calls_title),
+        primarySimInfo.callsAndSmsList,
+        callsSelectedId,
+        ImageVector.vectorResource(R.drawable.ic_phone),
+        actionSetCalls
+    )
+    CreatePrimarySimListPreference(
+        stringResource(id = R.string.primary_sim_texts_title),
+        primarySimInfo.callsAndSmsList,
+        textsSelectedId,
+        Icons.AutoMirrored.Outlined.Message,
+        actionSetTexts
+    )
+    CreatePrimarySimListPreference(
+        stringResource(id = R.string.mobile_data_settings_title),
+        primarySimInfo.dataList,
+        mobileDataSelectedId,
+        Icons.Outlined.DataUsage,
+        actionSetMobileData
+    )
 
-        CreatePrimarySimListPreference(
-            stringResource(id = R.string.primary_sim_calls_title),
-            callsAndSmsList,
-            callsSelectedId,
-            ImageVector.vectorResource(R.drawable.ic_phone),
-            actionSetCalls
-        )
-        CreatePrimarySimListPreference(
-            stringResource(id = R.string.primary_sim_texts_title),
-            callsAndSmsList,
-            textsSelectedId,
-            Icons.AutoMirrored.Outlined.Message,
-            actionSetTexts
-        )
-        CreatePrimarySimListPreference(
-            stringResource(id = R.string.mobile_data_settings_title),
-            dataList,
-            mobileDataSelectedId,
-            Icons.Outlined.DataUsage,
-            actionSetMobileData
-        )
-
-        val autoDataTitle = stringResource(id = R.string.primary_sim_automatic_data_title)
-        val autoDataSummary = stringResource(id = R.string.primary_sim_automatic_data_msg)
-        SwitchPreference(
-            object : SwitchPreferenceModel {
-                override val title = autoDataTitle
-                override val summary = { autoDataSummary }
-                override val checked = {
-                    if (nonDds.intValue != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-                        coroutineScope.launch {
-                            automaticDataChecked.value = getAutomaticData(telephonyManagerForNonDds)
-                            Log.d(
-                                NetworkCellularGroupProvider.name,
-                                "NonDds:${nonDds.intValue}" +
-                                    "getAutomaticData:${automaticDataChecked.value}"
-                            )
-                        }
+    val autoDataTitle = stringResource(id = R.string.primary_sim_automatic_data_title)
+    val autoDataSummary = stringResource(id = R.string.primary_sim_automatic_data_msg)
+    SwitchPreference(
+        object : SwitchPreferenceModel {
+            override val title = autoDataTitle
+            override val summary = { autoDataSummary }
+            override val checked = {
+                if (nonDds.intValue != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+                    coroutineScope.launch {
+                        automaticDataChecked.value = getAutomaticData(telephonyManagerForNonDds)
+                        Log.d(
+                            NetworkCellularGroupProvider.name,
+                            "NonDds:${nonDds.intValue}" +
+                                "getAutomaticData:${automaticDataChecked.value}"
+                        )
                     }
-                    automaticDataChecked.value
                 }
-                override val onCheckedChange: ((Boolean) -> Unit)? = {
-                    automaticDataChecked.value = it
-                    actionSetAutoDataSwitch(it)
-                }
+                automaticDataChecked.value
             }
-        )
-    }
+            override val onCheckedChange: ((Boolean) -> Unit)? = {
+                automaticDataChecked.value = it
+                actionSetAutoDataSwitch(it)
+            }
+        }
+    )
 }
 
 @Composable
 fun PrimarySimSectionImpl(
-    subscriptionInfoList: List<SubscriptionInfo>,
+    subscriptionInfoListFlow: Flow<List<SubscriptionInfo>>,
     callsSelectedId: MutableIntState,
     textsSelectedId: MutableIntState,
     mobileDataSelectedId: MutableIntState,
     nonDds: MutableIntState,
 ) {
+    val context = LocalContext.current
+    val primarySimInfo = remember(subscriptionInfoListFlow) {
+        subscriptionInfoListFlow
+            .map { subscriptionInfoList ->
+                subscriptionInfoList.filter { subInfo -> subInfo.simSlotIndex != -1 }
+            }
+            .map(PrimarySimRepository(context)::getPrimarySimInfo)
+            .flowOn(Dispatchers.Default)
+    }.collectAsStateWithLifecycle(initialValue = null).value ?: return
+
     Category(title = stringResource(id = R.string.primary_sim_title)) {
         PrimarySimImpl(
-            subscriptionInfoList,
+            primarySimInfo,
             callsSelectedId,
             textsSelectedId,
             mobileDataSelectedId,
