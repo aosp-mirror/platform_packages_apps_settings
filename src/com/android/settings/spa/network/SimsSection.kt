@@ -36,10 +36,10 @@ import com.android.settings.network.telephony.isSubscriptionEnabledFlow
 import com.android.settings.network.telephony.phoneNumberFlow
 import com.android.settingslib.spa.widget.preference.PreferenceModel
 import com.android.settingslib.spa.widget.preference.SwitchPreferenceModel
-import com.android.settingslib.spa.widget.preference.TwoTargetSwitchPreference
 import com.android.settingslib.spa.widget.ui.SettingsIcon
 import com.android.settingslib.spaprivileged.model.enterprise.Restrictions
 import com.android.settingslib.spaprivileged.template.preference.RestrictedPreference
+import com.android.settingslib.spaprivileged.template.preference.RestrictedTwoTargetSwitchPreference
 
 @Composable
 fun SimsSection(subscriptionInfoList: List<SubscriptionInfo>) {
@@ -61,9 +61,8 @@ private fun SimPreference(subInfo: SubscriptionInfo) {
     val phoneNumber = remember(subInfo) {
         context.phoneNumberFlow(subInfo)
     }.collectAsStateWithLifecycle(initialValue = null)
-    //TODO: Add the Restricted TwoTargetSwitchPreference in SPA
-    TwoTargetSwitchPreference(
-        object : SwitchPreferenceModel {
+    RestrictedTwoTargetSwitchPreference(
+        model = object : SwitchPreferenceModel {
             override val title = subInfo.displayName.toString()
             override val summary = { phoneNumber.value ?: "" }
             override val checked = { checked.value }
@@ -74,7 +73,8 @@ private fun SimPreference(subInfo: SubscriptionInfo) {
                     newChecked,
                 )
             }
-        }
+        },
+        restrictions = Restrictions(keys = listOf(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS)),
     ) {
         MobileNetworkUtils.launchMobileNetworkSettings(context, subInfo)
     }

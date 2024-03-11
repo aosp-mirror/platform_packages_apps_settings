@@ -33,6 +33,7 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settings.fuelgauge.BatteryOptimizeHistoricalLogEntry.Action;
+import com.android.settingslib.datastore.ChangeReason;
 import com.android.settingslib.fuelgauge.PowerAllowlistBackend;
 
 import java.lang.annotation.Retention;
@@ -222,6 +223,10 @@ public class BatteryOptimizeUtils {
             return;
         }
 
+        // App preferences are already clear when code reach here, and there may be no
+        // setAppUsageStateInternal call to notifyChange. So always trigger notifyChange here.
+        BatterySettingsStorage.get(context).notifyChange(ChangeReason.DELETE);
+
         allowlistBackend.refreshList();
         // Resets optimization mode for each application.
         for (ApplicationInfo info : applications) {
@@ -351,6 +356,9 @@ public class BatteryOptimizeUtils {
         }
         BatteryOptimizeLogUtils.writeLog(
                 context, action, packageNameKey, createLogEvent(appStandbyMode, allowListed));
+        if (action != Action.RESET) { // reset has been notified in resetAppOptimizationMode
+            BatterySettingsStorage.get(context).notifyChange(toChangeReason(action));
+        }
     }
 
     private static String createLogEvent(int appStandbyMode, boolean allowListed) {
@@ -361,5 +369,9 @@ public class BatteryOptimizeUtils {
                         appStandbyMode,
                         allowListed,
                         getAppOptimizationMode(appStandbyMode, allowListed));
+    }
+
+    private static @ChangeReason int toChangeReason(Action action) {
+        return action == Action.RESTORE ? ChangeReason.RESTORE : ChangeReason.UPDATE;
     }
 }

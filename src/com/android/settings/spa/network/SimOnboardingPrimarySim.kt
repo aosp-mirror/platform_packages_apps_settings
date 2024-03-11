@@ -24,10 +24,13 @@ import androidx.compose.material.icons.outlined.SignalCellularAlt
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableIntState
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settings.R
 import com.android.settings.network.SimOnboardingService
 import com.android.settingslib.spa.framework.theme.SettingsDimension
@@ -38,6 +41,9 @@ import com.android.settingslib.spa.widget.scaffold.BottomAppBarButton
 import com.android.settingslib.spa.widget.scaffold.SuwScaffold
 import com.android.settingslib.spa.widget.ui.SettingsBody
 import com.android.settingslib.spa.widget.ui.SettingsIcon
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 
 /**
  * the sim onboarding primary sim compose
@@ -77,13 +83,19 @@ fun SimOnboardingPrimarySimImpl(
             SettingsBody(stringResource(id = R.string.sim_onboarding_primary_sim_msg))
         }
 
-        var selectedSubscriptionInfoList =
-                onboardingService.getSelectedSubscriptionInfoListWithRenaming()
+        val context = LocalContext.current
+        val primarySimInfo = remember {
+            flow {
+                val selectableSubInfoList =
+                    onboardingService.getSelectedSubscriptionInfoListWithRenaming()
+                emit(PrimarySimRepository(context).getPrimarySimInfo(selectableSubInfoList))
+            }.flowOn(Dispatchers.Default)
+        }.collectAsStateWithLifecycle(initialValue = null).value ?: return@SuwScaffold
         callsSelectedId.intValue = onboardingService.targetPrimarySimCalls
         textsSelectedId.intValue = onboardingService.targetPrimarySimTexts
         mobileDataSelectedId.intValue = onboardingService.targetPrimarySimMobileData
         PrimarySimImpl(
-            subscriptionInfoList = selectedSubscriptionInfoList,
+            primarySimInfo = primarySimInfo,
             callsSelectedId = callsSelectedId,
             textsSelectedId = textsSelectedId,
             mobileDataSelectedId = mobileDataSelectedId,
