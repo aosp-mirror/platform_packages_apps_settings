@@ -74,6 +74,7 @@ import com.android.settings.ProxySelector;
 import com.android.settings.R;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.utils.AndroidKeystoreAliasLoader;
+import com.android.settings.wifi.details2.WifiPrivacyPreferenceController;
 import com.android.settings.wifi.details2.WifiPrivacyPreferenceController2;
 import com.android.settings.wifi.dpp.WifiDppUtils;
 import com.android.settingslib.Utils;
@@ -208,6 +209,8 @@ public class WifiConfigController2 implements TextWatcher,
     private Spinner mHiddenSettingsSpinner;
     @Nullable
     private Spinner mPrivacySettingsSpinner;
+    @Nullable
+    private Spinner mDhcpSettingsSpinner;
     private TextView mHiddenWarningView;
     private TextView mProxyHostView;
     private TextView mProxyPortView;
@@ -308,6 +311,7 @@ public class WifiConfigController2 implements TextWatcher,
         mHiddenSettingsSpinner = mView.findViewById(R.id.hidden_settings);
         if (!mHideMeteredAndPrivacy && mWifiManager.isConnectedMacRandomizationSupported()) {
             mPrivacySettingsSpinner = mView.findViewById(R.id.privacy_settings);
+            mDhcpSettingsSpinner  = mView.findViewById(R.id.dhcp_settings);
             mView.findViewById(R.id.privacy_settings_fields).setVisibility(View.VISIBLE);
         }
         mHiddenSettingsSpinner.setOnItemSelectedListener(this);
@@ -340,6 +344,13 @@ public class WifiConfigController2 implements TextWatcher,
                     final int prefMacValue = WifiPrivacyPreferenceController2
                             .translateMacRandomizedValueToPrefValue(config.macRandomizationSetting);
                     mPrivacySettingsSpinner.setSelection(prefMacValue);
+                }
+
+                if (mDhcpSettingsSpinner != null) {
+                    final int prefDhcpValue = WifiPrivacyPreferenceController.Companion
+                            .translateSendDhcpHostnameEnabledToPrefValue(
+                                    config.isSendDhcpHostnameEnabled());
+                    mDhcpSettingsSpinner.setSelection(prefDhcpValue);
                 }
 
                 if (config.getIpConfiguration().getIpAssignment() == IpAssignment.STATIC) {
@@ -852,6 +863,12 @@ public class WifiConfigController2 implements TextWatcher,
             config.macRandomizationSetting = WifiPrivacyPreferenceController2
                     .translatePrefValueToMacRandomizedValue(mPrivacySettingsSpinner
                             .getSelectedItemPosition());
+        }
+
+        if (mDhcpSettingsSpinner != null) {
+            config.setSendDhcpHostnameEnabled(WifiPrivacyPreferenceController.Companion
+                    .translatePrefValueToSendDhcpHostnameEnabled(mDhcpSettingsSpinner
+                            .getSelectedItemPosition()));
         }
 
         return config;
