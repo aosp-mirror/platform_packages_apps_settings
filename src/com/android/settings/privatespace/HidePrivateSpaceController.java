@@ -19,13 +19,21 @@ package com.android.settings.privatespace;
 import static com.android.settings.privatespace.PrivateSpaceMaintainer.HIDE_PRIVATE_SPACE_ENTRY_POINT_DISABLED_VAL;
 import static com.android.settings.privatespace.PrivateSpaceMaintainer.HIDE_PRIVATE_SPACE_ENTRY_POINT_ENABLED_VAL;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 
+import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 
 /**
- *  A class that is used to show details page for the setting to hide private space entry point
- *  in All Apps.
+ * Toggle Preference Controller responsible for managing the visibility of private space entry point
+ * in the "All Apps" section. This includes:
+ *
+ * <p>Toggling the entry point's visibility (hiding/unhiding)
+ *
+ * <p>Displaying a dialog to inform the user that the entry point will be hidden when private space
+ * is locked (if the hide option is enabled)
  */
 public class HidePrivateSpaceController extends TogglePreferenceController {
     private final PrivateSpaceMaintainer mPrivateSpaceMaintainer;
@@ -39,7 +47,7 @@ public class HidePrivateSpaceController extends TogglePreferenceController {
     @AvailabilityStatus
     public int getAvailabilityStatus() {
         return android.os.Flags.allowPrivateProfile()
-                && android.multiuser.Flags.enablePrivateSpaceFeatures()
+                        && android.multiuser.Flags.enablePrivateSpaceFeatures()
                 ? AVAILABLE
                 : UNSUPPORTED_ON_DEVICE;
     }
@@ -55,11 +63,26 @@ public class HidePrivateSpaceController extends TogglePreferenceController {
         mPrivateSpaceMaintainer.setHidePrivateSpaceEntryPointSetting(
                 isChecked ? HIDE_PRIVATE_SPACE_ENTRY_POINT_ENABLED_VAL
                         : HIDE_PRIVATE_SPACE_ENTRY_POINT_DISABLED_VAL);
+        if (isChecked) {
+            showAlertDialog();
+        }
         return true;
     }
 
     @Override
     public int getSliceHighlightMenuRes() {
         return 0;
+    }
+
+    private void showAlertDialog() {
+        new AlertDialog.Builder(mContext)
+                .setTitle(R.string.private_space_hide_dialog_title)
+                .setMessage(R.string.private_space_hide_dialog_message)
+                .setPositiveButton(
+                        R.string.private_space_hide_dialog_button,
+                        (DialogInterface dialog, int which) -> {
+                            dialog.dismiss();
+                        })
+                .show();
     }
 }
