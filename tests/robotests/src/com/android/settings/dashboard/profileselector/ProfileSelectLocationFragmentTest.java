@@ -16,6 +16,7 @@
 
 package com.android.settings.dashboard.profileselector;
 
+import static android.content.pm.UserInfo.FLAG_MAIN;
 import static android.os.UserManager.USER_TYPE_FULL_SYSTEM;
 import static android.os.UserManager.USER_TYPE_PROFILE_MANAGED;
 import static android.os.UserManager.USER_TYPE_PROFILE_PRIVATE;
@@ -60,7 +61,7 @@ public class ProfileSelectLocationFragmentTest {
     public void setUp() {
         mUserManager = ShadowUserManager.getShadow();
         mUserManager.addProfile(
-                new UserInfo(0, PERSONAL_PROFILE_NAME, null, 0, USER_TYPE_FULL_SYSTEM));
+                new UserInfo(0, PERSONAL_PROFILE_NAME, null, FLAG_MAIN, USER_TYPE_FULL_SYSTEM));
         mUserManager.addProfile(
                 new UserInfo(1, WORK_PROFILE_NAME, null, 0, USER_TYPE_PROFILE_MANAGED));
         mUserManager.addProfile(

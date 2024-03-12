@@ -86,7 +86,10 @@ import java.util.Set;
 /**
  * Tests for {@link EditShortcutsPreferenceFragment}
  */
-@Config(shadows = SettingsShadowResources.class)
+@Config(shadows = {
+        SettingsShadowResources.class,
+        com.android.settings.testutils.shadow.ShadowAccessibilityManager.class
+})
 @RunWith(RobolectricTestRunner.class)
 public class EditShortcutsPreferenceFragmentTest {
     private static final int METRICS_CATEGORY = 123;
@@ -99,7 +102,8 @@ public class EditShortcutsPreferenceFragmentTest {
     @Rule
     public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
-    private final Context mContext = ApplicationProvider.getApplicationContext();
+    private Context mContext = ApplicationProvider.getApplicationContext();
+
     private FragmentActivity mActivity;
     private FragmentScenario<EditShortcutsPreferenceFragment> mFragmentScenario;
 
@@ -291,7 +295,7 @@ public class EditShortcutsPreferenceFragmentTest {
         mFragmentScenario.onFragment(fragment -> {
             TwoStatePreference preference = fragment.findPreference(
                     mContext.getString(
-                            R.string.accessibility_shortcut_two_fingers_double_tap_pref));
+                            R.string.accessibility_shortcut_two_finger_double_tap_pref));
             assertThat(preference.isChecked()).isTrue();
         });
     }
@@ -476,7 +480,26 @@ public class EditShortcutsPreferenceFragmentTest {
                         ));
     }
 
+    @Test
+    public void onQuickSettingsShortcutSettingChanged_preferredShortcutsUpdated() {
+        mFragmentScenario = createFragScenario(/* isInSuw= */ false);
+        mFragmentScenario.moveToState(Lifecycle.State.CREATED);
+        int currentPreferredShortcut =
+                PreferredShortcuts.retrieveUserShortcutType(mContext, TARGET);
+        assertThat(currentPreferredShortcut
+                & ShortcutConstants.UserShortcutType.QUICK_SETTINGS).isEqualTo(0);
 
+        ShortcutUtils.optInValueToSettings(
+                mContext, ShortcutConstants.UserShortcutType.QUICK_SETTINGS, TARGET);
+
+        // Calls onFragment so that the change to Setting is notified to its observer
+        mFragmentScenario.onFragment(fragment ->
+                assertThat(
+                        PreferredShortcuts.retrieveUserShortcutType(
+                                mContext, TARGET)
+                ).isEqualTo(ShortcutConstants.UserShortcutType.QUICK_SETTINGS)
+        );
+    }
 
     private void assertLaunchSubSettingWithCurrentTargetComponents(
             String componentName, boolean isInSuw) {

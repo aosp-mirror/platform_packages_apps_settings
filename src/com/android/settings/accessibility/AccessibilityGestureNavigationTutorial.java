@@ -414,7 +414,7 @@ public final class AccessibilityGestureNavigationTutorial {
 
     private static TutorialPage createTwoFingerTripleTapTutorialPage(@NonNull Context context) {
         // TODO(b/308088945): Update tutorial string and image when UX provides them
-        final int type = UserShortcutType.TWOFINGERTRIPLETAP;
+        final int type = UserShortcutType.TWOFINGER_DOUBLETAP;
         final CharSequence title =
                 context.getText(R.string.accessibility_tutorial_dialog_title_two_finger_double);
         final View image =
@@ -429,10 +429,32 @@ public final class AccessibilityGestureNavigationTutorial {
         return new TutorialPage(type, title, image, indicatorIcon, instruction);
     }
 
+    private static TutorialPage createQuickSettingTutorialPage(@NonNull Context context) {
+        final int type = UserShortcutType.QUICK_SETTINGS;
+        final CharSequence title =
+                context.getText(R.string.accessibility_tutorial_dialog_title_quick_setting);
+        final View image =
+                createIllustrationView(context,
+                        R.drawable.a11y_shortcut_type_quick_settings);
+        final CharSequence instruction =
+                context.getText(R.string.accessibility_tutorial_dialog_message_quick_setting);
+        final ImageView indicatorIcon =
+                createImageView(context, R.drawable.ic_accessibility_page_indicator);
+        indicatorIcon.setEnabled(false);
+
+        return new TutorialPage(type, title, image, indicatorIcon, instruction);
+    }
+
     @VisibleForTesting
     static List<TutorialPage> createShortcutTutorialPages(@NonNull Context context,
             int shortcutTypes) {
         final List<TutorialPage> tutorialPages = new ArrayList<>();
+        if (android.view.accessibility.Flags.a11yQsShortcut()) {
+            if ((shortcutTypes & UserShortcutType.QUICK_SETTINGS)
+                    == UserShortcutType.QUICK_SETTINGS) {
+                tutorialPages.add(createQuickSettingTutorialPage(context));
+            }
+        }
         if ((shortcutTypes & UserShortcutType.SOFTWARE) == UserShortcutType.SOFTWARE) {
             tutorialPages.add(createSoftwareTutorialPage(context));
         }
@@ -446,8 +468,8 @@ public final class AccessibilityGestureNavigationTutorial {
         }
 
         if (Flags.enableMagnificationMultipleFingerMultipleTapGesture()) {
-            if ((shortcutTypes & UserShortcutType.TWOFINGERTRIPLETAP)
-                    == UserShortcutType.TWOFINGERTRIPLETAP) {
+            if ((shortcutTypes & UserShortcutType.TWOFINGER_DOUBLETAP)
+                    == UserShortcutType.TWOFINGER_DOUBLETAP) {
                 tutorialPages.add(createTwoFingerTripleTapTutorialPage(context));
             }
         }

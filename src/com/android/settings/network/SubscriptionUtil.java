@@ -49,11 +49,13 @@ import com.android.settings.flags.Flags;
 import com.android.settings.network.helper.SelectableSubscriptions;
 import com.android.settings.network.helper.SubscriptionAnnotation;
 import com.android.settings.network.telephony.DeleteEuiccSubscriptionDialogActivity;
+import com.android.settings.network.telephony.EuiccRacConnectivityDialogActivity;
+import com.android.settings.network.telephony.SubscriptionRepositoryKt;
 import com.android.settings.network.telephony.ToggleSubscriptionDialogActivity;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
@@ -497,40 +499,7 @@ public class SubscriptionUtil {
      * @return list of user selectable subscriptions.
      */
     public static List<SubscriptionInfo> getSelectableSubscriptionInfoList(Context context) {
-        SubscriptionManager subManager = context.getSystemService(SubscriptionManager.class);
-        List<SubscriptionInfo> availableList = subManager.getAvailableSubscriptionInfoList();
-        if (availableList == null) {
-            return null;
-        } else {
-            // Multiple subscriptions in a group should only have one representative.
-            // It should be the current active primary subscription if any, or any
-            // primary subscription.
-            List<SubscriptionInfo> selectableList = new ArrayList<>();
-            Map<ParcelUuid, SubscriptionInfo> groupMap = new HashMap<>();
-
-            for (SubscriptionInfo info : availableList) {
-                // Opportunistic subscriptions are considered invisible
-                // to users so they should never be returned.
-                if (!isSubscriptionVisible(subManager, context, info)) continue;
-
-                ParcelUuid groupUuid = info.getGroupUuid();
-                if (groupUuid == null) {
-                    // Doesn't belong to any group. Add in the list.
-                    selectableList.add(info);
-                } else if (!groupMap.containsKey(groupUuid)
-                        || (groupMap.get(groupUuid).getSimSlotIndex() == INVALID_SIM_SLOT_INDEX
-                        && info.getSimSlotIndex() != INVALID_SIM_SLOT_INDEX)) {
-                    // If it belongs to a group that has never been recorded or it's the current
-                    // active subscription, add it in the list.
-                    selectableList.remove(groupMap.get(groupUuid));
-                    selectableList.add(info);
-                    groupMap.put(groupUuid, info);
-                }
-
-            }
-            Log.d(TAG, "getSelectableSubscriptionInfoList: " + selectableList);
-            return selectableList;
-        }
+        return SubscriptionRepositoryKt.getSelectableSubscriptionInfoList(context);
     }
 
     /**
@@ -557,13 +526,21 @@ public class SubscriptionUtil {
      * @param context {@code Context}
      * @param subId The id of subscription need to be deleted.
      */
-    public static void startDeleteEuiccSubscriptionDialogActivity(Context context, int subId) {
+    public static void startDeleteEuiccSubscriptionDialogActivity(Context context, int subId,
+            int carrierId) {
         if (!SubscriptionManager.isUsableSubscriptionId(subId)) {
             Log.i(TAG, "Unable to delete subscription due to invalid subscription ID.");
             return;
         }
-        // TODO(b/325693582): Add verification if carrier is RAC and logic for new dialog
-        context.startActivity(DeleteEuiccSubscriptionDialogActivity.getIntent(context, subId));
+        final int[] carriersThatUseRAC = context.getResources().getIntArray(
+                R.array.config_carrier_use_rac);
+        boolean isCarrierRac = Arrays.stream(carriersThatUseRAC).anyMatch(cid -> cid == carrierId);
+
+        if (isCarrierRac && !isConnectedToWifiOrDifferentSubId(context, subId)) {
+            context.startActivity(EuiccRacConnectivityDialogActivity.getIntent(context, subId));
+        } else {
+            context.startActivity(DeleteEuiccSubscriptionDialogActivity.getIntent(context, subId));
+        }
     }
 
     /**

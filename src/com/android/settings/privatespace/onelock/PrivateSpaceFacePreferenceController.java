@@ -45,6 +45,7 @@ public class PrivateSpaceFacePreferenceController extends BiometricFaceStatusPre
     protected boolean isUserSupported() {
         return android.os.Flags.allowPrivateProfile()
                 && android.multiuser.Flags.enableBiometricsToUnlockPrivateSpace()
+                && android.multiuser.Flags.enablePrivateSpaceFeatures()
                 && getUserId() != UserHandle.USER_NULL;
     }
 
@@ -63,7 +64,8 @@ public class PrivateSpaceFacePreferenceController extends BiometricFaceStatusPre
     @Override
     public int getAvailabilityStatus() {
         return android.os.Flags.allowPrivateProfile()
-                        && android.multiuser.Flags.enableBiometricsToUnlockPrivateSpace()
+                && android.multiuser.Flags.enableBiometricsToUnlockPrivateSpace()
+                && android.multiuser.Flags.enablePrivateSpaceFeatures()
                 ? AVAILABLE
                 : UNSUPPORTED_ON_DEVICE;
     }

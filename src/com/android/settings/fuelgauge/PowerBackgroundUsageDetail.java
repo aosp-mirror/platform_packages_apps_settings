@@ -19,7 +19,6 @@ package com.android.settings.fuelgauge;
 import static com.android.settings.fuelgauge.BatteryOptimizeHistoricalLogEntry.Action;
 
 import android.app.Activity;
-import android.app.backup.BackupManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
@@ -78,7 +77,6 @@ public class PowerBackgroundUsageDetail extends DashboardFragment
     @VisibleForTesting SelectorWithWidgetPreference mUnrestrictedPreference;
     @VisibleForTesting MainSwitchPreference mMainSwitchPreference;
     @VisibleForTesting FooterPreference mFooterPreference;
-    @VisibleForTesting BackupManager mBackupManager;
     @VisibleForTesting StringBuilder mLogStringBuilder;
 
     @VisibleForTesting @BatteryOptimizeUtils.OptimizationMode
@@ -117,7 +115,6 @@ public class PowerBackgroundUsageDetail extends DashboardFragment
     public void onPause() {
         super.onPause();
 
-        notifyBackupManager();
         final int currentOptimizeMode = mBatteryOptimizeUtils.getAppOptimizationMode();
         mLogStringBuilder.append(", onPause mode = ").append(currentOptimizeMode);
         logMetricCategory(currentOptimizeMode);
@@ -182,15 +179,6 @@ public class PowerBackgroundUsageDetail extends DashboardFragment
         mOptimizePreference.setEnabled(isEnabled);
         mUnrestrictedPreference.setEnabled(isEnabled);
         onRadioButtonClicked(isEnabled ? mOptimizePreference : null);
-    }
-
-    @VisibleForTesting
-    void notifyBackupManager() {
-        if (mOptimizationMode != mBatteryOptimizeUtils.getAppOptimizationMode()) {
-            final BackupManager backupManager =
-                    mBackupManager != null ? mBackupManager : new BackupManager(getContext());
-            backupManager.dataChanged();
-        }
     }
 
     @VisibleForTesting

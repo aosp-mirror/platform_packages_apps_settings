@@ -17,8 +17,6 @@
 package com.android.settings.network
 
 import android.app.settings.SettingsEnums
-import android.content.Context
-import android.content.Intent
 import android.net.wifi.WifiManager
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Text
@@ -26,20 +24,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.lifecycleScope
 import com.android.settings.R
 import com.android.settings.core.SubSettingLauncher
 import com.android.settings.wifi.ConfigureWifiSettings
 import com.android.settingslib.spa.SpaBaseDialogActivity
 import com.android.settingslib.spa.widget.dialog.AlertDialogButton
 import com.android.settingslib.spa.widget.dialog.SettingsAlertDialogWithIcon
-import kotlin.coroutines.resume
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.asExecutor
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.suspendCancellableCoroutine
-import kotlinx.coroutines.withContext
+import com.android.settingslib.wifi.WifiUtils.Companion.SSID
 
 class WepNetworkDialogActivity : SpaBaseDialogActivity() {
     @Composable
@@ -75,38 +66,5 @@ class WepNetworkDialogActivity : SpaBaseDialogActivity() {
                     textAlign = TextAlign.Center
                 )
             })
-    }
-
-    companion object {
-        @JvmStatic
-        fun checkWepAllowed(
-            context: Context,
-            lifecycleOwner: LifecycleOwner,
-            ssid: String,
-            onAllowed: () -> Unit,
-        ) {
-            lifecycleOwner.lifecycleScope.launch {
-                val wifiManager = context.getSystemService(WifiManager::class.java) ?: return@launch
-                if (wifiManager.queryWepAllowed()) {
-                    onAllowed()
-                } else {
-                    val intent = Intent(context, WepNetworkDialogActivity::class.java).apply {
-                        putExtra(SSID, ssid)
-                    }
-                    context.startActivity(intent)
-                }
-            }
-        }
-
-        private suspend fun WifiManager.queryWepAllowed(): Boolean =
-            withContext(Dispatchers.Default) {
-                suspendCancellableCoroutine { continuation ->
-                    queryWepAllowed(Dispatchers.Default.asExecutor()) {
-                        continuation.resume(it)
-                    }
-                }
-            }
-
-        const val SSID = "ssid"
     }
 }

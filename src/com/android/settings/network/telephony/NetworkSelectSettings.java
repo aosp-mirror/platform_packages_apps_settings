@@ -16,7 +16,6 @@
 
 package com.android.settings.network.telephony;
 
-import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
@@ -39,6 +38,7 @@ import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.Keep;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -48,14 +48,21 @@ import com.android.internal.annotations.Initializer;
 import com.android.internal.telephony.OperatorInfo;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.network.telephony.scan.NetworkScanRepository;
+import com.android.settings.network.telephony.scan.NetworkScanRepository.NetworkScanCellInfos;
+import com.android.settings.network.telephony.scan.NetworkScanRepository.NetworkScanComplete;
+import com.android.settings.network.telephony.scan.NetworkScanRepository.NetworkScanError;
+import com.android.settings.network.telephony.scan.NetworkScanRepository.NetworkScanResult;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.utils.ThreadUtils;
 
+import kotlin.Unit;
+import kotlin.jvm.functions.Function1;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -70,12 +77,8 @@ public class NetworkSelectSettings extends DashboardFragment {
     private static final String TAG = "NetworkSelectSettings";
 
     private static final int EVENT_SET_NETWORK_SELECTION_MANUALLY_DONE = 1;
-    private static final int EVENT_NETWORK_SCAN_RESULTS = 2;
-    private static final int EVENT_NETWORK_SCAN_ERROR = 3;
-    private static final int EVENT_NETWORK_SCAN_COMPLETED = 4;
 
     private static final String PREF_KEY_NETWORK_OPERATORS = "network_operators_preference";
-    private static final int MIN_NUMBER_OF_SCAN_REQUIRED = 2;
 
     private PreferenceCategory mPreferenceCategory;
     @VisibleForTesting
@@ -90,17 +93,13 @@ public class NetworkSelectSettings extends DashboardFragment {
     private CarrierConfigManager mCarrierConfigManager;
     private List<String> mForbiddenPlmns;
     private boolean mShow4GForLTE = false;
-    private NetworkScanHelper mNetworkScanHelper;
     private final ExecutorService mNetworkScanExecutor = Executors.newFixedThreadPool(1);
     private MetricsFeatureProvider mMetricsFeatureProvider;
-    private boolean mUseNewApi;
-    private long mRequestIdManualNetworkSelect;
-    private long mRequestIdManualNetworkScan;
-    private long mWaitingForNumberOfScanResults;
-    @VisibleForTesting
-    boolean mIsAggregationEnabled = false;
     private CarrierConfigManager.CarrierConfigChangeListener mCarrierConfigChangeListener;
     private AtomicBoolean mShouldFilterOutSatellitePlmn = new AtomicBoolean();
+
+    private NetworkScanRepository mNetworkScanRepository;
+    private boolean mUpdateScanResult = false;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -113,7 +112,6 @@ public class NetworkSelectSettings extends DashboardFragment {
     @Initializer
     protected void onCreateInitialization() {
         Context context = getContext();
-        mUseNewApi = enableNewAutoSelectNetworkUI(context);
         mSubId = getSubId();
 
         mPreferenceCategory = getPreferenceCategory(PREF_KEY_NETWORK_OPERATORS);
@@ -123,8 +121,6 @@ public class NetworkSelectSettings extends DashboardFragment {
         mTelephonyManager = getTelephonyManager(context, mSubId);
         mSatelliteManager = getSatelliteManager(context);
         mCarrierConfigManager = getCarrierConfigManager(context);
-        mNetworkScanHelper = new NetworkScanHelper(
-                mTelephonyManager, mCallback, mNetworkScanExecutor);
         PersistableBundle bundle = mCarrierConfigManager.getConfigForSubId(mSubId,
                 CarrierConfigManager.KEY_SHOW_4G_FOR_LTE_DATA_ICON_BOOL,
                 CarrierConfigManager.KEY_REMOVE_SATELLITE_PLMN_IN_MANUAL_NETWORK_SCAN_BOOL);
@@ -135,30 +131,13 @@ public class NetworkSelectSettings extends DashboardFragment {
                 true));
 
         mMetricsFeatureProvider = getMetricsFeatureProvider(context);
-        mIsAggregationEnabled = enableAggregation(context);
-        Log.d(TAG, "init: mUseNewApi:" + mUseNewApi
-                + " ,mIsAggregationEnabled:" + mIsAggregationEnabled + " ,mSubId:" + mSubId);
 
         mCarrierConfigChangeListener =
                 (slotIndex, subId, carrierId, specificCarrierId) -> handleCarrierConfigChanged(
                         subId);
         mCarrierConfigManager.registerCarrierConfigChangeListener(mNetworkScanExecutor,
                 mCarrierConfigChangeListener);
-
-    }
-
-    @Keep
-    @VisibleForTesting
-    protected boolean enableNewAutoSelectNetworkUI(Context context) {
-        return context.getResources().getBoolean(
-                com.android.internal.R.bool.config_enableNewAutoSelectNetworkUI);
-    }
-
-    @Keep
-    @VisibleForTesting
-    protected boolean enableAggregation(Context context) {
-        return context.getResources().getBoolean(
-                R.bool.config_network_selection_list_aggregation_enabled);
+        mNetworkScanRepository = new NetworkScanRepository(context, mSubId);
     }
 
     @Keep
@@ -217,17 +196,42 @@ public class NetworkSelectSettings extends DashboardFragment {
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        final Activity activity = getActivity();
-        if (activity != null) {
-            mProgressHeader = setPinnedHeaderView(
-                    com.android.settingslib.widget.progressbar.R.layout.progress_header)
-                    .findViewById(com.android.settingslib.widget.progressbar.R.id.progress_bar_animation);
-            setProgressBarVisible(false);
-        }
+        mProgressHeader = setPinnedHeaderView(
+                com.android.settingslib.widget.progressbar.R.layout.progress_header
+        ).findViewById(com.android.settingslib.widget.progressbar.R.id.progress_bar_animation);
         forceUpdateConnectedPreferenceCategory();
+        launchNetworkScan();
+    }
+
+    private void launchNetworkScan() {
+        mNetworkScanRepository.launchNetworkScan(getViewLifecycleOwner(), new Function1<>() {
+            @Override
+            public Unit invoke(@NonNull NetworkScanResult networkScanResult) {
+                if (!mUpdateScanResult) {
+                    // Not update UI if not in scan mode.
+                    return Unit.INSTANCE;
+                }
+                if (networkScanResult instanceof NetworkScanCellInfos networkScanCellInfos) {
+                    scanResultHandler(networkScanCellInfos.getCellInfos());
+                    return Unit.INSTANCE;
+                }
+                if (!isPreferenceScreenEnabled()) {
+                    clearPreferenceSummary();
+                    enablePreferenceScreen(true);
+                } else if (networkScanResult instanceof NetworkScanComplete
+                        && mCellInfoList == null) {
+                    // In case the scan timeout before getting any results
+                    addMessagePreference(R.string.empty_networks_list);
+                } else if (networkScanResult instanceof NetworkScanError) {
+                    addMessagePreference(R.string.network_query_error);
+                }
+
+                return Unit.INSTANCE;
+            }
+        });
     }
 
     @Override
@@ -235,12 +239,8 @@ public class NetworkSelectSettings extends DashboardFragment {
         super.onStart();
 
         updateForbiddenPlmns();
-        if (isProgressBarVisible()) {
-            return;
-        }
-        if (mWaitingForNumberOfScanResults <= 0) {
-            startNetworkQuery();
-        }
+        setProgressBarVisible(true);
+        mUpdateScanResult = true;
     }
 
     /**
@@ -256,14 +256,6 @@ public class NetworkSelectSettings extends DashboardFragment {
     }
 
     @Override
-    public void onStop() {
-        if (mWaitingForNumberOfScanResults <= 0) {
-            stopNetworkQuery();
-        }
-        super.onStop();
-    }
-
-    @Override
     public boolean onPreferenceTreeClick(Preference preference) {
         if (preference == mSelectedPreference) {
             Log.d(TAG, "onPreferenceTreeClick: preference is mSelectedPreference. Do nothing.");
@@ -274,7 +266,7 @@ public class NetworkSelectSettings extends DashboardFragment {
             return false;
         }
 
-        stopNetworkQuery();
+        mUpdateScanResult = false;
 
         // Refresh the last selected item in case users reselect network.
         clearPreferenceSummary();
@@ -293,8 +285,6 @@ public class NetworkSelectSettings extends DashboardFragment {
         // Disable the screen until network is manually set
         enablePreferenceScreen(false);
 
-        mRequestIdManualNetworkSelect = getNewRequestId();
-        mWaitingForNumberOfScanResults = MIN_NUMBER_OF_SCAN_REQUIRED;
         final OperatorInfo operator = mSelectedPreference.getOperatorInfo();
         ThreadUtils.postOnBackgroundThread(() -> {
             final Message msg = mHandler.obtainMessage(
@@ -328,7 +318,6 @@ public class NetworkSelectSettings extends DashboardFragment {
             switch (msg.what) {
                 case EVENT_SET_NETWORK_SELECTION_MANUALLY_DONE:
                     final boolean isSucceed = (boolean) msg.obj;
-                    stopNetworkQuery();
                     setProgressBarVisible(false);
                     enablePreferenceScreen(true);
 
@@ -340,86 +329,15 @@ public class NetworkSelectSettings extends DashboardFragment {
                         Log.e(TAG, "No preference to update!");
                     }
                     break;
-                case EVENT_NETWORK_SCAN_RESULTS:
-                    scanResultHandler((List<CellInfo>) msg.obj);
-                    break;
-
-                case EVENT_NETWORK_SCAN_ERROR:
-                    stopNetworkQuery();
-                    Log.i(TAG, "Network scan failure " + msg.arg1 + ":"
-                            + " scan request 0x" + Long.toHexString(mRequestIdManualNetworkScan)
-                            + ", waiting for scan results = " + mWaitingForNumberOfScanResults
-                            + ", select request 0x"
-                            + Long.toHexString(mRequestIdManualNetworkSelect));
-                    if (mRequestIdManualNetworkScan < mRequestIdManualNetworkSelect) {
-                        break;
-                    }
-                    if (!isPreferenceScreenEnabled()) {
-                        clearPreferenceSummary();
-                        enablePreferenceScreen(true);
-                    } else {
-                        addMessagePreference(R.string.network_query_error);
-                    }
-                    break;
-
-                case EVENT_NETWORK_SCAN_COMPLETED:
-                    stopNetworkQuery();
-                    Log.d(TAG, "Network scan complete:"
-                            + " scan request 0x" + Long.toHexString(mRequestIdManualNetworkScan)
-                            + ", waiting for scan results = " + mWaitingForNumberOfScanResults
-                            + ", select request 0x"
-                            + Long.toHexString(mRequestIdManualNetworkSelect));
-                    if (mRequestIdManualNetworkScan < mRequestIdManualNetworkSelect) {
-                        break;
-                    }
-                    if (!isPreferenceScreenEnabled()) {
-                        clearPreferenceSummary();
-                        enablePreferenceScreen(true);
-                    } else if (mCellInfoList == null) {
-                        // In case the scan timeout before getting any results
-                        addMessagePreference(R.string.empty_networks_list);
-                    }
-                    break;
             }
-            return;
         }
     };
-
-    @VisibleForTesting
-    List<CellInfo> doAggregation(List<CellInfo> cellInfoListInput) {
-        if (!mIsAggregationEnabled) {
-            Log.d(TAG, "no aggregation");
-            return new ArrayList<>(cellInfoListInput);
-        }
-        ArrayList<CellInfo> aggregatedList = new ArrayList<>();
-        for (CellInfo cellInfo : cellInfoListInput) {
-            String plmn = CellInfoUtil.getNetworkTitle(cellInfo.getCellIdentity());
-            Class className = cellInfo.getClass();
-
-            Optional<CellInfo> itemInTheList = aggregatedList.stream().filter(
-                    item -> {
-                        String itemPlmn = CellInfoUtil.getNetworkTitle(item.getCellIdentity());
-                        return itemPlmn.equals(plmn) && item.getClass().equals(className);
-                    })
-                    .findFirst();
-            if (itemInTheList.isPresent()) {
-                if (cellInfo.isRegistered() && !itemInTheList.get().isRegistered()) {
-                    // Adding the registered cellinfo item into list. If there are two registered
-                    // cellinfo items, then select first one from source list.
-                    aggregatedList.set(aggregatedList.indexOf(itemInTheList.get()), cellInfo);
-                }
-                continue;
-            }
-            aggregatedList.add(cellInfo);
-        }
-
-        return filterOutSatellitePlmn(aggregatedList);
-    }
 
     /* We do not want to expose carrier satellite plmns to the user when manually scan the
        cellular network. Therefore, it is needed to filter out satellite plmns from current cell
        info list  */
-    private List<CellInfo> filterOutSatellitePlmn(List<CellInfo> cellInfoList) {
+    @VisibleForTesting
+    List<CellInfo> filterOutSatellitePlmn(List<CellInfo> cellInfoList) {
         List<String> aggregatedSatellitePlmn = getSatellitePlmnsForCarrierWrapper();
         if (!mShouldFilterOutSatellitePlmn.get() || aggregatedSatellitePlmn.isEmpty()) {
             return cellInfoList;
@@ -451,39 +369,10 @@ public class NetworkSelectSettings extends DashboardFragment {
         }
     }
 
-    private final NetworkScanHelper.NetworkScanCallback mCallback =
-            new NetworkScanHelper.NetworkScanCallback() {
-                public void onResults(List<CellInfo> results) {
-                    final Message msg = mHandler.obtainMessage(EVENT_NETWORK_SCAN_RESULTS, results);
-                    msg.sendToTarget();
-                }
-
-                public void onComplete() {
-                    final Message msg = mHandler.obtainMessage(EVENT_NETWORK_SCAN_COMPLETED);
-                    msg.sendToTarget();
-                }
-
-                public void onError(int error) {
-                    final Message msg = mHandler.obtainMessage(EVENT_NETWORK_SCAN_ERROR, error,
-                            0 /* arg2 */);
-                    msg.sendToTarget();
-                }
-            };
-
     @Keep
     @VisibleForTesting
     protected void scanResultHandler(List<CellInfo> results) {
-        if (mRequestIdManualNetworkScan < mRequestIdManualNetworkSelect) {
-            Log.d(TAG, "CellInfoList (drop): "
-                    + CellInfoUtil.cellInfoListToString(new ArrayList<>(results)));
-            return;
-        }
-        mWaitingForNumberOfScanResults--;
-        if ((mWaitingForNumberOfScanResults <= 0) && (!isResumed())) {
-            stopNetworkQuery();
-        }
-
-        mCellInfoList = doAggregation(results);
+        mCellInfoList = filterOutSatellitePlmn(results);
         Log.d(TAG, "CellInfoList: " + CellInfoUtil.cellInfoListToString(mCellInfoList));
         if (mCellInfoList != null && mCellInfoList.size() != 0) {
             final NetworkOperatorPreference connectedPref = updateAllPreferenceCategory();
@@ -642,11 +531,6 @@ public class NetworkSelectSettings extends DashboardFragment {
         }
     }
 
-    private long getNewRequestId() {
-        return Math.max(mRequestIdManualNetworkSelect,
-                mRequestIdManualNetworkScan) + 1;
-    }
-
     private boolean isProgressBarVisible() {
         if (mProgressHeader == null) {
             return false;
@@ -667,29 +551,8 @@ public class NetworkSelectSettings extends DashboardFragment {
         mPreferenceCategory.addPreference(mStatusMessagePreference);
     }
 
-    private void startNetworkQuery() {
-        setProgressBarVisible(true);
-        if (mNetworkScanHelper != null) {
-            mRequestIdManualNetworkScan = getNewRequestId();
-            mWaitingForNumberOfScanResults = MIN_NUMBER_OF_SCAN_REQUIRED;
-            mNetworkScanHelper.startNetworkScan(
-                    mUseNewApi
-                            ? NetworkScanHelper.NETWORK_SCAN_TYPE_INCREMENTAL_RESULTS
-                            : NetworkScanHelper.NETWORK_SCAN_TYPE_WAIT_FOR_ALL_RESULTS);
-        }
-    }
-
-    private void stopNetworkQuery() {
-        setProgressBarVisible(false);
-        if (mNetworkScanHelper != null) {
-            mWaitingForNumberOfScanResults = 0;
-            mNetworkScanHelper.stopNetworkQuery();
-        }
-    }
-
     @Override
     public void onDestroy() {
-        stopNetworkQuery();
         mNetworkScanExecutor.shutdown();
         super.onDestroy();
     }

@@ -59,7 +59,8 @@ public class PrivateProfileContextHelperActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if (!android.os.Flags.allowPrivateProfile()) {
+        if (!android.os.Flags.allowPrivateProfile()
+                || !android.multiuser.Flags.enablePrivateSpaceFeatures()) {
             return;
         }
         setTheme(SetupWizardUtils.getTheme(this, getIntent()));

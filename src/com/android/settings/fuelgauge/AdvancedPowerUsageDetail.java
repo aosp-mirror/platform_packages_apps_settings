@@ -20,7 +20,6 @@ import static com.android.settings.fuelgauge.batteryusage.ConvertUtils.isUserCon
 
 import android.app.Activity;
 import android.app.ActivityManager;
-import android.app.backup.BackupManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
@@ -105,7 +104,6 @@ public class AdvancedPowerUsageDetail extends DashboardFragment
     @VisibleForTesting @BatteryOptimizeUtils.OptimizationMode
     int mOptimizationMode = BatteryOptimizeUtils.MODE_UNKNOWN;
 
-    @VisibleForTesting BackupManager mBackupManager;
     @VisibleForTesting StringBuilder mLogStringBuilder;
 
     // A wrapper class to carry LaunchBatteryDetailPage required arguments.
@@ -273,7 +271,6 @@ public class AdvancedPowerUsageDetail extends DashboardFragment
     public void onPause() {
         super.onPause();
 
-        notifyBackupManager();
         final int currentOptimizeMode = mBatteryOptimizeUtils.getAppOptimizationMode();
         mLogStringBuilder.append(", onPause mode = ").append(currentOptimizeMode);
         logMetricCategory(currentOptimizeMode);
@@ -288,15 +285,6 @@ public class AdvancedPowerUsageDetail extends DashboardFragment
                             mLogStringBuilder.toString());
                 });
         Log.d(TAG, "Leave with mode: " + currentOptimizeMode);
-    }
-
-    @VisibleForTesting
-    void notifyBackupManager() {
-        if (mOptimizationMode != mBatteryOptimizeUtils.getAppOptimizationMode()) {
-            final BackupManager backupManager =
-                    mBackupManager != null ? mBackupManager : new BackupManager(getContext());
-            backupManager.dataChanged();
-        }
     }
 
     @VisibleForTesting

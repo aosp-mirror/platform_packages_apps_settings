@@ -21,33 +21,26 @@ import static android.app.NotificationManager.BUBBLE_PREFERENCE_NONE;
 import static android.app.NotificationManager.BUBBLE_PREFERENCE_SELECTED;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
+import androidx.annotation.NonNull;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
-import com.android.settings.Utils;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreferenceHelper;
 
 /**
  * A tri-state preference allowing a user to specify what gets to bubble.
  */
-public class BubblePreference extends Preference implements View.OnClickListener {
+public class BubblePreference extends Preference implements RadioGroup.OnCheckedChangeListener {
     RestrictedPreferenceHelper mHelper;
 
     private int mSelectedPreference;
-
-    private Context mContext;
-
-    private ButtonViewHolder mBubbleAllButton;
-    private ButtonViewHolder mBubbleSelectedButton;
-    private ButtonViewHolder mBubbleNoneButton;
 
     private boolean mSelectedVisible;
 
@@ -64,16 +57,16 @@ public class BubblePreference extends Preference implements View.OnClickListener
     }
 
     public BubblePreference(Context context, AttributeSet attrs,
-            int defStyleAttr, int defStyleRes) {
+                            int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         mHelper = new RestrictedPreferenceHelper(context, this, attrs);
         mHelper.useAdminDisabledSummary(true);
-        mContext = context;
         setLayoutResource(R.layout.bubble_preference);
     }
 
     public void setSelectedPreference(int preference) {
         mSelectedPreference = preference;
+        notifyChanged();
     }
 
     public int getSelectedPreference() {
@@ -92,9 +85,8 @@ public class BubblePreference extends Preference implements View.OnClickListener
     }
 
     @Override
-    public void onBindViewHolder(final PreferenceViewHolder holder) {
+    public void onBindViewHolder(@NonNull final PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
-
         final boolean disabledByAdmin = mHelper.isDisabledByAdmin();
         View summary = holder.findViewById(android.R.id.summary);
         if (disabledByAdmin) {
@@ -105,74 +97,34 @@ public class BubblePreference extends Preference implements View.OnClickListener
         }
         holder.itemView.setClickable(false);
 
-        View bubbleAll = holder.findViewById(R.id.bubble_all);
-        ImageView bubbleAllImage = (ImageView) holder.findViewById(R.id.bubble_all_icon);
-        TextView bubbleAllText = (TextView) holder.findViewById(R.id.bubble_all_label);
-        mBubbleAllButton = new ButtonViewHolder(bubbleAll, bubbleAllImage, bubbleAllText,
-                BUBBLE_PREFERENCE_ALL);
-        mBubbleAllButton.setSelected(mContext, mSelectedPreference == BUBBLE_PREFERENCE_ALL);
-        bubbleAll.setTag(BUBBLE_PREFERENCE_ALL);
-        bubbleAll.setOnClickListener(this);
-        bubbleAll.setVisibility(disabledByAdmin ? View.GONE : View.VISIBLE);
+        RadioButton bubbleAllButton = (RadioButton) holder.findViewById(R.id.bubble_all);
+        bubbleAllButton.setChecked(mSelectedPreference == BUBBLE_PREFERENCE_ALL);
+        bubbleAllButton.setTag(BUBBLE_PREFERENCE_ALL);
+        bubbleAllButton.setVisibility(disabledByAdmin ? View.GONE : View.VISIBLE);
 
-        View bubbleSelected = holder.findViewById(R.id.bubble_selected);
-        ImageView bubbleSelectedImage = (ImageView) holder.findViewById(R.id.bubble_selected_icon);
-        TextView bubbleSelectedText = (TextView) holder.findViewById(R.id.bubble_selected_label);
-        mBubbleSelectedButton = new ButtonViewHolder(bubbleSelected, bubbleSelectedImage,
-                bubbleSelectedText, BUBBLE_PREFERENCE_SELECTED);
-        mBubbleSelectedButton.setSelected(mContext,
-                mSelectedPreference == BUBBLE_PREFERENCE_SELECTED);
-        bubbleSelected.setTag(BUBBLE_PREFERENCE_SELECTED);
-        bubbleSelected.setOnClickListener(this);
-        bubbleSelected.setVisibility((!mSelectedVisible || disabledByAdmin)
-                ? View.GONE : View.VISIBLE);
+        RadioButton bubbleSelectedButton = (RadioButton) holder.findViewById(R.id.bubble_selected);
+        bubbleSelectedButton.setChecked(mSelectedPreference == BUBBLE_PREFERENCE_SELECTED);
+        bubbleSelectedButton.setTag(BUBBLE_PREFERENCE_SELECTED);
+        int selectedButtonVisibility =
+                (!mSelectedVisible || disabledByAdmin) ? View.GONE : View.VISIBLE;
+        bubbleSelectedButton.setVisibility(selectedButtonVisibility);
 
-        View bubbleNone = holder.findViewById(R.id.bubble_none);
-        ImageView bubbleNoneImage = (ImageView) holder.findViewById(R.id.bubble_none_icon);
-        TextView bubbleNoneText = (TextView) holder.findViewById(R.id.bubble_none_label);
-        mBubbleNoneButton = new ButtonViewHolder(bubbleNone, bubbleNoneImage, bubbleNoneText,
-                BUBBLE_PREFERENCE_NONE);
-        mBubbleNoneButton.setSelected(mContext, mSelectedPreference == BUBBLE_PREFERENCE_NONE);
-        bubbleNone.setTag(BUBBLE_PREFERENCE_NONE);
-        bubbleNone.setOnClickListener(this);
-        bubbleNone.setVisibility(disabledByAdmin ? View.GONE : View.VISIBLE);
+        RadioButton bubbleNoneButton = (RadioButton) holder.findViewById(R.id.bubble_none);
+        bubbleNoneButton.setChecked(mSelectedPreference == BUBBLE_PREFERENCE_NONE);
+        bubbleNoneButton.setTag(BUBBLE_PREFERENCE_NONE);
+        bubbleNoneButton.setVisibility(disabledByAdmin ? View.GONE : View.VISIBLE);
+
+        RadioGroup bublesRadioGroup = (RadioGroup) holder.findViewById(R.id.radio_group);
+        bublesRadioGroup.setOnCheckedChangeListener(this);
     }
 
     @Override
-    public void onClick(View v) {
-        final int selected = (int) v.getTag();
-        callChangeListener(selected);
-
-        mBubbleAllButton.setSelected(mContext, selected == BUBBLE_PREFERENCE_ALL);
-        mBubbleSelectedButton.setSelected(mContext, selected == BUBBLE_PREFERENCE_SELECTED);
-        mBubbleNoneButton.setSelected(mContext, selected == BUBBLE_PREFERENCE_NONE);
-    }
-
-    private class ButtonViewHolder {
-        private View mView;
-        private ImageView mImageView;
-        private TextView mTextView;
-        private int mId;
-
-        ButtonViewHolder(View v, ImageView iv, TextView tv, int identifier) {
-            mView = v;
-            mImageView = iv;
-            mTextView = tv;
-            mId = identifier;
+    public void onCheckedChanged(@NonNull RadioGroup group, int checkedId) {
+        View v = group.findViewById(checkedId);
+        if (v == null || v.getTag() == null) {
+            return;
         }
-
-        void setSelected(Context context, boolean selected) {
-            mView.setBackground(mContext.getDrawable(selected
-                ? R.drawable.notification_importance_button_background_selected
-                : R.drawable.notification_importance_button_background_unselected));
-            mView.setSelected(selected);
-
-            int colorResId = selected
-                    ? R.attr.notification_importance_button_foreground_color_selected
-                    : R.attr.notification_importance_button_foreground_color_unselected;
-            ColorStateList stateList = Utils.getColorAttr(context, colorResId);
-            mImageView.setImageTintList(stateList);
-            mTextView.setTextColor(stateList);
-        }
+        int selectedTag = (int) v.getTag();
+        callChangeListener(selectedTag);
     }
 }

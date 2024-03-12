@@ -21,8 +21,10 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.UserHandle;
 import android.util.ArrayMap;
+import android.view.accessibility.Flags;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.accessibility.common.ShortcutConstants;
 import com.android.internal.accessibility.util.ShortcutUtils;
@@ -98,6 +100,11 @@ public final class PreferredShortcuts {
             @NonNull Context context, @NonNull Set<String> components) {
         final Map<Integer, Set<String>> shortcutTypeToTargets = new ArrayMap<>();
         for (int shortcutType : ShortcutConstants.USER_SHORTCUT_TYPES) {
+            if (!Flags.a11yQsShortcut()
+                    && shortcutType == ShortcutConstants.UserShortcutType.QUICK_SETTINGS) {
+                // Skip saving quick setting as preferred shortcut option when flag is not enabled
+                continue;
+            }
             shortcutTypeToTargets.put(
                     shortcutType,
                     ShortcutUtils.getShortcutTargetsFromSettings(
@@ -136,6 +143,11 @@ public final class PreferredShortcuts {
 
     private static SharedPreferences getSharedPreferences(Context context) {
         return context.getSharedPreferences(ACCESSIBILITY_PERF, Context.MODE_PRIVATE);
+    }
+
+    @VisibleForTesting(otherwise = VisibleForTesting.NONE)
+    static void clearPreferredShortcuts(Context context) {
+        getSharedPreferences(context).edit().clear().apply();
     }
 
     /**

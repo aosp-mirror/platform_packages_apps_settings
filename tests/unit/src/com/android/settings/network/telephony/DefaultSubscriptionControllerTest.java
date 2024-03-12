@@ -26,6 +26,7 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.Looper;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.telecom.TelecomManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -40,6 +41,7 @@ import androidx.test.annotation.UiThreadTest;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import com.android.settings.flags.Flags;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.testutils.ResourcesUtils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -47,6 +49,7 @@ import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -58,6 +61,8 @@ import java.util.List;
 
 @RunWith(AndroidJUnit4.class)
 public class DefaultSubscriptionControllerTest {
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     private static final String SUB_ID_1 = "1";
     private static final String SUB_ID_2 = "2";
@@ -105,10 +110,11 @@ public class DefaultSubscriptionControllerTest {
         if (Looper.myLooper() == null) {
             Looper.prepare();
         }
-
+        mSetFlagsRule.disableFlags(Flags.FLAG_IS_DUAL_SIM_ONBOARDING_ENABLED);
         mContext = spy(ApplicationProvider.getApplicationContext());
         when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubMgr);
         when(mContext.getSystemService(TelecomManager.class)).thenReturn(mTelecomManager);
+        when(mSubMgr.createForAllUserProfiles()).thenReturn(mSubMgr);
 
         final String key = "prefkey";
         mController = new TestDefaultSubscriptionController(mContext, key, mLifecycle,
@@ -312,9 +318,9 @@ public class DefaultSubscriptionControllerTest {
         mController.setDefaultSubscription(Integer.parseInt(mSubInfo1.subId));
         mSubscriptionInfoEntityList.add(mSubInfo1);
         mSubscriptionInfoEntityList.add(mSubInfo2);
-        mController.onActiveSubInfoChanged(mSubscriptionInfoEntityList);
 
         mController.displayPreference(mScreen);
+        mController.onActiveSubInfoChanged(mSubscriptionInfoEntityList);
         assertThat(mListPreference.getEntries().length).isEqualTo(3);
 
         mSubscriptionInfoEntityList.add(mSubInfo3);

@@ -21,6 +21,7 @@ import static com.android.internal.accessibility.AccessibilityShortcutController
 import android.content.Context;
 import android.icu.text.MessageFormat;
 import android.provider.Settings;
+import android.view.accessibility.Flags;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -105,6 +106,11 @@ public class TripleTapShortcutOptionController extends ShortcutOptionPreferenceC
 
     @Override
     protected void enableShortcutForTargets(boolean enable) {
+        if (Flags.a11yQsShortcut()) {
+            super.enableShortcutForTargets(enable);
+            return;
+        }
+
         Settings.Secure.putInt(
                 mContext.getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED,

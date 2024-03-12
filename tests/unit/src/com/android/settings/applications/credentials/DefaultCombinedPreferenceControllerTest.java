@@ -117,7 +117,7 @@ public class DefaultCombinedPreferenceControllerTest {
 
         // Set the preference back to none and make sure the view was updated.
         dcpc.updatePreferenceForProvider(ppp, null, null, null, null, null);
-        assertThat(ppp.getTitle().toString()).isEqualTo("None");
+        assertThat(ppp.getTitle().toString()).isEqualTo("None selected");
         assertThat(ppp.getSummary()).isNull();
         assertThat(ppp.getIcon()).isNull();
     }

@@ -293,7 +293,7 @@ public class ResetNetwork extends InstrumentedFragment {
         }
         EuiccManager euiccManager =
                 (EuiccManager) context.getSystemService(Context.EUICC_SERVICE);
-        if (!euiccManager.isEnabled()) {
+        if (euiccManager == null || !euiccManager.isEnabled()) {
             return false;
         }
         ContentResolver resolver = context.getContentResolver();

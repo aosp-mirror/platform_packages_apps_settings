@@ -150,14 +150,14 @@
     <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button">Pair right ear</string>
     <!-- Connected devices settings. Positive button of the dialog to help user to pair left ear of the hearing aid device. Dialog shows when only one of the hearing aid device set is connected. [CHAR LIMIT=20] -->
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button">Pair left ear</string>
-    <!-- Title for all hearing devices related controls section. [CHAR LIMIT=60] -->
-    <string name="bluetooth_device_controls_general">For all available hearing devices</string>
-    <!-- Connected devices settings. Title of the preference to show the entrance of the hearing device settings related page. [CHAR LIMIT=65] -->
-    <string name="bluetooth_device_controls_title">More hearing device settings</string>
-    <!-- Connected devices settings. Summary of the preference to show the item in the hearing device settings related page. [CHAR LIMIT=120] -->
-    <string name="bluetooth_device_controls_summary">Change cross-device settings like shortcut, and telecoil controls</string>
-    <!-- Title for this device specific controls section. [CHAR LIMIT=30] -->
-    <string name="bluetooth_device_controls_specific">For this device</string>
+    <!-- Connected devices settings. Title of the preference to show the entrance of the hearing device settings page. [CHAR LIMIT=65 BACKUP_MESSAGE_ID=1895676556354697234] -->
+    <string name="bluetooth_hearing_device_settings_title">Hearing device settings</string>
+    <!-- Connected devices settings. Summary of the preference to show the entrance of the hearing device settings page. [CHAR LIMIT=65 BACKUP_MESSAGE_ID=8115767735418425663] -->
+    <string name="bluetooth_hearing_device_settings_summary">Shortcut, hearing aid compatibility</string>
+    <!-- Connected devices settings. Title for hearing aids presets. A preset is a set of hearing aid settings. User can apply different settings in different environments (e.g. Outdoor, Restaurant, Home) [CHAR LIMIT=60] -->
+    <string name="bluetooth_hearing_aids_presets">Presets</string>
+    <!-- Message when selecting hearing aids presets failed. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_hearing_aids_presets_error">Couldn\u2019t update preset</string>
     <!-- Connected devices settings. Title of the preference to show the entrance of the audio output page. It can change different types of audio are played on phone or other bluetooth devices. [CHAR LIMIT=35] -->
     <string name="bluetooth_audio_routing_title">Audio output</string>
     <!-- Title for bluetooth audio routing page footer. [CHAR LIMIT=30] -->
@@ -1847,11 +1847,6 @@
     <!-- Bluetooth developer settings: Maximum number of connected audio devices -->
     <string name="bluetooth_max_connected_audio_devices_dialog_title">Select maximum number of connected Bluetooth audio devices</string>
 
-    <!-- Nfc developer settings: The title of the setting. [CHAR LIMIT=60] -->
-    <string name="nfc_stack_debuglog_title">NFC stack debug log</string>
-    <!-- Nfc developer settings: The description of the setting. -->
-    <string name="nfc_stack_debuglog_summary">Increase NFC stack logging level</string>
-
     <!-- Nfc developer settings: The title of the setting to enable nfc verbose vendor log. [CHAR LIMIT=60] -->
     <string name="nfc_verbose_vendor_log_title">NFC verbose vendor debug log</string>
     <!-- Nfc developer settings: The description of the setting to enable nfc verbose vendor log. [CHAR_LIMIT=NONE] -->
@@ -2060,6 +2055,10 @@
     <string name="wifi_settings_wep_networks_button_allow">Allow WEP</string>
     <!-- Wi-Fi settings dialog. Button text of dialog displayed when WEP network toggle is blocked. [CHAR LIMIT=NONE] -->
     <string name="wifi_settings_ssid_block_button_close">Close</string>
+    <!-- Wi-Fi settings dialog. Title of dialog displayed when the user turns off “Allow WEP networks” while connected to a WEP network. [CHAR LIMIT=NONE] -->
+    <string name="wifi_settings_wep_networks_disconnect_title">Disconnect from <xliff:g id="name">%1$s</xliff:g>?</string>
+    <!-- Wi-Fi settings dialog. Summary text of dialog displayed when the user turns off “Allow WEP networks” while connected to a WEP network. [CHAR LIMIT=NONE] -->
+    <string name="wifi_settings_wep_networks_disconnect_summary">You\u0027re connected to a WEP network. If you block these networks, you\u0027ll be disconnected.</string>
 
     <!-- Dialog for Access Points --> <skip />
     <!-- Label to show/hide advanced options [CHAR LIMIT=40] -->
@@ -3558,6 +3557,8 @@
 
     <!-- [CHAR LIMIT=30] Title for managed profile location switch  -->
     <string name="managed_profile_location_switch_title">Location for work profile</string>
+    <!-- [CHAR LIMIT=60] Title for private profile location switch  -->
+    <string name="private_profile_location_switch_title">Location for private space</string>
     <!-- [CHAR LIMIT=30] Location settings screen. It's a link that directs the user to a page that
       shows the location permission setting for each installed app -->
     <string name="location_app_level_permissions">App location permissions</string>
@@ -4341,16 +4342,16 @@
     <string name="show_ime_summary">Keep it on screen while physical keyboard is active</string>
     <!-- Title for the 'Bounce keys' preference switch. [CHAR LIMIT=35] -->
     <string name="bounce_keys">Bounce keys</string>
-    <!-- Summary text for the 'Bounce keys' preference sub-screen. [CHAR LIMIT=100] -->
-    <string name="bounce_keys_summary">Enable Bounce keys for physical keyboard accessibility</string>
+    <!-- Summary text for the 'Bounce keys' preference sub-screen. [CHAR LIMIT=300] -->
+    <string name="bounce_keys_summary">The keyboard ignores quickly repeated presses of the same key within <xliff:g id="bounce_keys_threshold" example="500">%1$d</xliff:g> ms</string>
     <!-- Title for the 'Slow keys' preference switch. [CHAR LIMIT=35] -->
     <string name="slow_keys">Slow keys</string>
-    <!-- Summary text for the 'Slow keys' preference sub-screen. [CHAR LIMIT=100] -->
-    <string name="slow_keys_summary">Enable Slow keys for physical keyboard accessibility</string>
+    <!-- Summary text for the 'Slow keys' preference sub-screen. [CHAR LIMIT=300] -->
+    <string name="slow_keys_summary">Adjusts the time it takes for a key press to activate to <xliff:g id="slow_keys_threshold" example="500">%1$d</xliff:g> ms</string>
     <!-- Title for the 'Sticky keys' preference switch. [CHAR LIMIT=35] -->
     <string name="sticky_keys">Sticky keys</string>
-    <!-- Summary text for the 'Sticky keys' preference sub-screen. [CHAR LIMIT=100] -->
-    <string name="sticky_keys_summary">Enable Sticky keys for physical keyboard accessibility</string>
+    <!-- Summary text for the 'Sticky keys' preference sub-screen. [CHAR LIMIT=300] -->
+    <string name="sticky_keys_summary">Press one key at a time for shortcuts instead of holding keys down together</string>
     <!-- Title for the button to trigger the 'keyboard shortcuts helper' dialog. [CHAR LIMIT=35] -->
     <string name="keyboard_shortcuts_helper">Keyboard shortcuts</string>
     <!-- Summary text for the 'keyboard shortcuts helper' dialog. [CHAR LIMIT=100] -->
@@ -4371,6 +4372,8 @@
 
     <!-- Title text for 'Tap to click'. [CHAR LIMIT=35] -->
     <string name="trackpad_tap_to_click">Tap to click</string>
+    <!-- TODO(b/321978150): mark as translatable once we have finalized text from UX. -->
+    <string name="trackpad_tap_dragging" translatable="false">Tap dragging</string>
     <!-- Title text for 'Touchpad gestures' [CHAR LIMIT=35] -->
     <string name="trackpad_touchpad_gesture_title">Touchpad gestures</string>
     <!-- Summary text for 'Touchpad gestures' [CHAR LIMIT=60] -->
@@ -4474,8 +4477,14 @@
     <!-- Summary for the modifier key picker dialog page [CHAR LIMIT=35] -->
     <string name="modifier_keys_picker_summary">Choose a new key for <xliff:g id="modifier_key_default_name">%1$s</xliff:g>:</string>
 
+    <!-- Title text for per IME subtype keyboard layout. [CHAR LIMIT=35] -->
+    <string name="ime_label_title"><xliff:g id="ime_label" example="Gboard">%s</xliff:g> layout</string>
     <!-- Summary text for keyboards when no layout has been selected. [CHAR LIMIT=35] -->
     <string name="default_keyboard_layout">Default</string>
+    <!-- Summary text for keyboards when a layout is automatically selected. [CHAR LIMIT=35] -->
+    <string name="automatic_keyboard_layout_label">Automatic: <xliff:g id="layout_label" example="English(US)">%s</xliff:g></string>
+    <!-- Summary text for keyboards when a layout is user selected. [CHAR LIMIT=35] -->
+    <string name="user_selected_keyboard_layout_label">User selected: <xliff:g id="layout_label" example="English(US)">%s</xliff:g></string>
 
     <!-- Title for the 'Speech' preference category. [CHAR LIMIT=45] -->
     <string name="speech_category_title">Speech</string>
@@ -4614,6 +4623,8 @@
     <string name="vision_settings_suggestion_title">Change font size</string>
     <!-- Title for the accessibility preference category of screen reader services and settings. [CHAR LIMIT=50] -->
     <string name="screen_reader_category_title">Screen reader</string>
+    <!-- Title for the accessibility preference category of physical keyboard options. [CHAR LIMIT=50] -->
+    <string name="keyboard_category_title">Physical keyboard options</string>
     <!-- Title for the accessibility preference category of caption services and settings. [CHAR LIMIT=50] -->
     <string name="captions_category_title">Captions</string>
     <!-- Title for the accessibility preference category of audio services and settings. [CHAR LIMIT=50] -->
@@ -4660,6 +4671,10 @@
     <string name="experimental_category_title">Experimental</string>
     <!-- Title for feature flags dashboard where developers can turn on experimental features [CHAR LIMIT=50] -->
     <string name="feature_flags_dashboard_title">Feature flags</string>
+    <!-- Setting Checkbox title whether to enable Bluetooth stack log -->
+    <string name="bt_stack_log_level">Enable Bluetooth stack log</string>
+    <!-- setting Checkbox summary to set log level [CHAR_LIMIT=100] -->
+    <string name="bt_stack_log_level_summary">Change log level of Bluetooth Stack Logging (Toggle Bluetooth after changing this setting)</string>
     <!-- Title for snoop logger filters dashboard where developers can turn on filters [CHAR LIMIT=100] -->
     <string name="bt_hci_snoop_log_filters_dashboard_title">Bluetooth HCI snoop log filtering</string>
     <!-- Summary for the snoop logger filters [CHAR LIMIT=100] -->
@@ -4744,6 +4759,14 @@
     <string name="accessibility_magnification_triple_tap_warning_negative_button">Cancel</string>
     <!-- Title for the accessibility preference screen to enable screen magnification settings. [CHAR LIMIT=35] -->
     <string name="accessibility_magnification_service_settings_title">Magnification settings</string>
+    <!-- Title for accessibility magnification preference where user can move the magnification area by dragging one finger instead of two. [CHAR LIMIT=60] -->
+    <string name="accessibility_magnification_one_finger_panning_title">One-finger panning</string>
+    <!-- Summary for accessibility magnification preference when one finger panning feature is turned on.
+         The feature when enabled allows user to move the magnification area by dragging one finger instead of two. [CHAR LIMIT=60] -->
+    <string name="accessibility_magnification_one_finger_panning_summary_on">Move the magnification area by dragging one finger.</string>
+    <!-- Summary for accessibility magnification preference when one finger panning feature is turned off.
+         The feature when disabled, allows user to move the magnification area by dragging two fingers instead of one. [CHAR LIMIT=60] -->
+    <string name="accessibility_magnification_one_finger_panning_summary_off">Move the magnification area by dragging two fingers.</string>
     <!-- Title for the accessibility preference screen to enable navigation bar screen magnification. [CHAR LIMIT=35] -->
     <string name="accessibility_screen_magnification_navbar_title">Magnify with shortcut</string>
     <!-- Summary for the accessibility magnification setting indicating both "Magnify with button" and "Magnify with triple-tap" are enabled [CHAR LIMIT=50] -->
@@ -4811,6 +4834,8 @@
     <string name="accessibility_tutorial_dialog_title_triple">Triple tap screen to open</string>
     <!-- Title for the accessibility tutorial dialog in accessibility service with two finger double tap. [CHAR LIMIT=100] -->
     <string name="accessibility_tutorial_dialog_title_two_finger_double">Two finger double tap screen to open</string>
+    <!-- Title for the accessibility tutorial dialog in accessibility service with quick setting shortcut. [CHAR LIMIT=100] -->
+    <string name="accessibility_tutorial_dialog_title_quick_setting">Quick Settings shortcut</string>
     <!-- Title for the accessibility tutorial dialog in accessibility service with gesture. [CHAR LIMIT=50] -->
     <string name="accessibility_tutorial_dialog_title_gesture">Use gesture to open</string>
     <!-- Title for the accessibility tutorial dialog in gesture navigation settings. [CHAR LIMIT=50] -->
@@ -4825,6 +4850,8 @@
     <string name="accessibility_tutorial_dialog_message_triple">To start and stop magnification, triple-tap anywhere on your screen.</string>
     <!-- Instruction for the accessibility tutorial dialog in accessibility service with two finger double tap. [CHAR LIMIT=100] -->
     <string name="accessibility_tutorial_dialog_message_two_finger_triple">To start and stop magnification, double-tap anywhere on your screen with two fingers.</string>
+    <!-- Instruction for the accessibility tutorial dialog in accessibility service with triple tap. [CHAR LIMIT=NONE]-->
+    <string name="accessibility_tutorial_dialog_message_quick_setting">To use this feature, swipe down from the top of your screen.</string>
     <!-- Message for the accessibility tutorial dialog when user enables an accessibility service while using gesture navigation and touch exploration is not enabled. [CHAR LIMIT=NONE] -->
     <string name="accessibility_tutorial_dialog_message_gesture">To use this feature, swipe up from the bottom of the screen with 2 fingers.\n\nTo switch between features, swipe up with 2 fingers and hold.</string>
     <!-- Message for the accessibility tutorial dialog when user enables an accessibility service while using gesture navigation and touch exploration is enabled. [CHAR LIMIT=NONE] -->
@@ -4839,10 +4866,10 @@
     <string name="accessibility_tutorial_dialog_link_button">Button settings</string>
     <!-- Title for accessibility shortcut preference for accessibility apps. [CHAR LIMIT=40] -->
     <string name="accessibility_shortcut_title"><xliff:g id="service" example="Select to Speak">%1$s</xliff:g> shortcut</string>
-    <!-- Title for software shortcut in accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_shortcut_edit_summary_software">Accessibility button</string>
-    <!-- Title for software shortcut gesture in accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_shortcut_edit_summary_software_gesture">Accessibility gesture</string>
+    <!-- Shown as one of the item in the chosen accessibility shortcut types list presented as a label next to the shortcut toggle. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_shortcut_edit_summary_software">accessibility button</string>
+    <!-- Shown as one of the item in the chosen accessibility shortcut types list presented as a label next to the shortcut toggle. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_shortcut_edit_summary_software_gesture">accessibility gesture</string>
     <!-- Title for software shortcut in gesture mode in accessibility edit shortcut dialog while using gesture navigation is enabled. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture">Swipe up with 2 fingers</string>
     <!-- Title for software shortcut in gesture mode in accessibility edit shortcut dialog while using gesture navigation and touch exploration are enabled. [CHAR LIMIT=NONE] -->
@@ -4861,6 +4888,12 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating"><annotation id="link">More options</annotation></string>
     <!-- Footer to show help link content description. [CHAR LIMIT=NONE] -->
     <string name="footer_learn_more_content_description">Learn more about <xliff:g id="service" example="Select to Speak">%1$s</xliff:g></string>
+    <!-- Title for quick settings shortcut option in accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_shortcut_edit_dialog_title_quick_settings">Quick Settings</string>
+    <!-- Summary for quick settings shortcut option in accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_shortcut_edit_dialog_summary_quick_settings">Swipe down from the top of your screen</string>
+    <!-- Shown as one of the item in the chosen accessibility shortcut types list presented as a label next to the shortcut toggle. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_feature_shortcut_setting_summary_quick_settings">Quick Settings</string>
     <!-- Title for hardware shortcut in accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_dialog_title_hardware">Hold volume keys</string>
     <!-- Part of list to compose user's accessibility shortcut list. [CHAR LIMIT=NONE] -->
@@ -5154,14 +5187,14 @@
     <!-- Generic title for editing the shortcuts of multiple accessibility features. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_screen_title">Edit accessibility shortcuts</string>
     <!-- Prompt for editing the shortcuts of multiple accessibility features. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_shortcut_edit_screen_prompt">Chose your shortcut for %1$s</string>
+    <string name="accessibility_shortcut_edit_screen_prompt">Choose your shortcut for %1$s</string>
 
     <!-- Button text for the accessibility dialog continue to the next screen for hearing aid. [CHAR LIMIT=32] -->
     <string name="accessibility_hearingaid_instruction_continue_button">Continue</string>
     <!-- Title for the accessibility preference for hearing devices. [CHAR LIMIT=35] -->
     <string name="accessibility_hearingaid_title">Hearing devices</string>
-    <!-- Introduction for the Hearing devices page to introduce feature. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_hearingaid_intro">You can use hearing aids, cochlear implants, and other amplification devices with your phone</string>
+    <!-- Introduction for the Hearing devices page to introduce feature. [CHAR LIMIT=NONE BACKUP_MESSAGE_ID=5856992709195963850] -->
+    <string name="accessibility_hearingaid_intro">Set up and manage ASHA and LE Audio hearing aids, cochlear implants, and other amplification devices</string>
     <!-- Summary for the accessibility preference for hearing aid when not connected. [CHAR LIMIT=50] -->
     <string name="accessibility_hearingaid_not_connected_summary">No hearing devices connected</string>
     <!-- Summary for the accessibility preference for hearing aid when adding new devices. [CHAR LIMIT=50] -->
@@ -5196,6 +5229,8 @@
     <string name="accessibility_hac_mode_summary">Improves compatibility with telecoils and reduces unwanted noise</string>
     <!-- Title for accessibility hearing device page footer. [CHAR LIMIT=40] -->
     <string name="accessibility_hearing_device_about_title">About hearing devices</string>
+    <!-- Description for text in accessibility hearing aids footer. [CHAR LIMIT=NONE BACKUP_MESSAGE_ID=7451899224828040581] -->
+    <string name="accessibility_hearing_device_footer_summary">To find other hearing devices that aren’t supported by ASHA or LE Audio, tap <b>Pair new device</b> > <b>See more devices</b></string>
     <!-- Title for the pair hearing device page. [CHAR LIMIT=25] -->
     <string name="accessibility_hearing_device_pairing_page_title">Pair hearing device</string>
     <!-- Subtitle for the pair hearing device page. [CHAR LIMIT=NONE] -->
@@ -11659,6 +11694,13 @@
     <!-- Body text of automatic data switching at dual sim onboarding's primary sim page or SIMs page. [CHAR LIMIT=NONE] -->
     <string name="primary_sim_automatic_data_msg">Use data from either SIM depending on coverage and availability</string>
 
+    <!-- Title of asking the user whether to restart device after enabling DSDS. [CHAR LIMIT=NONE] -->
+    <string name="sim_action_restart_dialog_title">Restart to use 2 SIMs</string>
+    <!-- Body text of asking the user whether to restart device after enabling DSDS. [CHAR LIMIT=NONE] -->
+    <string name="sim_action_restart_dialog_msg">To use 2 SIMs at once, restart your device, then turn on both SIMs</string>
+    <!-- Button text to cancel dialog and then enable the sim -->
+    <string name="sim_action_restart_dialog_cancel">Use <xliff:g id="carrier_name" example="Google Fi">%1$s</xliff:g> only</string>
+
     <!-- Text of phone number item when the sim is data only. [CHAR LIMIT=NONE] -->
     <string name="sim_onboarding_phoneNumber_data_only">Data only</string>
 
@@ -11944,6 +11986,12 @@
     <!-- Toast message when 16k OTA update fails -->
     <string name="toast_16k_update_failed_text">Failed to update kernel to 16KB pages compatible kernel.</string>
     <string name="progress_16k_ota_title">Applying change</string>
+    <!-- Confirmation dialog title and text to reformat data to ext4 -->
+    <string name="confirm_format_ext4_title">Reformat device to ext4?</string>
+    <string name="confirm_format_ext4_text">16K developer option is supported with ext4 filesystem. Device will be wiped and filesystem will be changed to ext4 after confirmation.</string>
+    <!-- Toast on failure to reformat data to ext4 -->
+    <string name="format_ext4_failure_toast">Failed to reformat and wipe the data partiton to ext4.</string>
+
     <!-- DSU Loader. Do not translate. -->
 
     <string name="dsu_loader_title" translatable="false">DSU Loader</string>
@@ -12337,6 +12385,15 @@
 
     <!-- Summary for UWB preference when UWB is unavailable due to regulatory requirements. [CHAR_LIMIT=NONE]-->
     <string name="uwb_settings_summary_no_uwb_regulatory">UWB is unavailable in the current location</string>
+
+    <!-- Title for Thread network preference [CHAR_LIMIT=60] -->
+    <string name="thread_network_settings_title">Thread</string>
+
+    <!-- Summary for Thread network preference. [CHAR_LIMIT=NONE]-->
+    <string name="thread_network_settings_summary">Connect to compatible devices using Thread for a seamless smart home experience</string>
+
+    <!-- Summary for Thread network preference when airplane mode is enabled. [CHAR_LIMIT=NONE]-->
+    <string name="thread_network_settings_summary_airplane_mode">Turn off airplane mode to use Thread</string>
 
     <!-- Label for the camera use toggle [CHAR LIMIT=40] -->
     <string name="camera_toggle_title">Camera access</string>
@@ -12966,11 +13023,6 @@
     <string name="grammatical_gender_title">Grammatical gender</string>
     <!-- Developer settings: select Grammatical gender dialog title [CHAR LIMIT=50]-->
     <string name="grammatical_gender_dialog_title">Select Grammatical gender</string>
-
-    <!-- Do not translate. Developer settings: Title for the screen allowing user to control Quarantined apps [CHAR LIMIT=50] -->
-    <string name="quarantined_apps_title" translatable="false">Quarantined Apps</string>
-    <!-- Do not translate. Developer settings: Button to unquarantine an app [CHAR LIMIT=20] -->
-    <string name="unquarantine_app_button" translatable="false">Unquarantine app</string>
 
     <!-- Title of preference to manage content protection settings -->
     <string name="content_protection_preference_title">Scanning for deceptive apps</string>

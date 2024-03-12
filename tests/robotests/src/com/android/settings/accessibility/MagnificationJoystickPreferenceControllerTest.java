@@ -17,10 +17,10 @@
 package com.android.settings.accessibility;
 
 import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
-import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
@@ -56,38 +56,13 @@ public class MagnificationJoystickPreferenceControllerTest {
         mSwitchPreference.setKey(MagnificationJoystickPreferenceController.PREF_KEY);
         screen.addPreference(mSwitchPreference);
         mController.displayPreference(screen);
-    }
 
-    @Test
-    public void isChecked_defaultStateForJoystick_onResumeShouldReturnFalse() {
-        mController.onResume();
-
-        assertThat(mController.isChecked()).isFalse();
-        assertThat(mSwitchPreference.isChecked()).isFalse();
-    }
-
-    @Test
-    public void isChecked_enableJoystick_onResumeShouldReturnTrue() {
-        Settings.Secure.putInt(mContext.getContentResolver(), KEY_JOYSTICK, ON);
-        mController.onResume();
-
-        assertThat(mController.isChecked()).isTrue();
-        assertThat(mSwitchPreference.isChecked()).isTrue();
-    }
-
-    @Test
-    public void isChecked_disableJoystick_onResumeShouldReturnFalse() {
-        Settings.Secure.putInt(mContext.getContentResolver(), KEY_JOYSTICK, OFF);
-        mController.onResume();
-
-        assertThat(mController.isChecked()).isFalse();
-        assertThat(mSwitchPreference.isChecked()).isFalse();
+        mController.updateState(mSwitchPreference);
+        reset(mSwitchPreference);
     }
 
     @Test
     public void performClick_switchDefaultStateForJoystick_shouldReturnTrue() {
-        mController.onResume();
-
         mSwitchPreference.performClick();
 
         verify(mSwitchPreference).setChecked(true);
@@ -99,7 +74,7 @@ public class MagnificationJoystickPreferenceControllerTest {
     public void updateState_disableJoystick_shouldReturnFalse() {
         Settings.Secure.putInt(mContext.getContentResolver(), KEY_JOYSTICK, OFF);
 
-        mController.updateState();
+        mController.updateState(mSwitchPreference);
 
         verify(mSwitchPreference).setChecked(false);
         assertThat(mController.isChecked()).isFalse();

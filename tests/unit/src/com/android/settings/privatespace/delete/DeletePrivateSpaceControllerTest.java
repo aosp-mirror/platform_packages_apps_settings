@@ -58,7 +58,8 @@ public class DeletePrivateSpaceControllerTest {
     /** Tests that the controller is available when private space flag is enabled. */
     @Test
     public void getAvailabilityStatus_whenPrivateFlagEnabled_returnsAvailable() {
-        mSetFlagsRule.enableFlags(android.os.Flags.FLAG_ALLOW_PRIVATE_PROFILE);
+        mSetFlagsRule.enableFlags(android.os.Flags.FLAG_ALLOW_PRIVATE_PROFILE,
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
 
         assertThat(mDeletePrivateSpaceController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
@@ -66,7 +67,8 @@ public class DeletePrivateSpaceControllerTest {
     /** Tests that the controller is not available when private space flag is disabled. */
     @Test
     public void getAvailabilityStatus_whenPrivateFlagDisabled_returnsUnsupportedOnDevice() {
-        mSetFlagsRule.disableFlags(android.os.Flags.FLAG_ALLOW_PRIVATE_PROFILE);
+        mSetFlagsRule.disableFlags(android.os.Flags.FLAG_ALLOW_PRIVATE_PROFILE,
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
 
         assertThat(mDeletePrivateSpaceController.getAvailabilityStatus())
                 .isEqualTo(UNSUPPORTED_ON_DEVICE);

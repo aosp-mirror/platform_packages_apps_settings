@@ -300,6 +300,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                 launchedCDC = true;
             }
         } else if (android.os.Flags.allowPrivateProfile()
+                && android.multiuser.Flags.enablePrivateSpaceFeatures()
                 && userProperties != null
                 && userProperties.isAuthAlwaysRequiredToDisableQuietMode()
                 && isInternalActivity()) {
@@ -413,7 +414,8 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
 
     private boolean doesUserStateEnforceStrongAuth(int userId) {
         if (android.os.Flags.allowPrivateProfile()
-                && android.multiuser.Flags.enableBiometricsToUnlockPrivateSpace()) {
+                && android.multiuser.Flags.enableBiometricsToUnlockPrivateSpace()
+                && android.multiuser.Flags.enablePrivateSpaceFeatures()) {
             // Check if CE storage for user is locked since biometrics can't unlock fbe/keystore of
             // the profile user using verifyTiedProfileChallenge. Biometrics can still be used if
             // the user is stopped with delayed locking (i.e., with storage unlocked), so the user

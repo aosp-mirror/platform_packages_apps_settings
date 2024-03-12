@@ -52,6 +52,7 @@ public class HidePrivateSpaceSensitiveNotificationsController extends TogglePref
     public int getAvailabilityStatus() {
         if (!android.os.Flags.allowPrivateProfile()
                 || !android.multiuser.Flags.enablePsSensitiveNotificationsToggle()
+                || !android.multiuser.Flags.enablePrivateSpaceFeatures()
                 || !mPrivateSpaceMaintainer.doesPrivateSpaceExist()) {
             return UNSUPPORTED_ON_DEVICE;
         }

@@ -257,6 +257,7 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
     private boolean shouldSkipProfile(UserInfo userInfo) {
         return android.os.Flags.allowPrivateProfile()
                 && android.multiuser.Flags.handleInterleavedSettingsForPrivateSpace()
+                && android.multiuser.Flags.enablePrivateSpaceFeatures()
                 && userInfo.isQuietModeEnabled()
                 && mUm.getUserProperties(userInfo.getUserHandle()).getShowInQuietMode()
                         == UserProperties.SHOW_IN_QUIET_MODE_HIDDEN;

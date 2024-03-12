@@ -104,7 +104,8 @@ public class AutoAdvanceSetupFragment extends InstrumentedFragment {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        if (android.os.Flags.allowPrivateProfile()) {
+        if (android.os.Flags.allowPrivateProfile()
+                && android.multiuser.Flags.enablePrivateSpaceFeatures()) {
             super.onCreate(savedInstanceState);
         }
     }

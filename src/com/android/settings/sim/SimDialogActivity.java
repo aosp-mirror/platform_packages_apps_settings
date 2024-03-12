@@ -136,9 +136,7 @@ public class SimDialogActivity extends FragmentActivity {
         }
 
         if (Flags.isDualSimOnboardingEnabled()
-                && getProgressState() == SubscriptionActionDialogActivity.PROGRESS_IS_SHOWING
-                && (dialogType == PREFERRED_PICK
-                || dialogType == DATA_PICK
+                && (dialogType == DATA_PICK
                 || dialogType == CALLS_PICK
                 || dialogType == SMS_PICK)) {
             Log.d(TAG, "Finish the sim dialog since the sim onboarding is shown");

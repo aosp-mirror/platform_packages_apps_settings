@@ -32,10 +32,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.platform.test.annotations.RequiresFlagsDisabled;
-import android.platform.test.annotations.RequiresFlagsEnabled;
-import android.platform.test.flag.junit.CheckFlagsRule;
-import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
@@ -47,7 +43,6 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.bluetooth.BluetoothPairingDetail;
 import com.android.settings.bluetooth.HearingAidPairingDialogFragment;
 import com.android.settings.bluetooth.Utils;
-import com.android.settings.flags.Flags;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
@@ -81,9 +76,6 @@ public class HearingAidPairingDialogFragmentTest {
 
     @Rule
     public final MockitoRule mockito = MockitoJUnit.rule();
-
-    @Rule
-    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
 
     private static final String TEST_DEVICE_ADDRESS = "00:A1:A1:A1:A1:A1";
     private static final int TEST_LAUNCH_PAGE = SettingsEnums.SETTINGS_CONNECTED_DEVICE_CATEGORY;
@@ -137,8 +129,7 @@ public class HearingAidPairingDialogFragmentTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_NEW_HEARING_DEVICE_PAIRING_PAGE)
-    public void dialogPositiveButtonClick_intentToNewA11yPairingPage() {
+    public void dialogPositiveButtonClick_intentToA11yPairingPage() {
         setupDialog(SettingsEnums.ACCESSIBILITY);
         final AlertDialog dialog = (AlertDialog) mFragment.onCreateDialog(Bundle.EMPTY);
         dialog.show();
@@ -148,20 +139,6 @@ public class HearingAidPairingDialogFragmentTest {
         final Intent intent = shadowOf(mActivity).getNextStartedActivity();
         assertThat(intent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT))
                 .isEqualTo(HearingDevicePairingFragment.class.getName());
-    }
-
-    @Test
-    @RequiresFlagsDisabled(Flags.FLAG_NEW_HEARING_DEVICE_PAIRING_PAGE)
-    public void dialogPositiveButtonClick_intentToOldA11yPairingPage() {
-        setupDialog(SettingsEnums.ACCESSIBILITY);
-        final AlertDialog dialog = (AlertDialog) mFragment.onCreateDialog(Bundle.EMPTY);
-        dialog.show();
-
-        dialog.getButton(DialogInterface.BUTTON_POSITIVE).performClick();
-
-        final Intent intent = shadowOf(mActivity).getNextStartedActivity();
-        assertThat(intent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT))
-                .isEqualTo(HearingDevicePairingDetail.class.getName());
     }
 
     @Test

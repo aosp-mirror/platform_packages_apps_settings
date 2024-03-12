@@ -98,7 +98,20 @@ public final class AccessibilityGestureNavigationTutorialTest {
     @Test
     @RequiresFlagsEnabled(Flags.FLAG_ENABLE_MAGNIFICATION_MULTIPLE_FINGER_MULTIPLE_TAP_GESTURE)
     public void createTutorialPages_turnOnTwoFingerTripleTapShortcut_hasOnePage() {
-        mShortcutTypes |= UserShortcutType.TWOFINGERTRIPLETAP;
+        mShortcutTypes |= UserShortcutType.TWOFINGER_DOUBLETAP;
+
+        final AlertDialog alertDialog =
+                createAccessibilityTutorialDialog(mContext, mShortcutTypes);
+
+        assertThat(createShortcutTutorialPages(mContext,
+                mShortcutTypes)).hasSize(/* expectedSize= */ 1);
+        assertThat(alertDialog).isNotNull();
+    }
+
+    @Test
+    @RequiresFlagsEnabled(android.view.accessibility.Flags.FLAG_A11Y_QS_SHORTCUT)
+    public void createTutorialPages_turnOnQuickSettingShortcut_hasOnePage() {
+        mShortcutTypes |= UserShortcutType.QUICK_SETTINGS;
 
         final AlertDialog alertDialog =
                 createAccessibilityTutorialDialog(mContext, mShortcutTypes);

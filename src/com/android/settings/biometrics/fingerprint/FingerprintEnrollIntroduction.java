@@ -340,6 +340,9 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
             final List<FingerprintSensorPropertiesInternal> props =
                     mFingerprintManager.getSensorPropertiesInternal();
             // This will need to be updated for devices with multiple fingerprint sensors
+            if (props == null || props.isEmpty()) {
+                return R.string.fingerprint_intro_error_unknown;
+            }
             final int max = props.get(0).maxEnrollmentsPerUser;
             final int numEnrolledFingerprints =
                     mFingerprintManager.getEnrolledFingerprints(mUserId).size();
