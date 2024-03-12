@@ -19,6 +19,7 @@ package com.android.settings.network.telephony
 import android.content.Context
 import android.telephony.SubscriptionInfo
 import android.telephony.SubscriptionManager
+import android.util.Log
 import androidx.annotation.VisibleForTesting
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -26,6 +27,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
 import com.android.settings.flags.Flags
+import com.android.settings.network.SimOnboardingActivity
 import com.android.settings.network.SubscriptionInfoListViewModel
 import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
 
@@ -57,6 +59,14 @@ class MobileNetworkSpnPreferenceController(context: Context, key: String) :
     }
 
     override fun onViewCreated(viewLifecycleOwner: LifecycleOwner) {
+        if (!this::lazyViewModel.isInitialized) {
+            Log.e(
+                this.javaClass.simpleName,
+                "lateinit property lazyViewModel has not been initialized"
+            )
+            return
+        }
+
         val viewModel by lazyViewModel
 
         viewModel.subscriptionInfoListFlow

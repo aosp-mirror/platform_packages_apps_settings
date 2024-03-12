@@ -78,6 +78,13 @@ class MobileNetworkImeiPreferenceController(context: Context, key: String) :
     }
 
     override fun onViewCreated(viewLifecycleOwner: LifecycleOwner) {
+        if (!this::lazyViewModel.isInitialized) {
+            Log.e(
+                this.javaClass.simpleName,
+                "lateinit property lazyViewModel has not been initialized"
+            )
+            return
+        }
         val viewModel by lazyViewModel
         val coroutineScope = viewLifecycleOwner.lifecycleScope
 
