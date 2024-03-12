@@ -53,7 +53,7 @@ class SpaLogDataTest {
         bundle.putString(LOG_DATA_SESSION_NAME, SESSION_BROWSE)
         val spaLogData = SpaLogData(TEST_PID, LogEvent.PAGE_ENTER, bundle, dataModel)
 
-        assertThat(spaLogData.getSessionType()).isEqualTo(SettingsEnums.BROWSE)
+        assertThat(spaLogData.getSessionType()).isEqualTo(SettingsEnums.SESSION_BROWSE)
     }
 
     @Test
@@ -61,7 +61,7 @@ class SpaLogDataTest {
         bundle.putString(LOG_DATA_SESSION_NAME, SESSION_SEARCH)
         val spaLogData = SpaLogData(TEST_PID, LogEvent.PAGE_ENTER, bundle, dataModel)
 
-        assertThat(spaLogData.getSessionType()).isEqualTo(SettingsEnums.SEARCH)
+        assertThat(spaLogData.getSessionType()).isEqualTo(SettingsEnums.SESSION_SEARCH)
     }
 
     @Test

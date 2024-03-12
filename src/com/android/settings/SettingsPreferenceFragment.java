@@ -479,6 +479,10 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
                 mDialogFragment.dismiss();
                 mDialogFragment = null;
             }
+            RecyclerView view = getListView();
+            if (view != null) {
+                view.clearOnScrollListeners();
+            }
         }
         super.onDetach();
     }
@@ -737,7 +741,7 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
                 overrideKey, () -> getString(resource)));
     }
 
-    protected void replaceEnterpriseStringSummary(
+    public void replaceEnterpriseStringSummary(
             String preferenceKey, String overrideKey, int resource) {
         Preference preference = findPreference(preferenceKey);
         if (preference == null) {
@@ -750,7 +754,7 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
                         () -> getString(resource)));
     }
 
-    protected void replaceEnterpriseStringTitle(
+    public void replaceEnterpriseStringTitle(
             String preferenceKey, String overrideKey, int resource) {
         Preference preference = findPreference(preferenceKey);
         if (preference == null) {

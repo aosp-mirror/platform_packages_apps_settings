@@ -46,7 +46,7 @@ public abstract class InstrumentedDialogFragment extends ObservableDialogFragmen
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context)
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory()
                 .getMetricsFeatureProvider();
         mLifecycle.addObserver(new VisibilityLoggerMixin(getMetricsCategory(),
                 mMetricsFeatureProvider));

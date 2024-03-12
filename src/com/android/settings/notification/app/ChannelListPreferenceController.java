@@ -34,7 +34,7 @@ import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceGroup;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -313,7 +313,7 @@ public class ChannelListPreferenceController extends NotificationPreferenceContr
                 && isChannelGroupBlockable(group));
         preference.setChecked(!group.isBlocked());
         preference.setOnPreferenceClickListener(preference1 -> {
-            final boolean allowGroup = ((SwitchPreference) preference1).isChecked();
+            final boolean allowGroup = ((TwoStatePreference) preference1).isChecked();
             group.setBlocked(!allowGroup);
             mBackend.updateChannelGroup(mAppRow.pkg, mAppRow.uid, group);
 

@@ -17,16 +17,11 @@ package com.android.settings.fuelgauge.batterytip.tips;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 
 import androidx.preference.Preference;
@@ -72,20 +67,19 @@ public final class IncompatibleChargerTipTest {
 
     @Test
     public void getTitle_showTitle() {
-        assertThat(mIncompatibleChargerTip.getTitle(mContext)).isEqualTo(
-                mContext.getString(R.string.battery_tip_incompatible_charging_title));
+        assertThat(mIncompatibleChargerTip.getTitle(mContext))
+                .isEqualTo(mContext.getString(R.string.battery_tip_incompatible_charging_title));
     }
 
     @Test
     public void getSummary_showSummary() {
-        assertThat(mIncompatibleChargerTip.getSummary(mContext)).isEqualTo(
-                mContext.getString(R.string.battery_tip_incompatible_charging_message));
+        assertThat(mIncompatibleChargerTip.getSummary(mContext))
+                .isEqualTo(mContext.getString(R.string.battery_tip_incompatible_charging_message));
     }
 
     @Test
     public void getIcon_showIcon() {
-        assertThat(mIncompatibleChargerTip.getIconId())
-                .isEqualTo(R.drawable.ic_battery_charger);
+        assertThat(mIncompatibleChargerTip.getIconId()).isEqualTo(R.drawable.ic_battery_charger);
     }
 
     @Test
@@ -93,8 +87,11 @@ public final class IncompatibleChargerTipTest {
         mIncompatibleChargerTip.updateState(mBatteryTip);
         mIncompatibleChargerTip.log(mContext, mMetricsFeatureProvider);
 
-        verify(mMetricsFeatureProvider).action(mContext,
-                SettingsEnums.ACTION_INCOMPATIBLE_CHARGING_TIP, mBatteryTip.mState);
+        verify(mMetricsFeatureProvider)
+                .action(
+                        mContext,
+                        SettingsEnums.ACTION_INCOMPATIBLE_CHARGING_TIP,
+                        mBatteryTip.mState);
     }
 
     @Test

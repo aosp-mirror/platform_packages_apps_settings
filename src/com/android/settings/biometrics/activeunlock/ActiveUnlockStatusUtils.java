@@ -191,12 +191,9 @@ public class ActiveUnlockStatusUtils {
     public String getIntroForActiveUnlock() {
         final boolean faceAllowed = Utils.hasFaceHardware(mContext);
         final boolean fingerprintAllowed = Utils.hasFingerprintHardware(mContext);
-        if (useBiometricFailureLayout()) {
+        if (isAvailable()) {
             int introRes = getIntroRes(faceAllowed, fingerprintAllowed);
             return introRes == 0 ? "" : mContext.getString(introRes);
-        }
-        if (useUnlockIntentLayout() && (!faceAllowed || !fingerprintAllowed)) {
-            return "";
         }
         return mContext.getString(R.string.biometric_settings_intro);
     }

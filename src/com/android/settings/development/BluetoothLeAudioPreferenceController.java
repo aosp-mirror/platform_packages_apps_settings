@@ -24,7 +24,7 @@ import android.os.SystemProperties;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
@@ -84,7 +84,7 @@ public class BluetoothLeAudioPreferenceController
         final boolean leAudioEnabled =
                 (isLeAudioSupportedStatus == BluetoothStatusCodes.FEATURE_SUPPORTED);
 
-        ((SwitchPreference) mPreference).setChecked(!leAudioEnabled);
+        ((TwoStatePreference) mPreference).setChecked(!leAudioEnabled);
 
         // Disable option if Bluetooth is disabled or if switch is not supported
         if (isLeAudioSupportedStatus == BluetoothStatusCodes.ERROR_BLUETOOTH_NOT_ENABLED

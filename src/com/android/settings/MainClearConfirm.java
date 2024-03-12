@@ -212,7 +212,7 @@ public class MainClearConfirm extends InstrumentedFragment {
                         .setText(R.string.main_clear_button_text)
                         .setListener(mFinalClickListener)
                         .setButtonType(ButtonType.OTHER)
-                        .setTheme(R.style.SudGlifButton_Primary)
+                        .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Primary)
                         .build()
         );
     }

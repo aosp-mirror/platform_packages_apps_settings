@@ -57,7 +57,7 @@ public class GesturesSettingsPreferenceControllerTest {
         doReturn(mock(DevicePolicyManager.class)).when(mActivity)
                 .getSystemService(Context.DEVICE_POLICY_SERVICE);
         FakeFeatureFactory.setupForTest();
-        mController = new GesturesSettingPreferenceController(mActivity);
+        mController = new GesturesSettingPreferenceController(mActivity, "test_key");
     }
 
     @Test

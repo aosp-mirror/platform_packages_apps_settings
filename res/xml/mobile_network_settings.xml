@@ -37,12 +37,14 @@
         <ListPreference
             android:key="calls_preference"
             android:title="@string/calls_preference"
+            android:enabled="false"
             settings:controller="com.android.settings.network.telephony.CallsDefaultSubscriptionController"
             settings:allowDividerAbove="true"/>
 
         <ListPreference
             android:key="sms_preference"
             android:title="@string/sms_preference"
+            android:enabled="false"
             settings:controller="com.android.settings.network.telephony.SmsDefaultSubscriptionController"/>
 
         <Preference
@@ -52,14 +54,14 @@
             settings:allowDividerAbove="true"
             settings:allowDividerBelow="false"/>
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="mobile_data_enable"
             android:title="@string/mobile_data_settings_title"
             android:summary="@string/mobile_data_settings_summary"
             settings:controller="com.android.settings.network.telephony.MobileDataPreferenceController"
             settings:allowDividerAbove="true"/>
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="auto_data_switch"
             android:title="@string/auto_data_switch_title"
             android:summary="@string/auto_data_switch_summary"
@@ -84,7 +86,7 @@
             android:title="@string/billing_cycle"
             settings:controller="com.android.settings.datausage.BillingCyclePreferenceController"/>
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="carrier_wifi_toggle"
             android:title="@string/carrier_wifi_offload_title"
             android:summary="@string/carrier_wifi_offload_summary"
@@ -96,13 +98,13 @@
             android:selectable="false"
             settings:searchable="false"/>
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="mms_message"
             android:title="@string/mms_message_title"
             android:summary="@string/mms_message_summary"
             settings:controller="com.android.settings.network.telephony.MmsMessagePreferenceController"/>
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="enhanced_4g_lte"
             android:title="@string/enhanced_4g_lte_mode_title"
             android:persistent="false"
@@ -110,7 +112,7 @@
             settings:keywords="@string/keywords_enhance_4g_lte"
             settings:controller="com.android.settings.network.telephony.Enhanced4gLtePreferenceController"/>
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="4g_calling"
             android:title="@string/enhanced_4g_lte_mode_title_4g_calling"
             android:persistent="false"
@@ -118,7 +120,7 @@
             settings:keywords="@string/keywords_enhance_4g_lte"
             settings:controller="com.android.settings.network.telephony.Enhanced4gCallingPreferenceController"/>
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="advance_call"
             android:title="@string/enhanced_4g_lte_mode_title_advanced_calling"
             android:persistent="false"
@@ -126,7 +128,7 @@
             settings:keywords="@string/keywords_enhance_4g_lte"
             settings:controller="com.android.settings.network.telephony.Enhanced4gAdvancedCallingPreferenceController"/>
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="contact_discovery_opt_in"
             android:title="@string/contact_discovery_opt_in_title"
             android:persistent="false"
@@ -177,7 +179,7 @@
                 </intent>
             </Preference>
 
-            <SwitchPreference
+            <SwitchPreferenceCompat
                 android:key="video_calling_key"
                 android:title="@string/video_calling_settings_title"
                 android:persistent="true"
@@ -208,7 +210,7 @@
             android:title="@string/network_operator_category"
             settings:controller="com.android.settings.network.telephony.NetworkPreferenceCategoryController">
 
-            <SwitchPreference
+            <SwitchPreferenceCompat
                 android:key="auto_select_key"
                 android:title="@string/select_automatically"
                 settings:controller="com.android.settings.network.telephony.gsm.AutoSelectPreferenceController"/>
@@ -242,14 +244,14 @@
             settings:useAdminDisabledSummary="true"
             settings:userRestriction="no_cellular_2g"/>
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="require_cellular_encryption"
             android:title="@string/require_cellular_encryption_title"
             android:summary="@string/require_cellular_encryption_summary"
             settings:controller=
                 "com.android.settings.network.telephony.NullAlgorithmsPreferenceController" />
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="nr_advanced_calling"
             android:title="@string/nr_advanced_calling_title"
             android:persistent="false"

@@ -20,16 +20,15 @@ import static android.app.NotificationManager.BUBBLE_PREFERENCE_NONE;
 import static android.provider.Settings.Secure.NOTIFICATION_BUBBLES;
 
 import android.annotation.Nullable;
-import android.app.ActivityManager;
 import android.app.NotificationChannel;
 import android.content.Context;
 import android.provider.Settings;
 
-import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.notification.BubbleHelper;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settingslib.RestrictedSwitchPreference;
 
@@ -42,10 +41,6 @@ public class BubblePreferenceController extends NotificationPreferenceController
 
     private static final String TAG = "BubblePrefContr";
     private static final String KEY = "bubble_pref";
-    @VisibleForTesting
-    static final int SYSTEM_WIDE_ON = 1;
-    @VisibleForTesting
-    static final int SYSTEM_WIDE_OFF = 0;
 
     private FragmentManager mFragmentManager;
     private boolean mIsAppPage;
@@ -146,9 +141,7 @@ public class BubblePreferenceController extends NotificationPreferenceController
     }
 
     private boolean isEnabled() {
-        ActivityManager am = mContext.getSystemService(ActivityManager.class);
-        return !am.isLowRamDevice() && Settings.Secure.getInt(mContext.getContentResolver(),
-                NOTIFICATION_BUBBLES, SYSTEM_WIDE_OFF) == SYSTEM_WIDE_ON;
+        return BubbleHelper.isEnabledSystemWide(mContext);
     }
 
     /**
@@ -163,7 +156,7 @@ public class BubblePreferenceController extends NotificationPreferenceController
         // correct preference state
         Settings.Secure.putInt(context.getContentResolver(),
                 NOTIFICATION_BUBBLES,
-                SYSTEM_WIDE_OFF);
+                BubbleHelper.SYSTEM_WIDE_OFF);
     }
 
     /**
@@ -176,6 +169,6 @@ public class BubblePreferenceController extends NotificationPreferenceController
         // correct preference state
         Settings.Secure.putInt(context.getContentResolver(),
                 NOTIFICATION_BUBBLES,
-                SYSTEM_WIDE_ON);
+                BubbleHelper.SYSTEM_WIDE_ON);
     }
 }

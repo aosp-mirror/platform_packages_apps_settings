@@ -76,6 +76,8 @@ public class UdfpsEnrollHelper extends InstrumentedFragment {
 
     private int mCenterTouchCount = 0;
 
+    private int mPace = 1;
+
     @Nullable
     UdfpsEnrollHelper.Listener mListener;
 
@@ -157,6 +159,9 @@ public class UdfpsEnrollHelper extends InstrumentedFragment {
             }
         }
 
+        if (mRemainingSteps > remaining) {
+            mPace = mRemainingSteps - remaining;
+        }
         mRemainingSteps = remaining;
 
         if (mListener != null && mTotalSteps != -1) {
@@ -177,7 +182,7 @@ public class UdfpsEnrollHelper extends InstrumentedFragment {
      * Called when a fingerprint image has been acquired, but wasn't processed yet.
      */
     public void onAcquired(boolean isAcquiredGood) {
-        if (mListener != null && mTotalSteps != -1) {
+        if (mListener != null) {
             mListener.onAcquired(isAcquiredGood && animateIfLastStep());
         }
     }
@@ -258,7 +263,7 @@ public class UdfpsEnrollHelper extends InstrumentedFragment {
             return false;
         }
 
-        return mRemainingSteps <= 2 && mRemainingSteps >= 0;
+        return mRemainingSteps <= mPace && mRemainingSteps >= 0;
     }
 
     private int getStageThresholdSteps(int totalSteps, int stageIndex) {

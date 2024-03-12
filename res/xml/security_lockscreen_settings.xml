@@ -28,7 +28,7 @@
             android:summary="@string/summary_placeholder"
             settings:keywords="@string/keywords_lock_screen_notif"/>
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="security_display_lockscreen_bypass"
             android:title="@string/lockscreen_bypass_title"
             android:summary="@string/lockscreen_bypass_summary"
@@ -45,25 +45,25 @@
             android:title="@string/owner_info_settings_title"
             android:summary="@string/owner_info_settings_summary" />
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="lockscreen_privacy_wallet_switch"
             android:title="@string/lockscreen_privacy_wallet_setting_toggle"
             android:summary="@string/lockscreen_privacy_wallet_summary"
             settings:controller="com.android.settings.display.WalletPrivacyPreferenceController" />
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="lock_screen_show_qr_scanner"
             android:title="@string/lockscreen_privacy_qr_code_scanner_setting_toggle"
             android:summary="@string/lockscreen_privacy_qr_code_scanner_summary"
             settings:controller="com.android.settings.display.QRCodeScannerPreferenceController" />
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="lockscreen_privacy_controls_switch"
             android:title="@string/lockscreen_privacy_controls_setting_toggle"
             android:summary="@string/lockscreen_privacy_controls_summary"
             settings:controller="com.android.settings.display.ControlsPrivacyPreferenceController" />
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="lockscreen_trivial_controls_switch"
             android:title="@string/lockscreen_trivial_controls_setting_toggle"
             android:summary="@string/lockscreen_trivial_controls_summary"
@@ -74,7 +74,7 @@
             android:title="@string/lockscreen_quick_affordances_title"
             settings:controller="com.android.settings.display.CustomizableLockScreenQuickAffordancesPreferenceController" />
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="lockscreen_double_line_clock_switch"
             android:title="@string/lockscreen_double_line_clock_setting_toggle"
             android:summary="@string/lockscreen_double_line_clock_summary"
@@ -116,7 +116,7 @@
             settings:searchable="false"
             settings:controller="com.android.settings.gestures.PickupGesturePreferenceController" />
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="ambient_display_notification"
             android:title="@string/doze_title"
             android:summary="@string/doze_summary"

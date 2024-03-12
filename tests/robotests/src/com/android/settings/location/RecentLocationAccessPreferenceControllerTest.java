@@ -80,7 +80,7 @@ public class RecentLocationAccessPreferenceControllerTest {
         mController.init(mDashboardFragment);
         final String key = mController.getPreferenceKey();
         mAppEntitiesHeaderView = LayoutInflater.from(mContext).inflate(
-                R.layout.app_entities_header, null /* root */);
+                com.android.settingslib.widget.entityheader.R.layout.app_entities_header, null /* root */);
         when(mScreen.findPreference(key)).thenReturn(mLayoutPreference);
         when(mLayoutPreference.getKey()).thenReturn(key);
         when(mLayoutPreference.getContext()).thenReturn(mContext);
@@ -108,7 +108,8 @@ public class RecentLocationAccessPreferenceControllerTest {
         final TextView title = mAppEntitiesHeaderView.findViewById(R.id.header_title);
         assertThat(title.getText()).isEqualTo(
                 mContext.getText(R.string.location_category_recent_location_access));
-        final TextView details = mAppEntitiesHeaderView.findViewById(R.id.header_details);
+        final TextView details = mAppEntitiesHeaderView
+                .findViewById(com.android.settingslib.widget.entityheader.R.id.header_details);
         assertThat(details.getText()).isEqualTo(
                 mContext.getText(R.string.location_recent_location_access_view_details));
         assertThat(details.hasOnClickListeners()).isTrue();

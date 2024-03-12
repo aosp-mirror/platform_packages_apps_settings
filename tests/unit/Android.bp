@@ -14,20 +14,16 @@ android_test {
     certificate: "platform",
 
     libs: [
-        "android.test.runner",
         "telephony-common",
         "ims-common",
-        "android.test.base",
-        "android.test.mock",
     ],
 
     static_libs: [
+        "aconfig_settings_flags_lib",
         "androidx.arch.core_core-testing",
         "androidx.test.core",
-        "androidx.test.rules",
         "androidx.test.espresso.core",
-        "androidx.test.espresso.contrib-nodeps",
-        "androidx.test.espresso.intents-nodeps",
+        "androidx.test.rules",
         "androidx.test.ext.junit",
         "androidx.preference_preference",
         "flag-junit",
@@ -35,8 +31,9 @@ android_test {
         "platform-test-annotations",
         "platform-test-rules",
         "truth",
-        "androidx.test.uiautomator_uiautomator",
         "kotlinx_coroutines_test",
+        "flag-junit",
+        "Settings-testutils2",
         // Don't add SettingsLib libraries here - you can use them directly as they are in the
         // instrumented Settings app.
     ],
@@ -44,13 +41,12 @@ android_test {
     errorprone: {
         javacflags: ["-Xep:CheckReturnValue:WARN"],
     },
-
     // Include all test java/kotlin files.
     srcs: [
         "src/**/*.java",
         "src/**/*.kt",
     ],
-
+    use_resource_processor: true,
     platform_apis: true,
     test_suites: ["device-tests"],
 

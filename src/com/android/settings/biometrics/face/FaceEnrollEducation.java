@@ -25,6 +25,8 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.hardware.face.FaceManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -32,6 +34,7 @@ import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ScrollView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -86,6 +89,23 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
                 }
             };
 
+    final View.OnLayoutChangeListener mSwitchDiversityOnLayoutChangeListener =
+            (v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> {
+                if (oldBottom == 0 && bottom != 0) {
+                    new Handler(Looper.getMainLooper()).post(() -> {
+                        final ScrollView scrollView =
+                                findViewById(com.google.android.setupdesign.R.id.sud_scroll_view);
+                        if (scrollView != null) {
+                            scrollView.fullScroll(View.FOCUS_DOWN); // scroll down
+                        }
+                        if (mSwitchDiversity != null) {
+                            mSwitchDiversity.removeOnLayoutChangeListener(
+                                    this.mSwitchDiversityOnLayoutChangeListener);
+                        }
+                    });
+                }
+            };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,7 +137,8 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
                             .setText(R.string.skip_label)
                             .setListener(this::onSkipButtonClick)
                             .setButtonType(FooterButton.ButtonType.SKIP)
-                            .setTheme(R.style.SudGlifButton_Secondary)
+                            .setTheme(
+                                    com.google.android.setupdesign.R.style.SudGlifButton_Secondary)
                             .build()
             );
         } else {
@@ -126,7 +147,8 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
                             .setText(R.string.security_settings_face_enroll_introduction_cancel)
                             .setListener(this::onSkipButtonClick)
                             .setButtonType(FooterButton.ButtonType.CANCEL)
-                            .setTheme(R.style.SudGlifButton_Secondary)
+                            .setTheme(
+                                    com.google.android.setupdesign.R.style.SudGlifButton_Secondary)
                             .build()
             );
         }
@@ -135,7 +157,7 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
                 .setText(R.string.security_settings_face_enroll_education_start)
                 .setListener(this::onNextButtonClick)
                 .setButtonType(FooterButton.ButtonType.NEXT)
-                .setTheme(R.style.SudGlifButton_Primary)
+                .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Primary)
                 .build();
 
         final AccessibilityManager accessibilityManager = getApplicationContext().getSystemService(
@@ -153,6 +175,7 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
             mSwitchDiversity.setChecked(true);
             accessibilityButton.setVisibility(View.GONE);
             mSwitchDiversity.setVisibility(View.VISIBLE);
+            mSwitchDiversity.addOnLayoutChangeListener(mSwitchDiversityOnLayoutChangeListener);
         });
 
         mSwitchDiversity = findViewById(R.id.toggle_diversity);

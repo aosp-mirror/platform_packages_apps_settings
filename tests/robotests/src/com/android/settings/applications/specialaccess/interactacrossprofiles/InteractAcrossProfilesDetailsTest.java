@@ -23,22 +23,32 @@ import static org.robolectric.Shadows.shadowOf;
 import android.content.Context;
 import android.content.PermissionChecker;
 import android.content.pm.CrossProfileApps;
-import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
 import android.os.UserManager;
 
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
+import com.android.settings.testutils.shadow.ShadowApplicationPackageManager;
+import com.android.settings.testutils.shadow.ShadowCrossProfileApps;
+import com.android.settings.testutils.shadow.ShadowUserManager;
+import com.android.settingslib.testutils.shadow.ShadowPermissionChecker;
 
 import com.google.common.collect.ImmutableList;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.shadows.ShadowPermissionChecker;
+import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        ShadowApplicationPackageManager.class,
+        ShadowCrossProfileApps.class,
+        ShadowUserManager.class,
+        ShadowPermissionChecker.class,
+})
 public class InteractAcrossProfilesDetailsTest {
 
     private static final int PERSONAL_PROFILE_ID = 0;
@@ -48,23 +58,34 @@ public class InteractAcrossProfilesDetailsTest {
             "android.permission.INTERACT_ACROSS_PROFILES";
 
     private final Context mContext = ApplicationProvider.getApplicationContext();
-    private final PackageManager mPackageManager = mContext.getPackageManager();
-    private final UserManager mUserManager = mContext.getSystemService(UserManager.class);
-    private final CrossProfileApps mCrossProfileApps = mContext.getSystemService(
-            CrossProfileApps.class);
+    private ShadowUserManager mShadowUserManager;
+    private ShadowCrossProfileApps mShadowCrossProfileApps;
+    private ShadowApplicationPackageManager mShadowPackageManager;
+
+    @Before
+    public void setUp() {
+        mShadowUserManager = (ShadowUserManager) shadowOf(
+                mContext.getSystemService(UserManager.class)
+        );
+        mShadowCrossProfileApps = (ShadowCrossProfileApps) shadowOf(
+                mContext.getSystemService(CrossProfileApps.class)
+        );
+        mShadowPackageManager =
+                (ShadowApplicationPackageManager) shadowOf(mContext.getPackageManager());
+    }
 
     @Test
     public void getPreferenceSummary_appOpAllowed_returnsAllowed() {
-        shadowOf(mUserManager).addUser(
+        mShadowUserManager.addUser(
                 PERSONAL_PROFILE_ID, "personal-profile"/* name */, 0/* flags */);
-        shadowOf(mUserManager).addProfile(
+        mShadowUserManager.addProfile(
                 PERSONAL_PROFILE_ID, WORK_PROFILE_ID,
                 "work-profile"/* profileName */, UserInfo.FLAG_MANAGED_PROFILE);
-        shadowOf(mPackageManager).setInstalledPackagesForUserId(
+        mShadowPackageManager.setInstalledPackagesForUserId(
                 PERSONAL_PROFILE_ID, ImmutableList.of(CROSS_PROFILE_PACKAGE_NAME));
-        shadowOf(mPackageManager).setInstalledPackagesForUserId(
+        mShadowPackageManager.setInstalledPackagesForUserId(
                 WORK_PROFILE_ID, ImmutableList.of(CROSS_PROFILE_PACKAGE_NAME));
-        shadowOf(mCrossProfileApps).addCrossProfilePackage(
+        mShadowCrossProfileApps.addCrossProfilePackage(
                 CROSS_PROFILE_PACKAGE_NAME);
         ShadowPermissionChecker.setResult(
                 CROSS_PROFILE_PACKAGE_NAME,
@@ -78,16 +99,16 @@ public class InteractAcrossProfilesDetailsTest {
 
     @Test
     public void getPreferenceSummary_appOpNotAllowed_returnsNotAllowed() {
-        shadowOf(mUserManager).addUser(
+        mShadowUserManager.addUser(
                 PERSONAL_PROFILE_ID, "personal-profile"/* name */, 0/* flags */);
-        shadowOf(mUserManager).addProfile(
+        mShadowUserManager.addProfile(
                 PERSONAL_PROFILE_ID, WORK_PROFILE_ID,
                 "work-profile"/* profileName */, UserInfo.FLAG_MANAGED_PROFILE);
-        shadowOf(mPackageManager).setInstalledPackagesForUserId(
+        mShadowPackageManager.setInstalledPackagesForUserId(
                 PERSONAL_PROFILE_ID, ImmutableList.of(CROSS_PROFILE_PACKAGE_NAME));
-        shadowOf(mPackageManager).setInstalledPackagesForUserId(
+        mShadowPackageManager.setInstalledPackagesForUserId(
                 WORK_PROFILE_ID, ImmutableList.of(CROSS_PROFILE_PACKAGE_NAME));
-        shadowOf(mCrossProfileApps).addCrossProfilePackage(
+        mShadowCrossProfileApps.addCrossProfilePackage(
                 CROSS_PROFILE_PACKAGE_NAME);
         ShadowPermissionChecker.setResult(
                 CROSS_PROFILE_PACKAGE_NAME,
@@ -101,9 +122,9 @@ public class InteractAcrossProfilesDetailsTest {
 
     @Test
     public void getPreferenceSummary_noWorkProfile_returnsNotAllowed() {
-        shadowOf(mUserManager).addUser(
+        mShadowUserManager.addUser(
                 PERSONAL_PROFILE_ID, "personal-profile"/* name */, 0/* flags */);
-        shadowOf(mPackageManager).setInstalledPackagesForUserId(
+        mShadowPackageManager.setInstalledPackagesForUserId(
                 PERSONAL_PROFILE_ID, ImmutableList.of(CROSS_PROFILE_PACKAGE_NAME));
 
         assertThat(InteractAcrossProfilesDetails.getPreferenceSummary(

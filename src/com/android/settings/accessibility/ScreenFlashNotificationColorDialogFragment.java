@@ -27,6 +27,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.view.View;
 
 import androidx.annotation.ColorInt;
@@ -40,6 +41,7 @@ import com.android.settings.R;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.function.Consumer;
+
 
 /**
  * DialogFragment for Screen flash notification color picker.
@@ -119,7 +121,7 @@ public class ScreenFlashNotificationColorDialogFragment extends DialogFragment i
         synchronized (this) {
             if (mTimer != null) mTimer.cancel();
 
-            mTimer = new Timer();
+            mTimer = createTimer();
             if (mIsPreview) {
                 mTimer.schedule(getStopTask(), 0);
                 startDelay = BETWEEN_STOP_AND_START_DELAY_MS;
@@ -166,14 +168,18 @@ public class ScreenFlashNotificationColorDialogFragment extends DialogFragment i
         Intent intent = new Intent(ACTION_FLASH_NOTIFICATION_START_PREVIEW);
         intent.putExtra(EXTRA_FLASH_NOTIFICATION_PREVIEW_TYPE, TYPE_LONG_PREVIEW);
         intent.putExtra(EXTRA_FLASH_NOTIFICATION_PREVIEW_COLOR, mCurrentColor);
-        getContext().sendBroadcast(intent);
+        getContext().sendBroadcastAsUser(intent, UserHandle.SYSTEM);
     }
 
     private void stopPreviewLocked() {
         if (getContext() == null) return;
 
         Intent stopIntent = new Intent(ACTION_FLASH_NOTIFICATION_STOP_PREVIEW);
-        getContext().sendBroadcast(stopIntent);
+        getContext().sendBroadcastAsUser(stopIntent, UserHandle.SYSTEM);
         mIsPreview = false;
+    }
+
+    Timer createTimer() {
+        return new Timer();
     }
 }

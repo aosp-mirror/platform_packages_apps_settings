@@ -82,6 +82,37 @@ public final class CombinedProviderInfo {
         return mAutofillServiceInfo.getServiceInfo().applicationInfo;
     }
 
+    /** Returns the package name. */
+    public @Nullable String getPackageName() {
+        ApplicationInfo ai = getApplicationInfo();
+        if (ai != null) {
+            return ai.packageName;
+        }
+
+        return null;
+    }
+
+    /** Returns the settings activity. */
+    public @Nullable String getSettingsActivity() {
+        // This logic is not used by the top entry but rather what activity should
+        // be launched from the settings screen.
+        for (CredentialProviderInfo cpi : mCredentialProviderInfos) {
+            final CharSequence settingsActivity = cpi.getSettingsActivity();
+            if (!TextUtils.isEmpty(settingsActivity)) {
+                return String.valueOf(settingsActivity);
+            }
+        }
+
+        if (mAutofillServiceInfo != null) {
+            final String settingsActivity = mAutofillServiceInfo.getSettingsActivity();
+            if (!TextUtils.isEmpty(settingsActivity)) {
+                return settingsActivity;
+            }
+        }
+
+        return null;
+    }
+
     /** Returns the app icon. */
     @Nullable
     public Drawable getAppIcon(@NonNull Context context, int userId) {

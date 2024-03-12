@@ -16,10 +16,8 @@
 
 package com.android.settings.development;
 
-import static com.android.settings.development.AnimatorDurationScalePreferenceController
-        .ANIMATOR_DURATION_SCALE_SELECTOR;
-import static com.android.settings.development.AnimatorDurationScalePreferenceController
-        .DEFAULT_VALUE;
+import static com.android.settings.development.AnimatorDurationScalePreferenceController.ANIMATOR_DURATION_SCALE_SELECTOR;
+import static com.android.settings.development.AnimatorDurationScalePreferenceController.DEFAULT_VALUE;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -30,8 +28,6 @@ import android.view.IWindowManager;
 
 import androidx.preference.ListPreference;
 import androidx.preference.PreferenceScreen;
-
-import com.android.settings.R;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -71,9 +67,9 @@ public class AnimatorDurationScalePreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
         mListValues = mContext.getResources()
-            .getStringArray(R.array.animator_duration_scale_values);
+            .getStringArray(com.android.settingslib.R.array.animator_duration_scale_values);
         mListSummaries = mContext.getResources()
-            .getStringArray(R.array.animator_duration_scale_entries);
+            .getStringArray(com.android.settingslib.R.array.animator_duration_scale_entries);
         mController = new AnimatorDurationScalePreferenceController(mContext);
         ReflectionHelpers.setField(mController, "mWindowManager", mWindowManager);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);

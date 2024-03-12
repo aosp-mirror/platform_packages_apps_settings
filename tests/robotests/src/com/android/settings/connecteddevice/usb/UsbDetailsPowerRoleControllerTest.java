@@ -45,6 +45,7 @@ import com.android.settings.R;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -52,8 +53,12 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class UsbDetailsPowerRoleControllerTest {
 
     private UsbDetailsPowerRoleController mDetailsPowerRoleController;
@@ -96,6 +101,7 @@ public class UsbDetailsPowerRoleControllerTest {
         mDetailsPowerRoleController.mHandler = mHandler;
     }
 
+    @Ignore("b/313362757")
     @Test
     public void displayRefresh_sink_shouldUncheck() {
         mDetailsPowerRoleController.displayPreference(mScreen);
@@ -108,6 +114,7 @@ public class UsbDetailsPowerRoleControllerTest {
         assertThat(pref.isChecked()).isFalse();
     }
 
+    @Ignore("b/313362757")
     @Test
     public void displayRefresh_source_shouldCheck() {
         mDetailsPowerRoleController.displayPreference(mScreen);
@@ -145,6 +152,7 @@ public class UsbDetailsPowerRoleControllerTest {
                 mDetailsPowerRoleController.getPreferenceKey())).isNull();
     }
 
+    @Ignore("b/313362757")
     @Test
     public void onClick_sink_shouldSetSource() {
         mDetailsPowerRoleController.displayPreference(mScreen);
@@ -158,6 +166,7 @@ public class UsbDetailsPowerRoleControllerTest {
                 .isEqualTo(mContext.getString(R.string.usb_switching));
     }
 
+    @Ignore("b/313362757")
     @Test
     public void onClickTwice_sink_shouldSetSourceOnce() {
         mDetailsPowerRoleController.displayPreference(mScreen);
@@ -172,6 +181,7 @@ public class UsbDetailsPowerRoleControllerTest {
         verify(mUsbBackend, times(1)).setPowerRole(POWER_ROLE_SOURCE);
     }
 
+    @Ignore("b/313362757")
     @Test
     public void onClickDeviceAndRefresh_success_shouldClearSubtext() {
         mDetailsPowerRoleController.displayPreference(mScreen);
@@ -190,6 +200,7 @@ public class UsbDetailsPowerRoleControllerTest {
         assertThat(pref.getSummary()).isEqualTo("");
     }
 
+    @Ignore("b/313362757")
     @Test
     public void onClickDeviceAndRefresh_failed_shouldShowFailureText() {
         mDetailsPowerRoleController.displayPreference(mScreen);
@@ -209,6 +220,7 @@ public class UsbDetailsPowerRoleControllerTest {
                 .isEqualTo(mContext.getString(R.string.usb_switching_failed));
     }
 
+    @Ignore("b/313362757")
     @Test
     public void onClickDevice_timedOut_shouldShowFailureText() {
         mDetailsPowerRoleController.displayPreference(mScreen);

@@ -66,6 +66,7 @@ public class SavedAccessPointsPreferenceController2 extends BasePreferenceContro
         super.displayPreference(screen);
     }
 
+    @VisibleForTesting
     void displayPreference(PreferenceScreen screen, List<WifiEntry> wifiEntries) {
         if (wifiEntries == null || wifiEntries.isEmpty()) {
             mWifiEntries.clear();
@@ -89,28 +90,32 @@ public class SavedAccessPointsPreferenceController2 extends BasePreferenceContro
      * mPreferenceGroup.removeAll() then mPreferenceGroup.addPreference for mWifiEntries.
      */
     private void updatePreference() {
-        // Remove the Preference of removed WifiEntry.
-        final List<String> removedPreferenceKeys = new ArrayList<>();
-        final int preferenceCount = mPreferenceGroup.getPreferenceCount();
+        // Update WifiEntry to existing preference and find out which WifiEntry was removed by key.
+        List<String> removedKeys = new ArrayList<>();
+        int preferenceCount = mPreferenceGroup.getPreferenceCount();
         for (int i = 0; i < preferenceCount; i++) {
-            final String key = mPreferenceGroup.getPreference(i).getKey();
-            if (mWifiEntries.stream().filter(wifiEntry ->
-                    TextUtils.equals(key, wifiEntry.getKey())).count() == 0) {
-                removedPreferenceKeys.add(key);
+            WifiEntryPreference pref = (WifiEntryPreference) mPreferenceGroup.getPreference(i);
+            WifiEntry wifiEntry = mWifiEntries.stream()
+                    .filter(entry -> TextUtils.equals(pref.getKey(), entry.getKey()))
+                    .findFirst()
+                    .orElse(null);
+            if (wifiEntry != null) {
+                pref.setWifiEntry(wifiEntry);
+            } else {
+                removedKeys.add(pref.getKey());
             }
         }
-        for (String removedPreferenceKey : removedPreferenceKeys) {
-            mPreferenceGroup.removePreference(
-                    mPreferenceGroup.findPreference(removedPreferenceKey));
+        // Remove preference by WifiEntry's key.
+        for (String removedKey : removedKeys) {
+            mPreferenceGroup.removePreference(mPreferenceGroup.findPreference(removedKey));
         }
 
         // Add the Preference of new added WifiEntry.
         for (WifiEntry wifiEntry : mWifiEntries) {
             if (mPreferenceGroup.findPreference(wifiEntry.getKey()) == null) {
-                final WifiEntryPreference preference = new WifiEntryPreference(mContext, wifiEntry);
+                WifiEntryPreference preference = new WifiEntryPreference(mContext, wifiEntry);
                 preference.setKey(wifiEntry.getKey());
                 preference.setOnPreferenceClickListener(this);
-
                 mPreferenceGroup.addPreference(preference);
             }
         }

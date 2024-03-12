@@ -20,7 +20,8 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.SystemProperties;
 import android.provider.Settings;
-import android.widget.Switch;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
@@ -29,11 +30,10 @@ import com.android.internal.util.Preconditions;
 import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settingslib.Utils;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 /** Handles the logic for flipping the storage management toggle on a {@link SwitchBar}. */
 public class AutomaticStorageManagerSwitchBarController
-        implements OnMainSwitchChangeListener {
+        implements OnCheckedChangeListener {
     private static final String STORAGE_MANAGER_ENABLED_BY_DEFAULT_PROPERTY =
             "ro.storage_manager.enabled";
 
@@ -64,7 +64,7 @@ public class AutomaticStorageManagerSwitchBarController
     }
 
     @Override
-    public void onSwitchChanged(Switch switchView, boolean isChecked) {
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         mMetrics.action(mContext, SettingsEnums.ACTION_TOGGLE_STORAGE_MANAGER, isChecked);
         mDaysToRetainPreference.setEnabled(isChecked);
         Settings.Secure.putInt(

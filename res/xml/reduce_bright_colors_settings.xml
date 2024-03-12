@@ -30,7 +30,7 @@
         settings:tickMark="@android:color/transparent"
     />
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="rbc_persist"
         android:persistent="false"
         android:title="@string/reduce_bright_colors_persist_preference_title" />

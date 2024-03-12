@@ -25,7 +25,7 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-/** FeatureProvider for USB settings */
+/** FeatureProvider for USB settings **/
 public interface StylusFeatureProvider {
 
     /**

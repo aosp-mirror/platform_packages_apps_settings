@@ -57,8 +57,7 @@ public final class BatteryOptimizeLogUtilsTest {
         BatteryOptimizeLogUtils.writeLog(mContext, Action.APPLY, "pkg1", "logs");
         BatteryOptimizeLogUtils.printBatteryOptimizeHistoricalLog(mContext, mTestPrintWriter);
 
-        assertThat(mTestStringWriter.toString()).contains(
-                "pkg1\taction:APPLY\tevent:logs");
+        assertThat(mTestStringWriter.toString()).contains("pkg1\taction:APPLY\tevent:logs");
     }
 
     @Test

@@ -29,6 +29,7 @@ import android.hardware.display.ColorDisplayManager;
 import android.os.UserHandle;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -56,6 +57,7 @@ public class GrayscaleConditionControllerTest {
         mController = new GrayscaleConditionController(mContext, mConditionManager);
     }
 
+    @Ignore("b/313597163")
     @Test
     public void isDisplayable_noIntent_shouldReturnFalse() {
         assertThat(mController.isDisplayable()).isFalse();

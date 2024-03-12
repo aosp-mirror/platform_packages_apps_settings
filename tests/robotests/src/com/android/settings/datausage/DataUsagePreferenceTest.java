@@ -61,7 +61,7 @@ public class DataUsagePreferenceTest {
 
         mPreference.setTemplate(new NetworkTemplate.Builder(NetworkTemplate.MATCH_MOBILE)
                 .setMeteredness(NetworkStats.METERED_YES).build(),
-                5 /* subId */, null /* services */);
+                5 /* subId */);
 
         verify(mPreference).setEnabled(false);
         verify(mPreference).setIntent(null);
@@ -73,7 +73,7 @@ public class DataUsagePreferenceTest {
 
         mPreference.setTemplate(new NetworkTemplate.Builder(NetworkTemplate.MATCH_MOBILE)
                 .setMeteredness(NetworkStats.METERED_YES).build(),
-                5 /* subId */, null /* services */);
+                5 /* subId */);
 
         verify(mPreference, never()).setEnabled(false);
         verify(mPreference).setIntent(any(Intent.class));

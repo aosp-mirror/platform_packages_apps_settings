@@ -145,7 +145,7 @@ public class ContextualCardLoaderTest {
     @Test
     public void getCardCount_hasConfiguredCardCount_returnConfiguredCardCount() {
         int configCount = 4;
-        Settings.Global.putLong(mContext.getContentResolver(),
+        Settings.Global.putInt(mContext.getContentResolver(),
                 ContextualCardLoader.CONTEXTUAL_CARD_COUNT, configCount);
 
         assertThat(mContextualCardLoader.getCardCount()).isEqualTo(configCount);
@@ -168,18 +168,13 @@ public class ContextualCardLoaderTest {
                 .setName("test_dark_theme")
                 .setCardType(ContextualCard.CardType.SLICE)
                 .setSliceUri(CustomSliceRegistry.DARK_THEME_SLICE_URI)
+                .setCategory(STICKY_VALUE)
                 .build());
         cards.add(new ContextualCard.Builder()
                 .setName("test_gesture")
                 .setCardType(ContextualCard.CardType.SLICE)
                 .setSliceUri(Uri.parse(
                         "content://com.android.settings.test.slices/action/gesture_pick_up"))
-                .build());
-        cards.add(new ContextualCard.Builder()
-                .setName("test_wifi")
-                .setCardType(ContextualCard.CardType.SLICE)
-                .setSliceUri(CustomSliceRegistry.CONTEXTUAL_WIFI_SLICE_URI)
-                .setCategory(STICKY_VALUE)
                 .build());
         cards.add(new ContextualCard.Builder()
                 .setName("test_connected")

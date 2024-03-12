@@ -19,6 +19,8 @@ package com.android.settings.network;
 import static androidx.lifecycle.Lifecycle.Event.ON_PAUSE;
 import static androidx.lifecycle.Lifecycle.Event.ON_RESUME;
 
+import static com.android.settings.network.MobileIconGroupExtKt.getSummaryForSub;
+import static com.android.settings.network.MobileIconGroupExtKt.maybeToHtml;
 import static com.android.settings.network.telephony.MobileNetworkUtils.NO_CELL_DATA_TYPE_ICON;
 import static com.android.settingslib.mobile.MobileMappings.getIconKey;
 import static com.android.settingslib.mobile.MobileMappings.mapIconSets;
@@ -39,7 +41,6 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyCallback;
 import android.telephony.TelephonyDisplayInfo;
 import android.telephony.TelephonyManager;
-import android.text.Html;
 import android.util.ArraySet;
 import android.util.Log;
 
@@ -265,9 +266,8 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
 
     /**@return {@code true} if subId is the default data sub. **/
     private boolean isDds(int subId) {
-        return mSubscriptionManager.getDefaultDataSubscriptionInfo() != null
-                && mSubscriptionManager.getDefaultDataSubscriptionInfo().getSubscriptionId()
-                == subId;
+        SubscriptionInfo info = mSubscriptionManager.getDefaultDataSubscriptionInfo();
+        return info != null && info.getSubscriptionId() == subId;
     }
 
     private CharSequence getMobilePreferenceSummary(int subId) {
@@ -290,18 +290,19 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         String result = mSubsPrefCtrlInjector.getNetworkType(mContext, mConfig,
                 mTelephonyDisplayInfo, subId, isCarrierNetworkActive, mCarrierNetworkChangeMode);
         if (mSubsPrefCtrlInjector.isActiveCellularNetwork(mContext) || isCarrierNetworkActive) {
+            String connectionState = mContext.getString(isDds
+                    ? R.string.mobile_data_connection_active
+                    : R.string.mobile_data_temp_connection_active);
             if (result.isEmpty()) {
-                result = mContext.getString(isDds ? R.string.mobile_data_connection_active
-                        : R.string.mobile_data_temp_connection_active);
+                return connectionState;
             } else {
-                result = mContext.getString(R.string.preference_summary_default_combination,
-                        mContext.getString(isDds ? R.string.mobile_data_connection_active
-                                : R.string.mobile_data_temp_connection_active), result);
+                result = mContext.getString(
+                        R.string.preference_summary_default_combination, connectionState, result);
             }
         } else if (!isDataInService) {
-            result = mContext.getString(R.string.mobile_data_no_connection);
+            return mContext.getString(R.string.mobile_data_no_connection);
         }
-        return Html.fromHtml(result, Html.FROM_HTML_MODE_LEGACY);
+        return maybeToHtml(result);
     }
 
     @VisibleForTesting
@@ -520,7 +521,7 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
          * Uses to inject function and value for class and test class.
          */
         public boolean canSubscriptionBeDisplayed(Context context, int subId) {
-            return (SubscriptionUtil.getAvailableSubscription(context,
+            return (SubscriptionUtil.getAvailableSubscriptionBySubIdAndShowingForUser(context,
                     ProxySubscriptionManager.getInstance(context), subId) != null);
         }
 
@@ -580,10 +581,7 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
                 return "";
             }
 
-            int resId = iconGroup.dataContentDescription;
-            return resId != 0
-                    ? SubscriptionManager.getResourcesForSubId(context, subId).getString(resId)
-                    : "";
+            return getSummaryForSub(iconGroup, context, subId);
         }
 
         /**

@@ -16,12 +16,16 @@
 
 package com.android.settings.network.telephony;
 
+import static android.telephony.TelephonyManager.CALL_STATE_IDLE;
+
 import static androidx.lifecycle.Lifecycle.Event.ON_PAUSE;
 import static androidx.lifecycle.Lifecycle.Event.ON_RESUME;
 
 import android.content.Context;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyCallback;
+import android.telephony.TelephonyManager;
 
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
@@ -40,26 +44,40 @@ public class MobileNetworkSwitchController extends BasePreferenceController impl
     private int mSubId;
     private SubscriptionsChangeListener mChangeListener;
     private SubscriptionManager mSubscriptionManager;
+    private TelephonyManager mTelephonyManager;
+    private CallStateTelephonyCallback mCallStateCallback;
 
     public MobileNetworkSwitchController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
         mSubscriptionManager = mContext.getSystemService(SubscriptionManager.class);
+        mTelephonyManager = mContext.getSystemService(TelephonyManager.class);
         mChangeListener = new SubscriptionsChangeListener(context, this);
     }
 
     void init(int subId) {
         mSubId = subId;
+        mTelephonyManager = mTelephonyManager.createForSubscriptionId(mSubId);
     }
 
     @OnLifecycleEvent(ON_RESUME)
     public void onResume() {
         mChangeListener.start();
+
+        if (mCallStateCallback == null) {
+            mCallStateCallback = new CallStateTelephonyCallback();
+            mTelephonyManager.registerTelephonyCallback(
+                    mContext.getMainExecutor(), mCallStateCallback);
+        }
         update();
     }
 
     @OnLifecycleEvent(ON_PAUSE)
     public void onPause() {
+        if (mCallStateCallback != null) {
+            mTelephonyManager.unregisterTelephonyCallback(mCallStateCallback);
+            mCallStateCallback = null;
+        }
         mChangeListener.stop();
     }
 
@@ -68,7 +86,7 @@ public class MobileNetworkSwitchController extends BasePreferenceController impl
         super.displayPreference(screen);
         mSwitchBar = (SettingsMainSwitchPreference) screen.findPreference(mPreferenceKey);
 
-        mSwitchBar.setOnBeforeCheckedChangeListener((toggleSwitch, isChecked) -> {
+        mSwitchBar.setOnBeforeCheckedChangeListener((isChecked) -> {
             // TODO b/135222940: re-evaluate whether to use
             // mSubscriptionManager#isSubscriptionEnabled
             if (mSubscriptionManager.isActiveSubscriptionId(mSubId) != isChecked) {
@@ -117,5 +135,13 @@ public class MobileNetworkSwitchController extends BasePreferenceController impl
     @Override
     public void onSubscriptionsChanged() {
         update();
+    }
+
+    private class CallStateTelephonyCallback extends TelephonyCallback implements
+            TelephonyCallback.CallStateListener {
+        @Override
+        public void onCallStateChanged(int state) {
+            mSwitchBar.setSwitchBarEnabled(state == CALL_STATE_IDLE);
+        }
     }
 }

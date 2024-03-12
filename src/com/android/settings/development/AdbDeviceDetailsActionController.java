@@ -70,7 +70,7 @@ public class AdbDeviceDetailsActionController extends AbstractPreferenceControll
         mButtonsPref = ((ActionButtonsPreference) screen.findPreference(getPreferenceKey()))
                 .setButton1Visible(false)
                 .setButton2Icon(R.drawable.ic_settings_delete)
-                .setButton2Text(R.string.adb_device_forget)
+                .setButton2Text(com.android.settingslib.R.string.adb_device_forget)
                 .setButton2OnClickListener(view -> forgetDevice());
     }
 

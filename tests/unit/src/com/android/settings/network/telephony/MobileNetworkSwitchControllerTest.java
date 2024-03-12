@@ -35,6 +35,8 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyCallback;
+import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -44,28 +46,32 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.PreferenceViewHolder;
 import androidx.test.annotation.UiThreadTest;
 import androidx.test.core.app.ApplicationProvider;
-import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.widget.SettingsMainSwitchPreference;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 
 import java.util.Arrays;
+import java.util.concurrent.Executor;
 
-@RunWith(AndroidJUnit4.class)
 public class MobileNetworkSwitchControllerTest {
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+
     @Mock
     private SubscriptionManager mSubscriptionManager;
     @Mock
     private SubscriptionInfo mSubscription;
+    @Mock
+    private TelephonyManager mTelephonyManager;
 
     private PreferenceScreen mScreen;
     private PreferenceManager mPreferenceManager;
@@ -76,7 +82,9 @@ public class MobileNetworkSwitchControllerTest {
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
+        if (Looper.myLooper() == null) {
+            Looper.prepare();
+        }
         mContext = spy(ApplicationProvider.getApplicationContext());
         when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
         when(mSubscriptionManager.setSubscriptionEnabled(eq(mSubId), anyBoolean()))
@@ -89,18 +97,19 @@ public class MobileNetworkSwitchControllerTest {
         when(sub2.getSubscriptionId()).thenReturn(456);
         SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(mSubscription, sub2));
 
+        when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
+        when(mTelephonyManager.createForSubscriptionId(mSubId))
+                .thenReturn(mTelephonyManager);
+
         final String key = "prefKey";
         mController = new MobileNetworkSwitchController(mContext, key);
         mController.init(mSubscription.getSubscriptionId());
-
-        if (Looper.myLooper() == null) {
-            Looper.prepare();
-        }
 
         mPreferenceManager = new PreferenceManager(mContext);
         mScreen = mPreferenceManager.createPreferenceScreen(mContext);
         mSwitchBar = new SettingsMainSwitchPreference(mContext);
         mSwitchBar.setKey(key);
+        mSwitchBar.setTitle("123");
         mScreen.addPreference(mSwitchBar);
 
         final LayoutInflater inflater = LayoutInflater.from(mContext);
@@ -117,7 +126,6 @@ public class MobileNetworkSwitchControllerTest {
 
     @Test
     @UiThreadTest
-    @Ignore
     public void isAvailable_pSIM_isNotAvailable() {
         when(mSubscription.isEmbedded()).thenReturn(false);
         mController.displayPreference(mScreen);
@@ -130,7 +138,6 @@ public class MobileNetworkSwitchControllerTest {
 
     @Test
     @UiThreadTest
-    @Ignore
     public void displayPreference_oneEnabledSubscription_switchBarNotHidden() {
         doReturn(true).when(mSubscriptionManager).isActiveSubscriptionId(mSubId);
         SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(mSubscription));
@@ -140,7 +147,6 @@ public class MobileNetworkSwitchControllerTest {
 
     @Test
     @UiThreadTest
-    @Ignore
     public void displayPreference_oneDisabledSubscription_switchBarNotHidden() {
         doReturn(false).when(mSubscriptionManager).isActiveSubscriptionId(mSubId);
         SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(mSubscription));
@@ -152,7 +158,6 @@ public class MobileNetworkSwitchControllerTest {
 
     @Test
     @UiThreadTest
-    @Ignore
     public void displayPreference_subscriptionEnabled_switchIsOn() {
         when(mSubscriptionManager.isActiveSubscriptionId(mSubId)).thenReturn(true);
         mController.displayPreference(mScreen);
@@ -162,7 +167,6 @@ public class MobileNetworkSwitchControllerTest {
 
     @Test
     @UiThreadTest
-    @Ignore
     public void displayPreference_subscriptionDisabled_switchIsOff() {
         when(mSubscriptionManager.isActiveSubscriptionId(mSubId)).thenReturn(false);
 
@@ -174,7 +178,6 @@ public class MobileNetworkSwitchControllerTest {
 
     @Test
     @UiThreadTest
-    @Ignore
     public void switchChangeListener_fromEnabledToDisabled_setSubscriptionEnabledCalledCorrectly() {
         when(mSubscriptionManager.isActiveSubscriptionId(mSubId)).thenReturn(true);
         mController.displayPreference(mScreen);
@@ -183,18 +186,24 @@ public class MobileNetworkSwitchControllerTest {
 
         final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
         doNothing().when(mContext).startActivity(intentCaptor.capture());
+
+        // set switch off then should start a Activity.
         mSwitchBar.setChecked(false);
+
+        when(mSubscriptionManager.isActiveSubscriptionId(mSubId)).thenReturn(false);
+        // Simulate action of back from previous activity.
+        mController.displayPreference(mScreen);
         Bundle extra = intentCaptor.getValue().getExtras();
 
         verify(mContext, times(1)).startActivity(any());
         assertThat(extra.getInt(ToggleSubscriptionDialogActivity.ARG_SUB_ID)).isEqualTo(mSubId);
         assertThat(extra.getBoolean(ToggleSubscriptionDialogActivity.ARG_enable))
                 .isEqualTo(false);
+        assertThat(mSwitchBar.isChecked()).isFalse();
     }
 
     @Test
     @UiThreadTest
-    @Ignore
     public void switchChangeListener_fromEnabledToDisabled_setSubscriptionEnabledFailed() {
         when(mSubscriptionManager.setSubscriptionEnabled(eq(mSubId), anyBoolean()))
                 .thenReturn(false);
@@ -205,7 +214,12 @@ public class MobileNetworkSwitchControllerTest {
 
         final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
         doNothing().when(mContext).startActivity(intentCaptor.capture());
+
+        // set switch off then should start a Activity.
         mSwitchBar.setChecked(false);
+
+        // Simulate action of back from previous activity.
+        mController.displayPreference(mScreen);
         Bundle extra = intentCaptor.getValue().getExtras();
 
         verify(mContext, times(1)).startActivity(any());
@@ -217,7 +231,6 @@ public class MobileNetworkSwitchControllerTest {
 
     @Test
     @UiThreadTest
-    @Ignore
     public void switchChangeListener_fromDisabledToEnabled_setSubscriptionEnabledCalledCorrectly() {
         when(mSubscriptionManager.isActiveSubscriptionId(mSubId)).thenReturn(false);
         mController.displayPreference(mScreen);
@@ -232,5 +245,25 @@ public class MobileNetworkSwitchControllerTest {
         verify(mContext, times(1)).startActivity(any());
         assertThat(extra.getInt(ToggleSubscriptionDialogActivity.ARG_SUB_ID)).isEqualTo(mSubId);
         assertThat(extra.getBoolean(ToggleSubscriptionDialogActivity.ARG_enable)).isEqualTo(true);
+    }
+    @Test
+    @UiThreadTest
+    public void onResumeAndonPause_registerAndUnregisterTelephonyCallback() {
+        mController.onResume();
+
+        verify(mTelephonyManager)
+                .registerTelephonyCallback(any(Executor.class), any(TelephonyCallback.class));
+
+        mController.onPause();
+        verify(mTelephonyManager)
+                .unregisterTelephonyCallback(any(TelephonyCallback.class));
+    }
+
+    @Test
+    @UiThreadTest
+    public void onPause_doNotRegisterAndUnregisterTelephonyCallback() {
+        mController.onPause();
+        verify(mTelephonyManager, times(0))
+                .unregisterTelephonyCallback(any(TelephonyCallback.class));
     }
 }

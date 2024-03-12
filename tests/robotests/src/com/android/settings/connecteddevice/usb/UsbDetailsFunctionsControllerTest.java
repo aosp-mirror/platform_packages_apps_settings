@@ -58,6 +58,9 @@ import java.util.Iterator;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class UsbDetailsFunctionsControllerTest {
 
     private UsbDetailsFunctionsController mDetailsFunctionsController;
@@ -220,7 +223,7 @@ public class UsbDetailsFunctionsControllerTest {
         assertThat(prefs.get(3).isChecked()).isFalse();
     }
 
-    @Ignore
+    @Ignore("b/313362757")
     @Test
     public void onClickNone_mtpEnabled_shouldDisableMtp() {
         when(mUsbBackend.areFunctionsSupported(anyLong())).thenReturn(true);

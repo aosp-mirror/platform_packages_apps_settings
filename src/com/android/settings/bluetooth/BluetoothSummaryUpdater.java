@@ -80,9 +80,9 @@ public final class BluetoothSummaryUpdater extends SummaryUpdater implements Blu
             case BluetoothAdapter.STATE_CONNECTED:
                 return getConnectedDeviceSummary();
             case BluetoothAdapter.STATE_CONNECTING:
-                return mContext.getString(R.string.bluetooth_connecting);
+                return mContext.getString(com.android.settingslib.R.string.bluetooth_connecting);
             case BluetoothAdapter.STATE_DISCONNECTING:
-                return mContext.getString(R.string.bluetooth_disconnecting);
+                return mContext.getString(com.android.settingslib.R.string.bluetooth_disconnecting);
             default:
                 return mContext.getString(R.string.disconnected);
         }

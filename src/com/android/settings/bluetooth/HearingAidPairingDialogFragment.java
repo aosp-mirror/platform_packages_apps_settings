@@ -28,6 +28,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.R;
+import com.android.settings.accessibility.HearingDevicePairingDetail;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
@@ -41,6 +42,8 @@ public class HearingAidPairingDialogFragment extends InstrumentedDialogFragment 
         CachedBluetoothDevice.Callback {
     public static final String TAG = "HearingAidPairingDialogFragment";
     private static final String KEY_DEVICE_ADDRESS = "device_address";
+    private static final String KEY_LAUNCH_PAGE = "launch_page";
+
     private LocalBluetoothManager mLocalBluetoothManager;
     private CachedBluetoothDevice mDevice;
 
@@ -50,11 +53,17 @@ public class HearingAidPairingDialogFragment extends InstrumentedDialogFragment 
      *
      * @param deviceAddress The remote Bluetooth device address, that needs to be a hearing aid
      *                      device.
+     * @param launchPage The id of the page where this dialog launch from. Should be one of
+     *                   {@link SettingsEnums#ACCESSIBILITY},
+     *                   {@link SettingsEnums#ACCESSIBILITY_HEARING_AID_SETTINGS}, or
+     *                   {@link SettingsEnums#SETTINGS_CONNECTED_DEVICE_CATEGORY}
      * @return a DialogFragment
      */
-    public static HearingAidPairingDialogFragment newInstance(String deviceAddress) {
+    public static HearingAidPairingDialogFragment newInstance(String deviceAddress,
+            int launchPage) {
         Bundle args = new Bundle(1);
         args.putString(KEY_DEVICE_ADDRESS, deviceAddress);
+        args.putInt(KEY_LAUNCH_PAGE, launchPage);
         final HearingAidPairingDialogFragment fragment = new HearingAidPairingDialogFragment();
         fragment.setArguments(args);
         return fragment;
@@ -111,8 +120,14 @@ public class HearingAidPairingDialogFragment extends InstrumentedDialogFragment 
     }
 
     private void positiveButtonListener() {
+        final int launchPage = getArguments().getInt(KEY_LAUNCH_PAGE);
+        final boolean launchFromA11y = (launchPage == SettingsEnums.ACCESSIBILITY)
+                || (launchPage == SettingsEnums.ACCESSIBILITY_HEARING_AID_SETTINGS);
+        final String destination = launchFromA11y
+                ? HearingDevicePairingDetail.class.getName()
+                : BluetoothPairingDetail.class.getName();
         new SubSettingLauncher(getActivity())
-                .setDestination(BluetoothPairingDetail.class.getName())
+                .setDestination(destination)
                 .setSourceMetricsCategory(getMetricsCategory())
                 .launch();
     }

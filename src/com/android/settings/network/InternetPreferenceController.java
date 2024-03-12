@@ -24,6 +24,7 @@ import static com.android.settings.network.InternetUpdater.INTERNET_ETHERNET;
 import static com.android.settings.network.InternetUpdater.INTERNET_NETWORKS_AVAILABLE;
 import static com.android.settings.network.InternetUpdater.INTERNET_OFF;
 import static com.android.settings.network.InternetUpdater.INTERNET_WIFI;
+import static com.android.settingslib.wifi.WifiUtils.getHotspotIconResource;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -40,11 +41,16 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.widget.SummaryUpdater;
+import com.android.settings.wifi.WifiPickerTrackerHelper;
 import com.android.settings.wifi.WifiSummaryUpdater;
+import com.android.settings.wifi.repository.SharedConnectivityRepository;
 import com.android.settingslib.Utils;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
 import com.android.settingslib.utils.ThreadUtils;
+import com.android.wifitrackerlib.HotspotNetworkEntry;
+import com.android.wifitrackerlib.WifiEntry;
+import com.android.wifitrackerlib.WifiPickerTracker;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -57,12 +63,14 @@ import java.util.Map;
 public class InternetPreferenceController extends AbstractPreferenceController implements
         LifecycleObserver, SummaryUpdater.OnSummaryChangeListener,
         InternetUpdater.InternetChangeListener, MobileNetworkRepository.MobileNetworkCallback,
-        DefaultSubscriptionReceiver.DefaultSubscriptionListener {
+        DefaultSubscriptionReceiver.DefaultSubscriptionListener,
+        WifiPickerTracker.WifiPickerTrackerCallback {
 
     public static final String KEY = "internet_settings";
 
     private Preference mPreference;
-    private final WifiSummaryUpdater mSummaryHelper;
+    @VisibleForTesting
+    WifiSummaryUpdater mSummaryHelper;
     private InternetUpdater mInternetUpdater;
     private @InternetUpdater.InternetType int mInternetType;
     private LifecycleOwner mLifecycleOwner;
@@ -70,6 +78,9 @@ public class InternetPreferenceController extends AbstractPreferenceController i
     private List<SubscriptionInfoEntity> mSubInfoEntityList = new ArrayList<>();
     private int mDefaultDataSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     private DefaultSubscriptionReceiver mDataSubscriptionChangedReceiver;
+    private boolean mIsHotspotNetworkEnabled = SharedConnectivityRepository.isDeviceConfigEnabled();
+    @VisibleForTesting
+    WifiPickerTrackerHelper mWifiPickerTrackerHelper;
 
     @VisibleForTesting
     static Map<Integer, Integer> sIconMap = new HashMap<>();
@@ -102,6 +113,9 @@ public class InternetPreferenceController extends AbstractPreferenceController i
         mLifecycleOwner = lifecycleOwner;
         mMobileNetworkRepository = MobileNetworkRepository.getInstance(context);
         mDataSubscriptionChangedReceiver = new DefaultSubscriptionReceiver(context, this);
+        if (mIsHotspotNetworkEnabled) {
+            mWifiPickerTrackerHelper = new WifiPickerTrackerHelper(lifecycle, context, this);
+        }
         lifecycle.addObserver(this);
     }
 
@@ -111,20 +125,27 @@ public class InternetPreferenceController extends AbstractPreferenceController i
         mPreference = screen.findPreference(KEY);
     }
 
+    private void drawIcon(int iconResId) {
+        Drawable drawable = mContext.getDrawable(iconResId);
+        if (drawable != null) {
+            drawable.setTintList(Utils.getColorAttr(mContext, android.R.attr.colorControlNormal));
+            mPreference.setIcon(drawable);
+        }
+    }
+
     @Override
     public void updateState(Preference preference) {
         if (mPreference == null) {
             return;
         }
 
+        if (mInternetType == INTERNET_WIFI && updateHotspotNetwork()) {
+            return;
+        }
+
         final @IdRes int icon = sIconMap.get(mInternetType);
         if (icon != 0) {
-            final Drawable drawable = mContext.getDrawable(icon);
-            if (drawable != null) {
-                drawable.setTintList(
-                        Utils.getColorAttr(mContext, android.R.attr.colorControlNormal));
-                mPreference.setIcon(drawable);
-            }
+            drawIcon(icon);
         }
 
         if (mInternetType == INTERNET_WIFI) {
@@ -141,6 +162,20 @@ public class InternetPreferenceController extends AbstractPreferenceController i
         if (summary != 0) {
             mPreference.setSummary(summary);
         }
+    }
+
+    @VisibleForTesting
+    boolean updateHotspotNetwork() {
+        if (mWifiPickerTrackerHelper == null) {
+            return false;
+        }
+        WifiEntry entry = mWifiPickerTrackerHelper.getWifiPickerTracker().getConnectedWifiEntry();
+        if (!(entry instanceof HotspotNetworkEntry)) {
+            return false;
+        }
+        drawIcon(getHotspotIconResource(((HotspotNetworkEntry) entry).getDeviceType()));
+        mPreference.setSummary(((HotspotNetworkEntry) entry).getAlternateSummary());
+        return true;
     }
 
     @Override
@@ -200,8 +235,8 @@ public class InternetPreferenceController extends AbstractPreferenceController i
 
     @Override
     public void onSummaryChanged(String summary) {
-        if (mInternetType == INTERNET_WIFI && mPreference != null) {
-            mPreference.setSummary(summary);
+        if (mInternetType == INTERNET_WIFI) {
+            updateState(mPreference);
         }
     }
 
@@ -255,5 +290,27 @@ public class InternetPreferenceController extends AbstractPreferenceController i
     public void onDefaultDataChanged(int defaultDataSubId) {
         mDefaultDataSubId = defaultDataSubId;
         updateState(mPreference);
+    }
+
+    @Override
+    public void onWifiEntriesChanged() {
+        if (mInternetType == INTERNET_WIFI) {
+            updateState(mPreference);
+        }
+    }
+
+    @Override
+    public void onWifiStateChanged() {
+        // Do nothing
+    }
+
+    @Override
+    public void onNumSavedNetworksChanged() {
+        // Do nothing
+    }
+
+    @Override
+    public void onNumSavedSubscriptionsChanged() {
+        // Do nothing
     }
 }

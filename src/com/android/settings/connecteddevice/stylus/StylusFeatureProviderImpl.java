@@ -23,7 +23,8 @@ import androidx.preference.Preference;
 
 import java.util.List;
 
-/** Default implementation for StylusFeatureProvider */
+
+/** Default implementation for StylusFeatureProvider **/
 public class StylusFeatureProviderImpl implements StylusFeatureProvider {
     @Override
     public boolean isUsbFirmwareUpdateEnabled(UsbDevice usbDevice) {

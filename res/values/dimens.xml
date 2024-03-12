@@ -75,10 +75,6 @@
     <!-- Preference icon foreground image inset (from background edge to foreground edge) -->
     <dimen name="preference_icon_foreground_image_inset">12dp</dimen>
 
-    <!-- SwitchBar sub settings margin start / end -->
-    <dimen name="switchbar_subsettings_margin_start">72dp</dimen>
-    <dimen name="switchbar_subsettings_margin_end">16dp</dimen>
-
     <!-- Search bar -->
     <dimen name="search_bar_margin">16dp</dimen>
     <dimen name="search_bar_height">52dp</dimen>
@@ -169,6 +165,27 @@
     <item name="face_preview_scale" format="float" type="dimen">1.0</item>
     <dimen name="face_enroll_intro_illustration_margin_bottom">0dp</dimen>
 
+    <!-- RemoteAuth-->
+    <dimen name="remoteauth_fragment_padding_horizontal">40dp</dimen>
+    <dimen name="remoteauth_fragment_subtitle_text_size">14sp</dimen>
+    <dimen name="remoteauth_icon_small_size">24dp</dimen>
+    <dimen name="remoteauth_touchable_area_minimum_span">48dp</dimen>
+    <dimen name="remoteauth_padding_horizontal">24dp</dimen>
+    <dimen name="remoteauth_device_name_text_size">20sp</dimen>
+    <dimen name="remoteauth_device_vertical_margin">12dp</dimen>
+    <dimen name="remoteauth_introduction_fragment_padding_horizontal">30dp</dimen>
+    <dimen name="remoteauth_introduction_description_start_margin">8dp</dimen>
+    <dimen name="remoteauth_introduction_subheading_text_size">18sp</dimen>
+    <dimen name="remoteauth_carousel_progress_margin">28dp</dimen>
+    <dimen name="remoteauth_carousel_progress_circle_diameter">8dp</dimen>
+    <dimen name="remoteauth_carousel_progress_circle_margin">4dp</dimen>
+    <dimen name="remoteauth_enrolling_authenticator_vertical_margin">12dp</dimen>
+    <dimen name="remoteauth_enrolling_authenticator_horizontal_margin">16dp</dimen>
+    <dimen name="remoteauth_enrolling_progress_bar_size">16dp</dimen>
+    <dimen name="remoteauth_settings_top_margin">22dp</dimen>
+    <dimen name="remoteauth_settings_device_horizontal_margin">16dp</dimen>
+
+
     <!-- Lock pattern view size, align sysui biometric_auth_pattern_view_size -->
     <dimen name="biometric_auth_pattern_view_size">348dp</dimen>
     <dimen name="biometric_auth_pattern_view_max_size">@dimen/biometric_auth_pattern_view_size</dimen>
@@ -205,6 +222,16 @@
     <dimen name="message_metadata_top_padding">4dp</dimen>
     <dimen name="message_icon_inset">11dp</dimen>
 
+    <!-- Text Reading Settings -->
+    <dimen name="text_reading_preview_layout_padding_horizontal_min">
+        @*android:dimen/list_item_padding_start_material</dimen>
+    <dimen name="text_reading_preview_background_padding_horizontal_min">18dp</dimen>
+
+    <dimen name="text_reading_preview_layout_padding_horizontal_min_suw">
+        @dimen/text_reading_preview_layout_padding_horizontal_min</dimen>
+    <dimen name="text_reading_preview_background_padding_horizontal_min_suw">
+        @dimen/text_reading_preview_background_padding_horizontal_min</dimen>
+
     <!-- Accessibility Settings -->
     <dimen name="accessibility_layout_margin_start_end">16dp</dimen>
     <dimen name="accessibility_imageview_size">176dp</dimen>
@@ -217,11 +244,6 @@
     <!-- Accessibility quick settings tooltip -->
     <dimen name="accessibility_qs_tooltip_margin">20dp</dimen>
     <dimen name="accessibility_qs_tooltip_margin_top">27dp</dimen>
-
-    <!-- Restricted icon in switch bar -->
-    <dimen name="restricted_icon_margin_end">16dp</dimen>
-    <!-- Restricted icon size in switch bar -->
-    <dimen name="restricted_icon_size">@*android:dimen/config_restrictedIconSize</dimen>
 
     <!-- Padding for Gestures settings screen -->
     <dimen name="gestures_play_button_size">36dp</dimen>
@@ -371,7 +393,7 @@
     <dimen name="chartview_divider_height">4dp</dimen>
     <dimen name="chartview_transom_width">4dp</dimen>
     <dimen name="chartview_transom_radius">4dp</dimen>
-    <dimen name="chartview_transom_icon_size">12dp</dimen>
+    <dimen name="chartview_transom_icon_size">18dp</dimen>
     <dimen name="chartview_transom_padding_top">2dp</dimen>
     <dimen name="chartview_transom_layout_height">12dp</dimen>
     <dimen name="chartview_layout_height">182dp</dimen>
@@ -429,7 +451,7 @@
     <dimen name="lottie_animation_view_margin_top">-52dp</dimen>
     <dimen name="limited_vision_button_margin_top">0dp</dimen>
     <dimen name="limited_vision_button_margin_bottom">0dp</dimen>
-    <dimen name="limited_vision_button_toggle_margin_top">0dp</dimen>
+    <dimen name="limited_vision_button_toggle_margin_top">20dp</dimen>
 
     <!-- Default margin for side fps enroll find sensor lottie -->
     <dimen name="sfps_enroll_find_sensor_lottie_margin">0dp</dimen>
@@ -441,4 +463,7 @@
     <dimen name="screen_flash_color_button_inner_circle_size">42dp</dimen>
     <dimen name="screen_flash_color_button_inner_circle_padding">3dp</dimen>
     <dimen name="screen_flash_color_button_inner_circle_stroke">1dp</dimen>
+
+    <!-- An arbitrarily large number to make the max size fit the parent -->
+    <dimen name="animation_max_size">1000dp</dimen>
 </resources>

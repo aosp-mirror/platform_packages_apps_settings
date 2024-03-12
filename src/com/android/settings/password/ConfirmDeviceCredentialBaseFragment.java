@@ -419,6 +419,10 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
         }
     }
 
+    protected void clearResetErrorRunnable() {
+        mHandler.removeCallbacks(mResetErrorRunnable);
+    }
+
     protected void validateGuess(LockscreenCredential credentialGuess) {
         mRemoteLockscreenValidationFragment.validateLockscreenGuess(
                 mRemoteLockscreenValidationClient, credentialGuess,

@@ -301,7 +301,8 @@ public class UiccSlotUtil {
         }
         if (slotId == INVALID_PHYSICAL_SLOT_ID) {
             for (int i = 0; i < slots.length; i++) {
-                if (slots[i].isRemovable()
+                if (slots[i] != null
+                        && slots[i].isRemovable()
                         && !slots[i].getIsEuicc()
                         && !slots[i].getPorts().stream().findFirst().get().isActive()
                         && slots[i].getCardStateInfo() != UiccSlotInfo.CARD_STATE_INFO_ERROR
@@ -310,8 +311,9 @@ public class UiccSlotUtil {
                 }
             }
         } else {
-            if (slotId >= slots.length || !slots[slotId].isRemovable()) {
-                throw new UiccSlotsException("The given slotId is not a removable slot: " + slotId);
+            if (slotId >= slots.length || slots[slotId] == null || !slots[slotId].isRemovable()) {
+                Log.d(TAG, "The given slotId is not a removable slot: " + slotId);
+                return INVALID_PHYSICAL_SLOT_ID;
             }
             if (!slots[slotId].getPorts().stream().findFirst().get().isActive()) {
                 return slotId;

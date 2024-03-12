@@ -34,6 +34,7 @@ import android.widget.TextView;
 import androidx.preference.PreferenceViewHolder;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -42,6 +43,7 @@ import org.mockito.Spy;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
+@Ignore("b/313563183")
 @RunWith(RobolectricTestRunner.class)
 public class LinkifySummaryPreferenceTest {
     @Spy

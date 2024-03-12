@@ -34,17 +34,28 @@ import android.util.Pair;
 
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.testutils.shadow.ShadowApplicationPackageManager;
+import com.android.settings.testutils.shadow.ShadowCrossProfileApps;
+import com.android.settings.testutils.shadow.ShadowUserManager;
+import com.android.settingslib.testutils.shadow.ShadowPermissionChecker;
+
 import com.google.common.collect.ImmutableList;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.shadows.ShadowPermissionChecker;
+import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowProcess;
 
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        ShadowUserManager.class,
+        ShadowApplicationPackageManager.class,
+        ShadowCrossProfileApps.class,
+})
 public class InteractAcrossProfilesSettingsTest {
 
     private static final int PERSONAL_PROFILE_ID = 0;
@@ -70,16 +81,33 @@ public class InteractAcrossProfilesSettingsTest {
     private final CrossProfileApps mCrossProfileApps =
             mContext.getSystemService(CrossProfileApps.class);
 
+    private ShadowApplicationPackageManager mShadowPackageManager;
+    private ShadowUserManager mShadowUserManager;
+    private ShadowCrossProfileApps mShadowCrossProfileApps;
+
+    @Before
+    public void setUp() {
+        mShadowUserManager = (ShadowUserManager) shadowOf(
+                mContext.getSystemService(UserManager.class)
+        );
+        mShadowCrossProfileApps = (ShadowCrossProfileApps) shadowOf(
+                mContext.getSystemService(CrossProfileApps.class)
+        );
+        mShadowPackageManager = (ShadowApplicationPackageManager) shadowOf(
+                mContext.getPackageManager()
+        );
+    }
+
     @Test
     public void collectConfigurableApps_fromPersonal_returnsCombinedPackages() {
-        shadowOf(mUserManager).addUser(
+        mShadowUserManager.addUser(
                 PERSONAL_PROFILE_ID, "personal-profile"/* name */, 0/* flags */);
-        shadowOf(mUserManager).addProfile(
+        mShadowUserManager.addProfile(
                 PERSONAL_PROFILE_ID, WORK_PROFILE_ID,
                 "work-profile"/* profileName */, UserInfo.FLAG_MANAGED_PROFILE);
-        shadowOf(mPackageManager).setInstalledPackagesForUserId(
+        mShadowPackageManager.setInstalledPackagesForUserId(
                 PERSONAL_PROFILE_ID, PERSONAL_PROFILE_INSTALLED_PACKAGES);
-        shadowOf(mPackageManager).setInstalledPackagesForUserId(
+        mShadowPackageManager.setInstalledPackagesForUserId(
                 WORK_PROFILE_ID, WORK_PROFILE_INSTALLED_PACKAGES);
         installCrossProfilePackage(PERSONAL_CROSS_PROFILE_PACKAGE);
         installCrossProfilePackage(WORK_CROSS_PROFILE_PACKAGE);
@@ -97,15 +125,15 @@ public class InteractAcrossProfilesSettingsTest {
 
     @Test
     public void collectConfigurableApps_fromWork_returnsCombinedPackages() {
-        shadowOf(mUserManager).addUser(
+        mShadowUserManager.addUser(
                 PERSONAL_PROFILE_ID, "personal-profile"/* name */, 0/* flags */);
-        shadowOf(mUserManager).addProfile(
+        mShadowUserManager.addProfile(
                 PERSONAL_PROFILE_ID, WORK_PROFILE_ID,
                 "work-profile"/* profileName */, UserInfo.FLAG_MANAGED_PROFILE);
         ShadowProcess.setUid(WORK_UID);
-        shadowOf(mPackageManager).setInstalledPackagesForUserId(
+        mShadowPackageManager.setInstalledPackagesForUserId(
                 PERSONAL_PROFILE_ID, PERSONAL_PROFILE_INSTALLED_PACKAGES);
-        shadowOf(mPackageManager).setInstalledPackagesForUserId(
+        mShadowPackageManager.setInstalledPackagesForUserId(
                 WORK_PROFILE_ID, WORK_PROFILE_INSTALLED_PACKAGES);
         installCrossProfilePackage(PERSONAL_CROSS_PROFILE_PACKAGE);
         installCrossProfilePackage(WORK_CROSS_PROFILE_PACKAGE);
@@ -123,9 +151,9 @@ public class InteractAcrossProfilesSettingsTest {
 
     @Test
     public void collectConfigurableApps_onlyOneProfile_returnsEmpty() {
-        shadowOf(mUserManager).addUser(
+        mShadowUserManager.addUser(
                 PERSONAL_PROFILE_ID, "personal-profile"/* name */, 0/* flags */);
-        shadowOf(mPackageManager).setInstalledPackagesForUserId(
+        mShadowPackageManager.setInstalledPackagesForUserId(
                 PERSONAL_PROFILE_ID, PERSONAL_PROFILE_INSTALLED_PACKAGES);
         installCrossProfilePackage(PERSONAL_CROSS_PROFILE_PACKAGE);
 
@@ -138,18 +166,18 @@ public class InteractAcrossProfilesSettingsTest {
 
     @Test
     public void getNumberOfEnabledApps_returnsNumberOfEnabledApps() {
-        shadowOf(mUserManager).addUser(
+        mShadowUserManager.addUser(
                 PERSONAL_PROFILE_ID, "personal-profile"/* name */, 0/* flags */);
-        shadowOf(mUserManager).addProfile(
+        mShadowUserManager.addProfile(
                 PERSONAL_PROFILE_ID, WORK_PROFILE_ID,
                 "work-profile"/* profileName */, UserInfo.FLAG_MANAGED_PROFILE);
-        shadowOf(mPackageManager).setInstalledPackagesForUserId(
+        mShadowPackageManager.setInstalledPackagesForUserId(
                 PERSONAL_PROFILE_ID, PERSONAL_PROFILE_INSTALLED_PACKAGES);
-        shadowOf(mPackageManager).setInstalledPackagesForUserId(
+        mShadowPackageManager.setInstalledPackagesForUserId(
                 WORK_PROFILE_ID, WORK_PROFILE_INSTALLED_PACKAGES);
         installCrossProfilePackage(PERSONAL_CROSS_PROFILE_PACKAGE);
         installCrossProfilePackage(WORK_CROSS_PROFILE_PACKAGE);
-        shadowOf(mCrossProfileApps).addCrossProfilePackage(PERSONAL_CROSS_PROFILE_PACKAGE);
+        mShadowCrossProfileApps.addCrossProfilePackage(PERSONAL_CROSS_PROFILE_PACKAGE);
         ShadowPermissionChecker.setResult(
                 PERSONAL_CROSS_PROFILE_PACKAGE,
                 INTERACT_ACROSS_PROFILES_PERMISSION,
@@ -166,7 +194,7 @@ public class InteractAcrossProfilesSettingsTest {
     }
 
     private void installCrossProfilePackage(String packageName) {
-        PackageInfo personalPackageInfo = shadowOf(mPackageManager).getInternalMutablePackageInfo(
+        PackageInfo personalPackageInfo = mShadowPackageManager.getInternalMutablePackageInfo(
                 packageName);
         personalPackageInfo.requestedPermissions = new String[]{
                 INTERACT_ACROSS_PROFILES_PERMISSION};

@@ -40,6 +40,7 @@ import android.util.Log;
 import androidx.annotation.GuardedBy;
 import androidx.lifecycle.LifecycleOwner;
 
+import com.android.internal.telephony.flags.Flags;
 import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -120,7 +121,7 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
     private MobileNetworkRepository(Context context) {
         mContext = context;
         mMobileNetworkDatabase = MobileNetworkDatabase.getInstance(context);
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
         mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_MOBILE_NETWORK_DB_CREATED);
         mSubscriptionManager = context.getSystemService(SubscriptionManager.class);
         mSubscriptionInfoDao = mMobileNetworkDatabase.mSubscriptionInfoDao();
@@ -380,11 +381,11 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         return mMobileNetworkInfoDao.queryMobileNetworkInfoBySubId(subId);
     }
 
-    private void getUiccInfoBySubscriptionInfo(UiccSlotInfo[] uiccSlotInfos,
+    private void getUiccInfoBySubscriptionInfo(@NonNull UiccSlotInfo[] uiccSlotInfos,
             SubscriptionInfo subInfo) {
         for (int i = 0; i < uiccSlotInfos.length; i++) {
             UiccSlotInfo curSlotInfo = uiccSlotInfos[i];
-            if (curSlotInfo.getCardStateInfo() == CARD_STATE_INFO_PRESENT) {
+            if (curSlotInfo != null && curSlotInfo.getCardStateInfo() == CARD_STATE_INFO_PRESENT) {
                 final int index = i;
                 mIsEuicc = curSlotInfo.getIsEuicc();
                 mCardState = curSlotInfo.getCardStateInfo();
@@ -742,9 +743,11 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
                         Log.d(TAG, "insert subInfo to subInfoEntity, subInfo = " + subInfo);
                     }
                     if (subInfo.isEmbedded()
-                            && subInfo.getProfileClass() == PROFILE_CLASS_PROVISIONING) {
+                        && (subInfo.getProfileClass() == PROFILE_CLASS_PROVISIONING
+                            || (Flags.oemEnabledSatelliteFlag()
+                            && subInfo.isOnlyNonTerrestrialNetwork()))) {
                         if (DEBUG) {
-                            Log.d(TAG, "Do not insert the provision eSIM");
+                            Log.d(TAG, "Do not insert the provisioning or satellite eSIM");
                         }
                         continue;
                     }

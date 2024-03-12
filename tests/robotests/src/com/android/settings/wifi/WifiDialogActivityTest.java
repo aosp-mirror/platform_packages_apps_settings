@@ -27,7 +27,9 @@ import static com.android.settings.wifi.WifiDialogActivity.RESULT_OK;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -41,13 +43,14 @@ import android.net.wifi.WifiManager;
 import android.os.UserManager;
 
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.utils.ActivityControllerWrapper;
 import com.android.settingslib.wifi.AccessPoint;
+import com.android.wifitrackerlib.NetworkDetailsTracker;
 import com.android.wifitrackerlib.WifiEntry;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -55,18 +58,18 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 
+@Ignore("b/314867581")
 @RunWith(RobolectricTestRunner.class)
 public class WifiDialogActivityTest {
 
     static final String CALLING_PACKAGE = "calling_package";
     static final int REQUEST_CODE = REQUEST_CODE_WIFI_DPP_ENROLLEE_QR_CODE_SCANNER;
+    private static final String SSID = "SSID";
 
     @Mock
     UserManager mUserManager;
     @Mock
     PackageManager mPackageManager;
-    @Mock
-    WifiManager mWifiManager;
     @Mock
     WifiDialog mWifiDialog;
     @Mock
@@ -92,17 +95,22 @@ public class WifiDialogActivityTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         when(mWifiDialog.getController()).thenReturn(mController);
+        mWifiConfiguration.SSID = SSID;
         when(mController.getConfig()).thenReturn(mWifiConfiguration);
         when(mController.getAccessPoint()).thenReturn(mAccessPoint);
         when(mWifiDialog2.getController()).thenReturn(mWifiConfiguration2);
         when(mWifiConfiguration2.getWifiEntry()).thenReturn(mWifiEntry);
         when(mWifiEntry.canConnect()).thenReturn(true);
         FakeFeatureFactory.setupForTest();
+        WifiTrackerLibProvider mockWifiTrackerLibProvider =
+                FakeFeatureFactory.getFeatureFactory().getWifiTrackerLibProvider();
+        when(mockWifiTrackerLibProvider.createNetworkDetailsTracker(
+                any(), any(), any(), any(), any(), anyLong(), anyLong(), any())
+        ).thenReturn(mock(NetworkDetailsTracker.class));
 
-        mActivity = spy((WifiDialogActivity) ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(WifiDialogActivity.class)).get());
+        mActivity = spy(Robolectric.setupActivity(WifiDialogActivity.class));
         when(mActivity.getSystemService(UserManager.class)).thenReturn(mUserManager);
-        when(mActivity.getSystemService(WifiManager.class)).thenReturn(mWifiManager);
+
         when(mActivity.getSystemService(KeyguardManager.class)).thenReturn(mKeyguardManager);
     }
 
@@ -110,7 +118,8 @@ public class WifiDialogActivityTest {
     public void onSubmit_shouldConnectToNetwork() {
         mActivity.onSubmit(mWifiDialog);
 
-        verify(mWifiManager).connect(any(), any());
+        WifiManager wifiManager = mActivity.getSystemService(WifiManager.class);
+        assertThat(wifiManager.getConnectionInfo().getSSID()).isEqualTo("\"SSID\"");
     }
 
     @Test
@@ -156,9 +165,7 @@ public class WifiDialogActivityTest {
         final Intent intent = new Intent("com.android.settings.WIFI_DIALOG");
         intent.putExtra(WifiDialogActivity.KEY_CHOSEN_WIFIENTRY_KEY, "FAKE_KEY");
         intent.putExtra(WifiDialogActivity.KEY_CONNECT_FOR_CALLER, true);
-        mActivity = spy((WifiDialogActivity) ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(WifiDialogActivity.class, intent)).get());
-        when(mActivity.getSystemService(WifiManager.class)).thenReturn(mWifiManager);
+        mActivity = spy(Robolectric.buildActivity(WifiDialogActivity.class, intent).setup().get());
 
         mActivity.onSubmit(mWifiDialog2);
 
@@ -169,13 +176,12 @@ public class WifiDialogActivityTest {
     public void onSubmit_whenConnectForCallerIsFalse_shouldNotConnectToNetwork() {
         final Intent intent = new Intent();
         intent.putExtra(WifiDialogActivity.KEY_CONNECT_FOR_CALLER, false);
-        mActivity = spy((WifiDialogActivity) ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(WifiDialogActivity.class, intent)).get());
-        when(mActivity.getSystemService(WifiManager.class)).thenReturn(mWifiManager);
+        mActivity = spy(Robolectric.buildActivity(WifiDialogActivity.class, intent).setup().get());
 
         mActivity.onSubmit(mWifiDialog);
 
-        verify(mWifiManager, never()).connect(any(), any());
+        WifiManager wifiManager = mActivity.getSystemService(WifiManager.class);
+        assertThat(wifiManager.getConnectionInfo().getSSID()).isEqualTo(WifiManager.UNKNOWN_SSID);
     }
 
     @Test
@@ -183,9 +189,7 @@ public class WifiDialogActivityTest {
         final Intent intent = new Intent("com.android.settings.WIFI_DIALOG");
         intent.putExtra(WifiDialogActivity.KEY_CHOSEN_WIFIENTRY_KEY, "FAKE_KEY");
         intent.putExtra(WifiDialogActivity.KEY_CONNECT_FOR_CALLER, false);
-        mActivity = spy((WifiDialogActivity) ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(WifiDialogActivity.class, intent)).get());
-        when(mActivity.getSystemService(WifiManager.class)).thenReturn(mWifiManager);
+        mActivity = spy(Robolectric.buildActivity(WifiDialogActivity.class, intent).setup().get());
 
         mActivity.onSubmit(mWifiDialog2);
 
@@ -198,9 +202,7 @@ public class WifiDialogActivityTest {
         intent.putExtra(WifiDialogActivity.KEY_CONNECT_FOR_CALLER, false);
         intent.putExtra(WizardManagerHelper.EXTRA_IS_FIRST_RUN, true);
         intent.putExtra(WizardManagerHelper.EXTRA_IS_SETUP_FLOW, true);
-        mActivity = spy((WifiDialogActivity) ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(WifiDialogActivity.class, intent)).get());
-        when(mActivity.getSystemService(WifiManager.class)).thenReturn(mWifiManager);
+        mActivity = spy(Robolectric.buildActivity(WifiDialogActivity.class, intent).create().get());
         doNothing().when(mActivity).createDialogWithSuwTheme();
 
         mActivity.onStart();

@@ -21,8 +21,6 @@ import android.content.pm.ApplicationInfo
 import android.os.Bundle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
-import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.res.stringResource
 import com.android.settings.R
 import com.android.settings.spa.app.appinfo.AppInfoSettingsProvider
@@ -116,7 +114,7 @@ class AllAppListModel(
         option: Int,
         recordListFlow: Flow<List<AppRecordWithSize>>,
     ): Flow<List<AppRecordWithSize>> = recordListFlow.filterItem(
-        when (SpinnerItem.values().getOrNull(option)) {
+        when (SpinnerItem.entries.getOrNull(option)) {
             SpinnerItem.Enabled -> ({ it.app.enabled && !it.app.isInstantApp })
             SpinnerItem.Disabled -> isDisabled
             SpinnerItem.Instant -> isInstant
@@ -130,21 +128,20 @@ class AllAppListModel(
     private val isInstant: (AppRecordWithSize) -> Boolean = { it.app.isInstantApp }
 
     @Composable
-    override fun getSummary(option: Int, record: AppRecordWithSize): State<String> {
+    override fun getSummary(option: Int, record: AppRecordWithSize): () -> String {
         val storageSummary = record.app.getStorageSummary()
-        return remember {
-            derivedStateOf {
-                storageSummary.value +
-                    when {
-                        !record.app.installed -> {
-                            System.lineSeparator() + context.getString(R.string.not_installed)
-                        }
-                        isDisabled(record) -> {
-                            System.lineSeparator() + context.getString(R.string.disabled)
-                        }
-                        else -> ""
-                    }
+        return {
+            val summaryList = mutableListOf(storageSummary.value)
+            when {
+                !record.app.installed && !record.app.isArchived -> {
+                    summaryList += context.getString(R.string.not_installed)
+                }
+
+                isDisabled(record) -> {
+                    summaryList += context.getString(com.android.settingslib.R.string.disabled)
+                }
             }
+            summaryList.joinToString(separator = System.lineSeparator())
         }
     }
 

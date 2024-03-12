@@ -18,16 +18,16 @@ package com.android.settings.spa.app.specialaccess
 
 import android.Manifest
 import android.app.AlarmManager
+import android.app.AppOpsManager
 import android.app.compat.CompatChanges
 import android.app.settings.SettingsEnums
 import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.os.PowerExemptionManager
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.livedata.observeAsState
-import com.android.settings.R
-import com.android.settings.overlay.FeatureFactory
-import com.android.settingslib.spa.framework.compose.stateOf
+import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
+import com.android.settingslib.R
+import com.android.settingslib.spa.livedata.observeAsCallback
 import com.android.settingslib.spaprivileged.model.app.AppRecord
 import com.android.settingslib.spaprivileged.model.app.IPackageManagers
 import com.android.settingslib.spaprivileged.model.app.PackageManagers
@@ -57,6 +57,7 @@ class AlarmsAndRemindersAppListModel(
     override val pageTitleResId = R.string.alarms_and_reminders_title
     override val switchTitleResId = R.string.alarms_and_reminders_switch_title
     override val footerResId = R.string.alarms_and_reminders_footer_title
+    override val enhancedConfirmationKey: String = AppOpsManager.OPSTR_SCHEDULE_EXACT_ALARM
 
     override fun transform(userIdFlow: Flow<Int>, appListFlow: Flow<List<ApplicationInfo>>) =
         userIdFlow.map { userId ->
@@ -79,9 +80,10 @@ class AlarmsAndRemindersAppListModel(
     }
 
     @Composable
-    override fun isAllowed(record: AlarmsAndRemindersAppRecord) =
-        if (record.isTrumped) stateOf(true)
-        else record.controller.isAllowed.observeAsState()
+    override fun isAllowed(record: AlarmsAndRemindersAppRecord): () -> Boolean? = when {
+        record.isTrumped -> ({ true })
+        else -> record.controller.isAllowed.observeAsCallback()
+    }
 
     override fun isChangeable(record: AlarmsAndRemindersAppRecord) = record.isChangeable
 
@@ -91,7 +93,7 @@ class AlarmsAndRemindersAppListModel(
     }
 
     private fun logPermissionChange(newAllowed: Boolean) {
-        FeatureFactory.getFactory(context).metricsFeatureProvider.action(
+        featureFactory.metricsFeatureProvider.action(
             SettingsEnums.PAGE_UNKNOWN,
             SettingsEnums.ACTION_ALARMS_AND_REMINDERS_TOGGLE,
             SettingsEnums.ALARMS_AND_REMINDERS,

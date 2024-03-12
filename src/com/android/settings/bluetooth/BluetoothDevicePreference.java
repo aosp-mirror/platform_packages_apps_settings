@@ -196,6 +196,10 @@ public final class BluetoothDevicePreference extends GearPreference {
     }
 
     private void registerMetadataChangedListener() {
+        if (mBluetoothAdapter == null) {
+            Log.d(TAG, "No mBluetoothAdapter");
+            return;
+        }
         if (mBluetoothDevices == null) {
             mBluetoothDevices = new HashSet<>();
         }
@@ -210,18 +214,47 @@ public final class BluetoothDevicePreference extends GearPreference {
             Log.d(TAG, "No BT device to register.");
             return;
         }
-        mBluetoothDevices.forEach(bd ->
-                mBluetoothAdapter.addOnMetadataChangedListener(bd,
-                        getContext().getMainExecutor(), mMetadataListener));
+        Set<BluetoothDevice> errorDevices = new HashSet<>();
+        mBluetoothDevices.forEach(bd -> {
+            try {
+                boolean isSuccess = mBluetoothAdapter.addOnMetadataChangedListener(bd,
+                        getContext().getMainExecutor(), mMetadataListener);
+                if (!isSuccess) {
+                    Log.e(TAG, bd.getAnonymizedAddress() + ": add into Listener failed");
+                    errorDevices.add(bd);
+                }
+            } catch (NullPointerException e) {
+                errorDevices.add(bd);
+                Log.e(TAG, bd.getAnonymizedAddress() + ":" + e.toString());
+            } catch (IllegalArgumentException e) {
+                errorDevices.add(bd);
+                Log.e(TAG, bd.getAnonymizedAddress() + ":" + e.toString());
+            }
+        });
+        for (BluetoothDevice errorDevice : errorDevices) {
+            mBluetoothDevices.remove(errorDevice);
+            Log.d(TAG, "mBluetoothDevices remove " + errorDevice.getAnonymizedAddress());
+        }
     }
 
     private void unregisterMetadataChangedListener() {
+        if (mBluetoothAdapter == null) {
+            Log.d(TAG, "No mBluetoothAdapter");
+            return;
+        }
         if (mBluetoothDevices == null || mBluetoothDevices.isEmpty()) {
             Log.d(TAG, "No BT device to unregister.");
             return;
         }
-        mBluetoothDevices.forEach(
-                bd -> mBluetoothAdapter.removeOnMetadataChangedListener(bd, mMetadataListener));
+        mBluetoothDevices.forEach(bd -> {
+            try {
+                mBluetoothAdapter.removeOnMetadataChangedListener(bd, mMetadataListener);
+            } catch (NullPointerException e) {
+                Log.e(TAG, bd.getAnonymizedAddress() + ":" + e.toString());
+            } catch (IllegalArgumentException e) {
+                Log.e(TAG, bd.getAnonymizedAddress() + ":" + e.toString());
+            }
+        });
         mBluetoothDevices.clear();
     }
 
@@ -334,7 +367,7 @@ public final class BluetoothDevicePreference extends GearPreference {
         int bondState = mCachedDevice.getBondState();
 
         final MetricsFeatureProvider metricsFeatureProvider =
-                FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+                FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
 
         if (mCachedDevice.isConnected()) {
             metricsFeatureProvider.action(context,
@@ -378,7 +411,7 @@ public final class BluetoothDevicePreference extends GearPreference {
     private void pair() {
         if (!mCachedDevice.startPairing()) {
             Utils.showError(getContext(), mCachedDevice.getName(),
-                    R.string.bluetooth_pairing_error_message);
+                    com.android.settingslib.R.string.bluetooth_pairing_error_message);
         }
     }
 

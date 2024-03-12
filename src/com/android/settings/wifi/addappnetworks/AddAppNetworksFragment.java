@@ -192,7 +192,7 @@ public class AddAppNetworksFragment extends InstrumentedFragment implements
                 return SystemClock.elapsedRealtime();
             }
         };
-        mWifiPickerTracker = FeatureFactory.getFactory(mActivity.getApplicationContext())
+        mWifiPickerTracker = FeatureFactory.getFeatureFactory()
                 .getWifiTrackerLibProvider()
                 .createWifiPickerTracker(getSettingsLifecycle(), mActivity,
                         new Handler(Looper.getMainLooper()),
@@ -550,7 +550,7 @@ public class AddAppNetworksFragment extends InstrumentedFragment implements
             }
 
             final View divider = view.findViewById(
-                    com.android.settingslib.R.id.two_target_divider);
+                    com.android.settingslib.widget.preference.twotarget.R.id.two_target_divider);
             if (divider != null) {
                 divider.setVisibility(View.GONE);
             }

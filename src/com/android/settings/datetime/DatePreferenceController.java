@@ -33,14 +33,12 @@ import android.widget.DatePicker;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
-import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.RestrictedPreference;
-import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settings.core.BasePreferenceController;
 
 import java.util.Calendar;
 
-public class DatePreferenceController extends AbstractPreferenceController
-        implements PreferenceControllerMixin, DatePickerDialog.OnDateSetListener {
+public class DatePreferenceController extends BasePreferenceController
+        implements DatePickerDialog.OnDateSetListener {
 
     public interface DatePreferenceHost extends UpdateTimeAndDateCallback {
         void showDatePicker();
@@ -49,47 +47,43 @@ public class DatePreferenceController extends AbstractPreferenceController
     public static final int DIALOG_DATEPICKER = 0;
 
     private static final String TAG = "DatePreferenceController";
-    private static final String KEY_DATE = "date";
 
-    private final DatePreferenceHost mHost;
+    private DatePreferenceHost mHost;
     private final TimeManager mTimeManager;
 
-    public DatePreferenceController(Context context, DatePreferenceHost host) {
-        super(context);
-        mHost = host;
+    public DatePreferenceController(Context context, String preferenceKey) {
+        super(context, preferenceKey);
         mTimeManager = context.getSystemService(TimeManager.class);
     }
 
+    public void setHost(DatePreferenceHost host) {
+        mHost = host;
+    }
+
     @Override
-    public boolean isAvailable() {
-        return true;
+    public int getAvailabilityStatus() {
+        return isEnabled() ? AVAILABLE : DISABLED_DEPENDENT_SETTING;
     }
 
     @Override
     public void updateState(Preference preference) {
-        if (!(preference instanceof RestrictedPreference)) {
-            return;
-        }
-        final Calendar now = Calendar.getInstance();
-        preference.setSummary(DateFormat.getLongDateFormat(mContext).format(now.getTime()));
-        if (!((RestrictedPreference) preference).isDisabledByAdmin()) {
-            boolean enableManualDateSelection = isEnabled();
-            preference.setEnabled(enableManualDateSelection);
-        }
+        super.updateState(preference);
+        preference.setEnabled(isEnabled());
+    }
+
+    @Override
+    public CharSequence getSummary() {
+        Calendar now = Calendar.getInstance();
+        return DateFormat.getLongDateFormat(mContext).format(now.getTime());
     }
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-        if (!TextUtils.equals(preference.getKey(), KEY_DATE)) {
+        if (!TextUtils.equals(getPreferenceKey(), preference.getKey())) {
             return false;
         }
         mHost.showDatePicker();
         return true;
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return KEY_DATE;
     }
 
     @Override

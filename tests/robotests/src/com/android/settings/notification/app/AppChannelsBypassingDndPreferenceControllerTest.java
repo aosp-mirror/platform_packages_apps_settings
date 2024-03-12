@@ -26,28 +26,36 @@ import android.app.NotificationChannelGroup;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.pm.ParceledListSlice;
+import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.flags.Flags;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settingslib.PrimarySwitchPreference;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.LooperMode;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 @RunWith(RobolectricTestRunner.class)
+@LooperMode(LooperMode.Mode.LEGACY)
 public class AppChannelsBypassingDndPreferenceControllerTest {
+
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     @Mock
     private NotificationBackend mBackend;
@@ -147,5 +155,45 @@ public class AppChannelsBypassingDndPreferenceControllerTest {
                             : NotificationManager.IMPORTANCE_NONE));
         }
         return new ParceledListSlice<>(Collections.singletonList(group));
+    }
+
+    @Test
+    public void displayPreference_duplicateChannelName_AddsGroupNameAsSummary() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_DEDUPE_DND_SETTINGS_CHANNELS);
+        NotificationChannelGroup group1 = new NotificationChannelGroup("group1_id", "Group1");
+        NotificationChannelGroup group2 = new NotificationChannelGroup("group2_id", "Group2");
+
+        group1.addChannel(new NotificationChannel("mail_group1_id", "Mail",
+                NotificationManager.IMPORTANCE_DEFAULT));
+        group1.addChannel(new NotificationChannel("other_group1_id", "Other",
+                NotificationManager.IMPORTANCE_DEFAULT));
+
+        group2.addChannel(new NotificationChannel("music_group2_id", "Music",
+                NotificationManager.IMPORTANCE_DEFAULT));
+        // This channel has the same name as a channel in group1.
+        group2.addChannel(new NotificationChannel("mail_group2_id", "Mail",
+                NotificationManager.IMPORTANCE_DEFAULT));
+
+        ParceledListSlice<NotificationChannelGroup> groups = new ParceledListSlice<>(
+                new ArrayList<NotificationChannelGroup>() {
+                    {
+                        add(group1);
+                        add(group2);
+                    }
+                }
+        );
+
+        when(mBackend.getGroups(eq(mAppRow.pkg), eq(mAppRow.uid))).thenReturn(groups);
+        mController.displayPreference(mPreferenceScreen);
+        ShadowApplication.runBackgroundTasks();
+        // Check that we've added the group name as a summary to channels that have identical names.
+        // Channels are also alphabetized.
+        assertThat(mCategory.getPreference(1).getTitle().toString()).isEqualTo("Mail");
+        assertThat(mCategory.getPreference(1).getSummary().toString()).isEqualTo("Group1");
+        assertThat(mCategory.getPreference(2).getTitle().toString()).isEqualTo("Mail");
+        assertThat(mCategory.getPreference(2).getSummary().toString()).isEqualTo("Group2");
+        assertThat(mCategory.getPreference(3).getTitle().toString()).isEqualTo("Music");
+        assertThat(mCategory.getPreference(4).getTitle().toString()).isEqualTo("Other");
+
     }
 }

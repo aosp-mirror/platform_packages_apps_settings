@@ -38,8 +38,8 @@ public class BatteryManufactureDatePreferenceController extends BasePreferenceCo
 
     public BatteryManufactureDatePreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
-        mBatterySettingsFeatureProvider = FeatureFactory.getFactory(
-                context).getBatterySettingsFeatureProvider();
+        mBatterySettingsFeatureProvider = FeatureFactory.getFeatureFactory()
+                .getBatterySettingsFeatureProvider();
         mBatteryManager = mContext.getSystemService(BatteryManager.class);
     }
 

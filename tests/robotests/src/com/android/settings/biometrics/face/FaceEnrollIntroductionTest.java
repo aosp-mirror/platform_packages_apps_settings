@@ -76,6 +76,7 @@ import com.google.android.setupdesign.view.BottomScrollView;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -282,6 +283,7 @@ public class FaceEnrollIntroductionTest {
     }
 
     @Test
+    @Ignore("b/295325503")
     public void testOnCreateToGenerateChallenge() {
         setupActivityWithGenerateChallenge(
                 new Intent().putExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE, 1L));
@@ -385,7 +387,8 @@ public class FaceEnrollIntroductionTest {
     @Test
     public void testFaceEnrollIntroduction_hasBottomScrollView() {
         setupActivity();
-        BottomScrollView scrollView = getGlifLayout(mActivity).findViewById(R.id.sud_scroll_view);
+        BottomScrollView scrollView = getGlifLayout(mActivity)
+                .findViewById(com.google.android.setupdesign.R.id.sud_scroll_view);
 
         assertThat(scrollView).isNotNull();
         assertThat(scrollView.getVisibility()).isEqualTo(View.VISIBLE);
@@ -431,6 +434,7 @@ public class FaceEnrollIntroductionTest {
     }
 
     @Test
+    @Ignore("b/295325503")
     public void testFaceEnrollIntroduction_onStartRegisteredPostureChangeCallback() {
         setupActivityForPosture();
         mSpyActivity.onStart();

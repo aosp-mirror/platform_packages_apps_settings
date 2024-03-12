@@ -25,16 +25,17 @@ import androidx.annotation.VisibleForTesting;
 
 import java.util.Objects;
 
-/**
- * Model class stores app info(e.g. package name, type..) that used in battery tip
- */
+/** Model class stores app info(e.g. package name, type..) that used in battery tip */
 public class AppInfo implements Comparable<AppInfo>, Parcelable {
     public final String packageName;
+
     /**
      * Anomaly type of the app
+     *
      * @see StatsManagerConfig.AnomalyType
      */
     public final ArraySet<Integer> anomalyTypes;
+
     public final long screenOnTimeMs;
     public final int uid;
 
@@ -73,7 +74,11 @@ public class AppInfo implements Comparable<AppInfo>, Parcelable {
 
     @Override
     public String toString() {
-        return "packageName=" + packageName + ",anomalyTypes=" + anomalyTypes + ",screenTime="
+        return "packageName="
+                + packageName
+                + ",anomalyTypes="
+                + anomalyTypes
+                + ",screenTime="
                 + screenOnTimeMs;
     }
 
@@ -93,15 +98,16 @@ public class AppInfo implements Comparable<AppInfo>, Parcelable {
                 && TextUtils.equals(packageName, other.packageName);
     }
 
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-        public AppInfo createFromParcel(Parcel in) {
-            return new AppInfo(in);
-        }
+    public static final Parcelable.Creator CREATOR =
+            new Parcelable.Creator() {
+                public AppInfo createFromParcel(Parcel in) {
+                    return new AppInfo(in);
+                }
 
-        public AppInfo[] newArray(int size) {
-            return new AppInfo[size];
-        }
-    };
+                public AppInfo[] newArray(int size) {
+                    return new AppInfo[size];
+                }
+            };
 
     public static final class Builder {
         private ArraySet<Integer> mAnomalyTypes = new ArraySet<>();

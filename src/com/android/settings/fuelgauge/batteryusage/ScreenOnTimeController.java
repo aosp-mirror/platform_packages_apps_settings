@@ -42,12 +42,9 @@ public class ScreenOnTimeController extends BasePreferenceController {
     private static final Pattern NUMBER_PATTERN = Pattern.compile("[\\d]*[\\.,]?[\\d]+");
     private static final Locale IW_LOCALE = new Locale("iw");
 
-    @VisibleForTesting
-    Context mPrefContext;
-    @VisibleForTesting
-    PreferenceCategory mRootPreference;
-    @VisibleForTesting
-    TextViewPreference mScreenOnTimeTextPreference;
+    @VisibleForTesting Context mPrefContext;
+    @VisibleForTesting PreferenceCategory mRootPreference;
+    @VisibleForTesting TextViewPreference mScreenOnTimeTextPreference;
 
     public ScreenOnTimeController(Context context) {
         super(context, ROOT_PREFERENCE_KEY);
@@ -78,19 +75,22 @@ public class ScreenOnTimeController extends BasePreferenceController {
 
     @VisibleForTesting
     void showCategoryTitle(String slotTimestamp) {
-        mRootPreference.setTitle(slotTimestamp == null
-                ? mPrefContext.getString(
-                        R.string.screen_time_category_last_full_charge)
-                : mPrefContext.getString(
-                        R.string.screen_time_category_for_slot, slotTimestamp));
+        mRootPreference.setTitle(
+                slotTimestamp == null
+                        ? mPrefContext.getString(R.string.screen_time_category_last_full_charge)
+                        : mPrefContext.getString(
+                                R.string.screen_time_category_for_slot, slotTimestamp));
         mRootPreference.setVisible(true);
     }
 
     @VisibleForTesting
     void showScreenOnTimeText(Long screenOnTime) {
         final CharSequence timeSequence =
-                BatteryUtils.formatElapsedTimeWithoutComma(mPrefContext, (double) screenOnTime,
-                        /*withSeconds=*/ false, /*collapseTimeUnit=*/ false);
+                BatteryUtils.formatElapsedTimeWithoutComma(
+                        mPrefContext,
+                        (double) screenOnTime,
+                        /* withSeconds= */ false,
+                        /* collapseTimeUnit= */ false);
         mScreenOnTimeTextPreference.setText(
                 enlargeFontOfNumberIfNeeded(mPrefContext, timeSequence));
         mScreenOnTimeTextPreference.setVisible(true);
@@ -107,11 +107,14 @@ public class ScreenOnTimeController extends BasePreferenceController {
             return text;
         }
 
-        final SpannableString spannableText =  new SpannableString(text);
+        final SpannableString spannableText = new SpannableString(text);
         final Matcher matcher = NUMBER_PATTERN.matcher(text);
         while (matcher.find()) {
-            spannableText.setSpan(new AbsoluteSizeSpan(36, true /* dip */), matcher.start(),
-                    matcher.end(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            spannableText.setSpan(
+                    new AbsoluteSizeSpan(36, true /* dip */),
+                    matcher.start(),
+                    matcher.end(),
+                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
         return spannableText;
     }

@@ -23,8 +23,8 @@ import static android.app.NotificationManager.BUBBLE_PREFERENCE_SELECTED;
 import static android.app.NotificationManager.IMPORTANCE_HIGH;
 import static android.provider.Settings.Secure.NOTIFICATION_BUBBLES;
 
-import static com.android.settings.notification.app.BubblePreferenceController.SYSTEM_WIDE_OFF;
-import static com.android.settings.notification.app.BubblePreferenceController.SYSTEM_WIDE_ON;
+import static com.android.settings.notification.BubbleHelper.SYSTEM_WIDE_OFF;
+import static com.android.settings.notification.BubbleHelper.SYSTEM_WIDE_ON;
 
 import static junit.framework.TestCase.assertEquals;
 
@@ -46,6 +46,7 @@ import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.notification.NotificationBackend;
+import com.android.settings.testutils.shadow.ShadowActivityManager;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -54,11 +55,14 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
-import org.robolectric.shadows.ShadowActivityManager;
 import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        ShadowActivityManager.class,
+})
 public class BubbleSummaryPreferenceControllerTest {
 
     private Context mContext;

@@ -27,8 +27,8 @@ public class AlwaysOnVpnManagedProfilePreferenceController
 
     public AlwaysOnVpnManagedProfilePreferenceController(Context context) {
         super(context);
-        mFeatureProvider = FeatureFactory.getFactory(context)
-                .getEnterprisePrivacyFeatureProvider(context);
+        mFeatureProvider = FeatureFactory.getFeatureFactory()
+                .getEnterprisePrivacyFeatureProvider();
     }
 
     @Override

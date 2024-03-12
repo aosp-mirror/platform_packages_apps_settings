@@ -30,7 +30,7 @@
         settings:lottie_rawRes="@drawable/flash_notifications_illustration"
         settings:controller="com.android.settings.accessibility.FlashNotificationIllustrationPreferenceController"/>
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="camera_flash_notification_preference"
         android:persistent="false"
         android:title="@string/camera_flash_notification_title"

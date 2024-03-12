@@ -24,7 +24,6 @@ import android.app.Activity;
 import android.content.ComponentName;
 
 import com.android.settings.Settings;
-import com.android.settings.utils.ActivityControllerWrapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -47,8 +46,7 @@ public class WorkModeConditionControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mActivity = spy((Activity) ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(Activity.class)).get());
+        mActivity = spy(Robolectric.setupActivity(Activity.class));
         mController = new WorkModeConditionController(mActivity, mConditionManager);
     }
 

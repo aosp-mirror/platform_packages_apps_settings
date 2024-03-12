@@ -27,7 +27,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.Preference.OnPreferenceClickListener;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoWithHeader;
@@ -47,7 +47,7 @@ public class ManageExternalStorageDetails extends AppInfoWithHeader implements
 
     private AppStateManageExternalStorageBridge mBridge;
     private AppOpsManager mAppOpsManager;
-    private SwitchPreference mSwitchPref;
+    private TwoStatePreference mSwitchPref;
     private PermissionState mPermissionState;
     private MetricsFeatureProvider mMetricsFeatureProvider;
 
@@ -67,7 +67,7 @@ public class ManageExternalStorageDetails extends AppInfoWithHeader implements
         mSwitchPref.setOnPreferenceChangeListener(this);
 
         mMetricsFeatureProvider =
-                FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider();
+                FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     @Override

@@ -119,7 +119,7 @@ public class RestrictedPreferenceHelper {
             final String htmlDescription = info.loadHtmlDescription(mPm);
             final String settingsClassName = info.getSettingsActivityName();
             final String tileServiceClassName = info.getTileServiceName();
-            final int metricsCategory = FeatureFactory.getFactory(mContext)
+            final int metricsCategory = FeatureFactory.getFeatureFactory()
                     .getAccessibilityMetricsFeatureProvider()
                     .getDownloadedFeatureMetricsCategory(componentName);
 
@@ -182,7 +182,7 @@ public class RestrictedPreferenceHelper {
             final String htmlDescription = info.loadHtmlDescription(mPm);
             final String settingsClassName = info.getSettingsActivityName();
             final String tileServiceClassName = info.getTileServiceName();
-            final int metricsCategory = FeatureFactory.getFactory(mContext)
+            final int metricsCategory = FeatureFactory.getFeatureFactory()
                     .getAccessibilityMetricsFeatureProvider()
                     .getDownloadedFeatureMetricsCategory(componentName);
 
@@ -234,6 +234,32 @@ public class RestrictedPreferenceHelper {
         // permittedServices null means all accessibility services are allowed.
         boolean serviceAllowed = permittedServices == null || permittedServices.contains(
                 preference.getPackageName());
+
+        if (android.security.Flags.extendEcmToAllSettings()) {
+            preference.checkEcmRestrictionAndSetDisabled(
+                    AppOpsManager.OPSTR_BIND_ACCESSIBILITY_SERVICE,
+                    preference.getPackageName(), preference.getUid());
+            if (preference.isDisabledByEcm()) {
+                serviceAllowed = false;
+            }
+
+            if (serviceAllowed || serviceEnabled) {
+                preference.setEnabled(true);
+            } else {
+                // Disable accessibility service that are not permitted.
+                final RestrictedLockUtils.EnforcedAdmin admin =
+                        RestrictedLockUtilsInternal.checkIfAccessibilityServiceDisallowed(
+                                mContext, preference.getPackageName(), UserHandle.myUserId());
+
+                if (admin != null) {
+                    preference.setDisabledByAdmin(admin);
+                } else if (!preference.isDisabledByEcm()) {
+                    preference.setEnabled(false);
+                }
+            }
+            return;
+        }
+
         boolean appOpsAllowed;
         if (serviceAllowed) {
             try {

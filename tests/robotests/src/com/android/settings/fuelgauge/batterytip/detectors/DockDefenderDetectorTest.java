@@ -59,25 +59,35 @@ public class DockDefenderDetectorTest {
         mBatteryInfo = new BatteryInfo();
         mBatteryInfo.pluggedStatus = BatteryManager.BATTERY_PLUGGED_DOCK;
         mDockDefenderDetector = new DockDefenderDetector(mBatteryInfo, mContext);
-        Intent intent = BatteryTestUtils.getCustomBatteryIntent(BatteryManager.BATTERY_PLUGGED_DOCK,
-                50 /* level */, 100 /* scale */, BatteryManager.BATTERY_STATUS_CHARGING);
-        doReturn(intent).when(mContext).registerReceiver(eq(null),
-                refEq(new IntentFilter(Intent.ACTION_BATTERY_CHANGED)));
+        Intent intent =
+                BatteryTestUtils.getCustomBatteryIntent(
+                        BatteryManager.BATTERY_PLUGGED_DOCK,
+                        50 /* level */,
+                        100 /* scale */,
+                        BatteryManager.BATTERY_STATUS_CHARGING);
+        doReturn(intent)
+                .when(mContext)
+                .registerReceiver(eq(null), refEq(new IntentFilter(Intent.ACTION_BATTERY_CHANGED)));
 
-        Settings.Global.putInt(mContext.getContentResolver(),
-                BatteryUtils.SETTINGS_GLOBAL_DOCK_DEFENDER_BYPASS, 0);
+        Settings.Global.putInt(
+                mContext.getContentResolver(),
+                BatteryUtils.SETTINGS_GLOBAL_DOCK_DEFENDER_BYPASS,
+                0);
         mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
     }
 
     @Test
     public void testDetect_dockDefenderTemporarilyBypassed() {
-        Settings.Global.putInt(mContext.getContentResolver(),
-                BatteryUtils.SETTINGS_GLOBAL_DOCK_DEFENDER_BYPASS, 1);
+        Settings.Global.putInt(
+                mContext.getContentResolver(),
+                BatteryUtils.SETTINGS_GLOBAL_DOCK_DEFENDER_BYPASS,
+                1);
 
         BatteryTip batteryTip = mDockDefenderDetector.detect();
 
         assertTrue(batteryTip instanceof DockDefenderTip);
-        assertEquals(((DockDefenderTip) batteryTip).getMode(),
+        assertEquals(
+                ((DockDefenderTip) batteryTip).getMode(),
                 BatteryUtils.DockDefenderMode.TEMPORARILY_BYPASSED);
     }
 
@@ -89,8 +99,8 @@ public class DockDefenderDetectorTest {
         BatteryTip batteryTip = mDockDefenderDetector.detect();
 
         assertTrue(batteryTip instanceof DockDefenderTip);
-        assertEquals(((DockDefenderTip) batteryTip).getMode(),
-                BatteryUtils.DockDefenderMode.ACTIVE);
+        assertEquals(
+                ((DockDefenderTip) batteryTip).getMode(), BatteryUtils.DockDefenderMode.ACTIVE);
     }
 
     @Test
@@ -101,7 +111,8 @@ public class DockDefenderDetectorTest {
         BatteryTip batteryTip = mDockDefenderDetector.detect();
 
         assertTrue(batteryTip instanceof DockDefenderTip);
-        assertEquals(((DockDefenderTip) batteryTip).getMode(),
+        assertEquals(
+                ((DockDefenderTip) batteryTip).getMode(),
                 BatteryUtils.DockDefenderMode.FUTURE_BYPASS);
     }
 
@@ -113,8 +124,8 @@ public class DockDefenderDetectorTest {
         BatteryTip batteryTip = mDockDefenderDetector.detect();
 
         assertTrue(batteryTip instanceof DockDefenderTip);
-        assertEquals(((DockDefenderTip) batteryTip).getMode(),
-                BatteryUtils.DockDefenderMode.DISABLED);
+        assertEquals(
+                ((DockDefenderTip) batteryTip).getMode(), BatteryUtils.DockDefenderMode.DISABLED);
     }
 
     @Test
@@ -124,8 +135,8 @@ public class DockDefenderDetectorTest {
         BatteryTip batteryTip = mDockDefenderDetector.detect();
 
         assertTrue(batteryTip instanceof DockDefenderTip);
-        assertEquals(((DockDefenderTip) batteryTip).getMode(),
-                BatteryUtils.DockDefenderMode.DISABLED);
+        assertEquals(
+                ((DockDefenderTip) batteryTip).getMode(), BatteryUtils.DockDefenderMode.DISABLED);
     }
 
     @Test
@@ -136,7 +147,7 @@ public class DockDefenderDetectorTest {
         BatteryTip batteryTip = mDockDefenderDetector.detect();
 
         assertTrue(batteryTip instanceof DockDefenderTip);
-        assertEquals(((DockDefenderTip) batteryTip).getMode(),
-                BatteryUtils.DockDefenderMode.DISABLED);
+        assertEquals(
+                ((DockDefenderTip) batteryTip).getMode(), BatteryUtils.DockDefenderMode.DISABLED);
     }
 }

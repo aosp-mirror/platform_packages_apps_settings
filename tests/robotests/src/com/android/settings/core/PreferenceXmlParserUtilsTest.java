@@ -27,27 +27,21 @@ import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_UNAVAI
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
-import android.content.res.XmlResourceParser;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.AttributeSet;
-import android.util.Xml;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceXmlParserUtils.MetadataFlag;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
-import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * These tests use a series of preferences that have specific attributes which are sometimes
@@ -56,7 +50,6 @@ import java.util.Objects;
  * If changing a preference file breaks a test in this test file, please replace its reference
  * with another preference with a matching replacement attribute.
  */
-@Ignore
 @RunWith(RobolectricTestRunner.class)
 public class PreferenceXmlParserUtilsTest {
 
@@ -65,115 +58,6 @@ public class PreferenceXmlParserUtilsTest {
     @Before
     public void setUp() {
         mContext = getApplicationContext();
-    }
-
-    @Test
-    public void testDataTitleValid_ReturnsPreferenceTitle() {
-        XmlResourceParser parser = getChildByType(R.xml.display_settings,
-                "com.android.settings.display.darkmode.DarkModePreference");
-        final AttributeSet attrs = Xml.asAttributeSet(parser);
-        String title = PreferenceXmlParserUtils.getDataTitle(mContext, attrs);
-        String expTitle = mContext.getString(R.string.dark_ui_mode);
-        assertThat(title).isEqualTo(expTitle);
-    }
-
-    @Test
-    public void testDataKeywordsValid_ReturnsPreferenceKeywords() {
-        XmlResourceParser parser = getChildByType(R.xml.display_settings,
-                "com.android.settings.display.darkmode.DarkModePreference");
-        final AttributeSet attrs = Xml.asAttributeSet(parser);
-        String keywords = PreferenceXmlParserUtils.getDataKeywords(mContext, attrs);
-        String expKeywords = mContext.getString(R.string.keywords_dark_ui_mode);
-        assertThat(keywords).isEqualTo(expKeywords);
-    }
-
-    @Test
-    public void testDataKeyValid_ReturnsPreferenceKey() {
-        XmlResourceParser parser = getChildByType(R.xml.display_settings,
-                "com.android.settings.display.darkmode.DarkModePreference");
-        final AttributeSet attrs = Xml.asAttributeSet(parser);
-        String key = PreferenceXmlParserUtils.getDataKey(mContext, attrs);
-        String expKey = "dark_ui_mode";
-        assertThat(key).isEqualTo(expKey);
-    }
-
-    @Test
-    public void testDataSummaryValid_ReturnsPreferenceSummary() {
-        XmlResourceParser parser = getChildByType(R.xml.sound_settings,
-                "com.android.settings.DefaultRingtonePreference");
-        final AttributeSet attrs = Xml.asAttributeSet(parser);
-        String summary = PreferenceXmlParserUtils.getDataSummary(mContext, attrs);
-        String expSummary = mContext.getString(R.string.summary_placeholder);
-        assertThat(summary).isEqualTo(expSummary);
-    }
-
-    @Test
-    @Config(qualifiers = "mcc999")
-    public void testDataSummaryOnOffValid_ReturnsPreferenceSummaryOnOff() {
-        XmlResourceParser parser = getChildByType(R.xml.display_settings, "CheckBoxPreference");
-        final AttributeSet attrs = Xml.asAttributeSet(parser);
-
-        assertThat(PreferenceXmlParserUtils.getDataSummaryOn(mContext, attrs))
-                .isEqualTo("summary_on");
-        assertThat(PreferenceXmlParserUtils.getDataSummaryOff(mContext, attrs))
-                .isEqualTo("summary_off");
-    }
-
-    @Test
-    @Config(qualifiers = "mcc999")
-    public void testDataEntriesValid_ReturnsPreferenceEntries() {
-        XmlResourceParser parser = getChildByType(R.xml.display_settings, "ListPreference");
-        final AttributeSet attrs = Xml.asAttributeSet(parser);
-        String entries = PreferenceXmlParserUtils.getDataEntries(mContext, attrs);
-        String[] expEntries = mContext.getResources()
-                .getStringArray(R.array.mvno_type_entries);
-        for (String expEntry : expEntries) {
-            assertThat(entries).contains(expEntry);
-        }
-    }
-
-    // Null checks
-    @Test
-    @Config(qualifiers = "mcc999")
-    public void testDataKeyInvalid_ReturnsNull() {
-        XmlResourceParser parser = getParentPrimedParser(R.xml.display_settings);
-        final AttributeSet attrs = Xml.asAttributeSet(parser);
-        String key = PreferenceXmlParserUtils.getDataKey(mContext, attrs);
-        assertThat(key).isNull();
-    }
-
-    @Test
-    @Config(qualifiers = "mcc999")
-    public void testControllerAttribute_returnsValidData() {
-        XmlResourceParser parser = getChildByType(R.xml.about_legal, "Preference");
-        final AttributeSet attrs = Xml.asAttributeSet(parser);
-
-        String controller = PreferenceXmlParserUtils.getController(mContext, attrs);
-        assertThat(controller).isEqualTo("mind_flayer");
-    }
-
-    @Test
-    public void testDataSummaryInvalid_ReturnsNull() {
-        XmlResourceParser parser = getParentPrimedParser(R.xml.display_settings);
-        final AttributeSet attrs = Xml.asAttributeSet(parser);
-        String summary = PreferenceXmlParserUtils.getDataSummary(mContext, attrs);
-        assertThat(summary).isNull();
-    }
-
-    @Test
-    public void testDataSummaryOffInvalid_ReturnsNull() {
-        XmlResourceParser parser = getParentPrimedParser(R.xml.display_settings);
-        final AttributeSet attrs = Xml.asAttributeSet(parser);
-        String summaryOff = PreferenceXmlParserUtils.getDataSummaryOff(mContext, attrs);
-        assertThat(summaryOff).isNull();
-    }
-
-    @Test
-    public void testDataEntriesInvalid_ReturnsNull() {
-        XmlResourceParser parser = getParentPrimedParser(R.xml.display_settings);
-        final AttributeSet attrs = Xml.asAttributeSet(parser);
-        String entries = PreferenceXmlParserUtils.getDataEntries(mContext, attrs);
-        assertThat(entries).isNull();
     }
 
     @Test
@@ -380,46 +264,4 @@ public class PreferenceXmlParserUtilsTest {
         assertThat(bundleWithKey2Found).isTrue();
     }
 
-    /**
-     * @param resId the ID for the XML preference
-     * @return an XML resource parser that points to the start tag
-     */
-    private XmlResourceParser getParentPrimedParser(int resId) {
-        XmlResourceParser parser = null;
-        try {
-            parser = mContext.getResources().getXml(resId);
-
-            int type;
-            while ((type = parser.next()) != XmlPullParser.END_DOCUMENT
-                    && type != XmlPullParser.START_TAG) {
-            }
-        } catch (Exception e) {
-
-        }
-        return parser;
-    }
-
-    private XmlResourceParser getChildByType(int resId, String xmlType) {
-        XmlResourceParser parser = null;
-        try {
-            parser = mContext.getResources().getXml(resId);
-
-            int type;
-            while ((type = parser.next()) != XmlPullParser.END_DOCUMENT
-                    && type != XmlPullParser.START_TAG) {
-            }
-            while (true) {
-                if (Objects.equals(parser.getName(), xmlType)) {
-                    break;
-                }
-                final int nextEvent = parser.next();
-                if (nextEvent == XmlPullParser.END_DOCUMENT) {
-                    break;
-                }
-            }
-        } catch (Exception e) {
-
-        }
-        return parser;
-    }
 }

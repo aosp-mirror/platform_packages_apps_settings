@@ -108,7 +108,7 @@
             Standard auto-rotation preference that will be shown when device state based
             auto-rotation settings are NOT available.
           -->
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="auto_rotate"
             android:title="@string/accelerometer_title"
             settings:keywords="@string/keywords_auto_rotate"
@@ -132,19 +132,19 @@
             settings:keywords="@string/keywords_screen_resolution"
             settings:controller="com.android.settings.display.ScreenResolutionController"/>
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="display_white_balance"
             android:title="@string/display_white_balance_title"
             android:summary="@string/display_white_balance_summary"
             settings:controller="com.android.settings.display.DisplayWhiteBalancePreferenceController"/>
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="peak_refresh_rate"
             android:title="@string/peak_refresh_rate_title"
             android:summary="@string/peak_refresh_rate_summary"
             settings:controller="com.android.settings.display.PeakRefreshRatePreferenceController"/>
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="show_operator_name"
             android:title="@string/show_operator_name_title"
             android:summary="@string/show_operator_name_summary"/>
@@ -156,16 +156,16 @@
             settings:keywords="@string/keywords_screensaver"
             settings:controller="com.android.settings.display.ScreenSaverPreferenceController"/>
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="camera_gesture"
             android:title="@string/camera_gesture_title"
             android:summary="@string/camera_gesture_desc"/>
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="lift_to_wake"
             android:title="@string/lift_to_wake_title"/>
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="tap_to_wake"
             android:title="@string/tap_to_wake"
             android:summary="@string/tap_to_wake_summary"/>
