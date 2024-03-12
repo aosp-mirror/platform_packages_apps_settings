@@ -45,6 +45,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
@@ -126,7 +127,10 @@ public class StorageItemPreferenceControllerTest {
         final StorageItemPreference documentsAndOther = spy(new StorageItemPreference(mContext));
         documentsAndOther.setIcon(R.drawable.ic_folder_vd_theme_24);
         final StorageItemPreference system = spy(new StorageItemPreference(mContext));
-        system.setIcon(com.android.settingslib.R.drawable.ic_system_update);
+        system.setIcon(R.drawable.ic_android_vd_theme_24);
+        final StorageItemPreference temporaryFiles = spy(new StorageItemPreference(mContext));
+        temporaryFiles.setIcon(R.drawable.ic_database_vd_theme_24);
+        final PreferenceCategory categorySplitter = spy(new PreferenceCategory(mContext));
         final StorageItemPreference trash = spy(new StorageItemPreference(mContext));
         trash.setIcon(R.drawable.ic_trash_can);
 
@@ -147,6 +151,10 @@ public class StorageItemPreferenceControllerTest {
                 .thenReturn(documentsAndOther);
         when(screen.findPreference(eq(StorageItemPreferenceController.SYSTEM_KEY)))
                 .thenReturn(system);
+        when(screen.findPreference(eq(StorageItemPreferenceController.TEMPORARY_FILES_KEY)))
+                .thenReturn(temporaryFiles);
+        when(screen.findPreference(eq(StorageItemPreferenceController.CATEGORY_SPLITTER)))
+                .thenReturn(categorySplitter);
         when(screen.findPreference(eq(StorageItemPreferenceController.TRASH_KEY)))
                 .thenReturn(trash);
 
@@ -219,6 +227,7 @@ public class StorageItemPreferenceControllerTest {
         assertThat(mController.mGamesPreference.isVisible()).isFalse();
         assertThat(mController.mDocumentsAndOtherPreference.isVisible()).isFalse();
         assertThat(mController.mSystemPreference.isVisible()).isFalse();
+        assertThat(mController.mTemporaryFilesPreference.isVisible()).isFalse();
         assertThat(mController.mTrashPreference.isVisible()).isFalse();
     }
 
@@ -330,6 +339,16 @@ public class StorageItemPreferenceControllerTest {
     }
 
     @Test
+    public void testClickTemporaryFiles() {
+        mPreference.setKey(StorageItemPreferenceController.TEMPORARY_FILES_KEY);
+        assertThat(mController.handlePreferenceTreeClick(mPreference)).isTrue();
+
+        verify(mFragment.getFragmentManager().beginTransaction())
+                .add(nullable(StorageUtils.TemporaryFilesInfoFragment.class),
+                        nullable(String.class));
+    }
+
+    @Test
     @Config(shadows = ShadowUserManager.class)
     public void testMeasurementCompletedUpdatesPreferences() {
         mController.displayPreference(mPreferenceScreen);
@@ -343,6 +362,7 @@ public class StorageItemPreferenceControllerTest {
         result.documentsAndOtherSize = MEGABYTE_IN_BYTES * 50;
         result.trashSize = KILOBYTE_IN_BYTES * 100;
         result.allAppsExceptGamesSize = MEGABYTE_IN_BYTES * 90;
+        result.systemSize = MEGABYTE_IN_BYTES * 60;
 
         final SparseArray<StorageAsyncLoader.StorageResult> results = new SparseArray<>();
         results.put(0, result);
@@ -356,6 +376,8 @@ public class StorageItemPreferenceControllerTest {
         assertThat(mController.mDocumentsAndOtherPreference.getSummary().toString())
                 .isEqualTo("50 MB");
         assertThat(mController.mTrashPreference.getSummary().toString()).isEqualTo("100 kB");
+        assertThat(mController.mSystemPreference.getSummary().toString())
+                .isEqualTo("60 MB");
     }
 
     @Test
@@ -373,6 +395,7 @@ public class StorageItemPreferenceControllerTest {
         verify(mController.mDocumentsAndOtherPreference, times(2))
                 .setIcon(nullable(Drawable.class));
         verify(mController.mSystemPreference, times(2)).setIcon(nullable(Drawable.class));
+        verify(mController.mTemporaryFilesPreference, times(2)).setIcon(nullable(Drawable.class));
         verify(mController.mTrashPreference, times(2)).setIcon(nullable(Drawable.class));
     }
 
@@ -437,6 +460,7 @@ public class StorageItemPreferenceControllerTest {
         assertThat(mController.mGamesPreference.isVisible()).isFalse();
         assertThat(mController.mDocumentsAndOtherPreference.isVisible()).isFalse();
         assertThat(mController.mSystemPreference.isVisible()).isFalse();
+        assertThat(mController.mTemporaryFilesPreference.isVisible()).isFalse();
         assertThat(mController.mTrashPreference.isVisible()).isFalse();
     }
 

@@ -41,6 +41,7 @@ public class StorageCacheHelperTest {
     private static final long FAKE_TOTAL_SIZE = 256000L;
     private static final long FAKE_TOTAL_USED_SIZE = 50000L;
     private static final long FAKE_USED_SIZE = 6500L;
+    private static final long FAKE_TEMPORARY_FILES_SIZE = 2500L;
 
     private Context mContext;
     private StorageCacheHelper mHelper;
@@ -70,6 +71,7 @@ public class StorageCacheHelperTest {
         StorageCacheHelper.StorageCache storageCache = mHelper.retrieveCachedSize();
 
         assertThat(storageCache.imagesSize).isEqualTo(FAKE_IMAGES_SIZE);
+        assertThat(storageCache.temporaryFilesSize).isEqualTo(FAKE_TEMPORARY_FILES_SIZE);
         assertThat(storageCache.totalSize).isEqualTo(0);
     }
 
@@ -100,6 +102,7 @@ public class StorageCacheHelperTest {
         result.gamesSize = FAKE_GAMES_SIZE;
         result.videosSize = FAKE_VIDEOS_SIZE;
         result.allAppsExceptGamesSize = FAKE_APPS_SIZE;
+        result.temporaryFilesSize = FAKE_TEMPORARY_FILES_SIZE;
         return result;
     }
 }

@@ -81,18 +81,30 @@
         android:icon="@drawable/ic_folder_vd_theme_24"
         android:order="106"/>
     <com.android.settings.deviceinfo.StorageItemPreference
-        android:key="pref_system"
-        android:title="@string/storage_system"
-        android:icon="@drawable/ic_system_update"
-        android:order="107"/>
-    <com.android.settings.deviceinfo.StorageItemPreference
         android:key="pref_trash"
         android:title="@string/storage_trash"
         android:icon="@drawable/ic_trash_can"
-        android:order="108"/>
-    <!-- Preference order 100~200 are 'ONLY' for storage category preferences above. -->
+        android:order="107"/>
+    <!-- Preference order 100~200 are 'ONLY' for storage category
+    preferences that are sorted by size. -->
+    <PreferenceCategory
+        android:key="storage_category_splitter"
+        android:title="@string/storage_system_label"
+        android:order="201"
+        settings:searchable="false">
+        <com.android.settings.deviceinfo.StorageItemPreference
+            android:key="pref_system"
+            android:title="@string/storage_os_name"
+            android:icon="@drawable/ic_android_vd_theme_24"
+            android:order="202"/>
+        <com.android.settings.deviceinfo.StorageItemPreference
+            android:key="temporary_files"
+            android:title="@string/storage_temporary_files"
+            android:icon="@drawable/ic_database_vd_theme_24"
+            android:order="203"/>
+    </PreferenceCategory>
     <PreferenceCategory
         android:key="pref_non_current_users"
         android:title="@string/storage_other_users"
-        android:order="201" />
+        android:order="204" />
 </PreferenceScreen>

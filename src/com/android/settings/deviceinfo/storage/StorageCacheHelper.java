@@ -35,6 +35,7 @@ public class StorageCacheHelper {
     private static final String DOCUMENTS_AND_OTHER_SIZE_KEY = "documents_and_other_size_key";
     private static final String TRASH_SIZE_KEY = "trash_size_key";
     private static final String SYSTEM_SIZE_KEY = "system_size_key";
+    private static final String TEMPORARY_FILES_SIZE_KEY = "temporary_files_size_key";
     private static final String USED_SIZE_KEY = "used_size_key";
 
     private final SharedPreferences mSharedPreferences;
@@ -66,6 +67,7 @@ public class StorageCacheHelper {
                 .putLong(DOCUMENTS_AND_OTHER_SIZE_KEY, data.documentsAndOtherSize)
                 .putLong(TRASH_SIZE_KEY, data.trashSize)
                 .putLong(SYSTEM_SIZE_KEY, data.systemSize)
+                .putLong(TEMPORARY_FILES_SIZE_KEY, data.temporaryFilesSize)
                 .apply();
     }
 
@@ -109,6 +111,7 @@ public class StorageCacheHelper {
         result.documentsAndOtherSize = mSharedPreferences.getLong(DOCUMENTS_AND_OTHER_SIZE_KEY, 0);
         result.trashSize = mSharedPreferences.getLong(TRASH_SIZE_KEY, 0);
         result.systemSize = mSharedPreferences.getLong(SYSTEM_SIZE_KEY, 0);
+        result.temporaryFilesSize = mSharedPreferences.getLong(TEMPORARY_FILES_SIZE_KEY, 0);
         return result;
     }
 
@@ -126,5 +129,6 @@ public class StorageCacheHelper {
         public long documentsAndOtherSize;
         public long trashSize;
         public long systemSize;
+        public long temporaryFilesSize;
     }
 }
