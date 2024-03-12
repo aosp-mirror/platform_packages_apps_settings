@@ -39,7 +39,7 @@ import android.os.ServiceManager;
 import android.os.UserManager;
 
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.internal.R;
 import com.android.internal.annotations.VisibleForTesting;
@@ -81,13 +81,13 @@ public class ForceEnableNotesRolePreferenceController
 
     @Override
     public void updateState(Preference preference) {
-        ((SwitchPreference) mPreference).setChecked(isEnabled());
+        ((TwoStatePreference) mPreference).setChecked(isEnabled());
     }
 
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
         super.onDeveloperOptionsSwitchDisabled();
-        ((SwitchPreference) mPreference).setChecked(false);
+        ((TwoStatePreference) mPreference).setChecked(false);
         setEnabled(false);
     }
 

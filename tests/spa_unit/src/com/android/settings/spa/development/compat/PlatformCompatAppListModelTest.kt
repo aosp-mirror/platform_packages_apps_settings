@@ -20,12 +20,10 @@ import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.content.pm.PackageManager.PackageInfoFlags
-import androidx.compose.runtime.State
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth.assertThat
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
@@ -41,7 +39,6 @@ import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoRule
 import org.mockito.Mockito.`when` as whenever
 
-@OptIn(ExperimentalCoroutinesApi::class)
 @RunWith(AndroidJUnit4::class)
 class PlatformCompatAppListModelTest {
     @get:Rule
@@ -81,20 +78,20 @@ class PlatformCompatAppListModelTest {
 
     @Test
     fun getSummary() = runTest {
-        val summaryState = getSummaryState(APP)
+        val summary = getSummary(APP)
 
-        assertThat(summaryState.value).isEqualTo(PACKAGE_NAME)
+        assertThat(summary).isEqualTo(PACKAGE_NAME)
     }
 
-    private fun getSummaryState(app: ApplicationInfo): State<String> {
-        lateinit var summary: State<String>
+    private fun getSummary(app: ApplicationInfo): String {
+        lateinit var summary: () -> String
         composeTestRule.setContent {
             summary = listModel.getSummary(
                 option = 0,
                 record = PlatformCompatAppRecord(app),
             )
         }
-        return summary
+        return summary()
     }
 
     private companion object {

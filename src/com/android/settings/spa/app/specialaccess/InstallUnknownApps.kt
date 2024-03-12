@@ -18,14 +18,15 @@ package com.android.settings.spa.app.specialaccess
 
 import android.Manifest
 import android.app.AppGlobals
+import android.app.AppOpsManager
 import android.app.AppOpsManager.MODE_DEFAULT
 import android.app.AppOpsManager.OP_REQUEST_INSTALL_PACKAGES
 import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.os.UserManager
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.livedata.observeAsState
 import com.android.settings.R
+import com.android.settingslib.spa.livedata.observeAsCallback
 import com.android.settingslib.spaprivileged.model.app.AppOpsController
 import com.android.settingslib.spaprivileged.model.app.AppRecord
 import com.android.settingslib.spaprivileged.model.app.userId
@@ -47,7 +48,7 @@ data class InstallUnknownAppsRecord(
 
 class InstallUnknownAppsListModel(private val context: Context) :
     TogglePermissionAppListModel<InstallUnknownAppsRecord> {
-    override val pageTitleResId = R.string.install_other_apps
+    override val pageTitleResId = com.android.settingslib.R.string.install_other_apps
     override val switchTitleResId = R.string.external_source_switch_title
     override val footerResId = R.string.install_all_warning
     override val switchRestrictionKeys =
@@ -55,6 +56,7 @@ class InstallUnknownAppsListModel(private val context: Context) :
             UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES,
             UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES_GLOBALLY,
         )
+    override val enhancedConfirmationKey: String = AppOpsManager.OPSTR_REQUEST_INSTALL_PACKAGES
 
     override fun transformItem(app: ApplicationInfo) =
         InstallUnknownAppsRecord(
@@ -79,7 +81,7 @@ class InstallUnknownAppsListModel(private val context: Context) :
 
     @Composable
     override fun isAllowed(record: InstallUnknownAppsRecord) =
-        record.appOpsController.isAllowed.observeAsState()
+        record.appOpsController.isAllowed.observeAsCallback()
 
     override fun isChangeable(record: InstallUnknownAppsRecord) =
         isChangeable(record, getPotentialPackageNames(record.app.userId))

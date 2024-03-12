@@ -16,21 +16,17 @@
 
 package com.android.settings.wifi.tether;
 
-import static com.android.settings.AllInOneTetherSettings.DEDUP_POSTFIX;
-
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.net.wifi.SoftApConfiguration;
 import android.text.TextUtils;
-import android.util.FeatureFlagUtils;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.EditTextPreference;
 import androidx.preference.Preference;
 
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.ValidatedEditTextPreference;
 import com.android.settings.wifi.dpp.WifiDppUtils;
@@ -63,13 +59,12 @@ public class WifiTetherSSIDPreferenceController extends WifiTetherBasePreference
         super(context, listener);
 
         mWifiDeviceNameTextValidator = new WifiDeviceNameTextValidator();
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     @Override
     public String getPreferenceKey() {
-        return FeatureFlagUtils.isEnabled(mContext, FeatureFlags.TETHER_ALL_IN_ONE)
-                ? PREF_KEY + DEDUP_POSTFIX : PREF_KEY;
+        return PREF_KEY;
     }
 
     @Override

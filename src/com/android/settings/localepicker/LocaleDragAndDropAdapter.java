@@ -16,6 +16,7 @@
 
 package com.android.settings.localepicker;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.os.Bundle;
@@ -38,6 +39,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.internal.app.LocalePicker;
 import com.android.internal.app.LocaleStore;
 import com.android.settings.R;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.shortcut.ShortcutsUpdateTask;
 
 import java.text.NumberFormat;
@@ -192,6 +194,9 @@ class LocaleDragAndDropAdapter
     @VisibleForTesting
     protected void setCheckBoxDescription(LocaleDragCell dragCell, CheckBox checkbox,
             boolean isChecked) {
+        if (!mRemoveMode) {
+            return;
+        }
         CharSequence checkedStatus = mContext.getText(
                 isChecked ? com.android.internal.R.string.checked
                         : com.android.internal.R.string.not_checked);
@@ -223,6 +228,11 @@ class LocaleDragAndDropAdapter
             // I did not see it in a while, but if it happens, investigate and file a bug.
             Log.e(TAG, String.format(Locale.US,
                     "Negative position in onItemMove %d -> %d", fromPosition, toPosition));
+        }
+
+        if (fromPosition != toPosition) {
+            FeatureFactory.getFeatureFactory().getMetricsFeatureProvider()
+                    .action(mContext, SettingsEnums.ACTION_REORDER_LANGUAGE);
         }
 
         notifyItemChanged(fromPosition); // to update the numbers
@@ -263,6 +273,8 @@ class LocaleDragAndDropAdapter
         for (int i = itemCount - 1; i >= 0; i--) {
             localeInfo = mFeedItemList.get(i);
             if (localeInfo.getChecked()) {
+                FeatureFactory.getFeatureFactory().getMetricsFeatureProvider()
+                        .action(mContext, SettingsEnums.ACTION_REMOVE_LANGUAGE);
                 mFeedItemList.remove(i);
             }
         }

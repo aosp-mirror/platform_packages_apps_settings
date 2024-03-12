@@ -46,10 +46,8 @@ public class BatteryInfoLoaderTest {
 
     private static final long TEST_TIME_REMAINING = 1000L;
 
-    @Mock
-    private BatteryStatsManager mBatteryStatsManager;
-    @Mock
-    private BatteryUsageStats mBatteryUsageStats;
+    @Mock private BatteryStatsManager mBatteryStatsManager;
+    @Mock private BatteryUsageStats mBatteryUsageStats;
 
     private Context mContext;
 
@@ -57,7 +55,7 @@ public class BatteryInfoLoaderTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
-        FakeFeatureFactory.setupForTest().getPowerUsageFeatureProvider(mContext);
+        FakeFeatureFactory.setupForTest().getPowerUsageFeatureProvider();
 
         doReturn(mContext).when(mContext).getApplicationContext();
         when(mContext.getSystemService(eq(Context.BATTERY_STATS_SERVICE)))

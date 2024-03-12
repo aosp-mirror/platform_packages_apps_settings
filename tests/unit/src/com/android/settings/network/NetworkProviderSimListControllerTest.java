@@ -16,19 +16,16 @@
 
 package com.android.settings.network;
 
-import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
-import static com.google.common.truth.Truth.assertThat;
-
 import static androidx.lifecycle.Lifecycle.Event;
+
+import static com.google.common.truth.Truth.assertThat;
 
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.os.Looper;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -36,18 +33,15 @@ import android.text.TextUtils;
 
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LifecycleRegistry;
-import androidx.preference.PreferenceManager;
-import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.test.annotation.UiThreadTest;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import com.android.settings.R;
 import com.android.settings.testutils.ResourcesUtils;
 import com.android.settingslib.RestrictedPreference;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
 
 import org.junit.Before;
@@ -83,8 +77,6 @@ public class NetworkProviderSimListControllerTest {
     @Mock
     private SubscriptionManager mSubscriptionManager;
     @Mock
-    private Lifecycle mLifecycle;
-    @Mock
     private LifecycleOwner mLifecycleOwner;
     private LifecycleRegistry mLifecycleRegistry;
 
@@ -100,12 +92,10 @@ public class NetworkProviderSimListControllerTest {
      * Mock the NetworkProviderSimListController that allows one to set a default voice,
      * SMS and mobile data subscription ID.
      */
-    @SuppressWarnings("ClassCanBeStatic")
-    private class MockNetworkProviderSimListController extends
-            com.android.settings.network.NetworkProviderSimListController {
-        public MockNetworkProviderSimListController(Context context, Lifecycle lifecycle,
-        LifecycleOwner lifecycleOwner) {
-            super(context, lifecycle, lifecycleOwner);
+    private static class MockNetworkProviderSimListController
+            extends NetworkProviderSimListController {
+        MockNetworkProviderSimListController(Context context, String preferenceKey) {
+            super(context, preferenceKey);
         }
 
         private List<SubscriptionInfoEntity> mSubscriptionInfoEntity;
@@ -136,8 +126,7 @@ public class NetworkProviderSimListControllerTest {
         mPreference.setKey(KEY_PREFERENCE_SIM_LIST);
         mPreferenceCategory = new PreferenceCategory(mContext);
         mPreferenceCategory.setKey(KEY_PREFERENCE_CATEGORY_SIM);
-        mController = new MockNetworkProviderSimListController(mContext, mLifecycle,
-                mLifecycleOwner);
+        mController = new MockNetworkProviderSimListController(mContext, "test_key");
         mLifecycleRegistry = new LifecycleRegistry(mLifecycleOwner);
         when(mLifecycleOwner.getLifecycle()).thenReturn(mLifecycleRegistry);
     }

@@ -210,7 +210,7 @@ public class EnterprisePrivacySettingsTest extends AbsBasePrivacySettingsPrefere
 
             // Need to set the Theme.AppCompat theme (or descendant) with this activity, otherwise
             // a {@link IllegalStateException} is thrown when setting the content view.
-            setTheme(R.style.Theme_AppCompat_Light);
+            setTheme(androidx.appcompat.R.style.Theme_AppCompat_Light);
             setContentView(frameLayout);
         }
     }

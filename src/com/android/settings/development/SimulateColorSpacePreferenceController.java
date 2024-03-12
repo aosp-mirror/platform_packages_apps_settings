@@ -26,7 +26,6 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 
-import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
@@ -83,8 +82,10 @@ public class SimulateColorSpacePreferenceController extends DeveloperOptionsPref
             if (index < 0) {
                 final Resources res = mContext.getResources();
                 // We're using a mode controlled by accessibility preferences.
-                listPreference.setSummary(res.getString(R.string.daltonizer_type_overridden,
-                        res.getString(R.string.accessibility_display_daltonizer_preference_title)));
+                listPreference.setSummary(
+                        res.getString(com.android.settingslib.R.string.daltonizer_type_overridden,
+                        res.getString(com.android.settingslib.R
+                                .string.accessibility_display_daltonizer_preference_title)));
             } else {
                 listPreference.setSummary("%s");
             }

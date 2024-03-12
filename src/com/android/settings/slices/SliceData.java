@@ -73,6 +73,8 @@ public class SliceData {
 
     private final int mHighlightMenuRes;
 
+    private final String mUserRestriction;
+
     @SliceType
     private final int mSliceType;
 
@@ -132,6 +134,10 @@ public class SliceData {
         return mIsPublicSlice;
     }
 
+    public String getUserRestriction() {
+        return mUserRestriction;
+    }
+
     private SliceData(Builder builder) {
         mKey = builder.mKey;
         mTitle = builder.mTitle;
@@ -146,6 +152,7 @@ public class SliceData {
         mUnavailableSliceSubtitle = builder.mUnavailableSliceSubtitle;
         mIsPublicSlice = builder.mIsPublicSlice;
         mHighlightMenuRes = builder.mHighlightMenuRes;
+        mUserRestriction = builder.mUserRestriction;
     }
 
     @Override
@@ -188,6 +195,8 @@ public class SliceData {
         private int mHighlightMenuRes;
 
         private boolean mIsPublicSlice;
+
+        private String mUserRestriction;
 
         public Builder setKey(String key) {
             mKey = key;
@@ -252,6 +261,11 @@ public class SliceData {
 
         public Builder setIsPublicSlice(boolean isPublicSlice) {
             mIsPublicSlice = isPublicSlice;
+            return this;
+        }
+
+        public Builder setUserRestriction(String userRestriction) {
+            mUserRestriction = userRestriction;
             return this;
         }
 

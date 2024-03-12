@@ -30,7 +30,6 @@ import static android.telephony.data.ApnSetting.TYPE_MMS;
 
 import static com.android.settings.sim.SimDialogActivity.DATA_PICK;
 import static com.android.settings.sim.SimDialogActivity.INVALID_PICK;
-import static com.android.settings.sim.SimDialogActivity.PICK_DISMISS;
 import static com.android.settings.sim.SimSelectNotification.ENABLE_MMS_NOTIFICATION_CHANNEL;
 import static com.android.settings.sim.SimSelectNotification.ENABLE_MMS_NOTIFICATION_ID;
 import static com.android.settings.sim.SimSelectNotification.SIM_WARNING_NOTIFICATION_CHANNEL;
@@ -61,6 +60,8 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
 
+import androidx.test.core.app.ApplicationProvider;
+
 import com.android.settings.R;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
@@ -71,6 +72,7 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
@@ -80,8 +82,8 @@ import java.util.concurrent.Executor;
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowAlertDialogCompat.class)
 public class SimSelectNotificationTest {
-    @Mock
-    private Context mContext;
+    @Spy
+    private Context mContext = ApplicationProvider.getApplicationContext();
     @Mock
     private Executor mExecutor;
     @Mock
@@ -92,8 +94,8 @@ public class SimSelectNotificationTest {
     private SubscriptionManager mSubscriptionManager;
     @Mock
     private PackageManager mPackageManager;
-    @Mock
-    private Resources mResources;
+    @Spy
+    private Resources mResources = mContext.getResources();
     @Mock
     private SubscriptionInfo mSubInfo;
     @Mock

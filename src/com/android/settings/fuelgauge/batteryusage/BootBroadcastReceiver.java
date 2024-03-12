@@ -27,6 +27,7 @@ import com.android.settings.core.instrumentation.ElapsedTimeUtils;
 import com.android.settings.fuelgauge.BatteryUsageHistoricalLogEntry.Action;
 import com.android.settings.fuelgauge.batteryusage.bugreport.BatteryUsageLogUtils;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.fuelgauge.BatteryUtils;
 
 import java.time.Duration;
 
@@ -56,7 +57,7 @@ public final class BootBroadcastReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         final String action = intent == null ? "" : intent.getAction();
-        if (DatabaseUtils.isWorkProfile(context)) {
+        if (BatteryUtils.isWorkProfile(context)) {
             Log.w(TAG, "do not start job for work profile action=" + action);
             return;
         }
@@ -70,8 +71,7 @@ public final class BootBroadcastReceiver extends BroadcastReceiver {
                 break;
             case Intent.ACTION_TIME_CHANGED:
                 Log.d(TAG, "refresh job and clear all data from action=" + action);
-                DatabaseUtils.clearAll(context);
-                PeriodicJobManager.getInstance(context).refreshJob(/*fromBoot=*/ false);
+                DatabaseUtils.clearDataAfterTimeChangedIfNeeded(context);
                 break;
             default:
                 Log.w(TAG, "receive unsupported action=" + action);
@@ -95,8 +95,8 @@ public final class BootBroadcastReceiver extends BroadcastReceiver {
 
     private long getRescheduleTimeForBootAction(Context context) {
         final boolean delayHourlyJobWhenBooting =
-                FeatureFactory.getFactory(context)
-                        .getPowerUsageFeatureProvider(context)
+                FeatureFactory.getFeatureFactory()
+                        .getPowerUsageFeatureProvider()
                         .delayHourlyJobWhenBooting();
         return delayHourlyJobWhenBooting
                 ? RESCHEDULE_FOR_BOOT_ACTION_WITH_DELAY
@@ -104,6 +104,6 @@ public final class BootBroadcastReceiver extends BroadcastReceiver {
     }
 
     private static void refreshJobs(Context context) {
-        PeriodicJobManager.getInstance(context).refreshJob(/*fromBoot=*/ true);
+        PeriodicJobManager.getInstance(context).refreshJob(/* fromBoot= */ true);
     }
 }

@@ -14,29 +14,12 @@
 
 package com.android.settings.datausage;
 
-import android.net.NetworkPolicy;
-
 import com.android.settingslib.net.DataUsageController.DataUsageInfo;
 
 /**
  * Controller to handle caching and mobile data logic.
  */
 public class DataUsageInfoController {
-    /**
-     * Take the cached data usage values in the NetworkPolicy to update DataUsageInfo.
-     */
-    public void updateDataLimit(DataUsageInfo info, NetworkPolicy policy) {
-        if (info == null || policy == null) {
-            return;
-        }
-        if (policy.warningBytes >= 0) {
-            info.warningLevel = policy.warningBytes;
-        }
-        if (policy.limitBytes >= 0) {
-            info.limitLevel = policy.limitBytes;
-        }
-    }
-
     /**
      * @returns the most appropriate limit for the data usage summary. Use the total usage when it
      * is higher than the limit and warning level. Use the limit when it is set and less than usage.

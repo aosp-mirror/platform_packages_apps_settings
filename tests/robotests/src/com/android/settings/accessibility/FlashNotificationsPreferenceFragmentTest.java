@@ -22,6 +22,7 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 
 import androidx.test.core.app.ApplicationProvider;
@@ -30,7 +31,6 @@ import com.android.settings.R;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -66,10 +66,10 @@ public class FlashNotificationsPreferenceFragmentTest {
         assertThat(mFragment.getLogTag()).isEqualTo("FlashNotificationsPreferenceFragment");
     }
 
-    @Ignore
     @Test
-    public void getMetricsCategory_isZero() {
-        assertThat(mFragment.getMetricsCategory()).isEqualTo(0); // TODO
+    public void getMetricsCategory_returnsCorrectCategory() {
+        assertThat(mFragment.getMetricsCategory()).isEqualTo(
+                SettingsEnums.FLASH_NOTIFICATION_SETTINGS);
     }
 
     @Test

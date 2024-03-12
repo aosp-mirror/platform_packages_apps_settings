@@ -328,8 +328,9 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
                 if (BiometricUtils.containsGatekeeperPasswordHandle(data)) {
                     mGkPwHandle = BiometricUtils.getGatekeeperPasswordHandle(data);
                     if (!TextUtils.isEmpty(mRetryPreferenceKey)) {
-                        getActivity().overridePendingTransition(R.anim.sud_slide_next_in,
-                                R.anim.sud_slide_next_out);
+                        getActivity().overridePendingTransition(
+                                com.google.android.setupdesign.R.anim.sud_slide_next_in,
+                                com.google.android.setupdesign.R.anim.sud_slide_next_out);
                         retryPreferenceKey(mRetryPreferenceKey, mRetryPreferenceExtra);
                     }
                 } else {

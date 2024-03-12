@@ -54,7 +54,7 @@ public class LockAfterTimeoutPreferenceController extends AbstractPreferenceCont
         mUserId = userId;
         mLockPatternUtils = lockPatternUtils;
         mDPM = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
-        mTrustAgentManager = FeatureFactory.getFactory(context)
+        mTrustAgentManager = FeatureFactory.getFeatureFactory()
                 .getSecurityFeatureProvider().getTrustAgentManager();
     }
 

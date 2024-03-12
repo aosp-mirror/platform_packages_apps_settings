@@ -35,6 +35,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 
+import com.android.internal.telephony.flags.Flags;
 import com.android.settings.R;
 import com.android.settings.network.SubscriptionUtil;
 
@@ -133,10 +134,15 @@ public class SelectSpecificDataSimDialogFragment extends SimDialogFragment imple
             return;
         }
 
-        if ((newSubInfo.isEmbedded() && newSubInfo.getProfileClass() == PROFILE_CLASS_PROVISIONING)
-                || (currentDataSubInfo.isEmbedded()
-                && currentDataSubInfo.getProfileClass() == PROFILE_CLASS_PROVISIONING)) {
-            Log.d(TAG, "do not set the provision eSIM");
+        if ((newSubInfo.isEmbedded()
+            && (newSubInfo.getProfileClass() == PROFILE_CLASS_PROVISIONING
+                || (Flags.oemEnabledSatelliteFlag()
+                    && newSubInfo.isOnlyNonTerrestrialNetwork())))
+            || (currentDataSubInfo.isEmbedded()
+            && (currentDataSubInfo.getProfileClass() == PROFILE_CLASS_PROVISIONING
+                || (Flags.oemEnabledSatelliteFlag()
+                    && currentDataSubInfo.isOnlyNonTerrestrialNetwork())))) {
+            Log.d(TAG, "do not set the provisioning or satellite eSIM");
             dismiss();
             return;
         }

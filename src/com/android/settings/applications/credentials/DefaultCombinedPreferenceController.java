@@ -16,11 +16,10 @@
 
 package com.android.settings.applications.credentials;
 
+import android.annotation.Nullable;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.credentials.CredentialManager;
 import android.credentials.CredentialProviderInfo;
@@ -29,8 +28,10 @@ import android.provider.Settings;
 import android.service.autofill.AutofillService;
 import android.service.autofill.AutofillServiceInfo;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.autofill.AutofillManager;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.applications.defaultapps.DefaultAppPreferenceController;
 import com.android.settingslib.applications.DefaultAppInfo;
@@ -38,7 +39,8 @@ import com.android.settingslib.applications.DefaultAppInfo;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DefaultCombinedPreferenceController extends DefaultAppPreferenceController {
+public class DefaultCombinedPreferenceController extends DefaultAppPreferenceController
+        implements Preference.OnPreferenceClickListener {
 
     private static final Intent AUTOFILL_PROBE = new Intent(AutofillService.SERVICE_INTERFACE);
     private static final String TAG = "DefaultCombinedPreferenceController";
@@ -73,18 +75,55 @@ public class DefaultCombinedPreferenceController extends DefaultAppPreferenceCon
 
     @Override
     protected Intent getSettingIntent(DefaultAppInfo info) {
-        if (info == null) {
-            return null;
+        // Despite this method being called getSettingIntent this intent actually
+        // opens the primary picker. This is so that we can swap the cog and the left
+        // hand side presses to align the UX.
+        return new Intent(mContext, CredentialsPickerActivity.class);
+    }
+
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+
+        final String prefKey = getPreferenceKey();
+        final Preference preference = screen.findPreference(prefKey);
+        if (preference != null) {
+            preference.setOnPreferenceClickListener((Preference.OnPreferenceClickListener) this);
         }
-        final AutofillSettingIntentProvider intentProvider =
-                new AutofillSettingIntentProvider(mContext, getUser(), info.getKey());
-        return intentProvider.getIntent();
+    }
+
+    @Override
+    public boolean onPreferenceClick(Preference preference) {
+        // Get the selected provider.
+        final CombinedProviderInfo topProvider = getTopProvider();
+        if (topProvider == null) {
+            return false;
+        }
+
+        // If the top provider has a defined Credential Manager settings
+        // provider then we should open that up.
+        final String settingsActivity = topProvider.getSettingsActivity();
+        if (!TextUtils.isEmpty(settingsActivity)) {
+            final Intent intent =
+                    new Intent(Intent.ACTION_MAIN)
+                            .setComponent(
+                                    new ComponentName(
+                                            topProvider.getPackageName(), settingsActivity));
+            startActivity(intent);
+            return true;
+        }
+
+        return false;
+    }
+
+    private @Nullable CombinedProviderInfo getTopProvider() {
+        List<CombinedProviderInfo> providers = getAllProviders(getUser());
+        return CombinedProviderInfo.getTopProvider(providers);
     }
 
     @Override
     protected DefaultAppInfo getDefaultAppInfo() {
-        List<CombinedProviderInfo> providers = getAllProviders(getUser());
-        CombinedProviderInfo topProvider = CombinedProviderInfo.getTopProvider(providers);
+        CombinedProviderInfo topProvider = getTopProvider();
         if (topProvider != null) {
             ServiceInfo brandingService = topProvider.getBrandingService();
             if (brandingService == null) {
@@ -136,53 +175,6 @@ public class DefaultCombinedPreferenceController extends DefaultAppPreferenceCon
     @Override
     protected boolean showAppSummary() {
         return true;
-    }
-
-    /** Provides Intent to setting activity for the specified autofill service. */
-    static final class AutofillSettingIntentProvider {
-
-        private final String mKey;
-        private final Context mContext;
-        private final int mUserId;
-
-        public AutofillSettingIntentProvider(Context context, int userId, String key) {
-            mKey = key;
-            mContext = context;
-            mUserId = userId;
-        }
-
-        public Intent getIntent() {
-            final List<ResolveInfo> resolveInfos =
-                    mContext.getPackageManager()
-                            .queryIntentServicesAsUser(
-                                    AUTOFILL_PROBE, PackageManager.GET_META_DATA, mUserId);
-
-            for (ResolveInfo resolveInfo : resolveInfos) {
-                final ServiceInfo serviceInfo = resolveInfo.serviceInfo;
-
-                // If there are multiple autofill services then pick the first one.
-                if (mKey != null && mKey.startsWith(serviceInfo.packageName)) {
-                    final String settingsActivity;
-                    try {
-                        settingsActivity =
-                                new AutofillServiceInfo(mContext, serviceInfo)
-                                        .getSettingsActivity();
-                    } catch (SecurityException e) {
-                        // Service does not declare the proper permission, ignore it.
-                        Log.e(TAG, "Error getting info for " + serviceInfo + ": " + e);
-                        return null;
-                    }
-                    if (TextUtils.isEmpty(settingsActivity)) {
-                        return null;
-                    }
-                    return new Intent(Intent.ACTION_MAIN)
-                            .setComponent(
-                                    new ComponentName(serviceInfo.packageName, settingsActivity));
-                }
-            }
-
-            return null;
-        }
     }
 
     protected int getUser() {

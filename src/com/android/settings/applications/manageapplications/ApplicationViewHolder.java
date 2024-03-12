@@ -31,9 +31,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.StringRes;
@@ -46,11 +46,16 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.spaprivileged.template.app.AppListItemModelKt;
+import com.android.settingslib.spaprivileged.template.app.AppListPageKt;
 import com.android.settingslib.widget.LottieColorUtils;
 
 import com.airbnb.lottie.LottieAnimationView;
 
-
+/**
+ * @deprecated Will be removed, use {@link AppListItemModelKt} {@link AppListPageKt} instead.
+ */
+@Deprecated(forRemoval = true)
 public class ApplicationViewHolder extends RecyclerView.ViewHolder {
 
     @VisibleForTesting
@@ -62,7 +67,7 @@ public class ApplicationViewHolder extends RecyclerView.ViewHolder {
     @VisibleForTesting
     final ViewGroup mWidgetContainer;
     @VisibleForTesting
-    final Switch mSwitch;
+    final CompoundButton mSwitch;
     final ImageView mAddIcon;
     final ProgressBar mProgressBar;
 
@@ -73,8 +78,8 @@ public class ApplicationViewHolder extends RecyclerView.ViewHolder {
         mAppName = itemView.findViewById(android.R.id.title);
         mAppIcon = itemView.findViewById(android.R.id.icon);
         mSummary = itemView.findViewById(android.R.id.summary);
-        mDisabled = itemView.findViewById(R.id.appendix);
-        mSwitch = itemView.findViewById(R.id.switchWidget);
+        mDisabled = itemView.findViewById(com.android.settingslib.widget.preference.app.R.id.appendix);
+        mSwitch = itemView.findViewById(com.android.settingslib.R.id.switchWidget);
         mWidgetContainer = itemView.findViewById(android.R.id.widget_frame);
         mAddIcon = itemView.findViewById(R.id.add_preference_widget);
         mProgressBar = itemView.findViewById(R.id.progressBar_cyclic);
@@ -86,7 +91,7 @@ public class ApplicationViewHolder extends RecyclerView.ViewHolder {
 
     static View newView(ViewGroup parent, boolean twoTarget, int listType) {
         ViewGroup view = (ViewGroup) LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.preference_app, parent, false);
+                .inflate(com.android.settingslib.widget.preference.app.R.layout.preference_app, parent, false);
         ViewGroup widgetFrame = view.findViewById(android.R.id.widget_frame);
         if (twoTarget) {
             if (widgetFrame != null) {
@@ -94,11 +99,13 @@ public class ApplicationViewHolder extends RecyclerView.ViewHolder {
                     LayoutInflater.from(parent.getContext())
                             .inflate(R.layout.preference_widget_add_progressbar, widgetFrame, true);
                 } else {
-                    LayoutInflater.from(parent.getContext())
-                            .inflate(R.layout.preference_widget_primary_switch, widgetFrame, true);
+                    LayoutInflater.from(parent.getContext()).inflate(
+                            com.android.settingslib.R.layout.preference_widget_primary_switch,
+                            widgetFrame, true);
                 }
                 View divider = LayoutInflater.from(parent.getContext()).inflate(
-                        R.layout.preference_two_target_divider, view, false);
+                        com.android.settingslib.widget.preference.twotarget.R.layout.preference_two_target_divider,
+                        view, false);
                 // second to last, before widget frame
                 view.addView(divider, view.getChildCount() - 1);
             }
@@ -110,7 +117,8 @@ public class ApplicationViewHolder extends RecyclerView.ViewHolder {
 
     static View newHeader(ViewGroup parent, int resText) {
         ViewGroup view = (ViewGroup) LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.preference_app_header, parent, false);
+                .inflate(com.android.settingslib.widget.preference.app.R.layout.preference_app_header,
+                        parent, false);
         TextView textView = view.findViewById(R.id.apps_top_intro_text);
         textView.setText(resText);
         return view;
@@ -165,10 +173,6 @@ public class ApplicationViewHolder extends RecyclerView.ViewHolder {
         mAppName.setContentDescription(contentDescription);
     }
 
-    void setIcon(int drawableRes) {
-        mAppIcon.setImageResource(drawableRes);
-    }
-
     void setIcon(Drawable icon) {
         if (icon == null) {
             return;
@@ -183,7 +187,7 @@ public class ApplicationViewHolder extends RecyclerView.ViewHolder {
         } else if (!info.enabled || info.enabledSetting
                 == PackageManager.COMPONENT_ENABLED_STATE_DISABLED_UNTIL_USED) {
             mDisabled.setVisibility(View.VISIBLE);
-            mDisabled.setText(R.string.disabled);
+            mDisabled.setText(com.android.settingslib.R.string.disabled);
         } else {
             mDisabled.setVisibility(View.GONE);
         }
@@ -211,7 +215,8 @@ public class ApplicationViewHolder extends RecyclerView.ViewHolder {
         }
     }
 
-    void updateSwitch(Switch.OnCheckedChangeListener listener, boolean enabled, boolean checked) {
+    void updateSwitch(CompoundButton.OnCheckedChangeListener listener, boolean enabled,
+            boolean checked) {
         if (mSwitch != null && mWidgetContainer != null) {
             mWidgetContainer.setFocusable(false);
             mWidgetContainer.setClickable(false);
@@ -244,7 +249,7 @@ public class ApplicationViewHolder extends RecyclerView.ViewHolder {
             public void onClick(View v) {
                 CloneBackend cloneBackend = CloneBackend.getInstance(context);
                 final MetricsFeatureProvider metricsFeatureProvider =
-                        FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+                        FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
 
                 String packageName = entry.info.packageName;
 

@@ -79,6 +79,7 @@ public class UwbPreferenceController extends TogglePreferenceController implemen
                 mStateReason = reason;
                 updateState(mPreference);
             };
+            mState = mUwbManager.getAdapterState();
         } else {
             mUwbManager = null;
             mAirplaneModeChangedReceiver = null;
@@ -182,6 +183,11 @@ public class UwbPreferenceController extends TogglePreferenceController implemen
     @Override
     public int getSliceHighlightMenuRes() {
         return R.string.menu_key_connected_devices;
+    }
+
+    @Override
+    public boolean hasAsyncUpdate() {
+        return true;
     }
 }
 

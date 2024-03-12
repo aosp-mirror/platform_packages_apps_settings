@@ -54,7 +54,7 @@ public class SavedDeviceGroupController extends BasePreferenceController
         super(context, KEY);
 
         DockUpdaterFeatureProvider dockUpdaterFeatureProvider =
-                FeatureFactory.getFactory(context).getDockUpdaterFeatureProvider();
+                FeatureFactory.getFeatureFactory().getDockUpdaterFeatureProvider();
         mSavedDockUpdater =
                 dockUpdaterFeatureProvider.getSavedDockUpdater(context, this);
     }

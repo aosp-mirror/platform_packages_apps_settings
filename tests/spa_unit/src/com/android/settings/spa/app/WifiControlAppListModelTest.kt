@@ -18,11 +18,8 @@ package com.android.settings.spa.app.specialaccess
 
 import android.Manifest
 import android.app.AppOpsManager
-import android.app.AppOpsManager.MODE_ALLOWED
-import android.app.AppOpsManager.MODE_DEFAULT
 import android.content.Context
 import android.content.pm.ApplicationInfo
-import androidx.compose.runtime.State
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.lifecycle.MutableLiveData
 import androidx.test.core.app.ApplicationProvider
@@ -40,9 +37,9 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
-import org.mockito.Mockito.`when` as whenever
 import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoRule
+import org.mockito.Mockito.`when` as whenever
 
 @ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
@@ -248,9 +245,9 @@ class WifiControlAppListModelTest {
     }
 
     private fun getIsAllowed(record: AppOpPermissionRecord): Boolean? {
-        lateinit var isAllowedState: State<Boolean?>
+        lateinit var isAllowedState: () -> Boolean?
         composeTestRule.setContent { isAllowedState = listModel.isAllowed(record) }
-        return isAllowedState.value
+        return isAllowedState()
     }
 
     private companion object {

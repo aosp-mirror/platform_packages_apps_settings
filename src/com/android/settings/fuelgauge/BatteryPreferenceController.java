@@ -16,15 +16,12 @@
 
 package com.android.settings.fuelgauge;
 
-/**
- * Common interface for a preference controller that updates battery status
- */
+/** Common interface for a preference controller that updates battery status */
 public interface BatteryPreferenceController {
 
     /**
-     * Updates the label for the preference controller. If the label is null, the
-     * implementation should revert back to the original label based on the
-     * battery info.
+     * Updates the label for the preference controller. If the label is null, the implementation
+     * should revert back to the original label based on the battery info.
      */
     void updateBatteryStatus(String label, BatteryInfo info);
 }

@@ -57,15 +57,16 @@ public final class ConvertUtils {
     /** A fake package name to represent no BatteryEntry data. */
     public static final String FAKE_PACKAGE_NAME = "fake_package";
 
-    @IntDef(prefix = {"CONSUMER_TYPE"}, value = {
-            CONSUMER_TYPE_UNKNOWN,
-            CONSUMER_TYPE_UID_BATTERY,
-            CONSUMER_TYPE_USER_BATTERY,
-            CONSUMER_TYPE_SYSTEM_BATTERY,
-    })
+    @IntDef(
+            prefix = {"CONSUMER_TYPE"},
+            value = {
+                CONSUMER_TYPE_UNKNOWN,
+                CONSUMER_TYPE_UID_BATTERY,
+                CONSUMER_TYPE_USER_BATTERY,
+                CONSUMER_TYPE_SYSTEM_BATTERY,
+            })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ConsumerType {
-    }
+    public @interface ConsumerType {}
 
     public static final int CONSUMER_TYPE_UNKNOWN = 0;
     public static final int CONSUMER_TYPE_UID_BATTERY = 1;
@@ -75,11 +76,9 @@ public final class ConvertUtils {
     public static final int DEFAULT_USAGE_SOURCE = UsageStatsManager.USAGE_SOURCE_CURRENT_ACTIVITY;
     public static final int EMPTY_USAGE_SOURCE = -1;
 
-    @VisibleForTesting
-    static int sUsageSource = EMPTY_USAGE_SOURCE;
+    @VisibleForTesting static int sUsageSource = EMPTY_USAGE_SOURCE;
 
-    private ConvertUtils() {
-    }
+    private ConvertUtils() {}
 
     /** Whether {@code consumerType} is app consumer or not. */
     public static boolean isUidConsumer(final int consumerType) {
@@ -109,17 +108,19 @@ public final class ConvertUtils {
         final ContentValues values = new ContentValues();
         if (entry != null && batteryUsageStats != null) {
             values.put(BatteryHistEntry.KEY_UID, Long.valueOf(entry.getUid()));
-            values.put(BatteryHistEntry.KEY_USER_ID,
+            values.put(
+                    BatteryHistEntry.KEY_USER_ID,
                     Long.valueOf(UserHandle.getUserId(entry.getUid())));
-            values.put(BatteryHistEntry.KEY_PACKAGE_NAME,
-                    entry.getDefaultPackageName());
-            values.put(BatteryHistEntry.KEY_CONSUMER_TYPE,
-                    Integer.valueOf(entry.getConsumerType()));
+            final String packageName = entry.getDefaultPackageName();
+            values.put(BatteryHistEntry.KEY_PACKAGE_NAME, packageName != null ? packageName : "");
+            values.put(
+                    BatteryHistEntry.KEY_CONSUMER_TYPE, Integer.valueOf(entry.getConsumerType()));
         } else {
             values.put(BatteryHistEntry.KEY_PACKAGE_NAME, FAKE_PACKAGE_NAME);
         }
         values.put(BatteryHistEntry.KEY_TIMESTAMP, Long.valueOf(timestamp));
-        values.put(BatteryHistEntry.KEY_IS_FULL_CHARGE_CYCLE_START,
+        values.put(
+                BatteryHistEntry.KEY_IS_FULL_CHARGE_CYCLE_START,
                 Boolean.valueOf(isFullChargeStart));
         final BatteryInformation batteryInformation =
                 constructBatteryInformation(
@@ -129,7 +130,8 @@ public final class ConvertUtils {
                         batteryStatus,
                         batteryHealth,
                         bootTimestamp);
-        values.put(BatteryHistEntry.KEY_BATTERY_INFORMATION,
+        values.put(
+                BatteryHistEntry.KEY_BATTERY_INFORMATION,
                 convertBatteryInformationToString(batteryInformation));
         // Save the BatteryInformation unencoded string into database for debugging.
         if (Build.TYPE.equals("userdebug")) {
@@ -166,7 +168,8 @@ public final class ConvertUtils {
             final BatteryUsageSlot batteryUsageSlot) {
         final ContentValues values = new ContentValues(2);
         values.put(BatteryUsageSlotEntity.KEY_TIMESTAMP, batteryUsageSlot.getStartTimestamp());
-        values.put(BatteryUsageSlotEntity.KEY_BATTERY_USAGE_SLOT,
+        values.put(
+                BatteryUsageSlotEntity.KEY_BATTERY_USAGE_SLOT,
                 Base64.encodeToString(batteryUsageSlot.toByteArray(), Base64.DEFAULT));
         return values;
     }
@@ -200,33 +203,36 @@ public final class ConvertUtils {
 
     /** Converts to {@link BatteryHistEntry} */
     public static BatteryHistEntry convertToBatteryHistEntry(
-            BatteryEntry entry,
-            BatteryUsageStats batteryUsageStats) {
+            BatteryEntry entry, BatteryUsageStats batteryUsageStats) {
         return new BatteryHistEntry(
                 convertBatteryEntryToContentValues(
                         entry,
                         batteryUsageStats,
-                        /*batteryLevel=*/ 0,
-                        /*batteryStatus=*/ 0,
-                        /*batteryHealth=*/ 0,
-                        /*bootTimestamp=*/ 0,
-                        /*timestamp=*/ 0,
-                        /*isFullChargeStart=*/ false));
+                        /* batteryLevel= */ 0,
+                        /* batteryStatus= */ 0,
+                        /* batteryHealth= */ 0,
+                        /* bootTimestamp= */ 0,
+                        /* timestamp= */ 0,
+                        /* isFullChargeStart= */ false));
     }
 
     /** Converts from {@link Event} to {@link AppUsageEvent} */
     @Nullable
     public static AppUsageEvent convertToAppUsageEvent(
-            Context context, IUsageStatsManager usageStatsManager, final Event event,
+            Context context,
+            IUsageStatsManager usageStatsManager,
+            final Event event,
             final long userId) {
         final String packageName = event.getPackageName();
         if (packageName == null) {
             // See b/190609174: Event package names should never be null, but sometimes they are.
             // Note that system events like device shutting down should still come with the android
             // package name.
-            Log.w(TAG, String.format(
-                    "Ignoring a usage event with null package name (timestamp=%d, type=%d)",
-                    event.getTimeStamp(), event.getEventType()));
+            Log.w(
+                    TAG,
+                    String.format(
+                            "Ignoring a usage event with null package name (timestamp=%d, type=%d)",
+                            event.getTimeStamp(), event.getEventType()));
             return null;
         }
 
@@ -246,13 +252,16 @@ public final class ConvertUtils {
                 getEffectivePackageName(
                         context, usageStatsManager, packageName, taskRootPackageName);
         try {
-            final long uid = context
-                    .getPackageManager()
-                    .getPackageUidAsUser(effectivePackageName, (int) userId);
+            final long uid =
+                    context.getPackageManager()
+                            .getPackageUidAsUser(effectivePackageName, (int) userId);
             appUsageEventBuilder.setUid(uid);
         } catch (PackageManager.NameNotFoundException e) {
-            Log.w(TAG, String.format(
-                    "Fail to get uid for package %s of user %d)", event.getPackageName(), userId));
+            Log.w(
+                    TAG,
+                    String.format(
+                            "Fail to get uid for package %s of user %d)",
+                            event.getPackageName(), userId));
             return null;
         }
 
@@ -300,8 +309,7 @@ public final class ConvertUtils {
         eventBuilder.setTimestamp(getLongFromCursor(cursor, BatteryEventEntity.KEY_TIMESTAMP));
         eventBuilder.setType(
                 BatteryEventType.forNumber(
-                        getIntegerFromCursor(
-                                cursor, BatteryEventEntity.KEY_BATTERY_EVENT_TYPE)));
+                        getIntegerFromCursor(cursor, BatteryEventEntity.KEY_BATTERY_EVENT_TYPE)));
         eventBuilder.setBatteryLevel(
                 getIntegerFromCursor(cursor, BatteryEventEntity.KEY_BATTERY_LEVEL));
         return eventBuilder.build();
@@ -315,10 +323,11 @@ public final class ConvertUtils {
                 batteryLevelData.getHourlyBatteryLevelsPerDay();
         for (BatteryLevelData.PeriodBatteryLevelData oneDayData : levelDataList) {
             for (int hourIndex = 0; hourIndex < oneDayData.getLevels().size() - 1; hourIndex++) {
-                batteryEventList.add(convertToBatteryEvent(
-                        oneDayData.getTimestamps().get(hourIndex),
-                        BatteryEventType.EVEN_HOUR,
-                        oneDayData.getLevels().get(hourIndex)));
+                batteryEventList.add(
+                        convertToBatteryEvent(
+                                oneDayData.getTimestamps().get(hourIndex),
+                                BatteryEventType.EVEN_HOUR,
+                                oneDayData.getLevels().get(hourIndex)));
             }
         }
         return batteryEventList;
@@ -329,8 +338,9 @@ public final class ConvertUtils {
         final BatteryUsageSlot defaultInstance = BatteryUsageSlot.getDefaultInstance();
         final int columnIndex =
                 cursor.getColumnIndex(BatteryUsageSlotEntity.KEY_BATTERY_USAGE_SLOT);
-        return columnIndex < 0 ? defaultInstance : BatteryUtils.parseProtoFromString(
-                cursor.getString(columnIndex), defaultInstance);
+        return columnIndex < 0
+                ? defaultInstance
+                : BatteryUtils.parseProtoFromString(cursor.getString(columnIndex), defaultInstance);
     }
 
     /** Converts from {@link Map<Long, BatteryDiffData>} to {@link List<BatteryUsageSlot>} */
@@ -343,18 +353,22 @@ public final class ConvertUtils {
         return batteryUsageSlotList;
     }
 
-    /** Converts UTC timestamp to local time string for logging only, so use the US locale for
-     *  better readability in debugging. */
+    /**
+     * Converts UTC timestamp to local time string for logging only, so use the US locale for better
+     * readability in debugging.
+     */
     public static String utcToLocalTimeForLogging(long timestamp) {
         final Locale locale = Locale.US;
-        final String pattern =
-                DateFormat.getBestDateTimePattern(locale, "MMM dd,yyyy HH:mm:ss");
+        final String pattern = DateFormat.getBestDateTimePattern(locale, "MMM dd,yyyy HH:mm:ss");
         return DateFormat.format(pattern, timestamp).toString();
     }
 
     /** Converts UTC timestamp to local time hour data. */
-    public static String utcToLocalTimeHour(final Context context, final long timestamp,
-            final boolean is24HourFormat, final boolean showMinute) {
+    public static String utcToLocalTimeHour(
+            final Context context,
+            final long timestamp,
+            final boolean is24HourFormat,
+            final boolean showMinute) {
         final Locale locale = getLocale(context);
         // e.g. for 12-hour format: 9 PM
         // e.g. for 24-hour format: 09:00
@@ -367,8 +381,8 @@ public final class ConvertUtils {
     public static String utcToLocalTimeDayOfWeek(
             final Context context, final long timestamp, final boolean isAbbreviation) {
         final Locale locale = getLocale(context);
-        final String pattern = DateFormat.getBestDateTimePattern(locale,
-                isAbbreviation ? "E" : "EEEE");
+        final String pattern =
+                DateFormat.getBestDateTimePattern(locale, isAbbreviation ? "E" : "EEEE");
         return DateFormat.format(pattern, timestamp).toString();
     }
 
@@ -377,10 +391,8 @@ public final class ConvertUtils {
         if (context == null) {
             return Locale.getDefault();
         }
-        final LocaleList locales =
-                context.getResources().getConfiguration().getLocales();
-        return locales != null && !locales.isEmpty() ? locales.get(0)
-                : Locale.getDefault();
+        final LocaleList locales = context.getResources().getConfiguration().getLocales();
+        return locales != null && !locales.isEmpty() ? locales.get(0) : Locale.getDefault();
     }
 
     /**
@@ -396,14 +408,14 @@ public final class ConvertUtils {
      */
     @VisibleForTesting
     static String getEffectivePackageName(
-            Context context, IUsageStatsManager usageStatsManager, final String packageName,
+            Context context,
+            IUsageStatsManager usageStatsManager,
+            final String packageName,
             final String taskRootPackageName) {
         final int usageSource = getUsageSource(context, usageStatsManager);
         switch (usageSource) {
             case UsageStatsManager.USAGE_SOURCE_TASK_ROOT_ACTIVITY:
-                return !TextUtils.isEmpty(taskRootPackageName)
-                        ? taskRootPackageName
-                        : packageName;
+                return !TextUtils.isEmpty(taskRootPackageName) ? taskRootPackageName : packageName;
             case UsageStatsManager.USAGE_SOURCE_CURRENT_ACTIVITY:
                 return packageName;
             default:
@@ -432,9 +444,13 @@ public final class ConvertUtils {
         try {
             String taskRootPackageName = event.getTaskRootPackageName();
             if (taskRootPackageName == null) {
-                Log.w(TAG, String.format(
-                        "Null task root in event with timestamp %d, type=%d, package %s",
-                        event.getTimeStamp(), event.getEventType(), event.getPackageName()));
+                Log.w(
+                        TAG,
+                        String.format(
+                                "Null task root in event with timestamp %d, type=%d, package %s",
+                                event.getTimeStamp(),
+                                event.getEventType(),
+                                event.getPackageName()));
             }
             return taskRootPackageName;
         } catch (NoSuchMethodError e) {
@@ -464,21 +480,24 @@ public final class ConvertUtils {
     }
 
     private static BatteryUsageDiff convertToBatteryUsageDiff(BatteryDiffEntry batteryDiffEntry) {
-        BatteryUsageDiff.Builder builder = BatteryUsageDiff.newBuilder()
-                .setUid(batteryDiffEntry.mUid)
-                .setUserId(batteryDiffEntry.mUserId)
-                .setIsHidden(batteryDiffEntry.mIsHidden)
-                .setComponentId(batteryDiffEntry.mComponentId)
-                .setConsumerType(batteryDiffEntry.mConsumerType)
-                .setConsumePower(batteryDiffEntry.mConsumePower)
-                .setForegroundUsageConsumePower(batteryDiffEntry.mForegroundUsageConsumePower)
-                .setBackgroundUsageConsumePower(batteryDiffEntry.mBackgroundUsageConsumePower)
-                .setForegroundServiceUsageConsumePower(
-                        batteryDiffEntry.mForegroundServiceUsageConsumePower)
-                .setCachedUsageConsumePower(batteryDiffEntry.mCachedUsageConsumePower)
-                .setForegroundUsageTime(batteryDiffEntry.mForegroundUsageTimeInMs)
-                .setBackgroundUsageTime(batteryDiffEntry.mBackgroundUsageTimeInMs)
-                .setScreenOnTime(batteryDiffEntry.mScreenOnTimeInMs);
+        BatteryUsageDiff.Builder builder =
+                BatteryUsageDiff.newBuilder()
+                        .setUid(batteryDiffEntry.mUid)
+                        .setUserId(batteryDiffEntry.mUserId)
+                        .setIsHidden(batteryDiffEntry.mIsHidden)
+                        .setComponentId(batteryDiffEntry.mComponentId)
+                        .setConsumerType(batteryDiffEntry.mConsumerType)
+                        .setConsumePower(batteryDiffEntry.mConsumePower)
+                        .setForegroundUsageConsumePower(
+                                batteryDiffEntry.mForegroundUsageConsumePower)
+                        .setBackgroundUsageConsumePower(
+                                batteryDiffEntry.mBackgroundUsageConsumePower)
+                        .setForegroundServiceUsageConsumePower(
+                                batteryDiffEntry.mForegroundServiceUsageConsumePower)
+                        .setCachedUsageConsumePower(batteryDiffEntry.mCachedUsageConsumePower)
+                        .setForegroundUsageTime(batteryDiffEntry.mForegroundUsageTimeInMs)
+                        .setBackgroundUsageTime(batteryDiffEntry.mBackgroundUsageTimeInMs)
+                        .setScreenOnTime(batteryDiffEntry.mScreenOnTimeInMs);
         if (batteryDiffEntry.mKey != null) {
             builder.setKey(batteryDiffEntry.mKey);
         }
@@ -496,12 +515,13 @@ public final class ConvertUtils {
         if (batteryDiffData == null) {
             return BatteryUsageSlot.getDefaultInstance();
         }
-        final BatteryUsageSlot.Builder builder = BatteryUsageSlot.newBuilder()
-                .setStartTimestamp(batteryDiffData.getStartTimestamp())
-                .setEndTimestamp(batteryDiffData.getEndTimestamp())
-                .setStartBatteryLevel(batteryDiffData.getStartBatteryLevel())
-                .setEndBatteryLevel(batteryDiffData.getEndBatteryLevel())
-                .setScreenOnTime(batteryDiffData.getScreenOnTime());
+        final BatteryUsageSlot.Builder builder =
+                BatteryUsageSlot.newBuilder()
+                        .setStartTimestamp(batteryDiffData.getStartTimestamp())
+                        .setEndTimestamp(batteryDiffData.getEndTimestamp())
+                        .setStartBatteryLevel(batteryDiffData.getStartBatteryLevel())
+                        .setEndBatteryLevel(batteryDiffData.getEndBatteryLevel())
+                        .setScreenOnTime(batteryDiffData.getScreenOnTime());
         for (BatteryDiffEntry batteryDiffEntry : batteryDiffData.getAppDiffEntryList()) {
             builder.addAppUsage(convertToBatteryUsageDiff(batteryDiffEntry));
         }
@@ -524,6 +544,7 @@ public final class ConvertUtils {
                 batteryUsageDiff.getLabel(),
                 batteryUsageDiff.getConsumerType(),
                 batteryUsageDiff.getForegroundUsageTime(),
+                batteryUsageDiff.getForegroundServiceUsageTime(),
                 batteryUsageDiff.getBackgroundUsageTime(),
                 batteryUsageDiff.getScreenOnTime(),
                 batteryUsageDiff.getConsumePower(),
@@ -557,7 +578,7 @@ public final class ConvertUtils {
                 systemDiffEntries,
                 systemAppsPackageNames,
                 systemAppsUids,
-                /*isAccumulated=*/ false);
+                /* isAccumulated= */ false);
     }
 
     private static BatteryInformation constructBatteryInformation(
@@ -568,15 +589,13 @@ public final class ConvertUtils {
             final int batteryHealth,
             final long bootTimestamp) {
         final DeviceBatteryState deviceBatteryState =
-                DeviceBatteryState
-                        .newBuilder()
+                DeviceBatteryState.newBuilder()
                         .setBatteryLevel(batteryLevel)
                         .setBatteryStatus(batteryStatus)
                         .setBatteryHealth(batteryHealth)
                         .build();
         final BatteryInformation.Builder batteryInformationBuilder =
-                BatteryInformation
-                        .newBuilder()
+                BatteryInformation.newBuilder()
                         .setDeviceBatteryState(deviceBatteryState)
                         .setBootTimestamp(bootTimestamp)
                         .setZoneId(TimeZone.getDefault().getID());
@@ -594,6 +613,7 @@ public final class ConvertUtils {
                     .setPercentOfTotal(entry.mPercent)
                     .setDrainType(entry.getPowerComponentId())
                     .setForegroundUsageTimeInMs(entry.getTimeInForegroundMs())
+                    .setForegroundServiceUsageTimeInMs(entry.getTimeInForegroundServiceMs())
                     .setBackgroundUsageTimeInMs(entry.getTimeInBackgroundMs());
         }
 

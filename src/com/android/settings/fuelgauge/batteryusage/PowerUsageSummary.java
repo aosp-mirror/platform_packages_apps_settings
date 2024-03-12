@@ -53,41 +53,32 @@ import java.util.List;
  * since the last time it was unplugged.
  */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
-public class PowerUsageSummary extends PowerUsageBase implements
-        BatteryTipPreferenceController.BatteryTipListener {
+public class PowerUsageSummary extends PowerUsageBase
+        implements BatteryTipPreferenceController.BatteryTipListener {
 
     static final String TAG = "PowerUsageSummary";
 
-    @VisibleForTesting
-    static final String KEY_BATTERY_ERROR = "battery_help_message";
-    @VisibleForTesting
-    static final String KEY_BATTERY_USAGE = "battery_usage_summary";
+    @VisibleForTesting static final String KEY_BATTERY_ERROR = "battery_help_message";
+    @VisibleForTesting static final String KEY_BATTERY_USAGE = "battery_usage_summary";
+
+    @VisibleForTesting PowerUsageFeatureProvider mPowerFeatureProvider;
+    @VisibleForTesting BatteryUtils mBatteryUtils;
+    @VisibleForTesting BatteryInfo mBatteryInfo;
+
+    @VisibleForTesting BatteryHeaderPreferenceController mBatteryHeaderPreferenceController;
+    @VisibleForTesting BatteryTipPreferenceController mBatteryTipPreferenceController;
+    @VisibleForTesting boolean mNeedUpdateBatteryTip;
+    @VisibleForTesting Preference mHelpPreference;
+    @VisibleForTesting Preference mBatteryUsagePreference;
 
     @VisibleForTesting
-    PowerUsageFeatureProvider mPowerFeatureProvider;
-    @VisibleForTesting
-    BatteryUtils mBatteryUtils;
-    @VisibleForTesting
-    BatteryInfo mBatteryInfo;
-
-    @VisibleForTesting
-    BatteryHeaderPreferenceController mBatteryHeaderPreferenceController;
-    @VisibleForTesting
-    BatteryTipPreferenceController mBatteryTipPreferenceController;
-    @VisibleForTesting
-    boolean mNeedUpdateBatteryTip;
-    @VisibleForTesting
-    Preference mHelpPreference;
-    @VisibleForTesting
-    Preference mBatteryUsagePreference;
-
-    @VisibleForTesting
-    final ContentObserver mSettingsObserver = new ContentObserver(new Handler()) {
-        @Override
-        public void onChange(boolean selfChange, Uri uri) {
-            restartBatteryInfoLoader();
-        }
-    };
+    final ContentObserver mSettingsObserver =
+            new ContentObserver(new Handler()) {
+                @Override
+                public void onChange(boolean selfChange, Uri uri) {
+                    restartBatteryInfoLoader();
+                }
+            };
 
     @VisibleForTesting
     LoaderManager.LoaderCallbacks<BatteryInfo> mBatteryInfoLoaderCallbacks =
@@ -121,17 +112,14 @@ public class PowerUsageSummary extends PowerUsageBase implements
                 }
 
                 @Override
-                public void onLoadFinished(Loader<List<BatteryTip>> loader,
-                        List<BatteryTip> data) {
+                public void onLoadFinished(Loader<List<BatteryTip>> loader, List<BatteryTip> data) {
                     mBatteryTipPreferenceController.updateBatteryTips(data);
                     mBatteryHeaderPreferenceController.updateHeaderByBatteryTips(
                             mBatteryTipPreferenceController.getCurrentBatteryTip(), mBatteryInfo);
                 }
 
                 @Override
-                public void onLoaderReset(Loader<List<BatteryTip>> loader) {
-
-                }
+                public void onLoaderReset(Loader<List<BatteryTip>> loader) {}
             };
 
     @Override
@@ -140,9 +128,6 @@ public class PowerUsageSummary extends PowerUsageBase implements
         final SettingsActivity activity = (SettingsActivity) getActivity();
 
         mBatteryHeaderPreferenceController = use(BatteryHeaderPreferenceController.class);
-        mBatteryHeaderPreferenceController.setActivity(activity);
-        mBatteryHeaderPreferenceController.setFragment(this);
-        mBatteryHeaderPreferenceController.setLifecycle(getSettingsLifecycle());
 
         mBatteryTipPreferenceController = use(BatteryTipPreferenceController.class);
         mBatteryTipPreferenceController.setActivity(activity);
@@ -173,10 +158,11 @@ public class PowerUsageSummary extends PowerUsageBase implements
     @Override
     public void onResume() {
         super.onResume();
-        getContentResolver().registerContentObserver(
-                Global.getUriFor(Global.BATTERY_ESTIMATES_LAST_UPDATE_TIME),
-                false,
-                mSettingsObserver);
+        getContentResolver()
+                .registerContentObserver(
+                        Global.getUriFor(Global.BATTERY_ESTIMATES_LAST_UPDATE_TIME),
+                        false,
+                        mSettingsObserver);
     }
 
     @Override
@@ -216,8 +202,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
         }
 
         // Skip BatteryTipLoader if device is rotated or only battery level change
-        if (mNeedUpdateBatteryTip
-                && refreshType != BatteryUpdateType.BATTERY_LEVEL) {
+        if (mNeedUpdateBatteryTip && refreshType != BatteryUpdateType.BATTERY_LEVEL) {
             restartBatteryTipLoader();
         } else {
             mNeedUpdateBatteryTip = true;
@@ -233,17 +218,14 @@ public class PowerUsageSummary extends PowerUsageBase implements
 
     @VisibleForTesting
     void initFeatureProvider() {
-        final Context context = getContext();
-        mPowerFeatureProvider = FeatureFactory.getFactory(context)
-                .getPowerUsageFeatureProvider(context);
+        mPowerFeatureProvider = FeatureFactory.getFeatureFactory().getPowerUsageFeatureProvider();
     }
 
     @VisibleForTesting
     void initPreference() {
         mBatteryUsagePreference = findPreference(KEY_BATTERY_USAGE);
         mBatteryUsagePreference.setSummary(getString(R.string.advanced_battery_preference_summary));
-        mBatteryUsagePreference.setVisible(
-                mPowerFeatureProvider.isBatteryUsageEnabled());
+        mBatteryUsagePreference.setVisible(mPowerFeatureProvider.isBatteryUsageEnabled());
 
         mHelpPreference = findPreference(KEY_BATTERY_ERROR);
         mHelpPreference.setVisible(false);

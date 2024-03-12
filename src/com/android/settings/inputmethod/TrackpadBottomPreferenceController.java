@@ -16,16 +16,22 @@
 
 package com.android.settings.inputmethod;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.hardware.input.InputSettings;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 public class TrackpadBottomPreferenceController extends TogglePreferenceController {
 
+    private MetricsFeatureProvider mMetricsFeatureProvider;
+
     public TrackpadBottomPreferenceController(Context context, String key) {
         super(context, key);
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     @Override
@@ -36,6 +42,8 @@ public class TrackpadBottomPreferenceController extends TogglePreferenceControll
     @Override
     public boolean setChecked(boolean isChecked) {
         InputSettings.setTouchpadRightClickZone(mContext, isChecked);
+        mMetricsFeatureProvider.action(
+                mContext, SettingsEnums.ACTION_GESTURE_BOTTOM_RIGHT_TAP_CHANGED, isChecked);
         return true;
     }
 

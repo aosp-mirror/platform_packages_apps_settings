@@ -70,7 +70,8 @@ public class VpnInfoPreference extends RestrictedPreference implements View.OnCl
         }
 
         // Hide the divider from view
-        final View divider = holder.findViewById(R.id.two_target_divider);
+        final View divider =
+                holder.findViewById(com.android.settingslib.widget.preference.twotarget.R.id.two_target_divider);
         divider.setVisibility(View.GONE);
     }
 

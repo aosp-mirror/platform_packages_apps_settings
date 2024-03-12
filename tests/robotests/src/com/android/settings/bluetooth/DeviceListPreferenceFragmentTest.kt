@@ -56,7 +56,10 @@ import org.robolectric.annotation.Config
 import org.mockito.Mockito.`when` as whenever
 
 @RunWith(RobolectricTestRunner::class)
-@Config(shadows = [ShadowBluetoothAdapter::class])
+@Config(shadows = [
+    ShadowBluetoothAdapter::class,
+    com.android.settings.testutils.shadow.ShadowFragment::class,
+])
 class DeviceListPreferenceFragmentTest {
     @get:Rule
     val mockito: MockitoRule = MockitoJUnit.rule()

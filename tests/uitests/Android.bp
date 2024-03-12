@@ -27,7 +27,10 @@ android_test {
     platform_apis: true,
     certificate: "platform",
     test_suites: ["device-tests"],
-    srcs: ["src/**/*.java"],
+    srcs: [
+        "src/**/*.java",
+        "src/**/*.kt",
+    ],
 
     libs: [
         "android.test.runner",
@@ -35,6 +38,7 @@ android_test {
     ],
 
     static_libs: [
+        "androidx.test.ext.junit",
         "androidx.test.rules",
         "androidx.test.uiautomator_uiautomator",
         "app-helpers-core",
@@ -45,6 +49,7 @@ android_test {
         "sysui-helper",
         "timeresult-helper-lib",
         "truth",
+        "flag-junit",
     ],
 
     //sdk_version: "current",

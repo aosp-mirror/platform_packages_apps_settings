@@ -23,6 +23,7 @@ import android.content.Context;
 import android.net.NetworkPolicyManager;
 import android.util.SparseIntArray;
 
+import com.android.settings.fuelgauge.datasaver.DynamicDenylistManager;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.utils.ThreadUtils;
@@ -39,6 +40,7 @@ public class DataSaverBackend {
     private final MetricsFeatureProvider mMetricsFeatureProvider;
 
     private final NetworkPolicyManager mPolicyManager;
+    private final DynamicDenylistManager mDynamicDenylistManager;
     private final ArrayList<Listener> mListeners = new ArrayList<>();
     private SparseIntArray mUidPolicies = new SparseIntArray();
     private boolean mAllowlistInitialized;
@@ -48,8 +50,9 @@ public class DataSaverBackend {
     public DataSaverBackend(@NotNull Context context) {
         // TODO(b/246537614):Use fragment context to DataSaverBackend class will caused memory leak
         mContext = context.getApplicationContext();
-        mMetricsFeatureProvider = FeatureFactory.getFactory(mContext).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
         mPolicyManager = NetworkPolicyManager.from(mContext);
+        mDynamicDenylistManager = DynamicDenylistManager.getInstance(mContext);
     }
 
     public void addListener(Listener listener) {
@@ -83,7 +86,7 @@ public class DataSaverBackend {
 
     public void setIsAllowlisted(int uid, String packageName, boolean allowlisted) {
         final int policy = allowlisted ? POLICY_ALLOW_METERED_BACKGROUND : POLICY_NONE;
-        mPolicyManager.setUidPolicy(uid, policy);
+        mDynamicDenylistManager.setUidPolicyLocked(uid, policy);
         mUidPolicies.put(uid, policy);
         if (allowlisted) {
             mMetricsFeatureProvider.action(
@@ -113,7 +116,7 @@ public class DataSaverBackend {
 
     public void setIsDenylisted(int uid, String packageName, boolean denylisted) {
         final int policy = denylisted ? POLICY_REJECT_METERED_BACKGROUND : POLICY_NONE;
-        mPolicyManager.setUidPolicy(uid, policy);
+        mDynamicDenylistManager.setUidPolicyLocked(uid, policy);
         mUidPolicies.put(uid, policy);
         if (denylisted) {
             mMetricsFeatureProvider.action(
@@ -123,7 +126,8 @@ public class DataSaverBackend {
 
     public boolean isDenylisted(int uid) {
         loadDenylist();
-        return mUidPolicies.get(uid, POLICY_NONE) == POLICY_REJECT_METERED_BACKGROUND;
+        return mUidPolicies.get(uid, POLICY_NONE) == POLICY_REJECT_METERED_BACKGROUND
+                && mDynamicDenylistManager.isInManualDenylist(uid);
     }
 
     private void loadDenylist() {

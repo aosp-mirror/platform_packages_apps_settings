@@ -129,7 +129,6 @@ public class ProcessStatsDetail extends SettingsPreferenceFragment {
         final Activity activity = getActivity();
         final Preference pref = EntityHeaderController
                 .newInstance(activity, this, null /* appHeader */)
-                .setRecyclerView(getListView(), getSettingsLifecycle())
                 .setIcon(mApp.mUiTargetApp != null
                         ? IconDrawableFactory.newInstance(activity).getBadgedIcon(mApp.mUiTargetApp)
                         : new ColorDrawable(0))
@@ -140,7 +139,7 @@ public class ProcessStatsDetail extends SettingsPreferenceFragment {
                         : UserHandle.USER_NULL)
                 .setHasAppInfoLink(true)
                 .setButtonActions(ActionType.ACTION_NONE, ActionType.ACTION_NONE)
-                .done(activity, getPrefContext());
+                .done(getPrefContext());
         getPreferenceScreen().addPreference(pref);
     }
 

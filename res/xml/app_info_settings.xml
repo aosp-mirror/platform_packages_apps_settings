@@ -139,7 +139,7 @@
         settings:controller=
             "com.android.settings.applications.appinfo.AppHibernationPreferenceCategoryController">
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="hibernation_switch"
             android:title="@string/unused_apps_switch"
             android:summary="@string/unused_apps_switch_summary"

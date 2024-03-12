@@ -86,12 +86,12 @@ public class SearchMenuController implements LifecycleObserver, OnCreateOptionsM
             return;
         }
         final MenuItem searchItem = menu.add(Menu.NONE, MENU_SEARCH, 0 /* order */,
-                R.string.search_menu);
-        searchItem.setIcon(R.drawable.ic_search_24dp);
+                com.android.settingslib.search.widget.R.string.search_menu);
+        searchItem.setIcon(com.android.settingslib.search.widget.R.drawable.ic_search_24dp);
         searchItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 
         searchItem.setOnMenuItemClickListener(target -> {
-            final Intent intent = FeatureFactory.getFactory(activity)
+            final Intent intent = FeatureFactory.getFeatureFactory()
                     .getSearchFeatureProvider()
                     .buildSearchIntent(activity, mPageId);
 
@@ -100,7 +100,7 @@ public class SearchMenuController implements LifecycleObserver, OnCreateOptionsM
                 return true;
             }
 
-            FeatureFactory.getFactory(activity).getMetricsFeatureProvider()
+            FeatureFactory.getFeatureFactory().getMetricsFeatureProvider()
                     .action(activity, SettingsEnums.ACTION_SEARCH_RESULTS);
             mHost.startActivityForResult(intent, SearchFeatureProvider.REQUEST_CODE);
             return true;

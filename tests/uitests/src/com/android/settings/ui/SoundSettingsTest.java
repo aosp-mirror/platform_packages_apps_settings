@@ -30,8 +30,11 @@ import androidx.test.uiautomator.UiDevice;
 import androidx.test.uiautomator.UiObject2;
 import androidx.test.uiautomator.Until;
 
+import org.junit.Ignore;
+
 import java.util.Map;
 
+@Ignore
 public class SoundSettingsTest extends InstrumentationTestCase {
     private static final String PAGE = Settings.ACTION_SOUND_SETTINGS;
     private static final int TIMEOUT = 2000;

@@ -33,10 +33,7 @@ import android.view.inputmethod.InputMethodManager;
 import androidx.core.text.BidiFormatter;
 import androidx.preference.Preference;
 
-import com.android.settings.R;
-
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -80,7 +77,6 @@ public class VirtualKeyboardPreferenceControllerTest {
         assertThat(mController.isAvailable()).isTrue();
     }
 
-    @Ignore
     @Test
     @Config(qualifiers = "mcc999")
     public void testVirtualKeyboard_ifDisabled_shouldNotBeShown() {
@@ -93,7 +89,7 @@ public class VirtualKeyboardPreferenceControllerTest {
     public void updateState_noEnabledIMEs_setEmptySummary() {
         mController.updateState(mPreference);
 
-        verify(mPreference).setSummary(R.string.summary_empty);
+        verify(mPreference).setSummary(com.android.settingslib.R.string.summary_empty);
     }
 
     @Test

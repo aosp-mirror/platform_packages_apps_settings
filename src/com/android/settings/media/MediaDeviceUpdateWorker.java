@@ -23,6 +23,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.media.AudioManager;
+import android.media.MediaRouter2Manager;
 import android.media.RoutingSessionInfo;
 import android.net.Uri;
 import android.os.UserHandle;
@@ -39,7 +40,6 @@ import com.android.settingslib.media.LocalMediaManager;
 import com.android.settingslib.media.MediaDevice;
 import com.android.settingslib.utils.ThreadUtils;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -59,6 +59,8 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
     protected final Collection<MediaDevice> mMediaDevices = new CopyOnWriteArrayList<>();
     private final DevicesChangedBroadcastReceiver mReceiver;
     private final String mPackageName;
+    @VisibleForTesting
+    MediaRouter2Manager mManager;
 
     private boolean mIsTouched;
     private MediaDevice mTopDevice;
@@ -80,6 +82,11 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
         if (mLocalMediaManager == null || !TextUtils.equals(mPackageName,
                 mLocalMediaManager.getPackageName())) {
             mLocalMediaManager = new LocalMediaManager(mContext, mPackageName, null);
+        }
+
+        // Delaying initialization to allow mocking in Roboelectric tests.
+        if (mManager == null) {
+            mManager = MediaRouter2Manager.getInstance(mContext);
         }
 
         mLocalMediaManager.registerCallback(this);
@@ -216,18 +223,8 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
         return mLocalMediaManager.getSessionName();
     }
 
-    List<RoutingSessionInfo> getActiveRemoteMediaDevice() {
-        final List<RoutingSessionInfo> sessionInfos = new ArrayList<>();
-        for (RoutingSessionInfo info : mLocalMediaManager.getActiveMediaSession()) {
-            if (!info.isSystemSession()) {
-                if (DEBUG) {
-                    Log.d(TAG, "getActiveRemoteMediaDevice() info : " + info.toString()
-                            + ", package name : " + info.getClientPackageName());
-                }
-                sessionInfos.add(info);
-            }
-        }
-        return sessionInfos;
+    List<RoutingSessionInfo> getActiveRemoteMediaDevices() {
+        return mLocalMediaManager.getRemoteRoutingSessions();
     }
 
     /**
@@ -239,7 +236,7 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
      */
     public void adjustVolume(MediaDevice device, int volume) {
         ThreadUtils.postOnBackgroundThread(() -> {
-            device.requestSetVolume(volume);
+            mLocalMediaManager.adjustDeviceVolume(device, volume);
         });
     }
 
@@ -259,7 +256,9 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
     }
 
     boolean shouldDisableMediaOutput(String packageName) {
-        return mLocalMediaManager.shouldDisableMediaOutput(packageName);
+        // TODO: b/291277292 - Remove references to MediaRouter2Manager and implement long-term
+        //  solution in SettingsLib.
+        return mManager.getTransferableRoutes(packageName).isEmpty();
     }
 
     boolean shouldEnableVolumeSeekBar(RoutingSessionInfo sessionInfo) {

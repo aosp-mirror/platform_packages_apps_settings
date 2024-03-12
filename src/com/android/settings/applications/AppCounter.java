@@ -16,11 +16,17 @@ package com.android.settings.applications;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.FeatureFlags;
+import android.content.pm.FeatureFlagsImpl;
 import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.ApplicationInfoFlags;
 import android.content.pm.UserInfo;
 import android.os.AsyncTask;
 import android.os.UserHandle;
 import android.os.UserManager;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
 
 import java.util.List;
 
@@ -28,21 +34,31 @@ public abstract class AppCounter extends AsyncTask<Void, Void, Integer> {
 
     protected final PackageManager mPm;
     protected final UserManager mUm;
+    protected final FeatureFlags mFf;
 
-    public AppCounter(Context context, PackageManager packageManager) {
+    @VisibleForTesting
+    AppCounter(@NonNull Context context, @NonNull PackageManager packageManager,
+            @NonNull FeatureFlags featureFlags) {
         mPm = packageManager;
-        mUm = (UserManager) context.getSystemService(Context.USER_SERVICE);
+        mUm = context.getSystemService(UserManager.class);
+        mFf = featureFlags;
+    }
+
+    public AppCounter(@NonNull Context context, @NonNull PackageManager packageManager) {
+        this(context, packageManager, new FeatureFlagsImpl());
     }
 
     @Override
     protected Integer doInBackground(Void... params) {
         int count = 0;
         for (UserInfo user : mUm.getProfiles(UserHandle.myUserId())) {
+            long flags = PackageManager.GET_DISABLED_COMPONENTS
+                    | PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS
+                    | (mFf.archiving() ? PackageManager.MATCH_ARCHIVED_PACKAGES : 0)
+                    | (user.isAdmin() ? PackageManager.MATCH_ANY_USER : 0);
+            ApplicationInfoFlags infoFlags = ApplicationInfoFlags.of(flags);
             final List<ApplicationInfo> list =
-                    mPm.getInstalledApplicationsAsUser(PackageManager.GET_DISABLED_COMPONENTS
-                            | PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS
-                            | (user.isAdmin() ? PackageManager.MATCH_ANY_USER : 0),
-                            user.id);
+                    mPm.getInstalledApplicationsAsUser(infoFlags, user.id);
             for (ApplicationInfo info : list) {
                 if (includeInCount(info)) {
                     count++;
@@ -62,5 +78,6 @@ public abstract class AppCounter extends AsyncTask<Void, Void, Integer> {
     }
 
     protected abstract void onCountComplete(int num);
+
     protected abstract boolean includeInCount(ApplicationInfo info);
 }

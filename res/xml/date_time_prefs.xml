@@ -24,19 +24,22 @@
         android:key="auto_time"
         android:title="@string/date_time_auto"
         settings:useAdditionalSummary="true"
-        settings:userRestriction="no_config_date_time"/>
+        settings:userRestriction="no_config_date_time"
+        settings:controller="com.android.settings.datetime.AutoTimePreferenceController" />
 
     <com.android.settingslib.RestrictedPreference
         android:key="date"
         android:title="@string/date_time_set_date_title"
         android:summary="@string/summary_placeholder"
-        settings:userRestriction="no_config_date_time"/>
+        settings:userRestriction="no_config_date_time"
+        settings:controller="com.android.settings.datetime.DatePreferenceController" />
 
     <com.android.settingslib.RestrictedPreference
         android:key="time"
         android:title="@string/date_time_set_time_title"
         android:summary="@string/summary_placeholder"
-        settings:userRestriction="no_config_date_time"/>
+        settings:userRestriction="no_config_date_time"
+        settings:controller="com.android.settings.datetime.TimePreferenceController" />
 
     <PreferenceCategory
         android:key="timezone_preference_category"
@@ -45,7 +48,8 @@
         <com.android.settingslib.RestrictedSwitchPreference
             android:key="auto_zone"
             android:title="@string/zone_auto_title"
-            settings:userRestriction="no_config_date_time"/>
+            settings:userRestriction="no_config_date_time"
+            settings:controller="com.android.settings.datetime.AutoTimeZonePreferenceController" />
 
         <com.android.settingslib.widget.BannerMessagePreference
             android:key="location_time_zone_detection_status"
@@ -64,7 +68,8 @@
             android:summary="@string/summary_placeholder"
             android:fragment="com.android.settings.datetime.timezone.TimeZoneSettings"
             settings:userRestriction="no_config_date_time"
-            settings:keywords="@string/keywords_time_zone"/>
+            settings:keywords="@string/keywords_time_zone"
+            settings:controller="com.android.settings.datetime.TimeZonePreferenceController" />
 
     </PreferenceCategory>
 
@@ -74,11 +79,13 @@
         settings:keywords="@string/keywords_time_format">
         <SwitchPreference
             android:key="auto_24hour"
-            android:title="@string/date_time_24hour_auto"/>
+            android:title="@string/date_time_24hour_auto"
+            settings:controller="com.android.settings.datetime.AutoTimeFormatPreferenceController" />
 
         <SwitchPreference
             android:key="24 hour"
-            android:title="@string/date_time_24hour" />
+            android:title="@string/date_time_24hour"
+            settings:controller="com.android.settings.datetime.TimeFormatPreferenceController" />
     </PreferenceCategory>
 
 </PreferenceScreen>

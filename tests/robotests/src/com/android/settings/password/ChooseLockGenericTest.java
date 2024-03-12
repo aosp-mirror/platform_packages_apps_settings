@@ -28,6 +28,8 @@ import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_SOMETHING;
 import static com.android.internal.widget.LockPatternUtils.CREDENTIAL_TYPE_NONE;
 import static com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment.KEY_LOCK_SETTINGS_FOOTER;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_CALLER_APP_NAME;
+import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_CHOOSE_LOCK_SCREEN_DESCRIPTION;
+import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_CHOOSE_LOCK_SCREEN_TITLE;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_DEVICE_PASSWORD_REQUIREMENT_ONLY;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_FOR_BIOMETRICS;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_FOR_FACE;
@@ -52,6 +54,7 @@ import android.hardware.face.FaceManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 import android.provider.Settings.Global;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.preference.Preference;
@@ -66,6 +69,7 @@ import com.android.settings.search.SearchFeatureProvider;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowInteractionJankMonitor;
 import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
+import com.android.settings.testutils.shadow.ShadowPersistentDataBlockManager;
 import com.android.settings.testutils.shadow.ShadowStorageManager;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.testutils.shadow.ShadowUtils;
@@ -85,7 +89,6 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
-import org.robolectric.shadows.ShadowPersistentDataBlockManager;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(
@@ -377,6 +380,47 @@ public class ChooseLockGenericTest {
         assertThat(actualIntent.hasExtra(EXTRA_KEY_CALLER_APP_NAME)).isTrue();
         assertThat(actualIntent.getStringExtra(EXTRA_KEY_CALLER_APP_NAME))
                 .isEqualTo("app name");
+    }
+
+    @Test
+    public void onSetNewPassword_withTitleAndDescription_displaysPassedTitleAndDescription() {
+        Intent intent =
+                new Intent(ACTION_SET_NEW_PASSWORD)
+                        .putExtra(
+                                EXTRA_KEY_CHOOSE_LOCK_SCREEN_TITLE,
+                                R.string.private_space_lock_setup_title)
+                        .putExtra(
+                                EXTRA_KEY_CHOOSE_LOCK_SCREEN_DESCRIPTION,
+                                R.string.private_space_lock_setup_description);
+        initActivity(intent);
+
+        CharSequence expectedTitle = mActivity.getString(R.string.private_space_lock_setup_title);
+        CharSequence expectedDescription =
+                mActivity.getString(R.string.private_space_lock_setup_description);
+        assertThat(mActivity.getTitle().toString().contentEquals(expectedTitle)).isTrue();
+        TextView textView =
+                mFragment.getHeaderView().findViewById(R.id.biometric_header_description);
+        assertThat(textView.getText().toString().contentEquals(expectedDescription)).isTrue();
+    }
+
+    @Test
+    public void onSetNewPassword_withLockScreenTitle_titlePassedOntoNextActivity() {
+        Intent intent =
+                new Intent(ACTION_SET_NEW_PASSWORD)
+                        .putExtra(
+                                EXTRA_KEY_CHOOSE_LOCK_SCREEN_TITLE,
+                                R.string.private_space_lock_setup_title);
+        initActivity(intent);
+
+        Preference facePref = new Preference(application);
+        facePref.setKey("unlock_skip_biometrics");
+        boolean result = mFragment.onPreferenceTreeClick(facePref);
+
+        assertThat(result).isTrue();
+        Intent actualIntent = shadowOf(mActivity).getNextStartedActivityForResult().intent;
+        assertThat(actualIntent.hasExtra(EXTRA_KEY_CHOOSE_LOCK_SCREEN_TITLE)).isTrue();
+        assertThat(actualIntent.getIntExtra(EXTRA_KEY_CHOOSE_LOCK_SCREEN_TITLE, -1))
+                .isEqualTo(R.string.private_space_lock_setup_title);
     }
 
     @Test

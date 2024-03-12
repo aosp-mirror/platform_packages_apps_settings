@@ -22,6 +22,7 @@ import android.os.Handler;
 import android.os.ParcelFileDescriptor;
 import android.os.PersistableBundle;
 import android.os.PowerManager;
+import android.os.RecoverySystem;
 import android.os.SystemProperties;
 import android.os.SystemUpdateManager;
 import android.os.UpdateEngine;
@@ -34,7 +35,6 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
@@ -54,6 +54,7 @@ import com.google.common.util.concurrent.MoreExecutors;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -68,7 +69,8 @@ import java.util.zip.ZipFile;
 public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferenceController
         implements Preference.OnPreferenceChangeListener,
                 PreferenceControllerMixin,
-                Enable16kbPagesDialogHost {
+                Enable16kbPagesDialogHost,
+                EnableExt4DialogHost {
 
     private static final String TAG = "Enable16kPages";
     private static final String REBOOT_REASON = "toggle16k";
@@ -87,7 +89,7 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
     private static final int OFFSET_TO_FILE_NAME = 30;
     public static final String EXPERIMENTAL_UPDATE_TITLE = "Android 16K Kernel Experimental Update";
 
-    private @Nullable DevelopmentSettingsDashboardFragment mFragment = null;
+    private @NonNull DevelopmentSettingsDashboardFragment mFragment;
     private boolean mEnable16k;
 
     private final ListeningExecutorService mExecutorService =
@@ -96,9 +98,9 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
     private AlertDialog mProgressDialog;
 
     public Enable16kPagesPreferenceController(
-            @NonNull Context context, @Nullable DevelopmentSettingsDashboardFragment fragment) {
+            @NonNull Context context, @NonNull DevelopmentSettingsDashboardFragment fragment) {
         super(context);
-        mFragment = fragment;
+        this.mFragment = fragment;
     }
 
     @Override
@@ -114,6 +116,10 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         mEnable16k = (Boolean) newValue;
+        if (isDataf2fs()) {
+            EnableExt4WarningDialog.show(mFragment, this);
+            return false;
+        }
         Enable16kPagesWarningDialog.show(mFragment, this, mEnable16k);
         return true;
     }
@@ -162,7 +168,7 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
                     }
 
                     @Override
-                    public void onFailure(Throwable t) {
+                    public void onFailure(@NonNull Throwable t) {
                         hideProgressDialog();
                         Log.e(TAG, "Failed to call applyPayload of UpdateEngineStable!");
                         displayToast(mContext.getString(R.string.toast_16k_update_failed_text));
@@ -291,6 +297,41 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
         Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void onExt4DialogConfirmed() {
+        // user has confirmed to wipe the device
+        ListenableFuture future = mExecutorService.submit(() -> wipeData());
+        Futures.addCallback(
+                future,
+                new FutureCallback<>() {
+                    @Override
+                    public void onSuccess(@NonNull Object result) {
+                        Log.i(TAG, "Wiping /data  with recovery system.");
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Throwable t) {
+                        Log.e(TAG, "Failed to change the /data partition with ext4");
+                        displayToast(mContext.getString(R.string.format_ext4_failure_toast));
+                    }
+                },
+                ContextCompat.getMainExecutor(mContext));
+    }
+
+    private void wipeData() {
+        RecoverySystem recoveryService = mContext.getSystemService(RecoverySystem.class);
+        try {
+            recoveryService.wipePartitionToExt4();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void onExt4DialogDismissed() {
+        // Do nothing
+    }
+
     private class OtaUpdateCallback extends UpdateEngineStableCallback {
         UpdateEngineStable mUpdateEngineStable;
 
@@ -356,5 +397,25 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
         infoBundle.putBoolean(SystemUpdateManager.KEY_IS_SECURITY_UPDATE, false);
         infoBundle.putString(SystemUpdateManager.KEY_TITLE, EXPERIMENTAL_UPDATE_TITLE);
         return infoBundle;
+    }
+
+    private boolean isDataf2fs() {
+        try (BufferedReader br = new BufferedReader(new FileReader("/proc/mounts"))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                Log.i(TAG, line);
+                final String[] fields = line.split(" ");
+                final String partition = fields[1];
+                final String fsType = fields[2];
+                if (partition.equals("/data") && fsType.equals("f2fs")) {
+                    return true;
+                }
+            }
+        } catch (IOException e) {
+            Log.e(TAG, "Failed to read /proc/mounts");
+            displayToast(mContext.getString(R.string.format_ext4_failure_toast));
+        }
+
+        return false;
     }
 }

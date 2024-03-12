@@ -29,14 +29,10 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
-import com.android.settings.overlay.FeatureFactory;
-import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import com.google.android.material.button.MaterialButton;
 
-/**
- * A preference for displaying the battery tips card view.
- */
+/** A preference for displaying the battery tips card view. */
 public class BatteryTipsCardPreference extends Preference implements View.OnClickListener {
 
     private static final String TAG = "BatteryTipsCardPreference";
@@ -49,23 +45,19 @@ public class BatteryTipsCardPreference extends Preference implements View.OnClic
         void onReject();
     }
 
-    private final MetricsFeatureProvider mMetricsFeatureProvider;
     private OnConfirmListener mOnConfirmListener;
     private OnRejectListener mOnRejectListener;
     private int mIconResourceId = 0;
-    private int mMainButtonStrokeColorResourceId = 0;
+    private int mButtonColorResourceId = 0;
 
-    @VisibleForTesting
-    CharSequence mMainButtonLabel;
-    @VisibleForTesting
-    CharSequence mDismissButtonLabel;
+    @VisibleForTesting CharSequence mMainButtonLabel;
+    @VisibleForTesting CharSequence mDismissButtonLabel;
 
     public BatteryTipsCardPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         setLayoutResource(R.layout.battery_tips_card);
+        setViewId(R.id.battery_tips_card);
         setSelectable(false);
-        final FeatureFactory featureFactory = FeatureFactory.getFactory(context);
-        mMetricsFeatureProvider = featureFactory.getMetricsFeatureProvider();
     }
 
     public void setOnConfirmListener(OnConfirmListener listener) {
@@ -87,11 +79,11 @@ public class BatteryTipsCardPreference extends Preference implements View.OnClic
     }
 
     /**
-     * Sets the stroke color of main button in tips card.
+     * Sets the background color for main button and the text color for dismiss button.
      */
-    public void setMainButtonStrokeColorResourceId(int resourceId) {
-        if (mMainButtonStrokeColorResourceId != resourceId) {
-            mMainButtonStrokeColorResourceId = resourceId;
+    public void setButtonColorResourceId(int resourceId) {
+        if (mButtonColorResourceId != resourceId) {
+            mButtonColorResourceId = resourceId;
             notifyChanged();
         }
     }
@@ -119,7 +111,7 @@ public class BatteryTipsCardPreference extends Preference implements View.OnClic
     @Override
     public void onClick(View view) {
         final int viewId = view.getId();
-        if (viewId == R.id.main_button || viewId == R.id.tips_card) {
+        if (viewId == R.id.main_button || viewId == R.id.battery_tips_card) {
             if (mOnConfirmListener != null) {
                 mOnConfirmListener.onConfirm();
             }
@@ -136,17 +128,21 @@ public class BatteryTipsCardPreference extends Preference implements View.OnClic
 
         ((TextView) view.findViewById(R.id.title)).setText(getTitle());
 
-        LinearLayout tipsCard = (LinearLayout) view.findViewById(R.id.tips_card);
+        final LinearLayout tipsCard = (LinearLayout) view.findViewById(R.id.battery_tips_card);
         tipsCard.setOnClickListener(this);
-        MaterialButton mainButton = (MaterialButton) view.findViewById(R.id.main_button);
+        final MaterialButton mainButton = (MaterialButton) view.findViewById(R.id.main_button);
         mainButton.setOnClickListener(this);
         mainButton.setText(mMainButtonLabel);
-        if (mMainButtonStrokeColorResourceId != 0) {
-            mainButton.setStrokeColorResource(mMainButtonStrokeColorResourceId);
-        }
-        MaterialButton dismissButton = (MaterialButton) view.findViewById(R.id.dismiss_button);
+        final MaterialButton dismissButton =
+                (MaterialButton) view.findViewById(R.id.dismiss_button);
         dismissButton.setOnClickListener(this);
         dismissButton.setText(mDismissButtonLabel);
+        if (mButtonColorResourceId != 0) {
+            final int colorInt = getContext().getColor(mButtonColorResourceId);
+            mainButton.setBackgroundColor(colorInt);
+            dismissButton.setTextColor(colorInt);
+        }
+
         if (mIconResourceId != 0) {
             ((ImageView) view.findViewById(R.id.icon)).setImageResource(mIconResourceId);
         }

@@ -65,7 +65,7 @@ public class WifiHotspotSecurityViewModel extends AndroidViewModel {
         mViewItemMap.put(SECURITY_TYPE_WPA2_PSK, new ViewItem(KEY_SECURITY_WPA2));
         mViewItemMap.put(SECURITY_TYPE_OPEN, new ViewItem(KEY_SECURITY_NONE));
 
-        mWifiHotspotRepository = FeatureFactory.getFactory(application).getWifiFeatureProvider()
+        mWifiHotspotRepository = FeatureFactory.getFeatureFactory().getWifiFeatureProvider()
                 .getWifiHotspotRepository();
         mWifiHotspotRepository.getSecurityType().observeForever(mSecurityTypeObserver);
         mWifiHotspotRepository.getSpeedType().observeForever(mSpeedTypeObserver);
@@ -159,6 +159,6 @@ public class WifiHotspotSecurityViewModel extends AndroidViewModel {
     }
 
     private void log(String msg) {
-        FeatureFactory.getFactory(getApplication()).getWifiFeatureProvider().verboseLog(TAG, msg);
+        FeatureFactory.getFeatureFactory().getWifiFeatureProvider().verboseLog(TAG, msg);
     }
 }

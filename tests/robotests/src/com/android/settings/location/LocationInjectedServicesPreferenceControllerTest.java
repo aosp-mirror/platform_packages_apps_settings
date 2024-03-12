@@ -115,7 +115,7 @@ public class LocationInjectedServicesPreferenceControllerTest {
         verify(mContext).unregisterReceiver(mController.mInjectedSettingsReceiver);
     }
 
-    @Ignore
+    @Ignore("b/313540388")
     @Test
     public void workProfileDisallowShareLocationOn_getParentUserLocationServicesOnly() {
         final int fakeWorkProfileId = 123;
@@ -168,7 +168,7 @@ public class LocationInjectedServicesPreferenceControllerTest {
         verify(mSettingsInjector).reloadStatusMessages();
     }
 
-    @Ignore
+    @Ignore("b/313540388")
     @Test
     public void withUserRestriction_shouldDisableLocationAccuracy() {
         final List<Preference> preferences = new ArrayList<>();

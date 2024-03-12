@@ -66,7 +66,7 @@ public final class BatteryUsageContentProviderTest {
     public void setUp() {
         mContext = ApplicationProvider.getApplicationContext();
         mProvider = new BatteryUsageContentProvider();
-        mProvider.attachInfo(mContext, /*info=*/ null);
+        mProvider.attachInfo(mContext, /* info= */ null);
         BatteryTestUtils.setUpBatteryStateDatabase(mContext);
     }
 
@@ -95,11 +95,14 @@ public final class BatteryUsageContentProviderTest {
                 IllegalArgumentException.class,
                 () ->
                         mProvider.query(
-                                uri, /*strings=*/ null, /*s=*/ null, /*strings1=*/ null,
-                                /*s1=*/ null));
+                                uri,
+                                /* strings= */ null,
+                                /* s= */ null,
+                                /* strings1= */ null,
+                                /* s1= */ null));
         assertThrows(
                 IllegalArgumentException.class,
-                () -> mProvider.insert(uri, /*contentValues=*/ null));
+                () -> mProvider.insert(uri, /* contentValues= */ null));
     }
 
     @Test
@@ -116,11 +119,14 @@ public final class BatteryUsageContentProviderTest {
                 IllegalArgumentException.class,
                 () ->
                         mProvider.query(
-                                uri, /*strings=*/ null, /*s=*/ null, /*strings1=*/ null,
-                                /*s1=*/ null));
+                                uri,
+                                /* strings= */ null,
+                                /* s= */ null,
+                                /* strings1= */ null,
+                                /* s1= */ null));
         assertThrows(
                 IllegalArgumentException.class,
-                () -> mProvider.insert(uri, /*contentValues=*/ null));
+                () -> mProvider.insert(uri, /* contentValues= */ null));
     }
 
     @Test
@@ -128,7 +134,8 @@ public final class BatteryUsageContentProviderTest {
         mProvider.onCreate();
         ContentValues values = new ContentValues();
         values.put(BatteryEventEntity.KEY_TIMESTAMP, 10001L);
-        values.put(BatteryEventEntity.KEY_BATTERY_EVENT_TYPE,
+        values.put(
+                BatteryEventEntity.KEY_BATTERY_EVENT_TYPE,
                 BatteryEventType.FULL_CHARGED.getNumber());
         values.put(BatteryEventEntity.KEY_BATTERY_LEVEL, 100);
         mProvider.insert(DatabaseUtils.BATTERY_EVENT_URI, values);
@@ -263,15 +270,13 @@ public final class BatteryUsageContentProviderTest {
     public void insert_batteryState_returnsExpectedResult() {
         mProvider.onCreate();
         final DeviceBatteryState deviceBatteryState =
-                DeviceBatteryState
-                        .newBuilder()
+                DeviceBatteryState.newBuilder()
                         .setBatteryLevel(51)
                         .setBatteryStatus(2)
                         .setBatteryHealth(3)
                         .build();
         final BatteryInformation batteryInformation =
-                BatteryInformation
-                        .newBuilder()
+                BatteryInformation.newBuilder()
                         .setDeviceBatteryState(deviceBatteryState)
                         .setAppLabel("Settings")
                         .setIsHidden(true)
@@ -285,6 +290,7 @@ public final class BatteryUsageContentProviderTest {
                         .setPercentOfTotal(0.9)
                         .setForegroundUsageTimeInMs(1000)
                         .setBackgroundUsageTimeInMs(2000)
+                        .setForegroundServiceUsageTimeInMs(1500)
                         .setDrainType(1)
                         .build();
         final String expectedBatteryInformationString =
@@ -318,17 +324,13 @@ public final class BatteryUsageContentProviderTest {
     public void insert_partialFieldsContentValues_returnsExpectedResult() {
         mProvider.onCreate();
         final DeviceBatteryState deviceBatteryState =
-                DeviceBatteryState
-                        .newBuilder()
+                DeviceBatteryState.newBuilder()
                         .setBatteryLevel(52)
                         .setBatteryStatus(3)
                         .setBatteryHealth(2)
                         .build();
         final BatteryInformation batteryInformation =
-                BatteryInformation
-                        .newBuilder()
-                        .setDeviceBatteryState(deviceBatteryState)
-                        .build();
+                BatteryInformation.newBuilder().setDeviceBatteryState(deviceBatteryState).build();
         final String expectedBatteryInformationString =
                 ConvertUtils.convertBatteryInformationToString(batteryInformation);
         final ContentValues values = new ContentValues();
@@ -381,7 +383,8 @@ public final class BatteryUsageContentProviderTest {
         mProvider.onCreate();
         ContentValues values = new ContentValues();
         values.put(BatteryEventEntity.KEY_TIMESTAMP, 10001L);
-        values.put(BatteryEventEntity.KEY_BATTERY_EVENT_TYPE,
+        values.put(
+                BatteryEventEntity.KEY_BATTERY_EVENT_TYPE,
                 BatteryEventType.POWER_CONNECTED.getNumber());
         values.put(BatteryEventEntity.KEY_BATTERY_LEVEL, 66);
 
@@ -393,24 +396,26 @@ public final class BatteryUsageContentProviderTest {
                 BatteryStateDatabase.getInstance(mContext).batteryEventDao().getAll();
         assertThat(entities).hasSize(1);
         assertThat(entities.get(0).timestamp).isEqualTo(10001L);
-        assertThat(entities.get(0).batteryEventType).isEqualTo(
-                BatteryEventType.POWER_CONNECTED.getNumber());
+        assertThat(entities.get(0).batteryEventType)
+                .isEqualTo(BatteryEventType.POWER_CONNECTED.getNumber());
         assertThat(entities.get(0).batteryLevel).isEqualTo(66);
 
-        final Cursor cursor1 = getCursorOfBatteryEvents(
-                0L, List.of(BatteryEventType.POWER_CONNECTED.getNumber()));
+        final Cursor cursor1 =
+                getCursorOfBatteryEvents(0L, List.of(BatteryEventType.POWER_CONNECTED.getNumber()));
         assertThat(cursor1.getCount()).isEqualTo(1);
         cursor1.moveToFirst();
         assertThat(cursor1.getLong(cursor1.getColumnIndex(BatteryEventEntity.KEY_TIMESTAMP)))
                 .isEqualTo(10001L);
         assertThat(
-                cursor1.getInt(cursor1.getColumnIndex(BatteryEventEntity.KEY_BATTERY_EVENT_TYPE)))
+                        cursor1.getInt(
+                                cursor1.getColumnIndex(BatteryEventEntity.KEY_BATTERY_EVENT_TYPE)))
                 .isEqualTo(BatteryEventType.POWER_CONNECTED.getNumber());
         assertThat(cursor1.getInt(cursor1.getColumnIndex(BatteryEventEntity.KEY_BATTERY_LEVEL)))
                 .isEqualTo(66);
 
-        final Cursor cursor2 = getCursorOfBatteryEvents(
-                0L, List.of(BatteryEventType.POWER_DISCONNECTED.getNumber()));
+        final Cursor cursor2 =
+                getCursorOfBatteryEvents(
+                        0L, List.of(BatteryEventType.POWER_DISCONNECTED.getNumber()));
         assertThat(cursor2.getCount()).isEqualTo(0);
     }
 
@@ -435,8 +440,11 @@ public final class BatteryUsageContentProviderTest {
         cursor1.moveToFirst();
         assertThat(cursor1.getLong(cursor1.getColumnIndex(BatteryUsageSlotEntity.KEY_TIMESTAMP)))
                 .isEqualTo(10001L);
-        assertThat(cursor1.getString(cursor1.getColumnIndex(
-                BatteryUsageSlotEntity.KEY_BATTERY_USAGE_SLOT))).isEqualTo("TEST_STRING");
+        assertThat(
+                        cursor1.getString(
+                                cursor1.getColumnIndex(
+                                        BatteryUsageSlotEntity.KEY_BATTERY_USAGE_SLOT)))
+                .isEqualTo("TEST_STRING");
 
         final Cursor cursor2 = getCursorOfBatteryUsageSlots(10002L);
         assertThat(cursor2.getCount()).isEqualTo(0);
@@ -446,7 +454,7 @@ public final class BatteryUsageContentProviderTest {
     public void delete_throwsUnsupportedOperationException() {
         assertThrows(
                 UnsupportedOperationException.class,
-                () -> mProvider.delete(/*uri=*/ null, /*s=*/ null, /*strings=*/ null));
+                () -> mProvider.delete(/* uri= */ null, /* s= */ null, /* strings= */ null));
     }
 
     @Test
@@ -455,13 +463,13 @@ public final class BatteryUsageContentProviderTest {
                 UnsupportedOperationException.class,
                 () ->
                         mProvider.update(
-                                /*uri=*/ null, /*contentValues=*/ null, /*s=*/ null,
-                                /*strings=*/ null));
+                                /* uri= */ null,
+                                /* contentValues= */ null,
+                                /* s= */ null,
+                                /* strings= */ null));
     }
 
-    private Cursor insertBatteryState(
-            Duration currentTime,
-            String queryTimestamp)
+    private Cursor insertBatteryState(Duration currentTime, String queryTimestamp)
             throws Exception {
         mProvider.onCreate();
         final FakeClock fakeClock = new FakeClock();
@@ -470,20 +478,17 @@ public final class BatteryUsageContentProviderTest {
         final long currentTimestamp = currentTime.toMillis();
         // Inserts some valid testing data.
         BatteryTestUtils.insertDataToBatteryStateTable(
-                mContext, currentTimestamp - 6, PACKAGE_NAME1,
-                /*isFullChargeStart=*/ true);
+                mContext, currentTimestamp - 6, PACKAGE_NAME1, /* isFullChargeStart= */ true);
         BatteryTestUtils.insertDataToBatteryStateTable(
                 mContext, currentTimestamp - 2, PACKAGE_NAME2);
-        BatteryTestUtils.insertDataToBatteryStateTable(
-                mContext, currentTimestamp, PACKAGE_NAME3);
+        BatteryTestUtils.insertDataToBatteryStateTable(mContext, currentTimestamp, PACKAGE_NAME3);
 
         final Uri batteryStateQueryContentUri =
                 new Uri.Builder()
                         .scheme(ContentResolver.SCHEME_CONTENT)
                         .authority(DatabaseUtils.AUTHORITY)
                         .appendPath(DatabaseUtils.BATTERY_STATE_TABLE)
-                        .appendQueryParameter(
-                                DatabaseUtils.QUERY_KEY_TIMESTAMP, queryTimestamp)
+                        .appendQueryParameter(DatabaseUtils.QUERY_KEY_TIMESTAMP, queryTimestamp)
                         .build();
 
         final Cursor cursor = query(batteryStateQueryContentUri);
@@ -532,17 +537,17 @@ public final class BatteryUsageContentProviderTest {
                         .scheme(ContentResolver.SCHEME_CONTENT)
                         .authority(DatabaseUtils.AUTHORITY)
                         .appendPath(DatabaseUtils.APP_USAGE_LATEST_TIMESTAMP_PATH)
-                        .appendQueryParameter(
-                                DatabaseUtils.QUERY_KEY_USERID, Long.toString(userId))
+                        .appendQueryParameter(DatabaseUtils.QUERY_KEY_USERID, Long.toString(userId))
                         .build();
 
         return query(appUsageLatestTimestampQueryContentUri);
     }
 
     private Cursor getCursorOfAppUsage(final List<Long> userIds, final long queryTimestamp) {
-        final String queryUserIdString = userIds.stream()
-                .map(userId -> String.valueOf(userId))
-                .collect(Collectors.joining(","));
+        final String queryUserIdString =
+                userIds.stream()
+                        .map(userId -> String.valueOf(userId))
+                        .collect(Collectors.joining(","));
         final Uri appUsageEventUri =
                 new Uri.Builder()
                         .scheme(ContentResolver.SCHEME_CONTENT)
@@ -558,9 +563,10 @@ public final class BatteryUsageContentProviderTest {
 
     private Cursor getCursorOfBatteryEvents(
             final long queryTimestamp, final List<Integer> batteryEventTypes) {
-        final String batteryEventTypesString = batteryEventTypes.stream()
-                .map(type -> String.valueOf(type))
-                .collect(Collectors.joining(","));
+        final String batteryEventTypesString =
+                batteryEventTypes.stream()
+                        .map(type -> String.valueOf(type))
+                        .collect(Collectors.joining(","));
         final Uri batteryEventUri =
                 new Uri.Builder()
                         .scheme(ContentResolver.SCHEME_CONTENT)
@@ -590,6 +596,6 @@ public final class BatteryUsageContentProviderTest {
 
     private Cursor query(Uri uri) {
         return mProvider.query(
-                uri, /*strings=*/ null, /*s=*/ null, /*strings1=*/ null, /*s1=*/ null);
+                uri, /* strings= */ null, /* s= */ null, /* strings1= */ null, /* s1= */ null);
     }
 }

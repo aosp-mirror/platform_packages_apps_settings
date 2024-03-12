@@ -16,10 +16,8 @@
 
 package com.android.settings.development;
 
-import static com.android.settings.development.TransitionAnimationScalePreferenceController
-        .DEFAULT_VALUE;
-import static com.android.settings.development.TransitionAnimationScalePreferenceController
-        .TRANSITION_ANIMATION_SCALE_SELECTOR;
+import static com.android.settings.development.TransitionAnimationScalePreferenceController.DEFAULT_VALUE;
+import static com.android.settings.development.TransitionAnimationScalePreferenceController.TRANSITION_ANIMATION_SCALE_SELECTOR;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -31,8 +29,6 @@ import android.view.IWindowManager;
 
 import androidx.preference.ListPreference;
 import androidx.preference.PreferenceScreen;
-
-import com.android.settings.R;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -72,8 +68,10 @@ public class TransitionAnimationScalePreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
         final Resources resources = mContext.getResources();
-        mListValues = resources.getStringArray(R.array.transition_animation_scale_values);
-        mListSummaries = resources.getStringArray(R.array.transition_animation_scale_entries);
+        mListValues = resources.getStringArray(
+                com.android.settingslib.R.array.transition_animation_scale_values);
+        mListSummaries = resources.getStringArray(
+                com.android.settingslib.R.array.transition_animation_scale_entries);
         mController = new TransitionAnimationScalePreferenceController(mContext);
         ReflectionHelpers.setField(mController, "mWindowManager", mWindowManager);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);

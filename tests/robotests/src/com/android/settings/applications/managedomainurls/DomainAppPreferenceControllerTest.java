@@ -30,7 +30,6 @@ import android.content.pm.PackageManager;
 import android.content.pm.verify.domain.DomainVerificationManager;
 import android.content.pm.verify.domain.DomainVerificationUserState;
 
-import com.android.settings.R;
 import com.android.settingslib.applications.ApplicationsState;
 
 import org.junit.Before;
@@ -72,7 +71,8 @@ public class DomainAppPreferenceControllerTest {
         doReturn(true).when(domainVerificationUserState).isLinkHandlingAllowed();
         final DomainAppPreference pref = new DomainAppPreference(mContext, mAppEntry);
 
-        assertThat(pref.getLayoutResource()).isEqualTo(R.layout.preference_app);
+        assertThat(pref.getLayoutResource())
+                .isEqualTo(com.android.settingslib.widget.preference.app.R.layout.preference_app);
     }
 
     private ApplicationInfo createApplicationInfo(String packageName) {

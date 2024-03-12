@@ -16,7 +16,6 @@
 
 package com.android.settings.core.gateway;
 
-import com.android.settings.AllInOneTetherSettings;
 import com.android.settings.DisplaySettings;
 import com.android.settings.IccLockSettings;
 import com.android.settings.MainClear;
@@ -73,7 +72,7 @@ import com.android.settings.biometrics.combination.CombinedBiometricProfileSetti
 import com.android.settings.biometrics.combination.CombinedBiometricSettings;
 import com.android.settings.biometrics.face.FaceSettings;
 import com.android.settings.biometrics.fingerprint.FingerprintSettings;
-import com.android.settings.biometrics.fingerprint2.ui.fragment.FingerprintSettingsV2Fragment;
+import com.android.settings.biometrics.fingerprint2.ui.settings.fragment.FingerprintSettingsV2Fragment;
 import com.android.settings.bluetooth.BluetoothBroadcastDialog;
 import com.android.settings.bluetooth.BluetoothDeviceDetailsFragment;
 import com.android.settings.bluetooth.BluetoothFindBroadcastsFragment;
@@ -101,6 +100,7 @@ import com.android.settings.deviceinfo.firmwareversion.FirmwareVersionSettings;
 import com.android.settings.deviceinfo.legal.ModuleLicensesDashboard;
 import com.android.settings.display.AutoBrightnessSettings;
 import com.android.settings.display.NightDisplaySettings;
+import com.android.settings.display.ScreenTimeoutSettings;
 import com.android.settings.display.SmartAutoRotatePreferenceFragment;
 import com.android.settings.display.darkmode.DarkModeSettingsFragment;
 import com.android.settings.dream.DreamSettings;
@@ -109,7 +109,6 @@ import com.android.settings.fuelgauge.AdvancedPowerUsageDetail;
 import com.android.settings.fuelgauge.batterysaver.BatterySaverScheduleSettings;
 import com.android.settings.fuelgauge.batterysaver.BatterySaverSettings;
 import com.android.settings.fuelgauge.batteryusage.PowerUsageSummary;
-import com.android.settings.gestures.AssistGestureSettings;
 import com.android.settings.gestures.ButtonNavigationSettingsFragment;
 import com.android.settings.gestures.DoubleTapPowerSettings;
 import com.android.settings.gestures.DoubleTapScreenSettings;
@@ -186,7 +185,6 @@ import com.android.settings.wfd.WifiDisplaySettings;
 import com.android.settings.wifi.ConfigureWifiSettings;
 import com.android.settings.wifi.WifiAPITest;
 import com.android.settings.wifi.WifiInfo;
-import com.android.settings.wifi.WifiSettings;
 import com.android.settings.wifi.calling.WifiCallingDisclaimerFragment;
 import com.android.settings.wifi.calling.WifiCallingSettings;
 import com.android.settings.wifi.details.WifiNetworkDetailsFragment;
@@ -204,11 +202,9 @@ public class SettingsGateway {
             AdvancedConnectedDeviceDashboardFragment.class.getName(),
             CreateShortcut.class.getName(),
             BluetoothPairingDetail.class.getName(),
-            WifiSettings.class.getName(),
             WifiNetworkDetailsFragment.class.getName(),
             ConfigureWifiSettings.class.getName(),
             SavedAccessPointsWifiSettings2.class.getName(),
-            AllInOneTetherSettings.class.getName(),
             TetherSettings.class.getName(),
             SmartAutoRotatePreferenceFragment.class.getName(),
             WifiP2pSettings.class.getName(),
@@ -263,7 +259,6 @@ public class SettingsGateway {
             WifiDisplaySettings.class.getName(),
             PowerUsageSummary.class.getName(),
             AccountSyncSettings.class.getName(),
-            AssistGestureSettings.class.getName(),
             FaceSettings.class.getName(),
             FingerprintSettings.FingerprintSettingsFragment.class.getName(),
             FingerprintSettingsV2Fragment.class.getName(),
@@ -375,7 +370,8 @@ public class SettingsGateway {
             LongBackgroundTasksDetails.class.getName(),
             RegionalPreferencesEntriesFragment.class.getName(),
             BatteryInfoFragment.class.getName(),
-            UserAspectRatioDetails.class.getName()
+            UserAspectRatioDetails.class.getName(),
+            ScreenTimeoutSettings.class.getName(),
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {

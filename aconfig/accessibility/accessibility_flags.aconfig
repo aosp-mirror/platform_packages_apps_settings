@@ -1,0 +1,10 @@
+package: "com.android.settings.accessibility"
+
+# NOTE: Keep alphabetized to help limit merge conflicts from multiple simultaneous editors.
+
+flag {
+  name: "remove_qs_tooltip_in_suw"
+  namespace: "accessibility"
+  description: "Don't show quick settings tooltip in SUW, since the user can't use quick settings there."
+  bug: "294560581"
+}

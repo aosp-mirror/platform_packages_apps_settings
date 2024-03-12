@@ -25,6 +25,8 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.icu.text.MessageFormat;
+import android.text.Html;
 
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
@@ -73,18 +75,26 @@ public class AccessibilityButtonFooterPreferenceControllerTest {
 
         mController.displayPreference(mScreen);
 
-        assertThat(mPreference.getTitle()).isEqualTo(
-                mContext.getText(R.string.accessibility_button_gesture_description));
+        assertThat(mPreference.getTitle().toString()).isEqualTo(
+                Html.fromHtml(
+                        MessageFormat.format(mContext.getString(
+                                R.string.accessibility_button_gesture_description), 1, 2, 3),
+                        Html.FROM_HTML_MODE_COMPACT).toString());
     }
 
     @Test
     public void displayPreference_navigationGestureDisabled_setCorrectTitle() {
-        when(mResources.getInteger(com.android.internal.R.integer.config_navBarInteractionMode))
-                .thenReturn(NAV_BAR_MODE_2BUTTON);
+        when(mResources.getInteger(
+                com.android.internal.R.integer.config_navBarInteractionMode)).thenReturn(
+                NAV_BAR_MODE_2BUTTON);
 
         mController.displayPreference(mScreen);
 
-        assertThat(mPreference.getTitle()).isEqualTo(
-                mContext.getText(R.string.accessibility_button_description));
+        assertThat(mPreference.getTitle().toString()).isEqualTo(
+                Html.fromHtml(
+                        MessageFormat.format(
+                                mContext.getString(
+                                        R.string.accessibility_button_description), 1, 2, 3),
+                        Html.FROM_HTML_MODE_COMPACT).toString());
     }
 }

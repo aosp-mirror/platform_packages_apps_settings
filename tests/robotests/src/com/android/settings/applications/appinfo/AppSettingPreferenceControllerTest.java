@@ -26,7 +26,6 @@ import android.content.pm.ResolveInfo;
 import androidx.preference.Preference;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -67,14 +66,12 @@ public class AppSettingPreferenceControllerTest {
         mPreference.setKey(mController.getPreferenceKey());
     }
 
-    @Ignore
     @Test
     public void getAvailabilityStatus_noAppSetting_shouldNotBeAvailable() {
         assertThat(mController.isAvailable())
                 .isFalse();
     }
 
-    @Ignore
     @Test
     public void getAvailabilityStatus_noPackageName_shouldNotBeAvailable() {
         mController.setPackageName(null);
@@ -83,7 +80,6 @@ public class AppSettingPreferenceControllerTest {
                 .isFalse();
     }
 
-    @Ignore
     @Test
     public void getAvailabilityStatus_hasAppSetting_shouldBeAvailable() {
         final ResolveInfo info = new ResolveInfo();
@@ -97,13 +93,11 @@ public class AppSettingPreferenceControllerTest {
                 .isTrue();
     }
 
-    @Ignore
     @Test
     public void clickPreference_noAppSetting_shouldDoNothing() {
         assertThat(mController.handlePreferenceTreeClick(mPreference)).isFalse();
     }
 
-    @Ignore
     @Test
     public void clickPreference_hasAppSetting_shouldLaunchIntent() {
         final ResolveInfo info = new ResolveInfo();

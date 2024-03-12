@@ -37,6 +37,7 @@ import com.android.settings.fuelgauge.batteryusage.db.BatteryStateDao;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryStateDatabase;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryUsageSlotDao;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryUsageSlotEntity;
+import com.android.settingslib.fuelgauge.BatteryUtils;
 
 import java.time.Clock;
 import java.time.Duration;
@@ -53,6 +54,7 @@ public class BatteryUsageContentProvider extends ContentProvider {
 
     /** Codes */
     private static final int BATTERY_STATE_CODE = 1;
+
     private static final int APP_USAGE_LATEST_TIMESTAMP_CODE = 2;
     private static final int APP_USAGE_EVENT_CODE = 3;
     private static final int BATTERY_EVENT_CODE = 4;
@@ -67,32 +69,32 @@ public class BatteryUsageContentProvider extends ContentProvider {
     static {
         sUriMatcher.addURI(
                 DatabaseUtils.AUTHORITY,
-                /*path=*/ DatabaseUtils.BATTERY_STATE_TABLE,
-                /*code=*/ BATTERY_STATE_CODE);
+                /* path= */ DatabaseUtils.BATTERY_STATE_TABLE,
+                /* code= */ BATTERY_STATE_CODE);
         sUriMatcher.addURI(
                 DatabaseUtils.AUTHORITY,
-                /*path=*/ DatabaseUtils.APP_USAGE_LATEST_TIMESTAMP_PATH,
-                /*code=*/ APP_USAGE_LATEST_TIMESTAMP_CODE);
+                /* path= */ DatabaseUtils.APP_USAGE_LATEST_TIMESTAMP_PATH,
+                /* code= */ APP_USAGE_LATEST_TIMESTAMP_CODE);
         sUriMatcher.addURI(
                 DatabaseUtils.AUTHORITY,
-                /*path=*/ DatabaseUtils.APP_USAGE_EVENT_TABLE,
-                /*code=*/ APP_USAGE_EVENT_CODE);
+                /* path= */ DatabaseUtils.APP_USAGE_EVENT_TABLE,
+                /* code= */ APP_USAGE_EVENT_CODE);
         sUriMatcher.addURI(
                 DatabaseUtils.AUTHORITY,
-                /*path=*/ DatabaseUtils.BATTERY_EVENT_TABLE,
-                /*code=*/ BATTERY_EVENT_CODE);
+                /* path= */ DatabaseUtils.BATTERY_EVENT_TABLE,
+                /* code= */ BATTERY_EVENT_CODE);
         sUriMatcher.addURI(
                 DatabaseUtils.AUTHORITY,
-                /*path=*/ DatabaseUtils.LAST_FULL_CHARGE_TIMESTAMP_PATH,
-                /*code=*/ LAST_FULL_CHARGE_TIMESTAMP_CODE);
+                /* path= */ DatabaseUtils.LAST_FULL_CHARGE_TIMESTAMP_PATH,
+                /* code= */ LAST_FULL_CHARGE_TIMESTAMP_CODE);
         sUriMatcher.addURI(
                 DatabaseUtils.AUTHORITY,
-                /*path=*/ DatabaseUtils.BATTERY_STATE_LATEST_TIMESTAMP_PATH,
-                /*code=*/ BATTERY_STATE_LATEST_TIMESTAMP_CODE);
+                /* path= */ DatabaseUtils.BATTERY_STATE_LATEST_TIMESTAMP_PATH,
+                /* code= */ BATTERY_STATE_LATEST_TIMESTAMP_CODE);
         sUriMatcher.addURI(
                 DatabaseUtils.AUTHORITY,
-                /*path=*/ DatabaseUtils.BATTERY_USAGE_SLOT_TABLE,
-                /*code=*/ BATTERY_USAGE_SLOT_CODE);
+                /* path= */ DatabaseUtils.BATTERY_USAGE_SLOT_TABLE,
+                /* code= */ BATTERY_USAGE_SLOT_CODE);
     }
 
     private Clock mClock;
@@ -108,7 +110,7 @@ public class BatteryUsageContentProvider extends ContentProvider {
 
     @Override
     public boolean onCreate() {
-        if (DatabaseUtils.isWorkProfile(getContext())) {
+        if (BatteryUtils.isWorkProfile(getContext())) {
             Log.w(TAG, "do not create provider for work profile");
             return false;
         }
@@ -177,7 +179,7 @@ public class BatteryUsageContentProvider extends ContentProvider {
                     throw new IllegalArgumentException("unknown URI: " + uri);
             }
         } catch (RuntimeException e) {
-            if (e instanceof  IllegalArgumentException) {
+            if (e instanceof IllegalArgumentException) {
                 throw e;
             }
             Log.e(TAG, "insert() from:" + uri + " error:", e);
@@ -208,8 +210,10 @@ public class BatteryUsageContentProvider extends ContentProvider {
         } catch (RuntimeException e) {
             Log.e(TAG, "query() from:" + uri + " error:", e);
         }
-        Log.d(TAG, String.format("getLastFullChargeTimestamp() in %d/ms",
-                mClock.millis() - timestamp));
+        Log.d(
+                TAG,
+                String.format(
+                        "getLastFullChargeTimestamp() in %d/ms", mClock.millis() - timestamp));
         return cursor;
     }
 
@@ -222,8 +226,11 @@ public class BatteryUsageContentProvider extends ContentProvider {
         } catch (RuntimeException e) {
             Log.e(TAG, "query() from:" + uri + " error:", e);
         }
-        Log.d(TAG, String.format("getBatteryStateLatestTimestamp() no later than %d in %d/ms",
-                queryTimestamp, mClock.millis() - timestamp));
+        Log.d(
+                TAG,
+                String.format(
+                        "getBatteryStateLatestTimestamp() no later than %d in %d/ms",
+                        queryTimestamp, mClock.millis() - timestamp));
         return cursor;
     }
 
@@ -236,8 +243,11 @@ public class BatteryUsageContentProvider extends ContentProvider {
         } catch (RuntimeException e) {
             Log.e(TAG, "query() from:" + uri + " error:", e);
         }
-        Log.d(TAG, String.format("getBatteryStates() after %d in %d/ms",
-                queryTimestamp, mClock.millis() - timestamp));
+        Log.d(
+                TAG,
+                String.format(
+                        "getBatteryStates() after %d in %d/ms",
+                        queryTimestamp, mClock.millis() - timestamp));
         return cursor;
     }
 
@@ -270,8 +280,11 @@ public class BatteryUsageContentProvider extends ContentProvider {
         } catch (RuntimeException e) {
             Log.e(TAG, "query() from:" + uri + " error:", e);
         }
-        Log.d(TAG, String.format("getAppUsageLatestTimestamp() for user %d in %d/ms",
-                queryUserId, (mClock.millis() - timestamp)));
+        Log.d(
+                TAG,
+                String.format(
+                        "getAppUsageLatestTimestamp() for user %d in %d/ms",
+                        queryUserId, (mClock.millis() - timestamp)));
         return cursor;
     }
 

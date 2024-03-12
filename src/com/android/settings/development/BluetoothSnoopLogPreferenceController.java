@@ -26,7 +26,6 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 
-import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
@@ -48,8 +47,10 @@ public class BluetoothSnoopLogPreferenceController extends DeveloperOptionsPrefe
     public BluetoothSnoopLogPreferenceController(
             Context context, DevelopmentSettingsDashboardFragment fragment) {
         super(context);
-        mListValues = context.getResources().getStringArray(R.array.bt_hci_snoop_log_values);
-        mListEntries = context.getResources().getStringArray(R.array.bt_hci_snoop_log_entries);
+        mListValues = context.getResources()
+                .getStringArray(com.android.settingslib.R.array.bt_hci_snoop_log_values);
+        mListEntries = context.getResources()
+                .getStringArray(com.android.settingslib.R.array.bt_hci_snoop_log_entries);
         mFragment = fragment;
     }
 

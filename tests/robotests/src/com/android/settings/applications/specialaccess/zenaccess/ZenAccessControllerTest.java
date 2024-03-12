@@ -27,6 +27,7 @@ import android.content.Context;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.shadow.ShadowActivityManager;
 import com.android.settings.testutils.shadow.ShadowNotificationManager;
 
 import org.junit.Before;
@@ -36,9 +37,11 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
-import org.robolectric.shadows.ShadowActivityManager;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        ShadowActivityManager.class,
+})
 public class ZenAccessControllerTest {
 
     private static final String TEST_PKG = "com.test.package";

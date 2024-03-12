@@ -28,6 +28,7 @@ import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_UNSET;
 
 import android.app.ActivityManager;
 import android.app.IActivityManager;
+import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -44,8 +45,10 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.applications.AppInfoBase;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.applications.AppUtils;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.widget.ActionButtonsPreference;
 
 import java.util.ArrayList;
@@ -104,6 +107,7 @@ public class UserAspectRatioDetails extends AppInfoBase implements
             Log.e(TAG, "Unable to set user min aspect ratio");
             return;
         }
+        logActionMetrics(selectedKey, mSelectedKey);
         // Only update to selected aspect ratio if nothing goes wrong
         mSelectedKey = selectedKey;
         updateAllPreferences(mSelectedKey);
@@ -118,8 +122,7 @@ public class UserAspectRatioDetails extends AppInfoBase implements
 
     @Override
     public int getMetricsCategory() {
-        // TODO(b/292566895): add metrics for logging
-        return 0;
+        return SettingsEnums.USER_ASPECT_RATIO_APP_INFO_SETTINGS;
     }
 
     @Override
@@ -197,7 +200,7 @@ public class UserAspectRatioDetails extends AppInfoBase implements
                 .setHasAppInfoLink(true)
                 .setButtonActions(EntityHeaderController.ActionType.ACTION_NONE,
                         EntityHeaderController.ActionType.ACTION_NONE)
-                .done(getActivity(), getPrefContext());
+                .done(getPrefContext());
 
         getPreferenceScreen().addPreference(pref);
     }
@@ -241,6 +244,68 @@ public class UserAspectRatioDetails extends AppInfoBase implements
     private void updateAllPreferences(@NonNull String selectedKey) {
         for (RadioWithImagePreference pref : mAspectRatioPreferences) {
             pref.setChecked(selectedKey.equals(pref.getKey()));
+        }
+    }
+
+    private void logActionMetrics(@NonNull String selectedKey, @NonNull String unselectedKey) {
+        final MetricsFeatureProvider metricsFeatureProvider =
+                FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
+        final int attribution = metricsFeatureProvider.getAttribution(getActivity());
+        metricsFeatureProvider.action(
+                attribution,
+                getUnselectedAspectRatioAction(unselectedKey),
+                getMetricsCategory(),
+                mPackageName,
+                mUserId
+        );
+        metricsFeatureProvider.action(
+                attribution,
+                getSelectedAspectRatioAction(selectedKey),
+                getMetricsCategory(),
+                mPackageName,
+                mUserId
+        );
+    }
+
+    private static int getSelectedAspectRatioAction(@NonNull String selectedKey) {
+        switch (selectedKey) {
+            case KEY_PREF_DEFAULT:
+                return SettingsEnums.ACTION_USER_ASPECT_RATIO_APP_DEFAULT_SELECTED;
+            case KEY_PREF_FULLSCREEN:
+                return SettingsEnums.ACTION_USER_ASPECT_RATIO_FULL_SCREEN_SELECTED;
+            case KEY_PREF_HALF_SCREEN:
+                return SettingsEnums.ACTION_USER_ASPECT_RATIO_HALF_SCREEN_SELECTED;
+            case KEY_PREF_4_3:
+                return SettingsEnums.ACTION_USER_ASPECT_RATIO_4_3_SELECTED;
+            case KEY_PREF_16_9:
+                return SettingsEnums.ACTION_USER_ASPECT_RATIO_16_9_SELECTED;
+            case KEY_PREF_3_2:
+                return SettingsEnums.ACTION_USER_ASPECT_RATIO_3_2_SELECTED;
+            case KEY_PREF_DISPLAY_SIZE:
+                return SettingsEnums.ACTION_USER_ASPECT_RATIO_DISPLAY_SIZE_SELECTED;
+            default:
+                return SettingsEnums.ACTION_UNKNOWN;
+        }
+    }
+
+    private static int getUnselectedAspectRatioAction(@NonNull String unselectedKey) {
+        switch (unselectedKey) {
+            case KEY_PREF_DEFAULT:
+                return SettingsEnums.ACTION_USER_ASPECT_RATIO_APP_DEFAULT_UNSELECTED;
+            case KEY_PREF_FULLSCREEN:
+                return SettingsEnums.ACTION_USER_ASPECT_RATIO_FULL_SCREEN_UNSELECTED;
+            case KEY_PREF_HALF_SCREEN:
+                return SettingsEnums.ACTION_USER_ASPECT_RATIO_HALF_SCREEN_UNSELECTED;
+            case KEY_PREF_4_3:
+                return SettingsEnums.ACTION_USER_ASPECT_RATIO_4_3_UNSELECTED;
+            case KEY_PREF_16_9:
+                return SettingsEnums.ACTION_USER_ASPECT_RATIO_16_9_UNSELECTED;
+            case KEY_PREF_3_2:
+                return SettingsEnums.ACTION_USER_ASPECT_RATIO_3_2_UNSELECTED;
+            case KEY_PREF_DISPLAY_SIZE:
+                return SettingsEnums.ACTION_USER_ASPECT_RATIO_DISPLAY_SIZE_UNSELECTED;
+            default:
+                return SettingsEnums.ACTION_UNKNOWN;
         }
     }
 

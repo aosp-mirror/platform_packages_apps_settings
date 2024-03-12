@@ -28,7 +28,6 @@ import android.os.HandlerExecutor;
 import android.telephony.RadioAccessFamily;
 import android.telephony.TelephonyCallback;
 import android.telephony.TelephonyManager;
-import android.test.mock.MockContentResolver;
 
 import androidx.test.annotation.UiThreadTest;
 import androidx.test.core.app.ApplicationProvider;
@@ -46,7 +45,6 @@ public class AllowedNetworkTypesListenerTest {
     private static final int SUB_ID = 1;
 
     private Context mContext;
-    private MockContentResolver mResolver;
     private AllowedNetworkTypesListener mAllowedNetworkTypesListener;
 
     @Mock

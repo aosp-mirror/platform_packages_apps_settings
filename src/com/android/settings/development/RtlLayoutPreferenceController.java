@@ -22,7 +22,7 @@ import android.sysprop.DisplayProperties;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.internal.app.LocalePicker;
 import com.android.settings.core.PreferenceControllerMixin;
@@ -59,7 +59,7 @@ public class RtlLayoutPreferenceController extends DeveloperOptionsPreferenceCon
     public void updateState(Preference preference) {
         int rtlLayoutMode = Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.DEVELOPMENT_FORCE_RTL, SETTING_VALUE_OFF);
-        ((SwitchPreference) mPreference).setChecked(rtlLayoutMode != SETTING_VALUE_OFF);
+        ((TwoStatePreference) mPreference).setChecked(rtlLayoutMode != SETTING_VALUE_OFF);
     }
 
     @Override
@@ -67,7 +67,7 @@ public class RtlLayoutPreferenceController extends DeveloperOptionsPreferenceCon
         super.onDeveloperOptionsSwitchDisabled();
         writeToForceRtlLayoutSetting(false);
         updateLocales();
-        ((SwitchPreference) mPreference).setChecked(false);
+        ((TwoStatePreference) mPreference).setChecked(false);
     }
 
     @VisibleForTesting

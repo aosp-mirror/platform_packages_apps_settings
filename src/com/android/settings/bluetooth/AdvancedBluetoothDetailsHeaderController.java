@@ -167,6 +167,10 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
     }
 
     private void registerBluetoothDevice() {
+        if (mBluetoothAdapter == null) {
+            Log.d(TAG, "No mBluetoothAdapter");
+            return;
+        }
         if (mBluetoothDevices == null) {
             mBluetoothDevices = new HashSet<>();
         }
@@ -180,23 +184,52 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
             }
         });
         if (mBluetoothDevices.isEmpty()) {
-            Log.d(TAG, "No BT devcie to register.");
+            Log.d(TAG, "No BT device to register.");
             return;
         }
         mCachedDevice.registerCallback(this);
-        mBluetoothDevices.forEach(bd ->
-                mBluetoothAdapter.addOnMetadataChangedListener(bd,
-                        mContext.getMainExecutor(), mMetadataListener));
+        Set<BluetoothDevice> errorDevices = new HashSet<>();
+        mBluetoothDevices.forEach(bd -> {
+            try {
+                boolean isSuccess = mBluetoothAdapter.addOnMetadataChangedListener(bd,
+                        mContext.getMainExecutor(), mMetadataListener);
+                if (!isSuccess) {
+                    Log.e(TAG, bd.getAnonymizedAddress() + ": add into Listener failed");
+                    errorDevices.add(bd);
+                }
+            } catch (NullPointerException e) {
+                errorDevices.add(bd);
+                Log.e(TAG, bd.getAnonymizedAddress() + ":" + e.toString());
+            } catch (IllegalArgumentException e) {
+                errorDevices.add(bd);
+                Log.e(TAG, bd.getAnonymizedAddress() + ":" + e.toString());
+            }
+        });
+        for (BluetoothDevice errorDevice : errorDevices) {
+            mBluetoothDevices.remove(errorDevice);
+            Log.d(TAG, "mBluetoothDevices remove " + errorDevice.getAnonymizedAddress());
+        }
     }
 
     private void unRegisterBluetoothDevice() {
+        if (mBluetoothAdapter == null) {
+            Log.d(TAG, "No mBluetoothAdapter");
+            return;
+        }
         if (mBluetoothDevices == null || mBluetoothDevices.isEmpty()) {
-            Log.d(TAG, "No BT devcie to unregister.");
+            Log.d(TAG, "No BT device to unregister.");
             return;
         }
         mCachedDevice.unregisterCallback(this);
-        mBluetoothDevices.forEach(bd -> mBluetoothAdapter.removeOnMetadataChangedListener(bd,
-                mMetadataListener));
+        mBluetoothDevices.forEach(bd -> {
+            try {
+                mBluetoothAdapter.removeOnMetadataChangedListener(bd, mMetadataListener);
+            } catch (NullPointerException e) {
+                Log.e(TAG, bd.getAnonymizedAddress() + ":" + e.toString());
+            } catch (IllegalArgumentException e) {
+                Log.e(TAG, bd.getAnonymizedAddress() + ":" + e.toString());
+            }
+        });
         mBluetoothDevices.clear();
     }
 
@@ -267,7 +300,7 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
     Drawable createBtBatteryIcon(Context context, int level, boolean charging) {
         final BatteryMeterView.BatteryMeterDrawable drawable =
                 new BatteryMeterView.BatteryMeterDrawable(context,
-                        context.getColor(R.color.meter_background_color),
+                        context.getColor(com.android.settingslib.R.color.meter_background_color),
                         context.getResources().getDimensionPixelSize(
                                 R.dimen.advanced_bluetooth_battery_meter_width),
                         context.getResources().getDimensionPixelSize(

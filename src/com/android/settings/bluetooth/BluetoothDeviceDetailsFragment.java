@@ -173,8 +173,8 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
         use(LeAudioBluetoothDetailsHeaderController.class).init(mCachedDevice, mManager);
         use(KeyboardSettingsPreferenceController.class).init(mCachedDevice);
 
-        final BluetoothFeatureProvider featureProvider = FeatureFactory.getFactory(
-                context).getBluetoothFeatureProvider();
+        final BluetoothFeatureProvider featureProvider =
+                FeatureFactory.getFeatureFactory().getBluetoothFeatureProvider();
         final boolean sliceEnabled = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_SETTINGS_UI,
                 SettingsUIDeviceConfig.BT_SLICE_SETTINGS_ENABLED, true);
 
@@ -184,8 +184,8 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
     }
 
     private void updateExtraControlUri(int viewWidth) {
-        BluetoothFeatureProvider featureProvider = FeatureFactory.getFactory(
-                getContext()).getBluetoothFeatureProvider();
+        BluetoothFeatureProvider featureProvider =
+                FeatureFactory.getFeatureFactory().getBluetoothFeatureProvider();
         boolean sliceEnabled = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_SETTINGS_UI,
                 SettingsUIDeviceConfig.BT_SLICE_SETTINGS_ENABLED, true);
         Uri controlUri = null;
@@ -203,6 +203,16 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
         slicePreferenceController.setSliceUri(sliceEnabled ? controlUri : null);
         slicePreferenceController.onStart();
         slicePreferenceController.displayPreference(getPreferenceScreen());
+
+        // Temporarily fix the issue that the page will be automatically scrolled to a wrong
+        // position when entering the page. This will make sure the bluetooth header is shown on top
+        // of the page.
+        use(LeAudioBluetoothDetailsHeaderController.class).displayPreference(
+                getPreferenceScreen());
+        use(AdvancedBluetoothDetailsHeaderController.class).displayPreference(
+                getPreferenceScreen());
+        use(BluetoothDetailsHeaderController.class).displayPreference(
+                getPreferenceScreen());
     }
 
     private final ViewTreeObserver.OnGlobalLayoutListener mOnGlobalLayoutListener =
@@ -295,7 +305,7 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
         if (mCachedDevice != null) {
             Lifecycle lifecycle = getSettingsLifecycle();
             controllers.add(new BluetoothDetailsHeaderController(context, this, mCachedDevice,
-                    lifecycle, mManager));
+                    lifecycle));
             controllers.add(new BluetoothDetailsButtonsController(context, this, mCachedDevice,
                     lifecycle));
             controllers.add(new BluetoothDetailsCompanionAppsController(context, this,

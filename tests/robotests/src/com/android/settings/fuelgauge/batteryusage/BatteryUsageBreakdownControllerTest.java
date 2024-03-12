@@ -58,18 +58,12 @@ public final class BatteryUsageBreakdownControllerTest {
     private static final String PREF_KEY2 = "pref_key2";
     private static final String PREF_SUMMARY = "fake preference summary";
 
-    @Mock
-    private InstrumentedPreferenceFragment mFragment;
-    @Mock
-    private SettingsActivity mSettingsActivity;
-    @Mock
-    private PreferenceGroup mAppListPreferenceGroup;
-    @Mock
-    private Drawable mDrawable;
-    @Mock
-    private BatteryHistEntry mBatteryHistEntry;
-    @Mock
-    private AnomalyAppItemPreference mAnomalyAppItemPreference;
+    @Mock private InstrumentedPreferenceFragment mFragment;
+    @Mock private SettingsActivity mSettingsActivity;
+    @Mock private PreferenceGroup mAppListPreferenceGroup;
+    @Mock private Drawable mDrawable;
+    @Mock private BatteryHistEntry mBatteryHistEntry;
+    @Mock private AnomalyAppItemPreference mAnomalyAppItemPreference;
 
     private Context mContext;
     private FakeFeatureFactory mFeatureFactory;
@@ -94,43 +88,52 @@ public final class BatteryUsageBreakdownControllerTest {
                 .getHideApplicationSet();
         mBatteryUsageBreakdownController = createController();
         mBatteryUsageBreakdownController.mAppListPreferenceGroup = mAppListPreferenceGroup;
-        mBatteryDiffEntry = new BatteryDiffEntry(
-                mContext,
-                /*uid=*/ 0L,
-                /*userId=*/ 0L,
-                /*key=*/ "key",
-                /*isHidden=*/ false,
-                /*componentId=*/ -1,
-                /*legacyPackageName=*/ null,
-                /*legacyLabel=*/ null,
-                /*consumerType=*/ ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
-                /*foregroundUsageTimeInMs=*/ 1,
-                /*backgroundUsageTimeInMs=*/ 2,
-                /*screenOnTimeInMs=*/ 0,
-                /*consumePower=*/ 3,
-                /*foregroundUsageConsumePower=*/ 0,
-                /*foregroundServiceUsageConsumePower=*/ 1,
-                /*backgroundUsageConsumePower=*/ 2,
-                /*cachedUsageConsumePower=*/ 0);
+        mBatteryDiffEntry =
+                new BatteryDiffEntry(
+                        mContext,
+                        /* uid= */ 0L,
+                        /* userId= */ 0L,
+                        /* key= */ "key",
+                        /* isHidden= */ false,
+                        /* componentId= */ -1,
+                        /* legacyPackageName= */ null,
+                        /* legacyLabel= */ null,
+                        /* consumerType= */ ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
+                        /* foregroundUsageTimeInMs= */ 1,
+                        /* foregroundServiceUsageTimeInMs= */ 2,
+                        /* backgroundUsageTimeInMs= */ 3,
+                        /* screenOnTimeInMs= */ 0,
+                        /* consumePower= */ 3,
+                        /* foregroundUsageConsumePower= */ 0,
+                        /* foregroundServiceUsageConsumePower= */ 1,
+                        /* backgroundUsageConsumePower= */ 2,
+                        /* cachedUsageConsumePower= */ 0);
         mBatteryDiffEntry = spy(mBatteryDiffEntry);
         mBatteryUsageBreakdownController.mBatteryDiffData =
-                new BatteryDiffData(mContext, /* startTimestamp= */ 0L, /* endTimestamp= */ 0L,
-                        /* startBatteryLevel= */ 0, /* endBatteryLevel= */ 0,
-                        /* screenOnTime= */ 0L, Arrays.asList(mBatteryDiffEntry), Arrays.asList(),
-                        Set.of(), Set.of(), /* isAccumulated= */ false);
+                new BatteryDiffData(
+                        mContext,
+                        /* startTimestamp= */ 0L,
+                        /* endTimestamp= */ 0L,
+                        /* startBatteryLevel= */ 0,
+                        /* endBatteryLevel= */ 0,
+                        /* screenOnTime= */ 0L,
+                        Arrays.asList(mBatteryDiffEntry),
+                        Arrays.asList(),
+                        Set.of(),
+                        Set.of(),
+                        /* isAccumulated= */ false);
         BatteryDiffEntry.clearCache();
         // Adds fake testing data.
         BatteryDiffEntry.sResourceCache.put(
                 "fakeBatteryDiffEntryKey",
-                new BatteryEntry.NameAndIcon("fakeName", /*icon=*/ null, /*iconId=*/ 1));
+                new BatteryEntry.NameAndIcon("fakeName", /* icon= */ null, /* iconId= */ 1));
         doReturn(mAnomalyAppItemPreference).when(mAppListPreferenceGroup).findPreference(PREF_KEY);
     }
 
     @Test
     public void onDestroy_clearPreferenceCacheAndPreferenceGroupRemoveAll() {
         // Ensures the testing environment is correct.
-        mBatteryUsageBreakdownController.mPreferenceCache.put(
-                PREF_KEY, mAnomalyAppItemPreference);
+        mBatteryUsageBreakdownController.mPreferenceCache.put(PREF_KEY, mAnomalyAppItemPreference);
         assertThat(mBatteryUsageBreakdownController.mPreferenceCache).hasSize(1);
 
         mBatteryUsageBreakdownController.onDestroy();
@@ -158,8 +161,8 @@ public final class BatteryUsageBreakdownControllerTest {
 
         // Verifies the preference cache.
         final PowerGaugePreference pref =
-                (PowerGaugePreference) mBatteryUsageBreakdownController.mPreferenceCache
-                        .get(PREF_KEY);
+                (PowerGaugePreference)
+                        mBatteryUsageBreakdownController.mPreferenceCache.get(PREF_KEY);
         assertThat(pref).isNotNull();
         // Verifies the added preference configuration.
         verify(mAppListPreferenceGroup).addPreference(pref);
@@ -218,8 +221,10 @@ public final class BatteryUsageBreakdownControllerTest {
 
     @Test
     public void handlePreferenceTreeClick_notPowerGaugePreference_returnFalse() {
-        assertThat(mBatteryUsageBreakdownController
-                .handlePreferenceTreeClick(mAppListPreferenceGroup)).isFalse();
+        assertThat(
+                        mBatteryUsageBreakdownController.handlePreferenceTreeClick(
+                                mAppListPreferenceGroup))
+                .isFalse();
 
         verify(mMetricsFeatureProvider, never())
                 .action(mContext, SettingsEnums.ACTION_BATTERY_USAGE_APP_ITEM);
@@ -232,8 +237,10 @@ public final class BatteryUsageBreakdownControllerTest {
         mBatteryDiffEntry.mConsumerType = ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY;
         doReturn(mBatteryDiffEntry).when(mAnomalyAppItemPreference).getBatteryDiffEntry();
 
-        assertThat(mBatteryUsageBreakdownController.handlePreferenceTreeClick(
-                mAnomalyAppItemPreference)).isTrue();
+        assertThat(
+                        mBatteryUsageBreakdownController.handlePreferenceTreeClick(
+                                mAnomalyAppItemPreference))
+                .isTrue();
         verify(mMetricsFeatureProvider)
                 .action(
                         SettingsEnums.OPEN_BATTERY_USAGE,
@@ -248,8 +255,10 @@ public final class BatteryUsageBreakdownControllerTest {
         mBatteryDiffEntry.mConsumerType = ConvertUtils.CONSUMER_TYPE_UID_BATTERY;
         doReturn(mBatteryDiffEntry).when(mAnomalyAppItemPreference).getBatteryDiffEntry();
 
-        assertThat(mBatteryUsageBreakdownController.handlePreferenceTreeClick(
-                mAnomalyAppItemPreference)).isTrue();
+        assertThat(
+                        mBatteryUsageBreakdownController.handlePreferenceTreeClick(
+                                mAnomalyAppItemPreference))
+                .isTrue();
         verify(mMetricsFeatureProvider)
                 .action(
                         SettingsEnums.OPEN_BATTERY_USAGE,
@@ -262,11 +271,13 @@ public final class BatteryUsageBreakdownControllerTest {
     @Test
     public void setPreferencePercent_lessThanThreshold_expectedFormat() {
         final PowerGaugePreference pref = new PowerGaugePreference(mContext);
-        final BatteryDiffEntry batteryDiffEntry = createBatteryDiffEntry(
-                /*isSystem=*/ true,
-                /*screenOnTimeInMs=*/ 0,
-                /*foregroundUsageTimeInMs=*/ 0,
-                /*backgroundUsageTimeInMs=*/ 0);
+        final BatteryDiffEntry batteryDiffEntry =
+                createBatteryDiffEntry(
+                        /* isSystem= */ true,
+                        /* screenOnTimeInMs= */ 0,
+                        /* foregroundUsageTimeInMs= */ 0,
+                        /* foregroundServiceUsageTimeInMs= */ 0,
+                        /* backgroundUsageTimeInMs= */ 0);
         batteryDiffEntry.mConsumePower = 0.8;
         batteryDiffEntry.setTotalConsumePower(100);
         mBatteryUsageBreakdownController.mPercentLessThanThresholdText = "< 1%";
@@ -279,11 +290,13 @@ public final class BatteryUsageBreakdownControllerTest {
     @Test
     public void setPreferencePercent_greaterThanThreshold_expectedFormat() {
         final PowerGaugePreference pref = new PowerGaugePreference(mContext);
-        final BatteryDiffEntry batteryDiffEntry = createBatteryDiffEntry(
-                /*isSystem=*/ true,
-                /*screenOnTimeInMs=*/ 0,
-                /*foregroundUsageTimeInMs=*/ 0,
-                /*backgroundUsageTimeInMs=*/ 0);
+        final BatteryDiffEntry batteryDiffEntry =
+                createBatteryDiffEntry(
+                        /* isSystem= */ true,
+                        /* screenOnTimeInMs= */ 0,
+                        /* foregroundUsageTimeInMs= */ 0,
+                        /* foregroundServiceUsageTimeInMs= */ 0,
+                        /* backgroundUsageTimeInMs= */ 0);
         batteryDiffEntry.mConsumePower = 16;
         batteryDiffEntry.setTotalConsumePower(100);
         mBatteryUsageBreakdownController.mPercentLessThanThresholdText = "< 1%";
@@ -299,11 +312,13 @@ public final class BatteryUsageBreakdownControllerTest {
         pref.setSummary(PREF_SUMMARY);
 
         mBatteryUsageBreakdownController.setPreferenceSummary(
-                pref, createBatteryDiffEntry(
-                        /*isSystem=*/ true,
-                        /*screenOnTimeInMs=*/ 0,
-                        /*foregroundUsageTimeInMs=*/ 0,
-                        /*backgroundUsageTimeInMs=*/ 0));
+                pref,
+                createBatteryDiffEntry(
+                        /* isSystem= */ true,
+                        /* screenOnTimeInMs= */ 0,
+                        /* foregroundUsageTimeInMs= */ 0,
+                        /* foregroundServiceUsageTimeInMs= */ 0,
+                        /* backgroundUsageTimeInMs= */ 0));
         assertThat(pref.getSummary().toString().isEmpty()).isTrue();
     }
 
@@ -313,11 +328,13 @@ public final class BatteryUsageBreakdownControllerTest {
         pref.setSummary(PREF_SUMMARY);
 
         mBatteryUsageBreakdownController.setPreferenceSummary(
-                pref, createBatteryDiffEntry(
-                        /*isSystem=*/ true,
-                        /*screenOnTimeInMs=*/ 0,
-                        /*foregroundUsageTimeInMs=*/ DateUtils.MINUTE_IN_MILLIS - 1,
-                        /*backgroundUsageTimeInMs=*/ 0));
+                pref,
+                createBatteryDiffEntry(
+                        /* isSystem= */ true,
+                        /* screenOnTimeInMs= */ 0,
+                        /* foregroundUsageTimeInMs= */ DateUtils.MINUTE_IN_MILLIS - 1,
+                        /* foregroundServiceUsageTimeInMs= */ 0,
+                        /* backgroundUsageTimeInMs= */ 0));
         assertThat(pref.getSummary().toString()).isEqualTo("Total: less than a min");
     }
 
@@ -327,11 +344,13 @@ public final class BatteryUsageBreakdownControllerTest {
         pref.setSummary(PREF_SUMMARY);
 
         mBatteryUsageBreakdownController.setPreferenceSummary(
-                pref, createBatteryDiffEntry(
-                        /*isSystem=*/ true,
-                        /*screenOnTimeInMs=*/ 0,
-                        /*foregroundUsageTimeInMs=*/ DateUtils.MINUTE_IN_MILLIS * 2,
-                        /*backgroundUsageTimeInMs=*/ 0));
+                pref,
+                createBatteryDiffEntry(
+                        /* isSystem= */ true,
+                        /* screenOnTimeInMs= */ 0,
+                        /* foregroundUsageTimeInMs= */ DateUtils.MINUTE_IN_MILLIS * 2,
+                        /* foregroundServiceUsageTimeInMs= */ 0,
+                        /* backgroundUsageTimeInMs= */ 0));
         assertThat(pref.getSummary().toString()).isEqualTo("Total: 2 min");
     }
 
@@ -341,11 +360,13 @@ public final class BatteryUsageBreakdownControllerTest {
         pref.setSummary(PREF_SUMMARY);
 
         mBatteryUsageBreakdownController.setPreferenceSummary(
-                pref, createBatteryDiffEntry(
-                        /*isSystem=*/ false,
-                        /*screenOnTimeInMs=*/ 0,
-                        /*foregroundUsageTimeInMs=*/ 0,
-                        /*backgroundUsageTimeInMs=*/ 0));
+                pref,
+                createBatteryDiffEntry(
+                        /* isSystem= */ false,
+                        /* screenOnTimeInMs= */ 0,
+                        /* foregroundUsageTimeInMs= */ 0,
+                        /* foregroundServiceUsageTimeInMs= */ 0,
+                        /* backgroundUsageTimeInMs= */ 0));
         assertThat(pref.getSummary().toString().isEmpty()).isTrue();
     }
 
@@ -355,11 +376,29 @@ public final class BatteryUsageBreakdownControllerTest {
         pref.setSummary(PREF_SUMMARY);
 
         mBatteryUsageBreakdownController.setPreferenceSummary(
-                pref, createBatteryDiffEntry(
-                        /*isSystem=*/ false,
-                        /*screenOnTimeInMs=*/ 0,
-                        /*foregroundUsageTimeInMs=*/ 0,
-                        /*backgroundUsageTimeInMs=*/ DateUtils.MINUTE_IN_MILLIS));
+                pref,
+                createBatteryDiffEntry(
+                        /* isSystem= */ false,
+                        /* screenOnTimeInMs= */ 0,
+                        /* foregroundUsageTimeInMs= */ 0,
+                        /* foregroundServiceUsageTimeInMs= */ 0,
+                        /* backgroundUsageTimeInMs= */ DateUtils.MINUTE_IN_MILLIS));
+        assertThat(pref.getSummary().toString()).isEqualTo("Background: 1 min");
+    }
+
+    @Test
+    public void setPreferenceSummary_appEntryWithFGSTime_expectedSummary() {
+        final PowerGaugePreference pref = new PowerGaugePreference(mContext);
+        pref.setSummary(PREF_SUMMARY);
+
+        mBatteryUsageBreakdownController.setPreferenceSummary(
+                pref,
+                createBatteryDiffEntry(
+                        /* isSystem= */ false,
+                        /* screenOnTimeInMs= */ 0,
+                        /* foregroundUsageTimeInMs= */ 0,
+                        /* foregroundServiceUsageTimeInMs= */ DateUtils.MINUTE_IN_MILLIS / 2,
+                        /* backgroundUsageTimeInMs= */ DateUtils.MINUTE_IN_MILLIS / 2));
         assertThat(pref.getSummary().toString()).isEqualTo("Background: 1 min");
     }
 
@@ -369,11 +408,13 @@ public final class BatteryUsageBreakdownControllerTest {
         pref.setSummary(PREF_SUMMARY);
 
         mBatteryUsageBreakdownController.setPreferenceSummary(
-                pref, createBatteryDiffEntry(
-                        /*isSystem=*/ false,
-                        /*screenOnTimeInMs=*/ DateUtils.MINUTE_IN_MILLIS,
-                        /*foregroundUsageTimeInMs=*/ 0,
-                        /*backgroundUsageTimeInMs=*/ 0));
+                pref,
+                createBatteryDiffEntry(
+                        /* isSystem= */ false,
+                        /* screenOnTimeInMs= */ DateUtils.MINUTE_IN_MILLIS,
+                        /* foregroundUsageTimeInMs= */ 0,
+                        /* foregroundServiceUsageTimeInMs= */ 0,
+                        /* backgroundUsageTimeInMs= */ 0));
         assertThat(pref.getSummary().toString()).isEqualTo("Screen time: 1 min");
     }
 
@@ -383,21 +424,30 @@ public final class BatteryUsageBreakdownControllerTest {
         pref.setSummary(PREF_SUMMARY);
 
         mBatteryUsageBreakdownController.setPreferenceSummary(
-                pref, createBatteryDiffEntry(
-                        /*isSystem=*/ false,
-                        /*screenOnTimeInMs=*/ DateUtils.MINUTE_IN_MILLIS - 1,
-                        /*foregroundUsageTimeInMs=*/ DateUtils.MINUTE_IN_MILLIS - 1,
-                        /*backgroundUsageTimeInMs=*/ DateUtils.MINUTE_IN_MILLIS - 1));
-        assertThat(pref.getSummary().toString()).isEqualTo(
-                "Screen time: less than a min\nBackground: less than a min");
+                pref,
+                createBatteryDiffEntry(
+                        /* isSystem= */ false,
+                        /* screenOnTimeInMs= */ DateUtils.MINUTE_IN_MILLIS - 1,
+                        /* foregroundUsageTimeInMs= */ DateUtils.MINUTE_IN_MILLIS - 1,
+                        /* foregroundServiceUsageTimeInMs= */ 0,
+                        /* backgroundUsageTimeInMs= */ DateUtils.MINUTE_IN_MILLIS - 1));
+        assertThat(pref.getSummary().toString())
+                .isEqualTo("Screen time: less than a min\nBackground: less than a min");
     }
 
-    private BatteryDiffEntry createBatteryDiffEntry(boolean isSystem, long screenOnTimeInMs,
-            long foregroundUsageTimeInMs, long backgroundUsageTimeInMs) {
+    private BatteryDiffEntry createBatteryDiffEntry(
+            boolean isSystem,
+            long screenOnTimeInMs,
+            long foregroundUsageTimeInMs,
+            long foregroundServiceUsageTimeInMs,
+            long backgroundUsageTimeInMs) {
         final ContentValues contentValues = new ContentValues();
-        contentValues.put(BatteryHistEntry.KEY_CONSUMER_TYPE, Integer.valueOf(
-                isSystem ? ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY
-                        : ConvertUtils.CONSUMER_TYPE_UID_BATTERY));
+        contentValues.put(
+                BatteryHistEntry.KEY_CONSUMER_TYPE,
+                Integer.valueOf(
+                        isSystem
+                                ? ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY
+                                : ConvertUtils.CONSUMER_TYPE_UID_BATTERY));
         contentValues.put(BatteryHistEntry.KEY_USER_ID, Integer.valueOf(1001));
         final BatteryHistEntry batteryHistEntry = new BatteryHistEntry(contentValues);
         return new BatteryDiffEntry(
@@ -412,18 +462,19 @@ public final class BatteryUsageBreakdownControllerTest {
                 batteryHistEntry.mConsumerType,
                 foregroundUsageTimeInMs,
                 backgroundUsageTimeInMs,
+                foregroundServiceUsageTimeInMs,
                 screenOnTimeInMs,
-                /*consumePower=*/ 0,
-                /*foregroundUsageConsumePower=*/ 0,
-                /*foregroundServiceUsageConsumePower=*/ 0,
-                /*backgroundUsageConsumePower=*/ 0,
-                /*cachedUsageConsumePower=*/ 0);
+                /* consumePower= */ 0,
+                /* foregroundUsageConsumePower= */ 0,
+                /* foregroundServiceUsageConsumePower= */ 0,
+                /* backgroundUsageConsumePower= */ 0,
+                /* cachedUsageConsumePower= */ 0);
     }
 
     private BatteryUsageBreakdownController createController() {
         final BatteryUsageBreakdownController controller =
                 new BatteryUsageBreakdownController(
-                        mContext, /*lifecycle=*/ null, mSettingsActivity, mFragment);
+                        mContext, /* lifecycle= */ null, mSettingsActivity, mFragment);
         controller.mPrefContext = mContext;
         return controller;
     }

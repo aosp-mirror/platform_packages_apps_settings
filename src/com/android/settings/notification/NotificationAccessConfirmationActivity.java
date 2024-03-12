@@ -17,6 +17,7 @@
 
 package com.android.settings.notification;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_APPS_CANNOT_ACCESS_NOTIFICATION_SETTINGS;
 import static android.view.WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
 
 import static com.android.internal.notification.NotificationAccessConfirmationActivityContract.EXTRA_COMPONENT_NAME;
@@ -26,6 +27,7 @@ import android.Manifest;
 import android.annotation.Nullable;
 import android.app.Activity;
 import android.app.NotificationManager;
+import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -35,10 +37,12 @@ import android.content.pm.PackageManager;
 import android.content.pm.ServiceInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.text.TextUtils;
 import android.util.Slog;
 import android.view.WindowManager;
 import android.view.accessibility.AccessibilityEvent;
+import android.widget.Toast;
 
 import com.android.internal.app.AlertActivity;
 import com.android.internal.app.AlertController;
@@ -55,11 +59,27 @@ public class NotificationAccessConfirmationActivity extends Activity
     private ComponentName mComponentName;
     private NotificationManager mNm;
 
+    private DevicePolicyManager mDpm;
+    private UserManager mUm;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         getWindow().addSystemFlags(SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
+
+        mUm = getSystemService(UserManager.class);
+        mDpm = getSystemService(DevicePolicyManager.class);
+
+        if (mUm.isManagedProfile()) {
+            Slog.w(LOG_TAG, "Apps in the work profile do not support notification listeners");
+            Toast.makeText(this,
+                    mDpm.getResources().getString(WORK_APPS_CANNOT_ACCESS_NOTIFICATION_SETTINGS,
+                            () -> getString(R.string.notification_settings_work_profile)),
+                    Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
 
         mNm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 

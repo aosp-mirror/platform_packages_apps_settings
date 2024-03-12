@@ -30,6 +30,8 @@ import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROF
 
 import static com.android.settings.password.ChooseLockPassword.ChooseLockPasswordFragment.RESULT_FINISHED;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_CALLER_APP_NAME;
+import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_CHOOSE_LOCK_SCREEN_DESCRIPTION;
+import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_CHOOSE_LOCK_SCREEN_TITLE;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_DEVICE_PASSWORD_REQUIREMENT_ONLY;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_IS_CALLING_APP_ADMIN;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_REQUESTED_MIN_COMPLEXITY;
@@ -86,6 +88,10 @@ import com.android.settingslib.widget.FooterPreference;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
+/**
+ * Activity class that provides a generic implementation for displaying options to choose a lock
+ * type, either for setting up a new lock or updating an existing lock.
+ */
 public class ChooseLockGeneric extends SettingsActivity {
     public static final String CONFIRM_CREDENTIALS = "confirm_credentials";
 
@@ -194,6 +200,8 @@ public class ChooseLockGeneric extends SettingsActivity {
         protected boolean mForBiometrics = false;
 
         private boolean mOnlyEnforceDevicePasswordRequirement = false;
+        private int mExtraLockScreenTitleResId;
+        private int mExtraLockScreenDescriptionResId;
 
         @Override
         public int getMetricsCategory() {
@@ -241,6 +249,10 @@ public class ChooseLockGeneric extends SettingsActivity {
                     ChooseLockSettingsHelper.EXTRA_KEY_FOR_FACE, false);
             mForBiometrics = intent.getBooleanExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_FOR_BIOMETRICS, false);
+
+            mExtraLockScreenTitleResId = intent.getIntExtra(EXTRA_KEY_CHOOSE_LOCK_SCREEN_TITLE, -1);
+            mExtraLockScreenDescriptionResId =
+                    intent.getIntExtra(EXTRA_KEY_CHOOSE_LOCK_SCREEN_DESCRIPTION, -1);
 
             mRequestedMinComplexity = intent.getIntExtra(
                     EXTRA_KEY_REQUESTED_MIN_COMPLEXITY, PASSWORD_COMPLEXITY_NONE);
@@ -343,13 +355,19 @@ public class ChooseLockGeneric extends SettingsActivity {
                 if (updateExistingLock) {
                     getActivity().setTitle(mDpm.getResources().getString(
                             LOCK_SETTINGS_UPDATE_PROFILE_LOCK_TITLE,
-                            () -> getString(
-                                    R.string.lock_settings_picker_update_profile_lock_title)));
+                            () -> getString(mExtraLockScreenTitleResId != -1
+                                    ? mExtraLockScreenTitleResId
+                                    : R.string.lock_settings_picker_update_profile_lock_title)));
                 } else {
                     getActivity().setTitle(mDpm.getResources().getString(
                             LOCK_SETTINGS_NEW_PROFILE_LOCK_TITLE,
-                            () -> getString(R.string.lock_settings_picker_new_profile_lock_title)));
+                            () -> getString(mExtraLockScreenTitleResId != -1
+                                    ? mExtraLockScreenTitleResId
+                                    : R.string.lock_settings_picker_new_profile_lock_title)));
                 }
+            } else if (mExtraLockScreenTitleResId != -1) {
+                // Show customized screen lock title if it is passed as an extra in the intent.
+                getActivity().setTitle(mExtraLockScreenTitleResId);
             } else {
                 updateExistingLock = mLockPatternUtils.isSecure(mUserId);
                 if (updateExistingLock) {
@@ -377,7 +395,16 @@ public class ChooseLockGeneric extends SettingsActivity {
             setHeaderView(R.layout.choose_lock_generic_biometric_header);
             TextView textView = getHeaderView().findViewById(R.id.biometric_header_description);
 
-            if (mForFingerprint) {
+            if (mIsManagedProfile) {
+                textView.setText(mDpm.getResources().getString(
+                        WORK_PROFILE_SCREEN_LOCK_SETUP_MESSAGE,
+                        () -> getString(mExtraLockScreenDescriptionResId != -1
+                                ? mExtraLockScreenDescriptionResId
+                                : R.string.lock_settings_picker_profile_message)));
+            } else if (mExtraLockScreenDescriptionResId != -1) {
+                // Show customized description in screen lock if passed as an extra in the intent.
+                textView.setText(mExtraLockScreenDescriptionResId);
+            } else if (mForFingerprint) {
                 if (mIsSetNewPassword) {
                     textView.setText(R.string.fingerprint_unlock_title);
                 } else {
@@ -396,13 +423,7 @@ public class ChooseLockGeneric extends SettingsActivity {
                     textView.setText(R.string.lock_settings_picker_biometric_message);
                 }
             } else {
-                if (mIsManagedProfile) {
-                    textView.setText(mDpm.getResources().getString(
-                            WORK_PROFILE_SCREEN_LOCK_SETUP_MESSAGE,
-                            () -> getString(R.string.lock_settings_picker_profile_message)));
-                } else {
-                    textView.setText("");
-                }
+                textView.setText("");
             }
         }
 
@@ -426,6 +447,8 @@ public class ChooseLockGeneric extends SettingsActivity {
                 }
                 // Forward the target user id to  ChooseLockGeneric.
                 chooseLockGenericIntent.putExtra(Intent.EXTRA_USER_ID, mUserId);
+                chooseLockGenericIntent.putExtra(
+                        EXTRA_KEY_CHOOSE_LOCK_SCREEN_TITLE, mExtraLockScreenTitleResId);
                 chooseLockGenericIntent.putExtra(CONFIRM_CREDENTIALS, !mPasswordConfirmed);
                 chooseLockGenericIntent.putExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY,
                         mRequestedMinComplexity);

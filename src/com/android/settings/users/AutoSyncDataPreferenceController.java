@@ -31,7 +31,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
@@ -59,7 +59,7 @@ public class AutoSyncDataPreferenceController extends AbstractPreferenceControll
 
     @Override
     public void updateState(Preference preference) {
-        SwitchPreference switchPreference = (SwitchPreference) preference;
+        TwoStatePreference switchPreference = (TwoStatePreference) preference;
         switchPreference.setChecked(ContentResolver.getMasterSyncAutomaticallyAsUser(
                 mUserHandle.getIdentifier()));
     }
@@ -67,7 +67,7 @@ public class AutoSyncDataPreferenceController extends AbstractPreferenceControll
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (getPreferenceKey().equals(preference.getKey())) {
-            SwitchPreference switchPreference = (SwitchPreference) preference;
+            TwoStatePreference switchPreference = (TwoStatePreference) preference;
             boolean checked = switchPreference.isChecked();
             switchPreference.setChecked(!checked);
             if (ActivityManager.isUserAMonkey()) {
@@ -156,8 +156,8 @@ public class AutoSyncDataPreferenceController extends AbstractPreferenceControll
                     Preference preference =
                             ((PreferenceFragmentCompat) targetFragment).findPreference(
                                     arguments.getString(ARG_KEY));
-                    if (preference instanceof SwitchPreference) {
-                        ((SwitchPreference) preference).setChecked(enabling);
+                    if (preference instanceof TwoStatePreference) {
+                        ((TwoStatePreference) preference).setChecked(enabling);
                     }
                 }
             }

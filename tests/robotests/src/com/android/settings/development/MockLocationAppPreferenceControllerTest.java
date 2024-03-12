@@ -23,8 +23,6 @@ import android.content.pm.PackageManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.R;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -79,7 +77,8 @@ public class MockLocationAppPreferenceControllerTest {
 
         mController.updateState(mPreference);
 
-        verify(mPreference).setSummary(mContext.getString(R.string.mock_location_app_set, appName));
+        verify(mPreference).setSummary(mContext.getString(
+                com.android.settingslib.R.string.mock_location_app_set, appName));
     }
 
     @Test
@@ -89,7 +88,8 @@ public class MockLocationAppPreferenceControllerTest {
 
         mController.updateState(mPreference);
 
-        verify(mPreference).setSummary(mContext.getString(R.string.mock_location_app_not_set));
+        verify(mPreference).setSummary(mContext.getString(
+                com.android.settingslib.R.string.mock_location_app_not_set));
     }
 
     @Test

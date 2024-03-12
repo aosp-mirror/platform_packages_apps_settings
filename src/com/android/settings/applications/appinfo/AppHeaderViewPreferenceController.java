@@ -66,7 +66,6 @@ public class AppHeaderViewPreferenceController extends BasePreferenceController
         final Activity activity = mParent.getActivity();
         mEntityHeaderController = EntityHeaderController
                 .newInstance(activity, mParent, mHeader.findViewById(R.id.entity_header))
-                .setRecyclerView(mParent.getListView(), mLifecycle)
                 .setPackageName(mPackageName)
                 .setButtonActions(EntityHeaderController.ActionType.ACTION_NONE,
                         EntityHeaderController.ActionType.ACTION_NONE)
@@ -86,6 +85,6 @@ public class AppHeaderViewPreferenceController extends BasePreferenceController
                 .setLabel(appEntry)
                 .setIcon(appEntry)
                 .setIsInstantApp(isInstantApp)
-                .done(activity, false /* rebindActions */);
+                .done(false /* rebindActions */);
     }
 }

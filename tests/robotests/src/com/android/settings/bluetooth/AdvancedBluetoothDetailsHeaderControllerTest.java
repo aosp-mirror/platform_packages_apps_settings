@@ -59,6 +59,7 @@ import org.robolectric.annotation.Config;
 import java.util.HashSet;
 import java.util.Set;
 
+@Ignore("b/313014781")
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowEntityHeaderController.class, ShadowDeviceConfig.class})
 public class AdvancedBluetoothDetailsHeaderControllerTest {

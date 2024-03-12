@@ -28,14 +28,14 @@
         android:fragment="com.android.settings.inputmethod.TrackpadTouchGestureSettings"
         settings:controller="com.android.settings.inputmethod.TrackpadTouchGestureSettingsController"/>
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="trackpad_tap_to_click"
         android:title="@string/trackpad_tap_to_click"
         android:icon="@drawable/ic_trackpad_tap_to_click"
         settings:controller="com.android.settings.inputmethod.TrackpadTapToClickPreferenceController"
         android:order="10"/>
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="trackpad_reverse_scrolling"
         android:title="@string/trackpad_reverse_scrolling_title"
         android:summary="@string/trackpad_reverse_scrolling_summary"
@@ -43,7 +43,7 @@
         settings:controller="com.android.settings.inputmethod.TrackpadReverseScrollingPreferenceController"
         android:order="20"/>
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="trackpad_bottom_right_tap"
         android:title="@string/trackpad_bottom_right_tap_title"
         android:summary="@string/trackpad_bottom_right_tap_summary"

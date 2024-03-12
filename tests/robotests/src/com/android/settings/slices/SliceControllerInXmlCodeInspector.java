@@ -146,8 +146,8 @@ public class SliceControllerInXmlCodeInspector extends CodeInspector {
     private List<Integer> getIndexableXml() {
         final List<Integer> xmlResSet = new ArrayList<>();
 
-        final Collection<SearchIndexableData> bundles = FeatureFactory.getFactory(
-                mContext).getSearchFeatureProvider().getSearchIndexableResources()
+        final Collection<SearchIndexableData> bundles = FeatureFactory.getFeatureFactory()
+                .getSearchFeatureProvider().getSearchIndexableResources()
                 .getProviderValues();
 
         for (SearchIndexableData bundle : bundles) {

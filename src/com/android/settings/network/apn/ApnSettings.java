@@ -16,6 +16,8 @@
 
 package com.android.settings.network.apn;
 
+import static com.android.settings.network.apn.ApnEditPageProviderKt.INSERT_URL;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -57,7 +59,9 @@ import androidx.preference.PreferenceGroup;
 
 import com.android.settings.R;
 import com.android.settings.RestrictedSettingsFragment;
+import com.android.settings.flags.Flags;
 import com.android.settings.network.SubscriptionUtil;
+import com.android.settings.spa.SpaActivity;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import java.util.ArrayList;
@@ -248,7 +252,7 @@ public class ApnSettings extends RestrictedSettingsFragment
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        getEmptyTextView().setText(R.string.apn_settings_not_available);
+        getEmptyTextView().setText(com.android.settingslib.R.string.apn_settings_not_available);
         mUnavailable = isUiRestricted();
         setHasOptionsMenu(!mUnavailable);
         if (mUnavailable) {
@@ -420,16 +424,22 @@ public class ApnSettings extends RestrictedSettingsFragment
     }
 
     private void addNewApn() {
-        final Intent intent = new Intent(Intent.ACTION_INSERT, Telephony.Carriers.CONTENT_URI);
         final int subId = mSubscriptionInfo != null ? mSubscriptionInfo.getSubscriptionId()
                 : SubscriptionManager.INVALID_SUBSCRIPTION_ID;
-        intent.putExtra(SUB_ID, subId);
-        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        if (!TextUtils.isEmpty(mMvnoType) && !TextUtils.isEmpty(mMvnoMatchData)) {
-            intent.putExtra(MVNO_TYPE, mMvnoType);
-            intent.putExtra(MVNO_MATCH_DATA, mMvnoMatchData);
+        if (Flags.newApnPageEnabled()) {
+            String route = ApnEditPageProvider.INSTANCE.getRoute(
+                    INSERT_URL, Telephony.Carriers.CONTENT_URI, subId);
+            SpaActivity.startSpaActivity(getContext(), route);
+        } else {
+            final Intent intent = new Intent(Intent.ACTION_INSERT, Telephony.Carriers.CONTENT_URI);
+            intent.putExtra(SUB_ID, subId);
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            if (!TextUtils.isEmpty(mMvnoType) && !TextUtils.isEmpty(mMvnoMatchData)) {
+                intent.putExtra(MVNO_TYPE, mMvnoType);
+                intent.putExtra(MVNO_MATCH_DATA, mMvnoMatchData);
+            }
+            startActivity(intent);
         }
-        startActivity(intent);
     }
 
     @Override

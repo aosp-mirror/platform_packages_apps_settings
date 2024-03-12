@@ -29,12 +29,14 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceGroupAdapter;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.PreferenceViewHolder;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -122,6 +124,9 @@ public class HighlightablePreferenceGroupAdapter extends PreferenceGroupAdapter 
                 && TextUtils.equals(mHighlightKey, getItem(position).getKey()))) {
             // This position should be highlighted. If it's highlighted before - skip animation.
             addHighlightBackground(holder, !mFadeInAnimated);
+            if (v != null) {
+                v.requestAccessibilityFocus();
+            }
         } else if (Boolean.TRUE.equals(v.getTag(R.id.preference_highlighted))) {
             // View with highlight is reused for a view that should not have highlight
             removeHighlightBackground(holder, false /* animate */);
@@ -156,15 +161,32 @@ public class HighlightablePreferenceGroupAdapter extends PreferenceGroupAdapter 
         root.postDelayed(() -> {
             if (ensureHighlightPosition()) {
                 recyclerView.smoothScrollToPosition(mHighlightPosition);
+                highlightAndFocusTargetItem(recyclerView, mHighlightPosition);
             }
         }, DELAY_HIGHLIGHT_DURATION_MILLIS);
+    }
 
-        // Highlight preference after 900 milliseconds.
-        root.postDelayed(() -> {
-            if (ensureHighlightPosition()) {
-                notifyItemChanged(mHighlightPosition);
-            }
-        }, DELAY_COLLAPSE_DURATION_MILLIS + DELAY_HIGHLIGHT_DURATION_MILLIS);
+    private void highlightAndFocusTargetItem(RecyclerView recyclerView, int highlightPosition) {
+        ViewHolder target = recyclerView.findViewHolderForAdapterPosition(highlightPosition);
+        if (target != null) { // view already visible
+            notifyItemChanged(mHighlightPosition);
+            target.itemView.requestFocus();
+        } else { // otherwise we're about to scroll to that view (but we might not be scrolling yet)
+            recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                @Override
+                public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                    if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                        notifyItemChanged(mHighlightPosition);
+                        ViewHolder target = recyclerView
+                                .findViewHolderForAdapterPosition(highlightPosition);
+                        if (target != null) {
+                            target.itemView.requestFocus();
+                        }
+                        recyclerView.removeOnScrollListener(this);
+                    }
+                }
+            });
+        }
     }
 
     /**
