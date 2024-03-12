@@ -72,6 +72,7 @@ import com.android.settings.ProxySelector;
 import com.android.settings.R;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.utils.AndroidKeystoreAliasLoader;
+import com.android.settings.wifi.details2.WifiPrivacyPreferenceController;
 import com.android.settings.wifi.dpp.WifiDppUtils;
 import com.android.settingslib.Utils;
 import com.android.settingslib.utils.ThreadUtils;
@@ -154,6 +155,10 @@ public class WifiConfigController implements TextWatcher,
     @VisibleForTesting static final int PRIVACY_SPINNER_INDEX_RANDOMIZED_MAC = 0;
     @VisibleForTesting static final int PRIVACY_SPINNER_INDEX_DEVICE_MAC = 1;
 
+    // Should be the same index value as wifi_dhcp_entries in arrays.xml
+    @VisibleForTesting static final int DHCP_SPINNER_INDEX_SEND_DHCP_HOST_NAME_ENABLE = 0;
+    @VisibleForTesting static final int DHCP_SPINNER_INDEX_SEND_DHCP_HOST_NAME_DISABLE = 1;
+
     /* Phase2 methods supported by PEAP are limited */
     private ArrayAdapter<CharSequence> mPhase2PeapAdapter;
     /* Phase2 methods supported by TTLS are limited */
@@ -194,6 +199,7 @@ public class WifiConfigController implements TextWatcher,
     private Spinner mMeteredSettingsSpinner;
     private Spinner mHiddenSettingsSpinner;
     private Spinner mPrivacySettingsSpinner;
+    private Spinner mDhcpSettingsSpinner;
     private TextView mHiddenWarningView;
     private TextView mProxyHostView;
     private TextView mProxyPortView;
@@ -291,6 +297,7 @@ public class WifiConfigController implements TextWatcher,
         mMeteredSettingsSpinner = mView.findViewById(R.id.metered_settings);
         mHiddenSettingsSpinner = mView.findViewById(R.id.hidden_settings);
         mPrivacySettingsSpinner = mView.findViewById(R.id.privacy_settings);
+        mDhcpSettingsSpinner = mView.findViewById(R.id.dhcp_settings);
         if (mWifiManager.isConnectedMacRandomizationSupported()) {
             View privacySettingsLayout = mView.findViewById(R.id.privacy_settings_fields);
             privacySettingsLayout.setVisibility(View.VISIBLE);
@@ -322,6 +329,12 @@ public class WifiConfigController implements TextWatcher,
                 mPrivacySettingsSpinner.setSelection(
                         config.macRandomizationSetting == WifiConfiguration.RANDOMIZATION_PERSISTENT
                         ? PRIVACY_SPINNER_INDEX_RANDOMIZED_MAC : PRIVACY_SPINNER_INDEX_DEVICE_MAC);
+
+                mDhcpSettingsSpinner.setSelection(
+                        config.isSendDhcpHostnameEnabled()
+                                ? DHCP_SPINNER_INDEX_SEND_DHCP_HOST_NAME_ENABLE :
+                                DHCP_SPINNER_INDEX_SEND_DHCP_HOST_NAME_DISABLE
+                );
 
                 if (config.getIpConfiguration().getIpAssignment() == IpAssignment.STATIC) {
                     mIpSettingsSpinner.setSelection(STATIC_IP);
@@ -839,6 +852,12 @@ public class WifiConfigController implements TextWatcher,
                     == PRIVACY_SPINNER_INDEX_RANDOMIZED_MAC
                     ? WifiConfiguration.RANDOMIZATION_PERSISTENT
                     : WifiConfiguration.RANDOMIZATION_NONE;
+        }
+
+        if (mDhcpSettingsSpinner != null) {
+            config.setSendDhcpHostnameEnabled(WifiPrivacyPreferenceController.Companion
+                    .translatePrefValueToSendDhcpHostnameEnabled(mDhcpSettingsSpinner
+                            .getSelectedItemPosition()));
         }
 
         return config;
