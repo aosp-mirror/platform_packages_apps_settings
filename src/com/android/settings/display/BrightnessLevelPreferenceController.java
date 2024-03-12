@@ -31,6 +31,8 @@ import android.hardware.display.DisplayManager.DisplayListener;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.Process;
+import android.os.UserManager;
 import android.provider.Settings.System;
 import android.text.TextUtils;
 
@@ -116,6 +118,10 @@ public class BrightnessLevelPreferenceController extends AbstractPreferenceContr
 
     @Override
     public void updateState(Preference preference) {
+        if (preference.isEnabled() && UserManager.get(mContext).hasBaseUserRestriction(
+                UserManager.DISALLOW_CONFIG_BRIGHTNESS, Process.myUserHandle())) {
+            preference.setEnabled(false);
+        }
         updatedSummary(preference);
     }
 
