@@ -83,6 +83,7 @@ public class AppStoreUtil {
     }
 
     /** Convenience method that looks up the installerPackageName for you. */
+    @Nullable
     public static Intent getAppStoreLink(Context context, String packageName) {
       String installerPackageName = getInstallerPackageName(context, packageName);
       return getAppStoreLink(context, installerPackageName, packageName);

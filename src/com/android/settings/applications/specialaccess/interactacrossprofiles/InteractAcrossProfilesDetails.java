@@ -384,20 +384,21 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
     }
 
     private void handleInstallBannerClick() {
-        if (mInstallAppIntent == null) {
-            logEvent(
-                    DevicePolicyEnums.CROSS_PROFILE_SETTINGS_PAGE_INSTALL_BANNER_NO_INTENT_CLICKED);
-            return;
-        }
-        if (!mInstalledInWork) {
+        if (mInstallAppIntent != null
+                && !mInstalledInWork
+                && isInstallableInProfile(mInstallAppIntent, mWorkProfile)) {
             logEvent(DevicePolicyEnums.CROSS_PROFILE_SETTINGS_PAGE_INSTALL_BANNER_CLICKED);
             mContext.startActivityAsUser(mInstallAppIntent, mWorkProfile);
             return;
         }
-        if (!mInstalledInPersonal) {
+        if (mInstallAppIntent != null
+                && !mInstalledInPersonal
+                && isInstallableInProfile(mInstallAppIntent, mPersonalProfile)) {
             logEvent(DevicePolicyEnums.CROSS_PROFILE_SETTINGS_PAGE_INSTALL_BANNER_CLICKED);
             mContext.startActivityAsUser(mInstallAppIntent, mPersonalProfile);
+            return;
         }
+        logEvent(DevicePolicyEnums.CROSS_PROFILE_SETTINGS_PAGE_INSTALL_BANNER_NO_INTENT_CLICKED);
     }
 
     /**
@@ -447,7 +448,8 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
                                     R.string.interact_across_profiles_install_personal_app_title,
                                     mAppLabel),
                             mAppLabel));
-            if (mInstallAppIntent != null) {
+            if (mInstallAppIntent != null
+                    && isInstallableInProfile(mInstallAppIntent, mPersonalProfile)) {
                 mInstallBanner.setSummary(
                         R.string.interact_across_profiles_install_app_summary);
             }
@@ -461,7 +463,8 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
                                     R.string.interact_across_profiles_install_work_app_title,
                                     mAppLabel),
                             mAppLabel));
-            if (mInstallAppIntent != null) {
+            if (mInstallAppIntent != null
+                    && isInstallableInProfile(mInstallAppIntent, mWorkProfile)) {
                 mInstallBanner.setSummary(
                         R.string.interact_across_profiles_install_app_summary);
             }
@@ -486,6 +489,12 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
             return false;
         }
         return info != null;
+    }
+
+    private boolean isInstallableInProfile(Intent intent, UserHandle profile) {
+        return !mContext.getPackageManager()
+                .queryIntentActivitiesAsUser(intent, /* flags= */ 0, profile)
+                .isEmpty();
     }
 
     private void refreshUiForConfigurableApps() {
