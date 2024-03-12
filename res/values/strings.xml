@@ -3174,8 +3174,17 @@
     <!-- Body of dialog confirming that user wants to forget an internal storage device [CHAR LIMIT=NONE]-->
     <string name="storage_internal_forget_confirm">All the apps, photos, and data stored on this <xliff:g id="name" example="SD card">^1</xliff:g> will be lost forever.</string>
 
-    <!-- Body of dialog informing user about the storage used by the Android System [CHAR LIMIT=NONE]-->
+    <!-- Old body of dialog informing user about the storage used by the Android System [CHAR LIMIT=NONE]-->
     <string name="storage_detail_dialog_system">System includes files used to run Android version <xliff:g id="version" example="8.0">%s</xliff:g></string>
+
+    <!-- New body of dialog informing user about the storage used by the Android System [CHAR LIMIT=NONE]-->
+    <string name="storage_os_detail_dialog_system">This includes your operating system and the files that are needed to keep your phone running smoothly. To protect their integrity, these files can\u2019t be accessed.</string>
+
+    <!-- Body of dialog informing user about the storage used by the Android temporary system files [CHAR LIMIT=NONE]-->
+    <string name="storage_other_files_detail_dialog_system">This includes cache and other temporary files that are needed by your operating system. You may notice changes to the amount of storage used over time.</string>
+
+    <!-- Label for categories splitter in Settings > Storage [CHAR LIMIT=none] -->
+    <string name="storage_system_label">System</string>
 
     <!-- Message to notify guest users as to why they can't set up the storage device [CHAR LIMIT=50]-->
     <string name="storage_wizard_guest">Guest mode users cannot format SD cards</string>
@@ -10768,8 +10777,14 @@
     <!-- Preference label for the Documents & other storage section. [CHAR LIMIT=50] -->
     <string name="storage_documents_and_other">Documents &amp; other</string>
 
-    <!-- Preference label for the System storage section. [CHAR LIMIT=50] -->
+    <!-- Old Preference label for the System storage section. [CHAR LIMIT=50] -->
     <string name="storage_system">System</string>
+
+    <!-- New Preference label for the System storage section. [CHAR LIMIT=50] -->
+    <string name="storage_os_name">Android <xliff:g id="version" example="8">%s</xliff:g></string>
+
+    <!-- Preference label for the System storage section. [CHAR LIMIT=50] -->
+    <string name="storage_temporary_files">Temporary system files</string>
 
     <!-- Preference label for the Trash storage section. [CHAR LIMIT=50] -->
     <string name="storage_trash">Trash</string>
