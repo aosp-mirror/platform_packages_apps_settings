@@ -54,23 +54,22 @@ class UdfpsEnrollViewV2(context: Context, attrs: AttributeSet?) : FrameLayout(co
    */
   fun setSensorRect(rect: Rect) {
     this.sensorRect = rect
-    post {
-      findViewById<ImageView?>(R.id.udfps_enroll_animation_fp_progress_view)?.also {
-        it.setImageDrawable(fingerprintProgressDrawable)
-      }
-      findViewById<ImageView>(R.id.udfps_enroll_animation_fp_view)?.also {
-        it.setImageDrawable(fingerprintIcon)
-      }
-      val parentView = parent as ViewGroup
-      val coords = parentView.getLocationOnScreen()
-      val parentLeft = coords[0]
-      val parentTop = coords[1]
-      val sensorRectOffset = Rect(sensorRect)
-      sensorRectOffset.offset(-parentLeft, -parentTop)
 
-      fingerprintIcon.drawSensorRectAt(sensorRectOffset)
-      fingerprintProgressDrawable.drawProgressAt(sensorRectOffset)
+    findViewById<ImageView?>(R.id.udfps_enroll_animation_fp_progress_view)?.also {
+      it.setImageDrawable(fingerprintProgressDrawable)
     }
+    findViewById<ImageView>(R.id.udfps_enroll_animation_fp_view)?.also {
+      it.setImageDrawable(fingerprintIcon)
+    }
+    val parentView = parent as ViewGroup
+    val coords = parentView.getLocationOnScreen()
+    val parentLeft = coords[0]
+    val parentTop = coords[1]
+    val sensorRectOffset = Rect(sensorRect)
+    sensorRectOffset.offset(-parentLeft, -parentTop)
+
+    fingerprintIcon.drawSensorRectAt(sensorRectOffset)
+    fingerprintProgressDrawable.drawProgressAt(sensorRectOffset)
   }
 
   /** Updates the current enrollment stage. */
@@ -97,15 +96,7 @@ class UdfpsEnrollViewV2(context: Context, attrs: AttributeSet?) : FrameLayout(co
     fingerprintProgressDrawable.setAccessibilityEnabled(enabled)
   }
 
-  override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
-    invalidate()
-    super.onLayout(changed, left, top, right, bottom)
-    invalidate()
-  }
-
-  private fun udfpsError(errMsgId: Int, errString: String) {
-    Log.e(TAG, "Implement udfpsError")
-  }
+  private fun udfpsError(errMsgId: Int, errString: String) {}
 
   private fun overlayShown() {
     Log.e(TAG, "Implement overlayShown")
@@ -113,28 +104,30 @@ class UdfpsEnrollViewV2(context: Context, attrs: AttributeSet?) : FrameLayout(co
 
   /** Receive enroll progress event */
   private fun onEnrollmentProgress(remaining: Int, totalSteps: Int) {
-    post {
-      fingerprintIcon.onEnrollmentProgress(remaining, totalSteps)
-      fingerprintProgressDrawable.onEnrollmentProgress(remaining, totalSteps)
-    }
+    fingerprintIcon.onEnrollmentProgress(remaining, totalSteps)
+    fingerprintProgressDrawable.onEnrollmentProgress(remaining, totalSteps)
   }
 
   /** Receive enroll help event */
   private fun onEnrollmentHelp() {
-    post { fingerprintProgressDrawable.onEnrollmentHelp(mRemainingSteps, mTotalSteps) }
+    fingerprintProgressDrawable.onEnrollmentHelp()
   }
 
   /** Receive onAcquired event */
   private fun onAcquired(isAcquiredGood: Boolean) {
     val animateIfLastStepGood = isAcquiredGood && mRemainingSteps <= 2 && mRemainingSteps >= 0
-    post { if (animateIfLastStepGood) fingerprintProgressDrawable.onLastStepAcquired() }
+    if (animateIfLastStepGood) fingerprintProgressDrawable.onLastStepAcquired()
   }
 
   /** Receive onPointerDown event */
-  private fun onPointerDown() {}
+  private fun onPointerDown() {
+    fingerprintIcon.stopDrawing()
+  }
 
   /** Receive onPointerUp event */
-  private fun onPointerUp() {}
+  private fun onPointerUp() {
+    fingerprintIcon.startDrawing()
+  }
 
   companion object {
     private const val TAG = "UdfpsEnrollView"
