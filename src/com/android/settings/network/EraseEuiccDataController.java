@@ -25,7 +25,6 @@ import androidx.preference.Preference;
 
 import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.system.ResetDashboardFragment;
 
@@ -51,7 +50,12 @@ public class EraseEuiccDataController extends BasePreferenceController {
         if (!TextUtils.equals(preference.getKey(), getPreferenceKey())) {
             return false;
         }
-        EraseEuiccDataDialogFragment.show(mHostFragment);
+        if (SubscriptionUtil.hasSubscriptionWithRacCarrier(mContext)
+                && !SubscriptionUtil.isConnectedToWifi(mContext)) {
+            EuiccRacConnectivityDialogFragment.show(mHostFragment);
+        } else {
+            EraseEuiccDataDialogFragment.show(mHostFragment);
+        }
         return true;
     }
 

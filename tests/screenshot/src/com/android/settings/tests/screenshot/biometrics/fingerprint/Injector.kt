@@ -50,7 +50,7 @@ import kotlinx.coroutines.flow.update
 import platform.test.screenshot.DeviceEmulationSpec
 import platform.test.screenshot.DisplaySpec
 import platform.test.screenshot.FragmentScreenshotTestRule
-import platform.test.screenshot.GoldenImagePathManager
+import platform.test.screenshot.GoldenPathManager
 import platform.test.screenshot.matchers.PixelPerfectMatcher
 
 class Injector(step: FingerprintNavigationStep.UiStep) {
@@ -154,7 +154,7 @@ class Injector(step: FingerprintNavigationStep.UiStep) {
     fun BiometricFragmentScreenShotRule() =
       FragmentScreenshotTestRule(
         DeviceEmulationSpec.forDisplays(Phone).first(),
-        GoldenImagePathManager(
+        GoldenPathManager(
           InstrumentationRegistry.getInstrumentation().context,
           InstrumentationRegistry.getInstrumentation().targetContext.filesDir.absolutePath +
             screenshotPath,
