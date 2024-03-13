@@ -25,6 +25,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Add
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -58,9 +59,7 @@ private fun SimPreference(subInfo: SubscriptionInfo) {
     val checked = remember(subInfo.subscriptionId) {
         context.isSubscriptionEnabledFlow(subInfo.subscriptionId)
     }.collectAsStateWithLifecycle(initialValue = false)
-    val phoneNumber = remember(subInfo) {
-        context.phoneNumberFlow(subInfo)
-    }.collectAsStateWithLifecycle(initialValue = null)
+    val phoneNumber = phoneNumber(subInfo)
     RestrictedTwoTargetSwitchPreference(
         model = object : SwitchPreferenceModel {
             override val title = subInfo.displayName.toString()
@@ -78,6 +77,14 @@ private fun SimPreference(subInfo: SubscriptionInfo) {
     ) {
         MobileNetworkUtils.launchMobileNetworkSettings(context, subInfo)
     }
+}
+
+@Composable
+fun phoneNumber(subInfo: SubscriptionInfo): State<String?> {
+    val context = LocalContext.current
+    return remember(subInfo) {
+        context.phoneNumberFlow(subInfo)
+    }.collectAsStateWithLifecycle(initialValue = null)
 }
 
 @Composable

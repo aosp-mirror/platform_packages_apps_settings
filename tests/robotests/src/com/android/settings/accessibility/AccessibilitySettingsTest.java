@@ -38,8 +38,12 @@ import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.database.ContentObserver;
 import android.os.Build;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 import android.view.accessibility.AccessibilityManager;
+import android.view.accessibility.Flags;
 
 import androidx.fragment.app.Fragment;
 import androidx.test.core.app.ApplicationProvider;
@@ -58,6 +62,8 @@ import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.search.SearchIndexableRaw;
 import com.android.settingslib.testutils.shadow.ShadowColorDisplayManager;
+
+import com.google.common.truth.BooleanSubject;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -103,6 +109,7 @@ public class AccessibilitySettingsTest {
 
     @Rule
     public final MockitoRule mocks = MockitoJUnit.rule();
+    @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     private final Context mContext = ApplicationProvider.getApplicationContext();
     @Spy
     private final AccessibilityServiceInfo mServiceInfo = getMockAccessibilityServiceInfo(
@@ -316,30 +323,39 @@ public class AccessibilitySettingsTest {
     }
 
     @Test
-    public void onCreate_haveRegisterToSpecificUrisAndActions() {
+    @DisableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
+    public void onCreate_flagDisabled_haveRegisterToSpecificUrisAndActions() {
         setupFragment();
 
-        ShadowContentResolver shadowContentResolver = shadowOf(mContext.getContentResolver());
-        Collection<ContentObserver> a11yButtonTargetsObservers =
-                shadowContentResolver.getContentObservers(
-                        Settings.Secure.getUriFor(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS));
-        Collection<ContentObserver> a11yShortcutTargetServiceObservers =
-                shadowContentResolver.getContentObservers(Settings.Secure.getUriFor(
-                        Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE));
+        assertUriObserversContainsClazz(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS,
+                AccessibilitySettingsContentObserver.class).isTrue();
+        assertUriObserversContainsClazz(Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE,
+                AccessibilitySettingsContentObserver.class).isTrue();
+        assertUriObserversContainsClazz(Settings.Secure.ACCESSIBILITY_QS_TARGETS,
+                AccessibilitySettingsContentObserver.class).isFalse();
         List<BroadcastReceiver> broadcastReceivers =
                 shadowOf((Application) ApplicationProvider.getApplicationContext())
                         .getRegisteredReceivers()
                         .stream().map(wrapper -> wrapper.broadcastReceiver).toList();
-        assertThat(
-                a11yButtonTargetsObservers.stream()
-                        .anyMatch(contentObserver ->
-                                contentObserver instanceof AccessibilitySettingsContentObserver))
-                .isTrue();
-        assertThat(
-                a11yShortcutTargetServiceObservers.stream()
-                        .anyMatch(contentObserver ->
-                                contentObserver instanceof AccessibilitySettingsContentObserver))
-                .isTrue();
+        assertThat(broadcastReceivers.stream().anyMatch(
+                broadcastReceiver -> broadcastReceiver instanceof PackageMonitor)).isTrue();
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
+    public void onCreate_flagEnabled_haveRegisterToSpecificUrisAndActions() {
+        setupFragment();
+
+        assertUriObserversContainsClazz(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS,
+                AccessibilitySettingsContentObserver.class).isTrue();
+        assertUriObserversContainsClazz(Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE,
+                AccessibilitySettingsContentObserver.class).isTrue();
+        assertUriObserversContainsClazz(Settings.Secure.ACCESSIBILITY_QS_TARGETS,
+                AccessibilitySettingsContentObserver.class).isTrue();
+        List<BroadcastReceiver> broadcastReceivers =
+                shadowOf((Application) ApplicationProvider.getApplicationContext())
+                        .getRegisteredReceivers()
+                        .stream().map(wrapper -> wrapper.broadcastReceiver).toList();
         assertThat(broadcastReceivers.stream().anyMatch(
                 broadcastReceiver -> broadcastReceiver instanceof PackageMonitor)).isTrue();
     }
@@ -350,27 +366,16 @@ public class AccessibilitySettingsTest {
 
         mActivityController.pause().stop().destroy();
 
-        ShadowContentResolver shadowContentResolver = shadowOf(mContext.getContentResolver());
-        Collection<ContentObserver> a11yButtonTargetsObservers =
-                shadowContentResolver.getContentObservers(
-                        Settings.Secure.getUriFor(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS));
-        Collection<ContentObserver> a11yShortcutTargetServiceObservers =
-                shadowContentResolver.getContentObservers(Settings.Secure.getUriFor(
-                        Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE));
+        assertUriObserversContainsClazz(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS,
+                AccessibilitySettingsContentObserver.class).isFalse();
+        assertUriObserversContainsClazz(Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE,
+                AccessibilitySettingsContentObserver.class).isFalse();
+        assertUriObserversContainsClazz(Settings.Secure.ACCESSIBILITY_QS_TARGETS,
+                AccessibilitySettingsContentObserver.class).isFalse();
         List<BroadcastReceiver> broadcastReceivers =
                 shadowOf((Application) ApplicationProvider.getApplicationContext())
                         .getRegisteredReceivers()
                         .stream().map(wrapper -> wrapper.broadcastReceiver).toList();
-        assertThat(
-                a11yButtonTargetsObservers.stream()
-                        .anyMatch(contentObserver ->
-                                contentObserver instanceof AccessibilitySettingsContentObserver))
-                .isFalse();
-        assertThat(
-                a11yShortcutTargetServiceObservers.stream()
-                        .anyMatch(contentObserver ->
-                                contentObserver instanceof AccessibilitySettingsContentObserver))
-                .isFalse();
         assertThat(broadcastReceivers.stream().anyMatch(
                 broadcastReceiver -> broadcastReceiver instanceof PackageMonitor)).isFalse();
     }
@@ -490,5 +495,15 @@ public class AccessibilitySettingsTest {
         Settings.Secure.putString(mContext.getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS,
                 enabled ? componentName.flattenToString() : "");
+    }
+
+    private BooleanSubject assertUriObserversContainsClazz(
+            String settingUri, Class<?> clazz) {
+        ShadowContentResolver shadowContentResolver = shadowOf(mContext.getContentResolver());
+        Collection<ContentObserver> observers =
+                shadowContentResolver.getContentObservers(
+                        Settings.Secure.getUriFor(settingUri));
+
+        return assertThat(observers.stream().anyMatch(clazz::isInstance));
     }
 }
