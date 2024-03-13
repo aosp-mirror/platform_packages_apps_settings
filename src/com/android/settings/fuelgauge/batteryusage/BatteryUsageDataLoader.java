@@ -84,12 +84,12 @@ public final class BatteryUsageDataLoader {
     }
 
     @VisibleForTesting
-    static void loadAppUsageData(final Context context) {
+    static void loadAppUsageData(final Context context, final UserIdsSeries userIdsSeries) {
         final long start = System.currentTimeMillis();
         final Map<Long, UsageEvents> appUsageEvents =
                 sFakeAppUsageEventsSupplier != null
                         ? sFakeAppUsageEventsSupplier.get()
-                        : DataProcessor.getAppUsageEvents(context);
+                        : DataProcessor.getAppUsageEvents(context, userIdsSeries);
         if (appUsageEvents == null) {
             Log.w(TAG, "loadAppUsageData() returns null");
             return;
@@ -113,13 +113,15 @@ public final class BatteryUsageDataLoader {
         DatabaseUtils.sendAppUsageEventData(context, appUsageEventList);
     }
 
-    private static void preprocessBatteryUsageSlots(final Context context) {
+    private static void preprocessBatteryUsageSlots(
+            final Context context, final UserIdsSeries userIdsSeries) {
         final long start = System.currentTimeMillis();
         final Handler handler = new Handler(Looper.getMainLooper());
         final BatteryLevelData batteryLevelData =
                 DataProcessManager.getBatteryLevelData(
                         context,
                         handler,
+                        userIdsSeries,
                         /* isFromPeriodJob= */ true,
                         batteryDiffDataMap -> {
                             DatabaseUtils.sendBatteryUsageSlotData(
@@ -162,8 +164,12 @@ public final class BatteryUsageDataLoader {
             loadBatteryStatsData(context, isFullChargeStart);
             if (!isFullChargeStart) {
                 // No app usage data or battery diff data at this time.
-                loadAppUsageData(context);
-                preprocessBatteryUsageSlots(context);
+                final UserIdsSeries userIdsSeries =
+                        new UserIdsSeries(context, /* mainUserOnly= */ true);
+                if (!userIdsSeries.isCurrentUserLocked()) {
+                    loadAppUsageData(context, userIdsSeries);
+                    preprocessBatteryUsageSlots(context, userIdsSeries);
+                }
             }
             Log.d(
                     TAG,

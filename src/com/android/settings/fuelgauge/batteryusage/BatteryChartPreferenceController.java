@@ -556,9 +556,11 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
                 String.format(
                         "getBatterySinceLastFullChargeUsageData() size=%d time=%d/ms",
                         batteryHistoryMap.size(), (System.currentTimeMillis() - start)));
-
         final Map<Integer, Map<Integer, BatteryDiffData>> batteryUsageData =
-                DataProcessor.getBatteryUsageData(context, batteryHistoryMap);
+                DataProcessor.getBatteryUsageData(
+                        context,
+                        new UserIdsSeries(context, /* mainUserOnly= */ false),
+                        batteryHistoryMap);
         if (batteryUsageData == null) {
             return null;
         }
