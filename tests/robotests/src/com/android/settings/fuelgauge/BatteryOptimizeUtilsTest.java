@@ -49,7 +49,11 @@ import android.os.UserManager;
 import android.util.ArraySet;
 
 import com.android.settings.fuelgauge.BatteryOptimizeHistoricalLogEntry.Action;
+import com.android.settingslib.datastore.ChangeReason;
+import com.android.settingslib.datastore.Observer;
 import com.android.settingslib.fuelgauge.PowerAllowlistBackend;
+
+import com.google.common.util.concurrent.MoreExecutors;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -74,14 +78,18 @@ public class BatteryOptimizeUtilsTest {
     @Mock private PowerAllowlistBackend mMockBackend;
     @Mock private IPackageManager mMockIPackageManager;
     @Mock private UserManager mMockUserManager;
+    @Mock private Observer mObserver;
 
     private Context mContext;
     private BatteryOptimizeUtils mBatteryOptimizeUtils;
+    private BatterySettingsStorage mBatterySettingsStorage;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
+        mBatterySettingsStorage = BatterySettingsStorage.get(mContext);
+        mBatterySettingsStorage.addObserver(mObserver, MoreExecutors.directExecutor());
         mBatteryOptimizeUtils = spy(new BatteryOptimizeUtils(mContext, UID, PACKAGE_NAME));
         mBatteryOptimizeUtils.mAppOpsManager = mMockAppOpsManager;
         mBatteryOptimizeUtils.mBatteryUtils = mMockBatteryUtils;
@@ -156,6 +164,7 @@ public class BatteryOptimizeUtilsTest {
         TimeUnit.SECONDS.sleep(1);
 
         verifySetAppOptimizationMode(AppOpsManager.MODE_IGNORED, /* allowListed */ false);
+        verify(mObserver).onChanged(ChangeReason.UPDATE);
     }
 
     @Test
@@ -169,6 +178,7 @@ public class BatteryOptimizeUtilsTest {
         TimeUnit.SECONDS.sleep(1);
 
         verifySetAppOptimizationMode(AppOpsManager.MODE_ALLOWED, /* allowListed */ true);
+        verify(mObserver).onChanged(ChangeReason.UPDATE);
     }
 
     @Test
@@ -182,6 +192,7 @@ public class BatteryOptimizeUtilsTest {
         TimeUnit.SECONDS.sleep(1);
 
         verifySetAppOptimizationMode(AppOpsManager.MODE_ALLOWED, /* allowListed */ false);
+        verify(mObserver).onChanged(ChangeReason.UPDATE);
     }
 
     @Test
@@ -197,6 +208,7 @@ public class BatteryOptimizeUtilsTest {
         verify(mMockBatteryUtils, never()).setForceAppStandby(anyInt(), anyString(), anyInt());
         verify(mMockBackend, never()).addApp(anyString());
         verify(mMockBackend, never()).removeApp(anyString());
+        verifyNoInteractions(mObserver);
     }
 
     @Test
@@ -288,6 +300,7 @@ public class BatteryOptimizeUtilsTest {
         inOrder.verify(mMockBackend).isAllowlisted(PACKAGE_NAME, UID);
         inOrder.verify(mMockBackend).isSysAllowlisted(PACKAGE_NAME);
         verifyNoMoreInteractions(mMockBackend);
+        verify(mObserver).onChanged(ChangeReason.DELETE);
     }
 
     @Test
@@ -298,6 +311,7 @@ public class BatteryOptimizeUtilsTest {
                 /* isSystemOrDefaultApp */ false);
 
         verifySetAppOptimizationMode(AppOpsManager.MODE_ALLOWED, /* allowListed */ false);
+        verify(mObserver).onChanged(ChangeReason.DELETE);
     }
 
     @Test
@@ -308,6 +322,7 @@ public class BatteryOptimizeUtilsTest {
                 /* isSystemOrDefaultApp */ false);
 
         verifySetAppOptimizationMode(AppOpsManager.MODE_ALLOWED, /* allowListed */ false);
+        verify(mObserver).onChanged(ChangeReason.DELETE);
     }
 
     private void runTestForResetWithMode(
