@@ -179,6 +179,9 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
         final List<String> shortcutFeatureKeys = new ArrayList<>();
         shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS);
         shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE);
+        if (android.view.accessibility.Flags.a11yQsShortcut()) {
+            shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_QS_TARGETS);
+        }
         return shortcutFeatureKeys;
     }
 

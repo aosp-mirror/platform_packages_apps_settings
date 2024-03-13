@@ -24,6 +24,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -146,8 +147,9 @@ public class ToggleFeaturePreferenceFragmentTest {
     }
 
     @Test
+    @EnableFlags(android.view.accessibility.Flags.FLAG_A11Y_QS_SHORTCUT)
     @Config(shadows = {ShadowFragment.class})
-    public void onResume_haveRegisterToSpecificUris() {
+    public void onResume_flagEnabled_haveRegisterToSpecificUris() {
         mFragment.onAttach(mContext);
         mFragment.onCreate(Bundle.EMPTY);
 
@@ -160,6 +162,36 @@ public class ToggleFeaturePreferenceFragmentTest {
         verify(mContentResolver).registerContentObserver(
                 eq(Settings.Secure.getUriFor(
                         Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE)),
+                eq(false),
+                any(AccessibilitySettingsContentObserver.class));
+        verify(mContentResolver).registerContentObserver(
+                eq(Settings.Secure.getUriFor(
+                        Settings.Secure.ACCESSIBILITY_QS_TARGETS)),
+                eq(false),
+                any(AccessibilitySettingsContentObserver.class));
+    }
+
+    @Test
+    @DisableFlags(android.view.accessibility.Flags.FLAG_A11Y_QS_SHORTCUT)
+    @Config(shadows = {ShadowFragment.class})
+    public void onResume_flagDisabled_haveRegisterToSpecificUris() {
+        mFragment.onAttach(mContext);
+        mFragment.onCreate(Bundle.EMPTY);
+
+        mFragment.onResume();
+
+        verify(mContentResolver).registerContentObserver(
+                eq(Settings.Secure.getUriFor(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS)),
+                eq(false),
+                any(AccessibilitySettingsContentObserver.class));
+        verify(mContentResolver).registerContentObserver(
+                eq(Settings.Secure.getUriFor(
+                        Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE)),
+                eq(false),
+                any(AccessibilitySettingsContentObserver.class));
+        verify(mContentResolver, never()).registerContentObserver(
+                eq(Settings.Secure.getUriFor(
+                        Settings.Secure.ACCESSIBILITY_QS_TARGETS)),
                 eq(false),
                 any(AccessibilitySettingsContentObserver.class));
     }

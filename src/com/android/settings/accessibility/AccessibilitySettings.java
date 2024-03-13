@@ -175,6 +175,9 @@ public class AccessibilitySettings extends DashboardFragment implements
         // Observe changes from accessibility selection menu
         shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS);
         shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE);
+        if (android.view.accessibility.Flags.a11yQsShortcut()) {
+            shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_QS_TARGETS);
+        }
         shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_STICKY_KEYS);
         shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_SLOW_KEYS);
         shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_BOUNCE_KEYS);
