@@ -16,6 +16,7 @@
 
 package com.android.settings.spa.network
 
+import android.telephony.SubscriptionInfo
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -63,52 +64,55 @@ fun SimOnboardingLabelSimImpl(
             cancelAction
         ),
     ) {
-        labelSimBody(onboardingService)
+        LabelSimBody(onboardingService)
     }
 }
 
 @Composable
-private fun labelSimBody(onboardingService: SimOnboardingService) {
+private fun LabelSimBody(onboardingService: SimOnboardingService) {
     Column(Modifier.padding(SettingsDimension.itemPadding)) {
         SettingsBody(stringResource(R.string.sim_onboarding_label_sim_msg))
     }
 
     for (subInfo in onboardingService.getSelectableSubscriptionInfoList()) {
-        var titleSimName by remember {
-            mutableStateOf(
-                onboardingService.getSubscriptionInfoDisplayName(subInfo)
-            )
-        }
-        var summaryNumber = subInfo.number
-            // TODO using the SubscriptionUtil.getFormattedPhoneNumber
-        val alertDialogPresenter = rememberAlertDialogPresenter(
-            confirmButton = AlertDialogButton(
-                stringResource(R.string.mobile_network_sim_name_rename)
-            ) {
-                onboardingService.addItemForRenaming(subInfo, titleSimName)
-            },
-            dismissButton = AlertDialogButton(stringResource(R.string.cancel)) {
-                titleSimName = onboardingService.getSubscriptionInfoDisplayName(subInfo)
-            },
-            title = stringResource(R.string.sim_onboarding_label_sim_dialog_title),
-            text = {
-                Text(summaryNumber,
-                    modifier = Modifier.padding(bottom = SettingsDimension.itemPaddingVertical))
-                SettingsOutlinedTextField(
-                    value = titleSimName,
-                    label = stringResource(R.string.sim_onboarding_label_sim_dialog_label),
-                    enabled = true,
-                    shape = MaterialTheme.shapes.extraLarge
-                ) {
-                    titleSimName = it
-                }
-            },
-        )
-        Preference(object : PreferenceModel {
-            override val title = titleSimName
-            override val summary: () -> String
-                get() = { summaryNumber }
-            override val onClick = alertDialogPresenter::open
-        })
+        LabelSimPreference(onboardingService, subInfo)
     }
+}
+
+@Composable
+private fun LabelSimPreference(
+    onboardingService: SimOnboardingService,
+    subInfo: SubscriptionInfo,
+) {
+    var titleSimName by remember {
+        mutableStateOf(onboardingService.getSubscriptionInfoDisplayName(subInfo))
+    }
+    val phoneNumber = phoneNumber(subInfo)
+    val alertDialogPresenter = rememberAlertDialogPresenter(
+        confirmButton = AlertDialogButton(stringResource(R.string.mobile_network_sim_name_rename)) {
+            onboardingService.addItemForRenaming(subInfo, titleSimName)
+        },
+        dismissButton = AlertDialogButton(stringResource(R.string.cancel)) {
+            titleSimName = onboardingService.getSubscriptionInfoDisplayName(subInfo)
+        },
+        title = stringResource(R.string.sim_onboarding_label_sim_dialog_title),
+        text = {
+            Text(
+                phoneNumber.value ?: "",
+                modifier = Modifier.padding(bottom = SettingsDimension.itemPaddingVertical)
+            )
+            SettingsOutlinedTextField(
+                value = titleSimName,
+                label = stringResource(R.string.sim_onboarding_label_sim_dialog_label),
+                shape = MaterialTheme.shapes.extraLarge
+            ) {
+                titleSimName = it
+            }
+        },
+    )
+    Preference(object : PreferenceModel {
+        override val title = titleSimName
+        override val summary = { phoneNumber.value ?: "" }
+        override val onClick = alertDialogPresenter::open
+    })
 }
