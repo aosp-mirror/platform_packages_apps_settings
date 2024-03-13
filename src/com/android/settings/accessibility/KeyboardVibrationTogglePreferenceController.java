@@ -22,6 +22,7 @@ import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
 import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
 
 import android.app.settings.SettingsEnums;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.database.ContentObserver;
 import android.net.Uri;
@@ -157,8 +158,11 @@ public class KeyboardVibrationTogglePreferenceController extends TogglePreferenc
     }
 
     private boolean updateKeyboardVibrationSetting(boolean enable) {
-        final boolean success = Settings.System.putInt(mContext.getContentResolver(),
-                    KEYBOARD_VIBRATION_ENABLED, enable ? ON : OFF);
+        final ContentResolver contentResolver = mContext.getContentResolver();
+        final boolean success = Settings.System.putInt(contentResolver,
+                KEYBOARD_VIBRATION_ENABLED, enable ? ON : OFF);
+        contentResolver.notifyChange(Settings.System.getUriFor(KEYBOARD_VIBRATION_ENABLED),
+                null /* observer */, ContentResolver.NOTIFY_NO_DELAY);
         if (!success) {
             Log.w(TAG, "Update settings database error!");
         }
