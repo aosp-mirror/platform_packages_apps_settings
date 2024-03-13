@@ -30,6 +30,7 @@ import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.verify;
 
 import android.app.settings.SettingsEnums;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.vibrator.Flags;
@@ -60,6 +61,9 @@ public class KeyboardVibrationTogglePreferenceControllerTest {
     @Mock
     private PreferenceScreen mPreferenceScreen;
 
+    @Mock
+    private ContentResolver mContentResolver;
+
     private Context mContext;
     private Resources mResources;
     private KeyboardVibrationTogglePreferenceController mController;
@@ -72,6 +76,7 @@ public class KeyboardVibrationTogglePreferenceControllerTest {
         mContext = spy(ApplicationProvider.getApplicationContext());
         mResources = spy(mContext.getResources());
         when(mContext.getResources()).thenReturn(mResources);
+        when(mContext.getContentResolver()).thenReturn(mContentResolver);
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mController = new KeyboardVibrationTogglePreferenceController(mContext, "preferenceKey");
         mPreference = new SwitchPreference(mContext);
