@@ -72,7 +72,6 @@ class CertificateDetailsPreferenceController(context: Context, preferenceKey: St
     }
 
     private fun getCertX509(wifiEntry: WifiEntry): Boolean {
-        if (certX509 != null ) return true
         certificateAliases =
             wifiEntry.wifiConfiguration?.enterpriseConfig?.caCertificateAliases?.get(0)
                 ?: return false
