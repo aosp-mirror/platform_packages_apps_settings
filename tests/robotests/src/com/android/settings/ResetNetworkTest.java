@@ -27,6 +27,9 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.CheckBox;
 
+import com.android.settings.network.SubscriptionUtil;
+import com.android.settings.network.telephony.EuiccRacConnectivityDialogActivity;
+
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -51,6 +54,7 @@ public class ResetNetworkTest {
     @Test
     @Ignore
     public void showFinalConfirmation_checkboxVisible_eraseEsimChecked() {
+        SubscriptionUtil.setEnableRacDialogForTesting(true);
         mResetNetwork.mEsimContainer.setVisibility(View.VISIBLE);
         mResetNetwork.mEsimCheckbox.setChecked(true);
 
@@ -59,6 +63,21 @@ public class ResetNetworkTest {
         Intent intent = shadowOf(mActivity).getNextStartedActivity();
         assertThat(intent.getStringExtra(ResetNetworkRequest.KEY_ESIM_PACKAGE))
                 .isNotNull();
+    }
+
+    @Test
+    public void showFinalConfirmation_checkboxVisible_eraseEsimChecked_showRacWarningDialog() {
+        SubscriptionUtil.setEnableRacDialogForTesting(true);
+        mResetNetwork.mEsimContainer.setVisibility(View.VISIBLE);
+        mResetNetwork.mEsimCheckbox.setChecked(true);
+
+        mResetNetwork.showFinalConfirmation();
+
+        Intent intent = shadowOf(mActivity).getNextStartedActivity();
+
+        assertThat(intent).isNotNull();
+        assertThat(intent.getComponent().getClassName()).isEqualTo(
+                EuiccRacConnectivityDialogActivity.class.getName());
     }
 
     @Test

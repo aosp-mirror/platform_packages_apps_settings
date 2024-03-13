@@ -80,6 +80,7 @@ public class SubscriptionUtil {
 
     private static List<SubscriptionInfo> sAvailableResultsForTesting;
     private static List<SubscriptionInfo> sActiveResultsForTesting;
+    @Nullable private static Boolean sEnableRacDialogForTesting;
 
     @VisibleForTesting
     public static void setAvailableSubscriptionsForTesting(List<SubscriptionInfo> results) {
@@ -89,6 +90,11 @@ public class SubscriptionUtil {
     @VisibleForTesting
     public static void setActiveSubscriptionsForTesting(List<SubscriptionInfo> results) {
         sActiveResultsForTesting = results;
+    }
+
+    @VisibleForTesting
+    public static void setEnableRacDialogForTesting(boolean enableRacDialog) {
+        sEnableRacDialogForTesting = enableRacDialog;
     }
 
     public static List<SubscriptionInfo> getActiveSubscriptions(SubscriptionManager manager) {
@@ -906,6 +912,19 @@ public class SubscriptionUtil {
                 context.getResources().getIntArray(R.array.config_carrier_use_rac);
 
         return Arrays.stream(carriersThatUseRAC).anyMatch(cid -> cid == carrierId);
+    }
+
+    /**
+     * Check if warning dialog should be presented when erasing all eSIMS.
+     *
+     * @param context Context to check if any sim carrier use RAC and device Wi-Fi connection.
+     * @return {@code true} if dialog should be presented to the user.
+     */
+    public static boolean shouldShowRacDialog(@NonNull Context context) {
+        if (sEnableRacDialogForTesting != null) {
+            return sEnableRacDialogForTesting;
+        }
+        return !isConnectedToWifi(context) && hasSubscriptionWithRacCarrier(context);
     }
 
     /**
