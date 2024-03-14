@@ -137,7 +137,7 @@ public final class BatteryUsageDataLoader {
                                                                             .isEmpty()))) {
                                 FeatureFactory.getFeatureFactory()
                                         .getPowerUsageFeatureProvider()
-                                        .detectSettingsAnomaly(
+                                        .detectPowerAnomaly(
                                                 context,
                                                 /* displayDrain= */ 0,
                                                 DetectRequestSourceType.TYPE_DATA_LOADER);
