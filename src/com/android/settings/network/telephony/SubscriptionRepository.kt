@@ -26,6 +26,7 @@ import kotlinx.coroutines.asExecutor
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.conflate
+import kotlinx.coroutines.flow.filterNot
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
@@ -55,7 +56,7 @@ fun Context.isSubscriptionEnabledFlow(subId: Int) = subscriptionsChangedFlow().m
 
 fun Context.phoneNumberFlow(subscriptionInfo: SubscriptionInfo) = subscriptionsChangedFlow().map {
     SubscriptionUtil.getFormattedPhoneNumber(this, subscriptionInfo)
-}.flowOn(Dispatchers.Default)
+}.filterNot { it.isNullOrEmpty() }.flowOn(Dispatchers.Default)
 
 fun Context.subscriptionsChangedFlow() = callbackFlow {
     val subscriptionManager = requireSubscriptionManager()
