@@ -73,10 +73,10 @@
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="631521133525979967">"Десното слушно помагало е поврзано.\n\nЗа да го спарите левото, проверете дали е вклучено и подготвено за спарување."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"Спари го десното уво"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"Спари го левото уво"</string>
-    <string name="bluetooth_device_controls_general" msgid="1399214835599665488">"За сите достапни слушни апарати"</string>
-    <string name="bluetooth_device_controls_title" msgid="659009912978022189">"Повеќе поставки на слушен апарат"</string>
-    <string name="bluetooth_device_controls_summary" msgid="5387400497394163925">"Променете ги поставките на повеќе уреди, како што се контролите на кратенките и телекалемите"</string>
-    <string name="bluetooth_device_controls_specific" msgid="7706863288754077107">"За овој уред"</string>
+    <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Поставки за слушен апарат"</string>
+    <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Кратенка, компатибилност со слушни помагала"</string>
+    <string name="bluetooth_hearing_aids_presets" msgid="5429761844739722885">"Зададени вредности"</string>
+    <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Не можеше да се ажурира зададената вредност"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Аудиоизлез"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"За аудио-излезот"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Пренасочете ги звуците до слушното помагало или звучникот на телефонот"</string>
@@ -569,6 +569,12 @@
     <string name="privatespace_unlock_description" msgid="3177710543121916413">"Отклучете го вашиот „Приватен простор“"</string>
     <string name="privatespace_hide_off_summary" msgid="7227778747159633671">"Исклучено"</string>
     <string name="privatespace_hide_on_summary" msgid="6136704537527640183">"Вклучено"</string>
+    <!-- no translation found for private_space_hide_dialog_title (3192253150765516720) -->
+    <skip />
+    <!-- no translation found for private_space_hide_dialog_message (2006421821648157211) -->
+    <skip />
+    <!-- no translation found for private_space_hide_dialog_button (4157191429310035457) -->
+    <skip />
     <string name="private_space_category_system" msgid="1286843321867285700">"Систем"</string>
     <string name="private_space_delete_title" msgid="636873505724100006">"Бришење на „Приватниот простор“"</string>
     <string name="private_space_delete_header" msgid="4594429153176776184">"Да се избрише „Приватниот простор“?"</string>
@@ -828,8 +834,6 @@
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Прекини врска со апликацијата"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Максимален број аудиоуреди поврзани преку Bluetooth"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Изберете го максималниот број аудиоуреди поврзани преку Bluetooth"</string>
-    <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"Евиденција за отстранување грешки за NFC stack"</string>
-    <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"Зголеми го нивото на евиденција за NFC stack"</string>
     <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"Опширна евиденција за отстранување грешки за продавач на NFC"</string>
     <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"Вклучи дополнителни дневници за евиденција на продавачи за конкретен уред, коишто може да содржат приватни податоци."</string>
     <string name="nfc_snoop_log_title" msgid="1576197495976952388">"NCI за нефилтрирана евиденција за NFC"</string>
@@ -1540,8 +1544,7 @@
     <string name="network_scorer_change_active_no_previous_dialog_text" msgid="680685773455072321">"Да се користи <xliff:g id="NEW_APP">%s</xliff:g> за управување на вашите мрежни врски?"</string>
     <string name="location_category_recent_location_requests" msgid="2205900488782832082">"Последни барања за локација"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Локација за работен профил"</string>
-    <!-- no translation found for private_profile_location_switch_title (4127119143109855789) -->
-    <skip />
+    <string name="private_profile_location_switch_title" msgid="4127119143109855789">"Локација за „Приватен простор“"</string>
     <string name="location_app_level_permissions" msgid="907206607664629759">"Дозволи за локација за апликации"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"Локацијата е исклучена"</string>
     <string name="location_app_permission_summary_location_on" msgid="7552095451731948984">"{count,plural, =1{# од {total} апликации има пристап до локацијата}one{# од {total} апликации имаат пристап до локацијата}other{# од {total} апликации имаат пристап до локацијата}}"</string>
@@ -1933,13 +1936,10 @@
     <string name="modifier_keys_reset" msgid="551170906710422041">"Ресетирај"</string>
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"Изберете го копчето модификатор"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Изберете ново копче за <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>:"</string>
-    <!-- no translation found for ime_label_title (8994569521516807168) -->
-    <skip />
+    <string name="ime_label_title" msgid="8994569521516807168">"Распоред на <xliff:g id="IME_LABEL">%s</xliff:g>"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Стандардно"</string>
-    <!-- no translation found for automatic_keyboard_layout_label (9138088156046198913) -->
-    <skip />
-    <!-- no translation found for user_selected_keyboard_layout_label (154742505924555156) -->
-    <skip />
+    <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"Автоматски: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
+    <string name="user_selected_keyboard_layout_label" msgid="154742505924555156">"Корисникот избрал: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"Говор"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"Брзина на покажувач"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Контролор на игра"</string>
@@ -2009,7 +2009,7 @@
     <string name="color_contrast_preview_sender_name" msgid="8641943417589238147">"Хелен, Адам"</string>
     <string name="color_contrast_preview_email_send_date" msgid="2108702726171600080">"Пред 2 дена"</string>
     <string name="color_contrast_preview_email_badge" msgid="4845484039428505392">"Ќе проверите?"</string>
-    <string name="color_contrast_preview_email_title" msgid="198712116139754823">"Извештај за бизнис патувањето"</string>
+    <string name="color_contrast_preview_email_title" msgid="198712116139754823">"Извештај за бизнис-патување"</string>
     <string name="color_contrast_preview_email_body" msgid="4139331665325624199">"За дополнителна помош, контактирајте со \nмене или Хелен. Извештајов ќе биде"</string>
     <string name="color_contrast_preview_email_attachment_name" msgid="852407311884814746">"Трошоци на клиентот"</string>
     <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"Затемнете го екранот"</string>
@@ -2019,6 +2019,8 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Преземени апликации"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Експериментално"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Ознаки за функции"</string>
+    <string name="bt_stack_log_level" msgid="6527899271926969296">"Овозможи евиденција за Bluetooth stack"</string>
+    <string name="bt_stack_log_level_summary" msgid="3769107713334448285">"Промени ниво на евиденција за Bluetooth Stack (вклучи/исклучи Bluetooth по промена на поставкава)"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"Филтрирање евиденција за Bluetooth HCI"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="1319792184194176235">"Поставете филтри"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_footer" msgid="4158945851818483666">"Исклучете и вклучете Bluetooth за промените да станат активни"</string>
@@ -2061,12 +2063,9 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Сепак продолжи"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Откажи"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Поставки за зголемување"</string>
-    <!-- no translation found for accessibility_magnification_one_finger_panning_title (4503949739883092989) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_on (9133125894310777539) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_off (8979146350396559805) -->
-    <skip />
+    <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"Повлекување со еден прст"</string>
+    <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"Преместете го зголемување со повлекување со еден прст."</string>
+    <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"Преместете го зголемување со повлекување со два прста."</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Зголемување со кратенка"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Зголемете со кратенка и троен допир"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"За <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
@@ -2093,6 +2092,7 @@
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Држете ги копчињата за јачина на звук за отворање"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Допрете го екранот трипати за отворање"</string>
     <string name="accessibility_tutorial_dialog_title_two_finger_double" msgid="3912970760484557646">"Допрете го екранот двапати со два прста за да отворите"</string>
+    <string name="accessibility_tutorial_dialog_title_quick_setting" msgid="2905083277641794558">"Кратенка за „Брзи поставки“"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Користете движење за да отворите"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="6800684770875867559">"Користете го движењето за пристапност"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"За да ја користите функцијава, допрете го копчето за пристапност <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> на дното на екранот.\n\nЗа префрлање помеѓу функциите, допрете и задржете го копчето за пристапност."</string>
@@ -2100,6 +2100,7 @@
     <string name="accessibility_tutorial_dialog_message_volume" msgid="5033080515460519183">"За да ја користите функцијава, притиснете и задржете ги двете копчиња за јачина на звук."</string>
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"За почеток и крај на зголемувањето, допрете трипати каде било на екранот."</string>
     <string name="accessibility_tutorial_dialog_message_two_finger_triple" msgid="860548190334486449">"За да го започнете и сопрете зголемувањето, допрете каде било на екранот двапати со два прста."</string>
+    <string name="accessibility_tutorial_dialog_message_quick_setting" msgid="2272748015553891860">"За да ја користите функцијава, повлечете надолу од горниот дел на екранот."</string>
     <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"За да ја користите функцијава, повлечете нагоре од дното на екранот со два прста.\n\nЗа да се префрлите на друга функција, повлечете нагоре со два прста и задржете."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="8142847782708562793">"За да ја користите функцијава, повлечете нагоре од дното на екранот со три прста.\n\nЗа префрлање помеѓу функциите, повлечете нагоре со три прста и задржете."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"За да користите функција за пристапност, повлечете нагоре од дното на екранот со два прста.\n\nЗа да се префрлите на друга функција, повлечете нагоре со два прста и задржете."</string>
@@ -2107,8 +2108,8 @@
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Сфатив"</string>
     <string name="accessibility_tutorial_dialog_link_button" msgid="6797349445794031781">"Поставки за копчиња"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Кратенка за: <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
-    <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Копче за пристапност"</string>
-    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"Движење за пристапност"</string>
+    <string name="accessibility_shortcut_edit_summary_software" msgid="48978719406821294">"копче за пристапност"</string>
+    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="7346399253904683940">"движење за пристапност"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Повлечете нагоре со два прста"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Повлечете нагоре со три прста"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"Допрете го копчето за пристапност"</string>
@@ -2118,6 +2119,9 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Повлечете нагоре од дното на екранот со три прста.\n\nЗа префрлање помеѓу функциите, повлечете нагоре со три прста и задржете."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="4459254227203203324"><annotation id="link">"Повеќе опции"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"Дознајте повеќе за <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"Брзи поставки"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="8726678553797015432">"Повлечете надолу од горниот дел на екранот"</string>
+    <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"Брзи поставки"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Задржете ги копчињата за јачина на звук"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"задржете ги копчињата за јачина на звук"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Притиснете и задржете ги двете копчиња за јачина на звук"</string>
@@ -2155,7 +2159,8 @@
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Текст со висок контраст"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Променете ја бојата на текстот во црна или бела. Го максимизира контрастот со заднината."</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"Максимиз. го контрастот на текстот"</string>
-    <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="5493999083693403489">"Променете ја бојата на текстот во црна или бела за да го зголемите контрастот со заднината."</string>
+    <!-- no translation found for accessibility_toggle_maximize_text_contrast_preference_summary (8200408691846666900) -->
+    <skip />
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Автоматско ажурирање на зголемување на екран"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Ажурирај зголемување екран при премини меѓу аплик."</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Прекини повик со копче за вклучување"</string>
@@ -4200,6 +4205,8 @@
     <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"За да одите на почетниот екран, повлечете нагоре од дното на екранот. За префрлање меѓу апликации, повлечете нагоре од дното, задржете, а потоа пуштете. За да се вратите назад, повлечете од левиот или десниот раб."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Навигација со 3 копчиња"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"За враќање назад, отворање на почетниот екран и префрлање помеѓу апликациите, користете ги копчињата на дното од екранот."</string>
+    <!-- no translation found for nav_tutorial_button_description (5791791794770463386) -->
+    <skip />
     <string name="keywords_system_navigation" msgid="3131782378486554934">"навигација на системот, навигација со 2 копчиња, навигација со 3 копчиња, навигација со движење, повлечи"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Дигитален помошник"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Повлечете за да го повикате помошникот"</string>
@@ -4644,12 +4651,9 @@
     <string name="primary_sim_texts_title" msgid="1287584042733097749">"Пораки"</string>
     <string name="primary_sim_automatic_data_title" msgid="1265528923229642480">"Автоматско префрлање интернет"</string>
     <string name="primary_sim_automatic_data_msg" msgid="1612203837010785203">"Користете интернет од која било SIM-картичка зависно од покриеноста и достапноста"</string>
-    <!-- no translation found for sim_action_restart_dialog_title (3507413479633430120) -->
-    <skip />
-    <!-- no translation found for sim_action_restart_dialog_msg (4737611046767629774) -->
-    <skip />
-    <!-- no translation found for sim_action_restart_dialog_cancel (665560106686565624) -->
-    <skip />
+    <string name="sim_action_restart_dialog_title" msgid="3507413479633430120">"Рестартирајте за да користите 2 SIM-картички"</string>
+    <string name="sim_action_restart_dialog_msg" msgid="4737611046767629774">"За да користите 2 SIM-картички истовремено, рестартирајте го уредот, па вклучете ги двете SIM-картички"</string>
+    <string name="sim_action_restart_dialog_cancel" msgid="665560106686565624">"Користи само <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="sim_onboarding_phoneNumber_data_only" msgid="8158409121949373662">"Само за интернет"</string>
     <string name="sim_onboarding_setup" msgid="5750393553605388463">"Поставете"</string>
     <string name="sim_onboarding_next" msgid="6415025179929475355">"Следно"</string>
@@ -4764,6 +4768,13 @@
     <string name="confirm_enable_4k_pages_text" msgid="6168921566226074524">"Уредот ќе се рестартира по потврдата."</string>
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"Не можеше да се ажурира кернелот на компатибилен кернел со страници од 16 KB."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Се применува промената"</string>
+    <string name="confirm_format_ext4_title" msgid="4453684705528818873">"Да се форматира уредот повторно на ext4?"</string>
+    <string name="confirm_format_ext4_text" msgid="8164677342487500794">"Опцијата за програмер 16K е поддржана со системот на датотеки ext4. Уредот ќе се избрише трајно и по потврдата системот на датотеки ќе се промени во ext4."</string>
+    <string name="format_ext4_failure_toast" msgid="6904611547290793885">"Неуспешно повторно форматирање и трајно бришење на партицијата со податоци на ext4."</string>
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (6338135847153690912) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_text (236718973897424382) -->
+    <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"Ракувач со извештајот за грешки"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Одредува која апликација ќе ракува со кратенката за извештајот за грешки на уредот."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Лични"</string>

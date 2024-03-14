@@ -73,10 +73,10 @@
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="631521133525979967">"Votre appareil auditif droit est connecté.\n\nPour associer le gauche, vérifiez qu\'il est allumé et prêt pour l\'association."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"Associer le droit"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"Associer le gauche"</string>
-    <string name="bluetooth_device_controls_general" msgid="1399214835599665488">"Pour tous les appareils auditifs disponibles"</string>
-    <string name="bluetooth_device_controls_title" msgid="659009912978022189">"Plus de paramètres concernant les appareils auditifs"</string>
-    <string name="bluetooth_device_controls_summary" msgid="5387400497394163925">"Modifier les paramètres de l\'appareil, tels que les commandes liées aux raccourcis et au phonocapteur."</string>
-    <string name="bluetooth_device_controls_specific" msgid="7706863288754077107">"Pour cet appareil"</string>
+    <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Paramètres de l\'appareil auditif"</string>
+    <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Raccourci, compatibilité avec les appareils auditifs"</string>
+    <string name="bluetooth_hearing_aids_presets" msgid="5429761844739722885">"Préréglages"</string>
+    <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Impossible de mettre à jour les préréglages"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Sortie audio"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"À propos de la sortie audio"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Envoyer le son vers votre appareil auditif ou le haut-parleur de votre téléphone"</string>
@@ -136,7 +136,7 @@
     <string name="stylus_default_notes_app" msgid="4165657465911764628">"Appui sur le bouton du stylet"</string>
     <string name="stylus_default_notes_summary_work" msgid="4554643411627934223">"<xliff:g id="APP_NAME">%s</xliff:g> (Profil professionnel)"</string>
     <string name="stylus_textfield_handwriting" msgid="2363579035338976327">"Écrire dans les champs de texte"</string>
-    <string name="stylus_ignore_button" msgid="7734540973145241391">"Ignorer toutes les pressions sur les boutons du stylet"</string>
+    <string name="stylus_ignore_button" msgid="7734540973145241391">"Ignorer toutes les pressions sur le bouton du stylet"</string>
     <string name="stylus_connected_devices_title" msgid="2823967577941359812">"Stylet"</string>
     <string name="audio_streams_empty" msgid="8803517701437394982">"Aucun flux audio n\'a été détecté"</string>
     <string name="date_and_time" msgid="1788358029823431692">"Date et heure"</string>
@@ -569,6 +569,12 @@
     <string name="privatespace_unlock_description" msgid="3177710543121916413">"Déverrouillez votre espace privé"</string>
     <string name="privatespace_hide_off_summary" msgid="7227778747159633671">"Désactivé"</string>
     <string name="privatespace_hide_on_summary" msgid="6136704537527640183">"Activé"</string>
+    <!-- no translation found for private_space_hide_dialog_title (3192253150765516720) -->
+    <skip />
+    <!-- no translation found for private_space_hide_dialog_message (2006421821648157211) -->
+    <skip />
+    <!-- no translation found for private_space_hide_dialog_button (4157191429310035457) -->
+    <skip />
     <string name="private_space_category_system" msgid="1286843321867285700">"Système"</string>
     <string name="private_space_delete_title" msgid="636873505724100006">"Supprimer l\'espace privé"</string>
     <string name="private_space_delete_header" msgid="4594429153176776184">"Supprimer l\'espace privé ?"</string>
@@ -828,8 +834,6 @@
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Dissocier l\'appli"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Nombre maximal d\'appareils audio Bluetooth connectés"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Sélectionner le nombre maximal d\'appareils audio Bluetooth connectés"</string>
-    <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"Journal de débogage des piles NFC"</string>
-    <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"Accroître le niveau de journalisation des piles NFC"</string>
     <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"Journaux de débogage NFC détaillé du fournisseur"</string>
     <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"Inclure les journaux supplémentaires du fournisseur, spécifiques à l\'appareil, dans les rapports de bug. Ils peuvent contenir des informations privées."</string>
     <string name="nfc_snoop_log_title" msgid="1576197495976952388">"Journaux non filtrés NFC NCI"</string>
@@ -1540,8 +1544,7 @@
     <string name="network_scorer_change_active_no_previous_dialog_text" msgid="680685773455072321">"Utiliser <xliff:g id="NEW_APP">%s</xliff:g> pour gérer vos connexions réseau ?"</string>
     <string name="location_category_recent_location_requests" msgid="2205900488782832082">"Demandes de localisation récentes"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Position du profil pro"</string>
-    <!-- no translation found for private_profile_location_switch_title (4127119143109855789) -->
-    <skip />
+    <string name="private_profile_location_switch_title" msgid="4127119143109855789">"Emplacement pour espace privé"</string>
     <string name="location_app_level_permissions" msgid="907206607664629759">"Accès des applis à la position"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"La localisation est désactivée"</string>
     <string name="location_app_permission_summary_location_on" msgid="7552095451731948984">"{count,plural, =1{# appli sur {total} a accès à la position}one{# appli sur {total} a accès à la position}other{# applis sur {total} ont accès à la position}}"</string>
@@ -2016,6 +2019,8 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Applications téléchargées"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Paramètres expérimentaux"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Flags de fonctionnalités"</string>
+    <string name="bt_stack_log_level" msgid="6527899271926969296">"Activer le journal de la pile Bluetooth"</string>
+    <string name="bt_stack_log_level_summary" msgid="3769107713334448285">"Modifier le niveau de journalisation de la pile Bluetooth (activer le Bluetooth ensuite)"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"Filtrage des journaux de surveillance HCI Bluetooth"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="1319792184194176235">"Définissez des filtres"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_footer" msgid="4158945851818483666">"Désactivez et activez le Bluetooth pour appliquer les changements"</string>
@@ -2058,12 +2063,9 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Continuer"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Annuler"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Paramètres d\'agrandissement"</string>
-    <!-- no translation found for accessibility_magnification_one_finger_panning_title (4503949739883092989) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_on (9133125894310777539) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_off (8979146350396559805) -->
-    <skip />
+    <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"Défilement panoramique à un doigt"</string>
+    <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"Déplacez la zone d\'agrandissement en faisant glisser un doigt sur cette dernière."</string>
+    <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"Déplacez la zone d\'agrandissement en faisant glisser deux doigts sur cette dernière."</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Agrandir avec un raccourci"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Agrandir avec un raccourci et trois tapotements"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"À propos de <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
@@ -2090,6 +2092,7 @@
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Maintenir enfoncés les boutons de volume pour ouvrir"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Appuyez trois fois sur l\'écran pour ouvrir"</string>
     <string name="accessibility_tutorial_dialog_title_two_finger_double" msgid="3912970760484557646">"Appuyer deux fois sur l\'écran avec deux doigts pour ouvrir"</string>
+    <string name="accessibility_tutorial_dialog_title_quick_setting" msgid="2905083277641794558">"Raccourci des réglages rapides"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Utiliser un geste pour ouvrir"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="6800684770875867559">"Utiliser le geste d\'accessibilité"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"Pour utiliser cette fonctionnalité, appuyez sur le bouton Accessibilité <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> en bas de l\'écran.\n\nPour changer de fonctionnalité, appuyez dessus de manière prolongée."</string>
@@ -2097,6 +2100,7 @@
     <string name="accessibility_tutorial_dialog_message_volume" msgid="5033080515460519183">"Pour utiliser cette fonctionnalité, appuyez de manière prolongée sur les deux boutons de volume."</string>
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"Pour lancer ou arrêter l\'agrandissement, appuyez trois fois n\'importe où sur l\'écran."</string>
     <string name="accessibility_tutorial_dialog_message_two_finger_triple" msgid="860548190334486449">"Pour commencer et arrêter l\'agrandissement, appuyez deux fois sur votre écran avec deux doigts."</string>
+    <string name="accessibility_tutorial_dialog_message_quick_setting" msgid="2272748015553891860">"Pour utiliser cette fonctionnalité, balayez vers le bas à partir du haut de votre écran."</string>
     <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"Pour utiliser cette fonctionnalité, balayez l\'écran vers le haut avec deux doigts.\n\nPour changer de fonctionnalité, balayez l\'écran vers le haut avec deux doigts et appuyez de manière prolongée."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="8142847782708562793">"Pour utiliser cette fonctionnalité, balayez l\'écran vers le haut avec trois doigts.\n\nPour changer de fonctionnalité, balayez l\'écran vers le haut avec trois doigts et appuyez de manière prolongée."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"Pour utiliser une fonctionnalité d\'accessibilité, balayez l\'écran vers le haut avec deux doigts.\n\nPour changer de fonctionnalité, balayez l\'écran vers le haut avec deux doigts et appuyez de manière prolongée."</string>
@@ -2104,8 +2108,8 @@
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"OK"</string>
     <string name="accessibility_tutorial_dialog_link_button" msgid="6797349445794031781">"Paramètres du bouton"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Raccourci vers <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
-    <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Bouton Accessibilité"</string>
-    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"Geste Accessibilité"</string>
+    <string name="accessibility_shortcut_edit_summary_software" msgid="48978719406821294">"bouton Accessibilité"</string>
+    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="7346399253904683940">"geste d\'accessibilité"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Balayer l\'écran vers le haut avec deux doigts"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Balayer l\'écran vers le haut avec trois doigts"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"Appuyer sur le bouton Accessibilité"</string>
@@ -2115,6 +2119,9 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Balayez l\'écran de bas en haut avec trois doigts.\n\nPour changer de fonctionnalité, balayez l\'écran vers le haut avec trois doigts et appuyez de manière prolongée."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="4459254227203203324"><annotation id="link">"Plus d\'options"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"En savoir plus sur <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"Réglages rapides"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="8726678553797015432">"Balayer vers le bas depuis le haut de l\'écran"</string>
+    <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"Réglages rapides"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Maintenir enfoncés les boutons de volume"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"maintenir enfoncés les boutons de volume"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Appuyer de manière prolongée sur les deux boutons de volume"</string>
@@ -2152,7 +2159,8 @@
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Texte avec contraste élevé"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Mettre le texte en noir ou blanc pour accentuer le contraste avec le fond."</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"Maximiser le contraste du texte"</string>
-    <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="5493999083693403489">"Mettez le texte en noir ou blanc pour accentuer le contraste avec l\'arrière-plan."</string>
+    <!-- no translation found for accessibility_toggle_maximize_text_contrast_preference_summary (8200408691846666900) -->
+    <skip />
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Mise à jour auto de la loupe"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Mettre à jour la loupe si transition entre applis"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Bouton Marche/Arrêt pour raccrocher"</string>
@@ -4197,6 +4205,8 @@
     <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"Pour revenir à l\'accueil, balayez l\'écran de bas en haut. Pour changer d\'application, balayez l\'écran de bas en haut, appuyez de manière prolongée, puis relâchez. Pour revenir en arrière, balayez l\'écran de gauche à droite ou de droite à gauche."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Navigation à trois boutons"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"Changer d\'application et revenir en arrière ou à l\'accueil avec les boutons situés en bas de l\'écran."</string>
+    <!-- no translation found for nav_tutorial_button_description (5791791794770463386) -->
+    <skip />
     <string name="keywords_system_navigation" msgid="3131782378486554934">"navigation système, navigation à deux boutons, navigation à trois boutons, navigation par gestes, balayer l\'écran"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Assistant numérique"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Balayer pour appeler l\'assistant"</string>
@@ -4641,12 +4651,9 @@
     <string name="primary_sim_texts_title" msgid="1287584042733097749">"SMS"</string>
     <string name="primary_sim_automatic_data_title" msgid="1265528923229642480">"Migration automatique des données"</string>
     <string name="primary_sim_automatic_data_msg" msgid="1612203837010785203">"Utiliser les données de l\'une ou l\'autre des cartes SIM en fonction de la couverture et de la disponibilité"</string>
-    <!-- no translation found for sim_action_restart_dialog_title (3507413479633430120) -->
-    <skip />
-    <!-- no translation found for sim_action_restart_dialog_msg (4737611046767629774) -->
-    <skip />
-    <!-- no translation found for sim_action_restart_dialog_cancel (665560106686565624) -->
-    <skip />
+    <string name="sim_action_restart_dialog_title" msgid="3507413479633430120">"Redémarrer pour utiliser deux cartes SIM"</string>
+    <string name="sim_action_restart_dialog_msg" msgid="4737611046767629774">"Pour utiliser deux cartes SIM simultanément, redémarrez votre appareil, puis activez chacune des cartes SIM"</string>
+    <string name="sim_action_restart_dialog_cancel" msgid="665560106686565624">"Utiliser <xliff:g id="CARRIER_NAME">%1$s</xliff:g> uniquement"</string>
     <string name="sim_onboarding_phoneNumber_data_only" msgid="8158409121949373662">"Données uniquement"</string>
     <string name="sim_onboarding_setup" msgid="5750393553605388463">"Configuration"</string>
     <string name="sim_onboarding_next" msgid="6415025179929475355">"Suivant"</string>
@@ -4761,6 +4768,13 @@
     <string name="confirm_enable_4k_pages_text" msgid="6168921566226074524">"L\'appareil redémarrera après la confirmation."</string>
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"Échec de la mise à jour du kernel vers un kernel compatible avec les pages de 16 ko."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Application des modifications"</string>
+    <string name="confirm_format_ext4_title" msgid="4453684705528818873">"Reformater l\'appareil en ext4 ?"</string>
+    <string name="confirm_format_ext4_text" msgid="8164677342487500794">"L\'option pour les développeurs 16K est compatible avec le système de fichiers ext4. L\'appareil sera effacé et le système de fichiers sera remplacé par ext4 après confirmation."</string>
+    <string name="format_ext4_failure_toast" msgid="6904611547290793885">"Échec du reformatage et de l\'effacement de la partition de données vers ext4."</string>
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (6338135847153690912) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_text (236718973897424382) -->
+    <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"Gestionnaire de rapport de bug"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Détermine quelle application gère le raccourci vers le rapport de bug sur votre appareil."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Personnel"</string>

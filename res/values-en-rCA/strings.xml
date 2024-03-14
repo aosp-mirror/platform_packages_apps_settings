@@ -73,10 +73,10 @@
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="631521133525979967">"Your right hearing device is connected.\n\nTo pair the left one, make sure it’s turned on and ready to pair."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"Pair right ear"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"Pair left ear"</string>
-    <string name="bluetooth_device_controls_general" msgid="1399214835599665488">"For all available hearing devices"</string>
-    <string name="bluetooth_device_controls_title" msgid="659009912978022189">"More hearing device settings"</string>
-    <string name="bluetooth_device_controls_summary" msgid="5387400497394163925">"Change cross-device settings like shortcut, and telecoil controls"</string>
-    <string name="bluetooth_device_controls_specific" msgid="7706863288754077107">"For this device"</string>
+    <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Hearing device settings"</string>
+    <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Shortcut, hearing aid compatibility"</string>
+    <string name="bluetooth_hearing_aids_presets" msgid="5429761844739722885">"Presets"</string>
+    <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Couldn’t update preset"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Audio output"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"About audio output"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Route sounds to your hearing device or phone speaker"</string>
@@ -569,6 +569,9 @@
     <string name="privatespace_unlock_description" msgid="3177710543121916413">"Unlock your private space"</string>
     <string name="privatespace_hide_off_summary" msgid="7227778747159633671">"Off"</string>
     <string name="privatespace_hide_on_summary" msgid="6136704537527640183">"On"</string>
+    <string name="private_space_hide_dialog_title" msgid="3192253150765516720">"Private space will hide when you lock it next"</string>
+    <string name="private_space_hide_dialog_message" msgid="2006421821648157211">"To access your space when it’s hidden, enter private space in the search bar on your apps list"</string>
+    <string name="private_space_hide_dialog_button" msgid="4157191429310035457">"Got it"</string>
     <string name="private_space_category_system" msgid="1286843321867285700">"System"</string>
     <string name="private_space_delete_title" msgid="636873505724100006">"Delete private space"</string>
     <string name="private_space_delete_header" msgid="4594429153176776184">"Delete private space?"</string>
@@ -828,8 +831,6 @@
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Disconnect app"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Maximum connected Bluetooth audio devices"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Select maximum number of connected Bluetooth audio devices"</string>
-    <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"NFC stack debug log"</string>
-    <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"Increase NFC stack logging level"</string>
     <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"NFC verbose vendor debug log"</string>
     <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"Include additional device-specific vendor logs in bugreports, which may contain private information."</string>
     <string name="nfc_snoop_log_title" msgid="1576197495976952388">"NFC NCI unfiltered log"</string>
@@ -2015,6 +2016,8 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Downloaded apps"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Experimental"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Feature flags"</string>
+    <string name="bt_stack_log_level" msgid="6527899271926969296">"Enable Bluetooth stack log"</string>
+    <string name="bt_stack_log_level_summary" msgid="3769107713334448285">"Change log level of Bluetooth Stack Logging (Toggle Bluetooth after changing this setting)"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"Bluetooth HCI snoop log filtering"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="1319792184194176235">"Set filters"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_footer" msgid="4158945851818483666">"Disable and enable Bluetooth for the changes to take effect"</string>
@@ -2086,6 +2089,7 @@
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Hold volume keys to open"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Triple-tap screen to open"</string>
     <string name="accessibility_tutorial_dialog_title_two_finger_double" msgid="3912970760484557646">"Two finger double tap screen to open"</string>
+    <string name="accessibility_tutorial_dialog_title_quick_setting" msgid="2905083277641794558">"Quick Settings shortcut"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Use gesture to open"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="6800684770875867559">"Use accessibility gesture"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"To use this feature, tap the accessibility button <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> on the bottom of your screen.\n\nTo switch between features, touch and hold the accessibility button."</string>
@@ -2093,6 +2097,7 @@
     <string name="accessibility_tutorial_dialog_message_volume" msgid="5033080515460519183">"To use this feature, press and hold both volume keys."</string>
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"To start and stop magnification, triple-tap anywhere on your screen."</string>
     <string name="accessibility_tutorial_dialog_message_two_finger_triple" msgid="860548190334486449">"To start and stop magnification, double-tap anywhere on your screen with two fingers."</string>
+    <string name="accessibility_tutorial_dialog_message_quick_setting" msgid="2272748015553891860">"To use this feature, swipe down from the top of your screen."</string>
     <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"To use this feature, swipe up from the bottom of the screen with 2 fingers.\n\nTo switch between features, swipe up with 2 fingers and hold."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="8142847782708562793">"To use this feature, swipe up from the bottom of the screen with 3 fingers.\n\nTo switch between features, swipe up with 3 fingers and hold."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"To use an accessibility feature, swipe up from the bottom of the screen with 2 fingers.\n\nTo switch between features, swipe up with 2 fingers and hold."</string>
@@ -2100,8 +2105,8 @@
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Got it"</string>
     <string name="accessibility_tutorial_dialog_link_button" msgid="6797349445794031781">"Button settings"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"<xliff:g id="SERVICE">%1$s</xliff:g> shortcut"</string>
-    <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Accessibility button"</string>
-    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"Accessibility gesture"</string>
+    <string name="accessibility_shortcut_edit_summary_software" msgid="48978719406821294">"accessibility button"</string>
+    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="7346399253904683940">"accessibility gesture"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Swipe up with 2 fingers"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Swipe up with 3 fingers"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"Tap accessibility button"</string>
@@ -2111,6 +2116,9 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Swipe up from the bottom of the screen with 3 fingers.\n\nTo switch between features, swipe up with 3 fingers and hold."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="4459254227203203324"><annotation id="link">"More options"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"Learn more about <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"Quick Settings"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="8726678553797015432">"Swipe down from the top of your screen"</string>
+    <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"Quick Settings"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Hold volume keys"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"hold volume keys"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Press and hold both volume keys"</string>
@@ -2148,7 +2156,8 @@
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"High contrast text"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Change text color to black or white. Maximizes contrast with the background."</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"Maximize text contrast"</string>
-    <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="5493999083693403489">"Change text color to black or white to increase contrast with the background."</string>
+    <!-- no translation found for accessibility_toggle_maximize_text_contrast_preference_summary (8200408691846666900) -->
+    <skip />
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Auto update screen magnification"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Update screen magnification on app transitions"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Power button ends call"</string>
@@ -4193,6 +4202,8 @@
     <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"To go home, swipe up from the bottom of the screen. To switch apps, swipe up from the bottom, hold, then release. To go back, swipe from either the left or right edge."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Three-button navigation"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"Go back, Home and switch apps with buttons at the bottom of your screen."</string>
+    <!-- no translation found for nav_tutorial_button_description (5791791794770463386) -->
+    <skip />
     <string name="keywords_system_navigation" msgid="3131782378486554934">"system navigation, two-button navigation, three-button navigation, gesture navigation, swipe"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Digital assistant"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Swipe to invoke assistant"</string>
@@ -4754,6 +4765,13 @@
     <string name="confirm_enable_4k_pages_text" msgid="6168921566226074524">"Device will reboot after confirmation."</string>
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"Failed to update kernel to 16KB pages compatible kernel."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Applying change"</string>
+    <string name="confirm_format_ext4_title" msgid="4453684705528818873">"Reformat device to ext4?"</string>
+    <string name="confirm_format_ext4_text" msgid="8164677342487500794">"16K developer option is supported with ext4 filesystem. Device will be wiped and filesystem will be changed to ext4 after confirmation."</string>
+    <string name="format_ext4_failure_toast" msgid="6904611547290793885">"Failed to reformat and wipe the data partiton to ext4."</string>
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (6338135847153690912) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_text (236718973897424382) -->
+    <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"Bug report handler"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Determines which app handles the Bug Report shortcut on your device."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Personal"</string>

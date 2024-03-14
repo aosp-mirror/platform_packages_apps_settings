@@ -73,10 +73,10 @@
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="631521133525979967">"Je pripojené pravé načúvacie zariadenie.\n\nAk chcete spárovať ľavé, skontrolujte, či je zapnuté a pripravené na párovanie."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"Spárovať pravé ucho"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"Spárovať ľavé ucho"</string>
-    <string name="bluetooth_device_controls_general" msgid="1399214835599665488">"Pre všetky dostupné načúvadlá"</string>
-    <string name="bluetooth_device_controls_title" msgid="659009912978022189">"Ďalšie nastavenia načúvacieho zariadenia"</string>
-    <string name="bluetooth_device_controls_summary" msgid="5387400497394163925">"Zmeňte nastavenia pre viacero zariadení, ako sú skratky a ovládanie cievky telecoil"</string>
-    <string name="bluetooth_device_controls_specific" msgid="7706863288754077107">"Pre toto zariadenie"</string>
+    <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Nastavenia načúvacieho zariadenia"</string>
+    <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Skratka, kompatibilita s načúvadlami"</string>
+    <string name="bluetooth_hearing_aids_presets" msgid="5429761844739722885">"Predvoľby"</string>
+    <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Predvoľbu sa nepodarilo aktualizovať"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Zvukový výstup"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Zvukový výstup"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Prehrávajte zvuk v načúvacom zariadení alebo reproduktore telefónu"</string>
@@ -569,6 +569,12 @@
     <string name="privatespace_unlock_description" msgid="3177710543121916413">"Odomknúť súkromný priestor"</string>
     <string name="privatespace_hide_off_summary" msgid="7227778747159633671">"Vypnuté"</string>
     <string name="privatespace_hide_on_summary" msgid="6136704537527640183">"Zapnuté"</string>
+    <!-- no translation found for private_space_hide_dialog_title (3192253150765516720) -->
+    <skip />
+    <!-- no translation found for private_space_hide_dialog_message (2006421821648157211) -->
+    <skip />
+    <!-- no translation found for private_space_hide_dialog_button (4157191429310035457) -->
+    <skip />
     <string name="private_space_category_system" msgid="1286843321867285700">"Systém"</string>
     <string name="private_space_delete_title" msgid="636873505724100006">"Odstránenie súkromného priestoru"</string>
     <string name="private_space_delete_header" msgid="4594429153176776184">"Chcete odstrániť súkromný priestor?"</string>
@@ -828,8 +834,6 @@
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Odpojiť aplikáciu"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Maximálny počet pripojených zvukových zariadení Bluetooth"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Výber maximálneho počtu pripojených zvukových zariadení Bluetooth"</string>
-    <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"Denník ladenia zásobníka NFC"</string>
-    <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"Zvýšiť úroveň zapisovania zásobníka NFC"</string>
     <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"Podrobný denník dodávateľa pre ladenie NFC"</string>
     <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"Zahrnúť ďalšie denníky dodávateľov špecifické pre zariadenia do hlásení chýb, ktoré môžu obsahovať súkromné informácie"</string>
     <string name="nfc_snoop_log_title" msgid="1576197495976952388">"Nefiltrovaný denník NCI NFC"</string>
@@ -1540,8 +1544,7 @@
     <string name="network_scorer_change_active_no_previous_dialog_text" msgid="680685773455072321">"Chcete spravovať sieťové pripojenia pomocou aplikácie <xliff:g id="NEW_APP">%s</xliff:g>?"</string>
     <string name="location_category_recent_location_requests" msgid="2205900488782832082">"Nedávne žiadosti o polohu"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Poloha pre pracovný profil"</string>
-    <!-- no translation found for private_profile_location_switch_title (4127119143109855789) -->
-    <skip />
+    <string name="private_profile_location_switch_title" msgid="4127119143109855789">"Umiestnenie súkromného priestoru"</string>
     <string name="location_app_level_permissions" msgid="907206607664629759">"Prístup aplikácií k polohe"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"Poloha je vypnutá"</string>
     <string name="location_app_permission_summary_location_on" msgid="7552095451731948984">"{count,plural, =1{Prístup k polohe má # z {total} aplikácií}few{Prístup k polohe majú # z {total} aplikácií}many{# of {total} apps have access to location}other{Prístup k polohe má # z {total} aplikácií}}"</string>
@@ -1933,13 +1936,10 @@
     <string name="modifier_keys_reset" msgid="551170906710422041">"Resetovať"</string>
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"Vyberte modifikačný kláves"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Vyberte pre <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g> nový kláves:"</string>
-    <!-- no translation found for ime_label_title (8994569521516807168) -->
-    <skip />
+    <string name="ime_label_title" msgid="8994569521516807168">"Rozloženie <xliff:g id="IME_LABEL">%s</xliff:g>"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Predvolené"</string>
-    <!-- no translation found for automatic_keyboard_layout_label (9138088156046198913) -->
-    <skip />
-    <!-- no translation found for user_selected_keyboard_layout_label (154742505924555156) -->
-    <skip />
+    <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"Automaticky: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
+    <string name="user_selected_keyboard_layout_label" msgid="154742505924555156">"Vybrané používateľom: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"Reč"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"Rýchlosť kurzora"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Herné ovládače"</string>
@@ -2019,6 +2019,8 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Stiahnuté aplikácie"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Experimentálne"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Experimentálne funkcie"</string>
+    <string name="bt_stack_log_level" msgid="6527899271926969296">"Povoliť denník zásobníka rozhrania Bluetooth"</string>
+    <string name="bt_stack_log_level_summary" msgid="3769107713334448285">"Zmeniť úroveň denníka zásobníka rozhrania Bluetooth (prepnúť Bluetooth po zmene tohto nastavenia)"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"Filtrovanie denníka Bluetooth HCI"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="1319792184194176235">"Nastaviť filtre"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_footer" msgid="4158945851818483666">"Ak chcete uplatniť zmeny, vypnite a zapnite Bluetooth"</string>
@@ -2061,12 +2063,9 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Aj tak pokračovať"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Zrušiť"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Nastavenia priblíženia"</string>
-    <!-- no translation found for accessibility_magnification_one_finger_panning_title (4503949739883092989) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_on (9133125894310777539) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_off (8979146350396559805) -->
-    <skip />
+    <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"Presunutie jedným prstom"</string>
+    <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"Jedným prstom presuňte oblasť zväčšenia."</string>
+    <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"Dvoma prstami presuňte oblasť zväčšenia."</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Priblíženie skratkou"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Priblíženie skratkou a trojitým klepnutím"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"<xliff:g id="SERVICE">%1$s</xliff:g>"</string>
@@ -2093,6 +2092,7 @@
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Otvorte pridržaním tlačidiel hlasitosti"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Otvorenie troma klepnutiami na obrazovku"</string>
     <string name="accessibility_tutorial_dialog_title_two_finger_double" msgid="3912970760484557646">"Otvorte dvojitým klepnutím dvoma prstami na obrazovku"</string>
+    <string name="accessibility_tutorial_dialog_title_quick_setting" msgid="2905083277641794558">"Skratka pre rýchle nastavenia"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Otváranie gestom"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="6800684770875867559">"Použitie gesta dostupnosti"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"Ak chcete použiť túto funkciu, klepnite na tlačidlo dostupnosti <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> v dolnej časti obrazovky.\n\nFunkcie prepnete pridržaním tlačidla dostupnosti."</string>
@@ -2100,6 +2100,7 @@
     <string name="accessibility_tutorial_dialog_message_volume" msgid="5033080515460519183">"Túto funkciu použijete tak, že pridržíte obe tlačidlá hlasitosti."</string>
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"Ak chcete spustiť alebo zastaviť zväčšenie, klepnite trikrát na ľubovoľné miesto na obrazovke."</string>
     <string name="accessibility_tutorial_dialog_message_two_finger_triple" msgid="860548190334486449">"Ak chcete spustiť či zastaviť zväčšenie, klepnite dvakrát dvoma prstami kdekoľvek na obrazovku."</string>
+    <string name="accessibility_tutorial_dialog_message_quick_setting" msgid="2272748015553891860">"Ak chcete používať túto funkciu, potiahnite nadol z hornej časti obrazovky."</string>
     <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"Ak chcete použiť túto funkciu, potiahnite dvoma prstami z dolnej časti obrazovky nahor.\n\nFunkcie prepnete potiahnutím dvoma prstami smerom nahor a pridržaním."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="8142847782708562793">"Ak chcete použiť túto funkciu, potiahnite troma prstami z dolnej časti obrazovky nahor.\n\nFunkcie prepnete potiahnutím troma prstami smerom nahor a pridržaním."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"Ak chcete použiť funkciu dostupnosti, potiahnite dvoma prstami z dolnej časti obrazovky nahor.\n\nFunkcie prepnete potiahnutím dvoma prstami smerom nahor a pridržaním."</string>
@@ -2107,8 +2108,8 @@
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Dobre"</string>
     <string name="accessibility_tutorial_dialog_link_button" msgid="6797349445794031781">"Nastavenia tlačidla"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"<xliff:g id="SERVICE">%1$s</xliff:g> – skratka"</string>
-    <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Tlačidlo dostupnosti"</string>
-    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"Gesto dostupnosti"</string>
+    <string name="accessibility_shortcut_edit_summary_software" msgid="48978719406821294">"tlačidlo dostupnosti"</string>
+    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="7346399253904683940">"gesto dostupnosti"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Potiahnutie dvoma prstami nahor"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Potiahnite troma prstami nahor"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"Klepnutie na tlačidlo dostupnosti"</string>
@@ -2118,6 +2119,9 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Potiahnite troma prstami z dolnej časti obrazovky nahor.\n\nFunkcie prepnete potiahnutím troma prstami smerom nahor a pridržaním."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="4459254227203203324"><annotation id="link">"Ďalšie možnosti"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"Ďalšie informácie o funkcii <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"Rýchle nastavenia"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="8726678553797015432">"Potiahnite nadol z hornej časti obrazovky"</string>
+    <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"Rýchle nastavenia"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Pridržanie tlačidiel hlasitosti"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"podržanie tlačidiel hlasitosti"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Pridržte obe tlačidlá hlasitosti"</string>
@@ -2155,7 +2159,8 @@
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Text s vysokým kontrastom"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Zmeniť farbu textu na čiernu alebo bielu, čim sa maximalizuje kontrast s pozadím"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"Maximalizujte kontrast textu"</string>
-    <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="5493999083693403489">"Zmeňte farbu textu na čiernu alebo bielu, aby lepšie vynikol na pozadí."</string>
+    <!-- no translation found for accessibility_toggle_maximize_text_contrast_preference_summary (8200408691846666900) -->
+    <skip />
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Auto. aktualiz. priblíž. obrazovky"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Aktualizovať priblíž. obrazov. pri prechodoch apl."</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Ukončiť hovor vypínačom"</string>
@@ -4200,6 +4205,8 @@
     <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"Na plochu prejdete potiahnutím z dolnej časti obrazovky smerom nahor. Aplikácie prepnete potiahnutím zdola nahor, podržaním a následným uvoľnením. Vrátite sa potiahnutím z ľavého alebo pravého okraja."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Navigácia troma tlačidlami"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"Na návrat späť, zobrazenie plochy a prepínanie aplikácií slúžia tlačidlá v dolnej časti obrazovky."</string>
+    <!-- no translation found for nav_tutorial_button_description (5791791794770463386) -->
+    <skip />
     <string name="keywords_system_navigation" msgid="3131782378486554934">"navigácia v systéme, navigácia dvoma tlačidlami, navigácia troma tlačidlami, navigácia gestami, potiahnutie"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Digitálny asistent"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Aktivovať asistenta potiahnutím"</string>
@@ -4644,12 +4651,9 @@
     <string name="primary_sim_texts_title" msgid="1287584042733097749">"Textové správy"</string>
     <string name="primary_sim_automatic_data_title" msgid="1265528923229642480">"Automatické prepínanie dát"</string>
     <string name="primary_sim_automatic_data_msg" msgid="1612203837010785203">"V závislosti od pokrytia a dostupnosti môžete používať dáta oboch SIM kariet"</string>
-    <!-- no translation found for sim_action_restart_dialog_title (3507413479633430120) -->
-    <skip />
-    <!-- no translation found for sim_action_restart_dialog_msg (4737611046767629774) -->
-    <skip />
-    <!-- no translation found for sim_action_restart_dialog_cancel (665560106686565624) -->
-    <skip />
+    <string name="sim_action_restart_dialog_title" msgid="3507413479633430120">"Reštartujte, ak chcete používať dve SIM karty"</string>
+    <string name="sim_action_restart_dialog_msg" msgid="4737611046767629774">"Ak chcete používať dve SIM karty naraz, reštartujte zariadenie a zapnite obe SIM karty"</string>
+    <string name="sim_action_restart_dialog_cancel" msgid="665560106686565624">"Používať iba <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="sim_onboarding_phoneNumber_data_only" msgid="8158409121949373662">"Iba dáta"</string>
     <string name="sim_onboarding_setup" msgid="5750393553605388463">"Nastaviť"</string>
     <string name="sim_onboarding_next" msgid="6415025179929475355">"Ďalej"</string>
@@ -4764,6 +4768,13 @@
     <string name="confirm_enable_4k_pages_text" msgid="6168921566226074524">"Po potvrdení sa zariadenie reštartuje."</string>
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"Jadro sa nepodarilo aktualizovať na kompatibilné jadro so 16 KB stránkami"</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Zmena sa uplatňuje"</string>
+    <string name="confirm_format_ext4_title" msgid="4453684705528818873">"Chcete zmeniť formát zariadenia na ext4?"</string>
+    <string name="confirm_format_ext4_text" msgid="8164677342487500794">"Možnosť 16K pre vývojárov je podporovaná so systémom súborov ext4. Zariadenie bude trvale vymazané a systém súborov bude po potvrdení zmenený na ext4."</string>
+    <string name="format_ext4_failure_toast" msgid="6904611547290793885">"Nepodarilo sa zmeniť formát ani trvale vymazať oddiel dát na ext4."</string>
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (6338135847153690912) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_text (236718973897424382) -->
+    <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"Obsluha hlásení chýb"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Určuje, ktorá aplikácia vo vašom zariadení obsluhuje odkaz na hlásenie chýb."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Osobné"</string>

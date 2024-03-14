@@ -73,10 +73,10 @@
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="631521133525979967">"ඔබේ දකුණු ශ්‍රවණාධාරක උපාංගය සම්බන්ධ කර ඇත.\n\nවම් එක යුගල කිරීමට, එය ක්‍රියාත්මක කර යුගල කිරීමට සූදානම් බව සහතික කර ගන්න."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"දකුණු කණ යුගල කරන්න"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"වම් කණ යුගල කරන්න"</string>
-    <string name="bluetooth_device_controls_general" msgid="1399214835599665488">"පවතින සියලු ශ්‍රවණ උපාංග සඳහා"</string>
-    <string name="bluetooth_device_controls_title" msgid="659009912978022189">"තවත් ශ්‍රවණ උපකරණ සැකසීම්"</string>
-    <string name="bluetooth_device_controls_summary" msgid="5387400497394163925">"කෙටිමං, සහ ටෙලිකොයිල් පාලන වැනි හරස් උපාංග සැකසීම් වෙනස් කරන්න"</string>
-    <string name="bluetooth_device_controls_specific" msgid="7706863288754077107">"මෙම උපාංගය සඳහා"</string>
+    <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"ශ්‍රවණ උපකරණ සැකසීම්"</string>
+    <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"කෙටිමඟ, ශ්‍රවණාධාරක අනුකූලත්වය"</string>
+    <string name="bluetooth_hearing_aids_presets" msgid="5429761844739722885">"පෙර සැකසීම්"</string>
+    <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"පෙර සැකසීම යාවත්කාලීන කළ නොහැකි විය"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"ශබ්ද ප්‍රතිදානය"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"ශ්‍රව්‍ය ප්‍රතිදානය පිළිබඳව"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"හඬ ඔබේ ශ්‍රවණ උපාංගයට හෝ දුරකථන ස්පීකරයට ගෙන යන්න"</string>
@@ -569,6 +569,12 @@
     <string name="privatespace_unlock_description" msgid="3177710543121916413">"ඔබේ පුද්ගලික අවකාශය අගුලු හරින්න"</string>
     <string name="privatespace_hide_off_summary" msgid="7227778747159633671">"ක්‍රියාවිරහිතයි"</string>
     <string name="privatespace_hide_on_summary" msgid="6136704537527640183">"ක්‍රියාත්මකයි"</string>
+    <!-- no translation found for private_space_hide_dialog_title (3192253150765516720) -->
+    <skip />
+    <!-- no translation found for private_space_hide_dialog_message (2006421821648157211) -->
+    <skip />
+    <!-- no translation found for private_space_hide_dialog_button (4157191429310035457) -->
+    <skip />
     <string name="private_space_category_system" msgid="1286843321867285700">"පද්ධතිය"</string>
     <string name="private_space_delete_title" msgid="636873505724100006">"පෞද්ගලික අවකාශය මකන්න"</string>
     <string name="private_space_delete_header" msgid="4594429153176776184">"පෞද්ගලික අවකාශය මකන්න ද?"</string>
@@ -828,8 +834,6 @@
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"යෙදුම විසන්ධි කරන්න"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"උපරිම සම්බන්ධිත බ්ලූටූත් ශ්‍රව්‍ය උපාංග"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"සම්බන්ධිත බ්ලූටූත් ශ්‍රව්‍ය උපාංග උපරිම ගණන තෝරන්න"</string>
-    <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"NFC අට්ටි නිදොසීම් ලොගය"</string>
-    <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"NFC අට්ටි ලොග මට්ටම වැඩි කරන්න"</string>
     <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"NFC වාචික විකුණුම්කරු නිදොස් කිරීමේ ලොගය"</string>
     <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"පෞද්ගලික තොරතුරු අඩංගු විය හැකි, දෝෂ වාර්තා තුළ අතිරේක උපාංග-විශේෂිත විකුණුම් ලොග ඇතුළත් කරන්න."</string>
     <string name="nfc_snoop_log_title" msgid="1576197495976952388">"NFC NCI නොපෙරන ලද ලොගය"</string>
@@ -1540,8 +1544,7 @@
     <string name="network_scorer_change_active_no_previous_dialog_text" msgid="680685773455072321">"ඔබගේ ජාල සම්බන්ධතා කළමනාකරණය කිරීමට <xliff:g id="NEW_APP">%s</xliff:g> භාවිතා කරන්නද?"</string>
     <string name="location_category_recent_location_requests" msgid="2205900488782832082">"මෑත කාලීන ස්ථාන ඉල්ලීම්"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"කාර්යාල පැතිකඩ සඳහා ස්ථානය"</string>
-    <!-- no translation found for private_profile_location_switch_title (4127119143109855789) -->
-    <skip />
+    <string name="private_profile_location_switch_title" msgid="4127119143109855789">"පුද්ගලික අවකාශය සඳහා වන ස්ථානය"</string>
     <string name="location_app_level_permissions" msgid="907206607664629759">"යෙදුම් ස්ථාන අවසර"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"ස්ථානය ක්‍රියාවිරහිතයි"</string>
     <string name="location_app_permission_summary_location_on" msgid="7552095451731948984">"{count,plural, =1{යෙදුම් {total}න් #කට ස්ථානයට ප්‍රවේශය ඇත}one{යෙදුම් {total}න් #කට ස්ථානයට ප්‍රවේශය ඇත}other{යෙදුම් {total}න් #කට ස්ථානයට ප්‍රවේශය ඇත}}"</string>
@@ -1933,13 +1936,10 @@
     <string name="modifier_keys_reset" msgid="551170906710422041">"යළි සකසන්න"</string>
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"සංස්කාරක යතුර තෝරා ගන්න"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"<xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g> සඳහා නව යතුරක් තෝරා ගන්න:"</string>
-    <!-- no translation found for ime_label_title (8994569521516807168) -->
-    <skip />
+    <string name="ime_label_title" msgid="8994569521516807168">"<xliff:g id="IME_LABEL">%s</xliff:g> පිරිසැලසුම"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"පෙරනිමි"</string>
-    <!-- no translation found for automatic_keyboard_layout_label (9138088156046198913) -->
-    <skip />
-    <!-- no translation found for user_selected_keyboard_layout_label (154742505924555156) -->
-    <skip />
+    <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"ස්වයංක්‍රීය: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
+    <string name="user_selected_keyboard_layout_label" msgid="154742505924555156">"පරිශීලක තෝරා ඇත: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"කථනය"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"දර්ශක වේගය"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"ක්‍රීඩා පාලකය"</string>
@@ -2019,6 +2019,8 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"බාගත් යෙදුම්"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"පරීක්ෂණාත්මක"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"විශේෂාංග සලකුණු කිරීම්"</string>
+    <string name="bt_stack_log_level" msgid="6527899271926969296">"බ්ලූටූත් ස්ටැක් ලොගය සබල කරන්න"</string>
+    <string name="bt_stack_log_level_summary" msgid="3769107713334448285">"බ්ලූටූත් ස්ටැක් ලොගය හි ලොග් මට්ටම වෙනස් කරන්න (මෙම සැකසීම වෙනස් කිරීමෙන් පසු බ්ලූටූත් ටොගල් කරන්න)"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"බ්ලූටූත් HCI ස්නූප් ලොග් පෙරහන"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="1319792184194176235">"පෙරහන් සකසන්න"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_footer" msgid="4158945851818483666">"වෙනස්කම් බලපැවැත්වීම සඳහා බ්ලූටූත් අබල කර සබල කරන්න"</string>
@@ -2061,12 +2063,9 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"කෙසේ වෙතත් ඉදිරියට යන්න"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"අවලංගු කරන්න"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"විශාලන සැකසීම්"</string>
-    <!-- no translation found for accessibility_magnification_one_finger_panning_title (4503949739883092989) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_on (9133125894310777539) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_off (8979146350396559805) -->
-    <skip />
+    <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"එක ඇඟිල්ලකින් පෑන් කිරීම"</string>
+    <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"එක ඇඟිල්ලක් ඇදීමෙන් විශාලන ප්‍රදේශය එහා මෙහා කරන්න."</string>
+    <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"ඇඟිලි දෙකක් ඇදීමෙන් විශාලන ප්‍රදේශය එහා මෙහා කරන්න."</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"කෙටිමඟ සමඟ විශාලන කරන්න"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"කෙටිමඟ සහ තට්ටු කිරීම් තුනක් සමඟ විශාලන කරන්න"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"<xliff:g id="SERVICE">%1$s</xliff:g> පිළිබඳ"</string>
@@ -2093,6 +2092,7 @@
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"විවෘත කිරීමට හඬ පරිමා යතුරු අල්ලාගෙන සිටින්න"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"විවෘත කිරීමට තිරය තෙවරක් තට්ටු කරන්න"</string>
     <string name="accessibility_tutorial_dialog_title_two_finger_double" msgid="3912970760484557646">"විවෘත කිරීමට ඇඟිලි දෙකකින් තිරය ද්විත්ව තට්ටු කරන්න"</string>
+    <string name="accessibility_tutorial_dialog_title_quick_setting" msgid="2905083277641794558">"ඉක්මන් සැකසීම් කෙටිමඟ"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"විවෘත කිරීමට ඉංගිතය භාවිත කරන්න"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="6800684770875867559">"ප්‍රවේශ්‍යතා ඉංගිතය භාවිත කරන්න"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"මෙම විශේෂාංගය භාවිත කිරීමට, ඔබේ තිරයේ පහළ ඇති <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> ප්‍රවේශ්‍යතා බොත්තම තට්ටු කරන්න.\n\nවිශේෂාංග අතර මාරු වීමට, ප්‍රවේශ්‍යතා බොත්තම ස්පර්ශ කර අල්ලාගෙන සිටින්න."</string>
@@ -2100,6 +2100,7 @@
     <string name="accessibility_tutorial_dialog_message_volume" msgid="5033080515460519183">"මෙම විශේෂාංගය භාවිත කිරීමට, හඬ පරිමා යතුරු දෙකම ඔබා අල්ලාගෙන සිටින්න"</string>
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"විශාලනය ආරම්භ කිරීමට සහ නතර කිරීමට, ඔබේ තිරයේ ඕනෑම තැනක තෙවරක් තට්ටු කරන්න."</string>
     <string name="accessibility_tutorial_dialog_message_two_finger_triple" msgid="860548190334486449">"විශාලනය ආරම්භ කිරීමට සහ නැවැත්වීමට, ඇඟිලි දෙකකින් ඔබේ තිරයේ ඕනෑම තැනක ද්විත්ව තට්ටු කරන්න."</string>
+    <string name="accessibility_tutorial_dialog_message_quick_setting" msgid="2272748015553891860">"මෙම විශේෂාංගය භාවිතය සඳහා, ඔබේ තිරයෙහි ඉහළ සිට පහළට ස්වයිප් කරන්න."</string>
     <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"මෙම විශේෂාංගය භාවිත කිරීමට, ඇඟිලි 2කින් තිරයේ පහළ සිට ඉහළට ස්වයිප් කරන්න.\n\nවිශේෂාංග අතර මාරු වීමට, ඇඟිලි 2කින් ඉහළට ස්වයිප් කර අල්ලාගෙන සිටින්න."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="8142847782708562793">"මෙම විශේෂාංගය භාවිත කිරීමට, ඇඟිලි 3කින් තිරයේ පහළ සිට ඉහළට ස්වයිප් කරන්න.\n\nවිශේෂාංග අතර මාරු වීමට, ඇඟිලි 3කින් ඉහළට ස්වයිප් කර අල්ලාගෙන සිටින්න."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"ප්‍රවේශ්‍යතා විශේෂාංගයක් භාවිත කිරීමට, ඇඟිලි 2කින් තිරයේ පහළ සිට ඉහළට ස්වයිප් කරන්න.\n\nවිශේෂාංග අතර මාරු වීමට, ඇඟිලි 2කින් ඉහළට ස්වයිප් කර අල්ලාගෙන සිටින්න."</string>
@@ -2107,8 +2108,8 @@
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"තේරුණා"</string>
     <string name="accessibility_tutorial_dialog_link_button" msgid="6797349445794031781">"බොත්තම් සැකසීම්"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"<xliff:g id="SERVICE">%1$s</xliff:g> කෙටිමඟ"</string>
-    <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"ප්‍රවේශ්‍යතා බොත්තම"</string>
-    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"ප්‍රවේශ්‍යතා ඉංගිතය"</string>
+    <string name="accessibility_shortcut_edit_summary_software" msgid="48978719406821294">"ප්‍රවේශ්‍යතා බොත්තම"</string>
+    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="7346399253904683940">"ප්‍රවේශ්‍යතා ඉංගිතය"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"ඇඟිලි 2කින් ඉහළට ස්වයිප් කරන්න"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"ඇඟිලි 3කින් ඉහළට ස්වයිප් කරන්න"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"ප්‍රවේශ්‍යතා බොත්තම තට්ටු කරන්න"</string>
@@ -2118,6 +2119,9 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"ඇඟිලි 3කින් තිරයේ පහළ සිට ඉහළට ස්වයිප් කරන්න.\n\nවිශේෂාංග අතර මාරු වීමට, ඇඟිලි 3කින් ඉහළට ස්වයිප් කර අල්ලාගෙන සිටින්න."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="4459254227203203324"><annotation id="link">"තව විකල්ප"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"<xliff:g id="SERVICE">%1$s</xliff:g> ගැන තව දැන ගන්න"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"ඉක්මන් සැකසීම්"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="8726678553797015432">"ඔබේ තිරයෙහි ඉහළ සිට පහළට ස්වයිප් කරන්න"</string>
+    <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"ඉක්මන් සැකසීම්"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"හඬ පරිමා යතුරු අල්ලාගන්න"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"හඬ පරිමා යතුරු අල්ලාගන්න"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"හඬ පරිමා යතුරු දෙකම ඔබා අල්ලාගෙන සිටින්න"</string>
@@ -2155,7 +2159,8 @@
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"ඉහළම වෙනසක් ඇති පෙළ"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"පෙළ වර්ණය කළු හෝ සුදු ලෙස වෙනස් කරන්න. පසුබිම සමඟ වෙනස උපරිම කරයි."</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"පෙළ අසමානතාව උපරිම කරන්න"</string>
-    <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="5493999083693403489">"පසුබිම සමග අසමානතාව වැඩි කිරීමට පෙළ වර්ණය කළු හෝ සුදු ලෙස වෙනස් කරන්න."</string>
+    <!-- no translation found for accessibility_toggle_maximize_text_contrast_preference_summary (8200408691846666900) -->
+    <skip />
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"තිර විශාලනය ස්වයංක්‍රීයව යාවත්කාලීන කරන්න"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"යෙදුම් සංක්‍රමණයේදී තිර විශාලනය යාවත්කාලීන කරන්න"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"බල බොත්තම ඇමතුම අවසන් කරයි"</string>
@@ -4200,6 +4205,8 @@
     <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"නිවසට යාම සඳහා, තිරයෙහි පහළින් උඩට ස්වයිප් කරන්න. යෙදුම් මාරු කිරීම සඳහා, පහළින් උඩට ස්වයිප් කර, අල්ලා සිට, පසුව මුදා හරින්න. ආපසු යාම සඳහා, වම් හෝ දකුණු දාරයෙන් ස්වයිප් කරන්න."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"3-බොත්තම් සංචලනය"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"ඔබේ තිරයේ පහළින් ඇති බොත්තම් මඟින් ආපසු යාම, මුල් පිටුව, සහ යෙදුම් මාරු කිරීම."</string>
+    <!-- no translation found for nav_tutorial_button_description (5791791794770463386) -->
+    <skip />
     <string name="keywords_system_navigation" msgid="3131782378486554934">"පද්ධති සංචාලනය, බොත්තම්-2 සංචාලනය, බොත්තම්-3 සංචාලනය, අභින සංචාලනය, ස්වයිප් කිරීම"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"ඩිජිටල් සහායක"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"සහායක ඉල්ලීමට ස්වයිප් කරන්න"</string>
@@ -4644,12 +4651,9 @@
     <string name="primary_sim_texts_title" msgid="1287584042733097749">"පෙළ"</string>
     <string name="primary_sim_automatic_data_title" msgid="1265528923229642480">"ස්වයංක්‍රීය දත්ත මාරු කිරීම"</string>
     <string name="primary_sim_automatic_data_msg" msgid="1612203837010785203">"ආවරණය සහ ලබා ගැනීමේ හැකියාව මත පදනම්ව කිනම් හෝ SIM එකකින් දත්ත භාවිතා කරන්න"</string>
-    <!-- no translation found for sim_action_restart_dialog_title (3507413479633430120) -->
-    <skip />
-    <!-- no translation found for sim_action_restart_dialog_msg (4737611046767629774) -->
-    <skip />
-    <!-- no translation found for sim_action_restart_dialog_cancel (665560106686565624) -->
-    <skip />
+    <string name="sim_action_restart_dialog_title" msgid="3507413479633430120">"SIM 2ක් භාවිතා කිරීමට යළි අරඹන්න"</string>
+    <string name="sim_action_restart_dialog_msg" msgid="4737611046767629774">"එකවර SIM 2ක් භාවිතා කිරීමට, ඔබේ උපාංගය යළි අරඹා, පසුව SIM දෙකම ක්‍රියාත්මක කරන්න"</string>
+    <string name="sim_action_restart_dialog_cancel" msgid="665560106686565624">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> පමණක් භාවිතා කරන්න"</string>
     <string name="sim_onboarding_phoneNumber_data_only" msgid="8158409121949373662">"දත්ත පමණි"</string>
     <string name="sim_onboarding_setup" msgid="5750393553605388463">"පිහිටුවන්න"</string>
     <string name="sim_onboarding_next" msgid="6415025179929475355">"මීළඟ"</string>
@@ -4764,6 +4768,13 @@
     <string name="confirm_enable_4k_pages_text" msgid="6168921566226074524">"තහවුරු කිරීමෙන් පසු උපාංගය නැවත පණ ගැන්වෙනු ඇත."</string>
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"කර්නලය 16KB පිටු ගැළපෙන කර්නලයට යාවත්කාලීන කිරීමට අසමත් විය."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"වෙනස යෙදීම"</string>
+    <string name="confirm_format_ext4_title" msgid="4453684705528818873">"උපාංගය ext4 වෙත යළි ෆෝමැට් කරන්න ද?"</string>
+    <string name="confirm_format_ext4_text" msgid="8164677342487500794">"16K සංවර්ධක විකල්පය ext4 ගොනු පද්ධතිය සමග සහාය දක්වයි. තහවුරු කිරීමෙන් පසු උපාංගය පිස දමනු ඇති අතර ගොනු පද්ධතිය ext4 වෙත වෙනස් කරනු ඇත."</string>
+    <string name="format_ext4_failure_toast" msgid="6904611547290793885">"ext4 වෙත දත්ත කොටස යළි ෆෝමැට් කිරීම සහ පිස දැමීම අසමත් විය."</string>
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (6338135847153690912) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_text (236718973897424382) -->
+    <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"දෝෂ වාර්තා හසුරුවනය"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"ඔබේ උපාංගයේ දෝෂ වර්තා කෙටිමග හසුරුවන්නේ කුමන යෙදුමදැයි තීරණය කරයි."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"පුද්ගලික"</string>

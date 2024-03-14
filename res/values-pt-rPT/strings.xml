@@ -73,10 +73,10 @@
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="631521133525979967">"O seu dispositivo auditivo direito está ligado.\n\nPara sincronizar o esquerdo, certifique-se de que está ativado e pronto a sincronizar."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"Sincr. ouv. direito"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"Sincr. ouv. esquerdo"</string>
-    <string name="bluetooth_device_controls_general" msgid="1399214835599665488">"Para todos os dispositivos auditivos disponíveis"</string>
-    <string name="bluetooth_device_controls_title" msgid="659009912978022189">"Mais definições do dispositivo auditivo"</string>
-    <string name="bluetooth_device_controls_summary" msgid="5387400497394163925">"Altere as definições entre dispositivos, como os controlos de atalhos e da telebobina"</string>
-    <string name="bluetooth_device_controls_specific" msgid="7706863288754077107">"Para este dispositivo"</string>
+    <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Definições do dispositivo auditivo"</string>
+    <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Atalho, compatibilidade com aparelhos auditivos"</string>
+    <string name="bluetooth_hearing_aids_presets" msgid="5429761844739722885">"Predefinições"</string>
+    <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Não foi possível atualizar a predefinição"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Saída de áudio"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Acerca da saída de áudio"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Encaminhe sons para o seu dispositivo auditivo ou altifalante do telemóvel"</string>
@@ -133,10 +133,10 @@
     <string name="previous_connected_see_all" msgid="7759413145713251328">"Ver todos"</string>
     <string name="connected_device_fast_pair_device_see_all" msgid="4898279230458128620">"Veja tudo"</string>
     <string name="stylus_device_details_title" msgid="7618295136015480864">"Caneta stylus"</string>
-    <string name="stylus_default_notes_app" msgid="4165657465911764628">"Botão da caneta stylus premido"</string>
+    <string name="stylus_default_notes_app" msgid="4165657465911764628">"Premir botão traseiro"</string>
     <string name="stylus_default_notes_summary_work" msgid="4554643411627934223">"<xliff:g id="APP_NAME">%s</xliff:g> (perfil de trabalho)"</string>
     <string name="stylus_textfield_handwriting" msgid="2363579035338976327">"Escrever em campos de texto"</string>
-    <string name="stylus_ignore_button" msgid="7734540973145241391">"Ignorar todos os botões premidos com a caneta stylus"</string>
+    <string name="stylus_ignore_button" msgid="7734540973145241391">"Ignorar pressões do botão da caneta stylus"</string>
     <string name="stylus_connected_devices_title" msgid="2823967577941359812">"Caneta stylus"</string>
     <string name="audio_streams_empty" msgid="8803517701437394982">"Nenhuma stream de áudio próxima."</string>
     <string name="date_and_time" msgid="1788358029823431692">"Data e hora"</string>
@@ -569,6 +569,12 @@
     <string name="privatespace_unlock_description" msgid="3177710543121916413">"Desbloqueie o seu espaço privado"</string>
     <string name="privatespace_hide_off_summary" msgid="7227778747159633671">"Desativado"</string>
     <string name="privatespace_hide_on_summary" msgid="6136704537527640183">"Ativado"</string>
+    <!-- no translation found for private_space_hide_dialog_title (3192253150765516720) -->
+    <skip />
+    <!-- no translation found for private_space_hide_dialog_message (2006421821648157211) -->
+    <skip />
+    <!-- no translation found for private_space_hide_dialog_button (4157191429310035457) -->
+    <skip />
     <string name="private_space_category_system" msgid="1286843321867285700">"Sistema"</string>
     <string name="private_space_delete_title" msgid="636873505724100006">"Eliminar espaço privado"</string>
     <string name="private_space_delete_header" msgid="4594429153176776184">"Eliminar o espaço privado?"</string>
@@ -828,8 +834,6 @@
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Desassociar app"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Máximo de dispositivos de áudio Bluetooth associados"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Selecione o número máximo de dispositivos de áudio Bluetooth associados."</string>
-    <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"Registo de depuração de pilha NFC"</string>
-    <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"Aumente o nível de registo de pilha NFC"</string>
     <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"Registo verboso de depuração de fornecedores de NFC"</string>
     <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"Inclua registos adicionais de fornecedores específicos de dispositivos em relatórios de erros, que podem conter informações privadas."</string>
     <string name="nfc_snoop_log_title" msgid="1576197495976952388">"Registo não filtrado NCI de NFC"</string>
@@ -1540,8 +1544,7 @@
     <string name="network_scorer_change_active_no_previous_dialog_text" msgid="680685773455072321">"Usar <xliff:g id="NEW_APP">%s</xliff:g> para gerir as ligações de rede?"</string>
     <string name="location_category_recent_location_requests" msgid="2205900488782832082">"Pedidos de localização recentes"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Local. para perfil de trabalho"</string>
-    <!-- no translation found for private_profile_location_switch_title (4127119143109855789) -->
-    <skip />
+    <string name="private_profile_location_switch_title" msgid="4127119143109855789">"Localização do espaço privado"</string>
     <string name="location_app_level_permissions" msgid="907206607664629759">"Autorizações de localização das apps"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"A localização está desativada"</string>
     <string name="location_app_permission_summary_location_on" msgid="7552095451731948984">"{count,plural, =1{# de {total} apps tem acesso à localização}other{# de {total} apps têm acesso à localização}}"</string>
@@ -1933,13 +1936,10 @@
     <string name="modifier_keys_reset" msgid="551170906710422041">"Repor"</string>
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"Escolha uma tecla de modificação"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Escolha uma nova tecla para <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>:"</string>
-    <!-- no translation found for ime_label_title (8994569521516807168) -->
-    <skip />
+    <string name="ime_label_title" msgid="8994569521516807168">"Esquema do <xliff:g id="IME_LABEL">%s</xliff:g>"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Predefinição"</string>
-    <!-- no translation found for automatic_keyboard_layout_label (9138088156046198913) -->
-    <skip />
-    <!-- no translation found for user_selected_keyboard_layout_label (154742505924555156) -->
-    <skip />
+    <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"Automático: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
+    <string name="user_selected_keyboard_layout_label" msgid="154742505924555156">"Utilizador selecionado: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"Voz"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"Velocidade do ponteiro"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Controlador de Jogos"</string>
@@ -2019,6 +2019,8 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Apps transferidas"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Experimental"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Sinalizadores de funcionalidades"</string>
+    <string name="bt_stack_log_level" msgid="6527899271926969296">"Ativar registo de pilha do Bluetooth"</string>
+    <string name="bt_stack_log_level_summary" msgid="3769107713334448285">"Altere o nível de registo de pilha do Bluetooth (ative/desative o Bluetooth após alterar definição)"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"Filtro de registo de monitorização Bluetooth HCI"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="1319792184194176235">"Defina os filtros"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_footer" msgid="4158945851818483666">"Desative ou ative o Bluetooth para que as alterações entrem em vigor"</string>
@@ -2061,12 +2063,9 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Continuar mesmo assim"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Cancelar"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Definições de ampliação"</string>
-    <!-- no translation found for accessibility_magnification_one_finger_panning_title (4503949739883092989) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_on (9133125894310777539) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_off (8979146350396559805) -->
-    <skip />
+    <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"Deslocação com um dedo"</string>
+    <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"Mova a área de ampliação arrastando um dedo."</string>
+    <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"Mova a área de ampliação arrastando dois dedos."</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Amplie com um atalho"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Amplie com um atalho e três toques"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"Acerca de <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
@@ -2093,6 +2092,7 @@
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Mantenha premidas as teclas de volume para abrir"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Toque três vezes no ecrã para abrir"</string>
     <string name="accessibility_tutorial_dialog_title_two_finger_double" msgid="3912970760484557646">"Toque duas vezes com dois dedos no ecrã para abrir"</string>
+    <string name="accessibility_tutorial_dialog_title_quick_setting" msgid="2905083277641794558">"Atalho das Definições rápidas"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Utilize gestos para abrir"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="6800684770875867559">"Usar gesto de acessibilidade"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"Para usar esta funcionalidade, toque no botão Acessibilidade <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> na parte inferior do seu ecrã.\n\nPara alternar entre funcionalidades, toque sem soltar no botão Acessibilidade."</string>
@@ -2100,6 +2100,7 @@
     <string name="accessibility_tutorial_dialog_message_volume" msgid="5033080515460519183">"Para usar esta funcionalidade, prima sem soltar as teclas de volume."</string>
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"Para iniciar e parar a ampliação, toque três vezes em qualquer parte do ecrã."</string>
     <string name="accessibility_tutorial_dialog_message_two_finger_triple" msgid="860548190334486449">"Para iniciar e parar a ampliação, toque duas vezes em qualquer parte do ecrã com dois dedos."</string>
+    <string name="accessibility_tutorial_dialog_message_quick_setting" msgid="2272748015553891860">"Para usar esta funcionalidade, deslize rapidamente para baixo a partir da parte superior do ecrã."</string>
     <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"Para usar esta funcionalidade, deslize rapidamente com dois dedos para cima a partir da parte inferior do ecrã.\n\nPara alternar entre funcionalidades, deslize rapidamente com dois dedos para cima sem soltar."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="8142847782708562793">"Para usar esta funcionalidade, deslize rapidamente com três dedos para cima a partir da parte inferior do ecrã.\n\nPara alternar entre funcionalidades, deslize rapidamente com três dedos para cima sem soltar."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"Para utilizar uma funcionalidade de acessibilidade, deslize rapidamente com dois dedos para cima a partir da parte inferior do ecrã.\n\nPara alternar entre funcionalidades, deslize rapidamente com dois dedos para cima sem soltar."</string>
@@ -2107,8 +2108,8 @@
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"OK"</string>
     <string name="accessibility_tutorial_dialog_link_button" msgid="6797349445794031781">"Definições do botão"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Atalho para <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
-    <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Botão Acessibilidade"</string>
-    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"Gesto de acessibilidade"</string>
+    <string name="accessibility_shortcut_edit_summary_software" msgid="48978719406821294">"botão Acessibilidade"</string>
+    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="7346399253904683940">"gesto de acessibilidade"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Deslize rapidamente para cima com 2 dedos"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Deslize rapidamente para cima com 3 dedos"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"Tocar no botão Acessibilidade"</string>
@@ -2118,6 +2119,9 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Deslize rapidamente com três dedos para cima a partir da parte inferior do ecrã.\n\nPara alternar entre funcionalidades, deslize rapidamente com três dedos para cima sem soltar."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="4459254227203203324"><annotation id="link">"Mais opções"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"Saiba mais sobre <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"Definições rápidas"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="8726678553797015432">"Deslize rapidamente para baixo a partir da parte superior do ecrã"</string>
+    <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"Definições rápidas"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Manter premidas as teclas de volume"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"mantenha premidas as teclas de volume"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Prima sem soltar ambas as teclas de volume"</string>
@@ -2155,7 +2159,8 @@
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Texto de alto contraste"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Altere a cor do texto para preto ou branco. Maximiza o contraste com o fundo."</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"Maximizar contraste de texto"</string>
-    <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="5493999083693403489">"Altere a cor do texto para preto ou branco de forma a aumentar o contraste com o fundo."</string>
+    <!-- no translation found for accessibility_toggle_maximize_text_contrast_preference_summary (8200408691846666900) -->
+    <skip />
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Atualiz. auto da ampliação do ecrã"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Atualizar ampliação do ecrã em transições de aplic"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Botão de ligar termina chamada"</string>
@@ -4200,6 +4205,8 @@
     <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"Para aceder à página inicial, deslize rapidamente para cima a partir da parte inferior do ecrã. Para mudar de app, deslize rapidamente para cima a partir da parte inferior do ecrã sem soltar e, em seguida, solte. Para retroceder, deslize rapidamente a partir da extremidade esquerda ou direita do ecrã."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Navegação com 3 botões"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"Retroceda, aceda à página inicial e mude de app com os botões na parte inferior do ecrã."</string>
+    <!-- no translation found for nav_tutorial_button_description (5791791794770463386) -->
+    <skip />
     <string name="keywords_system_navigation" msgid="3131782378486554934">"navegação no sistema, navegação com 2 botões, navegação com 3 botões, navegação por gestos, deslizar rapidamente"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Assistente digital"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Deslizar rapidamente para invocar assistente"</string>
@@ -4644,12 +4651,9 @@
     <string name="primary_sim_texts_title" msgid="1287584042733097749">"Mensagens de texto"</string>
     <string name="primary_sim_automatic_data_title" msgid="1265528923229642480">"Comutação automática de dados"</string>
     <string name="primary_sim_automatic_data_msg" msgid="1612203837010785203">"Use dados de qualquer um dos SIMs, consoante a cobertura e a disponibilidade"</string>
-    <!-- no translation found for sim_action_restart_dialog_title (3507413479633430120) -->
-    <skip />
-    <!-- no translation found for sim_action_restart_dialog_msg (4737611046767629774) -->
-    <skip />
-    <!-- no translation found for sim_action_restart_dialog_cancel (665560106686565624) -->
-    <skip />
+    <string name="sim_action_restart_dialog_title" msgid="3507413479633430120">"Reinicie para usar 2 SIMs"</string>
+    <string name="sim_action_restart_dialog_msg" msgid="4737611046767629774">"Para usar os 2 SIMs em simultâneo, reinicie o dispositivo e, em seguida, ative ambos os SIMs"</string>
+    <string name="sim_action_restart_dialog_cancel" msgid="665560106686565624">"Usar apenas <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="sim_onboarding_phoneNumber_data_only" msgid="8158409121949373662">"Apenas de dados"</string>
     <string name="sim_onboarding_setup" msgid="5750393553605388463">"Configurar"</string>
     <string name="sim_onboarding_next" msgid="6415025179929475355">"Seguinte"</string>
@@ -4764,6 +4768,13 @@
     <string name="confirm_enable_4k_pages_text" msgid="6168921566226074524">"O dispositivo vai ser reiniciado após a confirmação."</string>
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"Falha ao fazer a atualização para o kernel compatível com páginas de 16 KB."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"A aplicar a alteração"</string>
+    <string name="confirm_format_ext4_title" msgid="4453684705528818873">"Reformatar o dispositivo para ext4?"</string>
+    <string name="confirm_format_ext4_text" msgid="8164677342487500794">"A opção de programador 16K é suportada com o sistema de ficheiros ext4. O dispositivo vai ser limpo e o sistema de ficheiros vai ser alterado para ext4 após a confirmação."</string>
+    <string name="format_ext4_failure_toast" msgid="6904611547290793885">"Falha ao reformatar e limpar a partição de dados para ext4."</string>
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (6338135847153690912) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_text (236718973897424382) -->
+    <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"Controlador do Relatório de erro"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Determina que aplicação processa o atalho para Relatório de erro no seu dispositivo."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Pessoal"</string>

@@ -73,10 +73,10 @@
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="631521133525979967">"Peranti pendengaran kanan anda disambungkan.\n\nUntuk menggandingkan peranti pendengaran kiri, pastikan peranti dihidupkan dan sedia untuk digandingkan."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"Gandingkan telinga kanan"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"Gandingkan telinga kiri"</string>
-    <string name="bluetooth_device_controls_general" msgid="1399214835599665488">"Untuk semua peranti pendengaran yang tersedia"</string>
-    <string name="bluetooth_device_controls_title" msgid="659009912978022189">"Lagi tetapan peranti pendengaran"</string>
-    <string name="bluetooth_device_controls_summary" msgid="5387400497394163925">"Ubah tetapan silang peranti seperti pintasan dan kawalan telegegelung"</string>
-    <string name="bluetooth_device_controls_specific" msgid="7706863288754077107">"Untuk peranti ini"</string>
+    <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Tetapan peranti pendengaran"</string>
+    <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Pintasan, keserasian alat bantu pendengaran"</string>
+    <string name="bluetooth_hearing_aids_presets" msgid="5429761844739722885">"Pratetapan"</string>
+    <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Tidak dapat mengemaskinikan pratetapan"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Output audio"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Perihal output audio"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Menghalakan bunyi kepada peranti pendengaran atau pembesar suara telefon anda"</string>
@@ -569,6 +569,12 @@
     <string name="privatespace_unlock_description" msgid="3177710543121916413">"Buka kunci ruang peribadi anda"</string>
     <string name="privatespace_hide_off_summary" msgid="7227778747159633671">"Mati"</string>
     <string name="privatespace_hide_on_summary" msgid="6136704537527640183">"Hidup"</string>
+    <!-- no translation found for private_space_hide_dialog_title (3192253150765516720) -->
+    <skip />
+    <!-- no translation found for private_space_hide_dialog_message (2006421821648157211) -->
+    <skip />
+    <!-- no translation found for private_space_hide_dialog_button (4157191429310035457) -->
+    <skip />
     <string name="private_space_category_system" msgid="1286843321867285700">"Sistem"</string>
     <string name="private_space_delete_title" msgid="636873505724100006">"Padamkan ruang peribadi"</string>
     <string name="private_space_delete_header" msgid="4594429153176776184">"Padamkan ruang privasi?"</string>
@@ -828,8 +834,6 @@
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Putuskan sambungan apl"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Bilangan maksimum peranti audio Bluetooth yang disambungkan"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Pilih bilangan maksimum peranti audio Bluetooth yang disambungkan"</string>
-    <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"Log nyahpepijat tindanan NFC"</string>
-    <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"Tingkatkan tahap pengelogan tindanan NFC"</string>
     <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"Log nyahpepijat vendor berjela NFC"</string>
     <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"Sertakan log vendor khusus peranti tambahan dalam laporan pepijat, yang mungkin mengandungi maklumat peribadi."</string>
     <string name="nfc_snoop_log_title" msgid="1576197495976952388">"Log NFC NCI yang tidak ditapis"</string>
@@ -1540,8 +1544,7 @@
     <string name="network_scorer_change_active_no_previous_dialog_text" msgid="680685773455072321">"Gunakan <xliff:g id="NEW_APP">%s</xliff:g> untuk mengurus sambungan rangkaian anda?"</string>
     <string name="location_category_recent_location_requests" msgid="2205900488782832082">"Permintaan lokasi terbaharu"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Lokasi untuk profil kerja"</string>
-    <!-- no translation found for private_profile_location_switch_title (4127119143109855789) -->
-    <skip />
+    <string name="private_profile_location_switch_title" msgid="4127119143109855789">"Lokasi untuk ruang privasi"</string>
     <string name="location_app_level_permissions" msgid="907206607664629759">"Kebenaran lokasi apl"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"Lokasi dimatikan"</string>
     <string name="location_app_permission_summary_location_on" msgid="7552095451731948984">"{count,plural, =1{# daripada {total} apl mempunyai akses kepada lokasi}other{# daripada {total} apl mempunyai akses kepada lokasi}}"</string>
@@ -2016,6 +2019,8 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Apl yang dimuat turun"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Percubaan"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Bendera ciri"</string>
+    <string name="bt_stack_log_level" msgid="6527899271926969296">"Dayakan log tindanan Bluetooth"</string>
+    <string name="bt_stack_log_level_summary" msgid="3769107713334448285">"Ubah tahap log Pengelogan Tindanan Bluetooth (Togol Bluetooth selepas mengubah tetapan ini)"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"Penapisan log intip HCI Bluetooth"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="1319792184194176235">"Tetapkan penapis"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_footer" msgid="4158945851818483666">"Lumpuhkan dan dayakan Bluetooth supaya perubahan dapat dilaksanakan"</string>
@@ -2058,12 +2063,9 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Teruskan juga"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Batal"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Tetapan pembesaran"</string>
-    <!-- no translation found for accessibility_magnification_one_finger_panning_title (4503949739883092989) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_on (9133125894310777539) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_off (8979146350396559805) -->
-    <skip />
+    <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"Penyorotan satu jari"</string>
+    <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"Alihkan kawasan pembesaran dengan menyeret satu jari."</string>
+    <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"Alihkan kawasan pembesaran dengan menyeret dua jari."</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Besarkan menggunakan pintasan"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Besarkan menggunakan pintasan &amp; tiga ketikan"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"Perihal <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
@@ -2090,6 +2092,7 @@
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Tahan kekunci kelantangan untuk buka"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Ketik skrin tiga kali untuk buka"</string>
     <string name="accessibility_tutorial_dialog_title_two_finger_double" msgid="3912970760484557646">"Ketik skrin dua kali menggunakan dua jari untuk membuka"</string>
+    <string name="accessibility_tutorial_dialog_title_quick_setting" msgid="2905083277641794558">"Pintasan Tetapan Pantas"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Gunakan gerak isyarat untuk buka"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="6800684770875867559">"Gunakan gerak isyarat kebolehaksesan"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"Untuk menggunakan ciri ini, ketik butang kebolehaksesan <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> di bahagian bawah skrin anda.\n\nUntuk menukar antara ciri, sentuh &amp; tahan butang kebolehaksesan."</string>
@@ -2097,6 +2100,7 @@
     <string name="accessibility_tutorial_dialog_message_volume" msgid="5033080515460519183">"Untuk menggunakan ciri ini, tekan &amp; tahan kedua-dua kekunci kelantangan."</string>
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"Untuk memulakan dan menghentikan pembesaran, ketik tiga kali di mana-mana bahagian skrin anda."</string>
     <string name="accessibility_tutorial_dialog_message_two_finger_triple" msgid="860548190334486449">"Untuk memulakan dan menghentikan pembesaran, ketik dua kali pada skrin anda menggunakan dua jari."</string>
+    <string name="accessibility_tutorial_dialog_message_quick_setting" msgid="2272748015553891860">"Untuk menggunakan ciri ini, leret ke bawah daripada bahagian atas skrin anda."</string>
     <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"Untuk menggunakan ciri ini, leret ke atas dari bahagian bawah skrin dengan menggunakan 2 jari.\n\nUntuk menukar antara ciri, leret ke atas dengan menggunakan 2 jari dan tahan."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="8142847782708562793">"Untuk menggunakan ciri ini, leret ke atas dari bahagian bawah skrin dengan menggunakan 3 jari.\n\nUntuk menukar antara ciri, leret ke atas dengan menggunakan 3 jari dan tahan."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"Untuk menggunakan ciri kebolehcapaian, leret ke atas dari bahagian bawah skrin dengan menggunakan 2 jari.\n\nUntuk menukar antara ciri, leret ke atas dengan menggunakan 2 hari dan tahan."</string>
@@ -2104,8 +2108,8 @@
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"OK"</string>
     <string name="accessibility_tutorial_dialog_link_button" msgid="6797349445794031781">"Tetapan butang"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Pintasan <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
-    <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Butang kebolehaksesan"</string>
-    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"Gerak isyarat kebolehaksesan"</string>
+    <string name="accessibility_shortcut_edit_summary_software" msgid="48978719406821294">"butang kebolehaksesan"</string>
+    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="7346399253904683940">"gerak isyarat kebolehaksesan"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Leret ke atas dengan 2 jari"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Leret ke atas dengan 3 jari"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"Ketik butang kebolehaksesan"</string>
@@ -2115,6 +2119,9 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Leret ke atas dari bahagian bawah skrin menggunakan 3 jari.\n\nUntuk beralih antara ciri, leret ke atas menggunakan 3 jari dan tahan."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="4459254227203203324"><annotation id="link">"Lagi pilihan"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"Ketahui lebih lanjut tentang <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"Tetapan Pantas"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="8726678553797015432">"Leret ke bawah daripada bahagian atas skrin anda"</string>
+    <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"Tetapan Pantas"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Tahan kekunci kelantangan"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"tahan kekunci kelantangan"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Tekan &amp; tahan kedua-dua kekunci kelantangan"</string>
@@ -2152,7 +2159,8 @@
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Teks kontras tinggi"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Menukar warna teks kepada hitam atau putih. Memaksimumkan kontras dengan latar belakang."</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"Maksimumkan kontras teks"</string>
-    <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="5493999083693403489">"Ubah warna teks kepada hitam atau putih untuk meningkatkan kontras dengan latar."</string>
+    <!-- no translation found for accessibility_toggle_maximize_text_contrast_preference_summary (8200408691846666900) -->
+    <skip />
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Auto kemas kini pembesaran skrin"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Kemas kini pembesaran skrin pada peralihan apl"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Butang kuasa menamatkan panggilan"</string>
@@ -4197,6 +4205,8 @@
     <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"Untuk mengakses skrin utama, leret ke atas dari bahagian bawah skrin. Untuk beralih apl, leret ke atas dari bawah, tekan, kemudian lepaskan. Untuk kembali, leret dari sisi kiri atau kanan."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Navigasi 3 butang"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"Kembali, pergi ke Skrin Utama dan beralih antara apl menggunakan butang di bahagian bawah skrin anda."</string>
+    <!-- no translation found for nav_tutorial_button_description (5791791794770463386) -->
+    <skip />
     <string name="keywords_system_navigation" msgid="3131782378486554934">"navigasi sistem, navigasi 2 butang, navigasi 3 butang, navigasi gerak isyarat, leret"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Pembantu digital"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Leret untuk menggunakan pembantu"</string>
@@ -4641,12 +4651,9 @@
     <string name="primary_sim_texts_title" msgid="1287584042733097749">"Teks"</string>
     <string name="primary_sim_automatic_data_title" msgid="1265528923229642480">"Penukaran data automatik"</string>
     <string name="primary_sim_automatic_data_msg" msgid="1612203837010785203">"Penggunaan data daripada mana-mana SIM bergantung pada liputan dan ketersediaan"</string>
-    <!-- no translation found for sim_action_restart_dialog_title (3507413479633430120) -->
-    <skip />
-    <!-- no translation found for sim_action_restart_dialog_msg (4737611046767629774) -->
-    <skip />
-    <!-- no translation found for sim_action_restart_dialog_cancel (665560106686565624) -->
-    <skip />
+    <string name="sim_action_restart_dialog_title" msgid="3507413479633430120">"Mulakan semula untuk menggunakan 2 SIM"</string>
+    <string name="sim_action_restart_dialog_msg" msgid="4737611046767629774">"Untuk menggunakan 2 SIM serentak, mulakan semula peranti anda, kemudian hidupkan kedua-dua SIM"</string>
+    <string name="sim_action_restart_dialog_cancel" msgid="665560106686565624">"Gunakan <xliff:g id="CARRIER_NAME">%1$s</xliff:g> sahaja"</string>
     <string name="sim_onboarding_phoneNumber_data_only" msgid="8158409121949373662">"Data sahaja"</string>
     <string name="sim_onboarding_setup" msgid="5750393553605388463">"Sediakan"</string>
     <string name="sim_onboarding_next" msgid="6415025179929475355">"Seterusnya"</string>
@@ -4761,6 +4768,13 @@
     <string name="confirm_enable_4k_pages_text" msgid="6168921566226074524">"Peranti akan but semula selepas pengesahan."</string>
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"Gagal mengemaskinikan kernel kepada kernel serasi halaman 16KB."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Menggunakan perubahan"</string>
+    <string name="confirm_format_ext4_title" msgid="4453684705528818873">"Format semula peranti kepada ext4?"</string>
+    <string name="confirm_format_ext4_text" msgid="8164677342487500794">"16K pilihan pembangun disokong dengan sistem fail ext4. Peranti akan dihapuskan dan sistem fail akan ditukar kepada ext4 selepas pengesahan."</string>
+    <string name="format_ext4_failure_toast" msgid="6904611547290793885">"Gagal memformat semula dan menghapuskan pemetakan data kepada ext4."</string>
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (6338135847153690912) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_text (236718973897424382) -->
+    <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"Pengendali laporan pepijat"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Menentukan apl yang mengendalikan pintasan Laporan Pepijat pada peranti anda."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Peribadi"</string>

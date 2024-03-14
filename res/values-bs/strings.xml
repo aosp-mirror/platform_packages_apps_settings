@@ -73,10 +73,10 @@
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="631521133525979967">"Vaš desni slušni aparat je povezan.\n\nDa uparite lijevi, provjerite je li uključen i spreman za uparivanje."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"Upari desno uho"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"Upari lijevo uho"</string>
-    <string name="bluetooth_device_controls_general" msgid="1399214835599665488">"Za sve dostupne slušne aparate"</string>
-    <string name="bluetooth_device_controls_title" msgid="659009912978022189">"Više postavki slušnog aparata"</string>
-    <string name="bluetooth_device_controls_summary" msgid="5387400497394163925">"Promijenite postavke na više uređaja kao što su prečica i kontrole telezavojnica"</string>
-    <string name="bluetooth_device_controls_specific" msgid="7706863288754077107">"Za ovaj uređaj"</string>
+    <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Postavke slušnih pomagala"</string>
+    <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Prečac, kompatibilnost sa slušnim pomagalima"</string>
+    <string name="bluetooth_hearing_aids_presets" msgid="5429761844739722885">"Unaprijed definirane postavke"</string>
+    <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Ažuriranje unaprijed definiranih postavki nije uspjelo"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Izlaz zvuka"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Informacije o izlazu zvuka"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Usmjerite zvuk na slušni aparat ili zvučnik telefona"</string>
@@ -569,6 +569,12 @@
     <string name="privatespace_unlock_description" msgid="3177710543121916413">"Otključajte privatni prostor"</string>
     <string name="privatespace_hide_off_summary" msgid="7227778747159633671">"Isključeno"</string>
     <string name="privatespace_hide_on_summary" msgid="6136704537527640183">"Uključeno"</string>
+    <!-- no translation found for private_space_hide_dialog_title (3192253150765516720) -->
+    <skip />
+    <!-- no translation found for private_space_hide_dialog_message (2006421821648157211) -->
+    <skip />
+    <!-- no translation found for private_space_hide_dialog_button (4157191429310035457) -->
+    <skip />
     <string name="private_space_category_system" msgid="1286843321867285700">"Sistem"</string>
     <string name="private_space_delete_title" msgid="636873505724100006">"Izbriši privatni prostor"</string>
     <string name="private_space_delete_header" msgid="4594429153176776184">"Izbrisati privatni prostor?"</string>
@@ -622,7 +628,7 @@
     <string name="private_space_gaia_education_title" msgid="3787414895669666563">"Kreirajte Google račun da zaštitite privatnost podataka"</string>
     <string name="private_space_gaia_education_description" msgid="1592753570023264559">"Na sljedećem ekranu se možete prijaviti na račun da ga koristite s privatnim prostorom"</string>
     <string name="private_space_gaia_education_header" msgid="7835879839637613495"><b>"Kreirajte namjenski račun da spriječite pojavljivanje podataka izvan privatnog prostora, npr.:"</b></string>
-    <string name="private_space_gaia_education_bullet1" msgid="641701340908301992">"Sinhronizirajte slike, fajlove, e-poruke, kontakte, događaje u kalendaru i druge podatke"</string>
+    <string name="private_space_gaia_education_bullet1" msgid="641701340908301992">"Sinhronizirane slike, fajlovi, e-poruke, kontakti, događaji u kalendaru i drugi podaci"</string>
     <string name="private_space_gaia_education_bullet2" msgid="3679859681253672976">"Historija preuzimanja aplikacija i preporuke"</string>
     <string name="private_space_gaia_education_bullet3" msgid="1703614225321289717">"Historija pregledanja, oznake i sačuvane lozinke"</string>
     <string name="private_space_gaia_education_bullet4" msgid="515761604505366164">"Predloženi sadržaj povezan s aktivnošću u aplikacijama u privatnom prostoru"</string>
@@ -828,8 +834,6 @@
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Prekini vezu s aplikacijom"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Maksimalni broj povezanih Bluetooth audio uređaja"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Odaberite maksimalan broj povezanih Bluetooth audio uređaja"</string>
-    <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"Povećaj nivo evidentiranja za NFC grupu"</string>
-    <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"Povećajte nivo zapisivanja za NFC grupu"</string>
     <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"Opširni NFC zapisnik dobavljača o otklanjanju grešaka"</string>
     <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"U izvještaje o greškama uključite dodatne zapisnike dobavljača specifične za uređaj, koji mogu sadržavati privatne podatke."</string>
     <string name="nfc_snoop_log_title" msgid="1576197495976952388">"Nefiltrirani NFC NCI zapisnik"</string>
@@ -1540,8 +1544,7 @@
     <string name="network_scorer_change_active_no_previous_dialog_text" msgid="680685773455072321">"Koristiti <xliff:g id="NEW_APP">%s</xliff:g> za upravljanje vašim mrežnim vezama?"</string>
     <string name="location_category_recent_location_requests" msgid="2205900488782832082">"Nedavni zahtjevi za lokaciju"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Lokacija za radni profil"</string>
-    <!-- no translation found for private_profile_location_switch_title (4127119143109855789) -->
-    <skip />
+    <string name="private_profile_location_switch_title" msgid="4127119143109855789">"Lokacija za privatni prostor"</string>
     <string name="location_app_level_permissions" msgid="907206607664629759">"Odobrenja lokacije za aplikacije"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"Lokacija je isključena"</string>
     <string name="location_app_permission_summary_location_on" msgid="7552095451731948984">"{count,plural, =1{# od {total} aplik. ima pristup lokaciji}one{# od {total} aplik. imaju pristup lokaciji}few{# od {total} aplik. imaju pristup lokaciji}other{# od {total} aplik. imaju pristup lokaciji}}"</string>
@@ -1933,10 +1936,10 @@
     <string name="modifier_keys_reset" msgid="551170906710422041">"Poništi"</string>
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"Odaberite modifikacijsku tipku"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Odaberite novu tipku za \"<xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>\":"</string>
-    <string name="ime_label_title" msgid="8994569521516807168">"Izgled: <xliff:g id="IME_LABEL">%s</xliff:g>"</string>
+    <string name="ime_label_title" msgid="8994569521516807168">"Raspored: <xliff:g id="IME_LABEL">%s</xliff:g>"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Zadano"</string>
     <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"Automatski: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
-    <string name="user_selected_keyboard_layout_label" msgid="154742505924555156">"Izgled koji je odabrao korisnik: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
+    <string name="user_selected_keyboard_layout_label" msgid="154742505924555156">"Korisnički odabrano: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"Govor"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"Brzina pokazivača"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Kontroler za igre"</string>
@@ -2001,7 +2004,7 @@
     <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"Kontrast boja"</string>
     <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"Viši kontrast omogućava veću istaknutost teksta, dugmadi i ikona. Odaberite kontrast koji vam izgleda najbolje."</string>
     <string name="color_contrast_note" msgid="7592686603372566198">"Određene aplikacije možda neće podržavati sve postavke kontrasta boja i teksta"</string>
-    <string name="accessibility_color_contrast_summary" msgid="7563237683500106632">"Podesite način na koji boje i tekst izgledaju u odnosu na boju pozadine ekrana"</string>
+    <string name="accessibility_color_contrast_summary" msgid="7563237683500106632">"Podesite izgled boja i tekst u odnosu na boju pozadine ekrana"</string>
     <string name="color_contrast_preview" msgid="6791430227535363883">"Pregledajte"</string>
     <string name="color_contrast_preview_sender_name" msgid="8641943417589238147">"Helen, Adam"</string>
     <string name="color_contrast_preview_email_send_date" msgid="2108702726171600080">"Prije 2 dana"</string>
@@ -2016,6 +2019,8 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Preuzete aplikacije"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Eksperimentalno"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Oznake funkcija"</string>
+    <string name="bt_stack_log_level" msgid="6527899271926969296">"Omogućivanje skupnog zapisa za Bluetooth"</string>
+    <string name="bt_stack_log_level_summary" msgid="3769107713334448285">"Razina zapisnika izmjena skupnog zapisa za Bluetooth (uključi Bluetooth nakon promjene ove postavke)"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"Filtriranje snoop zapisnika za Bluetooth HCI"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="1319792184194176235">"Postavite filtere"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_footer" msgid="4158945851818483666">"Omogućite i onemogućite Bluetooth da se promjene primijene"</string>
@@ -2058,12 +2063,9 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Ipak nastavi"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Otkaži"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Postavke uvećavanja"</string>
-    <!-- no translation found for accessibility_magnification_one_finger_panning_title (4503949739883092989) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_on (9133125894310777539) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_off (8979146350396559805) -->
-    <skip />
+    <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"Pomicanjem prstom"</string>
+    <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"Pomaknite područje uvećanja prevlačenjem prstom."</string>
+    <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"Pomaknite područje uvećavanja prevlačenjem s dva prsta."</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Uvećavanje pomoću prečice"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Uvećajte pomoću prečice i trostrukog dodira"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"O usluzi <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
@@ -2090,6 +2092,7 @@
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Držite tipke za jačinu zvuka da otvorite"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Triput dodirnite ekran da otvorite"</string>
     <string name="accessibility_tutorial_dialog_title_two_finger_double" msgid="3912970760484557646">"Otvaranje dvostrukim dodirom ekrana s dva prsta"</string>
+    <string name="accessibility_tutorial_dialog_title_quick_setting" msgid="2905083277641794558">"Prečac za Brze postavke"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Otvorite pokretom"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="6800684770875867559">"Korištenje pokreta za pristupačnost"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"Da koristite ovu funkciju, dodirnite dugme Pristupačnost <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> na dnu ekrana.\n\nDa prebacujete između funkcija, dodirnite i zadržite dugme Pristupačnost."</string>
@@ -2097,6 +2100,7 @@
     <string name="accessibility_tutorial_dialog_message_volume" msgid="5033080515460519183">"Da koristite ovu funkciju, pritisnite i držite obje tipke za jačinu zvuka."</string>
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"Da pokrenete i zaustavite uvećavanje, triput dodirnite bilo gdje na ekranu."</string>
     <string name="accessibility_tutorial_dialog_message_two_finger_triple" msgid="860548190334486449">"Da pokrenete i zaustavite uvećavanje, dvaput dodirnite bilo gdje na ekranu s dva prsta."</string>
+    <string name="accessibility_tutorial_dialog_message_quick_setting" msgid="2272748015553891860">"Da biste koristili tu značajku, prijeđite prstom prema dolje od vrha zaslona."</string>
     <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"Da koristite ovu funkciju, prevucite s 2 prsta nagore s dna ekrana.\n\nDa prebacujete između funkcija, prevucite s 2 prsta nagore i zadržite."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="8142847782708562793">"Da koristite ovu funkciju, prevucite s 3 prsta nagore s dna ekrana.\n\nDa prebacujete između funkcija, prevucite s 3 prsta nagore i zadržite."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"Da koristite funkciju pristupačnosti, prevucite s 2 prsta nagore s dna ekrana.\n\nDa prebacujete između funkcija, prevucite s 2 prsta nagore i zadržite."</string>
@@ -2104,8 +2108,8 @@
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Razumijem"</string>
     <string name="accessibility_tutorial_dialog_link_button" msgid="6797349445794031781">"Postavke dugmeta"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Prečica za: <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
-    <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Dugme Pristupačnost"</string>
-    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"Pokret za pristupačnost"</string>
+    <string name="accessibility_shortcut_edit_summary_software" msgid="48978719406821294">"gumb za pristupačnost"</string>
+    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="7346399253904683940">"pokret za pristupačnost"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Prevucite prema gore s 2 prsta"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Prevucite prema gore s 3 prsta"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"Dodirnite dugme za pristupačnost"</string>
@@ -2115,6 +2119,9 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Prevucite s tri prsta prema gore s dna ekrana.\n\nDa prebacujete između funkcija, prevucite s tri prsta prema gore i zadržite."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="4459254227203203324"><annotation id="link">"Više opcija"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"<xliff:g id="SERVICE">%1$s</xliff:g> – saznajte više"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"Brze postavke"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="8726678553797015432">"Prijeđite prstom od vrha zaslona prema dolje"</string>
+    <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"Brze postavke"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Držite tipke za jačinu zvuka"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"držite tipke za jačinu zvuka"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Pritisnite i zadržite obje tipke za jačinu zvuka"</string>
@@ -2152,7 +2159,8 @@
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Tekst visokog kontrasta"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Promjena boje teksta u crnu ili bijelu. Maksimalno se povećava kontrast s pozadinom."</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"Maksimiziraj kontrast teksta"</string>
-    <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="5493999083693403489">"Promijenite boju teksta u crnu ili bijelu da povećate kontrast s pozadinom."</string>
+    <!-- no translation found for accessibility_toggle_maximize_text_contrast_preference_summary (8200408691846666900) -->
+    <skip />
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Automatsko ažurir. uvećav. ekrana"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Ažurira uvećavanje ekrana kod prelaza aplikacija"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Dugme uklj./isklj. prekida poziv"</string>
@@ -4197,6 +4205,8 @@
     <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"Da odete na početni ekran, prevucite prema gore s dna ekrana. Da se prebacite na drugu aplikaciju, prevucite s dna prema gore, zadržite, a zatim otpustite. Da se vratite, prevucite s lijevog odnosno desnog ruba."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Navigacija pomoću 3 dugmeta"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"Da se vratite, odete na početni ekran i pebacite iz jedne aplikacije u drugu, koristite dugmad u dnu ekrana."</string>
+    <!-- no translation found for nav_tutorial_button_description (5791791794770463386) -->
+    <skip />
     <string name="keywords_system_navigation" msgid="3131782378486554934">"navigacija za sistem, navigacija pomoću 2 dugmeta, navigacija pomoću 3 dugmeta, navigacija pokretima, prevlačenje"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Digitalni asistent"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Prevucite da pozovete asistenta na radnju"</string>
@@ -4641,12 +4651,9 @@
     <string name="primary_sim_texts_title" msgid="1287584042733097749">"Poruke"</string>
     <string name="primary_sim_automatic_data_title" msgid="1265528923229642480">"Autom. prebac. na prij. podataka"</string>
     <string name="primary_sim_automatic_data_msg" msgid="1612203837010785203">"Koristite prijenos podataka s bilo kojeg SIM-a ovisno o pokrivenosti i dostupnosti"</string>
-    <!-- no translation found for sim_action_restart_dialog_title (3507413479633430120) -->
-    <skip />
-    <!-- no translation found for sim_action_restart_dialog_msg (4737611046767629774) -->
-    <skip />
-    <!-- no translation found for sim_action_restart_dialog_cancel (665560106686565624) -->
-    <skip />
+    <string name="sim_action_restart_dialog_title" msgid="3507413479633430120">"Ponovo pokrenite uređaj da koristite 2 SIM-a"</string>
+    <string name="sim_action_restart_dialog_msg" msgid="4737611046767629774">"Da istovremeno koristite 2 SIM-a, ponovno pokrenite uređaj, a zatim uključite oba SIM-a"</string>
+    <string name="sim_action_restart_dialog_cancel" msgid="665560106686565624">"Koristi samo operatera <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="sim_onboarding_phoneNumber_data_only" msgid="8158409121949373662">"Samo prijenos podataka"</string>
     <string name="sim_onboarding_setup" msgid="5750393553605388463">"Postavi"</string>
     <string name="sim_onboarding_next" msgid="6415025179929475355">"Naprijed"</string>
@@ -4761,6 +4768,13 @@
     <string name="confirm_enable_4k_pages_text" msgid="6168921566226074524">"Uređaj će se ponovo pokrenuti nakon potvrde."</string>
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"Ažuriranje jezgre u jezgru kompatibilnu sa stranicama od 16 kB nije uspjelo."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Primjena promjene"</string>
+    <string name="confirm_format_ext4_title" msgid="4453684705528818873">"Želite li preoblikovati uređaj u ext4?"</string>
+    <string name="confirm_format_ext4_text" msgid="8164677342487500794">"Opcija za razvojne programere 16K podržana je uz datotečni sustav ext4. Uređaj će se očistiti, a datotečni sustav promijenit će se u ext4 nakon potvrde."</string>
+    <string name="format_ext4_failure_toast" msgid="6904611547290793885">"Preoblikovanje i čišćenje podatkovne particije u ext4 nije uspjelo."</string>
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (6338135847153690912) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_text (236718973897424382) -->
+    <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"Obrađivač izvještaja o greškama"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Određuje koja aplikacija obrađuje prečicu za Izvještaj o greškama na uređaju."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Lično"</string>

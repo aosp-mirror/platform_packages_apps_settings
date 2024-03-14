@@ -73,10 +73,10 @@
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="631521133525979967">"Bạn đã kết nối thiết bị trợ thính cho tai phải.\n\nĐể ghép nối thiết bị trợ thính cho tai trái, hãy đảm bảo rằng thiết bị đã bật và ở trạng thái sẵn sàng ghép nối."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"Ghép nối tai phải"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"Ghép nối tai trái"</string>
-    <string name="bluetooth_device_controls_general" msgid="1399214835599665488">"Cho tất cả các thiết bị trợ thính có sẵn"</string>
-    <string name="bluetooth_device_controls_title" msgid="659009912978022189">"Các chế độ cài đặt khác về thiết bị trợ thính"</string>
-    <string name="bluetooth_device_controls_summary" msgid="5387400497394163925">"Thay đổi chế độ cài đặt trên nhiều thiết bị, chẳng hạn như chế độ điều khiển lối tắt và cuộn dây cảm ứng"</string>
-    <string name="bluetooth_device_controls_specific" msgid="7706863288754077107">"Cho thiết bị này"</string>
+    <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Cài đặt thiết bị trợ thính"</string>
+    <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Phím tắt, khả năng tương thích với thiết bị trợ thính"</string>
+    <string name="bluetooth_hearing_aids_presets" msgid="5429761844739722885">"Giá trị đặt trước"</string>
+    <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Không cập nhật được giá trị đặt trước"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Đầu ra âm thanh"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Giới thiệu về đầu ra âm thanh"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Định tuyến âm thanh đến thiết bị trợ thính hoặc loa điện thoại của bạn"</string>
@@ -569,6 +569,12 @@
     <string name="privatespace_unlock_description" msgid="3177710543121916413">"Mở khoá không gian riêng tư"</string>
     <string name="privatespace_hide_off_summary" msgid="7227778747159633671">"Tắt"</string>
     <string name="privatespace_hide_on_summary" msgid="6136704537527640183">"Bật"</string>
+    <!-- no translation found for private_space_hide_dialog_title (3192253150765516720) -->
+    <skip />
+    <!-- no translation found for private_space_hide_dialog_message (2006421821648157211) -->
+    <skip />
+    <!-- no translation found for private_space_hide_dialog_button (4157191429310035457) -->
+    <skip />
     <string name="private_space_category_system" msgid="1286843321867285700">"Hệ thống"</string>
     <string name="private_space_delete_title" msgid="636873505724100006">"Xoá không gian riêng tư"</string>
     <string name="private_space_delete_header" msgid="4594429153176776184">"Xoá Không gian riêng tư?"</string>
@@ -625,7 +631,7 @@
     <string name="private_space_gaia_education_bullet1" msgid="641701340908301992">"Ảnh, tệp, email, danh bạ, sự kiện trên lịch và các dữ liệu khác đã đồng bộ hoá"</string>
     <string name="private_space_gaia_education_bullet2" msgid="3679859681253672976">"Nhật ký ứng dụng đã tải xuống và các đề xuất"</string>
     <string name="private_space_gaia_education_bullet3" msgid="1703614225321289717">"Nhật ký duyệt web, dấu trang và mật khẩu đã lưu"</string>
-    <string name="private_space_gaia_education_bullet4" msgid="515761604505366164">"Nội dung đề xuất liên quan đến hoạt động của bạn ở các ứng dụng trong không gian riêng tư"</string>
+    <string name="private_space_gaia_education_bullet4" msgid="515761604505366164">"Nội dung đề xuất liên quan đến hoạt động của bạn tại các ứng dụng trên không gian riêng tư"</string>
     <string name="private_space_gaia_education_got_it" msgid="7824029819615566806">"Tôi hiểu"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Bạn có thể thêm tối đa <xliff:g id="COUNT">%d</xliff:g> vân tay"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Bạn đã thêm số vân tay tối đa"</string>
@@ -828,8 +834,6 @@
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Ngắt kết nối ứng dụng"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Số thiết bị âm thanh được kết nối qua Bluetooth tối đa"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Chọn số thiết bị âm thanh được kết nối qua Bluetooth tối đa"</string>
-    <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"Nhật ký gỡ lỗi của ngăn xếp NFC"</string>
-    <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"Tăng cấp độ ghi nhật ký của ngăn xếp NFC"</string>
     <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"Nhật ký gỡ lỗi chi tiết của nhà cung cấp về NFC"</string>
     <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"Đưa nhật ký bổ sung dành riêng cho thiết bị của nhà cung cấp vào báo cáo lỗi. Nhật ký này có thể chứa thông tin riêng tư."</string>
     <string name="nfc_snoop_log_title" msgid="1576197495976952388">"Nhật ký chưa lọc NCI NFC"</string>
@@ -1540,8 +1544,7 @@
     <string name="network_scorer_change_active_no_previous_dialog_text" msgid="680685773455072321">"Sử dụng <xliff:g id="NEW_APP">%s</xliff:g> để quản lý các kết nối mạng của bạn?"</string>
     <string name="location_category_recent_location_requests" msgid="2205900488782832082">"Các yêu cầu gần đây về vị trí"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Vị trí của hồ sơ công việc"</string>
-    <!-- no translation found for private_profile_location_switch_title (4127119143109855789) -->
-    <skip />
+    <string name="private_profile_location_switch_title" msgid="4127119143109855789">"Vị trí dành cho không gian riêng tư"</string>
     <string name="location_app_level_permissions" msgid="907206607664629759">"Quyền truy cập thông tin vị trí cho ứng dụng"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"Dịch vụ vị trí hiện đang tắt"</string>
     <string name="location_app_permission_summary_location_on" msgid="7552095451731948984">"{count,plural, =1{#/{total} ứng dụng có quyền truy cập vào thông tin vị trí}other{#/{total} ứng dụng có quyền truy cập vào thông tin vị trí}}"</string>
@@ -1933,13 +1936,10 @@
     <string name="modifier_keys_reset" msgid="551170906710422041">"Đặt lại"</string>
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"Chọn phím bổ trợ"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Chọn một phím mới cho <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>:"</string>
-    <!-- no translation found for ime_label_title (8994569521516807168) -->
-    <skip />
+    <string name="ime_label_title" msgid="8994569521516807168">"Bố cục <xliff:g id="IME_LABEL">%s</xliff:g>"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Mặc định"</string>
-    <!-- no translation found for automatic_keyboard_layout_label (9138088156046198913) -->
-    <skip />
-    <!-- no translation found for user_selected_keyboard_layout_label (154742505924555156) -->
-    <skip />
+    <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"Tự động: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
+    <string name="user_selected_keyboard_layout_label" msgid="154742505924555156">"Người dùng đã chọn: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"Lời nói"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"Tốc độ con trỏ"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Trình điều khiển trò chơi"</string>
@@ -2002,9 +2002,9 @@
     <string name="display_category_title" msgid="6638191682294461408">"Màn hình"</string>
     <string name="accessibility_color_and_motion_title" msgid="2323301706545305874">"Màu sắc và chuyển động"</string>
     <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"Độ tương phản màu"</string>
-    <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"Độ tương phản càng cao thì càng giúp làm nổi bật văn bản, nút và biểu tượng. Hãy chọn độ tương phản phù hợp nhất với bạn."</string>
+    <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"Độ tương phản càng cao thì văn bản, nút và biểu tượng càng nổi bật. Hãy chọn độ tương phản phù hợp nhất với bạn."</string>
     <string name="color_contrast_note" msgid="7592686603372566198">"Một số ứng dụng có thể không hỗ trợ hết tất cả các chế độ cài đặt độ tương phản màu và văn bản"</string>
-    <string name="accessibility_color_contrast_summary" msgid="7563237683500106632">"Điều chỉnh cách hiển thị màu và văn bản dựa vào màu nền của màn hình"</string>
+    <string name="accessibility_color_contrast_summary" msgid="7563237683500106632">"Điều chỉnh cách hiển thị màu và văn bản sao cho tương phản với màu nền của màn hình"</string>
     <string name="color_contrast_preview" msgid="6791430227535363883">"Xem trước"</string>
     <string name="color_contrast_preview_sender_name" msgid="8641943417589238147">"Helen, Adam"</string>
     <string name="color_contrast_preview_email_send_date" msgid="2108702726171600080">"2 ngày trước"</string>
@@ -2019,6 +2019,8 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Ứng dụng đã tải xuống"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Thử nghiệm"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Cờ tính năng"</string>
+    <string name="bt_stack_log_level" msgid="6527899271926969296">"Bật nhật ký ngăn xếp Bluetooth"</string>
+    <string name="bt_stack_log_level_summary" msgid="3769107713334448285">"Đổi cấp độ nhật ký của tính năng Ghi nhật ký ngăn xếp Bluetooth (Bật/tắt Bluetooth sau khi đổi chế độ cài đặt này)"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"Lọc nhật ký Bluetooth HCI snoop"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="1319792184194176235">"Đặt bộ lọc"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_footer" msgid="4158945851818483666">"Tắt và bật Bluetooth để các thay đổi có hiệu lực"</string>
@@ -2061,12 +2063,9 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Vẫn tiếp tục"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Huỷ"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Cài đặt phóng to"</string>
-    <!-- no translation found for accessibility_magnification_one_finger_panning_title (4503949739883092989) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_on (9133125894310777539) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_off (8979146350396559805) -->
-    <skip />
+    <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"Di chuyển vùng phóng to bằng một ngón tay"</string>
+    <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"Di chuyển vùng phóng to bằng cách kéo một ngón tay."</string>
+    <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"Di chuyển vùng phóng to bằng cách kéo hai ngón tay."</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Phóng to bằng phím tắt"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Phóng to bằng phím tắt và nhấn 3 lần"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"Giới thiệu về <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
@@ -2093,6 +2092,7 @@
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Giữ các phím âm lượng để mở"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Nhấn 3 lần vào màn hình để mở"</string>
     <string name="accessibility_tutorial_dialog_title_two_finger_double" msgid="3912970760484557646">"Nhấn đúp vào màn hình bằng hai ngón tay để mở"</string>
+    <string name="accessibility_tutorial_dialog_title_quick_setting" msgid="2905083277641794558">"Phím tắt Cài đặt nhanh"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Dùng cử chỉ để mở"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="6800684770875867559">"Sử dụng cử chỉ hỗ trợ tiếp cận"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"Để sử dụng tính năng này, hãy nhấn vào nút hỗ trợ tiếp cận <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> ở cuối màn hình.\n\nĐể chuyển đổi giữa các tính năng, hãy chạm và giữ nút hỗ trợ tiếp cận."</string>
@@ -2100,6 +2100,7 @@
     <string name="accessibility_tutorial_dialog_message_volume" msgid="5033080515460519183">"Để sử dụng tính năng này, hãy nhấn và giữ cả hai phím âm lượng."</string>
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"Để bắt đầu và dừng phóng to, hãy nhấn 3 lần vào bất cứ đâu trên màn hình."</string>
     <string name="accessibility_tutorial_dialog_message_two_finger_triple" msgid="860548190334486449">"Để bắt đầu và dừng phóng to, hãy dùng 2 ngón tay nhấn đúp vào bất cứ đâu trên màn hình."</string>
+    <string name="accessibility_tutorial_dialog_message_quick_setting" msgid="2272748015553891860">"Để sử dụng tính năng này, hãy vuốt xuống từ đầu màn hình."</string>
     <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"Để sử dụng tính năng này, hãy dùng 2 ngón tay vuốt lên từ cuối màn hình.\n\nĐể chuyển đổi giữa các tính năng, hãy dùng 2 ngón tay vuốt lên và giữ."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="8142847782708562793">"Để sử dụng tính năng này, hãy dùng 3 ngón tay vuốt lên từ cuối màn hình.\n\nĐể chuyển đổi giữa các tính năng, hãy dùng 3 ngón tay vuốt lên và giữ."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"Để sử dụng tính năng hỗ trợ tiếp cận, hãy dùng 2 ngón tay vuốt lên từ cuối màn hình.\n\nĐể chuyển đổi giữa các tính năng, hãy dùng 2 ngón tay vuốt lên và giữ."</string>
@@ -2107,8 +2108,8 @@
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Đã hiểu"</string>
     <string name="accessibility_tutorial_dialog_link_button" msgid="6797349445794031781">"Cài đặt nút"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Phím tắt dành cho <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
-    <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Nút hỗ trợ tiếp cận"</string>
-    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"Cử chỉ hỗ trợ tiếp cận"</string>
+    <string name="accessibility_shortcut_edit_summary_software" msgid="48978719406821294">"nút hỗ trợ tiếp cận"</string>
+    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="7346399253904683940">"cử chỉ hỗ trợ tiếp cận"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Vuốt lên bằng 2 ngón tay"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Vuốt lên bằng 3 ngón tay"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"Nhấn vào nút hỗ trợ tiếp cận"</string>
@@ -2118,6 +2119,9 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Dùng 3 ngón tay vuốt lên từ cuối màn hình.\n\nĐể chuyển đổi giữa các tính năng, hãy dùng 3 ngón tay vuốt lên và giữ."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="4459254227203203324"><annotation id="link">"Tùy chọn khác"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"Tìm hiểu thêm về <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"Cài đặt nhanh"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="8726678553797015432">"Vuốt xuống từ đầu màn hình"</string>
+    <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"Cài đặt nhanh"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Giữ phím âm lượng"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"giữ các phím âm lượng"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Nhấn và giữ cả 2 phím âm lượng"</string>
@@ -2155,7 +2159,8 @@
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Văn bản có độ tương phản cao"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Thay đổi màu chữ thành đen hoặc trắng. Tăng tối đa độ tương phản so với nền."</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"Tăng tối đa độ tương phản văn bản"</string>
-    <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="5493999083693403489">"Thay đổi màu chữ thành đen hoặc trắng để tăng độ tương phản với nền."</string>
+    <!-- no translation found for accessibility_toggle_maximize_text_contrast_preference_summary (8200408691846666900) -->
+    <skip />
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Tự động cập nhật phóng đại màn hình"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Cập nhật phóng đại màn hình khi chuyển ứng dụng"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Kết thúc cuộc gọi bằng nút nguồn"</string>
@@ -4200,6 +4205,8 @@
     <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"Để trở về màn hình chính, hãy vuốt từ cuối màn hình lên. Để chuyển đổi giữa các ứng dụng, hãy vuốt từ cuối màn hình lên, giữ rồi thả ra. Để quay lại, hãy vuốt từ mép trái hoặc mép phải."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Thao tác bằng 3 nút"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"Quay lại, trở về Màn hình chính và chuyển đổi ứng dụng bằng các nút ở cuối màn hình."</string>
+    <!-- no translation found for nav_tutorial_button_description (5791791794770463386) -->
+    <skip />
     <string name="keywords_system_navigation" msgid="3131782378486554934">"thao tác trên hệ thống, thao tác bằng 2 nút, thao tác bằng 3 nút, thao tác bằng cử chỉ, vuốt"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Trợ lý kỹ thuật số"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Vuốt để gọi trợ lý"</string>
@@ -4644,12 +4651,9 @@
     <string name="primary_sim_texts_title" msgid="1287584042733097749">"Tin nhắn văn bản"</string>
     <string name="primary_sim_automatic_data_title" msgid="1265528923229642480">"Tự động chuyển đổi dữ liệu"</string>
     <string name="primary_sim_automatic_data_msg" msgid="1612203837010785203">"Dùng dữ liệu từ 1 trong 2 SIM tuỳ theo phạm vi phủ sóng và tình trạng mạng"</string>
-    <!-- no translation found for sim_action_restart_dialog_title (3507413479633430120) -->
-    <skip />
-    <!-- no translation found for sim_action_restart_dialog_msg (4737611046767629774) -->
-    <skip />
-    <!-- no translation found for sim_action_restart_dialog_cancel (665560106686565624) -->
-    <skip />
+    <string name="sim_action_restart_dialog_title" msgid="3507413479633430120">"Khởi động lại để dùng 2 SIM"</string>
+    <string name="sim_action_restart_dialog_msg" msgid="4737611046767629774">"Để dùng 2 SIM cùng lúc, hãy khởi động lại thiết bị, sau đó bật cả 2 SIM"</string>
+    <string name="sim_action_restart_dialog_cancel" msgid="665560106686565624">"Chỉ dùng <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="sim_onboarding_phoneNumber_data_only" msgid="8158409121949373662">"Chỉ dữ liệu"</string>
     <string name="sim_onboarding_setup" msgid="5750393553605388463">"Thiết lập"</string>
     <string name="sim_onboarding_next" msgid="6415025179929475355">"Tiếp theo"</string>
@@ -4764,6 +4768,13 @@
     <string name="confirm_enable_4k_pages_text" msgid="6168921566226074524">"Thiết bị sẽ khởi động lại sau khi xác nhận."</string>
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"Không cập nhật được nhân hệ điều hành thành nhân hệ điều hành tương thích với trang 16KB"</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Đang áp dụng thay đổi"</string>
+    <string name="confirm_format_ext4_title" msgid="4453684705528818873">"Định dạng lại thiết bị sang định dạng ext4?"</string>
+    <string name="confirm_format_ext4_text" msgid="8164677342487500794">"Tuỳ chọn cho nhà phát triển 16K được hỗ trợ hệ thống tệp có định dạng ext4. Thiết bị sẽ bị xoá sạch và hệ thống tệp sẽ được đổi thành định dạng ext4 sau khi xác nhận."</string>
+    <string name="format_ext4_failure_toast" msgid="6904611547290793885">"Không thể định dạng lại sang định dạng ext4 và không xoá sạch được phân vùng dữ liệu."</string>
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (6338135847153690912) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_text (236718973897424382) -->
+    <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"Trình xử lý báo cáo lỗi"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Xác định ứng dụng nào xử lý phím tắt Báo cáo lỗi trên thiết bị của bạn."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Cá nhân"</string>

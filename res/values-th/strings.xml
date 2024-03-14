@@ -73,10 +73,10 @@
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="631521133525979967">"เชื่อมต่อเครื่องช่วยฟังข้างขวาแล้ว\n\nหากต้องการจับคู่ข้างซ้าย โปรดตรวจสอบว่าคุณเปิดเครื่องช่วยฟังแล้วและอุปกรณ์พร้อมจับคู่"</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"จับคู่หูฟังข้างขวา"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"จับคู่หูฟังข้างซ้าย"</string>
-    <string name="bluetooth_device_controls_general" msgid="1399214835599665488">"สำหรับเครื่องช่วยฟังทั้งหมดที่พร้อมใช้งาน"</string>
-    <string name="bluetooth_device_controls_title" msgid="659009912978022189">"การตั้งค่าเครื่องช่วยฟังเพิ่มเติม"</string>
-    <string name="bluetooth_device_controls_summary" msgid="5387400497394163925">"เปลี่ยนการตั้งค่าข้ามอุปกรณ์ เช่น การควบคุมทางลัดและเทเลคอยล์"</string>
-    <string name="bluetooth_device_controls_specific" msgid="7706863288754077107">"สำหรับอุปกรณ์นี้"</string>
+    <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"การตั้งค่าเครื่องช่วยฟัง"</string>
+    <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"ทางลัด ความเข้ากันได้กับเครื่องช่วยฟัง"</string>
+    <string name="bluetooth_hearing_aids_presets" msgid="5429761844739722885">"ค่าที่กำหนดล่วงหน้า"</string>
+    <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"ไม่สามารถอัปเดตค่าที่กำหนดล่วงหน้า"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"เอาต์พุตเสียง"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"เกี่ยวกับเอาต์พุตเสียง"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"กำหนดเส้นทางเสียงไปยังเครื่องช่วยฟังหรือลำโพงโทรศัพท์"</string>
@@ -569,6 +569,12 @@
     <string name="privatespace_unlock_description" msgid="3177710543121916413">"ปลดล็อกพื้นที่ส่วนตัว"</string>
     <string name="privatespace_hide_off_summary" msgid="7227778747159633671">"ปิด"</string>
     <string name="privatespace_hide_on_summary" msgid="6136704537527640183">"เปิด"</string>
+    <!-- no translation found for private_space_hide_dialog_title (3192253150765516720) -->
+    <skip />
+    <!-- no translation found for private_space_hide_dialog_message (2006421821648157211) -->
+    <skip />
+    <!-- no translation found for private_space_hide_dialog_button (4157191429310035457) -->
+    <skip />
     <string name="private_space_category_system" msgid="1286843321867285700">"ระบบ"</string>
     <string name="private_space_delete_title" msgid="636873505724100006">"ลบพื้นที่ส่วนตัว"</string>
     <string name="private_space_delete_header" msgid="4594429153176776184">"ลบพื้นที่ส่วนตัวไหม"</string>
@@ -828,8 +834,6 @@
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"ยกเลิกการเชื่อมต่อแอป"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"จำนวนอุปกรณ์เสียงบลูทูธที่เชื่อมต่อสูงสุด"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"เลือกจำนวนสูงสุดสำหรับอุปกรณ์เสียงบลูทูธที่เชื่อมต่อ"</string>
-    <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"บันทึกการแก้ไขข้อบกพร่องของสแต็ก NFC"</string>
-    <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"เพิ่มระดับการบันทึกสแต็ก NFC"</string>
     <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"บันทึกการแก้ไขข้อบกพร่องเกี่ยวกับเวนเดอร์แบบละเอียดของ NFC"</string>
     <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"รวมบันทึกเวนเดอร์เพิ่มเติมเฉพาะอุปกรณ์ไว้ในรายงานข้อบกพร่อง ซึ่งอาจมีข้อมูลส่วนตัว"</string>
     <string name="nfc_snoop_log_title" msgid="1576197495976952388">"บันทึกที่ไม่มีการกรองของ NFC NCI"</string>
@@ -1540,8 +1544,7 @@
     <string name="network_scorer_change_active_no_previous_dialog_text" msgid="680685773455072321">"ใช้ <xliff:g id="NEW_APP">%s</xliff:g> ในการจัดการการเชื่อมต่อเครือข่ายใช่ไหม"</string>
     <string name="location_category_recent_location_requests" msgid="2205900488782832082">"คำขอตำแหน่งล่าสุด"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"ตำแหน่งสำหรับโปรไฟล์งาน"</string>
-    <!-- no translation found for private_profile_location_switch_title (4127119143109855789) -->
-    <skip />
+    <string name="private_profile_location_switch_title" msgid="4127119143109855789">"ตำแหน่งสำหรับพื้นที่ส่วนตัว"</string>
     <string name="location_app_level_permissions" msgid="907206607664629759">"สิทธิ์เข้าถึงตำแหน่งสำหรับแอป"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"ตำแหน่งปิดอยู่"</string>
     <string name="location_app_permission_summary_location_on" msgid="7552095451731948984">"{count,plural, =1{# จาก {total} แอปมีสิทธิ์เข้าถึงตำแหน่ง}other{# จาก {total} แอปมีสิทธิ์เข้าถึงตำแหน่ง}}"</string>
@@ -2016,6 +2019,8 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"แอปที่ดาวน์โหลด"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"ทดสอบ"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"แฟล็กฟีเจอร์"</string>
+    <string name="bt_stack_log_level" msgid="6527899271926969296">"เปิดใช้บันทึกสแต็กบลูทูธ"</string>
+    <string name="bt_stack_log_level_summary" msgid="3769107713334448285">"เปลี่ยนระดับการบันทึกของบันทึกสแต็กบลูทูธ (เปิด/ปิดบลูทูธหลังจากเปลี่ยนการตั้งค่านี้)"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"การกรองบันทึก HCI Snoop ของบลูทูธ"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="1319792184194176235">"ตั้งค่าตัวกรอง"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_footer" msgid="4158945851818483666">"ปิดและเปิดบลูทูธเพื่อให้การเปลี่ยนแปลงมีผล"</string>
@@ -2058,12 +2063,9 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"ดำเนินการต่อ"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"ยกเลิก"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"การตั้งค่าการขยาย"</string>
-    <!-- no translation found for accessibility_magnification_one_finger_panning_title (4503949739883092989) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_on (9133125894310777539) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_off (8979146350396559805) -->
-    <skip />
+    <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"การแพนกล้องด้วยนิ้วเดียว"</string>
+    <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"ย้ายพื้นที่ในการขยายโดยลากนิ้วเพียงนิ้วเดียว"</string>
+    <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"ย้ายพื้นที่ในการขยายโดยลากนิ้ว 2 นิ้ว"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"ขยายโดยใช้ทางลัด"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"ขยายโดยใช้ทางลัดและการแตะ 3 ครั้ง"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"เกี่ยวกับ \"<xliff:g id="SERVICE">%1$s</xliff:g>\""</string>
@@ -2090,6 +2092,7 @@
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"กดปุ่มปรับระดับเสียงค้างไว้เพื่อเปิด"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"แตะหน้าจอ 3 ครั้งเพื่อเปิด"</string>
     <string name="accessibility_tutorial_dialog_title_two_finger_double" msgid="3912970760484557646">"ใช้ 2 นิ้วแตะสองครั้งบนหน้าจอเพื่อเปิด"</string>
+    <string name="accessibility_tutorial_dialog_title_quick_setting" msgid="2905083277641794558">"ทางลัดสำหรับการตั้งค่าด่วน"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"ใช้ท่าทางสัมผัสเพื่อเปิด"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="6800684770875867559">"ใช้ท่าทางสัมผัสการช่วยเหลือพิเศษ"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"หากต้องการใช้ฟีเจอร์นี้ ให้แตะปุ่มการช่วยเหลือพิเศษ <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> ที่ด้านล่างของหน้าจอ\n\nหากต้องการสลับระหว่างฟีเจอร์ต่างๆ ให้แตะปุ่มการช่วยเหลือพิเศษค้างไว้"</string>
@@ -2097,6 +2100,7 @@
     <string name="accessibility_tutorial_dialog_message_volume" msgid="5033080515460519183">"หากต้องการใช้ฟีเจอร์นี้ ให้กดปุ่มปรับระดับเสียงทั้ง 2 ปุ่มค้างไว้"</string>
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"หากต้องการเริ่มหรือหยุดการขยาย ให้แตะ 3 ครั้งที่ใดก็ได้บนหน้าจอ"</string>
     <string name="accessibility_tutorial_dialog_message_two_finger_triple" msgid="860548190334486449">"หากต้องการเริ่มหรือหยุดการขยาย ให้ใช้ 2 นิ้วแตะสองครั้งที่ใดก็ได้บนหน้าจอ"</string>
+    <string name="accessibility_tutorial_dialog_message_quick_setting" msgid="2272748015553891860">"หากต้องการใช้ฟีเจอร์นี้ ให้ปัดลงจากด้านบนของหน้าจอ"</string>
     <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"หากต้องการใช้ฟีเจอร์นี้ ให้ใช้ 2 นิ้วเลื่อนขึ้นจากด้านล่างของหน้าจอ\n\nหากต้องการสลับระหว่างฟีเจอร์ต่างๆ ให้ใช้ 2 นิ้วเลื่อนขึ้นแล้วค้างไว้"</string>
     <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="8142847782708562793">"หากต้องการใช้ฟีเจอร์นี้ ให้ใช้ 3 นิ้วเลื่อนขึ้นจากด้านล่างของหน้าจอ\n\nหากต้องการสลับระหว่างฟีเจอร์ต่างๆ ให้ใช้ 3 นิ้วเลื่อนขึ้นแล้วค้างไว้"</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"หากต้องการใช้ฟีเจอร์การช่วยเหลือพิเศษ ให้ใช้ 2 นิ้วเลื่อนขึ้นจากด้านล่างของหน้าจอ\n\nหากต้องการสลับระหว่างฟีเจอร์ต่างๆ ให้ใช้ 2 นิ้วเลื่อนขึ้นแล้วค้างไว้"</string>
@@ -2104,8 +2108,8 @@
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"รับทราบ"</string>
     <string name="accessibility_tutorial_dialog_link_button" msgid="6797349445794031781">"การตั้งค่าปุ่ม"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"ทางลัดของ \"<xliff:g id="SERVICE">%1$s</xliff:g>\""</string>
-    <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"ปุ่มการช่วยเหลือพิเศษ"</string>
-    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"ท่าทางสัมผัสการช่วยเหลือพิเศษ"</string>
+    <string name="accessibility_shortcut_edit_summary_software" msgid="48978719406821294">"ปุ่มการช่วยเหลือพิเศษ"</string>
+    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="7346399253904683940">"ท่าทางสัมผัสการช่วยเหลือพิเศษ"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"ใช้ 2 นิ้วปัดขึ้น"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"ใช้ 3 นิ้วปัดขึ้น"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"แตะปุ่มการช่วยเหลือพิเศษ"</string>
@@ -2115,6 +2119,9 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"ใช้ 3 นิ้วเลื่อนขึ้นจากด้านล่างของหน้าจอ\n\nหากต้องการสลับระหว่างฟีเจอร์ต่างๆ ให้ใช้ 3 นิ้วเลื่อนขึ้นแล้วค้างไว้"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="4459254227203203324"><annotation id="link">"ตัวเลือกเพิ่มเติม"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"ดูข้อมูลเพิ่มเติมเกี่ยวกับ<xliff:g id="SERVICE">%1$s</xliff:g>"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"การตั้งค่าด่วน"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="8726678553797015432">"ปัดลงจากด้านบนของหน้าจอ"</string>
+    <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"การตั้งค่าด่วน"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"กดปุ่มปรับระดับเสียงค้างไว้"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"กดปุ่มปรับระดับเสียงค้างไว้"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"กดปุ่มปรับระดับเสียงทั้ง 2 ปุ่มค้างไว้"</string>
@@ -2152,7 +2159,8 @@
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"ข้อความคอนทราสต์สูง"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"เปลี่ยนสีข้อความเป็นสีดำหรือสีขาว เพิ่มความ​คอนทราสต์เมื่อเทียบกับพื้นหลังให้สูงสุด"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"เพิ่มคอนทราสต์ของข้อความให้สูงสุด"</string>
-    <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="5493999083693403489">"เปลี่ยนสีข้อความเป็นสีดำหรือสีขาวเพื่อเพิ่มคอนทราสต์กับพื้นหลัง"</string>
+    <!-- no translation found for accessibility_toggle_maximize_text_contrast_preference_summary (8200408691846666900) -->
+    <skip />
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"อัปเดตการขยายหน้าจอโดยอัตโนมัติ"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"อัปเดตการขยายหน้าจอเมื่อเปลี่ยนแอปพลิเคชัน"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"กดปุ่มเปิด/ปิดเพื่อวางสาย"</string>
@@ -4197,6 +4205,8 @@
     <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"ไปที่หน้าแรกโดยเลื่อนขึ้นจากด้านล่างของหน้าจอ สลับแอปโดยเลื่อนขึ้นจากด้านล่างค้างไว้แล้วปล่อย กลับโดยเลื่อนจากขอบด้านซ้ายหรือขวา"</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"การนำทางแบบ 3 ปุ่ม"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"ย้อนกลับ ไปที่หน้าจอหลัก และสลับแอปโดยใช้ปุ่มที่ด้านล่างของหน้าจอ"</string>
+    <!-- no translation found for nav_tutorial_button_description (5791791794770463386) -->
+    <skip />
     <string name="keywords_system_navigation" msgid="3131782378486554934">"การนำทางของระบบ, การนำทางแบบ 2 ปุ่ม, การนำทางแบบ 3 ปุ่ม, การนำทางด้วยท่าทางสัมผัส, เลื่อน"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"ผู้ช่วยดิจิทัล"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"ปัดเพื่อเรียกใช้ผู้ช่วย"</string>
@@ -4641,12 +4651,9 @@
     <string name="primary_sim_texts_title" msgid="1287584042733097749">"ข้อความ"</string>
     <string name="primary_sim_automatic_data_title" msgid="1265528923229642480">"การเปลี่ยนการเชื่อมต่ออินเทอร์เน็ตอัตโนมัติ"</string>
     <string name="primary_sim_automatic_data_msg" msgid="1612203837010785203">"ใช้การเชื่อมต่ออินเทอร์เน็ตจากซิมใดก็ได้โดยขึ้นอยู่กับการครอบคลุมและความพร้อมใช้งาน"</string>
-    <!-- no translation found for sim_action_restart_dialog_title (3507413479633430120) -->
-    <skip />
-    <!-- no translation found for sim_action_restart_dialog_msg (4737611046767629774) -->
-    <skip />
-    <!-- no translation found for sim_action_restart_dialog_cancel (665560106686565624) -->
-    <skip />
+    <string name="sim_action_restart_dialog_title" msgid="3507413479633430120">"รีสตาร์ทเพื่อใช้ 2 ซิม"</string>
+    <string name="sim_action_restart_dialog_msg" msgid="4737611046767629774">"หากต้องการใช้ 2 ซิมพร้อมกัน ให้รีสตาร์ทอุปกรณ์แล้วเปิดใช้งาน 2 ซิม"</string>
+    <string name="sim_action_restart_dialog_cancel" msgid="665560106686565624">"ใช้ <xliff:g id="CARRIER_NAME">%1$s</xliff:g> เท่านั้น"</string>
     <string name="sim_onboarding_phoneNumber_data_only" msgid="8158409121949373662">"ใช้เชื่อมต่ออินเทอร์เน็ตเท่านั้น"</string>
     <string name="sim_onboarding_setup" msgid="5750393553605388463">"ตั้งค่า"</string>
     <string name="sim_onboarding_next" msgid="6415025179929475355">"ถัดไป"</string>
@@ -4761,6 +4768,13 @@
     <string name="confirm_enable_4k_pages_text" msgid="6168921566226074524">"อุปกรณ์จะรีบูตหลังจากยืนยัน"</string>
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"อัปเดตเป็นเคอร์เนลที่รองรับการใช้งานหน้าขนาด 16 KB ไม่สำเร็จ"</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"กำลังใช้การเปลี่ยนแปลง"</string>
+    <string name="confirm_format_ext4_title" msgid="4453684705528818873">"ฟอร์แมตอุปกรณ์ใหม่เป็น ext4 ใช่ไหม"</string>
+    <string name="confirm_format_ext4_text" msgid="8164677342487500794">"ตัวเลือกสำหรับนักพัฒนาแอป 16K รองรับระบบไฟล์ ext4 ระบบจะล้างข้อมูลอุปกรณ์และระบบไฟล์จะเปลี่ยนเป็น ext4 หลังจากการยืนยัน"</string>
+    <string name="format_ext4_failure_toast" msgid="6904611547290793885">"ฟอร์แมตใหม่และล้างพาร์ติชันข้อมูลเป็น ext4 ไม่สำเร็จ"</string>
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (6338135847153690912) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_text (236718973897424382) -->
+    <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"เครื่องจัดการรายงานข้อบกพร่อง"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"เลือกแอปที่จะให้จัดการทางลัดรายงานข้อบกพร่องในอุปกรณ์"</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"ส่วนตัว"</string>

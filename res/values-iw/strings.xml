@@ -73,10 +73,10 @@
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="631521133525979967">"מכשיר השמיעה באוזן ימין מחובר.\n\nכדי להתאים את מכשיר השמיעה באוזן שמאל, צריך לוודא שהוא פועל ומוכן להתאמה."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"התאמה באוזן ימין"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"התאמה באוזן שמאל"</string>
-    <string name="bluetooth_device_controls_general" msgid="1399214835599665488">"לכל מכשירי השמיעה הזמינים"</string>
-    <string name="bluetooth_device_controls_title" msgid="659009912978022189">"הגדרות נוספות של מכשיר השמיעה"</string>
-    <string name="bluetooth_device_controls_summary" msgid="5387400497394163925">"‏שינוי הגדרות שמקושרות למכשיר אחר כמו אמצעי בקרה לקיצורי דרך ו-Telecoil"</string>
-    <string name="bluetooth_device_controls_specific" msgid="7706863288754077107">"למכשיר הזה"</string>
+    <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"ההגדרות של מכשיר השמיעה"</string>
+    <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"קיצור דרך, תאימות למכשירי שמיעה"</string>
+    <string name="bluetooth_hearing_aids_presets" msgid="5429761844739722885">"הגדרות קבועות מראש"</string>
+    <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"לא ניתן לעדכן את ההגדרה הקבועה מראש"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"פלט אודיו"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"מידע על פלט האודיו"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"ניתוב הצלילים למכשיר השמיעה או לרמקול של הטלפון"</string>
@@ -569,6 +569,12 @@
     <string name="privatespace_unlock_description" msgid="3177710543121916413">"ביטול הנעילה של המרחב הפרטי"</string>
     <string name="privatespace_hide_off_summary" msgid="7227778747159633671">"מצב מושבת"</string>
     <string name="privatespace_hide_on_summary" msgid="6136704537527640183">"מצב פעיל"</string>
+    <!-- no translation found for private_space_hide_dialog_title (3192253150765516720) -->
+    <skip />
+    <!-- no translation found for private_space_hide_dialog_message (2006421821648157211) -->
+    <skip />
+    <!-- no translation found for private_space_hide_dialog_button (4157191429310035457) -->
+    <skip />
     <string name="private_space_category_system" msgid="1286843321867285700">"מערכת"</string>
     <string name="private_space_delete_title" msgid="636873505724100006">"מחיקת המרחב הפרטי"</string>
     <string name="private_space_delete_header" msgid="4594429153176776184">"למחוק את המרחב הפרטי?"</string>
@@ -828,8 +834,6 @@
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"ניתוק האפליקציה"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"‏מקסימום התקני אודיו המחוברים באמצעות Bluetooth"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"‏בחירת מספר מקסימלי של התקני אודיו המחוברים באמצעות Bluetooth"</string>
-    <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"‏יומן ניפוי באגים של סטאק NFC"</string>
-    <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"‏העלאת רמת הרישום של סטאק NFC ביומן"</string>
     <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"‏יומן ניפוי באגים מפורט של ספקי NFC"</string>
     <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"הוספת רישומי יומן של יצרנים למכשירים ספציפיים בדוחות על באגים. הדוחות האלה עשויים להכיל מידע פרטי."</string>
     <string name="nfc_snoop_log_title" msgid="1576197495976952388">"‏יומן NFC NCI ללא סינון"</string>
@@ -1540,8 +1544,7 @@
     <string name="network_scorer_change_active_no_previous_dialog_text" msgid="680685773455072321">"האם להשתמש ב-<xliff:g id="NEW_APP">%s</xliff:g> כדי לנהל את חיבורי הרשת שלך?"</string>
     <string name="location_category_recent_location_requests" msgid="2205900488782832082">"בקשות של מיקומים אחרונים"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"מיקום עבור פרופיל עבודה"</string>
-    <!-- no translation found for private_profile_location_switch_title (4127119143109855789) -->
-    <skip />
+    <string name="private_profile_location_switch_title" msgid="4127119143109855789">"מיקום של המרחב הפרטי"</string>
     <string name="location_app_level_permissions" msgid="907206607664629759">"הרשאות מיקום של אפליקציות"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"תכונת המיקום כבויה"</string>
     <string name="location_app_permission_summary_location_on" msgid="7552095451731948984">"{count,plural, =1{לאחת (#) מתוך {total} אפליקציות יש גישה למיקום}one{ל-# מתוך {total} אפליקציות יש גישה למיקום}two{ל-# מתוך {total} אפליקציות יש גישה למיקום}other{ל-# מתוך {total} אפליקציות יש גישה למיקום}}"</string>
@@ -2016,6 +2019,8 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"אפליקציות שהורדת"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"ניסיוני"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"סימוני תכונות"</string>
+    <string name="bt_stack_log_level" msgid="6527899271926969296">"‏הפעלת היומן של מקבץ Bluetooth"</string>
+    <string name="bt_stack_log_level_summary" msgid="3769107713334448285">"‏שינוי רמת היומן של יומן מקבץ Bluetooth (החלפת המצב של ה-Bluetooth לאחר שינוי ההגדרה הזו)"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"‏סינון יומן snoop של Bluetooth HCI"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="1319792184194176235">"הגדרת מסננים"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_footer" msgid="4158945851818483666">"‏צריך להשבית ולהפעיל את ה-Bluetooth כדי שהשינויים ייכנסו לתוקף"</string>
@@ -2058,12 +2063,9 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"אני רוצה להמשיך בכל זאת"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"ביטול"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"הגדרות ההגדלה"</string>
-    <!-- no translation found for accessibility_magnification_one_finger_panning_title (4503949739883092989) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_on (9133125894310777539) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_off (8979146350396559805) -->
-    <skip />
+    <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"הזזה עם אצבע אחת"</string>
+    <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"גוררים אצבע אחת כדי להזיז את אזור ההגדלה."</string>
+    <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"גוררים שתי אצבעות כדי להזיז את אזור ההגדלה."</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"הגדלה בעזרת קיצור דרך"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"הגדלה בעזרת קיצור דרך והקשה שלוש פעמים"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"מידע על <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
@@ -2090,6 +2092,7 @@
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"לחיצה ארוכה על לחצני עוצמת הקול כדי לפתוח"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"מקישים שלוש פעמים על המסך כדי לפתוח"</string>
     <string name="accessibility_tutorial_dialog_title_two_finger_double" msgid="3912970760484557646">"הקשה כפולה במסך עם שתי אצבעות כדי לפתוח"</string>
+    <string name="accessibility_tutorial_dialog_title_quick_setting" msgid="2905083277641794558">"קיצור דרך להגדרות מהירות"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"שימוש בתנועה לצורך פתיחה"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="6800684770875867559">"שימוש בתנועה להפעלת תכונות הנגישות"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"כדי להשתמש בתכונה זו, יש להקיש על לחצן הנגישות <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> שבתחתית המסך.\n\nכדי לעבור בין התכונות השונות, יש ללחוץ לחיצה ארוכה על לחצן הנגישות."</string>
@@ -2097,6 +2100,7 @@
     <string name="accessibility_tutorial_dialog_message_volume" msgid="5033080515460519183">"כדי להשתמש בתכונה הזו, יש ללחוץ לחיצה ארוכה על שני הלחצנים של עוצמת הקול."</string>
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"כדי להפעיל הגדלה ולהפסיק אותה, יש להקיש שלוש פעמים במיקום כלשהו במסך."</string>
     <string name="accessibility_tutorial_dialog_message_two_finger_triple" msgid="860548190334486449">"כדי להתחיל ולהפסיק את ההגדלה, מקישים הקשה כפולה במיקום כלשהו במסך עם שתי אצבעות."</string>
+    <string name="accessibility_tutorial_dialog_message_quick_setting" msgid="2272748015553891860">"כדי להשתמש בתכונה הזו, מחליקים למטה מהחלק העליון של המסך."</string>
     <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"כדי להשתמש בתכונה זו, יש להחליק כלפי מעלה מתחתית המסך באמצעות שתי אצבעות.\n\nכדי לעבור בין התכונות השונות, יש להחליק כלפי מעלה באמצעות שתי אצבעות ולהחזיק."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="8142847782708562793">"כדי להשתמש בתכונה זו, יש להחליק כלפי מעלה מתחתית המסך באמצעות שלוש אצבעות.\n\nכדי לעבור בין התכונות השונות, יש להחליק כלפי מעלה באמצעות שלוש אצבעות ולהחזיק."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"כדי להשתמש בתכונת הנגישות, יש להחליק כלפי מעלה מתחתית המסך באמצעות שתי אצבעות.\n\nכדי לעבור בין התכונות השונות, יש להחליק כלפי מעלה באמצעות שתי אצבעות ולהחזיק."</string>
@@ -2104,8 +2108,8 @@
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"הבנתי"</string>
     <string name="accessibility_tutorial_dialog_link_button" msgid="6797349445794031781">"הגדרות הלחצן"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"קיצור הדרך של \'<xliff:g id="SERVICE">%1$s</xliff:g>\'"</string>
-    <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"לחצן הנגישות"</string>
-    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"תנועת נגישות"</string>
+    <string name="accessibility_shortcut_edit_summary_software" msgid="48978719406821294">"לחצן הנגישות"</string>
+    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="7346399253904683940">"תנועה להפעלת תכונות הנגישות"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"יש להחליק למעלה בעזרת שתי אצבעות"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"יש להחליק למעלה בעזרת שלוש אצבעות"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"הקשה על לחצן הנגישות"</string>
@@ -2115,6 +2119,9 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"יש להחליק כלפי מעלה מתחתית המסך באמצעות שלוש אצבעות.\n\nכדי לעבור בין תכונות, יש להחליק כלפי מעלה באמצעות שלוש אצבעות ולהחזיק."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="4459254227203203324"><annotation id="link">"אפשרויות נוספות"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"מידע נוסף על <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"הגדרות מהירות"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="8726678553797015432">"מחליקים למטה מהחלק העליון של המסך"</string>
+    <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"הגדרות מהירות"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"לחיצה ארוכה על לחצני עוצמת הקול"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"לחיצה ארוכה על לחצני עוצמת הקול"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"יש ללחוץ לחיצה ארוכה על שני הלחצנים של עוצמת הקול"</string>
@@ -2152,7 +2159,8 @@
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"טקסט בניגודיות גבוהה"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"שינוי צבע הטקסט לשחור או לבן. ניגודיות מקסימלית לצבע הרקע."</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"הגדלת הניגודיות של הטקסט למקסימום"</string>
-    <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="5493999083693403489">"ניתן לשנות את צבע הטקסט לשחור או לבן כדי להגביר את הניגודיות עם הרקע."</string>
+    <!-- no translation found for accessibility_toggle_maximize_text_contrast_preference_summary (8200408691846666900) -->
+    <skip />
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"עדכון אוטומטי של הגדלת מסך"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"עדכון הגדלת מסך במעבר בין אפליקציות"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"לחצן ההפעלה מסיים שיחה"</string>
@@ -4197,6 +4205,8 @@
     <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"כדי לעבור למסך הבית, מחליקים למעלה מתחתית המסך. כדי לעבור בין אפליקציות, מחליקים למעלה מתחתית המסך, מחזיקים ומשחררים. כדי לחזור למסך הקודם, מחליקים מהקצה הימני או השמאלי של המסך."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"ניווט ב-3 לחצנים"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"ביצוע פעולות כמו חזרה למסך הקודם, מעבר למסך הבית ומעבר בין אפליקציות באמצעות לחצנים בחלק התחתון של המסך."</string>
+    <!-- no translation found for nav_tutorial_button_description (5791791794770463386) -->
+    <skip />
     <string name="keywords_system_navigation" msgid="3131782378486554934">"ניווט במערכת, ניווט ב-2 לחצנים, ניווט ב-3 לחצנים, ניווט באמצעות תנועות, החלקה"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"העוזר הדיגיטלי"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"החלקה להפעלת העוזר הדיגיטלי"</string>
@@ -4641,12 +4651,9 @@
     <string name="primary_sim_texts_title" msgid="1287584042733097749">"הודעות טקסט"</string>
     <string name="primary_sim_automatic_data_title" msgid="1265528923229642480">"מעבר אוטומטי בין חבילות גלישה"</string>
     <string name="primary_sim_automatic_data_msg" msgid="1612203837010785203">"‏שימוש בחבילת הגלישה של אחד מכרטיסי ה-SIM, תלוי בכיסוי ובזמינות"</string>
-    <!-- no translation found for sim_action_restart_dialog_title (3507413479633430120) -->
-    <skip />
-    <!-- no translation found for sim_action_restart_dialog_msg (4737611046767629774) -->
-    <skip />
-    <!-- no translation found for sim_action_restart_dialog_cancel (665560106686565624) -->
-    <skip />
+    <string name="sim_action_restart_dialog_title" msgid="3507413479633430120">"‏הפעלה מחדש לשימוש בשני כרטיסי SIM"</string>
+    <string name="sim_action_restart_dialog_msg" msgid="4737611046767629774">"‏כדי להשתמש בשני כרטיסי SIM בו-זמנית, צריך להפעיל מחדש את המכשיר ואז להפעיל את שני כרטיסי ה-SIM"</string>
+    <string name="sim_action_restart_dialog_cancel" msgid="665560106686565624">"שימוש ב-<xliff:g id="CARRIER_NAME">%1$s</xliff:g> בלבד"</string>
     <string name="sim_onboarding_phoneNumber_data_only" msgid="8158409121949373662">"נתונים בלבד"</string>
     <string name="sim_onboarding_setup" msgid="5750393553605388463">"הגדרה"</string>
     <string name="sim_onboarding_next" msgid="6415025179929475355">"הבא"</string>
@@ -4761,6 +4768,13 @@
     <string name="confirm_enable_4k_pages_text" msgid="6168921566226074524">"המכשיר יופעל מחדש לאחר האישור."</string>
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"‏עדכון הליבה (kernel) התואמת לדפים של 16KB נכשל."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"השינויים מתעדכנים"</string>
+    <string name="confirm_format_ext4_title" msgid="4453684705528818873">"‏לפרמט מחדש את המכשיר ל-ext4?"</string>
+    <string name="confirm_format_ext4_text" msgid="8164677342487500794">"‏האפשרות של 16K למפתחים נתמכת במערכת הקבצים ext4. לאחר האישור, נתוני המכשיר יאופסו ומערכת הקבצים תוחלף ל-ext4."</string>
+    <string name="format_ext4_failure_toast" msgid="6904611547290793885">"‏הניסיון לפרמט מחדש את המכשיר ולאפס את מחיצת הנתונים ל-ext4 נכשל."</string>
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (6338135847153690912) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_text (236718973897424382) -->
+    <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"טיפול בדוחות על באגים"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"הגדרה זו קובעת איזו אפליקציה מטפלת במקש הקיצור של הדוח על הבאג במכשיר."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"אישי"</string>
