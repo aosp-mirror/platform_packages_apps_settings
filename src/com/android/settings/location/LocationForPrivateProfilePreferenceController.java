@@ -68,6 +68,7 @@ public class LocationForPrivateProfilePreferenceController
     @Override
     public int getAvailabilityStatus() {
         if (!android.os.Flags.allowPrivateProfile()
+                || !android.multiuser.Flags.enablePrivateSpaceFeatures()
                 || !android.multiuser.Flags.handleInterleavedSettingsForPrivateSpace()
                 || !isPrivateProfileAvailable()) {
             return CONDITIONALLY_UNAVAILABLE;

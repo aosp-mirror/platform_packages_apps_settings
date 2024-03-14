@@ -4989,7 +4989,7 @@
     <!-- Title for the accessibility preference to high contrast text. [CHAR LIMIT=35] -->
     <string name="accessibility_toggle_maximize_text_contrast_preference_title">Maximize text contrast</string>
     <!-- Summary for the accessibility preference to high contrast text. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_toggle_maximize_text_contrast_preference_summary">Change text color to black or white to increase contrast with the background.</string>
+    <string name="accessibility_toggle_maximize_text_contrast_preference_summary">Add a black or white background around text to increase contrast</string>
     <!-- Title for the accessibility preference to auto update screen magnification. [CHAR LIMIT=35] -->
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title">Auto
         update screen magnification</string>
@@ -10479,6 +10479,9 @@
     <!-- Summary text for 3-button navigation  [CHAR LIMIT=NONE] -->
     <string name="legacy_navigation_summary">Go back, Home, and switch apps with buttons at the bottom of your screen.</string>
 
+    <!-- Accessibility string for gesture nav tutorial button [CHAR_LIMIT=NONE] -->
+    <string name="nav_tutorial_button_description">Start gesture navigation tutorial</string>
+
     <!-- Search keywords for System Navigation settings. [CHAR_LIMIT=NONE]-->
     <string name="keywords_system_navigation">system navigation, 2 button navigation, 3 button navigation, gesture navigation, swipe</string>
 
@@ -11997,6 +12000,9 @@
     <string name="confirm_format_ext4_text">16K developer option is supported with ext4 filesystem. Device will be wiped and filesystem will be changed to ext4 after confirmation.</string>
     <!-- Toast on failure to reformat data to ext4 -->
     <string name="format_ext4_failure_toast">Failed to reformat and wipe the data partiton to ext4.</string>
+    <!-- Dialog to OEM unlock the device before using 16K developer option -->
+    <string name="confirm_oem_unlock_for_16k_title">OEM unlock required</string>
+    <string name="confirm_oem_unlock_for_16k_text">Device needs to be OEM unlocked before using 16K developer option. OEM unlock will also require formatting userdata. Please OEM unlock the device and try again.</string>
 
     <!-- DSU Loader. Do not translate. -->
 

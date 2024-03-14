@@ -1,0 +1,9 @@
+package: "com.android.settings.flags"
+container: "system"
+
+flag {
+    name: "thread_settings_enabled"
+    namespace: "thread_network"
+    description: "Controls whether the Thread Settings UX is displayed"
+    bug: "329384658"
+}
