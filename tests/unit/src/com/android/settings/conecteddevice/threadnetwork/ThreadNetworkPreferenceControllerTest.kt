@@ -33,13 +33,13 @@ import androidx.preference.PreferenceManager
 import androidx.preference.SwitchPreference
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.android.net.thread.platform.flags.Flags
 import com.android.settings.R
 import com.android.settings.core.BasePreferenceController.AVAILABLE
 import com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE
 import com.android.settings.core.BasePreferenceController.DISABLED_DEPENDENT_SETTING
 import com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE
 import com.android.settings.connecteddevice.threadnetwork.ThreadNetworkPreferenceController.BaseThreadNetworkController
+import com.android.settings.flags.Flags
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Rule
@@ -68,7 +68,7 @@ class ThreadNetworkPreferenceControllerTest {
 
     @Before
     fun setUp() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_THREAD_ENABLED_PLATFORM)
+        mSetFlagsRule.enableFlags(Flags.FLAG_THREAD_SETTINGS_ENABLED)
         context = spy(ApplicationProvider.getApplicationContext<Context>())
         executor = ContextCompat.getMainExecutor(context)
         fakeThreadNetworkController = FakeThreadNetworkController(executor)
@@ -96,7 +96,7 @@ class ThreadNetworkPreferenceControllerTest {
 
     @Test
     fun availabilityStatus_flagDisabled_returnsConditionallyUnavailable() {
-        mSetFlagsRule.disableFlags(Flags.FLAG_THREAD_ENABLED_PLATFORM)
+        mSetFlagsRule.disableFlags(Flags.FLAG_THREAD_SETTINGS_ENABLED)
         assertThat(controller.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE)
     }
 
