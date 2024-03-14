@@ -28,7 +28,10 @@ import android.os.SystemUpdateManager;
 import android.os.UpdateEngine;
 import android.os.UpdateEngineStable;
 import android.os.UpdateEngineStableCallback;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.Settings;
+import android.service.oemlock.OemLockManager;
 import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -116,6 +119,12 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         mEnable16k = (Boolean) newValue;
+        // Prompt user to do oem unlock first
+        if (!isDeviceOEMUnlocked()) {
+            Enable16KOemUnlockDialog.show(mFragment);
+            return false;
+        }
+
         if (isDataf2fs()) {
             EnableExt4WarningDialog.show(mFragment, this);
             return false;
@@ -417,5 +426,31 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
         }
 
         return false;
+    }
+
+    private boolean isDeviceOEMUnlocked() {
+        // OEM unlock is checked for bootloader, carrier and user. Check all three to ensure
+        // that device is unlocked and it is also allowed by user as well as carrier
+        final OemLockManager oemLockManager = mContext.getSystemService(OemLockManager.class);
+        final UserManager userManager = mContext.getSystemService(UserManager.class);
+        if (oemLockManager == null || userManager == null) {
+            Log.e(TAG, "Required services not found on device to check for OEM unlock state.");
+            return false;
+        }
+
+        // If either of device or carrier is not allowed to unlock, return false
+        if (!oemLockManager.isDeviceOemUnlocked()
+                || !oemLockManager.isOemUnlockAllowedByCarrier()) {
+            Log.e(TAG, "Device is not OEM unlocked or it is not allowed by carrier");
+            return false;
+        }
+
+        final UserHandle userHandle = UserHandle.of(UserHandle.myUserId());
+        if (userManager.hasBaseUserRestriction(UserManager.DISALLOW_FACTORY_RESET, userHandle)) {
+            Log.e(TAG, "Factory reset is not allowed for user.");
+            return false;
+        }
+
+        return true;
     }
 }
