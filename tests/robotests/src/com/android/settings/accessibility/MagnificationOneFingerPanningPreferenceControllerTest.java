@@ -16,7 +16,6 @@
 
 package com.android.settings.accessibility;
 
-import static com.android.server.accessibility.Flags.enableMagnificationOneFingerPanningGesture;
 import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
 import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
@@ -28,7 +27,10 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
 import android.content.Context;
-import android.platform.test.flag.junit.SetFlagsRule;
+import android.platform.test.annotations.RequiresFlagsDisabled;
+import android.platform.test.annotations.RequiresFlagsEnabled;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.provider.Settings;
 
 import androidx.preference.PreferenceManager;
@@ -51,8 +53,9 @@ public class MagnificationOneFingerPanningPreferenceControllerTest {
     private static final String ONE_FINGER_PANNING_KEY =
             Settings.Secure.ACCESSIBILITY_SINGLE_FINGER_PANNING_ENABLED;
 
-    @Rule public final SetFlagsRule mSetFlagsRule =
-            new SetFlagsRule(SetFlagsRule.DefaultInitValueType.DEVICE_DEFAULT);
+    @Rule
+    public final CheckFlagsRule mCheckFlagsRule =
+            DeviceFlagsValueProvider.createCheckFlagsRule();
 
     private final Context mContext = ApplicationProvider.getApplicationContext();
     private final SwitchPreference mSwitchPreference = spy(new SwitchPreference(mContext));
@@ -88,16 +91,16 @@ public class MagnificationOneFingerPanningPreferenceControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_defaultState_disabled() {
+    @RequiresFlagsDisabled(Flags.FLAG_ENABLE_MAGNIFICATION_ONE_FINGER_PANNING_GESTURE)
+    public void getAvailabilityStatus_flagDisabled_disabled() {
         int status = mController.getAvailabilityStatus();
 
         assertThat(status).isEqualTo(DISABLED_FOR_USER);
     }
 
     @Test
+    @RequiresFlagsEnabled(Flags.FLAG_ENABLE_MAGNIFICATION_ONE_FINGER_PANNING_GESTURE)
     public void getAvailabilityStatus_featureFlagEnabled_enabled() {
-        enableFlag();
-
         int status = mController.getAvailabilityStatus();
 
         assertThat(status).isEqualTo(AVAILABLE);
@@ -158,21 +161,13 @@ public class MagnificationOneFingerPanningPreferenceControllerTest {
     }
 
     @Test
+    @RequiresFlagsEnabled(Flags.FLAG_ENABLE_MAGNIFICATION_ONE_FINGER_PANNING_GESTURE)
     public void performClick_switchDefaultState_shouldReturnTrue() {
-        enableFlag();
-
         mSwitchPreference.performClick();
 
         verify(mSwitchPreference).setChecked(true);
         assertThat(mController.isChecked()).isTrue();
         assertThat(mSwitchPreference.isChecked()).isTrue();
-    }
-
-    private void enableFlag() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_ONE_FINGER_PANNING_GESTURE);
-        assertThat(enableMagnificationOneFingerPanningGesture()).isTrue();
-        // This ensures that preference change listeners are added correctly.
-        mController.displayPreference(mScreen);
     }
 
     private String enabledSummary() {
