@@ -23,6 +23,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import com.android.settings.deviceinfo.regulatory.RegulatoryInfo.getRegulatoryInfo
+import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 
 /**
  * [Activity] that displays regulatory information for the "Regulatory information"
@@ -53,8 +54,8 @@ class RegulatoryInfoDisplayActivity : Activity() {
             return
         }
 
-        val regulatoryText = resources.getText(R.string.regulatory_info_text)
-        if (regulatoryText.isNotEmpty()) {
+        val regulatoryText = getRegulatoryText()
+        if (!regulatoryText.isNullOrEmpty()) {
             builder.setMessage(regulatoryText)
             val dialog = builder.show()
             // we have to show the dialog first, or the setGravity() call will throw a NPE
@@ -63,5 +64,11 @@ class RegulatoryInfoDisplayActivity : Activity() {
             // neither drawable nor text resource exists, finish activity
             finish()
         }
+    }
+
+    private fun getRegulatoryText(): CharSequence? {
+        val regulatoryInfoText = resources.getText(R.string.regulatory_info_text)
+        if (regulatoryInfoText.isNotBlank()) return regulatoryInfoText
+        return featureFactory.hardwareInfoFeatureProvider?.countryIfOriginLabel
     }
 }
