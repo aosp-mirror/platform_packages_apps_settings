@@ -81,10 +81,12 @@
 
     </PreferenceCategory>
 
-    <com.android.settings.accessibility.AccessibilityFooterPreference
+    <com.android.settingslib.widget.FooterPreference
         android:key="private_space_footer"
         android:title="@string/private_space_apps_permission_text"
         android:selectable="false"
-        settings:searchable="false"/>
+        settings:searchable="false"
+        settings:controller="com.android.settings.privatespace.PrivateSpaceFooterPreferenceController"/>
+
 
 </PreferenceScreen>
