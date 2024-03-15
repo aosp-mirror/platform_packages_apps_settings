@@ -52,7 +52,7 @@
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"継続しない"</string>
     <string name="sleep_on_fold_summary" msgid="7737992842459588846">"デバイスを折りたたむとフロント ディスプレイがロックされます"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"画面を自動で回転させる"</string>
-    <string name="smart_rotate_text_headline" msgid="5878008933992951904">"顔検出は、前面カメラを使用して自動回転の精度を高めます。画像が Google に保存されたり送信されたりすることはありません。"</string>
+    <string name="smart_rotate_text_headline" msgid="5878008933992951904">"顔検出は、前面カメラを使用して自動回転の精度を高めます。画像が保存されたり Google に送信されたりすることはありません。"</string>
     <string name="bluetooth" msgid="8898478620943459654">"Bluetooth"</string>
     <string name="bluetooth_is_discoverable" msgid="4798961627677790935">"周辺のすべてのBluetoothデバイスに表示（<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>）"</string>
     <string name="bluetooth_is_discoverable_always" msgid="8122823110652921674">"周辺のすべてのBluetoothデバイスに表示"</string>
@@ -73,10 +73,10 @@
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="631521133525979967">"右の補聴器を接続しました。\n\n左耳をペア設定するには、電源が入り、ペア設定できる状態になっていることをご確認ください。"</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"右耳をペア設定"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"左耳をペア設定"</string>
-    <string name="bluetooth_device_controls_general" msgid="1399214835599665488">"使用可能なすべての補聴器"</string>
-    <string name="bluetooth_device_controls_title" msgid="659009912978022189">"補聴器の詳細設定"</string>
-    <string name="bluetooth_device_controls_summary" msgid="5387400497394163925">"ショートカットやテレコイルの制御などのクロスデバイス設定を変更します"</string>
-    <string name="bluetooth_device_controls_specific" msgid="7706863288754077107">"このデバイスのみ"</string>
+    <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"補聴器の設定"</string>
+    <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"ショートカット、補聴器両立性"</string>
+    <string name="bluetooth_hearing_aids_presets" msgid="5429761844739722885">"プリセット"</string>
+    <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"プリセットを更新できませんでした"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"音声出力"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"音声出力について"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"補聴器またはスマートフォンのスピーカーに音を転送します"</string>
@@ -569,6 +569,9 @@
     <string name="privatespace_unlock_description" msgid="3177710543121916413">"プライベート スペースのロックを解除する"</string>
     <string name="privatespace_hide_off_summary" msgid="7227778747159633671">"OFF"</string>
     <string name="privatespace_hide_on_summary" msgid="6136704537527640183">"ON"</string>
+    <string name="private_space_hide_dialog_title" msgid="3192253150765516720">"プライベート スペースは次回ロックしたときに非表示になります"</string>
+    <string name="private_space_hide_dialog_message" msgid="2006421821648157211">"非表示のときにアクセスするには、アプリリストの検索バーにプライベート スペースと入力します"</string>
+    <string name="private_space_hide_dialog_button" msgid="4157191429310035457">"OK"</string>
     <string name="private_space_category_system" msgid="1286843321867285700">"システム"</string>
     <string name="private_space_delete_title" msgid="636873505724100006">"プライベート スペースの削除"</string>
     <string name="private_space_delete_header" msgid="4594429153176776184">"プライベート スペースを削除しますか？"</string>
@@ -828,8 +831,6 @@
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"アプリの接続を解除する"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"接続できる Bluetooth オーディオ デバイスの上限"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"接続できる Bluetooth オーディオ デバイス数の上限の選択"</string>
-    <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"NFC スタック デバッグログ"</string>
-    <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"NFC スタック ロギングレベルを増やす"</string>
     <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"NFC ベンダーの詳細なデバッグログ"</string>
     <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"バグレポートには、その他のデバイス固有のベンダーログが含まれます。これには、非公開の情報が含まれることがあります。"</string>
     <string name="nfc_snoop_log_title" msgid="1576197495976952388">"フィルタされていない NFC NCI ログ"</string>
@@ -2015,6 +2016,8 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"ダウンロードしたアプリ"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"試験運用機能"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"機能フラグ"</string>
+    <string name="bt_stack_log_level" msgid="6527899271926969296">"Bluetooth スタックログの有効化"</string>
+    <string name="bt_stack_log_level_summary" msgid="3769107713334448285">"Bluetooth スタック ロギングのログレベルを変更します（この設定の変更後に Bluetooth を切り替えます）"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"Bluetooth HCI スヌープログ フィルタリング"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="1319792184194176235">"フィルタを設定"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_footer" msgid="4158945851818483666">"変更を反映するには、Bluetooth を無効にしてから有効にしてください"</string>
@@ -2086,6 +2089,7 @@
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"両方の音量ボタンを長押しして開く"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"画面をトリプルタップして開く"</string>
     <string name="accessibility_tutorial_dialog_title_two_finger_double" msgid="3912970760484557646">"2 本の指で画面をダブルタップして開く"</string>
+    <string name="accessibility_tutorial_dialog_title_quick_setting" msgid="2905083277641794558">"クイック設定のショートカット"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"ジェスチャーで開く"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="6800684770875867559">"ユーザー補助操作を使用する"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"この機能を使用するには、画面の下部にあるユーザー補助機能ボタン <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> をタップします。\n\n機能を切り替えるには、ユーザー補助機能ボタンを長押しします。"</string>
@@ -2093,6 +2097,7 @@
     <string name="accessibility_tutorial_dialog_message_volume" msgid="5033080515460519183">"この機能を使用するには、音量大と音量小の両方のボタンを長押しします。"</string>
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"拡大を開始および停止するには、画面をトリプルタップします。"</string>
     <string name="accessibility_tutorial_dialog_message_two_finger_triple" msgid="860548190334486449">"拡大を開始および停止するには、2 本の指で画面をダブルタップします。"</string>
+    <string name="accessibility_tutorial_dialog_message_quick_setting" msgid="2272748015553891860">"この機能を使用するには、画面の上部から下にスワイプしてください。"</string>
     <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"この機能を使用するには、2 本の指で画面の下から上にスワイプします。\n\n機能を切り替えるには、2 本の指で上にスワイプしたまま長押しします。"</string>
     <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="8142847782708562793">"この機能を使用するには、3 本の指で画面の下から上にスワイプします。\n\n機能を切り替えるには、3 本の指で上にスワイプしたまま長押しします。"</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"ユーザー補助機能を使用するには、2 本の指で画面の下から上にスワイプします。\n\n機能を切り替えるには、2 本の指で上にスワイプしたまま長押しします。"</string>
@@ -2100,8 +2105,8 @@
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"OK"</string>
     <string name="accessibility_tutorial_dialog_link_button" msgid="6797349445794031781">"ボタンの設定"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"<xliff:g id="SERVICE">%1$s</xliff:g>のショートカット"</string>
-    <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"ユーザー補助機能ボタン"</string>
-    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"ユーザー補助操作"</string>
+    <string name="accessibility_shortcut_edit_summary_software" msgid="48978719406821294">"ユーザー補助機能ボタン"</string>
+    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="7346399253904683940">"ユーザー補助操作"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"2 本の指で上にスワイプ"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"3 本の指で上にスワイプ"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"ユーザー補助機能ボタンをタップ"</string>
@@ -2111,6 +2116,9 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"3 本の指で画面の下から上にスワイプします。\n\n機能を切り替えるには、3 本指で上にスワイプしたまま長押しします。"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="4459254227203203324"><annotation id="link">"その他のオプション"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"「<xliff:g id="SERVICE">%1$s</xliff:g>」の詳細"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"クイック設定"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="8726678553797015432">"画面の上部から下にスワイプします"</string>
+    <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"クイック設定"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"音量ボタンを長押し"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"音量大と音量小の両方のボタンを長押し"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"音量大と音量小の両方のボタンを長押しします"</string>
@@ -2148,7 +2156,8 @@
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"高コントラスト テキスト"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"テキストの色を黒または白に変更します。背景とのコントラストが最も際立ちます。"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"テキストのコントラストを最大にする"</string>
-    <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="5493999083693403489">"背景とのコントラストが最も際立つようにするには、テキストの色を黒または白に変更します。"</string>
+    <!-- no translation found for accessibility_toggle_maximize_text_contrast_preference_summary (8200408691846666900) -->
+    <skip />
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"画面の拡大を自動更新"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"アプリの遷移時に画面の拡大を更新"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"電源ボタンで通話を終了"</string>
@@ -3797,7 +3806,7 @@
     <string name="filter_instant_apps" msgid="2292108467020380068">"Instant Apps"</string>
     <string name="filter_notif_blocked_apps" msgid="1065653868850012325">"通知 OFF"</string>
     <string name="advanced_apps" msgid="7643010673326578815">"詳細設定"</string>
-    <string name="app_permissions" msgid="8666537659217653626">"権限マネージャー"</string>
+    <string name="app_permissions" msgid="8666537659217653626">"権限マネージャ"</string>
     <string name="app_data_sharing_updates_title" msgid="1694297952320402788">"位置情報を共有する方法の更新"</string>
     <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"ユーザーの位置情報を共有する方法が変更されたアプリを確認"</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"タップして復帰"</string>
@@ -4193,6 +4202,8 @@
     <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"ホームに移動するには、画面の下部から上にスワイプします。アプリを切り替えるには、下から上にスワイプして長押ししてから離します。戻るには、左端または右端からスワイプします。"</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"3 ボタン ナビゲーション"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"戻る、ホームへの移動、アプリの切り替えを画面下部のボタンで行います。"</string>
+    <!-- no translation found for nav_tutorial_button_description (5791791794770463386) -->
+    <skip />
     <string name="keywords_system_navigation" msgid="3131782378486554934">"システム ナビゲーション, 2 ボタン ナビゲーション, 3 ボタン ナビゲーション, ジェスチャー ナビゲーション, スワイプ"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"デジタル アシスタント"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"スワイプしてアシスタントを起動"</string>
@@ -4637,12 +4648,9 @@
     <string name="primary_sim_texts_title" msgid="1287584042733097749">"テキスト メッセージ"</string>
     <string name="primary_sim_automatic_data_title" msgid="1265528923229642480">"自動データ切り替え"</string>
     <string name="primary_sim_automatic_data_msg" msgid="1612203837010785203">"サービスの対象エリアや提供状況に応じて、いずれかの SIM のデータを使用します"</string>
-    <!-- no translation found for sim_action_restart_dialog_title (3507413479633430120) -->
-    <skip />
-    <!-- no translation found for sim_action_restart_dialog_msg (4737611046767629774) -->
-    <skip />
-    <!-- no translation found for sim_action_restart_dialog_cancel (665560106686565624) -->
-    <skip />
+    <string name="sim_action_restart_dialog_title" msgid="3507413479633430120">"SIM を 2 つ使用するには再起動してください"</string>
+    <string name="sim_action_restart_dialog_msg" msgid="4737611046767629774">"2 つの SIM を同時に使用するには、デバイスを再起動してから両方の SIM を有効にしてください"</string>
+    <string name="sim_action_restart_dialog_cancel" msgid="665560106686565624">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> のみ使用"</string>
     <string name="sim_onboarding_phoneNumber_data_only" msgid="8158409121949373662">"データのみ"</string>
     <string name="sim_onboarding_setup" msgid="5750393553605388463">"設定"</string>
     <string name="sim_onboarding_next" msgid="6415025179929475355">"次へ"</string>
@@ -4757,6 +4765,13 @@
     <string name="confirm_enable_4k_pages_text" msgid="6168921566226074524">"確認後にデバイスが再起動します。"</string>
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"16 KB ページの互換性のあるカーネルにアップデートできませんでした。"</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"変更を適用しています"</string>
+    <string name="confirm_format_ext4_title" msgid="4453684705528818873">"デバイスを ext4 に再フォーマットしますか？"</string>
+    <string name="confirm_format_ext4_text" msgid="8164677342487500794">"ext4 ファイルシステムでは 16K のデベロッパー オプションがサポートされています。確定すると、デバイスがワイプされ、ファイルシステムが ext4 に変更されます。"</string>
+    <string name="format_ext4_failure_toast" msgid="6904611547290793885">"データ パーティションを ext4 に再フォーマットしてワイプすることができませんでした。"</string>
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (6338135847153690912) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_text (236718973897424382) -->
+    <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"バグレポート ハンドラ"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"デバイスでバグレポートのショートカットを処理するアプリを選択します。"</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"個人用"</string>
