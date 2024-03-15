@@ -22,7 +22,9 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.spy;
 
+import android.app.GrammaticalInflectionManager;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.os.Looper;
 
 import com.android.settings.widget.TickButtonPreference;
@@ -58,6 +60,7 @@ public class TermsOfAddressMasculineControllerTest {
     private TickButtonPreference mMasculinePreference;
     private TickButtonPreference mNotSpecifiedPreference;
     private TickButtonPreference mNeutralPreference;
+    private GrammaticalInflectionManager mGrammaticalInflectionManager;
 
     @Before
     public void setUp() throws Exception {
@@ -68,6 +71,8 @@ public class TermsOfAddressMasculineControllerTest {
             Looper.prepare();
         }
 
+        mGrammaticalInflectionManager = mContext.getSystemService(
+                GrammaticalInflectionManager.class);
         mPreferenceManager = new PreferenceManager(mContext);
         mPreferenceScreen = mPreferenceManager.createPreferenceScreen(mContext);
         mPreferenceCategory = new PreferenceCategory(mContext);
@@ -93,12 +98,10 @@ public class TermsOfAddressMasculineControllerTest {
     public void displayPreference_setGrammaticalGenderIsMasculine_MasculineIsSelected() {
         TickButtonPreference selectedPreference =
                 (TickButtonPreference) mPreferenceScreen.getPreference(3);
-        TickButtonPreference pref = (TickButtonPreference) mPreferenceScreen.getPreference(1);
-
         selectedPreference.performClick();
 
         assertThat(selectedPreference.getKey()).isEqualTo(KEY_MASCULINE);
-        assertThat(selectedPreference.isSelected()).isTrue();
-        assertThat(pref.isSelected()).isFalse();
+        assertThat(mGrammaticalInflectionManager.getSystemGrammaticalGender()).isEqualTo(
+                Configuration.GRAMMATICAL_GENDER_MASCULINE);
     }
 }
