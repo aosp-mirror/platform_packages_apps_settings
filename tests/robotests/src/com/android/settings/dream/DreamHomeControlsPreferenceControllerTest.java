@@ -63,7 +63,7 @@ public class DreamHomeControlsPreferenceControllerTest {
         mContext = ApplicationProvider.getApplicationContext();
         mShadowContentResolver = Shadow.extract(mContext.getContentResolver());
         mBackend = new DreamBackend(mContext);
-        mController = new DreamHomeControlsPreferenceController(mContext, "key", mBackend);
+        mController = new DreamHomeControlsPreferenceController(mContext, mBackend);
         mPreference = new SwitchPreference(mContext);
         mPreference.setKey(mController.getPreferenceKey());
         when(mScreen.findPreference(mPreference.getKey())).thenReturn(mPreference);
