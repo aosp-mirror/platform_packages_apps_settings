@@ -247,6 +247,7 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
         switch (systemNavKey) {
             case KEY_SYSTEM_NAV_GESTURAL:
                 if (isGestureTutorialAvailable()){
+                    videoPref.setContentDescription(R.string.nav_tutorial_button_description);
                     videoPref.setOnPreferenceClickListener(preference -> {
                         startActivity(mLaunchSandboxIntent);
                         return true;

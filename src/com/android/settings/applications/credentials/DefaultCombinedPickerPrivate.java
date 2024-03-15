@@ -32,6 +32,8 @@ public class DefaultCombinedPickerPrivate extends DefaultCombinedPicker {
 
     /** Returns whether the user is handled by this fragment. */
     public static boolean isUserHandledByFragment(UserManager userManager) {
-        return android.os.Flags.allowPrivateProfile() && userManager.isPrivateProfile();
+        return android.os.Flags.allowPrivateProfile()
+                && android.multiuser.Flags.enablePrivateSpaceFeatures()
+                && userManager.isPrivateProfile();
     }
 }

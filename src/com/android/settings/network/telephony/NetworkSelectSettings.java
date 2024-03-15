@@ -24,12 +24,10 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.PersistableBundle;
 import android.provider.Settings;
-import android.telephony.AccessNetworkConstants;
 import android.telephony.CarrierConfigManager;
 import android.telephony.CellIdentity;
 import android.telephony.CellInfo;
 import android.telephony.NetworkRegistrationInfo;
-import android.telephony.ServiceState;
 import android.telephony.SignalStrength;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -52,13 +50,11 @@ import com.android.settings.network.telephony.scan.NetworkScanRepository;
 import com.android.settings.network.telephony.scan.NetworkScanRepository.NetworkScanCellInfos;
 import com.android.settings.network.telephony.scan.NetworkScanRepository.NetworkScanComplete;
 import com.android.settings.network.telephony.scan.NetworkScanRepository.NetworkScanError;
-import com.android.settings.network.telephony.scan.NetworkScanRepository.NetworkScanResult;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.utils.ThreadUtils;
 
 import kotlin.Unit;
-import kotlin.jvm.functions.Function1;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -101,6 +97,8 @@ public class NetworkSelectSettings extends DashboardFragment {
     private NetworkScanRepository mNetworkScanRepository;
     private boolean mUpdateScanResult = false;
 
+    private NetworkSelectRepository mNetworkSelectRepository;
+
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
@@ -138,6 +136,7 @@ public class NetworkSelectSettings extends DashboardFragment {
         mCarrierConfigManager.registerCarrierConfigChangeListener(mNetworkScanExecutor,
                 mCarrierConfigChangeListener);
         mNetworkScanRepository = new NetworkScanRepository(context, mSubId);
+        mNetworkSelectRepository = new NetworkSelectRepository(context, mSubId);
     }
 
     @Keep
@@ -202,35 +201,37 @@ public class NetworkSelectSettings extends DashboardFragment {
         mProgressHeader = setPinnedHeaderView(
                 com.android.settingslib.widget.progressbar.R.layout.progress_header
         ).findViewById(com.android.settingslib.widget.progressbar.R.id.progress_bar_animation);
-        forceUpdateConnectedPreferenceCategory();
+        mNetworkSelectRepository.launchUpdateNetworkRegistrationInfo(
+                getViewLifecycleOwner(),
+                (info) -> {
+                    forceUpdateConnectedPreferenceCategory(info);
+                    return Unit.INSTANCE;
+                });
         launchNetworkScan();
     }
 
     private void launchNetworkScan() {
-        mNetworkScanRepository.launchNetworkScan(getViewLifecycleOwner(), new Function1<>() {
-            @Override
-            public Unit invoke(@NonNull NetworkScanResult networkScanResult) {
-                if (!mUpdateScanResult) {
-                    // Not update UI if not in scan mode.
-                    return Unit.INSTANCE;
-                }
-                if (networkScanResult instanceof NetworkScanCellInfos networkScanCellInfos) {
-                    scanResultHandler(networkScanCellInfos.getCellInfos());
-                    return Unit.INSTANCE;
-                }
-                if (!isPreferenceScreenEnabled()) {
-                    clearPreferenceSummary();
-                    enablePreferenceScreen(true);
-                } else if (networkScanResult instanceof NetworkScanComplete
-                        && mCellInfoList == null) {
-                    // In case the scan timeout before getting any results
-                    addMessagePreference(R.string.empty_networks_list);
-                } else if (networkScanResult instanceof NetworkScanError) {
-                    addMessagePreference(R.string.network_query_error);
-                }
-
+        mNetworkScanRepository.launchNetworkScan(getViewLifecycleOwner(), (networkScanResult) -> {
+            if (!mUpdateScanResult) {
+                // Not update UI if not in scan mode.
                 return Unit.INSTANCE;
             }
+            if (networkScanResult instanceof NetworkScanCellInfos networkScanCellInfos) {
+                scanResultHandler(networkScanCellInfos.getCellInfos());
+                return Unit.INSTANCE;
+            }
+            if (!isPreferenceScreenEnabled()) {
+                clearPreferenceSummary();
+                enablePreferenceScreen(true);
+            } else if (networkScanResult instanceof NetworkScanComplete
+                    && mCellInfoList == null) {
+                // In case the scan timeout before getting any results
+                addMessagePreference(R.string.empty_networks_list);
+            } else if (networkScanResult instanceof NetworkScanError) {
+                addMessagePreference(R.string.network_query_error);
+            }
+
+            return Unit.INSTANCE;
         });
     }
 
@@ -238,7 +239,6 @@ public class NetworkSelectSettings extends DashboardFragment {
     public void onStart() {
         super.onStart();
 
-        updateForbiddenPlmns();
         setProgressBarVisible(true);
         mUpdateScanResult = true;
     }
@@ -477,45 +477,26 @@ public class NetworkSelectSettings extends DashboardFragment {
      * - If the device has no data, we will remove the connected network operators list from the
      * screen.
      */
-    private void forceUpdateConnectedPreferenceCategory() {
-        if (mTelephonyManager.getDataState() == mTelephonyManager.DATA_CONNECTED) {
-            // Try to get the network registration states
-            final ServiceState ss = mTelephonyManager.getServiceState();
-            if (ss == null) {
-                return;
+    private void forceUpdateConnectedPreferenceCategory(
+            NetworkSelectRepository.NetworkRegistrationAndForbiddenInfo info) {
+        for (NetworkRegistrationInfo regInfo : info.getNetworkList()) {
+            final CellIdentity cellIdentity = regInfo.getCellIdentity();
+            if (cellIdentity == null) {
+                continue;
             }
-            final List<NetworkRegistrationInfo> networkList =
-                    ss.getNetworkRegistrationInfoListForTransportType(
-                            AccessNetworkConstants.TRANSPORT_TYPE_WWAN);
-            if (networkList == null || networkList.size() == 0) {
-                return;
+            final NetworkOperatorPreference pref = new NetworkOperatorPreference(
+                    getPrefContext(), info.getForbiddenPlmns(), mShow4GForLTE);
+            pref.updateCell(null, cellIdentity);
+            if (pref.isForbiddenNetwork()) {
+                continue;
             }
-            // Due to the aggregation of cell between carriers, it's possible to get CellIdentity
-            // containing forbidden PLMN.
-            // Getting current network from ServiceState is no longer a good idea.
-            // Add an additional rule to avoid from showing forbidden PLMN to the user.
-            if (mForbiddenPlmns == null) {
-                updateForbiddenPlmns();
-            }
-            for (NetworkRegistrationInfo regInfo : networkList) {
-                final CellIdentity cellIdentity = regInfo.getCellIdentity();
-                if (cellIdentity == null) {
-                    continue;
-                }
-                final NetworkOperatorPreference pref = new NetworkOperatorPreference(
-                        getPrefContext(), mForbiddenPlmns, mShow4GForLTE);
-                pref.updateCell(null, cellIdentity);
-                if (pref.isForbiddenNetwork()) {
-                    continue;
-                }
-                pref.setSummary(R.string.network_connected);
-                // Update the signal strength icon, since the default signalStrength value
-                // would be zero
-                // (it would be quite confusing why the connected network has no signal)
-                pref.setIcon(SignalStrength.NUM_SIGNAL_STRENGTH_BINS - 1);
-                mPreferenceCategory.addPreference(pref);
-                break;
-            }
+            pref.setSummary(R.string.network_connected);
+            // Update the signal strength icon, since the default signalStrength value
+            // would be zero
+            // (it would be quite confusing why the connected network has no signal)
+            pref.setIcon(SignalStrength.NUM_SIGNAL_STRENGTH_BINS - 1);
+            mPreferenceCategory.addPreference(pref);
+            break;
         }
     }
 
