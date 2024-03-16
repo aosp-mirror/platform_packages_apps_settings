@@ -45,8 +45,6 @@ import com.android.settings.core.instrumentation.SettingsMetricsFeatureProvider
 import com.android.settings.dashboard.DashboardFeatureProviderImpl
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProviderImpl
-import com.android.settings.deviceinfo.hardwareinfo.HardwareInfoFeatureProvider
-import com.android.settings.deviceinfo.hardwareinfo.HardwareInfoFeatureProviderImpl
 import com.android.settings.display.DisplayFeatureProvider
 import com.android.settings.display.DisplayFeatureProviderImpl
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProviderImpl
@@ -80,9 +78,6 @@ open class FeatureFactoryImpl : FeatureFactory() {
     private val contextualCardFeatureProvider by lazy {
         ContextualCardFeatureProviderImpl(appContext)
     }
-
-    override val hardwareInfoFeatureProvider: HardwareInfoFeatureProvider =
-        HardwareInfoFeatureProviderImpl
 
     override val metricsFeatureProvider by lazy { SettingsMetricsFeatureProvider() }
 
