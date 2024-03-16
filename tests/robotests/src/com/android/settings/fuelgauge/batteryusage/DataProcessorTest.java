@@ -80,6 +80,7 @@ public final class DataProcessorTest {
     @Mock private Intent mIntent;
     @Mock private BatteryUsageStats mBatteryUsageStats;
     @Mock private UserManager mUserManager;
+    @Mock private UserIdsSeries mUserIdsSeries;
     @Mock private IUsageStatsManager mUsageStatsManager;
     @Mock private BatteryEntry mMockBatteryEntry1;
     @Mock private BatteryEntry mMockBatteryEntry2;
@@ -95,6 +96,7 @@ public final class DataProcessorTest {
         mContext = spy(RuntimeEnvironment.application);
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mPowerUsageFeatureProvider = mFeatureFactory.powerUsageFeatureProvider;
+        doReturn(true).when(mUserIdsSeries).isMainUserProfileOnly();
 
         DataProcessor.sTestSystemAppsPackageNames = Set.of();
         DataProcessor.sUsageStatsManager = mUsageStatsManager;
@@ -118,8 +120,10 @@ public final class DataProcessorTest {
         doReturn(mUsageEvents1)
                 .when(mUsageStatsManager)
                 .queryEventsForUser(anyLong(), anyLong(), anyInt(), anyString());
+        doReturn(new ArrayList<>(List.of(0))).when(mUserIdsSeries).getVisibleUserIds();
 
-        final Map<Long, UsageEvents> resultMap = DataProcessor.getAppUsageEvents(mContext);
+        final Map<Long, UsageEvents> resultMap =
+                DataProcessor.getAppUsageEvents(mContext, mUserIdsSeries);
 
         assertThat(resultMap).hasSize(1);
         assertThat(resultMap.get(Long.valueOf(userInfo.id))).isEqualTo(mUsageEvents1);
@@ -134,7 +138,8 @@ public final class DataProcessorTest {
         // Test locked user.
         doReturn(false).when(mUserManager).isUserUnlocked(userInfo.id);
 
-        final Map<Long, UsageEvents> resultMap = DataProcessor.getAppUsageEvents(mContext);
+        final Map<Long, UsageEvents> resultMap =
+                DataProcessor.getAppUsageEvents(mContext, mUserIdsSeries);
 
         assertThat(resultMap).isNull();
     }
@@ -150,7 +155,8 @@ public final class DataProcessorTest {
                 .when(mUsageStatsManager)
                 .queryEventsForUser(anyLong(), anyLong(), anyInt(), anyString());
 
-        final Map<Long, UsageEvents> resultMap = DataProcessor.getAppUsageEvents(mContext);
+        final Map<Long, UsageEvents> resultMap =
+                DataProcessor.getAppUsageEvents(mContext, mUserIdsSeries);
 
         assertThat(resultMap).isNull();
     }
@@ -163,7 +169,8 @@ public final class DataProcessorTest {
                 .when(mUsageStatsManager)
                 .queryEventsForUser(anyLong(), anyLong(), anyInt(), anyString());
 
-        assertThat(DataProcessor.getAppUsageEventsForUser(mContext, userId, 0))
+        assertThat(DataProcessor.getCurrentAppUsageEventsForUser(
+                mContext, mUserIdsSeries, userId, 0))
                 .isEqualTo(mUsageEvents1);
     }
 
@@ -173,7 +180,9 @@ public final class DataProcessorTest {
         // Test locked user.
         doReturn(false).when(mUserManager).isUserUnlocked(userId);
 
-        assertThat(DataProcessor.getAppUsageEventsForUser(mContext, userId, 0)).isNull();
+        assertThat(DataProcessor.getCurrentAppUsageEventsForUser(
+                mContext, mUserIdsSeries, userId, 0))
+                .isNull();
     }
 
     @Test
@@ -184,7 +193,9 @@ public final class DataProcessorTest {
                 .when(mUsageStatsManager)
                 .queryEventsForUser(anyLong(), anyLong(), anyInt(), anyString());
 
-        assertThat(DataProcessor.getAppUsageEventsForUser(mContext, userId, 0)).isNull();
+        assertThat(DataProcessor.getCurrentAppUsageEventsForUser(
+                mContext, mUserIdsSeries, userId, 0))
+                .isNull();
     }
 
     @Test
@@ -852,6 +863,7 @@ public final class DataProcessorTest {
         assertThat(
                         DataProcessor.getBatteryDiffDataMap(
                                 mContext,
+                                mUserIdsSeries,
                                 hourlyBatteryLevelsPerDay,
                                 new HashMap<>(),
                                 /* appUsagePeriodMap= */ null,
@@ -938,6 +950,7 @@ public final class DataProcessorTest {
         Map<Long, BatteryDiffData> batteryDiffDataMap =
                 DataProcessor.getBatteryDiffDataMap(
                         mContext,
+                        mUserIdsSeries,
                         batteryLevelData.getHourlyBatteryLevelsPerDay(),
                         batteryHistoryMap,
                         appUsagePeriodMap,
@@ -1154,6 +1167,7 @@ public final class DataProcessorTest {
                         mContext,
                         DataProcessor.getBatteryDiffDataMap(
                                 mContext,
+                                mUserIdsSeries,
                                 batteryLevelData.getHourlyBatteryLevelsPerDay(),
                                 batteryHistoryMap,
                                 appUsagePeriodMap,
@@ -1271,6 +1285,10 @@ public final class DataProcessorTest {
                 };
         final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap = new HashMap<>();
         final int currentUserId = mContext.getUserId();
+        doReturn(false).when(mUserIdsSeries).isFromOtherUsers(currentUserId);
+        doReturn(true).when(mUserIdsSeries).isFromOtherUsers(currentUserId + 1);
+        doReturn(true).when(mUserIdsSeries).isFromOtherUsers(currentUserId + 2);
+
         // Adds the index = 0 data.
         Map<String, BatteryHistEntry> entryMap = new HashMap<>();
         BatteryHistEntry entry =
@@ -1431,6 +1449,7 @@ public final class DataProcessorTest {
                         mContext,
                         DataProcessor.getBatteryDiffDataMap(
                                 mContext,
+                                mUserIdsSeries,
                                 batteryLevelData.getHourlyBatteryLevelsPerDay(),
                                 batteryHistoryMap,
                                 /* appUsagePeriodMap= */ null,
@@ -1546,6 +1565,7 @@ public final class DataProcessorTest {
                         mContext,
                         DataProcessor.getBatteryDiffDataMap(
                                 mContext,
+                                mUserIdsSeries,
                                 batteryLevelData.getHourlyBatteryLevelsPerDay(),
                                 batteryHistoryMap,
                                 appUsagePeriodMap,
@@ -1701,6 +1721,7 @@ public final class DataProcessorTest {
                         mContext,
                         DataProcessor.getBatteryDiffDataMap(
                                 mContext,
+                                mUserIdsSeries,
                                 batteryLevelData.getHourlyBatteryLevelsPerDay(),
                                 batteryHistoryMap,
                                 /* appUsagePeriodMap= */ null,
@@ -1851,6 +1872,7 @@ public final class DataProcessorTest {
                         mContext,
                         DataProcessor.getBatteryDiffDataMap(
                                 mContext,
+                                mUserIdsSeries,
                                 batteryLevelData.getHourlyBatteryLevelsPerDay(),
                                 batteryHistoryMap,
                                 /* appUsagePeriodMap= */ null,
@@ -1873,6 +1895,7 @@ public final class DataProcessorTest {
         final BatteryDiffData batteryDiffData =
                 DataProcessor.generateBatteryDiffData(
                         mContext,
+                        mUserIdsSeries,
                         System.currentTimeMillis(),
                         DataProcessor.convertToBatteryHistEntry(null, mBatteryUsageStats),
                         /* systemAppsPackageNames= */ Set.of(),
@@ -1933,6 +1956,7 @@ public final class DataProcessorTest {
         final BatteryDiffData batteryDiffData =
                 DataProcessor.generateBatteryDiffData(
                         mContext,
+                        mUserIdsSeries,
                         System.currentTimeMillis(),
                         DataProcessor.convertToBatteryHistEntry(
                                 batteryEntryList, mBatteryUsageStats),

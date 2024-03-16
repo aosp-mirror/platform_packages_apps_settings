@@ -70,6 +70,7 @@ public final class DataProcessManagerTest {
     private Context mContext;
     private DataProcessManager mDataProcessManager;
 
+    @Mock private UserIdsSeries mUserIdsSeries;
     @Mock private IUsageStatsManager mUsageStatsManager;
     @Mock private UserManager mUserManager;
     @Mock private BatteryStatsManager mBatteryStatsManager;
@@ -95,11 +96,13 @@ public final class DataProcessManagerTest {
         doReturn(mIntent).when(mContext).registerReceiver(any(), any());
         doReturn(100).when(mIntent).getIntExtra(eq(BatteryManager.EXTRA_SCALE), anyInt());
         doReturn(66).when(mIntent).getIntExtra(eq(BatteryManager.EXTRA_LEVEL), anyInt());
+        doReturn(true).when(mUserIdsSeries).isMainUserProfileOnly();
 
         mDataProcessManager =
                 new DataProcessManager(
                         mContext,
                         /* handler= */ null,
+                        mUserIdsSeries,
                         /* rawStartTimestamp= */ 0L,
                         /* lastFullChargeTimestamp= */ 0L,
                         /* callbackFunction= */ null,
@@ -117,7 +120,11 @@ public final class DataProcessManagerTest {
     @LooperMode(LooperMode.Mode.LEGACY)
     public void constructor_noLevelData() {
         final DataProcessManager dataProcessManager =
-                new DataProcessManager(mContext, /* handler= */ null, /* callbackFunction= */ null);
+                new DataProcessManager(
+                        mContext,
+                        /* handler= */ null,
+                        mUserIdsSeries,
+                        /* callbackFunction= */ null);
         assertThat(dataProcessManager.getShowScreenOnTime()).isFalse();
     }
 
@@ -180,6 +187,7 @@ public final class DataProcessManagerTest {
         doReturn(1).when(mContext).getUserId();
         // No work profile.
         doReturn(new ArrayList<>()).when(mUserManager).getUserProfiles();
+        doReturn(new ArrayList<>(List.of(1))).when(mUserIdsSeries).getVisibleUserIds();
 
         // Fake database usage data.
         final MatrixCursor cursor =
@@ -239,6 +247,7 @@ public final class DataProcessManagerTest {
                 new DataProcessManager(
                         mContext,
                         /* handler= */ null,
+                        mUserIdsSeries,
                         /* rawStartTimestamp= */ 2L,
                         /* lastFullChargeTimestamp= */ 1L,
                         /* callbackFunction= */ null,
@@ -301,7 +310,7 @@ public final class DataProcessManagerTest {
         doReturn(getUsageEvents(events))
                 .when(mUsageStatsManager)
                 .queryEventsForUser(anyLong(), anyLong(), anyInt(), any());
-        doReturn(false).when(mUserManager).isUserUnlocked(anyInt());
+        doReturn(true).when(mUserIdsSeries).isCurrentUserLocked();
         final MatrixCursor cursor =
                 new MatrixCursor(
                         new String[] {
@@ -327,6 +336,7 @@ public final class DataProcessManagerTest {
                         DataProcessManager.getBatteryLevelData(
                                 mContext,
                                 /* handler= */ null,
+                                mUserIdsSeries,
                                 /* isFromPeriodJob= */ false,
                                 /* asyncResponseDelegate= */ null))
                 .isNull();
@@ -334,6 +344,7 @@ public final class DataProcessManagerTest {
                         DataProcessManager.getBatteryLevelData(
                                 mContext,
                                 /* handler= */ null,
+                                mUserIdsSeries,
                                 /* isFromPeriodJob= */ true,
                                 /* asyncResponseDelegate= */ null))
                 .isNull();
@@ -355,6 +366,7 @@ public final class DataProcessManagerTest {
                 DataProcessManager.getBatteryLevelData(
                         mContext,
                         /* handler= */ null,
+                        mUserIdsSeries,
                         /* isFromPeriodJob= */ false,
                         /* asyncResponseDelegate= */ null);
 
@@ -383,6 +395,7 @@ public final class DataProcessManagerTest {
                 DataProcessManager.getBatteryLevelData(
                         mContext,
                         /* handler= */ null,
+                        mUserIdsSeries,
                         /* isFromPeriodJob= */ false,
                         /* asyncResponseDelegate= */ null);
 

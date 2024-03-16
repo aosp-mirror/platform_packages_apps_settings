@@ -73,10 +73,10 @@
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="631521133525979967">"Aparatul auditiv drept este conectat.\n\nCa să-l asociezi pe cel stâng, verifică dacă este pornit și gata de asociat."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"Asociază urechea dreaptă"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"Asociază urechea stângă"</string>
-    <string name="bluetooth_device_controls_general" msgid="1399214835599665488">"Pentru toate aparatele auditive disponibile"</string>
-    <string name="bluetooth_device_controls_title" msgid="659009912978022189">"Mai multe setări pentru aparate auditive"</string>
-    <string name="bluetooth_device_controls_summary" msgid="5387400497394163925">"Modifică setările pe mai multe dispozitive, de exemplu, comenzile rapide și comenzile pentru bobina cu inducție"</string>
-    <string name="bluetooth_device_controls_specific" msgid="7706863288754077107">"Pentru acest dispozitiv"</string>
+    <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Setări pentru aparate auditive"</string>
+    <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Comandă rapidă, compatibilitate cu aparatele auditive"</string>
+    <string name="bluetooth_hearing_aids_presets" msgid="5429761844739722885">"Presetări"</string>
+    <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Nu s-a putut actualiza presetarea"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Ieșire audio"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Despre ieșirea audio"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Transmite sunetele spre dispozitivul auditiv sau spre difuzorul telefonului"</string>
@@ -569,6 +569,12 @@
     <string name="privatespace_unlock_description" msgid="3177710543121916413">"Deblochează spațiul privat"</string>
     <string name="privatespace_hide_off_summary" msgid="7227778747159633671">"Dezactivat"</string>
     <string name="privatespace_hide_on_summary" msgid="6136704537527640183">"Activat"</string>
+    <!-- no translation found for private_space_hide_dialog_title (3192253150765516720) -->
+    <skip />
+    <!-- no translation found for private_space_hide_dialog_message (2006421821648157211) -->
+    <skip />
+    <!-- no translation found for private_space_hide_dialog_button (4157191429310035457) -->
+    <skip />
     <string name="private_space_category_system" msgid="1286843321867285700">"Sistem"</string>
     <string name="private_space_delete_title" msgid="636873505724100006">"Șterge spațiul privat"</string>
     <string name="private_space_delete_header" msgid="4594429153176776184">"Ștergi spațiul privat?"</string>
@@ -828,8 +834,6 @@
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Deconectează aplicația"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Numărul maxim de dispozitive audio Bluetooth conectate"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Selectează numărul maxim de dispozitive audio Bluetooth conectate"</string>
-    <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"Jurnalul de remediere a erorilor pentru stiva NFC"</string>
-    <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"Mărește nivelul de înregistrare pentru stiva NFC"</string>
     <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"Jurnal de remediere erori pentru furnizorii detaliați NFC"</string>
     <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"Include alte jurnale ale furnizorilor de dispozitive în rapoartele de eroare, care pot conține informații private."</string>
     <string name="nfc_snoop_log_title" msgid="1576197495976952388">"Jurnal nefiltrat NCI NFC"</string>
@@ -1540,8 +1544,7 @@
     <string name="network_scorer_change_active_no_previous_dialog_text" msgid="680685773455072321">"Folosești <xliff:g id="NEW_APP">%s</xliff:g> pentru a gestiona conexiunile la rețea?"</string>
     <string name="location_category_recent_location_requests" msgid="2205900488782832082">"Solicitări recente ale locației"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Locație pt. profil de serviciu"</string>
-    <!-- no translation found for private_profile_location_switch_title (4127119143109855789) -->
-    <skip />
+    <string name="private_profile_location_switch_title" msgid="4127119143109855789">"Locația spațiului privat"</string>
     <string name="location_app_level_permissions" msgid="907206607664629759">"Permisiuni pentru locație"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"Locația este dezactivată"</string>
     <string name="location_app_permission_summary_location_on" msgid="7552095451731948984">"{count,plural, =1{# din {total} aplicații are acces la locație}few{# din {total} aplicații au acces la locație}other{# din {total} de aplicații au acces la locație}}"</string>
@@ -1933,13 +1936,10 @@
     <string name="modifier_keys_reset" msgid="551170906710422041">"Resetează"</string>
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"Alege tasta de modificare"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Alege o nouă tastă pentru <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>:"</string>
-    <!-- no translation found for ime_label_title (8994569521516807168) -->
-    <skip />
+    <string name="ime_label_title" msgid="8994569521516807168">"Aspectul <xliff:g id="IME_LABEL">%s</xliff:g>"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Prestabilit"</string>
-    <!-- no translation found for automatic_keyboard_layout_label (9138088156046198913) -->
-    <skip />
-    <!-- no translation found for user_selected_keyboard_layout_label (154742505924555156) -->
-    <skip />
+    <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"Automat: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
+    <string name="user_selected_keyboard_layout_label" msgid="154742505924555156">"Utilizator selectat: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"Voce"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"Viteza indicatorului"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Controler de joc"</string>
@@ -2019,6 +2019,8 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Aplicații descărcate"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Experimentale"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Semnalări ale funcției"</string>
+    <string name="bt_stack_log_level" msgid="6527899271926969296">"Activează jurnalul seturilor Bluetooth"</string>
+    <string name="bt_stack_log_level_summary" msgid="3769107713334448285">"Schimbă nivelul de jurnal al înregistrării de set Bluetooth (activează Bluetooth după setare)"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"Filtrarea jurnalului de examinare Bluetooth HCI"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="1319792184194176235">"Setează filtrele"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_footer" msgid="4158945851818483666">"Dezactivează și activează Bluetooth ca să se aplice modificările"</string>
@@ -2061,12 +2063,9 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Continuă oricum"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Anulează"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Setări pentru mărire"</string>
-    <!-- no translation found for accessibility_magnification_one_finger_panning_title (4503949739883092989) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_on (9133125894310777539) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_off (8979146350396559805) -->
-    <skip />
+    <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"Deplasare cu un deget"</string>
+    <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"Mută zona de mărit trăgând cu un deget."</string>
+    <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"Mută zona de mărit trăgând cu două degete."</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Mărește folosind scurtătura"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Mărește folosind scurtătura și atingând de trei ori"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"Despre <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
@@ -2093,6 +2092,7 @@
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Apasă lung butoanele de volum pentru a deschide"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Atinge ecranul de trei ori ca să deschizi"</string>
     <string name="accessibility_tutorial_dialog_title_two_finger_double" msgid="3912970760484557646">"Atinge de două ori ecranul cu două degete pentru a deschide"</string>
+    <string name="accessibility_tutorial_dialog_title_quick_setting" msgid="2905083277641794558">"Comanda directă Setări rapide"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Folosește un gest pentru a deschide"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="6800684770875867559">"Folosește gestul de accesibilitate"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"Ca să folosești această funcție, atinge butonul de accesibilitate <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> din partea de jos a ecranului.\n\nCa să comuți între funcții, atinge lung butonul de accesibilitate."</string>
@@ -2100,6 +2100,7 @@
     <string name="accessibility_tutorial_dialog_message_volume" msgid="5033080515460519183">"Ca să folosești această funcție, apasă lung ambele butoane de volum."</string>
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"Pentru a porni și a opri mărirea, atinge de trei ori oriunde pe ecran."</string>
     <string name="accessibility_tutorial_dialog_message_two_finger_triple" msgid="860548190334486449">"Pentru a porni și a opri mărirea, atinge de două ori oriunde pe ecran cu două degete."</string>
+    <string name="accessibility_tutorial_dialog_message_quick_setting" msgid="2272748015553891860">"Ca să folosești această funcție, glisează în jos din partea de sus a ecranului."</string>
     <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"Ca să folosești această funcție, glisează în sus cu două degete din partea de jos a ecranului.\n\nCa să comuți între funcții, glisează în sus cu două degete și ține apăsat."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="8142847782708562793">"Ca să folosești această funcție, glisează în sus cu trei degete din partea de jos a ecranului.\n\nCa să comuți între funcții, glisează în sus cu trei degete și ține apăsat."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"Ca să folosești o funcție de accesibilitate, glisează în sus cu două degete din partea de jos a ecranului.\n\nCa să comuți între funcții, glisează în sus cu două degete și ține apăsat."</string>
@@ -2107,8 +2108,8 @@
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"OK"</string>
     <string name="accessibility_tutorial_dialog_link_button" msgid="6797349445794031781">"Setări pentru buton"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Comanda rapidă pentru <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
-    <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Buton de accesibilitate"</string>
-    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"Gest de accesibilitate"</string>
+    <string name="accessibility_shortcut_edit_summary_software" msgid="48978719406821294">"buton de accesibilitate"</string>
+    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="7346399253904683940">"gest de accesibilitate"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Glisează în sus cu două degete"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Glisează în sus cu trei degete"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"Atinge butonul de accesibilitate"</string>
@@ -2118,6 +2119,9 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Glisează în sus cu trei degete din partea de jos a ecranului.\n\nPentru a comuta între funcții, glisează în sus cu trei degete și ține apăsat."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="4459254227203203324"><annotation id="link">"Mai multe opțiuni"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"Află mai multe despre <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"Setări rapide"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="8726678553797015432">"Glisează în jos din partea de sus a ecranului"</string>
+    <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"Setări rapide"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Apasă lung butoanele de volum"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"apasă lung butoanele de volum"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Apasă lung ambele butoane de volum"</string>
@@ -2155,7 +2159,8 @@
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Text cu contrast ridicat"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Schimbă culoarea textului în negru sau alb. Astfel, se maximizează contrastul cu fundalul."</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"Maximizează contrastul textului"</string>
-    <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="5493999083693403489">"Schimbă culoarea textului în negru sau alb pentru a crește contrastul dintre acesta și fundal."</string>
+    <!-- no translation found for accessibility_toggle_maximize_text_contrast_preference_summary (8200408691846666900) -->
+    <skip />
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Actualiz. automat mărirea ecranului"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Actualiz. mărirea ecran. la tranziția între aplic."</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Butonul de pornire închide"</string>
@@ -4200,6 +4205,8 @@
     <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"Pentru a merge la ecranul de pornire, glisează în sus din partea de jos a ecranului. Pentru a schimba aplicațiile, glisează în sus din partea de jos, ține, apoi eliberează. Pentru a reveni, glisează din partea stângă sau dreaptă."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Navigare cu 3 butoane"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"Accesează ecranul anterior sau ecranul de pornire și comută între aplicații folosind butoanele din josul ecranului."</string>
+    <!-- no translation found for nav_tutorial_button_description (5791791794770463386) -->
+    <skip />
     <string name="keywords_system_navigation" msgid="3131782378486554934">"navigarea sistemului, navigare cu 2 butoane, navigare cu 3 butoane, navigare prin gesturi, glisare"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Asistent digital"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Glisează pentru a invoca asistentul"</string>
@@ -4644,12 +4651,9 @@
     <string name="primary_sim_texts_title" msgid="1287584042733097749">"Mesaje text"</string>
     <string name="primary_sim_automatic_data_title" msgid="1265528923229642480">"Comutarea automată a datelor"</string>
     <string name="primary_sim_automatic_data_msg" msgid="1612203837010785203">"Folosește date de pe orice card SIM, în funcție de acoperire și de disponibilitate"</string>
-    <!-- no translation found for sim_action_restart_dialog_title (3507413479633430120) -->
-    <skip />
-    <!-- no translation found for sim_action_restart_dialog_msg (4737611046767629774) -->
-    <skip />
-    <!-- no translation found for sim_action_restart_dialog_cancel (665560106686565624) -->
-    <skip />
+    <string name="sim_action_restart_dialog_title" msgid="3507413479633430120">"Repornește ca să folosești două carduri SIM"</string>
+    <string name="sim_action_restart_dialog_msg" msgid="4737611046767629774">"Ca să folosești două carduri SIM simultan, repornește dispozitivul, apoi activează ambele carduri SIM"</string>
+    <string name="sim_action_restart_dialog_cancel" msgid="665560106686565624">"Folosește doar <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="sim_onboarding_phoneNumber_data_only" msgid="8158409121949373662">"Numai pentru date"</string>
     <string name="sim_onboarding_setup" msgid="5750393553605388463">"Configurează"</string>
     <string name="sim_onboarding_next" msgid="6415025179929475355">"Înainte"</string>
@@ -4764,6 +4768,13 @@
     <string name="confirm_enable_4k_pages_text" msgid="6168921566226074524">"Dispozitivul va reporni după confirmare."</string>
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"Nu s-a putut actualiza nucleul la unul compatibil cu pagini pe 16 KB."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Se aplică modificarea"</string>
+    <string name="confirm_format_ext4_title" msgid="4453684705528818873">"Reformatezi dispozitivul pe ext4?"</string>
+    <string name="confirm_format_ext4_text" msgid="8164677342487500794">"Opțiunea pentru dezvoltatori 16K este acceptată cu sistemul de fișiere ext4. Dispozitivul se va șterge și sistemul de fișiere se va schimba în ext4 după confirmare."</string>
+    <string name="format_ext4_failure_toast" msgid="6904611547290793885">"Nu s-a putut reformata și goli partiția de date pe ext4."</string>
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (6338135847153690912) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_text (236718973897424382) -->
+    <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"Handler pentru rapoartele de eroare"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Stabilește ce aplicație gestionează comanda rapidă pentru Raportul de eroare pe dispozitivul tău."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Personal"</string>

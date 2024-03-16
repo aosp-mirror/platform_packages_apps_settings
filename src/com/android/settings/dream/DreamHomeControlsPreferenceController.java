@@ -21,7 +21,6 @@ import android.provider.Settings;
 
 import androidx.preference.Preference;
 
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settingslib.dream.DreamBackend;
@@ -33,14 +32,11 @@ import com.android.settingslib.dream.DreamBackend;
 public class DreamHomeControlsPreferenceController extends TogglePreferenceController {
     private final DreamBackend mBackend;
 
-    public DreamHomeControlsPreferenceController(Context context, String key) {
-        this(context, key, DreamBackend.getInstance(context));
-    }
+    public static final String PREF_KEY = "dream_home_controls_toggle";
 
-    @VisibleForTesting
-    public DreamHomeControlsPreferenceController(Context context, String key,
+    public DreamHomeControlsPreferenceController(Context context,
             DreamBackend dreamBackend) {
-        super(context, key);
+        super(context, PREF_KEY);
         mBackend = dreamBackend;
     }
 
@@ -57,7 +53,6 @@ public class DreamHomeControlsPreferenceController extends TogglePreferenceContr
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        preference.setEnabled(getAvailabilityStatus() == AVAILABLE);
         refreshSummary(preference);
     }
 

@@ -73,10 +73,10 @@
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="631521133525979967">"Kifaa chako cha kusikilizia cha kulia kimeunganishwa.\n\nIli uoanishe cha kushoto, hakikisha kuwa kimewashwa na kipo tayari kuoanishwa."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"Unganisha kisaidizi cha kulia"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"Unganisha kisaidizi cha kushoto"</string>
-    <string name="bluetooth_device_controls_general" msgid="1399214835599665488">"Kwa vifaa vyote vya kusikia vinavyopatikana"</string>
-    <string name="bluetooth_device_controls_title" msgid="659009912978022189">"Mipangilio zaidi ya vifaa vya kusikilizia"</string>
-    <string name="bluetooth_device_controls_summary" msgid="5387400497394163925">"Badilisha mipangilio ya kifaa kilichounganishwa kwingine kama vile vidhibiti vya koili ya shaba na njia ya mkato"</string>
-    <string name="bluetooth_device_controls_specific" msgid="7706863288754077107">"Katika kifaa hiki"</string>
+    <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Mipangilio ya vifaa vya kusikilizia"</string>
+    <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Njia ya mkato, uoanifu wa kifaa cha kusaidia kusikia"</string>
+    <string name="bluetooth_hearing_aids_presets" msgid="5429761844739722885">"Mipangilio iliyowekwa mapema"</string>
+    <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Imeshindwa kusasisha mipangilio iliyowekwa mapema"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Vifaa vya kutoa sauti"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Kuhusu vifaa vya kutoa sauti"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Elekeza sauti kwenye kifaa chako cha kusikia au spika ya simu"</string>
@@ -569,6 +569,12 @@
     <string name="privatespace_unlock_description" msgid="3177710543121916413">"Fungua sehemu yako ya faragha"</string>
     <string name="privatespace_hide_off_summary" msgid="7227778747159633671">"Umezima"</string>
     <string name="privatespace_hide_on_summary" msgid="6136704537527640183">"Umewasha"</string>
+    <!-- no translation found for private_space_hide_dialog_title (3192253150765516720) -->
+    <skip />
+    <!-- no translation found for private_space_hide_dialog_message (2006421821648157211) -->
+    <skip />
+    <!-- no translation found for private_space_hide_dialog_button (4157191429310035457) -->
+    <skip />
     <string name="private_space_category_system" msgid="1286843321867285700">"Mfumo"</string>
     <string name="private_space_delete_title" msgid="636873505724100006">"Futa nafasi ya faragha"</string>
     <string name="private_space_delete_header" msgid="4594429153176776184">"Ungependa kufuta sehemu ya faragha?"</string>
@@ -828,8 +834,6 @@
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Tenganisha programu"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Kima cha juu zaidi cha vifaa vya sauti vya Bluetooth vilivyounganishwa"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Chagua kima cha juu zaidi cha vifaa vya sauti vya Bluetooth vilivyounganishwa"</string>
-    <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"Kumbukumbu ya utatuzi wa rafu za NFC"</string>
-    <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"Ongeza kiwango cha kuweka kumbukumbu ya rafu za NFC"</string>
     <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"Kumbukumbu ya kina ya utatuzi ya mtoa huduma"</string>
     <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"Jumuisha kumbukumbu za ziada za mtoa huduma mahususi kwa kifaa katika ripoti za hitilafu ambazo huenda zikawa na taarifa ya faragha."</string>
     <string name="nfc_snoop_log_title" msgid="1576197495976952388">"Kumbukumbu isiyochujwa ya NFC NCI"</string>
@@ -1540,8 +1544,7 @@
     <string name="network_scorer_change_active_no_previous_dialog_text" msgid="680685773455072321">"Ungependa kutumia <xliff:g id="NEW_APP">%s</xliff:g> kusimamia miunganisho yako ya mtandao?"</string>
     <string name="location_category_recent_location_requests" msgid="2205900488782832082">"Maombi ya hivi karibuni ya kutambua mahali"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Wasifu wa kazi kutambua mahali"</string>
-    <!-- no translation found for private_profile_location_switch_title (4127119143109855789) -->
-    <skip />
+    <string name="private_profile_location_switch_title" msgid="4127119143109855789">"Eneo la sehemu ya faragha"</string>
     <string name="location_app_level_permissions" msgid="907206607664629759">"Ruhusa za programu kufikia mahali"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"Utambuzi wa mahali umezimwa"</string>
     <string name="location_app_permission_summary_location_on" msgid="7552095451731948984">"{count,plural, =1{Programu # kati ya {total} ina idhini ya kufikia data ya mahali}other{Programu # kati ya {total} zina idhini ya kufikia data ya mahali}}"</string>
@@ -2016,6 +2019,8 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Programu ulizopakua"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Ya majaribio"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Alama za vipengele"</string>
+    <string name="bt_stack_log_level" msgid="6527899271926969296">"Washa kumbukumbu ya rafu ya Bluetooth"</string>
+    <string name="bt_stack_log_level_summary" msgid="3769107713334448285">"Badilisha kiwango cha kumbukumbu cha Kumbukumbu ya Rafu ya Bluetooth (Geuza Bluetooth baada ya kubadilisha mipangilio hii)"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"Kuchuja data ya kumbukumbu ya Bluetooth HCI"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="1319792184194176235">"Weka vichujio"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_footer" msgid="4158945851818483666">"Zima na uwashe Bluetooth ili mabadiliko yaanze kutumika"</string>
@@ -2058,12 +2063,9 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Endelea tu"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Ghairi"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Mipangilio ya ukuzaji"</string>
-    <!-- no translation found for accessibility_magnification_one_finger_panning_title (4503949739883092989) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_on (9133125894310777539) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_off (8979146350396559805) -->
-    <skip />
+    <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"Kubuta kwa kidole kimoja"</string>
+    <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"Sogeza sehemu ya ukuzaji kwa kuburuta kwa kidole kimoja."</string>
+    <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"Sogeza sehemu ya ukuzaji kwa kuburuta kwa vidole viwili."</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Kuza kwa njia ya mkato"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Kuza ukitumia njia ya mkato na kugonga mara tatu"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"Kuhusu <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
@@ -2090,6 +2092,7 @@
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Shikilia vitufe vya sauti ili ufungue"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Gusa skrini mara tatu ili ufungue"</string>
     <string name="accessibility_tutorial_dialog_title_two_finger_double" msgid="3912970760484557646">"Gusa skrini mara mbili kwa vidole viwili ili ufungue"</string>
+    <string name="accessibility_tutorial_dialog_title_quick_setting" msgid="2905083277641794558">"Njia ya mkato ya Mipangilio ya Haraka"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Tumia ishara ili ufungue"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="6800684770875867559">"Tumia ishara ya ufikivu"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"Ili utumie kipengele hiki, gusa kitufe cha zana za ufikivu cha <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> katika sehemu ya chini ya skrini yako.\n\nIli ubadilishe kati ya vipengele, gusa na ushikilie kitufe cha zana za ufikivu."</string>
@@ -2097,6 +2100,7 @@
     <string name="accessibility_tutorial_dialog_message_volume" msgid="5033080515460519183">"Ili utumie kipengele hiki, bonyeza na ushikilie vitufe vyote viwili vya sauti."</string>
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"Ili uanzishe na kusimamisha ukuzaji, gusa mara tatu mahali popote kwenye skrini yako."</string>
     <string name="accessibility_tutorial_dialog_message_two_finger_triple" msgid="860548190334486449">"Ili uanze au ukomeshe ukuzaji, gusa mara mbili mahali popote kwenye skrini yako kwa vidole viwili."</string>
+    <string name="accessibility_tutorial_dialog_message_quick_setting" msgid="2272748015553891860">"Ili utumie kipengele hiki, telezesha kidole chini kutoka juu ya skrini yako."</string>
     <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"Ili utumie kipengele hiki, telezesha vidole viwili juu kutoka sehemu ya chini ya skrini.\n\nIli ubadilishe kati ya vipengele, telezesha vidole viwili juu na ushikilie."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="8142847782708562793">"Ili utumie kipengele hiki, telezesha vidole vitatu juu kutoka sehemu ya chini ya skrini.\n\nIli ubadilishe kati ya vipengele, telezesha vidole vitatu juu na ushikilie."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"Ili utumie kipengele cha ufikivu, telezesha vidole viwili juu kutoka sehemu ya chini ya skrini.\n\nIli ubadilishe kati ya vipengele, telezesha vidole viwili juu na ushikilie."</string>
@@ -2104,8 +2108,8 @@
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Nimeelewa"</string>
     <string name="accessibility_tutorial_dialog_link_button" msgid="6797349445794031781">"Mipangilio ya kitufe"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Njia mkato ya <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
-    <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Kitufe cha zana za ufikivu"</string>
-    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"Ishara ya ufikivu"</string>
+    <string name="accessibility_shortcut_edit_summary_software" msgid="48978719406821294">"kitufe cha zana za ufikivu"</string>
+    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="7346399253904683940">"ishara ya ufikivu"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Telezesha vidole viwili juu"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Telezesha vidole vitatu juu"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"Gusa kitufe cha zana za ufikivu"</string>
@@ -2115,6 +2119,9 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Telezesha vidole vitatu juu kutoka sehemu ya chini ya skrini.\n\nIli ubadilishe kati ya vipengele, telezesha vidole vitatu juu na ushikilie."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="4459254227203203324"><annotation id="link">"Chaguo zaidi"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"Pata maelezo zaidi kuhusu <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"Mipangilio ya Haraka"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="8726678553797015432">"Telezesha kidole chini kutoka juu ya skrini yako"</string>
+    <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"Mipangilio ya Haraka"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Shikilia vitufe vya sauti"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"shikilia vitufe vya sauti"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Bonyeza na ushikilie vitufe vyote viwili vya sauti"</string>
@@ -2152,7 +2159,8 @@
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Maandishi yenye utofautishaji bora"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Badilisha rangi ya maandishi kuwa nyeusi au nyeupe. Ongeza utofautishaji ukitumia mandharinyuma."</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"Imarisha utofautishaji wa matini"</string>
-    <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="5493999083693403489">"Badilisha rangi ya maandishi iwe nyeusi au nyeupe ili uongeze utofautishaji kwenye mandharinyuma."</string>
+    <!-- no translation found for accessibility_toggle_maximize_text_contrast_preference_summary (8200408691846666900) -->
+    <skip />
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Sasisha otomatiki ukuzaji wa skrini"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Sasisha ukuzaji wa skrini kwenye mipito ya  programu"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Kata simu kwa kitufe cha kuwasha/kuzima"</string>
@@ -4197,6 +4205,8 @@
     <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"Ili uende kwenye skrini ya kwanza, telezesha kidole juu kutoka sehemu ya chini ya skrini. Ili ubadilishe programu, telezesha kidole juu kutoka sehemu ya chini ya skrini kisha ushikilie, halafu uachilie. Ili urudi nyuma, telezesha kidole kutoka ukingo wa kushoto au kulia."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Usogezaji kwa kutumia vitufe 3"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"Rudi nyuma, Skrini ya kwanza na ubadilishe programu ukitumia vitufe vilivyo sehemu ya chini ya skrini yako."</string>
+    <!-- no translation found for nav_tutorial_button_description (5791791794770463386) -->
+    <skip />
     <string name="keywords_system_navigation" msgid="3131782378486554934">"usogezaji kwenye mfumo, usogezaji kwa kutumia vitufe 2, usogezaji kwa kutumia vitufe 3, usogezaji kwa kutumia ishara, telezesha kidole"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Mratibu dijitali"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Telezesha kidole ili uombe programu ya mratibu dijitali"</string>
@@ -4641,12 +4651,9 @@
     <string name="primary_sim_texts_title" msgid="1287584042733097749">"Ujumbe"</string>
     <string name="primary_sim_automatic_data_title" msgid="1265528923229642480">"Kubadilisha muunganisho wa data kiotomatiki"</string>
     <string name="primary_sim_automatic_data_msg" msgid="1612203837010785203">"Tumia muunganisho wa data wa SIM yoyote kulingana na ufikiaji na upatikanaji"</string>
-    <!-- no translation found for sim_action_restart_dialog_title (3507413479633430120) -->
-    <skip />
-    <!-- no translation found for sim_action_restart_dialog_msg (4737611046767629774) -->
-    <skip />
-    <!-- no translation found for sim_action_restart_dialog_cancel (665560106686565624) -->
-    <skip />
+    <string name="sim_action_restart_dialog_title" msgid="3507413479633430120">"Zima kisha uwashe kifaa ili utumie SIM 2"</string>
+    <string name="sim_action_restart_dialog_msg" msgid="4737611046767629774">"Ili utumie SIM 2 kwa wakati mmoja, zima kisha uwashe kifaa chako, halafu uwashe SIM zote mbili"</string>
+    <string name="sim_action_restart_dialog_cancel" msgid="665560106686565624">"Tumia <xliff:g id="CARRIER_NAME">%1$s</xliff:g> pekee"</string>
     <string name="sim_onboarding_phoneNumber_data_only" msgid="8158409121949373662">"Data pekee"</string>
     <string name="sim_onboarding_setup" msgid="5750393553605388463">"Weka mipangilio"</string>
     <string name="sim_onboarding_next" msgid="6415025179929475355">"Endelea"</string>
@@ -4761,6 +4768,13 @@
     <string name="confirm_enable_4k_pages_text" msgid="6168921566226074524">"Kifaa kitajiwasha tena baada ya uthibitishaji."</string>
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"Imeshindwa kusasisha kiini kiwe kinachooana na kurasa za KB 16."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Kutekeleza mabadiliko"</string>
+    <string name="confirm_format_ext4_title" msgid="4453684705528818873">"Ungependa kubadilisha muundo wa kifaa uwe ext4?"</string>
+    <string name="confirm_format_ext4_text" msgid="8164677342487500794">"Chaguo la wasanidi programu la 16K linatumika likiwa na mfumo wa faili wa ext4. Data kwenye kifaa itaondolewa isipatikane kabisa na mfumo wa faili kubadilishwa ili uwe ext4 baada ya uthibitisho."</string>
+    <string name="format_ext4_failure_toast" msgid="6904611547290793885">"Imeshindwa kubadilisha muundo na kufuta ugavi wa data kuwa ext4."</string>
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (6338135847153690912) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_text (236718973897424382) -->
+    <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"Kidhibiti cha ripoti ya hitilafu"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Hubaini programu inayodhibiti njia ya mkato ya Ripoti ya Hitilafu kwenye kifaa chako."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Binafsi"</string>

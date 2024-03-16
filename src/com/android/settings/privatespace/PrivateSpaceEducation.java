@@ -19,10 +19,12 @@ package com.android.settings.privatespace;
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.os.Bundle;
+import android.text.util.Linkify;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.navigation.fragment.NavHostFragment;
@@ -33,6 +35,8 @@ import com.android.settings.core.InstrumentedFragment;
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupdesign.GlifLayout;
+
+import java.util.regex.Pattern;
 
 /** Fragment educating about the usage of Private Space. */
 public class PrivateSpaceEducation extends InstrumentedFragment {
@@ -65,6 +69,13 @@ public class PrivateSpaceEducation extends InstrumentedFragment {
                         .setButtonType(FooterButton.ButtonType.CANCEL)
                         .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Secondary)
                         .build());
+
+        TextView infoTextView = rootView.findViewById(R.id.learn_more);
+        Pattern pattern = Pattern.compile(infoTextView.getText().toString());
+        Linkify.addLinks(
+                infoTextView,
+                pattern,
+                getContext().getString(R.string.private_space_learn_more_url));
 
         return rootView;
     }
