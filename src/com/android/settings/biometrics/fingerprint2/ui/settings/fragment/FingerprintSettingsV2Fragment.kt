@@ -45,12 +45,14 @@ import com.android.settings.biometrics.BiometricEnrollBase.RESULT_FINISHED
 import com.android.settings.biometrics.GatekeeperPasswordProvider
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollEnrolling
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollIntroductionInternal
+import com.android.settings.biometrics.fingerprint2.domain.interactor.FingerprintEnrollInteractorImpl
 import com.android.settings.biometrics.fingerprint2.data.repository.FingerprintSensorRepositoryImpl
-import com.android.settings.biometrics.fingerprint2.domain.interactor.PressToAuthInteractorImpl
 import com.android.settings.biometrics.fingerprint2.domain.interactor.FingerprintManagerInteractorImpl
+import com.android.settings.biometrics.fingerprint2.domain.interactor.PressToAuthInteractorImpl
 import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintAuthAttemptModel
 import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintData
 import com.android.settings.biometrics.fingerprint2.lib.model.Settings
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.common.util.toFingerprintEnrollOptions
 import com.android.settings.biometrics.fingerprint2.ui.settings.binder.FingerprintSettingsViewBinder
 import com.android.settings.biometrics.fingerprint2.ui.settings.viewmodel.FingerprintSettingsNavigationViewModel
 import com.android.settings.biometrics.fingerprint2.ui.settings.viewmodel.FingerprintSettingsViewModel
@@ -222,6 +224,13 @@ class FingerprintSettingsV2Fragment :
     val fingerprintSensorProvider =
       FingerprintSensorRepositoryImpl(fingerprintManager, backgroundDispatcher, lifecycleScope)
     val pressToAuthInteractor = PressToAuthInteractorImpl(context, backgroundDispatcher)
+    val fingerprintEnrollStateRepository =
+      FingerprintEnrollInteractorImpl(
+        requireContext().applicationContext,
+        intent.toFingerprintEnrollOptions(),
+        fingerprintManager,
+        Settings,
+      )
 
     val interactor =
       FingerprintManagerInteractorImpl(
@@ -230,9 +239,7 @@ class FingerprintSettingsV2Fragment :
         fingerprintManager,
         fingerprintSensorProvider,
         GatekeeperPasswordProvider(LockPatternUtils(context.applicationContext)),
-        pressToAuthInteractor,
-        Settings,
-        getIntent()
+        fingerprintEnrollStateRepository,
       )
 
     val token = intent.getByteArrayExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN)

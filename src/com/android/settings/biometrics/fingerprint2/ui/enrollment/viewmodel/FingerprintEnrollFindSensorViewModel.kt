@@ -25,7 +25,6 @@ import com.android.settings.biometrics.fingerprint2.domain.interactor.Orientatio
 import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.FingerprintManagerInteractor
 import com.android.settings.biometrics.fingerprint2.lib.model.FingerEnrollState
 import com.android.settings.biometrics.fingerprint2.lib.model.SetupWizard
-import com.android.settings.biometrics.fingerprint2.ui.enrollment.fragment.FingerprintEnrollFindSensorV2Fragment
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintNavigationStep.Education
 import com.android.systemui.biometrics.shared.model.FingerprintSensorType
 import kotlinx.coroutines.flow.Flow
@@ -38,7 +37,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-/** Models the UI state for [FingerprintEnrollFindSensorV2Fragment]. */
+/** Models the UI state for fingerprint enroll education */
 class FingerprintEnrollFindSensorViewModel(
   private val navigationViewModel: FingerprintNavigationViewModel,
   private val fingerprintEnrollViewModel: FingerprintEnrollViewModel,
@@ -70,7 +69,7 @@ class FingerprintEnrollFindSensorViewModel(
     combineTransform(
       _showSfpsLottie,
       foldStateInteractor.isFolded,
-      orientationInteractor.rotation,
+      orientationInteractor.rotationFromDefault,
     ) { _, isFolded, rotation ->
       emit(Pair(isFolded, rotation))
     }
@@ -147,6 +146,7 @@ class FingerprintEnrollFindSensorViewModel(
                   }
                 }
                 is FingerEnrollState.EnrollHelp -> {}
+                else -> {}
               }
             }
         }

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.udfps.ui.viewmodel
+package com.android.settings.biometrics.fingerprint2.lib.model
 
 /**
  * A view model that describes the various stages of UDFPS Enrollment. This stages typically update

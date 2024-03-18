@@ -145,7 +145,8 @@ class FingerprintEnrollFindSensorViewModelV2Test {
     orientationInteractor =
       object : OrientationInteractor {
         override val orientation: Flow<Int> = flowOf(Configuration.ORIENTATION_LANDSCAPE)
-        override val rotation: Flow<Int> = flowOf(Surface.ROTATION_0)
+          override val rotation: Flow<Int> = flowOf(Surface.ROTATION_0)
+          override val rotationFromDefault: Flow<Int> = flowOf(Surface.ROTATION_0)
         override fun getRotationFromDefault(rotation: Int): Int = rotation
       }
     underTest =

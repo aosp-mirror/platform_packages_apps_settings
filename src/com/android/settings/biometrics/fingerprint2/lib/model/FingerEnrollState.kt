@@ -42,4 +42,16 @@ sealed class FingerEnrollState {
     val shouldRetryEnrollment: Boolean,
     val isCancelled: Boolean,
   ) : FingerEnrollState()
+
+  /** Indicates an acquired event has occurred */
+  data class Acquired(val acquiredGood: Boolean) : FingerEnrollState()
+
+  /** Indicates a pointer down event has occurred */
+  data object PointerDown : FingerEnrollState()
+
+  /** Indicates a pointer up event has occurred */
+  data object PointerUp : FingerEnrollState()
+
+  /** Indicates the overlay has shown */
+  data object OverlayShown : FingerEnrollState()
 }
