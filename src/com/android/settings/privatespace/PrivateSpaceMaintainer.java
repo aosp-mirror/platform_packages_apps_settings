@@ -87,7 +87,7 @@ public class PrivateSpaceMaintainer {
             return true;
         }
         // a name indicating that the profile was created from the PS Settings page
-        final String userName = "psSettingsUser";
+        final String userName = "Private space";
 
         if (mUserHandle == null) {
             try {
