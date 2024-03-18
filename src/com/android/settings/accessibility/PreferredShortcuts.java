@@ -42,7 +42,8 @@ public final class PreferredShortcuts {
 
     /**
      * Retrieves the user preferred shortcut types for the given {@code componentName} from
-     * SharedPreferences.
+     * SharedPreferences. If the user doesn't have a preferred shortcut,
+     * {@link ShortcutConstants.UserShortcutType.SOFTWARE} is returned.
      *
      * @param context       {@link Context} to access the {@link SharedPreferences}
      * @param componentName Name of the service or activity, should be the format of {@link
@@ -52,7 +53,26 @@ public final class PreferredShortcuts {
     @ShortcutConstants.UserShortcutType
     public static int retrieveUserShortcutType(
             @NonNull Context context, @NonNull String componentName) {
-        final int defaultTypes = getDefaultPreferredShortcutTypesForTarget(componentName);
+        return retrieveUserShortcutType(
+                context, componentName, ShortcutConstants.UserShortcutType.SOFTWARE);
+    }
+
+    /**
+     * Retrieves the user preferred shortcut types for the given {@code componentName} from
+     * SharedPreferences.
+     *
+     * @param context          {@link Context} to access the {@link SharedPreferences}
+     * @param componentName    Name of the service or activity, should be the format of {@link
+     *                         ComponentName#flattenToString()}.
+     * @param defaultTypes The default shortcut types to use if the user doesn't have a
+     *                         preferred shortcut.
+     * @return {@link ShortcutConstants.UserShortcutType}
+     */
+    @ShortcutConstants.UserShortcutType
+    public static int retrieveUserShortcutType(
+            @NonNull Context context,
+            @NonNull String componentName,
+            @ShortcutConstants.UserShortcutType int defaultTypes) {
 
         // Create a mutable set to modify
         final Set<String> info = new HashSet<>(getFromSharedPreferences(context));
@@ -148,15 +168,6 @@ public final class PreferredShortcuts {
     @VisibleForTesting(otherwise = VisibleForTesting.NONE)
     static void clearPreferredShortcuts(Context context) {
         getSharedPreferences(context).edit().clear().apply();
-    }
-
-    /**
-     * Returns the default shortcut types for the given accessibility feature.
-     */
-    @ShortcutConstants.UserShortcutType
-    private static int getDefaultPreferredShortcutTypesForTarget(@NonNull String componentName) {
-        // TODO (b/322712028): return different default shortcut types for the given component
-        return ShortcutConstants.UserShortcutType.SOFTWARE;
     }
 
     private PreferredShortcuts() {}

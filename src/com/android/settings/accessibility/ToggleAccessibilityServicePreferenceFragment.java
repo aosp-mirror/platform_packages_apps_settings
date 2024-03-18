@@ -45,6 +45,7 @@ import android.widget.CompoundButton;
 
 import androidx.annotation.Nullable;
 
+import com.android.internal.accessibility.common.ShortcutConstants;
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragment;
@@ -330,7 +331,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     @Override
     public void onToggleClicked(ShortcutPreference preference) {
         final int shortcutTypes = retrieveUserShortcutType(getPrefContext(),
-                mComponentName.flattenToString());
+                mComponentName.flattenToString(), getDefaultShortcutTypes());
         if (preference.isChecked()) {
             final boolean isWarningRequired;
             if (android.view.accessibility.Flags.cleanupAccessibilityWarningDialog()) {
@@ -476,6 +477,16 @@ public class ToggleAccessibilityServicePreferenceFragment extends
         return TAG;
     }
 
+    @Override
+    protected int getDefaultShortcutTypes() {
+        if (android.view.accessibility.Flags.a11yQsShortcut()) {
+            return getTileComponentName() == null ? super.getDefaultShortcutTypes()
+                    : ShortcutConstants.UserShortcutType.QUICK_SETTINGS;
+        }
+
+        return super.getDefaultShortcutTypes();
+    }
+
     private void onAllowButtonFromEnableToggleClicked() {
         handleConfirmServiceEnabled(/* confirmed= */ true);
         if (serviceSupportsAccessibilityButton()) {
@@ -507,7 +518,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
         mShortcutPreference.setChecked(true);
 
         final int shortcutTypes = retrieveUserShortcutType(getPrefContext(),
-                mComponentName.flattenToString());
+                mComponentName.flattenToString(), getDefaultShortcutTypes());
         AccessibilityUtil.optInAllValuesToSettings(getPrefContext(), shortcutTypes, mComponentName);
 
         mIsDialogShown.set(false);

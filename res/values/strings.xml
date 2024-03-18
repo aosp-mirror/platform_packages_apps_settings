@@ -178,6 +178,9 @@
     <!-- Description for text in accessibility hearing aids footer. [CHAR LIMIT=NONE] -->
     <string name="bluetooth_audio_routing_footer_summary">By default, audio output is determined by individual apps</string>
 
+    <!-- Bluetooth audio codec related settings. Title of the default audio codec selection. [CHAR LIMIT=60] -->
+    <string name="bluetooth_audio_codec_default_selection">Use System Selection (Default)</string>
+
     <!--Bluetooth settings screen, summary text for Bluetooth device with no name -->
     <string name="bluetooth_device">Unnamed Bluetooth device</string>
     <!--Bluetooth settings screen, text that appears in heading bar when scanning for devices -->
@@ -1551,20 +1554,12 @@
     <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint">"A pattern protects your phone if it\u2019s lost or stolen.<xliff:g id="empty_line">\n\n</xliff:g>This deletes the fingerprint model stored on your device. Your face model will also be permanently and securely deleted. You won\u2019t be able to use your face or fingerprint for authentication in apps."</string>
     <!-- Content of the dialog shown when the user removes the device lock PIN [CHAR LIMIT=NONE] -->
     <string name="unlock_disable_frp_warning_content_pin">"A PIN protects your phone if it\u2019s lost or stolen"</string>
-    <!-- Content of the dialog shown when the user removes the device lock PIN and there are apps with auth-bound keys that will be affected [CHAR LIMIT=NONE] -->
-    <string name="unlock_disable_frp_warning_content_pin_authbound_keys">"You will lose saved data like your PIN.<xliff:g id="empty_line">\n\n</xliff:g>Cards set up for tap to pay will be removed.<xliff:g id="empty_line">\n\n</xliff:g>Wallets and other apps that require device unlock may not work properly."</string>
     <!-- Content of the dialog shown when the user removes the device lock PIN and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
     <string name="unlock_disable_frp_warning_content_pin_fingerprint">"A PIN protects your phone if it\u2019s lost or stolen.<xliff:g id="empty_line">\n\n</xliff:g>This also deletes the fingerprint model stored on your device. You won\u2019t be able to use your fingerprint for authentication in apps."</string>
-    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has fingerprints enrolled and there are apps with auth-bound keys that will be affected [CHAR LIMIT=NONE] -->
-    <string name="unlock_disable_frp_warning_content_pin_fingerprint_authbound_keys">"You will lose saved data like your PIN and fingerprint model.<xliff:g id="empty_line">\n\n</xliff:g>Cards set up for tap to pay will be removed.<xliff:g id="empty_line">\n\n</xliff:g>Wallets and other apps that require device unlock may not work properly."</string>
     <!-- Content of the dialog shown when the user removes the device lock PIN and the user has face enrolled [CHAR LIMIT=NONE] -->
     <string name="unlock_disable_frp_warning_content_pin_face">"A PIN protects your phone if it\u2019s lost or stolen.<xliff:g id="empty_line">\n\n</xliff:g>Your face model will also be permanently and securely deleted. You won\u2019t be able to use your face for authentication in apps."</string>
-    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has face enrolled and there are apps with auth-bound keys that will be affected [CHAR LIMIT=NONE] -->
-    <string name="unlock_disable_frp_warning_content_pin_face_authbound_keys">"You will lose saved data like your PIN and face model.<xliff:g id="empty_line">\n\n</xliff:g>Cards set up for tap to pay will be removed.<xliff:g id="empty_line">\n\n</xliff:g>Wallets and other apps that require device unlock may not work properly."</string>
     <!-- Content of the dialog shown when the user removes the device lock PIN and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
     <string name="unlock_disable_frp_warning_content_pin_face_fingerprint">"A PIN protects your phone if it\u2019s lost or stolen.<xliff:g id="empty_line">\n\n</xliff:g>This deletes the fingerprint model stored on your device. Your face model will also be permanently and securely deleted. You won\u2019t be able to use your face or fingerprint for authentication in apps."</string>
-    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has face authentication and fingerprint enrolled and there are apps with auth-bound keys that will be affected [CHAR LIMIT=NONE] -->
-    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint_authbound_keys">"You will lose saved data like your PIN, face and fingerprint models.<xliff:g id="empty_line">\n\n</xliff:g>Cards set up for tap to pay will be removed.<xliff:g id="empty_line">\n\n</xliff:g>Wallets and other apps that require device unlock may not work properly."</string>
     <!-- Content of the dialog shown when the user removes the device lock password [CHAR LIMIT=NONE] -->
     <string name="unlock_disable_frp_warning_content_password">"A password protects your phone if it\u2019s lost or stolen"</string>
     <!-- Content of the dialog shown when the user removes the device lock password and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
@@ -1581,6 +1576,15 @@
     <string name="unlock_disable_frp_warning_content_unknown_face">"Device protection features will not work without your screen lock.<xliff:g id="empty_line">\n\n</xliff:g>Your face model will also be permanently and securely deleted. You won\u2019t be able to use your face for authentication in apps."</string>
     <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
     <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint">"Device protection features will not work without your screen lock.<xliff:g id="empty_line">\n\n</xliff:g>This deletes the fingerprint model stored on your device. Your face model will also be permanently and securely deleted. You won\u2019t be able to use your face or fingerprint for authentication in apps."</string>
+    <!-- Content of the dialog shown when the user removes any device screenlock and there are apps with auth-bound keys that will be affected [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_authbound_keys">"Your screen lock will be removed.<xliff:g id="empty_line">\n\n</xliff:g>Tap to pay won\u2019t be available.<xliff:g id="empty_line">\n\n</xliff:g>Wallet, payment, and other apps that require authentication may not work properly."</string>
+    <!-- Content of the dialog shown when the user removes any device screen lock and the user has fingerprints enrolled and there are apps with auth-bound keys that will be affected [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_fingerprint_authbound_keys">"Your screen lock and Fingerprint Unlock will be removed.<xliff:g id="empty_line">\n\n</xliff:g>Tap to pay won\u2019t be available.<xliff:g id="empty_line">\n\n</xliff:g>Wallet, payment, and other apps that require authentication may not work properly."</string>
+    <!-- Content of the dialog shown when the user removes any device screen lock and the user has face enrolled and there are apps with auth-bound keys that will be affected [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_face_authbound_keys">"Your screen lock and Face Unlock will be removed.<xliff:g id="empty_line">\n\n</xliff:g>Tap to pay won\u2019t be available.<xliff:g id="empty_line">\n\n</xliff:g>Wallet, payment, and other apps that require authentication may not work properly."</string>
+    <!-- Content of the dialog shown when the user removes any device screen lock and the user has face authentication and fingerprint enrolled and there are apps with auth-bound keys that will be affected [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_face_fingerprint_authbound_keys">"Your screen lock and Face &amp; Fingerprint Unlock will be removed.<xliff:g id="empty_line">\n\n</xliff:g>Tap to pay won\u2019t be available.<xliff:g id="empty_line">\n\n</xliff:g>Wallet, payment, and other apps that require authentication may not work properly."</string>
+
 
     <!-- Affirmative action of the dialog shown when the user removes the device lock [CHAR LIMIT=25] -->
     <string name="unlock_disable_frp_warning_ok">Delete</string>
@@ -2320,6 +2324,8 @@
     <string name="wifi_details_title">Network details</string>
     <!-- Wifi details preference title to display router IP subnet mask -->
     <string name="wifi_details_subnet_mask">Subnet mask</string>
+    <!-- Server name title-->
+    <string name="server_name_title">Server name</string>
     <!-- Wifi details preference title to display wifi type info [CHAR LIMIT=50]-->
     <string name="wifi_type_title">Type</string>
     <!-- Wifi details preference title to display router DNS info -->
@@ -3198,8 +3204,17 @@
     <!-- Body of dialog confirming that user wants to forget an internal storage device [CHAR LIMIT=NONE]-->
     <string name="storage_internal_forget_confirm">All the apps, photos, and data stored on this <xliff:g id="name" example="SD card">^1</xliff:g> will be lost forever.</string>
 
-    <!-- Body of dialog informing user about the storage used by the Android System [CHAR LIMIT=NONE]-->
+    <!-- Old body of dialog informing user about the storage used by the Android System [CHAR LIMIT=NONE]-->
     <string name="storage_detail_dialog_system">System includes files used to run Android version <xliff:g id="version" example="8.0">%s</xliff:g></string>
+
+    <!-- New body of dialog informing user about the storage used by the Android System [CHAR LIMIT=NONE]-->
+    <string name="storage_os_detail_dialog_system">This includes your operating system and the files that are needed to keep your phone running smoothly. To protect their integrity, these files can\u2019t be accessed.</string>
+
+    <!-- Body of dialog informing user about the storage used by the Android temporary system files [CHAR LIMIT=NONE]-->
+    <string name="storage_other_files_detail_dialog_system">This includes cache and other temporary files that are needed by your operating system. You may notice changes to the amount of storage used over time.</string>
+
+    <!-- Label for categories splitter in Settings > Storage [CHAR LIMIT=none] -->
+    <string name="storage_system_label">System</string>
 
     <!-- Message to notify guest users as to why they can't set up the storage device [CHAR LIMIT=50]-->
     <string name="storage_wizard_guest">Guest mode users cannot format SD cards</string>
@@ -10855,8 +10870,14 @@
     <!-- Preference label for the Documents & other storage section. [CHAR LIMIT=50] -->
     <string name="storage_documents_and_other">Documents &amp; other</string>
 
-    <!-- Preference label for the System storage section. [CHAR LIMIT=50] -->
+    <!-- Old Preference label for the System storage section. [CHAR LIMIT=50] -->
     <string name="storage_system">System</string>
+
+    <!-- New Preference label for the System storage section. [CHAR LIMIT=50] -->
+    <string name="storage_os_name">Android <xliff:g id="version" example="8">%s</xliff:g></string>
+
+    <!-- Preference label for the System storage section. [CHAR LIMIT=50] -->
+    <string name="storage_temporary_files">Temporary system files</string>
 
     <!-- Preference label for the Trash storage section. [CHAR LIMIT=50] -->
     <string name="storage_trash">Trash</string>
