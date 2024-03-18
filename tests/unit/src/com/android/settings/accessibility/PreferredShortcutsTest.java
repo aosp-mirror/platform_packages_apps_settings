@@ -208,6 +208,23 @@ public class PreferredShortcutsTest {
         assertThat(savedPreferredShortcut).isEqualTo(UserShortcutType.HARDWARE);
     }
 
+    @Test
+    public void retrieveUserShortcutTypeWithoutDefault_noUserPreferredShortcuts_returnSoftwareShortcut() {
+        String target = COMPONENT_NAME_1.flattenToString();
+
+        assertThat(PreferredShortcuts.retrieveUserShortcutType(mContext, target))
+                .isEqualTo(UserShortcutType.SOFTWARE);
+    }
+
+    @Test
+    public void retrieveUserShortcutTypeWithDefaultAsDefault_noUserPreferredShortcuts_returnSpecifiedDefault() {
+        String target = COMPONENT_NAME_1.flattenToString();
+
+        assertThat(PreferredShortcuts.retrieveUserShortcutType(mContext, target,
+                UserShortcutType.HARDWARE))
+                .isEqualTo(UserShortcutType.HARDWARE);
+    }
+
     private static void clearShortcuts() {
         Settings.Secure.putString(sContentResolver,
                 Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS, "");
