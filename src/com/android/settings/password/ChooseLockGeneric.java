@@ -927,34 +927,45 @@ public class ChooseLockGeneric extends SettingsActivity {
             switch (mLockPatternUtils.getKeyguardStoredPasswordQuality(mUserId)) {
                 case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING:
                     if (hasFingerprints && hasFace) {
-                        return R.string.unlock_disable_frp_warning_content_pattern_face_fingerprint;
+                        return hasAppsWithAuthBoundKeys
+                                ?
+                                R.string.unlock_disable_frp_warning_content_face_fingerprint_authbound_keys
+                                : R.string.unlock_disable_frp_warning_content_pattern_face_fingerprint;
                     } else if (hasFingerprints) {
-                        return R.string.unlock_disable_frp_warning_content_pattern_fingerprint;
+                        return hasAppsWithAuthBoundKeys
+                                ?
+                                R.string.unlock_disable_frp_warning_content_fingerprint_authbound_keys
+                                : R.string.unlock_disable_frp_warning_content_pattern_fingerprint;
                     } else if (hasFace) {
-                        return R.string.unlock_disable_frp_warning_content_pattern_face;
+                        return hasAppsWithAuthBoundKeys
+                                ?
+                                R.string.unlock_disable_frp_warning_content_face_authbound_keys
+                                : R.string.unlock_disable_frp_warning_content_pattern_face;
                     } else {
-                        return R.string.unlock_disable_frp_warning_content_pattern;
+                        return hasAppsWithAuthBoundKeys
+                                ? R.string.unlock_disable_frp_warning_content_authbound_keys
+                                : R.string.unlock_disable_frp_warning_content_pattern;
                     }
                 case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC:
                 case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC_COMPLEX:
                     if (hasFingerprints && hasFace) {
                         return hasAppsWithAuthBoundKeys
                                 ?
-                                R.string.unlock_disable_frp_warning_content_pin_face_fingerprint_authbound_keys
+                                R.string.unlock_disable_frp_warning_content_face_fingerprint_authbound_keys
                                 : R.string.unlock_disable_frp_warning_content_pin_face_fingerprint;
                     } else if (hasFingerprints) {
                         return hasAppsWithAuthBoundKeys
                                 ?
-                                R.string.unlock_disable_frp_warning_content_pin_fingerprint_authbound_keys
+                                R.string.unlock_disable_frp_warning_content_fingerprint_authbound_keys
                                 : R.string.unlock_disable_frp_warning_content_pin_fingerprint;
                     } else if (hasFace) {
                         return hasAppsWithAuthBoundKeys
                                 ?
-                                R.string.unlock_disable_frp_warning_content_pin_face_authbound_keys
+                                R.string.unlock_disable_frp_warning_content_face_authbound_keys
                                 : R.string.unlock_disable_frp_warning_content_pin_face;
                     } else {
                         return hasAppsWithAuthBoundKeys
-                                ? R.string.unlock_disable_frp_warning_content_pin_authbound_keys
+                                ? R.string.unlock_disable_frp_warning_content_authbound_keys
                                 : R.string.unlock_disable_frp_warning_content_pin;
                     }
                 case DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC:
@@ -962,24 +973,45 @@ public class ChooseLockGeneric extends SettingsActivity {
                 case DevicePolicyManager.PASSWORD_QUALITY_COMPLEX:
                 case DevicePolicyManager.PASSWORD_QUALITY_MANAGED:
                     if (hasFingerprints && hasFace) {
-                        return R.string
-                                .unlock_disable_frp_warning_content_password_face_fingerprint;
+                        return hasAppsWithAuthBoundKeys
+                                ?
+                                R.string.unlock_disable_frp_warning_content_face_fingerprint_authbound_keys
+                                : R.string.unlock_disable_frp_warning_content_password_face_fingerprint;
                     } else if (hasFingerprints) {
-                        return R.string.unlock_disable_frp_warning_content_password_fingerprint;
+                        return hasAppsWithAuthBoundKeys
+                                ?
+                                R.string.unlock_disable_frp_warning_content_fingerprint_authbound_keys
+                                : R.string.unlock_disable_frp_warning_content_password_fingerprint;
                     } else if (hasFace) {
-                        return R.string.unlock_disable_frp_warning_content_password_face;
+                        return hasAppsWithAuthBoundKeys
+                                ?
+                                R.string.unlock_disable_frp_warning_content_face_authbound_keys
+                                : R.string.unlock_disable_frp_warning_content_password_face;
                     } else {
-                        return R.string.unlock_disable_frp_warning_content_password;
+                        return hasAppsWithAuthBoundKeys
+                                ? R.string.unlock_disable_frp_warning_content_authbound_keys
+                                : R.string.unlock_disable_frp_warning_content_password;
                     }
                 default:
                     if (hasFingerprints && hasFace) {
-                        return R.string.unlock_disable_frp_warning_content_unknown_face_fingerprint;
+                        return hasAppsWithAuthBoundKeys
+                                ?
+                                R.string.unlock_disable_frp_warning_content_face_fingerprint_authbound_keys
+                                : R.string.unlock_disable_frp_warning_content_unknown_face_fingerprint;
                     } else if (hasFingerprints) {
-                        return R.string.unlock_disable_frp_warning_content_unknown_fingerprint;
+                        return hasAppsWithAuthBoundKeys
+                                ?
+                                R.string.unlock_disable_frp_warning_content_fingerprint_authbound_keys
+                                : R.string.unlock_disable_frp_warning_content_unknown_fingerprint;
                     } else if (hasFace) {
-                        return R.string.unlock_disable_frp_warning_content_unknown_face;
+                        return hasAppsWithAuthBoundKeys
+                                ?
+                                R.string.unlock_disable_frp_warning_content_face_authbound_keys
+                                : R.string.unlock_disable_frp_warning_content_unknown_face;
                     } else {
-                        return R.string.unlock_disable_frp_warning_content_unknown;
+                        return hasAppsWithAuthBoundKeys
+                                ? R.string.unlock_disable_frp_warning_content_authbound_keys
+                                : R.string.unlock_disable_frp_warning_content_unknown;
                     }
             }
         }
