@@ -23,12 +23,9 @@ import android.content.Context
 import android.platform.test.flag.junit.SetFlagsRule
 import android.telephony.SubscriptionInfo
 import android.telephony.SubscriptionManager
-import android.telephony.TelephonyCallback
-import android.telephony.TelephonyManager
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.internal.telephony.flags.Flags
-import com.android.settings.network.telephony.CallStateFlowTest
 import com.android.settingslib.spa.testutils.toListWithTimeout
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.async
@@ -42,7 +39,6 @@ import org.mockito.kotlin.doAnswer
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.spy
-import org.mockito.kotlin.stub
 
 @RunWith(AndroidJUnit4::class)
 class SubscriptionInfoListViewModelTest {
@@ -62,8 +58,7 @@ class SubscriptionInfoListViewModelTest {
         on { getSystemService(SubscriptionManager::class.java) } doReturn mockSubscriptionManager
     }
 
-    private val subscriptionInfoListViewModel: SubscriptionInfoListViewModel =
-        SubscriptionInfoListViewModel(context as Application);
+    private fun createViewModel() = SubscriptionInfoListViewModel(context as Application)
 
     private var activeSubscriptionInfoList: List<SubscriptionInfo>? = null
 
@@ -72,7 +67,7 @@ class SubscriptionInfoListViewModelTest {
         activeSubscriptionInfoList = listOf(SUB_INFO_1, SUB_INFO_2)
 
         val listDeferred = async {
-            subscriptionInfoListViewModel.subscriptionInfoListFlow.toListWithTimeout()
+            createViewModel().subscriptionInfoListFlow.toListWithTimeout()
         }
         delay(100)
         subInfoListener?.onSubscriptionsChanged()
@@ -83,49 +78,44 @@ class SubscriptionInfoListViewModelTest {
     @Test
     fun onSubscriptionsChanged_hasProvisioning_filterProvisioning() = runBlocking {
         activeSubscriptionInfoList = listOf(SUB_INFO_1, SUB_INFO_2, SUB_INFO_3)
-        val expectation = listOf(SUB_INFO_1, SUB_INFO_2)
 
         val listDeferred = async {
-            subscriptionInfoListViewModel.subscriptionInfoListFlow.toListWithTimeout()
+            createViewModel().subscriptionInfoListFlow.toListWithTimeout()
         }
         delay(100)
         subInfoListener?.onSubscriptionsChanged()
 
-        assertThat(listDeferred.await()).contains(expectation)
+        assertThat(listDeferred.await()).contains(listOf(SUB_INFO_1, SUB_INFO_2))
     }
 
     @Test
     fun onSubscriptionsChanged_flagOffHasNonTerrestrialNetwork_filterNonTerrestrialNetwork() =
         runBlocking {
             mSetFlagsRule.disableFlags(Flags.FLAG_OEM_ENABLED_SATELLITE_FLAG)
-
             activeSubscriptionInfoList = listOf(SUB_INFO_1, SUB_INFO_2, SUB_INFO_4)
-            val expectation = listOf(SUB_INFO_1, SUB_INFO_2, SUB_INFO_4)
 
             val listDeferred = async {
-                subscriptionInfoListViewModel.subscriptionInfoListFlow.toListWithTimeout()
+                createViewModel().subscriptionInfoListFlow.toListWithTimeout()
             }
             delay(100)
             subInfoListener?.onSubscriptionsChanged()
 
-            assertThat(listDeferred.await()).contains(expectation)
+            assertThat(listDeferred.await()).contains(listOf(SUB_INFO_1, SUB_INFO_2, SUB_INFO_4))
         }
 
     @Test
     fun onSubscriptionsChanged_flagOnHasNonTerrestrialNetwork_filterNonTerrestrialNetwork() =
         runBlocking {
             mSetFlagsRule.enableFlags(Flags.FLAG_OEM_ENABLED_SATELLITE_FLAG)
-
             activeSubscriptionInfoList = listOf(SUB_INFO_1, SUB_INFO_2, SUB_INFO_4)
-            val expectation = listOf(SUB_INFO_1, SUB_INFO_2)
 
             val listDeferred = async {
-                subscriptionInfoListViewModel.subscriptionInfoListFlow.toListWithTimeout()
+                createViewModel().subscriptionInfoListFlow.toListWithTimeout()
             }
             delay(100)
             subInfoListener?.onSubscriptionsChanged()
 
-            assertThat(listDeferred.await()).contains(expectation)
+            assertThat(listDeferred.await()).contains(listOf(SUB_INFO_1, SUB_INFO_2))
         }
 
     private companion object {
