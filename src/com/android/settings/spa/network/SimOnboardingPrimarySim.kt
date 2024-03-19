@@ -23,6 +23,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.SignalCellularAlt
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableIntState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -75,9 +76,6 @@ fun SimOnboardingPrimarySimImpl(
         val mobileDataSelectedId = rememberSaveable {
             mutableIntStateOf(SubscriptionManager.INVALID_SUBSCRIPTION_ID)
         }
-        val nonDdsRemember = rememberSaveable {
-            mutableIntStateOf(SubscriptionManager.INVALID_SUBSCRIPTION_ID)
-        }
 
         Column(Modifier.padding(SettingsDimension.itemPadding)) {
             SettingsBody(stringResource(id = R.string.sim_onboarding_primary_sim_msg))
@@ -94,12 +92,14 @@ fun SimOnboardingPrimarySimImpl(
         callsSelectedId.intValue = onboardingService.targetPrimarySimCalls
         textsSelectedId.intValue = onboardingService.targetPrimarySimTexts
         mobileDataSelectedId.intValue = onboardingService.targetPrimarySimMobileData
+        val isAutoDataEnabled by
+            onboardingService.targetPrimarySimAutoDataSwitch
+                .collectAsStateWithLifecycle(initialValue = null)
         PrimarySimImpl(
             primarySimInfo = primarySimInfo,
             callsSelectedId = callsSelectedId,
             textsSelectedId = textsSelectedId,
             mobileDataSelectedId = mobileDataSelectedId,
-            nonDds = nonDdsRemember,
             actionSetCalls = {
                 callsSelectedId.intValue = it
                 onboardingService.targetPrimarySimCalls = it},
@@ -109,8 +109,10 @@ fun SimOnboardingPrimarySimImpl(
             actionSetMobileData = {
                 mobileDataSelectedId.intValue = it
                 onboardingService.targetPrimarySimMobileData = it},
-            actionSetAutoDataSwitch = {
-                onboardingService.targetPrimarySimAutoDataSwitch = it},
+            isAutoDataEnabled = { isAutoDataEnabled },
+            setAutoDataEnabled = { newEnabled ->
+                onboardingService.targetPrimarySimAutoDataSwitch.value = newEnabled
+            },
         )
     }
 }

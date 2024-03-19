@@ -30,7 +30,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableIntState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -44,6 +43,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.android.settings.R
 import com.android.settings.network.SubscriptionInfoListViewModel
 import com.android.settings.network.telephony.MobileNetworkUtils
+import com.android.settings.network.telephony.TelephonyRepository
 import com.android.settings.spa.network.PrimarySimRepository.PrimarySimInfo
 import com.android.settings.wifi.WifiPickerTrackerHelper
 import com.android.settingslib.spa.framework.common.SettingsEntryBuilder
@@ -53,8 +53,6 @@ import com.android.settingslib.spa.framework.compose.navigator
 import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
 import com.android.settingslib.spa.widget.preference.Preference
 import com.android.settingslib.spa.widget.preference.PreferenceModel
-import com.android.settingslib.spa.widget.preference.SwitchPreference
-import com.android.settingslib.spa.widget.preference.SwitchPreferenceModel
 import com.android.settingslib.spa.widget.scaffold.RegularScaffold
 import com.android.settingslib.spa.widget.ui.Category
 import com.android.settingslib.spaprivileged.framework.common.broadcastReceiverFlow
@@ -193,7 +191,6 @@ fun PrimarySimImpl(
     callsSelectedId: MutableIntState,
     textsSelectedId: MutableIntState,
     mobileDataSelectedId: MutableIntState,
-    nonDds: MutableIntState,
     subscriptionManager: SubscriptionManager? =
         LocalContext.current.getSystemService(SubscriptionManager::class.java),
     coroutineScope: CoroutineScope = rememberCoroutineScope(),
@@ -223,23 +220,9 @@ fun PrimarySimImpl(
             )
         }
     },
-    actionSetAutoDataSwitch: (Boolean) -> Unit = { newState ->
-        coroutineScope.launch {
-            val telephonyManagerForNonDds: TelephonyManager? =
-                context.getSystemService(TelephonyManager::class.java)
-                    ?.createForSubscriptionId(nonDds.intValue)
-            Log.d(NetworkCellularGroupProvider.name, "NonDds:${nonDds.intValue} setAutomaticData")
-            setAutomaticData(telephonyManagerForNonDds, newState)
-        }
-    },
+    isAutoDataEnabled: () -> Boolean?,
+    setAutoDataEnabled: (newEnabled: Boolean) -> Unit,
 ) {
-    val telephonyManagerForNonDds: TelephonyManager? =
-            context.getSystemService(TelephonyManager::class.java)
-                    ?.createForSubscriptionId(nonDds.intValue)
-    val automaticDataChecked = rememberSaveable() {
-        mutableStateOf(false)
-    }
-
     CreatePrimarySimListPreference(
         stringResource(id = R.string.primary_sim_calls_title),
         primarySimInfo.callsAndSmsList,
@@ -262,31 +245,7 @@ fun PrimarySimImpl(
         actionSetMobileData
     )
 
-    val autoDataTitle = stringResource(id = R.string.primary_sim_automatic_data_title)
-    val autoDataSummary = stringResource(id = R.string.primary_sim_automatic_data_msg)
-    SwitchPreference(
-        object : SwitchPreferenceModel {
-            override val title = autoDataTitle
-            override val summary = { autoDataSummary }
-            override val checked = {
-                if (nonDds.intValue != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-                    coroutineScope.launch {
-                        automaticDataChecked.value = getAutomaticData(telephonyManagerForNonDds)
-                        Log.d(
-                            NetworkCellularGroupProvider.name,
-                            "NonDds:${nonDds.intValue}" +
-                                "getAutomaticData:${automaticDataChecked.value}"
-                        )
-                    }
-                }
-                automaticDataChecked.value
-            }
-            override val onCheckedChange: ((Boolean) -> Unit)? = {
-                automaticDataChecked.value = it
-                actionSetAutoDataSwitch(it)
-            }
-        }
-    )
+    AutomaticDataSwitchingPreference(isAutoDataEnabled, setAutoDataEnabled)
 }
 
 @Composable
@@ -308,12 +267,21 @@ fun PrimarySimSectionImpl(
     }.collectAsStateWithLifecycle(initialValue = null).value ?: return
 
     Category(title = stringResource(id = R.string.primary_sim_title)) {
+        val isAutoDataEnabled by remember(nonDds.intValue) {
+            TelephonyRepository(context).isMobileDataPolicyEnabledFlow(
+                subId = nonDds.intValue,
+                policy = TelephonyManager.MOBILE_DATA_POLICY_AUTO_DATA_SWITCH
+            )
+        }.collectAsStateWithLifecycle(initialValue = null)
         PrimarySimImpl(
             primarySimInfo,
             callsSelectedId,
             textsSelectedId,
             mobileDataSelectedId,
-            nonDds
+            isAutoDataEnabled = { isAutoDataEnabled },
+            setAutoDataEnabled = { newEnabled ->
+                TelephonyRepository(context).setAutomaticData(nonDds.intValue, newEnabled)
+            },
         )
     }
 }
@@ -380,24 +348,4 @@ suspend fun setDefaultData(
         ) {
             wifiPickerTrackerHelper.setCarrierNetworkEnabled(true)
         }
-    }
-
-suspend fun getAutomaticData(telephonyManagerForNonDds: TelephonyManager?): Boolean =
-    withContext(Dispatchers.Default) {
-        telephonyManagerForNonDds != null
-            && telephonyManagerForNonDds.isMobileDataPolicyEnabled(
-            TelephonyManager.MOBILE_DATA_POLICY_AUTO_DATA_SWITCH)
-    }
-
-suspend fun setAutomaticData(telephonyManager: TelephonyManager?, newState: Boolean): Unit =
-    withContext(Dispatchers.Default) {
-        Log.d(
-            NetworkCellularGroupProvider.name,
-            "setAutomaticData: MOBILE_DATA_POLICY_AUTO_DATA_SWITCH as $newState"
-        )
-        telephonyManager?.setMobileDataPolicyEnabled(
-            TelephonyManager.MOBILE_DATA_POLICY_AUTO_DATA_SWITCH,
-            newState
-        )
-        //TODO: setup backup calling
     }

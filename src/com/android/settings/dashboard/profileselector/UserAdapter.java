@@ -64,7 +64,11 @@ public class UserAdapter extends BaseAdapter {
             UserInfo userInfo = um.getUserInfo(mUserHandle.getIdentifier());
             int tintColor = Utils.getColorAttrDefaultColor(context,
                     com.android.internal.R.attr.materialColorPrimary);
-            if (userInfo.isManagedProfile()) {
+            if (userInfo.isManagedProfile()
+                    || (android.os.Flags.allowPrivateProfile()
+                        && android.multiuser.Flags.enablePrivateSpaceFeatures()
+                        && android.multiuser.Flags.handleInterleavedSettingsForPrivateSpace()
+                        && userInfo.isPrivateProfile())) {
                 mIcon = context.getPackageManager().getUserBadgeForDensityNoBackground(
                         userHandle, /* density= */ 0);
                 mIcon.setTint(tintColor);
@@ -88,6 +92,7 @@ public class UserAdapter extends BaseAdapter {
                         () -> context.getString(com.android.settingslib.R.string.category_work));
             } else if (android.os.Flags.allowPrivateProfile()
                     && android.multiuser.Flags.enablePrivateSpaceFeatures()
+                    && android.multiuser.Flags.handleInterleavedSettingsForPrivateSpace()
                     && mUserManager.getUserInfo(userId).isPrivateProfile()) {
                 return resources.getString(PRIVATE_CATEGORY_HEADER,
                         () -> context.getString(com.android.settingslib.R.string.category_private));
@@ -209,11 +214,21 @@ public class UserAdapter extends BaseAdapter {
 
     private static UserAdapter createUserAdapter(
             UserManager userManager, Context context, List<UserHandle> userProfiles) {
+        updateUserHandlesIfNeeded(userManager, userProfiles);
         ArrayList<UserDetails> userDetails = new ArrayList<>(userProfiles.size());
         for (UserHandle userProfile : userProfiles) {
             userDetails.add(new UserDetails(userProfile, userManager, context));
         }
         return new UserAdapter(context, userDetails);
+    }
+
+    private static void updateUserHandlesIfNeeded(
+            UserManager userManager, List<UserHandle> userProfiles) {
+        for (int i = userProfiles.size() - 1; i >= 0; --i) {
+            if (com.android.settings.Utils.shouldHideUser(userProfiles.get(i), userManager)) {
+                userProfiles.remove(i);
+            }
+        }
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
