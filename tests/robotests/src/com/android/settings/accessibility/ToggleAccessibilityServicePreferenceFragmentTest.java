@@ -237,7 +237,6 @@ public class ToggleAccessibilityServicePreferenceFragmentTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_CLEANUP_ACCESSIBILITY_WARNING_DIALOG)
     public void enableService_warningRequired_showWarning() throws Throwable {
         setupServiceWarningRequired(true);
         mFragment.mToggleServiceSwitchPreference =
@@ -250,7 +249,6 @@ public class ToggleAccessibilityServicePreferenceFragmentTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_CLEANUP_ACCESSIBILITY_WARNING_DIALOG)
     public void enableService_warningNotRequired_dontShowWarning() throws Throwable {
         final AccessibilityServiceInfo info = setupServiceWarningRequired(false);
         mFragment.mToggleServiceSwitchPreference =
@@ -264,7 +262,6 @@ public class ToggleAccessibilityServicePreferenceFragmentTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_CLEANUP_ACCESSIBILITY_WARNING_DIALOG)
     public void toggleShortcutPreference_warningRequired_showWarning() throws Throwable {
         setupServiceWarningRequired(true);
         mFragment.mShortcutPreference = new ShortcutPreference(mContext, /* attrs= */null);
@@ -278,7 +275,6 @@ public class ToggleAccessibilityServicePreferenceFragmentTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_CLEANUP_ACCESSIBILITY_WARNING_DIALOG)
     public void toggleShortcutPreference_warningNotRequired_dontShowWarning() throws Throwable {
         setupServiceWarningRequired(false);
         mFragment.mShortcutPreference = new ShortcutPreference(mContext, /* attrs= */null);
@@ -292,7 +288,6 @@ public class ToggleAccessibilityServicePreferenceFragmentTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_CLEANUP_ACCESSIBILITY_WARNING_DIALOG)
     public void clickShortcutSettingsPreference_warningRequired_showWarning() throws Throwable {
         setupServiceWarningRequired(true);
         mFragment.mShortcutPreference = new ShortcutPreference(mContext, /* attrs= */null);
@@ -304,7 +299,6 @@ public class ToggleAccessibilityServicePreferenceFragmentTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_CLEANUP_ACCESSIBILITY_WARNING_DIALOG)
     @DisableFlags(
             com.android.settings.accessibility.Flags.FLAG_EDIT_SHORTCUTS_IN_FULL_SCREEN)
     public void clickShortcutSettingsPreference_warningNotRequired_dontShowWarning_showDialog()
@@ -319,8 +313,7 @@ public class ToggleAccessibilityServicePreferenceFragmentTest {
     }
 
     @Test
-    @EnableFlags({Flags.FLAG_CLEANUP_ACCESSIBILITY_WARNING_DIALOG,
-            com.android.settings.accessibility.Flags.FLAG_EDIT_SHORTCUTS_IN_FULL_SCREEN})
+    @EnableFlags(com.android.settings.accessibility.Flags.FLAG_EDIT_SHORTCUTS_IN_FULL_SCREEN)
     public void clickShortcutSettingsPreference_warningNotRequired_dontShowWarning_launchActivity()
             throws Throwable {
         setupServiceWarningRequired(false);
@@ -365,7 +358,7 @@ public class ToggleAccessibilityServicePreferenceFragmentTest {
     }
 
     @Test
-    @EnableFlags({Flags.FLAG_CLEANUP_ACCESSIBILITY_WARNING_DIALOG, Flags.FLAG_A11Y_QS_SHORTCUT})
+    @EnableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
     public void toggleShortcutPreference_noUserPreferredShortcut_hasQsTile_enableQsShortcut()
             throws Throwable {
         PreferredShortcuts.clearPreferredShortcuts(mContext);
@@ -383,7 +376,7 @@ public class ToggleAccessibilityServicePreferenceFragmentTest {
     }
 
     @Test
-    @EnableFlags({Flags.FLAG_CLEANUP_ACCESSIBILITY_WARNING_DIALOG, Flags.FLAG_A11Y_QS_SHORTCUT})
+    @EnableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
     public void toggleShortcutPreference_noUserPreferredShortcut_noQsTile_enableSoftwareShortcut()
             throws Throwable {
         PreferredShortcuts.clearPreferredShortcuts(mContext);
@@ -401,7 +394,6 @@ public class ToggleAccessibilityServicePreferenceFragmentTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_CLEANUP_ACCESSIBILITY_WARNING_DIALOG)
     @DisableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
     public void toggleShortcutPreference_noUserPreferredShortcut_hasQsTile_flagOff_enableSoftwareShortcut()
             throws Throwable {
@@ -420,7 +412,6 @@ public class ToggleAccessibilityServicePreferenceFragmentTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_CLEANUP_ACCESSIBILITY_WARNING_DIALOG)
     @DisableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
     public void toggleShortcutPreference_noUserPreferredShortcut_noQsTile_flagOff_enableSoftwareShortcut()
             throws Throwable {
@@ -439,7 +430,7 @@ public class ToggleAccessibilityServicePreferenceFragmentTest {
     }
 
     @Test
-    @EnableFlags({Flags.FLAG_CLEANUP_ACCESSIBILITY_WARNING_DIALOG, Flags.FLAG_A11Y_QS_SHORTCUT})
+    @EnableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
     public void toggleShortcutPreference_userPreferVolumeKeysShortcut_noQsTile_enableVolumeKeysShortcut()
             throws Throwable {
         setupServiceWarningRequired(false);
@@ -462,7 +453,7 @@ public class ToggleAccessibilityServicePreferenceFragmentTest {
     }
 
     @Test
-    @EnableFlags({Flags.FLAG_CLEANUP_ACCESSIBILITY_WARNING_DIALOG, Flags.FLAG_A11Y_QS_SHORTCUT})
+    @EnableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
     public void toggleShortcutPreference_userPreferVolumeKeysShortcut_hasQsTile_enableVolumeKeysShortcut()
             throws Throwable {
         setupServiceWarningRequired(false);
