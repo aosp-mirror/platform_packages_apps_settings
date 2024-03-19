@@ -1365,6 +1365,16 @@ public final class Utils extends com.android.settingslib.Utils {
         }
     }
 
+    /**
+     * Returns true if the user should be hidden in Settings when it's in quiet mode.
+     */
+    public static boolean shouldHideUser(
+            @NonNull UserHandle userHandle, @NonNull UserManager userManager) {
+        UserProperties userProperties = userManager.getUserProperties(userHandle);
+        return userProperties.getShowInQuietMode() == UserProperties.SHOW_IN_QUIET_MODE_HIDDEN
+                && userManager.isQuietModeEnabled(userHandle);
+    }
+
     private static FaceManager.RemovalCallback faceManagerRemovalCallback(int userId) {
         return new FaceManager.RemovalCallback() {
             @Override
