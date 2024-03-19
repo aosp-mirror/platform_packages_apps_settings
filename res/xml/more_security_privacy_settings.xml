@@ -118,6 +118,12 @@
             android:summary="@string/content_capture_summary"
             settings:controller="com.android.settings.privacy.EnableContentCaptureWithServiceSettingsPreferenceController"/>
 
+        <Preference
+            android:key="cellular_security_settings_privacy"
+            android:title="@string/cellular_security_title"
+            android:summary="@string/cellular_security_summary"
+            android:fragment="com.android.settings.network.telephony.CellularSecuritySettingsFragment"
+            settings:searchable="false"/>
     </PreferenceCategory>
 
     <!-- Security section. -->
