@@ -25,7 +25,6 @@ import android.content.DialogInterface.OnDismissListener;
 import android.content.DialogInterface.OnShowListener;
 import android.content.Intent;
 import android.content.pm.UserInfo;
-import android.content.pm.UserProperties;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -42,6 +41,7 @@ import com.android.internal.widget.DialogTitle;
 import com.android.internal.widget.LinearLayoutManager;
 import com.android.internal.widget.RecyclerView;
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.drawer.Tile;
 
@@ -186,7 +186,7 @@ public class ProfileSelectDialog extends DialogFragment implements UserAdapter.O
             UserInfo userInfo = userManager.getUserInfo(userHandles.get(i).getIdentifier());
             if (userInfo == null
                     || userInfo.isCloneProfile()
-                    || shouldHideUserInQuietMode(userHandles.get(i), userManager)) {
+                    || Utils.shouldHideUser(userHandles.get(i), userManager)) {
                 if (DEBUG) {
                     Log.d(TAG, "Delete the user: " + userHandles.get(i).getIdentifier());
                 }
@@ -219,7 +219,7 @@ public class ProfileSelectDialog extends DialogFragment implements UserAdapter.O
             UserInfo userInfo = userManager.getUserInfo(userHandle.getIdentifier());
             if (userInfo == null
                     || userInfo.isCloneProfile()
-                    || shouldHideUserInQuietMode(userHandle, userManager)) {
+                    || Utils.shouldHideUser(userHandle, userManager)) {
                 if (DEBUG) {
                     Log.d(TAG, "Delete the user: " + userHandle.getIdentifier());
                 }
@@ -227,12 +227,5 @@ public class ProfileSelectDialog extends DialogFragment implements UserAdapter.O
                 tile.pendingIntentMap.remove(userHandle);
             }
         }
-    }
-
-    private static boolean shouldHideUserInQuietMode(
-            UserHandle userHandle, UserManager userManager) {
-        UserProperties userProperties = userManager.getUserProperties(userHandle);
-        return userProperties.getShowInQuietMode() == UserProperties.SHOW_IN_QUIET_MODE_HIDDEN
-                && userManager.isQuietModeEnabled(userHandle);
     }
 }

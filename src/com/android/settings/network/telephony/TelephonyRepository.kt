@@ -17,8 +17,10 @@
 package com.android.settings.network.telephony
 
 import android.content.Context
+import android.telephony.SubscriptionManager
 import android.telephony.TelephonyCallback
 import android.telephony.TelephonyManager
+import android.util.Log
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.asExecutor
 import kotlinx.coroutines.channels.ProducerScope
@@ -26,15 +28,51 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.conflate
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
+
+class TelephonyRepository(
+    private val context: Context,
+    private val subscriptionsChangedFlow: Flow<Unit> = context.subscriptionsChangedFlow(),
+) {
+    fun isMobileDataPolicyEnabledFlow(
+        subId: Int,
+        @TelephonyManager.MobileDataPolicy policy: Int,
+    ): Flow<Boolean> {
+        if (!SubscriptionManager.isValidSubscriptionId(subId)) return flowOf(false)
+
+        val telephonyManager = context.telephonyManager(subId)
+
+        return subscriptionsChangedFlow.map {
+            telephonyManager.isMobileDataPolicyEnabled(policy)
+                .also { Log.d(TAG, "[$subId] isMobileDataPolicyEnabled($policy): $it") }
+        }.conflate().flowOn(Dispatchers.Default)
+    }
+
+    fun setMobileDataPolicyEnabled(
+        subId: Int,
+        @TelephonyManager.MobileDataPolicy policy: Int,
+        enabled: Boolean,
+    ) {
+        if (!SubscriptionManager.isValidSubscriptionId(subId)) return
+
+        val telephonyManager = context.telephonyManager(subId)
+        Log.d(TAG, "[$subId] setMobileDataPolicyEnabled($policy): $enabled")
+        telephonyManager.setMobileDataPolicyEnabled(policy, enabled)
+    }
+
+    private companion object {
+        private const val TAG = "TelephonyRepository"
+    }
+}
 
 /** Creates an instance of a cold Flow for Telephony callback of given [subId]. */
 fun <T> Context.telephonyCallbackFlow(
     subId: Int,
     block: ProducerScope<T>.() -> TelephonyCallback,
 ): Flow<T> = callbackFlow {
-    val telephonyManager = getSystemService(TelephonyManager::class.java)!!
-        .createForSubscriptionId(subId)
+    val telephonyManager = telephonyManager(subId)
 
     val callback = block()
 
@@ -42,3 +80,7 @@ fun <T> Context.telephonyCallbackFlow(
 
     awaitClose { telephonyManager.unregisterTelephonyCallback(callback) }
 }.conflate().flowOn(Dispatchers.Default)
+
+fun Context.telephonyManager(subId: Int): TelephonyManager =
+    getSystemService(TelephonyManager::class.java)!!
+        .createForSubscriptionId(subId)

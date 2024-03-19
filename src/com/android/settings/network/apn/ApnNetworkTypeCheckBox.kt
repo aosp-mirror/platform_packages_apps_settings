@@ -24,18 +24,13 @@ import com.android.settingslib.spa.widget.editor.SettingsDropdownCheckBox
 
 @Composable
 fun ApnNetworkTypeCheckBox(apnData: ApnData, onNetworkTypeChanged: (Long) -> Unit) {
-    val options = remember { ApnNetworkTypes.getNetworkTypeOptions() }
-    val selectedStateMap = remember {
-        ApnNetworkTypes.networkTypeToSelectedStateMap(options, apnData.networkType)
-    }
+    val options = remember { ApnNetworkTypes.getNetworkTypeOptions(apnData.networkType) }
     SettingsDropdownCheckBox(
         label = stringResource(R.string.network_type),
         options = options,
         emptyText = stringResource(R.string.network_type_unspecified),
         enabled = apnData.networkTypeEnabled,
     ) {
-        onNetworkTypeChanged(
-            ApnNetworkTypes.selectedStateMapToNetworkType(options, selectedStateMap)
-        )
+        onNetworkTypeChanged(ApnNetworkTypes.optionsToNetworkType(options))
     }
 }
