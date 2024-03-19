@@ -24,6 +24,7 @@ import android.telephony.UiccCardInfo
 import android.telephony.UiccSlotInfo
 import android.util.Log
 import com.android.settings.network.SimOnboardingActivity.Companion.CallbackType
+import com.android.settings.network.telephony.TelephonyRepository
 import com.android.settings.sim.SimActivationNotifier
 import com.android.settings.spa.network.setAutomaticData
 import com.android.settings.spa.network.setDefaultData
@@ -31,6 +32,7 @@ import com.android.settings.spa.network.setDefaultSms
 import com.android.settings.spa.network.setDefaultVoice
 import com.android.settingslib.utils.ThreadUtils
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.withContext
 
 class SimOnboardingService {
@@ -46,7 +48,7 @@ class SimOnboardingService {
     var targetPrimarySimCalls: Int = SubscriptionManager.INVALID_SUBSCRIPTION_ID
     var targetPrimarySimTexts: Int = SubscriptionManager.INVALID_SUBSCRIPTION_ID
     var targetPrimarySimMobileData: Int = SubscriptionManager.INVALID_SUBSCRIPTION_ID
-    var targetPrimarySimAutoDataSwitch: Boolean = false
+    val targetPrimarySimAutoDataSwitch = MutableStateFlow(false)
     var targetNonDds: Int = SubscriptionManager.INVALID_SUBSCRIPTION_ID
         get() {
             if(targetPrimarySimMobileData == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
@@ -349,19 +351,10 @@ class SimOnboardingService {
                     null,
                     targetPrimarySimMobileData
                 )
-
-                var nonDds = targetNonDds
-                Log.d(
-                    TAG,
-                    "setAutomaticData: targetNonDds: $nonDds," +
-                            " targetPrimarySimAutoDataSwitch: $targetPrimarySimAutoDataSwitch"
+                TelephonyRepository(context).setAutomaticData(
+                    targetNonDds,
+                    targetPrimarySimAutoDataSwitch.value
                 )
-                if (nonDds != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-                    val telephonyManagerForNonDds: TelephonyManager? =
-                        context.getSystemService(TelephonyManager::class.java)
-                            ?.createForSubscriptionId(nonDds)
-                    setAutomaticData(telephonyManagerForNonDds, targetPrimarySimAutoDataSwitch)
-                }
             }
             // no next action, send finish
             callback(CallbackType.CALLBACK_FINISH)
