@@ -32,6 +32,7 @@ import android.text.TextUtils;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.server.display.feature.flags.Flags;
 import com.android.settings.R;
 import com.android.settingslib.PrimarySwitchPreference;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -88,6 +89,15 @@ public class ReduceBrightColorsPreferenceController
 
     @Override
     public int getAvailabilityStatus() {
+        // Successor to this feature is Even Dimmer
+        // found in display/EvenDimmerPreferenceController
+        // Only allow RBC if even dimmer is not possible on this device
+        if (Flags.evenDimmer() && mContext.getResources().getBoolean(
+                com.android.internal.R.bool.config_evenDimmerEnabled)) {
+            return UNSUPPORTED_ON_DEVICE;
+        }
+
+
         return ColorDisplayManager.isReduceBrightColorsAvailable(mContext) ? AVAILABLE
                 : UNSUPPORTED_ON_DEVICE;
     }
