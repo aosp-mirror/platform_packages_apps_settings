@@ -16,7 +16,7 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:title="@string/privatespace_hide_page_title">
+    android:title="@string/private_space_hide_page_title">
 
     <com.android.settingslib.widget.IllustrationPreference
         android:key="privatespace_hide_video"
@@ -25,36 +25,36 @@
 
     <com.android.settingslib.widget.MainSwitchPreference
         android:key="hide_when_locked"
-        android:title="@string/privatespace_hide_page_title"
+        android:title="@string/private_space_hide_page_title"
         settings:controller="com.android.settings.privatespace.HidePrivateSpaceController"/>
 
         <Preference
         android:key="private_space_hidden"
-        android:summary="@string/privatespace_hide_page_summary"
+        android:summary="@string/private_space_hide_page_summary"
         android:selectable="false"
         settings:searchable="false" />
 
     <PreferenceCategory
-        android:title="@string/privatespace_access_header">
+        android:title="@string/private_space_access_header">
 
         <Preference
         android:key="search_when_locked_footer"
         android:icon="@drawable/counter_1_24dp"
-        android:title="@string/privatespace_search_description"
+        android:title="@string/private_space_search_description"
         android:selectable="false"
         settings:searchable="false" />
 
         <Preference
             android:key="tap_tile_footer"
             android:icon="@drawable/counter_2_24dp"
-            android:title="@string/privatespace_tap_tile_description"
+            android:title="@string/private_space_tap_tile_description"
             android:selectable="false"
             settings:searchable="false" />
 
         <Preference
             android:key="unlock_profile_footer"
             android:icon="@drawable/counter_3_24dp"
-            android:title="@string/privatespace_unlock_description"
+            android:title="@string/private_space_unlock_description"
             android:selectable="false"
             settings:searchable="false" />
 
