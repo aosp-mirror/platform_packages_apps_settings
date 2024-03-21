@@ -192,7 +192,8 @@ public class UseOneLockControllerSwitch extends AbstractPreferenceController
             return;
         }
         new AlertDialog.Builder(mContext)
-                  .setMessage(R.string.private_space_new_lock_title)
+                  .setTitle(R.string.private_space_new_lock_title)
+                  .setMessage(R.string.private_space_new_lock_message)
                   .setPositiveButton(
                             R.string.private_space_set_lock_label,
                             (dialog, which) -> {

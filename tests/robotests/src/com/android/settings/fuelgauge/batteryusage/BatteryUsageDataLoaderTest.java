@@ -52,6 +52,7 @@ import java.util.List;
 public final class BatteryUsageDataLoaderTest {
 
     private Context mContext;
+    @Mock private UserIdsSeries mUserIdsSeries;
     @Mock private ContentResolver mMockContentResolver;
     @Mock private BatteryStatsManager mBatteryStatsManager;
     @Mock private PackageManager mPackageManager;
@@ -120,7 +121,7 @@ public final class BatteryUsageDataLoaderTest {
         BatteryUsageDataLoader.sFakeAppUsageEventsSupplier = () -> new HashMap<>();
         BatteryUsageDataLoader.sFakeUsageEventsListSupplier = () -> AppUsageEventList;
 
-        BatteryUsageDataLoader.loadAppUsageData(mContext);
+        BatteryUsageDataLoader.loadAppUsageData(mContext, mUserIdsSeries);
 
         verify(mMockContentResolver).bulkInsert(any(), any());
         verify(mMockContentResolver).notifyChange(any(), any());
@@ -130,7 +131,7 @@ public final class BatteryUsageDataLoaderTest {
     public void loadAppUsageData_nullAppUsageEvents_notInsertDataIntoProvider() {
         BatteryUsageDataLoader.sFakeAppUsageEventsSupplier = () -> null;
 
-        BatteryUsageDataLoader.loadAppUsageData(mContext);
+        BatteryUsageDataLoader.loadAppUsageData(mContext, mUserIdsSeries);
 
         verifyNoMoreInteractions(mMockContentResolver);
     }
@@ -140,7 +141,7 @@ public final class BatteryUsageDataLoaderTest {
         BatteryUsageDataLoader.sFakeAppUsageEventsSupplier = () -> new HashMap<>();
         BatteryUsageDataLoader.sFakeUsageEventsListSupplier = () -> null;
 
-        BatteryUsageDataLoader.loadAppUsageData(mContext);
+        BatteryUsageDataLoader.loadAppUsageData(mContext, mUserIdsSeries);
 
         verifyNoMoreInteractions(mMockContentResolver);
     }
@@ -150,7 +151,7 @@ public final class BatteryUsageDataLoaderTest {
         BatteryUsageDataLoader.sFakeAppUsageEventsSupplier = () -> new HashMap<>();
         BatteryUsageDataLoader.sFakeUsageEventsListSupplier = () -> new ArrayList<>();
 
-        BatteryUsageDataLoader.loadAppUsageData(mContext);
+        BatteryUsageDataLoader.loadAppUsageData(mContext, mUserIdsSeries);
 
         verifyNoMoreInteractions(mMockContentResolver);
     }

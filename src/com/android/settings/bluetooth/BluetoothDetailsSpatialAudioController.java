@@ -18,6 +18,7 @@ package com.android.settings.bluetooth;
 
 import static android.media.Spatializer.SPATIALIZER_IMMERSIVE_LEVEL_NONE;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.media.AudioDeviceAttributes;
 import android.media.AudioDeviceInfo;
@@ -60,6 +61,7 @@ public class BluetoothDetailsSpatialAudioController extends BluetoothDetailsCont
     AudioDeviceAttributes mAudioDevice = null;
 
     AtomicBoolean mHasHeadTracker = new AtomicBoolean(false);
+    AtomicBoolean mInitialRefresh = new AtomicBoolean(true);
 
     public BluetoothDetailsSpatialAudioController(
             Context context,
@@ -81,6 +83,10 @@ public class BluetoothDetailsSpatialAudioController extends BluetoothDetailsCont
         TwoStatePreference switchPreference = (TwoStatePreference) preference;
         String key = switchPreference.getKey();
         if (TextUtils.equals(key, KEY_SPATIAL_AUDIO)) {
+            mMetricsFeatureProvider.action(
+                    mContext,
+                    SettingsEnums.ACTION_BLUETOOTH_DEVICE_DETAILS_SPATIAL_AUDIO_TOGGLE_CLICKED,
+                    switchPreference.isChecked());
             updateSpatializerEnabled(switchPreference.isChecked());
             ThreadUtils.postOnBackgroundThread(
                     () -> {
@@ -91,6 +97,10 @@ public class BluetoothDetailsSpatialAudioController extends BluetoothDetailsCont
                     });
             return true;
         } else if (TextUtils.equals(key, KEY_HEAD_TRACKING)) {
+            mMetricsFeatureProvider.action(
+                    mContext,
+                    SettingsEnums.ACTION_BLUETOOTH_DEVICE_DETAILS_HEAD_TRACKING_TOGGLE_CLICKED,
+                    switchPreference.isChecked());
             updateSpatializerHeadTracking(switchPreference.isChecked());
             return true;
         } else {
@@ -185,6 +195,20 @@ public class BluetoothDetailsSpatialAudioController extends BluetoothDetailsCont
         headTrackingPref.setVisible(isHeadTrackingAvailable);
         if (isHeadTrackingAvailable) {
             headTrackingPref.setChecked(mSpatializer.isHeadTrackerEnabled(mAudioDevice));
+        }
+
+        if (mInitialRefresh.compareAndSet(true, false)) {
+            // Only triggered when shown for the first time
+            mMetricsFeatureProvider.action(
+                    mContext,
+                    SettingsEnums.ACTION_BLUETOOTH_DEVICE_DETAILS_SPATIAL_AUDIO_TRIGGERED,
+                    spatialAudioPref.isChecked());
+            if (mHasHeadTracker.get()) {
+                mMetricsFeatureProvider.action(
+                        mContext,
+                        SettingsEnums.ACTION_BLUETOOTH_DEVICE_DETAILS_HEAD_TRACKING_TRIGGERED,
+                        headTrackingPref.isChecked());
+            }
         }
     }
 

@@ -53,7 +53,6 @@ import com.android.settings.widget.SingleTargetGearPreference;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -133,6 +132,7 @@ public class PreviouslyConnectedDevicePreferenceControllerTest {
         doReturn(mPackageManager).when(mContext).getPackageManager();
         when(mContext.getSystemService(BluetoothManager.class)).thenReturn(mBluetoothManager);
         when(mBluetoothManager.getAdapter()).thenReturn(mBluetoothAdapter);
+        when(mBluetoothAdapter.isEnabled()).thenReturn(true);
         mShadowBluetoothAdapter = Shadow.extract(BluetoothAdapter.getDefaultAdapter());
 
         when(mCachedDevice1.getDevice()).thenReturn(mBluetoothDevice1);
@@ -223,7 +223,6 @@ public class PreviouslyConnectedDevicePreferenceControllerTest {
             AVAILABLE);
     }
 
-    @Ignore("b/322712259")
     @Test
     public void onDeviceAdded_addDevicePreference_displayIt() {
         final BluetoothDevicePreference preference1 = new BluetoothDevicePreference(
@@ -234,7 +233,6 @@ public class PreviouslyConnectedDevicePreferenceControllerTest {
         assertThat(mPreferenceGroup.getPreferenceCount()).isEqualTo(2);
     }
 
-    @Ignore("b/322712259")
     @Test
     public void onDeviceAdded_addDockDevicePreference_displayIt() {
         final SingleTargetGearPreference dockPreference = new SingleTargetGearPreference(
@@ -245,7 +243,6 @@ public class PreviouslyConnectedDevicePreferenceControllerTest {
         assertThat(mPreferenceGroup.getPreferenceCount()).isEqualTo(2);
     }
 
-    @Ignore("b/322712259")
     @Test
     public void onDeviceAdded_addFourDevicePreference_onlyDisplayThree() {
         final BluetoothDevicePreference preference1 = new BluetoothDevicePreference(

@@ -26,8 +26,12 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.TickButtonPreference;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+
 public abstract class TermsOfAddressBaseController extends BasePreferenceController {
 
+    private static final Executor sExecutor = Executors.newSingleThreadExecutor();
     private PreferenceScreen mPreferenceScreen;
     private MetricsFeatureProvider mMetricsFeatureProvider;
     private TickButtonPreference mPreference;
@@ -46,8 +50,11 @@ public abstract class TermsOfAddressBaseController extends BasePreferenceControl
         mPreferenceScreen = screen;
         mPreference = screen.findPreference(getPreferenceKey());
         mPreference.setOnPreferenceClickListener(clickedPref -> {
-            mGrammaticalInflectionManager.setSystemWideGrammaticalGender(
-                    getGrammaticalGenderType());
+            sExecutor.execute(
+                    () -> {
+                        mGrammaticalInflectionManager.setSystemWideGrammaticalGender(
+                                getGrammaticalGenderType());
+                    });
             setSelected(mPreference);
             mMetricsFeatureProvider.action(mContext, getMetricsActionKey());
             return true;

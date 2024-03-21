@@ -178,6 +178,9 @@
     <!-- Description for text in accessibility hearing aids footer. [CHAR LIMIT=NONE] -->
     <string name="bluetooth_audio_routing_footer_summary">By default, audio output is determined by individual apps</string>
 
+    <!-- Bluetooth audio codec related settings. Title of the default audio codec selection. [CHAR LIMIT=60] -->
+    <string name="bluetooth_audio_codec_default_selection">Use System Selection (Default)</string>
+
     <!--Bluetooth settings screen, summary text for Bluetooth device with no name -->
     <string name="bluetooth_device">Unnamed Bluetooth device</string>
     <!--Bluetooth settings screen, text that appears in heading bar when scanning for devices -->
@@ -482,11 +485,11 @@
     <!-- Category for the terms of address. [CHAR LIMIT=NONE]-->
     <string name="category_title_terms_of_address">Additional preferences</string>
     <!-- Preference title for the terms of address. [CHAR LIMIT=NONE]-->
-    <string name="terms_of_address_title">Terms of address</string>
+    <string name="terms_of_address_title">Choose how you\’re addressed</string>
     <!-- Preference summary for the terms of address. [CHAR LIMIT=NONE]-->
-    <string name="terms_of_address_summary">Set how you want to be addressed</string>
+    <string name="terms_of_address_summary">Your device can personalize how you\’re addressed</string>
     <!-- The subtitle of terms of address. [CHAR LIMIT=NONE] -->
-    <string name="terms_of_address_intro_title">Apps can use your terms of address to personalize how they address you.</string>
+    <string name="terms_of_address_intro_title">This setting lets most system apps personalize how you\’re addressed. It isn\’t used by apps you install.</string>
     <!-- The title of not specified of terms of address. [CHAR LIMIT=NONE] -->
     <string name="terms_of_address_not_specified">Not specified</string>
     <!-- The title of feminine of terms of address. [CHAR LIMIT=NONE] -->
@@ -1233,8 +1236,10 @@
     <string name="private_space_category_ways_to_unlock">Ways to unlock</string>
     <!-- Summary for one lock when device screen lock is used as private profile lock. [CHAR LIMIT=40] -->
     <string name="private_space_screen_lock_summary">Same as device screen lock</string>
-    <!-- Dialog message to choose a new lock for Private Space. [CHAR LIMIT=50] -->
+    <!-- Dialog title to choose a new lock for Private Space. [CHAR LIMIT=50] -->
     <string name="private_space_new_lock_title">Choose a new lock for private space?</string>
+    <!-- Dialog message mentioning device PIN, pattern or password needs to be entered on the next screen. [CHAR LIMIT=NONE] -->
+    <string name="private_space_new_lock_message">You\’ll need to enter your device PIN, pattern, or password on the next screen</string>
     <!-- Title for the preference for auto lock private space and auto lock private space settings page. [CHAR LIMIT=50] -->
     <string name="private_space_auto_lock_title">Lock private space automatically</string>
     <!-- Description for private space auto lock settings page. [CHAR LIMIT=NONE] -->
@@ -1245,28 +1250,26 @@
     <string name="private_space_auto_lock_after_inactivity">After 5 minutes of inactivity</string>
     <!-- Configure auto lock: Value for auto lock configuration to never lock private space. [CHAR LIMIT=20] -->
     <string name="private_space_auto_lock_never">Never</string>
-    <!-- Title for the preference to hide Private Space. [CHAR LIMIT=60] -->
-    <string name="private_space_hide_title">Hide when locked</string>
-    <!-- Title for the hide Private Space setting. [CHAR LIMIT=60] -->
-    <string name="privatespace_hide_page_title">Hide private space when locked</string>
+    <!-- Title for the settings preference and settings page for hide private space when locked setting. [CHAR LIMIT=60] -->
+    <string name="private_space_hide_page_title">Hide private space when it\'s locked</string>
     <!-- Description for hide Private Space settings page. [CHAR LIMIT=NONE] -->
-    <string name="privatespace_hide_page_summary">To stop other people knowing you have a private space on your device, you can hide it from your apps list</string>
+    <string name="private_space_hide_page_summary">To stop other people knowing you have a private space on your device, you can hide it from your apps list</string>
     <!-- Header in hide Private Space settings page to access Private Space when hidden. [CHAR LIMIT=60] -->
-    <string name="privatespace_access_header">Access private space when hidden</string>
+    <string name="private_space_access_header">Access private space when hidden</string>
     <!-- Text in hide Private Space settings page on how to search Private Space when hidden. [CHAR LIMIT=90] -->
-    <string name="privatespace_search_description">From your apps list, enter \"private space\" in the search bar</string>
+    <string name="private_space_search_description">In the search bar, enter \"private space\"</string>
     <!-- Text in hide Private Space settings page to tap on Private Space tile. [CHAR LIMIT=60] -->
-    <string name="privatespace_tap_tile_description">Tap the private space tile</string>
+    <string name="private_space_tap_tile_description">Tap <b>Private space</b></string>
     <!-- Text in hide Private Space settings page to Unlock Private Space. [CHAR LIMIT=60] -->
-    <string name="privatespace_unlock_description">Unlock your private space</string>
+    <string name="private_space_unlock_description">Unlock your private space</string>
     <!-- Used to describe the off state of Private space hidden [CHAR LIMIT=30] -->
-    <string name="privatespace_hide_off_summary">Off</string>
+    <string name="private_space_hide_off_summary">Off</string>
     <!-- Used to describe the off state of Private space hidden [CHAR LIMIT=30] -->
-    <string name="privatespace_hide_on_summary">On</string>
+    <string name="private_space_hide_on_summary">On</string>
     <!-- Title for the dialog shown when Private space hidden setting is turned on. [CHAR LIMIT=60] -->
-    <string name="private_space_hide_dialog_title">Private space will hide when you lock it next</string>
+    <string name="private_space_hide_dialog_title">Private space will hide the next time you lock it</string>
     <!-- Text message in the dialog shown when Private space hidden setting is turned on. [CHAR LIMIT=90] -->
-    <string name="private_space_hide_dialog_message">To access your space when it’s hidden, enter \“private space\” in the search bar on your apps list</string>
+    <string name="private_space_hide_dialog_message">To access private space, enter \“private space\” in the search bar from your apps list.</string>
     <!-- Label for the dialog shown when Private space hidden setting is turned on. [CHAR LIMIT=90] -->
     <string name="private_space_hide_dialog_button">Got it</string>
     <!-- System category for the Private Space page. [CHAR LIMIT=30] -->
@@ -1317,6 +1320,9 @@
     <string name="private_space_install_apps_text"><b>Install apps</b>\nYour private space has its own Play Store so you can install apps easily.</string>
     <!-- This is info text to help explain in private space setup screen that the permissions granted to private space apps will not be shown in settings when private space is locked. [CHAR LIMIT=NONE] -->
     <string name="private_space_apps_permission_text">Apps in your private space won\'t appear in permission manager, privacy dashboard, and other settings when your private space is locked.\n\nYour private space can\'t be moved to a new device. You\'ll need to set up another private space if you want to use it on another device.\n\nAnyone that connects your device to a computer or installs harmful apps on your device may be able to access your private space.</string>
+    <!-- Private space footer link content description [CHAR LIMIT=40] -->
+    <string name="private_space_learn_more_text">Learn more about private space</string>
+    <string name="private_space_learn_more_url" translatable="false">https://support.google.com/android?p=private_space</string>
     <!-- Text shown at the bottom in private space auto advancing  screens. [CHAR LIMIT=60] -->
     <string name="private_space_setting_up_text">Setting up private space\u2026</string>
     <!-- Title for private space setup in auto advancing screen informing private space notifications are hidden when locked. [CHAR LIMIT=NONE] -->
@@ -1548,20 +1554,12 @@
     <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint">"A pattern protects your phone if it\u2019s lost or stolen.<xliff:g id="empty_line">\n\n</xliff:g>This deletes the fingerprint model stored on your device. Your face model will also be permanently and securely deleted. You won\u2019t be able to use your face or fingerprint for authentication in apps."</string>
     <!-- Content of the dialog shown when the user removes the device lock PIN [CHAR LIMIT=NONE] -->
     <string name="unlock_disable_frp_warning_content_pin">"A PIN protects your phone if it\u2019s lost or stolen"</string>
-    <!-- Content of the dialog shown when the user removes the device lock PIN and there are apps with auth-bound keys that will be affected [CHAR LIMIT=NONE] -->
-    <string name="unlock_disable_frp_warning_content_pin_authbound_keys">"You will lose saved data like your PIN.<xliff:g id="empty_line">\n\n</xliff:g>Cards set up for tap to pay will be removed.<xliff:g id="empty_line">\n\n</xliff:g>Wallets and other apps that require device unlock may not work properly."</string>
     <!-- Content of the dialog shown when the user removes the device lock PIN and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
     <string name="unlock_disable_frp_warning_content_pin_fingerprint">"A PIN protects your phone if it\u2019s lost or stolen.<xliff:g id="empty_line">\n\n</xliff:g>This also deletes the fingerprint model stored on your device. You won\u2019t be able to use your fingerprint for authentication in apps."</string>
-    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has fingerprints enrolled and there are apps with auth-bound keys that will be affected [CHAR LIMIT=NONE] -->
-    <string name="unlock_disable_frp_warning_content_pin_fingerprint_authbound_keys">"You will lose saved data like your PIN and fingerprint model.<xliff:g id="empty_line">\n\n</xliff:g>Cards set up for tap to pay will be removed.<xliff:g id="empty_line">\n\n</xliff:g>Wallets and other apps that require device unlock may not work properly."</string>
     <!-- Content of the dialog shown when the user removes the device lock PIN and the user has face enrolled [CHAR LIMIT=NONE] -->
     <string name="unlock_disable_frp_warning_content_pin_face">"A PIN protects your phone if it\u2019s lost or stolen.<xliff:g id="empty_line">\n\n</xliff:g>Your face model will also be permanently and securely deleted. You won\u2019t be able to use your face for authentication in apps."</string>
-    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has face enrolled and there are apps with auth-bound keys that will be affected [CHAR LIMIT=NONE] -->
-    <string name="unlock_disable_frp_warning_content_pin_face_authbound_keys">"You will lose saved data like your PIN and face model.<xliff:g id="empty_line">\n\n</xliff:g>Cards set up for tap to pay will be removed.<xliff:g id="empty_line">\n\n</xliff:g>Wallets and other apps that require device unlock may not work properly."</string>
     <!-- Content of the dialog shown when the user removes the device lock PIN and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
     <string name="unlock_disable_frp_warning_content_pin_face_fingerprint">"A PIN protects your phone if it\u2019s lost or stolen.<xliff:g id="empty_line">\n\n</xliff:g>This deletes the fingerprint model stored on your device. Your face model will also be permanently and securely deleted. You won\u2019t be able to use your face or fingerprint for authentication in apps."</string>
-    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has face authentication and fingerprint enrolled and there are apps with auth-bound keys that will be affected [CHAR LIMIT=NONE] -->
-    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint_authbound_keys">"You will lose saved data like your PIN, face and fingerprint models.<xliff:g id="empty_line">\n\n</xliff:g>Cards set up for tap to pay will be removed.<xliff:g id="empty_line">\n\n</xliff:g>Wallets and other apps that require device unlock may not work properly."</string>
     <!-- Content of the dialog shown when the user removes the device lock password [CHAR LIMIT=NONE] -->
     <string name="unlock_disable_frp_warning_content_password">"A password protects your phone if it\u2019s lost or stolen"</string>
     <!-- Content of the dialog shown when the user removes the device lock password and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
@@ -1578,6 +1576,15 @@
     <string name="unlock_disable_frp_warning_content_unknown_face">"Device protection features will not work without your screen lock.<xliff:g id="empty_line">\n\n</xliff:g>Your face model will also be permanently and securely deleted. You won\u2019t be able to use your face for authentication in apps."</string>
     <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
     <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint">"Device protection features will not work without your screen lock.<xliff:g id="empty_line">\n\n</xliff:g>This deletes the fingerprint model stored on your device. Your face model will also be permanently and securely deleted. You won\u2019t be able to use your face or fingerprint for authentication in apps."</string>
+    <!-- Content of the dialog shown when the user removes any device screenlock and there are apps with auth-bound keys that will be affected [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_authbound_keys">"Your screen lock will be removed.<xliff:g id="empty_line">\n\n</xliff:g>Tap to pay won\u2019t be available.<xliff:g id="empty_line">\n\n</xliff:g>Wallet, payment, and other apps that require authentication may not work properly."</string>
+    <!-- Content of the dialog shown when the user removes any device screen lock and the user has fingerprints enrolled and there are apps with auth-bound keys that will be affected [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_fingerprint_authbound_keys">"Your screen lock and Fingerprint Unlock will be removed.<xliff:g id="empty_line">\n\n</xliff:g>Tap to pay won\u2019t be available.<xliff:g id="empty_line">\n\n</xliff:g>Wallet, payment, and other apps that require authentication may not work properly."</string>
+    <!-- Content of the dialog shown when the user removes any device screen lock and the user has face enrolled and there are apps with auth-bound keys that will be affected [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_face_authbound_keys">"Your screen lock and Face Unlock will be removed.<xliff:g id="empty_line">\n\n</xliff:g>Tap to pay won\u2019t be available.<xliff:g id="empty_line">\n\n</xliff:g>Wallet, payment, and other apps that require authentication may not work properly."</string>
+    <!-- Content of the dialog shown when the user removes any device screen lock and the user has face authentication and fingerprint enrolled and there are apps with auth-bound keys that will be affected [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_face_fingerprint_authbound_keys">"Your screen lock and Face &amp; Fingerprint Unlock will be removed.<xliff:g id="empty_line">\n\n</xliff:g>Tap to pay won\u2019t be available.<xliff:g id="empty_line">\n\n</xliff:g>Wallet, payment, and other apps that require authentication may not work properly."</string>
+
 
     <!-- Affirmative action of the dialog shown when the user removes the device lock [CHAR LIMIT=25] -->
     <string name="unlock_disable_frp_warning_ok">Delete</string>
@@ -2317,6 +2324,8 @@
     <string name="wifi_details_title">Network details</string>
     <!-- Wifi details preference title to display router IP subnet mask -->
     <string name="wifi_details_subnet_mask">Subnet mask</string>
+    <!-- Server name title-->
+    <string name="server_name_title">Server name</string>
     <!-- Wifi details preference title to display wifi type info [CHAR LIMIT=50]-->
     <string name="wifi_type_title">Type</string>
     <!-- Wifi details preference title to display router DNS info -->
@@ -2851,7 +2860,7 @@
     <!-- Dark UI screen footer action text shown when the when Dark theme turns on/off automatically according to a user bedtime schedule. [CHAR LIMIT=NONE] -->
     <string name="dark_ui_bedtime_footer_action">Bedtime mode settings</string>
     <!-- Even Dimmer setting title. Allows device to reduce brightness even further than standard range. [CHAR LIMIT=NONE] -->
-    <string name="even_dimmer_display_title">Even Dimmer</string>
+    <string name="even_dimmer_display_title">Even dimmer</string>
     <!-- Even Dimmer setting summary. [CHAR LIMIT=NONE] -->
     <string name="even_dimmer_display_summary">Allow device to go dimmer than usual</string>
 
@@ -3195,8 +3204,17 @@
     <!-- Body of dialog confirming that user wants to forget an internal storage device [CHAR LIMIT=NONE]-->
     <string name="storage_internal_forget_confirm">All the apps, photos, and data stored on this <xliff:g id="name" example="SD card">^1</xliff:g> will be lost forever.</string>
 
-    <!-- Body of dialog informing user about the storage used by the Android System [CHAR LIMIT=NONE]-->
+    <!-- Old body of dialog informing user about the storage used by the Android System [CHAR LIMIT=NONE]-->
     <string name="storage_detail_dialog_system">System includes files used to run Android version <xliff:g id="version" example="8.0">%s</xliff:g></string>
+
+    <!-- New body of dialog informing user about the storage used by the Android System [CHAR LIMIT=NONE]-->
+    <string name="storage_os_detail_dialog_system">This includes your operating system and the files that are needed to keep your phone running smoothly. To protect their integrity, these files can\u2019t be accessed.</string>
+
+    <!-- Body of dialog informing user about the storage used by the Android temporary system files [CHAR LIMIT=NONE]-->
+    <string name="storage_other_files_detail_dialog_system">This includes cache and other temporary files that are needed by your operating system. You may notice changes to the amount of storage used over time.</string>
+
+    <!-- Label for categories splitter in Settings > Storage [CHAR LIMIT=none] -->
+    <string name="storage_system_label">System</string>
 
     <!-- Message to notify guest users as to why they can't set up the storage device [CHAR LIMIT=50]-->
     <string name="storage_wizard_guest">Guest mode users cannot format SD cards</string>
@@ -6197,6 +6215,29 @@
     <string name="adaptive_connectivity_switch_off">Off</string>
     <!-- Title for adaptive connectivity main switch preferences. [CHAR LIMIT=50] -->
     <string name="adaptive_connectivity_main_switch_title">Use adaptive connectivity</string>
+
+    <!-- Cellular security related strings -->
+    <!-- Title of Cellular security tile in Network & Internet settings page. [CHAR LIMIT=60]-->
+    <string name="cellular_security_title">Cellular network security</string>
+    <!-- Summary of Cellular security tile in Network & Internet settings page. [CHAR LIMIT=NONE]-->
+    <string name="cellular_security_summary">Network type, encryption, notification controls</string>
+
+    <!-- Title of cellular security settings page [CHAR LIMIT=60]-->
+    <string name="cellular_security_settings_title">Cellular network security</string>
+    <!-- Title of Cellular security notifications section [CHAR LIMIT=60]-->
+    <string name="cellular_security_notifications">Notifications</string>
+    <!-- Title of Cellular security notifications toggle [CHAR LIMIT=60]-->
+    <string name="cellular_security_notifications_controller_title">Security notifications</string>
+    <!-- Summary of Cellular security notifications toggle [CHAR LIMIT=NONE]-->
+    <string name="cellular_security_notifications_controller_summary">Receive notifications in case the cellular network you are connected to is insecure due to lack of encryption, or if the cellular network records your unique decive or SIM identifiers (IMEI &amp; IMSI)</string>
+
+    <!--Cellular encryption -->
+    <!--Cellular encryption title [CHAR LIMIT=60] -->
+    <string name="cellular_security_settings_encryption_title">Encryption</string>
+    <!-- Title of Cellular security Network generations divider [CHAR LIMIT=30]-->
+    <string name="cellular_security_network_generations_title">Network generations</string>
+    <!-- Summary of Cellular security Network generations divider [CHAR LIMIT=NONE]-->
+    <string name="cellular_security_network_generations_summary">You can configure each installed SIM card to only connect to networks that support 3G, 4G, and 5G. The SIM will not connect to older, insecure 2G networks. This setting may limit your connectivity in case the only available network is 2G. In case of an emergency, 2G may be used.</string>
 
     <!-- Title of preference group for credential storage settings [CHAR LIMIT=30] -->
     <string name="credentials_title">Credential storage</string>
@@ -10514,7 +10555,7 @@
     <string name="back_sensitivity_dialog_title">Back Sensitivity</string>
 
     <!-- Title for the screen to show all the gesture navigation settings [CHAR LIMIT=80] -->
-    <string name="gesture_settings_activity_title">Gesture Navigation Sensitivity</string>
+    <string name="gesture_settings_activity_title">Gesture Navigation</string>
 
     <!-- Title for the screen to show all the 2- and 3-button navigation settings. [CHAR LIMIT=80] -->
     <string name="button_navigation_settings_activity_title">Button navigation</string>
@@ -10846,14 +10887,26 @@
     <!-- Preference label for the Audio storage section. [CHAR LIMIT=50] -->
     <string name="storage_audio">Audio</string>
 
+    <!-- Preference label for the Documents storage section. [CHAR LIMIT=50] -->
+    <string name="storage_documents">Documents</string>
+
+    <!-- Preference label for the Other storage section. [CHAR LIMIT=50] -->
+    <string name="storage_other">Other</string>
+
     <!-- Preference label for the Apps storage section. [CHAR LIMIT=50] -->
     <string name="storage_apps">Apps</string>
 
     <!-- Preference label for the Documents & other storage section. [CHAR LIMIT=50] -->
     <string name="storage_documents_and_other">Documents &amp; other</string>
 
-    <!-- Preference label for the System storage section. [CHAR LIMIT=50] -->
+    <!-- Old Preference label for the System storage section. [CHAR LIMIT=50] -->
     <string name="storage_system">System</string>
+
+    <!-- New Preference label for the System storage section. [CHAR LIMIT=50] -->
+    <string name="storage_os_name">Android <xliff:g id="version" example="8">%s</xliff:g></string>
+
+    <!-- Preference label for the System storage section. [CHAR LIMIT=50] -->
+    <string name="storage_temporary_files">Temporary system files</string>
 
     <!-- Preference label for the Trash storage section. [CHAR LIMIT=50] -->
     <string name="storage_trash">Trash</string>
@@ -12135,7 +12188,7 @@
     <!-- Developer settings: Title for disable app and notification screen share protections [CHAR LIMIT=50] -->
     <string name="disable_screen_share_protections_for_apps_and_notifications">Disable screen share protections</string>
     <!-- Developer settings: Summary for disable app and notification screen share protections summary [CHAR LIMIT=150] -->
-    <string name="disable_screen_share_protections_for_apps_and_notifications_summary">Disables system applied app and notifications protections during screen sharing</string>
+    <string name="disable_screen_share_protections_for_apps_and_notifications_summary">Turn off system protections for sensitive app content for upcoming screen share sessions</string>
 
     <!-- Title for media control settings [CHAR LIMIT=50]-->
     <string name="media_controls_title">Media</string>

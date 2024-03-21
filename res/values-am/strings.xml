@@ -73,10 +73,10 @@
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="631521133525979967">"የቀኝ የመስማት ችሎታ መሣሪያዎ ተገናኝቷል።\n\nየግራውን ለማጣመር መብራቱን እና ለመጣመር መዘጋጀቱን ያረጋግጡ።"</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"የቀኝ ጆሮን ያጣምሩ"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"የግራ ጆሮን ያጣምሩ"</string>
-    <string name="bluetooth_device_controls_general" msgid="1399214835599665488">"ለሁሉም ለሚገኙ የመስሚያ መሣሪያዎች"</string>
-    <string name="bluetooth_device_controls_title" msgid="659009912978022189">"ተጨማሪ የመስማት ችሎታ መሣሪያ ቅንብሮች"</string>
-    <string name="bluetooth_device_controls_summary" msgid="5387400497394163925">"እንደ አቋራጭ እና የቴሌኮይል ቁጥጥሮች ያሉ የመሣሪያ-ተሻጋሪ ቅንብሮችን ይቀይሩ"</string>
-    <string name="bluetooth_device_controls_specific" msgid="7706863288754077107">"ለዚህ መሳሪያ"</string>
+    <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"የመስማት ችሎታ መሣሪያ ቅንብሮች"</string>
+    <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"አቋራጭ፣ የመስሚያ ረዳት ተኳዃኝነት"</string>
+    <string name="bluetooth_hearing_aids_presets" msgid="5429761844739722885">"ቅድመ-ቅምጦች"</string>
+    <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"ቅድመ-ቅምጥን ማዘመን አልተቻለም"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"የኦዲዮ ውጽዓት"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"ስለኦዲዮ ውፅዓት"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"ድምጾችን ወደ የመስሚያ መሣሪያዎ ወይም ወደ ስልክዎ ድምፅ ማውጫ ያዙሩ"</string>
@@ -569,6 +569,12 @@
     <string name="privatespace_unlock_description" msgid="3177710543121916413">"የግል ቦታዎን ይክፈቱ"</string>
     <string name="privatespace_hide_off_summary" msgid="7227778747159633671">"ጠፍቷል"</string>
     <string name="privatespace_hide_on_summary" msgid="6136704537527640183">"በርቷል"</string>
+    <!-- no translation found for private_space_hide_dialog_title (3192253150765516720) -->
+    <skip />
+    <!-- no translation found for private_space_hide_dialog_message (2006421821648157211) -->
+    <skip />
+    <!-- no translation found for private_space_hide_dialog_button (4157191429310035457) -->
+    <skip />
     <string name="private_space_category_system" msgid="1286843321867285700">"ሥርዓት"</string>
     <string name="private_space_delete_title" msgid="636873505724100006">"የግል ቦታን ይሰርዙ"</string>
     <string name="private_space_delete_header" msgid="4594429153176776184">"የግል ቦታ ይሰረዝ?"</string>
@@ -828,8 +834,6 @@
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"የመተግበሪያን ግንኙነትን አቋርጥ"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"ከፍተኛው የተገናኙ የብሉቱዝ ኦዲዮ መሣሪያዎች ብዛት"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"ከፍተኛው የተገናኙ የብሉቱዝ ኦዲዮ መሣሪያዎች ብዛትን ይምረጡ"</string>
-    <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"የኤንኤፍሲ ቁልል የስህተት አርም ምዝግብ ማስታወሻ"</string>
-    <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"የኤንኤፍሲ ቁልል የምዝግብ ማስታወሻ ደረጃን ይጨምሩ"</string>
     <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"የኤንኤፍሲ ብዙ ቃላት አቅራቢ ስህተት ማረሚያ ምዝግብ ማስታወሻ"</string>
     <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"በሳንካ ሪፖርቶች ውስጥ የግል መረጃን ሊይዙ የሚችሉ ተጨማሪ መሣሪያ-ተኮር የአቅራቢ ምዝግብ ማስታወሻዎችን ያካትቱ።"</string>
     <string name="nfc_snoop_log_title" msgid="1576197495976952388">"የኤንኤፍሲ NCI ያልተጣራ ምዝግብ ማስታወሻ"</string>
@@ -1540,8 +1544,7 @@
     <string name="network_scorer_change_active_no_previous_dialog_text" msgid="680685773455072321">"የአውታረ መረብ ግንኙነቶችዎን ለማቀናበር <xliff:g id="NEW_APP">%s</xliff:g>ን ይጠቀሙ?"</string>
     <string name="location_category_recent_location_requests" msgid="2205900488782832082">"የቅርብ ጊዜ የአካባቢ ጥያቄዎች"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"የስራ መገለጫ አካባቢ"</string>
-    <!-- no translation found for private_profile_location_switch_title (4127119143109855789) -->
-    <skip />
+    <string name="private_profile_location_switch_title" msgid="4127119143109855789">"የግል ቦታ አካባቢ"</string>
     <string name="location_app_level_permissions" msgid="907206607664629759">"የመተግበሪያ አካባቢ ፈቃዶች"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"መገኛ አካባቢ ጠፍቷል"</string>
     <string name="location_app_permission_summary_location_on" msgid="7552095451731948984">"{count,plural, =1{ከ{total} መተግበሪያዎች # የአካባቢ መዳረሻ አለው}one{ከ{total} መተግበሪያዎች # የአካባቢ መዳረሻ አለው}other{ከ{total} መተግበሪያዎች # የአካባቢ መዳረሻ አላቸው}}"</string>
@@ -1933,13 +1936,10 @@
     <string name="modifier_keys_reset" msgid="551170906710422041">"ዳግም አስጀምር"</string>
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"አሻሻይ ቁልፍ ይምረጡ"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"ለ<xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g> አዲስ ቁልፍ ይምረጡ፦"</string>
-    <!-- no translation found for ime_label_title (8994569521516807168) -->
-    <skip />
+    <string name="ime_label_title" msgid="8994569521516807168">"የ<xliff:g id="IME_LABEL">%s</xliff:g> አቀማመጥ"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"ነባሪ"</string>
-    <!-- no translation found for automatic_keyboard_layout_label (9138088156046198913) -->
-    <skip />
-    <!-- no translation found for user_selected_keyboard_layout_label (154742505924555156) -->
-    <skip />
+    <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"ራስ-ሰር፦ <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
+    <string name="user_selected_keyboard_layout_label" msgid="154742505924555156">"የተመረጠው ተጠቃሚ፦ <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"ንግግር"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"የጠቋሚ ፍጥነት"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"የጨዋታ መቆጣጠሪያ"</string>
@@ -2019,6 +2019,8 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"እንዲወረዱ የተደረጉ መተግበሪያዎች"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"የሙከራ"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"የባህሪ ጥቆማዎች"</string>
+    <string name="bt_stack_log_level" msgid="6527899271926969296">"የብሉቱዝ ቁልሎች ምዝግብ ማስታወሻን አንቃ"</string>
+    <string name="bt_stack_log_level_summary" msgid="3769107713334448285">"የብሉቱዝ ቁልሎች ምዝግብ ማስታወሻ ደረጃን ይቀይሩ (ይህን ቅንብር ከቀየሩ በኋላ ብሉቱዝን ይቀያይሩ)"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"የብሉቱዝ HCI snoop ምዝግብ ማስታወሻ ማጣራት"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="1319792184194176235">"ማጣሪያዎችን ያቀናብሩ"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_footer" msgid="4158945851818483666">"ለውጦቹ እንዲተገበሩ ብሉቱዝን ያሰናክሉ እና ያንቁ"</string>
@@ -2061,12 +2063,9 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"ለማንኛውም ቀጥል"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"ይቅር"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"የማጉያ ቅንብሮች"</string>
-    <!-- no translation found for accessibility_magnification_one_finger_panning_title (4503949739883092989) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_on (9133125894310777539) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_off (8979146350396559805) -->
-    <skip />
+    <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"በአንድ ጣት መጎተት"</string>
+    <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"አንድ ጣትን በመጎተት የማጉያ ቦታውን ያንቀሳቅሱ።"</string>
+    <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"ሁለት ጣቶችን በመጎተት የማጉያ ቦታውን ያንቀሳቅሱ።"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"በአቋራጭ ያጉሉ"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"በአቋራጭ እና ሦስቴ መታ በማድረግ ያጉሉ"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"ስለ<xliff:g id="SERVICE">%1$s</xliff:g>"</string>
@@ -2093,6 +2092,7 @@
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"ለመክፈት የድምጽ ቁልፎችን ይያዙ"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"ለመክፈት ማያ ገጹን ሦስት ጊዜ መታ ያድርጉ"</string>
     <string name="accessibility_tutorial_dialog_title_two_finger_double" msgid="3912970760484557646">"ለመክፈት ማያ ገጽን በሁለት ጣት ሁለቴ መታ ያድርጉ"</string>
+    <string name="accessibility_tutorial_dialog_title_quick_setting" msgid="2905083277641794558">"የፈጣን ቅንብሮች አቋራጭ"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"ለመክፈት የጣት ምልክትን ይጠቀሙ"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="6800684770875867559">"የተደራሽነት እጅ ምልክትን ይጠቀሙ"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"ይህን ባህሪ ለመጠቀም በማያ ገጽዎ ግርጌ ላይ ያለውን የተደራሽነት አዝራሩን <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> መታ ያድርጉ።\n\nባህሪያት መካከል ለመቀያየር የተደራሽነት አዝራሩን ነክተው ይያዙ።"</string>
@@ -2100,6 +2100,7 @@
     <string name="accessibility_tutorial_dialog_message_volume" msgid="5033080515460519183">"ይህን ባህሪ ለመጠቀም ሁለቱንም የድምጽ ቁልፎች ተጭነው ይያዙ።"</string>
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"ማጉላትን ለመጀመር እና ለማቆም በማያ ገጽዎ ላይ ማንኛውም ቦታ ላይ ሦስት ጊዜ መታ ያድርጉ።"</string>
     <string name="accessibility_tutorial_dialog_message_two_finger_triple" msgid="860548190334486449">"ማጉላትን ለመጀመር እና ለማቆም በማያ ገጽዎ ላይ ማንኛውም ቦታ ላይ በሁለት ጣቶች ሁለቴ መታ ያድርጉ።"</string>
+    <string name="accessibility_tutorial_dialog_message_quick_setting" msgid="2272748015553891860">"ይህን ባህሪ ለመጠቀም ከማያ ገጽዎ የላይኛው ክፍል ወደ ታች ያንሸራትቱ።"</string>
     <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"ይህን ባህሪ ለመጠቀም በ2 ጣቶች ከማያ ገጹ ግርጌ ወደ ላይ ይጥረጉ።\n\nበባሕሪያት መካከል ለመቀያየር በ2 ጣቶች ወደ ላይ ጠርገው ይያዙ።"</string>
     <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="8142847782708562793">"ይህን ባህሪ ለመጠቀም በ3 ጣቶች ከማያ ገጹ ግርጌ ወደ ላይ ይጥረጉ።\n\nበባሕሪያት መካከል ለመቀያየር በ3 ጣቶች ወደ ላይ ጠርገው ይያዙ።"</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"የተደራሽነት ባሕሪን ለመጠቀም በ2 ጣቶች ከማያ ገጹ ግርጌ ወደ ላይ ይጥረጉ።\n\nበባሕሪያት መካከል ለመቀያየር በ2 ጣቶች ወደ ላይ ጠርገው ይያዙ።"</string>
@@ -2107,8 +2108,8 @@
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"ገባኝ"</string>
     <string name="accessibility_tutorial_dialog_link_button" msgid="6797349445794031781">"የአዝራር ቅንብሮች"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"የ<xliff:g id="SERVICE">%1$s</xliff:g> አቋራጭ"</string>
-    <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"የተደራሽነት አዝራር"</string>
-    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"የተደራሽነት እጅ ምልክት"</string>
+    <string name="accessibility_shortcut_edit_summary_software" msgid="48978719406821294">"የተደራሽነት አዝራር"</string>
+    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="7346399253904683940">"የተደራሽነት እጅ ምልክት"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"በ2 ጣቶች ወደ ላይ ይጥረጉ"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"በ3 ጣቶች ወደ ላይ ይጥረጉ"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"የተደራሽነት አዝራሩን መታ ያድርጉ"</string>
@@ -2118,6 +2119,9 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"በ3 ጣቶች ከማያ ገጹ ግርጌ ላይ በጣት ወደ ላይ ጠረግ ያድርጉ።\n\nበባሕሪያት መካከል ለመቀያየር በ3 ጣቶች ወደ ላይ ጠረግ ያድርጉ እና ይያዙ።"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="4459254227203203324"><annotation id="link">"ተጨማሪ አማራጮች"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"ስለ<xliff:g id="SERVICE">%1$s</xliff:g> የበለጠ ይወቁ"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"ፈጣን ቅንብሮች"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="8726678553797015432">"ከማያ ገጽዎ የላይኛው ክፍል ወደ ታች ያንሸራትቱ"</string>
+    <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"ፈጣን ቅንብሮች"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"የድምፅ አዝራሮችን ይያዙ"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"የድምጽ አዝራሮችን ይያዙ"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"ሁለቱንም የድምፅ ቁልፎች ተጭነው ይያዙ"</string>
@@ -2155,7 +2159,8 @@
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"ከፍተኛ ንጽጽር ጽሁፍ"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"የጽሑፍ ቀለም ወደ ጥቁር ወይም ነጭ ይቀይሩ። ከዳራ ንፅፅርን ከፍ ያደርገዋል።"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"የጽሑፍ ንፅፅርን ያሳድጉ"</string>
-    <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="5493999083693403489">"ከበስተጀርባው ጋር ያለውን ንፅፅር ለመጨመር የጽሑፍ ቀለም ወደ ጥቁር ወይም ነጭ ይቀይሩ።"</string>
+    <!-- no translation found for accessibility_toggle_maximize_text_contrast_preference_summary (8200408691846666900) -->
+    <skip />
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"ማጉላትን በራስ-አዘምን"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"የመተግበሪያ ሽግግሮች ላይ ማጉላትን አዘምን"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"የኃይል አዘራር ጥሪውን ይዘገዋል"</string>
@@ -4200,6 +4205,8 @@
     <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"ወደ መነሻ ለመሄድ ከማያ ገፅ ከስር ወደ ላይ በጣት ያንሸራትቱ። መተግበሪያዎችን ለመቀየር ከስር ወደ ላይ በጣት ያንሸራቱ፣ ይያዙ፣ ከዚያም ይልቀቁ። ወደ ኋላ ለመመለስ ከግራ ወይም ቀኝ ጠርዝ በጣት ያንሸራትቱ።"</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"3-አዝራር ዳሰሳ"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"በማያ ገጽዎ ግርጌ ላይ ባሉ አዝራሮች አማካኝነት ይመለሱ፣ ወደ መነሻ ይሂዱ እና መተግበሪያዎችን ይቀይሩ።"</string>
+    <!-- no translation found for nav_tutorial_button_description (5791791794770463386) -->
+    <skip />
     <string name="keywords_system_navigation" msgid="3131782378486554934">"የሥርዓት ዳሰሳ፣ 2 አዝራር ዳሰሳ፣ 3 አዝራር ዳሰሳ፣ የእጅ ውዝውዜ ዳሰሳ፣ በጣት ጠረግ ማድረግ"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"ዲጂታል ረዳት"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"ረዳትን ለመጥራት ያንሸራትቱ"</string>
@@ -4644,12 +4651,9 @@
     <string name="primary_sim_texts_title" msgid="1287584042733097749">"ጽሑፎች"</string>
     <string name="primary_sim_automatic_data_title" msgid="1265528923229642480">"ራስ-ሰር የውሂብ መቀየር"</string>
     <string name="primary_sim_automatic_data_msg" msgid="1612203837010785203">"በሽፋን እና በተገኝነት ላይ በመመስረት ከሁለቱም የሲም ውሂብ ይጠቀሙ"</string>
-    <!-- no translation found for sim_action_restart_dialog_title (3507413479633430120) -->
-    <skip />
-    <!-- no translation found for sim_action_restart_dialog_msg (4737611046767629774) -->
-    <skip />
-    <!-- no translation found for sim_action_restart_dialog_cancel (665560106686565624) -->
-    <skip />
+    <string name="sim_action_restart_dialog_title" msgid="3507413479633430120">"2 ሲሞችን ለመጠቀም እንደገና ያስጀምሩ"</string>
+    <string name="sim_action_restart_dialog_msg" msgid="4737611046767629774">"2 ሲሞችን በአንድ ጊዜ ለመጠቀም መሣሪያዎን እንደገና ያስጀምሩትና ሁለቱንም ሲም ያብሩ"</string>
+    <string name="sim_action_restart_dialog_cancel" msgid="665560106686565624">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> ብቻ ተጠቀም"</string>
     <string name="sim_onboarding_phoneNumber_data_only" msgid="8158409121949373662">"ውሂብ-ብቻ"</string>
     <string name="sim_onboarding_setup" msgid="5750393553605388463">"ያዋቅሩ"</string>
     <string name="sim_onboarding_next" msgid="6415025179929475355">"ቀጣይ"</string>
@@ -4764,6 +4768,13 @@
     <string name="confirm_enable_4k_pages_text" msgid="6168921566226074524">"መሣሪያው ከማረጋገጫ በኋላ ዳግም ይነሳል።"</string>
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"ከርነልን ወደ 16ኪባ ገጾች ተኳዃኝ ከርነል ማዘመን አልተሳካም።"</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"ለውጦችን በመተግበር ላይ"</string>
+    <string name="confirm_format_ext4_title" msgid="4453684705528818873">"የመሣሪያ ቅርጸት እንደገና ወደ ex4 ይሰራለት?"</string>
+    <string name="confirm_format_ext4_text" msgid="8164677342487500794">"የ16 ኪ ገንቢ አማራጭ በext4 የፋይል ስርዓት ይደገፋል። መሣሪያው ይጠረጋል እና የፋይል ስርዓቱ ከተረጋገጠ በኋላ ወደ ext4 ይለወጣል።"</string>
+    <string name="format_ext4_failure_toast" msgid="6904611547290793885">"ዳግም ቅርጸት መስራት እና የውሂብ ክፍልፋይን ወደ ext4 መጥረግ አልተሳካም።"</string>
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (6338135847153690912) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_text (236718973897424382) -->
+    <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"የሳንካ ሪፖርት ተቆጣጣሪ"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"በእርስዎ መሣሪያ ላይ የሳንካ ሪፖርት አቋራጭን የትኛው መተግበሪያ እንደሚቆጣጠር ይወስናል።"</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"የግል"</string>

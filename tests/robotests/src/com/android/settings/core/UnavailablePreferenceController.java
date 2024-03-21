@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 The Android Open Source Project
+ * Copyright (C) 2024 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,12 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.deviceinfo.hardwareinfo
 
-/**
- * Feature provider for hardware info
- */
-object HardwareInfoFeatureProviderImpl : HardwareInfoFeatureProvider {
-    override val manufacturedYear: String?
-        get() = null
+package com.android.settings.core;
+
+import android.content.Context;
+
+public class UnavailablePreferenceController extends BasePreferenceController {
+
+    public UnavailablePreferenceController(Context context, String preferenceKey) {
+        super(context, preferenceKey);
+    }
+
+    @Override
+    public int getAvailabilityStatus() {
+        return UNSUPPORTED_ON_DEVICE;
+    }
+
 }

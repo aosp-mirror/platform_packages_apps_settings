@@ -73,10 +73,10 @@
     <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="631521133525979967">"右耳助聽器已連接。\n\n如要配對左耳，請確認該耳助聽器已開啟並可開始配對。"</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"配對右耳的裝置"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"配對左耳"</string>
-    <string name="bluetooth_device_controls_general" msgid="1399214835599665488">"所有適用的助聽器"</string>
-    <string name="bluetooth_device_controls_title" msgid="659009912978022189">"更多助聽器設定"</string>
-    <string name="bluetooth_device_controls_summary" msgid="5387400497394163925">"變更捷徑等跨裝置設定，以及電話線圈控制項"</string>
-    <string name="bluetooth_device_controls_specific" msgid="7706863288754077107">"僅限此裝置"</string>
+    <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"助聽器設定"</string>
+    <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"捷徑、助聽器兼容性"</string>
+    <string name="bluetooth_hearing_aids_presets" msgid="5429761844739722885">"預設"</string>
+    <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"無法更新預設"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"音訊輸出裝置"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"關於音訊輸出"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"將聲音轉送至助聽器或手機喇叭"</string>
@@ -569,6 +569,12 @@
     <string name="privatespace_unlock_description" msgid="3177710543121916413">"解鎖私人空間"</string>
     <string name="privatespace_hide_off_summary" msgid="7227778747159633671">"關閉"</string>
     <string name="privatespace_hide_on_summary" msgid="6136704537527640183">"開啟"</string>
+    <!-- no translation found for private_space_hide_dialog_title (3192253150765516720) -->
+    <skip />
+    <!-- no translation found for private_space_hide_dialog_message (2006421821648157211) -->
+    <skip />
+    <!-- no translation found for private_space_hide_dialog_button (4157191429310035457) -->
+    <skip />
     <string name="private_space_category_system" msgid="1286843321867285700">"系統"</string>
     <string name="private_space_delete_title" msgid="636873505724100006">"刪除私人空間"</string>
     <string name="private_space_delete_header" msgid="4594429153176776184">"要刪除私人空間嗎？"</string>
@@ -828,8 +834,6 @@
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"解除連結應用程式"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"連接藍牙音訊裝置的數量上限"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"選取已連接藍牙音訊裝置的數量上限"</string>
-    <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"NFC 堆疊偵錯記錄"</string>
-    <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"提高 NFC 堆疊記錄等級"</string>
     <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"NFC 詳細供應商偵錯記錄"</string>
     <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"錯誤報告包括個別裝置的其他供應商記錄，可能包含私人資料。"</string>
     <string name="nfc_snoop_log_title" msgid="1576197495976952388">"NFC NCI 未篩選記錄"</string>
@@ -1540,8 +1544,7 @@
     <string name="network_scorer_change_active_no_previous_dialog_text" msgid="680685773455072321">"使用「<xliff:g id="NEW_APP">%s</xliff:g>」管理你的網絡連線？"</string>
     <string name="location_category_recent_location_requests" msgid="2205900488782832082">"最近的位置資訊要求"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"工作設定檔的位置"</string>
-    <!-- no translation found for private_profile_location_switch_title (4127119143109855789) -->
-    <skip />
+    <string name="private_profile_location_switch_title" msgid="4127119143109855789">"私人空間的位置功能"</string>
     <string name="location_app_level_permissions" msgid="907206607664629759">"應用程式位置權限"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"位置設定已關閉"</string>
     <string name="location_app_permission_summary_location_on" msgid="7552095451731948984">"{count,plural, =1{在 {total} 個應用程式中，有 # 個已取得位置資訊存取權}other{在 {total} 個應用程式中，有 # 個已取得位置資訊存取權}}"</string>
@@ -2016,6 +2019,8 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"已下載的應用程式"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"實驗性"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"功能標示"</string>
+    <string name="bt_stack_log_level" msgid="6527899271926969296">"啟用藍牙堆疊記錄"</string>
+    <string name="bt_stack_log_level_summary" msgid="3769107713334448285">"變更藍牙堆疊記錄功能的記錄層級 (變更此設定後請切換藍牙)"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"藍牙 HCI 窺探記錄篩選器"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="1319792184194176235">"設定篩選器"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_footer" msgid="4158945851818483666">"停用藍牙並重新啟用，變更才能生效"</string>
@@ -2058,12 +2063,9 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"仍要繼續"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"取消"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"放大設定"</string>
-    <!-- no translation found for accessibility_magnification_one_finger_panning_title (4503949739883092989) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_on (9133125894310777539) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_off (8979146350396559805) -->
-    <skip />
+    <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"單指平移"</string>
+    <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"拖曳一隻手指即可移動放大範圍。"</string>
+    <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"拖曳兩隻手指即可移動放大範圍。"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"使用快速鍵來放大"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"使用快速鍵和輕按三下來放大"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"關於「<xliff:g id="SERVICE">%1$s</xliff:g>」"</string>
@@ -2090,6 +2092,7 @@
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"㩒住兩個音量鍵就可以打開"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"㩒螢幕 3 下就可以開"</string>
     <string name="accessibility_tutorial_dialog_title_two_finger_double" msgid="3912970760484557646">"用兩隻手指喺螢幕上面㩒兩下就可以打開"</string>
+    <string name="accessibility_tutorial_dialog_title_quick_setting" msgid="2905083277641794558">"「快速設定」捷徑"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"使用手勢即可開啟"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="6800684770875867559">"使用無障礙手勢"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"要使用這項功能，請輕按螢幕底部的無障礙功能按鈕 <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>。\n\n如要切換不同的功能，按住無障礙功能按鈕即可。"</string>
@@ -2097,6 +2100,7 @@
     <string name="accessibility_tutorial_dialog_message_volume" msgid="5033080515460519183">"如果要使用呢項功能，請同時㩒住兩個音量鍵。"</string>
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"如果要啟用同停用放大功能，請喺螢幕上面嘅任何一個地方㩒三下。"</string>
     <string name="accessibility_tutorial_dialog_message_two_finger_triple" msgid="860548190334486449">"如果要啟用同停用放大功能，請用兩隻手指喺螢幕上面嘅任何一個地方㩒兩下。"</string>
+    <string name="accessibility_tutorial_dialog_message_quick_setting" msgid="2272748015553891860">"如要使用此功能，請從螢幕頂部向下滑動。"</string>
     <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"如果要使用呢項功能，請用兩指由螢幕底部向上掃。\n\n用兩指向上掃然後㩒住，就可以切換唔同功能。"</string>
     <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="8142847782708562793">"如果要使用呢項功能，請用 3 隻手指由螢幕底部向上掃。\n\n用 3 隻手指向上掃然後㩒住，就可以切換唔同功能。"</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"如果要使用無障礙功能，請用兩指由螢幕底部向上掃。\n\n用兩指向上掃然後㩒住，就可以切換唔同功能。"</string>
@@ -2104,8 +2108,8 @@
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"知道了"</string>
     <string name="accessibility_tutorial_dialog_link_button" msgid="6797349445794031781">"按鈕設定"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"「<xliff:g id="SERVICE">%1$s</xliff:g>」捷徑"</string>
-    <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"無障礙功能按鈕"</string>
-    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"無障礙手勢"</string>
+    <string name="accessibility_shortcut_edit_summary_software" msgid="48978719406821294">"無障礙功能按鈕"</string>
+    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="7346399253904683940">"無障礙手勢"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"用兩指向上掃"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"用 3 隻手指向上掃"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"輕按無障礙功能按鈕"</string>
@@ -2115,6 +2119,9 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"用 3 隻手指由螢幕底部向上掃。\n\n用 3 隻手指向上掃然後㩒住，就可以切換唔同功能。"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="4459254227203203324"><annotation id="link">"更多選項"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"進一步瞭解「<xliff:g id="SERVICE">%1$s</xliff:g>」"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"快速設定"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="8726678553797015432">"從螢幕頂部向下滑動"</string>
+    <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"快速設定"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"按住音量鍵"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"按住音量鍵"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"同時按住兩個音量鍵"</string>
@@ -2152,7 +2159,8 @@
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"高對比文字"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"將文字顏色改成黑色或白色，盡量令文字和背景顏色有最大對比。"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"將文字對比度最大化"</string>
-    <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="5493999083693403489">"將文字色彩改成黑色或白色，提升文字和背景之間的對比度。"</string>
+    <!-- no translation found for accessibility_toggle_maximize_text_contrast_preference_summary (8200408691846666900) -->
+    <skip />
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"自動更新螢幕放大設定"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"在應用程式轉場時更新螢幕放大設定"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"按開關按鈕結束通話"</string>
@@ -4197,6 +4205,8 @@
     <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"從螢幕底部向上滑動即可前往主畫面。如要切換應用程式，請從螢幕底部向上滑動並按住，然後放手。如要返回上一個畫面，請從螢幕左側或右側往另一側滑動。"</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"3 按鈕導覽"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"使用畫面底部的按鈕返回上一個畫面、前往主畫面和切換應用程式。"</string>
+    <!-- no translation found for nav_tutorial_button_description (5791791794770463386) -->
+    <skip />
     <string name="keywords_system_navigation" msgid="3131782378486554934">"系統導覽, 雙按鈕導覽, 3 按鈕導覽, 手勢導覽, 輕掃"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"數碼助理"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"滑動即可調用數碼助理應用程式"</string>
@@ -4641,12 +4651,9 @@
     <string name="primary_sim_texts_title" msgid="1287584042733097749">"短訊"</string>
     <string name="primary_sim_automatic_data_title" msgid="1265528923229642480">"自動切換數據"</string>
     <string name="primary_sim_automatic_data_msg" msgid="1612203837010785203">"按流動網絡的覆蓋範圍和適用範圍，選擇要使用哪張 SIM 卡的數據"</string>
-    <!-- no translation found for sim_action_restart_dialog_title (3507413479633430120) -->
-    <skip />
-    <!-- no translation found for sim_action_restart_dialog_msg (4737611046767629774) -->
-    <skip />
-    <!-- no translation found for sim_action_restart_dialog_cancel (665560106686565624) -->
-    <skip />
+    <string name="sim_action_restart_dialog_title" msgid="3507413479633430120">"重新啟動裝置才能使用 2 張 SIM 卡"</string>
+    <string name="sim_action_restart_dialog_msg" msgid="4737611046767629774">"如要同時使用 2 張 SIM 卡，請重新啟動裝置，然後啟用這 2 張 SIM 卡"</string>
+    <string name="sim_action_restart_dialog_cancel" msgid="665560106686565624">"只使用 <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="sim_onboarding_phoneNumber_data_only" msgid="8158409121949373662">"數據專用"</string>
     <string name="sim_onboarding_setup" msgid="5750393553605388463">"設定"</string>
     <string name="sim_onboarding_next" msgid="6415025179929475355">"下一頁"</string>
@@ -4761,6 +4768,13 @@
     <string name="confirm_enable_4k_pages_text" msgid="6168921566226074524">"裝置將在確認後重新啟動。"</string>
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"無法將 kernel 更新為 16 KB 頁面兼容 kernel。"</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"正在套用變更"</string>
+    <string name="confirm_format_ext4_title" msgid="4453684705528818873">"要將裝置重新格式化為 ext4 嗎？"</string>
+    <string name="confirm_format_ext4_text" msgid="8164677342487500794">"ext4 檔案系統可支援 16K 開發人員選項。確認後，系統會抹除裝置上的資料，並變更為 ext4 檔案系統。"</string>
+    <string name="format_ext4_failure_toast" msgid="6904611547290793885">"無法重新格式化並將資料分區抹除，變更為 ext4 檔案系統。"</string>
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (6338135847153690912) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_text (236718973897424382) -->
+    <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"錯誤報告處理常式"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"選擇裝置上負責處理錯誤報告快速鍵的應用程式。"</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"個人"</string>

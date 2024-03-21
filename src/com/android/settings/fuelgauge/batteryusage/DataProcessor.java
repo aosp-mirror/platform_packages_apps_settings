@@ -28,7 +28,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.pm.UserInfo;
 import android.os.BatteryConsumer;
 import android.os.BatteryStatsManager;
 import android.os.BatteryUsageStats;
@@ -52,7 +51,6 @@ import androidx.annotation.Nullable;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.os.PowerProfile;
-import com.android.settings.Utils;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.fuelgauge.BatteryStatus;
@@ -134,6 +132,7 @@ public final class DataProcessor {
     @Nullable
     public static Map<Integer, Map<Integer, BatteryDiffData>> getBatteryUsageData(
             Context context,
+            UserIdsSeries userIdsSeries,
             @Nullable final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap) {
         if (batteryHistoryMap == null || batteryHistoryMap.isEmpty()) {
             Log.d(TAG, "getBatteryLevelData() returns null");
@@ -161,6 +160,7 @@ public final class DataProcessor {
                         context,
                         getBatteryDiffDataMap(
                                 context,
+                                userIdsSeries,
                                 batteryLevelData.getHourlyBatteryLevelsPerDay(),
                                 processedBatteryHistoryMap,
                                 /* appUsagePeriodMap= */ null,
@@ -183,24 +183,21 @@ public final class DataProcessor {
 
     /** Gets the {@link UsageEvents} from system service for all unlocked users. */
     @Nullable
-    public static Map<Long, UsageEvents> getAppUsageEvents(Context context) {
+    public static Map<Long, UsageEvents> getAppUsageEvents(
+            Context context, UserIdsSeries userIdsSeries) {
         final long start = System.currentTimeMillis();
         context = DatabaseUtils.getParentContext(context);
         if (context == null) {
             return null;
         }
         final Map<Long, UsageEvents> resultMap = new ArrayMap();
-        final UserManager userManager = context.getSystemService(UserManager.class);
-        if (userManager == null) {
-            return null;
-        }
         final long sixDaysAgoTimestamp =
                 DatabaseUtils.getTimestampSixDaysAgo(Calendar.getInstance());
-        for (final UserInfo user : userManager.getAliveUsers()) {
+        for (final int userId : userIdsSeries.getVisibleUserIds()) {
             final UsageEvents events =
-                    getAppUsageEventsForUser(context, userManager, user.id, sixDaysAgoTimestamp);
+                    getAppUsageEventsForUser(context, userIdsSeries, userId, sixDaysAgoTimestamp);
             if (events != null) {
-                resultMap.put(Long.valueOf(user.id), events);
+                resultMap.put(Long.valueOf(userId), events);
             }
         }
         final long elapsedTime = System.currentTimeMillis() - start;
@@ -212,22 +209,21 @@ public final class DataProcessor {
 
     /** Gets the {@link UsageEvents} from system service for the specific user. */
     @Nullable
-    public static UsageEvents getAppUsageEventsForUser(
-            Context context, final int userID, final long startTimestampOfLevelData) {
+    public static UsageEvents getCurrentAppUsageEventsForUser(
+            Context context,
+            final UserIdsSeries userIdsSeries,
+            final int userID,
+            final long startTimestampOfLevelData) {
         final long start = System.currentTimeMillis();
         context = DatabaseUtils.getParentContext(context);
         if (context == null) {
-            return null;
-        }
-        final UserManager userManager = context.getSystemService(UserManager.class);
-        if (userManager == null) {
             return null;
         }
         final long sixDaysAgoTimestamp =
                 DatabaseUtils.getTimestampSixDaysAgo(Calendar.getInstance());
         final long earliestTimestamp = Math.max(sixDaysAgoTimestamp, startTimestampOfLevelData);
         final UsageEvents events =
-                getAppUsageEventsForUser(context, userManager, userID, earliestTimestamp);
+                getAppUsageEventsForUser(context, userIdsSeries, userID, earliestTimestamp);
         final long elapsedTime = System.currentTimeMillis() - start;
         Log.d(
                 TAG,
@@ -521,6 +517,7 @@ public final class DataProcessor {
 
     static Map<Long, BatteryDiffData> getBatteryDiffDataMap(
             Context context,
+            final UserIdsSeries userIdsSeries,
             final List<BatteryLevelData.PeriodBatteryLevelData> hourlyBatteryLevelsPerDay,
             final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap,
             final Map<Integer, Map<Integer, Map<Long, Map<String, List<AppUsagePeriod>>>>>
@@ -528,11 +525,6 @@ public final class DataProcessor {
             final @NonNull Set<String> systemAppsPackageNames,
             final @NonNull Set<Integer> systemAppsUids) {
         final Map<Long, BatteryDiffData> batteryDiffDataMap = new ArrayMap<>();
-        final int currentUserId = context.getUserId();
-        final UserHandle userHandle =
-                Utils.getManagedProfile(context.getSystemService(UserManager.class));
-        final int workProfileUserId =
-                userHandle != null ? userHandle.getIdentifier() : Integer.MIN_VALUE;
         // Each time slot usage diff data =
         //     sum(Math.abs(timestamp[i+1] data - timestamp[i] data));
         // since we want to aggregate every hour usage diff data into a single time slot.
@@ -569,8 +561,7 @@ public final class DataProcessor {
                                 endTimestamp,
                                 startBatteryLevel,
                                 endBatteryLevel,
-                                currentUserId,
-                                workProfileUserId,
+                                userIdsSeries,
                                 slotDuration,
                                 systemAppsPackageNames,
                                 systemAppsUids,
@@ -629,6 +620,7 @@ public final class DataProcessor {
     @Nullable
     static BatteryDiffData generateBatteryDiffData(
             final Context context,
+            final UserIdsSeries userIdsSeries,
             final long startTimestamp,
             final List<BatteryHistEntry> batteryHistEntryList,
             final @NonNull Set<String> systemAppsPackageNames,
@@ -650,15 +642,9 @@ public final class DataProcessor {
                     systemAppsUids,
                     /* isAccumulated= */ false);
         }
-        final int currentUserId = context.getUserId();
-        final UserHandle userHandle =
-                Utils.getManagedProfile(context.getSystemService(UserManager.class));
-        final int workProfileUserId =
-                userHandle != null ? userHandle.getIdentifier() : Integer.MIN_VALUE;
-
         for (BatteryHistEntry entry : batteryHistEntryList) {
             final boolean isFromOtherUsers =
-                    isConsumedFromOtherUsers(currentUserId, workProfileUserId, entry);
+                    isConsumedFromOtherUsers(userIdsSeries, entry);
             // Not show other users' battery usage data.
             if (isFromOtherUsers) {
                 continue;
@@ -905,6 +891,7 @@ public final class DataProcessor {
 
     static Map<Long, BatteryDiffData> getBatteryDiffDataMapFromStatsService(
             final Context context,
+            final UserIdsSeries userIdsSeries,
             final long startTimestamp,
             @NonNull final Set<String> systemAppsPackageNames,
             @NonNull final Set<Integer> systemAppsUids) {
@@ -913,6 +900,7 @@ public final class DataProcessor {
                 startTimestamp,
                 generateBatteryDiffData(
                         context,
+                        userIdsSeries,
                         startTimestamp,
                         getBatteryHistListFromFromStatsService(context),
                         systemAppsPackageNames,
@@ -1034,14 +1022,14 @@ public final class DataProcessor {
     @Nullable
     private static UsageEvents getAppUsageEventsForUser(
             Context context,
-            final UserManager userManager,
+            final UserIdsSeries userIdsSeries,
             final int userID,
             final long earliestTimestamp) {
         final String callingPackage = context.getPackageName();
         final long now = System.currentTimeMillis();
         // When the user is not unlocked, UsageStatsManager will return null, so bypass the
         // following data loading logics directly.
-        if (!userManager.isUserUnlocked(userID)) {
+        if (userIdsSeries.isUserLocked(userID)) {
             Log.w(TAG, "fail to load app usage event for user :" + userID + " because locked");
             return null;
         }
@@ -1331,8 +1319,7 @@ public final class DataProcessor {
             final long endTimestamp,
             final int startBatteryLevel,
             final int endBatteryLevel,
-            final int currentUserId,
-            final int workProfileUserId,
+            final UserIdsSeries userIdsSeries,
             final long slotDuration,
             final Set<String> systemAppsPackageNames,
             final Set<Integer> systemAppsUids,
@@ -1342,8 +1329,7 @@ public final class DataProcessor {
         if (appUsageMap != null) {
             final List<AppUsagePeriod> flatAppUsagePeriodList = new ArrayList<>();
             for (final long userId : appUsageMap.keySet()) {
-                if ((userId != currentUserId && userId != workProfileUserId)
-                        || appUsageMap.get(userId) == null) {
+                if (userIdsSeries.isFromOtherUsers(userId) || appUsageMap.get(userId) == null) {
                     continue;
                 }
                 for (final String packageName : appUsageMap.get(userId).keySet()) {
@@ -1405,8 +1391,7 @@ public final class DataProcessor {
 
             // Not show other users' battery usage data.
             final boolean isFromOtherUsers =
-                    isConsumedFromOtherUsers(
-                            currentUserId, workProfileUserId, selectedBatteryEntry);
+                    isConsumedFromOtherUsers(userIdsSeries, selectedBatteryEntry);
             if (isFromOtherUsers) {
                 continue;
             }
@@ -1593,12 +1578,10 @@ public final class DataProcessor {
     }
 
     private static boolean isConsumedFromOtherUsers(
-            final int currentUserId,
-            final int workProfileUserId,
+            final UserIdsSeries userIdsSeries,
             final BatteryHistEntry batteryHistEntry) {
         return isUidConsumer(batteryHistEntry.mConsumerType)
-                && batteryHistEntry.mUserId != currentUserId
-                && batteryHistEntry.mUserId != workProfileUserId;
+                && userIdsSeries.isFromOtherUsers(batteryHistEntry.mUserId);
     }
 
     @Nullable

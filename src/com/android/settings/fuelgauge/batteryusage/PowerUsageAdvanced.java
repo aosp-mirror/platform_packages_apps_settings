@@ -492,6 +492,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
                     return DataProcessManager.getBatteryLevelData(
                             getContext(),
                             mHandler,
+                            new UserIdsSeries(getContext(), /* mainUserOnly= */ false),
                             /* isFromPeriodJob= */ false,
                             PowerUsageAdvanced.this::onBatteryDiffDataMapUpdate);
                 }

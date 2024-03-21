@@ -87,6 +87,10 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
     // this only applies to fingerprint.
     public static final String EXTRA_SKIP_INTRO = "skip_intro";
 
+    // Intent extra. If true, support fingerprint enrollment only and skip other biometric
+    // enrollment methods like face unlock.
+    public static final String EXTRA_FINGERPRINT_ENROLLMENT_ONLY = "fingerprint_enrollment_only";
+
     // Intent extra. If true, parental consent will be requested before user enrollment.
     public static final String EXTRA_REQUIRE_PARENTAL_CONSENT = "require_consent";
 
@@ -194,7 +198,8 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
 
         final PackageManager pm = getApplicationContext().getPackageManager();
         mHasFeatureFingerprint = pm.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT);
-        mHasFeatureFace = pm.hasSystemFeature(PackageManager.FEATURE_FACE);
+        mHasFeatureFace = pm.hasSystemFeature(PackageManager.FEATURE_FACE)
+                && !(intent.getBooleanExtra(EXTRA_FINGERPRINT_ENROLLMENT_ONLY, false));
 
         // Default behavior is to enroll BIOMETRIC_WEAK or above. See ACTION_BIOMETRIC_ENROLL.
         final int authenticators = getIntent().getIntExtra(

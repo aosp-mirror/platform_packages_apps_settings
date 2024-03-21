@@ -68,7 +68,7 @@ abstract class FeatureFactory {
     /**
      * Retrieves implementation for Hardware Info feature.
      */
-    abstract val hardwareInfoFeatureProvider: HardwareInfoFeatureProvider
+    open val hardwareInfoFeatureProvider: HardwareInfoFeatureProvider? = null
 
     /** Implementation for [SupportFeatureProvider]. */
     open val supportFeatureProvider: SupportFeatureProvider? = null

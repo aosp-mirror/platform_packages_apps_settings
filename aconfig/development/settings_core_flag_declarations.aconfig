@@ -2,6 +2,13 @@ package: "com.android.settings.development"
 container: "system"
 
 flag {
+  name: "a2dp_offload_codec_extensibility_settings"
+  namespace: "bluetooth"
+  description: "Feature flag for Bluetooth Audio Codec extensibility in Settings"
+  bug: "323319530"
+}
+
+flag {
   name: "deprecate_list_activity"
   namespace: "android_settings"
   description: "Feature flag for deprecating ListActivity in Settings"

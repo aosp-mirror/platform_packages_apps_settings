@@ -17,6 +17,7 @@
 package com.android.settings;
 
 import static android.app.admin.DevicePolicyResources.Strings.Settings.PERSONAL_CATEGORY_HEADER;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.PRIVATE_CATEGORY_HEADER;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_CATEGORY_HEADER;
 
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
@@ -505,6 +506,9 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
             final UserInfo userInfo = profiles.get(profileIndex);
             final int profileId = userInfo.id;
             final UserHandle userHandle = new UserHandle(profileId);
+            if (Utils.shouldHideUser(userHandle, um)) {
+                continue;
+            }
             Account[] accounts = mgr.getAccountsAsUser(profileId);
             final int accountLength = accounts.length;
             if (accountLength == 0) {
@@ -529,6 +533,13 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
                     titleText.setText(devicePolicyManager.getResources().getString(
                             WORK_CATEGORY_HEADER, () -> getString(
                                     com.android.settingslib.R.string.category_work)));
+                } else if (android.os.Flags.allowPrivateProfile()
+                        && android.multiuser.Flags.enablePrivateSpaceFeatures()
+                        && android.multiuser.Flags.handleInterleavedSettingsForPrivateSpace()
+                        && userInfo.isPrivateProfile()) {
+                    titleText.setText(devicePolicyManager.getResources().getString(
+                            PRIVATE_CATEGORY_HEADER, () -> getString(
+                                    com.android.settingslib.R.string.category_private)));
                 } else {
                     titleText.setText(devicePolicyManager.getResources().getString(
                             PERSONAL_CATEGORY_HEADER, () -> getString(
