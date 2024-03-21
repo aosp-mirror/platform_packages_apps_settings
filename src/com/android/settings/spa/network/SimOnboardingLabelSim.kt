@@ -56,12 +56,12 @@ fun SimOnboardingLabelSimImpl(
         imageVector = Icons.Outlined.SignalCellularAlt,
         title = stringResource(R.string.sim_onboarding_label_sim_title),
         actionButton = BottomAppBarButton(
-            stringResource(R.string.sim_onboarding_next),
-            nextAction
+            text = stringResource(R.string.sim_onboarding_next),
+            onClick = nextAction
         ),
         dismissButton = BottomAppBarButton(
-            stringResource(R.string.cancel),
-            cancelAction
+            text = stringResource(R.string.cancel),
+            onClick = cancelAction
         ),
     ) {
         LabelSimBody(onboardingService)
