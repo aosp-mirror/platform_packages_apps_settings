@@ -5103,9 +5103,9 @@
         <activity
             android:name=".privatespace.PrivateSpaceAuthenticationActivity"
             android:theme="@*android:style/Theme.DeviceDefault.Settings.Dialog.NoActionBar"
-            android:exported="true">
+            android:exported="false">
             <intent-filter>
-                <action android:name="com.android.settings.action.PRIVATE_SPACE_SETUP_FLOW" />
+                <action android:name="com.android.settings.action.OPEN_PRIVATE_SPACE_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
@@ -5116,6 +5116,14 @@
                   android:label="@string/private_space_delete_header"
                   android:exported="false">
         </activity>
+
+        <receiver android:name=".privatespace.PrivateSpaceBroadcastReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.PRE_BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
 
         <activity-alias android:name="UsageStatsActivity"
                         android:exported="true"
