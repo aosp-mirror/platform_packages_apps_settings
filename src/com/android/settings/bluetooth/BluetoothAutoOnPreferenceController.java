@@ -16,11 +16,8 @@
 
 package com.android.settings.bluetooth;
 
+import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
-import android.database.ContentObserver;
-import android.os.Handler;
-import android.os.UserHandle;
-import android.provider.Settings;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -30,39 +27,20 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.TwoStatePreference;
 
 import com.android.settings.core.TogglePreferenceController;
+import com.android.settingslib.bluetooth.BluetoothCallback;
+import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
-import com.android.settingslib.flags.Flags;
 import com.android.settingslib.utils.ThreadUtils;
 
 public class BluetoothAutoOnPreferenceController extends TogglePreferenceController
-        implements LifecycleObserver, OnStart, OnStop {
-    private static final String TAG = "BluetoothAutoOnPreferenceController";
+        implements BluetoothCallback, LifecycleObserver, OnStart, OnStop {
+    private static final String TAG = "BluetoothAutoOnPrefCtlr";
     @VisibleForTesting static final String PREF_KEY = "bluetooth_auto_on_settings_toggle";
-    static final String SETTING_NAME = "bluetooth_automatic_turn_on";
-    static final int UNSET = -1;
-    @VisibleForTesting static final int ENABLED = 1;
-    @VisibleForTesting static final int DISABLED = 0;
-    private final ContentObserver mContentObserver =
-            new ContentObserver(new Handler(/* async= */ true)) {
-                @Override
-                public void onChange(boolean selfChange) {
-                    var unused =
-                            ThreadUtils.postOnBackgroundThread(
-                                    () -> {
-                                        updateValue();
-                                        mContext.getMainExecutor()
-                                                .execute(
-                                                        () -> {
-                                                            if (mPreference != null) {
-                                                                updateState(mPreference);
-                                                            }
-                                                        });
-                                    });
-                }
-            };
-    private int mAutoOnValue = UNSET;
+    @VisibleForTesting BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+    private final LocalBluetoothManager mLocalBluetoothManager = Utils.getLocalBtManager(mContext);
+    private boolean mAutoOnValue = false;
     @Nullable private TwoStatePreference mPreference;
 
     public BluetoothAutoOnPreferenceController(
@@ -71,26 +49,54 @@ public class BluetoothAutoOnPreferenceController extends TogglePreferenceControl
     }
 
     @Override
+    public void onAutoOnStateChanged(int state) {
+        var unused =
+                ThreadUtils.postOnBackgroundThread(
+                        () -> {
+                            Log.i(TAG, "onAutoOnStateChanged() state: " + state);
+                            updateValue();
+                            mContext.getMainExecutor()
+                                    .execute(
+                                            () -> {
+                                                if (mPreference != null) {
+                                                    updateState(mPreference);
+                                                }
+                                            });
+                        });
+    }
+
+    @Override
     public void onStart() {
-        mContext.getContentResolver()
-                .registerContentObserver(
-                        Settings.Secure.getUriFor(SETTING_NAME),
-                        /* notifyForDescendants= */ false,
-                        mContentObserver);
+        if (mLocalBluetoothManager == null) {
+            return;
+        }
+        mLocalBluetoothManager.getEventManager().registerCallback(this);
     }
 
     @Override
     public void onStop() {
-        mContext.getContentResolver().unregisterContentObserver(mContentObserver);
+        if (mLocalBluetoothManager == null) {
+            return;
+        }
+        mLocalBluetoothManager.getEventManager().unregisterCallback(this);
     }
 
     @Override
     public int getAvailabilityStatus() {
-        if (!Flags.bluetoothQsTileDialogAutoOnToggle()) {
+        if (mBluetoothAdapter == null) {
             return UNSUPPORTED_ON_DEVICE;
         }
-        updateValue();
-        return mAutoOnValue != UNSET ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        try {
+            boolean isSupported = mBluetoothAdapter.isAutoOnSupported();
+            Log.i(TAG, "getAvailabilityStatus() isSupported: " + isSupported);
+            if (isSupported) {
+                var unused = ThreadUtils.postOnBackgroundThread(this::updateValue);
+            }
+            return isSupported ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        } catch (Exception e) {
+            // Server could throw TimeoutException, InterruptedException or ExecutionException
+            return UNSUPPORTED_ON_DEVICE;
+        }
     }
 
     @Override
@@ -106,26 +112,20 @@ public class BluetoothAutoOnPreferenceController extends TogglePreferenceControl
 
     @Override
     public boolean isChecked() {
-        return mAutoOnValue == ENABLED;
+        return mAutoOnValue;
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        if (getAvailabilityStatus() != AVAILABLE) {
-            Log.w(TAG, "Trying to set toggle value while feature not available.");
-            return false;
-        }
         var unused =
                 ThreadUtils.postOnBackgroundThread(
                         () -> {
-                            boolean updated =
-                                    Settings.Secure.putIntForUser(
-                                            mContext.getContentResolver(),
-                                            SETTING_NAME,
-                                            isChecked ? ENABLED : DISABLED,
-                                            UserHandle.myUserId());
-                            if (updated) {
-                                updateValue();
+                            try {
+                                mBluetoothAdapter.setAutoOnEnabled(isChecked);
+                            } catch (Exception e) {
+                                // Server could throw IllegalStateException, TimeoutException,
+                                // InterruptedException or ExecutionException
+                                Log.e(TAG, "Error calling setAutoOnEnabled()", e);
                             }
                         });
         return true;
@@ -137,8 +137,14 @@ public class BluetoothAutoOnPreferenceController extends TogglePreferenceControl
     }
 
     private void updateValue() {
-        mAutoOnValue =
-                Settings.Secure.getIntForUser(
-                        mContext.getContentResolver(), SETTING_NAME, UNSET, UserHandle.myUserId());
+        if (mBluetoothAdapter == null) {
+            return;
+        }
+        try {
+            mAutoOnValue = mBluetoothAdapter.isAutoOnEnabled();
+        } catch (Exception e) {
+            // Server could throw TimeoutException, InterruptedException or ExecutionException
+            Log.e(TAG, "Error calling isAutoOnEnabled()", e);
+        }
     }
 }
