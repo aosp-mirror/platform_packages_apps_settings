@@ -16,6 +16,7 @@
 
 package com.android.settings.network.apn
 
+import android.provider.Telephony
 import android.telephony.data.ApnSetting
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -45,7 +46,7 @@ fun ApnTypeCheckBox(
     SettingsDropdownCheckBox(
         label = stringResource(R.string.apn_type),
         options = apnTypeOptions,
-        enabled = apnData.apnTypeEnabled,
+        enabled = apnData.isFieldEnabled(Telephony.Carriers.TYPE),
     ) {
         onTypeChanged(apnTypeOptions.toApnType())
         updateMmsSelected()

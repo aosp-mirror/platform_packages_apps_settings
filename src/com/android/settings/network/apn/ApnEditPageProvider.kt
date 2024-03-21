@@ -18,6 +18,7 @@ package com.android.settings.network.apn
 
 import android.net.Uri
 import android.os.Bundle
+import android.provider.Telephony
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -142,39 +143,39 @@ fun ApnPage(apnDataInit: ApnData, apnDataCur: MutableState<ApnData>, uriInit: Ur
             SettingsOutlinedTextField(
                 value = apnData.name,
                 label = stringResource(R.string.apn_name),
-                enabled = apnData.nameEnabled,
+                enabled = apnData.isFieldEnabled(Telephony.Carriers.NAME),
                 errorMessage = validateName(apnData.validEnabled, apnData.name, context)
             ) { apnData = apnData.copy(name = it) }
             SettingsOutlinedTextField(
                 value = apnData.apn,
                 label = stringResource(R.string.apn_apn),
-                enabled = apnData.apnEnabled,
+                enabled = apnData.isFieldEnabled(Telephony.Carriers.APN),
                 errorMessage = validateAPN(apnData.validEnabled, apnData.apn, context)
             ) { apnData = apnData.copy(apn = it) }
             SettingsOutlinedTextField(
                 value = apnData.proxy,
                 label = stringResource(R.string.apn_http_proxy),
-                enabled = apnData.proxyEnabled
+                enabled = apnData.isFieldEnabled(Telephony.Carriers.PROXY),
             ) { apnData = apnData.copy(proxy = it) }
             SettingsOutlinedTextField(
                 value = apnData.port,
                 label = stringResource(R.string.apn_http_port),
-                enabled = apnData.portEnabled
+                enabled = apnData.isFieldEnabled(Telephony.Carriers.PORT),
             ) { apnData = apnData.copy(port = it) }
             SettingsOutlinedTextField(
                 value = apnData.userName,
                 label = stringResource(R.string.apn_user),
-                enabled = apnData.userNameEnabled
+                enabled = apnData.isFieldEnabled(Telephony.Carriers.USER),
             ) { apnData = apnData.copy(userName = it) }
             SettingsTextFieldPassword(
                 value = apnData.passWord,
                 label = stringResource(R.string.apn_password),
-                enabled = apnData.passWordEnabled
+                enabled = apnData.isFieldEnabled(Telephony.Carriers.PASSWORD),
             ) { apnData = apnData.copy(passWord = it) }
             SettingsOutlinedTextField(
                 value = apnData.server,
                 label = stringResource(R.string.apn_server),
-                enabled = apnData.serverEnabled
+                enabled = apnData.isFieldEnabled(Telephony.Carriers.SERVER),
             ) { apnData = apnData.copy(server = it) }
             ApnTypeCheckBox(
                 apnData = apnData,
@@ -186,42 +187,45 @@ fun ApnPage(apnDataInit: ApnData, apnDataCur: MutableState<ApnData>, uriInit: Ur
                     value = apnData.mmsc,
                     label = stringResource(R.string.apn_mmsc),
                     errorMessage = validateMMSC(apnData.validEnabled, apnData.mmsc, context),
-                    enabled = apnData.mmscEnabled
+                    enabled = apnData.isFieldEnabled(Telephony.Carriers.MMSC),
                 ) { apnData = apnData.copy(mmsc = it) }
                 SettingsOutlinedTextField(
                     value = apnData.mmsProxy,
                     label = stringResource(R.string.apn_mms_proxy),
-                    enabled = apnData.mmsProxyEnabled
+                    enabled = apnData.isFieldEnabled(Telephony.Carriers.MMSPROXY),
                 ) { apnData = apnData.copy(mmsProxy = it) }
                 SettingsOutlinedTextField(
                     value = apnData.mmsPort,
                     label = stringResource(R.string.apn_mms_port),
-                    enabled = apnData.mmsPortEnabled
+                    enabled = apnData.isFieldEnabled(Telephony.Carriers.MMSPORT),
                 ) { apnData = apnData.copy(mmsPort = it) }
             }
             SettingsDropdownBox(
                 label = stringResource(R.string.apn_auth_type),
                 options = authTypeOptions,
                 selectedOptionIndex = apnData.authType,
-                enabled = apnData.authTypeEnabled,
+                enabled = apnData.isFieldEnabled(Telephony.Carriers.AUTH_TYPE),
             ) { apnData = apnData.copy(authType = it) }
             SettingsDropdownBox(
                 label = stringResource(R.string.apn_protocol),
                 options = apnProtocolOptions,
                 selectedOptionIndex = apnData.apnProtocol,
-                enabled = apnData.apnProtocolEnabled
+                enabled = apnData.isFieldEnabled(Telephony.Carriers.PROTOCOL),
             ) { apnData = apnData.copy(apnProtocol = it) }
             SettingsDropdownBox(
                 label = stringResource(R.string.apn_roaming_protocol),
                 options = apnProtocolOptions,
                 selectedOptionIndex = apnData.apnRoaming,
-                enabled = apnData.apnRoamingEnabled
+                enabled = apnData.isFieldEnabled(Telephony.Carriers.ROAMING_PROTOCOL),
             ) { apnData = apnData.copy(apnRoaming = it) }
             ApnNetworkTypeCheckBox(apnData) { apnData = apnData.copy(networkType = it) }
             SwitchPreference(
                 object : SwitchPreferenceModel {
-                    override val title = context.resources.getString(R.string.carrier_enabled)
-                    override val changeable = { apnData.apnEnableEnabled }
+                    override val title = stringResource(R.string.carrier_enabled)
+                    override val changeable = {
+                        apnData.apnEnableEnabled &&
+                            apnData.isFieldEnabled(Telephony.Carriers.CARRIER_ENABLED)
+                    }
                     override val checked = { apnData.apnEnable }
                     override val onCheckedChange = { newChecked: Boolean ->
                         apnData = apnData.copy(apnEnable = newChecked)

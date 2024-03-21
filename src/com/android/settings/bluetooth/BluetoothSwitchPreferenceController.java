@@ -15,13 +15,10 @@
  */
 package com.android.settings.bluetooth;
 
-import static com.android.settings.bluetooth.BluetoothAutoOnPreferenceController.SETTING_NAME;
-import static com.android.settings.bluetooth.BluetoothAutoOnPreferenceController.UNSET;
-
 import android.app.settings.SettingsEnums;
+import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
-import android.os.UserHandle;
-import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.VisibleForTesting;
@@ -34,7 +31,6 @@ import com.android.settings.widget.SwitchWidgetController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
-import com.android.settingslib.flags.Flags;
 import com.android.settingslib.widget.FooterPreference;
 
 /**
@@ -47,11 +43,13 @@ public class BluetoothSwitchPreferenceController
                 OnStop,
                 SwitchWidgetController.OnSwitchChangeListener,
                 View.OnClickListener {
+    private static final String TAG = "BluetoothSwitchPrefCtrl";
 
     private BluetoothEnabler mBluetoothEnabler;
     private RestrictionUtils mRestrictionUtils;
     private SwitchWidgetController mSwitch;
     private Context mContext;
+    private BluetoothAdapter mBluetoothAdapter;
     private FooterPreference mFooterPreference;
     private boolean mIsAlwaysDiscoverable;
 
@@ -87,6 +85,7 @@ public class BluetoothSwitchPreferenceController
                         mRestrictionUtils);
         mBluetoothEnabler.setToggleCallback(this);
         mAlwaysDiscoverable = new AlwaysDiscoverable(context);
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
     }
 
     @Override
@@ -157,11 +156,15 @@ public class BluetoothSwitchPreferenceController
     }
 
     private boolean isAutoOnFeatureAvailable() {
-        if (!Flags.bluetoothQsTileDialogAutoOnToggle()) {
+        if (mBluetoothAdapter == null) {
             return false;
         }
-        return Settings.Secure.getIntForUser(
-                        mContext.getContentResolver(), SETTING_NAME, UNSET, UserHandle.myUserId())
-                != UNSET;
+        try {
+            return mBluetoothAdapter.isAutoOnSupported();
+        } catch (Exception e) {
+            // Server could throw TimeoutException, InterruptedException or ExecutionException
+            Log.e(TAG, "Error calling isAutoOnFeatureAvailable()", e);
+            return false;
+        }
     }
 }
