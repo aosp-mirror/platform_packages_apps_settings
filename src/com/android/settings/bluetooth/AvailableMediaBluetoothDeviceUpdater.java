@@ -136,12 +136,8 @@ public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
     @Override
     public boolean onPreferenceClick(Preference preference) {
         mMetricsFeatureProvider.logClickedPreference(preference, mMetricsCategory);
-        final CachedBluetoothDevice device =
-                ((BluetoothDevicePreference) preference).getBluetoothDevice();
-        FeatureFactory.getFeatureFactory()
-                .getAudioSharingFeatureProvider()
-                .handleMediaDeviceOnClick(mLocalManager);
-        return device.setActive();
+        mDevicePreferenceCallback.onDeviceClick(preference);
+        return true;
     }
 
     @Override
