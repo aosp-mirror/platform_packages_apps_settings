@@ -109,4 +109,11 @@
         android:summary="@string/summary_placeholder"
         android:order="25"
         settings:controller="com.android.settings.network.AdaptiveConnectivityPreferenceController"/>
+
+    <Preference
+        android:key="cellular_security_network_internet"
+        android:title="@string/cellular_security_title"
+        android:summary="@string/cellular_security_summary"
+        android:order="30"
+        settings:controller="com.android.settings.network.CellularSecurityPreferenceController"/>
 </PreferenceScreen>

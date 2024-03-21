@@ -1236,8 +1236,10 @@
     <string name="private_space_category_ways_to_unlock">Ways to unlock</string>
     <!-- Summary for one lock when device screen lock is used as private profile lock. [CHAR LIMIT=40] -->
     <string name="private_space_screen_lock_summary">Same as device screen lock</string>
-    <!-- Dialog message to choose a new lock for Private Space. [CHAR LIMIT=50] -->
+    <!-- Dialog title to choose a new lock for Private Space. [CHAR LIMIT=50] -->
     <string name="private_space_new_lock_title">Choose a new lock for private space?</string>
+    <!-- Dialog message mentioning device PIN, pattern or password needs to be entered on the next screen. [CHAR LIMIT=NONE] -->
+    <string name="private_space_new_lock_message">You\’ll need to enter your device PIN, pattern, or password on the next screen</string>
     <!-- Title for the preference for auto lock private space and auto lock private space settings page. [CHAR LIMIT=50] -->
     <string name="private_space_auto_lock_title">Lock private space automatically</string>
     <!-- Description for private space auto lock settings page. [CHAR LIMIT=NONE] -->
@@ -1248,28 +1250,26 @@
     <string name="private_space_auto_lock_after_inactivity">After 5 minutes of inactivity</string>
     <!-- Configure auto lock: Value for auto lock configuration to never lock private space. [CHAR LIMIT=20] -->
     <string name="private_space_auto_lock_never">Never</string>
-    <!-- Title for the preference to hide Private Space. [CHAR LIMIT=60] -->
-    <string name="private_space_hide_title">Hide when locked</string>
-    <!-- Title for the hide Private Space setting. [CHAR LIMIT=60] -->
-    <string name="privatespace_hide_page_title">Hide private space when locked</string>
+    <!-- Title for the settings preference and settings page for hide private space when locked setting. [CHAR LIMIT=60] -->
+    <string name="private_space_hide_page_title">Hide private space when it\'s locked</string>
     <!-- Description for hide Private Space settings page. [CHAR LIMIT=NONE] -->
-    <string name="privatespace_hide_page_summary">To stop other people knowing you have a private space on your device, you can hide it from your apps list</string>
+    <string name="private_space_hide_page_summary">To stop other people knowing you have a private space on your device, you can hide it from your apps list</string>
     <!-- Header in hide Private Space settings page to access Private Space when hidden. [CHAR LIMIT=60] -->
-    <string name="privatespace_access_header">Access private space when hidden</string>
+    <string name="private_space_access_header">Access private space when hidden</string>
     <!-- Text in hide Private Space settings page on how to search Private Space when hidden. [CHAR LIMIT=90] -->
-    <string name="privatespace_search_description">From your apps list, enter \"private space\" in the search bar</string>
+    <string name="private_space_search_description">In the search bar, enter \"private space\"</string>
     <!-- Text in hide Private Space settings page to tap on Private Space tile. [CHAR LIMIT=60] -->
-    <string name="privatespace_tap_tile_description">Tap the private space tile</string>
+    <string name="private_space_tap_tile_description">Tap <b>Private space</b></string>
     <!-- Text in hide Private Space settings page to Unlock Private Space. [CHAR LIMIT=60] -->
-    <string name="privatespace_unlock_description">Unlock your private space</string>
+    <string name="private_space_unlock_description">Unlock your private space</string>
     <!-- Used to describe the off state of Private space hidden [CHAR LIMIT=30] -->
-    <string name="privatespace_hide_off_summary">Off</string>
+    <string name="private_space_hide_off_summary">Off</string>
     <!-- Used to describe the off state of Private space hidden [CHAR LIMIT=30] -->
-    <string name="privatespace_hide_on_summary">On</string>
+    <string name="private_space_hide_on_summary">On</string>
     <!-- Title for the dialog shown when Private space hidden setting is turned on. [CHAR LIMIT=60] -->
-    <string name="private_space_hide_dialog_title">Private space will hide when you lock it next</string>
+    <string name="private_space_hide_dialog_title">Private space will hide the next time you lock it</string>
     <!-- Text message in the dialog shown when Private space hidden setting is turned on. [CHAR LIMIT=90] -->
-    <string name="private_space_hide_dialog_message">To access your space when it’s hidden, enter \“private space\” in the search bar on your apps list</string>
+    <string name="private_space_hide_dialog_message">To access private space, enter \“private space\” in the search bar from your apps list.</string>
     <!-- Label for the dialog shown when Private space hidden setting is turned on. [CHAR LIMIT=90] -->
     <string name="private_space_hide_dialog_button">Got it</string>
     <!-- System category for the Private Space page. [CHAR LIMIT=30] -->
@@ -2319,6 +2319,14 @@
     <!-- Wi-Fi settings screen, advanced, title of the item to show the randomized Wi-Fi MAC address when disconnected. [CHAR LIMIT=69] -->
     <string name="wifi_advanced_randomized_mac_address_disconnected_title">Randomized MAC address (last used)</string>
 
+    <!-- Wifi Network Certificates -->
+    <!-- Wifi certificates summary: More than one certificate -->
+    <string name="wifi_certificate_summary_Certificates"><xliff:g id="number" example="2">%d</xliff:g> certificates</string>
+    <!-- Wifi certificates summary: System certificate -->
+    <string name="wifi_certificate_summary_system">System certificate</string>
+    <!-- Wifi certificates summary: TOFU certificate -->
+    <string name="wifi_certificate_summary_pinning">Certificate pinning</string>
+
     <!-- Wifi Network Details -->
     <!-- Wifi details title-->
     <string name="wifi_details_title">Network details</string>
@@ -2860,7 +2868,7 @@
     <!-- Dark UI screen footer action text shown when the when Dark theme turns on/off automatically according to a user bedtime schedule. [CHAR LIMIT=NONE] -->
     <string name="dark_ui_bedtime_footer_action">Bedtime mode settings</string>
     <!-- Even Dimmer setting title. Allows device to reduce brightness even further than standard range. [CHAR LIMIT=NONE] -->
-    <string name="even_dimmer_display_title">Even Dimmer</string>
+    <string name="even_dimmer_display_title">Even dimmer</string>
     <!-- Even Dimmer setting summary. [CHAR LIMIT=NONE] -->
     <string name="even_dimmer_display_summary">Allow device to go dimmer than usual</string>
 
@@ -5838,9 +5846,6 @@
       other   {# apps restricted}
     }</string>
 
-    <!-- Title to display the battery percentage. [CHAR LIMIT=24] -->
-    <string name="battery_header_title_alternate"><xliff:g id="number" example="88">^1</xliff:g><small> <font size="20"><xliff:g id="unit" example="%">%</xliff:g></font></small></string>
-
     <!-- Summary for top level battery tile if battery is not present. [CHAR LIMIT=NONE] -->
     <string name="battery_missing_message">Problem reading the battery meter.</string>
     <!-- Help text if battery is not present. [CHAR LIMIT=NONE] -->
@@ -6216,6 +6221,29 @@
     <!-- Title for adaptive connectivity main switch preferences. [CHAR LIMIT=50] -->
     <string name="adaptive_connectivity_main_switch_title">Use adaptive connectivity</string>
 
+    <!-- Cellular security related strings -->
+    <!-- Title of Cellular security tile in Network & Internet settings page. [CHAR LIMIT=60]-->
+    <string name="cellular_security_title">Cellular network security</string>
+    <!-- Summary of Cellular security tile in Network & Internet settings page. [CHAR LIMIT=NONE]-->
+    <string name="cellular_security_summary">Network type, encryption, notification controls</string>
+
+    <!-- Title of cellular security settings page [CHAR LIMIT=60]-->
+    <string name="cellular_security_settings_title">Cellular network security</string>
+    <!-- Title of Cellular security notifications section [CHAR LIMIT=60]-->
+    <string name="cellular_security_notifications">Notifications</string>
+    <!-- Title of Cellular security notifications toggle [CHAR LIMIT=60]-->
+    <string name="cellular_security_notifications_controller_title">Security notifications</string>
+    <!-- Summary of Cellular security notifications toggle [CHAR LIMIT=NONE]-->
+    <string name="cellular_security_notifications_controller_summary">Receive notifications in case the cellular network you are connected to is insecure due to lack of encryption, or if the cellular network records your unique decive or SIM identifiers (IMEI &amp; IMSI)</string>
+
+    <!--Cellular encryption -->
+    <!--Cellular encryption title [CHAR LIMIT=60] -->
+    <string name="cellular_security_settings_encryption_title">Encryption</string>
+    <!-- Title of Cellular security Network generations divider [CHAR LIMIT=30]-->
+    <string name="cellular_security_network_generations_title">Network generations</string>
+    <!-- Summary of Cellular security Network generations divider [CHAR LIMIT=NONE]-->
+    <string name="cellular_security_network_generations_summary">You can configure each installed SIM card to only connect to networks that support 3G, 4G, and 5G. The SIM will not connect to older, insecure 2G networks. This setting may limit your connectivity in case the only available network is 2G. In case of an emergency, 2G may be used.</string>
+
     <!-- Title of preference group for credential storage settings [CHAR LIMIT=30] -->
     <string name="credentials_title">Credential storage</string>
     <!-- Title of preference to install certificates [CHAR LIMIT=30] -->
@@ -6240,6 +6268,10 @@
     <string name="credential_for_vpn_and_apps">Installed for VPN and apps</string>
     <!-- Sub-heading for a user credential installed for Wi-Fi configuration. [CHAR LIMIT=NONE]. -->
     <string name="credential_for_wifi">Installed for Wi\u2011Fi</string>
+    <!-- Sub-heading for a user credential installed for particular Wi-Fi configuration. [CHAR LIMIT=NONE]. -->
+    <string name="credential_installed_for_wifi">Installed for <xliff:g id="ssid" example="SSID">%s</xliff:g></string>
+    <!-- Sub-heading for a user credential using for Wi-Fi configuration. [CHAR LIMIT=NONE]. -->
+    <string name="credential_using_for_wifi">Using for <xliff:g id="ssid" example="SSID">%s</xliff:g></string>
     <!-- Sub-heading for a user credential installed to be used as part of a Wi-Fi configuration. [CHAR LIMIT=NONE]. -->
     <string name="credential_for_wifi_in_use">Installed for Wi\u2011Fi (In use)</string>
     <!-- Description of dialog to reset credential storage [CHAR LIMIT=NONE] -->
@@ -10532,7 +10564,7 @@
     <string name="back_sensitivity_dialog_title">Back Sensitivity</string>
 
     <!-- Title for the screen to show all the gesture navigation settings [CHAR LIMIT=80] -->
-    <string name="gesture_settings_activity_title">Gesture Navigation Sensitivity</string>
+    <string name="gesture_settings_activity_title">Gesture Navigation</string>
 
     <!-- Title for the screen to show all the 2- and 3-button navigation settings. [CHAR LIMIT=80] -->
     <string name="button_navigation_settings_activity_title">Button navigation</string>
@@ -12165,7 +12197,7 @@
     <!-- Developer settings: Title for disable app and notification screen share protections [CHAR LIMIT=50] -->
     <string name="disable_screen_share_protections_for_apps_and_notifications">Disable screen share protections</string>
     <!-- Developer settings: Summary for disable app and notification screen share protections summary [CHAR LIMIT=150] -->
-    <string name="disable_screen_share_protections_for_apps_and_notifications_summary">Disables system applied app and notifications protections during screen sharing</string>
+    <string name="disable_screen_share_protections_for_apps_and_notifications_summary">Turn off system protections for sensitive app content for upcoming screen share sessions</string>
 
     <!-- Title for media control settings [CHAR LIMIT=50]-->
     <string name="media_controls_title">Media</string>

@@ -49,8 +49,8 @@ public final class HidePrivateSpaceSummaryController extends BasePreferenceContr
 
     @Override
     public CharSequence getSummary() {
-        return isHidden() ? mContext.getString(R.string.privatespace_hide_on_summary)
-                : mContext.getString(R.string.privatespace_hide_off_summary);
+        return isHidden() ? mContext.getString(R.string.private_space_hide_on_summary)
+                : mContext.getString(R.string.private_space_hide_off_summary);
     }
 
     private boolean isHidden() {

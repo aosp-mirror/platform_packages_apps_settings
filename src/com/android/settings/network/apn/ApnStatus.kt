@@ -48,22 +48,7 @@ data class ApnData(
     val networkType: Long = 0,
     val edited: Int = Telephony.Carriers.USER_EDITED,
     val userEditable: Int = 1,
-    val nameEnabled: Boolean = true,
-    val apnEnabled: Boolean = true,
-    val proxyEnabled: Boolean = true,
-    val portEnabled: Boolean = true,
-    val userNameEnabled: Boolean = true,
-    val passWordEnabled: Boolean = true,
-    val serverEnabled: Boolean = true,
-    val mmscEnabled: Boolean = true,
-    val mmsProxyEnabled: Boolean = true,
-    val mmsPortEnabled: Boolean = true,
-    val authTypeEnabled: Boolean = true,
-    val apnTypeEnabled: Boolean = true,
-    val apnProtocolEnabled: Boolean = true,
-    val apnRoamingEnabled: Boolean = true,
     val apnEnableEnabled: Boolean = true,
-    val networkTypeEnabled: Boolean = true,
     val newApn: Boolean = false,
     val subId: Int = -1,
     val validEnabled: Boolean = false,
@@ -93,6 +78,10 @@ data class ApnData(
         if (newApn) context.getApnIdMap(subId).forEach(::putObject)
         getContentValueMap(context).forEach(::putObject)
     }
+
+    fun isFieldEnabled(vararg fieldName: String): Boolean =
+        !customizedConfig.readOnlyApn &&
+            fieldName.all { it !in customizedConfig.readOnlyApnFields }
 }
 
 data class CustomizedConfig(
@@ -271,81 +260,15 @@ private fun ApnData.isReadOnly(): Boolean {
 fun disableInit(apnDataInit: ApnData): ApnData {
     if (apnDataInit.isReadOnly()) {
         Log.d(TAG, "disableInit: read-only APN")
-        val apnData = apnDataInit.copy(
+        return apnDataInit.copy(
             customizedConfig = apnDataInit.customizedConfig.copy(readOnlyApn = true)
         )
-        return disableAllFields(apnData)
     }
     val readOnlyApnFields = apnDataInit.customizedConfig.readOnlyApnFields
     if (readOnlyApnFields.isNotEmpty()) {
         Log.d(TAG, "disableInit: readOnlyApnFields $readOnlyApnFields)")
-        return disableFields(readOnlyApnFields, apnDataInit)
     }
     return apnDataInit
-}
-
-/**
- * Disables all fields so that user cannot modify the APN
- */
-private fun disableAllFields(apnDataInit: ApnData): ApnData {
-    var apnData = apnDataInit
-    apnData = apnData.copy(nameEnabled = false)
-    apnData = apnData.copy(apnEnabled = false)
-    apnData = apnData.copy(proxyEnabled = false)
-    apnData = apnData.copy(portEnabled = false)
-    apnData = apnData.copy(userNameEnabled = false)
-    apnData = apnData.copy(passWordEnabled = false)
-    apnData = apnData.copy(serverEnabled = false)
-    apnData = apnData.copy(mmscEnabled = false)
-    apnData = apnData.copy(mmsProxyEnabled = false)
-    apnData = apnData.copy(mmsPortEnabled = false)
-    apnData = apnData.copy(authTypeEnabled = false)
-    apnData = apnData.copy(apnTypeEnabled = false)
-    apnData = apnData.copy(apnProtocolEnabled = false)
-    apnData = apnData.copy(apnRoamingEnabled = false)
-    apnData = apnData.copy(apnEnableEnabled = false)
-    apnData = apnData.copy(networkTypeEnabled = false)
-    return apnData
-}
-
-/**
- * Disables given fields so that user cannot modify them
- *
- * @param apnFields fields to be disabled
- */
-private fun disableFields(apnFields: List<String>, apnDataInit: ApnData): ApnData {
-    var apnData = apnDataInit
-    for (apnField in apnFields) {
-        apnData = disableByFieldName(apnField, apnDataInit)
-    }
-    return apnData
-}
-
-private fun disableByFieldName(apnField: String, apnDataInit: ApnData): ApnData {
-    var apnData = apnDataInit
-    when (apnField) {
-        Telephony.Carriers.NAME -> apnData = apnData.copy(nameEnabled = false)
-        Telephony.Carriers.APN -> apnData = apnData.copy(apnEnabled = false)
-        Telephony.Carriers.PROXY -> apnData = apnData.copy(proxyEnabled = false)
-        Telephony.Carriers.PORT -> apnData = apnData.copy(portEnabled = false)
-        Telephony.Carriers.USER -> apnData = apnData.copy(userNameEnabled = false)
-        Telephony.Carriers.SERVER -> apnData = apnData.copy(serverEnabled = false)
-        Telephony.Carriers.PASSWORD -> apnData = apnData.copy(passWordEnabled = false)
-        Telephony.Carriers.MMSPROXY -> apnData = apnData.copy(mmsProxyEnabled = false)
-        Telephony.Carriers.MMSPORT -> apnData = apnData.copy(mmsPortEnabled = false)
-        Telephony.Carriers.MMSC -> apnData = apnData.copy(mmscEnabled = false)
-        Telephony.Carriers.TYPE -> apnData = apnData.copy(apnTypeEnabled = false)
-        Telephony.Carriers.AUTH_TYPE -> apnData = apnData.copy(authTypeEnabled = false)
-        Telephony.Carriers.PROTOCOL -> apnData = apnData.copy(apnProtocolEnabled = false)
-        Telephony.Carriers.ROAMING_PROTOCOL -> apnData = apnData.copy(apnRoamingEnabled = false)
-        Telephony.Carriers.CARRIER_ENABLED -> apnData = apnData.copy(apnEnableEnabled = false)
-        Telephony.Carriers.BEARER, Telephony.Carriers.BEARER_BITMASK,
-        Telephony.Carriers.NETWORK_TYPE_BITMASK -> apnData = apnData.copy(
-            networkTypeEnabled =
-            false
-        )
-    }
-    return apnData
 }
 
 fun deleteApn(uri: Uri, context: Context) {
