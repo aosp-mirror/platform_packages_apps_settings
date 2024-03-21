@@ -108,7 +108,7 @@ public class ZenModeScheduleRuleSettings extends ZenModeRuleSettingsBase {
                 if (DEBUG) Log.d(TAG, "onPrefChange start h=" + hour + " m=" + minute);
                 mSchedule.startHour = hour;
                 mSchedule.startMinute = minute;
-                updateRule(ZenModeConfig.toScheduleConditionId(mSchedule));
+                updateScheduleRule(mSchedule);
                 return true;
             }
         });
@@ -130,7 +130,7 @@ public class ZenModeScheduleRuleSettings extends ZenModeRuleSettingsBase {
                 if (DEBUG) Log.d(TAG, "onPrefChange end h=" + hour + " m=" + minute);
                 mSchedule.endHour = hour;
                 mSchedule.endMinute = minute;
-                updateRule(ZenModeConfig.toScheduleConditionId(mSchedule));
+                updateScheduleRule(mSchedule);
                 return true;
             }
         });
@@ -142,7 +142,7 @@ public class ZenModeScheduleRuleSettings extends ZenModeRuleSettingsBase {
             @Override
             public boolean onPreferenceChange(Preference preference, Object o) {
                 mSchedule.exitAtAlarm = (Boolean) o;
-                updateRule(ZenModeConfig.toScheduleConditionId(mSchedule));
+                updateScheduleRule(mSchedule);
                 return true;
             }
         });
@@ -214,7 +214,7 @@ public class ZenModeScheduleRuleSettings extends ZenModeRuleSettingsBase {
                         if (Arrays.equals(days, mSchedule.days)) return;
                         if (DEBUG) Log.d(TAG, "days.onChanged days=" + Arrays.toString(days));
                         mSchedule.days = days;
-                        updateRule(ZenModeConfig.toScheduleConditionId(mSchedule));
+                        updateScheduleRule(mSchedule);
                     }
                 })
                 .setOnDismissListener(new OnDismissListener() {
