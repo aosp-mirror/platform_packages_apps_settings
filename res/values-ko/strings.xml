@@ -86,6 +86,7 @@
     <string name="bluetooth_media_title" msgid="2878373577382067290">"미디어 및 시스템 소리"</string>
     <string name="bluetooth_notification_title" msgid="8708962394926222039">"알림"</string>
     <string name="bluetooth_audio_routing_footer_summary" msgid="410260713589309293">"기본적으로 오디오 출력은 개별 앱에 의해 결정됩니다."</string>
+    <string name="bluetooth_audio_codec_default_selection" msgid="4753278792700664175">"시스템 설정 사용(기본)"</string>
     <string name="bluetooth_device" msgid="2217973503732544291">"이름이 없는 블루투스 기기"</string>
     <string name="progress_scanning" msgid="2564746192843011826">"검색 중"</string>
     <string name="bluetooth_no_devices_found" msgid="7704539337219953182">"근처에 블루투스 기기가 없습니다."</string>
@@ -208,9 +209,9 @@
     <string name="title_regional_pref_footer" msgid="7450438024324794380">"지역 설정을 지원하지 않는 앱에서는 기본 언어 설정이 사용됩니다"</string>
     <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"언어 환경설정에 관해 자세히 알아보세요."</string>
     <string name="category_title_terms_of_address" msgid="4309422700380895278">"추가 환경설정"</string>
-    <string name="terms_of_address_title" msgid="4064593634733842458">"호칭어"</string>
-    <string name="terms_of_address_summary" msgid="6136134336560679144">"호칭 방식 설정하기"</string>
-    <string name="terms_of_address_intro_title" msgid="6149691509414243483">"앱이 내가 지정한 호칭어를 사용하여 나를 호칭하는 방식을 맞춤설정할 수 있습니다"</string>
+    <string name="terms_of_address_title" msgid="7338630812197476808">"주소 지정 방식 선택하기"</string>
+    <string name="terms_of_address_summary" msgid="7802443422612600620">"사용 중인 기기에서 주소 지정 방식을 맞춤설정할 수 있습니다"</string>
+    <string name="terms_of_address_intro_title" msgid="1533951542181569335">"이 설정을 사용하면 대부분의 시스템 앱에서 주소 지정 방식을 맞춤설정할 수 있습니다. 설치한 앱에서는 사용되지 않습니다."</string>
     <string name="terms_of_address_not_specified" msgid="4439257779351251973">"지정되지 않음"</string>
     <string name="terms_of_address_feminine" msgid="1743479869695539283">"여성"</string>
     <string name="terms_of_address_masculine" msgid="983106046135098856">"남성"</string>
@@ -555,26 +556,34 @@
     <string name="private_space_category_ways_to_unlock" msgid="4356631225316950046">"잠금 해제 방법"</string>
     <string name="private_space_screen_lock_summary" msgid="394837965365561070">"기기 화면 잠금과 동일"</string>
     <string name="private_space_new_lock_title" msgid="9056139964133004094">"새로운 비공개 스페이스용 잠금을 선택하시겠습니까?"</string>
+    <!-- no translation found for private_space_new_lock_message (3117703578905489206) -->
+    <skip />
     <string name="private_space_auto_lock_title" msgid="8663409382910601261">"비공개 스페이스 자동 잠금"</string>
     <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"일정 시간 동안 기기를 사용하지 않은 경우 비공개 스페이스를 자동으로 잠글 수 있습니다."</string>
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"기기를 잠글 때마다"</string>
     <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"5분 동안 사용하지 않은 경우"</string>
     <string name="private_space_auto_lock_never" msgid="595014527119778873">"사용 안 함"</string>
-    <string name="private_space_hide_title" msgid="8687034008994037610">"잠겨 있을 때 숨김"</string>
-    <string name="privatespace_hide_page_title" msgid="8417507414027827566">"잠겨 있을 때 비공개 스페이스 숨기기"</string>
-    <string name="privatespace_hide_page_summary" msgid="5525422595477989312">"기기에 비공개 스페이스가 있다는 사실을 다른 사람이 알지 못하도록 앱 목록에서 숨길 수 있습니다."</string>
-    <string name="privatespace_access_header" msgid="6066826215718835041">"숨겨져 있을 때 비공개 스페이스에 액세스"</string>
-    <string name="privatespace_search_description" msgid="3121043205513022357">"앱 목록에서 검색창에 \"비공개 스페이스\"를 입력합니다"</string>
-    <string name="privatespace_tap_tile_description" msgid="8346440188590931635">"비공개 스페이스 타일을 탭합니다."</string>
-    <string name="privatespace_unlock_description" msgid="3177710543121916413">"비공개 스페이스를 잠금 해제합니다."</string>
-    <string name="privatespace_hide_off_summary" msgid="7227778747159633671">"사용 안함"</string>
-    <string name="privatespace_hide_on_summary" msgid="6136704537527640183">"사용"</string>
-    <!-- no translation found for private_space_hide_dialog_title (3192253150765516720) -->
+    <!-- no translation found for private_space_hide_page_title (4351404195904146088) -->
     <skip />
-    <!-- no translation found for private_space_hide_dialog_message (2006421821648157211) -->
+    <!-- no translation found for private_space_hide_page_summary (6247773353685839242) -->
     <skip />
-    <!-- no translation found for private_space_hide_dialog_button (4157191429310035457) -->
+    <!-- no translation found for private_space_access_header (1077082416567150819) -->
     <skip />
+    <!-- no translation found for private_space_search_description (1538155187658429618) -->
+    <skip />
+    <!-- no translation found for private_space_tap_tile_description (6173556870938267361) -->
+    <skip />
+    <!-- no translation found for private_space_unlock_description (5527228922778630361) -->
+    <skip />
+    <!-- no translation found for private_space_hide_off_summary (8565973976602078315) -->
+    <skip />
+    <!-- no translation found for private_space_hide_on_summary (3450844101901438867) -->
+    <skip />
+    <!-- no translation found for private_space_hide_dialog_title (6439207708506990156) -->
+    <skip />
+    <!-- no translation found for private_space_hide_dialog_message (618693520130744836) -->
+    <skip />
+    <string name="private_space_hide_dialog_button" msgid="4157191429310035457">"확인"</string>
     <string name="private_space_category_system" msgid="1286843321867285700">"시스템"</string>
     <string name="private_space_delete_title" msgid="636873505724100006">"비공개 스페이스 삭제"</string>
     <string name="private_space_delete_header" msgid="4594429153176776184">"비공개 스페이스를 삭제하시겠습니까?"</string>
@@ -599,6 +608,7 @@
     <string name="private_space_protected_lock_text" msgid="9123250938334372735"><b>"잠금 설정"</b>\n"다른 사용자가 스페이스를 열지 못하게 하려면 스페이스를 잠급니다."</string>
     <string name="private_space_install_apps_text" msgid="5693139160766464498"><b>"앱 설치"</b>\n"비공개 스페이스에 자체 Play 스토어가 있어 앱을 쉽게 설치할 수 있습니다."</string>
     <string name="private_space_apps_permission_text" msgid="7030946025253366172">"비공개 스페이스가 잠겨 있으면 비공개 스페이스의 앱은 권한 관리자, 개인 정보 대시보드, 기타 설정에 표시되지 않습니다.\n\n비공개 스페이스는 새 기기로 옮길 수 없습니다. 다른 기기에서 사용하려면 다른 비공개 스페이스를 설정해야 합니다.\n\n기기를 컴퓨터에 연결하거나 기기에 유해한 앱을 설치 가능한 사람은 비공개 스페이스에 액세스할 수 있습니다."</string>
+    <string name="private_space_learn_more_text" msgid="5314198983263277586">"비공개 스페이스에 관해 자세히 알아보기"</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"비공개 스페이스 설정 중…"</string>
     <string name="private_space_notifications_hidden_title" msgid="2009112565217540581">"비공개 스페이스가 잠겨 있으면 비공개 스페이스 앱에서 보내는 알림이 표시되지 않음"</string>
     <string name="private_space_explore_settings_title" msgid="1448128245941571654">"비공개 스페이스를 숨기고 자동 잠금을 설정하려면 비공개 스페이스 설정을 살펴보세요"</string>
@@ -701,35 +711,15 @@
 
 </xliff:g>기기에 저장된 지문 모델이 삭제됩니다. 또한 얼굴 모델이 영구적으로 안전하게 삭제됩니다. 앱 내에서 얼굴 또는 지문 인증을 사용할 수 없게 됩니다."</string>
     <string name="unlock_disable_frp_warning_content_pin" msgid="122154942944422284">"분실하거나 도난당한 경우 PIN으로 휴대전화를 보호합니다."</string>
-    <string name="unlock_disable_frp_warning_content_pin_authbound_keys" msgid="6497861740382402784">"PIN 등 저장된 데이터가 손실됩니다.<xliff:g id="EMPTY_LINE_0">
-
-</xliff:g>비접촉 결제가 설정된 카드가 삭제됩니다.<xliff:g id="EMPTY_LINE_1">
-
-</xliff:g>기기 잠금 해제가 필요한 월렛 및 기타 앱이 제대로 작동하지 않을 수도 있습니다."</string>
     <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="983373874470746066">"분실하거나 도난당한 경우 PIN으로 휴대전화를 보호합니다.<xliff:g id="EMPTY_LINE">
 
 </xliff:g>또한 기기에 저장된 지문 모델이 삭제됩니다. 앱 내에서 지문 인증을 사용할 수 없게 됩니다."</string>
-    <string name="unlock_disable_frp_warning_content_pin_fingerprint_authbound_keys" msgid="8930057076658360799">"PIN, 지문 모델 등 저장된 데이터가 손실됩니다.<xliff:g id="EMPTY_LINE_0">
-
-</xliff:g>비접촉 결제가 설정된 카드가 삭제됩니다.<xliff:g id="EMPTY_LINE_1">
-
-</xliff:g>기기 잠금 해제가 필요한 월렛 및 기타 앱이 제대로 작동하지 않을 수도 있습니다."</string>
     <string name="unlock_disable_frp_warning_content_pin_face" msgid="5607150515413131761">"분실하거나 도난당한 경우 PIN으로 휴대전화를 보호합니다.<xliff:g id="EMPTY_LINE">
 
 </xliff:g>또한 얼굴 모델이 영구적으로 안전하게 삭제됩니다. 앱 내에서 얼굴 인증을 사용할 수 없게 됩니다."</string>
-    <string name="unlock_disable_frp_warning_content_pin_face_authbound_keys" msgid="979399855891561038">"PIN, 얼굴 모델 등 저장된 데이터가 손실됩니다.<xliff:g id="EMPTY_LINE_0">
-
-</xliff:g>비접촉 결제가 설정된 카드가 삭제됩니다.<xliff:g id="EMPTY_LINE_1">
-
-</xliff:g>기기 잠금 해제가 필요한 월렛 및 기타 앱이 제대로 작동하지 않을 수도 있습니다."</string>
     <string name="unlock_disable_frp_warning_content_pin_face_fingerprint" msgid="1821792325159866312">"분실하거나 도난당한 경우 PIN으로 휴대전화를 보호합니다.<xliff:g id="EMPTY_LINE">
 
 </xliff:g>기기에 저장된 지문 모델이 삭제됩니다. 또한 얼굴 모델이 영구적으로 안전하게 삭제됩니다. 앱 내에서 얼굴 또는 지문 인증을 사용할 수 없게 됩니다."</string>
-    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint_authbound_keys" msgid="7019955731206729909">"PIN, 얼굴 모델, 지문 모델 등 저장된 데이터가 손실됩니다.<xliff:g id="EMPTY_LINE_0">
-
-</xliff:g>비접촉 결제가 설정된 카드가 삭제됩니다.<xliff:g id="EMPTY_LINE_1">
-
-</xliff:g>기기 잠금 해제가 필요한 월렛 및 기타 앱이 제대로 작동하지 않을 수도 있습니다."</string>
     <string name="unlock_disable_frp_warning_content_password" msgid="6422723907917376210">"분실하거나 도난당한 경우 비밀번호로 휴대전화를 보호합니다."</string>
     <string name="unlock_disable_frp_warning_content_password_fingerprint" msgid="8899452884016354856">"분실하거나 도난당한 경우 비밀번호로 휴대전화를 보호합니다.<xliff:g id="EMPTY_LINE">
 
@@ -750,6 +740,26 @@
     <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint" msgid="3779582301453677644">"기기 보호 기능은 화면 잠금 없이 작동하지 않습니다.<xliff:g id="EMPTY_LINE">
 
 </xliff:g>기기에 저장된 지문 모델이 삭제됩니다. 또한 얼굴 모델이 영구적으로 안전하게 삭제됩니다. 앱 내에서 얼굴 또는 지문 인증을 사용할 수 없게 됩니다."</string>
+    <string name="unlock_disable_frp_warning_content_authbound_keys" msgid="6397327696248819663">"화면 잠금이 삭제됩니다.<xliff:g id="EMPTY_LINE_0">
+
+</xliff:g>비접촉 결제를 사용할 수 없습니다.<xliff:g id="EMPTY_LINE_1">
+
+</xliff:g>인증이 필요한 월렛, 결제, 기타 앱이 제대로 작동하지 않을 수 있습니다."</string>
+    <string name="unlock_disable_frp_warning_content_fingerprint_authbound_keys" msgid="7158076544627335461">"화면 잠금 및 지문 잠금 해제가 삭제됩니다.<xliff:g id="EMPTY_LINE_0">
+
+</xliff:g>비접촉 결제를 사용할 수 없습니다.<xliff:g id="EMPTY_LINE_1">
+
+</xliff:g>인증이 필요한 월렛, 결제, 기타 앱이 제대로 작동하지 않을 수 있습니다."</string>
+    <string name="unlock_disable_frp_warning_content_face_authbound_keys" msgid="8120786951217029818">"화면 잠금 및 얼굴 인식 잠금 해제가 삭제됩니다.<xliff:g id="EMPTY_LINE_0">
+
+</xliff:g>비접촉 결제를 사용할 수 없습니다.<xliff:g id="EMPTY_LINE_1">
+
+</xliff:g>인증이 필요한 월렛, 결제, 기타 앱이 제대로 작동하지 않을 수 있습니다."</string>
+    <string name="unlock_disable_frp_warning_content_face_fingerprint_authbound_keys" msgid="1574263040292024543">"화면 잠금, 얼굴 인식, 지문 잠금 해제가 삭제됩니다.<xliff:g id="EMPTY_LINE_0">
+
+</xliff:g>비접촉 결제를 사용할 수 없습니다.<xliff:g id="EMPTY_LINE_1">
+
+</xliff:g>인증이 필요한 월렛, 결제, 기타 앱이 제대로 작동하지 않을 수 있습니다."</string>
     <string name="unlock_disable_frp_warning_ok" msgid="6173427638951230842">"삭제"</string>
     <string name="unlock_footer_high_complexity_requested" msgid="4471274783909915352">"<xliff:g id="APP_NAME">%1$s</xliff:g>에서 안전한 PIN 또는 비밀번호를 사용할 것을 제안합니다. 제안을 무시하면 앱이 제대로 작동하지 않을 수 있습니다."</string>
     <string name="unlock_footer_medium_complexity_requested" msgid="5515870066751600640">"<xliff:g id="APP_NAME">%1$s</xliff:g>에서 새 PIN 또는 비밀번호를 사용할 것을 제안합니다. 제안을 무시하면 앱이 제대로 작동하지 않을 수 있습니다."</string>
@@ -1037,8 +1047,15 @@
     <string name="wifi_advanced_device_mac_address_title" msgid="6155800851233164411">"기기 MAC 주소"</string>
     <string name="wifi_advanced_randomized_mac_address_title" msgid="3930671320234553088">"무작위 MAC 주소"</string>
     <string name="wifi_advanced_randomized_mac_address_disconnected_title" msgid="2755843130417523727">"무작위 MAC 주소(마지막으로 사용됨)"</string>
+    <!-- no translation found for wifi_certificate_summary_Certificates (7849788154375655654) -->
+    <skip />
+    <!-- no translation found for wifi_certificate_summary_system (6521297326433133669) -->
+    <skip />
+    <!-- no translation found for wifi_certificate_summary_pinning (5901067790901727957) -->
+    <skip />
     <string name="wifi_details_title" msgid="222735438574597493">"네트워크 세부정보"</string>
     <string name="wifi_details_subnet_mask" msgid="1619151769276260512">"서브넷 마스크"</string>
+    <string name="server_name_title" msgid="7257095185810299066">"서버 이름"</string>
     <string name="wifi_type_title" msgid="2174893488722015838">"유형"</string>
     <string name="wifi_details_dns" msgid="273231528073312579">"DNS"</string>
     <string name="wifi_details_ipv6_address_header" msgid="1913151339341722443">"IPv6 주소"</string>
@@ -1243,7 +1260,8 @@
     <string name="dark_ui_text" msgid="4392646155331126666">"어두운 테마는 배터리 사용 시간을 늘리기 위해 일부 화면에서 검은색 배경을 사용합니다. 어두운 테마 일정은 화면이 꺼질 때까지 기다린 후 켜집니다."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"어두운 테마는 현재 취침 모드 일정을 따릅니다."</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"취침 모드 설정"</string>
-    <string name="even_dimmer_display_title" msgid="8589063452814896327">"더 어둡게"</string>
+    <!-- no translation found for even_dimmer_display_title (6731255736830410149) -->
+    <skip />
     <string name="even_dimmer_display_summary" msgid="120301078873242172">"기기가 평소보다 어두워지도록 허용"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"화면 자동 잠금 시간"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> 이상 동작이 없을 때"</string>
@@ -1388,6 +1406,9 @@
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"<xliff:g id="NAME">^1</xliff:g>을(를) 삭제하시겠습니까?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"<xliff:g id="NAME">^1</xliff:g>에 저장된 앱, 사진, 데이터가 모두 완전히 삭제됩니다."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"시스템에는 Android 버전 <xliff:g id="VERSION">%s</xliff:g> 실행에 사용되는 파일이 포함되어 있습니다."</string>
+    <string name="storage_os_detail_dialog_system" msgid="1423073052313067844">"여기에는 운영체제 및 휴대전화를 원활하게 실행하기 위해 필요한 파일이 포함됩니다. 무결성을 보호하기 위해 이러한 파일에는 액세스할 수 없습니다."</string>
+    <string name="storage_other_files_detail_dialog_system" msgid="8241153880150866635">"여기에는 캐시 및 운영체제에서 필요한 기타 임시 파일이 포함됩니다. 시간이 지남에 따라 스토리지 사용량에 변화가 있을 수 있습니다."</string>
+    <string name="storage_system_label" msgid="8320948583086758295">"시스템"</string>
     <string name="storage_wizard_guest" msgid="5813419895687733649">"게스트 모드 사용자는 SD 카드를 포맷할 수 없습니다."</string>
     <string name="storage_wizard_format_progress_title" msgid="9170393018855949774">"<xliff:g id="NAME">^1</xliff:g> 포맷 중…"</string>
     <string name="storage_wizard_format_progress_body" msgid="1044024044955390417">"포맷 중에 <xliff:g id="NAME">^1</xliff:g>을(를) 삭제하지 마세요."</string>
@@ -2159,8 +2180,7 @@
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"고대비 텍스트"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"텍스트 색상을 검은색 또는 흰색으로 변경하여 배경과의 대비를 극대화합니다."</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"텍스트 대조 극대화"</string>
-    <!-- no translation found for accessibility_toggle_maximize_text_contrast_preference_summary (8200408691846666900) -->
-    <skip />
+    <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"텍스트 주변에 검은색 또는 흰색 배경을 추가하여 대비를 높이세요"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"화면 확대 자동 업데이트"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"앱 전환 시 화면 확대 업데이트"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"전원 버튼으로 통화 종료"</string>
@@ -2499,7 +2519,6 @@
     <string name="battery_manager_summary" msgid="255708681438809287">"앱의 배터리 사용량이 많은 경우 감지"</string>
     <string name="battery_manager_summary_unsupported" msgid="7334173707292807964">"앱의 배터리 사용량이 많은 경우 감지"</string>
     <string name="battery_manager_app_restricted" msgid="2583902700677009173">"{count,plural, =1{앱 #개 제한됨}other{앱 #개 제한됨}}"</string>
-    <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
     <string name="battery_missing_message" msgid="400958471814422770">"배터리 수준을 읽는 중에 문제가 발생했습니다."</string>
     <string name="battery_missing_link_message" msgid="6021565067124898074"></string>
     <string name="battery_missing_link_a11y_message" msgid="3310971406602316323">"탭하여 이 오류에 관해 자세히 알아보기"</string>
@@ -2656,6 +2675,24 @@
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"사용"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"사용 안함"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"스마트 연결 사용"</string>
+    <!-- no translation found for cellular_security_title (7124079732186082924) -->
+    <skip />
+    <!-- no translation found for cellular_security_summary (1893770670709928113) -->
+    <skip />
+    <!-- no translation found for cellular_security_settings_title (116950133456981770) -->
+    <skip />
+    <!-- no translation found for cellular_security_notifications (4619728340612184944) -->
+    <skip />
+    <!-- no translation found for cellular_security_notifications_controller_title (5085567551536606230) -->
+    <skip />
+    <!-- no translation found for cellular_security_notifications_controller_summary (2876183397456700377) -->
+    <skip />
+    <!-- no translation found for cellular_security_settings_encryption_title (4013084091666375780) -->
+    <skip />
+    <!-- no translation found for cellular_security_network_generations_title (2343026988833783854) -->
+    <skip />
+    <!-- no translation found for cellular_security_network_generations_summary (139087814553929402) -->
+    <skip />
     <string name="credentials_title" msgid="7535942196886123656">"사용자 인증 정보 저장소"</string>
     <string name="credentials_install" msgid="3933218407598415827">"인증서 설치"</string>
     <string name="credentials_reset" msgid="4246628389366452655">"사용자 인증 정보 삭제"</string>
@@ -2668,6 +2705,10 @@
     <string name="credentials_settings_not_available" msgid="7433088409177429600">"이 사용자는 자격증명을 확인하거나 수정할 수 없습니다."</string>
     <string name="credential_for_vpn_and_apps" msgid="2208229692860871136">"VPN 및 앱에 사용하도록 설치됨"</string>
     <string name="credential_for_wifi" msgid="2286560570630763556">"Wi-Fi에 사용하도록 설치됨"</string>
+    <!-- no translation found for credential_installed_for_wifi (2206050464844710099) -->
+    <skip />
+    <!-- no translation found for credential_using_for_wifi (6134471366188592845) -->
+    <skip />
     <string name="credential_for_wifi_in_use" msgid="7276290656840986618">"Wi-Fi에 사용하도록 설치됨(사용 중)"</string>
     <string name="credentials_reset_hint" msgid="4054601857203464867">"콘텐츠를 모두 삭제하시겠습니까?"</string>
     <string name="credentials_erased" msgid="9121052044566053345">"사용자 인증 정보 저장소가 삭제되었습니다."</string>
@@ -4205,8 +4246,7 @@
     <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"홈으로 이동하려면 화면 하단에서 위로 스와이프합니다. 앱을 전환하려면 아래에서 위로 스와이프하고 잠시 기다린 다음 손가락을 뗍니다. 뒤로 돌아가려면 왼쪽 또는 오른쪽 가장자리에서 스와이프합니다."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"3버튼 탐색"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"화면 하단의 버튼을 사용하여 뒤로 돌아가거나 홈으로 이동하거나 앱을 전환합니다."</string>
-    <!-- no translation found for nav_tutorial_button_description (5791791794770463386) -->
-    <skip />
+    <string name="nav_tutorial_button_description" msgid="5791791794770463386">"동작 탐색 튜토리얼 시작"</string>
     <string name="keywords_system_navigation" msgid="3131782378486554934">"시스템 탐색, 2버튼 탐색, 3버튼 탐색, 동작 탐색, 스와이프"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"디지털 어시스턴트"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"스와이프하여 어시스턴트 호출"</string>
@@ -4219,7 +4259,8 @@
     <string name="right_edge" msgid="1505309103265829121">"오른쪽 가장자리"</string>
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"민감도가 높으면 화면 가장자리 앱 동작과 충돌할 수 있습니다."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"뒤로 가기 동작 민감도"</string>
-    <string name="gesture_settings_activity_title" msgid="2025828425762595733">"동작 탐색 민감도"</string>
+    <!-- no translation found for gesture_settings_activity_title (1882463161833981820) -->
+    <skip />
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"버튼 탐색"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"동작 탐색, 뒤로 가기 동작 민감도, 뒤로 가기 동작"</string>
     <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"탐색, 홈 버튼"</string>
@@ -4350,9 +4391,15 @@
     <string name="storage_images" msgid="2055893015567979387">"이미지"</string>
     <string name="storage_videos" msgid="6117698226447251033">"동영상"</string>
     <string name="storage_audio" msgid="5994664984472140386">"오디오"</string>
+    <!-- no translation found for storage_documents (7873134307844320096) -->
+    <skip />
+    <!-- no translation found for storage_other (7922190148479988838) -->
+    <skip />
     <string name="storage_apps" msgid="3564291603258795216">"앱"</string>
     <string name="storage_documents_and_other" msgid="3293689243732236480">"문서 및 기타"</string>
     <string name="storage_system" msgid="8472410119822911844">"시스템"</string>
+    <string name="storage_os_name" msgid="4637680493234672410">"Android <xliff:g id="VERSION">%s</xliff:g>"</string>
+    <string name="storage_temporary_files" msgid="8254109904032452219">"임시 시스템 파일"</string>
     <string name="storage_trash" msgid="2807138998886084856">"휴지통"</string>
     <string name="storage_trash_dialog_title" msgid="2296169576049935200">"휴지통을 비우시겠습니까?"</string>
     <string name="storage_trash_dialog_ask_message" msgid="8982602137242358798">"휴지통에 파일이 <xliff:g id="TOTAL">%1$s</xliff:g>개 있습니다. 모든 항목이 완전히 사라지고 복원할 수 없게 됩니다."</string>
@@ -4769,12 +4816,10 @@
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"16KB 페이지 호환 커널로 커널을 업데이트할 수 없습니다."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"변경사항 적용 중"</string>
     <string name="confirm_format_ext4_title" msgid="4453684705528818873">"기기를 ext4로 포맷하시겠습니까?"</string>
-    <string name="confirm_format_ext4_text" msgid="8164677342487500794">"16K 개발자 옵션은 ext4 파일 시스템에서 지원됩니다. 확인 후 기기가 완전 삭제되며 파일 시스템이 ext4로 변경됩니다."</string>
+    <string name="confirm_format_ext4_text" msgid="8164677342487500794">"16K 개발자 옵션은 ext4 파일 시스템에서 지원됩니다. 확인 후 기기의 데이터가 완전 삭제되며 파일 시스템이 ext4로 변경됩니다."</string>
     <string name="format_ext4_failure_toast" msgid="6904611547290793885">"데이터 파티션을 ext4로 포맷하고 완전 삭제할 수 없습니다."</string>
-    <!-- no translation found for confirm_oem_unlock_for_16k_title (6338135847153690912) -->
-    <skip />
-    <!-- no translation found for confirm_oem_unlock_for_16k_text (236718973897424382) -->
-    <skip />
+    <string name="confirm_oem_unlock_for_16k_title" msgid="6338135847153690912">"OEM 잠금을 해제해야 함"</string>
+    <string name="confirm_oem_unlock_for_16k_text" msgid="236718973897424382">"16K 개발자 옵션을 사용하려면 먼저 기기에서 OEM 잠금을 해제해야 합니다. OEM 잠금 해제를 하려면 사용자 데이터의 형식도 지정해야 합니다. 기기에서 OEM 잠금을 해제한 후 다시 시도하세요."</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"버그 신고 핸들러"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"어떤 앱이 기기의 버그 신고 바로가기를 처리하는지 정합니다."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"개인"</string>
@@ -4824,7 +4869,8 @@
     <string name="allow_mock_modem" msgid="3832264806530479214">"가상 모뎀 허용"</string>
     <string name="allow_mock_modem_summary" msgid="9097416612748005374">"이 기기에서 계측 테스트에 가상 모뎀 서비스를 실행하도록 허용합니다. 휴대전화를 일반적으로 사용하는 동안에는 이 기능을 사용 설정하지 마세요."</string>
     <string name="disable_screen_share_protections_for_apps_and_notifications" msgid="4987116103699222633">"화면 공유 보호 기능 사용 안함"</string>
-    <string name="disable_screen_share_protections_for_apps_and_notifications_summary" msgid="932295234626582052">"화면 공유 중 시스템 적용 앱 및 알림 보호 기능을 중지합니다."</string>
+    <!-- no translation found for disable_screen_share_protections_for_apps_and_notifications_summary (5379583403909210858) -->
+    <skip />
     <string name="media_controls_title" msgid="403271085636252597">"미디어"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"미디어 플레이어 고정"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"재생을 빠르게 재개할 수 있도록 빠른 설정에서 미디어 플레이어를 계속 열어 둡니다."</string>

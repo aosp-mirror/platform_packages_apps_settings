@@ -86,6 +86,7 @@
     <string name="bluetooth_media_title" msgid="2878373577382067290">"മീഡിയ, സിസ്റ്റം ശബ്ദങ്ങൾ"</string>
     <string name="bluetooth_notification_title" msgid="8708962394926222039">"അറിയിപ്പുകൾ"</string>
     <string name="bluetooth_audio_routing_footer_summary" msgid="410260713589309293">"ഡിഫോൾട്ടായി, ഓഡിയോ ഔട്ട്പുട്ട് തീരുമാനിക്കുന്നത് ഓരോ ആപ്പുകളുമാണ്"</string>
+    <string name="bluetooth_audio_codec_default_selection" msgid="4753278792700664175">"സിസ്റ്റം സെലക്ഷൻ ഉപയോഗിക്കൂ (ഡിഫോൾട്ട്)"</string>
     <string name="bluetooth_device" msgid="2217973503732544291">"പേരുനൽകാത്ത ബ്ലൂടൂത്ത് ഉപകരണം"</string>
     <string name="progress_scanning" msgid="2564746192843011826">"തിരയുന്നു"</string>
     <string name="bluetooth_no_devices_found" msgid="7704539337219953182">"സമീപത്ത് ബ്ലൂടൂത്ത് ഉപകരണങ്ങളൊന്നും കണ്ടെത്തിയില്ല."</string>
@@ -208,9 +209,9 @@
     <string name="title_regional_pref_footer" msgid="7450438024324794380">"ഒരു ആപ്പിൽ പ്രാദേശിക മുൻഗണനകൾക്ക് പിന്തുണയില്ലെങ്കിൽ ആ ആപ്പ് അതിന്റെ ഡിഫോൾട്ടായ ഭാഷാ ക്രമീകരണം ഉപയോഗിക്കും."</string>
     <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"ഭാഷാ മുൻഗണനകളെക്കുറിച്ച് കൂടുതലറിയുക."</string>
     <string name="category_title_terms_of_address" msgid="4309422700380895278">"അധിക മുൻഗണനകൾ"</string>
-    <string name="terms_of_address_title" msgid="4064593634733842458">"അഭിസംബോധന ചെയ്യാനുള്ള പദങ്ങൾ"</string>
-    <string name="terms_of_address_summary" msgid="6136134336560679144">"നിങ്ങളെ എങ്ങനെ അഭിസംബോധന ചെയ്യണമെന്നത് സജ്ജീകരിക്കുക"</string>
-    <string name="terms_of_address_intro_title" msgid="6149691509414243483">"നിങ്ങളെ എങ്ങനെ അഭിസംബോധന ചെയ്യുന്നുവെന്ന് വ്യക്തിപരമാക്കാൻ ആപ്പുകൾക്ക് നിങ്ങളുടെ \'അഭിസംബോധന ചെയ്യാനുള്ള പദങ്ങൾ\' ഉപയോഗിക്കാനാകും."</string>
+    <string name="terms_of_address_title" msgid="7338630812197476808">"നിങ്ങളെ അഭിസംബോധന ചെയ്യേണ്ട രീതി തിരഞ്ഞെടുക്കുക"</string>
+    <string name="terms_of_address_summary" msgid="7802443422612600620">"നിങ്ങളുടെ ഉപകരണത്തിന്, നിങ്ങളെ അഭിസംബോധന ചെയ്യേണ്ട രീതി വ്യക്തിപരമാക്കാനാകും"</string>
+    <string name="terms_of_address_intro_title" msgid="1533951542181569335">"നിങ്ങളെ അഭിസംബോധന ചെയ്യേണ്ട രീതി വ്യക്തിപരമാക്കാൻ മിക്ക സിസ്റ്റം ആപ്പുകളെയും ഈ ക്രമീകരണം അനുവദിക്കുന്നു. നിങ്ങൾ ഇൻസ്റ്റാൾ ചെയ്യുന്ന ആപ്പുകൾ ഇത് ഉപയോഗിക്കില്ല."</string>
     <string name="terms_of_address_not_specified" msgid="4439257779351251973">"വ്യക്തമാക്കിയിട്ടില്ലാത്തവ"</string>
     <string name="terms_of_address_feminine" msgid="1743479869695539283">"സ്ത്രീകൾക്കുള്ളത്"</string>
     <string name="terms_of_address_masculine" msgid="983106046135098856">"പുരുഷന്മാർക്കുള്ളത്"</string>
@@ -555,26 +556,34 @@
     <string name="private_space_category_ways_to_unlock" msgid="4356631225316950046">"അൺലോക്ക് ചെയ്യാനുള്ള മാർഗ്ഗങ്ങൾ"</string>
     <string name="private_space_screen_lock_summary" msgid="394837965365561070">"ഉപകരണത്തിന്റെ അതേ സ്‌ക്രീൻ ലോക്ക്"</string>
     <string name="private_space_new_lock_title" msgid="9056139964133004094">"സ്വകാര്യ സ്‌പേസിന് പുതിയ ലോക്ക് തിരഞ്ഞെടുക്കണോ?"</string>
+    <!-- no translation found for private_space_new_lock_message (3117703578905489206) -->
+    <skip />
     <string name="private_space_auto_lock_title" msgid="8663409382910601261">"സ്വകാര്യ സ്പേസ് സ്വയമേവ ലോക്ക് ചെയ്യുക"</string>
     <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"ഉപകരണം ഒരു നിശ്ചിത കാലയളവിൽ ഉപയോഗിച്ചിട്ടില്ലെങ്കിൽ, നിങ്ങളുടെ സ്വകാര്യ സ്പേസ് സ്വയമേവ ലോക്ക് ചെയ്യാം"</string>
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"ഉപകരണം ലോക്ക് ചെയ്യുമ്പോഴെല്ലാം"</string>
     <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"5 മിനിറ്റ് നിഷ്‌ക്രിയമായതിന് ശേഷം"</string>
     <string name="private_space_auto_lock_never" msgid="595014527119778873">"ഒരിക്കലുമില്ല"</string>
-    <string name="private_space_hide_title" msgid="8687034008994037610">"ലോക്ക് ചെയ്‌തിരിക്കുമ്പോൾ മറയ്ക്കൂ"</string>
-    <string name="privatespace_hide_page_title" msgid="8417507414027827566">"ലോക്ക് ചെയ്‌തിരിക്കുമ്പോൾ സ്വകാര്യ സ്‌പേസ് മറയ്ക്കുക"</string>
-    <string name="privatespace_hide_page_summary" msgid="5525422595477989312">"നിങ്ങളുടെ ഉപകരണത്തിൽ നിങ്ങൾക്ക് ഒരു സ്വകാര്യ സ്‌പേസ് ഉണ്ടെന്ന് മറ്റുള്ളവർ അറിയാതിരിക്കാൻ നിങ്ങളുടെ ആപ്പുകളുടെ ലിസ്‌റ്റിൽ നിന്ന് അവ മറയ്ക്കാം"</string>
-    <string name="privatespace_access_header" msgid="6066826215718835041">"മറച്ചിരിക്കുമ്പോൾ സ്വകാര്യ സ്പേസ് ആക്സസ് ചെയ്യൂ"</string>
-    <string name="privatespace_search_description" msgid="3121043205513022357">"ആപ്പുകളുടെ ലിസ്റ്റിൽ, തിരയൽ ബാറിൽ \"സ്വകാര്യ സ്പേസ്\" നൽകുക"</string>
-    <string name="privatespace_tap_tile_description" msgid="8346440188590931635">"സ്വകാര്യ സ്പേസ് ടൈൽ ടാപ്പ് ചെയ്യുക"</string>
-    <string name="privatespace_unlock_description" msgid="3177710543121916413">"നിങ്ങളുടെ സ്വകാര്യ സ്പേസ് അൺലോക്ക് ചെയ്യുക"</string>
-    <string name="privatespace_hide_off_summary" msgid="7227778747159633671">"ഓഫാണ്"</string>
-    <string name="privatespace_hide_on_summary" msgid="6136704537527640183">"ഓണാണ്"</string>
-    <!-- no translation found for private_space_hide_dialog_title (3192253150765516720) -->
+    <!-- no translation found for private_space_hide_page_title (4351404195904146088) -->
     <skip />
-    <!-- no translation found for private_space_hide_dialog_message (2006421821648157211) -->
+    <!-- no translation found for private_space_hide_page_summary (6247773353685839242) -->
     <skip />
-    <!-- no translation found for private_space_hide_dialog_button (4157191429310035457) -->
+    <!-- no translation found for private_space_access_header (1077082416567150819) -->
     <skip />
+    <!-- no translation found for private_space_search_description (1538155187658429618) -->
+    <skip />
+    <!-- no translation found for private_space_tap_tile_description (6173556870938267361) -->
+    <skip />
+    <!-- no translation found for private_space_unlock_description (5527228922778630361) -->
+    <skip />
+    <!-- no translation found for private_space_hide_off_summary (8565973976602078315) -->
+    <skip />
+    <!-- no translation found for private_space_hide_on_summary (3450844101901438867) -->
+    <skip />
+    <!-- no translation found for private_space_hide_dialog_title (6439207708506990156) -->
+    <skip />
+    <!-- no translation found for private_space_hide_dialog_message (618693520130744836) -->
+    <skip />
+    <string name="private_space_hide_dialog_button" msgid="4157191429310035457">"മനസ്സിലായി"</string>
     <string name="private_space_category_system" msgid="1286843321867285700">"സിസ്റ്റം"</string>
     <string name="private_space_delete_title" msgid="636873505724100006">"സ്വകാര്യ സ്പേസ് ഇല്ലാതാക്കുക"</string>
     <string name="private_space_delete_header" msgid="4594429153176776184">"സ്വകാര്യ സ്പേസ് ഇല്ലാതാക്കണോ?"</string>
@@ -599,6 +608,7 @@
     <string name="private_space_protected_lock_text" msgid="9123250938334372735"><b>"ഒരു ലോക്ക് സജ്ജീകരിക്കുക"</b>\n"നിങ്ങളുടെ സ്‌പേസ് മറ്റ് ആളുകൾ തുറക്കുന്നത് തടയാൻ അത് ലോക്ക് ചെയ്യുക"</string>
     <string name="private_space_install_apps_text" msgid="5693139160766464498"><b>"ആപ്പുകൾ ഇൻസ്‌റ്റാൾ ചെയ്യുക"</b>\n"നിങ്ങളുടെ സ്വകാര്യ സ്‌പേസിന് അതിന്റേതായ Play Store ഉള്ളതിനാൽ നിങ്ങൾക്ക് എളുപ്പത്തിൽ ആപ്പുകൾ ഇൻസ്‌റ്റാൾ ചെയ്യാം."</string>
     <string name="private_space_apps_permission_text" msgid="7030946025253366172">"നിങ്ങളുടെ സ്വകാര്യ സ്പേസ് ലോക്ക് ചെയ്തിരിക്കുമ്പോൾ അനുമതി മാനേജർ, സ്വകാര്യതാ ഡാഷ്ബോർഡ്, മറ്റ് ക്രമീകരണം എന്നിവയിൽ സ്വകാര്യ സ്പേസിലെ ആപ്പുകൾ ദൃശ്യമാകില്ല.\n\nസ്വകാര്യ സ്പേസ് പുതിയ ഉപകരണത്തിലേക്ക് നീക്കാനാകില്ല. നിങ്ങൾക്ക് ഇത് മറ്റൊരു ഉപകരണത്തിൽ ഉപയോഗിക്കണമെങ്കിൽ മറ്റൊരു സ്വകാര്യ സ്പേസ് സജ്ജീകരിക്കേണ്ടതുണ്ട്.\n\nനിങ്ങളുടെ ഉപകരണം ഒരു കമ്പ്യൂട്ടറിലേക്ക് കണക്റ്റ് ചെയ്യുന്ന അല്ലെങ്കിൽ ഉപകരണത്തിൽ ദോഷകരമായ ആപ്പുകൾ ഇൻസ്റ്റാൾ ചെയ്യുന്ന ഏതൊരാൾക്കും നിങ്ങളുടെ സ്വകാര്യ സ്പേസ് ആക്സസ് ചെയ്യാൻ കഴിഞ്ഞേക്കാം."</string>
+    <string name="private_space_learn_more_text" msgid="5314198983263277586">"സ്വകാര്യ സ്പേസിനെക്കുറിച്ച് കൂടുതലറിയുക"</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"സ്വകാര്യ സ്പേസ് സജ്ജീകരിക്കുന്നു…"</string>
     <string name="private_space_notifications_hidden_title" msgid="2009112565217540581">"സ്വകാര്യ സ്‌പേസ് ആപ്പുകൾ ലോക്ക് ചെയ്‌തിരിക്കുമ്പോൾ അവയിൽ നിന്നുള്ള അറിയിപ്പുകൾ മറച്ചിരിക്കും"</string>
     <string name="private_space_explore_settings_title" msgid="1448128245941571654">"സ്വകാര്യ സ്‌പേസ് മറയ്ക്കുന്നതിനും സ്വയമേവയുള്ള ലോക്കിംഗ് സജ്ജീകരിക്കുന്നതിനും സ്വകാര്യ സ്‌പേസ് ക്രമീകരണം അടുത്തറിയുക"</string>
@@ -701,35 +711,15 @@
 
 </xliff:g>നിങ്ങളുടെ ഉപകരണത്തിൽ സംഭരിച്ച ഫിംഗർപ്രിന്റ് മോഡൽ ഇത് ഇല്ലാതാക്കും. നിങ്ങളുടെ മുഖ മോഡലും ശാശ്വതമായും സുരക്ഷിതമായും ഇല്ലാതാക്കും. ആപ്പുകളിലെ പരിശോധിച്ചുറപ്പിക്കലിന് നിങ്ങളുടെ മുഖമോ ഫിംഗർപ്രിന്റോ ഉപയോഗിക്കാനാകില്ല."</string>
     <string name="unlock_disable_frp_warning_content_pin" msgid="122154942944422284">"നിങ്ങളുടെ ഫോൺ നഷ്‌ടപ്പെടുകയോ മോഷ്‌ടിക്കപ്പെടുകയോ ചെയ്‌താൽ പിൻ അതിനെ പരിരക്ഷിക്കുന്നു"</string>
-    <string name="unlock_disable_frp_warning_content_pin_authbound_keys" msgid="6497861740382402784">"പിൻ പോലുള്ള സംരക്ഷിച്ച ഡാറ്റ നിങ്ങൾക്ക് നഷ്‌ടമാകും.<xliff:g id="EMPTY_LINE_0">
-
-</xliff:g>സമ്പർക്കരഹിതമായി പേ ചെയ്യാൻ സജ്ജീകരിച്ച കാർഡുകൾ നീക്കം ചെയ്യും.<xliff:g id="EMPTY_LINE_1">
-
-</xliff:g>ഉപകരണ അൺലോക്ക് ആവശ്യമായ വാലറ്റുകളും മറ്റ് ആപ്പുകളും ശരിയായി പ്രവർത്തിച്ചേക്കില്ല."</string>
     <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="983373874470746066">"നിങ്ങളുടെ ഫോൺ നഷ്‌ടപ്പെടുകയോ മോഷ്‌ടിക്കപ്പെടുകയോ ചെയ്‌താൽ പിൻ അതിനെ പരിരക്ഷിക്കുന്നു.<xliff:g id="EMPTY_LINE">
 
 </xliff:g>നിങ്ങളുടെ ഉപകരണത്തിൽ സംഭരിച്ച ഫിംഗർപ്രിന്റ് മോഡലും ഇത് ഇല്ലാതാക്കും. ആപ്പുകളിലെ പരിശോധിച്ചുറപ്പിക്കലിന് നിങ്ങളുടെ ഫിംഗർപ്രിന്റ് ഉപയോഗിക്കാനാകില്ല."</string>
-    <string name="unlock_disable_frp_warning_content_pin_fingerprint_authbound_keys" msgid="8930057076658360799">"നിങ്ങളുടെ പിൻ, ഫിംഗർപ്രിന്റ് മോഡൽ എന്നിവ പോലുള്ള സംരക്ഷിച്ച ഡാറ്റ നിങ്ങൾക്ക് നഷ്‌ടമാകും.<xliff:g id="EMPTY_LINE_0">
-
-</xliff:g>സമ്പർക്കരഹിതമായി പേ ചെയ്യാൻ സജ്ജീകരിച്ച കാർഡുകൾ നീക്കം ചെയ്യും.<xliff:g id="EMPTY_LINE_1">
-
-</xliff:g>ഉപകരണ അൺലോക്ക് ആവശ്യമായ വാലറ്റുകളും മറ്റ് ആപ്പുകളും ശരിയായി പ്രവർത്തിച്ചേക്കില്ല."</string>
     <string name="unlock_disable_frp_warning_content_pin_face" msgid="5607150515413131761">"നിങ്ങളുടെ ഫോൺ നഷ്‌ടപ്പെടുകയോ മോഷ്‌ടിക്കപ്പെടുകയോ ചെയ്‌താൽ പിൻ അതിനെ പരിരക്ഷിക്കുന്നു.<xliff:g id="EMPTY_LINE">
 
 </xliff:g>നിങ്ങളുടെ മുഖ മോഡലും ശാശ്വതമായും സുരക്ഷിതമായും ഇല്ലാതാക്കും. ആപ്പുകളിലെ പരിശോധിച്ചുറപ്പിക്കലിന് നിങ്ങളുടെ മുഖം ഉപയോഗിക്കാനാകില്ല."</string>
-    <string name="unlock_disable_frp_warning_content_pin_face_authbound_keys" msgid="979399855891561038">"നിങ്ങളുടെ പിൻ, മുഖ മോഡൽ എന്നിവ പോലുള്ള സംരക്ഷിച്ച ഡാറ്റ നഷ്‌ടമാകും.<xliff:g id="EMPTY_LINE_0">
-
-</xliff:g>സമ്പർക്കരഹിതമായി പേ ചെയ്യാൻ സജ്ജീകരിച്ച കാർഡുകൾ നീക്കം ചെയ്യും.<xliff:g id="EMPTY_LINE_1">
-
-</xliff:g>ഉപകരണ അൺലോക്ക് ആവശ്യമായ വാലറ്റുകളും മറ്റ് ആപ്പുകളും ശരിയായി പ്രവർത്തിച്ചേക്കില്ല."</string>
     <string name="unlock_disable_frp_warning_content_pin_face_fingerprint" msgid="1821792325159866312">"നിങ്ങളുടെ ഫോൺ നഷ്‌ടപ്പെടുകയോ മോഷ്‌ടിക്കപ്പെടുകയോ ചെയ്‌താൽ പിൻ അതിനെ പരിരക്ഷിക്കുന്നു.<xliff:g id="EMPTY_LINE">
 
 </xliff:g>നിങ്ങളുടെ ഉപകരണത്തിൽ സംഭരിച്ച ഫിംഗർപ്രിന്റ് മോഡൽ ഇത് ഇല്ലാതാക്കും. നിങ്ങളുടെ മുഖ മോഡലും ശാശ്വതമായും സുരക്ഷിതമായും ഇല്ലാതാക്കും. ആപ്പുകളിലെ പരിശോധിച്ചുറപ്പിക്കലിന് നിങ്ങളുടെ മുഖമോ ഫിംഗർപ്രിന്റോ ഉപയോഗിക്കാനാകില്ല."</string>
-    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint_authbound_keys" msgid="7019955731206729909">"നിങ്ങളുടെ പിൻ, മുഖം, ഫിംഗർപ്രിന്റ് മോഡലുകൾ എന്നിവ പോലുള്ള സംരക്ഷിച്ച ഡാറ്റ നഷ്‌ടമാകും.<xliff:g id="EMPTY_LINE_0">
-
-</xliff:g>സമ്പർക്കരഹിതമായി പേ ചെയ്യാൻ സജ്ജീകരിച്ച കാർഡുകൾ നീക്കം ചെയ്യും.<xliff:g id="EMPTY_LINE_1">
-
-</xliff:g>ഉപകരണ അൺലോക്ക് ആവശ്യമായ വാലറ്റുകളും മറ്റ് ആപ്പുകളും ശരിയായി പ്രവർത്തിച്ചേക്കില്ല."</string>
     <string name="unlock_disable_frp_warning_content_password" msgid="6422723907917376210">"നിങ്ങളുടെ ഫോൺ നഷ്‌ടപ്പെടുകയോ മോഷ്‌ടിക്കപ്പെടുകയോ ചെയ്‌താൽ പാസ്‌വേഡ് അതിനെ പരിരക്ഷിക്കുന്നു"</string>
     <string name="unlock_disable_frp_warning_content_password_fingerprint" msgid="8899452884016354856">"നിങ്ങളുടെ ഫോൺ നഷ്‌ടപ്പെടുകയോ മോഷ്‌ടിക്കപ്പെടുകയോ ചെയ്‌താൽ പാസ്‌വേഡ് അതിനെ പരിരക്ഷിക്കുന്നു.<xliff:g id="EMPTY_LINE">
 
@@ -750,6 +740,26 @@
     <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint" msgid="3779582301453677644">"സ്‌ക്രീൻ ലോക്ക് ഇല്ലാതെ ഉപകരണ പരിരക്ഷാ ഫീച്ചറുകൾ പ്രവർത്തിക്കില്ല.<xliff:g id="EMPTY_LINE">
 
 </xliff:g>നിങ്ങളുടെ ഉപകരണത്തിൽ സംഭരിച്ച ഫിംഗർപ്രിന്റ് മോഡൽ ഇത് ഇല്ലാതാക്കും. നിങ്ങളുടെ മുഖ മോഡലും ശാശ്വതമായും സുരക്ഷിതമായും ഇല്ലാതാക്കും. ആപ്പുകളിലെ പരിശോധിച്ചുറപ്പിക്കലിന് നിങ്ങളുടെ മുഖമോ ഫിംഗർപ്രിന്റോ ഉപയോഗിക്കാനാകില്ല."</string>
+    <string name="unlock_disable_frp_warning_content_authbound_keys" msgid="6397327696248819663">"നിങ്ങളുടെ സ്ക്രീൻ ലോക്ക് നീക്കം ചെയ്യും.<xliff:g id="EMPTY_LINE_0">
+
+</xliff:g>സമ്പർക്കരഹിതമായി പേ ചെയ്യൽ ലഭ്യമാകില്ല.<xliff:g id="EMPTY_LINE_1">
+
+</xliff:g>Wallet, പേയ്മെന്റ്, കൂടാതെ പരിശോധിച്ചുറപ്പിക്കൽ ആവശ്യമായ മറ്റ് ആപ്പുകൾ ശരിയായി പ്രവർത്തിച്ചേക്കില്ല."</string>
+    <string name="unlock_disable_frp_warning_content_fingerprint_authbound_keys" msgid="7158076544627335461">"നിങ്ങളുടെ സ്‌ക്രീൻ ലോക്കും ഫിംഗർപ്രിൻ്റ് അൺലോക്കും നീക്കം ചെയ്യും.<xliff:g id="EMPTY_LINE_0">
+
+</xliff:g>സമ്പർക്കരഹിതമായി പേ ചെയ്യൽ ലഭ്യമാകില്ല.<xliff:g id="EMPTY_LINE_1">
+
+</xliff:g>Wallet, പേയ്മെന്റ്, കൂടാതെ പരിശോധിച്ചുറപ്പിക്കൽ ആവശ്യമായ മറ്റ് ആപ്പുകൾ ശരിയായി പ്രവർത്തിച്ചേക്കില്ല."</string>
+    <string name="unlock_disable_frp_warning_content_face_authbound_keys" msgid="8120786951217029818">"നിങ്ങളുടെ സ്‌ക്രീൻ ലോക്കും ഫെയ്‌സ് അൺലോക്കും നീക്കംചെയ്യും.<xliff:g id="EMPTY_LINE_0">
+
+</xliff:g>സമ്പർക്കരഹിതമായി പേ ചെയ്യൽ ലഭ്യമാകില്ല.<xliff:g id="EMPTY_LINE_1">
+
+</xliff:g>Wallet, പേയ്മെന്റ്, കൂടാതെ പരിശോധിച്ചുറപ്പിക്കൽ ആവശ്യമായ മറ്റ് ആപ്പുകൾ ശരിയായി പ്രവർത്തിച്ചേക്കില്ല."</string>
+    <string name="unlock_disable_frp_warning_content_face_fingerprint_authbound_keys" msgid="1574263040292024543">"നിങ്ങളുടെ സ്‌ക്രീൻ ലോക്ക്, ഫേസ് &amp; ഫിംഗർപ്രിൻ്റ് അൺലോക്ക് നീക്കം ചെയ്യും.<xliff:g id="EMPTY_LINE_0">
+
+</xliff:g>സമ്പർക്കരഹിതമായി പേ ചെയ്യൽ ലഭ്യമാകില്ല.<xliff:g id="EMPTY_LINE_1">
+
+</xliff:g>Wallet, പേയ്മെന്റ്, കൂടാതെ പരിശോധിച്ചുറപ്പിക്കൽ ആവശ്യമായ മറ്റ് ആപ്പുകൾ ശരിയായി പ്രവർത്തിച്ചേക്കില്ല."</string>
     <string name="unlock_disable_frp_warning_ok" msgid="6173427638951230842">"ഇല്ലാതാക്കുക"</string>
     <string name="unlock_footer_high_complexity_requested" msgid="4471274783909915352">"<xliff:g id="APP_NAME">%1$s</xliff:g> ഒരു പുതിയ ശക്തമായ പിൻ അല്ലെങ്കിൽ പാസ്‌വേഡ് അഭ്യർത്ഥിക്കുന്നു, ഇവയിൽ ഒന്നില്ലാതെ പ്രതീക്ഷിക്കുന്ന രീതിയിൽ പ്രവർത്തിച്ചേക്കില്ല"</string>
     <string name="unlock_footer_medium_complexity_requested" msgid="5515870066751600640">"<xliff:g id="APP_NAME">%1$s</xliff:g> ഒരു പുതിയ പിൻ അല്ലെങ്കിൽ പാസ്‌വേഡ് അഭ്യർത്ഥിക്കുന്നു, ഇവയിൽ ഒന്നില്ലാതെ പ്രതീക്ഷിക്കുന്ന രീതിയിൽ പ്രവർത്തിച്ചേക്കില്ല"</string>
@@ -1037,8 +1047,15 @@
     <string name="wifi_advanced_device_mac_address_title" msgid="6155800851233164411">"ഉപകരണ MAC വിലാസം"</string>
     <string name="wifi_advanced_randomized_mac_address_title" msgid="3930671320234553088">"ക്രമരഹിതമാക്കിയ MAC വിലാസം"</string>
     <string name="wifi_advanced_randomized_mac_address_disconnected_title" msgid="2755843130417523727">"ക്രമരഹിതമായ MAC വിലാസം (അവസാനം ഉപയോഗിച്ചത്)"</string>
+    <!-- no translation found for wifi_certificate_summary_Certificates (7849788154375655654) -->
+    <skip />
+    <!-- no translation found for wifi_certificate_summary_system (6521297326433133669) -->
+    <skip />
+    <!-- no translation found for wifi_certificate_summary_pinning (5901067790901727957) -->
+    <skip />
     <string name="wifi_details_title" msgid="222735438574597493">"നെറ്റ്‌വർക്ക് വിശദാംശങ്ങൾ"</string>
     <string name="wifi_details_subnet_mask" msgid="1619151769276260512">"സബ്‌നെറ്റ് മാസ്‌ക്"</string>
+    <string name="server_name_title" msgid="7257095185810299066">"സെർവറിന്റെ പേര്"</string>
     <string name="wifi_type_title" msgid="2174893488722015838">"തരം"</string>
     <string name="wifi_details_dns" msgid="273231528073312579">"DNS"</string>
     <string name="wifi_details_ipv6_address_header" msgid="1913151339341722443">"IPv6 വിലാസങ്ങൾ"</string>
@@ -1243,7 +1260,8 @@
     <string name="dark_ui_text" msgid="4392646155331126666">"ചില സ്ക്രീനുകളിൽ ബാറ്ററി കൂടുതൽ നേരം നിലനിൽക്കുന്നതിന് ഡാർക്ക് തീം ഒരു ബ്ലാക്ക് പശ്ചാത്തലം ഉപയോഗിക്കുന്നു. സ്ക്രീൻ ഓഫാകുന്നത് വരെ ഓണാകുന്നതിന് കാത്തിരിക്കാൻ ഡാർക്ക് തീം ഷെഡ്യൂൾ ചെയ്യുന്നു."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"ഡാർക്ക് തീം നിലവിൽ നിങ്ങളുടെ ഉറക്ക സമയ മോഡ് ഷെഡ്യൂൾ പിന്തുടരുന്നു"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"ഉറക്ക സമയ മോഡ് ക്രമീകരണം"</string>
-    <string name="even_dimmer_display_title" msgid="8589063452814896327">"കൂടുതൽ മങ്ങിയത്"</string>
+    <!-- no translation found for even_dimmer_display_title (6731255736830410149) -->
+    <skip />
     <string name="even_dimmer_display_summary" msgid="120301078873242172">"ഉപകരണത്തെ പതിവിൽ കൂടുതൽ മങ്ങാൻ അനുവദിക്കുക"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"സ്ക്രീൻ തെളിഞ്ഞിരിക്കുന്ന സമയപരിധി"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> നിഷ്ക്രിയത്വത്തിന് ശേഷം"</string>
@@ -1388,6 +1406,9 @@
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"<xliff:g id="NAME">^1</xliff:g> മറക്കണോ?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"<xliff:g id="NAME">^1</xliff:g> എന്നതിൽ സംഭരിച്ചിരിക്കുന്ന എല്ലാ ആപ്സും ഫോട്ടോകളും ഡാറ്റയും ശാശ്വതമായി നഷ്ടപ്പെടും."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"സിസ്‌റ്റത്തിൽ Android <xliff:g id="VERSION">%s</xliff:g> പതിപ്പ് റൺ ചെയ്യാൻ ഉപയോഗിച്ച ഫയലുകളും ഉൾപ്പെടുന്നു"</string>
+    <string name="storage_os_detail_dialog_system" msgid="1423073052313067844">"ഇതിൽ നിങ്ങളുടെ ഓപ്പറേറ്റിംഗ് സിസ്റ്റവും നിങ്ങളുടെ ഫോൺ സുഗമമായി പ്രവർത്തിക്കാൻ ആവശ്യമായ ഫയലുകളും ഉൾപ്പെടുന്നു. അവയുടെ സമഗ്രത സംരക്ഷിക്കാൻ, ഈ ഫയലുകൾ ആക്‌സസ് ചെയ്യാൻ കഴിയില്ല."</string>
+    <string name="storage_other_files_detail_dialog_system" msgid="8241153880150866635">"നിങ്ങളുടെ ഓപ്പറേറ്റിംഗ് സിസ്റ്റത്തിന് ആവശ്യമായ കാഷെയും മറ്റ് താൽക്കാലിക ഫയലുകളും ഇതിൽ ഉൾപ്പെടുന്നു. കാലക്രമേണ ഉപയോഗിക്കുന്ന സംഭരണത്തിൻ്റെ അളവിൽ മാറ്റങ്ങൾ നിങ്ങൾ ശ്രദ്ധിച്ചേക്കാം."</string>
+    <string name="storage_system_label" msgid="8320948583086758295">"സിസ്റ്റം"</string>
     <string name="storage_wizard_guest" msgid="5813419895687733649">"അതിഥി മോഡ് യൂസർക്ക് SD കാർഡ് ഫോർമാറ്റ് ചെയ്യാനാകില്ല"</string>
     <string name="storage_wizard_format_progress_title" msgid="9170393018855949774">"<xliff:g id="NAME">^1</xliff:g> ഫോർമാറ്റുചെയ്യുന്നു…"</string>
     <string name="storage_wizard_format_progress_body" msgid="1044024044955390417">"അത് ഫോർമാറ്റ് ചെയ്യുമ്പോൾ <xliff:g id="NAME">^1</xliff:g> നീക്കം ചെയ്യരുത്."</string>
@@ -2159,8 +2180,7 @@
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"ദൃശ്യതീവ്രതയേറിയ ടെക്‌സ്റ്റ്"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"ടെക്‌സ്‌റ്റിന്റെ നിറം, കറുപ്പോ വെളുപ്പോ ആക്കുക. പശ്ചാത്തലത്തിന്റെ ദൃശ്യതീവ്രത പരമാവധിയാക്കുന്നു."</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"ടെക്സ്റ്റ് കോൺട്രാസ്റ്റ് കൂട്ടുക"</string>
-    <!-- no translation found for accessibility_toggle_maximize_text_contrast_preference_summary (8200408691846666900) -->
-    <skip />
+    <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"ദൃശ്യതീവ്രത വർദ്ധിപ്പിക്കാൻ ടെക്സ്റ്റിന് ചുറ്റും കറുപ്പും വെള്ളയും പശ്ചാത്തലം ചേർക്കുക"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"സ്‌ക്രീൻ മാഗ്‌നിഫിക്കേഷൻ സ്വയമേവ അപ്‌ഡേറ്റ് ചെയ്യുക"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"ആപ്പ് സംക്രമണങ്ങളിൽ സ്‌ക്രീൻ മാഗ്‌നിഫിക്കേഷൻ അപ്‌ഡേറ്റ് ചെയ്യുക"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"പവർബട്ടൺ കോൾ നിർത്തുന്നു"</string>
@@ -2499,7 +2519,6 @@
     <string name="battery_manager_summary" msgid="255708681438809287">"ആപ്പുകൾ എപ്പോഴാണ് ബാറ്ററി വേഗത്തിൽ കുറയ്ക്കുന്നതെന്ന് കണ്ടെത്തുന്നു"</string>
     <string name="battery_manager_summary_unsupported" msgid="7334173707292807964">"ആപ്പുകൾ എപ്പോഴാണ് ബാറ്ററി വേഗത്തിൽ കുറയ്ക്കുന്നതെന്ന് കണ്ടെത്തുന്നു"</string>
     <string name="battery_manager_app_restricted" msgid="2583902700677009173">"{count,plural, =1{# ആപ്പിനെ നിയന്ത്രിച്ചിരിക്കുന്നു}other{# ആപ്പുകളെ നിയന്ത്രിച്ചിരിക്കുന്നു}}"</string>
-    <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
     <string name="battery_missing_message" msgid="400958471814422770">"ബാറ്ററി മീറ്റർ വായിക്കുന്നതിൽ പ്രശ്‌നമുണ്ട്."</string>
     <string name="battery_missing_link_message" msgid="6021565067124898074"></string>
     <string name="battery_missing_link_a11y_message" msgid="3310971406602316323">"ഈ പിശകിനെ കുറിച്ച് കൂടുതലറിയാൻ ടാപ്പ് ചെയ്യുക"</string>
@@ -2656,6 +2675,24 @@
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"ഓണാണ്"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"ഓഫാണ്"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"അഡാപ്റ്റീവ് കണക്റ്റിവിറ്റി ഉപയോഗിക്കുക"</string>
+    <!-- no translation found for cellular_security_title (7124079732186082924) -->
+    <skip />
+    <!-- no translation found for cellular_security_summary (1893770670709928113) -->
+    <skip />
+    <!-- no translation found for cellular_security_settings_title (116950133456981770) -->
+    <skip />
+    <!-- no translation found for cellular_security_notifications (4619728340612184944) -->
+    <skip />
+    <!-- no translation found for cellular_security_notifications_controller_title (5085567551536606230) -->
+    <skip />
+    <!-- no translation found for cellular_security_notifications_controller_summary (2876183397456700377) -->
+    <skip />
+    <!-- no translation found for cellular_security_settings_encryption_title (4013084091666375780) -->
+    <skip />
+    <!-- no translation found for cellular_security_network_generations_title (2343026988833783854) -->
+    <skip />
+    <!-- no translation found for cellular_security_network_generations_summary (139087814553929402) -->
+    <skip />
     <string name="credentials_title" msgid="7535942196886123656">"ക്രെഡൻഷ്യൽ സ്റ്റോറേജ്"</string>
     <string name="credentials_install" msgid="3933218407598415827">"സർട്ടിഫിക്കറ്റ് ഇൻസ്റ്റാൾ ചെയ്യുക"</string>
     <string name="credentials_reset" msgid="4246628389366452655">"ക്രെഡൻഷ്യലുകൾ മായ്ക്കുക"</string>
@@ -2668,6 +2705,10 @@
     <string name="credentials_settings_not_available" msgid="7433088409177429600">"ഈ ഉപയോക്താവിന് ക്രെഡൻഷ്യലുകളൊന്നും ലഭ്യമല്ല"</string>
     <string name="credential_for_vpn_and_apps" msgid="2208229692860871136">"VPN, ആപ്‌സ് എന്നിവയ്ക്കായി ഇൻസ്റ്റാൾ ചെയ്തു"</string>
     <string name="credential_for_wifi" msgid="2286560570630763556">"വൈഫൈയ്‌ക്കായി ഇൻസ്റ്റാൾ ചെയ്തു"</string>
+    <!-- no translation found for credential_installed_for_wifi (2206050464844710099) -->
+    <skip />
+    <!-- no translation found for credential_using_for_wifi (6134471366188592845) -->
+    <skip />
     <string name="credential_for_wifi_in_use" msgid="7276290656840986618">"വൈഫൈയ്‌ക്കായി ഇൻസ്റ്റാൾ ചെയ്തു (ഉപയോഗത്തിലുണ്ട്)"</string>
     <string name="credentials_reset_hint" msgid="4054601857203464867">"എല്ലാ ഉള്ളടക്കങ്ങളും നീക്കംചെയ്യണോ?"</string>
     <string name="credentials_erased" msgid="9121052044566053345">"ക്രെഡൻഷ്യൽ സ്റ്റോറേജ്  മായ്ച്ചു."</string>
@@ -4205,8 +4246,7 @@
     <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"ഹോമിലേക്ക് പോകാൻ സ്‌ക്രീനിന്റെ താഴെ നിന്ന് മുകളിലോട്ട് സ്വൈപ്പ് ചെയ്യുക. ആപ്പുകൾ മാറാൻ താഴെ നിന്നും മുകളിലോട്ട് സ്വൈപ്പ് ചെയ്യുക, അമർത്തിപ്പിടിക്കുക, ശേഷം വിടുക. മടങ്ങാൻ ഇടതുവശത്തെയോ വലതുവശത്തെയോ അരികിൽ നിന്ന് സ്വൈപ്പ് ചെയ്യുക."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"3-ബട്ടൺ നാവിഗേഷൻ"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"മടങ്ങുക, ഹോം സ്ക്രീൻ, ആപ്പുകൾ തമ്മിൽ മാറുക എന്നിവയ്ക്ക് നിങ്ങളുടെ സ്‌ക്രീനിന്റെ താഴെയുള്ള ബട്ടണുകൾ ഉപയോഗിക്കുക."</string>
-    <!-- no translation found for nav_tutorial_button_description (5791791794770463386) -->
-    <skip />
+    <string name="nav_tutorial_button_description" msgid="5791791794770463386">"ജെസ്ച്ചർ നാവിഗേഷൻ ട്യൂട്ടോറിയൽ ആരംഭിക്കുക"</string>
     <string name="keywords_system_navigation" msgid="3131782378486554934">"സിസ്‌റ്റം നാവിഗേഷൻ, 2 ബട്ടൺ നാവിഗേഷൻ, 3 ബട്ടൺ നാവിഗേഷൻ, വിരൽചലന നാവിഗേഷൻ, സ്വൈപ്പ് ചെയ്യുക"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"ഡിജിറ്റൽ അസിസ്‌റ്റന്റ്"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"അസിസ്‌റ്റന്റ് ആപ്പ് പ്രവർത്തനക്ഷമമാക്കാൻ സ്വൈപ്പ് ചെയ്യുക"</string>
@@ -4219,7 +4259,8 @@
     <string name="right_edge" msgid="1505309103265829121">"വലത്തേയറ്റം"</string>
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"ഉയർന്ന സെൻസിറ്റിവിറ്റി സ്‌ക്രീനിന്റെ വശങ്ങളിൽ ആപ്പുമായി ബന്ധപ്പെട്ട് നടത്തുന്ന എന്തെങ്കിലും ജെസ്ച്ചറുകളിൽ പൊരുത്തക്കേട് വരുത്തിയേക്കാം."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"ബാക്ക് സെൻസിറ്റിവിറ്റി"</string>
-    <string name="gesture_settings_activity_title" msgid="2025828425762595733">"ജെസ്ച്ചർ നാവിഗേഷൻ സെൻസിറ്റിവിറ്റി"</string>
+    <!-- no translation found for gesture_settings_activity_title (1882463161833981820) -->
+    <skip />
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"ബട്ടൺ നാവിഗേഷൻ"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"വിരൽചലന നാവിഗേഷൻ, ബാക്ക് സെൻസിറ്റിവിറ്റി, തിരികെ പോകാനുള്ള വിരൽചലനം"</string>
     <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"നാവിഗേഷൻ, ഹോം ബട്ടൺ"</string>
@@ -4350,9 +4391,15 @@
     <string name="storage_images" msgid="2055893015567979387">"ചിത്രങ്ങൾ"</string>
     <string name="storage_videos" msgid="6117698226447251033">"വീഡിയോകൾ"</string>
     <string name="storage_audio" msgid="5994664984472140386">"ഓഡിയോ"</string>
+    <!-- no translation found for storage_documents (7873134307844320096) -->
+    <skip />
+    <!-- no translation found for storage_other (7922190148479988838) -->
+    <skip />
     <string name="storage_apps" msgid="3564291603258795216">"ആപ്പുകൾ"</string>
     <string name="storage_documents_and_other" msgid="3293689243732236480">"ഡോക്യുമെന്റുകളും മറ്റും"</string>
     <string name="storage_system" msgid="8472410119822911844">"സിസ്‌റ്റം"</string>
+    <string name="storage_os_name" msgid="4637680493234672410">"Android <xliff:g id="VERSION">%s</xliff:g>"</string>
+    <string name="storage_temporary_files" msgid="8254109904032452219">"താൽക്കാലിക സിസ്റ്റം ഫയലുകൾ"</string>
     <string name="storage_trash" msgid="2807138998886084856">"ട്രാഷ്"</string>
     <string name="storage_trash_dialog_title" msgid="2296169576049935200">"ട്രാഷ് ശൂന്യമാക്കണോ?"</string>
     <string name="storage_trash_dialog_ask_message" msgid="8982602137242358798">"ട്രാഷിൽ ആകെ <xliff:g id="TOTAL">%1$s</xliff:g> ഫയലുകളുണ്ട്. എല്ലാ ഇനങ്ങളും ശാശ്വതമായി ഇല്ലാതാക്കും, നിങ്ങൾക്കവ പുനഃസ്ഥാപിക്കാനാകില്ല."</string>
@@ -4771,10 +4818,8 @@
     <string name="confirm_format_ext4_title" msgid="4453684705528818873">"ഉപകരണം, ext4 എന്നതിലേക്ക് വീണ്ടും ഫോർമാറ്റ് ചെയ്യണോ?"</string>
     <string name="confirm_format_ext4_text" msgid="8164677342487500794">"ext4 ഫയൽസിസ്റ്റം ഉപയോഗിച്ച് 16K ഡെവലപ്പർ ഓപ്ഷന് പിന്തുണയുണ്ട്. സ്ഥിരീകരണത്തിന് ശേഷം ഉപകരണം തുടച്ചുനീക്കും, ഫയൽസിസ്റ്റം ext4 എന്നതിലേക്ക് മാറും."</string>
     <string name="format_ext4_failure_toast" msgid="6904611547290793885">"ഡാറ്റാ പാർട്ടീഷൻ ext4 എന്നതിലേക്ക് വീണ്ടും ഫോർമാറ്റ് ചെയ്യാനും തുടച്ചുനീക്കാനും കഴിഞ്ഞില്ല."</string>
-    <!-- no translation found for confirm_oem_unlock_for_16k_title (6338135847153690912) -->
-    <skip />
-    <!-- no translation found for confirm_oem_unlock_for_16k_text (236718973897424382) -->
-    <skip />
+    <string name="confirm_oem_unlock_for_16k_title" msgid="6338135847153690912">"OEM അൺലോക്ക് ചെയ്യേണ്ടതുണ്ട്"</string>
+    <string name="confirm_oem_unlock_for_16k_text" msgid="236718973897424382">"16K ഡെവലപ്പർ ഓപ്ഷൻ ഉപയോഗിക്കുന്നതിന് മുമ്പ് OEM അൺലോക്ക് ചെയ്യേണ്ടതുണ്ട്. OEM അൺലോക്ക് ചെയ്യാൻ ഉപയോക്തൃഡാറ്റ ഫോർമാറ്റ് ചെയ്യുകയും വേണം. ഉപകരണം OEM അൺലോക്ക് ചെയ്ത് വീണ്ടും ശ്രമിക്കുക."</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"ബഗ് റിപ്പോർട്ട് ഹാൻഡ്‍ലർ"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"നിങ്ങളുടെ ഉപകരണത്തിലെ ബഗ് റിപ്പോർട്ട് കുറുക്കുവഴി കൈകാര്യം ചെയ്യുന്നത് ഏത് ആപ്പാണെന്ന് നിർണ്ണയിക്കുന്നു."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"വ്യക്തിപരം"</string>
@@ -4824,7 +4869,8 @@
     <string name="allow_mock_modem" msgid="3832264806530479214">"മോക്ക് മോഡം അനുവദിക്കുക"</string>
     <string name="allow_mock_modem_summary" msgid="9097416612748005374">"ഇൻസ്ട്രുമെന്റേഷൻ പരിശോധനയ്ക്കായി മോക്ക് മോഡം സേവനം റൺ ചെയ്യാൻ ഈ ഉപകരണത്തെ അനുവദിക്കുക. ഫോൺ സാധാരണ പോലെ ഉപയോഗിക്കുന്ന സമയത്ത് ഇത് പ്രവർത്തനക്ഷമമാക്കരുത്"</string>
     <string name="disable_screen_share_protections_for_apps_and_notifications" msgid="4987116103699222633">"സ്‌ക്രീൻ പങ്കിടൽ പരിരക്ഷകൾ പ്രവർത്തനരഹിതമാക്കുക"</string>
-    <string name="disable_screen_share_protections_for_apps_and_notifications_summary" msgid="932295234626582052">"സ്‌ക്രീൻ പങ്കിടലിന്റെ സമയത്ത് സിസ്‌റ്റം പ്രയോഗിച്ച ആപ്പ്, അറിയിപ്പ് പരിരക്ഷകൾ പ്രവർത്തനരഹിതമാക്കുന്നു"</string>
+    <!-- no translation found for disable_screen_share_protections_for_apps_and_notifications_summary (5379583403909210858) -->
+    <skip />
     <string name="media_controls_title" msgid="403271085636252597">"മീഡിയ"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"മീഡിയ പ്ലേയർ പിൻ ചെയ്യുക"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"പ്ലേബാക്ക് വേഗത്തിൽ പുനരാരംഭിക്കാൻ, ദ്രുത ക്രമീകരണത്തിൽ മീഡിയ പ്ലേയർ തുറന്ന നിലയിൽ തുടരും"</string>

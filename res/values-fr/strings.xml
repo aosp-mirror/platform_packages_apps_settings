@@ -86,6 +86,7 @@
     <string name="bluetooth_media_title" msgid="2878373577382067290">"Sons des médias et du système"</string>
     <string name="bluetooth_notification_title" msgid="8708962394926222039">"Notifications"</string>
     <string name="bluetooth_audio_routing_footer_summary" msgid="410260713589309293">"Par défaut, la sortie audio est déterminée par chaque appli"</string>
+    <string name="bluetooth_audio_codec_default_selection" msgid="4753278792700664175">"Utiliser la sélection du système (par défaut)"</string>
     <string name="bluetooth_device" msgid="2217973503732544291">"Appareil Bluetooth sans nom"</string>
     <string name="progress_scanning" msgid="2564746192843011826">"Recherche en cours"</string>
     <string name="bluetooth_no_devices_found" msgid="7704539337219953182">"Aucun appareil Bluetooth détecté."</string>
@@ -208,9 +209,9 @@
     <string name="title_regional_pref_footer" msgid="7450438024324794380">"Si une appli ne prend pas en charge les préférences régionales, elle utilisera ses paramètres régionaux par défaut."</string>
     <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"Découvrez-en davantage sur les préférences linguistiques."</string>
     <string name="category_title_terms_of_address" msgid="4309422700380895278">"Préférences supplémentaires"</string>
-    <string name="terms_of_address_title" msgid="4064593634733842458">"Genre grammatical"</string>
-    <string name="terms_of_address_summary" msgid="6136134336560679144">"Sélectionnez la manière dont vous souhaitez que l\'on s\'adresse à vous."</string>
-    <string name="terms_of_address_intro_title" msgid="6149691509414243483">"Les applications sont susceptibles d\'utiliser le genre grammatical que vous spécifiez pour personnaliser la façon dont elles s\'adressent à vous."</string>
+    <string name="terms_of_address_title" msgid="7338630812197476808">"Choisissez la façon dont on s\'adresse à vous"</string>
+    <string name="terms_of_address_summary" msgid="7802443422612600620">"Votre appareil peut personnaliser la façon dont on s\'adresse à vous"</string>
+    <string name="terms_of_address_intro_title" msgid="1533951542181569335">"Ce paramètre permet à la plupart des applications système de personnaliser la façon dont on s\'adresse à vous. Il n\'est pas utilisé par les applications que vous installez."</string>
     <string name="terms_of_address_not_specified" msgid="4439257779351251973">"Non défini"</string>
     <string name="terms_of_address_feminine" msgid="1743479869695539283">"Féminin"</string>
     <string name="terms_of_address_masculine" msgid="983106046135098856">"Masculin"</string>
@@ -555,26 +556,34 @@
     <string name="private_space_category_ways_to_unlock" msgid="4356631225316950046">"Méthodes de déverrouillage"</string>
     <string name="private_space_screen_lock_summary" msgid="394837965365561070">"Comme pour verrouiller l\'écran de l\'appareil"</string>
     <string name="private_space_new_lock_title" msgid="9056139964133004094">"Choisir un nouveau verrouillage d\'espace privé ?"</string>
+    <!-- no translation found for private_space_new_lock_message (3117703578905489206) -->
+    <skip />
     <string name="private_space_auto_lock_title" msgid="8663409382910601261">"Verrouiller l\'espace privé automatiquement"</string>
     <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"Vous avez la possibilité de verrouiller votre espace privé automatiquement lorsque vous n\'utilisez pas votre appareil pendant un certain temps"</string>
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"À chaque verrouillage de l\'appareil"</string>
     <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"Après 5 minutes d\'inactivité"</string>
     <string name="private_space_auto_lock_never" msgid="595014527119778873">"Jamais"</string>
-    <string name="private_space_hide_title" msgid="8687034008994037610">"Masquer lorsque l\'application est verrouillée"</string>
-    <string name="privatespace_hide_page_title" msgid="8417507414027827566">"Masquer l\'espace privé lorsque l\'appli est verrouillée"</string>
-    <string name="privatespace_hide_page_summary" msgid="5525422595477989312">"Afin que personne ne puisse savoir que vous possédez un espace privé sur votre appareil, vous pouvez le faire disparaître de votre liste d\'applications"</string>
-    <string name="privatespace_access_header" msgid="6066826215718835041">"Accéder à l\'espace privé lorsque l\'appli est masquée"</string>
-    <string name="privatespace_search_description" msgid="3121043205513022357">"Tapez \"espace privé\" dans la barre de recherche de votre liste d\'applications"</string>
-    <string name="privatespace_tap_tile_description" msgid="8346440188590931635">"Appuyez sur la vignette Espace privé"</string>
-    <string name="privatespace_unlock_description" msgid="3177710543121916413">"Déverrouillez votre espace privé"</string>
-    <string name="privatespace_hide_off_summary" msgid="7227778747159633671">"Désactivé"</string>
-    <string name="privatespace_hide_on_summary" msgid="6136704537527640183">"Activé"</string>
-    <!-- no translation found for private_space_hide_dialog_title (3192253150765516720) -->
+    <!-- no translation found for private_space_hide_page_title (4351404195904146088) -->
     <skip />
-    <!-- no translation found for private_space_hide_dialog_message (2006421821648157211) -->
+    <!-- no translation found for private_space_hide_page_summary (6247773353685839242) -->
     <skip />
-    <!-- no translation found for private_space_hide_dialog_button (4157191429310035457) -->
+    <!-- no translation found for private_space_access_header (1077082416567150819) -->
     <skip />
+    <!-- no translation found for private_space_search_description (1538155187658429618) -->
+    <skip />
+    <!-- no translation found for private_space_tap_tile_description (6173556870938267361) -->
+    <skip />
+    <!-- no translation found for private_space_unlock_description (5527228922778630361) -->
+    <skip />
+    <!-- no translation found for private_space_hide_off_summary (8565973976602078315) -->
+    <skip />
+    <!-- no translation found for private_space_hide_on_summary (3450844101901438867) -->
+    <skip />
+    <!-- no translation found for private_space_hide_dialog_title (6439207708506990156) -->
+    <skip />
+    <!-- no translation found for private_space_hide_dialog_message (618693520130744836) -->
+    <skip />
+    <string name="private_space_hide_dialog_button" msgid="4157191429310035457">"OK"</string>
     <string name="private_space_category_system" msgid="1286843321867285700">"Système"</string>
     <string name="private_space_delete_title" msgid="636873505724100006">"Supprimer l\'espace privé"</string>
     <string name="private_space_delete_header" msgid="4594429153176776184">"Supprimer l\'espace privé ?"</string>
@@ -599,6 +608,7 @@
     <string name="private_space_protected_lock_text" msgid="9123250938334372735"><b>"Définissez une méthode de verrouillage"</b>\n"Verrouillez votre espace afin que personne ne puisse y accéder."</string>
     <string name="private_space_install_apps_text" msgid="5693139160766464498"><b>"Installez des applis"</b>\n"Votre espace privé dispose de son propre Play Store. Vous pouvez donc installer des applis facilement."</string>
     <string name="private_space_apps_permission_text" msgid="7030946025253366172">"Les applis installées dans votre espace privé n\'apparaîtront ni dans le gestionnaire d\'autorisations, ni dans le tableau de bord Confidentialité. Lorsque votre espace privé est verrouillé, d\'autres paramètres sont également concernés. \n\nIl est impossible de basculer votre espace privé sur un autre appareil. Vous devrez configurer un autre espace privé si vous souhaitez l\'utiliser sur un autre appareil.\n\nQuiconque connecte votre appareil à un ordinateur ou y installe des applis malveillantes peut avoir accès à votre espace privé."</string>
+    <string name="private_space_learn_more_text" msgid="5314198983263277586">"En savoir plus sur l\'espace privé"</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Configuration de l\'espace privé…"</string>
     <string name="private_space_notifications_hidden_title" msgid="2009112565217540581">"Les notifications provenant des applis de l\'espace privé sont masquées lorsque celui-ci est verrouillé"</string>
     <string name="private_space_explore_settings_title" msgid="1448128245941571654">"Rendez-vous dans les paramètres d\'espace privé pour masquer l\'espace privé et configurer le verrouillage automatique"</string>
@@ -701,35 +711,15 @@
 
 </xliff:g>L\'empreinte digitale stockée sur votre appareil sera supprimée. Votre empreinte faciale sera également supprimée définitivement de façon sécurisée. Vous ne pourrez pas vous authentifier dans les applis à l\'aide de votre empreinte faciale ou digitale."</string>
     <string name="unlock_disable_frp_warning_content_pin" msgid="122154942944422284">"Un code protège votre téléphone en cas de perte ou de vol"</string>
-    <string name="unlock_disable_frp_warning_content_pin_authbound_keys" msgid="6497861740382402784">"Les données que vous avez sauvegardées, telles que votre code seront perdues.<xliff:g id="EMPTY_LINE_0">
-
-</xliff:g>Les cartes configurées pour le paiement sans contact seront supprimées.<xliff:g id="EMPTY_LINE_1">
-
-</xliff:g>Wallet ainsi que d\'autres applis nécessitant que l\'appareil soit déverrouillé sont susceptibles de ne pas fonctionner correctement."</string>
     <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="983373874470746066">"Un code protège votre téléphone en cas de perte ou de vol.<xliff:g id="EMPTY_LINE">
 
 </xliff:g>L\'empreinte digitale stockée sur votre appareil sera également supprimée. Vous ne pourrez pas vous authentifier dans les applis à l\'aide de votre empreinte digitale."</string>
-    <string name="unlock_disable_frp_warning_content_pin_fingerprint_authbound_keys" msgid="8930057076658360799">"Les données que vous avez sauvegardées, telles que votre code ou votre empreinte digitale seront perdues.<xliff:g id="EMPTY_LINE_0">
-
-</xliff:g>Les cartes configurées pour le paiement sans contact seront supprimées.<xliff:g id="EMPTY_LINE_1">
-
-</xliff:g>Wallet ainsi que d\'autres applis nécessitant que l\'appareil soit déverrouillé sont susceptibles de ne pas fonctionner correctement."</string>
     <string name="unlock_disable_frp_warning_content_pin_face" msgid="5607150515413131761">"Un code protège votre téléphone en cas de perte ou de vol.<xliff:g id="EMPTY_LINE">
 
 </xliff:g>Votre empreinte faciale sera également supprimée définitivement de façon sécurisée. Vous ne pourrez pas vous authentifier dans les applis à l\'aide de votre empreinte faciale."</string>
-    <string name="unlock_disable_frp_warning_content_pin_face_authbound_keys" msgid="979399855891561038">"Les données que vous avez sauvegardées, telles que votre code ou votre empreinte faciale seront perdues.<xliff:g id="EMPTY_LINE_0">
-
-</xliff:g>Les cartes configurées pour le paiement sans contact seront supprimées.<xliff:g id="EMPTY_LINE_1">
-
-</xliff:g>Wallet ainsi que d\'autres applis nécessitant que l\'appareil soit déverrouillé sont susceptibles de ne pas fonctionner correctement."</string>
     <string name="unlock_disable_frp_warning_content_pin_face_fingerprint" msgid="1821792325159866312">"Un code protège votre téléphone en cas de perte ou de vol.<xliff:g id="EMPTY_LINE">
 
 </xliff:g>L\'empreinte digitale stockée sur votre appareil sera supprimée. Votre empreinte faciale sera également supprimée définitivement de façon sécurisée. Vous ne pourrez pas vous authentifier dans les applis à l\'aide de votre empreinte faciale ou digitale."</string>
-    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint_authbound_keys" msgid="7019955731206729909">"Les données que vous avez sauvegardées, telles que votre code, votre empreinte faciale ou digitale seront perdues.<xliff:g id="EMPTY_LINE_0">
-
-</xliff:g>Les cartes configurées pour le paiement sans contact seront supprimées.<xliff:g id="EMPTY_LINE_1">
-
-</xliff:g>Wallet ainsi que d\'autres applis nécessitant que l\'appareil soit déverrouillé sont susceptibles de ne pas fonctionner correctement."</string>
     <string name="unlock_disable_frp_warning_content_password" msgid="6422723907917376210">"Un mot de passe protège votre téléphone en cas de perte ou de vol"</string>
     <string name="unlock_disable_frp_warning_content_password_fingerprint" msgid="8899452884016354856">"Un mot de passe protège votre téléphone en cas de perte ou de vol.<xliff:g id="EMPTY_LINE">
 
@@ -750,6 +740,26 @@
     <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint" msgid="3779582301453677644">"Les fonctionnalités de protection de l\'appareil ne fonctionnent pas sans le verrouillage de l\'écran.<xliff:g id="EMPTY_LINE">
 
 </xliff:g>L\'empreinte digitale stockée sur votre appareil sera supprimée. Votre empreinte faciale sera également supprimée définitivement de façon sécurisée. Vous ne pourrez pas vous authentifier dans les applis à l\'aide de votre empreinte faciale ou digitale."</string>
+    <string name="unlock_disable_frp_warning_content_authbound_keys" msgid="6397327696248819663">"Le verrouillage de votre écran sera supprimé.<xliff:g id="EMPTY_LINE_0">
+
+</xliff:g>La fonctionnalité de paiement sans contact ne sera pas disponible.<xliff:g id="EMPTY_LINE_1">
+
+</xliff:g>Les applications Wallet, de paiement et autres qui requièrent une authentification peuvent ne pas fonctionner correctement."</string>
+    <string name="unlock_disable_frp_warning_content_fingerprint_authbound_keys" msgid="7158076544627335461">"Le verrouillage de l\'écran et le déverrouillage par empreinte digitale seront supprimés.<xliff:g id="EMPTY_LINE_0">
+
+</xliff:g>La fonctionnalité de paiement sans contact ne sera pas disponible.<xliff:g id="EMPTY_LINE_1">
+
+</xliff:g>Les applications Wallet, de paiement et autres qui requièrent une authentification peuvent ne pas fonctionner correctement."</string>
+    <string name="unlock_disable_frp_warning_content_face_authbound_keys" msgid="8120786951217029818">"Le verrouillage de l\'écran et le déverrouillage par reconnaissance faciale seront supprimés.<xliff:g id="EMPTY_LINE_0">
+
+</xliff:g>La fonctionnalité de paiement sans contact ne sera pas disponible.<xliff:g id="EMPTY_LINE_1">
+
+</xliff:g>Les applications Wallet, de paiement et autres qui requièrent une authentification peuvent ne pas fonctionner correctement."</string>
+    <string name="unlock_disable_frp_warning_content_face_fingerprint_authbound_keys" msgid="1574263040292024543">"Le verrouillage de l\'écran et le déverrouillage par reconnaissance faciale et empreinte digitale seront supprimés.<xliff:g id="EMPTY_LINE_0">
+
+</xliff:g>La fonctionnalité de paiement sans contact ne sera pas disponible.<xliff:g id="EMPTY_LINE_1">
+
+</xliff:g>Les applications Wallet, de paiement et autres qui requièrent une authentification peuvent ne pas fonctionner correctement."</string>
     <string name="unlock_disable_frp_warning_ok" msgid="6173427638951230842">"Supprimer"</string>
     <string name="unlock_footer_high_complexity_requested" msgid="4471274783909915352">"<xliff:g id="APP_NAME">%1$s</xliff:g> recommande d\'utiliser un code ou mot de passe sécurisés et risque de ne pas fonctionner comme prévu si vous n\'en définissez pas"</string>
     <string name="unlock_footer_medium_complexity_requested" msgid="5515870066751600640">"<xliff:g id="APP_NAME">%1$s</xliff:g> recommande d\'utiliser un nouveau code ou mot de passe et risque de ne pas fonctionner comme prévu si vous n\'en définissez pas"</string>
@@ -992,9 +1002,9 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Mot de passe Wi-Fi : <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"Mot de passe du point d\'accès : <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"Connexion automatique"</string>
-    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"Autoriser la connexion à ce réseau lorsqu\'il est à portée"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"Autorisez la connexion à ce réseau lorsqu\'il est à portée"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"Ajouter un appareil"</string>
-    <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Utiliser un code QR pour ajouter un appareil à ce réseau"</string>
+    <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Utilisez un code QR pour ajouter un appareil à ce réseau"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"Le format de code QR n\'est pas valide"</string>
     <string name="retry" msgid="7542103800274026915">"Réessayer"</string>
     <string name="wifi_shared" msgid="8850748923537589782">"Partager avec d\'autres utilisateurs de l\'appareil"</string>
@@ -1037,8 +1047,15 @@
     <string name="wifi_advanced_device_mac_address_title" msgid="6155800851233164411">"Adresse MAC de l\'appareil"</string>
     <string name="wifi_advanced_randomized_mac_address_title" msgid="3930671320234553088">"Adresse MAC aléatoire"</string>
     <string name="wifi_advanced_randomized_mac_address_disconnected_title" msgid="2755843130417523727">"Adresse MAC aléatoire (dernière utilisée)"</string>
+    <!-- no translation found for wifi_certificate_summary_Certificates (7849788154375655654) -->
+    <skip />
+    <!-- no translation found for wifi_certificate_summary_system (6521297326433133669) -->
+    <skip />
+    <!-- no translation found for wifi_certificate_summary_pinning (5901067790901727957) -->
+    <skip />
     <string name="wifi_details_title" msgid="222735438574597493">"Détails sur le réseau"</string>
     <string name="wifi_details_subnet_mask" msgid="1619151769276260512">"Masque de sous-réseau"</string>
+    <string name="server_name_title" msgid="7257095185810299066">"Nom du serveur"</string>
     <string name="wifi_type_title" msgid="2174893488722015838">"Type"</string>
     <string name="wifi_details_dns" msgid="273231528073312579">"DNS"</string>
     <string name="wifi_details_ipv6_address_header" msgid="1913151339341722443">"Adresses IPv6"</string>
@@ -1243,7 +1260,8 @@
     <string name="dark_ui_text" msgid="4392646155331126666">"Le thème sombre utilise un fond noir pour préserver l\'autonomie de la batterie sur certains écrans. Si vous le programmez, il attend que l\'écran soit éteint pour s\'activer."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Actuellement, le thème sombre s\'active au même horaire que le mode Coucher."</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Paramètres du mode Coucher"</string>
-    <string name="even_dimmer_display_title" msgid="8589063452814896327">"Encore moins lumineux"</string>
+    <!-- no translation found for even_dimmer_display_title (6731255736830410149) -->
+    <skip />
     <string name="even_dimmer_display_summary" msgid="120301078873242172">"Autoriser une diminution plus importante de la luminosité de l\'appareil"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Délai de mise en veille de l\'écran"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"Après <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> d\'inactivité"</string>
@@ -1261,7 +1279,7 @@
     <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"Indisponible, car Heure du coucher est activé"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Utiliser l\'économiseur d\'écran"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Lorsque l\'appareil est en charge ou connecté à une station d\'accueil"</string>
-    <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"Lorsque sur station et en recharge"</string>
+    <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"Pendant la recharge sur station"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Lorsque l\'appareil est en charge"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"Lorsque l\'appareil est connecté à une station d\'accueil"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"Jamais"</string>
@@ -1388,6 +1406,9 @@
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"Supprimer la mémoire \"<xliff:g id="NAME">^1</xliff:g>\" ?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"Toutes les applications, photos et données enregistrées sur la mémoire de stockage \"<xliff:g id="NAME">^1</xliff:g>\" seront définitivement perdues."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"\"Système\" contient les fichiers servant à exécuter Android <xliff:g id="VERSION">%s</xliff:g>"</string>
+    <string name="storage_os_detail_dialog_system" msgid="1423073052313067844">"Il s\'agit du système d\'exploitation et des fichiers nécessaires au bon fonctionnement de votre téléphone. Pour protéger leur intégrité, ces fichiers ne sont pas accessibles."</string>
+    <string name="storage_other_files_detail_dialog_system" msgid="8241153880150866635">"Cela inclut le cache et d\'autres fichiers temporaires nécessaires à votre système d\'exploitation. Des changements dans la quantité d\'espace de stockage utilisé peuvent survenir au fil du temps."</string>
+    <string name="storage_system_label" msgid="8320948583086758295">"Système"</string>
     <string name="storage_wizard_guest" msgid="5813419895687733649">"Utilisateurs invités ne peuvent pas formater cartes SD"</string>
     <string name="storage_wizard_format_progress_title" msgid="9170393018855949774">"Formatage de mémoire \"<xliff:g id="NAME">^1</xliff:g>\" en cours"</string>
     <string name="storage_wizard_format_progress_body" msgid="1044024044955390417">"Ne retirez pas le périphérique <xliff:g id="NAME">^1</xliff:g> pendant le formatage."</string>
@@ -1953,7 +1974,7 @@
     <string name="keyboard_layout_picker_category_title" msgid="2369473692906329772">"Dispositions de claviers physiques"</string>
     <string name="user_dict_settings_title" msgid="680410651924276991">"Dictionnaire personnel"</string>
     <string name="user_dict_settings_for_work_title" msgid="1245315720684961770">"Dictionnaire personnel pour le travail"</string>
-    <string name="user_dict_settings_summary" msgid="4939694372338975081">"Ajouter des mots à utiliser dans des applis comme le correcteur orthographique"</string>
+    <string name="user_dict_settings_summary" msgid="4939694372338975081">"Ajoutez des mots à utiliser dans des applis comme le correcteur orthographique"</string>
     <string name="user_dict_settings_add_menu_title" msgid="8046882347281382968">"Ajouter"</string>
     <string name="user_dict_settings_add_dialog_title" msgid="3485845465134083084">"Ajouter au dictionnaire"</string>
     <string name="user_dict_settings_add_screen_title" msgid="1866408024073475379">"Expression"</string>
@@ -2069,7 +2090,7 @@
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Agrandir avec un raccourci"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Agrandir avec un raccourci et trois tapotements"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"À propos de <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
-    <string name="accessibility_text_reading_options_title" msgid="3224648909213325563">"Taille de l\'affichage et du texte"</string>
+    <string name="accessibility_text_reading_options_title" msgid="3224648909213325563">"Taille d\'affichage et texte"</string>
     <string name="accessibility_text_reading_options_suggestion_title" msgid="2492155642665312733">"Modifier l\'affichage du texte"</string>
     <string name="accessibility_text_reading_preview_mail_subject" msgid="4597374768612733616">"Objet : modèles de montgolfières"</string>
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"De : Bill"</string>
@@ -2159,8 +2180,7 @@
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Texte avec contraste élevé"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Mettre le texte en noir ou blanc pour accentuer le contraste avec le fond."</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"Maximiser le contraste du texte"</string>
-    <!-- no translation found for accessibility_toggle_maximize_text_contrast_preference_summary (8200408691846666900) -->
-    <skip />
+    <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"Ajoutez un fond noir ou blanc autour du texte pour augmenter le contraste"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Mise à jour auto de la loupe"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Mettre à jour la loupe si transition entre applis"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Bouton Marche/Arrêt pour raccrocher"</string>
@@ -2209,7 +2229,7 @@
     <string name="accessibility_autoclick_shorter_desc" msgid="7631013255724544348">"Plus court"</string>
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"Plus long"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"Délai du clic automatique"</string>
-    <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Vibreur et retour tactile"</string>
+    <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Vibreur et retour haptique"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"Contrôler la force des vibrations pour différentes utilisations"</string>
     <string name="accessibility_vibration_settings_state_on" msgid="5566026932372832502">"Activé"</string>
     <string name="accessibility_vibration_settings_state_off" msgid="7946588741954981703">"Désactivés"</string>
@@ -2249,7 +2269,7 @@
     <string name="captioning_appearance_title" msgid="3128792092290011408">"Style et taille des sous-titres"</string>
     <string name="captioning_appearance_summary" msgid="4620682807315588019">"Taille de la police : <xliff:g id="ACCESSIBILITY_FONT_SIZE">%1$s</xliff:g>"</string>
     <string name="captioning_more_options_title" msgid="3484496882942539652">"Autres options"</string>
-    <string name="accessibility_captioning_preference_intro" msgid="8995427146374031134">"Personnaliser la taille et le style des sous-titres pour en faciliter la lecture"</string>
+    <string name="accessibility_captioning_preference_intro" msgid="8995427146374031134">"Personnalisez la taille et le style des sous-titres pour en faciliter la lecture"</string>
     <string name="accessibility_captioning_preference_summary" msgid="8335768472978374255">"Ces préférences pour les sous-titres ne fonctionnent pas avec toutes les applis multimédias"</string>
     <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"Bouton d\'accessibilité"</string>
     <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"Balayer l\'écran vers le haut avec deux doigts"</string>
@@ -2499,7 +2519,6 @@
     <string name="battery_manager_summary" msgid="255708681438809287">"Détecte quand des applis déchargent la batterie"</string>
     <string name="battery_manager_summary_unsupported" msgid="7334173707292807964">"Détecte quand des applis déchargent la batterie"</string>
     <string name="battery_manager_app_restricted" msgid="2583902700677009173">"{count,plural, =1{# appli limitée}one{# appli limitée}other{# applis limitées}}"</string>
-    <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
     <string name="battery_missing_message" msgid="400958471814422770">"Problème de lecture de l\'outil de mesure de batterie."</string>
     <string name="battery_missing_link_message" msgid="6021565067124898074"></string>
     <string name="battery_missing_link_a11y_message" msgid="3310971406602316323">"Appuyer pour en savoir plus sur cette erreur"</string>
@@ -2652,10 +2671,28 @@
     <string name="vpn_settings_single_insecure_multiple_total" msgid="6107225844641301139">"<xliff:g id="VPN_COUNT">%d</xliff:g> non sécurisé"</string>
     <string name="vpn_settings_multiple_insecure_multiple_total" msgid="1706236062478680488">"<xliff:g id="VPN_COUNT">%d</xliff:g> non sécurisés"</string>
     <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Connectivité adaptative"</string>
-    <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Prolonger l\'autonomie de la batterie et améliorer les performances de l\'appareil en gérant automatiquement vos connexions réseau"</string>
-    <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"Activé"</string>
+    <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Prolonge l\'autonomie de la batterie et améliore les performances de l\'appareil en gérant automatiquement vos connexions réseau"</string>
+    <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"Activée"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"Désactivé"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Utiliser la connectivité adaptative"</string>
+    <!-- no translation found for cellular_security_title (7124079732186082924) -->
+    <skip />
+    <!-- no translation found for cellular_security_summary (1893770670709928113) -->
+    <skip />
+    <!-- no translation found for cellular_security_settings_title (116950133456981770) -->
+    <skip />
+    <!-- no translation found for cellular_security_notifications (4619728340612184944) -->
+    <skip />
+    <!-- no translation found for cellular_security_notifications_controller_title (5085567551536606230) -->
+    <skip />
+    <!-- no translation found for cellular_security_notifications_controller_summary (2876183397456700377) -->
+    <skip />
+    <!-- no translation found for cellular_security_settings_encryption_title (4013084091666375780) -->
+    <skip />
+    <!-- no translation found for cellular_security_network_generations_title (2343026988833783854) -->
+    <skip />
+    <!-- no translation found for cellular_security_network_generations_summary (139087814553929402) -->
+    <skip />
     <string name="credentials_title" msgid="7535942196886123656">"Stockage des identifiants"</string>
     <string name="credentials_install" msgid="3933218407598415827">"Installer un certificat"</string>
     <string name="credentials_reset" msgid="4246628389366452655">"Effacer les identifiants"</string>
@@ -2668,6 +2705,10 @@
     <string name="credentials_settings_not_available" msgid="7433088409177429600">"Les identifiants ne sont pas disponibles pour cet utilisateur."</string>
     <string name="credential_for_vpn_and_apps" msgid="2208229692860871136">"Installé pour le VPN et les applications"</string>
     <string name="credential_for_wifi" msgid="2286560570630763556">"Installé pour le Wi-Fi"</string>
+    <!-- no translation found for credential_installed_for_wifi (2206050464844710099) -->
+    <skip />
+    <!-- no translation found for credential_using_for_wifi (6134471366188592845) -->
+    <skip />
     <string name="credential_for_wifi_in_use" msgid="7276290656840986618">"Installé pour le Wi-Fi (en cours d\'utilisation)"</string>
     <string name="credentials_reset_hint" msgid="4054601857203464867">"Supprimer l\'intégralité du contenu ?"</string>
     <string name="credentials_erased" msgid="9121052044566053345">"Les identifiants sont effacés."</string>
@@ -3115,7 +3156,7 @@
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"Création du clone <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>…"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"Clone <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> créé"</string>
     <string name="system_dashboard_summary" msgid="7400745270362833832">"Langues, gestes, heure, sauvegarde"</string>
-    <string name="languages_setting_summary" msgid="2650807397396180351">"Langues du système, langues des applications, préférences régionales, langage parlé"</string>
+    <string name="languages_setting_summary" msgid="2650807397396180351">"Langues du système, langues des applications, préférences régionales, voix"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, connexion réseau, internet, sans fil, données, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"notification Wi‑Fi, notification wi-fi"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"consommation des données"</string>
@@ -3265,7 +3306,7 @@
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Paramètres des appareils connectés"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Aucun}=1{1 programme défini}one{# programme défini}other{# programmes définis}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Ne pas déranger"</string>
-    <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Ne recevoir des notifications que des personnes et applications importantes"</string>
+    <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Recevez uniquement les notifications des personnes et applications importantes"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Limiter les interruptions"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Activer le mode Ne pas déranger"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Les alarmes et les sons des contenus multimédias peuvent interrompre le mode Ne pas déranger"</string>
@@ -3306,7 +3347,7 @@
     <string name="zen_mode_block_effect_light" msgid="1997222991427784993">"Ne pas faire clignoter"</string>
     <string name="zen_mode_block_effect_peek" msgid="2525844009475266022">"Ne pas afficher de notifications à l\'écran"</string>
     <string name="zen_mode_block_effect_status" msgid="5765965061064691918">"Masquer les icônes de la barre d\'état en haut de l\'écran"</string>
-    <string name="zen_mode_block_effect_badge" msgid="332151258515152429">"Masquer les pastilles de notification sur icônes des applis"</string>
+    <string name="zen_mode_block_effect_badge" msgid="332151258515152429">"Masquer les pastilles de notification sur les icônes des applis"</string>
     <string name="zen_mode_block_effect_ambient" msgid="1247740599476031543">"Ne pas activer pour les notifications"</string>
     <string name="zen_mode_block_effect_list" msgid="7549367848660137118">"Masquer dans le volet déroulant"</string>
     <string name="zen_mode_block_effect_summary_none" msgid="6688519142395714659">"Jamais"</string>
@@ -3337,7 +3378,7 @@
     <string name="zen_mode_duration_summary_time_hours" msgid="2602655749780428308">"{count,plural, =1{1 heure}one{# heure}other{# heures}}"</string>
     <string name="zen_mode_duration_summary_time_minutes" msgid="5755536844016835693">"{count,plural, =1{1 minute}one{# minute}other{# minutes}}"</string>
     <string name="zen_mode_sound_summary_off" msgid="7350437977839985836">"{count,plural, =0{Désactivé}=1{Désactivé/1 programme peut s\'activer automatiquement}one{Désactivé/# programme peut s\'activer automatiquement}other{Désactivé/# programmes peuvent s\'activer automatiquement}}"</string>
-    <string name="zen_category_behavior" msgid="3214056473947178507">"Ce qui peut interrompre le mode"</string>
+    <string name="zen_category_behavior" msgid="3214056473947178507">"Ce qui peut interrompre le mode Ne pas déranger"</string>
     <string name="zen_category_people" msgid="8252926021894933047">"Personnes"</string>
     <string name="zen_category_apps" msgid="1167374545618451925">"Applications"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"Alarmes et autres interruptions"</string>
@@ -3628,7 +3669,7 @@
     <string name="zen_mode_rule_summary_provider_combination" msgid="785343032708491365">"<xliff:g id="PACKAGE">%1$s</xliff:g>\n<xliff:g id="SUMMARY">%2$s</xliff:g>"</string>
     <string name="zen_mode_schedule_rule_days" msgid="8633770815307716351">"Jours"</string>
     <string name="zen_mode_schedule_rule_days_none" msgid="5636604196262227070">"Aucun"</string>
-    <string name="zen_mode_schedule_alarm_title" msgid="305237266064819345">"L\'alarme peut remplacer l\'heure de fin"</string>
+    <string name="zen_mode_schedule_alarm_title" msgid="305237266064819345">"L\'heure de fin peut être annulée par une alarme"</string>
     <string name="zen_mode_schedule_alarm_summary" msgid="9162760856136645133">"Le programme se désactive lorsqu\'une alarme sonne"</string>
     <string name="zen_mode_custom_behavior_title" msgid="92525364576358085">"Comportement du mode Ne pas déranger"</string>
     <string name="zen_mode_custom_behavior_summary_default" msgid="3259312823717839148">"Utiliser les paramètres par défaut"</string>
@@ -3642,12 +3683,12 @@
     <string name="zen_mode_from_important_conversations_second" msgid="7588299891972136599">"conversations prioritaires"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Aucune"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{Aucune}=1{1 conversation}one{# conversation}other{# conversations}}"</string>
-    <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"Personnes qui peuvent interrompre le mode"</string>
+    <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"Personnes qui peuvent interrompre"</string>
     <string name="zen_mode_people_footer" msgid="7710707353004137431">"Même si les applications de messagerie ou d\'appel ne peuvent pas vous envoyer de notifications, les personnes que vous sélectionnez ici peuvent vous contacter par leur biais"</string>
     <string name="zen_mode_calls_title" msgid="2078578043677037740">"Appels"</string>
     <string name="zen_mode_calls" msgid="7653245854493631095">"Appels"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"appels"</string>
-    <string name="zen_mode_calls_header" msgid="8379225445095856726">"Appels qui peuvent interrompre le mode"</string>
+    <string name="zen_mode_calls_header" msgid="8379225445095856726">"Appels qui peuvent interrompre"</string>
     <string name="zen_mode_calls_footer" msgid="2008079711083701243">"Pour que le téléphone sonne lorsque vous recevez un appel autorisé, assurez-vous d\'avoir activé la sonnerie"</string>
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"Les appels entrants sont bloqués pendant le programme \"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\". Vous pouvez ajuster les paramètres pour que vos proches ou d\'autres contacts puissent quand même vous joindre."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"Contacts favoris"</string>
@@ -3688,7 +3729,7 @@
     <string name="zen_mode_events_list" msgid="7191316245742097229">"les événements"</string>
     <string name="zen_mode_events_list_first" msgid="7425369082835214361">"Les événements"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Autoriser des applications à ignorer ce mode"</string>
-    <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"Applis qui peuvent interrompre le mode"</string>
+    <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"Applis qui peuvent interrompre"</string>
     <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"Sélectionnez plus d\'applications"</string>
     <string name="zen_mode_bypassing_apps_none" msgid="7944221631721778096">"Aucune application sélectionnée"</string>
     <string name="zen_mode_bypassing_apps_subtext_none" msgid="5128770411598722200">"Aucune application ne peut l\'interrompre"</string>
@@ -4061,7 +4102,7 @@
     <string name="data_usage_template" msgid="3822452362629968010">"<xliff:g id="ID_1">%1$s</xliff:g> utilisés : <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="configure" msgid="1499586749829665889">"Configurer"</string>
     <string name="data_usage_other_apps" msgid="5649047093607329537">"Autres applications incluses dans la consommation"</string>
-    <string name="data_saver_unrestricted_summary" msgid="7343571401172437542">"{count,plural, =1{1 appli autorisée à utiliser des données illimitées lorsque l\'Économiseur de données est activé}one{# appli autorisée à utiliser des données illimitées lorsque l\'Économiseur de données est activé}other{# applis autorisées à utiliser des données illimitées lorsque l\'Économiseur de données est activé}}"</string>
+    <string name="data_saver_unrestricted_summary" msgid="7343571401172437542">"{count,plural, =1{1 appli est autorisée à utiliser des données illimitées lorsque l\'Économiseur de données est activé}one{# appli est autorisée à utiliser des données illimitées lorsque l\'Économiseur de données est activé}other{# applis autorisées à utiliser des données illimitées lorsque l\'Économiseur de données est activé}}"</string>
     <string name="data_usage_title" msgid="4039024073687469094">"Données principales"</string>
     <string name="data_usage_wifi_title" msgid="1060495519280456926">"Données Wi-Fi"</string>
     <string name="data_used_formatted" msgid="7913920278059077938">"<xliff:g id="ID_1">^1</xliff:g> <xliff:g id="ID_2">^2</xliff:g> utilisés"</string>
@@ -4078,7 +4119,7 @@
     <string name="no_carrier_update_now_text" msgid="7898004907837200752">"Mis à jour à l\'instant"</string>
     <string name="launch_wifi_text" msgid="976421974332512894">"Afficher les détails"</string>
     <string name="data_saver_title" msgid="2593804270788863815">"Économiseur de données"</string>
-    <string name="unrestricted_data_saver" msgid="7922563266857367495">"Données sans restrictions"</string>
+    <string name="unrestricted_data_saver" msgid="7922563266857367495">"Données illimitées"</string>
     <string name="restrict_background_blocklisted" msgid="2308345280442438232">"Les données en arrière-plan sont désactivées"</string>
     <string name="data_saver_on" msgid="7848893946018448793">"Activé"</string>
     <string name="data_saver_off" msgid="5891210864117269045">"Désactivé"</string>
@@ -4204,9 +4245,8 @@
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Navigation par gestes"</string>
     <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"Pour revenir à l\'accueil, balayez l\'écran de bas en haut. Pour changer d\'application, balayez l\'écran de bas en haut, appuyez de manière prolongée, puis relâchez. Pour revenir en arrière, balayez l\'écran de gauche à droite ou de droite à gauche."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Navigation à trois boutons"</string>
-    <string name="legacy_navigation_summary" msgid="5905301067778326433">"Changer d\'application et revenir en arrière ou à l\'accueil avec les boutons situés en bas de l\'écran."</string>
-    <!-- no translation found for nav_tutorial_button_description (5791791794770463386) -->
-    <skip />
+    <string name="legacy_navigation_summary" msgid="5905301067778326433">"Changez d\'application et revenez en arrière ou à l\'accueil avec les boutons situés en bas de l\'écran."</string>
+    <string name="nav_tutorial_button_description" msgid="5791791794770463386">"Démarrer le tutoriel sur la navigation par gestes"</string>
     <string name="keywords_system_navigation" msgid="3131782378486554934">"navigation système, navigation à deux boutons, navigation à trois boutons, navigation par gestes, balayer l\'écran"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Assistant numérique"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Balayer pour appeler l\'assistant"</string>
@@ -4219,7 +4259,8 @@
     <string name="right_edge" msgid="1505309103265829121">"Bord droit"</string>
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"Une sensibilité élevée peut perturber l\'interprétation des gestes effectués sur les bords de l\'écran dans les applications."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Sensibilité du retour en arrière"</string>
-    <string name="gesture_settings_activity_title" msgid="2025828425762595733">"Sensibilité de la navigation par gestes"</string>
+    <!-- no translation found for gesture_settings_activity_title (1882463161833981820) -->
+    <skip />
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"Navigation à boutons"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"navigation par gestes, sensibilité du retour en arrière, geste de retour"</string>
     <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"navigation, bouton d\'accueil"</string>
@@ -4350,9 +4391,15 @@
     <string name="storage_images" msgid="2055893015567979387">"Images"</string>
     <string name="storage_videos" msgid="6117698226447251033">"Vidéos"</string>
     <string name="storage_audio" msgid="5994664984472140386">"Audio"</string>
+    <!-- no translation found for storage_documents (7873134307844320096) -->
+    <skip />
+    <!-- no translation found for storage_other (7922190148479988838) -->
+    <skip />
     <string name="storage_apps" msgid="3564291603258795216">"Applis"</string>
     <string name="storage_documents_and_other" msgid="3293689243732236480">"Documents et autres"</string>
     <string name="storage_system" msgid="8472410119822911844">"Système"</string>
+    <string name="storage_os_name" msgid="4637680493234672410">"Android <xliff:g id="VERSION">%s</xliff:g>"</string>
+    <string name="storage_temporary_files" msgid="8254109904032452219">"Fichiers temporaires du système"</string>
     <string name="storage_trash" msgid="2807138998886084856">"Corbeille"</string>
     <string name="storage_trash_dialog_title" msgid="2296169576049935200">"Vider la corbeille ?"</string>
     <string name="storage_trash_dialog_ask_message" msgid="8982602137242358798">"La corbeille contient <xliff:g id="TOTAL">%1$s</xliff:g> de fichiers. Tous les éléments seront supprimés définitivement, et vous ne pourrez pas les restaurer."</string>
@@ -4465,7 +4512,7 @@
     <string name="change_nfc_tag_apps_detail_summary" msgid="3338220223868942195">"Autoriser cette appli à démarrer lorsqu\'un tag NFC est scanné.\nSi cette autorisation est activée, l\'appli sera disponible comme option chaque fois qu\'un tag sera détecté."</string>
     <string name="media_output_title" msgid="8283629315159510680">"Diffuser des contenus multimédias sur"</string>
     <string name="media_output_label_title" msgid="4139048973886819148">"Diffuser <xliff:g id="LABEL">%s</xliff:g> sur"</string>
-    <string name="media_output_title_without_playing" msgid="3339321669132875821">"L\'audio se mettra en marche"</string>
+    <string name="media_output_title_without_playing" msgid="3339321669132875821">"Lecture audio sur"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"Cet appareil"</string>
     <string name="media_out_summary_ongoing_call_state" msgid="475188726850090363">"Indisponible pendant les appels"</string>
     <string name="take_call_on_title" msgid="1159417893879946757">"Accepter l\'appel sur"</string>
@@ -4771,10 +4818,8 @@
     <string name="confirm_format_ext4_title" msgid="4453684705528818873">"Reformater l\'appareil en ext4 ?"</string>
     <string name="confirm_format_ext4_text" msgid="8164677342487500794">"L\'option pour les développeurs 16K est compatible avec le système de fichiers ext4. L\'appareil sera effacé et le système de fichiers sera remplacé par ext4 après confirmation."</string>
     <string name="format_ext4_failure_toast" msgid="6904611547290793885">"Échec du reformatage et de l\'effacement de la partition de données vers ext4."</string>
-    <!-- no translation found for confirm_oem_unlock_for_16k_title (6338135847153690912) -->
-    <skip />
-    <!-- no translation found for confirm_oem_unlock_for_16k_text (236718973897424382) -->
-    <skip />
+    <string name="confirm_oem_unlock_for_16k_title" msgid="6338135847153690912">"L\'appareil doit être débloqué OEM"</string>
+    <string name="confirm_oem_unlock_for_16k_text" msgid="236718973897424382">"Avant de pouvoir utiliser une option pour les développeurs en 16 K, l\'appareil doit être débloqué OEM. Dans le cadre du déblocage OEM, les données devront également être formatées. Veuillez vous assurer que l\'appareil est débloqué OEM, puis réessayez."</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Gestionnaire de rapport de bug"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Détermine quelle application gère le raccourci vers le rapport de bug sur votre appareil."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Personnel"</string>
@@ -4824,13 +4869,14 @@
     <string name="allow_mock_modem" msgid="3832264806530479214">"Autoriser le modem fictif"</string>
     <string name="allow_mock_modem_summary" msgid="9097416612748005374">"Autoriser cet appareil à exécuter le service de modem fictif pour les tests d\'instrumentation. Ne pas l\'activer lors d\'une utilisation normale du téléphone"</string>
     <string name="disable_screen_share_protections_for_apps_and_notifications" msgid="4987116103699222633">"Désactiver les protections de partage d\'écran"</string>
-    <string name="disable_screen_share_protections_for_apps_and_notifications_summary" msgid="932295234626582052">"Désactive les protections appliquées aux applis et notifications du système lorsque le partage d\'écran est en cours"</string>
+    <!-- no translation found for disable_screen_share_protections_for_apps_and_notifications_summary (5379583403909210858) -->
+    <skip />
     <string name="media_controls_title" msgid="403271085636252597">"Multimédia"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Épingler le lecteur multimédia"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Pour reprendre rapidement la lecture, le lecteur multimédia reste ouvert dans les Réglages rapides"</string>
-    <string name="media_controls_lockscreen_title" msgid="2188311721857512510">"Afficher le média sur l\'écran de verrouillage"</string>
+    <string name="media_controls_lockscreen_title" msgid="2188311721857512510">"Afficher le contenu multimédia sur l\'écran de verrouillage"</string>
     <string name="media_controls_lockscreen_description" msgid="3320333660404439510">"Pour reprendre rapidement la lecture, le lecteur multimédia reste ouvert sur l\'écran de verrouillage"</string>
-    <string name="media_controls_recommendations_title" msgid="3012692549413927608">"Afficher les recommandations de contenus multimédias proposées par Google Assistant"</string>
+    <string name="media_controls_recommendations_title" msgid="3012692549413927608">"Afficher les recommandations de contenus multimédias de Google Assistant"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"En fonction de votre activité"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Masquer le lecteur"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"Afficher le lecteur"</string>
