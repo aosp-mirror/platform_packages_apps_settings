@@ -31,7 +31,6 @@ import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -43,10 +42,12 @@ import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
+import org.robolectric.annotation.LooperMode;
 import org.robolectric.annotation.Resetter;
 import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(RobolectricTestRunner.class)
+@LooperMode(LooperMode.Mode.LEGACY)
 public class WallpaperSuggestionActivityTest {
 
     @Mock
@@ -101,7 +102,6 @@ public class WallpaperSuggestionActivityTest {
                 .isTrue();
     }
 
-    @Ignore("b/315124270")
     @Test
     public void addExtras_intentFromSetupWizard_extrasHasWallpaperOnlyAndLaunchedSuw() {
         WallpaperSuggestionActivity activity =
@@ -119,7 +119,6 @@ public class WallpaperSuggestionActivityTest {
                 .isEqualTo("app_launched_suw");
     }
 
-    @Ignore("b/315124270")
     @Test
     public void addExtras_intentNotFromSetupWizard_extrasHasFocusWallpaper() {
         WallpaperSuggestionActivity activity = Robolectric.buildActivity(
@@ -135,7 +134,7 @@ public class WallpaperSuggestionActivityTest {
 
     @Implements(WallpaperManager.class)
     public static class ShadowWallpaperManager extends
-        org.robolectric.shadows.ShadowWallpaperManager {
+            org.robolectric.shadows.ShadowWallpaperManager {
 
         private static int sWallpaperId;
 
