@@ -42,6 +42,7 @@ import androidx.fragment.app.FragmentActivity;
 import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.SubSettings;
+import com.android.settings.Utils;
 import com.android.settings.core.CategoryMixin.CategoryHandler;
 import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
 import com.android.settingslib.transition.SettingsTransitionHelper.TransitionType;
@@ -91,6 +92,7 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
             Log.w(TAG, "Devices lock task mode pinned.");
             finish();
         }
+        Utils.setupEdgeToEdge(this);
         final long startTime = System.currentTimeMillis();
         getLifecycle().addObserver(new HideNonSystemOverlayMixin(this));
         TextAppearanceConfig.setShouldLoadFontSynchronously(true);

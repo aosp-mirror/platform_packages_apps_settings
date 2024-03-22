@@ -103,10 +103,14 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
+import androidx.core.graphics.Insets;
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.core.graphics.drawable.RoundedBitmapDrawable;
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.Lifecycle;
 
 import com.android.internal.app.UnlaunchableAppActivity;
@@ -1373,6 +1377,27 @@ public final class Utils extends com.android.settingslib.Utils {
         UserProperties userProperties = userManager.getUserProperties(userHandle);
         return userProperties.getShowInQuietMode() == UserProperties.SHOW_IN_QUIET_MODE_HIDDEN
                 && userManager.isQuietModeEnabled(userHandle);
+    }
+
+    /**
+     * Enable new edge to edge feature.
+     *
+     * @param activity the Activity need to setup the edge to edge feature.
+     */
+    public static void setupEdgeToEdge(@NonNull FragmentActivity activity) {
+        if (com.android.window.flags.Flags.edgeToEdgeByDefault()) {
+            ViewCompat.setOnApplyWindowInsetsListener(activity.findViewById(android.R.id.content),
+                    (v, windowInsets) -> {
+                        Insets insets = windowInsets.getInsets(
+                                WindowInsetsCompat.Type.systemBars());
+                        // Apply the insets paddings to the view.
+                        v.setPadding(insets.left, insets.top, insets.right, insets.bottom);
+
+                        // Return CONSUMED if you don't want the window insets to keep being
+                        // passed down to descendant views.
+                        return WindowInsetsCompat.CONSUMED;
+                    });
+        }
     }
 
     private static FaceManager.RemovalCallback faceManagerRemovalCallback(int userId) {
