@@ -54,11 +54,10 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.LooperMode;
+import org.robolectric.shadows.ShadowLooper;
 
 /** Tests for {@link AccessibilityGestureNavigationTutorial}. */
 @RunWith(RobolectricTestRunner.class)
-@LooperMode(LooperMode.Mode.LEGACY)
 public final class AccessibilityGestureNavigationTutorialTest {
 
     @Rule
@@ -178,6 +177,7 @@ public final class AccessibilityGestureNavigationTutorialTest {
         final AlertDialog alertDialog =
                 createAccessibilityTutorialDialog(mContext, mShortcutTypes);
         alertDialog.show();
+        ShadowLooper.idleMainLooper();
 
         assertThat(alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).getVisibility())
                 .isEqualTo(View.GONE);
@@ -204,6 +204,7 @@ public final class AccessibilityGestureNavigationTutorialTest {
         alertDialog.show();
 
         alertDialog.getButton(DialogInterface.BUTTON_POSITIVE).performClick();
+        ShadowLooper.idleMainLooper();
 
         assertThat(alertDialog.isShowing()).isFalse();
     }
@@ -216,6 +217,7 @@ public final class AccessibilityGestureNavigationTutorialTest {
         alertDialog.show();
 
         alertDialog.getButton(DialogInterface.BUTTON_POSITIVE).performClick();
+        ShadowLooper.idleMainLooper();
 
         verify(mOnClickListener).onClick(alertDialog, DialogInterface.BUTTON_POSITIVE);
     }
@@ -228,6 +230,7 @@ public final class AccessibilityGestureNavigationTutorialTest {
         alertDialog.show();
 
         alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).performClick();
+        ShadowLooper.idleMainLooper();
 
         final Intent intent = shadowOf(activity).peekNextStartedActivity();
         assertThat(intent.getComponent().getClassName()).isEqualTo(SubSettings.class.getName());
@@ -243,6 +246,7 @@ public final class AccessibilityGestureNavigationTutorialTest {
                 showGestureNavigationTutorialDialog(mContext, mOnDismissListener);
 
         alertDialog.getButton(DialogInterface.BUTTON_POSITIVE).performClick();
+        ShadowLooper.idleMainLooper();
 
         assertThat(alertDialog.isShowing()).isFalse();
         verify(mOnDismissListener).onDismiss(alertDialog);

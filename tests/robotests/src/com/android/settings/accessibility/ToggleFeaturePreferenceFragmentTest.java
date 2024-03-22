@@ -74,15 +74,14 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
-import org.robolectric.annotation.LooperMode;
 import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.shadows.ShadowLooper;
 
 import java.util.Locale;
 
 /** Tests for {@link ToggleFeaturePreferenceFragment} */
 @RunWith(RobolectricTestRunner.class)
-@LooperMode(LooperMode.Mode.LEGACY)
 @Config(shadows = {
         ShadowFragment.class,
 })
@@ -252,6 +251,7 @@ public class ToggleFeaturePreferenceFragmentTest {
         final CheckBox hardwareTypeCheckBox = dialogHardwareView.findViewById(R.id.checkbox);
         hardwareTypeCheckBox.setChecked(true);
         dialog.getButton(DialogInterface.BUTTON_POSITIVE).callOnClick();
+        ShadowLooper.idleMainLooper();
         final boolean skipTimeoutRestriction = Settings.Secure.getInt(mContext.getContentResolver(),
                 Settings.Secure.SKIP_ACCESSIBILITY_SHORTCUT_DIALOG_TIMEOUT_RESTRICTION, 0) != 0;
 

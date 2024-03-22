@@ -61,15 +61,14 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
-import org.robolectric.annotation.LooperMode;
 import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.shadows.ShadowLooper;
 
 /**
  * Tests for {@link PreviewSizeSeekBarController}.
  */
 @RunWith(RobolectricTestRunner.class)
-@LooperMode(LooperMode.Mode.LEGACY)
 @Config(shadows = {ShadowInteractionJankMonitor.class})
 public class PreviewSizeSeekBarControllerTest {
 
@@ -194,8 +193,9 @@ public class PreviewSizeSeekBarControllerTest {
         mSeekBarPreference.setProgress(mSeekBarPreference.getMax());
         mSeekBarPreference.onProgressChanged(new SeekBar(mContext), /* progress= */
                 0, /* fromUser= */ false);
+        ShadowLooper.idleMainLooper();
 
-        verify(mInteractionListener).notifyPreferenceChanged();
+        verify(mInteractionListener).onProgressChanged();
     }
 
     @Test
@@ -259,6 +259,7 @@ public class PreviewSizeSeekBarControllerTest {
         mSeekBarController.onCreate(savedInstanceState);
 
         mSeekBarController.displayPreference(mPreferenceScreen);
+        ShadowLooper.idleMainLooper();
 
         assertThat(getLatestPopupWindow().isShowing()).isTrue();
     }
