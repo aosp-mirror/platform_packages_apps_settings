@@ -38,6 +38,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.applications.defaultapps.DefaultAppPickerFragment;
+import com.android.settings.development.DeveloperOptionAwareMixin;
 import com.android.settingslib.applications.DefaultAppInfo;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.widget.CandidateInfo;
@@ -50,7 +51,8 @@ import java.util.List;
 /**
  * Picker for BugReportHandler.
  */
-public class BugReportHandlerPicker extends DefaultAppPickerFragment {
+public class BugReportHandlerPicker extends DefaultAppPickerFragment implements
+        DeveloperOptionAwareMixin {
     private static final String TAG = "BugReportHandlerPicker";
 
     private BugReportHandlerUtil mBugReportHandlerUtil;

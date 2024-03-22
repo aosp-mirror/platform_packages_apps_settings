@@ -33,6 +33,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.development.DeveloperOptionAwareMixin;
 import com.android.settings.widget.RadioButtonPickerFragment;
 import com.android.settingslib.widget.CandidateInfo;
 import com.android.settingslib.widget.FooterPreference;
@@ -45,7 +46,8 @@ import java.util.List;
 /**
  * Provides options for selecting the default USB mode.
  */
-public class UsbDefaultFragment extends RadioButtonPickerFragment {
+public class UsbDefaultFragment extends RadioButtonPickerFragment implements
+        DeveloperOptionAwareMixin {
 
     private static final String TAG = "UsbDefaultFragment";
 

@@ -32,7 +32,8 @@ import java.util.List;
  * Fragment shown when clicking on a paired device in the Wireless
  * Debugging fragment.
  */
-public class AdbDeviceDetailsFragment extends DashboardFragment {
+public class AdbDeviceDetailsFragment extends DashboardFragment implements
+        DeveloperOptionAwareMixin {
     private static final String TAG = "AdbDeviceDetailsFrag";
     private PairDevice mPairedDevice;
 
