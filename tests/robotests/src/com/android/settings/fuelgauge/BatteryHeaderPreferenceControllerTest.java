@@ -28,10 +28,8 @@ import android.content.Intent;
 import android.hardware.usb.UsbManager;
 import android.hardware.usb.UsbPort;
 import android.hardware.usb.UsbPortStatus;
-import android.icu.text.NumberFormat;
 import android.os.BatteryManager;
 import android.os.PowerManager;
-import android.text.TextUtils;
 
 import androidx.preference.PreferenceScreen;
 
@@ -320,9 +318,7 @@ public class BatteryHeaderPreferenceControllerTest {
     }
 
     private CharSequence formatBatteryPercentageText() {
-        return TextUtils.expandTemplate(
-                mContext.getText(R.string.battery_header_title_alternate),
-                NumberFormat.getIntegerInstance().format(BATTERY_LEVEL));
+        return com.android.settings.Utils.formatPercentage(BATTERY_LEVEL);
     }
 
     private void setChargingState(boolean isDischarging, boolean updatedByStatusFeature) {

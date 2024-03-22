@@ -17,10 +17,8 @@ package com.android.settings.fuelgauge;
 
 import android.content.Context;
 import android.content.Intent;
-import android.icu.text.NumberFormat;
 import android.os.BatteryManager;
 import android.os.PowerManager;
-import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
@@ -145,8 +143,6 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
     }
 
     private CharSequence formatBatteryPercentageText(int batteryLevel) {
-        return TextUtils.expandTemplate(
-                mContext.getText(R.string.battery_header_title_alternate),
-                NumberFormat.getIntegerInstance().format(batteryLevel));
+        return com.android.settings.Utils.formatPercentage(batteryLevel);
     }
 }

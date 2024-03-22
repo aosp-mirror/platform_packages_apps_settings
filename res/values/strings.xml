@@ -2319,6 +2319,14 @@
     <!-- Wi-Fi settings screen, advanced, title of the item to show the randomized Wi-Fi MAC address when disconnected. [CHAR LIMIT=69] -->
     <string name="wifi_advanced_randomized_mac_address_disconnected_title">Randomized MAC address (last used)</string>
 
+    <!-- Wifi Network Certificates -->
+    <!-- Wifi certificates summary: More than one certificate -->
+    <string name="wifi_certificate_summary_Certificates"><xliff:g id="number" example="2">%d</xliff:g> certificates</string>
+    <!-- Wifi certificates summary: System certificate -->
+    <string name="wifi_certificate_summary_system">System certificate</string>
+    <!-- Wifi certificates summary: TOFU certificate -->
+    <string name="wifi_certificate_summary_pinning">Certificate pinning</string>
+
     <!-- Wifi Network Details -->
     <!-- Wifi details title-->
     <string name="wifi_details_title">Network details</string>
@@ -5838,9 +5846,6 @@
       other   {# apps restricted}
     }</string>
 
-    <!-- Title to display the battery percentage. [CHAR LIMIT=24] -->
-    <string name="battery_header_title_alternate"><xliff:g id="number" example="88">^1</xliff:g><small> <font size="20"><xliff:g id="unit" example="%">%</xliff:g></font></small></string>
-
     <!-- Summary for top level battery tile if battery is not present. [CHAR LIMIT=NONE] -->
     <string name="battery_missing_message">Problem reading the battery meter.</string>
     <!-- Help text if battery is not present. [CHAR LIMIT=NONE] -->
@@ -6263,6 +6268,10 @@
     <string name="credential_for_vpn_and_apps">Installed for VPN and apps</string>
     <!-- Sub-heading for a user credential installed for Wi-Fi configuration. [CHAR LIMIT=NONE]. -->
     <string name="credential_for_wifi">Installed for Wi\u2011Fi</string>
+    <!-- Sub-heading for a user credential installed for particular Wi-Fi configuration. [CHAR LIMIT=NONE]. -->
+    <string name="credential_installed_for_wifi">Installed for <xliff:g id="ssid" example="SSID">%s</xliff:g></string>
+    <!-- Sub-heading for a user credential using for Wi-Fi configuration. [CHAR LIMIT=NONE]. -->
+    <string name="credential_using_for_wifi">Using for <xliff:g id="ssid" example="SSID">%s</xliff:g></string>
     <!-- Sub-heading for a user credential installed to be used as part of a Wi-Fi configuration. [CHAR LIMIT=NONE]. -->
     <string name="credential_for_wifi_in_use">Installed for Wi\u2011Fi (In use)</string>
     <!-- Description of dialog to reset credential storage [CHAR LIMIT=NONE] -->

@@ -295,7 +295,9 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
     }
 
     public void removeRegister(MobileNetworkCallback mobileNetworkCallback) {
-        sCallbacks.remove(mobileNetworkCallback);
+        synchronized (this) {
+            sCallbacks.remove(mobileNetworkCallback);
+        }
         if (sCallbacks.isEmpty()) {
             mSubscriptionManager.removeOnSubscriptionsChangedListener(this);
             mAirplaneModeObserver.unRegister(mContext);
