@@ -893,7 +893,7 @@
     <string name="wifi_wakeup_summary_no_location" msgid="681323616606485096">"Ez dago erabilgarri kokapena desaktibatuta dagoelako. Aktibatu "<annotation id="link">"kokapena"</annotation>"."</string>
     <string name="wifi_install_credentials" msgid="5192903644606839972">"Instalatu ziurtagiriak"</string>
     <string name="wifi_scan_notify_text" msgid="7163137260385995873">"Kokapenaren zehaztasuna hobetzeko, aplikazioek eta zerbitzuek wifi-sareak bilatzen jarraituko dute, baita wifi-konexioa desaktibatuta dagoenean ere. Besteak beste, kokapenean oinarritutako eginbideak eta zerbitzuak hobetzeko erabil daiteke. Aukera hori aldatzeko, joan <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>wifi-sareak bilatzeko eginbidearen ezarpenetara<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
-    <string name="wifi_scan_notify_text_scanning_off" msgid="7439201783168213149">"Kokapenaren zehaztasuna hobetzeko, aktibatu Wifi-sareen bilaketa <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>wifi-sareen bilaketaren ezarpenetan<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
+    <string name="wifi_scan_notify_text_scanning_off" msgid="7439201783168213149">"Kokapenaren zehaztasuna hobetzeko, aktibatu Wifi-sareak bilatzea <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>wifi-sareak bilatzeko eginbidearen ezarpenetan<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="wifi_cellular_data_fallback_title" msgid="2844653839490977040">"Aldatu datu-konexiora automatikoki"</string>
     <string name="wifi_cellular_data_fallback_summary" msgid="7039944853033554386">"Wi-Fi bidez ezin denean, erabili datu-konexioa Internetera konektatzeko. Agian datu-erabilera ordaindu beharko duzu."</string>
     <string name="wifi_add_network" msgid="4178564862173751181">"Gehitu sare bat"</string>
@@ -904,11 +904,11 @@
     <string name="wifi_empty_list_wifi_off" msgid="7697422506708419298">"Sare erabilgarriak ikusteko, aktibatu wifi-konexioa."</string>
     <string name="wifi_empty_list_wifi_on" msgid="2448010040478321376">"Sareak bilatzen…"</string>
     <string name="wifi_empty_list_user_restricted" msgid="454861411536708709">"Ez duzu wifi-sarea aldatzeko baimenik."</string>
-    <string name="wifi_settings_scanning_required_title" msgid="1088663325396007484">"Wifi-sareen bilaketa aktibatu nahi al duzu?"</string>
-    <string name="wifi_settings_scanning_required_summary" msgid="4770243653675416569">"Wifi-konexioa automatikoki aktibatzeko, Wifi-sareen bilaketa aktibatu behar duzu lehenik."</string>
-    <string name="wifi_settings_scanning_required_info" msgid="1473411566072565789">"Wifi-sareen bilaketari esker, aplikazioek eta zerbitzuek edonoiz bila ditzakete wifi-sareak, baita wifi-konexioa desaktibatuta dagoenean ere. Kokapenean oinarritutako eginbideak eta zerbitzuak hobetzeko erabil daiteke, besteak beste."</string>
+    <string name="wifi_settings_scanning_required_title" msgid="1088663325396007484">"Wifi-sareak bilatzeko eginbidea aktibatu nahi duzu?"</string>
+    <string name="wifi_settings_scanning_required_summary" msgid="4770243653675416569">"Wifi-konexioa automatikoki aktibatzeko, wifi-sareak bilatzeko eginbidea aktibatu behar duzu lehenik."</string>
+    <string name="wifi_settings_scanning_required_info" msgid="1473411566072565789">"Wifi-sareak bilatzeko eginbideari esker, aplikazioek eta zerbitzuek edonoiz bila ditzakete wifi-sareak, baita wifi-konexioa desaktibatuta dagoenean ere. Kokapenean oinarritutako eginbideak eta zerbitzuak hobetzeko erabil daiteke, besteak beste."</string>
     <string name="wifi_settings_scanning_required_turn_on" msgid="1112223196123955447">"Aktibatu"</string>
-    <string name="wifi_settings_scanning_required_enabled" msgid="4721729158927146365">"Aktibatu da Wifi-sareen bilaketa"</string>
+    <string name="wifi_settings_scanning_required_enabled" msgid="4721729158927146365">"Aktibatu da Wifi-sareak bilatzea"</string>
     <string name="wifi_settings_warning_wep_network" msgid="2655077013800385646">"Sare honek hain segurua ez den segurtasun-protokolo zaharrago bat erabiltzen du"</string>
     <string name="wifi_settings_wep_networks_blocked_title" msgid="8337700496544833669">"Blokeatu da <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="wifi_settings_wep_networks_summary_toggle_off" msgid="1113138364046142949">"Sareak hain segurua ez den segurtasun-protokolo zaharrago bat erabiltzen du: WEP. Hala eta guztiz ere konektatu nahi baduzu, eman WEP sareak erabiltzeko baimena."</string>
@@ -1036,7 +1036,7 @@
     <string name="wifi_details_title" msgid="222735438574597493">"Sarearen xehetasunak"</string>
     <string name="wifi_details_subnet_mask" msgid="1619151769276260512">"Azpisare-maskara"</string>
     <string name="wifi_type_title" msgid="2174893488722015838">"Mota"</string>
-    <string name="wifi_details_dns" msgid="273231528073312579">"DNS"</string>
+    <string name="wifi_details_dns" msgid="273231528073312579">"DNSa"</string>
     <string name="wifi_details_ipv6_address_header" msgid="1913151339341722443">"IPv6 helbideak"</string>
     <string name="hotspot_device_details_category" msgid="3110651914598697220">"Wifi-gunearen gailuaren xehetasunak"</string>
     <string name="hotspot_device_details_internet_source" msgid="1563266599673281875">"Interneten iturburua"</string>
@@ -1099,7 +1099,7 @@
     <string name="wifi_hotspot_speed_summary_unavailable" msgid="7276080644693388756">"Ez dago erabilgarri zure herrialdean edo lurraldean"</string>
     <string name="wifi_hotspot_speed_footer" msgid="8846939503916795002">"Maiztasun hobetsia erabilgarri ez dagoenean, baliteke wifi-guneak beste bat erabiltzea. Maiztasuna aldatuz gero, wifi-gunearen segurtasun-ezarpenak ere aldatuko dira agian."</string>
     <string name="wifi_hotspot_security_summary_unavailable" msgid="117582979310345853">"Ezin da erabili 6 GHz-ko frekuentzian"</string>
-    <string name="wifi_hotspot_security_footer" msgid="4608329688744949796">"Wifi-gunearen frekuentzia aldatuz gero, baliteke segurtasun-ezarpenak aldatzea"</string>
+    <string name="wifi_hotspot_security_footer" msgid="4608329688744949796">"Wifi-gunearen maiztasuna aldatuz gero, baliteke segurtasun-ezarpenak aldatzea"</string>
     <string name="wifi_hotspot_instant_title" msgid="7052526695338853703">"Istanteko wifi-gunea"</string>
     <string name="wifi_hotspot_instant_summary_on" msgid="3142749148673081288">"Aktibatuta"</string>
     <string name="wifi_hotspot_instant_summary_off" msgid="8594065628453795615">"Desaktibatuta"</string>
@@ -1502,7 +1502,7 @@
     <string name="tether_settings_title_wifi" msgid="4327056146425282159">"Wifi-gune eramangarria"</string>
     <string name="tether_settings_title_bluetooth" msgid="8878813702520141084">"Konexioa partekatzea (Bluetooth)"</string>
     <string name="tether_settings_title_usb_bluetooth" msgid="4437274151658505496">"Konexioa partekatzea"</string>
-    <string name="tether_settings_title_all" msgid="6807525590937697228">"Wifi-gunea eta konexioa partekatzeko aukera"</string>
+    <string name="tether_settings_title_all" msgid="6807525590937697228">"Wifi-gunea eta konexioa partekatzea"</string>
     <string name="tether_settings_summary_hotspot_on_tether_on" msgid="6110241048260139633">"Wifi-gunea aktibatuta, konexioa partekatzea"</string>
     <string name="tether_settings_summary_hotspot_on_tether_off" msgid="5057598961245943644">"Wifi-gunea aktibatuta"</string>
     <string name="tether_settings_summary_hotspot_off_tether_on" msgid="7181518138494995888">"Konexioa partekatzea"</string>
@@ -1550,7 +1550,7 @@
     <string name="location_no_recent_accesses" msgid="6031735777805464247">"Ez dago kokapena berriki atzitu duen aplikaziorik"</string>
     <string name="location_high_battery_use" msgid="4277318891200626524">"Bateria-erabilera handia"</string>
     <string name="location_low_battery_use" msgid="5218950289737996431">"Bateria-erabilera txikia"</string>
-    <string name="location_scanning_wifi_always_scanning_title" msgid="5004781272733434794">"Wifi-sareen bilaketa"</string>
+    <string name="location_scanning_wifi_always_scanning_title" msgid="5004781272733434794">"Wifi-sareak bilatzea"</string>
     <string name="location_scanning_wifi_always_scanning_description" msgid="6236055656376931306">"Eman wifi-sareak edozein unetan bilatzeko baimena aplikazioei eta zerbitzuei, baita wifi-konexioa desaktibatuta dagoenean ere. Kokapenean oinarritutako eginbideak eta zerbitzuak hobetzeko erabil daiteke hori, besteak beste."</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"Bluetooth bidezko bilaketa"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"Eman inguruko gailuak edozein unetan bilatzeko baimena aplikazioei eta zerbitzuei, baita Bluetootha desaktibatuta dagoenean ere. Kokapenean oinarritutako eginbideak eta zerbitzuak hobetzeko erabil daiteke hori, besteak beste."</string>
@@ -2632,11 +2632,11 @@
     <string name="vpn_settings_insecure_single" msgid="9012504179995045195">"Ez da segurua"</string>
     <string name="vpn_settings_single_insecure_multiple_total" msgid="6107225844641301139">"<xliff:g id="VPN_COUNT">%d</xliff:g> ez-segurua"</string>
     <string name="vpn_settings_multiple_insecure_multiple_total" msgid="1706236062478680488">"<xliff:g id="VPN_COUNT">%d</xliff:g> ez-seguruak"</string>
-    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Sareko konexio egokitua"</string>
+    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Konexio egokitua"</string>
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Bateriaren iraupena luzatzen, eta gailuaren errendimendua hobetzen du sareko konexioak automatikoki kudeatuz."</string>
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"Aktibatuta"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"Desaktibatuta"</string>
-    <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Erabili sareko konexio egokitua"</string>
+    <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Erabili konexio egokitua"</string>
     <string name="credentials_title" msgid="7535942196886123656">"Kredentzialen biltegia"</string>
     <string name="credentials_install" msgid="3933218407598415827">"Instalatu ziurtagiriak"</string>
     <string name="credentials_reset" msgid="4246628389366452655">"Garbitu kredentzialak"</string>
