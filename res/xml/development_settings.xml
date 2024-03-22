@@ -411,6 +411,11 @@
             android:positiveButtonText=""
             android:negativeButtonText="@string/dlg_ok"/>
 
+        <ListPreference
+            android:key="bluetooth_audio_codec_settings_list"
+            android:title="@string/bluetooth_select_a2dp_codec_type"
+            android:dialogTitle="@string/bluetooth_select_a2dp_codec_type_dialog_title"/>
+
         <com.android.settings.development.bluetooth.BluetoothSampleRateDialogPreference
             android:key="bluetooth_sample_rate_settings"
             android:title="@string/bluetooth_select_a2dp_codec_sample_rate"
