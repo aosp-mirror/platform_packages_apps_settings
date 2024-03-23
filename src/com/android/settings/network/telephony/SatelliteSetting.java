@@ -16,6 +16,8 @@
 
 package com.android.settings.network.telephony;
 
+import static android.telephony.CarrierConfigManager.KEY_SATELLITE_INFORMATION_REDIRECT_URL_STRING;
+
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
@@ -23,7 +25,9 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.os.UserManager;
+import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.telephony.satellite.SatelliteManager;
@@ -60,7 +64,9 @@ public class SatelliteSetting extends RestrictedDashboardFragment {
 
     private Activity mActivity;
     private TelephonyManager mTelephonymanager;
+    private CarrierConfigManager mCarrierConfigManager;
     private SatelliteManager mSatelliteManager;
+    private PersistableBundle mConfigBundle;
     private int mSubId;
 
     public SatelliteSetting() {
@@ -78,6 +84,7 @@ public class SatelliteSetting extends RestrictedDashboardFragment {
 
         mActivity = getActivity();
         mTelephonymanager = mActivity.getSystemService(TelephonyManager.class);
+        mCarrierConfigManager = mActivity.getSystemService(CarrierConfigManager.class);
         mSatelliteManager = mActivity.getSystemService(SatelliteManager.class);
         mSubId = mActivity.getIntent().getIntExtra(SUB_ID,
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
@@ -134,7 +141,7 @@ public class SatelliteSetting extends RestrictedDashboardFragment {
             preference.setSummary(spannable);
             /* The link will lead users to a guide page */
             preference.setOnPreferenceClickListener(pref -> {
-                String url = getResources().getString(R.string.more_info_satellite_messaging_link);
+                String url = readSatelliteMoreInfoString(mSubId);
                 if (!url.isEmpty()) {
                     Uri uri = Uri.parse(url);
                     Intent intent = new Intent(Intent.ACTION_VIEW, uri);
@@ -163,7 +170,7 @@ public class SatelliteSetting extends RestrictedDashboardFragment {
                             operatorName));
 
             final String[] link = new String[1];
-            link[0] = getResources().getString(R.string.more_info_satellite_messaging_link);
+            link[0] = readSatelliteMoreInfoString(mSubId);
             footerPreference.setLearnMoreAction(view -> {
                 if (!link[0].isEmpty()) {
                     Intent helpIntent = HelpUtils.getHelpIntent(mActivity, link[0],
@@ -190,6 +197,18 @@ public class SatelliteSetting extends RestrictedDashboardFragment {
             loge(ex.toString());
             return false;
         }
+    }
+
+    private String readSatelliteMoreInfoString(int subId) {
+        if (mConfigBundle == null) {
+            mConfigBundle = mCarrierConfigManager.getConfigForSubId(subId,
+                    KEY_SATELLITE_INFORMATION_REDIRECT_URL_STRING);
+            if (mConfigBundle.isEmpty()) {
+                Log.d(TAG, "SatelliteSettings: getDefaultConfig");
+                mConfigBundle = CarrierConfigManager.getDefaultConfig();
+            }
+        }
+        return mConfigBundle.getString(KEY_SATELLITE_INFORMATION_REDIRECT_URL_STRING, "");
     }
 
     private static void loge(String message) {
