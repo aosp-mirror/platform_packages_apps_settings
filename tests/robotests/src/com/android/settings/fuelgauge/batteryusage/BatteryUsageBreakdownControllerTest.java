@@ -335,7 +335,7 @@ public final class BatteryUsageBreakdownControllerTest {
                         /* foregroundUsageTimeInMs= */ DateUtils.MINUTE_IN_MILLIS - 1,
                         /* foregroundServiceUsageTimeInMs= */ 0,
                         /* backgroundUsageTimeInMs= */ 0));
-        assertThat(pref.getSummary().toString()).isEqualTo("Total: less than a min");
+        assertThat(pref.getSummary().toString()).isEqualTo("Total: less than a minute");
     }
 
     @Test
@@ -432,7 +432,7 @@ public final class BatteryUsageBreakdownControllerTest {
                         /* foregroundServiceUsageTimeInMs= */ 0,
                         /* backgroundUsageTimeInMs= */ DateUtils.MINUTE_IN_MILLIS - 1));
         assertThat(pref.getSummary().toString())
-                .isEqualTo("Screen time: less than a min\nBackground: less than a min");
+                .isEqualTo("Screen time: less than a minute\nBackground: less than a minute");
     }
 
     private BatteryDiffEntry createBatteryDiffEntry(

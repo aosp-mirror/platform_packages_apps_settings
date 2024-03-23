@@ -86,6 +86,7 @@
     <string name="bluetooth_media_title" msgid="2878373577382067290">"メディア、システム音"</string>
     <string name="bluetooth_notification_title" msgid="8708962394926222039">"通知"</string>
     <string name="bluetooth_audio_routing_footer_summary" msgid="410260713589309293">"デフォルトでは、音声出力方法はアプリによって決まります"</string>
+    <string name="bluetooth_audio_codec_default_selection" msgid="4753278792700664175">"システムの選択（デフォルト）を使用"</string>
     <string name="bluetooth_device" msgid="2217973503732544291">"名前のないBluetoothデバイス"</string>
     <string name="progress_scanning" msgid="2564746192843011826">"検索中"</string>
     <string name="bluetooth_no_devices_found" msgid="7704539337219953182">"周辺にBluetoothデバイスが見つかりません"</string>
@@ -208,9 +209,9 @@
     <string name="title_regional_pref_footer" msgid="7450438024324794380">"アプリで地域別の設定がサポートされていない場合は、デフォルトの言語 / 地域設定が使用されます。"</string>
     <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"詳しくは、言語設定についての説明をご覧ください。"</string>
     <string name="category_title_terms_of_address" msgid="4309422700380895278">"追加設定"</string>
-    <string name="terms_of_address_title" msgid="4064593634733842458">"呼び方"</string>
-    <string name="terms_of_address_summary" msgid="6136134336560679144">"自分を何と呼んでほしいかを設定します"</string>
-    <string name="terms_of_address_intro_title" msgid="6149691509414243483">"アプリがあなたを呼ぶときに使用できる呼び方を設定できます。"</string>
+    <string name="terms_of_address_title" msgid="7338630812197476808">"あなたの呼び方を選択する"</string>
+    <string name="terms_of_address_summary" msgid="7802443422612600620">"デバイスであなたの呼び方をカスタマイズできます。"</string>
+    <string name="terms_of_address_intro_title" msgid="1533951542181569335">"この設定により、ほとんどのシステムアプリであなたの呼び方をカスタマイズできます。あなたがインストールしたアプリでは、この設定は使用されません。"</string>
     <string name="terms_of_address_not_specified" msgid="4439257779351251973">"指定しない"</string>
     <string name="terms_of_address_feminine" msgid="1743479869695539283">"女性"</string>
     <string name="terms_of_address_masculine" msgid="983106046135098856">"男性"</string>
@@ -555,22 +556,33 @@
     <string name="private_space_category_ways_to_unlock" msgid="4356631225316950046">"ロック解除方法"</string>
     <string name="private_space_screen_lock_summary" msgid="394837965365561070">"デバイスと同じ画面ロックを使用中"</string>
     <string name="private_space_new_lock_title" msgid="9056139964133004094">"プライベート スペースの新規ロックを選択しますか？"</string>
+    <!-- no translation found for private_space_new_lock_message (3117703578905489206) -->
+    <skip />
     <string name="private_space_auto_lock_title" msgid="8663409382910601261">"プライベート スペースを自動的にロックする"</string>
     <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"デバイスを一定時間使用していないときに、プライベート スペースを自動的にロックできます"</string>
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"デバイスのロック時は毎回"</string>
     <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"操作が行われない状態で 5 分経過後"</string>
     <string name="private_space_auto_lock_never" msgid="595014527119778873">"なし"</string>
-    <string name="private_space_hide_title" msgid="8687034008994037610">"ロック時に表示しない"</string>
-    <string name="privatespace_hide_page_title" msgid="8417507414027827566">"ロック時にプライベート スペースを表示しない"</string>
-    <string name="privatespace_hide_page_summary" msgid="5525422595477989312">"プライベート スペースがデバイスにあることを秘密にするために、アプリのリストで非表示にできます"</string>
-    <string name="privatespace_access_header" msgid="6066826215718835041">"非表示のプライベート スペースにアクセスする"</string>
-    <string name="privatespace_search_description" msgid="3121043205513022357">"アプリの一覧の検索バーで「プライベート スペース」を検索する"</string>
-    <string name="privatespace_tap_tile_description" msgid="8346440188590931635">"[プライベート スペース] のタイルをタップする"</string>
-    <string name="privatespace_unlock_description" msgid="3177710543121916413">"プライベート スペースのロックを解除する"</string>
-    <string name="privatespace_hide_off_summary" msgid="7227778747159633671">"OFF"</string>
-    <string name="privatespace_hide_on_summary" msgid="6136704537527640183">"ON"</string>
-    <string name="private_space_hide_dialog_title" msgid="3192253150765516720">"プライベート スペースは次回ロックしたときに非表示になります"</string>
-    <string name="private_space_hide_dialog_message" msgid="2006421821648157211">"非表示のときにアクセスするには、アプリリストの検索バーにプライベート スペースと入力します"</string>
+    <!-- no translation found for private_space_hide_page_title (4351404195904146088) -->
+    <skip />
+    <!-- no translation found for private_space_hide_page_summary (6247773353685839242) -->
+    <skip />
+    <!-- no translation found for private_space_access_header (1077082416567150819) -->
+    <skip />
+    <!-- no translation found for private_space_search_description (1538155187658429618) -->
+    <skip />
+    <!-- no translation found for private_space_tap_tile_description (6173556870938267361) -->
+    <skip />
+    <!-- no translation found for private_space_unlock_description (5527228922778630361) -->
+    <skip />
+    <!-- no translation found for private_space_hide_off_summary (8565973976602078315) -->
+    <skip />
+    <!-- no translation found for private_space_hide_on_summary (3450844101901438867) -->
+    <skip />
+    <!-- no translation found for private_space_hide_dialog_title (6439207708506990156) -->
+    <skip />
+    <!-- no translation found for private_space_hide_dialog_message (618693520130744836) -->
+    <skip />
     <string name="private_space_hide_dialog_button" msgid="4157191429310035457">"OK"</string>
     <string name="private_space_category_system" msgid="1286843321867285700">"システム"</string>
     <string name="private_space_delete_title" msgid="636873505724100006">"プライベート スペースの削除"</string>
@@ -596,6 +608,7 @@
     <string name="private_space_protected_lock_text" msgid="9123250938334372735"><b>"ロックを設定する"</b>\n"スペースをロックして、他のユーザーが開けないようにできます"</string>
     <string name="private_space_install_apps_text" msgid="5693139160766464498"><b>"アプリをインストールする"</b>\n"プライベート スペース専用の Google Play ストアを使って、アプリを簡単にインストールできます。"</string>
     <string name="private_space_apps_permission_text" msgid="7030946025253366172">"プライベート スペースがロックされている場合、プライベート スペースにあるアプリは、権限マネージャ、プライバシー ダッシュボード、その他の設定に表示されません。\n\nプライベート スペースを新しいデバイスに移動することはできません。別のデバイスで使用したい場合は、別のプライベート スペースを設定する必要があります。\n\nお使いのデバイスをパソコンに接続したり、デバイスに有害なアプリをインストールしたりしたユーザーが、あなたのプライベート スペースにアクセスできる可能性があります。"</string>
+    <string name="private_space_learn_more_text" msgid="5314198983263277586">"プライベート スペースの詳細"</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"プライベート スペースを設定しています…"</string>
     <string name="private_space_notifications_hidden_title" msgid="2009112565217540581">"プライベート スペースがロックされているときは、プライベート スペースのアプリからの通知は表示されません"</string>
     <string name="private_space_explore_settings_title" msgid="1448128245941571654">"プライベート スペースを非表示にして自動ロックを設定するには、プライベート スペースの設定を確認してください"</string>
@@ -698,35 +711,15 @@
 
 </xliff:g>パターンを削除すると、デバイスに保存されている指紋モデルが削除されます。顔モデルも安全かつ完全に削除されます。アプリでの認証に顔や指紋を使用できなくなります。"</string>
     <string name="unlock_disable_frp_warning_content_pin" msgid="122154942944422284">"PIN は紛失・盗難時にスマートフォンを保護します"</string>
-    <string name="unlock_disable_frp_warning_content_pin_authbound_keys" msgid="6497861740382402784">"PIN などの保存されているデータが失われます。<xliff:g id="EMPTY_LINE_0">
-
-</xliff:g>タッチ決済に設定したカードが削除されます。<xliff:g id="EMPTY_LINE_1">
-
-</xliff:g>デバイスのロック解除を必要とするウォレットなどのアプリが正しく動作しなくなる可能性があります。"</string>
     <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="983373874470746066">"PIN は紛失・盗難時にスマートフォンを保護します。<xliff:g id="EMPTY_LINE">
 
 </xliff:g>PIN を削除すると、デバイスに保存されている指紋モデルも削除されます。アプリでの認証に指紋を使用できなくなります。"</string>
-    <string name="unlock_disable_frp_warning_content_pin_fingerprint_authbound_keys" msgid="8930057076658360799">"PIN、指紋モデルなどの保存されているデータが失われます。<xliff:g id="EMPTY_LINE_0">
-
-</xliff:g>タッチ決済に設定したカードが削除されます。<xliff:g id="EMPTY_LINE_1">
-
-</xliff:g>デバイスのロック解除を必要とするウォレットなどのアプリが正しく動作しなくなる可能性があります。"</string>
     <string name="unlock_disable_frp_warning_content_pin_face" msgid="5607150515413131761">"PIN は紛失・盗難時にスマートフォンを保護します。<xliff:g id="EMPTY_LINE">
 
 </xliff:g>PIN を削除すると、顔認証のモデルも安全かつ完全に削除されます。アプリでの認証に顔を使用できなくなります。"</string>
-    <string name="unlock_disable_frp_warning_content_pin_face_authbound_keys" msgid="979399855891561038">"PIN、顔モデルなどの保存されているデータが失われます。<xliff:g id="EMPTY_LINE_0">
-
-</xliff:g>タッチ決済に設定したカードが削除されます。<xliff:g id="EMPTY_LINE_1">
-
-</xliff:g>デバイスのロック解除を必要とするウォレットなどのアプリが正しく動作しなくなる可能性があります。"</string>
     <string name="unlock_disable_frp_warning_content_pin_face_fingerprint" msgid="1821792325159866312">"PIN は紛失・盗難時にスマートフォンを保護します。<xliff:g id="EMPTY_LINE">
 
 </xliff:g>PIN を削除すると、デバイスに保存されている指紋モデルと顔認証モデルが安全かつ完全に削除されます。アプリでの認証に顔や指紋を使用できなくなります。"</string>
-    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint_authbound_keys" msgid="7019955731206729909">"PIN、顔モデル、指紋モデルなどの保存されているデータが失われます。<xliff:g id="EMPTY_LINE_0">
-
-</xliff:g>タッチ決済に設定したカードが削除されます。<xliff:g id="EMPTY_LINE_1">
-
-</xliff:g>デバイスのロック解除を必要とするウォレットなどのアプリが正しく動作しなくなる可能性があります。"</string>
     <string name="unlock_disable_frp_warning_content_password" msgid="6422723907917376210">"パスワードは、紛失したり盗難に遭ったりした場合にスマートフォンを保護するものです"</string>
     <string name="unlock_disable_frp_warning_content_password_fingerprint" msgid="8899452884016354856">"パスワードは、紛失したり盗難に遭ったりした場合にスマートフォンを保護するものです。<xliff:g id="EMPTY_LINE">
 
@@ -747,6 +740,26 @@
     <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint" msgid="3779582301453677644">"画面ロックがないと、デバイス保護機能は利用できません。<xliff:g id="EMPTY_LINE">
 
 </xliff:g>画面ロックを削除すると、デバイスに保存されている指紋モデルが削除されます。顔モデルも安全かつ完全に削除されます。アプリでの認証に顔や指紋を使用できなくなります。"</string>
+    <string name="unlock_disable_frp_warning_content_authbound_keys" msgid="6397327696248819663">"画面ロックを削除します。<xliff:g id="EMPTY_LINE_0">
+
+</xliff:g>タッチ決済が使用できなくなります。<xliff:g id="EMPTY_LINE_1">
+
+</xliff:g>ウォレット、決済アプリなど、認証を必要とするアプリが正しく動作しなくなる可能性があります。"</string>
+    <string name="unlock_disable_frp_warning_content_fingerprint_authbound_keys" msgid="7158076544627335461">"画面ロックと指紋認証を削除します。<xliff:g id="EMPTY_LINE_0">
+
+</xliff:g>タッチ決済が使用できなくなります。<xliff:g id="EMPTY_LINE_1">
+
+</xliff:g>ウォレット、決済アプリなど、認証を必要とするアプリが正しく動作しなくなる可能性があります。"</string>
+    <string name="unlock_disable_frp_warning_content_face_authbound_keys" msgid="8120786951217029818">"画面ロックと顔認証を削除します。<xliff:g id="EMPTY_LINE_0">
+
+</xliff:g>タッチ決済が使用できなくなります。<xliff:g id="EMPTY_LINE_1">
+
+</xliff:g>ウォレット、決済アプリなど、認証を必要とするアプリが正しく動作しなくなる可能性があります。"</string>
+    <string name="unlock_disable_frp_warning_content_face_fingerprint_authbound_keys" msgid="1574263040292024543">"画面ロック、顔認証、指紋認証を削除します。<xliff:g id="EMPTY_LINE_0">
+
+</xliff:g>タッチ決済が使用できなくなります。<xliff:g id="EMPTY_LINE_1">
+
+</xliff:g>ウォレット、決済アプリなど、認証を必要とするアプリが正しく動作しなくなる可能性があります。"</string>
     <string name="unlock_disable_frp_warning_ok" msgid="6173427638951230842">"削除"</string>
     <string name="unlock_footer_high_complexity_requested" msgid="4471274783909915352">"<xliff:g id="APP_NAME">%1$s</xliff:g> が安全な PIN またはパスワードの設定を推奨しています。設定しないと、正しく動作しない可能性があります"</string>
     <string name="unlock_footer_medium_complexity_requested" msgid="5515870066751600640">"<xliff:g id="APP_NAME">%1$s</xliff:g> が、新しい PIN またはパスワードの設定を推奨しています。設定しないと、正しく動作しない可能性があります"</string>
@@ -1034,8 +1047,15 @@
     <string name="wifi_advanced_device_mac_address_title" msgid="6155800851233164411">"デバイスの MAC アドレス"</string>
     <string name="wifi_advanced_randomized_mac_address_title" msgid="3930671320234553088">"ランダム MAC アドレス"</string>
     <string name="wifi_advanced_randomized_mac_address_disconnected_title" msgid="2755843130417523727">"前回のランダム MAC アドレス"</string>
+    <!-- no translation found for wifi_certificate_summary_Certificates (7849788154375655654) -->
+    <skip />
+    <!-- no translation found for wifi_certificate_summary_system (6521297326433133669) -->
+    <skip />
+    <!-- no translation found for wifi_certificate_summary_pinning (5901067790901727957) -->
+    <skip />
     <string name="wifi_details_title" msgid="222735438574597493">"ネットワークの詳細"</string>
     <string name="wifi_details_subnet_mask" msgid="1619151769276260512">"サブネット マスク"</string>
+    <string name="server_name_title" msgid="7257095185810299066">"サーバー名"</string>
     <string name="wifi_type_title" msgid="2174893488722015838">"タイプ"</string>
     <string name="wifi_details_dns" msgid="273231528073312579">"DNS"</string>
     <string name="wifi_details_ipv6_address_header" msgid="1913151339341722443">"IPv6 アドレス"</string>
@@ -1087,7 +1107,7 @@
     <string name="wifi_hotspot_speed_summary_5g" msgid="6221158936983135040">"5 GHz / 対応デバイスは多数"</string>
     <string name="wifi_hotspot_speed_summary_6g" msgid="8863992901226595544">"6 GHz / 対応デバイスはまだ少数"</string>
     <string name="wifi_hotspot_speed_summary_2g_and_5g" msgid="5931052946168943750">"2.4 / 5 GHz / ほとんどのデバイスに対応"</string>
-    <string name="wifi_hotspot_speed_intro" msgid="6973482196363758925">"アクセス ポイントの周波数を選択してください。周波数は、接続速度と、アクセス ポイントを検出できるデバイスの種類に影響します。"</string>
+    <string name="wifi_hotspot_speed_intro" msgid="6973482196363758925">"アクセス ポイントの周波数を選択してください。周波数によって接続速度と対応デバイスが異なります。"</string>
     <string name="wifi_hotspot_speed_category" msgid="5265655850463630286">"優先周波数"</string>
     <string name="wifi_hotspot_speed_2g" msgid="3400600834257664480">"2.4 GHz"</string>
     <string name="wifi_hotspot_speed_2g_summary" msgid="6930273933810520155">"速度が遅くなります。ほとんどのデバイスに対応しています。"</string>
@@ -1098,9 +1118,9 @@
     <string name="wifi_hotspot_speed_6g" msgid="3787697484862730500">"6 GHz"</string>
     <string name="wifi_hotspot_speed_6g_summary" msgid="8675262219242174548">"速度が最も速くなります。対応デバイスはまだ少数です。"</string>
     <string name="wifi_hotspot_speed_summary_unavailable" msgid="7276080644693388756">"お住まいの国や地域では利用できません"</string>
-    <string name="wifi_hotspot_speed_footer" msgid="8846939503916795002">"優先周波数を利用できない場合、アクセス ポイントは別の周波数を使用する可能性があります。周波数を変更すると、アクセス ポイントのセキュリティ設定が変更される可能性があります。"</string>
+    <string name="wifi_hotspot_speed_footer" msgid="8846939503916795002">"優先周波数を利用できない状況では、別の周波数を使用することがあります。周波数を変更すると、アクセス ポイントのセキュリティ設定も変わる場合があります。"</string>
     <string name="wifi_hotspot_security_summary_unavailable" msgid="117582979310345853">"6 GHz には対応していません"</string>
-    <string name="wifi_hotspot_security_footer" msgid="4608329688744949796">"アクセス ポイントの周波数を変更すると、セキュリティ設定が変更される可能性があります"</string>
+    <string name="wifi_hotspot_security_footer" msgid="4608329688744949796">"アクセス ポイントの周波数を変更すると、セキュリティ設定も変わることがあります"</string>
     <string name="wifi_hotspot_instant_title" msgid="7052526695338853703">"インスタント アクセス ポイント"</string>
     <string name="wifi_hotspot_instant_summary_on" msgid="3142749148673081288">"ON"</string>
     <string name="wifi_hotspot_instant_summary_off" msgid="8594065628453795615">"OFF"</string>
@@ -1240,7 +1260,8 @@
     <string name="dark_ui_text" msgid="4392646155331126666">"ダークモードでは黒い背景を使用するため、一部の画面で電池が長持ちします。スケジュールを設定した場合、時刻を過ぎても画面が OFF になるまではダークモードに切り替わりません。"</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"ダークモードは現在、おやすみ時間モードのスケジュールに合わせた設定になっています"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"おやすみ時間モードの設定"</string>
-    <string name="even_dimmer_display_title" msgid="8589063452814896327">"さらに暗くする"</string>
+    <!-- no translation found for even_dimmer_display_title (6731255736830410149) -->
+    <skip />
     <string name="even_dimmer_display_summary" msgid="120301078873242172">"デバイスを通常より暗くできます"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"画面消灯"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"操作が行われない状態で <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>経過後"</string>
@@ -1385,6 +1406,9 @@
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"<xliff:g id="NAME">^1</xliff:g>を削除しますか？"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"この<xliff:g id="NAME">^1</xliff:g>に保存されているすべてのアプリ、写真、データが完全に失われます。"</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"システムには、Android バージョン <xliff:g id="VERSION">%s</xliff:g> の実行に使用されるファイルが含まれています"</string>
+    <string name="storage_os_detail_dialog_system" msgid="1423073052313067844">"オペレーティング システムのほか、スマートフォンを常にスムーズに動作させるために必要なファイルも含まれます。整合性を守るため、これらのファイルにはアクセスできません。"</string>
+    <string name="storage_other_files_detail_dialog_system" msgid="8241153880150866635">"オペレーティング システムに必要なキャッシュやその他の一時ファイルが含まれます。ストレージの使用容量は時間ともに変化する可能性があります。"</string>
+    <string name="storage_system_label" msgid="8320948583086758295">"システム"</string>
     <string name="storage_wizard_guest" msgid="5813419895687733649">"ゲストモードでは SD カードをフォーマットできません"</string>
     <string name="storage_wizard_format_progress_title" msgid="9170393018855949774">"<xliff:g id="NAME">^1</xliff:g>をフォーマット中…"</string>
     <string name="storage_wizard_format_progress_body" msgid="1044024044955390417">"フォーマット中は <xliff:g id="NAME">^1</xliff:g>を取り外さないでください。"</string>
@@ -2156,8 +2180,7 @@
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"高コントラスト テキスト"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"テキストの色を黒または白に変更します。背景とのコントラストが最も際立ちます。"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"テキストのコントラストを最大にする"</string>
-    <!-- no translation found for accessibility_toggle_maximize_text_contrast_preference_summary (8200408691846666900) -->
-    <skip />
+    <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"コントラストが際立つようにするには、テキストの背景色を黒または白にします"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"画面の拡大を自動更新"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"アプリの遷移時に画面の拡大を更新"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"電源ボタンで通話を終了"</string>
@@ -2496,7 +2519,6 @@
     <string name="battery_manager_summary" msgid="255708681438809287">"アプリのバッテリー使用量が多いかどうかを検出しています"</string>
     <string name="battery_manager_summary_unsupported" msgid="7334173707292807964">"アプリのバッテリー使用量が多いときを検出します"</string>
     <string name="battery_manager_app_restricted" msgid="2583902700677009173">"{count,plural, =1{# 件のアプリが制限されています}other{# 件のアプリが制限されています}}"</string>
-    <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small></string>
     <string name="battery_missing_message" msgid="400958471814422770">"バッテリー残量の読み取り中に問題が発生しました。"</string>
     <string name="battery_missing_link_message" msgid="6021565067124898074"></string>
     <string name="battery_missing_link_a11y_message" msgid="3310971406602316323">"タップすると、このエラーの詳細が表示されます"</string>
@@ -2653,6 +2675,24 @@
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"ON"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"OFF"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"接続の自動調整を使用"</string>
+    <!-- no translation found for cellular_security_title (7124079732186082924) -->
+    <skip />
+    <!-- no translation found for cellular_security_summary (1893770670709928113) -->
+    <skip />
+    <!-- no translation found for cellular_security_settings_title (116950133456981770) -->
+    <skip />
+    <!-- no translation found for cellular_security_notifications (4619728340612184944) -->
+    <skip />
+    <!-- no translation found for cellular_security_notifications_controller_title (5085567551536606230) -->
+    <skip />
+    <!-- no translation found for cellular_security_notifications_controller_summary (2876183397456700377) -->
+    <skip />
+    <!-- no translation found for cellular_security_settings_encryption_title (4013084091666375780) -->
+    <skip />
+    <!-- no translation found for cellular_security_network_generations_title (2343026988833783854) -->
+    <skip />
+    <!-- no translation found for cellular_security_network_generations_summary (139087814553929402) -->
+    <skip />
     <string name="credentials_title" msgid="7535942196886123656">"認証情報ストレージ"</string>
     <string name="credentials_install" msgid="3933218407598415827">"証明書のインストール"</string>
     <string name="credentials_reset" msgid="4246628389366452655">"認証情報の消去"</string>
@@ -2665,6 +2705,10 @@
     <string name="credentials_settings_not_available" msgid="7433088409177429600">"認証情報はこのユーザーには表示されません"</string>
     <string name="credential_for_vpn_and_apps" msgid="2208229692860871136">"VPN とアプリ用にインストール済み"</string>
     <string name="credential_for_wifi" msgid="2286560570630763556">"Wi-Fi 用にインストール済み"</string>
+    <!-- no translation found for credential_installed_for_wifi (2206050464844710099) -->
+    <skip />
+    <!-- no translation found for credential_using_for_wifi (6134471366188592845) -->
+    <skip />
     <string name="credential_for_wifi_in_use" msgid="7276290656840986618">"Wi-Fi 用にインストール済み（使用中）"</string>
     <string name="credentials_reset_hint" msgid="4054601857203464867">"コンテンツをすべて削除しますか？"</string>
     <string name="credentials_erased" msgid="9121052044566053345">"認証情報ストレージを消去しました。"</string>
@@ -4058,7 +4102,7 @@
     <string name="data_usage_template" msgid="3822452362629968010">"<xliff:g id="ID_1">%1$s</xliff:g> 使用（<xliff:g id="ID_2">%2$s</xliff:g>）"</string>
     <string name="configure" msgid="1499586749829665889">"設定"</string>
     <string name="data_usage_other_apps" msgid="5649047093607329537">"データ使用量に含まれている他のアプリ"</string>
-    <string name="data_saver_unrestricted_summary" msgid="7343571401172437542">"{count,plural, =1{データセーバーが ON のときのデータ無制限使用を 1 件のアプリに許可しました}other{データセーバーが ON のときのデータ無制限使用を # 件のアプリに許可しました}}"</string>
+    <string name="data_saver_unrestricted_summary" msgid="7343571401172437542">"{count,plural, =1{データセーバーが ON のときでも、1 件のアプリはデータを無制限で使用できます}other{データセーバーが ON のときでも、# 件のアプリはデータを無制限で使用できます}}"</string>
     <string name="data_usage_title" msgid="4039024073687469094">"メインデータ"</string>
     <string name="data_usage_wifi_title" msgid="1060495519280456926">"Wi‑Fi データ"</string>
     <string name="data_used_formatted" msgid="7913920278059077938">"<xliff:g id="ID_1">^1</xliff:g> <xliff:g id="ID_2">^2</xliff:g> 使用"</string>
@@ -4202,8 +4246,7 @@
     <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"ホームに移動するには、画面の下部から上にスワイプします。アプリを切り替えるには、下から上にスワイプして長押ししてから離します。戻るには、左端または右端からスワイプします。"</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"3 ボタン ナビゲーション"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"戻る、ホームへの移動、アプリの切り替えを画面下部のボタンで行います。"</string>
-    <!-- no translation found for nav_tutorial_button_description (5791791794770463386) -->
-    <skip />
+    <string name="nav_tutorial_button_description" msgid="5791791794770463386">"ジェスチャー ナビゲーションのチュートリアルを開始"</string>
     <string name="keywords_system_navigation" msgid="3131782378486554934">"システム ナビゲーション, 2 ボタン ナビゲーション, 3 ボタン ナビゲーション, ジェスチャー ナビゲーション, スワイプ"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"デジタル アシスタント"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"スワイプしてアシスタントを起動"</string>
@@ -4216,7 +4259,8 @@
     <string name="right_edge" msgid="1505309103265829121">"右の端"</string>
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"感度を上げると、画面の端付近でのアプリの操作に影響することがあります。"</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"「戻る」の感度"</string>
-    <string name="gesture_settings_activity_title" msgid="2025828425762595733">"ジェスチャー ナビゲーションの感度"</string>
+    <!-- no translation found for gesture_settings_activity_title (1882463161833981820) -->
+    <skip />
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"ボタン ナビゲーション"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"ジェスチャー ナビゲーション, 「戻る」の感度, 「戻る」のジェスチャー"</string>
     <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"ナビゲーション, ホームボタン"</string>
@@ -4347,9 +4391,15 @@
     <string name="storage_images" msgid="2055893015567979387">"画像"</string>
     <string name="storage_videos" msgid="6117698226447251033">"動画"</string>
     <string name="storage_audio" msgid="5994664984472140386">"音声"</string>
+    <!-- no translation found for storage_documents (7873134307844320096) -->
+    <skip />
+    <!-- no translation found for storage_other (7922190148479988838) -->
+    <skip />
     <string name="storage_apps" msgid="3564291603258795216">"アプリ"</string>
     <string name="storage_documents_and_other" msgid="3293689243732236480">"ドキュメント、その他"</string>
     <string name="storage_system" msgid="8472410119822911844">"システム"</string>
+    <string name="storage_os_name" msgid="4637680493234672410">"Android <xliff:g id="VERSION">%s</xliff:g>"</string>
+    <string name="storage_temporary_files" msgid="8254109904032452219">"一時システム ファイル"</string>
     <string name="storage_trash" msgid="2807138998886084856">"ゴミ箱"</string>
     <string name="storage_trash_dialog_title" msgid="2296169576049935200">"ゴミ箱を空にしますか？"</string>
     <string name="storage_trash_dialog_ask_message" msgid="8982602137242358798">"ゴミ箱に <xliff:g id="TOTAL">%1$s</xliff:g> のファイルがあります。すべてのアイテムが完全に削除されます。削除したアイテムを復元することはできません。"</string>
@@ -4768,10 +4818,8 @@
     <string name="confirm_format_ext4_title" msgid="4453684705528818873">"デバイスを ext4 に再フォーマットしますか？"</string>
     <string name="confirm_format_ext4_text" msgid="8164677342487500794">"ext4 ファイルシステムでは 16K のデベロッパー オプションがサポートされています。確定すると、デバイスがワイプされ、ファイルシステムが ext4 に変更されます。"</string>
     <string name="format_ext4_failure_toast" msgid="6904611547290793885">"データ パーティションを ext4 に再フォーマットしてワイプすることができませんでした。"</string>
-    <!-- no translation found for confirm_oem_unlock_for_16k_title (6338135847153690912) -->
-    <skip />
-    <!-- no translation found for confirm_oem_unlock_for_16k_text (236718973897424382) -->
-    <skip />
+    <string name="confirm_oem_unlock_for_16k_title" msgid="6338135847153690912">"OEM のロック解除が必要です。"</string>
+    <string name="confirm_oem_unlock_for_16k_text" msgid="236718973897424382">"16K のデベロッパー オプションを使用するには、デバイスに OEM のロック解除を許可する必要があります。OEM のロック解除には、ユーザーデータのフォーマットも必要になります。デバイスに OEM のロック解除を許可してから、もう一度試してください。"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"バグレポート ハンドラ"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"デバイスでバグレポートのショートカットを処理するアプリを選択します。"</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"個人用"</string>
@@ -4821,7 +4869,8 @@
     <string name="allow_mock_modem" msgid="3832264806530479214">"Mock Modem の許可"</string>
     <string name="allow_mock_modem_summary" msgid="9097416612748005374">"インストルメンテーション テストで Mock Modem サービスを実行することをこのデバイスに許可します。スマートフォンの通常の使用中はこの設定を有効にしないでください"</string>
     <string name="disable_screen_share_protections_for_apps_and_notifications" msgid="4987116103699222633">"画面共有の保護を無効にする"</string>
-    <string name="disable_screen_share_protections_for_apps_and_notifications_summary" msgid="932295234626582052">"システムが適用しているアプリや通知の保護機能を、画面共有中は無効にします"</string>
+    <!-- no translation found for disable_screen_share_protections_for_apps_and_notifications_summary (5379583403909210858) -->
+    <skip />
     <string name="media_controls_title" msgid="403271085636252597">"メディア"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"メディア プレーヤーを固定する"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"再生をすばやく再開できるよう、[クイック設定] にメディア プレーヤーを開いたままにします"</string>

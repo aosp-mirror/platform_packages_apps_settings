@@ -192,6 +192,9 @@
 
         <!-- Define this color for material design -->
         <item name="colorPrimaryVariant">@android:color/white</item>
+        <!-- Workaround for E2E modification. -->
+        <!-- TODO (b/328622648) waiting for new method instead of this attribute. -->
+        <item name="android:windowOptOutEdgeToEdgeEnforcement">true</item>
     </style>
 
     <style name="Theme.Settings.Home" parent="Theme.Settings.HomeBase">

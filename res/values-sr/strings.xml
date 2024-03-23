@@ -86,6 +86,7 @@
     <string name="bluetooth_media_title" msgid="2878373577382067290">"Звуци медија и система"</string>
     <string name="bluetooth_notification_title" msgid="8708962394926222039">"Обавештења"</string>
     <string name="bluetooth_audio_routing_footer_summary" msgid="410260713589309293">"Аудио излаз подразумевано одређују појединачне апликације"</string>
+    <string name="bluetooth_audio_codec_default_selection" msgid="4753278792700664175">"Користите избор система (подразумевано)"</string>
     <string name="bluetooth_device" msgid="2217973503732544291">"Неименовани Bluetooth уређај"</string>
     <string name="progress_scanning" msgid="2564746192843011826">"Претражује се"</string>
     <string name="bluetooth_no_devices_found" msgid="7704539337219953182">"Нема Bluetooth уређаја у близини."</string>
@@ -208,9 +209,9 @@
     <string name="title_regional_pref_footer" msgid="7450438024324794380">"Ако апликација не подржава регионална подешавања, користиће подразумевана подешавања локалитета."</string>
     <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"Сазнајте више о подешавањима језика."</string>
     <string name="category_title_terms_of_address" msgid="4309422700380895278">"Додатна подешавања"</string>
-    <string name="terms_of_address_title" msgid="4064593634733842458">"Жељени род за обраћање"</string>
-    <string name="terms_of_address_summary" msgid="6136134336560679144">"Подесите род у ком желите да вам се обраћа"</string>
-    <string name="terms_of_address_intro_title" msgid="6149691509414243483">"Да би начин обраћања био персонализован, апликације могу да вам се обраћају у роду који изаберете"</string>
+    <string name="terms_of_address_title" msgid="7338630812197476808">"Изаберите начин обраћања"</string>
+    <string name="terms_of_address_summary" msgid="7802443422612600620">"Уређај може да персонализује начин на који вам се обраћа"</string>
+    <string name="terms_of_address_intro_title" msgid="1533951542181569335">"Ово подешавање дозвољава већини системских апликација да персонализују начин на који вам се обраћају. Не користе га апликације које инсталирате."</string>
     <string name="terms_of_address_not_specified" msgid="4439257779351251973">"Није наведено"</string>
     <string name="terms_of_address_feminine" msgid="1743479869695539283">"Женски род"</string>
     <string name="terms_of_address_masculine" msgid="983106046135098856">"Мушки род"</string>
@@ -555,26 +556,34 @@
     <string name="private_space_category_ways_to_unlock" msgid="4356631225316950046">"Начини за откључавање"</string>
     <string name="private_space_screen_lock_summary" msgid="394837965365561070">"Исто као закључавање екрана уређаја"</string>
     <string name="private_space_new_lock_title" msgid="9056139964133004094">"Одабраћете ново закључавање за приватни простор?"</string>
+    <!-- no translation found for private_space_new_lock_message (3117703578905489206) -->
+    <skip />
     <string name="private_space_auto_lock_title" msgid="8663409382910601261">"Аутоматски закључајте приватан простор"</string>
     <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"Можете аутоматски да закључате приватан простор ако уређај нисте користили неко време"</string>
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"Сваки пут кад се уређај закључа"</string>
     <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"После 5 минута неактивности"</string>
     <string name="private_space_auto_lock_never" msgid="595014527119778873">"Никад"</string>
-    <string name="private_space_hide_title" msgid="8687034008994037610">"Сакриј кад је закључан"</string>
-    <string name="privatespace_hide_page_title" msgid="8417507414027827566">"Сакриј приватни простор кад је закључан"</string>
-    <string name="privatespace_hide_page_summary" msgid="5525422595477989312">"Приватни простор можете да сакријете на листи апликација како други не би знали да га имате на уређају"</string>
-    <string name="privatespace_access_header" msgid="6066826215718835041">"Приступајте приватном простору кад је сакривен"</string>
-    <string name="privatespace_search_description" msgid="3121043205513022357">"На листи апл. унесите „приватни простор“ у траку за претрагу"</string>
-    <string name="privatespace_tap_tile_description" msgid="8346440188590931635">"Додирните плочицу Приватни простор"</string>
-    <string name="privatespace_unlock_description" msgid="3177710543121916413">"Откључајте приватни простор"</string>
-    <string name="privatespace_hide_off_summary" msgid="7227778747159633671">"Искључено"</string>
-    <string name="privatespace_hide_on_summary" msgid="6136704537527640183">"Укључeно"</string>
-    <!-- no translation found for private_space_hide_dialog_title (3192253150765516720) -->
+    <!-- no translation found for private_space_hide_page_title (4351404195904146088) -->
     <skip />
-    <!-- no translation found for private_space_hide_dialog_message (2006421821648157211) -->
+    <!-- no translation found for private_space_hide_page_summary (6247773353685839242) -->
     <skip />
-    <!-- no translation found for private_space_hide_dialog_button (4157191429310035457) -->
+    <!-- no translation found for private_space_access_header (1077082416567150819) -->
     <skip />
+    <!-- no translation found for private_space_search_description (1538155187658429618) -->
+    <skip />
+    <!-- no translation found for private_space_tap_tile_description (6173556870938267361) -->
+    <skip />
+    <!-- no translation found for private_space_unlock_description (5527228922778630361) -->
+    <skip />
+    <!-- no translation found for private_space_hide_off_summary (8565973976602078315) -->
+    <skip />
+    <!-- no translation found for private_space_hide_on_summary (3450844101901438867) -->
+    <skip />
+    <!-- no translation found for private_space_hide_dialog_title (6439207708506990156) -->
+    <skip />
+    <!-- no translation found for private_space_hide_dialog_message (618693520130744836) -->
+    <skip />
+    <string name="private_space_hide_dialog_button" msgid="4157191429310035457">"Важи"</string>
     <string name="private_space_category_system" msgid="1286843321867285700">"Систем"</string>
     <string name="private_space_delete_title" msgid="636873505724100006">"Избриши приватни простор"</string>
     <string name="private_space_delete_header" msgid="4594429153176776184">"Желите да избришете приватни простор?"</string>
@@ -599,6 +608,7 @@
     <string name="private_space_protected_lock_text" msgid="9123250938334372735"><b>"Подесите закључавање"</b>\n"Закључајте простор да други не би могли да га отворе"</string>
     <string name="private_space_install_apps_text" msgid="5693139160766464498"><b>"Инсталирајте апликације"</b>\n"Приватни простор има своју Play продавницу, па можете лако да инсталирате апликације."</string>
     <string name="private_space_apps_permission_text" msgid="7030946025253366172">"Кад је приватни простор закључан, апликације у њему се неће приказивати у менаџеру дозвола, на контролној табли за приватност ни у другим подешавањима.\n\nПриватни простор не можете да преместите на нови уређај. Морате да подесите други приватни простор ако желите да га користите на другом уређају.\n\nСвако ко ваш уређај повеже са рачунаром или на њега инсталира штетне апликације моћи ће да приступи вашем приватном простору."</string>
+    <string name="private_space_learn_more_text" msgid="5314198983263277586">"Сазнајте више о приватном простору"</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Подешава се приватни простор…"</string>
     <string name="private_space_notifications_hidden_title" msgid="2009112565217540581">"Обавештења из апликација у приватном простору су скривена кад је он закључан"</string>
     <string name="private_space_explore_settings_title" msgid="1448128245941571654">"Истражите подешавања приватног простора да бисте га сакрили и подесили аутоматско закључавање"</string>
@@ -701,35 +711,15 @@
 
 </xliff:g>Тиме се брише модел отиска прста који је сачуван на уређају. Модел лица ће се такође трајно и безбедно избрисати. Нећете моћи да потврђујете идентитет лицем или отиском прста у апликацијама."</string>
     <string name="unlock_disable_frp_warning_content_pin" msgid="122154942944422284">"PIN штити телефон ако га изгубите или га неко украде"</string>
-    <string name="unlock_disable_frp_warning_content_pin_authbound_keys" msgid="6497861740382402784">"Изгубићете сачуване податке као што је PIN.<xliff:g id="EMPTY_LINE_0">
-
-</xliff:g>Картице које сте подесили за бесконтактно плаћање ће бити уклоњене.<xliff:g id="EMPTY_LINE_1">
-
-</xliff:g>Новчаници и друге апликације које захтевају откључавање уређаја можда неће радити правилно."</string>
     <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="983373874470746066">"PIN штити телефон ако га изгубите или га неко украде.<xliff:g id="EMPTY_LINE">
 
 </xliff:g>Тиме се брише и модел отиска прста који је сачуван на уређају. Нећете моћи да потврђујете идентитет отиском прста у апликацијама."</string>
-    <string name="unlock_disable_frp_warning_content_pin_fingerprint_authbound_keys" msgid="8930057076658360799">"Изгубићете сачуване податке као што су PIN и модел отиска прста.<xliff:g id="EMPTY_LINE_0">
-
-</xliff:g>Картице које сте подесили за бесконтактно плаћање ће бити уклоњене.<xliff:g id="EMPTY_LINE_1">
-
-</xliff:g>Новчаници и друге апликације које захтевају откључавање уређаја можда неће радити правилно."</string>
     <string name="unlock_disable_frp_warning_content_pin_face" msgid="5607150515413131761">"PIN штити телефон ако га изгубите или га неко украде.<xliff:g id="EMPTY_LINE">
 
 </xliff:g>Модел лица ће се такође трајно и безбедно избрисати. Нећете моћи да потврђујете идентитет лицем у апликацијама."</string>
-    <string name="unlock_disable_frp_warning_content_pin_face_authbound_keys" msgid="979399855891561038">"Изгубићете сачуване податке као што су PIN и модел лица.<xliff:g id="EMPTY_LINE_0">
-
-</xliff:g>Картице које сте подесили за бесконтактно плаћање ће бити уклоњене.<xliff:g id="EMPTY_LINE_1">
-
-</xliff:g>Новчаници и друге апликације које захтевају откључавање уређаја можда неће радити правилно."</string>
     <string name="unlock_disable_frp_warning_content_pin_face_fingerprint" msgid="1821792325159866312">"PIN штити телефон ако га изгубите или га неко украде.<xliff:g id="EMPTY_LINE">
 
 </xliff:g>Тиме се брише модел отиска прста који је сачуван на уређају. Модел лица ће се такође трајно и безбедно избрисати. Нећете моћи да потврђујете идентитет лицем или отиском прста у апликацијама."</string>
-    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint_authbound_keys" msgid="7019955731206729909">"Изгубићете сачуване податке као што су PIN, модел лица и модел отиска прста.<xliff:g id="EMPTY_LINE_0">
-
-</xliff:g>Картице које сте подесили за бесконтактно плаћање ће бити уклоњене.<xliff:g id="EMPTY_LINE_1">
-
-</xliff:g>Новчаници и друге апликације које захтевају откључавање уређаја можда неће радити правилно."</string>
     <string name="unlock_disable_frp_warning_content_password" msgid="6422723907917376210">"Лозинка штити телефон ако га изгубите или га неко украде"</string>
     <string name="unlock_disable_frp_warning_content_password_fingerprint" msgid="8899452884016354856">"Лозинка штити телефон ако га изгубите или га неко украде.<xliff:g id="EMPTY_LINE">
 
@@ -750,6 +740,26 @@
     <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint" msgid="3779582301453677644">"Функције заштите уређаја неће радити без закључавања екрана.<xliff:g id="EMPTY_LINE">
 
 </xliff:g>Тиме се брише модел отиска прста који је сачуван на уређају. Модел лица ће се такође трајно и безбедно избрисати. Нећете моћи да потврђујете идентитет лицем или отиском прста у апликацијама."</string>
+    <string name="unlock_disable_frp_warning_content_authbound_keys" msgid="6397327696248819663">"Закључавање екрана ће бити уклоњено.<xliff:g id="EMPTY_LINE_0">
+
+</xliff:g>Бесконтактно плаћање неће бити доступно.<xliff:g id="EMPTY_LINE_1">
+
+</xliff:g>Новчаник, апликације за плаћање и друге које можда захтевају потврду идентитета неће правилно радити."</string>
+    <string name="unlock_disable_frp_warning_content_fingerprint_authbound_keys" msgid="7158076544627335461">"Закључавање екрана и откључавање отиском прста ће бити уклоњено.<xliff:g id="EMPTY_LINE_0">
+
+</xliff:g>Бесконтактно плаћање неће бити доступно.<xliff:g id="EMPTY_LINE_1">
+
+</xliff:g>Новчаник, апликације за плаћање и друге које захтевају потврду идентитета можда неће правилно радити."</string>
+    <string name="unlock_disable_frp_warning_content_face_authbound_keys" msgid="8120786951217029818">"Закључавање екрана и откључавање лицем ће бити уклоњено.<xliff:g id="EMPTY_LINE_0">
+
+</xliff:g>Бесконтактно плаћање неће бити доступно.<xliff:g id="EMPTY_LINE_1">
+
+</xliff:g>Новчаник, апликације за плаћање и друге које захтевају потврду идентитета можда неће правилно радити."</string>
+    <string name="unlock_disable_frp_warning_content_face_fingerprint_authbound_keys" msgid="1574263040292024543">"Закључавање екрана и откључавање лицем и отиском прста ће бити уклоњено.<xliff:g id="EMPTY_LINE_0">
+
+</xliff:g>Бесконтактно плаћање неће бити доступно.<xliff:g id="EMPTY_LINE_1">
+
+</xliff:g>Новчаник, апликације за плаћање и друге које захтевају потврду идентитета можда неће правилно радити."</string>
     <string name="unlock_disable_frp_warning_ok" msgid="6173427638951230842">"Избриши"</string>
     <string name="unlock_footer_high_complexity_requested" msgid="4471274783909915352">"<xliff:g id="APP_NAME">%1$s</xliff:g> препоручује јак PIN или лозинку и можда неће радити на очекивани начин ако то не подесите"</string>
     <string name="unlock_footer_medium_complexity_requested" msgid="5515870066751600640">"<xliff:g id="APP_NAME">%1$s</xliff:g> препоручује нови PIN или лозинку и можда неће радити на очекивани начин ако то не подесите"</string>
@@ -904,7 +914,7 @@
     <string name="wifi_configure_settings_preference_title" msgid="2536725796700696566">"Подешавања Wi‑Fi-ја"</string>
     <string name="wifi_configure_settings_preference_summary_wakeup_on" msgid="7822368955551467382">"Wi‑Fi се аутоматски укључује поново"</string>
     <string name="wifi_configure_settings_preference_summary_wakeup_off" msgid="5710203586018223864">"Wi‑Fi се не укључује поново аутоматски"</string>
-    <string name="wifi_menu_p2p" msgid="5234165837732940385">"Wi‑Fi Direct"</string>
+    <string name="wifi_menu_p2p" msgid="5234165837732940385">"WiFi Direct"</string>
     <string name="wifi_empty_list_wifi_off" msgid="7697422506708419298">"Да бисте видели доступне мреже, укључите WiFi."</string>
     <string name="wifi_empty_list_wifi_on" msgid="2448010040478321376">"Траже се мреже…"</string>
     <string name="wifi_empty_list_user_restricted" msgid="454861411536708709">"Немате дозволу да мењате Wi‑Fi мрежу."</string>
@@ -1037,8 +1047,15 @@
     <string name="wifi_advanced_device_mac_address_title" msgid="6155800851233164411">"MAC адреса уређаја"</string>
     <string name="wifi_advanced_randomized_mac_address_title" msgid="3930671320234553088">"Насумична MAC адреса"</string>
     <string name="wifi_advanced_randomized_mac_address_disconnected_title" msgid="2755843130417523727">"Насумична MAC адреса (последњи пут коришћена)"</string>
+    <!-- no translation found for wifi_certificate_summary_Certificates (7849788154375655654) -->
+    <skip />
+    <!-- no translation found for wifi_certificate_summary_system (6521297326433133669) -->
+    <skip />
+    <!-- no translation found for wifi_certificate_summary_pinning (5901067790901727957) -->
+    <skip />
     <string name="wifi_details_title" msgid="222735438574597493">"Детаљи о мрежи"</string>
     <string name="wifi_details_subnet_mask" msgid="1619151769276260512">"Маска подмреже"</string>
+    <string name="server_name_title" msgid="7257095185810299066">"Назив сервера"</string>
     <string name="wifi_type_title" msgid="2174893488722015838">"Тип"</string>
     <string name="wifi_details_dns" msgid="273231528073312579">"DNS"</string>
     <string name="wifi_details_ipv6_address_header" msgid="1913151339341722443">"IPv6 адресе"</string>
@@ -1061,7 +1078,7 @@
     <string name="wifi_dns2" msgid="7273133202625326148">"DNS 2 (осим ако га не замени приватни DNS)"</string>
     <string name="wifi_gateway" msgid="3699227808616416759">"Мрежни пролаз"</string>
     <string name="wifi_network_prefix_length" msgid="1003365439352276622">"Дужина префикса мреже"</string>
-    <string name="wifi_p2p_settings_title" msgid="1689918226469221870">"Wi‑Fi Direct"</string>
+    <string name="wifi_p2p_settings_title" msgid="1689918226469221870">"WiFi Direct"</string>
     <string name="wifi_p2p_menu_search" msgid="8383306178784876840">"Претражи уређаје"</string>
     <string name="wifi_p2p_menu_searching" msgid="3428767661028761100">"Претражује се…"</string>
     <string name="wifi_p2p_menu_rename" msgid="7059994112737743336">"Преименуј уређај"</string>
@@ -1243,7 +1260,8 @@
     <string name="dark_ui_text" msgid="4392646155331126666">"Тамна тема користи црну позадину да би батерија трајала дуже на неким екранима. Распореди тамне теме се укључују тек када се екран искључи."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Тамна тема тренутно прати распоред ноћног режима"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Подешавања ноћног режима"</string>
-    <string name="even_dimmer_display_title" msgid="8589063452814896327">"Још слабије осветљење"</string>
+    <!-- no translation found for even_dimmer_display_title (6731255736830410149) -->
+    <skip />
     <string name="even_dimmer_display_summary" msgid="120301078873242172">"Дозволите да осветљење уређаја буде слабије него обично"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Гашење екрана"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"После <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> неактивности"</string>
@@ -1388,6 +1406,9 @@
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"Желите да заборавите уређај <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"Све апликације, слике и подаци сачувани на уређају <xliff:g id="NAME">^1</xliff:g> биће заувек избрисани."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"Систем обухвата датотеке које се користе за покретање верзије Android <xliff:g id="VERSION">%s</xliff:g>"</string>
+    <string name="storage_os_detail_dialog_system" msgid="1423073052313067844">"То обухвата оперативни систем и фајлове неопходне за несметан рад телефона. Овим фајловима не може да се приступи како би се заштитио њихов интегритет."</string>
+    <string name="storage_other_files_detail_dialog_system" msgid="8241153880150866635">"То обухвата кеш и друге привремене фајлове неопходне за рад оперативног система. Можда ћете приметити промене у количини искоришћеног меморијског простора током времена."</string>
+    <string name="storage_system_label" msgid="8320948583086758295">"Систем"</string>
     <string name="storage_wizard_guest" msgid="5813419895687733649">"Корисници у режиму госта не могу да форматирају SD"</string>
     <string name="storage_wizard_format_progress_title" msgid="9170393018855949774">"<xliff:g id="NAME">^1</xliff:g> се форматира…"</string>
     <string name="storage_wizard_format_progress_body" msgid="1044024044955390417">"Не уклањајте уређај <xliff:g id="NAME">^1</xliff:g> док се форматира."</string>
@@ -2159,8 +2180,7 @@
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Текст високог контраста"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Промените боју текста у црну или белу. Максимално увећава контраст са позадином."</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"Максимално увећајте контраст текста"</string>
-    <!-- no translation found for accessibility_toggle_maximize_text_contrast_preference_summary (8200408691846666900) -->
-    <skip />
+    <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"Додајте црну или белу позадину око текста да бисте повећали контраст"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Аутоматски ажурирај увелич. екрана"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Ажурира увеличавање екрана при прелазу апликација"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Дугме за укључивање прекида позив"</string>
@@ -2499,7 +2519,6 @@
     <string name="battery_manager_summary" msgid="255708681438809287">"Открива када апликације троше батерију"</string>
     <string name="battery_manager_summary_unsupported" msgid="7334173707292807964">"Открива када апликације троше батерију"</string>
     <string name="battery_manager_app_restricted" msgid="2583902700677009173">"{count,plural, =1{# апликација је ограничена}one{# апликација је ограничена}few{# апликације су ограничене}other{# апликација је ограничено}}"</string>
-    <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
     <string name="battery_missing_message" msgid="400958471814422770">"Проблем са очитавањем мерача батерије."</string>
     <string name="battery_missing_link_message" msgid="6021565067124898074"></string>
     <string name="battery_missing_link_a11y_message" msgid="3310971406602316323">"Додирните да бисте сазнали више о овој грешци"</string>
@@ -2655,7 +2674,25 @@
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Продужује трајање батерије и побољшава учинак уређаја тако што аутоматски управља мрежним везама"</string>
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"Укључено"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"Искључено"</string>
-    <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Користите прилагодљиву повезаност"</string>
+    <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Користи прилагодљиву повезаност"</string>
+    <!-- no translation found for cellular_security_title (7124079732186082924) -->
+    <skip />
+    <!-- no translation found for cellular_security_summary (1893770670709928113) -->
+    <skip />
+    <!-- no translation found for cellular_security_settings_title (116950133456981770) -->
+    <skip />
+    <!-- no translation found for cellular_security_notifications (4619728340612184944) -->
+    <skip />
+    <!-- no translation found for cellular_security_notifications_controller_title (5085567551536606230) -->
+    <skip />
+    <!-- no translation found for cellular_security_notifications_controller_summary (2876183397456700377) -->
+    <skip />
+    <!-- no translation found for cellular_security_settings_encryption_title (4013084091666375780) -->
+    <skip />
+    <!-- no translation found for cellular_security_network_generations_title (2343026988833783854) -->
+    <skip />
+    <!-- no translation found for cellular_security_network_generations_summary (139087814553929402) -->
+    <skip />
     <string name="credentials_title" msgid="7535942196886123656">"Складиште акредитива"</string>
     <string name="credentials_install" msgid="3933218407598415827">"Инсталирање сертификата"</string>
     <string name="credentials_reset" msgid="4246628389366452655">"Брисање акредитива"</string>
@@ -2668,6 +2705,10 @@
     <string name="credentials_settings_not_available" msgid="7433088409177429600">"Акредитиви нису доступни за овог корисника"</string>
     <string name="credential_for_vpn_and_apps" msgid="2208229692860871136">"Инсталирано за VPN и апликације"</string>
     <string name="credential_for_wifi" msgid="2286560570630763556">"Инсталирано за WiFi"</string>
+    <!-- no translation found for credential_installed_for_wifi (2206050464844710099) -->
+    <skip />
+    <!-- no translation found for credential_using_for_wifi (6134471366188592845) -->
+    <skip />
     <string name="credential_for_wifi_in_use" msgid="7276290656840986618">"Инсталирано за WiFi (у употреби)"</string>
     <string name="credentials_reset_hint" msgid="4054601857203464867">"Желите ли да уклоните сав садржај?"</string>
     <string name="credentials_erased" msgid="9121052044566053345">"Складиште акредитива је избрисано."</string>
@@ -2738,7 +2779,7 @@
     <string name="notification_history_dismiss" msgid="6180321217375722918">"Недавно одбачено"</string>
     <string name="notification_history_count" msgid="885305572972482838">"{count,plural, =1{# обавештење}one{# обавештење}few{# обавештења}other{# обавештења}}"</string>
     <string name="sound_category_call_ringtone_vibrate_title" msgid="9090693401915654528">"Мелодија звона и вибрација позива"</string>
-    <string name="wifi_setup_detail" msgid="2012898800571616422">"Мрежни детаљи"</string>
+    <string name="wifi_setup_detail" msgid="2012898800571616422">"О мрежи"</string>
     <string name="accessibility_sync_enabled" msgid="5308864640407050209">"Синхронизација је омогућена"</string>
     <string name="accessibility_sync_disabled" msgid="5507600126380593611">"Синхронизација је онемогућена"</string>
     <string name="accessibility_sync_in_progress" msgid="3229428197779196660">"Синхронизација је у току"</string>
@@ -4205,8 +4246,7 @@
     <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"Да бисте отишли на почетни екран, превуците нагоре од дна екрана. Да бисте прешли са једне апликације на другу, превуците нагоре од дна екрана, задржите, па пустите. Да бисте се вратили назад, превуците од леве или десне ивице."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Навигација помоћу 3 дугмета"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"Вратите се назад, приступите почетном екрану и прелазите са једне апликације на другу помоћу дугмади у дну екрана."</string>
-    <!-- no translation found for nav_tutorial_button_description (5791791794770463386) -->
-    <skip />
+    <string name="nav_tutorial_button_description" msgid="5791791794770463386">"Покрените водич за навигацију помоћу покрета"</string>
     <string name="keywords_system_navigation" msgid="3131782378486554934">"навигација кроз систем, навигација помоћу 2 дугмета, навигација помоћу 3 дугмета, навигација помоћу покрета, превлачење"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Дигитални помоћник"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Превуците да бисте покренули помоћник"</string>
@@ -4219,7 +4259,8 @@
     <string name="right_edge" msgid="1505309103265829121">"Десна ивица"</string>
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"Већа осетљивост може да изазове неслагање са покретима у апликацији дуж ивица екрана."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Позадинска осетљивост"</string>
-    <string name="gesture_settings_activity_title" msgid="2025828425762595733">"Осетљивост навигације помоћу покрета"</string>
+    <!-- no translation found for gesture_settings_activity_title (1882463161833981820) -->
+    <skip />
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"Кретање помоћу дугмета"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"навигација помоћу покрета, осетљивост покрета за назад, покрет за назад"</string>
     <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"кретање, дугме почетак"</string>
@@ -4350,9 +4391,15 @@
     <string name="storage_images" msgid="2055893015567979387">"Слике"</string>
     <string name="storage_videos" msgid="6117698226447251033">"Видео снимци"</string>
     <string name="storage_audio" msgid="5994664984472140386">"Звук"</string>
+    <!-- no translation found for storage_documents (7873134307844320096) -->
+    <skip />
+    <!-- no translation found for storage_other (7922190148479988838) -->
+    <skip />
     <string name="storage_apps" msgid="3564291603258795216">"Апликације"</string>
     <string name="storage_documents_and_other" msgid="3293689243732236480">"Документи и друго"</string>
     <string name="storage_system" msgid="8472410119822911844">"Систем"</string>
+    <string name="storage_os_name" msgid="4637680493234672410">"Android <xliff:g id="VERSION">%s</xliff:g>"</string>
+    <string name="storage_temporary_files" msgid="8254109904032452219">"Привремени системски фајлови"</string>
     <string name="storage_trash" msgid="2807138998886084856">"Отпад"</string>
     <string name="storage_trash_dialog_title" msgid="2296169576049935200">"Желите да испразните отпад?"</string>
     <string name="storage_trash_dialog_ask_message" msgid="8982602137242358798">"Број фајлова у отпаду је <xliff:g id="TOTAL">%1$s</xliff:g>. Све ставке ће бити избрисане заувек и нећете моћи да их вратите."</string>
@@ -4771,10 +4818,8 @@
     <string name="confirm_format_ext4_title" msgid="4453684705528818873">"Желите да реформатирате уређај на ext4?"</string>
     <string name="confirm_format_ext4_text" msgid="8164677342487500794">"Систем фајлова ext4 подржава 16K опцију за програмера. Уређај ће после потврде бити обрисан, а систем фајлова промењен на ext4."</string>
     <string name="format_ext4_failure_toast" msgid="6904611547290793885">"Реформатирање и брисање партиције података на ext4 није успело."</string>
-    <!-- no translation found for confirm_oem_unlock_for_16k_title (6338135847153690912) -->
-    <skip />
-    <!-- no translation found for confirm_oem_unlock_for_16k_text (236718973897424382) -->
-    <skip />
+    <string name="confirm_oem_unlock_for_16k_title" msgid="6338135847153690912">"OEM откључавање је обавезно"</string>
+    <string name="confirm_oem_unlock_for_16k_text" msgid="236718973897424382">"Уређај мора да буде OEM откључан да би користио 16K опцију за програмере. Поред тога, OEM откључавање захтева форматирање података корисника. Обавите OEM откључавање уређаја и пробајте поново."</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Обрађивач извештаја о грешци"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Одређује која апликација управља пречицом за извештај о грешци на уређају."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Лично"</string>
@@ -4825,7 +4870,8 @@
     <string name="allow_mock_modem" msgid="3832264806530479214">"Дозволи лажни модем"</string>
     <string name="allow_mock_modem_summary" msgid="9097416612748005374">"Желите ли да дозволите овом уређају да покрене услугу лажног модема за тест инструментације. Немојте омогућавати током нормалне употребе телефона"</string>
     <string name="disable_screen_share_protections_for_apps_and_notifications" msgid="4987116103699222633">"Онемогући заштиту при дељењу садржаја екрана"</string>
-    <string name="disable_screen_share_protections_for_apps_and_notifications_summary" msgid="932295234626582052">"Током дељења садржаја екрана, онемогућава заштиту коју систем примењује у вези са обавештењима и апликацијама"</string>
+    <!-- no translation found for disable_screen_share_protections_for_apps_and_notifications_summary (5379583403909210858) -->
+    <skip />
     <string name="media_controls_title" msgid="403271085636252597">"Медији"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Закачи медија плејер"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Да бисте брзо наставили репродукцију, медија плејер остаје отворен у Брзим подешавањима"</string>
@@ -5015,7 +5061,7 @@
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Још подешавања"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Изаберите чувар екрана"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Изаберите шта ћете видети на екрану када је таблет на базној станици. Уређај може да троши више енергије када се користи чувар екрана."</string>
-    <string name="customize_button_title" msgid="1110284655990203359">"Прилагодите"</string>
+    <string name="customize_button_title" msgid="1110284655990203359">"Прилагоди"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"Прилагодите <xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"Морате да рестартујете да бисте омогућили подршку за слободан облик."</string>
     <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"Морате да рестартујете да бисте принудно омогућили режим за рачунаре на секундарним екранима."</string>

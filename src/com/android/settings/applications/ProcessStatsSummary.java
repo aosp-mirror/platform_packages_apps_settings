@@ -35,13 +35,15 @@ import com.android.settings.SummaryPreference;
 import com.android.settings.Utils;
 import com.android.settings.applications.ProcStatsData.MemInfo;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.development.DeveloperOptionAwareMixin;
 import com.android.settings.development.DisableDevSettingsDialogFragment;
 
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-public class ProcessStatsSummary extends ProcessStatsBase implements OnPreferenceClickListener {
+public class ProcessStatsSummary extends ProcessStatsBase implements OnPreferenceClickListener,
+        DeveloperOptionAwareMixin {
 
     private static final String KEY_PREF_SCREEN = "app_list";
     private static final String KEY_MEMORY_INFO_PREF_GROUP = "memory_info";

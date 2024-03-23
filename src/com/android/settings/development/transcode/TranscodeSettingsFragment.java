@@ -21,6 +21,7 @@ import android.content.Context;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.development.DeveloperOptionAwareMixin;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.search.SearchIndexable;
@@ -29,7 +30,8 @@ import com.android.settingslib.search.SearchIndexable;
  * Fragment for native transcode settings in Developer options.
  */
 @SearchIndexable
-public class TranscodeSettingsFragment extends DashboardFragment {
+public class TranscodeSettingsFragment extends DashboardFragment implements
+        DeveloperOptionAwareMixin {
     private static final String TAG = "TranscodeSettings";
 
     @Override

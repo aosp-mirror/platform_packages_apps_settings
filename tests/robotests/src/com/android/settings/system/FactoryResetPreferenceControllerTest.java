@@ -46,7 +46,6 @@ import com.google.common.collect.ImmutableList;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -107,7 +106,6 @@ public class FactoryResetPreferenceControllerTest {
                 Settings.Global.DEVICE_DEMO_MODE, 0);
     }
 
-    @Ignore("b/314930928")
     @Test
     public void isAvailable_systemUser() {
         when(mUserManager.isAdminUser()).thenReturn(true);

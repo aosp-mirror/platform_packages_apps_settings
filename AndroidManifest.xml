@@ -1629,6 +1629,39 @@
         </activity>
 
         <activity
+            android:name=".Settings$HearingDevicesActivity"
+            android:label="@string/accessibility_hearingaid_title"
+            android:exported="true">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.HEARING_DEVICES_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.accessibility.AccessibilityHearingAidsFragment" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_accessibility"/>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true" />
+        </activity>
+
+        <activity
+            android:name=".Settings$HearingDevicesPairingActivity"
+            android:label="@string/accessibility_hearing_device_pairing_title"
+            android:permission="android.permission.BLUETOOTH_SCAN"
+            android:exported="true">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.HEARING_DEVICES_PAIRING_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.accessibility.HearingDevicePairingFragment" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_accessibility"/>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true" />
+        </activity>
+
+        <activity
             android:name="SettingsLicenseActivity"
             android:label="@string/settings_license_activity_title"
             android:exported="true"
