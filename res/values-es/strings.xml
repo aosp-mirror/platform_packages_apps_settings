@@ -692,9 +692,9 @@
     <string name="wifi_venue_website_button_text" msgid="7749360432667175030">"Abrir sitio web"</string>
     <string name="wifi_time_remaining" msgid="8503606272869846170">"Tiempo restante: <xliff:g id="REMAINING_TIME">%1$s</xliff:g>"</string>
     <string name="wifi_expiry_time" msgid="5419758551129267624">"Caduca el <xliff:g id="EXPIRY_TIME">%1$s</xliff:g>"</string>
-    <string name="tx_link_speed" msgid="3071955184703668113">"<xliff:g id="TRANSMIT_LINK_SPEED">%1$d</xliff:g> Mbps"</string>
-    <string name="rx_link_speed" msgid="6292229178855567783">"<xliff:g id="RECEIVE_LINK_SPEED">%1$d</xliff:g> Mbps"</string>
-    <string name="link_speed" msgid="931786745741016446">"<xliff:g id="LINK_SPEED">%1$d</xliff:g> Mbps"</string>
+    <string name="tx_link_speed" msgid="3071955184703668113">"<xliff:g id="TRANSMIT_LINK_SPEED">%1$d</xliff:g> Mb/s"</string>
+    <string name="rx_link_speed" msgid="6292229178855567783">"<xliff:g id="RECEIVE_LINK_SPEED">%1$d</xliff:g> Mb/s"</string>
+    <string name="link_speed" msgid="931786745741016446">"<xliff:g id="LINK_SPEED">%1$d</xliff:g> Mb/s"</string>
     <string name="wifi_ask_enable" msgid="6860056048266810769">"<xliff:g id="REQUESTER">%s</xliff:g> quiere activar la conexión Wi-Fi"</string>
     <string name="wifi_ask_disable" msgid="1663208096020309639">"<xliff:g id="REQUESTER">%s</xliff:g> quiere desactivar la conexión Wi-Fi"</string>
     <string name="art_verifier_for_debuggable_title" msgid="1926445785190030479">"Verificar bytecode de aplicaciones depurables"</string>
@@ -802,7 +802,7 @@
     <string name="wifi_dpp_device_found" msgid="633646744759830603">"Dispositivo encontrado"</string>
     <string name="wifi_dpp_sharing_wifi_with_this_device" msgid="7250369936882080107">"Compartiendo Wi‑Fi con este dispositivo…"</string>
     <string name="wifi_dpp_connecting" msgid="2312769193202897589">"Conectando…"</string>
-    <string name="wifi_dpp_share_hotspot" msgid="6186452780604755316">"Comparte el punto de acceso"</string>
+    <string name="wifi_dpp_share_hotspot" msgid="6186452780604755316">"Compartir Internet"</string>
     <string name="wifi_dpp_lockscreen_title" msgid="4231438175617953652">"Verifica que eres tú"</string>
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Contraseña de la red Wi‑Fi: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"Contraseña del punto de acceso: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
@@ -911,7 +911,7 @@
     <string name="wifi_hotspot_speed_2g_5g_summary" msgid="8104575293617700173">"Velocidades rápidas. Este punto de acceso de doble banda es compatible con la mayoría de los dispositivos."</string>
     <string name="wifi_hotspot_speed_6g" msgid="3787697484862730500">"6 GHz"</string>
     <string name="wifi_hotspot_speed_6g_summary" msgid="8675262219242174548">"Velocidades aún más rápidas. Compatible con pocos dispositivos."</string>
-    <string name="wifi_hotspot_speed_summary_unavailable" msgid="7276080644693388756">"No disponible en tu tu país ni zona"</string>
+    <string name="wifi_hotspot_speed_summary_unavailable" msgid="7276080644693388756">"No disponible en tu tu país ni zona."</string>
     <string name="wifi_hotspot_speed_footer" msgid="8846939503916795002">"Si tu frecuencia preferida no está disponible, tu punto de acceso puede usar una diferente. La configuración de seguridad del punto de acceso puede cambiar si modificas la frecuencia."</string>
     <string name="wifi_hotspot_security_summary_unavailable" msgid="117582979310345853">"No disponible con 6 GHz"</string>
     <string name="wifi_hotspot_security_footer" msgid="4608329688744949796">"La configuración de seguridad puede cambiar si modificas la frecuencia del punto de acceso"</string>
@@ -2987,12 +2987,12 @@
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"Sonido de alarma predeterminado"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"Vibrar primero y sonar cada vez más alto"</string>
     <string name="spatial_audio_title" msgid="6591051622375191603">"Audio espacial"</string>
-    <string name="dial_pad_tones_title" msgid="3536945335367914892">"Tonos del teclado telefónico"</string>
+    <string name="dial_pad_tones_title" msgid="3536945335367914892">"Tonos del teclado de marcación"</string>
     <string name="screen_locking_sounds_title" msgid="5695030983872787321">"Sonido de bloqueo de pantalla"</string>
     <string name="charging_sounds_title" msgid="5261683808537783668">"Vibración y sonidos de carga"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"Sonidos al conectar a la base"</string>
     <string name="touch_sounds_title" msgid="826964355109667449">"Sonidos al tocar y hacer clic"</string>
-    <string name="vibrate_icon_title" msgid="1281100105045362530">"Mostrar siempre el icono en el modo vibración"</string>
+    <string name="vibrate_icon_title" msgid="1281100105045362530">"Mostrar siempre el icono en el modo de vibración"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"Reproducciones altavoz base"</string>
     <string name="dock_audio_media_disabled" msgid="8499927008999532341">"Todo el audio"</string>
     <string name="dock_audio_media_enabled" msgid="4039126523653131281">"Solo audio multimedia"</string>
@@ -3053,7 +3053,7 @@
     <string name="zen_mode_block_effect_light" msgid="1997222991427784993">"No hacer parpadear la luz"</string>
     <string name="zen_mode_block_effect_peek" msgid="2525844009475266022">"No mostrar notificaciones en la pantalla"</string>
     <string name="zen_mode_block_effect_status" msgid="5765965061064691918">"Ocultar los iconos de la barra de estado superior"</string>
-    <string name="zen_mode_block_effect_badge" msgid="332151258515152429">"Ocultar los puntos de notificación en los iconos de las aplicaciones"</string>
+    <string name="zen_mode_block_effect_badge" msgid="332151258515152429">"Ocultar las burbujas de notificación en los iconos de las aplicaciones"</string>
     <string name="zen_mode_block_effect_ambient" msgid="1247740599476031543">"No activar con notificaciones"</string>
     <string name="zen_mode_block_effect_list" msgid="7549367848660137118">"Ocultar en el panel desplegable"</string>
     <string name="zen_mode_block_effect_summary_none" msgid="6688519142395714659">"Nunca"</string>
@@ -3084,7 +3084,7 @@
     <string name="zen_mode_duration_summary_time_hours" msgid="2602655749780428308">"{count,plural, =1{1 hora}other{# horas}}"</string>
     <string name="zen_mode_duration_summary_time_minutes" msgid="5755536844016835693">"{count,plural, =1{1 minuto}other{# minutos}}"</string>
     <string name="zen_mode_sound_summary_off" msgid="7350437977839985836">"{count,plural, =0{Desactivado}=1{Desactivado / 1 programación puede activarlo automáticamente}other{Desactivado / # programaciones pueden activarlo automáticamente}}"</string>
-    <string name="zen_category_behavior" msgid="3214056473947178507">"Qué puede interrumpir el modo No molestar"</string>
+    <string name="zen_category_behavior" msgid="3214056473947178507">"Qué puede interrumpirte durante el modo No molestar"</string>
     <string name="zen_category_people" msgid="8252926021894933047">"Personas"</string>
     <string name="zen_category_apps" msgid="1167374545618451925">"Aplicaciones"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"Alarmas y otras interrupciones"</string>
@@ -3354,7 +3354,7 @@
     <string name="zen_mode_event_rule_calendar_any" msgid="5152139705998281205">"Cualquier calendario"</string>
     <string name="zen_mode_event_rule_reply" msgid="6099405414361340225">"Cuando la respuesta sea"</string>
     <string name="zen_mode_event_rule_reply_any_except_no" msgid="4672746760505346596">"Sí, quizás o sin respuesta"</string>
-    <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="6584448788100186574">"Sí o quizás"</string>
+    <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="6584448788100186574">"Sí o Quizás"</string>
     <string name="zen_mode_event_rule_reply_yes" msgid="7812120982734551236">"Sí"</string>
     <string name="zen_mode_rule_not_found_text" msgid="5303667326973891036">"No se ha encontrado esa regla."</string>
     <string name="zen_mode_rule_summary_enabled_combination" msgid="1183604368083885789">"Activado / <xliff:g id="MODE">%1$s</xliff:g>"</string>
@@ -3904,7 +3904,7 @@
     <string name="double_tap_power_for_camera_summary" msgid="1100926048598415509">"Pulsa dos veces el botón de encendido para abrir la cámara rápidamente. Funciona desde cualquier pantalla."</string>
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Cambiar de cámara para hacer selfie"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
-    <string name="system_navigation_title" msgid="4890381153527184636">"Modo Navegación"</string>
+    <string name="system_navigation_title" msgid="4890381153527184636">"Modo de navegación"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="6677266952021118342">"Navegación con 2 botones"</string>
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"Para cambiar de aplicación, desliza hacia arriba desde el botón de inicio. Para ver todas las aplicaciones, vuelve a deslizar hacia arriba. Para ir atrás, toca el botón Atrás."</string>
     <string name="emergency_settings_preference_title" msgid="6183455153241187148">"Seguridad y emergencias"</string>
