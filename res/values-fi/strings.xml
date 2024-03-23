@@ -730,14 +730,14 @@
     <string name="wifi_add_network" msgid="4178564862173751181">"Lisää verkko"</string>
     <string name="wifi_configure_settings_preference_title" msgid="2536725796700696566">"Wi-Fi-asetukset"</string>
     <string name="wifi_configure_settings_preference_summary_wakeup_on" msgid="7822368955551467382">"Wi-Fi otetaan uudelleen käyttöön automaattisesti"</string>
-    <string name="wifi_configure_settings_preference_summary_wakeup_off" msgid="5710203586018223864">"Wi-Fiä ei oteta uudelleen käyttöön automaattisesti"</string>
+    <string name="wifi_configure_settings_preference_summary_wakeup_off" msgid="5710203586018223864">"Wi-Fi ei mene uudelleen päälle automaattisesti"</string>
     <string name="wifi_menu_p2p" msgid="5234165837732940385">"Wi-Fi Direct"</string>
     <string name="wifi_empty_list_wifi_off" msgid="7697422506708419298">"Näet käytössä olevat verkot ottamalla Wi-Fin käyttöön."</string>
     <string name="wifi_empty_list_wifi_on" msgid="2448010040478321376">"Etsitään verkkoja…"</string>
     <string name="wifi_empty_list_user_restricted" msgid="454861411536708709">"Käyttöoikeutesi eivät riitä Wi-Fi-verkon muuttamiseen."</string>
-    <string name="wifi_settings_scanning_required_title" msgid="1088663325396007484">"Otetaanko Wi-Fi-haku käyttöön?"</string>
-    <string name="wifi_settings_scanning_required_summary" msgid="4770243653675416569">"Jos haluat käynnistää Wi-Fin automaattisesti, ota ensin Wi-Fi-haku käyttöön."</string>
-    <string name="wifi_settings_scanning_required_info" msgid="1473411566072565789">"Wi-Fi-haku sallii sovellusten ja palvelujen hakea Wi‑Fi-verkkoja aina, vaikka Wi-Fi olisi pois käytöstä. Näin voidaan esimerkiksi kehittää sijaintiin perustuvia ominaisuuksia ja palveluja."</string>
+    <string name="wifi_settings_scanning_required_title" msgid="1088663325396007484">"Laitetaanko Wi-Fi-haku päälle?"</string>
+    <string name="wifi_settings_scanning_required_summary" msgid="4770243653675416569">"Jos haluat Wi-Fin toimivan automaattisesti, laita ensin Wi-Fi-haku päälle."</string>
+    <string name="wifi_settings_scanning_required_info" msgid="1473411566072565789">"Wi-Fi-haun avulla sovellukset ja palvelut voivat hakea Wi‑Fi-verkkoja aina, vaikka Wi-Fi olisi pois päältä. Näin voidaan esimerkiksi kehittää sijaintiin perustuvia ominaisuuksia ja palveluja."</string>
     <string name="wifi_settings_scanning_required_turn_on" msgid="1112223196123955447">"Ota käyttöön"</string>
     <string name="wifi_settings_scanning_required_enabled" msgid="4721729158927146365">"Wi-Fi-haku on käytössä"</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Lisäasetukset"</string>
@@ -807,7 +807,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Wi-Fi-verkon salasana: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"Hotspotin salasana: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"Automaattinen yhdistäminen"</string>
-    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"Salli tähän verkkoon yhdistäminen sen kantoalueella ollessa"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"Salli tähän verkkoon yhdistäminen sen toiminta-alueella"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"Lisää laite"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Lisää laite tähän verkkoon QR-koodin avulla"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR-koodin muoto ei kelpaa"</string>
@@ -999,7 +999,7 @@
     <string name="adaptive_sleep_summary_no_permission" msgid="5822591289468803691">"Huomionäyttö edellyttää pääsyä kameraan. Ylläpidä Palvelut laitteen personointiin ‑lupia."</string>
     <string name="adaptive_sleep_manage_permission_button" msgid="1404510197847664846">"Ylläpidä lupia"</string>
     <string name="adaptive_sleep_description" msgid="1835321775327187860">"Estää näyttöä sammumasta, kun katsot sitä"</string>
-    <string name="adaptive_sleep_privacy" msgid="7664570136417980556">"Huomionäyttö näkee etukameralla, katsooko joku näyttöä. Ominaisuus toimii laitteella, eikä kuvia ikinä tallenneta tai lähetetä Googlelle."</string>
+    <string name="adaptive_sleep_privacy" msgid="7664570136417980556">"Huomionäyttö havaitsee etukamerasta, jos joku katsoo näyttöä. Ominaisuus toimii laitteella, eikä kuvia ikinä tallenneta tai lähetetä Googlelle."</string>
     <string name="adaptive_sleep_contextual_slice_title" msgid="7467588613212629758">"Laita huomionäyttö päälle"</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"Pidä näyttö päällä, kun sitä katsotaan"</string>
     <string name="auto_rotate_camera_lock_title" msgid="5369003176695105872">"Kamera on lukittu"</string>
@@ -1012,7 +1012,7 @@
     <string name="night_display_auto_mode_title" msgid="5869128421470824381">"Aikataulu"</string>
     <string name="night_display_auto_mode_never" msgid="2721729920187175239">"Ei mitään"</string>
     <string name="night_display_auto_mode_custom" msgid="3938791496034086916">"Käynnistyy valitsemaasi aikaan"</string>
-    <string name="night_display_auto_mode_twilight" msgid="4291855156158833997">"Auringonlaskusta sen nousuun"</string>
+    <string name="night_display_auto_mode_twilight" msgid="4291855156158833997">"Auringon laskusta sen nousuun"</string>
     <string name="night_display_start_time_title" msgid="2611541851596977786">"Alkamisaika"</string>
     <string name="night_display_end_time_title" msgid="5243112480391192111">"Päättymisaika"</string>
     <string name="night_display_temperature_title" msgid="857248782470764263">"Voimakkuus"</string>
@@ -1023,7 +1023,7 @@
     <string name="night_display_summary_on_auto_mode_custom" msgid="2096677025343425755">"Sammuu automaattisesti kello <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_summary_on_auto_mode_twilight" msgid="8070517472000680361">"Sammuu automaattisesti, kun aurinko nousee"</string>
     <string name="night_display_not_currently_on" msgid="6600205753103093827">"Yövalo ei päällä"</string>
-    <string name="twilight_mode_location_off_dialog_message" msgid="4559150893687124801">"Laitteen sijainti vaaditaan auringonlasku- ja ‑nousuaikojen määrittämiseksi"</string>
+    <string name="twilight_mode_location_off_dialog_message" msgid="4559150893687124801">"Laitteen sijainti vaaditaan auringon lasku- ja nousuaikojen määrittämiseen."</string>
     <string name="twilight_mode_launch_location" msgid="7799112373591153956">"Sijaintiasetukset"</string>
     <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"Laita päälle"</string>
     <string name="dark_ui_activation_off_manual" msgid="2395333709291250065">"Laita pois päältä"</string>
@@ -1032,7 +1032,7 @@
     <string name="dark_ui_title" msgid="3373976268671557416">"Tumma tila"</string>
     <string name="dark_ui_auto_mode_title" msgid="9027528859262295099">"Aikataulu"</string>
     <string name="dark_ui_auto_mode_never" msgid="3980412582267787662">"Ei mitään"</string>
-    <string name="dark_ui_auto_mode_auto" msgid="6658909029498623375">"Auringonlaskusta sen nousuun"</string>
+    <string name="dark_ui_auto_mode_auto" msgid="6658909029498623375">"Auringon laskusta sen nousuun"</string>
     <string name="dark_ui_auto_mode_custom" msgid="3800138185265182170">"Menee päälle valitsemaasi aikaan"</string>
     <string name="dark_ui_auto_mode_custom_bedtime" msgid="8465023741946439266">"Menee päälle nukkumaanmenoaikaan"</string>
     <string name="dark_ui_status_title" msgid="3505119141437774329">"Tila"</string>
@@ -1048,7 +1048,7 @@
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Tumma teema toimii nyt nukkuma-aikamoodisi aikataulun mukaan"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Nukkuma-aikamoodin asetukset"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Näytön aikakatkaisu"</string>
-    <string name="screen_timeout_summary" msgid="5558778019594643427">"Laitteen oltua käyttämättä: <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="screen_timeout_summary" msgid="5558778019594643427">"Laitteen oltua käyttämättä <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
     <string name="screen_timeout_summary_not_set" msgid="5107680774964178875">"Ei asetettu"</string>
     <string name="wallpaper_settings_title" msgid="5635129851136006383">"Taustakuva"</string>
     <string name="style_and_wallpaper_settings_title" msgid="2232042809407308946">"Taustakuva ja tyyli"</string>
@@ -1828,7 +1828,7 @@
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Suurenna pikanäppäimellä"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Suurenna pikanäppäimellä ja kolmoisnapautuksella."</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"Tietoja: <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
-    <string name="accessibility_text_reading_options_title" msgid="3224648909213325563">"Näytön koko ja teksti"</string>
+    <string name="accessibility_text_reading_options_title" msgid="3224648909213325563">"Näyttökoko ja teksti"</string>
     <string name="accessibility_text_reading_options_suggestion_title" msgid="2492155642665312733">"Muuta tekstin näkymistä"</string>
     <string name="accessibility_text_reading_preview_mail_subject" msgid="4597374768612733616">"Aihe: Kuumailmapallot"</string>
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"Lähettäjä: Mika"</string>
@@ -2385,11 +2385,11 @@
     <string name="vpn_settings_insecure_single" msgid="9012504179995045195">"Suojaamaton"</string>
     <string name="vpn_settings_single_insecure_multiple_total" msgid="6107225844641301139">"<xliff:g id="VPN_COUNT">%d</xliff:g> suojaamatonta"</string>
     <string name="vpn_settings_multiple_insecure_multiple_total" msgid="1706236062478680488">"<xliff:g id="VPN_COUNT">%d</xliff:g> suojaamatonta"</string>
-    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Mukautuvat yhteydet"</string>
+    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Mukautuva yhdistettävyys"</string>
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Parantaa akunkestoa ja laitteen suorituskykyä hallinnoimalla automaattisesti verkkoyhteyksiäsi"</string>
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"Päälle"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"Pois"</string>
-    <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Käytä Adaptive Connectivityä"</string>
+    <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Käytä mukautuvaa yhdistettävyyttä"</string>
     <string name="credentials_title" msgid="7535942196886123656">"Kirjautumistietojen tallennustila"</string>
     <string name="credentials_install" msgid="3933218407598415827">"Varmenteen asentaminen"</string>
     <string name="credentials_reset" msgid="4246628389366452655">"Tyhjennä käyttöoikeustiedot"</string>
@@ -2992,7 +2992,7 @@
     <string name="charging_sounds_title" msgid="5261683808537783668">"Latausäänet ja ‑värinä"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"Telakointiäänet"</string>
     <string name="touch_sounds_title" msgid="826964355109667449">"Napautus- ja klikkausäänet"</string>
-    <string name="vibrate_icon_title" msgid="1281100105045362530">"Näytä aina kuvake värinätilassa ollessa"</string>
+    <string name="vibrate_icon_title" msgid="1281100105045362530">"Näytä aina kuvake värinätilassa"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"Telineen kaiutin"</string>
     <string name="dock_audio_media_disabled" msgid="8499927008999532341">"Kaikki äänet"</string>
     <string name="dock_audio_media_enabled" msgid="4039126523653131281">"Vain median ääni"</string>
@@ -3381,7 +3381,7 @@
     <string name="zen_mode_calls" msgid="7653245854493631095">"Puhelut"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"puhelut"</string>
     <string name="zen_mode_calls_header" msgid="8379225445095856726">"Puhelut, jotka saavat keskeyttää"</string>
-    <string name="zen_mode_calls_footer" msgid="2008079711083701243">"Varmista sallittujen puhelujen kuuluminen tarkistamalla, että laitteen soittoääni on päällä"</string>
+    <string name="zen_mode_calls_footer" msgid="2008079711083701243">"Sallitut puhelut kuuluvat vain, kun laitteen soittoääni on päällä"</string>
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"Saapuvat puhelut estetään: <xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>. Voit määrittää asetukset niin, että ystävät, perheenjäsenet tai muut yhteyshenkilöt saavat sinuun yhteyden."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"Tähdelliset yhteystiedot"</string>
     <string name="zen_mode_starred_contacts_summary_contacts" msgid="1629467178444895094">"{count,plural,offset:2 =0{Ei yhtään}=1{{contact_1}}=2{{contact_1} ja {contact_2}}=3{{contact_1}, {contact_2} ja {contact_3}}other{{contact_1}, {contact_2} ja # muuta}}"</string>
@@ -3690,7 +3690,7 @@
     <string name="camera_gesture_title" msgid="5559439253128696180">"Kaksoiskääntäminen kameraa varten"</string>
     <string name="camera_gesture_desc" msgid="7557645057320805328">"Avaa kamerasovellus kääntämällä rannettasi kahdesti"</string>
     <string name="screen_zoom_title" msgid="6928045302654960559">"Näyttökoko"</string>
-    <string name="screen_zoom_short_summary" msgid="756254364808639194">"Suurenna tai pienennä asioita"</string>
+    <string name="screen_zoom_short_summary" msgid="756254364808639194">"Suurenna tai pienennä kaikkea sisältöä"</string>
     <string name="screen_zoom_keywords" msgid="5964023524422386592">"näytön tiheys, näytön zoomaus, skaala, skaalaus"</string>
     <string name="screen_zoom_preview_title" msgid="5288355628444562735">"Esikatselu"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="2628662648068995971">"Pienennä"</string>
@@ -3768,7 +3768,7 @@
     <string name="cell_data_template" msgid="6077963976103260821">"<xliff:g id="AMOUNT">^1</xliff:g> mobiilidataa"</string>
     <string name="wifi_data_template" msgid="935934798340307438">"<xliff:g id="AMOUNT">^1</xliff:g> Wi-Fi-dataa"</string>
     <string name="ethernet_data_template" msgid="1429173767445201145">"<xliff:g id="AMOUNT">^1</xliff:g> Ethernet-dataa"</string>
-    <string name="billing_cycle" msgid="6618424022653876279">"Datavaroitus ja raja"</string>
+    <string name="billing_cycle" msgid="6618424022653876279">"Datavaroitus ja käyttöraja"</string>
     <string name="app_usage_cycle" msgid="341009528778520583">"Mobiilidatan käyttökausi"</string>
     <string name="cell_data_warning" msgid="5664921950473359634">"Datavaroitus <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="cell_data_limit" msgid="256855024790622112">"Dataraja <xliff:g id="ID_1">^1</xliff:g>"</string>
@@ -3806,7 +3806,7 @@
     <string name="restrict_background_blocklisted" msgid="2308345280442438232">"Taustatiedot on poistettu käytöstä"</string>
     <string name="data_saver_on" msgid="7848893946018448793">"Päällä"</string>
     <string name="data_saver_off" msgid="5891210864117269045">"Pois päältä"</string>
-    <string name="data_saver_switch_title" msgid="7111538580123722959">"Käytä virransäästöä"</string>
+    <string name="data_saver_switch_title" msgid="7111538580123722959">"Käytä Data Saveria"</string>
     <string name="unrestricted_app_title" msgid="7117585996574329284">"Rajoittamaton datan käyttö"</string>
     <string name="unrestricted_app_summary" msgid="282698963532000403">"Sallii rajoittamattoman datan Data Saverin kanssa"</string>
     <string name="home_app" msgid="6056850504746902747">"Aloitusnäyttösovellus"</string>
