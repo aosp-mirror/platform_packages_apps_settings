@@ -50,7 +50,7 @@ import com.google.android.setupdesign.util.ThemeHelper;
  * This class represents an activity responsible for user authentication before starting the private
  * space setup flow or accessing the private space settings page if already created. Also prompts
  * user to set a device lock if not set with an alert dialog. This can be launched using the intent
- * com.android.settings.action.PRIVATE_SPACE_SETUP_FLOW.
+ * com.android.settings.action.OPEN_PRIVATE_SPACE_SETTINGS.
  */
 public class PrivateSpaceAuthenticationActivity extends FragmentActivity {
     private static final String TAG = "PrivateSpaceAuthCheck";
