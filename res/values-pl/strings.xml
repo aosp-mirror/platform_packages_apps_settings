@@ -414,7 +414,7 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"Usuń"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Dotknij czytnika"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Przyłóż palec do czytnika. Podnieś go, gdy poczujesz wibracje."</string>
-    <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"Trzymaj palec na czytniku linii papilarnych do chwili, aż poczujesz wibracje"</string>
+    <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"Trzymaj palec na czytniku do chwili, aż poczujesz wibracje"</string>
     <string name="security_settings_sfps_enroll_start_message" msgid="9054672627477685212">"Trzymaj palec na czytniku, bez naciskania, dopóki nie poczujesz wibracji.\n\nZa każdym razem lekko obracaj palec. Dzięki temu zeskanujesz większą część odcisku palca."</string>
     <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"Połóż palec na czytniku linii papilarnych i przytrzymaj"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"Podnieś palec i przyłóż go ponownie"</string>
@@ -750,8 +750,8 @@
     <string name="wifi_hidden_network_warning" msgid="3937433813754746158">"Jeśli router nie transmituje identyfikatora sieci, ale chcesz się z nią łączyć w przyszłości, możesz ją ustawić jako ukrytą.\n\nMoże to stanowić zagrożenie dla bezpieczeństwa, bo Twój telefon będzie regularnie transmitował sygnał, żeby znaleźć sieć.\n\nUstawienie sieci jako ukrytej nie zmienia ustawień routera."</string>
     <string name="wifi_signal" msgid="4442182285304271424">"Siła sygnału"</string>
     <string name="wifi_status" msgid="5349199188871002778">"Stan"</string>
-    <string name="tx_wifi_speed" msgid="2368986629172050673">"Szybkość łącza nadawania"</string>
-    <string name="rx_wifi_speed" msgid="5167966079215111232">"Szybkość łącza odbierania"</string>
+    <string name="tx_wifi_speed" msgid="2368986629172050673">"Szybkość łącza przy wysyłaniu"</string>
+    <string name="rx_wifi_speed" msgid="5167966079215111232">"Szybkość łącza przy odbieraniu"</string>
     <string name="wifi_speed" msgid="6562147734565434513">"Szybkość łącza"</string>
     <string name="wifi_frequency" msgid="3120998420184702834">"Częstotliwość"</string>
     <string name="wifi_ip_address" msgid="8903577251845268209">"Adres IP"</string>
@@ -777,7 +777,7 @@
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"Randomizowany adres MAC"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="6141246783457722976">"Dodaj urządzenie"</string>
     <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"Wyśrodkuj kod QR poniżej, by podłączyć urządzenie do sieci „<xliff:g id="SSID">%1$s</xliff:g>”"</string>
-    <string name="wifi_dpp_scan_qr_code" msgid="3543923817779444434">"Skaner kodów QR"</string>
+    <string name="wifi_dpp_scan_qr_code" msgid="3543923817779444434">"Zeskanuj kod QR"</string>
     <string name="wifi_dpp_scan_qr_code_join_network" msgid="969985020363459133">"Wyśrodkuj kod QR poniżej, by połączyć się z siecią „<xliff:g id="SSID">%1$s</xliff:g>”"</string>
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"Zeskanuj kod QR i połącz się z siecią Wi-Fi"</string>
     <string name="wifi_dpp_share_wifi" msgid="2431744447544057866">"Udostępnij Wi‑Fi"</string>
@@ -1008,7 +1008,7 @@
     <string name="auto_rotate_summary_no_permission" msgid="1025061139746254554">"Wykrywanie twarzy wymaga dostępu do aparatu. Kliknij, aby zarządzać uprawnieniami usług personalizacji urządzenia."</string>
     <string name="auto_rotate_manage_permission_button" msgid="2591146085906382385">"Zarządzaj uprawnieniami"</string>
     <string name="night_display_title" msgid="8532432776487216581">"Podświetlenie nocne"</string>
-    <string name="night_display_text" msgid="4789324042428095383">"Gdy Podświetlenie nocne jest włączone, kolory na ekranie mają pomarańczowy odcień. Dzięki temu oczy mniej się męczą podczas patrzenia na ekran albo czytania przy słabym oświetleniu, co ułatwia zaśnięcie."</string>
+    <string name="night_display_text" msgid="4789324042428095383">"Gdy podświetlenie nocne jest włączone, kolory na ekranie mają pomarańczowy odcień. Dzięki temu oczy mniej się męczą podczas patrzenia na ekran albo czytania przy słabym oświetleniu, co ułatwia zaśnięcie."</string>
     <string name="night_display_auto_mode_title" msgid="5869128421470824381">"Harmonogram"</string>
     <string name="night_display_auto_mode_never" msgid="2721729920187175239">"Brak"</string>
     <string name="night_display_auto_mode_custom" msgid="3938791496034086916">"Włącza się o wybranej godzinie"</string>
@@ -1828,7 +1828,7 @@
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Powiększanie skrótem"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Powiększanie skrótem i trzykrotnym kliknięciem"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"<xliff:g id="SERVICE">%1$s</xliff:g> – informacje"</string>
-    <string name="accessibility_text_reading_options_title" msgid="3224648909213325563">"Rozmiar wyświetlacza i tekst"</string>
+    <string name="accessibility_text_reading_options_title" msgid="3224648909213325563">"Rozmiar interfejsu i tekst"</string>
     <string name="accessibility_text_reading_options_suggestion_title" msgid="2492155642665312733">"Zmień sposób wyświetlania tekstu"</string>
     <string name="accessibility_text_reading_preview_mail_subject" msgid="4597374768612733616">"Temat: Projekty balonów"</string>
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"Nadawca: Krzysztof"</string>
@@ -3363,7 +3363,7 @@
     <string name="zen_mode_schedule_rule_days_none" msgid="5636604196262227070">"Brak"</string>
     <string name="zen_mode_schedule_alarm_title" msgid="305237266064819345">"Alarm może zastąpić godzinę zakończenia"</string>
     <string name="zen_mode_schedule_alarm_summary" msgid="9162760856136645133">"Harmonogram wyłączy się w przypadku dzwonka alarmu"</string>
-    <string name="zen_mode_custom_behavior_title" msgid="92525364576358085">"Działanie Nie przeszkadzać"</string>
+    <string name="zen_mode_custom_behavior_title" msgid="92525364576358085">"Działanie w trybie Nie przeszkadzać"</string>
     <string name="zen_mode_custom_behavior_summary_default" msgid="3259312823717839148">"Używaj ustawień domyślnych"</string>
     <string name="zen_mode_custom_behavior_summary" msgid="5390522750884328843">"Wybierz ustawienia niestandardowe dla tego harmonogramu"</string>
     <string name="zen_mode_custom_behavior_category_title" msgid="7815612569425733764">"W harmonogramie „<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>”"</string>
@@ -3689,7 +3689,7 @@
     <string name="external_source_switch_title" msgid="101571983954849473">"Zezwalaj z tego źródła"</string>
     <string name="camera_gesture_title" msgid="5559439253128696180">"Dwukrotny obrót otwiera aparat"</string>
     <string name="camera_gesture_desc" msgid="7557645057320805328">"Otwórz aplikację aparatu, obracając dwukrotnie nadgarstkiem"</string>
-    <string name="screen_zoom_title" msgid="6928045302654960559">"Rozmiar wyświetlacza"</string>
+    <string name="screen_zoom_title" msgid="6928045302654960559">"Rozmiar wyświetlanych elementów"</string>
     <string name="screen_zoom_short_summary" msgid="756254364808639194">"Zwiększ lub zmniejsz wszystko"</string>
     <string name="screen_zoom_keywords" msgid="5964023524422386592">"układ interfejsu, powiększenie ekranu, skala, skalowanie"</string>
     <string name="screen_zoom_preview_title" msgid="5288355628444562735">"Podgląd"</string>
@@ -3759,7 +3759,7 @@
     <string name="ota_disable_automatic_update_summary" msgid="7803279951533276841">"Zastosuj aktualizacje po ponownym uruchomieniu urządzenia"</string>
     <string name="usage" msgid="287782903846013936">"Wykorzystanie danych"</string>
     <string name="cellular_data_usage" msgid="5874156338825285334">"Użycie danych"</string>
-    <string name="app_cellular_data_usage" msgid="7603292978956033926">"Użycie danych przez aplikację"</string>
+    <string name="app_cellular_data_usage" msgid="7603292978956033926">"Użycie danych przez aplikacje"</string>
     <string name="wifi_data_usage" msgid="6868503699134605707">"Użycie danych (Wi-Fi)"</string>
     <string name="non_carrier_data_usage" msgid="6494603202578414755">"Użycie danych poza siecią operatora"</string>
     <string name="ethernet_data_usage" msgid="4552227880905679761">"Użycie danych w sieci Ethernet"</string>
@@ -3784,7 +3784,7 @@
     <string name="data_usage_template" msgid="3822452362629968010">"<xliff:g id="ID_1">%1$s</xliff:g> w okresie <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="configure" msgid="1499586749829665889">"Skonfiguruj"</string>
     <string name="data_usage_other_apps" msgid="5649047093607329537">"Inne aplikacje korzystające z transmisji danych"</string>
-    <string name="data_saver_unrestricted_summary" msgid="7343571401172437542">"{count,plural, =1{1 aplikacja może używać nieograniczonej ilości danych, gdy Oszczędzanie danych jest włączone}few{# aplikacje mogą używać nieograniczonej ilości danych, gdy Oszczędzanie danych jest włączone}many{# aplikacji może używać nieograniczonej ilości danych, gdy Oszczędzanie danych jest włączone}other{# aplikacji może używać nieograniczonej ilości danych, gdy Oszczędzanie danych jest włączone}}"</string>
+    <string name="data_saver_unrestricted_summary" msgid="7343571401172437542">"{count,plural, =1{1 aplikacja może używać nieograniczonej ilości danych, gdy oszczędzanie danych jest włączone}few{# aplikacje mogą używać nieograniczonej ilości danych, gdy oszczędzanie danych jest włączone}many{# aplikacji może używać nieograniczonej ilości danych, gdy oszczędzanie danych jest włączone}other{# aplikacji może używać nieograniczonej ilości danych, gdy oszczędzanie danych jest włączone}}"</string>
     <string name="data_usage_title" msgid="4039024073687469094">"Dane podstawowe"</string>
     <string name="data_usage_wifi_title" msgid="1060495519280456926">"Dane Wi-Fi"</string>
     <string name="data_used_formatted" msgid="7913920278059077938">"Wykorzystano <xliff:g id="ID_1">^1</xliff:g> <xliff:g id="ID_2">^2</xliff:g>"</string>
@@ -3806,9 +3806,9 @@
     <string name="restrict_background_blocklisted" msgid="2308345280442438232">"Dane w tle są wyłączone"</string>
     <string name="data_saver_on" msgid="7848893946018448793">"Włączone"</string>
     <string name="data_saver_off" msgid="5891210864117269045">"Wyłączone"</string>
-    <string name="data_saver_switch_title" msgid="7111538580123722959">"Włącz Oszczędzanie danych"</string>
+    <string name="data_saver_switch_title" msgid="7111538580123722959">"Włącz oszczędzanie danych"</string>
     <string name="unrestricted_app_title" msgid="7117585996574329284">"Nieograniczone użycie danych"</string>
-    <string name="unrestricted_app_summary" msgid="282698963532000403">"Włącz nieograniczony dostęp do danych, gdy jest włączone Oszczędzanie danych"</string>
+    <string name="unrestricted_app_summary" msgid="282698963532000403">"Włącz nieograniczony dostęp do danych, gdy jest włączone oszczędzanie danych"</string>
     <string name="home_app" msgid="6056850504746902747">"Aplikacja ekranu głównego"</string>
     <string name="suggestion_additional_fingerprints" msgid="4726777300101156208">"Dodaj kolejny odcisk palca"</string>
     <string name="suggestion_additional_fingerprints_summary" msgid="2825364645039666674">"Odblokuj innym palcem"</string>
@@ -4546,7 +4546,7 @@
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"zezwalać, wiele, użytkownik, pozwolenie, dużo"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Używaj debugowania bezprzewodowego"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Używaj ustawień sterownika grafiki"</string>
-    <string name="night_light_main_switch_title" msgid="3428298022467805219">"Używaj Podświetlenia nocnego"</string>
+    <string name="night_light_main_switch_title" msgid="3428298022467805219">"Używaj podświetlenia nocnego"</string>
     <string name="nfc_main_switch_title" msgid="6295839988954817432">"Używaj NFC"</string>
     <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"Używaj automatycznej jasności"</string>
     <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"Używaj Połączeń przez Wi-Fi"</string>
