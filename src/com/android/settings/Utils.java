@@ -1385,7 +1385,7 @@ public final class Utils extends com.android.settingslib.Utils {
      * @param activity the Activity need to setup the edge to edge feature.
      */
     public static void setupEdgeToEdge(@NonNull FragmentActivity activity) {
-        if (com.android.window.flags.Flags.edgeToEdgeByDefault()) {
+        if (com.android.window.flags.Flags.enforceEdgeToEdge()) {
             ViewCompat.setOnApplyWindowInsetsListener(activity.findViewById(android.R.id.content),
                     (v, windowInsets) -> {
                         Insets insets = windowInsets.getInsets(
