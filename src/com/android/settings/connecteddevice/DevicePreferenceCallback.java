@@ -18,19 +18,26 @@ package com.android.settings.connecteddevice;
 
 import androidx.preference.Preference;
 
-/**
- * Callback to add or remove {@link Preference} in device group.
- */
+/** Callback to add or remove {@link Preference} in device group. */
 public interface DevicePreferenceCallback {
     /**
      * Called when a device(i.e. bluetooth, usb) is added
+     *
      * @param preference present the device
      */
     void onDeviceAdded(Preference preference);
 
     /**
      * Called when a device(i.e. bluetooth, usb) is removed
+     *
      * @param preference present the device
      */
     void onDeviceRemoved(Preference preference);
+
+    /**
+     * Called when a device(i.e. bluetooth, usb) is click
+     *
+     * @param preference present the device
+     */
+    default void onDeviceClick(Preference preference) {}
 }

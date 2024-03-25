@@ -52,7 +52,4 @@ public class AudioSharingFeatureProviderImpl implements AudioSharingFeatureProvi
             @NonNull CachedBluetoothDevice cachedDevice, LocalBluetoothManager localBtManager) {
         return false;
     }
-
-    @Override
-    public void handleMediaDeviceOnClick(LocalBluetoothManager localBtManager) {}
 }
