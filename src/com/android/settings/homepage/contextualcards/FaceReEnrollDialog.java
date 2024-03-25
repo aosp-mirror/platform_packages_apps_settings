@@ -113,8 +113,8 @@ public class FaceReEnrollDialog extends AlertActivity implements
                     return;
                 }
                 // Send user to the enroll flow.
-                final Intent reEnroll = new Intent(BIOMETRIC_ENROLL_ACTION);
-                final Context context = getApplicationContext();
+                final Intent reEnroll = new Intent(BIOMETRIC_ENROLL_ACTION)
+                        .setPackage(getPackageName());
 
                 try {
                     startActivity(reEnroll);

@@ -34,8 +34,6 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.text.SpannableStringBuilder;
-import android.text.style.ClickableSpan;
-import android.view.View;
 
 import com.android.settings.R;
 import com.android.settings.vpn2.VpnUtils;
@@ -302,25 +300,5 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
             return userInfo.id;
         }
         return UserHandle.USER_NULL;
-    }
-
-    protected static class EnterprisePrivacySpan extends ClickableSpan {
-        private final Context mContext;
-
-        public EnterprisePrivacySpan(Context context) {
-            mContext = context;
-        }
-
-        @Override
-        public void onClick(View widget) {
-            mContext.startActivity(new Intent(Settings.ACTION_ENTERPRISE_PRIVACY_SETTINGS)
-                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-        }
-
-        @Override
-        public boolean equals(Object object) {
-            return object instanceof EnterprisePrivacySpan
-                    && ((EnterprisePrivacySpan) object).mContext == mContext;
-        }
     }
 }

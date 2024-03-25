@@ -223,8 +223,9 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     @Override
     public void openTileIntent(FragmentActivity activity, Tile tile) {
         if (tile == null) {
-            Intent intent = new Intent(Settings.ACTION_SETTINGS).addFlags(
-                    Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            Intent intent = new Intent(Settings.ACTION_SETTINGS)
+                    .setPackage(mContext.getPackageName())
+                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             mContext.startActivity(intent);
             return;
         }
