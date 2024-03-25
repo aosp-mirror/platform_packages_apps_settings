@@ -49,7 +49,7 @@ public class ApnPreference extends Preference
     private static CompoundButton sCurrentChecked = null;
     private int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     private boolean mProtectFromCheckedChange = false;
-    private boolean mSelectable = true;
+    private boolean mDefaultSelectable = true;
     private boolean mHideDetails = false;
 
     /**
@@ -57,6 +57,9 @@ public class ApnPreference extends Preference
      */
     public ApnPreference(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+        // Primary target and radio button could be selectable, but entire preference itself is not
+        // selectable.
+        setSelectable(false);
     }
 
     /**
@@ -80,25 +83,25 @@ public class ApnPreference extends Preference
         final RelativeLayout textArea = (RelativeLayout) view.findViewById(R.id.text_layout);
         textArea.setOnClickListener(this);
 
-        final View widget = view.findViewById(R.id.apn_radiobutton);
-        if ((widget != null) && widget instanceof RadioButton) {
-            final RadioButton rb = (RadioButton) widget;
-            if (mSelectable) {
-                rb.setOnCheckedChangeListener(this);
+        final RadioButton rb = view.itemView.requireViewById(R.id.apn_radiobutton);
+        if (mDefaultSelectable) {
+            view.itemView.requireViewById(R.id.apn_radio_button_frame).setOnClickListener((v) -> {
+                rb.performClick();
+            });
+            rb.setOnCheckedChangeListener(this);
 
-                final boolean isChecked = getKey().equals(sSelectedKey);
-                if (isChecked) {
-                    sCurrentChecked = rb;
-                    sSelectedKey = getKey();
-                }
-
-                mProtectFromCheckedChange = true;
-                rb.setChecked(isChecked);
-                mProtectFromCheckedChange = false;
-                rb.setVisibility(View.VISIBLE);
-            } else {
-                rb.setVisibility(View.GONE);
+            final boolean isChecked = getKey().equals(sSelectedKey);
+            if (isChecked) {
+                sCurrentChecked = rb;
+                sSelectedKey = getKey();
             }
+
+            mProtectFromCheckedChange = true;
+            rb.setChecked(isChecked);
+            mProtectFromCheckedChange = false;
+            rb.setVisibility(View.VISIBLE);
+        } else {
+            rb.setVisibility(View.GONE);
         }
     }
 
@@ -167,12 +170,8 @@ public class ApnPreference extends Preference
         }
     }
 
-    public boolean getSelectable() {
-        return mSelectable;
-    }
-
-    public void setSelectable(boolean selectable) {
-        mSelectable = selectable;
+    public void setDefaultSelectable(boolean defaultSelectable) {
+        mDefaultSelectable = defaultSelectable;
     }
 
     public void setSubId(int subId) {
