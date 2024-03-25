@@ -569,6 +569,7 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
         }
 
         Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+        intent.setPackage(getContext().getPackageName());
         intent.setData(Uri.parse("package:" + packageName));
 
         final Preference appInfoPreference = new Preference(getPrefContext());
