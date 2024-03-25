@@ -78,7 +78,8 @@
             android:key="regulatory_info"
             android:order="16"
             android:title="@string/regulatory_labels">
-            <intent android:action="android.settings.SHOW_REGULATORY_INFO"/>
+            <intent android:action="android.settings.SHOW_REGULATORY_INFO"
+                    android:targetPackage="${applicationId}"/>
         </Preference>
 
         <!-- Safety & regulatory manual -->
@@ -207,7 +208,8 @@
             android:key="manual"
             android:order="50"
             android:title="@string/manual">
-            <intent android:action="android.settings.SHOW_MANUAL"/>
+            <intent android:action="android.settings.SHOW_MANUAL"
+                    android:targetPackage="${applicationId}"/>
         </Preference>
 
         <!-- Feedback on the device -->
