@@ -28,20 +28,18 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.ComponentInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ServiceInfo;
-import android.os.Binder;
 import android.provider.Settings;
 import android.service.notification.ConditionProviderService;
 import android.util.Log;
-import android.util.Slog;
 
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 
+import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.Map;
-import java.util.Objects;
 
 abstract public class AbstractZenModeAutomaticRulePreferenceController extends
         AbstractZenModePreferenceController implements PreferenceControllerMixin {
@@ -85,6 +83,7 @@ abstract public class AbstractZenModeAutomaticRulePreferenceController extends
             intent.setComponent(configurationActivity);
         } else {
             intent.setAction(settingsAction);
+            intent.setPackage(Utils.SETTINGS_PACKAGE_NAME);
         }
         return intent;
     }

@@ -95,6 +95,11 @@ public class ZenPrioritySendersHelper {
         mNotificationBackend = notificationBackend;
         mSelectorClickListener = clickListener;
 
+        String contactsPackage = context.getString(R.string.config_contacts_package_name);
+        ALL_CONTACTS_INTENT.setPackage(contactsPackage);
+        STARRED_CONTACTS_INTENT.setPackage(contactsPackage);
+        FALLBACK_INTENT.setPackage(contactsPackage);
+
         mPackageManager = mContext.getPackageManager();
         if (!FALLBACK_INTENT.hasCategory(Intent.CATEGORY_APP_CONTACTS)) {
             FALLBACK_INTENT.addCategory(Intent.CATEGORY_APP_CONTACTS);
