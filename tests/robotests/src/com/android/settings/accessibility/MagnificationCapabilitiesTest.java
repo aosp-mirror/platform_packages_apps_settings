@@ -18,7 +18,14 @@ package com.android.settings.accessibility;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+
 import android.content.Context;
+import android.database.ContentObserver;
 
 import androidx.test.core.app.ApplicationProvider;
 
@@ -42,7 +49,6 @@ public final class MagnificationCapabilitiesTest {
         final int windowCapabilities = MagnificationCapabilities.getCapabilities(mContext);
         assertThat(windowCapabilities).isEqualTo(
                 MagnificationCapabilities.MagnificationMode.WINDOW);
-
     }
 
     @Test
@@ -62,5 +68,36 @@ public final class MagnificationCapabilitiesTest {
         final int windowCapabilities = MagnificationCapabilities.getCapabilities(mContext);
         assertThat(windowCapabilities).isEqualTo(
                 MagnificationCapabilities.MagnificationMode.FULLSCREEN);
+    }
+
+    @Test
+    public void registerObserver_triggeredWhenCapabilitiesChanged() {
+        MagnificationCapabilities.setCapabilities(mContext,
+                MagnificationCapabilities.MagnificationMode.FULLSCREEN);
+
+        ContentObserver contentObserver =
+                spy(new ContentObserver(/* handler= */ null) {});
+
+        MagnificationCapabilities.registerObserver(mContext, contentObserver);
+        MagnificationCapabilities.setCapabilities(mContext,
+                MagnificationCapabilities.MagnificationMode.WINDOW);
+
+        verify(contentObserver).onChange(/* selfChange= */ anyBoolean(), /* uri= */ any());
+    }
+
+    @Test
+    public void unregisterObserver_neverTriggeredWhenCapabilitiesChanged() {
+        MagnificationCapabilities.setCapabilities(mContext,
+                MagnificationCapabilities.MagnificationMode.FULLSCREEN);
+
+        ContentObserver contentObserver =
+                spy(new ContentObserver(/* handler= */ null) {});
+
+        MagnificationCapabilities.registerObserver(mContext, contentObserver);
+        MagnificationCapabilities.unregisterObserver(mContext, contentObserver);
+        MagnificationCapabilities.setCapabilities(mContext,
+                MagnificationCapabilities.MagnificationMode.WINDOW);
+
+        verify(contentObserver, never()).onChange(/* selfChange= */ anyBoolean(), /* uri= */ any());
     }
 }
