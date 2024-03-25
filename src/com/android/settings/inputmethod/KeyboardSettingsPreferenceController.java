@@ -53,6 +53,7 @@ public class KeyboardSettingsPreferenceController extends BasePreferenceControll
         for (HardKeyboardDeviceInfo hardKeyboardDeviceInfo : newHardKeyboards) {
             if (mCachedDevice.getAddress().equals(hardKeyboardDeviceInfo.mBluetoothAddress)) {
                 Intent intent = new Intent(Settings.ACTION_HARD_KEYBOARD_SETTINGS);
+                intent.setPackage(mContext.getPackageName());
                 intent.putExtra(
                         Settings.EXTRA_ENTRYPOINT, SettingsEnums.CONNECTED_DEVICES_SETTINGS);
                 intent.putExtra(
