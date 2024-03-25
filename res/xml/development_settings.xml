@@ -152,7 +152,8 @@
         <Preference
             android:key="demo_mode"
             android:title="@string/demo_mode">
-            <intent android:action="com.android.settings.action.DEMO_MODE" />
+            <intent android:action="com.android.settings.action.DEMO_MODE"
+                    android:targetPackage="com.android.systemui"/>
         </Preference>
 
         <Preference
