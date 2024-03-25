@@ -372,6 +372,6 @@ public class AvailableMediaBluetoothDeviceUpdaterTest {
     public void onClick_Preference_setActive() {
         mBluetoothDeviceUpdater.onPreferenceClick(mPreference);
 
-        verify(mCachedBluetoothDevice).setActive();
+        verify(mDevicePreferenceCallback).onDeviceClick(mPreference);
     }
 }

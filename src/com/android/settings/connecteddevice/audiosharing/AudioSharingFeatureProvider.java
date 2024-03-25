@@ -50,7 +50,4 @@ public interface AudioSharingFeatureProvider {
      */
     boolean isAudioSharingFilterMatched(
             @NonNull CachedBluetoothDevice cachedDevice, LocalBluetoothManager localBtManager);
-
-    /** Handle preference onClick in "Media devices" section. */
-    void handleMediaDeviceOnClick(LocalBluetoothManager localBtManager);
 }

@@ -32,9 +32,9 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
-import android.platform.test.flag.junit.CheckFlagsRule;
-import android.platform.test.flag.junit.DeviceFlagsValueProvider;
+import android.util.Pair;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
@@ -46,6 +46,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.bluetooth.AvailableMediaBluetoothDeviceUpdater;
+import com.android.settings.bluetooth.BluetoothDevicePreference;
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.testutils.shadow.ShadowAudioManager;
@@ -64,7 +65,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
@@ -79,11 +81,11 @@ import org.robolectric.annotation.Config;
             ShadowAlertDialogCompat.class,
         })
 public class AvailableMediaDeviceGroupControllerTest {
-    @Rule
-    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
+    @Rule public final MockitoRule mMockitoRule = MockitoJUnit.rule();
 
     private static final String TEST_DEVICE_ADDRESS = "00:A1:A1:A1:A1:A1";
     private static final String PREFERENCE_KEY_1 = "pref_key_1";
+    private static final String TEST_DEVICE_NAME = "test";
 
     @Mock private AvailableMediaBluetoothDeviceUpdater mAvailableMediaBluetoothDeviceUpdater;
     @Mock private PreferenceScreen mPreferenceScreen;
@@ -96,6 +98,9 @@ public class AvailableMediaDeviceGroupControllerTest {
     @Mock private LocalBluetoothManager mLocalBluetoothManager;
     @Mock private CachedBluetoothDeviceManager mCachedDeviceManager;
     @Mock private CachedBluetoothDevice mCachedBluetoothDevice;
+    @Mock private BluetoothDevice mDevice;
+    @Mock
+    private Drawable mDrawable;
 
     private PreferenceGroup mPreferenceGroup;
     private Context mContext;
@@ -107,8 +112,6 @@ public class AvailableMediaDeviceGroupControllerTest {
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-
         mContext = spy(RuntimeEnvironment.application);
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
@@ -261,5 +264,20 @@ public class AvailableMediaDeviceGroupControllerTest {
 
         final AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(dialog.isShowing()).isTrue();
+    }
+
+    @Test
+    public void onDeviceClick_setActive() {
+        when(mCachedBluetoothDevice.getDevice()).thenReturn(mDevice);
+        Pair<Drawable, String> pair = new Pair<>(mDrawable, TEST_DEVICE_NAME);
+        when(mCachedBluetoothDevice.getDrawableWithDescription()).thenReturn(pair);
+        BluetoothDevicePreference preference =
+                new BluetoothDevicePreference(
+                        mContext,
+                        mCachedBluetoothDevice,
+                        true,
+                        BluetoothDevicePreference.SortType.TYPE_NO_SORT);
+        mAvailableMediaDeviceGroupController.onDeviceClick(preference);
+        verify(mCachedBluetoothDevice).setActive();
     }
 }

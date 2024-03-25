@@ -35,6 +35,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.accessibility.HearingAidUtils;
 import com.android.settings.bluetooth.AvailableMediaBluetoothDeviceUpdater;
+import com.android.settings.bluetooth.BluetoothDevicePreference;
 import com.android.settings.bluetooth.BluetoothDeviceUpdater;
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.core.BasePreferenceController;
@@ -148,6 +149,13 @@ public class AvailableMediaDeviceGroupController extends BasePreferenceControlle
                 mPreferenceGroup.setVisible(false);
             }
         }
+    }
+
+    @Override
+    public void onDeviceClick(Preference preference) {
+        final CachedBluetoothDevice cachedDevice =
+                ((BluetoothDevicePreference) preference).getBluetoothDevice();
+        cachedDevice.setActive();
     }
 
     public void init(DashboardFragment fragment) {
