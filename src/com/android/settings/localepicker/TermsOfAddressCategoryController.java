@@ -36,9 +36,10 @@ import java.util.Locale;
 
 public class TermsOfAddressCategoryController extends PreferenceCategoryController {
 
-    private static final String TAG = "TermsOfAddressCategoryController";
+    private static final String TAG = "TermsOfAddressCategory";
     private static final String KEY_CATEGORY_TERMS_OF_ADDRESS = "key_category_terms_of_address";
     private static final String KEY_TERMS_OF_ADDRESS = "key_terms_of_address";
+    private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
     public TermsOfAddressCategoryController(Context context, String key) {
         super(context, key);
@@ -79,11 +80,13 @@ public class TermsOfAddressCategoryController extends PreferenceCategoryControll
                 mContext.getResources().getStringArray(
                         R.array.terms_of_address_unsupported_locales));
 
-        final Locale locale = localeInfo.getLocale();
+        final Locale locale = localeInfo.getLocale().stripExtensions();
         final String language = locale.getLanguage();
         final String localeTag = locale.toLanguageTag();
-        Log.d(TAG, "current language: " + language);
-        Log.d(TAG, "current locale tag: " + localeTag);
+        if (DEBUG) {
+            Log.d(TAG, "current language: " + language);
+            Log.d(TAG, "current locale tag: " + localeTag);
+        }
 
         // Supported locales:
         // 1. All French is supported except fr-CA.
