@@ -23,6 +23,7 @@
     android:layout_height="wrap_content">
 
     <FrameLayout
+        android:contentDescription="@string/color_contrast_preview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingVertical="@dimen/settingslib_illustration_padding"
@@ -44,12 +45,12 @@
             android:layout_weight="1"/>
 
         <LinearLayout
+            android:id="@+id/contrast_button_default"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <FrameLayout
-                android:id="@+id/contrast_button_default"
                 android:layout_width="@dimen/contrast_button_total_size"
                 android:layout_height="@dimen/contrast_button_total_size"
                 android:background="@drawable/accessibility_contrast_button_background">
@@ -58,7 +59,7 @@
                     android:layout_gravity="center"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
-                    android:contentDescription="@string/contrast_default"
+                    android:contentDescription="@null"
                     android:src="@drawable/ic_contrast_standard"/>
             </FrameLayout>
 
@@ -79,12 +80,12 @@
             android:layout_height="match_parent" />
 
         <LinearLayout
+            android:id="@+id/contrast_button_medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <FrameLayout
-                android:id="@+id/contrast_button_medium"
                 android:layout_width="@dimen/contrast_button_total_size"
                 android:layout_height="@dimen/contrast_button_total_size"
                 android:background="@drawable/accessibility_contrast_button_background">
@@ -93,7 +94,7 @@
                     android:layout_gravity="center"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
-                    android:contentDescription="@string/contrast_medium"
+                    android:contentDescription="@null"
                     android:src="@drawable/ic_contrast_medium"/>
             </FrameLayout>
 
@@ -114,12 +115,12 @@
             android:layout_height="match_parent" />
 
         <LinearLayout
+            android:id="@+id/contrast_button_high"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <FrameLayout
-                android:id="@+id/contrast_button_high"
                 android:layout_width="@dimen/contrast_button_total_size"
                 android:layout_height="@dimen/contrast_button_total_size"
                 android:background="@drawable/accessibility_contrast_button_background">
@@ -128,7 +129,7 @@
                     android:layout_gravity="center"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
-                    android:contentDescription="@string/contrast_high"
+                    android:contentDescription="@null"
                     android:src="@drawable/ic_contrast_high"/>
             </FrameLayout>
 
