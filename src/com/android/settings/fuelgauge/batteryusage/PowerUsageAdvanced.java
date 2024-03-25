@@ -262,7 +262,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
                     final PowerUsageFeatureProvider powerUsageFeatureProvider =
                             FeatureFactory.getFeatureFactory().getPowerUsageFeatureProvider();
                     final PowerAnomalyEventList anomalyEventList =
-                            powerUsageFeatureProvider.detectSettingsAnomaly(
+                            powerUsageFeatureProvider.detectPowerAnomaly(
                                     getContext(),
                                     /* displayDrain= */ 0,
                                     DetectRequestSourceType.TYPE_USAGE_UI);
