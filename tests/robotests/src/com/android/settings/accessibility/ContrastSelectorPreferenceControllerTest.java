@@ -27,7 +27,7 @@ import static org.mockito.Mockito.when;
 
 import android.app.UiModeManager;
 import android.content.Context;
-import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
@@ -57,7 +57,7 @@ public class ContrastSelectorPreferenceControllerTest {
     @Mock
     private PreferenceScreen mScreen;
     @Mock
-    private FrameLayout mFrameLayout;
+    private LinearLayout mLinearLayout;
     @Mock
     private LayoutPreference mLayoutPreference;
     private Context mContext;
@@ -72,7 +72,7 @@ public class ContrastSelectorPreferenceControllerTest {
         when(mContext.getSystemService(UiModeManager.class)).thenReturn(mUiService);
         mController = new ContrastSelectorPreferenceController(mContext, PREFERENCE_KEY);
         when(mScreen.findPreference(PREFERENCE_KEY)).thenReturn(mLayoutPreference);
-        when(mLayoutPreference.findViewById(anyInt())).thenReturn(mFrameLayout);
+        when(mLayoutPreference.findViewById(anyInt())).thenReturn(mLinearLayout);
     }
 
     @Test
@@ -102,7 +102,7 @@ public class ContrastSelectorPreferenceControllerTest {
     public void displayPreference_shouldAddClickListener() {
         mController.displayPreference(mScreen);
 
-        verify(mFrameLayout, times(3)).setOnClickListener(any());
+        verify(mLinearLayout, times(3)).setOnClickListener(any());
     }
 
     @Test
@@ -110,6 +110,6 @@ public class ContrastSelectorPreferenceControllerTest {
         mController.displayPreference(mScreen);
         mController.onContrastChanged(1);
 
-        verify(mFrameLayout, times(2)).setSelected(true);
+        verify(mLinearLayout, times(2)).setSelected(true);
     }
 }

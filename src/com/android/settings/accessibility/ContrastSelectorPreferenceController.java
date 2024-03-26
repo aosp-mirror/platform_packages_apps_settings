@@ -26,7 +26,7 @@ import android.app.UiModeManager;
 import android.content.Context;
 import android.provider.Settings;
 import android.view.View;
-import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -53,7 +53,7 @@ public class ContrastSelectorPreferenceController extends BasePreferenceControll
 
     private final Executor mMainExecutor;
     private final UiModeManager mUiModeManager;
-    private Map<Integer, FrameLayout> mContrastButtons = new HashMap<>();
+    private Map<Integer, LinearLayout> mContrastButtons = new HashMap<>();
 
     public ContrastSelectorPreferenceController(@NonNull Context context,
             @NonNull String preferenceKey) {
