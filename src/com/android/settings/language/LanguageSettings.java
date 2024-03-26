@@ -19,7 +19,6 @@ package com.android.settings.language;
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.util.FeatureFlagUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -112,8 +111,7 @@ public class LanguageSettings extends DashboardFragment {
                 }
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    return FeatureFlagUtils
-                            .isEnabled(context, FeatureFlagUtils.SETTINGS_NEW_KEYBOARD_UI);
+                    return true;
                 }
             };
 }
