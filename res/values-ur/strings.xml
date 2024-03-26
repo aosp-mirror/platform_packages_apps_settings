@@ -915,10 +915,8 @@
     <string name="wifi_settings_wep_networks_summary_blocked_by_carrier" msgid="6085673947156094523">"آپ کا کیریئر آپ کو اس نیٹ ورک سے منسلک ہونے کی اجازت نہیں دیتا ہے کیونکہ یہ ایک پرانا سیکیورٹی پروٹوکول استعمال کرتا ہے جو کم محفوظ ہے"</string>
     <string name="wifi_settings_wep_networks_button_allow" msgid="2807926329019873706">"‏WEP کی اجازت دیں"</string>
     <string name="wifi_settings_ssid_block_button_close" msgid="3013886895576949908">"بند کریں"</string>
-    <!-- no translation found for wifi_settings_wep_networks_disconnect_title (2158070405309246888) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_disconnect_summary (643132352152685538) -->
-    <skip />
+    <string name="wifi_settings_wep_networks_disconnect_title" msgid="2158070405309246888">"<xliff:g id="NAME">%1$s</xliff:g> سے غیر منسلک کریں؟"</string>
+    <string name="wifi_settings_wep_networks_disconnect_summary" msgid="643132352152685538">"‏آپ ایک WEP نیٹ ورک سے منسلک ہیں۔ اگر آپ ان نیٹ ورکس کو بلاک کرتے ہیں تو آپ غیر منسلک ہو جائیں گے۔"</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"جدید ترین اختیارات"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"ڈراپ ڈاؤن فہرست کے اعلی درجے کے اختیارات"</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"پھیلائیں"</string>
@@ -1327,7 +1325,7 @@
     <string name="eid_multi_sim" msgid="9087924808336397804">"‏EID (sim سلاٹ ‏<xliff:g id="EID_SLOT_ID">%1$d</xliff:g>)"</string>
     <string name="imei_multi_sim" msgid="9001570420423929507">"‏IMEI (sim‎‎ سلاٹ <xliff:g id="IMEI_SLOT_ID">%1$d</xliff:g>)‎‎"</string>
     <string name="imei_multi_sim_primary" msgid="7914653040843734282">"‏IMEI (sim‎‎ سلاٹ <xliff:g id="IMEI_SLOT_ID_PRIMARY">%1$d</xliff:g>)‎‎ (بنیادی)"</string>
-    <string name="view_saved_network" msgid="1232387673095080910">"دیکھنے کے لیے، محفوظ کردہ نیٹ ورک کا انتخاب کریں۔"</string>
+    <string name="view_saved_network" msgid="1232387673095080910">"دیکھنے کے لیے، محفوظ کردہ نیٹ ورک کا انتخاب کریں"</string>
     <string name="status_imei" msgid="5719752369250485007">"IMEI"</string>
     <string name="status_imei_sv" msgid="6908985558726440951">"IMEI SV"</string>
     <string name="status_min_number" msgid="4492899165438225714">"MIN"</string>
@@ -1875,14 +1873,11 @@
     <string name="show_ime" msgid="4334255501724746849">"آن اسکرین کی بورڈ کا استعمال کریں"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"جب فزیکل کی بورڈ فعال ہو تو اس کو اسکرین پر رکھیں"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"باؤنس کلیدیں"</string>
-    <!-- no translation found for bounce_keys_summary (7347050868868080302) -->
-    <skip />
+    <string name="bounce_keys_summary" msgid="7347050868868080302">"‏کی بورڈ ‎<xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> ms‎ کے اندر ایک ہی کلید کو فوری طور پر بار بار دبائے جانے کو نظر انداز کرتا ہے"</string>
     <string name="slow_keys" msgid="2891452895499690837">"سلو کلیدیں"</string>
-    <!-- no translation found for slow_keys_summary (1784371292745423292) -->
-    <skip />
+    <string name="slow_keys_summary" msgid="1784371292745423292">"‏کسی کلید کے دبانے پر اس کے فعال ہونے میں لگنے والے وقت کو ‎<xliff:g id="SLOW_KEYS_THRESHOLD">%1$d</xliff:g> ms‎ میں ایڈجسٹ کرتا ہے"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"دبی رہنے والی کلیدیں"</string>
-    <!-- no translation found for sticky_keys_summary (1844953803625480623) -->
-    <skip />
+    <string name="sticky_keys_summary" msgid="1844953803625480623">"کلیدوں کو ایک ساتھ نیچے کی طرف پکڑے رکھنے کے بجائے، شارٹ کٹس کیلئے ایک وقت میں ایک کلید دبائیں"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"کی بورڈ شارٹ کٹس"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"شارٹ کٹس کی فہرست دکھائیں"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"دفتری پروفائل کے کی بورڈز اور ٹولز"</string>
@@ -1936,7 +1931,10 @@
     <string name="modifier_keys_reset" msgid="551170906710422041">"ری سیٹ کریں"</string>
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"موڈیفائر کلید منتخب کریں"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"‫<xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g> کے لیے نئی کلید منتخب کریں:"</string>
+    <string name="ime_label_title" msgid="8994569521516807168">"<xliff:g id="IME_LABEL">%s</xliff:g> لے آؤٹ"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"ڈیفالٹ"</string>
+    <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"خودکار: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
+    <string name="user_selected_keyboard_layout_label" msgid="154742505924555156">"صارف کا منتخب کردہ: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"اسپیچ"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"پوائنٹر کی رفتار"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"گیم کنٹرولر"</string>
@@ -1992,8 +1990,7 @@
     <string name="vision_settings_description" msgid="7614894785054441991">"آپ اس آلہ کو اپنی ضروریات کے مطابق حسب ضرورت بنا سکتے ہیں۔ یہ ایکسیسبیلٹی خصوصیات بعد میں ترتیبات میں تبدیل ہو سکتی ہیں۔"</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"فونٹ سائز تبدیل کریں"</string>
     <string name="screen_reader_category_title" msgid="5825700839731107803">"اسکرین قاری"</string>
-    <!-- no translation found for keyboard_category_title (6841712758039893220) -->
-    <skip />
+    <string name="keyboard_category_title" msgid="6841712758039893220">"طبعی کی بورڈ کے اختیارات"</string>
     <string name="captions_category_title" msgid="574490148949400274">"کیپشنز"</string>
     <string name="audio_category_title" msgid="5283853679967605826">"آڈیو"</string>
     <string name="general_category_title" msgid="6298579528716834157">"عام"</string>
@@ -2243,12 +2240,10 @@
     <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"والیوم کی کلیدوں کو دبائیں رکھیں"</string>
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"اسکرین پر تین بار تھپتھپائیں"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"ایکسیسبیلٹی شارٹ کٹس میں ترمیم کریں"</string>
-    <!-- no translation found for accessibility_shortcut_edit_screen_prompt (5966054283114856682) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"‏%1$s کیلئے اپنے شارٹ کٹ کا انتخاب کریں"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"جاری رکھیں"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"سماعتی آلات"</string>
-    <!-- no translation found for accessibility_hearingaid_intro (6686620444104350629) -->
-    <skip />
+    <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"‏ASHA اور LE آڈیو سماعتی آلات، کوکلیئر امپلانٹس اور دیگر ایمپلیفیکیشن آلات سیٹ اپ اور ان کا نظم کریں"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="7438018718889849521">"کوئی سماعت کا آلہ منسلک نہیں ہے"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"سماعتی آلات شامل کریں"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"سماعتی آلات کا جوڑا بنائیں"</string>
@@ -2266,8 +2261,7 @@
     <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"سماعتی آلہ کی موافقت"</string>
     <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"ٹیلی کوائلز کے ساتھ مطابقت کو بہتر بناتا ہے اور غیر ضروری شور کو کم کرتا ہے"</string>
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"آلات کو سننے کے بارے میں"</string>
-    <!-- no translation found for accessibility_hearing_device_footer_summary (256061045064940818) -->
-    <skip />
+    <string name="accessibility_hearing_device_footer_summary" msgid="256061045064940818">"‏ایسے دیگر آلات سماعت تلاش کرنے کیلئے جو ASHA یا LE آڈیو سے تعاون یافتہ نہیں ہیں، "<b>"نئے آلے کا جوڑا بنائیں"</b>" ‎&gt;‎ "<b>"مزید آلات دیکھیں"</b>" پر تھپتھپائیں"</string>
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"سماعتی آلہ کا جوڑا بنائیں"</string>
     <string name="accessibility_hearing_device_pairing_intro" msgid="7022201665808166517">"‏آپ اس صفحہ پر ASHA اور LE آڈیو سماعت کے آلات کا جوڑا بنا سکتے ہیں۔ یقینی بنائیں کہ آپ کا سماعتی آلہ آن ہے اور جوڑا بنانے کے لیے تیار ہے۔"</string>
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"دستیاب سماعتی آلات"</string>
@@ -2311,7 +2305,7 @@
     <string name="captioning_preview_title" msgid="2888561631323180535">"پیش منظر دیکھیں"</string>
     <string name="captioning_standard_options_title" msgid="5360264497750980205">"معیاری اختیارات"</string>
     <string name="captioning_locale" msgid="5533303294290661590">"زبان"</string>
-    <string name="captioning_text_size" msgid="8039448543171463017">"متن کا سائز"</string>
+    <string name="captioning_text_size" msgid="8039448543171463017">"ٹیکسٹ کا سائز"</string>
     <string name="captioning_preset" msgid="4174276086501638524">"کیپشن کا طرز"</string>
     <string name="captioning_custom_options_title" msgid="3858866498893566351">"حسب ضرورت اختیارات"</string>
     <string name="captioning_background_color" msgid="5231412761368883107">"پس منظر کا رنگ"</string>
@@ -3122,7 +3116,7 @@
     <string name="keywords_display_brightness_level" msgid="850742707616318056">"مدھم اسکرین، ٹچ اسکرین، بیٹری، روشنی"</string>
     <string name="keywords_display_night_display" msgid="4711054330804250058">"مدھم اسکرین، نائٹ، ہلکا رنگ، نائٹ شفٹ، چمک، اسکرین کا رنگ، رنگ، رنگ"</string>
     <string name="keywords_display_wallpaper" msgid="8478137541939526564">"پس منظر، ذاتی نوعیت کا بنانا، حسب ضرورت ڈسپلے"</string>
-    <string name="keywords_display_font_size" msgid="3593317215149813183">"متن کا سائز"</string>
+    <string name="keywords_display_font_size" msgid="3593317215149813183">"ٹیکسٹ کا سائز"</string>
     <string name="keywords_display_cast_screen" msgid="2572331770299149370">"پروجیکٹ، کاسٹ، اسکرین کی بہتر سازی، اسکرین کا اشتراک، مررنگ، اشتراک کی اسکرین، اسکرین کی کاسٹنگ"</string>
     <string name="keywords_storage" msgid="3004667910133021783">"اسپیس، ڈسک، ہارڈ ڈرائیو، آلہ کا استعمال"</string>
     <string name="keywords_battery" msgid="7040323668283600530">"پاور کا استعمال، چارج کریں"</string>
@@ -3633,7 +3627,7 @@
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"کوئی نہیں"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{کوئی نہیں}=1{1 گفتگو}other{# گفتگوئیں}}"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"کون رکاوٹ ڈال سکتا ہے"</string>
-    <string name="zen_mode_people_footer" msgid="7710707353004137431">"اگرچہ پیغام رسانی یا کالنگ ایپس آپ کو اطلاع نہیں دے سکتیں اس باوجود بھی آپ کے منتخب کردہ لوگ یہاں ان ایپس کے ذریعے آپ سے رابطہ کر سکتے ہیں"</string>
+    <string name="zen_mode_people_footer" msgid="7710707353004137431">"اگرچہ پیغام رسانی یا کالنگ ایپس آپ کو اطلاع نہیں دے سکتیں اس کے باوجود بھی آپ کے منتخب کردہ لوگ یہاں ان ایپس کے ذریعے آپ سے رابطہ کر سکتے ہیں"</string>
     <string name="zen_mode_calls_title" msgid="2078578043677037740">"کالز"</string>
     <string name="zen_mode_calls" msgid="7653245854493631095">"کالز"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"کالز"</string>
@@ -4373,8 +4367,8 @@
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"‏%1$s کو آف کریں؟"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"‏&lt;b&gt;یہ سروس آف کریں؟&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; جب آپ سائن ان کرتے ہیں تو محفوظ کردہ معلومات جیسے پاس ورڈ، پاس کیز، ادائیگی کے طریقے اور دیگر معلومات کو پُر نہیں کیا جائے گا۔ اپنی محفوظ کردہ معلومات کو استعمال کرنے کے لیے، پاس ورڈ، پاس کی، یا ڈیٹا سروس کا انتخاب کریں۔"</string>
     <string name="account_dashboard_title_with_passkeys" msgid="6214673787161409996">"پاس ورڈز، پاس کیز اور آٹوفل"</string>
-    <string name="credman_confirmation_message_new_ui" msgid="6126274509951156460">"‏&lt;b&gt;Turn off all services?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; آپ کے سائن ان کرنے پر پاس ورڈز، پاس کیز اور دیگر محفوظ کردہ معلومات آٹو فل کے لیے دستیاب نہیں ہوں گی"</string>
-    <string name="credman_autofill_confirmation_message_new_ui" msgid="6222139222478822267">"‏&lt;b&gt;اپنی ترجیحی سروس کو &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; میں تبدیل کریں، نئے پاس ورڈز، پاس کیز اور دیگر معلومات اب سے یہاں محفوظ کی جائیں گی۔ &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; آپ کی اسکرین پر موجود چیزوں کا استعمال کر سکتا ہے تاکہ یہ تعین کیا جا سکے کہ کیا آٹو فل ہو سکتا ہے"</string>
+    <string name="credman_confirmation_message_new_ui" msgid="6126274509951156460">"‏&lt;b&gt;تمام سروسز کو آف کریں؟&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; آپ کے سائن ان کرنے پر پاس ورڈز، پاس کیز اور دیگر محفوظ کردہ معلومات آٹو فل کے لیے دستیاب نہیں ہوں گی"</string>
+    <string name="credman_autofill_confirmation_message_new_ui" msgid="6222139222478822267">"‏&lt;b&gt;آپ کی ترجیحی سروس کو &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; میں تبدیل کریں؟&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; نئے پاس ورڈز، پاس کیز اور دیگر معلومات اب سے یہاں محفوظ کی جائیں گی۔ &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; آپ کی اسکرین پر موجود چیزوں کا استعمال کر سکتا ہے تاکہ یہ تعین کیا جا سکے کہ کیا آٹو فل ہو سکتا ہے"</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"‏%1$s کا استعمال کرنا ہے؟"</string>
     <string name="credman_confirmation_turn_off_positive_button" msgid="5678773011513369161">"آف کریں"</string>
     <string name="credman_confirmation_change_provider_positive_button" msgid="7732302992885116967">"تبدیل کریں"</string>
@@ -4771,7 +4765,7 @@
     <string name="power_menu_power_prevent_ringing_hint" msgid="1169955014711158873">"گھنٹی بجنے کو روکیں:\nشارٹ کٹ کے لیے والیوم بٹن کو دبائیں"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"دبانے اور ہولڈ رکھنے کا دورانیہ"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"پاور بٹن کو کتنی دیر تک دبائے رکھنا ہے اس کا انتخاب کر کے حساسیت کو ایڈجسٹ کریں"</string>
-    <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"مختصر ویڈیو"</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"مختصر"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"طویل"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"والٹ دکھائیں"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="3984851951621168573">"مقفل اسکرین سے والٹ تک رسائی کی اجازت دیں"</string>
@@ -4811,7 +4805,7 @@
     <string name="media_controls_recommendations_title" msgid="3012692549413927608">"اسسٹنٹ کی میڈیا تجاویز دکھائیں"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"آپ کی سرگرمی کی بنیاد پر"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"کھلاڑی کو چھپائیں"</string>
-    <string name="media_controls_show_player" msgid="8504571042365814021">"کھلاڑی کو دکھائیں"</string>
+    <string name="media_controls_show_player" msgid="8504571042365814021">"پلیئر دکھائیں"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"میڈیا"</string>
     <string name="camera_extensions_fallback_title" msgid="3604579046777004989">"کیمرا سافٹ ویئر ایکسٹینشنز کی اجازت دیں"</string>
     <string name="camera_extensions_fallback_description" msgid="6939818294458854536">"‏Eyes Free ویڈیوگرافی جیسی جدید کیمرا کی خصوصیات کے ڈیفالٹ سافٹ ویئر کے نفاذ کو قابل بناتا ہے۔"</string>
@@ -4848,7 +4842,7 @@
     <string name="default_active_sim_calls" msgid="2390973682556353558">"کالز"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"SMS"</string>
     <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"موبائل ڈیٹا"</string>
-    <string name="wifi_scan_notify_message" msgid="1331238142061476869">"‏آلے کے تجربے کو بہتر بنانے کے لیے، Wi‑Fi کے آف ہونے پر بھی ایپس اور سروسز اب بھی کسی بھی وقت Wi‑Fi نیٹ ورکس اسکین کر سکتی ہیں۔ مثال کے طور، اسے مقام پر مبنی خصوصیات اور سروسز کو بہتر بنانے کے لیے استعمال کیا جا سکتا ہے۔ آپ اسے Wi‑Fi اسکیننگ کی ترتیبات میں تبدیل کر سکتے ہیں۔"</string>
+    <string name="wifi_scan_notify_message" msgid="1331238142061476869">"‏آلے کے تجربے کو بہتر بنانے کے لیے، Wi‑Fi کے آف ہونے پر بھی ایپس اور سروسز اب بھی کسی بھی وقت Wi‑Fi نیٹ ورکس اسکین کر سکتی ہیں۔ مثال کے طور پر، اسے مقام پر مبنی خصوصیات اور سروسز کو بہتر بنانے کے لیے استعمال کیا جا سکتا ہے۔ آپ اسے Wi‑Fi اسکیننگ کی ترتیبات میں تبدیل کر سکتے ہیں۔"</string>
     <string name="wifi_scan_change" msgid="8438320311511852918">"تبدیل کریں"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"منسلک ہے"</string>
@@ -4917,12 +4911,9 @@
     <string name="uwb_settings_summary" msgid="3074271396764672268">"‏اس سے UWB والے قریبی آلات کی متعلقہ پوزیشن کی شناخت کرنے میں مدد ملتی ہے"</string>
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"‏UWB کا استعمال کرنے کیلئے ہوائی جہاز وضع آف کریں"</string>
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"‏UWB موجودہ مقام پر دستیاب نہیں ہے"</string>
-    <!-- no translation found for thread_network_settings_title (4212301030523859220) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_summary (8065599651021748339) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_summary_airplane_mode (7207252895832446979) -->
-    <skip />
+    <string name="thread_network_settings_title" msgid="4212301030523859220">"تھریڈ"</string>
+    <string name="thread_network_settings_summary" msgid="8065599651021748339">"ایک بے جوڑ اسمارٹ گھر تجربے کیلئے، تھریڈ کا استعمال کرتے ہوئے موافق آلات سے منسلک ہوں"</string>
+    <string name="thread_network_settings_summary_airplane_mode" msgid="7207252895832446979">"تھریڈ کا استعمال کرنے کیلئے ہوائی جہاز وضع آف کریں"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"کیمرا تک رسائی"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"مائیکروفون تک رسائی"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"ایپس اور سروسز کے لیے"</string>
