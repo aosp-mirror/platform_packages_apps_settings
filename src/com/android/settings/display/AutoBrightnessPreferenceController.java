@@ -62,6 +62,10 @@ public class AutoBrightnessPreferenceController extends TogglePreferenceControll
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
+        if (!(preference instanceof PrimarySwitchPreference)) {
+            return;
+        }
+
         PrimarySwitchPreference pref = (PrimarySwitchPreference) preference;
         if (pref.isEnabled() && UserManager.get(mContext).hasBaseUserRestriction(
                 UserManager.DISALLOW_CONFIG_BRIGHTNESS, Process.myUserHandle())) {
