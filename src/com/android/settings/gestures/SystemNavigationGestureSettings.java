@@ -42,7 +42,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.accessibility.AccessibilityGestureNavigationTutorial;
+import com.android.settings.accessibility.AccessibilityShortcutsTutorial;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerListHelper;
 import com.android.settings.core.SubSettingLauncher;
@@ -101,7 +101,7 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
             mA11yTutorialDialogShown =
                     savedInstanceState.getBoolean(KEY_SHOW_A11Y_TUTORIAL_DIALOG, false);
             if (mA11yTutorialDialogShown) {
-                AccessibilityGestureNavigationTutorial.showGestureNavigationTutorialDialog(
+                AccessibilityShortcutsTutorial.showGestureNavigationTutorialDialog(
                         getContext(), dialog -> mA11yTutorialDialogShown = false);
             }
         }
@@ -355,7 +355,7 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
                 && !isAccessibilityFloatingMenuEnabled()
                 && (isAnyServiceSupportAccessibilityButton() || isNavBarMagnificationEnabled())) {
             mA11yTutorialDialogShown = true;
-            AccessibilityGestureNavigationTutorial.showGestureNavigationTutorialDialog(getContext(),
+            AccessibilityShortcutsTutorial.showGestureNavigationTutorialDialog(getContext(),
                     dialog -> mA11yTutorialDialogShown = false);
         } else {
             mA11yTutorialDialogShown = false;
