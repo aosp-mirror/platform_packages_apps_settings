@@ -26,6 +26,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.development.BluetoothA2dpConfigStore;
+import com.android.settings.development.Flags;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.ArrayList;
@@ -47,6 +48,11 @@ public class BluetoothCodecDialogPreferenceController extends
                                                     Callback callback) {
         super(context, lifecycle, store);
         mCallback = callback;
+    }
+
+    @Override
+    public boolean isAvailable() {
+        return !Flags.a2dpOffloadCodecExtensibilitySettings();
     }
 
     @Override
