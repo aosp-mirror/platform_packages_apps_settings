@@ -140,6 +140,8 @@ public final class Utils extends com.android.settingslib.Utils {
 
     public static final String SYSTEMUI_PACKAGE_NAME = "com.android.systemui";
 
+    public static final String PHONE_PACKAGE_NAME = "com.android.phone";
+
     public static final String OS_PKG = "os";
 
     /**

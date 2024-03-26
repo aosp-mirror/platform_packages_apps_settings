@@ -31,6 +31,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settings.R
+import com.android.settings.Utils
 import com.android.settings.network.SubscriptionUtil
 import com.android.settings.network.telephony.MobileNetworkUtils
 import com.android.settings.network.telephony.isSubscriptionEnabledFlow
@@ -104,6 +105,7 @@ private fun AddSim() {
 
 private fun startAddSimFlow(context: Context) {
     val intent = Intent(EuiccManager.ACTION_PROVISION_EMBEDDED_SUBSCRIPTION)
+    intent.setPackage(Utils.PHONE_PACKAGE_NAME)
     intent.putExtra(EuiccManager.EXTRA_FORCE_PROVISION, true)
     context.startActivity(intent)
 }
