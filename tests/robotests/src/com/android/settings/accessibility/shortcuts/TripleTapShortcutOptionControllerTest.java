@@ -27,7 +27,6 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 import android.content.ComponentName;
 import android.content.Context;
-import android.icu.text.MessageFormat;
 import android.os.UserHandle;
 import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
@@ -83,16 +82,16 @@ public class TripleTapShortcutOptionControllerTest {
     }
 
     @Test
-    public void displayPreference_verifyScreenTestSet() {
+    public void displayPreference_verifyTitleSummaryText() {
+        String expectedTitle = mContext.getString(
+                R.string.accessibility_shortcut_edit_screen_title_triple_tap);
+        String expectedSummary = mContext.getString(
+                R.string.accessibility_shortcut_edit_screen_summary_triple_tap, 3);
+
         mController.displayPreference(mPreferenceScreen);
 
-        assertThat(mShortcutOptionPreference.getTitle().toString()).isEqualTo(
-                mContext.getString(R.string.accessibility_shortcut_edit_dialog_title_triple_tap));
-        assertThat(mShortcutOptionPreference.getSummary().toString()).isEqualTo(
-                MessageFormat.format(
-                        mContext.getString(
-                                R.string.accessibility_shortcut_edit_dialog_summary_triple_tap),
-                        3));
+        assertThat(mShortcutOptionPreference.getTitle().toString()).isEqualTo(expectedTitle);
+        assertThat(mShortcutOptionPreference.getSummary().toString()).isEqualTo(expectedSummary);
     }
 
     @Test

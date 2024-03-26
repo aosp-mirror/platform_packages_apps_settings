@@ -24,7 +24,6 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 import android.content.ComponentName;
 import android.content.Context;
-import android.icu.text.MessageFormat;
 import android.os.UserHandle;
 import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
@@ -82,15 +81,15 @@ public class TwoFingerDoubleTapShortcutOptionControllerTest {
 
     @Test
     public void displayPreference_verifyScreenTextSet() {
+        String expectedTitle = mContext.getString(
+                R.string.accessibility_shortcut_edit_screen_title_two_finger_double_tap, 2);
+        String expectedSummary = mContext.getString(
+                R.string.accessibility_shortcut_edit_screen_summary_two_finger_double_tap, 2);
+
         mController.displayPreference(mPreferenceScreen);
 
-        assertThat(mShortcutOptionPreference.getTitle().toString()).isEqualTo(
-                mContext.getString(
-                        R.string.accessibility_shortcut_edit_dialog_title_two_finger_double_tap));
-        assertThat(mShortcutOptionPreference.getSummary().toString()).isEqualTo(
-                MessageFormat.format(mContext.getString(
-                        R.string.accessibility_shortcut_edit_dialog_summary_two_finger_double_tap),
-                        2));
+        assertThat(mShortcutOptionPreference.getTitle().toString()).isEqualTo(expectedTitle);
+        assertThat(mShortcutOptionPreference.getSummary().toString()).isEqualTo(expectedSummary);
     }
 
     @Test

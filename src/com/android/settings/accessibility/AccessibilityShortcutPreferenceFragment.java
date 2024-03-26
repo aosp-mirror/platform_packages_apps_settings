@@ -223,12 +223,12 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
                     mDialog = AccessibilityGestureNavigationTutorial
                             .createAccessibilityTutorialDialogForSetupWizard(
                                     getPrefContext(), getUserShortcutTypes(),
-                                    this::callOnTutorialDialogButtonClicked);
+                                    this::callOnTutorialDialogButtonClicked, getLabelName());
                 } else {
                     mDialog = AccessibilityGestureNavigationTutorial
                             .createAccessibilityTutorialDialog(
                                     getPrefContext(), getUserShortcutTypes(),
-                                    this::callOnTutorialDialogButtonClicked);
+                                    this::callOnTutorialDialogButtonClicked, getLabelName());
                 }
                 mDialog.setCanceledOnTouchOutside(false);
                 return mDialog;
@@ -454,6 +454,7 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
         final int shortcutTypes = PreferredShortcuts.retrieveUserShortcutType(context,
                 getComponentName().flattenToString());
 
+        // LINT.IfChange(shortcut_type_ui_order)
         final List<CharSequence> list = new ArrayList<>();
         if (android.view.accessibility.Flags.a11yQsShortcut()) {
             if (hasShortcutType(shortcutTypes, AccessibilityUtil.UserShortcutType.QUICK_SETTINGS)) {
@@ -470,6 +471,7 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
                     R.string.accessibility_shortcut_hardware_keyword);
             list.add(hardwareTitle);
         }
+        // LINT.ThenChange(/res/xml/accessibility_edit_shortcuts.xml:shortcut_type_ui_order)
 
         // Show software shortcut if first time to use.
         if (list.isEmpty()) {

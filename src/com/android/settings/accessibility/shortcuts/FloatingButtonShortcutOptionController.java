@@ -57,9 +57,12 @@ public class FloatingButtonShortcutOptionController
     @Nullable
     @Override
     public CharSequence getSummary() {
-        if (isInSetupWizard()) {
-            return null;
+        final SpannableStringBuilder sb = new SpannableStringBuilder();
+        sb.append(mContext.getText(
+                R.string.accessibility_shortcut_edit_dialog_summary_floating_button));
+        if (!isInSetupWizard()) {
+            sb.append("\n\n").append(getCustomizeAccessibilityButtonLink());
         }
-        return new SpannableStringBuilder().append(getCustomizeAccessibilityButtonLink());
+        return sb;
     }
 }

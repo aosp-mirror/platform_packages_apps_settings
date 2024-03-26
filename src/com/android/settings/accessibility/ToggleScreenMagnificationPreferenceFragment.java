@@ -484,6 +484,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         final int shortcutTypes = PreferredShortcuts.retrieveUserShortcutType(context,
                 MAGNIFICATION_CONTROLLER_NAME);
 
+        // LINT.IfChange(shortcut_type_ui_order)
         final List<CharSequence> list = new ArrayList<>();
         if (android.view.accessibility.Flags.a11yQsShortcut()) {
             if (hasShortcutType(shortcutTypes, UserShortcutType.QUICK_SETTINGS)) {
@@ -500,18 +501,19 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                     R.string.accessibility_shortcut_hardware_keyword);
             list.add(hardwareTitle);
         }
+        if (Flags.enableMagnificationMultipleFingerMultipleTapGesture()) {
+            if (hasShortcutType(shortcutTypes, UserShortcutType.TWOFINGER_DOUBLETAP)) {
+                final CharSequence twoFingerDoubleTapTitle = context.getString(
+                        R.string.accessibility_shortcut_two_finger_double_tap_keyword, 2);
+                list.add(twoFingerDoubleTapTitle);
+            }
+        }
         if (hasShortcutType(shortcutTypes, UserShortcutType.TRIPLETAP)) {
             final CharSequence tripleTapTitle = context.getText(
                     R.string.accessibility_shortcut_triple_tap_keyword);
             list.add(tripleTapTitle);
         }
-        if (Flags.enableMagnificationMultipleFingerMultipleTapGesture()) {
-            if (hasShortcutType(shortcutTypes, UserShortcutType.TWOFINGER_DOUBLETAP)) {
-                final CharSequence twoFingerTripleTapTitle = context.getText(
-                        R.string.accessibility_shortcut_two_finger_double_tap_keyword);
-                list.add(twoFingerTripleTapTitle);
-            }
-        }
+        // LINT.ThenChange(/res/xml/accessibility_edit_shortcuts.xml:shortcut_type_ui_order)
 
         // Show software shortcut if first time to use.
         if (list.isEmpty()) {

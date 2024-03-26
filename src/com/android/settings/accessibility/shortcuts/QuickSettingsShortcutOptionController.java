@@ -34,6 +34,8 @@ import androidx.preference.PreferenceScreen;
 import com.android.internal.accessibility.common.ShortcutConstants;
 import com.android.internal.accessibility.util.AccessibilityUtils;
 import com.android.settings.R;
+import com.android.settings.accessibility.AccessibilityUtil;
+import com.android.settingslib.utils.StringUtil;
 
 import java.util.List;
 import java.util.Map;
@@ -62,11 +64,20 @@ public class QuickSettingsShortcutOptionController extends ShortcutOptionPrefere
         if (preference instanceof ShortcutOptionPreference shortcutOptionPreference) {
             shortcutOptionPreference.setTitle(
                     R.string.accessibility_shortcut_edit_dialog_title_quick_settings);
-            shortcutOptionPreference.setSummary(
-                    R.string.accessibility_shortcut_edit_dialog_summary_quick_settings);
             shortcutOptionPreference.setIntroImageResId(
                     R.drawable.a11y_shortcut_type_quick_settings);
         }
+    }
+
+    @Override
+    public CharSequence getSummary() {
+        int numFingers = AccessibilityUtil.isTouchExploreEnabled(mContext) ? 2 : 1;
+        return StringUtil.getIcuPluralsString(
+                mContext,
+                numFingers,
+                isInSetupWizard()
+                        ? R.string.accessibility_shortcut_edit_dialog_summary_quick_settings_suw
+                        : R.string.accessibility_shortcut_edit_dialog_summary_quick_settings);
     }
 
     @Override
@@ -91,7 +102,8 @@ public class QuickSettingsShortcutOptionController extends ShortcutOptionPrefere
         }
         for (String target : getShortcutTargets()) {
             ComponentName targetComponentName = ComponentName.unflattenFromString(target);
-            if (!a11yFeatureToTileMap.containsKey(targetComponentName)) {
+            if (targetComponentName == null
+                    || !a11yFeatureToTileMap.containsKey(targetComponentName)) {
                 return false;
             }
         }

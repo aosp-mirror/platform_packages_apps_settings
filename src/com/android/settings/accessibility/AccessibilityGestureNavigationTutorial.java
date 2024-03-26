@@ -29,12 +29,14 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.style.ImageSpan;
+import android.util.ArrayMap;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -57,6 +59,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.android.server.accessibility.Flags;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settingslib.utils.StringUtil;
 import com.android.settingslib.widget.LottieColorUtils;
 
 import com.airbnb.lottie.LottieAnimationView;
@@ -66,6 +69,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Utility class for creating the dialog that guides users for gesture navigation for
@@ -117,12 +121,17 @@ public final class AccessibilityGestureNavigationTutorial {
         return createDialog(context, DialogType.LAUNCH_SERVICE_BY_ACCESSIBILITY_GESTURE);
     }
 
-    static AlertDialog createAccessibilityTutorialDialog(Context context, int shortcutTypes) {
-        return createAccessibilityTutorialDialog(context, shortcutTypes, mOnClickListener);
+    static AlertDialog createAccessibilityTutorialDialog(
+            @NonNull Context context, int shortcutTypes, @NonNull CharSequence featureName) {
+        return createAccessibilityTutorialDialog(
+                context, shortcutTypes, mOnClickListener, featureName);
     }
 
-    static AlertDialog createAccessibilityTutorialDialog(Context context, int shortcutTypes,
-            @Nullable DialogInterface.OnClickListener actionButtonListener) {
+    static AlertDialog createAccessibilityTutorialDialog(
+            @NonNull Context context,
+            int shortcutTypes,
+            @Nullable DialogInterface.OnClickListener actionButtonListener,
+            @NonNull CharSequence featureName) {
 
         final int category = SettingsEnums.SWITCH_SHORTCUT_DIALOG_ACCESSIBILITY_BUTTON_SETTINGS;
         final DialogInterface.OnClickListener linkButtonListener =
@@ -138,46 +147,59 @@ public final class AccessibilityGestureNavigationTutorial {
                         linkButtonListener)
                 .create();
 
-        final List<TutorialPage> tutorialPages =
-                createShortcutTutorialPages(context, shortcutTypes);
+        final List<TutorialPage> tutorialPages = createShortcutTutorialPages(
+                context, shortcutTypes, featureName, /* isInSetupWizard= */ false);
         Preconditions.checkArgument(!tutorialPages.isEmpty(),
                 /* errorMessage= */ "Unexpected tutorial pages size");
 
-        final TutorialPageChangeListener.OnPageSelectedCallback callback = index -> {
-            final int pageType = tutorialPages.get(index).getType();
-            alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).setVisibility(
-                    pageType == UserShortcutType.SOFTWARE ? VISIBLE : GONE);
-        };
+        final TutorialPageChangeListener.OnPageSelectedCallback callback =
+                index -> updateTutorialNegativeButtonTextAndVisibility(
+                        alertDialog, tutorialPages, index);
 
         alertDialog.setView(createShortcutNavigationContentView(context, tutorialPages, callback));
 
         // Showing first page won't invoke onPageSelectedCallback. Need to check the first tutorial
         // page type manually to set correct visibility of the link button.
-        alertDialog.setOnShowListener(dialog -> {
-            final int firstPageType = tutorialPages.get(0).getType();
-            alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).setVisibility(
-                    firstPageType == UserShortcutType.SOFTWARE ? VISIBLE : GONE);
-        });
+        alertDialog.setOnShowListener(
+                dialog -> updateTutorialNegativeButtonTextAndVisibility(
+                        alertDialog, tutorialPages, /* selectedPageIndex= */ 0));
 
         return alertDialog;
     }
 
-    static AlertDialog createAccessibilityTutorialDialogForSetupWizard(Context context,
-            int shortcutTypes) {
-        return createAccessibilityTutorialDialogForSetupWizard(context, shortcutTypes,
-                mOnClickListener);
+    private static void updateTutorialNegativeButtonTextAndVisibility(
+            AlertDialog dialog, List<TutorialPage> pages, int selectedPageIndex) {
+        final Button button = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+        final int pageType = pages.get(selectedPageIndex).getType();
+        final int buttonVisibility = pageType == UserShortcutType.SOFTWARE ? VISIBLE : GONE;
+        button.setVisibility(buttonVisibility);
+        if (buttonVisibility == VISIBLE) {
+            final int textResId = AccessibilityUtil.isFloatingMenuEnabled(dialog.getContext())
+                    ? R.string.accessibility_tutorial_dialog_link_button
+                    : R.string.accessibility_tutorial_dialog_configure_software_shortcut_type;
+            button.setText(textResId);
+        }
     }
 
     static AlertDialog createAccessibilityTutorialDialogForSetupWizard(Context context,
-            int shortcutTypes, @Nullable DialogInterface.OnClickListener actionButtonListener) {
+            int shortcutTypes, CharSequence featureName) {
+        return createAccessibilityTutorialDialogForSetupWizard(context, shortcutTypes,
+                mOnClickListener, featureName);
+    }
+
+    static AlertDialog createAccessibilityTutorialDialogForSetupWizard(
+            @NonNull Context context,
+            int shortcutTypes,
+            @Nullable DialogInterface.OnClickListener actionButtonListener,
+            @NonNull CharSequence featureName) {
 
         final AlertDialog alertDialog = new AlertDialog.Builder(context)
                 .setPositiveButton(R.string.accessibility_tutorial_dialog_button,
                         actionButtonListener)
                 .create();
 
-        final List<TutorialPage> tutorialPages =
-                createShortcutTutorialPages(context, shortcutTypes);
+        final List<TutorialPage> tutorialPages = createShortcutTutorialPages(
+                context, shortcutTypes, featureName, /* inSetupWizard= */ true);
         Preconditions.checkArgument(!tutorialPages.isEmpty(),
                 /* errorMessage= */ "Unexpected tutorial pages size");
 
@@ -403,8 +425,8 @@ public final class AccessibilityGestureNavigationTutorial {
         final View image =
                 createIllustrationViewWithImageRawResource(context,
                         R.raw.a11y_shortcut_type_triple_tap);
-        final CharSequence instruction =
-                context.getText(R.string.accessibility_tutorial_dialog_message_triple);
+        final CharSequence instruction = context.getString(
+                R.string.accessibility_tutorial_dialog_tripletap_instruction, 3);
         final ImageView indicatorIcon =
                 createImageView(context, R.drawable.ic_accessibility_page_indicator);
         indicatorIcon.setEnabled(false);
@@ -413,15 +435,16 @@ public final class AccessibilityGestureNavigationTutorial {
     }
 
     private static TutorialPage createTwoFingerTripleTapTutorialPage(@NonNull Context context) {
-        // TODO(b/308088945): Update tutorial string and image when UX provides them
         final int type = UserShortcutType.TWOFINGER_DOUBLETAP;
-        final CharSequence title =
-                context.getText(R.string.accessibility_tutorial_dialog_title_two_finger_double);
+        final int numFingers = 2;
+        final CharSequence title = context.getString(
+                R.string.accessibility_tutorial_dialog_title_two_finger_double, numFingers);
+        // TODO(b/308088945): Update tutorial image when UX provides them
         final View image =
                 createIllustrationViewWithImageRawResource(context,
                         R.raw.a11y_shortcut_type_triple_tap);
-        final CharSequence instruction =
-                context.getText(R.string.accessibility_tutorial_dialog_message_two_finger_triple);
+        final CharSequence instruction = context.getString(
+                R.string.accessibility_tutorial_dialog_twofinger_doubletap_instruction, numFingers);
         final ImageView indicatorIcon =
                 createImageView(context, R.drawable.ic_accessibility_page_indicator);
         indicatorIcon.setEnabled(false);
@@ -429,30 +452,50 @@ public final class AccessibilityGestureNavigationTutorial {
         return new TutorialPage(type, title, image, indicatorIcon, instruction);
     }
 
-    private static TutorialPage createQuickSettingTutorialPage(@NonNull Context context) {
+    private static TutorialPage createQuickSettingsTutorialPage(
+            @NonNull Context context, @NonNull CharSequence featureName, boolean inSetupWizard) {
         final int type = UserShortcutType.QUICK_SETTINGS;
         final CharSequence title =
                 context.getText(R.string.accessibility_tutorial_dialog_title_quick_setting);
         final View image =
                 createIllustrationView(context,
                         R.drawable.a11y_shortcut_type_quick_settings);
-        final CharSequence instruction =
-                context.getText(R.string.accessibility_tutorial_dialog_message_quick_setting);
+        final int numFingers = AccessibilityUtil.isTouchExploreEnabled(context) ? 2 : 1;
+        Map<String, Object> arguments = new ArrayMap<>();
+        arguments.put("count", numFingers);
+        arguments.put("featureName", featureName);
+        final CharSequence instruction = StringUtil.getIcuPluralsString(context,
+                arguments,
+                R.string.accessibility_tutorial_dialog_message_quick_setting);
+        final SpannableStringBuilder tutorialText = new SpannableStringBuilder();
+        if (inSetupWizard) {
+            tutorialText.append(context.getText(
+                            R.string.accessibility_tutorial_dialog_shortcut_unavailable_in_suw))
+                    .append("\n\n");
+        }
+        tutorialText.append(instruction);
         final ImageView indicatorIcon =
                 createImageView(context, R.drawable.ic_accessibility_page_indicator);
         indicatorIcon.setEnabled(false);
 
-        return new TutorialPage(type, title, image, indicatorIcon, instruction);
+        return new TutorialPage(type, title, image, indicatorIcon, tutorialText);
     }
 
+    /**
+     * Create the tutorial pages for selected shortcut types in the same order as shown in the
+     * edit shortcut screen.
+     */
     @VisibleForTesting
-    static List<TutorialPage> createShortcutTutorialPages(@NonNull Context context,
-            int shortcutTypes) {
+    static List<TutorialPage> createShortcutTutorialPages(
+            @NonNull Context context, int shortcutTypes, @NonNull CharSequence featureName,
+            boolean inSetupWizard) {
+        // LINT.IfChange(shortcut_type_ui_order)
         final List<TutorialPage> tutorialPages = new ArrayList<>();
         if (android.view.accessibility.Flags.a11yQsShortcut()) {
             if ((shortcutTypes & UserShortcutType.QUICK_SETTINGS)
                     == UserShortcutType.QUICK_SETTINGS) {
-                tutorialPages.add(createQuickSettingTutorialPage(context));
+                tutorialPages.add(
+                        createQuickSettingsTutorialPage(context, featureName, inSetupWizard));
             }
         }
         if ((shortcutTypes & UserShortcutType.SOFTWARE) == UserShortcutType.SOFTWARE) {
@@ -463,16 +506,17 @@ public final class AccessibilityGestureNavigationTutorial {
             tutorialPages.add(createHardwareTutorialPage(context));
         }
 
-        if ((shortcutTypes & UserShortcutType.TRIPLETAP) == UserShortcutType.TRIPLETAP) {
-            tutorialPages.add(createTripleTapTutorialPage(context));
-        }
-
         if (Flags.enableMagnificationMultipleFingerMultipleTapGesture()) {
             if ((shortcutTypes & UserShortcutType.TWOFINGER_DOUBLETAP)
                     == UserShortcutType.TWOFINGER_DOUBLETAP) {
                 tutorialPages.add(createTwoFingerTripleTapTutorialPage(context));
             }
         }
+
+        if ((shortcutTypes & UserShortcutType.TRIPLETAP) == UserShortcutType.TRIPLETAP) {
+            tutorialPages.add(createTripleTapTutorialPage(context));
+        }
+        // LINT.ThenChange(/res/xml/accessibility_edit_shortcuts.xml:shortcut_type_ui_order)
 
         return tutorialPages;
     }
@@ -509,10 +553,11 @@ public final class AccessibilityGestureNavigationTutorial {
             final int resId = R.string.accessibility_tutorial_dialog_message_floating_button;
             sb.append(context.getText(resId));
         } else if (AccessibilityUtil.isGestureNavigateEnabled(context)) {
-            final int resId = AccessibilityUtil.isTouchExploreEnabled(context)
-                    ? R.string.accessibility_tutorial_dialog_message_gesture_talkback
-                    : R.string.accessibility_tutorial_dialog_message_gesture;
-            sb.append(context.getText(resId));
+            final int numFingers = AccessibilityUtil.isTouchExploreEnabled(context) ? 3 : 2;
+            sb.append(StringUtil.getIcuPluralsString(
+                    context,
+                    numFingers,
+                    R.string.accessibility_tutorial_dialog_gesture_shortcut_instruction));
         } else {
             final int resId = R.string.accessibility_tutorial_dialog_message_button;
             sb.append(getSoftwareInstructionWithIcon(context, context.getText(resId)));

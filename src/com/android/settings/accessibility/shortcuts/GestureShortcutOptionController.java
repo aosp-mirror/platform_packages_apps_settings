@@ -24,6 +24,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityUtil;
+import com.android.settingslib.utils.StringUtil;
 
 /**
  * A controller handles displaying the gesture shortcut option preference and
@@ -59,13 +60,18 @@ public class GestureShortcutOptionController extends SoftwareShortcutOptionPrefe
 
     @Override
     public CharSequence getSummary() {
+        int numFingers = AccessibilityUtil.isTouchExploreEnabled(mContext) ? 3 : 2;
+        String instruction = StringUtil.getIcuPluralsString(
+                mContext,
+                numFingers,
+                R.string.accessibility_shortcut_edit_dialog_summary_gesture);
+
         final SpannableStringBuilder sb = new SpannableStringBuilder();
-        final int resId = AccessibilityUtil.isTouchExploreEnabled(mContext)
-                ? R.string.accessibility_shortcut_edit_dialog_summary_software_gesture_talkback
-                : R.string.accessibility_shortcut_edit_dialog_summary_software_gesture;
-        sb.append(mContext.getText(resId));
-        sb.append("\n\n");
-        sb.append(getCustomizeAccessibilityButtonLink());
+        sb.append(instruction);
+        if (!isInSetupWizard()) {
+            sb.append("\n\n");
+            sb.append(getCustomizeAccessibilityButtonLink());
+        }
 
         return sb;
     }

@@ -19,7 +19,6 @@ package com.android.settings.accessibility.shortcuts;
 import static com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_CONTROLLER_NAME;
 
 import android.content.Context;
-import android.icu.text.MessageFormat;
 import android.provider.Settings;
 import android.view.accessibility.Flags;
 
@@ -52,12 +51,9 @@ public class TripleTapShortcutOptionController extends ShortcutOptionPreferenceC
         final Preference preference = screen.findPreference(getPreferenceKey());
         if (preference instanceof ShortcutOptionPreference shortcutOptionPreference) {
             shortcutOptionPreference.setTitle(
-                    R.string.accessibility_shortcut_edit_dialog_title_triple_tap);
+                    R.string.accessibility_shortcut_edit_screen_title_triple_tap);
             String summary = mContext.getString(
-                    R.string.accessibility_shortcut_edit_dialog_summary_triple_tap);
-            // Format the number '3' in the summary.
-            final Object[] arguments = {3};
-            summary = MessageFormat.format(summary, arguments);
+                    R.string.accessibility_shortcut_edit_screen_summary_triple_tap, 3);
 
             shortcutOptionPreference.setSummary(summary);
             shortcutOptionPreference.setIntroImageRawResId(
