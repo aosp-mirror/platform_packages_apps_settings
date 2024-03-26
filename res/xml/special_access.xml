@@ -23,6 +23,8 @@
         android:key="run_backup_tasks"
         android:title="@string/run_backup_tasks_title"
         android:order="-2000"
+        settings:isPreferenceVisible="false"
+        settings:searchable="false"
         settings:keywords="@string/keywords_run_backup_tasks"
         settings:controller="com.android.settings.spa.app.specialaccess.BackupTasksAppsPreferenceController">
     </Preference>
