@@ -16,10 +16,10 @@
 
 package com.android.settings.accessibility;
 
-import static com.android.settings.accessibility.AccessibilityGestureNavigationTutorial.createAccessibilityTutorialDialog;
-import static com.android.settings.accessibility.AccessibilityGestureNavigationTutorial.createAccessibilityTutorialDialogForSetupWizard;
-import static com.android.settings.accessibility.AccessibilityGestureNavigationTutorial.createShortcutTutorialPages;
-import static com.android.settings.accessibility.AccessibilityGestureNavigationTutorial.showGestureNavigationTutorialDialog;
+import static com.android.settings.accessibility.AccessibilityShortcutsTutorial.createAccessibilityTutorialDialog;
+import static com.android.settings.accessibility.AccessibilityShortcutsTutorial.createAccessibilityTutorialDialogForSetupWizard;
+import static com.android.settings.accessibility.AccessibilityShortcutsTutorial.createShortcutTutorialPages;
+import static com.android.settings.accessibility.AccessibilityShortcutsTutorial.showGestureNavigationTutorialDialog;
 import static com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -69,10 +69,10 @@ import org.robolectric.shadows.ShadowLooper;
 
 import java.util.Map;
 
-/** Tests for {@link AccessibilityGestureNavigationTutorial}. */
+/** Tests for {@link AccessibilityShortcutsTutorial}. */
 @Config(shadows = SettingsShadowResources.class)
 @RunWith(RobolectricTestRunner.class)
-public final class AccessibilityGestureNavigationTutorialTest {
+public final class AccessibilityShortcutsTutorialTest {
     private static final String FAKE_FEATURE_NAME = "Fake Feature Name";
 
     @Rule

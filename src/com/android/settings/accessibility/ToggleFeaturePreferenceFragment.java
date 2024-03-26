@@ -225,12 +225,12 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
                 return mDialog;
             case DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL:
                 if (isAnySetupWizard()) {
-                    mDialog = AccessibilityGestureNavigationTutorial
+                    mDialog = AccessibilityShortcutsTutorial
                             .createAccessibilityTutorialDialogForSetupWizard(
                                     getPrefContext(), getUserShortcutTypes(),
                                     this::callOnTutorialDialogButtonClicked, mPackageName);
                 } else {
-                    mDialog = AccessibilityGestureNavigationTutorial
+                    mDialog = AccessibilityShortcutsTutorial
                             .createAccessibilityTutorialDialog(
                                     getPrefContext(), getUserShortcutTypes(),
                                     this::callOnTutorialDialogButtonClicked, mPackageName);

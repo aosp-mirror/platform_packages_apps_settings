@@ -11,7 +11,7 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License
+ * limitations under the License.
  */
 
 package com.android.settings.accessibility;
@@ -72,10 +72,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Utility class for creating the dialog that guides users for gesture navigation for
- * accessibility services.
+ * Utility class for creating the dialog that shows tutorials on how to use the selected
+ * accessibility shortcut types
  */
-public final class AccessibilityGestureNavigationTutorial {
+public final class AccessibilityShortcutsTutorial {
     private static final String TAG = "AccessibilityGestureNavigationTutorial";
 
     /** IntDef enum for dialog type. */
@@ -92,9 +92,9 @@ public final class AccessibilityGestureNavigationTutorial {
         int GESTURE_NAVIGATION_SETTINGS = 2;
     }
 
-    private AccessibilityGestureNavigationTutorial() {}
+    private AccessibilityShortcutsTutorial() {}
 
-    private static final DialogInterface.OnClickListener mOnClickListener =
+    private static final DialogInterface.OnClickListener ON_CLICK_LISTENER =
             (DialogInterface dialog, int which) -> dialog.dismiss();
 
     /**
@@ -106,7 +106,7 @@ public final class AccessibilityGestureNavigationTutorial {
         final AlertDialog alertDialog = new AlertDialog.Builder(context)
                 .setView(createTutorialDialogContentView(context,
                         DialogType.GESTURE_NAVIGATION_SETTINGS))
-                .setPositiveButton(R.string.accessibility_tutorial_dialog_button, mOnClickListener)
+                .setPositiveButton(R.string.accessibility_tutorial_dialog_button, ON_CLICK_LISTENER)
                 .setOnDismissListener(onDismissListener)
                 .create();
 
@@ -124,7 +124,7 @@ public final class AccessibilityGestureNavigationTutorial {
     static AlertDialog createAccessibilityTutorialDialog(
             @NonNull Context context, int shortcutTypes, @NonNull CharSequence featureName) {
         return createAccessibilityTutorialDialog(
-                context, shortcutTypes, mOnClickListener, featureName);
+                context, shortcutTypes, ON_CLICK_LISTENER, featureName);
     }
 
     static AlertDialog createAccessibilityTutorialDialog(
@@ -184,7 +184,7 @@ public final class AccessibilityGestureNavigationTutorial {
     static AlertDialog createAccessibilityTutorialDialogForSetupWizard(Context context,
             int shortcutTypes, CharSequence featureName) {
         return createAccessibilityTutorialDialogForSetupWizard(context, shortcutTypes,
-                mOnClickListener, featureName);
+                ON_CLICK_LISTENER, featureName);
     }
 
     static AlertDialog createAccessibilityTutorialDialogForSetupWizard(
@@ -259,7 +259,7 @@ public final class AccessibilityGestureNavigationTutorial {
     private static AlertDialog createDialog(Context context, int dialogType) {
         final AlertDialog alertDialog = new AlertDialog.Builder(context)
                 .setView(createTutorialDialogContentView(context, dialogType))
-                .setPositiveButton(R.string.accessibility_tutorial_dialog_button, mOnClickListener)
+                .setPositiveButton(R.string.accessibility_tutorial_dialog_button, ON_CLICK_LISTENER)
                 .create();
 
         alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);

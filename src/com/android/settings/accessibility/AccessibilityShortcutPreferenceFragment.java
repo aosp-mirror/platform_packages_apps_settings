@@ -220,12 +220,12 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
                 return mDialog;
             case DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL:
                 if (WizardManagerHelper.isAnySetupWizard(getIntent())) {
-                    mDialog = AccessibilityGestureNavigationTutorial
+                    mDialog = AccessibilityShortcutsTutorial
                             .createAccessibilityTutorialDialogForSetupWizard(
                                     getPrefContext(), getUserShortcutTypes(),
                                     this::callOnTutorialDialogButtonClicked, getLabelName());
                 } else {
-                    mDialog = AccessibilityGestureNavigationTutorial
+                    mDialog = AccessibilityShortcutsTutorial
                             .createAccessibilityTutorialDialog(
                                     getPrefContext(), getUserShortcutTypes(),
                                     this::callOnTutorialDialogButtonClicked, getLabelName());

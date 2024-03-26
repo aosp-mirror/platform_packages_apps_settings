@@ -166,7 +166,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         }
         switch (dialogId) {
             case DialogEnums.GESTURE_NAVIGATION_TUTORIAL:
-                return AccessibilityGestureNavigationTutorial
+                return AccessibilityShortcutsTutorial
                         .showAccessibilityGestureTutorialDialog(getPrefContext());
             case DialogEnums.MAGNIFICATION_EDIT_SHORTCUT:
                 final CharSequence dialogTitle = getShortcutTitle();
