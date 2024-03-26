@@ -18,18 +18,23 @@ package com.android.settings.fingerprint2.domain.interactor
 
 import android.content.Context
 import android.content.Intent
+import android.hardware.biometrics.ComponentInfoInternal
+import android.hardware.biometrics.SensorLocationInternal
+import android.hardware.biometrics.SensorProperties
 import android.hardware.fingerprint.Fingerprint
 import android.hardware.fingerprint.FingerprintEnrollOptions
 import android.hardware.fingerprint.FingerprintManager
 import android.hardware.fingerprint.FingerprintManager.CryptoObject
 import android.hardware.fingerprint.FingerprintManager.FINGERPRINT_ERROR_LOCKOUT_PERMANENT
+import android.hardware.fingerprint.FingerprintSensorProperties
+import android.hardware.fingerprint.FingerprintSensorPropertiesInternal
 import android.os.CancellationSignal
 import android.os.Handler
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.biometrics.GatekeeperPasswordProvider
 import com.android.settings.biometrics.fingerprint2.data.repository.FingerprintSensorRepository
-import com.android.settings.biometrics.fingerprint2.domain.interactor.PressToAuthInteractor
 import com.android.settings.biometrics.fingerprint2.domain.interactor.FingerprintManagerInteractorImpl
+import com.android.settings.biometrics.fingerprint2.domain.interactor.PressToAuthInteractor
 import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.FingerprintManagerInteractor
 import com.android.settings.biometrics.fingerprint2.lib.model.Default
 import com.android.settings.biometrics.fingerprint2.lib.model.EnrollReason
@@ -38,8 +43,7 @@ import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintAuthAtt
 import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintData
 import com.android.settings.password.ChooseLockSettingsHelper
 import com.android.systemui.biometrics.shared.model.FingerprintSensor
-import com.android.systemui.biometrics.shared.model.FingerprintSensorType
-import com.android.systemui.biometrics.shared.model.SensorStrength
+import com.android.systemui.biometrics.shared.model.toFingerprintSensor
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.flow.Flow
@@ -85,7 +89,18 @@ class FingerprintManagerInteractorTest {
 
   @Before
   fun setup() {
-    val sensor = FingerprintSensor(1, SensorStrength.STRONG, 5, FingerprintSensorType.POWER_BUTTON)
+    val sensor =
+      FingerprintSensorPropertiesInternal(
+          0 /* sensorId */,
+          SensorProperties.STRENGTH_STRONG,
+          5 /* maxEnrollmentsPerUser */,
+          listOf<ComponentInfoInternal>(),
+          FingerprintSensorProperties.TYPE_POWER_BUTTON,
+          false /* halControlsIllumination */,
+          true /* resetLockoutRequiresHardwareAuthToken */,
+          listOf<SensorLocationInternal>(SensorLocationInternal.DEFAULT),
+        )
+        .toFingerprintSensor()
     val fingerprintSensorRepository =
       object : FingerprintSensorRepository {
         override val fingerprintSensor: Flow<FingerprintSensor> = flowOf(sensor)
@@ -135,7 +150,7 @@ class FingerprintManagerInteractorTest {
         listOf(
           Fingerprint("Finger 1,", 2, 3L),
           Fingerprint("Finger 2,", 3, 3L),
-          Fingerprint("Finger 3,", 4, 3L)
+          Fingerprint("Finger 3,", 4, 3L),
         )
       val fingerprintList2: List<Fingerprint> =
         fingerprintList1.plus(
@@ -160,7 +175,7 @@ class FingerprintManagerInteractorTest {
           gateKeeperPasswordProvider.requestGatekeeperHat(
             any(Intent::class.java),
             anyLong(),
-            anyInt()
+            anyInt(),
           )
         )
         .thenReturn(byteArray)
@@ -223,7 +238,7 @@ class FingerprintManagerInteractorTest {
       removalCallback.value.onRemovalError(
         fingerprintToRemove,
         100,
-        "Oh no, we couldn't find that one"
+        "Oh no, we couldn't find that one",
       )
 
       runCurrent()
@@ -260,7 +275,7 @@ class FingerprintManagerInteractorTest {
           any(CancellationSignal::class.java),
           capture(authCallback),
           nullable(Handler::class.java),
-          anyInt()
+          anyInt(),
         )
       authCallback.value.onAuthenticationSucceeded(
         FingerprintManager.AuthenticationResult(null, fingerprint, 1, false)
@@ -287,7 +302,7 @@ class FingerprintManagerInteractorTest {
           any(CancellationSignal::class.java),
           capture(authCallback),
           nullable(Handler::class.java),
-          anyInt()
+          anyInt(),
         )
       authCallback.value.onAuthenticationError(FINGERPRINT_ERROR_LOCKOUT_PERMANENT, "Lockout!!")
 

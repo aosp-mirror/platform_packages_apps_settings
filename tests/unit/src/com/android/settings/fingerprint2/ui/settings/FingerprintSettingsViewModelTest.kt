@@ -16,6 +16,11 @@
 
 package com.android.settings.fingerprint2.ui.settings
 
+import android.hardware.biometrics.ComponentInfoInternal
+import android.hardware.biometrics.SensorLocationInternal
+import android.hardware.biometrics.SensorProperties
+import android.hardware.fingerprint.FingerprintSensorProperties
+import android.hardware.fingerprint.FingerprintSensorPropertiesInternal
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintAuthAttemptModel
 import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintData
@@ -23,9 +28,7 @@ import com.android.settings.biometrics.fingerprint2.ui.settings.viewmodel.Finger
 import com.android.settings.biometrics.fingerprint2.ui.settings.viewmodel.FingerprintSettingsViewModel
 import com.android.settings.biometrics.fingerprint2.ui.settings.viewmodel.PreferenceViewModel
 import com.android.settings.testutils2.FakeFingerprintManagerInteractor
-import com.android.systemui.biometrics.shared.model.FingerprintSensor
-import com.android.systemui.biometrics.shared.model.FingerprintSensorType
-import com.android.systemui.biometrics.shared.model.SensorStrength
+import com.android.systemui.biometrics.shared.model.toFingerprintSensor
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
@@ -96,12 +99,18 @@ class FingerprintSettingsViewModelTest {
   fun authenticate_DoesNotRun_ifOptical() =
     testScope.runTest {
       fakeFingerprintManagerInteractor.sensorProp =
-        FingerprintSensor(
-          0 /* sensorId */,
-          SensorStrength.STRONG,
-          5 /* maxEnrollmentsPerUser */,
-          FingerprintSensorType.UDFPS_OPTICAL,
-        )
+        FingerprintSensorPropertiesInternal(
+            0 /* sensorId */,
+            SensorProperties.STRENGTH_STRONG,
+            5 /* maxEnrollmentsPerUser */,
+            listOf<ComponentInfoInternal>(),
+            FingerprintSensorProperties.TYPE_UDFPS_OPTICAL,
+            false /* halControlsIllumination */,
+            true /* resetLockoutRequiresHardwareAuthToken */,
+            listOf<SensorLocationInternal>(SensorLocationInternal.DEFAULT),
+          )
+          .toFingerprintSensor()
+
       fakeFingerprintManagerInteractor.enrolledFingerprintsInternal =
         mutableListOf(FingerprintData("a", 1, 3L))
 
@@ -132,12 +141,18 @@ class FingerprintSettingsViewModelTest {
   fun authenticate_DoesNotRun_ifUltrasonic() =
     testScope.runTest {
       fakeFingerprintManagerInteractor.sensorProp =
-        FingerprintSensor(
-          0 /* sensorId */,
-          SensorStrength.STRONG,
-          5 /* maxEnrollmentsPerUser */,
-          FingerprintSensorType.UDFPS_ULTRASONIC,
-        )
+        FingerprintSensorPropertiesInternal(
+            0 /* sensorId */,
+            SensorProperties.STRENGTH_STRONG,
+            5 /* maxEnrollmentsPerUser */,
+            listOf<ComponentInfoInternal>(),
+            FingerprintSensorProperties.TYPE_UDFPS_ULTRASONIC,
+            false /* halControlsIllumination */,
+            true /* resetLockoutRequiresHardwareAuthToken */,
+            listOf<SensorLocationInternal>(SensorLocationInternal.DEFAULT),
+          )
+          .toFingerprintSensor()
+
       fakeFingerprintManagerInteractor.enrolledFingerprintsInternal =
         mutableListOf(FingerprintData("a", 1, 3L))
 
@@ -166,12 +181,18 @@ class FingerprintSettingsViewModelTest {
   fun authenticate_DoesRun_ifNotUdfps() =
     testScope.runTest {
       fakeFingerprintManagerInteractor.sensorProp =
-        FingerprintSensor(
-          0 /* sensorId */,
-          SensorStrength.STRONG,
-          5 /* maxEnrollmentsPerUser */,
-          FingerprintSensorType.POWER_BUTTON
-        )
+        FingerprintSensorPropertiesInternal(
+            0 /* sensorId */,
+            SensorProperties.STRENGTH_STRONG,
+            5 /* maxEnrollmentsPerUser */,
+            listOf<ComponentInfoInternal>(),
+            FingerprintSensorProperties.TYPE_POWER_BUTTON,
+            false /* halControlsIllumination */,
+            true /* resetLockoutRequiresHardwareAuthToken */,
+            listOf<SensorLocationInternal>(SensorLocationInternal.DEFAULT),
+          )
+          .toFingerprintSensor()
+
       fakeFingerprintManagerInteractor.enrolledFingerprintsInternal =
         mutableListOf(FingerprintData("a", 1, 3L))
       val success = FingerprintAuthAttemptModel.Success(1)
@@ -324,8 +345,7 @@ class FingerprintSettingsViewModelTest {
       runCurrent()
       assertThat(authAttempt).isEqualTo(success)
 
-      fakeFingerprintManagerInteractor.authenticateAttempt =
-        FingerprintAuthAttemptModel.Success(10)
+      fakeFingerprintManagerInteractor.authenticateAttempt = FingerprintAuthAttemptModel.Success(10)
       underTest.shouldAuthenticate(false)
       advanceTimeBy(400)
       runCurrent()
@@ -372,14 +392,19 @@ class FingerprintSettingsViewModelTest {
 
   private fun setupAuth(): MutableList<FingerprintData> {
     fakeFingerprintManagerInteractor.sensorProp =
-      FingerprintSensor(
-        0 /* sensorId */,
-        SensorStrength.STRONG,
-        5 /* maxEnrollmentsPerUser */,
-        FingerprintSensorType.POWER_BUTTON
-      )
-    val fingerprints =
-      mutableListOf(FingerprintData("a", 1, 3L), FingerprintData("b", 2, 5L))
+      FingerprintSensorPropertiesInternal(
+          0 /* sensorId */,
+          SensorProperties.STRENGTH_STRONG,
+          5 /* maxEnrollmentsPerUser */,
+          listOf<ComponentInfoInternal>(),
+          FingerprintSensorProperties.TYPE_POWER_BUTTON,
+          false /* halControlsIllumination */,
+          true /* resetLockoutRequiresHardwareAuthToken */,
+          listOf<SensorLocationInternal>(SensorLocationInternal.DEFAULT),
+        )
+        .toFingerprintSensor()
+
+    val fingerprints = mutableListOf(FingerprintData("a", 1, 3L), FingerprintData("b", 2, 5L))
     fakeFingerprintManagerInteractor.enrolledFingerprintsInternal = fingerprints
     val success = FingerprintAuthAttemptModel.Success(1)
     fakeFingerprintManagerInteractor.authenticateAttempt = success
