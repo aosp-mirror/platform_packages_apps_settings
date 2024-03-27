@@ -95,7 +95,7 @@ public final class BatteryUsageLogUtils {
                         .append(ConvertUtils.utcToLocalTimeForLogging(entry.getTimestamp()))
                         .append(" " + entry.getAction());
         final String description = entry.getActionDescription();
-        if (description != null && !description.isEmpty()) {
+        if (!description.isEmpty()) {
             builder.append(" " + description);
         }
         return builder.toString();

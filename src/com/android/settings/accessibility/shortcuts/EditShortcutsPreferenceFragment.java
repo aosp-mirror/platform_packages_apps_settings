@@ -258,8 +258,10 @@ public class EditShortcutsPreferenceFragment extends DashboardFragment {
     @Override
     public void onResume() {
         super.onResume();
-        mTouchExplorationStateChangeListener = isTouchExplorationEnabled ->
-                refreshPreferenceController(GestureShortcutOptionController.class);
+        mTouchExplorationStateChangeListener = isTouchExplorationEnabled -> {
+            refreshPreferenceController(QuickSettingsShortcutOptionController.class);
+            refreshPreferenceController(GestureShortcutOptionController.class);
+        };
 
         final AccessibilityManager am = getSystemService(
                 AccessibilityManager.class);

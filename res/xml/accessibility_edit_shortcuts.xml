@@ -24,7 +24,7 @@
         android:selectable="false"
         settings:allowDividerAbove="false"
         settings:allowDividerBelow="false"/>
-
+    <!-- LINT.IfChange(shortcut_type_ui_order) -->
     <com.android.settings.accessibility.shortcuts.ShortcutOptionPreference
         android:key="@string/accessibility_shortcut_quick_settings_pref"
         android:persistent="false"
@@ -90,4 +90,11 @@
         settings:allowDividerAbove="false"
         settings:allowDividerBelow="false"
         settings:controller="com.android.settings.accessibility.shortcuts.TripleTapShortcutOptionController" />
+    <!--
+        LINT.ThenChange(
+            /src/com/android/settings/accessibility/AccessibilityGestureNavigationTutorial.java:shortcut_type_ui_order,
+            /src/com/android/settings/accessibility/ToggleFeaturePreferenceFragment.java:shortcut_type_ui_order,
+            /src/com/android/settings/accessibility/AccessibilityShortcutPreferenceFragment.java:shortcut_type_ui_order
+        )
+    -->
 </PreferenceScreen>
