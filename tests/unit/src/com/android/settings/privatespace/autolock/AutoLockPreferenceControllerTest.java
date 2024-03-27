@@ -130,9 +130,12 @@ public class AutoLockPreferenceControllerTest {
                 .isEqualTo("After 5 minutes of inactivity");
     }
 
-    /** Tests that auto lock preference displays the correct summary for option - Never. */
+    /**
+     * Tests that auto lock preference displays the correct summary for option - Only after device
+     * restarts.
+     */
     @Test
-    public void getSummary_whenOptionNever_returnsNever() {
+    public void getSummary_whenOptionAfterDeviceRestart_returnsOnlyAfterDeviceRestarts() {
         mSetFlagsRule.enableFlags(
                 Flags.FLAG_ALLOW_PRIVATE_PROFILE,
                 android.multiuser.Flags.FLAG_SUPPORT_AUTOLOCK_FOR_PRIVATE_SPACE,
@@ -141,7 +144,8 @@ public class AutoLockPreferenceControllerTest {
         Settings.Secure.putInt(
                 mContentResolver,
                 Settings.Secure.PRIVATE_SPACE_AUTO_LOCK,
-                Settings.Secure.PRIVATE_SPACE_AUTO_LOCK_NEVER);
-        assertThat(mAutoLockPreferenceController.getSummary().toString()).isEqualTo("Never");
+                Settings.Secure.PRIVATE_SPACE_AUTO_LOCK_AFTER_DEVICE_RESTART);
+        assertThat(mAutoLockPreferenceController.getSummary().toString())
+                .isEqualTo("Only after device restarts");
     }
 }
