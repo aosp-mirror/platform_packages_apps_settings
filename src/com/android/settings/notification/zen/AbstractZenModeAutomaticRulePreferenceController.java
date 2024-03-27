@@ -19,6 +19,7 @@ package com.android.settings.notification.zen;
 import static android.app.NotificationManager.EXTRA_AUTOMATIC_RULE_ID;
 
 import android.app.AutomaticZenRule;
+import android.app.Flags;
 import android.app.NotificationManager;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
@@ -28,11 +29,9 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.ComponentInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ServiceInfo;
-import android.os.Binder;
 import android.provider.Settings;
 import android.service.notification.ConditionProviderService;
 import android.util.Log;
-import android.util.Slog;
 
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
@@ -41,7 +40,6 @@ import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.Map;
-import java.util.Objects;
 
 abstract public class AbstractZenModeAutomaticRulePreferenceController extends
         AbstractZenModePreferenceController implements PreferenceControllerMixin {
@@ -166,9 +164,20 @@ abstract public class AbstractZenModeAutomaticRulePreferenceController extends
         public void onOk(String ruleName, Fragment parent) {
             mMetricsFeatureProvider.action(mContext,
                     SettingsEnums.ACTION_ZEN_MODE_RULE_NAME_CHANGE_OK);
-            AutomaticZenRule rule = new AutomaticZenRule(ruleName, mRuleInfo.serviceComponent,
-                    mRuleInfo.configurationActivity, mRuleInfo.defaultConditionId, null,
-                    NotificationManager.INTERRUPTION_FILTER_PRIORITY, true);
+            AutomaticZenRule rule;
+            if (Flags.modesApi() && Flags.modesUi()) {
+                rule = new AutomaticZenRule.Builder(ruleName, mRuleInfo.defaultConditionId)
+                        .setType(mRuleInfo.type)
+                        .setOwner(mRuleInfo.serviceComponent)
+                        .setConfigurationActivity(mRuleInfo.configurationActivity)
+                        .setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_PRIORITY)
+                        .setTriggerDescription(mRuleInfo.defaultTriggerDescription)
+                        .build();
+            } else {
+                rule = new AutomaticZenRule(ruleName, mRuleInfo.serviceComponent,
+                        mRuleInfo.configurationActivity, mRuleInfo.defaultConditionId, null,
+                        NotificationManager.INTERRUPTION_FILTER_PRIORITY, true);
+            }
             String savedRuleId = mBackend.addZenRule(rule);
             if (savedRuleId != null) {
                 parent.startActivity(getRuleIntent(mRuleInfo.settingsAction, null,

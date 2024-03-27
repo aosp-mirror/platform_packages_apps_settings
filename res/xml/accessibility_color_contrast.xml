@@ -28,7 +28,7 @@
         android:key="color_contrast_selector"
         android:selectable="false"
         android:layout="@layout/accessibility_color_contrast_selector"
-        settings:controller="com.android.settings.accessibility.ContrastSelectorPreferenceController"/>
+        settings:controller="com.android.settings.accessibility.ContrastSelectorPreferenceController" />
 
     <SwitchPreferenceCompat
         android:key="toggle_high_text_contrast_preference"
@@ -39,8 +39,10 @@
             "com.android.settings.accessibility.HighTextContrastPreferenceController" />
 
     <com.android.settings.accessibility.AccessibilityFooterPreference
+        android:key="color_contrast_footer"
         android:title="@string/color_contrast_note"
         android:selectable="false"
-        settings:searchable="false"/>
+        settings:searchable="false"
+        settings:controller="com.android.settings.accessibility.ColorContrastFooterPreferenceController" />
 
 </PreferenceScreen>

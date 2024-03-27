@@ -614,6 +614,15 @@
     <!-- The menu item to switch to selecting a time zone with a fixed offset (such as UTC or GMT+0200) [CHAR LIMIT=30] -->
     <string name="zone_menu_by_offset">Select by UTC offset</string>
 
+    <!-- The settings category title containing the feedback button [CHAR LIMIT=30] -->
+    <string name="time_feedback_category_title">Feedback</string>
+    <!-- Search keywords for the feedback category / section in Date & Time settings. [CHAR_LIMIT=NONE] -->
+    <string name="keywords_time_feedback_category">feedback, bug, time, zone, timezone</string>
+    <!-- The menu item to start the feedback process [CHAR LIMIT=30] -->
+    <string name="time_feedback_title">Send feedback about time</string>
+    <!-- Search keywords for the feedback option in Date & Time settings. [CHAR_LIMIT=NONE] -->
+    <string name="keywords_time_feedback">feedback, bug, time, zone, timezone</string>
+
     <!-- Security Settings --><skip />
 
     <!-- Security settings screen, setting option name to change screen timeout -->
@@ -4692,9 +4701,11 @@
     <!-- Preview screen email title on the contrast page. [CHAR LIMIT=30]  -->
     <string name="color_contrast_preview_email_title">Business trip report</string>
     <!-- Preview screen email body on the contrast page. [CHAR LIMIT=NONE]  -->
-    <string name="color_contrast_preview_email_body">For further assistance, please reach out to \nmyself or Helen. This report will be</string>
+    <string name="color_contrast_preview_email_body">For further assistance, please reach out to myself or Helen. This report will be</string>
     <!-- Preview screen email attachment name on the contrast page. [CHAR LIMIT=30]  -->
     <string name="color_contrast_preview_email_attachment_name">Client Expenses</string>
+    <!-- Title for color_contrast page footer. [CHAR LIMIT=30] -->
+    <string name="color_contrast_about_title">About color contrast</string>
     <!-- Title for the accessibility text options page. [CHAR LIMIT=50] -->
     <string name="accessibility_turn_screen_darker_title">Turn screen darker</string>
     <!-- Title for the accessibility preference category of interaction control services and settings. [CHAR LIMIT=50] -->
@@ -13168,4 +13179,11 @@
 
     <!--Text for Stylus Pointer Icon preference -->
     <string name="show_stylus_pointer_icon">Show pointer while hovering</string>
+
+     <!-- Developer settings title: Media DRM settings screen. [CHAR LIMIT=50] -->
+    <string name="media_drm_settings_title">Media DRM settings</string>
+     <!-- Developer settings title: select whether to enable force Software Secure Crypto fallback. [CHAR LIMIT=50] -->
+    <string name="force_swcrypto_fallback_title">Force Software Secure Crypto</string>
+     <!-- Developer settings summary: select to force Software Secure Crypto.[CHAR LIMIT=NONE] -->
+    <string name="force_swcrypto_fallback_summary">Force DRM key management to use software-based whitebox crypto</string>
 </resources>

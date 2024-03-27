@@ -18,12 +18,12 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:title="@string/widevine_settings_title"
+    android:title="@string/media_drm_settings_title"
     settings:searchable="false">
 
     <SwitchPreferenceCompat
-        android:key="force_l3_fallback"
-        android:title="@string/force_l3_fallback_title"
-        android:summary="@string/force_l3_fallback_summary"
-        settings:controller="com.android.settings.development.widevine.ForceL3FallbackPreferenceController" />
+        android:key="force_swcrypto_fallback"
+        android:title="@string/force_swcrypto_fallback_title"
+        android:summary="@string/force_swcrypto_fallback_summary"
+        settings:controller="com.android.settings.development.mediadrm.ForceSwSecureCryptoFallbackPreferenceController" />
 </PreferenceScreen>
