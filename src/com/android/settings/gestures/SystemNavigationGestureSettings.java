@@ -41,6 +41,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceScreen;
 
+import com.android.internal.accessibility.common.ShortcutConstants;
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityShortcutsTutorial;
 import com.android.settings.core.BasePreferenceController;
@@ -366,7 +367,7 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
     private boolean isAnyServiceSupportAccessibilityButton() {
         final AccessibilityManager ams = getContext().getSystemService(AccessibilityManager.class);
         final List<String> targets = ams.getAccessibilityShortcutTargets(
-                AccessibilityManager.ACCESSIBILITY_BUTTON);
+                ShortcutConstants.UserShortcutType.SOFTWARE);
         return !targets.isEmpty();
     }
 
