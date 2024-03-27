@@ -52,6 +52,8 @@ import com.android.settings.biometrics.fingerprint2.ui.enrollment.fragment.Finge
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.fragment.FingerprintEnrollIntroV2Fragment
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.rfps.ui.fragment.RFPSEnrollFragment
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.rfps.ui.viewmodel.RFPSViewModel
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.udfps.ui.fragment.UdfpsEnrollFragment
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.udfps.ui.viewmodel.UdfpsViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.BackgroundViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintAction
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollConfirmationViewModel
@@ -100,6 +102,7 @@ class FingerprintEnrollmentV2Activity : FragmentActivity() {
   private lateinit var fingerprintFlowViewModel: FingerprintFlowViewModel
   private lateinit var fingerprintEnrollConfirmationViewModel:
     FingerprintEnrollConfirmationViewModel
+  private lateinit var udfpsViewModel: UdfpsViewModel
   private val coroutineDispatcher = Dispatchers.Default
 
   /** Result listener for ChooseLock activity flow. */
@@ -306,6 +309,12 @@ class FingerprintEnrollmentV2Activity : FragmentActivity() {
       ),
     )[RFPSViewModel::class.java]
 
+    udfpsViewModel =
+      ViewModelProvider(
+        this,
+        UdfpsViewModel.UdfpsEnrollmentFactory(),
+      )[UdfpsViewModel::class.java]
+
     fingerprintEnrollConfirmationViewModel =
       ViewModelProvider(
         this,
@@ -344,6 +353,8 @@ class FingerprintEnrollmentV2Activity : FragmentActivity() {
               is Enrollment -> {
                 when (step.sensor.sensorType) {
                   FingerprintSensorType.REAR -> RFPSEnrollFragment()
+                  FingerprintSensorType.UDFPS_OPTICAL,
+                  FingerprintSensorType.UDFPS_ULTRASONIC -> UdfpsEnrollFragment()
                   else -> FingerprintEnrollEnrollingV2Fragment()
                 }
               }
