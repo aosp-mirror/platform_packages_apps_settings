@@ -17,6 +17,7 @@
 package com.android.settings.privatespace;
 
 import static android.text.Layout.BREAK_STRATEGY_SIMPLE;
+import static android.view.View.ACCESSIBILITY_LIVE_REGION_POLITE;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -130,6 +131,7 @@ public class AutoAdvanceSetupFragment extends InstrumentedFragment {
                         inflater.inflate(R.layout.private_space_advancing_screen, container, false);
         mRootView.getHeaderTextView().setMaxLines(HEADER_TEXT_MAX_LINES);
         mRootView.getHeaderTextView().setBreakStrategy(BREAK_STRATEGY_SIMPLE);
+        mRootView.getHeaderTextView().setAccessibilityLiveRegion(ACCESSIBILITY_LIVE_REGION_POLITE);
         updateHeaderAndIllustration();
         mHandler = new Handler(Looper.getMainLooper());
         mHandler.postDelayed(mUpdateScreenResources, DELAY_BETWEEN_SCREENS);
