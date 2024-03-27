@@ -14,7 +14,7 @@
 * limitations under the License.
 */
 
-package com.android.settings.development.widevine;
+package com.android.settings.development.mediadrm;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.junit.Assume.assumeTrue;
@@ -43,23 +43,23 @@ import org.junit.runner.RunWith;
 import java.util.UUID;
 
 @RunWith(AndroidJUnit4.class)
-public class ForceL3FallbackPreferenceControllerTest {
+public class ForceSwSecureCryptoFallbackPreferenceControllerTest {
 
-    private static final String PREF_KEY = "force_l3_fallback";
+    private static final String PREF_KEY = "force_swcrypto_fallback";
     private static final UUID WIDEVINE_UUID =
         new UUID(0xEDEF8BA979D64ACEL, 0xA3C827DCD51D21EDL);
-    private static final String TAG = "ForceL3FallbackPreferenceControllerTest";
+    private static final String TAG = "ForceSwSecureCryptoFallbackPreferenceControllerTest";
 
     @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     private Context mContext;
-    private ForceL3FallbackPreferenceController mController;
+    private ForceSwSecureCryptoFallbackPreferenceController mController;
     private SwitchPreference mPreference;
 
     @Before
     public void setUp() {
         mContext = ApplicationProvider.getApplicationContext();
-        mController = new ForceL3FallbackPreferenceController(mContext, PREF_KEY);
+        mController = new ForceSwSecureCryptoFallbackPreferenceController(mContext, PREF_KEY);
         mPreference = new SwitchPreference(mContext);
         WidevineProperties.forcel3_enabled(false);
     }
