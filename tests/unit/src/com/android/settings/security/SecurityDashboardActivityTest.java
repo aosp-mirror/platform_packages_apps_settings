@@ -20,6 +20,8 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -27,6 +29,7 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
@@ -80,6 +83,10 @@ public class SecurityDashboardActivityTest {
             }
         });
         doNothing().when(mActivity).startActivity(any(Intent.class));
+
+        PackageManager pm = mock(PackageManager.class);
+        doReturn(pm).when(mActivity).getPackageManager();
+        doReturn("com.android.permissioncontroller").when(pm).getPermissionControllerPackageName();
     }
 
     @Test
