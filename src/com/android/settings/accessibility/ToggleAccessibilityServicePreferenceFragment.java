@@ -443,7 +443,8 @@ public class ToggleAccessibilityServicePreferenceFragment extends
         final ApplicationInfo appInfo =
                 a11yServiceInfo.getResolveInfo().serviceInfo.applicationInfo;
         final Uri packageUri = Uri.parse("package:" + appInfo.packageName);
-        final Intent uninstallIntent = new Intent(Intent.ACTION_UNINSTALL_PACKAGE, packageUri);
+        final Intent uninstallIntent = new Intent(Intent.ACTION_UNINSTALL_PACKAGE, packageUri)
+                .setPackage(getString(R.string.config_package_installer_package_name));
         return uninstallIntent;
     }
 
