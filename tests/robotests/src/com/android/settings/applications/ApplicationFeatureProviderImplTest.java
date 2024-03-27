@@ -55,12 +55,15 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.android.util.concurrent.PausedExecutorService;
 import org.robolectric.annotation.Config;
-import org.robolectric.annotation.LooperMode;
 import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.shadows.ShadowLooper;
+import org.robolectric.shadows.ShadowPausedAsyncTask;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
@@ -72,8 +75,10 @@ import java.util.Set;
  * Tests for {@link ApplicationFeatureProviderImpl}.
  */
 @RunWith(RobolectricTestRunner.class)
-@LooperMode(LooperMode.Mode.LEGACY)
 public final class ApplicationFeatureProviderImplTest {
+
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
 
     @Rule
     public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
@@ -114,11 +119,10 @@ public final class ApplicationFeatureProviderImplTest {
 
     private int mAppCount = -1;
     private List<UserAppInfo> mAppList = null;
+    private PausedExecutorService mExecutorService;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-
         when(mContext.getApplicationContext()).thenReturn(mContext);
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
         when(mContext.getSystemService(Context.LOCATION_SERVICE)).thenReturn(mLocationManager);
@@ -126,6 +130,9 @@ public final class ApplicationFeatureProviderImplTest {
 
         mProvider = new ApplicationFeatureProviderImpl(mContext, mPackageManager,
                 mPackageManagerService, mDevicePolicyManager, mWebViewUpdateServiceWrapper);
+
+        mExecutorService = new PausedExecutorService();
+        ShadowPausedAsyncTask.overrideExecutor(mExecutorService);
     }
 
     private void verifyCalculateNumberOfPolicyInstalledApps(boolean async) {
@@ -155,6 +162,8 @@ public final class ApplicationFeatureProviderImplTest {
 
         mAppList = null;
         mProvider.listPolicyInstalledApps((list) -> mAppList = list);
+        mExecutorService.runAll();
+        ShadowLooper.idleMainLooper();
         assertThat(mAppList).isNotNull();
         assertThat(mAppList.size()).isEqualTo(1);
         assertThat(mAppList.get(0).appInfo.packageName).isEqualTo(APP_2);
@@ -231,6 +240,9 @@ public final class ApplicationFeatureProviderImplTest {
         mAppList = null;
         mProvider.listAppsWithAdminGrantedPermissions(new String[]{PERMISSION},
                 (list) -> mAppList = list);
+        mExecutorService.runAll();
+        ShadowLooper.idleMainLooper();
+
         assertThat(mAppList).isNotNull();
         assertThat(mAppList.size()).isEqualTo(2);
         assertThat(Arrays.asList(mAppList.get(0).appInfo.packageName,
