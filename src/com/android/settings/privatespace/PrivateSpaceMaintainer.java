@@ -155,7 +155,7 @@ public class PrivateSpaceMaintainer {
             return true;
         }
 
-        List<UserInfo> users = mUserManager.getProfiles(0);
+        List<UserInfo> users = mUserManager.getProfiles(mContext.getUserId());
         for (UserInfo user : users) {
             if (user.isPrivateProfile()) {
                 mUserHandle = user.getUserHandle();

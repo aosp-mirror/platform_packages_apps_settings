@@ -44,11 +44,27 @@ public final class PrivateSpaceSafetySource {
             return;
         }
 
-        // Check the profile type - we don't want to show this for anything other than primary user.
         UserManager userManager = context.getSystemService(UserManager.class);
-        if (userManager != null && !userManager.isMainUser()) {
-            Log.i(TAG, "setSafetySourceData not main user");
-            return;
+        PrivateSpaceMaintainer privateSpaceMaintainer =
+                PrivateSpaceMaintainer.getInstance(context);
+        if (android.multiuser.Flags.enablePrivateSpaceFeatures()
+                && android.multiuser.Flags.blockPrivateSpaceCreation()) {
+            // Do not add the entry point when
+            // -Private Profile is not present and
+            // -Private Profile cannot be added.
+            if (!privateSpaceMaintainer.doesPrivateSpaceExist()
+                    && userManager != null
+                    && !userManager.canAddPrivateProfile()) {
+                Log.i(TAG, "Private Space not allowed for user " + context.getUser());
+                return;
+            }
+        } else {
+            // Check the profile type - we don't want to show this for anything other than primary
+            // user.
+            if (userManager != null && !userManager.isMainUser()) {
+                Log.i(TAG, "setSafetySourceData not main user");
+                return;
+            }
         }
 
         if (!Flags.allowPrivateProfile()

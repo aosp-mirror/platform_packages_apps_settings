@@ -40,12 +40,13 @@ import androidx.preference.PreferenceGroup;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.development.DeveloperOptionAwareMixin;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class InactiveApps extends SettingsPreferenceFragment
-        implements Preference.OnPreferenceChangeListener {
+        implements Preference.OnPreferenceChangeListener, DeveloperOptionAwareMixin {
 
     private static final CharSequence[] FULL_SETTABLE_BUCKETS_NAMES = {
         "ACTIVE", "WORKING_SET", "FREQUENT", "RARE", "RESTRICTED"

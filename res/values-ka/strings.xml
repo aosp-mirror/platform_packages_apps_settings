@@ -86,6 +86,7 @@
     <string name="bluetooth_media_title" msgid="2878373577382067290">"მედიისა და სისტემის ხმები"</string>
     <string name="bluetooth_notification_title" msgid="8708962394926222039">"შეტყობინებები"</string>
     <string name="bluetooth_audio_routing_footer_summary" msgid="410260713589309293">"ნაგულისხმევად, გამომავალ აუდიოს განსაზღვრავს ინდივიდუალური აპები"</string>
+    <string name="bluetooth_audio_codec_default_selection" msgid="4753278792700664175">"სისტემის არჩეულის გამოყენება (ნაგულისხმევი)"</string>
     <string name="bluetooth_device" msgid="2217973503732544291">"უსახელო Bluetooth მოწყობილობა"</string>
     <string name="progress_scanning" msgid="2564746192843011826">"მიმდინარეობს ძიება"</string>
     <string name="bluetooth_no_devices_found" msgid="7704539337219953182">"ახლომახლო Bluetooth მოწყობილობების მოძიება ვერ მოხერხდა."</string>
@@ -208,9 +209,9 @@
     <string name="title_regional_pref_footer" msgid="7450438024324794380">"თუ აპი მხარს არ უჭერს რეგიონულ პარამეტრებს, ის ნაგულისხმევი ლოკალის პარამეტრებს გამოიყენებს."</string>
     <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"შეიტყვეთ მეტი ენის პარამეტრების შესახებ."</string>
     <string name="category_title_terms_of_address" msgid="4309422700380895278">"დამატებითი პარამეტრები"</string>
-    <string name="terms_of_address_title" msgid="4064593634733842458">"მომართვის პირობები"</string>
-    <string name="terms_of_address_summary" msgid="6136134336560679144">"დააყენეთ თქვენთან მომართვის პირობები"</string>
-    <string name="terms_of_address_intro_title" msgid="6149691509414243483">"აპს შეუძლია თქვენთან მომართვის პირობების პერსონალიზება."</string>
+    <string name="terms_of_address_title" msgid="7338630812197476808">"აირჩიეთ თქვენთვის სასურველი მომართვის ფორმა"</string>
+    <string name="terms_of_address_summary" msgid="7802443422612600620">"მოწყობილობას შეუძლია თქვენთვის მომართვის პერსონალიზება"</string>
+    <string name="terms_of_address_intro_title" msgid="1533951542181569335">"ეს პარამეტრი სისტემის აპების უმეტესობას თქვენთვის მომართვის პერსონაზილიზების საშუალებას აძლევს. მას თქვენ მიერ დაინსტალირებული აპები არ იყენებს."</string>
     <string name="terms_of_address_not_specified" msgid="4439257779351251973">"არ არის მითითებული"</string>
     <string name="terms_of_address_feminine" msgid="1743479869695539283">"მდედრობითი"</string>
     <string name="terms_of_address_masculine" msgid="983106046135098856">"მამრობითი"</string>
@@ -555,26 +556,34 @@
     <string name="private_space_category_ways_to_unlock" msgid="4356631225316950046">"განბლოკვის ხერხები"</string>
     <string name="private_space_screen_lock_summary" msgid="394837965365561070">"მოწყობილობის იდენტური ეკრანის დაბლოკვის მეთოდი"</string>
     <string name="private_space_new_lock_title" msgid="9056139964133004094">"კერძო სივრცისთვის ახალი საკეტის არჩევა"</string>
+    <!-- no translation found for private_space_new_lock_message (3117703578905489206) -->
+    <skip />
     <string name="private_space_auto_lock_title" msgid="8663409382910601261">"კერძო სივრცის ავტომატურად ჩაკეტვა"</string>
     <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"შეგიძლიათ კერძო სივრცის ავტომატურად ჩაკეტვა, თუ არ იყენებთ მოწყობილობას გარკვეული პერიოდის განმავლობაში"</string>
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"ყოველთვის, როდესაც მოწყობილობა ჩაიკეტება"</string>
     <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"5-წუთიანი უმოქმედობის შემდეგ"</string>
     <string name="private_space_auto_lock_never" msgid="595014527119778873">"არასოდეს"</string>
-    <string name="private_space_hide_title" msgid="8687034008994037610">"დამალვა ჩაკეტილ მდგომარეობაში"</string>
-    <string name="privatespace_hide_page_title" msgid="8417507414027827566">"კერძო სივრცის დამალვა ჩაკეტილ მდგომარეობაში"</string>
-    <string name="privatespace_hide_page_summary" msgid="5525422595477989312">"შეგიძლიათ დამალოთ კერძო სივრცე თქვენი აპების სიიდან, თუ არ გსურთ, რომ სხვებმა იცოდნენ, რომ თქვენს მოწყობილობაზე კერძო სივრცეს იყენებთ"</string>
-    <string name="privatespace_access_header" msgid="6066826215718835041">"წვდომა კერძო სივრცეზე, როცა დამალულია"</string>
-    <string name="privatespace_search_description" msgid="3121043205513022357">"თქვენი აპების სიიდან ძიების ზოლში შეიყვანეთ „კერძო სივრცე“"</string>
-    <string name="privatespace_tap_tile_description" msgid="8346440188590931635">"შეეხეთ კერძო სივრცის მოზაიკის ფილას"</string>
-    <string name="privatespace_unlock_description" msgid="3177710543121916413">"თქვენი კერძო სივრცის განბლოკვა"</string>
-    <string name="privatespace_hide_off_summary" msgid="7227778747159633671">"გამორთული"</string>
-    <string name="privatespace_hide_on_summary" msgid="6136704537527640183">"ჩართული"</string>
-    <!-- no translation found for private_space_hide_dialog_title (3192253150765516720) -->
+    <!-- no translation found for private_space_hide_page_title (4351404195904146088) -->
     <skip />
-    <!-- no translation found for private_space_hide_dialog_message (2006421821648157211) -->
+    <!-- no translation found for private_space_hide_page_summary (6247773353685839242) -->
     <skip />
-    <!-- no translation found for private_space_hide_dialog_button (4157191429310035457) -->
+    <!-- no translation found for private_space_access_header (1077082416567150819) -->
     <skip />
+    <!-- no translation found for private_space_search_description (1538155187658429618) -->
+    <skip />
+    <!-- no translation found for private_space_tap_tile_description (6173556870938267361) -->
+    <skip />
+    <!-- no translation found for private_space_unlock_description (5527228922778630361) -->
+    <skip />
+    <!-- no translation found for private_space_hide_off_summary (8565973976602078315) -->
+    <skip />
+    <!-- no translation found for private_space_hide_on_summary (3450844101901438867) -->
+    <skip />
+    <!-- no translation found for private_space_hide_dialog_title (6439207708506990156) -->
+    <skip />
+    <!-- no translation found for private_space_hide_dialog_message (618693520130744836) -->
+    <skip />
+    <string name="private_space_hide_dialog_button" msgid="4157191429310035457">"გასაგებია"</string>
     <string name="private_space_category_system" msgid="1286843321867285700">"სისტემა"</string>
     <string name="private_space_delete_title" msgid="636873505724100006">"კერძო სივრცის წაშლა"</string>
     <string name="private_space_delete_header" msgid="4594429153176776184">"გსურთ კერძო სივრცის წაშლა?"</string>
@@ -599,6 +608,7 @@
     <string name="private_space_protected_lock_text" msgid="9123250938334372735"><b>"ჩაკეტვის დაყენება"</b>\n"ჩაკეტეთ თქვენი სივრცე, რათა სხვებმა არ გახსნან"</string>
     <string name="private_space_install_apps_text" msgid="5693139160766464498"><b>"აპების ინსტალაცია"</b>\n"თქვენს კერძო სივრცეს თავისი Play Store აქვს, შესაბამისად, აპების ინსტალაცია მარტივად შეგიძლიათ."</string>
     <string name="private_space_apps_permission_text" msgid="7030946025253366172">"თქვენს პირად სივრცეში არსებული აპები არ გამოჩნდება ნებართვების მენეჯერში, კონფიდენციალურობის საინფორმაციო დაფაში და სხვა პარამეტრებში, როდესაც თქვენი პირადი სივრცე დაბლოკილია.\n\nთქვენი პირადი სივრცის ახალ მოწყობილობაში გადატანა შეუძლებელია. თქვენ უნდა დააყენოთ სხვა პირადი სივრცე, თუ გსურთ მისი სხვა მოწყობილობაზე გამოყენება.\n\nნებისმიერს, ვინც თქვენს მოწყობილობას აკავშირებს კომპიუტერთან ან დააინსტალირებს მავნე აპებს თქვენს მოწყობილობაზე, შეიძლება ჰქონდეს წვდომა თქვენს პირად სივრცეში."</string>
+    <string name="private_space_learn_more_text" msgid="5314198983263277586">"შეიტყვეთ მეტი კერძო სივრცის შესახებ"</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"მიმდინარეობს პირადი სივრცის დაყენება…"</string>
     <string name="private_space_notifications_hidden_title" msgid="2009112565217540581">"კერძო სივრცის აპების შეტყობინებები დამალულია, როცა ის ჩაკეტილია"</string>
     <string name="private_space_explore_settings_title" msgid="1448128245941571654">"გაეცანით კერძო სივრცის პარამეტრებს ავტომატური ჩაკეტვის დასაყენებლად და კერძო სივრცის დასამალად"</string>
@@ -701,35 +711,15 @@
 
 </xliff:g>ამით თქვენს მოწყობილობაში შენახული თითის ანაბეჭდის მოდელი წაიშლება. თქვენი სახის მოდელი სამუდამოდ და საიმედოდ წაიშლება. თქვენ ვეღარ შეძლებთ სახის ან თითის ანაბეჭდის გამოყენებას აპებში შესასვლელად ავტორიზაციისთვის."</string>
     <string name="unlock_disable_frp_warning_content_pin" msgid="122154942944422284">"PIN-კოდი დაიცავს თქვენს ტელეფონს, თუ ის დაიკარგება ან მას მოგპარავენ"</string>
-    <string name="unlock_disable_frp_warning_content_pin_authbound_keys" msgid="6497861740382402784">"დაკარგავთ დამახსოვრებულ მონაცემებს, როგორიცაა PIN-კოდი.<xliff:g id="EMPTY_LINE_0">
-
-</xliff:g>ამოიშლება უკონტაქტოდ გადახდისთვის დაყენებული ბარათები.<xliff:g id="EMPTY_LINE_1">
-
-</xliff:g>საფულე და სხვა აპები, რომლებიც მოითხოვს მოწყობილობის განბლოკვას, შესაძლოა, არ ფუნქციონირებდეს სათანადოდ."</string>
     <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="983373874470746066">"PIN-კოდი დაიცავს თქვენს ტელეფონს, თუ ის დაიკარგება ან მას მოგპარავენ.<xliff:g id="EMPTY_LINE">
 
 </xliff:g>ამით თქვენს მოწყობილობაში შენახული თითის ანაბეჭდის მოდელი წაიშლება. თქვენ ვეღარ შეძლებთ თითის ანაბეჭდის გამოყენებას აპებში შესასვლელად ავტორიზაციისთვის."</string>
-    <string name="unlock_disable_frp_warning_content_pin_fingerprint_authbound_keys" msgid="8930057076658360799">"დაკარგავთ დამახსოვრებულ მონაცემებს, როგორიცაა PIN-კოდი და თითის ანაბეჭდი.<xliff:g id="EMPTY_LINE_0">
-
-</xliff:g>ამოიშლება უკონტაქტოდ გადახდისთვის დაყენებული ბარათები.<xliff:g id="EMPTY_LINE_1">
-
-</xliff:g>საფულე და სხვა აპები, რომლებიც მოითხოვს მოწყობილობის განბლოკვას, შესაძლოა, არ ფუნქციონირებდეს სათანადოდ."</string>
     <string name="unlock_disable_frp_warning_content_pin_face" msgid="5607150515413131761">"PIN-კოდი დაიცავს თქვენს ტელეფონს, თუ ის დაიკარგება ან მას მოგპარავენ.<xliff:g id="EMPTY_LINE">
 
 </xliff:g>თქვენი სახის მოდელიც სამუდამოდ და საიმედოდ წაიშლება. თქვენ ვეღარ შეძლებთ სახის გამოყენებას აპებში შესასვლელად ავტორიზაციისთვის."</string>
-    <string name="unlock_disable_frp_warning_content_pin_face_authbound_keys" msgid="979399855891561038">"დაკარგავთ დამახსოვრებულ მონაცემებს, როგორიცაა PIN-კოდი და სახის მოდელი.<xliff:g id="EMPTY_LINE_0">
-
-</xliff:g>ამოიშლება უკონტაქტოდ გადახდისთვის დაყენებული ბარათები.<xliff:g id="EMPTY_LINE_1">
-
-</xliff:g>საფულე და სხვა აპები, რომლებიც მოითხოვს მოწყობილობის განბლოკვას, შესაძლოა, არ ფუნქციონირებდეს სათანადოდ."</string>
     <string name="unlock_disable_frp_warning_content_pin_face_fingerprint" msgid="1821792325159866312">"PIN-კოდი დაიცავს თქვენს ტელეფონს, თუ ის დაიკარგება ან მას მოგპარავენ.<xliff:g id="EMPTY_LINE">
 
 </xliff:g>ამით თქვენს მოწყობილობაში შენახული თითის ანაბეჭდის მოდელი წაიშლება. თქვენი სახის მოდელი სამუდამოდ და საიმედოდ წაიშლება. თქვენ ვეღარ შეძლებთ სახის ან თითის ანაბეჭდის გამოყენებას აპებში შესასვლელად ავტორიზაციისთვის."</string>
-    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint_authbound_keys" msgid="7019955731206729909">"დაკარგავთ დამახსოვრებულ მონაცემებს, როგორიცაა PIN-კოდი, სახის მოდელი და თითის ანაბეჭდი.<xliff:g id="EMPTY_LINE_0">
-
-</xliff:g>ამოიშლება უკონტაქტოდ გადახდისთვის დაყენებული ბარათები.<xliff:g id="EMPTY_LINE_1">
-
-</xliff:g>საფულე და სხვა აპები, რომლებიც მოითხოვს მოწყობილობის განბლოკვას, შესაძლოა, არ ფუნქციონირებდეს სათანადოდ."</string>
     <string name="unlock_disable_frp_warning_content_password" msgid="6422723907917376210">"პაროლი დაიცავს თქვენს ტელეფონს იმ შემთხვევაში, თუ ის დაიკარგება ან მას მოგპარავენ"</string>
     <string name="unlock_disable_frp_warning_content_password_fingerprint" msgid="8899452884016354856">"პაროლი დაიცავს თქვენს ტელეფონს, თუ ის დაიკარგება ან მას მოგპარავენ.<xliff:g id="EMPTY_LINE">
 
@@ -750,6 +740,26 @@
     <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint" msgid="3779582301453677644">"მოწყობილობის დაცვის ფუნქციები ეკრანის ჩაკეტვის გარეშე არ იმუშავებს.<xliff:g id="EMPTY_LINE">
 
 </xliff:g>ამით თქვენს მოწყობილობაში შენახული თითის ანაბეჭდის მოდელი წაიშლება. თქვენი სახის მოდელი სამუდამოდ და საიმედოდ წაიშლება. თქვენ ვეღარ შეძლებთ სახის ან თითის ანაბეჭდის გამოყენებას აპებში შესასვლელად ავტორიზაციისთვის."</string>
+    <string name="unlock_disable_frp_warning_content_authbound_keys" msgid="6397327696248819663">"ამოიშლება ეკრანის დაბლოკვის ფუნქცია.<xliff:g id="EMPTY_LINE_0">
+
+</xliff:g>უკონტაქტოდ გადახდის ფუნქცია არ იქნება ხელმისაწვდომი.<xliff:g id="EMPTY_LINE_1">
+
+</xliff:g>საფულის, გადახდისა და სხვა აპებმა, რომლებსაც სჭირდებათ ავტორიზაცია, შესაძლოა სათანადოდ არ იფუნქციონიროს."</string>
+    <string name="unlock_disable_frp_warning_content_fingerprint_authbound_keys" msgid="7158076544627335461">"ამოიშლება ეკრანის დაბლოკვისა და ანაბეჭდით განბლოკვის ფუნქციები.<xliff:g id="EMPTY_LINE_0">
+
+</xliff:g>უკონტაქტოდ გადახდის ფუნქცია არ იქნება ხელმისაწვდომი.<xliff:g id="EMPTY_LINE_1">
+
+</xliff:g>საფულის, გადახდისა და სხვა აპებმა, რომლებსაც სჭირდებათ ავტორიზაცია, შესაძლოა სათანადოდ არ იფუნქციონიროს."</string>
+    <string name="unlock_disable_frp_warning_content_face_authbound_keys" msgid="8120786951217029818">"ამოიშლება ეკრანის დაბლოკვისა და სახით განბლოკვის ფუნქციები.<xliff:g id="EMPTY_LINE_0">
+
+</xliff:g>უკონტაქტოდ გადახდის ფუნქცია არ იქნება ხელმისაწვდომი.<xliff:g id="EMPTY_LINE_1">
+
+</xliff:g>საფულის, გადახდისა და სხვა აპებმა, რომლებსაც სჭირდებათ ავტორიზაცია, შესაძლოა სათანადოდ არ იფუნქციონიროს."</string>
+    <string name="unlock_disable_frp_warning_content_face_fingerprint_authbound_keys" msgid="1574263040292024543">"ამოიშლება ეკრანის დაბლოკვისა და სახითა და ანაბეჭდით განბლოკვის ფუნქციები.<xliff:g id="EMPTY_LINE_0">
+
+</xliff:g>უკონტაქტოდ გადახდის ფუნქცია არ იქნება ხელმისაწვდომი.<xliff:g id="EMPTY_LINE_1">
+
+</xliff:g>საფულის, გადახდისა და სხვა აპებმა, რომლებსაც სჭირდებათ ავტორიზაცია, შესაძლოა სათანადოდ არ იფუნქციონიროს."</string>
     <string name="unlock_disable_frp_warning_ok" msgid="6173427638951230842">"წაშლა"</string>
     <string name="unlock_footer_high_complexity_requested" msgid="4471274783909915352">"<xliff:g id="APP_NAME">%1$s</xliff:g> გირჩევთ ძლიერი PIN-კოდის ან პაროლის გამოყენებას და მის გარეშე შეიძლება არ იმუშაოს მოლოდინისამებრ"</string>
     <string name="unlock_footer_medium_complexity_requested" msgid="5515870066751600640">"<xliff:g id="APP_NAME">%1$s</xliff:g> გირჩევთ ახალი PIN-კოდის ან პაროლის გამოყენებას და მის გარეშე შეიძლება არ იმუშაოს მოლოდინისამებრ"</string>
@@ -1037,8 +1047,15 @@
     <string name="wifi_advanced_device_mac_address_title" msgid="6155800851233164411">"მოწყობილობის MAC მისამართი"</string>
     <string name="wifi_advanced_randomized_mac_address_title" msgid="3930671320234553088">"შემთხვევითი MAC მისამართი"</string>
     <string name="wifi_advanced_randomized_mac_address_disconnected_title" msgid="2755843130417523727">"შემთხვევითი MAC მისამართი (ბოლოს გამოყენებული)"</string>
+    <!-- no translation found for wifi_certificate_summary_Certificates (7849788154375655654) -->
+    <skip />
+    <!-- no translation found for wifi_certificate_summary_system (6521297326433133669) -->
+    <skip />
+    <!-- no translation found for wifi_certificate_summary_pinning (5901067790901727957) -->
+    <skip />
     <string name="wifi_details_title" msgid="222735438574597493">"ქსელის დეტალები"</string>
     <string name="wifi_details_subnet_mask" msgid="1619151769276260512">"ქვექსელის ნიღაბი"</string>
+    <string name="server_name_title" msgid="7257095185810299066">"სერვერის სახელი"</string>
     <string name="wifi_type_title" msgid="2174893488722015838">"ტიპი"</string>
     <string name="wifi_details_dns" msgid="273231528073312579">"DNS"</string>
     <string name="wifi_details_ipv6_address_header" msgid="1913151339341722443">"IPv6 მისამართები"</string>
@@ -1243,7 +1260,8 @@
     <string name="dark_ui_text" msgid="4392646155331126666">"მუქი თემა ზოგიერთ ეკრანზე იყენებს შავ ფონს იმისთვის, რომ ბატარეამ უფრო დიდხანს გაძლოს. მუქი თემის განრიგი ეკრანის გამორთვის შემდეგ გააქტიურდება."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"მუქი თემა ამჟამად მიჰყვება თქვენს ძილის დროის რეჟიმის განრიგს"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"ძილის დროის რეჟიმის პარამეტრები"</string>
-    <string name="even_dimmer_display_title" msgid="8589063452814896327">"უფრო მეტად დაბნელება"</string>
+    <!-- no translation found for even_dimmer_display_title (6731255736830410149) -->
+    <skip />
     <string name="even_dimmer_display_summary" msgid="120301078873242172">"ჩვეულებრივზე უფრო მეტად დააბნელეთ მოწყობილობა"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"ეკრანის დროის ლიმიტი"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> უმოქმედობის შემდეგ"</string>
@@ -1388,6 +1406,9 @@
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"გსურთ <xliff:g id="NAME">^1</xliff:g>-ის დავიწყება?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"ყველა აპი, ფოტო და მონაცემი, რომელიც ინახება ამ <xliff:g id="NAME">^1</xliff:g>-ზე, სამუდამოდ დაიკარგება."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"სისტემა მოიცავს ფაილებს, რომლებიც Android <xliff:g id="VERSION">%s</xliff:g>-ის გასაშვებად გამოიყენება"</string>
+    <string name="storage_os_detail_dialog_system" msgid="1423073052313067844">"ეს მოიცავს თქვენს ოპერაციულ სისტემასა და ფაილებს, რომლებიც საჭიროა თქვენი ტელეფონის გამართულად მუშაობისათვის. მათი მთლიანობის დასაცავად, ამ ფაილებზე წვდომა შეუძლებელია."</string>
+    <string name="storage_other_files_detail_dialog_system" msgid="8241153880150866635">"ეს მოიცავს ქეშ და სხვა დროებით ფაილებს, რომლებსაც თქვენი ოპერაციული სისტემა საჭიროებს. დროთა განმავლობაში შეამჩნევთ ცვლილებებს თქვენ მიერ გამოყენებულ მეხსიერებაში."</string>
+    <string name="storage_system_label" msgid="8320948583086758295">"სისტემა"</string>
     <string name="storage_wizard_guest" msgid="5813419895687733649">"სტუმრის რეჟიმში მყოფთ არ შეუძლიათ SD ბარათის დაფ."</string>
     <string name="storage_wizard_format_progress_title" msgid="9170393018855949774">"<xliff:g id="NAME">^1</xliff:g>-ის დაფორმატება…"</string>
     <string name="storage_wizard_format_progress_body" msgid="1044024044955390417">"არ ამოიღოთ <xliff:g id="NAME">^1</xliff:g> დაფორმატებისას."</string>
@@ -2159,8 +2180,7 @@
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"მაღალკონტრასტიანი ტექსტი"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"ტექსტის ფერის შავით ან თეთრით შეცვლა. აძლიერებს კონტრასტს ფონთან."</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"ტექსტის კონტრასტის მაქსიმიზაცია"</string>
-    <!-- no translation found for accessibility_toggle_maximize_text_contrast_preference_summary (8200408691846666900) -->
-    <skip />
+    <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"კონტრასტის გაზრდის მიზნით ტექსტის ირგვლივ შავი ან თეთრი ფონის დამატება"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"ეკრანის მასშტაბის ავტომატური განახლება"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"ეკრანის მასშტაბის განახლება ერთი აპიდან მეორეზე გადასვლისას"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"ზარი შეწყდება ჩართვის ღილაკზე დაჭერით"</string>
@@ -2499,7 +2519,6 @@
     <string name="battery_manager_summary" msgid="255708681438809287">"გამოავლენს, როდის ცლის აპები ბატარეას"</string>
     <string name="battery_manager_summary_unsupported" msgid="7334173707292807964">"გამოავლენს, როდის ცლის აპები ბატარეას"</string>
     <string name="battery_manager_app_restricted" msgid="2583902700677009173">"{count,plural, =1{# აპს წვდომა შეზღუდული აქვს}other{# აპს წვდომა შეზღუდული აქვს}}"</string>
-    <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
     <string name="battery_missing_message" msgid="400958471814422770">"ბატარეის მზომის წაკითხვასთან დაკავშირებით პრობლემა დაფიქსირდა"</string>
     <string name="battery_missing_link_message" msgid="6021565067124898074"></string>
     <string name="battery_missing_link_a11y_message" msgid="3310971406602316323">"შეეხეთ ამ შეცდომის შესახებ მეტის გასაგებად"</string>
@@ -2656,6 +2675,24 @@
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"ჩართვა"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"გამორთვა"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"გამოიყენეთ ადაპტირებადი კავშირი"</string>
+    <!-- no translation found for cellular_security_title (7124079732186082924) -->
+    <skip />
+    <!-- no translation found for cellular_security_summary (1893770670709928113) -->
+    <skip />
+    <!-- no translation found for cellular_security_settings_title (116950133456981770) -->
+    <skip />
+    <!-- no translation found for cellular_security_notifications (4619728340612184944) -->
+    <skip />
+    <!-- no translation found for cellular_security_notifications_controller_title (5085567551536606230) -->
+    <skip />
+    <!-- no translation found for cellular_security_notifications_controller_summary (2876183397456700377) -->
+    <skip />
+    <!-- no translation found for cellular_security_settings_encryption_title (4013084091666375780) -->
+    <skip />
+    <!-- no translation found for cellular_security_network_generations_title (2343026988833783854) -->
+    <skip />
+    <!-- no translation found for cellular_security_network_generations_summary (139087814553929402) -->
+    <skip />
     <string name="credentials_title" msgid="7535942196886123656">"ავტორიზაციის მონაცემთა საცავი"</string>
     <string name="credentials_install" msgid="3933218407598415827">"სერტიფიკატის ინსტალაცია"</string>
     <string name="credentials_reset" msgid="4246628389366452655">"ავტორიზაციის მონაცემების წაშლა"</string>
@@ -2668,6 +2705,10 @@
     <string name="credentials_settings_not_available" msgid="7433088409177429600">"ამ მომხმარებლისთვის ავტორიზაციის მონაცემები ხელმისაწვდომი არ არის"</string>
     <string name="credential_for_vpn_and_apps" msgid="2208229692860871136">"დაინსტალირებულია VPN-ისა და აპებისთვის"</string>
     <string name="credential_for_wifi" msgid="2286560570630763556">"დაინსტალირებულია Wi-Fi-სთვის"</string>
+    <!-- no translation found for credential_installed_for_wifi (2206050464844710099) -->
+    <skip />
+    <!-- no translation found for credential_using_for_wifi (6134471366188592845) -->
+    <skip />
     <string name="credential_for_wifi_in_use" msgid="7276290656840986618">"დაინსტალირებულია Wi-Fi-სთვის (გამოიყენება)"</string>
     <string name="credentials_reset_hint" msgid="4054601857203464867">"გსურთ სრული კონტენტის წაშლა?"</string>
     <string name="credentials_erased" msgid="9121052044566053345">"ავტორიზაციის მონაცემთა საცავი წაშლილია."</string>
@@ -4205,8 +4246,7 @@
     <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"მთავარზე გადასასვლელად, გადაფურცლეთ ეკრანის ქვედა კიდიდან ზემოთ. აპების გადასართავად, გადაფურცლეთ ეკრანის ქვედა კიდიდან ზემოთ, დააყოვნეთ, შემდეგ გაუშვით. უკან გადასასვლელად, გადაფურცლეთ ეკრანის მარცხენა ან მარჯვენა კიდიდან."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"3-ღილაკიანი ნავიგაცია"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"უკან გადასვლა, მთავარი და აპების გადართვა თქვენი ეკრანის ქვედა ნაწილში მდებარე ღილაკებით."</string>
-    <!-- no translation found for nav_tutorial_button_description (5791791794770463386) -->
-    <skip />
+    <string name="nav_tutorial_button_description" msgid="5791791794770463386">"ჟესტებით ნავიგაციის სახელმძღვანელოს დაწყება"</string>
     <string name="keywords_system_navigation" msgid="3131782378486554934">"სისტემური ნავიგაცია, 2-ღილაკიანი ნავიგაცია, 3-ღილაკიანი ნავიგაცია, ჟესტებით ნავიგაცია, გადაფურცვლა"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"ციფრული ასისტენტი"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"გადაფურცლეთ ასისტენტის გამოსაძახებლად"</string>
@@ -4219,7 +4259,8 @@
     <string name="right_edge" msgid="1505309103265829121">"მარჯვენა კიდე"</string>
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"უფრო მაღალმა მგრძნობიარობამ შეიძლება კონფლიქტი შექმნას აპის რომელიმე ჟესტთან ეკრანის კიდეების გასწვრივ."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"უკან გადასვლის მგრძნობიარობა"</string>
-    <string name="gesture_settings_activity_title" msgid="2025828425762595733">"ჟესტებით ნავიგაციის მგრძნობიარობა"</string>
+    <!-- no translation found for gesture_settings_activity_title (1882463161833981820) -->
+    <skip />
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"ნავიგაცია ღილაკის მეშვეობით"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"ჟესტებით ნავიგაცია, უკან გადასვლის მგრძნობიარობა, უკან გადასვლის ჟესტი"</string>
     <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"ნავიგაცია, მთავარი ეკრანის ღილაკი"</string>
@@ -4350,9 +4391,15 @@
     <string name="storage_images" msgid="2055893015567979387">"სურათები"</string>
     <string name="storage_videos" msgid="6117698226447251033">"ვიდეო"</string>
     <string name="storage_audio" msgid="5994664984472140386">"აუდიო"</string>
+    <!-- no translation found for storage_documents (7873134307844320096) -->
+    <skip />
+    <!-- no translation found for storage_other (7922190148479988838) -->
+    <skip />
     <string name="storage_apps" msgid="3564291603258795216">"აპები"</string>
     <string name="storage_documents_and_other" msgid="3293689243732236480">"დოკუმენტები და სხვა"</string>
     <string name="storage_system" msgid="8472410119822911844">"სისტემა"</string>
+    <string name="storage_os_name" msgid="4637680493234672410">"Android <xliff:g id="VERSION">%s</xliff:g>"</string>
+    <string name="storage_temporary_files" msgid="8254109904032452219">"სისტემის დროებითი ფაილები"</string>
     <string name="storage_trash" msgid="2807138998886084856">"წაშლილები"</string>
     <string name="storage_trash_dialog_title" msgid="2296169576049935200">"გასუფთავდეს წაშლილები?"</string>
     <string name="storage_trash_dialog_ask_message" msgid="8982602137242358798">"წაშლილებში <xliff:g id="TOTAL">%1$s</xliff:g> ფაილებია. ყველა ერთეული სამუდამოდ წაიშლება და მათ აღდგენას ვერ შეძლებთ."</string>
@@ -4771,10 +4818,8 @@
     <string name="confirm_format_ext4_title" msgid="4453684705528818873">"გსურთ მოწყობილობის ფორმატის ext4-ზე შეცვლა?"</string>
     <string name="confirm_format_ext4_text" msgid="8164677342487500794">"16K დეველოპერთა პარამეტრები მხარდაჭერილია ext4 ფაილის სისტემით. მოწყობილობა ამოიშლება და დადასტურების შემდეგ, ფაილის სისტემა ext4-ზე გადავა."</string>
     <string name="format_ext4_failure_toast" msgid="6904611547290793885">"ფორმატის შეცვლა და მონაცემთა სექციის ext4-მდე ამოშლა ვერ მოხერხდა."</string>
-    <!-- no translation found for confirm_oem_unlock_for_16k_title (6338135847153690912) -->
-    <skip />
-    <!-- no translation found for confirm_oem_unlock_for_16k_text (236718973897424382) -->
-    <skip />
+    <string name="confirm_oem_unlock_for_16k_title" msgid="6338135847153690912">"საჭიროა OEM-ის მხრიდან განბლოკვა"</string>
+    <string name="confirm_oem_unlock_for_16k_text" msgid="236718973897424382">"16K დეველოპერთა პარამეტრების გამოყენებამდე მოწყობილობა OEM-ის მხრიდან განბლოკილი უნდა იყოს. OEM-ის მხრიდან განბლოკვისთვის საჭიროა მომხმარებლის მონაცემების დაფორმატება. OEM-ის მხრიდან განბლოკეთ მოწყობილობა და ხელახლა ცადეთ."</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"სისტემის ხარვეზის ანგარიშის დამმუშავებელი"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"განსაზღვრავს, რომელი აპი მართავს სისტემის ხარვეზის ანგარიშის მალსახმობს თქვენს მოწყობილობაზე."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"პირადი"</string>
@@ -4824,7 +4869,8 @@
     <string name="allow_mock_modem" msgid="3832264806530479214">"სიმულაციური მოდემის დაშვება"</string>
     <string name="allow_mock_modem_summary" msgid="9097416612748005374">"დაუშვით ამ მოწყობილობაზე სიმულაციური მოდემის სერვისის გაშვება ინსტრუმენტული ტესტირებისთვის. ნუ ჩართავთ მას ტელეფონის ნორმალური გამოყენების დროს"</string>
     <string name="disable_screen_share_protections_for_apps_and_notifications" msgid="4987116103699222633">"ეკრანის გაზიარების დაცვის გათიშვა"</string>
-    <string name="disable_screen_share_protections_for_apps_and_notifications_summary" msgid="932295234626582052">"თიშავს აპლიკაციისა და შეტყობინებების სისტემურ დაცვას ეკრანის გაზიარების დროს"</string>
+    <!-- no translation found for disable_screen_share_protections_for_apps_and_notifications_summary (5379583403909210858) -->
+    <skip />
     <string name="media_controls_title" msgid="403271085636252597">"მედია"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"მედიადამკვრელის ჩამაგრება"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"დაკვრის სწრაფად გასაგრძელებლად მედიადამკვრელი გახსნილი დარჩება სწრაფ პარამეტრებში"</string>

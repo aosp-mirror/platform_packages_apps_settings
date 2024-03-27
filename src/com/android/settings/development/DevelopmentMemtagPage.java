@@ -25,7 +25,7 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
 @SearchIndexable
-public class DevelopmentMemtagPage extends DashboardFragment {
+public class DevelopmentMemtagPage extends DashboardFragment implements DeveloperOptionAwareMixin {
     private static final String TAG = "DevelopmentMemtagPage";
 
     @Override

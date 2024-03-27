@@ -25,11 +25,13 @@ import com.android.settings.Settings;
 import com.android.settings.TestingSettings;
 import com.android.settings.TrustedCredentialsSettings;
 import com.android.settings.accessibility.AccessibilityDetailsSettingsFragment;
+import com.android.settings.accessibility.AccessibilityHearingAidsFragment;
 import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.accessibility.AccessibilitySettingsForSetupWizard;
 import com.android.settings.accessibility.CaptioningPropertiesFragment;
 import com.android.settings.accessibility.ColorAndMotionFragment;
 import com.android.settings.accessibility.ColorContrastFragment;
+import com.android.settings.accessibility.HearingDevicePairingFragment;
 import com.android.settings.accessibility.TextReadingPreferenceFragment;
 import com.android.settings.accessibility.TextReadingPreferenceFragmentForSetupWizard;
 import com.android.settings.accessibility.ToggleColorInversionPreferenceFragment;
@@ -390,6 +392,8 @@ public class SettingsGateway {
             ResetNetwork.class.getName(),
             VibrationIntensitySettingsFragment.class.getName(),
             CellularSecuritySettingsFragment.class.getName(),
+            AccessibilityHearingAidsFragment.class.getName(),
+            HearingDevicePairingFragment.class.getName(),
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {

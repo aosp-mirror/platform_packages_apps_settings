@@ -18,6 +18,7 @@ package com.android.settings.fuelgauge;
 
 import static com.android.settings.Utils.SYSTEMUI_PACKAGE_NAME;
 
+import android.annotation.Nullable;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -179,7 +180,8 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
-    public PowerAnomalyEventList detectSettingsAnomaly(
+    @Nullable
+    public PowerAnomalyEventList detectPowerAnomaly(
             Context context, double displayDrain, DetectRequestSourceType detectRequestSourceType) {
         return null;
     }
