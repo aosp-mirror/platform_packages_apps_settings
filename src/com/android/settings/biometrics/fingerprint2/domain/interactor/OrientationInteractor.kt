@@ -42,6 +42,7 @@ interface OrientationInteractor {
    * A flow that contains the rotation info matched against the def [config_reverseDefaultRotation]
    */
   val rotationFromDefault: Flow<Int>
+
   /**
    * A Helper function that computes rotation if device is in
    * [R.bool.config_reverseDefaultConfigRotation]
