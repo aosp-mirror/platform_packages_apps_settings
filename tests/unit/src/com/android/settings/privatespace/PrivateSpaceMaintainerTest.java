@@ -90,6 +90,7 @@ public class PrivateSpaceMaintainerTest {
     public void deletePrivateSpace_psDoesNotExist_returnsNoPSError() {
         PrivateSpaceMaintainer privateSpaceMaintainer =
                 PrivateSpaceMaintainer.getInstance(mContext);
+        privateSpaceMaintainer.deletePrivateSpace();
         ErrorDeletingPrivateSpace errorDeletingPrivateSpace =
                 privateSpaceMaintainer.deletePrivateSpace();
         assertThat(errorDeletingPrivateSpace)
@@ -176,6 +177,30 @@ public class PrivateSpaceMaintainerTest {
         privateSpaceMaintainer.createPrivateSpace();
         assertThat(privateSpaceMaintainer.getHidePrivateSpaceEntryPointSetting())
                 .isEqualTo(HIDE_PRIVATE_SPACE_ENTRY_POINT_ENABLED_VAL);
+    }
+
+    @Test
+    public void createPrivateSpace_psDoesNotExist_registersTheBroadcastReceiver() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE,
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
+        PrivateSpaceMaintainer privateSpaceMaintainer =
+                PrivateSpaceMaintainer.getInstance(mContext);
+        privateSpaceMaintainer.deletePrivateSpace();
+        privateSpaceMaintainer.createPrivateSpace();
+        // test that no exception is thrown, which would indicate that the receiver was registered.
+        mContext.unregisterReceiver(privateSpaceMaintainer.getBroadcastReceiver());
+        privateSpaceMaintainer.resetBroadcastReceiver();
+    }
+
+    @Test
+    public void deletePrivateSpace_psExists_unregistersTheBroadcastReceiver() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE,
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
+        PrivateSpaceMaintainer privateSpaceMaintainer =
+                PrivateSpaceMaintainer.getInstance(mContext);
+        privateSpaceMaintainer.createPrivateSpace();
+        privateSpaceMaintainer.deletePrivateSpace();
+        assertThat(privateSpaceMaintainer.getBroadcastReceiver()).isNull();
     }
 
     /**
