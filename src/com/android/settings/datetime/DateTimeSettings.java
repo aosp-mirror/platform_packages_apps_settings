@@ -68,6 +68,12 @@ public class DateTimeSettings extends DashboardFragment implements
                 .setTimeAndDateCallback(this)
                 .setFromSUW(isFromSUW);
 
+        // All the elements in the category are optional, so we must ensure the category is only
+        // available if any of the elements are available.
+        TimeFeedbackPreferenceCategoryController helpAndFeedbackCategoryController =
+                use(TimeFeedbackPreferenceCategoryController.class);
+        use(TimeFeedbackPreferenceController.class)
+                .registerWithOptionalCategoryController(helpAndFeedbackCategoryController);
     }
 
     @Override
