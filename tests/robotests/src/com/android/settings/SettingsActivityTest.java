@@ -27,6 +27,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.ActionBar;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
@@ -112,6 +113,15 @@ public class SettingsActivityTest {
         mActivity.onActivityResult(0, 0, new Intent());
 
         assertThat(((ListenerFragment) fragments.get(1)).mOnActivityResultCalled).isTrue();
+    }
+
+    @Test
+    public void getActionBar_hasNoActionBar() {
+        final SettingsActivity activity = Robolectric.buildActivity(SettingsActivity.class).get();
+
+        final ActionBar actionBar = activity.getActionBar();
+
+        assertThat(actionBar).isNull();
     }
 
     public static class ListenerFragment extends Fragment implements OnActivityResultListener {
