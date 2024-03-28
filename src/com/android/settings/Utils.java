@@ -1389,7 +1389,8 @@ public final class Utils extends com.android.settingslib.Utils {
             ViewCompat.setOnApplyWindowInsetsListener(activity.findViewById(android.R.id.content),
                     (v, windowInsets) -> {
                         Insets insets = windowInsets.getInsets(
-                                WindowInsetsCompat.Type.systemBars());
+                                WindowInsetsCompat.Type.systemBars()
+                                        | WindowInsetsCompat.Type.ime());
                         // Apply the insets paddings to the view.
                         v.setPadding(insets.left, insets.top, insets.right, insets.bottom);
 
