@@ -21,6 +21,7 @@ import static android.provider.Settings.Secure.PRIVATE_SPACE_AUTO_LOCK;
 
 import static com.android.settings.privatespace.PrivateSpaceMaintainer.HIDE_PRIVATE_SPACE_ENTRY_POINT_DISABLED_VAL;
 import static com.android.settings.privatespace.PrivateSpaceMaintainer.HIDE_PRIVATE_SPACE_ENTRY_POINT_ENABLED_VAL;
+import static com.android.settings.privatespace.PrivateSpaceMaintainer.HIDE_PRIVATE_SPACE_SENSITIVE_NOTIFICATIONS_DISABLED_VAL;
 import static com.android.settings.privatespace.PrivateSpaceMaintainer.PRIVATE_SPACE_AUTO_LOCK_DEFAULT_VAL;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -162,7 +163,7 @@ public class PrivateSpaceMaintainerTest {
         privateSpaceMaintainer.createPrivateSpace();
         assertThat(privateSpaceMaintainer.doesPrivateSpaceExist()).isTrue();
         assertThat(getPsSensitiveNotificationsValue(privateSpaceMaintainer))
-                .isEqualTo(HidePrivateSpaceSensitiveNotificationsController.DISABLED);
+                .isEqualTo(HIDE_PRIVATE_SPACE_SENSITIVE_NOTIFICATIONS_DISABLED_VAL);
     }
 
     /**
@@ -374,7 +375,7 @@ public class PrivateSpaceMaintainerTest {
     private int getPsSensitiveNotificationsValue(PrivateSpaceMaintainer privateSpaceMaintainer) {
         return Settings.Secure.getIntForUser(mContentResolver,
                 LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS,
-                HidePrivateSpaceSensitiveNotificationsController.ENABLED,
+                /* enabled */ 1,
                 privateSpaceMaintainer.getPrivateProfileHandle().getIdentifier());
     }
 }
