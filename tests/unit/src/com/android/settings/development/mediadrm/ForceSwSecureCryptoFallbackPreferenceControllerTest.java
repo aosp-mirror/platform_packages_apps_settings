@@ -137,4 +137,22 @@ public class ForceSwSecureCryptoFallbackPreferenceControllerTest {
             assumeNoException(ex);
         }
     }
+
+    @Test
+    public void updateState_checkWhenWidevineReady() throws Exception {
+        try (MediaDrm drm = new MediaDrm(WIDEVINE_UUID)) {
+            if (drm.getPropertyString("securityLevel").equals("L1")) {
+                String version = drm.getPropertyString(MediaDrm.PROPERTY_VERSION);
+                mSetFlagsRule.enableFlags(Flags.FLAG_FORCE_L3_ENABLED);
+                mController.updateState(mPreference);
+                if (Integer.parseInt(version.split("\\.", 2)[0]) >= 19) {
+                    assertThat(mPreference.isEnabled()).isTrue();
+                } else {
+                    assertThat(mPreference.isEnabled()).isFalse();
+                }
+            }
+        } catch (UnsupportedSchemeException ex) {
+            assumeNoException(ex);
+        }
+    }
 }
