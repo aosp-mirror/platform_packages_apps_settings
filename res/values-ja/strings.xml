@@ -43,7 +43,7 @@
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"縮小"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"拡大"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"画面を自動で回転させる"</string>
-    <string name="smart_rotate_text_headline" msgid="5878008933992951904">"顔検出は、前面カメラを使用して自動回転の精度を高めます。画像が Google に保存されたり送信されたりすることはありません。"</string>
+    <string name="smart_rotate_text_headline" msgid="5878008933992951904">"顔検出は、前面カメラを使用して自動回転の精度を高めます。画像が保存されたり Google に送信されたりすることはありません。"</string>
     <string name="bluetooth" msgid="8898478620943459654">"Bluetooth"</string>
     <string name="bluetooth_is_discoverable" msgid="4798961627677790935">"周辺のすべてのBluetoothデバイスに表示（<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>）"</string>
     <string name="bluetooth_is_discoverable_always" msgid="8122823110652921674">"周辺のすべてのBluetoothデバイスに表示"</string>
@@ -264,7 +264,7 @@
     <string name="security_status_title" msgid="6958004275337618656">"セキュリティ ステータス"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"画面ロック、デバイスを探す、アプリのセキュリティ"</string>
     <string name="safety_center_title" msgid="7732397372178774777">"セキュリティとプライバシー"</string>
-    <string name="safety_center_summary" msgid="3554867379951053869">"アプリのセキュリティ、デバイスのロック、権限"</string>
+    <string name="safety_center_summary" msgid="3554867379951053869">"アプリのセキュリティ、デバイスのロック、アクセス許可"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"顔が登録されています"</string>
     <string name="security_settings_face_preference_summary_none" msgid="523320857738436024">"セットアップが必要です"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"顔認証"</string>
@@ -901,7 +901,7 @@
     <string name="wifi_hotspot_speed_summary_5g" msgid="6221158936983135040">"5 GHz / 対応デバイスは多数"</string>
     <string name="wifi_hotspot_speed_summary_6g" msgid="8863992901226595544">"6 GHz / 対応デバイスはまだ少数"</string>
     <string name="wifi_hotspot_speed_summary_2g_and_5g" msgid="5931052946168943750">"2.4 / 5 GHz / ほとんどのデバイスに対応"</string>
-    <string name="wifi_hotspot_speed_intro" msgid="6973482196363758925">"アクセス ポイントの周波数を選択してください。周波数は、接続速度と、アクセス ポイントを検出できるデバイスの種類に影響します。"</string>
+    <string name="wifi_hotspot_speed_intro" msgid="6973482196363758925">"アクセス ポイントの周波数を選択してください。周波数によって接続速度と対応デバイスが異なります。"</string>
     <string name="wifi_hotspot_speed_category" msgid="5265655850463630286">"優先周波数"</string>
     <string name="wifi_hotspot_speed_2g" msgid="3400600834257664480">"2.4 GHz"</string>
     <string name="wifi_hotspot_speed_2g_summary" msgid="6930273933810520155">"速度が遅くなります。ほとんどのデバイスに対応しています。"</string>
@@ -912,9 +912,9 @@
     <string name="wifi_hotspot_speed_6g" msgid="3787697484862730500">"6 GHz"</string>
     <string name="wifi_hotspot_speed_6g_summary" msgid="8675262219242174548">"速度が最も速くなります。対応デバイスはまだ少数です。"</string>
     <string name="wifi_hotspot_speed_summary_unavailable" msgid="7276080644693388756">"お住まいの国や地域では利用できません"</string>
-    <string name="wifi_hotspot_speed_footer" msgid="8846939503916795002">"優先周波数を利用できない場合、アクセス ポイントは別の周波数を使用する可能性があります。周波数を変更すると、アクセス ポイントのセキュリティ設定が変更される可能性があります。"</string>
+    <string name="wifi_hotspot_speed_footer" msgid="8846939503916795002">"優先周波数を利用できない状況では、別の周波数を使用することがあります。周波数を変更すると、アクセス ポイントのセキュリティ設定も変わる場合があります。"</string>
     <string name="wifi_hotspot_security_summary_unavailable" msgid="117582979310345853">"6 GHz には対応していません"</string>
-    <string name="wifi_hotspot_security_footer" msgid="4608329688744949796">"アクセス ポイントの周波数を変更すると、セキュリティ設定が変更される可能性があります"</string>
+    <string name="wifi_hotspot_security_footer" msgid="4608329688744949796">"アクセス ポイントの周波数を変更すると、セキュリティ設定も変わることがあります"</string>
     <string name="wifi_tether_starting" msgid="8879874184033857814">"アクセスポイントをONにしています…"</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"アクセスポイントをOFFにしています…"</string>
     <string name="wifi_tether_carrier_unsupport_dialog_title" msgid="3089432578433978073">"テザリングは利用できません"</string>
@@ -3540,7 +3540,7 @@
     <string name="filter_instant_apps" msgid="2292108467020380068">"Instant Apps"</string>
     <string name="filter_notif_blocked_apps" msgid="1065653868850012325">"通知 OFF"</string>
     <string name="advanced_apps" msgid="7643010673326578815">"詳細設定"</string>
-    <string name="app_permissions" msgid="8666537659217653626">"権限マネージャー"</string>
+    <string name="app_permissions" msgid="8666537659217653626">"権限マネージャ"</string>
     <string name="app_data_sharing_updates_title" msgid="1694297952320402788">"位置情報を共有する方法の更新"</string>
     <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"ユーザーの位置情報を共有する方法が変更されたアプリを確認"</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"タップして復帰"</string>
@@ -3784,7 +3784,7 @@
     <string name="data_usage_template" msgid="3822452362629968010">"<xliff:g id="ID_1">%1$s</xliff:g> 使用（<xliff:g id="ID_2">%2$s</xliff:g>）"</string>
     <string name="configure" msgid="1499586749829665889">"設定"</string>
     <string name="data_usage_other_apps" msgid="5649047093607329537">"データ使用量に含まれている他のアプリ"</string>
-    <string name="data_saver_unrestricted_summary" msgid="7343571401172437542">"{count,plural, =1{データセーバーが ON のときのデータ無制限使用を 1 件のアプリに許可しました}other{データセーバーが ON のときのデータ無制限使用を # 件のアプリに許可しました}}"</string>
+    <string name="data_saver_unrestricted_summary" msgid="7343571401172437542">"{count,plural, =1{データセーバーが ON のときでも、1 件のアプリはデータを無制限で使用できます}other{データセーバーが ON のときでも、# 件のアプリはデータを無制限で使用できます}}"</string>
     <string name="data_usage_title" msgid="4039024073687469094">"メインデータ"</string>
     <string name="data_usage_wifi_title" msgid="1060495519280456926">"Wi‑Fi データ"</string>
     <string name="data_used_formatted" msgid="7913920278059077938">"<xliff:g id="ID_1">^1</xliff:g> <xliff:g id="ID_2">^2</xliff:g> 使用"</string>
