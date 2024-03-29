@@ -52,7 +52,6 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockPattern;
 import com.android.settings.remoteauth.RemoteAuthActivity;
 import com.android.settings.remoteauth.RemoteAuthActivityInternal;
-import com.android.settingslib.users.AvatarPickerActivity;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -265,12 +264,9 @@ public class ActivityEmbeddingRulesController {
         addActivityFilter(activityFilters, RemoteAuthActivity.class);
         addActivityFilter(activityFilters, RemoteAuthActivityInternal.class);
         addActivityFilter(activityFilters, ChooseLockPattern.class);
-        if (android.multiuser.Flags.avatarSync()) {
-            String action = mContext.getString(R.string.config_avatar_picker_action);
-            addActivityFilter(activityFilters, new Intent(action));
-        } else {
-            addActivityFilter(activityFilters, AvatarPickerActivity.class);
-        }
+        String action = mContext.getString(R.string.config_avatar_picker_action);
+        addActivityFilter(activityFilters, new Intent(action));
+
         ActivityRule activityRule = new ActivityRule.Builder(activityFilters).setAlwaysExpand(true)
                 .build();
         mRuleController.addRule(activityRule);
