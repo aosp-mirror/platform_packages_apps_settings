@@ -22,8 +22,10 @@ import android.net.ConnectivityManager;
 import android.net.LinkAddress;
 import android.net.LinkProperties;
 import android.net.wifi.WifiManager;
+import android.os.Build;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+import android.os.SystemProperties;
 import android.util.Log;
 
 import androidx.preference.Preference;
@@ -100,12 +102,23 @@ public class AdbIpAddressPreferenceController extends AbstractConnectivityPrefer
     }
 
     public String getIpv4Address() {
+        // ARC specific - from here
+        // Get the host's Wi-Fi IP address instead of guest's IP.
+        if (Build.IS_ARC) {
+            final String[] addrs =
+                    SystemProperties.get("vendor.arc.net.ipv4.host_wifi_address").split(",");
+            // ADB over Wi-Fi uses the first available available network configuration.
+            if (addrs.length > 0) {
+                return addrs[0];
+            }
+        }
+        // ARC specific - till here.
         return getDefaultIpAddresses(mCM);
     }
 
     @Override
     protected void updateConnectivity() {
-        String ipAddress = getDefaultIpAddresses(mCM);
+        String ipAddress = getIpv4Address();
         if (ipAddress != null) {
             int port = getPort();
             if (port <= 0) {
