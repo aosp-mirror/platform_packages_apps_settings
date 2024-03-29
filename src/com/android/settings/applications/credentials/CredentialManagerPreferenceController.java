@@ -69,8 +69,9 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.utils.ThreadUtils;
-import com.android.settingslib.widget.TwoTargetPreference;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -328,7 +329,8 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
 
         setAvailableServices(
                 mCredentialManager.getCredentialProviderServices(
-                        getUser(), CredentialManager.PROVIDER_FILTER_USER_PROVIDERS_ONLY),
+                        getUser(),
+                        CredentialManager.PROVIDER_FILTER_USER_PROVIDERS_INCLUDING_HIDDEN),
                 null);
     }
 
@@ -355,7 +357,8 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         // Get the list of new providers and components.
         List<CredentialProviderInfo> newProviders =
                 mCredentialManager.getCredentialProviderServices(
-                        getUser(), CredentialManager.PROVIDER_FILTER_USER_PROVIDERS_ONLY);
+                        getUser(),
+                        CredentialManager.PROVIDER_FILTER_USER_PROVIDERS_INCLUDING_HIDDEN);
         Set<ComponentName> newComponents = buildComponentNameSet(newProviders, false);
         Set<ComponentName> newPrimaryComponents = buildComponentNameSet(newProviders, true);
 
@@ -548,7 +551,8 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
                             icon,
                             packageName,
                             combinedInfo.getSettingsSubtitle(),
-                            combinedInfo.getSettingsActivity());
+                            combinedInfo.getSettingsActivity(),
+                            combinedInfo.getDeviceAdminRestrictions(context, getUser()));
             output.put(packageName, pref);
             group.addPreference(pref);
         }
@@ -569,7 +573,8 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
                 service.getServiceIcon(mContext),
                 service.getServiceInfo().packageName,
                 service.getSettingsSubtitle(),
-                service.getSettingsActivity());
+                service.getSettingsActivity(),
+                /* enforcedCredManAdmin= */ null);
     }
 
     /**
@@ -653,7 +658,8 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
             @Nullable Drawable icon,
             @NonNull String packageName,
             @Nullable CharSequence subtitle,
-            @Nullable CharSequence settingsActivity) {
+            @Nullable CharSequence settingsActivity,
+            @Nullable RestrictedLockUtils.EnforcedAdmin enforcedCredManAdmin) {
         final CombiPreference pref =
                 new CombiPreference(prefContext, mEnabledPackageNames.contains(packageName));
         pref.setTitle(title);
@@ -668,6 +674,8 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         if (subtitle != null) {
             pref.setSummary(subtitle);
         }
+
+        pref.setDisabledByAdmin(enforcedCredManAdmin);
 
         pref.setPreferenceListener(
                 new CombiPreference.OnCombiPreferenceClickListener() {
@@ -1005,8 +1013,8 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         }
     }
 
-    /** CombiPreference is a combination of TwoTargetPreference and SwitchPreference. */
-    public static class CombiPreference extends TwoTargetPreference {
+    /** CombiPreference is a combination of RestrictedPreference and SwitchPreference. */
+    public static class CombiPreference extends RestrictedPreference {
 
         private final Listener mListener = new Listener();
 
