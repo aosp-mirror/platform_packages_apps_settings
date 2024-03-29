@@ -175,7 +175,8 @@
             android:title="@string/financed_device_info"
             android:summary="@string/summary_placeholder"
             settings:controller="com.android.settings.devicelock.DeviceLockPreferenceController">
-            <intent android:action="com.android.devicelockcontroller.action.DEVICE_INFO_SETTINGS"/>
+            <intent android:action="com.android.devicelockcontroller.action.DEVICE_INFO_SETTINGS"
+                    android:targetPackage="@string/config_device_lock_controller_package_name"/>
         </Preference>
     </PreferenceCategory>
 

@@ -151,7 +151,9 @@ public class VolumePanel implements PanelContent, LifecycleObserver {
 
     @Override
     public Intent getSeeMoreIntent() {
-        return new Intent(Settings.ACTION_SOUND_SETTINGS).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        return new Intent(Settings.ACTION_SOUND_SETTINGS)
+                .setPackage(mContext.getPackageName())
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     }
 
     @Override

@@ -14,12 +14,14 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License
   -->
-<shortcuts xmlns:android="http://schemas.android.com/apk/res/android" >
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
     <shortcut
         android:shortcutId="manifest-shortcut-wifi"
         android:icon="@drawable/ic_shortcut_wireless"
-        android:shortcutShortLabel="@string/wifi_settings" >
-        <intent android:action="android.settings.WIFI_SETTINGS" />
+        android:shortcutShortLabel="@string/wifi_settings">
+        <intent
+            android:action="android.settings.WIFI_SETTINGS"
+            android:targetPackage="${applicationId}"/>
     </shortcut>
     <shortcut
         android:shortcutId="manifest-shortcut-data-usage"
@@ -28,13 +30,15 @@
         android:shortcutShortLabel="@string/data_usage_summary_title">
         <intent
             android:action="android.intent.action.MAIN"
-            android:targetPackage="com.android.settings"
-            android:targetClass="com.android.settings.Settings$DataUsageSummaryActivity" />
+            android:targetPackage="${applicationId}"
+            android:targetClass="com.android.settings.Settings$DataUsageSummaryActivity"/>
     </shortcut>
     <shortcut
         android:shortcutId="manifest-shortcut-battery"
         android:icon="@drawable/ic_shortcut_battery"
-        android:shortcutShortLabel="@string/power_usage_summary_title" >
-        <intent android:action="android.intent.action.POWER_USAGE_SUMMARY" />
+        android:shortcutShortLabel="@string/power_usage_summary_title">
+        <intent
+            android:action="android.intent.action.POWER_USAGE_SUMMARY"
+            android:targetPackage="${applicationId}"/>
     </shortcut>
 </shortcuts>

@@ -208,6 +208,8 @@ public class SettingsHomepageActivity extends FragmentActivity implements
                 if (TextUtils.equals(intent.getAction(), ACTION_SETTINGS_EMBED_DEEP_LINK_ACTIVITY)
                         && this instanceof DeepLinkHomepageActivity) {
                     intent.setClass(this, DeepLinkHomepageActivityInternal.class);
+                } else {
+                    intent.setPackage(getPackageName());
                 }
                 intent.removeFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivityAsUser(intent, um.getProfileParent(userInfo.id).getUserHandle());

@@ -42,7 +42,8 @@ public class LocationToggleDisabledDialogFragment extends InstrumentedDialogFrag
                 .setPositiveButton(
                         R.string.location_time_zone_detection_location_is_off_dialog_ok_button,
                         (dialog, which) -> {
-                            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                                    .setPackage(getContext().getPackageName());
                             getContext().startActivity(intent);
                         })
                 .setNegativeButton(
