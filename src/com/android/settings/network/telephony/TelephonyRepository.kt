@@ -21,6 +21,8 @@ import android.telephony.SubscriptionManager
 import android.telephony.TelephonyCallback
 import android.telephony.TelephonyManager
 import android.util.Log
+import com.android.settings.network.mobileDataEnabledFlow
+import com.android.settings.wifi.WifiPickerTrackerHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.asExecutor
 import kotlinx.coroutines.channels.ProducerScope
@@ -62,6 +64,42 @@ class TelephonyRepository(
         telephonyManager.setMobileDataPolicyEnabled(policy, enabled)
     }
 
+    fun isDataEnabled(
+        subId: Int,
+    ): Flow<Boolean> {
+        if (!SubscriptionManager.isValidSubscriptionId(subId)) return flowOf(false)
+
+        Log.d(TAG, "register mobileDataEnabledFlow: [$subId]")
+        return context.mobileDataEnabledFlow(subId)
+            .map {
+                Log.d(TAG, "mobileDataEnabledFlow: receive mobile data [$subId] start")
+                val telephonyManager = context.telephonyManager(subId)
+                telephonyManager.isDataEnabledForReason(TelephonyManager.DATA_ENABLED_REASON_USER)
+                    .also { Log.d(TAG, "mobileDataEnabledFlow: [$subId] isDataEnabled(): $it") }
+            }
+    }
+
+    fun setMobileData(
+        subId: Int,
+        enabled: Boolean,
+        wifiPickerTrackerHelper: WifiPickerTrackerHelper? = null
+    ) {
+        if (!SubscriptionManager.isValidSubscriptionId(subId)) return
+
+        Log.d(TAG, "setMobileData: $enabled")
+        MobileNetworkUtils.setMobileDataEnabled(
+            context,
+            subId,
+            enabled /* enabled */,
+            true /* disableOtherSubscriptions */
+        )
+
+        if (wifiPickerTrackerHelper != null
+            && !wifiPickerTrackerHelper.isCarrierNetworkProvisionEnabled(subId)
+        ) {
+            wifiPickerTrackerHelper.setCarrierNetworkEnabled(enabled)
+        }
+    }
     private companion object {
         private const val TAG = "TelephonyRepository"
     }
