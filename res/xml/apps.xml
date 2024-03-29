@@ -72,7 +72,9 @@
         <extra
             android:name="classname"
             android:value="com.android.settings.Settings$ClonedAppsListActivity"/>
-        <intent android:action="android.settings.MANAGE_CLONED_APPS_SETTINGS"/>
+        <intent
+            android:action="android.settings.MANAGE_CLONED_APPS_SETTINGS"
+            android:targetPackage="${applicationId}"/>
     </Preference>
 
     <PreferenceCategory
