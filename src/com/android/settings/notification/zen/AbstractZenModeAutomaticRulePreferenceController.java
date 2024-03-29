@@ -36,6 +36,7 @@ import android.util.Log;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 
+import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -83,6 +84,7 @@ abstract public class AbstractZenModeAutomaticRulePreferenceController extends
             intent.setComponent(configurationActivity);
         } else {
             intent.setAction(settingsAction);
+            intent.setPackage(Utils.SETTINGS_PACKAGE_NAME);
         }
         return intent;
     }

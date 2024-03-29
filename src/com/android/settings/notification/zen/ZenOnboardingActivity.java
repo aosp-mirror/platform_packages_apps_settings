@@ -116,7 +116,8 @@ public class ZenOnboardingActivity extends Activity {
 
     public void launchSettings(View button) {
         mMetrics.action(SettingsEnums.ACTION_ZEN_ONBOARDING_SETTINGS);
-        Intent settings = new Intent(Settings.ACTION_ZEN_MODE_SETTINGS);
+        Intent settings = new Intent(Settings.ACTION_ZEN_MODE_SETTINGS)
+                .setPackage(getPackageName());
         settings.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(settings);
     }
