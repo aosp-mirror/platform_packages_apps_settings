@@ -921,7 +921,9 @@ public class ManageApplications extends InstrumentedFragment
                         .setResultListener(this, ADVANCED_SETTINGS)
                         .launch();
             } else {
-                Intent intent = new Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS);
+                Intent intent = new Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS)
+                        .setPackage(getContext()
+                                .getPackageManager().getPermissionControllerPackageName());
                 startActivityForResult(intent, ADVANCED_SETTINGS);
             }
             return true;

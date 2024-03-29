@@ -19,8 +19,13 @@ package com.android.settings.privacy;
 import static android.safetylabel.SafetyLabelConstants.SAFETY_LABEL_CHANGE_NOTIFICATIONS_ENABLED;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.provider.DeviceConfig;
+
+import androidx.annotation.NonNull;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
 
@@ -32,6 +37,17 @@ public class AppDataSharingUpdatesPreferenceController extends BasePreferenceCon
     public AppDataSharingUpdatesPreferenceController(Context context,
             String preferenceKey) {
         super(context, preferenceKey);
+    }
+
+    @Override
+    public void displayPreference(@NonNull PreferenceScreen screen) {
+        super.displayPreference(screen);
+
+        Preference pref = screen.findPreference(getPreferenceKey());
+        if (pref != null) {
+            pref.setIntent(new Intent(Intent.ACTION_REVIEW_APP_DATA_SHARING_UPDATES)
+                    .setPackage(mContext.getPackageManager().getPermissionControllerPackageName()));
+        }
     }
 
     @Override

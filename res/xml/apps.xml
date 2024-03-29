@@ -58,9 +58,7 @@
         android:key="default_apps"
         android:title="@string/app_default_dashboard_title"
         android:order="-996"
-        settings:controller="com.android.settings.applications.DefaultAppsPreferenceController">
-        <intent android:action="android.settings.MANAGE_DEFAULT_APPS_SETTINGS"/>
-    </Preference>
+        settings:controller="com.android.settings.applications.DefaultAppsPreferenceController"/>
 
     <Preference
         android:key="cloned_apps"
@@ -87,9 +85,7 @@
         android:summary="@string/summary_placeholder"
         android:order="15"
         settings:keywords="app_hibernation_key"
-        settings:controller="com.android.settings.applications.HibernatedAppsPreferenceController">
-        <intent android:action="android.intent.action.MANAGE_UNUSED_APPS"/>
-    </Preference>
+        settings:controller="com.android.settings.applications.HibernatedAppsPreferenceController"/>
 
     <Preference
         android:key="app_battery_usage"

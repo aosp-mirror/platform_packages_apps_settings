@@ -18,10 +18,12 @@ package com.android.settings.privacy;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.content.Context;
+import android.content.Intent;
 import android.view.accessibility.AccessibilityManager;
 
 import androidx.annotation.NonNull;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
@@ -63,5 +65,16 @@ public class AccessibilityUsagePreferenceController extends BasePreferenceContro
     public CharSequence getSummary() {
         return StringUtil.getIcuPluralsString(mContext, mEnabledServiceInfos.size(),
                 R.string.accessibility_usage_summary);
+    }
+
+    @Override
+    public void displayPreference(@NonNull PreferenceScreen screen) {
+        super.displayPreference(screen);
+
+        Preference pref = screen.findPreference(getPreferenceKey());
+        if (pref != null) {
+            pref.setIntent(new Intent(Intent.ACTION_REVIEW_ACCESSIBILITY_SERVICES)
+                    .setPackage(mContext.getPackageManager().getPermissionControllerPackageName()));
+        }
     }
 }
