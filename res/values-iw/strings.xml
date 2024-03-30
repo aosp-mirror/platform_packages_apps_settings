@@ -252,8 +252,8 @@
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"כבוי"</string>
     <string name="location_settings_summary_location_on" msgid="7029728269719893381">"{count,plural, =1{פועל – לאפליקציה אחת (#) יש גישה למיקום}one{פועל – ל-# אפליקציות יש גישה למיקום}two{פועל – ל-# אפליקציות יש גישה למיקום}other{פועל – ל-# אפליקציות יש גישה למיקום}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"בטעינה…"</string>
-    <string name="location_settings_footer_general" msgid="1040507068701188821">"אפליקציות עם ההרשאה \"מכשירים בקרבת מקום\" יכולות להעריך את המיקום היחסי של המכשירים המחוברים."</string>
-    <string name="location_settings_footer_location_off" msgid="8568995909147566720">"הגישה למיקום מושבתת עבור אפליקציות ושירותים. אם מתקשרים למספר חירום או שולחים אליו הודעת טקסט, ייתכן שפרטי מיקום המכשיר יישלחו לצוותי חירום."</string>
+    <string name="location_settings_footer_general" msgid="1040507068701188821">"אפליקציות עם ההרשאה \'מכשירים בקרבת מקום\' יכולות להעריך את המיקום היחסי של המכשירים המחוברים."</string>
+    <string name="location_settings_footer_location_off" msgid="8568995909147566720">"הגישה למיקום מושבתת עבור אפליקציות ושירותים. אם מתקשרים למספר חירום או שולחים אליו הודעת טקסט, ייתכן שפרטי מיקום המכשיר יישלחו לכוחות ההצלה."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="5329024810729665156">"למידע נוסף על הגדרות המיקום"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"חשבונות"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"אבטחה"</string>
@@ -492,7 +492,7 @@
     <string name="encryption_settings_title" msgid="2848716008695618360">"הצפנה"</string>
     <string name="encrypted_summary" msgid="545623487587251207">"ההצפנה פועלת"</string>
     <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"הגדרה של נעילת מסך"</string>
-    <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"כדי לשפר את האבטחה ניתן להגדיר קוד אימות, תבנית או סיסמה למכשיר הזה."</string>
+    <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"כדי לשפר את האבטחה ניתן להגדיר קוד אימות, קו ביטול נעילה או סיסמה למכשיר הזה."</string>
     <string name="no_screen_lock_issue_action_label" msgid="2691229130486382863">"הגדרה של נעילת מסך"</string>
     <string name="no_screen_lock_issue_notification_title" msgid="1214876733592830628">"הגדרת נעילת מסך"</string>
     <string name="no_screen_lock_issue_notification_text" msgid="8696194459170873345">"כדי לשפר את האבטחה ניתן להגדיר קוד אימות, קו ביטול נעילה או סיסמה למכשיר הזה."</string>
@@ -1030,7 +1030,7 @@
     <string name="dark_ui_activation_on_auto" msgid="4824339634784765049">"הפעלה עד הזריחה"</string>
     <string name="dark_ui_activation_off_auto" msgid="9136717444658505208">"כיבוי עד השקיעה"</string>
     <string name="dark_ui_title" msgid="3373976268671557416">"מצב כהה"</string>
-    <string name="dark_ui_auto_mode_title" msgid="9027528859262295099">"לוח זמנים"</string>
+    <string name="dark_ui_auto_mode_title" msgid="9027528859262295099">"תזמון"</string>
     <string name="dark_ui_auto_mode_never" msgid="3980412582267787662">"לא להפעיל"</string>
     <string name="dark_ui_auto_mode_auto" msgid="6658909029498623375">"הפעלה מהשקיעה עד הזריחה"</string>
     <string name="dark_ui_auto_mode_custom" msgid="3800138185265182170">"הפעלה בשעה שאני אקבע"</string>
@@ -1074,7 +1074,7 @@
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"תצוגה רגישה לסביבה"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"מתי להציג"</string>
     <string name="doze_title" msgid="1523090408230862316">"הוצאת המסך ממצב שינה בשביל התראות"</string>
-    <string name="doze_summary" msgid="8252867381522942804">"כשהמסך מוחשך, הוא יופעל כשיתקבלו התראות חדשות"</string>
+    <string name="doze_summary" msgid="8252867381522942804">"אם המסך מוחשך, הוא יופעל כשיתקבלו התראות חדשות"</string>
     <string name="doze_always_on_title" msgid="7326245192352868477">"הצגת השעה והפרטים כל הזמן"</string>
     <string name="doze_always_on_summary" msgid="509097829739647852">"שימוש מוגבר בסוללה"</string>
     <string name="force_bold_text" msgid="4620929631102086716">"טקסט מודגש"</string>
@@ -1958,7 +1958,7 @@
     <string name="accessibility_vibration_settings_state_off" msgid="7946588741954981703">"כבוי"</string>
     <string name="accessibility_vibration_setting_disabled_for_silent_mode_summary" msgid="3982701772953323190">"ההגדרה הושבתה מפני שהמכשיר מוגדר למצב שקט"</string>
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"שיחות"</string>
-    <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"התראות"</string>
+    <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"התראות ושעון מעורר"</string>
     <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"משוב פיזי אינטראקטיבי"</string>
     <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"שימוש ברטט ובמשוב פיזי"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"רטט של שעון מעורר"</string>
@@ -2073,7 +2073,7 @@
     <string name="captioning_edge_color" msgid="6035818279902597518">"צבע קצה"</string>
     <string name="captioning_edge_type" msgid="5281259280060811506">"סוג קצה"</string>
     <string name="captioning_typeface" msgid="285325623518361407">"משפחת גופנים"</string>
-    <string name="captioning_preview_text" msgid="4973475065545995704">"כתוביות ייראו כך"</string>
+    <string name="captioning_preview_text" msgid="4973475065545995704">"הכתוביות ייראו ככה"</string>
     <string name="captioning_preview_characters" msgid="7854812443613580460">"Aa"</string>
     <string name="locale_default" msgid="8948077172250925164">"ברירת מחדל"</string>
     <string name="color_title" msgid="2511586788643787427">"צבע"</string>
@@ -2552,7 +2552,7 @@
     <string name="data_usage_app_restrict_dialog_title" msgid="5383874438677899255">"להגביל נתוני רקע?"</string>
     <string name="data_usage_app_restrict_dialog" msgid="5534272311979978297">"תכונה זו עלולה לגרום לאפליקציה התלויה בנתוני רקע להפסיק לפעול כאשר רק רשתות לנייד זמינות.\n\nניתן למצוא אמצעים מתאימים יותר לבקרת השימוש בנתונים דרך ההגדרות הזמינות באפליקציה."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="8599940395497268584">"הגבלת השימוש בנתונים ברקע אפשרית רק אם הגדרת מגבלת שימוש בחבילת הגלישה."</string>
-    <string name="data_usage_auto_sync_on_dialog_title" msgid="2048411447974361181">"האם להפעיל סנכרון אוטומטי של נתונים?"</string>
+    <string name="data_usage_auto_sync_on_dialog_title" msgid="2048411447974361181">"להפעיל סנכרון אוטומטי של נתונים?"</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="1783917145440587470">"האם לכבות סנכרון אוטומטי של נתונים?"</string>
     <string name="data_usage_auto_sync_off_dialog" msgid="6523112583569674837">"הפעולה הזו תחסוך בשימוש בנתונים ובעוצמת הסוללה, אך יהיה צורך לסנכרן כל חשבון באופן ידני כדי לאסוף מידע עדכני. בזמן עדכונים לא יתקבלו התראות."</string>
     <string name="data_usage_cycle_editor_title" msgid="2019035830921480941">"תאריך איפוס של מחזור השימוש"</string>
@@ -2992,7 +2992,7 @@
     <string name="charging_sounds_title" msgid="5261683808537783668">"צלילים ורטט לטעינה"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"צלילים בעגינה"</string>
     <string name="touch_sounds_title" msgid="826964355109667449">"צלילים של הקשה ולחיצה"</string>
-    <string name="vibrate_icon_title" msgid="1281100105045362530">"הסמל תמיד מוצג במצב רטט"</string>
+    <string name="vibrate_icon_title" msgid="1281100105045362530">"הצגת סמל של מצב רטט"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"רמקול בעגינה מופעל"</string>
     <string name="dock_audio_media_disabled" msgid="8499927008999532341">"כל האודיו"</string>
     <string name="dock_audio_media_enabled" msgid="4039126523653131281">"רק אודיו של מדיה"</string>
@@ -3089,7 +3089,7 @@
     <string name="zen_category_apps" msgid="1167374545618451925">"אפליקציות"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"שעונים מעוררים והפרעות אחרות"</string>
     <string name="zen_category_schedule" msgid="2003707171924226212">"לוחות זמנים"</string>
-    <string name="zen_category_duration" msgid="7515850842082631460">"משך הזמן כשמפעילים את התכונה מההגדרות המהירות"</string>
+    <string name="zen_category_duration" msgid="7515850842082631460">"כמה זמן פועלות ההגדרות המהירות"</string>
     <string name="zen_settings_general" msgid="2704932194620124153">"כללי"</string>
     <string name="zen_sound_footer" msgid="4090291351903631977">"כשמצב \'נא לא להפריע\' פועל, צלילים ורטט מושתקים, חוץ מהפריטים שאפשרת למעלה."</string>
     <string name="zen_custom_settings_dialog_title" msgid="4613603772432720380">"הגדרות מותאמות אישית"</string>
@@ -3534,7 +3534,7 @@
     <string name="unused_apps_summary" msgid="4236371818881973021">"{count,plural, =1{אפליקציה אחת (#) שמזמן לא השתמשת בה}one{# אפליקציות שמזמן לא השתמשת בהן}two{# אפליקציות שמזמן לא השתמשת בהן}other{# אפליקציות שמזמן לא השתמשת בהן}}"</string>
     <string name="unused_apps_category" msgid="8954930958175500851">"הגדרות לאפליקציה שמזמן לא השתמשת בה"</string>
     <string name="unused_apps_switch" msgid="7595419855882245772">"השהיית הפעילות באפליקציה אם אין בה שימוש"</string>
-    <string name="unused_apps_switch_summary" msgid="2171098908014596802">"ההרשאות של האפליקציה יוסרו, הקבצים הזמניים יימחקו ותופסק קבלת ההתראות ממנה"</string>
+    <string name="unused_apps_switch_summary" msgid="2171098908014596802">"הסרת ההרשאות, מחיקה של הקבצים הזמניים, הפסקה של קבלת ההתראות"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"כל האפליקציות"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"אפליקציות מותקנות"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"אפליקציות ללא התקנה"</string>
@@ -3905,7 +3905,7 @@
     <string name="double_tap_power_for_camera_summary" msgid="1100926048598415509">"כדי לפתוח את המצלמה במהירות, לוחצים פעמיים על לחצן ההפעלה. ניתן לבצע את הפעולה הזו מכל מסך."</string>
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"היפוך המצלמה לתמונת סלפי"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
-    <string name="system_navigation_title" msgid="4890381153527184636">"מצב ניווט"</string>
+    <string name="system_navigation_title" msgid="4890381153527184636">"מעבר בין מסכים"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="6677266952021118342">"ניווט באמצעות 2 לחצנים"</string>
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"כדי לעבור בין אפליקציות יש להחליק מעלה על הלחצן הראשי. כדי להציג את כל האפליקציות, יש להחליק מעלה שוב. כדי לחזור למסך הקודם, יש להקיש על הלחצן \'הקודם\'."</string>
     <string name="emergency_settings_preference_title" msgid="6183455153241187148">"בטיחות ומקרי חירום"</string>
@@ -4162,7 +4162,7 @@
     <string name="change_nfc_tag_apps_detail_summary" msgid="3338220223868942195">"‏ההרשאה הזו מאפשרת לאפליקציה לפעול כשתג NFC נסרק.\nכשההרשאה פועלת, האפליקציה תופיע כאפשרות בכל פעם שיאותר תג."</string>
     <string name="media_output_title" msgid="8283629315159510680">"הפעלת מדיה באמצעות"</string>
     <string name="media_output_label_title" msgid="4139048973886819148">"הפעלת <xliff:g id="LABEL">%s</xliff:g> ב:"</string>
-    <string name="media_output_default_summary" msgid="4200343059396412376">"מכשיר זה"</string>
+    <string name="media_output_default_summary" msgid="4200343059396412376">"במכשיר הזה"</string>
     <string name="media_out_summary_ongoing_call_state" msgid="475188726850090363">"לא זמין במהלך ביצוע שיחות"</string>
     <string name="take_call_on_title" msgid="1159417893879946757">"קבלת שיחה בסוג פלט"</string>
     <string name="cannot_change_apn_toast" msgid="296540724089240405">"‏לא ניתן לשנות APN זה."</string>
@@ -4467,7 +4467,7 @@
     <string name="media_controls_resume_title" msgid="855076860336652370">"הצמדה של נגן המדיה"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"לצורך המשך מהיר של ההפעלה, נגן המדיה נשאר פתוח בהגדרות המהירות"</string>
     <string name="media_controls_lockscreen_title" msgid="2188311721857512510">"הצגת מדיה במסך הנעילה"</string>
-    <string name="media_controls_lockscreen_description" msgid="3320333660404439510">"כדי שתהיה לך אפשרות להמשיך במהירות את ההפעלה, נגן המדיה נשאר פתוח במסך הנעילה"</string>
+    <string name="media_controls_lockscreen_description" msgid="3320333660404439510">"לצורך המשך מהיר של ההפעלה, נגן המדיה נשאר פתוח במסך הנעילה"</string>
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"הצגת המלצות על מדיה"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"על סמך הפעילות שלך"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"הסתרת הנגן"</string>
