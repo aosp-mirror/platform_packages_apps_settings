@@ -359,6 +359,7 @@ public class MobileNetworkUtils {
                 .createForSubscriptionId(subId);
         final SubscriptionManager subscriptionManager = context.getSystemService(
                 SubscriptionManager.class).createForAllUserProfiles();
+        Log.d(TAG, "setDataEnabledForReason: " + enabled);
         telephonyManager.setDataEnabledForReason(TelephonyManager.DATA_ENABLED_REASON_USER,
                 enabled);
 

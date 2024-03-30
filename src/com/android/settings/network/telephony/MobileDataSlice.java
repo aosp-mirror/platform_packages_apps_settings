@@ -33,6 +33,7 @@ import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
@@ -64,6 +65,7 @@ import java.util.List;
  *
  */
 public class MobileDataSlice implements CustomSliceable {
+    private static final String TAG = "MobileDataSlice";
 
     private final Context mContext;
     private final SubscriptionManager mSubscriptionManager;
@@ -128,7 +130,7 @@ public class MobileDataSlice implements CustomSliceable {
         if (defaultSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             return; // No subscription - do nothing.
         }
-
+        Log.d(TAG, "setMobileDataEnabled: " + newState);
         MobileNetworkUtils.setMobileDataEnabled(mContext, defaultSubId, newState,
                 false /* disableOtherSubscriptions */);
         // Do not notifyChange on Uri. The service takes longer to update the current value than it

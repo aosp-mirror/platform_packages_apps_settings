@@ -337,6 +337,7 @@ suspend fun setDefaultData(
 ): Unit =
     withContext(Dispatchers.Default) {
         subscriptionManager?.setDefaultDataSubId(subId)
+        Log.d(NetworkCellularGroupProvider.name, "setMobileDataEnabled: true")
         MobileNetworkUtils.setMobileDataEnabled(
             context,
             subId,
