@@ -460,6 +460,8 @@ public final class AccessibilityShortcutsTutorial {
         final View image =
                 createIllustrationView(context,
                         R.drawable.a11y_shortcut_type_quick_settings);
+        // Remove the unneeded background, since the main image already includes a background
+        image.findViewById(R.id.image_background).setVisibility(GONE);
         final int numFingers = AccessibilityUtil.isTouchExploreEnabled(context) ? 2 : 1;
         Map<String, Object> arguments = new ArrayMap<>();
         arguments.put("count", numFingers);
