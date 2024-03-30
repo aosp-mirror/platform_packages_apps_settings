@@ -266,6 +266,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                 defaultValue
         );
     }
+
     private void addAlwaysOnSetting(PreferenceCategory generalCategory) {
         if (!isAlwaysOnSettingEnabled()) {
             return;
@@ -282,6 +283,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
         var alwaysOnPreferenceController = new MagnificationAlwaysOnPreferenceController(
                 getContext(), MagnificationAlwaysOnPreferenceController.PREF_KEY);
+        getSettingsLifecycle().addObserver(alwaysOnPreferenceController);
         alwaysOnPreferenceController.displayPreference(getPreferenceScreen());
         addPreferenceController(alwaysOnPreferenceController);
     }

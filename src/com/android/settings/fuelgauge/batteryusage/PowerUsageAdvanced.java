@@ -95,7 +95,11 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         super.onCreate(icicle);
         mHistPref = findPreference(KEY_BATTERY_CHART);
         setBatteryChartPreferenceController();
-        AsyncTask.execute(() -> BootBroadcastReceiver.invokeJobRecheck(getContext()));
+        AsyncTask.execute(() -> {
+            if (getContext() != null) {
+                BootBroadcastReceiver.invokeJobRecheck(getContext());
+            }
+        });
     }
 
     @Override

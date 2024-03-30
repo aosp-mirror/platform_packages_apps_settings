@@ -817,6 +817,21 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
     }
 
     @Test
+    public void onCreateView_addTheAlwaysOnControllerToLifeCycleObserver() {
+        Correspondence instanceOf = Correspondence.transforming(
+                observer -> (observer instanceof MagnificationAlwaysOnPreferenceController),
+                "contains MagnificationAlwaysOnPreferenceController");
+
+        ToggleScreenMagnificationPreferenceFragment fragment = mFragController.create(
+                R.id.main_content, /* bundle= */ null).start().resume().get();
+
+        List<LifecycleObserver> lifecycleObservers = ReflectionHelpers.getField(
+                fragment.getSettingsLifecycle(), "mObservers");
+        assertThat(lifecycleObservers).isNotNull();
+        assertThat(lifecycleObservers).comparingElementsUsing(instanceOf).contains(true);
+    }
+
+    @Test
     public void onCreateDialog_setDialogDelegate_invokeDialogDelegate() {
         ToggleScreenMagnificationPreferenceFragment fragment =
                 mFragController.create(

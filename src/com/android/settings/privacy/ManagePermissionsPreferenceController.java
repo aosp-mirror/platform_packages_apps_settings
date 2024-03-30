@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 The Android Open Source Project
+ * Copyright (C) 2024 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,6 @@ package com.android.settings.privacy;
 
 import android.content.Context;
 import android.content.Intent;
-import android.provider.DeviceConfig;
 
 import androidx.annotation.NonNull;
 import androidx.preference.Preference;
@@ -27,19 +26,13 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.core.BasePreferenceController;
 
 /**
- * The preference controller for privacy hub top level preference.
+ * The preference controller for managing permissions
  */
-public final class PrivacyHubPreferenceController extends BasePreferenceController {
-    public static final String PROPERTY_PRIVACY_HUB_ENABLED = "privacy_hub_enabled";
+public class ManagePermissionsPreferenceController extends BasePreferenceController {
 
-    public PrivacyHubPreferenceController(@NonNull Context context, @NonNull String key) {
-        super(context, key);
-    }
-
-    @Override
-    public int getAvailabilityStatus() {
-        return DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_PRIVACY,
-                PROPERTY_PRIVACY_HUB_ENABLED, true) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+    public ManagePermissionsPreferenceController(@NonNull Context context,
+            @NonNull String preferenceKey) {
+        super(context, preferenceKey);
     }
 
     @Override
@@ -48,8 +41,13 @@ public final class PrivacyHubPreferenceController extends BasePreferenceControll
 
         Preference pref = screen.findPreference(getPreferenceKey());
         if (pref != null) {
-            pref.setIntent(new Intent(Intent.ACTION_REVIEW_PERMISSION_USAGE)
+            pref.setIntent(new Intent(Intent.ACTION_MANAGE_PERMISSIONS)
                     .setPackage(mContext.getPackageManager().getPermissionControllerPackageName()));
         }
+    }
+
+    @Override
+    public int getAvailabilityStatus() {
+        return AVAILABLE;
     }
 }

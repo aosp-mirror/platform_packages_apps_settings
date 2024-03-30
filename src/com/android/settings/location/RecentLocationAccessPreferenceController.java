@@ -67,6 +67,7 @@ public class RecentLocationAccessPreferenceController extends LocationBasePrefer
         @Override
         public boolean onPreferenceClick(Preference preference) {
             final Intent intent = new Intent(Intent.ACTION_MANAGE_APP_PERMISSION);
+            intent.setPackage(mContext.getPackageManager().getPermissionControllerPackageName());
             intent.putExtra(Intent.EXTRA_PERMISSION_GROUP_NAME, LOCATION);
             intent.putExtra(Intent.EXTRA_PACKAGE_NAME, mPackage);
             intent.putExtra(Intent.EXTRA_USER, mUserHandle);

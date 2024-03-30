@@ -34,6 +34,7 @@ import androidx.preference.TwoStatePreference;
 
 import com.android.settings.AirplaneModeEnabler;
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnDestroy;
@@ -84,7 +85,8 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
             // In ECM mode launch ECM app dialog
             if (mFragment != null) {
                 mFragment.startActivityForResult(
-                        new Intent(TelephonyManager.ACTION_SHOW_NOTICE_ECM_BLOCK_OTHERS, null),
+                        new Intent(TelephonyManager.ACTION_SHOW_NOTICE_ECM_BLOCK_OTHERS, null)
+                                .setPackage(Utils.PHONE_PACKAGE_NAME),
                         REQUEST_CODE_EXIT_ECM);
             }
             return true;

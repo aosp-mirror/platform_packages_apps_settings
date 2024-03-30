@@ -512,6 +512,7 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
         } else {
             Intent intent = new Intent(Intent.ACTION_QUERY_PACKAGE_RESTART,
                     Uri.fromParts("package", mAppEntry.info.packageName, null));
+            intent.setPackage("android");
             intent.putExtra(Intent.EXTRA_PACKAGES, new String[]{mAppEntry.info.packageName});
             intent.putExtra(Intent.EXTRA_UID, mAppEntry.info.uid);
             intent.putExtra(Intent.EXTRA_USER_HANDLE, UserHandle.getUserId(mAppEntry.info.uid));
@@ -538,6 +539,8 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
         // Create new intent to launch Uninstaller activity
         Uri packageUri = Uri.parse("package:" + packageName);
         Intent uninstallIntent = new Intent(Intent.ACTION_UNINSTALL_PACKAGE, packageUri);
+        uninstallIntent.setPackage(mContext.getString(
+                R.string.config_package_installer_package_name));
         uninstallIntent.putExtra(Intent.EXTRA_UNINSTALL_ALL_USERS, allUsers);
 
         mMetricsFeatureProvider.action(mActivity, SettingsEnums.ACTION_SETTINGS_UNINSTALL_APP);

@@ -39,6 +39,7 @@ import android.text.TextUtils;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.SettingsBaseActivity;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -145,6 +146,7 @@ public class BrightnessLevelPreferenceController extends AbstractPreferenceContr
             return false;
         }
         final Intent intent = new Intent(ACTION_SHOW_BRIGHTNESS_DIALOG);
+        intent.setPackage(Utils.SYSTEMUI_PACKAGE_NAME);
         intent.putExtra(SettingsBaseActivity.EXTRA_PAGE_TRANSITION_TYPE,
                 SettingsTransitionHelper.TransitionType.TRANSITION_NONE);
         intent.putExtra(EXTRA_BRIGHTNESS_DIALOG_IS_FULL_WIDTH, true);

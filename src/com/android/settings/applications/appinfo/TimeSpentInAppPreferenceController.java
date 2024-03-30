@@ -60,6 +60,7 @@ public class TimeSpentInAppPreferenceController extends LiveDataController {
     public void setPackageName(String packageName) {
         mPackageName = packageName;
         mIntent = new Intent(SEE_TIME_IN_APP_TEMPLATE)
+                .setPackage(mPackageManager.getWellbeingPackageName())
                 .putExtra(Intent.EXTRA_PACKAGE_NAME, mPackageName);
     }
 

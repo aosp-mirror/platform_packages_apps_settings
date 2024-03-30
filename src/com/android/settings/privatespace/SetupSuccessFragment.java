@@ -87,8 +87,6 @@ public class SetupSuccessFragment extends InstrumentedFragment {
             if (activity != null) {
                 mMetricsFeatureProvider.action(
                         getContext(), SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_DONE);
-                //TODO(b/307729746): Add a test to verify PS is locked after setup completion.
-                PrivateSpaceMaintainer.getInstance(activity).lockPrivateSpace();
                 Intent allAppsIntent = new Intent(Intent.ACTION_ALL_APPS);
                 ResolveInfo resolveInfo =
                         activity.getPackageManager()
