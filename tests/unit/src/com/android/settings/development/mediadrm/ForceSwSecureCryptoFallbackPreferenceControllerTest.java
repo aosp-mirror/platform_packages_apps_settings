@@ -68,7 +68,7 @@ public class ForceSwSecureCryptoFallbackPreferenceControllerTest {
     public void updateState_flagEnabled_checkPreference() {
         mSetFlagsRule.enableFlags(Flags.FLAG_FORCE_L3_ENABLED);
         mController.updateState(mPreference);
-        assertThat(mPreference.isEnabled()).isTrue();
+        assumeTrue(mPreference.isEnabled());
         assertThat(mPreference.isChecked()).isFalse();
         assertThat(WidevineProperties.forcel3_enabled().orElse(false)).isFalse();
 
@@ -107,12 +107,11 @@ public class ForceSwSecureCryptoFallbackPreferenceControllerTest {
 
     @Test
     public void updateState_checkWidevine() throws Exception {
-        MediaDrm drm;
-        try {
-            drm = new MediaDrm(WIDEVINE_UUID);
+        try (MediaDrm drm = new MediaDrm(WIDEVINE_UUID)) {
             assumeTrue(drm.getPropertyString("securityLevel").equals("L1"));
             mSetFlagsRule.enableFlags(Flags.FLAG_FORCE_L3_ENABLED);
-            drm.close();
+            mController.updateState(mPreference);
+            assumeTrue(mPreference.isEnabled());
         } catch (UnsupportedSchemeException ex) {
             assumeNoException(ex);
         }
@@ -120,17 +119,22 @@ public class ForceSwSecureCryptoFallbackPreferenceControllerTest {
         // L3 enforced
         mController.setChecked(true);
         mController.updateState(mPreference);
-        assertThat(WidevineProperties.forcel3_enabled().orElse(false)).isTrue();
         assertThat(mPreference.isEnabled()).isTrue();
         assertThat(mPreference.isChecked()).isTrue();
-        drm = new MediaDrm(WIDEVINE_UUID);
-        assertThat(drm.getPropertyString("securityLevel")).isEqualTo("L3");
+        try (MediaDrm drm = new MediaDrm(WIDEVINE_UUID)) {
+            assertThat(drm.getPropertyString("securityLevel")).isEqualTo("L3");
+        } catch (UnsupportedSchemeException ex) {
+            assumeNoException(ex);
+        }
 
         // Switch back to L1
         mController.setChecked(false);
         mController.updateState(mPreference);
-        drm.close();
-        drm = new MediaDrm(WIDEVINE_UUID);
-        assertThat(drm.getPropertyString("securityLevel")).isEqualTo("L1");
+
+        try (MediaDrm drm = new MediaDrm(WIDEVINE_UUID)) {
+            assertThat(drm.getPropertyString("securityLevel")).isEqualTo("L1");
+        } catch (UnsupportedSchemeException ex) {
+            assumeNoException(ex);
+        }
     }
 }

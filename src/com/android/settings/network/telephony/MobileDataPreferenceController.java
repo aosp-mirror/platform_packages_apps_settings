@@ -23,6 +23,7 @@ import android.content.Context;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.FragmentManager;
@@ -127,6 +128,7 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
 
         if (!mNeedDialog) {
             // Update data directly if we don't need dialog
+            Log.d(DIALOG_TAG, "setMobileDataEnabled: " + isChecked);
             MobileNetworkUtils.setMobileDataEnabled(mContext, mSubId, isChecked, false);
             if (mWifiPickerTrackerHelper != null
                     && !mWifiPickerTrackerHelper.isCarrierNetworkProvisionEnabled(mSubId)) {

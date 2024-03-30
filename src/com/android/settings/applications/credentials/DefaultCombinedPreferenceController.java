@@ -111,7 +111,7 @@ public class DefaultCombinedPreferenceController extends DefaultAppPreferenceCon
             @Nullable CharSequence appName,
             @Nullable String appSubtitle,
             @Nullable Drawable appIcon,
-            @Nullable CharSequence packageName,
+            @Nullable String packageName,
             @Nullable CharSequence settingsActivity) {
         if (appName == null) {
             preference.setTitle(R.string.credman_app_list_preference_none);

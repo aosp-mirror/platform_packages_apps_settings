@@ -60,7 +60,7 @@ public class AutoAdvanceSetupFragment extends InstrumentedFragment {
     private static final int ANIMATION_DURATION_MILLIS = 500;
     private static final int HEADER_TEXT_MAX_LINES = 4;
     private GlifLayout mRootView;
-    private static final Handler sHandler = new Handler(Looper.getMainLooper());
+    private Handler mHandler;
     private int mScreenTitleIndex;
     private static final List<Pair<Integer, Integer>> HEADER_ILLUSTRATION_PAIRS =
             ImmutableList.of(
@@ -78,7 +78,7 @@ public class AutoAdvanceSetupFragment extends InstrumentedFragment {
                     if (getActivity() != null) {
                         if (++mScreenTitleIndex < HEADER_ILLUSTRATION_PAIRS.size()) {
                             startFadeOutAnimation();
-                            sHandler.postDelayed(mUpdateScreenResources, DELAY_BETWEEN_SCREENS);
+                            mHandler.postDelayed(mUpdateScreenResources, DELAY_BETWEEN_SCREENS);
                         } else if (PrivateSpaceMaintainer.getInstance(getActivity())
                                 .doesPrivateSpaceExist()) {
                             mMetricsFeatureProvider.action(
@@ -133,6 +133,8 @@ public class AutoAdvanceSetupFragment extends InstrumentedFragment {
         mRootView.getHeaderTextView().setBreakStrategy(BREAK_STRATEGY_SIMPLE);
         mRootView.getHeaderTextView().setAccessibilityLiveRegion(ACCESSIBILITY_LIVE_REGION_POLITE);
         updateHeaderAndIllustration();
+        mHandler = new Handler(Looper.getMainLooper());
+        mHandler.postDelayed(mUpdateScreenResources, DELAY_BETWEEN_SCREENS);
         OnBackPressedCallback callback =
                 new OnBackPressedCallback(true /* enabled by default */) {
                     @Override
@@ -153,14 +155,10 @@ public class AutoAdvanceSetupFragment extends InstrumentedFragment {
 
     @Override
     public void onDestroy() {
-        sHandler.removeCallbacks(mUpdateScreenResources);
+        if (mHandler != null) {
+            mHandler.removeCallbacks(mUpdateScreenResources);
+        }
         super.onDestroy();
-    }
-
-    @Override
-    public void onResume() {
-        sHandler.postDelayed(mUpdateScreenResources, DELAY_BETWEEN_SCREENS);
-        super.onResume();
     }
 
     @Override
