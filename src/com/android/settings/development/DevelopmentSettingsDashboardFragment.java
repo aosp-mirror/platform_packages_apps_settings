@@ -740,7 +740,6 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new DefaultLaunchPreferenceController(context, "density"));
         controllers.add(new DefaultLaunchPreferenceController(context, "background_check"));
         controllers.add(new DefaultLaunchPreferenceController(context, "inactive_apps"));
-        controllers.add(new TarePreferenceController(context));
         controllers.add(new AutofillCategoryController(context, lifecycle));
         controllers.add(new AutofillLoggingLevelPreferenceController(context, lifecycle));
         controllers.add(new AutofillResetOptionsPreferenceController(context));
