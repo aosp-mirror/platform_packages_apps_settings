@@ -109,11 +109,15 @@ object ApnTypes {
         return regularOptions.filter { it.selected.value }.joinToString(",") { it.text }
     }
 
-    private val NotPreSelectedTypes = setOf(
-        ApnSetting.TYPE_IMS_STRING,
-        ApnSetting.TYPE_IA_STRING,
-        ApnSetting.TYPE_EMERGENCY_STRING,
-        ApnSetting.TYPE_MCX_STRING,
+    private val PreSelectedTypes = setOf(
+        ApnSetting.TYPE_DEFAULT_STRING,
+        ApnSetting.TYPE_MMS_STRING,
+        ApnSetting.TYPE_SUPL_STRING,
+        ApnSetting.TYPE_DUN_STRING,
+        ApnSetting.TYPE_HIPRI_STRING,
+        ApnSetting.TYPE_FOTA_STRING,
+        ApnSetting.TYPE_CBS_STRING,
+        ApnSetting.TYPE_XCAP_STRING,
     )
 
     fun getPreSelectedApnType(customizedConfig: CustomizedConfig): String =
@@ -123,5 +127,5 @@ object ApnTypes {
 
     private fun defaultPreSelectedApnTypes(readOnlyApnTypes: List<String>) =
         if (ApnSetting.TYPE_ALL_STRING in readOnlyApnTypes) emptyList()
-        else APN_TYPES.filter { it !in readOnlyApnTypes + NotPreSelectedTypes }
+        else PreSelectedTypes.filterNot { it in readOnlyApnTypes }
 }
