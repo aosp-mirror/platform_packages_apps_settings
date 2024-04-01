@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Copyright (C) 2023 The Android Open Source Project
+  ~ Copyright (C) 2024 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -15,56 +15,77 @@
   ~ limitations under the License.
   -->
 
-<com.google.android.setupdesign.GlifLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-
     android:id="@+id/setup_wizard_layout"
     style="?attr/fingerprint_layout_theme"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    android:orientation="vertical">
 
-    <LinearLayout
-        style="@style/SudContentFrame"
+    <!-- This is used to grab style attributes and apply them
+    to this layout -->
+    <com.google.android.setupdesign.GlifLayout
+        android:id="@+id/dummy_glif_layout"
+        style="?attr/fingerprint_layout_theme"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        />
+
+    <ImageView
+        android:id="@+id/sud_layout_icon"
+        style="@style/SudGlifIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="fitStart"
+        android:src="@drawable/ic_lock" />
+
+    <TextView
+        android:id="@+id/title"
+        style="@style/SudGlifHeaderTitle"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="80dp"
+        android:ellipsize="end"
+        android:lines="2"
+        />
+
+    <TextView
+        android:id="@+id/description"
+        style="@style/SudDescription.Glif"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:lines="3"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        />
+
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/illustration_lottie"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
         android:clipChildren="false"
         android:clipToPadding="false"
-        android:orientation="vertical">
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:scaleType="centerInside"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_speed=".85" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center|bottom"
-            android:orientation="vertical">
+    <FrameLayout
+        android:id="@+id/layout_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal|bottom"
+        android:clipToPadding="false"
+        >
 
-            <FrameLayout
-                android:id="@+id/layout_container"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:layout_gravity="center_horizontal|bottom"
-                android:clipChildren="false"
-                android:clipToPadding="false"
-                tools:ignore="Suspicious0dp">
-
-                <!-- Animation res MUST be set in code -->
-                <com.airbnb.lottie.LottieAnimationView
-                    android:id="@+id/illustration_lottie"
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
-                    android:clipChildren="false"
-                    android:clipToPadding="false"
-                    android:scaleType="centerInside"
-                    app:lottie_autoPlay="true"
-                    app:lottie_loop="true"
-                    app:lottie_speed=".85" />
-
-            </FrameLayout>
-        </LinearLayout>
-    </LinearLayout>
+        <include layout="@layout/fingerprint_v2_udfps_enroll_view" />
+    </FrameLayout>
 
 
-</com.google.android.setupdesign.GlifLayout>
+</LinearLayout>
