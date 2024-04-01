@@ -16,11 +16,11 @@
 
 package com.android.settings.network;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.mockito.ArgumentMatchers.any;
 import static org.robolectric.Shadows.shadowOf;
 
 import android.content.Context;
@@ -59,19 +59,19 @@ public class SubscriptionUtilRoboTest {
     }
 
     @Test
-    public void isConnectedToWifiOrDifferentSubId_hasDataOnSubId2_returnTrue() {
+    public void isConnectedToMobileDataWithDifferentSubId_hasDataOnSubId2_returnTrue() {
         addNetworkTransportType(NetworkCapabilities.TRANSPORT_CELLULAR);
         mShadowSubscriptionManager.setActiveDataSubscriptionId(SUBID_2);
 
-        assertTrue(SubscriptionUtil.isConnectedToWifiOrDifferentSubId(mContext, SUBID_1));
+        assertTrue(SubscriptionUtil.isConnectedToMobileDataWithDifferentSubId(mContext, SUBID_1));
     }
 
     @Test
-    public void isConnectedToWifiOrDifferentSubId_hasDataOnSubId1_returnFalse() {
+    public void isConnectedToMobileDataWithDifferentSubId_hasDataOnSubId1_returnFalse() {
         addNetworkTransportType(NetworkCapabilities.TRANSPORT_CELLULAR);
         mShadowSubscriptionManager.setActiveDataSubscriptionId(SUBID_1);
 
-        assertFalse(SubscriptionUtil.isConnectedToWifiOrDifferentSubId(mContext, SUBID_1));
+        assertFalse(SubscriptionUtil.isConnectedToMobileDataWithDifferentSubId(mContext, SUBID_1));
     }
 
     private void addNetworkTransportType(int networkType) {
