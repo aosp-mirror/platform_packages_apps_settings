@@ -1387,20 +1387,19 @@ public final class Utils extends com.android.settingslib.Utils {
      * @param activity the Activity need to setup the edge to edge feature.
      */
     public static void setupEdgeToEdge(@NonNull FragmentActivity activity) {
-        if (com.android.window.flags.Flags.enforceEdgeToEdge()) {
-            ViewCompat.setOnApplyWindowInsetsListener(activity.findViewById(android.R.id.content),
-                    (v, windowInsets) -> {
-                        Insets insets = windowInsets.getInsets(
-                                WindowInsetsCompat.Type.systemBars()
-                                        | WindowInsetsCompat.Type.ime());
-                        // Apply the insets paddings to the view.
-                        v.setPadding(insets.left, insets.top, insets.right, insets.bottom);
+        ViewCompat.setOnApplyWindowInsetsListener(activity.findViewById(android.R.id.content),
+                (v, windowInsets) -> {
+                    Insets insets = windowInsets.getInsets(
+                            WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.ime());
+                    int statusBarHeight = activity.getWindow().getDecorView().getRootWindowInsets()
+                            .getInsets(WindowInsetsCompat.Type.statusBars()).top;
+                    // Apply the insets paddings to the view.
+                    v.setPadding(insets.left, statusBarHeight, insets.right, insets.bottom);
 
-                        // Return CONSUMED if you don't want the window insets to keep being
-                        // passed down to descendant views.
-                        return WindowInsetsCompat.CONSUMED;
-                    });
-        }
+                    // Return CONSUMED if you don't want the window insets to keep being
+                    // passed down to descendant views.
+                    return WindowInsetsCompat.CONSUMED;
+                });
     }
 
     private static FaceManager.RemovalCallback faceManagerRemovalCallback(int userId) {

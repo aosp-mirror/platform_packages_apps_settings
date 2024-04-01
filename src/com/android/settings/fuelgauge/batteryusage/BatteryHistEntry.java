@@ -192,41 +192,44 @@ public class BatteryHistEntry {
     @Override
     public String toString() {
         final String recordAtDateTime = ConvertUtils.utcToLocalTimeForLogging(mTimestamp);
-        final StringBuilder builder = new StringBuilder();
-        builder.append("\nBatteryHistEntry{");
-        builder.append(
-                String.format(
-                        "\n\tpackage=%s|label=%s|uid=%d|userId=%d|isHidden=%b",
-                        mPackageName, mAppLabel, mUid, mUserId, mIsHidden));
-        builder.append(
-                String.format(
-                        "\n\ttimestamp=%s|zoneId=%s|bootTimestamp=%d",
-                        recordAtDateTime, mZoneId, TimestampUtils.getSeconds(mBootTimestamp)));
-        builder.append(
-                String.format(
-                        "\n\tusage=%f|total=%f|consume=%f",
-                        mPercentOfTotal, mTotalPower, mConsumePower));
-        builder.append(
-                String.format(
-                        "\n\tforeground=%f|foregroundService=%f",
-                        mForegroundUsageConsumePower, mForegroundServiceUsageConsumePower));
-        builder.append(
-                String.format(
-                        "\n\tbackground=%f|cached=%f",
-                        mBackgroundUsageConsumePower, mCachedUsageConsumePower));
-        builder.append(
-                String.format(
-                        "\n\telapsedTime,fg=%d|fgs=%d|bg=%d",
-                        TimestampUtils.getSeconds(mBackgroundUsageTimeInMs),
-                        TimestampUtils.getSeconds(mForegroundServiceUsageTimeInMs),
-                        TimestampUtils.getSeconds(mBackgroundUsageTimeInMs)));
-        builder.append(
-                String.format("\n\tdrainType=%d|consumerType=%d", mDrainType, mConsumerType));
-        builder.append(
-                String.format(
-                        "\n\tbattery=%d|status=%d|health=%d\n}",
-                        mBatteryLevel, mBatteryStatus, mBatteryHealth));
-        return builder.toString();
+        return new StringBuilder()
+                .append("\nBatteryHistEntry{")
+                .append(
+                        String.format(
+                                "\n\tpackage=%s|label=%s|uid=%d|userId=%d|isHidden=%b",
+                                mPackageName, mAppLabel, mUid, mUserId, mIsHidden))
+                .append(
+                        String.format(
+                                "\n\ttimestamp=%s|zoneId=%s|bootTimestamp=%d",
+                                recordAtDateTime,
+                                mZoneId,
+                                TimestampUtils.getSeconds(mBootTimestamp)))
+                .append(
+                        String.format(
+                                "\n\tusage=%f|total=%f|consume=%f",
+                                mPercentOfTotal, mTotalPower, mConsumePower))
+                .append(
+                        String.format(
+                                "\n\tforeground=%f|foregroundService=%f",
+                                mForegroundUsageConsumePower, mForegroundServiceUsageConsumePower))
+                .append(
+                        String.format(
+                                "\n\tbackground=%f|cached=%f",
+                                mBackgroundUsageConsumePower, mCachedUsageConsumePower))
+                .append(
+                        String.format(
+                                "\n\telapsedTime,fg=%d|fgs=%d|bg=%d",
+                                TimestampUtils.getSeconds(mForegroundUsageTimeInMs),
+                                TimestampUtils.getSeconds(mForegroundServiceUsageTimeInMs),
+                                TimestampUtils.getSeconds(mBackgroundUsageTimeInMs)))
+                .append(
+                        String.format(
+                                "\n\tdrainType=%d|consumerType=%d", mDrainType, mConsumerType))
+                .append(
+                        String.format(
+                                "\n\tbattery=%d|status=%d|health=%d\n}",
+                                mBatteryLevel, mBatteryStatus, mBatteryHealth))
+                .toString();
     }
 
     private int getInteger(ContentValues values, String key) {

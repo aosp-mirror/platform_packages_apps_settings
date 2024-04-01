@@ -46,6 +46,7 @@ import com.android.settings.Utils;
 import com.android.settings.core.CategoryMixin.CategoryHandler;
 import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
 import com.android.settingslib.transition.SettingsTransitionHelper.TransitionType;
+import com.android.window.flags.Flags;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
@@ -92,8 +93,11 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
             Log.w(TAG, "Devices lock task mode pinned.");
             finish();
         }
-        Utils.setupEdgeToEdge(this);
         final long startTime = System.currentTimeMillis();
+        if (Flags.enforceEdgeToEdge()) {
+            Utils.setupEdgeToEdge(this);
+            hideInternalActionBar();
+        }
         getLifecycle().addObserver(new HideNonSystemOverlayMixin(this));
         TextAppearanceConfig.setShouldLoadFontSynchronously(true);
 
@@ -290,5 +294,19 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
             return TransitionType.TRANSITION_NONE;
         }
         return intent.getIntExtra(EXTRA_PAGE_TRANSITION_TYPE, TransitionType.TRANSITION_NONE);
+    }
+
+    /**
+     * This internal ActionBar will be appeared automatically when the
+     * Utils.setupEdgeToEdge is invoked.
+     *
+     * @see Utils.setupEdgeToEdge
+     */
+    private void hideInternalActionBar() {
+        final View actionBarContainer =
+                findViewById(com.android.internal.R.id.action_bar_container);
+        if (actionBarContainer != null) {
+            actionBarContainer.setVisibility(View.GONE);
+        }
     }
 }
