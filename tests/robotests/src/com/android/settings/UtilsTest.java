@@ -30,6 +30,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.ActionBar;
 import android.app.admin.DevicePolicyManager;
 import android.app.admin.DevicePolicyResourcesManager;
 import android.content.ComponentName;
@@ -55,9 +56,11 @@ import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
 import android.util.IconDrawableFactory;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.core.graphics.drawable.IconCompat;
+import androidx.fragment.app.FragmentActivity;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
@@ -68,6 +71,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
@@ -264,6 +268,17 @@ public class UtilsTest {
     public void setActionBarShadowAnimation_nullParameters_shouldNotCrash() {
         // no crash here
         Utils.setActionBarShadowAnimation(null, null, null);
+    }
+
+    @Test
+    public void setActionBarShadowAnimation_shouldSetElevationToZero() {
+        final FragmentActivity activity = Robolectric.setupActivity(FragmentActivity.class);
+        final ActionBar actionBar = activity.getActionBar();
+
+        Utils.setActionBarShadowAnimation(activity, activity.getLifecycle(),
+                new ScrollView(mContext));
+
+        assertThat(actionBar.getElevation()).isEqualTo(0.f);
     }
 
     @Test
