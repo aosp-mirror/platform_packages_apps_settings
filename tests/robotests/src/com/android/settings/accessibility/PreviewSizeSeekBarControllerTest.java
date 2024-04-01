@@ -30,9 +30,6 @@ import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
-import android.platform.test.annotations.RequiresFlagsEnabled;
-import android.platform.test.flag.junit.CheckFlagsRule;
-import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.view.LayoutInflater;
 import android.widget.PopupWindow;
 import android.widget.SeekBar;
@@ -71,9 +68,6 @@ import org.robolectric.shadows.ShadowLooper;
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowInteractionJankMonitor.class})
 public class PreviewSizeSeekBarControllerTest {
-
-    @Rule
-    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
 
     @Rule
     public ActivityScenarioRule<EmptyFragmentActivity> rule =
@@ -213,7 +207,6 @@ public class PreviewSizeSeekBarControllerTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_REMOVE_QS_TOOLTIP_IN_SUW)
     public void onProgressChanged_inSuw_toolTipShouldNotShown() {
         Intent intent = mContext.getIntent();
         intent.putExtra(WizardManagerHelper.EXTRA_IS_SETUP_FLOW, true);
