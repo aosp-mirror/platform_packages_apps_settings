@@ -33,6 +33,7 @@ public class ContrastPreferenceController extends BasePreferenceController {
 
     @Override
     public int getAvailabilityStatus() {
-        return Flags.enableColorContrastControl() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        // Hide color contrast entry point inside Accessibility settings.
+        return CONDITIONALLY_UNAVAILABLE;
     }
 }
