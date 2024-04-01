@@ -70,27 +70,11 @@ class UdfpsEnrollViewV2(context: Context, attrs: AttributeSet?) : FrameLayout(co
   fun setSensorRect(rect: Rect, sensorType: FingerprintSensorType) {
     this.sensorRect = rect
     this.fingerprintSensorType = sensorType
-    findViewById<ImageView?>(R.id.udfps_enroll_animation_fp_progress_view)?.also {
-      it.setImageDrawable(fingerprintProgressDrawable)
-    }
-    findViewById<ImageView>(R.id.udfps_enroll_animation_fp_view)?.also {
-      it.setImageDrawable(fingerprintIcon)
-    }
 
-    val rotation = display.rotation
     var displayInfo = DisplayInfo()
     context.display.getDisplayInfo(displayInfo)
+    val rotation = displayInfo.rotation
     val scaleFactor = udfpsUtils.getScaleFactor(displayInfo)
-    val overlayParams =
-      UdfpsOverlayParams(
-        sensorRect,
-        fingerprintProgressDrawable.bounds,
-        displayInfo.naturalWidth,
-        displayInfo.naturalHeight,
-        scaleFactor,
-        rotation,
-        sensorType.toInt(),
-      )
     val parentView = parent as ViewGroup
     val coords = parentView.getLocationOnScreen()
     val parentLeft = coords[0]
@@ -99,22 +83,44 @@ class UdfpsEnrollViewV2(context: Context, attrs: AttributeSet?) : FrameLayout(co
     // If the view has been rotated, we need to translate the sensor coordinates
     // to the new rotated view.
     when (rotation) {
-      Surface.ROTATION_90,
-      Surface.ROTATION_270 -> {
+      Surface.ROTATION_90 -> {
         sensorRectOffset.set(
           sensorRectOffset.top,
           sensorRectOffset.left,
           sensorRectOffset.bottom,
           sensorRectOffset.right,
         )
+        sensorRectOffset.offset(-parentLeft, -parentTop)
       }
-      else -> {}
-    }
-    // Translate the sensor position into UdfpsEnrollView's view space.
-    sensorRectOffset.offset(-parentLeft, -parentTop)
+      // When the view is rotated 270 degrees, 0,0 is the top corner left
+      Surface.ROTATION_270 -> {
+        sensorRectOffset.set(
+          (displayInfo.naturalHeight - sensorRectOffset.bottom) - parentLeft,
+          sensorRectOffset.left - parentTop,
+          (displayInfo.naturalHeight - sensorRectOffset.top) - parentLeft,
+          sensorRectOffset.right - parentTop,
+        )
+      }
+      else -> {
 
-    fingerprintIcon.drawSensorRectAt(sensorRectOffset)
-    fingerprintProgressDrawable.drawProgressAt(sensorRectOffset)
+        sensorRectOffset.offset(-parentLeft, -parentTop)
+      }
+    }
+
+    // Translate the sensor position into UdfpsEnrollView's view space.
+    val overlayParams =
+      UdfpsOverlayParams(
+        sensorRectOffset,
+        fingerprintProgressDrawable.bounds,
+        displayInfo.naturalWidth,
+        displayInfo.naturalHeight,
+        scaleFactor,
+        rotation,
+        sensorType.toInt(),
+      )
+
+    fingerprintIcon.drawSensorRectAt(overlayParams)
+    fingerprintProgressDrawable.drawProgressAt(overlayParams)
 
     touchExplorationAnnouncer = TouchExplorationAnnouncer(context, this, overlayParams, udfpsUtils)
   }
@@ -126,11 +132,8 @@ class UdfpsEnrollViewV2(context: Context, attrs: AttributeSet?) : FrameLayout(co
         onEnrollmentProgress(event.remainingSteps, event.totalStepsRequired)
       is FingerEnrollState.Acquired -> onAcquired(event.acquiredGood)
       is FingerEnrollState.EnrollHelp -> onEnrollmentHelp()
-      is FingerEnrollState.PointerDown -> onPointerDown()
-      is FingerEnrollState.PointerUp -> onPointerUp()
-      is FingerEnrollState.OverlayShown -> overlayShown()
-      is FingerEnrollState.EnrollError ->
-        throw IllegalArgumentException("$TAG should not handle udfps error")
+      // Else ignore
+      else -> {}
     }
   }
 
@@ -145,7 +148,6 @@ class UdfpsEnrollViewV2(context: Context, attrs: AttributeSet?) : FrameLayout(co
     }
   }
 
-  private fun udfpsError(errMsgId: Int, errString: String) {}
   /**
    * Sends a touch exploration event to the [onHoverListener] this should only be used for
    * debugging.
@@ -170,8 +172,15 @@ class UdfpsEnrollViewV2(context: Context, attrs: AttributeSet?) : FrameLayout(co
     onHoverListener = listener
   }
 
-  private fun overlayShown() {
-    Log.e(TAG, "Implement overlayShown")
+  /** Indicates the overlay has been shown */
+  fun overlayShown() {
+    Log.d(TAG, "Showing udfps overlay")
+    findViewById<ImageView?>(R.id.udfps_enroll_animation_fp_progress_view)?.also {
+      it.setImageDrawable(fingerprintProgressDrawable)
+    }
+    findViewById<ImageView>(R.id.udfps_enroll_animation_fp_view)?.also {
+      it.setImageDrawable(fingerprintIcon)
+    }
   }
 
   /** Receive enroll progress event */
@@ -188,16 +197,6 @@ class UdfpsEnrollViewV2(context: Context, attrs: AttributeSet?) : FrameLayout(co
   private fun onAcquired(isAcquiredGood: Boolean) {
     val animateIfLastStepGood = isAcquiredGood && remainingSteps <= 2 && remainingSteps >= 0
     if (animateIfLastStepGood) fingerprintProgressDrawable.onLastStepAcquired()
-  }
-
-  /** Receive onPointerDown event */
-  private fun onPointerDown() {
-    fingerprintIcon.stopDrawing()
-  }
-
-  /** Receive onPointerUp event */
-  private fun onPointerUp() {
-    fingerprintIcon.startDrawing()
   }
 
   override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
@@ -259,6 +258,17 @@ class UdfpsEnrollViewV2(context: Context, attrs: AttributeSet?) : FrameLayout(co
 
   fun updateGuidedEnrollment(point: PointF) {
     fingerprintIcon.updateGuidedEnrollment(point, false)
+  }
+
+  /** Indicates if the enroll icon should be drawn. */
+  fun shouldDrawIcon(it: Boolean) {
+    post {
+      if (it) {
+        fingerprintIcon.startDrawing()
+      } else {
+        fingerprintIcon.stopDrawing()
+      }
+    }
   }
 
   companion object {

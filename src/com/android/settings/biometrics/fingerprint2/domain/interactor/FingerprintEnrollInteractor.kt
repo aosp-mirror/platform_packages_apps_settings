@@ -33,6 +33,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.transform
 import kotlinx.coroutines.flow.update
 
 /** This repository is responsible for collecting all state related to the enroll API. */
@@ -105,6 +106,30 @@ class FingerprintEnrollInteractorImpl(
           Log.d(TAG, "onEnrollmentError($errMsgId)")
           streamEnded = true
           enrollRequestOutstanding.update { false }
+        }
+
+        override fun onUdfpsPointerDown(sensorId: Int) {
+          trySend(FingerEnrollState.PointerDown(sensorId)).onFailure { error ->
+            Log.d(TAG, "onUdfpsPointerDown failed to send, due to $error")
+          }
+        }
+
+        override fun onUdfpsPointerUp(sensorId: Int) {
+          trySend(FingerEnrollState.PointerUp(sensorId)).onFailure { error ->
+            Log.d(TAG, "onUdfpsPointerUp failed to send, due to $error")
+          }
+        }
+
+        override fun onUdfpsOverlayShown() {
+          trySend(FingerEnrollState.OverlayShown).onFailure { error ->
+            Log.d(TAG, "OverlayShown failed to send, due to $error")
+          }
+        }
+
+        override fun onAcquired(isAcquiredGood: Boolean) {
+          trySend(FingerEnrollState.Acquired(isAcquiredGood)).onFailure { error ->
+            Log.d(TAG, "Acquired failed to send, due to $error")
+          }
         }
       }
 

@@ -27,16 +27,15 @@ import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.util.DisplayMetrics
-import android.util.Log
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.Interpolator
 import android.view.animation.OvershootInterpolator
 import androidx.annotation.ColorInt
-import androidx.core.animation.addListener
 import androidx.core.animation.doOnEnd
 import androidx.core.graphics.toRectF
 import com.android.internal.annotations.VisibleForTesting
 import com.android.settings.R
+import com.android.systemui.biometrics.shared.model.UdfpsOverlayParams
 import kotlin.math.cos
 import kotlin.math.max
 import kotlin.math.sin
@@ -145,7 +144,6 @@ class UdfpsEnrollProgressBarDrawableV2(private val context: Context, attrs: Attr
 
   /** Indicates enrollment progress has occurred. */
   fun onEnrollmentProgress(remaining: Int, totalSteps: Int, isRecreating: Boolean = false) {
-
     afterFirstTouch = true
     updateProgress(remaining, totalSteps, isRecreating)
   }
@@ -216,8 +214,8 @@ class UdfpsEnrollProgressBarDrawableV2(private val context: Context, attrs: Attr
    * Draws the progress with locations [sensorLocationX] [sensorLocationY], note these must be with
    * respect to the parent framelayout.
    */
-  fun drawProgressAt(sensorRect: Rect) {
-    this.sensorRect.set(sensorRect)
+  fun drawProgressAt(overlayParams: UdfpsOverlayParams) {
+    this.sensorRect.set(overlayParams.sensorBounds)
     invalidateSelf()
   }
 
@@ -249,8 +247,6 @@ class UdfpsEnrollProgressBarDrawableV2(private val context: Context, attrs: Attr
       restoreAnimationTime()
     }
 
-    this.remainingSteps = remainingSteps
-    this.totalSteps = totalSteps
     this.remainingSteps = remainingSteps
     this.totalSteps = totalSteps
     val targetProgress = (totalSteps - remainingSteps).toFloat().div(max(1, totalSteps))
@@ -290,12 +286,8 @@ class UdfpsEnrollProgressBarDrawableV2(private val context: Context, attrs: Attr
         checkMarkDrawable.bounds = newBounds
         checkMarkDrawable.setVisible(true, false)
       }
-      doOnEnd {
-        onFinishedCompletionAnimation?.let{
-          it()
-        }
+      doOnEnd { onFinishedCompletionAnimation?.let { it() } }
 
-      }
       start()
     }
   }
@@ -356,6 +348,7 @@ class UdfpsEnrollProgressBarDrawableV2(private val context: Context, attrs: Attr
   private fun flashHelpFillColor() {
     if (fillColorAnimator != null && fillColorAnimator!!.isRunning) {
       fillColorAnimator!!.end()
+      fillColorAnimator = null
     }
     @ColorInt val targetColor = helpColor
     fillColorAnimator =
@@ -375,7 +368,6 @@ class UdfpsEnrollProgressBarDrawableV2(private val context: Context, attrs: Attr
    * want to re-animate the progress/success animation with the default timer
    */
   private fun setAnimationTimeToZero() {
-    fillColorAnimationDuration = 0
     animateArcDuration = 0
     checkmarkAnimationDelayDuration = 0
     checkmarkAnimationDuration = 0
@@ -383,7 +375,6 @@ class UdfpsEnrollProgressBarDrawableV2(private val context: Context, attrs: Attr
 
   /** This sets animation timers back to normal, this happens after we have */
   private fun restoreAnimationTime() {
-    fillColorAnimationDuration = FILL_COLOR_ANIMATION_DURATION_MS
     animateArcDuration = PROGRESS_ANIMATION_DURATION_MS
     checkmarkAnimationDelayDuration = CHECKMARK_ANIMATION_DELAY_MS
     checkmarkAnimationDuration = CHECKMARK_ANIMATION_DURATION_MS
