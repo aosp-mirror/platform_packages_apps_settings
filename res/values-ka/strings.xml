@@ -565,7 +565,8 @@
     <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"შეგიძლიათ კერძო სივრცის ავტომატურად ჩაკეტვა, თუ არ იყენებთ მოწყობილობას გარკვეული პერიოდის განმავლობაში"</string>
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"ყოველთვის, როდესაც მოწყობილობა ჩაიკეტება"</string>
     <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"5-წუთიანი უმოქმედობის შემდეგ"</string>
-    <string name="private_space_auto_lock_never" msgid="595014527119778873">"არასოდეს"</string>
+    <!-- no translation found for private_space_auto_lock_after_device_restart (288755768725895029) -->
+    <skip />
     <string name="private_space_hide_page_title" msgid="4351404195904146088">"კერძო სივრცის დამალვა ჩაკეტვის დროს"</string>
     <string name="private_space_hide_page_summary" msgid="6247773353685839242">"თუ არ გსურთ, სხვებმა იცოდნენ, რომ თქვენს მოწყობილობაზე კერძო სივრცე გაქვთ, შეგიძლიათ, დამალოთ იგი თქვენი აპების გვერდიდან"</string>
     <string name="private_space_access_header" msgid="1077082416567150819">"წვდომა კერძო სივრცეზე, როცა დამალულია"</string>
@@ -1435,8 +1436,7 @@
     <string name="battery_level_title" msgid="1371765298786083448">"ბატარეის დატენვის დონე"</string>
     <string name="communal_settings_title" msgid="2845678473945902115">"საერთო"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"საერთო პარამეტრები"</string>
-    <!-- no translation found for satellite_setting (4171265534842459910) -->
-    <skip />
+    <string name="satellite_setting" msgid="4171265534842459910">"შეტყობინებების სატელიტური მიმოცვლა"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN-ები"</string>
     <string name="apn_edit" msgid="2003683641840248741">"წვდომის წერტილის რედაქტირება"</string>
     <string name="apn_add" msgid="9069613192201630934">"დაამატეთ წვდომის წერტილი"</string>
@@ -2054,6 +2054,8 @@
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"გამადიდებელი მოგყვებათ ტექსტის აკრეფისას"</string>
     <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"დარჩეს ჩართული აპების გადართვისას"</string>
     <string name="accessibility_screen_magnification_always_on_summary" msgid="306908451430863049">"გამადიდებელი დარჩება ჩართული და მასშტაბს შეამცირებს როდესაც აპებს გადართავთ"</string>
+    <!-- no translation found for accessibility_screen_magnification_always_on_unavailable_summary (3844732482037416038) -->
+    <skip />
     <string name="accessibility_screen_magnification_joystick_title" msgid="1803769708582404964">"ჯოისტიკი"</string>
     <string name="accessibility_screen_magnification_joystick_summary" msgid="4640300148573982720">"გაააქტიურეთ და გაამოძრავეთ გამადიდებელი შუშა ეკრანის ჯოისტიკით. გამადიდებელი შუშის სამართავად ხანგრძლივად შეეხეთ, შემდეგ კი გადაათრიეთ ჯოისტიკი. შეხებით გადაათრიეთ ჯოისტიკი."</string>
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"გადიდების შესახებ"</string>
@@ -2102,89 +2104,59 @@
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;მასშტაბის გასადიდებლად:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. გადიდების დასაწყებად გამოიყენეთ მალსახმობი&lt;br/&gt; {1,number,integer}. შეეხეთ ეკრანს&lt;br/&gt; {2,number,integer}. ჩაავლეთ 2 თითი ეკრანზე გადასაადგილებლად&lt;br/&gt; {3,number,integer}. მასშტაბის კორექტირებისთვის გამოიყენეთ თითებით მასშტაბირება 2 თითით&lt;br/&gt; {4,number,integer}. გადიდების შესაწყვეტად გამოიყენეთ მალსახმობი&lt;br/&gt;&lt;br/&gt;&lt;b&gt;მასშტაბის დროებით გასადიდებლად:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. გადიდების მასშტაბი სრულ ეკრანზე უნდა იყოს დაყენებული&lt;br/&gt; {1,number,integer}. გადიდების დასაწყებად გამოიყენეთ მალსახმობი&lt;br/&gt; {2,number,integer}. ხანგრძლივად შეეხეთ ეკრანს ნებისმიერ ადგილას&lt;br/&gt; {3,number,integer}. ჩაავლეთ თითი ეკრანზე გადასაადგილებლად&lt;br/&gt; {4,number,integer}. გადიდების შესაწყვეტად მოაშორეთ თითი"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"როდესაც გადიდება ჩართულია, შეგიძლიათ გაადიდოთ მასშტაბი თქვენს ეკრანზე.\n\n"<b>"მასშტაბირებისთვის"</b>", დაიწყეთ გადიდება, შემდეგ შეეხეთ ეკრანის ნებისმიერ ადგილს.\n"<ul><li>"გადასაადგილებლად გადაატარეთ ეკრანს 2 ან მეტი თითი"</li>\n<li>"მასშტაბის დასარეგულირებლად ეკრანზე შეაერთეთ 2 ან მეტი თითი"</li></ul>\n\n<b>"მასშტაბის დროებით გასადიდებლად"</b>", დაიწყეთ გადიდება, შემდეგ ხანგრძლივად შეეხეთ ეკრანის ნებისმიერ ნაწილს.\n"<ul><li>"გადაატარეთ თითი ეკრანს მისი სხვადასხვა ნაწილის დასათვალიერებლად"</li>\n<li>"მასშტაბის შესამცირებლად ასწიეთ თითი"</li></ul>\n\n"კლავიატურისა და ნავიგაციის ზოლის მასშტაბის გაზრდა ვერ მოხერხდება."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"გვერდი <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> / <xliff:g id="NUM_PAGES">%2$d</xliff:g>-დან"</string>
-    <!-- no translation found for accessibility_tutorial_dialog_title_button (1924337057649065884) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_title_volume (1032323517963429981) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_title_triple (5529704884360240365) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_title_two_finger_double (5749704453829390283) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"მარტივი წვდომის ღილაკის მალსახმობი"</string>
+    <string name="accessibility_tutorial_dialog_title_volume" msgid="1032323517963429981">"ხმის ღილაკების მალსახმობები"</string>
+    <string name="accessibility_tutorial_dialog_title_triple" msgid="5529704884360240365">"სამმაგი შეხების მალსახმობი"</string>
+    <string name="accessibility_tutorial_dialog_title_two_finger_double" msgid="5749704453829390283">"%1$d თითით ორმაგი შეხების მალსახმობი"</string>
     <string name="accessibility_tutorial_dialog_title_quick_setting" msgid="2905083277641794558">"სწრაფი პარამეტრების მალსახმობი"</string>
-    <!-- no translation found for accessibility_tutorial_dialog_title_gesture (4541649734549409614) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_title_gesture" msgid="4541649734549409614">"მარტივი წვდომისთვის ჟესტის მალსახმობი"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="6800684770875867559">"მარტივი წვდომის ჟესტის გამოყენება"</string>
-    <!-- no translation found for accessibility_tutorial_dialog_message_button (8977286776192770246) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_floating_button (6631371483819355514) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_volume (3785791536286606664) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_message_button" msgid="8977286776192770246">"ამ ფუნქციით სარგებლობისთვის თქვენი ეკრანის ქვედა ნაწილში შეეხეთ მარტივი წვდომის ღილაკს: <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>.\n\nფუნქციებს შორის გადასართავად ხანგრძლივად შეეხეთ მარტივი წვდომის ღილაკს."</string>
+    <string name="accessibility_tutorial_dialog_message_floating_button" msgid="6631371483819355514">"ამ ფუნქციის გამოსაყენებლად შეეხეთ მარტივი წვდომის ღილაკს თქვენს ეკრანზე"</string>
+    <string name="accessibility_tutorial_dialog_message_volume" msgid="3785791536286606664">"ამ ფუნქციით სარგებლობისთვის ხანგრძლივად დააჭირეთ ხმის ორივე ღილაკს."</string>
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"გადიდების დასაწყებად და შესაწყვეტად, სამმაგად შეეხეთ ეკრანს ნებისმიერ ადგილზე."</string>
-    <!-- no translation found for accessibility_tutorial_dialog_tripletap_instruction (7549293553589934) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_twofinger_doubletap_instruction (1007756360115974649) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_quick_setting (3715446725334547432) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_shortcut_unavailable_in_suw (3847728530771929959) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_tripletap_instruction" msgid="7549293553589934">"გადიდების დასაწყებად და შესაწყვეტად %1$d-ჯერ სწრაფად შეეხეთ ეკრანს"</string>
+    <string name="accessibility_tutorial_dialog_twofinger_doubletap_instruction" msgid="1007756360115974649">"გადიდების დასაწყებად და შესაწყვეტად %1$d-ჯერ სწრაფად შეეხეთ ეკრანს"</string>
+    <string name="accessibility_tutorial_dialog_message_quick_setting" msgid="3715446725334547432">"{count,plural, =1{ამ ფუნქციის გამოსაყენებლად გადაფურცლეთ ეკრანის ზემოდან ქვემოთ. შემდეგ იპოვეთ {featureName} მოზაიკა.}other{ამ ფუნქციის გამოყენებისთვის თქვენი ეკრანი ზემოდან ქვემოთ გადაფურცლეთ # თითით. შემდეგ იპოვეთ {featureName} მოზაიკა.}}"</string>
+    <string name="accessibility_tutorial_dialog_shortcut_unavailable_in_suw" msgid="3847728530771929959">"ეს მალსახმობი ხელმისაწვდომი იქნება მოწყობილობის დაყენების დასრულების შემდეგ."</string>
     <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"ამ ფუნქციით სარგებლობისთვის 2 თითით გადაფურცლეთ ეკრანის ქვედა კიდიდან ზემოთ.\n\nფუნქციების გადასართავად 2 თითით გადაფურცლეთ ზემოთ და დააყოვნეთ."</string>
-    <!-- no translation found for accessibility_tutorial_dialog_gesture_shortcut_instruction (7349950768250852308) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_gesture_shortcut_instruction" msgid="7349950768250852308">"{count,plural, =1{ამ ფუნქციის გამოსაყენებლად გადაფურცლეთ ზემოთ თქვენი ეკრანის ქვედა ნაწილიდან}other{ამ ფუნქციის გამოსაყენებლად # თითით გადაფურცლეთ ზემოთ თქვენი ეკრანის ქვედა ნაწილიდან}}"</string>
     <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="8142847782708562793">"ამ ფუნქციით სარგებლობისთვის 3 თითით გადაფურცლეთ ეკრანის ქვედა კიდიდან ზემოთ.\n\nფუნქციების გადასართავად 3 თითით გადაფურცლეთ ზემოთ და დააყოვნეთ."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"მარტივი წვდომის ფუნქციით სარგებლობისთვის 2 თითით გადაფურცლეთ ეკრანის ქვედა კიდიდან ზემოთ.\n\nფუნქციების გადასართავად 2 თითით გადაფურცლეთ ზემოთ და დააყოვნეთ."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="7292969929578621958">"მარტივი წვდომის ფუნქციით სარგებლობისთვის 3 თითით გადაფურცლეთ ეკრანის ქვედა კიდიდან ზემოთ.\n\nფუნქციების გადასართავად 3 თითით გადაფურცლეთ ზემოთ და დააყოვნეთ."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"გასაგებია"</string>
-    <!-- no translation found for accessibility_tutorial_dialog_link_button (13364319079385020) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_configure_software_shortcut_type (8041105223988170653) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_link_button" msgid="13364319079385020">"ღილაკის მორგება"</string>
+    <string name="accessibility_tutorial_dialog_configure_software_shortcut_type" msgid="8041105223988170653">"სხვა ვარიანტები"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"<xliff:g id="SERVICE">%1$s</xliff:g> - მალსახმობი"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="48978719406821294">"მარტივი წვდომის ღილაკი"</string>
     <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="7346399253904683940">"ჟესტი მარტივი წვდომისთვის"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"გადაფურცლეთ ზემოთ 2 თითით"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"გადაფურცლეთ ზემოთ 3 თითით"</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_software (6505512764022389951) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_floating_button (6266489864614886247) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_software_by_gesture (4775049370625630546) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software (8315934725362849788) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_title_software" msgid="6505512764022389951">"მარტივი წვდომის ღილაკი"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_floating_button" msgid="6266489864614886247">"შეეხეთ მოლივლივე ღილაკს"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="4775049370625630546">"მარტივი წვდომის ჟესტი"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="8315934725362849788">"თქვენი ეკრანის ქვედა ნაწილში შეეხეთ მარტივი წვდომის ღილაკს: <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>. სერვისების გადასართავად ხანგრძლივად შეეხეთ მარტივი წვდომის ღილაკს."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"ორი თითით გადაფურცლეთ ეკრანის ქვედა კიდიდან ზემოთ.\n\nფუნქციების გადასართავად, ორი თითით გადაფურცლეთ ზემოთ და დააყოვნეთ."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"სამი თითით გადაფურცლეთ ეკრანის ქვედა კიდიდან ზემოთ.\n\nფუნქციების გადასართავად, სამი თითით გადაფურცლეთ ზემოთ და დააყოვნეთ."</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_gesture (2081123009255579884) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_summary_gesture" msgid="2081123009255579884">"{count,plural, =1{გადაფურცლეთ ზემოთ თქვენი ეკრანის ქვედა ნაწილიდან. ფუნქციებს შორის გადასართავად გადაფურცლეთ ზემოთ და დააყოვნეთ.}other{გადაფურცლეთ # თითით ზემოთ თქვენი ეკრანის ქვედა ნაწილიდან. ფუნქციებს შორის გადასართავად # თითით გადაფურცლეთ ზემოთ და დააყოვნეთ.}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="4459254227203203324"><annotation id="link">"სხვა ვარიანტები"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"შეიტყვეთ მეტი <xliff:g id="SERVICE">%1$s</xliff:g>-ის შესახებ"</string>
     <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"სწრაფი პარამეტრები"</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_quick_settings (739883998754165940) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_quick_settings_suw (4216628328191609785) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="739883998754165940">"{count,plural, =1{გადაფურცლეთ ეკრანის ზემოდან ქვემოთ}other{გადაფურცლეთ # თითით ეკრანის ზემოდან ქვემოთ}}"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_quick_settings_suw" msgid="4216628328191609785">"{count,plural, =1{გადაფურცლეთ ეკრანის ზემოდან ქვემოთ ეს მალსახმობი ხელმისაწვდომი იქნება მოწყობილობის დაყენების დასრულების შემდეგ.}other{გადაფურცლეთ # თითით ეკრანის ზემოდან ქვემოთ. ეს მალსახმობი ხელმისაწვდომი იქნება მოწყობილობის დაყენების დასრულების შემდეგ.}}"</string>
     <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"სწრაფი პარამეტრები"</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_hardware (844089763968552142) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_hardware_keyword (2483152542320987022) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="844089763968552142">"ხმის ღილაკები"</string>
+    <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"ხმის ღილაკები"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"ხანგრძლივად დააჭირეთ ხმის ორივე ღილაკს"</string>
     <string name="accessibility_shortcut_edit_dialog_title_two_finger_double_tap" msgid="2271778556854020996">"ეკრანზე ორი თითით ორმაგი შეხება"</string>
-    <!-- no translation found for accessibility_shortcut_edit_screen_title_two_finger_double_tap (8952595692906527694) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_screen_summary_two_finger_double_tap (385404127425496362) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_screen_title_triple_tap (3314488747597058942) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_screen_summary_triple_tap (4839204951599629871) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_two_finger_double_tap_keyword (6271718715836961167) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_screen_title_two_finger_double_tap" msgid="8952595692906527694">"%1$d თითით ორმაგად შეხება"</string>
+    <string name="accessibility_shortcut_edit_screen_summary_two_finger_double_tap" msgid="385404127425496362">"ორჯერ სწრაფად შეეხეთ ეკრანს %1$d თითით"</string>
+    <string name="accessibility_shortcut_edit_screen_title_triple_tap" msgid="3314488747597058942">"სამმაგი შეხება"</string>
+    <string name="accessibility_shortcut_edit_screen_summary_triple_tap" msgid="4839204951599629871">"სწრაფად შეეხეთ ეკრანს %1$d-ჯერ. ამან შესაძლოა თქვენი მოწყობილობა შეანელოს."</string>
+    <string name="accessibility_shortcut_two_finger_double_tap_keyword" msgid="6271718715836961167">"%1$d თითით ორმაგად შეხება"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_two_finger_double_tap" msgid="8262165091808318538">"სწრაფად შეეხეთ ეკრანს {0,number,integer}-ჯერ ორი თითით"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"სამმაგად შეეხეთ ეკრანს"</string>
-    <!-- no translation found for accessibility_shortcut_triple_tap_keyword (5359347130888464334) -->
-    <skip />
+    <string name="accessibility_shortcut_triple_tap_keyword" msgid="5359347130888464334">"სამმაგი შეხება"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="2102327956423320536">"სწრაფად შეეხეთ ეკრანს {0,number,integer}-ჯერ. ამ მალსახმობმა შეიძლება მოწყობილობა შეანელოს"</string>
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"გაფართოებ."</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"მარტივი წვდომის ღილაკად დაყენებულია <xliff:g id="SERVICE">%1$s</xliff:g>. გადიდების გამოსაყენებლად ხანგრძლივად შეეხეთ მარტივი წვდომის ღილაკს, ხოლო შემდეგ აირჩიეთ გადიდება."</string>
@@ -4459,6 +4431,8 @@
     <string name="credman_confirmation_change_provider_positive_button" msgid="7732302992885116967">"შეცვლა"</string>
     <string name="credman_limit_error_msg_title" msgid="1525814645803612135">"შეგიძლიათ ჩართული გქონდეთ მხოლოდ 5 მომსახურება"</string>
     <string name="credman_limit_error_msg" msgid="2521803280130310063">"ახლის დასამატებლად გამორთეთ სულ მცირე ერთი მომსახურება მაინც"</string>
+    <!-- no translation found for credman_main_settings_intro_text (4981603639240772620) -->
+    <skip />
     <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"%1$s იყენებს თქვენს ეკრანზე გამოსახულ კონტენტს, რათა გაარკვიოს, რა შეიძლება შეივსოს ავტომატურად."</string>
     <string name="credman_error_message_title" msgid="4099557206946333568">"პაროლების, წვდომის გასაღებებისა და მონაცემთა სერვისების ლიმიტი"</string>
     <string name="credman_error_message" msgid="8334797097200415449">"ერთდროულად, შეგიძლიათ, მაქსიმუმ 5 პაროლი, წვდომის გასაღები და მონაცემთა სერვისი გქონდეთ. სხვების დასამატებლად გამორთეთ სერვისი."</string>
@@ -4534,8 +4508,7 @@
     <string name="media_output_label_title" msgid="4139048973886819148">"<xliff:g id="LABEL">%s</xliff:g>-ის დაკვრა"</string>
     <string name="media_output_title_without_playing" msgid="3339321669132875821">"აუდიო დაიკვრება"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"ეს მოწყობილობა"</string>
-    <!-- no translation found for media_output_audio_sharing (6531742594884809737) -->
-    <skip />
+    <string name="media_output_audio_sharing" msgid="6531742594884809737">"აუდიოს გაზიარება"</string>
     <string name="media_out_summary_ongoing_call_state" msgid="475188726850090363">"ზარების განხორციელებისას მიუწვდომელია"</string>
     <string name="take_call_on_title" msgid="1159417893879946757">"ზარის აღება მოწყობილობაზე:"</string>
     <string name="cannot_change_apn_toast" msgid="296540724089240405">"ამ APN-ის შეცვლა ვერ მოხერხდება."</string>
@@ -4667,8 +4640,7 @@
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"თქვენი ტელეფონი ავტომატურად დაუკავშირდება სატელიტს. საუკეთესო კავშირისთვის იყავთ ისეთ ადგილას, სადაც ცის ნათელი ხედია."</string>
     <string name="title_supported_service" msgid="4275535165812691571">"თქვენი ტელეფონის სატელიტთან დაკავშირების შემდეგ"</string>
     <string name="summary_supported_service" msgid="4320535903444834786">"შეტყობინების ყველგან გაგზავნა შეგიძლიათ, მათ შორის გადაუდებელი დახმარების სამსახურებში. თქვენი ტელეფონი დაუკავშირდება მობილური ქსელს, მისი ხელმისაწვდომობის შემთხვევაში."</string>
-    <!-- no translation found for satellite_setting_summary_more_information (7729454610548016356) -->
-    <skip />
+    <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"შეტყობინებების სატელიტურ მიმოცვლას შეიძლება უფრო მეტი დრო დასჭირდეს და ხელმისაწვდომია მხოლოდ გარკვეულ ტერიტორიაზე. ამინდმა და გარკვეულმა კონსტრუქციებმა შეიძლება გავლენა მოახდინოს თქვენს კავშირზე სატელიტთან. სატელიტით დარეკვა მიუწვდომელია. გადაუდებელი ზარის განხორციელება მიანც შესაძლებელია.\n\nშესაძლოა გარკვეული დრო დასჭირდეს ანგარიშის პარამეტრების ცვლილებების ასახვას. დეტალური ინფორმაციისთვის მიმართეთ ოპერატორს."</string>
     <string name="more_about_satellite_messaging" msgid="3385673133561348509">"მეტი ინფორმაცია შეტყობინებების სატელიტური მიმოცვლის შესახებ"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"წვდომის წერტილების სახელები"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
@@ -4706,10 +4678,8 @@
     <string name="sim_action_turn_off" msgid="3506698692916473000">"გამორთვა"</string>
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"SIM ბარათის გააქტიურება ვერ ხერხდება"</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"ცადეთ, ხელახლა ჩართოთ SIM ბარათი. თუ პრობლემა არ მოგვარდა, გადატვირთეთ მოწყობილობა."</string>
-    <!-- no translation found for sim_onboarding_dialog_starting_title (4212945803784596345) -->
-    <skip />
-    <!-- no translation found for sim_onboarding_dialog_starting_msg (8450391476631265209) -->
-    <skip />
+    <string name="sim_onboarding_dialog_starting_title" msgid="4212945803784596345">"SIM-ის პარამეტრების დაყენება"</string>
+    <string name="sim_onboarding_dialog_starting_msg" msgid="8450391476631265209">"მობილური ქსელის პრეფერენციების კონფიგურაცია ამ მოწყობილობაზე რამდენიმე SIM-ის გამოსაყენებლად"</string>
     <string name="sim_onboarding_label_sim_title" msgid="273162565849288273">"მიამაგრეთ ლეიბლი SIM-ებს"</string>
     <string name="sim_onboarding_label_sim_msg" msgid="5105859235219529056">"ეს ლეიბლები გამოჩნდება ზარების განხორციელებისას, ტექსტური შეტყობინებების გაგზავნისას და ინტერნეტის გამოყენებისას, ასევე, პარამეტრებში"</string>
     <string name="sim_onboarding_label_sim_dialog_title" msgid="5839073125605286120">"SIM-ლეიბლი"</string>
@@ -4727,10 +4697,8 @@
     <string name="sim_action_restart_dialog_msg" msgid="4737611046767629774">"ერთდროულად 2 SIM ბარათის გამოსაყენებლად გადატვირთეთ თქვენი მოწყობილობა, შემდეგ ჩართეთ ორივე SIM ბარათი"</string>
     <string name="sim_action_restart_dialog_cancel" msgid="665560106686565624">"მხოლოდ <xliff:g id="CARRIER_NAME">%1$s</xliff:g>-ის გამოყენება"</string>
     <string name="sim_onboarding_phoneNumber_data_only" msgid="8158409121949373662">"მხოლოდ ინტერნეტისთვის"</string>
-    <!-- no translation found for sim_onboarding_setup (8678504891830386486) -->
-    <skip />
-    <!-- no translation found for sim_onboarding_close (8656305651358745422) -->
-    <skip />
+    <string name="sim_onboarding_setup" msgid="8678504891830386486">"დაწყება"</string>
+    <string name="sim_onboarding_close" msgid="8656305651358745422">"დახურვა"</string>
     <string name="sim_onboarding_next" msgid="6415025179929475355">"შემდეგი"</string>
     <string name="sim_onboarding_progressbar_turning_sim_on" msgid="1163318788393361574">"ირთვება: <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="mobile_network_spn_title" msgid="3053793174495329077">"მობილური ქსელი"</string>
@@ -5221,10 +5189,7 @@
     <string name="content_protection_preference_subpage_info" msgid="6890886357653365489"></string>
     <string name="accessibility_setup_password_complete" msgid="6358749253318369077">"პაროლი დაყენებულია"</string>
     <string name="show_stylus_pointer_icon" msgid="1010583689203665786">"კურსორის ჩვენება სტილუსის გადატარების დროს"</string>
-    <!-- no translation found for media_drm_settings_title (897424966554739867) -->
-    <skip />
-    <!-- no translation found for force_swcrypto_fallback_title (8053166299808645593) -->
-    <skip />
-    <!-- no translation found for force_swcrypto_fallback_summary (181969966310309701) -->
-    <skip />
+    <string name="media_drm_settings_title" msgid="897424966554739867">"მედიის DRM პარამეტრები"</string>
+    <string name="force_swcrypto_fallback_title" msgid="8053166299808645593">"Software Secure Crypto-ს იძულება"</string>
+    <string name="force_swcrypto_fallback_summary" msgid="181969966310309701">"DRM გასაღების მმართველის იძულება პროგრამულ უზრუნველყოფაზე დაფუძნებული თეთრი ყუთის კრიპტოგრაფიის გამოსაყენებლად"</string>
 </resources>

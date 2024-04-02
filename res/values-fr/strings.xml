@@ -116,9 +116,9 @@
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"Redémarrer"</string>
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Annuler"</string>
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Désactiver Bluetooth LE Audio"</string>
-    <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Désactiver la fonctionnalité Bluetooth LE Audio si l\'appareil accepte les capacités matérielles LE Audio"</string>
+    <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Désactive la fonctionnalité Bluetooth LE Audio si l\'appareil est compatible avec les capacités matérielles LE Audio"</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Mode Bluetooth LE Audio"</string>
-    <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Voir LE Audio dans Détails de l\'appareil"</string>
+    <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Bouton LE Audio dans Détails appareil"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Liste d\'autorisation de contournement Bluetooth LE Audio"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Utilisez LE Audio par défaut même si le périphérique LE Audio n\'a pas été vérifié pour remplir les critères de la liste d\'autorisation."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Périphériques multimédias"</string>
@@ -209,7 +209,7 @@
     <string name="title_regional_pref_footer" msgid="7450438024324794380">"Si une appli ne prend pas en charge les préférences régionales, elle utilisera ses paramètres régionaux par défaut."</string>
     <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"Découvrez-en davantage sur les préférences linguistiques."</string>
     <string name="category_title_terms_of_address" msgid="4309422700380895278">"Préférences supplémentaires"</string>
-    <string name="terms_of_address_title" msgid="7338630812197476808">"Choisissez la façon dont on s\'adresse à vous"</string>
+    <string name="terms_of_address_title" msgid="7338630812197476808">"Choisissez comment on s\'adresse à vous"</string>
     <string name="terms_of_address_summary" msgid="7802443422612600620">"Votre appareil peut personnaliser la façon dont on s\'adresse à vous"</string>
     <string name="terms_of_address_intro_title" msgid="1533951542181569335">"Ce paramètre permet à la plupart des applications système de personnaliser la façon dont on s\'adresse à vous. Il n\'est pas utilisé par les applications que vous installez."</string>
     <string name="terms_of_address_not_specified" msgid="4439257779351251973">"Non défini"</string>
@@ -267,14 +267,10 @@
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Heure standard"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"Sélectionner par zone géo."</string>
     <string name="zone_menu_by_offset" msgid="1257702747474426745">"Sélectionner le décalage UTC"</string>
-    <!-- no translation found for time_feedback_category_title (5942621686512255208) -->
-    <skip />
-    <!-- no translation found for keywords_time_feedback_category (4553921538559830393) -->
-    <skip />
-    <!-- no translation found for time_feedback_title (7720948068042783614) -->
-    <skip />
-    <!-- no translation found for keywords_time_feedback (929965356597294030) -->
-    <skip />
+    <string name="time_feedback_category_title" msgid="5942621686512255208">"Commentaires"</string>
+    <string name="keywords_time_feedback_category" msgid="4553921538559830393">"commentaires, bug, heure, zone, fuseau horaire"</string>
+    <string name="time_feedback_title" msgid="7720948068042783614">"Envoyer des commentaires sur l\'heure"</string>
+    <string name="keywords_time_feedback" msgid="929965356597294030">"commentaires, bug, heure, zone, fuseau horaire"</string>
     <string name="lock_after_timeout" msgid="8682769000437403444">"Verrouiller après la mise en veille"</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> après la mise en veille"</string>
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"Immédiatement après la mise en veille, sauf lorsque l\'appareil est maintenu en activité par <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
@@ -569,7 +565,8 @@
     <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"Vous pouvez verrouiller votre espace privé automatiquement lorsque vous n\'utilisez pas votre appareil pendant un certain temps"</string>
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"À chaque verrouillage de l\'appareil"</string>
     <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"Après 5 minutes d\'inactivité"</string>
-    <string name="private_space_auto_lock_never" msgid="595014527119778873">"Jamais"</string>
+    <!-- no translation found for private_space_auto_lock_after_device_restart (288755768725895029) -->
+    <skip />
     <string name="private_space_hide_page_title" msgid="4351404195904146088">"Masquer l\'espace privé lorsqu\'il est verrouillé"</string>
     <string name="private_space_hide_page_summary" msgid="6247773353685839242">"Afin que personne ne puisse savoir que vous possédez un espace privé sur votre appareil, vous pouvez le faire disparaître de votre liste d\'applications"</string>
     <string name="private_space_access_header" msgid="1077082416567150819">"Accéder à l\'espace privé lorsque l\'appli est masquée"</string>
@@ -1758,8 +1755,7 @@
     <string name="enable_text" msgid="8570798764647110430">"Activer"</string>
     <string name="clear_user_data_text" msgid="6773186434260397947">"Vider l\'espace de stockage"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"Désinstaller les mises à jour"</string>
-    <!-- no translation found for app_restricted_settings_lockscreen_title (796413224212436400) -->
-    <skip />
+    <string name="app_restricted_settings_lockscreen_title" msgid="796413224212436400">"Accorder l\'accès aux autorisations restreintes"</string>
     <string name="auto_launch_enable_text" msgid="8912714475823807798">"Certaines activités que vous avez sélectionnées s\'ouvrent dans cette appli par défaut."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"Vous avez choisi de permettre à cette application de créer des widgets et d\'accéder à leurs données."</string>
     <string name="auto_launch_disable_text" msgid="502648841250936209">"Aucun paramètre par défaut défini"</string>
@@ -2027,11 +2023,9 @@
     <string name="color_contrast_preview_email_send_date" msgid="2108702726171600080">"Il y a 2 jours"</string>
     <string name="color_contrast_preview_email_badge" msgid="4845484039428505392">"Suivre ?"</string>
     <string name="color_contrast_preview_email_title" msgid="198712116139754823">"Rapport du déplacement professionnel"</string>
-    <!-- no translation found for color_contrast_preview_email_body (2714343154965937945) -->
-    <skip />
+    <string name="color_contrast_preview_email_body" msgid="2714343154965937945">"Pour plus d\'aide, veuillez contacter Helen ou moi-même. Ce rapport sera"</string>
     <string name="color_contrast_preview_email_attachment_name" msgid="852407311884814746">"Dépenses du client"</string>
-    <!-- no translation found for color_contrast_about_title (5939566801408667867) -->
-    <skip />
+    <string name="color_contrast_about_title" msgid="5939566801408667867">"À propos du contraste des couleurs"</string>
     <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"Assombrir l\'écran"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Commandes d\'interaction"</string>
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"Contrôle du temps d\'appui"</string>
@@ -2060,6 +2054,8 @@
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"La loupe suit le texte à mesure que vous tapez"</string>
     <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"Conserver en changeant d\'appli"</string>
     <string name="accessibility_screen_magnification_always_on_summary" msgid="306908451430863049">"La loupe reste activée et fait un zoom arrière lorsque vous changez d\'appli"</string>
+    <!-- no translation found for accessibility_screen_magnification_always_on_unavailable_summary (3844732482037416038) -->
+    <skip />
     <string name="accessibility_screen_magnification_joystick_title" msgid="1803769708582404964">"Joystick"</string>
     <string name="accessibility_screen_magnification_joystick_summary" msgid="4640300148573982720">"Activez et déplacez la loupe à l\'aide d\'un joystick à l\'écran. Appuyez de manière prolongée, puis déplacez votre doigt sur le joystick pour contrôler la loupe. Appuyez et faites glisser pour déplacer le joystick."</string>
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"À propos de l\'agrandissement"</string>
@@ -4251,7 +4247,7 @@
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Balayer pour appeler l\'assistant"</string>
     <string name="assistant_corner_gesture_summary" msgid="5012534700233017955">"Pour appeler l\'appli d\'assistant numérique, balayez vers le haut depuis un coin inférieur"</string>
     <string name="assistant_long_press_home_gesture_title" msgid="4865972278738178753">"Maintenir le bouton d\'accueil enfoncé pour l\'Assistant"</string>
-    <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"Appuyer de manière prolongée sur le bouton d\'accueil pour appeler l\'appli d\'assistant numérique."</string>
+    <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"Appuyez de manière prolongée sur le bouton d\'accueil pour appeler l\'appli d\'assistant numérique."</string>
     <string name="low_label" msgid="6525629096999711220">"Faible"</string>
     <string name="high_label" msgid="357503396626018487">"Élevée"</string>
     <string name="left_edge" msgid="1513576842959071849">"Bord gauche"</string>
@@ -4424,7 +4420,7 @@
     <string name="credman_app_list_preference_none" msgid="2509646651254971448">"Aucun élément sélectionné"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Assurez-vous que cette appli est fiable&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; se sert de ce qui figure à l\'écran pour déterminer ce qui peut être saisi automatiquement."</string>
     <string name="credman_autofill_confirmation_message" msgid="843829628024668466">"&lt;b&gt;Utilisez &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Les nouveaux mots de passe, clés d\'accès et autres infos seront désormais enregistrés ici. &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; peut utiliser ce qui est affiché à l\'écran pour déterminer ce qui peut être saisi automatiquement."</string>
-    <string name="credman_picker_title" msgid="8442086614222006564">"Fournisseur de service préféré pour la gestion des mots de passe, des clés d\'accès et de la saisie automatique"</string>
+    <string name="credman_picker_title" msgid="8442086614222006564">"Service préféré pour la gestion des mots de passe, des clés d\'accès et de la saisie automatique"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Désactiver %1$s ?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Désactiver ce service ?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Les infos enregistrées telles que les mots de passe, clés d\'accès, modes de paiement et autres ne seront pas renseignées quand vous vous connecterez. Pour utiliser vos infos enregistrées, choisissez un mot de passe, une clé d\'accès ou un service de données."</string>
     <string name="account_dashboard_title_with_passkeys" msgid="6214673787161409996">"Mots de passe, clés d\'accès et saisie automatique"</string>
@@ -4435,6 +4431,8 @@
     <string name="credman_confirmation_change_provider_positive_button" msgid="7732302992885116967">"Modifier"</string>
     <string name="credman_limit_error_msg_title" msgid="1525814645803612135">"Seuls cinq services peuvent être activés"</string>
     <string name="credman_limit_error_msg" msgid="2521803280130310063">"Désactivez au moins un service pour pouvoir en ajouter un autre"</string>
+    <!-- no translation found for credman_main_settings_intro_text (4981603639240772620) -->
+    <skip />
     <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"%1$s utilise ce qui est affiché à l\'écran pour déterminer ce qui peut être saisi automatiquement."</string>
     <string name="credman_error_message_title" msgid="4099557206946333568">"Limite de mots de passe, clés d\'accès et services de données"</string>
     <string name="credman_error_message" msgid="8334797097200415449">"Vous pouvez avoir jusqu\'à cinq mots de passe, clés d\'accès et services de données actifs à la fois. Pour en ajouter un, désactivez-en un autre."</string>
@@ -4978,7 +4976,7 @@
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Afficher un message lorsque les applis accèdent à du texte, à des images ou à d\'autres contenus que vous avez copiés"</string>
     <string name="all_apps" msgid="3054120149509114789">"Toutes les applis"</string>
     <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"Ne pas autoriser"</string>
-    <string name="uwb_settings_title" msgid="8578498712312002231">"Ultra-wideband (UWB)"</string>
+    <string name="uwb_settings_title" msgid="8578498712312002231">"Bande ultralarge (UWB)"</string>
     <string name="uwb_settings_summary" msgid="3074271396764672268">"Aide à identifier la position relative des appareils à proximité disposant de l\'UWB"</string>
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Désactiver le mode Avion pour utiliser l\'UWB"</string>
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"UWB n\'est pas disponible dans le lieu actuel"</string>
@@ -5065,7 +5063,7 @@
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Redémarrer plus tard"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"Son spatial"</string>
     <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"Le son des appareils multimédias compatibles devient plus immersif"</string>
-    <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"Suivi des mouvements de la tête"</string>
+    <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"Suivi de la tête"</string>
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"Le son change quand vous bougez la tête pour un son plus naturel"</string>
     <string name="bluetooth_details_permissions_sync_title" msgid="7277580382321003521">"Synchroniser les autorisations du téléphone"</string>
     <string name="bluetooth_details_permissions_sync_summary" msgid="8125037984381432059">"Accorder à votre montre les mêmes autorisations que celles que vous avez accordées à votre téléphone"</string>
