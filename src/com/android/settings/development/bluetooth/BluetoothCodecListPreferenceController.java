@@ -78,6 +78,10 @@ public class BluetoothCodecListPreferenceController
 
     @Override
     public boolean onPreferenceChange(@Nullable Preference preference, @NonNull Object newValue) {
+        if (!Flags.a2dpOffloadCodecExtensibilitySettings()) {
+            return false;
+        }
+
         if (DEBUG) {
             Log.d(TAG, "onPreferenceChange: newValue=" + (String) newValue);
         }
@@ -120,6 +124,10 @@ public class BluetoothCodecListPreferenceController
     @Override
     public void updateState(@Nullable Preference preference) {
         super.updateState(preference);
+        if (!Flags.a2dpOffloadCodecExtensibilitySettings()) {
+            return;
+        }
+
         final List<String> codecIds = new ArrayList<>();
         final List<String> labels = new ArrayList<>();
         String selectedCodecId = mDefaultValue;
