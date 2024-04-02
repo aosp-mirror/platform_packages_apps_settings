@@ -486,7 +486,7 @@
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Položite konico prsta na tipalo"</string>
     <string name="security_settings_udfps_enroll_left_edge_title" msgid="1944076382202470458">"Položite levi rob prsta"</string>
     <string name="security_settings_udfps_enroll_right_edge_title" msgid="9036744264606447490">"Položite desni rob prsta"</string>
-    <string name="security_settings_sfps_enroll_finger_center_title" msgid="1320688855767675739">"Položite sredino prsta na tipalo."</string>
+    <string name="security_settings_sfps_enroll_finger_center_title" msgid="1320688855767675739">"Položite sredino prsta na tipalo"</string>
     <string name="security_settings_sfps_enroll_fingertip_title" msgid="2737520837684516446">"Položite konico prsta na tipalo"</string>
     <string name="security_settings_sfps_enroll_left_edge_title" msgid="9022963735924413343">"Položite levi rob prsta na tipalo"</string>
     <string name="security_settings_sfps_enroll_right_edge_title" msgid="823106857743394392">"Nazadnje položite desni rob prsta na tipalo"</string>
@@ -565,7 +565,8 @@
     <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"Zasebni prostor lahko samodejno zaklenete, če nekaj časa ne uporabljate naprave"</string>
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"Vsakič, ko se naprava zaklene"</string>
     <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"Po 5 minutah nedejavnosti"</string>
-    <string name="private_space_auto_lock_never" msgid="595014527119778873">"Nikoli"</string>
+    <!-- no translation found for private_space_auto_lock_after_device_restart (288755768725895029) -->
+    <skip />
     <string name="private_space_hide_page_title" msgid="4351404195904146088">"Skrij zasebni prostor, ko je zaklenjen"</string>
     <string name="private_space_hide_page_summary" msgid="6247773353685839242">"Če ne želite, da bi druge osebe vedele, da imate v napravi zasebni prostor, ga lahko skrijete, da ni prikazan na seznamu aplikacij"</string>
     <string name="private_space_access_header" msgid="1077082416567150819">"Dostop do zasebnega prostora, kadar je skrit"</string>
@@ -1435,8 +1436,7 @@
     <string name="battery_level_title" msgid="1371765298786083448">"Raven napolnjenosti baterije"</string>
     <string name="communal_settings_title" msgid="2845678473945902115">"Skupno"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"Skupne nastavitve"</string>
-    <!-- no translation found for satellite_setting (4171265534842459910) -->
-    <skip />
+    <string name="satellite_setting" msgid="4171265534842459910">"Satelitska sporočila"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN-ji"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Urejanje dostopne točke"</string>
     <string name="apn_add" msgid="9069613192201630934">"Dodajanje dostopne točke"</string>
@@ -2054,6 +2054,8 @@
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"Lupa sledi besedilu med tipkanjem"</string>
     <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"Pusti vklopljeno ob preklopu aplikacij"</string>
     <string name="accessibility_screen_magnification_always_on_summary" msgid="306908451430863049">"Ob preklopu aplikacij ostane Lupa vklopljena in izvede se pomanjšava na običajno velikost"</string>
+    <!-- no translation found for accessibility_screen_magnification_always_on_unavailable_summary (3844732482037416038) -->
+    <skip />
     <string name="accessibility_screen_magnification_joystick_title" msgid="1803769708582404964">"Krmilna palica"</string>
     <string name="accessibility_screen_magnification_joystick_summary" msgid="4640300148573982720">"Lupo aktivirajte in premikajte s krmilno palico na zaslonu. Dotaknite se, pridržite in nato lupo upravljajte z vlečenjem po krmilni palici. Če želite premakniti krmilno palico, se je dotaknite in jo povlecite."</string>
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"O povečavi"</string>
@@ -2102,89 +2104,59 @@
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Če želite povečati:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Z bližnjico vklopite povečavo.&lt;br/&gt; {1,number,integer}. Dotaknite se zaslona.&lt;br/&gt; {2,number,integer}. Po zaslonu se pomikajte z vlečenjem dveh prstov.&lt;br/&gt; {3,number,integer}. Stopnjo povečave prilagodite tako, da prsta razmaknete ali primaknete.&lt;br/&gt; {4,number,integer}. Z bližnjico izklopite povečavo.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Povečavo začasno vklopite tako:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Prepričajte se, da je vrsta povečave nastavljena na celozaslonski način.&lt;br/&gt; {1,number,integer}. Z bližnjico vklopite povečavo.&lt;br/&gt; {2,number,integer}. Dotaknite se poljubne točke na zaslonu in jo pridržite.&lt;br/&gt; {3,number,integer}. Po zaslonu se pomikajte z vlečenjem prsta.&lt;br/&gt; {4,number,integer}. Dvignite prst, da izklopite povečavo."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Ko je povečava vklopljena, lahko povečate prikaz na zaslonu.\n\n"<b>"Če želite povečati prikaz"</b>", zaženite povečavo, nato pa se dotaknite poljubnega mesta na zaslonu.\n"<ul><li>"Povlecite z dvema ali več prsti po zaslonu, če se želite pomikati."</li>\n<li>"Primaknite ali razmaknite dva ali več prstov, če želite prilagoditi povečavo."</li></ul>\n\n<b>"Če želite začasno povečati prikaz"</b>", zaženite povečavo ter se dotaknite poljubnega mesta na zaslonu in ga pridržite.\n"<ul><li>"Povlecite, če se želite premikati po zaslonu."</li>\n<li>"Dvignite prst, če želite zmanjšati povečavo."</li></ul>\n\n"Povečava ni mogoča na tipkovnici ali v vrstici za krmarjenje."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"<xliff:g id="CURRENT_PAGE">%1$d</xliff:g>. stran od <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
-    <!-- no translation found for accessibility_tutorial_dialog_title_button (1924337057649065884) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_title_volume (1032323517963429981) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_title_triple (5529704884360240365) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_title_two_finger_double (5749704453829390283) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"Bližnjica gumba za dostopnost"</string>
+    <string name="accessibility_tutorial_dialog_title_volume" msgid="1032323517963429981">"Bližnjica gumbov za glasnost"</string>
+    <string name="accessibility_tutorial_dialog_title_triple" msgid="5529704884360240365">"Bližnjica trikratnega dotika"</string>
+    <string name="accessibility_tutorial_dialog_title_two_finger_double" msgid="5749704453829390283">"Bližnjica dvakratnega dotika z %1$d prstoma"</string>
     <string name="accessibility_tutorial_dialog_title_quick_setting" msgid="2905083277641794558">"Bližnjica za hitre nastavitve"</string>
-    <!-- no translation found for accessibility_tutorial_dialog_title_gesture (4541649734549409614) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_title_gesture" msgid="4541649734549409614">"Bližnjica poteze za dostopnost"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="6800684770875867559">"Uporaba poteze za dostopnost"</string>
-    <!-- no translation found for accessibility_tutorial_dialog_message_button (8977286776192770246) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_floating_button (6631371483819355514) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_volume (3785791536286606664) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_message_button" msgid="8977286776192770246">"Če želite uporabiti to funkcijo, se na dnu zaslona dotaknite gumba za dostopnost <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>.\n\nČe želite preklopiti med funkcijami, pridržite gumb za dostopnost."</string>
+    <string name="accessibility_tutorial_dialog_message_floating_button" msgid="6631371483819355514">"Če želite uporabiti to funkcijo, se na zaslonu dotaknite gumba za dostopnost."</string>
+    <string name="accessibility_tutorial_dialog_message_volume" msgid="3785791536286606664">"Če želite uporabiti to funkcijo, pritisnite in pridržite oba gumba za glasnost."</string>
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"Če želite vklopiti ali izklopiti povečavo, se trikrat dotaknite poljubnega mesta na zaslonu."</string>
-    <!-- no translation found for accessibility_tutorial_dialog_tripletap_instruction (7549293553589934) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_twofinger_doubletap_instruction (1007756360115974649) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_quick_setting (3715446725334547432) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_shortcut_unavailable_in_suw (3847728530771929959) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_tripletap_instruction" msgid="7549293553589934">"Za vklop ali izklop povečave se %1$d-krat hitro dotaknite zaslona"</string>
+    <string name="accessibility_tutorial_dialog_twofinger_doubletap_instruction" msgid="1007756360115974649">"Za vklop ali izklop povečave se z %1$d prstoma dvakrat hitro dotaknite zaslona"</string>
+    <string name="accessibility_tutorial_dialog_message_quick_setting" msgid="3715446725334547432">"{count,plural, =1{Če želite uporabiti to funkcijo, s prstom povlecite navzdol z vrha zaslona. Nato poiščite ploščico »{featureName}«.}one{Če želite uporabiti to funkcijo, z # prstom povlecite navzdol z vrha zaslona. Nato poiščite ploščico »{featureName}«.}two{Če želite uporabiti to funkcijo, z # prstoma povlecite navzdol z vrha zaslona. Nato poiščite ploščico »{featureName}«.}few{Če želite uporabiti to funkcijo, s # prsti povlecite navzdol z vrha zaslona. Nato poiščite ploščico »{featureName}«.}other{Če želite uporabiti to funkcijo, s # prsti povlecite navzdol z vrha zaslona. Nato poiščite ploščico »{featureName}«.}}"</string>
+    <string name="accessibility_tutorial_dialog_shortcut_unavailable_in_suw" msgid="3847728530771929959">"Ta bližnjica bo na voljo po dokončani nastavitvi naprave."</string>
     <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"Če želite uporabljati to funkcijo, z dvema prstoma povlecite z dna zaslona navzgor.\n\nČe želite preklopiti med funkcijami, z dvema prstoma povlecite navzgor in pridržite."</string>
-    <!-- no translation found for accessibility_tutorial_dialog_gesture_shortcut_instruction (7349950768250852308) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_gesture_shortcut_instruction" msgid="7349950768250852308">"{count,plural, =1{Če želite uporabiti to funkcijo, s prstom povlecite navzgor z dna zaslona.}one{Če želite uporabiti to funkcijo, z # prstom povlecite navzgor z dna zaslona.}two{Če želite uporabiti to funkcijo, z # prstoma povlecite navzgor z dna zaslona.}few{Če želite uporabiti to funkcijo, s # prsti povlecite navzgor z dna zaslona.}other{Če želite uporabiti to funkcijo, s # prsti povlecite navzgor z dna zaslona.}}"</string>
     <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="8142847782708562793">"Če želite uporabljati to funkcijo, s tremi prsti povlecite z dna zaslona navzgor.\n\nČe želite preklopiti med funkcijami, s tremi prsti povlecite navzgor in pridržite."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"Če želite uporabljati funkcijo za dostopnost, z dvema prstoma povlecite z dna zaslona navzgor.\n\nČe želite preklopiti med funkcijami, z dvema prstoma povlecite navzgor in pridržite."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="7292969929578621958">"Če želite uporabljati funkcijo za dostopnost, s tremi prsti povlecite z dna zaslona navzgor.\n\nČe želite preklopiti med funkcijami, s tremi prsti povlecite navzgor in pridržite."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Razumem"</string>
-    <!-- no translation found for accessibility_tutorial_dialog_link_button (13364319079385020) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_configure_software_shortcut_type (8041105223988170653) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_link_button" msgid="13364319079385020">"Prilagoditev gumba"</string>
+    <string name="accessibility_tutorial_dialog_configure_software_shortcut_type" msgid="8041105223988170653">"Več možnosti"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Bližnjica do funkcije »<xliff:g id="SERVICE">%1$s</xliff:g>«"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="48978719406821294">"gumb za dostopnost"</string>
     <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="7346399253904683940">"poteza za dostopnost"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Vlečenje navzgor z dvema prstoma"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Vlečenje navzgor s tremi prsti"</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_software (6505512764022389951) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_floating_button (6266489864614886247) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_software_by_gesture (4775049370625630546) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software (8315934725362849788) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_title_software" msgid="6505512764022389951">"Gumb za dostopnost"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_floating_button" msgid="6266489864614886247">"Dotaknite se plavajočega gumba"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="4775049370625630546">"Poteza za dostopnost"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="8315934725362849788">"Dotaknite se gumba za dostopnost <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> na dnu zaslona. Če želite preklopiti med funkcijami, pridržite gumb za dostopnost."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Z dvema prstoma povlecite z dna zaslona navzgor.\n\nČe želite preklopiti med funkcijami, z dvema prstoma povlecite navzgor in pridržite."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"S tremi prsti povlecite z dna zaslona navzgor.\n\nČe želite preklopiti med funkcijami, s tremi prsti povlecite navzgor in pridržite."</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_gesture (2081123009255579884) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_summary_gesture" msgid="2081123009255579884">"{count,plural, =1{S prstom povlecite navzgor z dna zaslona. Če želite preklopiti med funkcijami, povlecite navzgor in pridržite.}one{Z # prstom povlecite navzgor z dna zaslona. Če želite preklopiti med funkcijami, z # prstom povlecite navzgor in pridržite.}two{Z # prstoma povlecite navzgor z dna zaslona. Če želite preklopiti med funkcijami, z # prstoma povlecite navzgor in pridržite.}few{S # prsti povlecite navzgor z dna zaslona. Če želite preklopiti med funkcijami, s # prsti povlecite navzgor in pridržite.}other{S # prsti povlecite navzgor z dna zaslona. Če želite preklopiti med funkcijami, s # prsti povlecite navzgor in pridržite.}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="4459254227203203324"><annotation id="link">"Več možnosti"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"Več o storitvi <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"Hitre nastavitve"</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_quick_settings (739883998754165940) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_quick_settings_suw (4216628328191609785) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="739883998754165940">"{count,plural, =1{S prstom povlecite navzdol z vrha zaslona.}one{Z # prstom povlecite navzdol z vrha zaslona.}two{Z # prstoma povlecite navzdol z vrha zaslona.}few{S # prsti povlecite navzdol z vrha zaslona.}other{S # prsti povlecite navzdol z vrha zaslona.}}"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_quick_settings_suw" msgid="4216628328191609785">"{count,plural, =1{S prstom povlecite navzdol z vrha zaslona. Ta bližnjica bo na voljo po dokončani nastavitvi naprave.}one{Z # prstom povlecite navzdol z vrha zaslona. Ta bližnjica bo na voljo po dokončani nastavitvi naprave.}two{Z # prstoma povlecite navzdol z vrha zaslona. Ta bližnjica bo na voljo po dokončani nastavitvi naprave.}few{S # prsti povlecite navzdol z vrha zaslona. Ta bližnjica bo na voljo po dokončani nastavitvi naprave.}other{S # prsti povlecite navzdol z vrha zaslona. Ta bližnjica bo na voljo po dokončani nastavitvi naprave.}}"</string>
     <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"Hitre nastavitve"</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_hardware (844089763968552142) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_hardware_keyword (2483152542320987022) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="844089763968552142">"Gumba za glasnost"</string>
+    <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"gumba za glasnost"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Pritisnite in pridržite obe tipki za glasnost."</string>
     <string name="accessibility_shortcut_edit_dialog_title_two_finger_double_tap" msgid="2271778556854020996">"Dvakratni dotik zaslona z dvema prstoma"</string>
-    <!-- no translation found for accessibility_shortcut_edit_screen_title_two_finger_double_tap (8952595692906527694) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_screen_summary_two_finger_double_tap (385404127425496362) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_screen_title_triple_tap (3314488747597058942) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_screen_summary_triple_tap (4839204951599629871) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_two_finger_double_tap_keyword (6271718715836961167) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_screen_title_two_finger_double_tap" msgid="8952595692906527694">"Dvakratni dotik z %1$d prstoma"</string>
+    <string name="accessibility_shortcut_edit_screen_summary_two_finger_double_tap" msgid="385404127425496362">"Z %1$d prstoma se dvakrat hitro dotaknite zaslona."</string>
+    <string name="accessibility_shortcut_edit_screen_title_triple_tap" msgid="3314488747597058942">"Trikratni dotik"</string>
+    <string name="accessibility_shortcut_edit_screen_summary_triple_tap" msgid="4839204951599629871">"%1$d-krat se hitro dotaknite zaslona. To bo morda upočasnilo delovanje naprave."</string>
+    <string name="accessibility_shortcut_two_finger_double_tap_keyword" msgid="6271718715836961167">"Dvakratni dotik z %1$d prstoma"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_two_finger_double_tap" msgid="8262165091808318538">"Z dvema prstoma se {0,number,integer}-krat hitro dotaknite zaslona"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"Trikratni dotik zaslona"</string>
-    <!-- no translation found for accessibility_shortcut_triple_tap_keyword (5359347130888464334) -->
-    <skip />
+    <string name="accessibility_shortcut_triple_tap_keyword" msgid="5359347130888464334">"trikratni dotik"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="2102327956423320536">"{0,number,integer}-krat se hitro dotaknite zaslona. Ta bližnjica bo morda upočasnila delovanje naprave."</string>
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Dodatno"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"Gumb »Dostopnost« je nastavljen na <xliff:g id="SERVICE">%1$s</xliff:g>. Če želite uporabiti povečavo, se dotaknite gumba »Dostopnost« in ga pridržite, nato pa izberite povečavo."</string>
@@ -4459,6 +4431,8 @@
     <string name="credman_confirmation_change_provider_positive_button" msgid="7732302992885116967">"Spremeni"</string>
     <string name="credman_limit_error_msg_title" msgid="1525814645803612135">"Vklopljenih je lahko največ pet storitev"</string>
     <string name="credman_limit_error_msg" msgid="2521803280130310063">"Če želite dodati novo storitev, izklopite vsaj eno obstoječo"</string>
+    <!-- no translation found for credman_main_settings_intro_text (4981603639240772620) -->
+    <skip />
     <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"%1$s na podlagi prikaza na zaslonu ugotovi, kaj se lahko samodejno izpolni."</string>
     <string name="credman_error_message_title" msgid="4099557206946333568">"Omejitev števila gesel, ključev za dostop in podatkovnih storitev"</string>
     <string name="credman_error_message" msgid="8334797097200415449">"Hkrati je lahko aktivnih največ 5 gesel, ključev za dostop in podatkovnih storitev. Če želite dodati novo storitev, najprej izklopite eno od obstoječih."</string>
@@ -4534,8 +4508,7 @@
     <string name="media_output_label_title" msgid="4139048973886819148">"Predvaj <xliff:g id="LABEL">%s</xliff:g> v napravi:"</string>
     <string name="media_output_title_without_playing" msgid="3339321669132875821">"Zvok bo predvajan v"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"Ta naprava"</string>
-    <!-- no translation found for media_output_audio_sharing (6531742594884809737) -->
-    <skip />
+    <string name="media_output_audio_sharing" msgid="6531742594884809737">"Deljenje zvoka"</string>
     <string name="media_out_summary_ongoing_call_state" msgid="475188726850090363">"Ni na voljo med klici"</string>
     <string name="take_call_on_title" msgid="1159417893879946757">"Sprejemanje klicev je vklopljeno"</string>
     <string name="cannot_change_apn_toast" msgid="296540724089240405">"Tega APN-ja ni mogoče spremeniti."</string>
@@ -4667,8 +4640,7 @@
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"Telefon se bo samodejno povezal s satelitom. Za najboljšo povezavo zagotovite neoviran pogled v nebo."</string>
     <string name="title_supported_service" msgid="4275535165812691571">"Po vzpostavitvi povezave telefona s satelitom"</string>
     <string name="summary_supported_service" msgid="4320535903444834786">"Sporočilo lahko pošljete vsakomur, tudi reševalnim službam. Telefon se bo znova povezal z mobilnim omrežjem, ko bo to na voljo."</string>
-    <!-- no translation found for satellite_setting_summary_more_information (7729454610548016356) -->
-    <skip />
+    <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"Izmenjava satelitskih sporočil morda traja dalj časa in je na voljo le na nekaterih območjih. Vreme in nekatere ovire lahko vplivajo na satelitsko povezavo. Klicanje po satelitski povezavi ni na voljo. Klici v sili bodo morda kljub temu izvedljivi.\n\nMorda bo trajalo nekaj časa, preden bodo spremembe računa prikazane v nastavitvah. Za podrobnejše informacije se obrnite na operaterja."</string>
     <string name="more_about_satellite_messaging" msgid="3385673133561348509">"Več o satelitskih sporočilih"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Imena dostopnih točk"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
@@ -4706,10 +4678,8 @@
     <string name="sim_action_turn_off" msgid="3506698692916473000">"Izklopi"</string>
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"Kartice SIM ni mogoče aktivirati"</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"Poskusite znova vklopiti kartico SIM. Če s tem ne odpravite težave, znova zaženite napravo."</string>
-    <!-- no translation found for sim_onboarding_dialog_starting_title (4212945803784596345) -->
-    <skip />
-    <!-- no translation found for sim_onboarding_dialog_starting_msg (8450391476631265209) -->
-    <skip />
+    <string name="sim_onboarding_dialog_starting_title" msgid="4212945803784596345">"Izbira nastavitev kartice SIM"</string>
+    <string name="sim_onboarding_dialog_starting_msg" msgid="8450391476631265209">"Izberite nastavitev mobilnega omrežja, ki omogoča uporabo več kartic SIM v tej napravi."</string>
     <string name="sim_onboarding_label_sim_title" msgid="273162565849288273">"Dodajanje oznak karticam SIM"</string>
     <string name="sim_onboarding_label_sim_msg" msgid="5105859235219529056">"Te oznake bodo prikazane med klici, pošiljanjem sporočil SMS in prenosom podatkov ter v nastavitvah."</string>
     <string name="sim_onboarding_label_sim_dialog_title" msgid="5839073125605286120">"Oznaka kartice SIM"</string>
@@ -4727,10 +4697,8 @@
     <string name="sim_action_restart_dialog_msg" msgid="4737611046767629774">"Če želite hkrati uporabljati dve kartici SIM, znova zaženite napravo in nato vklopite obe kartici SIM."</string>
     <string name="sim_action_restart_dialog_cancel" msgid="665560106686565624">"Uporabi samo operaterja <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="sim_onboarding_phoneNumber_data_only" msgid="8158409121949373662">"Samo prenos podatkov"</string>
-    <!-- no translation found for sim_onboarding_setup (8678504891830386486) -->
-    <skip />
-    <!-- no translation found for sim_onboarding_close (8656305651358745422) -->
-    <skip />
+    <string name="sim_onboarding_setup" msgid="8678504891830386486">"Začni"</string>
+    <string name="sim_onboarding_close" msgid="8656305651358745422">"Zapri"</string>
     <string name="sim_onboarding_next" msgid="6415025179929475355">"Naprej"</string>
     <string name="sim_onboarding_progressbar_turning_sim_on" msgid="1163318788393361574">"Vklapljanje operaterja <xliff:g id="CARRIER_NAME">%1$s</xliff:g> …"</string>
     <string name="mobile_network_spn_title" msgid="3053793174495329077">"Mobilno omrežje"</string>

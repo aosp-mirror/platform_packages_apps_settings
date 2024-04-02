@@ -267,14 +267,10 @@
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Standardtid"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"Vælg efter region"</string>
     <string name="zone_menu_by_offset" msgid="1257702747474426745">"Vælg efter UTC-forskydning"</string>
-    <!-- no translation found for time_feedback_category_title (5942621686512255208) -->
-    <skip />
-    <!-- no translation found for keywords_time_feedback_category (4553921538559830393) -->
-    <skip />
-    <!-- no translation found for time_feedback_title (7720948068042783614) -->
-    <skip />
-    <!-- no translation found for keywords_time_feedback (929965356597294030) -->
-    <skip />
+    <string name="time_feedback_category_title" msgid="5942621686512255208">"Feedback"</string>
+    <string name="keywords_time_feedback_category" msgid="4553921538559830393">"feedback, fejl, tid, zone, tidszone"</string>
+    <string name="time_feedback_title" msgid="7720948068042783614">"Send feedback om tiden"</string>
+    <string name="keywords_time_feedback" msgid="929965356597294030">"feedback, fejl, tid, zone, tidszone"</string>
     <string name="lock_after_timeout" msgid="8682769000437403444">"Lås efter skærmens timeout"</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> efter timeout"</string>
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"Straks efter timeout, medmindre <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> holder den oplåst"</string>
@@ -569,7 +565,8 @@
     <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"Du kan låse dit private område automatisk, hvis du ikke har brugt din enhed i et stykke tid"</string>
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"Hver gang enheden låses"</string>
     <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"Efter 5 minutters inaktivitet"</string>
-    <string name="private_space_auto_lock_never" msgid="595014527119778873">"Aldrig"</string>
+    <!-- no translation found for private_space_auto_lock_after_device_restart (288755768725895029) -->
+    <skip />
     <string name="private_space_hide_page_title" msgid="4351404195904146088">"Skjul det private område, når det er låst"</string>
     <string name="private_space_hide_page_summary" msgid="6247773353685839242">"Hvis andre ikke må vide, at du har et privat område på din enhed, kan du skjule det på applisten"</string>
     <string name="private_space_access_header" msgid="1077082416567150819">"Åbn dit private område, når det er skjult"</string>
@@ -599,10 +596,10 @@
     <string name="private_space_cancel_label" msgid="379259667396956886">"Annuller"</string>
     <string name="private_space_setup_button_label" msgid="2094882154623560585">"Konfigurer"</string>
     <string name="private_space_setup_title" msgid="2272968244329821450">"Privat område"</string>
-    <string name="private_space_hide_apps_summary" msgid="4418722947376042418">"Skjul eller lås private apps i et separat område Anvend en dedikeret Google-konto for at få ekstra beskyttelse."</string>
+    <string name="private_space_hide_apps_summary" msgid="4418722947376042418">"Skjul eller lås private apps i et separat område. Anvend en dedikeret Google-konto for at få ekstra beskyttelse."</string>
     <string name="private_space_setup_sub_header" msgid="5454598292017819146">"Konfigurer dit private område"</string>
     <string name="private_space_separate_account_text" msgid="4492251315012955548"><b>"Vælg en Google-konto til dit område"</b>\n"En dedikeret konto hjælper med at forhindre synkroniserede filer, billeder og mails i at blive vist uden for dit område."</string>
-    <string name="private_space_protected_lock_text" msgid="9123250938334372735"><b>"Konfigurer en lås"</b>\n"Lås dit område for at forhindre andre i at åbne det"</string>
+    <string name="private_space_protected_lock_text" msgid="9123250938334372735"><b>"Konfigurer en lås"</b>\n"Lås dit område for at forhindre andre i at åbne det."</string>
     <string name="private_space_install_apps_text" msgid="5693139160766464498"><b>"Installer apps"</b>\n"Dit private område har sin egen Play Butik, så du nemt kan installere apps."</string>
     <string name="private_space_apps_permission_text" msgid="7030946025253366172">"Apps i dit private område vises ikke i tilladelsesmanager, privatlivspanelet eller andre indstillinger, når det private område er låst.\n\nDu kan ikke flytte dit private område til en ny enhed. Hvis du vil bruge det private område på en anden enhed, skal du konfigurere et nyt privat område.\n\nPersoner, der slutter din enhed til en computer eller installerer skadelige apps på din enhed, kan muligvis få adgang til dit private område."</string>
     <string name="private_space_learn_more_text" msgid="5314198983263277586">"Få flere oplysninger om privat område"</string>
@@ -1758,8 +1755,7 @@
     <string name="enable_text" msgid="8570798764647110430">"Aktivér"</string>
     <string name="clear_user_data_text" msgid="6773186434260397947">"Ryd lagerplads"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"Afinstaller opdateringer"</string>
-    <!-- no translation found for app_restricted_settings_lockscreen_title (796413224212436400) -->
-    <skip />
+    <string name="app_restricted_settings_lockscreen_title" msgid="796413224212436400">"Tillad begrænsede tilladelser"</string>
     <string name="auto_launch_enable_text" msgid="8912714475823807798">"Nogle af de aktiviteter, du har valgt, åbnes som standard i denne app."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"Du har valgt at tillade, at denne app opretter widgets og får adgang til deres data."</string>
     <string name="auto_launch_disable_text" msgid="502648841250936209">"Der er ikke angivet nogen standarder."</string>
@@ -2027,11 +2023,9 @@
     <string name="color_contrast_preview_email_send_date" msgid="2108702726171600080">"2 dage siden"</string>
     <string name="color_contrast_preview_email_badge" msgid="4845484039428505392">"Vil du følge op?"</string>
     <string name="color_contrast_preview_email_title" msgid="198712116139754823">"Forretningsrejserapport"</string>
-    <!-- no translation found for color_contrast_preview_email_body (2714343154965937945) -->
-    <skip />
+    <string name="color_contrast_preview_email_body" msgid="2714343154965937945">"Kontakt mig eller Helen, hvis du har brug for mere hjælp. Denne rapport er"</string>
     <string name="color_contrast_preview_email_attachment_name" msgid="852407311884814746">"Kundeudgifter"</string>
-    <!-- no translation found for color_contrast_about_title (5939566801408667867) -->
-    <skip />
+    <string name="color_contrast_about_title" msgid="5939566801408667867">"Om farvekontrast"</string>
     <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"Gør skærmen mørkere"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Interaktionsstyring"</string>
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"Tidsrelaterede styringselementer"</string>
@@ -2060,6 +2054,8 @@
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"Luppen følger teksten, når du skriver"</string>
     <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"Hold aktiveret ved skift af app"</string>
     <string name="accessibility_screen_magnification_always_on_summary" msgid="306908451430863049">"Forstørrelse forbliver aktiveret og zoomer ud, når du skifter app"</string>
+    <!-- no translation found for accessibility_screen_magnification_always_on_unavailable_summary (3844732482037416038) -->
+    <skip />
     <string name="accessibility_screen_magnification_joystick_title" msgid="1803769708582404964">"Joystick"</string>
     <string name="accessibility_screen_magnification_joystick_summary" msgid="4640300148573982720">"Aktivér luppen, og flyt den ved hjælp af et joystick på skærmen. Tryk på luppen, hold fingeren nede, og træk i joysticket for at flytte luppen. Tryk på selve joysticket for at trække i det."</string>
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"Om forstørrelse"</string>
@@ -4435,6 +4431,8 @@
     <string name="credman_confirmation_change_provider_positive_button" msgid="7732302992885116967">"Skift"</string>
     <string name="credman_limit_error_msg_title" msgid="1525814645803612135">"Du kan kun have 5 tjenester aktiveret"</string>
     <string name="credman_limit_error_msg" msgid="2521803280130310063">"Deaktiver mindst 1 tjeneste for at tilføje en anden"</string>
+    <!-- no translation found for credman_main_settings_intro_text (4981603639240772620) -->
+    <skip />
     <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"%1$s bruger det, der vises på din skærm, til at afgøre, hvad der kan udfyldes automatisk."</string>
     <string name="credman_error_message_title" msgid="4099557206946333568">"Grænse for antal adgangskoder, adgangsnøgler og datatjenester"</string>
     <string name="credman_error_message" msgid="8334797097200415449">"Du kan have op til 5 aktive adgangskoder, adgangsnøgler og datatjenester ad gangen. Deaktiver en tjeneste, hvis du vil tilføje en ny."</string>
