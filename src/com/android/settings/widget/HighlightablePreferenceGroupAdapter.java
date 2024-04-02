@@ -40,6 +40,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.accessibility.AccessibilityUtil;
 
 import com.google.android.material.appbar.AppBarLayout;
 
@@ -50,6 +51,8 @@ public class HighlightablePreferenceGroupAdapter extends PreferenceGroupAdapter 
     static final long DELAY_COLLAPSE_DURATION_MILLIS = 300L;
     @VisibleForTesting
     static final long DELAY_HIGHLIGHT_DURATION_MILLIS = 600L;
+    @VisibleForTesting
+    static final long DELAY_HIGHLIGHT_DURATION_MILLIS_A11Y = 300L;
     private static final long HIGHLIGHT_DURATION = 15000L;
     private static final long HIGHLIGHT_FADE_OUT_DURATION = 500L;
     private static final long HIGHLIGHT_FADE_IN_DURATION = 200L;
@@ -59,6 +62,7 @@ public class HighlightablePreferenceGroupAdapter extends PreferenceGroupAdapter 
     @VisibleForTesting
     boolean mFadeInAnimated;
 
+    private final Context mContext;
     private final int mNormalBackgroundRes;
     private final String mHighlightKey;
     private boolean mHighlightRequested;
@@ -102,12 +106,12 @@ public class HighlightablePreferenceGroupAdapter extends PreferenceGroupAdapter 
         super(preferenceGroup);
         mHighlightKey = key;
         mHighlightRequested = highlightRequested;
-        final Context context = preferenceGroup.getContext();
+        mContext = preferenceGroup.getContext();
         final TypedValue outValue = new TypedValue();
-        context.getTheme().resolveAttribute(android.R.attr.selectableItemBackground,
+        mContext.getTheme().resolveAttribute(android.R.attr.selectableItemBackground,
                 outValue, true /* resolveRefs */);
         mNormalBackgroundRes = outValue.resourceId;
-        mHighlightColor = context.getColor(R.color.preference_highlight_color);
+        mHighlightColor = mContext.getColor(R.color.preference_highlight_color);
     }
 
     @Override
@@ -121,12 +125,11 @@ public class HighlightablePreferenceGroupAdapter extends PreferenceGroupAdapter 
         View v = holder.itemView;
         if (position == mHighlightPosition
                 && (mHighlightKey != null
-                && TextUtils.equals(mHighlightKey, getItem(position).getKey()))) {
+                && TextUtils.equals(mHighlightKey, getItem(position).getKey()))
+                && v.isShown()) {
             // This position should be highlighted. If it's highlighted before - skip animation.
+            v.requestAccessibilityFocus();
             addHighlightBackground(holder, !mFadeInAnimated);
-            if (v != null) {
-                v.requestAccessibilityFocus();
-            }
         } else if (Boolean.TRUE.equals(v.getTag(R.id.preference_highlighted))) {
             // View with highlight is reused for a view that should not have highlight
             removeHighlightBackground(holder, false /* animate */);
@@ -157,13 +160,14 @@ public class HighlightablePreferenceGroupAdapter extends PreferenceGroupAdapter 
 
         // Remove the animator as early as possible to avoid a RecyclerView crash.
         recyclerView.setItemAnimator(null);
-        // Scroll to correct position after 600 milliseconds.
+        // Scroll to correct position after a short delay.
         root.postDelayed(() -> {
             if (ensureHighlightPosition()) {
                 recyclerView.smoothScrollToPosition(mHighlightPosition);
                 highlightAndFocusTargetItem(recyclerView, mHighlightPosition);
             }
-        }, DELAY_HIGHLIGHT_DURATION_MILLIS);
+        }, AccessibilityUtil.isTouchExploreEnabled(mContext)
+                ? DELAY_HIGHLIGHT_DURATION_MILLIS_A11Y : DELAY_HIGHLIGHT_DURATION_MILLIS);
     }
 
     private void highlightAndFocusTargetItem(RecyclerView recyclerView, int highlightPosition) {
