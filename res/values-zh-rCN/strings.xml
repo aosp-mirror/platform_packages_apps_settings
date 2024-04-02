@@ -788,7 +788,7 @@
     <string name="manage_trust_agents" msgid="6410149930029992356">"可信代理"</string>
     <string name="disabled_because_no_backup_security" msgid="4998095356607488854">"需先设置屏幕锁定方式才能使用"</string>
     <string name="manage_trust_agents_summary" msgid="6423843123607674286">"无"</string>
-    <string name="manage_trust_agents_summary_on" msgid="3302574418419446146">"{count,plural, =1{1 个活跃的可信代理}other{# 个活跃的可信代理}}"</string>
+    <string name="manage_trust_agents_summary_on" msgid="3302574418419446146">"{count,plural, =1{1 个可信代理正在运行}other{# 个可信代理正在运行}}"</string>
     <string name="bluetooth_settings" msgid="2967239493428695171">"蓝牙"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"蓝牙"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"要与<xliff:g id="DEVICE_NAME">%1$s</xliff:g>配对吗？"</string>
@@ -1283,7 +1283,7 @@
     <string name="sim_disable_sim_lock" msgid="6939439812841857306">"解锁 SIM 卡"</string>
     <string name="sim_enter_old" msgid="6882545610939674813">"旧 SIM 卡 PIN 码"</string>
     <string name="sim_enter_new" msgid="9010947802784561582">"新 SIM 卡 PIN 码"</string>
-    <string name="sim_reenter_new" msgid="6131418271490374263">"重新输入新的PIN码"</string>
+    <string name="sim_reenter_new" msgid="6131418271490374263">"重新输入新的 PIN 码"</string>
     <string name="sim_change_pin" msgid="1104103818545005448">"SIM 卡 PIN 码"</string>
     <string name="sim_invalid_pin_hint" msgid="3376397829969578877">"请输入 4 到 8 位数的 PIN 码"</string>
     <string name="sim_pins_dont_match" msgid="1540348773896609260">"PIN 码不匹配"</string>
@@ -1421,8 +1421,7 @@
     <string name="battery_level_title" msgid="1371765298786083448">"电池电量"</string>
     <string name="communal_settings_title" msgid="2845678473945902115">"共用"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"通用设置"</string>
-    <!-- no translation found for satellite_setting (4171265534842459910) -->
-    <skip />
+    <string name="satellite_setting" msgid="4171265534842459910">"卫星消息功能"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN"</string>
     <string name="apn_edit" msgid="2003683641840248741">"修改接入点"</string>
     <string name="apn_add" msgid="9069613192201630934">"添加接入点"</string>
@@ -2937,7 +2936,7 @@
     <string name="other_user_category_title" msgid="7089976887307643217">"其他用户"</string>
     <string name="remove_guest_on_exit" msgid="8202972371459611066">"删除访客活动记录"</string>
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"退出访客模式时删除所有访客应用和数据"</string>
-    <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"要删除访客活动吗？"</string>
+    <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"要删除访客活动记录吗？"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"此访客会话中的应用和数据将会立即删除；日后您每次退出访客模式时，系统都会删除访客活动记录"</string>
     <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"删除, 访客, 活动, 移除, 数据, 访问者, 清除, delete, guest, activity, remove, data, visitor, erase"</string>
     <string name="enable_guest_calling" msgid="4620657197834392094">"允许访客打电话"</string>
@@ -3467,7 +3466,7 @@
     <string name="notification_channel_summary_low" msgid="5549662596677692000">"不发出提示音，也不振动"</string>
     <string name="notification_conversation_summary_low" msgid="6352818857388412326">"不发出提示音，也不振动；显示在对话部分的靠下位置"</string>
     <string name="notification_channel_summary_default" msgid="1168420867670390611">"可能会响铃或振动，取决于设备设置"</string>
-    <string name="notification_channel_summary_high" msgid="3411637309360617621">"当设备处于解锁状态时，在屏幕顶端以横幅形式显示通知"</string>
+    <string name="notification_channel_summary_high" msgid="3411637309360617621">"设备处于解锁状态时，在屏幕顶端以横幅形式显示通知"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"所有“<xliff:g id="APP_NAME">%1$s</xliff:g>”通知"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"所有<xliff:g id="APP_NAME">%1$s</xliff:g>通知"</string>
     <string name="notifications_sent_daily" msgid="10274479224185437">"{count,plural, =1{每天大约 # 条通知}other{每天大约 # 条通知}}"</string>
@@ -4167,7 +4166,7 @@
     <string name="managed_profile_contact_search_summary" msgid="4974727886709219105">"您的 IT 管理员或许可以看到您的搜索内容和来电"</string>
     <string name="cross_profile_calendar_title" msgid="7570277841490216947">"跨个人资料日历"</string>
     <string name="cross_profile_calendar_summary" msgid="8856185206722860069">"在个人日历上显示工作活动"</string>
-    <string name="managed_profile_settings_footer" msgid="996500759305118103">"当工作应用处于关闭状态时，它们将暂停运行，且无法访问或向您发送通知"</string>
+    <string name="managed_profile_settings_footer" msgid="996500759305118103">"工作应用处于关闭状态时将暂停运行，且无法访问或向您发送通知"</string>
     <string name="automatic_storage_manager_settings" msgid="519158151463974656">"管理存储空间"</string>
     <string name="automatic_storage_manager_text" msgid="6900593059927987273">"存储空间管理器会从您的设备中移除已备份的照片和视频，从而释放存储空间。"</string>
     <string name="automatic_storage_manager_days_title" msgid="5077286114860539367">"移除照片和视频"</string>
@@ -4405,15 +4404,15 @@
     <string name="angle_enabled_app" msgid="6044941043384239076">"选择已启用 ANGLE 的应用"</string>
     <string name="angle_enabled_app_not_set" msgid="4472572224881726067">"未设置已启用 ANGLE 的应用"</string>
     <string name="angle_enabled_app_set" msgid="7811829383833353021">"已启用 ANGLE 的应用：<xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <string name="graphics_driver_dashboard_title" msgid="5661084817492587796">"图形驱动程序偏好设置"</string>
-    <string name="graphics_driver_dashboard_summary" msgid="6348759885315793654">"修改图形驱动程序设置"</string>
-    <string name="graphics_driver_footer_text" msgid="5123754522284046790">"如果有多个图形驱动程序，您可以为设备上已安装的应用选择使用更新的图形驱动程序。"</string>
+    <string name="graphics_driver_dashboard_title" msgid="5661084817492587796">"显卡驱动程序偏好设置"</string>
+    <string name="graphics_driver_dashboard_summary" msgid="6348759885315793654">"修改显卡驱动程序设置"</string>
+    <string name="graphics_driver_footer_text" msgid="5123754522284046790">"如果有多个显卡驱动程序，您可以为设备上已安装的应用选择使用最新的显卡驱动程序。"</string>
     <string name="graphics_driver_all_apps_preference_title" msgid="1343065382898127360">"针对所有应用启用"</string>
-    <string name="graphics_driver_app_preference_title" msgid="3133255818657706857">"选择图形驱动程序"</string>
+    <string name="graphics_driver_app_preference_title" msgid="3133255818657706857">"选择显卡驱动程序"</string>
     <string name="graphics_driver_app_preference_default" msgid="764432460281859855">"默认"</string>
     <string name="graphics_driver_app_preference_production_driver" msgid="1515874802568434915">"游戏驱动程序"</string>
     <string name="graphics_driver_app_preference_prerelease_driver" msgid="7355929161805829480">"开发者驱动程序"</string>
-    <string name="graphics_driver_app_preference_system" msgid="3754748149113184126">"系统图形驱动程序"</string>
+    <string name="graphics_driver_app_preference_system" msgid="3754748149113184126">"系统显卡驱动程序"</string>
     <!-- no translation found for graphics_driver_all_apps_preference_values:0 (8039644515855740879) -->
     <!-- no translation found for graphics_driver_all_apps_preference_values:1 (157748136905839375) -->
     <!-- no translation found for graphics_driver_all_apps_preference_values:2 (8104576549429294026) -->
@@ -4578,8 +4577,7 @@
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"您的手机会自动连接到卫星。为获得最佳连接质量，请确保您身在能清楚看到天空的场所。"</string>
     <string name="title_supported_service" msgid="4275535165812691571">"当您的手机连接到卫星后"</string>
     <string name="summary_supported_service" msgid="4320535903444834786">"您可以给任何对象发短信，包括应急服务机构。当有可用的移动网络时，您的手机将重新连接到移动网络。"</string>
-    <!-- no translation found for satellite_setting_summary_more_information (7729454610548016356) -->
-    <skip />
+    <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"卫星消息可能需要较长时间才会送达，而且此功能目前仅覆盖部分地区。天气和某些建筑物可能会影响卫星连接质量。不支持卫星通话。紧急呼叫或许仍可连通。\n\n账号更改可能要过一段时间才能显示在“设置”中。请联系您的运营商了解详情。"</string>
     <string name="more_about_satellite_messaging" msgid="3385673133561348509">"详细了解卫星消息功能"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"接入点名称"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
@@ -4774,7 +4772,7 @@
     <string name="lockscreen_privacy_controls_summary" msgid="7522918441738915364">"从锁定的屏幕"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="2174300719855112358">"使用设备控制器"</string>
     <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"需要先开启“显示设备控制器”才能使用"</string>
-    <string name="lockscreen_double_line_clock_summary" msgid="4109235686687860393">"时钟大小会依据锁定屏幕上的内容而变化"</string>
+    <string name="lockscreen_double_line_clock_summary" msgid="4109235686687860393">"时钟大小会随锁屏内容而变化"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="802271087416091548">"动态时钟"</string>
     <string name="lockscreen_quick_affordances_title" msgid="8615741551327565793">"快捷方式"</string>
     <plurals name="lockscreen_quick_affordances_summary" formatted="false" msgid="4225396036524703997">
@@ -4878,7 +4876,7 @@
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"允许多人设备共用"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"允许, 多位, 用户, 许可, 多个, allow, multiple, user, permit, many"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"使用“无线调试”"</string>
-    <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"使用“图形驱动程序偏好设置”"</string>
+    <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"使用“显卡驱动程序偏好设置”"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"使用护眼模式"</string>
     <string name="nfc_main_switch_title" msgid="6295839988954817432">"使用 NFC"</string>
     <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"使用自适应亮度"</string>
@@ -4907,7 +4905,7 @@
     <string name="all_apps" msgid="3054120149509114789">"所有应用"</string>
     <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"不允许"</string>
     <string name="uwb_settings_title" msgid="8578498712312002231">"超宽带 (UWB)"</string>
-    <string name="uwb_settings_summary" msgid="3074271396764672268">"有助于确定附近支持超宽带 (UWB) 的设备的相对位置"</string>
+    <string name="uwb_settings_summary" msgid="3074271396764672268">"帮助判断附近支持超宽带 (UWB) 的设备的相对位置"</string>
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"会关闭飞行模式，以使用超宽带 (UWB)"</string>
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"UWB 在当前位置不可用"</string>
     <string name="thread_network_settings_title" msgid="4212301030523859220">"Thread"</string>
