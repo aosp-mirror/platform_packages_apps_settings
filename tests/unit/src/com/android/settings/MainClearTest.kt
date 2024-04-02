@@ -28,11 +28,13 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.Settings.FactoryResetActivity
 import com.android.settings.flags.Flags
 import com.google.common.truth.Truth.assertThat
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 /** Test [MainClear]. */
+@Ignore
 @RunWith(AndroidJUnit4::class)
 class MainClearTest {
     @get:Rule

@@ -74,9 +74,7 @@
         <Preference
             android:key="privacy_accessibility_usage"
             android:title="@string/accessibility_usage_title"
-            settings:controller="com.android.settings.privacy.AccessibilityUsagePreferenceController">
-            <intent android:action="android.intent.action.REVIEW_ACCESSIBILITY_SERVICES"/>
-        </Preference>
+            settings:controller="com.android.settings.privacy.AccessibilityUsagePreferenceController"/>
 
         <!-- On lock screen notifications -->
         <com.android.settings.RestrictedListPreference
@@ -175,7 +173,8 @@
             android:title="@string/financed_device_info"
             android:summary="@string/summary_placeholder"
             settings:controller="com.android.settings.devicelock.DeviceLockPreferenceController">
-            <intent android:action="com.android.devicelockcontroller.action.DEVICE_INFO_SETTINGS"/>
+            <intent android:action="com.android.devicelockcontroller.action.DEVICE_INFO_SETTINGS"
+                    android:targetPackage="@string/config_device_lock_controller_package_name"/>
         </Preference>
     </PreferenceCategory>
 

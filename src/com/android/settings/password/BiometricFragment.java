@@ -143,7 +143,8 @@ public class BiometricFragment extends InstrumentedFragment {
                 .setShowEmergencyCallButton(promptInfo.isShowEmergencyCallButton())
                 .setReceiveSystemEvents(true);
 
-        if (Flags.enableBiometricsToUnlockPrivateSpace()) {
+        if (android.os.Flags.allowPrivateProfile() && Flags.enablePrivateSpaceFeatures()
+                && Flags.enableBiometricsToUnlockPrivateSpace()) {
             promptBuilder = promptBuilder.setAllowBackgroundAuthentication(true /* allow */,
                     promptInfo.shouldUseParentProfileForDeviceCredential());
         } else {

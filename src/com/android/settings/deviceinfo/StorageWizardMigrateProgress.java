@@ -27,11 +27,11 @@ import android.os.Handler;
 import android.os.storage.DiskInfo;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.android.settings.R;
-
-import android.view.WindowManager;
+import com.android.settings.Utils;
 
 public class StorageWizardMigrateProgress extends StorageWizardBase {
     private static final String TAG = "StorageWizardMigrateProgress";
@@ -83,6 +83,7 @@ public class StorageWizardMigrateProgress extends StorageWizardBase {
                         // Kinda lame, but tear down that shiny finished
                         // notification, since user is still in wizard flow
                         final Intent finishIntent = new Intent(ACTION_FINISH_WIZARD);
+                        finishIntent.setPackage(Utils.SYSTEMUI_PACKAGE_NAME);
                         finishIntent.addFlags(Intent.FLAG_RECEIVER_REGISTERED_ONLY);
                         sendBroadcast(finishIntent);
 

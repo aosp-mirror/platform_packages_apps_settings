@@ -267,6 +267,10 @@
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Standard time"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"Select by region"</string>
     <string name="zone_menu_by_offset" msgid="1257702747474426745">"Select by UTC offset"</string>
+    <string name="time_feedback_category_title" msgid="5942621686512255208">"Feedback"</string>
+    <string name="keywords_time_feedback_category" msgid="4553921538559830393">"feedback, bug, time, zone, timezone"</string>
+    <string name="time_feedback_title" msgid="7720948068042783614">"Send feedback about time"</string>
+    <string name="keywords_time_feedback" msgid="929965356597294030">"feedback, bug, time, zone, timezone"</string>
     <string name="lock_after_timeout" msgid="8682769000437403444">"Lock after screen timeout"</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> after timeout"</string>
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"Immediately after timeout, except when kept unlocked by <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
@@ -1036,12 +1040,9 @@
     <string name="wifi_advanced_device_mac_address_title" msgid="6155800851233164411">"Device MAC address"</string>
     <string name="wifi_advanced_randomized_mac_address_title" msgid="3930671320234553088">"Randomized MAC address"</string>
     <string name="wifi_advanced_randomized_mac_address_disconnected_title" msgid="2755843130417523727">"Randomized MAC address (last used)"</string>
-    <!-- no translation found for wifi_certificate_summary_Certificates (7849788154375655654) -->
-    <skip />
-    <!-- no translation found for wifi_certificate_summary_system (6521297326433133669) -->
-    <skip />
-    <!-- no translation found for wifi_certificate_summary_pinning (5901067790901727957) -->
-    <skip />
+    <string name="wifi_certificate_summary_Certificates" msgid="7849788154375655654">"<xliff:g id="NUMBER">%d</xliff:g> certificates"</string>
+    <string name="wifi_certificate_summary_system" msgid="6521297326433133669">"System certificate"</string>
+    <string name="wifi_certificate_summary_pinning" msgid="5901067790901727957">"Certificate pinning"</string>
     <string name="wifi_details_title" msgid="222735438574597493">"Network details"</string>
     <string name="wifi_details_subnet_mask" msgid="1619151769276260512">"Subnet mask"</string>
     <string name="server_name_title" msgid="7257095185810299066">"Server name"</string>
@@ -1434,7 +1435,7 @@
     <string name="battery_level_title" msgid="1371765298786083448">"Battery level"</string>
     <string name="communal_settings_title" msgid="2845678473945902115">"Communal"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"Communal settings"</string>
-    <string name="satellite_setting" msgid="706846910912477125">"Satellite Messaging"</string>
+    <string name="satellite_setting" msgid="4171265534842459910">"Satellite messaging"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APNs"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Edit access point"</string>
     <string name="apn_add" msgid="9069613192201630934">"Add access point"</string>
@@ -1498,6 +1499,8 @@
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"Network settings have been reset"</string>
     <string name="reset_esim_error_title" msgid="6516110227665862295">"Can’t erase eSIMs"</string>
     <string name="reset_esim_error_msg" msgid="8459527827897797168">"Something went wrong and your eSIMs weren’t erased.\n\nRestart your device and try again."</string>
+    <string name="reset_private_space_delete_title" msgid="2555885198282572990">"Delete private space"</string>
+    <string name="reset_private_space_delete_dialog" msgid="2108869024671690587">"If you have a private space on your device, it will be permanently deleted. All apps in your space and their data will be deleted."</string>
     <string name="main_clear_title" msgid="277664302144837723">"Erase all data (factory reset)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Erase all data (factory reset)"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"Music"</li>\n<li>"Photos"</li>\n<li>"Other user data"</li></string>
@@ -1751,7 +1754,7 @@
     <string name="enable_text" msgid="8570798764647110430">"Enable"</string>
     <string name="clear_user_data_text" msgid="6773186434260397947">"Clear storage"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"Uninstall updates"</string>
-    <string name="app_restricted_settings_lockscreen_title" msgid="5993061278264872648">"Allow restricted settings"</string>
+    <string name="app_restricted_settings_lockscreen_title" msgid="796413224212436400">"Allow restricted permissions"</string>
     <string name="auto_launch_enable_text" msgid="8912714475823807798">"Some activities you’ve selected open in this app by default."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"You’ve chosen to allow this app to create widgets and access their data."</string>
     <string name="auto_launch_disable_text" msgid="502648841250936209">"No defaults set."</string>
@@ -2019,8 +2022,9 @@
     <string name="color_contrast_preview_email_send_date" msgid="2108702726171600080">"2 days ago"</string>
     <string name="color_contrast_preview_email_badge" msgid="4845484039428505392">"Follow up?"</string>
     <string name="color_contrast_preview_email_title" msgid="198712116139754823">"Business trip report"</string>
-    <string name="color_contrast_preview_email_body" msgid="4139331665325624199">"For further assistance, please reach out to \nmyself or Helen. This report will be"</string>
+    <string name="color_contrast_preview_email_body" msgid="2714343154965937945">"For further assistance, please reach out to myself or Helen. This report will be"</string>
     <string name="color_contrast_preview_email_attachment_name" msgid="852407311884814746">"Client Expenses"</string>
+    <string name="color_contrast_about_title" msgid="5939566801408667867">"About color contrast"</string>
     <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"Turn screen darker"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Interaction controls"</string>
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"Timing controls"</string>
@@ -2097,48 +2101,59 @@
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;To zoom in:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Use shortcut to start magnification&lt;br/&gt; {1,number,integer}. Tap the screen&lt;br/&gt; {2,number,integer}. Drag two fingers to move around screen&lt;br/&gt; {3,number,integer}. Pinch with two fingers to adjust zoom&lt;br/&gt; {4,number,integer}. Use shortcut to stop magnification&lt;br/&gt;&lt;br/&gt; &lt;b&gt;To zoom in temporarily:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Make sure your magnification type is set to full screen&lt;br/&gt; {1,number,integer}. Use shortcut to start magnification&lt;br/&gt; {2,number,integer}. Touch and hold anywhere on the screen&lt;br/&gt; {3,number,integer}. Drag finger to move around screen&lt;br/&gt; {4,number,integer}. Lift finger to stop magnification"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"When magnification is turned on, you can zoom in on your screen.\n\n"<b>"To zoom"</b>", start magnification, then tap the screen anywhere.\n"<ul><li>"Drag two or more fingers to scroll"</li>\n<li>"Pinch two or more fingers to adjust the zoom"</li></ul>\n\n<b>"To zoom temporarily"</b>", start magnification, then touch and hold the screen anywhere.\n"<ul><li>"Drag to move around the screen"</li>\n<li>"Lift finger to zoom out"</li></ul>\n\n"You can\'t zoom in on the keyboard or navigation bar."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Page <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> of <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
-    <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Use accessibility button to open"</string>
-    <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Hold volume keys to open"</string>
-    <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Triple-tap screen to open"</string>
-    <string name="accessibility_tutorial_dialog_title_two_finger_double" msgid="3912970760484557646">"Two finger double tap screen to open"</string>
+    <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"Accessibility button shortcut"</string>
+    <string name="accessibility_tutorial_dialog_title_volume" msgid="1032323517963429981">"Volume keys shortcut"</string>
+    <string name="accessibility_tutorial_dialog_title_triple" msgid="5529704884360240365">"Triple tap shortcut"</string>
+    <string name="accessibility_tutorial_dialog_title_two_finger_double" msgid="5749704453829390283">"%1$d-finger double tap shortcut"</string>
     <string name="accessibility_tutorial_dialog_title_quick_setting" msgid="2905083277641794558">"Quick Settings shortcut"</string>
-    <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Use gesture to open"</string>
+    <string name="accessibility_tutorial_dialog_title_gesture" msgid="4541649734549409614">"Accessibility gesture shortcut"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="6800684770875867559">"Use accessibility gesture"</string>
-    <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"To use this feature, tap the accessibility button <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> on the bottom of your screen.\n\nTo switch between features, touch and hold the accessibility button."</string>
-    <string name="accessibility_tutorial_dialog_message_floating_button" msgid="2551777208185138391">"To use this feature, tap the accessibility button on your screen."</string>
-    <string name="accessibility_tutorial_dialog_message_volume" msgid="5033080515460519183">"To use this feature, press and hold both volume keys."</string>
+    <string name="accessibility_tutorial_dialog_message_button" msgid="8977286776192770246">"To use this feature, tap the accessibility button <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> at the bottom of your screen.\n\nTo switch between features, touch &amp; hold the accessibility button."</string>
+    <string name="accessibility_tutorial_dialog_message_floating_button" msgid="6631371483819355514">"To use this feature, tap the accessibility button on your screen"</string>
+    <string name="accessibility_tutorial_dialog_message_volume" msgid="3785791536286606664">"To use this feature, press &amp; hold both volume keys"</string>
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"To start and stop magnification, triple-tap anywhere on your screen."</string>
-    <string name="accessibility_tutorial_dialog_message_two_finger_triple" msgid="860548190334486449">"To start and stop magnification, double-tap anywhere on your screen with two fingers."</string>
-    <string name="accessibility_tutorial_dialog_message_quick_setting" msgid="2272748015553891860">"To use this feature, swipe down from the top of your screen."</string>
+    <string name="accessibility_tutorial_dialog_tripletap_instruction" msgid="7549293553589934">"To start and stop magnification, quickly tap the screen %1$d times"</string>
+    <string name="accessibility_tutorial_dialog_twofinger_doubletap_instruction" msgid="1007756360115974649">"To start and stop magnification, quickly tap the screen twice with %1$d fingers"</string>
+    <string name="accessibility_tutorial_dialog_message_quick_setting" msgid="3715446725334547432">"{count,plural, =1{To use this feature, swipe down from the top of your screen. Then, find the {featureName} tile.}other{To use this feature, swipe down from the top of your screen with # fingers. Then, find the {featureName} tile.}}"</string>
+    <string name="accessibility_tutorial_dialog_shortcut_unavailable_in_suw" msgid="3847728530771929959">"This shortcut will be available after you finish device setup."</string>
     <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"To use this feature, swipe up from the bottom of the screen with 2 fingers.\n\nTo switch between features, swipe up with 2 fingers and hold."</string>
+    <string name="accessibility_tutorial_dialog_gesture_shortcut_instruction" msgid="7349950768250852308">"{count,plural, =1{To use this feature, swipe up from the bottom of your screen}other{To use this feature, swipe up with # fingers from the bottom of your screen}}"</string>
     <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="8142847782708562793">"To use this feature, swipe up from the bottom of the screen with 3 fingers.\n\nTo switch between features, swipe up with 3 fingers and hold."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"To use an accessibility feature, swipe up from the bottom of the screen with 2 fingers.\n\nTo switch between features, swipe up with 2 fingers and hold."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="7292969929578621958">"To use an accessibility feature, swipe up from the bottom of the screen with 3 fingers.\n\nTo switch between features, swipe up with 3 fingers and hold."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Got it"</string>
-    <string name="accessibility_tutorial_dialog_link_button" msgid="6797349445794031781">"Button settings"</string>
+    <string name="accessibility_tutorial_dialog_link_button" msgid="13364319079385020">"Customize button"</string>
+    <string name="accessibility_tutorial_dialog_configure_software_shortcut_type" msgid="8041105223988170653">"More options"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"<xliff:g id="SERVICE">%1$s</xliff:g> shortcut"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="48978719406821294">"accessibility button"</string>
     <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="7346399253904683940">"accessibility gesture"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Swipe up with 2 fingers"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Swipe up with 3 fingers"</string>
-    <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"Tap accessibility button"</string>
-    <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="3981188764050497346">"Use accessibility gesture"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="5606196352833449600">"Tap the accessibility button <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> at the bottom of your screen.\n\nTo switch between features, touch and hold the accessibility button."</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software" msgid="6505512764022389951">"Accessibility button"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_floating_button" msgid="6266489864614886247">"Tap the floating button"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="4775049370625630546">"Accessibility gesture"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="8315934725362849788">"Tap the accessibility button <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> at the bottom of your screen. To switch between features, touch &amp; hold the accessibility button."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Swipe up from the bottom of the screen with 2 fingers.\n\nTo switch between features, swipe up with 2 fingers and hold."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Swipe up from the bottom of the screen with 3 fingers.\n\nTo switch between features, swipe up with 3 fingers and hold."</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_gesture" msgid="2081123009255579884">"{count,plural, =1{Swipe up from the bottom of your screen. To switch between features, swipe up and hold.}other{Swipe up with # fingers from the bottom of your screen. To switch between features, swipe up with # fingers and hold.}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="4459254227203203324"><annotation id="link">"More options"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"Learn more about <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"Quick Settings"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="8726678553797015432">"Swipe down from the top of your screen"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="739883998754165940">"{count,plural, =1{Swipe down from the top of your screen}other{Swipe down with # fingers from the top of your screen}}"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_quick_settings_suw" msgid="4216628328191609785">"{count,plural, =1{Swipe down from the top of your screen. This shortcut will be available after you finish device setup.}other{Swipe down with # fingers from the top of your screen. This shortcut will be available after you finish device setup.}}"</string>
     <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"Quick Settings"</string>
-    <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Hold volume keys"</string>
-    <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"hold volume keys"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="844089763968552142">"Volume keys"</string>
+    <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"volume keys"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Press and hold both volume keys"</string>
     <string name="accessibility_shortcut_edit_dialog_title_two_finger_double_tap" msgid="2271778556854020996">"Two-finger double-tap screen"</string>
-    <string name="accessibility_shortcut_two_finger_double_tap_keyword" msgid="2971265341474137433">"two-finger double-tap screen"</string>
+    <string name="accessibility_shortcut_edit_screen_title_two_finger_double_tap" msgid="8952595692906527694">"%1$d-finger double tap"</string>
+    <string name="accessibility_shortcut_edit_screen_summary_two_finger_double_tap" msgid="385404127425496362">"Quickly tap the screen twice with %1$d fingers"</string>
+    <string name="accessibility_shortcut_edit_screen_title_triple_tap" msgid="3314488747597058942">"Triple tap"</string>
+    <string name="accessibility_shortcut_edit_screen_summary_triple_tap" msgid="4839204951599629871">"Quickly tap the screen %1$d times. This may slow down your device."</string>
+    <string name="accessibility_shortcut_two_finger_double_tap_keyword" msgid="6271718715836961167">"%1$d-finger double tap"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_two_finger_double_tap" msgid="8262165091808318538">"Quickly tap screen {0,number,integer} times with two fingers"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"Triple-tap screen"</string>
-    <string name="accessibility_shortcut_triple_tap_keyword" msgid="6863958573135995927">"triple-tap screen"</string>
+    <string name="accessibility_shortcut_triple_tap_keyword" msgid="5359347130888464334">"triple tap"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="2102327956423320536">"Quickly tap screen {0,number,integer} times. This shortcut may slow down your device"</string>
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Advanced"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"The accessibility button is set to <xliff:g id="SERVICE">%1$s</xliff:g>. To use magnification, touch and hold the accessibility button, then select magnification."</string>
@@ -2573,10 +2588,10 @@
     <string name="battery_app_usage_for" msgid="7309909074935858949">"App usage for <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_system_usage_since_last_full_charge_to" msgid="4196795733829841971">"System usage since last full charge to <xliff:g id="SLOT_TIMESTAMP">%s</xliff:g>"</string>
     <string name="battery_app_usage_since_last_full_charge_to" msgid="4339201995118102114">"App usage since last full charge to <xliff:g id="SLOT_TIMESTAMP">%s</xliff:g>"</string>
-    <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"Total: less than a min"</string>
-    <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"Background: less than a min"</string>
-    <string name="battery_usage_screen_time_less_than_one_minute" msgid="2911989465891679033">"Screen time: less than a min"</string>
-    <string name="power_usage_time_less_than_one_minute" msgid="8407404329381010144">"Less than a min"</string>
+    <string name="battery_usage_total_less_than_one_minute" msgid="951460680288855780">"Total: less than a minute"</string>
+    <string name="battery_usage_background_less_than_one_minute" msgid="267133882897827276">"Background: less than a minute"</string>
+    <string name="battery_usage_screen_time_less_than_one_minute" msgid="578511021578427369">"Screen time: less than a minute"</string>
+    <string name="power_usage_time_less_than_one_minute" msgid="1599706998204418081">"Less than a minute"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Total: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"Background: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_screen_time" msgid="3973865893520804115">"Screen time: <xliff:g id="TIME">%s</xliff:g>"</string>
@@ -2684,10 +2699,8 @@
     <string name="credentials_settings_not_available" msgid="7433088409177429600">"Credentials are not available for this user"</string>
     <string name="credential_for_vpn_and_apps" msgid="2208229692860871136">"Installed for VPN and apps"</string>
     <string name="credential_for_wifi" msgid="2286560570630763556">"Installed for Wi‑Fi"</string>
-    <!-- no translation found for credential_installed_for_wifi (2206050464844710099) -->
-    <skip />
-    <!-- no translation found for credential_using_for_wifi (6134471366188592845) -->
-    <skip />
+    <string name="credential_installed_for_wifi" msgid="2206050464844710099">"Installed for <xliff:g id="SSID">%s</xliff:g>"</string>
+    <string name="credential_using_for_wifi" msgid="6134471366188592845">"Using for <xliff:g id="SSID">%s</xliff:g>"</string>
     <string name="credential_for_wifi_in_use" msgid="7276290656840986618">"Installed for Wi‑Fi (In use)"</string>
     <string name="credentials_reset_hint" msgid="4054601857203464867">"Remove all the contents?"</string>
     <string name="credentials_erased" msgid="9121052044566053345">"Credential storage is erased."</string>
@@ -4490,6 +4503,7 @@
     <string name="media_output_label_title" msgid="4139048973886819148">"Play <xliff:g id="LABEL">%s</xliff:g> on"</string>
     <string name="media_output_title_without_playing" msgid="3339321669132875821">"Audio will play on"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"This device"</string>
+    <string name="media_output_audio_sharing" msgid="6531742594884809737">"Audio sharing"</string>
     <string name="media_out_summary_ongoing_call_state" msgid="475188726850090363">"Unavailable during calls"</string>
     <string name="take_call_on_title" msgid="1159417893879946757">"Take call on"</string>
     <string name="cannot_change_apn_toast" msgid="296540724089240405">"This APN cannot be changed."</string>
@@ -4621,7 +4635,7 @@
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"Your phone will auto-connect to a satellite. For the best connection, keep a clear view of the sky."</string>
     <string name="title_supported_service" msgid="4275535165812691571">"After your phone connects to a satellite"</string>
     <string name="summary_supported_service" msgid="4320535903444834786">"You can text anyone, including emergency services. Your phone will reconnect to a mobile network when available."</string>
-    <string name="satellite_setting_summary_more_information" msgid="4008690241760925372">"Satellite messaging may take longer and is available only in some areas, Weather and certain structures may affect your satellite connection. Calling by satellite isn’t available.\n\nIt may take some time for changes to your account to show in Settings. Contact <xliff:g id="CARRIER_NAME">%1$s</xliff:g> for details."</string>
+    <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"Satellite messaging may take longer and is available only in some areas. Weather and certain structures may affect your satellite connection. Calling by satellite isn’t available. Emergency calls may still connect.\n\nIt may take some time for account changes to show in Settings. Contact your carrier for details."</string>
     <string name="more_about_satellite_messaging" msgid="3385673133561348509">"More about satellite messaging"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Access Point Names"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
@@ -4659,8 +4673,8 @@
     <string name="sim_action_turn_off" msgid="3506698692916473000">"Turn off"</string>
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"Can’t activate SIM"</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"Try turning on the SIM again. If the problem continues, restart your device."</string>
-    <string name="sim_onboarding_bottomsheets_title" msgid="143711121394213711">"Set up your SIM"</string>
-    <string name="sim_onboarding_bottomsheets_msg" msgid="7367245016476460849">"Set your mobile network preferences to use multiple SIMs on this device"</string>
+    <string name="sim_onboarding_dialog_starting_title" msgid="4212945803784596345">"Set your SIM preferences"</string>
+    <string name="sim_onboarding_dialog_starting_msg" msgid="8450391476631265209">"Set your mobile network preferences to use multiple SIMs on this device"</string>
     <string name="sim_onboarding_label_sim_title" msgid="273162565849288273">"Label your SIMs"</string>
     <string name="sim_onboarding_label_sim_msg" msgid="5105859235219529056">"You’ll see these labels when making calls, sending texts, and using data, and in Settings"</string>
     <string name="sim_onboarding_label_sim_dialog_title" msgid="5839073125605286120">"SIM label"</string>
@@ -4678,7 +4692,8 @@
     <string name="sim_action_restart_dialog_msg" msgid="4737611046767629774">"To use 2 SIMs at once, restart your device, then turn on both SIMs"</string>
     <string name="sim_action_restart_dialog_cancel" msgid="665560106686565624">"Use <xliff:g id="CARRIER_NAME">%1$s</xliff:g> only"</string>
     <string name="sim_onboarding_phoneNumber_data_only" msgid="8158409121949373662">"Data only"</string>
-    <string name="sim_onboarding_setup" msgid="5750393553605388463">"Set up"</string>
+    <string name="sim_onboarding_setup" msgid="8678504891830386486">"Get started"</string>
+    <string name="sim_onboarding_close" msgid="8656305651358745422">"Close"</string>
     <string name="sim_onboarding_next" msgid="6415025179929475355">"Next"</string>
     <string name="sim_onboarding_progressbar_turning_sim_on" msgid="1163318788393361574">"Turning on <xliff:g id="CARRIER_NAME">%1$s</xliff:g>…"</string>
     <string name="mobile_network_spn_title" msgid="3053793174495329077">"Mobile network"</string>
@@ -5169,4 +5184,8 @@
     <string name="content_protection_preference_subpage_info" msgid="6890886357653365489"></string>
     <string name="accessibility_setup_password_complete" msgid="6358749253318369077">"Password is now set up"</string>
     <string name="show_stylus_pointer_icon" msgid="1010583689203665786">"Show pointer while hovering"</string>
+    <!-- no translation found for media_drm_settings_title (897424966554739867) -->
+    <skip />
+    <string name="force_swcrypto_fallback_title" msgid="8053166299808645593">"Force Software Secure Crypto"</string>
+    <string name="force_swcrypto_fallback_summary" msgid="181969966310309701">"Force DRM key management to use software-based whitebox crypto"</string>
 </resources>

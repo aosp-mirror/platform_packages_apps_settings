@@ -41,6 +41,8 @@ import com.google.android.setupdesign.util.ThemeHelper;
  */
 public class InstallCaCertificateWarning extends Activity {
 
+    private static final String CERT_INSTALLER_PACKAGE_NAME = "com.android.certinstaller";
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +81,7 @@ public class InstallCaCertificateWarning extends Activity {
         return v -> {
             final Intent intent = new Intent();
             intent.setAction(Credentials.INSTALL_ACTION);
+            intent.setPackage(CERT_INSTALLER_PACKAGE_NAME);
             intent.putExtra(Credentials.EXTRA_CERTIFICATE_USAGE, Credentials.CERTIFICATE_USAGE_CA);
             startActivity(intent);
             finish();

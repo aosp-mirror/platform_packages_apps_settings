@@ -45,7 +45,8 @@ public class SpatialAudioSettings extends DashboardFragment {
             footerPreference.setLearnMoreText(
                     getString(R.string.spatial_audio_footer_learn_more_text));
             footerPreference.setLearnMoreAction(
-                    view -> startActivity(new Intent(Settings.ACTION_BLUETOOTH_SETTINGS)));
+                    view -> startActivity(new Intent(Settings.ACTION_BLUETOOTH_SETTINGS)
+                            .setPackage(getContext().getPackageName())));
         }
     }
 

@@ -159,6 +159,13 @@ public abstract class RadioButtonPickerFragment extends SettingsPreferenceFragme
             String key, CandidateInfo info, String defaultKey, String systemDefaultKey) {
     }
 
+    /**
+     * A chance for subclasses to create a custom preference instance.
+     */
+    protected SelectorWithWidgetPreference createPreference() {
+        return new SelectorWithWidgetPreference(getPrefContext());
+    }
+
     public void updateCandidates() {
         mCandidates.clear();
         final List<? extends CandidateInfo> candidateList = getCandidates();
@@ -193,8 +200,7 @@ public abstract class RadioButtonPickerFragment extends SettingsPreferenceFragme
         }
         if (candidateList != null) {
             for (CandidateInfo info : candidateList) {
-                SelectorWithWidgetPreference pref =
-                        new SelectorWithWidgetPreference(getPrefContext());
+                SelectorWithWidgetPreference pref = createPreference();
                 if (customLayoutResId > 0) {
                     pref.setLayoutResource(customLayoutResId);
                 }

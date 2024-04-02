@@ -37,21 +37,26 @@ import android.os.UserHandle;
 import android.os.UserManager;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.LooperMode;
-import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.android.util.concurrent.PausedExecutorService;
+import org.robolectric.shadows.ShadowLooper;
+import org.robolectric.shadows.ShadowPausedAsyncTask;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-@LooperMode(LooperMode.Mode.LEGACY)
 public final class AppWithAdminGrantedPermissionsListerTest {
+
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
 
     private final String APP_1 = "app1";
     private final String APP_2 = "app2";
@@ -85,10 +90,12 @@ public final class AppWithAdminGrantedPermissionsListerTest {
     private DevicePolicyManager mDevicePolicyManager;
 
     private List<UserAppInfo> mAppList = Collections.emptyList();
+    private PausedExecutorService mExecutorService;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
+        mExecutorService = new PausedExecutorService();
+        ShadowPausedAsyncTask.overrideExecutor(mExecutorService);
     }
 
     @Test
@@ -185,9 +192,9 @@ public final class AppWithAdminGrantedPermissionsListerTest {
         // List all apps installed that were granted one or more permissions by the
         // admin.
         (new AppWithAdminGrantedPermissionsListerTestable(PERMISSIONS)).execute();
+        mExecutorService.runAll();
+        ShadowLooper.idleMainLooper();
 
-        // Wait for the background task to finish.
-        ShadowApplication.runBackgroundTasks();
         assertThat(mAppList.size()).isEqualTo(3);
         InstalledAppListerTest.verifyListUniqueness(mAppList);
 

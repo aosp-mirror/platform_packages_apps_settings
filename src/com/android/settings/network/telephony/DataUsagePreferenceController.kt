@@ -75,6 +75,7 @@ class DataUsagePreferenceController(context: Context, key: String) :
     override fun handlePreferenceTreeClick(preference: Preference): Boolean {
         if (preference.key != preferenceKey || networkTemplate == null) return false
         val intent = Intent(Settings.ACTION_MOBILE_DATA_USAGE).apply {
+            setPackage(mContext.packageName)
             putExtra(Settings.EXTRA_NETWORK_TEMPLATE, networkTemplate)
             putExtra(Settings.EXTRA_SUB_ID, mSubId)
         }

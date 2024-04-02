@@ -26,6 +26,7 @@ import android.text.TextUtils
 import androidx.preference.Preference
 import com.android.internal.annotations.VisibleForTesting
 import com.android.settings.R
+import com.android.settings.Utils
 import com.android.settings.core.BasePreferenceController
 
 /**
@@ -47,6 +48,7 @@ class ContrastPreferenceController(
     override fun handlePreferenceTreeClick(preference: Preference): Boolean {
         if (TextUtils.equals(preference.key, preferenceKey)) {
             val intent = Intent(Intent.ACTION_SHOW_CONTRAST_DIALOG)
+            intent.setPackage(Utils.SYSTEMUI_PACKAGE_NAME)
             context.startActivityAsUser(intent, UserHandle(UserHandle.USER_CURRENT))
             return true
         }

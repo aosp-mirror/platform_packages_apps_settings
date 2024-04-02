@@ -369,10 +369,10 @@ public class ApnSettings extends RestrictedSettingsFragment
                     pref.setSummary(apn);
                 }
 
-                final boolean selectable =
+                final boolean defaultSelectable =
                         ((type == null) || type.contains(ApnSetting.TYPE_DEFAULT_STRING));
-                pref.setSelectable(selectable);
-                if (selectable) {
+                pref.setDefaultSelectable(defaultSelectable);
+                if (defaultSelectable) {
                     if ((mSelectedKey != null) && mSelectedKey.equals(key)) {
                         pref.setChecked();
                     }

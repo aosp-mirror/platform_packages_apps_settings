@@ -19,14 +19,11 @@ package com.android.settings.spa.app.specialaccess
 import android.content.Context
 import androidx.preference.Preference
 import com.android.settings.core.BasePreferenceController
-import com.android.settings.flags.Flags
 import com.android.settings.spa.SpaActivity.Companion.startSpaActivity
 
 class BackupTasksAppsPreferenceController(context: Context, preferenceKey: String) :
         BasePreferenceController(context, preferenceKey) {
-    override fun getAvailabilityStatus() =
-        if (Flags.enablePerformBackupTasksInSettings()) AVAILABLE
-        else CONDITIONALLY_UNAVAILABLE
+    override fun getAvailabilityStatus() = CONDITIONALLY_UNAVAILABLE
 
     override fun handlePreferenceTreeClick(preference: Preference): Boolean {
         if (preference.key == mPreferenceKey) {

@@ -25,22 +25,27 @@ import static org.mockito.Mockito.verify;
 import android.content.Context;
 import android.content.Intent;
 
+import androidx.test.core.app.ApplicationProvider;
+
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.LooperMode;
+import org.robolectric.shadows.ShadowLooper;
 
 @RunWith(RobolectricTestRunner.class)
-@LooperMode(LooperMode.Mode.LEGACY)
 public class TimeChangeListenerMixinTest {
+
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
 
     @Mock
     private UpdateTimeAndDateCallback mCallback;
@@ -50,8 +55,7 @@ public class TimeChangeListenerMixinTest {
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
+        mContext = ApplicationProvider.getApplicationContext();
         mMixin = new TimeChangeListenerMixin(mContext, mCallback);
     }
 
@@ -69,6 +73,7 @@ public class TimeChangeListenerMixinTest {
         mContext.sendBroadcast(new Intent(Intent.ACTION_TIME_CHANGED)
                 .addFlags(Intent.FLAG_RECEIVER_INCLUDE_BACKGROUND));
         mContext.sendBroadcast(new Intent(Intent.ACTION_TIMEZONE_CHANGED));
+        ShadowLooper.idleMainLooper();
 
         verify(mCallback, times(3)).updateTimeAndDateDisplay(mContext);
     }

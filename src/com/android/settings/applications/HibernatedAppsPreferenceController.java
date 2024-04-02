@@ -21,6 +21,7 @@ import static android.provider.DeviceConfig.NAMESPACE_APP_HIBERNATION;
 import static com.android.settings.Utils.PROPERTY_APP_HIBERNATION_ENABLED;
 
 import android.content.Context;
+import android.content.Intent;
 import android.icu.text.MessageFormat;
 import android.permission.PermissionControllerManager;
 import android.provider.DeviceConfig;
@@ -85,6 +86,12 @@ public final class HibernatedAppsPreferenceController extends BasePreferenceCont
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mScreen = screen;
+
+        Preference pref = screen.findPreference(getPreferenceKey());
+        if (pref != null) {
+            pref.setIntent(new Intent(Intent.ACTION_MANAGE_UNUSED_APPS)
+                    .setPackage(mContext.getPackageManager().getPermissionControllerPackageName()));
+        }
     }
 
     /**

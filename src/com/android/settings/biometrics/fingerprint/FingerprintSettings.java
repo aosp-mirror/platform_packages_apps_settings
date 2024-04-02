@@ -88,7 +88,6 @@ import com.android.settingslib.transition.SettingsTransitionHelper;
 import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.TwoTargetPreference;
 
-import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.util.DeviceHelper;
 
 import java.util.ArrayList;
@@ -112,9 +111,6 @@ public class FingerprintSettings extends SubSettings {
     private static final int RESULT_SKIP = BiometricEnrollBase.RESULT_SKIP;
     private static final int RESULT_TIMEOUT = BiometricEnrollBase.RESULT_TIMEOUT;
 
-    @Nullable
-    private UdfpsEnrollCalibrator mCalibrator;
-
     @Override
     public Intent getIntent() {
         Intent modIntent = new Intent(super.getIntent());
@@ -133,13 +129,6 @@ public class FingerprintSettings extends SubSettings {
         super.onCreate(savedInstanceState);
         CharSequence msg = getText(R.string.security_settings_fingerprint_preference_title);
         setTitle(msg);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        mCalibrator = FeatureFactory.getFeatureFactory().getFingerprintFeatureProvider()
-                .getUdfpsEnrollCalibrator(getApplicationContext(), null, null);
     }
 
     /**
@@ -271,6 +260,9 @@ public class FingerprintSettings extends SubSettings {
         private FingerprintAuthenticateSidecar mAuthenticateSidecar;
         private FingerprintRemoveSidecar mRemovalSidecar;
         private HashMap<Integer, String> mFingerprintsRenaming;
+
+        @Nullable
+        private UdfpsEnrollCalibrator mCalibrator;
 
         FingerprintAuthenticateSidecar.Listener mAuthenticateListener =
                 new FingerprintAuthenticateSidecar.Listener() {
@@ -745,6 +737,9 @@ public class FingerprintSettings extends SubSettings {
             if (mRemovalSidecar != null) {
                 mRemovalSidecar.setListener(mRemovalListener);
             }
+
+            mCalibrator = FeatureFactory.getFeatureFactory().getFingerprintFeatureProvider()
+                    .getUdfpsEnrollCalibrator(getActivity().getApplicationContext(), null, null);
         }
 
         private void updatePreferences() {
@@ -811,10 +806,8 @@ public class FingerprintSettings extends SubSettings {
                 }
                 intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
                 intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, mToken);
-                if (((FingerprintSettings) getActivity()).mCalibrator != null) {
-                    intent.putExtras(
-                            (((FingerprintSettings) getActivity()).mCalibrator)
-                                    .getExtrasForNextIntent());
+                if (mCalibrator != null) {
+                    intent.putExtras(mCalibrator.getExtrasForNextIntent());
                 }
                 startActivityForResult(intent, ADD_FINGERPRINT_REQUEST);
             } else if (pref instanceof FingerprintPreference) {

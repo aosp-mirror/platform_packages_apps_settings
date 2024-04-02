@@ -27,6 +27,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -189,6 +190,13 @@ class LocaleDragAndDropAdapter
                 setCheckBoxDescription(dragCell, checkbox, isChecked);
             }
         });
+
+        dragCell.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkbox.toggle();
+            }
+        });
     }
 
     @VisibleForTesting
@@ -200,8 +208,6 @@ class LocaleDragAndDropAdapter
         CharSequence checkedStatus = mContext.getText(
                 isChecked ? com.android.internal.R.string.checked
                         : com.android.internal.R.string.not_checked);
-        // Talkback
-        dragCell.setStateDescription(checkedStatus);
         // Select to Speak
         checkbox.setContentDescription(checkedStatus);
     }

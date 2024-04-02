@@ -55,7 +55,8 @@ class BackupTasksAppsPreferenceControllerTest {
     @Test
     @RequiresFlagsEnabled(Flags.FLAG_ENABLE_PERFORM_BACKUP_TASKS_IN_SETTINGS)
     fun getAvailabilityStatus_enableBackupTasksApps_returnAvailable() {
-        assertThat(controller.isAvailable).isTrue()
+        // Feature is currently disabled so it should return false regardless of flag status.
+        assertThat(controller.isAvailable).isFalse()
     }
 
     @Test

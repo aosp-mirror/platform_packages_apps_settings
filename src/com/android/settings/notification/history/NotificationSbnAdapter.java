@@ -130,6 +130,7 @@ public class NotificationSbnAdapter extends
                     mUiEventLogger);
             holder.itemView.setOnLongClickListener(v -> {
                 Intent intent =  new Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS)
+                        .setPackage(mContext.getPackageName())
                         .putExtra(EXTRA_APP_PACKAGE, sbn.getPackageName())
                         .putExtra(EXTRA_CHANNEL_ID, sbn.getNotification().getChannelId())
                         .putExtra(EXTRA_CONVERSATION_ID, sbn.getNotification().getShortcutId());

@@ -43,6 +43,7 @@ import androidx.preference.Preference;
 import com.android.settings.R;
 import com.android.settings.Settings.MobileNetworkActivity;
 import com.android.settings.SettingsActivity;
+import com.android.settings.Utils;
 import com.android.settings.datausage.BillingCyclePreferenceController;
 import com.android.settings.datausage.DataUsageSummaryPreferenceController;
 import com.android.settings.network.CarrierWifiTogglePreferenceController;
@@ -133,7 +134,8 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
                 || TextUtils.equals(key, BUTTON_CDMA_SUBSCRIPTION_KEY)) {
             if (mTelephonyManager.getEmergencyCallbackMode()) {
                 startActivityForResult(
-                        new Intent(TelephonyManager.ACTION_SHOW_NOTICE_ECM_BLOCK_OTHERS, null),
+                        new Intent(TelephonyManager.ACTION_SHOW_NOTICE_ECM_BLOCK_OTHERS, null)
+                                .setPackage(Utils.PHONE_PACKAGE_NAME),
                         REQUEST_CODE_EXIT_ECM);
                 mClickedPrefKey = key;
             }

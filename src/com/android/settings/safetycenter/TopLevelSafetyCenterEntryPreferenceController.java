@@ -50,7 +50,8 @@ public class TopLevelSafetyCenterEntryPreferenceController extends BasePreferenc
         }
 
         try {
-            mContext.startActivity(new Intent(Intent.ACTION_SAFETY_CENTER));
+            mContext.startActivity(new Intent(Intent.ACTION_SAFETY_CENTER)
+                    .setPackage(mContext.getPackageManager().getPermissionControllerPackageName()));
         } catch (ActivityNotFoundException e) {
             Log.e(TAG, "Unable to open safety center", e);
             return false;

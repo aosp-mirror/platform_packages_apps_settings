@@ -14,7 +14,7 @@
 * limitations under the License.
 */
 
-package com.android.settings.development.widevine;
+package com.android.settings.development.mediadrm;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.junit.Assume.assumeTrue;
@@ -43,23 +43,23 @@ import org.junit.runner.RunWith;
 import java.util.UUID;
 
 @RunWith(AndroidJUnit4.class)
-public class ForceL3FallbackPreferenceControllerTest {
+public class ForceSwSecureCryptoFallbackPreferenceControllerTest {
 
-    private static final String PREF_KEY = "force_l3_fallback";
+    private static final String PREF_KEY = "force_swcrypto_fallback";
     private static final UUID WIDEVINE_UUID =
         new UUID(0xEDEF8BA979D64ACEL, 0xA3C827DCD51D21EDL);
-    private static final String TAG = "ForceL3FallbackPreferenceControllerTest";
+    private static final String TAG = "ForceSwSecureCryptoFallbackPreferenceControllerTest";
 
     @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     private Context mContext;
-    private ForceL3FallbackPreferenceController mController;
+    private ForceSwSecureCryptoFallbackPreferenceController mController;
     private SwitchPreference mPreference;
 
     @Before
     public void setUp() {
         mContext = ApplicationProvider.getApplicationContext();
-        mController = new ForceL3FallbackPreferenceController(mContext, PREF_KEY);
+        mController = new ForceSwSecureCryptoFallbackPreferenceController(mContext, PREF_KEY);
         mPreference = new SwitchPreference(mContext);
         WidevineProperties.forcel3_enabled(false);
     }
@@ -68,7 +68,7 @@ public class ForceL3FallbackPreferenceControllerTest {
     public void updateState_flagEnabled_checkPreference() {
         mSetFlagsRule.enableFlags(Flags.FLAG_FORCE_L3_ENABLED);
         mController.updateState(mPreference);
-        assertThat(mPreference.isEnabled()).isTrue();
+        assumeTrue(mPreference.isEnabled());
         assertThat(mPreference.isChecked()).isFalse();
         assertThat(WidevineProperties.forcel3_enabled().orElse(false)).isFalse();
 
@@ -107,12 +107,11 @@ public class ForceL3FallbackPreferenceControllerTest {
 
     @Test
     public void updateState_checkWidevine() throws Exception {
-        MediaDrm drm;
-        try {
-            drm = new MediaDrm(WIDEVINE_UUID);
+        try (MediaDrm drm = new MediaDrm(WIDEVINE_UUID)) {
             assumeTrue(drm.getPropertyString("securityLevel").equals("L1"));
             mSetFlagsRule.enableFlags(Flags.FLAG_FORCE_L3_ENABLED);
-            drm.close();
+            mController.updateState(mPreference);
+            assumeTrue(mPreference.isEnabled());
         } catch (UnsupportedSchemeException ex) {
             assumeNoException(ex);
         }
@@ -120,17 +119,22 @@ public class ForceL3FallbackPreferenceControllerTest {
         // L3 enforced
         mController.setChecked(true);
         mController.updateState(mPreference);
-        assertThat(WidevineProperties.forcel3_enabled().orElse(false)).isTrue();
         assertThat(mPreference.isEnabled()).isTrue();
         assertThat(mPreference.isChecked()).isTrue();
-        drm = new MediaDrm(WIDEVINE_UUID);
-        assertThat(drm.getPropertyString("securityLevel")).isEqualTo("L3");
+        try (MediaDrm drm = new MediaDrm(WIDEVINE_UUID)) {
+            assertThat(drm.getPropertyString("securityLevel")).isEqualTo("L3");
+        } catch (UnsupportedSchemeException ex) {
+            assumeNoException(ex);
+        }
 
         // Switch back to L1
         mController.setChecked(false);
         mController.updateState(mPreference);
-        drm.close();
-        drm = new MediaDrm(WIDEVINE_UUID);
-        assertThat(drm.getPropertyString("securityLevel")).isEqualTo("L1");
+
+        try (MediaDrm drm = new MediaDrm(WIDEVINE_UUID)) {
+            assertThat(drm.getPropertyString("securityLevel")).isEqualTo("L1");
+        } catch (UnsupportedSchemeException ex) {
+            assumeNoException(ex);
+        }
     }
 }

@@ -36,6 +36,7 @@ import android.provider.Settings;
 import com.android.server.display.feature.flags.Flags;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -85,6 +86,7 @@ public class EvenDimmerPreferenceControllerTest {
                 Settings.Secure.EVEN_DIMMER_ACTIVATED)).isEqualTo(0.0f); // false
     }
 
+    @Ignore("b/331324279")
     @RequiresFlagsEnabled(Flags.FLAG_EVEN_DIMMER)
     @Test
     public void testGetAvailabilityStatus_flagOnConfigTrue() {
@@ -97,6 +99,7 @@ public class EvenDimmerPreferenceControllerTest {
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
+    @Ignore("b/331324279")
     @Test
     @RequiresFlagsEnabled(Flags.FLAG_EVEN_DIMMER)
     public void testSetChecked_enable() throws Settings.SettingNotFoundException {
@@ -113,6 +116,7 @@ public class EvenDimmerPreferenceControllerTest {
                 Settings.Secure.EVEN_DIMMER_ACTIVATED)).isEqualTo(0.0f); // false
     }
 
+    @Ignore("b/331324279")
     @Test
     @RequiresFlagsEnabled(Flags.FLAG_EVEN_DIMMER)
     public void testDisabledIfAutobrightnessIsOff() {

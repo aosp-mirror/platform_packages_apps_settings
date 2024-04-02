@@ -105,6 +105,7 @@ public abstract class DefaultAppShortcutPreferenceControllerBase extends BasePre
             return false;
         }
         final Intent intent = new Intent(Intent.ACTION_MANAGE_DEFAULT_APP)
+                .setPackage(mContext.getPackageManager().getPermissionControllerPackageName())
                 .putExtra(Intent.EXTRA_ROLE_NAME, mRoleName);
         mContext.startActivity(intent);
         return true;

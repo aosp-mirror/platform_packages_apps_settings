@@ -187,6 +187,15 @@ public class SettingsHomepageActivity extends FragmentActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Ensure device is provisioned in order to access Settings home
+        // TODO(b/331254029): This should later be replaced in favor of an allowlist
+        boolean unprovisioned = android.provider.Settings.Global.getInt(getContentResolver(),
+                android.provider.Settings.Global.DEVICE_PROVISIONED, 0) == 0;
+        if (unprovisioned) {
+            Log.e(TAG, "Device is not provisioned, exiting Settings");
+            finish();
+        }
+
         mIsEmbeddingActivityEnabled = ActivityEmbeddingUtils.isEmbeddingActivityEnabled(this);
         if (mIsEmbeddingActivityEnabled) {
             final UserManager um = getSystemService(UserManager.class);
@@ -199,6 +208,8 @@ public class SettingsHomepageActivity extends FragmentActivity implements
                 if (TextUtils.equals(intent.getAction(), ACTION_SETTINGS_EMBED_DEEP_LINK_ACTIVITY)
                         && this instanceof DeepLinkHomepageActivity) {
                     intent.setClass(this, DeepLinkHomepageActivityInternal.class);
+                } else {
+                    intent.setPackage(getPackageName());
                 }
                 intent.removeFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivityAsUser(intent, um.getProfileParent(userInfo.id).getUserHandle());

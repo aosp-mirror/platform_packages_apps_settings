@@ -142,6 +142,7 @@ public class ScreenPinningSettings extends SettingsPreferenceFragment
         if (isEnabled) {
             if (passwordQuality == DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED) {
                 Intent chooseLockIntent = new Intent(DevicePolicyManager.ACTION_SET_NEW_PASSWORD);
+                chooseLockIntent.setPackage(getContext().getPackageName());
                 chooseLockIntent.putExtra(
                         ChooseLockGeneric.ChooseLockGenericFragment.HIDE_INSECURE_OPTIONS,
                         true);

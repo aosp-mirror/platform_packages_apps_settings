@@ -751,6 +751,7 @@ public class NotificationStation extends SettingsPreferenceFragment {
         @Override
         public void performClick() {
             Intent intent =  new Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS)
+                    .setPackage(mContext.getPackageName())
                     .putExtra(EXTRA_APP_PACKAGE, mInfo.pkg)
                     .putExtra(EXTRA_CHANNEL_ID,
                             mInfo.channel != null ? mInfo.channel.getId() : mInfo.channelId);

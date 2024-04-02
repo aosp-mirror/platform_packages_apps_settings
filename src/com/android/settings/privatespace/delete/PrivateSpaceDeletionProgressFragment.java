@@ -21,6 +21,7 @@ import static com.android.settings.privatespace.PrivateSpaceMaintainer.ErrorDele
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -132,13 +133,23 @@ public class PrivateSpaceDeletionProgressFragment extends InstrumentedFragment {
     /** Shows a toast saying that the private space was deleted */
     @VisibleForTesting
     public void showSuccessfulDeletionToast() {
-        Toast.makeText(getContext(), R.string.private_space_deleted, Toast.LENGTH_SHORT).show();
+        showToastWithCustomIcon(R.string.private_space_deleted);
     }
 
     /** Shows a toast saying that the private space could not be deleted */
     @VisibleForTesting
     public void showDeletionInternalErrorToast() {
-        Toast.makeText(getContext(), R.string.private_space_delete_failed, Toast.LENGTH_SHORT)
+        showToastWithCustomIcon(R.string.private_space_delete_failed);
+    }
+
+    private void showToastWithCustomIcon(int stringRes) {
+        Drawable drawable = getContext().getDrawable(R.drawable.ic_private_space_icon);
+        Toast.makeCustomToastWithIcon(
+                        getContext(),
+                        null /* looper */ ,
+                        getContext().getString(stringRes),
+                        Toast.LENGTH_SHORT,
+                        drawable)
                 .show();
     }
 }

@@ -21,17 +21,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/color_contrast_preview_background"
+    android:importantForAccessibility="no"
     android:paddingLeft="24dp"
     android:paddingRight="24dp"
-    android:paddingBottom="24dp"
-    android:background="@drawable/color_contrast_preview_background">
+    android:paddingBottom="24dp">
 
     <View
         android:id="@+id/preview_background"
-        android:background="?androidprv:attr/materialColorSurface"
         android:layout_width="0dp"
         android:layout_height="0dp"
-
+        android:background="?androidprv:attr/materialColorSurface"
         app:layout_constraintBottom_toTopOf="@+id/bottom_appbar_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,21 +41,20 @@
         android:id="@+id/preview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
         android:layout_margin="8dp"
+        android:gravity="center_horizontal"
+        android:text="@string/color_contrast_preview"
+        android:textColor="?androidprv:attr/textColorPrimary"
         android:textSize="14sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:textColor="?androidprv:attr/textColorPrimary"
-        android:text="@string/color_contrast_preview" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <View
         android:id="@+id/email_background"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
+        android:layout_marginHorizontal="12dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="24dp"
         android:background="@drawable/color_contrast_preview_dialog_background"
@@ -66,88 +65,137 @@
 
     <ImageView
         android:id="@+id/ic_group"
-        android:contentDescription="@null"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
         android:layout_marginTop="14dp"
-        android:layout_marginLeft="14dp"
+        android:background="@drawable/color_contrast_preview_icon_group_background"
+        android:contentDescription="@null"
         android:padding="8dp"
         android:src="@drawable/ic_group_24dp"
-        android:background="@drawable/color_contrast_preview_icon_group_background"
         app:layout_constraintStart_toStartOf="@+id/email_background"
         app:layout_constraintTop_toTopOf="@+id/email_background" />
 
-    <TextView
-        android:id="@+id/sender_name"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/email_header"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="17dp"
-        android:textColor="?androidprv:attr/materialColorOnSurface"
-        android:textSize="12sp"
-        app:layout_constraintStart_toEndOf="@+id/ic_group"
-        app:layout_constraintTop_toTopOf="@+id/email_background"
-        android:text="@string/color_contrast_preview_sender_name" />
+        app:layout_constrainedWidth="true"
+        app:layout_constraintEnd_toStartOf="@+id/ic_star"
+        app:layout_constraintStart_toEndOf="@id/ic_group"
+        app:layout_constraintTop_toTopOf="@+id/email_background">
+
+        <TextView
+            android:id="@+id/sender_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:paddingEnd="10dp"
+            android:text="@string/color_contrast_preview_sender_name"
+            android:textColor="?androidprv:attr/materialColorOnSurface"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toStartOf="@+id/email_tag"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_default="percent"
+            app:layout_constraintWidth_max="wrap"
+            app:layout_constraintWidth_percent="0.5" />
+
+        <TextView
+            android:id="@+id/email_tag"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/color_contrast_preview_tag_background"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:paddingHorizontal="4dp"
+            android:text="@string/color_contrast_preview_email_badge"
+            android:textColor="?androidprv:attr/materialColorOnSurface"
+            android:textSize="11sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/sender_name"
+            app:layout_constraintTop_toTopOf="@+id/sender_name"
+            app:layout_constraintWidth_default="percent"
+            app:layout_constraintWidth_max="wrap"
+            app:layout_constraintWidth_percent="0.5" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="@string/color_contrast_preview_email_send_date"
         android:textColor="?androidprv:attr/materialColorOnSurfaceVariant"
         android:textSize="11sp"
-        app:layout_constraintStart_toStartOf="@+id/sender_name"
-        app:layout_constraintTop_toBottomOf="@+id/sender_name"
-        android:text="@string/color_contrast_preview_email_send_date" />
-
-    <TextView
-        android:id="@+id/email_tag"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:paddingHorizontal="4dp"
-        android:textColor="?androidprv:attr/materialColorOnSurface"
-        android:background="@drawable/color_contrast_preview_tag_background"
-        android:textSize="11sp"
-        app:layout_constraintStart_toEndOf="@+id/sender_name"
-        app:layout_constraintTop_toTopOf="@+id/sender_name"
-        android:text="@string/color_contrast_preview_email_badge" />
+        app:layout_constrainedWidth="true"
+        app:layout_constraintEnd_toEndOf="@+id/email_background"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/email_header"
+        app:layout_constraintTop_toBottomOf="@+id/email_header" />
 
     <ImageView
         android:id="@+id/ic_star"
-        android:contentDescription="@null"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
-        android:layout_marginRight="14dp"
+        android:layout_marginEnd="14dp"
+        android:background="@drawable/color_contrast_preview_icon_star_background"
+        android:contentDescription="@null"
         android:padding="8dp"
         android:src="@drawable/ic_star_24dp"
-        android:background="@drawable/color_contrast_preview_icon_star_background"
         app:layout_constraintEnd_toEndOf="@+id/email_background"
         app:layout_constraintTop_toTopOf="@+id/email_background" />
+
+    <View
+        android:id="@+id/email_main_background"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="14dp"
+        app:layout_constraintBottom_toBottomOf="@+id/email_background"
+        app:layout_constraintEnd_toEndOf="@+id/email_background"
+        app:layout_constraintStart_toStartOf="@+id/email_background"
+        app:layout_constraintTop_toBottomOf="@+id/date" />
 
     <TextView
         android:id="@+id/email_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="14dp"
-        android:layout_marginTop="62dp"
+        android:layout_marginTop="10dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="@string/color_contrast_preview_email_title"
         android:textColor="?androidprv:attr/materialColorOnSurface"
         android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@+id/email_background"
-        app:layout_constraintTop_toTopOf="@+id/email_background"
-        android:text="@string/color_contrast_preview_email_title" />
+        app:layout_constrainedWidth="true"
+        app:layout_constraintEnd_toEndOf="@+id/email_main_background"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/email_main_background"
+        app:layout_constraintTop_toTopOf="@+id/email_main_background" />
 
     <TextView
         android:id="@+id/email_body"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:paddingBottom="8dp"
+        android:text="@string/color_contrast_preview_email_body"
         android:textColor="?androidprv:attr/materialColorOnSurfaceVariant"
         android:textSize="12sp"
-        android:paddingBottom="8dp"
-        android:maxLines="2"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintEnd_toEndOf="@+id/email_main_background"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/email_title"
-        app:layout_constraintTop_toBottomOf="@+id/email_title"
-        android:text="@string/color_contrast_preview_email_body" />
+        app:layout_constraintTop_toBottomOf="@+id/email_title" />
 
     <View
         android:id="@+id/attachment_background"
@@ -161,13 +209,13 @@
 
     <ImageView
         android:id="@+id/ic_article_filled"
-        android:contentDescription="@null"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_article_filled_24dp"
+        android:contentDescription="@null"
+        android:paddingVertical="6dp"
         android:paddingStart="8dp"
         android:paddingEnd="6dp"
-        android:paddingVertical="6dp"
+        android:src="@drawable/ic_article_filled_24dp"
         app:layout_constraintStart_toStartOf="@+id/email_title"
         app:layout_constraintTop_toBottomOf="@+id/email_body" />
 
@@ -175,25 +223,31 @@
         android:id="@+id/email_attachment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:paddingEnd="10dp"
+        android:text="@string/color_contrast_preview_email_attachment_name"
         android:textColor="?androidprv:attr/materialColorOnTertiaryContainer"
         android:textSize="12sp"
-        app:layout_constraintStart_toEndOf="@+id/ic_article_filled"
-        app:layout_constraintTop_toTopOf="@+id/attachment_background"
+        app:layout_constrainedWidth="true"
         app:layout_constraintBottom_toBottomOf="@+id/attachment_background"
-        android:text="@string/color_contrast_preview_email_attachment_name" />
+        app:layout_constraintEnd_toStartOf="@+id/ic_edit"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/ic_article_filled"
+        app:layout_constraintTop_toTopOf="@+id/attachment_background" />
 
     <ImageView
         android:id="@+id/ic_edit"
-        android:contentDescription="@null"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginBottom="-8dp"
+        android:background="@drawable/color_contrast_preview_icon_edit_background"
+        android:contentDescription="@null"
         android:padding="27dp"
         android:src="@drawable/ic_edit_24dp"
-        android:background="@drawable/color_contrast_preview_icon_edit_background"
-        app:layout_constraintEnd_toEndOf="@+id/email_background"
-        app:layout_constraintTop_toBottomOf="@+id/ic_star" />
+        app:layout_constraintBottom_toBottomOf="@+id/email_background"
+        app:layout_constraintEnd_toEndOf="@+id/email_background" />
 
     <View
         android:id="@+id/bottom_appbar_background"
@@ -206,9 +260,9 @@
         app:layout_constraintTop_toTopOf="@+id/ic_inbox" />
 
     <ImageView
-        android:contentDescription="@null"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@null"
         android:src="@drawable/color_contrast_preview_icon_inbox_background"
         app:layout_constraintBottom_toBottomOf="@+id/ic_inbox"
         app:layout_constraintEnd_toEndOf="@+id/ic_inbox"
@@ -217,38 +271,38 @@
 
     <ImageView
         android:id="@+id/ic_inbox"
-        android:contentDescription="@null"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="42dp"
+        android:contentDescription="@null"
         android:padding="24dp"
         android:src="@drawable/ic_inbox_24dp"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/ic_article"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ic_article_filled" />
 
     <ImageView
         android:id="@+id/ic_article"
-        android:contentDescription="@null"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:contentDescription="@null"
         android:padding="24dp"
         android:src="@drawable/ic_article_24dp"
-        app:layout_constraintStart_toEndOf="@+id/ic_inbox"
+        app:layout_constraintBottom_toBottomOf="@id/ic_inbox"
         app:layout_constraintEnd_toStartOf="@+id/ic_chat_bubble"
-        app:layout_constraintTop_toTopOf="@id/ic_inbox"
-        app:layout_constraintBottom_toBottomOf="@id/ic_inbox"  />
+        app:layout_constraintStart_toEndOf="@+id/ic_inbox"
+        app:layout_constraintTop_toTopOf="@id/ic_inbox" />
 
     <ImageView
         android:id="@+id/ic_chat_bubble"
-        android:contentDescription="@null"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:contentDescription="@null"
         android:padding="24dp"
         android:src="@drawable/ic_chat_bubble_24dp"
+        app:layout_constraintBottom_toBottomOf="@id/ic_inbox"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ic_article"
-        app:layout_constraintTop_toTopOf="@id/ic_inbox"
-        app:layout_constraintBottom_toBottomOf="@id/ic_inbox"  />
+        app:layout_constraintTop_toTopOf="@id/ic_inbox" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -39,6 +39,7 @@ public class LiveCaptionPreferenceController extends BasePreferenceController {
     public LiveCaptionPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         mPackageManager = context.getPackageManager();
+        LIVE_CAPTION_INTENT.setPackage(mPackageManager.getSystemCaptionsServicePackageName());
     }
 
     @Override

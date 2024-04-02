@@ -31,16 +31,12 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.SignalCellularAlt
 import androidx.compose.material3.AlertDialogDefaults
 import androidx.compose.material3.BasicAlertDialog
-import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ModalBottomSheet
-import androidx.compose.material3.SheetState
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
@@ -52,7 +48,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
 import com.android.settings.R
 import com.android.settings.SidecarFragment
 import com.android.settings.network.telephony.SubscriptionActionDialogActivity
@@ -63,6 +58,7 @@ import com.android.settingslib.spa.SpaBaseDialogActivity
 import com.android.settingslib.spa.framework.theme.SettingsDimension
 import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
 import com.android.settingslib.spa.widget.dialog.AlertDialogButton
+import com.android.settingslib.spa.widget.dialog.SettingsAlertDialogWithIcon
 import com.android.settingslib.spa.widget.dialog.getDialogWidth
 import com.android.settingslib.spa.widget.dialog.rememberAlertDialogPresenter
 import com.android.settingslib.spa.widget.ui.SettingsTitle
@@ -77,7 +73,7 @@ import kotlinx.coroutines.launch
 
 class SimOnboardingActivity : SpaBaseDialogActivity() {
     lateinit var scope: CoroutineScope
-    lateinit var showBottomSheet: MutableState<Boolean>
+    lateinit var showStartingDialog: MutableState<Boolean>
     lateinit var showError: MutableState<ErrorType>
     lateinit var showProgressDialog: MutableState<Boolean>
     lateinit var showDsdsProgressDialog: MutableState<Boolean>
@@ -138,7 +134,7 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
             }
 
             CallbackType.CALLBACK_ONBOARDING_COMPLETE -> {
-                showBottomSheet.value = false
+                showStartingDialog.value = false
                 setProgressDialog(true)
                 scope.launch {
                     // TODO: refactor the Sidecar
@@ -181,7 +177,7 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     override fun Content() {
-        showBottomSheet = remember { mutableStateOf(false) }
+        showStartingDialog = remember { mutableStateOf(false) }
         showError = remember { mutableStateOf(ErrorType.ERROR_NONE) }
         showProgressDialog = remember { mutableStateOf(false) }
         showDsdsProgressDialog = remember { mutableStateOf(false) }
@@ -194,14 +190,12 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
         RestartDialogImpl()
         LaunchedEffect(Unit) {
             if (onboardingService.activeSubInfoList.isNotEmpty()) {
-                showBottomSheet.value = true
+                showStartingDialog.value = true
             }
         }
 
-        if (showBottomSheet.value) {
-            var sheetState = rememberModalBottomSheetState()
-            BottomSheetImpl(
-                sheetState = sheetState,
+        if (showStartingDialog.value) {
+            StartingDialogImpl(
                 nextAction = {
                     if (onboardingService.isDsdsConditionSatisfied()) {
                         // TODO: if the phone is SS mode and the isDsdsConditionSatisfied is true,
@@ -468,48 +462,39 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
     }
 
     @Composable
-    fun BottomSheetBody(nextAction: () -> Unit) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.padding(bottom = SettingsDimension.itemPaddingVertical)) {
-            Icon(
-                imageVector = Icons.Outlined.SignalCellularAlt,
-                contentDescription = null,
-                modifier = Modifier
-                    .size(SettingsDimension.iconLarge),
-                tint = MaterialTheme.colorScheme.primary,
-            )
-            SettingsTitle(stringResource(R.string.sim_onboarding_bottomsheets_title))
-            Column(Modifier.padding(SettingsDimension.itemPadding)) {
-                Text(
-                    text = stringResource(R.string.sim_onboarding_bottomsheets_msg),
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    style = MaterialTheme.typography.bodyMedium,
-                    overflow = TextOverflow.Ellipsis,
-                    textAlign = TextAlign.Center
-                )
-            }
-            Button(onClick = nextAction) {
-                Text(stringResource(R.string.sim_onboarding_setup))
-            }
-        }
-    }
-
-    @OptIn(ExperimentalMaterial3Api::class)
-    @Composable
-    fun BottomSheetImpl(
-        sheetState: SheetState,
+    fun StartingDialogImpl(
         nextAction: () -> Unit,
         cancelAction: () -> Unit,
     ) {
-        ModalBottomSheet(
+        SettingsAlertDialogWithIcon(
             onDismissRequest = cancelAction,
-            sheetState = sheetState,
-        ) {
-            BottomSheetBody(nextAction = nextAction)
-        }
-        LaunchedEffect(Unit) {
-            sheetState.show()
-        }
+            confirmButton = AlertDialogButton(
+                getString(R.string.sim_onboarding_setup),
+                nextAction
+            ),
+            dismissButton =
+                AlertDialogButton(
+                    getString(R.string.sim_onboarding_close),
+                    cancelAction
+                ),
+            title = stringResource(R.string.sim_onboarding_dialog_starting_title),
+            icon = {
+                Icon(
+                    imageVector = Icons.Outlined.SignalCellularAlt,
+                    contentDescription = null,
+                    modifier = Modifier
+                        .size(SettingsDimension.iconLarge),
+                    tint = MaterialTheme.colorScheme.primary,
+                )
+            },
+            text = {
+                Text(
+                    stringResource(R.string.sim_onboarding_dialog_starting_msg),
+                    modifier = Modifier.fillMaxWidth(),
+                    textAlign = TextAlign.Center
+                )
+            })
+
     }
 
     fun setProgressState(state: Int) {

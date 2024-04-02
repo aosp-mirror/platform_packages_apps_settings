@@ -140,7 +140,8 @@ public class Settings extends SettingsActivity {
 
             if (SafetyCenterManagerWrapper.get().isEnabled(this)) {
                 try {
-                    startActivity(new Intent(Intent.ACTION_SAFETY_CENTER));
+                    startActivity(new Intent(Intent.ACTION_SAFETY_CENTER)
+                            .setPackage(getPackageManager().getPermissionControllerPackageName()));
                     finish();
                 } catch (ActivityNotFoundException e) {
                     Log.e(TAG, "Unable to open safety center", e);
@@ -235,7 +236,8 @@ public class Settings extends SettingsActivity {
             if (ACTION_PRIVACY_SETTINGS.equals(getIntent().getAction())
                     && SafetyCenterManagerWrapper.get().isEnabled(this)) {
                 try {
-                    startActivity(new Intent(Intent.ACTION_SAFETY_CENTER));
+                    startActivity(new Intent(Intent.ACTION_SAFETY_CENTER)
+                            .setPackage(getPackageManager().getPermissionControllerPackageName()));
                     finish();
                 } catch (ActivityNotFoundException e) {
                     Log.e(TAG, "Unable to open safety center", e);

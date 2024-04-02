@@ -225,15 +225,15 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
                 return mDialog;
             case DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL:
                 if (isAnySetupWizard()) {
-                    mDialog = AccessibilityGestureNavigationTutorial
+                    mDialog = AccessibilityShortcutsTutorial
                             .createAccessibilityTutorialDialogForSetupWizard(
                                     getPrefContext(), getUserShortcutTypes(),
-                                    this::callOnTutorialDialogButtonClicked);
+                                    this::callOnTutorialDialogButtonClicked, mPackageName);
                 } else {
-                    mDialog = AccessibilityGestureNavigationTutorial
+                    mDialog = AccessibilityShortcutsTutorial
                             .createAccessibilityTutorialDialog(
                                     getPrefContext(), getUserShortcutTypes(),
-                                    this::callOnTutorialDialogButtonClicked);
+                                    this::callOnTutorialDialogButtonClicked, mPackageName);
                 }
                 mDialog.setCanceledOnTouchOutside(false);
                 return mDialog;
@@ -570,6 +570,7 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
         }
 
         Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+        intent.setPackage(getContext().getPackageName());
         intent.setData(Uri.parse("package:" + packageName));
 
         final Preference appInfoPreference = new Preference(getPrefContext());
@@ -711,6 +712,7 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
             return context.getText(R.string.accessibility_shortcut_state_off);
         }
 
+        // LINT.IfChange(shortcut_type_ui_order)
         final int shortcutTypes = PreferredShortcuts.retrieveUserShortcutType(
                 context, mComponentName.flattenToString(), getDefaultShortcutTypes());
 
@@ -730,6 +732,7 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
                     R.string.accessibility_shortcut_hardware_keyword);
             list.add(hardwareTitle);
         }
+        // LINT.ThenChange(/res/xml/accessibility_edit_shortcuts.xml:shortcut_type_ui_order)
 
         // Show software shortcut if first time to use.
         if (list.isEmpty()) {
