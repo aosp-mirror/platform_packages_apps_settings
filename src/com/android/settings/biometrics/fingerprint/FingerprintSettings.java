@@ -1331,7 +1331,7 @@ public class FingerprintSettings extends SubSettings {
 
                 final String title = getString(R.string.fingerprint_delete_title, mFp.getName());
                 final String message =
-                        getString(R.string.fingerprint_v2_delete_message, mFp.getName()) + ".";
+                        getString(R.string.fingerprint_v2_delete_message, mFp.getName());
 
                 DevicePolicyManager devicePolicyManager =
                         getContext().getSystemService(DevicePolicyManager.class);

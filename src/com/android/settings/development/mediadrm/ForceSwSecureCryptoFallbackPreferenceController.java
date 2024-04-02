@@ -23,6 +23,8 @@ import android.util.Log;
 
 import androidx.preference.Preference;
 
+import java.util.UUID;
+
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
@@ -34,6 +36,8 @@ import com.android.settings.media_drm.Flags;
 */
 public class ForceSwSecureCryptoFallbackPreferenceController extends TogglePreferenceController {
     private static final String TAG = "ForceSwSecureCryptoFallbackPreferenceController";
+    private static final UUID WIDEVINE_UUID =
+        new UUID(0xEDEF8BA979D64ACEL, 0xA3C827DCD51D21EDL);
 
     public ForceSwSecureCryptoFallbackPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -52,15 +56,24 @@ public class ForceSwSecureCryptoFallbackPreferenceController extends TogglePrefe
 
     @Override
     public void updateState(Preference preference) {
+        boolean isEnable = false;
         if (Flags.forceL3Enabled()) {
-            preference.setEnabled(true);
-            Log.i(TAG, "forceL3Enabled is on");
-        } else {
-            preference.setEnabled(false);
+            try (MediaDrm drm = new MediaDrm(WIDEVINE_UUID)) {
+                String version = drm.getPropertyString(MediaDrm.PROPERTY_VERSION);
+                if (Integer.parseInt(version.split("\\.", 2)[0]) >= 19) {
+                    isEnable = true;
+                }
+            } catch (Exception ex) {
+                Log.e(TAG, "An exception occurred:", ex);
+            }
+        }
+
+        preference.setEnabled(isEnable);
+        if (!isEnable) {
             // In case of flag rollback, the controller should be unchecked.
             WidevineProperties.forcel3_enabled(false);
-            Log.i(TAG, "forceL3Enabled is off");
         }
+        Log.i(TAG, "Force software crypto is " + isEnable);
         super.updateState(preference);
     }
 

@@ -210,8 +210,7 @@ abstract class PreviewSizeSeekBarController extends BasePreferenceController imp
             return;
         }
 
-        if (Flags.removeQsTooltipInSuw()
-                && mContext instanceof Activity
+        if (mContext instanceof Activity
                 && WizardManagerHelper.isAnySetupWizard(((Activity) mContext).getIntent())) {
             // Don't show QuickSettingsTooltip in Setup Wizard
             return;

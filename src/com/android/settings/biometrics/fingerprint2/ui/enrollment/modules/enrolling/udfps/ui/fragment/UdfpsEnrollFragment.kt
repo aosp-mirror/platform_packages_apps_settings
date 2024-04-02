@@ -17,6 +17,7 @@
 package com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.udfps.ui.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.TextView
@@ -117,7 +118,9 @@ class UdfpsEnrollFragment() : Fragment(R.layout.fingerprint_v2_udfps_enroll_enro
           }
         }
         viewLifecycleOwner.lifecycleScope.launch {
-          viewModel.udfpsEvent.collect { udfpsEnrollView.onUdfpsEvent(it) }
+          viewModel.udfpsEvent.collect {
+           Log.d(TAG, "EnrollEvent $it")
+            udfpsEnrollView.onUdfpsEvent(it) }
         }
 
         viewLifecycleOwner.lifecycleScope.launch {

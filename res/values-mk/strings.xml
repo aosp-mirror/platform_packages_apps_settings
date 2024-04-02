@@ -267,14 +267,10 @@
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Стандардно време"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"Изберете според регион"</string>
     <string name="zone_menu_by_offset" msgid="1257702747474426745">"Изберете по UTC со отстапување"</string>
-    <!-- no translation found for time_feedback_category_title (5942621686512255208) -->
-    <skip />
-    <!-- no translation found for keywords_time_feedback_category (4553921538559830393) -->
-    <skip />
-    <!-- no translation found for time_feedback_title (7720948068042783614) -->
-    <skip />
-    <!-- no translation found for keywords_time_feedback (929965356597294030) -->
-    <skip />
+    <string name="time_feedback_category_title" msgid="5942621686512255208">"Повратни информации"</string>
+    <string name="keywords_time_feedback_category" msgid="4553921538559830393">"повратни информации, грешка, време, зона, временска зона"</string>
+    <string name="time_feedback_title" msgid="7720948068042783614">"Повратни информации за времето"</string>
+    <string name="keywords_time_feedback" msgid="929965356597294030">"повратни информации, грешка, време, зона, временска зона"</string>
     <string name="lock_after_timeout" msgid="8682769000437403444">"Заклучи по исклучување на екранот"</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> после истекувањето на времето"</string>
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"Веднаш по исклучувањето, освен кога <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> го држи отклучен"</string>
@@ -553,8 +549,8 @@
     <string name="private_space_summary" msgid="2274405892301976238">"Чувајте ги приватните апликации заклучени и скриени"</string>
     <string name="private_space_description" msgid="4059594203775816136">"Чувајте ги приватните апликации во засебен простор што може да го скриете или заклучите"</string>
     <string name="private_space_lock_title" msgid="7230836881433350526">"Заклучување за „Приватен простор“"</string>
-    <string name="private_space_one_lock_summary" msgid="2106513606571219068">"Може да го отклучите „Приватниот простор“ исто како што го отклучувате уредот или да изберете друг начин на заклучување"</string>
-    <string name="private_space_screen_lock_title" msgid="8679383894967823163">"Користете го заклучувањето екран на уредот"</string>
+    <string name="private_space_one_lock_summary" msgid="2106513606571219068">"Може да го отклучувате „Приватниот простор“ исто како што го отклучувате уредот или да изберете друг начин на заклучување"</string>
+    <string name="private_space_screen_lock_title" msgid="8679383894967823163">"Користи заклучување екран на уредот"</string>
     <string name="private_space_biometric_title" msgid="3934339826674553174">"Отклучување со лик и отпечаток"</string>
     <string name="private_space_fingerprint_title" msgid="5989254643211889931">"Отклучување со отпечаток"</string>
     <string name="private_space_face_title" msgid="3290402865367663079">"Отклучување со лик"</string>
@@ -565,11 +561,12 @@
     <string name="private_space_screen_lock_summary" msgid="394837965365561070">"Исто како заклучувањето екран на уредот"</string>
     <string name="private_space_new_lock_title" msgid="9056139964133004094">"Да се избере ново заклучув. за „Приватен простор“?"</string>
     <string name="private_space_new_lock_message" msgid="3117703578905489206">"Ќе треба да го внесете PIN-кодот, шемата или лозинката на уредот на следниот екран"</string>
-    <string name="private_space_auto_lock_title" msgid="8663409382910601261">"Заклучување на „Приватен простор“ автоматски"</string>
+    <string name="private_space_auto_lock_title" msgid="8663409382910601261">"Автоматско заклучување на „Приватен простор“"</string>
     <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"Може да го заклучите вашиот „Приватен простор“ автоматски ако не сте го користеле уредот одреден временски период"</string>
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"При секое заклучување на уредот"</string>
     <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"По неактивност од 5 минути"</string>
-    <string name="private_space_auto_lock_never" msgid="595014527119778873">"Никогаш"</string>
+    <!-- no translation found for private_space_auto_lock_after_device_restart (288755768725895029) -->
+    <skip />
     <string name="private_space_hide_page_title" msgid="4351404195904146088">"Скриј го „Приватниот простор“ кога е заклучен"</string>
     <string name="private_space_hide_page_summary" msgid="6247773353685839242">"За да спречите други луѓе да знаат дека имате „Приватен простор“ на вашиот уред, може да го скриете од списокот со апликации"</string>
     <string name="private_space_access_header" msgid="1077082416567150819">"Пристапете до „Приватен простор“ кога е скриен"</string>
@@ -586,7 +583,7 @@
     <string name="private_space_delete_header" msgid="4594429153176776184">"Да се избрише „Приватниот простор“?"</string>
     <string name="private_space_delete_summary" msgid="3344372988408565545">"„Приватниот простор“ ќе се отстрани од вашиот уред. Ќе се избришат сите приватни апликации и податоци. Ова дејство не може да се врати."</string>
     <string name="private_space_accounts" msgid="1078277762792056395">"Следниве сметки ќе се отстранат од вашиот „Приватен простор“:"</string>
-    <string name="private_space_delete_button_label" msgid="1256981385318225002">"Бришење"</string>
+    <string name="private_space_delete_button_label" msgid="1256981385318225002">"Избриши"</string>
     <string name="private_space_confirm_deletion_header" msgid="3468651585498942977">"„Приватниот простор“ се брише…"</string>
     <string name="private_space_confirm_deletion_summary" msgid="342544588554284686">"Ова ќе трае неколку секунди"</string>
     <string name="private_space_deleted" msgid="7692240901492540053">"„Приватниот простор“ е избришан"</string>
@@ -600,20 +597,20 @@
     <string name="private_space_setup_button_label" msgid="2094882154623560585">"Постави"</string>
     <string name="private_space_setup_title" msgid="2272968244329821450">"Приватен простор"</string>
     <string name="private_space_hide_apps_summary" msgid="4418722947376042418">"Скријте ги или заклучете ги приватните апликации во засебен простор. Користете посебна сметка на Google за дополнителна безбедност."</string>
-    <string name="private_space_setup_sub_header" msgid="5454598292017819146">"Поставете го „Приватиот простор“"</string>
+    <string name="private_space_setup_sub_header" msgid="5454598292017819146">"Поставете го „Приватниот простор“"</string>
     <string name="private_space_separate_account_text" msgid="4492251315012955548"><b>"Изберете сметка на Google за „Приватен простор“"</b>\n"Користењето посебна сметка помага да се сопре синхронизираните датотеки, фотографии и е-пораки да се појавуваат надвор од вашиот простор"</string>
-    <string name="private_space_protected_lock_text" msgid="9123250938334372735"><b>"Поставување заклучување"</b>\n"Заклучете го „Приватниот простор“ за да спречите да го отвораат други луѓе"</string>
+    <string name="private_space_protected_lock_text" msgid="9123250938334372735"><b>"Поставете заклучување"</b>\n"Заклучете го просторот за да спречите да го отвораат други луѓе"</string>
     <string name="private_space_install_apps_text" msgid="5693139160766464498"><b>"Инсталирање апликации"</b>\n"Вашиот „Приватен простор“ има своја Play Store за да може лесно да инсталирате апликации."</string>
-    <string name="private_space_apps_permission_text" msgid="7030946025253366172">"Апликациите во вашиот „Приватен простор“ нема да се појават во „Управување со дозволи“, „Контролна табла за приватност“ и други поставки кога „Приватниот простор“ е заклучен.\n\nВашиот „Приватен простор“ не може да се премести на нов уред. Треба да поставите друг „Приватен простор“ ако сакате да го користите на друг уред.\n\nСекој што го поврзува вашиот уред со компјутер или инсталира штетни апликации можеби може да пристапи до вашиот „Приватен простор“."</string>
+    <string name="private_space_apps_permission_text" msgid="7030946025253366172">"Апликациите од вашиот „Приватен простор“ нема да се појавуваат во „Управувач со дозволи“, „Контролна табла за приватност“, ниту во други поставки кога „Приватниот простор“ ви е заклучен.\n\nВашиот „Приватен простор“ не може да се премести на друг уред. Ќе треба да поставите друг „Приватен простор“ ако сакате да го користите на друг уред.\n\nАко некој го поврзе вашиот уред со компјутер или инсталира штетни апликации на уредот, можеби ќе може да пристапи до вашиот „Приватен простор“."</string>
     <string name="private_space_learn_more_text" msgid="5314198983263277586">"Дознајте повеќе за „Приватен простор“"</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Се поставува „Приватен простор“…"</string>
-    <string name="private_space_notifications_hidden_title" msgid="2009112565217540581">"Известувањата од апликациите во „Приватниот простор“ се скриени кога е заклучен"</string>
-    <string name="private_space_explore_settings_title" msgid="1448128245941571654">"Истражете ги поставките за „Приватен простор“ за да го скриете „Приватниот простор“ и да поставите автоматско заклучување"</string>
-    <string name="private_space_apps_installed_title" msgid="4781838023423527730">"Задолжителните апликации се веќе инсталирани во вашиот „Приватен простор“"</string>
+    <string name="private_space_notifications_hidden_title" msgid="2009112565217540581">"Известувањата од аплик. во „Приватниот простор“ се скриени кога е заклучен"</string>
+    <string name="private_space_explore_settings_title" msgid="1448128245941571654">"Преку поставките може да го скриете „Приватниот простор“ и да поставите автоматско заклучување"</string>
+    <string name="private_space_apps_installed_title" msgid="4781838023423527730">"Задолжителните апликации се веќе инсталирани во „Приватен простор“"</string>
     <string name="private_space_error_screen_title" msgid="739381738044418346">"Не можеше да се постави „Приватен простор“"</string>
     <string name="private_space_tryagain_label" msgid="8305362615231738367">"Обиди се пак"</string>
-    <string name="private_space_lockscreen_title" msgid="6034864097861137509">"Да се користи закл. екран за откл. „Прив. прост.“?"</string>
-    <string name="private_space_lockscreen_summary" msgid="430569465080645805">"Може да го отклучите „Приватен простор“ исто како што го отклучувате уредот или да изберете друг начин на заклучување"</string>
+    <string name="private_space_lockscreen_title" msgid="6034864097861137509">"Да се користи заклучување екран за отклучување „Приватен простор“?"</string>
+    <string name="private_space_lockscreen_summary" msgid="430569465080645805">"Може да го отклучувате „Приватниот простор“ исто како што го отклучувате уредот или да изберете друг начин на заклучување"</string>
     <string name="private_space_use_screenlock_label" msgid="9182153443192032782">"Користете заклучување екран"</string>
     <string name="private_space_set_lock_label" msgid="1790408277477408475">"Изберете нов начин на заклучување"</string>
     <string name="private_space_success_title" msgid="4351904015352046118">"Готово!"</string>
@@ -633,8 +630,8 @@
     <string name="private_space_notifications_title" msgid="3456249671149740404">"Чувствителни известувања на заклучениот екран"</string>
     <string name="private_space_sensitive_notifications_description" msgid="1466031201599700985">"Прикажување на чувствителните содржини кога „Приватниот простор“ е отклучен"</string>
     <string name="private_space_gaia_education_title" msgid="3787414895669666563">"Создајте сметка на Google за да ви помогне да ја зачувате приватноста на вашите податоци"</string>
-    <string name="private_space_gaia_education_description" msgid="1592753570023264559">"На следниот екран, може да се најавите на сметка за да ја користите со вашиот „Приватен простор“"</string>
-    <string name="private_space_gaia_education_header" msgid="7835879839637613495"><b>"Создајте посебна сметка за да спречите податоците да излезат од „Приватниот простор“, како:"</b></string>
+    <string name="private_space_gaia_education_description" msgid="1592753570023264559">"На следниот екран може да се најавите на сметка што ќе ја користите за вашиот „Приватен простор“"</string>
+    <string name="private_space_gaia_education_header" msgid="7835879839637613495"><b>"Создајте посебна сметка за да спречите следниве податоци да се појавуваат надвор од „Приватниот простор“:"</b></string>
     <string name="private_space_gaia_education_bullet1" msgid="641701340908301992">"Синхронизирани фотографии, датотеки, е-пораки, контакти, настани во календарот и друго"</string>
     <string name="private_space_gaia_education_bullet2" msgid="3679859681253672976">"Историја на преземање апликации и препораки"</string>
     <string name="private_space_gaia_education_bullet3" msgid="1703614225321289717">"Историја на прелистување, обележувачи и зачувани лозинки"</string>
@@ -681,9 +678,9 @@
     <string name="unlock_set_unlock_password_title" msgid="2559842616268607041">"Лозинка"</string>
     <string name="unlock_set_do_later_title" msgid="6565575303676064364">"Не сега"</string>
     <string name="current_screen_lock" msgid="1367883977261098017">"Тековно заклучување на екранот"</string>
-    <string name="fingerprint_unlock_set_unlock_pattern" msgid="2229689425933043901">"Шема • отпечаток"</string>
-    <string name="fingerprint_unlock_set_unlock_pin" msgid="7979848492740627674">"PIN • отпечаток"</string>
-    <string name="fingerprint_unlock_set_unlock_password" msgid="6207676267295036963">"Лозинка • отпечаток"</string>
+    <string name="fingerprint_unlock_set_unlock_pattern" msgid="2229689425933043901">"Шема • Отпечаток"</string>
+    <string name="fingerprint_unlock_set_unlock_pin" msgid="7979848492740627674">"PIN • Отпечаток"</string>
+    <string name="fingerprint_unlock_set_unlock_password" msgid="6207676267295036963">"Лозинка • Отпечаток"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="7631242444064287891">"Продолжете без отпечаток"</string>
     <string name="face_unlock_set_unlock_pattern" msgid="4206669838203096608">"Шема • лик"</string>
     <string name="face_unlock_set_unlock_pin" msgid="9034912683791069602">"PIN • лик"</string>
@@ -1339,7 +1336,7 @@
     <string name="status_eid" msgid="7532406028683438634">"EID"</string>
     <string name="eid_multi_sim" msgid="9087924808336397804">"EID (отвор за SIM <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>)"</string>
     <string name="imei_multi_sim" msgid="9001570420423929507">"IMEI (отвор за SIM <xliff:g id="IMEI_SLOT_ID">%1$d</xliff:g>)"</string>
-    <string name="imei_multi_sim_primary" msgid="7914653040843734282">"IMEI (отвор за SIM-картичка <xliff:g id="IMEI_SLOT_ID_PRIMARY">%1$d</xliff:g>) (примарна)"</string>
+    <string name="imei_multi_sim_primary" msgid="7914653040843734282">"IMEI (отвор за SIM <xliff:g id="IMEI_SLOT_ID_PRIMARY">%1$d</xliff:g>) (примарна)"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"За преглед, изберете зачувана мрежа"</string>
     <string name="status_imei" msgid="5719752369250485007">"IMEI"</string>
     <string name="status_imei_sv" msgid="6908985558726440951">"IMEI SV"</string>
@@ -1439,8 +1436,7 @@
     <string name="battery_level_title" msgid="1371765298786083448">"Ниво на батерија"</string>
     <string name="communal_settings_title" msgid="2845678473945902115">"Заедница"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"Заеднички поставки"</string>
-    <!-- no translation found for satellite_setting (4171265534842459910) -->
-    <skip />
+    <string name="satellite_setting" msgid="4171265534842459910">"Размена на пораки преку сателит"</string>
     <string name="apn_settings" msgid="4295467389400441299">"Поставки за APN"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Изменете ја пристапната точка"</string>
     <string name="apn_add" msgid="9069613192201630934">"Додајте пристапна точка"</string>
@@ -1759,8 +1755,7 @@
     <string name="enable_text" msgid="8570798764647110430">"Овозможи"</string>
     <string name="clear_user_data_text" msgid="6773186434260397947">"Избриши ги податоците"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"Деинсталирај ажурирања"</string>
-    <!-- no translation found for app_restricted_settings_lockscreen_title (796413224212436400) -->
-    <skip />
+    <string name="app_restricted_settings_lockscreen_title" msgid="796413224212436400">"Дозволете ограничени дозволи"</string>
     <string name="auto_launch_enable_text" msgid="8912714475823807798">"Некои од активностите што ги избравте стандардно се отвораат во апликацијава."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"Сте одбрале да ѝ дозволите за апликацијата да создава виџети и да пристапува кон нивните податоци."</string>
     <string name="auto_launch_disable_text" msgid="502648841250936209">"Нема поставени стандардни вредности."</string>
@@ -2028,11 +2023,9 @@
     <string name="color_contrast_preview_email_send_date" msgid="2108702726171600080">"Пред 2 дена"</string>
     <string name="color_contrast_preview_email_badge" msgid="4845484039428505392">"Ќе проверите?"</string>
     <string name="color_contrast_preview_email_title" msgid="198712116139754823">"Извештај за бизнис-патување"</string>
-    <!-- no translation found for color_contrast_preview_email_body (2714343154965937945) -->
-    <skip />
+    <string name="color_contrast_preview_email_body" msgid="2714343154965937945">"За дополнителна помош, контактирајте со мене или Хелен. Извештајов ќе биде"</string>
     <string name="color_contrast_preview_email_attachment_name" msgid="852407311884814746">"Трошоци на клиентот"</string>
-    <!-- no translation found for color_contrast_about_title (5939566801408667867) -->
-    <skip />
+    <string name="color_contrast_about_title" msgid="5939566801408667867">"За контраст на бои"</string>
     <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"Затемнете го екранот"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Контроли за интеракција"</string>
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"Контроли за тајминг"</string>
@@ -2061,6 +2054,8 @@
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"Лупата го следи текстот додека пишувате"</string>
     <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"Остави вклучено при менување апликации"</string>
     <string name="accessibility_screen_magnification_always_on_summary" msgid="306908451430863049">"Лупата останува вклучена и одзумира кога менувате апликации"</string>
+    <!-- no translation found for accessibility_screen_magnification_always_on_unavailable_summary (3844732482037416038) -->
+    <skip />
     <string name="accessibility_screen_magnification_joystick_title" msgid="1803769708582404964">"Џојстик"</string>
     <string name="accessibility_screen_magnification_joystick_summary" msgid="4640300148573982720">"Активирајте и движете ја лупата со џојстикот на екранот. Допрете и задржете, а потоа влечете го џојстикот за да ја контролирате лупата. Допрете и повлечете за да го поместите самиот џојстик."</string>
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"За зголемување"</string>
@@ -2109,89 +2104,59 @@
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;За да зумирате:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Употребете кратенка за почеток на зголемувањето&lt;br/&gt; {1,number,integer}. Допрете го екранот&lt;br/&gt; {2,number,integer}. Повлечете со два прста за да се движите низ екранот&lt;br/&gt; {3,number,integer}. Штипнете со два прста за да го приспособите зумот&lt;br/&gt; {4,number,integer}. Употребете кратенка за крај на зголемувањето&lt;br/&gt;&lt;br/&gt;&lt;b&gt;За да зумирате привремено:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Погрижете се типот на зголемувањето да биде поставен на цел екран&lt;br/&gt; {1,number,integer}. Употребете кратенка за почеток на зголемувањето&lt;br/&gt; {2,number,integer}. Допрете и задржете каде било на екранот&lt;br/&gt; {3,number,integer}. Повлечете со прст за да се движите низ екранот&lt;br/&gt; {4,number,integer}. Подигнете го прстот за крај на зголемувањето"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Кога е вклучено зумирањето, може да зумирате на екранот.\n\n"<b>"За да зумирате"</b>", стартувајте го зголемувањето, па допрете каде било на екранот.\n"<ul><li>"Повлечете со два или повеќе прсти за да лизгате"</li>\n<li>"Штипнете со два или повеќе прсти за да го приспособите зумот"</li></ul>\n\n<b>"За да зумирате привремено"</b>", стартувајте го зголемувањето, а потоа допрете и задржете каде било на екранот.\n"<ul><li>"Повлечете за да се движите околу екранот"</li>\n<li>"Подигнете го прстот за да одзумирате"</li></ul>\n\n"Не може да зумирате на тастатурата или на лентата за навигација."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Страница <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> од <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
-    <!-- no translation found for accessibility_tutorial_dialog_title_button (1924337057649065884) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_title_volume (1032323517963429981) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_title_triple (5529704884360240365) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_title_two_finger_double (5749704453829390283) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"Кратенка за копчето за пристапност"</string>
+    <string name="accessibility_tutorial_dialog_title_volume" msgid="1032323517963429981">"Кратенка за копчињата за јачина на звук"</string>
+    <string name="accessibility_tutorial_dialog_title_triple" msgid="5529704884360240365">"Кратенка за троен допир"</string>
+    <string name="accessibility_tutorial_dialog_title_two_finger_double" msgid="5749704453829390283">"Кратенка за двоен допир со %1$d прста"</string>
     <string name="accessibility_tutorial_dialog_title_quick_setting" msgid="2905083277641794558">"Кратенка за „Брзи поставки“"</string>
-    <!-- no translation found for accessibility_tutorial_dialog_title_gesture (4541649734549409614) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_title_gesture" msgid="4541649734549409614">"Кратенка за движењето за пристапност"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="6800684770875867559">"Користете го движењето за пристапност"</string>
-    <!-- no translation found for accessibility_tutorial_dialog_message_button (8977286776192770246) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_floating_button (6631371483819355514) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_volume (3785791536286606664) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_message_button" msgid="8977286776192770246">"За да ја користите функцијава, допрете го копчето за пристапност <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> во долниот дел на екранот.\n\nЗа префрлање меѓу функциите, допрете и задржете го копчето за пристапност."</string>
+    <string name="accessibility_tutorial_dialog_message_floating_button" msgid="6631371483819355514">"За да ја користите функцијава, допрете го копчето за пристапност на екранот"</string>
+    <string name="accessibility_tutorial_dialog_message_volume" msgid="3785791536286606664">"За да ја користите функцијава, притиснете и задржете ги двете копчиња за јачина на звук"</string>
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"За почеток и крај на зголемувањето, допрете трипати каде било на екранот."</string>
-    <!-- no translation found for accessibility_tutorial_dialog_tripletap_instruction (7549293553589934) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_twofinger_doubletap_instruction (1007756360115974649) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_quick_setting (3715446725334547432) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_shortcut_unavailable_in_suw (3847728530771929959) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_tripletap_instruction" msgid="7549293553589934">"За да го започнете и сопрете зголемувањето, допрете го екранот брзо %1$d пати"</string>
+    <string name="accessibility_tutorial_dialog_twofinger_doubletap_instruction" msgid="1007756360115974649">"За да го започнете и сопрете зголемувањето, допрете го екранот двапати брзо со %1$d прста."</string>
+    <string name="accessibility_tutorial_dialog_message_quick_setting" msgid="3715446725334547432">"{count,plural, =1{За да ја користите функцијава, повлечете надолу од горниот дел на екранот. Потоа најдете ја плочката за {featureName}.}one{За да ја користите функцијава, повлечете надолу од горниот дел на екранот со # прст. Потоа најдете ја плочката за {featureName}.}other{За да ја користите функцијава, повлечете надолу од горниот дел на екранот со # прста. Потоа најдете ја плочката за {featureName}.}}"</string>
+    <string name="accessibility_tutorial_dialog_shortcut_unavailable_in_suw" msgid="3847728530771929959">"Кратенкава ќе биде достапна откако ќе го довршите поставувањето на уредот."</string>
     <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"За да ја користите функцијава, повлечете нагоре од дното на екранот со два прста.\n\nЗа да се префрлите на друга функција, повлечете нагоре со два прста и задржете."</string>
-    <!-- no translation found for accessibility_tutorial_dialog_gesture_shortcut_instruction (7349950768250852308) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_gesture_shortcut_instruction" msgid="7349950768250852308">"{count,plural, =1{За да ја користите функцијава, повлечете нагоре од долниот дел на екранот}one{За да ја користите функцијава, повлечете нагоре со # прст од долниот дел на екранот}other{За да ја користите функцијава, повлечете нагоре со # прста од долниот дел на екранот}}"</string>
     <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="8142847782708562793">"За да ја користите функцијава, повлечете нагоре од дното на екранот со три прста.\n\nЗа префрлање помеѓу функциите, повлечете нагоре со три прста и задржете."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"За да користите функција за пристапност, повлечете нагоре од дното на екранот со два прста.\n\nЗа да се префрлите на друга функција, повлечете нагоре со два прста и задржете."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="7292969929578621958">"За да користите функција за пристапност, повлечете нагоре од дното на екранот со три прста.\n\nЗа префрлање помеѓу функциите, повлечете нагоре со три прста и задржете."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Сфатив"</string>
-    <!-- no translation found for accessibility_tutorial_dialog_link_button (13364319079385020) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_configure_software_shortcut_type (8041105223988170653) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_link_button" msgid="13364319079385020">"Приспособете го копчето"</string>
+    <string name="accessibility_tutorial_dialog_configure_software_shortcut_type" msgid="8041105223988170653">"Повеќе опции"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Кратенка за: <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="48978719406821294">"копче за пристапност"</string>
     <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="7346399253904683940">"движење за пристапност"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Повлечете нагоре со два прста"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Повлечете нагоре со три прста"</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_software (6505512764022389951) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_floating_button (6266489864614886247) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_software_by_gesture (4775049370625630546) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software (8315934725362849788) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_title_software" msgid="6505512764022389951">"Копче за пристапност"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_floating_button" msgid="6266489864614886247">"Допрете го лебдечкото копче"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="4775049370625630546">"Движење за пристапност"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="8315934725362849788">"Допрете го копчето за пристапност <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> во долниот дел на екранот. За префрлање меѓу функциите, допрете и задржете го копчето за пристапност."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Повлечете нагоре од дното на екранот со два прста.\n\nЗа да се префрлите на друга функција, повлечете нагоре со два прста и задржете."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Повлечете нагоре од дното на екранот со три прста.\n\nЗа префрлање помеѓу функциите, повлечете нагоре со три прста и задржете."</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_gesture (2081123009255579884) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_summary_gesture" msgid="2081123009255579884">"{count,plural, =1{Повлечете нагоре од долниот дел на екранот. За префрлање меѓу функциите, повлечете нагоре и задржете.}one{Повлечете нагоре со # прст од долниот дел на екранот. За префрлање меѓу функциите, повлечете нагоре со # прст и задржете.}other{Повлечете нагоре со # прста од долниот дел на екранот. За префрлање меѓу функциите, повлечете нагоре со # прста и задржете.}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="4459254227203203324"><annotation id="link">"Повеќе опции"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"Дознајте повеќе за <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"Брзи поставки"</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_quick_settings (739883998754165940) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_quick_settings_suw (4216628328191609785) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="739883998754165940">"{count,plural, =1{Повлечете надолу од горниот дел на екранот}one{Повлечете надолу со # прст од горниот дел на екранот}other{Повлечете надолу со # прста од горниот дел на екранот}}"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_quick_settings_suw" msgid="4216628328191609785">"{count,plural, =1{Повлечете надолу од горниот дел на екранот. Кратенкава ќе биде достапна откако ќе го довршите поставувањето на уредот.}one{Повлечете надолу со # прст од горниот дел на екранот. Кратенкава ќе биде достапна откако ќе го довршите поставувањето на уредот.}other{Повлечете надолу со # прста од горниот дел на екранот. Кратенкава ќе биде достапна откако ќе го довршите поставувањето на уредот.}}"</string>
     <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"Брзи поставки"</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_hardware (844089763968552142) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_hardware_keyword (2483152542320987022) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="844089763968552142">"Копчиња за јачина на звук"</string>
+    <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"копчиња за јачина на звук"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Притиснете и задржете ги двете копчиња за јачина на звук"</string>
     <string name="accessibility_shortcut_edit_dialog_title_two_finger_double_tap" msgid="2271778556854020996">"Допрете го екранот двапати со два прста"</string>
-    <!-- no translation found for accessibility_shortcut_edit_screen_title_two_finger_double_tap (8952595692906527694) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_screen_summary_two_finger_double_tap (385404127425496362) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_screen_title_triple_tap (3314488747597058942) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_screen_summary_triple_tap (4839204951599629871) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_two_finger_double_tap_keyword (6271718715836961167) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_screen_title_two_finger_double_tap" msgid="8952595692906527694">"Двоен допир со %1$d прста"</string>
+    <string name="accessibility_shortcut_edit_screen_summary_two_finger_double_tap" msgid="385404127425496362">"Брзо допрете го екранот двапати со %1$d прста"</string>
+    <string name="accessibility_shortcut_edit_screen_title_triple_tap" msgid="3314488747597058942">"Троен допир"</string>
+    <string name="accessibility_shortcut_edit_screen_summary_triple_tap" msgid="4839204951599629871">"Брзо допрете го екранот %1$d пати. Со ова може да се забави уредот."</string>
+    <string name="accessibility_shortcut_two_finger_double_tap_keyword" msgid="6271718715836961167">"Двоен допир со %1$d прста"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_two_finger_double_tap" msgid="8262165091808318538">"Брзо допрете го екранот {0,number,integer} пати со два прста"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"Троен допир на екранот"</string>
-    <!-- no translation found for accessibility_shortcut_triple_tap_keyword (5359347130888464334) -->
-    <skip />
+    <string name="accessibility_shortcut_triple_tap_keyword" msgid="5359347130888464334">"троен допир"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="2102327956423320536">"Брзо допрете го екранот {0,number,integer} пати Оваа кратенка може да го забави уредот"</string>
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Напредно"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"Копчето за „Пристапност“ е поставено на <xliff:g id="SERVICE">%1$s</xliff:g>. За да користите зголемување, допрете го и задржете го копчето за „Пристапност“, а потоа изберете „Зголемување“."</string>
@@ -2492,7 +2457,7 @@
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"Апликацијата може да се однесува необично ако ја ограничите нејзината активност во заднина"</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"Апликацијава не е оптимизирана и не може да се ограничи.\n\nЗа да ја ограничите, прво вклучете оптимизација на батеријата."</string>
     <string name="manager_battery_usage_category_title" msgid="1493303237531629961">"Управувајте со користењето на батеријата"</string>
-    <string name="manager_battery_usage_allow_background_usage_title" msgid="6294649996820358852">"Овозможете користење во заднина"</string>
+    <string name="manager_battery_usage_allow_background_usage_title" msgid="6294649996820358852">"Дозволете користење во заднина"</string>
     <string name="manager_battery_usage_allow_background_usage_summary" msgid="8021153755201340819">"Овозможете за ажурирања во реално време, оневозможете за да заштедите батерија"</string>
     <string name="manager_battery_usage_unrestricted_title" msgid="2426486290463258032">"Неограничено"</string>
     <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"Оптимизирано"</string>
@@ -3293,7 +3258,7 @@
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"NFC, ознака, читач"</string>
     <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"тастатура, хаптика, вибрации,"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Јачина на звук, вибрации и „Не вознемирувај“"</string>
-    <string name="media_volume_option_title" msgid="5966569685119475630">"Јачина на аудио/видео звук"</string>
+    <string name="media_volume_option_title" msgid="5966569685119475630">"Јачина на звук за аудио/видео"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Јачина на звук на емитување"</string>
     <string name="call_volume_option_title" msgid="1461105986437268924">"Јачина на звук за повици"</string>
     <string name="alarm_volume_option_title" msgid="6398641749273697140">"Јачина на звук за аларм"</string>
@@ -4466,6 +4431,8 @@
     <string name="credman_confirmation_change_provider_positive_button" msgid="7732302992885116967">"Промени"</string>
     <string name="credman_limit_error_msg_title" msgid="1525814645803612135">"Може да имате само 5 вклучени услуги"</string>
     <string name="credman_limit_error_msg" msgid="2521803280130310063">"Исклучете барем 1 услуга за да додадете друга"</string>
+    <!-- no translation found for credman_main_settings_intro_text (4981603639240772620) -->
+    <skip />
     <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"%1$s го користи она што е на вашиот екран за да одреди што може автоматски да се пополни."</string>
     <string name="credman_error_message_title" msgid="4099557206946333568">"Ограничување за услуги за лозинки, криптографски клучеви и податоци"</string>
     <string name="credman_error_message" msgid="8334797097200415449">"Истовремено може да имате најмногу 5 активни услуги за лозинки, криптографски клучеви и податоци. Исклучете некоја од услугите за да додадете повеќе."</string>
@@ -4541,8 +4508,7 @@
     <string name="media_output_label_title" msgid="4139048973886819148">"Пуштај <xliff:g id="LABEL">%s</xliff:g> на"</string>
     <string name="media_output_title_without_playing" msgid="3339321669132875821">"Аудиото ќе се репродуцира на"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"Овој уред"</string>
-    <!-- no translation found for media_output_audio_sharing (6531742594884809737) -->
-    <skip />
+    <string name="media_output_audio_sharing" msgid="6531742594884809737">"Споделување аудио"</string>
     <string name="media_out_summary_ongoing_call_state" msgid="475188726850090363">"Недостапно за време на повици"</string>
     <string name="take_call_on_title" msgid="1159417893879946757">"Прифатете повик на"</string>
     <string name="cannot_change_apn_toast" msgid="296540724089240405">"Ова APN не може да се промени."</string>
@@ -4674,8 +4640,7 @@
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"Вашиот телефон ќе се поврзе на сателит автоматски. За најдобра врска, погрижете се да имате јасен поглед кон небото."</string>
     <string name="title_supported_service" msgid="4275535165812691571">"Откако телефонот ќе ви се поврзе на сателит"</string>
     <string name="summary_supported_service" msgid="4320535903444834786">"Може да испраќате пораки до сите, меѓу кои и службите за итни случаи. Вашиот телефон повторно ќе се поврзе на мобилна мрежа кога ќе биде достапна."</string>
-    <!-- no translation found for satellite_setting_summary_more_information (7729454610548016356) -->
-    <skip />
+    <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"Размената на пораки преку сателит може да трае подолго и е достапна само во некои области. Временските услови и одредени структури може да влијаат на вашата сателитска врска. Повикувањето преку сателит не е достапно. Итните повици можеби и понатаму ќе се поврзуваат.\n\nМоже да биде потребно некое време за да се прикажат промените на сметката во „Поставки“. Контактирајте со операторот за детали."</string>
     <string name="more_about_satellite_messaging" msgid="3385673133561348509">"Дознајте повеќе за размената на пораки преку сателит"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Имиња на пристапни точки"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
@@ -4713,10 +4678,8 @@
     <string name="sim_action_turn_off" msgid="3506698692916473000">"Исклучи"</string>
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"Не може да се активира SIM-картичката"</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"Обидете се повторно да ја вклучите SIM-картичката. Ако и понатаму се соочувате со проблемот, рестартирајте го уредот."</string>
-    <!-- no translation found for sim_onboarding_dialog_starting_title (4212945803784596345) -->
-    <skip />
-    <!-- no translation found for sim_onboarding_dialog_starting_msg (8450391476631265209) -->
-    <skip />
+    <string name="sim_onboarding_dialog_starting_title" msgid="4212945803784596345">"Изберете ги поставките за SIM"</string>
+    <string name="sim_onboarding_dialog_starting_msg" msgid="8450391476631265209">"Поставете ја мобилната мрежа за користење повеќе SIM-картички на уредов"</string>
     <string name="sim_onboarding_label_sim_title" msgid="273162565849288273">"Етикетирајте ги SIM-картичките"</string>
     <string name="sim_onboarding_label_sim_msg" msgid="5105859235219529056">"Ќе ги гледате етикетиве кога упатувате повици, испраќате пораки и користите интернет, како и во „Поставки“"</string>
     <string name="sim_onboarding_label_sim_dialog_title" msgid="5839073125605286120">"Етикета на SIM-картичка"</string>
@@ -4734,10 +4697,8 @@
     <string name="sim_action_restart_dialog_msg" msgid="4737611046767629774">"За да користите 2 SIM-картички истовремено, рестартирајте го уредот, па вклучете ги двете SIM-картички"</string>
     <string name="sim_action_restart_dialog_cancel" msgid="665560106686565624">"Користи само <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="sim_onboarding_phoneNumber_data_only" msgid="8158409121949373662">"Само за интернет"</string>
-    <!-- no translation found for sim_onboarding_setup (8678504891830386486) -->
-    <skip />
-    <!-- no translation found for sim_onboarding_close (8656305651358745422) -->
-    <skip />
+    <string name="sim_onboarding_setup" msgid="8678504891830386486">"Започнете"</string>
+    <string name="sim_onboarding_close" msgid="8656305651358745422">"Затвори"</string>
     <string name="sim_onboarding_next" msgid="6415025179929475355">"Следно"</string>
     <string name="sim_onboarding_progressbar_turning_sim_on" msgid="1163318788393361574">"Се вклучува <xliff:g id="CARRIER_NAME">%1$s</xliff:g>…"</string>
     <string name="mobile_network_spn_title" msgid="3053793174495329077">"Мобилна мрежа"</string>
@@ -5171,10 +5132,10 @@
     <string name="flash_notifications_title" msgid="4490438861180492311">"Известувања со блиц"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"За известувањата со блиц"</string>
     <string name="flash_notifications_summary_off" msgid="6056282996770691461">"Исклучено"</string>
-    <string name="flash_notifications_summary_on_camera" msgid="3286405833586333730">"Вклучено / блиц на камерата"</string>
-    <string name="flash_notifications_summary_on_screen" msgid="9040640799633336219">"Вклучено / осветлување на екранот"</string>
-    <string name="flash_notifications_summary_on_camera_and_screen" msgid="2326268141063768701">"Вклучено / блиц на камерата и осветлување на екранот"</string>
-    <string name="flash_notifications_intro" msgid="8409873413480928249">"Блицот на камерата или екранот светка кога добивате известувања или кога се огласуваат аларми"</string>
+    <string name="flash_notifications_summary_on_camera" msgid="3286405833586333730">"Вклучено/Блиц од камерата"</string>
+    <string name="flash_notifications_summary_on_screen" msgid="9040640799633336219">"Вклучено/Блиц од екранот"</string>
+    <string name="flash_notifications_summary_on_camera_and_screen" msgid="2326268141063768701">"Вклучено/Блиц од камерата и од екранот"</string>
+    <string name="flash_notifications_intro" msgid="8409873413480928249">"Блицот од камерата или екранот светка кога добивате известувања или кога се огласуваат аларми"</string>
     <string name="flash_notifications_intro_without_camera_flash" msgid="6297337174487793891">"Екранот светка кога добивате известувања или кога се огласуваат аларми"</string>
     <string name="flash_notifications_note" msgid="2426125248448055075">"Користете ги известувањата со блиц претпазливо ако сте чувствителни на светлина"</string>
     <string name="flash_notifications_keywords" msgid="2458759275318514836">"блесок, светлина, нарушување на слухот, загуба на слух"</string>

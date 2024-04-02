@@ -267,14 +267,10 @@
     <string name="zone_time_type_standard" msgid="6865420715430680352">"डिफल्ट समय"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"क्षेत्रका आधारमा चयन गर्नुहोस्"</string>
     <string name="zone_menu_by_offset" msgid="1257702747474426745">"UTC अफसेटका आधारमा चयन गर्नुहोस्‌"</string>
-    <!-- no translation found for time_feedback_category_title (5942621686512255208) -->
-    <skip />
-    <!-- no translation found for keywords_time_feedback_category (4553921538559830393) -->
-    <skip />
-    <!-- no translation found for time_feedback_title (7720948068042783614) -->
-    <skip />
-    <!-- no translation found for keywords_time_feedback (929965356597294030) -->
-    <skip />
+    <string name="time_feedback_category_title" msgid="5942621686512255208">"प्रतिक्रिया"</string>
+    <string name="keywords_time_feedback_category" msgid="4553921538559830393">"प्रतिक्रिया, त्रुटि, समय, क्षेत्र, प्रामाणिक समय"</string>
+    <string name="time_feedback_title" msgid="7720948068042783614">"समयबारे प्रतिक्रिया पठाउनुहोस्"</string>
+    <string name="keywords_time_feedback" msgid="929965356597294030">"प्रतिक्रिया, त्रुटि, समय, क्षेत्र, प्रामाणिक समय"</string>
     <string name="lock_after_timeout" msgid="8682769000437403444">"स्क्रिन टाइमआउटपछि लक गरियोस्"</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> टाइमआउट पछि"</string>
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> ले अनलक अवस्थामा राखेको बेलाबाहेक टाइमआउटपछि तुरुन्तै"</string>
@@ -569,7 +565,8 @@
     <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"तपाईंले केही समयसम्म आफ्नो डिभाइस प्रयोग नगर्दा उक्त डिभाइसमा भएको निजी स्पेस स्वतः लक हुने बनाउन सक्नुहुन्छ"</string>
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"डिभाइस लक हुँदैपिच्छे"</string>
     <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"५ मिनेटसम्म निष्क्रिय भएपछि"</string>
-    <string name="private_space_auto_lock_never" msgid="595014527119778873">"कहिल्यै पनि होइन"</string>
+    <!-- no translation found for private_space_auto_lock_after_device_restart (288755768725895029) -->
+    <skip />
     <string name="private_space_hide_page_title" msgid="4351404195904146088">"निजी स्पेस लक गरिएको बेलामा सो स्पेस लुकाउनुहोस्"</string>
     <string name="private_space_hide_page_summary" msgid="6247773353685839242">"अन्य मानिसहरूलाई तपाईंको डिभाइसमा निजी स्पेस छ भन्ने कुरा थाहा नदिन तपाईं आफ्नो एपको सूचीबाट उक्त स्पेस लुकाउन सक्नुहुन्छ"</string>
     <string name="private_space_access_header" msgid="1077082416567150819">"निजी स्पेस लुकाइएका बेला उक्त स्पेस एक्सेस गर्नुहोस्"</string>
@@ -601,9 +598,9 @@
     <string name="private_space_setup_title" msgid="2272968244329821450">"निजी स्पेस"</string>
     <string name="private_space_hide_apps_summary" msgid="4418722947376042418">"निजी एपहरू छुट्टै स्पेसमा लुकाउनुहोस् वा लक गर्नुहोस्। थप सुरक्षाका लागि विशेष Google खाता प्रयोग गर्नुहोस्।"</string>
     <string name="private_space_setup_sub_header" msgid="5454598292017819146">"आफ्नो निजी स्पेस सेटअप गर्नुहोस्"</string>
-    <string name="private_space_separate_account_text" msgid="4492251315012955548"><b>"तपाईंको स्पेसका लागि Google खाता छनौट गर्नुहोस्"</b>\n"विशेष खाता प्रयोग गर्दा तपाईंको स्पेस बाहिर देखिने सिंक गरिएको फाइल, फोटो र इमेलहरू रोक्न मद्दत गर्छ"</string>
-    <string name="private_space_protected_lock_text" msgid="9123250938334372735"><b>"लक सेटअप गर्नुहोस्"</b>\n"अरू मान्छेहरूले तपाईंको स्पेस खोल्न नसकोस् भन्नाका लागि उक्त स्पेस लक गर्नुहोस्"</string>
-    <string name="private_space_install_apps_text" msgid="5693139160766464498"><b>"एपहरू इन्स्टल गर्नुहोस्"</b>\n"तपाईंले सजिलैसँग एप इन्स्टल गर्न सक्नुहोस् भन्नाका लागि तपाईंको निजी स्पेसमा आफ्नै Play स्टोर छ।"</string>
+    <string name="private_space_separate_account_text" msgid="4492251315012955548"><b>"आफ्नो स्पेसका लागि Google खाता छनौट गर्नुहोस्"</b>\n"तपाईंले विशेष खाता प्रयोग गर्नुभयो भने तपाईं आफ्नो स्पेस बाहिर देखिने सिंक गरिएको फाइल, फोटो र इमेलहरू रोक्न सक्नुहुन्छ।"</string>
+    <string name="private_space_protected_lock_text" msgid="9123250938334372735"><b>"लक सेटअप गर्नुहोस्"</b>\n"अरू मान्छेले तपाईंको स्पेस खोल्न नसकून् भन्नाका लागि उक्त स्पेस लक गर्नुहोस्"</string>
+    <string name="private_space_install_apps_text" msgid="5693139160766464498"><b>"एपहरू इन्स्टल गर्नुहोस्"</b>\n"तपाईंले सजिलैसँग एप इन्स्टल गर्न सक्नुहोस् भन्नाका लागि तपाईंको निजी स्पेसमै Play स्टोर हुन्छ।"</string>
     <string name="private_space_apps_permission_text" msgid="7030946025253366172">"तपाईंको निजी स्पेस लक गरिएका बेला यसमा भएका एपहरू अनुमति व्यवस्थापन, गोपनीयतासम्बन्धी ड्यासबोर्ड र अन्य सेटिङमा देखिने छैनन्।\n\nतपाईंको निजी स्पेस सारेर अर्को डिभाइसमा लैजान सकिँदैन। तपाईं अर्को डिभाइसमा निजी स्पेस प्रयोग गर्न चाहनुहुन्छ भने तपाईंले अर्को डिभाइसमा निजी स्पेस सेटअप गर्नु पर्ने हुन्छ।\n\nतपाईंको डिभाइस कम्प्युटरमा कनेक्ट गर्ने वा तपाईंको डिभाइसमा हानिकारक एपहरू इन्स्टल गर्ने सबै जना तपाईंको निजी स्पेस एक्सेस गर्न सक्ने छन्।"</string>
     <string name="private_space_learn_more_text" msgid="5314198983263277586">"निजी स्पेसका बारेमा थप जान्नुहोस्"</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"निजी स्पेस सेटअप गरिँदै छ…"</string>
@@ -1439,8 +1436,7 @@
     <string name="battery_level_title" msgid="1371765298786083448">"ब्याट्री स्तर"</string>
     <string name="communal_settings_title" msgid="2845678473945902115">"सामुदायिक"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"समुदायसम्बन्धी सेटिङ"</string>
-    <!-- no translation found for satellite_setting (4171265534842459910) -->
-    <skip />
+    <string name="satellite_setting" msgid="4171265534842459910">"स्याटलाइटमार्फत म्यासेज पठाउने सुविधा"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APNs"</string>
     <string name="apn_edit" msgid="2003683641840248741">"एक्सेस पोइन्ट सम्पादन गर्नुहोस्"</string>
     <string name="apn_add" msgid="9069613192201630934">"एक्सेस पोइन्ट हाल्नुहोस्"</string>
@@ -1603,7 +1599,7 @@
     <string name="license_title" msgid="8745742085916617540">"लाइसेन्स"</string>
     <string name="module_license_title" msgid="8705484239826702828">"Google Play सिस्टम अपडेट गर्ने इजाजतपत्र"</string>
     <string name="terms_title" msgid="2071742973672326073">"सेवाका सर्तहरू"</string>
-    <string name="webview_license_title" msgid="5832692241345780517">"प्रणाली वेबभ्यु लाइसेन्स"</string>
+    <string name="webview_license_title" msgid="5832692241345780517">"सिस्टम वेबभ्यु लाइसेन्स"</string>
     <string name="wallpaper_attributions" msgid="4323659759250650736">"वालपेपरका श्रेय"</string>
     <string name="wallpaper_attributions_values" msgid="987277439026021925">"स्याटेलाइट फोटो उपलब्ध गराउने संस्था::\n©२०१४ CNES / Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_manual_activity_title" msgid="1682978148920788484">"म्यानुअल"</string>
@@ -1759,8 +1755,7 @@
     <string name="enable_text" msgid="8570798764647110430">"अन गर्नुहोस्"</string>
     <string name="clear_user_data_text" msgid="6773186434260397947">"भण्डारण खाली गर्नुहोस्"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"अद्यावधिकहरू अनइन्स्टल गर्नुहोस्"</string>
-    <!-- no translation found for app_restricted_settings_lockscreen_title (796413224212436400) -->
-    <skip />
+    <string name="app_restricted_settings_lockscreen_title" msgid="796413224212436400">"प्रतिबन्धित अनुमतिहरू दिनुहोस्"</string>
     <string name="auto_launch_enable_text" msgid="8912714475823807798">"तपाईंले चयन गर्नुभएका केही क्रियाकलापहरू यो एपमा डिफल्ट रूपमा खुल्छन्।"</string>
     <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"तपाईंले यो एपलाई विजेटहरू सिर्जना गर्न र तिनीहरूको डेटा पहुँच गर्न अनुमतिको लागि छान्नुभयो।"</string>
     <string name="auto_launch_disable_text" msgid="502648841250936209">"कुनै पनि डिफल्ट कारबाही सेट गरिएको छैन।"</string>
@@ -2028,11 +2023,9 @@
     <string name="color_contrast_preview_email_send_date" msgid="2108702726171600080">"२ दिनअघि"</string>
     <string name="color_contrast_preview_email_badge" msgid="4845484039428505392">"फलो अप गर्ने हो?"</string>
     <string name="color_contrast_preview_email_title" msgid="198712116139754823">"व्यावसायिक यात्रासम्बन्धी रिपोर्ट"</string>
-    <!-- no translation found for color_contrast_preview_email_body (2714343154965937945) -->
-    <skip />
+    <string name="color_contrast_preview_email_body" msgid="2714343154965937945">"थप सहायता चाहिएमा कृपया मलाई वा Helen लाई सम्पर्क गर्नुहोस्। यो रिपोर्ट"</string>
     <string name="color_contrast_preview_email_attachment_name" msgid="852407311884814746">"क्लाइन्टसँग सम्बन्धित खर्चहरू"</string>
-    <!-- no translation found for color_contrast_about_title (5939566801408667867) -->
-    <skip />
+    <string name="color_contrast_about_title" msgid="5939566801408667867">"कलर कन्ट्रास्टसम्बन्धी जानकारी"</string>
     <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"स्क्रिन अझ अँध्यारो बनाउनुहोस्"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"अन्तर्क्रियासम्बन्धी सेटिङ"</string>
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"समयसम्बन्धी कन्ट्रोल"</string>
@@ -2061,6 +2054,8 @@
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"म्याग्निफायरले तपाईंले टेक्स्ट टाइप गर्दै गर्दा उक्त टेक्स्ट जुम इन गरेर देखाउँछ"</string>
     <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"एपहरू अदलबदल गर्दा अन नै होस्"</string>
     <string name="accessibility_screen_magnification_always_on_summary" msgid="306908451430863049">"तपाईंले एपहरू अदलबदल गर्दा म्याग्निफायर अन नै रहन्छ र यसले स्क्रिनमा भएको सामग्री जुम आउट गर्छ"</string>
+    <!-- no translation found for accessibility_screen_magnification_always_on_unavailable_summary (3844732482037416038) -->
+    <skip />
     <string name="accessibility_screen_magnification_joystick_title" msgid="1803769708582404964">"जोयस्टिक"</string>
     <string name="accessibility_screen_magnification_joystick_summary" msgid="4640300148573982720">"स्क्रिनमा देखाइएको जोयस्टिकका मद्दतले म्याग्निफायर एक्टिभेट गर्नुहोस् र त्यसलाई यताउता सार्नुहोस्। ट्याप एन्ड होल्ड गर्नुहोस् र म्याग्निफायर यताउता सार्न जोयस्टिक ड्र्याग गर्नुहोस्। तपाईं जोयस्टिक नै सार्न चाहनुहुन्छ भने ट्याप एन्ड ड्र्याग गर्नुहोस्।"</string>
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"जुम इन गर्ने सुविधाका बारेमा"</string>
@@ -2109,89 +2104,59 @@
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;तपाईं जुम इन गर्न चाहनुहुन्छ भने निम्न कार्य गर्नुहोस्:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. जुम इन गर्ने सुविधा प्रयोग गर्न थाल्न सर्टकट प्रयोग गर्नुहोस्&lt;br/&gt; {1,number,integer}. स्क्रिनमा ट्याप गर्नुहोस्&lt;br/&gt; {2,number,integer}. स्क्रिनमा सामग्री यताउता सार्न २ वटा औँलाले ड्र्याग गर्नुहोस्&lt;br/&gt; {3,number,integer}. जुम इन वा जुम आउट गर्न २ वटा औँलाले पिन्च गर्नुहोस्&lt;br/&gt; {4,number,integer}. जुम इन गर्ने सुविधा बन्द गर्न सर्टकट प्रयोग गर्नुहोस्&lt;br/&gt;&lt;br/&gt; &lt;b&gt;तपाईं केही समयका लागि जुम इन गर्न चाहनुहुन्छ भने निम्न कार्य गर्नुहोस्:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. जुम इनको प्रकार फुल स्क्रिन तय गरिएको छ भन्ने कुरा सुनिश्चित गर्नुहोस्&lt;br/&gt; {1,number,integer}. जुम इन गर्ने सुविधा प्रयोग गर्न थाल्न सर्टकट प्रयोग गर्नुहोस्&lt;br/&gt; {2,number,integer}. स्क्रिनको कुनै भागमा टच एण्ड होल्ड गर्नुहोस्&lt;br/&gt; {3,number,integer}. स्क्रिनमा सामग्री यताउता सार्न औँलाले ड्र्याग गर्नुहोस्&lt;br/&gt; {4,number,integer}. जुम इन गर्ने सुविधा बन्द गर्न औँला उठाउनुहोस्"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"म्याग्निफिकेसन सुविधा सक्रिय गरेपछि, तपाईं आफ्नो स्क्रिनमा जुम इन गर्न सक्नुहुन्छ।\n\n"<b>"जुम गर्न"</b>", म्याग्निफिकेसन सुविधा सुरु गर्नुहोस्, त्यसपछि स्क्रिनको कुनै पनि भागमा ट्याप गर्नुहोस्।\n"<ul><li>"स्क्रोल गर्न २ वा सोभन्दा बढी औँलाले ड्र्याग गर्नुहोस्"</li>\n<li>"जुम समायोजन गर्न २ वा सोभन्दा बढी औँलाले पिन्च गर्नुहोस्"</li></ul>\n\n<b>"केहीबेरका लागि जुम गर्न"</b>", म्याग्निफिकेसन सुविधा सुरु गर्नुहोस्, त्यसपछि स्क्रिनको कुनै पनि भागमा केहीबेर छोइरहनुहोस्।\n"<ul><li>"स्क्रिनमा यताउता जान ड्र्याग गर्नुहोस्"</li>\n<li>"जुम आउट गर्न औँला उचाल्नुहोस्"</li></ul>\n\n"तपाईं किबोर्ड वा नेभिगेसन पट्टीमा जुम इन गर्न सक्नुहुन्न।"</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"<xliff:g id="NUM_PAGES">%2$d</xliff:g> मध्ये <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> औँ पृष्ठ"</string>
-    <!-- no translation found for accessibility_tutorial_dialog_title_button (1924337057649065884) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_title_volume (1032323517963429981) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_title_triple (5529704884360240365) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_title_two_finger_double (5749704453829390283) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"एक्सेसिबिलिटी बटनको सर्टकट"</string>
+    <string name="accessibility_tutorial_dialog_title_volume" msgid="1032323517963429981">"भोल्युम बटनको सर्टकट"</string>
+    <string name="accessibility_tutorial_dialog_title_triple" msgid="5529704884360240365">"ट्रिपल ट्याप गर्ने सर्टकट"</string>
+    <string name="accessibility_tutorial_dialog_title_two_finger_double" msgid="5749704453829390283">"%1$d-fऔँलाले डबल ट्याप गर्ने सर्टकट"</string>
     <string name="accessibility_tutorial_dialog_title_quick_setting" msgid="2905083277641794558">"द्रुत सेटिङको सर्टकट"</string>
-    <!-- no translation found for accessibility_tutorial_dialog_title_gesture (4541649734549409614) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_title_gesture" msgid="4541649734549409614">"एक्सेसिबिलिटी जेस्चरको सर्टकट"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="6800684770875867559">"एक्सेसिबिलिटी जेस्चर प्रयोग गर्नुहोस्"</string>
-    <!-- no translation found for accessibility_tutorial_dialog_message_button (8977286776192770246) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_floating_button (6631371483819355514) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_volume (3785791536286606664) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_message_button" msgid="8977286776192770246">"यो सुविधा प्रयोग गर्न आफ्नो स्क्रिनको पुछारमा रहेको एक्सेसिबिलिटी बटन <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> मा ट्याप गर्नुहोस्।\n\n एउटा सुविधाबाट अर्को सुविधामा जान एक्सेसिबिलिटी बटनमा टच एण्ड होल्ड गर्नुहोस्।"</string>
+    <string name="accessibility_tutorial_dialog_message_floating_button" msgid="6631371483819355514">"यो सुविधा प्रयोग गर्न स्क्रिनमा भएको एक्सेसिबिलिटी बटनमा ट्याप गर्नुहोस्"</string>
+    <string name="accessibility_tutorial_dialog_message_volume" msgid="3785791536286606664">"यो सुविधा प्रयोग गर्न दुवै भोल्युम बटनमा थिचिराख्नुहोस्"</string>
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"म्याग्निफिकेसन सुविधा सुरु गर्न वा रोक्न आफ्नो स्क्रिनमा कतै तीन पटक ट्याप गर्नुहोस्।"</string>
-    <!-- no translation found for accessibility_tutorial_dialog_tripletap_instruction (7549293553589934) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_twofinger_doubletap_instruction (1007756360115974649) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_quick_setting (3715446725334547432) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_shortcut_unavailable_in_suw (3847728530771929959) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_tripletap_instruction" msgid="7549293553589934">"जुम इन गर्ने सुविधा अन तथा अफ गर्न स्क्रिनमा %1$d पटक छिटो छिटो ट्याप गर्नुहोस्"</string>
+    <string name="accessibility_tutorial_dialog_twofinger_doubletap_instruction" msgid="1007756360115974649">"जुम इन गर्ने सुविधा अन तथा अफ गर्न स्क्रिनमा %1$d औँलाले दुई पटक छिटो छिटो ट्याप गर्नुहोस्"</string>
+    <string name="accessibility_tutorial_dialog_message_quick_setting" msgid="3715446725334547432">"{count,plural, =1{यो सुविधा प्रयोग गर्न स्क्रिनको सिरानबाट तलतिर स्वाइप गर्नुहोस्। त्यसपछि {featureName} टाइल भेट्टाउनुहोस्।}other{यो सुविधा प्रयोग गर्न # औँलाले स्क्रिनको सिरानबाट तलतिर स्वाइप गर्नुहोस्। त्यसपछि {featureName} टाइल भेट्टाउनुहोस्।}}"</string>
+    <string name="accessibility_tutorial_dialog_shortcut_unavailable_in_suw" msgid="3847728530771929959">"तपाईंले डिभाइस सेटअप गर्ने प्रक्रिया पूरा गरेपछि यो सर्टकट उपलब्ध हुने छ।"</string>
     <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"यो सुविधा प्रयोग गर्न २ वटा औँलाले स्क्रिनको पुछारबाट माथितिर स्वाइप गर्नुहोस्।\n\nएउटा सुविधाबाट अर्को सुविधामा जान २ वटा औँलाले माथितिर स्वाइप गरी स्क्रिनमा थिचिराख्नुहोस्।"</string>
-    <!-- no translation found for accessibility_tutorial_dialog_gesture_shortcut_instruction (7349950768250852308) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_gesture_shortcut_instruction" msgid="7349950768250852308">"{count,plural, =1{यो सुविधा प्रयोग गर्न स्क्रिनको फेदबाट माथितिर स्वाइप गर्नुहोस्}other{यो सुविधा प्रयोग गर्न # औँलाले स्क्रिनको फेदबाट माथितिर स्वाइप गर्नुहोस्}}"</string>
     <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="8142847782708562793">"यो सुविधा प्रयोग गर्न ३ वटा औँलाले स्क्रिनको पुछारबाट माथितिर स्वाइप गर्नुहोस्।\n\nएउटा सुविधाबाट अर्को सुविधामा जान ३ वटा औँलाले माथितिर स्वाइप गरी स्क्रिनमा थिचिराख्नुहोस्।"</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"पहुँचसम्बन्धी कुनै सुविधा प्रयोग गर्न २ वटा औँलाले स्क्रिनको पुछारबाट माथितिर स्वाइप गर्नुहोस्।\n\nएउटा सुविधाबाट अर्को सुविधामा जान २ वटा औँलाले माथितिर स्वाइप गरी स्क्रिनमा थिचिराख्नुहोस्।"</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="7292969929578621958">"पहुँचसम्बन्धी कुनै सुविधा प्रयोग गर्न ३ वटा औँलाले स्क्रिनको पुछारबाट माथितिर स्वाइप गर्नुहोस्।\n\nएउटा सुविधाबाट अर्को सुविधामा जान ३ वटा औँलाले माथितिर स्वाइप गरी स्क्रिनमा थिचिराख्नुहोस्।"</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"बुझेँ"</string>
-    <!-- no translation found for accessibility_tutorial_dialog_link_button (13364319079385020) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_configure_software_shortcut_type (8041105223988170653) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_link_button" msgid="13364319079385020">"कस्टमाइज गर्न मिल्ने बटन"</string>
+    <string name="accessibility_tutorial_dialog_configure_software_shortcut_type" msgid="8041105223988170653">"थप विकल्पहरू"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"<xliff:g id="SERVICE">%1$s</xliff:g>को सर्टकट"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="48978719406821294">"एक्सेसिबिलिटी बटन"</string>
     <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="7346399253904683940">"एक्सेसिबिलिटी जेस्चर"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"२ वटा औँलाले माथितिर स्वाइप गर्नुहोस्"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"३ वटा औँलाले माथितिर स्वाइप गर्नुहोस्"</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_software (6505512764022389951) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_floating_button (6266489864614886247) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_software_by_gesture (4775049370625630546) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software (8315934725362849788) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_title_software" msgid="6505512764022389951">"एक्सेसिबिलिटी बटन"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_floating_button" msgid="6266489864614886247">"फ्लोटिङ बटनमा ट्याप गर्नुहोस्"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="4775049370625630546">"एक्सेसिबिलिटी जेस्चर"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="8315934725362849788">"स्क्रिनको फेदमा रहेको एक्सेसिबिलिटी बटन <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> मा ट्याप गर्नुहोस्। एउटा सुविधाबाट अर्को सुविधामा जान एक्सेसिबिलिटी बटनमा टच एन्ड होल्ड गर्नुहोस्।"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"२ वटा औँलाले स्क्रिनको फेदबाट माथितिर स्वाइप गर्नुहोस्।\n\nएउटा सुविधाबाट अर्को सुविधामा जान २ वटा औँलाले माथितिर स्वाइप गरी स्क्रिनमा टच एण्ड होल्ड गर्नुहोस्।"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"३ वटा औँलाले स्क्रिनको फेदबाट माथितिर स्वाइप गर्नुहोस्।\n\nएउटा सुविधाबाट अर्को सुविधामा जान ३ वटा औँलाले माथितिर स्वाइप गरी स्क्रिनमा टच एण्ड होल्ड गर्नुहोस्।"</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_gesture (2081123009255579884) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_summary_gesture" msgid="2081123009255579884">"{count,plural, =1{स्क्रिनको फेदबाट माथितिर स्वाइप गर्नुहोस्। एउटा सुविधाबाट अर्को सुविधामा जान माथितिर स्वाइप गर्नुहोस् र होल्ड गर्नुहोस्।}other{स्क्रिनको फेदबाट # औँलाले माथितिर स्वाइप गर्नुहोस्। एउटा सुविधाबाट अर्को सुविधामा जान # औँलाले माथितिर स्वाइप गर्नुहोस् र होल्ड गर्नुहोस्।}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="4459254227203203324"><annotation id="link">"थप विकल्पहरू"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"<xliff:g id="SERVICE">%1$s</xliff:g> का बारेमा थप जान्नुहोस्"</string>
     <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"द्रुत सेटिङ"</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_quick_settings (739883998754165940) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_quick_settings_suw (4216628328191609785) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="739883998754165940">"{count,plural, =1{स्क्रिनको सिरानबाट तलतिर स्वाइप गर्नुहोस्}other{स्क्रिनको सिरानबाट # वटा औँलाले तलतिर स्वाइप गर्नुहोस्}}"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_quick_settings_suw" msgid="4216628328191609785">"{count,plural, =1{स्क्रिनको सिरानबाट तलतिर स्वाइप गर्नुहोस्। तपाईंले डिभाइस सेटअप गर्ने प्रक्रिया पूरा गरेपछि यो सर्टकट उपलब्ध हुने छ।}other{स्क्रिनको सिरानबाट # औँलाले तलतिर स्वाइप गर्नुहोस्। तपाईंले डिभाइस सेटअप गर्ने प्रक्रिया पूरा गरेपछि यो सर्टकट उपलब्ध हुने छ।}}"</string>
     <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"द्रुत सेटिङ"</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_hardware (844089763968552142) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_hardware_keyword (2483152542320987022) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="844089763968552142">"भोल्युम बटन"</string>
+    <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"भोल्युम बटन"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"दुवै भोल्युम की थिचिराख्नुहोस्"</string>
     <string name="accessibility_shortcut_edit_dialog_title_two_finger_double_tap" msgid="2271778556854020996">"स्क्रिनमा दुई वटा औँलाले डबल ट्याप गर्नुहोस्"</string>
-    <!-- no translation found for accessibility_shortcut_edit_screen_title_two_finger_double_tap (8952595692906527694) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_screen_summary_two_finger_double_tap (385404127425496362) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_screen_title_triple_tap (3314488747597058942) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_screen_summary_triple_tap (4839204951599629871) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_two_finger_double_tap_keyword (6271718715836961167) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_screen_title_two_finger_double_tap" msgid="8952595692906527694">"%1$d-औँलाले डबल ट्याप"</string>
+    <string name="accessibility_shortcut_edit_screen_summary_two_finger_double_tap" msgid="385404127425496362">"स्क्रिनमा आफ्नो %1$d औँलाले दुई पटक छिटो छिटो ट्याप गर्नुहोस्"</string>
+    <string name="accessibility_shortcut_edit_screen_title_triple_tap" msgid="3314488747597058942">"ट्रिपल ट्याप"</string>
+    <string name="accessibility_shortcut_edit_screen_summary_triple_tap" msgid="4839204951599629871">"स्क्रिनमा %1$d पटक छिटो छिटो ट्याप गर्नुहोस्। तपाईंले यसो गर्नुभयो भने तपाईंको डिभाइस ढिलो चल्न सक्छ।"</string>
+    <string name="accessibility_shortcut_two_finger_double_tap_keyword" msgid="6271718715836961167">"%1$d-औँलाले डबल ट्याप"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_two_finger_double_tap" msgid="8262165091808318538">"स्क्रिनमा दुई वटा औँलाले {0,number,integer} पटक छिटो छिटो ट्याप गर्नुहोस्"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"स्क्रिनमा तीन पटक ट्याप गर्नुहोस्"</string>
-    <!-- no translation found for accessibility_shortcut_triple_tap_keyword (5359347130888464334) -->
-    <skip />
+    <string name="accessibility_shortcut_triple_tap_keyword" msgid="5359347130888464334">"ट्रिपल ट्याप"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="2102327956423320536">"स्क्रिनमा द्रुत रूपमा {0,number,integer} पटक ट्याप गर्नुहोस्। यो सर्टकट प्रयोग गर्दा तपाईंको डिभाइस ढिलो चल्न सक्छ"</string>
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"उन्नत"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"पहुँच बटनलाई <xliff:g id="SERVICE">%1$s</xliff:g> मा सेट गरिएको छ। म्याग्निफिकेसन प्रयोग गर्नाका लागि पहुँच बटनलाई केहीबेर छोइरहनुहोस् र त्यसपछि म्याग्निफिकेसन चयन गर्नुहोस्।"</string>
@@ -2510,7 +2475,7 @@
     <string name="history_details_title" msgid="8628584613889559355">"इतिहास विवरणहरू"</string>
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"ब्याट्रीको खपत"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"गत २४ घण्टाको ब्याट्री खपत हेर्नुहोस्"</string>
-    <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"पछिल्लो पटक पूरा चार्ज भएपछि ब्याट्री कति प्रयोग भएको छ भन्ने हेर्नुहोस्"</string>
+    <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"पछिल्लो पटक पूरा चार्ज भएपछि ब्याट्री कति प्रयोग भएको छ हेर्नुहोस्"</string>
     <string name="battery_details_title" msgid="3289680399291090588">"एपका हकमा तोकिएको ब्याट्रीको खपत"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"विवरणहरू प्रयोग गर्नुहोस्"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"उर्जा प्रयोग मिलाउनुहोस्"</string>
@@ -2645,7 +2610,7 @@
     <string name="battery_usage_breakdown_title_since_last_full_charge" msgid="435006273323199906">"पछिल्लो पटक पूरा चार्ज गरेदेखि अहिलेसम्म भएको ब्याट्रीको खपत"</string>
     <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"<xliff:g id="SLOT">%s</xliff:g> का बीचमा खपत भएको ब्याट्री"</string>
     <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"पछिल्लो पटक पूरा चार्ज गरेदेखि अहिलेसम्मको स्क्रिन टाइम"</string>
-    <string name="screen_time_category_for_slot" msgid="8287722270554654959">"<xliff:g id="SLOT">%s</xliff:g> का लागि स्क्रिन टाइम"</string>
+    <string name="screen_time_category_for_slot" msgid="8287722270554654959">"<xliff:g id="SLOT">%s</xliff:g> को स्क्रिन टाइम"</string>
     <string name="battery_usage_spinner_view_by_apps" msgid="8769276544072098082">"एपअनुसार हेर्नुहोस्"</string>
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"सिस्टमअनुसार हेर्नुहोस्"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
@@ -3630,7 +3595,7 @@
     <string name="interact_across_profiles_keywords" msgid="5996472773111665049">"अन्तरप्रोफाइल जोडिएको एप एपहरू कामसम्बन्धी र व्यक्तिगत"</string>
     <string name="interact_across_profiles_switch_enabled" msgid="7294719120282287495">"कनेक्ट भएको छ"</string>
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"यी एप कनेक्ट गरियोस्"</string>
-    <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"कनेक्ट गरिएका एपहरूले आफूसँग भएका अनुमतिहरू तथा डेटा आदान प्रदान गरी प्रयोग गर्न सक्छन्।"</string>
+    <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"कनेक्ट गरिएका एपले आफूसँग भएका अनुमतिहरू एक अर्कासँग सेयर गर्न तथा एक अर्काका डेटा एक्सेस गर्न सक्छन्।"</string>
     <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"तपाईंलाई जुन एपले तपाईंका IT एड्मिनसँग तपाईंको व्यक्तिगत डेटा सेयर गर्दैनन् जस्तो लाग्छ ती एप मात्र कनेक्ट गर्नुहोस्।"</string>
     <string name="interact_across_profiles_summary_3" msgid="444428694843299854">"तपाईं आफ्नो डिभाइसको गोपनीयतासम्बन्धी सेटिङमा गई जुनसुकै बेला एपहरू डिसकनेक्ट गर्न सक्नुहुन्छ।"</string>
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"तपाईं कार्यालयको <xliff:g id="NAME">%1$s</xliff:g> एपसँग आफ्नो व्यक्तिगत डेटा सेयर गर्न सक्ने गरी विश्वास गर्नुहुन्छ?"</string>
@@ -4466,6 +4431,8 @@
     <string name="credman_confirmation_change_provider_positive_button" msgid="7732302992885116967">"परिवर्तन गर्नुहोस्"</string>
     <string name="credman_limit_error_msg_title" msgid="1525814645803612135">"तपाईं ५ वटा सेवाहरू मात्र अन गर्न सक्नुहुन्छ"</string>
     <string name="credman_limit_error_msg" msgid="2521803280130310063">"अर्को सेवा अन गर्न कम्तीमा एउटा सेवा अफ गर्नुहोस्"</string>
+    <!-- no translation found for credman_main_settings_intro_text (4981603639240772620) -->
+    <skip />
     <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"%1$s ले के-कस्ता जानकारी स्वतः भर्न सकिन्छ भन्ने कुरा निर्धारण गर्न तपाईंको स्क्रिनमा भएका कुराहरू प्रयोग गर्छ।"</string>
     <string name="credman_error_message_title" msgid="4099557206946333568">"पासवर्ड, पासकी र डेटासम्बन्धी सेवाहरूको सीमा"</string>
     <string name="credman_error_message" msgid="8334797097200415449">"तपाईं एक पटकमा बढीमा ५ वटा पासवर्ड, पासकी र डेटासम्बन्धी सेवा चयन गर्न सक्नुहुन्छ। थप सेवा चयन गर्न हाल प्रयोगमा रहेको कुनै सेवा अफ गर्नुहोस्।"</string>
@@ -4539,10 +4506,9 @@
     <string name="change_nfc_tag_apps_detail_summary" msgid="3338220223868942195">"कुनै NFC ट्याग स्क्यान गरिँदा यो एपलाई सुरु हुने अनुमति दिनुहोस्।\nतपाईंले यो अनुमति दिनुभयो भने कुनै ट्याग पत्ता लाग्दा कारबाही गर्नका लागि देखाइने विकल्पमध्ये एउटा विकल्पका रूपमा यो एप उपलब्ध हुने छ।"</string>
     <string name="media_output_title" msgid="8283629315159510680">"मिडिया यसमा प्ले गर्नुहोस्"</string>
     <string name="media_output_label_title" msgid="4139048973886819148">"यसमा <xliff:g id="LABEL">%s</xliff:g> प्ले गर्नुहोस्"</string>
-    <string name="media_output_title_without_playing" msgid="3339321669132875821">"अडियो प्ले भइरहने छ"</string>
+    <string name="media_output_title_without_playing" msgid="3339321669132875821">"अडियो यसमा प्ले हुने छ"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"यो डिभाइस"</string>
-    <!-- no translation found for media_output_audio_sharing (6531742594884809737) -->
-    <skip />
+    <string name="media_output_audio_sharing" msgid="6531742594884809737">"अडियो सेयरिङ"</string>
     <string name="media_out_summary_ongoing_call_state" msgid="475188726850090363">"कलहरूको बेला अनुपलब्ध"</string>
     <string name="take_call_on_title" msgid="1159417893879946757">"यसमार्फत फोन उठाउनुहोस्"</string>
     <string name="cannot_change_apn_toast" msgid="296540724089240405">"यो APN परिवर्तन गर्न सकिँदैन।"</string>
@@ -4674,8 +4640,7 @@
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"तपाईंको फोन स्याटलाइटमा स्वतः कनेक्ट हुने छ। उत्कृष्ट कनेक्सन प्राप्त गर्न आफ्नो फोन आकाश राम्रोसँग देखिने ठाउँमा राखिराख्नुहोस्।"</string>
     <string name="title_supported_service" msgid="4275535165812691571">"तपाईंको फोन स्याटलाइटमा कनेक्ट भएपछि"</string>
     <string name="summary_supported_service" msgid="4320535903444834786">"तपाईं आपत्कालीन सेवालगायत सबै जनालाई टेक्स्ट म्यासेज पठाउन सक्नुहुन्छ। तपाईंको फोन मोबाइल नेटवर्क उपलब्ध भएका बेला उक्त नेटवर्कमा रिकनेक्ट हुने छ।"</string>
-    <!-- no translation found for satellite_setting_summary_more_information (7729454610548016356) -->
-    <skip />
+    <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"स्याटलाइटमार्फत म्यासेज पठाउने सुविधा प्रयोग गर्दा सामान्यभन्दा बढी समय लाग्न सक्छ र यो सुविधा केही क्षेत्रहरूमा मात्र उपलब्ध छ। मौसम र निश्चित संरचनाहरूले स्याटलाइट कनेक्सनमा असर गर्न सक्छ। स्याटलाइटमार्फत कल गर्ने सुविधा उपलब्ध छैन। आपत्कालीन कल अझै पनि कनेक्ट हुन सक्छ।\n\nतपाईंको खातामा गरिएका परिवर्तनहरू सेटिङमा देखिन केही समय लाग्न सक्छ। यससम्बन्धी थप जानकारी प्राप्त गर्न आफ्नो सेवा प्रदायकलाई सम्पर्क गर्नुहोस्।"</string>
     <string name="more_about_satellite_messaging" msgid="3385673133561348509">"स्याटलाइटमार्फत म्यासेज पठाउने सुविधाका बारेमा थप जानकारी"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"एक्सेस पोइन्ट नेम"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
@@ -4713,10 +4678,8 @@
     <string name="sim_action_turn_off" msgid="3506698692916473000">"अफ गर्नुहोस्"</string>
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"SIM सक्रिय गर्न सकिएन"</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"फेरि SIM सक्रिय गरी हेर्नुहोस्। अझै समस्या रहिरह्यो भने आफ्नो डिभाइस रिस्टार्ट गर्नुहोस्।"</string>
-    <!-- no translation found for sim_onboarding_dialog_starting_title (4212945803784596345) -->
-    <skip />
-    <!-- no translation found for sim_onboarding_dialog_starting_msg (8450391476631265209) -->
-    <skip />
+    <string name="sim_onboarding_dialog_starting_title" msgid="4212945803784596345">"SIM सम्बन्धी प्राथमिकताहरू सेट गर्नुहोस्"</string>
+    <string name="sim_onboarding_dialog_starting_msg" msgid="8450391476631265209">"यो डिभाइसमा एकभन्दा बढी SIM प्रयोग गर्न आफ्नो मोबाइल नेटवर्कका प्राथमिकताहरू तय गर्नुहोस्"</string>
     <string name="sim_onboarding_label_sim_title" msgid="273162565849288273">"आफ्ना SIM मा लेबल राख्नुहोस्"</string>
     <string name="sim_onboarding_label_sim_msg" msgid="5105859235219529056">"तपाईं कल गर्दा, टेक्स्ट म्यासेज पठाउँदा, मोबाइल डेटा प्रयोग गर्दा र सेटिङमा यी लेबलहरू देख्नु हुने छ"</string>
     <string name="sim_onboarding_label_sim_dialog_title" msgid="5839073125605286120">"SIM को लेबल"</string>
@@ -4734,10 +4697,8 @@
     <string name="sim_action_restart_dialog_msg" msgid="4737611046767629774">"एकैसाथ २ वटा SIM प्रयोग गर्नका निम्ति आफ्नो डिभाइस रिस्टार्ट गर्नुहोस् र दुई वटै SIM अन गर्नुहोस्"</string>
     <string name="sim_action_restart_dialog_cancel" msgid="665560106686565624">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> मात्र प्रयोग गर्नुहोस्"</string>
     <string name="sim_onboarding_phoneNumber_data_only" msgid="8158409121949373662">"मोबाइल डेटा मात्र"</string>
-    <!-- no translation found for sim_onboarding_setup (8678504891830386486) -->
-    <skip />
-    <!-- no translation found for sim_onboarding_close (8656305651358745422) -->
-    <skip />
+    <string name="sim_onboarding_setup" msgid="8678504891830386486">"सुरु गर्नुहोस्"</string>
+    <string name="sim_onboarding_close" msgid="8656305651358745422">"बन्द गर्नुहोस्"</string>
     <string name="sim_onboarding_next" msgid="6415025179929475355">"अर्को"</string>
     <string name="sim_onboarding_progressbar_turning_sim_on" msgid="1163318788393361574">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> अन गरिँदै छ…"</string>
     <string name="mobile_network_spn_title" msgid="3053793174495329077">"मोबाइल नेटवर्क"</string>

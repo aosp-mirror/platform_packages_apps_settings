@@ -285,7 +285,7 @@
     <string name="location_settings_title" msgid="8375074508036087178">"Position"</string>
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"Utiliser ma position"</string>
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Désactivé"</string>
-    <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Activée / # d\'applications ayant accès à la position}one{Activée / # d\'applications ayant accès à la position}other{Activée / # d\'applications ayant accès à la position}}"</string>
+    <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Activée / # application a accès à la position}one{Activée / # application a accès à la position}other{Activée / # applications ont accès à la position}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Chargement en cours…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Les applications qui disposent de l\'autorisation de détection des appareils à proximité peuvent déterminer la position relative des appareils connectés."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"L\'accès à la position est désactivé pour les applications et les services. La position de votre appareil pourrait quand même être envoyée aux intervenants d\'urgence lorsque vous appelez ou textez un numéro d\'urgence."</string>
@@ -569,7 +569,8 @@
     <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"Vous pouvez verrouiller automatiquement votre Espace privé si vous n\'avez pas utilisé votre appareil pendant un certain temps"</string>
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"Chaque fois que l\'appareil se verrouille"</string>
     <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"Après cinq minutes d\'inactivité"</string>
-    <string name="private_space_auto_lock_never" msgid="595014527119778873">"Jamais"</string>
+    <!-- no translation found for private_space_auto_lock_after_device_restart (288755768725895029) -->
+    <skip />
     <string name="private_space_hide_page_title" msgid="4351404195904146088">"Masquer l\'espace privé lorsqu\'il est verrouillé"</string>
     <string name="private_space_hide_page_summary" msgid="6247773353685839242">"Pour empêcher les autres personnes de savoir que vous avez un Espace privé sur votre appareil, vous pouvez le masquer à partir de votre liste d\'applications"</string>
     <string name="private_space_access_header" msgid="1077082416567150819">"Accéder à l\'Espace privé lorsqu\'il est masqué"</string>
@@ -635,7 +636,7 @@
     <string name="private_space_gaia_education_title" msgid="3787414895669666563">"Créez un compte Google pour préserver la confidentialité de vos données"</string>
     <string name="private_space_gaia_education_description" msgid="1592753570023264559">"Sur l\'écran suivant, vous pouvez vous connecter à un compte à utiliser avec votre Espace privé"</string>
     <string name="private_space_gaia_education_header" msgid="7835879839637613495"><b>"Créez un compte dédié pour éviter que des données n\'apparaissent en dehors de l\'Espace privé, comme :"</b></string>
-    <string name="private_space_gaia_education_bullet1" msgid="641701340908301992">"Photos, fichiers, courriels, contacts, événements d\'agenda et autres données synchronisés"</string>
+    <string name="private_space_gaia_education_bullet1" msgid="641701340908301992">"Photos, fichiers, courriels, contacts, événements d\'agenda et autres données synchronisées"</string>
     <string name="private_space_gaia_education_bullet2" msgid="3679859681253672976">"Historique des téléchargements d\'applis et recommandations"</string>
     <string name="private_space_gaia_education_bullet3" msgid="1703614225321289717">"Historique de navigation, favoris et mots de passe enregis."</string>
     <string name="private_space_gaia_education_bullet4" msgid="515761604505366164">"Contenu suggéré relativement à votre activité dans les applications de l\'Espace privé"</string>
@@ -1439,8 +1440,7 @@
     <string name="battery_level_title" msgid="1371765298786083448">"Niveau de la pile"</string>
     <string name="communal_settings_title" msgid="2845678473945902115">"Commun"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"Paramètres communs"</string>
-    <!-- no translation found for satellite_setting (4171265534842459910) -->
-    <skip />
+    <string name="satellite_setting" msgid="4171265534842459910">"Messagerie par satellite"</string>
     <string name="apn_settings" msgid="4295467389400441299">"Noms des points d\'accès"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Modifier le point d\'accès"</string>
     <string name="apn_add" msgid="9069613192201630934">"Ajouter un point d\'accès"</string>
@@ -2061,6 +2061,8 @@
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"La loupe suit le texte lorsque vous tapez"</string>
     <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"Active lors du changement d\'applis"</string>
     <string name="accessibility_screen_magnification_always_on_summary" msgid="306908451430863049">"La loupe reste activée et dézoome lorsque vous changez d\'appli"</string>
+    <!-- no translation found for accessibility_screen_magnification_always_on_unavailable_summary (3844732482037416038) -->
+    <skip />
     <string name="accessibility_screen_magnification_joystick_title" msgid="1803769708582404964">"Manche"</string>
     <string name="accessibility_screen_magnification_joystick_summary" msgid="4640300148573982720">"Activez et déplacez la loupe à l\'aide d\'un manche à l\'écran. Touchez et maintenez, puis faites glisser le manche pour contrôler la loupe. Touchez et faites glisser pour déplacer le manche lui-même."</string>
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"À propos de la fonctionnalité d\'agrandissement"</string>
@@ -2109,89 +2111,59 @@
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Pour zoomer :&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Utilisez le raccourci pour commencer l\'agrandissement&lt;br/&gt; {1,number,integer}. Touchez l\'écran&lt;br/&gt; {2,number,integer}. Faites glisser deux doigts pour naviguer dans l\'écran&lt;br/&gt; {3,number,integer}. Pincez l\'écran avec deux doigts pour ajuster le zoom&lt;br/&gt; {4,number,integer}. Utilisez le raccourci pour arrêter l\'agrandissement&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Pour zoomer temporairement :&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Assurez-vous que le type d\'agrandissement est défini à plein écran&lt;br/&gt; {1,number,integer}. Utilisez le raccourci pour commencer l\'agrandissement&lt;br/&gt; {2,number,integer}. Maintenez le doigt sur une zone de l\'écran&lt;br/&gt; {3,number,integer}. Faites glisser un doigt pour naviguer dans l\'écran&lt;br/&gt; {4,number,integer}. Levez le doigt pour arrêter l\'agrandissement"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"When magnification is turned on, you can zoom in on your screen.\n\n"<b>"Pour effectuer un zoom,"</b>", activez cette fonction, puis touchez une zone de l\'écran.\n"<ul><li>"Glissez deux doigts ou plus sur l\'écran pour le faire défiler"</li>\n<li>"Pincez deux doigts ou plus pour ajuster le zoom"</li></ul>\n\n<b>"Pour zoomer temporairement l\'écran"</b>", touchez le bouton d\'accessibilité, puis maintenez le doigt sur ailleurs sur l\'écran.\n"<ul><li>"Glissez votre doigt sur l\'écran à l\'endroit désiré"</li>\n<li>"Relevez le doigt pour zoomer vers l\'arrière"</li></ul>\n\n"On ne peut pas zoomer sur le clavier ou la barre de navigation."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Page <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> sur <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
-    <!-- no translation found for accessibility_tutorial_dialog_title_button (1924337057649065884) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_title_volume (1032323517963429981) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_title_triple (5529704884360240365) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_title_two_finger_double (5749704453829390283) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"Raccourci du bouton d\'accessibilité"</string>
+    <string name="accessibility_tutorial_dialog_title_volume" msgid="1032323517963429981">"Raccourci des touches de volume"</string>
+    <string name="accessibility_tutorial_dialog_title_triple" msgid="5529704884360240365">"Raccourci du triple toucher"</string>
+    <string name="accessibility_tutorial_dialog_title_two_finger_double" msgid="5749704453829390283">"Raccourci du double toucher avec %1$d doigts"</string>
     <string name="accessibility_tutorial_dialog_title_quick_setting" msgid="2905083277641794558">"Raccourci des Paramètres rapides"</string>
-    <!-- no translation found for accessibility_tutorial_dialog_title_gesture (4541649734549409614) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_title_gesture" msgid="4541649734549409614">"Raccourci du geste d\'accessibilité"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="6800684770875867559">"Utiliser le geste d\'accessibilité"</string>
-    <!-- no translation found for accessibility_tutorial_dialog_message_button (8977286776192770246) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_floating_button (6631371483819355514) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_volume (3785791536286606664) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_message_button" msgid="8977286776192770246">"Pour utiliser cette fonctionnalité, touchez le bouton d\'accessibilité <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> au bas de l\'écran.\n\nPour basculer entre les fonctionnalités, maintenez le doigt sur le bouton d\'accessibilité."</string>
+    <string name="accessibility_tutorial_dialog_message_floating_button" msgid="6631371483819355514">"Pour utiliser cette fonctionnalité, touchez le bouton d\'accessibilité sur votre écran"</string>
+    <string name="accessibility_tutorial_dialog_message_volume" msgid="3785791536286606664">"Pour utiliser cette fonctionnalité, maintenez enfoncées les deux touches de volume"</string>
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"Pour démarrer et arrêter l\'agrandissement, touchez l\'écran trois fois n\'importe où."</string>
-    <!-- no translation found for accessibility_tutorial_dialog_tripletap_instruction (7549293553589934) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_twofinger_doubletap_instruction (1007756360115974649) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_quick_setting (3715446725334547432) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_shortcut_unavailable_in_suw (3847728530771929959) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_tripletap_instruction" msgid="7549293553589934">"Pour démarrer et arrêter l\'agrandissement, touchez rapidement l\'écran %1$d fois"</string>
+    <string name="accessibility_tutorial_dialog_twofinger_doubletap_instruction" msgid="1007756360115974649">"Pour démarrer et arrêter l\'agrandissement, touchez deux fois l\'écran n\'importe où avec %1$d doigts"</string>
+    <string name="accessibility_tutorial_dialog_message_quick_setting" msgid="3715446725334547432">"{count,plural, =1{Pour utiliser cette fonctionnalité, balayez l\'écran du haut vers le bas. Trouvez ensuite la tuile de {featureName}.}one{Pour utiliser cette fonctionnalité, balayez l\'écran du haut vers le bas avec # doigt. Trouvez ensuite la tuile de {featureName}.}other{Pour utiliser cette fonctionnalité, balayez l\'écran du haut vers le bas avec # doigts. Trouvez ensuite la tuile de {featureName}.}}"</string>
+    <string name="accessibility_tutorial_dialog_shortcut_unavailable_in_suw" msgid="3847728530771929959">"Ce raccourci sera accessible quand vous aurez terminé de configurer l\'appareil."</string>
     <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"Pour utiliser cette fonctionnalité, balayez l\'écran de bas en haut avec deux doigts.\n\nPour basculer entre les fonctionnalités, balayez l\'écran vers le haut avec deux doigts et maintenez la pression."</string>
-    <!-- no translation found for accessibility_tutorial_dialog_gesture_shortcut_instruction (7349950768250852308) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_gesture_shortcut_instruction" msgid="7349950768250852308">"{count,plural, =1{Pour utiliser cette fonctionnalité, balayez votre écran du bas vers le haut}one{Pour utiliser cette fonctionnalité, balayez l\'écran du bas vers le haut avec # doigt}other{Pour utiliser cette fonctionnalité, balayez l\'écran du bas vers le haut avec # doigts}}"</string>
     <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="8142847782708562793">"Pour utiliser cette fonctionnalité, balayez l\'écran de bas en haut avec trois doigts.\n\nPour basculer entre les fonctionnalités, balayez l\'écran vers le haut avec trois doigts et maintenez-les-y."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"Pour utiliser une fonctionnalité d\'accessibilité, balayez l\'écran de bas en haut avec deux doigts.\n\nPour basculer entre les fonctionnalités, balayez l\'écran vers le haut avec deux doigts et maintenez-la pression."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="7292969929578621958">"Pour utiliser une fonctionnalité d\'accessibilité, balayez l\'écran de bas en haut avec trois doigts.\n\nPour basculer entre les fonctionnalités, balayez l\'écran vers le haut avec trois doigts et maintenez-les-y."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"OK"</string>
-    <!-- no translation found for accessibility_tutorial_dialog_link_button (13364319079385020) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_configure_software_shortcut_type (8041105223988170653) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_link_button" msgid="13364319079385020">"Personnaliser le bouton"</string>
+    <string name="accessibility_tutorial_dialog_configure_software_shortcut_type" msgid="8041105223988170653">"Plus d\'options"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Raccourci <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="48978719406821294">"bouton d\'accessibilité"</string>
     <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="7346399253904683940">"geste d\'accessibilité"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Balayer l\'écran vers le haut avec deux doigts"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Balayez l\'écran vers le haut avec trois doigts"</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_software (6505512764022389951) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_floating_button (6266489864614886247) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_software_by_gesture (4775049370625630546) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software (8315934725362849788) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_title_software" msgid="6505512764022389951">"Bouton d\'accessibilité"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_floating_button" msgid="6266489864614886247">"Touchez le bouton flottant"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="4775049370625630546">"Geste d\'accessibilité"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="8315934725362849788">"Touchez le bouton d\'accessibilité <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> au bas de l\'écran. Pour basculer entre les fonctionnalités, maintenez le doigt sur le bouton d\'accessibilité."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Balayez l\'écran de bas en haut avec deux doigts.\n\nPour basculer entre les fonctionnalités, balayez l\'écran vers le haut avec deux doigts et maintenez la pression."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Balayez l\'écran de bas en haut avec trois doigts.\n\nPour basculer entre les fonctionnalités, balayez l\'écran vers le haut avec trois doigts et maintenez-les-y."</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_gesture (2081123009255579884) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_summary_gesture" msgid="2081123009255579884">"{count,plural, =1{Balayez votre écran du bas vers le haut. Pour basculer entre les fonctionnalités, balayez l\'écran vers le haut et maintenez le doigt en place.}one{Balayez l\'écran du bas vers le haut avec # doigt. Pour basculer entre les fonctionnalités, balayez l\'écran vers le haut avec # doigt et maintenez-le en place.}other{Balayez l\'écran du bas vers le haut avec # doigts. Pour basculer entre les fonctionnalités, balayez l\'écran vers le haut avec # doigts et maintenez-les en place.}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="4459254227203203324"><annotation id="link">"Autres options"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"En savoir plus sur <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"Paramètres rapides"</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_quick_settings (739883998754165940) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_quick_settings_suw (4216628328191609785) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="739883998754165940">"{count,plural, =1{Balayez l\'écran du haut vers le bas}one{Balayez l\'écran du haut vers le bas avec # doigt}other{Balayez l\'écran du haut vers le bas avec # doigts}}"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_quick_settings_suw" msgid="4216628328191609785">"{count,plural, =1{Balayez l\'écran du haut vers le bas. Ce raccourci sera accessible quand vous aurez terminé de configurer l\'appareil.}one{Balayez l\'écran du haut vers le bas avec # doigt. Ce raccourci sera accessible quand vous aurez terminé de configurer l\'appareil.}other{Balayez l\'écran du haut vers le bas avec # doigts. Ce raccourci sera accessible quand vous aurez terminé de configurer l\'appareil.}}"</string>
     <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"Paramètres rapides"</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_hardware (844089763968552142) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_hardware_keyword (2483152542320987022) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="844089763968552142">"Touches de volume"</string>
+    <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"touches de volume"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Maintenez enfoncées les deux touches de volume"</string>
     <string name="accessibility_shortcut_edit_dialog_title_two_finger_double_tap" msgid="2271778556854020996">"Toucher deux fois l\'écran avec deux doigts"</string>
-    <!-- no translation found for accessibility_shortcut_edit_screen_title_two_finger_double_tap (8952595692906527694) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_screen_summary_two_finger_double_tap (385404127425496362) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_screen_title_triple_tap (3314488747597058942) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_screen_summary_triple_tap (4839204951599629871) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_two_finger_double_tap_keyword (6271718715836961167) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_screen_title_two_finger_double_tap" msgid="8952595692906527694">"Toucher deux fois avec %1$d doigts"</string>
+    <string name="accessibility_shortcut_edit_screen_summary_two_finger_double_tap" msgid="385404127425496362">"Touchez rapidement l\'écran deux fois avec %1$d doigts"</string>
+    <string name="accessibility_shortcut_edit_screen_title_triple_tap" msgid="3314488747597058942">"Toucher trois fois"</string>
+    <string name="accessibility_shortcut_edit_screen_summary_triple_tap" msgid="4839204951599629871">"Touchez rapidement l\'écran %1$d fois. Cela pourrait ralentir votre appareil."</string>
+    <string name="accessibility_shortcut_two_finger_double_tap_keyword" msgid="6271718715836961167">"toucher deux fois avec %1$d doigts"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_two_finger_double_tap" msgid="8262165091808318538">"Touchez rapidement l\'écran {0,number,integer} fois avec deux doigts"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"Toucher l\'écran trois fois"</string>
-    <!-- no translation found for accessibility_shortcut_triple_tap_keyword (5359347130888464334) -->
-    <skip />
+    <string name="accessibility_shortcut_triple_tap_keyword" msgid="5359347130888464334">"toucher trois fois"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="2102327956423320536">"Touchez rapidement l\'écran {0,number,integer} fois. Ce raccourci peut ralentir votre appareil"</string>
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Paramètres avancés"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"Le bouton d\'accessibilité est défini à <xliff:g id="SERVICE">%1$s</xliff:g>. Pour utiliser cette fonction, maintenez enfoncé le bouton d\'accessibilité, puis sélectionnez l\'agrandissement."</string>
@@ -2523,7 +2495,7 @@
     <string name="battery_tip_early_heads_up_title" msgid="4411387863476629452">"Activer l\'économiseur de pile"</string>
     <string name="battery_tip_early_heads_up_summary" msgid="578523794827443977">"La pile pourrait s\'épuiser plus tôt que d\'habitude"</string>
     <string name="battery_tip_early_heads_up_done_title" msgid="7705597228709143337">"Économiseur de pile activé"</string>
-    <string name="battery_saver_link_a11y" msgid="6613079613524512257">"En savoir plus à propos de l\'économiseur de pile"</string>
+    <string name="battery_saver_link_a11y" msgid="6613079613524512257">"En savoir plus à propos de l\'Économiseur de pile"</string>
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Certaines fonctionnalités pourraient être limitées"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Utilisation plus élevée de la pile"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Affichez les applications qui utilisent le plus d\'énergie"</string>
@@ -4271,7 +4243,7 @@
     <string name="swipe_up_to_switch_apps_title" msgid="6677266952021118342">"Navigation à deux boutons"</string>
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"Pour changer d\'application, balayez un doigt vers le haut sur la touche d\'accueil. Pour voir toutes les applications, balayez vers le haut de nouveau. Pour revenir, touchez le bouton Précédent."</string>
     <string name="emergency_settings_preference_title" msgid="6183455153241187148">"Sécurité et urgence"</string>
-    <string name="emergency_dashboard_summary" msgid="401033951074039302">"Appel d\'urgence, données médicales, alertes"</string>
+    <string name="emergency_dashboard_summary" msgid="401033951074039302">"Appel d\'urgence, infos médicales, alertes"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Navigation par gestes"</string>
     <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"Pour accéder à l\'écran d\'accueil, balayez l\'écran du bas vers le haut. Pour changer d\'application, balayez l\'écran du bas vers le haut, maintenez le doigt sur l\'écran, puis relâchez-le. Pour revenir en arrière, balayez l\'écran à partir du bord gauche ou droit."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Navigation à trois boutons"</string>
@@ -4458,7 +4430,7 @@
     <string name="credman_picker_title" msgid="8442086614222006564">"Fourn. de serv. préf. pour mots de passe, clés d\'accès et remp. aut."</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Désactiver %1$s?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Désactiver ce service?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Lorsque vous vous connectez, les renseignements enregistrés, comme les mots de passe, les clés d\'accès, les modes de paiement, ou tout autre renseignement, ne seront pas remplis. Pour utiliser vos renseignements enregistrés, choisissez un mot de passe, une clé d\'accès ou un service de données."</string>
-    <string name="account_dashboard_title_with_passkeys" msgid="6214673787161409996">"Mots de passe, clés d\'accès, remp. aut."</string>
+    <string name="account_dashboard_title_with_passkeys" msgid="6214673787161409996">"Mots de passe/clés d\'accès/rempl. auto"</string>
     <string name="credman_confirmation_message_new_ui" msgid="6126274509951156460">"&lt;b&gt;Désactiver tous les services?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Les mots de passe, les clés d\'accès et les autres renseignements enregistrés ne seront pas accessibles pour le Remplissage automatique lorsque vous vous connectez"</string>
     <string name="credman_autofill_confirmation_message_new_ui" msgid="6222139222478822267">"&lt;b&gt;Modifiez votre service préféré pour &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Les nouveaux renseignements, notamment les clés d\'accès et les mots de passe, seront dorénavant enregistrés ici. &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; peut utiliser ce qui se trouve à l\'écran pour déterminer les renseignements qui peuvent être remplis automatiquement"</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"Utiliser %1$s?"</string>
@@ -4466,6 +4438,8 @@
     <string name="credman_confirmation_change_provider_positive_button" msgid="7732302992885116967">"Modifier"</string>
     <string name="credman_limit_error_msg_title" msgid="1525814645803612135">"Vous ne pouvez avoir que cinq services sur"</string>
     <string name="credman_limit_error_msg" msgid="2521803280130310063">"Désactivez au moins un service pour en ajouter un autre"</string>
+    <!-- no translation found for credman_main_settings_intro_text (4981603639240772620) -->
+    <skip />
     <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"%1$s se sert des données affichées à l\'écran pour déterminer ce qui peut être rempli automatiquement."</string>
     <string name="credman_error_message_title" msgid="4099557206946333568">"Limite atteinte pour les services de mots de passe, de clés d\'accès et de données"</string>
     <string name="credman_error_message" msgid="8334797097200415449">"Vous pouvez disposer d\'un maximum de cinq services de mots de passe, de clés d\'accès et de données actifs en même temps. Désactivez un service pour en ajouter d\'autres."</string>
@@ -4541,8 +4515,7 @@
     <string name="media_output_label_title" msgid="4139048973886819148">"Faire jouer <xliff:g id="LABEL">%s</xliff:g> sur"</string>
     <string name="media_output_title_without_playing" msgid="3339321669132875821">"L\'audio jouera sur"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"Cet appareil"</string>
-    <!-- no translation found for media_output_audio_sharing (6531742594884809737) -->
-    <skip />
+    <string name="media_output_audio_sharing" msgid="6531742594884809737">"Partage audio"</string>
     <string name="media_out_summary_ongoing_call_state" msgid="475188726850090363">"Indisponible pendant les appels"</string>
     <string name="take_call_on_title" msgid="1159417893879946757">"Répondre à l\'appel sur"</string>
     <string name="cannot_change_apn_toast" msgid="296540724089240405">"Impossible de modifier ce nom de point d\'accès."</string>
@@ -4674,8 +4647,7 @@
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"Votre téléphone se connectera automatiquement à un satellite. Pour une connexion optimale, tenez le téléphone sous un ciel dégagé."</string>
     <string name="title_supported_service" msgid="4275535165812691571">"Une fois que votre téléphone s\'est connecté à un satellite"</string>
     <string name="summary_supported_service" msgid="4320535903444834786">"Vous pouvez envoyer des messages texte à n\'importe qui, y compris aux services d\'urgence. Votre téléphone se reconnectera à un réseau cellulaire lorsqu\'il sera accessible."</string>
-    <!-- no translation found for satellite_setting_summary_more_information (7729454610548016356) -->
-    <skip />
+    <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"La messagerie par satellite peut prendre plus de temps et est accessible seulement dans certaines régions. Les conditions météorologiques et certaines structures peuvent avoir une incidence sur votre connexion par satellite. Les appels par satellite ne sont pas accessibles. Les appels d\'urgence pourraient tout de même se connecter.\n\nIl peut s\'écouler un certain temps avant que les modifications apportées à votre compte s\'affichent dans les paramètres. Communiquez avec votre opérateur pour en savoir plus."</string>
     <string name="more_about_satellite_messaging" msgid="3385673133561348509">"En savoir plus sur la messagerie par satellite"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Noms des points d\'accès"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"nom du point d\'accès"</string>
@@ -4713,10 +4685,8 @@
     <string name="sim_action_turn_off" msgid="3506698692916473000">"Désactiver"</string>
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"Impossible d\'activer la carte SIM"</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"Réessayer d\'activer la carte SIM. Si le problème persiste, redémarrez votre appareil."</string>
-    <!-- no translation found for sim_onboarding_dialog_starting_title (4212945803784596345) -->
-    <skip />
-    <!-- no translation found for sim_onboarding_dialog_starting_msg (8450391476631265209) -->
-    <skip />
+    <string name="sim_onboarding_dialog_starting_title" msgid="4212945803784596345">"Définir vos préférences SIM"</string>
+    <string name="sim_onboarding_dialog_starting_msg" msgid="8450391476631265209">"Configurez les préférences de votre réseau cellulaire pour utiliser plusieurs cartes SIM sur cet appareil"</string>
     <string name="sim_onboarding_label_sim_title" msgid="273162565849288273">"Étiqueter vos cartes SIM"</string>
     <string name="sim_onboarding_label_sim_msg" msgid="5105859235219529056">"Vous verrez ces étiquettes lors des appels, de l\'envoi de messages texte et de l\'utilisation des données, ainsi que dans les Paramètres"</string>
     <string name="sim_onboarding_label_sim_dialog_title" msgid="5839073125605286120">"Étiquette de la carte SIM"</string>
@@ -4734,10 +4704,8 @@
     <string name="sim_action_restart_dialog_msg" msgid="4737611046767629774">"Pour utiliser deux cartes SIM simultanément, redémarrez votre appareil, puis activez les deux cartes SIM"</string>
     <string name="sim_action_restart_dialog_cancel" msgid="665560106686565624">"Utiliser seulement <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="sim_onboarding_phoneNumber_data_only" msgid="8158409121949373662">"Données uniquement"</string>
-    <!-- no translation found for sim_onboarding_setup (8678504891830386486) -->
-    <skip />
-    <!-- no translation found for sim_onboarding_close (8656305651358745422) -->
-    <skip />
+    <string name="sim_onboarding_setup" msgid="8678504891830386486">"Commencer"</string>
+    <string name="sim_onboarding_close" msgid="8656305651358745422">"Fermer"</string>
     <string name="sim_onboarding_next" msgid="6415025179929475355">"Suivant"</string>
     <string name="sim_onboarding_progressbar_turning_sim_on" msgid="1163318788393361574">"Activation de <xliff:g id="CARRIER_NAME">%1$s</xliff:g> en cours…"</string>
     <string name="mobile_network_spn_title" msgid="3053793174495329077">"Réseau cellulaire"</string>

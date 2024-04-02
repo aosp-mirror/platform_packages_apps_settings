@@ -169,15 +169,26 @@ class UdfpsEnrollIconV2 internal constructor(context: Context, attrs: AttributeS
     invalidateSelf()
   }
 
+  /** Stop drawing the fingerprint icon. */
+  fun stopDrawing() {
+    alpha = 0
+  }
+
+  /** Resume drawing the fingerprint icon */
+  fun startDrawing() {
+    alpha = 255
+  }
+
   override fun draw(canvas: Canvas) {
+    movingTargetFpIcon.alpha = alpha
+    fingerprintDrawable.setAlpha(alpha)
+    sensorOutlinePaint.setAlpha(alpha)
     val currLocation = getCurrLocation()
     canvas.scale(currentScale, currentScale, currLocation.centerX(), currLocation.centerY())
 
     sensorRectBounds?.let { canvas.drawOval(currLocation, sensorOutlinePaint) }
     fingerprintDrawable.bounds = currLocation.toRect()
     fingerprintDrawable.draw(canvas)
-    fingerprintDrawable.setAlpha(alpha)
-    sensorOutlinePaint.setAlpha(alpha)
   }
 
   private fun getCurrLocation(): RectF =

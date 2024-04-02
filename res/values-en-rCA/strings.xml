@@ -565,7 +565,7 @@
     <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"You can lock your private space automatically if you havent used your device for a period of time"</string>
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"Every time device locks"</string>
     <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"After 5 minutes of inactivity"</string>
-    <string name="private_space_auto_lock_never" msgid="595014527119778873">"Never"</string>
+    <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"Only after device restarts"</string>
     <string name="private_space_hide_page_title" msgid="4351404195904146088">"Hide private space when it\'s locked"</string>
     <string name="private_space_hide_page_summary" msgid="6247773353685839242">"To stop other people knowing you have a private space on your device, you can hide it from your apps list"</string>
     <string name="private_space_access_header" msgid="1077082416567150819">"Access private space when hidden"</string>
@@ -2053,6 +2053,7 @@
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"Magnifier follows text as you type"</string>
     <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"Keep on while switching apps"</string>
     <string name="accessibility_screen_magnification_always_on_summary" msgid="306908451430863049">"Magnifier stays on and zooms out when you switch apps"</string>
+    <string name="accessibility_screen_magnification_always_on_unavailable_summary" msgid="3844732482037416038">"Unavailable while only magnifying part of the screen"</string>
     <string name="accessibility_screen_magnification_joystick_title" msgid="1803769708582404964">"Joystick"</string>
     <string name="accessibility_screen_magnification_joystick_summary" msgid="4640300148573982720">"Activate and move the magnifier with an on-screen joystick. Tap and hold, then drag on the joystick to control the magnifier. Tap and drag to move the joystick itself."</string>
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"About magnification"</string>
@@ -4428,6 +4429,7 @@
     <string name="credman_confirmation_change_provider_positive_button" msgid="7732302992885116967">"Change"</string>
     <string name="credman_limit_error_msg_title" msgid="1525814645803612135">"You can only have 5 services on"</string>
     <string name="credman_limit_error_msg" msgid="2521803280130310063">"Turn off at least 1 service to add another"</string>
+    <string name="credman_main_settings_intro_text" msgid="4981603639240772620">"Choose your preferred service to save data for sign-in and autofill suggestions. Turn on additional services if you\'d like them to provide suggestions too."</string>
     <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"%1$s uses what\'s on your screen to determine what can be autofilled."</string>
     <string name="credman_error_message_title" msgid="4099557206946333568">"Passwords, passkeys, and data services limit"</string>
     <string name="credman_error_message" msgid="8334797097200415449">"You can have up to 5 passwords, passkeys, and data services active at the same time. Turn off a service to add more."</string>
@@ -5184,8 +5186,7 @@
     <string name="content_protection_preference_subpage_info" msgid="6890886357653365489"></string>
     <string name="accessibility_setup_password_complete" msgid="6358749253318369077">"Password is now set up"</string>
     <string name="show_stylus_pointer_icon" msgid="1010583689203665786">"Show pointer while hovering"</string>
-    <!-- no translation found for media_drm_settings_title (897424966554739867) -->
-    <skip />
+    <string name="media_drm_settings_title" msgid="897424966554739867">"Media DRM settings"</string>
     <string name="force_swcrypto_fallback_title" msgid="8053166299808645593">"Force Software Secure Crypto"</string>
     <string name="force_swcrypto_fallback_summary" msgid="181969966310309701">"Force DRM key management to use software-based whitebox crypto"</string>
 </resources>

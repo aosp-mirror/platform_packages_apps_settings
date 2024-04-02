@@ -267,14 +267,10 @@
     <string name="zone_time_type_standard" msgid="6865420715430680352">"שעון רגיל"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"בחירה לפי אזור"</string>
     <string name="zone_menu_by_offset" msgid="1257702747474426745">"‏בחירה לפי קיזוז ל-UTC"</string>
-    <!-- no translation found for time_feedback_category_title (5942621686512255208) -->
-    <skip />
-    <!-- no translation found for keywords_time_feedback_category (4553921538559830393) -->
-    <skip />
-    <!-- no translation found for time_feedback_title (7720948068042783614) -->
-    <skip />
-    <!-- no translation found for keywords_time_feedback (929965356597294030) -->
-    <skip />
+    <string name="time_feedback_category_title" msgid="5942621686512255208">"משוב"</string>
+    <string name="keywords_time_feedback_category" msgid="4553921538559830393">"משוב, באג, זמן, אזור, אזור זמן"</string>
+    <string name="time_feedback_title" msgid="7720948068042783614">"שליחת משוב לגבי הזמן"</string>
+    <string name="keywords_time_feedback" msgid="929965356597294030">"משוב, באג, זמן, אזור, אזור זמן"</string>
     <string name="lock_after_timeout" msgid="8682769000437403444">"נעילה בתום הזמן הקצוב לכיבוי המסך"</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> לאחר תום הזמן הקצוב לתפוגה"</string>
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"מיד לאחר תום הזמן הקצוב לתפוגה, מלבד כאשר נמנעת נעילה על ידי <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
@@ -569,7 +565,8 @@
     <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"אפשר לנעול את המרחב הפרטי באופן אוטומטי אם לא משתמשים במכשיר במשך פרק זמן מסוים"</string>
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"בכל פעם שהמכשיר ננעל"</string>
     <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"אחרי 5 דקות של חוסר פעילות"</string>
-    <string name="private_space_auto_lock_never" msgid="595014527119778873">"אף פעם"</string>
+    <!-- no translation found for private_space_auto_lock_after_device_restart (288755768725895029) -->
+    <skip />
     <string name="private_space_hide_page_title" msgid="4351404195904146088">"הסתרת המרחב הפרטי כשהוא נעול"</string>
     <string name="private_space_hide_page_summary" msgid="6247773353685839242">"כדי למנוע מאנשים אחרים לדעת שיש לך מרחב פרטי במכשיר, אפשר להסתיר אותו מרשימת האפליקציות"</string>
     <string name="private_space_access_header" msgid="1077082416567150819">"גישה למרחב הפרטי כשהוא מוסתר"</string>
@@ -1439,8 +1436,7 @@
     <string name="battery_level_title" msgid="1371765298786083448">"טעינת סוללה:"</string>
     <string name="communal_settings_title" msgid="2845678473945902115">"שיתופי"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"הגדרות שיתופיות"</string>
-    <!-- no translation found for satellite_setting (4171265534842459910) -->
-    <skip />
+    <string name="satellite_setting" msgid="4171265534842459910">"העברת הודעות באמצעות לוויין"</string>
     <string name="apn_settings" msgid="4295467389400441299">"‏פריטי APN"</string>
     <string name="apn_edit" msgid="2003683641840248741">"עריכת נקודת גישה"</string>
     <string name="apn_add" msgid="9069613192201630934">"‏הוספת נקודת גישה (AP)"</string>
@@ -1506,7 +1502,7 @@
     <string name="reset_esim_error_msg" msgid="8459527827897797168">"‏משהו השתבש וכרטיסי ה-eSIM לא נמחקו.\n\nצריך להפעיל את המכשיר מחדש ולנסות שוב."</string>
     <string name="reset_private_space_delete_title" msgid="2555885198282572990">"מחיקת המרחב הפרטי"</string>
     <string name="reset_private_space_delete_dialog" msgid="2108869024671690587">"אם יש לך מרחב פרטי במכשיר, הוא יימחק לתמיד. כל האפליקציות במרחב הפרטי שלך והנתונים שלהן יימחקו."</string>
-    <string name="main_clear_title" msgid="277664302144837723">"מחיקת כל הנתונים (איפוס לנתוני היצרן)"</string>
+    <string name="main_clear_title" msgid="277664302144837723">"מחיקת כל הנתונים (איפוס להגדרות המקוריות)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"מחיקת כל הנתונים (איפוס לנתוני היצרן)"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"מוזיקה"</li>\n<li>"תמונות"</li>\n<li>"נתוני משתמש אחרים"</li></string>
     <string name="main_clear_desc_also_erases_esim" msgid="4553469876411831729">"‏"<li>"כרטיסי eSIM"</li></string>
@@ -1759,8 +1755,7 @@
     <string name="enable_text" msgid="8570798764647110430">"הפעלה"</string>
     <string name="clear_user_data_text" msgid="6773186434260397947">"מחיקת כל הנתונים מהאחסון"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"להסרת התקנה של עדכונים"</string>
-    <!-- no translation found for app_restricted_settings_lockscreen_title (796413224212436400) -->
-    <skip />
+    <string name="app_restricted_settings_lockscreen_title" msgid="796413224212436400">"מתן גישה להרשאות מוגבלות"</string>
     <string name="auto_launch_enable_text" msgid="8912714475823807798">"פעילויות מסוימות שבחרת נפתחות באפליקציה הזו כברירת מחדל."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"בחרת לאפשר לאפליקציה ליצור ווידג\'טים ולגשת לנתונים שלהם."</string>
     <string name="auto_launch_disable_text" msgid="502648841250936209">"לא הוגדרו ברירות מחדל."</string>
@@ -2028,11 +2023,9 @@
     <string name="color_contrast_preview_email_send_date" msgid="2108702726171600080">"לפני יומיים"</string>
     <string name="color_contrast_preview_email_badge" msgid="4845484039428505392">"להמשיך בטיפול?"</string>
     <string name="color_contrast_preview_email_title" msgid="198712116139754823">"דוח על נסיעת העסקים"</string>
-    <!-- no translation found for color_contrast_preview_email_body (2714343154965937945) -->
-    <skip />
+    <string name="color_contrast_preview_email_body" msgid="2714343154965937945">"לסיוע נוסף, אפשר לפנות אליי או לציפורה. הדוח הזה יהיה"</string>
     <string name="color_contrast_preview_email_attachment_name" msgid="852407311884814746">"הוצאות הלקוח"</string>
-    <!-- no translation found for color_contrast_about_title (5939566801408667867) -->
-    <skip />
+    <string name="color_contrast_about_title" msgid="5939566801408667867">"מידע על ניגודיות צבעים"</string>
     <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"הכהיית המסך"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"פקדי אינטראקציה"</string>
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"הגדרות תזמון"</string>
@@ -2061,6 +2054,8 @@
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"תוך כדי שמקלידים, הגדלת התצוגה עוקבת אחר הטקסט"</string>
     <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"ההגדלה פועלת גם כשעוברים בין אפליקציות"</string>
     <string name="accessibility_screen_magnification_always_on_summary" msgid="306908451430863049">"הזכוכית המגדלת ממשיכה לפעול והתצוגה מוקטנת כשעוברים בין אפליקציות"</string>
+    <!-- no translation found for accessibility_screen_magnification_always_on_unavailable_summary (3844732482037416038) -->
+    <skip />
     <string name="accessibility_screen_magnification_joystick_title" msgid="1803769708582404964">"ג\'ויסטיק"</string>
     <string name="accessibility_screen_magnification_joystick_summary" msgid="4640300148573982720">"אפשר להפעיל את זכוכית המגדלת ולהזיז אותה באמצעות ג\'ויסטיק במסך. לוחצים לחיצה ארוכה וגוררים באמצעות הג\'ויסטיק כדי לשלוט בזכוכית המגדלת. מקישים וגוררים את האצבע כדי להזיז את הג\'ויסטיק עצמו."</string>
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"מידע על הגדלה"</string>
@@ -2109,89 +2104,59 @@
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"‏&lt;b&gt;כדי להגדיל את התצוגה:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. משתמשים במקש הקיצור כדי להתחיל בהגדלה&lt;br/&gt; {1,number,integer}. מקישים על המסך&lt;br/&gt; {2,number,integer}. גוררים 2 אצבעות על המסך כדי לזוז בו&lt;br/&gt; {3,number,integer}. עושים תנועת צביטה באמצעות 2 אצבעות כדי לשנות את מרחק התצוגה&lt;br/&gt; {4,number,integer}. משתמשים במקש הקיצור כדי להפסיק את ההגדלה&lt;br/&gt;&lt;br/&gt; &lt;b&gt;כדי להגדיל את התצוגה באופן זמני:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. מוודאים שסוג ההגדלה הוא \'מסך מלא\'&lt;br/&gt; {1,number,integer}. משתמשים במקש הקיצור כדי להתחיל בהגדלה&lt;br/&gt; {2,number,integer}. לוחצים לחיצה ארוכה במקום כלשהו במסך&lt;br/&gt; {3,number,integer}. גוררים את האצבע על המסך כדי לזוז בו&lt;br/&gt; {4,number,integer}. כדי להפסיק את ההגדלה, מרימים את האצבע"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"כשההגדלה מופעלת, ניתן להתקרב למסך.\n\n"<b>"כדי להתקרב,"</b>", מתחילים בהגדלה ולאחר מכן מקישים במקום כלשהו במסך.\n"<ul><li>"גוררים שתי אצבעות או יותר כדי לגלול"</li>\n<li>"עושים תנועת צביטה עם שתי אצבעות או יותר כדי לשנות את מרחק התצוגה"</li></ul>\n\n<b>"כדי להתקרב באופן זמני"</b>", מתחילים בהגדלה ולאחר מכן, לוחצים לחיצה ארוכה במקום כלשהו במסך.\n"<ul><li>"גוררים כדי לנוע במסך"</li>\n<li>"מרימים את האצבע כדי להתרחק"</li></ul>\n\n"לא ניתן להתקרב באמצעות המקלדת או סרגל הניווט."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"דף <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> מתוך <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
-    <!-- no translation found for accessibility_tutorial_dialog_title_button (1924337057649065884) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_title_volume (1032323517963429981) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_title_triple (5529704884360240365) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_title_two_finger_double (5749704453829390283) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"קיצור דרך באמצעות לחצן הנגישות"</string>
+    <string name="accessibility_tutorial_dialog_title_volume" msgid="1032323517963429981">"קיצור דרך באמצעות מקשי עוצמת הקול"</string>
+    <string name="accessibility_tutorial_dialog_title_triple" msgid="5529704884360240365">"קיצור דרך באמצעות הקשה משולשת"</string>
+    <string name="accessibility_tutorial_dialog_title_two_finger_double" msgid="5749704453829390283">"‏קיצור דרך באמצעות הקשה כפולה ב-%1$d אצבעות"</string>
     <string name="accessibility_tutorial_dialog_title_quick_setting" msgid="2905083277641794558">"קיצור דרך להגדרות מהירות"</string>
-    <!-- no translation found for accessibility_tutorial_dialog_title_gesture (4541649734549409614) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_title_gesture" msgid="4541649734549409614">"קיצור דרך באמצעות תנועה להפעלת תכונות הנגישות"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="6800684770875867559">"שימוש בתנועה להפעלת תכונות הנגישות"</string>
-    <!-- no translation found for accessibility_tutorial_dialog_message_button (8977286776192770246) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_floating_button (6631371483819355514) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_volume (3785791536286606664) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_message_button" msgid="8977286776192770246">"כדי להשתמש בתכונה הזו, צריך להקיש על לחצן הנגישות <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> בחלק התחתון של המסך.\n\nכדי לעבור בין התכונות השונות, צריך ללחוץ לחיצה ארוכה על לחצן הנגישות."</string>
+    <string name="accessibility_tutorial_dialog_message_floating_button" msgid="6631371483819355514">"כדי להשתמש בתכונה הזו, צריך להקיש על לחצן הנגישות במסך"</string>
+    <string name="accessibility_tutorial_dialog_message_volume" msgid="3785791536286606664">"כדי להשתמש בתכונה הזו, לוחצים לחיצה ארוכה על שני המקשים של עוצמת הקול"</string>
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"כדי להפעיל הגדלה ולהפסיק אותה, יש להקיש שלוש פעמים במיקום כלשהו במסך."</string>
-    <!-- no translation found for accessibility_tutorial_dialog_tripletap_instruction (7549293553589934) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_twofinger_doubletap_instruction (1007756360115974649) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_quick_setting (3715446725334547432) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_shortcut_unavailable_in_suw (3847728530771929959) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_tripletap_instruction" msgid="7549293553589934">"‏כדי להתחיל ולהפסיק את ההגדלה, מקישים %1$d פעמים במהירות על המסך"</string>
+    <string name="accessibility_tutorial_dialog_twofinger_doubletap_instruction" msgid="1007756360115974649">"‏כדי להתחיל ולהפסיק את ההגדלה, מקישים הקשה כפולה במהירות על המסך עם %1$d אצבעות"</string>
+    <string name="accessibility_tutorial_dialog_message_quick_setting" msgid="3715446725334547432">"{count,plural, =1{כדי להשתמש בתכונה הזו, מחליקים למטה מהחלק העליון של המסך. לאחר מכן, מאתרים את הלחצן של {featureName}.}one{כדי להשתמש בתכונה הזו, מחליקים למטה מהחלק העליון של המסך עם # אצבעות. לאחר מכן, מאתרים את הלחצן של {featureName}.}two{כדי להשתמש בתכונה הזו, מחליקים למטה מהחלק העליון של המסך עם # אצבעות. לאחר מכן, מאתרים את הלחצן של {featureName}.}other{כדי להשתמש בתכונה הזו, מחליקים למטה מהחלק העליון של המסך עם # אצבעות. לאחר מכן, מאתרים את הלחצן של {featureName}.}}"</string>
+    <string name="accessibility_tutorial_dialog_shortcut_unavailable_in_suw" msgid="3847728530771929959">"קיצור הדרך יהיה זמין כשהגדרת המכשיר תסתיים."</string>
     <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"כדי להשתמש בתכונה זו, יש להחליק כלפי מעלה מתחתית המסך באמצעות שתי אצבעות.\n\nכדי לעבור בין התכונות השונות, יש להחליק כלפי מעלה באמצעות שתי אצבעות ולהחזיק."</string>
-    <!-- no translation found for accessibility_tutorial_dialog_gesture_shortcut_instruction (7349950768250852308) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_gesture_shortcut_instruction" msgid="7349950768250852308">"{count,plural, =1{כדי להשתמש בתכונה הזו, מחליקים למעלה מהחלק התחתון של המסך}one{כדי להשתמש בתכונה הזו, מחליקים למעלה עם # אצבעות מהחלק התחתון של המסך}two{כדי להשתמש בתכונה הזו, מחליקים למעלה עם # אצבעות מהחלק התחתון של המסך}other{כדי להשתמש בתכונה הזו, מחליקים למעלה עם # אצבעות מהחלק התחתון של המסך}}"</string>
     <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="8142847782708562793">"כדי להשתמש בתכונה זו, יש להחליק כלפי מעלה מתחתית המסך באמצעות שלוש אצבעות.\n\nכדי לעבור בין התכונות השונות, יש להחליק כלפי מעלה באמצעות שלוש אצבעות ולהחזיק."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"כדי להשתמש בתכונת הנגישות, יש להחליק כלפי מעלה מתחתית המסך באמצעות שתי אצבעות.\n\nכדי לעבור בין התכונות השונות, יש להחליק כלפי מעלה באמצעות שתי אצבעות ולהחזיק."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="7292969929578621958">"כדי להשתמש בתכונת הנגישות, יש להחליק כלפי מעלה מתחתית המסך באמצעות שלוש אצבעות.\n\nכדי לעבור בין התכונות השונות, יש להחליק כלפי מעלה באמצעות שלוש אצבעות ולהחזיק."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"הבנתי"</string>
-    <!-- no translation found for accessibility_tutorial_dialog_link_button (13364319079385020) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_configure_software_shortcut_type (8041105223988170653) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_link_button" msgid="13364319079385020">"לחצן בהתאמה אישית"</string>
+    <string name="accessibility_tutorial_dialog_configure_software_shortcut_type" msgid="8041105223988170653">"אפשרויות נוספות"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"קיצור הדרך של \'<xliff:g id="SERVICE">%1$s</xliff:g>\'"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="48978719406821294">"לחצן הנגישות"</string>
     <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="7346399253904683940">"תנועה להפעלת תכונות הנגישות"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"יש להחליק למעלה בעזרת שתי אצבעות"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"יש להחליק למעלה בעזרת שלוש אצבעות"</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_software (6505512764022389951) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_floating_button (6266489864614886247) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_software_by_gesture (4775049370625630546) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software (8315934725362849788) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_title_software" msgid="6505512764022389951">"לחצן הנגישות"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_floating_button" msgid="6266489864614886247">"צריך להקיש על הלחצן הצף"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="4775049370625630546">"תנועה להפעלת תכונות הנגישות"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="8315934725362849788">"צריך להקיש על לחצן הנגישות <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> בחלק התחתון של המסך. כדי לעבור בין תכונות, צריך ללחוץ לחיצה ארוכה על לחצן הנגישות."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"יש להחליק כלפי מעלה מתחתית המסך באמצעות שתי אצבעות.\n\nכדי לעבור בין תכונות, יש להחליק כלפי מעלה באמצעות שתי אצבעות ולהחזיק."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"יש להחליק כלפי מעלה מתחתית המסך באמצעות שלוש אצבעות.\n\nכדי לעבור בין תכונות, יש להחליק כלפי מעלה באמצעות שלוש אצבעות ולהחזיק."</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_gesture (2081123009255579884) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_summary_gesture" msgid="2081123009255579884">"{count,plural, =1{מחליקים למעלה מהחלק התחתון של המסך. כדי לעבור בין תכונות, מחליקים למעלה ומחזיקים.}one{מחליקים למעלה עם # אצבעות מהחלק התחתון של המסך. כדי לעבור בין תכונות, מחליקים למעלה עם # אצבעות ומחזיקים.}two{מחליקים למעלה עם # אצבעות מהחלק התחתון של המסך. כדי לעבור בין תכונות, מחליקים למעלה עם # אצבעות ומחזיקים.}other{מחליקים למעלה עם # אצבעות מהחלק התחתון של המסך. כדי לעבור בין תכונות, מחליקים למעלה עם # אצבעות ומחזיקים.}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="4459254227203203324"><annotation id="link">"אפשרויות נוספות"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"מידע נוסף על <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"הגדרות מהירות"</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_quick_settings (739883998754165940) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_quick_settings_suw (4216628328191609785) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="739883998754165940">"{count,plural, =1{מחליקים למטה מהחלק העליון של המסך}one{מחליקים למטה עם # אצבעות מהחלק העליון של המסך}two{מחליקים למטה עם # אצבעות מהחלק העליון של המסך}other{מחליקים למטה עם # אצבעות מהחלק העליון של המסך}}"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_quick_settings_suw" msgid="4216628328191609785">"{count,plural, =1{מחליקים למטה מהחלק העליון של המסך. קיצור הדרך יהיה זמין כשהגדרת המכשיר תסתיים.}one{מחליקים למטה עם # אצבעות מהחלק העליון של המסך. קיצור הדרך יהיה זמין כשהגדרת המכשיר תסתיים.}two{מחליקים למטה עם # אצבעות מהחלק העליון של המסך. קיצור הדרך יהיה זמין כשהגדרת המכשיר תסתיים.}other{מחליקים למטה עם # אצבעות מהחלק העליון של המסך. קיצור הדרך יהיה זמין כשהגדרת המכשיר תסתיים.}}"</string>
     <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"הגדרות מהירות"</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_hardware (844089763968552142) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_hardware_keyword (2483152542320987022) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="844089763968552142">"מקשי עוצמת הקול"</string>
+    <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"מקשי עוצמת הקול"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"יש ללחוץ לחיצה ארוכה על שני הלחצנים של עוצמת הקול"</string>
     <string name="accessibility_shortcut_edit_dialog_title_two_finger_double_tap" msgid="2271778556854020996">"מקישים הקשה כפולה על המסך עם שתי אצבעות"</string>
-    <!-- no translation found for accessibility_shortcut_edit_screen_title_two_finger_double_tap (8952595692906527694) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_screen_summary_two_finger_double_tap (385404127425496362) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_screen_title_triple_tap (3314488747597058942) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_screen_summary_triple_tap (4839204951599629871) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_two_finger_double_tap_keyword (6271718715836961167) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_screen_title_two_finger_double_tap" msgid="8952595692906527694">"‏הקשה כפולה עם %1$d אצבעות"</string>
+    <string name="accessibility_shortcut_edit_screen_summary_two_finger_double_tap" msgid="385404127425496362">"‏מקישים הקשה כפולה במהירות על המסך עם %1$d אצבעות"</string>
+    <string name="accessibility_shortcut_edit_screen_title_triple_tap" msgid="3314488747597058942">"הקשה משולשת"</string>
+    <string name="accessibility_shortcut_edit_screen_summary_triple_tap" msgid="4839204951599629871">"‏מקישים %1$d פעמים במהירות על המסך. זה עלול להאט את פעולת המכשיר."</string>
+    <string name="accessibility_shortcut_two_finger_double_tap_keyword" msgid="6271718715836961167">"‏הקשה כפולה עם %1$d אצבעות"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_two_finger_double_tap" msgid="8262165091808318538">"‏מקישים במהירות על המסך {0,number,integer} פעמים עם שתי אצבעות"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"הקשה על המסך 3 פעמים"</string>
-    <!-- no translation found for accessibility_shortcut_triple_tap_keyword (5359347130888464334) -->
-    <skip />
+    <string name="accessibility_shortcut_triple_tap_keyword" msgid="5359347130888464334">"הקשה משולשת"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="2102327956423320536">"‏מקישים במהירות על המסך {0,number,integer} פעמים. קיצור הדרך הזה עלול להאט את פעולת המכשיר"</string>
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"מתקדם"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"הלחצן \'נגישות\' מוגדר לשירות <xliff:g id="SERVICE">%1$s</xliff:g>. כדי להשתמש בהגדלה, יש ללחוץ לחיצה ארוכה על לחצן הנגישות ולאחר מכן לבחור בהגדלה."</string>
@@ -4466,6 +4431,8 @@
     <string name="credman_confirmation_change_provider_positive_button" msgid="7732302992885116967">"שינוי"</string>
     <string name="credman_limit_error_msg_title" msgid="1525814645803612135">"אפשר להפעיל רק 5 שירותים בכל פעם"</string>
     <string name="credman_limit_error_msg" msgid="2521803280130310063">"צריך להשבית לפחות שירות אחד כדי להוסיף עוד שירות"</string>
+    <!-- no translation found for credman_main_settings_intro_text (4981603639240772620) -->
+    <skip />
     <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"‏%1$s עושה שימוש במידע המוצג במסך כדי לקבוע אילו פרטים ניתן למלא באופן אוטומטי."</string>
     <string name="credman_error_message_title" msgid="4099557206946333568">"מגבלת הסיסמאות, מפתחות הגישה ושירותי הנתונים"</string>
     <string name="credman_error_message" msgid="8334797097200415449">"ניתן להפעיל עד 5 סיסמאות, מפתחות גישה ושירותי נתונים בו-זמנית. יש להשבית אחד מהשירותים כדי להוסיף שירות אחר."</string>
@@ -4541,8 +4508,7 @@
     <string name="media_output_label_title" msgid="4139048973886819148">"הפעלת <xliff:g id="LABEL">%s</xliff:g> ב:"</string>
     <string name="media_output_title_without_playing" msgid="3339321669132875821">"איפה האודיו יופעל"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"במכשיר הזה"</string>
-    <!-- no translation found for media_output_audio_sharing (6531742594884809737) -->
-    <skip />
+    <string name="media_output_audio_sharing" msgid="6531742594884809737">"שיתוף אודיו"</string>
     <string name="media_out_summary_ongoing_call_state" msgid="475188726850090363">"לא זמין במהלך ביצוע שיחות"</string>
     <string name="take_call_on_title" msgid="1159417893879946757">"קבלת שיחה בסוג פלט"</string>
     <string name="cannot_change_apn_toast" msgid="296540724089240405">"‏לא ניתן לשנות APN זה."</string>
@@ -4674,8 +4640,7 @@
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"הטלפון יתחבר אוטומטית ללוויין. כדי להתחבר בצורה הטובה ביותר צריך להיות בחוץ, מתחת לכיפת השמיים."</string>
     <string name="title_supported_service" msgid="4275535165812691571">"אחרי שהטלפון מתחבר ללוויין"</string>
     <string name="summary_supported_service" msgid="4320535903444834786">"אפשר לשלוח הודעות טקסט לכל אחד, כולל לשירותי החירום. הטלפון יתחבר מחדש לרשת סלולרית כשהיא תהיה זמינה."</string>
-    <!-- no translation found for satellite_setting_summary_more_information (7729454610548016356) -->
-    <skip />
+    <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"העברת הודעות באמצעות לוויין אורכת זמן רב יותר וזמינה רק בחלק מהאזורים. מזג אוויר ומבנים מסוימים עשויים להשפיע על חיבור הלוויין. אי אפשר להתקשר באמצעות לוויין. יכול להיות שאפשר לבצע שיחות חירום.\n\nיכול להיות שהשינויים בחשבון יופיעו ב\'הגדרות\' לאחר זמן מה. למידע נוסף, ניתן לפנות לספק הסלולרי."</string>
     <string name="more_about_satellite_messaging" msgid="3385673133561348509">"מידע נוסף על העברת הודעות באמצעות לוויין"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"‏שמות של נקודות גישה (APN)"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
@@ -4713,10 +4678,8 @@
     <string name="sim_action_turn_off" msgid="3506698692916473000">"השבתה"</string>
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"‏לא ניתן להפעיל את ה-SIM"</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"‏יש להפעיל שוב את ה-SIM. אם הבעיה נמשכת, יש להפעיל מחדש את המכשיר."</string>
-    <!-- no translation found for sim_onboarding_dialog_starting_title (4212945803784596345) -->
-    <skip />
-    <!-- no translation found for sim_onboarding_dialog_starting_msg (8450391476631265209) -->
-    <skip />
+    <string name="sim_onboarding_dialog_starting_title" msgid="4212945803784596345">"‏הגדרת ההעדפות של כרטיסי ה-SIM"</string>
+    <string name="sim_onboarding_dialog_starting_msg" msgid="8450391476631265209">"‏צריך להגדיר את ההעדפות של הרשת הסלולרית כדי להשתמש בכמה כרטיסי SIM במכשיר הזה"</string>
     <string name="sim_onboarding_label_sim_title" msgid="273162565849288273">"‏הוספת תווית לכרטיסי ה-SIM"</string>
     <string name="sim_onboarding_label_sim_msg" msgid="5105859235219529056">"התוויות האלה יוצגו לך בביצוע שיחות, בשליחת טקסטים ובשימוש בנתונים וב\'הגדרות\'"</string>
     <string name="sim_onboarding_label_sim_dialog_title" msgid="5839073125605286120">"‏התווית של כרטיס ה-SIM"</string>
@@ -4734,10 +4697,8 @@
     <string name="sim_action_restart_dialog_msg" msgid="4737611046767629774">"‏כדי להשתמש בשני כרטיסי SIM בו-זמנית, צריך להפעיל מחדש את המכשיר ואז להפעיל את שני כרטיסי ה-SIM"</string>
     <string name="sim_action_restart_dialog_cancel" msgid="665560106686565624">"שימוש ב-<xliff:g id="CARRIER_NAME">%1$s</xliff:g> בלבד"</string>
     <string name="sim_onboarding_phoneNumber_data_only" msgid="8158409121949373662">"נתונים בלבד"</string>
-    <!-- no translation found for sim_onboarding_setup (8678504891830386486) -->
-    <skip />
-    <!-- no translation found for sim_onboarding_close (8656305651358745422) -->
-    <skip />
+    <string name="sim_onboarding_setup" msgid="8678504891830386486">"שנתחיל?"</string>
+    <string name="sim_onboarding_close" msgid="8656305651358745422">"סגירה"</string>
     <string name="sim_onboarding_next" msgid="6415025179929475355">"הבא"</string>
     <string name="sim_onboarding_progressbar_turning_sim_on" msgid="1163318788393361574">"מתבצעת הפעלה של <xliff:g id="CARRIER_NAME">%1$s</xliff:g>…"</string>
     <string name="mobile_network_spn_title" msgid="3053793174495329077">"רשת סלולרית"</string>

@@ -109,7 +109,7 @@
     <string name="bluetooth_off_footer" msgid="76578735660216295">"Pokud se chcete připojit k ostatním zařízením, zapněte Bluetooth."</string>
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"Vaše zařízení"</string>
     <string name="bluetooth_pairing_page_title" msgid="3403981358823707692">"Spárovat nové zařízení"</string>
-    <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Vypnout hardwarové snížení zátěže Bluetooth (A2DP)"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Vypnout hardwarové snižování zátěže Bluetooth (A2DP)"</string>
     <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"Vypnout snižování zatížení zvukového hardwaru Bluetooth LE"</string>
     <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"Restartovat zařízení?"</string>
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"Ke změně nastavení je nutné restartovat zařízení."</string>
@@ -267,14 +267,10 @@
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Standardní čas"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"Vybrat podle oblasti"</string>
     <string name="zone_menu_by_offset" msgid="1257702747474426745">"Vybrat podle posunu od UTC"</string>
-    <!-- no translation found for time_feedback_category_title (5942621686512255208) -->
-    <skip />
-    <!-- no translation found for keywords_time_feedback_category (4553921538559830393) -->
-    <skip />
-    <!-- no translation found for time_feedback_title (7720948068042783614) -->
-    <skip />
-    <!-- no translation found for keywords_time_feedback (929965356597294030) -->
-    <skip />
+    <string name="time_feedback_category_title" msgid="5942621686512255208">"Zpětná vazba"</string>
+    <string name="keywords_time_feedback_category" msgid="4553921538559830393">"zpětná vazba, chyba, čas, pásmo, časové pásmo"</string>
+    <string name="time_feedback_title" msgid="7720948068042783614">"Odeslat zpětnou vazbu o čase"</string>
+    <string name="keywords_time_feedback" msgid="929965356597294030">"zpětná vazba, chyba, čas, pásmo, časové pásmo"</string>
     <string name="lock_after_timeout" msgid="8682769000437403444">"Interval uzamčení obrazovky"</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> po vypršení časového limitu"</string>
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"Okamžitě po vypršení časového limitu, pokud odemknutí není udržováno funkcí <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
@@ -569,7 +565,8 @@
     <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"Pokud zařízení nějakou dobu nepoužijete, soukromý prostor se může automaticky zamknout"</string>
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"Vždy, když se zařízení zamkne"</string>
     <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"Po 5 minutách nečinnosti"</string>
-    <string name="private_space_auto_lock_never" msgid="595014527119778873">"Nikdy"</string>
+    <!-- no translation found for private_space_auto_lock_after_device_restart (288755768725895029) -->
+    <skip />
     <string name="private_space_hide_page_title" msgid="4351404195904146088">"Skrýt soukromý prostor, když je uzamčený"</string>
     <string name="private_space_hide_page_summary" msgid="6247773353685839242">"Pokud chcete, aby o soukromém prostoru ve vašem zařízení nikdo nevěděl, můžete ho skrýt ze seznamu aplikací"</string>
     <string name="private_space_access_header" msgid="1077082416567150819">"Přístup do soukromého prostoru, když je skrytý"</string>
@@ -608,7 +605,7 @@
     <string name="private_space_learn_more_text" msgid="5314198983263277586">"Další informace o soukromém prostoru"</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Nastavování soukromého prostoru…"</string>
     <string name="private_space_notifications_hidden_title" msgid="2009112565217540581">"Když je soukromý prostor uzamčen, jsou oznámení aplikací v soukromém prostoru skryta"</string>
-    <string name="private_space_explore_settings_title" msgid="1448128245941571654">"Pokud chcete skrýt soukromý prostor a nastavit automatické uzamknutí, přejděte do nastavení soukromého prostoru"</string>
+    <string name="private_space_explore_settings_title" msgid="1448128245941571654">"Chcete-li soukromý prostor skrýt a automaticky ho uzamykat, přejděte do jeho nastavení"</string>
     <string name="private_space_apps_installed_title" msgid="4781838023423527730">"Povinné aplikace už jsou v soukromém prostoru nainstalované"</string>
     <string name="private_space_error_screen_title" msgid="739381738044418346">"Soukromý prostor se nepodařilo nastavit"</string>
     <string name="private_space_tryagain_label" msgid="8305362615231738367">"Zkusit znovu"</string>
@@ -643,7 +640,7 @@
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Maximální počet otisků prstů, které lze přidat: <xliff:g id="COUNT">%d</xliff:g>"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Přidali jste maximální počet otisků prstů"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Další otisky prstů nelze přidat"</string>
-    <string name="fingerprint_delete_title" msgid="5412123164503407098">"Smazat otisk <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>"</string>
+    <string name="fingerprint_delete_title" msgid="5412123164503407098">"Smazání otisku <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>"</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Otisk prstu už nebude možné používat k odemknutí pracovního profilu, autorizaci nákupů ani přihlašování do pracovních aplikací."</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"Šifrování"</string>
     <string name="encrypted_summary" msgid="545623487587251207">"Šifrováno"</string>
@@ -1716,7 +1713,7 @@
     <string name="lock_settings_profile_unification_dialog_uncompliant_body" msgid="8844682343443755895">"Zámek pracovního profilu nesplňuje požadavky vaší organizace na zabezpečení. Pro obrazovku zařízení i pracovní profil můžete používat stejný zámek, budou se na něj však vztahovat všechny zásady platné pro pracovní zámek."</string>
     <string name="lock_settings_profile_unification_dialog_confirm" msgid="6276915393736137843">"Používat jeden zámek"</string>
     <string name="lock_settings_profile_unification_dialog_uncompliant_confirm" msgid="8509287115116369677">"Používat jeden zámek"</string>
-    <string name="lock_settings_profile_unified_summary" msgid="777095092175037385">"Stejný jako zámek obrazovky zařízení"</string>
+    <string name="lock_settings_profile_unified_summary" msgid="777095092175037385">"Stejný způsob zamykání jako u obrazovky"</string>
     <string name="manageapplications_settings_title" msgid="9198876415524237657">"Spravovat aplikace"</string>
     <string name="applications_settings" msgid="1941993743933425622">"Informace o aplikacích"</string>
     <string name="applications_settings_header" msgid="3154670675856048015">"Nastavení aplikace"</string>
@@ -1758,8 +1755,7 @@
     <string name="enable_text" msgid="8570798764647110430">"Aktivovat"</string>
     <string name="clear_user_data_text" msgid="6773186434260397947">"Vymazat úložiště"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"Odinstalovat aktualizace"</string>
-    <!-- no translation found for app_restricted_settings_lockscreen_title (796413224212436400) -->
-    <skip />
+    <string name="app_restricted_settings_lockscreen_title" msgid="796413224212436400">"Povolit omezená oprávnění"</string>
     <string name="auto_launch_enable_text" msgid="8912714475823807798">"Některé aktivity, které jste vybrali, se otevírají v této aplikaci podle výchozího nastavení."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"Této aplikaci jste povolili vytváření widgetů a přístup k jejich datům."</string>
     <string name="auto_launch_disable_text" msgid="502648841250936209">"Aplikace není nastavena jako výchozí pro žádné akce."</string>
@@ -2027,11 +2023,9 @@
     <string name="color_contrast_preview_email_send_date" msgid="2108702726171600080">"před 2 dny"</string>
     <string name="color_contrast_preview_email_badge" msgid="4845484039428505392">"Sledovat?"</string>
     <string name="color_contrast_preview_email_title" msgid="198712116139754823">"Hlášení o služební cestě"</string>
-    <!-- no translation found for color_contrast_preview_email_body (2714343154965937945) -->
-    <skip />
+    <string name="color_contrast_preview_email_body" msgid="2714343154965937945">"Pokud potřebujete pomoct, obraťte se na mě nebo na Helen. Toto hlášení bude"</string>
     <string name="color_contrast_preview_email_attachment_name" msgid="852407311884814746">"Klientské výdaje"</string>
-    <!-- no translation found for color_contrast_about_title (5939566801408667867) -->
-    <skip />
+    <string name="color_contrast_about_title" msgid="5939566801408667867">"O barevném kontrastu"</string>
     <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"Ztmavit obrazovku"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Interaktivní ovládací prvky"</string>
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"Ovládací prvky časování"</string>
@@ -2060,6 +2054,8 @@
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"Lupa sleduje text během psaní"</string>
     <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"Při přepínání mezi aplikacemi ponechat zapnuté"</string>
     <string name="accessibility_screen_magnification_always_on_summary" msgid="306908451430863049">"Lupa zůstane zapnutá a při přepnutí mezi aplikacemi se oddálí"</string>
+    <!-- no translation found for accessibility_screen_magnification_always_on_unavailable_summary (3844732482037416038) -->
+    <skip />
     <string name="accessibility_screen_magnification_joystick_title" msgid="1803769708582404964">"Joystick"</string>
     <string name="accessibility_screen_magnification_joystick_summary" msgid="4640300148573982720">"Lupu aktivujete a posouváte pomocí joysticku na obrazovce. Klepněte na obrazovku a podržte ji, poté přetahováním prstu po joysticku ovládejte lupu. Joystick můžete přesunout klepnutím a přetažením."</string>
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"Zvětšení"</string>
@@ -2694,7 +2690,7 @@
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"Šifrování"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"Generace sítí"</string>
     <string name="cellular_security_network_generations_summary" msgid="139087814553929402">"Každou nainstalovanou SIM kartu můžete nakonfigurovat, aby se připojovala pouze k sítím, které podporují 3G, 4G a 5G. Ke starším, nezabezpečeným sítím 2G, se SIM karta připojovat nebude. Toto nastavení může omezit možnost připojení v situacích, kdy bude k dispozici pouze síť 2G. V případě naléhavé události může být síť 2G použita."</string>
-    <string name="credentials_title" msgid="7535942196886123656">"Úložiště pověření"</string>
+    <string name="credentials_title" msgid="7535942196886123656">"Úložiště přihlašovacích údajů"</string>
     <string name="credentials_install" msgid="3933218407598415827">"Instalace certifikátu"</string>
     <string name="credentials_reset" msgid="4246628389366452655">"Vymazání pověření"</string>
     <string name="credentials_reset_summary" msgid="5400585520572874255">"Odstranit všechny certifikáty"</string>
@@ -3474,9 +3470,9 @@
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Skrýt tiché konverzace a oznámení"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Nezobrazovat žádná oznámení"</string>
     <string name="lock_screen_notifs_redact" msgid="9024158855454642296">"Citlivá oznámení"</string>
-    <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"Při uzamknutí zobrazovat citlivý obsah"</string>
+    <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"Zobrazovat citlivý obsah při uzamknutí"</string>
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"Citlivá oznámení v pracovním profilu"</string>
-    <string name="lock_screen_notifs_redact_work_summary" msgid="3238238380405430156">"Při uzamknutí zobrazovat citlivý obsah pracovního profilu"</string>
+    <string name="lock_screen_notifs_redact_work_summary" msgid="3238238380405430156">"Zobrazovat citlivý obsah pracovního profilu při uzamknutí"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"Zobrazovat veškerý obsah oznámení"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"Citlivý obsah zobrazovat jen po odemknutí"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="3388290397947365744">"Oznámení vůbec nezobrazovat"</string>
@@ -3531,7 +3527,7 @@
     <string name="notifications_sent_daily" msgid="10274479224185437">"{count,plural, =1{Přibližně # oznámení za den}few{Přibližně # oznámení za den}many{Přibližně # oznámení za den}other{Přibližně # oznámení za den}}"</string>
     <string name="notifications_sent_weekly" msgid="7895656213187555346">"{count,plural, =1{Přibližně # oznámení za týden}few{Přibližně # oznámení za týden}many{Přibližně # oznámení za týden}other{Přibližně # oznámení za týden}}"</string>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Nikdy"</string>
-    <string name="manage_notification_access_title" msgid="6481256069087219982">"Oznámení v zařízeních a aplikacích"</string>
+    <string name="manage_notification_access_title" msgid="6481256069087219982">"Oznámení ze zařízení a aplikací"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"Ovládat, které aplikace a zařízení mohou číst oznámení"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8643809206612366067">"Přístup k oznámením pracovního profilu je zablokován"</string>
     <string name="notification_assistant_title" msgid="5889201903272393099">"Vylepšená oznámení"</string>
@@ -3600,7 +3596,7 @@
     <string name="interact_across_profiles_switch_enabled" msgid="7294719120282287495">"Propojeno"</string>
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"Propojit tyto aplikace"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Propojené aplikace sdílejí oprávnění a mají vzájemný přístup k datům."</string>
-    <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"Propojujte pouze aplikace, kterým důvěřujete, že nebudou sdílet osobní údaje s vaším administrátorem IT."</string>
+    <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"Propojujte pouze aplikace, kterým důvěřujete, že nebudou sdílet osobní údaje s vaším IT administrátorem."</string>
     <string name="interact_across_profiles_summary_3" msgid="444428694843299854">"Aplikace můžete kdykoli odpojit v nastavení ochrany soukromí v zařízení."</string>
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"Svěřit pracovní aplikaci <xliff:g id="NAME">%1$s</xliff:g> vaše osobní data?"</string>
     <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"Propojujte pouze aplikace, kterým důvěřujete, že nebudou sdílet osobní údaje s vaším administrátorem IT."</string>
@@ -4222,7 +4218,7 @@
     <string name="sensors_off_quick_settings_title" msgid="8472151847125917167">"Senzory jsou vypnuty"</string>
     <string name="managed_profile_settings_title" msgid="3400923723423564217">"Nastavení pracovního profilu"</string>
     <string name="managed_profile_contact_search_title" msgid="6562061740814513737">"Vyhledávat kontakty z pracovního adresáře v osobních aplikacích"</string>
-    <string name="managed_profile_contact_search_summary" msgid="4974727886709219105">"Vaše vyhledávání a příchozí hovory se možná zobrazí administrátorovi IT."</string>
+    <string name="managed_profile_contact_search_summary" msgid="4974727886709219105">"Vaše vyhledávání a příchozí hovory se možná zobrazí IT administrátorovi."</string>
     <string name="cross_profile_calendar_title" msgid="7570277841490216947">"Kalendář s více profily"</string>
     <string name="cross_profile_calendar_summary" msgid="8856185206722860069">"Zobrazovat v osobním kalendáři pracovní události"</string>
     <string name="managed_profile_settings_footer" msgid="996500759305118103">"Když jsou pracovní aplikace vypnuté, jsou pozastaveny, nelze je otevřít a nemohou vám ani zasílat oznámení."</string>
@@ -4423,18 +4419,20 @@
     <string name="credman_button_open" msgid="7519871964170816850">"Otevřít"</string>
     <string name="credman_app_list_preference_none" msgid="2509646651254971448">"Nejsou vybrány žádné položky"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Zkontrolujte, zda se jedná o důvěryhodnou aplikaci&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Automatické doplňování Google&gt;%1$s&lt;/xliff:g&gt; určuje, co lze automaticky vyplnit, na základě obsahu obrazovky."</string>
-    <string name="credman_autofill_confirmation_message" msgid="843829628024668466">"&lt;b&gt;Používat aplikaci &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Nová hesla, přístupové klíče a další informace se budou od této chvíle ukládat sem. Aplikace &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; může používat obsah obrazovky k určení, co lze automaticky vyplnit."</string>
+    <string name="credman_autofill_confirmation_message" msgid="843829628024668466">"&lt;b&gt;Používat aplikaci &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Nová hesla, přístupové klíče a další informace se budou od této chvíle ukládat sem. Aplikace &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; může používat obsah obrazovky k určení toho, co lze automaticky vyplnit."</string>
     <string name="credman_picker_title" msgid="8442086614222006564">"Preferovaná služba pro hesla, přístupové klíče a automatické vyplňování"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Vypnout poskytovatele %1$s?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Vypnout tuto službu?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Při přihlášení se nebudou vyplňovat uložené údaje, jako jsou hesla, přístupové klíče, platební metody a podobně. Pokud chcete používat uložené údaje, zvolte heslo, přístupový klíč nebo datovou službu."</string>
     <string name="account_dashboard_title_with_passkeys" msgid="6214673787161409996">"Hesla, přístupové klíče a automatické vyplňování"</string>
     <string name="credman_confirmation_message_new_ui" msgid="6126274509951156460">"&lt;b&gt;Vypnout všechny služby?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Hesla, přístupové klíče a další uložené údaje se po přihlášení nebudou automaticky vyplňovat"</string>
-    <string name="credman_autofill_confirmation_message_new_ui" msgid="6222139222478822267">"&lt;b&gt;Změnit preferovanou službu na &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Nová hesla, přístupové klíče a další informace se budou od této chvíle ukládat sem. Aplikace &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; může používat obsah obrazovky k určení, co lze automaticky vyplnit."</string>
+    <string name="credman_autofill_confirmation_message_new_ui" msgid="6222139222478822267">"&lt;b&gt;Změnit preferovanou službu na &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Nová hesla, přístupové klíče a další informace se budou od této chvíle ukládat sem. Aplikace &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; může používat obsah obrazovky k určení toho, co lze automaticky vyplnit."</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"Použít %1$s?"</string>
     <string name="credman_confirmation_turn_off_positive_button" msgid="5678773011513369161">"Vypnout"</string>
     <string name="credman_confirmation_change_provider_positive_button" msgid="7732302992885116967">"Změnit"</string>
     <string name="credman_limit_error_msg_title" msgid="1525814645803612135">"Lze mít maximálně pět zapnutých služeb"</string>
     <string name="credman_limit_error_msg" msgid="2521803280130310063">"Pokud chcete přidat další službu, alespoň jednu vypněte"</string>
+    <!-- no translation found for credman_main_settings_intro_text (4981603639240772620) -->
+    <skip />
     <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"%1$s určuje údaje, které lze automaticky vyplnit, na základě obsahu obrazovky."</string>
     <string name="credman_error_message_title" msgid="4099557206946333568">"Limit hesel, přístupových klíčů a datových služeb"</string>
     <string name="credman_error_message" msgid="8334797097200415449">"V jednu chvíli můžete mít aktivních až 5 hesel, přístupových klíčů a datových služeb. Pokud chcete přidat další, některou službu vypněte."</string>
@@ -5054,7 +5052,7 @@
     <string name="dream_picker_category" msgid="7726447836872744867">"Vyberte spořič obrazovky"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Zobrazovat další informace"</string>
     <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Zobrazovat na spořiči obrazovky informace jako čas, počasí atd."</string>
-    <string name="dream_home_controls_toggle_title" msgid="706799741564479248">"Zobrazit ovládání domácnosti"</string>
+    <string name="dream_home_controls_toggle_title" msgid="706799741564479248">"Zobrazovat ovládání domácnosti"</string>
     <string name="dream_home_controls_toggle_summary" msgid="4102519907917430579">"Zobrazovat na spořiči obrazovky tlačítko ovládání domácnosti"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Další nastavení"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Vyberte spořič obrazovky"</string>
