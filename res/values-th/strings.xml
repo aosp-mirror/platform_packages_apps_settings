@@ -268,8 +268,8 @@
     <string name="zone_menu_by_offset" msgid="1257702747474426745">"เลือกตามความต่างเวลา UTC"</string>
     <string name="lock_after_timeout" msgid="8682769000437403444">"ล็อกหลังจากระยะหมดเวลาหน้าจอ"</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> หลังหมดเวลาหน้าจอ"</string>
-    <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"ทันทีหลังหมดเวลาหน้าจอ ยกเว้นเมื่อ <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> สั่งไม่ให้ล็อก"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>หลังจากหมดเวลาหน้าจอ ยกเว้นเมื่อ <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> สั่งไม่ให้ล็อก"</string>
+    <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"ทันทีหลังหมดเวลาหน้าจอ ยกเว้นเมื่อฟีเจอร์ \"<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>\" สั่งไม่ให้ล็อก"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>หลังจากหมดเวลาหน้าจอ ยกเว้นเมื่อฟีเจอร์ \"<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>\" สั่งไม่ให้ล็อก"</string>
     <string name="owner_info_settings_title" msgid="3555626140700093017">"เพิ่มข้อความในหน้าจอล็อก"</string>
     <string name="owner_info_settings_summary" msgid="347238313388083297">"ไม่มี"</string>
     <string name="owner_info_settings_edit_text_hint" msgid="841926875876050274">"เช่น Android ของสมชาย"</string>
@@ -612,7 +612,7 @@
     <string name="private_space_skip_login_label" msgid="7078019409056628192">"ไว้ทีหลัง"</string>
     <string name="private_space_continue_login_label" msgid="7779965766333065391">"ดำเนินการต่อ"</string>
     <string name="private_space_lock_setup_title" msgid="6541564212199510787">"เลือกการล็อกสำหรับพื้นที่ส่วนตัว"</string>
-    <string name="private_space_lock_setup_description" msgid="423405593476300918">"คุณปลดล็อกพื้นที่ส่วนตัวได้โดยใช้ลายนิ้วมือ ตัวเลือกนี้ต้องใช้การล็อกข้อมูลสำรองเพื่อความปลอดภัย"</string>
+    <string name="private_space_lock_setup_description" msgid="423405593476300918">"คุณปลดล็อกพื้นที่ส่วนตัวได้โดยใช้ลายนิ้วมือ ตัวเลือกนี้ต้องมีการล็อกสำรองเพื่อความปลอดภัย"</string>
     <string name="private_space_choose_your_pin_header" msgid="4560802934975898265">"ตั้งค่า PIN สำหรับพื้นที่ส่วนตัว"</string>
     <string name="private_space_choose_your_password_header" msgid="7660259341095044434">"ตั้งค่ารหัสผ่านสำหรับพื้นที่ส่วนตัว"</string>
     <string name="private_space_choose_your_pattern_header" msgid="2165607102459936724">"ตั้งค่ารูปแบบสำหรับพื้นที่ส่วนตัว"</string>
@@ -1680,7 +1680,7 @@
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"แสดงรูปแบบโปรไฟล์"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"สั่นเมื่อแตะ"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"ล็อกทันทีที่กดปุ่มเปิด/ปิด"</string>
-    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="2202430156268094229">"ยกเว้นเมื่อ <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> สั่งไม่ให้ล็อก"</string>
+    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="2202430156268094229">"ยกเว้นเมื่อฟีเจอร์ \"<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>\" สั่งไม่ให้ล็อก"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="2193588309557281466">"ตั้งค่ารูปแบบการปลดล็อก"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="7614155083815661347">"เปลี่ยนรูปแบบการปลดล็อก"</string>
     <string name="lockpattern_settings_help_how_to_record" msgid="2093801939046625774">"วิธีวาดรูปแบบการปลดล็อก"</string>
@@ -2499,7 +2499,7 @@
     <string name="battery_detail_since_full_charge" msgid="5650946565524184582">"รายละเอียดนับตั้งแต่ชาร์จจนเต็มครั้งล่าสุด"</string>
     <string name="battery_last_full_charge" msgid="8308424441475063956">"ชาร์จจนเต็มครั้งล่าสุด"</string>
     <string name="battery_full_charge_last" msgid="465146408601016923">"การชาร์จเต็มใช้งานได้นานประมาณ"</string>
-    <string name="battery_footer_summary" msgid="6753248007004259000">"อายุการใช้งานแบตเตอรี่ที่เหลืออยู่เป็นเพียงค่าประมาณและอาจเปลี่ยนไปตามการใช้งาน"</string>
+    <string name="battery_footer_summary" msgid="6753248007004259000">"ระยะเวลาการใช้งานแบตเตอรี่ที่เหลืออยู่เป็นเพียงค่าประมาณและอาจเปลี่ยนไปตามการใช้งาน"</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"การใช้งานแบตเตอรี่"</string>
     <string name="battery_not_usage" msgid="3851536644733662392">"ไม่มีการใช้งานตั้งแต่ชาร์จจนเต็มครั้งล่าสุด"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"ไม่มีการใช้งานในช่วง 24 ชม. ที่ผ่านมา"</string>
@@ -3388,9 +3388,9 @@
     <string name="bubbles_feature_disabled_dialog_text" msgid="5275666953364031055">"การเปิดบับเบิลของแอปนี้จะเปิดบับเบิลของอุปกรณ์ด้วย\n\nการดำเนินการนี้จะส่งผลต่อแอปหรือการสนทนาอื่นๆ ที่ได้รับอนุญาตให้แสดงเป็นบับเบิล"</string>
     <string name="bubbles_feature_disabled_button_approve" msgid="2042628067101419871">"เปิด"</string>
     <string name="bubbles_feature_disabled_button_cancel" msgid="8963409459448350600">"ยกเลิก"</string>
-    <string name="notifications_bubble_setting_on_summary" msgid="4641572377430901196">"เปิดอยู่ / การสนทนาจะปรากฏเป็นไอคอนแบบลอยได้"</string>
+    <string name="notifications_bubble_setting_on_summary" msgid="4641572377430901196">"เปิดอยู่ / การสนทนาสามารถปรากฏเป็นไอคอนแบบลอย"</string>
     <string name="notifications_bubble_setting_title" msgid="8287649393774855268">"อนุญาตให้แอปแสดงบับเบิล"</string>
-    <string name="notifications_bubble_setting_description" msgid="7336770088735025981">"การสนทนาบางรายการจะปรากฏเป็นไอคอนแบบลอยที่ด้านบนของแอปอื่นๆ"</string>
+    <string name="notifications_bubble_setting_description" msgid="7336770088735025981">"การสนทนาบางรายการจะปรากฏเป็นไอคอนแบบลอยที่ด้านบนของ​แอปอื่นๆ"</string>
     <string name="bubble_app_setting_all" msgid="312524752846978277">"การสนทนาทั้งหมดแสดงเป็นบับเบิลได้"</string>
     <string name="bubble_app_setting_selected" msgid="4324386074198040675">"การสนทนาที่เลือกไว้แสดงเป็นบับเบิลได้"</string>
     <string name="bubble_app_setting_none" msgid="8643594711863996418">"ไม่มีสิ่งใดที่แสดงเป็นบับเบิลได้"</string>

@@ -433,7 +433,7 @@
     <string name="security_settings_remoteauth_settings_register_new_authenticator" msgid="9191331738306527887">"新增智慧手錶"</string>
     <string name="security_settings_remoteauth_settings_remove_device" msgid="2436226120578851282">"移除智慧手錶"</string>
     <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"指紋與人臉解鎖"</string>
-    <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"用於工作資料夾的人臉和指紋解鎖"</string>
+    <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"人臉和指紋解鎖 (工作資料夾)"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"需要設定"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"已新增臉孔和指紋"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"已新增臉孔和指紋"</string>
@@ -1282,12 +1282,12 @@
     <string name="sim_enable_sim_lock" msgid="6486354334679225748">"鎖定 SIM 卡"</string>
     <string name="sim_disable_sim_lock" msgid="6939439812841857306">"解鎖 SIM 卡"</string>
     <string name="sim_enter_old" msgid="6882545610939674813">"舊的 SIM 卡 PIN 碼"</string>
-    <string name="sim_enter_new" msgid="9010947802784561582">"新增 SIM PIN"</string>
-    <string name="sim_reenter_new" msgid="6131418271490374263">"重新輸入新的 PIN"</string>
+    <string name="sim_enter_new" msgid="9010947802784561582">"新的 SIM 卡 PIN 碼"</string>
+    <string name="sim_reenter_new" msgid="6131418271490374263">"重新輸入新的 PIN 碼"</string>
     <string name="sim_change_pin" msgid="1104103818545005448">"SIM 卡 PIN 碼"</string>
     <string name="sim_invalid_pin_hint" msgid="3376397829969578877">"請輸入 4 到 8 位數的 PIN 碼"</string>
     <string name="sim_pins_dont_match" msgid="1540348773896609260">"PIN 碼不符"</string>
-    <string name="sim_change_succeeded" msgid="3516905528149069739">"成功變更 SIM PIN"</string>
+    <string name="sim_change_succeeded" msgid="3516905528149069739">"成功變更 SIM 卡 PIN 碼"</string>
     <string name="sim_pin_disable_failed" msgid="8719890393181032837">"無法停用 PIN 碼。"</string>
     <string name="sim_pin_enable_failed" msgid="5156513975085380284">"無法啟用 PIN 碼。"</string>
     <string name="sim_enter_ok" msgid="3401715290135787531">"確定"</string>
@@ -1421,8 +1421,7 @@
     <string name="battery_level_title" msgid="1371765298786083448">"電池電量"</string>
     <string name="communal_settings_title" msgid="2845678473945902115">"共通"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"共通設定"</string>
-    <!-- no translation found for satellite_setting (4171265534842459910) -->
-    <skip />
+    <string name="satellite_setting" msgid="4171265534842459910">"衛星訊息"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN"</string>
     <string name="apn_edit" msgid="2003683641840248741">"編輯存取點"</string>
     <string name="apn_add" msgid="9069613192201630934">"新增存取點"</string>
@@ -2373,7 +2372,7 @@
     <string name="keywords_accessibility_timeout" msgid="8903766864902000346">"延遲, 精細動作, 年長"</string>
     <string name="print_settings" msgid="8519810615863882491">"列印"</string>
     <string name="print_settings_summary_no_service" msgid="6721731154917653862">"關閉"</string>
-    <string name="print_settings_summary" msgid="1458773840720811915">"{count,plural, =1{1 個列印服務已啟用}other{# 個列印服務已啟用}}"</string>
+    <string name="print_settings_summary" msgid="1458773840720811915">"{count,plural, =1{已啟用 1 個列印服務}other{已啟用 # 個列印服務}}"</string>
     <string name="print_jobs_summary" msgid="7040836482336577323">"{count,plural, =1{1 個列印工作}other{# 個列印工作}}"</string>
     <string name="print_settings_title" msgid="7680498284751129935">"列印服務"</string>
     <string name="print_no_services_installed" msgid="7554057966540602692">"未安裝任何服務"</string>
@@ -3420,7 +3419,7 @@
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"敏感工作資料夾通知"</string>
     <string name="lock_screen_notifs_redact_work_summary" msgid="3238238380405430156">"鎖定時顯示敏感工作資料夾內容"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"顯示所有通知內容"</string>
-    <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"僅在解鎖狀態下顯示敏感內容"</string>
+    <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"僅在解鎖狀態下顯示私密內容"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="3388290397947365744">"完全不顯示通知"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="6326229471276829730">"想在螢幕鎖定畫面上顯示什麼內容？"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1360388192096354315">"螢幕鎖定"</string>
@@ -3463,7 +3462,7 @@
     <string name="notification_priority_title" msgid="5554834239080425229">"優先通知"</string>
     <string name="notification_channel_summary_priority" msgid="7225362351439076913">"以浮動對話框的形式顯示在對話區的最上方。如果裝置處於鎖定狀態，螢幕鎖定畫面上會顯示個人資料相片"</string>
     <string name="convo_not_supported_summary" msgid="4285471045268268048">"「<xliff:g id="APP_NAME">%1$s</xliff:g>」不支援大多數的對話功能。對話無法設為優先，也不會以浮動對話框的形式顯示。"</string>
-    <string name="notification_channel_summary_min" msgid="8823399508450176842">"將下拉式通知欄中的通知收合為單一行"</string>
+    <string name="notification_channel_summary_min" msgid="8823399508450176842">"將下拉式通知欄中的通知收合到同一行"</string>
     <string name="notification_channel_summary_low" msgid="5549662596677692000">"不震動或發出聲音"</string>
     <string name="notification_conversation_summary_low" msgid="6352818857388412326">"不震動或發出聲音，並顯示在對話區的下方"</string>
     <string name="notification_channel_summary_default" msgid="1168420867670390611">"可能會根據裝置設定響鈴或震動"</string>
@@ -3559,8 +3558,8 @@
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"允許「零打擾」模式"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"最近沒有已安裝的應用程式要求「零打擾」存取權"</string>
     <string name="app_notifications_off_desc" msgid="2484843759466874201">"你尚未允許這個應用程式發出通知"</string>
-    <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Android 已根據你的要求啟用封鎖設定，不讓這個類別的通知顯示在這個裝置上"</string>
-    <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"Android 已根據你的要求啟用封鎖設定，不讓這個群組的通知顯示在這個裝置上"</string>
+    <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Android 已根據你的要求封鎖這類通知，不顯示在這部裝置上"</string>
+    <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"Android 已根據你的要求封鎖這個群組的通知，不顯示在這部裝置上"</string>
     <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"這個應用程式不會傳送通知"</string>
     <string name="notification_channels" msgid="1502969522886493799">"類別"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"其他"</string>
@@ -4192,7 +4191,7 @@
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"滑動即可啟動數位助理應用程式"</string>
     <string name="assistant_corner_gesture_summary" msgid="5012534700233017955">"如要啟動數位助理應用程式，請從底部的任一角落向上滑動"</string>
     <string name="assistant_long_press_home_gesture_title" msgid="4865972278738178753">"按住主畫面按鈕即可使用 Google 助理"</string>
-    <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"按住主畫面按鈕即可叫用數位助理應用程式。"</string>
+    <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"按住主畫面按鈕即可叫出數位助理應用程式。"</string>
     <string name="low_label" msgid="6525629096999711220">"低"</string>
     <string name="high_label" msgid="357503396626018487">"高"</string>
     <string name="left_edge" msgid="1513576842959071849">"左側邊緣"</string>
@@ -4217,7 +4216,7 @@
     <string name="one_handed_action_show_notification_summary" msgid="8281689861222000436">"畫面上會顯示通知和設定。"</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"輕觸兩下螢幕即可查看時間、通知和其他資訊。"</string>
     <string name="ambient_display_wake_screen_title" msgid="7637678749035378085">"喚醒螢幕"</string>
-    <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"如要查看時間、通知和其他資訊，請輕觸螢幕。"</string>
+    <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"輕觸螢幕即可查看時間、通知等資訊。"</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"緊急求救"</string>
     <string name="emergency_gesture_switchbar_title" msgid="7421353963329899514">"使用緊急求救功能"</string>
     <string name="emergency_gesture_screen_summary" msgid="6640521030845132507">"快速按電源鍵 5 次以上即可觸發以下動作"</string>
@@ -4578,8 +4577,7 @@
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"手機會自動連上衛星。為獲得最佳連線品質，請在沒有物體遮住天空的地方使用。"</string>
     <string name="title_supported_service" msgid="4275535165812691571">"手機連上衛星後"</string>
     <string name="summary_supported_service" msgid="4320535903444834786">"你可以傳送訊息給任何人，包括緊急救援服務。如果有可用的行動網路，手機就會重新連線。"</string>
-    <!-- no translation found for satellite_setting_summary_more_information (7729454610548016356) -->
-    <skip />
+    <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"衛星訊息可能需要比較長的時間才會送達，而且這項功能僅支援部分地區。天氣和特定結構可能會影響衛星連線的品質。系統不支援衛星電話，但你仍可撥打緊急電話。\n\n「設定」頁面可能要一段時間後才會顯示帳戶變動，詳情請與你的電信業者聯絡。"</string>
     <string name="more_about_satellite_messaging" msgid="3385673133561348509">"進一步瞭解衛星訊息"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"存取點名稱"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
@@ -4770,10 +4768,10 @@
     <string name="lockscreen_privacy_wallet_summary" msgid="3984851951621168573">"允許從螢幕鎖定畫面使用數位錢包"</string>
     <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1856477548806618829">"顯示 QR code 掃描器"</string>
     <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"允許從螢幕鎖定畫面使用 QR code 掃描器"</string>
-    <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"顯示裝置控制"</string>
-    <string name="lockscreen_privacy_controls_summary" msgid="7522918441738915364">"在鎖定畫面中"</string>
+    <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"顯示裝置控制功能"</string>
+    <string name="lockscreen_privacy_controls_summary" msgid="7522918441738915364">"在螢幕鎖定畫面上"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="2174300719855112358">"使用裝置控制功能"</string>
-    <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"如要使用，請先開啟「顯示裝置控制」"</string>
+    <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"如要使用，請先開啟「顯示裝置控制功能」"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="4109235686687860393">"時鐘大小會依螢幕鎖定畫面上的內容調整"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="802271087416091548">"動態時鐘"</string>
     <string name="lockscreen_quick_affordances_title" msgid="8615741551327565793">"捷徑"</string>
@@ -4907,7 +4905,7 @@
     <string name="all_apps" msgid="3054120149509114789">"所有應用程式"</string>
     <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"不允許"</string>
     <string name="uwb_settings_title" msgid="8578498712312002231">"超寬頻 (UWB)"</string>
-    <string name="uwb_settings_summary" msgid="3074271396764672268">"協助判斷附近支援 UWB 的裝置的相對位置"</string>
+    <string name="uwb_settings_summary" msgid="3074271396764672268">"協助判斷附近 UWB 裝置的相對位置"</string>
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"請關閉飛航模式，以便使用 UWB"</string>
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"無法在目前的位置使用 UWB"</string>
     <string name="thread_network_settings_title" msgid="4212301030523859220">"Thread"</string>

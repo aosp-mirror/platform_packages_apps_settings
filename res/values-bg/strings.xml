@@ -269,7 +269,7 @@
     <string name="lock_after_timeout" msgid="8682769000437403444">"Заключв. след времето до авт. изкл."</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> след времето за изчакване"</string>
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"Веднага след времето за изчакване, освен когато екранът се поддържа отключен от <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> след времето за изчакване, освен когато екранът се поддържа отключен от <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> след времето за изчакване, освен когато екранът се поддържа отключен от „<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>“"</string>
     <string name="owner_info_settings_title" msgid="3555626140700093017">"Добав. на текст на закл. екран"</string>
     <string name="owner_info_settings_summary" msgid="347238313388083297">"Няма"</string>
     <string name="owner_info_settings_edit_text_hint" msgid="841926875876050274">"Напр. „Устройството с Android на Иван“."</string>
@@ -555,7 +555,7 @@
     <string name="private_space_category_ways_to_unlock" msgid="4356631225316950046">"Начини за отключване"</string>
     <string name="private_space_screen_lock_summary" msgid="394837965365561070">"Като опцията за заключване на екрана на устройството"</string>
     <string name="private_space_new_lock_title" msgid="9056139964133004094">"Ново заключване на частното пространство?"</string>
-    <string name="private_space_auto_lock_title" msgid="8663409382910601261">"Автоматично заключване на частното пространство"</string>
+    <string name="private_space_auto_lock_title" msgid="8663409382910601261">"Авт. заключване на частното пространство"</string>
     <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"Частното ви пространство може да се заключва автоматично, ако не сте използвали устройството си за определен период от време"</string>
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"При всяко заключване на устройството"</string>
     <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"След 5 минути неактивност"</string>
@@ -606,12 +606,12 @@
     <string name="private_space_success_title" msgid="4351904015352046118">"Готово!"</string>
     <string name="private_space_access_text" msgid="4433988836344567888">"За да намерите частното си пространство, отворете списъка с приложения и превъртете надолу"</string>
     <string name="private_space_done_label" msgid="1020482651595246071">"Готово"</string>
-    <string name="private_space_scrolldown_to_access" msgid="4820954877349434545">"Превъртете надолу, за да намерите частното пространство"</string>
+    <string name="private_space_scrolldown_to_access" msgid="4820954877349434545">"Превъртете надолу, за да намерите частното простр."</string>
     <string name="private_space_retry_signin_title" msgid="8090276618867918844">"Вход"</string>
     <string name="private_space_retry_summary" msgid="1920444015972648774">"Влезте в профил, който да използвате с частното си пространство"</string>
     <string name="private_space_skip_login_label" msgid="7078019409056628192">"Не сега"</string>
     <string name="private_space_continue_login_label" msgid="7779965766333065391">"Напред"</string>
-    <string name="private_space_lock_setup_title" msgid="6541564212199510787">"Изберете опция за заключване на частното ви пространство"</string>
+    <string name="private_space_lock_setup_title" msgid="6541564212199510787">"Изберете опция за закл. на частното ви пространство"</string>
     <string name="private_space_lock_setup_description" msgid="423405593476300918">"Можете да отключвате частното си пространство посредством отпечатъка си. От съображения за сигурност трябва да зададете резервна опция за заключване."</string>
     <string name="private_space_choose_your_pin_header" msgid="4560802934975898265">"Задайте ПИН код за частното пространство"</string>
     <string name="private_space_choose_your_password_header" msgid="7660259341095044434">"Задайте парола за частното пространство"</string>
@@ -1421,8 +1421,7 @@
     <string name="battery_level_title" msgid="1371765298786083448">"Ниво на батерията"</string>
     <string name="communal_settings_title" msgid="2845678473945902115">"Общи"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"Общи настройки"</string>
-    <!-- no translation found for satellite_setting (4171265534842459910) -->
-    <skip />
+    <string name="satellite_setting" msgid="4171265534842459910">"Сателитни съобщения"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Редакт. на точка за достъп"</string>
     <string name="apn_add" msgid="9069613192201630934">"Добавяне на точка за достъп"</string>
@@ -1681,7 +1680,7 @@
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"Фигурата за потребителския профил да е видима"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"Вибриране при докосване"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"Заключване веднага с бутона за вкл./изкл."</string>
-    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="2202430156268094229">"Освен когато екранът се поддържа отключен от <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
+    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="2202430156268094229">"Освен когато екранът се поддържа отключен от „<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>“"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="2193588309557281466">"Задаване на фигура за отключване"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="7614155083815661347">"Промяна на фигурата за отключване"</string>
     <string name="lockpattern_settings_help_how_to_record" msgid="2093801939046625774">"Как се чертае фигура за отключване"</string>
@@ -4578,8 +4577,7 @@
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"Телефонът ви ще се свърже автоматично със сателит. За оптимална връзка трябва да сте на място с ясен изглед към небето."</string>
     <string name="title_supported_service" msgid="4275535165812691571">"След като телефонът ви се свърже със сателит"</string>
     <string name="summary_supported_service" msgid="4320535903444834786">"Можете да изпращате текстови съобщения на когото пожелаете, включително на службите за спешни случаи. Телефонът ви ще се свърже отново с мобилна мрежа, когато е възможно."</string>
-    <!-- no translation found for satellite_setting_summary_more_information (7729454610548016356) -->
-    <skip />
+    <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"Доставянето на сателитни съобщения може да отнеме по-дълго време. Услугата се предлага само в някои райони и сателитната връзка може да бъде повлияна от времето и определени структури. Не се поддържат обаждания чрез сателит, но е възможно спешните обаждания да бъдат извършени.\n\nМоже да измине известно време, докато промените в профила ви се покажат в настройките. За подробности се обърнете към оператора си."</string>
     <string name="more_about_satellite_messaging" msgid="3385673133561348509">"Още за сателитните съобщения"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Имена на точки за достъп"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"име на точката за достъп"</string>
