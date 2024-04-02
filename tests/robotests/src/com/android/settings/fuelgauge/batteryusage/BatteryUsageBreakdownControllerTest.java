@@ -57,6 +57,7 @@ public final class BatteryUsageBreakdownControllerTest {
     private static final String PREF_KEY = "pref_key";
     private static final String PREF_KEY2 = "pref_key2";
     private static final String PREF_SUMMARY = "fake preference summary";
+    private static final long TIME_LESS_THAN_HALF_MINUTE  = DateUtils.MINUTE_IN_MILLIS / 2  - 1;
 
     @Mock private InstrumentedPreferenceFragment mFragment;
     @Mock private SettingsActivity mSettingsActivity;
@@ -332,7 +333,7 @@ public final class BatteryUsageBreakdownControllerTest {
                 createBatteryDiffEntry(
                         /* isSystem= */ true,
                         /* screenOnTimeInMs= */ 0,
-                        /* foregroundUsageTimeInMs= */ DateUtils.MINUTE_IN_MILLIS - 1,
+                        /* foregroundUsageTimeInMs= */ TIME_LESS_THAN_HALF_MINUTE,
                         /* foregroundServiceUsageTimeInMs= */ 0,
                         /* backgroundUsageTimeInMs= */ 0));
         assertThat(pref.getSummary().toString()).isEqualTo("Total: less than a minute");
@@ -427,10 +428,10 @@ public final class BatteryUsageBreakdownControllerTest {
                 pref,
                 createBatteryDiffEntry(
                         /* isSystem= */ false,
-                        /* screenOnTimeInMs= */ DateUtils.MINUTE_IN_MILLIS - 1,
-                        /* foregroundUsageTimeInMs= */ DateUtils.MINUTE_IN_MILLIS - 1,
+                        /* screenOnTimeInMs= */ TIME_LESS_THAN_HALF_MINUTE,
+                        /* foregroundUsageTimeInMs= */ TIME_LESS_THAN_HALF_MINUTE,
                         /* foregroundServiceUsageTimeInMs= */ 0,
-                        /* backgroundUsageTimeInMs= */ DateUtils.MINUTE_IN_MILLIS - 1));
+                        /* backgroundUsageTimeInMs= */ TIME_LESS_THAN_HALF_MINUTE));
         assertThat(pref.getSummary().toString())
                 .isEqualTo("Screen time: less than a minute\nBackground: less than a minute");
     }
