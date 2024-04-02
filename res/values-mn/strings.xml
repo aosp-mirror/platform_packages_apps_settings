@@ -270,7 +270,7 @@
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"Завсарлагын дараа <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>"</string>
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> түгжээгүй байлгаснаас бусад үед завсарлага дууссан дариуд"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> түгжээгүй байлгаснаас бусад үед хугацаа дууссанаас хойш <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>"</string>
-    <string name="owner_info_settings_title" msgid="3555626140700093017">"Түгжсэн дэлгэц дээр текст нэмэх"</string>
+    <string name="owner_info_settings_title" msgid="3555626140700093017">"Түгжээтэй дэлгэц дээр текст нэмэх"</string>
     <string name="owner_info_settings_summary" msgid="347238313388083297">"Байхгүй"</string>
     <string name="owner_info_settings_edit_text_hint" msgid="841926875876050274">"Жишээ нь Joe-ийн Андройд."</string>
     <string name="location_settings_title" msgid="8375074508036087178">"Байршил"</string>
@@ -1421,8 +1421,7 @@
     <string name="battery_level_title" msgid="1371765298786083448">"Зайны түвшин"</string>
     <string name="communal_settings_title" msgid="2845678473945902115">"Нийтийн"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"Нийтийн тохиргоо"</string>
-    <!-- no translation found for satellite_setting (4171265534842459910) -->
-    <skip />
+    <string name="satellite_setting" msgid="4171265534842459910">"Хиймэл дагуулаар мессеж бичих"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APNs"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Хандалтын цэгийг засах"</string>
     <string name="apn_add" msgid="9069613192201630934">"Хандалтын цэг нэмэх"</string>
@@ -2918,7 +2917,7 @@
     <string name="user_cannot_add_accounts_message" msgid="2351326078338805337">"Хязгаарлагдсан профайлууд бүртгэл нэмэх боломжгүй"</string>
     <string name="user_remove_user_menu" msgid="2183714948094429367">"<xliff:g id="USER_NAME">%1$s</xliff:g>-г энэ төхөөрөмжөөс устгах"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Дэлгэц түгжих тохиргоо"</string>
-    <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Түгжигдсэн дэлгэцээс хэрэглэгч нэмэх"</string>
+    <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Түгжээтэй дэлгэцээс хэрэглэгч нэмэх"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Суурилуулах үед админ хэрэглэгч рүү сэлгэх"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Өөрийгөө устгах уу?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Энэ хэрэглэгчийг устгах уу?"</string>
@@ -3420,7 +3419,7 @@
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"Ажлын профайлын эмзэг мэдэгдлүүд"</string>
     <string name="lock_screen_notifs_redact_work_summary" msgid="3238238380405430156">"Түгжигдсэн үед ажлын профайлын эмзэг контентыг харуулах"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"Бүх мэдэгдлийн агуулгыг харуулах"</string>
-    <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"Эмзэг контентыг зөвхөн түгжээг тайлсан үед харуулах"</string>
+    <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"Эмзэг агуулгыг зөвхөн түгжээг тайлсан үед харуулах"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="3388290397947365744">"Огт мэдэгдэл харуулахгүй"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="6326229471276829730">"Та түгжээтэй дэлгэцдээ юу харахыг хүсэж байна вэ?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1360388192096354315">"Түгжээтэй дэлгэц"</string>
@@ -3579,7 +3578,7 @@
     <string name="notification_channel_badge_title" msgid="6505542437385640049">"Мэдэгдлийн цэгийг харуулах"</string>
     <string name="app_notification_override_dnd_title" msgid="3769539356442226691">"\"Бүү саад бол\" горимыг үл хэрэгсэх"</string>
     <string name="app_notification_override_dnd_summary" msgid="4894641191397562920">"Бүү саад бол горим асаалттай үед эдгээр мэдэгдлийг үргэлжлүүлэн саад болохыг нь зөвшөөрөх"</string>
-    <string name="app_notification_visibility_override_title" msgid="7778628150022065920">"Түгжигдсэн дэлгэц"</string>
+    <string name="app_notification_visibility_override_title" msgid="7778628150022065920">"Түгжээтэй дэлгэц"</string>
     <string name="app_notifications_dialog_done" msgid="573716608705273004">"Дууссан"</string>
     <string name="notification_show_lights_title" msgid="5564315979007438583">"Анивчих гэрэл"</string>
     <string name="notification_vibrate_title" msgid="1422330728336623351">"Чичиргээ"</string>
@@ -4366,7 +4365,7 @@
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Энэ үйлчилгээг унтраах уу?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Нууц үг, нэвтрэх түлхүүр, төлбөрийн хэрэгсэл болон бусад хадгалсан мэдээллийг таныг нэвтрэх үед бөглөхгүй. Хадгалсан мэдээллээ ашиглахын тулд нууц үг, нэвтрэх түлхүүр эсвэл өгөгдлийн үйлчилгээ сонгоно уу."</string>
     <string name="account_dashboard_title_with_passkeys" msgid="6214673787161409996">"Нууц үг, нэвтрэх түлхүүр, автоматаар бөглөх"</string>
     <string name="credman_confirmation_message_new_ui" msgid="6126274509951156460">"&lt;b&gt;Бүх үйлчилгээг унтраах уу?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Нууц үг, нэвтрэх түлхүүр болон бусад хадгалсан мэдээлэл таныг нэвтрэх үед автоматаар бөглөх хэсэгт боломжгүй байх болно"</string>
-    <string name="credman_autofill_confirmation_message_new_ui" msgid="6222139222478822267">"&lt;b&gt;Илүүд үзсэн үйлчилгээгээ &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; болгож өөрчилнө үү?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Шинэ нууц үг, нэвтрэх түлхүүр болон бусад мэдээллийг одооноос энд хадгална. &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; юуг автоматаар бөглөж болохыг тодорхойлохын тулд таны дэлгэц дээр байгаа зүйлсийг ашиглаж магадгүй"</string>
+    <string name="credman_autofill_confirmation_message_new_ui" msgid="6222139222478822267">"&lt;b&gt;Илүүд үзсэн үйлчилгээгээ &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; болгож өөрчлөх үү?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Шинэ нууц үг, нэвтрэх түлхүүр болон бусад мэдээллийг одооноос энд хадгална. &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; юуг автоматаар бөглөж болохыг тодорхойлохын тулд таны дэлгэц дээр байгаа зүйлсийг ашиглаж магадгүй"</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"%1$s-г ашиглах уу?"</string>
     <string name="credman_confirmation_turn_off_positive_button" msgid="5678773011513369161">"Унтраах"</string>
     <string name="credman_confirmation_change_provider_positive_button" msgid="7732302992885116967">"Өөрчлөх"</string>
@@ -4578,8 +4577,7 @@
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"Таны утас хиймэл дагуулд автоматаар холбогдоно. Шилдэг холболтыг авах бол тэнгэр тод харагдах газар байгаарай."</string>
     <string name="title_supported_service" msgid="4275535165812691571">"Таны утас хиймэл дагуулд холбогдсоны дараа"</string>
     <string name="summary_supported_service" msgid="4320535903444834786">"Та яаралтай тусламжийн үйлчилгээнүүдийг оруулаад дурын хүн рүү мессеж бичих боломжтой. Таны утас мобайл сүлжээг боломжтой үед үүнд дахин холбогдоно."</string>
-    <!-- no translation found for satellite_setting_summary_more_information (7729454610548016356) -->
-    <skip />
+    <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"Хиймэл дагуулаар мессеж бичихэд илүү удаж болох ба зөвхөн зарим бүсэд боломжтой. Цаг агаар болон тодорхой байгууламжууд таны хиймэл дагуулын холболтод нөлөөлж болно. Хиймэл дагуулаар дуудлага хийх боломжгүй. Яаралтай дуудлагад холбогдсон хэвээр байж магадгүй.\n\nТаны бүртгэлийн өөрчлөлтүүд Тохиргоонд харагдах хүртэл хэсэг хугацаа зарцуулагдаж болно. Дэлгэрэнгүй мэдээлэл авах бол оператор компанитайгаа холбогдоно уу."</string>
     <string name="more_about_satellite_messaging" msgid="3385673133561348509">"Хиймэл дагуулаар мессеж бичих талаарх нэмэлт мэдээлэл"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Хандах цэгийн нэрс (APN)"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
@@ -4771,10 +4769,10 @@
     <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1856477548806618829">"QR код сканнерыг харуулах"</string>
     <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"Түгжигдсэн дэлгэцээс QR код сканнерт хандахыг зөвшөөрнө үү"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Төхөөрөмжийн хяналтыг харуулах"</string>
-    <string name="lockscreen_privacy_controls_summary" msgid="7522918441738915364">"Түгжигдсэн дэлгэцээс"</string>
+    <string name="lockscreen_privacy_controls_summary" msgid="7522918441738915364">"Түгжээтэй дэлгэцээс"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="2174300719855112358">"Төхөөрөмжийн хяналтыг ашиглах"</string>
     <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"Ашиглахын тулд эхлээд \"Төхөөрөмжийн хяналтыг харуулах\"-г асаана уу"</string>
-    <string name="lockscreen_double_line_clock_summary" msgid="4109235686687860393">"Цагны хэмжээ нь түгжигдсэн дэлгэцийн контентоос хамаарч өөрчлөгддөг"</string>
+    <string name="lockscreen_double_line_clock_summary" msgid="4109235686687860393">"Цагны хэмжээ нь түгжээтэй дэлгэцийн контентоос хамаарч өөрчлөгддөг"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="802271087416091548">"Динамик цаг"</string>
     <string name="lockscreen_quick_affordances_title" msgid="8615741551327565793">"Товчлол"</string>
     <plurals name="lockscreen_quick_affordances_summary" formatted="false" msgid="4225396036524703997">
