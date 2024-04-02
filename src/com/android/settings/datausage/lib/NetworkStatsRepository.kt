@@ -93,13 +93,15 @@ class NetworkStatsRepository(context: Context, private val template: NetworkTemp
             val buckets = mutableListOf<Bucket>()
             val bucket = NetworkStats.Bucket()
             while (getNextBucket(bucket)) {
-                buckets += Bucket(
-                    uid = bucket.uid,
-                    bytes = bucket.bytes,
-                    state = bucket.state,
-                    startTimeStamp = bucket.startTimeStamp,
-                    endTimeStamp = bucket.endTimeStamp,
-                )
+                if (bucket.bytes > 0) {
+                    buckets += Bucket(
+                        uid = bucket.uid,
+                        bytes = bucket.bytes,
+                        state = bucket.state,
+                        startTimeStamp = bucket.startTimeStamp,
+                        endTimeStamp = bucket.endTimeStamp,
+                    )
+                }
             }
             buckets
         }
