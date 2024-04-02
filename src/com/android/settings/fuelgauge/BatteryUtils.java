@@ -670,7 +670,7 @@ public class BatteryUtils {
             long timeInMs,
             final int lessThanOneMinuteResId,
             final int normalResId) {
-        if (timeInMs < DateUtils.MINUTE_IN_MILLIS) {
+        if (timeInMs <= DateUtils.MINUTE_IN_MILLIS / 2) {
             return context.getString(lessThanOneMinuteResId);
         }
         final CharSequence timeSequence =
