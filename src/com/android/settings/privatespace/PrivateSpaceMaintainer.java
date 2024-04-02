@@ -287,6 +287,14 @@ public class PrivateSpaceMaintainer {
         }
     }
 
+    /**
+     * Returns true if private profile can be added to the device or if private space already
+     * exists, false otherwise.
+     */
+    public boolean isPrivateSpaceEntryPointEnabled() {
+        return mUserManager.canAddPrivateProfile() || doesPrivateSpaceExist();
+    }
+
     /** Returns true if private space exists and is running, otherwise returns false */
     @VisibleForTesting
     synchronized boolean isPrivateProfileRunning() {

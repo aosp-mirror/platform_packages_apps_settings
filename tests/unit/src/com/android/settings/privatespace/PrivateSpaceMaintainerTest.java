@@ -25,12 +25,18 @@ import static com.android.settings.privatespace.PrivateSpaceMaintainer.PRIVATE_S
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.junit.Assume.assumeFalse;
+import static org.junit.Assume.assumeTrue;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
+
 import android.app.ActivityManager;
 import android.app.IActivityManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.os.Flags;
 import android.os.RemoteException;
+import android.os.UserManager;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 
@@ -298,6 +304,61 @@ public class PrivateSpaceMaintainerTest {
         privateSpaceMaintainer.createPrivateSpace();
         assertThat(privateSpaceMaintainer.getPrivateSpaceAutoLockSetting())
                 .isEqualTo(privateSpaceAutLockValue);
+    }
+
+    @Test
+    public void isPrivateSpaceEntryPointEnabled_psExistCanAddProfileTrue_returnsTrue() {
+        mSetFlagsRule.enableFlags(
+                Flags.FLAG_ALLOW_PRIVATE_PROFILE,
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
+        assumeTrue(mContext.getSystemService(UserManager.class).canAddPrivateProfile());
+        PrivateSpaceMaintainer privateSpaceMaintainer =
+                PrivateSpaceMaintainer.getInstance(mContext);
+        privateSpaceMaintainer.createPrivateSpace();
+        assertThat(privateSpaceMaintainer.doesPrivateSpaceExist()).isTrue();
+
+        assertThat(privateSpaceMaintainer.isPrivateSpaceEntryPointEnabled()).isTrue();
+    }
+
+    @Test
+    public void isPrivateSpaceEntryPointEnabled_psNotExistsCanAddProfileTrue_returnsTrue() {
+        mSetFlagsRule.enableFlags(
+                Flags.FLAG_ALLOW_PRIVATE_PROFILE,
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
+        assumeTrue(mContext.getSystemService(UserManager.class).canAddPrivateProfile());
+        PrivateSpaceMaintainer privateSpaceMaintainer =
+                PrivateSpaceMaintainer.getInstance(mContext);
+        privateSpaceMaintainer.deletePrivateSpace();
+        assertThat(privateSpaceMaintainer.doesPrivateSpaceExist()).isFalse();
+
+        assertThat(privateSpaceMaintainer.isPrivateSpaceEntryPointEnabled()).isTrue();
+    }
+
+    @Test
+    public void isPrivateSpaceEntryPointEnabled_psExistsCanAddProfileFalse_returnsTrue() {
+        mSetFlagsRule.enableFlags(
+                Flags.FLAG_ALLOW_PRIVATE_PROFILE,
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
+        assumeFalse(mContext.getSystemService(UserManager.class).canAddPrivateProfile());
+        PrivateSpaceMaintainer privateSpaceMaintainer =
+                spy(PrivateSpaceMaintainer.getInstance(mContext));
+        when(privateSpaceMaintainer.doesPrivateSpaceExist()).thenReturn(true);
+
+        assertThat(privateSpaceMaintainer.isPrivateSpaceEntryPointEnabled()).isTrue();
+    }
+
+    @Test
+    public void isPrivateSpaceEntryPointEnabled_psNotExistsCanAddProfileFalse_returnsFalse() {
+        mSetFlagsRule.enableFlags(
+                Flags.FLAG_ALLOW_PRIVATE_PROFILE,
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
+        assumeFalse(mContext.getSystemService(UserManager.class).canAddPrivateProfile());
+        PrivateSpaceMaintainer privateSpaceMaintainer =
+                PrivateSpaceMaintainer.getInstance(mContext);
+        privateSpaceMaintainer.deletePrivateSpace();
+        assertThat(privateSpaceMaintainer.doesPrivateSpaceExist()).isFalse();
+
+        assertThat(privateSpaceMaintainer.isPrivateSpaceEntryPointEnabled()).isFalse();
     }
 
     private int getSecureUserSetupComplete() {
