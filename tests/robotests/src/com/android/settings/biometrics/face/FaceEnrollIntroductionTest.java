@@ -78,6 +78,7 @@ import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.GlifLayout;
+import com.google.android.setupdesign.template.RequireScrollMixin;
 import com.google.android.setupdesign.view.BottomScrollView;
 
 import org.junit.After;
@@ -135,6 +136,11 @@ public class FaceEnrollIntroductionTest {
 
         public int getRecreateCount() {
             return mRecreateCount;
+        }
+
+        @Override
+        protected void onResume() {
+            super.onResume();
         }
 
         @Override
@@ -424,11 +430,39 @@ public class FaceEnrollIntroductionTest {
     }
 
     @Test
-    public void testFaceEnrollIntroduction_notShowFooterSecondaryButton() {
+    public void testFaceEnrollIntroduction_footerSecondaryButtonWhenCanEnroll() {
         setupActivity();
         FooterBarMixin footer = getGlifLayout(mActivity).getMixin(FooterBarMixin.class);
         FooterButton footerButton = footer.getSecondaryButton();
 
+        final RequireScrollMixin requireScrollMixin = getGlifLayout(mActivity).getMixin(
+                RequireScrollMixin.class);
+        assertThat(footerButton.getVisibility()).isEqualTo(
+                requireScrollMixin.isScrollingRequired() ? View.INVISIBLE : View.VISIBLE);
+
+        requireScrollMixin.getOnRequireScrollStateChangedListener().onRequireScrollStateChanged(
+                false);
+        assertThat(footerButton.getVisibility()).isEqualTo(View.VISIBLE);
+    }
+
+    @Test
+    public void testFaceEnrollIntroduction_footerSecondaryButtonWhenMaxEnroll() {
+        setFaceManagerToHave(1 /* numEnrollments */);
+        final Intent intent = new Intent();
+        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, new byte[0]);
+        mController = Robolectric.buildActivity(TestFaceEnrollIntroduction.class, intent);
+        mActivity = (TestFaceEnrollIntroduction) mController.get();
+
+        mController.create();
+
+        FooterBarMixin footer = getGlifLayout(mActivity).getMixin(FooterBarMixin.class);
+        FooterButton footerButton = footer.getSecondaryButton();
+        final RequireScrollMixin requireScrollMixin = getGlifLayout(mActivity).getMixin(
+                RequireScrollMixin.class);
+        assertThat(footerButton.getVisibility()).isEqualTo(View.INVISIBLE);
+
+        requireScrollMixin.getOnRequireScrollStateChangedListener().onRequireScrollStateChanged(
+                false);
         assertThat(footerButton.getVisibility()).isEqualTo(View.INVISIBLE);
     }
 
