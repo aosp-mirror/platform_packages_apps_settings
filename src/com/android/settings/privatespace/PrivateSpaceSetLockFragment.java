@@ -97,7 +97,7 @@ public class PrivateSpaceSetLockFragment extends InstrumentedFragment {
                     getContext(), SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_USE_SCREEN_LOCK);
             // Simply Use default screen lock. No need to handle
             NavHostFragment.findNavController(PrivateSpaceSetLockFragment.this)
-                    .navigate(R.id.action_lock_success_fragment);
+                    .navigate(R.id.action_pre_finish_delay_fragment);
         };
     }
 
