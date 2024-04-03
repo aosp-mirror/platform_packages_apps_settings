@@ -2686,6 +2686,7 @@
 
         <activity android:name=".biometrics.face.FaceEnrollIntroduction"
                   android:exported="true"
+                  android:theme="@style/GlifV4Theme.DayNight"
                   android:screenOrientation="nosensor">
             <intent-filter>
                 <action android:name="android.settings.FACE_ENROLL"/>
@@ -2696,18 +2697,22 @@
         <activity android:name=".biometrics.face.FaceEnrollIntroductionInternal"
                   android:exported="false"
                   android:screenOrientation="nosensor"
+                  android:theme="@style/GlifV4Theme.DayNight"
                   android:taskAffinity="com.android.settings.root" />
 
         <activity android:name=".biometrics.face.FaceEnrollEducation"
             android:exported="false"
+            android:theme="@style/GlifV4Theme.DayNight"
             android:screenOrientation="nosensor"/>
 
         <activity android:name=".biometrics.face.FaceEnrollEnrolling"
             android:exported="false"
+            android:theme="@style/GlifV4Theme.DayNight"
             android:screenOrientation="portrait"/>
 
         <activity android:name=".biometrics.face.FaceEnrollFinish"
             android:exported="false"
+            android:theme="@style/GlifV4Theme.DayNight"
             android:screenOrientation="portrait"/>
 
         <activity android:name=".biometrics.BiometricHandoffActivity"
