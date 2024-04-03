@@ -5184,9 +5184,11 @@
 
         <activity
             android:name="com.android.settings.network.WepNetworkDialogActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenSize|screenLayout|smallestScreenSize"
+            android:excludeFromRecents="true"
             android:exported="true"
-            android:theme="@style/Theme.SpaLib.Dialog"
-            android:permission="android.permission.NETWORK_SETTINGS">
+            android:permission="android.permission.NETWORK_SETTINGS"
+            android:theme="@style/Theme.SpaLib.Dialog">
         </activity>
 
         <!-- This is the longest AndroidManifest.xml ever. -->
