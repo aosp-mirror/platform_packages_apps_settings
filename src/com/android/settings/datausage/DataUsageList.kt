@@ -34,6 +34,7 @@ import com.android.settings.dashboard.DashboardFragment
 import com.android.settings.datausage.lib.BillingCycleRepository
 import com.android.settings.datausage.lib.NetworkUsageData
 import com.android.settings.network.MobileNetworkRepository
+import com.android.settings.network.SubscriptionUtil
 import com.android.settings.network.mobileDataEnabledFlow
 import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity
 import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
@@ -95,6 +96,18 @@ open class DataUsageList : DashboardFragment() {
         }
         chartDataUsagePreferenceController = use(ChartDataUsagePreferenceController::class.java)
             .apply { init(template) }
+
+        updateWarning()
+    }
+
+    private fun updateWarning() {
+        val template = template ?: return
+        val warningPreference = findPreference<Preference>(KEY_WARNING)!!
+        if (template.matchRule != NetworkTemplate.MATCH_WIFI) {
+            warningPreference.setSummary(R.string.operator_warning)
+        } else if (SubscriptionUtil.isSimHardwareVisible(context)) {
+            warningPreference.setSummary(R.string.non_carrier_data_usage_warning)
+        }
     }
 
     override fun onViewCreated(v: View, savedInstanceState: Bundle?) {
@@ -188,5 +201,8 @@ open class DataUsageList : DashboardFragment() {
 
         private const val TAG = "DataUsageList"
         private const val KEY_USAGE_AMOUNT = "usage_amount"
+
+        @VisibleForTesting
+        const val KEY_WARNING = "warning"
     }
 }

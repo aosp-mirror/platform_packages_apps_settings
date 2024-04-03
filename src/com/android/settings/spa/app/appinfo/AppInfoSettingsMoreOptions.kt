@@ -20,6 +20,7 @@ import android.app.AppOpsManager
 import android.app.ecm.EnhancedConfirmationManager
 import android.content.Context
 import android.content.pm.ApplicationInfo
+import android.content.pm.PackageManager
 import android.os.UserManager
 import android.widget.Toast
 import androidx.compose.runtime.Composable
@@ -180,7 +181,12 @@ private fun ApplicationInfo.shouldShowAccessRestrictedSettings(context: Context)
     return if (android.permission.flags.Flags.enhancedConfirmationModeApisEnabled()
             && android.security.Flags.extendEcmToAllSettings()) {
         val manager = context.getSystemService(EnhancedConfirmationManager::class.java)!!
-        manager.isClearRestrictionAllowed(packageName)
+        try {
+            manager.isClearRestrictionAllowed(packageName)
+        } catch (e: PackageManager.NameNotFoundException) {
+            // Package might have been archived
+            false
+        }
     } else {
         context.appOpsManager.noteOpNoThrow(
             AppOpsManager.OP_ACCESS_RESTRICTED_SETTINGS, uid, packageName, null, null

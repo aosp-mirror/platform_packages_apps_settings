@@ -26,6 +26,7 @@ import android.graphics.Matrix;
 import android.graphics.Rect;
 import android.graphics.SurfaceTexture;
 import android.net.wifi.EasyConnectStatusCallback;
+import android.net.wifi.UriParserResults;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -183,32 +184,29 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
                     // one for open network and one for enhanced open network.
                     final WifiManager wifiManager =
                             context.getSystemService(WifiManager.class);
-                    final WifiNetworkConfig qrCodeWifiNetworkConfig =
-                            (WifiNetworkConfig)msg.obj;
-                    final List<WifiConfiguration> qrCodeWifiConfigurations =
-                            qrCodeWifiNetworkConfig.getWifiConfigurations();
+                    final WifiConfiguration qrCodeWifiConfiguration = (WifiConfiguration) msg.obj;
 
                     // Adds all Wi-Fi networks in QR code to the set of configured networks and
                     // connects to it if it's reachable.
                     boolean hasHiddenOrReachableWifiNetwork = false;
-                    for (WifiConfiguration qrCodeWifiConfiguration : qrCodeWifiConfigurations) {
-                        final int id = wifiManager.addNetwork(qrCodeWifiConfiguration);
-                        if (id == -1) {
-                            continue;
-                        }
+                    final int id = wifiManager.addNetwork(qrCodeWifiConfiguration);
+                    if (id == -1) {
+                        return;
+                    }
 
-                        if (!canConnectWifi(qrCodeWifiConfiguration.SSID)) return;
+                    if (!canConnectWifi(qrCodeWifiConfiguration.SSID)) {
+                        return;
+                    }
 
-                        wifiManager.enableNetwork(id, /* attemptConnect */ false);
-                        // WifiTracker only contains a hidden SSID Wi-Fi network if it's saved.
-                        // We can't check if a hidden SSID Wi-Fi network is reachable in advance.
-                        if (qrCodeWifiConfiguration.hiddenSSID ||
-                                isReachableWifiNetwork(qrCodeWifiConfiguration)) {
-                            hasHiddenOrReachableWifiNetwork = true;
-                            mEnrolleeWifiConfiguration = qrCodeWifiConfiguration;
-                            wifiManager.connect(id,
-                                    /* listener */ WifiDppQrCodeScannerFragment.this);
-                        }
+                    wifiManager.enableNetwork(id, /* attemptConnect */ false);
+                    // WifiTracker only contains a hidden SSID Wi-Fi network if it's saved.
+                    // We can't check if a hidden SSID Wi-Fi network is reachable in advance.
+                    if (qrCodeWifiConfiguration.hiddenSSID
+                            || isReachableWifiNetwork(qrCodeWifiConfiguration)) {
+                        hasHiddenOrReachableWifiNetwork = true;
+                        mEnrolleeWifiConfiguration = qrCodeWifiConfiguration;
+                        wifiManager.connect(id,
+                                /* listener */ WifiDppQrCodeScannerFragment.this);
                     }
 
                     if (!hasHiddenOrReachableWifiNetwork) {
@@ -530,8 +528,9 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
         }
 
         // It's impossible to provision other device with ZXing Wi-Fi Network config format
-        final String scheme = mWifiQrCode.getScheme();
-        if (mIsConfiguratorMode && WifiQrCode.SCHEME_ZXING_WIFI_NETWORK_CONFIG.equals(scheme)) {
+        if (mIsConfiguratorMode
+                && mWifiQrCode.getScheme()
+                        == UriParserResults.URI_SCHEME_ZXING_WIFI_NETWORK_CONFIG) {
             showErrorMessage(R.string.wifi_dpp_qr_code_is_not_valid_format);
             return false;
         }
@@ -545,11 +544,11 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
     @Override
     public void handleSuccessfulResult(String qrCode) {
         switch (mWifiQrCode.getScheme()) {
-            case WifiQrCode.SCHEME_DPP:
+            case UriParserResults.URI_SCHEME_DPP:
                 handleWifiDpp();
                 break;
 
-            case WifiQrCode.SCHEME_ZXING_WIFI_NETWORK_CONFIG:
+            case UriParserResults.URI_SCHEME_ZXING_WIFI_NETWORK_CONFIG:
                 handleZxingWifiFormat();
                 break;
 
@@ -567,7 +566,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
 
     private void handleZxingWifiFormat() {
         Message message = mHandler.obtainMessage(MESSAGE_SCAN_ZXING_WIFI_FORMAT_SUCCESS);
-        message.obj = new WifiQrCode(mWifiQrCode.getQrCode()).getWifiNetworkConfig();
+        message.obj = new WifiQrCode(mWifiQrCode.getQrCode()).getWifiConfiguration();
 
         mHandler.sendMessageDelayed(message, SHOW_SUCCESS_SQUARE_INTERVAL);
     }
