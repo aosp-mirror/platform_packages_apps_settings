@@ -46,6 +46,13 @@
             android:id="@+id/action_retry_profile_creation"
             app:destination="@id/ps_auto_advance_fragment"/>
     </fragment>
+    <fragment android:id="@+id/ps_pre_finish_delay_fragment"
+              android:name="com.android.settings.privatespace.SetupPreFinishDelayFragment"
+              android:label="fragment_ps_pre_finish">
+        <action
+            android:id="@+id/action_success_fragment"
+            app:destination="@id/ps_profile_success_fragment"/>
+    </fragment>
     <fragment android:id="@+id/ps_profile_success_fragment"
               android:name="com.android.settings.privatespace.SetupSuccessFragment"
               android:label="fragment_ps_success"/>
@@ -64,7 +71,7 @@
               android:label="fragment_ps_lock">
         <action
             android:id="@+id/action_lock_success_fragment"
-            app:destination="@id/ps_profile_success_fragment"/>
+            app:destination="@id/ps_pre_finish_delay_fragment"/>
     </fragment>
     <fragment android:id="@+id/ps_account_intro_fragment"
               android:name="com.android.settings.privatespace.PrivateSpaceGaiaEducationFragment"
@@ -76,6 +83,6 @@
             android:id="@+id/action_advance_login_error"
             app:destination="@id/ps_account_error_fragment"/>
     </fragment>
-    <action android:id="@+id/action_success_fragment"
-            app:destination="@id/ps_profile_success_fragment"/>
+    <action android:id="@+id/action_pre_finish_delay_fragment"
+            app:destination="@id/ps_pre_finish_delay_fragment"/>
 </navigation>
