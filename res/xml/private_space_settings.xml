@@ -60,17 +60,6 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="@string/private_space_apps_and_notifications_header">
-
-        <com.android.settingslib.RestrictedSwitchPreference
-            android:key="private_space_sensitive_notifications"
-            android:title="@string/private_space_notifications_title"
-            android:summary="@string/private_space_sensitive_notifications_description"
-            settings:controller="com.android.settings.privatespace.HidePrivateSpaceSensitiveNotificationsController" />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory
         android:title="@string/private_space_category_system">
 
         <Preference
