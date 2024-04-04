@@ -65,6 +65,8 @@ public class PrivateSpaceMaintainer {
     @Settings.Secure.PrivateSpaceAutoLockOption
     public static final int PRIVATE_SPACE_AUTO_LOCK_DEFAULT_VAL =
             PRIVATE_SPACE_AUTO_LOCK_AFTER_DEVICE_RESTART;
+    /** Default value for the hide private space sensitive notifications on lockscreen. */
+    public static final int HIDE_PRIVATE_SPACE_SENSITIVE_NOTIFICATIONS_DISABLED_VAL = 0;
 
     public enum ErrorDeletingPrivateSpace {
         DELETE_PS_ERROR_NONE,
@@ -287,6 +289,14 @@ public class PrivateSpaceMaintainer {
         }
     }
 
+    /**
+     * Returns true if private profile can be added to the device or if private space already
+     * exists, false otherwise.
+     */
+    public boolean isPrivateSpaceEntryPointEnabled() {
+        return mUserManager.canAddPrivateProfile() || doesPrivateSpaceExist();
+    }
+
     /** Returns true if private space exists and is running, otherwise returns false */
     @VisibleForTesting
     synchronized boolean isPrivateProfileRunning() {
@@ -308,7 +318,7 @@ public class PrivateSpaceMaintainer {
     private void setPrivateSpaceSensitiveNotificationsDefaultValue() {
         Settings.Secure.putIntForUser(mContext.getContentResolver(),
                 Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS,
-                HidePrivateSpaceSensitiveNotificationsController.DISABLED,
+                HIDE_PRIVATE_SPACE_SENSITIVE_NOTIFICATIONS_DISABLED_VAL,
                 mUserHandle.getIdentifier());
     }
 

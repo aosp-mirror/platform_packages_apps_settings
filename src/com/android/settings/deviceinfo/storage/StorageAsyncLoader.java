@@ -30,8 +30,10 @@ import android.content.pm.UserInfo;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.os.storage.StorageManager;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Files.FileColumns;
 import android.provider.MediaStore.MediaColumns;
@@ -94,6 +96,7 @@ public class StorageAsyncLoader
                     media /* queryArgs */);
             result.audioSize = getFilesSize(info.id, MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
                     media /* queryArgs */);
+            result.systemSize = getSystemSize();
 
             final Bundle documentsAndOtherQueryArgs = new Bundle();
             documentsAndOtherQueryArgs.putString(ContentResolver.QUERY_ARG_SQL_SELECTION,
@@ -137,6 +140,16 @@ public class StorageAsyncLoader
                 return 0L;
             }
             return cursor.moveToFirst() ? cursor.getLong(0) : 0L;
+        }
+    }
+
+    private long getSystemSize() {
+        try {
+            return mStatsManager.getTotalBytes(StorageManager.UUID_DEFAULT)
+                    - Environment.getDataDirectory().getTotalSpace();
+        } catch (IOException e) {
+            Log.e(TAG, "Exception in calculating System category size", e);
+            return 0;
         }
     }
 
@@ -225,6 +238,7 @@ public class StorageAsyncLoader
         public long videosSize;
         public long documentsAndOtherSize;
         public long trashSize;
+        public long systemSize;
 
         public long cacheSize;
         public long duplicateCodeSize;

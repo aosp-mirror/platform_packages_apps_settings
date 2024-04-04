@@ -103,11 +103,23 @@ public class ResetOptionsDeletePrivateSpaceControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_flagsEnabled_returnsAvailable() {
+    public void getAvailabilityStatus_flagsEnabledCanAddProfile_returnsAvailable() {
         mSetFlagsRule.enableFlags(android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
         mSetFlagsRule.enableFlags(android.multiuser.Flags.FLAG_DELETE_PRIVATE_SPACE_FROM_RESET);
+        ResetOptionsDeletePrivateSpaceController spyController = spy(mController);
+        doReturn(true).when(spyController).isPrivateSpaceEntryPointEnabled();
 
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+        assertThat(spyController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_flagsEnabledCannotAddProfile_returnsUnsupported() {
+        mSetFlagsRule.enableFlags(android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
+        mSetFlagsRule.enableFlags(android.multiuser.Flags.FLAG_DELETE_PRIVATE_SPACE_FROM_RESET);
+        ResetOptionsDeletePrivateSpaceController spyController = spy(mController);
+        doReturn(false).when(spyController).isPrivateSpaceEntryPointEnabled();
+
+        assertThat(spyController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 
     @Test

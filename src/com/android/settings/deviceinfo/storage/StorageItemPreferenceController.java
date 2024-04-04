@@ -27,6 +27,7 @@ import android.content.pm.UserInfo;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -40,6 +41,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
@@ -52,6 +54,7 @@ import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 import com.android.settings.deviceinfo.StorageItemPreference;
 import com.android.settings.deviceinfo.storage.StorageUtils.SystemInfoFragment;
+import com.android.settings.deviceinfo.storage.StorageUtils.TemporaryFilesInfoFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -74,6 +77,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
     private static final String TAG = "StorageItemPreference";
 
     private static final String SYSTEM_FRAGMENT_TAG = "SystemInfo";
+    private static final String TEMPORARY_FILES_FRAGMENT_TAG = "TemporaryFilesInfo";
 
     @VisibleForTesting
     static final String PUBLIC_STORAGE_KEY = "pref_public_storage";
@@ -91,6 +95,10 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
     static final String DOCUMENTS_AND_OTHER_KEY = "pref_documents_and_other";
     @VisibleForTesting
     static final String SYSTEM_KEY = "pref_system";
+    @VisibleForTesting
+    static final String TEMPORARY_FILES_KEY = "temporary_files";
+    @VisibleForTesting
+    static final String CATEGORY_SPLITTER = "storage_category_splitter";
     @VisibleForTesting
     static final String TRASH_KEY = "pref_trash";
 
@@ -133,9 +141,13 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
     @VisibleForTesting
     @Nullable StorageItemPreference mDocumentsAndOtherPreference;
     @VisibleForTesting
+    @Nullable StorageItemPreference mTrashPreference;
+    @VisibleForTesting
     @Nullable StorageItemPreference mSystemPreference;
     @VisibleForTesting
-    @Nullable StorageItemPreference mTrashPreference;
+    @Nullable StorageItemPreference mTemporaryFilesPreference;
+    @VisibleForTesting
+    @Nullable PreferenceCategory mCategorySplitterPreferenceCategory;
 
     private final int mProfileType;
 
@@ -220,6 +232,13 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
                 dialog.setTargetFragment(mFragment, 0);
                 dialog.show(mFragment.getFragmentManager(), SYSTEM_FRAGMENT_TAG);
                 return true;
+            case TEMPORARY_FILES_KEY:
+                final TemporaryFilesInfoFragment temporaryFilesDialog =
+                        new TemporaryFilesInfoFragment();
+                temporaryFilesDialog.setTargetFragment(mFragment, 0);
+                temporaryFilesDialog.show(mFragment.getFragmentManager(),
+                        TEMPORARY_FILES_FRAGMENT_TAG);
+                return true;
             case TRASH_KEY:
                 launchTrashIntent();
                 return true;
@@ -285,6 +304,8 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         mAppsPreference.setVisible(visible);
         mGamesPreference.setVisible(visible);
         mSystemPreference.setVisible(visible);
+        mTemporaryFilesPreference.setVisible(visible);
+        mCategorySplitterPreferenceCategory.setVisible(visible);
         mTrashPreference.setVisible(visible);
 
         // If we don't have a shared volume for our internal storage (or the shared volume isn't
@@ -315,7 +336,6 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
             mPrivateStorageItemPreferences.add(mAppsPreference);
             mPrivateStorageItemPreferences.add(mGamesPreference);
             mPrivateStorageItemPreferences.add(mDocumentsAndOtherPreference);
-            mPrivateStorageItemPreferences.add(mSystemPreference);
             mPrivateStorageItemPreferences.add(mTrashPreference);
         }
         mScreen.removePreference(mImagesPreference);
@@ -324,7 +344,6 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         mScreen.removePreference(mAppsPreference);
         mScreen.removePreference(mGamesPreference);
         mScreen.removePreference(mDocumentsAndOtherPreference);
-        mScreen.removePreference(mSystemPreference);
         mScreen.removePreference(mTrashPreference);
 
         // Sort display order by size.
@@ -361,6 +380,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         tintPreference(mGamesPreference);
         tintPreference(mDocumentsAndOtherPreference);
         tintPreference(mSystemPreference);
+        tintPreference(mTemporaryFilesPreference);
         tintPreference(mTrashPreference);
     }
 
@@ -389,7 +409,9 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         mAppsPreference = screen.findPreference(APPS_KEY);
         mGamesPreference = screen.findPreference(GAMES_KEY);
         mDocumentsAndOtherPreference = screen.findPreference(DOCUMENTS_AND_OTHER_KEY);
+        mCategorySplitterPreferenceCategory = screen.findPreference(CATEGORY_SPLITTER);
         mSystemPreference = screen.findPreference(SYSTEM_KEY);
+        mTemporaryFilesPreference = screen.findPreference(TEMPORARY_FILES_KEY);
         mTrashPreference = screen.findPreference(TRASH_KEY);
     }
 
@@ -417,6 +439,12 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         mTrashPreference.setStorageSize(storageCache.trashSize, mTotalSize, animate);
         if (mSystemPreference != null) {
             mSystemPreference.setStorageSize(storageCache.systemSize, mTotalSize, animate);
+            mSystemPreference.setTitle(mContext.getString(R.string.storage_os_name,
+                    Build.VERSION.RELEASE));
+        }
+        if (mTemporaryFilesPreference != null) {
+            mTemporaryFilesPreference.setStorageSize(storageCache.temporaryFilesSize, mTotalSize,
+                    animate);
         }
         // Cache the size info
         if (result != null) {
@@ -445,6 +473,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         storageCache.gamesSize = data.gamesSize;
         storageCache.documentsAndOtherSize = data.documentsAndOtherSize;
         storageCache.trashSize = data.trashSize;
+        storageCache.systemSize = data.systemSize;
         // Everything else that hasn't already been attributed is tracked as
         // belonging to system.
         long attributedSize = 0;
@@ -460,7 +489,9 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
                             + otherData.allAppsExceptGamesSize;
             attributedSize -= otherData.duplicateCodeSize;
         }
-        storageCache.systemSize = Math.max(DataUnit.GIBIBYTES.toBytes(1),
+        // System size is equal for each user and should be added only once
+        attributedSize += data.systemSize;
+        storageCache.temporaryFilesSize = Math.max(DataUnit.GIBIBYTES.toBytes(1),
                 mUsedBytes - attributedSize);
         return storageCache;
     }

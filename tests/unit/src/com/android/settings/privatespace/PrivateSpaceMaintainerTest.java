@@ -21,9 +21,15 @@ import static android.provider.Settings.Secure.PRIVATE_SPACE_AUTO_LOCK;
 
 import static com.android.settings.privatespace.PrivateSpaceMaintainer.HIDE_PRIVATE_SPACE_ENTRY_POINT_DISABLED_VAL;
 import static com.android.settings.privatespace.PrivateSpaceMaintainer.HIDE_PRIVATE_SPACE_ENTRY_POINT_ENABLED_VAL;
+import static com.android.settings.privatespace.PrivateSpaceMaintainer.HIDE_PRIVATE_SPACE_SENSITIVE_NOTIFICATIONS_DISABLED_VAL;
 import static com.android.settings.privatespace.PrivateSpaceMaintainer.PRIVATE_SPACE_AUTO_LOCK_DEFAULT_VAL;
 
 import static com.google.common.truth.Truth.assertThat;
+
+import static org.junit.Assume.assumeFalse;
+import static org.junit.Assume.assumeTrue;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
 import android.app.ActivityManager;
 import android.app.IActivityManager;
@@ -31,6 +37,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.os.Flags;
 import android.os.RemoteException;
+import android.os.UserManager;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 
@@ -72,6 +79,8 @@ public class PrivateSpaceMaintainerTest {
     /** Tests that {@link PrivateSpaceMaintainer#deletePrivateSpace()} deletes PS when PS exists. */
     @Test
     public void deletePrivateSpace_psExists_deletesPS() {
+        mSetFlagsRule.enableFlags(
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
         PrivateSpaceMaintainer privateSpaceMaintainer =
                 PrivateSpaceMaintainer.getInstance(mContext);
         privateSpaceMaintainer.createPrivateSpace();
@@ -88,6 +97,8 @@ public class PrivateSpaceMaintainerTest {
      */
     @Test
     public void deletePrivateSpace_psDoesNotExist_returnsNoPSError() {
+        mSetFlagsRule.enableFlags(
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
         PrivateSpaceMaintainer privateSpaceMaintainer =
                 PrivateSpaceMaintainer.getInstance(mContext);
         ErrorDeletingPrivateSpace errorDeletingPrivateSpace =
@@ -100,6 +111,8 @@ public class PrivateSpaceMaintainerTest {
     /** Tests that {@link PrivateSpaceMaintainer#createPrivateSpace()} when PS exists creates PS. */
     @Test
     public void createPrivateSpace_psDoesNotExist_createsPS() {
+        mSetFlagsRule.enableFlags(
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
         PrivateSpaceMaintainer privateSpaceMaintainer =
                 PrivateSpaceMaintainer.getInstance(mContext);
         privateSpaceMaintainer.deletePrivateSpace();
@@ -113,6 +126,8 @@ public class PrivateSpaceMaintainerTest {
      */
     @Test
     public void createPrivateSpace_psExists_returnsFalse() {
+        mSetFlagsRule.enableFlags(
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
         PrivateSpaceMaintainer privateSpaceMaintainer =
                 PrivateSpaceMaintainer.getInstance(mContext);
         privateSpaceMaintainer.deletePrivateSpace();
@@ -127,6 +142,8 @@ public class PrivateSpaceMaintainerTest {
      */
     @Test
     public void createPrivateSpace_psDoesNotExist_resetsHidePSSettings() {
+        mSetFlagsRule.enableFlags(
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
         PrivateSpaceMaintainer privateSpaceMaintainer =
                 PrivateSpaceMaintainer.getInstance(mContext);
         Settings.Secure.putInt(
@@ -156,7 +173,7 @@ public class PrivateSpaceMaintainerTest {
         privateSpaceMaintainer.createPrivateSpace();
         assertThat(privateSpaceMaintainer.doesPrivateSpaceExist()).isTrue();
         assertThat(getPsSensitiveNotificationsValue(privateSpaceMaintainer))
-                .isEqualTo(HidePrivateSpaceSensitiveNotificationsController.DISABLED);
+                .isEqualTo(HIDE_PRIVATE_SPACE_SENSITIVE_NOTIFICATIONS_DISABLED_VAL);
     }
 
     /**
@@ -165,6 +182,8 @@ public class PrivateSpaceMaintainerTest {
      */
     @Test
     public void createPrivateSpace_psExists_doesNotResetHidePSSettings() {
+        mSetFlagsRule.enableFlags(
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
         PrivateSpaceMaintainer privateSpaceMaintainer =
                 PrivateSpaceMaintainer.getInstance(mContext);
         privateSpaceMaintainer.createPrivateSpace();
@@ -184,6 +203,8 @@ public class PrivateSpaceMaintainerTest {
      */
     @Test
     public void lockPrivateSpace_psExistsAndPrivateProfileRunning_locksCreatedPrivateSpace() {
+        mSetFlagsRule.enableFlags(
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
         PrivateSpaceMaintainer privateSpaceMaintainer =
                 PrivateSpaceMaintainer.getInstance(mContext);
         privateSpaceMaintainer.createPrivateSpace();
@@ -200,6 +221,8 @@ public class PrivateSpaceMaintainerTest {
      */
     @Test
     public void lockPrivateSpace_psExistsAndPrivateProfileNotRunning_returnsFalse() {
+        mSetFlagsRule.enableFlags(
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
         PrivateSpaceMaintainer privateSpaceMaintainer =
                 PrivateSpaceMaintainer.getInstance(mContext);
         privateSpaceMaintainer.createPrivateSpace();
@@ -220,6 +243,8 @@ public class PrivateSpaceMaintainerTest {
      */
     @Test
     public void lockPrivateSpace_psDoesNotExist_returnsFalse() {
+        mSetFlagsRule.enableFlags(
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
         PrivateSpaceMaintainer privateSpaceMaintainer =
                 PrivateSpaceMaintainer.getInstance(mContext);
         assertThat(privateSpaceMaintainer.doesPrivateSpaceExist()).isFalse();
@@ -232,6 +257,8 @@ public class PrivateSpaceMaintainerTest {
      */
     @Test
     public void createPrivateSpace_psDoesNotExist_setsUserSetupComplete() {
+        mSetFlagsRule.enableFlags(
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
         PrivateSpaceMaintainer privateSpaceMaintainer =
                 PrivateSpaceMaintainer.getInstance(mContext);
         privateSpaceMaintainer.createPrivateSpace();
@@ -244,6 +271,8 @@ public class PrivateSpaceMaintainerTest {
      */
     @Test
     public void createPrivateSpace_pSExists_doesNotChangeUserSetupSetting() {
+        mSetFlagsRule.enableFlags(
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
         PrivateSpaceMaintainer privateSpaceMaintainer =
                 PrivateSpaceMaintainer.getInstance(mContext);
         privateSpaceMaintainer.createPrivateSpace();
@@ -300,6 +329,61 @@ public class PrivateSpaceMaintainerTest {
                 .isEqualTo(privateSpaceAutLockValue);
     }
 
+    @Test
+    public void isPrivateSpaceEntryPointEnabled_psExistCanAddProfileTrue_returnsTrue() {
+        mSetFlagsRule.enableFlags(
+                Flags.FLAG_ALLOW_PRIVATE_PROFILE,
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
+        assumeTrue(mContext.getSystemService(UserManager.class).canAddPrivateProfile());
+        PrivateSpaceMaintainer privateSpaceMaintainer =
+                PrivateSpaceMaintainer.getInstance(mContext);
+        privateSpaceMaintainer.createPrivateSpace();
+        assertThat(privateSpaceMaintainer.doesPrivateSpaceExist()).isTrue();
+
+        assertThat(privateSpaceMaintainer.isPrivateSpaceEntryPointEnabled()).isTrue();
+    }
+
+    @Test
+    public void isPrivateSpaceEntryPointEnabled_psNotExistsCanAddProfileTrue_returnsTrue() {
+        mSetFlagsRule.enableFlags(
+                Flags.FLAG_ALLOW_PRIVATE_PROFILE,
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
+        assumeTrue(mContext.getSystemService(UserManager.class).canAddPrivateProfile());
+        PrivateSpaceMaintainer privateSpaceMaintainer =
+                PrivateSpaceMaintainer.getInstance(mContext);
+        privateSpaceMaintainer.deletePrivateSpace();
+        assertThat(privateSpaceMaintainer.doesPrivateSpaceExist()).isFalse();
+
+        assertThat(privateSpaceMaintainer.isPrivateSpaceEntryPointEnabled()).isTrue();
+    }
+
+    @Test
+    public void isPrivateSpaceEntryPointEnabled_psExistsCanAddProfileFalse_returnsTrue() {
+        mSetFlagsRule.enableFlags(
+                Flags.FLAG_ALLOW_PRIVATE_PROFILE,
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
+        assumeFalse(mContext.getSystemService(UserManager.class).canAddPrivateProfile());
+        PrivateSpaceMaintainer privateSpaceMaintainer =
+                spy(PrivateSpaceMaintainer.getInstance(mContext));
+        when(privateSpaceMaintainer.doesPrivateSpaceExist()).thenReturn(true);
+
+        assertThat(privateSpaceMaintainer.isPrivateSpaceEntryPointEnabled()).isTrue();
+    }
+
+    @Test
+    public void isPrivateSpaceEntryPointEnabled_psNotExistsCanAddProfileFalse_returnsFalse() {
+        mSetFlagsRule.enableFlags(
+                Flags.FLAG_ALLOW_PRIVATE_PROFILE,
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
+        assumeFalse(mContext.getSystemService(UserManager.class).canAddPrivateProfile());
+        PrivateSpaceMaintainer privateSpaceMaintainer =
+                PrivateSpaceMaintainer.getInstance(mContext);
+        privateSpaceMaintainer.deletePrivateSpace();
+        assertThat(privateSpaceMaintainer.doesPrivateSpaceExist()).isFalse();
+
+        assertThat(privateSpaceMaintainer.isPrivateSpaceEntryPointEnabled()).isFalse();
+    }
+
     private int getSecureUserSetupComplete() {
         PrivateSpaceMaintainer privateSpaceMaintainer =
                 PrivateSpaceMaintainer.getInstance(mContext);
@@ -313,7 +397,7 @@ public class PrivateSpaceMaintainerTest {
     private int getPsSensitiveNotificationsValue(PrivateSpaceMaintainer privateSpaceMaintainer) {
         return Settings.Secure.getIntForUser(mContentResolver,
                 LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS,
-                HidePrivateSpaceSensitiveNotificationsController.ENABLED,
+                /* enabled */ 1,
                 privateSpaceMaintainer.getPrivateProfileHandle().getIdentifier());
     }
 }
