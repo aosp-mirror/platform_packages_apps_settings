@@ -91,7 +91,7 @@ public class PrivateSpaceEducation extends InstrumentedFragment {
                     getContext(), SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_START);
             Log.i(TAG, "Starting private space setup");
             NavHostFragment.findNavController(PrivateSpaceEducation.this)
-                    .navigate(R.id.action_education_to_auto_advance);
+                    .navigate(R.id.action_education_to_create);
         };
     }
 
