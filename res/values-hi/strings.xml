@@ -243,7 +243,7 @@
     <string name="lock_after_timeout" msgid="8682769000437403444">"स्क्रीन बंद होने पर लॉक करें"</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"टाइम आउट के बाद <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>"</string>
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"टाइम आउट के तुरंत बाद, अगर <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> ने लॉक न कर रखा हो"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"स्क्रीन बंद होने के <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> बाद. हालांकि, अगर <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> ने अनलॉक कर रखा है, तब नहीं"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"स्क्रीन बंद होने के <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> बाद. हालांकि, <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> से अनलॉक किए होने पर नहीं"</string>
     <string name="owner_info_settings_title" msgid="3555626140700093017">"लॉक स्क्रीन पर टेक्स्ट जोड़ें"</string>
     <string name="owner_info_settings_summary" msgid="347238313388083297">"कोई नहीं"</string>
     <string name="owner_info_settings_edit_text_hint" msgid="841926875876050274">"उदाहरण, जो का Android."</string>
@@ -1483,7 +1483,7 @@
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"प्रोफ़ाइल पैटर्न दिखे"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"छूने पर कंपन (वाइब्रेशन) करें"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"पावर बटन से तुरंत लॉक हो"</string>
-    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="2202430156268094229">"अगर <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> ने अनलॉक कर रखा है, तब नहीं"</string>
+    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="2202430156268094229">"<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> से अनलॉक किए होने पर नहीं"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="2193588309557281466">"अनलॉक आकार सेट करें"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="7614155083815661347">"अनलॉक आकार बदलें"</string>
     <string name="lockpattern_settings_help_how_to_record" msgid="2093801939046625774">"अनलॉक आकार कैसे आरेखित करें"</string>
@@ -2182,7 +2182,7 @@
     <string name="history_details_title" msgid="8628584613889559355">"इतिहास विवरण"</string>
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"बैटरी खर्च"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"पिछले 24 घंटों में हुए इस्तेमाल की जानकारी"</string>
-    <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"पूरा चार्ज होने के बाद से, बैटरी खर्च"</string>
+    <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"पूरा चार्ज होने के बाद बैटरी खर्च देखें"</string>
     <string name="battery_details_title" msgid="3289680399291090588">"ऐप्लिकेशन के इस्तेमाल में हुआ बैटरी खर्च"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"विवरणों का उपयोग करें"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"पावर उपयोग एडजस्ट करें"</string>
@@ -2294,7 +2294,7 @@
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"<xliff:g id="PERCENT">%1$s</xliff:g> बैटरी होने पर"</string>
     <string name="battery_percentage" msgid="1779934245963043490">"बैटरी का प्रतिशत"</string>
     <string name="battery_percentage_description" msgid="2321465139126125541">"स्टेटस बार में दिखाएं कि कितने प्रतिशत बैटरी बची है"</string>
-    <string name="battery_usage_chart_graph_hint_last_full_charge" msgid="6570336408060566877">"पूरी चार्ज होने के बाद से, बैटरी का लेवल"</string>
+    <string name="battery_usage_chart_graph_hint_last_full_charge" msgid="6570336408060566877">"पूरा चार्ज होने के बाद, बैटरी का लेवल"</string>
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"पिछले 24 घंटों में बैटरी लेवल की जानकारी"</string>
     <string name="battery_app_usage" msgid="8976453608783133770">"पिछली बार पूरी तरह चार्ज होने के बाद से अब तक, ऐप्लिकेशन के इस्तेमाल में खर्च हुई बैटरी"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"पिछले 24 घंटों में, ऐप्लिकेशन ने कितनी बैटरी इस्तेमाल की"</string>
@@ -2319,8 +2319,8 @@
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"हर घंटे का बैटरी खर्च दिखाने वाला चार्ट"</string>
     <string name="battery_usage_breakdown_title_since_last_full_charge" msgid="435006273323199906">"पूरा चार्ज होने के बाद से, बैटरी खर्च"</string>
     <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"<xliff:g id="SLOT">%s</xliff:g> तक का बैटरी खर्च"</string>
-    <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"पूरा चार्ज होने के बाद से, किसी डिवाइस के इस्तेमाल में बीता समय"</string>
-    <string name="screen_time_category_for_slot" msgid="8287722270554654959">"<xliff:g id="SLOT">%s</xliff:g> तक किसी डिवाइस के इस्तेमाल में बीता समय"</string>
+    <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"पूरा चार्ज होने के बाद से स्क्रीन टाइम"</string>
+    <string name="screen_time_category_for_slot" msgid="8287722270554654959">"<xliff:g id="SLOT">%s</xliff:g> तक का स्क्रीन टाइम"</string>
     <string name="battery_usage_spinner_view_by_apps" msgid="8769276544072098082">"ऐप्लिकेशन के हिसाब से देखें"</string>
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"सिस्टम के हिसाब से देखें"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
@@ -3138,17 +3138,17 @@
     <string name="notification_history_summary" msgid="5434741516307706892">"हाल ही में मिली और स्नूज़ की गई सूचनाएं दिखाएं"</string>
     <string name="notification_history" msgid="8663811361243456201">"सूचनाओं का इतिहास"</string>
     <string name="notification_history_toggle" msgid="9093762294928569030">"सूचनाओं के इतिहास की सुविधा का इस्तेमाल करें"</string>
-    <string name="notification_history_off_title_extended" msgid="853807652537281601">"सूचनाओं के इतिहास की सुविधा बंद कर दी गई है"</string>
+    <string name="notification_history_off_title_extended" msgid="853807652537281601">"सूचनाओं के इतिहास की सुविधा बंद है"</string>
     <string name="notification_history_off_summary" msgid="671359587084797617">"हाल ही में मिली और स्नूज़ की गई सूचनाएं देखने के लिए, सूचनाओं के इतिहास की सुविधा चालू करें"</string>
     <string name="history_toggled_on_title" msgid="4518001110492652830">"हाल ही में कोई सूचना नहीं मिली है"</string>
     <string name="history_toggled_on_summary" msgid="9034278971358282728">"हाल ही में मिली और स्नूज़ की गई सूचनाएं यहां दिखेंगी"</string>
     <string name="notification_history_view_settings" msgid="5269317798670449002">"सूचना सेटिंग देखें"</string>
     <string name="notification_history_open_notification" msgid="2655071846911258371">"सूचना खोलें"</string>
-    <string name="snooze_options_title" msgid="2109795569568344617">"सूचना स्नूज़ करने की अनुमति दें"</string>
+    <string name="snooze_options_title" msgid="2109795569568344617">"सूचनाएं स्नूज़ करने की अनुमति दें"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"ऐप्लिकेशन आइकॉन पर सूचनाएं बताने वाला डॉट"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"बबल्स"</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"बबल्स"</string>
-    <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"इस बातचीत को बबल करें"</string>
+    <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"इस बातचीत को बबल के रूप में दिखाएं"</string>
     <string name="bubbles_conversation_toggle_summary" msgid="720229032254323578">"ऐप्लिकेशन के ऊपर फ़्लोटिंग आइकॉन दिखाएं"</string>
     <string name="bubbles_feature_disabled_dialog_title" msgid="1794193899792284007">"डिवाइस के लिए बबल्स की सुविधा चालू करें?"</string>
     <string name="bubbles_feature_disabled_dialog_text" msgid="5275666953364031055">"इस ऐप्लिकेशन पर बबल्स की सुविधा चालू करने से आपके डिवाइस के लिए भी बबल्स की सुविधा चालू हो जाएगी.\n\nइससे उन ऐप्लिकेशन और बातचीत पर भी असर पड़ता है जिन्हें बबल की अनुमति दी गई है."</string>
@@ -3168,7 +3168,7 @@
     <string name="swipe_direction_rtl" msgid="1707391213940663992">"खारिज करने के लिए बाईं ओर स्वाइप करें और मेन्यू दिखाने के लिए दाईं ओर"</string>
     <string name="silent_notifications_status_bar" msgid="6113307620588767516">"साइलेंट मोड पर सेट की गई सूचनाएं, स्टेटस बार में न दिखाएं"</string>
     <string name="notification_pulse_title" msgid="8013178454646671529">"ब्लिंक लाइट"</string>
-    <string name="lock_screen_notifications_title" msgid="2876323153692406203">"निजता"</string>
+    <string name="lock_screen_notifications_title" msgid="2876323153692406203">"निजता सेटिंग"</string>
     <string name="lockscreen_bypass_title" msgid="6519964196744088573">"पिछली खुली स्क्रीन पर जाएं"</string>
     <string name="lockscreen_bypass_summary" msgid="4578154430436224161">"डिवाइस को अनलॉक करने के बाद, सीधे पिछली खुली स्क्रीन पर जाएं. लॉक स्क्रीन पर सूचनाएं नहीं दिखेंगी. सूचनाएं देखने के लिए ऊपर से नीचे की ओर स्वाइप करें."</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"लॉक स्क्रीन, लॉकस्क्रीन, छोड़ें, बायपास"</string>
@@ -3176,7 +3176,7 @@
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"लॉक स्क्रीन पर सिर्फ़ नई सूचनाएं दिखाएं"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"देखी जा चुकी सूचनाएं लॉक स्क्रीन से अपने-आप हट जाएंगी"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"लॉक स्क्रीन पर दिखने वाली सूचनाएं"</string>
-    <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"बातचीत, डिफ़ॉल्ट, और साइलेंट मोड पर सेट की गई सूचनाएं दिखाएं"</string>
+    <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"डिफ़ॉल्ट और साइलेंट, दोनों मोड वाली सूचनाएं और बातचीत दिखाएं"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"बातचीत, डिफ़ॉल्ट, और साइलेंट मोड पर सेट की गई सूचनाएं दिखाएं"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"साइलेंट मोड पर सेट की गई सूचनाएं और बातचीत छिपाएं"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"कोई भी सूचना न दिखाएं"</string>
@@ -3184,7 +3184,7 @@
     <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"स्क्रीन लॉक होने पर संवेदनशील कॉन्टेंट दिखाएं"</string>
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"वर्क प्रोफ़ाइल की संवेदनशील सूचनाएं"</string>
     <string name="lock_screen_notifs_redact_work_summary" msgid="3238238380405430156">"स्क्रीन लॉक होने पर वर्क प्रोफ़ाइल का संवेदनशील कॉन्टेंट दिखाएं"</string>
-    <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"सारी सूचनाएं दिखाएं"</string>
+    <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"पूरी सूचना दिखाएं"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"डिवाइस अनलॉक होने पर ही संवेदनशील कॉन्टेंट दिखाएं"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="3388290397947365744">"सूचनाएं बिलकुल न दिखाएं"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="4688399629301178487">"आपको लॉक स्क्रीन पर क्या देखना है?"</string>
@@ -3210,28 +3210,28 @@
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"बातचीत सेक्शन में सबसे ऊपर, फ्लोटिंग बबल्स के तौर पर दिखती है"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"बातचीत सेक्शन में सबसे ऊपर दिखाएं"</string>
     <string name="other_conversations" msgid="551178916855139870">"अन्य बातचीत"</string>
-    <string name="other_conversations_summary" msgid="3487426787901236273">"आपने जिन बातचीत में बदलाव किए हैं"</string>
+    <string name="other_conversations_summary" msgid="3487426787901236273">"आपने जिन बातचीत की सेटिंग में बदलाव किए हैं"</string>
     <string name="recent_conversations" msgid="471678228756995274">"हाल ही में की गई बातचीत"</string>
     <string name="conversation_settings_clear_recents" msgid="8940398397663307054">"हाल ही में की गई बातचीत मिटाएं"</string>
     <string name="recent_convos_removed" msgid="2122932798895714203">"हाल ही में की गई बातचीत को हटाया गया"</string>
     <string name="recent_convo_removed" msgid="8686414146325958281">"बातचीत हटाई गई"</string>
     <string name="clear" msgid="5092178335409471100">"मिटाएं"</string>
-    <string name="conversation_onboarding_title" msgid="5194559958353468484">"यहां ऐसी बातचीत दिखेंगी जो अहम हैं और जिनमें बदलाव किए गए हैं"</string>
-    <string name="conversation_onboarding_summary" msgid="2484845363368486941">"जब किसी बातचीत को अहम के रूप में मार्क किया जाता है या उसमें कोई बदलाव किया जाता है, तो वह यहां दिखेगी. \n\nबातचीत की सेटिंग बदलने के लिए: \nपुल-डाउन शेड खोलने के लिए, स्क्रीन पर ऊपर से नीचे की ओर स्वाइप करें. इसके बाद, किसी बातचीत को दबाकर रखें."</string>
+    <string name="conversation_onboarding_title" msgid="5194559958353468484">"यहां ऐसी बातचीत दिखेंगी जो अहम हैं. वे बातचीत भी दिखेंगी जिनकी सेटिंग में बदलाव किए गए हैं"</string>
+    <string name="conversation_onboarding_summary" msgid="2484845363368486941">"जब किसी बातचीत को अहम के तौर पर मार्क किया जाता है या उसकी सेटिंग में कोई बदलाव किया जाता है, तो वह यहां दिखेगी. \n\nबातचीत की सेटिंग बदलने के लिए: \nपुल-डाउन शेड खोलने के लिए, स्क्रीन पर ऊपर से नीचे की ओर स्वाइप करें. इसके बाद, किसी बातचीत को दबाकर रखें."</string>
     <string name="notification_importance_min_title" msgid="7676541266705442501">"छोटा करें"</string>
     <string name="notification_importance_high_title" msgid="394129291760607808">"स्क्रीन पर दिखाएं"</string>
-    <string name="notification_silence_title" msgid="4085829874452944989">"बिना आवाज़ के सूचनाएं दिखाएं"</string>
+    <string name="notification_silence_title" msgid="4085829874452944989">"साइलेंट मोड पर सेट की गई सूचनाएं दिखाएं"</string>
     <string name="notification_alert_title" msgid="1632401211722199217">"डिफ़ॉल्ट"</string>
     <string name="allow_interruption" msgid="5237201780159482716">"रुकावटों की अनुमति दें"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"ऐप को आवाज़, थरथराहट (वाइब्रेशन) करने दें और/या स्क्रीन पर सूचना नई विंडो में खुलने दें"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"प्राथमिकता"</string>
-    <string name="notification_channel_summary_priority" msgid="7225362351439076913">"इससे चैट, बातचीत सेक्शन में सबसे ऊपर फ़्लोटिंग बबल के तौर पर दिखती है. साथ ही, लॉक स्क्रीन पर प्रोफ़ाइल फ़ोटो दिखती है"</string>
+    <string name="notification_channel_summary_priority" msgid="7225362351439076913">"सूचना, बातचीत सेक्शन में सबसे ऊपर फ़्लोटिंग बबल के तौर पर दिखती है. साथ ही, लॉक स्क्रीन पर प्रोफ़ाइल फ़ोटो दिखती है"</string>
     <string name="convo_not_supported_summary" msgid="4285471045268268048">"<xliff:g id="APP_NAME">%1$s</xliff:g>, बातचीत वाली कई सुविधाओं के साथ काम नहीं करता. आप किसी \'बातचीत\' को प्राथमिकता के तौर पर सेट नहीं कर सकते. इसके अलावा, \'बातचीत\', फ़्लोटिंग बबल के रूप में नहीं दिखेंगी."</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"पुल-डाउन शेड में, सूचनाओं को एक लाइन तक छोटा करें"</string>
     <string name="notification_channel_summary_low" msgid="5549662596677692000">"आवाज़ या वाइब्रेशन न हो"</string>
-    <string name="notification_conversation_summary_low" msgid="6352818857388412326">"इससे किसी तरह की आवाज़ या वाइब्रेशन नहीं होता और ये सूचनाएं, बातचीत सेक्शन में सबसे नीचे दिखती हैं"</string>
+    <string name="notification_conversation_summary_low" msgid="6352818857388412326">"इन सूचनाओं से किसी तरह की आवाज़ या वाइब्रेशन नहीं होता और ये बातचीत सेक्शन में सबसे नीचे दिखती हैं"</string>
     <string name="notification_channel_summary_default" msgid="1168420867670390611">"डिवाइस की सेटिंग के हिसाब से, सूचना आने पर घंटी बज सकती है या वाइब्रेशन हो सकता है"</string>
-    <string name="notification_channel_summary_high" msgid="3411637309360617621">"डिवाइस अनलॉक होने पर, सूचनाओं को स्क्रीन के सबसे ऊपर बैनर के रूप में दिखाएं"</string>
+    <string name="notification_channel_summary_high" msgid="3411637309360617621">"डिवाइस अनलॉक रहने पर, सूचनाओं को स्क्रीन के सबसे ऊपर बैनर के रूप में दिखाएं"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"\"<xliff:g id="APP_NAME">%1$s</xliff:g>\" की सभी सूचनाएं"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"<xliff:g id="APP_NAME">%1$s</xliff:g> की सभी सूचनाएं"</string>
     <string name="notifications_sent_daily" msgid="10274479224185437">"{count,plural, =1{हर दिन करीब # सूचना}one{हर दिन करीब # सूचना}other{हर दिन करीब # सूचनाएं}}"</string>
@@ -3241,11 +3241,11 @@
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"यह कंट्रोल करें कि कौनसे ऐप्लिकेशन और डिवाइस आपको मिलने वाली सूचनाएं पढ़ सकते हैं"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8643809206612366067">"वर्क प्रोफ़ाइल सूचना की पहुंच रोक दी गई है"</string>
     <string name="notification_assistant_title" msgid="5889201903272393099">"बेहतर सूचनाएं"</string>
-    <string name="notification_assistant_summary" msgid="1957783114840908887">"कार्रवाई और जवाब वगैरह के लिए सुझाव पाएं"</string>
+    <string name="notification_assistant_summary" msgid="1957783114840908887">"कार्रवाई, जवाब वगैरह के लिए सुझाव पाएं"</string>
     <string name="no_notification_assistant" msgid="2533323397091834096">"कोई नहीं"</string>
     <string name="no_notification_listeners" msgid="2839354157349636000">"इंस्टॉल किए गए किसी भी ऐप्लिकेशन ने सूचना के ऐक्सेस का अनुरोध नहीं किया है."</string>
     <string name="notification_access_detail_switch" msgid="46386786409608330">"सूचना के ऐक्सेस की अनुमति दें"</string>
-    <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Android 12 में, ज़रूरत के हिसाब से सूचनाएं पाने की सुविधा की जगह अब \'बेहतर सूचनाएं\' सुविधा काम करेगी. यह सुविधा आपको कार्रवाइयों और जवाबों के सुझाव दिखाती है. साथ ही, आपके डिवाइस पर मिलने वाली सूचनाओं को व्यवस्थित करती है. \n\n\'बेहतर सूचनाएं\' सुविधा, डिवाइस पर मिलने वाली सूचनाओं का कॉन्टेंट ऐक्सेस कर सकती है. इसमें आपकी निजी जानकारी, जैसे कि संपर्कों के नाम और मैसेज शामिल हैं. यह सुविधा, सूचनाओं को खारिज कर सकती है या उनका जवाब भी दे सकती है, जैसे कि फ़ोन कॉल का जवाब देना और \'परेशान न करें\' को कंट्रोल करना."</string>
+    <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Android 12 में, ज़रूरत के हिसाब से सूचनाएं पाने की सुविधा की जगह अब \'बेहतर सूचनाएं\' सुविधा काम करेगी. यह सुविधा आपको कार्रवाइयों और जवाबों के सुझाव दिखाने के साथ ही, आपके डिवाइस पर मिलने वाली सूचनाओं को व्यवस्थित करेगी. \n\n\'बेहतर सूचनाएं\' सुविधा, डिवाइस पर मिलने वाली सूचनाओं का कॉन्टेंट ऐक्सेस कर सकती है. इसमें संपर्कों के नाम और मैसेज जैसी आपकी निजी जानकारी शामिल हो सकती है. साथ ही, यह सुविधा, सूचनाओं को खारिज कर सकती है या उनका जवाब दे सकती है. जैसे, फ़ोन कॉल का जवाब देना और \'परेशान न करें\' को कंट्रोल करना."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"क्या आपको <xliff:g id="SERVICE">%1$s</xliff:g> को सूचना ऐक्सेस करने की अनुमति देनी है?"</string>
     <string name="notification_listener_security_warning_summary" msgid="1131986567509818121">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> ऐप्लिकेशन, सभी सूचनाओं को पढ़ पाएगा. इसमें आपकी निजी जानकारी शामिल है. जैसे, संपर्कों के नाम, फ़ोटो, और आपको मिलने वाले मैसेज. यह ऐप्लिकेशन, सूचनाओं के साथ दिखने वाले बटन से कार्रवाई कर सकता है या सूचनाओं को स्नूज़/खारिज भी कर पाएगा. यह फ़ोन कॉल का जवाब भी दे पाएगा. \n\nइससे यह ऐप्लिकेशन, \'परेशान न करें\' मोड चालू या बंद कर पाएगा और इससे जुड़ी सेटिंग भी बदल पाएगा."</string>
     <string name="nls_warning_prompt" msgid="1486887096703743841">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> ऐप्लिकेशन ये काम कर पाएगा:"</string>
@@ -4694,9 +4694,9 @@
     <string name="flash_notifications_summary_on_camera" msgid="3286405833586333730">"कैमरे के फ़्लैश की सुविधा चालू है"</string>
     <string name="flash_notifications_summary_on_screen" msgid="9040640799633336219">"स्क्रीन के फ़्लैश की सुविधा चालू है"</string>
     <string name="flash_notifications_summary_on_camera_and_screen" msgid="2326268141063768701">"कैमरे और स्क्रीन के फ़्लैश की सुविधा चालू है"</string>
-    <string name="flash_notifications_intro" msgid="8409873413480928249">"सूचनाएं पाने या अलार्म बजने पर कैमरे या स्क्रीन का फ़्लैश चालू होने की सुविधा पाएं"</string>
+    <string name="flash_notifications_intro" msgid="8409873413480928249">"सूचनाएं मिलने या अलार्म बजने पर कैमरे या स्क्रीन का फ़्लैश चालू होने की सुविधा पाएं"</string>
     <string name="flash_notifications_intro_without_camera_flash" msgid="6297337174487793891">"सूचनाएं मिलने या अलार्म बजने पर स्क्रीन का फ़्लैश चालू होने की सुविधा पाएं"</string>
-    <string name="flash_notifications_note" msgid="2426125248448055075">"अगर आपको रोशनी से दिक्कत होती है, तो स्क्रीन पर फ़्लैश के साथ मिलने वाली सूचनाओं की सुविधा का इस्तेमाल सावधानी से करें"</string>
+    <string name="flash_notifications_note" msgid="2426125248448055075">"अगर आपको रोशनी से दिक्कत होती है, तो फ़्लैश के साथ मिलने वाली सूचनाओं की सुविधा का इस्तेमाल सावधानी से करें"</string>
     <string name="flash_notifications_keywords" msgid="2458759275318514836">"फ़्लैश, लाइट, कम सुनने वाला, सुनने में समस्या"</string>
     <string name="flash_notifications_preview" msgid="5320176885050440874">"झलक देखें"</string>
     <string name="camera_flash_notification_title" msgid="2475084876382922732">"कैमरे का फ़्लैश"</string>
