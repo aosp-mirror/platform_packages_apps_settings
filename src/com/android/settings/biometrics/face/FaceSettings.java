@@ -201,8 +201,9 @@ public class FaceSettings extends DashboardFragment {
         }
         mRemoveController.setUserId(mUserId);
 
-        // Don't show keyguard controller for work profile settings.
-        if (mUserManager.isManagedProfile(mUserId)) {
+        // Don't show keyguard controller for work and private profile settings.
+        if (mUserManager.isManagedProfile(mUserId)
+                || mUserManager.getUserInfo(mUserId).isPrivateProfile()) {
             removePreference(FaceSettingsKeyguardPreferenceController.KEY);
             removePreference(mLockscreenController.getPreferenceKey());
         }
