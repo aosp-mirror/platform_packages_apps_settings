@@ -36,6 +36,7 @@ public class StorageCacheHelperTest {
     private static final long FAKE_APPS_SIZE = 4000L;
     private static final long FAKE_GAMES_SIZE = 5000L;
     private static final long FAKE_DOCS_SIZE = 1500L;
+    private static final long FAKE_OTHER_SIZE = 2000L;
     private static final long FAKE_TRASH_SIZE = 500L;
     private static final long FAKE_SYSTEM_SIZE = 2300L;
     private static final long FAKE_TOTAL_SIZE = 256000L;
@@ -72,6 +73,8 @@ public class StorageCacheHelperTest {
 
         assertThat(storageCache.imagesSize).isEqualTo(FAKE_IMAGES_SIZE);
         assertThat(storageCache.temporaryFilesSize).isEqualTo(FAKE_TEMPORARY_FILES_SIZE);
+        assertThat(storageCache.documentsSize).isEqualTo(FAKE_DOCS_SIZE);
+        assertThat(storageCache.otherSize).isEqualTo(FAKE_OTHER_SIZE);
         assertThat(storageCache.totalSize).isEqualTo(0);
     }
 
@@ -97,7 +100,8 @@ public class StorageCacheHelperTest {
         result.trashSize = FAKE_TRASH_SIZE;
         result.systemSize = FAKE_SYSTEM_SIZE;
         result.imagesSize = FAKE_IMAGES_SIZE;
-        result.documentsAndOtherSize = FAKE_DOCS_SIZE;
+        result.documentsSize = FAKE_DOCS_SIZE;
+        result.otherSize = FAKE_OTHER_SIZE;
         result.audioSize = FAKE_AUDIO_SIZE;
         result.gamesSize = FAKE_GAMES_SIZE;
         result.videosSize = FAKE_VIDEOS_SIZE;
