@@ -29,9 +29,14 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 
 import com.android.settings.R;
-import com.android.settingslib.utils.ThreadUtils;
+import com.android.settings.network.SatelliteManagerUtil;
+
+import com.google.common.util.concurrent.ListenableFuture;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 /** The receiver when the slot status changes. */
 public class SimSlotChangeReceiver extends BroadcastReceiver {
@@ -51,7 +56,25 @@ public class SimSlotChangeReceiver extends BroadcastReceiver {
 
     public static void runOnBackgroundThread(Context context) {
         if (shouldHandleSlotChange(context)) {
-            SimSlotChangeHandler.get().onSlotsStatusChange(context.getApplicationContext());
+            Log.d(TAG, "Checking satellite enabled status");
+            Executor executor = Executors.newSingleThreadExecutor();
+            ListenableFuture<Boolean> satelliteEnabledFuture = SatelliteManagerUtil
+                    .requestIsEnabled(context, executor);
+            satelliteEnabledFuture.addListener(() -> {
+                boolean isSatelliteEnabled = false;
+                try {
+                    isSatelliteEnabled = satelliteEnabledFuture.get();
+                } catch (ExecutionException | InterruptedException e) {
+                    Log.w(TAG, "Can't get satellite enabled status", e);
+                }
+
+                if (isSatelliteEnabled) {
+                    Log.i(TAG, "Satellite is enabled. Unable to handle SIM slot changes");
+                } else {
+                    Log.i(TAG, "Satellite is disabled. Handle slot changes");
+                    SimSlotChangeHandler.get().onSlotsStatusChange(context.getApplicationContext());
+                }
+            }, executor);
         }
     }
 
