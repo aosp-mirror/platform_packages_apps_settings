@@ -43,6 +43,9 @@ public class EraseEuiccDataDialogFragment extends InstrumentedDialogFragment imp
             "com.android.settings.network";
 
     public static void show(ResetDashboardFragment host) {
+        if (host.getActivity() == null) {
+            return;
+        }
         final EraseEuiccDataDialogFragment dialog = new EraseEuiccDataDialogFragment();
         dialog.setTargetFragment(host, 0 /* requestCode */);
         final FragmentManager manager = host.getActivity().getSupportFragmentManager();
