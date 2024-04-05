@@ -33,14 +33,25 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.android.settings.R;
-import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.system.ResetDashboardFragment;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.core.lifecycle.ObservableDialogFragment;
 
-public class EuiccRacConnectivityDialogFragment extends InstrumentedDialogFragment
-        implements DialogInterface.OnClickListener {
+public class EuiccRacConnectivityDialogFragment extends ObservableDialogFragment
+        implements DialogInterface.OnClickListener, DialogInterface.OnCancelListener {
     public static final String TAG = "EuiccRacConnectivityDlg";
+    private static final int METRICS_TAG =
+            SettingsEnums.ACTION_RESET_ESIMS_RAC_CONNECTIVITY_WARNING;
+    private static final int METRICS_CANCEL_VALUE = 0;
+    private static final int METRICS_CONTINUE_VALUE = 1;
+
+    private MetricsFeatureProvider mMetricsFeatureProvider;
 
     static void show(ResetDashboardFragment host) {
+        if (host.getActivity() == null) {
+            return;
+        }
         final EuiccRacConnectivityDialogFragment dialog = new EuiccRacConnectivityDialogFragment();
         dialog.setTargetFragment(host, /* requestCode= */ 0);
         final FragmentManager manager = host.getActivity().getSupportFragmentManager();
@@ -48,8 +59,9 @@ public class EuiccRacConnectivityDialogFragment extends InstrumentedDialogFragme
     }
 
     @Override
-    public int getMetricsCategory() {
-        return SettingsEnums.RESET_EUICC;
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     @NonNull
@@ -62,7 +74,7 @@ public class EuiccRacConnectivityDialogFragment extends InstrumentedDialogFragme
                 new AlertDialog.Builder(getContext())
                         .setOnDismissListener(this)
                         // Return is on the right side
-                        .setPositiveButton(R.string.wifi_warning_return_button, null)
+                        .setPositiveButton(R.string.wifi_warning_return_button, this)
                         // Continue is on the left side
                         .setNegativeButton(R.string.wifi_warning_continue_button, this);
 
@@ -109,7 +121,24 @@ public class EuiccRacConnectivityDialogFragment extends InstrumentedDialogFragme
         // Positions of the buttons have been switch:
         // negative button = left button = the button to continue
         if (which == DialogInterface.BUTTON_NEGATIVE) {
+            logMetrics(METRICS_CONTINUE_VALUE);
             EraseEuiccDataDialogFragment.show(((ResetDashboardFragment) fragment));
+        } else {
+            logMetrics(METRICS_CANCEL_VALUE);
         }
+    }
+
+    @Override
+    public void onCancel(@NonNull DialogInterface dialog) {
+        final Fragment fragment = getTargetFragment();
+        if (!(fragment instanceof ResetDashboardFragment)) {
+            Log.e(TAG, "getTargetFragment return unexpected type");
+            return;
+        }
+        logMetrics(METRICS_CANCEL_VALUE);
+    }
+
+    private void logMetrics(int value) {
+        mMetricsFeatureProvider.action(getActivity(), METRICS_TAG, value);
     }
 }
