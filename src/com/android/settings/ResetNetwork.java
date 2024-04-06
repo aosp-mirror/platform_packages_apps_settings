@@ -49,6 +49,7 @@ import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.network.ResetNetworkRestrictionViewBuilder;
 import com.android.settings.network.SubscriptionUtil;
+import com.android.settings.network.telephony.EuiccRacConnectivityDialogActivity;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.ConfirmLockPattern;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
@@ -121,6 +122,8 @@ public class ResetNetwork extends InstrumentedFragment {
     @VisibleForTesting
     void showFinalConfirmation() {
         Bundle args = new Bundle();
+        Context context = getContext();
+        boolean resetSims = false;
 
         // TODO(b/317276437) Simplify the logic once flag is released
         int resetOptions = ResetNetworkRequest.RESET_CONNECTIVITY_MANAGER
@@ -142,18 +145,25 @@ public class ResetNetwork extends InstrumentedFragment {
             }
         }
         if (mEsimContainer.getVisibility() == View.VISIBLE && mEsimCheckbox.isChecked()) {
-            request.setResetEsim(getContext().getPackageName())
-                   .writeIntoBundle(args);
+            resetSims = true;
+            request.setResetEsim(context.getPackageName()).writeIntoBundle(args);
         } else {
             request.writeIntoBundle(args);
         }
 
-        new SubSettingLauncher(getContext())
-                .setDestination(ResetNetworkConfirm.class.getName())
-                .setArguments(args)
-                .setTitleRes(R.string.reset_mobile_network_settings_confirm_title)
-                .setSourceMetricsCategory(getMetricsCategory())
-                .launch();
+        SubSettingLauncher launcher =
+                new SubSettingLauncher(context)
+                        .setDestination(ResetNetworkConfirm.class.getName())
+                        .setArguments(args)
+                        .setTitleRes(R.string.reset_mobile_network_settings_confirm_title)
+                        .setSourceMetricsCategory(getMetricsCategory());
+
+        if (resetSims && SubscriptionUtil.shouldShowRacDialog(context)) {
+            context.startActivity(
+                    EuiccRacConnectivityDialogActivity.getIntent(context, launcher.toIntent()));
+        } else {
+            launcher.launch();
+        }
     }
 
     /**
