@@ -37,6 +37,8 @@ import com.android.internal.os.BatteryStatsHistoryIterator;
 import com.android.settings.Utils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.UsageView;
+import com.android.settingslib.R;
+import com.android.settingslib.fuelgauge.BatteryStatus;
 import com.android.settingslib.fuelgauge.Estimate;
 import com.android.settingslib.fuelgauge.EstimateKt;
 import com.android.settingslib.utils.PowerUtil;
@@ -52,6 +54,7 @@ public class BatteryInfo {
     public int pluggedStatus;
     public boolean discharging = true;
     public boolean isBatteryDefender;
+    public boolean isFastCharging;
     public long remainingTimeUs = 0;
     public long averageTimeToDischarge = EstimateKt.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN;
     public String batteryPercentString;
@@ -143,13 +146,13 @@ public class BatteryInfo {
         parseBatteryHistory(parserList);
         String timeString =
                 context.getString(
-                        com.android.settingslib.R.string.charge_length_format,
+                        R.string.charge_length_format,
                         Formatter.formatShortElapsedTime(context, timePeriod));
         String remaining = "";
         if (remainingTimeUs != 0) {
             remaining =
                     context.getString(
-                            com.android.settingslib.R.string.remaining_length_format,
+                            R.string.remaining_length_format,
                             Formatter.formatShortElapsedTime(context, remainingTimeUs / 1000));
         }
         view.setBottomLabels(new CharSequence[] {timeString, remaining});
@@ -291,8 +294,8 @@ public class BatteryInfo {
             @NonNull BatteryUsageStats batteryUsageStats,
             Estimate estimate,
             long elapsedRealtimeUs,
-            boolean shortString) {
-        final long startTime = System.currentTimeMillis();
+            boolean shortString,
+            long currentTimeMs) {
         final boolean isCompactStatus =
                 context.getResources()
                         .getBoolean(com.android.settings.R.bool.config_use_compact_battery_status);
@@ -313,14 +316,42 @@ public class BatteryInfo {
         info.batteryStatus =
                 batteryBroadcast.getIntExtra(
                         BatteryManager.EXTRA_STATUS, BatteryManager.BATTERY_STATUS_UNKNOWN);
+        info.isFastCharging =
+                BatteryStatus.getChargingSpeed(context, batteryBroadcast)
+                        == BatteryStatus.CHARGING_FAST;
         if (!info.mCharging) {
             updateBatteryInfoDischarging(context, shortString, estimate, info);
         } else {
             updateBatteryInfoCharging(
-                    context, batteryBroadcast, batteryUsageStats, info, isCompactStatus);
+                    context,
+                    batteryBroadcast,
+                    batteryUsageStats,
+                    info,
+                    isCompactStatus,
+                    currentTimeMs);
         }
-        BatteryUtils.logRuntime(LOG_TAG, "time for getBatteryInfo", startTime);
+        BatteryUtils.logRuntime(LOG_TAG, "time for getBatteryInfo", currentTimeMs);
         return info;
+    }
+
+    /** Returns a {@code BatteryInfo} with battery and charging relative information. */
+    @WorkerThread
+    public static BatteryInfo getBatteryInfo(
+            Context context,
+            Intent batteryBroadcast,
+            BatteryUsageStats batteryUsageStats,
+            Estimate estimate,
+            long elapsedRealtimeUs,
+            boolean shortString) {
+        long currentTimeMs = System.currentTimeMillis();
+        return getBatteryInfo(
+                context,
+                batteryBroadcast,
+                batteryUsageStats,
+                estimate,
+                elapsedRealtimeUs,
+                shortString,
+                currentTimeMs);
     }
 
     private static void updateBatteryInfoCharging(
@@ -328,7 +359,8 @@ public class BatteryInfo {
             Intent batteryBroadcast,
             BatteryUsageStats stats,
             BatteryInfo info,
-            boolean compactStatus) {
+            boolean compactStatus,
+            long currentTimeMs) {
         final Resources resources = context.getResources();
         final long chargeTimeMs = stats.getChargeTimeRemainingMs();
         if (getSettingsChargeTimeRemaining(context) != chargeTimeMs) {
@@ -350,7 +382,7 @@ public class BatteryInfo {
                 || dockDefenderMode == BatteryUtils.DockDefenderMode.ACTIVE) {
             // Battery defender active, battery charging paused
             info.remainingLabel = null;
-            int chargingLimitedResId = com.android.settingslib.R.string.power_charging_limited;
+            int chargingLimitedResId = R.string.power_charging_limited;
             info.chargeLabel = context.getString(chargingLimitedResId, info.batteryPercentString);
         } else if ((chargeTimeMs > 0
                         && status != BatteryManager.BATTERY_STATUS_FULL
@@ -358,30 +390,29 @@ public class BatteryInfo {
                 || dockDefenderMode == BatteryUtils.DockDefenderMode.TEMPORARILY_BYPASSED) {
             // Battery is charging to full
             info.remainingTimeUs = PowerUtil.convertMsToUs(chargeTimeMs);
-            final CharSequence timeString =
-                    StringUtil.formatElapsedTime(
-                            context,
-                            (double) PowerUtil.convertUsToMs(info.remainingTimeUs),
-                            false /* withSeconds */,
-                            true /* collapseTimeUnit */);
-            int resId = com.android.settingslib.R.string.power_charging_duration;
+
+            int resId = getChargingDurationResId(info.isFastCharging);
             info.remainingLabel =
                     chargeTimeMs <= 0
                             ? null
-                            : context.getString(
-                                    com.android.settingslib.R.string
-                                            .power_remaining_charging_duration_only,
-                                    timeString);
+                            : getPowerRemainingChargingLabel(
+                                    context, chargeTimeMs, info.isFastCharging, currentTimeMs);
+
             info.chargeLabel =
                     chargeTimeMs <= 0
                             ? info.batteryPercentString
-                            : context.getString(resId, info.batteryPercentString, timeString);
+                            : getChargeLabelWithTimeToFull(
+                                    context,
+                                    resId,
+                                    info.batteryPercentString,
+                                    chargeTimeMs,
+                                    info.isFastCharging,
+                                    currentTimeMs);
         } else if (dockDefenderMode == BatteryUtils.DockDefenderMode.FUTURE_BYPASS) {
             // Dock defender will be triggered in the future, charging will be optimized.
             info.chargeLabel =
                     context.getString(
-                            com.android.settingslib.R.string.power_charging_future_paused,
-                            info.batteryPercentString);
+                            R.string.power_charging_future_paused, info.batteryPercentString);
         } else {
             final String chargeStatusLabel =
                     Utils.getBatteryStatus(context, batteryBroadcast, compactStatus);
@@ -390,10 +421,68 @@ public class BatteryInfo {
                     info.batteryLevel == 100
                             ? info.batteryPercentString
                             : resources.getString(
-                                    com.android.settingslib.R.string.power_charging,
+                                    R.string.power_charging,
                                     info.batteryPercentString,
                                     chargeStatusLabel);
         }
+    }
+
+    private static CharSequence getPowerRemainingChargingLabel(
+            Context context, long remainingTimeMs, boolean isFastCharging, long currentTimeMs) {
+        if (com.android.settingslib.fuelgauge.BatteryUtils.isChargingStringV2Enabled()) {
+            int chargeLabelResId =
+                    isFastCharging
+                            ? R.string.power_remaining_fast_charging_duration_only_v2
+                            : R.string.power_remaining_charging_duration_only_v2;
+            String timeString =
+                    PowerUtil.getTargetTimeShortString(context, remainingTimeMs, currentTimeMs);
+            return context.getString(chargeLabelResId, timeString);
+        }
+        final CharSequence timeString =
+                StringUtil.formatElapsedTime(
+                        context,
+                        remainingTimeMs,
+                        /* withSeconds= */ false,
+                        /* collapseTimeUnit= */ true);
+        return context.getString(R.string.power_remaining_charging_duration_only, timeString);
+    }
+
+    private static CharSequence getChargeLabelWithTimeToFull(
+            Context context,
+            int chargeLabelResId,
+            String batteryPercentString,
+            long chargeTimeMs,
+            boolean isFastCharging,
+            long currentTimeMs) {
+        if (com.android.settingslib.fuelgauge.BatteryUtils.isChargingStringV2Enabled()) {
+            var timeString =
+                    PowerUtil.getTargetTimeShortString(context, chargeTimeMs, currentTimeMs);
+
+            return isFastCharging
+                    ? context.getString(
+                            chargeLabelResId,
+                            batteryPercentString,
+                            context.getString(R.string.battery_info_status_charging_fast_v2),
+                            timeString)
+                    : context.getString(chargeLabelResId, batteryPercentString, timeString);
+        } else {
+            var timeString =
+                    StringUtil.formatElapsedTime(
+                            context,
+                            (double) chargeTimeMs,
+                            /* withSeconds= */ false,
+                            /* collapseTimeUnit= */ true);
+            return context.getString(chargeLabelResId, batteryPercentString, timeString);
+        }
+    }
+
+    private static int getChargingDurationResId(boolean isFastCharging) {
+        if (com.android.settingslib.fuelgauge.BatteryUtils.isChargingStringV2Enabled()) {
+            return isFastCharging
+                    ? R.string.power_fast_charging_duration_v2
+                    : R.string.power_charging_duration_v2;
+        }
+        return R.string.power_charging_duration;
     }
 
     private static void updateBatteryInfoDischarging(
