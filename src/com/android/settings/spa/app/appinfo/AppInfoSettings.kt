@@ -43,7 +43,6 @@ import com.android.settings.spa.app.specialaccess.DisplayOverOtherAppsAppListPro
 import com.android.settings.spa.app.specialaccess.InstallUnknownAppsListProvider
 import com.android.settings.spa.app.specialaccess.ModifySystemSettingsAppListProvider
 import com.android.settings.spa.app.specialaccess.PictureInPictureListProvider
-import com.android.settings.spa.app.specialaccess.VoiceActivationAppsListProvider
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
 import com.android.settingslib.spa.framework.compose.navigator
 import com.android.settingslib.spa.widget.scaffold.RegularScaffold
@@ -167,9 +166,6 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
             InstallUnknownAppsListProvider.InfoPageEntryItem(app)
             InteractAcrossProfilesDetailsPreference(app)
             AlarmsAndRemindersAppListProvider.InfoPageEntryItem(app)
-            if (Flags.enableVoiceActivationAppsInSettings()) {
-                VoiceActivationAppsListProvider.InfoPageEntryItem(app)
-            }
             if (Flags.enablePerformBackupTasksInSettings()) {
                 BackupTasksAppsListProvider.InfoPageEntryItem(app)
             }
