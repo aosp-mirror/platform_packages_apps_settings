@@ -17,7 +17,6 @@
 package com.android.settings.wallpaper;
 
 import android.app.WallpaperManager;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 
@@ -81,10 +80,9 @@ public class WallpaperSuggestionActivity extends StyleSuggestionActivityBase imp
                     SearchIndexableRaw data = new SearchIndexableRaw(context);
                     data.title = controller.getTitle();
                     data.screenTitle = data.title;
-                    ComponentName component = controller.getComponentName();
-                    data.intentTargetPackage = component.getPackageName();
-                    data.intentTargetClass = component.getClassName();
-                    data.intentAction = controller.getComponentActionName();
+                    data.intentTargetPackage = context.getPackageName();
+                    data.intentTargetClass = WallpaperSuggestionActivity.class.getName();
+                    data.intentAction = Intent.ACTION_MAIN;
                     data.key = SUPPORT_SEARCH_INDEX_KEY;
                     data.keywords = controller.getKeywords();
                     result.add(data);
