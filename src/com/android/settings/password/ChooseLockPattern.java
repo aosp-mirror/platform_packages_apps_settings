@@ -478,6 +478,8 @@ public class ChooseLockPattern extends SettingsActivity {
                         .getString(SET_WORK_PROFILE_PATTERN_HEADER,
                                 () -> getString(
                                         R.string.lockpassword_choose_your_profile_pattern_header));
+            } else if (android.os.Flags.allowPrivateProfile() && isPrivateProfile()) {
+                msg = getString(R.string.private_space_choose_your_pattern_header);
             } else {
                 msg = getString(R.string.lockpassword_choose_your_pattern_header);
             }
@@ -872,6 +874,12 @@ public class ChooseLockPattern extends SettingsActivity {
                 }
             }
             getActivity().finish();
+        }
+
+        private boolean isPrivateProfile() {
+            UserManager userManager = getContext().createContextAsUser(UserHandle.of(mUserId),
+                    /*flags=*/0).getSystemService(UserManager.class);
+            return userManager.isPrivateProfile();
         }
     }
 }
