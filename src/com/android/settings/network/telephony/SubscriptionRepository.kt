@@ -20,7 +20,9 @@ import android.content.Context
 import android.telephony.SubscriptionInfo
 import android.telephony.SubscriptionManager
 import android.util.Log
+import androidx.lifecycle.LifecycleOwner
 import com.android.settings.network.SubscriptionUtil
+import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.asExecutor
 import kotlinx.coroutines.channels.awaitClose
@@ -43,6 +45,16 @@ class SubscriptionRepository(private val context: Context) {
         context.getSelectableSubscriptionInfoList()
 
     fun isSubscriptionEnabledFlow(subId: Int) = context.isSubscriptionEnabledFlow(subId)
+
+    /** TODO: Move this to UI layer, when UI layer migrated to Kotlin. */
+    fun collectSubscriptionEnabled(
+        subId: Int,
+        lifecycleOwner: LifecycleOwner,
+        action: (Boolean) -> Unit,
+    ) {
+        isSubscriptionEnabledFlow(subId).collectLatestWithLifecycle(lifecycleOwner, action = action)
+    }
+
 }
 
 val Context.subscriptionManager: SubscriptionManager?
@@ -52,7 +64,8 @@ fun Context.requireSubscriptionManager(): SubscriptionManager = subscriptionMana
 
 fun Context.isSubscriptionEnabledFlow(subId: Int) = subscriptionsChangedFlow().map {
     subscriptionManager?.isSubscriptionEnabled(subId) ?: false
-}.flowOn(Dispatchers.Default)
+}.conflate().onEach { Log.d(TAG, "[$subId] isSubscriptionEnabledFlow: $it") }
+    .flowOn(Dispatchers.Default)
 
 fun Context.phoneNumberFlow(subscriptionInfo: SubscriptionInfo) = subscriptionsChangedFlow().map {
     SubscriptionUtil.getFormattedPhoneNumber(this, subscriptionInfo)
