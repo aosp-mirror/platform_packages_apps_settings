@@ -24,6 +24,8 @@ import android.telephony.euicc.EuiccManager
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Add
+import androidx.compose.material.icons.outlined.SimCard
+import androidx.compose.material.icons.outlined.SimCardDownload
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.remember
@@ -65,6 +67,7 @@ private fun SimPreference(subInfo: SubscriptionInfo) {
         model = object : SwitchPreferenceModel {
             override val title = subInfo.displayName.toString()
             override val summary = { phoneNumber.value ?: "" }
+            override val icon = @Composable { SimIcon(subInfo.isEmbedded) }
             override val checked = { checked.value }
             override val onCheckedChange = { newChecked: Boolean ->
                 SubscriptionUtil.startToggleSubscriptionDialogActivity(
@@ -78,6 +81,11 @@ private fun SimPreference(subInfo: SubscriptionInfo) {
     ) {
         MobileNetworkUtils.launchMobileNetworkSettings(context, subInfo)
     }
+}
+
+@Composable
+private fun SimIcon(isEmbedded: Boolean) {
+    SettingsIcon(if (isEmbedded) Icons.Outlined.SimCardDownload else Icons.Outlined.SimCard)
 }
 
 @Composable
