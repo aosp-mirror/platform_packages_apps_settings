@@ -163,7 +163,7 @@
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Јазикот може да се разликува од јазиците достапни во апликацијата. Некои апликации може да не ја поддржуваат оваа поставка."</string>
     <string name="desc_app_locale_selection_supported" msgid="6744909281573556379">"Поставете го јазикот за секоја апликација."</string>
     <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Системот, апликациите и веб-сајтовите го користат првиот поддржан јазик од вашите претпочитани јазици."</string>
-    <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"За да изберете јазик за секоја апликација, одете во поставките за јазик на апликацијата."</string>
+    <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"За да изберете јазик за поединечна апликација, одете во поставките за јазик на апликацијата."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Дознајте повеќе за јазиците за апликации"</string>
     <string name="title_change_system_locale" msgid="8589844586256566951">"Да се промени системскиот јазик во %s ?"</string>
     <string name="desc_notice_device_locale_settings_change" msgid="8311132485850714160">"Поставките на вашиот уред и регионалните поставки ќе се променат."</string>
@@ -525,9 +525,9 @@
     <string name="unlock_set_unlock_password_title" msgid="2559842616268607041">"Лозинка"</string>
     <string name="unlock_set_do_later_title" msgid="6565575303676064364">"Не сега"</string>
     <string name="current_screen_lock" msgid="1367883977261098017">"Тековно заклучување на екранот"</string>
-    <string name="fingerprint_unlock_set_unlock_pattern" msgid="2229689425933043901">"Шема • отпечаток"</string>
-    <string name="fingerprint_unlock_set_unlock_pin" msgid="7979848492740627674">"PIN • отпечаток"</string>
-    <string name="fingerprint_unlock_set_unlock_password" msgid="6207676267295036963">"Лозинка • отпечаток"</string>
+    <string name="fingerprint_unlock_set_unlock_pattern" msgid="2229689425933043901">"Шема • Отпечаток"</string>
+    <string name="fingerprint_unlock_set_unlock_pin" msgid="7979848492740627674">"PIN • Отпечаток"</string>
+    <string name="fingerprint_unlock_set_unlock_password" msgid="6207676267295036963">"Лозинка • Отпечаток"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="7631242444064287891">"Продолжете без отпечаток"</string>
     <string name="face_unlock_set_unlock_pattern" msgid="4206669838203096608">"Шема • лик"</string>
     <string name="face_unlock_set_unlock_pin" msgid="9034912683791069602">"PIN • лик"</string>
@@ -735,11 +735,11 @@
     <string name="wifi_empty_list_wifi_off" msgid="7697422506708419298">"За да ги видите достапните мрежи, вклучете Wi-Fi."</string>
     <string name="wifi_empty_list_wifi_on" msgid="2448010040478321376">"Се пребаруваат мрежи…"</string>
     <string name="wifi_empty_list_user_restricted" msgid="454861411536708709">"Немате дозвола за промена на Wi-Fi мрежата."</string>
-    <string name="wifi_settings_scanning_required_title" msgid="1088663325396007484">"Да се вклучи скенирање на Wi-Fi?"</string>
-    <string name="wifi_settings_scanning_required_summary" msgid="4770243653675416569">"За автоматско вклучување Wi-Fi, прво треба да го вклучите скенирањето на Wi-Fi."</string>
-    <string name="wifi_settings_scanning_required_info" msgid="1473411566072565789">"Скенирањето на Wi-Fi дозволува апликациите и услугите да скенираат Wi-Fi мрежи во секое време, дури и кога Wi-Fi е исклучено. Ова може да се користи, на пример, за да се подобрат функциите и услугите според локација."</string>
+    <string name="wifi_settings_scanning_required_title" msgid="1088663325396007484">"Да се вклучи скенирање за Wi-Fi?"</string>
+    <string name="wifi_settings_scanning_required_summary" msgid="4770243653675416569">"За да може автоматски да се вклучува Wi-Fi, прво треба да вклучите скенирање за Wi-Fi."</string>
+    <string name="wifi_settings_scanning_required_info" msgid="1473411566072565789">"Скенирањето за Wi-Fi дозволува апликациите и услугите да скенираат за Wi-Fi мрежи во секое време, дури и кога Wi-Fi е исклучено. Ова може да се користи, на пример, за да се подобрат функциите и услугите според локација."</string>
     <string name="wifi_settings_scanning_required_turn_on" msgid="1112223196123955447">"Вклучи"</string>
-    <string name="wifi_settings_scanning_required_enabled" msgid="4721729158927146365">"Скенирањето на Wi‑Fi е вклучено"</string>
+    <string name="wifi_settings_scanning_required_enabled" msgid="4721729158927146365">"Скенирањето за Wi‑Fi е вклучено"</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Напредни опции"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Паѓачки список „Напредни опции“"</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"прошири"</string>
@@ -891,16 +891,16 @@
     <string name="wifi_hotspot_name_title" msgid="6633480190014369846">"Име на точката на пристап"</string>
     <string name="wifi_hotspot_password_title" msgid="9096340919454296786">"Лозинка за точката на пристап"</string>
     <string name="wifi_hotspot_ap_band_title" msgid="560262446129195042">"Опсег на точката на пристап"</string>
-    <string name="wifi_hotspot_auto_off_title" msgid="8855711787485504882">"Автоматско исклучување на точката на пристап"</string>
+    <string name="wifi_hotspot_auto_off_title" msgid="8855711787485504882">"Автоматски исклучувај ја точката на пристап"</string>
     <string name="wifi_hotspot_auto_off_summary" msgid="8283656069997871354">"Кога не е поврзан ниеден уред"</string>
     <string name="wifi_hotspot_maximize_compatibility" msgid="6494125684420024058">"Прошири компатибилност"</string>
     <string name="wifi_hotspot_maximize_compatibility_single_ap_summary" msgid="383355687431591441">"Помага другите уреди да ја најдат точкава на пристап. Ја намалува брзината на поврзување на точката на пристап."</string>
     <string name="wifi_hotspot_maximize_compatibility_dual_ap_summary" msgid="3579549223159056533">"Помага другите уреди да ја најдат точкава на пристап. Го зголемува користењето на батеријата."</string>
     <string name="wifi_hotspot_speed_title" msgid="8629448084180512685">"Брзина и компатибилност"</string>
-    <string name="wifi_hotspot_speed_summary_2g" msgid="5063438001736234858">"2,4 GHz / компатибилно со повеќето уреди"</string>
+    <string name="wifi_hotspot_speed_summary_2g" msgid="5063438001736234858">"2,4 GHz/компатибилно со повеќето уреди"</string>
     <string name="wifi_hotspot_speed_summary_5g" msgid="6221158936983135040">"5 GHz / компатибилно со многу уреди."</string>
     <string name="wifi_hotspot_speed_summary_6g" msgid="8863992901226595544">"6 GHz / компатибилно со неколку уреди."</string>
-    <string name="wifi_hotspot_speed_summary_2g_and_5g" msgid="5931052946168943750">"2,4 и 5 GHz / компатибилно со повеќето уреди"</string>
+    <string name="wifi_hotspot_speed_summary_2g_and_5g" msgid="5931052946168943750">"2,4 и 5 GHz/компатибилно со повеќето уреди"</string>
     <string name="wifi_hotspot_speed_intro" msgid="6973482196363758925">"Изберете фреквенција за вашата точка на пристап. Фреквенцијата влијае на брзината на врската и на типовите уреди кои можат да ја најдат вашата точка на пристап."</string>
     <string name="wifi_hotspot_speed_category" msgid="5265655850463630286">"Претпочитана фреквенција"</string>
     <string name="wifi_hotspot_speed_2g" msgid="3400600834257664480">"2,4 GHz"</string>
@@ -908,13 +908,13 @@
     <string name="wifi_hotspot_speed_5g" msgid="4058116867148848395">"5 GHz"</string>
     <string name="wifi_hotspot_speed_5g_summary" msgid="562987935924535694">"Големи брзини. Компатибилно со многу уреди."</string>
     <string name="wifi_hotspot_speed_2g_5g" msgid="9192756255938408285">"2,4 и 5 GHz"</string>
-    <string name="wifi_hotspot_speed_2g_5g_summary" msgid="8104575293617700173">"Големи брзини. Ова точка на пристап со двоен опсег е компатибилна со повеќето уреди."</string>
+    <string name="wifi_hotspot_speed_2g_5g_summary" msgid="8104575293617700173">"Големи брзини. Оваа точка на пристап со двоен опсег е компатибилна со повеќето уреди."</string>
     <string name="wifi_hotspot_speed_6g" msgid="3787697484862730500">"6 GHz"</string>
     <string name="wifi_hotspot_speed_6g_summary" msgid="8675262219242174548">"Најголеми брзини. Компатибилно со неколку уреди."</string>
     <string name="wifi_hotspot_speed_summary_unavailable" msgid="7276080644693388756">"Не е достапна во вашата земја или регион"</string>
-    <string name="wifi_hotspot_speed_footer" msgid="8846939503916795002">"Ако вашата претпочитана фреквенција не е достапна, вашата точка на пристап може да користи друга. Поставките за безбедност на точка на пристап може да се променат ако ја промените фреквенцијата."</string>
+    <string name="wifi_hotspot_speed_footer" msgid="8846939503916795002">"Ако вашата претпочитана фреквенција не е достапна, вашата точка на пристап може да користи друга фреквенција. Поставките за безбедност на точката на пристап може да се променат ако ја промените фреквенцијата."</string>
     <string name="wifi_hotspot_security_summary_unavailable" msgid="117582979310345853">"Не е достапно со 6 GHz"</string>
-    <string name="wifi_hotspot_security_footer" msgid="4608329688744949796">"Поставките за безбедност може да се променат ако ја промените фреквенцијата на точката за пристап"</string>
+    <string name="wifi_hotspot_security_footer" msgid="4608329688744949796">"Поставките за безбедност може да се променат ако ја промените фреквенцијата за точката на пристап"</string>
     <string name="wifi_tether_starting" msgid="8879874184033857814">"Вклучување точка на пристап..."</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"Исклучување точка на пристап..."</string>
     <string name="wifi_tether_carrier_unsupport_dialog_title" msgid="3089432578433978073">"Интернет преку мобилен не е достапен"</string>
@@ -1129,7 +1129,7 @@
     <string name="status_eid" msgid="7532406028683438634">"EID"</string>
     <string name="eid_multi_sim" msgid="9087924808336397804">"EID (отвор за SIM <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>)"</string>
     <string name="imei_multi_sim" msgid="9001570420423929507">"IMEI (отвор за SIM <xliff:g id="IMEI_SLOT_ID">%1$d</xliff:g>)"</string>
-    <string name="imei_multi_sim_primary" msgid="7914653040843734282">"IMEI (отвор за SIM-картичка <xliff:g id="IMEI_SLOT_ID_PRIMARY">%1$d</xliff:g>) (примарна)"</string>
+    <string name="imei_multi_sim_primary" msgid="7914653040843734282">"IMEI (отвор за SIM <xliff:g id="IMEI_SLOT_ID_PRIMARY">%1$d</xliff:g>) (примарна)"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"За преглед, изберете зачувана мрежа"</string>
     <string name="status_min_number" msgid="4492899165438225714">"MIN"</string>
     <string name="status_msid_number" msgid="3871958248824595774">"MSID"</string>
@@ -1671,7 +1671,7 @@
     <string name="keyboard_default_layout" msgid="5377811770620422301">"Стандарден"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"Подлога за допир"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Подлога за допир и глувче"</string>
-    <string name="trackpad_settings_summary" msgid="3369855644136760402">"Брзина на покажувач, движења"</string>
+    <string name="trackpad_settings_summary" msgid="3369855644136760402">"Брзина на покажувачот, движења"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Кликнување со допир"</string>
     <string name="trackpad_touchpad_gesture_title" msgid="7568052847609914436">"Движења на подлогата за допир"</string>
     <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"Приспособете поединечни движења на подлогата за допир"</string>
@@ -1679,7 +1679,7 @@
     <string name="trackpad_reverse_scrolling_summary" msgid="6048648562887499036">"Содржините се поместуваат нагоре кога лизгате надолу"</string>
     <string name="trackpad_bottom_right_tap_title" msgid="6275428879042702880">"Допир долу десно"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="8734094086900680674">"Допрете го долниот десен агол од подлогата за допир за опции"</string>
-    <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Брзина на покажувач"</string>
+    <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Брзина на покажувачот"</string>
     <string name="trackpad_touch_gesture" msgid="8641725062131922497">"Научете движења за подлога за допир"</string>
     <string name="gesture_title_go_home" msgid="3682238648647225933">"Оди на почетен екран"</string>
     <string name="gesture_summary_go_home" msgid="6409031586904205741">"Повлечете нагоре со 3 прсти каде било на подлогата за допир"</string>
@@ -1717,7 +1717,7 @@
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Изберете ново копче за <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>:"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Стандардно"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"Говор"</string>
-    <string name="pointer_speed" msgid="7398649279282675718">"Брзина на покажувач"</string>
+    <string name="pointer_speed" msgid="7398649279282675718">"Брзина на покажувачот"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Контролор на игра"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"Пренасочување вибрации"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"Испрати вибрации кон контролорот на игра кога е поврзан"</string>
@@ -2389,7 +2389,7 @@
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Го продолжува траењето на батеријата и ја подобрува изведбата на уредот со автоматско управување со вашите мрежни врски"</string>
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"Вклучено"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"Исклучено"</string>
-    <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Користете Adaptive Connectivity"</string>
+    <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Користи „Адаптивно поврзување“"</string>
     <string name="credentials_title" msgid="7535942196886123656">"Складирање акредитиви"</string>
     <string name="credentials_install" msgid="3933218407598415827">"Инсталирајте сертификат"</string>
     <string name="credentials_reset" msgid="4246628389366452655">"Бришење акредитиви"</string>
@@ -2686,12 +2686,12 @@
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Да се отстрани профилот?"</string>
     <string name="work_profile_confirm_remove_title" msgid="6229618888167176036">"Отстрани работен профил?"</string>
     <string name="user_confirm_remove_message" msgid="362545924965977597">"Ќе се избришат сите апликации и податоци."</string>
-    <string name="work_profile_confirm_remove_message" msgid="1037294114103024478">"Ако продолжите, ќе се избришат сите апликации и податоци на профилов."</string>
+    <string name="work_profile_confirm_remove_message" msgid="1037294114103024478">"Ако продолжите, ќе се избришат сите апликации и податоци во профилов."</string>
     <string name="user_profile_confirm_remove_message" msgid="3641289528179850718">"Ќе се избришат сите апликации и податоци."</string>
     <string name="user_adding_new_user" msgid="7439602720177181412">"Додавање нов корисник..."</string>
     <string name="user_delete_user_description" msgid="7764153465503821011">"Избриши корисник"</string>
     <string name="user_delete_button" msgid="3833498650182594653">"Избриши"</string>
-    <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Сите апликации и податоци во сесијата ќе се избришат."</string>
+    <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Сите апликации и податоци во сесијава ќе се избришат."</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Отстрани"</string>
     <string name="guest_category_title" msgid="5562663588315329152">"Гостин (Вие)"</string>
     <string name="user_category_title" msgid="4368580529662699083">"Корисници"</string>
@@ -2968,7 +2968,7 @@
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"секогаш вклучено амбиентален екран, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"NFC, ознака, читач"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Јачина на звук, вибрации и „Не вознемирувај“"</string>
-    <string name="media_volume_option_title" msgid="5966569685119475630">"Јачина на аудио/видео звук"</string>
+    <string name="media_volume_option_title" msgid="5966569685119475630">"Јачина на звук за аудио/видео"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Јачина на звук на емитување"</string>
     <string name="call_volume_option_title" msgid="1461105986437268924">"Јачина на звук за повици"</string>
     <string name="alarm_volume_option_title" msgid="6398641749273697140">"Јачина на звук за аларм"</string>
@@ -3592,7 +3592,7 @@
     <string name="usb_use_file_transfers" msgid="483915710802018503">"Пренос на датотеки"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"PTP"</string>
     <string name="usb_use_uvc_webcam" msgid="6595429508472038732">"Веб-камера"</string>
-    <string name="usb_transcode_files" msgid="2441954752105119109">"Конвертирајте видеа во AVC"</string>
+    <string name="usb_transcode_files" msgid="2441954752105119109">"Конвертирање видеа во AVC"</string>
     <string name="usb_transcode_files_summary" msgid="307102635711961513">"Видеата ќе може да се пуштаат во повеќето плеери, но квалитетот може да биде намален"</string>
     <string name="usb_use_tethering" msgid="2897063414491670531">"Интернет преку USB"</string>
     <string name="usb_use_MIDI" msgid="8621338227628859789">"MIDI"</string>
@@ -3912,7 +3912,7 @@
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Навигација со движења"</string>
     <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"За отворање на почетниот екран, повлечете нагоре од дното на екранот. За префрлање помеѓу апликациите, повлечете нагоре од дното, задржете, а потоа пуштете. За враќање назад, повлечете од левиот или десниот раб."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Навигација со 3 копчиња"</string>
-    <string name="legacy_navigation_summary" msgid="5905301067778326433">"За враќање назад, отворање на почетниот екран и префрлање помеѓу апликациите, користете ги копчињата на дното од екранот."</string>
+    <string name="legacy_navigation_summary" msgid="5905301067778326433">"За враќање назад, отворање на почетниот екран и префрлање помеѓу апликациите, користете ги копчињата на дното на екранот."</string>
     <string name="keywords_system_navigation" msgid="3131782378486554934">"навигација на системот, навигација со 2 копчиња, навигација со 3 копчиња, навигација со движење, повлечи"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Дигитален помошник"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Повлечете за да го повикате помошникот"</string>
@@ -4265,7 +4265,7 @@
     <string name="preferred_network_mode_title" msgid="3083431168988535628">"Претпочитан тип мрежа"</string>
     <string name="preferred_network_mode_summary" msgid="537577807865497546">"Променете го режимот на работа на мрежата"</string>
     <string name="preferred_network_mode_dialogtitle" msgid="4179420486180351631">"Претпочитан тип мрежа"</string>
-    <string name="carrier_settings_version" msgid="3364919669057317776">"Верзија на поставките од оператор"</string>
+    <string name="carrier_settings_version" msgid="3364919669057317776">"Верзија на поставки од операторот"</string>
     <string name="call_category" msgid="641461844504128789">"Повикување"</string>
     <string name="video_calling_settings_title" msgid="5490466306783552190">"Видеоповици преку оператор"</string>
     <string name="cdma_system_select_title" msgid="8261408056382123386">"Избирање систем"</string>
@@ -4427,7 +4427,7 @@
     <string name="power_menu_summary_long_press_for_assistant" msgid="32706459458422952">"Пристап до дигиталниот помошник"</string>
     <string name="power_menu_summary_long_press_for_power_menu" msgid="7617247135239683710">"Пристап до менито на копчето за вклучување"</string>
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"За да користите, прво поставете заклучување екран"</string>
-    <string name="power_menu_power_volume_up_hint" msgid="5619917593676125759">"Мени на копчето за вклучување:\nистовремено притиснете и задржете ги копчето за вклучување и копчето за зголемување на звукот"</string>
+    <string name="power_menu_power_volume_up_hint" msgid="5619917593676125759">"Мени на копчето за вклучување:\nИстовремено притиснете и задржете ги копчето за вклучување и копчето за зголемување на звукот"</string>
     <string name="power_menu_power_prevent_ringing_hint" msgid="1169955014711158873">"Спречете ѕвонење:\nпритиснете го копчето за јачина на звук за да ја користите кратенката"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"Времетраење на притискање и задржување"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"Приспособете ја чувствителноста така што ќе изберете колку долго треба да го задржите притиснато копчето за вклучување"</string>
@@ -4559,7 +4559,7 @@
     <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"Внесете телефонски број"</string>
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"Телефонскиот број недостасува."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"Во ред"</string>
-    <string name="enable_2g_title" msgid="8184757884636162942">"Дозволете 2G"</string>
+    <string name="enable_2g_title" msgid="8184757884636162942">"Дозволи 2G"</string>
     <string name="enable_2g_summary" msgid="2794534052372565914">"2G е помалку безбедна, но може да ја подобри врската на некои локации. За итни повици, 2G е секогаш дозволена."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> има потреба од 2G за да биде достапен"</string>
     <string name="require_cellular_encryption_title" msgid="7516008146269371585">"Потребно е шифрирање"</string>
@@ -4691,10 +4691,10 @@
     <string name="flash_notifications_title" msgid="4490438861180492311">"Известувања со блиц"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"За известувањата со блиц"</string>
     <string name="flash_notifications_summary_off" msgid="6056282996770691461">"Исклучено"</string>
-    <string name="flash_notifications_summary_on_camera" msgid="3286405833586333730">"Вклучено / блиц на камерата"</string>
-    <string name="flash_notifications_summary_on_screen" msgid="9040640799633336219">"Вклучено / осветлување на екранот"</string>
-    <string name="flash_notifications_summary_on_camera_and_screen" msgid="2326268141063768701">"Вклучено / блиц на камерата и осветлување на екранот"</string>
-    <string name="flash_notifications_intro" msgid="8409873413480928249">"Блицот на камерата или екранот светка кога добивате известувања или кога се огласуваат аларми"</string>
+    <string name="flash_notifications_summary_on_camera" msgid="3286405833586333730">"Вклучено/Блиц од камерата"</string>
+    <string name="flash_notifications_summary_on_screen" msgid="9040640799633336219">"Вклучено/Блиц од екранот"</string>
+    <string name="flash_notifications_summary_on_camera_and_screen" msgid="2326268141063768701">"Вклучено/Блиц од камерата и од екранот"</string>
+    <string name="flash_notifications_intro" msgid="8409873413480928249">"Блицот од камерата или екранот светка кога добивате известувања или кога се огласуваат аларми"</string>
     <string name="flash_notifications_intro_without_camera_flash" msgid="6297337174487793891">"Екранот светка кога добивате известувања или кога се огласуваат аларми"</string>
     <string name="flash_notifications_note" msgid="2426125248448055075">"Користете ги известувањата со блиц претпазливо ако сте чувствителни на светлина"</string>
     <string name="flash_notifications_keywords" msgid="2458759275318514836">"блесок, светлина, нарушување на слухот, загуба на слух"</string>
