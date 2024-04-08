@@ -124,7 +124,7 @@ public class ChartDataUsagePreference extends Preference {
             UsageView chart, @NonNull List<NetworkUsageData> usageSummary) {
         final Context context = getContext();
         final StringBuilder contentDescription = new StringBuilder();
-        final int flags = DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_MONTH;
+        final int flags = DateUtils.FORMAT_SHOW_DATE;
 
         // Setup a brief content description.
         final String startDate = DateUtils.formatDateTime(context, mStart, flags);
@@ -153,7 +153,7 @@ public class ChartDataUsagePreference extends Preference {
                 nodeDate = DateUtils.formatDateRange(context, data.getStartTime(),
                         data.getEndTime(), flags);
             }
-            nodeContentDescription = String.format(";%s %d%%", nodeDate, dataUsagePercentage);
+            nodeContentDescription = String.format("; %s, %d%%", nodeDate, dataUsagePercentage);
 
             contentDescription.append(nodeContentDescription);
         }
