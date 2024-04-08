@@ -477,10 +477,6 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
             mOpenSsid = intent.getStringExtra(EXTRA_START_CONNECT_SSID);
         }
 
-        if (mNetworkMobileProviderController != null) {
-            mNetworkMobileProviderController.setWifiPickerTrackerHelper(mWifiPickerTrackerHelper);
-        }
-
         requireActivity().addMenuProvider(mMenuProvider);
     }
 
