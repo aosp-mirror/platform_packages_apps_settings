@@ -76,15 +76,20 @@
         android:icon="@drawable/ic_videogame_vd_theme_24"
         android:order="105"/>
     <com.android.settings.deviceinfo.StorageItemPreference
-        android:key="pref_documents_and_other"
-        android:title="@string/storage_documents_and_other"
+        android:key="pref_documents"
+        android:title="@string/storage_documents"
         android:icon="@drawable/ic_folder_vd_theme_24"
         android:order="106"/>
+    <com.android.settings.deviceinfo.StorageItemPreference
+        android:key="pref_other"
+        android:title="@string/storage_other"
+        android:icon="@drawable/ic_category_vd_theme_24"
+        android:order="107"/>
     <com.android.settings.deviceinfo.StorageItemPreference
         android:key="pref_trash"
         android:title="@string/storage_trash"
         android:icon="@drawable/ic_trash_can"
-        android:order="107"/>
+        android:order="108"/>
     <!-- Preference order 100~200 are 'ONLY' for storage category
     preferences that are sorted by size. -->
     <PreferenceCategory

@@ -98,15 +98,24 @@ public class StorageAsyncLoader
                     media /* queryArgs */);
             result.systemSize = getSystemSize();
 
-            final Bundle documentsAndOtherQueryArgs = new Bundle();
-            documentsAndOtherQueryArgs.putString(ContentResolver.QUERY_ARG_SQL_SELECTION,
-                    FileColumns.MEDIA_TYPE + "!=" + FileColumns.MEDIA_TYPE_IMAGE
-                    + " AND " + FileColumns.MEDIA_TYPE + "!=" + FileColumns.MEDIA_TYPE_VIDEO
-                    + " AND " + FileColumns.MEDIA_TYPE + "!=" + FileColumns.MEDIA_TYPE_AUDIO
-                    + " AND " + FileColumns.MIME_TYPE + " IS NOT NULL");
-            result.documentsAndOtherSize = getFilesSize(info.id,
+            final Bundle documentsQueryArgs = new Bundle();
+            documentsQueryArgs.putString(ContentResolver.QUERY_ARG_SQL_SELECTION,
+                    FileColumns.MEDIA_TYPE + "=" + FileColumns.MEDIA_TYPE_DOCUMENT);
+            result.documentsSize = getFilesSize(info.id,
                     MediaStore.Files.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY),
-                    documentsAndOtherQueryArgs);
+                    documentsQueryArgs);
+
+            final Bundle otherQueryArgs = new Bundle();
+            otherQueryArgs.putString(ContentResolver.QUERY_ARG_SQL_SELECTION,
+                    FileColumns.MEDIA_TYPE + "!=" + FileColumns.MEDIA_TYPE_IMAGE
+                            + " AND " + FileColumns.MEDIA_TYPE + "!=" + FileColumns.MEDIA_TYPE_VIDEO
+                            + " AND " + FileColumns.MEDIA_TYPE + "!=" + FileColumns.MEDIA_TYPE_AUDIO
+                            + " AND " + FileColumns.MEDIA_TYPE + "!="
+                            + FileColumns.MEDIA_TYPE_DOCUMENT
+                            + " AND " + FileColumns.MIME_TYPE + " IS NOT NULL");
+            result.otherSize = getFilesSize(info.id,
+                    MediaStore.Files.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY),
+                    otherQueryArgs);
 
             final Bundle trashQueryArgs = new Bundle();
             trashQueryArgs.putInt(MediaStore.QUERY_ARG_MATCH_TRASHED, MediaStore.MATCH_ONLY);
@@ -236,7 +245,8 @@ public class StorageAsyncLoader
         public long audioSize;
         public long imagesSize;
         public long videosSize;
-        public long documentsAndOtherSize;
+        public long documentsSize;
+        public long otherSize;
         public long trashSize;
         public long systemSize;
 

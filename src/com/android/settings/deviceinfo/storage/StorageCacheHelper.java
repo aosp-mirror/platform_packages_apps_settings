@@ -32,7 +32,8 @@ public class StorageCacheHelper {
     private static final String AUDIO_SIZE_KEY = "audio_size_key";
     private static final String APPS_SIZE_KEY = "apps_size_key";
     private static final String GAMES_SIZE_KEY = "games_size_key";
-    private static final String DOCUMENTS_AND_OTHER_SIZE_KEY = "documents_and_other_size_key";
+    private static final String DOCUMENTS_SIZE_KEY = "documents_size_key";
+    private static final String OTHER_SIZE_KEY = "other_size_key";
     private static final String TRASH_SIZE_KEY = "trash_size_key";
     private static final String SYSTEM_SIZE_KEY = "system_size_key";
     private static final String TEMPORARY_FILES_SIZE_KEY = "temporary_files_size_key";
@@ -64,7 +65,8 @@ public class StorageCacheHelper {
                 .putLong(AUDIO_SIZE_KEY, data.audioSize)
                 .putLong(APPS_SIZE_KEY, data.allAppsExceptGamesSize)
                 .putLong(GAMES_SIZE_KEY, data.gamesSize)
-                .putLong(DOCUMENTS_AND_OTHER_SIZE_KEY, data.documentsAndOtherSize)
+                .putLong(DOCUMENTS_SIZE_KEY, data.documentsSize)
+                .putLong(OTHER_SIZE_KEY, data.otherSize)
                 .putLong(TRASH_SIZE_KEY, data.trashSize)
                 .putLong(SYSTEM_SIZE_KEY, data.systemSize)
                 .putLong(TEMPORARY_FILES_SIZE_KEY, data.temporaryFilesSize)
@@ -108,7 +110,8 @@ public class StorageCacheHelper {
         result.audioSize = mSharedPreferences.getLong(AUDIO_SIZE_KEY, 0);
         result.allAppsExceptGamesSize = mSharedPreferences.getLong(APPS_SIZE_KEY, 0);
         result.gamesSize = mSharedPreferences.getLong(GAMES_SIZE_KEY, 0);
-        result.documentsAndOtherSize = mSharedPreferences.getLong(DOCUMENTS_AND_OTHER_SIZE_KEY, 0);
+        result.documentsSize = mSharedPreferences.getLong(DOCUMENTS_SIZE_KEY, 0);
+        result.otherSize = mSharedPreferences.getLong(OTHER_SIZE_KEY, 0);
         result.trashSize = mSharedPreferences.getLong(TRASH_SIZE_KEY, 0);
         result.systemSize = mSharedPreferences.getLong(SYSTEM_SIZE_KEY, 0);
         result.temporaryFilesSize = mSharedPreferences.getLong(TEMPORARY_FILES_SIZE_KEY, 0);
@@ -126,7 +129,8 @@ public class StorageCacheHelper {
         public long audioSize;
         public long imagesSize;
         public long videosSize;
-        public long documentsAndOtherSize;
+        public long documentsSize;
+        public long otherSize;
         public long trashSize;
         public long systemSize;
         public long temporaryFilesSize;
