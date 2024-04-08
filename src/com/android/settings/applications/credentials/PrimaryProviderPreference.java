@@ -129,6 +129,7 @@ public class PrimaryProviderPreference extends GearPreference {
                     }
                 });
         setVisibility(mOpenButton, mOpenButtonVisible);
+        holder.itemView.setClickable(false);
 
         mChangeButton = (Button) holder.findViewById(R.id.change_button);
         mChangeButton.setOnClickListener(
