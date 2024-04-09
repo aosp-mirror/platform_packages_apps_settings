@@ -31,7 +31,9 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
+import com.android.settingslib.widget.LottieColorUtils;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupdesign.GlifLayout;
@@ -69,6 +71,8 @@ public class PrivateSpaceEducation extends InstrumentedFragment {
                         .setButtonType(FooterButton.ButtonType.CANCEL)
                         .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Secondary)
                         .build());
+        LottieAnimationView lottieAnimationView = rootView.findViewById(R.id.lottie_animation);
+        LottieColorUtils.applyDynamicColors(getContext(), lottieAnimationView);
 
         TextView infoTextView = rootView.findViewById(R.id.learn_more);
         Pattern pattern = Pattern.compile(infoTextView.getText().toString());
