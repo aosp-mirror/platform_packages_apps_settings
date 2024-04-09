@@ -20,7 +20,7 @@ import android.content.Context
 import android.text.format.DateUtils
 import android.util.Range
 import com.android.settings.R
-import com.android.settings.datausage.DataUsageUtils
+import com.android.settings.datausage.lib.DataUsageFormatter.FormattedDataUsage
 
 /**
  * Base data structure representing usage data in a period.
@@ -38,10 +38,11 @@ data class NetworkUsageData(
     fun formatDateRange(context: Context): String =
         DateUtils.formatDateRange(context, startTime, endTime, DATE_FORMAT)
 
-    fun formatUsage(context: Context): CharSequence = DataUsageUtils.formatDataUsage(context, usage)
+    fun formatUsage(context: Context): FormattedDataUsage =
+        DataUsageFormatter(context).formatDataUsage(usage)
 
-    fun getDataUsedString(context: Context): String =
-        context.getString(R.string.data_used_template, formatUsage(context))
+    fun getDataUsedString(context: Context): FormattedDataUsage =
+        formatUsage(context).format(context, R.string.data_used_template)
 
     companion object {
         val AllZero = NetworkUsageData(
