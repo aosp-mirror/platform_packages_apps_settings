@@ -17,6 +17,7 @@
 package com.android.settings.privatespace;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -38,6 +39,8 @@ import com.android.settings.core.InstrumentedFragment;
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupdesign.GlifLayout;
+
+import java.util.List;
 
 /** Fragment for the final screen shown on successful completion of private space setup. */
 public class SetupSuccessFragment extends InstrumentedFragment {
@@ -103,7 +106,7 @@ public class SetupSuccessFragment extends InstrumentedFragment {
                 accessPrivateSpaceToast();
                 startActivity(allAppsIntent);
                 Log.i(TAG, "Private space setup complete");
-                activity.finish();
+                deleteAllTaskAndFinish(activity);
             }
         };
     }
@@ -117,5 +120,13 @@ public class SetupSuccessFragment extends InstrumentedFragment {
                         Toast.LENGTH_SHORT,
                         drawable)
                 .show();
+    }
+
+    private void deleteAllTaskAndFinish(Activity activity) {
+        ActivityManager activityManager = activity.getSystemService(ActivityManager.class);
+        List<ActivityManager.AppTask> tasks = activityManager.getAppTasks();
+        for (var task : tasks) {
+            task.finishAndRemoveTask();
+        }
     }
 }
