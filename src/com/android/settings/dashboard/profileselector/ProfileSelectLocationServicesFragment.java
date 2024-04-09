@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment;
 
 import com.android.settings.R;
 import com.android.settings.location.LocationServices;
+import com.android.settings.location.LocationServicesForPrivateProfile;
 import com.android.settings.location.LocationServicesForWork;
 
 /**
@@ -34,7 +35,7 @@ public class ProfileSelectLocationServicesFragment extends ProfileSelectFragment
                 null /* bundle */,
                 LocationServices::new,
                 LocationServicesForWork::new,
-                LocationServices::new);
+                LocationServicesForPrivateProfile::new);
     }
 
     @Override
