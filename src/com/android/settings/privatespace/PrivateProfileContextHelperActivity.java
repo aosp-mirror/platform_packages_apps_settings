@@ -96,13 +96,24 @@ public class PrivateProfileContextHelperActivity extends FragmentActivity {
     }
 
     private void onAccountAdded(@Nullable ActivityResult result) {
-        if (result != null && result.getResultCode() == RESULT_OK) {
+        if (result == null) {
+            Log.i(TAG, "private space account login result null");
+            setResult(RESULT_CANCELED);
+            finish();
+            return;
+        }
+        final int resultCode = result.getResultCode();
+        if (resultCode == RESULT_OK) {
             Log.i(TAG, "private space account login success");
-            setResult(RESULT_OK);
+        } else if (resultCode == RESULT_FIRST_USER) {
+            Log.i(TAG, "private space account login skipped");
         } else {
             Log.i(TAG, "private space account login failed");
-            setResult(RESULT_CANCELED);
         }
+        setResult(
+                resultCode == RESULT_OK || resultCode == RESULT_FIRST_USER
+                        ? RESULT_OK
+                        : RESULT_CANCELED);
         finish();
     }
 
