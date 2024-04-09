@@ -112,8 +112,6 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = screen.findPreference(getPreferenceKey());
-        // Set a summary placeholder to reduce flicker.
-        mPreference.setSummaryProvider(pref -> mContext.getString(R.string.summary_placeholder));
         updateEntries();
     }
 
