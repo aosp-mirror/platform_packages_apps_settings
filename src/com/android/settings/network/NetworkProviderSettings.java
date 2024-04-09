@@ -295,6 +295,12 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        final Context context = getContext();
+        if (context != null && !context.getResources().getBoolean(
+                R.bool.config_show_internet_settings)) {
+            finish();
+            return;
+        }
         mAirplaneModeEnabler = new AirplaneModeEnabler(getContext(), this);
 
         // TODO(b/37429702): Add animations and preference comparator back after initial screen is
