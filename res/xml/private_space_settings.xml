@@ -34,7 +34,14 @@
         settings:searchable="false" />
 
     <PreferenceCategory
-        android:title="@string/security_header">
+        android:title="@string/private_space_category_lock">
+
+        <Preference
+            android:key="private_space_use_one_lock"
+            android:title="@string/private_space_lock_title"
+            android:fragment="com.android.settings.privatespace.onelock.UseOneLockSettingsFragment"
+            settings:controller="com.android.settings.privatespace.onelock.UseOneLockController"
+            settings:searchable="false" />
 
         <Preference
             android:key="private_space_auto_lock"
@@ -43,12 +50,10 @@
             settings:controller="com.android.settings.privatespace.autolock.AutoLockPreferenceController"
             settings:searchable="false" />
 
-        <Preference
-            android:key="private_space_use_one_lock"
-            android:title="@string/private_space_lock_title"
-            android:fragment="com.android.settings.privatespace.onelock.UseOneLockSettingsFragment"
-            settings:controller="com.android.settings.privatespace.onelock.UseOneLockController"
-            settings:searchable="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/private_space_category_hide">
 
         <Preference
             android:key="private_space_hidden"
