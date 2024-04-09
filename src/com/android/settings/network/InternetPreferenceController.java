@@ -180,7 +180,7 @@ public class InternetPreferenceController extends AbstractPreferenceController i
 
     @Override
     public boolean isAvailable() {
-        return true;
+        return mContext.getResources().getBoolean(R.bool.config_show_internet_settings);
     }
 
     @Override

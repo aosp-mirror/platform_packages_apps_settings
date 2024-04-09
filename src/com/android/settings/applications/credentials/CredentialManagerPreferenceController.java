@@ -1072,6 +1072,22 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
             return mChecked;
         }
 
+        @Override
+        public void setTitle(@Nullable CharSequence title) {
+            super.setTitle(title);
+            maybeUpdateContentDescription();
+        }
+
+        private void maybeUpdateContentDescription() {
+            final CharSequence appName = getTitle();
+
+            if (mSwitch != null && !TextUtils.isEmpty(appName)) {
+                mSwitch.setContentDescription(
+                    getContext().getString(
+                        R.string.credman_on_off_switch_content_description, appName));
+            }
+        }
+
         public void setPreferenceListener(OnCombiPreferenceClickListener onClickListener) {
             mOnClickListener = onClickListener;
         }
@@ -1094,6 +1110,9 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
 
                 // Store this for later.
                 mSwitch = switchView;
+
+                // Update the content description.
+                maybeUpdateContentDescription();
             }
 
             super.setOnPreferenceClickListener(

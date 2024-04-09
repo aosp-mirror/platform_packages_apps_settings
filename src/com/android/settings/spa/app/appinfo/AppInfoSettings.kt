@@ -179,5 +179,4 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
 }
 
 fun isArchivingEnabled(featureFlags: PmFeatureFlags) =
-        featureFlags.archiving() || SystemProperties.getBoolean("pm.archiving.enabled", false)
-                || Flags.appArchiving()
+        featureFlags.archiving() || Flags.appArchiving()
