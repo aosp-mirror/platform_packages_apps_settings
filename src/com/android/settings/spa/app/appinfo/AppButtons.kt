@@ -19,7 +19,6 @@ package com.android.settings.spa.app.appinfo
 import android.content.pm.ApplicationInfo
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settingslib.applications.AppUtils
 import com.android.settingslib.spa.widget.button.ActionButton
@@ -43,7 +42,6 @@ private class AppButtonsPresenter(private val packageInfoPresenter: PackageInfoP
     private val appClearButton = AppClearButton(packageInfoPresenter)
     private val appForceStopButton = AppForceStopButton(packageInfoPresenter)
 
-    @OptIn(ExperimentalLifecycleComposeApi::class)
     @Composable
     fun getActionButtons() =
         packageInfoPresenter.flow.collectAsStateWithLifecycle(initialValue = null).value?.let {
