@@ -72,8 +72,7 @@ public abstract class AppCounter extends AsyncTask<Void, Void, Integer> {
     }
 
     private boolean isArchivingEnabled() {
-        return mFf.archiving() || SystemProperties.getBoolean("pm.archiving.enabled", false)
-                || Flags.appArchiving();
+        return mFf.archiving() || Flags.appArchiving();
     }
 
     @Override
