@@ -514,6 +514,12 @@ public class WifiConfigController2 implements TextWatcher,
         submit.setEnabled(isSubmittable());
     }
 
+    boolean isValidWepPassword(String password) {
+        // Checks for WEP40 and WEP104 password lengths (5 and 13 bytes)
+        int passwordLen = (password != null) ? password.length() : -1;
+        return passwordLen == 5 || passwordLen == 13;
+    }
+
     boolean isValidPsk(String password) {
         if (password.length() == 64 && password.matches("[0-9A-Fa-f]{64}")) {
             return true;
@@ -535,7 +541,7 @@ public class WifiConfigController2 implements TextWatcher,
         boolean passwordInvalid = false;
         if (mPasswordView != null
                 && ((mWifiEntrySecurity == WifiEntry.SECURITY_WEP
-                        && mPasswordView.length() == 0)
+                        && !isValidWepPassword(mPasswordView.getText().toString()))
                     || (mWifiEntrySecurity == WifiEntry.SECURITY_PSK
                            && !isValidPsk(mPasswordView.getText().toString()))
                     || (mWifiEntrySecurity == WifiEntry.SECURITY_SAE
