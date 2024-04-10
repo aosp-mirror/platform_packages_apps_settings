@@ -181,11 +181,7 @@ public class DataProcessManager {
                 }
             }
             // Loads app usage list from database.
-            if (mUserIdsSeries.isMainUserProfileOnly()) {
-                loadDatabaseAppUsageList();
-            } else {
-                mIsDatabaseAppUsageLoaded = true;
-            }
+            loadDatabaseAppUsageList();
             // Loads the battery event list from database.
             loadPowerConnectionBatteryEventList();
         } else {
