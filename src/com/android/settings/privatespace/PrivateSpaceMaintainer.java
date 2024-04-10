@@ -83,7 +83,7 @@ public class PrivateSpaceMaintainer {
      *
      * <p> This method should be used by the Private Space Setup Flow ONLY.
      */
-    @VisibleForTesting
+    @VisibleForTesting(otherwise = VisibleForTesting.PACKAGE_PRIVATE)
     public final synchronized boolean createPrivateSpace() {
         if (!Flags.allowPrivateProfile()
                 || !android.multiuser.Flags.enablePrivateSpaceFeatures()) {
