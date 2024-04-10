@@ -41,8 +41,8 @@ import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.preference.Preference;
 
@@ -125,12 +125,12 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
         protected CharSequence getPositiveButtonText() {
             final Bundle bundle = getArguments();
             if (TextUtils.isEmpty(bundle.getString(EXTRA_KEY))) {
-                return getContext().getString(
-                    R.string.credman_confirmation_turn_off_positive_button);
+                return getContext()
+                        .getString(R.string.credman_confirmation_turn_off_positive_button);
             }
 
-            return getContext().getString(
-                R.string.credman_confirmation_change_provider_positive_button);
+            return getContext()
+                    .getString(R.string.credman_confirmation_change_provider_positive_button);
         }
     }
 
@@ -259,21 +259,21 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
         return mCredentialManager;
     }
 
-    private List<CombinedProviderInfo> getAllProviders() {
+    private List<CombinedProviderInfo> getAllProviders(int userId) {
         final Context context = getContext();
         final List<AutofillServiceInfo> autofillProviders =
-                AutofillServiceInfo.getAvailableServices(context, getUser());
+                AutofillServiceInfo.getAvailableServices(context, userId);
 
         final CredentialManager service = getCredentialProviderService();
         final List<CredentialProviderInfo> credManProviders = new ArrayList<>();
         if (service != null) {
             credManProviders.addAll(
                     service.getCredentialProviderServices(
-                            getUser(),
+                            userId,
                             CredentialManager.PROVIDER_FILTER_USER_PROVIDERS_INCLUDING_HIDDEN));
         }
 
-        final String selectedAutofillProvider = getSelectedAutofillProvider(context, getUser());
+        final String selectedAutofillProvider = getSelectedAutofillProvider(context, userId);
         return CombinedProviderInfo.buildMergedList(
                 autofillProviders, credManProviders, selectedAutofillProvider);
     }
@@ -285,7 +285,8 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
 
     protected List<DefaultAppInfo> getCandidates() {
         final Context context = getContext();
-        final List<CombinedProviderInfo> allProviders = getAllProviders();
+        final int userId = getUser();
+        final List<CombinedProviderInfo> allProviders = getAllProviders(userId);
         final List<DefaultAppInfo> candidates = new ArrayList<>();
 
         for (CombinedProviderInfo cpi : allProviders) {
@@ -295,10 +296,10 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
             if (brandingService != null) {
                 candidates.add(
                         new CredentialManagerDefaultAppInfo(
-                                context, mPm, getUser(), brandingService, cpi));
+                                context, mPm, userId, brandingService, cpi));
             } else if (appInfo != null) {
                 candidates.add(
-                        new CredentialManagerDefaultAppInfo(context, mPm, getUser(), appInfo, cpi));
+                        new CredentialManagerDefaultAppInfo(context, mPm, userId, appInfo, cpi));
             }
         }
 
@@ -361,9 +362,23 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
 
     @Override
     protected String getDefaultKey() {
-        final CombinedProviderInfo topProvider =
-                CombinedProviderInfo.getTopProvider(getAllProviders());
-        return topProvider == null ? "" : topProvider.getApplicationInfo().packageName;
+        final int userId = getUser();
+        final @Nullable CombinedProviderInfo topProvider =
+                CombinedProviderInfo.getTopProvider(getAllProviders(userId));
+
+        if (topProvider != null) {
+            // Apply device admin restrictions to top provider.
+            if (topProvider.getDeviceAdminRestrictions(getContext(), userId) != null) {
+                return "";
+            }
+
+            ApplicationInfo appInfo = topProvider.getApplicationInfo();
+            if (appInfo != null) {
+                return appInfo.packageName;
+            }
+        }
+
+        return "";
     }
 
     @Override
@@ -392,7 +407,7 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
     @Override
     protected boolean setDefaultKey(String key) {
         // Get the list of providers and see if any match the key (package name).
-        final List<CombinedProviderInfo> allProviders = getAllProviders();
+        final List<CombinedProviderInfo> allProviders = getAllProviders(getUser());
         CombinedProviderInfo matchedProvider = null;
         for (CombinedProviderInfo cpi : allProviders) {
             if (cpi.getApplicationInfo().packageName.equals(key)) {
