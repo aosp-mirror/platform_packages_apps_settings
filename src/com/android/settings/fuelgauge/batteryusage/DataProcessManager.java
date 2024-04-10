@@ -588,7 +588,8 @@ public class DataProcessManager {
                         lastFullChargeTime,
                         DatabaseUtils.BATTERY_LEVEL_RECORD_EVENTS);
         final long startTimestamp =
-                (batteryLevelRecordEvents.isEmpty() || !userIdsSeries.isMainUserProfileOnly())
+                (batteryLevelRecordEvents.isEmpty()
+                                || (!isFromPeriodJob && !userIdsSeries.isMainUserProfileOnly()))
                         ? lastFullChargeTime
                         : batteryLevelRecordEvents.get(0).getTimestamp();
         final BatteryLevelData batteryLevelData =
