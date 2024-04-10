@@ -43,6 +43,7 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLifecycleOwner
@@ -177,11 +178,11 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     override fun Content() {
-        showStartingDialog = remember { mutableStateOf(false) }
-        showError = remember { mutableStateOf(ErrorType.ERROR_NONE) }
-        showProgressDialog = remember { mutableStateOf(false) }
-        showDsdsProgressDialog = remember { mutableStateOf(false) }
-        showRestartDialog = remember { mutableStateOf(false) }
+        showStartingDialog = rememberSaveable { mutableStateOf(false) }
+        showError = rememberSaveable { mutableStateOf(ErrorType.ERROR_NONE) }
+        showProgressDialog = rememberSaveable { mutableStateOf(false) }
+        showDsdsProgressDialog = rememberSaveable { mutableStateOf(false) }
+        showRestartDialog = rememberSaveable { mutableStateOf(false) }
         scope = rememberCoroutineScope()
 
         registerSidecarReceiverFlow()
@@ -189,7 +190,16 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
         ErrorDialogImpl()
         RestartDialogImpl()
         LaunchedEffect(Unit) {
-            if (onboardingService.activeSubInfoList.isNotEmpty()) {
+            if (showError.value != ErrorType.ERROR_NONE
+                || showProgressDialog.value
+                || showDsdsProgressDialog.value
+                || showRestartDialog.value) {
+                Log.d(TAG, "status: showError:${showError.value}, " +
+                        "showProgressDialog:${showProgressDialog.value}, " +
+                        "showDsdsProgressDialog:${showDsdsProgressDialog.value}, " +
+                        "showRestartDialog:${showRestartDialog.value}")
+                showStartingDialog.value = false
+            } else if (onboardingService.activeSubInfoList.isNotEmpty()) {
                 showStartingDialog.value = true
             }
         }
