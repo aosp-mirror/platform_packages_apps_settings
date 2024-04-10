@@ -18,7 +18,9 @@ package com.android.settings.accessibility;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doNothing;
@@ -29,9 +31,6 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Vibrator;
-import android.platform.test.annotations.RequiresFlagsEnabled;
-import android.platform.test.flag.junit.CheckFlagsRule;
-import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.provider.Settings;
 
 import androidx.preference.Preference;
@@ -39,10 +38,8 @@ import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
-import com.android.settings.flags.Flags;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -51,10 +48,6 @@ import org.robolectric.RobolectricTestRunner;
 
 @RunWith(RobolectricTestRunner.class)
 public class VibrationPreferenceControllerTest {
-
-    @Rule
-    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
-
     private static final String PREFERENCE_KEY = "preference_key";
     private static final int OFF = 0;
     private static final int ON = 1;
@@ -130,7 +123,6 @@ public class VibrationPreferenceControllerTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_SEPARATE_ACCESSIBILITY_VIBRATION_SETTINGS_FRAGMENTS)
     public void handlePreferenceTreeClick_oneIntensityLevel_opensVibrationSettings() {
         when(mResources.getInteger(R.integer.config_vibration_supported_intensity_levels))
                 .thenReturn(1);
@@ -143,7 +135,6 @@ public class VibrationPreferenceControllerTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_SEPARATE_ACCESSIBILITY_VIBRATION_SETTINGS_FRAGMENTS)
     public void handlePreferenceTreeClick_multipleIntensityLevels_opensVibrationIntensity() {
         when(mResources.getInteger(R.integer.config_vibration_supported_intensity_levels))
                 .thenReturn(2);
