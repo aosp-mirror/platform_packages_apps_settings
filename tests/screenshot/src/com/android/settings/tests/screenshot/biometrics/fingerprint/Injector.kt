@@ -16,6 +16,11 @@
 package com.android.settings.tests.screenshot.biometrics.fingerprint
 
 import android.content.res.Configuration
+import android.hardware.biometrics.ComponentInfoInternal
+import android.hardware.biometrics.SensorLocationInternal
+import android.hardware.biometrics.SensorProperties
+import android.hardware.fingerprint.FingerprintSensorProperties
+import android.hardware.fingerprint.FingerprintSensorPropertiesInternal
 import android.view.Surface
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -39,9 +44,7 @@ import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.Fing
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintScrollViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.GatekeeperInfo
 import com.android.settings.testutils2.FakeFingerprintManagerInteractor
-import com.android.systemui.biometrics.shared.model.FingerprintSensor
-import com.android.systemui.biometrics.shared.model.FingerprintSensorType
-import com.android.systemui.biometrics.shared.model.SensorStrength
+import com.android.systemui.biometrics.shared.model.toFingerprintSensor
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -56,7 +59,19 @@ import platform.test.screenshot.matchers.PixelPerfectMatcher
 class Injector(step: FingerprintNavigationStep.UiStep) {
 
   var enrollFlow = Default
-  var fingerprintSensor = FingerprintSensor(1, SensorStrength.STRONG, 5, FingerprintSensorType.REAR)
+  var fingerprintSensor =
+    FingerprintSensorPropertiesInternal(
+        0 /* sensorId */,
+        SensorProperties.STRENGTH_STRONG,
+        5 /* maxEnrollmentsPerUser */,
+        listOf<ComponentInfoInternal>(),
+        FingerprintSensorProperties.TYPE_REAR,
+        false /* halControlsIllumination */,
+        true /* resetLockoutRequiresHardwareAuthToken */,
+        listOf<SensorLocationInternal>(SensorLocationInternal.DEFAULT),
+      )
+      .toFingerprintSensor()
+
   var accessibilityInteractor =
     object : AccessibilityInteractor {
       override val isAccessibilityEnabled: Flow<Boolean> = flowOf(true)

@@ -16,6 +16,11 @@
 
 package com.android.settings.fingerprint2.ui.enrollment.viewmodel
 
+import android.hardware.biometrics.ComponentInfoInternal
+import android.hardware.biometrics.SensorLocationInternal
+import android.hardware.biometrics.SensorProperties
+import android.hardware.fingerprint.FingerprintSensorProperties
+import android.hardware.fingerprint.FingerprintSensorPropertiesInternal
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.android.settings.biometrics.fingerprint2.lib.model.Default
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.BackgroundViewModel
@@ -26,11 +31,8 @@ import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.Fing
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintNavigationStep.Enrollment
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintNavigationViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.GatekeeperInfo
-import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.NavigationState
 import com.android.settings.testutils2.FakeFingerprintManagerInteractor
-import com.android.systemui.biometrics.shared.model.FingerprintSensor
-import com.android.systemui.biometrics.shared.model.FingerprintSensorType
-import com.android.systemui.biometrics.shared.model.SensorStrength
+import com.android.systemui.biometrics.shared.model.toFingerprintSensor
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -72,7 +74,18 @@ class FingerprintEnrollEnrollingViewModelTest {
           fakeFingerprintManagerInteractor,
         )
         .create(FingerprintGatekeeperViewModel::class.java)
-    val sensor = FingerprintSensor(1, SensorStrength.STRONG, 5, FingerprintSensorType.POWER_BUTTON)
+    val sensor =
+      FingerprintSensorPropertiesInternal(
+          1 /* sensorId */,
+          SensorProperties.STRENGTH_STRONG,
+          5 /* maxEnrollmentsPerUser */,
+          listOf<ComponentInfoInternal>(),
+          FingerprintSensorProperties.TYPE_POWER_BUTTON,
+          false /* halControlsIllumination */,
+          true /* resetLockoutRequiresHardwareAuthToken */,
+          listOf<SensorLocationInternal>(SensorLocationInternal.DEFAULT),
+        )
+        .toFingerprintSensor()
     val fingerprintFlowViewModel = FingerprintFlowViewModel(Default)
 
     navigationViewModel =

@@ -16,6 +16,11 @@
 
 package com.android.settings.fingerprint2.ui.enrollment.viewmodel
 
+import android.hardware.biometrics.ComponentInfoInternal
+import android.hardware.biometrics.SensorLocationInternal
+import android.hardware.biometrics.SensorProperties
+import android.hardware.fingerprint.FingerprintSensorProperties
+import android.hardware.fingerprint.FingerprintSensorPropertiesInternal
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.android.settings.biometrics.fingerprint2.lib.model.Default
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollConfirmationViewModel
@@ -26,6 +31,7 @@ import com.android.settings.testutils2.FakeFingerprintManagerInteractor
 import com.android.systemui.biometrics.shared.model.FingerprintSensor
 import com.android.systemui.biometrics.shared.model.FingerprintSensorType
 import com.android.systemui.biometrics.shared.model.SensorStrength
+import com.android.systemui.biometrics.shared.model.toFingerprintSensor
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.StandardTestDispatcher
@@ -68,8 +74,18 @@ class FingerprintEnrollConfirmationViewModelTest {
   @Test
   fun testCanEnrollFingerprints() =
     testScope.runTest {
-      fakeFingerprintManagerInteractor.sensorProp =
-        FingerprintSensor(0 /* sensorId */, SensorStrength.STRONG, 5, FingerprintSensorType.REAR)
+      fakeFingerprintManagerInteractor.sensorProp = FingerprintSensorPropertiesInternal(
+        0 /* sensorId */,
+        SensorProperties.STRENGTH_STRONG,
+        5 /* maxEnrollmentsPerUser */,
+        listOf<ComponentInfoInternal>(),
+        FingerprintSensorProperties.TYPE_POWER_BUTTON,
+        false /* halControlsIllumination */,
+        true /* resetLockoutRequiresHardwareAuthToken */,
+        listOf<SensorLocationInternal>(SensorLocationInternal.DEFAULT),
+      )
+        .toFingerprintSensor()
+
       fakeFingerprintManagerInteractor.enrolledFingerprintsInternal = mutableListOf()
       fakeFingerprintManagerInteractor.enrollableFingerprints = 5
 
