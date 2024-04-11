@@ -559,7 +559,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         final Map<Integer, Map<Integer, BatteryDiffData>> batteryUsageData =
                 DataProcessor.getBatteryUsageData(
                         context,
-                        new UserIdsSeries(context, /* mainUserOnly= */ false),
+                        new UserIdsSeries(context, /* isNonUIRequest= */ false),
                         batteryHistoryMap);
         if (batteryUsageData == null) {
             return null;
