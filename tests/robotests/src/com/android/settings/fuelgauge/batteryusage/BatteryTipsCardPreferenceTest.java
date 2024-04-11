@@ -30,6 +30,7 @@ import static org.mockito.Mockito.when;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Pair;
 import android.view.View;
 
 import com.android.settings.DisplaySettings;
@@ -40,7 +41,6 @@ import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -51,6 +51,7 @@ import org.robolectric.RuntimeEnvironment;
 
 import java.util.Map;
 import java.util.Optional;
+import java.util.TimeZone;
 
 @RunWith(RobolectricTestRunner.class)
 public final class BatteryTipsCardPreferenceTest {
@@ -69,6 +70,7 @@ public final class BatteryTipsCardPreferenceTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        TimeZone.setDefault(TimeZone.getTimeZone("GMT+8"));
         mContext = spy(RuntimeEnvironment.application);
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mBatteryTipsCardPreference = new BatteryTipsCardPreference(mContext, /* attrs= */ null);
@@ -167,7 +169,6 @@ public final class BatteryTipsCardPreferenceTest {
                         PowerAnomalyKey.KEY_SCREEN_TIMEOUT.getNumber());
     }
 
-    @Ignore("b/313582999")
     @Test
     public void onClick_mainBtnOfAppsAnomaly_selectHighlightSlot() {
         final PowerAnomalyEvent appsAnomaly = BatteryTestUtils.createAppAnomalyEvent();
@@ -177,6 +178,7 @@ public final class BatteryTipsCardPreferenceTest {
         when(mPowerUsageAdvanced.findRelatedBatteryDiffEntry(any())).thenReturn(mFakeEntry);
 
         mPowerUsageAdvanced.onDisplayAnomalyEventUpdated(appsAnomaly, appsAnomaly);
+        assertHighlightSlotIndexPair(1, 0);
         mBatteryTipsCardPreference.onClick(mFakeView);
 
         assertThat(mBatteryTipsCardPreference.isVisible()).isFalse();
@@ -199,7 +201,6 @@ public final class BatteryTipsCardPreferenceTest {
                         PowerAnomalyKey.KEY_APP_TOTAL_HIGHER_THAN_USUAL.getNumber());
     }
 
-    @Ignore("b/313582999")
     @Test
     public void onClick_dismissBtnOfAppsAnomaly_keepHighlightSlotIndex() {
         final PowerAnomalyEvent appsAnomaly = BatteryTestUtils.createAppAnomalyEvent();
@@ -208,6 +209,7 @@ public final class BatteryTipsCardPreferenceTest {
         when(mPowerUsageAdvanced.findRelatedBatteryDiffEntry(any())).thenReturn(mFakeEntry);
 
         mPowerUsageAdvanced.onDisplayAnomalyEventUpdated(appsAnomaly, appsAnomaly);
+        assertHighlightSlotIndexPair(1, 0);
         mBatteryTipsCardPreference.onClick(mFakeView);
 
         assertThat(mBatteryTipsCardPreference.isVisible()).isFalse();
@@ -228,5 +230,22 @@ public final class BatteryTipsCardPreferenceTest {
                         SettingsEnums.FUELGAUGE_BATTERY_HISTORY_DETAIL,
                         BatteryTipsController.ANOMALY_KEY,
                         PowerAnomalyKey.KEY_APP_TOTAL_HIGHER_THAN_USUAL.getNumber());
+    }
+
+    private void assertHighlightSlotIndexPair(
+            int dailyHighlightSlotIndex, int hourlyHighlightSlotIndex) {
+        assertThat(mPowerUsageAdvanced.mBatteryLevelData.isPresent()).isTrue();
+        assertThat(mPowerUsageAdvanced.mHighlightEventWrapper.isPresent()).isTrue();
+        Pair<Integer, Integer> slotIndexPair =
+                mPowerUsageAdvanced
+                        .mHighlightEventWrapper
+                        .get()
+                        .getHighlightSlotPair(mPowerUsageAdvanced.mBatteryLevelData.get());
+        assertThat(slotIndexPair)
+                .isEqualTo(Pair.create(dailyHighlightSlotIndex, hourlyHighlightSlotIndex));
+        assertThat(mPowerUsageAdvanced.mBatteryChartPreferenceController.mDailyHighlightSlotIndex)
+                .isEqualTo(dailyHighlightSlotIndex);
+        assertThat(mPowerUsageAdvanced.mBatteryChartPreferenceController.mHourlyHighlightSlotIndex)
+                .isEqualTo(hourlyHighlightSlotIndex);
     }
 }
