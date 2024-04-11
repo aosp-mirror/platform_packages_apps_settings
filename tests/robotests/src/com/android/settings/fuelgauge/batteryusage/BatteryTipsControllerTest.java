@@ -94,7 +94,7 @@ public final class BatteryTipsControllerTest {
                         SettingsEnums.FUELGAUGE_BATTERY_HISTORY_DETAIL,
                         SettingsEnums.ACTION_BATTERY_TIPS_CARD_SHOW,
                         SettingsEnums.FUELGAUGE_BATTERY_HISTORY_DETAIL,
-                        "BrightnessAnomaly",
+                        BatteryTipsController.ANOMALY_KEY,
                         PowerAnomalyKey.KEY_BRIGHTNESS.getNumber());
     }
 
@@ -117,7 +117,7 @@ public final class BatteryTipsControllerTest {
                         SettingsEnums.FUELGAUGE_BATTERY_HISTORY_DETAIL,
                         SettingsEnums.ACTION_BATTERY_TIPS_CARD_SHOW,
                         SettingsEnums.FUELGAUGE_BATTERY_HISTORY_DETAIL,
-                        "ScreenTimeoutAnomaly",
+                        BatteryTipsController.ANOMALY_KEY,
                         PowerAnomalyKey.KEY_SCREEN_TIMEOUT.getNumber());
     }
 
@@ -148,7 +148,7 @@ public final class BatteryTipsControllerTest {
                         SettingsEnums.FUELGAUGE_BATTERY_HISTORY_DETAIL,
                         SettingsEnums.ACTION_BATTERY_TIPS_CARD_SHOW,
                         SettingsEnums.FUELGAUGE_BATTERY_HISTORY_DETAIL,
-                        "ScreenTimeoutAnomaly",
+                        BatteryTipsController.ANOMALY_KEY,
                         PowerAnomalyKey.KEY_SCREEN_TIMEOUT.getNumber());
     }
 
@@ -174,7 +174,7 @@ public final class BatteryTipsControllerTest {
                         SettingsEnums.FUELGAUGE_BATTERY_HISTORY_DETAIL,
                         SettingsEnums.ACTION_BATTERY_TIPS_CARD_SHOW,
                         SettingsEnums.FUELGAUGE_BATTERY_HISTORY_DETAIL,
-                        "AppAnomaly",
+                        BatteryTipsController.ANOMALY_KEY,
                         PowerAnomalyKey.KEY_APP_TOTAL_HIGHER_THAN_USUAL.getNumber());
     }
 }

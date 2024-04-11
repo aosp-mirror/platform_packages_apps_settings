@@ -34,6 +34,8 @@ public class BatteryTipsController extends BasePreferenceController {
     private static final String ROOT_PREFERENCE_KEY = "battery_tips_category";
     private static final String CARD_PREFERENCE_KEY = "battery_tips_card";
 
+    @VisibleForTesting static final String ANOMALY_KEY = "anomaly_key";
+
     private final MetricsFeatureProvider mMetricsFeatureProvider;
 
     /** A callback listener for the battery tips is confirmed. */
@@ -94,7 +96,7 @@ public class BatteryTipsController extends BasePreferenceController {
                 /* attribution= */ SettingsEnums.FUELGAUGE_BATTERY_HISTORY_DETAIL,
                 /* action= */ SettingsEnums.ACTION_BATTERY_TIPS_CARD_ACCEPT,
                 /* pageId= */ SettingsEnums.FUELGAUGE_BATTERY_HISTORY_DETAIL,
-                /* key= */ mAnomalyEventWrapper.getEventId(),
+                /* key= */ ANOMALY_KEY,
                 /* value= */ mAnomalyEventWrapper.getAnomalyKeyNumber());
     }
 
@@ -107,7 +109,6 @@ public class BatteryTipsController extends BasePreferenceController {
             return;
         }
 
-        final String eventId = mAnomalyEventWrapper.getEventId();
         final int anomalyKeyNumber = mAnomalyEventWrapper.getAnomalyKeyNumber();
 
         // Update card & buttons preference
@@ -127,7 +128,7 @@ public class BatteryTipsController extends BasePreferenceController {
                                 /* attribution= */ SettingsEnums.FUELGAUGE_BATTERY_HISTORY_DETAIL,
                                 /* action= */ SettingsEnums.ACTION_BATTERY_TIPS_CARD_ACCEPT,
                                 /* pageId= */ SettingsEnums.FUELGAUGE_BATTERY_HISTORY_DETAIL,
-                                /* key= */ eventId,
+                                /* key= */ ANOMALY_KEY,
                                 /* value= */ anomalyKeyNumber);
                     }
                 });
@@ -147,7 +148,7 @@ public class BatteryTipsController extends BasePreferenceController {
                             /* attribution= */ SettingsEnums.FUELGAUGE_BATTERY_HISTORY_DETAIL,
                             /* action= */ SettingsEnums.ACTION_BATTERY_TIPS_CARD_DISMISS,
                             /* pageId= */ SettingsEnums.FUELGAUGE_BATTERY_HISTORY_DETAIL,
-                            /* key= */ eventId,
+                            /* key= */ ANOMALY_KEY,
                             /* value= */ anomalyKeyNumber);
                 });
 
@@ -156,7 +157,7 @@ public class BatteryTipsController extends BasePreferenceController {
                 /* attribution= */ SettingsEnums.FUELGAUGE_BATTERY_HISTORY_DETAIL,
                 /* action= */ SettingsEnums.ACTION_BATTERY_TIPS_CARD_SHOW,
                 /* pageId= */ SettingsEnums.FUELGAUGE_BATTERY_HISTORY_DETAIL,
-                /* key= */ eventId,
+                /* key= */ ANOMALY_KEY,
                 /* value= */ anomalyKeyNumber);
     }
 }
