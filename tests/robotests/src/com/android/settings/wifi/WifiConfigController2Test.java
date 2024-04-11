@@ -203,6 +203,39 @@ public class WifiConfigController2Test {
     }
 
     @Test
+    public void isSubmittable_wepPasswordLength5_returnTrue() {
+        when(mWifiEntry.getSecurity()).thenReturn(WifiEntry.SECURITY_WEP);
+        createController(mWifiEntry, WifiConfigUiBase2.MODE_CONNECT, false);
+        final TextView password = mView.findViewById(R.id.password);
+        assertThat(password).isNotNull();
+        password.setText("12345");
+
+        assertThat(mController.isSubmittable()).isTrue();
+    }
+
+    @Test
+    public void isSubmittable_wepPasswordLength13_returnTrue() {
+        when(mWifiEntry.getSecurity()).thenReturn(WifiEntry.SECURITY_WEP);
+        createController(mWifiEntry, WifiConfigUiBase2.MODE_CONNECT, false);
+        final TextView password = mView.findViewById(R.id.password);
+        assertThat(password).isNotNull();
+        password.setText("1234567890123");
+
+        assertThat(mController.isSubmittable()).isTrue();
+    }
+
+    @Test
+    public void isSubmittable_wepPasswordLength1_returnFalse() {
+        when(mWifiEntry.getSecurity()).thenReturn(WifiEntry.SECURITY_WEP);
+        createController(mWifiEntry, WifiConfigUiBase2.MODE_CONNECT, false);
+        final TextView password = mView.findViewById(R.id.password);
+        assertThat(password).isNotNull();
+        password.setText("1");
+
+        assertThat(mController.isSubmittable()).isFalse();
+    }
+
+    @Test
     public void isSubmittable_longPsk_shouldReturnFalse() {
         createController(mWifiEntry, WifiConfigUiBase2.MODE_CONNECT, false);
         final TextView password = mView.findViewById(R.id.password);
