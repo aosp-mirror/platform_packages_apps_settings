@@ -87,6 +87,7 @@ public class BluetoothDetailsHearingAidsPresetsControllerTest extends
 
         when(mLocalManager.getProfileManager()).thenReturn(mProfileManager);
         when(mProfileManager.getHapClientProfile()).thenReturn(mHapClientProfile);
+        when(mCachedDevice.getDevice()).thenReturn(mDevice);
         when(mCachedDevice.getProfiles()).thenReturn(List.of(mHapClientProfile));
         when(mCachedDevice.isConnectedHapClientDevice()).thenReturn(true);
         when(mCachedChildDevice.getDevice()).thenReturn(mChildDevice);
@@ -249,6 +250,16 @@ public class BluetoothDetailsHearingAidsPresetsControllerTest extends
 
         assertThat(mController.getPreference()).isNotNull();
         assertThat(mController.getPreference().getSummary()).isNotNull();
+    }
+
+    @Test
+    public void onPresetSelectionForGroupFailed_selectPresetIsCalled() {
+        when(mHapClientProfile.getHapGroup(mDevice)).thenReturn(TEST_HAP_GROUP_ID);
+        mController.getPreference().setValue(String.valueOf(TEST_PRESET_INDEX));
+
+        mController.onPresetSelectionForGroupFailed(TEST_HAP_GROUP_ID, TEST_PRESET_INDEX);
+
+        verify(mHapClientProfile).selectPreset(mDevice, TEST_PRESET_INDEX);
     }
 
     private BluetoothHapPresetInfo getTestPresetInfo() {
