@@ -30,6 +30,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.utils.AnnotationSpan;
@@ -41,12 +42,17 @@ import java.util.List;
  * Footer for face settings showing the help text and help link.
  */
 public class FaceSettingsFooterPreferenceController extends BasePreferenceController {
+    private static final String KEY = "security_face_footer";
     private static final String TAG = "FaceSettingsFooterPreferenceController";
     private static final String ANNOTATION_URL = "url";
     private final FaceFeatureProvider mProvider;
     private Preference mPreference;
     private boolean mIsFaceStrong;
+    private int mUserId;
 
+    public FaceSettingsFooterPreferenceController(@NonNull Context context) {
+        this(context, KEY);
+    }
     public FaceSettingsFooterPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         mProvider = FeatureFactory.getFeatureFactory().getFaceFeatureProvider();
@@ -79,7 +85,9 @@ public class FaceSettingsFooterPreferenceController extends BasePreferenceContro
 
         int footerRes;
         boolean isAttentionSupported = mProvider.isAttentionSupported(mContext);
-        if (mIsFaceStrong) {
+        if (Utils.isPrivateProfile(mUserId, mContext)) {
+            footerRes = R.string.private_space_face_settings_footer;
+        } else if (mIsFaceStrong) {
             footerRes = isAttentionSupported
                     ? R.string.security_settings_face_settings_footer_class3
                     : R.string.security_settings_face_settings_footer_attention_not_supported;
@@ -90,6 +98,10 @@ public class FaceSettingsFooterPreferenceController extends BasePreferenceContro
         }
         preference.setTitle(AnnotationSpan.linkify(
                 mContext.getText(footerRes), linkInfo));
+    }
+
+    public void setUserId(int userId) {
+        mUserId = userId;
     }
 
     private void addAuthenticatorsRegisteredCallback(Context context) {

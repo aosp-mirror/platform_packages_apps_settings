@@ -510,8 +510,9 @@ public class FingerprintSettings extends SubSettings {
                 mFooterColumns.add(column2);
             } else {
                 final FooterColumn column = new FooterColumn();
-                column.mTitle = getString(
-                        R.string.security_settings_fingerprint_enroll_introduction_v3_message,
+                column.mTitle = getString(isPrivateProfile()
+                        ? R.string.private_space_fingerprint_enroll_introduction_message
+                        : R.string.security_settings_fingerprint_enroll_introduction_v3_message,
                         DeviceHelper.getDeviceName(getActivity()));
                 column.mLearnMoreClickListener = learnMoreClickListener;
                 column.mLearnMoreOverrideText = getText(
@@ -1129,6 +1130,10 @@ public class FingerprintSettings extends SubSettings {
                 retryFingerprint();
             }
         };
+
+        private boolean isPrivateProfile() {
+            return Utils.isPrivateProfile(mUserId, getContext());
+        }
 
         public static class DeleteFingerprintDialog extends InstrumentedDialogFragment
                 implements DialogInterface.OnClickListener {
