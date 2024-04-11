@@ -31,7 +31,6 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.AlarmManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.BatteryManager;
@@ -48,6 +47,7 @@ import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.widget.UsageView;
 import com.android.settingslib.fuelgauge.Estimate;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -62,6 +62,7 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.Locale;
 import java.util.Map;
+import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
 @RunWith(RobolectricTestRunner.class)
@@ -102,6 +103,7 @@ public class BatteryInfoTest {
     private Intent mChargingBatteryBroadcast;
     private Context mContext;
     private FakeFeatureFactory mFeatureFactory;
+    private TimeZone mOriginalTimeZone;
 
     @Mock private BatteryUsageStats mBatteryUsageStats;
 
@@ -123,6 +125,13 @@ public class BatteryInfoTest {
 
         // Reset static cache for testing purpose.
         com.android.settingslib.fuelgauge.BatteryUtils.setChargingStringV2Enabled(null);
+
+        mOriginalTimeZone = TimeZone.getDefault();
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        TimeZone.setDefault(mOriginalTimeZone);
     }
 
     @Test
@@ -668,7 +677,7 @@ public class BatteryInfoTest {
             String expectedRemainingLabel,
             String expectedChargeLabel) {
         mContext.getResources().getConfiguration().setLocale(Locale.US);
-        mContext.getSystemService(AlarmManager.class).setTimeZone("UTC");
+        TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
         var info =
                 BatteryInfo.getBatteryInfo(
                         mContext,
