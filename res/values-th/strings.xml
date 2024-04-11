@@ -134,7 +134,7 @@
     <string name="previous_connected_see_all" msgid="7759413145713251328">"ดูทั้งหมด"</string>
     <string name="connected_device_fast_pair_device_see_all" msgid="4898279230458128620">"ดูทั้งหมด"</string>
     <string name="stylus_device_details_title" msgid="7618295136015480864">"สไตลัส"</string>
-    <string name="stylus_default_notes_app" msgid="4165657465911764628">"มีการกดปุ่มค้าง"</string>
+    <string name="stylus_default_notes_app" msgid="4165657465911764628">"กดปุ่มตรงปลาย"</string>
     <string name="stylus_default_notes_summary_work" msgid="4554643411627934223">"<xliff:g id="APP_NAME">%s</xliff:g> (โปรไฟล์งาน)"</string>
     <string name="stylus_textfield_handwriting" msgid="2363579035338976327">"เขียนในช่องข้อความ"</string>
     <string name="stylus_ignore_button" msgid="7734540973145241391">"ไม่ต้องสนใจการกดปุ่มสไตลัสทั้งหมด"</string>
@@ -438,7 +438,7 @@
     <string name="security_settings_remoteauth_settings_register_new_authenticator" msgid="9191331738306527887">"เพิ่มนาฬิกา"</string>
     <string name="security_settings_remoteauth_settings_remove_device" msgid="2436226120578851282">"นำนาฬิกาออก"</string>
     <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"การปลดล็อกด้วยลายนิ้วมือและใบหน้า"</string>
-    <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"การปลดล็อกด้วยใบหน้าและลายนิ้วมือสำหรับการทำงาน"</string>
+    <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"การปลดล็อกด้วยใบหน้าและลายนิ้วมือสำหรับงาน"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"ต้องตั้งค่า"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"เพิ่มใบหน้าและลายนิ้วมือแล้ว"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"เพิ่มใบหน้าและลายนิ้วมือแล้ว"</string>
@@ -565,8 +565,7 @@
     <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"คุณสามารถล็อกพื้นที่ส่วนตัวโดยอัตโนมัติหากไม่ได้ใช้อุปกรณ์เป็นระยะเวลาหนึ่ง"</string>
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"ทุกครั้งที่อุปกรณ์ล็อก"</string>
     <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"หลังจากไม่มีการใช้งานเป็นเวลา 5 นาที"</string>
-    <!-- no translation found for private_space_auto_lock_after_device_restart (288755768725895029) -->
-    <skip />
+    <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"หลังจากรีสตาร์ทอุปกรณ์เท่านั้น"</string>
     <string name="private_space_hide_page_title" msgid="4351404195904146088">"ซ่อนพื้นที่ส่วนตัวเมื่อล็อกไว้"</string>
     <string name="private_space_hide_page_summary" msgid="6247773353685839242">"คุณซ่อนพื้นที่ส่วนตัวจากรายการแอปได้ เพื่อไม่ให้คนอื่นรู้ว่ามีพื้นที่ส่วนตัวอยู่ในอุปกรณ์ของคุณ"</string>
     <string name="private_space_access_header" msgid="1077082416567150819">"เข้าถึงพื้นที่ส่วนตัวเมื่อซ่อนไว้"</string>
@@ -585,7 +584,6 @@
     <string name="private_space_accounts" msgid="1078277762792056395">"ระบบจะนำบัญชีต่อไปนี้ออกจากพื้นที่ส่วนตัว"</string>
     <string name="private_space_delete_button_label" msgid="1256981385318225002">"ลบ"</string>
     <string name="private_space_confirm_deletion_header" msgid="3468651585498942977">"กำลังลบพื้นที่ส่วนตัว…"</string>
-    <string name="private_space_confirm_deletion_summary" msgid="342544588554284686">"การดำเนินการนี้จะใช้เวลาสักครู่"</string>
     <string name="private_space_deleted" msgid="7692240901492540053">"ลบพื้นที่ส่วนตัวแล้ว"</string>
     <string name="private_space_delete_failed" msgid="7705795653796174741">"ลบพื้นที่ส่วนตัวไม่ได้"</string>
     <string name="private_space_unlocked" msgid="9091600948712932046">"ปลดล็อกพื้นที่ส่วนตัวแล้ว"</string>
@@ -603,16 +601,16 @@
     <string name="private_space_install_apps_text" msgid="5693139160766464498"><b>"ติดตั้งแอป"</b>\n"พื้นที่ส่วนตัวของคุณมี Play Store ของตัวเอง คุณจึงติดตั้งแอปได้อย่างง่ายดาย"</string>
     <string name="private_space_apps_permission_text" msgid="7030946025253366172">"แอปในพื้นที่ส่วนตัวจะไม่ปรากฏในเครื่องมือจัดการสิทธิ์ แดชบอร์ดความเป็นส่วนตัว และการตั้งค่าอื่นๆ เมื่อล็อกพื้นที่ส่วนตัวไว้\n\nระบบจะย้ายพื้นที่ส่วนตัวไปยังอุปกรณ์ใหม่ไม่ได้ คุณจะต้องตั้งค่าพื้นที่ส่วนตัวอีกแห่งหนึ่งหากต้องการใช้ในอุปกรณ์อื่น\n\nใครก็ตามที่เชื่อมต่ออุปกรณ์ของคุณกับคอมพิวเตอร์หรือติดตั้งแอปที่เป็นอันตรายลงในอุปกรณ์อาจเข้าถึงพื้นที่ส่วนตัวได้"</string>
     <string name="private_space_learn_more_text" msgid="5314198983263277586">"ดูข้อมูลเพิ่มเติมเกี่ยวกับพื้นที่ส่วนตัว"</string>
+    <!-- no translation found for private_space_few_moments_text (7166883272914424011) -->
+    <skip />
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"กำลังตั้งค่าพื้นที่ส่วนตัว…"</string>
-    <string name="private_space_notifications_hidden_title" msgid="2009112565217540581">"การแจ้งเตือนจากแอปในพื้นที่ส่วนตัวจะถูกซ่อนเมื่อล็อกไว้"</string>
-    <string name="private_space_explore_settings_title" msgid="1448128245941571654">"สำรวจการตั้งค่าพื้นที่ส่วนตัวเพื่อซ่อนพื้นที่ส่วนตัวและตั้งค่าการล็อกอัตโนมัติ"</string>
-    <string name="private_space_apps_installed_title" msgid="4781838023423527730">"แอปที่จำเป็นได้รับการติดตั้งในพื้นที่ส่วนตัวอยู่แล้ว"</string>
     <string name="private_space_error_screen_title" msgid="739381738044418346">"ตั้งค่าพื้นที่ส่วนตัวไม่ได้"</string>
     <string name="private_space_tryagain_label" msgid="8305362615231738367">"ลองอีกครั้ง"</string>
     <string name="private_space_lockscreen_title" msgid="6034864097861137509">"ใช้การล็อกหน้าจอเพื่อปลดล็อกพื้นที่ส่วนตัวใช่ไหม"</string>
     <string name="private_space_lockscreen_summary" msgid="430569465080645805">"คุณจะปลดล็อกพื้นที่ส่วนตัวได้โดยใช้วิธีเดียวกับที่คุณปลดล็อกอุปกรณ์ หรือเลือกการล็อกอื่น"</string>
     <string name="private_space_use_screenlock_label" msgid="9182153443192032782">"ใช้การล็อกหน้าจอ"</string>
     <string name="private_space_set_lock_label" msgid="1790408277477408475">"เลือกการล็อกใหม่"</string>
+    <string name="private_space_pre_finish_title" msgid="2314776598615113267">"รอสักครู่…"</string>
     <string name="private_space_success_title" msgid="4351904015352046118">"เรียบร้อยแล้ว"</string>
     <string name="private_space_access_text" msgid="4433988836344567888">"หากต้องการดูพื้นที่ส่วนตัว ให้ไปที่รายการแอปแล้วเลื่อนลงไปด้านล่าง"</string>
     <string name="private_space_done_label" msgid="1020482651595246071">"เสร็จสิ้น"</string>
@@ -626,9 +624,6 @@
     <string name="private_space_choose_your_pin_header" msgid="4560802934975898265">"ตั้งค่า PIN สำหรับพื้นที่ส่วนตัว"</string>
     <string name="private_space_choose_your_password_header" msgid="7660259341095044434">"ตั้งค่ารหัสผ่านสำหรับพื้นที่ส่วนตัว"</string>
     <string name="private_space_choose_your_pattern_header" msgid="2165607102459936724">"ตั้งค่ารูปแบบสำหรับพื้นที่ส่วนตัว"</string>
-    <string name="private_space_apps_and_notifications_header" msgid="7493922100321972687">"แอปและการแจ้งเตือน"</string>
-    <string name="private_space_notifications_title" msgid="3456249671149740404">"การแจ้งเตือนที่มีความละเอียดอ่อนบนหน้าจอล็อก"</string>
-    <string name="private_space_sensitive_notifications_description" msgid="1466031201599700985">"แสดงเนื้อหาที่ละเอียดอ่อนเมื่อพื้นที่ส่วนตัวปลดล็อกอยู่"</string>
     <string name="private_space_gaia_education_title" msgid="3787414895669666563">"สร้างบัญชี Google เพื่อช่วยรักษาข้อมูลของคุณให้เป็นส่วนตัว"</string>
     <string name="private_space_gaia_education_description" msgid="1592753570023264559">"คุณจะลงชื่อเข้าใช้บัญชีเพื่อใช้กับพื้นที่ส่วนตัวได้ในหน้าจอถัดไป"</string>
     <string name="private_space_gaia_education_header" msgid="7835879839637613495"><b>"สร้างบัญชีเฉพาะเพื่อช่วยไม่ให้ข้อมูลปรากฏนอกพื้นที่ส่วนตัว เช่น"</b></string>
@@ -637,6 +632,10 @@
     <string name="private_space_gaia_education_bullet3" msgid="1703614225321289717">"ประวัติการท่องเว็บ บุ๊กมาร์ก และรหัสผ่านที่บันทึกไว้"</string>
     <string name="private_space_gaia_education_bullet4" msgid="515761604505366164">"เนื้อหาแนะนำที่เกี่ยวข้องกับกิจกรรมของคุณในแอปพื้นที่ส่วนตัว"</string>
     <string name="private_space_gaia_education_got_it" msgid="7824029819615566806">"รับทราบ"</string>
+    <!-- no translation found for private_space_category_lock (1917657024358778169) -->
+    <skip />
+    <!-- no translation found for private_space_category_hide (3236587591523126649) -->
+    <skip />
     <string name="fingerprint_add_max" msgid="8639321019299347447">"คุณสามารถเพิ่มได้ถึง <xliff:g id="COUNT">%d</xliff:g> ลายนิ้วมือ"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"คุณได้เพิ่มลายนิ้วมือถึงขีดจำกัดสูงสุดแล้ว"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"เพิ่มลายนิ้วมืออีกไม่ได้แล้ว"</string>
@@ -1257,14 +1256,14 @@
     <string name="screen_timeout_summary" msgid="5558778019594643427">"หลังจากไม่ได้ทำงานเป็นเวลา <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
     <string name="screen_timeout_summary_not_set" msgid="5107680774964178875">"ไม่ได้ตั้งค่า"</string>
     <string name="wallpaper_settings_title" msgid="5635129851136006383">"วอลเปเปอร์"</string>
-    <string name="style_and_wallpaper_settings_title" msgid="2232042809407308946">"วอลเปเปอร์และรูปแบบ"</string>
+    <string name="style_and_wallpaper_settings_title" msgid="2232042809407308946">"วอลเปเปอร์และสไตล์"</string>
     <string name="wallpaper_dashboard_summary" msgid="2324472863981057118">"หน้าแรก, หน้าจอล็อก"</string>
     <string name="wallpaper_suggestion_title" msgid="3812842717939877330">"เปลี่ยนวอลเปเปอร์"</string>
     <string name="wallpaper_suggestion_summary" msgid="9077061486716754784">"ปรับเปลี่ยนหน้าจอในแบบของคุณ"</string>
     <string name="wallpaper_settings_fragment_title" msgid="8445963841717633149">"เลือกวอลเปเปอร์จาก"</string>
     <string name="style_suggestion_title" msgid="1213747484782364775">"ปรับแต่งโทรศัพท์"</string>
     <string name="style_suggestion_summary" msgid="4271131877800968159">"ลองใช้รูปแบบ วอลเปเปอร์ และอื่นๆ ที่มีหลากหลาย"</string>
-    <string name="screensaver_settings_title" msgid="3588535639672365395">"โปรแกรมรักษาหน้าจอ"</string>
+    <string name="screensaver_settings_title" msgid="3588535639672365395">"ภาพพักหน้าจอ"</string>
     <string name="keywords_screensaver" msgid="7249337959432229172">"โปรแกรมรักษาหน้าจอ"</string>
     <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"ใช้ไม่ได้เนื่องจากโหมดเวลาเข้านอนเปิดอยู่"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"ใช้ภาพพักหน้าจอ"</string>
@@ -1294,12 +1293,12 @@
     <string name="sim_enable_sim_lock" msgid="6486354334679225748">"ล็อกซิม"</string>
     <string name="sim_disable_sim_lock" msgid="6939439812841857306">"ปลดล็อกซิม"</string>
     <string name="sim_enter_old" msgid="6882545610939674813">"PIN เดิมของซิม"</string>
-    <string name="sim_enter_new" msgid="9010947802784561582">"ซิม PIN ใหม่"</string>
+    <string name="sim_enter_new" msgid="9010947802784561582">"PIN ใหม่ของซิม"</string>
     <string name="sim_reenter_new" msgid="6131418271490374263">"พิมพ์ PIN อีกครั้ง"</string>
     <string name="sim_change_pin" msgid="1104103818545005448">"PIN ของซิม"</string>
     <string name="sim_invalid_pin_hint" msgid="3376397829969578877">"พิมพ์ PIN ซึ่งเป็นตัวเลข 4-8 หลัก"</string>
     <string name="sim_pins_dont_match" msgid="1540348773896609260">"PIN ไม่ตรงกัน"</string>
-    <string name="sim_change_succeeded" msgid="3516905528149069739">"เปลี่ยนซิม PIN สำเร็จแล้ว"</string>
+    <string name="sim_change_succeeded" msgid="3516905528149069739">"เปลี่ยน PIN ของซิมสำเร็จแล้ว"</string>
     <string name="sim_pin_disable_failed" msgid="8719890393181032837">"ปิดใช้ PIN ไม่ได้"</string>
     <string name="sim_pin_enable_failed" msgid="5156513975085380284">"เปิดใช้ PIN ไม่ได้"</string>
     <string name="sim_enter_ok" msgid="3401715290135787531">"ตกลง"</string>
@@ -1905,6 +1904,8 @@
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"ทัชแพดและเมาส์"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"ความเร็วของตัวชี้ ท่าทางสัมผัส"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"แตะเพื่อคลิก"</string>
+    <string name="trackpad_tap_dragging_title" msgid="798644199582480712">"การแตะแล้วลาก"</string>
+    <string name="trackpad_tap_dragging_summary" msgid="5276968646031591058">"แตะและลากนิ้วบนทัชแพดเพื่อเคลื่อนย้ายวัตถุ"</string>
     <string name="trackpad_touchpad_gesture_title" msgid="7568052847609914436">"ท่าทางสัมผัสของทัชแพด"</string>
     <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"ปรับแต่งท่าทางสัมผัสการนำทางแต่ละแบบของทัชแพด"</string>
     <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"การเลื่อนย้อนกลับ"</string>
@@ -1940,7 +1941,7 @@
     <string name="trackpad_switch_apps_title" msgid="7342032935377284039">"เปลี่ยนแอป"</string>
     <string name="trackpad_switch_apps_summary" msgid="9193942041912927440">"ใช้ 4 นิ้วปัดไปทางซ้ายหรือขวา"</string>
     <string name="modifier_keys_settings" msgid="2537108435032034683">"แป้นกดร่วม"</string>
-    <string name="modifier_keys_settings_summary" msgid="6933143361657444436">"เปลี่ยนลักษณะการทำงานของคีย์"</string>
+    <string name="modifier_keys_settings_summary" msgid="6933143361657444436">"เปลี่ยนลักษณะการทำงานของแป้น"</string>
     <string name="modifier_keys_reset_title" msgid="948294258402761066">"รีเซ็ตทั้งหมด"</string>
     <string name="modifier_keys_default_summary" msgid="8701640508670973258">"ค่าเริ่มต้น"</string>
     <string name="modifier_keys_reset_message" msgid="5236994817619936058">"คุณแน่ใจไหมว่าต้องการรีเซ็ตแป้นกดร่วมทั้งหมดเป็นค่าเริ่มต้น"</string>
@@ -2054,8 +2055,7 @@
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"แว่นขยายจะเลื่อนตามข้อความขณะที่คุณพิมพ์"</string>
     <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"เปิดไว้ขณะเปลี่ยนแอป"</string>
     <string name="accessibility_screen_magnification_always_on_summary" msgid="306908451430863049">"แว่นขยายจะเปิดอยู่และซูมออกเมื่อคุณเปลี่ยนแอป"</string>
-    <!-- no translation found for accessibility_screen_magnification_always_on_unavailable_summary (3844732482037416038) -->
-    <skip />
+    <string name="accessibility_screen_magnification_always_on_unavailable_summary" msgid="3844732482037416038">"ไม่พร้อมใช้งานในขณะที่ขยายเพียงบางส่วนของหน้าจอ"</string>
     <string name="accessibility_screen_magnification_joystick_title" msgid="1803769708582404964">"จอยสติ๊ก"</string>
     <string name="accessibility_screen_magnification_joystick_summary" msgid="4640300148573982720">"เปิดใช้งานและเลื่อนแว่นขยายด้วยจอยสติ๊กบนหน้าจอ แตะค้างไว้แล้วลากจอยสติ๊กเพื่อควบคุมแว่นขยาย แตะแล้วลากเพื่อเลื่อนจอยสติ๊ก"</string>
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"เกี่ยวกับการขยาย"</string>
@@ -2285,7 +2285,7 @@
     <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"เลือกแป้มพิมพ์ลัดสำหรับ %1$s"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"ต่อไป"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"เครื่องช่วยฟัง"</string>
-    <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"ตั้งค่าและจัดการเครื่องช่วยฟังของ ASHA และLE Audio, ประสาทหูเทียม และอุปกรณ์ขยายเสียงอื่ยๆ"</string>
+    <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"ตั้งค่าและจัดการเครื่องช่วยฟังของ ASHA และ LE Audio, ประสาทหูเทียม และอุปกรณ์ขยายเสียงอื่นๆ"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="7438018718889849521">"ไม่ได้เชื่อมต่อเครื่องช่วยฟังไว้"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"เพิ่มเครื่องช่วยฟัง"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"จับคู่เครื่องช่วยฟัง"</string>
@@ -2303,7 +2303,7 @@
     <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"ความเข้ากันได้กับเครื่องช่วยฟัง"</string>
     <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"ปรับปรุงความเข้ากันได้ด้วยเทเลคอยล์และลดเสียงรบกวนที่ไม่พึงประสงค์"</string>
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"เกี่ยวกับเครื่องช่วยฟัง"</string>
-    <string name="accessibility_hearing_device_footer_summary" msgid="256061045064940818">"หากต้องการค้นหาเครื่องช่วยฟังอื่นๆ ที่ ASHA หรือ LE Audio ไม่รองรับ ให้แตะ"<b>"จับคู่อุปกรณ์ใหม่"</b>"และ"<b>"ดูอุปกรณ์เพิ่มเติม"</b></string>
+    <string name="accessibility_hearing_device_footer_summary" msgid="256061045064940818">"หากต้องการค้นหาเครื่องช่วยฟังอื่นๆ ที่ ASHA หรือ LE Audio ไม่รองรับ ให้แตะ"<b>"จับคู่อุปกรณ์ใหม่"</b>" &gt; "<b>"ดูอุปกรณ์เพิ่มเติม"</b></string>
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"จับคู่เครื่องช่วยฟัง"</string>
     <string name="accessibility_hearing_device_pairing_intro" msgid="7022201665808166517">"คุณสามารถจับคู่เครื่องช่วยฟัง ASHA และ LE Audio ในหน้านี้ ตรวจสอบว่าเครื่องช่วยฟังเปิดอยู่และพร้อมจับคู่แล้ว"</string>
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"เครื่องช่วยฟังที่พร้อมใช้งาน"</string>
@@ -2457,6 +2457,7 @@
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"แอปอาจทำงานผิดพลาดหากคุณจำกัดกิจกรรมในพื้นหลัง"</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"เนื่องจากแอปนี้ไม่ได้ตั้งค่าให้เพิ่มประสิทธิภาพแบตเตอรี่ คุณจึงจำกัดการใช้งานไม่ได้\n\nหากต้องการจำกัด ให้เปิดการเพิ่มประสิทธิภาพแบตเตอรี่ก่อน"</string>
     <string name="manager_battery_usage_category_title" msgid="1493303237531629961">"จัดการการใช้งานแบตเตอรี่"</string>
+    <string name="manager_battery_usage_allow_background_usage_settings_title" msgid="8150026934645052635">"อนุญาตการใช้งานในเบื้องหลัง"</string>
     <string name="manager_battery_usage_allow_background_usage_title" msgid="6294649996820358852">"อนุญาตการใช้งานในเบื้องหลัง"</string>
     <string name="manager_battery_usage_allow_background_usage_summary" msgid="8021153755201340819">"เปิดใช้เพื่อให้อัปเดตแบบเรียลไทม์ ปิดใช้เพื่อประหยัดแบตเตอรี่"</string>
     <string name="manager_battery_usage_unrestricted_title" msgid="2426486290463258032">"ไม่จำกัด"</string>
@@ -2855,7 +2856,7 @@
     <string name="data_usage_restrict_denied_dialog" msgid="8599940395497268584">"คุณสามารถจำกัดอินเทอร์เน็ตที่ใช้งานอยู่เบื้องหลังได้เมื่อคุณได้ตั้งค่าขีดจำกัดอินเทอร์เน็ตมือถือไว้เท่านั้น"</string>
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2048411447974361181">"เปิดซิงค์ข้อมูลอัตโนมัติไหม"</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="1783917145440587470">"ปิดซิงค์ข้อมูลอัตโนมัติไหม"</string>
-    <string name="data_usage_auto_sync_off_dialog" msgid="6523112583569674837">"การกระทำดังกล่าวจะเป็นการประหยัดปริมาณการใช้อินเทอร์เน็ตและแบตเตอรี่ แต่คุณจะต้องซิงค์แต่ละบัญชีด้วยตนเองเพื่อรวบรวมข้อมูลล่าสุด และคุณจะไม่ได้รับการแจ้งเตือนเมื่อมีการอัปเดต"</string>
+    <string name="data_usage_auto_sync_off_dialog" msgid="6523112583569674837">"การทำเช่นนี้จะเป็นการประหยัดปริมาณการใช้อินเทอร์เน็ตและแบตเตอรี่ แต่คุณจะต้องซิงค์แต่ละบัญชีด้วยตนเองเพื่อรวบรวมข้อมูลล่าสุด และคุณจะไม่ได้รับการแจ้งเตือนเมื่อมีการอัปเดต"</string>
     <string name="data_usage_cycle_editor_title" msgid="2019035830921480941">"วันที่รีเซ็ตรอบการใช้"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="1026234456777365545">"วันที่ของแต่ละเดือน:"</string>
     <string name="data_usage_cycle_editor_positive" msgid="6110165528024717527">"ตั้งค่า"</string>
@@ -3296,7 +3297,7 @@
     <string name="spatial_audio_text" msgid="8201387855375146000">"เสียงจากสื่อที่เข้ากันได้จะสมจริงยิ่งขึ้น"</string>
     <string name="spatial_summary_off" msgid="8272678804629774378">"ปิด"</string>
     <string name="spatial_summary_on_one" msgid="6239933399496282994">"เปิด/<xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
-    <string name="spatial_summary_on_two" msgid="4526919818832483883">"เปิด / <xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> และ <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
+    <string name="spatial_summary_on_two" msgid="4526919818832483883">"เปิด/<xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g>และ<xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
     <string name="spatial_audio_footer_title" msgid="8775010547623606088">"คุณยังเปิดเสียงรอบทิศทางสำหรับอุปกรณ์บลูทูธได้ด้วย"</string>
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"การตั้งค่าอุปกรณ์ที่เชื่อมต่อ"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{ไม่มี}=1{ตั้งกำหนดการแล้ว 1 รายการ}other{ตั้งกำหนดการแล้ว # รายการ}}"</string>
@@ -3549,7 +3550,7 @@
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"ปิด"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"ยกเลิก"</string>
     <string name="notif_type_ongoing" msgid="135675014223627555">"เรียลไทม์"</string>
-    <string name="notif_type_ongoing_summary" msgid="2348867528527573574">"การสื่อสารที่ดำเนินอยู่จากแอปที่กำลังใช้งาน การนำทาง การโทร และอื่นๆ"</string>
+    <string name="notif_type_ongoing_summary" msgid="2348867528527573574">"การสื่อสารที่ดำเนินอยู่จากแอปที่กำลังใช้งาน การไปยังส่วนต่างๆ การโทร และอื่นๆ"</string>
     <string name="notif_type_conversation" msgid="4383931408641374979">"การสนทนา"</string>
     <string name="notif_type_conversation_summary" msgid="179142405410217101">"SMS, ข้อความ และการสื่อสารวิธีอื่นๆ"</string>
     <string name="notif_type_alerting" msgid="4713073696855718576">"การแจ้งเตือน"</string>
@@ -3796,7 +3797,7 @@
     <string name="memtag_reboot_yes" msgid="5788896350697141429">"รีสตาร์ท"</string>
     <string name="memtag_reboot_no" msgid="2860671356184849330">"ไว้ทีหลัง"</string>
     <string name="memtag_learn_more" msgid="1596145970669119776">"ดูข้อมูลเพิ่มเติมเกี่ยวกับการป้องกันหน่วยความจำขั้นสูง"</string>
-    <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"โปรไฟล์งานนี้ได้รับการจัดการโดย:"</string>
+    <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"โปรไฟล์งานนี้ได้รับการจัดการโดย"</string>
     <string name="managing_admin" msgid="2633920317425356619">"จัดการโดย <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="launch_by_default" msgid="892824422067985734">"เปิดโดยค่าเริ่มต้น"</string>
     <string name="app_launch_open_domain_urls_title" msgid="4805388403977096285">"เปิดลิงก์ที่รองรับ"</string>
@@ -3976,15 +3977,12 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"อนุญาตให้เข้าถึงเพื่อจัดการไฟล์ทั้งหมด"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"อนุญาตให้แอปนี้อ่าน แก้ไข และลบไฟล์ทั้งหมดในอุปกรณ์นี้หรือวอลุ่มของพื้นที่เก็บข้อมูลใดๆ ที่เชื่อมต่อ หากได้รับอนุญาต ​แอปอาจเข้าถึงไฟล์ได้โดยที่คุณไม่ทราบอย่างชัดแจ้ง"</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"เข้าถึงไฟล์ทั้งหมดได้"</string>
-    <string name="voice_activation_apps_title" msgid="7130045161611529825">"แอปการเปิดใช้งานด้วยเสียง"</string>
-    <string name="permit_voice_activation_apps" msgid="9152780172988949319">"อนุญาตการเปิดใช้งานด้วยเสียง"</string>
-    <string name="allow_voice_activation_apps_description" msgid="6369745626995060656">"การเปิดใช้งานด้วยเสียงจะเปิดแอปที่ได้รับอนุมัติแบบแฮนด์ฟรีโดยใช้คำสั่งเสียง การตรวจจับแบบปรับอัตโนมัติในตัวช่วยให้มั่นใจได้ว่าข้อมูลจะเป็นส่วนตัวสำหรับคุณเท่านั้น\n\n"<a href="">"ข้อมูลเพิ่มเติมเกี่ยวกับการตรวจจับแบบปรับอัตโนมัติที่มีการป้องกัน"</a></string>
     <string name="full_screen_intent_title" msgid="747270185715224130">"การแจ้งเตือนแบบเต็มหน้าจอ"</string>
     <string name="permit_full_screen_intent" msgid="9035367640019960861">"อนุญาตให้แอปนี้แสดงการแจ้งเตือนแบบเต็มหน้าจอ"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"อนุญาตให้แอปนี้แสดงการแจ้งเตือนได้เต็มหน้าจอเมื่ออุปกรณ์ล็อกอยู่ แอปอาจใช้การแจ้งเตือนเหล่านี้เพื่อให้เห็นการปลุก สายเรียกเข้า หรือการแจ้งเตือนอื่นๆ ที่เร่งด่วนได้อย่างเด่นชัด"</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"แอปการจัดการสื่อ"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"อนุญาตให้แอปจัดการสื่อ"</string>
-    <string name="media_management_apps_description" msgid="8000565658455268524">"หากอนุญาต แอปนี้จะแก้ไขหรือลบไฟล์สื่อที่สร้างขึ้นด้วย​แอปอื่นๆ โดยไม่ต้องถาม แอปต้องมีสิทธิ์เข้าถึงไฟล์และสื่อ"</string>
+    <string name="media_management_apps_description" msgid="8000565658455268524">"หากอนุญาต แอปนี้จะแก้ไขหรือลบไฟล์สื่อที่สร้างขึ้นด้วย​แอปอื่นๆ ได้โดยไม่ต้องถามคุณ ทั้งนี้แอปต้องมีสิทธิ์เข้าถึงไฟล์และสื่อ"</string>
     <string name="keywords_media_management_apps" msgid="7499959607583088690">"สื่อ ไฟล์ การจัดการ ตัวจัดการ จัดการ แก้ไข ตัวแก้ไข แอป แอปพลิเคชัน โปรแกรม"</string>
     <string name="keywords_vr_listener" msgid="902737490270081131">"VR Virtual Reality Listener บริการตัวช่วยสเตอริโอ"</string>
     <string name="overlay_settings" msgid="2030836934139139469">"แสดงทับบนแอปอื่นๆ"</string>
@@ -4087,6 +4085,7 @@
     <string name="cell_data_warning" msgid="5664921950473359634">"คำเตือนปริมาณอินเทอร์เน็ต <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="cell_data_limit" msgid="256855024790622112">"ขีดจำกัดอินเทอร์เน็ต <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="cell_data_warning_and_limit" msgid="8393200831986035724">"คำเตือนปริมาณอินเทอร์เน็ต <xliff:g id="ID_1">^1</xliff:g>/ขีดจำกัดอินเทอร์เน็ต <xliff:g id="ID_2">^2</xliff:g>"</string>
+    <string name="operator_warning" msgid="5672761970087591211">"การบันทึกการใช้อินเทอร์เน็ตของผู้ให้บริการอาจแตกต่างไปจากการบันทึกในอุปกรณ์"</string>
     <string name="non_carrier_data_usage_warning" msgid="4707184871368847697">"ไม่รวมอินเทอร์เน็ตที่ใช้โดยเครือข่ายผู้ให้บริการ"</string>
     <string name="data_used_template" msgid="8229342096562327646">"ใช้ไป <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="set_data_warning" msgid="1685771882794205462">"ตั้งค่าเตือนปริมาณอินเทอร์เน็ต"</string>
@@ -4188,7 +4187,7 @@
     <string name="long_background_tasks_title" msgid="3272230637974707490">"งานเบื้องหลังซึ่งใช้เวลานาน"</string>
     <string name="long_background_tasks_footer_title" msgid="9117342254914743097">"อนุญาตให้แอปนี้เรียกใช้งานที่ทำอยู่เบื้องหลังซึ่งใช้เวลานาน โดยจะทำให้แอปสามารถเรียกใช้งานที่อาจต้องใช้เวลานานกว่า 2-3 นาทีจึงจะทำงานเสร็จสิ้น เช่น การดาวน์โหลดและอัปโหลด \n\nหากสิทธิ์นี้ถูกปฏิเสธ ระบบจะจำกัดเวลาที่แอปสามารถทำงานดังกล่าวในเบื้องหลังได้"</string>
     <string name="keywords_long_background_tasks" msgid="5788956269136054574">"งานที่ใช้เวลานาน, การโอนข้อมูล, งานที่ทำอยู่เบื้องหลัง"</string>
-    <string name="run_backup_tasks_title" msgid="8572480651659803275">"ดำเนินการงานการสำรองข้อมูลในเบื้องหลัง"</string>
+    <string name="run_backup_tasks_title" msgid="8572480651659803275">"ทำงานเกี่ยวกับการสำรองข้อมูลในเบื้องหลัง"</string>
     <string name="run_backup_tasks_switch_title" msgid="4740767959730361777">"อนุญาตให้แอปทำงานที่เกี่ยวข้องกับการสำรองข้อมูลในเบื้องหลัง"</string>
     <string name="run_backup_tasks_footer_title" msgid="1766222193265152388">"บ่งบอกว่าแอปนี้มีกรณีการใช้งานที่สำคัญซึ่งจำเป็นต้องสำรองข้อมูลหรือซิงค์เนื้อหา การให้สิทธิ์นี้จะช่วยให้แอปทำงานในเบื้องหลังได้เป็นเวลานานขึ้นเล็กน้อยเพื่อทำงานที่เกี่ยวข้องกับการสำรองข้อมูลให้เสร็จสมบูรณ์ \n\nหากสิทธิ์นี้ถูกปฏิเสธ ระบบจะไม่ให้การยกเว้นพิเศษใดๆ แก่แอปนี้ในการทำงานที่เกี่ยวข้องกับการสำรองข้อมูลให้เสร็จสมบูรณ์ในเบื้องหลัง"</string>
     <string name="keywords_run_backup_tasks" msgid="632219905465766211">"งานการสำรองข้อมูล การดำเนินการสำรองข้อมูล"</string>
@@ -4388,7 +4387,6 @@
     <string name="storage_documents" msgid="7873134307844320096">"เอกสาร"</string>
     <string name="storage_other" msgid="7922190148479988838">"อื่นๆ"</string>
     <string name="storage_apps" msgid="3564291603258795216">"แอป"</string>
-    <string name="storage_documents_and_other" msgid="3293689243732236480">"เอกสารและอื่นๆ"</string>
     <string name="storage_system" msgid="8472410119822911844">"ระบบ"</string>
     <string name="storage_os_name" msgid="4637680493234672410">"Android <xliff:g id="VERSION">%s</xliff:g>"</string>
     <string name="storage_temporary_files" msgid="8254109904032452219">"ไฟล์ระบบชั่วคราว"</string>
@@ -4423,16 +4421,17 @@
     <string name="credman_picker_title" msgid="8442086614222006564">"บริการที่ต้องการสำหรับรหัสผ่าน พาสคีย์ และป้อนข้อความอัตโนมัติ"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"ปิด %1$s ไหม"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;ปิดบริการนี้ไหม&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; ระบบจะไม่กรอกข้อมูลที่บันทึกไว้ เช่น รหัสผ่าน พาสคีย์ วิธีการชำระเงิน และข้อมูลอื่นๆ เมื่อคุณลงชื่อเข้าใช้ หากต้องการใช้ข้อมูลที่บันทึกไว้ ให้เลือกรหัสผ่าน พาสคีย์ หรือบริการข้อมูล"</string>
-    <string name="account_dashboard_title_with_passkeys" msgid="6214673787161409996">"รหัสผ่าน พาสคีย์ และป้อนข้อความอัตโนมัติ"</string>
-    <string name="credman_confirmation_message_new_ui" msgid="6126274509951156460">"&lt;b&gt;ต้องการปิดบริการทั้งหมดหรือไม่&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; ระบบจะไม่ป้อนรหัสผ่าน พาสคีย์ และข้อมูลอื่นๆ ที่บันทึกไว้โดยอัตโนมัติเมื่อคุณลงชื่อเข้าใช้"</string>
-    <string name="credman_autofill_confirmation_message_new_ui" msgid="6222139222478822267">"&lt;b&gt;เปลี่ยนบริการที่ต้องการเป็น &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; ระบบจะบันทึกรหัสผ่านใหม่ พาสคีย์ และข้อมูลอื่นๆ ไว้ที่นี่นับจากนี้เป็นต้นไป &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; อาจใช้สิ่งที่อยู่บนหน้าจอเพื่อดูว่าจะป้อนข้อมูลใดโดยอัตโนมัติได้บ้าง"</string>
+    <string name="account_dashboard_title_with_passkeys" msgid="648242372086733541">"รหัสผ่าน พาสคีย์ และบัญชี"</string>
+    <string name="credman_confirmation_message_new_ui" msgid="6126274509951156460">"&lt;b&gt;ต้องการปิดบริการทั้งหมดหรือไม่&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; ระบบจะไม่ป้อนรหัสผ่าน พาสคีย์ และข้อมูลอื่นๆ ที่บันทึกไว้ให้โดยอัตโนมัติเมื่อคุณลงชื่อเข้าใช้"</string>
+    <string name="credman_autofill_confirmation_message_new_ui" msgid="6222139222478822267">"&lt;b&gt;เปลี่ยนบริการที่ต้องการเป็น &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; ไหม&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; ระบบจะบันทึกรหัสผ่านใหม่ พาสคีย์ และข้อมูลอื่นๆ ไว้ที่นี่นับจากนี้เป็นต้นไป &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; อาจใช้สิ่งที่อยู่บนหน้าจอเพื่อดูว่าจะป้อนข้อมูลใดโดยอัตโนมัติได้บ้าง"</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"ใช้ %1$s ใช่ไหม"</string>
+    <!-- no translation found for credman_on_off_switch_content_description (2930826358220917851) -->
+    <skip />
     <string name="credman_confirmation_turn_off_positive_button" msgid="5678773011513369161">"ปิด"</string>
     <string name="credman_confirmation_change_provider_positive_button" msgid="7732302992885116967">"เปลี่ยน"</string>
     <string name="credman_limit_error_msg_title" msgid="1525814645803612135">"คุณเปิดใช้บริการได้เพียง 5 รายการเท่านั้น"</string>
     <string name="credman_limit_error_msg" msgid="2521803280130310063">"ปิดบริการอย่างน้อย 1 รายการเพื่อเพิ่มบริการอื่น"</string>
-    <!-- no translation found for credman_main_settings_intro_text (4981603639240772620) -->
-    <skip />
+    <string name="credman_main_settings_intro_text" msgid="4981603639240772620">"เลือกบริการที่ต้องการเพื่อบันทึกข้อมูลสำหรับคำแนะนำการลงชื่อเข้าใช้และการป้อนข้อความอัตโนมัติ เปิดบริการเพิ่มเติมหากต้องการรับคำแนะนำจากบริการดังกล่าวด้วยเช่นกัน"</string>
     <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"%1$s ใช้สิ่งที่อยู่บนหน้าจอเพื่อดูว่าจะป้อนข้อมูลใดโดยอัตโนมัติได้บ้าง"</string>
     <string name="credman_error_message_title" msgid="4099557206946333568">"ขีดจำกัดรหัสผ่าน พาสคีย์ และบริการอินเทอร์เน็ต"</string>
     <string name="credman_error_message" msgid="8334797097200415449">"คุณสามารถใช้งานรหัสผ่าน พาสคีย์ และบริการอินเทอร์เน็ตได้พร้อมกันสูงสุด 5 รายการ ปิดบริการใดบริการหนึ่งเพื่อเพิ่มอีก"</string>
@@ -4970,7 +4969,7 @@
     <string name="enable_2g_summary" msgid="2794534052372565914">"2G ปลอดภัยน้อยกว่าแต่อาจเชื่อมต่อดีกว่าในบางสถานที่ โดยจะอนุญาตเสมอสำหรับหมายเลขฉุกเฉิน"</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> กำหนดให้ต้องใช้งาน 2G ได้"</string>
     <string name="require_cellular_encryption_title" msgid="7516008146269371585">"ต้องมีการเข้ารหัส"</string>
-    <string name="require_cellular_encryption_summary" msgid="4813823321032908641">"การเข้ารหัสมีความปลอดภัยกว่า แต่คุณอาจเชื่อมต่อไม่ได้ในบางสถานที่ ไม่ต้องมีการเข้ารหัสสำหรับหมายเลขฉุกเฉิน"</string>
+    <string name="require_cellular_encryption_summary" msgid="4813823321032908641">"การเข้ารหัสมีความปลอดภัยกว่า แต่คุณอาจเชื่อมต่อไม่ได้ในบางสถานที่ ไม่ต้องมีการเข้ารหัสสำหรับการโทรฉุกเฉิน"</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"บริการทั้งหมด"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"แสดงการเข้าถึงคลิปบอร์ด"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"แสดงข้อความเมื่อแอปเข้าถึงข้อความ รูปภาพ หรือเนื้อหาอื่นๆ ที่คุณคัดลอก"</string>
@@ -5050,11 +5049,11 @@
     <string name="dream_picker_category" msgid="7726447836872744867">"เลือกภาพพักหน้าจอ"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"แสดงข้อมูลเพิ่มเติม"</string>
     <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"แสดงสิ่งต่างๆ เช่น เวลา สภาพอากาศ หรือข้อมูลอื่นๆ บนภาพพักหน้าจอ"</string>
-    <string name="dream_home_controls_toggle_title" msgid="706799741564479248">"แสดงระบบควบคุมอุปกรณ์ในบ้าน"</string>
-    <string name="dream_home_controls_toggle_summary" msgid="4102519907917430579">"แสดงปุ่มระบบควบคุมอุปกรณ์ในบ้านจากภาพพักหน้าจอ"</string>
+    <string name="dream_home_controls_toggle_title" msgid="706799741564479248">"แสดงระบบควบคุมอุปกรณ์สมาร์ทโฮม"</string>
+    <string name="dream_home_controls_toggle_summary" msgid="4102519907917430579">"แสดงปุ่มระบบควบคุมอุปกรณ์สมาร์ทโฮมจากภาพพักหน้าจอ"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"การตั้งค่าเพิ่มเติม"</string>
-    <string name="dream_setup_title" msgid="2458303874255396142">"เลือกโปรแกรมรักษาหน้าจอ"</string>
-    <string name="dream_setup_description" msgid="7508547154038580296">"เลือกสิ่งที่คุณจะเห็นในหน้าจอเมื่อวางแท็บเล็ตบนแท่นชาร์จ อุปกรณ์อาจใช้พลังงานมากขึ้นเมื่อใช้โปรแกรมรักษาหน้าจอ"</string>
+    <string name="dream_setup_title" msgid="2458303874255396142">"เลือกภาพพักหน้าจอ"</string>
+    <string name="dream_setup_description" msgid="7508547154038580296">"เลือกสิ่งที่คุณจะเห็นในหน้าจอเมื่อวางแท็บเล็ตบนแท่นชาร์จ อุปกรณ์อาจใช้พลังงานมากขึ้นเมื่อใช้ภาพพักหน้าจอ"</string>
     <string name="customize_button_title" msgid="1110284655990203359">"ปรับแต่ง"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"ปรับแต่ง <xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"ต้องรีบูตเพื่อเปิดใช้การสนับสนุนแบบอิสระ"</string>
@@ -5189,10 +5188,7 @@
     <string name="content_protection_preference_subpage_info" msgid="6890886357653365489"></string>
     <string name="accessibility_setup_password_complete" msgid="6358749253318369077">"ตั้งค่ารหัสผ่านแล้ว"</string>
     <string name="show_stylus_pointer_icon" msgid="1010583689203665786">"แสดงตัวชี้เมื่อวางสไตลัสเหนือ"</string>
-    <!-- no translation found for media_drm_settings_title (897424966554739867) -->
-    <skip />
-    <!-- no translation found for force_swcrypto_fallback_title (8053166299808645593) -->
-    <skip />
-    <!-- no translation found for force_swcrypto_fallback_summary (181969966310309701) -->
-    <skip />
+    <string name="media_drm_settings_title" msgid="897424966554739867">"การตั้งค่า Media DRM"</string>
+    <string name="force_swcrypto_fallback_title" msgid="8053166299808645593">"บังคับใช้ Software Secure Crypto"</string>
+    <string name="force_swcrypto_fallback_summary" msgid="181969966310309701">"บังคับให้การจัดการคีย์ DRM ใช้การเข้ารหัส White Box แบบใช้ซอฟต์แวร์"</string>
 </resources>
