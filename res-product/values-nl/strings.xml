@@ -22,7 +22,7 @@
     <string name="bluetooth_disconnect_all_profiles" product="device" msgid="1632553419566947403">"De verbinding tussen je apparaat en <xliff:g id="DEVICE_NAME">%1$s</xliff:g> wordt verbroken."</string>
     <string name="bluetooth_footer_mac_message" product="default" msgid="1640339352473051542">"Bluetooth-adres van je telefoon: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_footer_mac_message" product="tablet" msgid="7338607486971997745">"Bluetooth-adres van je tablet: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
-    <string name="bluetooth_footer_mac_message" product="device" msgid="8944917742814573320">"Bluetooth-adres van je apparaat: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
+    <string name="bluetooth_footer_mac_message" product="device" msgid="8944917742814573320">"Bluetooth-adres van apparaat: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_ask_discovery" product="tablet" msgid="7430581669309228387">"<xliff:g id="APP_NAME">%1$s</xliff:g> wil je tablet <xliff:g id="TIMEOUT">%2$d</xliff:g> seconden zichtbaar maken voor andere Bluetooth-apparaten."</string>
     <string name="bluetooth_ask_discovery" product="default" msgid="3947027393224406367">"<xliff:g id="APP_NAME">%1$s</xliff:g> wil je telefoon <xliff:g id="TIMEOUT">%2$d</xliff:g> seconden zichtbaar maken voor andere Bluetooth-apparaten."</string>
     <string name="bluetooth_ask_discovery_no_name" product="tablet" msgid="440976482246291783">"Een app wil je tablet <xliff:g id="TIMEOUT">%1$d</xliff:g> seconden zichtbaar maken voor andere Bluetooth-apparaten."</string>
@@ -225,8 +225,8 @@
     <string name="wifi_add_app_single_network_summary" product="tablet" msgid="93466057231937113">"<xliff:g id="APPNAME">%1$s</xliff:g> wil een netwerk opslaan op je tablet"</string>
     <string name="wifi_add_app_networks_summary" product="default" msgid="7014504084783236696">"<xliff:g id="APPNAME">%1$s</xliff:g> wil deze netwerken opslaan op je telefoon"</string>
     <string name="wifi_add_app_networks_summary" product="tablet" msgid="6433255556506891439">"<xliff:g id="APPNAME">%1$s</xliff:g> wil deze netwerken opslaan op je tablet"</string>
-    <string name="auto_rotate_screen_summary" product="default" msgid="5562937346878935483">"De schermstand automatisch aanpassen als je met je telefoon wisselt tussen de staande en liggende stand"</string>
-    <string name="auto_rotate_screen_summary" product="tablet" msgid="3163709742477804994">"De schermstand automatisch aanpassen als je met je tablet wisselt tussen de staande en liggende modus"</string>
+    <string name="auto_rotate_screen_summary" product="default" msgid="5562937346878935483">"Pas de schermstand automatisch aan als je je telefoon wisselt tussen de staande en liggende modus"</string>
+    <string name="auto_rotate_screen_summary" product="tablet" msgid="3163709742477804994">"Pas de schermstand automatisch aan als je met je tablet wisselt tussen de staande en liggende modus"</string>
     <string name="sim_lock_on" product="tablet" msgid="227481196121403470">"Pincode vereist voor gebruik van tablet"</string>
     <string name="sim_lock_on" product="default" msgid="6896034657274595838">"Vereis pincode voor gebruik van telefoon"</string>
     <string name="sim_lock_off" product="tablet" msgid="4619320846576958981">"Pincode vereist voor gebruik van tablet"</string>
@@ -270,7 +270,7 @@
     <string name="about_settings" product="device" msgid="7595574154492383452">"Over het apparaat"</string>
     <string name="about_settings" product="emulator" msgid="1099246296173401003">"Over het geëmuleerde apparaat"</string>
     <string name="install_all_warning" product="tablet" msgid="1732116924846572063">"Je tablet en persoonsgegevens zijn gevoelig voor aanvallen door onbekende apps. Als je apps van deze bron installeert, ga je ermee akkoord dat je verantwoordelijk bent voor eventuele schade aan je tablet of verlies van gegevens als gevolg van het gebruik van deze apps."</string>
-    <string name="install_all_warning" product="default" msgid="4597256179485325694">"Je telefoon en persoonsgegevens zijn gevoelig voor aanvallen door onbekende apps. Als je apps van deze bron installeert, ga je ermee akkoord dat je verantwoordelijk bent voor eventuele schade aan je telefoon of verlies van gegevens als gevolg van het gebruik van deze apps."</string>
+    <string name="install_all_warning" product="default" msgid="4597256179485325694">"Je telefoon en persoonsgegevens zijn kwetsbaarder voor aanvallen door onbekende apps. Door apps van deze bron te installeren, ga je ermee akkoord dat je verantwoordelijk bent voor eventuele schade aan je telefoon of verlies van gegevens als gevolg van het gebruik van deze apps."</string>
     <string name="install_all_warning" product="device" msgid="6293002353591632851">"Je apparaat en persoonsgegevens zijn gevoelig voor aanvallen door onbekende apps. Als je apps van deze bron installeert, ga je ermee akkoord dat je verantwoordelijk bent voor eventuele schade aan je apparaat of verlies van gegevens als gevolg van het gebruik van deze apps."</string>
     <string name="runningservicedetails_stop_dlg_text" product="tablet" msgid="6321057186549848774">"Als je deze service stopt, werken bepaalde functies van je telefoon mogelijk pas weer correct nadat je de tablet hebt uitgezet en weer aangezet."</string>
     <string name="runningservicedetails_stop_dlg_text" product="default" msgid="6869998550403667737">"Als je deze service stopt, werken bepaalde functies van je telefoon mogelijk pas weer correct nadat je de telefoon hebt uitgezet en weer aangezet."</string>
@@ -278,8 +278,8 @@
     <string name="testing_phone_info" product="default" msgid="7507506297352160191">"Telefooninformatie"</string>
     <string name="accessibility_text_reading_confirm_dialog_message" product="default" msgid="1773409172676594981">"Je weergavegrootte en tekstvoorkeuren worden gereset naar de oorspronkelijke instellingen van de telefoon"</string>
     <string name="accessibility_text_reading_confirm_dialog_message" product="tablet" msgid="2547948891207211388">"Je weergavegrootte en tekstvoorkeuren worden gereset naar de oorspronkelijke instellingen van de tablet"</string>
-    <string name="accessibility_daltonizer_about_intro_text" product="default" msgid="5234458848997942613">"Pas aan hoe je kleuren ziet op je telefoon"</string>
-    <string name="accessibility_daltonizer_about_intro_text" product="tablet" msgid="5300401841391736534">"Pas aan hoe je kleuren ziet op je telefoon"</string>
+    <string name="accessibility_daltonizer_about_intro_text" product="default" msgid="5234458848997942613">"Pas aan hoe kleuren worden getoond op je telefoon"</string>
+    <string name="accessibility_daltonizer_about_intro_text" product="tablet" msgid="5300401841391736534">"Pas aan hoe kleuren worden getoond op je tablet"</string>
     <string name="reduce_bright_colors_preference_summary" product="default" msgid="2025941326724094318">"Dim het scherm meer dan de minimumhelderheid van je telefoon"</string>
     <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="3106979202311807559">"Dim het scherm meer dan de minimumhelderheid van je tablet"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="9162440023310121356">"Extra dimmen kan handig zijn in de volgende situaties: &lt;ol&gt; &lt;li&gt; De standaard minimumhelderheid van je telefoon is te helder voor je.&lt;/li&gt; &lt;li&gt; Je gebruikt je telefoon in een donkere omgeving, zoals \'s avonds laat of in een donkere kamer voordat je gaat slapen.&lt;/li&gt; &lt;/ol&gt;"</string>
@@ -352,11 +352,11 @@
     <string name="battery_tip_incompatible_charging_message" product="tablet" msgid="5697523201841444736">"Je tablet laadt misschien langzaam of helemaal niet op. Gebruik een aanbevolen kabel en adapter om sneller op te laden."</string>
     <string name="lockscreen_trivial_controls_summary" product="default" msgid="42562533085885152">"Zonder je telefoon te ontgrendelen"</string>
     <string name="lockscreen_trivial_controls_summary" product="tablet" msgid="9052068482124729345">"Zonder je tablet te ontgrendelen"</string>
-    <string name="auto_rotate_summary_a11y" product="default" msgid="2813368383309985185">"Als je wisselt tussen de staande en liggende telefoonstand"</string>
+    <string name="auto_rotate_summary_a11y" product="default" msgid="2813368383309985185">"Als je je telefoon wisselt tussen de staande en liggende modus"</string>
     <string name="auto_rotate_summary_a11y" product="tablet" msgid="4708833814245913981">"Als je wisselt tussen de staande en liggende tabletmodus"</string>
     <string name="daltonizer_feature_summary" product="default" msgid="3940653889277283702">"Pas aan hoe kleuren worden getoond op je telefoon"</string>
-    <string name="daltonizer_feature_summary" product="tablet" msgid="4006596881671077623">"Pas aan hoe kleuren worden getoond op je telefoon"</string>
-    <string name="spatial_audio_speaker" product="default" msgid="7148176677982615792">"Telefoonspeakers"</string>
-    <string name="spatial_audio_speaker" product="tablet" msgid="5452617980485166854">"Tabletspeakers"</string>
-    <string name="spatial_audio_speaker" product="device" msgid="6204289590128303795">"Apparaatspeakers"</string>
+    <string name="daltonizer_feature_summary" product="tablet" msgid="4006596881671077623">"Pas aan hoe kleuren worden getoond op je tablet"</string>
+    <string name="spatial_audio_speaker" product="default" msgid="7148176677982615792">"telefoonspeakers"</string>
+    <string name="spatial_audio_speaker" product="tablet" msgid="5452617980485166854">"tabletspeakers"</string>
+    <string name="spatial_audio_speaker" product="device" msgid="6204289590128303795">"apparaatspeakers"</string>
 </resources>
