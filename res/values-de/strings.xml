@@ -75,7 +75,7 @@
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"Linkes Ohr koppeln"</string>
     <string name="bluetooth_device_controls_general" msgid="1399214835599665488">"Für alle verfügbaren Hörgeräte"</string>
     <string name="bluetooth_device_controls_title" msgid="659009912978022189">"Mehr Hörgeräteeinstellungen"</string>
-    <string name="bluetooth_device_controls_summary" msgid="5387400497394163925">"Du kannst die geräteübergreifenden Einstellungen wie Tastenkombinations- und Hörspuleneinstellungen ändern."</string>
+    <string name="bluetooth_device_controls_summary" msgid="5387400497394163925">"Du kannst die geräteübergreifenden Einstellungen wie Tastenkombinations- und Telefonspuleneinstellungen ändern."</string>
     <string name="bluetooth_device_controls_specific" msgid="7706863288754077107">"Für dieses Gerät"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Audioausgabe"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Informationen zur Audioausgabe"</string>
@@ -432,7 +432,7 @@
     <string name="security_settings_remoteauth_settings_learn_more" msgid="5653556124819260050">"Weitere Informationen zu „Mit Smartwatch entsperren“"</string>
     <string name="security_settings_remoteauth_settings_register_new_authenticator" msgid="9191331738306527887">"Smartwatch hinzufügen"</string>
     <string name="security_settings_remoteauth_settings_remove_device" msgid="2436226120578851282">"Smartwatch entfernen"</string>
-    <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"Entsperrung per Gesichtserkennung &amp; Fingerabdruck"</string>
+    <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"Entsperrung per Gesichtserkennung und Fingerabdruck"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Entsperrung per Gesichtserkennung &amp; Fingerabdruck für die Arbeit"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"Einrichtung erforderlich"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Gesicht und Fingerabdrücke hinzugefügt"</string>
@@ -646,7 +646,7 @@
     <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"Neue Displaysperre wählen"</string>
     <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"Sperre für geschäftliche Apps wählen"</string>
     <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"Neue Arbeitsprofilsperre wählen"</string>
-    <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"Alternative Displaysperre einrichten für zusätzliche Sicherheit"</string>
+    <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"Alternative Displaysperre für zusätzliche Sicherheit einrichten"</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Alternative Methode für die Displaysperre auswählen"</string>
     <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"Wenn du deine Displaysperre vergessen hast, kann dein IT-Administrator sie nicht zurücksetzen."</string>
     <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"Separate Sperre für geschäftliche Apps einrichten"</string>
@@ -760,7 +760,7 @@
     <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2479195488386373253">"Wenn du beim nächsten Versuch ein falsches Muster eingibst, werden dein Arbeitsprofil und die zugehörigen Daten gelöscht"</string>
     <string name="lock_last_pin_attempt_before_wipe_profile" msgid="7086428013814722436">"Wenn du beim nächsten Versuch eine falsche PIN eingibst, werden dein Arbeitsprofil und die zugehörigen Daten gelöscht"</string>
     <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"Wenn du beim nächsten Versuch ein falsches Passwort eingibst, werden dein Arbeitsprofil und die zugehörigen Daten gelöscht"</string>
-    <string name="lockpassword_password_too_short" msgid="1938086368137797700">"{count,plural, =1{Muss mindestens # Zeichen haben}other{Muss mindestens # Zeichen haben}}"</string>
+    <string name="lockpassword_password_too_short" msgid="1938086368137797700">"{count,plural, =1{Muss aus mindestens # Zeichen bestehen}other{Muss aus mindestens # Zeichen bestehen}}"</string>
     <string name="lockpassword_password_too_short_all_numeric" msgid="4301294924022401502">"{count,plural, =1{Wenn du nur Zahlen verwendest, muss das Passwort mindestens 1 Zahl enthalten}other{Wenn du nur Zahlen verwendest, muss das Passwort mindestens # Zahlen enthalten}}"</string>
     <string name="lockpassword_pin_too_short" msgid="8910105226463085689">"{count,plural, =1{PIN muss mindestens # Ziffer haben}other{PIN muss mindestens # Ziffern haben}}"</string>
     <string name="lockpassword_pin_too_short_autoConfirm_extra_message" msgid="3271351502900762571">"{count,plural, =1{Die PIN muss mindestens aus # Ziffer bestehen, aber eine PIN mit {minAutoConfirmLen} Ziffern wird empfohlen, um die Sicherheit zu erhöhen}other{Die PIN muss mindestens aus # Ziffern bestehen, aber eine PIN mit {minAutoConfirmLen} Ziffern wird empfohlen, um die Sicherheit zu erhöhen}}"</string>
@@ -1595,12 +1595,12 @@
     <string name="lockpassword_choose_your_pin_header" msgid="7754265746504679473">"PIN festlegen"</string>
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"PIN für Arbeitsprofil festlegen"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"Muster festlegen"</string>
-    <string name="lockpassword_choose_your_pattern_description" msgid="6808109256008481046">"Für zusätzliche Sicherheit ein Muster zum Entsperren des Geräts einrichten"</string>
+    <string name="lockpassword_choose_your_pattern_description" msgid="6808109256008481046">"Muster zum Entsperren des Geräts für zusätzliche Sicherheit einrichten"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"Muster für Arbeitsprofil festlegen"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"Für Fingerabdruck Passwort festlegen"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Für Fingerabdruck Muster festlegen"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"Richte zur Sicherheit eine PIN ein"</string>
-    <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="2783879743691792556">"PIN für Fingerabdruck festlegen"</string>
+    <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="2783879743691792556">"Für Fingerabdruck PIN festlegen"</string>
     <string name="lockpassword_confirm_your_password_header" msgid="6132312814563023990">"Passwort noch einmal eingeben"</string>
     <string name="lockpassword_reenter_your_profile_password_header" msgid="3812040127714827685">"Passwort für Arbeitsprofil noch einmal eingeben"</string>
     <string name="lockpassword_confirm_your_work_password_header" msgid="4647071231702288305">"Passwort deines Arbeitsprofils eingeben"</string>
@@ -1755,7 +1755,7 @@
     <string name="default_emergency_app" msgid="1929974800666613803">"App für Notfallbenachrichtigungen"</string>
     <string name="reset_app_preferences" msgid="8861758340732716573">"App-Einstellungen zurücksetzen"</string>
     <string name="reset_app_preferences_title" msgid="8935136792316050759">"App-Einstellungen zurücksetzen?"</string>
-    <string name="reset_app_preferences_desc" msgid="8550782670650158299">"Dadurch werden die folgenden Einstellungen zurückgesetzt:\n\n"<li>"Deaktivierung von Apps"</li>\n<li>"Deaktivierung von App-Benachrichtigungen"</li>\n<li>"Festlegung von Standard-Apps für bestimmte Aktionen"</li>\n" "<li>"Einschränkungen der Hintergrunddaten für Apps"</li>\n<li>"Jegliche Zugriffsbeschränkungen"</li>\n<li>"Einstellungen für die Akkunutzung"</li>\n\n"Alle App-Daten bleiben erhalten."</string>
+    <string name="reset_app_preferences_desc" msgid="8550782670650158299">"Dadurch werden die folgenden Einstellungen zurückgesetzt:\n\n"<li>"Deaktivierung von Apps"</li>\n<li>"Deaktivierung von App-Benachrichtigungen"</li>\n<li>"Festlegung von Standard-Apps für bestimmte Aktionen"</li>\n<li>"Einschränkungen der Hintergrunddaten für Apps"</li>\n<li>"Jegliche Zugriffsbeschränkungen"</li>\n<li>"Einstellungen für die Akkunutzung"</li>\n\n"Alle App-Daten bleiben erhalten."</string>
     <string name="reset_app_preferences_button" msgid="2591318711372850058">"Apps zurücksetzen"</string>
     <string name="filter" msgid="9039576690686251462">"Filter"</string>
     <string name="filter_dlg_title" msgid="3086282431958601338">"Filteroptionen auswählen"</string>
@@ -1792,7 +1792,7 @@
     <string name="force_stop_dlg_title" msgid="86745852555490146">"Beenden erzwingen?"</string>
     <string name="force_stop_dlg_text" msgid="1527286468544457368">"Das Beenden der App zu erzwingen kann zu unerwünschtem Verhalten führen."</string>
     <string name="app_disable_dlg_positive" msgid="1414218905322009505">"App deaktivieren"</string>
-    <string name="app_disable_dlg_text" msgid="2449382902751908916">"Bei Deaktivierung dieser App funktionieren Android und andere Apps möglicherweise nicht mehr ordnungsgemäß. Beachte hierbei, dass du diese App nicht löschen kannst, weil sie auf deinem Gerät vorinstalliert war. Durch die Deaktivierung schaltest du diese App ab und blendest sie auf deinem Gerät aus."</string>
+    <string name="app_disable_dlg_text" msgid="2449382902751908916">"Bei Deaktivierung dieser App funktionieren Android und andere Apps möglicherweise nicht mehr ordnungsgemäß. Beachte hierbei, dass du diese App nicht löschen kannst, weil sie auf deinem Gerät vorinstalliert war. Durch die Deaktivierung schaltest du diese App aus und blendest sie auf deinem Gerät aus."</string>
     <string name="app_install_details_group_title" msgid="1172114479073704677">"App-Shop"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"App-Details"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"App installiert vom <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
@@ -2039,7 +2039,7 @@
     <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"Ganzer Bildschirm"</string>
     <string name="accessibility_magnification_area_settings_window_screen_summary" msgid="9191632962955877019">"Teil des Bildschirms"</string>
     <string name="accessibility_magnification_area_settings_all_summary" msgid="8107511976748799455">"Zwischen dem ganzen Bildschirm und einem Teil des Bildschirms wechseln"</string>
-    <string name="accessibility_magnification_mode_dialog_title" msgid="9151027667059878578">"Wählen, wie vergrößert werden soll"</string>
+    <string name="accessibility_magnification_mode_dialog_title" msgid="9151027667059878578">"Vergrößerungsoption auswählen"</string>
     <string name="accessibility_magnification_mode_dialog_option_full_screen" msgid="4892487869954032029">"Ganzen Bildschirm vergrößern"</string>
     <string name="accessibility_magnification_mode_dialog_option_window" msgid="4492443201099153362">"Teil des Bildschirms vergrößern"</string>
     <string name="accessibility_magnification_mode_dialog_option_switch" msgid="561043521011229424">"Zwischen dem ganzen Bildschirm und einem Teil des Bildschirms wechseln"</string>
@@ -2128,8 +2128,8 @@
     <string name="accessibility_button_gesture_footer_learn_more_content_description" msgid="4144803517680297869">"Weitere Informationen zur Schaltfläche „Bedienungshilfen“ und zu Gesten"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Schaltfläche „Bedienungshilfen“ wird verwendet. Bei Bedienung über 3 Schaltflächen ist die Touch-Geste nicht verfügbar."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Schnell auf Bedienungshilfen zugreifen"</string>
-    <string name="accessibility_button_gesture_description" msgid="1141723096904904336">"&lt;b&gt;So gehts&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Geh zu den Einstellungen für Bedienungshilfen&lt;br/&gt; {1,number,integer}. Wähle eine Bedienungshilfe aus und tippe auf den Kurzbefehl&lt;br/&gt; {2,number,integer}. Wähle aus, ob du eine Taste oder eine Touch-Geste für den Zugriff auf die Bedienungshilfe verwenden möchtest&lt;br/&gt;"</string>
-    <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;So gehts&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Geh zu den Einstellungen für Bedienungshilfen&lt;br/&gt; {1,number,integer}. Wähle eine Bedienungshilfe aus und tippe auf den Kurzbefehl&lt;br/&gt; {2,number,integer}. Wähle die Taste aus, die du für den Zugriff auf die Bedienungshilfe verwenden möchtest&lt;br/&gt;"</string>
+    <string name="accessibility_button_gesture_description" msgid="1141723096904904336">"&lt;b&gt;So gehts&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Gehe zu den Einstellungen für Bedienungshilfen&lt;br/&gt; {1,number,integer}. Wähle eine Bedienungshilfe aus und tippe auf den Kurzbefehl&lt;br/&gt; {2,number,integer}. Wähle aus, ob du eine Taste oder eine Touch-Geste für den Zugriff auf die Bedienungshilfe verwenden möchtest&lt;br/&gt;"</string>
+    <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;So gehts&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Gehe zu den Einstellungen für Bedienungshilfen&lt;br/&gt; {1,number,integer}. Wähle eine Bedienungshilfe aus und tippe auf den Kurzbefehl&lt;br/&gt; {2,number,integer}. Wähle die Taste aus, die du für den Zugriff auf die Bedienungshilfe verwenden möchtest&lt;br/&gt;"</string>
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Schaltfläche oder Touch-Geste verwenden"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Ort"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Größe"</string>
@@ -2178,8 +2178,8 @@
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Über automatischer Klick (Verweildauer)"</string>
     <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"Weitere Informationen zu automatischen Klicks (Verweildauer)"</string>
     <string name="accessibility_autoclick_intro_text" msgid="8959680635470639347">"Du kannst eine verbundene Maus so einstellen, dass sie automatisch klickt, wenn sich der Cursor für eine bestimmte Zeit nicht bewegt"</string>
-    <string name="accessibility_autoclick_description" msgid="6695732131412361101">"Die Funktion \"automatischer Klick\" kann nützlich sein, wenn es schwierig ist, mit der Maus zu klicken"</string>
-    <string name="accessibility_autoclick_default_title" msgid="2024730028293793490">"Automatischer Klick deaktivieren"</string>
+    <string name="accessibility_autoclick_description" msgid="6695732131412361101">"Die Funktion \"Automatischer Klick\" kann nützlich sein, wenn es schwierig ist, mit der Maus zu klicken"</string>
+    <string name="accessibility_autoclick_default_title" msgid="2024730028293793490">"„Automatischer Klick“ deaktivieren"</string>
     <string name="accessibility_autoclick_short_title" msgid="7938302504358912984">"Kurz"</string>
     <string name="accessibility_autoclick_short_summary" msgid="4106953930081213514">"0,2 Sekunden"</string>
     <string name="accessibility_autoclick_medium_title" msgid="3134175117576834320">"Mittel"</string>
@@ -2808,7 +2808,7 @@
     <string name="data_usage_limit_editor_title" msgid="8826855902435008518">"Datenlimit festlegen"</string>
     <string name="data_usage_limit_dialog_title" msgid="2053134451707801439">"Datennutzung begrenzen"</string>
     <string name="data_usage_sweep_warning" msgid="2072854703184614828"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g> "</font><font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"Warnung"</font></string>
-    <string name="data_usage_sweep_limit" msgid="6947019190890086284"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font><font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"Limit"</font></string>
+    <string name="data_usage_sweep_limit" msgid="6947019190890086284"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"Limit"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="9065885396147675694">"Entfernte Apps"</string>
     <string name="data_usage_uninstalled_apps_users" msgid="1262228664057122983">"Entfernte Apps und Nutzer"</string>
     <string name="wifi_metered_title" msgid="6623732965268033931">"Netzwerknutzung"</string>
@@ -3521,7 +3521,7 @@
     <string name="notification_polite_work" msgid="8823596456640216391">"Auf Arbeitsprofile anwenden"</string>
     <string name="notification_polite_work_summary" msgid="8260947839104352075">"Einstellungen für das Verringern der Benachrichtigungslautstärke des privaten Profils auf das Arbeitsprofil anwenden"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR-Hilfsdienste"</string>
-    <string name="no_vr_listeners" msgid="8442646085375949755">"Keine installierte App hat die Ausführung als VR-Hilfedienst angefordert."</string>
+    <string name="no_vr_listeners" msgid="8442646085375949755">"Keine installierte App hat die Ausführung als VR-Hilfsdienst angefordert."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"VR-Dienstzugriff für <xliff:g id="SERVICE">%1$s</xliff:g> erlauben?"</string>
     <string name="vr_listener_security_warning_summary" msgid="1888843557687017791">"<xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g> kann ausgeführt werden, wenn der Modus für virtuelle Realität für Apps aktiviert wird."</string>
     <string name="display_vr_pref_title" msgid="4850474436291113569">"Wenn das Gerät im VR-Modus ist"</string>
@@ -3876,7 +3876,7 @@
     <string name="assist_access_screenshot_title" msgid="4395902231753643633">"Screenshot verwenden"</string>
     <string name="assist_access_screenshot_summary" msgid="5276593070956201863">"Der Assistent-App den Zugriff auf eine Aufnahme deines Bildschirms gestatten"</string>
     <string name="assist_flash_title" msgid="5449512572885550108">"Bildschirm kurz aufleuchten lassen"</string>
-    <string name="assist_flash_summary" msgid="3032289860177784594">"Bildschirmränder kurz aufleuchten lassen, wenn die Assistent-App auf Bildschirmtext oder Screenshot zugreift"</string>
+    <string name="assist_flash_summary" msgid="3032289860177784594">"Bildschirmrand kurz aufleuchten lassen, wenn die Assistent-App auf Bildschirmtext oder Screenshots zugreift"</string>
     <string name="assist_footer" msgid="8248015363806299068">"Assistent-Apps können dir bei bestimmten Dingen helfen. Dazu greifen sie auf die Informationen zu, die aktuell auf deinem Bildschirm angezeigt werden. Einige Apps unterstützen sowohl Launcher- als auch Spracheingabedienste."</string>
     <string name="average_memory_use" msgid="717313706368825388">"Durchschnittl. Speicherverbrauch"</string>
     <string name="maximum_memory_use" msgid="2171779724001152933">"Maximaler Speicherverbrauch"</string>
@@ -3913,7 +3913,7 @@
     <string name="draw_overlay" msgid="7902083260500573027">"Über anderen Apps einblenden"</string>
     <string name="system_alert_window_settings" msgid="6458633954424862521">"Über anderen Apps einblenden"</string>
     <string name="permit_draw_overlay" msgid="4468994037192804075">"Einblendung über anderen Apps zulassen"</string>
-    <string name="allow_overlay_description" msgid="1607235723669496298">"Erlaube, dass diese App über anderen Apps, die du gerade verwendest, eingeblendet wird. Diese App erkennt, wo du tippst oder welche Elemente auf dem Bildschirm du änderst."</string>
+    <string name="allow_overlay_description" msgid="1607235723669496298">"Erlaube, dass diese App über anderen Apps, die du gerade verwendest, eingeblendet wird. Diese App erkennt, wohin du tippst oder welche Elemente auf dem Bildschirm du änderst."</string>
     <string name="media_routing_control_title" msgid="6402800638960066807">"Medienausgabe ändern"</string>
     <string name="allow_media_routing_control" msgid="4907036637509360616">"App erlauben, die Medienausgabe zu wechseln"</string>
     <string name="allow_media_routing_description" msgid="8343709701298051207">"Dieser App erlauben, festzulegen, welches verbundene Gerät Audio- oder Videoinhalte aus anderen Apps abspielt. Sie hat dann Zugriff auf eine Liste mit verfügbaren Geräten wie Kopfhörern und Lautsprechern und kann festlegen, welches Ausgabegerät Audio- oder Videoinhalte aus anderen Apps streamt oder überträgt."</string>
@@ -3929,7 +3929,7 @@
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Diese App darf Benachrichtigungen anzeigen, die das gesamte Display ausfüllen, wenn das Gerät gesperrt ist. Apps können diese verwenden, um Wecker, eingehende Anrufe oder andere dringende Benachrichtigungen hervorzuheben."</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"Apps zur Medienverwaltung"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"App erlauben, Medien zu verwalten"</string>
-    <string name="media_management_apps_description" msgid="8000565658455268524">"Wenn du es erlaubst, kann diese App Mediendateien ändern oder löschen, die mit anderen Apps erstellt wurden, ohne dich zu fragen. Die App muss berechtigt sein, auf Mediendateien zuzugreifen."</string>
+    <string name="media_management_apps_description" msgid="8000565658455268524">"Wenn du es erlaubst, kann diese App mit anderen Apps erstellte Mediendateien ändern oder löschen, ohne dich zu fragen. Die App muss berechtigt sein, auf Mediendateien zuzugreifen."</string>
     <string name="keywords_media_management_apps" msgid="7499959607583088690">"Medien, Datei, Verwaltung, Verwalter, verwalten, bearbeiten, Bearbeiter, App, Anwendung, Programm"</string>
     <string name="keywords_vr_listener" msgid="902737490270081131">"vr virtuelle realität listener stereo hilfe dienst"</string>
     <string name="overlay_settings" msgid="2030836934139139469">"Über anderen Apps einblenden"</string>
@@ -3943,7 +3943,7 @@
     <string name="filter_write_settings_apps" msgid="4754994984909024093">"Kann Systemeinstellungen ändern"</string>
     <string name="write_settings_title" msgid="3011034187823288557">"Kann Systemeinstellungen ändern"</string>
     <string name="write_system_settings" msgid="5555707701419757421">"Systemeinstellungen ändern"</string>
-    <string name="permit_write_settings" msgid="3113056800709924871">"Änderung von Systemeinstellungen zulassen"</string>
+    <string name="permit_write_settings" msgid="3113056800709924871">"Ändern von Systemeinstellungen zulassen"</string>
     <string name="write_settings_description" msgid="1474881759793261146">"Diese Berechtigung ermöglicht einer App das Ändern von Systemeinstellungen."</string>
     <string name="external_source_switch_title" msgid="101571983954849473">"Dieser Quelle vertrauen"</string>
     <string name="camera_gesture_title" msgid="5559439253128696180">"Zum Öffnen der Kamera zweimal drehen"</string>
@@ -4166,7 +4166,7 @@
     <string name="managed_profile_contact_search_summary" msgid="4974727886709219105">"Deine Suchanfragen und eingehende Anrufe können für deinen IT-Administrator sichtbar sein"</string>
     <string name="cross_profile_calendar_title" msgid="7570277841490216947">"Profilübergreifender Kalender"</string>
     <string name="cross_profile_calendar_summary" msgid="8856185206722860069">"Geschäftliche Termine in meinem persönlichen Kalender anzeigen"</string>
-    <string name="managed_profile_settings_footer" msgid="996500759305118103">"Wenn geschäftliche Apps ausgeschaltet sind, sind sie pausiert, d. h., weder kannst du darauf zugreifen noch erhältst du Benachrichtigungen"</string>
+    <string name="managed_profile_settings_footer" msgid="996500759305118103">"Wenn geschäftliche Apps ausgeschaltet sind, sind sie pausiert, d. h., du kannst weder darauf zugreifen noch erhältst du Benachrichtigungen"</string>
     <string name="automatic_storage_manager_settings" msgid="519158151463974656">"Speicher verwalten"</string>
     <string name="automatic_storage_manager_text" msgid="6900593059927987273">"Zur Freigabe von Speicherplatz entfernt der Speichermanager Back-ups von Fotos und Videos von deinem Gerät."</string>
     <string name="automatic_storage_manager_days_title" msgid="5077286114860539367">"Fotos &amp; Videos entfernen"</string>
@@ -4357,7 +4357,7 @@
     <string name="credman_autofill_keywords" msgid="701180623776848914">"automatisch, ausfüllen, Autofill, Daten, Passkey, Passwort"</string>
     <string name="credman_button_change" msgid="4072629639218503790">"Ändern"</string>
     <string name="credman_button_open" msgid="7519871964170816850">"Öffnen"</string>
-    <string name="credman_app_list_preference_none" msgid="2509646651254971448">"Nichts ausgewählt"</string>
+    <string name="credman_app_list_preference_none" msgid="2509646651254971448">"Keiner ausgewählt"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Nur für vertrauenswürdige Apps&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; greift auf die Displayanzeige zu, um zu bestimmen, welche Felder automatisch ausgefüllt werden können. Die Funktion sollte daher nur für vertrauenswürdige Apps zugelassen werden."</string>
     <string name="credman_autofill_confirmation_message" msgid="843829628024668466">"&lt;b&gt;Soll &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; verwendet werden?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Neue Passwörter, Passkeys und weitere Informationen werden ab sofort hier gespeichert. &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; kann anhand dessen, was auf deinem Bildschirm zu sehen ist, bestimmen, was automatisch ausgefüllt werden kann."</string>
     <string name="credman_picker_title" msgid="8442086614222006564">"Bevorzugte Dienste für Passwörter, Passkeys &amp; Autofill"</string>
@@ -4438,7 +4438,7 @@
     <string name="my_device_info_device_identifiers_category_title" msgid="2197063484127704153">"Geräte-IDs"</string>
     <string name="change_wifi_state_title" msgid="5629648102837821525">"WLAN-Steuerung"</string>
     <string name="change_wifi_state_app_detail_switch" msgid="1385358508267180745">"App darf WLAN steuern"</string>
-    <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"Erlaubt der App, das WLAN zu aktivieren oder zu deaktivieren, nach WLANs zu scannen und eine Verbindung zu ihnen herstellen, Netzwerke hinzuzufügen oder zu entfernen oder einen lokal beschränkten Hotspot zu starten"</string>
+    <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"Erlaubt der App, das WLAN zu aktivieren oder zu deaktivieren, nach WLANs zu scannen und eine Verbindung zu ihnen herzustellen, Netzwerke hinzuzufügen oder zu entfernen oder einen lokal beschränkten Hotspot zu starten"</string>
     <string name="change_nfc_tag_apps_title" msgid="91514009058149617">"Über NFC starten"</string>
     <string name="change_nfc_tag_apps_detail_switch" msgid="240286205725043561">"Start bei NFC-Scan erlauben"</string>
     <string name="change_nfc_tag_apps_detail_summary" msgid="3338220223868942195">"Erlauben, dass diese App gestartet wird, wenn ein NFC-Tag gescannt wird.\nWenn Apps diese Berechtigung haben, stehen sie als Option zur Verfügung, wenn ein Tag erkannt wird."</string>
@@ -4897,7 +4897,7 @@
     <string name="enable_2g_title" msgid="8184757884636162942">"2G zulassen"</string>
     <string name="enable_2g_summary" msgid="2794534052372565914">"2G ist weniger sicher, bietet aber an manchen Orten eine bessere Verbindung. Für Notrufe ist 2G immer zugelassen."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"Für <xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> muss 2G verfügbar sein"</string>
-    <string name="require_cellular_encryption_title" msgid="7516008146269371585">"Verschlüsselung erfordern"</string>
+    <string name="require_cellular_encryption_title" msgid="7516008146269371585">"Verschlüsselung erforderlich"</string>
     <string name="require_cellular_encryption_summary" msgid="4813823321032908641">"Die Verschlüsselung ist sicherer, du kannst jedoch an manchen Standorten eventuell keine Verbindung herstellen. Für Notrufe ist eine Verschlüsselung nie erforderlich."</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Alle Dienste"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Zugriff auf Zwischenablage anzeigen"</string>
