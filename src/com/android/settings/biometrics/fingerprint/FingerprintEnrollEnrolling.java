@@ -17,6 +17,7 @@
 package com.android.settings.biometrics.fingerprint;
 
 import static android.hardware.biometrics.BiometricAuthenticator.TYPE_FINGERPRINT;
+import static android.hardware.biometrics.BiometricFingerprintConstants.FINGERPRINT_ACQUIRED_IMAGER_DIRTY;
 import static android.text.Layout.HYPHENATION_FREQUENCY_NONE;
 
 import android.animation.Animator;
@@ -770,9 +771,14 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
 
     @Override
     public void onEnrollmentHelp(int helpMsgId, CharSequence helpString) {
-        final CharSequence featuredString = mCanAssumeSfps
+        CharSequence featuredString = mCanAssumeSfps
                 ? mSfpsEnrollmentFeature.getFeaturedVendorString(this, helpMsgId, helpString)
                 : helpString;
+
+        if (helpMsgId == FINGERPRINT_ACQUIRED_IMAGER_DIRTY && mCanAssumeUdfps) {
+            featuredString = getResources().getString(
+                    R.string.fingerprint_acquired_imager_dirty_udfps);
+        }
 
         if (!TextUtils.isEmpty(featuredString)) {
             if (!(mCanAssumeUdfps || mCanAssumeSfps)) {

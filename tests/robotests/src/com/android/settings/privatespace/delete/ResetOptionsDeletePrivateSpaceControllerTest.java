@@ -39,6 +39,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.system.ResetDashboardFragment;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
@@ -48,17 +49,14 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.annotation.LooperMode;
+import org.robolectric.shadows.ShadowLooper;
 
 @RunWith(RobolectricTestRunner.class)
-@LooperMode(LooperMode.Mode.LEGACY)
 @Config(shadows = ShadowAlertDialogCompat.class)
 public class ResetOptionsDeletePrivateSpaceControllerTest {
     @Rule public final MockitoRule mMockitoRule = MockitoJUnit.rule();
@@ -78,8 +76,7 @@ public class ResetOptionsDeletePrivateSpaceControllerTest {
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
+        mContext = ApplicationProvider.getApplicationContext();
         mController = new ResetOptionsDeletePrivateSpaceController(mContext, KEY);
         mActivity = Robolectric.setupActivity(FragmentActivity.class);
         mDialogFragment =
@@ -149,9 +146,12 @@ public class ResetOptionsDeletePrivateSpaceControllerTest {
         boolean result =
                 mController.handleActivityResult(
                         PRIVATE_SPACE_DELETE_CREDENTIAL_REQUEST, Activity.RESULT_CANCELED, mIntent);
+        ShadowLooper.idleMainLooper();
 
         assertThat(result).isFalse();
         AlertDialog alertDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+        ShadowLooper.idleMainLooper();
+
         assertThat(alertDialog).isNotNull();
         assertThat(alertDialog.isShowing()).isFalse();
     }
@@ -162,12 +162,16 @@ public class ResetOptionsDeletePrivateSpaceControllerTest {
         mSetFlagsRule.enableFlags(android.multiuser.Flags.FLAG_DELETE_PRIVATE_SPACE_FROM_RESET);
 
         mDialogFragment.show(mActivity.getSupportFragmentManager(), "className");
+        ShadowLooper.idleMainLooper();
+
         AlertDialog alertDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(alertDialog).isNotNull();
         assertThat(alertDialog.isShowing()).isTrue();
         Button positiveButton = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
 
         positiveButton.performClick();
+        ShadowLooper.idleMainLooper();
+
         assertThat(alertDialog.isShowing()).isFalse();
     }
 
@@ -177,12 +181,16 @@ public class ResetOptionsDeletePrivateSpaceControllerTest {
         mSetFlagsRule.enableFlags(android.multiuser.Flags.FLAG_DELETE_PRIVATE_SPACE_FROM_RESET);
 
         mDialogFragment.show(mActivity.getSupportFragmentManager(), "fragmentName");
+        ShadowLooper.idleMainLooper();
+
         AlertDialog alertDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(alertDialog).isNotNull();
         assertThat(alertDialog.isShowing()).isTrue();
         Button negativeButton = alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE);
 
         negativeButton.performClick();
+        ShadowLooper.idleMainLooper();
+
         assertThat(alertDialog.isShowing()).isFalse();
     }
 }

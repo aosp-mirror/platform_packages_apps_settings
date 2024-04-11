@@ -32,6 +32,7 @@ import android.widget.TimePicker;
 import androidx.preference.Preference;
 
 import com.android.settings.core.BasePreferenceController;
+import com.android.settingslib.RestrictedPreference;
 
 import java.util.Calendar;
 
@@ -66,6 +67,11 @@ public class TimePreferenceController extends BasePreferenceController
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
+
+        if (preference instanceof RestrictedPreference
+                && ((RestrictedPreference) preference).isDisabledByAdmin()) {
+            return;
+        }
         preference.setEnabled(isEnabled());
     }
 

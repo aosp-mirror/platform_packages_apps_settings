@@ -165,7 +165,7 @@ public final class BatteryUsageDataLoader {
             if (!isFullChargeStart) {
                 // No app usage data or battery diff data at this time.
                 final UserIdsSeries userIdsSeries =
-                        new UserIdsSeries(context, /* mainUserOnly= */ true);
+                        new UserIdsSeries(context, /* isNonUIRequest= */ true);
                 if (!userIdsSeries.isCurrentUserLocked()) {
                     loadAppUsageData(context, userIdsSeries);
                     preprocessBatteryUsageSlots(context, userIdsSeries);
