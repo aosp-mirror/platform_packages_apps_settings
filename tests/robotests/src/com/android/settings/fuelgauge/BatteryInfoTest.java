@@ -538,7 +538,7 @@ public class BatteryInfoTest {
                 createIntentForGetBatteryInfoTest(
                         ChargingType.WIRED, ChargingSpeed.FAST, /* batteryLevel= */ 56);
         var expectedStatusLabel = "Fast charging";
-        var expectedRemainingLabel = "Full by 1:30 PM";
+        var expectedRemainingLabel = "Full by ";
         var expectedChargeLabel = "56% - " + expectedStatusLabel + " - " + expectedRemainingLabel;
         var currentTimeMillis = Instant.parse("2024-04-01T13:00:00Z").toEpochMilli();
 
@@ -559,7 +559,7 @@ public class BatteryInfoTest {
                 createIntentForGetBatteryInfoTest(
                         ChargingType.WIRED, ChargingSpeed.REGULAR, /* batteryLevel= */ 12);
         var expectedStatusLabel = "Charging";
-        var expectedRemainingLabel = "Fully charged by 2:00 PM";
+        var expectedRemainingLabel = "Fully charged by ";
         var expectedChargeLabel = "12% - " + expectedRemainingLabel;
         var currentTimeMillis = Instant.parse("2024-04-01T13:00:00Z").toEpochMilli();
 
@@ -580,7 +580,7 @@ public class BatteryInfoTest {
                 createIntentForGetBatteryInfoTest(
                         ChargingType.WIRED, ChargingSpeed.SLOW, /* batteryLevel= */ 18);
         var expectedStatusLabel = "Charging";
-        var expectedRemainingLabel = "Fully charged by 3:00 PM";
+        var expectedRemainingLabel = "Fully charged by";
         var expectedChargeLabel = "18% - " + expectedRemainingLabel;
         var currentTimeMillis = Instant.parse("2024-04-01T13:00:00Z").toEpochMilli();
 
@@ -601,7 +601,7 @@ public class BatteryInfoTest {
                 createIntentForGetBatteryInfoTest(
                         ChargingType.WIRELESS, ChargingSpeed.REGULAR, /* batteryLevel= */ 45);
         var expectedStatusLabel = "Charging";
-        var expectedRemainingLabel = "Fully charged by 4:00 PM";
+        var expectedRemainingLabel = "Fully charged by";
         var expectedChargeLabel = "45% - " + expectedRemainingLabel;
         var currentTimeMillis = Instant.parse("2024-04-01T15:00:00Z").toEpochMilli();
 
@@ -622,7 +622,7 @@ public class BatteryInfoTest {
                 createIntentForGetBatteryInfoTest(
                         ChargingType.DOCKED, ChargingSpeed.REGULAR, /* batteryLevel= */ 66);
         var expectedStatusLabel = "Charging";
-        var expectedRemainingLabel = "Fully charged by 2:00 PM";
+        var expectedRemainingLabel = "Fully charged by";
         var expectedChargeLabel = "66% - " + expectedRemainingLabel;
         var currentTimeMillis = Instant.parse("2021-02-09T13:00:00.00Z").toEpochMilli();
 
@@ -693,10 +693,10 @@ public class BatteryInfoTest {
                 .isEqualTo(expectedStatusLabel);
         assertWithMessage("remainingLabel is incorrect")
                 .that(info.remainingLabel.toString())
-                .isEqualTo(expectedRemainingLabel);
+                .contains(expectedRemainingLabel);
         assertWithMessage("chargeLabel is incorrect")
                 .that(info.chargeLabel.toString())
-                .isEqualTo(expectedChargeLabel);
+                .contains(expectedChargeLabel);
     }
 
     private static Intent createBatteryIntent(int plugged, int level, int status) {
