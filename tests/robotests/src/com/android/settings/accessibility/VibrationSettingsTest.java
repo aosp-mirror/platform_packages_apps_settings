@@ -17,35 +17,26 @@
 package com.android.settings.accessibility;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.res.Resources;
-import android.platform.test.annotations.RequiresFlagsEnabled;
-import android.platform.test.flag.junit.CheckFlagsRule;
-import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
-import com.android.settings.flags.Flags;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 
 /** Tests for {@link VibrationSettings} fragment. */
 @RunWith(RobolectricTestRunner.class)
-@RequiresFlagsEnabled(Flags.FLAG_SEPARATE_ACCESSIBILITY_VIBRATION_SETTINGS_FRAGMENTS)
 public class VibrationSettingsTest {
-
-    @Rule
-    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
-
     private Context mContext;
     private Resources mResources;
     private VibrationSettings mFragment;
