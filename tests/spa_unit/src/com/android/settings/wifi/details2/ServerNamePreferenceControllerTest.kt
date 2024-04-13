@@ -39,20 +39,19 @@ import org.mockito.kotlin.spy
 import org.mockito.kotlin.whenever
 
 @RunWith(AndroidJUnit4::class)
-class CertificateDetailsPreferenceControllerTest {
+class ServerNamePreferenceControllerTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
     private val context: Context = spy(ApplicationProvider.getApplicationContext()) {
         doNothing().whenever(mock).startActivity(any())
     }
-    private val controller = CertificateDetailsPreferenceController(context, TEST_KEY)
+    private val controller = ServerNamePreferenceController(context, TEST_KEY)
 
     private val mockCertificateInfo = mock<WifiEntry.CertificateInfo> {
-        it.validationMethod =
-            WifiEntry.CertificateInfo.CERTIFICATE_VALIDATION_METHOD_USING_INSTALLED_ROOTCA
-        it.caCertificateAliases = arrayOf(MOCK_CA)
+        it.domain = DOMAIN
     }
+
     private val mockWifiEntry =
         mock<WifiEntry> { on { certificateInfo } doReturn mockCertificateInfo }
 
@@ -70,25 +69,24 @@ class CertificateDetailsPreferenceControllerTest {
             }
         }
 
-        composeTestRule.onNodeWithText(
-            context.getString(com.android.internal.R.string.ssl_certificate)
-        ).assertIsDisplayed()
+        composeTestRule.onNodeWithText(context.getString(R.string.server_name_title))
+            .assertIsDisplayed()
     }
 
     @Test
     @RequiresFlagsEnabled(com.android.wifi.flags.Flags.FLAG_ANDROID_V_WIFI_API)
-    fun one_caCertificate_summary() {
+    fun summary_isDisplayed() {
         composeTestRule.setContent {
             CompositionLocalProvider(LocalContext provides context) {
                 controller.Content()
             }
         }
 
-        composeTestRule.onNodeWithText(context.getString(R.string.one_cacrt)).assertIsDisplayed()
+        composeTestRule.onNodeWithText(DOMAIN).assertIsDisplayed()
     }
 
     private companion object {
         const val TEST_KEY = "test_key"
-        const val MOCK_CA = "mock_ca"
+        const val DOMAIN = "domain"
     }
 }

@@ -37,6 +37,9 @@ import com.android.settingslib.spa.widget.preference.Preference
 import com.android.settingslib.spa.widget.preference.PreferenceModel
 import com.android.wifi.flags.Flags
 import com.android.wifitrackerlib.WifiEntry
+import com.android.wifitrackerlib.WifiEntry.CertificateInfo.CERTIFICATE_VALIDATION_METHOD_USING_CERTIFICATE_PINNING
+import com.android.wifitrackerlib.WifiEntry.CertificateInfo.CERTIFICATE_VALIDATION_METHOD_USING_INSTALLED_ROOTCA
+import com.android.wifitrackerlib.WifiEntry.CertificateInfo.CERTIFICATE_VALIDATION_METHOD_USING_SYSTEM_CERTIFICATE
 import java.security.KeyStore
 import java.security.cert.X509Certificate
 
@@ -44,15 +47,13 @@ class CertificateDetailsPreferenceController(context: Context, preferenceKey: St
     ComposePreferenceController(context, preferenceKey) {
 
     private lateinit var wifiEntry: WifiEntry
-    lateinit var certificateAliases: String
-    lateinit var certX509: X509Certificate
 
     fun setWifiEntry(entry: WifiEntry) {
         wifiEntry = entry
     }
 
     override fun getAvailabilityStatus(): Int {
-        return if (Flags.androidVWifiApi() && getCertX509(wifiEntry)) AVAILABLE
+        return if (Flags.androidVWifiApi() && isCertificateDetailsAvailable(wifiEntry)) AVAILABLE
         else CONDITIONALLY_UNAVAILABLE
     }
 
@@ -64,26 +65,52 @@ class CertificateDetailsPreferenceController(context: Context, preferenceKey: St
     @Composable
     fun CertificateDetails() {
         val context = LocalContext.current
+
+        val validationMethod = wifiEntry.certificateInfo!!.validationMethod
+        val certificateDetailsSummary = when (validationMethod) {
+            CERTIFICATE_VALIDATION_METHOD_USING_SYSTEM_CERTIFICATE ->
+                stringResource(R.string.wifi_certificate_summary_system)
+
+            CERTIFICATE_VALIDATION_METHOD_USING_INSTALLED_ROOTCA -> {
+                val aliasesSize = wifiEntry.certificateInfo?.caCertificateAliases?.size
+                if (aliasesSize == 1) stringResource(R.string.one_cacrt)
+                else
+                    String.format(
+                    stringResource(R.string.wifi_certificate_summary_Certificates),
+                    aliasesSize
+                )
+            }
+
+            else -> stringResource(R.string.wifi_certificate_summary_pinning)
+        }
+
         Preference(object : PreferenceModel {
             override val title = stringResource(com.android.internal.R.string.ssl_certificate)
-            override val summary = { certificateAliases }
-            override val onClick: () -> Unit = { createCertificateDetailsDialog(context, certX509) }
+            override val summary = { certificateDetailsSummary }
+            override val onClick: () -> Unit = {
+                if (validationMethod == CERTIFICATE_VALIDATION_METHOD_USING_INSTALLED_ROOTCA)
+                    getCertX509(wifiEntry)?.let {
+                        createCertificateDetailsDialog(
+                            context,
+                            it
+                        )
+                    }
+            }
         })
     }
 
-    private fun getCertX509(wifiEntry: WifiEntry): Boolean {
-        certificateAliases =
-            wifiEntry.wifiConfiguration?.enterpriseConfig?.caCertificateAliases?.get(0)
-                ?: return false
+    private fun getCertX509(wifiEntry: WifiEntry): X509Certificate? {
+        val certificateAliases =
+            wifiEntry.certificateInfo?.caCertificateAliases?.get(0)
+                ?: return null
         return try {
             val keyStore = KeyStore.getInstance("AndroidKeyStore")
             keyStore.load(AndroidKeyStoreLoadStoreParameter(KeyProperties.NAMESPACE_WIFI))
             val cert = keyStore.getCertificate(certificateAliases)
-            certX509 = KeyChain.toCertificate(cert.encoded)
-            true
+            KeyChain.toCertificate(cert.encoded)
         } catch (e: Exception) {
             Log.e(TAG, "Failed to open Android Keystore.", e)
-            false
+            null
         }
     }
 
@@ -122,6 +149,15 @@ class CertificateDetailsPreferenceController(context: Context, preferenceKey: St
             .setNegativeButton(R.string.trusted_credentials_remove_label, listener).create()
         dialog.show()
         dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setEnabled(false)
+    }
+
+    private fun isCertificateDetailsAvailable(wifiEntry: WifiEntry): Boolean {
+        val validationMethod = wifiEntry.certificateInfo?.validationMethod
+        return validationMethod in listOf(
+            CERTIFICATE_VALIDATION_METHOD_USING_SYSTEM_CERTIFICATE,
+            CERTIFICATE_VALIDATION_METHOD_USING_INSTALLED_ROOTCA,
+            CERTIFICATE_VALIDATION_METHOD_USING_CERTIFICATE_PINNING
+        )
     }
 
     companion object {

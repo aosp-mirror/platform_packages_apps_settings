@@ -30,7 +30,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.flags.Flags;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
@@ -65,11 +64,7 @@ public class VibrationIntensitySettingsFragment extends DashboardFragment {
         final int supportedIntensityLevels = context.getResources().getInteger(
                 R.integer.config_vibration_supported_intensity_levels);
         final boolean hasVibrator = context.getSystemService(Vibrator.class).hasVibrator();
-        if (Flags.separateAccessibilityVibrationSettingsFragments()) {
-            return hasVibrator && supportedIntensityLevels > 1;
-        } else {
-            return false;
-        }
+        return hasVibrator && supportedIntensityLevels > 1;
     }
 
     @Override

@@ -112,11 +112,10 @@ public class PrivateSpaceMaintainer {
 
             registerBroadcastReceiver();
 
-            try {
-                //TODO(b/313926659): To check and handle failure of startProfile
-                mActivityManager.startProfile(mUserHandle);
-            } catch (IllegalArgumentException e) {
-                Log.e(TAG, "Unexpected that " + mUserHandle.getIdentifier() + " is not a profile");
+            if (!startProfile()) {
+                // TODO(b/333884792): Add test to mock when startProfile fails.
+                Log.e(TAG, "profile not started, created profile is deleted");
+                deletePrivateSpace();
                 return false;
             }
 
@@ -310,6 +309,16 @@ public class PrivateSpaceMaintainer {
     synchronized boolean isPrivateProfileRunning() {
         if (doesPrivateSpaceExist() && mUserHandle != null) {
             return mUserManager.isUserRunning(mUserHandle);
+        }
+        return false;
+    }
+
+    @GuardedBy("this")
+    private boolean startProfile() {
+        try {
+            return mActivityManager.startProfile(mUserHandle);
+        } catch (IllegalArgumentException e) {
+            Log.e(TAG, "Unexpected that " + mUserHandle.getIdentifier() + " is not a profile");
         }
         return false;
     }
