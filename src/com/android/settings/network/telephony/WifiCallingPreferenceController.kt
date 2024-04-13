@@ -22,6 +22,7 @@ import android.telecom.TelecomManager
 import android.telephony.SubscriptionManager
 import android.telephony.TelephonyManager
 import android.telephony.ims.ImsMmTelManager
+import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
@@ -76,6 +77,13 @@ open class WifiCallingPreferenceController @JvmOverloads constructor(
     }
 
     override fun onViewCreated(viewLifecycleOwner: LifecycleOwner) {
+        if(mSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID){
+            Log.e(
+                this.javaClass.simpleName,
+                "mSubId is INVALID_SUBSCRIPTION_ID"
+            )
+            return
+        }
         wifiCallingRepositoryFactory(mSubId).wifiCallingReadyFlow()
             .collectLatestWithLifecycle(viewLifecycleOwner) { isReady ->
                 preference.isVisible = isReady
