@@ -43,7 +43,7 @@
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"縮小"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"放大"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"使用自動旋轉"</string>
-    <string name="smart_rotate_text_headline" msgid="5878008933992951904">"臉部偵測技術會使用前置鏡頭提高「自動旋轉」功能的準確度。系統不會儲存相關圖像，也不會將這類圖像傳送給 Google。"</string>
+    <string name="smart_rotate_text_headline" msgid="5878008933992951904">"臉部偵測功能會使用前置鏡頭提高「自動旋轉」功能的準確度。系統不會儲存相關圖像，也不會將這類圖像傳送給 Google。"</string>
     <string name="bluetooth" msgid="8898478620943459654">"藍牙"</string>
     <string name="bluetooth_is_discoverable" msgid="4798961627677790935">"向附近所有藍牙裝置顯示 (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
     <string name="bluetooth_is_discoverable_always" msgid="8122823110652921674">"向附近所有藍牙裝置顯示"</string>
@@ -258,7 +258,7 @@
     <string name="account_settings_title" msgid="9138880127246241885">"帳戶"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"安全性"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"加密和憑證"</string>
-    <string name="lockscreen_settings_title" msgid="4086121748092341549">"螢幕鎖定畫面"</string>
+    <string name="lockscreen_settings_title" msgid="4086121748092341549">"螢幕鎖定"</string>
     <string name="lockscreen_settings_what_to_show_category" msgid="9205490627927741254">"要顯示的項目"</string>
     <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"無法使用"</string>
     <string name="security_status_title" msgid="6958004275337618656">"安全性狀態"</string>
@@ -700,7 +700,7 @@
     <string name="art_verifier_for_debuggable_title" msgid="1926445785190030479">"驗證可偵錯應用程式的位元碼"</string>
     <string name="art_verifier_for_debuggable_summary" msgid="4802875841862652879">"允許 ART 驗證可偵錯應用程式的位元碼"</string>
     <string name="show_refresh_rate" msgid="5742688821872354973">"顯示刷新率"</string>
-    <string name="show_refresh_rate_summary" msgid="3558118122374609663">"顯示目前的螢幕重新整理頻率"</string>
+    <string name="show_refresh_rate_summary" msgid="3558118122374609663">"顯示目前的螢幕刷新率"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
     <string name="nfc_secure_settings_title" msgid="4906958426927741485">"必須解鎖裝置才能使用 NFC"</string>
     <string name="android_beam_settings_title" msgid="2797963824490671295">"Android Beam"</string>
@@ -992,8 +992,8 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"流暢顯示"</string>
     <string name="peak_refresh_rate_summary" msgid="3627278682437562787">"自動將某些內容的刷新率從 60 Hz 調高到 <xliff:g id="ID_1">%1$s</xliff:g> Hz。請注意，開啟這項設定會增加電池用量。"</string>
-    <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"強制使用最高重新整理頻率"</string>
-    <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"強制使用最高重新整理頻率可提升觸控回應和動畫品質。請注意，開啟這項設定會增加電池用量。"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"強制使用最高刷新率"</string>
+    <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"最高刷新率可加快觸控反應時間並提升動畫品質，但會增加電池用量。"</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"螢幕感知"</string>
     <string name="adaptive_sleep_title_no_permission" msgid="1719759921214237016">"需要相機存取權"</string>
     <string name="adaptive_sleep_summary_no_permission" msgid="5822591289468803691">"螢幕感知功能必須存取相機。輕觸即可管理「裝置個人化服務」權限"</string>
@@ -1552,7 +1552,7 @@
     <string name="default_emergency_app" msgid="1929974800666613803">"緊急應用程式"</string>
     <string name="reset_app_preferences" msgid="8861758340732716573">"重設應用程式偏好設定"</string>
     <string name="reset_app_preferences_title" msgid="8935136792316050759">"重設應用程式偏好設定？"</string>
-    <string name="reset_app_preferences_desc" msgid="8550782670650158299">"這麼做會重設下列項目的所有偏好設定：\n\n"<li>"已停用的應用程式"</li>\n<li>"已停用的應用程式通知"</li>\n<li>"執行動作的預設應用程式"</li>\n<li>"應用程式背景資料限制"</li>\n<li>"任何權限限制"</li>\n<li>"電池用量設定"</li>\n\n"你不會遺失任何應用程式資料。"</string>
+    <string name="reset_app_preferences_desc" msgid="8550782670650158299">"這項操作會重設下列項目的所有偏好設定：\n\n"<li>"已停用的應用程式"</li>\n<li>"已停用的應用程式通知"</li>\n<li>"執行動作的預設應用程式"</li>\n<li>"應用程式背景資料限制"</li>\n<li>"任何權限限制"</li>\n<li>"電池用量設定"</li>\n\n"你不會遺失任何應用程式資料。"</string>
     <string name="reset_app_preferences_button" msgid="2591318711372850058">"重設應用程式"</string>
     <string name="filter" msgid="9039576690686251462">"篩選"</string>
     <string name="filter_dlg_title" msgid="3086282431958601338">"選擇篩選器選項"</string>
@@ -1582,10 +1582,10 @@
     <string name="invalid_location" msgid="8013853455355520557">"安裝位置無效。"</string>
     <string name="system_package" msgid="7559476279008519360">"無法在外部媒體上安裝系統更新。"</string>
     <string name="move_error_device_admin" msgid="1561502976834303626">"無法在外部媒體上安裝裝置管理員"</string>
-    <string name="force_stop_dlg_title" msgid="86745852555490146">"你要強制停止嗎？"</string>
+    <string name="force_stop_dlg_title" msgid="86745852555490146">"確定要強制停止嗎？"</string>
     <string name="force_stop_dlg_text" msgid="1527286468544457368">"如果你強制停止應用程式，應用程式可能無法正常運作。"</string>
     <string name="app_disable_dlg_positive" msgid="1414218905322009505">"停用應用程式"</string>
-    <string name="app_disable_dlg_text" msgid="2449382902751908916">"如果你停用這個應用程式，Android 和其他應用程式可能無法正常運作。請注意，這是預先安裝在你裝置上的應用程式，因此無法將其刪除。不過，只要停用這個應用程式，即可將其關閉並在裝置上隱藏。"</string>
+    <string name="app_disable_dlg_text" msgid="2449382902751908916">"如果你停用這個應用程式，Android 和其他應用程式可能無法正常運作。請注意，這是預先安裝在裝置上的應用程式，因此無法刪除。不過，只要停用這個應用程式，即可關閉該程式並在裝置上隱藏。"</string>
     <string name="app_install_details_group_title" msgid="1172114479073704677">"商店"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"應用程式詳細資料"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"應用程式安裝來源：<xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
@@ -1800,7 +1800,7 @@
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"放大目前輸入的內容"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"放大輸入的文字"</string>
     <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"切換應用程式時保持開啟"</string>
-    <string name="accessibility_screen_magnification_always_on_summary" msgid="306908451430863049">"切換應用程式時，放大鏡會保持開啟"</string>
+    <string name="accessibility_screen_magnification_always_on_summary" msgid="306908451430863049">"切換應用程式時，放大鏡功能會保持開啟狀態但不放大畫面內容"</string>
     <string name="accessibility_screen_magnification_joystick_title" msgid="1803769708582404964">"搖桿"</string>
     <string name="accessibility_screen_magnification_joystick_summary" msgid="4640300148573982720">"使用螢幕上的搖桿啟用及移動放大鏡。只要按住並在搖桿上拖曳，即可控制放大鏡；輕觸並拖曳則可移動搖桿。"</string>
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"關於放大功能"</string>
@@ -1809,12 +1809,12 @@
     <string name="accessibility_magnification_area_settings_message" msgid="8498648925928109462">"你可以放大整個或局部螢幕畫面，也可以隨時切換這兩種模式"</string>
     <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"整個螢幕"</string>
     <string name="accessibility_magnification_area_settings_window_screen_summary" msgid="9191632962955877019">"局部螢幕畫面"</string>
-    <string name="accessibility_magnification_area_settings_all_summary" msgid="8107511976748799455">"切換螢幕畫面全部放大或局部放大模式"</string>
+    <string name="accessibility_magnification_area_settings_all_summary" msgid="8107511976748799455">"切換放大整個或局部螢幕畫面"</string>
     <string name="accessibility_magnification_mode_dialog_title" msgid="9151027667059878578">"選擇放大模式"</string>
     <string name="accessibility_magnification_mode_dialog_option_full_screen" msgid="4892487869954032029">"放大整個螢幕畫面"</string>
     <string name="accessibility_magnification_mode_dialog_option_window" msgid="4492443201099153362">"放大局部螢幕畫面"</string>
-    <string name="accessibility_magnification_mode_dialog_option_switch" msgid="561043521011229424">"螢幕畫面可切換為全部放大或局部放大模式"</string>
-    <string name="accessibility_magnification_area_settings_mode_switch_summary" msgid="2885238806099080966">"輕觸切換鈕即可在兩個選項之間切換"</string>
+    <string name="accessibility_magnification_mode_dialog_option_switch" msgid="561043521011229424">"切換放大整個或局部螢幕畫面"</string>
+    <string name="accessibility_magnification_area_settings_mode_switch_summary" msgid="2885238806099080966">"輕觸切換鈕即可在兩種模式之間切換"</string>
     <string name="accessibility_magnification_switch_shortcut_title" msgid="3671432048806533079">"要改用無障礙工具按鈕嗎？"</string>
     <string name="accessibility_magnification_switch_shortcut_message" msgid="7718653917415163833">"如果你使用「輕觸三下放大」手勢放大局部螢幕畫面，輸入內容及執行其他操作時會出現延遲。\n\n無障礙工具按鈕會懸浮在畫面中的其他應用程式上。輕觸該按鈕即可放大畫面。"</string>
     <string name="accessibility_magnification_switch_shortcut_positive_button" msgid="2446942190957296957">"改用無障礙工具按鈕"</string>
@@ -1844,7 +1844,7 @@
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"輕觸三下即可縮放畫面"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"輕觸按鈕即可縮放"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"快速放大螢幕畫面中的內容"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;放大螢幕畫面的方法如下：&lt;/b&gt;&lt;br/&gt; {0,number,integer}. 使用快速鍵啟動放大功能&lt;br/&gt; {1,number,integer}. 輕觸螢幕&lt;br/&gt; {2,number,integer}. 拖曳 2 指即可四處移動畫面&lt;br/&gt; {3,number,integer}. 使用 2 指撥動即可調整縮放等級&lt;br/&gt; {4,number,integer}. 使用快速鍵關閉放大功能&lt;br/&gt;&lt;br/&gt; &lt;b&gt;暫時放大螢幕畫面的方法如下：&lt;/b&gt;&lt;br/&gt; {0,number,integer}. 確認放大類型已設為全螢幕&lt;br/&gt; {1,number,integer}. 使用快速鍵啟動放大功能&lt;br/&gt; {2,number,integer}. 按住螢幕上的任一處&lt;br/&gt; {3,number,integer}. 拖曳手指即可四處移動畫面&lt;br/&gt; {4,number,integer}. 移開手指即可關閉放大功能"</string>
+    <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;放大螢幕畫面的方法如下：&lt;/b&gt;&lt;br/&gt; {0,number,integer}. 使用捷徑啟動放大功能&lt;br/&gt; {1,number,integer}. 輕觸螢幕&lt;br/&gt; {2,number,integer}. 拖曳 2 指即可四處移動畫面&lt;br/&gt; {3,number,integer}. 使用 2 指撥動即可調整縮放等級&lt;br/&gt; {4,number,integer}. 使用捷徑關閉放大功能&lt;br/&gt;&lt;br/&gt; &lt;b&gt;暫時放大螢幕畫面的方法如下：&lt;/b&gt;&lt;br/&gt; {0,number,integer}. 確認放大類型已設為全螢幕&lt;br/&gt; {1,number,integer}. 使用捷徑啟動放大功能&lt;br/&gt; {2,number,integer}. 按住螢幕上的任一處&lt;br/&gt; {3,number,integer}. 拖曳手指即可四處移動畫面&lt;br/&gt; {4,number,integer}. 移開手指即可關閉放大功能"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"放大功能啟用後，你可以放大畫面上的內容。\n\n"<b>"如要進行縮放"</b>"，請開啟放大功能，然後輕觸畫面上的任何位置。\n"<ul><li>"使用兩指或多指以拖曳的方式捲動畫面"</li>\n<li>"使用兩指或多指撥動以調整縮放大小"</li></ul>\n\n<b>"如要暫時放大畫面"</b>"，請開啟放大功能，然後按住畫面上的任何位置。\n"<ul><li>"使用手指拖曳可瀏覽畫面的不同部分"</li>\n<li>"放開手指即可縮小"</li></ul>\n\n"你無法放大鍵盤和導覽列部分。"</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"第 <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> 頁，共 <xliff:g id="NUM_PAGES">%2$d</xliff:g> 頁"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"使用無障礙按鈕開啟"</string>
@@ -1885,8 +1885,8 @@
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"無障礙手勢已設為「<xliff:g id="SERVICE">%1$s</xliff:g>」。如要使用放大功能，請用兩指從螢幕底部向上滑動並按住，然後選取 [放大]。"</string>
     <string name="accessibility_global_gesture_preference_title" msgid="3713636732641882959">"音量快速鍵功能"</string>
     <string name="accessibility_shortcut_settings" msgid="836783442658447995">"快速鍵設定"</string>
-    <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="3923122834058574478">"在螢幕鎖定畫面使用快速鍵"</string>
-    <string name="accessibility_shortcut_description" msgid="2184693606202133549">"允許在螢幕鎖定畫面開啟功能快速鍵，方法是同時按住音量調高鍵和調低鍵數秒。"</string>
+    <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="3923122834058574478">"在螢幕鎖定畫面使用捷徑"</string>
+    <string name="accessibility_shortcut_description" msgid="2184693606202133549">"允許在螢幕鎖定畫面使用功能捷徑，方法是同時按住音量調高鍵和調低鍵數秒。"</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"無障礙工具按鈕"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"無障礙工具按鈕和手勢"</string>
     <string name="accessibility_button_intro_text" msgid="80993874471745687">"在任何畫面上都能快速使用無障礙功能"</string>
@@ -1933,13 +1933,13 @@
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"按住的延遲時間"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"色彩反轉"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"使用色彩反轉"</string>
-    <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"色彩反轉快速鍵"</string>
+    <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"色彩反轉捷徑"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"「色彩反轉」功能可將螢幕上的淺色部分轉成深色，並將深色部分轉成淺色。"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"&lt;b&gt;注意事項&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; 媒體和圖像中的色彩都會改變&lt;/li&gt; &lt;li&gt; 色彩反轉的效果會套用到所有應用程式&lt;/li&gt; &lt;li&gt; 如要讓背景呈現深色，可以改用深色主題&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"自動點選 (停留時間)"</string>
-    <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"關於自動點擊 (停留時間)"</string>
-    <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"進一步瞭解自動點擊 (停留時間)"</string>
-    <string name="accessibility_autoclick_intro_text" msgid="8959680635470639347">"連接滑鼠後，你可以設定當游標在畫面上停留一段時間未移動時，讓滑鼠自動點選游標所在位置上的項目"</string>
+    <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"關於自動點選 (停留時間)"</string>
+    <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"進一步瞭解自動點選 (停留時間)"</string>
+    <string name="accessibility_autoclick_intro_text" msgid="8959680635470639347">"連接滑鼠後，你可以設定當游標停留一段時間未移動時，滑鼠會自動做出點按動作"</string>
     <string name="accessibility_autoclick_description" msgid="6695732131412361101">"不方便按滑鼠時可以使用自動點選功能"</string>
     <string name="accessibility_autoclick_default_title" msgid="2024730028293793490">"關閉自動點選"</string>
     <string name="accessibility_autoclick_short_title" msgid="7938302504358912984">"短"</string>
@@ -1981,7 +1981,7 @@
     <string name="accessibility_font_scaling_auto_added_qs_tooltip_content" msgid="7229921960884718332">"「字型大小」已加入「快速設定」選單，向下滑動就能隨時變更字型大小。"</string>
     <string name="accessibility_quick_settings_tooltip_dismiss" msgid="3269120277643884190">"關閉"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"使用色彩校正"</string>
-    <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"色彩校正快速鍵"</string>
+    <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"色彩校正捷徑"</string>
     <string name="accessibility_daltonizer_about_title" msgid="6063650804116981287">"關於色彩校正"</string>
     <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"進一步瞭解色彩校正"</string>
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"關於色彩反轉"</string>
@@ -2094,7 +2094,7 @@
     <string name="accessibility_service_warning" msgid="6779187188736432618">"<xliff:g id="SERVICE">%1$s</xliff:g>要求這個裝置的完整控制權。如果你授予相關權限，該服務就能讀取畫面內容及執行動作，以協助需要無障礙服務的使用者。這個等級的控制權不適用於大多數應用程式。"</string>
     <string name="accessibility_service_warning_description" msgid="6573203795976134751">"如果你有無障礙服務需求，建議可將完整控制權授予具有相關功能的應用程式，但請勿將完整控制權授予大多數的應用程式。"</string>
     <string name="accessibility_service_screen_control_title" msgid="324795030658109870">"查看及控制螢幕"</string>
-    <string name="accessibility_service_screen_control_description" msgid="8431940515157990426">"可讀取螢幕上的所有內容及在其他應用程式上顯示內容。"</string>
+    <string name="accessibility_service_screen_control_description" msgid="8431940515157990426">"可讀取螢幕上的所有內容，並在其他應用程式上顯示內容。"</string>
     <string name="accessibility_service_action_perform_title" msgid="1449360056585337833">"查看及執行動作"</string>
     <string name="accessibility_service_action_perform_description" msgid="7807832069800034738">"可追蹤你與應用程式或硬體感應器的互動，並代表你與應用程式進行互動。"</string>
     <string name="accessibility_dialog_button_allow" msgid="8274918676473216697">"允許"</string>
@@ -2459,7 +2459,7 @@
     <string name="add_device_admin_msg" msgid="7730006568970042119">"要啟用裝置管理員應用程式嗎？"</string>
     <string name="add_device_admin" msgid="6252128813507932519">"啟用這個裝置管理員應用程式"</string>
     <string name="device_admin_add_title" msgid="6087481040932322289">"裝置管理員"</string>
-    <string name="device_admin_warning" msgid="1889160106787280321">"啟用這個管理員應用程式，將允許「<xliff:g id="APP_NAME">%1$s</xliff:g>」應用程式執行以下作業："</string>
+    <string name="device_admin_warning" msgid="1889160106787280321">"如果啟用這個管理員應用程式，將允許「<xliff:g id="APP_NAME">%1$s</xliff:g>」應用程式執行以下作業："</string>
     <string name="device_admin_warning_simplified" msgid="2715756519899116115">"這個裝置將由「<xliff:g id="APP_NAME">%1$s</xliff:g>」管理及監控。"</string>
     <string name="device_admin_status" msgid="6332571781623084064">"這個管理員應用程式已啟用，且允許「<xliff:g id="APP_NAME">%1$s</xliff:g>」應用程式執行以下作業："</string>
     <string name="profile_owner_add_title" msgid="2774489881662331549">"啟用設定檔管理員？"</string>
@@ -2554,7 +2554,7 @@
     <string name="data_usage_restrict_denied_dialog" msgid="8599940395497268584">"你必須先設定行動數據用量上限，才能限制背景資料。"</string>
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2048411447974361181">"開啟資料自動同步功能？"</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="1783917145440587470">"關閉資料自動同步功能？"</string>
-    <string name="data_usage_auto_sync_off_dialog" msgid="6523112583569674837">"這樣可以節省數據用量和電池用量，但你必須手動同步處理每個帳戶才能收集最新資訊。此外，系統進行更新時不會通知你。"</string>
+    <string name="data_usage_auto_sync_off_dialog" msgid="6523112583569674837">"這樣可以節省數據用量和電池用量，但你必須手動同步處理每個帳戶才能收集最新資訊。此外，你也不會收到最新動態的通知。"</string>
     <string name="data_usage_cycle_editor_title" msgid="2019035830921480941">"用量週期重設日期"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="1026234456777365545">"每月固定日期："</string>
     <string name="data_usage_cycle_editor_positive" msgid="6110165528024717527">"儲存設定"</string>
@@ -3269,7 +3269,7 @@
     <string name="notification_listener_allowed" msgid="5536962633536318551">"允許"</string>
     <string name="notification_listener_not_allowed" msgid="3352962779597846538">"不允許"</string>
     <string name="notif_listener_excluded_app_title" msgid="6679316209330349730">"查看所有應用程式"</string>
-    <string name="notif_listener_excluded_app_summary" msgid="2914567678047195396">"個別為可傳送通知的應用程式變更設定"</string>
+    <string name="notif_listener_excluded_app_summary" msgid="2914567678047195396">"為可傳送通知的應用程式變更個別設定"</string>
     <string name="notif_listener_excluded_app_screen_title" msgid="8636196723227432994">"裝置上顯示的應用程式"</string>
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"這個應用程式不支援加強型設定"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"更多設定"</string>
@@ -3542,7 +3542,7 @@
     <string name="advanced_apps" msgid="7643010673326578815">"進階"</string>
     <string name="app_permissions" msgid="8666537659217653626">"權限管理工具"</string>
     <string name="app_data_sharing_updates_title" msgid="1694297952320402788">"位置資料共用方式更新"</string>
-    <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"查看哪些應用程式變更了分享位置資料的方式"</string>
+    <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"查看曾變更位置資料共用方式的應用程式"</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"輕觸即可喚醒"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"在螢幕上任一處輕觸兩下即可喚醒裝置"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"開啟連結"</string>
@@ -3562,10 +3562,10 @@
     <string name="default_phone_title" msgid="7616730756650803827">"電話應用程式"</string>
     <string name="system_app" msgid="1863291702508355041">"(系統)"</string>
     <string name="apps_storage" msgid="643866814746927111">"應用程式儲存空間"</string>
-    <string name="usage_access" msgid="5487993885373893282">"使用記錄存取權"</string>
-    <string name="permit_usage_access" msgid="179630895262172674">"允許存取使用記錄"</string>
+    <string name="usage_access" msgid="5487993885373893282">"使用存取權"</string>
+    <string name="permit_usage_access" msgid="179630895262172674">"允許存取使用情形"</string>
     <string name="time_spent_in_app_pref_title" msgid="25327097913383330">"螢幕時間"</string>
-    <string name="usage_access_description" msgid="8547716253713890707">"具有使用記錄存取權的應用程式可以追蹤你使用的其他應用程式與頻率，以及你的電信業者、語言設定和其他詳細資料。"</string>
+    <string name="usage_access_description" msgid="8547716253713890707">"具有使用存取權的應用程式可以追蹤你使用的其他應用程式與頻率，以及你的電信業者、語言設定等詳情。"</string>
     <string name="memory_settings_title" msgid="6582588646363308430">"記憶體"</string>
     <string name="always_running" msgid="9012705720688200252">"一律執行 (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
     <string name="sometimes_running" msgid="7954947311082655448">"有時執行 (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
@@ -3627,7 +3627,7 @@
     <string name="assist_access_screenshot_summary" msgid="5276593070956201863">"允許小幫手應用程式存取螢幕截圖"</string>
     <string name="assist_flash_title" msgid="5449512572885550108">"閃爍螢幕"</string>
     <string name="assist_flash_summary" msgid="3032289860177784594">"小幫手應用程式存取螢幕或螢幕截圖中的文字時，螢幕邊緣會閃爍"</string>
-    <string name="assist_footer" msgid="8248015363806299068">"小幫手應用程式可根據你目前瀏覽的畫面資訊，為你提供協助。部分應用程式同時支援啟動器和語音輸入服務，為你提供更完善的服務。"</string>
+    <string name="assist_footer" msgid="8248015363806299068">"小幫手應用程式可根據當下的螢幕內容提供協助。某些應用程式同時支援啟動器和語音輸入服務，提供更完善的服務。"</string>
     <string name="average_memory_use" msgid="717313706368825388">"記憶體平均用量"</string>
     <string name="maximum_memory_use" msgid="2171779724001152933">"記憶體最高用量"</string>
     <string name="memory_usage" msgid="5594133403819880617">"記憶體用量"</string>
@@ -3660,17 +3660,17 @@
     <string name="draw_overlay" msgid="7902083260500573027">"顯示在其他應用程式上層"</string>
     <string name="system_alert_window_settings" msgid="6458633954424862521">"顯示在其他應用程式上層"</string>
     <string name="permit_draw_overlay" msgid="4468994037192804075">"允許顯示在其他應用程式上層"</string>
-    <string name="allow_overlay_description" msgid="1607235723669496298">"允許這個應用程式顯示在畫面最上層，遮住你使用的其他應用程式。該應用程式將可知道你輕觸的位置或變更畫面上顯示的內容。"</string>
+    <string name="allow_overlay_description" msgid="1607235723669496298">"允許這個應用程式顯示在畫面上層，遮住其他的應用程式。該應用程式將可知道你輕觸的位置或變更畫面上顯示的內容。"</string>
     <string name="manage_external_storage_title" msgid="8024521099838816100">"所有檔案的存取權"</string>
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"授予管理所有檔案的權限"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"允許這個應用程式讀取、修改及刪除這部裝置或任何已連結儲存空間上的所有檔案。如果應用程式獲得授權，可能會在你不知情的情況下存取檔案。"</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"可以存取所有檔案"</string>
     <string name="full_screen_intent_title" msgid="747270185715224130">"全螢幕通知"</string>
     <string name="permit_full_screen_intent" msgid="9035367640019960861">"允許這個應用程式顯示全螢幕通知"</string>
-    <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"允許這個應用程式在裝置鎖定時顯示全螢幕通知。應用程式可能會在這類通知中顯示鬧鐘、來電或其他緊急通知。"</string>
+    <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"允許這個應用程式在裝置鎖定時顯示全螢幕通知。應用程式可能會利用這類通知顯示鬧鐘、來電或其他緊急通知。"</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"媒體管理應用程式"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"允許應用程式管理媒體"</string>
-    <string name="media_management_apps_description" msgid="8000565658455268524">"如果允許，這個應用程式就能直接修改或刪除使用其他應用程式建立的媒體檔案，不用事先取得你的同意。應用程式必須具有檔案和媒體的存取權限。"</string>
+    <string name="media_management_apps_description" msgid="8000565658455268524">"如果允許，這個應用程式就能直接修改或刪除使用其他應用程式建立的媒體檔案，不用事先取得你的同意。應用程式必須先獲得權限才能存取檔案和媒體。"</string>
     <string name="keywords_media_management_apps" msgid="7499959607583088690">"媒體, 檔案, 管理, 管理員, 編輯, 編輯器, 應用程式, 程式"</string>
     <string name="keywords_vr_listener" msgid="902737490270081131">"vr 虛擬實境 接聽器 音響 小幫手 服務"</string>
     <string name="overlay_settings" msgid="2030836934139139469">"顯示在其他應用程式上層"</string>
@@ -3965,7 +3965,7 @@
     <string name="oem_lock_info_message" msgid="8843145669619429197">"請重新啟動裝置以啟用裝置保護功能。"</string>
     <string name="automatic_storage_manager_freed_bytes" msgid="706230592123831676">"總共釋出 <xliff:g id="SIZE">%1$s</xliff:g>\n\n上次執行日期：<xliff:g id="DATE">%2$s</xliff:g>"</string>
     <string name="web_action_enable_title" msgid="6654581786741216382">"免安裝應用程式"</string>
-    <string name="web_action_enable_summary" msgid="2658930257777545990">"在應用程式中開啟連結 (無須安裝應用程式)"</string>
+    <string name="web_action_enable_summary" msgid="2658930257777545990">"即使未安裝應用程式，也能在當中開啟連結"</string>
     <string name="web_action_section_title" msgid="994717569424234098">"免安裝應用程式"</string>
     <string name="instant_apps_settings" msgid="4280942494969957858">"免安裝應用程式偏好設定"</string>
     <string name="domain_url_section_title" msgid="9028890472923474958">"已安裝的應用程式"</string>
@@ -4155,7 +4155,7 @@
     <string name="my_device_info_device_identifiers_category_title" msgid="2197063484127704153">"裝置 ID"</string>
     <string name="change_wifi_state_title" msgid="5629648102837821525">"Wi-Fi 控制"</string>
     <string name="change_wifi_state_app_detail_switch" msgid="1385358508267180745">"允許應用程式控制 Wi-Fi"</string>
-    <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"允許這個應用程式開啟或關閉 Wi-Fi、掃描及連上 Wi-Fi 網路、新增或移除網路，或啟動僅限本機的無線基地台"</string>
+    <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"允許這個應用程式開啟或關閉 Wi-Fi、掃描及連上 Wi-Fi 網路、新增或移除網路，或啟動僅限區域網路的無線基地台"</string>
     <string name="change_nfc_tag_apps_title" msgid="91514009058149617">"透過 NFC 啟動"</string>
     <string name="change_nfc_tag_apps_detail_switch" msgid="240286205725043561">"允許在掃描 NFC 時啟動"</string>
     <string name="change_nfc_tag_apps_detail_summary" msgid="3338220223868942195">"允許系統掃描到 NFC 標記時啟用這個應用程式。\n如果開啟這項權限，每當系統偵測到標記時，就會將這個應用程式列為選項。"</string>
@@ -4424,7 +4424,7 @@
     <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"按住電源鍵即可存取"</string>
     <string name="power_menu_long_press_for_power_menu_title" msgid="477584639843663599">"電源鍵選單"</string>
     <string name="power_menu_long_press_for_assistant_title" msgid="6557738348262616455">"數位助理"</string>
-    <string name="power_menu_summary_long_press_for_assistant" msgid="32706459458422952">"存取數位助理"</string>
+    <string name="power_menu_summary_long_press_for_assistant" msgid="32706459458422952">"開啟數位助理"</string>
     <string name="power_menu_summary_long_press_for_power_menu" msgid="7617247135239683710">"存取電源鍵選單"</string>
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"必須先設定螢幕鎖定才能使用"</string>
     <string name="power_menu_power_volume_up_hint" msgid="5619917593676125759">"電源鍵選單：\n同時按下電源鍵和調高音量鍵"</string>
@@ -4457,8 +4457,8 @@
     <string name="cached_apps_freezer" msgid="1057519579761550350">"暫停執行快取的應用程式"</string>
     <string name="blob_never_expires_text" msgid="7293376386620106623">"永不過期。"</string>
     <string name="accessor_never_expires_text" msgid="4647624492147788340">"租約永不過期。"</string>
-    <string name="overlay_settings_title" msgid="1032863083496396365">"允許應用程式可重疊顯示在「設定」畫面上"</string>
-    <string name="overlay_settings_summary" msgid="2745336273786148166">"允許可顯示在其他應用程式上的應用程式重疊顯示在「設定」畫面上"</string>
+    <string name="overlay_settings_title" msgid="1032863083496396365">"允許在「設定」畫面上重疊顯示應用程式"</string>
+    <string name="overlay_settings_summary" msgid="2745336273786148166">"允許在「設定」畫面上重疊顯示其他適用的應用程式"</string>
     <string name="allow_mock_modem" msgid="3832264806530479214">"允許模擬數據機"</string>
     <string name="allow_mock_modem_summary" msgid="9097416612748005374">"允許這部裝置執行模擬數據機服務，以進行檢測設備測試。正常使用手機時不要啟用這項服務"</string>
     <string name="media_controls_title" msgid="403271085636252597">"媒體"</string>
