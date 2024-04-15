@@ -26,7 +26,7 @@ import androidx.preference.Preference;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
-import com.android.settings.widget.CardPreference;
+import com.android.settings.widget.TipCardPreference;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.testutils.DrawableTestHelper;
 
@@ -87,7 +87,7 @@ public class BatteryTipTest {
 
     @Test
     public void updatePreference_resetLayoutState() {
-        CardPreference cardPreference = new CardPreference(mContext);
+        var cardPreference = new TipCardPreference(mContext);
         cardPreference.setPrimaryButtonVisibility(true);
         cardPreference.setSecondaryButtonVisibility(true);
 
