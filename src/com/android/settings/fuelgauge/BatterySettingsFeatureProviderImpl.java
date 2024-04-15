@@ -18,6 +18,9 @@ package com.android.settings.fuelgauge;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.android.settings.fuelgauge.batterytip.BatteryTipPolicy;
 import com.android.settings.fuelgauge.batterytip.detectors.LowBatteryDetector;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
@@ -49,5 +52,12 @@ public class BatterySettingsFeatureProviderImpl implements BatterySettingsFeatur
             BatteryInfo batteryInfo,
             BatteryTipPolicy batteryTipPolicy) {
         batteryTips.add(new LowBatteryDetector(context, batteryTipPolicy, batteryInfo).detect());
+    }
+
+    @Override
+    @Nullable
+    public CharSequence getWirelessChargingLabel(
+            @NonNull Context context, @NonNull BatteryInfo info) {
+        return null;
     }
 }

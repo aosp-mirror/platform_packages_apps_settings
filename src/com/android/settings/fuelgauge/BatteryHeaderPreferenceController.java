@@ -43,14 +43,18 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
     @VisibleForTesting BatteryStatusFeatureProvider mBatteryStatusFeatureProvider;
     @VisibleForTesting UsageProgressBarPreference mBatteryUsageProgressBarPref;
 
-    private BatteryTip mBatteryTip;
     private final PowerManager mPowerManager;
+    private final BatterySettingsFeatureProvider mBatterySettingsFeatureProvider;
+
+    private BatteryTip mBatteryTip;
 
     public BatteryHeaderPreferenceController(Context context, String key) {
         super(context, key);
         mPowerManager = context.getSystemService(PowerManager.class);
         mBatteryStatusFeatureProvider =
                 FeatureFactory.getFeatureFactory().getBatteryStatusFeatureProvider();
+        mBatterySettingsFeatureProvider =
+                FeatureFactory.getFeatureFactory().getBatterySettingsFeatureProvider();
     }
 
     @Override
@@ -74,6 +78,14 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
     }
 
     private CharSequence generateLabel(BatteryInfo info) {
+        if (info.pluggedStatus == BatteryManager.BATTERY_PLUGGED_WIRELESS) {
+            final CharSequence wirelessChargingLabel =
+                    mBatterySettingsFeatureProvider.getWirelessChargingLabel(mContext, info);
+            if (wirelessChargingLabel != null) {
+                return wirelessChargingLabel;
+            }
+        }
+
         if (Utils.containsIncompatibleChargers(mContext, TAG)) {
             return mContext.getString(
                     com.android.settingslib.R.string.battery_info_status_not_charging);
