@@ -33,7 +33,7 @@ import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.fuelgauge.batterytip.actions.BatteryTipAction;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.widget.CardPreference;
+import com.android.settings.widget.TipCardPreference;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import java.util.List;
@@ -55,7 +55,7 @@ public class BatteryTipPreferenceController extends BasePreferenceController {
     private SettingsActivity mSettingsActivity;
     private MetricsFeatureProvider mMetricsFeatureProvider;
     private boolean mNeedUpdate;
-    @VisibleForTesting CardPreference mCardPreference;
+    @VisibleForTesting TipCardPreference mCardPreference;
     @VisibleForTesting Context mPrefContext;
     InstrumentedPreferenceFragment mFragment;
 

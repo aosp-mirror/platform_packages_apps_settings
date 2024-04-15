@@ -19,7 +19,9 @@ package com.android.settings.bluetooth;
 import static android.bluetooth.BluetoothDevice.BOND_NONE;
 import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
 
+import android.app.Activity;
 import android.app.settings.SettingsEnums;
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.Intent;
@@ -51,6 +53,7 @@ import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.inputmethod.KeyboardSettingsPreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.slices.SlicePreferenceController;
+import com.android.settingslib.bluetooth.BluetoothCallback;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -97,6 +100,20 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
     InputDevice mInputDevice;
 
     private UserManager mUserManager;
+
+    private final BluetoothCallback mBluetoothCallback =
+            new BluetoothCallback() {
+                @Override
+                public void onBluetoothStateChanged(int bluetoothState) {
+                    if (bluetoothState == BluetoothAdapter.STATE_OFF) {
+                        Log.i(TAG, "Bluetooth is off, exit activity.");
+                        Activity activity = getActivity();
+                        if (activity != null) {
+                            activity.finish();
+                        }
+                    }
+                }
+            };
 
     public BluetoothDeviceDetailsFragment() {
         super(DISALLOW_CONFIG_BLUETOOTH);
@@ -183,6 +200,14 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
         use(BlockingPrefWithSliceController.class).setSliceUri(sliceEnabled
                 ? featureProvider.getBluetoothDeviceSettingsUri(mCachedDevice.getDevice())
                 : null);
+
+        mManager.getEventManager().registerCallback(mBluetoothCallback);
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mManager.getEventManager().unregisterCallback(mBluetoothCallback);
     }
 
     private void updateExtraControlUri(int viewWidth) {

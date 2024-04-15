@@ -421,12 +421,46 @@ public class PrivateSpaceMaintainerTest {
         assertThat(privateSpaceMaintainer.isPrivateSpaceEntryPointEnabled()).isFalse();
     }
 
+    @Test
+    public void createPrivateSpace_psDoesNotExist_setsSkipFirstUseHints() {
+        mSetFlagsRule.enableFlags(
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
+        assumeTrue(mContext.getSystemService(UserManager.class).canAddPrivateProfile());
+        PrivateSpaceMaintainer privateSpaceMaintainer =
+                PrivateSpaceMaintainer.getInstance(mContext);
+        privateSpaceMaintainer.createPrivateSpace();
+        assertThat(getSecureSkipFirstUseHints()).isEqualTo(1);
+    }
+
+    @Test
+    public void createPrivateSpace_pSExists_doesNotChangeSkipFirstUseHints() {
+        mSetFlagsRule.enableFlags(
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
+        assumeTrue(mContext.getSystemService(UserManager.class).canAddPrivateProfile());
+        PrivateSpaceMaintainer privateSpaceMaintainer =
+                PrivateSpaceMaintainer.getInstance(mContext);
+        privateSpaceMaintainer.createPrivateSpace();
+        assertThat(getSecureSkipFirstUseHints()).isEqualTo(1);
+        privateSpaceMaintainer.createPrivateSpace();
+        assertThat(getSecureSkipFirstUseHints()).isEqualTo(1);
+    }
+
     private int getSecureUserSetupComplete() {
         PrivateSpaceMaintainer privateSpaceMaintainer =
                 PrivateSpaceMaintainer.getInstance(mContext);
         return Settings.Secure.getIntForUser(
                 mContentResolver,
                 Settings.Secure.USER_SETUP_COMPLETE,
+                0,
+                privateSpaceMaintainer.getPrivateProfileHandle().getIdentifier());
+    }
+
+    private int getSecureSkipFirstUseHints() {
+        PrivateSpaceMaintainer privateSpaceMaintainer =
+                PrivateSpaceMaintainer.getInstance(mContext);
+        return Settings.Secure.getIntForUser(
+                mContentResolver,
+                Settings.Secure.SKIP_FIRST_USE_HINTS,
                 0,
                 privateSpaceMaintainer.getPrivateProfileHandle().getIdentifier());
     }
