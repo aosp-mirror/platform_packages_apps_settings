@@ -123,7 +123,8 @@ public class BatteryTipsController extends BasePreferenceController {
                     mCardPreference.setVisible(false);
                     if (mOnAnomalyConfirmListener != null) {
                         mOnAnomalyConfirmListener.onAnomalyConfirm();
-                    } else if (mAnomalyEventWrapper.launchSubSetting()) {
+                    } else if (mAnomalyEventWrapper.updateSystemSettingsIfAvailable()
+                            || mAnomalyEventWrapper.launchSubSetting()) {
                         mMetricsFeatureProvider.action(
                                 /* attribution= */ SettingsEnums.FUELGAUGE_BATTERY_HISTORY_DETAIL,
                                 /* action= */ SettingsEnums.ACTION_BATTERY_TIPS_CARD_ACCEPT,
