@@ -23,6 +23,7 @@ import static com.android.settings.display.ScreenTimeoutSettings.FALLBACK_SCREEN
 
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
+import android.os.Process;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
@@ -67,9 +68,13 @@ public class ScreenTimeoutPreferenceController extends BasePreferenceController 
                     .getString(DISABLED_BY_IT_ADMIN_TITLE,
                             () -> mContext.getString(R.string.disabled_by_policy_title)));
             ((RestrictedPreference) preference).setDisabledByAdmin(admin);
-        } else {
-            preference.setSummary(getTimeoutSummary(maxTimeout));
+            return;
         }
+        if (UserManager.get(mContext).hasBaseUserRestriction(
+                UserManager.DISALLOW_CONFIG_SCREEN_TIMEOUT, Process.myUserHandle())) {
+            preference.setEnabled(false);
+        }
+        preference.setSummary(getTimeoutSummary(maxTimeout));
     }
 
     private CharSequence getTimeoutSummary(long maxTimeout) {
