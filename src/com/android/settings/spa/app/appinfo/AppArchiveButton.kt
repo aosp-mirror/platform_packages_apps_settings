@@ -21,6 +21,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInstaller
+import android.content.pm.PackageManager
 import android.os.UserHandle
 import android.util.Log
 import android.widget.Toast
@@ -87,11 +88,15 @@ class AppArchiveButton(
     }
 
     private fun ApplicationInfo.isActionButtonEnabled(): Boolean {
-        return !isArchived
-            && userPackageManager.isAppArchivable(packageName)
-            // We apply the same device policy for both the uninstallation and archive
-            // button.
-            && !appButtonRepository.isUninstallBlockedByAdmin(this)
+        return try {
+            (!isArchived
+                    && userPackageManager.isAppArchivable(packageName)
+                    // We apply the same device policy for both the uninstallation and archive
+                    // button.
+                    && !appButtonRepository.isUninstallBlockedByAdmin(this))
+        } catch (e: PackageManager.NameNotFoundException) {
+            false
+        }
     }
 
     private fun onArchiveClicked(app: ApplicationInfo) {
