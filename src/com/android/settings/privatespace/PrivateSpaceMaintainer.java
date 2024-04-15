@@ -20,6 +20,7 @@ import static android.os.UserManager.USER_TYPE_PROFILE_PRIVATE;
 import static android.provider.Settings.Secure.HIDE_PRIVATESPACE_ENTRY_POINT;
 import static android.provider.Settings.Secure.PRIVATE_SPACE_AUTO_LOCK;
 import static android.provider.Settings.Secure.PRIVATE_SPACE_AUTO_LOCK_AFTER_DEVICE_RESTART;
+import static android.provider.Settings.Secure.SKIP_FIRST_USE_HINTS;
 import static android.provider.Settings.Secure.USER_SETUP_COMPLETE;
 
 import android.app.ActivityManager;
@@ -122,6 +123,7 @@ public class PrivateSpaceMaintainer {
             Log.i(TAG, "Private space created with id: " + mUserHandle.getIdentifier());
             resetPrivateSpaceSettings();
             setUserSetupComplete();
+            setSkipFirstUseHints();
         }
         return true;
     }
@@ -347,6 +349,17 @@ public class PrivateSpaceMaintainer {
     private void setUserSetupComplete() {
         Log.d(TAG, "setting USER_SETUP_COMPLETE = 1 for private profile");
         Settings.Secure.putIntForUser(mContext.getContentResolver(), USER_SETUP_COMPLETE,
+                1, mUserHandle.getIdentifier());
+    }
+
+    /**
+     * Sets the SKIP_FIRST_USE_HINTS for private profile so that the first launch of an app in
+     * private space will not display introductory hints.
+     */
+    @GuardedBy("this")
+    private void setSkipFirstUseHints() {
+        Log.d(TAG, "setting SKIP_FIRST_USE_HINTS = 1 for private profile");
+        Settings.Secure.putIntForUser(mContext.getContentResolver(), SKIP_FIRST_USE_HINTS,
                 1, mUserHandle.getIdentifier());
     }
 
