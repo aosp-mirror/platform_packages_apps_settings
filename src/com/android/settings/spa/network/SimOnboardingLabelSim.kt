@@ -18,6 +18,7 @@ package com.android.settings.spa.network
 
 import android.telephony.SubscriptionInfo
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.SignalCellularAlt
@@ -104,7 +105,7 @@ private fun LabelSimPreference(
             SettingsOutlinedTextField(
                 value = titleSimName,
                 label = stringResource(R.string.sim_onboarding_label_sim_dialog_label),
-                shape = MaterialTheme.shapes.extraLarge
+                modifier = Modifier.fillMaxWidth()
             ) {
                 titleSimName = it
             }
