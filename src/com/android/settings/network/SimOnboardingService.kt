@@ -30,6 +30,7 @@ import com.android.settings.spa.network.setAutomaticData
 import com.android.settings.spa.network.setDefaultData
 import com.android.settings.spa.network.setDefaultSms
 import com.android.settings.spa.network.setDefaultVoice
+import com.android.settings.wifi.WifiPickerTrackerHelper
 import com.android.settingslib.utils.ThreadUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -336,14 +337,17 @@ class SimOnboardingService {
         }
     }
 
-    suspend fun startSetupPrimarySim(context: Context) {
+    suspend fun startSetupPrimarySim(
+        context: Context,
+        wifiPickerTrackerHelper: WifiPickerTrackerHelper
+    ) {
         withContext(Dispatchers.Default) {
                 setDefaultVoice(subscriptionManager, targetPrimarySimCalls)
                 setDefaultSms(subscriptionManager, targetPrimarySimTexts)
                 setDefaultData(
                     context,
                     subscriptionManager,
-                    null,
+                    wifiPickerTrackerHelper,
                     targetPrimarySimMobileData
                 )
                 TelephonyRepository(context).setAutomaticData(

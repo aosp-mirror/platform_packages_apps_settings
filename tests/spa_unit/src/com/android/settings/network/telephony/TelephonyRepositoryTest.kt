@@ -92,6 +92,30 @@ class TelephonyRepositoryTest {
     }
 
     @Test
+    fun isDataEnabled_invalidSub_returnFalse() = runBlocking {
+        val state = repository.isDataEnabled(
+            subId = SubscriptionManager.INVALID_SUBSCRIPTION_ID,
+        )
+
+        assertThat(state.firstWithTimeoutOrNull()).isFalse()
+    }
+
+    @Test
+    fun isDataEnabled_validSub_returnPolicyState() = runBlocking {
+        mockTelephonyManager.stub {
+            on {
+                isDataEnabledForReason(TelephonyManager.DATA_ENABLED_REASON_USER)
+            } doReturn true
+        }
+
+        val state = repository.isDataEnabled(
+            subId = SUB_ID,
+        )
+
+        assertThat(state.firstWithTimeoutOrNull()).isTrue()
+    }
+
+    @Test
     fun telephonyCallbackFlow_callbackRegistered() = runBlocking {
         val flow = context.telephonyCallbackFlow<Unit>(SUB_ID) {
             object : TelephonyCallback() {}
