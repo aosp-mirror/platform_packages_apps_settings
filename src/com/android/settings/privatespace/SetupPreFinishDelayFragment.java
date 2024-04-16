@@ -124,6 +124,12 @@ public class SetupPreFinishDelayFragment extends InstrumentedFragment {
     }
 
     @Override
+    public void onDestroy() {
+        sHandler.removeCallbacks(mRunnable);
+        super.onDestroy();
+    }
+
+    @Override
     public int getMetricsCategory() {
         return SettingsEnums.PRIVATE_SPACE_SETUP_PRE_FINISH;
     }
