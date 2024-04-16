@@ -88,6 +88,14 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
             return info.statusLabel;
         } else if (info.statusLabel != null && !info.discharging) {
             // Charging state
+            if (com.android.settingslib.fuelgauge.BatteryUtils.isChargingStringV2Enabled()) {
+                return info.isFastCharging
+                        ? mContext.getString(
+                                R.string.battery_state_and_duration,
+                                info.statusLabel,
+                                info.remainingLabel)
+                        : info.remainingLabel;
+            }
             return mContext.getString(
                     R.string.battery_state_and_duration, info.statusLabel, info.remainingLabel);
         } else if (mPowerManager.isPowerSaveMode()) {

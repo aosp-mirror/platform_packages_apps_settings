@@ -44,6 +44,7 @@ import com.android.settings.testutils.BatteryTestUtils;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settings.widget.EntityHeaderController;
+import com.android.settingslib.fuelgauge.BatteryUtils;
 import com.android.settingslib.widget.UsageProgressBarPreference;
 
 import org.junit.After;
@@ -107,6 +108,8 @@ public class BatteryHeaderPreferenceControllerTest {
         mController = spy(new BatteryHeaderPreferenceController(mContext, PREF_KEY));
         mController.mBatteryUsageProgressBarPref = mBatteryUsageProgressBarPref;
         mController.mBatteryStatusFeatureProvider = mBatteryStatusFeatureProvider;
+
+        BatteryUtils.setChargingStringV2Enabled(null);
     }
 
     @After
@@ -223,6 +226,65 @@ public class BatteryHeaderPreferenceControllerTest {
         mController.updateBatteryStatus(label, mBatteryInfo);
 
         verify(mBatteryUsageProgressBarPref).setBottomSummary(label);
+    }
+
+    @Test
+    public void updateBatteryStatus_chargingString_statusWithRemainingLabel() {
+        var batteryInfo =
+                arrangeUpdateBatteryStatusTestWithRemainingLabel(
+                        /* remainingLabel= */ "1 hr, 40 min left until full",
+                        /* statusLabel= */ "Charging rapidly",
+                        /* isFastCharging= */ true,
+                        /* isChargingStringV2= */ false);
+        var expectedChargingString = batteryInfo.statusLabel + " • " + batteryInfo.remainingLabel;
+
+        mController.updateBatteryStatus(/* label= */ null, batteryInfo);
+
+        verify(mBatteryUsageProgressBarPref).setBottomSummary(expectedChargingString);
+    }
+
+    @Test
+    public void updateBatteryStatus_chargingStringV2FastCharging_statusWithRemainingLabel() {
+        var batteryInfo =
+                arrangeUpdateBatteryStatusTestWithRemainingLabel(
+                        /* remainingLabel= */ "Full by 1:30 PM",
+                        /* statusLabel= */ "Fast Charging",
+                        /* isFastCharging= */ true,
+                        /* isChargingStringV2= */ true);
+        var expectedChargingString = batteryInfo.statusLabel + " • " + batteryInfo.remainingLabel;
+
+        mController.updateBatteryStatus(/* label= */ null, batteryInfo);
+
+        verify(mBatteryUsageProgressBarPref).setBottomSummary(expectedChargingString);
+    }
+
+    @Test
+    public void updateBatteryStatus_chargingStringV2NonFastCharging_remainingLabel() {
+        var batteryInfo =
+                arrangeUpdateBatteryStatusTestWithRemainingLabel(
+                        /* remainingLabel= */ "Fully charged by 11:10 PM",
+                        /* statusLabel= */ "Charging",
+                        /* isFastCharging= */ false,
+                        /* isChargingStringV2= */ true);
+        var expectedChargingString = batteryInfo.remainingLabel;
+
+        mController.updateBatteryStatus(/* label= */ null, batteryInfo);
+
+        verify(mBatteryUsageProgressBarPref).setBottomSummary(expectedChargingString);
+    }
+
+    private BatteryInfo arrangeUpdateBatteryStatusTestWithRemainingLabel(
+            String remainingLabel,
+            String statusLabel,
+            boolean isFastCharging,
+            boolean isChargingStringV2) {
+        BatteryUtils.setChargingStringV2Enabled(isChargingStringV2);
+        mBatteryInfo.isBatteryDefender = false;
+        mBatteryInfo.remainingLabel = remainingLabel;
+        mBatteryInfo.statusLabel = statusLabel;
+        mBatteryInfo.discharging = false;
+        mBatteryInfo.isFastCharging = isFastCharging;
+        return mBatteryInfo;
     }
 
     @Test
