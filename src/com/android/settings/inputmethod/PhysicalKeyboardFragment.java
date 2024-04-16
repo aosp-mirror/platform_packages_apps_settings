@@ -110,7 +110,6 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
 
 
     private Intent mIntentWaitingForResult;
-    private boolean mIsNewKeyboardSettings;
     private boolean mSupportsFirmwareUpdate;
 
     static final String EXTRA_BT_ADDRESS = "extra_bt_address";
@@ -152,8 +151,6 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
         if (mSupportsFirmwareUpdate) {
             mFeatureProvider.addFirmwareUpdateCategory(getContext(), getPreferenceScreen());
         }
-        mIsNewKeyboardSettings = FeatureFlagUtils.isEnabled(
-                getContext(), FeatureFlagUtils.SETTINGS_NEW_KEYBOARD_UI);
         boolean isModifierKeySettingsEnabled = FeatureFlagUtils
                 .isEnabled(getContext(), FeatureFlagUtils.SETTINGS_NEW_KEYBOARD_MODIFIER_KEY);
         if (!isModifierKeySettingsEnabled) {
@@ -287,27 +284,19 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
             // TODO(yukawa): Consider using com.android.settings.widget.GearPreference
             final Preference pref = new Preference(getPrefContext());
             pref.setTitle(hardKeyboardDeviceInfo.mDeviceName);
-            if (mIsNewKeyboardSettings) {
-                String currentLayout =
-                        NewKeyboardSettingsUtils.getSelectedKeyboardLayoutLabelForUser(getContext(),
-                                UserHandle.myUserId(), hardKeyboardDeviceInfo.mDeviceIdentifier);
-                if (currentLayout != null) {
-                    pref.setSummary(currentLayout);
-                }
-                pref.setOnPreferenceClickListener(
-                        preference -> {
-                            showEnabledLocalesKeyboardLayoutList(
-                                    hardKeyboardDeviceInfo.mDeviceIdentifier);
-                            return true;
-                        });
-            } else {
-                pref.setSummary(hardKeyboardDeviceInfo.mLayoutLabel);
-                pref.setOnPreferenceClickListener(
-                        preference -> {
-                            showKeyboardLayoutDialog(hardKeyboardDeviceInfo.mDeviceIdentifier);
-                            return true;
-                        });
+            String currentLayout =
+                    NewKeyboardSettingsUtils.getSelectedKeyboardLayoutLabelForUser(getContext(),
+                            UserHandle.myUserId(), hardKeyboardDeviceInfo.mDeviceIdentifier);
+            if (currentLayout != null) {
+                pref.setSummary(currentLayout);
             }
+            pref.setOnPreferenceClickListener(
+                    preference -> {
+                        showEnabledLocalesKeyboardLayoutList(
+                                hardKeyboardDeviceInfo.mDeviceIdentifier);
+                        return true;
+                    });
+
             category.addPreference(pref);
             StringBuilder vendorAndProductId = new StringBuilder();
             String vendorId = String.valueOf(hardKeyboardDeviceInfo.mVendorId);

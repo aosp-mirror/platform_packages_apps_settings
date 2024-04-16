@@ -38,7 +38,6 @@ import com.android.settings.fuelgauge.batterysaver.BatterySaverSettings;
 import com.android.settings.fuelgauge.batteryusage.PowerUsageSummary;
 import com.android.settings.gestures.GestureSettings;
 import com.android.settings.homepage.TopLevelSettings;
-import com.android.settings.language.LanguageAndInputSettings;
 import com.android.settings.network.NetworkDashboardFragment;
 import com.android.settings.notification.ConfigureNotificationSettings;
 import com.android.settings.notification.SoundSettings;
@@ -102,8 +101,6 @@ public class DashboardFragmentRegistry {
                 CategoryKey.CATEGORY_ACCOUNT);
         PARENT_TO_CATEGORY_KEY_MAP.put(
                 SystemDashboardFragment.class.getName(), CategoryKey.CATEGORY_SYSTEM);
-        PARENT_TO_CATEGORY_KEY_MAP.put(LanguageAndInputSettings.class.getName(),
-                CategoryKey.CATEGORY_SYSTEM_LANGUAGE);
         // TODO(b/242680328) Tie new category key to LanguageSettings and KeyboardSettings page
         PARENT_TO_CATEGORY_KEY_MAP.put(DevelopmentSettingsDashboardFragment.class.getName(),
                 CategoryKey.CATEGORY_SYSTEM_DEVELOPMENT);

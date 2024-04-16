@@ -68,7 +68,7 @@ public class RemoteVolumeGroupController extends BasePreferenceController implem
     public RemoteVolumeGroupController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         if (mLocalMediaManager == null) {
-            mLocalMediaManager = new LocalMediaManager(mContext, null, null);
+            mLocalMediaManager = new LocalMediaManager(mContext, /* packageName= */ null);
             mLocalMediaManager.registerCallback(this);
             mLocalMediaManager.startScan();
         }

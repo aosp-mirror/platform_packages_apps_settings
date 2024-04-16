@@ -19,7 +19,6 @@ package com.android.settings.language;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.util.FeatureFlagUtils;
 
 import com.android.settings.Settings;
 import com.android.settings.core.BasePreferenceController;
@@ -29,28 +28,14 @@ import com.android.settings.core.BasePreferenceController;
  * TODO(b/273642892): When new layout is on board, this class shall be removed.
  */
 public class LanguagePreferenceController extends BasePreferenceController {
-    private static final String TAG = LanguagePreferenceController.class.getSimpleName();
-
-    private boolean mCacheIsFeatureOn = false;
-
     public LanguagePreferenceController(Context context, String key) {
         super(context, key);
     }
 
     @Override
     public int getAvailabilityStatus() {
-        boolean isFeatureOn = FeatureFlagUtils
-                .isEnabled(mContext, FeatureFlagUtils.SETTINGS_NEW_KEYBOARD_UI);
-
-        // LanguageSettingsActivity is a new entry page for new language layout.
-        // LanguageAndInputSettingsActivity is existed entry page for current language layout.
-        if (mCacheIsFeatureOn != isFeatureOn) {
-            setActivityEnabled(
-                    mContext, Settings.LanguageAndInputSettingsActivity.class, !isFeatureOn);
-            setActivityEnabled(mContext, Settings.LanguageSettingsActivity.class, isFeatureOn);
-            mCacheIsFeatureOn = isFeatureOn;
-        }
-        return isFeatureOn ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+        setActivityEnabled(mContext, Settings.LanguageSettingsActivity.class, true);
+        return AVAILABLE;
     }
 
     private static void setActivityEnabled(Context context, Class klass, final boolean isEnabled) {

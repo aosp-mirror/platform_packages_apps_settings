@@ -50,6 +50,7 @@ import com.android.settings.homepage.DeepLinkHomepageActivityInternal;
 import com.android.settings.homepage.SettingsHomepageActivity;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockPattern;
+import com.android.settings.privatespace.PrivateSpaceSetupActivity;
 import com.android.settings.remoteauth.RemoteAuthActivity;
 import com.android.settings.remoteauth.RemoteAuthActivityInternal;
 
@@ -264,6 +265,7 @@ public class ActivityEmbeddingRulesController {
         addActivityFilter(activityFilters, RemoteAuthActivity.class);
         addActivityFilter(activityFilters, RemoteAuthActivityInternal.class);
         addActivityFilter(activityFilters, ChooseLockPattern.class);
+        addActivityFilter(activityFilters, PrivateSpaceSetupActivity.class);
         String action = mContext.getString(R.string.config_avatar_picker_action);
         addActivityFilter(activityFilters, new Intent(action));
 

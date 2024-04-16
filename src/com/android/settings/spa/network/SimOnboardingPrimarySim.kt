@@ -102,18 +102,21 @@ fun SimOnboardingPrimarySimImpl(
             mobileDataSelectedId = mobileDataSelectedId,
             actionSetCalls = {
                 callsSelectedId.intValue = it
-                onboardingService.targetPrimarySimCalls = it},
+                onboardingService.targetPrimarySimCalls = it
+            },
             actionSetTexts = {
                 textsSelectedId.intValue = it
-                onboardingService.targetPrimarySimTexts = it},
+                onboardingService.targetPrimarySimTexts = it
+            },
             actionSetMobileData = {
                 mobileDataSelectedId.intValue = it
-                onboardingService.targetPrimarySimMobileData = it},
-            isAutoDataEnabled = { isAutoDataEnabled },
+                onboardingService.targetPrimarySimMobileData = it
+            }
+        )
+        AutomaticDataSwitchingPreference(isAutoDataEnabled = { isAutoDataEnabled },
             setAutoDataEnabled = { newEnabled ->
                 onboardingService.targetPrimarySimAutoDataSwitch.value = newEnabled
-            },
-        )
+            })
     }
 }
 
