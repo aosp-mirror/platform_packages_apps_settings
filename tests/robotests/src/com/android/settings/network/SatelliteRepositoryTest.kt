@@ -20,10 +20,12 @@ import android.content.Context
 import android.os.OutcomeReceiver
 import android.telephony.satellite.SatelliteManager
 import android.telephony.satellite.SatelliteManager.SatelliteException
+import android.telephony.satellite.SatelliteModemStateCallback
 import androidx.test.core.app.ApplicationProvider
-import com.android.settings.network.SatelliteManagerUtil.requestIsEnabled
+import com.google.common.truth.Truth.assertThat
 import com.google.common.util.concurrent.ListenableFuture
 import java.util.concurrent.Executor
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
@@ -42,7 +44,7 @@ import org.robolectric.RobolectricTestRunner
 
 
 @RunWith(RobolectricTestRunner::class)
-class SatelliteManagerUtilTest {
+class SatelliteRepositoryTest {
 
     @JvmField
     @Rule
@@ -57,10 +59,15 @@ class SatelliteManagerUtilTest {
     @Mock
     private lateinit var mockExecutor: Executor
 
+    private lateinit var repository: SatelliteRepository
+
+
     @Before
     fun setUp() {
         `when`(this.spyContext.getSystemService(SatelliteManager::class.java))
             .thenReturn(mockSatelliteManager)
+
+        repository = SatelliteRepository(spyContext)
     }
 
     @Test
@@ -78,7 +85,7 @@ class SatelliteManagerUtilTest {
             }
 
         val result: ListenableFuture<Boolean> =
-            requestIsEnabled(spyContext, mockExecutor)
+            repository.requestIsEnabled(mockExecutor)
 
         assertTrue(result.get())
     }
@@ -98,7 +105,7 @@ class SatelliteManagerUtilTest {
             }
 
         val result: ListenableFuture<Boolean> =
-            requestIsEnabled(spyContext, mockExecutor)
+            repository.requestIsEnabled(mockExecutor)
         assertFalse(result.get())
     }
 
@@ -117,7 +124,7 @@ class SatelliteManagerUtilTest {
                 null
             }
 
-        val result = requestIsEnabled(spyContext, mockExecutor)
+        val result = repository.requestIsEnabled(mockExecutor)
 
         assertFalse(result.get())
     }
@@ -126,8 +133,52 @@ class SatelliteManagerUtilTest {
     fun requestIsEnabled_nullSatelliteManager() = runBlocking {
         `when`(spyContext.getSystemService(SatelliteManager::class.java)).thenReturn(null)
 
-        val result: ListenableFuture<Boolean> = requestIsEnabled(spyContext, mockExecutor)
+        val result: ListenableFuture<Boolean> = repository.requestIsEnabled(mockExecutor)
 
         assertFalse(result.get())
+    }
+
+    @Test
+    fun getIsModemEnabledFlow_isSatelliteEnabledState() = runBlocking {
+        `when`(
+            mockSatelliteManager.registerForModemStateChanged(
+                any(),
+                any()
+            )
+        ).thenAnswer { invocation ->
+            val callback = invocation.getArgument<SatelliteModemStateCallback>(1)
+            callback.onSatelliteModemStateChanged(SatelliteManager.SATELLITE_MODEM_STATE_CONNECTED)
+            SatelliteManager.SATELLITE_RESULT_SUCCESS
+        }
+
+        val flow = repository.getIsModemEnabledFlow()
+
+        assertThat(flow.first()).isTrue()
+    }
+
+    @Test
+    fun getIsModemEnabledFlow_isSatelliteDisabledState() = runBlocking {
+        `when`(
+            mockSatelliteManager.registerForModemStateChanged(
+                any(),
+                any()
+            )
+        ).thenAnswer { invocation ->
+            val callback = invocation.getArgument<SatelliteModemStateCallback>(1)
+            callback.onSatelliteModemStateChanged(SatelliteManager.SATELLITE_MODEM_STATE_OFF)
+            SatelliteManager.SATELLITE_RESULT_SUCCESS
+        }
+
+        val flow = repository.getIsModemEnabledFlow()
+
+        assertThat(flow.first()).isFalse()
+    }
+
+    @Test
+    fun getIsModemEnabledFlow_nullSatelliteManager() = runBlocking {
+        `when`(spyContext.getSystemService(SatelliteManager::class.java)).thenReturn(null)
+
+        val flow = repository.getIsModemEnabledFlow()
+        assertThat(flow.first()).isFalse()
     }
 }

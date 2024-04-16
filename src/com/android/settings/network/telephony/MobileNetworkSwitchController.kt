@@ -26,16 +26,19 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settings.R
+import com.android.settings.network.SatelliteRepository
 import com.android.settings.network.SubscriptionUtil
 import com.android.settings.spa.preference.ComposePreferenceController
 import com.android.settingslib.spa.widget.preference.MainSwitchPreference
 import com.android.settingslib.spa.widget.preference.SwitchPreferenceModel
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 
 class MobileNetworkSwitchController @JvmOverloads constructor(
     context: Context,
     preferenceKey: String,
     private val subscriptionRepository: SubscriptionRepository = SubscriptionRepository(context),
+    private val satelliteRepository: SatelliteRepository = SatelliteRepository(context)
 ) : ComposePreferenceController(context, preferenceKey) {
 
     private var subId = SubscriptionManager.INVALID_SUBSCRIPTION_ID
@@ -54,7 +57,12 @@ class MobileNetworkSwitchController @JvmOverloads constructor(
             subscriptionRepository.isSubscriptionEnabledFlow(subId)
         }.collectAsStateWithLifecycle(initialValue = null)
         val changeable by remember {
-            context.callStateFlow(subId).map { it == TelephonyManager.CALL_STATE_IDLE }
+            combine(
+                context.callStateFlow(subId).map { it == TelephonyManager.CALL_STATE_IDLE },
+                satelliteRepository.getIsModemEnabledFlow()
+            ) { isCallStateIdle, isSatelliteModemEnabled ->
+                isCallStateIdle && !isSatelliteModemEnabled
+            }
         }.collectAsStateWithLifecycle(initialValue = true)
         MainSwitchPreference(model = object : SwitchPreferenceModel {
             override val title = stringResource(R.string.mobile_network_use_sim_on)
