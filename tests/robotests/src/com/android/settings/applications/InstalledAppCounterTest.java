@@ -53,7 +53,6 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.LooperMode;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
@@ -63,7 +62,6 @@ import java.util.List;
 import java.util.Set;
 
 @RunWith(RobolectricTestRunner.class)
-@LooperMode(LooperMode.Mode.LEGACY)
 public final class InstalledAppCounterTest {
 
     @Rule
