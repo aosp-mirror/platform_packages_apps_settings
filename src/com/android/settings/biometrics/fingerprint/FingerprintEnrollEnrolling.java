@@ -812,13 +812,6 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
             CharSequence announcement = getString(
                     R.string.security_settings_sfps_enroll_progress_a11y_message, percent);
             announceEnrollmentProgress(announcement);
-            if (mIllustrationLottie != null) {
-                mIllustrationLottie.setContentDescription(
-                        getString(
-                                R.string.security_settings_sfps_animation_a11y_label,
-                                percent)
-                );
-            }
         }
         updateTitleAndDescription();
         animateFlash();
