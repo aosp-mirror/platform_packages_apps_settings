@@ -35,12 +35,14 @@ import android.bluetooth.BluetoothCodecType;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
+import android.platform.test.annotations.RequiresFlagsEnabled;
 
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.ListPreference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.development.BluetoothA2dpConfigStore;
+import com.android.settings.development.Flags;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -57,7 +59,6 @@ import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 public class BluetoothCodecListPreferenceControllerTest {
-
     private static final String DEVICE_ADDRESS = "00:11:22:33:44:55";
 
     @Mock private BluetoothA2dp mBluetoothA2dp;
@@ -245,6 +246,7 @@ public class BluetoothCodecListPreferenceControllerTest {
     }
 
     @Test
+    @RequiresFlagsEnabled(Flags.FLAG_A2DP_OFFLOAD_CODEC_EXTENSIBILITY_SETTINGS)
     public void onPreferenceChange_notifyPreference() {
         assertFalse(
                 mController.onPreferenceChange(
