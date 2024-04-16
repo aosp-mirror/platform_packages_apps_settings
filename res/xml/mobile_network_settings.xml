@@ -18,9 +18,8 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="mobile_network_pref_screen">
 
-    <com.android.settings.widget.SettingsMainSwitchPreference
+    <com.android.settings.spa.preference.ComposePreference
         android:key="use_sim_switch"
-        android:title="@string/mobile_network_use_sim_on"
         settings:controller="com.android.settings.network.telephony.MobileNetworkSwitchController"/>
 
     <PreferenceCategory
