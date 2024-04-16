@@ -80,7 +80,6 @@ public class MainlineModuleVersionPreferenceController extends BasePreferenceCon
             try {
                 mModuleVersion =
                         mPackageManager.getPackageInfo(moduleProvider, 0 /* flags */).versionName;
-                return;
             } catch (PackageManager.NameNotFoundException e) {
                 Log.e(TAG, "Failed to get mainline version.", e);
                 mModuleVersion = null;
@@ -124,7 +123,8 @@ public class MainlineModuleVersionPreferenceController extends BasePreferenceCon
             return mModuleVersion;
         }
 
-        return DateFormat.getLongDateFormat(mContext).format(parsedDate.get());
+        String format = DateFormat.getBestDateTimePattern(Locale.getDefault(), "dMMMMyyyy");
+        return DateFormat.format(format, parsedDate.get());
     }
 
     private Optional<Date> parseDateFromVersionName(String text) {
