@@ -56,6 +56,7 @@ import java.util.List;
 @RunWith(RobolectricTestRunner.class)
 public class ZenModesBackendTest {
 
+    private static final String ZEN_RULE_ID = "rule";
     private static final AutomaticZenRule ZEN_RULE =
             new AutomaticZenRule.Builder("Driving", Uri.parse("drive"))
                     .setType(AutomaticZenRule.TYPE_DRIVING)
@@ -63,19 +64,46 @@ public class ZenModesBackendTest {
                     .setZenPolicy(new ZenPolicy.Builder().allowAllSounds().build())
                     .build();
 
-    private static final ZenMode MANUAL_DND_MODE = ZenMode.manualDndMode(
+    private static final AutomaticZenRule MANUAL_DND_RULE =
             new AutomaticZenRule.Builder("Do Not Disturb", Uri.EMPTY)
                     .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
                     .setZenPolicy(new ZenPolicy.Builder().allowAllSounds().build())
-                    .build());
-
-    private static final ZenMode ZEN_RULE_MODE = new ZenMode("rule", ZEN_RULE);
+                    .build();
 
     @Mock
     private NotificationManager mNm;
 
     private Context mContext;
     private ZenModesBackend mBackend;
+
+    // Helper methods to add active/inactive rule state to a config. Returns a copy.
+    private ZenModeConfig configWithManualRule(ZenModeConfig base, boolean active) {
+        ZenModeConfig out = base.copy();
+        if (!active) {
+            out.manualRule = null;
+        } else {
+            out.manualRule = new ZenModeConfig.ZenRule();
+        }
+        return out;
+    }
+
+    private ZenModeConfig configWithRule(ZenModeConfig base, String ruleId, AutomaticZenRule rule,
+            boolean active) {
+        ZenModeConfig out = base.copy();
+
+        // Note that there are many other fields of zenRule, but here we only set the ones
+        // relevant to determining whether or not it is active.
+        ZenModeConfig.ZenRule zenRule = new ZenModeConfig.ZenRule();
+        zenRule.pkg = "package";
+        zenRule.enabled = active;
+        zenRule.snoozing = false;
+        zenRule.condition = new Condition(rule.getConditionId(), "",
+                active ? Condition.STATE_TRUE : Condition.STATE_FALSE,
+                Condition.SOURCE_USER_ACTION);
+        out.automaticRules.put(ruleId, zenRule);
+
+        return out;
+    }
 
     @Before
     public void setup() {
@@ -85,6 +113,10 @@ public class ZenModesBackendTest {
 
         mContext = RuntimeEnvironment.application;
         mBackend = new ZenModesBackend(mContext);
+
+        // Default catch-all case with no data. This isn't realistic, but tests below that rely
+        // on the config to get data on rules active will create those individually.
+        when(mNm.getZenModeConfig()).thenReturn(new ZenModeConfig());
     }
 
     @Test
@@ -102,6 +134,7 @@ public class ZenModesBackendTest {
 
         List<ZenMode> modes = mBackend.getModes();
 
+        // all modes exist, but none of them are currently active
         assertThat(modes).containsExactly(
                 ZenMode.manualDndMode(
                         new AutomaticZenRule.Builder(
@@ -112,9 +145,10 @@ public class ZenModesBackendTest {
                                 .setTriggerDescription(
                                         mContext.getString(R.string.zen_mode_settings_summary))
                                 .setManualInvocationAllowed(true)
-                                .build()),
-                new ZenMode("rule1", ZEN_RULE),
-                new ZenMode("rule2", rule2))
+                                .build(),
+                        false),
+                new ZenMode("rule1", ZEN_RULE, false),
+                new ZenMode("rule2", rule2, false))
                 .inOrder();
     }
 
@@ -136,26 +170,70 @@ public class ZenModesBackendTest {
                                 .setTriggerDescription(
                                         mContext.getString(R.string.zen_mode_settings_summary))
                                 .setManualInvocationAllowed(true)
-                                .build()));
+                                .build(), false));
     }
 
     @Test
     public void getMode_zenRule_returnsMode() {
-        when(mNm.getAutomaticZenRule(eq("rule"))).thenReturn(ZEN_RULE);
+        when(mNm.getAutomaticZenRule(eq(ZEN_RULE_ID))).thenReturn(ZEN_RULE);
 
-        ZenMode mode = mBackend.getMode("rule");
+        ZenMode mode = mBackend.getMode(ZEN_RULE_ID);
 
-        assertThat(mode).isEqualTo(new ZenMode("rule", ZEN_RULE));
+        assertThat(mode).isEqualTo(new ZenMode(ZEN_RULE_ID, ZEN_RULE, false));
     }
 
     @Test
     public void getMode_missingRule_returnsNull() {
         when(mNm.getAutomaticZenRule(any())).thenReturn(null);
 
-        ZenMode mode = mBackend.getMode("rule");
+        ZenMode mode = mBackend.getMode(ZEN_RULE_ID);
 
         assertThat(mode).isNull();
-        verify(mNm).getAutomaticZenRule(eq("rule"));
+        verify(mNm).getAutomaticZenRule(eq(ZEN_RULE_ID));
+    }
+
+    @Test
+    public void getMode_manualDnd_returnsCorrectActiveState() {
+        // Set up a base config with an active rule to make sure we're looking at the correct info
+        ZenModeConfig configWithActiveRule = configWithRule(new ZenModeConfig(), ZEN_RULE_ID,
+                ZEN_RULE, true);
+        when(mNm.getZenModeConfig()).thenReturn(configWithActiveRule);
+
+        // Equivalent to disallowAllSounds()
+        Policy dndPolicy = new Policy(0, 0, 0);
+        when(mNm.getNotificationPolicy()).thenReturn(dndPolicy);
+
+        ZenMode mode = mBackend.getMode(ZenMode.MANUAL_DND_MODE_ID);
+
+        // By default, manual rule is inactive
+        assertThat(mode.isActive()).isFalse();
+
+        // Now the returned config will represent the manual rule being active
+        when(mNm.getZenModeConfig()).thenReturn(configWithManualRule(configWithActiveRule, true));
+        ZenMode activeMode = mBackend.getMode(ZenMode.MANUAL_DND_MODE_ID);
+        assertThat(activeMode.isActive()).isTrue();
+    }
+
+    @Test
+    public void getMode_zenRule_returnsCorrectActiveState() {
+        // Set up a base config that has an active manual rule and "rule2", to make sure we're
+        // looking at the correct rule's info.
+        ZenModeConfig configWithActiveRules = configWithRule(
+                configWithManualRule(new ZenModeConfig(), true),  // active manual rule
+                "rule2", ZEN_RULE, true);  // active rule 2
+
+        when(mNm.getAutomaticZenRule(eq(ZEN_RULE_ID))).thenReturn(ZEN_RULE);
+        when(mNm.getZenModeConfig()).thenReturn(
+                configWithRule(configWithActiveRules, ZEN_RULE_ID, ZEN_RULE, false));
+
+        // Round 1: the current config should indicate that the rule is not active
+        ZenMode mode = mBackend.getMode(ZEN_RULE_ID);
+        assertThat(mode.isActive()).isFalse();
+
+        when(mNm.getZenModeConfig()).thenReturn(
+                configWithRule(configWithActiveRules, ZEN_RULE_ID, ZEN_RULE, true));
+        ZenMode activeMode = mBackend.getMode(ZEN_RULE_ID);
+        assertThat(activeMode.isActive()).isTrue();
     }
 
     @Test
@@ -163,7 +241,7 @@ public class ZenModesBackendTest {
         ZenMode manualDnd = ZenMode.manualDndMode(
                 new AutomaticZenRule.Builder("DND", Uri.EMPTY)
                         .setZenPolicy(new ZenPolicy.Builder().allowAllSounds().build())
-                        .build());
+                        .build(), false);
 
         mBackend.updateMode(manualDnd);
 
@@ -173,7 +251,7 @@ public class ZenModesBackendTest {
 
     @Test
     public void updateMode_zenRule_updatesRule() {
-        ZenMode ruleMode = new ZenMode("rule", ZEN_RULE);
+        ZenMode ruleMode = new ZenMode("rule", ZEN_RULE, false);
 
         mBackend.updateMode(ruleMode);
 
@@ -182,7 +260,7 @@ public class ZenModesBackendTest {
 
     @Test
     public void activateMode_manualDnd_setsZenModeImportant() {
-        mBackend.activateMode(MANUAL_DND_MODE, null);
+        mBackend.activateMode(ZenMode.manualDndMode(MANUAL_DND_RULE, false), null);
 
         verify(mNm).setZenMode(eq(Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS), eq(null),
                 any(), eq(true));
@@ -190,7 +268,8 @@ public class ZenModesBackendTest {
 
     @Test
     public void activateMode_manualDndWithDuration_setsZenModeImportantWithCondition() {
-        mBackend.activateMode(MANUAL_DND_MODE, Duration.ofMinutes(30));
+        mBackend.activateMode(ZenMode.manualDndMode(MANUAL_DND_RULE, false),
+                Duration.ofMinutes(30));
 
         verify(mNm).setZenMode(eq(Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS),
                 eq(ZenModeConfig.toTimeCondition(mContext, 30, 0, true).id),
@@ -200,9 +279,9 @@ public class ZenModesBackendTest {
 
     @Test
     public void activateMode_zenRule_setsRuleStateActive() {
-        mBackend.activateMode(ZEN_RULE_MODE, null);
+        mBackend.activateMode(new ZenMode(ZEN_RULE_ID, ZEN_RULE, false), null);
 
-        verify(mNm).setAutomaticZenRuleState(eq(ZEN_RULE_MODE.getId()),
+        verify(mNm).setAutomaticZenRuleState(eq(ZEN_RULE_ID),
                 eq(new Condition(ZEN_RULE.getConditionId(), "", Condition.STATE_TRUE,
                         Condition.SOURCE_USER_ACTION)));
     }
@@ -210,34 +289,36 @@ public class ZenModesBackendTest {
     @Test
     public void activateMode_zenRuleWithDuration_fails() {
         assertThrows(IllegalArgumentException.class,
-                () -> mBackend.activateMode(ZEN_RULE_MODE, Duration.ofMinutes(30)));
+                () -> mBackend.activateMode(new ZenMode(ZEN_RULE_ID, ZEN_RULE, false),
+                        Duration.ofMinutes(30)));
     }
 
     @Test
     public void deactivateMode_manualDnd_setsZenModeOff() {
-        mBackend.deactivateMode(MANUAL_DND_MODE);
+        mBackend.deactivateMode(ZenMode.manualDndMode(MANUAL_DND_RULE, true));
 
         verify(mNm).setZenMode(eq(Settings.Global.ZEN_MODE_OFF), eq(null), any(), eq(true));
     }
 
     @Test
     public void deactivateMode_zenRule_setsRuleStateInactive() {
-        mBackend.deactivateMode(ZEN_RULE_MODE);
+        mBackend.deactivateMode(new ZenMode(ZEN_RULE_ID, ZEN_RULE, false));
 
-        verify(mNm).setAutomaticZenRuleState(eq(ZEN_RULE_MODE.getId()),
+        verify(mNm).setAutomaticZenRuleState(eq(ZEN_RULE_ID),
                 eq(new Condition(ZEN_RULE.getConditionId(), "", Condition.STATE_FALSE,
                         Condition.SOURCE_USER_ACTION)));
     }
 
     @Test
     public void removeMode_zenRule_deletesRule() {
-        mBackend.removeMode(ZEN_RULE_MODE);
+        mBackend.removeMode(new ZenMode(ZEN_RULE_ID, ZEN_RULE, false));
 
-        verify(mNm).removeAutomaticZenRule(ZEN_RULE_MODE.getId(), true);
+        verify(mNm).removeAutomaticZenRule(ZEN_RULE_ID, true);
     }
 
     @Test
     public void removeMode_manualDnd_fails() {
-        assertThrows(IllegalArgumentException.class, () -> mBackend.removeMode(MANUAL_DND_MODE));
+        assertThrows(IllegalArgumentException.class,
+                () -> mBackend.removeMode(ZenMode.manualDndMode(MANUAL_DND_RULE, false)));
     }
 }
