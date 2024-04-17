@@ -29,7 +29,7 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 
 import com.android.settings.R;
-import com.android.settings.network.SatelliteManagerUtil;
+import com.android.settings.network.SatelliteRepository;
 
 import com.google.common.util.concurrent.ListenableFuture;
 
@@ -58,8 +58,8 @@ public class SimSlotChangeReceiver extends BroadcastReceiver {
         if (shouldHandleSlotChange(context)) {
             Log.d(TAG, "Checking satellite enabled status");
             Executor executor = Executors.newSingleThreadExecutor();
-            ListenableFuture<Boolean> satelliteEnabledFuture = SatelliteManagerUtil
-                    .requestIsEnabled(context, executor);
+            ListenableFuture<Boolean> satelliteEnabledFuture = new SatelliteRepository(context)
+                    .requestIsEnabled(executor);
             satelliteEnabledFuture.addListener(() -> {
                 boolean isSatelliteEnabled = false;
                 try {
