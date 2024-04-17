@@ -39,6 +39,9 @@ public interface PowerUsageFeatureProvider {
     /** Check whether the battery tips card is enabled in the battery usage page */
     boolean isBatteryTipsEnabled();
 
+    /** Check whether to log the optimization mode of app entry in period job */
+    boolean isAppOptimizationModeLogged();
+
     /**
      * Returns a threshold (in milliseconds) for the minimal screen on time in battery usage list
      */

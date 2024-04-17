@@ -345,10 +345,15 @@ public final class ConvertUtils {
 
     /** Converts from {@link Map<Long, BatteryDiffData>} to {@link List<BatteryUsageSlot>} */
     public static List<BatteryUsageSlot> convertToBatteryUsageSlotList(
-            final Map<Long, BatteryDiffData> batteryDiffDataMap) {
+            final Context context,
+            final Map<Long, BatteryDiffData> batteryDiffDataMap,
+            final boolean isAppOptimizationModeLogged) {
         List<BatteryUsageSlot> batteryUsageSlotList = new ArrayList<>();
+        final BatteryOptimizationModeCache optimizationModeCache =
+                isAppOptimizationModeLogged ? new BatteryOptimizationModeCache(context) : null;
         for (BatteryDiffData batteryDiffData : batteryDiffDataMap.values()) {
-            batteryUsageSlotList.add(convertToBatteryUsageSlot(batteryDiffData));
+            batteryUsageSlotList.add(
+                    convertToBatteryUsageSlot(batteryDiffData, optimizationModeCache));
         }
         return batteryUsageSlotList;
     }
@@ -479,9 +484,10 @@ public final class ConvertUtils {
         }
     }
 
-
     @VisibleForTesting
-    static BatteryUsageDiff convertToBatteryUsageDiff(BatteryDiffEntry batteryDiffEntry) {
+    static BatteryUsageDiff convertToBatteryUsageDiff(
+            final BatteryDiffEntry batteryDiffEntry,
+            final @Nullable BatteryOptimizationModeCache optimizationModeCache) {
         BatteryUsageDiff.Builder builder =
                 BatteryUsageDiff.newBuilder()
                         .setUid(batteryDiffEntry.mUid)
@@ -511,11 +517,18 @@ public final class ConvertUtils {
         if (batteryDiffEntry.mLegacyLabel != null) {
             builder.setLabel(batteryDiffEntry.mLegacyLabel);
         }
+        // Log the battery optimization mode of AppEntry while converting to batteryUsageSlot.
+        if (optimizationModeCache != null && !batteryDiffEntry.isSystemEntry()) {
+            builder.setAppOptimizationMode(
+                    optimizationModeCache.getBatteryOptimizeMode(
+                            (int) batteryDiffEntry.mUid, batteryDiffEntry.getPackageName()));
+        }
         return builder.build();
     }
 
     private static BatteryUsageSlot convertToBatteryUsageSlot(
-            final BatteryDiffData batteryDiffData) {
+            final BatteryDiffData batteryDiffData,
+            final @Nullable BatteryOptimizationModeCache optimizationModeCache) {
         if (batteryDiffData == null) {
             return BatteryUsageSlot.getDefaultInstance();
         }
@@ -527,10 +540,11 @@ public final class ConvertUtils {
                         .setEndBatteryLevel(batteryDiffData.getEndBatteryLevel())
                         .setScreenOnTime(batteryDiffData.getScreenOnTime());
         for (BatteryDiffEntry batteryDiffEntry : batteryDiffData.getAppDiffEntryList()) {
-            builder.addAppUsage(convertToBatteryUsageDiff(batteryDiffEntry));
+            builder.addAppUsage(convertToBatteryUsageDiff(batteryDiffEntry, optimizationModeCache));
         }
         for (BatteryDiffEntry batteryDiffEntry : batteryDiffData.getSystemDiffEntryList()) {
-            builder.addSystemUsage(convertToBatteryUsageDiff(batteryDiffEntry));
+            builder.addSystemUsage(
+                    convertToBatteryUsageDiff(batteryDiffEntry, /* optimizationModeCache= */ null));
         }
         return builder.build();
     }

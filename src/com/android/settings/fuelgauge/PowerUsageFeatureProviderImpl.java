@@ -84,6 +84,11 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
+    public boolean isAppOptimizationModeLogged() {
+        return false;
+    }
+
+    @Override
     public double getBatteryUsageListScreenOnTimeThresholdInMs() {
         return 0;
     }
