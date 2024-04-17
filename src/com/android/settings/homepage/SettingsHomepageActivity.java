@@ -194,7 +194,11 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         if (unprovisioned) {
             Log.e(TAG, "Device is not provisioned, exiting Settings");
             finish();
+            return;
         }
+
+        // Settings homepage should be the task root, otherwise there will be UI issues.
+        boolean isTaskRoot = isTaskRoot();
 
         mIsEmbeddingActivityEnabled = ActivityEmbeddingUtils.isEmbeddingActivityEnabled(this);
         if (mIsEmbeddingActivityEnabled) {
@@ -211,11 +215,32 @@ public class SettingsHomepageActivity extends FragmentActivity implements
                 } else {
                     intent.setPackage(getPackageName());
                 }
-                intent.removeFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                if (!isTaskRoot) {
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                } else {
+                    intent.removeFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                }
                 startActivityAsUser(intent, um.getProfileParent(userInfo.id).getUserHandle());
                 finish();
                 return;
             }
+        }
+
+        if (!isTaskRoot) {
+            if ((getIntent().getFlags() & Intent.FLAG_ACTIVITY_NEW_TASK) != 0) {
+                Log.i(TAG, "Activity has been started, finishing");
+            } else {
+                Log.i(TAG, "Homepage should be started with FLAG_ACTIVITY_NEW_TASK, restarting");
+                Intent intent = new Intent(getIntent())
+                        .setPackage(getPackageName())
+                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                                | Intent.FLAG_ACTIVITY_FORWARD_RESULT)
+                        .putExtra(EXTRA_USER_HANDLE, getUser())
+                        .putExtra(EXTRA_INITIAL_REFERRER, getCurrentReferrer());
+                startActivity(intent);
+            }
+            finish();
+            return;
         }
 
         setupEdgeToEdge();

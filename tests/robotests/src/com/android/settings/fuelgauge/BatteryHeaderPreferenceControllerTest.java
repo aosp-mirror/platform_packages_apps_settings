@@ -17,6 +17,7 @@ package com.android.settings.fuelgauge;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -40,6 +41,7 @@ import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.LowBatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.SmartBatteryTip;
 import com.android.settings.testutils.BatteryTestUtils;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settings.widget.EntityHeaderController;
@@ -81,6 +83,7 @@ public class BatteryHeaderPreferenceControllerTest {
     private Context mContext;
     private ShadowPowerManager mShadowPowerManager;
     private Intent mBatteryIntent;
+    private FakeFeatureFactory mFactory;
 
     @Before
     public void setUp() {
@@ -103,6 +106,7 @@ public class BatteryHeaderPreferenceControllerTest {
         mBatteryInfo.batteryLevel = BATTERY_LEVEL;
 
         mShadowPowerManager = Shadows.shadowOf(mContext.getSystemService(PowerManager.class));
+        mFactory = FakeFeatureFactory.setupForTest();
 
         mController = spy(new BatteryHeaderPreferenceController(mContext, PREF_KEY));
         mController.mBatteryUsageProgressBarPref = mBatteryUsageProgressBarPref;
@@ -266,6 +270,56 @@ public class BatteryHeaderPreferenceControllerTest {
                         /* isFastCharging= */ false,
                         /* isChargingStringV2= */ true);
         var expectedChargingString = batteryInfo.remainingLabel;
+
+        mController.updateBatteryStatus(/* label= */ null, batteryInfo);
+
+        verify(mBatteryUsageProgressBarPref).setBottomSummary(expectedChargingString);
+    }
+
+    @Test
+    public void updateBatteryStatus_customizedWirelessChargingLabel_customizedLabel() {
+        var label = "Customized Wireless Charging Label";
+        var batteryInfo =
+                arrangeUpdateBatteryStatusTestWithRemainingLabel(
+                        /* remainingLabel= */ "Full by 1:30 PM",
+                        /* statusLabel= */ "Fast Charging",
+                        /* isFastCharging= */ true,
+                        /* isChargingStringV2= */ true);
+        batteryInfo.pluggedStatus = BatteryManager.BATTERY_PLUGGED_WIRELESS;
+        when(mFactory.batterySettingsFeatureProvider.getWirelessChargingLabel(eq(mContext),
+                any(BatteryInfo.class))).thenReturn(label);
+
+        mController.updateBatteryStatus(/* label= */ null, batteryInfo);
+
+        verify(mBatteryUsageProgressBarPref).setBottomSummary(label);
+    }
+
+    @Test
+    public void updateBatteryStatus_noCustomizedWirelessChargingLabel_statusWithRemainingLabel() {
+        var batteryInfo =
+                arrangeUpdateBatteryStatusTestWithRemainingLabel(
+                        /* remainingLabel= */ "Full by 1:30 PM",
+                        /* statusLabel= */ "Fast Charging",
+                        /* isFastCharging= */ true,
+                        /* isChargingStringV2= */ true);
+        batteryInfo.pluggedStatus = BatteryManager.BATTERY_PLUGGED_WIRELESS;
+        var expectedChargingString = batteryInfo.statusLabel + " • " + batteryInfo.remainingLabel;
+
+        mController.updateBatteryStatus(/* label= */ null, batteryInfo);
+
+        verify(mBatteryUsageProgressBarPref).setBottomSummary(expectedChargingString);
+    }
+
+    @Test
+    public void updateBatteryStatus_noCustomizedWirelessChargingLabel_v1StatusWithRemainingLabel() {
+        var batteryInfo =
+                arrangeUpdateBatteryStatusTestWithRemainingLabel(
+                        /* remainingLabel= */ "1 hr, 40 min left until full",
+                        /* statusLabel= */ "Charging wirelessly",
+                        /* isFastCharging= */ false,
+                        /* isChargingStringV2= */ false);
+        batteryInfo.pluggedStatus = BatteryManager.BATTERY_PLUGGED_WIRELESS;
+        var expectedChargingString = batteryInfo.statusLabel + " • " + batteryInfo.remainingLabel;
 
         mController.updateBatteryStatus(/* label= */ null, batteryInfo);
 

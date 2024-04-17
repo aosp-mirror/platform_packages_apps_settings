@@ -83,7 +83,7 @@ object SimOnboardingPageProvider : SettingsPageProvider {
     ): String = "${name}/$subId"
 }
 
-private fun Context.getActivity(): Activity? = when (this) {
+fun Context.getActivity(): Activity? = when (this) {
     is Activity -> this
     is ContextWrapper -> baseContext.getActivity()
     else -> null
