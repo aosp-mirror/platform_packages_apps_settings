@@ -68,7 +68,7 @@ fun Context.isSubscriptionEnabledFlow(subId: Int) = subscriptionsChangedFlow().m
     .flowOn(Dispatchers.Default)
 
 fun Context.phoneNumberFlow(subscriptionInfo: SubscriptionInfo) = subscriptionsChangedFlow().map {
-    SubscriptionUtil.getFormattedPhoneNumber(this, subscriptionInfo)
+    SubscriptionUtil.getBidiFormattedPhoneNumber(this, subscriptionInfo)
 }.filterNot { it.isNullOrEmpty() }.flowOn(Dispatchers.Default)
 
 fun Context.subscriptionsChangedFlow() = callbackFlow {
