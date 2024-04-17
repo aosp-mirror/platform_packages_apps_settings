@@ -19,6 +19,7 @@ package com.android.settings.spa.network
 import android.content.Context
 import android.content.IntentFilter
 import android.os.Bundle
+import android.provider.Settings
 import android.telephony.SubscriptionInfo
 import android.telephony.SubscriptionManager
 import android.telephony.TelephonyManager
@@ -57,6 +58,7 @@ import com.android.settingslib.spa.widget.preference.PreferenceModel
 import com.android.settingslib.spa.widget.scaffold.RegularScaffold
 import com.android.settingslib.spa.widget.ui.Category
 import com.android.settingslib.spaprivileged.framework.common.broadcastReceiverFlow
+import com.android.settingslib.spaprivileged.settingsprovider.settingsGlobalBooleanFlow
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -109,6 +111,8 @@ object NetworkCellularGroupProvider : SettingsPageProvider {
         }
 
         val subscriptionViewModel = viewModel<SubscriptionInfoListViewModel>()
+
+        CollectAirplaneModeAndFinishIfOn()
 
         remember {
             allOfFlows(context, subscriptionViewModel.selectableSubscriptionInfoListFlow)
@@ -327,6 +331,17 @@ fun PrimarySimSectionImpl(
     }
 }
 
+@Composable
+fun CollectAirplaneModeAndFinishIfOn() {
+    val context = LocalContext.current
+    context.settingsGlobalBooleanFlow(Settings.Global.AIRPLANE_MODE_ON)
+        .collectLatestWithLifecycle(LocalLifecycleOwner.current) { isAirplaneModeOn ->
+            if (isAirplaneModeOn) {
+                context.getActivity()?.finish()
+            }
+        }
+}
+
 private fun getWifiPickerTrackerHelper(
     context: Context,
     lifecycleOwner: LifecycleOwner
@@ -336,6 +351,7 @@ private fun getWifiPickerTrackerHelper(
         null /* WifiPickerTrackerCallback */
     )
 }
+
 private fun Context.defaultVoiceSubscriptionFlow(): Flow<Int> =
         merge(
                 flowOf(null), // kick an initial value
