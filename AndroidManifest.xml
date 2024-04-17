@@ -822,6 +822,7 @@
 
         <activity android:name=".network.SimOnboardingActivity"
             android:exported="false"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenSize|screenLayout|smallestScreenSize"
             android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS"
             android:theme="@style/Theme.SpaLib.BottomSheetDialog"/>
 
