@@ -16,6 +16,7 @@
 
 package com.android.settings.network.telephony;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -28,20 +29,21 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 /** This dialog activity advise the user to have connectivity if the eSIM uses a RAC. */
 public class EuiccRacConnectivityDialogActivity extends FragmentActivity
         implements WarningDialogFragment.OnConfirmListener {
 
     private static final String TAG = "EuiccRacConnectivityDialogActivity";
-    // Dialog tags
-    private static final int DIALOG_TAG_ERASE_ANYWAY_CONFIRMATION = 1;
     private static final String ARG_SUB_ID = "sub_id";
     private static final String ARG_RESET_MOBILE_NETWORK_ID = "reset_mobile_netword_id";
 
     private int mSubId;
     @Nullable
     private Intent mResetMobileNetworkIntent;
+    private MetricsFeatureProvider mMetricsFeatureProvider;
 
     /**
      * Returns an intent of EuiccRacConnectivityDialogActivity for Settings: erase eSIM.
@@ -80,6 +82,7 @@ public class EuiccRacConnectivityDialogActivity extends FragmentActivity
         mSubId = intent.getIntExtra(ARG_SUB_ID, SubscriptionManager.INVALID_SUBSCRIPTION_ID);
         mResetMobileNetworkIntent =
                 intent.getParcelableExtra(ARG_RESET_MOBILE_NETWORK_ID, Intent.class);
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
 
         if (savedInstanceState == null) {
             showConnectivityWarningDialog();
@@ -88,20 +91,26 @@ public class EuiccRacConnectivityDialogActivity extends FragmentActivity
 
     @Override
     public void onConfirm(int tag, boolean confirmed) {
+        if (tag == SettingsEnums.ACTION_SETTINGS_ESIM_RAC_CONNECTIVITY_WARNING
+                || tag == SettingsEnums.ACTION_RESET_MOBILE_NETWORK_RAC_CONNECTIVITY_WARNING) {
+            mMetricsFeatureProvider.action(this, tag, confirmed ? 1 : 0);
+        }
+
         if (!confirmed) {
             finish();
             return;
         }
 
+        finish();
         switch (tag) {
-            case DIALOG_TAG_ERASE_ANYWAY_CONFIRMATION:
-                finish();
+            case SettingsEnums.ACTION_SETTINGS_ESIM_RAC_CONNECTIVITY_WARNING:
+                Log.i(TAG, "Show dialogue activity that handles deleting eSIM profile");
+                startActivity(DeleteEuiccSubscriptionDialogActivity.getIntent(this, mSubId));
+                break;
+            case SettingsEnums.ACTION_RESET_MOBILE_NETWORK_RAC_CONNECTIVITY_WARNING:
                 if (mResetMobileNetworkIntent != null) {
                     Log.i(TAG, "Show fragment activity that handles mobile network settings reset");
                     new SubSettingLauncher(this).launchWithIntent(mResetMobileNetworkIntent);
-                } else {
-                    Log.i(TAG, "Show dialogue activity that handles deleting eSIM profiles");
-                    startActivity(DeleteEuiccSubscriptionDialogActivity.getIntent(this, mSubId));
                 }
                 break;
             default:
@@ -115,10 +124,19 @@ public class EuiccRacConnectivityDialogActivity extends FragmentActivity
         WarningDialogFragment.show(
                 this,
                 WarningDialogFragment.OnConfirmListener.class,
-                DIALOG_TAG_ERASE_ANYWAY_CONFIRMATION,
+                getMetricsTag(),
                 getString(R.string.wifi_warning_dialog_title),
                 getString(R.string.wifi_warning_dialog_text),
                 getString(R.string.wifi_warning_continue_button),
                 getString(R.string.wifi_warning_return_button));
+    }
+
+    /* Get the metrics tag depending on the intent. */
+    private int getMetricsTag() {
+        if (mResetMobileNetworkIntent != null) {
+            return SettingsEnums.ACTION_RESET_MOBILE_NETWORK_RAC_CONNECTIVITY_WARNING;
+        } else {
+            return SettingsEnums.ACTION_SETTINGS_ESIM_RAC_CONNECTIVITY_WARNING;
+        }
     }
 }
