@@ -16,6 +16,7 @@
 
 package com.android.settings.spa.app.appinfo
 
+import android.app.ActivityManager
 import android.app.settings.SettingsEnums
 import android.content.Context
 import android.content.Intent
@@ -154,6 +155,13 @@ class PackageInfoPresenter(
         logAction(SettingsEnums.ACTION_APP_FORCE_STOP)
         coroutineScope.launch(Dispatchers.Default) {
             Log.d(TAG, "Stopping package $packageName")
+            if (android.app.Flags.appRestrictionsApi()) {
+                val uid = userPackageManager.getPackageUid(packageName, 0)
+                context.activityManager.noteAppRestrictionEnabled(
+                    packageName, uid,
+                    ActivityManager.RESTRICTION_LEVEL_FORCE_STOPPED, true,
+                    ActivityManager.RESTRICTION_REASON_USER, "settings", 0)
+            }
             context.activityManager.forceStopPackageAsUser(packageName, userId)
         }
     }

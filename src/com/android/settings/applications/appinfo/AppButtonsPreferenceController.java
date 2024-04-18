@@ -558,6 +558,11 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
         ActivityManager am = (ActivityManager) mActivity.getSystemService(
                 Context.ACTIVITY_SERVICE);
         Log.d(TAG, "Stopping package " + pkgName);
+        if (android.app.Flags.appRestrictionsApi()) {
+            am.noteAppRestrictionEnabled(pkgName, mAppEntry.info.uid,
+                    ActivityManager.RESTRICTION_LEVEL_FORCE_STOPPED, true,
+                    ActivityManager.RESTRICTION_REASON_USER, "settings", 0L);
+        }
         am.forceStopPackage(pkgName);
         int userId = UserHandle.getUserId(mAppEntry.info.uid);
         mState.invalidatePackage(pkgName, userId);
