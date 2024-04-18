@@ -31,6 +31,7 @@ import static com.android.settings.network.telephony.TelephonyConstants.Telephon
 import static com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants.NETWORK_MODE_NR_LTE_CDMA_EVDO;
 import static com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants.NETWORK_MODE_NR_LTE_GSM_WCDMA;
 
+import android.app.KeyguardManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -41,13 +42,18 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
+import android.hardware.biometrics.BiometricPrompt;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.os.Bundle;
+import android.os.CancellationSignal;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.PersistableBundle;
 import android.os.SystemClock;
 import android.os.SystemProperties;
+import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.telecom.PhoneAccountHandle;
@@ -68,6 +74,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 
@@ -1049,4 +1056,53 @@ public class MobileNetworkUtils {
                 .launch();
     }
 
+    /**
+     * Shows authentication screen to confirm credentials (pin/pattern/password) for the current
+     * user of the device.
+     *
+     * <p>Similar to WifiDppUtils.showLockScreen(), but doesn't check for the existence of
+     * SIM PIN lock, only screen PIN lock.
+     *
+     * @param context The {@code Context} used to get {@link KeyguardManager} service
+     * @param onSuccess The {@code Runnable} which will be executed if the user does not setup
+     *                  device security or if lock screen is unlocked
+     */
+    public static void showLockScreen(@NonNull Context context, @NonNull Runnable onSuccess) {
+        final KeyguardManager keyguardManager =
+                context.getSystemService(KeyguardManager.class);
+
+        if (keyguardManager.isDeviceSecure()) {
+            final BiometricPrompt.AuthenticationCallback authenticationCallback =
+                    new BiometricPrompt.AuthenticationCallback() {
+                        @Override
+                        public void onAuthenticationSucceeded(
+                                    BiometricPrompt.AuthenticationResult result) {
+                            onSuccess.run();
+                        }
+
+                        @Override
+                        public void onAuthenticationError(int errorCode, CharSequence errString) {
+                            // Do nothing
+                        }
+            };
+
+            final int userId = UserHandle.myUserId();
+            final BiometricPrompt biometricPrompt = new BiometricPrompt.Builder(context)
+                    .setTitle(context.getText(R.string.wifi_dpp_lockscreen_title))
+                    .setDeviceCredentialAllowed(true)
+                    .setTextForDeviceCredential(
+                        /* title= */ null,
+                        Utils.getConfirmCredentialStringForUser(
+                                context, userId, Utils.getCredentialType(context, userId)),
+                        /* description= */ null)
+                    .build();
+            final Handler handler = new Handler(Looper.getMainLooper());
+            biometricPrompt.authenticate(
+                    new CancellationSignal(),
+                    handler::post,
+                    authenticationCallback);
+        } else {
+            onSuccess.run();
+        }
+    }
 }
