@@ -228,6 +228,8 @@ public class BatteryTestUtils {
 
     /** Create a power anomaly event proto of adaptive brightness. */
     public static PowerAnomalyEvent createAdaptiveBrightnessAnomalyEvent(boolean changeSettings) {
+        // TODO: migrate "auto_brightness_entry" to use R.string.preference_key_auto_brightness
+        //  if we can access the Context here. (b/338314718)
         WarningBannerInfo.Builder warningBannerInfoBuilder =
                 WarningBannerInfo.newBuilder()
                         .setMainButtonDestination(DisplaySettings.class.getName())
