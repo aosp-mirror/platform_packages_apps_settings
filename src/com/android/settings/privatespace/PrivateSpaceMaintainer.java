@@ -293,7 +293,6 @@ public class PrivateSpaceMaintainer {
      */
     public synchronized void unlockPrivateSpace(IntentSender intentSender) {
         if (mUserHandle != null) {
-            Log.d(TAG, "Calling requestQuietModeEnabled to disableQuietMode");
             mUserManager.requestQuietModeEnabled(false, mUserHandle, intentSender);
         }
     }
@@ -374,7 +373,6 @@ public class PrivateSpaceMaintainer {
      */
     private final class ProfileAvailabilityBroadcastReceiver extends BroadcastReceiver {
         void register() {
-            Log.d(TAG, "Registering the receiver");
             IntentFilter filter = new IntentFilter();
             filter.addAction(Intent.ACTION_PROFILE_UNAVAILABLE);
             mContext.registerReceiver(/* receiver= */ this, filter, Context.RECEIVER_NOT_EXPORTED);
