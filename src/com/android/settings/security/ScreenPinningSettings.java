@@ -240,9 +240,9 @@ public class ScreenPinningSettings extends SettingsPreferenceFragment
             mUseScreenLock.setChecked(isScreenLockUsed());
             mUseScreenLock.setTitle(getCurrentSecurityTitle(mLockPatternUtils));
         } else {
-            mFooterPreference.setSummary(getAppPinningContent());
             mUseScreenLock.setEnabled(false);
         }
+        mFooterPreference.setSummary(getAppPinningContent());
     }
 
     private boolean isGuestModeSupported() {
