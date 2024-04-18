@@ -33,7 +33,7 @@ import androidx.fragment.app.FragmentManager;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.system.ResetDashboardFragment;
-import com.android.settings.wifi.dpp.WifiDppUtils;
+import com.android.settings.network.telephony.MobileNetworkUtils;
 
 public class EraseEuiccDataDialogFragment extends InstrumentedDialogFragment implements
         DialogInterface.OnClickListener {
@@ -78,7 +78,7 @@ public class EraseEuiccDataDialogFragment extends InstrumentedDialogFragment imp
 
         if (which == DialogInterface.BUTTON_POSITIVE) {
             Context context = getContext();
-            WifiDppUtils.showLockScreen(context, () -> runAsyncWipe(context));
+            MobileNetworkUtils.showLockScreen(context, () -> runAsyncWipe(context));
         }
     }
 
