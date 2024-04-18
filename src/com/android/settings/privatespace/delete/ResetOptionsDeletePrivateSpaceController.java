@@ -125,7 +125,7 @@ public class ResetOptionsDeletePrivateSpaceController extends BasePreferenceCont
         public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
             Context context = getContext();
             return new AlertDialog.Builder(context)
-                    .setTitle(R.string.reset_private_space_delete_title)
+                    .setTitle(R.string.private_space_delete_header)
                     .setMessage(R.string.reset_private_space_delete_dialog)
                     .setPositiveButton(
                             R.string.private_space_delete_button_label,
