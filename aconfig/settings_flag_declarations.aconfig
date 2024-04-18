@@ -28,3 +28,10 @@ flag {
     description: "Feature flag to enable new settings homepage UX."
     bug: "321612737"
 }
+
+flag {
+    name: "dynamic_injection_category"
+    namespace: "android_settings"
+    description: "Feature flag to enable injection into PreferenceCategory."
+    bug: "333547416"
+}
