@@ -35,3 +35,10 @@ flag {
     description: "Feature flag to enable injection into PreferenceCategory."
     bug: "333547416"
 }
+
+flag {
+    name: "slices_retirement"
+    namespace: "android_settings"
+    description: "Feature flag to remove relevant slices dependencies."
+    bug: "297367302"
+}
