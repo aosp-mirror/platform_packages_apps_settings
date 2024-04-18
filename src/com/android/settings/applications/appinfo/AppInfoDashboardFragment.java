@@ -642,7 +642,6 @@ public class AppInfoDashboardFragment extends DashboardFragment
         // Create new intent to launch Uninstaller activity
         final Uri packageURI = Uri.parse("package:" + packageName);
         final Intent uninstallIntent = new Intent(Intent.ACTION_UNINSTALL_PACKAGE, packageURI);
-        uninstallIntent.setPackage(getString(R.string.config_package_installer_package_name));
         uninstallIntent.putExtra(Intent.EXTRA_UNINSTALL_ALL_USERS, allUsers);
         mMetricsFeatureProvider.action(
                 getContext(), SettingsEnums.ACTION_SETTINGS_UNINSTALL_APP);

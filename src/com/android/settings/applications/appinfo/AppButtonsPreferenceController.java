@@ -539,8 +539,6 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
         // Create new intent to launch Uninstaller activity
         Uri packageUri = Uri.parse("package:" + packageName);
         Intent uninstallIntent = new Intent(Intent.ACTION_UNINSTALL_PACKAGE, packageUri);
-        uninstallIntent.setPackage(mContext.getString(
-                R.string.config_package_installer_package_name));
         uninstallIntent.putExtra(Intent.EXTRA_UNINSTALL_ALL_USERS, allUsers);
 
         mMetricsFeatureProvider.action(mActivity, SettingsEnums.ACTION_SETTINGS_UNINSTALL_APP);
