@@ -404,7 +404,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         }
     }
 
-    String getSlotInformation() {
+    String getSlotInformation(boolean isAccessibilityText) {
         if (mDailyViewModel == null || mHourlyViewModels == null) {
             // No data
             return null;
@@ -413,13 +413,20 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             return null;
         }
 
-        final String selectedDayText = mDailyViewModel.getFullText(mDailyChartIndex);
+        final String selectedDayText =
+                isAccessibilityText
+                        ? mDailyViewModel.getContentDescription(mDailyChartIndex)
+                        : mDailyViewModel.getFullText(mDailyChartIndex);
         if (mHourlyChartIndex == BatteryChartViewModel.SELECTED_INDEX_ALL) {
             return selectedDayText;
         }
 
         final String selectedHourText =
-                mHourlyViewModels.get(mDailyChartIndex).getFullText(mHourlyChartIndex);
+                isAccessibilityText
+                        ? mHourlyViewModels
+                                .get(mDailyChartIndex)
+                                .getContentDescription(mHourlyChartIndex)
+                        : mHourlyViewModels.get(mDailyChartIndex).getFullText(mHourlyChartIndex);
         if (isBatteryLevelDataInOneDay()) {
             return selectedHourText;
         }
@@ -444,7 +451,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     }
 
     private String getAccessibilityAnnounceMessage() {
-        final String slotInformation = getSlotInformation();
+        final String slotInformation = getSlotInformation(/* isAccessibilityText= */ true);
         final String slotInformationMessage =
                 slotInformation == null
                         ? mPrefContext.getString(
@@ -601,6 +608,11 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     private abstract class BaseLabelTextGenerator
             implements BatteryChartViewModel.LabelTextGenerator {
         @Override
+        public String generateContentDescription(List<Long> timestamps, int index) {
+            return generateFullText(timestamps, index);
+        }
+
+        @Override
         public String generateSlotBatteryLevelText(List<Integer> levels, int index) {
             final int fromBatteryLevelIndex =
                     index == BatteryChartViewModel.SELECTED_INDEX_ALL ? 0 : index;
@@ -671,6 +683,16 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
                             R.string.battery_usage_timestamps_hyphen,
                             generateText(timestamps, index),
                             generateText(timestamps, index + 1));
+        }
+
+        @Override
+        public String generateContentDescription(List<Long> timestamps, int index) {
+            return index == timestamps.size() - 1
+                    ? generateText(timestamps, index)
+                    : mContext.getString(
+                    R.string.battery_usage_timestamps_content_description,
+                    generateText(timestamps, index),
+                    generateText(timestamps, index + 1));
         }
 
         HourlyChartLabelTextGenerator updateSpecialCaseContext(
