@@ -141,7 +141,7 @@ class ZenModesBackend {
 
     void deactivateMode(ZenMode mode) {
         if (mode.isManualDnd()) {
-            // TODO: b/326061620 - This shouldn't snooze any rules that are active.
+            // When calling with fromUser=true this will not snooze other modes.
             mNotificationManager.setZenMode(Settings.Global.ZEN_MODE_OFF, null, TAG,
                     /* fromUser= */ true);
         } else {
