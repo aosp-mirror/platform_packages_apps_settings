@@ -202,7 +202,6 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         final PreferenceCategory generalCategory = findPreference(KEY_GENERAL_CATEGORY);
         generalCategory.addPreference(mSettingsPreference);
 
-        addOneFingerPanningSetting(generalCategory);
         final MagnificationModePreferenceController magnificationModePreferenceController =
                 new MagnificationModePreferenceController(getContext(),
                         MagnificationModePreferenceController.PREF_KEY);
@@ -212,6 +211,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         addPreferenceController(magnificationModePreferenceController);
 
         addFollowTypingSetting(generalCategory);
+        addOneFingerPanningSetting(generalCategory);
         addAlwaysOnSetting(generalCategory);
         addJoystickSetting(generalCategory);
     }
@@ -302,6 +302,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
         var oneFingerPanningPreferenceController =
                 new MagnificationOneFingerPanningPreferenceController(getContext());
+        getSettingsLifecycle().addObserver(oneFingerPanningPreferenceController);
         oneFingerPanningPreferenceController.displayPreference(getPreferenceScreen());
         addPreferenceController(oneFingerPanningPreferenceController);
     }

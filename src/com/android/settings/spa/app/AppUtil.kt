@@ -20,7 +20,6 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.UserHandle
-import com.android.settings.R
 
 /**
  * Based on PackageManagerService design, and it looks like the suggested replacement in the
@@ -37,7 +36,6 @@ fun Context.startUninstallActivity(
     val packageUri = Uri.parse("package:$packageName")
 
     val intent = Intent(Intent.ACTION_UNINSTALL_PACKAGE, packageUri).apply {
-        setPackage(getString(R.string.config_package_installer_package_name))
         putExtra(Intent.EXTRA_UNINSTALL_ALL_USERS, forAllUsers)
     }
     startActivityAsUser(intent, userHandle)

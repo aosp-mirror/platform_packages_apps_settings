@@ -34,7 +34,6 @@ import android.util.Log;
 
 import androidx.fragment.app.FragmentActivity;
 
-import com.android.settings.R;
 import com.android.settings.Utils;
 
 import java.util.HashSet;
@@ -79,8 +78,6 @@ public class CloneBackend {
         // Create new intent to launch Uninstaller activity.
         Uri packageUri = Uri.parse("package:" + packageName);
         Intent uninstallIntent = new Intent(Intent.ACTION_UNINSTALL_PACKAGE, packageUri);
-        uninstallIntent.setPackage(mContext.getString(
-                R.string.config_package_installer_package_name));
         uninstallIntent.putExtra(Intent.EXTRA_UNINSTALL_ALL_USERS, allUsers);
         uninstallIntent.putExtra(Intent.EXTRA_USER, UserHandle.of(mCloneUserId));
         // Trigger uninstall as clone user.

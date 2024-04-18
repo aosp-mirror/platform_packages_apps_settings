@@ -539,8 +539,6 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
         // Create new intent to launch Uninstaller activity
         Uri packageUri = Uri.parse("package:" + packageName);
         Intent uninstallIntent = new Intent(Intent.ACTION_UNINSTALL_PACKAGE, packageUri);
-        uninstallIntent.setPackage(mContext.getString(
-                R.string.config_package_installer_package_name));
         uninstallIntent.putExtra(Intent.EXTRA_UNINSTALL_ALL_USERS, allUsers);
 
         mMetricsFeatureProvider.action(mActivity, SettingsEnums.ACTION_SETTINGS_UNINSTALL_APP);
@@ -558,6 +556,11 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
         ActivityManager am = (ActivityManager) mActivity.getSystemService(
                 Context.ACTIVITY_SERVICE);
         Log.d(TAG, "Stopping package " + pkgName);
+        if (android.app.Flags.appRestrictionsApi()) {
+            am.noteAppRestrictionEnabled(pkgName, mAppEntry.info.uid,
+                    ActivityManager.RESTRICTION_LEVEL_FORCE_STOPPED, true,
+                    ActivityManager.RESTRICTION_REASON_USER, "settings", 0L);
+        }
         am.forceStopPackage(pkgName);
         int userId = UserHandle.getUserId(mAppEntry.info.uid);
         mState.invalidatePackage(pkgName, userId);

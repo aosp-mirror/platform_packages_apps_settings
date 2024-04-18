@@ -21,26 +21,42 @@ import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.database.ContentObserver;
+import android.net.Uri;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.Settings;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.TwoStatePreference;
 
-import com.android.server.accessibility.Flags;
 import com.android.settings.R;
+import com.android.settings.accessibility.MagnificationCapabilities.MagnificationMode;
 import com.android.settings.core.TogglePreferenceController;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnPause;
+import com.android.settingslib.core.lifecycle.events.OnResume;
 
 public class MagnificationOneFingerPanningPreferenceController
-        extends TogglePreferenceController {
+        extends TogglePreferenceController implements LifecycleObserver, OnResume, OnPause {
     static final String PREF_KEY = Settings.Secure.ACCESSIBILITY_SINGLE_FINGER_PANNING_ENABLED;
 
-    @Nullable
     private TwoStatePreference mSwitchPreference;
 
     @VisibleForTesting
     final boolean mDefaultValue;
+
+    @VisibleForTesting
+    final ContentObserver mContentObserver = new ContentObserver(
+            new Handler(Looper.getMainLooper())) {
+        @Override
+        public void onChange(boolean selfChange, @Nullable Uri uri) {
+            updateState(mSwitchPreference);
+        }
+    };
 
     public MagnificationOneFingerPanningPreferenceController(Context context) {
         super(context, PREF_KEY);
@@ -55,9 +71,18 @@ public class MagnificationOneFingerPanningPreferenceController
     }
 
     @Override
+    public void onResume() {
+        MagnificationCapabilities.registerObserver(mContext, mContentObserver);
+    }
+
+    @Override
+    public void onPause() {
+        MagnificationCapabilities.unregisterObserver(mContext, mContentObserver);
+    }
+
+    @Override
     public int getAvailabilityStatus() {
-        return (Flags.enableMagnificationOneFingerPanningGesture())
-                ? AVAILABLE : DISABLED_FOR_USER;
+        return AVAILABLE;
     }
 
     @Override
@@ -73,14 +98,17 @@ public class MagnificationOneFingerPanningPreferenceController
         var toReturn = Settings.Secure.putInt(mContext.getContentResolver(),
                 PREF_KEY,
                 (isChecked ? ON : OFF));
-        if (mSwitchPreference != null) {
-            refreshSummary(mSwitchPreference);
-        }
+        refreshSummary(mSwitchPreference);
         return toReturn;
     }
 
     @Override
     public CharSequence getSummary() {
+        if (!mSwitchPreference.isEnabled()) {
+            return mContext.getString(
+                    R.string.accessibility_magnification_one_finger_panning_summary_unavailable);
+        }
+
         return (isChecked())
                 ? mContext.getString(
                         R.string.accessibility_magnification_one_finger_panning_summary_on)
@@ -97,6 +125,20 @@ public class MagnificationOneFingerPanningPreferenceController
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mSwitchPreference = screen.findPreference(getPreferenceKey());
-        refreshSummary(mSwitchPreference);
+        updateState(mSwitchPreference);
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+
+        if (preference == null) {
+            return;
+        }
+        @MagnificationMode int mode =
+                MagnificationCapabilities.getCapabilities(mContext);
+        preference.setEnabled(
+                mode == MagnificationMode.FULLSCREEN || mode == MagnificationMode.ALL);
+        refreshSummary(preference);
     }
 }

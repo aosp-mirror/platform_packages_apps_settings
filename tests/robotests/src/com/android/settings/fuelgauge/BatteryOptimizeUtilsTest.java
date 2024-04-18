@@ -206,8 +206,8 @@ public class BatteryOptimizeUtilsTest {
         TimeUnit.SECONDS.sleep(1);
 
         verify(mMockBatteryUtils, never()).setForceAppStandby(anyInt(), anyString(), anyInt());
-        verify(mMockBackend, never()).addApp(anyString());
-        verify(mMockBackend, never()).removeApp(anyString());
+        verify(mMockBackend, never()).addApp(anyString(), anyInt());
+        verify(mMockBackend, never()).removeApp(anyString(), anyInt());
         verifyNoInteractions(mObserver);
     }
 
@@ -358,9 +358,9 @@ public class BatteryOptimizeUtilsTest {
     private void verifySetAppOptimizationMode(int appStandbyMode, boolean allowListed) {
         verify(mMockBatteryUtils).setForceAppStandby(UID, PACKAGE_NAME, appStandbyMode);
         if (allowListed) {
-            verify(mMockBackend).addApp(PACKAGE_NAME);
+            verify(mMockBackend).addApp(PACKAGE_NAME, UID);
         } else {
-            verify(mMockBackend).removeApp(PACKAGE_NAME);
+            verify(mMockBackend).removeApp(PACKAGE_NAME, UID);
         }
     }
 }
