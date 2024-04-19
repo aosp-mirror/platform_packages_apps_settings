@@ -68,7 +68,7 @@ public final class ScreenOnTimeControllerTest {
     @Test
     public void handleSceenOnTimeUpdated_nullScreenOnTime_hideAllPreference() {
         mScreenOnTimeController.handleSceenOnTimeUpdated(
-                /* screenOnTime= */ null, "Friday 12:00-now");
+                /* screenOnTime= */ null, "Friday 12:00 to now");
 
         verify(mRootPreference).setVisible(false);
         verify(mScreenOnTimeTextPreference).setVisible(false);
@@ -84,9 +84,9 @@ public final class ScreenOnTimeControllerTest {
 
     @Test
     public void showCategoryTitle_notNull_slotTimestamp() {
-        mScreenOnTimeController.showCategoryTitle("Friday 12:00-now");
+        mScreenOnTimeController.showCategoryTitle("Friday 12:00 to now");
 
-        verify(mRootPreference).setTitle("Screen time for Friday 12:00-now");
+        verify(mRootPreference).setTitle("Screen time for Friday 12:00 to now");
         verify(mRootPreference).setVisible(true);
     }
 
