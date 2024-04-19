@@ -91,7 +91,6 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     private CheckBox mTripleTapTypeCheckBox;
     @Nullable private CheckBox mTwoFingerTripleTapTypeCheckBox;
     private DialogCreatable mDialogDelegate;
-    private MagnificationFollowTypingPreferenceController mFollowTypingPreferenceController;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -241,14 +240,14 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     }
 
     private void addFollowTypingSetting(PreferenceCategory generalCategory) {
-        var followTypingSwitchPreference = new SwitchPreferenceCompat(getPrefContext());
-        followTypingSwitchPreference.setTitle(
+        mFollowingTypingSwitchPreference = new SwitchPreferenceCompat(getPrefContext());
+        mFollowingTypingSwitchPreference.setTitle(
                 R.string.accessibility_screen_magnification_follow_typing_title);
-        followTypingSwitchPreference.setSummary(
+        mFollowingTypingSwitchPreference.setSummary(
                 R.string.accessibility_screen_magnification_follow_typing_summary);
-        followTypingSwitchPreference.setKey(
+        mFollowingTypingSwitchPreference.setKey(
                 MagnificationFollowTypingPreferenceController.PREF_KEY);
-        generalCategory.addPreference(followTypingSwitchPreference);
+        generalCategory.addPreference(mFollowingTypingSwitchPreference);
 
         var followTypingPreferenceController = new MagnificationFollowTypingPreferenceController(
                 getContext(), MagnificationFollowTypingPreferenceController.PREF_KEY);
