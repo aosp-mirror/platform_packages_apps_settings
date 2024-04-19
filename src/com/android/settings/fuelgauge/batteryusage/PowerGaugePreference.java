@@ -18,6 +18,7 @@ package com.android.settings.fuelgauge.batteryusage;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +48,7 @@ public class PowerGaugePreference extends AppPreference {
     private BatteryDiffEntry mBatteryDiffEntry;
     private CharSequence mContentDescription;
     private CharSequence mProgress;
+    private CharSequence mProgressContentDescription;
     private boolean mShowAnomalyIcon;
 
     public PowerGaugePreference(
@@ -87,6 +89,13 @@ public class PowerGaugePreference extends AppPreference {
     /** Sets the percentage to show. */
     public void setPercentage(CharSequence percentage) {
         mProgress = percentage;
+        mProgressContentDescription = percentage;
+        notifyChanged();
+    }
+
+    /** Sets the content description of the percentage. */
+    public void setPercentageContentDescription(CharSequence contentDescription) {
+        mProgressContentDescription = contentDescription;
         notifyChanged();
     }
 
@@ -133,6 +142,9 @@ public class PowerGaugePreference extends AppPreference {
 
         final TextView subtitle = (TextView) view.findViewById(R.id.widget_summary);
         subtitle.setText(mProgress);
+        if (!TextUtils.isEmpty(mProgressContentDescription)) {
+            subtitle.setContentDescription(mProgressContentDescription);
+        }
         if (mShowAnomalyIcon) {
             subtitle.setCompoundDrawablesRelativeWithIntrinsicBounds(
                     R.drawable.ic_warning_24dp, 0, 0, 0);
