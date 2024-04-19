@@ -1340,10 +1340,8 @@
     <string name="storage_settings" msgid="7472188817781592677">"저장용량"</string>
     <string name="storage_settings_for_app" msgid="229425418984637483">"저장용량 및 캐시"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"저장소 설정"</string>
-    <!-- no translation found for status_eid (3588471107671992684) -->
-    <skip />
-    <!-- no translation found for eid_multi_sim (6551259348909791790) -->
-    <skip />
+    <string name="status_eid" msgid="3588471107671992684">"E​ID"</string>
+    <string name="eid_multi_sim" msgid="6551259348909791790">"E​ID(SIM 슬롯 <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>)"</string>
     <string name="imei_multi_sim" msgid="9001570420423929507">"IMEI(SIM 슬롯 <xliff:g id="IMEI_SLOT_ID">%1$d</xliff:g>)"</string>
     <string name="imei_multi_sim_primary" msgid="7914653040843734282">"IMEI(SIM 슬롯 <xliff:g id="IMEI_SLOT_ID_PRIMARY">%1$d</xliff:g>)(기본)"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"확인하려면 저장된 네트워크를 선택하세요."</string>
@@ -2092,6 +2090,8 @@
     <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"한 손가락으로 패닝"</string>
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"한 손가락으로 드래그하여 확대 영역을 이동하세요."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"두 손가락으로 드래그하여 확대 영역을 이동하세요."</string>
+    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_unavailable (4302567514781245318) -->
+    <skip />
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"바로가기를 사용하여 확대"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"바로가기 및 세 번 탭으로 확대"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"<xliff:g id="SERVICE">%1$s</xliff:g> 정보"</string>
@@ -3631,8 +3631,8 @@
     <string name="notification_channels_other" msgid="18159805343647908">"기타"</string>
     <string name="no_channels" msgid="4716199078612071915">"이 앱에서 게시한 알림이 없음"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"앱 내 추가 설정"</string>
-    <string name="show_unused_channels" msgid="2754356124204058828">"사용하지 않는 채널 표시"</string>
-    <string name="hide_unused_channels" msgid="9049958190570733200">"사용하지 않는 채널 숨기기"</string>
+    <string name="show_unused_channels" msgid="4956292847964439078">"사용하지 않는 카테고리 표시"</string>
+    <string name="hide_unused_channels" msgid="2019739275175707170">"사용하지 않는 카테고리 숨기기"</string>
     <string name="deleted_channels" msgid="8489800381509312964">"{count,plural, =1{카테고리 #개 삭제됨}other{카테고리 #개 삭제됨}}"</string>
     <string name="app_notification_block_title" msgid="3880322745749900296">"모두 차단"</string>
     <string name="app_notification_block_summary" msgid="1804611676339341551">"이러한 알림을 다시 표시하지 않음"</string>
@@ -4651,7 +4651,7 @@
     <string name="summary_supported_service" msgid="4320535903444834786">"응급 서비스를 포함해 누구에게나 문자 메시지를 보낼 수 있습니다. 모바일 네트워크가 사용 가능해지면 휴대전화가 네트워크에 다시 연결됩니다."</string>
     <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"위성 메시지는 시간이 더 오래 소요될 수 있으며 일부 지역에서만 사용 가능합니다. 날씨 및 특정 구조물이 위성 연결에 영향을 미칠 수 있습니다. 위성 통화를 사용할 수 없습니다. 긴급 전화는 연결될 수 있습니다.\n\n계정 변경사항이 설정에 표시되는 데 다소 시간이 걸릴 수 있습니다. 자세한 내용은 이동통신사에 문의하세요."</string>
     <string name="more_about_satellite_messaging" msgid="3385673133561348509">"위성 메시지 자세히 알아보기"</string>
-    <string name="mobile_network_apn_title" msgid="5582995550142073054">"액세스 포인트 이름(APN)"</string>
+    <string name="mobile_network_apn_title" msgid="5582995550142073054">"액세스 포인트 네임(APN)"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"<xliff:g id="CARRIER">%1$s</xliff:g>에 연결된 경우 사용할 수 없음"</string>
     <string name="see_more" msgid="7499355691042812723">"더보기"</string>
@@ -4690,13 +4690,13 @@
     <string name="sim_onboarding_dialog_starting_title" msgid="4212945803784596345">"SIM 환경설정을 설정하세요"</string>
     <string name="sim_onboarding_dialog_starting_msg" msgid="8450391476631265209">"이 기기에서 여러 개의 SIM을 사용하도록 모바일 네트워크 환경설정을 설정하세요."</string>
     <string name="sim_onboarding_label_sim_title" msgid="273162565849288273">"SIM 라벨 지정"</string>
-    <string name="sim_onboarding_label_sim_msg" msgid="5105859235219529056">"전화를 걸고, 문자를 보내고, 데이터를 사용할 때 설정에서 이러한 라벨이 표시됩니다."</string>
+    <string name="sim_onboarding_label_sim_msg" msgid="5105859235219529056">"전화를 걸고, 문자를 보내고, 데이터를 사용할 때, 그리고 설정에 이러한 라벨이 표시됩니다."</string>
     <string name="sim_onboarding_label_sim_dialog_title" msgid="5839073125605286120">"SIM 라벨"</string>
     <string name="sim_onboarding_label_sim_dialog_label" msgid="9020433985426525185">"라벨"</string>
     <string name="sim_onboarding_select_sim_title" msgid="5895262188167744055">"사용할 SIM 선택"</string>
     <string name="sim_onboarding_select_sim_msg" msgid="5638859405391915048">"한 번에 2개의 SIM을 사용할 수 있습니다."</string>
     <string name="sim_onboarding_primary_sim_title" msgid="2793090401371135675">"기본 SIM 설정"</string>
-    <string name="sim_onboarding_primary_sim_msg" msgid="5484656671490558032">"전화, 문자, 데이터에 기본적으로 사용할 SIM을 선택하세요"</string>
+    <string name="sim_onboarding_primary_sim_msg" msgid="5484656671490558032">"전화, 문자 메시지, 데이터에 기본적으로 사용할 SIM을 선택하세요."</string>
     <string name="primary_sim_title" msgid="2508161011657571566">"기본 SIM"</string>
     <string name="primary_sim_calls_title" msgid="4961189133582615685">"통화"</string>
     <string name="primary_sim_texts_title" msgid="1287584042733097749">"문자 메시지"</string>

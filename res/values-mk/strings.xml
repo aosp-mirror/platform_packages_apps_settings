@@ -1340,10 +1340,8 @@
     <string name="storage_settings" msgid="7472188817781592677">"Капацитет"</string>
     <string name="storage_settings_for_app" msgid="229425418984637483">"Капацитет и кеш"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"Подесување на меморија"</string>
-    <!-- no translation found for status_eid (3588471107671992684) -->
-    <skip />
-    <!-- no translation found for eid_multi_sim (6551259348909791790) -->
-    <skip />
+    <string name="status_eid" msgid="3588471107671992684">"E​ID"</string>
+    <string name="eid_multi_sim" msgid="6551259348909791790">"E​ID (отвор за SIM <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>)"</string>
     <string name="imei_multi_sim" msgid="9001570420423929507">"IMEI (отвор за SIM <xliff:g id="IMEI_SLOT_ID">%1$d</xliff:g>)"</string>
     <string name="imei_multi_sim_primary" msgid="7914653040843734282">"IMEI (отвор за SIM <xliff:g id="IMEI_SLOT_ID_PRIMARY">%1$d</xliff:g>) (примарна)"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"За преглед, изберете зачувана мрежа"</string>
@@ -2092,6 +2090,8 @@
     <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"Повлекување со еден прст"</string>
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"Преместете го зголемување со повлекување со еден прст."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"Преместете го зголемување со повлекување со два прста."</string>
+    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_unavailable (4302567514781245318) -->
+    <skip />
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Зголемување со кратенка"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Зголемете со кратенка и троен допир"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"За <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
@@ -3631,8 +3631,8 @@
     <string name="notification_channels_other" msgid="18159805343647908">"Друго"</string>
     <string name="no_channels" msgid="4716199078612071915">"Апликацијава не објави ниедно известување"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Дополнителни поставки во апликацијата"</string>
-    <string name="show_unused_channels" msgid="2754356124204058828">"Прикажи некористени"</string>
-    <string name="hide_unused_channels" msgid="9049958190570733200">"Скриј некористени"</string>
+    <string name="show_unused_channels" msgid="4956292847964439078">"Прикажи ги некористените категории"</string>
+    <string name="hide_unused_channels" msgid="2019739275175707170">"Скриј ги некористените категории"</string>
     <string name="deleted_channels" msgid="8489800381509312964">"{count,plural, =1{# категорија е избришана}one{# категорија се избришани}other{# категории се избришани}}"</string>
     <string name="app_notification_block_title" msgid="3880322745749900296">"Блокирај ги сите"</string>
     <string name="app_notification_block_summary" msgid="1804611676339341551">"Никогаш не прикажувај ги известувањава"</string>
@@ -4697,7 +4697,7 @@
     <string name="sim_onboarding_select_sim_msg" msgid="5638859405391915048">"Може да користите 2 SIM-картички истовремено"</string>
     <string name="sim_onboarding_primary_sim_title" msgid="2793090401371135675">"Поставете главни SIM-картички"</string>
     <string name="sim_onboarding_primary_sim_msg" msgid="5484656671490558032">"Изберете кои SIM-картички да се користат стандардно за повици, пораки и интернет"</string>
-    <string name="primary_sim_title" msgid="2508161011657571566">"Вашите примарни SIM-картички"</string>
+    <string name="primary_sim_title" msgid="2508161011657571566">"Вашите главни SIM-картички"</string>
     <string name="primary_sim_calls_title" msgid="4961189133582615685">"Повици"</string>
     <string name="primary_sim_texts_title" msgid="1287584042733097749">"Пораки"</string>
     <string name="primary_sim_automatic_data_title" msgid="1265528923229642480">"Автоматско префрлање интернет"</string>
@@ -5198,9 +5198,9 @@
     <string name="content_protection_preference_subpage_info" msgid="6890886357653365489"></string>
     <string name="accessibility_setup_password_complete" msgid="6358749253318369077">"Сега е поставена лозинката"</string>
     <string name="show_stylus_pointer_icon" msgid="1010583689203665786">"Прикажувај го покажувачот при наместување"</string>
-    <string name="media_drm_settings_title" msgid="897424966554739867">"Поставки за DRM-аудиовизуелни содржини"</string>
-    <string name="force_swcrypto_fallback_title" msgid="8053166299808645593">"Присилување на софтвер безбеден за криптографија"</string>
-    <string name="force_swcrypto_fallback_summary" msgid="181969966310309701">"Присилување на управувањето со клучевите за DRM да користи криптографија Whitebox базирана на софтвер"</string>
+    <string name="media_drm_settings_title" msgid="897424966554739867">"Поставки за DRM на аудиовизуелни содржини"</string>
+    <string name="force_swcrypto_fallback_title" msgid="8053166299808645593">"Принудување на безбедна софтверска криптографија"</string>
+    <string name="force_swcrypto_fallback_summary" msgid="181969966310309701">"Принуди го управувањето со клучевите за DRM да користи софтверска криптографија Whitebox"</string>
     <!-- no translation found for fingerprint_acquired_imager_dirty_udfps (7005042288289506776) -->
     <skip />
 </resources>
