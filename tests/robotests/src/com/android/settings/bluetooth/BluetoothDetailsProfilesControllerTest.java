@@ -558,4 +558,49 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
         List<SwitchPreferenceCompat> switches = getProfileSwitches(false);
         assertThat(switches.get(0).isVisible()).isTrue();
     }
+
+    @Test
+    public void classicAudioDeviceWithLeAudio_showLeAudioToggle() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_HIDE_LE_AUDIO_TOGGLE_FOR_LE_AUDIO_ONLY_DEVICE);
+        setupDevice(makeDefaultDeviceConfig());
+
+        LeAudioProfile leAudioProfile = mock(LeAudioProfile.class);
+        when(leAudioProfile.getNameResource(mDevice))
+                .thenReturn(com.android.settingslib.R.string.bluetooth_profile_le_audio);
+        when(leAudioProfile.isProfileReady()).thenReturn(true);
+        when(leAudioProfile.toString()).thenReturn("LE_AUDIO");
+        when(mProfileManager.getLeAudioProfile()).thenReturn(leAudioProfile);
+        mConnectableProfiles.add(leAudioProfile);
+        when(mCachedDevice.getProfiles())
+                .thenAnswer(
+                        invocation ->
+                                ImmutableList.of(
+                                        leAudioProfile, addMockA2dpProfile(false, false, false)));
+
+        showScreen(mController);
+
+        List<SwitchPreferenceCompat> switches = getProfileSwitches(false);
+        assertThat(switches.get(0).isVisible()).isTrue();
+    }
+
+    @Test
+    public void leAudioOnlyDevice_hideLeAudioToggle() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_HIDE_LE_AUDIO_TOGGLE_FOR_LE_AUDIO_ONLY_DEVICE);
+        setupDevice(makeDefaultDeviceConfig());
+
+        LeAudioProfile leAudioProfile = mock(LeAudioProfile.class);
+        when(leAudioProfile.getNameResource(mDevice))
+                .thenReturn(com.android.settingslib.R.string.bluetooth_profile_le_audio);
+        when(leAudioProfile.isProfileReady()).thenReturn(true);
+        when(leAudioProfile.toString()).thenReturn("LE_AUDIO");
+        when(mProfileManager.getLeAudioProfile()).thenReturn(leAudioProfile);
+        mConnectableProfiles.add(leAudioProfile);
+        when(mCachedDevice.getProfiles())
+                .thenAnswer(invocation -> ImmutableList.of(leAudioProfile));
+
+        showScreen(mController);
+
+        List<SwitchPreferenceCompat> switches = getProfileSwitches(false);
+        assertThat(switches.get(0).isVisible()).isFalse();
+    }
 }
