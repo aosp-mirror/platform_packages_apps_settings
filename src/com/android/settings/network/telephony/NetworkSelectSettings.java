@@ -167,6 +167,7 @@ public class NetworkSelectSettings extends DashboardFragment {
 
     @Keep
     @VisibleForTesting
+    @Nullable
     protected SatelliteManager getSatelliteManager(Context context) {
         return context.getSystemService(SatelliteManager.class);
     }
@@ -359,7 +360,13 @@ public class NetworkSelectSettings extends DashboardFragment {
         if (!Flags.carrierEnabledSatelliteFlag()) {
             return new ArrayList<>();
         }
-        return mSatelliteManager.getSatellitePlmnsForCarrier(mSubId);
+
+        if (mSatelliteManager != null) {
+            return mSatelliteManager.getSatellitePlmnsForCarrier(mSubId);
+        } else {
+            Log.e(TAG, "mSatelliteManager is null, return empty list");
+            return new ArrayList<>();
+        }
     }
 
     private void handleCarrierConfigChanged(int subId) {

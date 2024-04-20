@@ -29,7 +29,6 @@ import com.android.settings.spa.app.backgroundinstall.BackgroundInstalledAppsPag
 import com.android.settings.spa.app.battery.BatteryOptimizationModeAppListPageProvider
 import com.android.settings.spa.app.specialaccess.AlarmsAndRemindersAppListProvider
 import com.android.settings.spa.app.specialaccess.AllFilesAccessAppListProvider
-import com.android.settings.spa.app.specialaccess.BackupTasksAppsListProvider
 import com.android.settings.spa.app.specialaccess.DisplayOverOtherAppsAppListProvider
 import com.android.settings.spa.app.specialaccess.InstallUnknownAppsListProvider
 import com.android.settings.spa.app.specialaccess.LongBackgroundTasksAppListProvider
@@ -79,7 +78,6 @@ open class SettingsSpaEnvironment(context: Context) : SpaEnvironment(context) {
             NfcTagAppsSettingsProvider,
             LongBackgroundTasksAppListProvider,
             TurnScreenOnAppsAppListProvider,
-            BackupTasksAppsListProvider,
         )
     }
 

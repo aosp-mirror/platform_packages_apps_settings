@@ -27,6 +27,7 @@ import android.util.Log;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.fuelgauge.BatteryUsageHistoricalLogEntry.Action;
+import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.fuelgauge.batteryusage.bugreport.BatteryUsageLogUtils;
 import com.android.settings.overlay.FeatureFactory;
 
@@ -124,9 +125,15 @@ public final class BatteryUsageDataLoader {
                         userIdsSeries,
                         /* isFromPeriodJob= */ true,
                         batteryDiffDataMap -> {
+                            final PowerUsageFeatureProvider featureProvider =
+                                    FeatureFactory.getFeatureFactory()
+                                            .getPowerUsageFeatureProvider();
                             DatabaseUtils.sendBatteryUsageSlotData(
                                     context,
-                                    ConvertUtils.convertToBatteryUsageSlotList(batteryDiffDataMap));
+                                    ConvertUtils.convertToBatteryUsageSlotList(
+                                            context,
+                                            batteryDiffDataMap,
+                                            featureProvider.isAppOptimizationModeLogged()));
                             if (batteryDiffDataMap.values().stream()
                                     .anyMatch(
                                             data ->
@@ -135,12 +142,10 @@ public final class BatteryUsageDataLoader {
                                                                             .isEmpty()
                                                                     || !data.getAppDiffEntryList()
                                                                             .isEmpty()))) {
-                                FeatureFactory.getFeatureFactory()
-                                        .getPowerUsageFeatureProvider()
-                                        .detectPowerAnomaly(
-                                                context,
-                                                /* displayDrain= */ 0,
-                                                DetectRequestSourceType.TYPE_DATA_LOADER);
+                                featureProvider.detectPowerAnomaly(
+                                        context,
+                                        /* displayDrain= */ 0,
+                                        DetectRequestSourceType.TYPE_DATA_LOADER);
                             }
                         });
         if (batteryLevelData == null) {

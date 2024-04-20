@@ -371,9 +371,7 @@ public class SimSlotChangeHandler {
             return;
         }
         Log.d(TAG, "Start ToggleSubscriptionDialogActivity with " + subId + " under DSDS+Mep.");
-        Intent intent = ToggleSubscriptionDialogActivity.getIntent(mContext, subId, true);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        mContext.startActivityAsUser(intent, UserHandle.SYSTEM);
+        SubscriptionUtil.startToggleSubscriptionDialogActivity(mContext, subId, true);
     }
 
     private boolean isMultipleEnabledProfilesSupported() {

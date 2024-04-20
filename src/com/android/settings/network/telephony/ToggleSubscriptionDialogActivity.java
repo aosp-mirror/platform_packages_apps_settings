@@ -76,6 +76,7 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
         Intent intent = new Intent(context, ToggleSubscriptionDialogActivity.class);
         intent.putExtra(ARG_SUB_ID, subId);
         intent.putExtra(ARG_enable, enable);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         return intent;
     }
 

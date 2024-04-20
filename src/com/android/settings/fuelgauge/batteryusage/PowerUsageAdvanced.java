@@ -239,7 +239,9 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         }
         final int dailyIndex = mBatteryChartPreferenceController.getDailyChartIndex();
         final int hourlyIndex = mBatteryChartPreferenceController.getHourlyChartIndex();
-        final String slotInformation = mBatteryChartPreferenceController.getSlotInformation();
+        final String slotInformation =
+                mBatteryChartPreferenceController.getSlotInformation(
+                        /* isAccessibilityText= */ false);
         final BatteryDiffData slotUsageData = mBatteryUsageMap.get(dailyIndex).get(hourlyIndex);
         mScreenOnTimeController.handleSceenOnTimeUpdated(
                 slotUsageData != null ? slotUsageData.getScreenOnTime() : 0L, slotInformation);

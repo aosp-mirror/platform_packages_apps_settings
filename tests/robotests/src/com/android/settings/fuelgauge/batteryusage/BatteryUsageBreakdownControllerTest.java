@@ -271,7 +271,7 @@ public final class BatteryUsageBreakdownControllerTest {
 
     @Test
     public void setPreferencePercent_lessThanThreshold_expectedFormat() {
-        final PowerGaugePreference pref = new PowerGaugePreference(mContext);
+        final PowerGaugePreference pref = spy(new PowerGaugePreference(mContext));
         final BatteryDiffEntry batteryDiffEntry =
                 createBatteryDiffEntry(
                         /* isSystem= */ true,
@@ -282,15 +282,18 @@ public final class BatteryUsageBreakdownControllerTest {
         batteryDiffEntry.mConsumePower = 0.8;
         batteryDiffEntry.setTotalConsumePower(100);
         mBatteryUsageBreakdownController.mPercentLessThanThresholdText = "< 1%";
+        mBatteryUsageBreakdownController.mPercentLessThanThresholdContentDescription =
+                "test content description";
 
         mBatteryUsageBreakdownController.setPreferencePercentage(pref, batteryDiffEntry);
 
         assertThat(pref.getPercentage()).isEqualTo("< 1%");
+        verify(pref).setPercentageContentDescription("test content description");
     }
 
     @Test
     public void setPreferencePercent_greaterThanThreshold_expectedFormat() {
-        final PowerGaugePreference pref = new PowerGaugePreference(mContext);
+        final PowerGaugePreference pref = spy(new PowerGaugePreference(mContext));
         final BatteryDiffEntry batteryDiffEntry =
                 createBatteryDiffEntry(
                         /* isSystem= */ true,
@@ -301,10 +304,13 @@ public final class BatteryUsageBreakdownControllerTest {
         batteryDiffEntry.mConsumePower = 16;
         batteryDiffEntry.setTotalConsumePower(100);
         mBatteryUsageBreakdownController.mPercentLessThanThresholdText = "< 1%";
+        mBatteryUsageBreakdownController.mPercentLessThanThresholdContentDescription =
+                "test content description";
 
         mBatteryUsageBreakdownController.setPreferencePercentage(pref, batteryDiffEntry);
 
         assertThat(pref.getPercentage()).isEqualTo("16%");
+        verify(pref, never()).setPercentageContentDescription(any());
     }
 
     @Test

@@ -382,9 +382,13 @@ public final class ConvertUtilsTest {
                         /* foregroundServiceUsageConsumePower= */ 1.3,
                         /* backgroundUsageConsumePower= */ 1.4,
                         /* cachedUsageConsumePower= */ 1.5);
+        BatteryOptimizationModeCache optimizationModeCache =
+                new BatteryOptimizationModeCache(mContext);
+        optimizationModeCache.mBatteryOptimizeModeCacheMap.put(
+                (int) batteryDiffEntry.mUid, BatteryOptimizationMode.MODE_OPTIMIZED);
 
         final BatteryUsageDiff batteryUsageDiff =
-                ConvertUtils.convertToBatteryUsageDiff(batteryDiffEntry);
+                ConvertUtils.convertToBatteryUsageDiff(batteryDiffEntry, optimizationModeCache);
 
         assertThat(batteryUsageDiff.getUid()).isEqualTo(101L);
         assertThat(batteryUsageDiff.getUserId()).isEqualTo(1001L);
@@ -402,6 +406,8 @@ public final class ConvertUtilsTest {
         assertThat(batteryUsageDiff.getBackgroundUsageTime()).isEqualTo(5678L);
         assertThat(batteryUsageDiff.getScreenOnTime()).isEqualTo(123L);
         assertThat(batteryUsageDiff.getKey()).isEqualTo("key");
+        assertThat(batteryUsageDiff.getAppOptimizationMode())
+                .isEqualTo(BatteryOptimizationMode.MODE_OPTIMIZED);
         assertThat(batteryUsageDiff.hasPackageName()).isFalse();
         assertThat(batteryUsageDiff.hasLabel()).isFalse();
     }
@@ -591,7 +597,7 @@ public final class ConvertUtilsTest {
                 Map.of(11L, batteryDiffData1, 21L, batteryDiffData2, 31L, batteryDiffData3);
 
         final List<BatteryUsageSlot> batteryUsageSlotList =
-                ConvertUtils.convertToBatteryUsageSlotList(batteryDiffDataMap);
+                ConvertUtils.convertToBatteryUsageSlotList(mContext, batteryDiffDataMap, false);
 
         assertThat(batteryUsageSlotList).hasSize(3);
         assertThat(batteryUsageSlotList.stream().map((s) -> s.getScreenOnTime()).sorted().toList())

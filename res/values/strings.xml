@@ -3469,7 +3469,7 @@
     <!-- Title for the Delete private space settings controller [CHAR LIMIT=40] -->
     <string name="reset_private_space_delete_title">Delete private space</string>
     <!-- Delete private space dialog mentioning that private space and the apps in it along with its data will be permanently deleted [CHAR LIMIT=NONE] -->
-    <string name="reset_private_space_delete_dialog">If you have a private space on your device, it will be permanently deleted. All apps in your space and their data will be deleted.</string>
+    <string name="reset_private_space_delete_dialog">If you have a private space on your device, it will be permanently deleted and the Google Account added to your space will be removed.\n\nAll apps in your space and their data will also be permanently deleted.</string>
 
     <!-- Main Clear -->
     <!-- Button title to factory data reset the entire device [CHAR LIMIT=NONE] -->
@@ -6080,6 +6080,8 @@
     <string name="battery_usage_chart_label_now">now</string>
     <!-- [CHAR_LIMIT=NONE] A hyphen for two timestamps. For example, "6 AM - 8 AM", which means "from 6 AM to 8 AM". Please notice the spaces around the hyphen -->
     <string name="battery_usage_timestamps_hyphen"><xliff:g id="from_timestamp">%1$s</xliff:g> - <xliff:g id="to_timestamp">%2$s</xliff:g></string>
+    <!-- [CHAR_LIMIT=NONE] Accessibility content description for two timestamps. For example, Battery usage for "6 AM to 8 PM" -->
+    <string name="battery_usage_timestamps_content_description"><xliff:g id="from_timestamp">%1$s</xliff:g> to <xliff:g id="to_timestamp">%2$s</xliff:g></string>
     <!-- [CHAR_LIMIT=NONE] The first slot is a week day (e.g. "Monday"); the second slot is a hourly time span (e.g. "6 AM - 8 AM"). -->
     <string name="battery_usage_day_and_hour"><xliff:g id="day">%1$s</xliff:g> <xliff:g id="hour">%2$s</xliff:g></string>
     <!-- [CHAR_LIMIT=NONE] Accessibility content description for each slot in battery chart view. -->
@@ -6106,6 +6108,8 @@
     <string name="battery_usage_spinner_view_by_systems">View by systems</string>
     <!-- [CHAR_LIMIT=NONE] Less than some percentage, e.g. < 1% -->
     <string name="battery_usage_less_than_percent">&lt; <xliff:g id="percentage">%1$s</xliff:g></string>
+    <!-- [CHAR_LIMIT=NONE] Accessibility content description for less than some percentage, e.g. less than 1% -->
+    <string name="battery_usage_less_than_percent_content_description">less than <xliff:g id="percentage">%1$s</xliff:g></string>
     <!-- Process Stats strings -->
     <skip />
     <!-- Description of battery information footer text. [CHAR LIMIT=NONE] -->
@@ -10426,21 +10430,6 @@
     <!-- Keywords for settings screen for controlling apps that can run long background tasks [CHAR LIMIT=NONE] -->
     <string name="keywords_long_background_tasks">long jobs, data transfer, background tasks</string>
 
-    <!-- Title for the settings screen for controlling apps that hold the run backup jobs permission [CHAR LIMIT=60] -->
-    <string name="run_backup_tasks_title">Perform backup tasks in background</string>
-    <!-- Label for the switch to toggle the run backup jobs permission [CHAR LIMIT=100] -->
-    <string name="run_backup_tasks_switch_title">Allow app to run backup-related background tasks</string>
-    <!-- Description that appears below the run_backup_tasks switch [CHAR LIMIT=NONE] -->
-    <string name="run_backup_tasks_footer_title">
-        Indicates that this app has a major use-case where it needs to backup or sync content.
-        Granting this permission allows the app to run in the background for a slightly longer time
-        in order to complete the backup-related work.
-        \n\nIf this permission is denied, the system will not give any special exemption to this
-        app to complete backup-related work in the background.
-    </string>
-    <!-- Keywords for settings screen for controlling apps that hold the run backup tasks permission [CHAR LIMIT=NONE] -->
-    <string name="keywords_run_backup_tasks">backup tasks, backup jobs</string>
-
     <!-- Reset rate-limiting in the system service ShortcutManager.  "ShortcutManager" is the name of a system service and not translatable.
     If the word "rate-limit" is hard to translate, use "Reset ShortcutManager API call limit" as the source text, which means
     the same thing in this context.
@@ -13190,4 +13179,7 @@
 
     <!--Text for acquire msg on UDFPS devices -->
     <string name="fingerprint_acquired_imager_dirty_udfps">Clean your screen near the sensor and try again</string>
+
+    <!-- Provider Model: summary of converted in SIM category. [CHAR LIMIT=50] -->
+    <string name="sim_category_converted_sim">Converted to eSIM. Remove and discard.</string>
 </resources>
