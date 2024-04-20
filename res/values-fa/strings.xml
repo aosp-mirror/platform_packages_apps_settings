@@ -1340,10 +1340,8 @@
     <string name="storage_settings" msgid="7472188817781592677">"حافظه"</string>
     <string name="storage_settings_for_app" msgid="229425418984637483">"فضای ذخیره‌سازی و حافظه پنهان"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"تنظیمات ذخیره‌سازی"</string>
-    <!-- no translation found for status_eid (3588471107671992684) -->
-    <skip />
-    <!-- no translation found for eid_multi_sim (6551259348909791790) -->
-    <skip />
+    <string name="status_eid" msgid="3588471107671992684">"‏سند شناسایی جاسازی‌شده (EID)"</string>
+    <string name="eid_multi_sim" msgid="6551259348909791790">"‏‫E​ID (شیار سیم‌کارت <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>)"</string>
     <string name="imei_multi_sim" msgid="9001570420423929507">"‏IMEI (شیار سیم‌کارت <xliff:g id="IMEI_SLOT_ID">%1$d</xliff:g>)"</string>
     <string name="imei_multi_sim_primary" msgid="7914653040843734282">"‏IMEI (شیار سیم‌کارت <xliff:g id="IMEI_SLOT_ID_PRIMARY">%1$d</xliff:g>) (اصلی)"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"برای مشاهده، شبکه ذخیره‌شده را انتخاب کنید"</string>
@@ -2092,6 +2090,8 @@
     <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"حرکت افقی با یک انگشت"</string>
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"با کشیدن یک انگشت، درشت‌نمایی را جابه‌جا کنید."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"با کشیدن دو انگشت، درشت‌نمایی را جابه‌جا کنید."</string>
+    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_unavailable (4302567514781245318) -->
+    <skip />
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"درشت‌نمایی بااستفاده از میان‌بر"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"درشت‌نمایی بااستفاده از میان‌بر و سه ضربه"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"درباره <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
@@ -3631,8 +3631,8 @@
     <string name="notification_channels_other" msgid="18159805343647908">"موارد دیگر"</string>
     <string name="no_channels" msgid="4716199078612071915">"این برنامه هیچ اعلانی پست نکرده است"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"تنظیمات بیشتر در برنامه"</string>
-    <string name="show_unused_channels" msgid="2754356124204058828">"نمایش کانال‌های استفاده‌نشده"</string>
-    <string name="hide_unused_channels" msgid="9049958190570733200">"پنهان کردن کانال‌های استفاده‌نشده"</string>
+    <string name="show_unused_channels" msgid="4956292847964439078">"نمایش دسته‌های استفاده‌نشده"</string>
+    <string name="hide_unused_channels" msgid="2019739275175707170">"پنهان کردن دسته‌های استفاده‌نشده"</string>
     <string name="deleted_channels" msgid="8489800381509312964">"{count,plural, =1{‏# دسته حذف شد}one{‏# دسته حذف شد}other{‏# دسته حذف شد}}"</string>
     <string name="app_notification_block_title" msgid="3880322745749900296">"مسدود کردن همه"</string>
     <string name="app_notification_block_summary" msgid="1804611676339341551">"هرگز این اعلان‌ها نشان داده نشوند"</string>
@@ -4976,7 +4976,7 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"شماره تلفن وارد نشده است."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"تأیید"</string>
     <string name="enable_2g_title" msgid="8184757884636162942">"اجازه دادن به شبکه نسل دوم"</string>
-    <string name="enable_2g_summary" msgid="2794534052372565914">"‏2G امنیت کمتری دارد، اما ممکن است در بعضی مناطق اتصالتان را بهبود ببخشد. اتصال 2G همواره برای تماس‌های اضطراری مجاز است."</string>
+    <string name="enable_2g_summary" msgid="2794534052372565914">"‏شبکه نسل دوم (2G) امنیت کمتری دارد، اما ممکن است در بعضی مناطق اتصالتان را بهبود ببخشد. اتصال 2G همواره برای تماس‌های اضطراری مجاز است."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"‏<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> برای دردسترس بودن به 2G نیاز دارد"</string>
     <string name="require_cellular_encryption_title" msgid="7516008146269371585">"رمزگذاری لازم است"</string>
     <string name="require_cellular_encryption_summary" msgid="4813823321032908641">"رمزگذاری امن‌تر است، اما ممکن است از برخی‌از مکان‌ها نتوانید متصل شوید. برای تماس‌های اضطراری، هرگز رمزگذاری لازم نیست"</string>
@@ -5198,9 +5198,9 @@
     <string name="content_protection_preference_subpage_info" msgid="6890886357653365489"></string>
     <string name="accessibility_setup_password_complete" msgid="6358749253318369077">"گذرواژه اکنون تنظیم شد"</string>
     <string name="show_stylus_pointer_icon" msgid="1010583689203665786">"نمایش اشاره‌گر هنگام نگه داشتن"</string>
-    <string name="media_drm_settings_title" msgid="897424966554739867">"‏تنظیمات DRM رسانه"</string>
-    <string name="force_swcrypto_fallback_title" msgid="8053166299808645593">"فعال کردن اجباری رمزنگاری امنیتی نرم‌افزاری"</string>
-    <string name="force_swcrypto_fallback_summary" msgid="181969966310309701">"‏اجبار مدیریت کلید DRM برای استفاده از رمزنگاری جعبه سفید مبتنی بر نرم‌افزار"</string>
+    <string name="media_drm_settings_title" msgid="897424966554739867">"تنظیمات «مدیریت حقوق دیجیتال رسانه»"</string>
+    <string name="force_swcrypto_fallback_title" msgid="8053166299808645593">"اجباری کردن رمزنگاری ایمن نرم‌افزار"</string>
+    <string name="force_swcrypto_fallback_summary" msgid="181969966310309701">"‏اجباری کردن مدیریت کلید مورداستفاده برای «مدیریت حقوق دیجیتال (DRM) برای استفاده از رمزنگاری جعبه سفید مبتنی بر نرم‌افزار"</string>
     <!-- no translation found for fingerprint_acquired_imager_dirty_udfps (7005042288289506776) -->
     <skip />
 </resources>

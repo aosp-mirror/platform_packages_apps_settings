@@ -1340,10 +1340,8 @@
     <string name="storage_settings" msgid="7472188817781592677">"Pohrana"</string>
     <string name="storage_settings_for_app" msgid="229425418984637483">"Pohrana i keš memorija"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"Postavke za pohranu"</string>
-    <!-- no translation found for status_eid (3588471107671992684) -->
-    <skip />
-    <!-- no translation found for eid_multi_sim (6551259348909791790) -->
-    <skip />
+    <string name="status_eid" msgid="3588471107671992684">"E​ID"</string>
+    <string name="eid_multi_sim" msgid="6551259348909791790">"E​ID (utor SIM-a <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>)"</string>
     <string name="imei_multi_sim" msgid="9001570420423929507">"IMEI (utor za SIM <xliff:g id="IMEI_SLOT_ID">%1$d</xliff:g>)"</string>
     <string name="imei_multi_sim_primary" msgid="7914653040843734282">"IMEI (utor za SIM <xliff:g id="IMEI_SLOT_ID_PRIMARY">%1$d</xliff:g>) (primarno)"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"Za prikaz odaberite sačuvanu mrežu"</string>
@@ -1914,7 +1912,7 @@
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Dodirna podloga i miš"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"Brzina pokazivača, pokreti"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Dodir za klik"</string>
-    <string name="trackpad_tap_dragging_title" msgid="798644199582480712">"Dodirnite prevlačeći"</string>
+    <string name="trackpad_tap_dragging_title" msgid="798644199582480712">"Prevlačenje dodirom"</string>
     <string name="trackpad_tap_dragging_summary" msgid="5276968646031591058">"Dodirnite i prevucite prstom na podlozi da premjestite predmete"</string>
     <string name="trackpad_touchpad_gesture_title" msgid="7568052847609914436">"Pokreti na dodirnoj podlozi"</string>
     <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"Prilagodite pojedinačne pokrete navigacije na dodirnoj podlozi"</string>
@@ -2092,6 +2090,8 @@
     <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"Pomicanjem prstom"</string>
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"Pomaknite područje uvećanja prevlačenjem prstom."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"Pomaknite područje uvećavanja prevlačenjem s dva prsta."</string>
+    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_unavailable (4302567514781245318) -->
+    <skip />
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Uvećavanje pomoću prečice"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Uvećajte pomoću prečice i trostrukog dodira"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"O usluzi <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
@@ -2148,7 +2148,7 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="8315934725362849788">"Dodirnite dugme za pristupačnost <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> na dnu ekrana. Da prebacujete između funkcija, dodirnite i zadržite dugme za pristupačnost."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Prevucite s dva prsta prema gore s dna ekrana.\n\nDa prebacujete između funkcija, s dva prsta prevucite prema gore i zadržite."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Prevucite s tri prsta prema gore s dna ekrana.\n\nDa prebacujete između funkcija, prevucite s tri prsta prema gore i zadržite."</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_gesture" msgid="2081123009255579884">"{count,plural, =1{Prevucite s dna ekrana nagore. Da prebacujete između funkcija, prevucite nagore i zadržite.}one{Prevucite s dna ekrana nagore s # prstom. Da prebacujete između funkcija, prevucite nagore s # prstom i zadržite.}few{Prevucite s dna ekrana nagore sa # prsta. Da prebacujete između funkcija, prevucite nagore sa # prsta i zadržite.}other{Prevucite s dna ekrana nagore sa # prstiju. Da prebacujete između funkcija, prevucite nagore sa # prstiju i zadržite.}}"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_gesture" msgid="2081123009255579884">"{count,plural, =1{Prevucite s dna ekrana nagore. Da prebacujete između funkcija, prevucite nagore i zadržite.}one{Prevucite s dna ekrana nagore s # prstom. Da prebacujete između funkcija, prevucite nagore s # prstom i zadržite.}few{Prevucite s dna ekrana nagore s # prsta. Da prebacujete između funkcija, prevucite nagore s # prsta i zadržite.}other{Prevucite s dna ekrana nagore sa # prstiju. Da prebacujete između funkcija, prevucite nagore sa # prstiju i zadržite.}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="4459254227203203324"><annotation id="link">"Više opcija"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"<xliff:g id="SERVICE">%1$s</xliff:g> – saznajte više"</string>
     <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"Brze postavke"</string>
@@ -3631,8 +3631,8 @@
     <string name="notification_channels_other" msgid="18159805343647908">"Ostalo"</string>
     <string name="no_channels" msgid="4716199078612071915">"Ova aplikacija nije objavila nikakva obavještenja"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Dodatne postavke u aplikaciji"</string>
-    <string name="show_unused_channels" msgid="2754356124204058828">"Prikaži nekorišt. kanale"</string>
-    <string name="hide_unused_channels" msgid="9049958190570733200">"Sakrij nekorišt. kanale"</string>
+    <string name="show_unused_channels" msgid="4956292847964439078">"Prikaži kategorije koje se ne koriste"</string>
+    <string name="hide_unused_channels" msgid="2019739275175707170">"Sakrij kategorije koje se ne koriste"</string>
     <string name="deleted_channels" msgid="8489800381509312964">"{count,plural, =1{# kategorija je izbrisana}one{# kategorija je izbrisana}few{# kategorije su izbrisane}other{# kategorija je izbrisano}}"</string>
     <string name="app_notification_block_title" msgid="3880322745749900296">"Blokiraj sve"</string>
     <string name="app_notification_block_summary" msgid="1804611676339341551">"Nikada ne prikazuj ova obavještenja"</string>
@@ -5199,9 +5199,9 @@
     <string name="content_protection_preference_subpage_info" msgid="6890886357653365489"></string>
     <string name="accessibility_setup_password_complete" msgid="6358749253318369077">"Lozinka je sada postavljena"</string>
     <string name="show_stylus_pointer_icon" msgid="1010583689203665786">"Prikaz pokazivača prilikom postavljanja pokazivača miša iznad stavke"</string>
-    <string name="media_drm_settings_title" msgid="897424966554739867">"DRM postavke medijskog sadržaja"</string>
+    <string name="media_drm_settings_title" msgid="897424966554739867">"DRM postavke medija"</string>
     <string name="force_swcrypto_fallback_title" msgid="8053166299808645593">"Nametni softversku sigurnosnu kriptografiju"</string>
-    <string name="force_swcrypto_fallback_summary" msgid="181969966310309701">"Nametnite upravljanja DRM ključevima za korištenje whitebox kriptografije koja se zasniva na softveru"</string>
+    <string name="force_swcrypto_fallback_summary" msgid="181969966310309701">"Nametnite da upravljanje DRM ključevima koristi whitebox kriptografiju zasnovanu na softveru"</string>
     <!-- no translation found for fingerprint_acquired_imager_dirty_udfps (7005042288289506776) -->
     <skip />
 </resources>
