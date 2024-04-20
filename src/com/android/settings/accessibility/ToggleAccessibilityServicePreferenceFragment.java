@@ -467,7 +467,10 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     @Override
     protected int getDefaultShortcutTypes() {
         if (android.view.accessibility.Flags.a11yQsShortcut()) {
-            return getTileComponentName() == null ? super.getDefaultShortcutTypes()
+            AccessibilityServiceInfo info = getAccessibilityServiceInfo();
+            boolean isAccessibilityTool = info != null && info.isAccessibilityTool();
+            return !isAccessibilityTool || getTileComponentName() == null
+                    ? super.getDefaultShortcutTypes()
                     : ShortcutConstants.UserShortcutType.QUICK_SETTINGS;
         }
 

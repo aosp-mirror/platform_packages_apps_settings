@@ -1340,10 +1340,8 @@
     <string name="storage_settings" msgid="7472188817781592677">"Storage"</string>
     <string name="storage_settings_for_app" msgid="229425418984637483">"Storage at cache"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"Mga setting ng storage"</string>
-    <!-- no translation found for status_eid (3588471107671992684) -->
-    <skip />
-    <!-- no translation found for eid_multi_sim (6551259348909791790) -->
-    <skip />
+    <string name="status_eid" msgid="3588471107671992684">"E​ID"</string>
+    <string name="eid_multi_sim" msgid="6551259348909791790">"E​ID (sim slot <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>)"</string>
     <string name="imei_multi_sim" msgid="9001570420423929507">"IMEI (sim slot <xliff:g id="IMEI_SLOT_ID">%1$d</xliff:g>)"</string>
     <string name="imei_multi_sim_primary" msgid="7914653040843734282">"IMEI (sim slot <xliff:g id="IMEI_SLOT_ID_PRIMARY">%1$d</xliff:g>) (pangunahin)"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"Para tingnan, piliin ang naka-save na network"</string>
@@ -2092,6 +2090,8 @@
     <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"One-finger na pag-pan"</string>
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"Galawin ang magnification area sa pag-drag sa 1 daliri."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"Galawin ang magnification area sa pag-drag sa 2 daliri."</string>
+    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_unavailable (4302567514781245318) -->
+    <skip />
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Mag-magnify gamit ang shortcut"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Mag-magnify gamit ang shortcut at pag-triple tap"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"Tungkol sa <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
@@ -2145,7 +2145,7 @@
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="6505512764022389951">"Button ng accessibility"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_floating_button" msgid="6266489864614886247">"I-tap ang naka-float na button"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="4775049370625630546">"Galaw para sa accessibility"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="8315934725362849788">"I-tap ang button ng accessibility <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> sa ibaba ng screen Para magpalipat-lipat sa mga feature, pindutin nang matagal ang button ng accessibility."</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="8315934725362849788">"I-tap ang button ng accessibility <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> sa ibaba ng screen. Para magpalipat-lipat sa mga feature, pindutin nang matagal ang button ng accessibility."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Mag-swipe pataas mula sa ibaba ng screen gamit ang 2 daliri.\n\nPara magpalipat-lipat sa mga feature, mag-swipe pataas gamit ang 2 daliri at i-hold ang mga ito."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Mag-swipe pataas mula sa ibaba ng screen gamit ang 3 daliri.\n\nPara magpalipat-lipat sa mga feature, mag-swipe pataas gamit ang 3 daliri at i-hold ang mga ito."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_gesture" msgid="2081123009255579884">"{count,plural, =1{Mag-swipe pataas mula sa ibabang bahagi ng screen. Para magpalipat-lipat sa mga feature, mag-swipe pataas at i-hold ito.}one{Mag-swipe pataas gamit ang # daliri mula sa ibaba ng screen. Para magpalipat-lipat sa mga feature, mag-swipe pataas gamit ang # daliri at i-hold ito.}other{Mag-swipe pataas gamit ang # na daliri mula sa ibaba ng screen. Para magpalipat-lipat sa mga feature, mag-swipe pataas gamit ang # na daliri at i-hold ito.}}"</string>
@@ -3631,8 +3631,8 @@
     <string name="notification_channels_other" msgid="18159805343647908">"Iba Pa"</string>
     <string name="no_channels" msgid="4716199078612071915">"Walang anumang notification para sa app na ito"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Mga karagdagang setting sa app"</string>
-    <string name="show_unused_channels" msgid="2754356124204058828">"Ipakita: unused channels"</string>
-    <string name="hide_unused_channels" msgid="9049958190570733200">"Itago ang mga hindi ginagamit na channel"</string>
+    <string name="show_unused_channels" msgid="4956292847964439078">"Ipakita ang mga hindi ginagamit"</string>
+    <string name="hide_unused_channels" msgid="2019739275175707170">"Itago ang mga hindi ginagamit"</string>
     <string name="deleted_channels" msgid="8489800381509312964">"{count,plural, =1{Na-delete ang # kategorya}one{Na-delete ang # kategorya}other{Na-delete ang # na kategorya}}"</string>
     <string name="app_notification_block_title" msgid="3880322745749900296">"I-block lahat"</string>
     <string name="app_notification_block_summary" msgid="1804611676339341551">"Huwag kailanman ipakita ang mga notification na ito"</string>
@@ -5199,8 +5199,8 @@
     <string name="accessibility_setup_password_complete" msgid="6358749253318369077">"Naka-set up na ngayon ang password"</string>
     <string name="show_stylus_pointer_icon" msgid="1010583689203665786">"Ipakita ang pointer habang nagho-hover"</string>
     <string name="media_drm_settings_title" msgid="897424966554739867">"Mga setting ng media DRM"</string>
-    <string name="force_swcrypto_fallback_title" msgid="8053166299808645593">"Puwersahin ang Software Secure na Crypto"</string>
-    <string name="force_swcrypto_fallback_summary" msgid="181969966310309701">"Puwersahin ang pamamahala ng DRM key para gumamit ng software-based na whitebox crypto"</string>
+    <string name="force_swcrypto_fallback_title" msgid="8053166299808645593">"I-force ang Software Secure na Crypto"</string>
+    <string name="force_swcrypto_fallback_summary" msgid="181969966310309701">"I-force ang pamamahala ng DRM key para gumamit ng software-based na whitebox crypto"</string>
     <!-- no translation found for fingerprint_acquired_imager_dirty_udfps (7005042288289506776) -->
     <skip />
 </resources>

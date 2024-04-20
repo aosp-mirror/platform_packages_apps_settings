@@ -565,7 +565,7 @@
     <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"Možete automatski zaključati privatni prostor ako uređaj ne upotrebljavate neko vrijeme"</string>
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"Svaki put kad se uređaj zaključa"</string>
     <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"Nakon pet minuta neaktivnosti"</string>
-    <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"Samo nakon što se uređaj ponovno pokrene"</string>
+    <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"Samo nakon ponovnog pokretanja uređaja"</string>
     <string name="private_space_hide_page_title" msgid="4351404195904146088">"Sakrij privatni prostor kada je zaključan"</string>
     <string name="private_space_hide_page_summary" msgid="6247773353685839242">"Kako drugi ne bi znali da imate privatni prostor na uređaju, možete ga sakriti s popisa aplikacija"</string>
     <string name="private_space_access_header" msgid="1077082416567150819">"Pristup privatnom prostoru kad je skriven"</string>
@@ -575,7 +575,7 @@
     <string name="private_space_hide_off_summary" msgid="8565973976602078315">"Isključeno"</string>
     <string name="private_space_hide_on_summary" msgid="3450844101901438867">"Uključeno"</string>
     <string name="private_space_hide_dialog_title" msgid="6439207708506990156">"Privatni prostor bit će skriven kada ga idući put zaključate"</string>
-    <string name="private_space_hide_dialog_message" msgid="618693520130744836">"Za pristup privatnom prostoru unesite ga u traku za pretraživanje na popisu aplikacija."</string>
+    <string name="private_space_hide_dialog_message" msgid="618693520130744836">"Za pristup privatnom prostoru upišite \"privatni prostor\" u traku za pretraživanje na popisu aplikacija."</string>
     <string name="private_space_hide_dialog_button" msgid="4157191429310035457">"Shvaćam"</string>
     <string name="private_space_category_system" msgid="1286843321867285700">"Sustav"</string>
     <string name="private_space_delete_title" msgid="636873505724100006">"Brisanje privatnog prostora"</string>
@@ -1340,10 +1340,8 @@
     <string name="storage_settings" msgid="7472188817781592677">"Pohrana"</string>
     <string name="storage_settings_for_app" msgid="229425418984637483">"Pohrana i predmemorija"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"Postavke pohrane"</string>
-    <!-- no translation found for status_eid (3588471107671992684) -->
-    <skip />
-    <!-- no translation found for eid_multi_sim (6551259348909791790) -->
-    <skip />
+    <string name="status_eid" msgid="3588471107671992684">"EID"</string>
+    <string name="eid_multi_sim" msgid="6551259348909791790">"EID (utor za SIM <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>)"</string>
     <string name="imei_multi_sim" msgid="9001570420423929507">"IMEI (utor za SIM <xliff:g id="IMEI_SLOT_ID">%1$d</xliff:g>)"</string>
     <string name="imei_multi_sim_primary" msgid="7914653040843734282">"IMEI (utor za SIM <xliff:g id="IMEI_SLOT_ID_PRIMARY">%1$d</xliff:g>) (primarno)"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"Da biste je vidjeli, odaberite spremljenu mrežu"</string>
@@ -2092,6 +2090,8 @@
     <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"Pomicanje jednim prstom"</string>
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"Pomičite područje povećanja jednim prstom."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"Pomičite područje povećanja dvama prstima."</string>
+    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_unavailable (4302567514781245318) -->
+    <skip />
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Povećanje pomoću prečaca"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Povećanje pomoću prečaca i trostrukog dodira"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"O usluzi <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
@@ -2130,7 +2130,7 @@
     <string name="accessibility_tutorial_dialog_message_quick_setting" msgid="3715446725334547432">"{count,plural, =1{Da biste koristili tu značajku, prijeđite prstom od vrha zaslona prema dolje. Zatim pronađite pločicu značajke {featureName}.}one{Da biste koristili tu značajku, prijeđite # prstom od vrha zaslona prema dolje. Zatim pronađite pločicu značajke {featureName}.}few{Da biste koristili tu značajku, prijeđite # prstima od vrha zaslona prema dolje. Zatim pronađite pločicu značajke {featureName}.}other{Da biste koristili tu značajku, prijeđite od vrha zaslona prema dolje s # prstiju. Zatim pronađite pločicu značajke {featureName}.}}"</string>
     <string name="accessibility_tutorial_dialog_shortcut_unavailable_in_suw" msgid="3847728530771929959">"Taj će prečac biti dostupan nakon što dovršite postavljanje uređaja."</string>
     <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"Da biste koristili tu značajku, prijeđite s dva prsta prema gore od dna zaslona.\n\nDa biste prešli na neku drugu značajku, prijeđite s dva prsta prema gore i zadržite."</string>
-    <string name="accessibility_tutorial_dialog_gesture_shortcut_instruction" msgid="7349950768250852308">"{count,plural, =1{Da biste koristili tu značajku, prijeđite prstom od dna zaslona prema gore}one{Da biste koristili tu značajku, prijeđite # prstom od dna zaslona prema gore}few{Da biste koristili tu značajku, prijeđite # prstima od dna zaslona prema gore}other{Da biste koristili tu značajku, prijeđite od dna zaslona prema gore s # prstiju}}"</string>
+    <string name="accessibility_tutorial_dialog_gesture_shortcut_instruction" msgid="7349950768250852308">"{count,plural, =1{Da biste koristili tu značajku, prijeđite prstom od dna zaslona prema gore}one{Da biste koristili tu značajku, prijeđite # prstom od dna zaslona prema gore}few{Da biste koristili tu značajku, prijeđite s # prsta od dna zaslona prema gore}other{Da biste koristili tu značajku, prijeđite od dna zaslona prema gore s # prstiju}}"</string>
     <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="8142847782708562793">"Da biste koristili tu značajku, prijeđite s tri prsta prema gore od dna zaslona.\n\nDa biste prešli na neku drugu značajku, prijeđite s tri prsta prema gore i zadržite."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"Da biste koristili značajku pristupačnosti, prijeđite s dva prsta prema gore od dna zaslona.\n\nDa biste prešli na neku drugu značajku, prijeđite s dva prsta prema gore i zadržite."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="7292969929578621958">"Da biste koristili značajku pristupačnosti, prijeđite s tri prsta prema gore od dna zaslona.\n\nDa biste prešli na neku drugu značajku, prijeđite s tri prsta prema gore i zadržite."</string>
@@ -2148,7 +2148,7 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="8315934725362849788">"Dodirnite gumb za pristupačnost <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> pri dnu zaslona. Da biste prešli na neku drugu značajku, dodirnite i zadržite gumb za pristupačnost."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Prijeđite s dva prsta prema gore od dna zaslona.\n\nDa biste prešli na neku drugu značajku, prijeđite s dva prsta prema gore i zadržite."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Prijeđite s tri prsta prema gore od dna zaslona.\n\nDa biste prešli na neku drugu značajku, prijeđite s tri prsta prema gore i zadržite."</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_gesture" msgid="2081123009255579884">"{count,plural, =1{Prijeđite prstom od dna zaslona prema gore. Da biste prešli na neku drugu značajku, prijeđite prstom prema gore i zadržite.}one{Prijeđite # prstom prema gore s dna zaslona. Da biste prešli na neku drugu značajku, prijeđite # prstom prema gore i zadržite.}few{Prijeđite # prstima prema gore s dna zaslona. Da biste prešli na neku drugu značajku, prijeđite # prstima prema gore i zadržite.}other{Prijeđite s # prstiju prema gore s dna zaslona. Da biste prešli na neku drugu značajku, prijeđite s # prstiju prema gore i zadržite.}}"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_gesture" msgid="2081123009255579884">"{count,plural, =1{Prijeđite prstom od dna zaslona prema gore. Da biste prešli na neku drugu značajku, prijeđite prstom prema gore i zadržite.}one{Prijeđite # prstom prema gore s dna zaslona. Da biste prešli na neku drugu značajku, prijeđite # prstom prema gore i zadržite.}few{Prijeđite s # prsta prema gore s dna zaslona. Da biste prešli na neku drugu značajku, prijeđite s # prsta prema gore i zadržite.}other{Prijeđite s # prstiju prema gore s dna zaslona. Da biste prešli na neku drugu značajku, prijeđite s # prstiju prema gore i zadržite.}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="4459254227203203324"><annotation id="link">"Više opcija"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"Saznajte više o usluzi <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"Brze postavke"</string>
@@ -3631,8 +3631,8 @@
     <string name="notification_channels_other" msgid="18159805343647908">"Drugo"</string>
     <string name="no_channels" msgid="4716199078612071915">"Ova aplikacija nije objavila nijednu obavijest"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Dodatne postavke u aplikaciji"</string>
-    <string name="show_unused_channels" msgid="2754356124204058828">"Prikaži nekorištene kanale"</string>
-    <string name="hide_unused_channels" msgid="9049958190570733200">"Sakrij nekorištene kanale"</string>
+    <string name="show_unused_channels" msgid="4956292847964439078">"Prikaži nekorištene kategorije"</string>
+    <string name="hide_unused_channels" msgid="2019739275175707170">"Sakrij nekorištene kategorije"</string>
     <string name="deleted_channels" msgid="8489800381509312964">"{count,plural, =1{Izbrisana je # kategorija}one{Izbrisana je # kategorija}few{Izbrisane su # kategorije}other{Izbrisano je # kategorija}}"</string>
     <string name="app_notification_block_title" msgid="3880322745749900296">"Blokiraj sve"</string>
     <string name="app_notification_block_summary" msgid="1804611676339341551">"Nikad ne prikazuj te obavijesti"</string>
@@ -4700,8 +4700,8 @@
     <string name="primary_sim_title" msgid="2508161011657571566">"Vaše primarne SIM kartice"</string>
     <string name="primary_sim_calls_title" msgid="4961189133582615685">"Pozivi"</string>
     <string name="primary_sim_texts_title" msgid="1287584042733097749">"Tekstne poruke"</string>
-    <string name="primary_sim_automatic_data_title" msgid="1265528923229642480">"Autom. prebacivanje podataka"</string>
-    <string name="primary_sim_automatic_data_msg" msgid="1612203837010785203">"Upotrijebite podatke s jedne od SIM kartica ovisno o pokrivenosti i dostupnosti"</string>
+    <string name="primary_sim_automatic_data_title" msgid="1265528923229642480">"Aut. promjena izvora podatkovnog prometa"</string>
+    <string name="primary_sim_automatic_data_msg" msgid="1612203837010785203">"Koristi podatkovni promet s jedne od SIM kartica ovisno o pokrivenosti i dostupnosti"</string>
     <string name="sim_action_restart_dialog_title" msgid="3507413479633430120">"Ponovno pokretanje za upotrebu 2 SIM-a"</string>
     <string name="sim_action_restart_dialog_msg" msgid="4737611046767629774">"Da biste istovremeno koristili 2 SIM-a, ponovno pokrenite uređaj, a zatim uključite oba SIM-a"</string>
     <string name="sim_action_restart_dialog_cancel" msgid="665560106686565624">"Upotrijebi samo mobilnog operatera <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
