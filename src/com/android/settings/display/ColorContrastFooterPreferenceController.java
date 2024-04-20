@@ -14,26 +14,25 @@
  * limitations under the License.
  */
 
-package com.android.settings.accessibility;
+package com.android.settings.display;
 
 import android.content.Context;
 
 import androidx.annotation.NonNull;
 
-import com.android.settings.core.BasePreferenceController;
+import com.android.settings.R;
+import com.android.settings.accessibility.AccessibilityFooterPreferenceController;
 
-/**
- * Controller for {@link ColorContrastFragment}.
- */
-public class ContrastPreferenceController extends BasePreferenceController {
-
-    public ContrastPreferenceController(@NonNull Context context, @NonNull String preferenceKey) {
-        super(context, preferenceKey);
+/** Preference controller for footer in color contrast page. */
+public class ColorContrastFooterPreferenceController extends
+        AccessibilityFooterPreferenceController {
+    public ColorContrastFooterPreferenceController(@NonNull Context context,
+            @NonNull String key) {
+        super(context, key);
     }
 
     @Override
-    public int getAvailabilityStatus() {
-        // Hide color contrast entry point inside Accessibility settings.
-        return CONDITIONALLY_UNAVAILABLE;
+    protected String getIntroductionTitle() {
+        return mContext.getString(R.string.color_contrast_about_title);
     }
 }

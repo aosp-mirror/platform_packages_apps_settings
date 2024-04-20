@@ -14,15 +14,22 @@
  * limitations under the License.
  */
 
-package com.android.settings.accessibility;
+package com.android.settings.display;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import android.content.Context;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
+
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.accessibility.Flags;
 import com.android.settings.core.BasePreferenceController;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -31,19 +38,30 @@ import org.robolectric.RobolectricTestRunner;
 @RunWith(RobolectricTestRunner.class)
 public class ContrastPreferenceControllerTest {
 
+    @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+
     private static final String PREFERENCE_KEY = "preference_key";
 
+    private Context mContext;
     private ContrastPreferenceController mController;
 
     @Before
     public void setUp() {
-        mController = new ContrastPreferenceController(ApplicationProvider.getApplicationContext(),
-                PREFERENCE_KEY);
+        mContext = ApplicationProvider.getApplicationContext();
+        mController = new ContrastPreferenceController(mContext, PREFERENCE_KEY);
     }
 
     @Test
-    public void getAvailabilityStatus_shouldReturnUnavailable() {
+    @EnableFlags(Flags.FLAG_ENABLE_COLOR_CONTRAST_CONTROL)
+    public void getAvailabilityStatus_flagsEnabled_shouldReturnAvailable() {
         assertThat(mController.getAvailabilityStatus())
-                .isEqualTo(BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
+                .isEqualTo(BasePreferenceController.AVAILABLE);
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_ENABLE_COLOR_CONTRAST_CONTROL)
+    public void getAvailabilityStatus_flagsDisabled_shouldReturnUnsupported() {
+        assertThat(mController.getAvailabilityStatus())
+                .isEqualTo(BasePreferenceController.UNSUPPORTED_ON_DEVICE);
     }
 }
