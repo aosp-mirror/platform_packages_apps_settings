@@ -636,6 +636,14 @@ public class SubscriptionUtilTest {
     }
 
     @Test
+    public void isValidCachedDisplayName_withBrackets_noCrash() {
+        String originalName = "originalName(";
+        String cacheString = "originalName( 1234";
+
+        assertThat(SubscriptionUtil.isValidCachedDisplayName(cacheString, originalName)).isTrue();
+    }
+
+    @Test
     public void isConnectedToWifi_hasWiFi_returnTrue() {
         addNetworkTransportType(NetworkCapabilities.TRANSPORT_WIFI);
 
