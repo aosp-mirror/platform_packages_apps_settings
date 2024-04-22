@@ -67,11 +67,14 @@ class ZenModesBackend {
 
     List<ZenMode> getModes() {
         ArrayList<ZenMode> modes = new ArrayList<>();
-        modes.add(getManualDndMode());
+        ZenModeConfig currentConfig = mNotificationManager.getZenModeConfig();
+        modes.add(getManualDndMode(currentConfig));
 
         Map<String, AutomaticZenRule> zenRules = mNotificationManager.getAutomaticZenRules();
         for (Map.Entry<String, AutomaticZenRule> zenRuleEntry : zenRules.entrySet()) {
-            modes.add(new ZenMode(zenRuleEntry.getKey(), zenRuleEntry.getValue()));
+            String ruleId = zenRuleEntry.getKey();
+            modes.add(new ZenMode(ruleId, zenRuleEntry.getValue(),
+                    isRuleActive(ruleId, currentConfig)));
         }
 
         // TODO: b/331429435 - Sort modes.
@@ -80,15 +83,20 @@ class ZenModesBackend {
 
     @Nullable
     ZenMode getMode(String id) {
+        ZenModeConfig currentConfig = mNotificationManager.getZenModeConfig();
         if (ZenMode.MANUAL_DND_MODE_ID.equals(id)) {
-            return getManualDndMode();
+            // Regardless of its contents, non-null manualRule means that manual rule is active.
+            return getManualDndMode(currentConfig);
         } else {
             AutomaticZenRule rule = mNotificationManager.getAutomaticZenRule(id);
-            return rule != null ? new ZenMode(id, rule) : null;
+            if (rule == null) {
+                return null;
+            }
+            return new ZenMode(id, rule, isRuleActive(id, currentConfig));
         }
     }
 
-    private ZenMode getManualDndMode() {
+    private ZenMode getManualDndMode(ZenModeConfig config) {
         // TODO: b/333530553 - Read ZenDeviceEffects of manual DND.
         // TODO: b/333682392 - Replace with final strings for name & trigger description
         AutomaticZenRule manualDndRule = new AutomaticZenRule.Builder(
@@ -103,7 +111,17 @@ class ZenModesBackend {
                 .setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_PRIORITY)
                 .build();
 
-        return ZenMode.manualDndMode(manualDndRule);
+        return ZenMode.manualDndMode(manualDndRule,
+                config != null && config.manualRule != null);  // isActive
+    }
+
+    private static boolean isRuleActive(String id, ZenModeConfig config) {
+        if (config == null) {
+            // shouldn't happen if the config is coming from NM, but be safe
+            return false;
+        }
+        ZenModeConfig.ZenRule configRule = config.automaticRules.get(id);
+        return configRule != null && configRule.isAutomaticActive();
     }
 
     void updateMode(ZenMode mode) {
