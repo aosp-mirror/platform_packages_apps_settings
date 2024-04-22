@@ -919,15 +919,22 @@ public class SubscriptionUtil {
                 SubscriptionManager.class);
         List<SubscriptionInfo> allSubInofs = subscriptionManager.getAllSubscriptionInfoList();
         for (SubscriptionInfo subInfo : allSubInofs) {
-            if (subInfo != null) {
-                if (com.android.internal.telephony.flags.Flags.supportPsimToEsimConversion()
-                        && subInfo.getSubscriptionId() == subId
-                        && !subInfo.isEmbedded()
-                        && subInfo.getTransferStatus() == TRANSFER_STATUS_CONVERTED) {
-                    return true;
-                }
+            if (subInfo != null && subInfo.getSubscriptionId() == subId
+                    && isConvertedPsimSubscription(subInfo)) {
+                return true;
             }
         }
         return false;
+    }
+
+    /**
+     * Checks if the subscription is converted pSIM.
+     */
+    public static boolean isConvertedPsimSubscription(@NonNull SubscriptionInfo subInfo) {
+        Log.d(TAG, "isConvertedPsimSubscription: isEmbedded " + subInfo.isEmbedded());
+        Log.d(TAG, "isConvertedPsimSubscription: getTransferStatus " + subInfo.getTransferStatus());
+        return com.android.internal.telephony.flags.Flags.supportPsimToEsimConversion()
+                && !subInfo.isEmbedded()
+                && subInfo.getTransferStatus() == TRANSFER_STATUS_CONVERTED;
     }
 }
