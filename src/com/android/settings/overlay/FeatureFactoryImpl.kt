@@ -55,6 +55,8 @@ import com.android.settings.homepage.contextualcards.ContextualCardFeatureProvid
 import com.android.settings.inputmethod.KeyboardSettingsFeatureProvider
 import com.android.settings.inputmethod.KeyboardSettingsFeatureProviderImpl
 import com.android.settings.localepicker.LocaleFeatureProviderImpl
+import com.android.settings.notification.syncacrossdevices.SyncAcrossDevicesFeatureProvider
+import com.android.settings.notification.syncacrossdevices.SyncAcrossDevicesFeatureProviderImpl
 import com.android.settings.panel.PanelFeatureProviderImpl
 import com.android.settings.search.SearchFeatureProvider
 import com.android.settings.search.SearchFeatureProviderImpl
@@ -196,5 +198,9 @@ open class FeatureFactoryImpl : FeatureFactory() {
 
     override val audioSharingFeatureProvider: AudioSharingFeatureProvider by lazy {
         AudioSharingFeatureProviderImpl()
+    }
+
+    override val syncAcrossDevicesFeatureProvider: SyncAcrossDevicesFeatureProvider by lazy {
+        SyncAcrossDevicesFeatureProviderImpl()
     }
 }
