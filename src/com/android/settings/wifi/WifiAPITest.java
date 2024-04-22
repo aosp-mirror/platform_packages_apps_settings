@@ -18,7 +18,10 @@ package com.android.settings.wifi;
 
 import static android.content.Context.WIFI_SERVICE;
 
+import static com.android.settingslib.wifi.WifiEnterpriseRestrictionUtils.isChangeWifiStateAllowed;
+
 import android.app.settings.SettingsEnums;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -38,7 +41,7 @@ import com.android.settings.SettingsPreferenceFragment;
 public class WifiAPITest extends SettingsPreferenceFragment implements
         Preference.OnPreferenceClickListener {
 
-    private static final String TAG = "WifiAPITest";
+    private static final String TAG = "WifiAPITest+++";
     private int netid;
 
     //============================
@@ -69,18 +72,38 @@ public class WifiAPITest extends SettingsPreferenceFragment implements
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        Context context = getContext();
+        if (context == null) {
+            return;
+        }
         addPreferencesFromResource(R.xml.wifi_api_test);
 
+        boolean isChangeWifiStateAllowed = isChangeWifiStateAllowed(context);
         final PreferenceScreen preferenceScreen = getPreferenceScreen();
 
         mWifiDisconnect = (Preference) preferenceScreen.findPreference(KEY_DISCONNECT);
-        mWifiDisconnect.setOnPreferenceClickListener(this);
+        if (mWifiDisconnect != null) {
+            mWifiDisconnect.setEnabled(isChangeWifiStateAllowed);
+            if (isChangeWifiStateAllowed) {
+                mWifiDisconnect.setOnPreferenceClickListener(this);
+            }
+        }
 
         mWifiDisableNetwork = (Preference) preferenceScreen.findPreference(KEY_DISABLE_NETWORK);
-        mWifiDisableNetwork.setOnPreferenceClickListener(this);
+        if (mWifiDisableNetwork != null) {
+            mWifiDisableNetwork.setEnabled(isChangeWifiStateAllowed);
+            if (isChangeWifiStateAllowed) {
+                mWifiDisableNetwork.setOnPreferenceClickListener(this);
+            }
+        }
 
         mWifiEnableNetwork = (Preference) preferenceScreen.findPreference(KEY_ENABLE_NETWORK);
-        mWifiEnableNetwork.setOnPreferenceClickListener(this);
+        if (mWifiEnableNetwork != null) {
+            mWifiEnableNetwork.setEnabled(isChangeWifiStateAllowed);
+            if (isChangeWifiStateAllowed) {
+                mWifiEnableNetwork.setOnPreferenceClickListener(this);
+            }
+        }
 
     }
 
