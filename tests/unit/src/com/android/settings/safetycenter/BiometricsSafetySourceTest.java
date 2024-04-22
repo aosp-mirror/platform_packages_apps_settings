@@ -24,6 +24,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -45,10 +46,12 @@ import android.safetycenter.SafetySourceStatus;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.Settings;
 import com.android.settings.biometrics.face.FaceEnrollIntroductionInternal;
 import com.android.settings.biometrics.fingerprint.FingerprintSettings;
 import com.android.settings.testutils.ActiveUnlockTestUtils;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.ResourcesUtils;
 import com.android.settingslib.utils.StringUtil;
 
@@ -78,6 +81,7 @@ public class BiometricsSafetySourceTest {
     @Mock private DevicePolicyManager mDevicePolicyManager;
     @Mock private FingerprintManager mFingerprintManager;
     @Mock private FaceManager mFaceManager;
+    @Mock private LockPatternUtils mLockPatternUtils;
     @Mock private SafetyCenterManagerWrapper mSafetyCenterManagerWrapper;
 
     @Before
@@ -94,6 +98,10 @@ public class BiometricsSafetySourceTest {
         when(mApplicationContext.getSystemService(Context.DEVICE_POLICY_SERVICE))
                 .thenReturn(mDevicePolicyManager);
         when(mApplicationContext.getSystemService(Context.FACE_SERVICE)).thenReturn(mFaceManager);
+        FakeFeatureFactory featureFactory = FakeFeatureFactory.setupForTest();
+        when(featureFactory.securityFeatureProvider.getLockPatternUtils(mApplicationContext))
+                .thenReturn(mLockPatternUtils);
+        doReturn(true).when(mLockPatternUtils).isSecure(anyInt());
         SafetyCenterManagerWrapper.sInstance = mSafetyCenterManagerWrapper;
     }
 
