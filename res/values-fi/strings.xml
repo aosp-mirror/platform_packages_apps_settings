@@ -1508,7 +1508,8 @@
     <string name="reset_esim_error_title" msgid="6516110227665862295">"eSIMien poistaminen ei onnistu"</string>
     <string name="reset_esim_error_msg" msgid="8459527827897797168">"Jotain meni pieleen, eikä eSIMejä poistettu.\n\nKäynnistä laite uudelleen ja yritä sitten uudelleen."</string>
     <string name="reset_private_space_delete_title" msgid="2555885198282572990">"Poista yksityinen tila"</string>
-    <string name="reset_private_space_delete_dialog" msgid="2108869024671690587">"Jos laitteella on yksityinen tila, se poistetaan pysyvästi. Kaikki tilan sovellukset ja niiden data poistetaan."</string>
+    <!-- no translation found for reset_private_space_delete_dialog (7506471054091800883) -->
+    <skip />
     <string name="main_clear_title" msgid="277664302144837723">"Poista data (tehdasasetuksiin)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Poista data (tehdasasetuksiin)"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"musiikin"</li>\n<li>"valokuvat"</li>\n<li>"muun käyttäjädatan"</li></string>
@@ -2090,8 +2091,7 @@
     <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"Yhden sormen panorointi"</string>
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"Siirrä suurennusaluetta vetämällä yhdellä sormella."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"Siirrää suurennusaluetta vetämällä kahdella sormella."</string>
-    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_unavailable (4302567514781245318) -->
-    <skip />
+    <string name="accessibility_magnification_one_finger_panning_summary_unavailable" msgid="4302567514781245318">"Ei käytettävissä, kun vain osaa näytöstä suurennetaan"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Suurenna pikanäppäimellä"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Suurenna pikanäppäimellä ja kolmoisnapautuksella."</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"Tietoja: <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
@@ -2612,6 +2612,8 @@
     <string name="battery_usage_screen_footer_empty" msgid="3301144846133808193">"Akun käyttödata on saatavilla muutaman tunnin kuluttua, kun akku on ladattu täyteen"</string>
     <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"nyt"</string>
     <string name="battery_usage_timestamps_hyphen" msgid="7401188432989043905">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g>–<xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
+    <!-- no translation found for battery_usage_timestamps_content_description (1927748134271595985) -->
+    <skip />
     <string name="battery_usage_day_and_hour" msgid="1417890420844950881">"<xliff:g id="DAY">%1$s</xliff:g> <xliff:g id="HOUR">%2$s</xliff:g>⁠"</string>
     <string name="battery_usage_time_info_and_battery_level" msgid="6732629268310936155">"<xliff:g id="TIME_INFO">%1$s</xliff:g> <xliff:g id="BATTERY_LEVEL">%2$s</xliff:g>"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Kaavio akun käytöstä"</string>
@@ -2625,6 +2627,8 @@
     <string name="battery_usage_spinner_view_by_apps" msgid="8769276544072098082">"Näytä sovellusten mukaan"</string>
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"Näytä järjestelmien mukaan"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
+    <!-- no translation found for battery_usage_less_than_percent_content_description (6265933174815461493) -->
+    <skip />
     <string name="battery_cycle_count_footer" msgid="3642121059800373545">"Ennen lähetystä tehtyjen laaduntarkastusten vuoksi kierrosluku ei välttämättä ole nolla ensimmäisellä käyttökerralla."</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Käsittelytiedot"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Käsittelyn tarkat tiedot"</string>
@@ -4197,10 +4201,6 @@
     <string name="long_background_tasks_title" msgid="3272230637974707490">"Pitkät taustatehtävät"</string>
     <string name="long_background_tasks_footer_title" msgid="9117342254914743097">"Anna sovelluksen suorittaa pitkiä taustatehtäviä. Tämä antaa sovelluksen suorittaa tehtäviä, jotka voivat kestää kauemmin kuin muutaman minuutin, esimerkiksi latauksia ja lähetyksiä. \n\nJos lupaa ei myönnetä, järjestelmä rajoittaa, kuinka kauan sovellus voi suorittaa tällaisia tehtäviä taustalla."</string>
     <string name="keywords_long_background_tasks" msgid="5788956269136054574">"pitkäkestoiset työt, datansiirto, taustatehtävät"</string>
-    <string name="run_backup_tasks_title" msgid="8572480651659803275">"Varmuuskopiointitehtävien suorittaminen taustalla"</string>
-    <string name="run_backup_tasks_switch_title" msgid="4740767959730361777">"Salli sovelluksen suorittaa varmuuskopiointiin liittyvät tehtävät taustalla"</string>
-    <string name="run_backup_tasks_footer_title" msgid="1766222193265152388">"Osoittaa, että tällä sovelluksella on tärkeä käyttötapaus, joka edellyttää sisällön varmuuskopioimista tai synkronoimista. Kun sovelluksella on tämä lupa, se voi olla käynnissä taustalla hieman tavallista pidempään, jotta sillä on aikaa suorittaa varmuuskopiointiin liittyvät tehtävät. \n\nJos lupaa ei myönnetä, järjestelmä ei anna sovellukselle erityislupaa suorittaa varmuuskopiointiin liittyviä tehtäviä taustalla."</string>
-    <string name="keywords_run_backup_tasks" msgid="632219905465766211">"varmuuskopiotehtävät, varmuuskopiotyöt"</string>
     <string name="reset_shortcut_manager_throttling" msgid="2183940254903144298">"Nollaa ShortcutManagerin kutsurajoitus"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="8949943009096885470">"ShortcutManagerin kutsurajoitus nollattiin."</string>
     <string name="notification_suggestion_title" msgid="6309263655965785411">"Muuta lukitusnäytön tietoja"</string>
@@ -5202,5 +5202,7 @@
     <string name="force_swcrypto_fallback_title" msgid="8053166299808645593">"Pakota ohjelmiston suojauksen salaus"</string>
     <string name="force_swcrypto_fallback_summary" msgid="181969966310309701">"Pakota DRM-avaimen hallinta käyttämään ohjelmistopohjaista whitebox-salausta"</string>
     <!-- no translation found for fingerprint_acquired_imager_dirty_udfps (7005042288289506776) -->
+    <skip />
+    <!-- no translation found for sim_category_converted_sim (8575548015816988908) -->
     <skip />
 </resources>
