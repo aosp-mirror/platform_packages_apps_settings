@@ -45,12 +45,19 @@ public class ZenModeTest {
 
     @Test
     public void testBasicMethods() {
-        ZenMode zenMode = new ZenMode("id", ZEN_RULE);
+        ZenMode zenMode = new ZenMode("id", ZEN_RULE, true);
 
         assertThat(zenMode.getId()).isEqualTo("id");
         assertThat(zenMode.getRule()).isEqualTo(ZEN_RULE);
         assertThat(zenMode.isManualDnd()).isFalse();
         assertThat(zenMode.canBeDeleted()).isTrue();
+        assertThat(zenMode.isActive()).isTrue();
+
+        ZenMode manualMode = ZenMode.manualDndMode(ZEN_RULE, false);
+        assertThat(manualMode.getId()).isEqualTo(ZenMode.MANUAL_DND_MODE_ID);
+        assertThat(manualMode.isManualDnd()).isTrue();
+        assertThat(manualMode.canBeDeleted()).isFalse();
+        assertThat(manualMode.isActive()).isFalse();
     }
 
     @Test
@@ -58,7 +65,7 @@ public class ZenModeTest {
         ZenMode zenMode = new ZenMode("id", new AutomaticZenRule.Builder("Rule", Uri.EMPTY)
                 .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
                 .setZenPolicy(ZEN_POLICY)
-                .build());
+                .build(), false);
 
         assertThat(zenMode.getPolicy()).isEqualTo(ZEN_POLICY);
     }
@@ -68,7 +75,7 @@ public class ZenModeTest {
         ZenMode zenMode = new ZenMode("id", new AutomaticZenRule.Builder("Rule", Uri.EMPTY)
                 .setInterruptionFilter(INTERRUPTION_FILTER_ALL)
                 .setZenPolicy(ZEN_POLICY) // should be ignored
-                .build());
+                .build(), false);
 
         assertThat(zenMode.getPolicy()).isEqualTo(
                 new ZenPolicy.Builder().allowAllSounds().showAllVisualEffects().build());
@@ -79,7 +86,7 @@ public class ZenModeTest {
         ZenMode zenMode = new ZenMode("id", new AutomaticZenRule.Builder("Rule", Uri.EMPTY)
                 .setInterruptionFilter(INTERRUPTION_FILTER_ALARMS)
                 .setZenPolicy(ZEN_POLICY) // should be ignored
-                .build());
+                .build(), false);
 
         assertThat(zenMode.getPolicy()).isEqualTo(
                 new ZenPolicy.Builder()
@@ -95,7 +102,7 @@ public class ZenModeTest {
         ZenMode zenMode = new ZenMode("id", new AutomaticZenRule.Builder("Rule", Uri.EMPTY)
                 .setInterruptionFilter(INTERRUPTION_FILTER_NONE)
                 .setZenPolicy(ZEN_POLICY) // should be ignored
-                .build());
+                .build(), false);
 
         assertThat(zenMode.getPolicy()).isEqualTo(
                 new ZenPolicy.Builder()

@@ -75,20 +75,22 @@ class ZenMode {
 
     private final String mId;
     private final AutomaticZenRule mRule;
+    private boolean mIsActive;
     private final boolean mIsManualDnd;
 
-    ZenMode(String id, AutomaticZenRule rule) {
-        this(id, rule, false);
+    ZenMode(String id, AutomaticZenRule rule, boolean isActive) {
+        this(id, rule, isActive, false);
     }
 
-    private ZenMode(String id, AutomaticZenRule rule, boolean isManualDnd) {
+    private ZenMode(String id, AutomaticZenRule rule, boolean isActive, boolean isManualDnd) {
         mId = id;
         mRule = rule;
+        mIsActive = isActive;
         mIsManualDnd = isManualDnd;
     }
 
-    static ZenMode manualDndMode(AutomaticZenRule dndPolicyAsRule) {
-        return new ZenMode(MANUAL_DND_MODE_ID, dndPolicyAsRule, true);
+    static ZenMode manualDndMode(AutomaticZenRule dndPolicyAsRule, boolean isActive) {
+        return new ZenMode(MANUAL_DND_MODE_ID, dndPolicyAsRule, isActive, true);
     }
 
     @NonNull
@@ -190,11 +192,16 @@ class ZenMode {
         return mIsManualDnd;
     }
 
+    public boolean isActive() {
+        return mIsActive;
+    }
+
     @Override
     public boolean equals(@Nullable Object obj) {
         return obj instanceof ZenMode other
                 && mId.equals(other.mId)
-                && mRule.equals(other.mRule);
+                && mRule.equals(other.mRule)
+                && mIsActive == other.mIsActive;
     }
 
     @Override
@@ -204,6 +211,6 @@ class ZenMode {
 
     @Override
     public String toString() {
-        return mId + " -> " + mRule;
+        return mId + "(" + (mIsActive ? "active" : "inactive") + ") -> " + mRule;
     }
 }

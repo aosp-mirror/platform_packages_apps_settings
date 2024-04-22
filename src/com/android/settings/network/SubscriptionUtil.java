@@ -76,8 +76,9 @@ public class SubscriptionUtil {
     static final String SUB_ID = "sub_id";
     @VisibleForTesting
     static final String KEY_UNIQUE_SUBSCRIPTION_DISPLAYNAME = "unique_subscription_displayName";
-    private static final String REGEX_DISPLAY_NAME_PREFIXES = "^";
-    private static final String REGEX_DISPLAY_NAME_SUFFIXES = "\\s[0-9]+";
+    private static final String REGEX_DISPLAY_NAME_SUFFIX = "\\s[0-9]+";
+    private static final Pattern REGEX_DISPLAY_NAME_SUFFIX_PATTERN =
+            Pattern.compile(REGEX_DISPLAY_NAME_SUFFIX);
 
     private static List<SubscriptionInfo> sAvailableResultsForTesting;
     private static List<SubscriptionInfo> sActiveResultsForTesting;
@@ -461,12 +462,12 @@ public class SubscriptionUtil {
 
     @VisibleForTesting
     static boolean isValidCachedDisplayName(String cachedDisplayName, String originalName) {
-        if (TextUtils.isEmpty(cachedDisplayName) || TextUtils.isEmpty(originalName)) {
+        if (TextUtils.isEmpty(cachedDisplayName) || TextUtils.isEmpty(originalName)
+                || !cachedDisplayName.startsWith(originalName)) {
             return false;
         }
-        String regex = REGEX_DISPLAY_NAME_PREFIXES + originalName + REGEX_DISPLAY_NAME_SUFFIXES;
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(cachedDisplayName);
+        String displayNameSuffix = cachedDisplayName.substring(originalName.length());
+        Matcher matcher = REGEX_DISPLAY_NAME_SUFFIX_PATTERN.matcher(displayNameSuffix);
         return matcher.matches();
     }
 
@@ -918,15 +919,22 @@ public class SubscriptionUtil {
                 SubscriptionManager.class);
         List<SubscriptionInfo> allSubInofs = subscriptionManager.getAllSubscriptionInfoList();
         for (SubscriptionInfo subInfo : allSubInofs) {
-            if (subInfo != null) {
-                if (com.android.internal.telephony.flags.Flags.supportPsimToEsimConversion()
-                        && subInfo.getSubscriptionId() == subId
-                        && !subInfo.isEmbedded()
-                        && subInfo.getTransferStatus() == TRANSFER_STATUS_CONVERTED) {
-                    return true;
-                }
+            if (subInfo != null && subInfo.getSubscriptionId() == subId
+                    && isConvertedPsimSubscription(subInfo)) {
+                return true;
             }
         }
         return false;
+    }
+
+    /**
+     * Checks if the subscription is converted pSIM.
+     */
+    public static boolean isConvertedPsimSubscription(@NonNull SubscriptionInfo subInfo) {
+        Log.d(TAG, "isConvertedPsimSubscription: isEmbedded " + subInfo.isEmbedded());
+        Log.d(TAG, "isConvertedPsimSubscription: getTransferStatus " + subInfo.getTransferStatus());
+        return com.android.internal.telephony.flags.Flags.supportPsimToEsimConversion()
+                && !subInfo.isEmbedded()
+                && subInfo.getTransferStatus() == TRANSFER_STATUS_CONVERTED;
     }
 }

@@ -28,6 +28,7 @@ import androidx.compose.material.icons.outlined.SimCard
 import androidx.compose.material.icons.outlined.SimCardDownload
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -44,6 +45,7 @@ import com.android.settingslib.spa.widget.ui.SettingsIcon
 import com.android.settingslib.spaprivileged.model.enterprise.Restrictions
 import com.android.settingslib.spaprivileged.template.preference.RestrictedPreference
 import com.android.settingslib.spaprivileged.template.preference.RestrictedTwoTargetSwitchPreference
+import kotlinx.coroutines.flow.flow
 
 @Composable
 fun SimsSection(subscriptionInfoList: List<SubscriptionInfo>) {
@@ -63,11 +65,23 @@ private fun SimPreference(subInfo: SubscriptionInfo) {
         context.isSubscriptionEnabledFlow(subInfo.subscriptionId)
     }.collectAsStateWithLifecycle(initialValue = false)
     val phoneNumber = phoneNumber(subInfo)
+    val isConvertedPsim by remember(subInfo) {
+        flow {
+            emit(SubscriptionUtil.isConvertedPsimSubscription(subInfo))
+        }
+    }.collectAsStateWithLifecycle(initialValue = false)
     RestrictedTwoTargetSwitchPreference(
         model = object : SwitchPreferenceModel {
             override val title = subInfo.displayName.toString()
-            override val summary = { phoneNumber.value ?: "" }
+            override val summary = {
+                if (isConvertedPsim) {
+                    context.getString(R.string.sim_category_converted_sim)
+                } else {
+                    phoneNumber.value ?: ""
+                }
+            }
             override val icon = @Composable { SimIcon(subInfo.isEmbedded) }
+            override val changeable = { !isConvertedPsim }
             override val checked = { checked.value }
             override val onCheckedChange = { newChecked: Boolean ->
                 SubscriptionUtil.startToggleSubscriptionDialogActivity(
@@ -78,6 +92,7 @@ private fun SimPreference(subInfo: SubscriptionInfo) {
             }
         },
         restrictions = Restrictions(keys = listOf(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS)),
+        primaryEnabled = { !isConvertedPsim },
     ) {
         MobileNetworkUtils.launchMobileNetworkSettings(context, subInfo)
     }
