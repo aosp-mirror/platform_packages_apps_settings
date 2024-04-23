@@ -58,7 +58,8 @@ public class PrivateSpaceDashboardFragment extends DashboardFragment {
     public void onStart() {
         super.onStart();
         if (PrivateSpaceMaintainer.getInstance(getContext()).isPrivateSpaceLocked()) {
-            finish();
+            // To make sure the task is removed if it is the last activity in that stack.
+            getActivity().finishAndRemoveTask();
         }
     }
 
