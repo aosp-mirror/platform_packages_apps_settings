@@ -18,6 +18,7 @@ package com.android.settings.network
 
 import android.app.settings.SettingsEnums
 import android.net.wifi.WifiManager
+import android.view.WindowManager
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -30,12 +31,10 @@ import com.android.settings.wifi.ConfigureWifiSettings
 import com.android.settingslib.spa.SpaDialogWindowTypeActivity
 import com.android.settingslib.spa.widget.dialog.AlertDialogButton
 import com.android.settingslib.spa.widget.dialog.SettingsAlertDialogContent
+import com.android.settingslib.wifi.WifiUtils.Companion.DIALOG_WINDOW_TYPE
 import com.android.settingslib.wifi.WifiUtils.Companion.SSID
 
 class WepNetworkDialogActivity : SpaDialogWindowTypeActivity() {
-
-    // TODO: Set different window type when called from Quick Settings.
-    override val dialogWindowType = null
 
     @Composable
     override fun Content() {
@@ -69,5 +68,12 @@ class WepNetworkDialogActivity : SpaDialogWindowTypeActivity() {
                     textAlign = TextAlign.Center
                 )
             })
+    }
+
+    override fun getDialogWindowType(): Int {
+        return intent.getIntExtra(
+            DIALOG_WINDOW_TYPE,
+            WindowManager.LayoutParams.FIRST_APPLICATION_WINDOW
+        )
     }
 }
