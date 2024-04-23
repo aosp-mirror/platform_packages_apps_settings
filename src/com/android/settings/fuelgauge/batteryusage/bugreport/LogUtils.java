@@ -37,6 +37,7 @@ import java.io.PrintWriter;
 import java.time.Clock;
 import java.time.Duration;
 import java.util.List;
+import java.util.TimeZone;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 
@@ -97,6 +98,7 @@ public final class LogUtils {
     static void dumpBatteryUsageSlotDatabaseHist(Context context, PrintWriter writer) {
         final BatteryUsageSlotDao dao =
                 BatteryStateDatabase.getInstance(context).batteryUsageSlotDao();
+        writer.println("\n\tBattery Usage Slot TimeZone ID: " + TimeZone.getDefault().getID());
         writer.println("\n\tBattery Usage Slot DatabaseHistory:");
         final List<BatteryUsageSlotEntity> entities =
                 dao.getAllAfterForLog(getLastFullChargeTimestamp(context));

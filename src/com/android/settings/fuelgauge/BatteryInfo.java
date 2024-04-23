@@ -396,7 +396,11 @@ public class BatteryInfo {
                     chargeTimeMs <= 0
                             ? null
                             : getPowerRemainingChargingLabel(
-                                    context, chargeTimeMs, info.isFastCharging, currentTimeMs);
+                                    context,
+                                    chargeTimeMs,
+                                    info.isFastCharging,
+                                    info.pluggedStatus,
+                                    currentTimeMs);
 
             info.chargeLabel =
                     chargeTimeMs <= 0
@@ -428,20 +432,35 @@ public class BatteryInfo {
     }
 
     private static CharSequence getPowerRemainingChargingLabel(
-            Context context, long remainingTimeMs, boolean isFastCharging, long currentTimeMs) {
+            Context context,
+            long chargeRemainingTimeMs,
+            boolean isFastCharging,
+            int pluggedStatus,
+            long currentTimeMs) {
+        if (pluggedStatus == BatteryManager.BATTERY_PLUGGED_WIRELESS) {
+            BatterySettingsFeatureProvider featureProvider =
+                    FeatureFactory.getFeatureFactory().getBatterySettingsFeatureProvider();
+            final CharSequence wirelessChargingRemainingLabel =
+                    featureProvider.getWirelessChargingRemainingLabel(
+                            context, chargeRemainingTimeMs, currentTimeMs);
+            if (wirelessChargingRemainingLabel != null) {
+                return wirelessChargingRemainingLabel;
+            }
+        }
         if (com.android.settingslib.fuelgauge.BatteryUtils.isChargingStringV2Enabled()) {
             int chargeLabelResId =
                     isFastCharging
                             ? R.string.power_remaining_fast_charging_duration_only_v2
                             : R.string.power_remaining_charging_duration_only_v2;
             String timeString =
-                    PowerUtil.getTargetTimeShortString(context, remainingTimeMs, currentTimeMs);
+                    PowerUtil.getTargetTimeShortString(
+                            context, chargeRemainingTimeMs, currentTimeMs);
             return context.getString(chargeLabelResId, timeString);
         }
         final CharSequence timeString =
                 StringUtil.formatElapsedTime(
                         context,
-                        remainingTimeMs,
+                        chargeRemainingTimeMs,
                         /* withSeconds= */ false,
                         /* collapseTimeUnit= */ true);
         return context.getString(R.string.power_remaining_charging_duration_only, timeString);
