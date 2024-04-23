@@ -636,15 +636,14 @@ public class BatteryInfoTest {
     }
 
     @Test
-    public void
-            getBatteryInfo_customizedWirelessChargingLabel_updateRemainingLabelAndStatusLabel() {
+    public void getBatteryInfo_customizedWLCLabel_updateRemainingLabelAndStatusLabel() {
         prepareTestGetBatteryInfoEnvironment(
                 /* remainingTimeMs= */ Duration.ofHours(1).toMillis(),
                 /* chargingStringV2Enabled= */ true);
         Intent batteryIntent =
                 createIntentForGetBatteryInfoTest(
                         ChargingType.WIRELESS, ChargingSpeed.REGULAR, /* batteryLevel= */ 45);
-        CharSequence expectedLabel = "Full by 8:00 AM";
+        var expectedLabel = "Full by 8:00 AM";
         when(mFeatureFactory.batterySettingsFeatureProvider.getWirelessChargingRemainingLabel(
                         eq(mContext), anyLong(), anyLong()))
                 .thenReturn(expectedLabel);
@@ -663,8 +662,7 @@ public class BatteryInfoTest {
     }
 
     @Test
-    public void
-            getBatteryInfo_noCustomizedWirelessChargingLabel_updateRemainingLabelAndStatusLabel() {
+    public void getBatteryInfo_noCustomizedWLCLabel_updateRemainingLabelAndStatusLabel() {
         prepareTestGetBatteryInfoEnvironment(
                 /* remainingTimeMs= */ Duration.ofHours(1).toMillis(),
                 /* chargingStringV2Enabled= */ true);

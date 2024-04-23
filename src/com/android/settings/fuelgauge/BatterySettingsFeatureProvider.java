@@ -49,7 +49,7 @@ public interface BatterySettingsFeatureProvider {
     @Nullable
     CharSequence getWirelessChargingLabel(@NonNull Context context, @NonNull BatteryInfo info);
 
-    /** Return a remaining time label for wireless charging. */
+    /** Return a charging remaining time label for wireless charging. */
     @Nullable
     CharSequence getWirelessChargingRemainingLabel(
             @NonNull Context context, long remainingTimeMs, long currentTimeMs);

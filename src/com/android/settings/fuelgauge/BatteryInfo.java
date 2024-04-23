@@ -433,16 +433,16 @@ public class BatteryInfo {
 
     private static CharSequence getPowerRemainingChargingLabel(
             Context context,
-            long remainingTimeMs,
+            long chargeRemainingTimeMs,
             boolean isFastCharging,
             int pluggedStatus,
             long currentTimeMs) {
         if (pluggedStatus == BatteryManager.BATTERY_PLUGGED_WIRELESS) {
-            BatterySettingsFeatureProvider provider =
+            BatterySettingsFeatureProvider featureProvider =
                     FeatureFactory.getFeatureFactory().getBatterySettingsFeatureProvider();
             final CharSequence wirelessChargingRemainingLabel =
-                    provider.getWirelessChargingRemainingLabel(
-                            context, remainingTimeMs, currentTimeMs);
+                    featureProvider.getWirelessChargingRemainingLabel(
+                            context, chargeRemainingTimeMs, currentTimeMs);
             if (wirelessChargingRemainingLabel != null) {
                 return wirelessChargingRemainingLabel;
             }
@@ -453,13 +453,14 @@ public class BatteryInfo {
                             ? R.string.power_remaining_fast_charging_duration_only_v2
                             : R.string.power_remaining_charging_duration_only_v2;
             String timeString =
-                    PowerUtil.getTargetTimeShortString(context, remainingTimeMs, currentTimeMs);
+                    PowerUtil.getTargetTimeShortString(
+                            context, chargeRemainingTimeMs, currentTimeMs);
             return context.getString(chargeLabelResId, timeString);
         }
         final CharSequence timeString =
                 StringUtil.formatElapsedTime(
                         context,
-                        remainingTimeMs,
+                        chargeRemainingTimeMs,
                         /* withSeconds= */ false,
                         /* collapseTimeUnit= */ true);
         return context.getString(R.string.power_remaining_charging_duration_only, timeString);
