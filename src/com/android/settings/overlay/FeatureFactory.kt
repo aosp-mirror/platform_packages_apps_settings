@@ -38,7 +38,6 @@ import com.android.settings.fuelgauge.PowerUsageFeatureProvider
 import com.android.settings.homepage.contextualcards.ContextualCardFeatureProvider
 import com.android.settings.inputmethod.KeyboardSettingsFeatureProvider
 import com.android.settings.localepicker.LocaleFeatureProvider
-import com.android.settings.notification.syncacrossdevices.SyncAcrossDevicesFeatureProvider
 import com.android.settings.onboarding.OnboardingFeatureProvider
 import com.android.settings.overlay.FeatureFactory.Companion.setFactory
 import com.android.settings.panel.PanelFeatureProvider
@@ -188,11 +187,6 @@ abstract class FeatureFactory {
      * Gets implementation for audio sharing related feature.
      */
     abstract val audioSharingFeatureProvider: AudioSharingFeatureProvider
-
-    /**
-     * Gets implementation for sync across devices related feature.
-     */
-    abstract val syncAcrossDevicesFeatureProvider: SyncAcrossDevicesFeatureProvider
 
     companion object {
         private var _factory: FeatureFactory? = null

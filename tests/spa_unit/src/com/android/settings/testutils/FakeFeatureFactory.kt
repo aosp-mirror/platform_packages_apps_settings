@@ -39,7 +39,6 @@ import com.android.settings.fuelgauge.PowerUsageFeatureProvider
 import com.android.settings.homepage.contextualcards.ContextualCardFeatureProvider
 import com.android.settings.inputmethod.KeyboardSettingsFeatureProvider
 import com.android.settings.localepicker.LocaleFeatureProvider
-import com.android.settings.notification.syncacrossdevices.SyncAcrossDevicesFeatureProvider
 import com.android.settings.overlay.DockUpdaterFeatureProvider
 import com.android.settings.overlay.FeatureFactory
 import com.android.settings.overlay.SurveyFeatureProvider
@@ -152,7 +151,5 @@ class FakeFeatureFactory : FeatureFactory() {
     override val displayFeatureProvider: DisplayFeatureProvider
         get() = TODO("Not yet implemented")
     override val audioSharingFeatureProvider: AudioSharingFeatureProvider
-        get() = TODO("Not yet implemented")
-    override val syncAcrossDevicesFeatureProvider: SyncAcrossDevicesFeatureProvider
         get() = TODO("Not yet implemented")
 }
