@@ -321,8 +321,17 @@ public final class ConvertUtils {
         final List<BatteryEvent> batteryEventList = new ArrayList<>();
         final List<BatteryLevelData.PeriodBatteryLevelData> levelDataList =
                 batteryLevelData.getHourlyBatteryLevelsPerDay();
-        for (BatteryLevelData.PeriodBatteryLevelData oneDayData : levelDataList) {
-            for (int hourIndex = 0; hourIndex < oneDayData.getLevels().size() - 1; hourIndex++) {
+        final int dailyDataSize = levelDataList.size();
+        for (int dailyIndex = 0; dailyIndex < dailyDataSize; dailyIndex++) {
+            final BatteryLevelData.PeriodBatteryLevelData oneDayData =
+                    levelDataList.get(dailyIndex);
+            final int hourDataSize = oneDayData.getLevels().size();
+            for (int hourIndex = 0; hourIndex < hourDataSize; hourIndex++) {
+                // For timestamp data on adjacent days, the last data (24:00) of the previous day is
+                // equal to the first data (00:00) of the next day, so skip sending EVEN_HOUR event.
+                if (dailyIndex < dailyDataSize - 1 && hourIndex == hourDataSize - 1) {
+                    continue;
+                }
                 batteryEventList.add(
                         convertToBatteryEvent(
                                 oneDayData.getTimestamps().get(hourIndex),
