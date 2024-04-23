@@ -204,7 +204,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         if (mIsEmbeddingActivityEnabled) {
             final UserManager um = getSystemService(UserManager.class);
             final UserInfo userInfo = um.getUserInfo(getUserId());
-            if (userInfo.isManagedProfile()) {
+            if (!userInfo.isMain()) {
                 final Intent intent = new Intent(getIntent())
                         .addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT)
                         .putExtra(EXTRA_USER_HANDLE, getUser())
