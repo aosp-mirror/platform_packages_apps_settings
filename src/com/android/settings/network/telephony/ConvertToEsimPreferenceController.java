@@ -125,16 +125,21 @@ public class ConvertToEsimPreferenceController extends TelephonyBasePreferenceCo
         }
         EuiccManager euiccManager = (EuiccManager)
                 mContext.getSystemService(Context.EUICC_SERVICE);
-        if (!euiccManager.isPsimConversionSupported(subInfo.getCarrierId())) {
-            Log.i(TAG, "subId is not matched with pSIM conversion"
-                    + " supported carriers:" + subInfo.getCarrierId());
-            return CONDITIONALLY_UNAVAILABLE;
-        }
-        if (findConversionSupportComponent()) {
-            return mSubscriptionInfoEntity != null && mSubscriptionInfoEntity.isActiveSubscriptionId
-                    && !mSubscriptionInfoEntity.isEmbedded && isActiveSubscription(subId)
-                    ? AVAILABLE
-                    : CONDITIONALLY_UNAVAILABLE;
+        try {
+            if (!euiccManager.isPsimConversionSupported(subInfo.getCarrierId())) {
+                Log.i(TAG, "subId is not matched with pSIM conversion"
+                        + " supported carriers:" + subInfo.getCarrierId());
+                return CONDITIONALLY_UNAVAILABLE;
+            }
+            if (findConversionSupportComponent()) {
+                return mSubscriptionInfoEntity != null
+                        && mSubscriptionInfoEntity.isActiveSubscriptionId
+                        && !mSubscriptionInfoEntity.isEmbedded && isActiveSubscription(subId)
+                        ? AVAILABLE
+                        : CONDITIONALLY_UNAVAILABLE;
+            }
+        } catch (RuntimeException e) {
+            Log.e(TAG, "Fail to check pSIM conversion supported carrier: " + e.getMessage());
         }
         return CONDITIONALLY_UNAVAILABLE;
     }
