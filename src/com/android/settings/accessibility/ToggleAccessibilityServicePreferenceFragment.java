@@ -443,8 +443,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
         final ApplicationInfo appInfo =
                 a11yServiceInfo.getResolveInfo().serviceInfo.applicationInfo;
         final Uri packageUri = Uri.parse("package:" + appInfo.packageName);
-        final Intent uninstallIntent = new Intent(Intent.ACTION_UNINSTALL_PACKAGE, packageUri)
-                .setPackage(getString(R.string.config_package_installer_package_name));
+        final Intent uninstallIntent = new Intent(Intent.ACTION_UNINSTALL_PACKAGE, packageUri);
         return uninstallIntent;
     }
 
@@ -468,7 +467,10 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     @Override
     protected int getDefaultShortcutTypes() {
         if (android.view.accessibility.Flags.a11yQsShortcut()) {
-            return getTileComponentName() == null ? super.getDefaultShortcutTypes()
+            AccessibilityServiceInfo info = getAccessibilityServiceInfo();
+            boolean isAccessibilityTool = info != null && info.isAccessibilityTool();
+            return !isAccessibilityTool || getTileComponentName() == null
+                    ? super.getDefaultShortcutTypes()
                     : ShortcutConstants.UserShortcutType.QUICK_SETTINGS;
         }
 

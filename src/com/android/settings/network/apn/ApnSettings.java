@@ -52,8 +52,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 
@@ -61,8 +64,11 @@ import com.android.settings.R;
 import com.android.settings.RestrictedSettingsFragment;
 import com.android.settings.flags.Flags;
 import com.android.settings.network.SubscriptionUtil;
+import com.android.settings.network.telephony.SubscriptionRepository;
 import com.android.settings.spa.SpaActivity;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+
+import kotlin.Unit;
 
 import java.util.ArrayList;
 
@@ -91,13 +97,6 @@ public class ApnSettings extends RestrictedSettingsFragment
             Telephony.Carriers.MVNO_MATCH_DATA,
             Telephony.Carriers.EDITED_STATUS,
     };
-
-    /** Copied from {@code com.android.internal.telephony.TelephonyIntents} */
-    private static final String ACTION_SIM_STATE_CHANGED =
-            "android.intent.action.SIM_STATE_CHANGED";
-    /** Copied from {@code com.android.internal.telephony.IccCardConstants} */
-    public static final String INTENT_KEY_ICC_STATE = "ss";
-    public static final String INTENT_VALUE_ICC_ABSENT = "ABSENT";
 
     private static final int ID_INDEX = 0;
     private static final int NAME_INDEX = 1;
@@ -162,16 +161,7 @@ public class ApnSettings extends RestrictedSettingsFragment
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            if (ACTION_SIM_STATE_CHANGED.equals(action)
-                    && intent.getStringExtra(INTENT_KEY_ICC_STATE)
-                    .equals(INTENT_VALUE_ICC_ABSENT)) {
-                final SubscriptionManager sm = context.getSystemService(SubscriptionManager.class);
-                if (sm != null && !sm.isActiveSubscriptionId(mSubId)) {
-                    Log.d(TAG, "Due to SIM absent, closes APN settings page");
-                    finish();
-                }
-            } else if (intent.getAction().equals(
+            if (intent.getAction().equals(
                     TelephonyManager.ACTION_SUBSCRIPTION_CARRIER_IDENTITY_CHANGED)) {
                 if (mRestoreDefaultApnMode) {
                     return;
@@ -223,7 +213,6 @@ public class ApnSettings extends RestrictedSettingsFragment
         mPhoneId = SubscriptionUtil.getPhoneId(activity, mSubId);
         mIntentFilter = new IntentFilter();
         mIntentFilter.addAction(TelephonyManager.ACTION_SUBSCRIPTION_CARRIER_IDENTITY_CHANGED);
-        mIntentFilter.addAction(ACTION_SIM_STATE_CHANGED);
 
         setIfOnlyAvailableForAdmins(true);
 
@@ -261,6 +250,20 @@ public class ApnSettings extends RestrictedSettingsFragment
         }
 
         addPreferencesFromResource(R.xml.apn_settings);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        new SubscriptionRepository(requireContext())
+                .collectSubscriptionEnabled(mSubId, getViewLifecycleOwner(), (isEnabled) -> {
+                    if (!isEnabled) {
+                        Log.d(TAG, "Due to subscription not enabled, closes APN settings page");
+                        finish();
+                    }
+                    return Unit.INSTANCE;
+                });
     }
 
     @Override

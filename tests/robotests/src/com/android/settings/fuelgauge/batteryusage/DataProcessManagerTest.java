@@ -41,19 +41,24 @@ import android.os.RemoteException;
 import android.os.UserManager;
 import android.text.format.DateUtils;
 
+import androidx.test.core.app.ApplicationProvider;
+
 import com.android.settings.fuelgauge.batteryusage.db.AppUsageEventEntity;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.LooperMode;
+import org.robolectric.android.util.concurrent.PausedExecutorService;
+import org.robolectric.shadows.ShadowLooper;
+import org.robolectric.shadows.ShadowPausedAsyncTask;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -65,10 +70,14 @@ import java.util.function.Supplier;
 
 @RunWith(RobolectricTestRunner.class)
 public final class DataProcessManagerTest {
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+
     private static final String FAKE_ENTRY_KEY = "fake_entry_key";
 
     private Context mContext;
     private DataProcessManager mDataProcessManager;
+    private PausedExecutorService mExecutorService;
 
     @Mock private UserIdsSeries mUserIdsSeries;
     @Mock private IUsageStatsManager mUsageStatsManager;
@@ -80,9 +89,9 @@ public final class DataProcessManagerTest {
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-
-        mContext = spy(RuntimeEnvironment.application);
+        mExecutorService = new PausedExecutorService();
+        ShadowPausedAsyncTask.overrideExecutor(mExecutorService);
+        mContext = spy(ApplicationProvider.getApplicationContext());
         DataProcessor.sTestSystemAppsPackageNames = Set.of();
         DataProcessor.sUsageStatsManager = mUsageStatsManager;
         doReturn(mContext).when(mContext).getApplicationContext();
@@ -117,7 +126,6 @@ public final class DataProcessManagerTest {
     }
 
     @Test
-    @LooperMode(LooperMode.Mode.LEGACY)
     public void constructor_noLevelData() {
         final DataProcessManager dataProcessManager =
                 new DataProcessManager(
@@ -129,7 +137,6 @@ public final class DataProcessManagerTest {
     }
 
     @Test
-    @LooperMode(LooperMode.Mode.LEGACY)
     public void start_loadEmptyDatabaseAppUsageData() {
         final MatrixCursor cursor =
                 new MatrixCursor(
@@ -142,6 +149,8 @@ public final class DataProcessManagerTest {
         doReturn(true).when(mUserManager).isUserUnlocked(anyInt());
 
         mDataProcessManager.start();
+        mExecutorService.runAll();
+        ShadowLooper.idleMainLooper();
 
         assertThat(mDataProcessManager.getIsCurrentAppUsageLoaded()).isTrue();
         assertThat(mDataProcessManager.getIsDatabaseAppUsageLoaded()).isTrue();
@@ -152,7 +161,6 @@ public final class DataProcessManagerTest {
     }
 
     @Test
-    @LooperMode(LooperMode.Mode.LEGACY)
     public void start_loadExpectedAppUsageData() throws RemoteException {
         final List<BatteryLevelData.PeriodBatteryLevelData> hourlyBatteryLevelsPerDay =
                 new ArrayList<>();
@@ -254,6 +262,8 @@ public final class DataProcessManagerTest {
                         hourlyBatteryLevelsPerDay,
                         /* batteryHistoryMap= */ new HashMap<>());
         dataProcessManager.start();
+        mExecutorService.runAll();
+        ShadowLooper.idleMainLooper();
 
         assertThat(dataProcessManager.getIsCurrentAppUsageLoaded()).isTrue();
         assertThat(dataProcessManager.getIsDatabaseAppUsageLoaded()).isTrue();
@@ -301,7 +311,6 @@ public final class DataProcessManagerTest {
     }
 
     @Test
-    @LooperMode(LooperMode.Mode.LEGACY)
     public void start_currentUserLocked_emptyAppUsageList() throws RemoteException {
         final UsageEvents.Event event =
                 getUsageEvent(UsageEvents.Event.ACTIVITY_RESUMED, /* timestamp= */ 1, "package");
@@ -323,6 +332,8 @@ public final class DataProcessManagerTest {
         DatabaseUtils.sFakeSupplier = () -> cursor;
 
         mDataProcessManager.start();
+        mExecutorService.runAll();
+        ShadowLooper.idleMainLooper();
 
         assertThat(mDataProcessManager.getAppUsageEventList()).isEmpty();
         assertThat(mDataProcessManager.getAppUsagePeriodMap()).isNull();
@@ -330,7 +341,6 @@ public final class DataProcessManagerTest {
     }
 
     @Test
-    @LooperMode(LooperMode.Mode.LEGACY)
     public void getBatteryLevelData_emptyHistoryMap_returnNull() {
         assertThat(
                         DataProcessManager.getBatteryLevelData(

@@ -59,10 +59,9 @@ public class ResetOptionsDeletePrivateSpaceController extends BasePreferenceCont
 
     @Override
     public int getAvailabilityStatus() {
-        // TODO(b/330396315) : use canAddPrivateProfile() to check if private space is supported
-        //  on the device
         return android.multiuser.Flags.enablePrivateSpaceFeatures()
                         && android.multiuser.Flags.deletePrivateSpaceFromReset()
+                        && isPrivateSpaceEntryPointEnabled()
                 ? AVAILABLE
                 : UNSUPPORTED_ON_DEVICE;
     }
@@ -107,6 +106,11 @@ public class ResetOptionsDeletePrivateSpaceController extends BasePreferenceCont
         return mHostFragment.getFragmentManager();
     }
 
+    @VisibleForTesting
+    boolean isPrivateSpaceEntryPointEnabled() {
+        return PrivateSpaceMaintainer.getInstance(mContext).isPrivateSpaceEntryPointEnabled();
+    }
+
     /* Dialog shown when deleting private space from Reset Options. */
     public static class DeletePrivateSpaceDialogFragment extends InstrumentedDialogFragment {
         private static final String TAG = "PrivateSpaceResetFrag";
@@ -121,7 +125,7 @@ public class ResetOptionsDeletePrivateSpaceController extends BasePreferenceCont
         public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
             Context context = getContext();
             return new AlertDialog.Builder(context)
-                    .setTitle(R.string.reset_private_space_delete_title)
+                    .setTitle(R.string.private_space_delete_header)
                     .setMessage(R.string.reset_private_space_delete_dialog)
                     .setPositiveButton(
                             R.string.private_space_delete_button_label,

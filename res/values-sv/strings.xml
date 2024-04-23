@@ -267,14 +267,10 @@
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Standardtid"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"Välj efter område"</string>
     <string name="zone_menu_by_offset" msgid="1257702747474426745">"Välj efter UTC-förskjutning"</string>
-    <!-- no translation found for time_feedback_category_title (5942621686512255208) -->
-    <skip />
-    <!-- no translation found for keywords_time_feedback_category (4553921538559830393) -->
-    <skip />
-    <!-- no translation found for time_feedback_title (7720948068042783614) -->
-    <skip />
-    <!-- no translation found for keywords_time_feedback (929965356597294030) -->
-    <skip />
+    <string name="time_feedback_category_title" msgid="5942621686512255208">"Feedback"</string>
+    <string name="keywords_time_feedback_category" msgid="4553921538559830393">"feedback, fel, tid, zon, tidszon"</string>
+    <string name="time_feedback_title" msgid="7720948068042783614">"Skicka feedback om tid"</string>
+    <string name="keywords_time_feedback" msgid="929965356597294030">"feedback, fel, tid, zon, tidszon"</string>
     <string name="lock_after_timeout" msgid="8682769000437403444">"Lås när skärmens tidsgräns har nåtts"</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> efter tidsgränsen"</string>
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"Omedelbart efter tidsgränsen, utom när den hålls olåst av <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
@@ -569,17 +565,17 @@
     <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"Du kan låsa ditt privata område automatiskt om du inte har använt enheten på ett tag"</string>
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"Varje gång enheten låses"</string>
     <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"Efter fem minuters inaktivitet"</string>
-    <string name="private_space_auto_lock_never" msgid="595014527119778873">"Aldrig"</string>
+    <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"Endast när enheten har startats om"</string>
     <string name="private_space_hide_page_title" msgid="4351404195904146088">"Dölj privat område när det är låst"</string>
     <string name="private_space_hide_page_summary" msgid="6247773353685839242">"Du kan dölja ett privat område i applistan så att andra inte vet att du har ett"</string>
     <string name="private_space_access_header" msgid="1077082416567150819">"Kom åt ett privat område när det är dolt"</string>
     <string name="private_space_search_description" msgid="1538155187658429618">"Ange ”privat område” i sökfältet"</string>
-    <string name="private_space_tap_tile_description" msgid="6173556870938267361">"Tryck på "<b>"Private område"</b></string>
+    <string name="private_space_tap_tile_description" msgid="6173556870938267361">"Tryck på "<b>"Privat område"</b></string>
     <string name="private_space_unlock_description" msgid="5527228922778630361">"Lås upp ditt privata område"</string>
     <string name="private_space_hide_off_summary" msgid="8565973976602078315">"Av"</string>
     <string name="private_space_hide_on_summary" msgid="3450844101901438867">"På"</string>
     <string name="private_space_hide_dialog_title" msgid="6439207708506990156">"Det privata området döljs nästa gång du låser det"</string>
-    <string name="private_space_hide_dialog_message" msgid="618693520130744836">"Öppna ditt privata område genom att ange det privata området i sökfältet i applistan."</string>
+    <string name="private_space_hide_dialog_message" msgid="618693520130744836">"Öppna ditt privata område genom att skriva ”privat område” i sökfältet i applistan."</string>
     <string name="private_space_hide_dialog_button" msgid="4157191429310035457">"OK"</string>
     <string name="private_space_category_system" msgid="1286843321867285700">"System"</string>
     <string name="private_space_delete_title" msgid="636873505724100006">"Radera privat område"</string>
@@ -588,7 +584,6 @@
     <string name="private_space_accounts" msgid="1078277762792056395">"Följande konton tas bort från det privata området:"</string>
     <string name="private_space_delete_button_label" msgid="1256981385318225002">"Radera"</string>
     <string name="private_space_confirm_deletion_header" msgid="3468651585498942977">"Raderar privat område …"</string>
-    <string name="private_space_confirm_deletion_summary" msgid="342544588554284686">"Detta tar en stund"</string>
     <string name="private_space_deleted" msgid="7692240901492540053">"Privat område har raderats"</string>
     <string name="private_space_delete_failed" msgid="7705795653796174741">"Det gick inte att radera privat område"</string>
     <string name="private_space_unlocked" msgid="9091600948712932046">"Privat område är upplåst"</string>
@@ -606,16 +601,18 @@
     <string name="private_space_install_apps_text" msgid="5693139160766464498"><b>"Installera appar"</b>\n"Ditt privata område har en egen Play Butik så att du smidigt kan installera appar."</string>
     <string name="private_space_apps_permission_text" msgid="7030946025253366172">"Appar i ditt privata område visas inte i behörighetshanteringen, integritetsöversikten eller andra inställningar när ditt privata område är låst.\n\nDitt privata område kan inte flyttas till en ny enhet. Du måste ställa in ett nytt privat område om du vill använda det på en annan enhet.\n\nAlla som ansluter din enhet till en dator eller installerar skadliga appar på enheten kanske kan få åtkomst till ditt privata område."</string>
     <string name="private_space_learn_more_text" msgid="5314198983263277586">"Läs mer om privat område"</string>
+    <!-- no translation found for private_space_few_moments_text (7166883272914424011) -->
+    <skip />
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Ställer in privat område …"</string>
-    <string name="private_space_notifications_hidden_title" msgid="2009112565217540581">"Aviseringar från appar i ett privat område döljs när det är låst"</string>
-    <string name="private_space_explore_settings_title" msgid="1448128245941571654">"Utforska inställningarna för privat område om du vill dölja privat område och ställa in automatiskt lås"</string>
-    <string name="private_space_apps_installed_title" msgid="4781838023423527730">"Appar som krävs är redan installerade i ditt privata område"</string>
     <string name="private_space_error_screen_title" msgid="739381738044418346">"Det gick inte att ställa in privat område"</string>
     <string name="private_space_tryagain_label" msgid="8305362615231738367">"Försök igen"</string>
-    <string name="private_space_lockscreen_title" msgid="6034864097861137509">"Vill du låsa upp privat rum med skärmlåset?"</string>
-    <string name="private_space_lockscreen_summary" msgid="430569465080645805">"Du kan låsa upp ditt privata rum på samma sätt som du låser upp din enhet, eller så väljer du ett annat lås"</string>
+    <!-- no translation found for private_space_lockscreen_title (5785259588888586366) -->
+    <skip />
+    <!-- no translation found for private_space_lockscreen_summary (3053836076639653805) -->
+    <skip />
     <string name="private_space_use_screenlock_label" msgid="9182153443192032782">"Använd skärmlås"</string>
     <string name="private_space_set_lock_label" msgid="1790408277477408475">"Välj ett nytt lås"</string>
+    <string name="private_space_pre_finish_title" msgid="2314776598615113267">"Ett ögonblick …"</string>
     <string name="private_space_success_title" msgid="4351904015352046118">"Klart!"</string>
     <string name="private_space_access_text" msgid="4433988836344567888">"Om du vill hitta ditt privata område öppnar du applistan och scrollar nedåt"</string>
     <string name="private_space_done_label" msgid="1020482651595246071">"Klar"</string>
@@ -629,9 +626,6 @@
     <string name="private_space_choose_your_pin_header" msgid="4560802934975898265">"Ställ in pinkod för ditt privata rum"</string>
     <string name="private_space_choose_your_password_header" msgid="7660259341095044434">"Ställ in lösenord för ditt privata rum"</string>
     <string name="private_space_choose_your_pattern_header" msgid="2165607102459936724">"Ställ in mönster för ditt privata rum"</string>
-    <string name="private_space_apps_and_notifications_header" msgid="7493922100321972687">"Appar och aviseringar"</string>
-    <string name="private_space_notifications_title" msgid="3456249671149740404">"Känsliga aviseringar på låsskärmen"</string>
-    <string name="private_space_sensitive_notifications_description" msgid="1466031201599700985">"Visa känsligt innehåll när privat område är olåst"</string>
     <string name="private_space_gaia_education_title" msgid="3787414895669666563">"Skapa ett Google-konto för att hålla din data privat:"</string>
     <string name="private_space_gaia_education_description" msgid="1592753570023264559">"På nästa skärm kan du logga in på kontot som du vill använda med ditt privata område"</string>
     <string name="private_space_gaia_education_header" msgid="7835879839637613495"><b>"Skapa ett dedikerat konto för att förhindra att data visas utanför det privata området, till exempel:"</b></string>
@@ -640,6 +634,10 @@
     <string name="private_space_gaia_education_bullet3" msgid="1703614225321289717">"Webbhistorik, bokmärken och sparade lösenord"</string>
     <string name="private_space_gaia_education_bullet4" msgid="515761604505366164">"Föreslaget innehåll som rör din aktivitet i appar i det privat området"</string>
     <string name="private_space_gaia_education_got_it" msgid="7824029819615566806">"OK"</string>
+    <!-- no translation found for private_space_category_lock (1917657024358778169) -->
+    <skip />
+    <!-- no translation found for private_space_category_hide (3236587591523126649) -->
+    <skip />
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Du kan lägga till upp till <xliff:g id="COUNT">%d</xliff:g> fingeravtryck"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Du har lagt till det högsta tillåtna antalet fingeravtryck"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Det går inte att lägga till fler fingeravtryck"</string>
@@ -824,9 +822,11 @@
     <string name="bluetooth_device_context_disconnect" msgid="4464167389972513232">"Koppla ifrån"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="2406032703622371826">"Parkoppla och anslut"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="7326727272747345476">"När Bluetooth har aktiverats kan enheten kommunicera med andra Bluetooth-enheter i närheten"</string>
-    <string name="bluetooth_empty_list_bluetooth_off_auto_on_available" msgid="5833847615853525971">"När Bluetooth är aktiverat kan enheten kommunicera med andra Bluetooth-enheter i närheten. Funktioner som Snabbdelning, Hitta min enhet och enhetens plats använder Bluetooth."</string>
+    <!-- no translation found for bluetooth_empty_list_bluetooth_off_auto_on_available (3430864468105204282) -->
+    <skip />
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"När Bluetooth är aktiverat kan enheten kommunicera med andra Bluetooth-enheter i närheten.\n\nÄven när Bluetooth är inaktiverat kan appar och tjänster när som helst söka efter enheter i närheten för att förbättra användningen av enheten. Funktionen kan till exempel användas till att förbättra platsbaserade funktioner och tjänster. Du kan ändra inställningen i genomsökningsinställningarna för Bluetooth."</string>
-    <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="5047787966768730069">"När Bluetooth är aktiverat kan enheten kommunicera med andra Bluetooth-enheter i närheten. Funktioner som Snabbdelning, Hitta min enhet och enhetens plats använder Bluetooth.\n\nAppar och tjänster kan fortfarande söka efter enheter i närheten när som helst, även när Bluetooth är inaktiverat. Detta kan till exempel användas för att förbättra platsbaserade funktioner och tjänster. Du kan ändra detta i inställningarna för Bluetooth-sökning."</string>
+    <!-- no translation found for bluetooth_scanning_on_info_message_auto_on_available (7792443293031247638) -->
+    <skip />
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"Ändring"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Enhetsinformation"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Tangentbordsinställningar"</string>
@@ -920,14 +920,18 @@
     <string name="wifi_settings_scanning_required_info" msgid="1473411566072565789">"Med hjälp av wifi-sökning kan appar och tjänster söka efter wifi-nätverk när som helst, även när wifi är inaktiverat. Funktionen kan till exempel användas till att förbättra platsbaserade funktioner och tjänster."</string>
     <string name="wifi_settings_scanning_required_turn_on" msgid="1112223196123955447">"Aktivera"</string>
     <string name="wifi_settings_scanning_required_enabled" msgid="4721729158927146365">"Wifi-sökning har aktiverats"</string>
-    <string name="wifi_settings_warning_wep_network" msgid="2655077013800385646">"Det här nätverket använder ett äldre säkerhetsprotokoll som är mindre säkert"</string>
+    <!-- no translation found for wifi_settings_warning_wep_network (7032462362300663466) -->
+    <skip />
     <string name="wifi_settings_wep_networks_blocked_title" msgid="8337700496544833669">"<xliff:g id="NAME">%1$s</xliff:g> har blockerats"</string>
     <string name="wifi_settings_wep_networks_summary_toggle_off" msgid="1113138364046142949">"Det här nätverket använder ett äldre säkerhetsprotokoll som kallas WEP och som är mindre säkert. Om du vill ansluta ändå kan du tillåta WEP-nätverk."</string>
-    <string name="wifi_settings_wep_networks_summary_blocked_by_carrier" msgid="6085673947156094523">"Din operatör tillåter inte att du ansluter till det här nätverket eftersom det använder ett äldre säkerhetsprotokoll som är mindre säkert"</string>
+    <!-- no translation found for wifi_settings_wep_networks_summary_blocked_by_carrier (5891581925109256871) -->
+    <skip />
     <string name="wifi_settings_wep_networks_button_allow" msgid="2807926329019873706">"Tillåt WEP"</string>
     <string name="wifi_settings_ssid_block_button_close" msgid="3013886895576949908">"Stäng"</string>
-    <string name="wifi_settings_wep_networks_disconnect_title" msgid="2158070405309246888">"Vill du koppla från <xliff:g id="NAME">%1$s</xliff:g>?"</string>
-    <string name="wifi_settings_wep_networks_disconnect_summary" msgid="643132352152685538">"Du är ansluten till ett WEP-nätverk. Om du blockerar sådana nätverk kopplas du från."</string>
+    <!-- no translation found for wifi_settings_wep_networks_disconnect_title (2428960671702242156) -->
+    <skip />
+    <!-- no translation found for wifi_settings_wep_networks_disconnect_summary (6894496037087903635) -->
+    <skip />
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Avancerade alternativ"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Rullgardinsmenyn Avancerade alternativ"</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"utöka"</string>
@@ -1336,13 +1340,13 @@
     <string name="storage_settings" msgid="7472188817781592677">"Lagring"</string>
     <string name="storage_settings_for_app" msgid="229425418984637483">"Lagringsutrymme och cacheminne"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"Lagringsinställningar"</string>
-    <string name="status_eid" msgid="7532406028683438634">"EID"</string>
-    <string name="eid_multi_sim" msgid="9087924808336397804">"EID (SIM-kortsplats <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>)"</string>
+    <string name="status_eid" msgid="3588471107671992684">"EID"</string>
+    <string name="eid_multi_sim" msgid="6551259348909791790">"EID (SIM-kortsplats <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>)"</string>
     <string name="imei_multi_sim" msgid="9001570420423929507">"IMEI (SIM-kortplats <xliff:g id="IMEI_SLOT_ID">%1$d</xliff:g>)"</string>
     <string name="imei_multi_sim_primary" msgid="7914653040843734282">"IMEI (SIM-kortplats <xliff:g id="IMEI_SLOT_ID_PRIMARY">%1$d</xliff:g>) (primär)"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"Välj ett sparat nätverk att visa"</string>
-    <string name="status_imei" msgid="5719752369250485007">"IMEI-kod"</string>
-    <string name="status_imei_sv" msgid="6908985558726440951">"IMEI-kod SV"</string>
+    <string name="status_imei" msgid="5719752369250485007">"IMEI-nummer"</string>
+    <string name="status_imei_sv" msgid="6908985558726440951">"IMEI-nummer SV"</string>
     <string name="status_min_number" msgid="4492899165438225714">"MIN"</string>
     <string name="status_msid_number" msgid="3871958248824595774">"MSID"</string>
     <string name="status_prl_version" msgid="9002131357502714281">"PRL-version"</string>
@@ -1439,8 +1443,7 @@
     <string name="battery_level_title" msgid="1371765298786083448">"Batterinivå"</string>
     <string name="communal_settings_title" msgid="2845678473945902115">"Allmänt"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"Allmänna inställningar"</string>
-    <!-- no translation found for satellite_setting (4171265534842459910) -->
-    <skip />
+    <string name="satellite_setting" msgid="4171265534842459910">"Satellitmeddelanden"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN:er"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Redigera åtkomstpunkt"</string>
     <string name="apn_add" msgid="9069613192201630934">"Lägg till åtkomstpunkt"</string>
@@ -1759,8 +1762,7 @@
     <string name="enable_text" msgid="8570798764647110430">"Aktivera"</string>
     <string name="clear_user_data_text" msgid="6773186434260397947">"Rensa lagringsutrymme"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"Avinstallera uppdateringar"</string>
-    <!-- no translation found for app_restricted_settings_lockscreen_title (796413224212436400) -->
-    <skip />
+    <string name="app_restricted_settings_lockscreen_title" msgid="796413224212436400">"Tillåt begränsade behörigheter"</string>
     <string name="auto_launch_enable_text" msgid="8912714475823807798">"Vissa aktiviteter som du har valt öppnas i den här appen som standard."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"Du har valt att tillåta att den här appen skapar widgetar och får åtkomst till apparnas data."</string>
     <string name="auto_launch_disable_text" msgid="502648841250936209">"Inga standardinställningar har angetts."</string>
@@ -1910,6 +1912,8 @@
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Styrplatta och mus"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"Markörens hastighet, rörelser"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Lätt klick på styrplattan"</string>
+    <string name="trackpad_tap_dragging_title" msgid="798644199582480712">"Tryck och dra"</string>
+    <string name="trackpad_tap_dragging_summary" msgid="5276968646031591058">"Tryck och dra fingret på styrplattan för att flytta objekt"</string>
     <string name="trackpad_touchpad_gesture_title" msgid="7568052847609914436">"Röresler för styrplattan"</string>
     <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"Anpassa enskilda navigeringsrörelser för styrplattan"</string>
     <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"Omvänd scrollning"</string>
@@ -2028,11 +2032,9 @@
     <string name="color_contrast_preview_email_send_date" msgid="2108702726171600080">"2 dagar sedan"</string>
     <string name="color_contrast_preview_email_badge" msgid="4845484039428505392">"Följdfråga?"</string>
     <string name="color_contrast_preview_email_title" msgid="198712116139754823">"Rapport om affärsresa"</string>
-    <!-- no translation found for color_contrast_preview_email_body (2714343154965937945) -->
-    <skip />
+    <string name="color_contrast_preview_email_body" msgid="2714343154965937945">"Om du behöver mer hjälp kan du kontakta mig eller Helen. Den här rapporten kommer att vara"</string>
     <string name="color_contrast_preview_email_attachment_name" msgid="852407311884814746">"Klientutgifter"</string>
-    <!-- no translation found for color_contrast_about_title (5939566801408667867) -->
-    <skip />
+    <string name="color_contrast_about_title" msgid="5939566801408667867">"Om färgkontrast"</string>
     <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"Gör skärmen mörkare"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Interaktionsinställningar"</string>
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"Inställningar för tidsgräns"</string>
@@ -2061,6 +2063,7 @@
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"Förstoraren följer texten medan du skriver"</string>
     <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"Behåll på när du byter app"</string>
     <string name="accessibility_screen_magnification_always_on_summary" msgid="306908451430863049">"Förstoraren är på och zoomar ut när du byter app"</string>
+    <string name="accessibility_screen_magnification_always_on_unavailable_summary" msgid="3844732482037416038">"Inte tillgänglig när bara förstoringsdelen av skärmen visas"</string>
     <string name="accessibility_screen_magnification_joystick_title" msgid="1803769708582404964">"Styrspak"</string>
     <string name="accessibility_screen_magnification_joystick_summary" msgid="4640300148573982720">"Aktivera och flytta förstoringsglaset med styrspaken på skärmen. Tryck länge och dra sedan i styrspaken för att styra förstoringsglaset. Tryck på och dra i själva styrspaken för att flytta den."</string>
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"Om förstoring"</string>
@@ -2087,6 +2090,8 @@
     <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"Panorering med ett finger"</string>
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"Flytta förstoringsområdet genom att dra med ett finger."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"Flytta förstoringsområdet genom att dra med två fingrar."</string>
+    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_unavailable (4302567514781245318) -->
+    <skip />
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Förstora med genväg"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Förstora med genväg och tryck snabbt tre gånger"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"Om <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
@@ -2109,89 +2114,59 @@
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Så här zoomar du in:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Starta förstoring med genvägen&lt;br/&gt; {1,number,integer}. Tryck på skärmen&lt;br/&gt; {2,number,integer}. Navigera på skärmen genom att dra med två fingrar&lt;br/&gt; {3,number,integer}. Nyp med två fingrar för att justera zoomnivån&lt;br/&gt; {4,number,integer}. Stoppa förstoringen med genvägen&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Så här zoomar du in tillfälligt:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Kontrollera att förstoringstyp är inställd som helskärm&lt;br/&gt; {1,number,integer}. Starta förstoring med genvägen&lt;br/&gt; {2,number,integer}. Tryck länge var som helst på skärmen&lt;br/&gt; {3,number,integer}. Navigera på skärmen genom att dra med fingret&lt;br/&gt; {4,number,integer}. Stoppa förstoringen genom att lyfta fingret"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"När förstoring har aktiverats kan du zooma in på skärmen.\n\n"<b>"Om du vill zooma"</b>" aktiverar du förstoring och trycker var som helst på skärmen.\n"<ul><li>"Scrolla genom att dra med minst två fingrar."</li>\n<li>"Justera zoomen genom att nypa med minst två fingrar."</li></ul>\n\n<b>"Om du vill zooma tillfälligt"</b>" aktiverar du förstoring och trycker länge var som helst på skärmen.\n"<ul><li>"Flytta runt på skärmen genom att dra."</li>\n<li>"Zooma ut genom att lyfta fingret."</li></ul>\n\n"Det går inte att zooma in på tangentbordet eller navigeringsfältet."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Sida <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> av <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
-    <!-- no translation found for accessibility_tutorial_dialog_title_button (1924337057649065884) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_title_volume (1032323517963429981) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_title_triple (5529704884360240365) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_title_two_finger_double (5749704453829390283) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"Kortkommando med tillgänglighetsknappen"</string>
+    <string name="accessibility_tutorial_dialog_title_volume" msgid="1032323517963429981">"Kortkommando med volymknapparna"</string>
+    <string name="accessibility_tutorial_dialog_title_triple" msgid="5529704884360240365">"Kortkommando med tre snabba tryck"</string>
+    <string name="accessibility_tutorial_dialog_title_two_finger_double" msgid="5749704453829390283">"Kortkommando med två snabba tryck med %1$d fingrar"</string>
     <string name="accessibility_tutorial_dialog_title_quick_setting" msgid="2905083277641794558">"Genväg till Snabbinställningar"</string>
-    <!-- no translation found for accessibility_tutorial_dialog_title_gesture (4541649734549409614) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_title_gesture" msgid="4541649734549409614">"Kortkommando med tillgänglighetsrörelsen"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="6800684770875867559">"Använda tillgänglighetsrörelser"</string>
-    <!-- no translation found for accessibility_tutorial_dialog_message_button (8977286776192770246) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_floating_button (6631371483819355514) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_volume (3785791536286606664) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_message_button" msgid="8977286776192770246">"Tryck på tillgänglighetsknappen <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> längst ned på skärmen för använda denna funktion.\n\nTryck länge på tillgänglighetsknappen för att byta funktion."</string>
+    <string name="accessibility_tutorial_dialog_message_floating_button" msgid="6631371483819355514">"Tryck på tillgänglighetsknappen på skärmen för att använda denna funktion"</string>
+    <string name="accessibility_tutorial_dialog_message_volume" msgid="3785791536286606664">"Håll båda volymknapparna nedtryckta för att använda den här funktionen"</string>
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"Tryck snabbt tre gånger någonstans på skärmen för att starta och avsluta förstoring."</string>
-    <!-- no translation found for accessibility_tutorial_dialog_tripletap_instruction (7549293553589934) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_twofinger_doubletap_instruction (1007756360115974649) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_quick_setting (3715446725334547432) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_shortcut_unavailable_in_suw (3847728530771929959) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_tripletap_instruction" msgid="7549293553589934">"Tryck snabbt %1$d gånger på skärmen för att starta och avsluta förstoring"</string>
+    <string name="accessibility_tutorial_dialog_twofinger_doubletap_instruction" msgid="1007756360115974649">"Tryck snabbt två gånger med %1$d fingrar på skärmen för att starta och avsluta förstoring"</string>
+    <string name="accessibility_tutorial_dialog_message_quick_setting" msgid="3715446725334547432">"{count,plural, =1{Svep nedåt från skärmens överkant för att använda den här funktionen. Hitta sedan rutan {featureName}.}other{Svep nedåt från skärmens överkant med # fingrar för att använda denna funktion. Hitta sedan rutan {featureName}.}}"</string>
+    <string name="accessibility_tutorial_dialog_shortcut_unavailable_in_suw" msgid="3847728530771929959">"Detta kortkommando blir tillgängligt när du har slutfört konfigureringen av enheten."</string>
     <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"Svep uppåt med två fingrar från skärmens nederkant om du vill använda den här funktionen.\n\nByt funktion genom att svepa uppåt med två fingrar och hålla kvar dem."</string>
-    <!-- no translation found for accessibility_tutorial_dialog_gesture_shortcut_instruction (7349950768250852308) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_gesture_shortcut_instruction" msgid="7349950768250852308">"{count,plural, =1{Svep uppåt från skärmens nederkant för att använda denna funktion}other{Svep uppåt med # fingrar från skärmens nederkant för att använda denna funktion}}"</string>
     <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="8142847782708562793">"Svep uppåt med tre fingrar från skärmens nederkant om du vill använda den här funktionen.\n\nByt funktion genom att svepa uppåt med tre fingrar och hålla kvar dem."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"Svep uppåt med två fingrar från skärmens nederkant om du vill använda en tillgänglighetsfunktion.\n\nByt funktion genom att svepa uppåt med två fingrar och hålla kvar dem."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="7292969929578621958">"Svep uppåt med tre fingrar från skärmens nederkant om du vill använda en tillgänglighetsfunktion.\n\nByt funktion genom att svepa uppåt med tre fingrar och hålla kvar dem."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"OK"</string>
-    <!-- no translation found for accessibility_tutorial_dialog_link_button (13364319079385020) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_configure_software_shortcut_type (8041105223988170653) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_link_button" msgid="13364319079385020">"Anpassa knappen"</string>
+    <string name="accessibility_tutorial_dialog_configure_software_shortcut_type" msgid="8041105223988170653">"Fler alternativ"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Genväg till <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="48978719406821294">"tillgänglighetsknapp"</string>
     <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="7346399253904683940">"tillgänglighetsrörelse"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Svep uppåt med två fingrar"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Svep uppåt med tre fingrar"</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_software (6505512764022389951) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_floating_button (6266489864614886247) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_software_by_gesture (4775049370625630546) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software (8315934725362849788) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_title_software" msgid="6505512764022389951">"Tillgänglighetsknapp"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_floating_button" msgid="6266489864614886247">"Tryck på den flytande knappen"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="4775049370625630546">"Tillgänglighetsrörelse"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="8315934725362849788">"Tryck på tillgänglighetsknappen <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> längst ned på skärmen. Tryck länge på tillgänglighetsknappen för att byta funktion."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Svep uppåt med två fingrar från skärmens nederkant.\n\nByt funktion genom att svepa uppåt med två fingrar och hålla kvar dem."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Svep uppåt med tre fingrar från skärmens nederkant.\n\nByt funktion genom att svepa uppåt med två fingrar och hålla kvar dem."</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_gesture (2081123009255579884) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_summary_gesture" msgid="2081123009255579884">"{count,plural, =1{Svep uppåt från skärmens nederkant. Svep uppåt och håll kvar fingret för att byta funktion.}other{Svep uppåt med # fingrar från skärmens nederkant. Svep uppåt med # fingrar och håll kvar för att byta funktion.}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="4459254227203203324"><annotation id="link">"Fler alternativ"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"Läs mer om <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"Snabbinställningar"</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_quick_settings (739883998754165940) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_quick_settings_suw (4216628328191609785) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="739883998754165940">"{count,plural, =1{Svep nedåt från skärmens överkant}other{Svep nedåt med # fingrar från skärmens överkant}}"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_quick_settings_suw" msgid="4216628328191609785">"{count,plural, =1{Svep nedåt från skärmens överkant. Detta kortkommando blir tillgängligt när du har slutfört konfigureringen av enheten.}other{Svep nedåt med # fingrar från skärmens överkant. Detta kortkommando blir tillgängligt när du har slutfört konfigureringen av enheten.}}"</string>
     <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"Snabbinställningar"</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_hardware (844089763968552142) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_hardware_keyword (2483152542320987022) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="844089763968552142">"Volymknappar"</string>
+    <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"volymknappar"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Håll båda volymknapparna nedtryckta"</string>
     <string name="accessibility_shortcut_edit_dialog_title_two_finger_double_tap" msgid="2271778556854020996">"Tryck snabbt två gånger på skärmen med två fingrar"</string>
-    <!-- no translation found for accessibility_shortcut_edit_screen_title_two_finger_double_tap (8952595692906527694) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_screen_summary_two_finger_double_tap (385404127425496362) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_screen_title_triple_tap (3314488747597058942) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_screen_summary_triple_tap (4839204951599629871) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_two_finger_double_tap_keyword (6271718715836961167) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_screen_title_two_finger_double_tap" msgid="8952595692906527694">"Tryck snabbt två gånger med %1$d fingrar"</string>
+    <string name="accessibility_shortcut_edit_screen_summary_two_finger_double_tap" msgid="385404127425496362">"Tryck snabbt två gånger med %1$d fingrar på skärmen"</string>
+    <string name="accessibility_shortcut_edit_screen_title_triple_tap" msgid="3314488747597058942">"Tryck snabbt tre gånger"</string>
+    <string name="accessibility_shortcut_edit_screen_summary_triple_tap" msgid="4839204951599629871">"Tryck snabbt %1$d gånger på skärmen. Detta kan göra enheten långsammare."</string>
+    <string name="accessibility_shortcut_two_finger_double_tap_keyword" msgid="6271718715836961167">"Tryck snabbt två gånger med %1$d fingrar"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_two_finger_double_tap" msgid="8262165091808318538">"Tryck snabbt {0,number,integer} gånger på skärmen med två fingrar"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"Tryck snabbt tre gånger på skärmen"</string>
-    <!-- no translation found for accessibility_shortcut_triple_tap_keyword (5359347130888464334) -->
-    <skip />
+    <string name="accessibility_shortcut_triple_tap_keyword" msgid="5359347130888464334">"tryck snabbt tre gånger"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="2102327956423320536">"Tryck snabbt {0,number,integer} gånger på skärmen. Detta kortkommando kan göra enheten långsammare"</string>
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Avancerat"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"<xliff:g id="SERVICE">%1$s</xliff:g> har angetts för tillgänglighetsknappen. Om du vill använda förstoring trycker du länge på tillgänglighetsknappen och väljer förstoring."</string>
@@ -2492,6 +2467,7 @@
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"Om du begränsar bakgrundaktiviteten för en app kanske den inte fungerar som den ska"</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"Appen kan inte begränsas eftersom batterioptimering inte har angetts.\n\nAktivera batterioptimering för att begränsa appen."</string>
     <string name="manager_battery_usage_category_title" msgid="1493303237531629961">"Hantera batterianvändning"</string>
+    <string name="manager_battery_usage_allow_background_usage_settings_title" msgid="8150026934645052635">"Tillåt bakgrundsanvändning"</string>
     <string name="manager_battery_usage_allow_background_usage_title" msgid="6294649996820358852">"Tillåt bakgrundsanvändning"</string>
     <string name="manager_battery_usage_allow_background_usage_summary" msgid="8021153755201340819">"Aktivera för uppdateringar i realtid – inaktivera för att spara batteri"</string>
     <string name="manager_battery_usage_unrestricted_title" msgid="2426486290463258032">"Obegränsad"</string>
@@ -3185,7 +3161,7 @@
     <string name="cloned_app_created_summary" msgid="7277912971544890710">"Klonad"</string>
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"Klonar <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"Klonade <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>"</string>
-    <string name="system_dashboard_summary" msgid="7400745270362833832">"Språk, rörelser, tid, säkerhetskopiering"</string>
+    <string name="system_dashboard_summary" msgid="7400745270362833832">"Språk, rörelser, tid och säkerhetskopiering"</string>
     <string name="languages_setting_summary" msgid="2650807397396180351">"Systemspråk, appspråk, regionsinställningar, tal"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, nätverksanslutning, internet, trådlös, data, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Wi‑Fi-avisering, wi-fi-avisering"</string>
@@ -3655,8 +3631,8 @@
     <string name="notification_channels_other" msgid="18159805343647908">"Övrigt"</string>
     <string name="no_channels" msgid="4716199078612071915">"Den här appen har inte skickat några aviseringar"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Fler inställningar i appen"</string>
-    <string name="show_unused_channels" msgid="2754356124204058828">"Visa oanvända kanaler"</string>
-    <string name="hide_unused_channels" msgid="9049958190570733200">"Dölj oanvända kanaler"</string>
+    <string name="show_unused_channels" msgid="4956292847964439078">"Visa oanvända kategorier"</string>
+    <string name="hide_unused_channels" msgid="2019739275175707170">"Dölj oanvända kategorier"</string>
     <string name="deleted_channels" msgid="8489800381509312964">"{count,plural, =1{# kategori har raderats}other{# kategorier har raderats}}"</string>
     <string name="app_notification_block_title" msgid="3880322745749900296">"Blockera alla"</string>
     <string name="app_notification_block_summary" msgid="1804611676339341551">"Visa aldrig de här aviseringarna"</string>
@@ -4011,9 +3987,6 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Tillåt hanteringsåtkomst för alla filer"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Tillåt att den här appen får läsa, redigera och radera alla filer på enheten och eventuella anslutna lagringsutrymmen. Om du beviljar behörigheten kan appen komma åt filer utan att du informeras."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Har åtkomst till alla filer"</string>
-    <string name="voice_activation_apps_title" msgid="7130045161611529825">"Röstaktiveringsappar"</string>
-    <string name="permit_voice_activation_apps" msgid="9152780172988949319">"Tillåt röstaktivering"</string>
-    <string name="allow_voice_activation_apps_description" msgid="6369745626995060656">"Röstaktivering aktiverar godkända appar via rösten med dina röstkommandon. Inbyggda adaptiva sensorer ser till att data förblir privat för dig.\n\n"<a href="">"Mer om skyddade och adaptiva sensorer"</a></string>
     <string name="full_screen_intent_title" msgid="747270185715224130">"Aviseringar i helskärm"</string>
     <string name="permit_full_screen_intent" msgid="9035367640019960861">"Tillåt aviseringar i helskärm från den här appen"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Tillåt att den här appen visar aviseringar som täcker hela skärmen när enheten är låst. Sådana aviseringar kan användas i appar för att lyfta fram alarm, inkommande samtal och andra brådskande aviseringar."</string>
@@ -4122,6 +4095,7 @@
     <string name="cell_data_warning" msgid="5664921950473359634">"Datavarning vid <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="cell_data_limit" msgid="256855024790622112">"Datagräns på <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="cell_data_warning_and_limit" msgid="8393200831986035724">"Datavarning vid <xliff:g id="ID_1">^1</xliff:g>/datagräns på <xliff:g id="ID_2">^2</xliff:g>"</string>
+    <string name="operator_warning" msgid="5672761970087591211">"Operatörens dataredovisning kan skilja sig från enhetens dataredovisning."</string>
     <string name="non_carrier_data_usage_warning" msgid="4707184871368847697">"Data som används via operatörer utesluts"</string>
     <string name="data_used_template" msgid="8229342096562327646">"<xliff:g id="ID_1">%1$s</xliff:g> har använts"</string>
     <string name="set_data_warning" msgid="1685771882794205462">"Ställ in en datavarning"</string>
@@ -4271,12 +4245,13 @@
     <string name="swipe_up_to_switch_apps_title" msgid="6677266952021118342">"Navigering med två knappar"</string>
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"Svep uppåt från hemknappen om du vill byta app. Svep uppåt igen om du vill visa alla appar. Tryck på bakåtknappen om du vill gå tillbaka."</string>
     <string name="emergency_settings_preference_title" msgid="6183455153241187148">"Säkerhet och nödläge"</string>
-    <string name="emergency_dashboard_summary" msgid="401033951074039302">"SOS-larm, medicinska uppgifter, varningar"</string>
+    <string name="emergency_dashboard_summary" msgid="401033951074039302">"SOS-larm, medicinska uppgifter och varningar"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Navigering med rörelser"</string>
     <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"Du öppnar startskärmen genom att svepa uppåt från skärmens nederkant. Byt app genom att svepa uppåt från nederkanten, hålla stilla och sedan släppa. Gå tillbaka genom att svepa från skärmens höger- eller vänsterkant."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Navigering med tre knappar"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"Gå tillbaka, öppna startskärmen och byt app med knappar längst ned på skärmen."</string>
-    <string name="nav_tutorial_button_description" msgid="5791791794770463386">"Starta guiden för navigering med rörelser"</string>
+    <!-- no translation found for nav_tutorial_button_description (6880450051535137024) -->
+    <skip />
     <string name="keywords_system_navigation" msgid="3131782378486554934">"systemnavigering, navigering med två knappar, navigering med tre knappar, navigering med rörelser, svepa"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Digital assistent"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Aktivera assistenten genom att svepa"</string>
@@ -4423,7 +4398,6 @@
     <string name="storage_documents" msgid="7873134307844320096">"Dokument"</string>
     <string name="storage_other" msgid="7922190148479988838">"Annat"</string>
     <string name="storage_apps" msgid="3564291603258795216">"Appar"</string>
-    <string name="storage_documents_and_other" msgid="3293689243732236480">"Dokument och annat"</string>
     <string name="storage_system" msgid="8472410119822911844">"System"</string>
     <string name="storage_os_name" msgid="4637680493234672410">"Android <xliff:g id="VERSION">%s</xliff:g>"</string>
     <string name="storage_temporary_files" msgid="8254109904032452219">"Temporära systemfiler"</string>
@@ -4458,14 +4432,16 @@
     <string name="credman_picker_title" msgid="8442086614222006564">"Föredragen tjänst för lösenord, nycklar och autofyll"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Vill du stänga av %1$s?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Vill du inaktivera den här tjänsten?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Sparade uppgifter som lösenord, nycklar, betalningsmetoder och annan information fylls inte i när du loggar in. Om du vill använda dina sparade uppgifter väljer du en lösenords-, nyckel- eller datatjänst."</string>
-    <string name="account_dashboard_title_with_passkeys" msgid="6214673787161409996">"Lösenord, nycklar och autofyll"</string>
+    <string name="account_dashboard_title_with_passkeys" msgid="648242372086733541">"Lösenord, nycklar och konton"</string>
     <string name="credman_confirmation_message_new_ui" msgid="6126274509951156460">"&lt;b&gt;Vill du inaktivera alla tjänster?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt;Lösenord, nycklar och andra sparade uppgifter blir inte tillgängliga för autofyll när du loggar in"</string>
     <string name="credman_autofill_confirmation_message_new_ui" msgid="6222139222478822267">"&lt;b&gt;Ändra tjänsten du föredrar till &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Nya lösenord, nycklar och andra uppgifter sparas från och med nu här. &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; kan använda det som visas på skärmen för att avgöra vad som kan fyllas i automatiskt"</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"Vill du använda %1$s?"</string>
+    <string name="credman_on_off_switch_content_description" msgid="2930826358220917851">"%1$s av/på"</string>
     <string name="credman_confirmation_turn_off_positive_button" msgid="5678773011513369161">"Inaktivera"</string>
     <string name="credman_confirmation_change_provider_positive_button" msgid="7732302992885116967">"Ändra"</string>
     <string name="credman_limit_error_msg_title" msgid="1525814645803612135">"Du kan bara ha fem aktiva tjänster"</string>
     <string name="credman_limit_error_msg" msgid="2521803280130310063">"Inaktivera minst en tjänst för att lägga till en annan"</string>
+    <string name="credman_main_settings_intro_text" msgid="4981603639240772620">"Välj önskad tjänst för att spara data för inloggning och förslag från autofyll. Aktivera ytterligare tjänster om du vill att dessa också ska tillhandahålla förslag."</string>
     <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"%1$s använder det som visas på skärmen för att avgöra vad som kan fyllas i automatiskt."</string>
     <string name="credman_error_message_title" msgid="4099557206946333568">"Gräns för lösenord, nycklar och datatjänster"</string>
     <string name="credman_error_message" msgid="8334797097200415449">"Du kan ha upp till fem lösenord, nycklar och datatjänster aktiva samtidigt. Inaktivera en tjänst om du vill lägga till fler."</string>
@@ -4541,8 +4517,7 @@
     <string name="media_output_label_title" msgid="4139048973886819148">"Spela upp <xliff:g id="LABEL">%s</xliff:g> på"</string>
     <string name="media_output_title_without_playing" msgid="3339321669132875821">"Ljud spelas upp på"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"Den här enheten"</string>
-    <!-- no translation found for media_output_audio_sharing (6531742594884809737) -->
-    <skip />
+    <string name="media_output_audio_sharing" msgid="6531742594884809737">"Ljuddelning"</string>
     <string name="media_out_summary_ongoing_call_state" msgid="475188726850090363">"Ej tillgänglig under samtal"</string>
     <string name="take_call_on_title" msgid="1159417893879946757">"Svara med"</string>
     <string name="cannot_change_apn_toast" msgid="296540724089240405">"Denna APN kan inte ändras."</string>
@@ -4674,8 +4649,7 @@
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"Telefonen ansluter automatiskt till en satellit. Den bästa anslutningen får du utomhus under bar himmel."</string>
     <string name="title_supported_service" msgid="4275535165812691571">"När telefonen ansluter till en satellit"</string>
     <string name="summary_supported_service" msgid="4320535903444834786">"Du kan sms:a vem som helst, inklusive räddningstjänsten. Telefonen återansluter till ett mobilnätverk när det finns ett tillgängligt."</string>
-    <!-- no translation found for satellite_setting_summary_more_information (7729454610548016356) -->
-    <skip />
+    <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"Satellitmeddelanden kan ta längre tid och är bara tillgängliga i vissa områden. Väder och vissa byggnader kan påverka din satellitanslutning. Du kan inte ringa samtal via satellit. Nödsamtal kanske fortfarande går fram.\n\nDet kan ta en stund innan kontoändringar dyker upp i inställningarna. Kontakta operatören för mer information."</string>
     <string name="more_about_satellite_messaging" msgid="3385673133561348509">"Mer om satellitmeddelanden"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Namn på åtkomstpunkter"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
@@ -4713,10 +4687,8 @@
     <string name="sim_action_turn_off" msgid="3506698692916473000">"Inaktivera"</string>
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"Det gick inte att aktivera SIM-kortet"</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"Testa att aktivera SIM-kortet igen. Starta om enheten om problemet kvarstår."</string>
-    <!-- no translation found for sim_onboarding_dialog_starting_title (4212945803784596345) -->
-    <skip />
-    <!-- no translation found for sim_onboarding_dialog_starting_msg (8450391476631265209) -->
-    <skip />
+    <string name="sim_onboarding_dialog_starting_title" msgid="4212945803784596345">"Ställ in SIM-inställningarna"</string>
+    <string name="sim_onboarding_dialog_starting_msg" msgid="8450391476631265209">"Ställ in inställningarna för mobilnätverk på att använda flera SIM-kort på den här enheten"</string>
     <string name="sim_onboarding_label_sim_title" msgid="273162565849288273">"Sätt etikett på SIM-korten"</string>
     <string name="sim_onboarding_label_sim_msg" msgid="5105859235219529056">"Du ser dessa etiketter när du ringer samtal, skickar sms, använder data och i inställningarna"</string>
     <string name="sim_onboarding_label_sim_dialog_title" msgid="5839073125605286120">"SIM-kortsetikett"</string>
@@ -4734,10 +4706,8 @@
     <string name="sim_action_restart_dialog_msg" msgid="4737611046767629774">"Om du vill använda två SIM-kort samtidigt måste du första starta om enheten och sedan aktivera båda SIM-korten"</string>
     <string name="sim_action_restart_dialog_cancel" msgid="665560106686565624">"Använd endast <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="sim_onboarding_phoneNumber_data_only" msgid="8158409121949373662">"Endast data"</string>
-    <!-- no translation found for sim_onboarding_setup (8678504891830386486) -->
-    <skip />
-    <!-- no translation found for sim_onboarding_close (8656305651358745422) -->
-    <skip />
+    <string name="sim_onboarding_setup" msgid="8678504891830386486">"Kom igång"</string>
+    <string name="sim_onboarding_close" msgid="8656305651358745422">"Stäng"</string>
     <string name="sim_onboarding_next" msgid="6415025179929475355">"Nästa"</string>
     <string name="sim_onboarding_progressbar_turning_sim_on" msgid="1163318788393361574">"Aktiverar <xliff:g id="CARRIER_NAME">%1$s</xliff:g> …"</string>
     <string name="mobile_network_spn_title" msgid="3053793174495329077">"Mobilnätverk"</string>
@@ -5228,10 +5198,9 @@
     <string name="content_protection_preference_subpage_info" msgid="6890886357653365489"></string>
     <string name="accessibility_setup_password_complete" msgid="6358749253318369077">"Nu är lösenordet inställt"</string>
     <string name="show_stylus_pointer_icon" msgid="1010583689203665786">"Visa pekare när du håller muspekaren över något"</string>
-    <!-- no translation found for media_drm_settings_title (897424966554739867) -->
-    <skip />
-    <!-- no translation found for force_swcrypto_fallback_title (8053166299808645593) -->
-    <skip />
-    <!-- no translation found for force_swcrypto_fallback_summary (181969966310309701) -->
+    <string name="media_drm_settings_title" msgid="897424966554739867">"Medieinställningar för kopieringsskydd"</string>
+    <string name="force_swcrypto_fallback_title" msgid="8053166299808645593">"Tvinga säker programvarukryptering"</string>
+    <string name="force_swcrypto_fallback_summary" msgid="181969966310309701">"Tvinga hantering av kopieringsskyddsnyckel att använda programvarubaserad white-box-kryptering"</string>
+    <!-- no translation found for fingerprint_acquired_imager_dirty_udfps (7005042288289506776) -->
     <skip />
 </resources>

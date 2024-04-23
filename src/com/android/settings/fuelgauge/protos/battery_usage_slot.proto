@@ -14,6 +14,13 @@ message BatteryUsageSlot {
   repeated BatteryUsageDiff system_usage = 7;
 }
 
+enum BatteryOptimizationMode {
+  MODE_UNKNOWN = 0;
+  MODE_RESTRICTED = 1;
+  MODE_UNRESTRICTED = 2;
+  MODE_OPTIMIZED = 3;
+}
+
 message BatteryUsageDiff {
   optional int64 uid = 1;
   optional int64 user_id = 2;
@@ -32,4 +39,5 @@ message BatteryUsageDiff {
   optional int64 background_usage_time = 15;
   optional int64 screen_on_time = 16;
   optional int64 foreground_service_usage_time = 17;
+  optional BatteryOptimizationMode app_optimization_mode = 18;
 }

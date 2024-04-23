@@ -54,8 +54,10 @@ import android.graphics.drawable.AdaptiveIconDrawable;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.VectorDrawable;
+import android.hardware.biometrics.SensorProperties;
 import android.hardware.face.Face;
 import android.hardware.face.FaceManager;
+import android.hardware.face.FaceSensorPropertiesInternal;
 import android.hardware.fingerprint.Fingerprint;
 import android.hardware.fingerprint.FingerprintManager;
 import android.net.ConnectivityManager;
@@ -925,6 +927,23 @@ public final class Utils extends com.android.settingslib.Utils {
      */
     public static boolean isMultipleBiometricsSupported(Context context) {
         return hasFingerprintHardware(context) && hasFaceHardware(context);
+    }
+
+    /**
+     * Return true if face is supported as Class 2 biometrics and above on the device, false
+     * otherwise.
+     */
+    public static boolean isFaceNotConvenienceBiometric(@NonNull Context context) {
+        FaceManager faceManager = getFaceManagerOrNull(context);
+        if (faceManager != null) {
+            final List<FaceSensorPropertiesInternal> faceProperties =
+                    faceManager.getSensorPropertiesInternal();
+            if (!faceProperties.isEmpty()) {
+                final FaceSensorPropertiesInternal props = faceProperties.get(0);
+                return props.sensorStrength != SensorProperties.STRENGTH_CONVENIENCE;
+            }
+        }
+        return false;
     }
 
     /**

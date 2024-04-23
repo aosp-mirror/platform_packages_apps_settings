@@ -52,9 +52,7 @@ public final class PrivateSpaceSafetySource {
             // Do not add the entry point when
             // -Private Profile is not present and
             // -Private Profile cannot be added.
-            if (!privateSpaceMaintainer.doesPrivateSpaceExist()
-                    && userManager != null
-                    && !userManager.canAddPrivateProfile()) {
+            if (!privateSpaceMaintainer.isPrivateSpaceEntryPointEnabled()) {
                 Log.i(TAG, "Private Space not allowed for user " + context.getUser());
                 return;
             }

@@ -27,6 +27,7 @@ import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -39,6 +40,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import com.android.settings.R
+import com.android.settings.network.telephony.SubscriptionRepository
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
 import com.android.settingslib.spa.framework.compose.LocalNavController
 import com.android.settingslib.spa.framework.theme.SettingsDimension
@@ -78,6 +80,18 @@ object ApnEditPageProvider : SettingsPageProvider {
             mutableStateOf(apnDataInit)
         }
         ApnPage(apnDataInit, apnDataCur, uriInit)
+        SubscriptionNotEnabledEffect(subId)
+    }
+
+    @Composable
+    private fun SubscriptionNotEnabledEffect(subId: Int) {
+        val context = LocalContext.current
+        val navController = LocalNavController.current
+        LaunchedEffect(subId) {
+            SubscriptionRepository(context).isSubscriptionEnabledFlow(subId).collect { isEnabled ->
+                if (!isEnabled) navController.navigateBack()
+            }
+        }
     }
 
     fun getRoute(

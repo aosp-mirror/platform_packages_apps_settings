@@ -34,6 +34,7 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.euicc.EuiccManager;
 import android.text.TextUtils;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.LifecycleObserver;
@@ -42,22 +43,20 @@ import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.internal.telephony.flags.Flags;
 import com.android.internal.telephony.util.TelephonyUtils;
-import com.android.settings.R;
 import com.android.settings.network.MobileNetworkRepository;
-import com.android.settings.network.SubscriptionUtil;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ConvertToEsimPreferenceController extends TelephonyBasePreferenceController implements
         LifecycleObserver, MobileNetworkRepository.MobileNetworkCallback {
-
+    private static final String TAG = "ConvertToEsimPreference";
     private Preference mPreference;
     private LifecycleOwner mLifecycleOwner;
     private MobileNetworkRepository mMobileNetworkRepository;
@@ -113,14 +112,27 @@ public class ConvertToEsimPreferenceController extends TelephonyBasePreferenceCo
          * To avoid showing users dialogs that can cause confusion,
          * add conditions to allow conversion in the absence of active eSIM.
          */
-        if (!mContext.getResources().getBoolean(R.bool.config_psim_conversion_menu_enabled)
-                || !isPsimConversionSupport(subId)) {
+        if (!Flags.supportPsimToEsimConversion()) {
+            Log.d(TAG, "supportPsimToEsimConversion flag is not enabled");
+            return CONDITIONALLY_UNAVAILABLE;
+        }
+
+        SubscriptionManager subscriptionManager = mContext.getSystemService(
+                SubscriptionManager.class);
+        SubscriptionInfo subInfo = subscriptionManager.getActiveSubscriptionInfo(subId);
+        if (subInfo == null) {
+            return CONDITIONALLY_UNAVAILABLE;
+        }
+        EuiccManager euiccManager = (EuiccManager)
+                mContext.getSystemService(Context.EUICC_SERVICE);
+        if (!euiccManager.isPsimConversionSupported(subInfo.getCarrierId())) {
+            Log.i(TAG, "subId is not matched with pSIM conversion"
+                    + " supported carriers:" + subInfo.getCarrierId());
             return CONDITIONALLY_UNAVAILABLE;
         }
         if (findConversionSupportComponent()) {
             return mSubscriptionInfoEntity != null && mSubscriptionInfoEntity.isActiveSubscriptionId
                     && !mSubscriptionInfoEntity.isEmbedded && isActiveSubscription(subId)
-                    && !hasActiveEsimProfiles()
                     ? AVAILABLE
                     : CONDITIONALLY_UNAVAILABLE;
         }
@@ -174,24 +186,6 @@ public class ConvertToEsimPreferenceController extends TelephonyBasePreferenceCo
         return true;
     }
 
-    private boolean hasActiveEsimProfiles() {
-        SubscriptionManager subscriptionManager = mContext.getSystemService(
-                SubscriptionManager.class);
-        List<SubscriptionInfo> subscriptionInfoList =
-                SubscriptionUtil.getActiveSubscriptions(subscriptionManager);
-        if (subscriptionInfoList == null || subscriptionInfoList.isEmpty()) {
-            return false;
-        }
-        int activatedEsimCount = (int) subscriptionInfoList
-                .stream()
-                .filter(SubscriptionInfo::isEmbedded)
-                .count();
-        if (activatedEsimCount > 0) {
-            return true;
-        }
-        return false;
-    }
-
     private boolean findConversionSupportComponent() {
         Intent intent = new Intent(EuiccService.ACTION_CONVERT_TO_EMBEDDED_SUBSCRIPTION);
         PackageManager packageManager = mContext.getPackageManager();
@@ -241,17 +235,5 @@ public class ConvertToEsimPreferenceController extends TelephonyBasePreferenceCo
             return false;
         }
         return true;
-    }
-
-    private boolean isPsimConversionSupport(int subId) {
-        SubscriptionManager subscriptionManager = mContext.getSystemService(
-                SubscriptionManager.class);
-        SubscriptionInfo subInfo = subscriptionManager.getActiveSubscriptionInfo(subId);
-        if (subInfo == null) {
-            return false;
-        }
-        final int[] supportedCarriers = mContext.getResources().getIntArray(
-                R.array.config_psim_conversion_menu_enabled_carrier);
-        return Arrays.stream(supportedCarriers).anyMatch(id -> id == subInfo.getCarrierId());
     }
 }

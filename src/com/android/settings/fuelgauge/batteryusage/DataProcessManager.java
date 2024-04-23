@@ -181,11 +181,7 @@ public class DataProcessManager {
                 }
             }
             // Loads app usage list from database.
-            if (mUserIdsSeries.isMainUserProfileOnly()) {
-                loadDatabaseAppUsageList();
-            } else {
-                mIsDatabaseAppUsageLoaded = true;
-            }
+            loadDatabaseAppUsageList();
             // Loads the battery event list from database.
             loadPowerConnectionBatteryEventList();
         } else {
@@ -588,7 +584,8 @@ public class DataProcessManager {
                         lastFullChargeTime,
                         DatabaseUtils.BATTERY_LEVEL_RECORD_EVENTS);
         final long startTimestamp =
-                (batteryLevelRecordEvents.isEmpty() || !userIdsSeries.isMainUserProfileOnly())
+                (batteryLevelRecordEvents.isEmpty()
+                                || (!isFromPeriodJob && !userIdsSeries.isMainUserProfileOnly()))
                         ? lastFullChargeTime
                         : batteryLevelRecordEvents.get(0).getTimestamp();
         final BatteryLevelData batteryLevelData =

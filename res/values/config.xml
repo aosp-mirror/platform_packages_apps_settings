@@ -387,6 +387,9 @@
     <!-- Whether Wi-Fi hotspot speed should be shown or not. -->
     <bool name="config_show_wifi_hotspot_speed">true</bool>
 
+    <!-- Whether or not Internet preference should be shown. -->
+    <bool name="config_show_internet_settings">true</bool>
+
     <!-- Whether toggle_airplane is available or not. -->
     <bool name="config_show_toggle_airplane">true</bool>
 
@@ -604,8 +607,11 @@
     <!-- Media Uri to view audio storage category. -->
     <string name="config_audio_storage_category_uri" translatable="false">content://com.android.providers.media.documents/root/audio_root</string>
 
-    <!-- Media Uri to view documents & other storage category. -->
-    <string name="config_documents_and_other_storage_category_uri" translatable="false">content://com.android.providers.media.documents/root/documents_root</string>
+    <!-- Media Uri to view documents storage category. -->
+    <string name="config_documents_storage_category_uri" translatable="false">content://com.android.providers.media.documents/root/documents_root</string>
+
+    <!-- Media Uri to view "other" storage category. -->
+    <string name="config_other_storage_category_uri" translatable="false">content://com.android.providers.media.documents/root/others_root</string>
 
     <!-- Whether to show Smart Storage toggle -->
     <bool name="config_show_smart_storage_toggle">true</bool>

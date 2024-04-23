@@ -73,6 +73,11 @@ public class PowerUsageFeatureProviderImplTest {
     }
 
     @Test
+    public void testIsAppOptimizationModeLogged_returnFalse() {
+        assertThat(mPowerFeatureProvider.isAppOptimizationModeLogged()).isFalse();
+    }
+
+    @Test
     public void testGetBatteryUsageListConsumePowerThreshold_return0() {
         assertThat(mPowerFeatureProvider.getBatteryUsageListConsumePowerThreshold()).isEqualTo(0.0);
     }

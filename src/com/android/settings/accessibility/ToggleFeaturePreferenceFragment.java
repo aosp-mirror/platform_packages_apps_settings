@@ -931,9 +931,7 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
         }
 
         Activity activity = getActivity();
-        if (com.android.settings.accessibility.Flags.removeQsTooltipInSuw()
-                && activity != null
-                && WizardManagerHelper.isAnySetupWizard(activity.getIntent())) {
+        if (activity != null && WizardManagerHelper.isAnySetupWizard(activity.getIntent())) {
             // Don't show QuickSettingsTooltip in Setup Wizard
             return;
         }

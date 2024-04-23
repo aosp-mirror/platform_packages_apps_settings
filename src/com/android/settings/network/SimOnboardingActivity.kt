@@ -43,17 +43,21 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.lifecycle.LifecycleRegistry
 import com.android.settings.R
 import com.android.settings.SidecarFragment
 import com.android.settings.network.telephony.SubscriptionActionDialogActivity
 import com.android.settings.network.telephony.ToggleSubscriptionDialogActivity
 import com.android.settings.spa.SpaActivity.Companion.startSpaActivity
 import com.android.settings.spa.network.SimOnboardingPageProvider.getRoute
+import com.android.settings.wifi.WifiPickerTrackerHelper
 import com.android.settingslib.spa.SpaBaseDialogActivity
 import com.android.settingslib.spa.framework.theme.SettingsDimension
 import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
@@ -73,6 +77,8 @@ import kotlinx.coroutines.launch
 
 class SimOnboardingActivity : SpaBaseDialogActivity() {
     lateinit var scope: CoroutineScope
+    lateinit var wifiPickerTrackerHelper: WifiPickerTrackerHelper
+    lateinit var context: Context
     lateinit var showStartingDialog: MutableState<Boolean>
     lateinit var showError: MutableState<ErrorType>
     lateinit var showProgressDialog: MutableState<Boolean>
@@ -85,6 +91,7 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         if (!this.userManager.isAdminUser) {
             Log.e(TAG, "It is not the admin user. Unable to toggle subscription.")
             finish()
@@ -151,7 +158,10 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
 
             CallbackType.CALLBACK_SETUP_PRIMARY_SIM -> {
                 scope.launch {
-                    onboardingService.startSetupPrimarySim(this@SimOnboardingActivity)
+                    onboardingService.startSetupPrimarySim(
+                        this@SimOnboardingActivity,
+                        wifiPickerTrackerHelper
+                    )
                 }
             }
 
@@ -177,19 +187,34 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     override fun Content() {
-        showStartingDialog = remember { mutableStateOf(false) }
-        showError = remember { mutableStateOf(ErrorType.ERROR_NONE) }
-        showProgressDialog = remember { mutableStateOf(false) }
-        showDsdsProgressDialog = remember { mutableStateOf(false) }
-        showRestartDialog = remember { mutableStateOf(false) }
+        showStartingDialog = rememberSaveable { mutableStateOf(false) }
+        showError = rememberSaveable { mutableStateOf(ErrorType.ERROR_NONE) }
+        showProgressDialog = rememberSaveable { mutableStateOf(false) }
+        showDsdsProgressDialog = rememberSaveable { mutableStateOf(false) }
+        showRestartDialog = rememberSaveable { mutableStateOf(false) }
         scope = rememberCoroutineScope()
+        context = LocalContext.current
+        val lifecycleOwner = LocalLifecycleOwner.current
+        wifiPickerTrackerHelper = WifiPickerTrackerHelper(
+            LifecycleRegistry(lifecycleOwner), context,
+            null /* WifiPickerTrackerCallback */
+        )
 
         registerSidecarReceiverFlow()
 
         ErrorDialogImpl()
         RestartDialogImpl()
         LaunchedEffect(Unit) {
-            if (onboardingService.activeSubInfoList.isNotEmpty()) {
+            if (showError.value != ErrorType.ERROR_NONE
+                || showProgressDialog.value
+                || showDsdsProgressDialog.value
+                || showRestartDialog.value) {
+                Log.d(TAG, "status: showError:${showError.value}, " +
+                        "showProgressDialog:${showProgressDialog.value}, " +
+                        "showDsdsProgressDialog:${showDsdsProgressDialog.value}, " +
+                        "showRestartDialog:${showRestartDialog.value}")
+                showStartingDialog.value = false
+            } else if (onboardingService.activeSubInfoList.isNotEmpty()) {
                 showStartingDialog.value = true
             }
         }
@@ -524,6 +549,7 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
             val intent = Intent(context, SimOnboardingActivity::class.java).apply {
                 putExtra(SUB_ID, subId)
             }
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             context.startActivity(intent)
         }
 

@@ -26,7 +26,7 @@ import androidx.preference.PreferenceScreen
 import com.android.settings.R
 import com.android.settings.core.BasePreferenceController
 import com.android.settings.network.SubscriptionUtil
-import com.android.settings.wifi.dpp.WifiDppUtils
+import com.android.settings.network.telephony.MobileNetworkUtils
 import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
 
 /** This controls a preference allowing the user to delete the profile for an eSIM.  */
@@ -65,7 +65,7 @@ class DeleteSimProfilePreferenceController(context: Context, preferenceKey: Stri
     override fun handlePreferenceTreeClick(preference: Preference): Boolean {
         if (preference.key != preferenceKey) return false
 
-        WifiDppUtils.showLockScreen(mContext) { deleteSim() }
+        MobileNetworkUtils.showLockScreen(mContext) { deleteSim() }
 
         return true
     }

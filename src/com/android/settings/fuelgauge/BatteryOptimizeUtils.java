@@ -345,9 +345,9 @@ public class BatteryOptimizeUtils {
         try {
             batteryUtils.setForceAppStandby(uid, packageName, appStandbyMode);
             if (allowListed) {
-                powerAllowlistBackend.addApp(packageName);
+                powerAllowlistBackend.addApp(packageName, uid);
             } else {
-                powerAllowlistBackend.removeApp(packageName);
+                powerAllowlistBackend.removeApp(packageName, uid);
             }
         } catch (Exception e) {
             // Error cases, set standby mode as -1 for logging.

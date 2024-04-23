@@ -34,11 +34,11 @@ import android.util.DisplayMetrics
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.Interpolator
 import androidx.annotation.ColorInt
+import androidx.core.animation.doOnEnd
 import androidx.core.graphics.toRectF
 import com.android.internal.annotations.VisibleForTesting
 import com.android.settings.R
 import kotlin.math.max
-import kotlin.math.min
 
 /**
  * UDFPS enrollment progress bar. This view is responsible for drawing the progress ring and its
@@ -136,18 +136,22 @@ class UdfpsEnrollProgressBarDrawableV2(private val mContext: Context, attrs: Att
   /** Indicates enrollment progress has occurred. */
   fun onEnrollmentProgress(remaining: Int, totalSteps: Int) {
     afterFirstTouch = true
-    updateState(remaining, totalSteps, false /* showingHelp */)
+    updateProgress(remaining, totalSteps)
   }
 
   /** Indicates enrollment help has occurred. */
-  fun onEnrollmentHelp(remaining: Int, totalSteps: Int) {
-    updateState(remaining, totalSteps, true /* showingHelp */)
+  fun onEnrollmentHelp() {
+    if (remainingSteps == totalSteps) {
+      // We haven't had any progress, animate the background arc fill
+      animateBackgroundColor()
+    } else {
+      // else we have had progress, animate the progress fill
+      flashHelpFillColor()
+    }
   }
 
   /** Indicates the last step was acquired. */
-  fun onLastStepAcquired() {
-    updateState(0, totalSteps, false /* showingHelp */)
-  }
+  fun onLastStepAcquired() {}
 
   override fun draw(canvas: Canvas) {
 
@@ -224,15 +228,12 @@ class UdfpsEnrollProgressBarDrawableV2(private val mContext: Context, attrs: Att
       }
   }
 
-  private fun updateState(remainingSteps: Int, totalSteps: Int, showingHelp: Boolean) {
-    updateProgress(remainingSteps, totalSteps, showingHelp)
-    updateFillColor(showingHelp)
-  }
-
-  private fun updateProgress(remainingSteps: Int, totalSteps: Int, showingHelp: Boolean) {
+  private fun updateProgress(remainingSteps: Int, totalSteps: Int) {
     if (this.remainingSteps == remainingSteps && this.totalSteps == totalSteps) {
       return
     }
+    this.remainingSteps = remainingSteps
+    this.totalSteps = totalSteps
     if (this.showingHelp) {
       if (vibrator != null && isAccessibilityEnabled) {
         vibrator.vibrate(
@@ -270,13 +271,8 @@ class UdfpsEnrollProgressBarDrawableV2(private val mContext: Context, attrs: Att
     this.showingHelp = showingHelp
     this.remainingSteps = remainingSteps
     this.totalSteps = totalSteps
-    val progressSteps = max(0.0, (totalSteps - remainingSteps).toDouble()).toInt()
+    val targetProgress = (totalSteps - remainingSteps).toFloat().div(max(1, totalSteps))
 
-    // If needed, add 1 to progress and total steps to account for initial touch.
-    val adjustedSteps = if (afterFirstTouch) progressSteps + 1 else progressSteps
-    val adjustedTotal = if (afterFirstTouch) this.totalSteps + 1 else this.totalSteps
-    val targetProgress =
-      min(1.0, (adjustedSteps.toFloat() / adjustedTotal.toFloat()).toDouble()).toFloat()
     if (progressAnimator != null && progressAnimator!!.isRunning) {
       progressAnimator!!.cancel()
     }
@@ -286,13 +282,12 @@ class UdfpsEnrollProgressBarDrawableV2(private val mContext: Context, attrs: Att
         it.addUpdateListener(progressUpdateListener)
         it.start()
       }
-    if (remainingSteps == 0) {
-      startCompletionAnimation()
-    } else if (remainingSteps > 0) {
-      rollBackCompletionAnimation()
-    }
   }
 
+  /**
+   * Flashes the background progress to a different color, followed by setting it back to the
+   * original progress color.
+   */
   private fun animateBackgroundColor() {
     if (backgroundColorAnimator != null && backgroundColorAnimator!!.isRunning) {
       backgroundColorAnimator!!.end()
@@ -304,21 +299,20 @@ class UdfpsEnrollProgressBarDrawableV2(private val mContext: Context, attrs: Att
         it.repeatMode = ValueAnimator.REVERSE
         it.interpolator = DEACCEL
         it.addUpdateListener(backgroundColorUpdateListener)
+        it.doOnEnd { backgroundPaint.color = movingTargetFill }
         it.start()
       }
   }
 
-  private fun updateFillColor(showingHelp: Boolean) {
-    if (!afterFirstTouch && showingHelp) {
-      // If we are on the first touch, animate the background color
-      // instead of the progress color.
-      animateBackgroundColor()
-      return
-    }
+  /**
+   * Flashes the progress to a different color, followed by setting it back to the original progress
+   * color.
+   */
+  private fun flashHelpFillColor() {
     if (fillColorAnimator != null && fillColorAnimator!!.isRunning) {
       fillColorAnimator!!.end()
     }
-    @ColorInt val targetColor = if (showingHelp) helpColor else progressColor
+    @ColorInt val targetColor = helpColor
     fillColorAnimator =
       ValueAnimator.ofArgb(fillPaint.color, targetColor).also {
         it.setDuration(FILL_COLOR_ANIMATION_DURATION_MS)
@@ -326,6 +320,7 @@ class UdfpsEnrollProgressBarDrawableV2(private val mContext: Context, attrs: Att
         it.repeatMode = ValueAnimator.REVERSE
         it.interpolator = DEACCEL
         it.addUpdateListener(fillColorUpdateListener)
+        it.doOnEnd { fillPaint.color = enrollProgressColor }
         it.start()
       }
   }

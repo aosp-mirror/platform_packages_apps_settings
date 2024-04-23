@@ -22,7 +22,6 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.ComponentInfo;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ProviderInfo;
 import android.provider.DeviceConfig;
@@ -37,8 +36,6 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.BasePreferenceController.AvailabilityStatus;
-
-import java.util.List;
 
 /** Utilities for active unlock details shared between Security Settings and Safety Center. */
 public class ActiveUnlockStatusUtils {
@@ -98,18 +95,14 @@ public class ActiveUnlockStatusUtils {
             Log.i(TAG, "authority not set");
             return null;
         }
-        final List<PackageInfo> packageInfos =
-                mContext.getPackageManager().getInstalledPackages(
-                        PackageManager.PackageInfoFlags.of(PackageManager.GET_PROVIDERS));
-        for (PackageInfo packageInfo : packageInfos) {
-            final ProviderInfo[] providers = packageInfo.providers;
-            if (providers != null) {
-                for (ProviderInfo provider : providers) {
-                    if (authority.equals(provider.authority) && isSystemApp(provider)) {
-                        return authority;
-                    }
-                }
-            }
+        final ProviderInfo provider = mContext.getPackageManager().resolveContentProvider(
+                authority, PackageManager.ComponentInfoFlags.of(PackageManager.MATCH_SYSTEM_ONLY));
+        if (provider == null) {
+            Log.i(TAG, "could not find provider");
+            return null;
+        }
+        if (authority.equals(provider.authority) && isSystemApp(provider)) {
+            return authority;
         }
         Log.e(TAG, "authority not valid");
         return null;

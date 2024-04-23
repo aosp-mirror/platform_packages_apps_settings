@@ -17,6 +17,11 @@
 package com.android.settings.biometrics.fingerprint2.fragment
 
 import android.content.Context
+import android.hardware.biometrics.ComponentInfoInternal
+import android.hardware.biometrics.SensorLocationInternal
+import android.hardware.biometrics.SensorProperties
+import android.hardware.fingerprint.FingerprintSensorProperties
+import android.hardware.fingerprint.FingerprintSensorPropertiesInternal
 import android.os.Bundle
 import androidx.fragment.app.testing.FragmentScenario
 import androidx.fragment.app.testing.launchFragmentInContainer
@@ -47,6 +52,7 @@ import com.android.settings.testutils2.FakeFingerprintManagerInteractor
 import com.android.systemui.biometrics.shared.model.FingerprintSensor
 import com.android.systemui.biometrics.shared.model.FingerprintSensorType
 import com.android.systemui.biometrics.shared.model.SensorStrength
+import com.android.systemui.biometrics.shared.model.toFingerprintSensor
 import com.google.android.setupdesign.GlifLayout
 import com.google.android.setupdesign.template.RequireScrollMixin
 import kotlinx.coroutines.test.StandardTestDispatcher
@@ -67,7 +73,17 @@ class FingerprintEnrollIntroFragmentTest {
   private val backgroundDispatcher = StandardTestDispatcher()
   private lateinit var fragmentScenario: FragmentScenario<FingerprintEnrollIntroV2Fragment>
   private val fingerprintSensor =
-    FingerprintSensor(1, SensorStrength.STRONG, 5, FingerprintSensorType.POWER_BUTTON)
+    FingerprintSensorPropertiesInternal(
+      0 /* sensorId */,
+      SensorProperties.STRENGTH_STRONG,
+      5 /* maxEnrollmentsPerUser */,
+      listOf<ComponentInfoInternal>(),
+      FingerprintSensorProperties.TYPE_POWER_BUTTON,
+      false /* halControlsIllumination */,
+      true /* resetLockoutRequiresHardwareAuthToken */,
+      listOf<SensorLocationInternal>(SensorLocationInternal.DEFAULT),
+    )
+      .toFingerprintSensor()
 
   var enrollFlow = Default
   val flowViewModel = FingerprintFlowViewModel(enrollFlow)

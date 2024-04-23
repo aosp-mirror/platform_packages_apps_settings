@@ -329,22 +329,16 @@ public class ToggleAccessibilityServicePreferenceFragmentTest {
     }
 
     @Test
-    public void getDefaultShortcutTypes_noAssociatedTile_softwareTypeIsDefault() {
+    @DisableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
+    public void getDefaultShortcutTypes_noAssociatedTile_softwareTypeIsDefault() throws Throwable {
         PreferredShortcuts.clearPreferredShortcuts(mContext);
-        when(mFragment.getTileComponentName()).thenReturn(null);
+        setupAccessibilityServiceInfoForFragment(
+                /* isAccessibilityTool= */ true,
+                /* tileService= */ null
+                /* warningRequired= */);
 
         assertThat(mFragment.getDefaultShortcutTypes())
                 .isEqualTo(ShortcutConstants.UserShortcutType.SOFTWARE);
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
-    public void getDefaultShortcutTypes_hasAssociatedTile_qsTypeIsDefault() {
-        PreferredShortcuts.clearPreferredShortcuts(mContext);
-        when(mFragment.getTileComponentName()).thenReturn(PLACEHOLDER_TILE_COMPONENT_NAME);
-
-        assertThat(mFragment.getDefaultShortcutTypes())
-                .isEqualTo(ShortcutConstants.UserShortcutType.QUICK_SETTINGS);
     }
 
     @Test
@@ -359,11 +353,69 @@ public class ToggleAccessibilityServicePreferenceFragmentTest {
 
     @Test
     @EnableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
+    public void getDefaultShortcutTypes_isAccessibilityTool_hasAssociatedTile_qsTypeIsDefault()
+            throws Throwable {
+        PreferredShortcuts.clearPreferredShortcuts(mContext);
+        setupAccessibilityServiceInfoForFragment(
+                /* isAccessibilityTool= */ true,
+                /* tileService= */ PLACEHOLDER_TILE_COMPONENT_NAME
+                /* warningRequired= */);
+
+        assertThat(mFragment.getDefaultShortcutTypes())
+                .isEqualTo(ShortcutConstants.UserShortcutType.QUICK_SETTINGS);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
+    public void getDefaultShortcutTypes_isNotAccessibilityTool_hasAssociatedTile_softwareTypeIsDefault()
+            throws Throwable {
+        PreferredShortcuts.clearPreferredShortcuts(mContext);
+        setupAccessibilityServiceInfoForFragment(
+                /* isAccessibilityTool= */ false,
+                /* tileService= */ PLACEHOLDER_TILE_COMPONENT_NAME
+                /* warningRequired= */);
+
+        assertThat(mFragment.getDefaultShortcutTypes())
+                .isEqualTo(ShortcutConstants.UserShortcutType.SOFTWARE);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
+    public void getDefaultShortcutTypes_isAccessibilityTool_noAssociatedTile_softwareTypeIsDefault()
+            throws Throwable {
+        PreferredShortcuts.clearPreferredShortcuts(mContext);
+        setupAccessibilityServiceInfoForFragment(
+                /* isAccessibilityTool= */ true,
+                /* tileService= */ null
+                /* warningRequired= */);
+
+        assertThat(mFragment.getDefaultShortcutTypes())
+                .isEqualTo(ShortcutConstants.UserShortcutType.SOFTWARE);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
+    public void getDefaultShortcutTypes_isNotAccessibilityTool_noAssociatedTile_softwareTypeIsDefault()
+            throws Throwable {
+        PreferredShortcuts.clearPreferredShortcuts(mContext);
+        setupAccessibilityServiceInfoForFragment(
+                /* isAccessibilityTool= */ false,
+                /* tileService= */ null
+                /* warningRequired= */);
+
+        assertThat(mFragment.getDefaultShortcutTypes())
+                .isEqualTo(ShortcutConstants.UserShortcutType.SOFTWARE);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
     public void toggleShortcutPreference_noUserPreferredShortcut_hasQsTile_enableQsShortcut()
             throws Throwable {
         PreferredShortcuts.clearPreferredShortcuts(mContext);
-        setupServiceWarningRequired(false);
-        when(mFragment.getTileComponentName()).thenReturn(PLACEHOLDER_TILE_COMPONENT_NAME);
+        setupAccessibilityServiceInfoForFragment(
+                /* isAccessibilityTool= */ true,
+                /* tileService= */ PLACEHOLDER_TILE_COMPONENT_NAME
+                /* warningRequired= */);
         mFragment.mShortcutPreference = new ShortcutPreference(mContext, /* attrs= */ null);
 
         mFragment.mShortcutPreference.setChecked(true);
@@ -380,8 +432,10 @@ public class ToggleAccessibilityServicePreferenceFragmentTest {
     public void toggleShortcutPreference_noUserPreferredShortcut_noQsTile_enableSoftwareShortcut()
             throws Throwable {
         PreferredShortcuts.clearPreferredShortcuts(mContext);
-        setupServiceWarningRequired(false);
-        when(mFragment.getTileComponentName()).thenReturn(null);
+        setupAccessibilityServiceInfoForFragment(
+                /* isAccessibilityTool= */ true,
+                /* tileService= */ null
+                /* warningRequired= */);
         mFragment.mShortcutPreference = new ShortcutPreference(mContext, /* attrs= */ null);
 
         mFragment.mShortcutPreference.setChecked(true);
@@ -398,8 +452,10 @@ public class ToggleAccessibilityServicePreferenceFragmentTest {
     public void toggleShortcutPreference_noUserPreferredShortcut_hasQsTile_flagOff_enableSoftwareShortcut()
             throws Throwable {
         PreferredShortcuts.clearPreferredShortcuts(mContext);
-        setupServiceWarningRequired(false);
-        when(mFragment.getTileComponentName()).thenReturn(PLACEHOLDER_TILE_COMPONENT_NAME);
+        setupAccessibilityServiceInfoForFragment(
+                /* isAccessibilityTool= */ true,
+                /* tileService= */ PLACEHOLDER_TILE_COMPONENT_NAME
+                /* warningRequired= */);
         mFragment.mShortcutPreference = new ShortcutPreference(mContext, /* attrs= */ null);
 
         mFragment.mShortcutPreference.setChecked(true);
@@ -416,8 +472,10 @@ public class ToggleAccessibilityServicePreferenceFragmentTest {
     public void toggleShortcutPreference_noUserPreferredShortcut_noQsTile_flagOff_enableSoftwareShortcut()
             throws Throwable {
         PreferredShortcuts.clearPreferredShortcuts(mContext);
-        setupServiceWarningRequired(false);
-        when(mFragment.getTileComponentName()).thenReturn(null);
+        setupAccessibilityServiceInfoForFragment(
+                /* isAccessibilityTool= */ true,
+                /* tileService= */ null
+                /* warningRequired= */);
         mFragment.mShortcutPreference = new ShortcutPreference(mContext, /* attrs= */ null);
 
         mFragment.mShortcutPreference.setChecked(true);
@@ -433,12 +491,14 @@ public class ToggleAccessibilityServicePreferenceFragmentTest {
     @EnableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
     public void toggleShortcutPreference_userPreferVolumeKeysShortcut_noQsTile_enableVolumeKeysShortcut()
             throws Throwable {
-        setupServiceWarningRequired(false);
+        setupAccessibilityServiceInfoForFragment(
+                /* isAccessibilityTool= */ true,
+                /* tileService= */ null
+                /* warningRequired= */);
         String componentName = mFragment.mComponentName.flattenToString();
         PreferredShortcuts.saveUserShortcutType(
                 mContext,
                 new PreferredShortcut(componentName, ShortcutConstants.UserShortcutType.HARDWARE));
-        when(mFragment.getTileComponentName()).thenReturn(null);
         mFragment.mShortcutPreference = new ShortcutPreference(mContext, /* attrs= */ null);
 
         mFragment.mShortcutPreference.setChecked(true);
@@ -456,12 +516,14 @@ public class ToggleAccessibilityServicePreferenceFragmentTest {
     @EnableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
     public void toggleShortcutPreference_userPreferVolumeKeysShortcut_hasQsTile_enableVolumeKeysShortcut()
             throws Throwable {
-        setupServiceWarningRequired(false);
+        setupAccessibilityServiceInfoForFragment(
+                /* isAccessibilityTool= */ true,
+                /* tileService= */ PLACEHOLDER_TILE_COMPONENT_NAME
+                /* warningRequired= */);
         String componentName = mFragment.mComponentName.flattenToString();
         PreferredShortcuts.saveUserShortcutType(
                 mContext,
                 new PreferredShortcut(componentName, ShortcutConstants.UserShortcutType.HARDWARE));
-        when(mFragment.getTileComponentName()).thenReturn(PLACEHOLDER_TILE_COMPONENT_NAME);
         mFragment.mShortcutPreference = new ShortcutPreference(mContext, /* attrs= */ null);
 
         mFragment.mShortcutPreference.setChecked(true);
@@ -497,6 +559,16 @@ public class ToggleAccessibilityServicePreferenceFragmentTest {
                 .thenReturn(required);
         when(mFragment.getAccessibilityServiceInfo()).thenReturn(info);
         return info;
+    }
+
+    private void setupAccessibilityServiceInfoForFragment(
+            boolean isAccessibilityTool, ComponentName tileService) throws Throwable {
+        AccessibilityServiceInfo info = setupServiceWarningRequired(false);
+        info.setAccessibilityTool(isAccessibilityTool);
+        mShadowAccessibilityManager.setInstalledAccessibilityServiceList(List.of(info));
+        mFragment.mComponentName = info.getComponentName();
+        when(mFragment.getTileComponentName()).thenReturn(tileService);
+        when(mFragment.getAccessibilityServiceInfo()).thenReturn(info);
     }
 
     private static class FakeServiceInfo extends ServiceInfo {

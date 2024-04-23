@@ -339,7 +339,6 @@ public class ToggleFeaturePreferenceFragmentTest {
     }
 
     @Test
-    @EnableFlags(com.android.settings.accessibility.Flags.FLAG_REMOVE_QS_TOOLTIP_IN_SUW)
     @Config(shadows = ShadowFragment.class)
     public void onPreferenceToggledOnEnabledService_inSuw_toolTipViewShouldNotShow() {
         Intent suwIntent = new Intent();

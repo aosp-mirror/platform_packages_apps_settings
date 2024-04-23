@@ -147,6 +147,8 @@
     <uses-permission android:name="android.permission.MANAGE_NETWORK_POLICY" />
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.GET_BACKGROUND_INSTALLED_PACKAGES" />
+    <uses-permission android:name="android.permission.SATELLITE_COMMUNICATION" />
+    <uses-permission android:name="android.permission.READ_SYSTEM_GRAMMATICAL_GENDER" />
 
     <application
             android:name=".SettingsApplication"
@@ -821,6 +823,7 @@
 
         <activity android:name=".network.SimOnboardingActivity"
             android:exported="false"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenSize|screenLayout|smallestScreenSize"
             android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS"
             android:theme="@style/Theme.SpaLib.BottomSheetDialog"/>
 
@@ -968,39 +971,6 @@
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
                        android:value="@string/menu_key_apps"/>
         </activity>
-
-        <activity-alias
-            android:name="BackupTasksActivity"
-            android:knownActivityEmbeddingCerts="@array/config_known_host_certs"
-            android:exported="true"
-            android:targetActivity=".spa.SpaBridgeActivity"
-            android:label="@string/run_backup_tasks_title">
-            <intent-filter android:priority="1">
-                <action android:name="android.settings.REQUEST_RUN_BACKUP_JOBS" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.spa.DESTINATION"
-                       android:value="TogglePermissionAppList/BackupTasksApps"/>
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_apps"/>
-        </activity-alias>
-
-        <activity-alias
-            android:name="AppBackupTasksActivity"
-            android:knownActivityEmbeddingCerts="@array/config_known_host_certs"
-            android:exported="true"
-            android:targetActivity=".spa.SpaAppBridgeActivity"
-            android:label="@string/run_backup_tasks_title">
-            <intent-filter android:priority="1">
-                <action android:name="android.settings.REQUEST_RUN_BACKUP_JOBS" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:scheme="package" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.spa.DESTINATION"
-                       android:value="TogglePermissionAppInfoPage/BackupTasksApps"/>
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_apps"/>
-        </activity-alias>
 
         <activity
             android:name="Settings$DateTimeSettingsActivity"
@@ -2685,6 +2655,7 @@
 
         <activity android:name=".biometrics.face.FaceEnrollIntroduction"
                   android:exported="true"
+                  android:theme="@style/GlifV4Theme.DayNight"
                   android:screenOrientation="nosensor">
             <intent-filter>
                 <action android:name="android.settings.FACE_ENROLL"/>
@@ -2695,18 +2666,22 @@
         <activity android:name=".biometrics.face.FaceEnrollIntroductionInternal"
                   android:exported="false"
                   android:screenOrientation="nosensor"
+                  android:theme="@style/GlifV4Theme.DayNight"
                   android:taskAffinity="com.android.settings.root" />
 
         <activity android:name=".biometrics.face.FaceEnrollEducation"
             android:exported="false"
+            android:theme="@style/GlifV4Theme.DayNight"
             android:screenOrientation="nosensor"/>
 
         <activity android:name=".biometrics.face.FaceEnrollEnrolling"
             android:exported="false"
+            android:theme="@style/GlifV4Theme.DayNight"
             android:screenOrientation="portrait"/>
 
         <activity android:name=".biometrics.face.FaceEnrollFinish"
             android:exported="false"
+            android:theme="@style/GlifV4Theme.DayNight"
             android:screenOrientation="portrait"/>
 
         <activity android:name=".biometrics.BiometricHandoffActivity"
@@ -5178,9 +5153,11 @@
 
         <activity
             android:name="com.android.settings.network.WepNetworkDialogActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenSize|screenLayout|smallestScreenSize"
+            android:excludeFromRecents="true"
             android:exported="true"
-            android:theme="@style/Theme.SpaLib.Dialog"
-            android:permission="android.permission.NETWORK_SETTINGS">
+            android:permission="android.permission.NETWORK_SETTINGS"
+            android:theme="@style/Theme.SpaLib.Dialog">
         </activity>
 
         <!-- This is the longest AndroidManifest.xml ever. -->

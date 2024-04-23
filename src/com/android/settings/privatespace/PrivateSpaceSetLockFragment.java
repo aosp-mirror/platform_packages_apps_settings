@@ -34,7 +34,9 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
+import com.android.settingslib.widget.LottieColorUtils;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupdesign.GlifLayout;
@@ -61,16 +63,16 @@ public class PrivateSpaceSetLockFragment extends InstrumentedFragment {
         final FooterBarMixin mixin = rootView.getMixin(FooterBarMixin.class);
         mixin.setPrimaryButton(
                 new FooterButton.Builder(getContext())
-                        .setText(R.string.private_space_use_screenlock_label)
-                        .setListener(onClickUse())
+                        .setText(R.string.private_space_set_lock_label)
+                        .setListener(onClickNewLock())
                         .setButtonType(FooterButton.ButtonType.NEXT)
                         .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Primary)
                         .build());
         mixin.setSecondaryButton(
                 new FooterButton.Builder(getContext())
-                        .setText(R.string.private_space_set_lock_label)
-                        .setListener(onClickNewLock())
-                        .setButtonType(FooterButton.ButtonType.NEXT)
+                        .setText(R.string.private_space_use_screenlock_label)
+                        .setListener(onClickUse())
+                        .setButtonType(FooterButton.ButtonType.SKIP)
                         .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Secondary)
                         .build());
         OnBackPressedCallback callback =
@@ -82,6 +84,8 @@ public class PrivateSpaceSetLockFragment extends InstrumentedFragment {
                     }
                 };
         requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
+        LottieAnimationView lottieAnimationView = rootView.findViewById(R.id.lottie_animation);
+        LottieColorUtils.applyDynamicColors(getContext(), lottieAnimationView);
 
         return rootView;
     }
@@ -97,7 +101,7 @@ public class PrivateSpaceSetLockFragment extends InstrumentedFragment {
                     getContext(), SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_USE_SCREEN_LOCK);
             // Simply Use default screen lock. No need to handle
             NavHostFragment.findNavController(PrivateSpaceSetLockFragment.this)
-                    .navigate(R.id.action_lock_success_fragment);
+                    .navigate(R.id.action_pre_finish_delay_fragment);
         };
     }
 

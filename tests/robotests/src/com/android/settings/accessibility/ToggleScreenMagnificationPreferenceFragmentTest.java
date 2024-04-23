@@ -122,6 +122,8 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
 
     private static final String KEY_FOLLOW_TYPING =
             Settings.Secure.ACCESSIBILITY_MAGNIFICATION_FOLLOW_TYPING_ENABLED;
+    private static final String KEY_SINGLE_FINGER_PANNING =
+            Settings.Secure.ACCESSIBILITY_SINGLE_FINGER_PANNING_ENABLED;
     private static final String KEY_ALWAYS_ON =
             Settings.Secure.ACCESSIBILITY_MAGNIFICATION_ALWAYS_ON_ENABLED;
     private static final String KEY_JOYSTICK =
@@ -211,6 +213,43 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
 
         final TwoStatePreference switchPreference = mFragController.get().findPreference(
                 MagnificationFollowTypingPreferenceController.PREF_KEY);
+        assertThat(switchPreference).isNotNull();
+        assertThat(switchPreference.isChecked()).isFalse();
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_ONE_FINGER_PANNING_GESTURE)
+    public void onResume_defaultStateForOneFingerPan_switchPreferenceShouldReturnFalse() {
+        mFragController.create(R.id.main_content, /* bundle= */ null).start().resume();
+
+        final TwoStatePreference switchPreference = mFragController.get().findPreference(
+                MagnificationOneFingerPanningPreferenceController.PREF_KEY);
+        assertThat(switchPreference).isNotNull();
+        assertThat(switchPreference.isChecked()).isFalse();
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_ONE_FINGER_PANNING_GESTURE)
+    public void onResume_enableOneFingerPan_switchPreferenceShouldReturnTrue() {
+        setKeyOneFingerPanEnabled(true);
+
+        mFragController.create(R.id.main_content, /* bundle= */ null).start().resume();
+
+        final TwoStatePreference switchPreference = mFragController.get().findPreference(
+                MagnificationOneFingerPanningPreferenceController.PREF_KEY);
+        assertThat(switchPreference).isNotNull();
+        assertThat(switchPreference.isChecked()).isTrue();
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_ONE_FINGER_PANNING_GESTURE)
+    public void onResume_disableOneFingerPan_switchPreferenceShouldReturnFalse() {
+        setKeyOneFingerPanEnabled(false);
+
+        mFragController.create(R.id.main_content, /* bundle= */ null).start().resume();
+
+        final TwoStatePreference switchPreference = mFragController.get().findPreference(
+                MagnificationOneFingerPanningPreferenceController.PREF_KEY);
         assertThat(switchPreference).isNotNull();
         assertThat(switchPreference.isChecked()).isFalse();
     }
@@ -778,6 +817,16 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_ONE_FINGER_PANNING_GESTURE)
+    public void onCreateView_oneFingerPanNotSupported_settingsPreferenceIsNull() {
+        mFragController.create(R.id.main_content, /* bundle= */ null).start().resume();
+
+        final TwoStatePreference switchPreference = mFragController.get().findPreference(
+                MagnificationOneFingerPanningPreferenceController.PREF_KEY);
+        assertThat(switchPreference).isNull();
+    }
+
+    @Test
     public void onCreateView_alwaysOnNotSupported_settingsPreferenceIsNull() {
         setAlwaysOnSupported(false);
 
@@ -817,7 +866,25 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
     }
 
     @Test
-    public void onCreateView_addTheAlwaysOnControllerToLifeCycleObserver() {
+    @EnableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_ONE_FINGER_PANNING_GESTURE)
+    public void onCreateView_oneFingerPanSupported_addControllerToLifeCycleObserver() {
+        Correspondence instanceOf = Correspondence.transforming(
+                observer -> (observer instanceof MagnificationOneFingerPanningPreferenceController),
+                "contains MagnificationOneFingerPanningPreferenceController");
+
+        ToggleScreenMagnificationPreferenceFragment fragment = mFragController.create(
+                R.id.main_content, /* bundle= */ null).start().resume().get();
+
+        List<LifecycleObserver> lifecycleObservers = ReflectionHelpers.getField(
+                fragment.getSettingsLifecycle(), "mObservers");
+        assertThat(lifecycleObservers).isNotNull();
+        assertThat(lifecycleObservers).comparingElementsUsing(instanceOf).contains(true);
+    }
+
+    @Test
+    public void onCreateView_alwaysOnSupported_addControllerToLifeCycleObserver() {
+        setAlwaysOnSupported(true);
+
         Correspondence instanceOf = Correspondence.transforming(
                 observer -> (observer instanceof MagnificationAlwaysOnPreferenceController),
                 "contains MagnificationAlwaysOnPreferenceController");
@@ -981,6 +1048,11 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
 
     private void setKeyFollowTypingEnabled(boolean enabled) {
         Settings.Secure.putInt(mContext.getContentResolver(), KEY_FOLLOW_TYPING,
+                enabled ? ON : OFF);
+    }
+
+    private void setKeyOneFingerPanEnabled(boolean enabled) {
+        Settings.Secure.putInt(mContext.getContentResolver(), KEY_SINGLE_FINGER_PANNING,
                 enabled ? ON : OFF);
     }
 

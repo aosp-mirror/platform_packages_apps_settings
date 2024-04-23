@@ -66,6 +66,7 @@ public class FaceFingerprintUnlockControllerTest {
         final FakeFeatureFactory featureFactory = FakeFeatureFactory.setupForTest();
         when(featureFactory.securityFeatureProvider.getLockPatternUtils(mContext))
                 .thenReturn(mLockPatternUtils);
+        doReturn(true).when(mLockPatternUtils).isSecure(anyInt());
 
         mFaceFingerprintUnlockController =
                 new FaceFingerprintUnlockController(mContext, mLifecycle);

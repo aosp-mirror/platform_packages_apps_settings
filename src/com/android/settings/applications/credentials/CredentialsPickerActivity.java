@@ -54,7 +54,12 @@ public class CredentialsPickerActivity extends SettingsActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        injectFragmentIntoIntent(this, getIntent());
+        final String packageName = getCallingPackage();
+        final Intent intent = getIntent();
+
+        intent.putExtra(DefaultCombinedPicker.EXTRA_PACKAGE_NAME, packageName);
+        injectFragmentIntoIntent(this, intent);
+
         super.onCreate(savedInstanceState);
     }
 
