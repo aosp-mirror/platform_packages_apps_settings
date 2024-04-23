@@ -490,6 +490,7 @@ public class NetworkSelectSettings extends DashboardFragment {
      */
     private void forceUpdateConnectedPreferenceCategory(
             NetworkSelectRepository.NetworkRegistrationAndForbiddenInfo info) {
+        mPreferenceCategory.removeAll();
         for (NetworkRegistrationInfo regInfo : info.getNetworkList()) {
             final CellIdentity cellIdentity = regInfo.getCellIdentity();
             if (cellIdentity == null) {
