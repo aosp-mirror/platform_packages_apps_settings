@@ -1,3 +1,6 @@
+# The Android Accessibility team should approve all changes to Settings > Accessibility content.
+set noparent
+
 # Default reviewers for this and subdirectories.
 chunkulin@google.com
 danielnorman@google.com
@@ -8,5 +11,9 @@ thomasli@google.com
 # Legacy owner(s).
 menghanli@google.com #{LAST_RESORT_SUGGESTION}
 
+# Core Settings owner for emergency changes.
+cipson@google.com #{LAST_RESORT_SUGGESTION}
+
+# Partner-team files
 per-file HapticFeedbackIntensityPreferenceController.java = michaelwr@google.com
 per-file *Vibration* = michaelwr@google.com
