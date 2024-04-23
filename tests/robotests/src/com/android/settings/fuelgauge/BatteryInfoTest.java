@@ -21,6 +21,7 @@ import static com.google.common.truth.Truth.assertWithMessage;
 
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doReturn;
@@ -629,6 +630,81 @@ public class BatteryInfoTest {
         assertGetBatteryInfo(
                 batteryIntent,
                 currentTimeMillis,
+                expectedStatusLabel,
+                expectedRemainingLabel,
+                expectedChargeLabel);
+    }
+
+    @Test
+    public void
+            getBatteryInfo_customizedWirelessChargingLabel_updateRemainingLabelAndStatusLabel() {
+        prepareTestGetBatteryInfoEnvironment(
+                /* remainingTimeMs= */ Duration.ofHours(1).toMillis(),
+                /* chargingStringV2Enabled= */ true);
+        Intent batteryIntent =
+                createIntentForGetBatteryInfoTest(
+                        ChargingType.WIRELESS, ChargingSpeed.REGULAR, /* batteryLevel= */ 45);
+        CharSequence expectedLabel = "Full by 8:00 AM";
+        when(mFeatureFactory.batterySettingsFeatureProvider.getWirelessChargingRemainingLabel(
+                        eq(mContext), anyLong(), anyLong()))
+                .thenReturn(expectedLabel);
+        var currentTimeMillis = Instant.parse("2021-02-09T13:00:00.00Z").toEpochMilli();
+        var info =
+                BatteryInfo.getBatteryInfo(
+                        mContext,
+                        batteryIntent,
+                        mBatteryUsageStats,
+                        MOCK_ESTIMATE,
+                        /* elapsedRealtimeUs= */ UNUSED_TIME_MS,
+                        /* shortString= */ false,
+                        /* currentTimeMillis= */ currentTimeMillis);
+
+        assertThat(info.remainingLabel).isEqualTo(expectedLabel);
+    }
+
+    @Test
+    public void
+            getBatteryInfo_noCustomizedWirelessChargingLabel_updateRemainingLabelAndStatusLabel() {
+        prepareTestGetBatteryInfoEnvironment(
+                /* remainingTimeMs= */ Duration.ofHours(1).toMillis(),
+                /* chargingStringV2Enabled= */ true);
+        Intent batteryIntent =
+                createIntentForGetBatteryInfoTest(
+                        ChargingType.WIRELESS, ChargingSpeed.REGULAR, /* batteryLevel= */ 45);
+        when(mFeatureFactory.batterySettingsFeatureProvider.getWirelessChargingRemainingLabel(
+                        eq(mContext), anyLong(), anyLong()))
+                .thenReturn(null);
+        var expectedStatusLabel = "Charging";
+        var expectedRemainingLabel = "Fully charged by";
+        var expectedChargeLabel = "45% - " + expectedRemainingLabel;
+        var currentTimeMillis = Instant.parse("2024-04-01T15:00:00Z").toEpochMilli();
+
+        assertGetBatteryInfo(
+                batteryIntent,
+                currentTimeMillis,
+                expectedStatusLabel,
+                expectedRemainingLabel,
+                expectedChargeLabel);
+    }
+
+    @Test
+    public void getBatteryInfo_noCustomWirelessChargingLabelWithV1_updateRemainingAndStatusLabel() {
+        prepareTestGetBatteryInfoEnvironment(
+                /* remainingTimeMs= */ Duration.ofMinutes(130).toMillis(),
+                /* chargingStringV2Enabled= */ false);
+        Intent batteryIntent =
+                createIntentForGetBatteryInfoTest(
+                        ChargingType.WIRELESS, ChargingSpeed.REGULAR, /* batteryLevel= */ 10);
+        when(mFeatureFactory.batterySettingsFeatureProvider.getWirelessChargingRemainingLabel(
+                        eq(mContext), anyLong(), anyLong()))
+                .thenReturn(null);
+        var expectedStatusLabel = "Charging wirelessly";
+        var expectedRemainingLabel = "2 hr, 10 min left until full";
+        var expectedChargeLabel = "10% - " + expectedRemainingLabel;
+
+        assertGetBatteryInfo(
+                batteryIntent,
+                /* currentTimeMillis= */ UNUSED_TIME_MS,
                 expectedStatusLabel,
                 expectedRemainingLabel,
                 expectedChargeLabel);

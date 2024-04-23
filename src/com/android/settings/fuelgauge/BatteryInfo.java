@@ -396,7 +396,11 @@ public class BatteryInfo {
                     chargeTimeMs <= 0
                             ? null
                             : getPowerRemainingChargingLabel(
-                                    context, chargeTimeMs, info.isFastCharging, currentTimeMs);
+                                    context,
+                                    chargeTimeMs,
+                                    info.isFastCharging,
+                                    info.pluggedStatus,
+                                    currentTimeMs);
 
             info.chargeLabel =
                     chargeTimeMs <= 0
@@ -428,7 +432,21 @@ public class BatteryInfo {
     }
 
     private static CharSequence getPowerRemainingChargingLabel(
-            Context context, long remainingTimeMs, boolean isFastCharging, long currentTimeMs) {
+            Context context,
+            long remainingTimeMs,
+            boolean isFastCharging,
+            int pluggedStatus,
+            long currentTimeMs) {
+        if (pluggedStatus == BatteryManager.BATTERY_PLUGGED_WIRELESS) {
+            BatterySettingsFeatureProvider provider =
+                    FeatureFactory.getFeatureFactory().getBatterySettingsFeatureProvider();
+            final CharSequence wirelessChargingRemainingLabel =
+                    provider.getWirelessChargingRemainingLabel(
+                            context, remainingTimeMs, currentTimeMs);
+            if (wirelessChargingRemainingLabel != null) {
+                return wirelessChargingRemainingLabel;
+            }
+        }
         if (com.android.settingslib.fuelgauge.BatteryUtils.isChargingStringV2Enabled()) {
             int chargeLabelResId =
                     isFastCharging
