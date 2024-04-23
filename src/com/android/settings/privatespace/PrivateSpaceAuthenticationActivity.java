@@ -36,11 +36,11 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentActivity;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.app.SetScreenLockDialogActivity;
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.transition.SettingsTransitionHelper;
 
@@ -52,7 +52,7 @@ import com.google.android.setupdesign.util.ThemeHelper;
  * user to set a device lock if not set with an alert dialog. This can be launched using the intent
  * com.android.settings.action.OPEN_PRIVATE_SPACE_SETTINGS.
  */
-public class PrivateSpaceAuthenticationActivity extends FragmentActivity {
+public class PrivateSpaceAuthenticationActivity extends SettingsActivity {
     private static final String TAG = "PrivateSpaceAuthCheck";
     public static final String EXTRA_SHOW_PRIVATE_SPACE_UNLOCKED =
             "extra_show_private_space_unlocked";
@@ -76,6 +76,9 @@ public class PrivateSpaceAuthenticationActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (isFinishing()) {
+            return;
+        }
 
         if (Flags.allowPrivateProfile()
                 && android.multiuser.Flags.enablePrivateSpaceFeatures()) {
