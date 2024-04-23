@@ -175,6 +175,7 @@ private fun ApplicationInfo.isOtherUserHasInstallPackage(
     packageManagers: IPackageManagers,
 ): Boolean = userManager.aliveUsers
     .filter { it.id != userId }
+    .filter { !Utils.shouldHideUser(it.userHandle, userManager) }
     .any { packageManagers.isPackageInstalledAsUser(packageName, it.id) }
 
 private fun ApplicationInfo.shouldShowAccessRestrictedSettings(context: Context): Boolean {
