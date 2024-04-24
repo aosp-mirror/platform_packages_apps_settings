@@ -16,10 +16,12 @@
 
 package com.android.settings.notification.modes;
 
+import static android.app.NotificationManager.INTERRUPTION_FILTER_ALL;
 import static android.app.NotificationManager.INTERRUPTION_FILTER_PRIORITY;
 
 import static java.util.Objects.requireNonNull;
 
+import android.annotation.SuppressLint;
 import android.app.AutomaticZenRule;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -50,11 +52,25 @@ class ZenMode {
 
     private static final String TAG = "ZenMode";
 
+    /**
+     * Additional value for the {@code @ZenPolicy.ChannelType} enumeration that indicates that all
+     * channels can bypass DND when this policy is active.
+     *
+     * <p>This value shouldn't be used on "real" ZenPolicy objects sent to or returned from
+     * {@link android.app.NotificationManager}; it's a way of representing rules with interruption
+     * filter = {@link NotificationManager#INTERRUPTION_FILTER_ALL} in the UI.
+     */
+    public static final int CHANNEL_POLICY_ALL = -1;
+
     static final String MANUAL_DND_MODE_ID = "manual_dnd";
 
+    @SuppressLint("WrongConstant")
     private static final ZenPolicy POLICY_INTERRUPTION_FILTER_ALL =
-            // TODO: b/331267485 - Support "allow all channels"!
-            new ZenPolicy.Builder().allowAllSounds().showAllVisualEffects().build();
+            new ZenPolicy.Builder()
+                    .allowChannels(CHANNEL_POLICY_ALL)
+                    .allowAllSounds()
+                    .showAllVisualEffects()
+                    .build();
 
     // Must match com.android.server.notification.ZenModeHelper#applyCustomPolicy.
     private static final ZenPolicy POLICY_INTERRUPTION_FILTER_ALARMS =
@@ -75,8 +91,10 @@ class ZenMode {
 
     private final String mId;
     private final AutomaticZenRule mRule;
-    private boolean mIsActive;
+    private final boolean mIsActive;
     private final boolean mIsManualDnd;
+
+//    private ZenPolicy mPreviousPolicy;
 
     ZenMode(String id, AutomaticZenRule rule, boolean isActive) {
         this(id, rule, isActive, false);
@@ -172,14 +190,48 @@ class ZenMode {
         }
     }
 
-    public void setZenPolicy(@NonNull ZenPolicy policy) {
-        // TODO: b/331267485 - A policy with apps=ALL should be mapped to INTERRUPTION_FILTER_ALL.
-        if (mRule.getInterruptionFilter() != INTERRUPTION_FILTER_PRIORITY) {
-            ZenPolicy currentPolicy = getPolicy();
-            if (!currentPolicy.equals(policy)) {
-                // If policy is customized from any of the "special" ones, make the rule PRIORITY.
-                mRule.setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY);
+    /**
+     * Updates the {@link ZenPolicy} of the associated {@link AutomaticZenRule} based on the
+     * supplied policy. In some cases this involves conversions, so that the following call
+     * to {@link #getPolicy} might return a different policy from the one supplied here.
+     */
+    @SuppressLint("WrongConstant")
+    public void setPolicy(@NonNull ZenPolicy policy) {
+        ZenPolicy currentPolicy = getPolicy();
+        if (currentPolicy.equals(policy)) {
+            return;
+        }
+
+        // A policy with CHANNEL_POLICY_ALL is only a UI representation of the
+        // INTERRUPTION_FILTER_ALL filter. Thus, switching to or away to this value only updates
+        // the filter, discarding the rest of the supplied policy.
+        if (policy.getAllowedChannels() == CHANNEL_POLICY_ALL
+                && currentPolicy.getAllowedChannels() != CHANNEL_POLICY_ALL) {
+            if (mIsManualDnd) {
+                throw new IllegalArgumentException("Manual DND cannot have CHANNEL_POLICY_ALL");
             }
+            mRule.setInterruptionFilter(INTERRUPTION_FILTER_ALL);
+            // Preserve the existing policy, e.g. if the user goes PRIORITY -> ALL -> PRIORITY that
+            // shouldn't discard all other policy customizations. The existing policy will be a
+            // synthetic one if the rule originally had filter NONE or ALARMS_ONLY and that's fine.
+            if (mRule.getZenPolicy() == null) {
+                mRule.setZenPolicy(currentPolicy);
+            }
+            return;
+        } else if (policy.getAllowedChannels() != CHANNEL_POLICY_ALL
+                && currentPolicy.getAllowedChannels() == CHANNEL_POLICY_ALL) {
+            mRule.setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY);
+            // Go back to whatever policy the rule had before, unless the rule never had one, in
+            // which case we use the supplied policy (which we know has a valid allowedChannels).
+            if (mRule.getZenPolicy() == null) {
+                mRule.setZenPolicy(policy);
+            }
+            return;
+        }
+
+        // If policy is customized from any of the "special" ones, make the rule PRIORITY.
+        if (mRule.getInterruptionFilter() != INTERRUPTION_FILTER_PRIORITY) {
+            mRule.setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY);
         }
         mRule.setZenPolicy(policy);
     }
@@ -206,7 +258,7 @@ class ZenMode {
 
     @Override
     public int hashCode() {
-        return Objects.hash(mId, mRule);
+        return Objects.hash(mId, mRule, mIsActive);
     }
 
     @Override
