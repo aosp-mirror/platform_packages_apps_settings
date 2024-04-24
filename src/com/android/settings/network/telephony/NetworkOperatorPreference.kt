@@ -19,6 +19,12 @@ package com.android.settings.network.telephony
 import android.content.Context
 import android.telephony.AccessNetworkConstants.AccessNetworkType
 import android.telephony.CellIdentity
+import android.telephony.CellIdentityCdma
+import android.telephony.CellIdentityGsm
+import android.telephony.CellIdentityLte
+import android.telephony.CellIdentityNr
+import android.telephony.CellIdentityTdscdma
+import android.telephony.CellIdentityWcdma
 import android.telephony.CellInfo
 import android.telephony.CellInfoCdma
 import android.telephony.CellInfoGsm
@@ -120,17 +126,17 @@ open class NetworkOperatorPreference(
         getAccessNetworkTypeFromCellInfo(),
     )
 
-    private fun getIconIdForCell(): Int = when (cellInfo) {
-        is CellInfoGsm -> R.drawable.signal_strength_g
-        is CellInfoCdma -> R.drawable.signal_strength_1x
-        is CellInfoWcdma, is CellInfoTdscdma -> R.drawable.signal_strength_3g
+    private fun getIconIdForCell(): Int = when (cellId) {
+        is CellIdentityGsm -> R.drawable.signal_strength_g
+        is CellIdentityCdma -> R.drawable.signal_strength_1x
+        is CellIdentityWcdma, is CellIdentityTdscdma -> R.drawable.signal_strength_3g
 
-        is CellInfoLte -> {
+        is CellIdentityLte -> {
             if (show4GForLTE) R.drawable.ic_signal_strength_4g
             else R.drawable.signal_strength_lte
         }
 
-        is CellInfoNr -> R.drawable.signal_strength_5g
+        is CellIdentityNr -> R.drawable.signal_strength_5g
         else -> MobileNetworkUtils.NO_CELL_DATA_TYPE_ICON
     }
 

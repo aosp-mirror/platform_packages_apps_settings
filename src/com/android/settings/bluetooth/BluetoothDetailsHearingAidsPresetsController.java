@@ -199,10 +199,8 @@ public class BluetoothDetailsHearingAidsPresetsController extends
     @Override
     public void onPresetSelectionFailed(@NonNull BluetoothDevice device, int reason) {
         if (device.equals(mCachedDevice.getDevice())) {
-            if (DEBUG) {
-                Log.d(TAG, "onPresetSelectionFailed, device: " + device.getAddress()
-                        + ", reason: " + reason);
-            }
+            Log.w(TAG, "onPresetSelectionFailed, device: " + device.getAddress()
+                    + ", reason: " + reason);
             mContext.getMainExecutor().execute(() -> {
                 refresh();
                 showErrorToast();
@@ -213,10 +211,8 @@ public class BluetoothDetailsHearingAidsPresetsController extends
     @Override
     public void onPresetSelectionForGroupFailed(int hapGroupId, int reason) {
         if (hapGroupId == mHapClientProfile.getHapGroup(mCachedDevice.getDevice())) {
-            if (DEBUG) {
-                Log.d(TAG, "onPresetSelectionForGroupFailed, group: " + hapGroupId
-                        + ", reason: " + reason);
-            }
+            Log.w(TAG, "onPresetSelectionForGroupFailed, group: " + hapGroupId
+                    + ", reason: " + reason);
             // Try to set the preset independently if group operation failed
             if (mPreference != null) {
                 selectPresetIndependently(Integer.parseInt(mPreference.getValue()));
@@ -242,11 +238,8 @@ public class BluetoothDetailsHearingAidsPresetsController extends
     @Override
     public void onSetPresetNameFailed(@NonNull BluetoothDevice device, int reason) {
         if (device.equals(mCachedDevice.getDevice())) {
-            if (DEBUG) {
-                Log.d(TAG,
-                        "onSetPresetNameFailed, device: " + device.getAddress()
-                                + ", reason: " + reason);
-            }
+            Log.w(TAG, "onSetPresetNameFailed, device: " + device.getAddress()
+                    + ", reason: " + reason);
             mContext.getMainExecutor().execute(() -> {
                 refresh();
                 showErrorToast();
@@ -257,10 +250,8 @@ public class BluetoothDetailsHearingAidsPresetsController extends
     @Override
     public void onSetPresetNameForGroupFailed(int hapGroupId, int reason) {
         if (hapGroupId == mHapClientProfile.getHapGroup(mCachedDevice.getDevice())) {
-            if (DEBUG) {
-                Log.d(TAG, "onSetPresetNameForGroupFailed, group: " + hapGroupId
-                        + ", reason: " + reason);
-            }
+            Log.w(TAG, "onSetPresetNameForGroupFailed, group: " + hapGroupId
+                    + ", reason: " + reason);
             mContext.getMainExecutor().execute(() -> {
                 refresh();
                 showErrorToast();
@@ -288,9 +279,6 @@ public class BluetoothDetailsHearingAidsPresetsController extends
         for (int i = 0; i < infoList.size(); i++) {
             presetNames[i] = infoList.get(i).getName();
             presetIndexes[i] = Integer.toString(infoList.get(i).getIndex());
-            if (DEBUG) {
-                Log.d(TAG, "loadAllPresetInfo, preset " + presetIndexes[i] + ": " + presetNames[i]);
-            }
         }
         mPreference.setEntries(presetNames);
         mPreference.setEntryValues(presetIndexes);
