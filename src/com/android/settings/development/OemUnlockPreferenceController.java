@@ -21,6 +21,7 @@ import static com.android.settings.development.DevelopmentOptionsActivityRequest
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.SystemProperties;
 import android.os.UserHandle;
@@ -176,6 +177,13 @@ public class OemUnlockPreferenceController extends DeveloperOptionsPreferenceCon
 
     /** Returns {@code true} if the device is SIM-locked. Otherwise, returns {@code false}. */
     private boolean isSimLockedDevice() {
+        if (!mContext.getPackageManager().hasSystemFeature(
+                PackageManager.FEATURE_TELEPHONY_CARRIERLOCK)) {
+            Log.w(TAG,
+                    "getAllowedCarriers is unsupported without "
+                            + "PackageManager#FEATURE_TELEPHONY_CARRIERLOCK");
+            return false;
+        }
         int phoneCount = mTelephonyManager.getPhoneCount();
         for (int i = 0; i < phoneCount; i++) {
             if (mTelephonyManager.getAllowedCarriers(i).size() > 0) {
