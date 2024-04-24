@@ -56,22 +56,23 @@ public class SimSlotChangeReceiver extends BroadcastReceiver {
 
     public static void runOnBackgroundThread(Context context) {
         if (shouldHandleSlotChange(context)) {
-            Log.d(TAG, "Checking satellite enabled status");
+            Log.d(TAG, "Checking satellite session status");
             Executor executor = Executors.newSingleThreadExecutor();
-            ListenableFuture<Boolean> satelliteEnabledFuture = new SatelliteRepository(context)
-                    .requestIsEnabled(executor);
-            satelliteEnabledFuture.addListener(() -> {
-                boolean isSatelliteEnabled = false;
+            ListenableFuture<Boolean> isSatelliteSessionStartedFuture =
+                    new SatelliteRepository(context).requestIsSessionStarted(executor);
+            isSatelliteSessionStartedFuture.addListener(() -> {
+                boolean isSatelliteSessionStarted = false;
                 try {
-                    isSatelliteEnabled = satelliteEnabledFuture.get();
+                    isSatelliteSessionStarted = isSatelliteSessionStartedFuture.get();
                 } catch (ExecutionException | InterruptedException e) {
-                    Log.w(TAG, "Can't get satellite enabled status", e);
+                    Log.w(TAG, "Can't get satellite session status", e);
                 }
 
-                if (isSatelliteEnabled) {
-                    Log.i(TAG, "Satellite is enabled. Unable to handle SIM slot changes");
+                if (isSatelliteSessionStarted) {
+                    Log.i(TAG, "Device is in a satellite session. Unable to handle SIM slot"
+                            + " changes");
                 } else {
-                    Log.i(TAG, "Satellite is disabled. Handle slot changes");
+                    Log.i(TAG, "Not in a satellite session. Handle slot changes");
                     SimSlotChangeHandler.get().onSlotsStatusChange(context.getApplicationContext());
                 }
             }, executor);
