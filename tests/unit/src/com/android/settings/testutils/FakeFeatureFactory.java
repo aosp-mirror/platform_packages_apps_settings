@@ -40,6 +40,7 @@ import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.homepage.contextualcards.ContextualCardFeatureProvider;
 import com.android.settings.inputmethod.KeyboardSettingsFeatureProvider;
 import com.android.settings.localepicker.LocaleFeatureProvider;
+import com.android.settings.notification.syncacrossdevices.SyncAcrossDevicesFeatureProvider;
 import com.android.settings.onboarding.OnboardingFeatureProvider;
 import com.android.settings.overlay.DockUpdaterFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
@@ -102,6 +103,7 @@ public class FakeFeatureFactory extends FeatureFactory {
     public PrivateSpaceLoginFeatureProvider mPrivateSpaceLoginFeatureProvider;
     public DisplayFeatureProvider mDisplayFeatureProvider;
     public AudioSharingFeatureProvider mAudioSharingFeatureProvider;
+    public SyncAcrossDevicesFeatureProvider mSyncAcrossDevicesFeatureProvider;
 
     /** Call this in {@code @Before} method of the test class to use fake factory. */
     public static FakeFeatureFactory setupForTest() {
@@ -154,6 +156,7 @@ public class FakeFeatureFactory extends FeatureFactory {
         mPrivateSpaceLoginFeatureProvider = mock(PrivateSpaceLoginFeatureProvider.class);
         mDisplayFeatureProvider = mock(DisplayFeatureProvider.class);
         mAudioSharingFeatureProvider = mock(AudioSharingFeatureProvider.class);
+        mSyncAcrossDevicesFeatureProvider = mock(SyncAcrossDevicesFeatureProvider.class);
     }
 
     @Override
@@ -340,5 +343,10 @@ public class FakeFeatureFactory extends FeatureFactory {
     @Override
     public AudioSharingFeatureProvider getAudioSharingFeatureProvider() {
         return mAudioSharingFeatureProvider;
+    }
+
+    @Override
+    public SyncAcrossDevicesFeatureProvider getSyncAcrossDevicesFeatureProvider() {
+        return mSyncAcrossDevicesFeatureProvider;
     }
 }

@@ -109,6 +109,11 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+        android:key="sync_across_devices"
+        android:title="@string/sync_across_devices_title"
+        settings:controller="com.android.settings.notification.syncacrossdevices.SyncAcrossDevicesPreferenceController"/>
+
+    <PreferenceCategory
         android:key="advanced_section_header"
         android:title="@string/advanced_section_header">
         <com.android.settingslib.RestrictedPreference
