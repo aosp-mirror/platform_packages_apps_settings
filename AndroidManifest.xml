@@ -5114,6 +5114,8 @@
                 <action android:name="com.android.settings.action.OPEN_PRIVATE_SPACE_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_security"/>
         </activity>
 
         <activity android:name=".privatespace.PrivateProfileContextHelperActivity" android:exported="false"/>
