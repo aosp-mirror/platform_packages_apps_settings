@@ -545,9 +545,13 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
                         getActivity(), this, forceRoundedIcons, pref, tile, key,
                         mPlaceholderPreferenceController.getOrder());
                 if (Flags.dynamicInjectionCategory()) {
-                    Preference group = screen.findPreference(tile.getGroupKey());
-                    if (tile.hasGroupKey() && group instanceof PreferenceCategory) {
-                        ((PreferenceCategory) group).addPreference(pref);
+                    if (tile.hasGroupKey()) {
+                        Preference group = screen.findPreference(tile.getGroupKey());
+                        if (group instanceof PreferenceCategory) {
+                            ((PreferenceCategory) group).addPreference(pref);
+                        } else {
+                            screen.addPreference(pref);
+                        }
                     } else {
                         screen.addPreference(pref);
                     }

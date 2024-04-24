@@ -1508,7 +1508,8 @@
     <string name="reset_esim_error_title" msgid="6516110227665862295">"Det gick inte att rensa dessa eSIM"</string>
     <string name="reset_esim_error_msg" msgid="8459527827897797168">"Något gick fel och dina eSIM rensades inte.\n\nStarta om enheten och försök igen."</string>
     <string name="reset_private_space_delete_title" msgid="2555885198282572990">"Radera privat område"</string>
-    <string name="reset_private_space_delete_dialog" msgid="2108869024671690587">"Om du har ett privat område på enheten raderas det permanent. Alla appar i området och tillhörande data raderas."</string>
+    <!-- no translation found for reset_private_space_delete_dialog (7506471054091800883) -->
+    <skip />
     <string name="main_clear_title" msgid="277664302144837723">"Rensa all data (återställ standardinst.)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Rensa all data (återställ standardinst.)"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"musik"</li>\n<li>"foton"</li>\n<li>"annan användardata"</li></string>
@@ -2090,8 +2091,7 @@
     <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"Panorering med ett finger"</string>
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"Flytta förstoringsområdet genom att dra med ett finger."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"Flytta förstoringsområdet genom att dra med två fingrar."</string>
-    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_unavailable (4302567514781245318) -->
-    <skip />
+    <string name="accessibility_magnification_one_finger_panning_summary_unavailable" msgid="4302567514781245318">"Inte tillgänglig när bara förstoringsdelen av skärmen visas"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Förstora med genväg"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Förstora med genväg och tryck snabbt tre gånger"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"Om <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
@@ -2612,6 +2612,8 @@
     <string name="battery_usage_screen_footer_empty" msgid="3301144846133808193">"Information om batteriförbrukning blir tillgänglig om några timmar när enheten är fulladdad"</string>
     <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"nu"</string>
     <string name="battery_usage_timestamps_hyphen" msgid="7401188432989043905">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g>–<xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
+    <!-- no translation found for battery_usage_timestamps_content_description (1927748134271595985) -->
+    <skip />
     <string name="battery_usage_day_and_hour" msgid="1417890420844950881">"<xliff:g id="DAY">%1$s</xliff:g> <xliff:g id="HOUR">%2$s</xliff:g>"</string>
     <string name="battery_usage_time_info_and_battery_level" msgid="6732629268310936155">"<xliff:g id="TIME_INFO">%1$s</xliff:g> <xliff:g id="BATTERY_LEVEL">%2$s</xliff:g>"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Diagram över batteriförbrukning"</string>
@@ -2625,6 +2627,8 @@
     <string name="battery_usage_spinner_view_by_apps" msgid="8769276544072098082">"Visa efter appar"</string>
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"Visa efter system"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
+    <!-- no translation found for battery_usage_less_than_percent_content_description (6265933174815461493) -->
+    <skip />
     <string name="battery_cycle_count_footer" msgid="3642121059800373545">"Antalet cykler kanske inte är noll före första användningen på grund av kvalitetsinspektioner"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Processtatistik"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Nördig statistik om processer som körs"</string>
@@ -4197,10 +4201,6 @@
     <string name="long_background_tasks_title" msgid="3272230637974707490">"Långa bakgrundsuppgifter"</string>
     <string name="long_background_tasks_footer_title" msgid="9117342254914743097">"Tillåt att den här appen kör långa bakgrundsuppgifter. Detta gör att appen kan köra uppgifter som kanske tar längre än några minuter att slutföra, till exempel nedladdningar och uppladdningar. \n\nOm behörigheten nekas begränsar systemet hur länge appen kan utföra sådana uppgifter i bakgrunden."</string>
     <string name="keywords_long_background_tasks" msgid="5788956269136054574">"långa uppgifter, dataöverföring, bakgrundsuppgifter"</string>
-    <string name="run_backup_tasks_title" msgid="8572480651659803275">"Utför bakgrundsuppgifter som rör säkerhetskopiering"</string>
-    <string name="run_backup_tasks_switch_title" msgid="4740767959730361777">"Tillåt appen att köra bakgrundsuppgifter som rör säkerhetskopiering"</string>
-    <string name="run_backup_tasks_footer_title" msgid="1766222193265152388">"Indikerar att den här appen har ett viktigt användningsfall där den måste säkerhetskopiera eller synkronisera innehåll. När du ger denna behörighet får appen köras i bakgrunden lite längre för att slutföra uppgifter som rör säkerhetskopiering. \n\nOm behörigheten nekas får appen inget särskilt undantag från systemet för att slutföra uppgifter som rör säkerhetskopiering i bakgrunden."</string>
-    <string name="keywords_run_backup_tasks" msgid="632219905465766211">"uppgifter för säkerhetskopiering, säkerhetskopieringsuppgifter"</string>
     <string name="reset_shortcut_manager_throttling" msgid="2183940254903144298">"Återställ anropsbegränsning för ShortcutManager"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="8949943009096885470">"Anropsbegränsningen för ShortcutManager har återställts"</string>
     <string name="notification_suggestion_title" msgid="6309263655965785411">"Kontrolluppgifter på låsskärm"</string>
@@ -5202,5 +5202,7 @@
     <string name="force_swcrypto_fallback_title" msgid="8053166299808645593">"Tvinga säker programvarukryptering"</string>
     <string name="force_swcrypto_fallback_summary" msgid="181969966310309701">"Tvinga hantering av kopieringsskyddsnyckel att använda programvarubaserad white-box-kryptering"</string>
     <!-- no translation found for fingerprint_acquired_imager_dirty_udfps (7005042288289506776) -->
+    <skip />
+    <!-- no translation found for sim_category_converted_sim (8575548015816988908) -->
     <skip />
 </resources>

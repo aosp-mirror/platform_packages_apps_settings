@@ -20,13 +20,14 @@ import android.content.Context
 import android.content.pm.ApplicationInfo
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.assertIsDisplayed
-import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotDisplayed
 import androidx.compose.ui.test.assertIsNotEnabled
+import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.hasTextExactly
+import androidx.compose.ui.test.isEnabled
 import androidx.compose.ui.test.junit4.createComposeRule
-import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
 import androidx.test.core.app.ApplicationProvider
@@ -36,18 +37,23 @@ import com.android.settings.R
 import com.android.settings.fuelgauge.AdvancedPowerUsageDetail
 import com.android.settings.fuelgauge.batteryusage.BatteryChartPreferenceController
 import com.android.settings.fuelgauge.batteryusage.BatteryDiffEntry
+import com.android.settingslib.spa.testutils.delay
 import com.android.settingslib.spaprivileged.model.app.userId
+import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mockito.mock
 import org.mockito.MockitoSession
-import org.mockito.Spy
+import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.spy
+import org.mockito.kotlin.stub
+import org.mockito.kotlin.whenever
 import org.mockito.quality.Strictness
-import org.mockito.Mockito.`when` as whenever
 
+@OptIn(ExperimentalTestApi::class)
 @RunWith(AndroidJUnit4::class)
 class AppBatteryPreferenceTest {
     @get:Rule
@@ -55,29 +61,28 @@ class AppBatteryPreferenceTest {
 
     private lateinit var mockSession: MockitoSession
 
-    @Spy
-    private val context: Context = ApplicationProvider.getApplicationContext()
+    private val context: Context = spy(ApplicationProvider.getApplicationContext()) {}
 
-    @Spy
-    private val resources = context.resources
+    private val resources = spy(context.resources) {
+        on { getBoolean(R.bool.config_show_app_info_settings_battery) } doReturn true
+    }
 
     @Before
     fun setUp() {
         mockSession = ExtendedMockito.mockitoSession()
-            .initMocks(this)
             .mockStatic(BatteryChartPreferenceController::class.java)
             .mockStatic(AdvancedPowerUsageDetail::class.java)
             .strictness(Strictness.LENIENT)
             .startMocking()
         whenever(context.resources).thenReturn(resources)
-        whenever(resources.getBoolean(R.bool.config_show_app_info_settings_battery))
-            .thenReturn(true)
     }
 
     private fun mockBatteryDiffEntry(batteryDiffEntry: BatteryDiffEntry?) {
-        whenever(BatteryChartPreferenceController.getAppBatteryUsageData(
-            context, PACKAGE_NAME, APP.userId
-        )).thenReturn(batteryDiffEntry)
+        whenever(
+            BatteryChartPreferenceController.getAppBatteryUsageData(
+                context, PACKAGE_NAME, APP.userId
+            )
+        ).thenReturn(batteryDiffEntry)
     }
 
     @After
@@ -87,8 +92,9 @@ class AppBatteryPreferenceTest {
 
     @Test
     fun whenConfigIsFalse_notDisplayed() {
-        whenever(resources.getBoolean(R.bool.config_show_app_info_settings_battery))
-            .thenReturn(false)
+        resources.stub {
+            on { getBoolean(R.bool.config_show_app_info_settings_battery) } doReturn false
+        }
 
         setContent()
 
@@ -112,47 +118,47 @@ class AppBatteryPreferenceTest {
 
         setContent()
 
-        composeTestRule.onNode(
+        composeTestRule.waitUntilExactlyOneExists(
             hasTextExactly(
                 context.getString(R.string.battery_details_title),
                 context.getString(R.string.no_battery_summary),
-            ),
-        ).assertIsDisplayed().assertIsEnabled()
+            ) and isEnabled(),
+        )
     }
 
     @Test
     fun noConsumePower() {
-        val batteryDiffEntry = mock(BatteryDiffEntry::class.java).apply {
-            mConsumePower = 0.0
-        }
+        val batteryDiffEntry = mock<BatteryDiffEntry>().apply { mConsumePower = 0.0 }
         mockBatteryDiffEntry(batteryDiffEntry)
 
         setContent()
 
-        composeTestRule.onNodeWithText(context.getString(R.string.no_battery_summary))
-            .assertIsDisplayed()
+        composeTestRule.waitUntilExactlyOneExists(
+            hasText(context.getString(R.string.no_battery_summary))
+        )
     }
 
     @Test
     fun hasConsumePower() {
-        val batteryDiffEntry = mock(BatteryDiffEntry::class.java).apply {
-            mConsumePower = 12.3
-        }
-        whenever(batteryDiffEntry.percentage).thenReturn(45.6)
+        val batteryDiffEntry = mock<BatteryDiffEntry> {
+            on { percentage } doReturn 45.6
+        }.apply { mConsumePower = 12.3 }
         mockBatteryDiffEntry(batteryDiffEntry)
 
         setContent()
 
-        composeTestRule.onNodeWithText("46% use since last full charge").assertIsDisplayed()
+        composeTestRule.waitUntilExactlyOneExists(hasText("46% use since last full charge"))
     }
 
     @Test
     fun whenClick_openDetailsPage() {
-        val batteryDiffEntry = mock(BatteryDiffEntry::class.java)
-        whenever(batteryDiffEntry.percentage).thenReturn(10.0)
+        val batteryDiffEntry = mock<BatteryDiffEntry> {
+            on { percentage } doReturn 10.0
+        }.apply { mConsumePower = 12.3 }
         mockBatteryDiffEntry(batteryDiffEntry)
 
         setContent()
+        composeTestRule.waitUntilExactlyOneExists(hasText("10% use since last full charge"))
         composeTestRule.onRoot().performClick()
 
         ExtendedMockito.verify {
@@ -178,7 +184,7 @@ class AppBatteryPreferenceTest {
     }
 
     private companion object {
-        const val PACKAGE_NAME = "packageName"
+        const val PACKAGE_NAME = "package.name"
         const val UID = 123
         val APP = ApplicationInfo().apply {
             packageName = PACKAGE_NAME

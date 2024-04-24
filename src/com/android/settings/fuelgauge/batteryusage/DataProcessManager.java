@@ -31,6 +31,7 @@ import com.android.internal.annotations.VisibleForTesting;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -649,6 +650,22 @@ public class DataProcessManager {
         // Process raw history map data into hourly timestamps.
         final Map<Long, Map<String, BatteryHistEntry>> processedBatteryHistoryMap =
                 DataProcessor.getHistoryMapWithExpectedTimestamps(context, batteryHistoryMap);
+        if (isFromPeriodJob && !processedBatteryHistoryMap.isEmpty()) {
+            // For periodic job, only generate battery usage data between even-hour timestamps.
+            // Remove the timestamps:
+            // 1) earlier than the latest completed period job (startTimestamp)
+            // 2) later than current scheduled even-hour job (lastEvenHourTimestamp).
+            final long lastEvenHourTimestamp = TimestampUtils.getLastEvenHourTimestamp(currentTime);
+            final Set<Long> batteryHistMapKeySet = processedBatteryHistoryMap.keySet();
+            final long minTimestamp = Collections.min(batteryHistMapKeySet);
+            final long maxTimestamp = Collections.max(batteryHistMapKeySet);
+            if (minTimestamp < startTimestamp) {
+                processedBatteryHistoryMap.remove(minTimestamp);
+            }
+            if (maxTimestamp > lastEvenHourTimestamp) {
+                processedBatteryHistoryMap.remove(maxTimestamp);
+            }
+        }
         // Wrap and processed history map into easy-to-use format for UI rendering.
         final BatteryLevelData batteryLevelData =
                 DataProcessor.getLevelDataThroughProcessedHistoryMap(

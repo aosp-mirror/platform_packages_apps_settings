@@ -60,4 +60,11 @@ public class BatterySettingsFeatureProviderImpl implements BatterySettingsFeatur
             @NonNull Context context, @NonNull BatteryInfo info) {
         return null;
     }
+
+    @Nullable
+    @Override
+    public CharSequence getWirelessChargingRemainingLabel(
+            @NonNull Context context, long remainingTimeMs, long currentTimeMs) {
+        return null;
+    }
 }
