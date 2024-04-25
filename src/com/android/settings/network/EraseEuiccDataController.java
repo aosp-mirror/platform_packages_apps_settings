@@ -50,7 +50,7 @@ public class EraseEuiccDataController extends BasePreferenceController {
         if (!TextUtils.equals(preference.getKey(), getPreferenceKey())) {
             return false;
         }
-        if (SubscriptionUtil.shouldShowRacDialog(mContext)) {
+        if (SubscriptionUtil.shouldShowRacDialogWhenErasingAllEsims(mContext)) {
             EuiccRacConnectivityDialogFragment.show(mHostFragment);
         } else {
             EraseEuiccDataDialogFragment.show(mHostFragment);
