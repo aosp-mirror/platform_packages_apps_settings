@@ -241,8 +241,6 @@ public class MediaOutputPreferenceControllerTest {
         mScreen.addPreference(mPreference);
         mController.displayPreference(mScreen);
         mController.setCallback(mAudioSwitchPreferenceCallback);
-
-        mSetFlagsRule.initAllFlagsToReleaseConfigDefault();
     }
 
     @After
