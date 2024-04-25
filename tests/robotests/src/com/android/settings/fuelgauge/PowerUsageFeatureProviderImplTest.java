@@ -18,6 +18,8 @@ package com.android.settings.fuelgauge;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
@@ -48,6 +50,8 @@ public class PowerUsageFeatureProviderImplTest {
     private Context mContext;
 
     @Mock private PackageManager mPackageManager;
+    @Mock private BatteryInfo mBatteryInfo;
+
     private PowerUsageFeatureProviderImpl mPowerFeatureProvider;
 
     @Before
@@ -55,73 +59,74 @@ public class PowerUsageFeatureProviderImplTest {
         MockitoAnnotations.initMocks(this);
 
         when(mContext.getApplicationContext()).thenReturn(mContext);
-        mPowerFeatureProvider = new PowerUsageFeatureProviderImpl(mContext);
+        mPowerFeatureProvider = spy(new PowerUsageFeatureProviderImpl(mContext));
         when(mPackageManager.getPackagesForUid(UID_CALENDAR)).thenReturn(PACKAGES_CALENDAR);
         when(mPackageManager.getPackagesForUid(UID_MEDIA)).thenReturn(PACKAGES_MEDIA);
         when(mPackageManager.getPackagesForUid(UID_SYSTEMUI)).thenReturn(PACKAGES_SYSTEMUI);
         mPowerFeatureProvider.mPackageManager = mPackageManager;
+        mBatteryInfo.discharging = false;
     }
 
     @Test
-    public void testIsBatteryUsageEnabled_returnFalse() {
+    public void isBatteryUsageEnabled_returnFalse() {
         assertThat(mPowerFeatureProvider.isBatteryUsageEnabled()).isTrue();
     }
 
     @Test
-    public void testIsBatteryTipsEnabled_returnFalse() {
+    public void isBatteryTipsEnabled_returnFalse() {
         assertThat(mPowerFeatureProvider.isBatteryTipsEnabled()).isFalse();
     }
 
     @Test
-    public void testIsAppOptimizationModeLogged_returnFalse() {
+    public void isAppOptimizationModeLogged_returnFalse() {
         assertThat(mPowerFeatureProvider.isAppOptimizationModeLogged()).isFalse();
     }
 
     @Test
-    public void testGetBatteryUsageListConsumePowerThreshold_return0() {
+    public void getBatteryUsageListConsumePowerThreshold_return0() {
         assertThat(mPowerFeatureProvider.getBatteryUsageListConsumePowerThreshold()).isEqualTo(0.0);
     }
 
     @Test
-    public void testIsTypeSystem_uidRoot_returnTrue() {
+    public void isTypeSystem_uidRoot_returnTrue() {
         assertThat(mPowerFeatureProvider.isTypeSystem(Process.ROOT_UID, null)).isTrue();
     }
 
     @Test
-    public void testIsTypeSystem_uidSystem_returnTrue() {
+    public void isTypeSystem_uidSystem_returnTrue() {
         assertThat(mPowerFeatureProvider.isTypeSystem(Process.SYSTEM_UID, null)).isTrue();
     }
 
     @Test
-    public void testIsTypeSystem_uidMedia_returnTrue() {
+    public void isTypeSystem_uidMedia_returnTrue() {
         assertThat(mPowerFeatureProvider.isTypeSystem(Process.MEDIA_UID, null)).isTrue();
     }
 
     @Test
     @Ignore
-    public void testIsTypeSystem_appCalendar_returnTrue() {
+    public void isTypeSystem_appCalendar_returnTrue() {
         assertThat(mPowerFeatureProvider.isTypeSystem(UID_CALENDAR, null)).isTrue();
     }
 
     @Test
     @Ignore
-    public void testIsTypeSystem_appMedia_returnTrue() {
+    public void isTypeSystem_appMedia_returnTrue() {
         assertThat(mPowerFeatureProvider.isTypeSystem(UID_MEDIA, null)).isTrue();
     }
 
     @Test
     @Ignore
-    public void testIsTypeSystem_appSystemUi_returnTrue() {
+    public void isTypeSystem_appSystemUi_returnTrue() {
         assertThat(mPowerFeatureProvider.isTypeSystem(UID_SYSTEMUI, null)).isTrue();
     }
 
     @Test
-    public void testIsTypeSystem_uidOther_returnFalse() {
+    public void isTypeSystem_uidOther_returnFalse() {
         assertThat(mPowerFeatureProvider.isTypeSystem(UID_OTHER, null)).isFalse();
     }
 
     @Test
-    public void testIsSmartBatterySupported_smartBatterySupported_returnTrue() {
+    public void isSmartBatterySupported_smartBatterySupported_returnTrue() {
         when(mContext.getResources()
                         .getBoolean(com.android.internal.R.bool.config_smart_battery_available))
                 .thenReturn(true);
@@ -130,7 +135,7 @@ public class PowerUsageFeatureProviderImplTest {
     }
 
     @Test
-    public void testIsSmartBatterySupported_smartBatteryNotSupported_returnFalse() {
+    public void isSmartBatterySupported_smartBatteryNotSupported_returnFalse() {
         when(mContext.getResources()
                         .getBoolean(com.android.internal.R.bool.config_smart_battery_available))
                 .thenReturn(false);
@@ -139,17 +144,49 @@ public class PowerUsageFeatureProviderImplTest {
     }
 
     @Test
-    public void testIsAdaptiveChargingSupported_returnFalse() {
+    public void isAdaptiveChargingSupported_returnFalse() {
         assertThat(mPowerFeatureProvider.isAdaptiveChargingSupported()).isFalse();
     }
 
     @Test
-    public void testGetResumeChargeIntentWithoutDockDefender_returnNull() {
+    public void getResumeChargeIntentWithoutDockDefender_returnNull() {
         assertThat(mPowerFeatureProvider.getResumeChargeIntent(false)).isNull();
     }
 
     @Test
-    public void testGetResumeChargeIntentWithDockDefender_returnNull() {
+    public void getResumeChargeIntentWithDockDefender_returnNull() {
         assertThat(mPowerFeatureProvider.getResumeChargeIntent(true)).isNull();
+    }
+
+    @Test
+    public void isBatteryDefend_defenderModeAndExtraDefendAreFalse_returnFalse() {
+        mBatteryInfo.isBatteryDefender = false;
+        doReturn(false).when(mPowerFeatureProvider).isExtraDefend();
+
+        assertThat(mPowerFeatureProvider.isBatteryDefend(mBatteryInfo)).isFalse();
+    }
+
+    @Test
+    public void isBatteryDefend_defenderModeIsFalse_returnFalse() {
+        mBatteryInfo.isBatteryDefender = false;
+        doReturn(true).when(mPowerFeatureProvider).isExtraDefend();
+
+        assertThat(mPowerFeatureProvider.isBatteryDefend(mBatteryInfo)).isFalse();
+    }
+
+    @Test
+    public void isBatteryDefend_defenderModeAndExtraDefendAreTrue_returnFalse() {
+        mBatteryInfo.isBatteryDefender = true;
+        doReturn(true).when(mPowerFeatureProvider).isExtraDefend();
+
+        assertThat(mPowerFeatureProvider.isBatteryDefend(mBatteryInfo)).isFalse();
+    }
+
+    @Test
+    public void isBatteryDefend_extraDefendIsFalse_returnTrue() {
+        mBatteryInfo.isBatteryDefender = true;
+        doReturn(false).when(mPowerFeatureProvider).isExtraDefend();
+
+        assertThat(mPowerFeatureProvider.isBatteryDefend(mBatteryInfo)).isTrue();
     }
 }
