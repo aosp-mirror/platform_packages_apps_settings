@@ -658,36 +658,36 @@ public class SubscriptionUtilTest {
     }
 
     @Test
-    public void hasSubscriptionWithRacCarrier_hasNoWifi_showRacDialog_returnTrue() {
+    public void hasSubscriptionWithRacCarrier_hasNoWifi_showRacDialogForAllEsims_returnTrue() {
         when(mResources.getIntArray(anyInt())).thenReturn(CARRIERS_THAT_USE_RAC);
         final SubscriptionInfo info = mock(SubscriptionInfo.class);
         when(info.getCarrierId()).thenReturn(RAC_CARRIER_ID);
         when(mSubMgr.getAvailableSubscriptionInfoList()).thenReturn(Arrays.asList(info));
         addNetworkTransportType(NetworkCapabilities.TRANSPORT_BLUETOOTH);
 
-        assertTrue(SubscriptionUtil.shouldShowRacDialog(mContext));
+        assertTrue(SubscriptionUtil.shouldShowRacDialogWhenErasingAllEsims(mContext));
     }
 
     @Test
-    public void hasSubscriptionWithRacCarrier_hasWifi_showRacDialog_returnFalse() {
+    public void hasSubscriptionWithRacCarrier_hasWifi_showRacDialogForAllEsims_returnFalse() {
         when(mResources.getIntArray(anyInt())).thenReturn(CARRIERS_THAT_USE_RAC);
         final SubscriptionInfo info = mock(SubscriptionInfo.class);
         when(info.getCarrierId()).thenReturn(RAC_CARRIER_ID);
         when(mSubMgr.getAvailableSubscriptionInfoList()).thenReturn(Arrays.asList(info));
         addNetworkTransportType(NetworkCapabilities.TRANSPORT_WIFI);
 
-        assertFalse(SubscriptionUtil.shouldShowRacDialog(mContext));
+        assertFalse(SubscriptionUtil.shouldShowRacDialogWhenErasingAllEsims(mContext));
     }
 
     @Test
-    public void hasNoSubscriptionWithRacCarrier_hasNoWifi_showRacDialog_returnFalse() {
+    public void hasNoSubscriptionWithRacCarrier_hasNoWifi_showRacDialogForAllEsims_returnFalse() {
         when(mResources.getIntArray(anyInt())).thenReturn(CARRIERS_THAT_USE_RAC);
         final SubscriptionInfo info = mock(SubscriptionInfo.class);
         when(info.getCarrierId()).thenReturn(NO_RAC_CARRIER_ID);
         when(mSubMgr.getAvailableSubscriptionInfoList()).thenReturn(Arrays.asList(info));
         addNetworkTransportType(NetworkCapabilities.TRANSPORT_WIFI);
 
-        assertFalse(SubscriptionUtil.shouldShowRacDialog(mContext));
+        assertFalse(SubscriptionUtil.shouldShowRacDialogWhenErasingAllEsims(mContext));
     }
 
     private void addNetworkTransportType(int networkType) {
