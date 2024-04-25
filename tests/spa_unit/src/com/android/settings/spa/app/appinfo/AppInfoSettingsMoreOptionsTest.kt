@@ -24,6 +24,7 @@ import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.content.pm.UserInfo
+import android.os.UserHandle
 import android.os.UserManager
 import android.platform.test.annotations.RequiresFlagsDisabled
 import android.platform.test.annotations.RequiresFlagsEnabled
@@ -168,6 +169,44 @@ class AppInfoSettingsMoreOptionsTest {
         composeTestRule.waitUntilExists(
             hasText(context.getString(R.string.uninstall_all_users_text))
         )
+    }
+
+    @Test
+    fun uninstallForAllUsers_appHiddenNotInQuietModeAndPrimaryUser_displayed() {
+        val app = ApplicationInfo().apply {
+            packageName = PACKAGE_NAME
+            uid = UID
+        }
+        whenever(userManager.aliveUsers).thenReturn(listOf(OTHER_USER))
+        whenever(packageManagers
+                .isPackageInstalledAsUser(PACKAGE_NAME, OTHER_USER_ID))
+            .thenReturn(true)
+        whenever(Utils.shouldHideUser(UserHandle.of(OTHER_USER_ID), userManager)).thenReturn(false)
+
+        setContent(app)
+        composeTestRule.onRoot().performClick()
+
+        composeTestRule.waitUntilExists(
+            hasText(context.getString(R.string.uninstall_all_users_text))
+        )
+
+    }
+
+    @Test
+    fun uninstallForAllUsers_appHiddenInQuietModeAndPrimaryUser_notDisplayed() {
+        val app = ApplicationInfo().apply {
+            packageName = PACKAGE_NAME
+            uid = UID
+        }
+        whenever(userManager.aliveUsers).thenReturn(listOf(OTHER_USER))
+        whenever(packageManagers
+                .isPackageInstalledAsUser(PACKAGE_NAME, OTHER_USER_ID))
+            .thenReturn(true)
+        whenever(Utils.shouldHideUser(UserHandle.of(OTHER_USER_ID), userManager)).thenReturn(true)
+
+        setContent(ApplicationInfo())
+
+        composeTestRule.onRoot().assertIsNotDisplayed()
     }
 
     @Test

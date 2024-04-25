@@ -158,7 +158,7 @@ public class ResetNetwork extends InstrumentedFragment {
                         .setTitleRes(R.string.reset_mobile_network_settings_confirm_title)
                         .setSourceMetricsCategory(getMetricsCategory());
 
-        if (resetSims && SubscriptionUtil.shouldShowRacDialog(context)) {
+        if (resetSims && SubscriptionUtil.shouldShowRacDialogWhenErasingAllEsims(context)) {
             context.startActivity(
                     EuiccRacConnectivityDialogActivity.getIntent(context, launcher.toIntent()));
         } else {
