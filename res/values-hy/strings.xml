@@ -51,7 +51,7 @@
     <string name="stay_awake_on_lockscreen_summary" msgid="2299351813382522952">"Ծալեք ձեր հեռախոսը և սահեցրեք վերև՝ առջևի էկրանին, որպեսզի շարունակեք օգտվել հավելվածից, կամ սպասեք մի քանի վայրկյան, մինչև էկրանը կողպվի"</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"Երբեք"</string>
     <string name="sleep_on_fold_summary" msgid="7737992842459588846">"Առջևի էկրանը կողպվում է, երբ սարքը ծալում եք"</string>
-    <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Օգտագործել ինքնապտտումը"</string>
+    <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Օգտագործել ավտոմատ պտտումը"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"Դիմաճանաչումն օգտագործում է առջևի տեսախցիկը՝ ինքնապտտման ճշգրտությունը բարելավելու համար։ Պատկերները չեն պահվում և չեն ուղարկվում Google-ին։"</string>
     <string name="bluetooth" msgid="8898478620943459654">"Bluetooth"</string>
     <string name="bluetooth_is_discoverable" msgid="4798961627677790935">"Տեսանելի դառնալ մոտակայքում գտնվող բոլոր Bluetooth սարքերին (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
@@ -2290,9 +2290,12 @@
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Լսողական սարքի զուգակցում"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"Հաջորդ էկրանին հպեք ձեր լսողական սարքին։ Հնարավոր է, որ անհրաժեշտ լինի առանձին-առանձին զուգակցել ձախ և աջ ականջները։\n\nՀամոզվեք, որ ձեր լսողական սարքը միացված է և պատրաստ զուգակցման։"</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"«<xliff:g id="DEVICE_NAME">%1$s</xliff:g>» սարքը ակտիվ է"</string>
-    <string name="accessibility_hearingaid_left_side_device_summary" msgid="1907302799168261001">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, միայն ձախ"</string>
-    <string name="accessibility_hearingaid_right_side_device_summary" msgid="148257064855054376">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, միայն աջ"</string>
-    <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="4268221140368164452">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, ձախ և աջ"</string>
+    <!-- no translation found for accessibility_hearingaid_left_side_device_summary (12349058624943107) -->
+    <skip />
+    <!-- no translation found for accessibility_hearingaid_right_side_device_summary (8645789702686724188) -->
+    <skip />
+    <!-- no translation found for accessibility_hearingaid_left_and_right_side_device_summary (3314103411842694197) -->
+    <skip />
     <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ու ևս 1 սարք"</string>
     <string name="accessibility_hearing_device_pairing_title" msgid="2701812183769537320">"Նոր սարքի զուգակցում"</string>
     <string name="accessibility_hearing_device_connected_title" msgid="3785140037249487287">"Լսողական սարքեր"</string>
@@ -2601,8 +2604,7 @@
     <string name="battery_usage_screen_footer_empty" msgid="3301144846133808193">"Մարտկոցի օգտագործման տվյալները հասանելի կլինեն մի քանի ժամից՝ ամբողջական լիցքավորումից հետո"</string>
     <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"հիմա"</string>
     <string name="battery_usage_timestamps_hyphen" msgid="7401188432989043905">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g>–<xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
-    <!-- no translation found for battery_usage_timestamps_content_description (1927748134271595985) -->
-    <skip />
+    <string name="battery_usage_timestamps_content_description" msgid="1927748134271595985">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g>-ից <xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
     <string name="battery_usage_day_and_hour" msgid="1417890420844950881">"<xliff:g id="DAY">%1$s</xliff:g> <xliff:g id="HOUR">%2$s</xliff:g>"</string>
     <string name="battery_usage_time_info_and_battery_level" msgid="6732629268310936155">"<xliff:g id="TIME_INFO">%1$s</xliff:g> <xliff:g id="BATTERY_LEVEL">%2$s</xliff:g>"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Մարտկոցի օգտագործման գծապատկեր"</string>
@@ -2616,8 +2618,7 @@
     <string name="battery_usage_spinner_view_by_apps" msgid="8769276544072098082">"Հավելվածներ"</string>
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"Համակարգեր"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
-    <!-- no translation found for battery_usage_less_than_percent_content_description (6265933174815461493) -->
-    <skip />
+    <string name="battery_usage_less_than_percent_content_description" msgid="6265933174815461493">"<xliff:g id="PERCENTAGE">%1$s</xliff:g>-ից քիչ"</string>
     <string name="battery_cycle_count_footer" msgid="3642121059800373545">"Առաքումից առաջ որակի ստուգումների պատճառով լիցքավորման շրջափուլերի թիվը կարող է չլինել զրո առաջին օգտագործման ժամանակ"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Գործընթացի վիճակագրություն"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Ընթացիկ գործընթացների տեխնիկական վիճակագրություն"</string>
@@ -3626,8 +3627,8 @@
     <string name="notification_channels_other" msgid="18159805343647908">"Այլ"</string>
     <string name="no_channels" msgid="4716199078612071915">"Այս հավելվածը ծանուցումներ չի փակցրել"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Հավելվածի լրացուցիչ կարգավորումները"</string>
-    <string name="show_unused_channels" msgid="4956292847964439078">"Ցույց տալ չօգտագործվող կատեգորիաները"</string>
-    <string name="hide_unused_channels" msgid="2019739275175707170">"Թաքցնել չօգտագործվող կատեգորիաները"</string>
+    <string name="show_unused_channels" msgid="4956292847964439078">"Ցույց տալ չկիրառվող կատեգորիաները"</string>
+    <string name="hide_unused_channels" msgid="2019739275175707170">"Թաքցնել չկիրառվող կատեգորիաները"</string>
     <string name="deleted_channels" msgid="8489800381509312964">"{count,plural, =1{Ջնջվել է # կատեգորիա}one{Ջնջվել է # կատեգորիա}other{Ջնջվել է # կատեգորիա}}"</string>
     <string name="app_notification_block_title" msgid="3880322745749900296">"Արգելափակել բոլորը"</string>
     <string name="app_notification_block_summary" msgid="1804611676339341551">"Երբեք չցուցադրել այս ծանուցումները"</string>
@@ -4412,8 +4413,8 @@
     <string name="credman_credentials" msgid="2620352336624160642">"Լրացուցիչ ծառայություններ"</string>
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# գաղտնաբառ}one{# գաղտնաբառ}other{# գաղտնաբառ}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"ավտոմատ, լրացում, ինքնալրացում, գաղտնաբառ"</string>
-    <string name="credman_keywords" msgid="8305600680836806170">"տվյալներ, անցաբառ, գաղտնաբառ"</string>
-    <string name="credman_autofill_keywords" msgid="701180623776848914">"ավտոմատ, լրացնել, ինքնալրացում, տվյալներ, անցաբառ, գաղտնաբառ"</string>
+    <string name="credman_keywords" msgid="8305600680836806170">"տվյալներ, մուտքի բանալի, գաղտնաբառ"</string>
+    <string name="credman_autofill_keywords" msgid="701180623776848914">"ավտոմատ, լրացնել, ինքնալրացում, տվյալներ, մուտքի բանալի, գաղտնաբառ"</string>
     <string name="credman_button_change" msgid="4072629639218503790">"Փոփոխել"</string>
     <string name="credman_button_open" msgid="7519871964170816850">"Բացել"</string>
     <string name="credman_app_list_preference_none" msgid="2509646651254971448">"Ոչինչ ընտրված չէ"</string>
@@ -4421,7 +4422,7 @@
     <string name="credman_autofill_confirmation_message" msgid="843829628024668466">"&lt;b&gt;Օգտագործեք &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; հավելվածը &lt;br/&gt; &lt;br/&gt; Նոր գաղտնաբառերը, մուտքի բանալիները և այլ տեղեկություններ այսուհետ կպահվեն այստեղ։ &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; հավելվածը կարող է օգտագործել ձեր էկրանի բովանդակությունը՝ որոշելու, թե ինչ կարելի է ինքնալրացնել։"</string>
     <string name="credman_picker_title" msgid="8442086614222006564">"Նախընտրելի ծառայությունը գաղտնաբառերի, անցաբառերի և ինքնալրացման համար"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Անջատե՞լ %1$s ծառայությունը"</string>
-    <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Անջատե՞լ այս ծառայությունը&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Պահված տեղեկությունները, ինչպիսիք են գաղտնաբառերը, մուտքի բանալիները, վճարման եղանակները և այլ տվյալներ, չեն լրացվի, երբ մուտք գործեք։ Ձեր պահված տեղեկությունները օգտագործելու համար ընտրեք գաղտնաբառ, անցաբառ կամ ծառայություն։"</string>
+    <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Անջատե՞լ այս ծառայությունը&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Պահված տեղեկությունները, ինչպիսիք են գաղտնաբառերը, մուտքի բանալիները, վճարման եղանակները և այլ տվյալներ, չեն լրացվի, երբ մուտք գործեք։ Ձեր պահված տեղեկությունները օգտագործելու համար ընտրեք գաղտնաբառ, մուտքի բանալի կամ ծառայություն։"</string>
     <string name="account_dashboard_title_with_passkeys" msgid="648242372086733541">"Գաղտնաբառեր, անցաբառեր և հաշիվներ"</string>
     <string name="credman_confirmation_message_new_ui" msgid="6126274509951156460">"&lt;b&gt;Անջատե՞լ բոլոր ծառայությունները&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Գաղտնաբառերը, մուտքի բանալիները և այլ տեղեկություններ հասանելի չեն լինի ինքնալրացման համար, երբ հաշիվ մտնեք"</string>
     <string name="credman_autofill_confirmation_message_new_ui" msgid="6222139222478822267">"&lt;b&gt;Փոխարինե՞լ նախընտրած ծառայությունը &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;-ով&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Նոր գաղտնաբառերը, մուտքի բանալիները և այլ տեղեկություններ այսուհետ կպահվեն այստեղ։ &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; հավելվածը կարող է օգտագործել ձեր էկրանի բովանդակությունը՝ որոշելու, թե ինչ կարելի է ինքնալրացնել"</string>
@@ -5192,8 +5193,7 @@
     <string name="force_swcrypto_fallback_title" msgid="8053166299808645593">"Ստիպողաբար միացնել Software Secure Crypto-ն"</string>
     <string name="force_swcrypto_fallback_summary" msgid="181969966310309701">"Ստիպողաբար միացնել DRM բանալիների կառավարումը՝ ծրագրային ապահովման վրա հիմնված սպիտակ տուփի կրիպտոգրաֆիա օգտագործելու համար"</string>
     <string name="fingerprint_acquired_imager_dirty_udfps" msgid="7005042288289506776">"Մատնահետքի հատվածում մաքրեք էկրանը և նորից փորձեք"</string>
-    <!-- no translation found for sim_category_converted_sim (8575548015816988908) -->
-    <skip />
+    <string name="sim_category_converted_sim" msgid="8575548015816988908">"Վերածվել է eSIM-ի։ Չպահպանել և հեռացնել։"</string>
     <!-- no translation found for sync_across_devices_title (3447757705383089345) -->
     <skip />
 </resources>

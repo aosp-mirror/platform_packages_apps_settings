@@ -141,7 +141,7 @@
     <string name="stylus_connected_devices_title" msgid="2823967577941359812">"Стилус"</string>
     <string name="audio_streams_empty" msgid="8803517701437394982">"Маңайда аудио трансляциялар табылмады."</string>
     <string name="date_and_time" msgid="1788358029823431692">"Күн және уақыт"</string>
-    <string name="proxy_settings_title" msgid="4201866858226087066">"Прокси"</string>
+    <string name="proxy_settings_title" msgid="4201866858226087066">"Прокси-сервер"</string>
     <string name="proxy_clear_text" msgid="6529658759984031149">"Өшіру"</string>
     <string name="proxy_port_label" msgid="4647357286461712574">"Прокси порты"</string>
     <string name="proxy_exclusionlist_label" msgid="2598613986784917542">"Прокси қолданылмайды"</string>
@@ -1435,18 +1435,18 @@
     <string name="satellite_setting" msgid="4171265534842459910">"Жерсерік қызметі арқылы хабар алмасу"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Кіру нүктесін өзгерту"</string>
-    <string name="apn_add" msgid="9069613192201630934">"Кіру нүктесін енгізу"</string>
+    <string name="apn_add" msgid="9069613192201630934">"Кіру нүктесін қосу"</string>
     <string name="apn_not_set" msgid="8246646433109750293">"Қойылмаған"</string>
     <string name="apn_not_set_for_mvno" msgid="1141490067313964640">"Орнатылмаған"</string>
     <string name="apn_name" msgid="6677695784108157953">"Атауы"</string>
     <string name="apn_apn" msgid="5812828833797458602">"APN"</string>
-    <string name="apn_http_proxy" msgid="1052464912365838007">"Прокси"</string>
+    <string name="apn_http_proxy" msgid="1052464912365838007">"Прокси-сервер"</string>
     <string name="apn_http_port" msgid="9138610639873966046">"Порт"</string>
     <string name="apn_user" msgid="5831763936428279228">"Пайдаланушы аты"</string>
     <string name="apn_password" msgid="7435086635953953029">"Құпия сөз"</string>
     <string name="apn_server" msgid="6997704279138388384">"Сервер"</string>
     <string name="apn_mmsc" msgid="4985570919581927224">"MMSC"</string>
-    <string name="apn_mms_proxy" msgid="6592247653258283592">"MMS прокси"</string>
+    <string name="apn_mms_proxy" msgid="6592247653258283592">"MMS прокси-сервері"</string>
     <string name="apn_mms_port" msgid="6500563737462966663">"MMS порты"</string>
     <string name="apn_mcc" msgid="4971414138516074809">"MCC"</string>
     <string name="apn_mnc" msgid="1926382406843447854">"MNC"</string>
@@ -2290,9 +2290,12 @@
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Есту аппаратын жұптау"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"Келесі экранда есту аппаратын түртіңіз. Сол және оң құлақтағы есту аппаратын бөлек жұптау қажет болуы мүмкін.\n\nЕсту аппаратының қосылып, жұптауға дайын екеніне көз жеткізіңіз."</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> қосулы"</string>
-    <string name="accessibility_hearingaid_left_side_device_summary" msgid="1907302799168261001">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, тек сол құлақ"</string>
-    <string name="accessibility_hearingaid_right_side_device_summary" msgid="148257064855054376">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, тек оң құлақ"</string>
-    <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="4268221140368164452">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, сол және оң құлақ"</string>
+    <!-- no translation found for accessibility_hearingaid_left_side_device_summary (12349058624943107) -->
+    <skip />
+    <!-- no translation found for accessibility_hearingaid_right_side_device_summary (8645789702686724188) -->
+    <skip />
+    <!-- no translation found for accessibility_hearingaid_left_and_right_side_device_summary (3314103411842694197) -->
+    <skip />
     <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> және тағы 1 құрылғы"</string>
     <string name="accessibility_hearing_device_pairing_title" msgid="2701812183769537320">"Жаңа құрылғыны жұптау"</string>
     <string name="accessibility_hearing_device_connected_title" msgid="3785140037249487287">"Есту аппараттары"</string>
@@ -4221,7 +4224,7 @@
     <string name="managed_profile_contact_search_summary" msgid="4974727886709219105">"Іздеулер мен келген қоңыраулар әкімшілерге көрінуі мүмкін."</string>
     <string name="cross_profile_calendar_title" msgid="7570277841490216947">"Профиль аралық күнтізбе"</string>
     <string name="cross_profile_calendar_summary" msgid="8856185206722860069">"Жұмыстағы іс-шаралар жеке күнтізбеде көрсетіледі."</string>
-    <string name="managed_profile_settings_footer" msgid="996500759305118103">"Жұмыс қолданбалары өшірулі кезде, олар кідіртіліп, хабарландыруларды көру немесе жіберу мүмкін болмайды."</string>
+    <string name="managed_profile_settings_footer" msgid="996500759305118103">"Жұмыс қолданбалары өшірулі кезде олар кідіртіліп, ашылмай қалады және хабарландыру жібере алмайды."</string>
     <string name="automatic_storage_manager_settings" msgid="519158151463974656">"Жадты басқару"</string>
     <string name="automatic_storage_manager_text" msgid="6900593059927987273">"Жад кеңістігін босату үшін жад реттегіші құрылғыдағы сақтық көшірмесі жасалған фотосуреттер мен бейнелерді өшіреді."</string>
     <string name="automatic_storage_manager_days_title" msgid="5077286114860539367">"Фотосуреттер мен бейнелерді жою"</string>
