@@ -42,12 +42,10 @@ import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
-import org.robolectric.annotation.LooperMode;
 import org.robolectric.annotation.Resetter;
 import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(RobolectricTestRunner.class)
-@LooperMode(LooperMode.Mode.LEGACY)
 public class WallpaperSuggestionActivityTest {
 
     @Mock

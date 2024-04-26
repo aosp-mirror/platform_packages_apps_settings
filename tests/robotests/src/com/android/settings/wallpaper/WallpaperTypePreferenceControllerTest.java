@@ -33,10 +33,8 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.LooperMode;
 
 @RunWith(RobolectricTestRunner.class)
-@LooperMode(LooperMode.Mode.LEGACY)
 public class WallpaperTypePreferenceControllerTest {
     public final MockitoRule mMockitoRule = MockitoJUnit.rule();
 
