@@ -82,6 +82,8 @@ class SatelliteRepository(
      *         `false` otherwise.
      */
     fun requestIsSessionStarted(executor: Executor): ListenableFuture<Boolean> {
+        isSessionStarted?.let { return immediateFuture(it) }
+
         val satelliteManager: SatelliteManager? =
             context.getSystemService(SatelliteManager::class.java)
         if (satelliteManager == null) {
@@ -166,10 +168,6 @@ class SatelliteRepository(
         }
     }
 
-    companion object {
-        private const val TAG: String = "SatelliteRepository"
-    }
-
     /**
      * Check if the modem is in a satellite session.
      *
@@ -182,6 +180,17 @@ class SatelliteRepository(
             SatelliteManager.SATELLITE_MODEM_STATE_UNAVAILABLE,
             SatelliteManager.SATELLITE_MODEM_STATE_UNKNOWN -> false
             else -> true
+        }
+    }
+
+    companion object {
+        private const val TAG: String = "SatelliteRepository"
+
+        private var isSessionStarted: Boolean? = null
+
+        @VisibleForTesting
+        fun setIsSessionStartedForTesting(isEnabled: Boolean) {
+            this.isSessionStarted = isEnabled
         }
     }
 }

@@ -3959,6 +3959,9 @@
             </intent-filter>
         </receiver>
 
+        <service android:name=".sim.PrimarySubscriptionListChangedService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.files"
