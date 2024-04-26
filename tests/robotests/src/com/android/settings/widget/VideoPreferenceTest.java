@@ -47,7 +47,6 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.annotation.LooperMode;
 import org.robolectric.shadows.androidx.fragment.FragmentController;
 
 @RunWith(RobolectricTestRunner.class)
@@ -141,7 +140,6 @@ public class VideoPreferenceTest {
         assertThat(mAnimationController.isPlaying()).isTrue();
     }
 
-    @LooperMode(LooperMode.Mode.LEGACY)
     @Test
     @Config(qualifiers = "mcc999")
     public void onViewVisible_createAnimationController() {

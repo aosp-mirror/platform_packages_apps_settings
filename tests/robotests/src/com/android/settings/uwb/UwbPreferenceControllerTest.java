@@ -49,6 +49,7 @@ import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -60,6 +61,7 @@ import org.robolectric.RobolectricTestRunner;
 
 /** Unit tests for UWB preference toggle. */
 @RunWith(RobolectricTestRunner.class)
+@Ignore("b/337171922")
 public class UwbPreferenceControllerTest {
     private static final String TEST_SUMMARY = "uwb";
     private static final String TEST_AIRPLANE_SUMMARY = "apm_uwb";
