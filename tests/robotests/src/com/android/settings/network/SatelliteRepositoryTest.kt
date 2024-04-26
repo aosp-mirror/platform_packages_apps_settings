@@ -120,7 +120,7 @@ class SatelliteRepositoryTest {
     @Test
     fun requestIsSessionStarted_registerFailed() = runBlocking {
         `when`(mockSatelliteManager.registerForModemStateChanged(any(), any())
-        ).thenAnswer { invocation ->
+        ).thenAnswer {
             SatelliteManager.SATELLITE_RESULT_ERROR
         }
 
@@ -187,7 +187,7 @@ class SatelliteRepositoryTest {
     }
 
     @Test
-    fun getIsModemEnabledFlow_isSatelliteEnabledState() = runBlocking {
+    fun getIsSessionStartedFlow_isSatelliteEnabledState() = runBlocking {
         `when`(
             mockSatelliteManager.registerForModemStateChanged(
                 any(),
@@ -199,13 +199,13 @@ class SatelliteRepositoryTest {
             SatelliteManager.SATELLITE_RESULT_SUCCESS
         }
 
-        val flow = repository.getIsModemEnabledFlow()
+        val flow = repository.getIsSessionStartedFlow()
 
         assertThat(flow.first()).isTrue()
     }
 
     @Test
-    fun getIsModemEnabledFlow_isSatelliteDisabledState() = runBlocking {
+    fun getIsSessionStartedFlow_isSatelliteDisabledState() = runBlocking {
         `when`(
             mockSatelliteManager.registerForModemStateChanged(
                 any(),
@@ -217,16 +217,28 @@ class SatelliteRepositoryTest {
             SatelliteManager.SATELLITE_RESULT_SUCCESS
         }
 
-        val flow = repository.getIsModemEnabledFlow()
+        val flow = repository.getIsSessionStartedFlow()
 
         assertThat(flow.first()).isFalse()
     }
 
     @Test
-    fun getIsModemEnabledFlow_nullSatelliteManager() = runBlocking {
+    fun getIsSessionStartedFlow_nullSatelliteManager() = runBlocking {
         `when`(spyContext.getSystemService(SatelliteManager::class.java)).thenReturn(null)
 
-        val flow = repository.getIsModemEnabledFlow()
+        val flow = repository.getIsSessionStartedFlow()
+        assertThat(flow.first()).isFalse()
+    }
+
+    @Test
+    fun getIsSessionStartedFlow_registerFailed() = runBlocking {
+        `when`(mockSatelliteManager.registerForModemStateChanged(any(), any())
+        ).thenAnswer {
+            SatelliteManager.SATELLITE_RESULT_ERROR
+        }
+
+        val flow = repository.getIsSessionStartedFlow()
+
         assertThat(flow.first()).isFalse()
     }
 }
