@@ -546,7 +546,7 @@
     <string name="privacy_header" msgid="5526002421324257007">"Ochrana súkromia"</string>
     <string name="work_profile_category_header" msgid="85707750968948517">"Pracovný profil"</string>
     <string name="private_space_title" msgid="1752064212078238723">"Súkromný priestor"</string>
-    <string name="private_space_summary" msgid="2274405892301976238">"Ponechajte súkromné aplikácie uzamknuté a skryté"</string>
+    <string name="private_space_summary" msgid="2274405892301976238">"Možnosť uzamknutia a skrytia súkromných aplikácií"</string>
     <string name="private_space_description" msgid="4059594203775816136">"Uchovávajte súkromné aplikácie v samostatnom priestore, ktorý môžete skryť alebo uzamknúť"</string>
     <string name="private_space_lock_title" msgid="7230836881433350526">"Zámka súkromného priestoru"</string>
     <string name="private_space_one_lock_summary" msgid="2106513606571219068">"Súkromný priestor môžete odomknúť rovnakým spôsobom ako svoje zariadenie, prípadne môžete vybrať inú zámku"</string>
@@ -1434,12 +1434,12 @@
     <string name="communal_settings_summary" msgid="4923914136953940317">"Spoločné nastavenia"</string>
     <string name="satellite_setting" msgid="4171265534842459910">"Správy cez satelit"</string>
     <string name="apn_settings" msgid="4295467389400441299">"Prístupové body"</string>
-    <string name="apn_edit" msgid="2003683641840248741">"Upraviť prístupový bod"</string>
-    <string name="apn_add" msgid="9069613192201630934">"Pridanie prístupového bodu"</string>
+    <string name="apn_edit" msgid="2003683641840248741">"Úprava prístup. bodu"</string>
+    <string name="apn_add" msgid="9069613192201630934">"Pridanie prístup. bodu"</string>
     <string name="apn_not_set" msgid="8246646433109750293">"Nenastavené"</string>
     <string name="apn_not_set_for_mvno" msgid="1141490067313964640">"Nenastavené"</string>
     <string name="apn_name" msgid="6677695784108157953">"Názov"</string>
-    <string name="apn_apn" msgid="5812828833797458602">"Názov prístupového bodu"</string>
+    <string name="apn_apn" msgid="5812828833797458602">"Prístupový bod"</string>
     <string name="apn_http_proxy" msgid="1052464912365838007">"Proxy server"</string>
     <string name="apn_http_port" msgid="9138610639873966046">"Port"</string>
     <string name="apn_user" msgid="5831763936428279228">"Používateľské meno"</string>
@@ -1451,10 +1451,10 @@
     <string name="apn_mcc" msgid="4971414138516074809">"MCC"</string>
     <string name="apn_mnc" msgid="1926382406843447854">"MNC"</string>
     <string name="apn_auth_type" msgid="4234397513494356932">"Typ overenia"</string>
-    <string name="apn_type" msgid="1835573305077788773">"Typ názvu prístupového bodu"</string>
-    <string name="apn_protocol" msgid="181529867160380010">"Protokol APN"</string>
-    <string name="apn_roaming_protocol" msgid="1645131094105362513">"Protokol APN pre roaming"</string>
-    <string name="carrier_enabled" msgid="664074151573150130">"Zapnúť / vypnúť APN"</string>
+    <string name="apn_type" msgid="1835573305077788773">"Typ prístupového bodu"</string>
+    <string name="apn_protocol" msgid="181529867160380010">"Protokol prístupového bodu"</string>
+    <string name="apn_roaming_protocol" msgid="1645131094105362513">"Protokol prístupového bodu pre roaming"</string>
+    <string name="carrier_enabled" msgid="664074151573150130">"Zapnúť prístupový bod"</string>
     <string name="carrier_enabled_summaryOn" msgid="5212067975273903381">"Prístupový bod zapnutý"</string>
     <string name="carrier_enabled_summaryOff" msgid="8541959867953738521">"Prístupový bod vypnutý"</string>
     <string name="bearer" msgid="3231443241639159358">"Nositeľ"</string>
@@ -1462,12 +1462,12 @@
     <string name="network_type_unspecified" msgid="7756349656194518725">"Neurčený"</string>
     <string name="mvno_type" msgid="4734654257494971247">"Typ MVNO"</string>
     <string name="mvno_match_data" msgid="5213193073684321156">"Hodnota MVNO"</string>
-    <string name="menu_delete" msgid="9199740901584348273">"Odstrániť názov prístupového bodu (APN)"</string>
+    <string name="menu_delete" msgid="9199740901584348273">"Odstrániť prístupový bod"</string>
     <string name="menu_new" msgid="6571230342655509006">"Nový prístupový bod"</string>
     <string name="menu_save" msgid="6611465355127483100">"Uložiť"</string>
     <string name="menu_cancel" msgid="1197826697950745335">"Zrušiť"</string>
     <string name="error_title" msgid="7158648377702417716"></string>
-    <string name="error_duplicate_apn_entry" msgid="7792928408935276618">"Duplicitný vstup názvu prístupového bodu."</string>
+    <string name="error_duplicate_apn_entry" msgid="7792928408935276618">"Už existuje prístupový bod s rovnakým názvom."</string>
     <string name="error_name_empty" msgid="1258275899283079142">"Pole Meno nemôže byť prázdne."</string>
     <string name="error_apn_empty" msgid="7657491065443746915">"Názov prístupového bodu (APN) nemôže byť prázdny."</string>
     <string name="error_mcc_not3" msgid="883659545640179094">"Pole MCC musí obsahovať 3 číslice."</string>
@@ -2290,9 +2290,12 @@
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Párovanie načúvadiel"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"Na ďalšej obrazovke klepnite na svoje načúvadlá. Ľavé a pravé ucho môže byť potrebné spárovať zvlášť.\n\nSkontrolujte, či sú načúvadlá zapnuté a pripravené na párovanie."</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"Zariadenie <xliff:g id="DEVICE_NAME">%1$s</xliff:g> je aktívne"</string>
-    <string name="accessibility_hearingaid_left_side_device_summary" msgid="1907302799168261001">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, iba ľavá strana"</string>
-    <string name="accessibility_hearingaid_right_side_device_summary" msgid="148257064855054376">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, iba pravá strana"</string>
-    <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="4268221140368164452">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, ľavá aj pravá strana"</string>
+    <!-- no translation found for accessibility_hearingaid_left_side_device_summary (12349058624943107) -->
+    <skip />
+    <!-- no translation found for accessibility_hearingaid_right_side_device_summary (8645789702686724188) -->
+    <skip />
+    <!-- no translation found for accessibility_hearingaid_left_and_right_side_device_summary (3314103411842694197) -->
+    <skip />
     <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"Zariadenie <xliff:g id="DEVICE_NAME">%1$s</xliff:g> a jedno ďalšie"</string>
     <string name="accessibility_hearing_device_pairing_title" msgid="2701812183769537320">"Pár. nového zariad."</string>
     <string name="accessibility_hearing_device_connected_title" msgid="3785140037249487287">"Načúvacie zariadenia"</string>

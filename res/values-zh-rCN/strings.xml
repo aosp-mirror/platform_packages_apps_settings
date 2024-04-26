@@ -1473,7 +1473,7 @@
     <string name="error_mcc_not3" msgid="883659545640179094">"MCC 字段必须为 3 位数。"</string>
     <string name="error_mnc_not23" msgid="7642478711158474918">"MNC 字段必须为 2 位数或 3 位数。"</string>
     <string name="error_adding_apn_type" msgid="1324263534991467943">"运营商不允许添加“%s”类型的 APN。"</string>
-    <string name="error_mmsc_valid" msgid="8380951905485647380">"MMSC 字段必须有效。"</string>
+    <string name="error_mmsc_valid" msgid="8380951905485647380">"请在 MMSC 字段中输入有效的值。"</string>
     <string name="restore_default_apn" msgid="6596048535642130689">"正在恢复默认 APN 设置。"</string>
     <string name="menu_restore" msgid="4310539620115151551">"重置为默认设置"</string>
     <string name="restore_default_apn_completed" msgid="5167505087078340256">"已重置默认APN设置。"</string>
@@ -1619,7 +1619,7 @@
     <string name="lockpassword_confirm_your_password_header" msgid="6132312814563023990">"再次输入密码"</string>
     <string name="lockpassword_reenter_your_profile_password_header" msgid="3812040127714827685">"再次输入您的工作资料密码"</string>
     <string name="lockpassword_confirm_your_work_password_header" msgid="4647071231702288305">"请输入您的工作密码"</string>
-    <string name="lockpassword_confirm_your_pattern_header" msgid="4037701363240138651">"确认您的解锁图案"</string>
+    <string name="lockpassword_confirm_your_pattern_header" msgid="4037701363240138651">"请确认解锁图案"</string>
     <string name="lockpassword_confirm_your_work_pattern_header" msgid="2668883108969165844">"请绘制您的工作解锁图案"</string>
     <string name="lockpassword_confirm_your_pin_header" msgid="2241722970567131308">"再次输入 PIN 码"</string>
     <string name="lockpassword_reenter_your_profile_pin_header" msgid="2890233614560435538">"再次输入您的工作资料 PIN 码"</string>
@@ -1640,7 +1640,7 @@
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"忘记了密码？"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"忘记了图案？"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"忘记了 PIN 码？"</string>
-    <string name="lockpassword_confirm_your_pattern_generic" msgid="7401165571170203743">"绘制解锁图案才能继续"</string>
+    <string name="lockpassword_confirm_your_pattern_generic" msgid="7401165571170203743">"绘制解锁图案后即可继续操作"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="8990266101852808091">"输入 PIN 码才能继续"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="8823867445451497224">"输入密码才能继续"</string>
     <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="7003851856761939690">"绘制工作资料解锁图案才能继续"</string>
@@ -2290,9 +2290,12 @@
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"为助听器进行配对"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"请在下一步中点按您的助听器。您可能需要为左右耳分别进行配对。\n\n请确保助听器已开启，并且已准备好进行配对。"</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> 使用中"</string>
-    <string name="accessibility_hearingaid_left_side_device_summary" msgid="1907302799168261001">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>，仅在使用左耳助听器"</string>
-    <string name="accessibility_hearingaid_right_side_device_summary" msgid="148257064855054376">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>，仅在使用右耳助听器"</string>
-    <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="4268221140368164452">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>，左右耳都已激活"</string>
+    <!-- no translation found for accessibility_hearingaid_left_side_device_summary (12349058624943107) -->
+    <skip />
+    <!-- no translation found for accessibility_hearingaid_right_side_device_summary (8645789702686724188) -->
+    <skip />
+    <!-- no translation found for accessibility_hearingaid_left_and_right_side_device_summary (3314103411842694197) -->
+    <skip />
     <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>及另外 1 个设备已激活"</string>
     <string name="accessibility_hearing_device_pairing_title" msgid="2701812183769537320">"与新装置配对"</string>
     <string name="accessibility_hearing_device_connected_title" msgid="3785140037249487287">"助听装置"</string>
