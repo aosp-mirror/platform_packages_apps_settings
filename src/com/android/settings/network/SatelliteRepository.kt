@@ -33,6 +33,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.flowOf
 import java.util.concurrent.Executor
+import kotlinx.coroutines.flow.flowOn
 
 /**
  * A repository class for interacting with the SatelliteManager API.
@@ -82,6 +83,8 @@ class SatelliteRepository(
      *         `false` otherwise.
      */
     fun requestIsSessionStarted(executor: Executor): ListenableFuture<Boolean> {
+        isSessionStarted?.let { return immediateFuture(it) }
+
         val satelliteManager: SatelliteManager? =
             context.getSystemService(SatelliteManager::class.java)
         if (satelliteManager == null) {
@@ -110,13 +113,13 @@ class SatelliteRepository(
     }
 
     /**
-     * Provides a Flow that emits the enabled state of the satellite modem. Updates are triggered
+     * Provides a Flow that emits the session state of the satellite modem. Updates are triggered
      * when the modem state changes.
      *
      * @param defaultDispatcher The CoroutineDispatcher to use (Defaults to `Dispatchers.Default`).
-     * @return A Flow emitting `true` when the modem is enabled and `false` otherwise.
+     * @return A Flow emitting `true` when the session is started and `false` otherwise.
      */
-    fun getIsModemEnabledFlow(
+    fun getIsSessionStartedFlow(
         defaultDispatcher: CoroutineDispatcher = Dispatchers.Default,
     ): Flow<Boolean> {
         val satelliteManager: SatelliteManager? =
@@ -128,46 +131,27 @@ class SatelliteRepository(
 
         return callbackFlow {
             val callback = SatelliteModemStateCallback { state ->
-                val isEnabled = convertSatelliteModemStateToEnabledState(state)
-                Log.i(TAG, "Satellite modem state changed: state=$state, isEnabled=$isEnabled")
-                trySend(isEnabled)
+                val isSessionStarted = isSatelliteSessionStarted(state)
+                Log.i(TAG, "Satellite modem state changed: state=$state"
+                    + ", isSessionStarted=$isSessionStarted")
+                trySend(isSessionStarted)
             }
 
-            val result = satelliteManager.registerForModemStateChanged(
+            val registerResult = satelliteManager.registerForModemStateChanged(
                 defaultDispatcher.asExecutor(),
                 callback
             )
-            Log.i(TAG, "Call registerForModemStateChanged: result=$result")
+
+            if (registerResult != SatelliteManager.SATELLITE_RESULT_SUCCESS) {
+                // If the registration failed (e.g., device doesn't support satellite),
+                // SatelliteManager will not emit the current state by callback.
+                // We send `false` value by ourself to make sure the flow has initial value.
+                Log.w(TAG, "Failed to register for satellite modem state change: $registerResult")
+                trySend(false)
+            }
 
             awaitClose { satelliteManager.unregisterForModemStateChanged(callback) }
-        }
-    }
-
-    /**
-     * Converts a [SatelliteManager.SatelliteModemState] to a boolean representing whether the modem
-     * is enabled.
-     *
-     * @param state The SatelliteModemState provided by the SatelliteManager.
-     * @return `true` if the modem is enabled, `false` otherwise.
-     */
-    @VisibleForTesting
-    fun convertSatelliteModemStateToEnabledState(
-        @SatelliteManager.SatelliteModemState state: Int,
-    ): Boolean {
-        // Mapping table based on logic from b/315928920#comment24
-        return when (state) {
-            SatelliteManager.SATELLITE_MODEM_STATE_IDLE,
-            SatelliteManager.SATELLITE_MODEM_STATE_LISTENING,
-            SatelliteManager.SATELLITE_MODEM_STATE_DATAGRAM_TRANSFERRING,
-            SatelliteManager.SATELLITE_MODEM_STATE_DATAGRAM_RETRYING,
-            SatelliteManager.SATELLITE_MODEM_STATE_NOT_CONNECTED,
-            SatelliteManager.SATELLITE_MODEM_STATE_CONNECTED -> true
-            else -> false
-        }
-    }
-
-    companion object {
-        private const val TAG: String = "SatelliteRepository"
+        }.flowOn(Dispatchers.Default)
     }
 
     /**
@@ -182,6 +166,17 @@ class SatelliteRepository(
             SatelliteManager.SATELLITE_MODEM_STATE_UNAVAILABLE,
             SatelliteManager.SATELLITE_MODEM_STATE_UNKNOWN -> false
             else -> true
+        }
+    }
+
+    companion object {
+        private const val TAG: String = "SatelliteRepository"
+
+        private var isSessionStarted: Boolean? = null
+
+        @VisibleForTesting
+        fun setIsSessionStartedForTesting(isEnabled: Boolean) {
+            this.isSessionStarted = isEnabled
         }
     }
 }
