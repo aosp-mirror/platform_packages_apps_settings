@@ -59,7 +59,7 @@ class MobileNetworkSwitchController @JvmOverloads constructor(
         val changeable by remember {
             combine(
                 context.callStateFlow(subId).map { it == TelephonyManager.CALL_STATE_IDLE },
-                satelliteRepository.getIsModemEnabledFlow()
+                satelliteRepository.getIsSessionStartedFlow()
             ) { isCallStateIdle, isSatelliteModemEnabled ->
                 isCallStateIdle && !isSatelliteModemEnabled
             }

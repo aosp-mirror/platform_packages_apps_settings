@@ -16,6 +16,8 @@
 
 package com.android.settings.privatespace;
 
+import static android.text.Layout.BREAK_STRATEGY_SIMPLE;
+
 import static com.android.settings.privatespace.PrivateSpaceSetupActivity.EXTRA_ACTION_TYPE;
 import static com.android.settings.privatespace.PrivateSpaceSetupActivity.SET_LOCK_ACTION;
 
@@ -47,6 +49,7 @@ import com.google.android.setupdesign.GlifLayout;
  */
 public class PrivateSpaceSetLockFragment extends InstrumentedFragment {
     private static final String TAG = "PrivateSpaceSetLockFrag";
+    private static final int HEADER_TEXT_MAX_LINES = 4;
 
     @Override
     public View onCreateView(
@@ -60,6 +63,8 @@ public class PrivateSpaceSetLockFragment extends InstrumentedFragment {
         GlifLayout rootView =
                 (GlifLayout)
                         inflater.inflate(R.layout.private_space_setlock_screen, container, false);
+        rootView.getHeaderTextView().setBreakStrategy(BREAK_STRATEGY_SIMPLE);
+        rootView.getHeaderTextView().setMaxLines(HEADER_TEXT_MAX_LINES);
         final FooterBarMixin mixin = rootView.getMixin(FooterBarMixin.class);
         mixin.setPrimaryButton(
                 new FooterButton.Builder(getContext())

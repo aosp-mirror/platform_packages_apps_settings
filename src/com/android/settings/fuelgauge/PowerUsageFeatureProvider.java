@@ -151,4 +151,7 @@ public interface PowerUsageFeatureProvider {
 
     /** Whether the app optimization mode is valid to restore */
     boolean isValidToRestoreOptimizationMode(ArrayMap<String, String> deviceInfoMap);
+
+    /** Whether the device is under the battery defender mode */
+    boolean isBatteryDefend(BatteryInfo info);
 }
