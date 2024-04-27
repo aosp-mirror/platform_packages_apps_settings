@@ -17,10 +17,12 @@
 package com.android.settings.biometrics.face;
 
 import static android.hardware.biometrics.BiometricAuthenticator.TYPE_FACE;
+import static android.hardware.biometrics.BiometricFaceConstants.FACE_ERROR_TIMEOUT;
+import static android.hardware.biometrics.BiometricFaceConstants.FEATURE_REQUIRE_ATTENTION;
+import static android.hardware.biometrics.BiometricFaceConstants.FEATURE_REQUIRE_REQUIRE_DIVERSITY;
 
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
-import android.hardware.face.FaceManager;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -112,10 +114,10 @@ public class FaceEnrollEnrolling extends BiometricsEnrollEnrolling {
         );
 
         if (!getIntent().getBooleanExtra(BiometricEnrollBase.EXTRA_KEY_REQUIRE_DIVERSITY, true)) {
-            mDisabledFeatures.add(FaceManager.FEATURE_REQUIRE_REQUIRE_DIVERSITY);
+            mDisabledFeatures.add(FEATURE_REQUIRE_REQUIRE_DIVERSITY);
         }
         if (!getIntent().getBooleanExtra(BiometricEnrollBase.EXTRA_KEY_REQUIRE_VISION, true)) {
-            mDisabledFeatures.add(FaceManager.FEATURE_REQUIRE_ATTENTION);
+            mDisabledFeatures.add(FEATURE_REQUIRE_ATTENTION);
         }
 
         startEnrollment();
@@ -190,7 +192,7 @@ public class FaceEnrollEnrolling extends BiometricsEnrollEnrolling {
     public void onEnrollmentError(int errMsgId, CharSequence errString) {
         int msgId;
         switch (errMsgId) {
-            case FaceManager.FACE_ERROR_TIMEOUT:
+            case FACE_ERROR_TIMEOUT:
                 msgId = R.string.security_settings_face_enroll_error_timeout_dialog_message;
                 break;
             default:
