@@ -30,6 +30,7 @@ import com.android.settings.R
 import com.android.settings.network.telephony.wificalling.WifiCallingRepository
 import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 
 /**
@@ -40,7 +41,7 @@ import kotlinx.coroutines.withContext
 open class WifiCallingPreferenceController @JvmOverloads constructor(
     context: Context,
     key: String,
-    private val callStateRepository: CallStateRepository = CallStateRepository(context),
+    private val callStateFlowFactory: (subId: Int) -> Flow<Int> = context::callStateFlow,
     private val wifiCallingRepositoryFactory: (subId: Int) -> WifiCallingRepository = { subId ->
         WifiCallingRepository(context, subId)
     },
@@ -90,7 +91,7 @@ open class WifiCallingPreferenceController @JvmOverloads constructor(
                 if (isReady) update()
             }
 
-        callStateRepository.callStateFlow(mSubId).collectLatestWithLifecycle(viewLifecycleOwner) {
+        callStateFlowFactory(mSubId).collectLatestWithLifecycle(viewLifecycleOwner) {
             preference.isEnabled = (it == TelephonyManager.CALL_STATE_IDLE)
         }
     }

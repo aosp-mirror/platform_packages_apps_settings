@@ -58,9 +58,7 @@ class WifiCallingPreferenceControllerTest {
     }
     private val preferenceScreen = PreferenceManager(context).createPreferenceScreen(context)
 
-    private val mockCallStateRepository = mock<CallStateRepository> {
-        on { callStateFlow(SUB_ID) } doReturn flowOf(TelephonyManager.CALL_STATE_IDLE)
-    }
+    private var callState = TelephonyManager.CALL_STATE_IDLE
 
     private val mockWifiCallingRepository = mock<WifiCallingRepository> {
         on { getWiFiCallingMode() } doReturn ImsMmTelManager.WIFI_MODE_UNKNOWN
@@ -73,7 +71,7 @@ class WifiCallingPreferenceControllerTest {
     private val controller = WifiCallingPreferenceController(
         context = context,
         key = TEST_KEY,
-        callStateRepository = mockCallStateRepository,
+        callStateFlowFactory = { flowOf(callState) },
         wifiCallingRepositoryFactory = { mockWifiCallingRepository },
     ).init(subId = SUB_ID, callingPreferenceCategoryController)
 
@@ -114,9 +112,7 @@ class WifiCallingPreferenceControllerTest {
 
     @Test
     fun isEnabled_callIdle_enabled() = runBlocking {
-        mockCallStateRepository.stub {
-            on { callStateFlow(SUB_ID) } doReturn flowOf(TelephonyManager.CALL_STATE_IDLE)
-        }
+        callState = TelephonyManager.CALL_STATE_IDLE
 
         controller.onViewCreated(TestLifecycleOwner())
         delay(100)
@@ -126,9 +122,7 @@ class WifiCallingPreferenceControllerTest {
 
     @Test
     fun isEnabled_notCallIdle_disabled() = runBlocking {
-        mockCallStateRepository.stub {
-            on { callStateFlow(SUB_ID) } doReturn flowOf(TelephonyManager.CALL_STATE_RINGING)
-        }
+        callState = TelephonyManager.CALL_STATE_RINGING
 
         controller.onViewCreated(TestLifecycleOwner())
         delay(100)
