@@ -249,7 +249,8 @@ public class SubscriptionUtil {
             if (activeSlotSubInfoList.size() > 0) {
                 return (activeSlotSubInfoList.get(0).getSubscriptionId() == subId);
             }
-            return (inactiveSlotSubInfoList.get(0).getSubscriptionId() == subId);
+            return (inactiveSlotSubInfoList.size() > 0)
+                    && (inactiveSlotSubInfoList.get(0).getSubscriptionId() == subId);
         }
 
         // Allow non-opportunistic + active eSIM subscription as primary
