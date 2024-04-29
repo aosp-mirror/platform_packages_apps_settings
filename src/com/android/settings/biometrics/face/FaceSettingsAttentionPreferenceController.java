@@ -22,6 +22,7 @@ import android.hardware.face.FaceManager.GetFeatureCallback;
 import android.hardware.face.FaceManager.SetFeatureCallback;
 import android.provider.Settings;
 
+import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.TwoStatePreference;
 
@@ -64,8 +65,12 @@ public class FaceSettingsAttentionPreferenceController extends FaceSettingsPrefe
                     requireAttentionEnabled = featureState[i];
                 }
             }
-            mPreference.setEnabled(success);
             mPreference.setChecked(requireAttentionEnabled);
+            if (getRestrictingAdmin() != null) {
+                mPreference.setEnabled(false);
+            } else {
+                mPreference.setEnabled(success);
+            }
         }
     };
 

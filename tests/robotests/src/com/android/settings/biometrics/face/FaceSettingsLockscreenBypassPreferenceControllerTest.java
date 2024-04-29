@@ -127,6 +127,7 @@ public class FaceSettingsLockscreenBypassPreferenceControllerTest {
         EnforcedAdmin admin = new EnforcedAdmin();
         doReturn(admin).when(mController).getRestrictingAdmin();
         mController.updateState(mPreference);
-        verify(mPreference).setDisabledByAdmin(admin);
+
+        verify(mPreference).setEnabled(false);
     }
 }
