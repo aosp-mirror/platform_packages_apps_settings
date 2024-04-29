@@ -23,10 +23,8 @@ import android.telephony.TelephonyManager
 import androidx.lifecycle.LifecycleOwner
 import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
-import com.android.settings.R
 import com.android.settings.core.BasePreferenceController
 import com.android.settings.network.SubscriptionUtil
-import com.android.settings.network.telephony.MobileNetworkUtils
 import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
 
 /** This controls a preference allowing the user to delete the profile for an eSIM.  */
@@ -57,9 +55,10 @@ class DeleteSimProfilePreferenceController(context: Context, preferenceKey: Stri
     }
 
     override fun onViewCreated(viewLifecycleOwner: LifecycleOwner) {
-        mContext.callStateFlow(subscriptionId).collectLatestWithLifecycle(viewLifecycleOwner) {
-            preference.isEnabled = (it == TelephonyManager.CALL_STATE_IDLE)
-        }
+        CallStateRepository(mContext).callStateFlow(subscriptionId)
+            .collectLatestWithLifecycle(viewLifecycleOwner) {
+                preference.isEnabled = (it == TelephonyManager.CALL_STATE_IDLE)
+            }
     }
 
     override fun handlePreferenceTreeClick(preference: Preference): Boolean {
