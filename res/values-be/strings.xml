@@ -2604,8 +2604,7 @@
     <string name="battery_usage_screen_footer_empty" msgid="3301144846133808193">"Даныя пра выкарыстанне зараду з\'явяцца праз некалькі гадзін пасля поўнай зарадкі"</string>
     <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"цяпер"</string>
     <string name="battery_usage_timestamps_hyphen" msgid="7401188432989043905">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g>-<xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
-    <!-- no translation found for battery_usage_timestamps_content_description (1927748134271595985) -->
-    <skip />
+    <string name="battery_usage_timestamps_content_description" msgid="1927748134271595985">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g> – <xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
     <string name="battery_usage_day_and_hour" msgid="1417890420844950881">"<xliff:g id="DAY">%1$s</xliff:g> <xliff:g id="HOUR">%2$s</xliff:g>"</string>
     <string name="battery_usage_time_info_and_battery_level" msgid="6732629268310936155">"<xliff:g id="TIME_INFO">%1$s</xliff:g> <xliff:g id="BATTERY_LEVEL">%2$s</xliff:g>"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Дыяграма выкарыстання зараду"</string>
@@ -2619,8 +2618,7 @@
     <string name="battery_usage_spinner_view_by_apps" msgid="8769276544072098082">"Паказаць выкарыстанне праграмамі"</string>
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"Паказаць выкарыстанне сістэмамі"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
-    <!-- no translation found for battery_usage_less_than_percent_content_description (6265933174815461493) -->
-    <skip />
+    <string name="battery_usage_less_than_percent_content_description" msgid="6265933174815461493">"менш за <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="battery_cycle_count_footer" msgid="3642121059800373545">"У сувязі з праверкай якасці перад адпраўкай колькасць цыклаў можа не быць нулявой пры першым выкарыстанні"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Статыстыка працэсаў"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Падрабязная статыстыка запушчаных працэсаў"</string>
@@ -2688,12 +2686,18 @@
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"Уключана"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"Выключана"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Выкарыстанне адаптыўнага падключэння"</string>
-    <string name="cellular_security_title" msgid="7124079732186082924">"Бяспека сотавай сеткі"</string>
+    <!-- no translation found for cellular_security_title (5562899485544677941) -->
+    <skip />
     <string name="cellular_security_summary" msgid="1893770670709928113">"Тып сеткі, шыфраванне, налады апавяшчэнняў"</string>
-    <string name="cellular_security_settings_title" msgid="116950133456981770">"Бяспека сотавай сеткі"</string>
+    <!-- no translation found for cellular_security_top_intro (6749166804080092892) -->
+    <skip />
+    <!-- no translation found for cellular_security_settings_title (7779141923670352595) -->
+    <skip />
     <string name="cellular_security_notifications" msgid="4619728340612184944">"Апавяшчэнні"</string>
-    <string name="cellular_security_notifications_controller_title" msgid="5085567551536606230">"Апавяшчэнні сістэмы бяспекі"</string>
-    <string name="cellular_security_notifications_controller_summary" msgid="2876183397456700377">"Атрымлівайце паведамленні, калі сотавая сетка, да якой вы падключыліся, з\'яўляецца небяспечнай з-за адсутнасці шыфравання або калі яна запісвае вашы ўнікальныя ідэнтыфікатары прылады або SIM-карты (IMEI і IMSI)"</string>
+    <!-- no translation found for cellular_security_notifications_controller_title (4853056963523277847) -->
+    <skip />
+    <!-- no translation found for cellular_security_notifications_controller_summary (8339863845393759958) -->
+    <skip />
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"Шыфраванне"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"Пакаленні сетак"</string>
     <string name="cellular_security_network_generations_summary" msgid="139087814553929402">"Кожную з усталяваных SIM-карт можна наладзіць так, каб яна падключалася толькі да сетак, якія падтрымліваюць 3G, 4G і 5G. SIM-карта не будзе падключацца да старых небяспечных 2G-сетак. Калі адзіная даступная сетка падтрымлівае толькі 2G, магчымасць падключэння можа быць абмежаванай. Тэхналогія 2G можа быць выкарыстана ў экстранных выпадках."</string>
@@ -4973,8 +4977,10 @@
     <string name="enable_2g_title" msgid="8184757884636162942">"Дазволіць 2G"</string>
     <string name="enable_2g_summary" msgid="2794534052372565914">"Тэхналогія 2G менш бяспечная, аднак у некаторых месцах яна забяспечвае лепшую якасць сувязі. Для экстранных выклікаў заўсёды дазволена выкарыстоўваць 2G."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"Для выкарыстання аператара \"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g>\" неабходна ўключыць 2G"</string>
-    <string name="require_cellular_encryption_title" msgid="7516008146269371585">"Патрабуецца шыфраванне"</string>
-    <string name="require_cellular_encryption_summary" msgid="4813823321032908641">"Шыфраванне дае большую бяспеку, але ў некаторых месцах вы не зможаце падключыцца да сеткі. Для экстранных выклікаў шыфраванне не патрэбна."</string>
+    <!-- no translation found for require_cellular_encryption_title (6087085031703089235) -->
+    <skip />
+    <!-- no translation found for require_cellular_encryption_summary (6090569065420631457) -->
+    <skip />
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Усе сэрвісы"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Паказваць апавяшчэнні пра доступ да буфера абмену"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Паказваць паведамленне, калі праграмы атрымліваюць доступ да тэксту, відарысаў ці іншага змесціва, якое вы скапіравалі"</string>
@@ -5197,8 +5203,7 @@
     <string name="force_swcrypto_fallback_title" msgid="8053166299808645593">"Прымусова ўключыць праграмную крыптаабарону"</string>
     <string name="force_swcrypto_fallback_summary" msgid="181969966310309701">"Налада прымусова актывуе кіраванне ключамі DRM для выкарыстання праграмнай крыптаграфіі тыпу \"белая скрынка\""</string>
     <string name="fingerprint_acquired_imager_dirty_udfps" msgid="7005042288289506776">"Ачысціце экран вакол датчыка і паўтарыце спробу"</string>
-    <!-- no translation found for sim_category_converted_sim (8575548015816988908) -->
-    <skip />
+    <string name="sim_category_converted_sim" msgid="8575548015816988908">"Пераўтворана ў eSIM-карту. Выняць і выкінуць."</string>
     <!-- no translation found for sync_across_devices_title (3447757705383089345) -->
     <skip />
 </resources>

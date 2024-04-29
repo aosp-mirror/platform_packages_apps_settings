@@ -2604,8 +2604,7 @@
     <string name="battery_usage_screen_footer_empty" msgid="3301144846133808193">"배터리 사용량 데이터는 충전이 완료되고 몇 시간 후에 확인할 수 있습니다."</string>
     <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"현재"</string>
     <string name="battery_usage_timestamps_hyphen" msgid="7401188432989043905">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g>~<xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
-    <!-- no translation found for battery_usage_timestamps_content_description (1927748134271595985) -->
-    <skip />
+    <string name="battery_usage_timestamps_content_description" msgid="1927748134271595985">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g>~<xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
     <string name="battery_usage_day_and_hour" msgid="1417890420844950881">"<xliff:g id="DAY">%1$s</xliff:g> <xliff:g id="HOUR">%2$s</xliff:g>"</string>
     <string name="battery_usage_time_info_and_battery_level" msgid="6732629268310936155">"<xliff:g id="TIME_INFO">%1$s</xliff:g> <xliff:g id="BATTERY_LEVEL">%2$s</xliff:g>"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"배터리 사용량 차트"</string>
@@ -2619,8 +2618,7 @@
     <string name="battery_usage_spinner_view_by_apps" msgid="8769276544072098082">"앱별로 보기"</string>
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"시스템별로 보기"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
-    <!-- no translation found for battery_usage_less_than_percent_content_description (6265933174815461493) -->
-    <skip />
+    <string name="battery_usage_less_than_percent_content_description" msgid="6265933174815461493">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> 미만"</string>
     <string name="battery_cycle_count_footer" msgid="3642121059800373545">"발송 전 품질 검사로 인해 처음 사용 시 사이클 수가 0이 아닐 수 있습니다."</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"프로세스 통계"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"프로세스 실행에 관한 통계"</string>
@@ -2688,12 +2686,18 @@
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"사용"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"사용 안함"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"스마트 연결 사용"</string>
-    <string name="cellular_security_title" msgid="7124079732186082924">"셀룰러 네트워크 보안"</string>
+    <!-- no translation found for cellular_security_title (5562899485544677941) -->
+    <skip />
     <string name="cellular_security_summary" msgid="1893770670709928113">"네트워크 유형, 암호화, 알림 설정"</string>
-    <string name="cellular_security_settings_title" msgid="116950133456981770">"셀룰러 네트워크 보안"</string>
+    <!-- no translation found for cellular_security_top_intro (6749166804080092892) -->
+    <skip />
+    <!-- no translation found for cellular_security_settings_title (7779141923670352595) -->
+    <skip />
     <string name="cellular_security_notifications" msgid="4619728340612184944">"알림"</string>
-    <string name="cellular_security_notifications_controller_title" msgid="5085567551536606230">"보안 알림"</string>
-    <string name="cellular_security_notifications_controller_summary" msgid="2876183397456700377">"연결된 셀룰러 네트워크가 암호화되어 있지 않아 안전하지 않거나 셀룰러 네트워크에서 사용자의 고유 기기 또는 SIM 식별자(IMEI 및 IMSI)를 기록하는 경우 알림을 받습니다."</string>
+    <!-- no translation found for cellular_security_notifications_controller_title (4853056963523277847) -->
+    <skip />
+    <!-- no translation found for cellular_security_notifications_controller_summary (8339863845393759958) -->
+    <skip />
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"암호화"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"네트워크 생성"</string>
     <string name="cellular_security_network_generations_summary" msgid="139087814553929402">"설치된 각 SIM 카드를 3G, 4G, 5G를 지원하는 네트워크에만 연결하도록 구성할 수 있습니다. 해당 SIM은 오래되고 안전하지 않은 2G 네트워크에 연결되지 않습니다. 이 설정으로 인해 사용할 수 있는 네트워크가 2G뿐인 경우 연결이 제한될 수 있습니다. 응급 상황에서는 2G가 사용될 수 있습니다."</string>
@@ -4971,8 +4975,10 @@
     <string name="enable_2g_title" msgid="8184757884636162942">"2G 허용"</string>
     <string name="enable_2g_summary" msgid="2794534052372565914">"2G는 보안이 약한 대신 일부 위치에서 연결 품질을 개선할 수 있습니다. 긴급 전화의 경우 2G는 항상 허용됩니다."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> 이동통신사 사용 시 2G 필요"</string>
-    <string name="require_cellular_encryption_title" msgid="7516008146269371585">"암호화 요구"</string>
-    <string name="require_cellular_encryption_summary" msgid="4813823321032908641">"암호화가 더 안전하나 일부 위치에서는 연결이 불가능할 수 있습니다. 긴급 전화의 경우 암호화가 필요하지 않습니다."</string>
+    <!-- no translation found for require_cellular_encryption_title (6087085031703089235) -->
+    <skip />
+    <!-- no translation found for require_cellular_encryption_summary (6090569065420631457) -->
+    <skip />
     <string name="app_info_all_services_label" msgid="1487070364839071105">"모든 서비스"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"클립보드 액세스 표시"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"앱이 복사된 텍스트, 이미지 또는 기타 콘텐츠에 액세스할 때 메시지 표시"</string>
@@ -5195,8 +5201,7 @@
     <string name="force_swcrypto_fallback_title" msgid="8053166299808645593">"소프트웨어 보안 암호화 강제 적용"</string>
     <string name="force_swcrypto_fallback_summary" msgid="181969966310309701">"소프트웨어 기반 화이트박스 암호화를 사용하도록 DRM 키 관리 강제 적용"</string>
     <string name="fingerprint_acquired_imager_dirty_udfps" msgid="7005042288289506776">"센서 주변 화면을 닦고 다시 시도하세요."</string>
-    <!-- no translation found for sim_category_converted_sim (8575548015816988908) -->
-    <skip />
+    <string name="sim_category_converted_sim" msgid="8575548015816988908">"eSIM으로 전환했습니다. 기존 SIM을 제거하고 폐기하세요."</string>
     <!-- no translation found for sync_across_devices_title (3447757705383089345) -->
     <skip />
 </resources>
