@@ -1497,8 +1497,7 @@
     <string name="reset_esim_error_title" msgid="6516110227665862295">"ઇ-સિમ કાઢી નાખી શકાતા નથી"</string>
     <string name="reset_esim_error_msg" msgid="8459527827897797168">"કંઈક ખોટું થયું અને તમારા ઇ-સિમ કાઢી નાખવામાં આવ્યાં નથી.\n\nતમારું ડિવાઇસ ફરી શરૂ કરો અને ફરી પ્રયાસ કરો."</string>
     <string name="reset_private_space_delete_title" msgid="2555885198282572990">"ખાનગી સ્પેસ ડિલીટ કરો"</string>
-    <!-- no translation found for reset_private_space_delete_dialog (7506471054091800883) -->
-    <skip />
+    <string name="reset_private_space_delete_dialog" msgid="7506471054091800883">"જો તમારા ડિવાઇસમાં તમારી પાસે ખાનગી સ્પેસ હોય, તો તેને કાયમ માટે ડિલીટ કરવામાં આવશે અને તમારી સ્પેસમાં ઉમેરવામાં આવેલા Google એકાઉન્ટને કાઢી નાખવામાં આવશે.\n\nતમારી સ્પેસમાં ઉપલબ્ધ બધી ઍપ અને તેમનો ડેટા પણ કાયમ માટે ડિલીટ કરવામાં આવશે."</string>
     <string name="main_clear_title" msgid="277664302144837723">"બધો ડેટા કાઢી નાખો (ફેક્ટરી રીસેટ)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"બધો ડેટા કાઢી નાખો (ફેક્ટરી રીસેટ)"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"મ્યુઝિક"</li>\n<li>"ફોટા"</li>\n<li>"અન્ય વપરાશકર્તા ડેટા"</li></string>
@@ -2604,8 +2603,7 @@
     <string name="battery_usage_screen_footer_empty" msgid="3301144846133808193">"બૅટરી પૂરી ચાર્જ થયાના થોડા કલાકોમાં બૅટરી વપરાશનો ડેટા ઉપલબ્ધ બનશે"</string>
     <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"હમણાં"</string>
     <string name="battery_usage_timestamps_hyphen" msgid="7401188432989043905">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g> - <xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
-    <!-- no translation found for battery_usage_timestamps_content_description (1927748134271595985) -->
-    <skip />
+    <string name="battery_usage_timestamps_content_description" msgid="1927748134271595985">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g>થી <xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
     <string name="battery_usage_day_and_hour" msgid="1417890420844950881">"<xliff:g id="DAY">%1$s</xliff:g> <xliff:g id="HOUR">%2$s</xliff:g>"</string>
     <string name="battery_usage_time_info_and_battery_level" msgid="6732629268310936155">"<xliff:g id="TIME_INFO">%1$s</xliff:g> <xliff:g id="BATTERY_LEVEL">%2$s</xliff:g>"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"બૅટરીના વપરાશનો ચાર્ટ"</string>
@@ -2619,8 +2617,7 @@
     <string name="battery_usage_spinner_view_by_apps" msgid="8769276544072098082">"ઍપ દ્વારા જુઓ"</string>
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"સિસ્ટમ દ્વારા જુઓ"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
-    <!-- no translation found for battery_usage_less_than_percent_content_description (6265933174815461493) -->
-    <skip />
+    <string name="battery_usage_less_than_percent_content_description" msgid="6265933174815461493">"<xliff:g id="PERCENTAGE">%1$s</xliff:g>થી ઓછું"</string>
     <string name="battery_cycle_count_footer" msgid="3642121059800373545">"રવાના કરતા પહેલાં કરેલી ક્વૉલિટી માટેની તપાસના કારણે પહેલી વાર ઉપયોગ વખતે ચક્રની સંખ્યા શૂન્ય ન હોય એમ બને"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"પ્રક્રિયા આંકડા"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"ચાલુ પ્રક્રિયાઓ વિશેનાં અવ્યવસ્થિત આંકડાઓ"</string>
@@ -2688,12 +2685,18 @@
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"ચાલુ કરો"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"બંધ કરો"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Adaptive Connectivityનો ઉપયોગ કરો"</string>
-    <string name="cellular_security_title" msgid="7124079732186082924">"સેલ્યુલર નેટવર્ક સંબંધી સુરક્ષા"</string>
+    <!-- no translation found for cellular_security_title (5562899485544677941) -->
+    <skip />
     <string name="cellular_security_summary" msgid="1893770670709928113">"નેટવર્કનો પ્રકાર, એન્ક્રિપ્શન, નોટિફિકેશનના નિયંત્રણો"</string>
-    <string name="cellular_security_settings_title" msgid="116950133456981770">"સેલ્યુલર નેટવર્ક સંબંધી સુરક્ષા"</string>
+    <!-- no translation found for cellular_security_top_intro (6749166804080092892) -->
+    <skip />
+    <!-- no translation found for cellular_security_settings_title (7779141923670352595) -->
+    <skip />
     <string name="cellular_security_notifications" msgid="4619728340612184944">"નોટિફિકેશન"</string>
-    <string name="cellular_security_notifications_controller_title" msgid="5085567551536606230">"સુરક્ષા નોટિફિકેશન"</string>
-    <string name="cellular_security_notifications_controller_summary" msgid="2876183397456700377">"તમે જેની સાથે કનેક્ટેડ હો તે સેલ્યુલર નેટવર્ક એન્ક્રિપ્શન ન હોવાના કારણે અસુરક્ષિત હોય અથવા સેલ્યુલર નેટવર્ક દ્વારા તમારા ડિવાઇસ કે સિમ કાર્ડના વિશિષ્ટ ઓળખકર્તાઓ (IMEI &amp; IMSI)ને રેકોર્ડ કરવામાં આવ્યા હોય, તો આવા કિસ્સામાં નોટિફિકેશન મેળવો"</string>
+    <!-- no translation found for cellular_security_notifications_controller_title (4853056963523277847) -->
+    <skip />
+    <!-- no translation found for cellular_security_notifications_controller_summary (8339863845393759958) -->
+    <skip />
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"એન્ક્રિપ્શન"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"નેટવર્ક જનરેશન"</string>
     <string name="cellular_security_network_generations_summary" msgid="139087814553929402">"ઇન્સ્ટૉલ કરેલું દરેક સિમ કાર્ડ માત્ર 3G, 4G અને 5Gને સપોર્ટ કરતા નેટવર્ક સાથે જ કનેક્ટ થાય એ રીતે તમે તેને કન્ફિગ્યુર કરી શકો છો. સિમ કાર્ડ જૂના, અસલામત 2G નેટવર્ક સાથે કનેક્ટ થશે નહીં. જ્યારે માત્ર 2G નેટવર્ક જ ઉપલબ્ધ હોય, ત્યારે આ સેટિંગના કારણે તમારી કનેક્ટિવિટી મર્યાદિત થઈ જાય એમ બને. ઇમર્જન્સીના કિસ્સામાં 2Gનો ઉપયોગ થઈ શકે છે."</string>
@@ -4971,8 +4974,10 @@
     <string name="enable_2g_title" msgid="8184757884636162942">"2Gની મંજૂરી આપો"</string>
     <string name="enable_2g_summary" msgid="2794534052372565914">"2G ઓછું સુરક્ષિત છે, પણ કેટલાક લોકેશનમાં એ તમારા કનેક્શનને બહેતર બનાવી શકે છે. ઇમર્જન્સી કૉલ માટે, 2Gને હંમેશાં મંજૂરી આપવામાં આવી છે."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> માટે 2G ઉપલબ્ધ હોવું જરૂરી છે"</string>
-    <string name="require_cellular_encryption_title" msgid="7516008146269371585">"એન્ક્રિપ્શનને આવશ્યક બનાવો"</string>
-    <string name="require_cellular_encryption_summary" msgid="4813823321032908641">"એન્ક્રિપ્શન વધુ સુરક્ષિત છે, પણ તમે અમુક લોકેશનમાં કનેક્ટ ન કરી શકો તેવું બની શકે છે. ઇમર્જન્સી કૉલ માટે, એન્ક્રિપ્શનની ક્યારેય જરૂર હોતી નથી"</string>
+    <!-- no translation found for require_cellular_encryption_title (6087085031703089235) -->
+    <skip />
+    <!-- no translation found for require_cellular_encryption_summary (6090569065420631457) -->
+    <skip />
     <string name="app_info_all_services_label" msgid="1487070364839071105">"તમામ સેવાઓ"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"ક્લિપબોર્ડનો ઍક્સેસ બતાવો"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"જ્યારે ઍપ તમે કૉપિ કરેલી ટેક્સ્ટ, છબીઓ કે અન્ય કન્ટેન્ટનો ઍક્સેસ કરે ત્યારે મેસેજ બતાવો"</string>
@@ -5195,8 +5200,7 @@
     <string name="force_swcrypto_fallback_title" msgid="8053166299808645593">"સૉફ્ટવેર સિક્યોર ક્રિપ્ટો ફરજિયાત લાગુ કરો"</string>
     <string name="force_swcrypto_fallback_summary" msgid="181969966310309701">"DRM કી મેનેજમેન્ટને સૉફ્ટવેર આધારિત વ્હાઇટબૉક્સ ક્રિપ્ટોનો ફરજિયાત ઉપયોગ કરવા માટેનું સેટિંગ લાગુ કરો"</string>
     <string name="fingerprint_acquired_imager_dirty_udfps" msgid="7005042288289506776">"સેન્સર નજીકની તમારી સ્ક્રીન ક્લિન કરો અને ફરી પ્રયાસ કરો"</string>
-    <!-- no translation found for sim_category_converted_sim (8575548015816988908) -->
-    <skip />
+    <string name="sim_category_converted_sim" msgid="8575548015816988908">"ઇ-સિમમાં રૂપાંતરણ કર્યું છે. કાઢી નાખો."</string>
     <!-- no translation found for sync_across_devices_title (3447757705383089345) -->
     <skip />
 </resources>

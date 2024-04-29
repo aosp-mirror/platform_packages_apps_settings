@@ -841,7 +841,7 @@
     <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"להפעיל את המכשיר מחדש?"</string>
     <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"‏הרישום ביומן של פרטי NFC מיועד למטרות פיתוח בלבד. נתוני NFC נוספים נכללים בדוחות על באגים, שעשויים להכיל מידע פרטי. צריך להפעיל מחדש את המכשיר כדי לשנות את ההגדרה."</string>
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"הפעלה מחדש"</string>
-    <string name="wifi_display_settings_title" msgid="6451625615274960175">"‏העברה (cast)"</string>
+    <string name="wifi_display_settings_title" msgid="6451625615274960175">"‏הפעלת Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"‏העברה (csat)"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"‏הפעלת תצוגת WiFi"</string>
     <string name="wifi_display_no_devices_found" msgid="7904877793677102805">"לא נמצאו מכשירים בקרבת מקום."</string>
@@ -1188,7 +1188,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="fold_lock_behavior_title" msgid="786228803694268449">"המשך שימוש באפליקציות כשהמכשיר מקופל"</string>
     <string name="disable_game_default_frame_rate_title" msgid="3712908601744143753">"השבתת ברירת המחדל של קצב הפריימים למשחקים"</string>
-    <string name="disable_game_default_frame_rate_summary" msgid="4436762704707434225">"השבתה של הגבלת קצב הפריימים המרבי למשחקים ב-<xliff:g id="FRAME_RATE">%1$d</xliff:g> הרץ."</string>
+    <string name="disable_game_default_frame_rate_summary" msgid="4436762704707434225">"השבתה של הגבלת קצב הפריימים המרבי למשחקים ל-<xliff:g id="FRAME_RATE">%1$d</xliff:g> הרץ."</string>
     <string name="peak_refresh_rate_title" msgid="2056355754210341011">"תצוגה חלקה"</string>
     <string name="peak_refresh_rate_summary" msgid="3212309985294885790">"‏קצב הרענון עולה באופן אוטומטי עד ‎<xliff:g id="ID_1">%1$d</xliff:g> Hz לחלק מהתוכן. השימוש בסוללה יוגבר."</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"אילוץ לקצב הרענון המקסימלי"</string>
@@ -1223,7 +1223,7 @@
     <string name="night_display_summary_on_auto_mode_custom" msgid="2096677025343425755">"כיבוי אוטומטית בשעה <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_summary_on_auto_mode_twilight" msgid="8070517472000680361">"כיבוי אוטומטי בזריחה"</string>
     <string name="night_display_not_currently_on" msgid="6600205753103093827">"תאורת הלילה לא פועלת כרגע"</string>
-    <string name="twilight_mode_location_off_dialog_message" msgid="4559150893687124801">"מיקום המכשיר נדרש כדי לקבוע את זמני השקיעה והזריחה באזורך."</string>
+    <string name="twilight_mode_location_off_dialog_message" msgid="4559150893687124801">"מיקום המכשיר נדרש כדי לקבוע את זמני השקיעה והזריחה באזור שלך."</string>
     <string name="twilight_mode_launch_location" msgid="7799112373591153956">"הגדרות מיקום"</string>
     <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"להפעלה עכשיו"</string>
     <string name="dark_ui_activation_off_manual" msgid="2395333709291250065">"לכיבוי עכשיו"</string>
@@ -1377,7 +1377,7 @@
     <string name="storage_menu_free" msgid="616100170298501673">"פינוי שטח אחסון"</string>
     <string name="storage_menu_manage" msgid="7465522758801346408">"ניהול אחסון"</string>
     <string name="storage_free_up_space_title" msgid="281047807372131975">"פינוי מקום"</string>
-    <string name="storage_free_up_space_summary" msgid="6650027929735481350">"‏אפשר להיכנס לאפליקציית Files כדי לנהל את האחסון ולפנות מקום"</string>
+    <string name="storage_free_up_space_summary" msgid="6650027929735481350">"אפשר להיכנס לאפליקציית \'קבצים\' כדי לנהל את האחסון ולפנות מקום"</string>
     <string name="storage_other_users" msgid="7017206190449510992">"משתמשים אחרים"</string>
     <string name="storage_size_large" msgid="1155308277890194878">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small>""</string>
     <string name="storage_mount_success" msgid="393972242641313135">"<xliff:g id="NAME">%1$s</xliff:g> נטען"</string>
@@ -2604,8 +2604,7 @@
     <string name="battery_usage_screen_footer_empty" msgid="3301144846133808193">"נתוני השימוש בסוללה יהיו זמינים בעוד כמה שעות, כשהמכשיר יהיה טעון במלואו"</string>
     <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"עכשיו"</string>
     <string name="battery_usage_timestamps_hyphen" msgid="7401188432989043905">"‎<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g> – <xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>‎"</string>
-    <!-- no translation found for battery_usage_timestamps_content_description (1927748134271595985) -->
-    <skip />
+    <string name="battery_usage_timestamps_content_description" msgid="1927748134271595985">"‫<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g> עד <xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
     <string name="battery_usage_day_and_hour" msgid="1417890420844950881">"<xliff:g id="DAY">%1$s</xliff:g> <xliff:g id="HOUR">%2$s</xliff:g>⁠"</string>
     <string name="battery_usage_time_info_and_battery_level" msgid="6732629268310936155">"<xliff:g id="TIME_INFO">%1$s</xliff:g> <xliff:g id="BATTERY_LEVEL">%2$s</xliff:g>⁠"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"תרשים של השימוש בסוללה"</string>
@@ -2619,8 +2618,7 @@
     <string name="battery_usage_spinner_view_by_apps" msgid="8769276544072098082">"הצגה לפי אפליקציות"</string>
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"הצגה לפי מערכות"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
-    <!-- no translation found for battery_usage_less_than_percent_content_description (6265933174815461493) -->
-    <skip />
+    <string name="battery_usage_less_than_percent_content_description" msgid="6265933174815461493">"פחות מ-<xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="battery_cycle_count_footer" msgid="3642121059800373545">"בגלל בדיקות איכות שנערכות לפני המשלוח, מספר מחזורי הטעינה עשוי שלא להיות אפס בשימוש הראשון"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"סטטיסטיקה של תהליך"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"סטטיסטיקה של מומחי מחשבים על התהליכים הפועלים"</string>
@@ -2688,12 +2686,18 @@
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"מצב פעיל"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"כיבוי"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"שימוש בקישוריות דינמית"</string>
-    <string name="cellular_security_title" msgid="7124079732186082924">"אבטחת הרשת הסלולרית"</string>
+    <!-- no translation found for cellular_security_title (5562899485544677941) -->
+    <skip />
     <string name="cellular_security_summary" msgid="1893770670709928113">"סוג הרשת, הצפנה, אמצעי בקרה של התראות"</string>
-    <string name="cellular_security_settings_title" msgid="116950133456981770">"אבטחת הרשת הסלולרית"</string>
+    <!-- no translation found for cellular_security_top_intro (6749166804080092892) -->
+    <skip />
+    <!-- no translation found for cellular_security_settings_title (7779141923670352595) -->
+    <skip />
     <string name="cellular_security_notifications" msgid="4619728340612184944">"התראות"</string>
-    <string name="cellular_security_notifications_controller_title" msgid="5085567551536606230">"התראות אבטחה"</string>
-    <string name="cellular_security_notifications_controller_summary" msgid="2876183397456700377">"‏המערכת תשלח התראות אם הרשת הסלולרית שאליה התחברת לא מאובטחת בגלל היעדר הצפנה, או אם הרשת הסלולרית מתעדת את מזהי המכשיר או כרטיס ה-SIM הייחודיים שלך (IMEI ו-IMSI)"</string>
+    <!-- no translation found for cellular_security_notifications_controller_title (4853056963523277847) -->
+    <skip />
+    <!-- no translation found for cellular_security_notifications_controller_summary (8339863845393759958) -->
+    <skip />
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"הצפנה"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"דורות של רשתות"</string>
     <string name="cellular_security_network_generations_summary" msgid="139087814553929402">"‏אפשר לקבוע שכל כרטיס SIM שהותקן יתחבר רק לרשתות שתומכות ב-3G, ב-4G וב-5G. כרטיס ה-SIM לא יתחבר לרשתות 2G ישנות ולא מאובטחות. ההגדרה הזו עשויה להגביל את הקישוריות במקרה שהרשת הזמינה היחידה היא 2G. במקרה חירום, ניתן להשתמש ברשת 2G."</string>
@@ -2973,8 +2977,7 @@
     <string name="user_summary_not_set_up" msgid="4602868481732886115">"לא מוגדר"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1658946988920104613">"לא מוגדר – פרופיל מוגבל"</string>
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"לא מוגדר – פרופיל עבודה"</string>
-    <!-- no translation found for user_owner (2079206733011361994) -->
-    <skip />
+    <string name="user_owner" msgid="2079206733011361994">"בעלים"</string>
     <string name="user_admin" msgid="4024553191395768119">"אדמין"</string>
     <string name="user_you" msgid="3070562015202859996">"את/ה (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_add_max_count" msgid="3328539978480663740">"לא ניתן להוסיף עוד משתמשים. צריך להסיר משתמש כדי להוסיף משתמש חדש."</string>
@@ -3178,7 +3181,7 @@
     <string name="keywords_display_night_display" msgid="4711054330804250058">"עמעום מסך, לילה, גוון, משמרת לילה, בהירות, צבע מסך, צבע"</string>
     <string name="keywords_display_wallpaper" msgid="8478137541939526564">"רקע, התאמה אישית, התאם אישית את התצוגה"</string>
     <string name="keywords_display_font_size" msgid="3593317215149813183">"גודל טקסט"</string>
-    <string name="keywords_display_cast_screen" msgid="2572331770299149370">"הקרנה, העברה, שיקוף מסך, שיתוף מסך, שיקוף, שיתוף צג, העברת מסך"</string>
+    <string name="keywords_display_cast_screen" msgid="2572331770299149370">"‏הקרנה, הפעלת Cast, שיקוף מסך, שיתוף מסך, שיקוף, שיתוף צג, הפעלת Cast של התוכן במסך"</string>
     <string name="keywords_storage" msgid="3004667910133021783">"שטח, דיסק, כונן קשיח, שימוש במכשיר"</string>
     <string name="keywords_battery" msgid="7040323668283600530">"צריכת חשמל, טעינה"</string>
     <string name="keywords_battery_usage" msgid="1763573071014260220">"השימוש בסוללה, השימוש בסוללה, צריכת החשמל"</string>
@@ -3268,7 +3271,7 @@
     <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"מקלדת, משוב פיזי, רטט,"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"עוצמת קול, רטט ומצב \'נא לא להפריע\'"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"עוצמת קול של מדיה"</string>
-    <string name="remote_media_volume_option_title" msgid="8760846743943305764">"עוצמת הקול בהעברה"</string>
+    <string name="remote_media_volume_option_title" msgid="8760846743943305764">"‏עוצמת הקול בהפעלת Cast"</string>
     <string name="call_volume_option_title" msgid="1461105986437268924">"עוצמת קול של שיחות"</string>
     <string name="alarm_volume_option_title" msgid="6398641749273697140">"עוצמת קול של שעון מעורר"</string>
     <string name="ring_volume_option_title" msgid="1520802026403038560">"עוצמת קול של צלצול והתראות"</string>
@@ -3980,7 +3983,7 @@
     <string name="allow_overlay_description" msgid="1607235723669496298">"ההגדרה הזו מאפשרת לאפליקציה להופיע מעל אפליקציות אחרות שנמצאות בשימוש. האפליקציה תוכל לראות את מיקומי ההקשות שלך או לשנות את מה שמוצג במסך."</string>
     <string name="media_routing_control_title" msgid="6402800638960066807">"שינוי פלט המדיה"</string>
     <string name="allow_media_routing_control" msgid="4907036637509360616">"מתן הרשאה לאפליקציה להחליף פלט מדיה"</string>
-    <string name="allow_media_routing_description" msgid="8343709701298051207">"‏מתן הרשאה לאפליקציה הזו לבחור איזה מכשיר מחובר יפעיל אודיו או וידאו מאפליקציות אחרות. אם תינתן הרשאה לאפליקציה, היא תוכל לגשת לרשימה של מכשירים זמינים כמו אוזניות ורמקולים ולבחור איזה מכשיר להצגת מידע ישמש כדי לשדר או להעביר (cast) אודיו או וידאו."</string>
+    <string name="allow_media_routing_description" msgid="8343709701298051207">"‏מתן הרשאה לאפליקציה הזו לבחור איזה מכשיר מחובר יפעיל אודיו או וידאו מאפליקציות אחרות. אם תינתן הרשאה לאפליקציה, היא תוכל לגשת לרשימה של מכשירים זמינים כמו אוזניות ורמקולים ולבחור איזה מכשיר פלט ישמש כדי לשדר אודיו או וידאו או להפעיל Cast שלהם."</string>
     <string name="manage_external_storage_title" msgid="8024521099838816100">"גישה לכל הקבצים"</string>
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"הרשאת גישה לניהול כל הקבצים"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"לאפליקציה הזו תהיה הרשאה לקרוא, לשנות ולמחוק את כל הקבצים במכשיר הזה או בכל אחסון שמחובר אליו. אם ההרשאה ניתנת, האפליקציה תורשה לגשת לקבצים מבלי ליידע אותך במפורש."</string>
@@ -4434,7 +4437,7 @@
     <string name="credman_confirmation_change_provider_positive_button" msgid="7732302992885116967">"שינוי"</string>
     <string name="credman_limit_error_msg_title" msgid="1525814645803612135">"אפשר להפעיל רק 5 שירותים בכל פעם"</string>
     <string name="credman_limit_error_msg" msgid="2521803280130310063">"צריך להשבית לפחות שירות אחד כדי להוסיף עוד שירות"</string>
-    <string name="credman_main_settings_intro_text" msgid="4981603639240772620">"בחירת השירות המועדף כדי לשמור נתונים להצעות שיופיעו בזמן כניסה ובמילוי אוטומטי. כדי לקבל הצעות משירותים נוספים, צריך להפעיל אותם."</string>
+    <string name="credman_main_settings_intro_text" msgid="4981603639240772620">"אפשר לבחור שירות מועדף לשמירת נתונים להצעות שיופיעו בזמן כניסה ובמילוי אוטומטי. כדי לקבל הצעות משירותים נוספים, צריך להפעיל אותם."</string>
     <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"‏%1$s עושה שימוש במידע המוצג במסך כדי לקבוע אילו פרטים ניתן למלא באופן אוטומטי."</string>
     <string name="credman_error_message_title" msgid="4099557206946333568">"מגבלת הסיסמאות, מפתחות הגישה ושירותי הנתונים"</string>
     <string name="credman_error_message" msgid="8334797097200415449">"ניתן להפעיל עד 5 סיסמאות, מפתחות גישה ושירותי נתונים בו-זמנית. יש להשבית אחד מהשירותים כדי להוסיף שירות אחר."</string>
@@ -4694,7 +4697,7 @@
     <string name="primary_sim_calls_title" msgid="4961189133582615685">"שיחות"</string>
     <string name="primary_sim_texts_title" msgid="1287584042733097749">"הודעות טקסט"</string>
     <string name="primary_sim_automatic_data_title" msgid="1265528923229642480">"מעבר אוטומטי בין חבילות גלישה"</string>
-    <string name="primary_sim_automatic_data_msg" msgid="1612203837010785203">"‏שימוש בחבילת הגלישה של אחד מכרטיסי ה-SIM, תלוי בכיסוי ובזמינות"</string>
+    <string name="primary_sim_automatic_data_msg" msgid="1612203837010785203">"‏מעבר בין חבילות הגלישה של כל אחד מכרטיסי ה-SIM, בהתאם לכיסוי ולזמינות"</string>
     <string name="sim_action_restart_dialog_title" msgid="3507413479633430120">"‏הפעלה מחדש לשימוש בשני כרטיסי SIM"</string>
     <string name="sim_action_restart_dialog_msg" msgid="4737611046767629774">"‏כדי להשתמש בשני כרטיסי SIM בו-זמנית, צריך להפעיל מחדש את המכשיר ואז להפעיל את שני כרטיסי ה-SIM"</string>
     <string name="sim_action_restart_dialog_cancel" msgid="665560106686565624">"שימוש ב-<xliff:g id="CARRIER_NAME">%1$s</xliff:g> בלבד"</string>
@@ -4972,8 +4975,10 @@
     <string name="enable_2g_title" msgid="8184757884636162942">"‏אישור שימוש ב-2G"</string>
     <string name="enable_2g_summary" msgid="2794534052372565914">"‏רמת האבטחה של רשתות 2G נמוכה יותר, אבל הן עשויות לשפר את החיבור שלך במיקומים מסוימים. לרשתות 2G תמיד ניתנת הרשאה כשצריך לבצע שיחות חירום."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"‏לצורך זמינות ב-<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> נדרשת רשת 2G"</string>
-    <string name="require_cellular_encryption_title" msgid="7516008146269371585">"דרישה להצפנה"</string>
-    <string name="require_cellular_encryption_summary" msgid="4813823321032908641">"ההצפנה מאובטחת יותר, אך ייתכן שלא תהיה לך אפשרות להתחבר במקומות מסוימים. לא תידרש הצפנה במקרה של שיחת חירום"</string>
+    <!-- no translation found for require_cellular_encryption_title (6087085031703089235) -->
+    <skip />
+    <!-- no translation found for require_cellular_encryption_summary (6090569065420631457) -->
+    <skip />
     <string name="app_info_all_services_label" msgid="1487070364839071105">"כל השירותים"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"הצגת גישה ללוח העריכה"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"הצגת הודעה בזמן גישה של אפליקציות לטקסט, לתמונות או לכל תוכן אחר שהעתקת"</string>
@@ -5196,8 +5201,6 @@
     <string name="force_swcrypto_fallback_title" msgid="8053166299808645593">"שימוש ידני בהצפנת אבטחה מבוססת-תוכנה"</string>
     <string name="force_swcrypto_fallback_summary" msgid="181969966310309701">"‏ניהול ידני של מפתח DRM לשימוש בהצפנת Whitebox מבוססת-תוכנה"</string>
     <string name="fingerprint_acquired_imager_dirty_udfps" msgid="7005042288289506776">"צריך לנקות את אזור החיישן במסך ולנסות שוב"</string>
-    <!-- no translation found for sim_category_converted_sim (8575548015816988908) -->
-    <skip />
-    <!-- no translation found for sync_across_devices_title (3447757705383089345) -->
-    <skip />
+    <string name="sim_category_converted_sim" msgid="8575548015816988908">"‏התבצעה המרה ל-eSIM. אפשר להסיר ולזרוק."</string>
+    <string name="sync_across_devices_title" msgid="3447757705383089345">"סנכרון בין מכשירים"</string>
 </resources>

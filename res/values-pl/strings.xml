@@ -1187,7 +1187,7 @@
     <string name="display_white_balance_title" msgid="2624544323029364713">"Balans bieli wyświetlacza"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="fold_lock_behavior_title" msgid="786228803694268449">"Nadal używaj aplikacji po złożeniu"</string>
-    <string name="disable_game_default_frame_rate_title" msgid="3712908601744143753">"Wyłączenie domyślnej liczby klatek w grach"</string>
+    <string name="disable_game_default_frame_rate_title" msgid="3712908601744143753">"Wyłącz domyślną liczbę klatek w grach"</string>
     <string name="disable_game_default_frame_rate_summary" msgid="4436762704707434225">"Wyłącz ograniczenie maksymalnej liczby klatek na sekundę w grach do <xliff:g id="FRAME_RATE">%1$d</xliff:g> Hz."</string>
     <string name="peak_refresh_rate_title" msgid="2056355754210341011">"Płynne wyświetlanie"</string>
     <string name="peak_refresh_rate_summary" msgid="3212309985294885790">"W przypadku niektórych treści automatycznie podwyższa częstotliwość odświeżania do <xliff:g id="ID_1">%1$d</xliff:g> Hz. Zwiększa wykorzystanie baterii."</string>
@@ -1249,7 +1249,7 @@
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Ustawienia trybu nocnego"</string>
     <string name="even_dimmer_display_title" msgid="6731255736830410149">"Jeszcze ciemniej"</string>
     <string name="even_dimmer_display_summary" msgid="120301078873242172">"Zezwalaj na przyciemnianie ekranu urządzenia bardziej niż zwykle"</string>
-    <string name="screen_timeout" msgid="7709947617767439410">"Wygaszanie ekranu"</string>
+    <string name="screen_timeout" msgid="7709947617767439410">"Automatyczne wygaszanie"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"Po <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> bezczynności"</string>
     <string name="screen_timeout_summary_not_set" msgid="5107680774964178875">"Nie ustawiono"</string>
     <string name="wallpaper_settings_title" msgid="5635129851136006383">"Tapeta"</string>
@@ -1497,8 +1497,7 @@
     <string name="reset_esim_error_title" msgid="6516110227665862295">"Nie można usunąć danych z kart eSIM"</string>
     <string name="reset_esim_error_msg" msgid="8459527827897797168">"Coś poszło nie tak i dane z Twoich kart eSIM nie zostały usunięte.\n\nUruchom urządzenie ponownie i spróbuj jeszcze raz."</string>
     <string name="reset_private_space_delete_title" msgid="2555885198282572990">"Usuń przestrzeń prywatną"</string>
-    <!-- no translation found for reset_private_space_delete_dialog (7506471054091800883) -->
-    <skip />
+    <string name="reset_private_space_delete_dialog" msgid="7506471054091800883">"Jeśli na urządzeniu znajduje się przestrzeń prywatna, zostanie ona trwale usunięta razem z dodanym do niej kontem Google.\n\nWszystkie aplikacje w przestrzeni i ich dane również zostaną trwale usunięte."</string>
     <string name="main_clear_title" msgid="277664302144837723">"Wykasuj wszystkie dane (przywróć dane fabryczne)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Wykasuj wszystkie dane (przywróć dane fabryczne)"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"muzyka"</li>\n<li>"zdjęcia"</li>\n<li>"inne dane użytkownika"</li></string>
@@ -2686,12 +2685,18 @@
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"Włączona"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"Wyłączona"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Używaj łączności adaptacyjnej"</string>
-    <string name="cellular_security_title" msgid="7124079732186082924">"Bezpieczeństwo sieci komórkowej"</string>
+    <!-- no translation found for cellular_security_title (5562899485544677941) -->
+    <skip />
     <string name="cellular_security_summary" msgid="1893770670709928113">"Typ sieci, szyfrowanie, ustawienia powiadomień"</string>
-    <string name="cellular_security_settings_title" msgid="116950133456981770">"Bezpieczeństwo sieci komórkowej"</string>
+    <!-- no translation found for cellular_security_top_intro (6749166804080092892) -->
+    <skip />
+    <!-- no translation found for cellular_security_settings_title (7779141923670352595) -->
+    <skip />
     <string name="cellular_security_notifications" msgid="4619728340612184944">"Powiadomienia"</string>
-    <string name="cellular_security_notifications_controller_title" msgid="5085567551536606230">"Powiadomienia dotyczące bezpieczeństwa"</string>
-    <string name="cellular_security_notifications_controller_summary" msgid="2876183397456700377">"Otrzymuj powiadomienia, gdy sieć komórkowa, z którą masz połączenie, może być mniej bezpieczna, ponieważ nie stosuje szyfrowania, lub jeśli rejestruje ona unikalne identyfikatory Twojego urządzenia lub karty SIM (IMEI i IMSI)"</string>
+    <!-- no translation found for cellular_security_notifications_controller_title (4853056963523277847) -->
+    <skip />
+    <!-- no translation found for cellular_security_notifications_controller_summary (8339863845393759958) -->
+    <skip />
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"Szyfrowanie"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"Generacje sieci"</string>
     <string name="cellular_security_network_generations_summary" msgid="139087814553929402">"Każdą włożoną kartę SIM możesz skonfigurować tak, aby łączyła się tylko z sieciami 3G, 4G i 5G. Karty nie będą się łączyć ze starszymi i mniej bezpiecznymi sieciami 2G. To ustawienie może ograniczyć Ci łączność w przypadkach, gdy dostępne będą tylko sieci 2G. W sytuacjach awaryjnych możliwe będzie użycie sieci 2G."</string>
@@ -3876,7 +3881,7 @@
     <string name="apps_storage" msgid="643866814746927111">"Miejsce na aplikacje"</string>
     <string name="usage_access" msgid="5487993885373893282">"Dostęp do danych o użyciu"</string>
     <string name="permit_usage_access" msgid="179630895262172674">"Zezwalaj na dostęp do danych o użyciu"</string>
-    <string name="time_spent_in_app_pref_title" msgid="25327097913383330">"Czas używania"</string>
+    <string name="time_spent_in_app_pref_title" msgid="25327097913383330">"Czas korzystania z urządzenia"</string>
     <string name="usage_access_description" msgid="8547716253713890707">"Dostęp do danych o użyciu umożliwia aplikacji śledzenie tego, jakich innych aplikacji używasz i jak często, oraz odczytywanie m.in. informacji o operatorze i ustawień językowych."</string>
     <string name="memory_settings_title" msgid="6582588646363308430">"Pamięć RAM"</string>
     <string name="always_running" msgid="9012705720688200252">"Zawsze aktywna (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
@@ -4246,7 +4251,7 @@
     <string name="keywords_system_navigation" msgid="3131782378486554934">"nawigacja w systemie, nawigacja przy użyciu dwóch przycisków, nawigacja przy użyciu trzech przycisków, nawigacja przy użyciu gestów, przesuwanie"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Asystent cyfrowy"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Przesuń palcem, aby wywołać asystenta"</string>
-    <string name="assistant_corner_gesture_summary" msgid="5012534700233017955">"Przesuń palcem z dolnego rogu ekranu w górę, aby wywołać aplikację asystenta cyfrowego"</string>
+    <string name="assistant_corner_gesture_summary" msgid="5012534700233017955">"Aby wywołać aplikację cyfrowego asystenta, przesuń palcem z dolnego rogu ekranu w górę."</string>
     <string name="assistant_long_press_home_gesture_title" msgid="4865972278738178753">"Aby uruchomić Asystenta, przytrzymaj przycisk ekranu głównego"</string>
     <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"Jeśli chcesz wywołać cyfrowego asystenta, naciśnij i przytrzymaj przycisk ekranu głównego"</string>
     <string name="low_label" msgid="6525629096999711220">"Niska"</string>
@@ -4432,7 +4437,7 @@
     <string name="credman_confirmation_change_provider_positive_button" msgid="7732302992885116967">"Zmień"</string>
     <string name="credman_limit_error_msg_title" msgid="1525814645803612135">"Możesz mieć włączonych jednocześnie tylko 5 usług"</string>
     <string name="credman_limit_error_msg" msgid="2521803280130310063">"Wyłącz co najmniej 1 usługę, aby dodać kolejną"</string>
-    <string name="credman_main_settings_intro_text" msgid="4981603639240772620">"Wybierz preferowaną usługę, aby zapisać dane logowania i sugestie autouzupełniania. Włącz usługi dodatkowe, jeśli chcesz, aby one również przekazywały sugestie."</string>
+    <string name="credman_main_settings_intro_text" msgid="4981603639240772620">"Wybierz preferowaną usługę, aby zapisać dane logowania i sugestie autouzupełniania. Włącz usługi dodatkowe, jeśli chcesz, aby one również podpowiadały Ci, co wpisywać."</string>
     <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"Usługa %1$s używa treści wyświetlanych na ekranie do określania, co można uzupełnić automatycznie."</string>
     <string name="credman_error_message_title" msgid="4099557206946333568">"Limit usług haseł, kluczy i danych"</string>
     <string name="credman_error_message" msgid="8334797097200415449">"Możesz mieć aktywnych maksymalnie 5 usług haseł, kluczy i danych jednocześnie. Wyłącz jedną z usług, aby dodać kolejną."</string>
@@ -4971,8 +4976,10 @@
     <string name="enable_2g_title" msgid="8184757884636162942">"Zezwól na 2G"</string>
     <string name="enable_2g_summary" msgid="2794534052372565914">"Sieć 2G jest mniej bezpieczna, ale może poprawić jakość połączenia w niektórych lokalizacjach. W przypadku połączeń alarmowych sieć 2G jest zawsze dozwolona."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> wymaga dostępu do sieci 2G"</string>
-    <string name="require_cellular_encryption_title" msgid="7516008146269371585">"Wymagaj szyfrowania"</string>
-    <string name="require_cellular_encryption_summary" msgid="4813823321032908641">"Szyfrowanie jest bezpieczniejsze, ale możliwe, że nie zdołasz się połączyć w niektórych lokalizacjach. Połączenia alarmowe nigdy nie wymagają szyfrowania"</string>
+    <!-- no translation found for require_cellular_encryption_title (6087085031703089235) -->
+    <skip />
+    <!-- no translation found for require_cellular_encryption_summary (6090569065420631457) -->
+    <skip />
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Wszystkie usługi"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Pokazuj dostęp do schowka"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Pokazuj komunikat, gdy aplikacja uzyskuje dostęp do skopiowanego tekstu, obrazów lub innych treści"</string>
