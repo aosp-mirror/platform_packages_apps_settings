@@ -32,7 +32,7 @@ fun MobileDataSwitchingPreference(
     isMobileDataEnabled: () -> Boolean?,
     setMobileDataEnabled: (newEnabled: Boolean) -> Unit,
 ) {
-    val mobileDataSummary = stringResource(id = R.string.primary_sim_automatic_data_msg)
+    val mobileDataSummary = stringResource(id = R.string.mobile_data_settings_summary)
     val coroutineScope = rememberCoroutineScope()
     SwitchPreference(
         object : SwitchPreferenceModel {

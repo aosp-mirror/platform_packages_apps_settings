@@ -5164,6 +5164,14 @@
             android:theme="@style/Theme.SpaLib.Dialog">
         </activity>
 
+        <activity
+            android:name="com.android.settings.network.SatelliteWarningDialogActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenSize|screenLayout|smallestScreenSize"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:theme="@style/Theme.SpaLib.Dialog">
+        </activity>
+
         <!-- This is the longest AndroidManifest.xml ever. -->
     </application>
 </manifest>
