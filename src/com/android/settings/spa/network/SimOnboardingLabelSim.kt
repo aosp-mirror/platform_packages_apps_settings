@@ -17,12 +17,10 @@
 package com.android.settings.spa.network
 
 import android.telephony.SubscriptionInfo
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.SignalCellularAlt
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -42,7 +40,6 @@ import com.android.settingslib.spa.widget.preference.Preference
 import com.android.settingslib.spa.widget.preference.PreferenceModel
 import com.android.settingslib.spa.widget.scaffold.BottomAppBarButton
 import com.android.settingslib.spa.widget.scaffold.SuwScaffold
-import com.android.settingslib.spa.widget.ui.SettingsBody
 
 /**
  * the sim onboarding label compose
@@ -71,9 +68,7 @@ fun SimOnboardingLabelSimImpl(
 
 @Composable
 private fun LabelSimBody(onboardingService: SimOnboardingService) {
-    Column(Modifier.padding(SettingsDimension.itemPadding)) {
-        SettingsBody(stringResource(R.string.sim_onboarding_label_sim_msg))
-    }
+    SimOnboardingMessage(stringResource(R.string.sim_onboarding_label_sim_msg))
 
     for (subInfo in onboardingService.getSelectableSubscriptionInfoList()) {
         LabelSimPreference(onboardingService, subInfo)
