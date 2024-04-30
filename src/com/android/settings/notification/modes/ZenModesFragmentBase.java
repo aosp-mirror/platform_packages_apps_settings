@@ -31,7 +31,7 @@ import com.android.settings.dashboard.RestrictedDashboardFragment;
 /**
  * Base class for all Settings pages controlling Modes behavior.
  */
-abstract class ZenModesSettingsBase extends RestrictedDashboardFragment {
+abstract class ZenModesFragmentBase extends RestrictedDashboardFragment {
     protected static final String TAG = "ZenModesSettings";
     protected static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
@@ -46,7 +46,7 @@ abstract class ZenModesSettingsBase extends RestrictedDashboardFragment {
     // the device's zen mode state changes.
     protected abstract void updateZenModeState();
 
-    ZenModesSettingsBase() {
+    ZenModesFragmentBase() {
         super(UserManager.DISALLOW_ADJUST_VOLUME);
     }
 

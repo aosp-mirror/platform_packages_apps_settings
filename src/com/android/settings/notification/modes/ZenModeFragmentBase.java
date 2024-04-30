@@ -35,7 +35,7 @@ import java.util.List;
 /**
  * Base class for Settings pages used to configure individual modes.
  */
-abstract class ZenModeSettingsBase extends ZenModesSettingsBase {
+abstract class ZenModeFragmentBase extends ZenModesFragmentBase {
     static final String TAG = "ZenModeSettings";
     static final String MODE_ID = "MODE_ID";
 
