@@ -32,6 +32,8 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.service.oemlock.OemLockManager;
+import android.system.Os;
+import android.system.OsConstants;
 import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -92,6 +94,9 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
     private static final int OFFSET_TO_FILE_NAME = 30;
     public static final String EXPERIMENTAL_UPDATE_TITLE = "Android 16K Kernel Experimental Update";
 
+    private static final long PAGE_SIZE = Os.sysconf(OsConstants._SC_PAGESIZE);
+    private static final int PAGE_SIZE_16KB = 16 * 1024;
+
     private @NonNull DevelopmentSettingsDashboardFragment mFragment;
     private boolean mEnable16k;
 
@@ -104,6 +109,7 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
             @NonNull Context context, @NonNull DevelopmentSettingsDashboardFragment fragment) {
         super(context);
         this.mFragment = fragment;
+        mEnable16k = (PAGE_SIZE == PAGE_SIZE_16KB);
     }
 
     @Override
@@ -135,11 +141,13 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
 
     @Override
     public void updateState(Preference preference) {
+        int defaultOptionValue =
+                PAGE_SIZE == PAGE_SIZE_16KB ? ENABLE_16K_PAGE_SIZE : ENABLE_4K_PAGE_SIZE;
         final int optionValue =
                 Settings.Global.getInt(
                         mContext.getContentResolver(),
                         Settings.Global.ENABLE_16K_PAGES,
-                        ENABLE_4K_PAGE_SIZE /* default */);
+                        defaultOptionValue /* default */);
 
         ((SwitchPreference) mPreference).setChecked(optionValue == ENABLE_16K_PAGE_SIZE);
     }
@@ -153,6 +161,14 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
                 Settings.Global.ENABLE_16K_PAGES,
                 ENABLE_4K_PAGE_SIZE);
         ((SwitchPreference) mPreference).setChecked(false);
+    }
+
+    @Override
+    protected void onDeveloperOptionsSwitchEnabled() {
+        int currentStatus =
+                PAGE_SIZE == PAGE_SIZE_16KB ? ENABLE_16K_PAGE_SIZE : ENABLE_4K_PAGE_SIZE;
+        Settings.Global.putInt(
+                mContext.getContentResolver(), Settings.Global.ENABLE_16K_PAGES, currentStatus);
     }
 
     /** Called when user confirms reboot dialog */
@@ -179,7 +195,7 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
                     @Override
                     public void onFailure(@NonNull Throwable t) {
                         hideProgressDialog();
-                        Log.e(TAG, "Failed to call applyPayload of UpdateEngineStable!");
+                        Log.e(TAG, "Failed to call applyPayload of UpdateEngineStable!", t);
                         displayToast(mContext.getString(R.string.toast_16k_update_failed_text));
                     }
                 },
@@ -188,7 +204,12 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
 
     /** Called when user dismisses to reboot dialog */
     @Override
-    public void on16kPagesDialogDismissed() {}
+    public void on16kPagesDialogDismissed() {
+        if (mPreference == null) {
+            return;
+        }
+        updateState(mPreference);
+    }
 
     private void installUpdate() {
         // Check if there is any pending system update
@@ -412,7 +433,6 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
         try (BufferedReader br = new BufferedReader(new FileReader("/proc/mounts"))) {
             String line;
             while ((line = br.readLine()) != null) {
-                Log.i(TAG, line);
                 final String[] fields = line.split(" ");
                 final String partition = fields[1];
                 final String fsType = fields[2];
