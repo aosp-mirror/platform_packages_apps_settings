@@ -44,7 +44,11 @@ public class AddUserWhenLockedPreferenceController extends TogglePreferenceContr
         } else {
             restrictedSwitchPreference.setDisabledByAdmin(
                     mUserCaps.disallowAddUser() ? mUserCaps.getEnforcedAdmin() : null);
-            restrictedSwitchPreference.setVisible(mUserCaps.mUserSwitcherEnabled);
+            if (android.multiuser.Flags.newMultiuserSettingsUx()) {
+                restrictedSwitchPreference.setVisible(true);
+            } else {
+                restrictedSwitchPreference.setVisible(mUserCaps.mUserSwitcherEnabled);
+            }
         }
     }
 
@@ -55,7 +59,11 @@ public class AddUserWhenLockedPreferenceController extends TogglePreferenceContr
         } else if (mUserCaps.disallowAddUser() || mUserCaps.disallowAddUserSetByAdmin()) {
             return DISABLED_FOR_USER;
         } else {
-            return mUserCaps.mUserSwitcherEnabled ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+            if (android.multiuser.Flags.newMultiuserSettingsUx()) {
+                return AVAILABLE;
+            } else {
+                return mUserCaps.mUserSwitcherEnabled ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+            }
         }
     }
 

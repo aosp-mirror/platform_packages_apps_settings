@@ -45,6 +45,8 @@ public class GuestTelephonyPreferenceController extends TogglePreferenceControll
     public int getAvailabilityStatus() {
         if (!mUserCaps.isAdmin() || !mUserCaps.mCanAddGuest) {
             return DISABLED_FOR_USER;
+        } else if (android.multiuser.Flags.newMultiuserSettingsUx()) {
+            return AVAILABLE;
         } else {
             return mUserCaps.mUserSwitcherEnabled ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
         }
@@ -74,7 +76,7 @@ public class GuestTelephonyPreferenceController extends TogglePreferenceControll
     public void updateState(Preference preference) {
         super.updateState(preference);
         mUserCaps.updateAddUserCapabilities(mContext);
-        preference.setVisible(isAvailable() && mUserCaps.mUserSwitcherEnabled
+        preference.setVisible(isAvailable()
                 && mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_TELEPHONY)
                 && !UserManager.isHeadlessSystemUserMode());
     }

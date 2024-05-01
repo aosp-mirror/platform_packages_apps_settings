@@ -1198,15 +1198,23 @@ public class UserSettings extends SettingsPreferenceFragment
         }
 
         List<UserInfo> users;
-        if (mUserCaps.mUserSwitcherEnabled) {
+        if (android.multiuser.Flags.newMultiuserSettingsUx()) {
             // Only users that can be switched to should show up here.
             // e.g. Managed profiles appear under Accounts Settings instead
             users = mUserManager.getAliveUsers().stream()
                     .filter(UserInfo::supportsSwitchToByUser)
                     .collect(Collectors.toList());
         } else {
-            // Only current user will be displayed in case of multi-user switch is disabled
-            users = List.of(mUserManager.getUserInfo(context.getUserId()));
+            if (mUserCaps.mUserSwitcherEnabled) {
+                // Only users that can be switched to should show up here.
+                // e.g. Managed profiles appear under Accounts Settings instead
+                users = mUserManager.getAliveUsers().stream()
+                        .filter(UserInfo::supportsSwitchToByUser)
+                        .collect(Collectors.toList());
+            } else {
+                // Only current user will be displayed in case of multi-user switch is disabled
+                users = List.of(mUserManager.getUserInfo(context.getUserId()));
+            }
         }
 
         final ArrayList<Integer> missingIcons = new ArrayList<>();
@@ -1423,10 +1431,16 @@ public class UserSettings extends SettingsPreferenceFragment
             } else {
                 pref.setDisabledByAdmin(null);
             }
-            if (mUserCaps.mUserSwitcherEnabled) {
+            if (android.multiuser.Flags.newMultiuserSettingsUx()) {
                 mGuestUserCategory.addPreference(pref);
                 // guest user preference is shown hence also make guest category visible
                 mGuestUserCategory.setVisible(true);
+            } else {
+                if (mUserCaps.mUserSwitcherEnabled) {
+                    mGuestUserCategory.addPreference(pref);
+                    // guest user preference is shown hence also make guest category visible
+                    mGuestUserCategory.setVisible(true);
+                }
             }
             isGuestAlreadyCreated = true;
         }
@@ -1453,7 +1467,8 @@ public class UserSettings extends SettingsPreferenceFragment
         if (!isGuestAlreadyCreated && mUserCaps.mCanAddGuest
                 && mUserManager.canAddMoreUsers(UserManager.USER_TYPE_FULL_GUEST)
                 && WizardManagerHelper.isDeviceProvisioned(context)
-                && mUserCaps.mUserSwitcherEnabled) {
+                && (mUserCaps.mUserSwitcherEnabled
+                || android.multiuser.Flags.newMultiuserSettingsUx())) {
             Drawable icon = context.getDrawable(
                     com.android.settingslib.R.drawable.ic_account_circle);
             mAddGuest.setIcon(centerAndTint(icon));
@@ -1466,7 +1481,12 @@ public class UserSettings extends SettingsPreferenceFragment
                 mAddGuest.setEnabled(false);
             } else {
                 mAddGuest.setTitle(com.android.settingslib.R.string.guest_new_guest);
-                mAddGuest.setEnabled(canSwitchUserNow());
+                if (android.multiuser.Flags.newMultiuserSettingsUx()
+                        && mUserCaps.mDisallowAddUserSetByAdmin) {
+                    mAddGuest.setDisabledByAdmin(mUserCaps.mEnforcedAdmin);
+                } else {
+                    mAddGuest.setEnabled(canSwitchUserNow());
+                }
             }
         } else {
             mAddGuest.setVisible(false);
@@ -1496,7 +1516,8 @@ public class UserSettings extends SettingsPreferenceFragment
             boolean canAddRestrictedProfile) {
         if ((mUserCaps.mCanAddUser && !mUserCaps.mDisallowAddUserSetByAdmin)
                 && WizardManagerHelper.isDeviceProvisioned(context)
-                && mUserCaps.mUserSwitcherEnabled) {
+                && (mUserCaps.mUserSwitcherEnabled
+                || android.multiuser.Flags.newMultiuserSettingsUx())) {
             addUser.setVisible(true);
             addUser.setSelectable(true);
             final boolean canAddMoreUsers =
@@ -1514,6 +1535,10 @@ public class UserSettings extends SettingsPreferenceFragment
                 addUser.setDisabledByAdmin(
                         mUserCaps.mDisallowAddUser ? mUserCaps.mEnforcedAdmin : null);
             }
+        } else if (android.multiuser.Flags.newMultiuserSettingsUx()
+                && mUserCaps.mDisallowAddUserSetByAdmin) {
+            addUser.setVisible(true);
+            addUser.setDisabledByAdmin(mUserCaps.mEnforcedAdmin);
         } else {
             addUser.setVisible(false);
         }
