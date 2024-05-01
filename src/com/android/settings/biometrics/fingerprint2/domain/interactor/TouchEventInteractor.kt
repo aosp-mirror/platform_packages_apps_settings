@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 The Android Open Source Project
+ * Copyright (C) 2024 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,15 +14,14 @@
  * limitations under the License.
  */
 
-package com.android.settings.biometrics.fingerprint2.lib.model
+package com.android.settings.biometrics.fingerprint2.domain.interactor
 
-/** The reason for enrollment */
-enum class EnrollReason {
-  /**
-   * The enroll happens on education screen. This is to support legacy flows where we require the
-   * user to touch the sensor before going ahead to the EnrollEnrolling flow
-   */
-  FindSensor,
-  /** The enroll happens on enrolling screen. */
-  EnrollEnrolling,
+import android.view.MotionEvent
+import kotlinx.coroutines.flow.Flow
+
+interface TouchEventInteractor {
+
+  /** A flow simulating user touches. */
+  val touchEvent: Flow<MotionEvent>
 }
+
