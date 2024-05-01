@@ -32,6 +32,7 @@ import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
@@ -45,8 +46,9 @@ import com.android.settings.spa.SpaActivity;
 public class ApnPreference extends Preference
         implements CompoundButton.OnCheckedChangeListener, View.OnClickListener {
     private static final String TAG = "ApnPreference";
-    private static String sSelectedKey = null;
-    private static CompoundButton sCurrentChecked = null;
+    private boolean mIsChecked = false;
+    @Nullable
+    private RadioButton mRadioButton = null;
     private int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     private boolean mProtectFromCheckedChange = false;
     private boolean mDefaultSelectable = true;
@@ -84,20 +86,15 @@ public class ApnPreference extends Preference
         textArea.setOnClickListener(this);
 
         final RadioButton rb = view.itemView.requireViewById(R.id.apn_radiobutton);
+        mRadioButton = rb;
         if (mDefaultSelectable) {
             view.itemView.requireViewById(R.id.apn_radio_button_frame).setOnClickListener((v) -> {
                 rb.performClick();
             });
             rb.setOnCheckedChangeListener(this);
 
-            final boolean isChecked = getKey().equals(sSelectedKey);
-            if (isChecked) {
-                sCurrentChecked = rb;
-                sSelectedKey = getKey();
-            }
-
             mProtectFromCheckedChange = true;
-            rb.setChecked(isChecked);
+            rb.setChecked(mIsChecked);
             mProtectFromCheckedChange = false;
             rb.setVisibility(View.VISIBLE);
         } else {
@@ -106,17 +103,15 @@ public class ApnPreference extends Preference
     }
 
     /**
-     * Return the preference is checked or not.
+     * Set preference isChecked.
      */
-    public boolean isChecked() {
-        return getKey().equals(sSelectedKey);
-    }
-
-    /**
-     * Set preference checked.
-     */
-    public void setChecked() {
-        sSelectedKey = getKey();
+    public void setIsChecked(boolean isChecked) {
+        mIsChecked = isChecked;
+        if (mRadioButton != null) {
+            mProtectFromCheckedChange = true;
+            mRadioButton.setChecked(mIsChecked);
+            mProtectFromCheckedChange = false;
+        }
     }
 
     /**
@@ -129,15 +124,7 @@ public class ApnPreference extends Preference
         }
 
         if (isChecked) {
-            if (sCurrentChecked != null) {
-                sCurrentChecked.setChecked(false);
-            }
-            sCurrentChecked = buttonView;
-            sSelectedKey = getKey();
-            callChangeListener(sSelectedKey);
-        } else {
-            sCurrentChecked = null;
-            sSelectedKey = null;
+            callChangeListener(getKey());
         }
     }
 

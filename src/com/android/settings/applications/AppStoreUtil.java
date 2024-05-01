@@ -22,9 +22,14 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.InstallSourceInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
+import android.text.TextUtils;
 import android.util.Log;
+import android.util.Pair;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import java.util.Objects;
 
 /** This class provides methods that help dealing with app stores. */
 public class AppStoreUtil {
@@ -37,15 +42,20 @@ public class AppStoreUtil {
     }
 
     /**
-     * Returns the package name of the app that we consider to be the user-visible 'installer'
-     * of given packageName, if one is available.
+     * Returns a {@link Pair pair result}. The first item is the package name of the app that we
+     * consider to be the user-visible 'installer' of given packageName, if one is available. The
+     * second item is the {@link InstallSourceInfo install source info} of the given package.
      */
-    @Nullable
-    public static String getInstallerPackageName(Context context, String packageName) {
+    @NonNull
+    public static Pair<String, InstallSourceInfo> getInstallerPackageNameAndInstallSourceInfo(
+            @NonNull Context context, @NonNull String packageName) {
+        Objects.requireNonNull(context);
+        Objects.requireNonNull(packageName);
+
         String installerPackageName;
+        InstallSourceInfo source = null;
         try {
-            InstallSourceInfo source =
-                    context.getPackageManager().getInstallSourceInfo(packageName);
+            source = context.getPackageManager().getInstallSourceInfo(packageName);
             // By default, use the installing package name.
             installerPackageName = source.getInstallingPackageName();
             // Use the recorded originating package name only if the initiating package is a system
@@ -65,7 +75,17 @@ public class AppStoreUtil {
             Log.e(LOG_TAG, "Exception while retrieving the package installer of " + packageName, e);
             installerPackageName = null;
         }
-        return installerPackageName;
+        return new Pair<>(installerPackageName, source);
+    }
+
+    /**
+     * Returns the package name of the app that we consider to be the user-visible 'installer'
+     * of given packageName, if one is available.
+     */
+    @Nullable
+    public static String getInstallerPackageName(@NonNull Context context,
+            @NonNull String packageName) {
+        return getInstallerPackageNameAndInstallSourceInfo(context, packageName).first;
     }
 
     /** Returns a link to the installer app store for a given package name. */
@@ -87,5 +107,19 @@ public class AppStoreUtil {
     public static Intent getAppStoreLink(Context context, String packageName) {
       String installerPackageName = getInstallerPackageName(context, packageName);
       return getAppStoreLink(context, installerPackageName, packageName);
+    }
+
+    /**
+     * Returns {@code true} when the initiating package is different from installing package
+     * for the given {@link InstallSourceInfo install source}. Otherwise, returns {@code false}.
+     * If the {@code source} is null, also return {@code false}.
+     */
+    public static boolean isInitiatedFromDifferentPackage(@Nullable InstallSourceInfo source) {
+        if (source == null) {
+            return false;
+        }
+        final String initiatingPackageName = source.getInitiatingPackageName();
+        return initiatingPackageName != null
+                && !TextUtils.equals(source.getInstallingPackageName(), initiatingPackageName);
     }
 }

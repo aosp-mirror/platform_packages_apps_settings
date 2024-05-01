@@ -2080,8 +2080,7 @@
     <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"Desplaçament amb un dit"</string>
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"Mou l\'àrea d\'ampliació arrossegant un dit."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"Mou l\'àrea d\'ampliació arrossegant dos dits."</string>
-    <!-- no translation found for accessibility_magnification_one_finger_panning_summary_unavailable (4302567514781245318) -->
-    <skip />
+    <string name="accessibility_magnification_one_finger_panning_summary_unavailable" msgid="4302567514781245318">"No està disponible mentre només s\'amplia una part de la pantalla"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Amplia amb una drecera"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Amplia amb una drecera i tres tocs"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"Sobre <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
@@ -2291,9 +2290,12 @@
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Vinculació d\'audiòfons"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"A la pantalla següent, toca els teus audiòfons. Pot ser que hagis de vincular l\'audiòfon de l\'orella esquerra i el de la dreta per separat.\n\nComprova que els audiòfons estiguin encesos i a punt per vincular-se."</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"El dispositiu <xliff:g id="DEVICE_NAME">%1$s</xliff:g> està actiu"</string>
-    <string name="accessibility_hearingaid_left_side_device_summary" msgid="1907302799168261001">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, només l\'esquerre"</string>
-    <string name="accessibility_hearingaid_right_side_device_summary" msgid="148257064855054376">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, només l\'orella dreta"</string>
-    <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="4268221140368164452">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, orelles esquerra i dreta"</string>
+    <!-- no translation found for accessibility_hearingaid_left_side_device_summary (12349058624943107) -->
+    <skip />
+    <!-- no translation found for accessibility_hearingaid_right_side_device_summary (8645789702686724188) -->
+    <skip />
+    <!-- no translation found for accessibility_hearingaid_left_and_right_side_device_summary (3314103411842694197) -->
+    <skip />
     <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> i 1 dispositiu més"</string>
     <string name="accessibility_hearing_device_pairing_title" msgid="2701812183769537320">"Vincula un disp. nou"</string>
     <string name="accessibility_hearing_device_connected_title" msgid="3785140037249487287">"Audiòfons"</string>
@@ -2602,8 +2604,7 @@
     <string name="battery_usage_screen_footer_empty" msgid="3301144846133808193">"Les dades d\'ús de la bateria estaran disponibles d\'aquí a unes quantes hores un cop s\'hagi carregat del tot"</string>
     <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"ara"</string>
     <string name="battery_usage_timestamps_hyphen" msgid="7401188432989043905">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g>-<xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
-    <!-- no translation found for battery_usage_timestamps_content_description (1927748134271595985) -->
-    <skip />
+    <string name="battery_usage_timestamps_content_description" msgid="1927748134271595985">"Des de les <xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g> fins a les <xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
     <string name="battery_usage_day_and_hour" msgid="1417890420844950881">"<xliff:g id="DAY">%1$s</xliff:g> <xliff:g id="HOUR">%2$s</xliff:g>"</string>
     <string name="battery_usage_time_info_and_battery_level" msgid="6732629268310936155">"<xliff:g id="TIME_INFO">%1$s</xliff:g> <xliff:g id="BATTERY_LEVEL">%2$s</xliff:g>"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Gràfic de l\'ús de la bateria"</string>
@@ -2617,8 +2618,7 @@
     <string name="battery_usage_spinner_view_by_apps" msgid="8769276544072098082">"Mostra per aplicacions"</string>
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"Mostra per sistemes"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
-    <!-- no translation found for battery_usage_less_than_percent_content_description (6265933174815461493) -->
-    <skip />
+    <string name="battery_usage_less_than_percent_content_description" msgid="6265933174815461493">"menys d\'un <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="battery_cycle_count_footer" msgid="3642121059800373545">"A causa d\'inspeccions de qualitat prèvies a l\'enviament, és possible que el nombre de cicles no sigui zero en el primer ús"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Estadístiques sobre processos"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Estadístiques sobre els processos en execució"</string>
@@ -2686,12 +2686,18 @@
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"Activat"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"Desactivat"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Utilitza la connectivitat adaptativa"</string>
-    <string name="cellular_security_title" msgid="7124079732186082924">"Seguretat de la xarxa mòbil"</string>
+    <!-- no translation found for cellular_security_title (5562899485544677941) -->
+    <skip />
     <string name="cellular_security_summary" msgid="1893770670709928113">"Tipus de xarxa, encriptació, controls de notificació"</string>
-    <string name="cellular_security_settings_title" msgid="116950133456981770">"Seguretat de la xarxa mòbil"</string>
+    <!-- no translation found for cellular_security_top_intro (6749166804080092892) -->
+    <skip />
+    <!-- no translation found for cellular_security_settings_title (7779141923670352595) -->
+    <skip />
     <string name="cellular_security_notifications" msgid="4619728340612184944">"Notificacions"</string>
-    <string name="cellular_security_notifications_controller_title" msgid="5085567551536606230">"Notificacions de seguretat"</string>
-    <string name="cellular_security_notifications_controller_summary" msgid="2876183397456700377">"Rep notificacions quan la xarxa mòbil a què t\'has connectat no sigui segura perquè no està encriptada o quan la xarxa mòbil registri els teus identificadors únics de dispositiu o SIM (IMEI i IMSI)"</string>
+    <!-- no translation found for cellular_security_notifications_controller_title (4853056963523277847) -->
+    <skip />
+    <!-- no translation found for cellular_security_notifications_controller_summary (8339863845393759958) -->
+    <skip />
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"Encriptació"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"Generacions de xarxes"</string>
     <string name="cellular_security_network_generations_summary" msgid="139087814553929402">"Pots configurar cada targeta SIM instal·lada perquè es connecti només a xarxes que admetin 3G, 4G i 5G. La SIM no es connectarà a xarxes 2G antigues i no segures. Aquesta opció de configuració pot limitar la teva connectivitat en cas que l\'única xarxa disponible sigui 2G. En cas d\'emergència, es pot utilitzar 2G."</string>
@@ -2971,6 +2977,8 @@
     <string name="user_summary_not_set_up" msgid="4602868481732886115">"No configurat"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1658946988920104613">"No configurat: perfil restringit"</string>
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"El perfil de treball no està configurat."</string>
+    <!-- no translation found for user_owner (2079206733011361994) -->
+    <skip />
     <string name="user_admin" msgid="4024553191395768119">"Administrador"</string>
     <string name="user_you" msgid="3070562015202859996">"Tu (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_add_max_count" msgid="3328539978480663740">"No pots afegir cap altre usuari. Suprimeix un usuari per afegir-ne un."</string>
@@ -4967,8 +4975,10 @@
     <string name="enable_2g_title" msgid="8184757884636162942">"Permet 2G"</string>
     <string name="enable_2g_summary" msgid="2794534052372565914">"El 2G és menys segur, però pot millorar la teva connexió en algunes ubicacions. Per a les trucades d\'emergència, el 2G sempre es permet."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> necessita una connexió 2G disponible"</string>
-    <string name="require_cellular_encryption_title" msgid="7516008146269371585">"Sol·licita l\'encriptació"</string>
-    <string name="require_cellular_encryption_summary" msgid="4813823321032908641">"L\'encriptació és més segura, però és possible que no puguis connectar-te en algunes ubicacions. Per a les trucades d\'emergència, l\'encriptació no es requereix mai."</string>
+    <!-- no translation found for require_cellular_encryption_title (6087085031703089235) -->
+    <skip />
+    <!-- no translation found for require_cellular_encryption_summary (6090569065420631457) -->
+    <skip />
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Tots els serveis"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Mostra l\'accés al porta-retalls"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Mostra un missatge quan les aplicacions accedeixen al text, a les imatges o a qualsevol altre contingut que hagis copiat"</string>
@@ -5191,6 +5201,7 @@
     <string name="force_swcrypto_fallback_title" msgid="8053166299808645593">"Força la criptografia de seguretat per programari"</string>
     <string name="force_swcrypto_fallback_summary" msgid="181969966310309701">"Força la gestió de claus de DRM per utilitzar criptografia de caixa blanca basada en programari"</string>
     <string name="fingerprint_acquired_imager_dirty_udfps" msgid="7005042288289506776">"Neteja la part de la pantalla propera al sensor i torna-ho a provar"</string>
-    <!-- no translation found for sim_category_converted_sim (8575548015816988908) -->
+    <string name="sim_category_converted_sim" msgid="8575548015816988908">"S\'ha convertit a eSIM. Suprimeix i descarta."</string>
+    <!-- no translation found for sync_across_devices_title (3447757705383089345) -->
     <skip />
 </resources>

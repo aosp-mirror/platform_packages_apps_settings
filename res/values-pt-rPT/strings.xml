@@ -1434,7 +1434,7 @@
     <string name="communal_settings_summary" msgid="4923914136953940317">"Definições coletivas"</string>
     <string name="satellite_setting" msgid="4171265534842459910">"Mensagens por satélite"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APNs"</string>
-    <string name="apn_edit" msgid="2003683641840248741">"Editar ponto de acesso"</string>
+    <string name="apn_edit" msgid="2003683641840248741">"Edite o ponto de acesso"</string>
     <string name="apn_add" msgid="9069613192201630934">"Adicione o ponto de acesso"</string>
     <string name="apn_not_set" msgid="8246646433109750293">"Não definido"</string>
     <string name="apn_not_set_for_mvno" msgid="1141490067313964640">"Não definido"</string>
@@ -1451,7 +1451,7 @@
     <string name="apn_mcc" msgid="4971414138516074809">"MCC"</string>
     <string name="apn_mnc" msgid="1926382406843447854">"MNC"</string>
     <string name="apn_auth_type" msgid="4234397513494356932">"Tipo de autenticação"</string>
-    <string name="apn_type" msgid="1835573305077788773">"Tipo APN"</string>
+    <string name="apn_type" msgid="1835573305077788773">"Tipo de APN"</string>
     <string name="apn_protocol" msgid="181529867160380010">"Protocolo APN"</string>
     <string name="apn_roaming_protocol" msgid="1645131094105362513">"Protocolo APN quando em roaming"</string>
     <string name="carrier_enabled" msgid="664074151573150130">"Ativar/desativar APN"</string>
@@ -2290,9 +2290,9 @@
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Sincronizar aparelhos auditivos"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"No ecrã seguinte, toque nos seus aparelhos auditivos. Pode ter de sincronizar o ouvido esquerdo e direito separadamente.\n\nCertifique-se de que os seus aparelhos auditivos estão ativados e prontos a sincronizar."</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ativo"</string>
-    <string name="accessibility_hearingaid_left_side_device_summary" msgid="1907302799168261001">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, apenas esquerdo"</string>
-    <string name="accessibility_hearingaid_right_side_device_summary" msgid="148257064855054376">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, apenas direito"</string>
-    <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="4268221140368164452">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, esquerdo e direito"</string>
+    <string name="accessibility_hearingaid_left_side_device_summary" msgid="12349058624943107">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>/apenas esquerdo"</string>
+    <string name="accessibility_hearingaid_right_side_device_summary" msgid="8645789702686724188">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>/apenas direito"</string>
+    <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="3314103411842694197">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>/esquerdo e direito"</string>
     <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> mais 1"</string>
     <string name="accessibility_hearing_device_pairing_title" msgid="2701812183769537320">"Sincron. novo disp."</string>
     <string name="accessibility_hearing_device_connected_title" msgid="3785140037249487287">"Disposit. auditivos"</string>
@@ -2601,8 +2601,7 @@
     <string name="battery_usage_screen_footer_empty" msgid="3301144846133808193">"Os dados de utilização da bateria vão estar disponíveis daqui a algumas horas quando a bateria estiver totalmente carregada"</string>
     <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"agora"</string>
     <string name="battery_usage_timestamps_hyphen" msgid="7401188432989043905">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g> – <xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
-    <!-- no translation found for battery_usage_timestamps_content_description (1927748134271595985) -->
-    <skip />
+    <string name="battery_usage_timestamps_content_description" msgid="1927748134271595985">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g> – <xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
     <string name="battery_usage_day_and_hour" msgid="1417890420844950881">"<xliff:g id="DAY">%1$s</xliff:g> <xliff:g id="HOUR">%2$s</xliff:g>"</string>
     <string name="battery_usage_time_info_and_battery_level" msgid="6732629268310936155">"<xliff:g id="TIME_INFO">%1$s</xliff:g> <xliff:g id="BATTERY_LEVEL">%2$s</xliff:g>"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Gráfico de utilização da bateria"</string>
@@ -2616,8 +2615,7 @@
     <string name="battery_usage_spinner_view_by_apps" msgid="8769276544072098082">"Ver por apps"</string>
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"Ver por sistemas"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
-    <!-- no translation found for battery_usage_less_than_percent_content_description (6265933174815461493) -->
-    <skip />
+    <string name="battery_usage_less_than_percent_content_description" msgid="6265933174815461493">"menos de <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="battery_cycle_count_footer" msgid="3642121059800373545">"Devido a inspeções de qualidade antes do envio, a contagem de ciclos pode não ser zero na primeira utilização"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Estatísticas do Processo"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Estatísticas de peritos acerca dos processos em execução"</string>
@@ -2685,12 +2683,18 @@
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"Ativada"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"Desativado"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Usar conetividade adaptável"</string>
-    <string name="cellular_security_title" msgid="7124079732186082924">"Segurança da rede móvel"</string>
+    <!-- no translation found for cellular_security_title (5562899485544677941) -->
+    <skip />
     <string name="cellular_security_summary" msgid="1893770670709928113">"Tipo de rede, encriptação, controlos de notificação"</string>
-    <string name="cellular_security_settings_title" msgid="116950133456981770">"Segurança da rede móvel"</string>
+    <!-- no translation found for cellular_security_top_intro (6749166804080092892) -->
+    <skip />
+    <!-- no translation found for cellular_security_settings_title (7779141923670352595) -->
+    <skip />
     <string name="cellular_security_notifications" msgid="4619728340612184944">"Notificações"</string>
-    <string name="cellular_security_notifications_controller_title" msgid="5085567551536606230">"Notificações de segurança"</string>
-    <string name="cellular_security_notifications_controller_summary" msgid="2876183397456700377">"Receba notificações caso a rede móvel à qual estabeleceu ligação for insegura devido à ausência de encriptação ou se a rede móvel registar os seus identificadores do dispositivo e SIM únicos (IMEI e IMSI)"</string>
+    <!-- no translation found for cellular_security_notifications_controller_title (4853056963523277847) -->
+    <skip />
+    <!-- no translation found for cellular_security_notifications_controller_summary (8339863845393759958) -->
+    <skip />
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"Encriptação"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"Gerações de redes"</string>
     <string name="cellular_security_network_generations_summary" msgid="139087814553929402">"Pode configurar cada cartão SIM instalado para estabelecer ligação apenas a redes 3G, 4G e 5G. O SIM não vai estabelecer ligação a redes 2G inseguras mais antigas. Esta definição pode limitar a sua conetividade caso a única rede disponível seja o 2G. Em caso de emergência, o 2G pode ser usado."</string>
@@ -2970,6 +2974,7 @@
     <string name="user_summary_not_set_up" msgid="4602868481732886115">"Não configurado"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1658946988920104613">"Não configurado – Perfil restrito"</string>
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"Não configurado – Perfil de trabalho"</string>
+    <string name="user_owner" msgid="2079206733011361994">"Proprietário"</string>
     <string name="user_admin" msgid="4024553191395768119">"Administrador"</string>
     <string name="user_you" msgid="3070562015202859996">"Eu (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_add_max_count" msgid="3328539978480663740">"Não pode adicionar mais utilizadores. Remova um utilizador para adicionar um novo."</string>
@@ -4966,8 +4971,10 @@
     <string name="enable_2g_title" msgid="8184757884636162942">"Permitir 2G"</string>
     <string name="enable_2g_summary" msgid="2794534052372565914">"O 2G é menos seguro, mas pode melhorar a sua ligação em algumas localizações. Para chamadas de emergência, o 2G é sempre permitido."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"O operador <xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> requer que o 2G esteja disponível"</string>
-    <string name="require_cellular_encryption_title" msgid="7516008146269371585">"Pedir encriptação"</string>
-    <string name="require_cellular_encryption_summary" msgid="4813823321032908641">"A encriptação é mais segura, mas pode não conseguir ligar-se em algumas localizações. Para chamadas de emergência, a encriptação nunca é necessária"</string>
+    <!-- no translation found for require_cellular_encryption_title (6087085031703089235) -->
+    <skip />
+    <!-- no translation found for require_cellular_encryption_summary (6090569065420631457) -->
+    <skip />
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Todos os serviços"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Mostrar acesso à área de transferência"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Apresente uma mensagem quando as apps acedem a texto, imagens ou outro conteúdo que copiou"</string>
@@ -5094,7 +5101,7 @@
     <string name="find_broadcast_join_broadcast_error" msgid="5486980388774711346">"Não é possível participar na transmissão"</string>
     <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"Para começar a ouvir, centre o código QR abaixo"</string>
     <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"O código QR não é um formato válido"</string>
-    <string name="convert_to_esim_title" msgid="71037864129009206">"Converta num eSIM"</string>
+    <string name="convert_to_esim_title" msgid="71037864129009206">"Converter para eSIM"</string>
     <string name="transfer_esim_to_another_device_title" msgid="5286117866086383192">"Transfira o eSIM para outro dispositivo"</string>
     <string name="background_install_preference_summary" msgid="3065219346519340364">"{count,plural, =1{# app}other{# apps}}"</string>
     <string name="background_install_title" msgid="607913515188276168">"Apps instaladas em segundo plano"</string>
@@ -5190,6 +5197,6 @@
     <string name="force_swcrypto_fallback_title" msgid="8053166299808645593">"Forçar criptografia segura com base em software"</string>
     <string name="force_swcrypto_fallback_summary" msgid="181969966310309701">"Force a gestão de chaves DRM a usar criptografia de caixa branca baseada em software"</string>
     <string name="fingerprint_acquired_imager_dirty_udfps" msgid="7005042288289506776">"Limpe o ecrã junto ao sensor e tente novamente"</string>
-    <!-- no translation found for sim_category_converted_sim (8575548015816988908) -->
-    <skip />
+    <string name="sim_category_converted_sim" msgid="8575548015816988908">"Convertido no eSIM. Remova e elimine."</string>
+    <string name="sync_across_devices_title" msgid="3447757705383089345">"Sincronização entre dispositivos"</string>
 </resources>

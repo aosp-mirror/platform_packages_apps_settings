@@ -18,7 +18,6 @@ package com.android.settings.network.telephony
 
 import android.content.Context
 import android.telephony.SubscriptionManager
-import android.telephony.TelephonyManager
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -26,19 +25,17 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settings.R
-import com.android.settings.network.SatelliteRepository
 import com.android.settings.network.SubscriptionUtil
 import com.android.settings.spa.preference.ComposePreferenceController
 import com.android.settingslib.spa.widget.preference.MainSwitchPreference
 import com.android.settingslib.spa.widget.preference.SwitchPreferenceModel
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.map
 
 class MobileNetworkSwitchController @JvmOverloads constructor(
     context: Context,
     preferenceKey: String,
     private val subscriptionRepository: SubscriptionRepository = SubscriptionRepository(context),
-    private val satelliteRepository: SatelliteRepository = SatelliteRepository(context)
+    private val subscriptionActivationRepository: SubscriptionActivationRepository =
+        SubscriptionActivationRepository(context),
 ) : ComposePreferenceController(context, preferenceKey) {
 
     private var subId = SubscriptionManager.INVALID_SUBSCRIPTION_ID
@@ -57,12 +54,7 @@ class MobileNetworkSwitchController @JvmOverloads constructor(
             subscriptionRepository.isSubscriptionEnabledFlow(subId)
         }.collectAsStateWithLifecycle(initialValue = null)
         val changeable by remember {
-            combine(
-                context.callStateFlow(subId).map { it == TelephonyManager.CALL_STATE_IDLE },
-                satelliteRepository.getIsModemEnabledFlow()
-            ) { isCallStateIdle, isSatelliteModemEnabled ->
-                isCallStateIdle && !isSatelliteModemEnabled
-            }
+            subscriptionActivationRepository.isActivationChangeableFlow()
         }.collectAsStateWithLifecycle(initialValue = true)
         MainSwitchPreference(model = object : SwitchPreferenceModel {
             override val title = stringResource(R.string.mobile_network_use_sim_on)

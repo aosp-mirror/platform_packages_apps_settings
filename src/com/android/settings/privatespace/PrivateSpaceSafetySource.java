@@ -56,13 +56,13 @@ public final class PrivateSpaceSafetySource {
                 Log.i(TAG, "Private Space not allowed for user " + context.getUser());
                 return;
             }
-        } else {
-            // Check the profile type - we don't want to show this for anything other than primary
-            // user.
-            if (userManager != null && !userManager.isMainUser()) {
-                Log.i(TAG, "setSafetySourceData not main user");
-                return;
-            }
+        }
+
+        // Check the profile type - we don't want to show this for anything other than primary
+        // user.
+        if (userManager != null && !userManager.isMainUser()) {
+            Log.i(TAG, "setSafetySourceData not main user");
+            return;
         }
 
         if (!Flags.allowPrivateProfile()

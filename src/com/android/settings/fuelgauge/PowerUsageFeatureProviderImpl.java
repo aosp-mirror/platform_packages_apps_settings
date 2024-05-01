@@ -235,4 +235,9 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     public boolean isValidToRestoreOptimizationMode(ArrayMap<String, String> deviceInfoMap) {
         return false;
     }
+
+    @Override
+    public boolean isBatteryDefend(BatteryInfo info) {
+        return info.isBatteryDefender && !isExtraDefend();
+    }
 }

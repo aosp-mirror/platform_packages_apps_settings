@@ -19,6 +19,8 @@ package com.android.settings.spa.app.appinfo
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ApplicationInfo
+import android.content.pm.InstallSourceInfo
+import android.util.Pair
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.test.assertIsNotDisplayed
@@ -74,10 +76,17 @@ class AppInstallerInfoPreferenceTest {
             .startMocking()
         whenever(AppStoreUtil.getInstallerPackageName(any(), eq(PACKAGE_NAME)))
             .thenReturn(INSTALLER_PACKAGE_NAME)
+        whenever(AppStoreUtil.getInstallerPackageNameAndInstallSourceInfo(any(), eq(PACKAGE_NAME)))
+            .thenReturn(
+                    Pair<String, InstallSourceInfo>(INSTALLER_PACKAGE_NAME, INSTALL_SOURCE_INFO))
         whenever(AppStoreUtil.getAppStoreLink(context, INSTALLER_PACKAGE_NAME, PACKAGE_NAME))
             .thenReturn(STORE_LINK)
+        whenever(AppStoreUtil.isInitiatedFromDifferentPackage(eq(INSTALL_SOURCE_INFO)))
+            .thenReturn(false)
         whenever(Utils.getApplicationLabel(context, INSTALLER_PACKAGE_NAME))
             .thenReturn(INSTALLER_PACKAGE_LABEL)
+        whenever(Utils.getApplicationLabel(context, INITIATING_PACKAGE_NAME))
+            .thenReturn(INITIATING_PACKAGE_LABEL)
         whenever(AppUtils.isMainlineModule(any(), eq(PACKAGE_NAME))).thenReturn(false)
     }
 
@@ -145,6 +154,17 @@ class AppInstallerInfoPreferenceTest {
     }
 
     @Test
+    fun whenNotInstantAppAndDifferentInitiatingPackage() {
+        whenever(AppStoreUtil.isInitiatedFromDifferentPackage(eq(INSTALL_SOURCE_INFO)))
+                .thenReturn(true)
+        setContent()
+
+        composeTestRule.waitUntilExists(
+                hasText("App installed from installer label (via initiating label)"))
+        composeTestRule.waitUntilExists(preferenceNode.and(isEnabled()))
+    }
+
+    @Test
     fun whenClick_startActivity() {
         setContent()
         composeTestRule.delay()
@@ -169,6 +189,14 @@ class AppInstallerInfoPreferenceTest {
         const val PACKAGE_NAME = "package.name"
         const val INSTALLER_PACKAGE_NAME = "installer"
         const val INSTALLER_PACKAGE_LABEL = "installer label"
+        const val INITIATING_PACKAGE_NAME = "initiating"
+        const val INITIATING_PACKAGE_LABEL = "initiating label"
+        val INSTALL_SOURCE_INFO : InstallSourceInfo = InstallSourceInfo(
+                INITIATING_PACKAGE_NAME,
+                /* initiatingPackageSigningInfo= */ null,
+                /* originatingPackageName= */ null,
+                INSTALLER_PACKAGE_NAME
+        )
         val STORE_LINK = Intent("store/link")
         const val UID = 123
         val APP = ApplicationInfo().apply {

@@ -212,7 +212,7 @@
     <string name="terms_of_address_title" msgid="7338630812197476808">"Choisissez comment on s\'adresse à vous"</string>
     <string name="terms_of_address_summary" msgid="7802443422612600620">"Votre appareil peut personnaliser la façon dont on s\'adresse à vous"</string>
     <string name="terms_of_address_intro_title" msgid="1533951542181569335">"Ce paramètre permet à la plupart des applications système de personnaliser la façon dont on s\'adresse à vous. Il n\'est pas utilisé par les applications que vous installez."</string>
-    <string name="terms_of_address_not_specified" msgid="4439257779351251973">"Non indiqué"</string>
+    <string name="terms_of_address_not_specified" msgid="4439257779351251973">"Non personnalisé"</string>
     <string name="terms_of_address_feminine" msgid="1743479869695539283">"Féminin"</string>
     <string name="terms_of_address_masculine" msgid="983106046135098856">"Masculin"</string>
     <string name="terms_of_address_neutral" msgid="5475414185543112478">"Neutre"</string>
@@ -2290,9 +2290,12 @@
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Associer les appareils"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"Sur le prochain écran, appuyez sur vos appareils auditifs. Vous devrez peut-être associer séparément les appareils gauche et droit.\n\nAssurez-vous que vos appareils auditifs sont allumés et prêts pour l\'association."</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"Appareil \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\" actif"</string>
-    <string name="accessibility_hearingaid_left_side_device_summary" msgid="1907302799168261001">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, gauche uniquement"</string>
-    <string name="accessibility_hearingaid_right_side_device_summary" msgid="148257064855054376">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, droit uniquement"</string>
-    <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="4268221140368164452">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, gauche et droit"</string>
+    <!-- no translation found for accessibility_hearingaid_left_side_device_summary (12349058624943107) -->
+    <skip />
+    <!-- no translation found for accessibility_hearingaid_right_side_device_summary (8645789702686724188) -->
+    <skip />
+    <!-- no translation found for accessibility_hearingaid_left_and_right_side_device_summary (3314103411842694197) -->
+    <skip />
     <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> et un de plus"</string>
     <string name="accessibility_hearing_device_pairing_title" msgid="2701812183769537320">"Associer nouvel appareil"</string>
     <string name="accessibility_hearing_device_connected_title" msgid="3785140037249487287">"Appareils auditifs"</string>
@@ -2601,8 +2604,7 @@
     <string name="battery_usage_screen_footer_empty" msgid="3301144846133808193">"Les données d\'utilisation de la batterie seront disponibles dans quelques heures, une fois la recharge terminée"</string>
     <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"maintenant"</string>
     <string name="battery_usage_timestamps_hyphen" msgid="7401188432989043905">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g> – <xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
-    <!-- no translation found for battery_usage_timestamps_content_description (1927748134271595985) -->
-    <skip />
+    <string name="battery_usage_timestamps_content_description" msgid="1927748134271595985">"De <xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g> à <xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
     <string name="battery_usage_day_and_hour" msgid="1417890420844950881">"<xliff:g id="DAY">%1$s</xliff:g> <xliff:g id="HOUR">%2$s</xliff:g>"</string>
     <string name="battery_usage_time_info_and_battery_level" msgid="6732629268310936155">"<xliff:g id="TIME_INFO">%1$s</xliff:g> <xliff:g id="BATTERY_LEVEL">%2$s</xliff:g>"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Graphique d\'utilisation de la batterie"</string>
@@ -2616,8 +2618,7 @@
     <string name="battery_usage_spinner_view_by_apps" msgid="8769276544072098082">"Afficher par : applis"</string>
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"Afficher par : systèmes"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
-    <!-- no translation found for battery_usage_less_than_percent_content_description (6265933174815461493) -->
-    <skip />
+    <string name="battery_usage_less_than_percent_content_description" msgid="6265933174815461493">"moins de <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="battery_cycle_count_footer" msgid="3642121059800373545">"En raison du contrôle qualité avant livraison, il est possible que le nombre de cycles ne soit pas nul à la première utilisation"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Statistiques relatives aux processus"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Statistiques détaillées relatives aux processus en cours d\'exécution"</string>
@@ -2685,12 +2686,18 @@
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"Activée"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"Désactivé"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Utiliser la connectivité adaptative"</string>
-    <string name="cellular_security_title" msgid="7124079732186082924">"Sécurité des réseaux mobiles"</string>
+    <!-- no translation found for cellular_security_title (5562899485544677941) -->
+    <skip />
     <string name="cellular_security_summary" msgid="1893770670709928113">"Type de réseau, chiffrement, paramètres de notifications"</string>
-    <string name="cellular_security_settings_title" msgid="116950133456981770">"Sécurité des réseaux mobiles"</string>
+    <!-- no translation found for cellular_security_top_intro (6749166804080092892) -->
+    <skip />
+    <!-- no translation found for cellular_security_settings_title (7779141923670352595) -->
+    <skip />
     <string name="cellular_security_notifications" msgid="4619728340612184944">"Notifications"</string>
-    <string name="cellular_security_notifications_controller_title" msgid="5085567551536606230">"Notifications de sécurité"</string>
-    <string name="cellular_security_notifications_controller_summary" msgid="2876183397456700377">"Recevez des notifications si le réseau mobile auquel vous êtes connecté n\'est pas sécurisé en raison d\'une absence de chiffrement, ou si le réseau mobile enregistre les identifiants uniques de votre carte SIM ou de votre appareil (IMEI et IMSI)"</string>
+    <!-- no translation found for cellular_security_notifications_controller_title (4853056963523277847) -->
+    <skip />
+    <!-- no translation found for cellular_security_notifications_controller_summary (8339863845393759958) -->
+    <skip />
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"Chiffrement"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"Générations de réseaux"</string>
     <string name="cellular_security_network_generations_summary" msgid="139087814553929402">"Vous pouvez configurer chaque carte SIM installée afin qu\'elle ne se connecte qu\'aux réseaux compatibles avec la 3G, la 4G et la 5G. La carte SIM ne se connectera pas aux réseaux 2G plus anciens et non sécurisés. Ce paramètre peut limiter votre connectivité si le seul réseau disponible est un réseau 2G. En cas d\'urgence, la 2G peut être utilisée."</string>
@@ -2970,6 +2977,8 @@
     <string name="user_summary_not_set_up" msgid="4602868481732886115">"Non configuré"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1658946988920104613">"Non configuré : profil limité"</string>
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"Non configuré – Profil professionnel"</string>
+    <!-- no translation found for user_owner (2079206733011361994) -->
+    <skip />
     <string name="user_admin" msgid="4024553191395768119">"Administrateur"</string>
     <string name="user_you" msgid="3070562015202859996">"Vous (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_add_max_count" msgid="3328539978480663740">"Vous ne pouvez plus ajouter d\'utilisateurs. Supprimez-en un pour en ajouter un autre."</string>
@@ -3775,8 +3784,8 @@
     <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"Désactivé"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Épinglage d\'application"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"Avec l\'épinglage d\'application, l\'application actuelle reste affichée jusqu\'à ce que vous la retiriez. Cette fonctionnalité vous permet, par exemple, de laisser une personne de confiance jouer à un jeu spécifique."</string>
-    <string name="screen_pinning_description" msgid="5822120806426139396">"Lorsqu\'une application est épinglée, elle peut ouvrir d\'autres applications et des données personnelles peuvent devenir accessibles. \n\nPour utiliser l\'épinglage d\'application : 	\n{0,number,integer}. Activer l\'épinglage d\'application 	\n{1,number,integer}. Ouvrir Récents 	\n{2,number,integer}. Appuyez sur l\'icône d\'appli en haut de l\'écran, puis sur \"Épingler\""</string>
-    <string name="screen_pinning_guest_user_description" msgid="2307270321127139579">"Les données personnelles peuvent être accessibles et d\'autres applis peuvent être ouvertes depuis une appli épinglée. \n\nSi vous souhaitez partager votre appareil de manière sécurisée, essayez plutôt d\'utiliser un profil invité. \n\nPour utiliser l\'épinglage d\'application : 	\n{0,number,integer}. Activer l\'épinglage d\'application 	\n{1,number,integer}. Ouvrir Récents 	\n{2,number,integer}. Appuyez sur l\'icône d\'appli en haut de l\'écran, puis sur \"Épingler\""</string>
+    <string name="screen_pinning_description" msgid="5822120806426139396">"Lorsqu\'une application est épinglée, elle peut ouvrir d\'autres applications et des données personnelles peuvent devenir accessibles. \n\nPour utiliser l\'épinglage d\'application : 	\n{0,number,integer}. Activez l\'épinglage d\'application 	\n{1,number,integer}. Ouvrez \"Récents\" 	\n{2,number,integer}. Appuyez sur l\'icône d\'appli en haut de l\'écran, puis sur \"Épingler\""</string>
+    <string name="screen_pinning_guest_user_description" msgid="2307270321127139579">"Lorsqu\'une application est épinglée, elle peut ouvrir d\'autres applications et des données personnelles peuvent devenir accessibles. \n\nSi vous souhaitez partager votre appareil de manière sécurisée, essayez plutôt d\'utiliser un profil invité. \n\nPour utiliser l\'épinglage d\'application : 	\n{0,number,integer}. Activez l\'épinglage d\'application 	\n{1,number,integer}. Ouvrez \"Récents\" 	\n{2,number,integer}. Appuyez sur l\'icône d\'appli en haut de l\'écran, puis sur \"Épingler\""</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Lorsqu\'une application est épinglée : \n\n•	 Des données à caractère personnel peuvent être accessibles (comme des contacts et le contenu d\'e-mails) \n•		D\'autres applis peuvent être ouvertes depuis l\'application épinglée \n\nN\'utilisez l\'épinglage d\'application qu\'avec des personnes de confiance.\n"</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Demander le schéma de déverrouillage avant de retirer l\'épingle"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Demander le code avant de retirer l\'épingle"</string>
@@ -4966,8 +4975,10 @@
     <string name="enable_2g_title" msgid="8184757884636162942">"Autoriser la 2G"</string>
     <string name="enable_2g_summary" msgid="2794534052372565914">"La 2G est moins sécurisée, mais peut améliorer votre connexion dans certains endroits. Pour les appels d\'urgence, la 2G est toujours autorisée."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> nécessite que la 2G soit disponible"</string>
-    <string name="require_cellular_encryption_title" msgid="7516008146269371585">"Chiffrement obligatoire"</string>
-    <string name="require_cellular_encryption_summary" msgid="4813823321032908641">"Le chiffrement est plus sécurisé, mais vous ne pourrez peut-être pas vous connecter à certains endroits. Le chiffrement n\'est jamais requis pour les appels d\'urgence."</string>
+    <!-- no translation found for require_cellular_encryption_title (6087085031703089235) -->
+    <skip />
+    <!-- no translation found for require_cellular_encryption_summary (6090569065420631457) -->
+    <skip />
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Tous les services"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Afficher les accès au presse-papiers"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Afficher un message lorsque les applis accèdent à du texte, à des images ou à d\'autres contenus que vous avez copiés"</string>
@@ -5190,6 +5201,7 @@
     <string name="force_swcrypto_fallback_title" msgid="8053166299808645593">"Forcer Software Secure Crypto"</string>
     <string name="force_swcrypto_fallback_summary" msgid="181969966310309701">"Forcer la gestion des clés DRM pour utiliser le chiffrement de boîte blanche basé sur logiciel"</string>
     <string name="fingerprint_acquired_imager_dirty_udfps" msgid="7005042288289506776">"Nettoyez l\'écran près du capteur et réessayez"</string>
-    <!-- no translation found for sim_category_converted_sim (8575548015816988908) -->
+    <string name="sim_category_converted_sim" msgid="8575548015816988908">"Conversion en eSIM réussie. Supprimer et retirer."</string>
+    <!-- no translation found for sync_across_devices_title (3447757705383089345) -->
     <skip />
 </resources>

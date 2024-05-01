@@ -36,10 +36,9 @@ public class BatteryDefenderDetector implements BatteryTipDetector {
     @Override
     public BatteryTip detect() {
         final boolean isBasicBatteryDefend =
-                mBatteryInfo.isBatteryDefender
-                        && !FeatureFactory.getFeatureFactory()
-                                .getPowerUsageFeatureProvider()
-                                .isExtraDefend();
+                FeatureFactory.getFeatureFactory()
+                        .getPowerUsageFeatureProvider()
+                        .isBatteryDefend(mBatteryInfo);
         final int state =
                 isBasicBatteryDefend ? BatteryTip.StateType.NEW : BatteryTip.StateType.INVISIBLE;
         final boolean isPluggedIn = mBatteryInfo.pluggedStatus != 0;

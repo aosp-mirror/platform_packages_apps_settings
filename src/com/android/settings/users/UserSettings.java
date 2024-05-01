@@ -368,9 +368,6 @@ public class UserSettings extends SettingsPreferenceFragment
         mMePreference = new UserPreference(getPrefContext(), null /* attrs */, myUserId);
         mMePreference.setKey(KEY_USER_ME);
         mMePreference.setOnPreferenceClickListener(this);
-        if (isCurrentUserAdmin()) {
-            mMePreference.setSummary(R.string.user_admin);
-        }
 
         mGuestCategory = findPreference(KEY_GUEST_CATEGORY);
 
@@ -1241,12 +1238,14 @@ public class UserSettings extends SettingsPreferenceFragment
                 pref.setEnabled(canOpenUserDetails);
                 pref.setSelectable(true);
                 pref.setKey("id=" + user.id);
-                if (user.isAdmin()) {
-                    pref.setSummary(R.string.user_admin);
-                }
             }
             if (pref == null) {
                 continue;
+            }
+            if (user.isMain()) {
+                pref.setSummary(R.string.user_owner);
+            } else if (user.isAdmin()) {
+                pref.setSummary(R.string.user_admin);
             }
             if (user.id != UserHandle.myUserId() && !user.isGuest() && !user.isInitialized()) {
                 // sometimes after creating a guest the initialized flag isn't immediately set

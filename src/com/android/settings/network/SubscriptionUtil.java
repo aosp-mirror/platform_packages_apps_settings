@@ -249,7 +249,8 @@ public class SubscriptionUtil {
             if (activeSlotSubInfoList.size() > 0) {
                 return (activeSlotSubInfoList.get(0).getSubscriptionId() == subId);
             }
-            return (inactiveSlotSubInfoList.get(0).getSubscriptionId() == subId);
+            return (inactiveSlotSubInfoList.size() > 0)
+                    && (inactiveSlotSubInfoList.get(0).getSubscriptionId() == subId);
         }
 
         // Allow non-opportunistic + active eSIM subscription as primary
@@ -543,9 +544,7 @@ public class SubscriptionUtil {
             return;
         }
 
-        if (isCarrierRac(context, carrierId)
-                && (!isConnectedToWifi(context)
-                        || isConnectedToMobileDataWithDifferentSubId(context, subId))) {
+        if (shouldShowRacDialogWhenErasingEsim(context, subId, carrierId)) {
             context.startActivity(EuiccRacConnectivityDialogActivity.getIntent(context, subId));
         } else {
             context.startActivity(DeleteEuiccSubscriptionDialogActivity.getIntent(context, subId));
@@ -884,16 +883,33 @@ public class SubscriptionUtil {
     }
 
     /**
-     * Check if warning dialog should be presented when erasing all eSIMS.
+     * Check if warning dialog should be presented when erasing all eSIMs.
      *
      * @param context Context to check if any sim carrier use RAC and device Wi-Fi connection.
      * @return {@code true} if dialog should be presented to the user.
      */
-    public static boolean shouldShowRacDialog(@NonNull Context context) {
+    public static boolean shouldShowRacDialogWhenErasingAllEsims(@NonNull Context context) {
         if (sEnableRacDialogForTesting != null) {
             return sEnableRacDialogForTesting;
         }
+
         return !isConnectedToWifi(context) && hasSubscriptionWithRacCarrier(context);
+    }
+
+    /**
+     * Check if warning dialog should be presented when erasing eSIM.
+     *
+     * @param context Context to check if any sim carrier use RAC and device Wi-Fi connection.
+     * @param subId Subscription ID for the single eSIM.
+     * @param carrierId Carrier ID for the single eSIM.
+     * @return {@code true} if dialog should be presented to the user.
+     */
+    @VisibleForTesting
+    static boolean shouldShowRacDialogWhenErasingEsim(
+            @NonNull Context context, int subId, int carrierId) {
+        return isCarrierRac(context, carrierId)
+                && !isConnectedToWifi(context)
+                && !isConnectedToMobileDataWithDifferentSubId(context, subId);
     }
 
     /**

@@ -278,7 +278,8 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                     .setRequestWriteRepairModePassword(true)
                     .setForceVerifyPath(true)
                     .show();
-        } else if (isEffectiveUserManagedProfile && isInternalActivity()) {
+        } else if (mLockPatternUtils.isManagedProfileWithUnifiedChallenge(mUserId)
+                && isInternalActivity()) {
             // When the mForceVerifyPath is set to true, we launch the real confirm credential
             // activity with an explicit but fake challenge value (0L). This will result in
             // ConfirmLockPassword calling verifyTiedProfileChallenge() (if it's a profile with

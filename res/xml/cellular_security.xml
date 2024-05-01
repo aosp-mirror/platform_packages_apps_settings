@@ -18,6 +18,10 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="cellular_security_settings_screen"
     android:title="@string/cellular_security_settings_title">
+
+    <com.android.settingslib.widget.TopIntroPreference
+	android:key="cellular_security_prefs_top_intro"
+        android:title="@string/cellular_security_top_intro"/>
     <PreferenceCategory
         android:key="cellular_security_notifications_category"
         android:title="@string/cellular_security_notifications"

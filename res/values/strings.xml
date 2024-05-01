@@ -4201,6 +4201,8 @@
     <string name="app_install_details_title">App details</string>
     <!-- Manage applications, individual application info screen, summary for the option which will trigger application info in it's installer [CHAR_LIMIT=50] -->
     <string name="app_install_details_summary">App installed from <xliff:g id="app_store">%1$s</xliff:g></string>
+    <!-- Manage applications, individual application info screen, summary for the option which will trigger application info in its installer when the installing package and initiating package are different [CHAR_LIMIT=50] -->
+    <string name="app_install_details_different_initiating_package_summary">App installed from <xliff:g id="app_store1">%1$s</xliff:g> (via <xliff:g id="app_store2">%2$s</xliff:g>)</string>
 
     <!-- Manage applications, individual application info screen, summary for the option which will trigger instant app info in it's installer [CHAR_LIMIT=50] -->
     <string name="instant_app_details_summary">More info on <xliff:g id="app_store">%1$s</xliff:g></string>
@@ -5292,11 +5294,11 @@
     <!-- Summary for the accessibility preference for hearing aid when there is an active device. [CHAR LIMIT=50] -->
     <string name="accessibility_hearingaid_active_device_summary"><xliff:g id="device_name"  example="GN Hearing Aids">%1$s</xliff:g> active</string>
     <!-- Summary for the accessibility preference for hearing aid when there is only left side active. [CHAR LIMIT=50] -->
-    <string name="accessibility_hearingaid_left_side_device_summary"><xliff:g id="device_name"  example="GN Hearing Aids">%1$s</xliff:g>, left only</string>
+    <string name="accessibility_hearingaid_left_side_device_summary"><xliff:g id="device_name"  example="GN Hearing Aids">%1$s</xliff:g> / Left only</string>
     <!-- Summary for the accessibility preference for hearing aid when there is only right side active. [CHAR LIMIT=50] -->
-    <string name="accessibility_hearingaid_right_side_device_summary"><xliff:g id="device_name"  example="GN Hearing Aids">%1$s</xliff:g>, right only</string>
+    <string name="accessibility_hearingaid_right_side_device_summary"><xliff:g id="device_name"  example="GN Hearing Aids">%1$s</xliff:g> / Right only</string>
     <!-- Summary for the accessibility preference for hearing aid when both left side and right side are active. [CHAR LIMIT=50] -->
-    <string name="accessibility_hearingaid_left_and_right_side_device_summary"><xliff:g id="device_name"  example="GN Hearing Aids">%1$s</xliff:g>, left and right</string>
+    <string name="accessibility_hearingaid_left_and_right_side_device_summary"><xliff:g id="device_name"  example="GN Hearing Aids">%1$s</xliff:g> / Left and right</string>
     <!-- Summary for the accessibility preference for hearing aid when there are more than one set of devices are active. [CHAR LIMIT=50] -->
     <string name="accessibility_hearingaid_more_device_summary"><xliff:g id="device_name" example="GN Hearing Aids">%1$s</xliff:g> +1 more</string>
     <!-- Title for the hearing device pairing preference. [CHAR LIMIT=20] -->
@@ -6283,18 +6285,21 @@
 
     <!-- Cellular security related strings -->
     <!-- Title of Cellular security tile in Network & Internet settings page. [CHAR LIMIT=60]-->
-    <string name="cellular_security_title">Cellular network security</string>
+    <string name="cellular_security_title">Mobile network security</string>
     <!-- Summary of Cellular security tile in Network & Internet settings page. [CHAR LIMIT=NONE]-->
     <string name="cellular_security_summary">Network type, encryption, notification controls</string>
 
+    <!-- Summary of Cellular network security settings page in Network & Internet. [CHAR LIMIT=NONE]-->
+    <string name="cellular_security_top_intro">These settings help protect your calls, messages, and data from outdated or unencrypted networks that could expose you to data theft or surveillance</string>
+
     <!-- Title of cellular security settings page [CHAR LIMIT=60]-->
-    <string name="cellular_security_settings_title">Cellular network security</string>
+    <string name="cellular_security_settings_title">Mobile network security</string>
     <!-- Title of Cellular security notifications section [CHAR LIMIT=60]-->
     <string name="cellular_security_notifications">Notifications</string>
     <!-- Title of Cellular security notifications toggle [CHAR LIMIT=60]-->
-    <string name="cellular_security_notifications_controller_title">Security notifications</string>
+    <string name="cellular_security_notifications_controller_title">Network notifications</string>
     <!-- Summary of Cellular security notifications toggle [CHAR LIMIT=NONE]-->
-    <string name="cellular_security_notifications_controller_summary">Receive notifications in case the cellular network you are connected to is insecure due to lack of encryption, or if the cellular network records your unique decive or SIM identifiers (IMEI &amp; IMSI)</string>
+    <string name="cellular_security_notifications_controller_summary">Get notified when your device connects to an unencrypted network, or when a network records your unique device or SIM ID</string>
 
     <!--Cellular encryption -->
     <!--Cellular encryption title [CHAR LIMIT=60] -->
@@ -6948,6 +6953,8 @@
     <!-- User summary to indicate that a work profile is currently not set up [CHAR LIMIT=100] -->
     <string name="user_summary_managed_profile_not_set_up">Not set up - Work profile</string>
     <!-- User information string to represent the owner of the device [CHAR LIMIT=25] -->
+    <string name="user_owner">Owner</string>
+    <!-- User information string to represent the admin of the device [CHAR LIMIT=25] -->
     <string name="user_admin">Admin</string>
     <!-- User settings title for current user entry "You" user. [CHAR LIMIT=30] -->
     <string name="user_you">You (<xliff:g id="name" example="Name">%s</xliff:g>)</string>
@@ -11700,6 +11707,11 @@
     <string name="satellite_setting_summary_more_information">Satellite messaging may take longer and is available only in some areas. Weather and certain structures may affect your satellite connection. Calling by satellite isn\u2019t available. Emergency calls may still connect.\n\nIt may take some time for account changes to show in Settings. Contact your carrier for details.</string>
     <!-- more about satellite messaging [CHAR_LIMIT=NONE] -->
     <string name="more_about_satellite_messaging">More about satellite messaging</string>
+    <!-- Title for satellite warning dialog to avoid user using wifi/bluetooth/airplane mode [CHAR_LIMIT=NONE] -->
+    <string name="satellite_warning_dialog_title">Can’t turn on <xliff:g id="function" example="bluetooth">%1$s</xliff:g></string>
+    <!-- Content for satellite warning dialog to avoid user using wifi/bluetooth/airplane mode [CHAR_LIMIT=NONE] -->
+    <string name="satellite_warning_dialog_content">To turn on <xliff:g id="function" example="bluetooth">%1$s</xliff:g>, first end the satellite connection</string>
+
 
     <!-- Title for Apn settings in mobile network settings [CHAR LIMIT=60] -->
     <string name="mobile_network_apn_title">Access Point Names</string>
@@ -12272,7 +12284,7 @@
     <!-- Title of toggle to enable or disable the media resumption on lockscreen [CHAR LIMIT=NONE]-->
     <string name="camera_extensions_fallback_title">Allow camera software extensions</string>
     <!-- Description of toggle to enable or disable the media resumption on lockscreen [CHAR LIMIT=NONE]-->
-    <string name="camera_extensions_fallback_description">Enables the default software implementation of advanced camera features, such as Eyes Free videography.</string>
+    <string name="camera_extensions_fallback_description">Enables the default software implementation of advanced camera features, such as HDR, Night or other camera extensions.</string>
 
     <!-- Summary for see all preference when bluetooth is disable [CHAR LIMIT=none]-->
     <string name="connected_device_see_all_summary">Bluetooth will turn on</string>
@@ -12478,9 +12490,9 @@
     <string name="enable_2g_summary_disabled_carrier"><xliff:g id="carrier_name_2g" example="Google Fi">%1$s</xliff:g> requires 2G to be available</string>
 
     <!-- Title for toggle if user wants to require cellular encryption [CHAR LIMIT=40] -->
-    <string name="require_cellular_encryption_title">Require encryption</string>
+    <string name="require_cellular_encryption_title">Allow only encrypted networks</string>
     <!-- Summary for if the user wants to require cellular encryption [CHAR LIMIT=NONE] -->
-    <string name="require_cellular_encryption_summary">Encryption is more secure, but you might not be able to connect in some locations. For emergency calls, encryption is never required</string>
+    <string name="require_cellular_encryption_summary">This is more secure but may limit your mobile network connection in some locations. Emergency calling is always allowed.</string>
 
     <!-- Label for All services preference in App info settings [CHAR LIMIT=40] -->
     <string name="app_info_all_services_label">All services</string>
@@ -13182,4 +13194,7 @@
 
     <!-- Provider Model: summary of converted in SIM category. [CHAR LIMIT=50] -->
     <string name="sim_category_converted_sim">Converted to eSIM. Remove and discard.</string>
+
+    <!--Title for Sync Across Devices category-->
+    <string name="sync_across_devices_title">Sync across devices</string>
 </resources>

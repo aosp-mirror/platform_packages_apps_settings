@@ -111,7 +111,7 @@ private fun LabelSimPreference(
                 placeholder = {Text(text = originalSimCarrierName)},
                 modifier = Modifier.fillMaxWidth()
             ) {
-                titleSimName = it
+                titleSimName = if (it.isEmpty()) originalSimCarrierName else it
             }
         },
     )

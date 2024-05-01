@@ -24,7 +24,6 @@ import android.telephony.satellite.SatelliteModemStateCallback
 import androidx.test.core.app.ApplicationProvider
 import com.google.common.truth.Truth.assertThat
 import com.google.common.util.concurrent.ListenableFuture
-import java.util.concurrent.Executor
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertFalse
@@ -35,12 +34,12 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.eq
 import org.mockito.Mock
-import org.mockito.Mockito.any
-import org.mockito.Mockito.`when`
+import org.mockito.Mockito.*
 import org.mockito.Spy
 import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoRule
 import org.robolectric.RobolectricTestRunner
+import java.util.concurrent.Executor
 
 
 @RunWith(RobolectricTestRunner::class)
@@ -88,6 +87,55 @@ class SatelliteRepositoryTest {
             repository.requestIsEnabled(mockExecutor)
 
         assertTrue(result.get())
+    }
+
+    @Test
+    fun requestIsSessionStarted_resultIsTrue() = runBlocking {
+        `when`(mockSatelliteManager.registerForModemStateChanged(any(), any())
+        ).thenAnswer { invocation ->
+            val callback = invocation.getArgument<SatelliteModemStateCallback>(1)
+            callback.onSatelliteModemStateChanged(SatelliteManager.SATELLITE_MODEM_STATE_CONNECTED)
+            SatelliteManager.SATELLITE_RESULT_SUCCESS
+        }
+
+        val result: ListenableFuture<Boolean> = repository.requestIsSessionStarted(mockExecutor)
+        assertTrue(result.get())
+        verify(mockSatelliteManager).unregisterForModemStateChanged(any())
+    }
+
+    @Test
+    fun requestIsSessionStarted_resultIsFalse() = runBlocking {
+        `when`(mockSatelliteManager.registerForModemStateChanged(any(), any())
+        ).thenAnswer { invocation ->
+            val callback = invocation.getArgument<SatelliteModemStateCallback>(1)
+            callback.onSatelliteModemStateChanged(SatelliteManager.SATELLITE_MODEM_STATE_OFF)
+            SatelliteManager.SATELLITE_RESULT_SUCCESS
+        }
+
+        val result: ListenableFuture<Boolean> = repository.requestIsSessionStarted(mockExecutor)
+        assertFalse(result.get())
+        verify(mockSatelliteManager).unregisterForModemStateChanged(any())
+    }
+
+    @Test
+    fun requestIsSessionStarted_registerFailed() = runBlocking {
+        `when`(mockSatelliteManager.registerForModemStateChanged(any(), any())
+        ).thenAnswer {
+            SatelliteManager.SATELLITE_RESULT_ERROR
+        }
+
+        val result: ListenableFuture<Boolean> = repository.requestIsSessionStarted(mockExecutor)
+        assertFalse(result.get())
+        verify(mockSatelliteManager, never()).unregisterForModemStateChanged(any())
+    }
+
+    @Test
+    fun requestIsSessionStarted_nullSatelliteManager() = runBlocking {
+        `when`(spyContext.getSystemService(SatelliteManager::class.java)).thenReturn(null)
+
+        val result: ListenableFuture<Boolean> = repository.requestIsSessionStarted(mockExecutor)
+        assertFalse(result.get())
+        verifyNoInteractions(mockSatelliteManager)
     }
 
     @Test
@@ -139,7 +187,7 @@ class SatelliteRepositoryTest {
     }
 
     @Test
-    fun getIsModemEnabledFlow_isSatelliteEnabledState() = runBlocking {
+    fun getIsSessionStartedFlow_isSatelliteEnabledState() = runBlocking {
         `when`(
             mockSatelliteManager.registerForModemStateChanged(
                 any(),
@@ -151,13 +199,13 @@ class SatelliteRepositoryTest {
             SatelliteManager.SATELLITE_RESULT_SUCCESS
         }
 
-        val flow = repository.getIsModemEnabledFlow()
+        val flow = repository.getIsSessionStartedFlow()
 
         assertThat(flow.first()).isTrue()
     }
 
     @Test
-    fun getIsModemEnabledFlow_isSatelliteDisabledState() = runBlocking {
+    fun getIsSessionStartedFlow_isSatelliteDisabledState() = runBlocking {
         `when`(
             mockSatelliteManager.registerForModemStateChanged(
                 any(),
@@ -169,16 +217,28 @@ class SatelliteRepositoryTest {
             SatelliteManager.SATELLITE_RESULT_SUCCESS
         }
 
-        val flow = repository.getIsModemEnabledFlow()
+        val flow = repository.getIsSessionStartedFlow()
 
         assertThat(flow.first()).isFalse()
     }
 
     @Test
-    fun getIsModemEnabledFlow_nullSatelliteManager() = runBlocking {
+    fun getIsSessionStartedFlow_nullSatelliteManager() = runBlocking {
         `when`(spyContext.getSystemService(SatelliteManager::class.java)).thenReturn(null)
 
-        val flow = repository.getIsModemEnabledFlow()
+        val flow = repository.getIsSessionStartedFlow()
+        assertThat(flow.first()).isFalse()
+    }
+
+    @Test
+    fun getIsSessionStartedFlow_registerFailed() = runBlocking {
+        `when`(mockSatelliteManager.registerForModemStateChanged(any(), any())
+        ).thenAnswer {
+            SatelliteManager.SATELLITE_RESULT_ERROR
+        }
+
+        val flow = repository.getIsSessionStartedFlow()
+
         assertThat(flow.first()).isFalse()
     }
 }

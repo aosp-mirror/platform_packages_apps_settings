@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 The Android Open Source Project
+ * Copyright (C) 2024 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
 package com.android.settings.network.telephony
 
 import android.content.Context
+import android.telephony.SubscriptionManager
 import android.telephony.TelephonyCallback
 import android.telephony.TelephonyManager
 import androidx.test.core.app.ApplicationProvider
@@ -36,7 +37,7 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.spy
 
 @RunWith(AndroidJUnit4::class)
-class CallStateFlowTest {
+class CallStateRepositoryTest {
     private var callStateListener: TelephonyCallback.CallStateListener? = null
 
     private val mockTelephonyManager = mock<TelephonyManager> {
@@ -47,13 +48,24 @@ class CallStateFlowTest {
         }
     }
 
+    private val mockSubscriptionManager = mock<SubscriptionManager> {
+        on { activeSubscriptionIdList } doReturn intArrayOf(SUB_ID)
+        on { addOnSubscriptionsChangedListener(any(), any()) } doAnswer {
+            val listener = it.arguments[1] as SubscriptionManager.OnSubscriptionsChangedListener
+            listener.onSubscriptionsChanged()
+        }
+    }
+
     private val context: Context = spy(ApplicationProvider.getApplicationContext()) {
         on { getSystemService(TelephonyManager::class.java) } doReturn mockTelephonyManager
+        on { subscriptionManager } doReturn mockSubscriptionManager
     }
+
+    private val repository = CallStateRepository(context)
 
     @Test
     fun callStateFlow_initial_sendInitialState() = runBlocking {
-        val flow = context.callStateFlow(SUB_ID)
+        val flow = repository.callStateFlow(SUB_ID)
 
         val state = flow.firstWithTimeoutOrNull()
 
@@ -63,7 +75,7 @@ class CallStateFlowTest {
     @Test
     fun callStateFlow_changed_sendChangedState() = runBlocking {
         val listDeferred = async {
-            context.callStateFlow(SUB_ID).toListWithTimeout()
+            repository.callStateFlow(SUB_ID).toListWithTimeout()
         }
         delay(100)
 
@@ -71,6 +83,27 @@ class CallStateFlowTest {
 
         assertThat(listDeferred.await())
             .containsExactly(TelephonyManager.CALL_STATE_IDLE, TelephonyManager.CALL_STATE_RINGING)
+            .inOrder()
+    }
+
+    @Test
+    fun isInCallFlow_initial() = runBlocking {
+        val isInCall = repository.isInCallFlow().firstWithTimeoutOrNull()
+
+        assertThat(isInCall).isFalse()
+    }
+
+    @Test
+    fun isInCallFlow_changed_sendChangedState() = runBlocking {
+        val listDeferred = async {
+            repository.isInCallFlow().toListWithTimeout()
+        }
+        delay(100)
+
+        callStateListener?.onCallStateChanged(TelephonyManager.CALL_STATE_RINGING)
+
+        assertThat(listDeferred.await())
+            .containsExactly(false, true)
             .inOrder()
     }
 
