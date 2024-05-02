@@ -33,7 +33,6 @@ import com.android.settings.R;
 
 import java.time.Duration;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -94,7 +93,6 @@ class ZenModesBackend {
     ZenMode getMode(String id) {
         ZenModeConfig currentConfig = mNotificationManager.getZenModeConfig();
         if (ZenMode.MANUAL_DND_MODE_ID.equals(id)) {
-            // Regardless of its contents, non-null manualRule means that manual rule is active.
             return getManualDndMode(currentConfig);
         } else {
             AutomaticZenRule rule = mNotificationManager.getAutomaticZenRule(id);
@@ -119,8 +117,9 @@ class ZenModesBackend {
                 .setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_PRIORITY)
                 .build();
 
+        // Regardless of its contents, non-null manualRule means that manual rule is active.
         return ZenMode.manualDndMode(manualDndRule,
-                config != null && config.manualRule != null);  // isActive
+                config != null && config.manualRule != null);
     }
 
     private static boolean isRuleActive(String id, ZenModeConfig config) {
