@@ -127,7 +127,7 @@ public class AutoLockPreferenceControllerTest {
                 Settings.Secure.PRIVATE_SPACE_AUTO_LOCK,
                 Settings.Secure.PRIVATE_SPACE_AUTO_LOCK_AFTER_INACTIVITY);
         assertThat(mAutoLockPreferenceController.getSummary().toString())
-                .isEqualTo("After 5 minutes of inactivity");
+                .isEqualTo("5 minutes after screen timeout");
     }
 
     /**
