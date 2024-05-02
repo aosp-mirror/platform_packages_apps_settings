@@ -1486,7 +1486,7 @@
     <string name="unlock_set_unlock_launch_picker_title">Screen lock</string>
 
     <!--  Profile Security lock settings --><skip />
-    <!--  Title for PreferenceScreen to launch picker for security method for the managed profile when there is none [CHAR LIMIT=22] -->
+    <!--  Title for PreferenceScreen to launch picker for security method for the managed profile when there is none [CHAR LIMIT=40] -->
     <string name="unlock_set_unlock_launch_picker_title_profile">Work profile lock</string>
 
     <!-- Title for preference that disables unlock security [CHAR LIMIT=22] -->
@@ -6017,7 +6017,7 @@
     <string name="battery_saver_sticky_title_percentage">Turn off at <xliff:g id="battery_percentage" example="80%">%1$s</xliff:g></string>
 
     <!-- Battery Saver: Description for sticky battery saver preference [CHAR_LIMIT=NONE] -->
-    <string name="battery_saver_sticky_description_new">Battery Saver turns off when battery reaches <xliff:g id="battery_percentage" example="80%">%1$s</xliff:g></string>
+    <string name="battery_saver_sticky_description_new">Battery Saver turns off when battery charges above <xliff:g id="battery_percentage" example="80%">%1$s</xliff:g></string>
 
     <!-- Battery saver: Label for seekbar to change battery saver threshold [CHAR_LIMIT=40] -->
     <string name="battery_saver_seekbar_title"><xliff:g id="percent">%1$s</xliff:g></string>
@@ -12103,29 +12103,80 @@
     <!-- Developer Settings: Search keywords for the Profile HWUI rendering. [CHAR_LIMIT=NONE] -->
     <string name="track_frame_time_keywords">GPU</string>
 
-    <!-- setting Checkbox title whether to boot with 16K page size [CHAR_LIMIT=35] -->
-    <string name="enable_16k_pages">Boot with 16K page size</string>
+    <!-- setting Checkbox title whether to boot with 16KB page size [CHAR_LIMIT=35] -->
+    <string name="enable_16k_pages">Boot with 16KB page size</string>
     <!-- setting Checkbox summary whether to boot with 16K page size[CHAR_LIMIT=50] -->
-    <string name="enable_16k_pages_summary">Boot device using 16K page size supported kernel</string>
+    <string name="enable_16k_pages_summary">Boot device using 16KB page size supported kernel</string>
     <!-- Confirmation dialog title to ensure user wishes to enable 16K page size -->
-    <string name="confirm_enable_16k_pages_title">Reboot with 16KB pages compatible kernel?</string>
-    <!-- Warning dialog message to confirm user wishes to enable 16K page size -->
-    <string name="confirm_enable_16k_pages_text">WARNING: Some applications may not be compatible with this mode. Device will reboot after confirmation.</string>
+    <string name="confirm_enable_16k_pages_title">Switch from 4kB mode to 16KB mode</string>
+    <!-- Warning dialog message to confirm user wishes to enable 16KB page size -->
+    <string name="confirm_enable_16k_pages_text">You are in the page-agnostic mode running a 4kB kernel, and you are switching to the 16KB mode.
+        Software integrity cannot be guaranteed in this mode, and any data stored on the phone while the bootloader is unlocked may be at risk.
+        This will reboot the device. Some features will be disabled in these modes, so some applications may not work.
+        To return the device to production mode, you would need to then, switch back to the 4kB mode and lock the bootloader,
+        which factory resets the device. After the device successfully boots into Android, disable OEM unlocking in Developer options.</string>
     <!-- dialog title to confirm user wishes to revert to 4k page size kernel -->
-    <string name="confirm_enable_4k_pages_title">Reboot with 4KB pages compatible kernel?</string>
+    <string name="confirm_enable_4k_pages_title">Switch from 16KB mode to 4KB mode</string>
     <!-- dialog message to confirm user wishes to enable 4K page size -->
-    <string name="confirm_enable_4k_pages_text">Device will reboot after confirmation.</string>
+    <string name="confirm_enable_4k_pages_text">You are in the page-agnostic mode running a 16KB kernel, and you are switching to the 4KB mode.
+        Software integrity cannot be guaranteed in this mode, and any data stored on the phone while the bootloader is unlocked may be at risk.
+        This will reboot the device. Some features will be disabled in these modes, so some applications may not work. To return the device to production mode,
+        you would need to then lock the bootloader, which factory resets the device. After the device successfully boots into Android, disable OEM unlocking in Developer options.</string>
     <!-- Toast message when 16k OTA update fails -->
     <string name="toast_16k_update_failed_text">Failed to update kernel to 16KB pages compatible kernel.</string>
     <string name="progress_16k_ota_title">Applying change</string>
     <!-- Confirmation dialog title and text to reformat data to ext4 -->
-    <string name="confirm_format_ext4_title">Reformat device to ext4?</string>
-    <string name="confirm_format_ext4_text">16K developer option is supported with ext4 filesystem. Device will be wiped and filesystem will be changed to ext4 after confirmation.</string>
+    <string name="confirm_format_ext4_title">Reformat device to ext4? (required for 16KB mode)</string>
+    <string name="confirm_format_ext4_text">This device’s data partition needs to be converted to ext4 before using the 16KB developer option.
+        Software integrity cannot be guaranteed in this mode, and any data stored on the phone while the bootloader is unlocked may be at risk.
+        Activating the 16KB option will require one more reboot after this. Once you are in this mode, you can switch back and forth between 4KB and 16KB mode with a single reboot.
+        Some features will be disabled in these modes, so some applications may not work. To return the device to production mode, you would need to switch back to 4KB mode and
+        then lock the bootloader, which factory resets the device. After the device successfully boots into Android, disable OEM unlocking in Developer options.
+        The device will be wiped and the filesystem will be changed to ext4 after confirmation. After this completes, please come back to enable 16KB again.
+    </string>
     <!-- Toast on failure to reformat data to ext4 -->
-    <string name="format_ext4_failure_toast">Failed to reformat and wipe the data partiton to ext4.</string>
+    <string name="format_ext4_failure_toast">Failed to reformat and wipe the data partition to ext4.</string>
     <!-- Dialog to OEM unlock the device before using 16K developer option -->
-    <string name="confirm_oem_unlock_for_16k_title">OEM unlock required</string>
-    <string name="confirm_oem_unlock_for_16k_text">Device needs to be OEM unlocked before using 16K developer option. OEM unlock will also require formatting userdata. Please OEM unlock the device and try again.</string>
+    <string name="confirm_oem_unlock_for_16k_title">Bootloader Unlock Required for 16KB Mode</string>
+    <string name="confirm_oem_unlock_for_16k_text">This device needs to have the bootloader unlocked before using the 16KB developer option.
+        Software integrity cannot be guaranteed in this mode, and any data stored on the phone while the bootloader is unlocked may be at risk.
+        All user data and settings will be wiped when activating 16KB mode. Once the bootloader is unlocked, activating the 16KB option will require two reboots.
+        Once you are in this mode, you can switch back and forth between 4KB and 16KB mode with a single reboot. Some features will be disabled in these modes,
+        so some applications may not work. To return the device to production mode, you would need to switch back to 4KB mode and then OEM/bootloader lock (which factory resets) the device.
+        Please unlock the bootloader and try again. You can see instructions for how to do this at
+        &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;
+    </string>
+    <!-- persistent notification 4k page agnostic mode title -->
+    <string name="page_agnostic_4k_pages_title">Using 4KB page-agnostic mode</string>
+    <!-- persistent notification 4k page agnostic mode text -->
+    <string name="page_agnostic_4k_pages_text_short">You are in the 4KB mode of the page-agnostic mode. Software integrity cannot be guaranteed in this mode,
+        and any data stored on the phone while the bootloader is unlocked may be at risk. Some features will be disabled in these modes, so some applications may not work.
+        In order to re-enter the production mode, you must lock the bootloader of the device. Tap to read more.</string>
+    <!-- persistent notification 16k page agnostic mode title -->
+    <string name="page_agnostic_4k_pages_text">You are in the 4KB mode of the page-agnostic mode. Software integrity cannot be guaranteed in this mode,
+        and any data stored on the phone while the bootloader is unlocked may be at risk. Some features will be disabled in these modes, so some applications may not work.
+        In order to re-enter the production mode, you must lock the bootloader of the device. This would factory reset the device again and restore it to production settings.
+        After the device successfully boots into Android, disable OEM unlocking in Developer options.
+        If the device fails to boot into Android or is unstable, re-flash the device with the latest factory images from
+        &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt;
+        or use &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt;
+        and select \'Wipe Device\', \'Lock Bootloader\' and \'Force Flash all partitions\'.</string>
+    <!-- persistent notification 16k page agnostic mode title -->
+    <string name="page_agnostic_16k_pages_title">Using 16KB page-agnostic mode</string>
+    <!-- persistent notification 16k page agnostic mode text -->
+    <string name="page_agnostic_16k_pages_text_short">You are in the 16KB mode of the page-agnostic mode. Software integrity cannot be guaranteed in this mode,
+        and any data stored on the phone while the bootloader is unlocked may be at risk. Some features will be disabled in these modes, so some applications may not work.
+        In order to re-enter the production mode, you must, switch back to 4K mode and then lock the bootloader of the device. Tap to read more.</string>
+    <string name="page_agnostic_16k_pages_text">You are in the 16KB mode of the page-agnostic mode. Software integrity cannot be guaranteed in this mode,
+        and any data stored on the phone while the bootloader is unlocked may be at risk. Some features will be disabled in these modes, so some applications may not work.
+        In order to re-enter the production mode, you must, switch back to 4K mode and then lock the bootloader of the device. This would factory reset the device again and
+        restore it to production settings. After the device successfully boots into Android, disable OEM unlocking in Developer options.
+        If the device fails to boot into Android or is unstable, re-flash the device with the latest factory images from
+        &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt;
+        or use &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt;
+        and select \'Wipe Device\', \'Lock Bootloader\' and \'Force Flash all partitions\'.</string>
+    <string name="page_agnostic_notification_channel_name">16KB Page-agnostic Mode</string>
+    <string name="page_agnostic_notification_action">Read more</string>
 
     <!-- DSU Loader. Do not translate. -->
 
