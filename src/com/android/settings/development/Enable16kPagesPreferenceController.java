@@ -87,8 +87,11 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
     private static final int ENABLE_4K_PAGE_SIZE = 0;
     private static final int ENABLE_16K_PAGE_SIZE = 1;
 
-    private static final String OTA_16K_PATH = "/system/boot_otas/boot_ota_16k.zip";
-    private static final String OTA_4K_PATH = "/system/boot_otas/boot_ota_4k.zip";
+    private static final String SYSTEM_PATH = "/system";
+    private static final String VENDOR_PATH = "/vendor";
+    private static final String OTA_16K_PATH = "/boot_otas/boot_ota_16k.zip";
+    private static final String OTA_4K_PATH = "/boot_otas/boot_ota_4k.zip";
+
     private static final String PAYLOAD_BINARY_FILE_NAME = "payload.bin";
     private static final String PAYLOAD_PROPERTIES_FILE_NAME = "payload_properties.txt";
     private static final int OFFSET_TO_FILE_NAME = 30;
@@ -225,9 +228,9 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
         PersistableBundle info = createUpdateInfo(SystemUpdateManager.STATUS_IN_PROGRESS);
         manager.updateSystemUpdateInfo(info);
 
-        String updateFilePath = mEnable16k ? OTA_16K_PATH : OTA_4K_PATH;
         try {
-            File updateFile = new File(updateFilePath);
+            File updateFile = getOtaFile();
+            Log.i(TAG, "Update file path is " + updateFile.getAbsolutePath());
             applyUpdateFile(updateFile);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -472,5 +475,24 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
         }
 
         return true;
+    }
+
+    // if BOARD_16K_OTA_MOVE_VENDOR, OTAs will be present on the /vendor partition
+    private File getOtaFile() throws FileNotFoundException {
+        String otaPath = mEnable16k ? OTA_16K_PATH : OTA_4K_PATH;
+        // Check if boot ota exists on vendor path and prefer vendor ota if present
+        String vendorOta = VENDOR_PATH + otaPath;
+        File vendorOtaFile = new File(vendorOta);
+        if (vendorOtaFile != null && vendorOtaFile.exists()) {
+            return vendorOtaFile;
+        }
+
+        // otherwise, fallback to boot ota from system partition
+        String systemOta = SYSTEM_PATH + otaPath;
+        File systemOtaFile = new File(systemOta);
+        if (systemOtaFile == null || !systemOtaFile.exists()) {
+            throw new FileNotFoundException("File not found at path " + systemOta);
+        }
+        return systemOtaFile;
     }
 }
