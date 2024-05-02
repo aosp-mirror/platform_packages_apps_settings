@@ -37,6 +37,7 @@ import com.android.settings.R
 import com.android.settings.Utils
 import com.android.settings.network.SubscriptionUtil
 import com.android.settings.network.telephony.MobileNetworkUtils
+import com.android.settings.network.telephony.SubscriptionActivationRepository
 import com.android.settings.network.telephony.isSubscriptionEnabledFlow
 import com.android.settings.network.telephony.phoneNumberFlow
 import com.android.settingslib.spa.widget.preference.PreferenceModel
@@ -70,6 +71,9 @@ private fun SimPreference(subInfo: SubscriptionInfo) {
             emit(SubscriptionUtil.isConvertedPsimSubscription(subInfo))
         }
     }.collectAsStateWithLifecycle(initialValue = false)
+    val isActivationChangeable by remember {
+        SubscriptionActivationRepository(context).isActivationChangeableFlow()
+    }.collectAsStateWithLifecycle(initialValue = false)
     RestrictedTwoTargetSwitchPreference(
         model = object : SwitchPreferenceModel {
             override val title = subInfo.displayName.toString()
@@ -81,7 +85,7 @@ private fun SimPreference(subInfo: SubscriptionInfo) {
                 }
             }
             override val icon = @Composable { SimIcon(subInfo.isEmbedded) }
-            override val changeable = { !isConvertedPsim }
+            override val changeable = { isActivationChangeable && !isConvertedPsim }
             override val checked = { checked.value }
             override val onCheckedChange = { newChecked: Boolean ->
                 SubscriptionUtil.startToggleSubscriptionDialogActivity(
