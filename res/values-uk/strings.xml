@@ -605,8 +605,8 @@
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Налаштування приватного простору…"</string>
     <string name="private_space_error_screen_title" msgid="739381738044418346">"Не вдалося налаштувати приватний простір"</string>
     <string name="private_space_tryagain_label" msgid="8305362615231738367">"Повторити"</string>
-    <string name="private_space_lockscreen_title" msgid="5785259588888586366">"Вибрати новий спосіб блокування для приватного простору?"</string>
-    <string name="private_space_lockscreen_summary" msgid="3053836076639653805">"Ви можете налаштувати новий спосіб блокування лише для приватного простору або використовувати той самий, що й для блокування пристрою"</string>
+    <string name="private_space_lockscreen_title" msgid="5785259588888586366">"Вибрати новий спосіб розблокування для приватного простору?"</string>
+    <string name="private_space_lockscreen_summary" msgid="3053836076639653805">"Ви можете налаштувати новий спосіб розблокування лише для приватного простору або використовувати той самий, що й для розблокування пристрою"</string>
     <string name="private_space_use_screenlock_label" msgid="9182153443192032782">"Доступ розблокуванням екрана"</string>
     <string name="private_space_set_lock_label" msgid="1790408277477408475">"Вибрати новий спосіб розблокування"</string>
     <string name="private_space_pre_finish_title" msgid="2314776598615113267">"Зачекайте…"</string>
@@ -1497,8 +1497,7 @@
     <string name="reset_esim_error_title" msgid="6516110227665862295">"Не вдалося видалити всі дані з eSIM-карт"</string>
     <string name="reset_esim_error_msg" msgid="8459527827897797168">"Сталася помилка. Не вдалося видалити всі дані з eSIM-карт.\n\nПерезапустіть пристрій і повторіть спробу."</string>
     <string name="reset_private_space_delete_title" msgid="2555885198282572990">"Видалити приватний простір"</string>
-    <!-- no translation found for reset_private_space_delete_dialog (7506471054091800883) -->
-    <skip />
+    <string name="reset_private_space_delete_dialog" msgid="7506471054091800883">"Якщо на вашому пристрої є приватний простір, його буде видалено назавжди, а доданий у нього обліковий запис Google буде вилучено.\n\nУсі додатки у вашому просторі і їхні дані також буде видалено назавжди."</string>
     <string name="main_clear_title" msgid="277664302144837723">"Стерти всі дані (скинути налаштування)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Стерти всі дані (скинути налаштування)"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"музику"</li>\n<li>"фото"</li>\n<li>"інші дані користувача"</li></string>
@@ -1811,6 +1810,8 @@
     <string name="app_install_details_group_title" msgid="1172114479073704677">"Магазин"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"Про додаток"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"Додаток установлено звідси: <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
+    <!-- no translation found for app_install_details_different_initiating_package_summary (6093306593167176688) -->
+    <skip />
     <string name="instant_app_details_summary" msgid="417197491598208216">"Докладніше про додаток <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
     <string name="app_ops_running" msgid="6127474473137428721">"Виконується"</string>
     <string name="app_ops_never_used" msgid="9038133162371204506">"(Ніколи не використовується)"</string>
@@ -2290,12 +2291,9 @@
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Підключіть слух. апарати"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"Виберіть слухові апарати на наступному екрані. Можливо, вам знадобиться підключити слухові апарати для лівого та правого вух окремо.\n\nПереконайтеся, що слухові апарати ввімкнені й готові до підключення."</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"Пристрій <xliff:g id="DEVICE_NAME">%1$s</xliff:g> активовано"</string>
-    <!-- no translation found for accessibility_hearingaid_left_side_device_summary (12349058624943107) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_right_side_device_summary (8645789702686724188) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_left_and_right_side_device_summary (3314103411842694197) -->
-    <skip />
+    <string name="accessibility_hearingaid_left_side_device_summary" msgid="12349058624943107">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> / лише лівий"</string>
+    <string name="accessibility_hearingaid_right_side_device_summary" msgid="8645789702686724188">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> / лише правий"</string>
+    <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="3314103411842694197">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> / лівий і правий"</string>
     <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> і ще 1 пристрій"</string>
     <string name="accessibility_hearing_device_pairing_title" msgid="2701812183769537320">"Новий пристрій"</string>
     <string name="accessibility_hearing_device_connected_title" msgid="3785140037249487287">"Слухові апарати"</string>
@@ -2574,7 +2572,8 @@
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Подовжте час роботи акумулятора"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Вимикати, коли заряджено"</string>
     <string name="battery_saver_sticky_title_percentage" msgid="1178162022087559148">"Вимикати, коли акумулятор зарядиться до <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="battery_saver_sticky_description_new" msgid="6472610662679038342">"Режим енергозбереження вимкнеться, коли акумулятор зарядиться до <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <!-- no translation found for battery_saver_sticky_description_new (8543277078136947874) -->
+    <skip />
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Увімкнути"</string>
@@ -2686,18 +2685,13 @@
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"Увімкнено"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"Вимкнено"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Використовувати адаптивне підключення"</string>
-    <!-- no translation found for cellular_security_title (5562899485544677941) -->
-    <skip />
+    <string name="cellular_security_title" msgid="5562899485544677941">"Безпека мобільної мережі"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"Тип мережі, шифрування, налаштування сповіщень"</string>
-    <!-- no translation found for cellular_security_top_intro (6749166804080092892) -->
-    <skip />
-    <!-- no translation found for cellular_security_settings_title (7779141923670352595) -->
-    <skip />
+    <string name="cellular_security_top_intro" msgid="6749166804080092892">"Ці налаштування допомагають захистити ваші дзвінки, повідомлення  дані в застарілих чи незашифрованих мережах, де існує ризик крадіжки даних або стеження"</string>
+    <string name="cellular_security_settings_title" msgid="7779141923670352595">"Безпека мобільної мережі"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"Сповіщення"</string>
-    <!-- no translation found for cellular_security_notifications_controller_title (4853056963523277847) -->
-    <skip />
-    <!-- no translation found for cellular_security_notifications_controller_summary (8339863845393759958) -->
-    <skip />
+    <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"Сповіщення мережі"</string>
+    <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"Отримуйте сповіщення, коли пристрій підключається до незашифрованої мережі або коли мережа записує унікальний ідентифікатор вашого пристрою чи SIM-карти"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"Шифрування"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"Покоління мереж"</string>
     <string name="cellular_security_network_generations_summary" msgid="139087814553929402">"Кожну вставлену SIM-карту можна налаштувати для підключення лише до мереж, що підтримують 3G, 4G й 5G. SIM-карта не підключатиметься до старіших незахищених мереж 2G. Це налаштування обмежуватиме можливість зв’язку, якщо доступна лише мережа 2G. В екстрених випадках можна використовувати 2G."</string>
@@ -2970,15 +2964,15 @@
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{Адміністратор організації {orgName} установив для вашого робочого профілю центр сертифікації, за допомогою якого зможе відстежувати ваші дії в корпоративній мережі, зокрема в електронній пошті, додатках і на безпечних веб-сайтах.\n\nЩоб дізнатися більше про цей сертифікат, зверніться до адміністратора.}one{Адміністратор організації {orgName} установив для вашого робочого профілю центри сертифікації, за допомогою яких зможе відстежувати ваші дії в корпоративній мережі, зокрема в електронній пошті, додатках і на безпечних веб-сайтах.\n\nЩоб дізнатися більше про ці сертифікати, зверніться до адміністратора.}few{Адміністратор організації {orgName} установив для вашого робочого профілю центри сертифікації, за допомогою яких зможе відстежувати ваші дії в корпоративній мережі, зокрема в електронній пошті, додатках і на безпечних веб-сайтах.\n\nЩоб дізнатися більше про ці сертифікати, зверніться до адміністратора.}many{Адміністратор організації {orgName} установив для вашого робочого профілю центри сертифікації, за допомогою яких зможе відстежувати ваші дії в корпоративній мережі, зокрема в електронній пошті, додатках і на безпечних веб-сайтах.\n\nЩоб дізнатися більше про ці сертифікати, зверніться до адміністратора.}other{Адміністратор організації {orgName} установив для вашого робочого профілю центри сертифікації, за допомогою яких зможе відстежувати ваші дії в корпоративній мережі, зокрема в електронній пошті, додатках і на безпечних веб-сайтах.\n\nЩоб дізнатися більше про ці сертифікати, зверніться до адміністратора.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"Третя сторона може відстежувати ваші дії в мережі, зокрема електронне листування, роботу в програмах і на захищених веб-сайтах.\n\nЦе робиться за допомогою довірених облікових даних, установлених на вашому пристрої."</string>
     <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{Перевірити сертифікат}one{Перевірити сертифікати}few{Перевірити сертифікати}many{Перевірити сертифікати}other{Перевірити сертифікати}}"</string>
-    <string name="user_settings_title" msgid="6550866465409807877">"Кілька користувачів"</string>
+    <!-- no translation found for user_settings_title (9208831545558787202) -->
+    <skip />
     <string name="user_list_title" msgid="1387379079186123404">"Користувачі та профілі"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"Додати користувача чи профіль"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"Профіль з обмеженням"</string>
     <string name="user_summary_not_set_up" msgid="4602868481732886115">"Не створено"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1658946988920104613">"Не налаштовано – профіль з обмеженням"</string>
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"Робочий профіль не налаштовано"</string>
-    <!-- no translation found for user_owner (2079206733011361994) -->
-    <skip />
+    <string name="user_owner" msgid="2079206733011361994">"Власник"</string>
     <string name="user_admin" msgid="4024553191395768119">"Адміністратор"</string>
     <string name="user_you" msgid="3070562015202859996">"Ви (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_add_max_count" msgid="3328539978480663740">"Ви додали максимальну кількість користувачів. Щоб додати нового користувача, вилучіть наявного."</string>
@@ -4648,6 +4642,10 @@
     <string name="summary_supported_service" msgid="4320535903444834786">"Ви можете надсилати текстові повідомлення будь-кому, зокрема службам екстреної допомоги. Телефон знову підключиться до мобільної мережі, коли вона стане доступною."</string>
     <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"Обмін повідомленнями через супутник може тривати довше, і ця функція доступна лише в деяких регіонах. На з’єднання із супутником можуть впливати погодні умови й деякі будівлі. Дзвінки через супутник недоступні. Можуть підтримуватися екстрені виклики.\n\nПотрібен деякий час, щоб зміни у вашому обліковому записі відобразилися в налаштуваннях. Щоб дізнатися більше, зверніться до свого оператора мобільного зв’язку."</string>
     <string name="more_about_satellite_messaging" msgid="3385673133561348509">"Докладніше про обмін повідомленнями через супутник"</string>
+    <!-- no translation found for satellite_warning_dialog_title (1610117852475376931) -->
+    <skip />
+    <!-- no translation found for satellite_warning_dialog_content (936419945275934955) -->
+    <skip />
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Точки доступу"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Недоступно, коли підключено до оператора <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -4809,19 +4807,46 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"Інформація про правила роботи"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"Налаштування, якими керує адміністратор вашої організації"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"ГП"</string>
-    <string name="enable_16k_pages" msgid="5009476566957520607">"Запустити з розміром сторінки 16 KБ"</string>
-    <string name="enable_16k_pages_summary" msgid="428117226069445198">"Запустити пристрій із ядром для сторінок 16 КБ"</string>
-    <string name="confirm_enable_16k_pages_title" msgid="6751570067857011642">"Перезапустити з ядром, сумісним зі сторінками розміром 16 КБ?"</string>
-    <string name="confirm_enable_16k_pages_text" msgid="702888115148257215">"ПОПЕРЕДЖЕННЯ. Деякі додатки можуть бути несумісні з цим режимом. Пристрій перезапуститься після підтвердження."</string>
-    <string name="confirm_enable_4k_pages_title" msgid="626987400420355263">"Перезапустити з ядром, сумісним зі сторінками розміром 4 КБ?"</string>
-    <string name="confirm_enable_4k_pages_text" msgid="6168921566226074524">"Пристрій перезапуститься після підтвердження."</string>
+    <!-- no translation found for enable_16k_pages (8001470927566110689) -->
+    <skip />
+    <!-- no translation found for enable_16k_pages_summary (1964363364670306912) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_title (1286925577014793351) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_text (570198382662424714) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_title (3210360137887034659) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_text (155070605667160083) -->
+    <skip />
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"Не вдалося оновити ядро до сумісного зі сторінками розміром 16 КБ."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Застосування змін"</string>
-    <string name="confirm_format_ext4_title" msgid="4453684705528818873">"Переформатувати пристрій на ext4?"</string>
-    <string name="confirm_format_ext4_text" msgid="8164677342487500794">"Опцію 16K для розробників підтримує файлова система ext4. Після підтвердження з пристрою буде стерто всі дані, а файлову систему – змінено на ext4."</string>
-    <string name="format_ext4_failure_toast" msgid="6904611547290793885">"Не вдалося стерти розділ даних і переформатувати на ext4."</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="6338135847153690912">"Потрібне розблокування OEM"</string>
-    <string name="confirm_oem_unlock_for_16k_text" msgid="236718973897424382">"Щоб використовувати опцію 16K для розробників, потрібно активувати на пристрої розблокування OEM. У процесі розблокування OEM із пристрою буде стерто всі користувацькі дані. Активуйте розблокування OEM і повторіть спробу."</string>
+    <!-- no translation found for confirm_format_ext4_title (6696191800594435577) -->
+    <skip />
+    <!-- no translation found for confirm_format_ext4_text (7940372488624630214) -->
+    <skip />
+    <!-- no translation found for format_ext4_failure_toast (8059453995800471549) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (5374451262432025419) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_text (3583604865119937957) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_title (1184703958249093215) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text_short (2894243902906666242) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text (8284806650260868833) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_title (7762533464569818498) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text_short (269039281591806585) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (6208765386837706582) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_channel_name (1658444283036376361) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_action (2309805437430150456) -->
+    <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"Обробник звітів про помилки"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Визначає, який додаток викликається ярликом звіту про помилку на пристрої."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Особисті додатки"</string>
@@ -4885,7 +4910,8 @@
     <string name="media_controls_show_player" msgid="8504571042365814021">"Показати програвач"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"медіа"</string>
     <string name="camera_extensions_fallback_title" msgid="3604579046777004989">"Дозволяти розширення програмного забезпечення для камери"</string>
-    <string name="camera_extensions_fallback_description" msgid="6939818294458854536">"Вмикає програмну реалізацію за умовчанням для розширених функцій камери, таких як відеографія для користувачів із вадами зору."</string>
+    <!-- no translation found for camera_extensions_fallback_description (4306833827773277263) -->
+    <skip />
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Увімкнеться Bluetooth"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"Інтернет"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM-карти"</string>
@@ -4955,6 +4981,8 @@
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Використовувати сервіс друку"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Дозволити кілька користувачів"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"дозволити, кілька, користувач, дозвіл, багато"</string>
+    <!-- no translation found for multiple_users_title_keywords (2395593167746225172) -->
+    <skip />
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Використовувати налагодження через Wi-Fi"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Використовувати параметри графічного драйвера"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"Використовувати нічний екран"</string>
@@ -4977,10 +5005,8 @@
     <string name="enable_2g_title" msgid="8184757884636162942">"Дозволити 2G"</string>
     <string name="enable_2g_summary" msgid="2794534052372565914">"Використання 2G може покращити зв’язок у деяких місцезнаходженнях, однак це менш безпечно. З’єднання 2G завжди можна використовувати для екстрених викликів."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"Оператор <xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> вимагає підключення до мережі 2G"</string>
-    <!-- no translation found for require_cellular_encryption_title (6087085031703089235) -->
-    <skip />
-    <!-- no translation found for require_cellular_encryption_summary (6090569065420631457) -->
-    <skip />
+    <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Дозволяти лише зашифровані мережі"</string>
+    <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"Це безпечніший варіант, але в деяких місцях з’єднання з мобільною мережею може бути обмежене. Екстрені виклики дозволені завжди."</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Усі сервіси"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Показувати сповіщення про доступ до буфера обміну"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"З\'являтиметься сповіщення, коли будь-який додаток отримуватиме доступ до скопійованого вами тексту, зображень чи іншого контенту"</string>
@@ -5204,6 +5230,5 @@
     <string name="force_swcrypto_fallback_summary" msgid="181969966310309701">"Примусове керування ключами DRM для використання програмної криптографії методом \"білого ящика\""</string>
     <string name="fingerprint_acquired_imager_dirty_udfps" msgid="7005042288289506776">"Очистьте екран біля сканера й повторіть спробу"</string>
     <string name="sim_category_converted_sim" msgid="8575548015816988908">"Конвертовано в eSIM-карту. Вийміть і утилізуйте."</string>
-    <!-- no translation found for sync_across_devices_title (3447757705383089345) -->
-    <skip />
+    <string name="sync_across_devices_title" msgid="3447757705383089345">"Синхронізація між пристроями"</string>
 </resources>

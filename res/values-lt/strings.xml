@@ -1810,6 +1810,7 @@
     <string name="app_install_details_group_title" msgid="1172114479073704677">"Parduotuvė"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"Išsami programos informacija"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"Programa įdiegta iš <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
+    <string name="app_install_details_different_initiating_package_summary" msgid="6093306593167176688">"Programa įdiegta iš „<xliff:g id="APP_STORE1">%1$s</xliff:g>“ (per „<xliff:g id="APP_STORE2">%2$s</xliff:g>“)"</string>
     <string name="instant_app_details_summary" msgid="417197491598208216">"Daugiau informacijos apie „<xliff:g id="APP_STORE">%1$s</xliff:g>“"</string>
     <string name="app_ops_running" msgid="6127474473137428721">"Vykdoma"</string>
     <string name="app_ops_never_used" msgid="9038133162371204506">"(Niekada nenaudota)"</string>
@@ -2289,12 +2290,9 @@
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Klausos apar. susiejimas"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"Kitame ekrane palieskite klausos aparatus. Kairiosios ausies ir dešiniosios ausies klausos aparatus gali reikėti susieti atskirai.\n\nĮsitikinkite, kad klausos aparatai įjungti ir paruošti susieti."</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"„<xliff:g id="DEVICE_NAME">%1$s</xliff:g>“ įrenginys aktyvus"</string>
-    <!-- no translation found for accessibility_hearingaid_left_side_device_summary (12349058624943107) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_right_side_device_summary (8645789702686724188) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_left_and_right_side_device_summary (3314103411842694197) -->
-    <skip />
+    <string name="accessibility_hearingaid_left_side_device_summary" msgid="12349058624943107">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, tik kairiojoje pusėje"</string>
+    <string name="accessibility_hearingaid_right_side_device_summary" msgid="8645789702686724188">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, tik dešiniojoje pusėje"</string>
+    <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="3314103411842694197">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, kairiojoje ir dešiniojoje pusėse"</string>
     <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"„<xliff:g id="DEVICE_NAME">%1$s</xliff:g>“ ir dar 1"</string>
     <string name="accessibility_hearing_device_pairing_title" msgid="2701812183769537320">"Naujo įrenginio susiejimas"</string>
     <string name="accessibility_hearing_device_connected_title" msgid="3785140037249487287">"Klausos įrenginiai"</string>
@@ -2573,7 +2571,8 @@
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Pailginti akumuliatoriaus veikimo laiką"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Išjungti įkrovus"</string>
     <string name="battery_saver_sticky_title_percentage" msgid="1178162022087559148">"Išjungti pasiekus <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="battery_saver_sticky_description_new" msgid="6472610662679038342">"Akumuliatoriaus tausojimo priemonė išjungiama, kai akumuliatorius pasiekia <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <!-- no translation found for battery_saver_sticky_description_new (8543277078136947874) -->
+    <skip />
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Įjungti"</string>
@@ -2685,18 +2684,13 @@
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"Įjungta"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"Išjungta"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Prisitaikančio ryšio naudojimas"</string>
-    <!-- no translation found for cellular_security_title (5562899485544677941) -->
-    <skip />
+    <string name="cellular_security_title" msgid="5562899485544677941">"Mobiliojo ryšio tinklo apsauga"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"Tinklo tipas, šifruotė, pranešimų valdikliai"</string>
-    <!-- no translation found for cellular_security_top_intro (6749166804080092892) -->
-    <skip />
-    <!-- no translation found for cellular_security_settings_title (7779141923670352595) -->
-    <skip />
+    <string name="cellular_security_top_intro" msgid="6749166804080092892">"Šie nustatymai padeda apsaugoti skambučius, pranešimus ir duomenis nuo pasenusių ar nešifruotų tinklų, kuriuose gali įvykti duomenų vagystė ar gali būti stebimi duomenys"</string>
+    <string name="cellular_security_settings_title" msgid="7779141923670352595">"Mobiliojo ryšio tinklo apsauga"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"Pranešimai"</string>
-    <!-- no translation found for cellular_security_notifications_controller_title (4853056963523277847) -->
-    <skip />
-    <!-- no translation found for cellular_security_notifications_controller_summary (8339863845393759958) -->
-    <skip />
+    <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"Tinklo pranešimai"</string>
+    <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"Gaukite pranešimą, kai įrenginys prisijungia prie nešifruoto tinklo arba kai tinklas įrašo unikalų įrenginio ar SIM kortelės ID"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"Šifruotė"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"Tinklo kartos"</string>
     <string name="cellular_security_network_generations_summary" msgid="139087814553929402">"Galite konfigūruoti kiekvieną įdėtą SIM kortelę, kad būtų prisijungiama tik prie tinklų, palaikančių 3G, 4G ir 5G. Naudojant SIM kortelę nebus prisijungta prie senesnių, nesaugių 2G tinklų. Taikant šį nustatymą gali būti apribotas ryšys, jei vienintelis pasiekiamas tinklas bus 2G. Kritinės padėties atveju gali būti naudojamas 2G."</string>
@@ -2969,7 +2963,8 @@
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{{orgName} įdiegė jūsų darbo profiliui skirtą sertifikavimo institucijos sertifikatą, kuris gali leisti stebėti jūsų darbo tinklo veiklą, įskaitant el. laiškus, programas ir saugias svetaines.\n\nJei reikia daugiau informacijos apie šį sertifikatą, susisiekite su savo administratoriumi.}one{{orgName} įdiegė jūsų darbo profiliui skirtus sertifikavimo institucijos sertifikatus, kurie gali leisti stebėti jūsų darbo tinklo veiklą, įskaitant el. laiškus, programas ir saugias svetaines.\n\nJei reikia daugiau informacijos apie šiuos sertifikatus, susisiekite su savo administratoriumi.}few{{orgName} įdiegė jūsų darbo profiliui skirtus sertifikavimo institucijos sertifikatus, kurie gali leisti stebėti jūsų darbo tinklo veiklą, įskaitant el. laiškus, programas ir saugias svetaines.\n\nJei reikia daugiau informacijos apie šiuos sertifikatus, susisiekite su savo administratoriumi.}many{{orgName} įdiegė jūsų darbo profiliui skirtus sertifikavimo institucijos sertifikatus, kurie gali leisti stebėti jūsų darbo tinklo veiklą, įskaitant el. laiškus, programas ir saugias svetaines.\n\nJei reikia daugiau informacijos apie šiuos sertifikatus, susisiekite su savo administratoriumi.}other{{orgName} įdiegė jūsų darbo profiliui skirtus sertifikavimo institucijos sertifikatus, kurie gali leisti stebėti jūsų darbo tinklo veiklą, įskaitant el. laiškus, programas ir saugias svetaines.\n\nJei reikia daugiau informacijos apie šiuos sertifikatus, susisiekite su savo administratoriumi.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"Trečioji šalis gali stebėti jūsų tinklo veiklą, įskaitant el. laiškus, programas ir saugias svetaines.\n\nVisa tai galima dėl įrenginyje įdiegtų patikimų prisijungimo duomenų."</string>
     <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{Tikrinti sertifikatą}one{Tikrinti sertifikatus}few{Tikrinti sertifikatus}many{Tikrinti sertifikatus}other{Tikrinti sertifikatus}}"</string>
-    <string name="user_settings_title" msgid="6550866465409807877">"Keli naudotojai"</string>
+    <!-- no translation found for user_settings_title (9208831545558787202) -->
+    <skip />
     <string name="user_list_title" msgid="1387379079186123404">"Naudotojai ir profiliai"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"Pridėti naudotoją ar profilį"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"Ribotas profilis"</string>
@@ -4646,6 +4641,8 @@
     <string name="summary_supported_service" msgid="4320535903444834786">"Galite siųsti teksto pranešimą bet kam, įskaitant pagalbos tarnybas. Telefonas bus iš naujo prijungtas prie mobiliojo ryšio tinklo, kai jis bus pasiekiamas."</string>
     <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"Palydoviniai pranešimai gali užtrukti ilgiau ir būti pasiekiami tik tam tikruose regionuose. Orų sąlygos ir tam tikros struktūros gali turėti įtakos palydovo ryšiui. Skambinti per palydovą negalima. Skambučiai pagalbos numeriu gali būti sujungiami.\n\nGali šiek tiek užtrukti, kol paskyros pakeitimai bus rodomi Nustatymuose. Jei reikia išsamios informacijos, susisiekite su operatoriumi."</string>
     <string name="more_about_satellite_messaging" msgid="3385673133561348509">"Daugiau apie palydovinius pranešimus"</string>
+    <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"Nepavyko įjungti „<xliff:g id="FUNCTION">%1$s</xliff:g>“"</string>
+    <string name="satellite_warning_dialog_content" msgid="936419945275934955">"Jei norite įjungti „<xliff:g id="FUNCTION">%1$s</xliff:g>“, pirmiausia nutraukite palydovinį ryšį"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Prieigos taškų pavadinimai"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"Prieigos taško pavadinimas"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Nepasiekiama, kai prisijungta prie „<xliff:g id="CARRIER">%1$s</xliff:g>“"</string>
@@ -4807,19 +4804,46 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"Darbo politikos informacija"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"Nustatymus tvarko jūsų IT administratorius"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"Grafikos procesorius"</string>
-    <string name="enable_16k_pages" msgid="5009476566957520607">"Paleisti su 16 K puslapio dydžiu"</string>
-    <string name="enable_16k_pages_summary" msgid="428117226069445198">"Paleisti įrenginį su 16 K psl. palaik. branduoliu"</string>
-    <string name="confirm_enable_16k_pages_title" msgid="6751570067857011642">"Paleisti iš naujo naudojant su 16 KB puslapiais suderinamą branduolį?"</string>
-    <string name="confirm_enable_16k_pages_text" msgid="702888115148257215">"PERSPĖJIMAS: kai kurios programos gali būti nesuderinamos su šiuo režimu. Patvirtinus įrenginys bus paleistas iš naujo."</string>
-    <string name="confirm_enable_4k_pages_title" msgid="626987400420355263">"Paleisti iš naujo naudojant su 4 KB puslapiais suderinamą branduolį?"</string>
-    <string name="confirm_enable_4k_pages_text" msgid="6168921566226074524">"Patvirtinus įrenginys bus paleistas iš naujo."</string>
+    <!-- no translation found for enable_16k_pages (8001470927566110689) -->
+    <skip />
+    <!-- no translation found for enable_16k_pages_summary (1964363364670306912) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_title (1286925577014793351) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_text (570198382662424714) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_title (3210360137887034659) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_text (155070605667160083) -->
+    <skip />
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"Nepavyko atnaujinti į su 16 KB puslapiais suderinamą branduolį"</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Pritaikomas pakeitimas"</string>
-    <string name="confirm_format_ext4_title" msgid="4453684705528818873">"Performatuoti įrenginį į „ext4“?"</string>
-    <string name="confirm_format_ext4_text" msgid="8164677342487500794">"Failų sistemoje „ext4“ palaikoma 16 tūkst. kūrėjo parinkčių. Patvirtinus įrenginio duomenys bus panaikinti, o failų sistema bus pakeista į „ext4“."</string>
-    <string name="format_ext4_failure_toast" msgid="6904611547290793885">"Nepavyko performatuoti į „ext4“ ir panaikinti duomenų skaidinio."</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="6338135847153690912">"Būtina panaikinti OĮG nustatytą operatoriaus pasirinkimo ribojimą"</string>
-    <string name="confirm_oem_unlock_for_16k_text" msgid="236718973897424382">"Įrenginyje turi būti panaikintas OĮG nustatytas operatoriaus pasirinkimo ribojimas, kad būtų galima naudoti 16K kūrėjo parinktį. Be to, panaikinant OĮG nustatytą operatoriaus pasirinkimo ribojimą reikės formatuoti naudotojo duomenis. Panaikinkite OĮG nustatytą operatoriaus pasirinkimo ribojimą ir bandykite dar kartą."</string>
+    <!-- no translation found for confirm_format_ext4_title (6696191800594435577) -->
+    <skip />
+    <!-- no translation found for confirm_format_ext4_text (7940372488624630214) -->
+    <skip />
+    <!-- no translation found for format_ext4_failure_toast (8059453995800471549) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (5374451262432025419) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_text (3583604865119937957) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_title (1184703958249093215) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text_short (2894243902906666242) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text (8284806650260868833) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_title (7762533464569818498) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text_short (269039281591806585) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (6208765386837706582) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_channel_name (1658444283036376361) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_action (2309805437430150456) -->
+    <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"Pranešimų apie riktus doroklė"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Nustatoma, kuri programa apdoroja pranešimo apie riktą spartųjį klavišą įrenginyje."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Asmeninė"</string>
@@ -4883,7 +4907,7 @@
     <string name="media_controls_show_player" msgid="8504571042365814021">"Rodyti leistuvę"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"medija"</string>
     <string name="camera_extensions_fallback_title" msgid="3604579046777004989">"Fotoaparato programinės įrangos plėtinių leidimas"</string>
-    <string name="camera_extensions_fallback_description" msgid="6939818294458854536">"Įgalinamas numatytasis išplėstinių fotoaparato funkcijų, pvz., „Eyes Free“ videografijos, programinės įrangos diegimas."</string>
+    <string name="camera_extensions_fallback_description" msgid="4306833827773277263">"Įgalinamas numatytasis išplėstinių fotoaparato funkcijų, pvz., HDR, nakties režimo ar kitų fotoaparato plėtinių, programinės įrangos diegimas."</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bus įjungtas „Bluetooth“"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"Internetas"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM"</string>
@@ -4953,6 +4977,8 @@
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Naudoti spausdinimo paslaugą"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Kelių naudotojų leidimas"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"leisti, keli, naudotojas, leidimas, daug"</string>
+    <!-- no translation found for multiple_users_title_keywords (2395593167746225172) -->
+    <skip />
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Belaidžio ryšio derinimo naudojimas"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Grafikos tvarkyklės nuostatų naudojimas"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"Nakties šviesos naudojimas"</string>
@@ -4975,10 +5001,8 @@
     <string name="enable_2g_title" msgid="8184757884636162942">"Leisti 2G"</string>
     <string name="enable_2g_summary" msgid="2794534052372565914">"2G ne toks saugus, bet kai kur ryšys gali būti geresnis. 2G visada leidžiama naudoti skambučiams pagalbos numeriu."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"„<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g>“ būtinas 2G"</string>
-    <!-- no translation found for require_cellular_encryption_title (6087085031703089235) -->
-    <skip />
-    <!-- no translation found for require_cellular_encryption_summary (6090569065420631457) -->
-    <skip />
+    <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Leisti tik šifruotus tinklus"</string>
+    <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"Tai užtikrina geresnę saugą, bet gali apriboti mobiliojo ryšio tinklo ryšį tam tikrose vietovėse. Skambučiai pagalbos numeriu visada leidžiami."</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Visos paslaugos"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Rodyti iškarpinės prieigą"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Rodyti pranešimą, kai programos pasiekia nukopijuotą tekstą, vaizdus ar kitą turinį"</string>

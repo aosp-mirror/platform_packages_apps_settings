@@ -562,7 +562,7 @@
     <string name="private_space_new_lock_title" msgid="9056139964133004094">"Pilih kunci baharu untuk ruang privasi?"</string>
     <string name="private_space_new_lock_message" msgid="3117703578905489206">"Anda perlu memasukkan PIN, corak atau kata laluan peranti anda pada skrin seterusnya"</string>
     <string name="private_space_auto_lock_title" msgid="8663409382910601261">"Kunci ruang privasi secara automatik"</string>
-    <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"Anda boleh mengunci ruang privasi anda secara automatik jika anda tidak menggunakan peranti anda untuk suatu tempoh masa"</string>
+    <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"Anda boleh mengunci ruang privasi secara automatik jika anda tidak menggunakan peranti untuk suatu tempoh masa"</string>
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"Setiap kali peranti dikunci"</string>
     <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"Selepas 5 minit tanpa aktiviti"</string>
     <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"Hanya selepas peranti dimulakan semula"</string>
@@ -581,7 +581,7 @@
     <string name="private_space_delete_title" msgid="636873505724100006">"Padamkan ruang privasi"</string>
     <string name="private_space_delete_header" msgid="4594429153176776184">"Padamkan ruang privasi?"</string>
     <string name="private_space_delete_summary" msgid="3344372988408565545">"Ruang privasi anda akan dialih keluar daripada peranti. Semua apl dan data peribadi akan dipadamkan. Tindakan ini tidak boleh dibuat asal."</string>
-    <string name="private_space_accounts" msgid="1078277762792056395">"Akaun yang berikut akan dialih keluar daripada ruang privasi anda:"</string>
+    <string name="private_space_accounts" msgid="1078277762792056395">"Akaun yang berikut akan dialih keluar daripada ruang persendirian anda:"</string>
     <string name="private_space_delete_button_label" msgid="1256981385318225002">"Padam"</string>
     <string name="private_space_confirm_deletion_header" msgid="3468651585498942977">"Memadamkan ruang privasi…"</string>
     <string name="private_space_deleted" msgid="7692240901492540053">"Ruang privasi dipadamkan"</string>
@@ -1187,7 +1187,7 @@
     <string name="display_white_balance_title" msgid="2624544323029364713">"Paparkan imbangan putih"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="fold_lock_behavior_title" msgid="786228803694268449">"Terus menggunakan apl semasa dilipat"</string>
-    <string name="disable_game_default_frame_rate_title" msgid="3712908601744143753">"Lumpuhkan kadar bingkai lalai utk permainan"</string>
+    <string name="disable_game_default_frame_rate_title" msgid="3712908601744143753">"Lumpuhkan kadar bingkai lalai untuk permainan"</string>
     <string name="disable_game_default_frame_rate_summary" msgid="4436762704707434225">"Lumpuhkan pengehadan kadar bingkai maksimum untuk permainan pada <xliff:g id="FRAME_RATE">%1$d</xliff:g> Hz."</string>
     <string name="peak_refresh_rate_title" msgid="2056355754210341011">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="3212309985294885790">"Meningkatkan kadar segar semula hingga <xliff:g id="ID_1">%1$d</xliff:g> Hz untuk sesetengah kandungan secara automatik. Meningkatkan penggunaan bateri."</string>
@@ -1392,8 +1392,8 @@
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"Lupakan <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"Semua apl, foto dan data yang disimpan pada <xliff:g id="NAME">^1</xliff:g> ini akan hilang selama-lamanya."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"Sistem termasuk fail yang digunakan untuk menjalankan Android versi <xliff:g id="VERSION">%s</xliff:g>"</string>
-    <string name="storage_os_detail_dialog_system" msgid="1423073052313067844">"Perkara ini termasuk sistem pengendalian anda dan fail yang diperlukan untuk memastikan telefon anda berjalan lancar. Untuk melindungi integriti, fail ini tidak boleh diakses."</string>
-    <string name="storage_other_files_detail_dialog_system" msgid="8241153880150866635">"Perkara ini termasuk cache dan fail sementara lain yang diperlukan oleh sistem pengendalian anda. Anda mungkin melihat perubahan pada jumlah penggunaan storan dari semasa ke semasa."</string>
+    <string name="storage_os_detail_dialog_system" msgid="1423073052313067844">"Perkara ini termasuk sistem pengendalian dan fail yang diperlukan untuk memastikan telefon berjalan lancar. Untuk melindungi integriti, fail ini tidak boleh diakses."</string>
+    <string name="storage_other_files_detail_dialog_system" msgid="8241153880150866635">"Perkara ini termasuk cache dan fail sementara lain yang diperlukan oleh sistem pengendalian. Anda mungkin melihat perubahan jumlah penggunaan storan dari semasa ke semasa."</string>
     <string name="storage_system_label" msgid="8320948583086758295">"Sistem"</string>
     <string name="storage_wizard_guest" msgid="5813419895687733649">"Pengguna mod tetamu tidak boleh memformat kad SD"</string>
     <string name="storage_wizard_format_progress_title" msgid="9170393018855949774">"Memformat <xliff:g id="NAME">^1</xliff:g>..."</string>
@@ -1810,6 +1810,7 @@
     <string name="app_install_details_group_title" msgid="1172114479073704677">"Gedung"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"Butiran apl"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"Apl dipasang daripada <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
+    <string name="app_install_details_different_initiating_package_summary" msgid="6093306593167176688">"Apl dipasang daripada <xliff:g id="APP_STORE1">%1$s</xliff:g> (melalui <xliff:g id="APP_STORE2">%2$s</xliff:g>)"</string>
     <string name="instant_app_details_summary" msgid="417197491598208216">"Maklumat lanjut di <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
     <string name="app_ops_running" msgid="6127474473137428721">"Dijalankan"</string>
     <string name="app_ops_never_used" msgid="9038133162371204506">"(Tidak pernah digunakan)"</string>
@@ -2289,12 +2290,9 @@
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Gandingkan alat bantu pendengaran"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"Pada skrin seterusnya, ketik pada alat bantu pendengaran anda. Anda mungkin perlu menggandingkan telinga kiri dan kanan secara berasingan.\n\nPastikan alat bantu pendengaran anda dihidupkan dan sedia untuk digandingkan."</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> aktif"</string>
-    <!-- no translation found for accessibility_hearingaid_left_side_device_summary (12349058624943107) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_right_side_device_summary (8645789702686724188) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_left_and_right_side_device_summary (3314103411842694197) -->
-    <skip />
+    <string name="accessibility_hearingaid_left_side_device_summary" msgid="12349058624943107">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> / Kiri sahaja"</string>
+    <string name="accessibility_hearingaid_right_side_device_summary" msgid="8645789702686724188">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> / Kanan sahaja"</string>
+    <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="3314103411842694197">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> / Kiri dan kanan"</string>
     <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> +1 lagi"</string>
     <string name="accessibility_hearing_device_pairing_title" msgid="2701812183769537320">"Ganding peranti baharu"</string>
     <string name="accessibility_hearing_device_connected_title" msgid="3785140037249487287">"Peranti pendengaran"</string>
@@ -2573,7 +2571,8 @@
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Panjangkan hayat bateri"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Matikan apabila dicas"</string>
     <string name="battery_saver_sticky_title_percentage" msgid="1178162022087559148">"Matikan semasa <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="battery_saver_sticky_description_new" msgid="6472610662679038342">"Penjimat Bateri akan dimatikan apabila bateri mencecah <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <!-- no translation found for battery_saver_sticky_description_new (8543277078136947874) -->
+    <skip />
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Hidupkan"</string>
@@ -2685,18 +2684,13 @@
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"Hidup"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"Mati"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Gunakan kesambungan boleh suai"</string>
-    <!-- no translation found for cellular_security_title (5562899485544677941) -->
-    <skip />
+    <string name="cellular_security_title" msgid="5562899485544677941">"Keselamatan rangkaian mudah alih"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"Jenis rangkaian, penyulitan, kawalan pemberitahuan"</string>
-    <!-- no translation found for cellular_security_top_intro (6749166804080092892) -->
-    <skip />
-    <!-- no translation found for cellular_security_settings_title (7779141923670352595) -->
-    <skip />
+    <string name="cellular_security_top_intro" msgid="6749166804080092892">"Tetapan ini melindungi panggilan, mesej dan data anda daripada rangkaian sudah lapuk atau tidak disulitkan yang boleh mendedahkan anda kepada kecurian data atau pengawasan"</string>
+    <string name="cellular_security_settings_title" msgid="7779141923670352595">"Keselamatan rangkaian mudah alih"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"Pemberitahuan"</string>
-    <!-- no translation found for cellular_security_notifications_controller_title (4853056963523277847) -->
-    <skip />
-    <!-- no translation found for cellular_security_notifications_controller_summary (8339863845393759958) -->
-    <skip />
+    <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"Pemberitahuan rangkaian"</string>
+    <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"Dapatkan pemberitahuan apabila peranti anda disambungkan kepada rangkaian yang tidak disulitkan atau apabila rangkaian merekodkan ID unik peranti atau SIM anda"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"Penyulitan"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"Penjanaan rangkaian"</string>
     <string name="cellular_security_network_generations_summary" msgid="139087814553929402">"Anda boleh mengkonfigurasikan setiap kad SIM yang dipasang untuk hanya disambungkan kepada rangkaian yang menyokong 3G, 4G dan 5G. SIM tidak akan disambungkan kepada rangkaian 2G yang lebih lama dan tidak selamat. Tetapan ini mungkin mengehadkan kesambungan anda sekiranya satu-satunya rangkaian yang tersedia ialah 2G. Sekiranya berlaku kecemasan, 2G boleh digunakan."</string>
@@ -2969,7 +2963,8 @@
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{{orgName} telah memasang pihak berkuasa sijil untuk profil kerja anda yang mungkin membenarkan pemantauan aktiviti rangkaian kerja, termasuk e-mel, apl dan laman web selamat.\n\nUntuk mendapatkan maklumat lanjut tentang sijil ini, hubungi pentadbir anda.}other{{orgName} telah memasang pihak berkuasa sijil untuk profil kerja anda yang mungkin membenarkan pemantauan aktiviti rangkaian kerja, termasuk e-mel, apl dan laman web selamat.\n\nUntuk mendapatkan maklumat lanjut tentang sijil ini, hubungi pentadbir anda.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"Pihak ketiga berkeupayaan untuk memantau aktiviti rangkaian anda, termasuk e-mel, apl dan laman web selamat.\n\nBukti kelayakan dipercayai yang dipasang pada peranti anda yang membolehkan perkara ini."</string>
     <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{Semak sijil}other{Semak sijil}}"</string>
-    <string name="user_settings_title" msgid="6550866465409807877">"Berbilang pengguna"</string>
+    <!-- no translation found for user_settings_title (9208831545558787202) -->
+    <skip />
     <string name="user_list_title" msgid="1387379079186123404">"Pengguna &amp; profil"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"Tambah pengguna atau profil"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"Profil terhad"</string>
@@ -4243,7 +4238,7 @@
     <string name="emergency_settings_preference_title" msgid="6183455153241187148">"Keselamatan &amp; kecemasan"</string>
     <string name="emergency_dashboard_summary" msgid="401033951074039302">"SOS Kecemasan, maklumat perubatan, makluman"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Navigasi gerak isyarat"</string>
-    <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"Untuk mengakses skrin utama, leret ke atas dari bahagian bawah skrin. Untuk beralih apl, leret ke atas dari bawah, tekan, kemudian lepaskan. Untuk kembali, leret dari sisi kiri atau kanan."</string>
+    <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"Untuk mengakses skrin utama, leret skrin dari bawah ke atas. Untuk beralih apl, leret dari bawah ke atas, tahan, kemudian lepaskan. Untuk kembali, leret dari sisi kiri atau kanan."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Navigasi 3 butang"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"Kembali, pergi ke Skrin Utama dan beralih antara apl menggunakan butang di bahagian bawah skrin."</string>
     <string name="nav_tutorial_button_description" msgid="6880450051535137024">"Butang mulakan tutorial navigasi gerak isyarat. Ketik dua kali untuk mengaktifkan ciri."</string>
@@ -4429,14 +4424,14 @@
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Matikan perkhidmatan ini?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Maklumat yang disimpan seperti kata laluan, kunci laluan, kaedah pembayaran dan maklumat lain tidak akan diisikan apabila anda log masuk. Untuk menggunakan maklumat anda yang disimpan, pilih kata laluan, kunci laluan atau perkhidmatan data."</string>
     <string name="account_dashboard_title_with_passkeys" msgid="648242372086733541">"Kata laluan, kunci laluan &amp; akaun"</string>
     <string name="credman_confirmation_message_new_ui" msgid="6126274509951156460">"&lt;b&gt;Matikan semua perkhidmatan?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Kata laluan, kunci laluan dan maklumat lain yang disimpan tidak akan tersedia untuk autolengkap apabila anda log masuk"</string>
-    <string name="credman_autofill_confirmation_message_new_ui" msgid="6222139222478822267">"&lt;b&gt;Tukarkan perkhidmatan pilihan anda kepada &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Kata laluan baharu, kunci laluan dan maklumat lain akan disimpan di sini mulai sekarang. &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; mungkin menggunakan maklumat pada skrin anda untuk menentukan pengisian data automatik"</string>
+    <string name="credman_autofill_confirmation_message_new_ui" msgid="6222139222478822267">"&lt;b&gt;Tukar perkhidmatan pilihan kepada &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Kata laluan, kunci laluan dan maklumat baharu yang lain akan disimpan di sini mulai sekarang. &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; mungkin menggunakan maklumat pada skrin untuk menentukan pengisian data automatik"</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"Gunakan %1$s?"</string>
     <string name="credman_on_off_switch_content_description" msgid="2930826358220917851">"%1$s dihidupkan/dimatikan"</string>
     <string name="credman_confirmation_turn_off_positive_button" msgid="5678773011513369161">"Matikan"</string>
     <string name="credman_confirmation_change_provider_positive_button" msgid="7732302992885116967">"Ubah"</string>
     <string name="credman_limit_error_msg_title" msgid="1525814645803612135">"Anda hanya boleh menghidupkan 5 perkhidmatan"</string>
     <string name="credman_limit_error_msg" msgid="2521803280130310063">"Matikan sekurang-kurangnya 1 perkhidmatan untuk menambahkan perkhidmatan lain"</string>
-    <string name="credman_main_settings_intro_text" msgid="4981603639240772620">"Pilih perkhidmatan pilihan anda untuk menyimpan data untuk log masuk dan cadangan autolengkap. Hidupkan perkhidmatan tambahan jika anda mahu mereka menyediakan cadangan juga."</string>
+    <string name="credman_main_settings_intro_text" msgid="4981603639240772620">"Pilih perkhidmatan pilihan untuk menyimpan data log masuk dan cadangan autolengkap. Hidupkan perkhidmatan tambahan jika anda mahu perkhidmatan tersebut memberikan cadangan juga."</string>
     <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"%1$s menggunakan maklumat pada skrin anda untuk menentukan pengisian data automatik."</string>
     <string name="credman_error_message_title" msgid="4099557206946333568">"Had kata laluan, kunci laluan dan perkhidmatan data"</string>
     <string name="credman_error_message" msgid="8334797097200415449">"Anda boleh mempunyai hingga 5 kata laluan, kunci laluan dan perkhidmatan data yang aktif pada masa yang sama. Matikan perkhidmatan untuk menambahkan lagi."</string>
@@ -4646,7 +4641,9 @@
     <string name="summary_supported_service" msgid="4320535903444834786">"Anda boleh menghantar teks kepada sesiapa sahaja, termasuk perkhidmatan kecemasan. Telefon anda akan disambungkan semula kepada rangkaian mudah alih jika tersedia."</string>
     <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"Pemesejan satelit mungkin mengambil masa lebih lama dan tersedia di beberapa kawasan sahaja. Cuaca dan struktur tertentu boleh menjejaskan sambungan satelit anda. Panggilan melalui satelit tidak tersedia. Panggilan kecemasan masih boleh disambungkan.\n\nPerubahan pada akaun mungkin memerlukan sedikit masa untuk dipaparkan dalam Tetapan. Hubungi pembawa anda untuk mendapatkan butiran."</string>
     <string name="more_about_satellite_messaging" msgid="3385673133561348509">"Lagi tentang pemesejan satelit"</string>
-    <string name="mobile_network_apn_title" msgid="5582995550142073054">"Nama Titik Capaian (APN)"</string>
+    <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"Tidak dapat menghidupkan <xliff:g id="FUNCTION">%1$s</xliff:g>"</string>
+    <string name="satellite_warning_dialog_content" msgid="936419945275934955">"Untuk menghidupkan <xliff:g id="FUNCTION">%1$s</xliff:g>, tamatkan sambungan satelit dahulu"</string>
+    <string name="mobile_network_apn_title" msgid="5582995550142073054">"Nama Titik Akses"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Tidak tersedia apabila disambungkan ke <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="see_more" msgid="7499355691042812723">"Lihat lagi"</string>
@@ -4682,9 +4679,9 @@
     <string name="sim_action_turn_off" msgid="3506698692916473000">"Matikan"</string>
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"Tidak dapat mengaktifkan SIM"</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"Cuba hidupkan SIM sekali lagi. Jika masalah berlanjutan, mulakan semula peranti anda."</string>
-    <string name="sim_onboarding_dialog_starting_title" msgid="4212945803784596345">"Tetapkan pilihan SIM anda"</string>
-    <string name="sim_onboarding_dialog_starting_msg" msgid="8450391476631265209">"Tetapkan pilihan rangkaian mudah alih anda untuk menggunakan berbilang SIM pada peranti ini"</string>
-    <string name="sim_onboarding_label_sim_title" msgid="273162565849288273">"Labelkan SIM anda"</string>
+    <string name="sim_onboarding_dialog_starting_title" msgid="4212945803784596345">"Tetapkan pilihan SIM"</string>
+    <string name="sim_onboarding_dialog_starting_msg" msgid="8450391476631265209">"Tetapkan pilihan rangkaian mudah alih untuk menggunakan berbilang SIM pada peranti ini"</string>
+    <string name="sim_onboarding_label_sim_title" msgid="273162565849288273">"Labelkan SIM"</string>
     <string name="sim_onboarding_label_sim_msg" msgid="5105859235219529056">"Anda akan melihat label ini semasa membuat panggilan, menghantar teks dan menggunakan data serta dalam Tetapan"</string>
     <string name="sim_onboarding_label_sim_dialog_title" msgid="5839073125605286120">"Label SIM"</string>
     <string name="sim_onboarding_label_sim_dialog_label" msgid="9020433985426525185">"Label"</string>
@@ -4692,11 +4689,11 @@
     <string name="sim_onboarding_select_sim_msg" msgid="5638859405391915048">"Anda boleh menggunakan 2 SIM serentak"</string>
     <string name="sim_onboarding_primary_sim_title" msgid="2793090401371135675">"Tetapkan SIM utama anda"</string>
     <string name="sim_onboarding_primary_sim_msg" msgid="5484656671490558032">"Pilih SIM yang akan digunakan secara lalai untuk panggilan, teks dan data"</string>
-    <string name="primary_sim_title" msgid="2508161011657571566">"SIM utama anda"</string>
+    <string name="primary_sim_title" msgid="2508161011657571566">"SIM utama"</string>
     <string name="primary_sim_calls_title" msgid="4961189133582615685">"Panggilan"</string>
     <string name="primary_sim_texts_title" msgid="1287584042733097749">"Teks"</string>
     <string name="primary_sim_automatic_data_title" msgid="1265528923229642480">"Penukaran data automatik"</string>
-    <string name="primary_sim_automatic_data_msg" msgid="1612203837010785203">"Penggunaan data daripada mana-mana SIM bergantung pada liputan dan ketersediaan"</string>
+    <string name="primary_sim_automatic_data_msg" msgid="1612203837010785203">"Gunakan data daripada salah satu SIM bergantung pada liputan dan ketersediaan"</string>
     <string name="sim_action_restart_dialog_title" msgid="3507413479633430120">"Mulakan semula untuk menggunakan 2 SIM"</string>
     <string name="sim_action_restart_dialog_msg" msgid="4737611046767629774">"Untuk menggunakan 2 SIM serentak, mulakan semula peranti anda, kemudian hidupkan kedua-dua SIM"</string>
     <string name="sim_action_restart_dialog_cancel" msgid="665560106686565624">"Gunakan <xliff:g id="CARRIER_NAME">%1$s</xliff:g> sahaja"</string>
@@ -4807,19 +4804,46 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"Maklumat dasar kerja anda"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"Tetapan diurus oleh pentadbir IT anda"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
-    <string name="enable_16k_pages" msgid="5009476566957520607">"But dengan saiz halaman 16K"</string>
-    <string name="enable_16k_pages_summary" msgid="428117226069445198">"But peranti dengan kernel disokong saiz halaman 16K"</string>
-    <string name="confirm_enable_16k_pages_title" msgid="6751570067857011642">"But semula dengan kernel serasi halaman 16KB?"</string>
-    <string name="confirm_enable_16k_pages_text" msgid="702888115148257215">"AMARAN: Sesetengah aplikasi mungkin tidak serasi dengan mod ini. Peranti akan but semula selepas pengesahan."</string>
-    <string name="confirm_enable_4k_pages_title" msgid="626987400420355263">"But semula dengan kernel serasi halaman 4KB?"</string>
-    <string name="confirm_enable_4k_pages_text" msgid="6168921566226074524">"Peranti akan but semula selepas pengesahan."</string>
+    <!-- no translation found for enable_16k_pages (8001470927566110689) -->
+    <skip />
+    <!-- no translation found for enable_16k_pages_summary (1964363364670306912) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_title (1286925577014793351) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_text (570198382662424714) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_title (3210360137887034659) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_text (155070605667160083) -->
+    <skip />
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"Gagal mengemaskinikan kernel kepada kernel serasi halaman 16KB."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Menggunakan perubahan"</string>
-    <string name="confirm_format_ext4_title" msgid="4453684705528818873">"Format semula peranti kepada ext4?"</string>
-    <string name="confirm_format_ext4_text" msgid="8164677342487500794">"16K pilihan pembangun disokong dengan sistem fail ext4. Peranti akan dihapuskan dan sistem fail akan ditukar kepada ext4 selepas pengesahan."</string>
-    <string name="format_ext4_failure_toast" msgid="6904611547290793885">"Gagal memformat semula dan menghapuskan pemetakan data kepada ext4."</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="6338135847153690912">"Buka kunci OEM diperlukan"</string>
-    <string name="confirm_oem_unlock_for_16k_text" msgid="236718973897424382">"Peranti perlu dibuka kunci OEM sebelum menggunakan pilihan pembangun sebanyak 16K. Buka kunci OEM juga memerlukan pemformatan data pengguna. Sila buka kunci OEM pada peranti dan cuba lagi."</string>
+    <!-- no translation found for confirm_format_ext4_title (6696191800594435577) -->
+    <skip />
+    <!-- no translation found for confirm_format_ext4_text (7940372488624630214) -->
+    <skip />
+    <!-- no translation found for format_ext4_failure_toast (8059453995800471549) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (5374451262432025419) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_text (3583604865119937957) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_title (1184703958249093215) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text_short (2894243902906666242) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text (8284806650260868833) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_title (7762533464569818498) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text_short (269039281591806585) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (6208765386837706582) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_channel_name (1658444283036376361) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_action (2309805437430150456) -->
+    <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"Pengendali laporan pepijat"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Menentukan apl yang mengendalikan pintasan Laporan Pepijat pada peranti anda."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Peribadi"</string>
@@ -4881,7 +4905,7 @@
     <string name="media_controls_show_player" msgid="8504571042365814021">"Tunjukkan pemain"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"media"</string>
     <string name="camera_extensions_fallback_title" msgid="3604579046777004989">"Benarkan sambungan perisian kamera"</string>
-    <string name="camera_extensions_fallback_description" msgid="6939818294458854536">"Mendayakan pelaksanaan perisian lalai bagi ciri kamera lanjutan, seperti videografi Tanpa Lihat."</string>
+    <string name="camera_extensions_fallback_description" msgid="4306833827773277263">"Mendayakan pelaksanaan perisian lalai bagi ciri kamera lanjutan, seperti HDR, Mod Malam atau sambungan kamera yang lain."</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth akan dihidupkan"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"Internet"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM"</string>
@@ -4951,6 +4975,8 @@
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Gunakan perkhidmatan cetakan"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Benarkan berbilang pengguna"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"izinkan, beberapa, pengguna, benarkan, banyak"</string>
+    <!-- no translation found for multiple_users_title_keywords (2395593167746225172) -->
+    <skip />
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Gunakan nyahpepijat wayarles"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Gunakan pilihan pemacu grafik"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"Gunakan Cahaya Malam"</string>
@@ -4973,10 +4999,8 @@
     <string name="enable_2g_title" msgid="8184757884636162942">"Benarkan 2G"</string>
     <string name="enable_2g_summary" msgid="2794534052372565914">"2G kurang selamat, tetapi mungkin meningkatkan sambungan anda di sesetengah lokasi. Untuk panggilan kecemasan, 2G sentiasa dibenarkan."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> memerlukan 2G tersedia"</string>
-    <!-- no translation found for require_cellular_encryption_title (6087085031703089235) -->
-    <skip />
-    <!-- no translation found for require_cellular_encryption_summary (6090569065420631457) -->
-    <skip />
+    <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Hanya benarkan rangkaian yang disulitkan"</string>
+    <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"Penyulitan ini lebih selamat tetapi mungkin mengehadkan sambungan rangkaian mudah alih anda di sesetengah lokasi. Panggilan kecemasan sentiasa dibenarkan."</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Semua perkhidmatan"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Tunjukkan akses papan keratan"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Tunjukkan mesej apabila apl mengakses teks, imej atau kandungan lain yang telah anda salin"</string>

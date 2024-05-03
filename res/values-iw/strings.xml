@@ -1332,7 +1332,8 @@
     <string name="status_eid" msgid="3588471107671992684">"EID"</string>
     <string name="eid_multi_sim" msgid="6551259348909791790">"‏‫EID (חריץ SIM <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>)"</string>
     <string name="imei_multi_sim" msgid="9001570420423929507">"‏IMEI (חריץ SIM ‏<xliff:g id="IMEI_SLOT_ID">%1$d</xliff:g>)"</string>
-    <string name="imei_multi_sim_primary" msgid="7914653040843734282">"‏IMEI (חריץ SIM <xliff:g id="IMEI_SLOT_ID_PRIMARY">%1$d</xliff:g>) (ראשי)"</string>
+    <!-- no translation found for imei_multi_sim_primary (7914653040843734282) -->
+    <skip />
     <string name="view_saved_network" msgid="1232387673095080910">"יש לבחור רשת שמורה כדי להציג"</string>
     <string name="status_imei" msgid="5719752369250485007">"IMEI"</string>
     <string name="status_imei_sv" msgid="6908985558726440951">"IMEI SV"</string>
@@ -1485,7 +1486,7 @@
     <string name="reset_bluetooth_wifi_desc" msgid="4030295669083059711">"‏הפעולה הזו תאפס את כל ההגדרות של חיבורי Wi‑Fi ו-Bluetooth. לא ניתן לבטל את הפעולה הזו."</string>
     <string name="reset_bluetooth_wifi_button_text" msgid="3974098137045963639">"איפוס"</string>
     <string name="reset_bluetooth_wifi_complete_toast" msgid="5893439291030574365">"‏חיבורי Bluetooth ו-Wi‑Fi אופסו"</string>
-    <string name="reset_esim_title" msgid="4194570573425902754">"‏מחיקה של כרטיסי ה-eSIM"</string>
+    <string name="reset_esim_title" msgid="4194570573425902754">"‏מחיקה של כרטיסי eSIM"</string>
     <string name="reset_esim_desc" msgid="6125192435907740751">"‏הפעולה הזו לא תבטל את חבילת השירות הסלולרי. כדי לקבל כרטיס SIM חלופי, עליך ליצור קשר עם הספק."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"איפוס הגדרות"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"לאפס את כל הגדרות הרשת? לא ניתן לבטל את הפעולה הזו."</string>
@@ -1497,8 +1498,7 @@
     <string name="reset_esim_error_title" msgid="6516110227665862295">"‏לא ניתן למחוק את כרטיסי ה-eSIM"</string>
     <string name="reset_esim_error_msg" msgid="8459527827897797168">"‏משהו השתבש וכרטיסי ה-eSIM לא נמחקו.\n\nצריך להפעיל את המכשיר מחדש ולנסות שוב."</string>
     <string name="reset_private_space_delete_title" msgid="2555885198282572990">"מחיקת המרחב הפרטי"</string>
-    <!-- no translation found for reset_private_space_delete_dialog (7506471054091800883) -->
-    <skip />
+    <string name="reset_private_space_delete_dialog" msgid="7506471054091800883">"‏אם יש לך מרחב פרטי במכשיר, הוא יימחק לתמיד וחשבון Google שנוסף למרחב הפרטי שלך יוסר.\n\nגם כל האפליקציות והנתונים שלהן במרחב הפרטי יימחקו לתמיד."</string>
     <string name="main_clear_title" msgid="277664302144837723">"מחיקת כל הנתונים (איפוס להגדרות המקוריות)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"מחיקת כל הנתונים (איפוס לנתוני היצרן)"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"מוזיקה"</li>\n<li>"תמונות"</li>\n<li>"נתוני משתמש אחרים"</li></string>
@@ -1811,6 +1811,8 @@
     <string name="app_install_details_group_title" msgid="1172114479073704677">"חנות"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"פרטי האפליקציה"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"האפליקציה הותקנה מ: <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
+    <!-- no translation found for app_install_details_different_initiating_package_summary (6093306593167176688) -->
+    <skip />
     <string name="instant_app_details_summary" msgid="417197491598208216">"מידע נוסף באפליקציה <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
     <string name="app_ops_running" msgid="6127474473137428721">"פועל"</string>
     <string name="app_ops_never_used" msgid="9038133162371204506">"(מעולם לא נעשה שימוש)"</string>
@@ -2290,12 +2292,9 @@
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"התאמת מכשירי השמיעה"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"במסך הבא, יש להקיש על מכשירי שמיעה. יכול להיות שצריך להתאים את אוזן שמאל ואת אוזן ימין בנפרד.\n\nחשוב לוודא שמכשירי השמיעה מופעלים ומוכנים להתאמה."</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> פעיל"</string>
-    <!-- no translation found for accessibility_hearingaid_left_side_device_summary (12349058624943107) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_right_side_device_summary (8645789702686724188) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_left_and_right_side_device_summary (3314103411842694197) -->
-    <skip />
+    <string name="accessibility_hearingaid_left_side_device_summary" msgid="12349058624943107">"‫<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, אוזן שמאל בלבד"</string>
+    <string name="accessibility_hearingaid_right_side_device_summary" msgid="8645789702686724188">"‫<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, אוזן ימין בלבד"</string>
+    <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="3314103411842694197">"‫<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, אוזן שמאל ואוזן ימין"</string>
     <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ועוד אחד"</string>
     <string name="accessibility_hearing_device_pairing_title" msgid="2701812183769537320">"התאמה של מכשיר חדש"</string>
     <string name="accessibility_hearing_device_connected_title" msgid="3785140037249487287">"מכשירי שמיעה"</string>
@@ -2574,7 +2573,8 @@
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"הארכת חיי הסוללה"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"כיבוי כשהסוללה טעונה"</string>
     <string name="battery_saver_sticky_title_percentage" msgid="1178162022087559148">"השבתה ב-<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="battery_saver_sticky_description_new" msgid="6472610662679038342">"מצב \'חיסכון בסוללה\' כבה כשהסוללה מגיעה ל-<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <!-- no translation found for battery_saver_sticky_description_new (8543277078136947874) -->
+    <skip />
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"הפעלה"</string>
@@ -2686,18 +2686,13 @@
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"מצב פעיל"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"כיבוי"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"שימוש בקישוריות דינמית"</string>
-    <!-- no translation found for cellular_security_title (5562899485544677941) -->
-    <skip />
+    <string name="cellular_security_title" msgid="5562899485544677941">"אבטחת הרשת הסלולרית"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"סוג הרשת, הצפנה, אמצעי בקרה של התראות"</string>
-    <!-- no translation found for cellular_security_top_intro (6749166804080092892) -->
-    <skip />
-    <!-- no translation found for cellular_security_settings_title (7779141923670352595) -->
-    <skip />
+    <string name="cellular_security_top_intro" msgid="6749166804080092892">"ההגדרות האלו עוזרות להגן על השיחות, ההודעות והנתונים שלך מפני רשתות מיושנות או לא מוצפנות שעלולות לחשוף אותך לגניבת נתונים או למעקב"</string>
+    <string name="cellular_security_settings_title" msgid="7779141923670352595">"אבטחת הרשת הסלולרית"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"התראות"</string>
-    <!-- no translation found for cellular_security_notifications_controller_title (4853056963523277847) -->
-    <skip />
-    <!-- no translation found for cellular_security_notifications_controller_summary (8339863845393759958) -->
-    <skip />
+    <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"התראות רשת"</string>
+    <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"‏קבלת התראה כשהמכשיר מתחבר לרשת לא מוצפנת, או כשרשת מתעדת את המכשיר או מזהה כרטיס ה-SIM הייחודי שלך"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"הצפנה"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"דורות של רשתות"</string>
     <string name="cellular_security_network_generations_summary" msgid="139087814553929402">"‏אפשר לקבוע שכל כרטיס SIM שהותקן יתחבר רק לרשתות שתומכות ב-3G, ב-4G וב-5G. כרטיס ה-SIM לא יתחבר לרשתות 2G ישנות ולא מאובטחות. ההגדרה הזו עשויה להגביל את הקישוריות במקרה שהרשת הזמינה היחידה היא 2G. במקרה חירום, ניתן להשתמש ברשת 2G."</string>
@@ -2970,7 +2965,8 @@
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{{orgName} התקין רשות אישורים אחת לפרופיל העבודה שלך. ייתכן שהרשות תאפשר לו לנהל מעקב אחר פעילות רשת בעבודה, כולל אימיילים, אפליקציות ואתרים מאובטחים.\n\nלמידע נוסף לגבי האישור, יש ליצור קשר עם האדמין.}one{{orgName} התקין רשויות אישורים לפרופיל העבודה שלך. ייתכן שהרשויות יאפשרו לו לנהל מעקב אחר פעילות רשת בעבודה, כולל אימיילים, אפליקציות ואתרים מאובטחים.\n\nלמידע נוסף לגבי האישורים, יש ליצור קשר עם האדמין.}two{{orgName} התקין רשויות אישורים לפרופיל העבודה שלך. ייתכן שהרשויות יאפשרו לו לנהל מעקב אחר פעילות רשת בעבודה, כולל אימיילים, אפליקציות ואתרים מאובטחים.\n\nלמידע נוסף לגבי האישורים, יש ליצור קשר עם האדמין.}other{{orgName} התקין רשויות אישורים לפרופיל העבודה שלך. ייתכן שהרשויות יאפשרו לו לנהל מעקב אחר פעילות רשת בעבודה, כולל אימיילים, אפליקציות ואתרים מאובטחים.\n\nלמידע נוסף לגבי האישורים, יש ליצור קשר עם האדמין.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"צד שלישי מסוגל לעקוב אחר הפעילות שלך ברשת, כולל הודעות אימייל, אפליקציות ואתרים מאובטחים.\n\nאישור מהימן המותקן במכשיר מאפשר זאת."</string>
     <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{בדיקת אישור אחד}one{בדיקת אישורים}two{בדיקת אישורים}other{בדיקת אישורים}}"</string>
-    <string name="user_settings_title" msgid="6550866465409807877">"משתמשים מרובים"</string>
+    <!-- no translation found for user_settings_title (9208831545558787202) -->
+    <skip />
     <string name="user_list_title" msgid="1387379079186123404">"משתמשים ופרופילים"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"הוספת משתמש או פרופיל"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"פרופיל מוגבל"</string>
@@ -4452,7 +4448,7 @@
     <string name="location_indicator_settings_title" msgid="6655916258720093451">"אינדיקטור מיקום של שורת סטטוס"</string>
     <string name="location_indicator_settings_description" msgid="2888022085372804021">"הצגת כל המיקומים, כולל רשת וקישוריות"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"‏אילוץ הרצה מלאה של מדידות GNSS"</string>
-    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"‏מעקב אחר כל מערכות הניווט והתדרים של GNSS ללא מחזור פעילות"</string>
+    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"‏מעקב אחר כל מערכות הניווט והתדרים של GNSS ללא מחזור פעולה"</string>
     <string name="input_method_category" msgid="2252659253631639005">"שיטת קלט"</string>
     <string name="stylus_handwriting" msgid="2154591374132794563">"כתיבה ידנית בסטיילוס"</string>
     <string name="stylus_handwriting_summary" msgid="6333425895172696950">"‏כשההגדרה מופעלת, שיטת הקלט הנוכחית מקבלת MotionEvent מהסטיילוס כשהמיקוד הוא על עורך."</string>
@@ -4647,6 +4643,10 @@
     <string name="summary_supported_service" msgid="4320535903444834786">"אפשר לשלוח הודעות טקסט לכל אחד, כולל לשירותי החירום. הטלפון יתחבר מחדש לרשת סלולרית כשהיא תהיה זמינה."</string>
     <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"העברת הודעות באמצעות לוויין אורכת זמן רב יותר וזמינה רק בחלק מהאזורים. מזג אוויר ומבנים מסוימים עשויים להשפיע על חיבור הלוויין. אי אפשר להתקשר באמצעות לוויין. יכול להיות שאפשר לבצע שיחות חירום.\n\nיכול להיות שהשינויים בחשבון יופיעו ב\'הגדרות\' לאחר זמן מה. למידע נוסף, ניתן לפנות לספק הסלולרי."</string>
     <string name="more_about_satellite_messaging" msgid="3385673133561348509">"מידע נוסף על העברת הודעות באמצעות לוויין"</string>
+    <!-- no translation found for satellite_warning_dialog_title (1610117852475376931) -->
+    <skip />
+    <!-- no translation found for satellite_warning_dialog_content (936419945275934955) -->
+    <skip />
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"‏שמות של נקודות גישה (APN)"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"לא זמין כשהמכשיר מחובר ל-<xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -4808,19 +4808,46 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"פרטי המדיניות של פרופיל העבודה"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"‏הגדרות שעליהן אחראי מנהל ה-IT"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
-    <string name="enable_16k_pages" msgid="5009476566957520607">"‏הפעלה בגודל דף של 16K"</string>
-    <string name="enable_16k_pages_summary" msgid="428117226069445198">"‏הפעלת המכשיר באמצעות ליבה נתמכת בגודל דף של 16K"</string>
-    <string name="confirm_enable_16k_pages_title" msgid="6751570067857011642">"‏להפעיל מחדש עם ליבה (kernel) תואמת לדפים של 16KB?"</string>
-    <string name="confirm_enable_16k_pages_text" msgid="702888115148257215">"אזהרה: יכול להיות שאפליקציות מסוימות לא תואמות למצב הזה. המכשיר יופעל מחדש לאחר האישור."</string>
-    <string name="confirm_enable_4k_pages_title" msgid="626987400420355263">"‏להפעיל מחדש עם ליבה (kernel) תואמת לדפים של 4KB?"</string>
-    <string name="confirm_enable_4k_pages_text" msgid="6168921566226074524">"המכשיר יופעל מחדש לאחר האישור."</string>
+    <!-- no translation found for enable_16k_pages (8001470927566110689) -->
+    <skip />
+    <!-- no translation found for enable_16k_pages_summary (1964363364670306912) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_title (1286925577014793351) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_text (570198382662424714) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_title (3210360137887034659) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_text (155070605667160083) -->
+    <skip />
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"‏עדכון הליבה (kernel) התואמת לדפים של 16KB נכשל."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"השינויים מתעדכנים"</string>
-    <string name="confirm_format_ext4_title" msgid="4453684705528818873">"‏לפרמט מחדש את המכשיר ל-ext4?"</string>
-    <string name="confirm_format_ext4_text" msgid="8164677342487500794">"‏האפשרות של 16K למפתחים נתמכת במערכת הקבצים ext4. לאחר האישור, נתוני המכשיר יאופסו ומערכת הקבצים תוחלף ל-ext4."</string>
-    <string name="format_ext4_failure_toast" msgid="6904611547290793885">"‏הניסיון לפרמט מחדש את המכשיר ולאפס את מחיצת הנתונים ל-ext4 נכשל."</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="6338135847153690912">"‏נדרשת ביטול נעילת OEM (יצרן ציוד מקורי)"</string>
-    <string name="confirm_oem_unlock_for_16k_text" msgid="236718973897424382">"‏צריך לבטל את נעילת ה-OEM במכשיר לפני השימוש באפשרות של 16K למפתחים. ביטול נעילת ה-OEM ידרוש גם פירמוט של נתוני המשתמש. צריך לבטל את נעילת ה-OEM של המכשיר ולנסות שוב."</string>
+    <!-- no translation found for confirm_format_ext4_title (6696191800594435577) -->
+    <skip />
+    <!-- no translation found for confirm_format_ext4_text (7940372488624630214) -->
+    <skip />
+    <!-- no translation found for format_ext4_failure_toast (8059453995800471549) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (5374451262432025419) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_text (3583604865119937957) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_title (1184703958249093215) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text_short (2894243902906666242) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text (8284806650260868833) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_title (7762533464569818498) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text_short (269039281591806585) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (6208765386837706582) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_channel_name (1658444283036376361) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_action (2309805437430150456) -->
+    <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"טיפול בדוחות על באגים"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"הגדרה זו קובעת איזו אפליקציה מטפלת במקש הקיצור של הדוח על הבאג במכשיר."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"אישי"</string>
@@ -4883,7 +4910,8 @@
     <string name="media_controls_show_player" msgid="8504571042365814021">"הצגת הנגן"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"מדיה"</string>
     <string name="camera_extensions_fallback_title" msgid="3604579046777004989">"הפעלת תוספים לתוכנה של המצלמה"</string>
-    <string name="camera_extensions_fallback_description" msgid="6939818294458854536">"האפשרות הזו מפעילה את הטמעת התוכנה שמוגדרת כברירת מחדל וקשורה לתכונות המתקדמות של המצלמה, כמו צילום וידאו ללא שימוש בראייה."</string>
+    <!-- no translation found for camera_extensions_fallback_description (4306833827773277263) -->
+    <skip />
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"‏Bluetooth יופעל"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"אינטרנט"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"‏כרטיסי SIM"</string>
@@ -4953,6 +4981,8 @@
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"שימוש בשירות הדפסה"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"הרשאה למשתמשים מרובים"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"אפשר, משתמשים, מרובים, אישור, רבים"</string>
+    <!-- no translation found for multiple_users_title_keywords (2395593167746225172) -->
+    <skip />
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"ניפוי באגים אלחוטי"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"שימוש בהעדפות של מנהל ההתקן לגרפיקה"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"שימוש בתאורת לילה"</string>
@@ -4975,10 +5005,8 @@
     <string name="enable_2g_title" msgid="8184757884636162942">"‏אישור שימוש ב-2G"</string>
     <string name="enable_2g_summary" msgid="2794534052372565914">"‏רמת האבטחה של רשתות 2G נמוכה יותר, אבל הן עשויות לשפר את החיבור שלך במיקומים מסוימים. לרשתות 2G תמיד ניתנת הרשאה כשצריך לבצע שיחות חירום."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"‏לצורך זמינות ב-<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> נדרשת רשת 2G"</string>
-    <!-- no translation found for require_cellular_encryption_title (6087085031703089235) -->
-    <skip />
-    <!-- no translation found for require_cellular_encryption_summary (6090569065420631457) -->
-    <skip />
+    <string name="require_cellular_encryption_title" msgid="6087085031703089235">"מתן הרשאה לרשתות מוצפנות בלבד"</string>
+    <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"הפעולה הזו מאובטחת יותר אך עשויה להגביל את החיבור שלך לרשת הסלולרית במקומות מסוימים. תמיד אפשר לבצע שיחת חירום."</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"כל השירותים"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"הצגת גישה ללוח העריכה"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"הצגת הודעה בזמן גישה של אפליקציות לטקסט, לתמונות או לכל תוכן אחר שהעתקת"</string>

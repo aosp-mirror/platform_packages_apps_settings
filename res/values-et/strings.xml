@@ -1393,7 +1393,7 @@
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"Kõik üksusele <xliff:g id="NAME">^1</xliff:g> salvestatud rakendused, fotod ja andmed kaovad jäädavalt."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"Jaotis Süsteem hõlmab Androidi versiooni <xliff:g id="VERSION">%s</xliff:g> käitamiseks vajalikke faile"</string>
     <string name="storage_os_detail_dialog_system" msgid="1423073052313067844">"See hõlmab operatsioonisüsteemi ja teie telefoni sujuvaks tööks vajalikke faile. Failide terviklikkuse kaitsmiseks ei ole neile võimalik juurde pääseda."</string>
-    <string name="storage_other_files_detail_dialog_system" msgid="8241153880150866635">"See hõlmab vahemälu ja teisi teie operatsioonisüsteemi puhul vajalikke ajutisi faile. Aja jooksul võite märgata kasutatavas salvestusruumis muudatusi."</string>
+    <string name="storage_other_files_detail_dialog_system" msgid="8241153880150866635">"See hõlmab vahemälu ja teisi teie operatsioonisüsteemi puhul vajalikke ajutisi faile. Aja jooksul võite märgata kasutatavas salvestusruumi mahus muudatusi."</string>
     <string name="storage_system_label" msgid="8320948583086758295">"Süsteem"</string>
     <string name="storage_wizard_guest" msgid="5813419895687733649">"Külalisrež. kasutajad ei saa SD-kaarte vormindada"</string>
     <string name="storage_wizard_format_progress_title" msgid="9170393018855949774">"Üksuse <xliff:g id="NAME">^1</xliff:g> vormindamine …"</string>
@@ -1810,6 +1810,7 @@
     <string name="app_install_details_group_title" msgid="1172114479073704677">"Pood"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"Rakenduse üksikasjad"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"Rakendus installiti poest <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
+    <string name="app_install_details_different_initiating_package_summary" msgid="6093306593167176688">"Rakendus installiti poest <xliff:g id="APP_STORE1">%1$s</xliff:g> (poe <xliff:g id="APP_STORE2">%2$s</xliff:g> kaudu)"</string>
     <string name="instant_app_details_summary" msgid="417197491598208216">"Lisateavet leiate teenusest <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
     <string name="app_ops_running" msgid="6127474473137428721">"Töötab"</string>
     <string name="app_ops_never_used" msgid="9038133162371204506">"(Pole kasutatud)"</string>
@@ -2289,12 +2290,9 @@
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Kuuldeaparaatide sidumine"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"Puudutage järgmisel kuval oma kuuldeaparaate. Võib juhtuda, et peate vasaku ja parema kõrva eraldi siduma.\n\nVeenduge, et kuuldeaparaadid oleksid sisse lülitatud ja sidumiseks valmis."</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> on aktiivne"</string>
-    <!-- no translation found for accessibility_hearingaid_left_side_device_summary (12349058624943107) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_right_side_device_summary (8645789702686724188) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_left_and_right_side_device_summary (3314103411842694197) -->
-    <skip />
+    <string name="accessibility_hearingaid_left_side_device_summary" msgid="12349058624943107">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> / ainult vasak"</string>
+    <string name="accessibility_hearingaid_right_side_device_summary" msgid="8645789702686724188">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> / ainult parem"</string>
+    <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="3314103411842694197">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> / vasak ja parem"</string>
     <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ja veel üks"</string>
     <string name="accessibility_hearing_device_pairing_title" msgid="2701812183769537320">"Uue seadme sidumine"</string>
     <string name="accessibility_hearing_device_connected_title" msgid="3785140037249487287">"Kuuldeseadmed"</string>
@@ -2573,7 +2571,8 @@
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Aku tööea pikendamine"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Lülita välja, kui aku on täis laetud"</string>
     <string name="battery_saver_sticky_title_percentage" msgid="1178162022087559148">"Lülita välja <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> juures"</string>
-    <string name="battery_saver_sticky_description_new" msgid="6472610662679038342">"Akusäästja lülitub välja, kui aku laetuse tase on <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <!-- no translation found for battery_saver_sticky_description_new (8543277078136947874) -->
+    <skip />
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Lülita sisse"</string>
@@ -2685,18 +2684,13 @@
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"Sees"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"Väljas"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Kasuta adaptiivset ühenduvust"</string>
-    <!-- no translation found for cellular_security_title (5562899485544677941) -->
-    <skip />
+    <string name="cellular_security_title" msgid="5562899485544677941">"Mobiilsidevõrgu turve"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"Võrgu tüüp, krüpteerimine, märguannete juhtnupud"</string>
-    <!-- no translation found for cellular_security_top_intro (6749166804080092892) -->
-    <skip />
-    <!-- no translation found for cellular_security_settings_title (7779141923670352595) -->
-    <skip />
+    <string name="cellular_security_top_intro" msgid="6749166804080092892">"Need seaded aitavad kaitsta teie kõnesid, sõnumeid ja andmeid aegunud või krüpteerimata võrkude eest, mis võivad tuua teie jaoks kaasa andmete varguse või jälgimise ohu"</string>
+    <string name="cellular_security_settings_title" msgid="7779141923670352595">"Mobiilsidevõrgu turve"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"Märguanded"</string>
-    <!-- no translation found for cellular_security_notifications_controller_title (4853056963523277847) -->
-    <skip />
-    <!-- no translation found for cellular_security_notifications_controller_summary (8339863845393759958) -->
-    <skip />
+    <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"Võrgu märguanded"</string>
+    <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"Saate märguande, kui teie seade ühendub krüpteerimata võrguga või kui võrk salvestab teie kordumatu seadme või SIM-i ID"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"Krüpteerimine"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"Võrgugeneratsioonid"</string>
     <string name="cellular_security_network_generations_summary" msgid="139087814553929402">"Saate konfigureerida iga installitud SIM-kaardi nii, et see loob ühenduse ainult võrkudega, mis toetavad 3G-d, 4G-d ja 5G-d. SIM-kaart ei loo ühendust vanemate, ebaturvaliste 2G-võrkudega. See seade võib teie ühendust piirata juhul, kui ainus saadaolev võrk on 2G. 2G-d võidakse kasutada hädaolukordades."</string>
@@ -2969,15 +2963,15 @@
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{{orgName} installis teie tööprofiilile sertifikaadi volituse, mis võib lubada sellel jälgida tegevusi töökoha võrgus (sh meilid, rakendused ja turvalised veebisaidid).\n\nSelle sertifikaadi kohta lisateabe saamiseks võtke ühendust administraatoriga.}other{{orgName} installis teie tööprofiilile sertifikaadi volitused, mis võivad lubada sellel jälgida tegevusi töökoha võrgus (sh meilid, rakendused ja turvalised veebisaidid).\n\nNende sertifikaatide kohta lisateabe saamiseks võtke ühendust administraatoriga.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"Kolmas osapool saab jälgida teie tegevust võrgus, sh meile, rakendusi ja turvalisi veebisaite.\n\nSeda võimaldab teie seadmesse installitud usaldusväärne mandaat."</string>
     <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{Kontrollige sertifikaati}other{Kontrollige sertifikaate}}"</string>
-    <string name="user_settings_title" msgid="6550866465409807877">"Mitu kasutajat"</string>
+    <!-- no translation found for user_settings_title (9208831545558787202) -->
+    <skip />
     <string name="user_list_title" msgid="1387379079186123404">"Kasutajad ja profiilid"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"Lisa kasutaja või profiil"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"Piiratud profiil"</string>
     <string name="user_summary_not_set_up" msgid="4602868481732886115">"Pole seadistatud"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1658946988920104613">"Pole seadistatud – piiratud profiil"</string>
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"Seadistamata – tööprofiil"</string>
-    <!-- no translation found for user_owner (2079206733011361994) -->
-    <skip />
+    <string name="user_owner" msgid="2079206733011361994">"Omanik"</string>
     <string name="user_admin" msgid="4024553191395768119">"Administraator"</string>
     <string name="user_you" msgid="3070562015202859996">"Teie (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_add_max_count" msgid="3328539978480663740">"Rohkem kasutajaid ei saa lisada. Uue lisamiseks eemaldage mõni kasutaja."</string>
@@ -4647,6 +4641,8 @@
     <string name="summary_supported_service" msgid="4320535903444834786">"Saate sõnumeid saata kellele tahes, sealhulgas hädaabiteenustele. Teie telefon loob uuesti ühenduse mobiilsidevõrguga, kui see on saadaval."</string>
     <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"Satellidipõhine sõnumside võib võtta kauem aega ja on saadaval ainult teatud piirkondades. Ilm ja teatud struktuurid võivad mõjutada teie satelliidiühendust. Satelliidi kaudu helistamine pole saadaval. Hädaabikõned võivad siiski toimida.\n\nKontol tehtud muudatuste jõustumiseks seadetes võib kuluda veidi aega. Lisateavet küsige operaatorilt."</string>
     <string name="more_about_satellite_messaging" msgid="3385673133561348509">"Lisateave satellidipõhise sõnumside kohta"</string>
+    <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"Funktsiooni <xliff:g id="FUNCTION">%1$s</xliff:g> ei saa sisse lülitada"</string>
+    <string name="satellite_warning_dialog_content" msgid="936419945275934955">"Funktsiooni <xliff:g id="FUNCTION">%1$s</xliff:g> sisselülitamiseks katkestage esmalt satelliitühendus"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Pääsupunktide nimed"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Pole saadaval, kui on ühendus on loodud operaatoriga <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -4692,7 +4688,7 @@
     <string name="sim_onboarding_select_sim_title" msgid="5895262188167744055">"Kasutamiseks SIM-ide valimine"</string>
     <string name="sim_onboarding_select_sim_msg" msgid="5638859405391915048">"Saate korraga kasutada kahte SIM-i"</string>
     <string name="sim_onboarding_primary_sim_title" msgid="2793090401371135675">"Peamiste SIM-ide määramine"</string>
-    <string name="sim_onboarding_primary_sim_msg" msgid="5484656671490558032">"Valige, milliseid SIM-e kõnede, tekstisõnumite ja andmeside jaoks vaikimisi kasutada"</string>
+    <string name="sim_onboarding_primary_sim_msg" msgid="5484656671490558032">"Valige, milliseid SIM-e kõnede, tekstsõnumite ja andmeside jaoks vaikimisi kasutada"</string>
     <string name="primary_sim_title" msgid="2508161011657571566">"Teie peamised SIM-id"</string>
     <string name="primary_sim_calls_title" msgid="4961189133582615685">"Kõned"</string>
     <string name="primary_sim_texts_title" msgid="1287584042733097749">"Tekstsõnumid"</string>
@@ -4808,19 +4804,46 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"Teie tööeeskirjade teave"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"Seadeid haldab teie IT-administraator"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
-    <string name="enable_16k_pages" msgid="5009476566957520607">"Käivita 16 kB lehesuurusega"</string>
-    <string name="enable_16k_pages_summary" msgid="428117226069445198">"Seadme käivitamine 16 kB lehesuuruse toega tuumaga"</string>
-    <string name="confirm_enable_16k_pages_title" msgid="6751570067857011642">"Kas taaskäivitada 16 kB lehtedega ühilduva tuumaga?"</string>
-    <string name="confirm_enable_16k_pages_text" msgid="702888115148257215">"HOIATUS! Mõni rakendus ei pruugi selle režiimiga ühilduda. Seade taaskäivitatakse pärast kinnitamist."</string>
-    <string name="confirm_enable_4k_pages_title" msgid="626987400420355263">"Kas taaskäivitada 4 kB lehtedega ühilduva tuumaga?"</string>
-    <string name="confirm_enable_4k_pages_text" msgid="6168921566226074524">"Seade taaskäivitatakse pärast kinnitamist."</string>
+    <!-- no translation found for enable_16k_pages (8001470927566110689) -->
+    <skip />
+    <!-- no translation found for enable_16k_pages_summary (1964363364670306912) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_title (1286925577014793351) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_text (570198382662424714) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_title (3210360137887034659) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_text (155070605667160083) -->
+    <skip />
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"Ei õnnestunud tuuma 16 kB lehtedega ühilduvale tuumale värskendada."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Muudatuse rakendamine"</string>
-    <string name="confirm_format_ext4_title" msgid="4453684705528818873">"Kas vormindada seade ümber ext4-ks?"</string>
-    <string name="confirm_format_ext4_text" msgid="8164677342487500794">"16K arendaja valikut toetab ext4 failisüsteem. Pärast kinnitamist seade kustutatakse ja failisüsteemiks muudetakse ext4."</string>
-    <string name="format_ext4_failure_toast" msgid="6904611547290793885">"Andmete sektsiooni ümbervormindamine ja kustutamine ext4-le ebaõnnestus."</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="6338135847153690912">"OEM-i võrguluku eemaldamine on nõutav"</string>
-    <string name="confirm_oem_unlock_for_16k_text" msgid="236718973897424382">"OEM peab olema seadme võrguluku eemaldanud, enne kui saab kasutada arendaja valikut 16K. OEM-i võrguluku eemaldamisel tuleb ka kasutaja andmed vormindada. Paluge OEM-il seadme võrgulukk eemaldada ja proovige uuesti."</string>
+    <!-- no translation found for confirm_format_ext4_title (6696191800594435577) -->
+    <skip />
+    <!-- no translation found for confirm_format_ext4_text (7940372488624630214) -->
+    <skip />
+    <!-- no translation found for format_ext4_failure_toast (8059453995800471549) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (5374451262432025419) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_text (3583604865119937957) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_title (1184703958249093215) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text_short (2894243902906666242) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text (8284806650260868833) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_title (7762533464569818498) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text_short (269039281591806585) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (6208765386837706582) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_channel_name (1658444283036376361) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_action (2309805437430150456) -->
+    <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"Veaaruannete töötleja"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Määrab, milline rakendus kasutab teie seadmes veaaruannete otseteed."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Isiklik"</string>
@@ -4882,7 +4905,7 @@
     <string name="media_controls_show_player" msgid="8504571042365814021">"Kuva pleier"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"meedia"</string>
     <string name="camera_extensions_fallback_title" msgid="3604579046777004989">"Luba kaamera tarkvaralaiendused"</string>
-    <string name="camera_extensions_fallback_description" msgid="6939818294458854536">"Lubab kaamera täiustatud funktsioonide (nt vaegnägijate videograafia) vaiketarkvararakenduse."</string>
+    <string name="camera_extensions_fallback_description" msgid="4306833827773277263">"Lubab kaamera täiustatud funktsioonide (nt HDR, öörežiim) või muude kaameralaienduste vaikimisi haldamise tarkvara abil."</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth lülitub sisse"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"Internet"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM-id"</string>
@@ -4952,6 +4975,8 @@
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Printimisteenuse kasutamine"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Luba mitu kasutajat"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"luba, lubamine, mitu, kasutaja, kasutajat"</string>
+    <!-- no translation found for multiple_users_title_keywords (2395593167746225172) -->
+    <skip />
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Juhtmevaba silumise kasutamine"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Graafikadraiveri eelistuste kasutamine"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"Kasuta öövalgust"</string>
@@ -4974,10 +4999,8 @@
     <string name="enable_2g_title" msgid="8184757884636162942">"Luba 2G"</string>
     <string name="enable_2g_summary" msgid="2794534052372565914">"2G on vähem turvaline, kuid võib mõnes asukohas parandada ühendust. Hädaabikõnede puhul on 2G alati lubatud."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> nõuab 2G-d"</string>
-    <!-- no translation found for require_cellular_encryption_title (6087085031703089235) -->
-    <skip />
-    <!-- no translation found for require_cellular_encryption_summary (6090569065420631457) -->
-    <skip />
+    <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Luba ainult krüpteeritud võrgud"</string>
+    <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"See on turvalisem, kuid võib mõnedes asukohtades teie mobiilsidevõrgu ühendust piirata. Hädaabikõned on alati lubatud."</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Kõik teenused"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Kuva juurdepääs lõikelauale"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Kui rakendused pääsevad juurde kopeeritud tekstile, piltidele või muule sisule, kuvatakse teade"</string>
@@ -5201,6 +5224,5 @@
     <string name="force_swcrypto_fallback_summary" msgid="181969966310309701">"DRM-i võtmehaldust sunnitakse tarkvarapõhist hämarat krüptosüsteemi kasutama"</string>
     <string name="fingerprint_acquired_imager_dirty_udfps" msgid="7005042288289506776">"Puhastage ekraani anduri ümbruses ja proovige uuesti"</string>
     <string name="sim_category_converted_sim" msgid="8575548015816988908">"Teisendati eSIM-iks. Eemaldage ja visake ära."</string>
-    <!-- no translation found for sync_across_devices_title (3447757705383089345) -->
-    <skip />
+    <string name="sync_across_devices_title" msgid="3447757705383089345">"Seadmete vahel sünkroonimine"</string>
 </resources>

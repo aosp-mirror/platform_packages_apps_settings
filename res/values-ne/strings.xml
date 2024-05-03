@@ -1223,7 +1223,7 @@
     <string name="night_display_summary_on_auto_mode_custom" msgid="2096677025343425755">"<xliff:g id="ID_1">%1$s</xliff:g> मा स्वतः निष्क्रिय हुनेछ"</string>
     <string name="night_display_summary_on_auto_mode_twilight" msgid="8070517472000680361">"सूर्योदयको बेला स्वतः निष्क्रिय हुनेछ"</string>
     <string name="night_display_not_currently_on" msgid="6600205753103093827">"रात्रि प्रकाश हाल सक्रिय छैन"</string>
-    <string name="twilight_mode_location_off_dialog_message" msgid="4559150893687124801">"सूर्यास्त र सूर्योदयको समय निर्धारण गर्न डिभाइसको लोकेसन सर्भिस सक्रिय गर्नु पर्ने हुन्छ।"</string>
+    <string name="twilight_mode_location_off_dialog_message" msgid="4559150893687124801">"सूर्यास्त र सूर्योदयको समय निर्धारण गर्न डिभाइसको लोकेसन सर्भिस अन गर्नु पर्ने हुन्छ।"</string>
     <string name="twilight_mode_launch_location" msgid="7799112373591153956">"लोकेसन सेटिङ"</string>
     <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"अहिले नै अन गर्नुहोस्"</string>
     <string name="dark_ui_activation_off_manual" msgid="2395333709291250065">"अहिले नै अफ गर्नुहोस्"</string>
@@ -1639,10 +1639,10 @@
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"आफ्नो पासवर्ड बिर्सनुभयो?"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"आफ्नो ढाँचा बिर्सनुभयो?"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"आफ्नो PIN बिर्सनुभयो?"</string>
-    <string name="lockpassword_confirm_your_pattern_generic" msgid="7401165571170203743">"जारी राख्न आफ्नो प्याटर्न कोर्नुहोस्"</string>
+    <string name="lockpassword_confirm_your_pattern_generic" msgid="7401165571170203743">"जारी राख्न आफ्नो प्याटर्न हाल्नुहोस्"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="8990266101852808091">"जारी राख्न आफ्नो PIN हाल्नुहोस्"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="8823867445451497224">"जारी राख्न आफ्नो पासवर्ड हाल्नुहोस्"</string>
-    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="7003851856761939690">"जारी राख्न आफ्नो कार्य प्रोफाइलको प्याटर्न कोर्नुहोस्"</string>
+    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="7003851856761939690">"जारी राख्न आफ्नो कार्य प्रोफाइलको प्याटर्न हाल्नुहोस्"</string>
     <string name="lockpassword_confirm_your_pin_generic_profile" msgid="6524208128570235127">"जारी राख्नका लागि आफ्नो कार्य प्रोफाइलको PIN हाल्नुहोस्"</string>
     <string name="lockpassword_confirm_your_password_generic_profile" msgid="5918738487760814147">"जारी राख्नका लागि आफ्नो कार्य प्रोफाइलको पासवर्ड प्रविष्टि गर्नुहोस्"</string>
     <string name="lockpassword_strong_auth_required_device_pattern" msgid="113817518413715557">"थप सुरक्षाका लागि आफ्नो डिभाइसको ढाँचा प्रयोग गर्नुहोस्‌"</string>
@@ -1810,6 +1810,7 @@
     <string name="app_install_details_group_title" msgid="1172114479073704677">"स्टोर"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"एपका विवरणहरू"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"<xliff:g id="APP_STORE">%1$s</xliff:g>बाट इन्स्टल गरिएको एप"</string>
+    <string name="app_install_details_different_initiating_package_summary" msgid="6093306593167176688">"<xliff:g id="APP_STORE1">%1$s</xliff:g> बाट (<xliff:g id="APP_STORE2">%2$s</xliff:g> मार्फत) इन्स्टल गरिएको एप"</string>
     <string name="instant_app_details_summary" msgid="417197491598208216">"<xliff:g id="APP_STORE">%1$s</xliff:g> मा थप जानकारी छ"</string>
     <string name="app_ops_running" msgid="6127474473137428721">"चालु भइरहेको"</string>
     <string name="app_ops_never_used" msgid="9038133162371204506">"(कहिल्यै प्रयोग नभएको)"</string>
@@ -2289,12 +2290,9 @@
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"हियरिङ डिभाइस कनेक्ट गर्नुहोस्"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"अर्को स्क्रिनमा गई हियरिङ डिभाइसमा ट्याप गर्नुहोस् तपाईंले बायाँ र दायाँ कानका डिभाइसहरू छुट्टा छुट्टै कनेक्ट गर्नु पर्ने हुन्छ।\n\nतपाईंका हियरिङ डिभाइस अन छन् र कनेक्ट गर्नका निम्ति तयार छन् भन्ने कुरा सुनिश्चित गर्नुहोस्।"</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> सक्रिय"</string>
-    <!-- no translation found for accessibility_hearingaid_left_side_device_summary (12349058624943107) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_right_side_device_summary (8645789702686724188) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_left_and_right_side_device_summary (3314103411842694197) -->
-    <skip />
+    <string name="accessibility_hearingaid_left_side_device_summary" msgid="12349058624943107">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> / बायाँ मात्र"</string>
+    <string name="accessibility_hearingaid_right_side_device_summary" msgid="8645789702686724188">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> / दायाँ मात्र"</string>
+    <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="3314103411842694197">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> / बायाँ र दायाँ"</string>
     <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> र थप १"</string>
     <string name="accessibility_hearing_device_pairing_title" msgid="2701812183769537320">"नयाँ डिभाइस कनेक्ट गर्नुहोस्"</string>
     <string name="accessibility_hearing_device_connected_title" msgid="3785140037249487287">"हियरिङ डिभाइसहरू"</string>
@@ -2573,7 +2571,8 @@
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"ब्याट्रीको खपत बढाउनुहोस्"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"चार्ज भएपछि अफ गर्नुहोस्"</string>
     <string name="battery_saver_sticky_title_percentage" msgid="1178162022087559148">"<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> चार्ज भएपछि ब्याट्री सेभ अफ गर्नुहोस्"</string>
-    <string name="battery_saver_sticky_description_new" msgid="6472610662679038342">"ब्याट्री <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> चार्ज भएपछि ब्याट्री सेभर स्वतः अफ हुन्छ"</string>
+    <!-- no translation found for battery_saver_sticky_description_new (8543277078136947874) -->
+    <skip />
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"अन गर्नुहोस्"</string>
@@ -2685,18 +2684,13 @@
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"अन छ"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"अफ छ"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Adaptive Connectivity प्रयोग गर्नुहोस्"</string>
-    <!-- no translation found for cellular_security_title (5562899485544677941) -->
-    <skip />
+    <string name="cellular_security_title" msgid="5562899485544677941">"मोबाइल नेटवर्कको सुरक्षा"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"नेटवर्कको प्रकार, इन्क्रिप्सन, सूचनाका सेटिङ"</string>
-    <!-- no translation found for cellular_security_top_intro (6749166804080092892) -->
-    <skip />
-    <!-- no translation found for cellular_security_settings_title (7779141923670352595) -->
-    <skip />
+    <string name="cellular_security_top_intro" msgid="6749166804080092892">"यी सेटिङले तपाईंका कल, म्यासेज र डेटालाई डेटा चोरी हुने वा निगरानी गरिने जोखिम भएका पुराना वा इन्क्रिप्ट नगरिएका नेटवर्कहरूबाट सुरक्षित राख्न मद्दत गर्छन्"</string>
+    <string name="cellular_security_settings_title" msgid="7779141923670352595">"मोबाइल नेटवर्कको सुरक्षा"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"सूचनाहरू"</string>
-    <!-- no translation found for cellular_security_notifications_controller_title (4853056963523277847) -->
-    <skip />
-    <!-- no translation found for cellular_security_notifications_controller_summary (8339863845393759958) -->
-    <skip />
+    <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"नेटवर्कसम्बन्धी सूचना"</string>
+    <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"तपाईंको डिभाइस इन्क्रिप्ट नगरिएको नेटवर्कमा कनेक्ट गरिँदा वा कुनै नेटवर्कले तपाईंको डिभाइस वा SIM को अद्वितीय ID रेकर्ड गर्दा सूचना प्राप्त गर्नुहोस्"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"इन्क्रिप्सन"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"नेटवर्कका जेनेरेसनहरू"</string>
     <string name="cellular_security_network_generations_summary" msgid="139087814553929402">"तपाईं इन्स्टल गरिएको हरेक SIM कार्ड 3G, 4G र 5G प्रयोग गर्न मिल्ने नेटवर्कहरूमा मात्र कनेक्ट गर्न कन्फिगर गर्न सक्नुहुन्छ। उक्त SIM पुराना, असुरक्षित 2G नेटवर्कहरूमा कनेक्ट गर्न मिल्दैन। 2G नेटवर्क मात्र उपलब्ध भएका खण्डमा यो सेटिङले तपाईंको कनेक्टिभिटी सीमित गर्न सक्छ। आपत्कालीन अवस्थामा 2G प्रयोग गर्न सकिन्छ।"</string>
@@ -2969,15 +2963,14 @@
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{{orgName} ले तपाईंको कार्य प्रोफाइलमा CA प्रमाणपत्र इन्स्टल गरेको छ। यो सङ्गठनले उक्त प्रमाणपत्रको सहायताले इमेल, एप र सुरक्षित वेबसाइटलगायतका कार्यस्थलमा गरिने नेटवर्कसम्बन्धी क्रियाकलापको निगरानी गर्न सक्छ। \n\nयो प्रमाणपत्रका बारेमा थप जानकारी पाउन आफ्ना एड्मिनलाई सम्पर्क गर्नुहोस्।}other{{orgName} ले तपाईंको कार्य प्रोफाइलमा CA प्रमाणपत्रहरू इन्स्टल गरेको छ। यो सङ्गठनले यी प्रमाणपत्रका सहायताले इमेल, एप र सुरक्षित वेबसाइटलगायतका कार्यस्थलमा गरिने नेटवर्कसम्बन्धी क्रियाकलापको निगरानी गर्न सक्छ। \n\nयी प्रमाणपत्रका बारेमा थप जानकारी पाउन आफ्ना एड्मिनलाई सम्पर्क गर्नुहोस्।}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"तपाईँको सञ्जाल गतिविधिको साथ इमेल, एप र सुरक्षित वेबसाइटहरू सहितको अनुगमन गर्न तेस्रो पक्ष सक्षम छ। \n \n तपाईँको उपकरणमा स्थापित भएको बिश्वस्त गोप्य डेटाले गर्दा यो सम्भव भएको हो।"</string>
     <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{प्रमाणपत्र जाँच्नुहोस्}other{प्रमाणपत्रहरू जाँच्नुहोस्}}"</string>
-    <string name="user_settings_title" msgid="6550866465409807877">"बहु प्रयोगकर्ताहरू"</string>
+    <string name="user_settings_title" msgid="9208831545558787202">"प्रयोगकर्ताहरू"</string>
     <string name="user_list_title" msgid="1387379079186123404">"प्रयोगकर्ता र प्रोफाइलहरू"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"प्रयोगकर्ता वा प्रोफाइल थप गर्नुहोस्"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"निषेध गरिएको प्रोफाइल"</string>
     <string name="user_summary_not_set_up" msgid="4602868481732886115">"सेटअप छैन"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1658946988920104613">"सेट भएको छैन - सीमित प्रोफाइल"</string>
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"सेट भएको छैन - कार्य प्रोफाइल"</string>
-    <!-- no translation found for user_owner (2079206733011361994) -->
-    <skip />
+    <string name="user_owner" msgid="2079206733011361994">"मालिक"</string>
     <string name="user_admin" msgid="4024553191395768119">"एड्मिन"</string>
     <string name="user_you" msgid="3070562015202859996">"तपाईं (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_add_max_count" msgid="3328539978480663740">"तपाईं योभन्दा बढी प्रयोगकर्ता थप्न सक्नुहुन्न। नयाँ प्रयोगकर्ता थप्न कोही प्रयोगकर्ता हटाउनुहोस्।"</string>
@@ -3088,7 +3081,7 @@
     <string name="preferred_network_type_title" msgid="812509938714590857">"नेटवर्कको प्रकार रुचाइएको"</string>
     <string name="preferred_network_type_summary" msgid="8786291927331323061">"LTE (सिफारिस गरिएको)"</string>
     <string name="mms_message_title" msgid="6624505196063391964">"MMS म्यासेज"</string>
-    <string name="mms_message_summary" msgid="2855847140141698341">"मोबाइल डेटा अफ हुँदा पठाउन र प्राप्त गर्न सकियोस्"</string>
+    <string name="mms_message_summary" msgid="2855847140141698341">"मोबाइल डेटा अफ हुँदा पठाउनुहोस् तथा प्राप्त गर्नुहोस्"</string>
     <string name="auto_data_switch_title" msgid="5862200603753603464">"स्वतः मोबाइल डेटा प्रयोग गर्नुहोस्"</string>
     <string name="auto_data_switch_summary" msgid="1934340931995429057">"यो नेटवर्कको गुणस्तर तुलनात्मक रूपमा राम्रो हुँदा यो नेटवर्क प्रयोग गर्नुहोस्"</string>
     <string name="work_sim_title" msgid="8999872928646924429">"कार्य SIM"</string>
@@ -3287,7 +3280,7 @@
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"एपले प्रदान गरेको ध्वनि"</string>
     <string name="notification_sound_default" msgid="8630353701915294299">"सूचना आउँदा बज्ने डिफल्ट साउन्ड"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"अलार्मको डिफल्ट साउन्ड"</string>
-    <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"सुरुमा भाइब्रेट होस् अनि घन्टी बजोस्"</string>
+    <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"सुरुमा भाइब्रेट गरी घन्टी बजाउनुहोस्"</string>
     <string name="spatial_audio_title" msgid="1775370104206884711">"स्पेसियल अडियो"</string>
     <string name="dial_pad_tones_title" msgid="3536945335367914892">"डायल प्याडको टोन"</string>
     <string name="screen_locking_sounds_title" msgid="5695030983872787321">"स्क्रिन लक हुँदा बज्ने साउन्ड"</string>
@@ -4250,7 +4243,7 @@
     <string name="nav_tutorial_button_description" msgid="6880450051535137024">"जेस्चर नेभिगेसन ट्युटोरियल सुरु गर्नुहोस् नामक बटन। एक्टिभेट गर्न डबल ट्याप गर्नुहोस्।"</string>
     <string name="keywords_system_navigation" msgid="3131782378486554934">"सिस्टम नेभिगेसन, २ बटन नेभिगेसन, ३ बटन नेभिगेसन, जेस्चरले गरिने नेभिगेसन, स्वाइप"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"डिजिटल सहायक"</string>
-    <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"स्वाइप गर्दा सहायक सुरु होस्"</string>
+    <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"स्वाइप गर्दा सहायक सुरु गर्नुहोस्"</string>
     <string name="assistant_corner_gesture_summary" msgid="5012534700233017955">"डिजिटल सहायक एप सुरु गर्न स्क्रिनको फेदको कुनाबाट माथितिर स्वाइप गर्नुहोस्"</string>
     <string name="assistant_long_press_home_gesture_title" msgid="4865972278738178753">"सहायक खोल्न होम बटन थिचिराख्नुहोस्"</string>
     <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"डिजिटल सहायक एप खोल्न होम बटन थिचिराख्नुहोस्।"</string>
@@ -4606,7 +4599,7 @@
     <string name="mobile_network_inactive_esim" msgid="8777415108263057939">"निष्क्रिय / eSIM"</string>
     <string name="mobile_network_sim_name" msgid="3187192894150386537">"SIM को नाम र रङ्ग"</string>
     <string name="mobile_network_sim_name_label" msgid="1452440641628369625">"नाम"</string>
-    <string name="mobile_network_sim_color_label" msgid="5293944087609632340">"रङ्ग (मिल्दा एपहरूले प्रयोग गरेका)"</string>
+    <string name="mobile_network_sim_color_label" msgid="5293944087609632340">"रङ्ग (कम्प्याटिबल एपहरूले प्रयोग गरेका)"</string>
     <string name="mobile_network_sim_name_rename" msgid="5967588549571582924">"सेभ गर्नुहोस्"</string>
     <string name="mobile_network_use_sim_on" msgid="5333182776279917886">"यो SIM प्रयोग गर्नुहोस्"</string>
     <string name="mobile_network_use_sim_off" msgid="6303281166199670639">"निष्क्रिय"</string>
@@ -4647,6 +4640,8 @@
     <string name="summary_supported_service" msgid="4320535903444834786">"तपाईं आपत्कालीन सेवालगायत सबै जनालाई टेक्स्ट म्यासेज पठाउन सक्नुहुन्छ। तपाईंको फोन मोबाइल नेटवर्क उपलब्ध भएका बेला उक्त नेटवर्कमा रिकनेक्ट हुने छ।"</string>
     <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"स्याटलाइटमार्फत म्यासेज पठाउने सुविधा प्रयोग गर्दा सामान्यभन्दा बढी समय लाग्न सक्छ र यो सुविधा केही क्षेत्रहरूमा मात्र उपलब्ध छ। मौसम र निश्चित संरचनाहरूले स्याटलाइट कनेक्सनमा असर गर्न सक्छ। स्याटलाइटमार्फत कल गर्ने सुविधा उपलब्ध छैन। आपत्कालीन कल अझै पनि कनेक्ट हुन सक्छ।\n\nतपाईंको खातामा गरिएका परिवर्तनहरू सेटिङमा देखिन केही समय लाग्न सक्छ। यससम्बन्धी थप जानकारी प्राप्त गर्न आफ्नो सेवा प्रदायकलाई सम्पर्क गर्नुहोस्।"</string>
     <string name="more_about_satellite_messaging" msgid="3385673133561348509">"स्याटलाइटमार्फत म्यासेज पठाउने सुविधाका बारेमा थप जानकारी"</string>
+    <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"<xliff:g id="FUNCTION">%1$s</xliff:g> अन गर्न सकिँदैन"</string>
+    <string name="satellite_warning_dialog_content" msgid="936419945275934955">"<xliff:g id="FUNCTION">%1$s</xliff:g> अन गर्न सर्वप्रथम स्याटलाइट कनेक्सन अन्त्य गर्नुहोस्।"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"एक्सेस पोइन्ट नेम"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"<xliff:g id="CARRIER">%1$s</xliff:g> मा जडान हुँदा उपलब्ध छैन"</string>
@@ -4808,19 +4803,46 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"तपाईंको कार्यको नीतिसम्बन्धी जानकारी"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"तपाईंका IT एडमिनले व्यवस्थापन गरेका सेटिङहरू"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
-    <string name="enable_16k_pages" msgid="5009476566957520607">"१६ के.बि. आकारको पेज चल्ने गरी बुट गर्नुहोस्"</string>
-    <string name="enable_16k_pages_summary" msgid="428117226069445198">"१६ के.बि. आकारको पेज चल्ने कर्नेल प्रयोग गरी डिभाइस बुट गर्नुहोस्"</string>
-    <string name="confirm_enable_16k_pages_title" msgid="6751570067857011642">"१६ के.बि. का पेजसँग कम्प्याटिबल कर्नेल प्रयोग गर्न रिबुट गर्ने हो?"</string>
-    <string name="confirm_enable_16k_pages_text" msgid="702888115148257215">"चेतावनी: केही एपहरू यो मोडसँग कम्प्याटिबल नहुन सक्छन्। पुष्टि गरेपछि डिभाइस रिबुट हुने छ।"</string>
-    <string name="confirm_enable_4k_pages_title" msgid="626987400420355263">"४ के.बि. का पेजसँग कम्प्याटिबल कर्नेल प्रयोग गर्न रिबुट गर्ने हो?"</string>
-    <string name="confirm_enable_4k_pages_text" msgid="6168921566226074524">"पुष्टि गरेपछि डिभाइस रिबुट हुने छ।"</string>
+    <!-- no translation found for enable_16k_pages (8001470927566110689) -->
+    <skip />
+    <!-- no translation found for enable_16k_pages_summary (1964363364670306912) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_title (1286925577014793351) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_text (570198382662424714) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_title (3210360137887034659) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_text (155070605667160083) -->
+    <skip />
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"कर्नेल अपडेट गरी १६ के.बि. का पेजसँग कम्प्याटिबल कर्नेल बनाउन सकिएन।"</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"परिवर्तन लागू गरिँदै छ"</string>
-    <string name="confirm_format_ext4_title" msgid="4453684705528818873">"डिभाइस रिफर्म्याट गरी ext4 बनाउने हो?"</string>
-    <string name="confirm_format_ext4_text" msgid="8164677342487500794">"ext4 फाइलसिस्टममा 16K विकासकर्ता मोड प्रयोग गर्न मिल्छ। तपाईंले पुष्टि गरेपछि डिभाइसमा भएको डेटा मेटाइने छ र फाइलसिस्टम बदलेर ext4 बनाइने छ।"</string>
-    <string name="format_ext4_failure_toast" msgid="6904611547290793885">"रिफर्म्याट गर्न र डेटाको पार्टिसन मेटाएर ext4 बनाउन सकिएन।"</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="6338135847153690912">"OEM अनलक गर्नु पर्ने हुन्छ"</string>
-    <string name="confirm_oem_unlock_for_16k_text" msgid="236718973897424382">"डिभाइस OEM अनलक गरेपछि मात्र 16K विकासकर्ता मोड प्रयोग गर्न मिल्छ। OEM अनलक गर्न प्रयोगकर्ताको डेटा पनि फर्म्याट गर्नु पर्ने हुन्छ। कृपया यो डिभाइस OEM अनलक गर्नुहोस् र फेरि प्रयास गर्नुहोस्।"</string>
+    <!-- no translation found for confirm_format_ext4_title (6696191800594435577) -->
+    <skip />
+    <!-- no translation found for confirm_format_ext4_text (7940372488624630214) -->
+    <skip />
+    <!-- no translation found for format_ext4_failure_toast (8059453995800471549) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (5374451262432025419) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_text (3583604865119937957) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_title (1184703958249093215) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text_short (2894243902906666242) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text (8284806650260868833) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_title (7762533464569818498) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text_short (269039281591806585) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (6208765386837706582) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_channel_name (1658444283036376361) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_action (2309805437430150456) -->
+    <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"बग रिपोर्ट ह्यान्ड्लर"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"तपाईंको डिभाइसमा कुन एपले बग रिपोर्टसम्बन्धी सर्टकट ह्यान्डल गर्दछ भन्ने कुरा निर्धारण गर्दछ।"</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"व्यक्तिगत"</string>
@@ -4882,7 +4904,7 @@
     <string name="media_controls_show_player" msgid="8504571042365814021">"प्लेयर देखाउनुहोस्"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"मिडिया"</string>
     <string name="camera_extensions_fallback_title" msgid="3604579046777004989">"क्यामेरामा सफ्टवेयर एक्स्टेन्सन प्रयोग गर्न दिनुहोस्"</string>
-    <string name="camera_extensions_fallback_description" msgid="6939818294458854536">"यसले Eyes Free भिडियोग्राफी जस्ता क्यामेराका उन्नत सुविधाहरूको डिफल्ट सफ्टवेयर प्रयोग गर्ने प्रक्रिया सुरु गर्छ।"</string>
+    <string name="camera_extensions_fallback_description" msgid="4306833827773277263">"यसले HDR, रात्रिकालीन मोड वा क्यामेराका अन्य एक्स्टेन्सन जस्ता क्यामेराका उन्नत सुविधाहरूको डिफल्ट सफ्टवेयर प्रयोग गर्ने प्रक्रिया सुरु गर्छ।"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"ब्लुटुथ अन हुने छ"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"इन्टरनेट"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM"</string>
@@ -4952,6 +4974,7 @@
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"प्रिन्ट सेवा चलाउनुहोस्"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"एकभन्दा बढी व्यक्तिलाई प्रयोग गर्न दिनुहोस्"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"अनुमति दिनुहोस्, एकभन्दा बढी, प्रयोगकर्ता, अनुमति, धेरै"</string>
+    <string name="multiple_users_title_keywords" msgid="2395593167746225172">"एकभन्दा बढी, प्रयोगकर्ता, प्रोफाइल, मान्छे, खाता, स्विच, धेरै"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"\'वायरलेस डिबगिङ\' सुविधा प्रयोग गर्नुहोस्"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"\'ग्राफिक्स ड्राइभरसम्बन्धी प्राथमिकता\' प्रयोग गर्नुहोस्"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"Night Light प्रयोग गर्नुहोस्"</string>
@@ -4974,10 +4997,8 @@
     <string name="enable_2g_title" msgid="8184757884636162942">"2G चलाउन दिनुहोस्"</string>
     <string name="enable_2g_summary" msgid="2794534052372565914">"2G अलि कम सुरक्षित हुन्छ तर तपाईंले यसको प्रयोग गर्नुभयो भने यसले कतिपय लोकेसनमा तपाईंको डिभाइसमा इन्टरनेट कनेक्ट गर्न सजिलो बनाउन सक्छ। 2G प्रयोग गरेर जुनसुकै बेला आपत्कालीन कल गर्न सकिन्छ।"</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> को सेवा लिन 2G चाहिन्छ"</string>
-    <!-- no translation found for require_cellular_encryption_title (6087085031703089235) -->
-    <skip />
-    <!-- no translation found for require_cellular_encryption_summary (6090569065420631457) -->
-    <skip />
+    <string name="require_cellular_encryption_title" msgid="6087085031703089235">"इन्क्रिप्ट गरिएका नेटवर्क मात्र प्रयोग गर्न दिनुहोस्"</string>
+    <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"यो बढी सुरक्षित छ तर केही लोकेसनमा तपाईंको मोबाइल नेटवर्क कनेक्सनले राम्रोसँग काम नगर्न सक्छ। आपत्कालीन कल गर्न भने कहिले पनि रोक लगाइँदैन।"</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"सबै सेवाहरू"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"एपले क्लिपबोर्डमा रहेको सामग्री प्रयोग गर्दा सूचना देखाउनुहोस्"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"मैले कपी गरेका टेक्स्ट, फोटो वा अन्य सामग्री एपहरूले प्रयोग गर्दा म्यासेज देखाउनुहोस्"</string>
@@ -5201,6 +5222,5 @@
     <string name="force_swcrypto_fallback_summary" msgid="181969966310309701">"DRM की म्यानेजमेन्टलाई सफ्टवेयरमा आधारित ह्वाइटबक्स क्रिप्टो बलपूर्वक प्रयोग गर्न लगाउनुहोस्"</string>
     <string name="fingerprint_acquired_imager_dirty_udfps" msgid="7005042288289506776">"सेन्सर वरपरको स्क्रिनको भाग सफा गरी फेरि प्रयास गर्नुहोस्"</string>
     <string name="sim_category_converted_sim" msgid="8575548015816988908">"eSIM बनाइएको छ। हटाएर खारेज गर्नुहोस्।"</string>
-    <!-- no translation found for sync_across_devices_title (3447757705383089345) -->
-    <skip />
+    <string name="sync_across_devices_title" msgid="3447757705383089345">"विभिन्न डिभाइसमा सिंक गर्नुहोस्"</string>
 </resources>

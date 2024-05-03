@@ -1497,8 +1497,7 @@
     <string name="reset_esim_error_title" msgid="6516110227665862295">"ই-সিম মোছা যাচ্ছে না"</string>
     <string name="reset_esim_error_msg" msgid="8459527827897797168">"কিছু সমস্যা হয়েছে এবং আপনার ই-সিম মোছা যায়নি।\n\nআপনার ডিভাইস আবার চালু করে চেষ্টা করুন।"</string>
     <string name="reset_private_space_delete_title" msgid="2555885198282572990">"প্রাইভেট স্পেস মুছুন"</string>
-    <!-- no translation found for reset_private_space_delete_dialog (7506471054091800883) -->
-    <skip />
+    <string name="reset_private_space_delete_dialog" msgid="7506471054091800883">"আপনার ডিভাইসে কোনও প্রাইভেট স্পেস থাকলে, তা স্থায়ীভাবে মুছে ফেলা হবে এবং আপনার স্পেসে যোগ করা Google অ্যাকাউন্ট সরিয়ে দেওয়া হবে।\n\nআপনার স্পেসে সব অ্যাপ ও তার ডেটাও স্থায়ীভাবে মুছে ফেলা হবে।"</string>
     <string name="main_clear_title" msgid="277664302144837723">"সমস্ত ডেটা মুছুন (ফ্যাক্টরি রিসেট)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"সমস্ত ডেটা মুছুন (ফ্যাক্টরি রিসেট)"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"মিউজিক"</li>\n<li>"ফটো"</li>\n<li>"অন্যান্য ব্যবহারকারী ডেটা"</li></string>
@@ -1811,6 +1810,7 @@
     <string name="app_install_details_group_title" msgid="1172114479073704677">"Store"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"অ্যাপের বিশদ বিবরণ"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"অ্যাপটিকে <xliff:g id="APP_STORE">%1$s</xliff:g> থেকে ইনস্টল করা হয়েছে"</string>
+    <string name="app_install_details_different_initiating_package_summary" msgid="6093306593167176688">"অ্যাপ <xliff:g id="APP_STORE1">%1$s</xliff:g> থেকে ইনস্টল করা হয়েছে (<xliff:g id="APP_STORE2">%2$s</xliff:g>-এর মাধ্যমে)"</string>
     <string name="instant_app_details_summary" msgid="417197491598208216">"<xliff:g id="APP_STORE">%1$s</xliff:g> সম্পর্কে আরও তথ্য"</string>
     <string name="app_ops_running" msgid="6127474473137428721">"চলমান"</string>
     <string name="app_ops_never_used" msgid="9038133162371204506">"(কখনো ব্যবহৃত হয়নি)"</string>
@@ -2290,12 +2290,9 @@
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"হিয়ারিং এড পেয়ার করুন"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"পরের স্ক্রিনে, হিয়ারিং এডে ট্যাপ করুন। আপনাকে হয়ত বাঁ ও ডানদিকের হিয়ারিং এড আলাদাভাবে পেয়ার করতে হবে।\n\nহিয়ারিং এড চালু ও পেয়ার করার জন্য তৈরি কিনা তা ভালভাবে দেখে নিন।"</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> চালু আছে"</string>
-    <!-- no translation found for accessibility_hearingaid_left_side_device_summary (12349058624943107) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_right_side_device_summary (8645789702686724188) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_left_and_right_side_device_summary (3314103411842694197) -->
-    <skip />
+    <string name="accessibility_hearingaid_left_side_device_summary" msgid="12349058624943107">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> / শুধু বাঁদিক"</string>
+    <string name="accessibility_hearingaid_right_side_device_summary" msgid="8645789702686724188">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> / শুধু ডানদিক"</string>
+    <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="3314103411842694197">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> / বাঁদিক ও ডানদিক"</string>
     <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ও আরও ১টি"</string>
     <string name="accessibility_hearing_device_pairing_title" msgid="2701812183769537320">"নতুন ডিভাইস পেয়ার করুন"</string>
     <string name="accessibility_hearing_device_connected_title" msgid="3785140037249487287">"হিয়ারিং ডিভাইস"</string>
@@ -2574,7 +2571,8 @@
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"ব্যাটারি আরও বেশি সময় চলবে"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"চার্জ হয়ে গেলে বন্ধ করুন"</string>
     <string name="battery_saver_sticky_title_percentage" msgid="1178162022087559148">"<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>-এ বন্ধ হবে"</string>
-    <string name="battery_saver_sticky_description_new" msgid="6472610662679038342">"<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>-এ পৌঁছে গেলে ব্যাটারি সেভার বন্ধ হয়ে যায়"</string>
+    <!-- no translation found for battery_saver_sticky_description_new (8543277078136947874) -->
+    <skip />
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"চালু করুন"</string>
@@ -2686,18 +2684,13 @@
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"চালু আছে"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"বন্ধ আছে"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Adaptive Connectivity ব্যবহার করুন"</string>
-    <!-- no translation found for cellular_security_title (5562899485544677941) -->
-    <skip />
+    <string name="cellular_security_title" msgid="5562899485544677941">"মোবাইল নেটওয়ার্ক সুরক্ষা"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"নেটওয়ার্কের ধরন, এনক্রিপশন, বিজ্ঞপ্তির নিয়ন্ত্রণ"</string>
-    <!-- no translation found for cellular_security_top_intro (6749166804080092892) -->
-    <skip />
-    <!-- no translation found for cellular_security_settings_title (7779141923670352595) -->
-    <skip />
+    <string name="cellular_security_top_intro" msgid="6749166804080092892">"এইসব সেটিংস পুরনো বা এনক্রিপ্টেড নয় এমন নেটওয়ার্কের থেকে কল, মেসেজ এবং ডেটা সুরক্ষিত রাখতে সাহায্য করে। এগুলির কারণে ডেটা চুরি বা ডেটাতে নজরদারি রাখা হতে পারে"</string>
+    <string name="cellular_security_settings_title" msgid="7779141923670352595">"মোবাইল নেটওয়ার্ক সুরক্ষা"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"বিজ্ঞপ্তি"</string>
-    <!-- no translation found for cellular_security_notifications_controller_title (4853056963523277847) -->
-    <skip />
-    <!-- no translation found for cellular_security_notifications_controller_summary (8339863845393759958) -->
-    <skip />
+    <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"নেটওয়ার্ক সম্পর্কিত বিজ্ঞপ্তি"</string>
+    <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"নেটওয়ার্ক আপনার অনন্য ডিভাইস বা সিম কার্ড আইডি রেকর্ড করলে অথবা এনক্রিপটেড নয় এমন নেটওয়ার্কের সাথে আপনার ডিভাইস কানেক্ট হলে বিজ্ঞপ্তি পান"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"এনক্রিপশন"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"নেটওয়ার্ক জেনারেশন"</string>
     <string name="cellular_security_network_generations_summary" msgid="139087814553929402">"যে নেটওয়ার্কে 3G, 4G ও 5G কাজ করে শুধুমাত্র সেই নেটওয়ার্কে কানেক্ট করার জন্য প্রত্যেকটি ইনস্টল করা সিম কার্ড কনফিগার করতে পারবেন। সিম কার্ডটি পুরনো, নিরাপদ নয় এমন 2G নেটওয়ার্কের সাথে কানেক্ট করতে পারবে না। শুধুমাত্র 2G উপলভ্য হলে এই সেটিং আপনার কানেক্টিভিটি সীমিত করতে পারে। জরুরি পরিস্থিতির ক্ষেত্রে, 2G ব্যবহার করা যেতে পারে।"</string>
@@ -2970,15 +2963,15 @@
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{{orgName} আপনার অফিস প্রোফাইলের জন্য একটি সার্টিফিকেট অথরিটি ইনস্টল করেছে, যেটি তাদেরকে ইমেল, অ্যাপ এবং নিরাপদ ওয়েবসাইট সহ অফিস নেটওয়ার্কের কার্যকলাপ নিরীক্ষণ করার অনুমতি দিতে পারে।\n\nএই সার্টিফিকেট সম্পর্কে আরও তথ্যের জন্য আপনার অ্যাডমিনের সাথে যোগাযোগ করুন।}one{{orgName} আপনার অফিস প্রোফাইলের জন্য কিছু সার্টিফিকেট অথরিটি ইনস্টল করেছে, যা তাদেরকে ইমেল, অ্যাপ এবং নিরাপদ ওয়েবসাইট সহ অফিস নেটওয়ার্কের কার্যকলাপ নিরীক্ষণ করার অনুমতি দিতে পারে।\n\nএইসব সার্টিফিকেট সম্পর্কে আরও তথ্যের জন্য আপনার অ্যাডমিনের সাথে যোগাযোগ করুন।}other{{orgName} আপনার অফিস প্রোফাইলের জন্য কিছু সার্টিফিকেট অথরিটি ইনস্টল করেছে, যা তাদেরকে ইমেল, অ্যাপ এবং নিরাপদ ওয়েবসাইট সহ অফিস নেটওয়ার্কের কার্যকলাপ নিরীক্ষণ করার অনুমতি দিতে পারে।\n\nএইসব সার্টিফিকেট সম্পর্কে আরও তথ্যের জন্য আপনার অ্যাডমিনের সাথে যোগাযোগ করুন।}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"একজন তৃতীয় পক্ষ ইমেল অ্যাপ্লিকেশান, এবং নিরাপদ ওয়েবসাইটগুলি সহ আপনার নেটওয়ার্ক ক্রিয়াকলাপ নিরীক্ষণ করতে সক্ষম হবে। \n\nআপনার ডিভাইসে ইনস্টল করা একটি বিশ্বস্ত ক্রেডেনশিয়াল এটিকে সম্ভব করছে।"</string>
     <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{সার্টিফিকেট চেক করুন}one{সার্টিফিকেট চেক করুন}other{সার্টিফিকেট চেক করুন}}"</string>
-    <string name="user_settings_title" msgid="6550866465409807877">"একাধিক ব্যবহারকারী"</string>
+    <!-- no translation found for user_settings_title (9208831545558787202) -->
+    <skip />
     <string name="user_list_title" msgid="1387379079186123404">"ব্যবহারকারীরা ও প্রোফাইলগুলি"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"ব্যবহারকারী অথবা প্রোফাইল যোগ করুন"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"সীমাবদ্ধ প্রোফাইল"</string>
     <string name="user_summary_not_set_up" msgid="4602868481732886115">"সেট-আপ করা নেই"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1658946988920104613">"সেট-আপ করা নেই - সীমাবদ্ধ প্রোফাইল"</string>
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"সেট-আপ করা নেই - কর্মস্থলের প্রোফাইল"</string>
-    <!-- no translation found for user_owner (2079206733011361994) -->
-    <skip />
+    <string name="user_owner" msgid="2079206733011361994">"মালিক"</string>
     <string name="user_admin" msgid="4024553191395768119">"অ্যাডমিন"</string>
     <string name="user_you" msgid="3070562015202859996">"আপনি (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_add_max_count" msgid="3328539978480663740">"আপনি আর কোনও ব্যবহারকারীকে যোগ করতে পারবেন না। নতুন কাউকে যোগ করতে একজন ব্যবহারকারীকে সরিয়ে দিন।"</string>
@@ -4452,8 +4445,8 @@
     <string name="location_category" msgid="3496759112306219062">"লোকেশন"</string>
     <string name="location_indicator_settings_title" msgid="6655916258720093451">"স্ট্যাটাস বার লোকেশন সূচক"</string>
     <string name="location_indicator_settings_description" msgid="2888022085372804021">"নেটওয়ার্ক ও কানেক্টিভিটি সমেত সব লোকেশন দেখুন"</string>
-    <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"GnssMeasurement সম্পূর্ণভাবে ট্র্যাক করুন"</string>
-    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"ডিউটি-সাইক্লিং বাদে সমস্ত কন্সটেলেশন এবং ফ্রিকোয়েন্সি ট্র্যাক করুন"</string>
+    <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"GNSS measurement সম্পূর্ণভাবে ট্র্যাক করুন"</string>
+    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"ডিউটি-সাইক্লিং বাদে সমস্ত GNSS কন্সটেলেশন এবং ফ্রিকোয়েন্সি ট্র্যাক করুন"</string>
     <string name="input_method_category" msgid="2252659253631639005">"ইনপুট পদ্ধতি"</string>
     <string name="stylus_handwriting" msgid="2154591374132794563">"স্টাইলাস হ্যান্ডরাইটিং"</string>
     <string name="stylus_handwriting_summary" msgid="6333425895172696950">"চালু করা থাকলে এবং Editor ফোকাস করা হলে, বর্তমান ইনপুট পদ্ধতি স্টাইলাস MotionEvent কোড পায়।"</string>
@@ -4529,7 +4522,7 @@
     <string name="pref_title_network_details" msgid="7329759534269363308">"নেটওয়ার্কের বিবরণ"</string>
     <string name="devices_title" msgid="649715719278562515">"ডিভাইস"</string>
     <string name="choose_network_title" msgid="5355609223363859430">"নেটওয়ার্ক বেছে নিন"</string>
-    <string name="network_disconnected" msgid="8281188173486212661">"ডিসকানেক্ট আছে"</string>
+    <string name="network_disconnected" msgid="8281188173486212661">"ডিসকানেক্ট করা আছে"</string>
     <string name="network_connected" msgid="7637745547242487795">"কানেক্ট আছে"</string>
     <string name="network_connecting" msgid="6856124847029124041">"কানেক্ট হচ্ছে…"</string>
     <string name="network_could_not_connect" msgid="676574629319069922">"কানেক্ট করা যায়নি"</string>
@@ -4648,6 +4641,8 @@
     <string name="summary_supported_service" msgid="4320535903444834786">"আপনি জরুরি পরিষেবা সহ যেকোনও ব্যক্তিকে মেসেজ পাঠাতে পারেন। মোবাইল নেটওয়ার্ক পাওয়া গেলে ফোন সেটির সাথে আবার কানেক্ট করবে।"</string>
     <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"স্যাটেলাইট মেসেজিংয়ে আরও বেশি সময় লাগতে পারে এবং এটি শুধু কিছু জায়গাতে উপলভ্য। আবহাওয়া এবং নির্দিষ্ট স্ট্রাকচার আপনার স্যাটেলাইট কানেকশন প্রভাবিত করতে পারে। স্যাটেলাইটের মাধ্যমে কল করার সুবিধা উপলভ্য নেই। জরুরি কলের জন্য এখনও কানেক্ট করা যেতে পারে।\n\n\'সেটিংস\'-এ অ্যাকাউন্ট পরিবর্তনের বিষয়টি দেখানোর জন্য কিছুটা সময় লাগতে পারে। বিবরণের জন্য আপনার পরিষেবা প্রদানকারীর সাথে যোগাযোগ করুন।"</string>
     <string name="more_about_satellite_messaging" msgid="3385673133561348509">"স্যাটেলাইট মেসেজিং সম্পর্কে আরও তথ্য"</string>
+    <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"<xliff:g id="FUNCTION">%1$s</xliff:g> চালু করা যাচ্ছে না"</string>
+    <string name="satellite_warning_dialog_content" msgid="936419945275934955">"<xliff:g id="FUNCTION">%1$s</xliff:g> চালু করতে, প্রথমে স্যাটেলাইট কানেকশন বন্ধ করুন"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"অ্যাক্সেস পয়েন্টের নাম"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"<xliff:g id="CARRIER">%1$s</xliff:g>-এ কনেক্ট থাকলে উপলভ্য থাকে না"</string>
@@ -4809,19 +4804,46 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"অফিসের নীতি সংক্রান্ত তথ্য"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"আইটি অ্যাডমিন সেটিংস ম্যানেজ করে"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
-    <string name="enable_16k_pages" msgid="5009476566957520607">"১৬K সাইজের পৃষ্ঠা সহ বুট করুন"</string>
-    <string name="enable_16k_pages_summary" msgid="428117226069445198">"বুট ডিভাইস ১৬K সাইজের পৃষ্ঠার জন্য মানানসই কার্নেল ব্যবহার করছে"</string>
-    <string name="confirm_enable_16k_pages_title" msgid="6751570067857011642">"১৬KB পৃষ্ঠার জন্য মানানসই কার্নেল সহ রিবুুট করবেন?"</string>
-    <string name="confirm_enable_16k_pages_text" msgid="702888115148257215">"সতর্কতা: কিছু অ্যাপ্লিকেশন এই মোডে কাজ নাও করতে পারে। কনফার্ম করলে ডিভাইস রিবুট করবে।"</string>
-    <string name="confirm_enable_4k_pages_title" msgid="626987400420355263">"৪KB পৃষ্ঠার জন্য মানানসই কার্নেল সহ রিবুুট করবেন?"</string>
-    <string name="confirm_enable_4k_pages_text" msgid="6168921566226074524">"কনফার্ম করলে ডিভাইস রিবুট করবে।"</string>
+    <!-- no translation found for enable_16k_pages (8001470927566110689) -->
+    <skip />
+    <!-- no translation found for enable_16k_pages_summary (1964363364670306912) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_title (1286925577014793351) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_text (570198382662424714) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_title (3210360137887034659) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_text (155070605667160083) -->
+    <skip />
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"কার্নেল ১৬KB পৃষ্ঠার জন্য মানানসই কার্নেলে আপডেট করা যায়নি।"</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"পরিবর্তন প্রয়োগ করা হচ্ছে"</string>
-    <string name="confirm_format_ext4_title" msgid="4453684705528818873">"ext4-এ ডিভাইস আবার ফর্ম্যাট করবেন?"</string>
-    <string name="confirm_format_ext4_text" msgid="8164677342487500794">"ext4 ফাইলসিস্টেমে ১৬কে ডেভেলপার বিকল্প কাজ করে। নিশ্চিত করার পরে ডিভাইস ওয়াইপ করা হবে এবং ফাইল সিস্টেম ext4-এ পরিবর্তিত হয়ে যাবে।"</string>
-    <string name="format_ext4_failure_toast" msgid="6904611547290793885">"ডেটা পার্টিশানকে ext4 ফর্ম্যাটে আবার ফর্ম্যাট করা ও ওয়াইপ করা যায়নি।"</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="6338135847153690912">"OEM আনলক করতে হবে"</string>
-    <string name="confirm_oem_unlock_for_16k_text" msgid="236718973897424382">"16K ডেভেলপার বিকল্প ব্যবহার করার আগে ডিভাইসটিকে OEM আনলক করতে হবে। OEM আনলক করার জন্য ব্যবহারকারীর ডেটা ফর্ম্যাট করতে হবে। ডিভাইসে OEM আনলক করে আবার চেষ্টা করুন।"</string>
+    <!-- no translation found for confirm_format_ext4_title (6696191800594435577) -->
+    <skip />
+    <!-- no translation found for confirm_format_ext4_text (7940372488624630214) -->
+    <skip />
+    <!-- no translation found for format_ext4_failure_toast (8059453995800471549) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (5374451262432025419) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_text (3583604865119937957) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_title (1184703958249093215) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text_short (2894243902906666242) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text (8284806650260868833) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_title (7762533464569818498) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text_short (269039281591806585) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (6208765386837706582) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_channel_name (1658444283036376361) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_action (2309805437430150456) -->
+    <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"সমস্যার রিপোর্টের পরিচালক"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"আপনার ডিভাইসে কোন অ্যাপটি সমস্যার রিপোর্টের শর্টকাট পরিচালনা করবে তা নির্ধারণ করে।"</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"ব্যক্তিগত"</string>
@@ -4883,7 +4905,7 @@
     <string name="media_controls_show_player" msgid="8504571042365814021">"প্লেয়ার দেখুন"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"মিডিয়া"</string>
     <string name="camera_extensions_fallback_title" msgid="3604579046777004989">"ক্যামেরা সফ্টওয়্যার এক্সটেনশনের অনুমতি দিন"</string>
-    <string name="camera_extensions_fallback_description" msgid="6939818294458854536">"উন্নত ক্যামেরা ফিচারের জন্য ডিফল্ট সফ্টওয়্যার প্রয়োগ করার প্রসেস চালু করে যেমন, চোখের সাহায্য ছাড়াই ভিডিওগ্রাফি।"</string>
+    <string name="camera_extensions_fallback_description" msgid="4306833827773277263">"উন্নত ক্যামেরা ফিচারের জন্য ডিফল্ট সফ্টওয়্যার প্রয়োগ করার প্রসেস চালু করে যেমন, HDR, নাইট বা ক্যামেরার অন্যান্য এক্সটেনশন।"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth চালু হবে"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"ইন্টারনেট"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"সিম"</string>
@@ -4953,6 +4975,8 @@
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"প্রিন্ট পরিষেবা ব্যবহার করুন"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"একাধিক ব্যবহারকারীকে অনুমতি দিন"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"অনুমতি, একাধিক, ব্যবহারকারী, অনুমতি, অনেক"</string>
+    <!-- no translation found for multiple_users_title_keywords (2395593167746225172) -->
+    <skip />
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"ওয়্যারলেস ডিবাগিং বিকল্প ব্যবহার করুন"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"গ্রাফিক্স ড্রাইভার বিকল্প ব্যবহার করুন"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"নাইট লাইট বিকল্প ব্যবহার করুন"</string>
@@ -4975,10 +4999,8 @@
     <string name="enable_2g_title" msgid="8184757884636162942">"2G ব্যবহারের অনুমতি দিন"</string>
     <string name="enable_2g_summary" msgid="2794534052372565914">"2G কম নিরাপদ কিন্তু কিছু লোকেশনে হয়ত আপনার কানেকশন উন্নত করতে পারে। জরুরি কলের জন্য, 2G সবসময় ব্যবহার করা যায়।"</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g>-এর জন্য 2G উপলভ্য থাকতে হবে"</string>
-    <!-- no translation found for require_cellular_encryption_title (6087085031703089235) -->
-    <skip />
-    <!-- no translation found for require_cellular_encryption_summary (6090569065420631457) -->
-    <skip />
+    <string name="require_cellular_encryption_title" msgid="6087085031703089235">"শুধু এনক্রিপটেড নেটওয়ার্কের অনুমতি রয়েছে"</string>
+    <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"এটি আরও বেশি সুরক্ষিত কিন্তু এটির জন্য কিছু লোকেশনে আপনার মোবাইল নেটওয়ার্ক কানেকশন সীমিত হতে পারে। জরুরি কল সবসময় ব্যবহারের অনুমতি রয়েছে।"</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"সব পরিষেবা"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"ক্লিপবোর্ড অ্যাক্সেস দেখুন"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"আপনি কপি করেছেন এমন টেক্সট, ছবি বা অন্যান্য কন্টেন্ট, অ্যাপ অ্যাক্সেস করলে মেসেজ দেখুন"</string>
@@ -5202,6 +5224,5 @@
     <string name="force_swcrypto_fallback_summary" msgid="181969966310309701">"DRM কী ম্যানেজমেন্টকে সফ্টওয়্যার-ভিত্তিক হোয়াইটবক্স ক্রিপ্টো ব্যবহার করতে বাধ্য করার জন্য একটি সেটিং প্রয়োগ করুন"</string>
     <string name="fingerprint_acquired_imager_dirty_udfps" msgid="7005042288289506776">"সেন্সরের কাছাকাছি থাকা স্ক্রিন পরিষ্কার করে আবার চেষ্টা করুন"</string>
     <string name="sim_category_converted_sim" msgid="8575548015816988908">"ই-সিমে রূপান্তরিত হয়েছে। সরিয়ে দিন ও বাতিল করুন।"</string>
-    <!-- no translation found for sync_across_devices_title (3447757705383089345) -->
-    <skip />
+    <string name="sync_across_devices_title" msgid="3447757705383089345">"ডিভাইস জুড়ে সিঙ্ক করুন"</string>
 </resources>

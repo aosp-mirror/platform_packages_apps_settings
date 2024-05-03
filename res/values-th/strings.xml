@@ -606,7 +606,7 @@
     <string name="private_space_error_screen_title" msgid="739381738044418346">"ตั้งค่าพื้นที่ส่วนตัวไม่ได้"</string>
     <string name="private_space_tryagain_label" msgid="8305362615231738367">"ลองอีกครั้ง"</string>
     <string name="private_space_lockscreen_title" msgid="5785259588888586366">"เลือกการล็อกใหม่สำหรับพื้นที่ส่วนตัวไหม"</string>
-    <string name="private_space_lockscreen_summary" msgid="3053836076639653805">"คุณจะตั้งค่าล็อกใหม่สำหรับพื้นที่ส่วนตัวโดยเฉพาะ หรือจะใช้ล็อกเดียวกับที่ใช้ปลดล็อกอุปกรณ์ก็ได้"</string>
+    <string name="private_space_lockscreen_summary" msgid="3053836076639653805">"คุณจะตั้งค่าการล็อกใหม่สำหรับพื้นที่ส่วนตัวโดยเฉพาะ หรือจะใช้การล็อกเดียวกับที่ใช้ปลดล็อกอุปกรณ์ก็ได้"</string>
     <string name="private_space_use_screenlock_label" msgid="9182153443192032782">"ใช้การล็อกหน้าจอ"</string>
     <string name="private_space_set_lock_label" msgid="1790408277477408475">"เลือกการล็อกใหม่"</string>
     <string name="private_space_pre_finish_title" msgid="2314776598615113267">"รอสักครู่…"</string>
@@ -1497,8 +1497,7 @@
     <string name="reset_esim_error_title" msgid="6516110227665862295">"ลบ eSIM ไม่ได้"</string>
     <string name="reset_esim_error_msg" msgid="8459527827897797168">"เกิดข้อผิดพลาดทำให้ลบ eSIM ไม่ได้\n\nโปรดรีสตาร์ทอุปกรณ์แล้วลองอีกครั้ง"</string>
     <string name="reset_private_space_delete_title" msgid="2555885198282572990">"ลบพื้นที่ส่วนตัว"</string>
-    <!-- no translation found for reset_private_space_delete_dialog (7506471054091800883) -->
-    <skip />
+    <string name="reset_private_space_delete_dialog" msgid="7506471054091800883">"หากคุณมีพื้นที่ส่วนตัวในอุปกรณ์ ระบบจะลบออกอย่างถาวรและจะนำบัญชี Google ที่เพิ่มไปยังพื้นที่ของคุณออก\n\nนอกจากนี้ ระบบจะลบแอปทั้งหมดในพื้นที่ของคุณและข้อมูลของแอปออกอย่างถาวร"</string>
     <string name="main_clear_title" msgid="277664302144837723">"ลบข้อมูลทั้งหมด (รีเซ็ตเป็นค่าเริ่มต้น)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"ลบข้อมูลทั้งหมด (รีเซ็ตเป็นค่าเริ่มต้น)"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"เพลง"</li>\n<li>"รูปภาพ"</li>\n<li>"ข้อมูลผู้ใช้อื่นๆ"</li></string>
@@ -1811,6 +1810,8 @@
     <string name="app_install_details_group_title" msgid="1172114479073704677">"Store"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"รายละเอียดแอป"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"ติดตั้งแอปจาก <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
+    <!-- no translation found for app_install_details_different_initiating_package_summary (6093306593167176688) -->
+    <skip />
     <string name="instant_app_details_summary" msgid="417197491598208216">"ดูข้อมูลเพิ่มเติมใน <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
     <string name="app_ops_running" msgid="6127474473137428721">"กำลังดำเนินการ"</string>
     <string name="app_ops_never_used" msgid="9038133162371204506">"(ไม่เคยใช้)"</string>
@@ -2290,12 +2291,9 @@
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"จับคู่เครื่องช่วยฟัง"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"ในหน้าจอถัดไป ให้แตะที่เครื่องช่วยฟัง คุณอาจต้องจับคู่อุปกรณ์ของหูฟังข้างซ้ายและขวาแยกกัน\n\nโปรดตรวจสอบว่าคุณเปิดเครื่องช่วยฟังแล้วและอุปกรณ์พร้อมจับคู่"</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ใช้งานอยู่"</string>
-    <!-- no translation found for accessibility_hearingaid_left_side_device_summary (12349058624943107) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_right_side_device_summary (8645789702686724188) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_left_and_right_side_device_summary (3314103411842694197) -->
-    <skip />
+    <string name="accessibility_hearingaid_left_side_device_summary" msgid="12349058624943107">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>/เฉพาะข้างซ้าย"</string>
+    <string name="accessibility_hearingaid_right_side_device_summary" msgid="8645789702686724188">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>/เฉพาะข้างขวา"</string>
+    <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="3314103411842694197">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>/ข้างซ้ายและขวา"</string>
     <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> +1 รายการ"</string>
     <string name="accessibility_hearing_device_pairing_title" msgid="2701812183769537320">"จับคู่อุปกรณ์ใหม่"</string>
     <string name="accessibility_hearing_device_connected_title" msgid="3785140037249487287">"เครื่องช่วยฟัง"</string>
@@ -2574,7 +2572,8 @@
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"ยืดอายุใช้งานแบตเตอรี่"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"ปิดเมื่อชาร์จแล้ว"</string>
     <string name="battery_saver_sticky_title_percentage" msgid="1178162022087559148">"ปิดที่ <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="battery_saver_sticky_description_new" msgid="6472610662679038342">"โหมดประหยัดแบตเตอรี่จะปิดเมื่อแบตเตอรี่ถึง <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <!-- no translation found for battery_saver_sticky_description_new (8543277078136947874) -->
+    <skip />
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"เปิด"</string>
@@ -2686,18 +2685,13 @@
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"เปิด"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"ปิด"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"ใช้การเชื่อมต่อแบบปรับอัตโนมัติ"</string>
-    <!-- no translation found for cellular_security_title (5562899485544677941) -->
-    <skip />
+    <string name="cellular_security_title" msgid="5562899485544677941">"การรักษาความปลอดภัยของเครือข่ายมือถือ"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"ประเภทเครือข่าย การเข้ารหัส ส่วนควบคุมการแจ้งเตือน"</string>
-    <!-- no translation found for cellular_security_top_intro (6749166804080092892) -->
-    <skip />
-    <!-- no translation found for cellular_security_settings_title (7779141923670352595) -->
-    <skip />
+    <string name="cellular_security_top_intro" msgid="6749166804080092892">"การตั้งค่าเหล่านี้จะช่วยปกป้องการโทร ข้อความ และข้อมูลของคุณจากเครือข่ายที่ล้าสมัยหรือไม่ได้เข้ารหัสซึ่งเสี่ยงต่อการเฝ้าระวังการขโมยข้อมูลได้"</string>
+    <string name="cellular_security_settings_title" msgid="7779141923670352595">"การรักษาความปลอดภัยของเครือข่ายมือถือ"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"การแจ้งเตือน"</string>
-    <!-- no translation found for cellular_security_notifications_controller_title (4853056963523277847) -->
-    <skip />
-    <!-- no translation found for cellular_security_notifications_controller_summary (8339863845393759958) -->
-    <skip />
+    <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"การแจ้งเตือนเกี่ยวกับเครือข่าย"</string>
+    <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"รับการแจ้งเตือนเมื่ออุปกรณ์เชื่อมต่อกับเครือข่ายที่ไม่ได้เข้ารหัส หรือเมื่อเครือข่ายบันทึกรหัสอุปกรณ์หรือซิมที่ไม่ซ้ำกัน"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"การเข้ารหัส"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"รุ่นเครือข่าย"</string>
     <string name="cellular_security_network_generations_summary" msgid="139087814553929402">"คุณสามารถกำหนดค่าซิมการ์ดที่ติดตั้งไว้แต่ละรายการให้เชื่อมต่อกับเครือข่ายที่รองรับ 3G, 4G และ 5G เท่านั้น ซิมจะไม่เชื่อมต่อกับเครือข่าย 2G ที่ไม่ปลอดภัยหรือเครือข่ายที่เก่ากว่านั้น การตั้งค่านี้อาจจำกัดการเชื่อมต่อของคุณในกรณีที่มีเครือข่าย 2G ใช้ได้เพียงเครือข่ายเดียว ในกรณีฉุกเฉิน ระบบอาจใช้เครือข่าย 2G"</string>
@@ -2970,7 +2964,8 @@
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{{orgName} ติดตั้งผู้ออกใบรับรองสำหรับโปรไฟล์งานของคุณ ซึ่งอาจอนุญาตให้องค์กรตรวจสอบกิจกรรมในเครือข่ายของที่ทำงาน รวมถึงอีเมล แอป และเว็บไซต์ที่รักษาความปลอดภัย\n\nโปรดติดต่อผู้ดูแลระบบเพื่อขอข้อมูลเพิ่มเติมเกี่ยวกับใบรับรองนี้}other{{orgName} ติดตั้งผู้ออกใบรับรองสำหรับโปรไฟล์งานของคุณ ซึ่งอาจอนุญาตให้องค์กรตรวจสอบกิจกรรมในเครือข่ายของที่ทำงาน รวมถึงอีเมล แอป และเว็บไซต์ที่รักษาความปลอดภัย\n\nโปรดติดต่อผู้ดูแลระบบเพื่อขอข้อมูลเพิ่มเติมเกี่ยวกับใบรับรองเหล่านี้}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"บุคคลที่สามสามารถตรวจสอบกิจกรรมทางเครือข่ายของคุณได้ รวมทั้งอีเมล แอป และเว็บไซต์ที่ปลอดภัย\n\nข้อมูลรับรองที่เชื่อถือได้ที่ติดตั้งในอุปกรณ์ของคุณทำให้การดำเนินการนี้เป็นไปได้"</string>
     <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{ตรวจสอบใบรับรอง}other{ตรวจสอบใบรับรอง}}"</string>
-    <string name="user_settings_title" msgid="6550866465409807877">"ผู้ใช้หลายคน"</string>
+    <!-- no translation found for user_settings_title (9208831545558787202) -->
+    <skip />
     <string name="user_list_title" msgid="1387379079186123404">"ผู้ใช้และโปรไฟล์"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"เพิ่มผู้ใช้หรือโปรไฟล์"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"โปรไฟล์ที่ถูกจำกัด"</string>
@@ -4647,6 +4642,10 @@
     <string name="summary_supported_service" msgid="4320535903444834786">"คุณส่งข้อความถึงใครก็ได้ รวมถึงบริการช่วยเหลือฉุกเฉิน โดยโทรศัพท์จะเชื่อมต่อกับเครือข่ายมือถืออีกครั้งเมื่อมีให้ใช้งาน"</string>
     <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"การรับส่งข้อความผ่านดาวเทียมอาจใช้เวลานานกว่าปกติและพร้อมให้ใช้งานเฉพาะในบางพื้นที่ โปรดทราบว่าสภาพอากาศและโครงสร้างบางอย่างอาจส่งผลต่อการติดต่อผ่านดาวเทียม การโทรผ่านดาวเทียมไม่พร้อมใช้งาน การโทรฉุกเฉินอาจยังเชื่อมต่ออยู่\n\nระบบอาจใช้เวลาสักครู่กว่าที่การเปลี่ยนแปลงในบัญชีจะแสดงในการตั้งค่า โปรดติดต่อสอบถามรายละเอียดจากผู้ให้บริการ"</string>
     <string name="more_about_satellite_messaging" msgid="3385673133561348509">"ข้อมูลเพิ่มเติมเกี่ยวกับการรับส่งข้อความผ่านดาวเทียม"</string>
+    <!-- no translation found for satellite_warning_dialog_title (1610117852475376931) -->
+    <skip />
+    <!-- no translation found for satellite_warning_dialog_content (936419945275934955) -->
+    <skip />
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"จุดเข้าใช้งาน"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"ใช้ไม่ได้เมื่อเชื่อมต่อกับ <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -4697,7 +4696,7 @@
     <string name="primary_sim_calls_title" msgid="4961189133582615685">"โทร"</string>
     <string name="primary_sim_texts_title" msgid="1287584042733097749">"ข้อความ"</string>
     <string name="primary_sim_automatic_data_title" msgid="1265528923229642480">"การเปลี่ยนการเชื่อมต่ออินเทอร์เน็ตอัตโนมัติ"</string>
-    <string name="primary_sim_automatic_data_msg" msgid="1612203837010785203">"ใช้การเชื่อมต่ออินเทอร์เน็ตจากซิมใดก็ได้โดยขึ้นอยู่กับการครอบคลุมและความพร้อมใช้งาน"</string>
+    <string name="primary_sim_automatic_data_msg" msgid="1612203837010785203">"ใช้การเชื่อมต่ออินเทอร์เน็ตจากซิมใดก็ได้โดยขึ้นอยู่กับความครอบคลุมและความพร้อมใช้งาน"</string>
     <string name="sim_action_restart_dialog_title" msgid="3507413479633430120">"รีสตาร์ทเพื่อใช้ 2 ซิม"</string>
     <string name="sim_action_restart_dialog_msg" msgid="4737611046767629774">"หากต้องการใช้ 2 ซิมพร้อมกัน ให้รีสตาร์ทอุปกรณ์แล้วเปิดใช้งาน 2 ซิม"</string>
     <string name="sim_action_restart_dialog_cancel" msgid="665560106686565624">"ใช้ <xliff:g id="CARRIER_NAME">%1$s</xliff:g> เท่านั้น"</string>
@@ -4808,19 +4807,46 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"ข้อมูลนโยบายงาน"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"การตั้งค่าที่ผู้ดูแลระบบไอทีจัดการ"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
-    <string name="enable_16k_pages" msgid="5009476566957520607">"บูตด้วยหน้าขนาด 16 KB"</string>
-    <string name="enable_16k_pages_summary" msgid="428117226069445198">"บูตอุปกรณ์โดยใช้เคอร์เนลที่รองรับหน้าขนาด 16 KB"</string>
-    <string name="confirm_enable_16k_pages_title" msgid="6751570067857011642">"รีบูตด้วยเคอร์เนลที่รองรับการใช้งานหน้าขนาด 16 KB ใช่ไหม"</string>
-    <string name="confirm_enable_16k_pages_text" msgid="702888115148257215">"คำเตือน: บางแอปพลิเคชันอาจไม่รองรับการใช้งานโหมดนี้ อุปกรณ์จะรีบูตหลังจากยืนยัน"</string>
-    <string name="confirm_enable_4k_pages_title" msgid="626987400420355263">"รีบูตด้วยเคอร์เนลที่รองรับการใช้งานหน้าขนาด 4 KB ใช่ไหม"</string>
-    <string name="confirm_enable_4k_pages_text" msgid="6168921566226074524">"อุปกรณ์จะรีบูตหลังจากยืนยัน"</string>
+    <!-- no translation found for enable_16k_pages (8001470927566110689) -->
+    <skip />
+    <!-- no translation found for enable_16k_pages_summary (1964363364670306912) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_title (1286925577014793351) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_text (570198382662424714) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_title (3210360137887034659) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_text (155070605667160083) -->
+    <skip />
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"อัปเดตเป็นเคอร์เนลที่รองรับการใช้งานหน้าขนาด 16 KB ไม่สำเร็จ"</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"กำลังใช้การเปลี่ยนแปลง"</string>
-    <string name="confirm_format_ext4_title" msgid="4453684705528818873">"ฟอร์แมตอุปกรณ์ใหม่เป็น ext4 ใช่ไหม"</string>
-    <string name="confirm_format_ext4_text" msgid="8164677342487500794">"ตัวเลือกสำหรับนักพัฒนาแอป 16K รองรับระบบไฟล์ ext4 ระบบจะล้างข้อมูลอุปกรณ์และระบบไฟล์จะเปลี่ยนเป็น ext4 หลังจากการยืนยัน"</string>
-    <string name="format_ext4_failure_toast" msgid="6904611547290793885">"ฟอร์แมตใหม่และล้างพาร์ติชันข้อมูลเป็น ext4 ไม่สำเร็จ"</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="6338135847153690912">"ต้องปลดล็อก OEM"</string>
-    <string name="confirm_oem_unlock_for_16k_text" msgid="236718973897424382">"ต้องทำการปลดล็อก OEM อุปกรณ์ก่อนจึงจะใช้ตัวเลือกสำหรับนักพัฒนาแอป 16K ได้ การปลดล็อก OEM ต้องมีการฟอร์แมตข้อมูลผู้ใช้ด้วย โปรดปลดล็อก OEM อุปกรณ์ แล้วลองอีกครั้ง"</string>
+    <!-- no translation found for confirm_format_ext4_title (6696191800594435577) -->
+    <skip />
+    <!-- no translation found for confirm_format_ext4_text (7940372488624630214) -->
+    <skip />
+    <!-- no translation found for format_ext4_failure_toast (8059453995800471549) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (5374451262432025419) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_text (3583604865119937957) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_title (1184703958249093215) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text_short (2894243902906666242) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text (8284806650260868833) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_title (7762533464569818498) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text_short (269039281591806585) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (6208765386837706582) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_channel_name (1658444283036376361) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_action (2309805437430150456) -->
+    <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"เครื่องจัดการรายงานข้อบกพร่อง"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"เลือกแอปที่จะให้จัดการทางลัดรายงานข้อบกพร่องในอุปกรณ์"</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"ส่วนตัว"</string>
@@ -4882,7 +4908,8 @@
     <string name="media_controls_show_player" msgid="8504571042365814021">"แสดงเพลเยอร์"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"สื่อ"</string>
     <string name="camera_extensions_fallback_title" msgid="3604579046777004989">"อนุญาตส่วนขยายซอฟต์แวร์กล้อง"</string>
-    <string name="camera_extensions_fallback_description" msgid="6939818294458854536">"เปิดการใช้งานซอฟต์แวร์เริ่มต้นของฟีเจอร์กล้องขั้นสูง เช่น การถ่ายทำวิดีโอโดยไม่ต้องใช้สายตา"</string>
+    <!-- no translation found for camera_extensions_fallback_description (4306833827773277263) -->
+    <skip />
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"บลูทูธจะเปิด"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"อินเทอร์เน็ต"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"ซิม"</string>
@@ -4952,6 +4979,8 @@
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"ใช้บริการพิมพ์"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"อนุญาตให้มีผู้ใช้หลายคน"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"อนุญาต, หลายคน, ผู้ใช้, อนุมัติ, จำนวนมาก"</string>
+    <!-- no translation found for multiple_users_title_keywords (2395593167746225172) -->
+    <skip />
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"ใช้การแก้ไขข้อบกพร่องผ่าน Wi-Fi"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"ใช้ค่ากำหนดไดรเวอร์กราฟิก"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"ใช้แสงตอนกลางคืน"</string>
@@ -4972,12 +5001,10 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"ไม่มีหมายเลขโทรศัพท์"</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"ตกลง"</string>
     <string name="enable_2g_title" msgid="8184757884636162942">"อนุญาตให้ใช้ 2G"</string>
-    <string name="enable_2g_summary" msgid="2794534052372565914">"2G ปลอดภัยน้อยกว่าแต่อาจเชื่อมต่อดีกว่าในบางสถานที่ โดยจะอนุญาตเสมอสำหรับหมายเลขฉุกเฉิน"</string>
+    <string name="enable_2g_summary" msgid="2794534052372565914">"2G ปลอดภัยน้อยกว่าแต่อาจเชื่อมต่อดีกว่าในบางสถานที่ โดยจะอนุญาตเสมอสำหรับการโทรฉุกเฉิน"</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> กำหนดให้ต้องใช้งาน 2G ได้"</string>
-    <!-- no translation found for require_cellular_encryption_title (6087085031703089235) -->
-    <skip />
-    <!-- no translation found for require_cellular_encryption_summary (6090569065420631457) -->
-    <skip />
+    <string name="require_cellular_encryption_title" msgid="6087085031703089235">"อนุญาตเฉพาะเครือข่ายที่เข้ารหัส"</string>
+    <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"การตั้งค่านี้มีความปลอดภัยมากขึ้น แต่ก็อาจจำกัดการเชื่อมต่อเครือข่ายมือถือในบางพื้นที่ ทั้งนี้คุณจะสามารถโทรฉุกเฉินได้อยู่เสมอ"</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"บริการทั้งหมด"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"แสดงการเข้าถึงคลิปบอร์ด"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"แสดงข้อความเมื่อแอปเข้าถึงข้อความ รูปภาพ หรือเนื้อหาอื่นๆ ที่คุณคัดลอก"</string>
