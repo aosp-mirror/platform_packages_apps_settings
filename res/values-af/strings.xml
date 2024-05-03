@@ -1810,6 +1810,7 @@
     <string name="app_install_details_group_title" msgid="1172114479073704677">"Winkel"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"Appbesonderhede"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"App is vanaf <xliff:g id="APP_STORE">%1$s</xliff:g> geïnstalleer"</string>
+    <string name="app_install_details_different_initiating_package_summary" msgid="6093306593167176688">"App is vanaf <xliff:g id="APP_STORE1">%1$s</xliff:g> geïnstalleer (via <xliff:g id="APP_STORE2">%2$s</xliff:g>)"</string>
     <string name="instant_app_details_summary" msgid="417197491598208216">"Meer inligting oor <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
     <string name="app_ops_running" msgid="6127474473137428721">"Loop tans"</string>
     <string name="app_ops_never_used" msgid="9038133162371204506">"(Nooit gebruik nie)"</string>
@@ -2184,7 +2185,7 @@
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Hoëkontrasteks"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Verander tekskleur na swart of wit. Vergroot kontras met die agtergrond."</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"Maksimeer tekskontras"</string>
-    <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"Voeg ’n swart of wit agtergrond rondom die teks om die kontras te verhoog"</string>
+    <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"Voeg ’n swart of wit agtergrond by rondom die teks om die kontras te verhoog"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Dateer outomaties skermvergroting op"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Dateer skermvergroting op tydens programverwisseling"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Kragknoppie beëindig oproep"</string>
@@ -2289,12 +2290,9 @@
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Bind gehoortoestelle saam"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"Tik op die volgende skerm op jou gehoortoestelle. Jy sal dalk die linker- en regteroor apart moet saambind.\n\nMaak seker dat jou gehoortoestelle aangeskakel en gereed is om saam te bind."</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> is aktief"</string>
-    <!-- no translation found for accessibility_hearingaid_left_side_device_summary (12349058624943107) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_right_side_device_summary (8645789702686724188) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_left_and_right_side_device_summary (3314103411842694197) -->
-    <skip />
+    <string name="accessibility_hearingaid_left_side_device_summary" msgid="12349058624943107">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>/net linkerkant"</string>
+    <string name="accessibility_hearingaid_right_side_device_summary" msgid="8645789702686724188">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>/net regterkant"</string>
+    <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="3314103411842694197">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>/linkerkant en regterkant"</string>
     <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> + nog 1"</string>
     <string name="accessibility_hearing_device_pairing_title" msgid="2701812183769537320">"Bind nuwe toestel saam"</string>
     <string name="accessibility_hearing_device_connected_title" msgid="3785140037249487287">"Gehoortoestelle"</string>
@@ -2573,7 +2571,8 @@
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Verleng batterylewe"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Skakel af wanneer dit gelaai is"</string>
     <string name="battery_saver_sticky_title_percentage" msgid="1178162022087559148">"Skakel af by <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="battery_saver_sticky_description_new" msgid="6472610662679038342">"Batterybespaarder skakel af wanneer battery <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> bereik"</string>
+    <!-- no translation found for battery_saver_sticky_description_new (8543277078136947874) -->
+    <skip />
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Skakel aan"</string>
@@ -2685,18 +2684,13 @@
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"Aan"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"Af"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Gebruik aanpasbare verbinding"</string>
-    <!-- no translation found for cellular_security_title (5562899485544677941) -->
-    <skip />
+    <string name="cellular_security_title" msgid="5562899485544677941">"Selnetwerksekuriteit"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"Netwerktipe, enkripsie, kennisgewingkontroles"</string>
-    <!-- no translation found for cellular_security_top_intro (6749166804080092892) -->
-    <skip />
-    <!-- no translation found for cellular_security_settings_title (7779141923670352595) -->
-    <skip />
+    <string name="cellular_security_top_intro" msgid="6749166804080092892">"Hierdie instellings help om jou oproepe, boodskappe en data te beskerm teen verouderde of ongeënkripteerde netwerke wat jou aan datadiefstal of -waarneming kan blootstel"</string>
+    <string name="cellular_security_settings_title" msgid="7779141923670352595">"Selnetwerksekuriteit"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"Kennisgewings"</string>
-    <!-- no translation found for cellular_security_notifications_controller_title (4853056963523277847) -->
-    <skip />
-    <!-- no translation found for cellular_security_notifications_controller_summary (8339863845393759958) -->
-    <skip />
+    <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"Netwerkkennisgewings"</string>
+    <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"Kry ’n kennisgewing wanneer jou toestel aan ’n ongeënkripteerde netwerk verbind of wanneer ’n netwerk jou unieke toestel- of SIM-ID aanteken"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"Enkripsie"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"Netwerkgenerasies"</string>
     <string name="cellular_security_network_generations_summary" msgid="139087814553929402">"Jy kan elke geïnstalleerde SIM-kaart opstel om net te koppel aan netwerke wat 3G, 4G en 5G steun. Die SIM sal nie aan ouer, onveilige 2G-netwerke koppel nie. Hierdie instelling kan jou konnektiwiteit beperk as 2G die enigste beskikbare netwerk is. 2G mag in ’n noodgeval gebruik word."</string>
@@ -2969,15 +2963,15 @@
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{{orgName} het ’n sertifikaatinstansie vir jou werkprofiel geïnstalleer wat dit vir hulle moontlik kan maak om werknetwerkaktiwiteit, insluitend e-posse, programme en beveiligde webwerwe, te monitor.\n\nKontak jou admin vir meer inligting oor hierdie sertifikaat.}other{{orgName} het sertifikaatinstansies vir jou werkprofiel geïnstalleer wat dit vir hulle moontlik kan maak om werknetwerkaktiwiteit, insluitend e-posse, programme en beveiligde webwerwe, te monitor.\n\nKontak jou admin vir meer inligting oor hierdie sertifikate.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"\'n Derde party kan jou netwerkaktiwiteit monitor, insluitend e-posse, programme en veilige webwerwe.\n\n\'n Vertroude eiebewys wat op jou toestel geïnstalleer is, maak dit moontlik."</string>
     <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{Gaan sertifikaat na}other{Gaan sertifikate na}}"</string>
-    <string name="user_settings_title" msgid="6550866465409807877">"Veelvuldige gebruikers"</string>
+    <!-- no translation found for user_settings_title (9208831545558787202) -->
+    <skip />
     <string name="user_list_title" msgid="1387379079186123404">"Gebruikers en profiele"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"Voeg gebruiker of profiel by"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"Beperkte profiel"</string>
     <string name="user_summary_not_set_up" msgid="4602868481732886115">"Nie opgestel nie"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1658946988920104613">"Nie opgestel nie - beperkte profiel"</string>
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"Nie opgestel nie – werkprofiel"</string>
-    <!-- no translation found for user_owner (2079206733011361994) -->
-    <skip />
+    <string name="user_owner" msgid="2079206733011361994">"Eienaar"</string>
     <string name="user_admin" msgid="4024553191395768119">"Admin"</string>
     <string name="user_you" msgid="3070562015202859996">"Jy (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_add_max_count" msgid="3328539978480663740">"Jy kan nie meer gebruikers byvoeg nie. Verwyder ’n gebruiker om ’n nuwe een by te voeg."</string>
@@ -4138,7 +4132,7 @@
     <string name="battery_saver_off_scheduled_summary" msgid="2193875981740829819">"Sal aanskakel op <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="battery_saver_off_summary" msgid="4411561435493109261">"Af"</string>
     <string name="app_battery_usage_title" msgid="346558380609793334">"Appbatterygebruik"</string>
-    <string name="app_battery_usage_summary" msgid="6349965904306339539">"Stel batterygebruik vir programme"</string>
+    <string name="app_battery_usage_summary" msgid="6349965904306339539">"Stel batterygebruik vir apps"</string>
     <string name="battery_tips_card_action_button" msgid="4897793527424711648">"Bekyk instellings"</string>
     <string name="battery_tips_card_action_button_check" msgid="1535140204105479318">"Kontroleer"</string>
     <string name="battery_tips_card_dismiss_button" msgid="1885756985544936618">"Het dit"</string>
@@ -4251,7 +4245,7 @@
     <string name="keywords_system_navigation" msgid="3131782378486554934">"stelselnavigasie, 2-knoppienavigasie, 3-knoppienavigasie, gebaarnavigasie, swiep"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Digitale assistent"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Swiep om assistent op te roep"</string>
-    <string name="assistant_corner_gesture_summary" msgid="5012534700233017955">"Swiep op van ’n onderste hoek af om digitale bystandapp op te roep"</string>
+    <string name="assistant_corner_gesture_summary" msgid="5012534700233017955">"Swiep op van ’n onderste hoek af om digitale-assistent-app op te roep"</string>
     <string name="assistant_long_press_home_gesture_title" msgid="4865972278738178753">"Hou Tuis vir Assistent"</string>
     <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"Druk en hou die tuisknoppie om digitaleassistentapp op te roep."</string>
     <string name="low_label" msgid="6525629096999711220">"Laag"</string>
@@ -4606,7 +4600,7 @@
     <string name="mobile_network_inactive_esim" msgid="8777415108263057939">"Onaktief/e-SIM"</string>
     <string name="mobile_network_sim_name" msgid="3187192894150386537">"SIM-naam en -kleur"</string>
     <string name="mobile_network_sim_name_label" msgid="1452440641628369625">"Naam"</string>
-    <string name="mobile_network_sim_color_label" msgid="5293944087609632340">"Kleur (gebruik deur versoenbare programme)"</string>
+    <string name="mobile_network_sim_color_label" msgid="5293944087609632340">"Kleur (gebruik deur versoenbare apps)"</string>
     <string name="mobile_network_sim_name_rename" msgid="5967588549571582924">"Stoor"</string>
     <string name="mobile_network_use_sim_on" msgid="5333182776279917886">"Gebruik hierdie SIM"</string>
     <string name="mobile_network_use_sim_off" msgid="6303281166199670639">"Af"</string>
@@ -4647,6 +4641,8 @@
     <string name="summary_supported_service" msgid="4320535903444834786">"Jy kan ’n teksboodskap na enigiemand stuur, insluitend nooddienste. Jou foon sal weer aan ’n selnetwerk verbind wanneer dit beskikbaar is."</string>
     <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"Satellietboodskappe kan langer neem en is net in sekere gebiede beskikbaar. Die weer en sekere strukture kan jou satellietverbinding affekteer. Satellietoproepe is nie beskikbaar nie. Noodfoonoproepe kan steeds verbind.\n\nDit kan \'n tyd neem vir rekeningveranderinge om te wys in Instellings. Kontak jou diensverskaffer vir besonderhede"</string>
     <string name="more_about_satellite_messaging" msgid="3385673133561348509">"Meer oor satellietboodskappe"</string>
+    <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"Kan nie <xliff:g id="FUNCTION">%1$s</xliff:g> aanskakel nie"</string>
+    <string name="satellite_warning_dialog_content" msgid="936419945275934955">"Beëindig eers die satellietverbinding om <xliff:g id="FUNCTION">%1$s</xliff:g> aan te skakel."</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Toegangspuntname"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Onbeskikbaar wanneer gekoppel aan <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -4808,19 +4804,46 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"Jou werkbeleidinligting"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"Instellings wat deur jou IT-admin bestuur word"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
-    <string name="enable_16k_pages" msgid="5009476566957520607">"Selflaai met 16K-bladsygrootte"</string>
-    <string name="enable_16k_pages_summary" msgid="428117226069445198">"Selflaaitoestel wat 16K-bladsygrootte ondersteunde kern gebruik"</string>
-    <string name="confirm_enable_16k_pages_title" msgid="6751570067857011642">"Herlaai met 16KB-bladsye versoenbare kern?"</string>
-    <string name="confirm_enable_16k_pages_text" msgid="702888115148257215">"WAARSKUWING: Sommige apps is dalk nie versoenbaar met hierdie modus nie. Toestel sal ná bevestiging herlaai."</string>
-    <string name="confirm_enable_4k_pages_title" msgid="626987400420355263">"Herlaai met 4KB-bladsye versoenbare kern?"</string>
-    <string name="confirm_enable_4k_pages_text" msgid="6168921566226074524">"Toestel sal ná bevestiging herlaai."</string>
+    <!-- no translation found for enable_16k_pages (8001470927566110689) -->
+    <skip />
+    <!-- no translation found for enable_16k_pages_summary (1964363364670306912) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_title (1286925577014793351) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_text (570198382662424714) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_title (3210360137887034659) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_text (155070605667160083) -->
+    <skip />
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"Kon nie kern opdateer na 16KB-bladsy versoenbare kern nie."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Pas tans verandering toe"</string>
-    <string name="confirm_format_ext4_title" msgid="4453684705528818873">"Herformateer toestel na ext4?"</string>
-    <string name="confirm_format_ext4_text" msgid="8164677342487500794">"16K-ontwikkelaaropsie word met ext4-lêerstelsel gesteun. Toestel sal uitgevee word en die lêerstelsel sal ná bevestiging na ext4 verander word."</string>
-    <string name="format_ext4_failure_toast" msgid="6904611547290793885">"Kon nie herformateer en die dataverdeling na ext4 skoonvee nie."</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="6338135847153690912">"OEM-ontsluit word vereis"</string>
-    <string name="confirm_oem_unlock_for_16k_text" msgid="236718973897424382">"Die toestel moet OEM-ontsluit wees voordat 16K-ontwikkelaaropsie gebruik word. OEM-ontsluit sal ook die formatering van gebruikerdata vereis. OEM-ontsluit asseblief die toestel en probeer weer."</string>
+    <!-- no translation found for confirm_format_ext4_title (6696191800594435577) -->
+    <skip />
+    <!-- no translation found for confirm_format_ext4_text (7940372488624630214) -->
+    <skip />
+    <!-- no translation found for format_ext4_failure_toast (8059453995800471549) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (5374451262432025419) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_text (3583604865119937957) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_title (1184703958249093215) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text_short (2894243902906666242) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text (8284806650260868833) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_title (7762533464569818498) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text_short (269039281591806585) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (6208765386837706582) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_channel_name (1658444283036376361) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_action (2309805437430150456) -->
+    <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"Foutverslaghanteerder"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Bepaal watter program die Foutverslag-kortpad op jou toestel hanteer."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Persoonlik"</string>
@@ -4882,7 +4905,7 @@
     <string name="media_controls_show_player" msgid="8504571042365814021">"Wys speler"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"media"</string>
     <string name="camera_extensions_fallback_title" msgid="3604579046777004989">"Laat kamerasagteware-uitbreidings toe"</string>
-    <string name="camera_extensions_fallback_description" msgid="6939818294458854536">"Aktiveer die versteksagteware-implementering van gevorderde kamera-eienskappe soos videografie vir swaksiendes."</string>
+    <string name="camera_extensions_fallback_description" msgid="4306833827773277263">"Aktiveer die versteksagteware-implementering van gevorderde kamera-eienskappe soos HDR, Nag, of ander kamera-uitbreidings."</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth sal aanskakel"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"Internet"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM\'s"</string>
@@ -4952,6 +4975,8 @@
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Gebruik drukdiens"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Laat veelvuldige gebruikers toe"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"laat toe, veelvuldig, gebruiker, baie"</string>
+    <!-- no translation found for multiple_users_title_keywords (2395593167746225172) -->
+    <skip />
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Gebruik draadlose ontfouting"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Gebruik grafikadrywervoorkeure"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"Gebruik Aandbeligting"</string>
@@ -4974,10 +4999,8 @@
     <string name="enable_2g_title" msgid="8184757884636162942">"Laat 2G toe"</string>
     <string name="enable_2g_summary" msgid="2794534052372565914">"2G is minder veilig, maar kan jou verbinding in sekere liggings verbeter. 2G word altyd toegelaat vir noodoproepe."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> vereis 2G om beskikbaar te wees"</string>
-    <!-- no translation found for require_cellular_encryption_title (6087085031703089235) -->
-    <skip />
-    <!-- no translation found for require_cellular_encryption_summary (6090569065420631457) -->
-    <skip />
+    <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Laat slegs geënkripteerde netwerke toe"</string>
+    <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"Dit is meer beveilig maar kan jou selnetwerkverbinding in sekere liggings beperk. Noodoproepe word altyd toegelaat."</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Alle dienste"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Wys knipbordtoegang"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Wys \'n boodskap wanneer apps toegang het tot teks, prente of ander inhoud wat jy gekopieer het"</string>
@@ -5201,6 +5224,5 @@
     <string name="force_swcrypto_fallback_summary" msgid="181969966310309701">"Dwing DRM-sleutelbestuur om sagtewaregebaseerde witbokskripto te gebruik"</string>
     <string name="fingerprint_acquired_imager_dirty_udfps" msgid="7005042288289506776">"Maak jou skerm naby die sensor skoon en probeer weer"</string>
     <string name="sim_category_converted_sim" msgid="8575548015816988908">"Omgeskakel na e-SIM. Verwyder en gooi weg."</string>
-    <!-- no translation found for sync_across_devices_title (3447757705383089345) -->
-    <skip />
+    <string name="sync_across_devices_title" msgid="3447757705383089345">"Sinkroniseer alle toestelle"</string>
 </resources>

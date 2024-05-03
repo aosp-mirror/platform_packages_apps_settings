@@ -1810,6 +1810,7 @@
     <string name="app_install_details_group_title" msgid="1172114479073704677">"Store"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"अ‍ॅप तपशील"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"अ‍ॅप <xliff:g id="APP_STORE">%1$s</xliff:g> मधून इंस्टॉल केले"</string>
+    <string name="app_install_details_different_initiating_package_summary" msgid="6093306593167176688">"<xliff:g id="APP_STORE1">%1$s</xliff:g> मधून (<xliff:g id="APP_STORE2">%2$s</xliff:g> द्वारे) अ‍ॅप इंस्टॉल केले आहे"</string>
     <string name="instant_app_details_summary" msgid="417197491598208216">"<xliff:g id="APP_STORE">%1$s</xliff:g> ची अधिक माहिती"</string>
     <string name="app_ops_running" msgid="6127474473137428721">"सुरू आहे"</string>
     <string name="app_ops_never_used" msgid="9038133162371204506">"(कधीही न वापरलेले)"</string>
@@ -2289,12 +2290,9 @@
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"श्रवणयंत्रे पेअर करा"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"पुढील स्क्रीनवर, तुमच्या श्रवणयंत्रांवर टॅप करा. तुम्हाला डावे आणि उजवे कान स्वतंत्रपणे पेअर करावे लागतील.\n\nतुमची श्रवणयंत्रे सुरू केलेली आणि जोडण्यासाठी तयार असल्याची खात्री करा."</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> सुरू आहे"</string>
-    <!-- no translation found for accessibility_hearingaid_left_side_device_summary (12349058624943107) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_right_side_device_summary (8645789702686724188) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_left_and_right_side_device_summary (3314103411842694197) -->
-    <skip />
+    <string name="accessibility_hearingaid_left_side_device_summary" msgid="12349058624943107">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> / फक्त डावे"</string>
+    <string name="accessibility_hearingaid_right_side_device_summary" msgid="8645789702686724188">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> / फक्त उजवे"</string>
+    <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="3314103411842694197">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> / डावे आणि उजवे"</string>
     <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> + आणखी १"</string>
     <string name="accessibility_hearing_device_pairing_title" msgid="2701812183769537320">"नवीन डिव्हाइस पेअर करा"</string>
     <string name="accessibility_hearing_device_connected_title" msgid="3785140037249487287">"श्रवणयंत्रे"</string>
@@ -2573,7 +2571,8 @@
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"बॅटरी लाइफ वाढवा"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"चार्ज झाल्यानंतर बंद करा"</string>
     <string name="battery_saver_sticky_title_percentage" msgid="1178162022087559148">"<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> झाल्यावर बंद करा"</string>
-    <string name="battery_saver_sticky_description_new" msgid="6472610662679038342">"बॅटरी <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> वर पोहोचते तेव्हा बॅटरी सेव्हर बंद होते"</string>
+    <!-- no translation found for battery_saver_sticky_description_new (8543277078136947874) -->
+    <skip />
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"सुरू करा"</string>
@@ -2685,18 +2684,13 @@
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"सुरू"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"बंद"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"अडॅप्टिव्ह कनेक्टिव्हिटी वापरा"</string>
-    <!-- no translation found for cellular_security_title (5562899485544677941) -->
-    <skip />
+    <string name="cellular_security_title" msgid="5562899485544677941">"मोबाइल नेटवर्क सुरक्षा"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"नेटवर्क प्रकार, एन्क्रिप्शन, नोटिफिकेशन नियंत्रणे"</string>
-    <!-- no translation found for cellular_security_top_intro (6749166804080092892) -->
-    <skip />
-    <!-- no translation found for cellular_security_settings_title (7779141923670352595) -->
-    <skip />
+    <string name="cellular_security_top_intro" msgid="6749166804080092892">"या सेटिंग्ज तुमचा डेटा चोरू शकणाऱ्या किंवा तुमच्यावर लक्ष ठेवणाऱ्या कालबाह्य अथवा एन्क्रिप्ट न केलेल्या नेटवर्कपासून तुमचे कॉल, मेसेज आणि डेटा यांचे संरक्षण करण्यात मदत करतात."</string>
+    <string name="cellular_security_settings_title" msgid="7779141923670352595">"मोबाइल नेटवर्क सुरक्षा"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"नोटिफिकेशन"</string>
-    <!-- no translation found for cellular_security_notifications_controller_title (4853056963523277847) -->
-    <skip />
-    <!-- no translation found for cellular_security_notifications_controller_summary (8339863845393759958) -->
-    <skip />
+    <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"नेटवर्कसंबंधित नोटिफिकेशन"</string>
+    <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"तुमचे डिव्हाइस एन्क्रिप्ट न केलेल्या नेटवर्कशी कनेक्ट केल्यास किंवा एखाद्या नेटवर्कने तुमचा युनिक डिव्हाइस आयडी अथवा सिम आयडी रेकॉर्ड केल्यास, सूचना मिळवा"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"एन्क्रिप्शन"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"नेटवर्कची जनरेशन"</string>
     <string name="cellular_security_network_generations_summary" msgid="139087814553929402">"तुम्ही इंस्टॉल केलेले प्रत्येक सिम कार्ड फक्त 3G, 4G आणि 5G ला सपोर्ट करणाऱ्या नेटवर्कशी कनेक्ट करण्यासाठी कॉन्फिगर करू शकता. सिम जुन्या, असुरक्षित 2G नेटवर्कशी कनेक्ट होणार नाही. फक्त 2G नेटवर्क उपलब्ध असल्यास, या सेटिंगमुळे तुमची कनेक्टिव्हिटी मर्यादित होऊ शकते. आणीबाणीच्या परिस्थितीमध्ये 2G वापरले जाऊ शकते."</string>
@@ -2969,7 +2963,8 @@
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{{orgName} यांनी तुमच्या कार्य प्रोफाइलसाठी सर्टिफिकेटसंबंधित अधिकार इंस्टॉल केला आहे जो त्यांना ईमेल, अ‍ॅप्स आणि सुरक्षित वेबसाइट तसेच कार्य नेटवर्क अ‍ॅक्टिव्हिटीचे परीक्षण करण्याची अनुमती देऊ शकतो.\n\nया सर्टिफिकेटसंबंधित अधिक माहितीसाठी तुमच्या ॲडमिनशी संपर्क साधा.}other{{orgName} यांनी तुमच्या कार्य प्रोफाइलसाठी सर्टिफिकेटसंबंधित अधिकार इंस्टॉल केले आहेत जे त्यांना ईमेल, अ‍ॅप्स आणि सुरक्षित वेबसाइट तसेच कार्य नेटवर्क अ‍ॅक्टिव्हिटीचे परीक्षण करण्याची अनुमती देऊ शकतात.\n\nया सर्टिफिकेटसंबंधित अधिक माहितीसाठी तुमच्या ॲडमिनशी संपर्क साधा.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"एक तृतीय पक्ष ईमेल, अ‍ॅप्स आणि सुरक्षित वेबसाइट यासह, आपल्या नेटवर्क ॲक्टिव्हिटीचे परीक्षण करण्यास सक्षम आहे.\n\nआपल्या डीव्हाइसवर इंस्टॉल केलेले विश्वसनीय क्रेडेंशियल हे शक्य करते."</string>
     <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{प्रमाणपत्र तपासा}other{प्रमाणपत्रे तपासा}}"</string>
-    <string name="user_settings_title" msgid="6550866465409807877">"एकाहून अधिक वापरकर्ते"</string>
+    <!-- no translation found for user_settings_title (9208831545558787202) -->
+    <skip />
     <string name="user_list_title" msgid="1387379079186123404">"वापरकर्ते आणि प्रोफाईल्स"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"वापरकर्ता किंवा प्रोफाइल जोडा"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"प्रतिबंधित प्रोफाईल"</string>
@@ -4646,6 +4641,8 @@
     <string name="summary_supported_service" msgid="4320535903444834786">"आणीबाणी सेवांसह तुम्ही कोणालाही एसएमएस पाठवू शकता. उपलब्ध असेल, तेव्हा तुमचा फोन मोबाइल नेटवर्कशी पुन्हा कनेक्ट होईल."</string>
     <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"उपग्रह मेसेजिंगला जास्त वेळ लागू शकतो आणि ते फक्त काही भागांमध्येच उपलब्ध आहे. हवामान आणि विशिष्ट संरचना तुमच्या उपग्रह कनेक्शनवर परिणाम करू शकतात. उपग्रहाद्वारे कॉल करणे उपलब्ध नाही. आणीबाणी कॉल अजूनही कनेक्ट होऊ शकतात.\n\nखात्यामधील बदल सेटिंग्ज मध्ये दिसण्यासाठी काही वेळ लागू शकतो. तपशिलांसाठी तुमच्या वाहकाशी संपर्क साधा."</string>
     <string name="more_about_satellite_messaging" msgid="3385673133561348509">"उपग्रह मेसेजिंगबद्दल अधिक"</string>
+    <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"<xliff:g id="FUNCTION">%1$s</xliff:g> सुरू करू शकत नाही"</string>
+    <string name="satellite_warning_dialog_content" msgid="936419945275934955">"<xliff:g id="FUNCTION">%1$s</xliff:g> सुरू करण्यासाठी, सर्वप्रथम उपग्रह कनेक्शन बंद करा"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"अ‍ॅक्सेस पॉइंट"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"<xliff:g id="CARRIER">%1$s</xliff:g>शी कनेक्ट केले असल्यास उपलब्ध नाही"</string>
@@ -4807,19 +4804,46 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"तुमच्या कार्य धोरणाची माहिती"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"तुमच्या आयटी ॲडमिनद्वारे व्यवस्थापित केलेली सेटिंग्ज"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
-    <string name="enable_16k_pages" msgid="5009476566957520607">"16K पेज आकार वापरून बूट करा"</string>
-    <string name="enable_16k_pages_summary" msgid="428117226069445198">"16K पेज सपोर्ट असलेल्या कर्नेलने डिव्हाइस बूट करा"</string>
-    <string name="confirm_enable_16k_pages_title" msgid="6751570067857011642">"16KB पेज कंपॅटिबल कर्नेलसह रीबूट करायचे आहे का?"</string>
-    <string name="confirm_enable_16k_pages_text" msgid="702888115148257215">"चेतावणी: काही अ‍ॅप्लिकेशन या मोडशी कंपॅटिबल नसू शकतात. कंफर्मेशननंतर डिव्हाइस रीबूट केले जाईल."</string>
-    <string name="confirm_enable_4k_pages_title" msgid="626987400420355263">"4KB पेज कंपॅटिबल कर्नेलसह रीबूट करायचे आहे का?"</string>
-    <string name="confirm_enable_4k_pages_text" msgid="6168921566226074524">"कंफर्मेशननंतर डिव्हाइस रीबूट केले जाईल."</string>
+    <!-- no translation found for enable_16k_pages (8001470927566110689) -->
+    <skip />
+    <!-- no translation found for enable_16k_pages_summary (1964363364670306912) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_title (1286925577014793351) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_text (570198382662424714) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_title (3210360137887034659) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_text (155070605667160083) -->
+    <skip />
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"कर्नेल हे 16KB पेज कंपॅटिबल असलेल्या कर्नेलवर अपडेट करता आले नाही."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"बदल लागू करत आहे"</string>
-    <string name="confirm_format_ext4_title" msgid="4453684705528818873">"डिव्हाइस ext4 वर पुन्हा फॉरमॅट करायचे आहे का?"</string>
-    <string name="confirm_format_ext4_text" msgid="8164677342487500794">"ext4 फाइलसिस्टीमसह 16K डेव्हलपर पर्यायाला सपोर्ट आहे. कन्फर्मेशननंतर डिव्हाइस पुसून टाकले जाईल आणि फाइलसिस्टीम ext4 मध्ये बदलली जाईल."</string>
-    <string name="format_ext4_failure_toast" msgid="6904611547290793885">"डेटाचा भाग ext4 वर पुन्हा फॉरमॅट करता आला नाही आणि पुसून टाकता आला नाही."</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="6338135847153690912">"OEM अनलॉक आवश्यक आहे"</string>
-    <string name="confirm_oem_unlock_for_16k_text" msgid="236718973897424382">"16K डेव्हलपर पर्याय वापरण्यापूर्वी डिव्हाइस OEM अनलॉक केलेले असणे आवश्यक आहे. OEM अनलॉकसाठी वापरकर्ता डेटाचे फॉरमॅटिंग देखील आवश्यक असेल. कृपया डिव्हाइसला OEM अनलॉक करा आणि पुन्हा प्रयत्न करा."</string>
+    <!-- no translation found for confirm_format_ext4_title (6696191800594435577) -->
+    <skip />
+    <!-- no translation found for confirm_format_ext4_text (7940372488624630214) -->
+    <skip />
+    <!-- no translation found for format_ext4_failure_toast (8059453995800471549) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (5374451262432025419) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_text (3583604865119937957) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_title (1184703958249093215) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text_short (2894243902906666242) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text (8284806650260868833) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_title (7762533464569818498) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text_short (269039281591806585) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (6208765386837706582) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_channel_name (1658444283036376361) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_action (2309805437430150456) -->
+    <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"बग रिपोर्ट हँडलर"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"कोणते ॲप तुमच्या डिव्हाइसवरील बग रिपोर्ट शॉर्टकट हाताळेल हे निर्धारित करते."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"वैयक्तिक"</string>
@@ -4881,7 +4905,7 @@
     <string name="media_controls_show_player" msgid="8504571042365814021">"प्‍लेअर दाखवा"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"मीडिया"</string>
     <string name="camera_extensions_fallback_title" msgid="3604579046777004989">"कॅमेरा सॉफ्टवेअरच्या एक्स्टेंशनना अनुमती द्या"</string>
-    <string name="camera_extensions_fallback_description" msgid="6939818294458854536">"न बघता व्हिडिओग्राफी यांसारख्या प्रगत कॅमेरा वैशिष्ट्यांच्या डीफॉल्ट सॉफ्टवेअरची अंमलबजावणी सुरू करते."</string>
+    <string name="camera_extensions_fallback_description" msgid="4306833827773277263">"HDR, नाइट आणि इतर एक्स्टेंशन यांसारख्या प्रगत कॅमेरा वैशिष्ट्यांच्या डीफॉल्ट सॉफ्टवेअरची अंमलबजावणी सुरू करते."</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"ब्लूटूथ सुरू होईल"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"इंटरनेट"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"सिम"</string>
@@ -4951,6 +4975,8 @@
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"प्रिंट सेवा वापरा"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"एकाहून अधिक वापरकर्त्यांना अनुमती द्या"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"अनुमती द्या, एकाहून अधिक, वापरकर्ता, परवानगी द्या, बरेच"</string>
+    <!-- no translation found for multiple_users_title_keywords (2395593167746225172) -->
+    <skip />
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"वायरलेस डीबगिंग वापरणे"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"ग्राफिक ड्रायव्हर प्राधान्ये वापरणे"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"रात्रीचा प्रकाश वापरणे"</string>
@@ -4973,10 +4999,8 @@
     <string name="enable_2g_title" msgid="8184757884636162942">"2G ला अनुमती द्या"</string>
     <string name="enable_2g_summary" msgid="2794534052372565914">"2G कमी सुरक्षित आहे, पण ते काही ठिकाणी तुमच्या कनेक्शनमध्ये सुधारणा करू शकते. आणीबाणी कॉलसाठी, 2G ला नेहमी अनुमती आहे."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> साठी 2G उपलब्ध असण्याची आवश्यकता आहे"</string>
-    <!-- no translation found for require_cellular_encryption_title (6087085031703089235) -->
-    <skip />
-    <!-- no translation found for require_cellular_encryption_summary (6090569065420631457) -->
-    <skip />
+    <string name="require_cellular_encryption_title" msgid="6087085031703089235">"एन्क्रिप्ट केलेल्या नेटवर्कनाच अनुमती द्या"</string>
+    <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"हे आणखी सुरक्षित आहे, पण काही ठिकाणी तुमच्या मोबाइल नेटवर्कचे कनेक्शन मर्यादित करू शकते. आणीबाणी कॉलला नेहमी अनुमती दिलेली असते."</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"सर्व सेवा"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"क्लिपबोर्डचा अ‍ॅक्सेस दाखवा"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"तुम्ही कॉपी केलेला मजकूर, इमेज किंवा इतर आशय ॲप्स अ‍ॅक्सेस करतात, तेव्हा मेसेज दाखवा"</string>

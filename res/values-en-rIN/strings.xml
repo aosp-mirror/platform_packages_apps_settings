@@ -1377,7 +1377,7 @@
     <string name="storage_menu_free" msgid="616100170298501673">"Free up space"</string>
     <string name="storage_menu_manage" msgid="7465522758801346408">"Manage storage"</string>
     <string name="storage_free_up_space_title" msgid="281047807372131975">"Free up space"</string>
-    <string name="storage_free_up_space_summary" msgid="6650027929735481350">"Go to Files app to manage and free up space"</string>
+    <string name="storage_free_up_space_summary" msgid="6650027929735481350">"Go to the Files app to manage and free up space"</string>
     <string name="storage_other_users" msgid="7017206190449510992">"Other users"</string>
     <string name="storage_size_large" msgid="1155308277890194878">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small>""</string>
     <string name="storage_mount_success" msgid="393972242641313135">"<xliff:g id="NAME">%1$s</xliff:g> is mounted"</string>
@@ -1810,6 +1810,7 @@
     <string name="app_install_details_group_title" msgid="1172114479073704677">"Store"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"App details"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"App installed from <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
+    <string name="app_install_details_different_initiating_package_summary" msgid="6093306593167176688">"App installed from <xliff:g id="APP_STORE1">%1$s</xliff:g> (via <xliff:g id="APP_STORE2">%2$s</xliff:g>)"</string>
     <string name="instant_app_details_summary" msgid="417197491598208216">"More info on <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
     <string name="app_ops_running" msgid="6127474473137428721">"Running"</string>
     <string name="app_ops_never_used" msgid="9038133162371204506">"(Never used)"</string>
@@ -2289,12 +2290,9 @@
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Pair hearing aids"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"On the next screen, tap on your hearing aids. You may need to pair the left and right ears separately.\n\nMake sure that your hearing aids are turned on and ready to pair."</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> active"</string>
-    <!-- no translation found for accessibility_hearingaid_left_side_device_summary (12349058624943107) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_right_side_device_summary (8645789702686724188) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_left_and_right_side_device_summary (3314103411842694197) -->
-    <skip />
+    <string name="accessibility_hearingaid_left_side_device_summary" msgid="12349058624943107">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>/Left only"</string>
+    <string name="accessibility_hearingaid_right_side_device_summary" msgid="8645789702686724188">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>/Right only"</string>
+    <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="3314103411842694197">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>/Left and right"</string>
     <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> +1 more"</string>
     <string name="accessibility_hearing_device_pairing_title" msgid="2701812183769537320">"Pair new device"</string>
     <string name="accessibility_hearing_device_connected_title" msgid="3785140037249487287">"Hearing devices"</string>
@@ -2573,7 +2571,8 @@
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Extend battery life"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Turn off when charged"</string>
     <string name="battery_saver_sticky_title_percentage" msgid="1178162022087559148">"Turn off at <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="battery_saver_sticky_description_new" msgid="6472610662679038342">"Battery Saver turns off when battery reaches <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <!-- no translation found for battery_saver_sticky_description_new (8543277078136947874) -->
+    <skip />
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Turn on"</string>
@@ -2685,18 +2684,13 @@
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"On"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"Off"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Use adaptive connectivity"</string>
-    <!-- no translation found for cellular_security_title (5562899485544677941) -->
-    <skip />
+    <string name="cellular_security_title" msgid="5562899485544677941">"Mobile network security"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"Network type, encryption, notification controls"</string>
-    <!-- no translation found for cellular_security_top_intro (6749166804080092892) -->
-    <skip />
-    <!-- no translation found for cellular_security_settings_title (7779141923670352595) -->
-    <skip />
+    <string name="cellular_security_top_intro" msgid="6749166804080092892">"These settings help protect your calls, messages and data from outdated or unencrypted networks that could expose you to data theft or surveillance"</string>
+    <string name="cellular_security_settings_title" msgid="7779141923670352595">"Mobile network security"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"Notifications"</string>
-    <!-- no translation found for cellular_security_notifications_controller_title (4853056963523277847) -->
-    <skip />
-    <!-- no translation found for cellular_security_notifications_controller_summary (8339863845393759958) -->
-    <skip />
+    <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"Network notifications"</string>
+    <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"Get notified when your device connects to an unencrypted network, or when a network records your unique device or SIM ID"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"Encryption"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"Network generations"</string>
     <string name="cellular_security_network_generations_summary" msgid="139087814553929402">"You can configure each installed SIM card to only connect to networks that support 3G, 4G and 5G. The SIM will not connect to older, insecure 2G networks. This setting may limit your connectivity in case the only available network is 2G. In case of an emergency, 2G may be used."</string>
@@ -2969,15 +2963,15 @@
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{{orgName} has installed a certificate authority for your work profile, which may allow them to monitor work network activity, including emails, apps and secure websites.\n\nFor more information about this certificate, contact your admin.}other{{orgName} has installed certificate authorities for your work profile, which may allow them to monitor work network activity, including emails, apps and secure websites.\n\nFor more information about these certificates, contact your admin.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"A third party is capable of monitoring your network activity, including emails, apps and secure websites.\n\nA trusted credential installed on your device is making this possible."</string>
     <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{Check certificate}other{Check certificates}}"</string>
-    <string name="user_settings_title" msgid="6550866465409807877">"Multiple users"</string>
+    <!-- no translation found for user_settings_title (9208831545558787202) -->
+    <skip />
     <string name="user_list_title" msgid="1387379079186123404">"Users &amp; profiles"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"Add user or profile"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"Restricted profile"</string>
     <string name="user_summary_not_set_up" msgid="4602868481732886115">"Not set up"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1658946988920104613">"Not set up - Restricted profile"</string>
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"Not set up – Work profile"</string>
-    <!-- no translation found for user_owner (2079206733011361994) -->
-    <skip />
+    <string name="user_owner" msgid="2079206733011361994">"Owner"</string>
     <string name="user_admin" msgid="4024553191395768119">"Admin"</string>
     <string name="user_you" msgid="3070562015202859996">"You (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_add_max_count" msgid="3328539978480663740">"You can’t add any more users. Remove a user to add a new one."</string>
@@ -4430,7 +4424,7 @@
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Turn off this service?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Saved info like passwords, passkeys, payment methods and other info won\'t be filled in when you sign in. To use your saved info, choose a password, passkey or data service."</string>
     <string name="account_dashboard_title_with_passkeys" msgid="648242372086733541">"Passwords, passkeys and accounts"</string>
     <string name="credman_confirmation_message_new_ui" msgid="6126274509951156460">"&lt;b&gt;Turn off all services?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Passwords, passkeys and other saved info won\'t be available for autofill when you sign in"</string>
-    <string name="credman_autofill_confirmation_message_new_ui" msgid="6222139222478822267">"&lt;b&gt;Change your preferred service to &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; New passwords, passkeys and other info will be saved here from now on. &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; may use what\'s on your screen to determine what can be autofilled"</string>
+    <string name="credman_autofill_confirmation_message_new_ui" msgid="6222139222478822267">"&lt;b&gt;Change your preferred service to &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; New passwords, passkeys and other info will be saved here from now on. &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; may use what\'s on your screen to determine what can be autofilled."</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"Use %1$s?"</string>
     <string name="credman_on_off_switch_content_description" msgid="2930826358220917851">"%1$s on/off"</string>
     <string name="credman_confirmation_turn_off_positive_button" msgid="5678773011513369161">"Turn off"</string>
@@ -4647,6 +4641,8 @@
     <string name="summary_supported_service" msgid="4320535903444834786">"You can text anyone, including emergency services. Your phone will reconnect to a mobile network when available."</string>
     <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"Satellite messaging may take longer and is only available in some areas. Weather and certain structures may affect your satellite connection. Calling by satellite isn’t available. Emergency calls may still connect.\n\nIt may take some time for account changes to show in Settings. Contact your operator for details."</string>
     <string name="more_about_satellite_messaging" msgid="3385673133561348509">"More about satellite messaging"</string>
+    <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"Can\'t turn on <xliff:g id="FUNCTION">%1$s</xliff:g>"</string>
+    <string name="satellite_warning_dialog_content" msgid="936419945275934955">"To turn on <xliff:g id="FUNCTION">%1$s</xliff:g>, first end the satellite connection"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Access point names"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Unavailable when connected to <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -4808,19 +4804,46 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"Your work policy info"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"Settings managed by your IT admin"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
-    <string name="enable_16k_pages" msgid="5009476566957520607">"Boot with 16K page size"</string>
-    <string name="enable_16k_pages_summary" msgid="428117226069445198">"Boot device using 16K page size supported kernel"</string>
-    <string name="confirm_enable_16k_pages_title" msgid="6751570067857011642">"Reboot with 16 KB pages compatible kernel?"</string>
-    <string name="confirm_enable_16k_pages_text" msgid="702888115148257215">"WARNING: Some applications may not be compatible with this mode. Device will reboot after confirmation."</string>
-    <string name="confirm_enable_4k_pages_title" msgid="626987400420355263">"Reboot with 4 KB pages compatible kernel?"</string>
-    <string name="confirm_enable_4k_pages_text" msgid="6168921566226074524">"Device will reboot after confirmation."</string>
+    <!-- no translation found for enable_16k_pages (8001470927566110689) -->
+    <skip />
+    <!-- no translation found for enable_16k_pages_summary (1964363364670306912) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_title (1286925577014793351) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_text (570198382662424714) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_title (3210360137887034659) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_text (155070605667160083) -->
+    <skip />
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"Failed to update kernel to 16 KB pages compatible kernel."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Applying change"</string>
-    <string name="confirm_format_ext4_title" msgid="4453684705528818873">"Reformat device to ext4?"</string>
-    <string name="confirm_format_ext4_text" msgid="8164677342487500794">"16K developer option is supported with ext4 filesystem. Device will be wiped and filesystem will be changed to ext4 after confirmation."</string>
-    <string name="format_ext4_failure_toast" msgid="6904611547290793885">"Failed to reformat and wipe the data partition to ext4."</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="6338135847153690912">"OEM unlock required"</string>
-    <string name="confirm_oem_unlock_for_16k_text" msgid="236718973897424382">"Device needs to be OEM unlocked before using 16K developer option. OEM unlock will also require formatting userdata. Please OEM unlock the device and try again."</string>
+    <!-- no translation found for confirm_format_ext4_title (6696191800594435577) -->
+    <skip />
+    <!-- no translation found for confirm_format_ext4_text (7940372488624630214) -->
+    <skip />
+    <!-- no translation found for format_ext4_failure_toast (8059453995800471549) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (5374451262432025419) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_text (3583604865119937957) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_title (1184703958249093215) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text_short (2894243902906666242) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text (8284806650260868833) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_title (7762533464569818498) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text_short (269039281591806585) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (6208765386837706582) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_channel_name (1658444283036376361) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_action (2309805437430150456) -->
+    <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"Bug report handler"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Determines which app handles the bug report shortcut on your device."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Personal"</string>
@@ -4882,7 +4905,7 @@
     <string name="media_controls_show_player" msgid="8504571042365814021">"Show player"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"media"</string>
     <string name="camera_extensions_fallback_title" msgid="3604579046777004989">"Allow camera software extensions"</string>
-    <string name="camera_extensions_fallback_description" msgid="6939818294458854536">"Enables the default software implementation of advanced camera features, such as Eyes Free videography."</string>
+    <string name="camera_extensions_fallback_description" msgid="4306833827773277263">"Enables the default software implementation of advanced camera features, such as HDR, night or other camera extensions."</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth will turn on"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"Internet"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"SIMs"</string>
@@ -4952,6 +4975,8 @@
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Use print service"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Allow multiple users"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"allow, multiple, user, permit, many"</string>
+    <!-- no translation found for multiple_users_title_keywords (2395593167746225172) -->
+    <skip />
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Use wireless debugging"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Use graphics driver preferences"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"Use Night Light"</string>
@@ -4974,10 +4999,8 @@
     <string name="enable_2g_title" msgid="8184757884636162942">"Allow 2G"</string>
     <string name="enable_2g_summary" msgid="2794534052372565914">"2G is less secure, but may improve your connection in some locations. For emergency calls, 2G is always allowed."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> requires 2G to be available"</string>
-    <!-- no translation found for require_cellular_encryption_title (6087085031703089235) -->
-    <skip />
-    <!-- no translation found for require_cellular_encryption_summary (6090569065420631457) -->
-    <skip />
+    <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Allow only encrypted networks"</string>
+    <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"This is more secure but may limit your mobile network connection in some locations. Emergency calling is always allowed."</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"All services"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Show clipboard access"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Show a message when apps access text, images or other content that you’ve copied"</string>
@@ -5201,6 +5224,5 @@
     <string name="force_swcrypto_fallback_summary" msgid="181969966310309701">"Force DRM key management to use software-based whitebox crypto"</string>
     <string name="fingerprint_acquired_imager_dirty_udfps" msgid="7005042288289506776">"Clean your screen near the sensor and try again"</string>
     <string name="sim_category_converted_sim" msgid="8575548015816988908">"Converted to eSIM. Remove and discard."</string>
-    <!-- no translation found for sync_across_devices_title (3447757705383089345) -->
-    <skip />
+    <string name="sync_across_devices_title" msgid="3447757705383089345">"Sync across devices"</string>
 </resources>

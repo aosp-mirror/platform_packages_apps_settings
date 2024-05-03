@@ -1497,8 +1497,7 @@
     <string name="reset_esim_error_title" msgid="6516110227665862295">"Nevar izdzēst eSIM kartes"</string>
     <string name="reset_esim_error_msg" msgid="8459527827897797168">"Radās problēma, un jūsu eSIM kartes netika dzēstas.\n\nRestartējiet ierīci un mēģiniet vēlreiz."</string>
     <string name="reset_private_space_delete_title" msgid="2555885198282572990">"Dzēst privāto telpu"</string>
-    <!-- no translation found for reset_private_space_delete_dialog (7506471054091800883) -->
-    <skip />
+    <string name="reset_private_space_delete_dialog" msgid="7506471054091800883">"Ja ierīcē ir izveidota privātā telpa, tā tiks neatgriezeniski dzēsta un telpai pievienotais Google konts tiks noņemts.\n\nVisas telpai pievienotās lietotnes un to dati tiks neatgriezeniski dzēsti."</string>
     <string name="main_clear_title" msgid="277664302144837723">"Dzēst visus datus (atiestatīt rūpnīcas datus)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Atiestatīt rūpnīcas datus"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"mūzika"</li>\n<li>"fotoattēli"</li>\n<li>"citi lietotāja dati"</li></string>
@@ -1811,6 +1810,7 @@
     <string name="app_install_details_group_title" msgid="1172114479073704677">"Veikals"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"Lietotnes informācija"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"Lietotne instalēta, izmantojot <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
+    <string name="app_install_details_different_initiating_package_summary" msgid="6093306593167176688">"Lietotne instalēta no <xliff:g id="APP_STORE1">%1$s</xliff:g> (izmantojot <xliff:g id="APP_STORE2">%2$s</xliff:g>)"</string>
     <string name="instant_app_details_summary" msgid="417197491598208216">"Papildinformācija par <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
     <string name="app_ops_running" msgid="6127474473137428721">"Darbojas"</string>
     <string name="app_ops_never_used" msgid="9038133162371204506">"(Nekad nav izmantots)"</string>
@@ -2290,12 +2290,9 @@
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Dzirdes aparātu sav. pārī"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"Nākamajā ekrānā atlasiet savus dzirdes aparātus. Iespējams, kreisās un labās auss ierīces būs jāsavieno pārī atsevišķi.\n\nPārbaudiet, vai dzirdes aparāti ir ieslēgti un gatavi savienošanai pārī."</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"Ierīce <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ir aktīva"</string>
-    <!-- no translation found for accessibility_hearingaid_left_side_device_summary (12349058624943107) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_right_side_device_summary (8645789702686724188) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_left_and_right_side_device_summary (3314103411842694197) -->
-    <skip />
+    <string name="accessibility_hearingaid_left_side_device_summary" msgid="12349058624943107">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>: tikai kreisā auss"</string>
+    <string name="accessibility_hearingaid_right_side_device_summary" msgid="8645789702686724188">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>: tikai labā auss"</string>
+    <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="3314103411842694197">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>: kreisā un labā auss"</string>
     <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> un vēl 1 ierīce"</string>
     <string name="accessibility_hearing_device_pairing_title" msgid="2701812183769537320">"Jauna ierīce"</string>
     <string name="accessibility_hearing_device_connected_title" msgid="3785140037249487287">"Dzirdes aparāti"</string>
@@ -2574,7 +2571,8 @@
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Akumulatora darbības laika paildzināšana"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Izslēgt, kad uzlādējies"</string>
     <string name="battery_saver_sticky_title_percentage" msgid="1178162022087559148">"Izslēgt, kad uzlāde ir <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="battery_saver_sticky_description_new" msgid="6472610662679038342">"Akumulatora enerģijas taupīšanas režīms tiek izslēgts, kad akumulatora uzlādes līmenis sasniedz <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>."</string>
+    <!-- no translation found for battery_saver_sticky_description_new (8543277078136947874) -->
+    <skip />
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Ieslēgt"</string>
@@ -2686,18 +2684,13 @@
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"Ieslēgta"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"Izslēgta"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Lietot adaptīvo savienojamību"</string>
-    <!-- no translation found for cellular_security_title (5562899485544677941) -->
-    <skip />
+    <string name="cellular_security_title" msgid="5562899485544677941">"Mobilā tīkla drošība"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"Tīkla veids, šifrējums, paziņojumu vadīklas"</string>
-    <!-- no translation found for cellular_security_top_intro (6749166804080092892) -->
-    <skip />
-    <!-- no translation found for cellular_security_settings_title (7779141923670352595) -->
-    <skip />
+    <string name="cellular_security_top_intro" msgid="6749166804080092892">"Ar šiem iestatījumiem zvani, ziņojumi un dati tiek aizsargāti pret datu zādzību vai novērošanu novecojušos vai nešifrētos tīklos."</string>
+    <string name="cellular_security_settings_title" msgid="7779141923670352595">"Mobilā tīkla drošība"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"Paziņojumi"</string>
-    <!-- no translation found for cellular_security_notifications_controller_title (4853056963523277847) -->
-    <skip />
-    <!-- no translation found for cellular_security_notifications_controller_summary (8339863845393759958) -->
-    <skip />
+    <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"Tīkla paziņojumi"</string>
+    <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"Saņemiet paziņojumu, ja ierīcē tiek izveidots savienojums ar nešifrētu tīklu vai ja tīklā tiek reģistrēts jūsu ierīces vai SIM unikālais ID."</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"Šifrēšana"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"Tīklu paaudzes"</string>
     <string name="cellular_security_network_generations_summary" msgid="139087814553929402">"Jūs varat konfigurēt katru instalēto SIM karti, lai tā savienotos tikai ar tādiem tīkliem, kas atbalsta 3G, 4G vai 5G tehnoloģiju. SIM karte nesavienosies ar vecākas paaudzes, nedrošiem 2G tīkliem. Šis iestatījums var ierobežot savienojamību, ja vienīgais pieejamais tīkls ir 2G tīkls. Ārkārtas situācijā var tikt izmantots 2G tīkls."</string>
@@ -2970,15 +2963,15 @@
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{Organizācija {orgName} instalēja sertificēšanas iestādes sertifikātu jūsu darba profilam. Šis sertifikāts ļauj organizācijai pārraudzīt darbības darba tīklā, tostarp e-pasta kontus, lietotnes un drošās vietnes.\n\nLai iegūtu plašāku informāciju par šo sertifikātu, sazinieties ar administratoru.}zero{Organizācija {orgName} instalēja sertificēšanas iestāžu sertifikātus jūsu darba profilam. Šie sertifikāti ļauj organizācijai pārraudzīt darbības darba tīklā, tostarp e-pasta kontus, lietotnes un drošās vietnes.\n\nLai iegūtu plašāku informāciju par šiem sertifikātiem, sazinieties ar administratoru.}one{Organizācija {orgName} instalēja sertificēšanas iestāžu sertifikātus jūsu darba profilam. Šie sertifikāti ļauj organizācijai pārraudzīt darbības darba tīklā, tostarp e-pasta kontus, lietotnes un drošās vietnes.\n\nLai iegūtu plašāku informāciju par šiem sertifikātiem, sazinieties ar administratoru.}other{Organizācija {orgName} instalēja sertificēšanas iestāžu sertifikātus jūsu darba profilam. Šie sertifikāti ļauj organizācijai pārraudzīt darbības darba tīklā, tostarp e-pasta kontus, lietotnes un drošās vietnes.\n\nLai iegūtu plašāku informāciju par šiem sertifikātiem, sazinieties ar administratoru.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"Trešā puse spēj pārraudzīt jūsu darbības tīklā, tostarp e-pastu, lietotnes un drošās vietnes.\n\nŠo pārraudzības iespēju nodrošina jūsu ierīcē instalēts sertifikāts."</string>
     <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{Pārbaudīt sertifikātu}zero{Pārbaudīt sertifikātus}one{Pārbaudīt sertifikātus}other{Pārbaudīt sertifikātus}}"</string>
-    <string name="user_settings_title" msgid="6550866465409807877">"Vairāki lietotāji"</string>
+    <!-- no translation found for user_settings_title (9208831545558787202) -->
+    <skip />
     <string name="user_list_title" msgid="1387379079186123404">"Lietotāji un profili"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"Pievienot lietotāju vai profilu"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"Ierobežots profils"</string>
     <string name="user_summary_not_set_up" msgid="4602868481732886115">"Nav iestatīts"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1658946988920104613">"Ierobežots profils — nav iestatīts."</string>
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"Darba profils — nav iestatīts"</string>
-    <!-- no translation found for user_owner (2079206733011361994) -->
-    <skip />
+    <string name="user_owner" msgid="2079206733011361994">"Īpašnieks"</string>
     <string name="user_admin" msgid="4024553191395768119">"Administrators"</string>
     <string name="user_you" msgid="3070562015202859996">"Jūs (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_add_max_count" msgid="3328539978480663740">"Nevar pievienot vairāk lietotāju. Lai pievienotu jaunu lietotāju, noņemiet kādu no pašreizējiem."</string>
@@ -3982,7 +3975,7 @@
     <string name="system_alert_window_settings" msgid="6458633954424862521">"Rādīt pāri citām lietotnēm"</string>
     <string name="permit_draw_overlay" msgid="4468994037192804075">"Atļaut rādīt pāri citām lietotnēm"</string>
     <string name="allow_overlay_description" msgid="1607235723669496298">"Atļaut rādīt šo lietotni pāri citām jūsu izmantotajām lietotnēm. Šī lietotne varēs redzēt, kur pieskaraties, vai mainīt ekrānā redzamo saturu."</string>
-    <string name="media_routing_control_title" msgid="6402800638960066807">"Mainīt multivides izvadi"</string>
+    <string name="media_routing_control_title" msgid="6402800638960066807">"Multivides izvades maiņa"</string>
     <string name="allow_media_routing_control" msgid="4907036637509360616">"Atļaut lietotnei pārslēgt multivides ievadi"</string>
     <string name="allow_media_routing_description" msgid="8343709701298051207">"Atļaujiet šai lietotnei izvēlēties, kura pievienotā ierīce atskaņo audio vai video no citām lietotnēm. Ja atļausiet, šī lietotne varēs piekļūt sarakstam ar pieejamajām ierīcēm, piemēram, austiņām un skaļruņiem, un izvēlēties, kura izvades ierīce tiks izmantota audio vai video straumēšanai vai apraidīšanai."</string>
     <string name="manage_external_storage_title" msgid="8024521099838816100">"Piekļuve visiem failiem"</string>
@@ -4648,6 +4641,8 @@
     <string name="summary_supported_service" msgid="4320535903444834786">"Varat sūtīt īsziņu ikvienam, tostarp ārkārtas palīdzības dienestiem. Tālrunī tiks atkārtoti izveidots savienojums ar mobilo tīklu, tiklīdz tas būs pieejams."</string>
     <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"Ziņojumapmaiņai, izmantojot satelītu, var būt nepieciešams ilgāks laiks, un tā ir pieejama tikai noteiktos apgabalos. Laikapstākļi un noteiktas būves var ietekmēt savienojumu ar satelītu. Zvanīšana, izmantojot satelītu, nav pieejama. Var būt iespējami ārkārtas izsaukumi.\n\nVar būt nepieciešams laiks, lai kontā veiktās izmaiņas būtu redzamas iestatījumos. Lai iegūtu detalizētu informāciju, sazinieties ar savu mobilo sakaru operatoru."</string>
     <string name="more_about_satellite_messaging" msgid="3385673133561348509">"Vairāk par ziņojumapmaiņu, izmantojot satelītu"</string>
+    <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"Nevar ieslēgt <xliff:g id="FUNCTION">%1$s</xliff:g>"</string>
+    <string name="satellite_warning_dialog_content" msgid="936419945275934955">"Lai ieslēgtu <xliff:g id="FUNCTION">%1$s</xliff:g>, vispirms pārtrauciet savienojumu ar satelītu."</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Piekļuves punktu nosaukumi"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Nav pieejams, ja izveidots savienojums ar operatoru <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -4809,19 +4804,46 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"Jūsu darba politikas informācija"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"Iestatījumus pārvalda jūsu IT administrators"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"Grafiskais procesors"</string>
-    <string name="enable_16k_pages" msgid="5009476566957520607">"Palaist ar 16 KB lielām lapām"</string>
-    <string name="enable_16k_pages_summary" msgid="428117226069445198">"Palaist, izmantojot kodolu, kas atbalsta 16 KB lapas"</string>
-    <string name="confirm_enable_16k_pages_title" msgid="6751570067857011642">"Vai atkārtoti palaist, izmantojot kodolu, kas saderīgs ar 16 KB lapām?"</string>
-    <string name="confirm_enable_16k_pages_text" msgid="702888115148257215">"BRĪDINĀJUMS! Dažas lietojumprogrammas var nebūt saderīgas ar šo režīmu. Pēc apstiprināšanas ierīce tiks atkārtoti palaista."</string>
-    <string name="confirm_enable_4k_pages_title" msgid="626987400420355263">"Vai atkārtoti palaist, izmantojot kodolu, kas saderīgs ar 4 KB lapām?"</string>
-    <string name="confirm_enable_4k_pages_text" msgid="6168921566226074524">"Pēc apstiprināšanas ierīce tiks atkārtoti palaista."</string>
+    <!-- no translation found for enable_16k_pages (8001470927566110689) -->
+    <skip />
+    <!-- no translation found for enable_16k_pages_summary (1964363364670306912) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_title (1286925577014793351) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_text (570198382662424714) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_title (3210360137887034659) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_text (155070605667160083) -->
+    <skip />
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"Neizdevās atjaunināt kodolu uz tādu kodolu, kas saderīgs ar 16 KB lapām."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Izmaiņu piemērošana"</string>
-    <string name="confirm_format_ext4_title" msgid="4453684705528818873">"Vai pārformatēt ierīces failu sistēmu uz ext4?"</string>
-    <string name="confirm_format_ext4_text" msgid="8164677342487500794">"Izstrādātājiem paredzētā opcija ar 16K izšķirtspēju tiek atbalstīta failu sistēmā ext4. Pēc apstiprināšanas ierīces dati tiks notīrīti un failu sistēma tiks nomainīta uz ext4."</string>
-    <string name="format_ext4_failure_toast" msgid="6904611547290793885">"Neizdevās notīrīt datu nodalījumu un to pārformatēt uz failu sistēmu ext4."</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="6338135847153690912">"Jāveic OAR atbloķēšana"</string>
-    <string name="confirm_oem_unlock_for_16k_text" msgid="236718973897424382">"Lai varētu izmantot izstrādātājiem paredzēto 16 KB opciju, ierīcei jāveic OAR atbloķēšana. OAR atbloķēšanai būs nepieciešama arī lietotāja datu formatēšana. Lūdzu, veiciet ierīcei OAR atbloķēšanu un mēģiniet vēlreiz."</string>
+    <!-- no translation found for confirm_format_ext4_title (6696191800594435577) -->
+    <skip />
+    <!-- no translation found for confirm_format_ext4_text (7940372488624630214) -->
+    <skip />
+    <!-- no translation found for format_ext4_failure_toast (8059453995800471549) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (5374451262432025419) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_text (3583604865119937957) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_title (1184703958249093215) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text_short (2894243902906666242) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text (8284806650260868833) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_title (7762533464569818498) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text_short (269039281591806585) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (6208765386837706582) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_channel_name (1658444283036376361) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_action (2309805437430150456) -->
+    <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"Kļūdu pārskatu apstrādātājs"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Šeit varat noteikt, kurai lietotnei jūsu ierīcē jāapstrādā kļūdu pārskatu saīsne."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Personiskais profils"</string>
@@ -4884,7 +4906,7 @@
     <string name="media_controls_show_player" msgid="8504571042365814021">"Rādīt atskaņotāju"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"multivide"</string>
     <string name="camera_extensions_fallback_title" msgid="3604579046777004989">"Atļaut kameras programmatūras paplašinājumus"</string>
-    <string name="camera_extensions_fallback_description" msgid="6939818294458854536">"Tiek iespējota modernu kameras funkciju (piemēram, video uzņemšana neskatoties) noklusējuma programmatūras ieviešana."</string>
+    <string name="camera_extensions_fallback_description" msgid="4306833827773277263">"Tiek iespējota modernu kameras funkciju, piemēram, HDR, Nakts režīma vai citu kameras paplašinājumu, noklusējuma programmatūras ieviešana."</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Tiks ieslēgts Bluetooth savienojums."</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"Internets"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM kartes"</string>
@@ -4954,6 +4976,8 @@
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Izmantot drukāšanas pakalpojumu"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Atļaut vairākus lietotājus"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"ļaut, vairāki, lietotājs, atļaut, daudz"</string>
+    <!-- no translation found for multiple_users_title_keywords (2395593167746225172) -->
+    <skip />
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Izmantot bezvadu atkļūdošanu"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Izmantot grafikas draivera preferences"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"Izmantot funkciju Nakts režīms"</string>
@@ -4976,10 +5000,8 @@
     <string name="enable_2g_title" msgid="8184757884636162942">"Atļaut 2G"</string>
     <string name="enable_2g_summary" msgid="2794534052372565914">"2G drošības līmenis ir zemāks, taču dažās atrašanās vietās šis savienojums var būt stabilāks. Ārkārtas izsaukumiem 2G lietošana vienmēr ir atļauta."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> pieprasa 2G tīkla pieejamību"</string>
-    <!-- no translation found for require_cellular_encryption_title (6087085031703089235) -->
-    <skip />
-    <!-- no translation found for require_cellular_encryption_summary (6090569065420631457) -->
-    <skip />
+    <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Atļaut tikai šifrētus tīklus"</string>
+    <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"Tas ir drošāks risinājums, tomēr dažās vietās tādēļ var tikt ierobežots mobilā tīkla savienojums. Ārkārtas izsaukumi vienmēr ir atļauti."</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Visi pakalpojumi"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Rādīt paziņojumus par piekļuvi starpliktuvei"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Rādīt ziņojumu, kad lietotnes piekļūst jūsu nokopētajam tekstam, attēliem vai citam saturam"</string>
@@ -5203,6 +5225,5 @@
     <string name="force_swcrypto_fallback_summary" msgid="181969966310309701">"DRM atslēgas pārvaldībai varat iespējot piespiedu kārtā izmantot baltās kastes kriptogrāfiju, kuras pamatā ir programmatūra"</string>
     <string name="fingerprint_acquired_imager_dirty_udfps" msgid="7005042288289506776">"Notīriet ekrānu ap sensoru un mēģiniet vēlreiz."</string>
     <string name="sim_category_converted_sim" msgid="8575548015816988908">"Pārveidota par eSIM. Varat to izņemt."</string>
-    <!-- no translation found for sync_across_devices_title (3447757705383089345) -->
-    <skip />
+    <string name="sync_across_devices_title" msgid="3447757705383089345">"Sinhronizēšana ierīcēs"</string>
 </resources>
