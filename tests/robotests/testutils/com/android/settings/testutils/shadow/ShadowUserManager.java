@@ -17,6 +17,7 @@
 package com.android.settings.testutils.shadow;
 
 import static android.os.Build.VERSION_CODES.LOLLIPOP;
+import static android.os.UserManager.USER_TYPE_PROFILE_MANAGED;
 import static android.os.UserManager.USER_TYPE_PROFILE_PRIVATE;
 
 import android.annotation.UserIdInt;
@@ -76,6 +77,7 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
 
     public void addProfile(UserInfo userInfo) {
         mUserProfileInfos.add(userInfo);
+        mUserInfoMap.put(userInfo.id, userInfo);
     }
 
     @Resetter
@@ -100,8 +102,7 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
     public void addProfile(
             int userHandle, int profileUserHandle, String profileName, int profileFlags) {
         UserInfo profileUserInfo = new UserInfo(profileUserHandle, profileName, profileFlags);
-        mUserProfileInfos.add(profileUserInfo);
-        mUserInfoMap.put(profileUserHandle, profileUserInfo);
+        addProfile(profileUserInfo);
         mProfileToParent.put(profileUserHandle, userHandle);
         if (profileFlags == UserInfo.FLAG_MANAGED_PROFILE) {
             setManagedProfiles(new HashSet<>(Arrays.asList(profileUserHandle)));
@@ -179,8 +180,7 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
     }
 
     public static ShadowUserManager getShadow() {
-        return (ShadowUserManager) Shadow.extract(
-                RuntimeEnvironment.application.getSystemService(UserManager.class));
+        return Shadow.extract(RuntimeEnvironment.application.getSystemService(UserManager.class));
     }
 
     @Implementation
@@ -229,10 +229,23 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
     public void setManagedProfiles(Set<Integer> profileIds) {
         mManagedProfiles.clear();
         mManagedProfiles.addAll(profileIds);
+        profileIds.forEach(id -> {
+            addProfile(new UserInfo(id, "managed" + id, null, 0, USER_TYPE_PROFILE_MANAGED));
+            mProfileToParent.put(id, PRIMARY_USER_ID);
+        });
+        addPrimaryUser();
     }
 
     public void setPrivateProfile(int id, String name, int flags) {
-        mUserProfileInfos.add(new UserInfo(id, name, null, flags, USER_TYPE_PROFILE_PRIVATE));
+        addProfile(new UserInfo(id, name, null, flags, USER_TYPE_PROFILE_PRIVATE));
+        mProfileToParent.put(id, PRIMARY_USER_ID);
+        addPrimaryUser();
+    }
+
+    private void addPrimaryUser() {
+        if (mUserInfoMap.get(PRIMARY_USER_ID) == null) {
+            addProfile(getPrimaryUser());
+        }
     }
 
     public void setUserSwitcherEnabled(boolean userSwitchEnabled) {
