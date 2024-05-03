@@ -1179,7 +1179,7 @@
     <string name="display_white_balance_title" msgid="2624544323029364713">"Balans bele ekrana"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="fold_lock_behavior_title" msgid="786228803694268449">"Nastavi sa korišćenjem apl. po zatvaranju"</string>
-    <string name="disable_game_default_frame_rate_title" msgid="3712908601744143753">"Onemogući podraz. brz. kadrova"</string>
+    <string name="disable_game_default_frame_rate_title" msgid="3712908601744143753">"Onemogući podrazumevanu brzinu kadrova"</string>
     <string name="disable_game_default_frame_rate_summary" msgid="4436762704707434225">"Onemogućite ograničavanje maksimalne brzine kadrova za igre na <xliff:g id="FRAME_RATE">%1$d</xliff:g> Hz."</string>
     <string name="peak_refresh_rate_title" msgid="2056355754210341011">"Tečni prikaz"</string>
     <string name="peak_refresh_rate_summary" msgid="3212309985294885790">"Automatski podiže učestalost osvežavanja do <xliff:g id="ID_1">%1$d</xliff:g> Hz za određeni sadržaj. Povećava potrošnju baterije."</string>
@@ -1443,7 +1443,7 @@
     <string name="apn_type" msgid="1835573305077788773">"Tip naziva pristupne tačke"</string>
     <string name="apn_protocol" msgid="181529867160380010">"Protokol naziva pristupne tačke"</string>
     <string name="apn_roaming_protocol" msgid="1645131094105362513">"Protokol naziva pristupne tačke u romingu"</string>
-    <string name="carrier_enabled" msgid="664074151573150130">"Omogući/onemogući naziv pristupne tačke"</string>
+    <string name="carrier_enabled" msgid="664074151573150130">"Omogući/onemogući APN"</string>
     <string name="carrier_enabled_summaryOn" msgid="5212067975273903381">"Naziv pristupne tačke je omogućen"</string>
     <string name="carrier_enabled_summaryOff" msgid="8541959867953738521">"Naziv pristupne tačke je onemogućen"</string>
     <string name="bearer" msgid="3231443241639159358">"Nosilac"</string>
@@ -1470,7 +1470,7 @@
     <string name="reset_mobile_network_settings_title" msgid="5616713931258506842">"Resetuj podešavanja mobilne mreže"</string>
     <string name="reset_mobile_network_settings_desc" msgid="7292636387692165727">"Time ćete resetovati sva podešavanja mobilne mreže."</string>
     <string name="reset_mobile_network_settings_confirm_title" msgid="7510965634669511241">"Želite da resetujete mobilnu mrežu?"</string>
-    <string name="reset_bluetooth_wifi_title" msgid="4113071322344697317">"Resetujte Bluetooth i WiFi"</string>
+    <string name="reset_bluetooth_wifi_title" msgid="4113071322344697317">"Resetuj Bluetooth i WiFi"</string>
     <string name="reset_bluetooth_wifi_desc" msgid="4030295669083059711">"Ovim resetujete sva WiFi i Bluetooth podešavanja. Ne možete da opozovete ovu radnju."</string>
     <string name="reset_bluetooth_wifi_button_text" msgid="3974098137045963639">"Resetuj"</string>
     <string name="reset_bluetooth_wifi_complete_toast" msgid="5893439291030574365">"Bluetooth i WiFi su resetovani"</string>
@@ -2143,7 +2143,7 @@
     <string name="accessibility_button_high_label" msgid="9138077512008190896">"Nije prozirno"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Tekst visokog kontrasta"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Promenite boju teksta u crnu ili belu. Maksimalno uvećava kontrast sa pozadinom."</string>
-    <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"Maksimalno uvećajte kontrast teksta"</string>
+    <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"Maksimalno povećaj kontrast teksta"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="5493999083693403489">"Promenite boju teksta u crnu ili belu da biste povećali kontrast sa pozadinom."</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Automatski ažuriraj uvelič. ekrana"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Ažurira uveličavanje ekrana pri prelazu aplikacija"</string>
@@ -3846,7 +3846,7 @@
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"PTP"</string>
     <string name="usb_use_uvc_webcam" msgid="6595429508472038732">"Veb-kamera"</string>
     <string name="usb_transcode_files" msgid="2441954752105119109">"Konvertuj video snimke u AVC"</string>
-    <string name="usb_transcode_files_summary" msgid="307102635711961513">"Video snimci će moći da se puste na više medija plejera, ali će im kvalitet možda biti lošiji"</string>
+    <string name="usb_transcode_files_summary" msgid="307102635711961513">"Videi će moći da se puste na više medija plejera, ali će im kvalitet možda biti lošiji"</string>
     <string name="usb_use_tethering" msgid="2897063414491670531">"USB privezivanje"</string>
     <string name="usb_use_MIDI" msgid="8621338227628859789">"MIDI"</string>
     <string name="usb_use" msgid="6783183432648438528">"Koristi USB za"</string>
@@ -4188,7 +4188,7 @@
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Navigacija pomoću pokreta"</string>
     <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"Da biste otišli na početni ekran, prevucite nagore od dna ekrana. Da biste prešli sa jedne aplikacije na drugu, prevucite nagore od dna ekrana, zadržite, pa pustite. Da biste se vratili nazad, prevucite od leve ili desne ivice."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Navigacija pomoću 3 dugmeta"</string>
-    <string name="legacy_navigation_summary" msgid="5905301067778326433">"Vratite se nazad, na početni ekran i prelazite sa jedne aplikacije na drugu pomoću dugmadi u dnu ekrana."</string>
+    <string name="legacy_navigation_summary" msgid="5905301067778326433">"Idite nazad, na početni ekran i prelazite sa jedne aplikacije na drugu pomoću dugmadi u dnu ekrana."</string>
     <string name="keywords_system_navigation" msgid="3131782378486554934">"navigacija kroz sistem, navigacija pomoću 2 dugmeta, navigacija pomoću 3 dugmeta, navigacija pomoću pokreta, prevlačenje"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Digitalni pomoćnik"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Prevucite da biste pokrenuli pomoćnik"</string>
@@ -4330,7 +4330,7 @@
     <string name="storage_games" msgid="1176568610086802469">"Igre"</string>
     <string name="storage_files" msgid="7968460921272772299">"Datoteke"</string>
     <string name="storage_images" msgid="2055893015567979387">"Slike"</string>
-    <string name="storage_videos" msgid="6117698226447251033">"Video snimci"</string>
+    <string name="storage_videos" msgid="6117698226447251033">"Videi"</string>
     <string name="storage_audio" msgid="5994664984472140386">"Zvuk"</string>
     <string name="storage_apps" msgid="3564291603258795216">"Aplikacije"</string>
     <string name="storage_documents_and_other" msgid="3293689243732236480">"Dokumenti i drugo"</string>
@@ -4582,6 +4582,8 @@
     <string name="summary_supported_service" msgid="4320535903444834786">"Možete da šaljete poruke bilo kome, uključujući hitne službe. Telefon će se ponovo povezati na mobilnu mrežu kada bude dostupna."</string>
     <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"Satelitska razmena poruka može da traje duže i dostupna je samo u određenim oblastima. Vremenski uslovi i određene strukture mogu da utiču na satelitsku vezu. Pozivanje putem satelita nije dostupno. Hitni pozivi i dalje mogu da se obave.\n\nTreba malo vremena da se promene naloga pojave u Podešavanjima. Obratite se mobilnom operateru za detalje."</string>
     <string name="more_about_satellite_messaging" msgid="3385673133561348509">"Više o satelitskoj razmeni poruka"</string>
+    <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"Ne može da se uključi <xliff:g id="FUNCTION">%1$s</xliff:g>"</string>
+    <string name="satellite_warning_dialog_content" msgid="936419945275934955">"Da biste uključili <xliff:g id="FUNCTION">%1$s</xliff:g>, prvo završite satelitsku vezu"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Nazivi pristupnih tačaka"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"Naziv pristupne tačke"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Nedostupno kada je povezano sa: <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -5113,9 +5115,9 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Aplikacije koje ste instalirali mogu da vide naziv uređaja. I drugi ljudi mogu da vide naziv uređaja kada se povežete sa Bluetooth uređajima ili WiFi mrežom ili podesite WiFi hotspot."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Gramatički rod"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Izaberite gramatički rod"</string>
-    <string name="content_protection_preference_title" msgid="5069260032659193074">"Provera radi otkrivanja obmanjujućih aplikacija"</string>
+    <string name="content_protection_preference_title" msgid="5069260032659193074">"Otkrivanje obmanjujućih aplikacija"</string>
     <string name="content_protection_preference_summary" msgid="2252393849408445391">"Proverite aktivnosti u aplikacijama radi otkrivanja „pecanja“"</string>
-    <string name="content_protection_preference_user_consent_switch_title" msgid="1797782616799594426">"Koristi skeniranje za obmanjujuće aplikacije"</string>
+    <string name="content_protection_preference_user_consent_switch_title" msgid="1797782616799594426">"Koristi za otkrivanje obmanjujućih aplikacija"</string>
     <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="3004347470520916069">"Koristi skeniranje za obmanjujuće aplikacije za posao"</string>
     <string name="content_protection_preference_subpage_summary" msgid="3595621220981703364"></string>
     <string name="content_protection_preference_subpage_info" msgid="6890886357653365489"></string>
