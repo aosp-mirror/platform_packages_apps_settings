@@ -70,6 +70,7 @@ import com.android.settings.SettingsApplication;
 import com.android.settings.accounts.AvatarViewMixin;
 import com.android.settings.activityembedding.ActivityEmbeddingRulesController;
 import com.android.settings.activityembedding.ActivityEmbeddingUtils;
+import com.android.settings.activityembedding.EmbeddedDeepLinkUtils;
 import com.android.settings.core.CategoryMixin;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.homepage.contextualcards.ContextualCardsFragment;
@@ -204,7 +205,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         if (mIsEmbeddingActivityEnabled) {
             final UserManager um = getSystemService(UserManager.class);
             final UserInfo userInfo = um.getUserInfo(getUserId());
-            if (userInfo.isManagedProfile()) {
+            if (EmbeddedDeepLinkUtils.isSubProfile(userInfo)) {
                 final Intent intent = new Intent(getIntent())
                         .addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT)
                         .putExtra(EXTRA_USER_HANDLE, getUser())

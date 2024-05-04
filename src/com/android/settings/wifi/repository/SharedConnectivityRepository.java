@@ -16,6 +16,7 @@
 
 package com.android.settings.wifi.repository;
 
+import android.app.ActivityOptions;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.net.wifi.sharedconnectivity.app.HotspotNetwork;
@@ -25,6 +26,7 @@ import android.net.wifi.sharedconnectivity.app.KnownNetworkConnectionStatus;
 import android.net.wifi.sharedconnectivity.app.SharedConnectivityClientCallback;
 import android.net.wifi.sharedconnectivity.app.SharedConnectivityManager;
 import android.net.wifi.sharedconnectivity.app.SharedConnectivitySettingsState;
+import android.os.Bundle;
 import android.os.HandlerThread;
 import android.provider.DeviceConfig;
 import android.util.Log;
@@ -124,7 +126,11 @@ public class SharedConnectivityRepository {
     void sendSettingsIntent(@NonNull PendingIntent intent) {
         try {
             log("sendSettingsIntent(), sent intent:" + intent);
-            intent.send();
+            final Bundle options = ActivityOptions.makeBasic()
+                    .setPendingIntentBackgroundActivityStartMode(
+                            ActivityOptions.MODE_BACKGROUND_ACTIVITY_START_ALLOWED)
+                    .toBundle();
+            intent.send(options);
         } catch (PendingIntent.CanceledException e) {
             Log.e(TAG, "Failed to launch Instant Hotspot settings", e);
         }
