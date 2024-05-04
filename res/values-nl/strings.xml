@@ -818,7 +818,7 @@
     <string name="bluetooth_device_context_pair_connect" msgid="2406032703622371826">"Koppelen en verbinden"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="7326727272747345476">"Als bluetooth aanstaat, kan je apparaat communiceren met andere bluetooth-apparaten in de buurt"</string>
     <string name="bluetooth_empty_list_bluetooth_off_auto_on_available" msgid="3430864468105204282">"Als bluetooth aanstaat, kan je apparaat communiceren met andere bluetooth-apparaten in de buurt. Functies zoals Quick Share en Vind mijn apparaat gebruiken bluetooth."</string>
-    <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Als bluetooth aanstaat, kan je apparaat communiceren met andere bluetooth-apparaten in de buurt.\n\nApps en services kunnen nog steeds op elk gewenst moment zoeken naar apparaten in de buurt om de apparaatfunctionaliteit te verbeteren, zelfs als bluetooth uitstaat. Dit kan worden gebruikt om bijvoorbeeld locatiegebaseerde functies en services te verbeteren. Je kunt dit wijzigen in de instellingen voor bluetooth-scannen."</string>
+    <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Als bluetooth aanstaat, kan je apparaat communiceren met andere bluetooth-apparaten in de buurt.\n\nVoor een betere apparaatfunctionaliteit kunnen apps en services nog steeds op elk moment zoeken naar apparaten in de buurt, zelfs als bluetooth uitstaat. Dit kan worden gebruikt om bijvoorbeeld locatiegebaseerde functies en services te verbeteren. Je kunt dit wijzigen in de instellingen voor bluetooth-scannen."</string>
     <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"Als bluetooth aanstaat, kan je apparaat communiceren met andere bluetooth-apparaten in de buurt. Functies zoals Quick Share en Vind mijn apparaat gebruiken bluetooth.\n\nApps en services kunnen nog steeds op elk gewenst moment naar apparaten in de buurt scannen, zelfs als bluetooth uitstaat. Dit kan bijvoorbeeld worden gebruikt om functies en services op basis van locatie te verbeteren. Je kunt dit wijzigen in de instellingen voor Bluetooth-scannen."</string>
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"Wijzigen"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Apparaatgegevens"</string>
@@ -956,7 +956,7 @@
     <string name="wifi_privacy_mac_settings" msgid="3188060664478313363">"MAC"</string>
     <string name="wifi_privacy_device_name_settings" msgid="3699130177041345275">"Apparaatnaam"</string>
     <string name="wifi_privacy_send_device_name_toggle_title" msgid="1228107313152880073">"Apparaatnaam sturen"</string>
-    <string name="wifi_privacy_send_device_name_toggle_summary" msgid="5995365836332817655">"De naam van dit apparaat met het netwerk delen"</string>
+    <string name="wifi_privacy_send_device_name_toggle_summary" msgid="5995365836332817655">"Deel de naam van dit apparaat met het netwerk"</string>
     <string name="wifi_subscription" msgid="4432423938285430113">"Abonnement"</string>
     <string name="wifi_subscription_summary" msgid="18802471063384598">"Abonnement bekijken of wijzigen"</string>
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"Willekeurig MAC-adres"</string>
@@ -1188,7 +1188,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="fold_lock_behavior_title" msgid="786228803694268449">"Apps blijven gebruiken bij dichtvouwen"</string>
     <string name="disable_game_default_frame_rate_title" msgid="3712908601744143753">"Standaard framesnelheid voor games uitzetten"</string>
-    <string name="disable_game_default_frame_rate_summary" msgid="4436762704707434225">"Zet beperking van de maximale framesnelheid voor games tot <xliff:g id="FRAME_RATE">%1$d</xliff:g> Hz uit."</string>
+    <string name="disable_game_default_frame_rate_summary" msgid="4436762704707434225">"Zet beperking van de maximale framesnelheid voor games tot <xliff:g id="FRAME_RATE">%1$d</xliff:g> Hz uit"</string>
     <string name="peak_refresh_rate_title" msgid="2056355754210341011">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="3212309985294885790">"Verhoogt de vernieuwingssnelheid automatisch naar <xliff:g id="ID_1">%1$d</xliff:g> Hz voor bepaalde content. Het batterijgebruik neemt toe."</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Piekvernieuwingssnelheid afdwingen"</string>
@@ -1197,7 +1197,7 @@
     <string name="adaptive_sleep_title_no_permission" msgid="1719759921214237016">"Toegang tot camera nodig"</string>
     <string name="adaptive_sleep_summary_no_permission" msgid="5822591289468803691">"Cameratoegang is vereist voor schermaandacht. Tik om de rechten voor personalisatieservices voor apparaat te beheren."</string>
     <string name="adaptive_sleep_manage_permission_button" msgid="1404510197847664846">"Rechten beheren"</string>
-    <string name="adaptive_sleep_description" msgid="1835321775327187860">"Deze functie voorkomt dat je scherm uitgaat als je ernaar kijkt"</string>
+    <string name="adaptive_sleep_description" msgid="1835321775327187860">"Voorkom dat je scherm uitgaat als je ernaar kijkt"</string>
     <string name="adaptive_sleep_privacy" msgid="7664570136417980556">"Schermaandacht gebruikt de camera aan de voorzijde om te zien of er iemand naar het scherm kijkt. Deze functie werkt op het apparaat zelf. De afbeeldingen worden nooit opgeslagen of naar Google gestuurd."</string>
     <string name="adaptive_sleep_contextual_slice_title" msgid="7467588613212629758">"Schermaandacht aanzetten"</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"Houd het scherm aan als je ernaar kijkt"</string>
@@ -1497,8 +1497,7 @@
     <string name="reset_esim_error_title" msgid="6516110227665862295">"Kan e-simkaarten niet wissen"</string>
     <string name="reset_esim_error_msg" msgid="8459527827897797168">"Er is iets misgegaan en je e-simkaarten zijn niet gewist.\n\nStart je apparaat opnieuw en probeer het nog eens."</string>
     <string name="reset_private_space_delete_title" msgid="2555885198282572990">"Privégedeelte verwijderen"</string>
-    <!-- no translation found for reset_private_space_delete_dialog (7506471054091800883) -->
-    <skip />
+    <string name="reset_private_space_delete_dialog" msgid="7506471054091800883">"Als je een privégedeelte op je apparaat hebt, wordt het definitief verwijderd. Het Google-account dat is toegevoegd aan je gedeelte, wordt verwijderd.\n\nAlle apps in je gedeelte en de gegevens worden definitief verwijderd."</string>
     <string name="main_clear_title" msgid="277664302144837723">"Alle gegevens wissen (fabrieks­instellingen terugzetten)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Alle gegevens wissen (fabrieks­instellingen terugzetten)"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"Muziek"</li>\n<li>"Foto\'s"</li>\n<li>"Andere gebruikersgegevens"</li></string>
@@ -1811,6 +1810,7 @@
     <string name="app_install_details_group_title" msgid="1172114479073704677">"Store"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"App-details"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"App geïnstalleerd vanuit <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
+    <string name="app_install_details_different_initiating_package_summary" msgid="6093306593167176688">"App geïnstalleerd vanuit <xliff:g id="APP_STORE1">%1$s</xliff:g> (via <xliff:g id="APP_STORE2">%2$s</xliff:g>)"</string>
     <string name="instant_app_details_summary" msgid="417197491598208216">"Meer informatie via <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
     <string name="app_ops_running" msgid="6127474473137428721">"Actief"</string>
     <string name="app_ops_never_used" msgid="9038133162371204506">"(Nooit gebruikt)"</string>
@@ -2185,7 +2185,7 @@
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Tekst met hoog contrast"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Wijzig de tekstkleur in zwart of wit. Zo maximaliseer je het contrast met de achtergrond."</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"Tekstcontrast maximaliseren"</string>
-    <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"Voeg een zwarte of witte achtergrond rond tekst toe om het contrast te verhogen"</string>
+    <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"Voeg een zwarte of witte achtergrond rond tekst toe voor een hoger contrast"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Schermvergroting automatisch updaten"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Schermvergroting updaten bij app-overgangen"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Aan/uit-knop beëindigt gesprek"</string>
@@ -2290,12 +2290,9 @@
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Hoortoestellen koppelen"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"Tik op het volgende scherm op je hoortoestellen. Je moet je linker- en rechteroordopje misschien afzonderlijk koppelen.\n\nZorg dat je hoortoestellen aanstaan en klaar zijn voor koppelen."</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> actief"</string>
-    <!-- no translation found for accessibility_hearingaid_left_side_device_summary (12349058624943107) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_right_side_device_summary (8645789702686724188) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_left_and_right_side_device_summary (3314103411842694197) -->
-    <skip />
+    <string name="accessibility_hearingaid_left_side_device_summary" msgid="12349058624943107">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, alleen links"</string>
+    <string name="accessibility_hearingaid_right_side_device_summary" msgid="8645789702686724188">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, alleen rechts"</string>
+    <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="3314103411842694197">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, links en rechts"</string>
     <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> en nog 1 andere"</string>
     <string name="accessibility_hearing_device_pairing_title" msgid="2701812183769537320">"Nieuw apparaat koppelen"</string>
     <string name="accessibility_hearing_device_connected_title" msgid="3785140037249487287">"Hoortoestellen"</string>
@@ -2574,7 +2571,8 @@
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Gebruiksduur van de batterij verlengen"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Uitzetten na opladen"</string>
     <string name="battery_saver_sticky_title_percentage" msgid="1178162022087559148">"Uitzetten bij <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="battery_saver_sticky_description_new" msgid="6472610662679038342">"Batterijbesparing gaat uit als de batterij <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> lading heeft"</string>
+    <!-- no translation found for battery_saver_sticky_description_new (8543277078136947874) -->
+    <skip />
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Aanzetten"</string>
@@ -2686,18 +2684,13 @@
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"Aan"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"Uit"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Aanpasbare connectiviteit gebruiken"</string>
-    <!-- no translation found for cellular_security_title (5562899485544677941) -->
-    <skip />
+    <string name="cellular_security_title" msgid="5562899485544677941">"Beveiliging van mobiel netwerk"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"Netwerktype, versleuteling, beheeropties voor meldingen"</string>
-    <!-- no translation found for cellular_security_top_intro (6749166804080092892) -->
-    <skip />
-    <!-- no translation found for cellular_security_settings_title (7779141923670352595) -->
-    <skip />
+    <string name="cellular_security_top_intro" msgid="6749166804080092892">"Met deze instellingen kun je je gesprekken, berichten en gegevens beschermen tegen verouderde of niet-versleutelde netwerken waardoor je misschien wordt blootgesteld aan gegevensdiefstal of toezicht"</string>
+    <string name="cellular_security_settings_title" msgid="7779141923670352595">"Beveiliging van mobiel netwerk"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"Meldingen"</string>
-    <!-- no translation found for cellular_security_notifications_controller_title (4853056963523277847) -->
-    <skip />
-    <!-- no translation found for cellular_security_notifications_controller_summary (8339863845393759958) -->
-    <skip />
+    <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"Netwerkmeldingen"</string>
+    <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"Krijg een melding als je apparaat verbinding maakt met een niet-versleuteld netwerk, of als een netwerk je unieke apparaat of simkaart-ID registreert"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"Versleuteling"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"Netwerkgeneraties"</string>
     <string name="cellular_security_network_generations_summary" msgid="139087814553929402">"Je kunt elke geplaatste simkaart zo instellen dat deze alleen verbinding maakt met netwerken die 3G, 4G en 5G ondersteunen. De sim maakt geen verbinding met oudere, onveilige 2G-netwerken. Deze instelling kan je connectiviteit beperken als het enige beschikbare netwerk 2G is. In geval van nood kan 2G worden gebruikt."</string>
@@ -2970,7 +2963,8 @@
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{{orgName} heeft een certificeringsinstantie (CA) voor je werkprofiel geïnstalleerd, waardoor dit domein activiteit in het werknetwerk kan bijhouden, waaronder e-mails, apps en beveiligde websites.\n\nNeem contact op met je beheerder voor meer informatie.}other{{orgName} heeft certificeringsinstanties (CA\'s) voor je werkprofiel geïnstalleerd, waardoor dit domein activiteit in het werknetwerk kan bijhouden, waaronder e-mails, apps en beveiligde websites.\n\nNeem contact op met je beheerder voor meer informatie.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"Een derde partij kan je netwerkactiviteit, waaronder e-mails, apps en beveiligde websites, bijhouden.\n\nDit is mogelijk omdat je een vertrouwd certificaat op je apparaat hebt opgeslagen."</string>
     <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{Certificaat checken}other{Certificaten checken}}"</string>
-    <string name="user_settings_title" msgid="6550866465409807877">"Meerdere gebruikers"</string>
+    <!-- no translation found for user_settings_title (9208831545558787202) -->
+    <skip />
     <string name="user_list_title" msgid="1387379079186123404">"Gebruikers en profielen"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"Gebruiker of profiel toevoegen"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"Beperkt profiel"</string>
@@ -3677,7 +3671,7 @@
     <string name="zen_mode_schedule_rule_days" msgid="8633770815307716351">"Dagen"</string>
     <string name="zen_mode_schedule_rule_days_none" msgid="5636604196262227070">"Geen"</string>
     <string name="zen_mode_schedule_alarm_title" msgid="305237266064819345">"Wekker kan eindtijd negeren"</string>
-    <string name="zen_mode_schedule_alarm_summary" msgid="9162760856136645133">"Het schema wordt uitgezet als een wekker afgaat"</string>
+    <string name="zen_mode_schedule_alarm_summary" msgid="9162760856136645133">"Schema wordt uitgezet als een wekker afgaat"</string>
     <string name="zen_mode_custom_behavior_title" msgid="92525364576358085">"Gedrag van Niet storen"</string>
     <string name="zen_mode_custom_behavior_summary_default" msgid="3259312823717839148">"Gebruik standaardinstellingen"</string>
     <string name="zen_mode_custom_behavior_summary" msgid="5390522750884328843">"Pas instellingen voor dit schema aan"</string>
@@ -4307,7 +4301,7 @@
     <string name="automatic_storage_manager_activation_warning" msgid="170508173207142665">"Je opslag wordt nu beheerd door de opslagbeheerder"</string>
     <string name="account_for_section_header" msgid="7466759342105251096">"Accounts voor <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="auto_sync_account_title" msgid="1070908045600374254">"App-gegevens automatisch synchroniseren"</string>
-    <string name="auto_sync_account_summary" msgid="7580352130028957346">"Laat apps automatisch gegevens vernieuwen"</string>
+    <string name="auto_sync_account_summary" msgid="7580352130028957346">"Sta toe dat apps gegevens automatisch vernieuwen"</string>
     <string name="account_sync_title" msgid="7036067017433297574">"Accountsynchronisatie"</string>
     <string name="account_sync_summary_some_on" msgid="911460286297968724">"Synchronisatie staat aan voor <xliff:g id="ID_1">%1$d</xliff:g> van de <xliff:g id="ID_2">%2$d</xliff:g> items"</string>
     <string name="account_sync_summary_all_on" msgid="2953682111836599841">"Synchronisatie staat aan voor alle items"</string>
@@ -4436,8 +4430,8 @@
     <string name="credman_confirmation_turn_off_positive_button" msgid="5678773011513369161">"Uitzetten"</string>
     <string name="credman_confirmation_change_provider_positive_button" msgid="7732302992885116967">"Wijzigen"</string>
     <string name="credman_limit_error_msg_title" msgid="1525814645803612135">"Er kunnen maar 5 services aanstaan"</string>
-    <string name="credman_limit_error_msg" msgid="2521803280130310063">"Zet minsten 1 service uit om een andere toe te voegen"</string>
-    <string name="credman_main_settings_intro_text" msgid="4981603639240772620">"Kies je voorkeursservice om gegevens op te slaan voor suggesties voor inloggen en automatisch invullen. Zet aanvullende services aan als je wilt dat deze ook suggesties bieden."</string>
+    <string name="credman_limit_error_msg" msgid="2521803280130310063">"Zet minstens 1 service uit om een andere toe te voegen"</string>
+    <string name="credman_main_settings_intro_text" msgid="4981603639240772620">"Kies je voorkeursservice om inloggegevens en suggesties voor automatisch invullen op te slaan. Zet aanvullende services aan als je wilt dat deze ook suggesties bieden."</string>
     <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"%1$s gebruikt wat er op je scherm staat om te bepalen wat automatisch kan worden ingevuld."</string>
     <string name="credman_error_message_title" msgid="4099557206946333568">"Limiet voor wachtwoorden, toegangssleutels en gegevensservices"</string>
     <string name="credman_error_message" msgid="8334797097200415449">"Je kunt maximaal 5 wachtwoorden, toegangssleutels en gegevensservices tegelijk actief hebben. Zet een service uit om meer toe te voegen."</string>
@@ -4647,6 +4641,8 @@
     <string name="summary_supported_service" msgid="4320535903444834786">"Je kunt iedereen een tekstbericht sturen, ook hulpdiensten. Je telefoon maakt opnieuw verbinding met een mobiel netwerk zodra het beschikbaar is."</string>
     <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"Satellietberichten kunnen langer duren en zijn alleen in bepaalde gebieden beschikbaar. Het weer en bepaalde constructies kunnen je satellietverbinding beïnvloeden. Bellen via satelliet is niet beschikbaar. Noodoproepen kunnen nog steeds worden verbonden.\n\nHet kan even duren voordat accountwijzigingen in Instellingen worden getoond. Neem contact op met je provider voor meer informatie."</string>
     <string name="more_about_satellite_messaging" msgid="3385673133561348509">"Meer informatie over satellietberichten"</string>
+    <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"Kan <xliff:g id="FUNCTION">%1$s</xliff:g> niet aanzetten"</string>
+    <string name="satellite_warning_dialog_content" msgid="936419945275934955">"Als je <xliff:g id="FUNCTION">%1$s</xliff:g> wilt aanzetten, verbreek je eerst de satellietverbinding"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Toegangspuntnamen"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Niet beschikbaar wanneer verbonden met <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -4684,20 +4680,20 @@
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"Kan simkaart niet activeren"</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"Probeer de simkaart weer aan te zetten. Als het probleem blijft optreden, start je het apparaat opnieuw op."</string>
     <string name="sim_onboarding_dialog_starting_title" msgid="4212945803784596345">"Je simvoorkeuren instellen"</string>
-    <string name="sim_onboarding_dialog_starting_msg" msgid="8450391476631265209">"Stel je voorkeuren voor mobiele netwerken in om meerdere sims te gebruiken op dit apparaat"</string>
-    <string name="sim_onboarding_label_sim_title" msgid="273162565849288273">"Je sims labelen"</string>
+    <string name="sim_onboarding_dialog_starting_msg" msgid="8450391476631265209">"Stel je voorkeuren voor mobiele netwerken in om meerdere simkaarten te gebruiken op dit apparaat"</string>
+    <string name="sim_onboarding_label_sim_title" msgid="273162565849288273">"Simkaarten labelen"</string>
     <string name="sim_onboarding_label_sim_msg" msgid="5105859235219529056">"Je ziet deze labels als je belt, tekstberichten stuurt of data gebruikt, en in Instellingen"</string>
     <string name="sim_onboarding_label_sim_dialog_title" msgid="5839073125605286120">"Simlabel"</string>
     <string name="sim_onboarding_label_sim_dialog_label" msgid="9020433985426525185">"Label"</string>
     <string name="sim_onboarding_select_sim_title" msgid="5895262188167744055">"Sims selecteren voor gebruik"</string>
     <string name="sim_onboarding_select_sim_msg" msgid="5638859405391915048">"Je kunt 2 sims tegelijk gebruiken"</string>
-    <string name="sim_onboarding_primary_sim_title" msgid="2793090401371135675">"Je primaire sims instellen"</string>
-    <string name="sim_onboarding_primary_sim_msg" msgid="5484656671490558032">"Kies welke sims je standaard wilt gebruiken voor gesprekken, tekstberichten en data"</string>
-    <string name="primary_sim_title" msgid="2508161011657571566">"Je primaire sims"</string>
+    <string name="sim_onboarding_primary_sim_title" msgid="2793090401371135675">"Primaire simkaarten instellen"</string>
+    <string name="sim_onboarding_primary_sim_msg" msgid="5484656671490558032">"Kies welke simkaarten je standaard wilt gebruiken voor gesprekken, tekstberichten en data"</string>
+    <string name="primary_sim_title" msgid="2508161011657571566">"Je primaire simkaarten"</string>
     <string name="primary_sim_calls_title" msgid="4961189133582615685">"Gesprekken"</string>
     <string name="primary_sim_texts_title" msgid="1287584042733097749">"Tekstberichten"</string>
     <string name="primary_sim_automatic_data_title" msgid="1265528923229642480">"Automatische dataschakeling"</string>
-    <string name="primary_sim_automatic_data_msg" msgid="1612203837010785203">"Gebruik data van beide sims, afhankelijk van dekking en beschikbaarheid"</string>
+    <string name="primary_sim_automatic_data_msg" msgid="1612203837010785203">"Gebruik data van om het even welke simkaart, afhankelijk van dekking en beschikbaarheid"</string>
     <string name="sim_action_restart_dialog_title" msgid="3507413479633430120">"Start opnieuw op om 2 sims te gebruiken"</string>
     <string name="sim_action_restart_dialog_msg" msgid="4737611046767629774">"Als je 2 sims tegelijk wilt gebruiken, start je je apparaat opnieuw op en zet je beide sims aan"</string>
     <string name="sim_action_restart_dialog_cancel" msgid="665560106686565624">"Alleen <xliff:g id="CARRIER_NAME">%1$s</xliff:g> gebruiken"</string>
@@ -4708,7 +4704,7 @@
     <string name="sim_onboarding_progressbar_turning_sim_on" msgid="1163318788393361574">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> aanzetten…"</string>
     <string name="mobile_network_spn_title" msgid="3053793174495329077">"Mobiel netwerk"</string>
     <string name="mobile_network_phone_number_title" msgid="2090794402855021784">"Telefoonnummer"</string>
-    <string name="mobile_network_sim_label_color_title" msgid="2401352348041132876">"Simlabel en kleur"</string>
+    <string name="mobile_network_sim_label_color_title" msgid="2401352348041132876">"Simlabel en -kleur"</string>
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"Netwerkactivering"</string>
     <string name="sim_switch_channel_id" msgid="4927038626791837861">"Wijziging van provider"</string>
     <string name="post_dsds_reboot_notification_title_with_carrier" msgid="975447139749692794">"Je sim van <xliff:g id="CARRIER_NAME">%1$s</xliff:g> is actief"</string>
@@ -4808,19 +4804,46 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"Informatie over je werkbeleid"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"Instellingen beheerd door je IT-beheerder"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
-    <string name="enable_16k_pages" msgid="5009476566957520607">"Opstarten met paginagrootte 16 K"</string>
-    <string name="enable_16k_pages_summary" msgid="428117226069445198">"Opstarten met kernel voor paginagrootte van 16 K"</string>
-    <string name="confirm_enable_16k_pages_title" msgid="6751570067857011642">"Opnieuw opstarten met kernel voor pagina\'s van 16 KB?"</string>
-    <string name="confirm_enable_16k_pages_text" msgid="702888115148257215">"WAARSCHUWING: Sommige apps werken misschien niet met deze modus. Het apparaat wordt na bevestiging opnieuw opgestart."</string>
-    <string name="confirm_enable_4k_pages_title" msgid="626987400420355263">"Opnieuw opstarten met kernel voor pagina\'s van 4 KB?"</string>
-    <string name="confirm_enable_4k_pages_text" msgid="6168921566226074524">"Het apparaat wordt na bevestiging opnieuw opgestart."</string>
+    <!-- no translation found for enable_16k_pages (8001470927566110689) -->
+    <skip />
+    <!-- no translation found for enable_16k_pages_summary (1964363364670306912) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_title (1286925577014793351) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_text (570198382662424714) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_title (3210360137887034659) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_text (155070605667160083) -->
+    <skip />
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"Kan kernel niet updaten naar kernel voor pagina\'s van 16 KB."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Wijziging toepassen"</string>
-    <string name="confirm_format_ext4_title" msgid="4453684705528818873">"Apparaat omzetten naar ext4?"</string>
-    <string name="confirm_format_ext4_text" msgid="8164677342487500794">"16K-ontwikkelaarsoptie wordt ondersteund met het ext4-bestandssysteem. Het apparaat wordt gewist en het bestandssysteem wordt na de bevestiging gewijzigd in ext4."</string>
-    <string name="format_ext4_failure_toast" msgid="6904611547290793885">"Kan niet omzetten en de gegevenspartitie niet wissen naar ext4."</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="6338135847153690912">"Simlockvrij maken door OEM vereist"</string>
-    <string name="confirm_oem_unlock_for_16k_text" msgid="236718973897424382">"Het apparaat moet simlockvrij zijn gemaakt door de OEM voordat je de 16k-optie voor ontwikkelaars gebruikt. Voor het simlockvrij maken door de OEM moeten ook de gebruikersgegevens worden geformatteerd. Laat het apparaat simlockvrij maken door de OEM en probeer het opnieuw."</string>
+    <!-- no translation found for confirm_format_ext4_title (6696191800594435577) -->
+    <skip />
+    <!-- no translation found for confirm_format_ext4_text (7940372488624630214) -->
+    <skip />
+    <!-- no translation found for format_ext4_failure_toast (8059453995800471549) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (5374451262432025419) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_text (3583604865119937957) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_title (1184703958249093215) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text_short (2894243902906666242) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text (8284806650260868833) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_title (7762533464569818498) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text_short (269039281591806585) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (6208765386837706582) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_channel_name (1658444283036376361) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_action (2309805437430150456) -->
+    <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"App voor verwerking bugrapport"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Hierdoor wordt bepaald welke app de snelkoppeling voor het bugrapport verwerkt op je apparaat."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Privé"</string>
@@ -4882,7 +4905,7 @@
     <string name="media_controls_show_player" msgid="8504571042365814021">"Toon speler"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"media"</string>
     <string name="camera_extensions_fallback_title" msgid="3604579046777004989">"Software-extensies voor camera toestaan"</string>
-    <string name="camera_extensions_fallback_description" msgid="6939818294458854536">"Zet de standaard software-implementatie aan van geavanceerde camerafuncties, zoals Eyes Free-videografie"</string>
+    <string name="camera_extensions_fallback_description" msgid="4306833827773277263">"Zet de standaard software-implementatie aan van geavanceerde camerafuncties, zoals HDR, de nachtmodus of andere camera-extensies."</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth wordt aangezet"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"Internet"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"Simkaarten"</string>
@@ -4952,6 +4975,8 @@
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Afdrukservice gebruiken"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Meerdere gebruikers toestaan"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"toestaan, meerdere, gebruiker, toestemming, veel"</string>
+    <!-- no translation found for multiple_users_title_keywords (2395593167746225172) -->
+    <skip />
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Draadloze foutopsporing gebruiken"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Voorkeuren voor grafisch stuurprogramma gebruiken"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"Nachtverlichting gebruiken"</string>
@@ -4974,10 +4999,8 @@
     <string name="enable_2g_title" msgid="8184757884636162942">"2G toestaan"</string>
     <string name="enable_2g_summary" msgid="2794534052372565914">"2G is minder veilig, maar kan op bepaalde locaties zorgen voor een betere verbinding. Voor noodoproepen is 2G altijd toegestaan."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> vereist dat 2G beschikbaar is"</string>
-    <!-- no translation found for require_cellular_encryption_title (6087085031703089235) -->
-    <skip />
-    <!-- no translation found for require_cellular_encryption_summary (6090569065420631457) -->
-    <skip />
+    <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Alleen versleutelde netwerken toestaan"</string>
+    <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"De beveiliging is beter maar op sommige locaties kan je mobiele netwerkverbinding beperkt zijn. Noodoproepen zijn altijd toegestaan."</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Alle services"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Toegang tot klembord tonen"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Toon een bericht als apps toegang hebben tot tekst, afbeeldingen of andere content die je hebt gekopieerd"</string>
@@ -5190,7 +5213,7 @@
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Grammaticaal geslacht selecteren"</string>
     <string name="content_protection_preference_title" msgid="5069260032659193074">"Scannen op misleidende apps"</string>
     <string name="content_protection_preference_summary" msgid="2252393849408445391">"App-activiteit checken op phishing"</string>
-    <string name="content_protection_preference_user_consent_switch_title" msgid="1797782616799594426">"Scannen gebruiken om misleidende apps te vinden"</string>
+    <string name="content_protection_preference_user_consent_switch_title" msgid="1797782616799594426">"Scannen op misleidende apps gebruiken"</string>
     <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="3004347470520916069">"Scannen gebruiken om misleidende apps voor werk te vinden"</string>
     <string name="content_protection_preference_subpage_summary" msgid="3595621220981703364"></string>
     <string name="content_protection_preference_subpage_info" msgid="6890886357653365489"></string>

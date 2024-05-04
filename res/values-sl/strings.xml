@@ -1810,6 +1810,7 @@
     <string name="app_install_details_group_title" msgid="1172114479073704677">"Trgovina"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"Podrobnosti o aplikaciji"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"Aplikacija je nameščena iz trgovine <xliff:g id="APP_STORE">%1$s</xliff:g>."</string>
+    <string name="app_install_details_different_initiating_package_summary" msgid="6093306593167176688">"Aplikacija je bila nameščena iz trgovine <xliff:g id="APP_STORE1">%1$s</xliff:g> (prek: <xliff:g id="APP_STORE2">%2$s</xliff:g>)"</string>
     <string name="instant_app_details_summary" msgid="417197491598208216">"Več informacij v trgovini <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
     <string name="app_ops_running" msgid="6127474473137428721">"Se izvaja"</string>
     <string name="app_ops_never_used" msgid="9038133162371204506">"(Nikoli uporabljeno)"</string>
@@ -2289,12 +2290,9 @@
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Seznanite slušne aparate"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"Na naslednjem zaslonu se dotaknite slušnih aparatov. Morda boste morali posebej seznaniti aparat za levo in desno uho.\n\nPrepričajte se, da so slušni aparati vklopljeni in pripravljeni za seznanjanje."</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"Naprava <xliff:g id="DEVICE_NAME">%1$s</xliff:g> je aktivna"</string>
-    <!-- no translation found for accessibility_hearingaid_left_side_device_summary (12349058624943107) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_right_side_device_summary (8645789702686724188) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_left_and_right_side_device_summary (3314103411842694197) -->
-    <skip />
+    <string name="accessibility_hearingaid_left_side_device_summary" msgid="12349058624943107">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>/samo levo"</string>
+    <string name="accessibility_hearingaid_right_side_device_summary" msgid="8645789702686724188">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>/samo desno"</string>
+    <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="3314103411842694197">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>/levo in desno"</string>
     <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> in še 1"</string>
     <string name="accessibility_hearing_device_pairing_title" msgid="2701812183769537320">"Seznanitev nove naprave"</string>
     <string name="accessibility_hearing_device_connected_title" msgid="3785140037249487287">"Slušni pripomočki"</string>
@@ -2573,7 +2571,8 @@
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Podaljšanje časa delovanja baterije"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Izklop ob napolnjenosti"</string>
     <string name="battery_saver_sticky_title_percentage" msgid="1178162022087559148">"Izklop pri napolnjenosti <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="battery_saver_sticky_description_new" msgid="6472610662679038342">"Varčevanje z energijo baterije se izklopi, ko je baterija napolnjena na <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>."</string>
+    <!-- no translation found for battery_saver_sticky_description_new (8543277078136947874) -->
+    <skip />
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Vklop"</string>
@@ -2685,18 +2684,13 @@
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"Vklopljeno"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"Izklopljeno"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Uporaba prilagodljivega povezovanja"</string>
-    <!-- no translation found for cellular_security_title (5562899485544677941) -->
-    <skip />
+    <string name="cellular_security_title" msgid="5562899485544677941">"Varnost mobilnega omrežja"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"Vrsta omrežja, šifriranje, kontrolniki obvestil"</string>
-    <!-- no translation found for cellular_security_top_intro (6749166804080092892) -->
-    <skip />
-    <!-- no translation found for cellular_security_settings_title (7779141923670352595) -->
-    <skip />
+    <string name="cellular_security_top_intro" msgid="6749166804080092892">"Te nastavitve omogočajo zaščito klicev, sporočil in podatkov iz zastarelih ali nešifriranih omrežij, ki bi vaše podatke lahko izpostavila kraji ali nadzoru"</string>
+    <string name="cellular_security_settings_title" msgid="7779141923670352595">"Varnost mobilnega omrežja"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"Obvestila"</string>
-    <!-- no translation found for cellular_security_notifications_controller_title (4853056963523277847) -->
-    <skip />
-    <!-- no translation found for cellular_security_notifications_controller_summary (8339863845393759958) -->
-    <skip />
+    <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"Obvestila glede omrežja"</string>
+    <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"Prejmite obvestilo, ko se naprava poveže z nešifriranim omrežjem ali ko omrežje zabeleži enolični ID naprave ali kartice SIM"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"Šifriranje"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"Generacije omrežij"</string>
     <string name="cellular_security_network_generations_summary" msgid="139087814553929402">"Vsako nameščeno kartico SIM lahko konfigurirate, da se poveže samo v omrežja, ki podpirajo 3G, 4G in 5G. Kartica SIM se ne bo povezala v starejša omrežja 2G, ki niso varna. Ta nastavitev lahko omeji vašo povezljivost, ko je na voljo samo omrežje 2G. Omrežje 2G se lahko uporabi v nujnih primerih."</string>
@@ -2969,7 +2963,8 @@
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{Skrbnik organizacije {orgName} je namestil overitelja potrdil za vaš delovni profil, s čimer morda lahko spremlja dejavnost v službenem omrežju, vključno z e-pošto, aplikacijami in varnimi spletnimi mesti.\n\nČe želite več informacij o tem potrdilu, se obrnite na skrbnika.}one{Skrbnik organizacije {orgName} je namestil overitelje potrdil za vaš delovni profil, s čimer morda lahko spremlja dejavnost v službenem omrežju, vključno z e-pošto, aplikacijami in varnimi spletnimi mesti.\n\nČe želite več informacij o teh potrdilih, se obrnite na skrbnika.}two{Skrbnik organizacije {orgName} je namestil overitelja potrdil za vaš delovni profil, s čimer morda lahko spremlja dejavnost v službenem omrežju, vključno z e-pošto, aplikacijami in varnimi spletnimi mesti.\n\nČe želite več informacij o teh potrdilih, se obrnite na skrbnika.}few{Skrbnik organizacije {orgName} je namestil overitelje potrdil za vaš delovni profil, s čimer morda lahko spremlja dejavnost v službenem omrežju, vključno z e-pošto, aplikacijami in varnimi spletnimi mesti.\n\nČe želite več informacij o teh potrdilih, se obrnite na skrbnika.}other{Skrbnik organizacije {orgName} je namestil overitelje potrdil za vaš delovni profil, s čimer morda lahko spremlja dejavnost v službenem omrežju, vključno z e-pošto, aplikacijami in varnimi spletnimi mesti.\n\nČe želite več informacij o teh potrdilih, se obrnite na skrbnika.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"Tretja oseba lahko nadzira vašo omrežno dejavnost, vključno z e-poštnimi sporočili, aplikacijami in varnimi spletnimi mesti.\n\nTo ji omogoča zaupanja vredna poverilnica, ki je nameščena v vaši napravi."</string>
     <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{Preveri potrdilo}one{Preveri potrdila}two{Preveri potrdila}few{Preveri potrdila}other{Preveri potrdila}}"</string>
-    <string name="user_settings_title" msgid="6550866465409807877">"Več uporabnikov"</string>
+    <!-- no translation found for user_settings_title (9208831545558787202) -->
+    <skip />
     <string name="user_list_title" msgid="1387379079186123404">"Uporabniki in profili"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"Dodajanje uporabnika ali profila"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"Omejen profil"</string>
@@ -4436,7 +4431,7 @@
     <string name="credman_confirmation_change_provider_positive_button" msgid="7732302992885116967">"Spremeni"</string>
     <string name="credman_limit_error_msg_title" msgid="1525814645803612135">"Vklopljenih je lahko največ pet storitev"</string>
     <string name="credman_limit_error_msg" msgid="2521803280130310063">"Če želite dodati novo storitev, izklopite vsaj eno obstoječo"</string>
-    <string name="credman_main_settings_intro_text" msgid="4981603639240772620">"Izberite želeno storitev za shranjevanje podatkov za prijavo in predlogov za samodejno izpolnjevanje. Če želite tudi podajanje predlogov, vklopite dodatne storitve."</string>
+    <string name="credman_main_settings_intro_text" msgid="4981603639240772620">"Izberite želeno storitev za shranjevanje podatkov za prijavo in predlogov za samodejno izpolnjevanje. Vklopite dodatne storitve, če želite, da tudi te podajajo predloge."</string>
     <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"%1$s na podlagi prikaza na zaslonu ugotovi, kaj se lahko samodejno izpolni."</string>
     <string name="credman_error_message_title" msgid="4099557206946333568">"Omejitev števila gesel, ključev za dostop in podatkovnih storitev"</string>
     <string name="credman_error_message" msgid="8334797097200415449">"Hkrati je lahko aktivnih največ 5 gesel, ključev za dostop in podatkovnih storitev. Če želite dodati novo storitev, najprej izklopite eno od obstoječih."</string>
@@ -4646,6 +4641,8 @@
     <string name="summary_supported_service" msgid="4320535903444834786">"Sporočilo lahko pošljete vsakomur, tudi reševalnim službam. Telefon se bo znova povezal z mobilnim omrežjem, ko bo to na voljo."</string>
     <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"Izmenjava satelitskih sporočil morda traja dalj časa in je na voljo le na nekaterih območjih. Vreme in nekatere ovire lahko vplivajo na satelitsko povezavo. Klicanje po satelitski povezavi ni na voljo. Klici v sili bodo morda kljub temu izvedljivi.\n\nMorda bo trajalo nekaj časa, preden bodo spremembe računa prikazane v nastavitvah. Za podrobnejše informacije se obrnite na operaterja."</string>
     <string name="more_about_satellite_messaging" msgid="3385673133561348509">"Več o satelitskih sporočilih"</string>
+    <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"Funkcije <xliff:g id="FUNCTION">%1$s</xliff:g> ni mogoče vklopiti"</string>
+    <string name="satellite_warning_dialog_content" msgid="936419945275934955">"Če želite vklopiti funkcijo <xliff:g id="FUNCTION">%1$s</xliff:g>, najprej prekinite satelitsko povezavo"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Imena dostopnih točk"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Ni na voljo ob vzpostavljeni povezavi z operaterjem <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -4807,19 +4804,46 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"Podatki o službenem pravilniku"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"Nastavitve upravlja skrbnik za IT"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPE"</string>
-    <string name="enable_16k_pages" msgid="5009476566957520607">"Zaženi s stranmi velikosti 16 K"</string>
-    <string name="enable_16k_pages_summary" msgid="428117226069445198">"Zagon naprave z jedrom, ki podpira strani velikosti 16 K"</string>
-    <string name="confirm_enable_16k_pages_title" msgid="6751570067857011642">"Želite znova zagnati z jedrom, združljivim s stranmi velikosti 16 KB?"</string>
-    <string name="confirm_enable_16k_pages_text" msgid="702888115148257215">"OPOZORILO: Nekatere aplikacije morda niso združljive s tem načinom. Naprava se bo znova zagnala po potrditvi."</string>
-    <string name="confirm_enable_4k_pages_title" msgid="626987400420355263">"Želite znova zagnati z jedrom, združljivim s stranmi velikosti 4 KB?"</string>
-    <string name="confirm_enable_4k_pages_text" msgid="6168921566226074524">"Naprava se bo znova zagnala po potrditvi."</string>
+    <!-- no translation found for enable_16k_pages (8001470927566110689) -->
+    <skip />
+    <!-- no translation found for enable_16k_pages_summary (1964363364670306912) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_title (1286925577014793351) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_text (570198382662424714) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_title (3210360137887034659) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_text (155070605667160083) -->
+    <skip />
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"Jedra ni bilo mogoče posodobiti na jedro, ki je združljivo s stranmi velikosti 16 KB."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Uveljavljanje spremembe"</string>
-    <string name="confirm_format_ext4_title" msgid="4453684705528818873">"Želite formatirati napravo v sistem ext4?"</string>
-    <string name="confirm_format_ext4_text" msgid="8164677342487500794">"Možnost za razvijalce 16K je podprta z datotečnim sistemom ext4. Podatki v napravi bodo izbrisani, datotečni sistem pa bo po potrditvi spremenjen v ext4."</string>
-    <string name="format_ext4_failure_toast" msgid="6904611547290793885">"Formatiranje v sistem ext4 in brisanje particije s podatki ni uspelo."</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="6338135847153690912">"Potrebno je odklepanje OEM"</string>
-    <string name="confirm_oem_unlock_for_16k_text" msgid="236718973897424382">"Pred uporabo možnosti za razvijalce 16K je potrebno odklepanje OEM za napravo. Za odklepanje OEM bo potrebno tudi formatiranje uporabniških podatkov. Izvedite odklepanje OEM za napravo in poskusite znova."</string>
+    <!-- no translation found for confirm_format_ext4_title (6696191800594435577) -->
+    <skip />
+    <!-- no translation found for confirm_format_ext4_text (7940372488624630214) -->
+    <skip />
+    <!-- no translation found for format_ext4_failure_toast (8059453995800471549) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (5374451262432025419) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_text (3583604865119937957) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_title (1184703958249093215) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text_short (2894243902906666242) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text (8284806650260868833) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_title (7762533464569818498) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text_short (269039281591806585) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (6208765386837706582) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_channel_name (1658444283036376361) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_action (2309805437430150456) -->
+    <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"Rutina za obravnavo poročila o napakah"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Določa, katera aplikacija obravnava bližnjico za poročilo o napakah v napravi."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Osebno"</string>
@@ -4883,7 +4907,7 @@
     <string name="media_controls_show_player" msgid="8504571042365814021">"Prikaži predvajalnik"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"predstavnost"</string>
     <string name="camera_extensions_fallback_title" msgid="3604579046777004989">"Dovoli razširitve programske opreme za fotoaparat"</string>
-    <string name="camera_extensions_fallback_description" msgid="6939818294458854536">"Omogoča privzeto uvedbo programske opreme za napredne funkcije fotoaparata, kot je videografija za slepe in slabovidne."</string>
+    <string name="camera_extensions_fallback_description" msgid="4306833827773277263">"Omogoča privzeto uvedbo programske opreme za napredne funkcije fotoaparata, kot so HDR, Nočna svetloba in druge razširitve za fotoaparat."</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth se bo vklopil."</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"Internet"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"Kartice SIM"</string>
@@ -4953,6 +4977,8 @@
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Uporabi storitev tiskanja"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Dovoli več uporabnikov"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"dovoli, več, uporabnik, dovoljenje"</string>
+    <!-- no translation found for multiple_users_title_keywords (2395593167746225172) -->
+    <skip />
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Uporabi brezžično odpravljanje napak"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Uporaba nastavitev grafičnega gonilnika"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"Uporabi način Nočna svetloba"</string>
@@ -4975,10 +5001,8 @@
     <string name="enable_2g_title" msgid="8184757884636162942">"Omogoči 2G"</string>
     <string name="enable_2g_summary" msgid="2794534052372565914">"2G je manj varen, vendar lahko izboljša kakovost povezave na nekaterih lokacijah. Povezava 2G je vedno dovoljena za klice v sili."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"Operater <xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> zahteva razpoložljivo povezavo 2G"</string>
-    <!-- no translation found for require_cellular_encryption_title (6087085031703089235) -->
-    <skip />
-    <!-- no translation found for require_cellular_encryption_summary (6090569065420631457) -->
-    <skip />
+    <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Dovoli samo šifrirana omrežja"</string>
+    <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"To je varnejše, vendar pa je tako povezava z mobilnim omrežjem morda omejena na nekaterih lokacijah. Klici v sili so vedno dovoljeni."</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Vse storitve"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Pokaži dostop do odložišča"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Pokaži sporočilo, ko aplikacije dostopijo do besedila, slik ali drugih vsebin, ki ste jih kopirali."</string>

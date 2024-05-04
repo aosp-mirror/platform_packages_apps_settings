@@ -1497,8 +1497,7 @@
     <string name="reset_esim_error_title" msgid="6516110227665862295">"Hindi mabura ang mga eSIM"</string>
     <string name="reset_esim_error_msg" msgid="8459527827897797168">"Nagkaproblema at hindi nabura ang iyong mga eSIM.\n\nI-restart ang device mo at subukan ulit."</string>
     <string name="reset_private_space_delete_title" msgid="2555885198282572990">"I-delete ang pribadong space"</string>
-    <!-- no translation found for reset_private_space_delete_dialog (7506471054091800883) -->
-    <skip />
+    <string name="reset_private_space_delete_dialog" msgid="7506471054091800883">"Kung mayroon kang pribadong space sa iyong device, permanente itong made-delete at aalisin ang Account na idinagdag sa space mo.\n\nPermanente ring made-delete ang lahat ng app sa iyong space at ang data ng mga ito."</string>
     <string name="main_clear_title" msgid="277664302144837723">"Burahin ang data (factory reset)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Burahin lahat (factory reset)"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"Musika"</li>\n<li>"Mga Larawan"</li>\n<li>"Ibang data ng user"</li></string>
@@ -1811,6 +1810,7 @@
     <string name="app_install_details_group_title" msgid="1172114479073704677">"Store"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"Mga detalye ng app"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"Na-install ang app mula sa <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
+    <string name="app_install_details_different_initiating_package_summary" msgid="6093306593167176688">"Na-install ang app mula sa <xliff:g id="APP_STORE1">%1$s</xliff:g> (sa pamamagitan ng <xliff:g id="APP_STORE2">%2$s</xliff:g>)"</string>
     <string name="instant_app_details_summary" msgid="417197491598208216">"Higit pang impormasyon sa <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
     <string name="app_ops_running" msgid="6127474473137428721">"Gumagana"</string>
     <string name="app_ops_never_used" msgid="9038133162371204506">"(Hindi pa nagamit)"</string>
@@ -2290,12 +2290,9 @@
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Ipares ang hearing aid"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"Sa susunod na screen, mag-tap sa iyong mga hearing aid. Baka kailanganin mong ipares ang kaliwa at kanang tainga nang hiwalay.\n\nTiyaking naka-on ang iyong mga hearing aid at handa nang ipares."</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"Aktibo ang <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
-    <!-- no translation found for accessibility_hearingaid_left_side_device_summary (12349058624943107) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_right_side_device_summary (8645789702686724188) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_left_and_right_side_device_summary (3314103411842694197) -->
-    <skip />
+    <string name="accessibility_hearingaid_left_side_device_summary" msgid="12349058624943107">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> / Kaliwa lang"</string>
+    <string name="accessibility_hearingaid_right_side_device_summary" msgid="8645789702686724188">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> / Kanan lang"</string>
+    <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="3314103411842694197">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> / Kaliwa at kanan"</string>
     <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> +1 pa"</string>
     <string name="accessibility_hearing_device_pairing_title" msgid="2701812183769537320">"Magpares ng bagong device"</string>
     <string name="accessibility_hearing_device_connected_title" msgid="3785140037249487287">"Mga hearing device"</string>
@@ -2574,7 +2571,8 @@
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Patagalin ang baterya"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"I-off kapag naka-charge"</string>
     <string name="battery_saver_sticky_title_percentage" msgid="1178162022087559148">"I-off sa <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="battery_saver_sticky_description_new" msgid="6472610662679038342">"Mao-off ang Pantipid ng Baterya kapag umabot ang baterya sa <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <!-- no translation found for battery_saver_sticky_description_new (8543277078136947874) -->
+    <skip />
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"I-on"</string>
@@ -2686,18 +2684,13 @@
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"Naka-on"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"Naka-off"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Gumamit ng adaptive connectivity"</string>
-    <!-- no translation found for cellular_security_title (5562899485544677941) -->
-    <skip />
+    <string name="cellular_security_title" msgid="5562899485544677941">"Seguridad ng mobile network"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"Network type, pag-encrypt, mga kontrol sa notification"</string>
-    <!-- no translation found for cellular_security_top_intro (6749166804080092892) -->
-    <skip />
-    <!-- no translation found for cellular_security_settings_title (7779141923670352595) -->
-    <skip />
+    <string name="cellular_security_top_intro" msgid="6749166804080092892">"Nakakatulong ang mga setting na ito na protektahan ang iyong mga tawag, mensahe, at data mula sa mga luma o hindi naka-encrypt na network na puwedeng mag-expose sa iyo sa pagnanakaw ng data o pagsubaybay."</string>
+    <string name="cellular_security_settings_title" msgid="7779141923670352595">"Seguridad ng mobile network"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"Mga Notification"</string>
-    <!-- no translation found for cellular_security_notifications_controller_title (4853056963523277847) -->
-    <skip />
-    <!-- no translation found for cellular_security_notifications_controller_summary (8339863845393759958) -->
-    <skip />
+    <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"Mga notification sa network"</string>
+    <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"Maabisuhan kapag kumonekta ang iyong device sa isang hindi naka-encrypt na network, o kapag na-record ng network ang iyong natatanging device o SIM ID"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"Pag-encrypt"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"Mga generation ng network"</string>
     <string name="cellular_security_network_generations_summary" msgid="139087814553929402">"Puwede mong i-configure ang bawat naka-install na SIM card para kumonekta lang sa mga network na may suporta sa 3G, 4G, at 5G. Hindi kokonekta ang SIM sa mga mas luma at hindi secure na 2G network. Posibleng malimitahan ng setting na ito ang iyong pagkakonekta sakaling 2G lang ang available na network. Sakaling magkaroon ng emergency, puwedeng gamitin ang 2G."</string>
@@ -2970,15 +2963,15 @@
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{Nag-install ang {orgName} ng awtoridad sa certificate para sa iyong profile sa trabaho, na puwedeng magbigay-daan ditong subaybayan ang aktibidad sa network ng trabaho, kabilang ang mga email, app, at secure na website.\n\nPara sa higit pang impormasyon tungkol sa certificate na ito, makipag-ugnayan sa iyong admin.}one{Nag-install ang {orgName} ng mga awtoridad sa certificate para sa iyong profile sa trabaho, na puwedeng magbigay-daan ditong subaybayan ang aktibidad sa network ng trabaho, kabilang ang mga email, app, at secure na website.\n\nPara sa higit pang impormasyon tungkol sa mga certificate na ito, makipag-ugnayan sa iyong admin.}other{Nag-install ang {orgName} ng mga awtoridad sa certificate para sa iyong profile sa trabaho, na puwedeng magbigay-daan ditong subaybayan ang aktibidad sa network ng trabaho, kabilang ang mga email, app, at secure na website.\n\nPara sa higit pang impormasyon tungkol sa mga certificate na ito, makipag-ugnayan sa iyong admin.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"May kakayahan ang isang third party na subaybayan ang aktibidad ng iyong network, kabilang ang mga email, apps, at mga secure website.\n\nGinagawa itong posible ng isang pinagkakatiwalaang credential na naka-install sa iyong device."</string>
     <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{Suriin ang certificate}one{Suriin ang mga certificate}other{Suriin ang mga certificate}}"</string>
-    <string name="user_settings_title" msgid="6550866465409807877">"Maraming user"</string>
+    <!-- no translation found for user_settings_title (9208831545558787202) -->
+    <skip />
     <string name="user_list_title" msgid="1387379079186123404">"Mga user at profile"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"Magdagdag ng user o profile"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"Pinaghihigpitang profile"</string>
     <string name="user_summary_not_set_up" msgid="4602868481732886115">"Hindi naka-set up"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1658946988920104613">"Hindi naka-set up - Pinaghihigpitang profile"</string>
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"Hindi naka-set up - Profile sa trabaho"</string>
-    <!-- no translation found for user_owner (2079206733011361994) -->
-    <skip />
+    <string name="user_owner" msgid="2079206733011361994">"May-ari"</string>
     <string name="user_admin" msgid="4024553191395768119">"Admin"</string>
     <string name="user_you" msgid="3070562015202859996">"Ikaw (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_add_max_count" msgid="3328539978480663740">"Hindi ka na makakapagdagdag ng higit pang user. Mag-alis ng user para makapagdagdag ng bago."</string>
@@ -4648,6 +4641,8 @@
     <string name="summary_supported_service" msgid="4320535903444834786">"Puwede kang mag-text sa kahit sino, kasama ang mga serbisyong pang-emergency. Kokonekta ulit ang iyong telepono sa mobile network kapag available."</string>
     <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"Posibleng mas magtagal ang satellite na pagmemensahe at available lang sa ilang lugar. Puwedeng makaapekto sa iyong koneksyon sa satellite ang lagay ng panahon at ilang partikular na istruktura. Hindi available ang pagtawag gamit ang satellite. Posibleng kumonekta pa rin ang mga emergency na tawag.\n\nPosibleng abutin nang ilang sandali bago lumabas ang mga pagbabago sa account sa Mga Setting. Makipag-ugnayan sa iyong carrier para sa mga detalye."</string>
     <string name="more_about_satellite_messaging" msgid="3385673133561348509">"Higit pa tungkol sa satellite na pagmemensahe"</string>
+    <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"Hindi ma-on ang <xliff:g id="FUNCTION">%1$s</xliff:g>"</string>
+    <string name="satellite_warning_dialog_content" msgid="936419945275934955">"Para i-on ang <xliff:g id="FUNCTION">%1$s</xliff:g>, wakasan muna ang koneksyon sa satellite"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Mga Access Point Name"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Hindi available kapag nakakonekta sa <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -4685,7 +4680,7 @@
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"Hindi ma-activate ang SIM"</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"Subukang i-on ulit ang SIM. Kung magpapatuloy ang problema, i-restart ang iyong device."</string>
     <string name="sim_onboarding_dialog_starting_title" msgid="4212945803784596345">"Itakda ang SIM preferences mo"</string>
-    <string name="sim_onboarding_dialog_starting_msg" msgid="8450391476631265209">"Itakda ang iyong mga kagustuhan sa mobile network para makagamit ng maraming SIM sa device na ito"</string>
+    <string name="sim_onboarding_dialog_starting_msg" msgid="8450391476631265209">"Itakda ang iyong mga preference sa mobile network para makagamit ng maraming SIM sa device na ito"</string>
     <string name="sim_onboarding_label_sim_title" msgid="273162565849288273">"Lagyan ng label ang mga SIM mo"</string>
     <string name="sim_onboarding_label_sim_msg" msgid="5105859235219529056">"Makikita mo ang mga label na ito kapag tumatawag, nagpapadala ng mga text, at gumagamit ng data, at sa Mga Setting"</string>
     <string name="sim_onboarding_label_sim_dialog_title" msgid="5839073125605286120">"Label ng SIM"</string>
@@ -4809,19 +4804,46 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"Impormasyon tungkol sa iyong patakaran sa trabaho"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"Pinapamahalaan ng iyong IT admin ang mga setting"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
-    <string name="enable_16k_pages" msgid="5009476566957520607">"I-boot nang may 16K laki ng page"</string>
-    <string name="enable_16k_pages_summary" msgid="428117226069445198">"Mag-boot gamit ang 16K page size supported kernel"</string>
-    <string name="confirm_enable_16k_pages_title" msgid="6751570067857011642">"I-reboot nang may 16KB page na compatible kernel?"</string>
-    <string name="confirm_enable_16k_pages_text" msgid="702888115148257215">"BABALA: Posibleng hindi compatible sa mode na ito ang ilang application. Magre-reboot ang device pagkatapos ng pagkumpirma."</string>
-    <string name="confirm_enable_4k_pages_title" msgid="626987400420355263">"I-reboot nang may 4KB page na compatible kernel?"</string>
-    <string name="confirm_enable_4k_pages_text" msgid="6168921566226074524">"Magre-reboot ang device pagkatapos ng pagkumpirma."</string>
+    <!-- no translation found for enable_16k_pages (8001470927566110689) -->
+    <skip />
+    <!-- no translation found for enable_16k_pages_summary (1964363364670306912) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_title (1286925577014793351) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_text (570198382662424714) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_title (3210360137887034659) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_text (155070605667160083) -->
+    <skip />
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"Hindi na-update ang kernel sa 16KB page na compatible kernel."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Inilalapat ang pagbabago"</string>
-    <string name="confirm_format_ext4_title" msgid="4453684705528818873">"I-reformat ang device sa ext4?"</string>
-    <string name="confirm_format_ext4_text" msgid="8164677342487500794">"Sinusuportahan ang opsyong 16K developer sa ext4 filesystem. Iwa-wipe ang device at gagawing ext4 ang filesystem pagkatapos ng kumpirmasyon."</string>
-    <string name="format_ext4_failure_toast" msgid="6904611547290793885">"Hindi na-reformat at na-wipe ang partition ng data sa ext4."</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="6338135847153690912">"Kinakailangan ang OEM unlock"</string>
-    <string name="confirm_oem_unlock_for_16k_text" msgid="236718973897424382">"Kailangang naka-OEM unlock ang device bago gamitin ang 16K na opsyon ng developer. Mangangailangan din ang OEM unlock ng pag-format ng userdata. Paki-OEM unlock ang device at subukan ulit."</string>
+    <!-- no translation found for confirm_format_ext4_title (6696191800594435577) -->
+    <skip />
+    <!-- no translation found for confirm_format_ext4_text (7940372488624630214) -->
+    <skip />
+    <!-- no translation found for format_ext4_failure_toast (8059453995800471549) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (5374451262432025419) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_text (3583604865119937957) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_title (1184703958249093215) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text_short (2894243902906666242) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text (8284806650260868833) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_title (7762533464569818498) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text_short (269039281591806585) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (6208765386837706582) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_channel_name (1658444283036376361) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_action (2309805437430150456) -->
+    <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"Tagapangasiwa ng ulat ng bug"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Tinutukoy kung aling app ang mangangasiwa sa shortcut ng Ulat ng Bug sa iyong device."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Personal"</string>
@@ -4883,7 +4905,7 @@
     <string name="media_controls_show_player" msgid="8504571042365814021">"Ipakita ang player"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"media"</string>
     <string name="camera_extensions_fallback_title" msgid="3604579046777004989">"Payagan ang mga extension ng software ng camera"</string>
-    <string name="camera_extensions_fallback_description" msgid="6939818294458854536">"Ine-enable ang default na pagpapatupad ng software ng mga advanced na feature ng camera, gaya ng Eyes Free na videography."</string>
+    <string name="camera_extensions_fallback_description" msgid="4306833827773277263">"Ine-enable ang default na pagpapatupad ng software ng mga advanced na feature ng camera, tulad ng HDR, Night, o iba pang extension ng camera."</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Mag-o-on ang Bluetooth"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"Internet"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"Mga SIM"</string>
@@ -4953,6 +4975,8 @@
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Gamitin ang serbisyo ng pag-print"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Payagan ang maraming user"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"payagan, maraming, user, pahintulot, marami"</string>
+    <!-- no translation found for multiple_users_title_keywords (2395593167746225172) -->
+    <skip />
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Gamitin ang wireless na pag-debug"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Gamitin ang mga kagustuhan sa graphics driver"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"Gamitin ang Night Light"</string>
@@ -4975,10 +4999,8 @@
     <string name="enable_2g_title" msgid="8184757884636162942">"Payagan ang 2G"</string>
     <string name="enable_2g_summary" msgid="2794534052372565914">"Hindi gaanong secure ang 2G, pero posible nitong mapahusay ang iyong koneksyon sa ilang lokasyon. Para sa mga emergency na tawag, palaging pinapayagan ang 2G."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"Kailangan ng <xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> na available ang 2G"</string>
-    <!-- no translation found for require_cellular_encryption_title (6087085031703089235) -->
-    <skip />
-    <!-- no translation found for require_cellular_encryption_summary (6090569065420631457) -->
-    <skip />
+    <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Payagan lang ang mga encrypted network"</string>
+    <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"Mas secure ito pero posibleng limitahan nito ang iyong koneksyon sa mobile network sa ilang lokasyon. Palaging pinapayagan ang emergency na tawag."</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Lahat ng serbisyo"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Ipakita ang access sa clipboard"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Magpakita ng mensahe kapag ina-access ng mga app ang text, mga larawan, o iba pang content na nakopya mo"</string>
@@ -5202,6 +5224,5 @@
     <string name="force_swcrypto_fallback_summary" msgid="181969966310309701">"I-force ang pamamahala ng DRM key para gumamit ng software-based na whitebox crypto"</string>
     <string name="fingerprint_acquired_imager_dirty_udfps" msgid="7005042288289506776">"Linisin ang iyong screen malapit sa sensor at subukan ulit"</string>
     <string name="sim_category_converted_sim" msgid="8575548015816988908">"Na-convert sa eSIM. Alisin at itapon."</string>
-    <!-- no translation found for sync_across_devices_title (3447757705383089345) -->
-    <skip />
+    <string name="sync_across_devices_title" msgid="3447757705383089345">"I-sync sa lahat ng device"</string>
 </resources>

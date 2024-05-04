@@ -620,7 +620,7 @@
     <string name="private_space_continue_login_label" msgid="7779965766333065391">"Үргэлжлүүлэх"</string>
     <string name="private_space_lock_setup_title" msgid="6541564212199510787">"Хаалттай орон зайдаа зориулж түгжээ сонгоно уу"</string>
     <string name="private_space_lock_setup_description" msgid="423405593476300918">"Та хурууны хээгээ ашиглан хаалттай орон зайнхаа түгжээг тайлах боломжтой. Аюулгүй байдлын үүднээс энэ сонголт нөөц түгжээ шаарддаг."</string>
-    <string name="private_space_choose_your_pin_header" msgid="4560802934975898265">"Хувийн орон зайдаа ПИН тохируулна уу"</string>
+    <string name="private_space_choose_your_pin_header" msgid="4560802934975898265">"Хаалттай орон зайдаа ПИН тохируулна уу"</string>
     <string name="private_space_choose_your_password_header" msgid="7660259341095044434">"Хувийн орон зайдаа нууц үг тохируулна уу"</string>
     <string name="private_space_choose_your_pattern_header" msgid="2165607102459936724">"Хувийн орон зайдаа хээ тохируулна уу"</string>
     <string name="private_space_gaia_education_title" msgid="3787414895669666563">"Өгөгдлөө хувийн байлгахад туслахын тулд Google Бүртгэл үүсгэх"</string>
@@ -1497,8 +1497,7 @@
     <string name="reset_esim_error_title" msgid="6516110227665862295">"eSIM-үүдийг устгах боломжгүй"</string>
     <string name="reset_esim_error_msg" msgid="8459527827897797168">"Ямар нэг алдаа гарсан бөгөөд таны eSIM-үүдийг устгаагүй.\n\nТөхөөрөмжөө дахин эхлүүлээд, дахин оролдоно уу."</string>
     <string name="reset_private_space_delete_title" msgid="2555885198282572990">"Хаалттай орон зайг устгах"</string>
-    <!-- no translation found for reset_private_space_delete_dialog (7506471054091800883) -->
-    <skip />
+    <string name="reset_private_space_delete_dialog" msgid="7506471054091800883">"Хэрэв таны төхөөрөмж дээр хаалттай орон зай байвал үүнийг бүрмөсөн устгаж, орон зайд тань нэмсэн Google Бүртгэлийг хасна.\n\nТаны орон зай дахь бүх апп, тэдгээрийн өгөгдлийг мөн бүрмөсөн устгана."</string>
     <string name="main_clear_title" msgid="277664302144837723">"Бүх өгөгдлийг устгах (үйлдвэрийн тохиргоонд шинэчлэх)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Бүх өгөгдлийг устгах (үйлдвэрийн тохиргоонд шинэчлэх)"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"Хөгжим"</li>\n<li>"Зураг"</li>\n<li>"Бусад хэрэглэгчийн өгөгдөл"</li></string>
@@ -1811,6 +1810,7 @@
     <string name="app_install_details_group_title" msgid="1172114479073704677">"Дэлгүүр"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"Аппын дэлгэрэнгүй"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"<xliff:g id="APP_STORE">%1$s</xliff:g>-с суулгасан апп"</string>
+    <string name="app_install_details_different_initiating_package_summary" msgid="6093306593167176688">"<xliff:g id="APP_STORE1">%1$s</xliff:g>-с суулгасан апп (<xliff:g id="APP_STORE2">%2$s</xliff:g>-р)"</string>
     <string name="instant_app_details_summary" msgid="417197491598208216">"<xliff:g id="APP_STORE">%1$s</xliff:g>-н дэлгэрэнгүй мэдээлэл"</string>
     <string name="app_ops_running" msgid="6127474473137428721">"Ажиллаж байна"</string>
     <string name="app_ops_never_used" msgid="9038133162371204506">"(Хэзээ ч ашиглаагүй)"</string>
@@ -2290,12 +2290,9 @@
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Сонсголын төхөөрөмж хослуулах"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"Дараагийн дэлгэц дээр сонсголын төхөөрөмж дээрээ товшино уу. Та зүүн болон баруун чихийг тусад нь хослуулах шаардлагатай байж магадгүй.\n\nТаны сонсголын төхөөрөмж асаалттай бөгөөд хослуулахад бэлэн эсэхийг шалгана уу."</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> идэвхтэй байна"</string>
-    <!-- no translation found for accessibility_hearingaid_left_side_device_summary (12349058624943107) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_right_side_device_summary (8645789702686724188) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_left_and_right_side_device_summary (3314103411842694197) -->
-    <skip />
+    <string name="accessibility_hearingaid_left_side_device_summary" msgid="12349058624943107">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> / зөвхөн зүүн тал"</string>
+    <string name="accessibility_hearingaid_right_side_device_summary" msgid="8645789702686724188">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> / зөвхөн баруун тал"</string>
+    <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="3314103411842694197">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> / зүүн, баруун тал"</string>
     <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> өөр +1"</string>
     <string name="accessibility_hearing_device_pairing_title" msgid="2701812183769537320">"Шинэ төхөөрөмж хослуулах"</string>
     <string name="accessibility_hearing_device_connected_title" msgid="3785140037249487287">"Сонсголын төхөөрөмж"</string>
@@ -2574,7 +2571,8 @@
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Батарейн ажиллах хугацааг сунгах"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Цэнэглэсэн үед унтраах"</string>
     <string name="battery_saver_sticky_title_percentage" msgid="1178162022087559148">"<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>-д унтраах"</string>
-    <string name="battery_saver_sticky_description_new" msgid="6472610662679038342">"Батарей <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> хүрэх үед Батарей хэмнэгч унтарна"</string>
+    <!-- no translation found for battery_saver_sticky_description_new (8543277078136947874) -->
+    <skip />
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Асаах"</string>
@@ -2686,18 +2684,13 @@
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"Асаалттай байна"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"Унтраалттай байна"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Дасан зохицох холболтыг ашиглах"</string>
-    <!-- no translation found for cellular_security_title (5562899485544677941) -->
-    <skip />
+    <string name="cellular_security_title" msgid="5562899485544677941">"Мобайл сүлжээний аюулгүй байдал"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"Сүлжээний төрөл, шифрлэлт, мэдэгдлийн тохиргоо"</string>
-    <!-- no translation found for cellular_security_top_intro (6749166804080092892) -->
-    <skip />
-    <!-- no translation found for cellular_security_settings_title (7779141923670352595) -->
-    <skip />
+    <string name="cellular_security_top_intro" msgid="6749166804080092892">"Эдгээр тохиргоо нь таны мэдээллийг хулгайлах эсвэл тандахад хүргэж болзошгүй хуучирсан эсвэл шифрлэгдээгүй сүлжээнээс таны дуудлага, мессеж, өгөгдлийг хамгаалахад тусална."</string>
+    <string name="cellular_security_settings_title" msgid="7779141923670352595">"Мобайл сүлжээний аюулгүй байдал"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"Мэдэгдлүүд"</string>
-    <!-- no translation found for cellular_security_notifications_controller_title (4853056963523277847) -->
-    <skip />
-    <!-- no translation found for cellular_security_notifications_controller_summary (8339863845393759958) -->
-    <skip />
+    <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"Сүлжээний мэдэгдэл"</string>
+    <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"Таны төхөөрөмж шифрлэгдээгүй сүлжээнд холбогдох үед эсвэл сүлжээ таны төхөөрөмж, SIM-н цор ганц дугаарыг бүртгэх үед мэдэгдэл аваарай"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"Шифрлэлт"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"Сүлжээний үеүүд"</string>
     <string name="cellular_security_network_generations_summary" msgid="139087814553929402">"Та суулгасан SIM карт бүрийг зөвхөн 3G, 4G болон 5G-г дэмждэг сүлжээнүүдэд холбогдохоор тохируулах боломжтой. SIM нь хуучин, аюултай 2G сүлжээнүүдэд холбогдохгүй. Боломжтой ганц сүлжээ нь 2G үед энэ тохиргоо таны холболтыг хязгаарлаж магадгүй. Яаралтай тусламжийн тохиолдолд 2G-г ашиглаж магадгүй."</string>
@@ -2970,15 +2963,15 @@
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{{orgName} ажлын профайлд сертификатын зөвшөөрлийг суулгасан бөгөөд энэ нь түүнд имэйл, апп болон аюулгүй вебсайт зэрэг ажлын сүлжээний үйл ажиллагааг хянах зөвшөөрөл олгож болно.\n\nЭнэ сертификатын талаар дэлгэрэнгүй мэдээлэл авах бол админтайгаа холбогдоно уу.}other{{orgName} ажлын профайлд сертификатын зөвшөөрлийг суулгасан бөгөөд энэ нь түүнд имэйл, апп болон аюулгүй вебсайт зэрэг ажлын сүлжээний үйл ажиллагааг хянах зөвшөөрөл олгож болно.\n\nЭдгээр сертификатын талаар дэлгэрэнгүй мэдээлэл авах бол админтайгаа холбогдоно уу.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"Гуравдагч талын этгээд таны имэйл, апп-ууд болон аюулгүй вебсайтууд гэх мэтийг оруулан таны сүлжээний үйл ажиллагааг хянах боломжтой.\n\nТаны төхөөрөмж дээр суулгасан итгэмжлэгдсэн жуухын тусламжтайгаар ингэх боломжтой."</string>
     <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{Сертификат шалгах}other{Сертификат шалгах}}"</string>
-    <string name="user_settings_title" msgid="6550866465409807877">"Олон хэрэглэгч"</string>
+    <!-- no translation found for user_settings_title (9208831545558787202) -->
+    <skip />
     <string name="user_list_title" msgid="1387379079186123404">"Хэрэглэгчид &amp; профайлууд"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"Хэрэглэгч буюу профайл нэмэх"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"Хязгаарлагдсан профайл"</string>
     <string name="user_summary_not_set_up" msgid="4602868481732886115">"Тохируулаагүй"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1658946988920104613">"Тохируулаагүй - Хязгаарлагдсан профайл"</string>
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"Тохируулаагүй - Ажлын профайл"</string>
-    <!-- no translation found for user_owner (2079206733011361994) -->
-    <skip />
+    <string name="user_owner" msgid="2079206733011361994">"Өмчлөгч"</string>
     <string name="user_admin" msgid="4024553191395768119">"Админ"</string>
     <string name="user_you" msgid="3070562015202859996">"Та (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_add_max_count" msgid="3328539978480663740">"Та дахин зураг нэмэх боломжгүй байна. Шинэ хэрэглэгч нэмэхийн тулд хэрэгчлэгч хасна уу."</string>
@@ -4648,6 +4641,8 @@
     <string name="summary_supported_service" msgid="4320535903444834786">"Та яаралтай тусламжийн үйлчилгээнүүдийг оруулаад дурын хүн рүү мессеж бичих боломжтой. Таны утас мобайл сүлжээг боломжтой үед үүнд дахин холбогдоно."</string>
     <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"Хиймэл дагуулаар мессеж бичихэд илүү удаж болох ба зөвхөн зарим бүсэд боломжтой. Цаг агаар болон тодорхой байгууламжууд таны хиймэл дагуулын холболтод нөлөөлж болно. Хиймэл дагуулаар дуудлага хийх боломжгүй. Яаралтай дуудлагад холбогдсон хэвээр байж магадгүй.\n\nТаны бүртгэлийн өөрчлөлтүүд Тохиргоонд харагдах хүртэл хэсэг хугацаа зарцуулагдаж болно. Дэлгэрэнгүй мэдээлэл авах бол оператор компанитайгаа холбогдоно уу."</string>
     <string name="more_about_satellite_messaging" msgid="3385673133561348509">"Хиймэл дагуулаар мессеж бичих талаарх нэмэлт мэдээлэл"</string>
+    <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"<xliff:g id="FUNCTION">%1$s</xliff:g>-г асаах боломжгүй"</string>
+    <string name="satellite_warning_dialog_content" msgid="936419945275934955">"<xliff:g id="FUNCTION">%1$s</xliff:g>-г асаахын тулд эхлээд хиймэл дагуулын холболтыг тасална уу"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Хандах цэгийн нэрс (APN)"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"<xliff:g id="CARRIER">%1$s</xliff:g>-д холбогдсон үед боломжгүй"</string>
@@ -4809,19 +4804,46 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"Таны ажлын удирдамжийн мэдээлэл"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"Танай IT админы удирддаг тохиргоо"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
-    <string name="enable_16k_pages" msgid="5009476566957520607">"16К хуудасны хэмжээтэйгээр ачаалах"</string>
-    <string name="enable_16k_pages_summary" msgid="428117226069445198">"Төхөөрөмжийг 16K хуудасны хэмжээтэй дэмжигдсэн кернелээр ачаал"</string>
-    <string name="confirm_enable_16k_pages_title" msgid="6751570067857011642">"16КБ хуудсанд тохирох кернелээр дахин асаах уу?"</string>
-    <string name="confirm_enable_16k_pages_text" msgid="702888115148257215">"САНУУЛГА: Зарим аппликэйшн энэ горимтой тохиромжгүй байж магадгүй. Баталгаажуулалтын дараа төхөөрөмжийг дахин асаана."</string>
-    <string name="confirm_enable_4k_pages_title" msgid="626987400420355263">"4КБ хуудсанд тохирох кернелээр дахин асаах уу?"</string>
-    <string name="confirm_enable_4k_pages_text" msgid="6168921566226074524">"Баталгаажуулалтын дараа төхөөрөмжийг дахин асаана."</string>
+    <!-- no translation found for enable_16k_pages (8001470927566110689) -->
+    <skip />
+    <!-- no translation found for enable_16k_pages_summary (1964363364670306912) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_title (1286925577014793351) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_text (570198382662424714) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_title (3210360137887034659) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_text (155070605667160083) -->
+    <skip />
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"Кернелийг 16КБ хуудсанд тохирох кернел рүү шинэчилж чадсангүй."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Өөрчлөлтүүдийг оруулж байна"</string>
-    <string name="confirm_format_ext4_title" msgid="4453684705528818873">"Төхөөрөмжийг ext4 болгож дахин форматлах уу?"</string>
-    <string name="confirm_format_ext4_text" msgid="8164677342487500794">"Ext4 файл системээр 16K хөгжүүлэгчийн тохиргоог дэмждэг. Баталгаажуулалтын дараа төхөөрөмжийг арчиж, файлын системийг ext4 болгож өөрчилнө."</string>
-    <string name="format_ext4_failure_toast" msgid="6904611547290793885">"Өгөгдлийн хуваалтыг ext4 болгож дахин форматалж, арчиж чадсангүй."</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="6338135847153690912">"OEM-н түгжээг тайлах шаардлагатай"</string>
-    <string name="confirm_oem_unlock_for_16k_text" msgid="236718973897424382">"16K хөгжүүлэгчийн тохиргоог ашиглахаас өмнө төхөөрөмжийн OEM-н түгжээг тайлсан байх шаардлагатай. OEM-н түгжээг тайлахад мөн хэрэглэгчийн өгөгдлийг формат хийхийг шаарддаг. Төхөөрөмжийн OEM-н түгжээг тайлаад, дахин оролдоно уу."</string>
+    <!-- no translation found for confirm_format_ext4_title (6696191800594435577) -->
+    <skip />
+    <!-- no translation found for confirm_format_ext4_text (7940372488624630214) -->
+    <skip />
+    <!-- no translation found for format_ext4_failure_toast (8059453995800471549) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (5374451262432025419) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_text (3583604865119937957) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_title (1184703958249093215) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text_short (2894243902906666242) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text (8284806650260868833) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_title (7762533464569818498) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text_short (269039281591806585) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (6208765386837706582) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_channel_name (1658444283036376361) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_action (2309805437430150456) -->
+    <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"Алдааны мэдээний удирдагч"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Алдааны мэдээний товчлолыг таны төхөөрөмж дээр ямар апп удирддаг болохыг тодорхойлдог."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Хувийн"</string>
@@ -4883,7 +4905,7 @@
     <string name="media_controls_show_player" msgid="8504571042365814021">"Тоглуулагчийг харуулах"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"медиа"</string>
     <string name="camera_extensions_fallback_title" msgid="3604579046777004989">"Камерын программ хангамжийн өргөтгөлүүдийг зөвшөөрөх"</string>
-    <string name="camera_extensions_fallback_description" msgid="6939818294458854536">"Нүднээс хамаарахгүй видео бичлэг зэрэг камерын дэвшилтэт онцлогуудын программ хангамжийн өгөгдмөл хэрэгжүүлэлтийг идэвхжүүлнэ."</string>
+    <string name="camera_extensions_fallback_description" msgid="4306833827773277263">"HDR, шөнийн эсвэл камерын бусад өргөтгөл зэрэг камерын дэвшилтэт онцлогуудын программ хангамжийн өгөгдмөл хэрэгжүүлэлтийг идэвхжүүлнэ."</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth-г асаана"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"Интернэт"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM"</string>
@@ -4953,6 +4975,8 @@
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Хэвлэгчийн үйлчилгээ ашиглах"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Олон хэрэглэгчийг зөвшөөрөх"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"зөвшөөрөх, хэд хэдэн, хэрэглэгч, зөвшөөрөл олгох, олон"</string>
+    <!-- no translation found for multiple_users_title_keywords (2395593167746225172) -->
+    <skip />
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Wireless debugging-г ашиглах"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Графикийн драйверын сонголтыг ашиглах"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"Шөнийн гэрлийг ашиглах"</string>
@@ -4975,10 +4999,8 @@
     <string name="enable_2g_title" msgid="8184757884636162942">"2G-г зөвшөөрөх"</string>
     <string name="enable_2g_summary" msgid="2794534052372565914">"2G нь хамгаалалт багатай хэдий ч зарим байршилд таны холболтыг сайжруулж магадгүй. Яаралтай дуудлагад 2G-г үргэлж зөвшөөрдөг."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> 2G-г боломжтой байхыг шаардаж байна"</string>
-    <!-- no translation found for require_cellular_encryption_title (6087085031703089235) -->
-    <skip />
-    <!-- no translation found for require_cellular_encryption_summary (6090569065420631457) -->
-    <skip />
+    <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Зөвхөн шифрлэгдсэн сүлжээг зөвшөөрөх"</string>
+    <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"Энэ нь илүү аюулгүй хэдий ч зарим байршилд таны мобайл сүлжээний холболтыг хязгаарлаж магадгүй. Яаралтай дуудлагыг үргэлж зөвшөөрнө."</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Бүх үйлчилгээ"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Түр санах ойн хандалтыг харуулах"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Аппууд таны хуулсан текст, зураг эсвэл бусад контентод хандах үед мессеж харуулах"</string>
@@ -5202,6 +5224,5 @@
     <string name="force_swcrypto_fallback_summary" msgid="181969966310309701">"DRM түлхүүрийн удирдлагыг программ хангамжид суурилсан цагаан хайрцагтай крипто ашиглахыг хүчлэх"</string>
     <string name="fingerprint_acquired_imager_dirty_udfps" msgid="7005042288289506776">"Мэдрэгчийн ойролцоох дэлгэцээ цэвэрлээд, дахин оролдоно уу"</string>
     <string name="sim_category_converted_sim" msgid="8575548015816988908">"eSIM рүү хөрвүүлсэн. Салгаад, хаяна уу."</string>
-    <!-- no translation found for sync_across_devices_title (3447757705383089345) -->
-    <skip />
+    <string name="sync_across_devices_title" msgid="3447757705383089345">"Төхөөрөмжүүдэд синк хийх"</string>
 </resources>

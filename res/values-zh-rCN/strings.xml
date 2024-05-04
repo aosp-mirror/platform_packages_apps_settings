@@ -599,14 +599,14 @@
     <string name="private_space_separate_account_text" msgid="4492251315012955548"><b>"为您的空间选择一个 Google 账号"</b>\n"使用专属账号有助于阻止已同步的文件、照片和电子邮件出现在空间之外"</string>
     <string name="private_space_protected_lock_text" msgid="9123250938334372735"><b>"设置锁定方式"</b>\n"锁定您的空间，防止其他人打开该空间"</string>
     <string name="private_space_install_apps_text" msgid="5693139160766464498"><b>"安装应用"</b>\n"您的私密空间具有自己的 Play 商店，因此您可以轻松安装应用。"</string>
-    <string name="private_space_apps_permission_text" msgid="7030946025253366172">"私密空间处于锁定状态时，私密空间中的应用不会显示在权限管理器、隐私信息中心和其他设置中。\n\n私密空间无法转移到新设备。若要在其他设备上使用私密空间，您需要在该设备上再设置一个私密空间。\n\n如果有人将您的设备连接到计算机或在设备上安装了有害应用，或许就能够访问您的私密空间。"</string>
+    <string name="private_space_apps_permission_text" msgid="7030946025253366172">"私密空间处于锁定状态时，私密空间中的应用不会显示在权限管理器、隐私信息中心和其他设置中。\n\n私密空间无法转移到新设备。若要在其他设备上使用私密空间，您需要在该设备上再设置一个私密空间。\n\n如果有人将您的设备连接到电脑或在设备上安装了有害应用，或许就能够访问您的私密空间。"</string>
     <string name="private_space_learn_more_text" msgid="5314198983263277586">"详细了解私密空间"</string>
     <string name="private_space_few_moments_text" msgid="7166883272914424011">"这将需要一点时间"</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"正在设置私密空间…"</string>
     <string name="private_space_error_screen_title" msgid="739381738044418346">"无法设置私密空间"</string>
     <string name="private_space_tryagain_label" msgid="8305362615231738367">"重试"</string>
     <string name="private_space_lockscreen_title" msgid="5785259588888586366">"要为私密空间选择新的锁定方式？"</string>
-    <string name="private_space_lockscreen_summary" msgid="3053836076639653805">"您可以专为私密空间设置新的锁定方式，或使用设备解锁方式来锁定此空间"</string>
+    <string name="private_space_lockscreen_summary" msgid="3053836076639653805">"您可以专为私密空间设置新的锁定方式，或使用设备屏锁来锁定此空间"</string>
     <string name="private_space_use_screenlock_label" msgid="9182153443192032782">"使用屏锁"</string>
     <string name="private_space_set_lock_label" msgid="1790408277477408475">"选择新的锁定方式"</string>
     <string name="private_space_pre_finish_title" msgid="2314776598615113267">"请稍候…"</string>
@@ -1326,7 +1326,7 @@
     <string name="module_version" msgid="1787518340082046658">"Google Play 系统更新"</string>
     <string name="battery_info" msgid="7873528123969546728">"电池信息"</string>
     <string name="device_info_not_available" msgid="4804474466616712326">"无法获取"</string>
-    <string name="storage_settings" msgid="7472188817781592677">"存储"</string>
+    <string name="storage_settings" msgid="7472188817781592677">"存储空间"</string>
     <string name="storage_settings_for_app" msgid="229425418984637483">"存储空间和缓存"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"存储设置"</string>
     <string name="status_eid" msgid="3588471107671992684">"EID"</string>
@@ -1497,8 +1497,7 @@
     <string name="reset_esim_error_title" msgid="6516110227665862295">"无法清空 eSIM 卡"</string>
     <string name="reset_esim_error_msg" msgid="8459527827897797168">"出了点问题，未能清空您的 eSIM 卡。\n\n请重启设备并重试。"</string>
     <string name="reset_private_space_delete_title" msgid="2555885198282572990">"删除私密空间"</string>
-    <!-- no translation found for reset_private_space_delete_dialog (7506471054091800883) -->
-    <skip />
+    <string name="reset_private_space_delete_dialog" msgid="7506471054091800883">"您设备上的私密空间（若有）将被永久删除，添加到您空间中的 Google 账号将被移除。\n\n您空间中的所有应用及其数据也将被永久删除。"</string>
     <string name="main_clear_title" msgid="277664302144837723">"清除所有数据（恢复出厂设置）"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"清除所有数据（恢复出厂设置）"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"音乐"</li>\n<li>"照片"</li>\n<li>"其他用户数据"</li></string>
@@ -1811,6 +1810,7 @@
     <string name="app_install_details_group_title" msgid="1172114479073704677">"商店"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"应用详情"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"通过<xliff:g id="APP_STORE">%1$s</xliff:g>安装的应用"</string>
+    <string name="app_install_details_different_initiating_package_summary" msgid="6093306593167176688">"应用安装来源：<xliff:g id="APP_STORE1">%1$s</xliff:g>（通过<xliff:g id="APP_STORE2">%2$s</xliff:g>）"</string>
     <string name="instant_app_details_summary" msgid="417197491598208216">"前往 <xliff:g id="APP_STORE">%1$s</xliff:g> 查看详细信息"</string>
     <string name="app_ops_running" msgid="6127474473137428721">"正在运行"</string>
     <string name="app_ops_never_used" msgid="9038133162371204506">"（从未使用）"</string>
@@ -2290,12 +2290,9 @@
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"为助听器进行配对"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"请在下一步中点按您的助听器。您可能需要为左右耳分别进行配对。\n\n请确保助听器已开启，并且已准备好进行配对。"</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> 使用中"</string>
-    <!-- no translation found for accessibility_hearingaid_left_side_device_summary (12349058624943107) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_right_side_device_summary (8645789702686724188) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_left_and_right_side_device_summary (3314103411842694197) -->
-    <skip />
+    <string name="accessibility_hearingaid_left_side_device_summary" msgid="12349058624943107">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>/仅左耳使用中"</string>
+    <string name="accessibility_hearingaid_right_side_device_summary" msgid="8645789702686724188">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>/仅右耳使用中"</string>
+    <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="3314103411842694197">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>/左右耳都使用中"</string>
     <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>及另外 1 个设备已激活"</string>
     <string name="accessibility_hearing_device_pairing_title" msgid="2701812183769537320">"与新装置配对"</string>
     <string name="accessibility_hearing_device_connected_title" msgid="3785140037249487287">"助听装置"</string>
@@ -2574,7 +2571,8 @@
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"延长电池续航时间"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"充够电时关闭"</string>
     <string name="battery_saver_sticky_title_percentage" msgid="1178162022087559148">"电量充到 <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> 时关闭"</string>
-    <string name="battery_saver_sticky_description_new" msgid="6472610662679038342">"在电池电量达到 <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> 时关闭省电模式"</string>
+    <!-- no translation found for battery_saver_sticky_description_new (8543277078136947874) -->
+    <skip />
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"开启"</string>
@@ -2686,18 +2684,13 @@
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"已开启"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"已关闭"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"使用自适应连接"</string>
-    <!-- no translation found for cellular_security_title (5562899485544677941) -->
-    <skip />
+    <string name="cellular_security_title" msgid="5562899485544677941">"移动网络安全"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"网络类型、加密、通知控件"</string>
-    <!-- no translation found for cellular_security_top_intro (6749166804080092892) -->
-    <skip />
-    <!-- no translation found for cellular_security_settings_title (7779141923670352595) -->
-    <skip />
+    <string name="cellular_security_top_intro" msgid="6749166804080092892">"这些设置有助于保护您的通话、消息和数据，以防他人利用过时或未加密的网络窃取或监视您的数据"</string>
+    <string name="cellular_security_settings_title" msgid="7779141923670352595">"移动网络安全"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"通知"</string>
-    <!-- no translation found for cellular_security_notifications_controller_title (4853056963523277847) -->
-    <skip />
-    <!-- no translation found for cellular_security_notifications_controller_summary (8339863845393759958) -->
-    <skip />
+    <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"网络通知"</string>
+    <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"当您的设备连接到未加密的网络时，或当有网络记录您设备的唯一 ID 或 SIM 卡 ID 时，您会收到通知"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"加密"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"网络级别"</string>
     <string name="cellular_security_network_generations_summary" msgid="139087814553929402">"您可以将安装的每个 SIM 卡配置为仅连接到支持 3G、4G 和 5G 的网络。SIM 卡将不会连接到版本更低的不安全 2G 网络。如果只有 2G 网络可用，此设置可能会影响网络连接性。但出现紧急情况时，您可以使用 2G 网络。"</string>
@@ -2970,15 +2963,15 @@
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{{orgName}已为您的工作资料安装证书授权机构颁发的证书，借此监控工作网络活动，包括电子邮件、应用和安全网站。\n\n如需详细了解此证书，请与您的管理员联系。}other{{orgName}已为您的工作资料安装证书授权机构颁发的证书，借此监控工作网络活动，包括电子邮件、应用和安全网站。\n\n如需详细了解这些证书，请与您的管理员联系。}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"第三方可以监控您的网络活动，包括收发电子邮件、使用应用和浏览安全网站。\n\n出现这种情况的原因是您在设备上安装了信任的凭据。"</string>
     <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{检查证书}other{检查证书}}"</string>
-    <string name="user_settings_title" msgid="6550866465409807877">"多人设备共用"</string>
+    <!-- no translation found for user_settings_title (9208831545558787202) -->
+    <skip />
     <string name="user_list_title" msgid="1387379079186123404">"用户和个人资料"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"添加用户或个人资料"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"受限个人资料"</string>
     <string name="user_summary_not_set_up" msgid="4602868481732886115">"未设置"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1658946988920104613">"未设置 - 受限个人资料"</string>
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"未设置 - 工作资料"</string>
-    <!-- no translation found for user_owner (2079206733011361994) -->
-    <skip />
+    <string name="user_owner" msgid="2079206733011361994">"所有者"</string>
     <string name="user_admin" msgid="4024553191395768119">"管理员"</string>
     <string name="user_you" msgid="3070562015202859996">"您（<xliff:g id="NAME">%s</xliff:g>）"</string>
     <string name="user_add_max_count" msgid="3328539978480663740">"您无法再添加任何用户。若要添加新用户，请先移除一个现有用户。"</string>
@@ -4266,7 +4259,7 @@
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"手势导航, 返回手势的灵敏度, 返回手势"</string>
     <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"导航, 主屏幕按钮, navigation, home button"</string>
     <string name="one_handed_title" msgid="2584414010282746195">"单手模式"</string>
-    <string name="one_handed_mode_enabled" msgid="3396864848786359651">"使用单手模式"</string>
+    <string name="one_handed_mode_enabled" msgid="3396864848786359651">"启用单手模式"</string>
     <string name="one_handed_mode_shortcut_title" msgid="1847871530184067369">"单手模式快捷方式"</string>
     <string name="keywords_one_handed" msgid="969440592493034101">"可单手操作"</string>
     <string name="one_handed_mode_swipe_down_category" msgid="110178629274462484">"向下滑动"</string>
@@ -4364,7 +4357,7 @@
     <string name="financed_privacy_safe_mode" msgid="5362149445732602578">"重新启动设备并进入安全模式"</string>
     <string name="financed_privacy_multi_users" msgid="1727194928477613081">"向您的设备添加多个用户"</string>
     <string name="financed_privacy_config_date_time" msgid="8567370445374984365">"更改日期、时间和时区"</string>
-    <string name="financed_privacy_developer_options" msgid="7602001474669831672">"使用开发者选项"</string>
+    <string name="financed_privacy_developer_options" msgid="7602001474669831672">"启用开发者选项"</string>
     <string name="financed_privacy_credit_provider_capabilities_category" msgid="8737902277892987998">"您的分期付款提供商可以："</string>
     <string name="financed_privacy_IMEI" msgid="1852413860963824799">"获取您的 IMEI 识别码"</string>
     <string name="financed_privacy_factory_reset" msgid="5505016667590160732">"出现问题时，您可将设备恢复出厂设置"</string>
@@ -4453,7 +4446,7 @@
     <string name="location_indicator_settings_title" msgid="6655916258720093451">"状态栏位置指示器"</string>
     <string name="location_indicator_settings_description" msgid="2888022085372804021">"对所有位置均显示，包括通过网络和连接方式获取的位置信息"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"强制启用完整 GNSS 测量数据"</string>
-    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"在停用工作周期的情况下跟踪所有 GNSS 星座和频率"</string>
+    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"停用工作周期时跟踪所有 GNSS 星座和频率"</string>
     <string name="input_method_category" msgid="2252659253631639005">"输入法"</string>
     <string name="stylus_handwriting" msgid="2154591374132794563">"触控笔手写功能"</string>
     <string name="stylus_handwriting_summary" msgid="6333425895172696950">"启用后，如果焦点位于编辑器，当前输入法将接收触控笔的 MotionEvent 对象。"</string>
@@ -4648,6 +4641,8 @@
     <string name="summary_supported_service" msgid="4320535903444834786">"您可以给任何对象发短信，包括应急服务机构。当有可用的移动网络时，您的手机将重新连接到移动网络。"</string>
     <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"卫星消息可能需要较长时间才会送达，而且此功能目前仅覆盖部分地区。天气和某些建筑物可能会影响卫星连接质量。不支持卫星通话。紧急呼叫或许仍可连通。\n\n账号更改可能要过一段时间才能显示在“设置”中。请联系您的运营商了解详情。"</string>
     <string name="more_about_satellite_messaging" msgid="3385673133561348509">"详细了解卫星消息功能"</string>
+    <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"无法开启<xliff:g id="FUNCTION">%1$s</xliff:g>"</string>
+    <string name="satellite_warning_dialog_content" msgid="936419945275934955">"若要开启<xliff:g id="FUNCTION">%1$s</xliff:g>，请先断开卫星连接"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"接入点名称"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"连接到<xliff:g id="CARRIER">%1$s</xliff:g>时无法使用"</string>
@@ -4809,19 +4804,46 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"您的工作政策信息"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"由 IT 管理员管理的设置"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
-    <string name="enable_16k_pages" msgid="5009476566957520607">"使用 16K 大小的页面启动"</string>
-    <string name="enable_16k_pages_summary" msgid="428117226069445198">"使用 16K 页面大小支持的内核启动设备"</string>
-    <string name="confirm_enable_16k_pages_title" msgid="6751570067857011642">"要使用 16KB 页面兼容内核重新启动吗？"</string>
-    <string name="confirm_enable_16k_pages_text" msgid="702888115148257215">"警告：某些应用可能与此模式不兼容。设备将在确认后重新启动。"</string>
-    <string name="confirm_enable_4k_pages_title" msgid="626987400420355263">"要使用 4KB 页面兼容内核重新启动吗？"</string>
-    <string name="confirm_enable_4k_pages_text" msgid="6168921566226074524">"设备将在确认后重新启动。"</string>
+    <!-- no translation found for enable_16k_pages (8001470927566110689) -->
+    <skip />
+    <!-- no translation found for enable_16k_pages_summary (1964363364670306912) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_title (1286925577014793351) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_text (570198382662424714) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_title (3210360137887034659) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_text (155070605667160083) -->
+    <skip />
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"无法将内核更新为 16KB 页面兼容的内核。"</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"正在应用更改"</string>
-    <string name="confirm_format_ext4_title" msgid="4453684705528818873">"将设备重新格式化为 ext4？"</string>
-    <string name="confirm_format_ext4_text" msgid="8164677342487500794">"ext4 文件系统支持 16K 开发者选项。确认之后，设备数据将被擦除，并且文件系统将改为 ext4。"</string>
-    <string name="format_ext4_failure_toast" msgid="6904611547290793885">"未能重新格式化和擦除数据分区以改为 ext4。"</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="6338135847153690912">"需要 OEM 解锁"</string>
-    <string name="confirm_oem_unlock_for_16k_text" msgid="236718973897424382">"需要先对设备进行 OEM 解锁，然后才能使用 16K 开发者选项。OEM 解锁还需要格式化用户数据。请对设备进行 OEM 解锁，然后重试。"</string>
+    <!-- no translation found for confirm_format_ext4_title (6696191800594435577) -->
+    <skip />
+    <!-- no translation found for confirm_format_ext4_text (7940372488624630214) -->
+    <skip />
+    <!-- no translation found for format_ext4_failure_toast (8059453995800471549) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (5374451262432025419) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_text (3583604865119937957) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_title (1184703958249093215) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text_short (2894243902906666242) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text (8284806650260868833) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_title (7762533464569818498) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text_short (269039281591806585) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (6208765386837706582) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_channel_name (1658444283036376361) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_action (2309805437430150456) -->
+    <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"Bug 报告处理程序"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"确定要使用哪款应用来处理设备上的错误报告快捷方式。"</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"个人"</string>
@@ -4883,7 +4905,7 @@
     <string name="media_controls_show_player" msgid="8504571042365814021">"显示播放器"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"媒体"</string>
     <string name="camera_extensions_fallback_title" msgid="3604579046777004989">"允许相机软件扩展程序"</string>
-    <string name="camera_extensions_fallback_description" msgid="6939818294458854536">"允许默认软件实现高级相机功能，例如免视录像。"</string>
+    <string name="camera_extensions_fallback_description" msgid="4306833827773277263">"启用后将使用默认软件实现来提供高级相机功能，例如 HDR、夜间模式或其他相机扩展功能。"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"蓝牙将开启"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"互联网"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM 卡"</string>
@@ -4953,6 +4975,8 @@
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"使用打印服务"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"允许多人设备共用"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"允许, 多位, 用户, 许可, 多个, allow, multiple, user, permit, many"</string>
+    <!-- no translation found for multiple_users_title_keywords (2395593167746225172) -->
+    <skip />
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"使用“无线调试”"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"使用“显卡驱动程序偏好设置”"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"启用护眼模式"</string>
@@ -4975,10 +4999,8 @@
     <string name="enable_2g_title" msgid="8184757884636162942">"允许启用 2G"</string>
     <string name="enable_2g_summary" msgid="2794534052372565914">"2G 网络的安全性较低，但在某些地方可能会改善您的连接质量。您始终都能通过 2G 网络拨打紧急电话。"</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"必须启用 2G 网络才能使用<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g>的服务"</string>
-    <!-- no translation found for require_cellular_encryption_title (6087085031703089235) -->
-    <skip />
-    <!-- no translation found for require_cellular_encryption_summary (6090569065420631457) -->
-    <skip />
+    <string name="require_cellular_encryption_title" msgid="6087085031703089235">"只允许使用加密网络"</string>
+    <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"这样虽然更加安全，但可能会致使您的移动网络连接在某些地方受限。始终允许进行紧急呼叫。"</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"所有服务"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"显示剪贴板访问通知"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"系统会在应用访问您复制的文字、图片或其他内容时显示一条消息"</string>
@@ -5202,6 +5224,5 @@
     <string name="force_swcrypto_fallback_summary" msgid="181969966310309701">"强制 DRM 密钥管理功能使用基于软件的白盒加密"</string>
     <string name="fingerprint_acquired_imager_dirty_udfps" msgid="7005042288289506776">"请将传感器附近的屏幕擦干净，然后重试"</string>
     <string name="sim_category_converted_sim" msgid="8575548015816988908">"已转换成 eSIM 卡。请将实体卡取出并丢弃。"</string>
-    <!-- no translation found for sync_across_devices_title (3447757705383089345) -->
-    <skip />
+    <string name="sync_across_devices_title" msgid="3447757705383089345">"在设备之间保持同步"</string>
 </resources>

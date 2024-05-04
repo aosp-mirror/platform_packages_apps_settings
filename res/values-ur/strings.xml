@@ -1810,6 +1810,7 @@
     <string name="app_install_details_group_title" msgid="1172114479073704677">"اسٹور"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"ایپ کی تفصیلات"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"‫<xliff:g id="APP_STORE">%1$s</xliff:g> سے انسٹال کردہ ایپ"</string>
+    <string name="app_install_details_different_initiating_package_summary" msgid="6093306593167176688">"<xliff:g id="APP_STORE1">%1$s</xliff:g> (بذریعہ <xliff:g id="APP_STORE2">%2$s</xliff:g>) سے ایپ انسٹال ہو گئی"</string>
     <string name="instant_app_details_summary" msgid="417197491598208216">"<xliff:g id="APP_STORE">%1$s</xliff:g> پر مزید معلومات"</string>
     <string name="app_ops_running" msgid="6127474473137428721">"چل رہا ہے"</string>
     <string name="app_ops_never_used" msgid="9038133162371204506">"(کبھی استعمال نہیں ہوا)"</string>
@@ -2289,12 +2290,9 @@
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"سماعتی آلات کا جوڑا بنائیں"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"اگلی اسکرین پر، اپنے سماعتی آلات پر تھپتھپائیں۔ آپ کو علیحدہ طور پر بائیں اور دائیں کان کا جوڑا بنانے کی ضرورت پڑ سکتی ہے۔\n\nاس بات کو یقینی بنائیں کہ آپ کے سماعتی آلات آن ہیں اور جوڑا بنانے کے لیے تیار ہیں۔"</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> فعال ہے"</string>
-    <!-- no translation found for accessibility_hearingaid_left_side_device_summary (12349058624943107) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_right_side_device_summary (8645789702686724188) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_left_and_right_side_device_summary (3314103411842694197) -->
-    <skip />
+    <string name="accessibility_hearingaid_left_side_device_summary" msgid="12349058624943107">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> / صرف بایاں"</string>
+    <string name="accessibility_hearingaid_right_side_device_summary" msgid="8645789702686724188">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> / صرف دایاں"</string>
+    <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="3314103411842694197">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> / بایاں اور داياں"</string>
     <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"+1 <xliff:g id="DEVICE_NAME">%1$s</xliff:g> مزید"</string>
     <string name="accessibility_hearing_device_pairing_title" msgid="2701812183769537320">"نئے آلے کا جوڑا بنائیں"</string>
     <string name="accessibility_hearing_device_connected_title" msgid="3785140037249487287">"سماعتی آلات"</string>
@@ -2573,7 +2571,8 @@
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"بیٹری لائف میں توسیع کریں"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"چارج ہونے پر آف کریں"</string>
     <string name="battery_saver_sticky_title_percentage" msgid="1178162022087559148">"<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> پر آف کر دیں"</string>
-    <string name="battery_saver_sticky_description_new" msgid="6472610662679038342">"بیٹری کے <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> پہنچنے پر بیٹری سیور آف ہو جاتا ہے"</string>
+    <!-- no translation found for battery_saver_sticky_description_new (8543277078136947874) -->
+    <skip />
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"آن کریں"</string>
@@ -2685,18 +2684,13 @@
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"آن"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"آف"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"اڈاپٹیو کنیکٹیوٹی استعمال کریں"</string>
-    <!-- no translation found for cellular_security_title (5562899485544677941) -->
-    <skip />
+    <string name="cellular_security_title" msgid="5562899485544677941">"موبائل نیٹ ورک سیکیورٹی"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"نیٹ ورک کی قسم، مرموز کاری، نوٹیفکیشن کنٹرولز"</string>
-    <!-- no translation found for cellular_security_top_intro (6749166804080092892) -->
-    <skip />
-    <!-- no translation found for cellular_security_settings_title (7779141923670352595) -->
-    <skip />
+    <string name="cellular_security_top_intro" msgid="6749166804080092892">"یہ ترتیبات آپ کی کالز، پیغامات اور ڈیٹا کو پرانے یا غیر مرموز کردہ نیٹ ورکس سے بچانے میں مدد کرتی ہیں جن سے آپ کو ڈیٹا کی چوری یا نگرانی کا سامنا کرنا پر سکتا ہے"</string>
+    <string name="cellular_security_settings_title" msgid="7779141923670352595">"موبائل نیٹ ورک سیکیورٹی"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"اطلاعات"</string>
-    <!-- no translation found for cellular_security_notifications_controller_title (4853056963523277847) -->
-    <skip />
-    <!-- no translation found for cellular_security_notifications_controller_summary (8339863845393759958) -->
-    <skip />
+    <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"نیٹ ورک کی اطلاعات"</string>
+    <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"‏جب آپ کا آلہ کسی غیر خفیہ کردہ نیٹ ورک سے منسلک ہوتا ہے، یا جب کوئی نیٹ ورک آپ کے منفرد آلہ یا SIM ID کو ریکارڈ کرتا ہے تو اطلاع حاصل کریں"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"مرموز کاری"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"نیٹ ورک جنریشنز"</string>
     <string name="cellular_security_network_generations_summary" msgid="139087814553929402">"‏آپ ہر انسٹال کردہ SIM کارڈ کو صرف ان نیٹ ورکس سے منسلک کرنے کے لیے کنفیگر کر سکتے ہیں جو 3G،‏ 4G اور 5G کو سپورٹ کرتے ہیں۔ SIM پرانے، غیر محفوظ 2G نیٹ ورکس سے منسلک نہیں ہوگی۔ اگر صرف 2G نیٹ ورک دستیاب ہے تو یہ ترتیب آپ کی کنیکٹوٹی کو محدود کر سکتی ہے۔ ایمرجنسی کی صورت میں 2G استعمال کیا جا سکتا ہے۔"</string>
@@ -2969,15 +2963,15 @@
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{{orgName} نے آپ کی دفتری پروفائل کے لیے ایک سرٹیفیکیٹ اتھارٹی انسٹال کی ہے جو انہیں ای میلز، ایپس اور محفوظ ویب سائٹس سمیت نیٹ ورک کی دفتری سرگرمی کو مانیٹر کرنے کی اجازت دے سکتی ہے۔\n\nاس سرٹیفیکیٹ سے متعلق مزید معلومات کے لیے اپنے منتظم سے رابطہ کریں۔}other{{orgName} نے آپ کی دفتری پروفائل کے لیے سرٹیفیکیٹ اتھارٹیز انسٹال کی ہیں جو انہیں ای میلز، ایپس اور محفوظ ویب سائٹس سمیت نیٹ ورک کی دفتری سرگرمی کو مانیٹر کرنے کی اجازت دے سکتی ہیں۔\n\nان سرٹیفیکیٹس سے متعلق مزید معلومات کے لیے اپنے منتظم سے رابطہ کریں۔}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"ایک تیسرا فریق آپ کے نیٹ ورک کی سرگرمی، بشمول ای میلز، ایپس اور محفوظ ویب سائٹوں پر نگاہ رکھنے پر قادر ہے۔\n\nآپ کے آلے پر انسٹال شدہ ایک بھروسہ مند استناد کی وجہ سے یہ ممکن ہے۔"</string>
     <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{سرٹیفیکیٹ چیک کریں}other{سرٹیفکیٹس چیک کریں}}"</string>
-    <string name="user_settings_title" msgid="6550866465409807877">"متعدد صارفین"</string>
+    <!-- no translation found for user_settings_title (9208831545558787202) -->
+    <skip />
     <string name="user_list_title" msgid="1387379079186123404">"‏صارفین ‎اور‎ پروفائلز"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"صارف یا پروفائل شامل کریں"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"محدود پروفائل"</string>
     <string name="user_summary_not_set_up" msgid="4602868481732886115">"سیٹ اپ نہیں کیا گیا"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1658946988920104613">"ترتیب نہیں دی گئی - محدود پروفائل"</string>
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"ترتیب نہیں دیا گیا - دفتری پروفائل"</string>
-    <!-- no translation found for user_owner (2079206733011361994) -->
-    <skip />
+    <string name="user_owner" msgid="2079206733011361994">"مالک"</string>
     <string name="user_admin" msgid="4024553191395768119">"منتظم"</string>
     <string name="user_you" msgid="3070562015202859996">"آپ (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_add_max_count" msgid="3328539978480663740">"آپ مزید صارفین شامل نہیں کر سکتے۔ ایک نیا صارف شامل کرنے کے لیے کسی صارف کو ہٹائیں۔"</string>
@@ -4647,6 +4641,8 @@
     <string name="summary_supported_service" msgid="4320535903444834786">"آپ ایمرجنسی سروسز سمیت کسی کو بھی ٹیکسٹ پیغام بھیج سکتے ہیں۔ دستیاب ہونے پر آپ کا فون موبائل نیٹ ورک سے دوبارہ منسلک ہو جائے گا۔"</string>
     <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"سیٹلائٹ پیغام رسانی میں زیادہ وقت لگ سکتا ہے اور یہ صرف کچھ علاقوں میں دستیاب ہے۔ موسم اور کچھ ساختیں آپ کے سیٹلائٹ کنکشن کو متاثر کر سکتی ہیں۔ سیٹلائٹ کالنگ دستیاب نہیں ہے۔ ایمرجنسی کالز اب بھی منسلک ہو سکتی ہیں۔\n\nاکاؤنٹ کی تبدیلیوں کو ترتیبات میں ظاہر ہونے میں کچھ وقت لگ سکتا ہے۔ تفاصیل کے لیے اپنے کیریئر سے رابطہ کریں۔"</string>
     <string name="more_about_satellite_messaging" msgid="3385673133561348509">"سیٹلائٹ پیغام رسانی کے بارے میں مزید"</string>
+    <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"<xliff:g id="FUNCTION">%1$s</xliff:g> آن نہیں ہو سکتا"</string>
+    <string name="satellite_warning_dialog_content" msgid="936419945275934955">"<xliff:g id="FUNCTION">%1$s</xliff:g> آن کرنے کے لیے، پہلے سیٹلائٹ کنکشن ختم کریں"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"رسائی کی جگہ کے نام"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"<xliff:g id="CARRIER">%1$s</xliff:g> سے منسلک ہونے پر دستیاب نہیں ہے"</string>
@@ -4683,17 +4679,17 @@
     <string name="sim_action_turn_off" msgid="3506698692916473000">"آف کریں"</string>
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"‏SIM کو فعال نہیں کیا جا سکتا"</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"‏SIM کو دوبارہ آن کرنے کی کوشش کریں۔ مسئلے کے برقرار رہنے پر اپنا آلہ ری اسٹارٹ کریں۔"</string>
-    <string name="sim_onboarding_dialog_starting_title" msgid="4212945803784596345">"‏اپنے SIM کی ترجیحات سیٹ کریں"</string>
+    <string name="sim_onboarding_dialog_starting_title" msgid="4212945803784596345">"‏اپنی SIM کی ترجیحات سیٹ کریں"</string>
     <string name="sim_onboarding_dialog_starting_msg" msgid="8450391476631265209">"‏اس آلے پر متعدد SIMs کا استعمال کرنے کے لیے اپنے موبائل نیٹ ورک کی ترجیحات سیٹ کریں"</string>
-    <string name="sim_onboarding_label_sim_title" msgid="273162565849288273">"‏اپنے SIMs پر لیبل لگائیں"</string>
+    <string name="sim_onboarding_label_sim_title" msgid="273162565849288273">"‏اپنی SIMs پر لیبل لگائیں"</string>
     <string name="sim_onboarding_label_sim_msg" msgid="5105859235219529056">"آپ کو یہ لیبلز کال کرنے، ٹیکسٹ بھیجنے، ڈیٹا کا استعمال کرنے پر اور ترتیبات میں نظر آئیں گے"</string>
     <string name="sim_onboarding_label_sim_dialog_title" msgid="5839073125605286120">"‏SIM لیبل"</string>
     <string name="sim_onboarding_label_sim_dialog_label" msgid="9020433985426525185">"لیبل"</string>
     <string name="sim_onboarding_select_sim_title" msgid="5895262188167744055">"‏منتخب کریں کہ کون سا SIM استعمال کرنا ہے"</string>
     <string name="sim_onboarding_select_sim_msg" msgid="5638859405391915048">"‏آپ ایک وقت میں 2 SIM کا استعمال کر سکتے ہیں"</string>
-    <string name="sim_onboarding_primary_sim_title" msgid="2793090401371135675">"‏اپنے بنیادی SIMs سیٹ کریں"</string>
-    <string name="sim_onboarding_primary_sim_msg" msgid="5484656671490558032">"‏منتخب کریں کہ کالز، ٹیکسٹس اور ڈیٹا کے لیے بطور ڈیفالٹ کون سا SIM استعمال کرنا ہے"</string>
-    <string name="primary_sim_title" msgid="2508161011657571566">"‏آپ کے بنیادی SIMs"</string>
+    <string name="sim_onboarding_primary_sim_title" msgid="2793090401371135675">"‏اپنی بنیادی SIMs سیٹ کریں"</string>
+    <string name="sim_onboarding_primary_sim_msg" msgid="5484656671490558032">"‏منتخب کریں کہ کالز، ٹیکسٹس اور ڈیٹا کے لیے بطور ڈیفالٹ کون سی SIM استعمال کرنی ہے"</string>
+    <string name="primary_sim_title" msgid="2508161011657571566">"‏آپ کی بنیادی SIMs"</string>
     <string name="primary_sim_calls_title" msgid="4961189133582615685">"کالز"</string>
     <string name="primary_sim_texts_title" msgid="1287584042733097749">"ٹیکسٹس"</string>
     <string name="primary_sim_automatic_data_title" msgid="1265528923229642480">"خودکار طور پر ڈیٹا سوئچ کرنا"</string>
@@ -4808,19 +4804,46 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"آپ کے کام کی پالیسی کی معلومات"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"‏آپ کے IT منتظم کے ذریعے نظم کردہ ترتیبات"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
-    <string name="enable_16k_pages" msgid="5009476566957520607">"‏16K صفحہ سائز کے ساتھ بوٹ کریں"</string>
-    <string name="enable_16k_pages_summary" msgid="428117226069445198">"‏16K صفحہ سائز کے تعاون یافتہ کرنل کا استعمال کرتے ہوئے بوٹ کریں"</string>
-    <string name="confirm_enable_16k_pages_title" msgid="6751570067857011642">"‏16KB صفحات کے موافق کرنل کے ساتھ ریبوٹ کریں؟"</string>
-    <string name="confirm_enable_16k_pages_text" msgid="702888115148257215">"وارننگ: ہو سکتا ہے کچھ ایپلیکیشنز اس وضع کے ساتھ موافق نہ ہوں۔ تصدیق کے بعد آلہ ریبوٹ ہو جائے گا۔"</string>
-    <string name="confirm_enable_4k_pages_title" msgid="626987400420355263">"‏4KB صفحات کے موافق کرنل کے ساتھ ریبوٹ کریں؟"</string>
-    <string name="confirm_enable_4k_pages_text" msgid="6168921566226074524">"تصدیق کے بعد آلہ ریبوٹ ہو جائے گا۔"</string>
+    <!-- no translation found for enable_16k_pages (8001470927566110689) -->
+    <skip />
+    <!-- no translation found for enable_16k_pages_summary (1964363364670306912) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_title (1286925577014793351) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_text (570198382662424714) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_title (3210360137887034659) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_text (155070605667160083) -->
+    <skip />
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"‏کرنل کو 16KB صفحات کے موافق کرنل میں اپ ڈیٹ کرنے میں ناکام۔"</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"تبدیلی کا اطلاق کرنا"</string>
-    <string name="confirm_format_ext4_title" msgid="4453684705528818873">"‏آلہ کو ext4 میں دوبارہ فارمیٹ کریں؟"</string>
-    <string name="confirm_format_ext4_text" msgid="8164677342487500794">"‏16K ڈویلپر اختیار ext4 فائل سسٹم کے ساتھ تعاون یافتہ ہے۔ آلہ کو صاف کر دیا جائے گا اور تصدیق کے بعد فائل سسٹم کو ext4 میں تبدیل کر دیا جائے گا۔"</string>
-    <string name="format_ext4_failure_toast" msgid="6904611547290793885">"‏ڈیٹا پارٹیشن کو ext4 پر دوبارہ فارمیٹ کرنے اور صاف کرنے میں ناکام۔"</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="6338135847153690912">"‏OEM اَنلاک کرنے کی ضرورت ہے"</string>
-    <string name="confirm_oem_unlock_for_16k_text" msgid="236718973897424382">"‏16K ڈویلپر کا اختیار استعمال کرنے سے پہلے آلے کا OEM اَنلاک ہونا ضروری ہے۔ OEM اَنلاک کے لیے صارف کے ڈیٹا کو فارمیٹ کرنے کی بھی ضرورت ہوگی۔ براہ کرم آلہ کو OEM اَنلاک کریں اور دوبارہ کوشش کریں۔"</string>
+    <!-- no translation found for confirm_format_ext4_title (6696191800594435577) -->
+    <skip />
+    <!-- no translation found for confirm_format_ext4_text (7940372488624630214) -->
+    <skip />
+    <!-- no translation found for format_ext4_failure_toast (8059453995800471549) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (5374451262432025419) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_text (3583604865119937957) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_title (1184703958249093215) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text_short (2894243902906666242) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text (8284806650260868833) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_title (7762533464569818498) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text_short (269039281591806585) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (6208765386837706582) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_channel_name (1658444283036376361) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_action (2309805437430150456) -->
+    <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"بگ رپورٹ کا ہینڈلر"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"آپ کے آلے پر کون سی ایپ بگ رپورٹ شارٹ کٹ ہینڈل کرتی اس کا تعین کرتی ہے۔"</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"ذاتی"</string>
@@ -4882,7 +4905,7 @@
     <string name="media_controls_show_player" msgid="8504571042365814021">"پلیئر دکھائیں"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"میڈیا"</string>
     <string name="camera_extensions_fallback_title" msgid="3604579046777004989">"کیمرا سافٹ ویئر ایکسٹینشنز کی اجازت دیں"</string>
-    <string name="camera_extensions_fallback_description" msgid="6939818294458854536">"‏Eyes Free ویڈیوگرافی جیسی جدید کیمرا کی خصوصیات کے ڈیفالٹ سافٹ ویئر کے نفاذ کو قابل بناتا ہے۔"</string>
+    <string name="camera_extensions_fallback_description" msgid="4306833827773277263">"‏اعلی درجے کی کیمرے کی خصوصیات، جیسے HDR، نائٹ یا دیگر کیمرا ایکسٹینشنز کے ڈیفالٹ سافٹ ویئر کے نفاذ کو فعال کرتا ہے۔"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"بلوٹوتھ آن ہو جائے گا"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"انٹرنیٹ"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"SIMs"</string>
@@ -4952,6 +4975,8 @@
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"پرنٹ سروس کا استعمال کریں"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"متعدد صارفین کو اجازت دیں"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"اجازت دیں، متعدد، صارف، اجازت، بہت سے"</string>
+    <!-- no translation found for multiple_users_title_keywords (2395593167746225172) -->
+    <skip />
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"وائرلیس ڈیبگنگ کا استعمال کریں"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"گرافکس ڈرائیور کی ترتیبات کا استعمال کریں"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"نائٹ لائٹ کا استعمال کریں"</string>
@@ -4974,10 +4999,8 @@
     <string name="enable_2g_title" msgid="8184757884636162942">"‏2G کو اجازت دیں"</string>
     <string name="enable_2g_summary" msgid="2794534052372565914">"‏2G کم محفوظ ہے لیکن کچھ مقامات پر آپ کے کنکشن کو بہتر بنا سکتا ہے۔ ایمرجنسی کالز کے لیے، 2G کی ہمیشہ اجازت ہے۔"</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"‏<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> کو دستیاب ہونے کے لیے 2G درکار ہے"</string>
-    <!-- no translation found for require_cellular_encryption_title (6087085031703089235) -->
-    <skip />
-    <!-- no translation found for require_cellular_encryption_summary (6090569065420631457) -->
-    <skip />
+    <string name="require_cellular_encryption_title" msgid="6087085031703089235">"صرف مرموز کردہ نیٹ ورکس کی اجازت دیں"</string>
+    <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"یہ زیادہ محفوظ ہے لیکن کچھ مقامات پر آپ کے موبائل نیٹ ورک کنکشن کو محدود کر سکتا ہے۔ ایمرجنسی کالنگ ہمیشہ اجازت یافتہ ہے۔"</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"تمام سروسز"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"کلپ بورڈ تک رسائی دکھائیں"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"ایپس کے آپ کے کاپی کردہ ٹیکسٹ، تصاویر یا دیگر مواد تک رسائی حاصل کرنے پر پیغام دکھائیں"</string>
@@ -5188,7 +5211,7 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"‏آپ کے آلے کا نام آپ کی انسٹال کردہ ایپس میں دکھائی دیتا ہے۔ آپ کے بلوٹوتھ آلات سے منسلک ہونے، Wi-Fi نیٹ ورک سے منسلک ہونے یا Wi-Fi ہاٹ اسپاٹ کو سیٹ اپ کرنے پر دوسرے لوگ بھی اسے دیکھ سکتے ہیں۔"</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"قواعد سے متعلق صنف"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"قواعد سے متعلق صنف منتخب کریں"</string>
-    <string name="content_protection_preference_title" msgid="5069260032659193074">"جعلسازی کی ایپس کو اسکین کیا جا رہا ہے"</string>
+    <string name="content_protection_preference_title" msgid="5069260032659193074">"جعلساز ایپس کے لیے اسکین کرنا"</string>
     <string name="content_protection_preference_summary" msgid="2252393849408445391">"فریب دہی کے لیے ایپ کی سرگرمی چیک کریں"</string>
     <string name="content_protection_preference_user_consent_switch_title" msgid="1797782616799594426">"مغالطہ آمیز ایپس کے لیے اسکین کرنے کی خصوصیت استعمال کریں"</string>
     <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="3004347470520916069">"مغالطہ آمیز دفتری ایپس کے لیے اسکین کرنے کی خصوصیت استعمال کریں"</string>
@@ -5201,6 +5224,5 @@
     <string name="force_swcrypto_fallback_summary" msgid="181969966310309701">"‏DRM کلیدی مینجمنٹ کو سافٹ ویئر پر مبنی وائٹ باکس کرپٹو استعمال کرنے پر مجبور کریں"</string>
     <string name="fingerprint_acquired_imager_dirty_udfps" msgid="7005042288289506776">"سینسر کے قریب کی اپنی اسکرین کو صاف کریں اور دوبارہ کوشش کریں"</string>
     <string name="sim_category_converted_sim" msgid="8575548015816988908">"‏‫eSIM میں تبدیل کر دیا گیا۔ ہٹائیں اور مسترد کریں۔"</string>
-    <!-- no translation found for sync_across_devices_title (3447757705383089345) -->
-    <skip />
+    <string name="sync_across_devices_title" msgid="3447757705383089345">"تمام آلات پر سِنک کریں"</string>
 </resources>
