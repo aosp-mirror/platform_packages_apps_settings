@@ -25,8 +25,8 @@
     <string name="device_info_default" msgid="1406619232867343310">"غير معروف"</string>
     <string name="device_info_protected_single_press" msgid="3810785480060743677">"انقر لإظهار المعلومات."</string>
     <string name="show_dev_countdown" msgid="2936506773086395069">"{count,plural, =1{لا تفصلك الآن عن الوصول إلى مرحلة المطوّرين إلّا خطوة واحدة.}zero{لا تفصلك الآن عن الوصول إلى مرحلة المطوّرين إلّا # خطوة.}two{لا تفصلك الآن عن الوصول إلى مرحلة المطوّرين إلّا خطوتَين.}few{لا تفصلك الآن عن الوصول إلى مرحلة المطوّرين إلّا # خطوات.}many{لا تفصلك الآن عن الوصول إلى مرحلة المطوّرين إلّا # خطوة.}other{لا تفصلك الآن عن الوصول إلى مرحلة المطوّرين إلّا # خطوة.}}"</string>
-    <string name="show_dev_on" msgid="2840850085134853754">"لقد أصبحت الآن مطور برامج!"</string>
-    <string name="show_dev_already" msgid="7041756429707644630">"لا حاجة لذلك، فأنت مطور برامج فعلاً."</string>
+    <string name="show_dev_on" msgid="2840850085134853754">"لقد أصبحت الآن مطور برامج."</string>
+    <string name="show_dev_already" msgid="7041756429707644630">"لقد أصبحت الآن مطور برامج."</string>
     <string name="dev_settings_disabled_warning" msgid="6971867026249671244">"يُرجى تفعيل خيارات المطوري أولاً."</string>
     <string name="header_category_system" msgid="1665516346845259058">"النظام"</string>
     <string name="radioInfo_service_in" msgid="9088637745836646271">"قيد الخدمة"</string>
@@ -1225,22 +1225,22 @@
     <string name="apn_not_set" msgid="8246646433109750293">"لم يتم الضبط."</string>
     <string name="apn_not_set_for_mvno" msgid="1141490067313964640">"لم يتم ضبط أي قيمة."</string>
     <string name="apn_name" msgid="6677695784108157953">"الاسم"</string>
-    <string name="apn_apn" msgid="5812828833797458602">"APN"</string>
+    <string name="apn_apn" msgid="5812828833797458602">"اسم نقطة الوصول"</string>
     <string name="apn_http_proxy" msgid="1052464912365838007">"الخادم الوكيل"</string>
     <string name="apn_http_port" msgid="9138610639873966046">"المنفذ"</string>
     <string name="apn_user" msgid="5831763936428279228">"اسم المستخدم"</string>
     <string name="apn_password" msgid="7435086635953953029">"كلمة المرور"</string>
     <string name="apn_server" msgid="6997704279138388384">"الخادم"</string>
-    <string name="apn_mmsc" msgid="4985570919581927224">"MMSC"</string>
+    <string name="apn_mmsc" msgid="4985570919581927224">"مركز خدمة رسائل الوسائط المتعددة"</string>
     <string name="apn_mms_proxy" msgid="6592247653258283592">"الخادم الوكيل لرسائل الوسائط المتعددة"</string>
     <string name="apn_mms_port" msgid="6500563737462966663">"منفذ رسائل الوسائط المتعددة"</string>
     <string name="apn_mcc" msgid="4971414138516074809">"MCC"</string>
     <string name="apn_mnc" msgid="1926382406843447854">"MNC"</string>
     <string name="apn_auth_type" msgid="4234397513494356932">"نوع المصادقة"</string>
-    <string name="apn_type" msgid="1835573305077788773">"‏نوع APN"</string>
-    <string name="apn_protocol" msgid="181529867160380010">"‏بروتوكول APN"</string>
-    <string name="apn_roaming_protocol" msgid="1645131094105362513">"‏بروتوكول APN عند التجوال"</string>
-    <string name="carrier_enabled" msgid="664074151573150130">"‏تفعيل/إيقاف APN"</string>
+    <string name="apn_type" msgid="1835573305077788773">"نوع اسم نقطة الوصول"</string>
+    <string name="apn_protocol" msgid="181529867160380010">"بروتوكول اسم نقطة الوصول"</string>
+    <string name="apn_roaming_protocol" msgid="1645131094105362513">"بروتوكول اسم نقطة الوصول عند التجوال"</string>
+    <string name="carrier_enabled" msgid="664074151573150130">"تفعيل/إيقاف اسم نقطة الوصول"</string>
     <string name="carrier_enabled_summaryOn" msgid="5212067975273903381">"‏تم تفعيل APN"</string>
     <string name="carrier_enabled_summaryOff" msgid="8541959867953738521">"‏تم إيقاف APN"</string>
     <string name="bearer" msgid="3231443241639159358">"الحامل"</string>
@@ -1500,7 +1500,7 @@
     <string name="lock_settings_profile_unification_dialog_uncompliant_confirm" msgid="8509287115116369677">"استخدام قفل واحد"</string>
     <string name="lock_settings_profile_unified_summary" msgid="777095092175037385">"نفس قفل شاشة الجهاز"</string>
     <string name="manageapplications_settings_title" msgid="9198876415524237657">"إدارة التطبيقات"</string>
-    <string name="applications_settings" msgid="1941993743933425622">"معلومات عن التطبيقات"</string>
+    <string name="applications_settings" msgid="1941993743933425622">"معلومات عن التطبيق"</string>
     <string name="applications_settings_header" msgid="3154670675856048015">"إعدادات التطبيقات"</string>
     <string name="install_applications" msgid="3921609656584369901">"مصادر غير معروفة"</string>
     <string name="install_applications_title" msgid="7890233747559108106">"السماح بكل مصادر التطبيقات"</string>
@@ -2828,7 +2828,7 @@
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g> ديسبل ميلي واط <xliff:g id="ASU">%2$d</xliff:g> وحدة إشارة واحدة"</string>
     <string name="sim_notification_title" msgid="2819551384383504031">"‏تم تغيير شرائح SIM"</string>
     <string name="sim_notification_summary" msgid="5593339846307029991">"انقر للإعداد."</string>
-    <string name="sim_calls_ask_first_prefs_title" msgid="3077694594349657933">"طرح السؤال كل مرة"</string>
+    <string name="sim_calls_ask_first_prefs_title" msgid="3077694594349657933">"السؤال في كل مرة"</string>
     <string name="sim_selection_required_pref" msgid="231437651041498359">"يلزم التحديد"</string>
     <string name="sim_selection_channel_title" msgid="3193666315607572484">"‏اختيار شريحة SIM"</string>
     <string name="dashboard_title" msgid="5660733037244683387">"الإعدادات"</string>
@@ -3550,7 +3550,7 @@
     <string name="domain_urls_summary_one" msgid="3312008753802762892">"فتح <xliff:g id="DOMAIN">%s</xliff:g>"</string>
     <string name="domain_urls_summary_some" msgid="1197692164421314523">"‏فتح <xliff:g id="DOMAIN">%s</xliff:g> وعناوين URL أخرى"</string>
     <string name="app_link_open_always" msgid="9167065494930657503">"السماح للتطبيق بفتح الروابط المتوافقة"</string>
-    <string name="app_link_open_ask" msgid="2422450109908936371">"طرح السؤال كل مرة"</string>
+    <string name="app_link_open_ask" msgid="2422450109908936371">"السؤال في كل مرة"</string>
     <string name="app_link_open_never" msgid="5299808605386052350">"عدم السماح للتطبيق بفتح الروابط"</string>
     <string name="app_link_open_always_summary" msgid="4524005594295855117">"{count,plural, =1{يطلب التطبيق معالجة رابط واحد.}zero{يطلب التطبيق معالجة # رابط.}two{يطلب التطبيق معالجة رابطَين.}few{يطلب التطبيق معالجة # روابط.}many{يطلب التطبيق معالجة # رابطًا.}other{يطلب التطبيق معالجة # رابط.}}"</string>
     <string name="open_supported_links_footer" msgid="3188808142432787933">"يطلب التطبيق معالجة الروابط التالية:"</string>
@@ -3690,7 +3690,7 @@
     <string name="camera_gesture_title" msgid="5559439253128696180">"يمكنك اللف مرتين لفتح الكاميرا"</string>
     <string name="camera_gesture_desc" msgid="7557645057320805328">"يمكنك فتح تطبيق الكاميرا من خلال لف رسغك مرتين"</string>
     <string name="screen_zoom_title" msgid="6928045302654960559">"حجم شاشة العرض"</string>
-    <string name="screen_zoom_short_summary" msgid="756254364808639194">"تكبير كل شيء أو تصغيره"</string>
+    <string name="screen_zoom_short_summary" msgid="756254364808639194">"تكبير كل محتوى الشاشة أو تصغيره"</string>
     <string name="screen_zoom_keywords" msgid="5964023524422386592">"عرض، كثافة، شاشة تصغير/تكبير، تغيير الحجم، ضبط الحجم"</string>
     <string name="screen_zoom_preview_title" msgid="5288355628444562735">"معاينة"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="2628662648068995971">"تصغير"</string>
@@ -3773,7 +3773,7 @@
     <string name="cell_data_warning" msgid="5664921950473359634">"سيتم تحذيرك عند استخدام <xliff:g id="ID_1">^1</xliff:g> من البيانات"</string>
     <string name="cell_data_limit" msgid="256855024790622112">"الحد الأقصى للبيانات <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="cell_data_warning_and_limit" msgid="8393200831986035724">"حد التحذير بشأن البيانات <xliff:g id="ID_1">^1</xliff:g> / الحد الأقصى للبيانات <xliff:g id="ID_2">^2</xliff:g>"</string>
-    <string name="operator_warning" msgid="5672761970087591211">"قد تختلف طريقة احتساب بيانات مشغِّل شبكة الجوّال عن طريقة الاحتساب على الجهاز."</string>
+    <string name="operator_warning" msgid="5672761970087591211">"قد تختلف طريقة احتساب بيانات مشغِّل شبكة الجوّال عن طريقة الاحتساب على الجهاز"</string>
     <string name="non_carrier_data_usage_warning" msgid="4707184871368847697">"تم استبعاد البيانات التي تستخدمها شبكات مشغِّلي شبكات الجوّال"</string>
     <string name="data_used_template" msgid="8229342096562327646">"<xliff:g id="ID_1">%1$s</xliff:g> مستخدَمة"</string>
     <string name="set_data_warning" msgid="1685771882794205462">"ضبط تحذيرات استخدام البيانات"</string>
