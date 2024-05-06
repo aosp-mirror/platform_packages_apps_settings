@@ -66,6 +66,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+@Deprecated(forRemoval = true)
 public class PanelFragment extends Fragment {
 
     private static final String TAG = "PanelFragment";
@@ -519,6 +520,7 @@ public class PanelFragment extends Fragment {
         return mPanel.getViewType();
     }
 
+    @Deprecated(forRemoval = true)
     class LocalPanelCallback implements PanelContentCallback {
 
         @Override

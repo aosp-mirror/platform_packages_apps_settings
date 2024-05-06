@@ -24,6 +24,7 @@ import android.util.FeatureFlagUtils;
 
 import com.android.settings.Utils;
 
+@Deprecated(forRemoval = true)
 public class PanelFeatureProviderImpl implements PanelFeatureProvider {
 
     @Override

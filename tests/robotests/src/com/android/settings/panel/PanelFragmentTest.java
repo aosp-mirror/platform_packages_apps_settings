@@ -54,6 +54,7 @@ import org.robolectric.annotation.Config;
 
 import java.util.Objects;
 
+@Deprecated(forRemoval = true)
 @Ignore("b/313576125")
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {

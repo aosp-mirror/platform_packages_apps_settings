@@ -36,7 +36,10 @@ import java.util.concurrent.CountDownLatch;
  *     {@link Uri}. Then check if all of the Slices have loaded with
  *     {@link #isPanelReadyToLoad()}, which will return {@code true} the first time after all
  *     Slices have loaded.
+ *
+ * @deprecated this is no longer used after V and will be removed.
  */
+@Deprecated(forRemoval = true)
 public class PanelSlicesLoaderCountdownLatch {
     private final Set<Uri> mLoadedSlices;
     private final CountDownLatch mCountDownLatch;

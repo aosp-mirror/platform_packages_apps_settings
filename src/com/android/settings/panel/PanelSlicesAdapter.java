@@ -48,7 +48,10 @@ import java.util.Map;
 
 /**
  * RecyclerView adapter for Slices in Settings Panels.
+ *
+ * @deprecated this is no longer used after V and will be removed.
  */
+@Deprecated(forRemoval = true)
 public class PanelSlicesAdapter
         extends RecyclerView.Adapter<PanelSlicesAdapter.SliceRowViewHolder> {
 
@@ -112,7 +115,10 @@ public class PanelSlicesAdapter
 
     /**
      * ViewHolder for binding Slices to SliceViews.
+     *
+     * @deprecated this is no longer used after V and will be removed.
      */
+    @Deprecated(forRemoval = true)
     public class SliceRowViewHolder extends RecyclerView.ViewHolder
             implements DividerItemDecoration.DividedViewHolder {
 
