@@ -16,6 +16,9 @@
 
 package com.android.settings.wifi;
 
+import static com.android.settings.network.SatelliteWarningDialogActivity.EXTRA_TYPE_OF_SATELLITE_WARNING_DIALOG;
+import static com.android.settings.network.SatelliteWarningDialogActivity.TYPE_IS_WIFI;
+
 import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -27,19 +30,26 @@ import android.net.wifi.SupplicantState;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.provider.Settings;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
+import com.android.settings.network.SatelliteRepository;
+import com.android.settings.network.SatelliteWarningDialogActivity;
 import com.android.settings.widget.SwitchWidgetController;
 import com.android.settingslib.WirelessUtils;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class WifiEnabler implements SwitchWidgetController.OnSwitchChangeListener  {
-
+    private static final String TAG = WifiEnabler.class.getSimpleName();
     private final SwitchWidgetController mSwitchWidget;
     private final WifiManager mWifiManager;
     private final ConnectivityManager mConnectivityManager;
@@ -48,7 +58,9 @@ public class WifiEnabler implements SwitchWidgetController.OnSwitchChangeListene
     private Context mContext;
     private boolean mListeningToOnSwitchChange = false;
     private AtomicBoolean mConnected = new AtomicBoolean(false);
-
+    private SatelliteRepository mSatelliteRepository;
+    @VisibleForTesting
+    AtomicBoolean mIsSatelliteOn = new AtomicBoolean(false);
 
     private boolean mStateMachineEvent;
     private final IntentFilter mIntentFilter;
@@ -93,7 +105,7 @@ public class WifiEnabler implements SwitchWidgetController.OnSwitchChangeListene
         // The order matters! We really should not depend on this. :(
         mIntentFilter.addAction(WifiManager.SUPPLICANT_STATE_CHANGED_ACTION);
         mIntentFilter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
-
+        mSatelliteRepository = new SatelliteRepository(context);
         setupSwitchController();
     }
 
@@ -123,6 +135,14 @@ public class WifiEnabler implements SwitchWidgetController.OnSwitchChangeListene
         if (!mListeningToOnSwitchChange) {
             mSwitchWidget.startListening();
             mListeningToOnSwitchChange = true;
+        }
+        // Refresh satellite mode status.
+        try {
+            mIsSatelliteOn.set(
+                    mSatelliteRepository.requestIsEnabled(Executors.newSingleThreadExecutor())
+                            .get(2000, TimeUnit.MILLISECONDS));
+        } catch (ExecutionException | TimeoutException | InterruptedException e) {
+            Log.e(TAG, "Error to get satellite status : " + e);
         }
     }
 
@@ -185,6 +205,18 @@ public class WifiEnabler implements SwitchWidgetController.OnSwitchChangeListene
         if (mStateMachineEvent) {
             return true;
         }
+
+        // Show dialog and do nothing under satellite mode.
+        if (mIsSatelliteOn.get()) {
+            mContext.startActivity(
+                    new Intent(mContext, SatelliteWarningDialogActivity.class)
+                            .putExtra(
+                                    EXTRA_TYPE_OF_SATELLITE_WARNING_DIALOG,
+                                    TYPE_IS_WIFI)
+            );
+            return false;
+        }
+
         // Show toast message if Wi-Fi is not allowed in airplane mode
         if (isChecked && !WirelessUtils.isRadioAllowed(mContext, Settings.Global.RADIO_WIFI)) {
             Toast.makeText(mContext, R.string.wifi_in_airplane_mode, Toast.LENGTH_SHORT).show();
