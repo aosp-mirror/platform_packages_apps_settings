@@ -41,7 +41,7 @@ class SatelliteWarningDialogActivity : SpaDialogWindowTypeActivity() {
     }
 
     override fun getDialogWindowType(): Int {
-        return WindowManager.LayoutParams.FIRST_APPLICATION_WINDOW
+        return WindowManager.LayoutParams.LAST_APPLICATION_WINDOW
     }
 
     @Composable
