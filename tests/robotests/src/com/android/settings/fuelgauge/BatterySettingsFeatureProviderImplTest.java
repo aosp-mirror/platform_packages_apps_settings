@@ -79,4 +79,20 @@ public class BatterySettingsFeatureProviderImplTest {
     public void getWirelessChargingRemainingLabel_returnNull() {
         assertThat(mImpl.getWirelessChargingRemainingLabel(mContext, 1000L, 1000L)).isNull();
     }
+
+    @Test
+    public void isChargingOptimizationMode_default_returnFalse() {
+        assertThat(mImpl.isChargingOptimizationMode(mContext)).isFalse();
+    }
+
+    @Test
+    public void getChargingOptimizationRemainingLabel_default_returnNull() {
+        assertThat(mImpl.getChargingOptimizationRemainingLabel(mContext, 1000L, 1000L)).isNull();
+    }
+
+    @Test
+    public void getChargingOptimizationChargeLabel_default_returnNull() {
+        assertThat(mImpl.getChargingOptimizationChargeLabel(mContext, "70%", 1000L, 1000L))
+                .isNull();
+    }
 }
