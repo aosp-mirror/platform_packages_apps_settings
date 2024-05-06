@@ -35,6 +35,7 @@ import org.robolectric.RuntimeEnvironment;
 
 import java.util.List;
 
+@Deprecated(forRemoval = true)
 @RunWith(RobolectricTestRunner.class)
 public class VolumePanelTest {
 
