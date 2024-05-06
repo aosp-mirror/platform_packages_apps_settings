@@ -140,7 +140,7 @@
     <string name="stylus_ignore_button" msgid="7734540973145241391">"Παράβλεψη όλων των πατημάτων του κουμπιού γραφίδας"</string>
     <string name="stylus_connected_devices_title" msgid="2823967577941359812">"Γραφίδα"</string>
     <string name="audio_streams_empty" msgid="8803517701437394982">"Δεν βρέθηκαν ροές ήχου κοντά."</string>
-    <string name="date_and_time" msgid="1788358029823431692">"Ημερομηνία &amp; ώρα"</string>
+    <string name="date_and_time" msgid="1788358029823431692">"Ημερομηνία και ώρα"</string>
     <string name="proxy_settings_title" msgid="4201866858226087066">"Διακομιστής μεσολάβησης"</string>
     <string name="proxy_clear_text" msgid="6529658759984031149">"Διαγραφή"</string>
     <string name="proxy_port_label" msgid="4647357286461712574">"Θύρα διακομιστή μεσολάβησης"</string>
@@ -1497,8 +1497,7 @@
     <string name="reset_esim_error_title" msgid="6516110227665862295">"Δεν είναι δυνατή η διαγραφή των eSIM"</string>
     <string name="reset_esim_error_msg" msgid="8459527827897797168">"Προέκυψε πρόβλημα και οι eSIM δεν διαγράφηκαν.\n\nΕπανεκκινήστε τη συσκευή και δοκιμάστε ξανά."</string>
     <string name="reset_private_space_delete_title" msgid="2555885198282572990">"Διαγραφή απόρρητου χώρου"</string>
-    <!-- no translation found for reset_private_space_delete_dialog (7506471054091800883) -->
-    <skip />
+    <string name="reset_private_space_delete_dialog" msgid="7506471054091800883">"Εάν έχετε απόρρητο χώρο στη συσκευή σας θα διαγραφεί οριστικά και ο Λογαριασμός Google που έχει προστεθεί στον χώρο θα καταργηθεί.\n\nΕπίσης, όλες οι εφαρμογές στον χώρο σας και τα δεδομένα τους θα διαγραφούν οριστικά."</string>
     <string name="main_clear_title" msgid="277664302144837723">"Διαγραφή όλων των δεδομένων (επαναφ. ρυθμίσεων)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Διαγρ. δεδομ. (εργ. επαναφ.)"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"Μουσικής"</li>\n<li>"Φωτογραφιών"</li>\n<li>"Άλλων δεδομένων χρήστη"</li></string>
@@ -1811,6 +1810,7 @@
     <string name="app_install_details_group_title" msgid="1172114479073704677">"Κατάστημα"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"Λεπτομέρειες εφαρμογής"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"Η εφαρμογή εγκαταστάθηκε από το <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
+    <string name="app_install_details_different_initiating_package_summary" msgid="6093306593167176688">"Η εφαρμογή εγκαταστάθηκε από το <xliff:g id="APP_STORE1">%1$s</xliff:g> (μέσω του <xliff:g id="APP_STORE2">%2$s</xliff:g>)"</string>
     <string name="instant_app_details_summary" msgid="417197491598208216">"Περισσότερες πληροφορίες στο <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
     <string name="app_ops_running" msgid="6127474473137428721">"Σε εκτέλεση"</string>
     <string name="app_ops_never_used" msgid="9038133162371204506">"(Δεν έχει χρησιμοποιηθεί ποτέ)"</string>
@@ -2290,12 +2290,9 @@
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Σύζευξη βοηθημάτων ακοής"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"Στην επόμενη οθόνη, πατήστε τα βοηθήματα ακοής σας. Μπορεί να χρειαστεί να κάνετε τη σύζευξη ξεχωριστά για κάθε αυτί.\n\nΒεβαιωθείτε ότι τα βοηθήματα ακοής σας είναι ενεργοποιημένα και έτοιμα για σύζευξη."</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"Η συσκευή <xliff:g id="DEVICE_NAME">%1$s</xliff:g> είναι ενεργοποιημένη"</string>
-    <!-- no translation found for accessibility_hearingaid_left_side_device_summary (12349058624943107) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_right_side_device_summary (8645789702686724188) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_left_and_right_side_device_summary (3314103411842694197) -->
-    <skip />
+    <string name="accessibility_hearingaid_left_side_device_summary" msgid="12349058624943107">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> / Μόνο το αριστερό"</string>
+    <string name="accessibility_hearingaid_right_side_device_summary" msgid="8645789702686724188">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> / Μόνο το δεξί"</string>
+    <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="3314103411842694197">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> / Αριστερό και δεξί"</string>
     <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> +1 ακόμη"</string>
     <string name="accessibility_hearing_device_pairing_title" msgid="2701812183769537320">"Σύζευξη νέας συσκ."</string>
     <string name="accessibility_hearing_device_connected_title" msgid="3785140037249487287">"Συσκευές ακοής"</string>
@@ -2574,7 +2571,8 @@
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Επέκταση διάρκειας ζωής της μπαταρίας"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Απενεργοποίηση όταν είναι φορτισμένη"</string>
     <string name="battery_saver_sticky_title_percentage" msgid="1178162022087559148">"Απενεργοποίηση στο <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="battery_saver_sticky_description_new" msgid="6472610662679038342">"Η Εξοικονόμηση μπαταρίας απενεργοποιείται όταν το επίπεδο φόρτισης της μπαταρίας φτάσει στο <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <!-- no translation found for battery_saver_sticky_description_new (8543277078136947874) -->
+    <skip />
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Ενεργοποίηση"</string>
@@ -2686,18 +2684,13 @@
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"Ενεργό"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"Ανενεργό"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Χρήση προσαρμοστικής συνδεσιμότητας"</string>
-    <!-- no translation found for cellular_security_title (5562899485544677941) -->
-    <skip />
+    <string name="cellular_security_title" msgid="5562899485544677941">"Ασφάλεια δικτύου κινητής τηλεφωνίας"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"Τύπος δικτύου, κρυπτογράφηση, στοιχεία ελέγχου ειδοποιήσεων"</string>
-    <!-- no translation found for cellular_security_top_intro (6749166804080092892) -->
-    <skip />
-    <!-- no translation found for cellular_security_settings_title (7779141923670352595) -->
-    <skip />
+    <string name="cellular_security_top_intro" msgid="6749166804080092892">"Οι συγκεκριμένες ρυθμίσεις συμβάλλουν στην προστασία των κλήσεων, των μηνυμάτων και των δεδομένων από παρωχημένα ή μη κρυπτογραφημένα δίκτυα που μπορεί να επιτρέψουν την κλοπή ή την παρακολούθηση των δεδομένων σας"</string>
+    <string name="cellular_security_settings_title" msgid="7779141923670352595">"Ασφάλεια δικτύου κινητής τηλεφωνίας"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"Ειδοποιήσεις"</string>
-    <!-- no translation found for cellular_security_notifications_controller_title (4853056963523277847) -->
-    <skip />
-    <!-- no translation found for cellular_security_notifications_controller_summary (8339863845393759958) -->
-    <skip />
+    <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"Ειδοποιήσεις δικτύου"</string>
+    <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"Λάβετε ειδοποιήσεις όταν η συσκευή σας συνδέεται σε μη κρυπτογραφημένο δίκτυο ή όταν το δίκτυο καταγράφει το μοναδικό αναγνωριστικό της συσκευής ή της SIM"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"Κρυπτογράφηση"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"Γενιές δικτύων"</string>
     <string name="cellular_security_network_generations_summary" msgid="139087814553929402">"Μπορείτε να διαμορφώσετε κάθε εγκατεστημένη κάρτα SIM, έτσι ώστε να συνδέεται μόνο σε δίκτυα που υποστηρίζουν 3G, 4G και 5G. Η SIM δεν θα συνδεθεί σε παλαιότερα, μη ασφαλή δίκτυα 2G. Αυτή η ρύθμιση θα περιορίσει τη συνδεσιμότητα σε περίπτωση που το μόνο διαθέσιμο δίκτυο είναι 2G. Σε περίπτωση έκτακτης ανάγκης, μπορεί να χρησιμοποιηθεί το 2G."</string>
@@ -2970,7 +2963,8 @@
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{Ο τομέας {orgName} εγκατέστησε μια αρχή έκδοσης πιστοποιητικών για το προφίλ εργασίας σας, που ενδέχεται να του επιτρέψει να παρακολουθεί τη δραστηριότητα του δικτύου εργασίας, συμπεριλαμβανομένων των μηνυμάτων ηλεκτρονικού ταχυδρομείου, των εφαρμογών και των ασφαλών ιστοτόπων.\n\nΓια περισσότερες πληροφορίες σχετικά με αυτό το πιστοποιητικό, επικοινωνήστε με τον διαχειριστή σας.}other{Ο τομέας {orgName} εγκατέστησε αρχές έκδοσης πιστοποιητικών για το προφίλ εργασίας σας, που ενδέχεται να του επιτρέψουν να παρακολουθεί τη δραστηριότητα του δικτύου εργασίας, συμπεριλαμβανομένων των μηνυμάτων ηλεκτρονικού ταχυδρομείου, των εφαρμογών και των ασφαλών ιστοτόπων.\n\nΓια περισσότερες πληροφορίες σχετικά με αυτά τα πιστοποιητικά, επικοινωνήστε με τον διαχειριστή σας.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"Ένα τρίτο μέρος έχει τη δυνατότητα να παρακολουθεί τη δραστηριότητα του δικτύου σας, όπως μηνύματα ηλεκτρονικού ταχυδρομείου, εφαρμογές και ασφαλείς ιστότοπους. \n\nΑυτό είναι δυνατό μέσω ενός έγκυρου διαπιστευτηρίου που έχει εγκατασταθεί στη συσκευή σας."</string>
     <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{Έλεγχος πιστοποιητικού}other{Έλεγχος πιστοποιητικών}}"</string>
-    <string name="user_settings_title" msgid="6550866465409807877">"Πολλαπλοί χρήστες"</string>
+    <!-- no translation found for user_settings_title (9208831545558787202) -->
+    <skip />
     <string name="user_list_title" msgid="1387379079186123404">"Χρήστες και προφίλ"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"Προσθήκη χρήστη ή προφίλ"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"Προφίλ περιορισμένης πρόσβασης"</string>
@@ -4647,6 +4641,8 @@
     <string name="summary_supported_service" msgid="4320535903444834786">"Μπορείτε να στέλνετε μηνύματα σε οποιονδήποτε, ακόμα και στις υπηρεσίες έκτακτης ανάγκης. Το τηλέφωνό σας θα συνδεθεί ξανά σε ένα δίκτυο κινητής τηλεφωνίας όταν είναι διαθέσιμο."</string>
     <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"Η ανταλλαγή μηνυμάτων μέσω δορυφόρου μπορεί να διαρκέσει περισσότερο και είναι διαθέσιμη μόνο σε ορισμένες περιοχές. Ο καιρός και ορισμένες κατασκευές ενδέχεται να επηρεάσουν τη δορυφορική σύνδεση. Η σύνδεση μέσω δορυφόρου δεν είναι διαθέσιμη. Μπορεί να υπάρχει ακόμη δυνατότητα για κλήσεις έκτακτης ανάγκης.\n\nΊσως χρειαστεί λίγος χρόνος για να εμφανιστούν οι αλλαγές λογαριασμού στις Ρυθμίσεις. Επικοινωνήστε με την εταιρεία κινητής τηλεφωνίας που χρησιμοποιείτε για λεπτομέρειες."</string>
     <string name="more_about_satellite_messaging" msgid="3385673133561348509">"Περισσότερες πληροφορίες για την ανταλλαγή μηνυμάτων μέσω δορυφόρου"</string>
+    <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"Δεν είναι δυνατή η ενεργοποίηση της επιλογής <xliff:g id="FUNCTION">%1$s</xliff:g>"</string>
+    <string name="satellite_warning_dialog_content" msgid="936419945275934955">"Για να ενεργοποιήσετε την επιλογή <xliff:g id="FUNCTION">%1$s</xliff:g>, αρχικά τερματίστε τη σύνδεση μέσω δορυφόρου"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Ονόματα σημείων πρόσβασης"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Δεν διατίθεται κατά τη σύνδεση σε <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -4808,19 +4804,46 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"Οι πληροφορίες πολιτικής εργασίας σας"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"Η διαχείριση των ρυθμίσεων πραγματοποιείται από τον διαχειριστή IT"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
-    <string name="enable_16k_pages" msgid="5009476566957520607">"Εκκίνηση με μέγεθος σελίδας 16 KB"</string>
-    <string name="enable_16k_pages_summary" msgid="428117226069445198">"Εκκίν. συσκ. με πυρήνα που υποστ. μέγ. σελ. 16 KB"</string>
-    <string name="confirm_enable_16k_pages_title" msgid="6751570067857011642">"Επανεκκίνηση με πυρήνα που είναι συμβατός με σελίδες μεγέθους 16 KB;"</string>
-    <string name="confirm_enable_16k_pages_text" msgid="702888115148257215">"ΠΡΟΕΙΔΟΠΟΙΗΣΗ: Ορισμένες εφαρμογές μπορεί να μην είναι συμβατές με αυτή τη λειτουργία. Θα γίνει επανεκκίνηση της συσκευής μετά την επιβεβαίωση."</string>
-    <string name="confirm_enable_4k_pages_title" msgid="626987400420355263">"Επανεκκίνηση με πυρήνα που είναι συμβατός με σελίδες μεγέθους 4 KB;"</string>
-    <string name="confirm_enable_4k_pages_text" msgid="6168921566226074524">"Θα γίνει επανεκκίνηση της συσκευής μετά την επιβεβαίωση."</string>
+    <!-- no translation found for enable_16k_pages (8001470927566110689) -->
+    <skip />
+    <!-- no translation found for enable_16k_pages_summary (1964363364670306912) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_title (1286925577014793351) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_text (570198382662424714) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_title (3210360137887034659) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_text (155070605667160083) -->
+    <skip />
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"Απέτυχε η ενημέρωση του πυρήνα ώστε να είναι συμβατός με σελίδες μεγέθους 16 KB."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Εφαρμόζεται η αλλαγή"</string>
-    <string name="confirm_format_ext4_title" msgid="4453684705528818873">"Να αλλάξει η μορφή της συσκευής σε ext4;"</string>
-    <string name="confirm_format_ext4_text" msgid="8164677342487500794">"Η επιλογή για προγραμματιστές 16K υποστηρίζεται με το σύστημα αρχείων ext4. Η συσκευή θα εκκαθαριστεί και το σύστημα αρχείων θα αλλάξει σε ext4 μετά την επιβεβαίωση."</string>
-    <string name="format_ext4_failure_toast" msgid="6904611547290793885">"Απέτυχε η αλλαγή μορφής και η εκκαθάριση του διαμερίσματος δεδομένων σε ext4."</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="6338135847153690912">"Απαιτείται ξεκλείδωμα OEM"</string>
-    <string name="confirm_oem_unlock_for_16k_text" msgid="236718973897424382">"Για τη χρήση της επιλογής για προγραμματιστές 16K, θα πρέπει η συσκευή να μην έχει κλείδωμα OEM. Το ξεκλείδωμα OEM θα απαιτεί επίσης τη μορφοποίηση των δεδομένων χρήστη. Χρησιμοποιήστε το ξεκλείδωμα OEM στη συσκευή και δοκιμάστε ξανά."</string>
+    <!-- no translation found for confirm_format_ext4_title (6696191800594435577) -->
+    <skip />
+    <!-- no translation found for confirm_format_ext4_text (7940372488624630214) -->
+    <skip />
+    <!-- no translation found for format_ext4_failure_toast (8059453995800471549) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (5374451262432025419) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_text (3583604865119937957) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_title (1184703958249093215) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text_short (2894243902906666242) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text (8284806650260868833) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_title (7762533464569818498) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text_short (269039281591806585) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (6208765386837706582) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_channel_name (1658444283036376361) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_action (2309805437430150456) -->
+    <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"Χειρισμός Αναφοράς σφάλματος"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Καθορίζει ποια εφαρμογή διαχειρίζεται τη συντόμευση της Αναφοράς σφάλματος στη συσκευή σας."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Προσωπικό"</string>
@@ -4882,7 +4905,7 @@
     <string name="media_controls_show_player" msgid="8504571042365814021">"Εμφάνιση προγράμματος αναπαραγωγής"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"μέσα"</string>
     <string name="camera_extensions_fallback_title" msgid="3604579046777004989">"Να επιτρέπονται οι επεκτάσεις λογισμικού κάμερας"</string>
-    <string name="camera_extensions_fallback_description" msgid="6939818294458854536">"Ενεργοποιεί την προεπιλεγμένη εφαρμογή λογισμικού σύνθετων λειτουργιών της κάμερας, όπως η φωνητική βιντεοσκόπηση."</string>
+    <string name="camera_extensions_fallback_description" msgid="4306833827773277263">"Ενεργοποιεί την προεπιλεγμένη εφαρμογή λογισμικού σύνθετων λειτουργιών της κάμερας, όπως το Υψηλό δυναμικό εύρος (HDR), η λειτουργία νύχτας ή άλλες επεκτάσεις κάμερας."</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Το Bluetooth θα ενεργοποιηθεί."</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"Διαδίκτυο"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"Κάρτες SIM"</string>
@@ -4952,6 +4975,8 @@
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Χρήση υπηρεσίας εκτύπωσης"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Να επιτρέπονται πολλαπλοί χρήστες"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"επιτρέπεται, πολλαπλοί, χρήστες, άδεια, πολλοί"</string>
+    <!-- no translation found for multiple_users_title_keywords (2395593167746225172) -->
+    <skip />
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Χρήση ασύρματου εντοπισμού σφαλμάτων"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Χρήση προτιμήσεων προγράμματος οδήγησης γραφικών"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"Χρήση Νυχτερινού φωτισμού"</string>
@@ -4974,10 +4999,8 @@
     <string name="enable_2g_title" msgid="8184757884636162942">"Να επιτρέπεται το 2G"</string>
     <string name="enable_2g_summary" msgid="2794534052372565914">"Το 2G είναι λιγότερο ασφαλές, αλλά μπορεί να βελτιώσει τη σύνδεσή σας σε ορισμένες τοποθεσίες. Για κλήσεις έκτακτης ανάγκης, το 2G επιτρέπεται πάντα."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"Το <xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> απαιτεί τη διαθεσιμότητα 2G"</string>
-    <!-- no translation found for require_cellular_encryption_title (6087085031703089235) -->
-    <skip />
-    <!-- no translation found for require_cellular_encryption_summary (6090569065420631457) -->
-    <skip />
+    <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Επιτρέπονται μόνο κρυπτογραφημένα δίκτυα"</string>
+    <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"Αυτή η ρύθμιση είναι πιο ασφαλής, αλλά μπορεί να περιορίσει τη σύνδεση του δικτύου κινητής τηλεφωνίας σε ορισμένες τοποθεσίες. Οι κλήσεις έκτακτης ανάγκης επιτρέπονται πάντα."</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Όλες οι υπηρεσίες"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Εμφάνιση πρόσβασης στο πρόχειρο"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Να εμφανίζεται ένα μήνυμα όταν οι εφαρμογές αποκτούν πρόσβαση σε κείμενο, εικόνες ή άλλο περιεχόμενο που έχετε αντιγράψει"</string>

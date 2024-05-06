@@ -25,8 +25,8 @@
     <string name="device_info_default" msgid="1406619232867343310">"غير معروف"</string>
     <string name="device_info_protected_single_press" msgid="3810785480060743677">"انقر لإظهار المعلومات."</string>
     <string name="show_dev_countdown" msgid="2936506773086395069">"{count,plural, =1{لا تفصلك الآن عن الوصول إلى مرحلة المطوّرين إلّا خطوة واحدة.}zero{لا تفصلك الآن عن الوصول إلى مرحلة المطوّرين إلّا # خطوة.}two{لا تفصلك الآن عن الوصول إلى مرحلة المطوّرين إلّا خطوتَين.}few{لا تفصلك الآن عن الوصول إلى مرحلة المطوّرين إلّا # خطوات.}many{لا تفصلك الآن عن الوصول إلى مرحلة المطوّرين إلّا # خطوة.}other{لا تفصلك الآن عن الوصول إلى مرحلة المطوّرين إلّا # خطوة.}}"</string>
-    <string name="show_dev_on" msgid="2840850085134853754">"لقد أصبحت الآن مطور برامج!"</string>
-    <string name="show_dev_already" msgid="7041756429707644630">"لا حاجة لذلك، فأنت مطور برامج فعلاً."</string>
+    <string name="show_dev_on" msgid="2840850085134853754">"لقد أصبحت الآن مطور برامج."</string>
+    <string name="show_dev_already" msgid="7041756429707644630">"لقد أصبحت الآن مطور برامج."</string>
     <string name="dev_settings_disabled_warning" msgid="6971867026249671244">"يُرجى تفعيل خيارات المطوري أولاً."</string>
     <string name="dev_settings_available_to_admin_only_warning" msgid="3408243404879083111">"يمكن للمستخدمين المشرفين وحدهم الوصول إلى إعدادات المطوّر."</string>
     <string name="header_category_system" msgid="1665516346845259058">"النظام"</string>
@@ -1439,22 +1439,22 @@
     <string name="apn_not_set" msgid="8246646433109750293">"لم يتم الضبط."</string>
     <string name="apn_not_set_for_mvno" msgid="1141490067313964640">"لم يتم ضبط أي قيمة."</string>
     <string name="apn_name" msgid="6677695784108157953">"الاسم"</string>
-    <string name="apn_apn" msgid="5812828833797458602">"APN"</string>
+    <string name="apn_apn" msgid="5812828833797458602">"اسم نقطة الوصول"</string>
     <string name="apn_http_proxy" msgid="1052464912365838007">"الخادم الوكيل"</string>
     <string name="apn_http_port" msgid="9138610639873966046">"المنفذ"</string>
     <string name="apn_user" msgid="5831763936428279228">"اسم المستخدم"</string>
     <string name="apn_password" msgid="7435086635953953029">"كلمة المرور"</string>
     <string name="apn_server" msgid="6997704279138388384">"الخادم"</string>
-    <string name="apn_mmsc" msgid="4985570919581927224">"MMSC"</string>
+    <string name="apn_mmsc" msgid="4985570919581927224">"مركز خدمة رسائل الوسائط المتعددة"</string>
     <string name="apn_mms_proxy" msgid="6592247653258283592">"الخادم الوكيل لرسائل الوسائط المتعددة"</string>
     <string name="apn_mms_port" msgid="6500563737462966663">"منفذ رسائل الوسائط المتعددة"</string>
     <string name="apn_mcc" msgid="4971414138516074809">"MCC"</string>
     <string name="apn_mnc" msgid="1926382406843447854">"MNC"</string>
     <string name="apn_auth_type" msgid="4234397513494356932">"نوع المصادقة"</string>
-    <string name="apn_type" msgid="1835573305077788773">"‏نوع APN"</string>
-    <string name="apn_protocol" msgid="181529867160380010">"‏بروتوكول APN"</string>
-    <string name="apn_roaming_protocol" msgid="1645131094105362513">"‏بروتوكول APN عند التجوال"</string>
-    <string name="carrier_enabled" msgid="664074151573150130">"‏تفعيل/إيقاف APN"</string>
+    <string name="apn_type" msgid="1835573305077788773">"نوع اسم نقطة الوصول"</string>
+    <string name="apn_protocol" msgid="181529867160380010">"بروتوكول اسم نقطة الوصول"</string>
+    <string name="apn_roaming_protocol" msgid="1645131094105362513">"بروتوكول اسم نقطة الوصول عند التجوال"</string>
+    <string name="carrier_enabled" msgid="664074151573150130">"تفعيل/إيقاف اسم نقطة الوصول"</string>
     <string name="carrier_enabled_summaryOn" msgid="5212067975273903381">"‏تم تفعيل APN"</string>
     <string name="carrier_enabled_summaryOff" msgid="8541959867953738521">"‏تم إيقاف APN"</string>
     <string name="bearer" msgid="3231443241639159358">"الحامل"</string>
@@ -1810,6 +1810,7 @@
     <string name="app_install_details_group_title" msgid="1172114479073704677">"المتجر"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"تفاصيل التطبيق"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"تم تثبيت التطبيق من <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
+    <string name="app_install_details_different_initiating_package_summary" msgid="6093306593167176688">"تم تثبيت التطبيق من خلال <xliff:g id="APP_STORE1">%1$s</xliff:g> (عبر <xliff:g id="APP_STORE2">%2$s</xliff:g>)"</string>
     <string name="instant_app_details_summary" msgid="417197491598208216">"المزيد من المعلومات على <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
     <string name="app_ops_running" msgid="6127474473137428721">"جارية التنفيذ"</string>
     <string name="app_ops_never_used" msgid="9038133162371204506">"(لم يسبق الاستخدام مطلقًا)"</string>
@@ -2289,12 +2290,9 @@
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"إقران سماعتَي الأذن الطبيتين"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"في الشاشة التالية، انقر على سماعات الأذن الطبية. قد يُطلَب منك إقران سماعتَي الأذن الطبيتين اليسرى واليمنى بشكل منفصل.\n\nتأكَّد من تشغيل سماعتَي الأذن الطبيتين وجاهزيتهما للإقران."</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> مفعَّل"</string>
-    <!-- no translation found for accessibility_hearingaid_left_side_device_summary (12349058624943107) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_right_side_device_summary (8645789702686724188) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_left_and_right_side_device_summary (3314103411842694197) -->
-    <skip />
+    <string name="accessibility_hearingaid_left_side_device_summary" msgid="12349058624943107">"‫<xliff:g id="DEVICE_NAME">%1$s</xliff:g> / السماعة اليسرى فقط"</string>
+    <string name="accessibility_hearingaid_right_side_device_summary" msgid="8645789702686724188">"‫<xliff:g id="DEVICE_NAME">%1$s</xliff:g> / السماعة اليمنى فقط"</string>
+    <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="3314103411842694197">"‫<xliff:g id="DEVICE_NAME">%1$s</xliff:g> / السماعتان اليسرى واليمنى"</string>
     <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> وجهاز واحد إضافي"</string>
     <string name="accessibility_hearing_device_pairing_title" msgid="2701812183769537320">"إقران جهاز جديد"</string>
     <string name="accessibility_hearing_device_connected_title" msgid="3785140037249487287">"سماعات الأذن الطبية"</string>
@@ -2573,7 +2571,8 @@
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"إطالة عمر البطارية"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"إيقاف الميزة عندما يكون الجهاز مشحونًا"</string>
     <string name="battery_saver_sticky_title_percentage" msgid="1178162022087559148">"إيقاف شحن البطارية عند <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="battery_saver_sticky_description_new" msgid="6472610662679038342">"تتوقَّف ميزة \"توفير شحن البطارية\" عندما يصل مستوى شحن البطارية إلى <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>."</string>
+    <!-- no translation found for battery_saver_sticky_description_new (8543277078136947874) -->
+    <skip />
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"تفعيل"</string>
@@ -2603,8 +2602,7 @@
     <string name="battery_usage_screen_footer_empty" msgid="3301144846133808193">"ستتوفّر بيانات استخدام البطارية خلال بضع ساعات بعد اكتمال عملية الشحن."</string>
     <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"الآن"</string>
     <string name="battery_usage_timestamps_hyphen" msgid="7401188432989043905">"‏‫‎<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g> ‏- ‎<xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
-    <!-- no translation found for battery_usage_timestamps_content_description (1927748134271595985) -->
-    <skip />
+    <string name="battery_usage_timestamps_content_description" msgid="1927748134271595985">"‏من ‎<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g> إلى ‎<xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
     <string name="battery_usage_day_and_hour" msgid="1417890420844950881">"<xliff:g id="DAY">%1$s</xliff:g> <xliff:g id="HOUR">%2$s</xliff:g>⁠"</string>
     <string name="battery_usage_time_info_and_battery_level" msgid="6732629268310936155">"<xliff:g id="TIME_INFO">%1$s</xliff:g> ‏<xliff:g id="BATTERY_LEVEL">%2$s</xliff:g>"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"رسم بياني لاستخدام البطارية"</string>
@@ -2618,8 +2616,7 @@
     <string name="battery_usage_spinner_view_by_apps" msgid="8769276544072098082">"العرض حسب التطبيقات"</string>
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"العرض حسب الأنظمة"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
-    <!-- no translation found for battery_usage_less_than_percent_content_description (6265933174815461493) -->
-    <skip />
+    <string name="battery_usage_less_than_percent_content_description" msgid="6265933174815461493">"‏أقل من ‎<xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="battery_cycle_count_footer" msgid="3642121059800373545">"قد يظهر عند الاستخدام الأول أنه تم تفريغ البطارية وشحنها عدة مرات بسبب فحوصات الجودة."</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"إحصاءات العمليات"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"الإحصائيات التقنية حول العمليات الجارية"</string>
@@ -2687,18 +2684,13 @@
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"مفعّل"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"إيقاف"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"استخدام \"الاتصال التكيفي\""</string>
-    <!-- no translation found for cellular_security_title (5562899485544677941) -->
-    <skip />
+    <string name="cellular_security_title" msgid="5562899485544677941">"أمان شبكة الجوّال"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"عناصر التحكّم في نوع الشبكة والتشفير والإشعارات"</string>
-    <!-- no translation found for cellular_security_top_intro (6749166804080092892) -->
-    <skip />
-    <!-- no translation found for cellular_security_settings_title (7779141923670352595) -->
-    <skip />
+    <string name="cellular_security_top_intro" msgid="6749166804080092892">"تساعد هذه الإعدادات في حماية مكالماتك والرسائل والبيانات من خطر الاختراق أو المراقبة عبر الشبكات القديمة أو الشبكات غير المشفّرة"</string>
+    <string name="cellular_security_settings_title" msgid="7779141923670352595">"أمان شبكة الجوّال"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"الإشعارات"</string>
-    <!-- no translation found for cellular_security_notifications_controller_title (4853056963523277847) -->
-    <skip />
-    <!-- no translation found for cellular_security_notifications_controller_summary (8339863845393759958) -->
-    <skip />
+    <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"إشعارات الشبكة"</string>
+    <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"‏يمكنك تلقّي إشعارات عندما يتصل جهازك بشبكة غير مشفَّرة أو عندما ترصد شبكة أرقام التعريف الفريدة للجهاز أو شريحة SIM"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"التشفير"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"أجيال الشبكات"</string>
     <string name="cellular_security_network_generations_summary" msgid="139087814553929402">"‏يمكنك ضبط كل شريحة SIM مثبَّتة على الاتصال فقط بشبكات الجيل الثالث والرابع والخامس. لن تتصل شريحة SIM بشبكات الجيل الثاني القديمة وغير الآمنة. قد يحدّ هذا الإعداد من إمكانية اتصالك إذا كانت الشبكة الوحيدة المتوفّرة من الجيل الثاني. وقد يتم استخدام شبكات الجيل الثاني في حالات الطوارئ."</string>
@@ -2971,7 +2963,8 @@
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{يتم تثبيت مرجع تصديق واحد من قِبل \"{orgName}\" لملفك الشخصي للعمل، وهذا قد يسمح لمَن أجرى التثبيت بمراقبة النشاط على شبكة العمل، بما في ذلك الرسائل الإلكترونية والتطبيقات والمواقع الإلكترونية الآمنة.\n\nللحصول على مزيد من المعلومات حول هذه الشهادة، يُرجى التواصُل مع المشرف.}zero{يتم تثبيت مرجع تصديق من قِبل \"{orgName}\" لملفك الشخصي للعمل، وهذا قد يسمح لمَن أجرى التثبيت بمراقبة النشاط على شبكة العمل، بما في ذلك الرسائل الإلكترونية والتطبيقات والمواقع الإلكترونية الآمنة.\n\nللحصول على مزيد من المعلومات حول هذه الشهادات، يُرجى التواصُل مع المشرف.}two{يتم تثبيت مرجعَي تصديق من قِبل \"{orgName}\" لملفك الشخصي للعمل، وهذا قد يسمح لمَن أجرى التثبيت بمراقبة النشاط على شبكة العمل، بما في ذلك الرسائل الإلكترونية والتطبيقات والمواقع الإلكترونية الآمنة.\n\nللحصول على مزيد من المعلومات حول هذه الشهادات، يُرجى التواصُل مع المشرف.}few{يتم تثبيت مراجع تصديق من قِبل \"{orgName}\" لملفك الشخصي للعمل، وهذا قد يسمح لمَن أجرى التثبيت بمراقبة النشاط على شبكة العمل، بما في ذلك الرسائل الإلكترونية والتطبيقات والمواقع الإلكترونية الآمنة.\n\nللحصول على مزيد من المعلومات حول هذه الشهادات، يُرجى التواصُل مع المشرف.}many{يتم تثبيت مرجع تصديق من قِبل \"{orgName}\" لملفك الشخصي للعمل، وهذا قد يسمح لمَن أجرى التثبيت بمراقبة النشاط على شبكة العمل، بما في ذلك الرسائل الإلكترونية والتطبيقات والمواقع الإلكترونية الآمنة.\n\nللحصول على مزيد من المعلومات حول هذه الشهادات، يُرجى التواصُل مع المشرف.}other{يتم تثبيت مرجع تصديق من قِبل \"{orgName}\" لملفك الشخصي للعمل، وهذا قد يسمح لمَن أجرى التثبيت بمراقبة النشاط على شبكة العمل، بما في ذلك الرسائل الإلكترونية والتطبيقات والمواقع الإلكترونية الآمنة.\n\nللحصول على مزيد من المعلومات حول هذه الشهادات، يُرجى التواصُل مع المشرف.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"يُمكن لأي جهة خارجية مراقبة نشاط الشبكة، بما في ذلك الرسائل الإلكترونية والتطبيقات ومواقع الويب الآمنة.\n\nويُمكن لبيانات اعتماد موثوقة ومثبتة على جهاز الكمبيوتر إتاحة إجراء ذلك."</string>
     <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{الاطّلاع على الشهادة}zero{الاطّلاع على الشهادات}two{الاطّلاع على الشهادتَين}few{الاطّلاع على الشهادات}many{الاطّلاع على الشهادات}other{الاطّلاع على الشهادات}}"</string>
-    <string name="user_settings_title" msgid="6550866465409807877">"مستخدمون متعدِّدون"</string>
+    <!-- no translation found for user_settings_title (9208831545558787202) -->
+    <skip />
     <string name="user_list_title" msgid="1387379079186123404">"المستخدمون والملفات الشخصية"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"إضافة مستخدم أو ملف شخصي"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"ملف شخصي محظور"</string>
@@ -3129,7 +3122,7 @@
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g> ديسبل ميلي واط <xliff:g id="ASU">%2$d</xliff:g> وحدة إشارة واحدة"</string>
     <string name="sim_notification_title" msgid="6839556577405929262">"‏تم إجراء تغيير على شريحتَي SIM"</string>
     <string name="sim_notification_summary" msgid="5593339846307029991">"انقر للإعداد."</string>
-    <string name="sim_calls_ask_first_prefs_title" msgid="3077694594349657933">"طرح السؤال كل مرة"</string>
+    <string name="sim_calls_ask_first_prefs_title" msgid="3077694594349657933">"السؤال في كل مرة"</string>
     <string name="sim_selection_required_pref" msgid="231437651041498359">"يلزم التحديد"</string>
     <string name="sim_selection_channel_title" msgid="3193666315607572484">"‏اختيار شريحة SIM"</string>
     <string name="dashboard_title" msgid="5660733037244683387">"الإعدادات"</string>
@@ -3868,7 +3861,7 @@
     <string name="domain_urls_summary_one" msgid="3312008753802762892">"فتح <xliff:g id="DOMAIN">%s</xliff:g>"</string>
     <string name="domain_urls_summary_some" msgid="1197692164421314523">"‏فتح <xliff:g id="DOMAIN">%s</xliff:g> وعناوين URL أخرى"</string>
     <string name="app_link_open_always" msgid="9167065494930657503">"السماح للتطبيق بفتح الروابط المتوافقة"</string>
-    <string name="app_link_open_ask" msgid="2422450109908936371">"طرح السؤال كل مرة"</string>
+    <string name="app_link_open_ask" msgid="2422450109908936371">"السؤال في كل مرة"</string>
     <string name="app_link_open_never" msgid="5299808605386052350">"عدم السماح للتطبيق بفتح الروابط"</string>
     <string name="app_link_open_always_summary" msgid="4524005594295855117">"{count,plural, =1{يطلب التطبيق معالجة رابط واحد.}zero{يطلب التطبيق معالجة # رابط.}two{يطلب التطبيق معالجة رابطَين.}few{يطلب التطبيق معالجة # روابط.}many{يطلب التطبيق معالجة # رابطًا.}other{يطلب التطبيق معالجة # رابط.}}"</string>
     <string name="open_supported_links_footer" msgid="3188808142432787933">"يطلب التطبيق معالجة الروابط التالية:"</string>
@@ -4014,7 +4007,7 @@
     <string name="camera_gesture_title" msgid="5559439253128696180">"يمكنك اللف مرتين لفتح الكاميرا"</string>
     <string name="camera_gesture_desc" msgid="7557645057320805328">"يمكنك فتح تطبيق الكاميرا من خلال لف رسغك مرتين"</string>
     <string name="screen_zoom_title" msgid="6928045302654960559">"حجم شاشة العرض"</string>
-    <string name="screen_zoom_short_summary" msgid="756254364808639194">"تكبير كل شيء أو تصغيره"</string>
+    <string name="screen_zoom_short_summary" msgid="756254364808639194">"تكبير كل محتوى الشاشة أو تصغيره"</string>
     <string name="screen_zoom_keywords" msgid="5964023524422386592">"عرض، كثافة، شاشة تصغير/تكبير، تغيير الحجم، ضبط الحجم"</string>
     <string name="screen_zoom_preview_title" msgid="5288355628444562735">"معاينة"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="2628662648068995971">"تصغير"</string>
@@ -4097,7 +4090,7 @@
     <string name="cell_data_warning" msgid="5664921950473359634">"سيتم تحذيرك عند استخدام <xliff:g id="ID_1">^1</xliff:g> من البيانات"</string>
     <string name="cell_data_limit" msgid="256855024790622112">"الحد الأقصى للبيانات <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="cell_data_warning_and_limit" msgid="8393200831986035724">"حد التحذير بشأن البيانات <xliff:g id="ID_1">^1</xliff:g> / الحد الأقصى للبيانات <xliff:g id="ID_2">^2</xliff:g>"</string>
-    <string name="operator_warning" msgid="5672761970087591211">"قد تختلف طريقة احتساب بيانات مشغِّل شبكة الجوّال عن طريقة الاحتساب على الجهاز."</string>
+    <string name="operator_warning" msgid="5672761970087591211">"قد تختلف طريقة احتساب بيانات مشغِّل شبكة الجوّال عن طريقة الاحتساب على الجهاز"</string>
     <string name="non_carrier_data_usage_warning" msgid="4707184871368847697">"تم استبعاد البيانات التي تستخدمها شبكات مشغِّلي شبكات الجوّال"</string>
     <string name="data_used_template" msgid="8229342096562327646">"<xliff:g id="ID_1">%1$s</xliff:g> مستخدَمة"</string>
     <string name="set_data_warning" msgid="1685771882794205462">"ضبط تحذيرات استخدام البيانات"</string>
@@ -4392,7 +4385,7 @@
     <string name="storage_images" msgid="2055893015567979387">"الصور"</string>
     <string name="storage_videos" msgid="6117698226447251033">"الفيديوهات"</string>
     <string name="storage_audio" msgid="5994664984472140386">"الصوت"</string>
-    <string name="storage_documents" msgid="7873134307844320096">"مستندات"</string>
+    <string name="storage_documents" msgid="7873134307844320096">"المستندات"</string>
     <string name="storage_other" msgid="7922190148479988838">"غير ذلك"</string>
     <string name="storage_apps" msgid="3564291603258795216">"التطبيقات"</string>
     <string name="storage_system" msgid="8472410119822911844">"النظام"</string>
@@ -4648,6 +4641,8 @@
     <string name="summary_supported_service" msgid="4320535903444834786">"يمكنك إرسال رسائل نصية إلى أي شخص، وكذلك الاستفادة من خدمات الطوارئ. سيحاول هاتفك الاتصال بشبكة جوّال مجددًا عند توفُّرها."</string>
     <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"قد تستغرق المراسلة باستخدام القمر الصناعي وقتًا أطول ولا تتوفّر إلا في بعض المناطق. وقد يؤثّر الطقس وبعض المباني في اتصالك بالقمر الصناعي. لا تتوفّر إمكانية الاتصال باستخدام القمر الصناعي. قد تظل مكالمات الطوارئ مفعَّلة.\n\nقد يستغرق ظهور التغييرات في حسابك ضمن \"الإعدادات\" بعض الوقت. يمكنك التواصل مع مشغِّل شبكة الجوّال للتعرّف على التفاصيل."</string>
     <string name="more_about_satellite_messaging" msgid="3385673133561348509">"مزيد من المعلومات حول ميزة المراسلة باستخدام القمر الصناعي"</string>
+    <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"يتعذّر تفعيل <xliff:g id="FUNCTION">%1$s</xliff:g>"</string>
+    <string name="satellite_warning_dialog_content" msgid="936419945275934955">"لتفعيل <xliff:g id="FUNCTION">%1$s</xliff:g>، عليك أولاً إنهاء الاتصال بالقمر الصناعي"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"أسماء نقاط الوصول"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"عدم التوفُّر عند الربط بمشغّل شبكة الجوّال <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -4809,19 +4804,46 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"معلومات سياسة العمل"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"يتولى مشرف تكنولوجيا المعلومات إدارة الإعدادات."</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"وحدة معالجة الرسومات"</string>
-    <string name="enable_16k_pages" msgid="5009476566957520607">"التشغيل مع صفحات حجمها 16 كيلوبايت"</string>
-    <string name="enable_16k_pages_summary" msgid="428117226069445198">"التشغيل بنواة متوافقة مع صفحات حجمها 16 كيلوبايت"</string>
-    <string name="confirm_enable_16k_pages_title" msgid="6751570067857011642">"هل تريد إعادة التشغيل بنواة متوافقة مع الصفحات التي حجمها 16 كيلوبايت؟"</string>
-    <string name="confirm_enable_16k_pages_text" msgid="702888115148257215">"تحذير: قد لا تتوافق بعض التطبيقات مع هذا الوضع. وستتم إعادة تشغيل الجهاز بعد التأكيد."</string>
-    <string name="confirm_enable_4k_pages_title" msgid="626987400420355263">"هل تريد إعادة التشغيل بنواة متوافقة مع الصفحات التي حجمها 4 كيلوبايت؟"</string>
-    <string name="confirm_enable_4k_pages_text" msgid="6168921566226074524">"ستتم إعادة تشغيل الجهاز بعد التأكيد."</string>
+    <!-- no translation found for enable_16k_pages (8001470927566110689) -->
+    <skip />
+    <!-- no translation found for enable_16k_pages_summary (1964363364670306912) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_title (1286925577014793351) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_text (570198382662424714) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_title (3210360137887034659) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_text (155070605667160083) -->
+    <skip />
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"تعذَّر تحديث النواة إلى إصدار متوافق مع الصفحات التي حجمها 16 كيلوبايت."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"جارٍ تطبيق التغييرات"</string>
-    <string name="confirm_format_ext4_title" msgid="4453684705528818873">"‏هل تريد إعادة تنسيق بيانات الجهاز إلى ext4؟"</string>
-    <string name="confirm_format_ext4_text" msgid="8164677342487500794">"‏يتوافق خيار المطوّرين 16 كيلوبايت مع نظام الملفات ext4. سيتم حجب بيانات الجهاز وتغيير نظام الملفات إلى ext4 بعد التأكيد."</string>
-    <string name="format_ext4_failure_toast" msgid="6904611547290793885">"‏تعذَّر حجب قسم البيانات وإعادة تنسيقه إلى ext4."</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="6338135847153690912">"يجب فتح قفل المصنِّع الأصلي للجهاز"</string>
-    <string name="confirm_oem_unlock_for_16k_text" msgid="236718973897424382">"‏يجب فتح قفل المصنِّع الأصلي للجهاز قبل استخدام خيار 16K للمطوّرين. وسيتطلب فتح قفل المصنِّع الأصلي للجهاز تنسيق بيانات المستخدمين أيضًا. يُرجى فتح قفل المصنِّع الأصلي للجهاز، ثم إعادة المحاولة."</string>
+    <!-- no translation found for confirm_format_ext4_title (6696191800594435577) -->
+    <skip />
+    <!-- no translation found for confirm_format_ext4_text (7940372488624630214) -->
+    <skip />
+    <!-- no translation found for format_ext4_failure_toast (8059453995800471549) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (5374451262432025419) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_text (3583604865119937957) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_title (1184703958249093215) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text_short (2894243902906666242) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text (8284806650260868833) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_title (7762533464569818498) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text_short (269039281591806585) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (6208765386837706582) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_channel_name (1658444283036376361) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_action (2309805437430150456) -->
+    <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"معالِج تقارير الأخطاء"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"يحدّد هذا الإعداد التطبيق الذي سيعالج اختصار \"تقرير الأخطاء\" على جهازك."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"شخصي"</string>
@@ -4887,7 +4909,7 @@
     <string name="media_controls_show_player" msgid="8504571042365814021">"إظهار المشغِّل"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"الوسائط"</string>
     <string name="camera_extensions_fallback_title" msgid="3604579046777004989">"السماح بإضافات برنامج الكاميرا"</string>
-    <string name="camera_extensions_fallback_description" msgid="6939818294458854536">"‏إتاحة التنفيذ البرمجي التلقائي لميزات الكاميرا المتقدّمة، مثل Eyes Free videography"</string>
+    <string name="camera_extensions_fallback_description" msgid="4306833827773277263">"تتم إتاحة التنفيذ البرمجي التلقائي لميزات الكاميرا المتقدّمة، مثل \"النطاق العالي الديناميكية\" أو \"صور في الليل\" أو غير ذلك من إضافات الكاميرا."</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"سيتم تفعيل البلوتوث."</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"الإنترنت"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"‏شرائح SIM"</string>
@@ -4957,6 +4979,8 @@
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"استخدام خدمة الطباعة"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"السماح لمستخدمين متعددين"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"السماح، متعدد، مستخدم، سماح، عديد"</string>
+    <!-- no translation found for multiple_users_title_keywords (2395593167746225172) -->
+    <skip />
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"استخدام ميزة \"تصحيح الأخطاء اللاسلكي\""</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"استخدام الإعدادات المفضّلة لبرنامج تشغيل الرسومات"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"استخدام ميزة \"الإضاءة الليلية\""</string>
@@ -4979,10 +5003,8 @@
     <string name="enable_2g_title" msgid="8184757884636162942">"السماح بشبكة الجيل الثاني"</string>
     <string name="enable_2g_summary" msgid="2794534052372565914">"شبكة الجيل الثاني أقل أمانًا، ولكن قد تحسِّن الاتصال بالإنترنت في بعض المواقع الجغرافية. يُسمح باستخدام شبكة الجيل الثاني دائمًا لمكالمات الطوارئ."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"يطلب مشغّل شبكة الجوال <xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> توفّر شبكة الجيل الثاني"</string>
-    <!-- no translation found for require_cellular_encryption_title (6087085031703089235) -->
-    <skip />
-    <!-- no translation found for require_cellular_encryption_summary (6090569065420631457) -->
-    <skip />
+    <string name="require_cellular_encryption_title" msgid="6087085031703089235">"السماح بالشبكات المشفَّرة فقط"</string>
+    <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"سيكون هذا الإجراء أكثر أمانًا، ولكن قد يؤدي إلى الحد من إمكانية الاتصال بشبكة الجوّال في بعض المواقع الجغرافية. ويُسمح بإجراء مكالمات الطوارئ دائمًا."</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"جميع الخدمات"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"إظهار الوصول إلى الحافظة"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"إظهار رسالة عندما يصل التطبيق إلى نص أو صور أو محتوى آخر تم نسخه."</string>
@@ -5205,7 +5227,6 @@
     <string name="force_swcrypto_fallback_title" msgid="8053166299808645593">"فرض استخدام تشفير آمن في البرامج"</string>
     <string name="force_swcrypto_fallback_summary" msgid="181969966310309701">"‏فرض استخدام نموذج التشفير Whitebox المستند إلى البرامج من قِبل خدمة إدارة المفاتيح المستخدمة في إدارة الحقوق الرقمية"</string>
     <string name="fingerprint_acquired_imager_dirty_udfps" msgid="7005042288289506776">"يُرجى تنظيف الشاشة بالقرب من جهاز الاستشعار ثم إعادة المحاولة"</string>
-    <!-- no translation found for sim_category_converted_sim (8575548015816988908) -->
-    <skip />
+    <string name="sim_category_converted_sim" msgid="8575548015816988908">"‏تم التحويل إلى شريحة eSIM. أزِل الشريحة وتخلّص منها."</string>
     <string name="sync_across_devices_title" msgid="3447757705383089345">"المزامنة بين الأجهزة"</string>
 </resources>

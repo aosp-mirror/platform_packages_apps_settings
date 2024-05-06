@@ -561,7 +561,7 @@
     <string name="private_space_screen_lock_summary" msgid="394837965365561070">"O mesmo que o bloqueio de ecrã do dispositivo"</string>
     <string name="private_space_new_lock_title" msgid="9056139964133004094">"Escolher um novo bloqueio para o espaço privado?"</string>
     <string name="private_space_new_lock_message" msgid="3117703578905489206">"Precisa de introduzir o PIN, o padrão ou a palavra-passe do dispositivo no ecrã seguinte"</string>
-    <string name="private_space_auto_lock_title" msgid="8663409382910601261">"Bloqueie automaticamente o espaço privado"</string>
+    <string name="private_space_auto_lock_title" msgid="8663409382910601261">"Bloquear automaticamente o espaço privado"</string>
     <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"Pode bloquear automaticamente o seu espaço privado se não tiver usado o dispositivo durante um determinado período"</string>
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"Sempre que o dispositivo é bloqueado"</string>
     <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"Após 5 minutos de inatividade"</string>
@@ -652,7 +652,7 @@
     <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"Escolha um novo bloqueio de ecrã"</string>
     <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"Escolha um bloqueio para apps de trabalho"</string>
     <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"Esc. novo bloq. de trabalho"</string>
-    <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"Para maior segurança, defina um bloqueio de ecrã de segurança."</string>
+    <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"Para maior segurança, defina um bloqueio de ecrã de segurança"</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Escolha o método de bloqueio de ecrã de segurança"</string>
     <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"Caso se esqueça do bloqueio de ecrã, o administrador de TI não consegue repô-lo."</string>
     <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"Defina um bloqueio de trabalho separado"</string>
@@ -1187,7 +1187,7 @@
     <string name="display_white_balance_title" msgid="2624544323029364713">"Apresentar equilíb. de brancos"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="fold_lock_behavior_title" msgid="786228803694268449">"Continuar a usar apps ao dobrar"</string>
-    <string name="disable_game_default_frame_rate_title" msgid="3712908601744143753">"Des. veloc. frames predef. p/ jogos"</string>
+    <string name="disable_game_default_frame_rate_title" msgid="3712908601744143753">"Desativar o frame rate predefinido para jogos"</string>
     <string name="disable_game_default_frame_rate_summary" msgid="4436762704707434225">"Desative a limitação da velocidade de frames máxima para jogos a <xliff:g id="FRAME_RATE">%1$d</xliff:g> Hz."</string>
     <string name="peak_refresh_rate_title" msgid="2056355754210341011">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="3212309985294885790">"Aumenta automaticamente a taxa de atualização para <xliff:g id="ID_1">%1$d</xliff:g> Hz para algum conteúdo. Aumenta a utilização da bateria."</string>
@@ -1481,7 +1481,7 @@
     <string name="reset_mobile_network_settings_title" msgid="5616713931258506842">"Repor definições de rede móvel"</string>
     <string name="reset_mobile_network_settings_desc" msgid="7292636387692165727">"Esta ação vai repor todas as definições de rede móvel"</string>
     <string name="reset_mobile_network_settings_confirm_title" msgid="7510965634669511241">"Repor definições de rede móvel?"</string>
-    <string name="reset_bluetooth_wifi_title" msgid="4113071322344697317">"Reponha o Bluetooth e o Wi‑Fi"</string>
+    <string name="reset_bluetooth_wifi_title" msgid="4113071322344697317">"Repor Bluetooth e Wi‑Fi"</string>
     <string name="reset_bluetooth_wifi_desc" msgid="4030295669083059711">"Esta ação repõe todas as definições de Wi‑Fi e Bluetooth. Não é possível anular esta ação."</string>
     <string name="reset_bluetooth_wifi_button_text" msgid="3974098137045963639">"Repor"</string>
     <string name="reset_bluetooth_wifi_complete_toast" msgid="5893439291030574365">"O Bluetooth e o Wi-Fi foram repostos"</string>
@@ -1496,9 +1496,8 @@
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"As definições de rede foram repostas"</string>
     <string name="reset_esim_error_title" msgid="6516110227665862295">"Não é possível apagar os eSIMs"</string>
     <string name="reset_esim_error_msg" msgid="8459527827897797168">"Algo correu mal e os seus eSIMs não foram apagados.\n\nReinicie o seu dispositivo e tente novamente."</string>
-    <string name="reset_private_space_delete_title" msgid="2555885198282572990">"Elimine o espaço privado"</string>
-    <!-- no translation found for reset_private_space_delete_dialog (7506471054091800883) -->
-    <skip />
+    <string name="reset_private_space_delete_title" msgid="2555885198282572990">"Eliminar espaço privado"</string>
+    <string name="reset_private_space_delete_dialog" msgid="7506471054091800883">"Se tiver um espaço privado no dispositivo, este vai ser permanentemente eliminado e a Conta Google adicionada ao seu espaço vai ser removida.\n\nTodas as apps no seu espaço e os respetivos dados também vão ser eliminados permanentemente."</string>
     <string name="main_clear_title" msgid="277664302144837723">"Apagar tudo (reposição de fábrica)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Apagar tudo (reposição de fábrica)"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"Música"</li>\n<li>"Fotos"</li>\n<li>"Outros dados do utilizador"</li></string>
@@ -1811,6 +1810,8 @@
     <string name="app_install_details_group_title" msgid="1172114479073704677">"Loja"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"Detalhes da aplicação"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"App instalada a partir da <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
+    <!-- no translation found for app_install_details_different_initiating_package_summary (6093306593167176688) -->
+    <skip />
     <string name="instant_app_details_summary" msgid="417197491598208216">"Mais informações sobre <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
     <string name="app_ops_running" msgid="6127474473137428721">"Em execução"</string>
     <string name="app_ops_never_used" msgid="9038133162371204506">"(Nunca utilizado)"</string>
@@ -2571,7 +2572,8 @@
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Prolongue a autonomia da bateria"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Desativar após o carregamento"</string>
     <string name="battery_saver_sticky_title_percentage" msgid="1178162022087559148">"Desativar ao alcançar <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="battery_saver_sticky_description_new" msgid="6472610662679038342">"A Poupança de bateria é desativada quando a bateria chega a <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <!-- no translation found for battery_saver_sticky_description_new (8543277078136947874) -->
+    <skip />
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Ativar"</string>
@@ -2683,18 +2685,13 @@
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"Ativada"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"Desativado"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Usar conetividade adaptável"</string>
-    <!-- no translation found for cellular_security_title (5562899485544677941) -->
-    <skip />
+    <string name="cellular_security_title" msgid="5562899485544677941">"Segurança de redes móveis"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"Tipo de rede, encriptação, controlos de notificação"</string>
-    <!-- no translation found for cellular_security_top_intro (6749166804080092892) -->
-    <skip />
-    <!-- no translation found for cellular_security_settings_title (7779141923670352595) -->
-    <skip />
+    <string name="cellular_security_top_intro" msgid="6749166804080092892">"Estas definições ajudam a proteger as suas chamadas, mensagens e dados de redes desatualizadas ou não encriptadas que podem sujeitar os seus dados a roubo ou vigilância"</string>
+    <string name="cellular_security_settings_title" msgid="7779141923670352595">"Segurança de redes móveis"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"Notificações"</string>
-    <!-- no translation found for cellular_security_notifications_controller_title (4853056963523277847) -->
-    <skip />
-    <!-- no translation found for cellular_security_notifications_controller_summary (8339863845393759958) -->
-    <skip />
+    <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"Notificações de redes"</string>
+    <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"Receba uma notificação quando o seu dispositivo se ligar a uma rede não encriptada ou quando uma rede registar o seu ID exclusivo do dispositivo ou do SIM"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"Encriptação"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"Gerações de redes"</string>
     <string name="cellular_security_network_generations_summary" msgid="139087814553929402">"Pode configurar cada cartão SIM instalado para estabelecer ligação apenas a redes 3G, 4G e 5G. O SIM não vai estabelecer ligação a redes 2G inseguras mais antigas. Esta definição pode limitar a sua conetividade caso a única rede disponível seja o 2G. Em caso de emergência, o 2G pode ser usado."</string>
@@ -2967,7 +2964,8 @@
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{{orgName} instalou uma autoridade de certificação para o seu perfil de trabalho, o que pode permitir monitorizar a atividade na rede de trabalho, incluindo emails, apps e Websites seguros.\n\nPara obter mais informações sobre este certificado, contacte o administrador.}other{{orgName} instalou autoridades de certificação para o seu perfil de trabalho, o que pode permitir monitorizar a atividade na rede de trabalho, incluindo emails, apps e Websites seguros.\n\nPara obter mais informações sobre estes certificados, contacte o administrador.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"A sua atividade de rede, incluindo emails, aplicações e Sites seguros, pode ser monitorizada por terceiros.\n\nIsto é possível através de uma credencial fidedigna instalada no seu dispositivo."</string>
     <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{Rever certificado}other{Rever certificados}}"</string>
-    <string name="user_settings_title" msgid="6550866465409807877">"Vários utilizadores"</string>
+    <!-- no translation found for user_settings_title (9208831545558787202) -->
+    <skip />
     <string name="user_list_title" msgid="1387379079186123404">"Utilizadores e perfis"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"Adicionar utilizador ou perfil"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"Perfil restrito"</string>
@@ -4644,6 +4642,10 @@
     <string name="summary_supported_service" msgid="4320535903444834786">"Pode enviar mensagens de texto a qualquer pessoa, incluindo aos serviços de emergência. O seu telemóvel vai voltar a ligar-se a uma rede móvel quando esta estiver disponível."</string>
     <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"As mensagens por satélite podem demorar mais tempo e só estão disponíveis em algumas zonas. As condições meteorológicas e determinadas estruturas podem afetar a sua ligação por satélite. As chamadas por satélite não estão disponíveis. Pode continuar a fazer chamadas de emergência.\n\nPode demorar algum tempo até que as alterações à conta sejam apresentadas nas Definições. Contacte a sua operadora para mais detalhes."</string>
     <string name="more_about_satellite_messaging" msgid="3385673133561348509">"Mais acerca das mensagens por satélite"</string>
+    <!-- no translation found for satellite_warning_dialog_title (1610117852475376931) -->
+    <skip />
+    <!-- no translation found for satellite_warning_dialog_content (936419945275934955) -->
+    <skip />
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Nomes dos pontos de acesso"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Indisponível quando ligado a <xliff:g id="CARRIER">%1$s</xliff:g>."</string>
@@ -4805,19 +4807,46 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"As suas informações da política de trabalho"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"Definições geridas pelo seu administrador de TI."</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
-    <string name="enable_16k_pages" msgid="5009476566957520607">"Reiniciar com páginas de 16 KB"</string>
-    <string name="enable_16k_pages_summary" msgid="428117226069445198">"Reinicie com o kernel compatível com pág. de 16 KB"</string>
-    <string name="confirm_enable_16k_pages_title" msgid="6751570067857011642">"Reiniciar com kernel compatível com páginas de 16 KB?"</string>
-    <string name="confirm_enable_16k_pages_text" msgid="702888115148257215">"AVISO: algumas aplicações podem não ser compatíveis com este modo. O dispositivo vai ser reiniciado após a confirmação."</string>
-    <string name="confirm_enable_4k_pages_title" msgid="626987400420355263">"Reiniciar com kernel compatível com páginas de 4 KB?"</string>
-    <string name="confirm_enable_4k_pages_text" msgid="6168921566226074524">"O dispositivo vai ser reiniciado após a confirmação."</string>
+    <!-- no translation found for enable_16k_pages (8001470927566110689) -->
+    <skip />
+    <!-- no translation found for enable_16k_pages_summary (1964363364670306912) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_title (1286925577014793351) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_text (570198382662424714) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_title (3210360137887034659) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_text (155070605667160083) -->
+    <skip />
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"Falha ao fazer a atualização para o kernel compatível com páginas de 16 KB."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"A aplicar a alteração"</string>
-    <string name="confirm_format_ext4_title" msgid="4453684705528818873">"Reformatar o dispositivo para ext4?"</string>
-    <string name="confirm_format_ext4_text" msgid="8164677342487500794">"A opção de programador 16K é suportada com o sistema de ficheiros ext4. O dispositivo vai ser limpo e o sistema de ficheiros vai ser alterado para ext4 após a confirmação."</string>
-    <string name="format_ext4_failure_toast" msgid="6904611547290793885">"Falha ao reformatar e limpar a partição de dados para ext4."</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="6338135847153690912">"É necessário o desbloqueio pelo OEM"</string>
-    <string name="confirm_oem_unlock_for_16k_text" msgid="236718973897424382">"O dispositivo precisa de ser desbloqueado pelo OEM antes de usar a opção de programador 16K. O desbloqueio pelo OEM também exige a formatação dos dados do utilizador. Desbloqueie o dispositivo pelo OEM e tente novamente."</string>
+    <!-- no translation found for confirm_format_ext4_title (6696191800594435577) -->
+    <skip />
+    <!-- no translation found for confirm_format_ext4_text (7940372488624630214) -->
+    <skip />
+    <!-- no translation found for format_ext4_failure_toast (8059453995800471549) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (5374451262432025419) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_text (3583604865119937957) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_title (1184703958249093215) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text_short (2894243902906666242) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text (8284806650260868833) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_title (7762533464569818498) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text_short (269039281591806585) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (6208765386837706582) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_channel_name (1658444283036376361) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_action (2309805437430150456) -->
+    <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"Controlador do relatório de erro"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Determina que aplicação processa o atalho para Relatório de erro no seu dispositivo."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Pessoal"</string>
@@ -4879,7 +4908,8 @@
     <string name="media_controls_show_player" msgid="8504571042365814021">"Mostrar leitor"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"multimédia"</string>
     <string name="camera_extensions_fallback_title" msgid="3604579046777004989">"Permitir extensões do software da câmara"</string>
-    <string name="camera_extensions_fallback_description" msgid="6939818294458854536">"Permite a implementação do software predefinido de funcionalidades de câmara avançadas, como a videografia para invisuais"</string>
+    <!-- no translation found for camera_extensions_fallback_description (4306833827773277263) -->
+    <skip />
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"O Bluetooth será ativado"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"Internet"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"SIMs"</string>
@@ -4949,6 +4979,8 @@
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Usar serviço de impressão"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Permitir vários utilizadores"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"autorizar, vários, utilizador, permitir, muitos"</string>
+    <!-- no translation found for multiple_users_title_keywords (2395593167746225172) -->
+    <skip />
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Usar depuração sem fios"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Usar preferências da placa gráfica"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"Usar Luz noturna"</string>
@@ -4971,10 +5003,8 @@
     <string name="enable_2g_title" msgid="8184757884636162942">"Permitir 2G"</string>
     <string name="enable_2g_summary" msgid="2794534052372565914">"O 2G é menos seguro, mas pode melhorar a sua ligação em algumas localizações. Para chamadas de emergência, o 2G é sempre permitido."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"O operador <xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> requer que o 2G esteja disponível"</string>
-    <!-- no translation found for require_cellular_encryption_title (6087085031703089235) -->
-    <skip />
-    <!-- no translation found for require_cellular_encryption_summary (6090569065420631457) -->
-    <skip />
+    <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Permitir apenas redes encriptadas"</string>
+    <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"Esta opção é mais segura, mas pode limitar a sua ligação de rede móvel em alguns locais. As chamadas de emergência são sempre permitidas."</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Todos os serviços"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Mostrar acesso à área de transferência"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Apresente uma mensagem quando as apps acedem a texto, imagens ou outro conteúdo que copiou"</string>

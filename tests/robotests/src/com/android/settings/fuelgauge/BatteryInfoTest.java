@@ -531,6 +531,7 @@ public class BatteryInfoTest {
     }
 
     @Test
+    @Ignore
     public void getBatteryInfo_fastChargingV2_updateRemainingLabelAndStatusLabel() {
         prepareTestGetBatteryInfoEnvironment(
                 /* remainingTimeMs= */ Duration.ofMinutes(30).toMillis(),

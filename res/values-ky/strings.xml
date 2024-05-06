@@ -606,7 +606,7 @@
     <string name="private_space_error_screen_title" msgid="739381738044418346">"Жеке мейкиндик туураланган жок"</string>
     <string name="private_space_tryagain_label" msgid="8305362615231738367">"Кайталоо"</string>
     <string name="private_space_lockscreen_title" msgid="5785259588888586366">"Жеке мейкиндикти башкача жол менен кулпулайсызбы?"</string>
-    <string name="private_space_lockscreen_summary" msgid="3053836076639653805">"Жеке мейкиндик үчүн жаңы кулпуну коюп же түзмөгүңүздүн кулпусун ачуу үчүн колдонгон кулпуну пайдалана аласыз"</string>
+    <string name="private_space_lockscreen_summary" msgid="3053836076639653805">"Жеке мейкиндик үчүн жаңы кулпу коюп же түзмөгүңүздүн кулпусун ачкан ыкманы пайдалана аласыз"</string>
     <string name="private_space_use_screenlock_label" msgid="9182153443192032782">"Экран кулпусун колдонуу"</string>
     <string name="private_space_set_lock_label" msgid="1790408277477408475">"Жаңы кулпу коюу"</string>
     <string name="private_space_pre_finish_title" msgid="2314776598615113267">"Бир секунд…"</string>
@@ -956,7 +956,7 @@
     <string name="wifi_privacy_mac_settings" msgid="3188060664478313363">"MAC"</string>
     <string name="wifi_privacy_device_name_settings" msgid="3699130177041345275">"Түзмөктүн аталышы"</string>
     <string name="wifi_privacy_send_device_name_toggle_title" msgid="1228107313152880073">"Түзмөктүн аталышын жөнөтүү"</string>
-    <string name="wifi_privacy_send_device_name_toggle_summary" msgid="5995365836332817655">"Бул түзмөктүн аталышын тармак менен бөлүшүү"</string>
+    <string name="wifi_privacy_send_device_name_toggle_summary" msgid="5995365836332817655">"Бул түзмөктүн аталышын тармакка билдиресиз"</string>
     <string name="wifi_subscription" msgid="4432423938285430113">"Жазылуу"</string>
     <string name="wifi_subscription_summary" msgid="18802471063384598">"Жазылууну көрүү же өзгөртүү"</string>
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"Кокустан тандалган MAC"</string>
@@ -1188,7 +1188,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="fold_lock_behavior_title" msgid="786228803694268449">"Түзмөк бүктөлгөндө колдонмолорду пайдалана берүү"</string>
     <string name="disable_game_default_frame_rate_title" msgid="3712908601744143753">"Оюндар үчүн демейки кадрлардын жыштыгын өчүрүү"</string>
-    <string name="disable_game_default_frame_rate_summary" msgid="4436762704707434225">"Оюндар үчүн кадрлардын максималдуу жыштыгынын <xliff:g id="FRAME_RATE">%1$d</xliff:g> Герц менен чектелишин өчүрүңүз."</string>
+    <string name="disable_game_default_frame_rate_summary" msgid="4436762704707434225">"<xliff:g id="FRAME_RATE">%1$d</xliff:g> Герц деңгээлиндеги оюндардын кадрларынын эң жогорку жыштыгы чектелбейт."</string>
     <string name="peak_refresh_rate_title" msgid="2056355754210341011">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="3212309985294885790">"Айрым материалдар үчүн экрандын жаңыруу жыштыгы автоматтык түрдө <xliff:g id="ID_1">%1$d</xliff:g> Герцке көтөрүлөт. Батареяны көбүрөөк керектейт."</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Экрандын жаңыруу жыштыгын жогорулатуу"</string>
@@ -1392,8 +1392,8 @@
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"<xliff:g id="NAME">^1</xliff:g> унутулсунбу?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"Бул <xliff:g id="NAME">^1</xliff:g> ичинде сакталган бардык колдонмолор, сүрөттөр жана башка нерселер биротоло жоголот."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"Системада Android <xliff:g id="VERSION">%s</xliff:g> версиясында иштеген файлдар бар"</string>
-    <string name="storage_os_detail_dialog_system" msgid="1423073052313067844">"Буга операциялык тутумуңуз жана телефонуңуздун үзгүлтүксүз иштеши үчүн керектүү файлдар кирет. Алардын бүтүндүгүн коргоо үчүн бул файлдарга кирүү мүмкүн эмес."</string>
-    <string name="storage_other_files_detail_dialog_system" msgid="8241153880150866635">"Буга операциялык тутумуңузга керектүү кеш жана башка убактылуу файлдар кирет. Убакыттын өтүшү менен колдонулган сактагычтын көлөмүнүн өзгөргөнүн байкай аласыз."</string>
+    <string name="storage_os_detail_dialog_system" msgid="1423073052313067844">"Буга телефонуңуздун үзгүлтүксүз иштешин камсыз кылган операциялык система менен файлдар кирет. Файлдардын бүтүндүгүн коргоо үчүн аларды жеткиликсиз кылып койдук."</string>
+    <string name="storage_other_files_detail_dialog_system" msgid="8241153880150866635">"Буга операциялык системаңызга керектүү кеш жана башка убактылуу файлдар кирет. Убакыттын өтүшү менен колдонулуучу сактагычтын көлөмү өзгөрүшү мүмкүн."</string>
     <string name="storage_system_label" msgid="8320948583086758295">"Система"</string>
     <string name="storage_wizard_guest" msgid="5813419895687733649">"Конок режиминде SD карталарды форматтоого болбойт"</string>
     <string name="storage_wizard_format_progress_title" msgid="9170393018855949774">"<xliff:g id="NAME">^1</xliff:g> форматталууда…"</string>
@@ -1497,8 +1497,7 @@
     <string name="reset_esim_error_title" msgid="6516110227665862295">"eSIM-карталар өчүрүлгөн жок"</string>
     <string name="reset_esim_error_msg" msgid="8459527827897797168">"Бир жерден ката кетип, eSIM-карталарыңыз өчүрүлгөн жок.\n\nТүзмөгүңүздү өчүрүп күйгүзүп, кайталап көрүңүз."</string>
     <string name="reset_private_space_delete_title" msgid="2555885198282572990">"Жеке мейкиндикти өчүрүү"</string>
-    <!-- no translation found for reset_private_space_delete_dialog (7506471054091800883) -->
-    <skip />
+    <string name="reset_private_space_delete_dialog" msgid="7506471054091800883">"Эгер түзмөгүңүздө жеке мейкиндик болсо, ал биротоло өчүрүлөт жана мейкиндигиңизге кошулган Google аккаунту жок кылынат.\n\nМейкиндигиңиздеги бардык колдонмолор жана алардагы маалымат да биротоло өчүрүлөт."</string>
     <string name="main_clear_title" msgid="277664302144837723">"Бардык нерселерди өчүрүү (баштапкы абалга кайтаруу)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Бардык нерселерди өчүрүү (баштапкы абалга кайтаруу)"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"Музыка"</li>\n<li>"Сүрөттөр"</li>\n<li>"Колдонуучунун башка нерселери"</li></string>
@@ -1811,6 +1810,7 @@
     <string name="app_install_details_group_title" msgid="1172114479073704677">"Дүкөн"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"Колдонмонун чоо-жайы"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"Колдонмо <xliff:g id="APP_STORE">%1$s</xliff:g> аркылуу орнотулду"</string>
+    <string name="app_install_details_different_initiating_package_summary" msgid="6093306593167176688">"Колдонмо төмөнкүдөн орнотулду: <xliff:g id="APP_STORE1">%1$s</xliff:g> (<xliff:g id="APP_STORE2">%2$s</xliff:g> аркылуу)"</string>
     <string name="instant_app_details_summary" msgid="417197491598208216">"<xliff:g id="APP_STORE">%1$s</xliff:g> боюнча кеңири маалымат"</string>
     <string name="app_ops_running" msgid="6127474473137428721">"Аткарылууда"</string>
     <string name="app_ops_never_used" msgid="9038133162371204506">"(колдонулган эмес)"</string>
@@ -2242,7 +2242,7 @@
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Чалуулар"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Билдирмелер жана ойготкучтар"</string>
     <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"Интерактивдүү сенсорлор"</string>
-    <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Дирилдөөнү жана сенсорлорду колдонуу"</string>
+    <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Дирилдөөнү жана сенсорлорду иштетүү"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Ойготкучтун дирилдөөсү"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"Медианы дирилдетүү"</string>
     <string name="accessibility_keyboard_vibration_title" msgid="7559967730626765441">"Баскычтопту дирилдетүү"</string>
@@ -2290,12 +2290,9 @@
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Аппараттарды туташтыруу"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"Кийинки экранда угуу аппаратыңызды таптаңыз. Сол жана оң угуу аппаратын өз-өзүнчө туташтырышыңыз мүмкүн.\n\nАлар туташуу режиминде болушу керек."</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> жандырылган"</string>
-    <!-- no translation found for accessibility_hearingaid_left_side_device_summary (12349058624943107) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_right_side_device_summary (8645789702686724188) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_left_and_right_side_device_summary (3314103411842694197) -->
-    <skip />
+    <string name="accessibility_hearingaid_left_side_device_summary" msgid="12349058624943107">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> / Сол тарап гана"</string>
+    <string name="accessibility_hearingaid_right_side_device_summary" msgid="8645789702686724188">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> / Оң тарап гана"</string>
+    <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="3314103411842694197">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> / Сол жана оң"</string>
     <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> дагы +1"</string>
     <string name="accessibility_hearing_device_pairing_title" msgid="2701812183769537320">"Жаңы түзмөк кошуу"</string>
     <string name="accessibility_hearing_device_connected_title" msgid="3785140037249487287">"Угуу аппараттары"</string>
@@ -2574,7 +2571,8 @@
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Батареяны үнөмдөө"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Кубатталганда өчүрүү"</string>
     <string name="battery_saver_sticky_title_percentage" msgid="1178162022087559148">"<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> жеткенде өчүрүү"</string>
-    <string name="battery_saver_sticky_description_new" msgid="6472610662679038342">"Батарея <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> кубатталганда, Батареяны үнөмдөгүч өчөт"</string>
+    <!-- no translation found for battery_saver_sticky_description_new (8543277078136947874) -->
+    <skip />
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Күйгүзүү"</string>
@@ -2686,18 +2684,13 @@
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"Күйүк"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"Өчүк"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Adaptive connectivity колдонмосун пайдалануу"</string>
-    <!-- no translation found for cellular_security_title (5562899485544677941) -->
-    <skip />
+    <string name="cellular_security_title" msgid="5562899485544677941">"Мобилдик тармактын коопсуздугу"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"Тармактын түрү, шифрлөө, билдирмелерди башкаруу элементтери"</string>
-    <!-- no translation found for cellular_security_top_intro (6749166804080092892) -->
-    <skip />
-    <!-- no translation found for cellular_security_settings_title (7779141923670352595) -->
-    <skip />
+    <string name="cellular_security_top_intro" msgid="6749166804080092892">"Бул параметрлер маалыматтарыңызды уурдап же аларга көз салуу мүмкүн болгон эски же шифрленбеген тармактардан чалууларыңызды, билдирүүлөрүңүздү жана маалыматтарыңызды коргоого жардам берет"</string>
+    <string name="cellular_security_settings_title" msgid="7779141923670352595">"Мобилдик тармактын коопсуздугу"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"Билдирмелер"</string>
-    <!-- no translation found for cellular_security_notifications_controller_title (4853056963523277847) -->
-    <skip />
-    <!-- no translation found for cellular_security_notifications_controller_summary (8339863845393759958) -->
-    <skip />
+    <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"Тармак тууралуу билдирмелер"</string>
+    <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"Түзмөгүңүз шифрленбеген тармакка туташканда же тармакта SIM картанын же түзмөктүн уникалдуу идентификатору жазылганда билдирме алыңыз"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"Шифрлөө"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"Тармак муундары"</string>
     <string name="cellular_security_network_generations_summary" msgid="139087814553929402">"Ар бир орнотулган SIM картаны 3G, 4G жана 5G колдогон тармактарга гана туташуу үчүн конфигурациялай аласыз. SIM карта эски, кооптуу 2G тармактарына туташпайт. Жалгыз жеткиликтүү тармак 2G болсо, бул параметр байланышыңызды чектеши мүмкүн. Кырсыктаганда 2G колдонулушу мүмкүн."</string>
@@ -2970,15 +2963,15 @@
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{{orgName} доменинин администратору жумуш профилиңизге ТБнын тастыктамасын орнотту. Ушуну менен ал жумуш тармагындагы аракеттериңизге, электрондук почтанын жана колдонмолордун пайдаланылышына, ошондой эле кандай веб-сайттарга кирип жатканыңызды көзөмөлдөп турат.\n\nБул тастыктама тууралуу кошумча маалымат алуу үчүн администраторуңузга кайрылыңыз.}other{{orgName} доменинин администратору жумуш профилиңизге ТБнын тастыктамасын орнотту. Ушуну менен ал жумуш тармагындагы аракеттериңизге, электрондук почтанын жана колдонмолордун пайдаланылышына, ошондой эле кандай веб-сайттарга кирип жатканыңызды көзөмөлдөп турат.\n\nБул тастыктамалар тууралуу кошумча маалымат алуу үчүн администраторуңузга кайрылыңыз.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"Үчүнчү тараптар сиздин желедеги иш-аракеттериңизди, анын ичинде эмейлдер, колдонмолор жана корголгон вебсайттарды көзөмөл кыла алышат.\n\nБул, түзмөгүңүзгө ишенимдүү сертификаттарды орнотуу аркылуу мүмкүн болот."</string>
     <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{Тастыктаманы текшерүү}other{Тастыктамаларды текшерүү}}"</string>
-    <string name="user_settings_title" msgid="6550866465409807877">"Бир нече колдонуучу"</string>
+    <!-- no translation found for user_settings_title (9208831545558787202) -->
+    <skip />
     <string name="user_list_title" msgid="1387379079186123404">"Колдонуучулар жана профайлдар"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"Колдонуучу же профиль кошуу"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"Чектелген профайл"</string>
     <string name="user_summary_not_set_up" msgid="4602868481732886115">"Түзүлгөн жок"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1658946988920104613">"Түзүлгөн жок - Чектелген профайл"</string>
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"Коюлган эмес – Жумуш профили"</string>
-    <!-- no translation found for user_owner (2079206733011361994) -->
-    <skip />
+    <string name="user_owner" msgid="2079206733011361994">"Ээси"</string>
     <string name="user_admin" msgid="4024553191395768119">"Админ"</string>
     <string name="user_you" msgid="3070562015202859996">"Сиз (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_add_max_count" msgid="3328539978480663740">"Эми башка колдонуучуларды кошо албайсыз. Жаңысын кошуу үчүн учурдагы колдонуучуну өчүрүңүз."</string>
@@ -3328,7 +3321,7 @@
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Телефондун үнүн өчүрүүнү жөндөө"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"\"Тынчымды алба\" режиминин эрежелерин коюу"</string>
     <string name="zen_mode_schedule_title" msgid="7064866561892906613">"Ырааттама"</string>
-    <string name="zen_mode_use_automatic_rule" msgid="733850322530002484">"Ырааттаманы колдонуу"</string>
+    <string name="zen_mode_use_automatic_rule" msgid="733850322530002484">"Ырааттаманы иштетүү"</string>
     <string name="zen_mode_summary_combination" msgid="5944689309915947828">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_settings_category" msgid="3794956668816783447">"Үнү чыккан билдирмелерге уруксат берүү"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Визуалдык билдирмелерди бөгөттөө"</string>
@@ -3765,7 +3758,7 @@
     <string name="zen_mode_calls_summary_two" msgid="6351563496898410742">"<xliff:g id="CALLER_TYPE_0">%1$s</xliff:g> жана <xliff:g id="CALLER_TYPE_1">%2$s</xliff:g>"</string>
     <string name="zen_mode_repeat_callers_summary" msgid="4121054819936083025">"Эгер бир эле адам <xliff:g id="MINUTES">%d</xliff:g> мүнөттүн ичинде кайра чалса"</string>
     <string name="zen_mode_start_time" msgid="1252665038977523332">"Качан башталат:"</string>
-    <string name="zen_mode_end_time" msgid="223502560367331706">"Качан аяктайт"</string>
+    <string name="zen_mode_end_time" msgid="223502560367331706">"Качан аяктайт:"</string>
     <string name="zen_mode_end_time_next_day_summary_format" msgid="419683704068360804">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> кийинки күнү"</string>
     <string name="zen_mode_summary_alarms_only_indefinite" msgid="910047326128154945">"\"Ойготкучтар гана\" режимин белгисиз убакытка иштетүү"</string>
     <string name="zen_mode_summary_alarms_only_by_minute" msgid="6673649005494939311">"{count,plural, =1{{time} чейин бир мүнөткө \"Ойготкучтар гана\" режимине өзгөртүү}other{# мүнөткө \"Ойготкучтар гана\" режимине өзгөртүү ({time} чейин)}}"</string>
@@ -3982,7 +3975,7 @@
     <string name="system_alert_window_settings" msgid="6458633954424862521">"Башка колдонмолордун үстүнөн көрсөтүү"</string>
     <string name="permit_draw_overlay" msgid="4468994037192804075">"Башка колдонмолордун үстүнөн көрсөтүүгө уруксат"</string>
     <string name="allow_overlay_description" msgid="1607235723669496298">"Интерфейстин элементтери башка колдонмолордун үстүнөн көрүнөт. Бул колдонмо кайсы жерди басканыңызды көрүп же экрандагы нерселерди өзгөртө алат."</string>
-    <string name="media_routing_control_title" msgid="6402800638960066807">"Медиа чыгарылышын өзгөртүү"</string>
+    <string name="media_routing_control_title" msgid="6402800638960066807">"Медианы чыгаруучу булакты өзгөртүү"</string>
     <string name="allow_media_routing_control" msgid="4907036637509360616">"Колдонмого медиа чыгарылышын которууга уруксат берүү"</string>
     <string name="allow_media_routing_description" msgid="8343709701298051207">"Бул колдонмого кайсы туташкан түзмөк башка колдонмолордон аудио же видеону кайс ойноторун тандоосуна уруксат бериңиз. Эгер уруксат берилсе, бул колдонмо гарнитура жана динамиктер сыяктуу жеткиликтүү түзмөктөрдүн тизмесине кире алат. Ошондой эле аудио же видеону алып ойнотуп же тышкы экранга чыгаруу үчүн кайсы чыгаруучу түзмөк колдонуларын тандай алат."</string>
     <string name="manage_external_storage_title" msgid="8024521099838816100">"Бардык файлдарга мүмкүнчүлүк"</string>
@@ -4431,7 +4424,7 @@
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Бул кызматты өчүрөсүзбү?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Сырсөздөр, киргизүүчү ачкычтар, төлөм ыкмалары жана башка сакталган маалымат аккаунтка кирип жатканыңызда толтурулбайт. Сакталган маалыматыңызды колдонуу үчүн сырсөздү, киргизүүчү ачкычты же маалымат кызматын тандаңыз."</string>
     <string name="account_dashboard_title_with_passkeys" msgid="648242372086733541">"Сырсөздөр, киргизүүчү ачкычтар жана аккаунттар"</string>
     <string name="credman_confirmation_message_new_ui" msgid="6126274509951156460">"&lt;b&gt;Бардык кызматтарды өчүрөсүзбү?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Сырсөздөр, киргизүүчү ачкычтар жана башка сакталган маалымат аккаунтуңузга кирип жатканда автоматтык түрдө толтурулбайт."</string>
-    <string name="credman_autofill_confirmation_message_new_ui" msgid="6222139222478822267">"&lt;b&gt;&lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; кызматын тандайсызбы?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; кылып өзгөртүңүз; Жаңы сырсөздөр, киргизүүчү ачкычтар жана башка маалымат эми ушул жерде сакталат. &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; экрандагы нерселерди колдонуп, автотолтурула турган талааларды аныктай алат"</string>
+    <string name="credman_autofill_confirmation_message_new_ui" msgid="6222139222478822267">"&lt;b&gt;&lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; кызматын тандайсызбы?&lt;/b&gt; Жаңы сырсөздөр, киргизүүчү ачкычтар жана башка маалымат эми ушул жерде сакталат. &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; экрандагы нерселерди колдонуп, автотолтурула турган талааларды аныктай алат"</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"%1$s колдонулсунбу?"</string>
     <string name="credman_on_off_switch_content_description" msgid="2930826358220917851">"%1$s күйүк/өчүк"</string>
     <string name="credman_confirmation_turn_off_positive_button" msgid="5678773011513369161">"Өчүрүү"</string>
@@ -4462,7 +4455,7 @@
     <string name="show_operator_name_title" msgid="3355910331531144028">"Тармактын аталышы"</string>
     <string name="show_operator_name_summary" msgid="5352696579216501773">"Тармактын аталышы абал тилкесинде көрүнсүн"</string>
     <string name="install_type_instant" msgid="7685381859060486009">"Ыкчам ачылуучу колдонмо"</string>
-    <string name="automatic_storage_manager_deactivation_warning" msgid="4905106133215702099">"Сактагычты башкаруу функциясы өчүрүлсүнбү?"</string>
+    <string name="automatic_storage_manager_deactivation_warning" msgid="4905106133215702099">"Сактагычты башкаруу функциясын өчүрөсүзбү?"</string>
     <string name="zen_suggestion_title" msgid="4555260320474465668">"\"Тынчымды алба\" режимин жаңыртуу"</string>
     <string name="zen_suggestion_summary" msgid="1984990920503217">"Алагды кылбоо үчүн билдирмелерди тындыруу"</string>
     <string name="disabled_feature" msgid="7151433782819744211">"Функция жеткиликтүү эмес"</string>
@@ -4648,6 +4641,8 @@
     <string name="summary_supported_service" msgid="4320535903444834786">"Сиз каалаган адамга, анын ичинде кырсыктаганда жардамга келчү кызматтарга текст билдирүү жөнөтө аласыз. Телефонуңуз мүмкүн болгондо мобилдик тармакка кайра туташат."</string>
     <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"Спутник аркылуу жазышуу көбүрөөк убакытты алышы мүмкүн жана кээ бир аймактарда гана жеткиликтүү. Аба ырайы жана айрым нерселер спутник менен байланышыңызга таасирин тийгизиши мүмкүн. Спутник аркылуу чалууга болбойт. Шашылыш чалуу жеткиликтүү болушу мүмкүн.\n\nАккаунтка киргизилген өзгөртүүлөр Параметрлерде бир аздан кийин көрүнөт. Кеңири маалымат үчүн байланыш операторуңузга кайрылыңыз."</string>
     <string name="more_about_satellite_messaging" msgid="3385673133561348509">"Спутник аркылуу жазышуу тууралуу кеңири маалымат"</string>
+    <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"<xliff:g id="FUNCTION">%1$s</xliff:g> күйгүзүлбөй жатат"</string>
+    <string name="satellite_warning_dialog_content" msgid="936419945275934955">"<xliff:g id="FUNCTION">%1$s</xliff:g> функциясын иштетүү үчүн алгач спутник менен байланышты токтотуңуз"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Байланыш түйүнүнүн аталыштары"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"<xliff:g id="CARRIER">%1$s</xliff:g> операторуна туташып турганда жеткиликсиз"</string>
@@ -4693,7 +4688,7 @@
     <string name="sim_onboarding_select_sim_title" msgid="5895262188167744055">"Колдонула турган SIM карталарды тандоо"</string>
     <string name="sim_onboarding_select_sim_msg" msgid="5638859405391915048">"Бир эле маалда 2 SIM карта колдоно аласыз"</string>
     <string name="sim_onboarding_primary_sim_title" msgid="2793090401371135675">"Негизги SIM карталарды тууралоо"</string>
-    <string name="sim_onboarding_primary_sim_msg" msgid="5484656671490558032">"Чалуулар, тексттик билдирүүлөр жана дайындар үчүн демейки боюнча кайсы SIM-карталарды колдоноруңузду тандаңыз"</string>
+    <string name="sim_onboarding_primary_sim_msg" msgid="5484656671490558032">"Чалуулар, тексттик билдирүүлөр жана Интернет байланышы үчүн демейки шартта кайсы SIM карталар колдонуларын тандаңыз."</string>
     <string name="primary_sim_title" msgid="2508161011657571566">"Негизги SIM карталарыңыз"</string>
     <string name="primary_sim_calls_title" msgid="4961189133582615685">"Чалуулар"</string>
     <string name="primary_sim_texts_title" msgid="1287584042733097749">"SMS жөнөтүү"</string>
@@ -4809,19 +4804,46 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"Уюмдун эрежелери тууралуу маалымат"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"IT администраторуңуз тууралаган параметрлер"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
-    <string name="enable_16k_pages" msgid="5009476566957520607">"16К барак өлчөмү менен күйгүзүү"</string>
-    <string name="enable_16k_pages_summary" msgid="428117226069445198">"16К барак өлчөмүн колдоого алган ядролуу кубаттоо түзмөгү"</string>
-    <string name="confirm_enable_16k_pages_title" msgid="6751570067857011642">"16КБ барак өлчөмүнө шайкеш келген ядро менен өчүрүлүп-күйгүзүлсүнбү?"</string>
-    <string name="confirm_enable_16k_pages_text" msgid="702888115148257215">"ЭСКЕРТҮҮ: Айрым колдонмолор бул режимге шайкеш келбеши мүмкүн. Ырастоодон кийин түзмөк өчүрүлүп-күйгүзүлөт."</string>
-    <string name="confirm_enable_4k_pages_title" msgid="626987400420355263">"4 КБ барак өлчөмүнө шайкеш келген ядро менен өчүрүлүп-күйгүзүлсүнбү?"</string>
-    <string name="confirm_enable_4k_pages_text" msgid="6168921566226074524">"Ырастоодон кийин түзмөк өчүрүлүп-күйгүзүлөт."</string>
+    <!-- no translation found for enable_16k_pages (8001470927566110689) -->
+    <skip />
+    <!-- no translation found for enable_16k_pages_summary (1964363364670306912) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_title (1286925577014793351) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_text (570198382662424714) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_title (3210360137887034659) -->
+    <skip />
+    <!-- no translation found for confirm_enable_4k_pages_text (155070605667160083) -->
+    <skip />
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"Ядро 16КБ баракка шайкеш келген ядрого жаңыртылган жок."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Өзгөртүү киргизилүүдө"</string>
-    <string name="confirm_format_ext4_title" msgid="4453684705528818873">"Түзмөк ext4 кайра форматталсынбы?"</string>
-    <string name="confirm_format_ext4_text" msgid="8164677342487500794">"Иштеп чыгуучунун 16K параметри ext4 файл системасында колдоого алынат. Ырастагандан кийин түзмөк тазаланып, файл системасы ext4 өзгөрөт."</string>
-    <string name="format_ext4_failure_toast" msgid="6904611547290793885">"Кайра форматталбай жана маалымат ext4 үчүн тазаланбай калды."</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="6338135847153690912">"Түзмөктүн кулпусун OEM аркылуу ачуу талап кылынат"</string>
-    <string name="confirm_oem_unlock_for_16k_text" msgid="236718973897424382">"Иштеп чыгуучунун 16K параметрлерин колдонуудан мурда түзмөктүн кулпусун OEM аркылуу ачканга уруксат берүү керек. Түзмөктүн кулпусун OEM аркылуу ачуу үчүн колдонуучунун маалыматын форматтоо талап кылынат. Түзмөктүн кулпусун OEM аркылуу ачып, кайра аракет кылыңыз."</string>
+    <!-- no translation found for confirm_format_ext4_title (6696191800594435577) -->
+    <skip />
+    <!-- no translation found for confirm_format_ext4_text (7940372488624630214) -->
+    <skip />
+    <!-- no translation found for format_ext4_failure_toast (8059453995800471549) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (5374451262432025419) -->
+    <skip />
+    <!-- no translation found for confirm_oem_unlock_for_16k_text (3583604865119937957) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_title (1184703958249093215) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text_short (2894243902906666242) -->
+    <skip />
+    <!-- no translation found for page_agnostic_4k_pages_text (8284806650260868833) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_title (7762533464569818498) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text_short (269039281591806585) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (6208765386837706582) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_channel_name (1658444283036376361) -->
+    <skip />
+    <!-- no translation found for page_agnostic_notification_action (2309805437430150456) -->
+    <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"Мүчүлүштүк тууралуу кабар берүүнү иштеткич"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Түзмөгүңүздөгү Мүчүлүштүк тууралуу кабарлоо ыкчам баскычын кайсы колдонмо иштетерин аныктайт."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Жеке"</string>
@@ -4883,7 +4905,7 @@
     <string name="media_controls_show_player" msgid="8504571042365814021">"Ойноткучту көрсөтүү"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"медиа"</string>
     <string name="camera_extensions_fallback_title" msgid="3604579046777004989">"Камеранын программаларынын кеңейтүүлөрүн колдонууга уруксат берүү"</string>
-    <string name="camera_extensions_fallback_description" msgid="6939818294458854536">"Камеранын өркүндөтүлгөн функцияларын, мисалы, экранды карабай жаздыруу мүмкүнчүлүгүн берген функцияны ишке киргизүүчү демейки программаны иштетет."</string>
+    <string name="camera_extensions_fallback_description" msgid="4306833827773277263">"Камеранын өркүндөтүлгөн функцияларын, мисалы, HDR, Түнкү режимди же камеранын башка кеңейтүүлөрүн ишке киргизүүчү демейки программаны иштетет."</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth күйгүзүлөт"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"Интернет"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM карталар"</string>
@@ -4945,7 +4967,7 @@
     <string name="category_name_display_controls" msgid="7046581691184725216">"Экрандын башка параметрлери"</string>
     <string name="category_name_general" msgid="7737273712848115886">"Жалпы"</string>
     <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"Караңгы теманы колдонуу"</string>
-    <string name="bluetooth_main_switch_title" msgid="8409835540311309632">"Bluetooth\'ду колдонуу"</string>
+    <string name="bluetooth_main_switch_title" msgid="8409835540311309632">"Bluetooth\'ду иштетүү"</string>
     <string name="prevent_ringing_main_switch_title" msgid="4726252811262086643">"Шыңгырдын үнүн өчүрүү функциясын колдонуу"</string>
     <string name="use_wifi_hotsopt_main_switch_title" msgid="3909731167290690539">"Wi‑Fi байланыш түйүнүн колдонуу"</string>
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Колдонмону кадап коюу функциясын иштетүү"</string>
@@ -4953,6 +4975,8 @@
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Басып чыгаруу кызматын колдонуу"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Бир нече колдонуучуга уруксат берүү"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"уруксат берүү, бир нече, колдонуучу, уруксат, көп"</string>
+    <!-- no translation found for multiple_users_title_keywords (2395593167746225172) -->
+    <skip />
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Мүчүлүштүктөрдү Wi-Fi аркылуу оңдоону колдонуу"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Графикалык драйвердин параметрлерин колдонуу"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"Түнкү режимди иштетүү"</string>
@@ -4975,10 +4999,8 @@
     <string name="enable_2g_title" msgid="8184757884636162942">"2G тармагына уруксат берүү"</string>
     <string name="enable_2g_summary" msgid="2794534052372565914">"2G тармагы жакшы корголбогону менен, айрым жерлерде туруктуу иштеп, шашылыш чалуулар үчүн такай күйүп турат."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> 2G тармагын күйгүзүүнү талап кылат"</string>
-    <!-- no translation found for require_cellular_encryption_title (6087085031703089235) -->
-    <skip />
-    <!-- no translation found for require_cellular_encryption_summary (6090569065420631457) -->
-    <skip />
+    <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Шифрленген тармактарга гана уруксат берүү"</string>
+    <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"Бул коопсуз болгону менен, айрым жерлерде мобилдик тармакка туташууну чектеши мүмкүн. Шашылыш чалууга ар дайым уруксат берилет."</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Бардык кызматтар"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Алмашуу буферин пайдалануу мүмкүнчүлүгүн көрсөтүү"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Колдонмолор көчүрүлгөн текстти, сүрөттөрдү же башка нерселерди пайдаланганда билдирмелер көрүнөт"</string>
@@ -5189,7 +5211,7 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Түзмөгүңүздүн аталышы орнотулган колдонмолорго көрүнүп турат. Ошондой эле, Bluetooth түзмөктөрүнө, Wi‑Fi тармагына туташып же Wi‑Fi байланыш түйүнүн тууралаганыңызда башка адамдарга көрүнүшү мүмкүн."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Грамматикалык жак"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Грамматикалык жакты тандаңыз"</string>
-    <string name="content_protection_preference_title" msgid="5069260032659193074">"Алдамчы колдонмолор изделүүдө"</string>
+    <string name="content_protection_preference_title" msgid="5069260032659193074">"Алдамчы колдонмолорду издөө"</string>
     <string name="content_protection_preference_summary" msgid="2252393849408445391">"Колдонмолордо жасалган аракеттерде фишингди текшерүү"</string>
     <string name="content_protection_preference_user_consent_switch_title" msgid="1797782616799594426">"Алдамчы колдонмолорду издөө"</string>
     <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="3004347470520916069">"Алдамчы жумуш колдонмолорун издөө"</string>
@@ -5202,6 +5224,5 @@
     <string name="force_swcrypto_fallback_summary" msgid="181969966310309701">"Программага негизделген whitebox криптографиясын колдонуу үчүн DRM ачкычын мажбурлап башкаруу"</string>
     <string name="fingerprint_acquired_imager_dirty_udfps" msgid="7005042288289506776">"Сенсордун жанындагы экранды тазалап, кайталап көрүңүз"</string>
     <string name="sim_category_converted_sim" msgid="8575548015816988908">"eSIM-картага өзгөртүлдү. Аны чыгарыңыз."</string>
-    <!-- no translation found for sync_across_devices_title (3447757705383089345) -->
-    <skip />
+    <string name="sync_across_devices_title" msgid="3447757705383089345">"Түзмөктөрдө шайкештирүү"</string>
 </resources>
