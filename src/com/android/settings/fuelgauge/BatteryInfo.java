@@ -319,6 +319,12 @@ public class BatteryInfo {
         info.isFastCharging =
                 BatteryStatus.getChargingSpeed(context, batteryBroadcast)
                         == BatteryStatus.CHARGING_FAST;
+        if (info.isBatteryDefender) {
+            info.isBatteryDefender =
+                    FeatureFactory.getFeatureFactory()
+                            .getPowerUsageFeatureProvider()
+                            .isBatteryDefend(info);
+        }
         if (!info.mCharging) {
             updateBatteryInfoDischarging(context, shortString, estimate, info);
         } else {
@@ -388,9 +394,10 @@ public class BatteryInfo {
                         && status != BatteryManager.BATTERY_STATUS_FULL
                         && dockDefenderMode == BatteryUtils.DockDefenderMode.DISABLED)
                 || dockDefenderMode == BatteryUtils.DockDefenderMode.TEMPORARILY_BYPASSED) {
+            final BatterySettingsFeatureProvider featureProvider =
+                    FeatureFactory.getFeatureFactory().getBatterySettingsFeatureProvider();
             // Battery is charging to full
             info.remainingTimeUs = PowerUtil.convertMsToUs(chargeTimeMs);
-
             int resId = getChargingDurationResId(info.isFastCharging);
             info.remainingLabel =
                     chargeTimeMs <= 0
@@ -400,7 +407,8 @@ public class BatteryInfo {
                                     chargeTimeMs,
                                     info.isFastCharging,
                                     info.pluggedStatus,
-                                    currentTimeMs);
+                                    currentTimeMs,
+                                    featureProvider);
 
             info.chargeLabel =
                     chargeTimeMs <= 0
@@ -411,7 +419,8 @@ public class BatteryInfo {
                                     info.batteryPercentString,
                                     chargeTimeMs,
                                     info.isFastCharging,
-                                    currentTimeMs);
+                                    currentTimeMs,
+                                    featureProvider);
         } else if (dockDefenderMode == BatteryUtils.DockDefenderMode.FUTURE_BYPASS) {
             // Dock defender will be triggered in the future, charging will be optimized.
             info.chargeLabel =
@@ -436,10 +445,17 @@ public class BatteryInfo {
             long chargeRemainingTimeMs,
             boolean isFastCharging,
             int pluggedStatus,
-            long currentTimeMs) {
+            long currentTimeMs,
+            BatterySettingsFeatureProvider featureProvider) {
+        if (featureProvider.isChargingOptimizationMode(context)) {
+            final CharSequence chargingOptimizationRemainingLabel =
+                    featureProvider.getChargingOptimizationRemainingLabel(
+                            context, chargeRemainingTimeMs, currentTimeMs);
+            if (chargingOptimizationRemainingLabel != null) {
+                return chargingOptimizationRemainingLabel;
+            }
+        }
         if (pluggedStatus == BatteryManager.BATTERY_PLUGGED_WIRELESS) {
-            BatterySettingsFeatureProvider featureProvider =
-                    FeatureFactory.getFeatureFactory().getBatterySettingsFeatureProvider();
             final CharSequence wirelessChargingRemainingLabel =
                     featureProvider.getWirelessChargingRemainingLabel(
                             context, chargeRemainingTimeMs, currentTimeMs);
@@ -472,7 +488,16 @@ public class BatteryInfo {
             String batteryPercentString,
             long chargeTimeMs,
             boolean isFastCharging,
-            long currentTimeMs) {
+            long currentTimeMs,
+            BatterySettingsFeatureProvider featureProvider) {
+        if (featureProvider.isChargingOptimizationMode(context)) {
+            final CharSequence chargingOptimizationChargeLabel =
+                    featureProvider.getChargingOptimizationChargeLabel(
+                            context, batteryPercentString, chargeTimeMs, currentTimeMs);
+            if (chargingOptimizationChargeLabel != null) {
+                return chargingOptimizationChargeLabel;
+            }
+        }
         if (com.android.settingslib.fuelgauge.BatteryUtils.isChargingStringV2Enabled()) {
             var timeString =
                     PowerUtil.getTargetTimeShortString(context, chargeTimeMs, currentTimeMs);
