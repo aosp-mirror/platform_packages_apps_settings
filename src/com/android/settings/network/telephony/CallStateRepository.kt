@@ -26,6 +26,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.conflate
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.onEach
 
@@ -50,8 +51,12 @@ class CallStateRepository(private val context: Context) {
     fun isInCallFlow(): Flow<Boolean> = context.subscriptionsChangedFlow()
         .flatMapLatest {
             val subIds = subscriptionManager.activeSubscriptionIdList
-            combine(subIds.map(::callStateFlow)) { states ->
-                states.any { it != TelephonyManager.CALL_STATE_IDLE }
+            if (subIds.isEmpty()) {
+                flowOf(false)
+            } else {
+                combine(subIds.map(::callStateFlow)) { states ->
+                    states.any { it != TelephonyManager.CALL_STATE_IDLE }
+                }
             }
         }
         .conflate()

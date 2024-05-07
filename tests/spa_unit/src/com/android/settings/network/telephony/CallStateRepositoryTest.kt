@@ -35,6 +35,7 @@ import org.mockito.kotlin.doAnswer
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.spy
+import org.mockito.kotlin.stub
 
 @RunWith(AndroidJUnit4::class)
 class CallStateRepositoryTest {
@@ -84,6 +85,17 @@ class CallStateRepositoryTest {
         assertThat(listDeferred.await())
             .containsExactly(TelephonyManager.CALL_STATE_IDLE, TelephonyManager.CALL_STATE_RINGING)
             .inOrder()
+    }
+
+    @Test
+    fun isInCallFlow_noActiveSubscription() = runBlocking {
+        mockSubscriptionManager.stub {
+            on { activeSubscriptionIdList } doReturn intArrayOf()
+        }
+
+        val isInCall = repository.isInCallFlow().firstWithTimeoutOrNull()
+
+        assertThat(isInCall).isFalse()
     }
 
     @Test
