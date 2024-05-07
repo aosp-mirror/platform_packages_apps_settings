@@ -77,7 +77,14 @@ public class PanelFeatureProviderImpl implements PanelFeatureProvider {
                     context.sendBroadcast(volumeIntent);
                     return null;
                 } else {
-                    return VolumePanel.create(context);
+                    if (Flags.slicesRetirement()) {
+                        Intent volIntent = new Intent(Settings.ACTION_SOUND_SETTINGS);
+                        volIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        context.startActivity(volIntent);
+                        return null;
+                    } else {
+                        return VolumePanel.create(context);
+                    }
                 }
         }
 
