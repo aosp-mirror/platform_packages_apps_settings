@@ -23,6 +23,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
+import android.provider.Settings;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -34,6 +35,8 @@ public class PageAgnosticNotificationService extends Service {
     private static final String NOTIFICATION_CHANNEL_ID =
             "com.android.settings.development.PageAgnosticNotificationService";
     private static final int NOTIFICATION_ID = 1;
+
+    static final int DISABLE_UPDATES_SETTING = 1;
 
     private NotificationManager mNotificationManager;
 
@@ -106,6 +109,22 @@ public class PageAgnosticNotificationService extends Service {
         return builder.build();
     }
 
+    private void disableAutomaticUpdates() {
+        final int currentState =
+                Settings.Global.getInt(
+                        getApplicationContext().getContentResolver(),
+                        Settings.Global.OTA_DISABLE_AUTOMATIC_UPDATE,
+                        0 /* default */);
+        // 0 means enabled, 1 means disabled
+        if (currentState == 0) {
+            // automatic updates are enabled, disable them
+            Settings.Global.putInt(
+                    getApplicationContext().getContentResolver(),
+                    Settings.Global.OTA_DISABLE_AUTOMATIC_UPDATE,
+                    DISABLE_UPDATES_SETTING);
+        }
+    }
+
     @Override
     public int onStartCommand(@Nullable Intent intent, int flags, int startId) {
         Notification notification = buildNotification();
@@ -113,7 +132,8 @@ public class PageAgnosticNotificationService extends Service {
             mNotificationManager.notify(NOTIFICATION_ID, notification);
         }
 
-        // When clicked on notification, show dialog with full text
+        // No updates should be allowed in page-agnostic mode
+        disableAutomaticUpdates();
         return Service.START_NOT_STICKY;
     }
 }
