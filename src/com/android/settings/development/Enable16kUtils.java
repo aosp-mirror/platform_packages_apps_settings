@@ -17,6 +17,7 @@
 package com.android.settings.development;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -115,5 +116,14 @@ public class Enable16kUtils {
      */
     public static boolean isUsing16kbPages() {
         return PAGE_SIZE == PAGE_SIZE_16KB;
+    }
+
+    /**
+     * show page-agnostic mode warning dialog to user
+     * @param context to start activity
+     */
+    public static void showPageAgnosticWarning(@NonNull Context context) {
+        Intent intent = new Intent(context, PageAgnosticWarningActivity.class);
+        context.startActivityAsUser(intent, UserHandle.SYSTEM);
     }
 }

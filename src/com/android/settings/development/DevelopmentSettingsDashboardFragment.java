@@ -595,6 +595,15 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         if (Utils.isMonkeyRunning()) {
             return;
         }
+
+        // Disabling developer options in page-agnostic mode isn't supported as device isn't in
+        // production state
+        if (Enable16kUtils.isPageAgnosticModeOn(getContext())) {
+            Enable16kUtils.showPageAgnosticWarning(getContext());
+            onDisableDevelopmentOptionsRejected();
+            return;
+        }
+
         DevelopmentSettingsEnabler.setDevelopmentSettingsEnabled(getContext(), false);
         final SystemPropPoker poker = SystemPropPoker.getInstance();
         poker.blockPokes();
