@@ -78,6 +78,21 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
     }
 
     private CharSequence generateLabel(BatteryInfo info) {
+        if (Utils.containsIncompatibleChargers(mContext, TAG)) {
+            return mContext.getString(
+                    com.android.settingslib.R.string.battery_info_status_not_charging);
+        }
+        if (BatteryUtils.isBatteryDefenderOn(info)) {
+            return mContext.getString(
+                    com.android.settingslib.R.string.battery_info_status_charging_on_hold);
+        }
+        if (info.remainingLabel == null
+                || info.batteryStatus == BatteryManager.BATTERY_STATUS_NOT_CHARGING) {
+            return info.statusLabel;
+        }
+        if (mBatterySettingsFeatureProvider.isChargingOptimizationMode(mContext)) {
+            return info.remainingLabel;
+        }
         if (info.pluggedStatus == BatteryManager.BATTERY_PLUGGED_WIRELESS) {
             final CharSequence wirelessChargingLabel =
                     mBatterySettingsFeatureProvider.getWirelessChargingLabel(mContext, info);
@@ -85,18 +100,7 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
                 return wirelessChargingLabel;
             }
         }
-
-        if (Utils.containsIncompatibleChargers(mContext, TAG)) {
-            return mContext.getString(
-                    com.android.settingslib.R.string.battery_info_status_not_charging);
-        } else if (BatteryUtils.isBatteryDefenderOn(info)) {
-            return mContext.getString(
-                    com.android.settingslib.R.string.battery_info_status_charging_on_hold);
-        } else if (info.remainingLabel == null
-                || info.batteryStatus == BatteryManager.BATTERY_STATUS_NOT_CHARGING) {
-            // Present status only if no remaining time or status anomalous
-            return info.statusLabel;
-        } else if (info.statusLabel != null && !info.discharging) {
+        if (info.statusLabel != null && !info.discharging) {
             // Charging state
             if (com.android.settingslib.fuelgauge.BatteryUtils.isChargingStringV2Enabled()) {
                 return info.isFastCharging

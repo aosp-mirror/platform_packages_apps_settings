@@ -50,7 +50,14 @@ public class PanelFeatureProviderImpl implements PanelFeatureProvider {
                 context.sendBroadcast(intent);
                 return null;
             case Settings.Panel.ACTION_NFC:
-                return NfcPanel.create(context);
+                if (Flags.slicesRetirement()) {
+                    Intent nfcIntent = new Intent(Settings.ACTION_NFC_SETTINGS);
+                    nfcIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(nfcIntent);
+                    return null;
+                } else {
+                    return NfcPanel.create(context);
+                }
             case Settings.Panel.ACTION_WIFI:
                 if (Flags.slicesRetirement()) {
                     Intent wifiIntent = new Intent(Settings.ACTION_WIFI_SETTINGS);

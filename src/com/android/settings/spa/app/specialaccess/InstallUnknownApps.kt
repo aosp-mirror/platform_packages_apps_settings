@@ -94,9 +94,7 @@ class InstallUnknownAppsListModel(private val context: Context) :
         private fun isChangeable(
             record: InstallUnknownAppsRecord,
             potentialPackageNames: Set<String>,
-        ) =
-            record.appOpsController.getMode() != MODE_DEFAULT ||
-                record.app.packageName in potentialPackageNames
+        ) = record.app.packageName in potentialPackageNames
 
         private fun getPotentialPackageNames(userId: Int): Set<String> =
             AppGlobals.getPackageManager()
