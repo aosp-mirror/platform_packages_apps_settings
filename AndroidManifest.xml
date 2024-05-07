@@ -231,6 +231,28 @@
             </intent-filter>
         </receiver>
 
+        <receiver
+            android:name=".development.Enable16KBootReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".development.PageAgnosticNotificationService"
+            android:enabled="true"
+            android:exported="false"
+            android:permission="android.permission.POST_NOTIFICATIONS"/>
+
+        <activity android:name=".development.PageAgnosticWarningActivity"
+                  android:enabled="true"
+                  android:launchMode="singleTask"
+                  android:taskAffinity=""
+                  android:excludeFromRecents="true"
+                  android:theme="@*android:style/Theme.DeviceDefault.Dialog.Alert.DayNight"/>
+
         <activity android:name=".SubSettings"
                   android:exported="false"
                   android:theme="@style/Theme.SubSettings"
