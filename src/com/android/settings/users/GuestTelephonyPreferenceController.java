@@ -75,6 +75,7 @@ public class GuestTelephonyPreferenceController extends TogglePreferenceControll
         super.updateState(preference);
         mUserCaps.updateAddUserCapabilities(mContext);
         preference.setVisible(isAvailable() && mUserCaps.mUserSwitcherEnabled
-                && mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_TELEPHONY));
+                && mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_TELEPHONY)
+                && !UserManager.isHeadlessSystemUserMode());
     }
 }
