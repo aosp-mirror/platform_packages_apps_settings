@@ -19,6 +19,7 @@ package com.android.settings.privatespace;
 import static android.app.admin.DevicePolicyManager.ACTION_SET_NEW_PASSWORD;
 
 import static com.android.internal.app.SetScreenLockDialogActivity.LAUNCH_REASON_PRIVATE_SPACE_SETTINGS_ACCESS;
+import static com.android.settings.activityembedding.EmbeddedDeepLinkUtils.tryStartMultiPaneDeepLink;
 
 import android.app.ActivityOptions;
 import android.app.AlertDialog;
@@ -36,11 +37,12 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.app.SetScreenLockDialogActivity;
 import com.android.settings.R;
-import com.android.settings.SettingsActivity;
+import com.android.settings.activityembedding.ActivityEmbeddingUtils;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.transition.SettingsTransitionHelper;
 
@@ -52,7 +54,7 @@ import com.google.android.setupdesign.util.ThemeHelper;
  * user to set a device lock if not set with an alert dialog. This can be launched using the intent
  * com.android.settings.action.OPEN_PRIVATE_SPACE_SETTINGS.
  */
-public class PrivateSpaceAuthenticationActivity extends SettingsActivity {
+public class PrivateSpaceAuthenticationActivity extends FragmentActivity {
     private static final String TAG = "PrivateSpaceAuthCheck";
     public static final String EXTRA_SHOW_PRIVATE_SPACE_UNLOCKED =
             "extra_show_private_space_unlocked";
@@ -76,29 +78,53 @@ public class PrivateSpaceAuthenticationActivity extends SettingsActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (isFinishing()) {
+        if (!(Flags.allowPrivateProfile()
+                && android.multiuser.Flags.enablePrivateSpaceFeatures())) {
+            finish();
             return;
         }
 
-        if (Flags.allowPrivateProfile()
-                && android.multiuser.Flags.enablePrivateSpaceFeatures()) {
-            ThemeHelper.trySetDynamicColor(this);
-            mPrivateSpaceMaintainer =
-                    new Injector().injectPrivateSpaceMaintainer(getApplicationContext());
-            if (getKeyguardManager().isDeviceSecure()) {
-                if (savedInstanceState == null) {
-                    if (mPrivateSpaceMaintainer.doesPrivateSpaceExist()) {
-                        unlockAndLaunchPrivateSpaceSettings(this);
-                    } else {
-                        authenticatePrivateSpaceEntry();
-                    }
+        Intent intent = getIntent();
+        String highlightMenuKey = getString(R.string.menu_key_security);
+        if (shouldShowMultiPaneDeepLink(intent)
+                && tryStartMultiPaneDeepLink(this, intent, highlightMenuKey)) {
+            finish();
+            return;
+        }
+
+        ThemeHelper.trySetDynamicColor(this);
+        mPrivateSpaceMaintainer =
+                new Injector().injectPrivateSpaceMaintainer(getApplicationContext());
+        if (getKeyguardManager().isDeviceSecure()) {
+            if (savedInstanceState == null) {
+                if (mPrivateSpaceMaintainer.doesPrivateSpaceExist()) {
+                    unlockAndLaunchPrivateSpaceSettings(this);
+                } else {
+                    authenticatePrivateSpaceEntry();
                 }
-            } else {
-                promptToSetDeviceLock();
             }
         } else {
-            finish();
+            promptToSetDeviceLock();
         }
+    }
+
+    private boolean shouldShowMultiPaneDeepLink(Intent intent) {
+        if (!ActivityEmbeddingUtils.isEmbeddingActivityEnabled(this)) {
+            return false;
+        }
+
+        // If the activity is task root, starting trampoline is needed in order to show two-pane UI.
+        // If FLAG_ACTIVITY_NEW_TASK is set, the activity will become the start of a new task on
+        // this history stack, so starting trampoline is needed in order to notify the homepage that
+        // the highlight key is changed.
+        if (!isTaskRoot() && (intent.getFlags() & Intent.FLAG_ACTIVITY_NEW_TASK) == 0) {
+            return false;
+        }
+
+        // Only starts trampoline for deep links. Should return false for all the cases that
+        // Settings app starts SettingsActivity or SubSetting by itself.
+        // Other apps should send deep link intent which matches intent filter of the Activity.
+        return intent.getAction() != null;
     }
 
     /** Starts private space setup flow or the PS settings page on device lock authentication */
