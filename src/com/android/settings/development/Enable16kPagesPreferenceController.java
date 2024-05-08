@@ -207,7 +207,10 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
         int status = data.getInt(SystemUpdateManager.KEY_STATUS);
         if (status != SystemUpdateManager.STATUS_UNKNOWN
                 && status != SystemUpdateManager.STATUS_IDLE) {
-            throw new RuntimeException("System has pending update!");
+            throw new RuntimeException(
+                    "System has pending update! Please restart the device to complete applying"
+                            + " pending update. If you are seeing this after using 16KB developer"
+                            + " options, please check configuration and OTA packages!");
         }
 
         // Publish system update info
@@ -313,7 +316,7 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
     }
 
     private void displayToast(String message) {
-        Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(mContext, message, Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -330,7 +333,7 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
 
                     @Override
                     public void onFailure(@NonNull Throwable t) {
-                        Log.e(TAG, "Failed to change the /data partition with ext4");
+                        Log.e(TAG, "Failed to change the /data partition to ext4");
                         displayToast(mContext.getString(R.string.format_ext4_failure_toast));
                     }
                 },
@@ -405,6 +408,7 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
                         LinearLayout.LayoutParams.WRAP_CONTENT,
                         LinearLayout.LayoutParams.WRAP_CONTENT);
         progressBar.setLayoutParams(params);
+        progressBar.setPadding(0, 24, 0, 24);
         builder.setView(progressBar);
         builder.setCancelable(false);
         return builder.create();
