@@ -26,7 +26,10 @@ import com.android.wifitrackerlib.WifiEntry;
 /**
  * The data set which is needed by a Wi-Fi Slice, it collects necessary data from {@link WifiEntry}
  * and provides similar getter methods for corresponding data.
+ *
+ * @deprecated this is not used after V and will be removed.
  */
+@Deprecated(forRemoval = true)
 public class WifiSliceItem {
 
     private final Context mContext;

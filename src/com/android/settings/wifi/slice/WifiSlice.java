@@ -70,7 +70,10 @@ import java.util.stream.Collectors;
 
 /**
  * {@link CustomSliceable} for Wi-Fi, used by generic clients.
+ *
+ * @deprecated This is not used after V and will be removed.
  */
+@Deprecated(forRemoval = true)
 public class WifiSlice implements CustomSliceable {
 
     @VisibleForTesting
