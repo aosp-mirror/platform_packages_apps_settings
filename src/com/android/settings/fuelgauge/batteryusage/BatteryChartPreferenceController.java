@@ -649,9 +649,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
 
     private final class HourlyChartLabelTextGenerator extends BaseLabelTextGenerator
             implements BatteryChartViewModel.LabelTextGenerator {
-        private static final int FULL_CHARGE_BATTERY_LEVEL = 100;
-
-        private boolean mIsFromFullCharge;
+        private boolean mIsStartTimestamp;
         private long mFistTimestamp;
         private long mLatestTimestamp;
 
@@ -664,7 +662,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             long timestamp = timestamps.get(index);
             boolean showMinute = false;
             if (Objects.equal(timestamp, mFistTimestamp)) {
-                if (mIsFromFullCharge) {
+                if (mIsStartTimestamp) {
                     showMinute = true;
                 } else {
                     // starts from 7 days ago
@@ -699,8 +697,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
                 @NonNull final BatteryLevelData batteryLevelData) {
             BatteryLevelData.PeriodBatteryLevelData firstDayLevelData =
                     batteryLevelData.getHourlyBatteryLevelsPerDay().get(0);
-            this.mIsFromFullCharge =
-                    firstDayLevelData.getLevels().get(0) == FULL_CHARGE_BATTERY_LEVEL;
+            this.mIsStartTimestamp = firstDayLevelData.isStartTimestamp();
             this.mFistTimestamp = firstDayLevelData.getTimestamps().get(0);
             this.mLatestTimestamp =
                     getLast(

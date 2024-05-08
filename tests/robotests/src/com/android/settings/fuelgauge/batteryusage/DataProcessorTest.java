@@ -209,7 +209,8 @@ public final class DataProcessorTest {
         final Map<Long, Integer> batteryLevelMap1 =
                 Map.of(timestamps1.get(0), 100, timestamps1.get(1), 100, timestamps1.get(2), 100);
         hourlyBatteryLevelsPerDay.add(
-                new BatteryLevelData.PeriodBatteryLevelData(batteryLevelMap1, timestamps1));
+                new BatteryLevelData.PeriodBatteryLevelData(
+                        batteryLevelMap1, timestamps1, /* isStartTimestamp= */ false));
         // Adds the day 2 data.
         hourlyBatteryLevelsPerDay.add(null);
         // Adds the day 3 data.
@@ -217,7 +218,8 @@ public final class DataProcessorTest {
         final Map<Long, Integer> batteryLevelMap2 =
                 Map.of(timestamps2.get(0), 100, timestamps2.get(1), 100);
         hourlyBatteryLevelsPerDay.add(
-                new BatteryLevelData.PeriodBatteryLevelData(batteryLevelMap2, timestamps2));
+                new BatteryLevelData.PeriodBatteryLevelData(
+                        batteryLevelMap2, timestamps2, /* isStartTimestamp= */ false));
         final List<AppUsageEvent> appUsageEventList = new ArrayList<>();
         // Adds some events before the start timestamp.
         appUsageEventList.add(
@@ -365,7 +367,8 @@ public final class DataProcessorTest {
         final List<BatteryLevelData.PeriodBatteryLevelData> hourlyBatteryLevelsPerDay =
                 new ArrayList<>();
         hourlyBatteryLevelsPerDay.add(
-                new BatteryLevelData.PeriodBatteryLevelData(new ArrayMap<>(), new ArrayList<>()));
+                new BatteryLevelData.PeriodBatteryLevelData(
+                        new ArrayMap<>(), new ArrayList<>(), /* isStartTimestamp= */ false));
         assertThat(
                         DataProcessor.generateAppUsagePeriodMap(
                                 mContext,
@@ -858,7 +861,8 @@ public final class DataProcessorTest {
                 new ArrayList<>();
 
         hourlyBatteryLevelsPerDay.add(
-                new BatteryLevelData.PeriodBatteryLevelData(new ArrayMap<>(), new ArrayList<>()));
+                new BatteryLevelData.PeriodBatteryLevelData(
+                        new ArrayMap<>(), new ArrayList<>(), /* isStartTimestamp= */ false));
 
         assertThat(
                         DataProcessor.getBatteryDiffDataMap(
