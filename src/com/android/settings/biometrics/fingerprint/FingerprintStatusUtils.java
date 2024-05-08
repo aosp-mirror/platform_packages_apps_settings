@@ -16,6 +16,7 @@
 
 package com.android.settings.biometrics.fingerprint;
 
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.hardware.biometrics.BiometricAuthenticator;
 import android.hardware.fingerprint.FingerprintManager;
@@ -25,6 +26,7 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.ParentalControlsUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.utils.StringUtil;
 
 /**
@@ -76,6 +78,10 @@ public class FingerprintStatusUtils {
      * Returns the summary of fingerprint settings entity.
      */
     public String getSummary() {
+        if (shouldShowDisabledByAdminStr()) {
+            return mContext.getString(
+                    com.android.settingslib.widget.restricted.R.string.disabled_by_admin);
+        }
         if (hasEnrolled()) {
             final int numEnrolled = mFingerprintManager.getEnrolledFingerprints(mUserId).size();
             return StringUtil.getIcuPluralsString(mContext, numEnrolled,
@@ -98,5 +104,13 @@ public class FingerprintStatusUtils {
      */
     public boolean hasEnrolled() {
         return mFingerprintManager.hasEnrolledFingerprints(mUserId);
+    }
+
+    /**
+     * Indicates if the fingerprint feature should show the "Disabled by Admin" string.
+     */
+    private boolean shouldShowDisabledByAdminStr() {
+        return RestrictedLockUtilsInternal.checkIfKeyguardFeaturesDisabled(
+                mContext, DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT, mUserId) != null;
     }
 }

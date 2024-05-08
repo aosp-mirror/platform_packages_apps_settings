@@ -18,10 +18,15 @@ package com.android.settings.biometrics.combination;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.hardware.face.FaceManager;
@@ -30,6 +35,7 @@ import android.os.UserManager;
 
 import com.android.settings.testutils.ActiveUnlockTestUtils;
 import com.android.settings.testutils.shadow.ShadowDeviceConfig;
+import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
 
 import org.junit.After;
@@ -46,7 +52,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowDeviceConfig.class})
+@Config(shadows = {ShadowDeviceConfig.class, ShadowRestrictedLockUtilsInternal.class})
 public class BiometricFaceStatusPreferenceControllerTest {
 
     @Rule public final MockitoRule mMocks = MockitoJUnit.rule();
@@ -78,6 +84,7 @@ public class BiometricFaceStatusPreferenceControllerTest {
     @After
     public void tearDown() {
         ActiveUnlockTestUtils.disable(mContext);
+        ShadowRestrictedLockUtilsInternal.reset();
     }
 
     @Test
@@ -109,5 +116,44 @@ public class BiometricFaceStatusPreferenceControllerTest {
         mController.updateState(mPreference);
 
         assertThat(mPreference.isVisible()).isTrue();
+    }
+    @Test
+    public void faceDisabled_whenAdminAndNoFingerprintsEnrolled() {
+        when(mFaceManager.isHardwareDetected()).thenReturn(true);
+        when(mFaceManager.hasEnrolledTemplates(anyInt())).thenReturn(false);
+
+        ShadowRestrictedLockUtilsInternal
+                .setKeyguardDisabledFeatures(DevicePolicyManager.KEYGUARD_DISABLE_FACE);
+
+        final RestrictedPreference restrictedPreference = mock(RestrictedPreference.class);
+        mController.updateState(restrictedPreference);
+
+        verify(restrictedPreference).setDisabledByAdmin(any());
+    }
+
+    @Test
+    public void faceNotDisabled_whenAdminAndFingerprintsEnrolled() {
+        when(mFaceManager.isHardwareDetected()).thenReturn(true);
+        when(mFaceManager.hasEnrolledTemplates(anyInt())).thenReturn(true);
+
+        ShadowRestrictedLockUtilsInternal
+                .setKeyguardDisabledFeatures(DevicePolicyManager.KEYGUARD_DISABLE_FACE);
+
+        final RestrictedPreference restrictedPreference = mock(RestrictedPreference.class);
+        mController.updateState(restrictedPreference);
+
+        verify(restrictedPreference, never()).setDisabledByAdmin(any());
+        verify(restrictedPreference).setEnabled(true);
+    }
+
+    @Test
+    public void faceNotDisabled_whenNoAdmin() {
+        when(mFaceManager.isHardwareDetected()).thenReturn(true);
+
+        final RestrictedPreference restrictedPreference = mock(RestrictedPreference.class);
+        mController.updateState(restrictedPreference);
+
+        verify(restrictedPreference, never()).setDisabledByAdmin(any());
+        verify(restrictedPreference).setEnabled(true);
     }
 }
