@@ -566,7 +566,8 @@
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"每當裝置鎖定"</string>
     <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"閒置 5 分鐘後"</string>
     <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"只在裝置重新啟動後"</string>
-    <string name="private_space_hide_page_title" msgid="4351404195904146088">"私人空間處於鎖定狀態時，系統會隱藏私人空間"</string>
+    <string name="private_space_hide_page_title" msgid="3364639176511877414">"隱藏私人空間"</string>
+    <string name="private_space_hide_when_locked" msgid="6219472348124151797">"私人空間處於鎖定狀態時，系統會隱藏私人空間"</string>
     <string name="private_space_hide_page_summary" msgid="6247773353685839242">"如要防止其他使用者知道裝置上有私人空間，可以從應用程式清單中隱藏該空間"</string>
     <string name="private_space_access_header" msgid="1077082416567150819">"存取隱藏的私人空間"</string>
     <string name="private_space_search_description" msgid="1538155187658429618">"在搜尋列中輸入「私人空間」"</string>
@@ -1810,7 +1811,7 @@
     <string name="app_install_details_group_title" msgid="1172114479073704677">"商店"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"應用程式詳細資料"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"從「<xliff:g id="APP_STORE">%1$s</xliff:g>」安裝的應用程式"</string>
-    <string name="app_install_details_different_initiating_package_summary" msgid="6093306593167176688">"應用程式安裝來源：<xliff:g id="APP_STORE1">%1$s</xliff:g> (透過「<xliff:g id="APP_STORE2">%2$s</xliff:g>」)"</string>
+    <string name="app_install_details_different_initiating_package_summary" msgid="6093306593167176688">"從 <xliff:g id="APP_STORE1">%1$s</xliff:g> 安裝的應用程式 (透過 <xliff:g id="APP_STORE2">%2$s</xliff:g>)"</string>
     <string name="instant_app_details_summary" msgid="417197491598208216">"前往「<xliff:g id="APP_STORE">%1$s</xliff:g>」查看詳情"</string>
     <string name="app_ops_running" msgid="6127474473137428721">"執行中"</string>
     <string name="app_ops_never_used" msgid="9038133162371204506">"(從未使用)"</string>
@@ -2963,8 +2964,7 @@
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{「{orgName}」已為你的工作設定檔安裝憑證機構。該機構將可監察電郵、應用程式和安全網站等工作網絡活動。\n\n如要進一步瞭解此憑證，請聯絡你的管理員。}other{「{orgName}」已為你的工作設定檔安裝憑證機構。該機構將可監察電郵、應用程式和安全網站等工作網絡活動。\n\n如要進一步瞭解這些憑證，請聯絡你的管理員。}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"第三方可以監察你的網絡活動，包括收發電郵、使用應用程式及瀏覽安全網站。\n\n裝置安裝了信任的憑證後，便可能會出現這種情況。"</string>
     <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{檢查憑證}other{檢查憑證}}"</string>
-    <!-- no translation found for user_settings_title (9208831545558787202) -->
-    <skip />
+    <string name="user_settings_title" msgid="9208831545558787202">"使用者"</string>
     <string name="user_list_title" msgid="1387379079186123404">"使用者和個人檔案"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"新增使用者或個人檔案"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"限制存取的個人檔案"</string>
@@ -4905,7 +4905,7 @@
     <string name="media_controls_show_player" msgid="8504571042365814021">"顯示播放器"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"媒體"</string>
     <string name="camera_extensions_fallback_title" msgid="3604579046777004989">"允許相機軟件擴充程式"</string>
-    <string name="camera_extensions_fallback_description" msgid="4306833827773277263">"允許導入預設軟體的進階相機功能，例如 HDR、夜視或其他相機擴充功能。"</string>
+    <string name="camera_extensions_fallback_description" msgid="4306833827773277263">"允許導入預設軟件的進階相機功能，例如 HDR、夜視和其他相機擴充程式。"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"系統將開啟藍牙"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"互聯網"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM 卡"</string>
@@ -4975,8 +4975,7 @@
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"使用列印服務"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"允許多位使用者"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"允許, 多個, 使用者, 批准, 很多"</string>
-    <!-- no translation found for multiple_users_title_keywords (2395593167746225172) -->
-    <skip />
+    <string name="multiple_users_title_keywords" msgid="2395593167746225172">"多位, 使用者, 個人檔案, 人, 帳戶, 切換, 多人"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"使用「無線偵錯」功能"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"使用顯示卡驅動程式偏好設定"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"使用「夜燈模式」"</string>
