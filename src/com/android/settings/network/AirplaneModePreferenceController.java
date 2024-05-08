@@ -98,7 +98,7 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
             if (mAirplaneModeEnabler.isInEcmMode()) {
                 if (mFragment != null) {
                     mFragment.startActivityForResult(
-                            new Intent(TelephonyManager.ACTION_SHOW_NOTICE_ECM_BLOCK_OTHERS, null)
+                            new Intent(TelephonyManager.ACTION_SHOW_NOTICE_ECM_BLOCK_OTHERS, null),
                             REQUEST_CODE_EXIT_ECM);
                 }
                 return true;
