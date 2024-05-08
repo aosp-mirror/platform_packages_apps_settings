@@ -16,8 +16,6 @@
 
 package com.android.settings.fuelgauge.batteryusage;
 
-import static android.content.Intent.FLAG_RECEIVER_REPLACE_PENDING;
-
 import static com.android.settings.fuelgauge.batteryusage.ConvertUtils.utcToLocalTimeForLogging;
 
 import android.app.usage.IUsageStatsManager;
@@ -436,6 +434,23 @@ public final class DatabaseUtils {
                 });
     }
 
+    /** Clears data after a specific startTimestamp in the battery usage database. */
+    public static void clearAllAfter(Context context, long startTimestamp) {
+        AsyncTask.execute(
+                () -> {
+                    try {
+                        final BatteryStateDatabase database =
+                                BatteryStateDatabase.getInstance(context.getApplicationContext());
+                        database.appUsageEventDao().clearAllAfter(startTimestamp);
+                        database.batteryEventDao().clearAllAfter(startTimestamp);
+                        database.batteryStateDao().clearAllAfter(startTimestamp);
+                        database.batteryUsageSlotDao().clearAllAfter(startTimestamp);
+                    } catch (RuntimeException e) {
+                        Log.e(TAG, "clearAllAfter() failed", e);
+                    }
+                });
+    }
+
     /** Clears all out-of-date data in the battery usage database. */
     public static void clearExpiredDataIfNeeded(Context context) {
         AsyncTask.execute(
@@ -456,14 +471,14 @@ public final class DatabaseUtils {
                 });
     }
 
-    /** Clears all data and jobs if current timestamp is out of the range of last recorded job. */
+    /** Clears data after new updated time and refresh periodic job. */
     public static void clearDataAfterTimeChangedIfNeeded(Context context, Intent intent) {
-        if ((intent.getFlags() & FLAG_RECEIVER_REPLACE_PENDING) != 0) {
+        if ((intent.hasExtra(Intent.EXTRA_TIME_PREF_24_HOUR_FORMAT))) {
             BatteryUsageLogUtils.writeLog(
                     context,
                     Action.TIME_UPDATED,
-                    "Database is not cleared because the time change intent is only"
-                            + " for the existing pending receiver.");
+                    "Database is not cleared because the time change intent is"
+                            + " for time format change");
             return;
         }
         AsyncTask.execute(
@@ -861,36 +876,23 @@ public final class DatabaseUtils {
     }
 
     private static void clearDataAfterTimeChangedIfNeededInternal(Context context) {
+        final long currentTime = System.currentTimeMillis();
+        final String logInfo =
+                String.format(Locale.ENGLISH, "clear data after current time = %d", currentTime);
+        Log.d(TAG, logInfo);
+        BatteryUsageLogUtils.writeLog(context, Action.TIME_UPDATED, logInfo);
+        DatabaseUtils.clearAllAfter(context, currentTime);
+        PeriodicJobManager.getInstance(context).refreshJob(/* fromBoot= */ false);
+
         final List<BatteryEvent> batteryLevelRecordEvents =
                 DatabaseUtils.getBatteryEvents(
                         context,
                         Calendar.getInstance(),
                         getLastFullChargeTime(context),
                         BATTERY_LEVEL_RECORD_EVENTS);
-        final long lastRecordTimestamp =
-                batteryLevelRecordEvents.isEmpty()
-                        ? INVALID_TIMESTAMP
-                        : batteryLevelRecordEvents.get(0).getTimestamp();
-        final long nextRecordTimestamp =
-                TimestampUtils.getNextEvenHourTimestamp(lastRecordTimestamp);
-        final long currentTime = System.currentTimeMillis();
-        final boolean isOutOfTimeRange =
-                lastRecordTimestamp == INVALID_TIMESTAMP
-                        || currentTime < lastRecordTimestamp
-                        || currentTime > nextRecordTimestamp;
-        final String logInfo =
-                String.format(
-                        Locale.ENGLISH,
-                        "clear database = %b, current time = %d, last record time = %d",
-                        isOutOfTimeRange,
-                        currentTime,
-                        lastRecordTimestamp);
-        Log.d(TAG, logInfo);
-        BatteryUsageLogUtils.writeLog(context, Action.TIME_UPDATED, logInfo);
-        if (isOutOfTimeRange) {
-            DatabaseUtils.clearAll(context);
-            PeriodicJobManager.getInstance(context)
-                    .refreshJob(/* fromBoot= */ false);
+        if (batteryLevelRecordEvents.isEmpty()) {
+            // Take a snapshot of battery usage data immediately if there's no battery events.
+            BatteryUsageDataLoader.enqueueWork(context, /* isFullChargeStart= */ true);
         }
     }
 

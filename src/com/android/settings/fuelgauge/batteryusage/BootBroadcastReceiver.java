@@ -67,7 +67,7 @@ public final class BootBroadcastReceiver extends BroadcastReceiver {
                 refreshJobs(context);
                 break;
             case Intent.ACTION_TIME_CHANGED:
-                Log.d(TAG, "refresh job and clear all data from action=" + action);
+                Log.d(TAG, "refresh job and clear data from action=" + action);
                 DatabaseUtils.clearDataAfterTimeChangedIfNeeded(context, intent);
                 break;
             default:

@@ -65,6 +65,10 @@ public interface BatteryEventDao {
     @Query("DELETE FROM BatteryEventEntity WHERE timestamp <= :timestamp")
     void clearAllBefore(long timestamp);
 
+    /** Deletes all recorded data after a specific timestamp. */
+    @Query("DELETE FROM BatteryEventEntity WHERE timestamp >= :timestamp")
+    void clearAllAfter(long timestamp);
+
     /** Clears all recorded data in the database. */
     @Query("DELETE FROM BatteryEventEntity")
     void clearAll();
