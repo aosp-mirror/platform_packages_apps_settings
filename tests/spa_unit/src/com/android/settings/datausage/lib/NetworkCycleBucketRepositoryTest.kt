@@ -42,6 +42,13 @@ class NetworkCycleBucketRepositoryTest {
 
     private val mockNetworkCycleDataRepository = mock<NetworkCycleDataRepository>()
 
+    private fun createRepository(buckets: List<Bucket>) = NetworkCycleBucketRepository(
+        context = context,
+        networkTemplate = template,
+        buckets = buckets,
+        networkCycleDataRepository = mockNetworkCycleDataRepository,
+    )
+
     @Test
     fun loadCycles_byPolicy() {
         val policy = mock<NetworkPolicy> {
@@ -52,9 +59,7 @@ class NetworkCycleBucketRepositoryTest {
         mockNetworkCycleDataRepository.stub {
             on { getPolicy() } doReturn policy
         }
-        val repository = NetworkCycleBucketRepository(
-            context = context,
-            networkTemplate = template,
+        val repository = createRepository(
             buckets = listOf(
                 Bucket(
                     uid = 0,
@@ -62,8 +67,7 @@ class NetworkCycleBucketRepositoryTest {
                     startTimeStamp = CYCLE1_START_TIME,
                     endTimeStamp = CYCLE1_END_TIME,
                 )
-            ),
-            networkCycleDataRepository = mockNetworkCycleDataRepository,
+            )
         )
 
         val cycles = repository.loadCycles()
@@ -78,13 +82,14 @@ class NetworkCycleBucketRepositoryTest {
     }
 
     @Test
-    fun loadCycles_asFourWeeks() {
-        mockNetworkCycleDataRepository.stub {
-            on { getPolicy() } doReturn null
+    fun loadCycles_policyHasNoCycle_asFourWeeks() {
+        val policy = mock<NetworkPolicy> {
+            on { cycleIterator() } doReturn emptyList<Range<ZonedDateTime>>().iterator()
         }
-        val repository = NetworkCycleBucketRepository(
-            context = context,
-            networkTemplate = template,
+        mockNetworkCycleDataRepository.stub {
+            on { getPolicy() } doReturn policy
+        }
+        val repository = createRepository(
             buckets = listOf(
                 Bucket(
                     uid = 0,
@@ -92,8 +97,34 @@ class NetworkCycleBucketRepositoryTest {
                     startTimeStamp = CYCLE2_START_TIME,
                     endTimeStamp = CYCLE2_END_TIME,
                 )
+            )
+        )
+
+        val cycles = repository.loadCycles()
+
+        assertThat(cycles).containsExactly(
+            NetworkUsageData(
+                startTime = CYCLE2_END_TIME - DateUtils.WEEK_IN_MILLIS * 4,
+                endTime = CYCLE2_END_TIME,
+                usage = CYCLE2_BYTES,
             ),
-            networkCycleDataRepository = mockNetworkCycleDataRepository,
+        )
+    }
+
+    @Test
+    fun loadCycles_noPolicy_asFourWeeks() {
+        mockNetworkCycleDataRepository.stub {
+            on { getPolicy() } doReturn null
+        }
+        val repository = createRepository(
+            buckets = listOf(
+                Bucket(
+                    uid = 0,
+                    bytes = CYCLE2_BYTES,
+                    startTimeStamp = CYCLE2_START_TIME,
+                    endTimeStamp = CYCLE2_END_TIME,
+                )
+            )
         )
 
         val cycles = repository.loadCycles()
@@ -114,9 +145,7 @@ class NetworkCycleBucketRepositoryTest {
             endTime = CYCLE4_END_TIME,
             usage = CYCLE3_BYTES + CYCLE4_BYTES,
         )
-        val repository = NetworkCycleBucketRepository(
-            context = context,
-            networkTemplate = template,
+        val repository = createRepository(
             buckets = listOf(
                 Bucket(
                     uid = 0,
@@ -131,7 +160,6 @@ class NetworkCycleBucketRepositoryTest {
                     endTimeStamp = CYCLE4_END_TIME,
                 ),
             ),
-            networkCycleDataRepository = mockNetworkCycleDataRepository,
         )
 
         val summary = repository.queryChartData(cycle)
