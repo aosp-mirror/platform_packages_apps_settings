@@ -26,7 +26,7 @@
     <string name="device_info_protected_single_press" msgid="3810785480060743677">"Presiona para obtener más información"</string>
     <string name="show_dev_countdown" msgid="2936506773086395069">"{count,plural, =1{Ahora estás a # paso de activar las opciones para desarrolladores}other{Ahora estás a # pasos de activar las opciones para desarrolladores}}"</string>
     <string name="show_dev_on" msgid="2840850085134853754">"¡Ya eres desarrollador!"</string>
-    <string name="show_dev_already" msgid="7041756429707644630">"No es necesario, ya eres programador."</string>
+    <string name="show_dev_already" msgid="7041756429707644630">"No es necesario, ya eres desarrollador."</string>
     <string name="dev_settings_disabled_warning" msgid="6971867026249671244">"Primero habilita las opciones para programador."</string>
     <string name="dev_settings_available_to_admin_only_warning" msgid="3408243404879083111">"Solo los usuarios administradores pueden acceder a la configuración para desarrolladores."</string>
     <string name="header_category_system" msgid="1665516346845259058">"Sistema"</string>
@@ -554,7 +554,7 @@
     <string name="private_space_face_unlock_title" msgid="462248384776453613">"Desbloqueo facial para espacio privado"</string>
     <string name="private_space_category_ways_to_unlock" msgid="4356631225316950046">"Métodos de desbloqueo"</string>
     <string name="private_space_screen_lock_summary" msgid="394837965365561070">"Igual al bloqueo de pantalla del dispositivo"</string>
-    <string name="private_space_new_lock_title" msgid="9056139964133004094">"¿Quieres un nuevo bloqueo para tu espacio privado?"</string>
+    <string name="private_space_new_lock_title" msgid="9056139964133004094">"¿Elegir un nuevo bloqueo para tu espacio privado?"</string>
     <string name="private_space_auto_lock_title" msgid="8663409382910601261">"Bloquear espacio privado automáticamente"</string>
     <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"Puedes bloquear el espacio privado automáticamente si no usas el dispositivo por un cierto período"</string>
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"Cada vez que el dispositivo se bloquea"</string>
@@ -4248,7 +4248,7 @@
     <string name="automatic_storage_manager_activation_warning" msgid="170508173207142665">"Tu almacenamiento ahora está a cargo del administrador de almacenamiento"</string>
     <string name="account_for_section_header" msgid="7466759342105251096">"Cuentas de <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="auto_sync_account_title" msgid="1070908045600374254">"Sincronizar datos de apps automáticamente"</string>
-    <string name="auto_sync_account_summary" msgid="7580352130028957346">"Permitir que las apps actualicen datos automáticamente"</string>
+    <string name="auto_sync_account_summary" msgid="7580352130028957346">"Permite que las apps actualicen datos automáticamente"</string>
     <string name="account_sync_title" msgid="7036067017433297574">"Sincronización de la cuenta"</string>
     <string name="account_sync_summary_some_on" msgid="911460286297968724">"Sincronización activada para <xliff:g id="ID_1">%1$d</xliff:g> de <xliff:g id="ID_2">%2$d</xliff:g> elementos"</string>
     <string name="account_sync_summary_all_on" msgid="2953682111836599841">"Sincronización activada para todos los elementos"</string>
@@ -4373,7 +4373,7 @@
     <string name="credman_confirmation_turn_off_positive_button" msgid="5678773011513369161">"Desactivar"</string>
     <string name="credman_confirmation_change_provider_positive_button" msgid="7732302992885116967">"Cambiar"</string>
     <string name="credman_limit_error_msg_title" msgid="1525814645803612135">"Solo puedes tener 5 servicios activos"</string>
-    <string name="credman_limit_error_msg" msgid="2521803280130310063">"Desactiva al menos 1 servicio para agregar otro"</string>
+    <string name="credman_limit_error_msg" msgid="2521803280130310063">"Desactiva al menos 1 servicio para agregar otro."</string>
     <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"%1$s usa el contenido de tu pantalla para determinar qué se puede autocompletar."</string>
     <string name="credman_error_message_title" msgid="4099557206946333568">"Límite de servicios de contraseñas, llaves de acceso y datos"</string>
     <string name="credman_error_message" msgid="8334797097200415449">"Puedes tener hasta 5 servicios de contraseñas, llaves de acceso y datos activos al mismo tiempo. Desactiva un servicio para agregar otros."</string>
@@ -4582,10 +4582,8 @@
     <string name="summary_supported_service" msgid="4320535903444834786">"Puedes enviar mensajes de texto a quien quieras, incluidos los servicios de emergencia. Tu teléfono se volverá a conectar a la red móvil cuando esté disponible."</string>
     <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"La mensajería satelital podría demorar más y solo está disponible en ciertas áreas. El clima y ciertas estructuras podrían afectar su conexión. Las llamadas satelitales no están disponibles. Es posible que puedas realizar las llamadas de emergencia.\n\nLos cambios en la cuenta podrían demorar en mostrarse en Configuración. Para obtener más detalles, comunícate con tu operador."</string>
     <string name="more_about_satellite_messaging" msgid="3385673133561348509">"Más información sobre la mensajería satelital"</string>
-    <!-- no translation found for satellite_warning_dialog_title (1610117852475376931) -->
-    <skip />
-    <!-- no translation found for satellite_warning_dialog_content (936419945275934955) -->
-    <skip />
+    <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"No se puede activar <xliff:g id="FUNCTION">%1$s</xliff:g>"</string>
+    <string name="satellite_warning_dialog_content" msgid="936419945275934955">"Para activar <xliff:g id="FUNCTION">%1$s</xliff:g>, primero termina la conexión satelital"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Nombres de puntos de acceso"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"No está disponible cuando estás conectado a <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
