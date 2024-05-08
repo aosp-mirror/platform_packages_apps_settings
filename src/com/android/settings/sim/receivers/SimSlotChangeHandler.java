@@ -385,6 +385,10 @@ public class SimSlotChangeHandler {
     }
 
     private void startSimConfirmDialogActivity(int subId) {
+        if (!isSuwFinished(mContext)) {
+            Log.d(TAG, "Still in SUW. Do nothing");
+            return;
+        }
         if (!SubscriptionManager.isUsableSubscriptionId(subId)) {
             Log.i(TAG, "Unable to enable subscription due to invalid subscription ID.");
             return;

@@ -18,11 +18,10 @@ package com.android.settings.datausage.lib
 
 import android.content.Context
 import android.net.NetworkTemplate
-import android.text.format.DateUtils
 import android.util.Range
+import com.android.settings.datausage.lib.NetworkCycleDataRepository.Companion.asFourWeeks
 import com.android.settings.datausage.lib.NetworkCycleDataRepository.Companion.bucketRange
 import com.android.settings.datausage.lib.NetworkCycleDataRepository.Companion.getCycles
-import com.android.settings.datausage.lib.NetworkCycleDataRepository.Companion.reverseBucketRange
 import com.android.settings.datausage.lib.NetworkStatsRepository.Companion.Bucket
 import com.android.settings.datausage.lib.NetworkStatsRepository.Companion.aggregate
 import com.android.settings.datausage.lib.NetworkStatsRepository.Companion.filterTime
@@ -39,16 +38,11 @@ class NetworkCycleBucketRepository(
         getCycles().map { aggregateUsage(it) }.filter { it.usage > 0 }
 
     private fun getCycles(): List<Range<Long>> =
-        networkCycleDataRepository.getPolicy()?.getCycles() ?: queryCyclesAsFourWeeks()
+        networkCycleDataRepository.getPolicy()?.getCycles().orEmpty()
+            .ifEmpty { queryCyclesAsFourWeeks() }
 
-    private fun queryCyclesAsFourWeeks(): List<Range<Long>> {
-        val timeRange = buckets.aggregate()?.timeRange ?: return emptyList()
-        return reverseBucketRange(
-            startTime = timeRange.lower,
-            endTime = timeRange.upper,
-            step = DateUtils.WEEK_IN_MILLIS * 4,
-        )
-    }
+    private fun queryCyclesAsFourWeeks(): List<Range<Long>> =
+        buckets.aggregate()?.timeRange.asFourWeeks()
 
     fun queryChartData(usageData: NetworkUsageData) = NetworkCycleChartData(
         total = usageData,
