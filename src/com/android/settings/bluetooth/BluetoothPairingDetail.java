@@ -16,10 +16,15 @@
 
 package com.android.settings.bluetooth;
 
+import static com.android.settings.network.SatelliteWarningDialogActivity.EXTRA_TYPE_OF_SATELLITE_WARNING_DIALOG;
+import static com.android.settings.network.SatelliteWarningDialogActivity.TYPE_IS_BLUETOOTH;
+
 import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -27,9 +32,16 @@ import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
+import com.android.settings.network.SatelliteRepository;
+import com.android.settings.network.SatelliteWarningDialogActivity;
 import com.android.settingslib.bluetooth.BluetoothDeviceFilter;
 import com.android.settingslib.search.Indexable;
 import com.android.settingslib.widget.FooterPreference;
+
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 /**
  * BluetoothPairingDetail is a page to scan bluetooth devices and pair them.
@@ -55,7 +67,33 @@ public class BluetoothPairingDetail extends BluetoothDevicePairingDetailBase imp
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        if (mayStartSatelliteWarningDialog()) {
+            finish();
+            return;
+        }
         use(BluetoothDeviceRenamePreferenceController.class).setFragment(this);
+    }
+
+    private boolean mayStartSatelliteWarningDialog() {
+        SatelliteRepository satelliteRepository = new SatelliteRepository(this.getContext());
+        boolean isSatelliteOn = true;
+        try {
+            isSatelliteOn =
+                    satelliteRepository.requestIsEnabled(
+                            Executors.newSingleThreadExecutor()).get(3000, TimeUnit.MILLISECONDS);
+        } catch (InterruptedException | ExecutionException | TimeoutException e) {
+            Log.e(TAG, "Error to get satellite status : " + e);
+        }
+        if (!isSatelliteOn) {
+            return false;
+        }
+        startActivity(
+                new Intent(getContext(), SatelliteWarningDialogActivity.class)
+                        .putExtra(
+                                EXTRA_TYPE_OF_SATELLITE_WARNING_DIALOG,
+                                TYPE_IS_BLUETOOTH)
+        );
+        return true;
     }
 
     @Override
