@@ -57,6 +57,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.TimeZone;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -495,6 +496,22 @@ public final class DatabaseUtils {
                 });
     }
 
+    /** Clears all data and reset jobs if timezone changed. */
+    public static void clearDataAfterTimeZoneChangedIfNeeded(Context context) {
+        AsyncTask.execute(
+                () -> {
+                    try {
+                        clearDataAfterTimeZoneChangedIfNeededInternal(context);
+                    } catch (RuntimeException e) {
+                        Log.e(TAG, "clearDataAfterTimeZoneChangedIfNeeded() failed", e);
+                        BatteryUsageLogUtils.writeLog(
+                                context,
+                                Action.TIMEZONE_UPDATED,
+                                "clearDataAfterTimeZoneChangedIfNeeded() failed" + e);
+                    }
+                });
+    }
+
     /** Returns the timestamp for 00:00 6 days before the calendar date. */
     public static long getTimestampSixDaysAgo(Calendar calendar) {
         Calendar startCalendar =
@@ -894,6 +911,20 @@ public final class DatabaseUtils {
             // Take a snapshot of battery usage data immediately if there's no battery events.
             BatteryUsageDataLoader.enqueueWork(context, /* isFullChargeStart= */ true);
         }
+    }
+
+    private static void clearDataAfterTimeZoneChangedIfNeededInternal(Context context) {
+        final String logInfo =
+                String.format(
+                        Locale.ENGLISH,
+                        "clear database for new time zone = %s",
+                        TimeZone.getDefault().toString());
+        BatteryUsageLogUtils.writeLog(context, Action.TIMEZONE_UPDATED, logInfo);
+        Log.d(TAG, logInfo);
+        DatabaseUtils.clearAll(context);
+        PeriodicJobManager.getInstance(context).refreshJob(/* fromBoot= */ false);
+        // Take a snapshot of battery usage data immediately
+        BatteryUsageDataLoader.enqueueWork(context, /* isFullChargeStart= */ true);
     }
 
     private static long loadLongFromContentProvider(

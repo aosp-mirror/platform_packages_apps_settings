@@ -174,6 +174,20 @@ public final class BootBroadcastReceiverTest {
     }
 
     @Test
+    public void onReceive_withTimeZoneChangedIntent_clearAllDataAndRefreshesJob()
+            throws InterruptedException {
+        BatteryTestUtils.insertDataToBatteryStateTable(
+                mContext, Clock.systemUTC().millis(), "com.android.systemui");
+        assertThat(mDao.getAllAfter(0).size()).isEqualTo(1);
+
+        mReceiver.onReceive(mContext, new Intent(Intent.ACTION_TIMEZONE_CHANGED));
+
+        TimeUnit.MILLISECONDS.sleep(100);
+        assertThat(mDao.getAllAfter(0)).isEmpty();
+        assertThat(mShadowAlarmManager.peekNextScheduledAlarm()).isNotNull();
+    }
+
+    @Test
     public void invokeJobRecheck_broadcastsIntent() {
         BootBroadcastReceiver.invokeJobRecheck(mContext);
 
