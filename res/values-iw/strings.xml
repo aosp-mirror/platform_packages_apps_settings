@@ -566,7 +566,8 @@
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"בכל פעם שהמכשיר ננעל"</string>
     <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"אחרי 5 דקות של חוסר פעילות"</string>
     <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"רק לאחר הפעלה מחדש של המכשיר"</string>
-    <string name="private_space_hide_page_title" msgid="4351404195904146088">"הסתרת המרחב הפרטי כשהוא נעול"</string>
+    <string name="private_space_hide_page_title" msgid="3364639176511877414">"הסתרת המרחב הפרטי"</string>
+    <string name="private_space_hide_when_locked" msgid="6219472348124151797">"הסתרת המרחב הפרטי כשהוא נעול"</string>
     <string name="private_space_hide_page_summary" msgid="6247773353685839242">"כדי למנוע מאנשים אחרים לדעת שיש לך מרחב פרטי במכשיר, אפשר להסתיר אותו מרשימת האפליקציות"</string>
     <string name="private_space_access_header" msgid="1077082416567150819">"גישה למרחב הפרטי כשהוא מוסתר"</string>
     <string name="private_space_search_description" msgid="1538155187658429618">"בסרגל החיפוש, מזינים \"המרחב הפרטי\""</string>
@@ -1811,8 +1812,7 @@
     <string name="app_install_details_group_title" msgid="1172114479073704677">"חנות"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"פרטי האפליקציה"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"האפליקציה הותקנה מ: <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
-    <!-- no translation found for app_install_details_different_initiating_package_summary (6093306593167176688) -->
-    <skip />
+    <string name="app_install_details_different_initiating_package_summary" msgid="6093306593167176688">"האפליקציה הותקנה מ-<xliff:g id="APP_STORE1">%1$s</xliff:g> (דרך <xliff:g id="APP_STORE2">%2$s</xliff:g>)"</string>
     <string name="instant_app_details_summary" msgid="417197491598208216">"מידע נוסף באפליקציה <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
     <string name="app_ops_running" msgid="6127474473137428721">"פועל"</string>
     <string name="app_ops_never_used" msgid="9038133162371204506">"(מעולם לא נעשה שימוש)"</string>
@@ -2965,8 +2965,7 @@
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{{orgName} התקין רשות אישורים אחת לפרופיל העבודה שלך. ייתכן שהרשות תאפשר לו לנהל מעקב אחר פעילות רשת בעבודה, כולל אימיילים, אפליקציות ואתרים מאובטחים.\n\nלמידע נוסף לגבי האישור, יש ליצור קשר עם האדמין.}one{{orgName} התקין רשויות אישורים לפרופיל העבודה שלך. ייתכן שהרשויות יאפשרו לו לנהל מעקב אחר פעילות רשת בעבודה, כולל אימיילים, אפליקציות ואתרים מאובטחים.\n\nלמידע נוסף לגבי האישורים, יש ליצור קשר עם האדמין.}two{{orgName} התקין רשויות אישורים לפרופיל העבודה שלך. ייתכן שהרשויות יאפשרו לו לנהל מעקב אחר פעילות רשת בעבודה, כולל אימיילים, אפליקציות ואתרים מאובטחים.\n\nלמידע נוסף לגבי האישורים, יש ליצור קשר עם האדמין.}other{{orgName} התקין רשויות אישורים לפרופיל העבודה שלך. ייתכן שהרשויות יאפשרו לו לנהל מעקב אחר פעילות רשת בעבודה, כולל אימיילים, אפליקציות ואתרים מאובטחים.\n\nלמידע נוסף לגבי האישורים, יש ליצור קשר עם האדמין.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"צד שלישי מסוגל לעקוב אחר הפעילות שלך ברשת, כולל הודעות אימייל, אפליקציות ואתרים מאובטחים.\n\nאישור מהימן המותקן במכשיר מאפשר זאת."</string>
     <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{בדיקת אישור אחד}one{בדיקת אישורים}two{בדיקת אישורים}other{בדיקת אישורים}}"</string>
-    <!-- no translation found for user_settings_title (9208831545558787202) -->
-    <skip />
+    <string name="user_settings_title" msgid="9208831545558787202">"משתמשים"</string>
     <string name="user_list_title" msgid="1387379079186123404">"משתמשים ופרופילים"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"הוספת משתמש או פרופיל"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"פרופיל מוגבל"</string>
@@ -4643,10 +4642,8 @@
     <string name="summary_supported_service" msgid="4320535903444834786">"אפשר לשלוח הודעות טקסט לכל אחד, כולל לשירותי החירום. הטלפון יתחבר מחדש לרשת סלולרית כשהיא תהיה זמינה."</string>
     <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"העברת הודעות באמצעות לוויין אורכת זמן רב יותר וזמינה רק בחלק מהאזורים. מזג אוויר ומבנים מסוימים עשויים להשפיע על חיבור הלוויין. אי אפשר להתקשר באמצעות לוויין. יכול להיות שאפשר לבצע שיחות חירום.\n\nיכול להיות שהשינויים בחשבון יופיעו ב\'הגדרות\' לאחר זמן מה. למידע נוסף, ניתן לפנות לספק הסלולרי."</string>
     <string name="more_about_satellite_messaging" msgid="3385673133561348509">"מידע נוסף על העברת הודעות באמצעות לוויין"</string>
-    <!-- no translation found for satellite_warning_dialog_title (1610117852475376931) -->
-    <skip />
-    <!-- no translation found for satellite_warning_dialog_content (936419945275934955) -->
-    <skip />
+    <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"אי אפשר להפעיל <xliff:g id="FUNCTION">%1$s</xliff:g>"</string>
+    <string name="satellite_warning_dialog_content" msgid="936419945275934955">"כדי להפעיל <xliff:g id="FUNCTION">%1$s</xliff:g>, צריך להשבית קודם את חיבור הלוויין"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"‏שמות של נקודות גישה (APN)"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"לא זמין כשהמכשיר מחובר ל-<xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -4910,8 +4907,7 @@
     <string name="media_controls_show_player" msgid="8504571042365814021">"הצגת הנגן"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"מדיה"</string>
     <string name="camera_extensions_fallback_title" msgid="3604579046777004989">"הפעלת תוספים לתוכנה של המצלמה"</string>
-    <!-- no translation found for camera_extensions_fallback_description (4306833827773277263) -->
-    <skip />
+    <string name="camera_extensions_fallback_description" msgid="4306833827773277263">"‏האפשרות הזו מפעילה את הטמעת התוכנה שמוגדרת כברירת מחדל וקשורה לתכונות המתקדמות של המצלמה, כמו HDR, תוסף למצב \'ראיית לילה\' ותוספים אחרים."</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"‏Bluetooth יופעל"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"אינטרנט"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"‏כרטיסי SIM"</string>
@@ -4981,8 +4977,7 @@
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"שימוש בשירות הדפסה"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"הרשאה למשתמשים מרובים"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"אפשר, משתמשים, מרובים, אישור, רבים"</string>
-    <!-- no translation found for multiple_users_title_keywords (2395593167746225172) -->
-    <skip />
+    <string name="multiple_users_title_keywords" msgid="2395593167746225172">"ריבוי, רבים, משתמשים, משתמשות, פרופילים, אנשים, אנשי קשר, חשבונות, חשבונות אישיים, החלפה, מעבר, שינוי, הרבה"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"ניפוי באגים אלחוטי"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"שימוש בהעדפות של מנהל ההתקן לגרפיקה"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"שימוש בתאורת לילה"</string>

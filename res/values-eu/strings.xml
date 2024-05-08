@@ -566,7 +566,8 @@
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"Gailua blokeatzen den aldiro"</string>
     <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"5 minutuz inaktibo egon ondoren"</string>
     <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"Gailua berrabiarazi ondoren soilik"</string>
-    <string name="private_space_hide_page_title" msgid="4351404195904146088">"Ezkutatu eremu pribatua hura blokeatzean"</string>
+    <string name="private_space_hide_page_title" msgid="3364639176511877414">"Ezkutatu eremu pribatua"</string>
+    <string name="private_space_hide_when_locked" msgid="6219472348124151797">"Ezkutatu eremu pribatua hura blokeatzean"</string>
     <string name="private_space_hide_page_summary" msgid="6247773353685839242">"Inork jakin ez dezan gailuan eremu pribatu bat daukazula, aplikazio-zerrendatik ezkuta dezakezu"</string>
     <string name="private_space_access_header" msgid="1077082416567150819">"Atzitu eremu pribatua ezkutatuta dagoenean ere"</string>
     <string name="private_space_search_description" msgid="1538155187658429618">"Bilaketa-barran, idatzi \"eremu pribatua\"."</string>
@@ -2751,7 +2752,7 @@
     <string name="backup_erase_dialog_title" msgid="5892431263348766484"></string>
     <string name="backup_erase_dialog_message" msgid="2250872501409574331">"Wifi-sareetako pasahitzen, laster-marken, bestelako ezarpenen eta aplikazioetako datuen babeskopiak egiteari utzi eta Google-ren zerbitzarietako kopia guztiak ezabatu nahi dituzu?"</string>
     <string name="fullbackup_erase_dialog_message" msgid="2379053988557486162">"Gailuko datuen (adibidez, Wi-Fi pasahitzak eta deien historia) eta aplikazioetako datuen (besteak beste, ezarpenak eta aplikazioek gordetako fitxategiak) babeskopiak egiteari utzi nahi diozu eta urruneko zerbitzarietako kopia guztiak ezabatu nahi dituzu?"</string>
-    <string name="fullbackup_data_summary" msgid="971587401251601473">"Egin babeskopiak automatikoki urrunetik, bai gailuetako datuenak (esaterako, Wi-Fi sareetako pasahitzak eta deien historia), bai aplikazioetako datuenak (esaterako, ezarpenak eta aplikazioek gordetako fitxategiak).\n\nBabeskopiak automatikoki egiteko aukera aktibatzean, gailuko eta aplikazioetako datuak urrunetik gordetzen dira aldizka. Aplikazioetako datuak aplikazioek gordetako edozein datu izan daitezke (garatzaileen ezarpenen arabera), eta kontuzkoak izan litezkeen datuak ere sar daitezke (adibidez, kontaktuak, mezuak eta argazkiak)."</string>
+    <string name="fullbackup_data_summary" msgid="971587401251601473">"Egin babeskopiak automatikoki urrunetik, bai gailuetako datuenak (esaterako, Wi-Fi sareetako pasahitzak eta deien historia), bai aplikazioetako datuenak (esaterako, ezarpenak eta aplikazioek biltegiratutako fitxategiak).\n\nBabeskopiak automatikoki egiteko aukera aktibatzean, gailuko eta aplikazioetako datuak urrunetik gordetzen dira aldizka. Aplikazioetako datuak aplikazioek gordetako edozein datu izan daitezke (garatzaileen ezarpenen arabera), eta kontuzkoak izan litezkeen datuak ere sar daitezke (adibidez, kontaktuak, mezuak eta argazkiak)."</string>
     <string name="device_admin_settings_title" msgid="31392408594557070">"Gailua administratzeko aplikazioaren ezarpenak"</string>
     <string name="active_device_admin_msg" msgid="7744106305636543184">"Gailua administratzeko aplikazioa"</string>
     <string name="remove_device_admin" msgid="3143059558744287259">"Desaktibatu gailua administratzeko aplikazioa"</string>
@@ -2963,8 +2964,7 @@
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{{orgName} domeinuak autoritate ziurtagiri-emaile bat instalatu dizu laneko profilean. Hortaz, baliteke domeinuak laneko sareko jarduerak gainbegiratu ahal izatea; besteak beste, posta elektronikoan, aplikazioetan eta webgune seguruetan egiten duzuna.\n\nZiurtagiri horri buruzko informazio gehiago lortzeko, jarri administratzailearekin harremanetan.}other{{orgName} domeinuak autoritate ziurtagiri-emaileak instalatu dizkizu laneko profilean. Hortaz, baliteke domeinuak laneko sareko jarduerak gainbegiratu ahal izatea; besteak beste, posta elektronikoan, aplikazioetan eta webgune seguruetan egiten duzuna.\n\nZiurtagiri horiei buruzko informazio gehiago lortzeko, jarri administratzailearekin harremanetan.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"Hirugarren alderdi bat sarean bideratzen dituzun jarduerak kontrola ditzake, mezu elektronikoak, aplikazioak eta webgune seguruak barne.\n\nGailuan instalatu duzun kredentzial fidagarri batek egiten du hori posible."</string>
     <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{Ikusi ziurtagiria}other{Ikusi ziurtagiriak}}"</string>
-    <!-- no translation found for user_settings_title (9208831545558787202) -->
-    <skip />
+    <string name="user_settings_title" msgid="9208831545558787202">"Erabiltzaileak"</string>
     <string name="user_list_title" msgid="1387379079186123404">"Erabiltzaileak eta profilak"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"Gehitu erabiltzailea edo profila"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"Profil murriztua"</string>
@@ -4975,8 +4975,7 @@
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Erabili inprimatze-zerbitzua"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Baimendu erabiltzaile bat baino gehiago"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"eman, baimena, onartu, hainbat, erabiltzaile, bat, baino, gehiago"</string>
-    <!-- no translation found for multiple_users_title_keywords (2395593167746225172) -->
-    <skip />
+    <string name="multiple_users_title_keywords" msgid="2395593167746225172">"hainbat, erabiltzaile, profil, pertsona, kontu, aldatu, asko"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Erabili hari gabeko arazketa"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Erabili grafikoen kontrolatzailearen hobespenak"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"Erabili gaueko argia"</string>

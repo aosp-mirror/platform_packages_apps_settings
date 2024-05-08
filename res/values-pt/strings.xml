@@ -566,7 +566,8 @@
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"Sempre que o dispositivo for bloqueado"</string>
     <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"Depois de cinco minutos de inatividade"</string>
     <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"Só depois que o dispositivo for reiniciado"</string>
-    <string name="private_space_hide_page_title" msgid="4351404195904146088">"Ocultar espaço privado quando bloqueado"</string>
+    <string name="private_space_hide_page_title" msgid="3364639176511877414">"Ocultar espaço privado"</string>
+    <string name="private_space_hide_when_locked" msgid="6219472348124151797">"Ocultar espaço privado quando bloqueado"</string>
     <string name="private_space_hide_page_summary" msgid="6247773353685839242">"Oculte o espaço privado na sua lista de apps para que outras pessoas não saibam que ele está no dispositivo"</string>
     <string name="private_space_access_header" msgid="1077082416567150819">"Acessar o espaço privado quando oculto"</string>
     <string name="private_space_search_description" msgid="1538155187658429618">"Na barra de pesquisa, digite “espaço privado”"</string>
@@ -1810,8 +1811,7 @@
     <string name="app_install_details_group_title" msgid="1172114479073704677">"Loja"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"Detalhes do app"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"App instalado da <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
-    <!-- no translation found for app_install_details_different_initiating_package_summary (6093306593167176688) -->
-    <skip />
+    <string name="app_install_details_different_initiating_package_summary" msgid="6093306593167176688">"App instalado da <xliff:g id="APP_STORE1">%1$s</xliff:g> (via <xliff:g id="APP_STORE2">%2$s</xliff:g>)"</string>
     <string name="instant_app_details_summary" msgid="417197491598208216">"Mais informações em <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
     <string name="app_ops_running" msgid="6127474473137428721">"Em execução"</string>
     <string name="app_ops_never_used" msgid="9038133162371204506">"(Nunca usado)"</string>
@@ -2133,7 +2133,7 @@
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Deslizar para cima com dois dedos"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Deslizar para cima com três dedos"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="6505512764022389951">"Botão de acessibilidade"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_floating_button" msgid="6266489864614886247">"Toque no botão flutuante"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_floating_button" msgid="6266489864614886247">"Tocar no botão flutuante"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="4775049370625630546">"Gesto de acessibilidade"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="8315934725362849788">"Toque no botão de acessibilidade <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> na parte de baixo da tela. Para trocar de recurso, mantenha o botão de acessibilidade pressionado."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Deslize de baixo para cima na tela com dois dedos.\n\nPara alternar entre recursos, deslize de baixo para cima na tela com dois dedos, sem soltar."</string>
@@ -2147,7 +2147,7 @@
     <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"Configurações rápidas"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="844089763968552142">"Teclas de volume"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"teclas de volume"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Toque e mantenha as duas teclas de volume pressionadas"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Tocar e manter as duas teclas de volume pressionadas"</string>
     <string name="accessibility_shortcut_edit_dialog_title_two_finger_double_tap" msgid="2271778556854020996">"Tocar duas vezes na tela com dois dedos"</string>
     <string name="accessibility_shortcut_edit_screen_title_two_finger_double_tap" msgid="8952595692906527694">"Toque duplo com %1$d dedos"</string>
     <string name="accessibility_shortcut_edit_screen_summary_two_finger_double_tap" msgid="385404127425496362">"Toque rapidamente na tela 2 vezes com %1$d dedos"</string>
@@ -2964,8 +2964,7 @@
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{A organização {orgName} instalou uma autoridade certificadora para seu perfil de trabalho, o que pode permitir que ela monitore sua atividade profissional na rede, incluindo e-mails, apps e sites seguros.\n\nPara acessar mais informações sobre esse certificado, entre em contato com o administrador.}one{A organização {orgName} instalou uma autoridade certificadora para seu perfil de trabalho, o que pode permitir que ela monitore sua atividade profissional na rede, incluindo e-mails, apps e sites seguros.\n\nPara acessar mais informações sobre esse certificado, entre em contato com o administrador.}other{A organização {orgName} instalou autoridades certificadoras para seu perfil de trabalho, o que pode permitir que ela monitore sua atividade profissional na rede, incluindo e-mails, apps e sites seguros.\n\nPara acessar mais informações sobre esses certificados, entre em contato com o administrador.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"Sua atividade na rede, incluindo e-mails, apps e websites seguros, pode ser monitorada por terceiros.\n\nUma credencial confiável instalada no dispositivo permite isso."</string>
     <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{Verificar certificado}one{Verificar certificado}other{Verificar certificados}}"</string>
-    <!-- no translation found for user_settings_title (9208831545558787202) -->
-    <skip />
+    <string name="user_settings_title" msgid="9208831545558787202">"Usuários"</string>
     <string name="user_list_title" msgid="1387379079186123404">"Usuários e perfis"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"Adicionar usuário ou perfil"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"Perfil restrito"</string>
@@ -3993,8 +3992,8 @@
     <string name="keywords_vr_listener" msgid="902737490270081131">"rv realidade virtual ouvinte estéreo serviço de ajuda"</string>
     <string name="overlay_settings" msgid="2030836934139139469">"Sobrepor a outros apps"</string>
     <string name="filter_overlay_apps" msgid="2483998217116789206">"Apps com permissão"</string>
-    <string name="app_permission_summary_allowed" msgid="1155115629167757278">"Permitido"</string>
-    <string name="app_permission_summary_not_allowed" msgid="2673793662439097900">"Não permitido"</string>
+    <string name="app_permission_summary_allowed" msgid="1155115629167757278">"Permitidas"</string>
+    <string name="app_permission_summary_not_allowed" msgid="2673793662439097900">"Não permitidas"</string>
     <string name="keywords_install_other_apps" msgid="563895867658775580">"instalar apps fontes desconhecidas"</string>
     <string name="write_settings" msgid="6864794401614425894">"Mudar configurações do sistema"</string>
     <string name="keywords_write_settings" msgid="6908708078855507813">"gravar modificar configurações de modificação"</string>
@@ -4642,10 +4641,8 @@
     <string name="summary_supported_service" msgid="4320535903444834786">"É possível enviar mensagens de texto para qualquer pessoa, inclusive para serviços de emergência. O smartphone vai se reconectar a uma rede móvel quando estiver disponível."</string>
     <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"As mensagens via satélite podem demorar mais e estão disponíveis apenas em algumas áreas. O clima e determinadas estruturas podem afetar a conexão por satélite. A ligação via satélite não está disponível. Talvez chamadas de emergência ainda possam ser feitas.\n\nPode levar algum tempo para mudanças na conta aparecerem nas Configurações. Entre em contato com sua operadora para saber mais."</string>
     <string name="more_about_satellite_messaging" msgid="3385673133561348509">"Mais informações sobre mensagens via satélite"</string>
-    <!-- no translation found for satellite_warning_dialog_title (1610117852475376931) -->
-    <skip />
-    <!-- no translation found for satellite_warning_dialog_content (936419945275934955) -->
-    <skip />
+    <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"Não é possível ativar o <xliff:g id="FUNCTION">%1$s</xliff:g>"</string>
+    <string name="satellite_warning_dialog_content" msgid="936419945275934955">"Para ativar o <xliff:g id="FUNCTION">%1$s</xliff:g>, primeiro encerre a conexão via satélite"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Nomes dos pontos de acesso"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Indisponível quando conectado à <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -4908,8 +4905,7 @@
     <string name="media_controls_show_player" msgid="8504571042365814021">"Mostrar player"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"mídia"</string>
     <string name="camera_extensions_fallback_title" msgid="3604579046777004989">"Permitir extensões de softwares da câmera"</string>
-    <!-- no translation found for camera_extensions_fallback_description (4306833827773277263) -->
-    <skip />
+    <string name="camera_extensions_fallback_description" msgid="4306833827773277263">"Permite a implementação de softwares padrão com recursos avançados de câmera, como HDR, modo noturno e outras extensões de câmera."</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"O Bluetooth será ativado"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"Internet"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"Chips"</string>
@@ -4979,8 +4975,7 @@
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Usar o serviço de impressão"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Permitir vários usuários"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"autorizar, vários, usuários, permitir, muitos"</string>
-    <!-- no translation found for multiple_users_title_keywords (2395593167746225172) -->
-    <skip />
+    <string name="multiple_users_title_keywords" msgid="2395593167746225172">"múltiplos, usuários, perfis, pessoas, contas, trocar, vários"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Usar a depuração por Wi-Fi"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Usar as preferências do driver gráfico"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"Usar o Modo noturno"</string>

@@ -25,8 +25,8 @@
     <string name="device_info_default" msgid="1406619232867343310">"ଅଜଣା"</string>
     <string name="device_info_protected_single_press" msgid="3810785480060743677">"ସୂଚନା ଦେଖାଇବା ପାଇଁ ଟାପ କରନ୍ତୁ"</string>
     <string name="show_dev_countdown" msgid="2936506773086395069">"{count,plural, =1{ଆପଣ ଜଣେ ଡେଭେଲପର ହେବା ପାଇଁ ବର୍ତ୍ତମାନ #ଟି ଷ୍ଟେପ ଦୂରରେ ଅଛନ୍ତି।}other{ଆପଣ ଜଣେ ଡେଭେଲପର ହେବା ପାଇଁ ବର୍ତ୍ତମାନ #ଟି ଷ୍ଟେପ ଦୂରରେ ଅଛନ୍ତି।}}"</string>
-    <string name="show_dev_on" msgid="2840850085134853754">"ବର୍ତ୍ତମାନ ଆପଣ ଜଣେ ଡେଭଲପର୍‌!"</string>
-    <string name="show_dev_already" msgid="7041756429707644630">"ଆବଶ୍ୟକତା ନାହିଁ, ଆପଣ ଜଣେ ଡେଭଲପର୍‌ ହିଁ ଅଟନ୍ତି।"</string>
+    <string name="show_dev_on" msgid="2840850085134853754">"ବର୍ତ୍ତମାନ ଆପଣ ଜଣେ ଡେଭଲପର!"</string>
+    <string name="show_dev_already" msgid="7041756429707644630">"ଆବଶ୍ୟକତା ନାହିଁ, ଆପଣ ପୂର୍ବରୁ ଜଣେ ଡେଭଲପର ଅଟନ୍ତି।"</string>
     <string name="dev_settings_disabled_warning" msgid="6971867026249671244">"ଦୟାକରି ପ୍ରଥମେ ଡେଭଲପର୍‌ ବିକଳ୍ପଗୁଡିକ ସକ୍ଷମ କରନ୍ତୁ।"</string>
     <string name="dev_settings_available_to_admin_only_warning" msgid="3408243404879083111">"ଡେଭେଲପର ସେଟିଂସକୁ କେବଳ ଆଡମିନ ୟୁଜରମାନେ ଆକ୍ସେସ କରିପାରିବେ।"</string>
     <string name="header_category_system" msgid="1665516346845259058">"ସିଷ୍ଟମ୍‌"</string>
@@ -566,7 +566,8 @@
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"ପ୍ରତି ଥର ଡିଭାଇସ ଲକ ହେଲେ"</string>
     <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"5 ମିନିଟ ନିଷ୍କ୍ରିୟ ରହିବା ପରେ"</string>
     <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"କେବଳ ଡିଭାଇସ ରିଷ୍ଟାର୍ଟ ହେବା ପରେ"</string>
-    <string name="private_space_hide_page_title" msgid="4351404195904146088">"ଲକ ଥିବା ସମୟରେ ପ୍ରାଇଭେଟ ସ୍ପେସକୁ ଲୁଚାନ୍ତୁ"</string>
+    <string name="private_space_hide_page_title" msgid="3364639176511877414">"ପ୍ରାଇଭେଟ ସ୍ପେସକୁ ଲୁଚାନ୍ତୁ"</string>
+    <string name="private_space_hide_when_locked" msgid="6219472348124151797">"ଲକ ଥିବା ସମୟରେ ପ୍ରାଇଭେଟ ସ୍ପେସକୁ ଲୁଚାନ୍ତୁ"</string>
     <string name="private_space_hide_page_summary" msgid="6247773353685839242">"ଆପଣଙ୍କ ଡିଭାଇସରେ ଆପଣଙ୍କର ଏକ ପ୍ରାଇଭେଟ ସ୍ପେସ ଥିବା ଅନ୍ୟ ଲୋକମାନଙ୍କୁ ନଜଣାଇବାକୁ ଆପଣ ଆପଣଙ୍କ ଆପ୍ସ ତାଲିକାରୁ ଏହାକୁ ଲୁଚାଇପାରିବେ"</string>
     <string name="private_space_access_header" msgid="1077082416567150819">"ପ୍ରାଇଭେଟ ସ୍ପେସ ଲୁକ୍କାୟିତ ଥିବା ସମୟରେ ଏହାକୁ ଆକ୍ସେସ କରନ୍ତୁ"</string>
     <string name="private_space_search_description" msgid="1538155187658429618">"ସର୍ଚ୍ଚ ବାରରେ, \"ପ୍ରାଇଭେଟ ସ୍ପେସ\" ଲେଖନ୍ତୁ"</string>
@@ -2963,8 +2964,7 @@
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{{orgName} ଆପଣଙ୍କ ୱାର୍କ ପ୍ରୋଫାଇଲ ପାଇଁ ଏକ ସାର୍ଟିଫିକେଟ ପ୍ରାଧିକରଣ ଇନଷ୍ଟଲ କରିଛନ୍ତି, ଯାହା ଇମେଲ, ଆପ୍ସ ଓ ସୁରକ୍ଷିତ ୱେବସାଇଟଗୁଡ଼ିକ ସମେତ, ୱାର୍କ ନେଟୱାର୍କର କାର୍ଯ୍ୟକଳାପକୁ ମନିଟର କରିବା ପାଇଁ ତାଙ୍କୁ ଅନୁମତି ଦେଇପାରେ।\n\nଏହି ସାର୍ଟିଫିକେଟ ବିଷୟରେ ଅଧିକ ସୂଚନା ପାଇଁ ଆପଣଙ୍କ ଆଡମିନଙ୍କ ସହ କଣ୍ଟାକ୍ଟ କରନ୍ତୁ।}other{{orgName}  ଆପଣଙ୍କ ୱାର୍କ ପ୍ରୋଫାଇଲ ପାଇଁ ଏକ ସାର୍ଟିଫିକେଟ ପ୍ରାଧିକରଣ ଇନଷ୍ଟଲ କରିଛନ୍ତି, ଯାହା ଇମେଲ, ଆପ୍ସ ଓ ସୁରକ୍ଷିତ ୱେବସାଇଟଗୁଡ଼ିକ ସମେତ, ୱାର୍କ ନେଟୱାର୍କର କାର୍ଯ୍ୟକଳାପକୁ ମନିଟର କରିବା ପାଇଁ ତାଙ୍କୁ ଅନୁମତି ଦେଇପାରେ।\n\nଏହି ସାର୍ଟିଫିକେଟଗୁଡ଼ିକ ବିଷୟରେ ଅଧିକ ସୂଚନା ପାଇଁ ଆପଣଙ୍କ ଆଡମିନଙ୍କ ସହ କଣ୍ଟାକ୍ଟ କରନ୍ତୁ।}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"ଇମେଲ୍‌, ଆପ୍‌ ଏବଂ ନିରାପଦ ୱେବ୍‌ସାଇଟ୍‌ଗୁଡ଼ିକ ଅନ୍ତର୍ଭୂକ୍ତ କରି ଏକ ତୃତୀୟ ପକ୍ଷ ଆପଣଙ୍କ ନେଟୱାର୍କ୍ ଗତିବିଧି ମନିଟର୍‌ କରିପାରିବେ।\n\nଆପଣଙ୍କ ଡିଭାଇସ୍‌ରେ ଇନ୍‌ଷ୍ଟଲ୍‌ କରାଯାଇଥିବା ତଥ୍ୟ ଏହା କରାଇବାରେ ସମ୍ଭବ କରାଉଛି।"</string>
     <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{ସାର୍ଟିଫିକେଟକୁ ଯାଞ୍ଚ କରନ୍ତୁ}other{ସାର୍ଟିଫିକେଟଗୁଡ଼ିକୁ ଯାଞ୍ଚ କରନ୍ତୁ}}"</string>
-    <!-- no translation found for user_settings_title (9208831545558787202) -->
-    <skip />
+    <string name="user_settings_title" msgid="9208831545558787202">"ୟୁଜରମାନେ"</string>
     <string name="user_list_title" msgid="1387379079186123404">"ୟୁଜର ଓ ପ୍ରୋଫାଇଲ"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"ୟୁଜର୍ ବା ପ୍ରୋଫାଇଲ ଯୋଡ଼ନ୍ତୁ"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"ପ୍ରତିବନ୍ଧିତ ପ୍ରୋଫାଇଲ୍‌"</string>
@@ -4976,8 +4976,7 @@
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"ପ୍ରିଣ୍ଟ ସେବା ବ୍ୟବହାର କରନ୍ତୁ"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"ଏକାଧିକ ୟୁଜରଙ୍କୁ ଅନୁମତି ଦିଅନ୍ତୁ"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"ଅନୁମତି, ଏକାଧିକ, ୟୁଜର, ପରମିଟ, ଅନେକ"</string>
-    <!-- no translation found for multiple_users_title_keywords (2395593167746225172) -->
-    <skip />
+    <string name="multiple_users_title_keywords" msgid="2395593167746225172">"ଏକାଧିକ, ୟୁଜର, ପ୍ରୋଫାଇଲ, ଲୋକମାନେ, ଆକାଉଣ୍ଟ, ସୁଇଚ, ଅନେକ"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"ୱାୟାରଲେସ୍ ଡିବଗିଂ ବ୍ୟବହାର କରନ୍ତୁ"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"ଗ୍ରାଫିକ୍ସ ଡ୍ରାଇଭର୍ ପସନ୍ଦଗୁଡ଼ିକୁ ବ୍ୟବହାର କରନ୍ତୁ"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"ନାଇଟ ଲାଇଟ ବ୍ୟବହାର କରନ୍ତୁ"</string>

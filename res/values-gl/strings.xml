@@ -566,7 +566,8 @@
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"Cada vez que se bloquee o dispositivo"</string>
     <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"Despois de 5 minutos de inactividade"</string>
     <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"Só despois do reinicio do dispositivo"</string>
-    <string name="private_space_hide_page_title" msgid="4351404195904146088">"Ocultar espazo privado cando estea bloqueado"</string>
+    <string name="private_space_hide_page_title" msgid="3364639176511877414">"Ocultar o espazo privado"</string>
+    <string name="private_space_hide_when_locked" msgid="6219472348124151797">"Ocultar espazo privado cando estea bloqueado"</string>
     <string name="private_space_hide_page_summary" msgid="6247773353685839242">"Co fin de evitar que outras persoas saiban que tes un espazo privado no dispositivo, podes ocultalo para que non se mostre na lista de aplicacións"</string>
     <string name="private_space_access_header" msgid="1077082416567150819">"Acceso ao espazo privado cando estea oculto"</string>
     <string name="private_space_search_description" msgid="1538155187658429618">"Pon \"espazo privado\" na barra de busca"</string>
@@ -867,8 +868,8 @@
     <string name="wifi_ask_disable" msgid="1663208096020309639">"<xliff:g id="REQUESTER">%s</xliff:g> quere desactivar a wifi"</string>
     <string name="art_verifier_for_debuggable_title" msgid="1926445785190030479">"Verificar o bytecode das aplicacións depurables"</string>
     <string name="art_verifier_for_debuggable_summary" msgid="4802875841862652879">"Permite que ART verifique o bytecode das aplicacións que se poidan depurar"</string>
-    <string name="show_refresh_rate" msgid="5742688821872354973">"Mostrar taxa de actualización"</string>
-    <string name="show_refresh_rate_summary" msgid="3558118122374609663">"Mostra a taxa de actualización actual da pantalla"</string>
+    <string name="show_refresh_rate" msgid="5742688821872354973">"Mostrar frecuencia de actualización"</string>
+    <string name="show_refresh_rate_summary" msgid="3558118122374609663">"Mostra a frecuencia de actualización actual da pantalla"</string>
     <string name="show_hdr_sdr_ratio" msgid="4188007289024955585">"Mostrar proporción HDR/SDR"</string>
     <string name="show_hdr_sdr_ratio_summary" msgid="986292785096013733">"Mostra a proporción HDR/SDR actual"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
@@ -2963,8 +2964,7 @@
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{{orgName} instalou para o teu perfil de traballo unha autoridade de certificación que pode permitirlle supervisar a actividade da rede do traballo, (por exemplo, os correos electrónicos, as aplicacións e os sitios web seguros).\n\nPara obter máis información sobre este certificado, ponte en contacto co teu administrador.}other{{orgName} instalou para o teu perfil de traballo autoridades de certificación que poden permitirlle supervisar a actividade da rede do traballo, (por exemplo, os correos electrónicos, as aplicacións e os sitios web seguros).\n\nPara obter máis información sobre estes certificados, ponte en contacto co teu administrador.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"Un terceiro pode supervisar a túa actividade na rede, incluídos os correos electrónicos, as aplicacións e os sitios web seguros.\n\nUnha credencial de confianza instalada no teu dispositivo fai que isto sexa posible."</string>
     <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{Comprobar certificado}other{Comprobar certificados}}"</string>
-    <!-- no translation found for user_settings_title (9208831545558787202) -->
-    <skip />
+    <string name="user_settings_title" msgid="9208831545558787202">"Usuarios"</string>
     <string name="user_list_title" msgid="1387379079186123404">"Usuarios e perfís"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"Engadir usuario ou perfil"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"Perfil restrinxido"</string>
@@ -3302,7 +3302,7 @@
     <string name="spatial_audio_text" msgid="8201387855375146000">"O audio dos contidos multimedia compatibles ofréceche unha experiencia máis envolvente"</string>
     <string name="spatial_summary_off" msgid="8272678804629774378">"Opción desactivada"</string>
     <string name="spatial_summary_on_one" msgid="6239933399496282994">"Opción activada/<xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
-    <string name="spatial_summary_on_two" msgid="4526919818832483883">"Opción activada (<xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> e <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>)"</string>
+    <string name="spatial_summary_on_two" msgid="4526919818832483883">"Opción activada / <xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> e <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
     <string name="spatial_audio_footer_title" msgid="8775010547623606088">"Tamén podes activar o audio espacial para dispositivos Bluetooth."</string>
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Configuración de dispositivos conectados"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Ningunha planificación}=1{Definiuse 1 planificación}other{Definíronse # planificacións}}"</string>
@@ -4975,8 +4975,7 @@
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Usar servizo de impresión"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Permitir varios usuarios"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"permitir, varios, usuario, deixar, moitos"</string>
-    <!-- no translation found for multiple_users_title_keywords (2395593167746225172) -->
-    <skip />
+    <string name="multiple_users_title_keywords" msgid="2395593167746225172">"múltiples, usuarios, perfís, persoas, contas, cambiar, moitos"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Usar depuración sen fíos"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Usar preferencias do controlador de gráficos"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"Usar Luz nocturna"</string>
