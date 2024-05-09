@@ -566,7 +566,8 @@
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"デバイスのロック時は毎回"</string>
     <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"操作が行われない状態で 5 分経過後"</string>
     <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"デバイスの再起動後のみ"</string>
-    <string name="private_space_hide_page_title" msgid="4351404195904146088">"ロックされているプライベート スペースを非表示にする"</string>
+    <string name="private_space_hide_page_title" msgid="3364639176511877414">"プライベート スペースを非表示にする"</string>
+    <string name="private_space_hide_when_locked" msgid="6219472348124151797">"ロックされているプライベート スペースを非表示にする"</string>
     <string name="private_space_hide_page_summary" msgid="6247773353685839242">"プライベート スペースがデバイスにあることを秘密にするために、アプリのリストで非表示にできます"</string>
     <string name="private_space_access_header" msgid="1077082416567150819">"非表示のプライベート スペースにアクセスするには"</string>
     <string name="private_space_search_description" msgid="1538155187658429618">"検索バーに「プライベート スペース」と入力します"</string>
@@ -1169,7 +1170,7 @@
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"ON - 顔ベース"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"顔検出"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"自動回転の詳細"</string>
-    <string name="screen_resolution_title" msgid="2690518693139811486">"画面の解像度"</string>
+    <string name="screen_resolution_title" msgid="2690518693139811486">"画面解像度"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"高解像度"</string>
     <string name="screen_resolution_option_full" msgid="2694003735219114186">"最大解像度"</string>
     <string name="screen_resolution_footer" msgid="6772341522952795647">"最大解像度ではバッテリー消費量が多くなります。解像度を切り替えると、一部のアプリが再起動することがあります。"</string>
@@ -1810,8 +1811,7 @@
     <string name="app_install_details_group_title" msgid="1172114479073704677">"ストア"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"アプリの詳細"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"<xliff:g id="APP_STORE">%1$s</xliff:g> からインストールしたアプリ"</string>
-    <!-- no translation found for app_install_details_different_initiating_package_summary (6093306593167176688) -->
-    <skip />
+    <string name="app_install_details_different_initiating_package_summary" msgid="6093306593167176688">"<xliff:g id="APP_STORE1">%1$s</xliff:g> からインストールしたアプリ（<xliff:g id="APP_STORE2">%2$s</xliff:g> 経由）"</string>
     <string name="instant_app_details_summary" msgid="417197491598208216">"<xliff:g id="APP_STORE">%1$s</xliff:g>上の詳細情報"</string>
     <string name="app_ops_running" msgid="6127474473137428721">"実行中"</string>
     <string name="app_ops_never_used" msgid="9038133162371204506">"（未使用）"</string>
@@ -4641,10 +4641,8 @@
     <string name="summary_supported_service" msgid="4320535903444834786">"テキスト メッセージは、緊急サービスを含め誰にでも送信できます。モバイル ネットワークが利用できる状態になると再接続されます。"</string>
     <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"衛星通信メッセージは、利用できるエリアが制限され、通常より時間がかかることがあります。天候やなんらかの構造物が、衛星通信の接続に影響することがあります。衛星通信による通話はご利用いただけませんが、緊急通報はつながる場合があります。\n\n変更内容がアカウントの [設定] に反映されるまでに時間がかかることがあります。詳しくは携帯通信会社にお問い合わせください。"</string>
     <string name="more_about_satellite_messaging" msgid="3385673133561348509">"衛星通信メッセージの詳細"</string>
-    <!-- no translation found for satellite_warning_dialog_title (1610117852475376931) -->
-    <skip />
-    <!-- no translation found for satellite_warning_dialog_content (936419945275934955) -->
-    <skip />
+    <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"<xliff:g id="FUNCTION">%1$s</xliff:g> を有効にできません"</string>
+    <string name="satellite_warning_dialog_content" msgid="936419945275934955">"<xliff:g id="FUNCTION">%1$s</xliff:g> を有効にするには、衛星通信との接続を解除してください"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"アクセス ポイント名"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"<xliff:g id="CARRIER">%1$s</xliff:g> への接続時は利用できません"</string>
@@ -4907,8 +4905,7 @@
     <string name="media_controls_show_player" msgid="8504571042365814021">"クイック設定に表示させるプレーヤーを選択"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"メディア"</string>
     <string name="camera_extensions_fallback_title" msgid="3604579046777004989">"カメラ ソフトウェアの拡張機能を許可する"</string>
-    <!-- no translation found for camera_extensions_fallback_description (4306833827773277263) -->
-    <skip />
+    <string name="camera_extensions_fallback_description" msgid="4306833827773277263">"HDR、夜間モード、その他のカメラ拡張機能などの高度なカメラ機能について、デフォルトのソフトウェアの実装を有効にします。"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth が ON になります"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"インターネット"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM"</string>

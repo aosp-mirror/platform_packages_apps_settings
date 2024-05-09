@@ -280,7 +280,7 @@
     <string name="owner_info_settings_edit_text_hint" msgid="841926875876050274">"Npr. Jocin Android."</string>
     <string name="location_settings_title" msgid="8375074508036087178">"Lokacija"</string>
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"Koristi lokaciju"</string>
-    <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Isključena"</string>
+    <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Isključeno"</string>
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Uključeno/# aplikacija ima pristup lokaciji}one{Uključeno/# aplikacija ima pristup lokaciji}few{Uključeno/# aplikacije imaju pristup lokaciji}other{Uključeno/# aplikacija ima pristup lokaciji}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Učitava se…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Aplikacije sa dozvolom za uređaje u blizini mogu da odrede približan položaj povezanih uređaja."</string>
@@ -566,7 +566,8 @@
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"Svaki put kad se uređaj zaključa"</string>
     <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"Posle 5 minuta neaktivnosti"</string>
     <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"Samo posle restartovanja uređaja"</string>
-    <string name="private_space_hide_page_title" msgid="4351404195904146088">"Sakrij privatan prostor kada je zaključan"</string>
+    <string name="private_space_hide_page_title" msgid="3364639176511877414">"Sakrijte privatan prostor"</string>
+    <string name="private_space_hide_when_locked" msgid="6219472348124151797">"Sakrij privatan prostor kada je zaključan"</string>
     <string name="private_space_hide_page_summary" msgid="6247773353685839242">"Privatan prostor možete da sakrijete na listi aplikacija kako drugi ne bi znali da ga imate na uređaju"</string>
     <string name="private_space_access_header" msgid="1077082416567150819">"Pristupajte privatnom prostoru kad je sakriven"</string>
     <string name="private_space_search_description" msgid="1538155187658429618">"U traci za pretragu unesite „privatan prostor“"</string>
@@ -2963,8 +2964,7 @@
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{Administrator organizacije {orgName} je instalirao autoritet za izdavanje sertifikata za poslovni profil, što može da mu omogući da prati aktivnosti na poslovnoj mreži, uključujući imejlove, aplikacije i bezbedne veb-sajtove.\n\nObratite se administratoru da biste dobili više informacija o ovom sertifikatu.}one{Administrator organizacije {orgName} je instalirao autoritete za izdavanje sertifikata za poslovni profil, što može da mu omogući da prati aktivnosti na poslovnoj mreži, uključujući imejlove, aplikacije i bezbedne veb-sajtove.\n\nObratite se administratoru da biste dobili više informacija o ovim sertifikatima.}few{Administrator organizacije {orgName} je instalirao autoritete za izdavanje sertifikata za poslovni profil, što može da mu omogući da prati aktivnosti na poslovnoj mreži, uključujući imejlove, aplikacije i bezbedne veb-sajtove.\n\nObratite se administratoru da biste dobili više informacija o ovim sertifikatima.}other{Administrator organizacije {orgName} je instalirao autoritete za izdavanje sertifikata za poslovni profil, što može da mu omogući da prati aktivnosti na poslovnoj mreži, uključujući imejlove, aplikacije i bezbedne veb-sajtove.\n\nObratite se administratoru da biste dobili više informacija o ovim sertifikatima.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"Treća strana može da prati vašu aktivnost na mreži, uključujući e-poštu, aplikacije i bezbedne veb-sajtove.\n\nTo omogućava pouzdani akreditiv koji je instaliran na uređaju."</string>
     <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{Proveri sertifikat}one{Proveri sertifikate}few{Proveri sertifikate}other{Proveri sertifikate}}"</string>
-    <!-- no translation found for user_settings_title (9208831545558787202) -->
-    <skip />
+    <string name="user_settings_title" msgid="9208831545558787202">"Korisnici"</string>
     <string name="user_list_title" msgid="1387379079186123404">"Korisnici i profili"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"Dodaj korisnika ili profil"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"Ograničeni profil"</string>
@@ -3829,7 +3829,7 @@
     <string name="change" msgid="273206077375322595">"Promeni"</string>
     <string name="change_storage" msgid="8773820275624113401">"Promenite memoriju"</string>
     <string name="notifications_label" msgid="8471624476040164538">"Obaveštenja"</string>
-    <string name="notifications_enabled" msgid="7743168481579361019">"Uključena"</string>
+    <string name="notifications_enabled" msgid="7743168481579361019">"Uključeno"</string>
     <string name="notifications_enabled_with_info" msgid="1808946629277684308">"<xliff:g id="NOTIFICATIONS_SENT">%1$s</xliff:g> / <xliff:g id="NOTIFICATIONS_CATEGORIES_OFF">%2$s</xliff:g>"</string>
     <string name="notifications_disabled" msgid="5603160425378437143">"Isključeno"</string>
     <string name="notifications_categories_off" msgid="7712037485557237328">"{count,plural, =1{# kategorija je isključena}one{# kategorija je isključena}few{# kategorije su isključene}other{# kategorija je isključeno}}"</string>
@@ -4976,8 +4976,7 @@
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Koristi uslugu štampanja"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Dozvoli više korisnika"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"omogućiti, više, korisnik, dozvoliti, mnogo"</string>
-    <!-- no translation found for multiple_users_title_keywords (2395593167746225172) -->
-    <skip />
+    <string name="multiple_users_title_keywords" msgid="2395593167746225172">"više, korisnici, profili, ljudi, nalozi, promena, veliki broj"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Koristi bežično otklanjanje grešaka"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Koristi podešavanja upravljačkog programa za grafiku"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"Koristi noćno svetlo"</string>

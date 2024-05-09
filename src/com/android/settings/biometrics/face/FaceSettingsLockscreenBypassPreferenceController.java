@@ -27,8 +27,6 @@ import androidx.preference.Preference;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.Utils;
-import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
-import com.android.settingslib.RestrictedSwitchPreference;
 
 public class FaceSettingsLockscreenBypassPreferenceController
         extends FaceSettingsPreferenceController {
@@ -68,12 +66,11 @@ public class FaceSettingsLockscreenBypassPreferenceController
 
     @Override
     public void updateState(Preference preference) {
-        EnforcedAdmin admin;
         super.updateState(preference);
         if (!FaceSettings.isFaceHardwareDetected(mContext)) {
             preference.setEnabled(false);
-        } else if ((admin = getRestrictingAdmin()) != null) {
-            ((RestrictedSwitchPreference) preference).setDisabledByAdmin(admin);
+        } else if (getRestrictingAdmin() != null) {
+            preference.setEnabled(false);
         } else if (!mFaceManager.hasEnrolledTemplates(getUserId())) {
             preference.setEnabled(false);
         } else {

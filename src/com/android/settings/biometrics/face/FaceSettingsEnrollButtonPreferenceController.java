@@ -18,6 +18,7 @@ package com.android.settings.biometrics.face;
 
 import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
 
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
@@ -28,6 +29,7 @@ import androidx.preference.Preference;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.password.ChooseLockSettingsHelper;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.widget.LayoutPreference;
 
 import com.google.android.setupdesign.util.ButtonStyler;
@@ -71,6 +73,10 @@ public class FaceSettingsEnrollButtonPreferenceController extends BasePreference
         }
 
         mButton.setOnClickListener(this);
+        final boolean isDeviceOwnerBlockingAuth =
+                RestrictedLockUtilsInternal.checkIfKeyguardFeaturesDisabled(
+                        mContext, DevicePolicyManager.KEYGUARD_DISABLE_FACE, mUserId) != null;
+        mButton.setEnabled(!isDeviceOwnerBlockingAuth);
     }
 
     @Override

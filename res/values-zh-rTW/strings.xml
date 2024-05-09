@@ -120,7 +120,7 @@
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"藍牙 LE Audio 模式"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"在「裝置詳細資料」中顯示 LE Audio 切換鈕"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"略過藍牙 LE Audio 許可清單"</string>
-    <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"即使 LE Audio 周邊裝置未通過符合許可清單條件的驗證，系統仍會預設使用 LE Audio。"</string>
+    <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"即使 LE Audio 周邊裝置未經過驗證，尚未確認符合許可清單的條件，系統仍會預設使用 LE Audio。"</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"媒體裝置"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"通話裝置"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"其他裝置"</string>
@@ -566,7 +566,8 @@
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"裝置每次鎖定時"</string>
     <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"閒置 5 分鐘後"</string>
     <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"僅在裝置重新啟動後"</string>
-    <string name="private_space_hide_page_title" msgid="4351404195904146088">"隱藏鎖定的私人空間"</string>
+    <string name="private_space_hide_page_title" msgid="3364639176511877414">"隱藏私人空間"</string>
+    <string name="private_space_hide_when_locked" msgid="6219472348124151797">"隱藏鎖定的私人空間"</string>
     <string name="private_space_hide_page_summary" msgid="6247773353685839242">"如果不想讓其他人知道裝置上有私人空間，可以在應用程式清單中隱藏該空間"</string>
     <string name="private_space_access_header" msgid="1077082416567150819">"存取隱藏的私人空間"</string>
     <string name="private_space_search_description" msgid="1538155187658429618">"在搜尋列中輸入「私人空間」"</string>
@@ -2963,8 +2964,7 @@
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{「{orgName}」已在你的工作資料夾中安裝憑證授權單位憑證。該機構將可監控工作網路活動，包括電子郵件、應用程式和安全的網站。\n\n如要進一步瞭解這個憑證，請與你的管理員聯絡。}other{「{orgName}」已在你的工作資料夾中安裝憑證授權單位憑證。該機構將可監控工作網路活動，包括電子郵件、應用程式和安全的網站。\n\n如要進一步瞭解這些憑證，請與你的管理員聯絡。}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"第三方可以監控你的網路活動，包括你使用電子郵件、應用程式和加密網站的情況。\n\n這是因為你的裝置上安裝了信任的憑證。"</string>
     <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{查看憑證}other{查看憑證}}"</string>
-    <!-- no translation found for user_settings_title (9208831545558787202) -->
-    <skip />
+    <string name="user_settings_title" msgid="9208831545558787202">"使用者"</string>
     <string name="user_list_title" msgid="1387379079186123404">"使用者和個人資料"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"新增使用者或個人資料"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"設有限制的個人資料"</string>
@@ -4975,8 +4975,7 @@
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"使用列印服務"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"允許多位使用者"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"允許, 多位, 使用者, 許可, 數位"</string>
-    <!-- no translation found for multiple_users_title_keywords (2395593167746225172) -->
-    <skip />
+    <string name="multiple_users_title_keywords" msgid="2395593167746225172">"多位, 使用者, 個人資料, 人, 帳戶, 切換, 多人"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"使用無線偵錯功能"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"使用繪圖驅動程式偏好設定"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"使用夜燈功能"</string>

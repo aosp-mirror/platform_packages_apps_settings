@@ -566,7 +566,8 @@
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"Каждый раз при блокировке устройства"</string>
     <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"Через 5 минут бездействия"</string>
     <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"Только после перезапуска устройства"</string>
-    <string name="private_space_hide_page_title" msgid="4351404195904146088">"Прятать частное пространство, когда оно заблокировано"</string>
+    <string name="private_space_hide_page_title" msgid="3364639176511877414">"Скрывать частное пространство"</string>
+    <string name="private_space_hide_when_locked" msgid="6219472348124151797">"Скрывать частное пространство, когда оно заблокировано"</string>
     <string name="private_space_hide_page_summary" msgid="6247773353685839242">"Вы можете скрыть частное пространство из списка приложений на устройстве. Так никто не узнает, что вы пользуетесь этой функцией."</string>
     <string name="private_space_access_header" msgid="1077082416567150819">"Доступ к личному пространству, когда оно скрыто"</string>
     <string name="private_space_search_description" msgid="1538155187658429618">"Введите \"частное пространство\" в строке поиска."</string>
@@ -2963,8 +2964,7 @@
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{Администратор домена {orgName} установил сертификат ЦС для вашего рабочего профиля. Это позволяет отслеживать ваши действия в рабочей сети, включая использование электронной почты и приложений, а также просмотр сайтов.\n\nЗа дополнительной информацией обращайтесь к администратору.}one{Администратор домена {orgName} установил сертификаты ЦС для вашего рабочего профиля. Это позволяет отслеживать ваши действия в рабочей сети, включая использование электронной почты и приложений, а также просмотр сайтов.\n\nЗа дополнительной информацией обращайтесь к администратору.}few{Администратор домена {orgName} установил сертификаты ЦС для вашего рабочего профиля. Это позволяет отслеживать ваши действия в рабочей сети, включая использование электронной почты и приложений, а также просмотр сайтов.\n\nЗа дополнительной информацией обращайтесь к администратору.}many{Администратор домена {orgName} установил сертификаты ЦС для вашего рабочего профиля. Это позволяет отслеживать ваши действия в рабочей сети, включая использование электронной почты и приложений, а также просмотр сайтов.\n\nЗа дополнительной информацией обращайтесь к администратору.}other{Администратор домена {orgName} установил сертификаты ЦС для вашего рабочего профиля. Это позволяет отслеживать ваши действия в рабочей сети, включая использование электронной почты и приложений, а также просмотр сайтов.\n\nЗа дополнительной информацией обращайтесь к администратору.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"Третья сторона может отслеживать ваши действия в сети. (например, просматривать ваши письма, приложения и список посещенных сайтов).\n\nЭто возможно благодаря надежному сертификату, установленному на устройстве."</string>
     <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{Проверить сертификат}one{Проверить сертификаты}few{Проверить сертификаты}many{Проверить сертификаты}other{Проверить сертификаты}}"</string>
-    <!-- no translation found for user_settings_title (9208831545558787202) -->
-    <skip />
+    <string name="user_settings_title" msgid="9208831545558787202">"Пользователи"</string>
     <string name="user_list_title" msgid="1387379079186123404">"Пользователи и профили"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"Добавить пользователя или профиль"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"Профиль с ограниченным доступом"</string>
@@ -3063,7 +3063,7 @@
     <string name="network_operators_settings" msgid="5105453353329748954">"Операторы связи"</string>
     <string name="access_point_names" msgid="5768430498022188057">"Названия точек доступа"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
-    <string name="enhanced_4g_lte_mode_title_advanced_calling" msgid="7066009898031465265">"Расширенные настройки звонков"</string>
+    <string name="enhanced_4g_lte_mode_title_advanced_calling" msgid="7066009898031465265">"Расширенные вызовы"</string>
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"Звонки по сети 4G"</string>
     <string name="enhanced_4g_lte_mode_summary" msgid="1067066329756036427">"Использовать сервисы LTE, чтобы улучшить качество голосовых вызовов (рекомендуется)"</string>
     <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="2575004054914178405">"Использовать сервисы 4G, чтобы улучшить качество голосовых вызовов (рекомендуется)"</string>
@@ -4977,8 +4977,7 @@
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Использовать службу печати"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Разрешить добавлять несколько пользователей"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"разрешить, несколько, пользователь, разрешение, много"</string>
-    <!-- no translation found for multiple_users_title_keywords (2395593167746225172) -->
-    <skip />
+    <string name="multiple_users_title_keywords" msgid="2395593167746225172">"несколько, пользователи, профили, люди, аккаунты, переключиться, много"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Использовать отладку по Wi-Fi"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Изменение настроек графического драйвера"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"Ночная подсветка"</string>

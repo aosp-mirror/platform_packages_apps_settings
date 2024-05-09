@@ -566,7 +566,8 @@
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"Elke keer dat apparaat wordt vergrendeld"</string>
     <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"Na 5 minuten inactiviteit"</string>
     <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"Alleen nadat apparaat opnieuw opstart"</string>
-    <string name="private_space_hide_page_title" msgid="4351404195904146088">"Privégedeelte verbergen als het is vergrendeld"</string>
+    <string name="private_space_hide_page_title" msgid="3364639176511877414">"Privégedeelte verbergen"</string>
+    <string name="private_space_hide_when_locked" msgid="6219472348124151797">"Privégedeelte verbergen als het is vergrendeld"</string>
     <string name="private_space_hide_page_summary" msgid="6247773353685839242">"Als je niet wilt dat andere mensen weten dat je een privégedeelte op je apparaat hebt, kun je dit verbergen in de lijst met apps"</string>
     <string name="private_space_access_header" msgid="1077082416567150819">"Toegang krijgen tot privégedeelte indien verborgen"</string>
     <string name="private_space_search_description" msgid="1538155187658429618">"Voer in de zoekbalk \'privégedeelte\' in"</string>
@@ -2571,8 +2572,7 @@
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Gebruiksduur van de batterij verlengen"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Uitzetten na opladen"</string>
     <string name="battery_saver_sticky_title_percentage" msgid="1178162022087559148">"Uitzetten bij <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <!-- no translation found for battery_saver_sticky_description_new (8543277078136947874) -->
-    <skip />
+    <string name="battery_saver_sticky_description_new" msgid="8543277078136947874">"Batterijbesparing wordt uitgezet als de batterij meer dan <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> is opgeladen"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Aanzetten"</string>
@@ -2963,8 +2963,7 @@
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{{orgName} heeft een certificeringsinstantie (CA) voor je werkprofiel geïnstalleerd, waardoor dit domein activiteit in het werknetwerk kan bijhouden, waaronder e-mails, apps en beveiligde websites.\n\nNeem contact op met je beheerder voor meer informatie.}other{{orgName} heeft certificeringsinstanties (CA\'s) voor je werkprofiel geïnstalleerd, waardoor dit domein activiteit in het werknetwerk kan bijhouden, waaronder e-mails, apps en beveiligde websites.\n\nNeem contact op met je beheerder voor meer informatie.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"Een derde partij kan je netwerkactiviteit, waaronder e-mails, apps en beveiligde websites, bijhouden.\n\nDit is mogelijk omdat je een vertrouwd certificaat op je apparaat hebt opgeslagen."</string>
     <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{Certificaat checken}other{Certificaten checken}}"</string>
-    <!-- no translation found for user_settings_title (9208831545558787202) -->
-    <skip />
+    <string name="user_settings_title" msgid="9208831545558787202">"Gebruikers"</string>
     <string name="user_list_title" msgid="1387379079186123404">"Gebruikers en profielen"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"Gebruiker of profiel toevoegen"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"Beperkt profiel"</string>
@@ -4804,46 +4803,27 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"Informatie over je werkbeleid"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"Instellingen beheerd door je IT-beheerder"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
-    <!-- no translation found for enable_16k_pages (8001470927566110689) -->
-    <skip />
-    <!-- no translation found for enable_16k_pages_summary (1964363364670306912) -->
-    <skip />
-    <!-- no translation found for confirm_enable_16k_pages_title (1286925577014793351) -->
-    <skip />
-    <!-- no translation found for confirm_enable_16k_pages_text (570198382662424714) -->
-    <skip />
-    <!-- no translation found for confirm_enable_4k_pages_title (3210360137887034659) -->
-    <skip />
-    <!-- no translation found for confirm_enable_4k_pages_text (155070605667160083) -->
-    <skip />
+    <string name="enable_16k_pages" msgid="8001470927566110689">"Opstarten met paginagrootte 16 K"</string>
+    <string name="enable_16k_pages_summary" msgid="1964363364670306912">"Opstarten met kernel voor paginagrootte van 16 K"</string>
+    <string name="confirm_enable_16k_pages_title" msgid="1286925577014793351">"Wisselen van 4 KB-modus naar 16 KB-modus"</string>
+    <string name="confirm_enable_16k_pages_text" msgid="570198382662424714">"Je gebruikt de niet-paginagebonden modus met een kernel van 4 KB en je gaat naar de 16 KB-modus. In deze modus kan de software-integriteit niet worden gegarandeerd en kunnen alle gegevens die op de telefoon zijn opgeslagen, terwijl de bootloader is ontgrendeld, gevaar lopen. Je apparaat wordt opnieuw opgestart. Sommige functies worden in deze modi uitgezet, dus sommige apps werken misschien niet. Als je het apparaat wilt terugzetten naar de productiemodus, moet je teruggaan naar de 4 KB-modus en de bootloader vergrendelen. Hierdoor worden de fabrieksinstellingen teruggezet op het apparaat. Nadat het apparaat succesvol is opgestart in Android, zet je OEM-ontgrendeling uit in de Ontwikkelaarsopties."</string>
+    <string name="confirm_enable_4k_pages_title" msgid="3210360137887034659">"Wisselen van 16 KB-modus naar 4 KB-modus"</string>
+    <string name="confirm_enable_4k_pages_text" msgid="155070605667160083">"Je gebruikt de niet-paginagebonden modus met een kernel van 16 KB en je gaat naar de 4 KB-modus. In deze modus kan de software-integriteit niet worden gegarandeerd en kunnen alle gegevens die op de telefoon zijn opgeslagen, terwijl de bootloader is ontgrendeld, gevaar lopen. Je apparaat wordt opnieuw opgestart. Sommige functies worden in deze modi uitgezet, dus sommige apps werken misschien niet. Als je het apparaat wilt terugzetten naar de productiemodus, moet je de bootloader vergrendelen. Hierdoor worden de fabrieksinstellingen teruggezet op het apparaat. Nadat het apparaat succesvol is opgestart in Android, zet je OEM-ontgrendeling uit in de Ontwikkelaarsopties."</string>
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"Kan kernel niet updaten naar kernel voor pagina\'s van 16 KB."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Wijziging toepassen"</string>
-    <!-- no translation found for confirm_format_ext4_title (6696191800594435577) -->
-    <skip />
-    <!-- no translation found for confirm_format_ext4_text (7940372488624630214) -->
-    <skip />
-    <!-- no translation found for format_ext4_failure_toast (8059453995800471549) -->
-    <skip />
-    <!-- no translation found for confirm_oem_unlock_for_16k_title (5374451262432025419) -->
-    <skip />
-    <!-- no translation found for confirm_oem_unlock_for_16k_text (3583604865119937957) -->
-    <skip />
-    <!-- no translation found for page_agnostic_4k_pages_title (1184703958249093215) -->
-    <skip />
-    <!-- no translation found for page_agnostic_4k_pages_text_short (2894243902906666242) -->
-    <skip />
-    <!-- no translation found for page_agnostic_4k_pages_text (8284806650260868833) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_title (7762533464569818498) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text_short (269039281591806585) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text (6208765386837706582) -->
-    <skip />
-    <!-- no translation found for page_agnostic_notification_channel_name (1658444283036376361) -->
-    <skip />
-    <!-- no translation found for page_agnostic_notification_action (2309805437430150456) -->
-    <skip />
+    <string name="confirm_format_ext4_title" msgid="6696191800594435577">"Apparaat omzetten naar ext4? (vereist voor 16 KB-modus)"</string>
+    <string name="confirm_format_ext4_text" msgid="7940372488624630214">"De gegevenspartitie van dit apparaat moet worden geconverteerd naar ext4 voordat je de 16 KB-ontwikkelaarsoptie kunt gebruiken. In deze modus kan de software-integriteit niet worden gegarandeerd en kunnen alle gegevens die op de telefoon zijn opgeslagen, terwijl de bootloader is ontgrendeld, gevaar lopen. Als je de 16 KB-optie activeert, moet je het apparaat hierna nog een keer opnieuw opstarten. Zodra je in deze modus zit, kun met één keer opnieuw opstarten wisselen tussen de 4 KB- en 16 KB-modus. Sommige functies worden in deze modi uitgezet, dus sommige apps werken misschien niet. Als je het apparaat wilt terugzetten naar de productiemodus, moet je teruggaan naar de 4 KB-modus en daarna de bootloader vergrendelen. Hierdoor worden de fabrieksinstellingen teruggezet op het apparaat. Nadat het apparaat succesvol is opgestart in Android, zet je OEM-ontgrendeling uit in de Ontwikkelaarsopties. Het apparaat wordt gewist en het bestandssysteem wordt na bevestiging gewijzigd in ext4. Als dit is gebeurd, moet je terugkomen om 16 KB opnieuw aan te zetten."</string>
+    <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Kan niet omzetten en de gegevenspartitie niet wissen naar ext4."</string>
+    <string name="confirm_oem_unlock_for_16k_title" msgid="5374451262432025419">"Bootloader moet worden ontgrendeld voor 16 KB-modus"</string>
+    <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"De bootloader moet op dit apparaat ontgrendeld zijn voordat je de 16 KB-ontwikkelaarsoptie kunt gebruiken. In deze modus kan de software-integriteit niet worden gegarandeerd en kunnen alle gegevens die op de telefoon zijn opgeslagen, terwijl de bootloader is ontgrendeld, gevaar lopen. Alle gebruikersgegevens en instellingen worden gewist als de 16 KB-modus wordt geactiveerd. Na het ontgrendelen van de bootloader moet je voor het activeren van de 16 KB-optie het apparaat 2 keer opnieuw opstarten. Zodra je in deze modus zit, kun met één keer opnieuw opstarten wisselen tussen de 4 KB- en 16 KB-modus. Sommige functies worden in deze modi uitgezet, dus sommige apps werken misschien niet. Als je het apparaat wilt terugzetten naar de productiemodus, moet je teruggaan naar de 4 KB-modus en daarna OEM en de bootloader vergrendelen. Hierdoor worden de fabrieksinstellingen teruggezet op het apparaat. Ontgrendel de bootloader en probeer het opnieuw. Instructies hiervoor vind je op &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
+    <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"Niet-paginagebonden 4 KB-modus gebruiken"</string>
+    <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"Je zit in de 4 KB-modus van de niet-paginagebonden modus. In deze modus kan de software-integriteit niet worden gegarandeerd en kunnen alle gegevens die op de telefoon zijn opgeslagen, terwijl de bootloader is ontgrendeld, gevaar lopen. Sommige functies worden in deze modi uitgezet, dus sommige apps werken misschien niet. Als je wilt terugkeren naar de productiemodus, moet je de bootloader van het apparaat vergrendelen. Tik om meer te lezen."</string>
+    <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"Je zit in de 4 KB-modus van de niet-paginagebonden modus. In deze modus kan de software-integriteit niet worden gegarandeerd en kunnen alle gegevens die op de telefoon zijn opgeslagen, terwijl de bootloader is ontgrendeld, gevaar lopen. Sommige functies worden in deze modi uitgezet, dus sommige apps werken misschien niet. Als je wilt terugkeren naar de productiemodus, moet je de bootloader van het apparaat vergrendelen. Hierdoor worden de fabrieksinstellingen teruggezet en worden de productie-instellingen hersteld op het apparaat. Nadat het apparaat succesvol is opgestart in Android, zet je OEM-ontgrendeling uit in de Ontwikkelaarsopties. Als het apparaat niet opstart in Android of instabiel is, flash het apparaat dan opnieuw met de nieuwste fabrieksimages van &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; of gebruik &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; en selecteer Apparaat wissen, Bootloader vergrendelen en Alle partities geforceerd flashen."</string>
+    <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"Niet-paginagebonden modus van 16 KB gebruiken"</string>
+    <string name="page_agnostic_16k_pages_text_short" msgid="269039281591806585">"Je zit in de 16 KB-modus van de niet-paginagebonden modus. In deze modus kan de software-integriteit niet worden gegarandeerd en kunnen alle gegevens die op de telefoon zijn opgeslagen, terwijl de bootloader is ontgrendeld, gevaar lopen. Sommige functies worden in deze modi uitgezet, dus sommige apps werken misschien niet. Als je wilt terugkeren naar de productiemodus, moet je teruggaan naar de 4 KB-modus en daarna de bootloader van het apparaat vergrendelen. Tik om meer te lezen."</string>
+    <string name="page_agnostic_16k_pages_text" msgid="6208765386837706582">"Je zit in de 16 KB-modus van de niet-paginagebonden modus. In deze modus kan de software-integriteit niet worden gegarandeerd en kunnen alle gegevens die op de telefoon zijn opgeslagen, terwijl de bootloader is ontgrendeld, gevaar lopen. Sommige functies worden in deze modi uitgezet, dus sommige apps werken misschien niet. Als je wilt terugkeren naar de productiemodus, moet je teruggaan naar de 4 KB-modus en daarna de bootloader van het apparaat vergrendelen. Hierdoor worden de fabrieksinstellingen teruggezet en worden de productie-instellingen hersteld op het apparaat. Nadat het apparaat succesvol is opgestart in Android, zet je OEM-ontgrendeling uit in de Ontwikkelaarsopties. Als het apparaat niet opstart in Android of instabiel is, flash het apparaat dan opnieuw met de nieuwste fabrieksimages van &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; of gebruik &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; en selecteer Apparaat wissen, Bootloader vergrendelen en Alle partities geforceerd flashen."</string>
+    <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"Niet-paginagebonden 16 KB-modus"</string>
+    <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Meer lezen"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"App voor verwerking bugrapport"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Hierdoor wordt bepaald welke app de snelkoppeling voor het bugrapport verwerkt op je apparaat."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Privé"</string>
@@ -4975,8 +4955,7 @@
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Afdrukservice gebruiken"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Meerdere gebruikers toestaan"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"toestaan, meerdere, gebruiker, toestemming, veel"</string>
-    <!-- no translation found for multiple_users_title_keywords (2395593167746225172) -->
-    <skip />
+    <string name="multiple_users_title_keywords" msgid="2395593167746225172">"meerdere, gebruikers, profielen, personen, accounts, wisselen, veel"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Draadloze foutopsporing gebruiken"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Voorkeuren voor grafisch stuurprogramma gebruiken"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"Nachtverlichting gebruiken"</string>

@@ -72,6 +72,8 @@ public class FaceSettingsConfirmPreferenceController extends FaceSettingsPrefere
             preference.setEnabled(false);
         } else if (!mFaceManager.hasEnrolledTemplates(getUserId())) {
             preference.setEnabled(false);
+        } else if (getRestrictingAdmin() != null) {
+            preference.setEnabled(false);
         } else {
             preference.setEnabled(true);
         }

@@ -566,7 +566,8 @@
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"প্রতিবার ডিভাইস লক হলে"</string>
     <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"৫ মিনিট অ্যাক্টিভ না থাকলে"</string>
     <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"শুধুমাত্র ডিভাইস রিস্টার্ট হওয়ার পরে"</string>
-    <string name="private_space_hide_page_title" msgid="4351404195904146088">"প্রাইভেট স্পেস লক থাকাকালীন প্রাইভেট স্পেস লুকান"</string>
+    <string name="private_space_hide_page_title" msgid="3364639176511877414">"প্রাইভেট স্পেস লুকান"</string>
+    <string name="private_space_hide_when_locked" msgid="6219472348124151797">"প্রাইভেট স্পেস লক থাকাকালীন সেটি লুকান"</string>
     <string name="private_space_hide_page_summary" msgid="6247773353685839242">"আপনার ডিভাইসে যে প্রাইভেট স্পেস আছে সে কথা অন্য লোকজনকে জানানো বন্ধ করতে, এটি আপনার অ্যাপ তালিকা থেকে লুকাতে পারবেন"</string>
     <string name="private_space_access_header" msgid="1077082416567150819">"লুকানো থাকাকালীন প্রাইভেট স্পেস অ্যাক্সেস করুন"</string>
     <string name="private_space_search_description" msgid="1538155187658429618">"সার্চ বারে, \"প্রাইভেট স্পেস\" লিখুন"</string>
@@ -2963,8 +2964,7 @@
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{{orgName} আপনার অফিস প্রোফাইলের জন্য একটি সার্টিফিকেট অথরিটি ইনস্টল করেছে, যেটি তাদেরকে ইমেল, অ্যাপ এবং নিরাপদ ওয়েবসাইট সহ অফিস নেটওয়ার্কের কার্যকলাপ নিরীক্ষণ করার অনুমতি দিতে পারে।\n\nএই সার্টিফিকেট সম্পর্কে আরও তথ্যের জন্য আপনার অ্যাডমিনের সাথে যোগাযোগ করুন।}one{{orgName} আপনার অফিস প্রোফাইলের জন্য কিছু সার্টিফিকেট অথরিটি ইনস্টল করেছে, যা তাদেরকে ইমেল, অ্যাপ এবং নিরাপদ ওয়েবসাইট সহ অফিস নেটওয়ার্কের কার্যকলাপ নিরীক্ষণ করার অনুমতি দিতে পারে।\n\nএইসব সার্টিফিকেট সম্পর্কে আরও তথ্যের জন্য আপনার অ্যাডমিনের সাথে যোগাযোগ করুন।}other{{orgName} আপনার অফিস প্রোফাইলের জন্য কিছু সার্টিফিকেট অথরিটি ইনস্টল করেছে, যা তাদেরকে ইমেল, অ্যাপ এবং নিরাপদ ওয়েবসাইট সহ অফিস নেটওয়ার্কের কার্যকলাপ নিরীক্ষণ করার অনুমতি দিতে পারে।\n\nএইসব সার্টিফিকেট সম্পর্কে আরও তথ্যের জন্য আপনার অ্যাডমিনের সাথে যোগাযোগ করুন।}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"একজন তৃতীয় পক্ষ ইমেল অ্যাপ্লিকেশান, এবং নিরাপদ ওয়েবসাইটগুলি সহ আপনার নেটওয়ার্ক ক্রিয়াকলাপ নিরীক্ষণ করতে সক্ষম হবে। \n\nআপনার ডিভাইসে ইনস্টল করা একটি বিশ্বস্ত ক্রেডেনশিয়াল এটিকে সম্ভব করছে।"</string>
     <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{সার্টিফিকেট চেক করুন}one{সার্টিফিকেট চেক করুন}other{সার্টিফিকেট চেক করুন}}"</string>
-    <!-- no translation found for user_settings_title (9208831545558787202) -->
-    <skip />
+    <string name="user_settings_title" msgid="9208831545558787202">"ব্যবহারকারী"</string>
     <string name="user_list_title" msgid="1387379079186123404">"ব্যবহারকারীরা ও প্রোফাইলগুলি"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"ব্যবহারকারী অথবা প্রোফাইল যোগ করুন"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"সীমাবদ্ধ প্রোফাইল"</string>
@@ -4975,8 +4975,7 @@
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"প্রিন্ট পরিষেবা ব্যবহার করুন"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"একাধিক ব্যবহারকারীকে অনুমতি দিন"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"অনুমতি, একাধিক, ব্যবহারকারী, অনুমতি, অনেক"</string>
-    <!-- no translation found for multiple_users_title_keywords (2395593167746225172) -->
-    <skip />
+    <string name="multiple_users_title_keywords" msgid="2395593167746225172">"একাধিক, ব্যবহারকারী, প্রোফাইল, লোকজন, অ্যাকাউন্ট, পরিবর্তন করুন, অনেক"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"ওয়্যারলেস ডিবাগিং বিকল্প ব্যবহার করুন"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"গ্রাফিক্স ড্রাইভার বিকল্প ব্যবহার করুন"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"নাইট লাইট বিকল্প ব্যবহার করুন"</string>

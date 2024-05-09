@@ -242,6 +242,10 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
             return connectedDevices;
         }
         final List<BluetoothDevice> devices = leAudioProfile.getConnectedDevices();
+        if (devices == null) {
+          Log.d(TAG, "No connected LeAudioProfile devices");
+          return connectedDevices;
+        }
         for (BluetoothDevice device : devices) {
             if (device.isConnected() && isDeviceInCachedList(device)) {
                 connectedDevices.add(device);
