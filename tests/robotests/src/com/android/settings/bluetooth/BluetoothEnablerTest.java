@@ -34,6 +34,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.util.AndroidRuntimeException;
 import android.view.View;
 
 import androidx.preference.PreferenceViewHolder;
@@ -99,6 +100,19 @@ public class BluetoothEnablerTest {
         mRestrictedSwitchPreference.onBindViewHolder(mHolder);
         mBluetoothEnabler.setToggleCallback(mCallback);
         mShadowBluetoothAdapter = Shadow.extract(BluetoothAdapter.getDefaultAdapter());
+    }
+
+    @Test
+    public void onSwitchToggled_satelliteOn_showWarningDialog() {
+        mBluetoothEnabler.mIsSatelliteOn.set(true);
+
+        try {
+            mBluetoothEnabler.onSwitchToggled(true);
+        } catch (AndroidRuntimeException e) {
+            // Catch exception of starting activity .
+        }
+
+        verify(mContext).startActivity(any());
     }
 
     @Test
