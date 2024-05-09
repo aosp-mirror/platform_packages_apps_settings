@@ -86,12 +86,13 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
             return mContext.getString(
                     com.android.settingslib.R.string.battery_info_status_charging_on_hold);
         }
+        if (info.remainingLabel != null
+                && mBatterySettingsFeatureProvider.isChargingOptimizationMode(mContext)) {
+            return info.remainingLabel;
+        }
         if (info.remainingLabel == null
                 || info.batteryStatus == BatteryManager.BATTERY_STATUS_NOT_CHARGING) {
             return info.statusLabel;
-        }
-        if (mBatterySettingsFeatureProvider.isChargingOptimizationMode(mContext)) {
-            return info.remainingLabel;
         }
         if (info.pluggedStatus == BatteryManager.BATTERY_PLUGGED_WIRELESS) {
             final CharSequence wirelessChargingLabel =
