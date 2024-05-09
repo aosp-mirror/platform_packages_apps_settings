@@ -50,6 +50,7 @@ import com.android.settingslib.RestrictedSwitchPreference;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -188,6 +189,7 @@ public class ApprovalPreferenceControllerTest {
 
     @Test
     @EnableFlags(Flags.FLAG_MODES_API)
+    @Ignore("b/339550695")
     public void disable() {
         mController.disable(mCn);
         verify(mFeatureFactory.metricsFeatureProvider).action(

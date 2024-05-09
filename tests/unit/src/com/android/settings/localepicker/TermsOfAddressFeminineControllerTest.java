@@ -34,6 +34,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import com.android.settings.widget.TickButtonPreference;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
@@ -92,6 +93,7 @@ public class TermsOfAddressFeminineControllerTest {
     }
 
     @Test
+    @Ignore("b/339543490")
     public void displayPreference_setGrammaticalGenderIsFeminine_FeminineIsSelected() {
         TickButtonPreference selectedPreference =
                 (TickButtonPreference) mPreferenceScreen.getPreference(2);

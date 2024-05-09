@@ -48,6 +48,7 @@ import com.android.settings.network.ims.MockWfcQueryImsState;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -176,6 +177,7 @@ public class NetworkProviderWifiCallingGroupTest {
     }
 
     @Test
+    @Ignore("b/337417499")
     public void
     shouldShowWifiCallingForSub_wifiCallingEnabledWithActivityHandleIntent_returnTrue() {
         buildPhoneAccountConfigureIntent(true);

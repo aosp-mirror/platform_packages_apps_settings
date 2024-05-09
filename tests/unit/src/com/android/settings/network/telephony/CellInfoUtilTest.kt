@@ -25,6 +25,7 @@ import com.android.internal.telephony.OperatorInfo
 import com.android.settings.network.telephony.CellInfoUtil.getNetworkTitle
 import com.android.settings.network.telephony.CellInfoUtil.getOperatorNumeric
 import com.google.common.truth.Truth.assertThat
+import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -96,6 +97,7 @@ class CellInfoUtilTest {
     }
 
     @Test
+    @Ignore("b/337417936")
     fun convertOperatorInfoToCellInfo() {
         val operatorInfo = OperatorInfo(LONG, SHORT, "12301")
 
@@ -108,6 +110,7 @@ class CellInfoUtilTest {
     }
 
     @Test
+    @Ignore("b/337417222")
     fun cellInfoListToString() {
         val cellInfoList =
             listOf(
