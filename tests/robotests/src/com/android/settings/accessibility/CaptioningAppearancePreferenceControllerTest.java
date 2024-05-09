@@ -17,8 +17,10 @@
 package com.android.settings.accessibility;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.robolectric.Shadows.shadowOf;
 
 import android.content.Context;
+import android.os.Looper;
 import android.provider.Settings;
 import android.view.accessibility.CaptioningManager;
 
@@ -68,7 +70,9 @@ public class CaptioningAppearancePreferenceControllerTest {
 
     @Test
     public void getSummary_smallestScale_shouldReturnExpectedSummary() {
-        mShadowCaptioningManager.setFontScale(0.25f);
+        Settings.Secure.putFloat(mContext.getContentResolver(),
+            Settings.Secure.ACCESSIBILITY_CAPTIONING_FONT_SCALE, 0.25f);
+        shadowOf(Looper.getMainLooper()).idle();
 
         final String expectedSummary =
                 getSummaryCombo(/* fontScaleIndex= */ 0, DEFAULT_PRESET_INDEX);
@@ -77,7 +81,9 @@ public class CaptioningAppearancePreferenceControllerTest {
 
     @Test
     public void getSummary_smallScale_shouldReturnExpectedSummary() {
-        mShadowCaptioningManager.setFontScale(0.5f);
+        Settings.Secure.putFloat(mContext.getContentResolver(),
+            Settings.Secure.ACCESSIBILITY_CAPTIONING_FONT_SCALE, 0.5f);
+        shadowOf(Looper.getMainLooper()).idle();
 
         final String expectedSummary =
                 getSummaryCombo(/* fontScaleIndex= */ 1, DEFAULT_PRESET_INDEX);
@@ -86,7 +92,9 @@ public class CaptioningAppearancePreferenceControllerTest {
 
     @Test
     public void getSummary_mediumScale_shouldReturnExpectedSummary() {
-        mShadowCaptioningManager.setFontScale(1.0f);
+        Settings.Secure.putFloat(mContext.getContentResolver(),
+            Settings.Secure.ACCESSIBILITY_CAPTIONING_FONT_SCALE, 1.0f);
+        shadowOf(Looper.getMainLooper()).idle();
 
         final String expectedSummary =
                 getSummaryCombo(/* fontScaleIndex= */ 2, DEFAULT_PRESET_INDEX);
@@ -95,7 +103,9 @@ public class CaptioningAppearancePreferenceControllerTest {
 
     @Test
     public void getSummary_largeScale_shouldReturnExpectedSummary() {
-        mShadowCaptioningManager.setFontScale(1.5f);
+        Settings.Secure.putFloat(mContext.getContentResolver(),
+            Settings.Secure.ACCESSIBILITY_CAPTIONING_FONT_SCALE, 1.5f);
+        shadowOf(Looper.getMainLooper()).idle();
 
         final String expectedSummary =
                 getSummaryCombo(/* fontScaleIndex= */ 3, DEFAULT_PRESET_INDEX);
@@ -104,7 +114,9 @@ public class CaptioningAppearancePreferenceControllerTest {
 
     @Test
     public void getSummary_largestScale_shouldReturnExpectedSummary() {
-        mShadowCaptioningManager.setFontScale(2.0f);
+        Settings.Secure.putFloat(mContext.getContentResolver(),
+            Settings.Secure.ACCESSIBILITY_CAPTIONING_FONT_SCALE, 2.0f);
+        shadowOf(Looper.getMainLooper()).idle();
 
         final String expectedSummary =
                 getSummaryCombo(/* fontScaleIndex= */ 4, DEFAULT_PRESET_INDEX);
