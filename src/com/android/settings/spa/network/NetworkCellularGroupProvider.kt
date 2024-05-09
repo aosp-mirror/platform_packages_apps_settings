@@ -410,11 +410,22 @@ suspend fun setMobileData(
     enabled: Boolean,
 ): Unit =
     withContext(Dispatchers.Default) {
-        Log.d(NetworkCellularGroupProvider.fileName, "setMobileData: $enabled")
+        Log.d(NetworkCellularGroupProvider.fileName, "setMobileData[$subId]: $enabled")
+
+        var targetSubId = subId
+        val activeSubIdList = subscriptionManager?.activeSubscriptionIdList
+        if (activeSubIdList?.size == 1) {
+            targetSubId = activeSubIdList[0]
+            Log.d(
+                NetworkCellularGroupProvider.fileName,
+                "There is only one sim in the device, correct dds as $targetSubId"
+            )
+        }
+
         if (enabled) {
-            Log.d(NetworkCellularGroupProvider.fileName, "setDefaultData: [$subId]")
-            subscriptionManager?.setDefaultDataSubId(subId)
+            Log.d(NetworkCellularGroupProvider.fileName, "setDefaultData: [$targetSubId]")
+            subscriptionManager?.setDefaultDataSubId(targetSubId)
         }
         TelephonyRepository(context)
-            .setMobileData(subId, enabled, wifiPickerTrackerHelper)
+            .setMobileData(targetSubId, enabled, wifiPickerTrackerHelper)
     }
