@@ -517,6 +517,15 @@ public class AudioOutputSwitchPreferenceControllerTest {
     }
 
     @Test
+    public void getConnectedLeAudioDevices_nullConnectedDevices_returnEmptyList() {
+      when(mLeAudioProfile.getConnectedDevices()).thenReturn(null);
+
+      List<BluetoothDevice> connectedDevices = mController.getConnectedLeAudioDevices();
+
+      assertThat(connectedDevices.isEmpty()).isTrue();
+    }
+
+    @Test
     public void findActiveLeAudioDevice_noActiveDevice_returnNull() {
         mLeAudioActiveDevices.clear();
         when(mLeAudioProfile.getActiveDevices()).thenReturn(mLeAudioActiveDevices);
