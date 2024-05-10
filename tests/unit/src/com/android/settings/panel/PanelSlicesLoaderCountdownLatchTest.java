@@ -29,6 +29,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+@Deprecated(forRemoval = true)
 @RunWith(AndroidJUnit4.class)
 public class PanelSlicesLoaderCountdownLatchTest {
 

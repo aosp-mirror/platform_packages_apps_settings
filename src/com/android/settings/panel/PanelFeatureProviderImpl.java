@@ -27,6 +27,7 @@ import androidx.annotation.Nullable;
 import com.android.settings.Utils;
 import com.android.settings.flags.Flags;
 
+@Deprecated(forRemoval = true)
 public class PanelFeatureProviderImpl implements PanelFeatureProvider {
 
     @Override
