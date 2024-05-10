@@ -52,13 +52,24 @@ class SubscriptionRepositoryTest {
         on { subscriptionManager } doReturn mockSubscriptionManager
     }
 
+    private val repository = SubscriptionRepository(context)
+
     @Test
-    fun isSubscriptionEnabledFlow() = runBlocking {
+    fun isSubscriptionEnabledFlow_invalidSubId() = runBlocking {
+        val isEnabled = repository
+            .isSubscriptionEnabledFlow(SubscriptionManager.INVALID_SUBSCRIPTION_ID)
+            .firstWithTimeoutOrNull()
+
+        assertThat(isEnabled).isFalse()
+    }
+
+    @Test
+    fun isSubscriptionEnabledFlow_enabled() = runBlocking {
         mockSubscriptionManager.stub {
             on { isSubscriptionEnabled(SUB_ID_1) } doReturn true
         }
 
-        val isEnabled = context.isSubscriptionEnabledFlow(SUB_ID_1).firstWithTimeoutOrNull()
+        val isEnabled = repository.isSubscriptionEnabledFlow(SUB_ID_1).firstWithTimeoutOrNull()
 
         assertThat(isEnabled).isTrue()
     }
