@@ -33,14 +33,12 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settings.applications.defaultapps.DefaultAppPickerFragment;
-import com.android.settings.development.DeveloperOptionAwareMixin;
 import com.android.settingslib.applications.DefaultAppInfo;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class WebViewAppPicker extends DefaultAppPickerFragment implements
-        DeveloperOptionAwareMixin {
+public class WebViewAppPicker extends DefaultAppPickerFragment {
     private WebViewUpdateServiceWrapper mWebViewUpdateServiceWrapper;
 
     private WebViewUpdateServiceWrapper getWebViewUpdateServiceWrapper() {
