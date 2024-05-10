@@ -18,11 +18,13 @@ package com.android.settings.network;
 
 import static android.telephony.SubscriptionManager.INVALID_SIM_SLOT_INDEX;
 import static android.telephony.UiccSlotInfo.CARD_STATE_INFO_PRESENT;
+import static android.telephony.SubscriptionManager.PROFILE_CLASS_PROVISIONING;
 
 import static com.android.internal.util.CollectionUtils.emptyIfNull;
 
 import android.annotation.Nullable;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.ParcelUuid;
 import android.provider.Settings;
 import android.telephony.PhoneNumberUtils;
@@ -31,34 +33,47 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.telephony.UiccCardInfo;
 import android.telephony.UiccSlotInfo;
+import android.text.BidiFormatter;
+import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.telephony.MccTable;
+import com.android.internal.telephony.flags.Flags;
 import com.android.settings.R;
 import com.android.settings.network.helper.SelectableSubscriptions;
 import com.android.settings.network.helper.SubscriptionAnnotation;
 import com.android.settings.network.telephony.DeleteEuiccSubscriptionDialogActivity;
 import com.android.settings.network.telephony.ToggleSubscriptionDialogActivity;
-import com.android.settingslib.DeviceInfoUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Supplier;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class SubscriptionUtil {
     private static final String TAG = "SubscriptionUtil";
     private static final String PROFILE_GENERIC_DISPLAY_NAME = "CARD";
+    @VisibleForTesting
+    static final String SUB_ID = "sub_id";
+    @VisibleForTesting
+    static final String KEY_UNIQUE_SUBSCRIPTION_DISPLAYNAME = "unique_subscription_displayName";
+    private static final String REGEX_DISPLAY_NAME_PREFIXES = "^";
+    private static final String REGEX_DISPLAY_NAME_SUFFIXES = "\\s[0-9]+";
+
     private static List<SubscriptionInfo> sAvailableResultsForTesting;
     private static List<SubscriptionInfo> sActiveResultsForTesting;
 
@@ -73,6 +88,8 @@ public class SubscriptionUtil {
     }
 
     public static List<SubscriptionInfo> getActiveSubscriptions(SubscriptionManager manager) {
+        //TODO (b/315499317) : Refactor the subscription utils.
+
         if (sActiveResultsForTesting != null) {
             return sActiveResultsForTesting;
         }
@@ -83,7 +100,20 @@ public class SubscriptionUtil {
         if (subscriptions == null) {
             return new ArrayList<>();
         }
-        return subscriptions;
+        // Since the SubscriptionManager.getActiveSubscriptionInfoList() has checked whether the
+        // sim visible by the SubscriptionManager.isSubscriptionVisible(), here only checks whether
+        // the esim visible here.
+        return subscriptions.stream()
+                .filter(subInfo -> subInfo != null && isEmbeddedSubscriptionVisible(subInfo))
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Check if SIM hardware is visible to the end user.
+     */
+    public static boolean isSimHardwareVisible(Context context) {
+        return context.getResources()
+            .getBoolean(R.bool.config_show_sim_info);
     }
 
     @VisibleForTesting
@@ -109,7 +139,7 @@ public class SubscriptionUtil {
     }
 
     /**
-     * Get subscription which is available to be displayed to the user
+     * Get subscriptionInfo which is available to be displayed to the user
      * per subscription id.
      *
      * @param context {@code Context}
@@ -119,10 +149,17 @@ public class SubscriptionUtil {
      * @return {@code SubscriptionInfo} based on the given subscription id. Null of subscription
      *         is invalid or not allowed to be displayed to the user.
      */
-    public static SubscriptionInfo getAvailableSubscription(Context context,
+    public static SubscriptionInfo getAvailableSubscriptionBySubIdAndShowingForUser(Context context,
             ProxySubscriptionManager subscriptionManager, int subId) {
+        //TODO (b/315499317) : Refactor the subscription utils.
         final SubscriptionInfo subInfo = subscriptionManager.getAccessibleSubscriptionInfo(subId);
         if (subInfo == null) {
+            return null;
+        }
+
+        // hide provisioning/bootstrap and satellite profiles for user
+        if (!isEmbeddedSubscriptionVisible(subInfo)) {
+            Log.d(TAG, "Do not insert the provision eSIM or NTN eSim");
             return null;
         }
 
@@ -255,20 +292,21 @@ public class SubscriptionUtil {
         // Map of SubscriptionId to DisplayName
         final Supplier<Stream<DisplayInfo>> originalInfos =
                 () -> getAvailableSubscriptions(context)
-                .stream()
-                .filter(i -> {
-                    // Filter out null values.
-                    return (i != null && i.getDisplayName() != null);
-                })
-                .map(i -> {
-                    DisplayInfo info = new DisplayInfo();
-                    info.subscriptionInfo = i;
-                    String displayName = i.getDisplayName().toString();
-                    info.originalName = TextUtils.equals(displayName, PROFILE_GENERIC_DISPLAY_NAME)
-                            ? context.getResources().getString(R.string.sim_card)
-                            : displayName.trim();
-                    return info;
-                });
+                        .stream()
+                        .filter(i -> {
+                            // Filter out null values.
+                            return (i != null && i.getDisplayName() != null);
+                        })
+                        .map(i -> {
+                            DisplayInfo info = new DisplayInfo();
+                            info.subscriptionInfo = i;
+                            String displayName = i.getDisplayName().toString();
+                            info.originalName =
+                                    TextUtils.equals(displayName, PROFILE_GENERIC_DISPLAY_NAME)
+                                            ? context.getResources().getString(R.string.sim_card)
+                                            : displayName.trim();
+                            return info;
+                        });
 
         // TODO(goldmanj) consider using a map of DisplayName to SubscriptionInfos.
         // A Unique set of display names
@@ -282,22 +320,36 @@ public class SubscriptionUtil {
         // If a display name is duplicate, append the final 4 digits of the phone number.
         // Creates a mapping of Subscription id to original display name + phone number display name
         final Supplier<Stream<DisplayInfo>> uniqueInfos = () -> originalInfos.get().map(info -> {
+            int infoSubId = info.subscriptionInfo.getSubscriptionId();
+            String cachedDisplayName = getDisplayNameFromSharedPreference(
+                    context, infoSubId);
+            if (isValidCachedDisplayName(cachedDisplayName, info.originalName.toString())) {
+                Log.d(TAG, "use cached display name : for subId : " + infoSubId
+                        + "cached display name : " + cachedDisplayName);
+                info.uniqueName = cachedDisplayName;
+                return info;
+            } else {
+                Log.d(TAG, "remove cached display name : " + infoSubId);
+                removeItemFromDisplayNameSharedPreference(context, infoSubId);
+            }
+
             if (duplicateOriginalNames.contains(info.originalName)) {
                 // This may return null, if the user cannot view the phone number itself.
-                final String phoneNumber = DeviceInfoUtils.getBidiFormattedPhoneNumber(context,
+                final String phoneNumber = getBidiFormattedPhoneNumber(context,
                         info.subscriptionInfo);
                 String lastFourDigits = "";
                 if (phoneNumber != null) {
                     lastFourDigits = (phoneNumber.length() > 4)
-                        ? phoneNumber.substring(phoneNumber.length() - 4) : phoneNumber;
+                            ? phoneNumber.substring(phoneNumber.length() - 4) : phoneNumber;
                 }
-
                 if (TextUtils.isEmpty(lastFourDigits)) {
                     info.uniqueName = info.originalName;
                 } else {
                     info.uniqueName = info.originalName + " " + lastFourDigits;
+                    Log.d(TAG, "Cache display name [" + info.uniqueName + "] for sub id "
+                            + infoSubId);
+                    saveDisplayNameToSharedPreference(context, infoSubId, info.uniqueName);
                 }
-
             } else {
                 info.uniqueName = info.originalName;
             }
@@ -359,6 +411,44 @@ public class SubscriptionUtil {
             return "";
         }
         return getUniqueSubscriptionDisplayName(info.getSubscriptionId(), context);
+    }
+
+
+    private static SharedPreferences getDisplayNameSharedPreferences(Context context) {
+        return context.getSharedPreferences(
+                KEY_UNIQUE_SUBSCRIPTION_DISPLAYNAME, Context.MODE_PRIVATE);
+    }
+
+    private static SharedPreferences.Editor getDisplayNameSharedPreferenceEditor(Context context) {
+        return getDisplayNameSharedPreferences(context).edit();
+    }
+
+    private static void saveDisplayNameToSharedPreference(
+            Context context, int subId, CharSequence displayName) {
+        getDisplayNameSharedPreferenceEditor(context)
+                .putString(SUB_ID + subId, String.valueOf(displayName))
+                .apply();
+    }
+
+    private static void removeItemFromDisplayNameSharedPreference(Context context, int subId) {
+        getDisplayNameSharedPreferenceEditor(context)
+                .remove(SUB_ID + subId)
+                .commit();
+    }
+
+    private static String getDisplayNameFromSharedPreference(Context context, int subid) {
+        return getDisplayNameSharedPreferences(context).getString(SUB_ID + subid, "");
+    }
+
+    @VisibleForTesting
+    static boolean isValidCachedDisplayName(String cachedDisplayName, String originalName) {
+        if (TextUtils.isEmpty(cachedDisplayName) || TextUtils.isEmpty(originalName)) {
+            return false;
+        }
+        String regex = REGEX_DISPLAY_NAME_PREFIXES + originalName + REGEX_DISPLAY_NAME_SUFFIXES;
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(cachedDisplayName);
+        return matcher.matches();
     }
 
     public static String getDisplayName(SubscriptionInfo info) {
@@ -428,6 +518,7 @@ public class SubscriptionUtil {
                 }
 
             }
+            Log.d(TAG, "getSelectableSubscriptionInfoList: " + selectableList);
             return selectableList;
         }
     }
@@ -494,6 +585,12 @@ public class SubscriptionUtil {
     public static boolean isSubscriptionVisible(
             SubscriptionManager subscriptionManager, Context context, SubscriptionInfo info) {
         if (info == null) return false;
+
+        // hide provisioning/bootstrap and satellite profiles for user
+        if (!isEmbeddedSubscriptionVisible(info)) {
+            return false;
+        }
+
         // If subscription is NOT grouped opportunistic subscription, it's visible.
         if (info.getGroupUuid() == null || !info.isOpportunistic()) return true;
 
@@ -551,8 +648,23 @@ public class SubscriptionUtil {
         if (TextUtils.isEmpty(rawPhoneNumber)) {
             return null;
         }
-        String countryIso = MccTable.countryCodeForMcc(subscriptionInfo.getMccString());
+        String countryIso = MccTable.countryCodeForMcc(subscriptionInfo.getMccString())
+                .toUpperCase(Locale.ROOT);
         return PhoneNumberUtils.formatNumber(rawPhoneNumber, countryIso);
+    }
+
+    /**
+     * To get the formatting text for display in a potentially opposite-directionality context
+     * without garbling.
+     * @param subscriptionInfo {@link SubscriptionInfo} subscription information.
+     * @return Returns phone number with Bidi format.
+     */
+    @Nullable
+    public static String getBidiFormattedPhoneNumber(Context context,
+            SubscriptionInfo subscriptionInfo) {
+        String phoneNumber = getFormattedPhoneNumber(context, subscriptionInfo);
+        return (phoneNumber == null) ? phoneNumber :
+                BidiFormatter.getInstance().unicodeWrap(phoneNumber, TextDirectionHeuristics.LTR);
     }
 
     /**
@@ -602,7 +714,7 @@ public class SubscriptionUtil {
         boolean isDefaultData = subId == getDefaultDataSubscriptionId();
 
         if (!isDefaultData && !isDefaultCall && !isDefaultSms) {
-            return null;
+            return "";
         }
 
         final StringBuilder defaultConfig = new StringBuilder();
@@ -663,6 +775,12 @@ public class SubscriptionUtil {
                         .findFirst().orElse(null);
     }
 
+    public static boolean isDefaultSubscription(Context context, int subId) {
+        SubscriptionAnnotation subInfo = getDefaultSubscriptionSelection(
+                new SelectableSubscriptions(context, true).call());
+        return subInfo != null && subInfo.getSubscriptionId() == subId;
+    }
+
     public static SubscriptionInfo getSubscriptionOrDefault(Context context, int subscriptionId) {
         return getSubscription(context, subscriptionId,
                 (subscriptionId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) ? null : (
@@ -691,5 +809,15 @@ public class SubscriptionUtil {
             currentSubInfo = selectionOfDefault.apply(subList);
         }
         return (currentSubInfo == null) ? null : currentSubInfo.getSubInfo();
+    }
+
+    private static boolean isEmbeddedSubscriptionVisible(@NonNull SubscriptionInfo subInfo) {
+        if (subInfo.isEmbedded()
+                && (subInfo.getProfileClass() == PROFILE_CLASS_PROVISIONING
+                || (Flags.oemEnabledSatelliteFlag()
+                && subInfo.isOnlyNonTerrestrialNetwork()))) {
+            return false;
+        }
+        return true;
     }
 }

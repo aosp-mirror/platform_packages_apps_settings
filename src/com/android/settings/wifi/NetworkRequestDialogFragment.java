@@ -16,9 +16,7 @@
 
 package com.android.settings.wifi;
 
-import static com.android.settings.wifi.WifiUtils.getWifiEntrySecurity;
-
-import static java.util.stream.Collectors.toList;
+import static com.android.wifitrackerlib.Utils.getSecurityTypesFromScanResult;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -77,8 +75,12 @@ public class NetworkRequestDialogFragment extends NetworkRequestDialogBaseFragme
     private static final int MAX_NUMBER_LIST_ITEM = 5;
     private boolean mShowLimitedItem = true;
 
+    private static class MatchWifi {
+        String mSsid;
+        List<Integer> mSecurityTypes;
+    }
+    private List<MatchWifi> mMatchWifis = new ArrayList<>();
     @VisibleForTesting List<WifiEntry> mFilteredWifiEntries = new ArrayList<>();
-    @VisibleForTesting List<ScanResult> mMatchedScanResults = new ArrayList<>();
     private WifiEntryAdapter mDialogAdapter;
     private NetworkRequestUserSelectionCallback mUserSelectionCallback;
 
@@ -110,7 +112,7 @@ public class NetworkRequestDialogFragment extends NetworkRequestDialogBaseFragme
             }
         };
         final Context context = getContext();
-        mWifiPickerTracker = FeatureFactory.getFactory(context)
+        mWifiPickerTracker = FeatureFactory.getFeatureFactory()
                 .getWifiTrackerLibProvider()
                 .createWifiPickerTracker(getSettingsLifecycle(), context,
                         new Handler(Looper.getMainLooper()),
@@ -140,7 +142,7 @@ public class NetworkRequestDialogFragment extends NetworkRequestDialogBaseFragme
 
         // Prepares adapter.
         mDialogAdapter = new WifiEntryAdapter(context,
-                R.layout.preference_access_point, mFilteredWifiEntries);
+                com.android.settingslib.R.layout.preference_access_point, mFilteredWifiEntries);
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(context)
                 .setCustomTitle(customTitle)
@@ -237,7 +239,7 @@ public class NetworkRequestDialogFragment extends NetworkRequestDialogBaseFragme
     /** Called when the state of Wifi has changed. */
     @Override
     public void onWifiStateChanged() {
-        if (mMatchedScanResults.size() == 0) {
+        if (mMatchWifis.size() == 0) {
             return;
         }
         updateWifiEntries();
@@ -249,7 +251,7 @@ public class NetworkRequestDialogFragment extends NetworkRequestDialogBaseFragme
      */
     @Override
     public void onWifiEntriesChanged() {
-        if (mMatchedScanResults.size() == 0) {
+        if (mMatchWifis.size() == 0) {
             return;
         }
         updateWifiEntries();
@@ -269,22 +271,42 @@ public class NetworkRequestDialogFragment extends NetworkRequestDialogBaseFragme
     @VisibleForTesting
     void updateWifiEntries() {
         final List<WifiEntry> wifiEntries = new ArrayList<>();
-        if (mWifiPickerTracker.getConnectedWifiEntry() != null) {
-            wifiEntries.add(mWifiPickerTracker.getConnectedWifiEntry());
+        WifiEntry connectedWifiEntry = mWifiPickerTracker.getConnectedWifiEntry();
+        String connectedSsid;
+        if (connectedWifiEntry != null) {
+            connectedSsid = connectedWifiEntry.getSsid();
+            wifiEntries.add(connectedWifiEntry);
+        } else {
+            connectedSsid = null;
         }
         wifiEntries.addAll(mWifiPickerTracker.getWifiEntries());
 
         mFilteredWifiEntries.clear();
-        mFilteredWifiEntries.addAll(wifiEntries.stream().filter(entry -> {
-            for (ScanResult matchedScanResult : mMatchedScanResults) {
-                if (TextUtils.equals(entry.getSsid(), matchedScanResult.SSID)
-                        && entry.getSecurity() == getWifiEntrySecurity(matchedScanResult)) {
+        mFilteredWifiEntries.addAll(wifiEntries.stream()
+                .filter(entry -> isMatchedWifiEntry(entry, connectedSsid))
+                .limit(mShowLimitedItem ? MAX_NUMBER_LIST_ITEM : Long.MAX_VALUE)
+                .toList());
+    }
+
+    private boolean isMatchedWifiEntry(WifiEntry entry, String connectedSsid) {
+        if (entry.getConnectedState() == WifiEntry.CONNECTED_STATE_DISCONNECTED
+                && TextUtils.equals(entry.getSsid(), connectedSsid)) {
+            // WifiPickerTracker may return a duplicate unsaved network that is separate from
+            // the connecting app-requested network, so make sure we only show the connected
+            // app-requested one.
+            return false;
+        }
+        for (MatchWifi wifi : mMatchWifis) {
+            if (!TextUtils.equals(entry.getSsid(), wifi.mSsid)) {
+                continue;
+            }
+            for (Integer security : wifi.mSecurityTypes) {
+                if (entry.getSecurityTypes().contains(security)) {
                     return true;
                 }
             }
-            return false;
-        }).limit(mShowLimitedItem ? MAX_NUMBER_LIST_ITEM : Long.MAX_VALUE)
-                .collect(toList()));
+        }
+        return false;
     }
 
     private class WifiEntryAdapter extends ArrayAdapter<WifiEntry> {
@@ -304,7 +326,7 @@ public class NetworkRequestDialogFragment extends NetworkRequestDialogBaseFragme
                 view = mInflater.inflate(mResourceId, parent, false);
 
                 final View divider = view.findViewById(
-                        com.android.settingslib.R.id.two_target_divider);
+                        com.android.settingslib.widget.preference.twotarget.R.id.two_target_divider);
                 divider.setVisibility(View.GONE);
             }
 
@@ -350,7 +372,14 @@ public class NetworkRequestDialogFragment extends NetworkRequestDialogBaseFragme
 
     @Override
     public void onMatch(List<ScanResult> scanResults) {
-        mMatchedScanResults = scanResults;
+        mMatchWifis.clear();
+        for (ScanResult scanResult : scanResults) {
+            MatchWifi matchWifi = new MatchWifi();
+            matchWifi.mSsid = scanResult.SSID;
+            matchWifi.mSecurityTypes = getSecurityTypesFromScanResult(scanResult);
+            mMatchWifis.add(matchWifi);
+        }
+
         updateWifiEntries();
         updateUi();
     }

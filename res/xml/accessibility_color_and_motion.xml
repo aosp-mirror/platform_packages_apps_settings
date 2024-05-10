@@ -49,7 +49,15 @@
         settings:controller="com.android.settings.display.DarkUIPreferenceController"
         settings:searchable="false"/>
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
+        android:icon="@drawable/ic_dark_ui"
+        android:key="toggle_force_invert"
+        android:persistent="false"
+        android:summary="@string/accessibility_force_invert_summary"
+        android:title="@string/accessibility_force_invert_title"
+        settings:controller="com.android.settings.accessibility.ToggleForceInvertPreferenceController"/>
+
+    <SwitchPreferenceCompat
         android:icon="@drawable/ic_accessibility_animation"
         android:key="toggle_disable_animations"
         android:persistent="false"
@@ -57,7 +65,7 @@
         android:title="@string/accessibility_disable_animations"
         settings:controller="com.android.settings.accessibility.DisableAnimationsPreferenceController"/>
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="toggle_large_pointer_icon"
         android:persistent="false"
         android:summary="@string/accessibility_toggle_large_pointer_icon_summary"

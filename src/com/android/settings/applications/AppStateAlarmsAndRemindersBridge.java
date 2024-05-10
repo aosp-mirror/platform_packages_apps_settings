@@ -18,11 +18,11 @@ package com.android.settings.applications;
 
 import android.Manifest;
 import android.app.AlarmManager;
-import android.app.AppGlobals;
 import android.app.compat.CompatChanges;
 import android.content.Context;
-import android.content.pm.IPackageManager;
-import android.os.RemoteException;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.os.PowerExemptionManager;
 import android.os.UserHandle;
 import android.util.Log;
 
@@ -32,8 +32,6 @@ import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.ApplicationsState.AppFilter;
 
-import libcore.util.EmptyArray;
-
 import java.util.List;
 
 /**
@@ -42,31 +40,45 @@ import java.util.List;
  * Also provides app filters that can use the info.
  */
 public class AppStateAlarmsAndRemindersBridge extends AppStateBaseBridge {
-    private static final String PERMISSION = Manifest.permission.SCHEDULE_EXACT_ALARM;
+    private static final String SEA_PERMISSION = Manifest.permission.SCHEDULE_EXACT_ALARM;
+    private static final String UEA_PERMISSION = Manifest.permission.USE_EXACT_ALARM;
     private static final String TAG = "AlarmsAndRemindersBridge";
 
     @VisibleForTesting
     AlarmManager mAlarmManager;
     @VisibleForTesting
-    String[] mRequesterPackages;
+    PowerExemptionManager mPowerExemptionManager;
+    @VisibleForTesting
+    PackageManager mPackageManager;
 
     public AppStateAlarmsAndRemindersBridge(Context context, ApplicationsState appState,
             Callback callback) {
         super(appState, callback);
 
+        mPowerExemptionManager = context.getSystemService(PowerExemptionManager.class);
         mAlarmManager = context.getSystemService(AlarmManager.class);
-        final IPackageManager iPm = AppGlobals.getPackageManager();
-        try {
-            mRequesterPackages = iPm.getAppOpPermissionPackages(PERMISSION);
-        } catch (RemoteException re) {
-            Log.e(TAG, "Cannot reach package manager", re);
-            mRequesterPackages = EmptyArray.STRING;
-        }
+        mPackageManager = context.getPackageManager();
     }
 
     private boolean isChangeEnabled(String packageName, int userId) {
         return CompatChanges.isChangeEnabled(AlarmManager.REQUIRE_EXACT_ALARM_PERMISSION,
                 packageName, UserHandle.of(userId));
+    }
+
+    private boolean isUeaChangeEnabled(String packageName, int userId) {
+        return CompatChanges.isChangeEnabled(AlarmManager.ENABLE_USE_EXACT_ALARM, packageName,
+                UserHandle.of(userId));
+    }
+
+    private String[] getRequestedPermissions(String packageName, int userId) {
+        try {
+            final PackageInfo info = mPackageManager.getPackageInfoAsUser(packageName,
+                    PackageManager.GET_PERMISSIONS, userId);
+            return info.requestedPermissions;
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.e(TAG, "Could not find package " + packageName, e);
+        }
+        return null;
     }
 
     /**
@@ -76,10 +88,17 @@ public class AppStateAlarmsAndRemindersBridge extends AppStateBaseBridge {
     public AlarmsAndRemindersState createPermissionState(String packageName, int uid) {
         final int userId = UserHandle.getUserId(uid);
 
-        final boolean permissionRequested = ArrayUtils.contains(mRequesterPackages, packageName)
+        final String[] requestedPermissions = getRequestedPermissions(packageName, userId);
+
+        final boolean seaRequested = ArrayUtils.contains(requestedPermissions, SEA_PERMISSION)
                 && isChangeEnabled(packageName, userId);
-        final boolean permissionGranted = mAlarmManager.hasScheduleExactAlarm(packageName, userId);
-        return new AlarmsAndRemindersState(permissionRequested, permissionGranted);
+        final boolean ueaRequested = ArrayUtils.contains(requestedPermissions, UEA_PERMISSION)
+                && isUeaChangeEnabled(packageName, userId);
+
+        final boolean seaGranted = mAlarmManager.hasScheduleExactAlarm(packageName, userId);
+        final boolean allowListed = mPowerExemptionManager.isAllowListed(packageName, true);
+
+        return new AlarmsAndRemindersState(seaRequested, ueaRequested, seaGranted, allowListed);
     }
 
     @Override
@@ -113,26 +132,32 @@ public class AppStateAlarmsAndRemindersBridge extends AppStateBaseBridge {
     };
 
     /**
-     * Class to denote the state of an app regarding
-     * {@link Manifest.permission#SCHEDULE_EXACT_ALARM}.
+     * Class to denote the state of an app regarding "Alarms and Reminders" permission.
+     * This permission state is a combination of {@link Manifest.permission#SCHEDULE_EXACT_ALARM},
+     * {@link Manifest.permission#USE_EXACT_ALARM} and the power allowlist state.
      */
     public static class AlarmsAndRemindersState {
-        private boolean mPermissionRequested;
-        private boolean mPermissionGranted;
+        private boolean mSeaPermissionRequested;
+        private boolean mUeaPermissionRequested;
+        private boolean mSeaPermissionGranted;
+        private boolean mAllowListed;
 
-        AlarmsAndRemindersState(boolean permissionRequested, boolean permissionGranted) {
-            mPermissionRequested = permissionRequested;
-            mPermissionGranted = permissionGranted;
+        AlarmsAndRemindersState(boolean seaPermissionRequested, boolean ueaPermissionRequested,
+                boolean seaPermissionGranted, boolean allowListed) {
+            mSeaPermissionRequested = seaPermissionRequested;
+            mUeaPermissionRequested = ueaPermissionRequested;
+            mSeaPermissionGranted = seaPermissionGranted;
+            mAllowListed = allowListed;
         }
 
         /** Should the app associated with this state appear on the Settings screen */
         public boolean shouldBeVisible() {
-            return mPermissionRequested;
+            return mSeaPermissionRequested && !mUeaPermissionRequested && !mAllowListed;
         }
 
         /** Is the permission granted to the app associated with this state */
         public boolean isAllowed() {
-            return mPermissionGranted;
+            return mSeaPermissionGranted || mUeaPermissionRequested || mAllowListed;
         }
     }
 }

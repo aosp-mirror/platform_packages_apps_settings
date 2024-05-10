@@ -64,6 +64,12 @@
         settings:searchable="false"
         settings:controller="com.android.settings.applications.specialaccess.notificationaccess.BridgedAppsLinkPreferenceController" />
 
+    <Preference
+        android:key="more_settings"
+        android:title="@string/notif_listener_more_settings"
+        android:summary="@string/notif_listener_more_settings_desc"
+        settings:controller="com.android.settings.applications.specialaccess.notificationaccess.MoreSettingsPreferenceController" />
+
     <com.android.settingslib.widget.FooterPreference
         android:key="notif_listener_not_migrated"
         android:title="@string/notif_listener_not_migrated"

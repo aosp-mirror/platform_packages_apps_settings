@@ -50,6 +50,9 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class KeyboardLayoutPickerControllerTest {
 
     @Mock
@@ -93,13 +96,13 @@ public class KeyboardLayoutPickerControllerTest {
     }
 
     @Test
-    public void testLifecycle_onStart_NoInputDevice_shouldFinish() {
+    public void testLifecycle_onStart_NoInputDevice_shouldReturn() {
         final FragmentActivity activity = Robolectric.setupActivity(FragmentActivity.class);
         when(mInputManager.getInputDeviceByDescriptor(anyString())).thenReturn(null);
         when(mFragment.getActivity()).thenReturn(activity);
 
         mController.onStart();
-        assertThat(activity.isFinishing()).isTrue();
+        verify(mInputManager, never()).getEnabledKeyboardLayoutsForInputDevice(any());
     }
 
     @Test
@@ -174,7 +177,7 @@ public class KeyboardLayoutPickerControllerTest {
     }
 
     private void initializeOneLayout() {
-        final KeyboardLayout[] keyboardLayouts = {new KeyboardLayout("", "", "", 1, null, 1, 1)};
+        final KeyboardLayout[] keyboardLayouts = {new KeyboardLayout("", "", "", 1, null, 0, 1, 1)};
         when(mInputManager.getKeyboardLayoutsForInputDevice(
                 any(InputDeviceIdentifier.class))).thenReturn(
                 keyboardLayouts);
@@ -183,8 +186,8 @@ public class KeyboardLayoutPickerControllerTest {
     }
 
     private void initializeTwoLayouts() {
-        final KeyboardLayout[] keyboardLayouts = {new KeyboardLayout("", "", "", 1, null, 1, 1),
-                new KeyboardLayout("", "", "", 2, null, 2, 2)};
+        final KeyboardLayout[] keyboardLayouts = {new KeyboardLayout("", "", "", 1, null, 0, 1, 1),
+                new KeyboardLayout("", "", "", 2, null, 0, 2, 2)};
         when(mInputManager.getKeyboardLayoutsForInputDevice(any(InputDeviceIdentifier.class))).
                 thenReturn(keyboardLayouts);
 

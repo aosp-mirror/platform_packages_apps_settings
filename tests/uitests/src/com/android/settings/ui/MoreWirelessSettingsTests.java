@@ -19,13 +19,15 @@ package com.android.settings.ui;
 import android.os.RemoteException;
 import android.platform.test.annotations.Presubmit;
 import android.provider.Settings;
-import android.support.test.uiautomator.By;
-import android.support.test.uiautomator.UiDevice;
-import android.support.test.uiautomator.UiObject2;
-import android.support.test.uiautomator.Until;
 import android.system.helpers.SettingsHelper;
 import android.test.InstrumentationTestCase;
 import android.test.suitebuilder.annotation.MediumTest;
+
+import androidx.test.uiautomator.By;
+import androidx.test.uiautomator.Direction;
+import androidx.test.uiautomator.UiDevice;
+import androidx.test.uiautomator.UiObject2;
+import androidx.test.uiautomator.Until;
 
 
 public class MoreWirelessSettingsTests extends InstrumentationTestCase {
@@ -85,8 +87,8 @@ public class MoreWirelessSettingsTests extends InstrumentationTestCase {
     public void testVPNMenuLoad() throws Exception {
         SettingsHelper.launchSettingsPage(getInstrumentation().getContext(),
                 Settings.ACTION_WIRELESS_SETTINGS);
-        mDevice.wait(Until
-                 .findObject(By.text("VPN")), TIMEOUT)
+        mDevice.findObject(By.res(SETTINGS_PACKAGE, "main_content"))
+                .scrollUntil(Direction.DOWN, Until.findObject(By.text("VPN")))
                  .click();
         Thread.sleep(TIMEOUT);
         UiObject2 usbTethering = mDevice.wait(Until

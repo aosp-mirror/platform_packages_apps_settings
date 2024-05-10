@@ -117,7 +117,8 @@ public class AlarmManagerFragment extends Fragment implements
         mKeys = new String[][]{
                 {
                         EconomyManager.KEY_AM_INITIAL_CONSUMPTION_LIMIT,
-                        EconomyManager.KEY_AM_HARD_CONSUMPTION_LIMIT
+                        EconomyManager.KEY_AM_MIN_CONSUMPTION_LIMIT,
+                        EconomyManager.KEY_AM_MAX_CONSUMPTION_LIMIT,
                 },
                 {
                         EconomyManager.KEY_AM_MAX_SATIATED_BALANCE,

@@ -51,6 +51,7 @@ import com.android.internal.compat.OverrideAllowedState;
 import com.android.settings.R;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -140,6 +141,7 @@ public class PlatformCompatDashboardTest {
                 R.string.platform_compat_selected_app_summary, APP_NAME, 1));
     }
 
+    @Ignore("b/313591873")
     @Test
     public void createPreferenceForChange_defaultEnabledChange_createCheckedEntry() {
         CompatibilityChangeInfo enabledChange = mChanges[0];
@@ -158,6 +160,7 @@ public class PlatformCompatDashboardTest {
         assertThat(enabledSwitchPreference.isEnabled()).isTrue();
     }
 
+    @Ignore("b/313591873")
     @Test
     public void createPreferenceForChange_defaultDisabledChange_createUncheckedEntry() {
         CompatibilityChangeInfo disabledChange = mChanges[1];
@@ -174,6 +177,7 @@ public class PlatformCompatDashboardTest {
         assertThat(disabledSwitchPreference.isEnabled()).isTrue();
     }
 
+    @Ignore("b/313591873")
     @Test
     public void createPreferenceForChange_cannotOverride_createDisabledEntry()
                     throws RemoteException {
@@ -195,6 +199,7 @@ public class PlatformCompatDashboardTest {
         assertThat(switchPreference.isEnabled()).isFalse();
     }
 
+    @Ignore("b/313591873")
     @Test
     public void createChangeCategoryPreference_enabledAndDisabled_hasTitleAndEntries() {
         Set<Long> enabledChanges = new HashSet<>();

@@ -29,8 +29,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.icu.text.CaseMap;
+import android.icu.text.MessageFormat;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.DeviceConfig;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -40,17 +42,21 @@ import android.view.accessibility.AccessibilityManager;
 import android.view.accessibility.AccessibilityManager.TouchExplorationStateChangeListener;
 import android.widget.CheckBox;
 
+import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
-import androidx.preference.SwitchPreference;
+import androidx.preference.SwitchPreferenceCompat;
+import androidx.preference.TwoStatePreference;
 
 import com.android.internal.annotations.VisibleForTesting;
+import com.android.server.accessibility.Flags;
 import com.android.settings.DialogCreatable;
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityDialogUtils.DialogType;
 import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
 import com.android.settings.utils.LocaleUtils;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
@@ -66,21 +72,22 @@ import java.util.StringJoiner;
 public class ToggleScreenMagnificationPreferenceFragment extends
         ToggleFeaturePreferenceFragment implements
         MagnificationModePreferenceController.DialogHelper {
-    // TODO(b/147021230): Move duplicated functions with android/internal/accessibility into util.
-    private TouchExplorationStateChangeListener mTouchExplorationStateChangeListener;
 
-    private CheckBox mSoftwareTypeCheckBox;
-    private CheckBox mHardwareTypeCheckBox;
-    private CheckBox mTripleTapTypeCheckBox;
-
+    private static final String TAG = "ToggleScreenMagnificationPreferenceFragment";
     private static final char COMPONENT_NAME_SEPARATOR = ':';
     private static final TextUtils.SimpleStringSplitter sStringColonSplitter =
             new TextUtils.SimpleStringSplitter(COMPONENT_NAME_SEPARATOR);
 
+    protected TwoStatePreference mFollowingTypingSwitchPreference;
+
+    // TODO(b/147021230): Move duplicated functions with android/internal/accessibility into util.
+    private TouchExplorationStateChangeListener mTouchExplorationStateChangeListener;
+    private CheckBox mSoftwareTypeCheckBox;
+    private CheckBox mHardwareTypeCheckBox;
+    private CheckBox mTripleTapTypeCheckBox;
+    @Nullable private CheckBox mTwoFingerTripleTapTypeCheckBox;
     private DialogCreatable mDialogDelegate;
     private MagnificationFollowTypingPreferenceController mFollowTypingPreferenceController;
-
-    protected SwitchPreference mFollowingTypingSwitchPreference;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -94,7 +101,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         mPackageName = getString(R.string.accessibility_screen_magnification_title);
         mImageUri = new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
                 .authority(getPrefContext().getPackageName())
-                .appendPath(String.valueOf(R.raw.accessibility_magnification_banner))
+                .appendPath(String.valueOf(R.raw.a11y_magnification_banner))
                 .build();
         mTouchExplorationStateChangeListener = isTouchExplorationEnabled -> {
             removeDialog(DialogEnums.EDIT_SHORTCUT);
@@ -123,6 +130,17 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         final AccessibilityManager am = getPrefContext().getSystemService(
                 AccessibilityManager.class);
         am.addTouchExplorationStateChangeListener(mTouchExplorationStateChangeListener);
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        // TODO(b/171272809): Add back when controllers move to static type
+        return 0;
+    }
+
+    @Override
+    protected String getLogTag() {
+        return TAG;
     }
 
     @Override
@@ -187,8 +205,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         getSettingsLifecycle().addObserver(magnificationModePreferenceController);
         magnificationModePreferenceController.displayPreference(getPreferenceScreen());
 
-        mFollowingTypingSwitchPreference =
-                new SwitchPreference(getPrefContext());
+        mFollowingTypingSwitchPreference = new SwitchPreferenceCompat(getPrefContext());
         mFollowingTypingSwitchPreference.setTitle(
                 R.string.accessibility_screen_magnification_follow_typing_title);
         mFollowingTypingSwitchPreference.setSummary(
@@ -201,6 +218,93 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                 getContext(), MagnificationFollowTypingPreferenceController.PREF_KEY);
         getSettingsLifecycle().addObserver(mFollowTypingPreferenceController);
         mFollowTypingPreferenceController.displayPreference(getPreferenceScreen());
+        addPreferenceController(mFollowTypingPreferenceController);
+
+        addAlwaysOnSetting(generalCategory);
+        addJoystickSetting(generalCategory);
+    }
+
+    @Override
+    protected void onProcessArguments(Bundle arguments) {
+        Context context = getContext();
+
+        if (!arguments.containsKey(AccessibilitySettings.EXTRA_PREFERENCE_KEY)) {
+            arguments.putString(AccessibilitySettings.EXTRA_PREFERENCE_KEY,
+                    Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED);
+        }
+
+        if (!arguments.containsKey(AccessibilitySettings.EXTRA_INTRO)) {
+            arguments.putCharSequence(AccessibilitySettings.EXTRA_INTRO,
+                    context.getString(R.string.accessibility_screen_magnification_intro_text));
+        }
+
+        if (!arguments.containsKey(AccessibilitySettings.EXTRA_HTML_DESCRIPTION)) {
+            String summary = MessageFormat.format(
+                    context.getString(R.string.accessibility_screen_magnification_summary),
+                            new Object[]{1, 2, 3, 4, 5});
+            arguments.putCharSequence(AccessibilitySettings.EXTRA_HTML_DESCRIPTION, summary);
+        }
+
+        super.onProcessArguments(arguments);
+    }
+
+    private boolean isAlwaysOnSettingEnabled() {
+        final boolean defaultValue = getContext().getResources().getBoolean(
+                com.android.internal.R.bool.config_magnification_always_on_enabled);
+
+        return DeviceConfig.getBoolean(
+                DeviceConfig.NAMESPACE_WINDOW_MANAGER,
+                "AlwaysOnMagnifier__enable_always_on_magnifier",
+                defaultValue
+        );
+    }
+    private void addAlwaysOnSetting(PreferenceCategory generalCategory) {
+        if (!isAlwaysOnSettingEnabled()) {
+            return;
+        }
+
+        var alwaysOnPreference = new SwitchPreferenceCompat(getPrefContext());
+        alwaysOnPreference.setTitle(
+                R.string.accessibility_screen_magnification_always_on_title);
+        alwaysOnPreference.setSummary(
+                R.string.accessibility_screen_magnification_always_on_summary);
+        alwaysOnPreference.setKey(
+                MagnificationAlwaysOnPreferenceController.PREF_KEY);
+        generalCategory.addPreference(alwaysOnPreference);
+
+        var alwaysOnPreferenceController = new MagnificationAlwaysOnPreferenceController(
+                getContext(), MagnificationAlwaysOnPreferenceController.PREF_KEY);
+        getSettingsLifecycle().addObserver(alwaysOnPreferenceController);
+        alwaysOnPreferenceController.displayPreference(getPreferenceScreen());
+        addPreferenceController(alwaysOnPreferenceController);
+    }
+
+    private void addJoystickSetting(PreferenceCategory generalCategory) {
+        if (!DeviceConfig.getBoolean(
+                DeviceConfig.NAMESPACE_WINDOW_MANAGER,
+                "MagnificationJoystick__enable_magnification_joystick",
+                false
+        )) {
+            return;
+        }
+
+        TwoStatePreference joystickPreference = new SwitchPreferenceCompat(getPrefContext());
+        joystickPreference.setTitle(
+                R.string.accessibility_screen_magnification_joystick_title);
+        joystickPreference.setSummary(
+                R.string.accessibility_screen_magnification_joystick_summary);
+        joystickPreference.setKey(
+                MagnificationJoystickPreferenceController.PREF_KEY);
+        generalCategory.addPreference(joystickPreference);
+
+        MagnificationJoystickPreferenceController joystickPreferenceController =
+                new MagnificationJoystickPreferenceController(
+                        getContext(),
+                        MagnificationJoystickPreferenceController.PREF_KEY
+                );
+        getSettingsLifecycle().addObserver(joystickPreferenceController);
+        joystickPreferenceController.displayPreference(getPreferenceScreen());
+        addPreferenceController(joystickPreferenceController);
     }
 
     @Override
@@ -229,6 +333,11 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         if (mTripleTapTypeCheckBox.isChecked()) {
             value |= UserShortcutType.TRIPLETAP;
         }
+        if (Flags.enableMagnificationMultipleFingerMultipleTapGesture()) {
+            if (mTwoFingerTripleTapTypeCheckBox.isChecked()) {
+                value |= UserShortcutType.TWOFINGERTRIPLETAP;
+            }
+        }
         return value;
     }
 
@@ -241,6 +350,15 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         final View dialogHardwareView = dialog.findViewById(R.id.hardware_shortcut);
         mHardwareTypeCheckBox = dialogHardwareView.findViewById(R.id.checkbox);
         setDialogTextAreaClickListener(dialogHardwareView, mHardwareTypeCheckBox);
+
+        if (Flags.enableMagnificationMultipleFingerMultipleTapGesture()) {
+            final View dialogTwoFignerTripleTapView =
+                    dialog.findViewById(R.id.two_finger_triple_tap_shortcut);
+            mTwoFingerTripleTapTypeCheckBox = dialogTwoFignerTripleTapView.findViewById(
+                    R.id.checkbox);
+            setDialogTextAreaClickListener(
+                    dialogTwoFignerTripleTapView, mTwoFingerTripleTapTypeCheckBox);
+        }
 
         final View dialogTripleTapView = dialog.findViewById(R.id.triple_tap_shortcut);
         mTripleTapTypeCheckBox = dialogTripleTapView.findViewById(R.id.checkbox);
@@ -277,6 +395,10 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                 hasShortcutType(value, UserShortcutType.HARDWARE));
         mTripleTapTypeCheckBox.setChecked(
                 hasShortcutType(value, UserShortcutType.TRIPLETAP));
+        if (Flags.enableMagnificationMultipleFingerMultipleTapGesture()) {
+            mTwoFingerTripleTapTypeCheckBox.setChecked(
+                    hasShortcutType(value, UserShortcutType.TWOFINGERTRIPLETAP));
+        }
     }
 
     private int restoreOnConfigChangedValue() {
@@ -306,14 +428,20 @@ public class ToggleScreenMagnificationPreferenceFragment extends
             AccessibilitySettingsContentObserver contentObserver) {
         super.registerKeysToObserverCallback(contentObserver);
 
-        final List<String> followingTypingKeys = new ArrayList<>();
-        followingTypingKeys.add(Settings.Secure.ACCESSIBILITY_MAGNIFICATION_FOLLOW_TYPING_ENABLED);
-        contentObserver.registerKeysToObserverCallback(followingTypingKeys,
-                key -> updateFollowTypingState());
+        var keysToObserve = List.of(
+            Settings.Secure.ACCESSIBILITY_MAGNIFICATION_FOLLOW_TYPING_ENABLED,
+            Settings.Secure.ACCESSIBILITY_MAGNIFICATION_ALWAYS_ON_ENABLED,
+            Settings.Secure.ACCESSIBILITY_MAGNIFICATION_JOYSTICK_ENABLED
+        );
+        contentObserver.registerKeysToObserverCallback(keysToObserve,
+                key -> updatePreferencesState());
     }
 
-    private void updateFollowTypingState() {
-        mFollowTypingPreferenceController.updateState();
+    private void updatePreferencesState() {
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        getPreferenceControllers().forEach(controllers::addAll);
+        controllers.forEach(controller -> controller.updateState(
+                findPreference(controller.getPreferenceKey())));
     }
 
     @Override
@@ -345,6 +473,13 @@ public class ToggleScreenMagnificationPreferenceFragment extends
             final CharSequence tripleTapTitle = context.getText(
                     R.string.accessibility_shortcut_triple_tap_keyword);
             list.add(tripleTapTitle);
+        }
+        if (Flags.enableMagnificationMultipleFingerMultipleTapGesture()) {
+            if (hasShortcutType(shortcutTypes, UserShortcutType.TWOFINGERTRIPLETAP)) {
+                final CharSequence twoFingerTripleTapTitle = context.getText(
+                        R.string.accessibility_shortcut_two_finger_double_tap_keyword);
+                list.add(twoFingerTripleTapTitle);
+            }
         }
 
         // Show software shortcut if first time to use.
@@ -426,7 +561,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                 preferenceKey)) {
             showDialog(DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL);
         }
-        MagnificationPreferenceFragment.setChecked(getContentResolver(), preferenceKey, enabled);
+        Settings.Secure.putInt(getContentResolver(), preferenceKey, enabled ? ON : OFF);
     }
 
     @Override
@@ -511,6 +646,12 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         if (((shortcutTypes & UserShortcutType.TRIPLETAP) == UserShortcutType.TRIPLETAP)) {
             optInMagnificationValueToSettings(context, UserShortcutType.TRIPLETAP);
         }
+        if (Flags.enableMagnificationMultipleFingerMultipleTapGesture()) {
+            if (((shortcutTypes & UserShortcutType.TWOFINGERTRIPLETAP)
+                    == UserShortcutType.TWOFINGERTRIPLETAP)) {
+                optInMagnificationValueToSettings(context, UserShortcutType.TWOFINGERTRIPLETAP);
+            }
+        }
     }
 
     private static void optInMagnificationValueToSettings(Context context,
@@ -519,6 +660,15 @@ public class ToggleScreenMagnificationPreferenceFragment extends
             Settings.Secure.putInt(context.getContentResolver(),
                     Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED, ON);
             return;
+        }
+
+        if (Flags.enableMagnificationMultipleFingerMultipleTapGesture()) {
+            if (shortcutType == UserShortcutType.TWOFINGERTRIPLETAP) {
+                Settings.Secure.putInt(context.getContentResolver(),
+                        Settings.Secure.ACCESSIBILITY_MAGNIFICATION_TWO_FINGER_TRIPLE_TAP_ENABLED,
+                        ON);
+                return;
+            }
         }
 
         if (hasMagnificationValueInSettings(context, shortcutType)) {
@@ -536,6 +686,17 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         joiner.add(MAGNIFICATION_CONTROLLER_NAME);
 
         Settings.Secure.putString(context.getContentResolver(), targetKey, joiner.toString());
+        // The size setting defaults to unknown. If the user has ever manually changed the size
+        // before, we do not automatically change it.
+        if (shortcutType == UserShortcutType.SOFTWARE
+                && Settings.Secure.getInt(context.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_FLOATING_MENU_SIZE,
+                FloatingMenuSizePreferenceController.Size.UNKNOWN)
+                == FloatingMenuSizePreferenceController.Size.UNKNOWN) {
+            Settings.Secure.putInt(context.getContentResolver(),
+                    Settings.Secure.ACCESSIBILITY_FLOATING_MENU_SIZE,
+                    FloatingMenuSizePreferenceController.Size.LARGE);
+        }
     }
 
     @VisibleForTesting
@@ -550,6 +711,12 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         if (((shortcutTypes & UserShortcutType.TRIPLETAP) == UserShortcutType.TRIPLETAP)) {
             optOutMagnificationValueFromSettings(context, UserShortcutType.TRIPLETAP);
         }
+        if (Flags.enableMagnificationMultipleFingerMultipleTapGesture()) {
+            if (((shortcutTypes & UserShortcutType.TWOFINGERTRIPLETAP)
+                    == UserShortcutType.TWOFINGERTRIPLETAP)) {
+                optOutMagnificationValueFromSettings(context, UserShortcutType.TWOFINGERTRIPLETAP);
+            }
+        }
     }
 
     private static void optOutMagnificationValueFromSettings(Context context,
@@ -558,6 +725,15 @@ public class ToggleScreenMagnificationPreferenceFragment extends
             Settings.Secure.putInt(context.getContentResolver(),
                     Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED, OFF);
             return;
+        }
+
+        if (Flags.enableMagnificationMultipleFingerMultipleTapGesture()) {
+            if (shortcutType == UserShortcutType.TWOFINGERTRIPLETAP) {
+                Settings.Secure.putInt(context.getContentResolver(),
+                        Settings.Secure.ACCESSIBILITY_MAGNIFICATION_TWO_FINGER_TRIPLE_TAP_ENABLED,
+                        OFF);
+                return;
+            }
         }
 
         final String targetKey = AccessibilityUtil.convertKeyFromSettings(shortcutType);
@@ -595,6 +771,13 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         if (((shortcutTypes & UserShortcutType.TRIPLETAP) == UserShortcutType.TRIPLETAP)) {
             exist |= hasMagnificationValueInSettings(context, UserShortcutType.TRIPLETAP);
         }
+        if (Flags.enableMagnificationMultipleFingerMultipleTapGesture()) {
+            if (((shortcutTypes & UserShortcutType.TWOFINGERTRIPLETAP)
+                    == UserShortcutType.TWOFINGERTRIPLETAP)) {
+                exist |= hasMagnificationValueInSettings(context,
+                        UserShortcutType.TWOFINGERTRIPLETAP);
+            }
+        }
         return exist;
     }
 
@@ -603,6 +786,14 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         if (shortcutType == UserShortcutType.TRIPLETAP) {
             return Settings.Secure.getInt(context.getContentResolver(),
                     Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED, OFF) == ON;
+        }
+
+        if (Flags.enableMagnificationMultipleFingerMultipleTapGesture()) {
+            if (shortcutType == UserShortcutType.TWOFINGERTRIPLETAP) {
+                return Settings.Secure.getInt(context.getContentResolver(),
+                        Settings.Secure.ACCESSIBILITY_MAGNIFICATION_TWO_FINGER_TRIPLE_TAP_ENABLED,
+                        OFF) == ON;
+            }
         }
 
         final String targetKey = AccessibilityUtil.convertKeyFromSettings(shortcutType);
@@ -623,15 +814,6 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         return false;
     }
 
-    private boolean isWindowMagnification(Context context) {
-        final int mode = Settings.Secure.getIntForUser(
-                context.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_MAGNIFICATION_MODE,
-                Settings.Secure.ACCESSIBILITY_MAGNIFICATION_MODE_FULLSCREEN,
-                context.getContentResolver().getUserId());
-        return mode == Settings.Secure.ACCESSIBILITY_MAGNIFICATION_MODE_WINDOW;
-    }
-
     private static int getUserShortcutTypeFromSettings(Context context) {
         int shortcutTypes = UserShortcutType.EMPTY;
         if (hasMagnificationValuesInSettings(context, UserShortcutType.SOFTWARE)) {
@@ -643,6 +825,11 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         if (hasMagnificationValuesInSettings(context, UserShortcutType.TRIPLETAP)) {
             shortcutTypes |= UserShortcutType.TRIPLETAP;
         }
+        if (Flags.enableMagnificationMultipleFingerMultipleTapGesture()) {
+            if (hasMagnificationValuesInSettings(context, UserShortcutType.TWOFINGERTRIPLETAP)) {
+                shortcutTypes |= UserShortcutType.TWOFINGERTRIPLETAP;
+            }
+        }
         return shortcutTypes;
     }
 
@@ -653,9 +840,13 @@ public class ToggleScreenMagnificationPreferenceFragment extends
      */
     public static CharSequence getServiceSummary(Context context) {
         // Get the user shortcut type from settings provider.
-        final int uerShortcutType = getUserShortcutTypeFromSettings(context);
-        return (uerShortcutType != AccessibilityUtil.UserShortcutType.EMPTY)
+        final int userShortcutType = getUserShortcutTypeFromSettings(context);
+        final CharSequence featureState =
+                (userShortcutType != AccessibilityUtil.UserShortcutType.EMPTY)
                 ? context.getText(R.string.accessibility_summary_shortcut_enabled)
-                : context.getText(R.string.accessibility_summary_shortcut_disabled);
+                : context.getText(R.string.generic_accessibility_feature_shortcut_off);
+        final CharSequence featureSummary = context.getText(R.string.magnification_feature_summary);
+        return context.getString(R.string.preference_summary_default_combination,
+                featureState, featureSummary);
     }
 }

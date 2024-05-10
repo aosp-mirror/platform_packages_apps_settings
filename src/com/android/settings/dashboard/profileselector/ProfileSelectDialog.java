@@ -17,12 +17,15 @@
 package com.android.settings.dashboard.profileselector;
 
 import android.app.Dialog;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.DialogInterface.OnShowListener;
 import android.content.Intent;
+import android.content.pm.UserInfo;
+import android.content.pm.UserProperties;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -126,13 +129,25 @@ public class ProfileSelectDialog extends DialogFragment implements UserAdapter.O
     @Override
     public void onClick(int position) {
         final UserHandle user = mSelectedTile.userHandle.get(position);
-        // Show menu on top level items.
-        final Intent intent = new Intent(mSelectedTile.getIntent());
-        FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider()
-                .logStartedIntentWithProfile(intent, mSourceMetricCategory,
-                        position == 1 /* isWorkProfile */);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        getActivity().startActivityAsUser(intent, user);
+        if (!mSelectedTile.hasPendingIntent()) {
+            final Intent intent = new Intent(mSelectedTile.getIntent());
+            FeatureFactory.getFeatureFactory().getMetricsFeatureProvider()
+                    .logStartedIntentWithProfile(intent, mSourceMetricCategory,
+                            position == 1 /* isWorkProfile */);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            getActivity().startActivityAsUser(intent, user);
+        } else {
+            PendingIntent pendingIntent = mSelectedTile.pendingIntentMap.get(user);
+            FeatureFactory.getFeatureFactory().getMetricsFeatureProvider()
+                    .logSettingsTileClickWithProfile(mSelectedTile.getKey(getContext()),
+                            mSourceMetricCategory,
+                            position == 1 /* isWorkProfile */);
+            try {
+                pendingIntent.send();
+            } catch (PendingIntent.CanceledException e) {
+                Log.w(TAG, "Failed executing pendingIntent. " + pendingIntent.getIntent(), e);
+            }
+        }
         dismiss();
     }
 
@@ -168,12 +183,56 @@ public class ProfileSelectDialog extends DialogFragment implements UserAdapter.O
         }
         final UserManager userManager = UserManager.get(context);
         for (int i = userHandles.size() - 1; i >= 0; i--) {
-            if (userManager.getUserInfo(userHandles.get(i).getIdentifier()) == null) {
+            UserInfo userInfo = userManager.getUserInfo(userHandles.get(i).getIdentifier());
+            if (userInfo == null
+                    || userInfo.isCloneProfile()
+                    || shouldHideUserInQuietMode(userHandles.get(i), userManager)) {
                 if (DEBUG) {
                     Log.d(TAG, "Delete the user: " + userHandles.get(i).getIdentifier());
                 }
                 userHandles.remove(i);
             }
         }
+    }
+
+    /**
+     * Checks the userHandle and pendingIntentMap in the provided tile, and remove the invalid
+     * entries if any.
+     */
+    public static void updatePendingIntentsIfNeeded(Context context, Tile tile) {
+        if (tile.userHandle == null || tile.userHandle.size() <= 1
+                || tile.pendingIntentMap.size() <= 1) {
+            return;
+        }
+        for (UserHandle userHandle : List.copyOf(tile.userHandle)) {
+            if (!tile.pendingIntentMap.containsKey(userHandle)) {
+                if (DEBUG) {
+                    Log.d(TAG, "Delete the user without pending intent: "
+                            + userHandle.getIdentifier());
+                }
+                tile.userHandle.remove(userHandle);
+            }
+        }
+
+        final UserManager userManager = UserManager.get(context);
+        for (UserHandle userHandle : List.copyOf(tile.pendingIntentMap.keySet())) {
+            UserInfo userInfo = userManager.getUserInfo(userHandle.getIdentifier());
+            if (userInfo == null
+                    || userInfo.isCloneProfile()
+                    || shouldHideUserInQuietMode(userHandle, userManager)) {
+                if (DEBUG) {
+                    Log.d(TAG, "Delete the user: " + userHandle.getIdentifier());
+                }
+                tile.userHandle.remove(userHandle);
+                tile.pendingIntentMap.remove(userHandle);
+            }
+        }
+    }
+
+    private static boolean shouldHideUserInQuietMode(
+            UserHandle userHandle, UserManager userManager) {
+        UserProperties userProperties = userManager.getUserProperties(userHandle);
+        return userProperties.getShowInQuietMode() == UserProperties.SHOW_IN_QUIET_MODE_HIDDEN
+                && userManager.isQuietModeEnabled(userHandle);
     }
 }

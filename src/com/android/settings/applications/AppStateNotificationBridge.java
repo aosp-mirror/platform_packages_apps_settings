@@ -110,11 +110,11 @@ public class AppStateNotificationBridge extends AppStateBaseBridge {
                     context, System.currentTimeMillis() - state.lastSent, true);
         } else if (sortOrder == R.id.sort_order_frequent_notification) {
             if (state.avgSentDaily > 0) {
-                return context.getResources().getQuantityString(
-                        R.plurals.notifications_sent_daily, state.avgSentDaily, state.avgSentDaily);
+                return StringUtil.getIcuPluralsString(context, state.avgSentDaily,
+                        R.string.notifications_sent_daily);
             }
-            return context.getResources().getQuantityString(R.plurals.notifications_sent_weekly,
-                    state.avgSentWeekly, state.avgSentWeekly);
+            return StringUtil.getIcuPluralsString(context, state.avgSentWeekly,
+                    R.string.notifications_sent_weekly);
         } else {
             return "";
         }

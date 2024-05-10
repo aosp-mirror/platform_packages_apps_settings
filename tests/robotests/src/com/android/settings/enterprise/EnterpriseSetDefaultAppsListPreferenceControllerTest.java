@@ -53,12 +53,14 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.LooperMode;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.util.Arrays;
 import java.util.Collections;
 
 @RunWith(RobolectricTestRunner.class)
+@LooperMode(LooperMode.Mode.LEGACY)
 public class EnterpriseSetDefaultAppsListPreferenceControllerTest {
 
     private static final int USER_ID = 0;
@@ -93,7 +95,7 @@ public class EnterpriseSetDefaultAppsListPreferenceControllerTest {
         when(mContext.getString(R.string.default_browser_title)).thenReturn(BROWSER_TITLE);
         Resources resources = spy(mContext.getResources());
         when(mContext.getResources()).thenReturn(resources);
-        when(resources.getQuantityString(R.plurals.default_phone_app_title, 2))
+        when(resources.getString(R.string.default_phone_app_title))
                 .thenReturn(PHONE_TITLE);
         when(mContext.getString(R.string.app_names_concatenation_template_2))
                 .thenReturn("%1$s, %2$s");

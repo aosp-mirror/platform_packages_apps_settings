@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (C) 2023 The Android Open Source Project
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:bottom="@dimen/screen_flash_color_button_inner_circle_padding"
+        android:left="@dimen/screen_flash_color_button_inner_circle_padding"
+        android:right="@dimen/screen_flash_color_button_inner_circle_padding"
+        android:top="@dimen/screen_flash_color_button_inner_circle_padding">
+        <shape android:shape="oval">
+            <size
+                android:width="@dimen/screen_flash_color_button_inner_circle_size"
+                android:height="@dimen/screen_flash_color_button_inner_circle_size" />
+            <solid android:color="@color/screen_flash_preset_opaque_color_04" />
+            <stroke
+                android:width="@dimen/screen_flash_color_button_inner_circle_stroke"
+                android:color="@color/screen_flash_color_button_inner_circle_stroke_color" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="oval">
+            <size
+                android:width="@dimen/screen_flash_color_button_outer_circle_size"
+                android:height="@dimen/screen_flash_color_button_outer_circle_size" />
+            <solid android:color="@android:color/transparent" />
+            <stroke
+                android:width="@dimen/screen_flash_color_button_outer_circle_stroke_width"
+                android:color="@color/screen_flash_color_button_outer_circle_stroke_color" />
+        </shape>
+    </item>
+</layer-list>

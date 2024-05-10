@@ -23,8 +23,8 @@ import android.content.Intent;
 import android.util.Log;
 
 /**
- * Receive broadcast when {@link StatsManager} restart, then check the anomaly config and
- * prepare info for {@link StatsManager}
+ * Receive broadcast when {@link StatsManager} restart, then check the anomaly config and prepare
+ * info for {@link StatsManager}
  */
 public class AnomalyConfigReceiver extends BroadcastReceiver {
     private static final String TAG = "AnomalyConfigReceiver";

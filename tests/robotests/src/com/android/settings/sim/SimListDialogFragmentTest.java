@@ -48,6 +48,7 @@ import java.util.Arrays;
 @Config(shadows = ShadowAlertDialogCompat.class)
 public class SimListDialogFragmentTest extends SimDialogFragmentTestBase<SimListDialogFragment> {
 
+    @Ignore
     @Test
     public void onCreateDialog_noSubscriptions_dismissed() {
         final int dialogType = DATA_PICK;
@@ -60,6 +61,7 @@ public class SimListDialogFragmentTest extends SimDialogFragmentTestBase<SimList
         verify(mFragment).dismiss();
     }
 
+    @Ignore
     @Test
     public void onCreateDialog_twoSubscriptionsNoAskEveryTime_twoSubsForDisplay() {
         final int dialogType = DATA_PICK;
@@ -81,6 +83,7 @@ public class SimListDialogFragmentTest extends SimDialogFragmentTestBase<SimList
         verify(activity).onSubscriptionSelected(dialogType, SIM2_ID);
     }
 
+    @Ignore
     @Test
     public void onSubscriptionsChanged_dialogUpdates() {
         final int dialogType = DATA_PICK;

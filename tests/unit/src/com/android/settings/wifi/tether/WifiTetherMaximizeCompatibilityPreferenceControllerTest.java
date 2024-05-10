@@ -237,4 +237,11 @@ public class WifiTetherMaximizeCompatibilityPreferenceControllerTest {
 
         assertThat(builder.build().getBand()).isEqualTo(SoftApConfiguration.BAND_2GHZ);
     }
+
+    @Test
+    public void isAvailable_shouldHidePreference_returnFalse() {
+        mController.mShouldHidePreference = true;
+
+        assertThat(mController.isAvailable()).isFalse();
+    }
 }

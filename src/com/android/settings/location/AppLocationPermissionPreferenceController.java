@@ -16,9 +16,12 @@ import androidx.preference.Preference;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.utils.StringUtil;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class AppLocationPermissionPreferenceController extends
@@ -56,9 +59,11 @@ public class AppLocationPermissionPreferenceController extends
             if (mNumTotal == -1 || mNumHasLocation == -1) {
                 return mContext.getString(R.string.location_settings_loading_app_permission_stats);
             }
-            return mContext.getResources().getQuantityString(
-                    R.plurals.location_app_permission_summary_location_on, mNumHasLocation,
-                    mNumHasLocation, mNumTotal);
+            Map<String, Object> arguments = new HashMap<>();
+            arguments.put("count", mNumHasLocation);
+            arguments.put("total", mNumTotal);
+            return StringUtil.getIcuPluralsString(mContext, arguments,
+                    R.string.location_app_permission_summary_location_on);
         } else {
             return mContext.getString(R.string.location_app_permission_summary_location_off);
         }

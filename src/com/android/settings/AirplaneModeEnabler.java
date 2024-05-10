@@ -67,7 +67,7 @@ public class AirplaneModeEnabler extends GlobalSettingsChangeListener {
         super(context, Settings.Global.AIRPLANE_MODE_ON);
 
         mContext = context;
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
         mOnAirplaneModeChangedListener = listener;
 
         mTelephonyManager = context.getSystemService(TelephonyManager.class);

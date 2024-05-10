@@ -41,7 +41,10 @@ import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowContentResolver.class})
+@Config(shadows = {
+        ShadowContentResolver.class,
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class AccountSyncSettingsTest {
     private Context mContext;
     private AccountSyncSettings mAccountSyncSettings;

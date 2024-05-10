@@ -16,6 +16,7 @@
 
 package com.android.settings.testutils.shadow;
 
+import android.annotation.NonNull;
 import android.os.storage.DiskInfo;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
@@ -25,12 +26,15 @@ import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.annotation.Resetter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Implements(StorageManager.class)
 public class ShadowStorageManager {
 
     private static boolean sIsUnmountCalled;
     private static boolean sIsForgetCalled;
-    private static boolean sIsFileEncryptedNativeOrEmulated = true;
+    private static boolean sIsFileEncrypted = true;
 
     public static boolean isUnmountCalled() {
         return sIsUnmountCalled;
@@ -40,11 +44,15 @@ public class ShadowStorageManager {
         return sIsForgetCalled;
     }
 
+    public @NonNull List<VolumeInfo> getVolumes() {
+        return new ArrayList<VolumeInfo>();
+    }
+
     @Resetter
     public static void reset() {
         sIsUnmountCalled = false;
         sIsForgetCalled = false;
-        sIsFileEncryptedNativeOrEmulated = true;
+        sIsFileEncrypted = true;
     }
 
     @Implementation
@@ -73,12 +81,12 @@ public class ShadowStorageManager {
     }
 
     @Implementation
-    protected static boolean isFileEncryptedNativeOrEmulated() {
-        return sIsFileEncryptedNativeOrEmulated;
+    protected static boolean isFileEncrypted() {
+        return sIsFileEncrypted;
     }
 
-    public static void setIsFileEncryptedNativeOrEmulated(boolean encrypted) {
-        sIsFileEncryptedNativeOrEmulated = encrypted;
+    public static void setIsFileEncrypted(boolean encrypted) {
+        sIsFileEncrypted = encrypted;
     }
 
     private VolumeInfo createVolumeInfo(String volumeId) {

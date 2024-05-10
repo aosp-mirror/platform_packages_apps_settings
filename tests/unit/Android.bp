@@ -1,4 +1,5 @@
 package {
+    default_team: "trendy_team_android_settings_app",
     // See: http://go/android-license-faq
     // A large-scale-change added 'default_applicable_licenses' to import
     // all of the 'license_kinds' from "packages_apps_Settings_license"
@@ -13,32 +14,39 @@ android_test {
     certificate: "platform",
 
     libs: [
-        "android.test.runner",
         "telephony-common",
         "ims-common",
-        "android.test.base",
-        "android.test.mock",
     ],
 
     static_libs: [
+        "aconfig_settings_flags_lib",
+        "androidx.arch.core_core-testing",
         "androidx.test.core",
-        "androidx.test.rules",
         "androidx.test.espresso.core",
-        "androidx.test.espresso.contrib-nodeps",
-        "androidx.test.espresso.intents-nodeps",
+        "androidx.test.rules",
         "androidx.test.ext.junit",
         "androidx.preference_preference",
+        "flag-junit",
         "mockito-target-minus-junit4",
         "platform-test-annotations",
-        "truth-prebuilt",
-        "ub-uiautomator",
+        "platform-test-rules",
+        "truth",
+        "kotlinx_coroutines_test",
+        "flag-junit",
+        "Settings-testutils2",
         // Don't add SettingsLib libraries here - you can use them directly as they are in the
         // instrumented Settings app.
     ],
 
-    // Include all test java files.
-    srcs: ["src/**/*.java"],
-
+    errorprone: {
+        javacflags: ["-Xep:CheckReturnValue:WARN"],
+    },
+    // Include all test java/kotlin files.
+    srcs: [
+        "src/**/*.java",
+        "src/**/*.kt",
+    ],
+    use_resource_processor: true,
     platform_apis: true,
     test_suites: ["device-tests"],
 

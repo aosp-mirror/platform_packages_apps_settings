@@ -103,6 +103,7 @@ public class HandsFreeProfileOutputPreferenceController extends AudioSwitchPrefe
         mConnectedDevices.clear();
         mConnectedDevices.addAll(getConnectedHfpDevices());
         mConnectedDevices.addAll(getConnectedHearingAidDevices());
+        mConnectedDevices.addAll(getConnectedLeAudioDevices());
 
         final int numDevices = mConnectedDevices.size();
         if (numDevices == 0) {
@@ -181,12 +182,22 @@ public class HandsFreeProfileOutputPreferenceController extends AudioSwitchPrefe
 
     @Override
     public BluetoothDevice findActiveDevice() {
-        BluetoothDevice activeDevice = findActiveHearingAidDevice();
+        BluetoothDevice haActiveDevice = findActiveHearingAidDevice();
+        BluetoothDevice leAudioActiveDevice = findActiveLeAudioDevice();
         final HeadsetProfile headsetProfile = mProfileManager.getHeadsetProfile();
 
-        if (activeDevice == null && headsetProfile != null) {
-            activeDevice = headsetProfile.getActiveDevice();
+        if (haActiveDevice != null) {
+            return haActiveDevice;
         }
-        return activeDevice;
+
+        if (leAudioActiveDevice != null) {
+            return leAudioActiveDevice;
+        }
+
+        if (headsetProfile != null && headsetProfile.getActiveDevice() != null) {
+            return headsetProfile.getActiveDevice();
+        }
+
+        return null;
     }
 }

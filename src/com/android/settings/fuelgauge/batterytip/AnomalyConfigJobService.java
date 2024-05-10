@@ -44,8 +44,7 @@ public class AnomalyConfigJobService extends JobService {
     public static final String KEY_ANOMALY_CONFIG_VERSION = "anomaly_config_version";
     private static final int DEFAULT_VERSION = 0;
 
-    @VisibleForTesting
-    static final long CONFIG_UPDATE_FREQUENCY_MS = TimeUnit.DAYS.toMillis(1);
+    @VisibleForTesting static final long CONFIG_UPDATE_FREQUENCY_MS = TimeUnit.DAYS.toMillis(1);
 
     public static void scheduleConfigUpdate(Context context) {
         final JobScheduler jobScheduler = context.getSystemService(JobScheduler.class);
@@ -61,24 +60,25 @@ public class AnomalyConfigJobService extends JobService {
 
         // Don't schedule it if it already exists, to make sure it runs periodically even after
         // reboot
-        if (pending == null && jobScheduler.schedule(jobBuilder.build())
-                != JobScheduler.RESULT_SUCCESS) {
+        if (pending == null
+                && jobScheduler.schedule(jobBuilder.build()) != JobScheduler.RESULT_SUCCESS) {
             Log.i(TAG, "Anomaly config update job service schedule failed.");
         }
     }
 
     @Override
     public boolean onStartJob(JobParameters params) {
-        ThreadUtils.postOnBackgroundThread(() -> {
-            final StatsManager statsManager = getSystemService(StatsManager.class);
-            checkAnomalyConfig(statsManager);
-            try {
-                BatteryTipUtils.uploadAnomalyPendingIntent(this, statsManager);
-            } catch (StatsManager.StatsUnavailableException e) {
-                Log.w(TAG, "Failed to uploadAnomalyPendingIntent.", e);
-            }
-            jobFinished(params, false /* wantsReschedule */);
-        });
+        ThreadUtils.postOnBackgroundThread(
+                () -> {
+                    final StatsManager statsManager = getSystemService(StatsManager.class);
+                    checkAnomalyConfig(statsManager);
+                    try {
+                        BatteryTipUtils.uploadAnomalyPendingIntent(this, statsManager);
+                    } catch (StatsManager.StatsUnavailableException e) {
+                        Log.w(TAG, "Failed to uploadAnomalyPendingIntent.", e);
+                    }
+                    jobFinished(params, false /* wantsReschedule */);
+                });
 
         return true;
     }
@@ -90,37 +90,48 @@ public class AnomalyConfigJobService extends JobService {
 
     @VisibleForTesting
     synchronized void checkAnomalyConfig(StatsManager statsManager) {
-        final SharedPreferences sharedPreferences = getSharedPreferences(PREF_DB,
-                Context.MODE_PRIVATE);
-        final int currentVersion = sharedPreferences.getInt(KEY_ANOMALY_CONFIG_VERSION,
-                DEFAULT_VERSION);
-        final int newVersion = Settings.Global.getInt(getContentResolver(),
-                Settings.Global.ANOMALY_CONFIG_VERSION, DEFAULT_VERSION);
-        final String rawConfig = Settings.Global.getString(getContentResolver(),
-                Settings.Global.ANOMALY_CONFIG);
+        final SharedPreferences sharedPreferences =
+                getSharedPreferences(PREF_DB, Context.MODE_PRIVATE);
+        final int currentVersion =
+                sharedPreferences.getInt(KEY_ANOMALY_CONFIG_VERSION, DEFAULT_VERSION);
+        final int newVersion =
+                Settings.Global.getInt(
+                        getContentResolver(),
+                        Settings.Global.ANOMALY_CONFIG_VERSION,
+                        DEFAULT_VERSION);
+        final String rawConfig =
+                Settings.Global.getString(getContentResolver(), Settings.Global.ANOMALY_CONFIG);
         Log.i(TAG, "CurrentVersion: " + currentVersion + " new version: " + newVersion);
 
         if (newVersion > currentVersion) {
             try {
                 statsManager.removeConfig(StatsManagerConfig.ANOMALY_CONFIG_KEY);
             } catch (StatsManager.StatsUnavailableException e) {
-                Log.i(TAG, "When updating anomaly config, failed to first remove the old config "
-                        + StatsManagerConfig.ANOMALY_CONFIG_KEY, e);
+                Log.i(
+                        TAG,
+                        "When updating anomaly config, failed to first remove the old config "
+                                + StatsManagerConfig.ANOMALY_CONFIG_KEY,
+                        e);
             }
             if (!TextUtils.isEmpty(rawConfig)) {
                 try {
                     final byte[] config = Base64.decode(rawConfig, Base64.DEFAULT);
                     statsManager.addConfig(StatsManagerConfig.ANOMALY_CONFIG_KEY, config);
-                    Log.i(TAG, "Upload the anomaly config. configKey: "
-                            + StatsManagerConfig.ANOMALY_CONFIG_KEY);
+                    Log.i(
+                            TAG,
+                            "Upload the anomaly config. configKey: "
+                                    + StatsManagerConfig.ANOMALY_CONFIG_KEY);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putInt(KEY_ANOMALY_CONFIG_VERSION, newVersion);
                     editor.commit();
                 } catch (IllegalArgumentException e) {
                     Log.e(TAG, "Anomaly raw config is in wrong format", e);
                 } catch (StatsManager.StatsUnavailableException e) {
-                    Log.i(TAG, "Upload of anomaly config failed for configKey "
-                            + StatsManagerConfig.ANOMALY_CONFIG_KEY, e);
+                    Log.i(
+                            TAG,
+                            "Upload of anomaly config failed for configKey "
+                                    + StatsManagerConfig.ANOMALY_CONFIG_KEY,
+                            e);
                 }
             }
         }

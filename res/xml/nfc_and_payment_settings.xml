@@ -30,7 +30,7 @@
         settings:lottie_rawRes="@drawable/nfc_detection_point"
         settings:controller="com.android.settings.nfc.NfcDetectionPointController"/>
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="nfc_secure_settings"
         android:title="@string/nfc_secure_settings_title"
         settings:controller="com.android.settings.nfc.SecureNfcPreferenceController"

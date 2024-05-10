@@ -17,7 +17,6 @@
 package com.android.settings.fuelgauge;
 
 import android.content.Context;
-import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -31,7 +30,8 @@ public class UnrestrictedPreferenceController extends AbstractPreferenceControll
 
     private static final String TAG = "UNRESTRICTED_PREF";
 
-    @VisibleForTesting String KEY_UNRESTRICTED_PREF = "unrestricted_pref";
+    @VisibleForTesting static final String KEY_UNRESTRICTED_PREF = "unrestricted_preference";
+
     @VisibleForTesting BatteryOptimizeUtils mBatteryOptimizeUtils;
 
     public UnrestrictedPreferenceController(Context context, int uid, String packageName) {
@@ -41,25 +41,12 @@ public class UnrestrictedPreferenceController extends AbstractPreferenceControll
 
     @Override
     public void updateState(Preference preference) {
+        preference.setEnabled(mBatteryOptimizeUtils.isSelectorPreferenceEnabled());
 
-        if (!mBatteryOptimizeUtils.isValidPackageName()) {
-            Log.d(TAG, "invalid package name, disable pref");
-            preference.setEnabled(false);
-            return;
-        } else {
-            preference.setEnabled(true);
-        }
-
-        if (mBatteryOptimizeUtils.isSystemOrDefaultApp()) {
-            Log.d(TAG, "is system or default app, unrestricted states only");
-            ((SelectorWithWidgetPreference) preference).setChecked(true);
-        } else if (mBatteryOptimizeUtils.getAppOptimizationMode()
-                == BatteryOptimizeUtils.MODE_UNRESTRICTED) {
-            Log.d(TAG, "is unrestricted states");
-            ((SelectorWithWidgetPreference) preference).setChecked(true);
-        } else {
-            ((SelectorWithWidgetPreference) preference).setChecked(false);
-        }
+        final boolean isUnrestricted =
+                mBatteryOptimizeUtils.getAppOptimizationMode()
+                        == BatteryOptimizeUtils.MODE_UNRESTRICTED;
+        ((SelectorWithWidgetPreference) preference).setChecked(isUnrestricted);
     }
 
     @Override

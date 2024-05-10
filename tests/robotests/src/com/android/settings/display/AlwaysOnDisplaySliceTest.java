@@ -37,9 +37,7 @@ import androidx.slice.SliceProvider;
 import androidx.slice.widget.SliceLiveData;
 
 import com.android.settings.R;
-import com.android.settings.aware.AwareFeatureProvider;
 import com.android.settings.slices.CustomSliceRegistry;
-import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -55,8 +53,6 @@ public class AlwaysOnDisplaySliceTest {
 
     private Context mContext;
     private AlwaysOnDisplaySlice mSlice;
-    private FakeFeatureFactory mFeatureFactory;
-    private AwareFeatureProvider mFeatureProvider;
 
     @Mock
     private AmbientDisplayConfiguration mConfig;
@@ -65,8 +61,6 @@ public class AlwaysOnDisplaySliceTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mFeatureFactory = FakeFeatureFactory.setupForTest();
-        mFeatureProvider = mFeatureFactory.getAwareFeatureProvider();
 
         // Set-up specs for SliceMetadata.
         SliceProvider.setSpecs(SliceLiveData.SUPPORTED_SPECS);
@@ -116,44 +110,14 @@ public class AlwaysOnDisplaySliceTest {
     }
 
     @Test
-    public void onNotifyChange_toggleOn_awareNotSupported_enableAoD() {
+    public void onNotifyChange_toggleOn_enableAoD() {
         final Intent intent = new Intent();
         intent.putExtra(android.app.slice.Slice.EXTRA_TOGGLE_STATE, true);
-        when(mFeatureProvider.isEnabled(mContext)).thenReturn(false);
-        when(mFeatureProvider.isSupported(mContext)).thenReturn(false);
 
         mSlice.onNotifyChange(intent);
 
         final ContentResolver resolver = mContext.getContentResolver();
         assertThat(Settings.Secure.getInt(resolver, DOZE_ALWAYS_ON, 0)).isEqualTo(1);
         assertThat(Settings.Secure.getInt(resolver, DOZE_WAKE_DISPLAY_GESTURE, 0)).isEqualTo(0);
-    }
-
-    @Test
-    public void onNotifyChange_toggleOn_awareDisabled_enableAoD() {
-        final Intent intent = new Intent();
-        intent.putExtra(android.app.slice.Slice.EXTRA_TOGGLE_STATE, true);
-        when(mFeatureProvider.isEnabled(mContext)).thenReturn(false);
-        when(mFeatureProvider.isSupported(mContext)).thenReturn(true);
-
-        mSlice.onNotifyChange(intent);
-
-        final ContentResolver resolver = mContext.getContentResolver();
-        assertThat(Settings.Secure.getInt(resolver, DOZE_ALWAYS_ON, 0)).isEqualTo(1);
-        assertThat(Settings.Secure.getInt(resolver, DOZE_WAKE_DISPLAY_GESTURE, 0)).isEqualTo(0);
-    }
-
-    @Test
-    public void onNotifyChange_toggleOn_awareSupported_enableAoD() {
-        final Intent intent = new Intent();
-        intent.putExtra(android.app.slice.Slice.EXTRA_TOGGLE_STATE, true);
-        when(mFeatureProvider.isEnabled(mContext)).thenReturn(true);
-        when(mFeatureProvider.isSupported(mContext)).thenReturn(true);
-
-        mSlice.onNotifyChange(intent);
-
-        final ContentResolver resolver = mContext.getContentResolver();
-        assertThat(Settings.Secure.getInt(resolver, DOZE_ALWAYS_ON, 0)).isEqualTo(1);
-        assertThat(Settings.Secure.getInt(resolver, DOZE_WAKE_DISPLAY_GESTURE, 0)).isEqualTo(1);
     }
 }

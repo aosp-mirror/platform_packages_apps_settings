@@ -23,26 +23,29 @@ import android.util.Log;
 import androidx.preference.Preference;
 
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
-import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.connecteddevice.audiosharing.AudioSharingUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
-/**
- * Controller to maintain available media Bluetooth devices
- */
+/** Controller to maintain available media Bluetooth devices */
 public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
         implements Preference.OnPreferenceClickListener {
 
     private static final String TAG = "AvailableMediaBluetoothDeviceUpdater";
-    private static final boolean DBG = Log.isLoggable(TAG, Log.DEBUG);
+    private static final boolean DBG = Log.isLoggable(BluetoothDeviceUpdater.TAG, Log.DEBUG);
 
     private static final String PREF_KEY = "available_media_bt";
 
     private final AudioManager mAudioManager;
+    private final LocalBluetoothManager mLocalBtManager;
 
-    public AvailableMediaBluetoothDeviceUpdater(Context context, DashboardFragment fragment,
-            DevicePreferenceCallback devicePreferenceCallback) {
-        super(context, fragment, devicePreferenceCallback);
+    public AvailableMediaBluetoothDeviceUpdater(
+            Context context,
+            DevicePreferenceCallback devicePreferenceCallback,
+            int metricsCategory) {
+        super(context, devicePreferenceCallback, metricsCategory);
         mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+        mLocalBtManager = Utils.getLocalBtManager(context);
     }
 
     @Override
@@ -70,13 +73,29 @@ public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
             if (DBG) {
                 Log.d(TAG, "isFilterMatched() current audio profile : " + currentAudioProfile);
             }
-            // If device is Hearing Aid or LE Audio, it is compatible with HFP and A2DP.
+            // If device is Hearing Aid, it is compatible with HFP and A2DP.
             // It would show in Available Devices group.
-            if (cachedDevice.isConnectedHearingAidDevice()
-                    || cachedDevice.isConnectedLeAudioDevice()) {
-                Log.d(TAG, "isFilterMatched() device : " +
-                        cachedDevice.getName() + ", the profile is connected.");
+            if (cachedDevice.isConnectedAshaHearingAidDevice()) {
+                Log.d(
+                        TAG,
+                        "isFilterMatched() device : "
+                                + cachedDevice.getName()
+                                + ", the Hearing Aid profile is connected.");
                 return true;
+            }
+            // If device is LE Audio, it is compatible with HFP and A2DP.
+            // It would show in Available Devices group if the audio sharing flag is disabled or
+            // the device is not in the audio sharing session.
+            if (cachedDevice.isConnectedLeAudioDevice()) {
+                if (!AudioSharingUtils.isFeatureEnabled()
+                        || !AudioSharingUtils.hasBroadcastSource(cachedDevice, mLocalManager)) {
+                    Log.d(
+                            TAG,
+                            "isFilterMatched() device : "
+                                    + cachedDevice.getName()
+                                    + ", the LE Audio profile is connected and not in sharing.");
+                    return true;
+                }
             }
             // According to the current audio profile type,
             // this page will show the bluetooth device that have corresponding profile.
@@ -93,8 +112,12 @@ public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
                     break;
             }
             if (DBG) {
-                Log.d(TAG, "isFilterMatched() device : " +
-                        cachedDevice.getName() + ", isFilterMatched : " + isFilterMatched);
+                Log.d(
+                        TAG,
+                        "isFilterMatched() device : "
+                                + cachedDevice.getName()
+                                + ", isFilterMatched : "
+                                + isFilterMatched);
             }
         }
         return isFilterMatched;
@@ -102,14 +125,32 @@ public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
-        mMetricsFeatureProvider.logClickedPreference(preference, mFragment.getMetricsCategory());
-        final CachedBluetoothDevice device = ((BluetoothDevicePreference) preference)
-                .getBluetoothDevice();
+        mMetricsFeatureProvider.logClickedPreference(preference, mMetricsCategory);
+        final CachedBluetoothDevice device =
+                ((BluetoothDevicePreference) preference).getBluetoothDevice();
+        if (AudioSharingUtils.isFeatureEnabled()
+                && AudioSharingUtils.isBroadcasting(mLocalBtManager)) {
+            if (DBG) {
+                Log.d(TAG, "onPreferenceClick stop broadcasting.");
+            }
+            AudioSharingUtils.stopBroadcasting(mLocalBtManager);
+        }
         return device.setActive();
     }
 
     @Override
     protected String getPreferenceKey() {
         return PREF_KEY;
+    }
+
+    @Override
+    protected String getLogTag() {
+        return TAG;
+    }
+
+    @Override
+    protected void update(CachedBluetoothDevice cachedBluetoothDevice) {
+        super.update(cachedBluetoothDevice);
+        Log.d(TAG, "Map : " + mPreferenceMap);
     }
 }

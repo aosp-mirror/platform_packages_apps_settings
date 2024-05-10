@@ -24,8 +24,6 @@ import android.content.Context;
 import androidx.appcompat.app.AlertDialog;
 import androidx.test.core.app.ApplicationProvider;
 
-import com.android.settings.R;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,24 +37,24 @@ public class AccessibilityDialogUtilsTest {
 
     @Before
     public void setUp() {
-        mContext.setTheme(R.style.Theme_AppCompat);
+        mContext.setTheme(androidx.appcompat.R.style.Theme_AppCompat);
     }
 
     @Test
-    public void updateSoftwareShortcutInDialog_correctDialogType_success() {
+    public void updateShortcutInDialog_correctDialogType_success() {
         final AlertDialog dialog = AccessibilityDialogUtils.showEditShortcutDialog(
                 mContext, AccessibilityDialogUtils.DialogType.EDIT_SHORTCUT_GENERIC, "Title",
                 null);
 
         assertThat(
-                AccessibilityDialogUtils.updateSoftwareShortcutInDialog(mContext, dialog)).isTrue();
+                AccessibilityDialogUtils.updateShortcutInDialog(mContext, dialog)).isTrue();
     }
 
     @Test
-    public void updateSoftwareShortcutInDialog_useNotSupportedDialog_fail() {
+    public void updateShortcutInDialog_useNotSupportedDialog_fail() {
         final AlertDialog dialog = new AlertDialog.Builder(mContext).setTitle("Title").show();
 
-        assertThat(AccessibilityDialogUtils.updateSoftwareShortcutInDialog(mContext,
+        assertThat(AccessibilityDialogUtils.updateShortcutInDialog(mContext,
                 dialog)).isFalse();
     }
 

@@ -16,21 +16,28 @@
 
 package com.android.settings.wifi.tether;
 
+import static android.net.TetheringManager.TETHERING_WIFI;
+import static android.net.wifi.WifiManager.SAP_START_FAILURE_GENERAL;
+
+import static com.android.settings.wifi.WifiUtils.canShowWifiHotspot;
+
 import android.annotation.NonNull;
 import android.content.Context;
-import android.net.TetheringManager;
 import android.net.wifi.SoftApConfiguration;
 import android.net.wifi.WifiClient;
 import android.net.wifi.WifiManager;
 import android.text.BidiFormatter;
 
 import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.network.tether.TetheringManagerModel;
+import com.android.settings.widget.GenericSwitchController;
+import com.android.settings.widget.SwitchWidgetController;
+import com.android.settingslib.PrimarySwitchPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -42,25 +49,33 @@ import com.android.settingslib.wifi.WifiUtils;
 import java.util.List;
 
 public class WifiTetherPreferenceController extends AbstractPreferenceController
-        implements PreferenceControllerMixin, LifecycleObserver, OnStart, OnStop {
+        implements PreferenceControllerMixin, LifecycleObserver, OnStart, OnStop,
+        SwitchWidgetController.OnSwitchChangeListener {
 
     private static final String WIFI_TETHER_SETTINGS = "wifi_tether";
 
-    private boolean mIsWifiTetherable;
     private WifiManager mWifiManager;
     private boolean mIsWifiTetheringAllow;
     private int mSoftApState;
     @VisibleForTesting
-    Preference mPreference;
+    PrimarySwitchPreference mPreference;
     @VisibleForTesting
     WifiTetherSoftApManager mWifiTetherSoftApManager;
+    @VisibleForTesting
+    TetheringManagerModel mTetheringManagerModel;
+    @VisibleForTesting
+    boolean mIsDataSaverEnabled;
+    @VisibleForTesting
+    SwitchWidgetController mSwitch;
 
-    public WifiTetherPreferenceController(Context context, Lifecycle lifecycle) {
+    public WifiTetherPreferenceController(Context context, Lifecycle lifecycle,
+            TetheringManagerModel tetheringManagerModel) {
+        // TODO(b/246537032):Use fragment context to WifiManager service will caused memory leak
         this(context, lifecycle,
-                context.getSystemService(WifiManager.class),
-                context.getSystemService(TetheringManager.class),
+                context.getApplicationContext().getSystemService(WifiManager.class),
                 true /* initSoftApManager */,
-                WifiEnterpriseRestrictionUtils.isWifiTetheringAllowed(context));
+                WifiEnterpriseRestrictionUtils.isWifiTetheringAllowed(context),
+                tetheringManagerModel);
     }
 
     @VisibleForTesting
@@ -68,18 +83,14 @@ public class WifiTetherPreferenceController extends AbstractPreferenceController
             Context context,
             Lifecycle lifecycle,
             WifiManager wifiManager,
-            TetheringManager tetheringManager,
             boolean initSoftApManager,
-            boolean isWifiTetheringAllow) {
+            boolean isWifiTetheringAllow,
+            TetheringManagerModel tetheringManagerModel) {
         super(context);
-        final String[] wifiRegexs = tetheringManager.getTetherableWifiRegexs();
-        if (wifiRegexs != null && wifiRegexs.length != 0) {
-            mIsWifiTetherable = true;
-        }
-
         mIsWifiTetheringAllow = isWifiTetheringAllow;
         if (!isWifiTetheringAllow) return;
 
+        mTetheringManagerModel = tetheringManagerModel;
         mWifiManager = wifiManager;
 
         if (lifecycle != null) {
@@ -92,7 +103,7 @@ public class WifiTetherPreferenceController extends AbstractPreferenceController
 
     @Override
     public boolean isAvailable() {
-        return mIsWifiTetherable && !Utils.isMonkeyRunning();
+        return canShowWifiHotspot(mContext) && !Utils.isMonkeyRunning();
     }
 
     @Override
@@ -103,8 +114,13 @@ public class WifiTetherPreferenceController extends AbstractPreferenceController
             // unavailable
             return;
         }
-        if (!mIsWifiTetheringAllow && mPreference.isEnabled()) {
-            mPreference.setEnabled(false);
+        if (mSwitch == null) {
+            mSwitch = new GenericSwitchController(mPreference);
+            mSwitch.setListener(this);
+            updateSwitch();
+        }
+        mPreference.setEnabled(canEnabled());
+        if (!mIsWifiTetheringAllow) {
             mPreference.setSummary(R.string.not_allowed_by_ent);
         }
     }
@@ -120,6 +136,9 @@ public class WifiTetherPreferenceController extends AbstractPreferenceController
             if (mWifiTetherSoftApManager != null) {
                 mWifiTetherSoftApManager.registerSoftApCallback();
             }
+            if (mSwitch != null) {
+                mSwitch.startListening();
+            }
         }
     }
 
@@ -128,6 +147,9 @@ public class WifiTetherPreferenceController extends AbstractPreferenceController
         if (mPreference != null) {
             if (mWifiTetherSoftApManager != null) {
                 mWifiTetherSoftApManager.unRegisterSoftApCallback();
+            }
+            if (mSwitch != null) {
+                mSwitch.stopListening();
             }
         }
     }
@@ -164,6 +186,7 @@ public class WifiTetherPreferenceController extends AbstractPreferenceController
                 mPreference.setSummary(R.string.wifi_tether_starting);
                 break;
             case WifiManager.WIFI_AP_STATE_ENABLED:
+                mSwitch.setChecked(true);
                 final SoftApConfiguration softApConfig = mWifiManager.getSoftApConfiguration();
                 updateConfigSummary(softApConfig);
                 break;
@@ -171,6 +194,7 @@ public class WifiTetherPreferenceController extends AbstractPreferenceController
                 mPreference.setSummary(R.string.wifi_tether_stopping);
                 break;
             case WifiManager.WIFI_AP_STATE_DISABLED:
+                mSwitch.setChecked(false);
                 mPreference.setSummary(R.string.wifi_hotspot_off_subtext);
                 break;
             default:
@@ -189,5 +213,41 @@ public class WifiTetherPreferenceController extends AbstractPreferenceController
         }
         mPreference.setSummary(mContext.getString(R.string.wifi_tether_enabled_subtext,
                 BidiFormatter.getInstance().unicodeWrap(softApConfig.getSsid())));
+    }
+
+    /**
+     * Sets the Data Saver state for preference update.
+     */
+    public void setDataSaverEnabled(boolean enabled) {
+        mIsDataSaverEnabled = enabled;
+        if (mPreference != null) {
+            mPreference.setEnabled(canEnabled());
+        }
+        if (mSwitch != null) {
+            mSwitch.setEnabled(canEnabled());
+        }
+    }
+
+    private boolean canEnabled() {
+        return mIsWifiTetheringAllow && !mIsDataSaverEnabled;
+    }
+
+    @VisibleForTesting
+    protected void updateSwitch() {
+        if (mWifiManager == null) return;
+        int wifiApState = mWifiManager.getWifiApState();
+        mSwitch.setEnabled(canEnabled());
+        mSwitch.setChecked(wifiApState == WifiManager.WIFI_AP_STATE_ENABLED);
+        handleWifiApStateChanged(wifiApState, SAP_START_FAILURE_GENERAL);
+    }
+
+    @Override
+    public boolean onSwitchToggled(boolean isChecked) {
+        if (isChecked) {
+            mTetheringManagerModel.startTethering(TETHERING_WIFI);
+        } else {
+            mTetheringManagerModel.stopTethering(TETHERING_WIFI);
+        }
+        return true;
     }
 }

@@ -62,6 +62,11 @@ public class ControlsPrivacyPreferenceController extends TogglePreferenceControl
 
     @Override
     public int getAvailabilityStatus() {
+        // hide if we should use customizable lock screen quick affordances
+        if (CustomizableLockScreenUtils.isFeatureEnabled(mContext)) {
+            return UNSUPPORTED_ON_DEVICE;
+        }
+
         // hide if lockscreen isn't secure for this user
         return isEnabled() && isSecure() ? AVAILABLE : DISABLED_DEPENDENT_SETTING;
     }
@@ -83,7 +88,7 @@ public class ControlsPrivacyPreferenceController extends TogglePreferenceControl
     }
 
     private boolean isSecure() {
-        final LockPatternUtils utils = FeatureFactory.getFactory(mContext)
+        final LockPatternUtils utils = FeatureFactory.getFeatureFactory()
                 .getSecurityFeatureProvider()
                 .getLockPatternUtils(mContext);
         final int userId = UserHandle.myUserId();

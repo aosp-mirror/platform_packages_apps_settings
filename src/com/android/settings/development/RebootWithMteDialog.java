@@ -52,7 +52,7 @@ public class RebootWithMteDialog extends InstrumentedDialogFragment
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.REBOOT_WITH_MTE;
+        return SettingsEnums.REBOOT_WITH_MTE_DIALOG;
     }
 
     @Override

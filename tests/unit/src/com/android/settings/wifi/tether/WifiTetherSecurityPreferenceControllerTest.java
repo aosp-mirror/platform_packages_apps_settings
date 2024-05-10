@@ -203,4 +203,11 @@ public class WifiTetherSecurityPreferenceControllerTest {
                 .isEqualTo(SoftApConfiguration.SECURITY_TYPE_WPA2_PSK);
         assertThat(mPreference.getSummary().toString()).isEqualTo("WPA2-Personal");
     }
+
+    @Test
+    public void isAvailable_shouldHidePreference_returnFalse() {
+        mController.mShouldHidePreference = true;
+
+        assertThat(mController.isAvailable()).isFalse();
+    }
 }

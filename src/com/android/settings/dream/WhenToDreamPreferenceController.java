@@ -20,7 +20,10 @@ import android.content.Context;
 
 import androidx.preference.Preference;
 
+import com.android.internal.annotations.VisibleForTesting;
+import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.display.AmbientDisplayAlwaysOnPreferenceController;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.dream.DreamBackend;
 
@@ -29,19 +32,39 @@ public class WhenToDreamPreferenceController extends AbstractPreferenceControlle
 
     private static final String WHEN_TO_START = "when_to_start";
     private final DreamBackend mBackend;
+    private final boolean mDreamsDisabledByAmbientModeSuppression;
+    private final boolean mDreamsEnabledOnBattery;
 
     WhenToDreamPreferenceController(Context context) {
+        this(context, context.getResources().getBoolean(
+                com.android.internal.R.bool.config_dreamsDisabledByAmbientModeSuppressionConfig),
+                context.getResources().getBoolean(
+                        com.android.internal.R.bool.config_dreamsEnabledOnBattery));
+    }
+
+    @VisibleForTesting
+    WhenToDreamPreferenceController(Context context,
+            boolean dreamsDisabledByAmbientModeSuppression,
+            boolean dreamsEnabledOnBattery) {
         super(context);
 
         mBackend = DreamBackend.getInstance(context);
+        mDreamsDisabledByAmbientModeSuppression = dreamsDisabledByAmbientModeSuppression;
+        mDreamsEnabledOnBattery = dreamsEnabledOnBattery;
     }
 
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
 
-        int resId = DreamSettings.getDreamSettingDescriptionResId(mBackend.getWhenToDreamSetting());
-        preference.setSummary(preference.getContext().getString(resId));
+        if (mDreamsDisabledByAmbientModeSuppression
+                && AmbientDisplayAlwaysOnPreferenceController.isAodSuppressedByBedtime(mContext)) {
+            preference.setSummary(R.string.screensaver_settings_when_to_dream_bedtime);
+        } else {
+            final int resId = DreamSettings.getDreamSettingDescriptionResId(
+                    mBackend.getWhenToDreamSetting(), mDreamsEnabledOnBattery);
+            preference.setSummary(resId);
+        }
     }
 
     @Override

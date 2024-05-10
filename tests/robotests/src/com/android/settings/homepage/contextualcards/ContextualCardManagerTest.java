@@ -135,7 +135,7 @@ public class ContextualCardManagerTest {
 
         final List<String> actualCards = mManager.mSavedCards.stream().collect(Collectors.toList());
         final List<String> expectedCards = Arrays.asList("test_low_storage", "test_flashlight",
-                "test_dark_theme", "test_gesture", "test_battery");
+                "test_dark_theme", "test_gesture", "test_face_enroll");
         assertThat(actualCards).containsExactlyElementsIn(expectedCards);
     }
 
@@ -234,7 +234,7 @@ public class ContextualCardManagerTest {
     @Test
     public void sortCards_hasStickyCards_stickyShouldAlwaysBeTheLast() {
         final List<ContextualCard> cards = new ArrayList<>();
-        cards.add(buildContextualCard(CustomSliceRegistry.CONTEXTUAL_WIFI_SLICE_URI,
+        cards.add(buildContextualCard(CustomSliceRegistry.FACE_ENROLL_SLICE_URI,
                 ContextualCardProto.ContextualCard.Category.STICKY_VALUE, 1.02f));
         cards.add(buildContextualCard(CustomSliceRegistry.BLUETOOTH_DEVICES_SLICE_URI,
                 ContextualCardProto.ContextualCard.Category.STICKY_VALUE, 1.01f));
@@ -246,7 +246,7 @@ public class ContextualCardManagerTest {
         assertThat(sortedCards.get(cards.size() - 1).getSliceUri())
                 .isEqualTo(CustomSliceRegistry.BLUETOOTH_DEVICES_SLICE_URI);
         assertThat(sortedCards.get(cards.size() - 2).getSliceUri())
-                .isEqualTo(CustomSliceRegistry.CONTEXTUAL_WIFI_SLICE_URI);
+                .isEqualTo(CustomSliceRegistry.FACE_ENROLL_SLICE_URI);
     }
 
     @Test
@@ -611,7 +611,7 @@ public class ContextualCardManagerTest {
     @Test
     public void getCardsWithViewType_hasOneStickySlice_shouldHaveOneStickyCard() {
         final List<ContextualCard> cards = new ArrayList<>();
-        cards.add(buildContextualCard(CustomSliceRegistry.CONTEXTUAL_WIFI_SLICE_URI.toString()));
+        cards.add(buildContextualCard(CustomSliceRegistry.FACE_ENROLL_SLICE_URI.toString()));
         cards.add(buildContextualCard(CustomSliceRegistry.LOW_STORAGE_SLICE_URI.toString()));
         final List<Integer> categories = Arrays.asList(
                 ContextualCardProto.ContextualCard.Category.STICKY_VALUE,
@@ -695,9 +695,9 @@ public class ContextualCardManagerTest {
                 .setViewType(VIEW_TYPE_FULL_WIDTH)
                 .build());
         cards.add(new ContextualCard.Builder()
-                .setName("test_battery")
+                .setName("test_face_enroll")
                 .setCardType(ContextualCard.CardType.SLICE)
-                .setSliceUri(CustomSliceRegistry.BATTERY_FIX_SLICE_URI)
+                .setSliceUri(CustomSliceRegistry.FACE_ENROLL_SLICE_URI)
                 .setViewType(VIEW_TYPE_FULL_WIDTH)
                 .build());
         return cards;

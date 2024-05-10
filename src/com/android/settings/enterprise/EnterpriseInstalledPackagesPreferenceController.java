@@ -22,6 +22,7 @@ import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.utils.StringUtil;
 
 public class EnterpriseInstalledPackagesPreferenceController
         extends AbstractPreferenceController implements PreferenceControllerMixin {
@@ -33,8 +34,8 @@ public class EnterpriseInstalledPackagesPreferenceController
 
     public EnterpriseInstalledPackagesPreferenceController(Context context, boolean async) {
         super(context);
-        mFeatureProvider = FeatureFactory.getFactory(context)
-                .getApplicationFeatureProvider(context);
+        mFeatureProvider = FeatureFactory.getFeatureFactory()
+                .getApplicationFeatureProvider();
         mAsync = async;
     }
 
@@ -47,9 +48,8 @@ public class EnterpriseInstalledPackagesPreferenceController
                         available = false;
                     } else {
                         available = true;
-                        preference.setSummary(mContext.getResources().getQuantityString(
-                                R.plurals.enterprise_privacy_number_packages_lower_bound, num,
-                                num));
+                        preference.setSummary(StringUtil.getIcuPluralsString(mContext, num,
+                                R.string.enterprise_privacy_number_packages_lower_bound));
 
                     }
                     preference.setVisible(available);

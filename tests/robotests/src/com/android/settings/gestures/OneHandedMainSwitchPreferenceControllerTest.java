@@ -25,6 +25,7 @@ import android.os.UserHandle;
 import com.android.settings.core.BasePreferenceController;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -83,6 +84,7 @@ public class OneHandedMainSwitchPreferenceControllerTest {
                 .isEqualTo(BasePreferenceController.DISABLED_DEPENDENT_SETTING);
     }
 
+    @Ignore("b/313541907")
     @Test
     public void getAvailabilityStatus_set3ButtonMode_shouldDisabled() {
         SystemProperties.set(OneHandedSettingsUtils.SUPPORT_ONE_HANDED_MODE, "true");

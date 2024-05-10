@@ -57,22 +57,20 @@ import java.util.concurrent.TimeUnit;
 public class AnomalyDetectionJobService extends JobService {
     private static final String TAG = "AnomalyDetectionService";
     private static final int ON = 1;
-    @VisibleForTesting
-    static final int UID_NULL = -1;
-    @VisibleForTesting
-    static final int STATSD_UID_FILED = 1;
-    @VisibleForTesting
-    static final long MAX_DELAY_MS = TimeUnit.MINUTES.toMillis(30);
+    @VisibleForTesting static final int UID_NULL = -1;
+    @VisibleForTesting static final int STATSD_UID_FILED = 1;
+    @VisibleForTesting static final long MAX_DELAY_MS = TimeUnit.MINUTES.toMillis(30);
 
     private final Object mLock = new Object();
+
     @GuardedBy("mLock")
     @VisibleForTesting
     boolean mIsJobCanceled = false;
 
     public static void scheduleAnomalyDetection(Context context, Intent intent) {
         final JobScheduler jobScheduler = context.getSystemService(JobScheduler.class);
-        final ComponentName component = new ComponentName(context,
-                AnomalyDetectionJobService.class);
+        final ComponentName component =
+                new ComponentName(context, AnomalyDetectionJobService.class);
         final JobInfo.Builder jobBuilder =
                 new JobInfo.Builder(R.integer.job_anomaly_detection, component)
                         .setOverrideDeadline(MAX_DELAY_MS);
@@ -88,30 +86,40 @@ public class AnomalyDetectionJobService extends JobService {
         synchronized (mLock) {
             mIsJobCanceled = false;
         }
-        ThreadUtils.postOnBackgroundThread(() -> {
-            final Context context = AnomalyDetectionJobService.this;
-            final BatteryDatabaseManager batteryDatabaseManager =
-                    BatteryDatabaseManager.getInstance(this);
-            final BatteryTipPolicy policy = new BatteryTipPolicy(this);
-            final BatteryUtils batteryUtils = BatteryUtils.getInstance(this);
-            final ContentResolver contentResolver = getContentResolver();
-            final UserManager userManager = getSystemService(UserManager.class);
-            final PowerAllowlistBackend powerAllowlistBackend =
-                    PowerAllowlistBackend.getInstance(context);
-            final PowerUsageFeatureProvider powerUsageFeatureProvider = FeatureFactory
-                    .getFactory(this).getPowerUsageFeatureProvider(this);
-            final MetricsFeatureProvider metricsFeatureProvider = FeatureFactory
-                    .getFactory(this).getMetricsFeatureProvider();
+        ThreadUtils.postOnBackgroundThread(
+                () -> {
+                    final Context context = AnomalyDetectionJobService.this;
+                    final BatteryDatabaseManager batteryDatabaseManager =
+                            BatteryDatabaseManager.getInstance(this);
+                    final BatteryTipPolicy policy = new BatteryTipPolicy(this);
+                    final BatteryUtils batteryUtils = BatteryUtils.getInstance(this);
+                    final ContentResolver contentResolver = getContentResolver();
+                    final UserManager userManager = getSystemService(UserManager.class);
+                    final PowerAllowlistBackend powerAllowlistBackend =
+                            PowerAllowlistBackend.getInstance(context);
+                    final PowerUsageFeatureProvider powerUsageFeatureProvider =
+                            FeatureFactory.getFeatureFactory().getPowerUsageFeatureProvider();
+                    final MetricsFeatureProvider metricsFeatureProvider =
+                            FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
 
-            for (JobWorkItem item = dequeueWork(params); item != null; item = dequeueWork(params)) {
-                saveAnomalyToDatabase(context, userManager,
-                        batteryDatabaseManager, batteryUtils, policy, powerAllowlistBackend,
-                        contentResolver, powerUsageFeatureProvider, metricsFeatureProvider,
-                        item.getIntent().getExtras());
+                    for (JobWorkItem item = dequeueWork(params);
+                            item != null;
+                            item = dequeueWork(params)) {
+                        saveAnomalyToDatabase(
+                                context,
+                                userManager,
+                                batteryDatabaseManager,
+                                batteryUtils,
+                                policy,
+                                powerAllowlistBackend,
+                                contentResolver,
+                                powerUsageFeatureProvider,
+                                metricsFeatureProvider,
+                                item.getIntent().getExtras());
 
-                completeWork(params, item);
-            }
-        });
+                        completeWork(params, item);
+                    }
+                });
 
         return true;
     }
@@ -125,34 +133,49 @@ public class AnomalyDetectionJobService extends JobService {
     }
 
     @VisibleForTesting
-    void saveAnomalyToDatabase(Context context, UserManager userManager,
-            BatteryDatabaseManager databaseManager, BatteryUtils batteryUtils,
-            BatteryTipPolicy policy, PowerAllowlistBackend powerAllowlistBackend,
-            ContentResolver contentResolver, PowerUsageFeatureProvider powerUsageFeatureProvider,
-            MetricsFeatureProvider metricsFeatureProvider, Bundle bundle) {
+    void saveAnomalyToDatabase(
+            Context context,
+            UserManager userManager,
+            BatteryDatabaseManager databaseManager,
+            BatteryUtils batteryUtils,
+            BatteryTipPolicy policy,
+            PowerAllowlistBackend powerAllowlistBackend,
+            ContentResolver contentResolver,
+            PowerUsageFeatureProvider powerUsageFeatureProvider,
+            MetricsFeatureProvider metricsFeatureProvider,
+            Bundle bundle) {
         // The Example of intentDimsValue is: 35:{1:{1:{1:10013|}|}|}
         final StatsDimensionsValue intentDimsValue =
                 bundle.getParcelable(StatsManager.EXTRA_STATS_DIMENSIONS_VALUE);
-        final long timeMs = bundle.getLong(AnomalyDetectionReceiver.KEY_ANOMALY_TIMESTAMP,
-                System.currentTimeMillis());
-        final ArrayList<String> cookies = bundle.getStringArrayList(
-                StatsManager.EXTRA_STATS_BROADCAST_SUBSCRIBER_COOKIES);
-        final AnomalyInfo anomalyInfo = new AnomalyInfo(
-                !ArrayUtils.isEmpty(cookies) ? cookies.get(0) : "");
+        final long timeMs =
+                bundle.getLong(
+                        AnomalyDetectionReceiver.KEY_ANOMALY_TIMESTAMP, System.currentTimeMillis());
+        final ArrayList<String> cookies =
+                bundle.getStringArrayList(StatsManager.EXTRA_STATS_BROADCAST_SUBSCRIBER_COOKIES);
+        final AnomalyInfo anomalyInfo =
+                new AnomalyInfo(!ArrayUtils.isEmpty(cookies) ? cookies.get(0) : "");
         Log.i(TAG, "Extra stats value: " + intentDimsValue.toString());
 
         try {
             final int uid = extractUidFromStatsDimensionsValue(intentDimsValue);
-            final boolean autoFeatureOn = powerUsageFeatureProvider.isSmartBatterySupported()
-                    ? Settings.Global.getInt(contentResolver,
-                    Settings.Global.ADAPTIVE_BATTERY_MANAGEMENT_ENABLED, ON) == ON
-                    : Settings.Global.getInt(contentResolver,
-                            Settings.Global.APP_AUTO_RESTRICTION_ENABLED, ON) == ON;
+            final boolean autoFeatureOn =
+                    powerUsageFeatureProvider.isSmartBatterySupported()
+                            ? Settings.Global.getInt(
+                                            contentResolver,
+                                            Settings.Global.ADAPTIVE_BATTERY_MANAGEMENT_ENABLED,
+                                            ON)
+                                    == ON
+                            : Settings.Global.getInt(
+                                            contentResolver,
+                                            Settings.Global.APP_AUTO_RESTRICTION_ENABLED,
+                                            ON)
+                                    == ON;
             final String packageName = batteryUtils.getPackageName(uid);
             final long versionCode = batteryUtils.getAppLongVersionCode(packageName);
             final String versionedPackage = packageName + "/" + versionCode;
             if (batteryUtils.shouldHideAnomaly(powerAllowlistBackend, uid, anomalyInfo)) {
-                metricsFeatureProvider.action(SettingsEnums.PAGE_UNKNOWN,
+                metricsFeatureProvider.action(
+                        SettingsEnums.PAGE_UNKNOWN,
                         SettingsEnums.ACTION_ANOMALY_IGNORED,
                         SettingsEnums.PAGE_UNKNOWN,
                         versionedPackage,
@@ -160,17 +183,23 @@ public class AnomalyDetectionJobService extends JobService {
             } else {
                 if (autoFeatureOn && anomalyInfo.autoRestriction) {
                     // Auto restrict this app
-                    batteryUtils.setForceAppStandby(uid, packageName,
-                            AppOpsManager.MODE_IGNORED);
-                    databaseManager.insertAnomaly(uid, packageName, anomalyInfo.anomalyType,
+                    batteryUtils.setForceAppStandby(uid, packageName, AppOpsManager.MODE_IGNORED);
+                    databaseManager.insertAnomaly(
+                            uid,
+                            packageName,
+                            anomalyInfo.anomalyType,
                             AnomalyDatabaseHelper.State.AUTO_HANDLED,
                             timeMs);
                 } else {
-                    databaseManager.insertAnomaly(uid, packageName, anomalyInfo.anomalyType,
+                    databaseManager.insertAnomaly(
+                            uid,
+                            packageName,
+                            anomalyInfo.anomalyType,
                             AnomalyDatabaseHelper.State.NEW,
                             timeMs);
                 }
-                metricsFeatureProvider.action(SettingsEnums.PAGE_UNKNOWN,
+                metricsFeatureProvider.action(
+                        SettingsEnums.PAGE_UNKNOWN,
                         SettingsEnums.ACTION_ANOMALY_TRIGGERED,
                         SettingsEnums.PAGE_UNKNOWN,
                         versionedPackage,
@@ -183,12 +212,12 @@ public class AnomalyDetectionJobService extends JobService {
     }
 
     /**
-     * Extract the uid from {@link StatsDimensionsValue}
-     *
-     * The uid dimension has the format: 1:<int> inside the tuple list. Here are some examples:
-     * 1. Excessive bg anomaly: 27:{1:10089|}
-     * 2. Wakeup alarm anomaly: 35:{1:{1:{1:10013|}|}|}
-     * 3. Bluetooth anomaly:    3:{1:{1:{1:10140|}|}|}
+     * Extract the uid from {@link StatsDimensionsValue} <br>
+     * <br>
+     * The uid dimension has the format: {1:int} inside the tuple list. Here are some examples: <br>
+     * 1.Excessive bg anomaly: 27:{1:10089|} <br>
+     * 2.Wakeup alarm anomaly: 35:{1:{1:{1:10013|}|}|} <br>
+     * 3.Bluetooth anomaly: 3:{1:{1:{1:10140|}|}|}
      */
     @VisibleForTesting
     int extractUidFromStatsDimensionsValue(StatsDimensionsValue statsDimensionsValue) {

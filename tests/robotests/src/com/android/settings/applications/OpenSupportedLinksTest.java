@@ -36,6 +36,7 @@ import android.util.ArraySet;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 
+import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settingslib.widget.FooterPreference;
 
@@ -48,9 +49,14 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.annotation.LooperMode;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = ShadowUtils.class)
+@LooperMode(LooperMode.Mode.LEGACY)
+@Config(shadows = {
+        ShadowUtils.class,
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class OpenSupportedLinksTest {
     private static final String TEST_FOOTER_TITLE = "FooterTitle";
     private static final String TEST_DOMAIN_LINK = "aaa.bbb.ccc";
@@ -144,8 +150,9 @@ public class OpenSupportedLinksTest {
                 anyInt());
         doReturn(mCategory).when(mSettings).findPreference(any(CharSequence.class));
         doReturn(mResources).when(mSettings).getResources();
-        when(mResources.getQuantityString(anyInt(), anyInt(), anyInt())).thenReturn(TEST_SUMMARY);
         doReturn(true).when(mCategory).addPreference(any(Preference.class));
+        when(mResources.getString(R.string.app_link_open_always_summary))
+                .thenReturn("App claims to handle # links");
     }
 
     public static class TestFragment extends OpenSupportedLinks {

@@ -24,7 +24,7 @@ import android.os.ServiceManager;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
@@ -72,7 +72,7 @@ public class ShowSurfaceUpdatesPreferenceController extends DeveloperOptionsPref
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
         super.onDeveloperOptionsSwitchDisabled();
-        final SwitchPreference preference = (SwitchPreference) mPreference;
+        final TwoStatePreference preference = (TwoStatePreference) mPreference;
         if (preference.isChecked()) {
             // Writing false to the preference when the setting is already off will have a
             // side effect of turning on the preference that we wish to avoid
@@ -93,7 +93,7 @@ public class ShowSurfaceUpdatesPreferenceController extends DeveloperOptionsPref
                 @SuppressWarnings("unused") final int showCpu = reply.readInt();
                 @SuppressWarnings("unused") final int enableGL = reply.readInt();
                 final int showUpdates = reply.readInt();
-                ((SwitchPreference) mPreference).setChecked(showUpdates != SETTING_VALUE_OFF);
+                ((TwoStatePreference) mPreference).setChecked(showUpdates != SETTING_VALUE_OFF);
                 reply.recycle();
                 data.recycle();
             }

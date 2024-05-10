@@ -137,11 +137,6 @@ public class ProcessStatsUi extends ProcessStatsBase {
             ProcessStats.STATE_TOP
     };
 
-    public static final int[] CACHED_PROC_STATES = new int[] {
-            ProcessStats.STATE_CACHED_ACTIVITY, ProcessStats.STATE_CACHED_ACTIVITY_CLIENT,
-            ProcessStats.STATE_CACHED_EMPTY
-    };
-
     public static String makeDuration(long time) {
         StringBuilder sb = new StringBuilder(32);
         TimeUtils.formatDuration(time, sb);

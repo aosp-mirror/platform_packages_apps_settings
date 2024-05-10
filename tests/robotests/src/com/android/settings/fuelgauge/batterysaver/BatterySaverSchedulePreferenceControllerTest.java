@@ -59,10 +59,12 @@ public class BatterySaverSchedulePreferenceControllerTest {
 
     @Test
     public void testPreference_lowPowerLevelZero_percentageMode_summaryNoSchedule() {
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL, 0);
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Global.AUTOMATIC_POWER_SAVE_MODE, PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE);
+        Settings.Global.putInt(
+                mContext.getContentResolver(), Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL, 0);
+        Settings.Global.putInt(
+                mContext.getContentResolver(),
+                Global.AUTOMATIC_POWER_SAVE_MODE,
+                PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE);
 
         mController.updateState(mPreference);
 
@@ -71,26 +73,17 @@ public class BatterySaverSchedulePreferenceControllerTest {
 
     @Test
     public void testPreference_lowPowerLevelNonZero_percentageMode_summaryPercentage() {
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL, TRIGGER_LEVEL);
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Global.AUTOMATIC_POWER_SAVE_MODE, PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE);
+        Settings.Global.putInt(
+                mContext.getContentResolver(),
+                Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL,
+                TRIGGER_LEVEL);
+        Settings.Global.putInt(
+                mContext.getContentResolver(),
+                Global.AUTOMATIC_POWER_SAVE_MODE,
+                PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE);
 
         mController.updateState(mPreference);
 
         assertThat(mPreference.getSummary()).isEqualTo("Will turn on at 20%");
-    }
-
-    @Test
-    public void testPreference_percentageRoutine_summaryRoutine() {
-        // It doesn't matter what this is set to for routine mode
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL, TRIGGER_LEVEL);
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Global.AUTOMATIC_POWER_SAVE_MODE, PowerManager.POWER_SAVE_MODE_TRIGGER_DYNAMIC);
-
-        mController.updateState(mPreference);
-
-        assertThat(mPreference.getSummary()).isEqualTo("Based on your routine");
     }
 }

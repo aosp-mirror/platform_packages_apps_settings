@@ -26,11 +26,10 @@ import android.telephony.TelephonyManager;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-import android.widget.Checkable;
+import android.widget.CompoundButton;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog.Builder;
-import androidx.core.content.res.TypedArrayUtils;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
@@ -51,12 +50,10 @@ public class CellDataPreference extends CustomDialogPreferenceCompat
     public int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     public boolean mChecked;
     public boolean mMultiSimDialog;
-    private MobileDataEnabledListener mDataStateListener;
+    private final MobileDataEnabledListener mDataStateListener;
 
     public CellDataPreference(Context context, AttributeSet attrs) {
-        super(context, attrs, TypedArrayUtils.getAttr(context,
-                androidx.preference.R.attr.switchPreferenceStyle,
-                android.R.attr.switchPreferenceStyle));
+        super(context, attrs, androidx.preference.R.attr.switchPreferenceCompatStyle);
         mDataStateListener = new MobileDataEnabledListener(context, this);
     }
 
@@ -99,7 +96,7 @@ public class CellDataPreference extends CustomDialogPreferenceCompat
     }
 
     @Override
-    public void setTemplate(NetworkTemplate template, int subId, NetworkServices services) {
+    public void setTemplate(NetworkTemplate template, int subId) {
         if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             throw new IllegalArgumentException("CellDataPreference needs a SubscriptionInfo");
         }
@@ -138,7 +135,7 @@ public class CellDataPreference extends CustomDialogPreferenceCompat
     @Override
     protected void performClick(View view) {
         final Context context = getContext();
-        FeatureFactory.getFactory(context).getMetricsFeatureProvider()
+        FeatureFactory.getFeatureFactory().getMetricsFeatureProvider()
                 .action(context, SettingsEnums.ACTION_CELL_DATA_TOGGLE, !mChecked);
         final SubscriptionInfo currentSir = getActiveSubscriptionInfo(mSubId);
         final SubscriptionInfo nextSir = getActiveSubscriptionInfo(
@@ -170,9 +167,10 @@ public class CellDataPreference extends CustomDialogPreferenceCompat
     @Override
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
-        final View switchView = holder.findViewById(android.R.id.switch_widget);
+        final CompoundButton switchView =
+                (CompoundButton) holder.findViewById(androidx.preference.R.id.switchWidget);
         switchView.setClickable(false);
-        ((Checkable) switchView).setChecked(mChecked);
+        switchView.setChecked(mChecked);
     }
 
     @Override

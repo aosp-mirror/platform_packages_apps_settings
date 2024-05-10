@@ -37,7 +37,7 @@ public class DeviceStateAutoRotateDetailsFragment extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.DISPLAY_AUTO_ROTATE_SETTINGS;
+        return SettingsEnums.DISPLAY_DEVICE_STATE_AUTO_ROTATE_SETTINGS;
     }
 
     @Override

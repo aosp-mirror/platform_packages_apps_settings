@@ -27,6 +27,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -118,6 +119,8 @@ public class WifiDppQrCodeGeneratorFragment extends WifiDppQrCodeBaseFragment {
 
         final String password = wifiNetworkConfig.getPreSharedKey();
         TextView passwordView = view.findViewById(R.id.password);
+        passwordView.setInputType(
+                InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
         if (TextUtils.isEmpty(password)) {
             mSummary.setText(getString(
                     R.string.wifi_dpp_scan_open_network_qr_code_with_another_device,
@@ -223,11 +226,9 @@ public class WifiDppQrCodeGeneratorFragment extends WifiDppQrCodeBaseFragment {
 
     private Button createActionButton(Drawable icon, CharSequence title, View.OnClickListener r) {
         final Button b = (Button) LayoutInflater.from(getContext()).inflate(
-                com.android.internal.R.layout.chooser_action_button, null);
+                R.layout.action_button, null);
         if (icon != null) {
-            final int size = getResources()
-                    .getDimensionPixelSize(
-                            com.android.internal.R.dimen.chooser_action_button_icon_size);
+            final int size = getResources().getDimensionPixelSize(R.dimen.action_button_icon_size);
             icon.setBounds(0, 0, size, size);
             b.setCompoundDrawablesRelative(icon, null, null, null);
         }

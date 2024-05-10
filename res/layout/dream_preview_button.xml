@@ -17,17 +17,16 @@
 
 <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:androidprv="http://schemas.android.com/apk/prv/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/dream_preview_button"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="@string/dream_preview_button_title"
     android:textAllCaps="false"
-    android:textColor="?android:attr/textColorPrimaryInverse"
+    android:textColor="@color/settingslib_btn_colored_text_material"
     android:theme="@style/Theme.CollapsingToolbar.Settings"
     android:layout_marginBottom="16dp"
     android:layout_gravity="bottom|center"
-    app:backgroundTint="?androidprv:attr/colorAccentPrimaryVariant"
-    app:iconTint="?android:attr/textColorPrimaryInverse"
+    app:backgroundTint="@color/settingslib_btn_colored_background_material"
+    app:iconTint="@color/settingslib_btn_colored_text_material"
     app:icon="@drawable/dream_preview_icon"/>

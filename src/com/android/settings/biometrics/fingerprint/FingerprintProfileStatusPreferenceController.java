@@ -53,4 +53,9 @@ public class FingerprintProfileStatusPreferenceController
     protected int getUserId() {
         return mProfileChallengeUserId;
     }
+
+    @Override
+    protected boolean isWorkProfileController() {
+        return true;
+    }
 }

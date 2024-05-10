@@ -19,6 +19,7 @@ import android.Manifest;
 import android.app.AppOpsManager;
 import android.content.Context;
 
+import com.android.settings.Utils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.ApplicationsState.AppFilter;
@@ -33,7 +34,6 @@ import java.util.List;
  */
 public class AppStateOverlayBridge extends AppStateAppOpsBridge {
 
-    private static final String TAG = "AppStateOverlayBridge";
     private static final int APP_OPS_OP_CODE = AppOpsManager.OP_SYSTEM_ALERT_WINDOW;
     private static final String PM_SYSTEM_ALERT_WINDOW = Manifest.permission.SYSTEM_ALERT_WINDOW;
     private static final String[] PM_PERMISSION = {
@@ -54,23 +54,13 @@ public class AppStateOverlayBridge extends AppStateAppOpsBridge {
         return new OverlayState(permissionState);
     }
 
-    // TODO: figure out how to filter out system apps for this method
-    public int getNumberOfPackagesWithPermission() {
-        return super.getNumPackagesDeclaredPermission();
-    }
-
-    // TODO: figure out how to filter out system apps for this method
-    public int getNumberOfPackagesCanDrawOverlay() {
-        return super.getNumPackagesAllowedByAppOps();
-    }
-
     public static class OverlayState extends AppStateAppOpsBridge.PermissionState {
         public final boolean controlEnabled;
 
         private static final List<String> DISABLE_PACKAGE_LIST = new ArrayList<>();
 
         static {
-            DISABLE_PACKAGE_LIST.add("com.android.systemui");
+            DISABLE_PACKAGE_LIST.add(Utils.SYSTEMUI_PACKAGE_NAME);
         }
 
         public OverlayState(PermissionState permissionState) {

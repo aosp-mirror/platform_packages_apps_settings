@@ -50,8 +50,9 @@ public class FaceUpdater {
     /** Wrapper around the {@link FaceManager#enroll} method. */
     public void enroll(int userId, byte[] hardwareAuthToken, CancellationSignal cancel,
             FaceManager.EnrollmentCallback callback, int[] disabledFeatures) {
-        mFaceManager.enroll(userId, hardwareAuthToken, cancel,
-                new NotifyingEnrollmentCallback(mContext, callback), disabledFeatures);
+        this.enroll(userId, hardwareAuthToken, cancel,
+                new NotifyingEnrollmentCallback(mContext, callback), disabledFeatures,
+                null, false);
     }
 
     /** Wrapper around the {@link FaceManager#enroll} method. */

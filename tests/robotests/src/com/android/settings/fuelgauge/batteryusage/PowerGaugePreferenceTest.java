@@ -53,7 +53,12 @@ public class PowerGaugePreferenceTest {
         MockitoAnnotations.initMocks(this);
 
         mContext = RuntimeEnvironment.application;
-        mRootView = LayoutInflater.from(mContext).inflate(R.layout.preference_app, null);
+        mRootView =
+                LayoutInflater.from(mContext)
+                        .inflate(
+                                com.android.settingslib.widget.preference.app.R.layout
+                                        .preference_app,
+                                null);
         mWidgetView =
                 LayoutInflater.from(mContext).inflate(R.layout.preference_widget_summary, null);
         final LinearLayout widgetFrame = mRootView.findViewById(android.R.id.widget_frame);
@@ -62,16 +67,8 @@ public class PowerGaugePreferenceTest {
         mPreferenceViewHolder = PreferenceViewHolder.createInstanceForTests(mRootView);
 
         mPowerGaugePreference = new PowerGaugePreference(mContext);
-        assertThat(mPowerGaugePreference.getLayoutResource()).isEqualTo(R.layout.preference_app);
-    }
-
-    @Test
-    public void testOnBindViewHolder_bindSubtitle() {
-        mPowerGaugePreference.setSubtitle(SUBTITLE);
-        mPowerGaugePreference.onBindViewHolder(mPreferenceViewHolder);
-
-        TextView widgetSummary = (TextView) mPreferenceViewHolder.findViewById(R.id.widget_summary);
-        assertThat(widgetSummary.getText()).isEqualTo(SUBTITLE);
+        assertThat(mPowerGaugePreference.getLayoutResource())
+                .isEqualTo(com.android.settingslib.widget.preference.app.R.layout.preference_app);
     }
 
     @Test

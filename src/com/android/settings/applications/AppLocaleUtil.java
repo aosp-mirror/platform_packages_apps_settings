@@ -17,48 +17,55 @@
 package com.android.settings.applications;
 
 import android.annotation.NonNull;
-import android.app.ActivityManager;
 import android.app.LocaleConfig;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.LocaleList;
+import android.text.TextUtils;
 import android.util.FeatureFlagUtils;
 import android.util.Log;
+
+import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 
 import java.util.List;
 
-/** This class provides methods that help dealing with per app locale. */
+/**
+ * This class provides methods that help dealing with per app locale.
+ */
 public class AppLocaleUtil {
     private static final String TAG = AppLocaleUtil.class.getSimpleName();
 
     public static final Intent LAUNCHER_ENTRY_INTENT =
             new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER);
 
+    @VisibleForTesting
+    static LocaleConfig sLocaleConfig;
+
     /**
      * Decides the UI display of per app locale.
      */
     public static boolean canDisplayLocaleUi(
             @NonNull Context context,
-            @NonNull String packageName,
+            @NonNull ApplicationInfo app,
             @NonNull List<ResolveInfo> infos) {
-        boolean isDisallowedPackage = isDisallowedPackage(context, packageName);
-        boolean hasLauncherEntry = hasLauncherEntry(packageName, infos);
-        boolean isSignedWithPlatformKey = isSignedWithPlatformKey(context, packageName);
+        boolean isDisallowedPackage = isDisallowedPackage(context, app.packageName);
+        boolean hasLauncherEntry = hasLauncherEntry(app.packageName, infos);
+        boolean isSignedWithPlatformKey = app.isSignedWithPlatformKey();
         boolean canDisplay = !isDisallowedPackage
                 && !isSignedWithPlatformKey
                 && hasLauncherEntry
-                && isAppLocaleSupported(context, packageName);
+                && isAppLocaleSupported(context, app.packageName);
 
-        Log.i(TAG, "Can display preference - [" + packageName + "] :"
+        Log.i(TAG, "Can display preference - [" + app.packageName + "] :"
                 + " isDisallowedPackage : " + isDisallowedPackage
                 + " / isSignedWithPlatformKey : " + isSignedWithPlatformKey
                 + " / hasLauncherEntry : " + hasLauncherEntry
-                + " / canDisplay : " + canDisplay);
+                + " / canDisplay : " + canDisplay + " / 1.1");
         return canDisplay;
     }
 
@@ -66,28 +73,11 @@ public class AppLocaleUtil {
         final String[] disallowedPackages = context.getResources().getStringArray(
                 R.array.config_disallowed_app_localeChange_packages);
         for (String disallowedPackage : disallowedPackages) {
-            if (packageName.equals(disallowedPackage)) {
+            if (TextUtils.equals(packageName, disallowedPackage)) {
                 return true;
             }
         }
         return false;
-    }
-
-    private static boolean isSignedWithPlatformKey(Context context, String packageName) {
-        PackageInfo packageInfo = null;
-        PackageManager packageManager = context.getPackageManager();
-        ActivityManager activityManager = context.getSystemService(ActivityManager.class);
-        try {
-            packageInfo = packageManager.getPackageInfoAsUser(
-                    packageName, /* flags= */ 0,
-                    activityManager.getCurrentUser());
-        } catch (PackageManager.NameNotFoundException ex) {
-            Log.e(TAG, "package not found: " + packageName);
-        }
-        if (packageInfo == null) {
-            return false;
-        }
-        return packageInfo.applicationInfo.isSignedWithPlatformKey();
     }
 
     private static boolean hasLauncherEntry(String packageName, List<ResolveInfo> infos) {
@@ -99,7 +89,13 @@ public class AppLocaleUtil {
      * Check the function of per app language is supported by current application.
      */
     public static boolean isAppLocaleSupported(Context context, String packageName) {
-        LocaleList localeList = getPackageLocales(context, packageName);
+        LocaleList localeList;
+        if (sLocaleConfig != null) {
+            localeList = getPackageLocales(sLocaleConfig);
+        } else {
+            localeList = getPackageLocales(context, packageName);
+        }
+
         if (localeList != null) {
             return localeList.size() > 0;
         }
@@ -118,9 +114,8 @@ public class AppLocaleUtil {
     public static String[] getAssetLocales(Context context, String packageName) {
         try {
             PackageManager packageManager = context.getPackageManager();
-            String[] locales = packageManager.getResourcesForApplication(
-                    packageManager.getPackageInfo(packageName, PackageManager.MATCH_ALL)
-                            .applicationInfo).getAssets().getNonSystemLocales();
+            String[] locales = packageManager.getResourcesForApplication(packageName)
+                    .getAssets().getNonSystemLocales();
             if (locales == null) {
                 Log.i(TAG, "[" + packageName + "] locales are null.");
             }
@@ -137,6 +132,14 @@ public class AppLocaleUtil {
         return new String[0];
     }
 
+    @VisibleForTesting
+    static LocaleList getPackageLocales(LocaleConfig localeConfig) {
+        if (localeConfig.getStatus() == LocaleConfig.STATUS_SUCCESS) {
+            return localeConfig.getSupportedLocales();
+        }
+        return null;
+    }
+
     /**
      * Get locales from LocaleConfig.
      */
@@ -144,9 +147,7 @@ public class AppLocaleUtil {
         try {
             LocaleConfig localeConfig =
                     new LocaleConfig(context.createPackageContext(packageName, 0));
-            if (localeConfig.getStatus() == LocaleConfig.STATUS_SUCCESS) {
-                return localeConfig.getSupportedLocales();
-            }
+            return getPackageLocales(localeConfig);
         } catch (PackageManager.NameNotFoundException e) {
             Log.w(TAG, "Can not found the package name : " + packageName + " / " + e);
         }

@@ -46,8 +46,8 @@ public class PowerUsageFeatureProviderImplTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
-    @Mock
-    private PackageManager mPackageManager;
+
+    @Mock private PackageManager mPackageManager;
     private PowerUsageFeatureProviderImpl mPowerFeatureProvider;
 
     @Before
@@ -60,6 +60,21 @@ public class PowerUsageFeatureProviderImplTest {
         when(mPackageManager.getPackagesForUid(UID_MEDIA)).thenReturn(PACKAGES_MEDIA);
         when(mPackageManager.getPackagesForUid(UID_SYSTEMUI)).thenReturn(PACKAGES_SYSTEMUI);
         mPowerFeatureProvider.mPackageManager = mPackageManager;
+    }
+
+    @Test
+    public void testIsBatteryUsageEnabled_returnFalse() {
+        assertThat(mPowerFeatureProvider.isBatteryUsageEnabled()).isTrue();
+    }
+
+    @Test
+    public void testIsBatteryTipsEnabled_returnFalse() {
+        assertThat(mPowerFeatureProvider.isBatteryTipsEnabled()).isFalse();
+    }
+
+    @Test
+    public void testGetBatteryUsageListConsumePowerThreshold_return0() {
+        assertThat(mPowerFeatureProvider.getBatteryUsageListConsumePowerThreshold()).isEqualTo(0.0);
     }
 
     @Test
@@ -101,38 +116,30 @@ public class PowerUsageFeatureProviderImplTest {
     }
 
     @Test
-    public void testIsAdvancedUiEnabled_returnTrue() {
-        assertThat(mPowerFeatureProvider.isAdvancedUiEnabled()).isTrue();
-    }
-
-    @Test
-    public void testIsPowerAccountingToggleEnabled_returnTrue() {
-        assertThat(mPowerFeatureProvider.isPowerAccountingToggleEnabled()).isTrue();
-    }
-
-    @Test
     public void testIsSmartBatterySupported_smartBatterySupported_returnTrue() {
-        when(mContext.getResources().getBoolean(
-                com.android.internal.R.bool.config_smart_battery_available)).thenReturn(true);
+        when(mContext.getResources()
+                        .getBoolean(com.android.internal.R.bool.config_smart_battery_available))
+                .thenReturn(true);
 
         assertThat(mPowerFeatureProvider.isSmartBatterySupported()).isTrue();
     }
 
     @Test
     public void testIsSmartBatterySupported_smartBatteryNotSupported_returnFalse() {
-        when(mContext.getResources().getBoolean(
-                com.android.internal.R.bool.config_smart_battery_available)).thenReturn(false);
+        when(mContext.getResources()
+                        .getBoolean(com.android.internal.R.bool.config_smart_battery_available))
+                .thenReturn(false);
 
         assertThat(mPowerFeatureProvider.isSmartBatterySupported()).isFalse();
     }
 
     @Test
-    public void testIsAdaptiveChargingSupported_returnFalse() {
-        assertThat(mPowerFeatureProvider.isAdaptiveChargingSupported()).isFalse();
+    public void testGetResumeChargeIntentWithoutDockDefender_returnNull() {
+        assertThat(mPowerFeatureProvider.getResumeChargeIntent(false)).isNull();
     }
 
     @Test
-    public void testGetResumeChargeIntent_returnNull() {
-        assertThat(mPowerFeatureProvider.getResumeChargeIntent()).isNull();
+    public void testGetResumeChargeIntentWithDockDefender_returnNull() {
+        assertThat(mPowerFeatureProvider.getResumeChargeIntent(true)).isNull();
     }
 }

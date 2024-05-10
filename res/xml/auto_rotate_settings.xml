@@ -28,7 +28,7 @@
         android:title="@string/auto_rotate_settings_primary_switch_title"
         settings:controller="com.android.settings.display.AutoRotateSwitchBarController"/>
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="auto_rotate_switch"
         android:title="@string/auto_rotate_settings_primary_switch_title"
         settings:controller="com.android.settings.display.AutoRotatePreferenceController"/>
@@ -50,7 +50,7 @@
         android:title="@string/ambient_camera_summary_battery_saver_on"
         settings:controller="com.android.settings.display.SmartAutoRotateBatterySaverController" />
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="face_based_rotate"
         android:title="@string/auto_rotate_switch_face_based"
         settings:controller="com.android.settings.display.SmartAutoRotateController" />

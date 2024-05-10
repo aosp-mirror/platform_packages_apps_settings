@@ -16,86 +16,68 @@
 
 package com.android.settings.network;
 
-import static androidx.lifecycle.Lifecycle.Event.ON_PAUSE;
-import static androidx.lifecycle.Lifecycle.Event.ON_RESUME;
-
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.provider.Settings;
-import android.telephony.SubscriptionInfo;
+import android.graphics.drawable.Drawable;
 import android.telephony.SubscriptionManager;
-import android.telephony.TelephonyManager;
 import android.util.ArrayMap;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
-import androidx.lifecycle.OnLifecycleEvent;
+import androidx.lifecycle.DefaultLifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.network.telephony.MobileNetworkUtils;
-import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.RestrictedPreference;
+import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class NetworkProviderSimListController extends AbstractPreferenceController implements
-        LifecycleObserver, SubscriptionsChangeListener.SubscriptionsChangeListenerClient {
-    private static final String TAG = "NetworkProviderSimListCtrl";
-    private static final String KEY_PREFERENCE_CATEGORY_SIM = "provider_model_sim_category";
-    private static final String KEY_PREFERENCE_SIM = "provider_model_sim_list";
+public class NetworkProviderSimListController extends BasePreferenceController implements
+        DefaultLifecycleObserver, MobileNetworkRepository.MobileNetworkCallback,
+        DefaultSubscriptionReceiver.DefaultSubscriptionListener {
 
-    private SubscriptionManager mSubscriptionManager;
-    private SubscriptionsChangeListener mChangeListener;
+    private final SubscriptionManager mSubscriptionManager;
+    @Nullable
     private PreferenceCategory mPreferenceCategory;
-    private Map<Integer, Preference> mPreferences;
+    private Map<Integer, RestrictedPreference> mPreferences;
+    private final MobileNetworkRepository mMobileNetworkRepository;
+    private List<SubscriptionInfoEntity> mSubInfoEntityList = new ArrayList<>();
+    private final DefaultSubscriptionReceiver mDataSubscriptionChangedReceiver;
 
-    public NetworkProviderSimListController(Context context, Lifecycle lifecycle) {
-        super(context);
+    public NetworkProviderSimListController(Context context, String preferenceKey) {
+        super(context, preferenceKey);
         mSubscriptionManager = context.getSystemService(SubscriptionManager.class);
-        mChangeListener = new SubscriptionsChangeListener(context, this);
         mPreferences = new ArrayMap<>();
-        lifecycle.addObserver(this);
+        mMobileNetworkRepository = MobileNetworkRepository.getInstance(context);
+        mDataSubscriptionChangedReceiver = new DefaultSubscriptionReceiver(context, this);
     }
 
-    @OnLifecycleEvent(ON_RESUME)
-    public void onResume() {
-        mChangeListener.start();
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(TelephonyManager.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED);
-        mContext.registerReceiver(mDataSubscriptionChangedReceiver, filter);
-        update();
+    @Override
+    public void onResume(@NonNull LifecycleOwner owner) {
+        mMobileNetworkRepository.addRegister(owner, this,
+                SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+        mMobileNetworkRepository.updateEntity();
+        mDataSubscriptionChangedReceiver.registerReceiver();
     }
 
-    @OnLifecycleEvent(ON_PAUSE)
-    public void onPause() {
-        mChangeListener.stop();
-        if (mDataSubscriptionChangedReceiver != null) {
-            mContext.unregisterReceiver(mDataSubscriptionChangedReceiver);
-        }
+    @Override
+    public void onPause(@NonNull LifecycleOwner owner) {
+        mMobileNetworkRepository.removeRegister(this);
+        mDataSubscriptionChangedReceiver.unRegisterReceiver();
     }
-
-    @VisibleForTesting
-    final BroadcastReceiver mDataSubscriptionChangedReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            final String action = intent.getAction();
-            if (action.equals(TelephonyManager.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED)) {
-                update();
-            }
-        }
-    };
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mPreferenceCategory = screen.findPreference(KEY_PREFERENCE_CATEGORY_SIM);
+        mPreferenceCategory = screen.findPreference(getPreferenceKey());
         update();
     }
 
@@ -104,24 +86,26 @@ public class NetworkProviderSimListController extends AbstractPreferenceControll
             return;
         }
 
-        final Map<Integer, Preference> existingPreferences = mPreferences;
+        final Map<Integer, RestrictedPreference> existingPreferences = mPreferences;
         mPreferences = new ArrayMap<>();
 
-        final List<SubscriptionInfo> subscriptions = getAvailablePhysicalSubscription();
-        for (SubscriptionInfo info : subscriptions) {
-            final int subId = info.getSubscriptionId();
-            Preference pref = existingPreferences.remove(subId);
+        final List<SubscriptionInfoEntity> subscriptions = getAvailablePhysicalSubscriptions();
+        for (SubscriptionInfoEntity info : subscriptions) {
+            final int subId = Integer.parseInt(info.subId);
+            RestrictedPreference pref = existingPreferences.remove(subId);
             if (pref == null) {
-                pref = new Preference(mPreferenceCategory.getContext());
+                pref = new RestrictedPreference(mPreferenceCategory.getContext());
                 mPreferenceCategory.addPreference(pref);
             }
-            final CharSequence displayName = SubscriptionUtil.getUniqueSubscriptionDisplayName(
-                    info, mContext);
+            final CharSequence displayName = info.uniqueName;
             pref.setTitle(displayName);
-            pref.setSummary(getSummary(subId, displayName));
-
+            boolean isActiveSubscriptionId = info.isActiveSubscriptionId;
+            pref.setSummary(getSummary(info, displayName));
+            final Drawable drawable = mContext.getDrawable(
+                    info.isEmbedded ? R.drawable.ic_sim_card_download : R.drawable.ic_sim_card);
+            pref.setIcon(drawable);
             pref.setOnPreferenceClickListener(clickedPref -> {
-                if (!mSubscriptionManager.isActiveSubscriptionId(subId)
+                if (!info.isEmbedded && !isActiveSubscriptionId
                         && !SubscriptionUtil.showToggleForPhysicalSim(mSubscriptionManager)) {
                     SubscriptionUtil.startToggleSubscriptionDialogActivity(mContext, subId,
                             true);
@@ -132,60 +116,51 @@ public class NetworkProviderSimListController extends AbstractPreferenceControll
             });
             mPreferences.put(subId, pref);
         }
-        for (Preference pref : existingPreferences.values()) {
+        for (RestrictedPreference pref : existingPreferences.values()) {
             mPreferenceCategory.removePreference(pref);
         }
     }
 
-    public CharSequence getSummary(int subId, CharSequence displayName) {
-        if (mSubscriptionManager.isActiveSubscriptionId(subId)) {
-            CharSequence config = SubscriptionUtil.getDefaultSimConfig(mContext, subId);
+    public CharSequence getSummary(SubscriptionInfoEntity subInfo, CharSequence displayName) {
+        if (subInfo.isActiveSubscriptionId) {
+            CharSequence config = SubscriptionUtil.getDefaultSimConfig(mContext,
+                    subInfo.getSubId());
             CharSequence summary = mContext.getResources().getString(
                     R.string.sim_category_active_sim);
-            if (config == null) {
+            if (config == "") {
                 return summary;
             } else {
                 final StringBuilder activeSim = new StringBuilder();
                 activeSim.append(summary).append(config);
                 return activeSim;
             }
-        } else if (SubscriptionUtil.showToggleForPhysicalSim(mSubscriptionManager)) {
-            return mContext.getString(R.string.sim_category_inactive_sim);
         } else {
-            return mContext.getString(R.string.mobile_network_tap_to_activate, displayName);
+            if (!subInfo.isEmbedded && !SubscriptionUtil.showToggleForPhysicalSim(
+                    mSubscriptionManager)) {
+                return mContext.getString(R.string.mobile_network_tap_to_activate, displayName);
+            } else {
+                return mContext.getString(R.string.sim_category_inactive_sim);
+            }
         }
     }
 
     @Override
-    public boolean isAvailable() {
-        if (!getAvailablePhysicalSubscription().isEmpty()) {
-            return true;
-        }
-        return false;
+    public int getAvailabilityStatus() {
+        return getAvailablePhysicalSubscriptions().isEmpty()
+                ? CONDITIONALLY_UNAVAILABLE : AVAILABLE;
     }
 
     @VisibleForTesting
-    protected List<SubscriptionInfo> getAvailablePhysicalSubscription() {
-        List<SubscriptionInfo> subList = new ArrayList<>();
-        for (SubscriptionInfo info : SubscriptionUtil.getAvailableSubscriptions(mContext)) {
-            if (!info.isEmbedded()) {
-                subList.add(info);
-            }
+    protected List<SubscriptionInfoEntity> getAvailablePhysicalSubscriptions() {
+        return new ArrayList<>(mSubInfoEntityList);
+    }
+
+    @Override
+    public void onAvailableSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList) {
+        mSubInfoEntityList = subInfoEntityList;
+        if (mPreferenceCategory != null) {
+            mPreferenceCategory.setVisible(isAvailable());
         }
-        return subList;
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return KEY_PREFERENCE_SIM;
-    }
-
-    @Override
-    public void onAirplaneModeChanged(boolean airplaneModeEnabled) {
-    }
-
-    @Override
-    public void onSubscriptionsChanged() {
         update();
     }
 
@@ -196,18 +171,21 @@ public class NetworkProviderSimListController extends AbstractPreferenceControll
         update();
     }
 
-    @VisibleForTesting
-    protected int getDefaultVoiceSubscriptionId() {
-        return SubscriptionManager.getDefaultVoiceSubscriptionId();
+    @Override
+    public void onDefaultDataChanged(int defaultDataSubId) {
+        refreshSummary(mPreferenceCategory);
+        update();
     }
 
-    @VisibleForTesting
-    protected int getDefaultSmsSubscriptionId() {
-        return SubscriptionManager.getDefaultSmsSubscriptionId();
+    @Override
+    public void onDefaultVoiceChanged(int defaultVoiceSubId) {
+        refreshSummary(mPreferenceCategory);
+        update();
     }
 
-    @VisibleForTesting
-    protected int getDefaultDataSubscriptionId() {
-        return SubscriptionManager.getDefaultDataSubscriptionId();
+    @Override
+    public void onDefaultSmsChanged(int defaultSmsSubId) {
+        refreshSummary(mPreferenceCategory);
+        update();
     }
 }

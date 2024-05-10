@@ -22,17 +22,18 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import com.android.settings.R;
+
+import com.google.android.material.materialswitch.MaterialSwitch;
 
 /**
  * A layout that contains a start-justified title, and an end-justified switch.
  */
 public class FaceEnrollAccessibilityToggle extends LinearLayout {
 
-    private Switch mSwitch;
+    private final MaterialSwitch mSwitch;
 
     public FaceEnrollAccessibilityToggle(Context context) {
         this(context, null /* attrs */);
@@ -70,13 +71,14 @@ public class FaceEnrollAccessibilityToggle extends LinearLayout {
 
     public void setChecked(boolean checked) {
         mSwitch.setChecked(checked);
+        mSwitch.jumpDrawablesToCurrentState(); // Do not trigger animation from activity
     }
 
     public void setListener(CompoundButton.OnCheckedChangeListener listener) {
         mSwitch.setOnCheckedChangeListener(listener);
     }
 
-    public Switch getSwitch() {
+    public CompoundButton getSwitch() {
         return mSwitch;
     }
 }

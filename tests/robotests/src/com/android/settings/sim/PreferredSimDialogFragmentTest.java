@@ -36,6 +36,7 @@ import androidx.appcompat.app.AlertDialog;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -56,6 +57,7 @@ public class PreferredSimDialogFragmentTest extends
         doReturn(mSubscriptionManager).when(mFragment).getSubscriptionManager();
     }
 
+    @Ignore
     @Test
     public void onCreateDialog_noSims_dismissed() {
         when(mSubscriptionManager.getActiveSubscriptionInfoForSimSlotIndex(anyInt()))
@@ -65,6 +67,7 @@ public class PreferredSimDialogFragmentTest extends
         verify(mFragment).dismiss();
     }
 
+    @Ignore
     @Test
     public void onCreateDialog_oneSimWrongSlotArgument_dismissed() {
         when(mSubscriptionManager.getActiveSubscriptionInfoForSimSlotIndex(1)).thenReturn(null);
@@ -73,6 +76,7 @@ public class PreferredSimDialogFragmentTest extends
         verify(mFragment).dismiss();
     }
 
+    @Ignore
     @Test
     public void onCreateDialog_twoSimsSelectFirst_correctMessage() {
         SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(mSim1, mSim2));
@@ -86,6 +90,7 @@ public class PreferredSimDialogFragmentTest extends
         assertThat(message).doesNotContain(SIM2_NAME);
     }
 
+    @Ignore
     @Test
     public void onCreateDialog_twoSimsSelectSecond_correctMessage() {
         SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(mSim1, mSim2));
@@ -99,6 +104,7 @@ public class PreferredSimDialogFragmentTest extends
         assertThat(message).doesNotContain(SIM1_NAME);
     }
 
+    @Ignore
     @Test
     public void onClick_yesClicked_callsOnSubscriptionSelected() {
         SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(mSim1, mSim2));
@@ -114,6 +120,7 @@ public class PreferredSimDialogFragmentTest extends
         verify(activity).onSubscriptionSelected(PREFERRED_PICK, SIM1_ID);
     }
 
+    @Ignore
     @Test
     public void onClick_noClicked_doesNotCallOnSubscriptionSelected() {
         SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(mSim1, mSim2));

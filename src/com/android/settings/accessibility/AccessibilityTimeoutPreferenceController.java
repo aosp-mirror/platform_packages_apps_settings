@@ -16,17 +16,25 @@
 
 package com.android.settings.accessibility;
 
+import android.content.ContentResolver;
 import android.content.Context;
+import android.content.res.Resources;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
 import com.google.common.primitives.Ints;
 
+/** Preference controller for accessibility timeout. */
 public class AccessibilityTimeoutPreferenceController extends BasePreferenceController {
+
+    private final ContentResolver mContentResolver;
+    private final Resources mResources;
 
     public AccessibilityTimeoutPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
+        mContentResolver = mContext.getContentResolver();
+        mResources = mContext.getResources();
     }
 
     @Override
@@ -36,14 +44,13 @@ public class AccessibilityTimeoutPreferenceController extends BasePreferenceCont
 
     @Override
     public CharSequence getSummary() {
-        final String[] timeoutSummarys = mContext.getResources().getStringArray(
+        final String[] timeoutSummaries = mResources.getStringArray(
                 R.array.accessibility_timeout_summaries);
-        final int[] timeoutValues = mContext.getResources().getIntArray(
+        final int[] timeoutValues = mResources.getIntArray(
                 R.array.accessibility_timeout_selector_values);
-        final int timeoutValue = AccessibilityTimeoutController.getSecureAccessibilityTimeoutValue(
-                mContext.getContentResolver(),
-                AccessibilityTimeoutController.CONTROL_TIMEOUT_SETTINGS_SECURE);
+        final int timeoutValue = AccessibilityTimeoutUtils.getSecureAccessibilityTimeoutValue(
+                mContentResolver);
         final int idx = Ints.indexOf(timeoutValues, timeoutValue);
-        return timeoutSummarys[idx == -1 ? 0 : idx];
+        return timeoutSummaries[idx == -1 ? 0 : idx];
     }
 }

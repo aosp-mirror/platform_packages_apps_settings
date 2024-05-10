@@ -160,8 +160,9 @@ public class WifiQrCode {
 
     private String getValueOrNull(List<String> keyValueList, String prefix) {
         for (String keyValue : keyValueList) {
-            if (keyValue.startsWith(prefix)) {
-                return  keyValue.substring(prefix.length());
+            String strippedKeyValue = keyValue.stripLeading();
+            if (strippedKeyValue.startsWith(prefix)) {
+                return strippedKeyValue.substring(prefix.length());
             }
         }
 

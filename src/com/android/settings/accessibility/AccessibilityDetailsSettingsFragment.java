@@ -17,6 +17,7 @@
 package com.android.settings.accessibility;
 
 import static com.android.internal.accessibility.AccessibilityShortcutController.ACCESSIBILITY_BUTTON_COMPONENT_NAME;
+import static com.android.internal.accessibility.AccessibilityShortcutController.ACCESSIBILITY_HEARING_AIDS_COMPONENT_NAME;
 import static com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_COMPONENT_NAME;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
@@ -41,6 +42,7 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.accessibility.AccessibilityUtils;
 
 import java.util.List;
@@ -101,14 +103,16 @@ public class AccessibilityDetailsSettingsFragment extends InstrumentedFragment {
             @Nullable ComponentName componentName) {
         if (MAGNIFICATION_COMPONENT_NAME.equals(componentName)) {
             final String destination = ToggleScreenMagnificationPreferenceFragment.class.getName();
-            final Bundle arguments = new Bundle();
-            MagnificationGesturesPreferenceController.populateMagnificationGesturesPreferenceExtras(
-                    arguments, getContext());
-            return new LaunchFragmentArguments(destination, arguments);
+            return new LaunchFragmentArguments(destination, /* arguments= */ null);
         }
 
         if (ACCESSIBILITY_BUTTON_COMPONENT_NAME.equals(componentName)) {
             final String destination = AccessibilityButtonFragment.class.getName();
+            return new LaunchFragmentArguments(destination, /* arguments= */ null);
+        }
+
+        if (ACCESSIBILITY_HEARING_AIDS_COMPONENT_NAME.equals(componentName)) {
+            final String destination = AccessibilityHearingAidsFragment.class.getName();
             return new LaunchFragmentArguments(destination, /* arguments= */ null);
         }
 
@@ -230,6 +234,10 @@ public class AccessibilityDetailsSettingsFragment extends InstrumentedFragment {
                     new ComponentName(packageName, tileServiceClassName).flattenToString());
         }
 
+        final int metricsCategory = FeatureFactory.getFeatureFactory()
+                .getAccessibilityMetricsFeatureProvider()
+                .getDownloadedFeatureMetricsCategory(componentName);
+        extras.putInt(AccessibilitySettings.EXTRA_METRICS_CATEGORY, metricsCategory);
         extras.putParcelable(AccessibilitySettings.EXTRA_COMPONENT_NAME, componentName);
         extras.putInt(AccessibilitySettings.EXTRA_ANIMATED_IMAGE_RES, info.getAnimatedImageRes());
 

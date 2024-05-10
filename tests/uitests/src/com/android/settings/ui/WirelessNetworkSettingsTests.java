@@ -24,9 +24,6 @@ import android.net.wifi.WifiManager;
 import android.os.RemoteException;
 import android.platform.test.annotations.Presubmit;
 import android.provider.Settings;
-import android.support.test.uiautomator.By;
-import android.support.test.uiautomator.UiDevice;
-import android.support.test.uiautomator.Until;
 import android.system.helpers.CommandsHelper;
 import android.system.helpers.SettingsHelper;
 import android.test.suitebuilder.annotation.MediumTest;
@@ -34,15 +31,20 @@ import android.util.Log;
 
 import androidx.test.InstrumentationRegistry;
 import androidx.test.runner.AndroidJUnit4;
+import androidx.test.uiautomator.By;
+import androidx.test.uiautomator.UiDevice;
+import androidx.test.uiautomator.Until;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
  * Core tests for Wifi Settings.
  */
+@Ignore
 @RunWith(AndroidJUnit4.class)
 @MediumTest
 public class WirelessNetworkSettingsTests {

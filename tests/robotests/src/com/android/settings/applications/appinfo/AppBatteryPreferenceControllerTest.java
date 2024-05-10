@@ -18,8 +18,6 @@ package com.android.settings.applications.appinfo;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.anyDouble;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -57,6 +55,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class AppBatteryPreferenceControllerTest {
 
     private static final int TARGET_UID = 111;
@@ -133,32 +134,8 @@ public class AppBatteryPreferenceControllerTest {
     }
 
     @Test
-    public void updateBattery_noBatteryStats_summaryNo() {
-        mController.displayPreference(mScreen);
-
-        mController.updateBattery();
-
-        assertThat(mBatteryPreference.getSummary())
-            .isEqualTo("No battery use since last full charge");
-    }
-
-    @Test
-    public void updateBattery_hasBatteryStats_summaryPercent() {
-        mController.mBatteryUsageStats = mBatteryUsageStats;
-        mController.mUidBatteryConsumer = mUidBatteryConsumer;
-        doReturn(BATTERY_LEVEL).when(mBatteryUtils).calculateBatteryPercent(anyDouble(),
-                anyDouble(), anyInt());
-        mController.displayPreference(mScreen);
-
-        mController.updateBattery();
-
-        assertThat(mBatteryPreference.getSummary()).isEqualTo("60% use since last full charge");
-    }
-
-    @Test
     public void updateBatteryWithDiffEntry_noConsumePower_summaryNo() {
         mController.displayPreference(mScreen);
-        mController.mIsChartGraphEnabled = true;
 
         mController.updateBatteryWithDiffEntry();
 
@@ -169,10 +146,9 @@ public class AppBatteryPreferenceControllerTest {
     @Test
     public void updateBatteryWithDiffEntry_withConsumePower_summaryPercent() {
         mController.displayPreference(mScreen);
-        mController.mIsChartGraphEnabled = true;
         mBatteryDiffEntry.mConsumePower = 1;
         mController.mBatteryDiffEntry = mBatteryDiffEntry;
-        when(mBatteryDiffEntry.getPercentOfTotal()).thenReturn(60.0);
+        when(mBatteryDiffEntry.getPercentage()).thenReturn(60.0);
 
         mController.updateBatteryWithDiffEntry();
 

@@ -34,7 +34,7 @@
         settings:keywords="@string/keywords_battery_saver_schedule"
         settings:controller="com.android.settings.fuelgauge.batterysaver.BatterySaverSchedulePreferenceController"/>
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:order="80"
         android:key="battery_saver_sticky"
         android:title="@string/battery_saver_sticky_title_new"

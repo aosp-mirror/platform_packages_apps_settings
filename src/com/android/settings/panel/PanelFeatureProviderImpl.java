@@ -22,9 +22,9 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.util.FeatureFlagUtils;
 
-public class PanelFeatureProviderImpl implements PanelFeatureProvider {
+import com.android.settings.Utils;
 
-    private static final String SYSTEMUI_PACKAGE_NAME = "com.android.systemui";
+public class PanelFeatureProviderImpl implements PanelFeatureProvider {
 
     @Override
     public PanelContent getPanel(Context context, Bundle bundle) {
@@ -42,7 +42,7 @@ public class PanelFeatureProviderImpl implements PanelFeatureProvider {
                 // Redirect to the internet dialog in SystemUI.
                 Intent intent = new Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
                 intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND)
-                        .setPackage(SYSTEMUI_PACKAGE_NAME);
+                        .setPackage(Utils.SYSTEMUI_PACKAGE_NAME);
                 context.sendBroadcast(intent);
                 return null;
             case Settings.Panel.ACTION_NFC:
@@ -55,7 +55,7 @@ public class PanelFeatureProviderImpl implements PanelFeatureProvider {
                     // Redirect to the volume panel in SystemUI.
                     Intent volumeIntent = new Intent(Settings.Panel.ACTION_VOLUME);
                     volumeIntent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND).setPackage(
-                            SYSTEMUI_PACKAGE_NAME);
+                            Utils.SYSTEMUI_PACKAGE_NAME);
                     context.sendBroadcast(volumeIntent);
                     return null;
                 } else {

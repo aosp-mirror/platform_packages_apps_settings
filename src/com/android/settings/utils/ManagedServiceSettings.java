@@ -37,7 +37,7 @@ import android.view.View;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -121,7 +121,7 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
             }
             final CharSequence finalTitle = title;
             final String summary = service.loadLabel(mPm).toString();
-            final SwitchPreference pref = new AppSwitchPreference(getPrefContext());
+            final TwoStatePreference pref = new AppSwitchPreference(getPrefContext());
             pref.setPersistent(false);
             pref.setIcon(mIconDrawableFactory.getBadgedIcon(service, service.applicationInfo,
                     UserHandle.getUserId(service.applicationInfo.uid)));

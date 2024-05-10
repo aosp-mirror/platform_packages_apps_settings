@@ -35,7 +35,6 @@ import androidx.test.platform.app.InstrumentationRegistry;
 import com.android.settings.Settings;
 import com.android.settings.testutils.AdbUtils;
 import com.android.settings.testutils.UiUtils;
-import com.android.settingslib.utils.ThreadUtils;
 
 import org.junit.After;
 import org.junit.Before;
@@ -87,8 +86,7 @@ public class UserSettingsComponentTest {
                     ((FragmentActivity) activity).getSupportFragmentManager().getFragments().get(0);
             UserSettings us = (UserSettings) f;
             Log.d(TAG, "Start to add user :" + randomUserName);
-            ThreadUtils.postOnBackgroundThread(
-                    us.new AddUserNowImpl(USER_TYPE_RESTRICTED_PROFILE, randomUserName));
+            us.createUser(USER_TYPE_RESTRICTED_PROFILE, randomUserName);
         });
 
         assertThat(

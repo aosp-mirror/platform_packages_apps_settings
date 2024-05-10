@@ -24,7 +24,8 @@ import static com.android.settings.slices.CustomSliceRegistry.REMOTE_MEDIA_SLICE
 import static com.android.settings.slices.CustomSliceRegistry.VOLUME_ALARM_URI;
 import static com.android.settings.slices.CustomSliceRegistry.VOLUME_CALL_URI;
 import static com.android.settings.slices.CustomSliceRegistry.VOLUME_MEDIA_URI;
-import static com.android.settings.slices.CustomSliceRegistry.VOLUME_RINGER_URI;
+import static com.android.settings.slices.CustomSliceRegistry.VOLUME_NOTIFICATION_URI;
+import static com.android.settings.slices.CustomSliceRegistry.VOLUME_SEPARATE_RING_URI;
 
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
@@ -125,6 +126,10 @@ public class VolumePanel implements PanelContent, LifecycleObserver {
         return mContext.getText(R.string.sound_settings);
     }
 
+    /**
+     *  When considering ring and notification, we include all controllers unconditionally and rely
+     *  on getAvailability to govern visibility
+     */
     @Override
     public List<Uri> getSlices() {
         final List<Uri> uris = new ArrayList<>();
@@ -138,7 +143,8 @@ public class VolumePanel implements PanelContent, LifecycleObserver {
         }
         uris.add(MEDIA_OUTPUT_INDICATOR_SLICE_URI);
         uris.add(VOLUME_CALL_URI);
-        uris.add(VOLUME_RINGER_URI);
+        uris.add(VOLUME_SEPARATE_RING_URI);
+        uris.add(VOLUME_NOTIFICATION_URI);
         uris.add(VOLUME_ALARM_URI);
         return uris;
     }

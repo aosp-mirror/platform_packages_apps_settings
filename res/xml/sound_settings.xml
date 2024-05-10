@@ -36,6 +36,7 @@
         android:icon="@drawable/ic_media_stream"
         android:title="@string/media_volume_option_title"
         android:order="-180"
+        settings:userRestriction="no_adjust_volume"
         settings:controller="com.android.settings.notification.MediaVolumePreferenceController"/>
 
     <!-- Media output switcher -->
@@ -53,6 +54,7 @@
         android:icon="@drawable/ic_local_phone_24_lib"
         android:title="@string/call_volume_option_title"
         android:order="-170"
+        settings:userRestriction="no_adjust_volume"
         settings:controller="com.android.settings.notification.CallVolumePreferenceController"/>
 
     <!-- Hands free profile output switcher -->
@@ -64,30 +66,33 @@
         settings:searchable="false"
         settings:controller="com.android.settings.sound.HandsFreeProfileOutputPreferenceController"/>
 
-    <!-- Ring volume -->
+    <!-- Separate Ring volume -->
     <com.android.settings.notification.VolumeSeekBarPreference
-        android:key="ring_volume"
-        android:icon="@drawable/ic_notifications"
-        android:title="@string/ring_volume_option_title"
-        android:order="-160"
-        settings:controller="com.android.settings.notification.RingVolumePreferenceController"/>
-
-
-    <!-- Alarm volume -->
-    <com.android.settings.notification.VolumeSeekBarPreference
-        android:key="alarm_volume"
-        android:icon="@*android:drawable/ic_audio_alarm"
-        android:title="@string/alarm_volume_option_title"
-        android:order="-150"
-        settings:controller="com.android.settings.notification.AlarmVolumePreferenceController"/>
+        android:key="separate_ring_volume"
+        android:icon="@drawable/ic_ring_volume"
+        android:title="@string/separate_ring_volume_option_title"
+        android:order="-155"
+        settings:userRestriction="no_adjust_volume"
+        settings:controller="com.android.settings.notification.SeparateRingVolumePreferenceController"/>
 
     <!-- Notification volume -->
     <com.android.settings.notification.VolumeSeekBarPreference
         android:key="notification_volume"
         android:icon="@drawable/ic_notifications"
         android:title="@string/notification_volume_option_title"
+        android:order="-150"
+        settings:userRestriction="no_adjust_volume"
+        settings:controller="com.android.settings.notification.NotificationVolumePreferenceController"
+        settings:unavailableSliceSubtitle="@string/notification_volume_disabled_summary"/>
+
+    <!-- Alarm volume -->
+    <com.android.settings.notification.VolumeSeekBarPreference
+        android:key="alarm_volume"
+        android:icon="@*android:drawable/ic_audio_alarm"
+        android:title="@string/alarm_volume_option_title"
         android:order="-140"
-        settings:controller="com.android.settings.notification.NotificationVolumePreferenceController"/>
+        settings:userRestriction="no_adjust_volume"
+        settings:controller="com.android.settings.notification.AlarmVolumePreferenceController"/>
 
     <!-- TODO(b/174964721): make this a PrimarySwitchPreference -->
     <!-- Interruptions -->
@@ -164,37 +169,37 @@
         android:order="-60"/>
 
     <!-- Dial pad tones -->
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="dial_pad_tones"
         android:title="@string/dial_pad_tones_title"
         android:order="-50"/>
 
     <!-- Screen locking sounds -->
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="screen_locking_sounds"
         android:title="@string/screen_locking_sounds_title"
         android:order="-45"/>
 
     <!-- Charging sounds -->
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="charging_sounds"
         android:title="@string/charging_sounds_title"
         android:order="-40"/>
 
     <!-- Docking sounds -->
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="docking_sounds"
         android:title="@string/docking_sounds_title"
         android:order="-35"/>
 
     <!-- Touch sounds -->
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="touch_sounds"
         android:title="@string/touch_sounds_title"
         android:order="-30"/>
 
     <!-- Show vibrate icon in status bar -->
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="vibrate_icon"
         android:title="@string/vibrate_icon_title"
         android:order="-27"/>
@@ -207,7 +212,7 @@
         android:order="-20"/>
 
     <!-- Boot sounds -->
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="boot_sounds"
         android:title="@string/boot_sounds_title"
         android:order="-15"/>

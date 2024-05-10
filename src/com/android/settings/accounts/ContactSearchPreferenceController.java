@@ -17,32 +17,41 @@ import static android.provider.Settings.Secure.MANAGED_PROFILE_CONTACT_REMOTE_SE
 
 import android.content.Context;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.Settings;
 
+import androidx.lifecycle.DefaultLifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
-import com.android.settings.core.BasePreferenceController;
+import com.android.settings.R;
+import com.android.settings.Utils;
+import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.slices.SliceData;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedSwitchPreference;
 
-public class ContactSearchPreferenceController extends BasePreferenceController implements
-        Preference.OnPreferenceChangeListener {
+import org.jetbrains.annotations.NotNull;
 
-    private UserHandle mManagedUser;
+public class ContactSearchPreferenceController extends TogglePreferenceController implements
+        Preference.OnPreferenceChangeListener, DefaultLifecycleObserver,
+        ManagedProfileQuietModeEnabler.QuietModeChangeListener {
+
+    private final ManagedProfileQuietModeEnabler mQuietModeEnabler;
+    private final UserHandle mManagedUser;
+    private Preference mPreference;
 
     public ContactSearchPreferenceController(Context context, String key) {
         super(context, key);
-    }
-
-    public void setManagedUser(UserHandle managedUser) {
-        mManagedUser = managedUser;
+        mManagedUser = Utils.getManagedProfile(context.getSystemService(UserManager.class));
+        mQuietModeEnabler = new ManagedProfileQuietModeEnabler(context, this);
     }
 
     @Override
     public int getAvailabilityStatus() {
-        return (mManagedUser != null) ? AVAILABLE : DISABLED_FOR_USER;
+        return mQuietModeEnabler.isAvailable() ? AVAILABLE : DISABLED_FOR_USER;
     }
 
     @Override
@@ -51,6 +60,7 @@ public class ContactSearchPreferenceController extends BasePreferenceController 
         if (preference instanceof RestrictedSwitchPreference) {
             final RestrictedSwitchPreference pref = (RestrictedSwitchPreference) preference;
             pref.setChecked(isChecked());
+            pref.setEnabled(!mQuietModeEnabler.isQuietModeEnabled());
             if (mManagedUser != null) {
                 final RestrictedLockUtils.EnforcedAdmin enforcedAdmin =
                         RestrictedLockUtilsInternal.checkIfRemoteContactSearchDisallowed(
@@ -60,31 +70,58 @@ public class ContactSearchPreferenceController extends BasePreferenceController 
         }
     }
 
-    private boolean isChecked() {
-        if (mManagedUser == null) {
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        mPreference = screen.findPreference(getPreferenceKey());
+        updateState(mPreference);
+    }
+
+    @Override
+    public void onStart(@NotNull LifecycleOwner lifecycleOwner) {
+        lifecycleOwner.getLifecycle().addObserver(mQuietModeEnabler);
+    }
+
+    @Override
+    public void onStop(@NotNull LifecycleOwner lifecycleOwner) {
+        lifecycleOwner.getLifecycle().removeObserver(mQuietModeEnabler);
+    }
+
+    @Override
+    public boolean isChecked() {
+        if (mManagedUser == null || mQuietModeEnabler.isQuietModeEnabled()) {
             return false;
         }
         return 0 != Settings.Secure.getIntForUser(mContext.getContentResolver(),
                 MANAGED_PROFILE_CONTACT_REMOTE_SEARCH, 0, mManagedUser.getIdentifier());
     }
 
-    private boolean setChecked(boolean isChecked) {
-        if (mManagedUser != null) {
-            final int value = isChecked ? 1 : 0;
-            Settings.Secure.putIntForUser(mContext.getContentResolver(),
-                    MANAGED_PROFILE_CONTACT_REMOTE_SEARCH, value, mManagedUser.getIdentifier());
+    @Override
+    public boolean setChecked(boolean isChecked) {
+        if (mManagedUser == null || mQuietModeEnabler.isQuietModeEnabled()) {
+            return false;
         }
+        final int value = isChecked ? 1 : 0;
+        Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                MANAGED_PROFILE_CONTACT_REMOTE_SEARCH, value, mManagedUser.getIdentifier());
         return true;
     }
 
     @Override
-    public final boolean onPreferenceChange(Preference preference, Object newValue) {
-        return setChecked((boolean) newValue);
+    public void onQuietModeChanged() {
+        if (mPreference != null) {
+            updateState(mPreference);
+        }
     }
 
     @Override
     @SliceData.SliceType
     public int getSliceType() {
         return SliceData.SliceType.SWITCH;
+    }
+
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_accounts;
     }
 }

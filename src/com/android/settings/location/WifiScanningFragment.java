@@ -37,7 +37,7 @@ public class WifiScanningFragment extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.LOCATION_SERVICES;
+        return SettingsEnums.LOCATION_SERVICES_WIFI_SCANNING;
     }
 
     @Override

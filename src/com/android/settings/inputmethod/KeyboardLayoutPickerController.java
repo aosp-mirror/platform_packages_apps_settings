@@ -21,12 +21,12 @@ import android.content.Context;
 import android.hardware.input.InputDeviceIdentifier;
 import android.hardware.input.InputManager;
 import android.hardware.input.KeyboardLayout;
-import android.view.InputDevice;
 
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.SwitchPreferenceCompat;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -37,12 +37,11 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-
 public class KeyboardLayoutPickerController extends BasePreferenceController implements
         InputManager.InputDeviceListener, LifecycleObserver, OnStart, OnStop {
 
     private final InputManager mIm;
-    private final Map<SwitchPreference, KeyboardLayout> mPreferenceMap;
+    private final Map<TwoStatePreference, KeyboardLayout> mPreferenceMap;
 
     private Fragment mParent;
     private int mInputDeviceId;
@@ -68,15 +67,12 @@ public class KeyboardLayoutPickerController extends BasePreferenceController imp
     @Override
     public void onStart() {
         mIm.registerInputDeviceListener(this, null);
-
-        final InputDevice inputDevice =
-                mIm.getInputDeviceByDescriptor(mInputDeviceIdentifier.getDescriptor());
-        if (inputDevice == null) {
-            mParent.getActivity().finish();
+        if (mInputDeviceIdentifier == null
+                || NewKeyboardSettingsUtils.getInputDevice(mIm, mInputDeviceIdentifier) == null) {
             return;
         }
-        mInputDeviceId = inputDevice.getId();
-
+        mInputDeviceId =
+                NewKeyboardSettingsUtils.getInputDevice(mIm, mInputDeviceIdentifier).getId();
         updateCheckedState();
     }
 
@@ -100,11 +96,10 @@ public class KeyboardLayoutPickerController extends BasePreferenceController imp
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-        if (!(preference instanceof SwitchPreference)) {
+        if (!(preference instanceof TwoStatePreference switchPref)) {
             return false;
         }
 
-        final SwitchPreference switchPref = (SwitchPreference) preference;
         final KeyboardLayout layout = mPreferenceMap.get(switchPref);
         if (layout != null) {
             final boolean checked = switchPref.isChecked();
@@ -143,17 +138,21 @@ public class KeyboardLayoutPickerController extends BasePreferenceController imp
                 mInputDeviceIdentifier);
         Arrays.sort(enabledKeyboardLayouts);
 
-        for (Map.Entry<SwitchPreference, KeyboardLayout> entry : mPreferenceMap.entrySet()) {
+        for (Map.Entry<TwoStatePreference, KeyboardLayout> entry : mPreferenceMap.entrySet()) {
             entry.getKey().setChecked(Arrays.binarySearch(enabledKeyboardLayouts,
                     entry.getValue().getDescriptor()) >= 0);
         }
     }
 
     private void createPreferenceHierarchy() {
+        if (mKeyboardLayouts == null) {
+            return;
+        }
         for (KeyboardLayout layout : mKeyboardLayouts) {
-            final SwitchPreference pref = new SwitchPreference(mScreen.getContext());
+            final TwoStatePreference pref = new SwitchPreferenceCompat(mScreen.getContext());
             pref.setTitle(layout.getLabel());
             pref.setSummary(layout.getCollection());
+            // TODO: Waiting for new API to use a prefix with special number to setKey
             pref.setKey(layout.getDescriptor());
             mScreen.addPreference(pref);
             mPreferenceMap.put(pref, layout);

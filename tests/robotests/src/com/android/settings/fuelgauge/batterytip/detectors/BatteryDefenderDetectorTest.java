@@ -18,10 +18,15 @@ package com.android.settings.fuelgauge.batterytip.detectors;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.when;
+
+import android.content.Context;
+
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.fuelgauge.BatteryInfo;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
+import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -33,9 +38,11 @@ import org.robolectric.RobolectricTestRunner;
 @RunWith(RobolectricTestRunner.class)
 public class BatteryDefenderDetectorTest {
 
-    @Mock
-    private BatteryInfo mBatteryInfo;
+    @Mock private BatteryInfo mBatteryInfo;
     private BatteryDefenderDetector mBatteryDefenderDetector;
+    private Context mContext;
+
+    private FakeFeatureFactory mFakeFeatureFactory;
 
     @Before
     public void setUp() {
@@ -43,20 +50,41 @@ public class BatteryDefenderDetectorTest {
 
         mBatteryInfo.discharging = false;
 
-        mBatteryDefenderDetector = new BatteryDefenderDetector(
-            mBatteryInfo, ApplicationProvider.getApplicationContext());
+        mContext = ApplicationProvider.getApplicationContext();
+
+        mBatteryDefenderDetector = new BatteryDefenderDetector(mBatteryInfo, mContext);
+
+        mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
     }
 
     @Test
-    public void testDetect_notOverheated_tipInvisible() {
-        mBatteryInfo.isOverheated = false;
+    public void testDetect_notDefenderNotExtraDefend_tipInvisible() {
+        mBatteryInfo.isBatteryDefender = false;
+        when(mFakeFeatureFactory.powerUsageFeatureProvider.isExtraDefend()).thenReturn(false);
 
         assertThat(mBatteryDefenderDetector.detect().isVisible()).isFalse();
     }
 
     @Test
-    public void testDetect_isOverheated_tipNew() {
-        mBatteryInfo.isOverheated = true;
+    public void testDetect_notDefenderIsExtraDefend_tipInvisible() {
+        mBatteryInfo.isBatteryDefender = false;
+        when(mFakeFeatureFactory.powerUsageFeatureProvider.isExtraDefend()).thenReturn(true);
+
+        assertThat(mBatteryDefenderDetector.detect().isVisible()).isFalse();
+    }
+
+    @Test
+    public void testDetect_isDefenderIsExtraDefend_tipInvisible() {
+        mBatteryInfo.isBatteryDefender = false;
+        when(mFakeFeatureFactory.powerUsageFeatureProvider.isExtraDefend()).thenReturn(true);
+
+        assertThat(mBatteryDefenderDetector.detect().isVisible()).isFalse();
+    }
+
+    @Test
+    public void testDetect_isDefenderNotExtraDefend_tipNew() {
+        mBatteryInfo.isBatteryDefender = true;
+        when(mFakeFeatureFactory.powerUsageFeatureProvider.isExtraDefend()).thenReturn(false);
 
         assertThat(mBatteryDefenderDetector.detect().getState())
                 .isEqualTo(BatteryTip.StateType.NEW);

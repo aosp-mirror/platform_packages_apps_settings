@@ -215,7 +215,7 @@ public class KeyboardLayoutDialogFragment extends InstrumentedDialogFragment
     private void updateSwitchHintVisibility() {
         AlertDialog dialog = (AlertDialog)getDialog();
         if (dialog != null) {
-            View customPanel = dialog.findViewById(R.id.customPanel);
+            View customPanel = dialog.findViewById(com.google.android.material.R.id.customPanel);
             customPanel.setVisibility(mAdapter.getCount() > 1 ? View.VISIBLE : View.GONE);
         }
     }
@@ -308,6 +308,12 @@ public class KeyboardLayoutDialogFragment extends InstrumentedDialogFragment
         public Keyboards loadInBackground() {
             Keyboards keyboards = new Keyboards();
             InputManager im = (InputManager)getContext().getSystemService(Context.INPUT_SERVICE);
+            if (mInputDeviceIdentifier == null || NewKeyboardSettingsUtils.getInputDevice(
+                    im, mInputDeviceIdentifier) == null) {
+                keyboards.keyboardLayouts.add(null); // default layout
+                keyboards.current = 0;
+                return keyboards;
+            }
             String[] keyboardLayoutDescriptors = im.getEnabledKeyboardLayoutsForInputDevice(
                     mInputDeviceIdentifier);
             for (String keyboardLayoutDescriptor : keyboardLayoutDescriptors) {

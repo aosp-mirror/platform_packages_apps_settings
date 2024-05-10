@@ -16,7 +16,6 @@
 
 package com.android.settings.bluetooth;
 
-import android.bluetooth.BluetoothCsipSetCoordinator;
 import android.bluetooth.BluetoothLeAudio;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
@@ -48,7 +47,6 @@ import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 import com.android.settingslib.widget.LayoutPreference;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -90,7 +88,9 @@ public class LeAudioBluetoothDetailsHeaderController extends BasePreferenceContr
 
     @VisibleForTesting
     LayoutPreference mLayoutPreference;
+    LocalBluetoothManager mManager;
     private CachedBluetoothDevice mCachedDevice;
+    private List<CachedBluetoothDevice> mAllOfCachedDevices;
     @VisibleForTesting
     Handler mHandler = new Handler(Looper.getMainLooper());
     @VisibleForTesting
@@ -111,7 +111,7 @@ public class LeAudioBluetoothDetailsHeaderController extends BasePreferenceContr
                 .stream()
                 .anyMatch(profile -> profile.getProfileId() == BluetoothProfile.LE_AUDIO);
 
-        return !Utils.isAdvancedDetailsHeader(mCachedDevice.getDevice()) && hasLeAudio
+        return !BluetoothUtils.isAdvancedDetailsHeader(mCachedDevice.getDevice()) && hasLeAudio
                 ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
@@ -128,7 +128,9 @@ public class LeAudioBluetoothDetailsHeaderController extends BasePreferenceContr
             return;
         }
         mIsRegisterCallback = true;
-        mCachedDevice.registerCallback(this);
+        for (CachedBluetoothDevice item : mAllOfCachedDevices) {
+            item.registerCallback(this);
+        }
         refresh();
     }
 
@@ -137,7 +139,10 @@ public class LeAudioBluetoothDetailsHeaderController extends BasePreferenceContr
         if (!mIsRegisterCallback) {
             return;
         }
-        mCachedDevice.unregisterCallback(this);
+        for (CachedBluetoothDevice item : mAllOfCachedDevices) {
+            item.unregisterCallback(this);
+        }
+
         mIsRegisterCallback = false;
     }
 
@@ -148,7 +153,9 @@ public class LeAudioBluetoothDetailsHeaderController extends BasePreferenceContr
     public void init(CachedBluetoothDevice cachedBluetoothDevice,
             LocalBluetoothManager bluetoothManager) {
         mCachedDevice = cachedBluetoothDevice;
+        mManager = bluetoothManager;
         mProfileManager = bluetoothManager.getProfileManager();
+        mAllOfCachedDevices = Utils.getAllOfCachedBluetoothDevices(mManager, mCachedDevice);
     }
 
     @VisibleForTesting
@@ -185,7 +192,7 @@ public class LeAudioBluetoothDetailsHeaderController extends BasePreferenceContr
     Drawable createBtBatteryIcon(Context context, int level) {
         final BatteryMeterView.BatteryMeterDrawable drawable =
                 new BatteryMeterView.BatteryMeterDrawable(context,
-                        context.getColor(R.color.meter_background_color),
+                        context.getColor(com.android.settingslib.R.color.meter_background_color),
                         context.getResources().getDimensionPixelSize(
                                 R.dimen.advanced_bluetooth_battery_meter_width),
                         context.getResources().getDimensionPixelSize(
@@ -219,26 +226,11 @@ public class LeAudioBluetoothDetailsHeaderController extends BasePreferenceContr
         updateBatteryLayout(R.id.bt_battery_right, BluetoothUtils.META_INT_ERROR);
     }
 
-    private List<CachedBluetoothDevice> getAllOfLeAudioDevices() {
-        if (mCachedDevice == null) {
-            return null;
-        }
-        List<CachedBluetoothDevice> leAudioDevices = new ArrayList<>();
-        leAudioDevices.add(mCachedDevice);
-        if (mCachedDevice.getGroupId() != BluetoothCsipSetCoordinator.GROUP_ID_INVALID) {
-            for (CachedBluetoothDevice member : mCachedDevice.getMemberDevice()) {
-                leAudioDevices.add(member);
-            }
-        }
-        return leAudioDevices;
-    }
-
     private void updateBatteryLayout() {
         // Init the battery layouts.
         hideAllOfBatteryLayouts();
-        final List<CachedBluetoothDevice> leAudioDevices = getAllOfLeAudioDevices();
         LeAudioProfile leAudioProfile = mProfileManager.getLeAudioProfile();
-        if (leAudioDevices == null || leAudioDevices.isEmpty()) {
+        if (mAllOfCachedDevices.isEmpty()) {
             Log.e(TAG, "There is no LeAudioProfile.");
             return;
         }
@@ -252,7 +244,7 @@ public class LeAudioBluetoothDetailsHeaderController extends BasePreferenceContr
             return;
         }
 
-        for (CachedBluetoothDevice cachedDevice : leAudioDevices) {
+        for (CachedBluetoothDevice cachedDevice : mAllOfCachedDevices) {
             int deviceId = leAudioProfile.getAudioLocation(cachedDevice.getDevice());
             Log.d(TAG, "LeAudioDevices:" + cachedDevice.getDevice().getAnonymizedAddress()
                     + ", deviceId:" + deviceId);
@@ -295,7 +287,8 @@ public class LeAudioBluetoothDetailsHeaderController extends BasePreferenceContr
                     com.android.settings.Utils.formatPercentage(batteryLevel);
             batterySummaryView.setText(batteryLevelPercentageString);
             batterySummaryView.setContentDescription(mContext.getString(
-                    R.string.bluetooth_battery_level, batteryLevelPercentageString));
+                    com.android.settingslib.R.string.bluetooth_battery_level,
+                    batteryLevelPercentageString));
             batterySummaryView.setCompoundDrawablesRelativeWithIntrinsicBounds(
                     createBtBatteryIcon(mContext, batteryLevel), /* top */ null,
                     /* end */ null, /* bottom */ null);
@@ -307,7 +300,15 @@ public class LeAudioBluetoothDetailsHeaderController extends BasePreferenceContr
 
     @Override
     public void onDeviceAttributesChanged() {
-        if (mCachedDevice != null) {
+        for (CachedBluetoothDevice item : mAllOfCachedDevices) {
+            item.unregisterCallback(this);
+        }
+        mAllOfCachedDevices = Utils.getAllOfCachedBluetoothDevices(mManager, mCachedDevice);
+        for (CachedBluetoothDevice item : mAllOfCachedDevices) {
+            item.registerCallback(this);
+        }
+
+        if (!mAllOfCachedDevices.isEmpty()) {
             refresh();
         }
     }

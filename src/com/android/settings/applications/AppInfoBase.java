@@ -26,6 +26,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -89,8 +90,8 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
         super.onCreate(savedInstanceState);
         mFinishing = false;
         final Activity activity = getActivity();
-        mApplicationFeatureProvider = FeatureFactory.getFactory(activity)
-                .getApplicationFeatureProvider(activity);
+        mApplicationFeatureProvider = FeatureFactory.getFeatureFactory()
+                .getApplicationFeatureProvider();
         mState = ApplicationsState.getInstance(activity.getApplication());
         mSession = mState.newSession(this, getSettingsLifecycle());
         mDpm = (DevicePolicyManager) activity.getSystemService(Context.DEVICE_POLICY_SERVICE);
@@ -143,10 +144,14 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
         if (mAppEntry != null) {
             // Get application info again to refresh changed properties of application
             try {
-                mPackageInfo = mPm.getPackageInfoAsUser(mAppEntry.info.packageName,
-                        PackageManager.MATCH_DISABLED_COMPONENTS |
-                                PackageManager.GET_SIGNING_CERTIFICATES |
-                                PackageManager.GET_PERMISSIONS, mUserId);
+                mPackageInfo = mPm.getPackageInfoAsUser(
+                        mAppEntry.info.packageName,
+                        PackageManager.PackageInfoFlags.of(
+                                PackageManager.MATCH_DISABLED_COMPONENTS
+                                        | PackageManager.GET_SIGNING_CERTIFICATES
+                                        | PackageManager.GET_PERMISSIONS
+                                        | PackageManager.MATCH_ARCHIVED_PACKAGES),
+                        mUserId);
             } catch (NameNotFoundException e) {
                 Log.e(TAG, "Exception when retrieving package:" + mAppEntry.info.packageName, e);
             }
@@ -235,13 +240,29 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
                 .launch();
     }
 
+    /** Starts app info fragment from SPA pages. */
+    public static void startAppInfoFragment(Class<?> fragment, String title, ApplicationInfo app,
+            Context context, int sourceMetricsCategory) {
+        final Bundle args = new Bundle();
+        args.putString(AppInfoBase.ARG_PACKAGE_NAME, app.packageName);
+        args.putInt(AppInfoBase.ARG_PACKAGE_UID, app.uid);
+
+        new SubSettingLauncher(context)
+                .setDestination(fragment.getName())
+                .setSourceMetricsCategory(sourceMetricsCategory)
+                .setTitleText(title)
+                .setArguments(args)
+                .setUserHandle(UserHandle.getUserHandleForUid(app.uid))
+                .launch();
+    }
+
     public static class MyAlertDialogFragment extends InstrumentedDialogFragment {
 
         private static final String ARG_ID = "id";
 
         @Override
         public int getMetricsCategory() {
-            return SettingsEnums.DIALOG_APP_INFO_ACTION;
+            return SettingsEnums.DIALOG_BASE_APP_INFO_ACTION;
         }
 
         @Override

@@ -18,7 +18,6 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
-import android.net.ConnectivityManager;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
 import android.util.AttributeSet;
@@ -49,7 +48,7 @@ public class DataUsagePreference extends Preference implements TemplatePreferenc
     }
 
     @Override
-    public void setTemplate(NetworkTemplate template, int subId, NetworkServices services) {
+    public void setTemplate(NetworkTemplate template, int subId) {
         mTemplate = template;
         mSubId = subId;
         final DataUsageController controller = getDataUsageController();
@@ -78,9 +77,6 @@ public class DataUsagePreference extends Preference implements TemplatePreferenc
         final SubSettingLauncher launcher;
         args.putParcelable(DataUsageList.EXTRA_NETWORK_TEMPLATE, mTemplate);
         args.putInt(DataUsageList.EXTRA_SUB_ID, mSubId);
-        args.putInt(DataUsageList.EXTRA_NETWORK_TYPE, mTemplate.getMatchRule()
-                == NetworkTemplate.MATCH_MOBILE
-                ? ConnectivityManager.TYPE_MOBILE : ConnectivityManager.TYPE_WIFI);
         launcher = new SubSettingLauncher(getContext())
             .setArguments(args)
             .setDestination(DataUsageList.class.getName())

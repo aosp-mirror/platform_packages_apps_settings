@@ -89,7 +89,7 @@ public class BluetoothDetailsRelatedToolsControllerTest extends BluetoothDetails
     }
 
     @Test
-    public void isAvailable_notHearingAidDevice_notAvailable() {
+    public void isAvailable_isNotHearingAidDevice_notAvailable() {
         when(mCachedDevice.isHearingAidDevice()).thenReturn(false);
 
         assertThat(mController.isAvailable()).isFalse();

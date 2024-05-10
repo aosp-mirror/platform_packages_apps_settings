@@ -19,8 +19,6 @@ package com.android.settings.fuelgauge.batterytip.tips;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.os.BatteryManager;
 import android.os.Parcel;
 import android.util.Log;
 
@@ -32,24 +30,16 @@ import com.android.settings.widget.CardPreference;
 import com.android.settingslib.HelpUtils;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
-import java.text.NumberFormat;
-
-/**
- * Tip to show current battery is overheated
- */
+/** Tip to show current battery is overheated */
 public class BatteryDefenderTip extends BatteryTip {
 
     private static final String TAG = "BatteryDefenderTip";
-    private boolean mExtraDefend = false;
 
-    public BatteryDefenderTip(@StateType int state) {
-        this(state, false);
-    }
+    private boolean mIsPluggedIn;
 
-    public BatteryDefenderTip(@StateType int state, boolean extraDefend) {
-        super(TipType.BATTERY_DEFENDER, state, true /* showDialog */);
-        mExtraDefend = extraDefend;
-        mShowDialog = false;
+    public BatteryDefenderTip(@StateType int state, boolean isPluggedIn) {
+        super(TipType.BATTERY_DEFENDER, state, false /* showDialog */);
+        mIsPluggedIn = isPluggedIn;
     }
 
     private BatteryDefenderTip(Parcel in) {
@@ -63,20 +53,12 @@ public class BatteryDefenderTip extends BatteryTip {
 
     @Override
     public CharSequence getSummary(Context context) {
-        if (mExtraDefend) {
-            final int extraValue = context.getResources()
-                    .getInteger(R.integer.config_battery_extra_tip_value);
-            final String extraPercentage = NumberFormat.getPercentInstance()
-                    .format(extraValue * 0.01f);
-            return context.getString(
-                    R.string.battery_tip_limited_temporarily_extra_summary, extraPercentage);
-        }
         return context.getString(R.string.battery_tip_limited_temporarily_summary);
     }
 
     @Override
     public int getIconId() {
-        return R.drawable.ic_battery_status_good_24dp;
+        return R.drawable.ic_battery_status_good_theme;
     }
 
     @Override
@@ -86,8 +68,7 @@ public class BatteryDefenderTip extends BatteryTip {
 
     @Override
     public void log(Context context, MetricsFeatureProvider metricsFeatureProvider) {
-        metricsFeatureProvider.action(context, SettingsEnums.ACTION_BATTERY_DEFENDER_TIP,
-                mState);
+        metricsFeatureProvider.action(context, SettingsEnums.ACTION_BATTERY_DEFENDER_TIP, mState);
     }
 
     @Override
@@ -109,29 +90,28 @@ public class BatteryDefenderTip extends BatteryTip {
                     resumeCharging(context);
                     preference.setVisible(false);
                 });
-        cardPreference.setPrimaryButtonVisible(isPluggedIn(context));
+        cardPreference.setPrimaryButtonVisible(mIsPluggedIn);
 
         cardPreference.setSecondaryButtonText(context.getString(R.string.learn_more));
         cardPreference.setSecondaryButtonClickListener(
-                button -> button.startActivityForResult(
-                        HelpUtils.getHelpIntent(
-                                context,
-                                context.getString(R.string.help_url_battery_defender),
-                                /* backupContext */ ""), /* requestCode */ 0));
+                button ->
+                        button.startActivityForResult(
+                                HelpUtils.getHelpIntent(
+                                        context,
+                                        context.getString(R.string.help_url_battery_defender),
+                                        /* backupContext */ ""), /* requestCode */
+                                0));
         cardPreference.setSecondaryButtonVisible(true);
-        cardPreference.setSecondaryButtonContentDescription(context.getString(
-                R.string.battery_tip_limited_temporarily_sec_button_content_description));
-    }
-
-    private CardPreference castToCardPreferenceSafely(Preference preference) {
-        return preference instanceof CardPreference ? (CardPreference) preference : null;
+        cardPreference.setSecondaryButtonContentDescription(
+                context.getString(
+                        R.string.battery_tip_limited_temporarily_sec_button_content_description));
     }
 
     private void resumeCharging(Context context) {
         final Intent intent =
-                FeatureFactory.getFactory(context)
-                        .getPowerUsageFeatureProvider(context)
-                        .getResumeChargeIntent();
+                FeatureFactory.getFeatureFactory()
+                        .getPowerUsageFeatureProvider()
+                        .getResumeChargeIntent(false);
         if (intent != null) {
             context.sendBroadcast(intent);
         }
@@ -139,22 +119,14 @@ public class BatteryDefenderTip extends BatteryTip {
         Log.i(TAG, "send resume charging broadcast intent=" + intent);
     }
 
-    private boolean isPluggedIn(Context context) {
-        final Intent batteryIntent =
-                context.registerReceiver(
-                        /* receiver= */ null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-        return batteryIntent != null
-                && batteryIntent.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0) != 0;
-    }
+    public static final Creator CREATOR =
+            new Creator() {
+                public BatteryTip createFromParcel(Parcel in) {
+                    return new BatteryDefenderTip(in);
+                }
 
-    public static final Creator CREATOR = new Creator() {
-        public BatteryTip createFromParcel(Parcel in) {
-            return new BatteryDefenderTip(in);
-        }
-
-        public BatteryTip[] newArray(int size) {
-            return new BatteryDefenderTip[size];
-        }
-    };
-
+                public BatteryTip[] newArray(int size) {
+                    return new BatteryDefenderTip[size];
+                }
+            };
 }

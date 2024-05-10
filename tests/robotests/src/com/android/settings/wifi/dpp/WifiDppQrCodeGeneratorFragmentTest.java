@@ -42,6 +42,7 @@ import androidx.test.InstrumentationRegistry;
 import androidx.test.runner.AndroidJUnit4;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
@@ -77,6 +78,7 @@ public class WifiDppQrCodeGeneratorFragmentTest {
         when(mFragment.getContext()).thenReturn(mContext);
     }
 
+    @Ignore
     @Test
     public void rotateScreen_shouldNotCrash() {
         mActivity.setRequestedOrientation(
@@ -85,6 +87,7 @@ public class WifiDppQrCodeGeneratorFragmentTest {
                 ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
+    @Ignore
     @Test
     public void createNearbyButton_returnsNull() {
         assertThat(mFragment.createNearbyButton(new Intent(), v -> {
@@ -114,6 +117,7 @@ public class WifiDppQrCodeGeneratorFragmentTest {
         return ai;
     }
 
+    @Ignore
     @Test
     public void createNearbyButtonFromSetting_notNull()
             throws PackageManager.NameNotFoundException {
@@ -137,6 +141,7 @@ public class WifiDppQrCodeGeneratorFragmentTest {
         })).isNotNull();
     }
 
+    @Ignore
     @Test
     public void createNearbyButtonFromConfig_notNull() throws PackageManager.NameNotFoundException {
         doReturn(

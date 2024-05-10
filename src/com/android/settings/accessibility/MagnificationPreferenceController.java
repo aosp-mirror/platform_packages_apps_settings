@@ -17,16 +17,10 @@
 package com.android.settings.accessibility;
 
 import android.content.Context;
-import android.os.Bundle;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
 
 public class MagnificationPreferenceController extends BasePreferenceController {
-
-    private Preference mPreference;
 
     public MagnificationPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -40,19 +34,5 @@ public class MagnificationPreferenceController extends BasePreferenceController 
     @Override
     public CharSequence getSummary() {
         return ToggleScreenMagnificationPreferenceFragment.getServiceSummary(mContext);
-    }
-
-    @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-        mPreference = screen.findPreference(getPreferenceKey());
-        configureMagnificationPreferenceIfNeeded();
-    }
-
-    private void configureMagnificationPreferenceIfNeeded() {
-        mPreference.setFragment(ToggleScreenMagnificationPreferenceFragment.class.getName());
-        final Bundle extras = mPreference.getExtras();
-        MagnificationGesturesPreferenceController
-                .populateMagnificationGesturesPreferenceExtras(extras, mContext);
     }
 }

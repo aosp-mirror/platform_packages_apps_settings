@@ -31,7 +31,6 @@ import android.util.ArraySet;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.settings.core.CategoryMixin.CategoryListener;
-import com.android.settingslib.R;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -88,7 +87,7 @@ public class CategoryMixinTest {
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            setTheme(R.style.Theme_AppCompat);
+            setTheme(androidx.appcompat.R.style.Theme_AppCompat);
             mCategoryMixin = new CategoryMixin(this);
             getLifecycle().addObserver(mCategoryMixin);
         }

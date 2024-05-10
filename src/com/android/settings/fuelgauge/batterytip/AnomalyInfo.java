@@ -19,9 +19,7 @@ package com.android.settings.fuelgauge.batterytip;
 import android.util.KeyValueListParser;
 import android.util.Log;
 
-/**
- * Model class to parse and store anomaly info from statsd.
- */
+/** Model class to parse and store anomaly info from statsd. */
 public class AnomalyInfo {
     private static final String TAG = "AnomalyInfo";
 
@@ -37,5 +35,4 @@ public class AnomalyInfo {
         anomalyType = parser.getInt(KEY_ANOMALY_TYPE, -1);
         autoRestriction = parser.getBoolean(KEY_AUTO_RESTRICTION, false);
     }
-
 }

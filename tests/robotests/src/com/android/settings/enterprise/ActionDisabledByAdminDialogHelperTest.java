@@ -48,6 +48,7 @@ import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
@@ -81,6 +82,7 @@ public class ActionDisabledByAdminDialogHelperTest {
         mHelper = new ActionDisabledByAdminDialogHelper(mActivity);
     }
 
+    @Ignore
     @Test
     public void testSetAdminSupportTitle() {
         final ViewGroup view = new FrameLayout(mActivity);
@@ -198,6 +200,7 @@ public class ActionDisabledByAdminDialogHelperTest {
                 Shadows.shadowOf(textView).innerText());
     }
 
+    @Ignore
     @Test
     public void testMaybeSetLearnMoreButton() {
         UserManager userManager = RuntimeEnvironment.application

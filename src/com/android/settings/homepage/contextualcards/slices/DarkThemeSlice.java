@@ -74,7 +74,7 @@ public class DarkThemeSlice implements CustomSliceable {
 
     @Override
     public Slice getSlice() {
-        final long currentUiSession = FeatureFactory.getFactory(mContext)
+        final long currentUiSession = FeatureFactory.getFeatureFactory()
                 .getSlicesFeatureProvider().getUiSessionToken();
         if (currentUiSession != sActiveUiSession) {
             sActiveUiSession = currentUiSession;

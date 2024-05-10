@@ -72,12 +72,10 @@ public class ManagedProfileSettings extends DashboardFragment {
         super.onAttach(context);
         mUserManager = (UserManager) getSystemService(Context.USER_SERVICE);
         mManagedUser = getManagedUserFromArgument();
+
         if (mManagedUser == null) {
             getActivity().finish();
         }
-        use(WorkModePreferenceController.class).setManagedUser(mManagedUser);
-        use(ContactSearchPreferenceController.class).setManagedUser(mManagedUser);
-        use(CrossProfileCalendarPreferenceController.class).setManagedUser(mManagedUser);
     }
 
     @Override
@@ -140,8 +138,11 @@ public class ManagedProfileSettings extends DashboardFragment {
                 }
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    return false;
+                    UserManager userManager = context.getSystemService(UserManager.class);
+                    UserHandle managedUser = Utils.getManagedProfile(userManager);
+                    return managedUser != null;
                 }
+
             };
 
     private class ManagedProfileBroadcastReceiver extends BroadcastReceiver {

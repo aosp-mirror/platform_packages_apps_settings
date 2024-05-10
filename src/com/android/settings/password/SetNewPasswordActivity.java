@@ -24,6 +24,8 @@ import static android.app.admin.DevicePolicyManager.EXTRA_PASSWORD_COMPLEXITY;
 import static android.app.admin.DevicePolicyManager.PASSWORD_COMPLEXITY_NONE;
 
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_CALLER_APP_NAME;
+import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_CHOOSE_LOCK_SCREEN_DESCRIPTION;
+import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_CHOOSE_LOCK_SCREEN_TITLE;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_DEVICE_PASSWORD_REQUIREMENT_ONLY;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_IS_CALLING_APP_ADMIN;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_REQUESTED_MIN_COMPLEXITY;
@@ -126,6 +128,10 @@ public class SetNewPasswordActivity extends Activity implements SetNewPasswordCo
                 : new Intent(this, ChooseLockGeneric.class);
         intent.setAction(mNewPasswordAction);
         intent.putExtras(chooseLockFingerprintExtras);
+        intent.putExtra(EXTRA_KEY_CHOOSE_LOCK_SCREEN_TITLE,
+                getIntent().getIntExtra(EXTRA_KEY_CHOOSE_LOCK_SCREEN_TITLE, -1));
+        intent.putExtra(EXTRA_KEY_CHOOSE_LOCK_SCREEN_DESCRIPTION,
+                getIntent().getIntExtra(EXTRA_KEY_CHOOSE_LOCK_SCREEN_DESCRIPTION, -1));
         if (mCallerAppName != null) {
             intent.putExtra(EXTRA_KEY_CALLER_APP_NAME, mCallerAppName);
         }
@@ -180,7 +186,7 @@ public class SetNewPasswordActivity extends Activity implements SetNewPasswordCo
                 : SettingsEnums.ACTION_SET_NEW_PARENT_PROFILE_PASSWORD;
 
         final MetricsFeatureProvider metricsProvider =
-                FeatureFactory.getFactory(this).getMetricsFeatureProvider();
+                FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
         metricsProvider.action(
                 metricsProvider.getAttribution(this),
                 action,

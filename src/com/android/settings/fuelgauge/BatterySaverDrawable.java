@@ -23,9 +23,7 @@ import android.graphics.PorterDuffColorFilter;
 import com.android.settingslib.Utils;
 import com.android.settingslib.graph.BatteryMeterDrawableBase;
 
-/**
- * Drawable that shows a static battery saver icon - a full battery symbol and a plus sign.
- */
+/** Drawable that shows a static battery saver icon - a full battery symbol and a plus sign. */
 public class BatterySaverDrawable extends BatteryMeterDrawableBase {
 
     private static final int MAX_BATTERY = 100;

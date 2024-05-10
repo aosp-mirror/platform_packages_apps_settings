@@ -21,6 +21,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.verify;
 
 import android.content.Context;
+import android.hardware.fingerprint.Fingerprint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -57,6 +58,21 @@ public class FingerprintPreferenceTest {
     @Test
     public void shouldShowDeleteButton() {
         assertThat(mPreference.getSecondTargetResId()).isEqualTo(R.layout.preference_widget_delete);
+    }
+
+    @Test
+    public void deleteContentDescription() {
+        final FrameLayout layout = new FrameLayout(mContext);
+        LayoutInflater.from(mContext).inflate(mPreference.getSecondTargetResId(), layout, true);
+        final String fingerprintName = "fingerprint test";
+        mPreference.setFingerprint(new Fingerprint(fingerprintName, 0, 0));
+        final PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(layout);
+        mPreference.onBindViewHolder(holder);
+
+        final View view = layout.findViewById(R.id.delete_button);
+        String expectedContentDescription =
+                mContext.getString(R.string.delete) + " " + fingerprintName;
+        assertThat(view.getContentDescription().toString()).isEqualTo(expectedContentDescription);
     }
 
     @Test

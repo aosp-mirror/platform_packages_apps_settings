@@ -44,8 +44,10 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
+import org.robolectric.annotation.LooperMode;
 
 @RunWith(RobolectricTestRunner.class)
+@LooperMode(LooperMode.Mode.LEGACY)
 @Config(shadows = {ShadowRecoverySystem.class, ShadowBluetoothAdapter.class})
 public class ResetNetworkConfirmTest {
 
@@ -74,6 +76,14 @@ public class ResetNetworkConfirmTest {
     public void testResetNetworkData_notResetEsim() {
         mResetNetworkConfirm.mResetNetworkRequest =
                 new ResetNetworkRequest(ResetNetworkRequest.RESET_NONE);
+        mResetNetworkConfirm.mResetSubscriptionContract =
+                new ResetSubscriptionContract(mActivity,
+                mResetNetworkConfirm.mResetNetworkRequest) {
+            @Override
+            public void onSubscriptionInactive(int subscriptionId) {
+                mActivity.onBackPressed();
+            }
+        };
 
         mResetNetworkConfirm.mFinalClickListener.onClick(null /* View */);
         Robolectric.getBackgroundThreadScheduler().advanceToLastPostedRunnable();

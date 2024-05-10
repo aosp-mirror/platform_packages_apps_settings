@@ -17,6 +17,7 @@
 package com.android.settings.applications.autofill;
 
 import static android.app.admin.DevicePolicyResources.Strings.Settings.AUTO_SYNC_PERSONAL_DATA;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.AUTO_SYNC_PRIVATE_DATA;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.AUTO_SYNC_WORK_DATA;
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 import static android.service.autofill.AutofillService.EXTRA_RESULT;
@@ -55,6 +56,7 @@ import com.android.internal.os.IResultReceiver;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settingslib.utils.StringUtil;
 import com.android.settingslib.widget.AppPreference;
 
 import java.lang.ref.WeakReference;
@@ -121,6 +123,8 @@ public class PasswordsPreferenceController extends BasePreferenceController
                 AUTO_SYNC_PERSONAL_DATA, R.string.account_settings_menu_auto_sync_personal);
         replaceEnterpriseStringTitle(screen, "auto_sync_work_account_data",
                 AUTO_SYNC_WORK_DATA, R.string.account_settings_menu_auto_sync_work);
+        replaceEnterpriseStringTitle(screen, "auto_sync_private_account_data",
+                AUTO_SYNC_PRIVATE_DATA, R.string.account_settings_menu_auto_sync_private);
     }
 
     private void addPasswordPreferences(
@@ -153,9 +157,8 @@ public class PasswordsPreferenceController extends BasePreferenceController
             passwordCount.observe(
                     mLifecycleOwner, count -> {
                         // TODO(b/169455298): Validate the result.
-                        final CharSequence summary =
-                                mContext.getResources().getQuantityString(
-                                        R.plurals.autofill_passwords_count, count, count);
+                        final CharSequence summary = StringUtil.getIcuPluralsString(mContext, count,
+                                R.string.autofill_passwords_count);
                         pref.setSummary(summary);
                     });
             // TODO(b/169455298): Limit the number of concurrent queries.

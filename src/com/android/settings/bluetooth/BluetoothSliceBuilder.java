@@ -124,7 +124,8 @@ public class BluetoothSliceBuilder {
 
     private static boolean isBluetoothEnabled() {
         final BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
-        return adapter.isEnabled();
+        return adapter.getState() == BluetoothAdapter.STATE_ON
+                || adapter.getState() == BluetoothAdapter.STATE_TURNING_ON;
     }
 
     private static PendingIntent getPrimaryAction(Context context) {

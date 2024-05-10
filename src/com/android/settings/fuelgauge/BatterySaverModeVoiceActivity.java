@@ -18,6 +18,8 @@ package com.android.settings.fuelgauge;
 
 import static android.provider.Settings.EXTRA_BATTERY_SAVER_MODE_ENABLED;
 
+import static com.android.settingslib.fuelgauge.BatterySaverLogging.SAVER_ENABLED_VOICE;
+
 import android.content.Intent;
 import android.util.Log;
 
@@ -25,8 +27,8 @@ import com.android.settings.utils.VoiceSettingsActivity;
 import com.android.settingslib.fuelgauge.BatterySaverUtils;
 
 /**
- * Activity for modifying the {@link android.os.PowerManager} power save mode
- * setting using the Voice Interaction API.
+ * Activity for modifying the {@link android.os.PowerManager} power save mode setting using the
+ * Voice Interaction API.
  */
 public class BatterySaverModeVoiceActivity extends VoiceSettingsActivity {
     private static final String TAG = "BatterySaverModeVoiceActivity";
@@ -34,9 +36,11 @@ public class BatterySaverModeVoiceActivity extends VoiceSettingsActivity {
     @Override
     protected boolean onVoiceSettingInteraction(Intent intent) {
         if (intent.hasExtra(EXTRA_BATTERY_SAVER_MODE_ENABLED)) {
-            if (BatterySaverUtils.setPowerSaveMode(this,
+            if (BatterySaverUtils.setPowerSaveMode(
+                    this,
                     intent.getBooleanExtra(EXTRA_BATTERY_SAVER_MODE_ENABLED, false),
-                    /*needFirstTimeWarning=*/ true)) {
+                    /* needFirstTimeWarning= */ true,
+                    SAVER_ENABLED_VOICE)) {
                 notifySuccess(null);
             } else {
                 Log.v(TAG, "Unable to set power mode");

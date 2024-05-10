@@ -34,8 +34,8 @@ public class ImePreferenceController extends AbstractPreferenceController implem
 
     public ImePreferenceController(Context context) {
         super(context);
-        mFeatureProvider = FeatureFactory.getFactory(context)
-                .getEnterprisePrivacyFeatureProvider(context);
+        mFeatureProvider = FeatureFactory.getFeatureFactory()
+                .getEnterprisePrivacyFeatureProvider();
     }
 
     @Override

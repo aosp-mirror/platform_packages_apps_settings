@@ -33,9 +33,7 @@ import com.android.settings.Utils;
 
 import java.util.List;
 
-/**
- * Adapter for the high usage app list
- */
+/** Adapter for the high usage app list */
 public class HighUsageAdapter extends RecyclerView.Adapter<HighUsageAdapter.ViewHolder> {
     private final Context mContext;
     private final IconDrawableFactory mIconDrawableFactory;
@@ -66,8 +64,8 @@ public class HighUsageAdapter extends RecyclerView.Adapter<HighUsageAdapter.View
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        final View view = LayoutInflater.from(mContext).inflate(R.layout.app_high_usage_item,
-                parent, false);
+        final View view =
+                LayoutInflater.from(mContext).inflate(R.layout.app_high_usage_item, parent, false);
         return new ViewHolder(view);
     }
 
@@ -75,7 +73,10 @@ public class HighUsageAdapter extends RecyclerView.Adapter<HighUsageAdapter.View
     public void onBindViewHolder(ViewHolder holder, int position) {
         final AppInfo app = mHighUsageAppList.get(position);
         holder.appIcon.setImageDrawable(
-                Utils.getBadgedIcon(mIconDrawableFactory, mPackageManager, app.packageName,
+                Utils.getBadgedIcon(
+                        mIconDrawableFactory,
+                        mPackageManager,
+                        app.packageName,
                         UserHandle.getUserId(app.uid)));
         CharSequence label = Utils.getApplicationLabel(mContext, app.packageName);
         if (label == null) {

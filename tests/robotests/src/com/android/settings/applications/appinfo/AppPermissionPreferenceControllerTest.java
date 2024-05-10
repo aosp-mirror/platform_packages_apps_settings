@@ -44,11 +44,15 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class AppPermissionPreferenceControllerTest {
 
     @Mock
@@ -106,7 +110,7 @@ public class AppPermissionPreferenceControllerTest {
     public void onPermissionSummaryResult_noRequestedPermission_shouldDisablePreference() {
         mController.displayPreference(mScreen);
 
-        mController.mPermissionCallback.onPermissionSummaryResult(1, 0, 1, new ArrayList<>());
+        mController.mPermissionCallback.onPermissionSummaryResult(0, 1, new ArrayList<>());
 
         verify(mPreference).setEnabled(false);
         verify(mPreference).setSummary(mContext.getString(
@@ -117,7 +121,7 @@ public class AppPermissionPreferenceControllerTest {
     public void onPermissionSummaryResult_noGrantedPermission_shouldSetNoPermissionSummary() {
         mController.displayPreference(mScreen);
 
-        mController.mPermissionCallback.onPermissionSummaryResult(1, 5, 0, new ArrayList<>());
+        mController.mPermissionCallback.onPermissionSummaryResult(5, 0, new ArrayList<>());
 
         verify(mPreference).setEnabled(true);
         verify(mPreference).setSummary(mContext.getString(
@@ -131,7 +135,7 @@ public class AppPermissionPreferenceControllerTest {
         final ArrayList<CharSequence> labels = new ArrayList<>();
         labels.add(permission);
 
-        mController.mPermissionCallback.onPermissionSummaryResult(1, 5, 0, labels);
+        mController.mPermissionCallback.onPermissionSummaryResult(5, 0, labels);
 
         verify(mPreference).setEnabled(true);
         verify(mPreference).setSummary(permission);
@@ -144,7 +148,7 @@ public class AppPermissionPreferenceControllerTest {
         final ArrayList<CharSequence> labels = new ArrayList<>();
         labels.add(permission);
 
-        mController.mPermissionCallback.onPermissionSummaryResult(1, 5, 2, labels);
+        mController.mPermissionCallback.onPermissionSummaryResult(5, 2, labels);
 
         verify(mPreference).setEnabled(true);
         verify(mPreference).setSummary("Storage and 2 additional permissions");

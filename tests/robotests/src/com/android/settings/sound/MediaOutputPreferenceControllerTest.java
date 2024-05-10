@@ -16,9 +16,12 @@
 
 package com.android.settings.sound;
 
+import static android.media.AudioSystem.DEVICE_OUT_BLE_HEADSET;
 import static android.media.AudioSystem.DEVICE_OUT_BLUETOOTH_A2DP;
 import static android.media.AudioSystem.DEVICE_OUT_EARPIECE;
 import static android.media.AudioSystem.DEVICE_OUT_HEARING_AID;
+
+import static com.android.settingslib.media.flags.Flags.FLAG_ENABLE_OUTPUT_SWITCHER_FOR_SYSTEM_ROUTING;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -44,6 +47,7 @@ import android.media.VolumeProvider;
 import android.media.session.MediaController;
 import android.media.session.MediaSessionManager;
 import android.media.session.PlaybackState;
+import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
@@ -55,14 +59,17 @@ import com.android.settings.testutils.shadow.ShadowAudioManager;
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
 import com.android.settingslib.bluetooth.A2dpProfile;
 import com.android.settingslib.bluetooth.BluetoothEventManager;
+import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.HearingAidProfile;
+import com.android.settingslib.bluetooth.LeAudioProfile;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 import com.android.settingslib.media.MediaOutputConstants;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -76,10 +83,10 @@ import org.robolectric.shadows.ShadowBluetoothDevice;
 import org.robolectric.shadows.ShadowPackageManager;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-@Ignore
 @Config(shadows = {
         ShadowAudioManager.class,
         ShadowBluetoothUtils.class,
@@ -91,12 +98,17 @@ public class MediaOutputPreferenceControllerTest {
     private static final String TEST_DEVICE_NAME_2 = "Test_A2DP_BT_Device_NAME_2";
     private static final String TEST_HAP_DEVICE_NAME_1 = "Test_HAP_BT_Device_NAME_1";
     private static final String TEST_HAP_DEVICE_NAME_2 = "Test_HAP_BT_Device_NAME_2";
+    private static final String TEST_LE_AUDIO_DEVICE_NAME_1 = "Test_LE_AUDIO_Device_NAME_1";
     private static final String TEST_DEVICE_ADDRESS_1 = "00:A1:A1:A1:A1:A1";
     private static final String TEST_DEVICE_ADDRESS_2 = "00:B2:B2:B2:B2:B2";
     private static final String TEST_DEVICE_ADDRESS_3 = "00:C3:C3:C3:C3:C3";
     private static final String TEST_DEVICE_ADDRESS_4 = "00:D4:D4:D4:D4:D4";
+    private static final String TEST_DEVICE_ADDRESS_5 = "00:E5:E5:E5:E5:E5";
     private static final String TEST_PACKAGE_NAME = "com.test.packagename";
     private static final String TEST_APPLICATION_LABEL = "APP Test Label";
+
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     @Mock
     private LocalBluetoothManager mLocalManager;
@@ -109,11 +121,19 @@ public class MediaOutputPreferenceControllerTest {
     @Mock
     private HearingAidProfile mHearingAidProfile;
     @Mock
+    private LeAudioProfile mLeAudioProfile;
+    @Mock
     private AudioSwitchPreferenceController.AudioSwitchCallback mAudioSwitchPreferenceCallback;
     @Mock
     private MediaSessionManager mMediaSessionManager;
     @Mock
     private MediaController mMediaController;
+    @Mock
+    private CachedBluetoothDeviceManager mCachedDeviceManager;
+    @Mock
+    private CachedBluetoothDevice mCachedBluetoothDeviceL;
+    @Mock
+    private CachedBluetoothDevice mCachedBluetoothDeviceR;
 
     private Context mContext;
     private PreferenceScreen mScreen;
@@ -130,6 +150,7 @@ public class MediaOutputPreferenceControllerTest {
     private MediaOutputPreferenceController mController;
     private List<BluetoothDevice> mProfileConnectedDevices;
     private List<BluetoothDevice> mHearingAidActiveDevices;
+    private List<BluetoothDevice> mLeAudioActiveDevices;
     private List<MediaController> mMediaControllers = new ArrayList<>();
     private MediaController.PlaybackInfo mPlaybackInfo;
     private PlaybackState mPlaybackState;
@@ -137,6 +158,7 @@ public class MediaOutputPreferenceControllerTest {
     private ApplicationInfo mAppInfo;
     private PackageInfo mPackageInfo;
     private PackageStats mPackageStats;
+    private Collection<CachedBluetoothDevice> mCachedDevices;
 
     @Before
     public void setUp() {
@@ -168,14 +190,22 @@ public class MediaOutputPreferenceControllerTest {
 
         when(mLocalBluetoothManager.getEventManager()).thenReturn(mBluetoothEventManager);
         when(mLocalBluetoothManager.getProfileManager()).thenReturn(mLocalBluetoothProfileManager);
+        when(mLocalBluetoothManager.getCachedDeviceManager()).thenReturn(mCachedDeviceManager);
         when(mLocalBluetoothProfileManager.getA2dpProfile()).thenReturn(mA2dpProfile);
         when(mLocalBluetoothProfileManager.getHearingAidProfile()).thenReturn(mHearingAidProfile);
+        when(mLocalBluetoothProfileManager.getLeAudioProfile()).thenReturn(mLeAudioProfile);
 
         mBluetoothManager = mContext.getSystemService(BluetoothManager.class);
         mBluetoothAdapter = mBluetoothManager.getAdapter();
 
+        mCachedDevices = new ArrayList<>();
+        mCachedDevices.add(mCachedBluetoothDeviceL);
+        mCachedDevices.add(mCachedBluetoothDeviceR);
+        when(mCachedDeviceManager.getCachedDevicesCopy()).thenReturn(mCachedDevices);
+
         mBluetoothDevice = spy(mBluetoothAdapter.getRemoteDevice(TEST_DEVICE_ADDRESS_1));
         when(mBluetoothDevice.getName()).thenReturn(TEST_DEVICE_NAME_1);
+        when(mBluetoothDevice.getAlias()).thenReturn(TEST_DEVICE_NAME_1);
         when(mBluetoothDevice.isConnected()).thenReturn(true);
 
         mSecondBluetoothDevice = spy(mBluetoothAdapter.getRemoteDevice(TEST_DEVICE_ADDRESS_2));
@@ -184,6 +214,7 @@ public class MediaOutputPreferenceControllerTest {
 
         mLeftBluetoothHapDevice = spy(mBluetoothAdapter.getRemoteDevice(TEST_DEVICE_ADDRESS_3));
         when(mLeftBluetoothHapDevice.getName()).thenReturn(TEST_HAP_DEVICE_NAME_1);
+        when(mLeftBluetoothHapDevice.getAlias()).thenReturn(TEST_HAP_DEVICE_NAME_1);
         when(mLeftBluetoothHapDevice.isConnected()).thenReturn(true);
 
         mRightBluetoothHapDevice = spy(mBluetoothAdapter.getRemoteDevice(TEST_DEVICE_ADDRESS_4));
@@ -195,6 +226,7 @@ public class MediaOutputPreferenceControllerTest {
         mPreference = new Preference(mContext);
         mProfileConnectedDevices = new ArrayList<>();
         mHearingAidActiveDevices = new ArrayList<>(2);
+        mLeAudioActiveDevices = new ArrayList<>();
 
         when(mScreen.getPreferenceManager()).thenReturn(mock(PreferenceManager.class));
         when(mScreen.getContext()).thenReturn(mContext);
@@ -234,7 +266,6 @@ public class MediaOutputPreferenceControllerTest {
      * Preference summary should be device's name
      */
     @Test
-    @Ignore
     public void updateState_withActiveBtDevice_setActivatedDeviceName() {
         mShadowAudioManager.setOutputDevice(DEVICE_OUT_BLUETOOTH_A2DP);
         mAudioManager.setMode(AudioManager.MODE_NORMAL);
@@ -254,7 +285,6 @@ public class MediaOutputPreferenceControllerTest {
      * Preference summary should be device's name
      */
     @Test
-    @Ignore
     public void updateState_withActiveHADevice_setActivatedDeviceName() {
         mShadowAudioManager.setOutputDevice(DEVICE_OUT_HEARING_AID);
         mAudioManager.setMode(AudioManager.MODE_NORMAL);
@@ -270,7 +300,28 @@ public class MediaOutputPreferenceControllerTest {
     }
 
     @Test
+    public void updateState_withActiveLeAudioDevice_setActivatedDeviceName() {
+        mShadowAudioManager.setOutputDevice(DEVICE_OUT_BLE_HEADSET);
+        mAudioManager.setMode(AudioManager.MODE_NORMAL);
+        when(mCachedBluetoothDeviceL.getDevice()).thenReturn(mBluetoothDevice);
+        when(mCachedBluetoothDeviceR.getDevice()).thenReturn(mSecondBluetoothDevice);
+        when(mBluetoothDevice.getAlias()).thenReturn(TEST_LE_AUDIO_DEVICE_NAME_1);
+        mProfileConnectedDevices.clear();
+        mProfileConnectedDevices.add(mBluetoothDevice);
+        mProfileConnectedDevices.add(mSecondBluetoothDevice);
+        mLeAudioActiveDevices.clear();
+        mLeAudioActiveDevices.add(mBluetoothDevice);
+        when(mLeAudioProfile.getConnectedDevices()).thenReturn(mProfileConnectedDevices);
+        when(mLeAudioProfile.getActiveDevices()).thenReturn(mLeAudioActiveDevices);
+
+        assertThat(mPreference.getSummary()).isNull();
+        mController.updateState(mPreference);
+        assertThat(mPreference.getSummary()).isEqualTo(TEST_LE_AUDIO_DEVICE_NAME_1);
+    }
+
+    @Test
     public void updateState_noActiveLocalPlayback_noTitle() {
+        mSetFlagsRule.disableFlags(FLAG_ENABLE_OUTPUT_SWITCHER_FOR_SYSTEM_ROUTING);
         mPlaybackState = new PlaybackState.Builder()
                 .setState(PlaybackState.STATE_NONE, 0, 1)
                 .build();
@@ -280,6 +331,48 @@ public class MediaOutputPreferenceControllerTest {
         mController.updateState(mPreference);
 
         assertThat(mPreference.getTitle()).isNull();
+    }
+
+    @Test
+    public void updateState_noActiveLocalPlayback_checkTitle() {
+        mSetFlagsRule.enableFlags(FLAG_ENABLE_OUTPUT_SWITCHER_FOR_SYSTEM_ROUTING);
+        mPlaybackState = new PlaybackState.Builder()
+                .setState(PlaybackState.STATE_NONE, 0, 1)
+                .build();
+        when(mMediaController.getPlaybackState()).thenReturn(mPlaybackState);
+        mController = new MediaOutputPreferenceController(mContext, TEST_KEY);
+        mController.displayPreference(mScreen);
+
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.getTitle().toString()).isEqualTo(
+                mContext.getString(R.string.media_output_title_without_playing,
+                        TEST_APPLICATION_LABEL));
+    }
+
+    @Test
+    public void updateState_withNullMediaController_noTitle() {
+        mSetFlagsRule.disableFlags(FLAG_ENABLE_OUTPUT_SWITCHER_FOR_SYSTEM_ROUTING);
+        mMediaControllers.clear();
+        mController = new MediaOutputPreferenceController(mContext, TEST_KEY);
+
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.getTitle()).isNull();
+    }
+
+    @Test
+    public void updateState_withNullMediaController_checkTitle() {
+        mSetFlagsRule.enableFlags(FLAG_ENABLE_OUTPUT_SWITCHER_FOR_SYSTEM_ROUTING);
+        mMediaControllers.clear();
+        mController = new MediaOutputPreferenceController(mContext, TEST_KEY);
+        mController.displayPreference(mScreen);
+
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.getTitle().toString()).isEqualTo(
+                mContext.getString(R.string.media_output_title_without_playing,
+                        TEST_APPLICATION_LABEL));
     }
 
     @Test
@@ -304,6 +397,39 @@ public class MediaOutputPreferenceControllerTest {
         verify(mContext).sendBroadcast(intentCaptor.capture());
         assertThat(intentCaptor.getValue().getAction())
                 .isEqualTo(MediaOutputConstants.ACTION_LAUNCH_MEDIA_OUTPUT_DIALOG);
+    }
+
+    @Test
+    public void handlePreferenceTreeClick_WithNoLocalPlaybackFlagEnabled_verifyIntentExtra() {
+        mSetFlagsRule.enableFlags(FLAG_ENABLE_OUTPUT_SWITCHER_FOR_SYSTEM_ROUTING);
+        final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
+        mPlaybackState = new PlaybackState.Builder()
+                .setState(PlaybackState.STATE_NONE, 0, 1)
+                .build();
+        when(mMediaController.getPlaybackState()).thenReturn(mPlaybackState);
+        mController = new MediaOutputPreferenceController(mContext, TEST_KEY);
+        mPreference.setKey(TEST_KEY);
+
+        mController.handlePreferenceTreeClick(mPreference);
+
+        verify(mContext).sendBroadcast(intentCaptor.capture());
+        assertThat(intentCaptor.getValue().getAction())
+                .isEqualTo(MediaOutputConstants.ACTION_LAUNCH_SYSTEM_MEDIA_OUTPUT_DIALOG);
+    }
+
+    @Test
+    public void handlePreferenceTreeClick_WithNullControllerFlagEnabled_verifyIntentExtra() {
+        mSetFlagsRule.enableFlags(FLAG_ENABLE_OUTPUT_SWITCHER_FOR_SYSTEM_ROUTING);
+        final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
+        mMediaControllers.clear();
+        mController = new MediaOutputPreferenceController(mContext, TEST_KEY);
+        mPreference.setKey(TEST_KEY);
+
+        mController.handlePreferenceTreeClick(mPreference);
+
+        verify(mContext).sendBroadcast(intentCaptor.capture());
+        assertThat(intentCaptor.getValue().getAction())
+                .isEqualTo(MediaOutputConstants.ACTION_LAUNCH_SYSTEM_MEDIA_OUTPUT_DIALOG);
     }
 
     /**
@@ -348,6 +474,49 @@ public class MediaOutputPreferenceControllerTest {
         when(mA2dpProfile.getActiveDevice()).thenReturn(null);
 
         assertThat(mController.findActiveDevice()).isNull();
+    }
+
+    @Test
+    public void findActiveDevice_allProfilesWithActiveDevice_returnHADevice() {
+        BluetoothDevice btLeDevice = spy(mBluetoothAdapter.getRemoteDevice(TEST_DEVICE_ADDRESS_5));
+        when(btLeDevice.getName()).thenReturn(TEST_LE_AUDIO_DEVICE_NAME_1);
+        mLeAudioActiveDevices.clear();
+        mLeAudioActiveDevices.add(btLeDevice);
+        mHearingAidActiveDevices.clear();
+        mHearingAidActiveDevices.add(mLeftBluetoothHapDevice);
+        when(mHearingAidProfile.getActiveDevices()).thenReturn(mHearingAidActiveDevices);
+        when(mA2dpProfile.getActiveDevice()).thenReturn(mBluetoothDevice);
+        when(mLeAudioProfile.getActiveDevices()).thenReturn(mLeAudioActiveDevices);
+
+        assertThat(mController.findActiveDevice()).isEqualTo(mLeftBluetoothHapDevice);
+    }
+
+    @Test
+    public void findActiveDevice_a2dpDeviceAndLeAudioDeviceActive_returnLeAudioDevice() {
+        BluetoothDevice btLeDevice = spy(mBluetoothAdapter.getRemoteDevice(TEST_DEVICE_ADDRESS_5));
+        when(btLeDevice.getName()).thenReturn(TEST_LE_AUDIO_DEVICE_NAME_1);
+        mLeAudioActiveDevices.clear();
+        mLeAudioActiveDevices.add(btLeDevice);
+        mHearingAidActiveDevices.clear();
+        when(mHearingAidProfile.getActiveDevices()).thenReturn(mHearingAidActiveDevices);
+        when(mA2dpProfile.getActiveDevice()).thenReturn(mBluetoothDevice);
+        when(mLeAudioProfile.getActiveDevices()).thenReturn(mLeAudioActiveDevices);
+
+        assertThat(mController.findActiveDevice()).isEqualTo(btLeDevice);
+    }
+
+    @Test
+    public void findActiveDevice_onlyLeAudioDeviceActive_returnLeAudioDevice() {
+        BluetoothDevice btLeDevice = spy(mBluetoothAdapter.getRemoteDevice(TEST_DEVICE_ADDRESS_5));
+        when(btLeDevice.getName()).thenReturn(TEST_LE_AUDIO_DEVICE_NAME_1);
+        mLeAudioActiveDevices.clear();
+        mLeAudioActiveDevices.add(btLeDevice);
+        mHearingAidActiveDevices.clear();
+        when(mHearingAidProfile.getActiveDevices()).thenReturn(mHearingAidActiveDevices);
+        when(mA2dpProfile.getActiveDevice()).thenReturn(null);
+        when(mLeAudioProfile.getActiveDevices()).thenReturn(mLeAudioActiveDevices);
+
+        assertThat(mController.findActiveDevice()).isEqualTo(btLeDevice);
     }
 
     private void initPackage() {

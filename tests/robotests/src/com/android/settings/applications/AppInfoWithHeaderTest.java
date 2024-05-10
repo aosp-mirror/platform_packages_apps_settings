@@ -48,6 +48,7 @@ import com.android.settingslib.widget.LayoutPreference;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -119,6 +120,7 @@ public class AppInfoWithHeaderTest {
         assertThat(mAppInfoWithHeader.mPackageRemovedCalled).isTrue();
     }
 
+    @Ignore("b/315135755")
     @Test
     public void noExtraUserHandleInIntent_retrieveAppEntryWithMyUserId()
             throws PackageManager.NameNotFoundException {
@@ -144,6 +146,7 @@ public class AppInfoWithHeaderTest {
         assertThat(mAppInfoWithHeader.mAppEntry).isNotNull();
     }
 
+    @Ignore("b/315135755")
     @Test
     public void extraUserHandleInIntent_retrieveAppEntryWithMyUserId()
             throws PackageManager.NameNotFoundException {

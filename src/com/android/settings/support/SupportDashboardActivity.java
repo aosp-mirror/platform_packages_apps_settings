@@ -17,7 +17,6 @@ package com.android.settings.support;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
 import com.android.settings.R;
@@ -37,11 +36,14 @@ import java.util.List;
 @SearchIndexable
 public class SupportDashboardActivity extends Activity implements Indexable {
 
+    public static final String ACTION_SUPPORT_SETTINGS =
+            "com.android.settings.action.SUPPORT_SETTINGS";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SupportFeatureProvider supportFeatureProvider = FeatureFactory.getFactory(this)
-                .getSupportFeatureProvider(this);
+        SupportFeatureProvider supportFeatureProvider = FeatureFactory.getFeatureFactory()
+                .getSupportFeatureProvider();
 
         // try to launch support if we have the feature provider
         if (supportFeatureProvider != null) {
@@ -70,7 +72,7 @@ public class SupportDashboardActivity extends Activity implements Indexable {
                     data.summaryOn = context.getString(R.string.support_summary);
                     data.intentTargetPackage = context.getPackageName();
                     data.intentTargetClass = SupportDashboardActivity.class.getName();
-                    data.intentAction = Intent.ACTION_MAIN;
+                    data.intentAction = ACTION_SUPPORT_SETTINGS;
                     data.key = SUPPORT_SEARCH_INDEX_KEY;
                     result.add(data);
 

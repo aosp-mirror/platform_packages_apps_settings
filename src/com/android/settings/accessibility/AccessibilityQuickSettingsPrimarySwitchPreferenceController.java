@@ -28,12 +28,13 @@ import com.android.settings.core.TogglePreferenceController;
 import com.android.settingslib.PrimarySwitchPreference;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnCreate;
+import com.android.settingslib.core.lifecycle.events.OnDestroy;
 import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
 
 /** PrimarySwitchPreferenceController that shows quick settings tooltip on first use. */
 public abstract class AccessibilityQuickSettingsPrimarySwitchPreferenceController
         extends TogglePreferenceController
-        implements LifecycleObserver, OnCreate, OnSaveInstanceState {
+        implements LifecycleObserver, OnCreate, OnDestroy, OnSaveInstanceState {
     private static final String KEY_SAVED_QS_TOOLTIP_RESHOW = "qs_tooltip_reshow";
     private final Handler mHandler;
     private PrimarySwitchPreference mPreference;
@@ -63,9 +64,19 @@ public abstract class AccessibilityQuickSettingsPrimarySwitchPreferenceControlle
     }
 
     @Override
+    public void onDestroy() {
+        mHandler.removeCallbacksAndMessages(null);
+        final boolean isTooltipWindowShowing = mTooltipWindow != null && mTooltipWindow.isShowing();
+        if (isTooltipWindowShowing) {
+            mTooltipWindow.dismiss();
+        }
+    }
+
+    @Override
     public void onSaveInstanceState(Bundle outState) {
-        if (mTooltipWindow != null) {
-            outState.putBoolean(KEY_SAVED_QS_TOOLTIP_RESHOW, mTooltipWindow.isShowing());
+        final boolean isTooltipWindowShowing = mTooltipWindow != null && mTooltipWindow.isShowing();
+        if (mNeedsQSTooltipReshow || isTooltipWindowShowing) {
+            outState.putBoolean(KEY_SAVED_QS_TOOLTIP_RESHOW, /* value= */ true);
         }
     }
 
@@ -119,10 +130,17 @@ public abstract class AccessibilityQuickSettingsPrimarySwitchPreferenceControlle
             return;
         }
 
-        mTooltipWindow = new AccessibilityQuickSettingsTooltipWindow(mContext);
-        mTooltipWindow.setup(getTileTooltipContent(),
-                R.drawable.accessibility_auto_added_qs_tooltip_illustration);
-        mTooltipWindow.showAtTopCenter(mPreference.getSwitch());
+        // TODO (287728819): Move tooltip showing to SystemUI
+        // Since the lifecycle of controller is independent of that of the preference, doing
+        // null check on switch is a temporary solution for the case that switch view
+        // is not ready when we would like to show the tooltip.  If the switch is not ready,
+        // we give up showing the tooltip and also do not reshow it in the future.
+        if (mPreference.getSwitch() != null) {
+            mTooltipWindow = new AccessibilityQuickSettingsTooltipWindow(mContext);
+            mTooltipWindow.setup(getTileTooltipContent(),
+                    R.drawable.accessibility_auto_added_qs_tooltip_illustration);
+            mTooltipWindow.showAtTopCenter(mPreference.getSwitch());
+        }
         AccessibilityQuickSettingUtils.optInValueToSharedPreferences(mContext, tileComponentName);
         mNeedsQSTooltipReshow = false;
     }

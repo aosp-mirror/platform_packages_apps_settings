@@ -35,6 +35,7 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.utils.StringUtil;
 
 import org.junit.After;
 import org.junit.Before;
@@ -64,12 +65,9 @@ public class RestrictAppTipTest {
     private List<AppInfo> mUsageAppList;
     private AppInfo mAppInfo;
     private AppInfo mUninstallAppInfo;
-    @Mock
-    private ApplicationInfo mApplicationInfo;
-    @Mock
-    private PackageManager mPackageManager;
-    @Mock
-    private MetricsFeatureProvider mMetricsFeatureProvider;
+    @Mock private ApplicationInfo mApplicationInfo;
+    @Mock private PackageManager mPackageManager;
+    @Mock private MetricsFeatureProvider mMetricsFeatureProvider;
 
     @Before
     public void setUp() throws Exception {
@@ -78,28 +76,35 @@ public class RestrictAppTipTest {
         mContext = spy(RuntimeEnvironment.application);
         doReturn(mContext).when(mContext).getApplicationContext();
         doReturn(mPackageManager).when(mContext).getPackageManager();
-        doReturn(mApplicationInfo).when(mPackageManager).getApplicationInfo(PACKAGE_NAME,
-                PackageManager.MATCH_DISABLED_COMPONENTS | PackageManager.MATCH_ANY_USER);
-        doThrow(new PackageManager.NameNotFoundException()).when(mPackageManager)
-                .getApplicationInfo(UNINSTALL_PACKAGE_NAME,
+        doReturn(mApplicationInfo)
+                .when(mPackageManager)
+                .getApplicationInfo(
+                        PACKAGE_NAME,
+                        PackageManager.MATCH_DISABLED_COMPONENTS | PackageManager.MATCH_ANY_USER);
+        doThrow(new PackageManager.NameNotFoundException())
+                .when(mPackageManager)
+                .getApplicationInfo(
+                        UNINSTALL_PACKAGE_NAME,
                         PackageManager.MATCH_DISABLED_COMPONENTS | PackageManager.MATCH_ANY_USER);
         doReturn(DISPLAY_NAME).when(mApplicationInfo).loadLabel(mPackageManager);
 
-        mAppInfo = new AppInfo.Builder()
-                .setPackageName(PACKAGE_NAME)
-                .addAnomalyType(ANOMALY_WAKEUP)
-                .addAnomalyType(ANOMALY_WAKELOCK)
-                .build();
-        mUninstallAppInfo = new AppInfo.Builder()
-                .setPackageName(UNINSTALL_PACKAGE_NAME)
-                .addAnomalyType(ANOMALY_WAKEUP)
-                .build();
+        mAppInfo =
+                new AppInfo.Builder()
+                        .setPackageName(PACKAGE_NAME)
+                        .addAnomalyType(ANOMALY_WAKEUP)
+                        .addAnomalyType(ANOMALY_WAKELOCK)
+                        .build();
+        mUninstallAppInfo =
+                new AppInfo.Builder()
+                        .setPackageName(UNINSTALL_PACKAGE_NAME)
+                        .addAnomalyType(ANOMALY_WAKEUP)
+                        .build();
         mUsageAppList = new ArrayList<>();
         mUsageAppList.add(mAppInfo);
         mNewBatteryTip = new RestrictAppTip(BatteryTip.StateType.NEW, mUsageAppList);
         mHandledBatteryTip = new RestrictAppTip(BatteryTip.StateType.HANDLED, mUsageAppList);
-        mInvisibleBatteryTip = new RestrictAppTip(BatteryTip.StateType.INVISIBLE,
-                new ArrayList<>());
+        mInvisibleBatteryTip =
+                new RestrictAppTip(BatteryTip.StateType.INVISIBLE, new ArrayList<>());
     }
 
     @After
@@ -148,8 +153,9 @@ public class RestrictAppTipTest {
     @Test
     public void getSummary_oneAppHandled_showHandledSummary() {
         assertThat(mHandledBatteryTip.getSummary(mContext).toString())
-                .isEqualTo(mContext.getResources().getQuantityString(
-                        R.plurals.battery_tip_restrict_handled_summary, 1));
+                .isEqualTo(
+                        StringUtil.getIcuPluralsString(
+                                mContext, 1, R.string.battery_tip_restrict_handled_summary));
     }
 
     @Test
@@ -157,8 +163,9 @@ public class RestrictAppTipTest {
         mUsageAppList.add(new AppInfo.Builder().build());
         mHandledBatteryTip = new RestrictAppTip(BatteryTip.StateType.HANDLED, mUsageAppList);
         assertThat(mHandledBatteryTip.getSummary(mContext))
-                .isEqualTo(mContext.getResources().getQuantityString(
-                        R.plurals.battery_tip_restrict_handled_summary, 2));
+                .isEqualTo(
+                        StringUtil.getIcuPluralsString(
+                                mContext, 2, R.string.battery_tip_restrict_handled_summary));
     }
 
     @Test
@@ -216,35 +223,47 @@ public class RestrictAppTipTest {
 
     @Test
     public void toString_containsAppData() {
-        assertThat(mNewBatteryTip.toString()).isEqualTo(
-                "type=1 state=0 { packageName=com.android.app,anomalyTypes={0, 1},screenTime=0 }");
+        assertThat(mNewBatteryTip.toString())
+                .isEqualTo(
+                        "type=1 state=0 { packageName=com.android.app,anomalyTypes={0,"
+                            + " 1},screenTime=0 }");
     }
 
     @Test
     public void testLog_stateNew_logAppInfo() {
         mNewBatteryTip.log(mContext, mMetricsFeatureProvider);
 
-        verify(mMetricsFeatureProvider).action(mContext,
-                MetricsProto.MetricsEvent.ACTION_APP_RESTRICTION_TIP, BatteryTip.StateType.NEW);
-        verify(mMetricsFeatureProvider).action(SettingsEnums.PAGE_UNKNOWN,
-                MetricsProto.MetricsEvent.ACTION_APP_RESTRICTION_TIP_LIST,
-                SettingsEnums.PAGE_UNKNOWN,
-                PACKAGE_NAME,
-                ANOMALY_WAKEUP);
-        verify(mMetricsFeatureProvider).action(SettingsEnums.PAGE_UNKNOWN,
-                MetricsProto.MetricsEvent.ACTION_APP_RESTRICTION_TIP_LIST,
-                SettingsEnums.PAGE_UNKNOWN,
-                PACKAGE_NAME,
-                ANOMALY_WAKELOCK);
+        verify(mMetricsFeatureProvider)
+                .action(
+                        mContext,
+                        MetricsProto.MetricsEvent.ACTION_APP_RESTRICTION_TIP,
+                        BatteryTip.StateType.NEW);
+        verify(mMetricsFeatureProvider)
+                .action(
+                        SettingsEnums.PAGE_UNKNOWN,
+                        MetricsProto.MetricsEvent.ACTION_APP_RESTRICTION_TIP_LIST,
+                        SettingsEnums.PAGE_UNKNOWN,
+                        PACKAGE_NAME,
+                        ANOMALY_WAKEUP);
+        verify(mMetricsFeatureProvider)
+                .action(
+                        SettingsEnums.PAGE_UNKNOWN,
+                        MetricsProto.MetricsEvent.ACTION_APP_RESTRICTION_TIP_LIST,
+                        SettingsEnums.PAGE_UNKNOWN,
+                        PACKAGE_NAME,
+                        ANOMALY_WAKELOCK);
     }
 
     @Test
     public void testLog_stateHandled_doNotLogAppInfo() {
         mHandledBatteryTip.log(mContext, mMetricsFeatureProvider);
 
-        verify(mMetricsFeatureProvider).action(mContext,
-                MetricsProto.MetricsEvent.ACTION_APP_RESTRICTION_TIP, BatteryTip.StateType.HANDLED);
-        verify(mMetricsFeatureProvider, never()).action(
-                anyInt(), anyInt(), anyInt(), anyString(), anyInt());
+        verify(mMetricsFeatureProvider)
+                .action(
+                        mContext,
+                        MetricsProto.MetricsEvent.ACTION_APP_RESTRICTION_TIP,
+                        BatteryTip.StateType.HANDLED);
+        verify(mMetricsFeatureProvider, never())
+                .action(anyInt(), anyInt(), anyInt(), anyString(), anyInt());
     }
 }

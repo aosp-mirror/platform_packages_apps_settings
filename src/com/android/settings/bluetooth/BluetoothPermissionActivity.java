@@ -24,8 +24,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
-import android.telephony.TelephonyManager;
+import android.telephony.SubscriptionInfo;
+import android.telephony.SubscriptionManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -37,6 +40,9 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.app.AlertActivity;
 import com.android.internal.app.AlertController;
 import com.android.settings.R;
+import com.android.settings.network.SubscriptionUtil;
+
+import java.util.List;
 
 /**
  * BluetoothPermissionActivity shows a dialog for accepting incoming
@@ -151,13 +157,10 @@ public class BluetoothPermissionActivity extends AlertActivity implements
     public void onBackPressed() {
         /*we need an answer so ignore back button presses during auth */
         if(DEBUG) Log.i(TAG, "Back button pressed! ignoring");
-        return;
     }
 
     // TODO(edjee): createConnectionDialogView, createPhonebookDialogView and createMapDialogView
     // are similar. Refactor them into one method.
-    // Also, the string resources bluetooth_remember_choice and bluetooth_pb_remember_choice should
-    // be removed.
     private View createConnectionDialogView() {
         String mRemoteName = Utils.createRemoteName(this, mDevice);
         mView = getLayoutInflater().inflate(R.layout.bluetooth_access, null);
@@ -187,11 +190,10 @@ public class BluetoothPermissionActivity extends AlertActivity implements
 
     private View createSapDialogView() {
         String mRemoteName = Utils.createRemoteName(this, mDevice);
-        TelephonyManager tm = getSystemService(TelephonyManager.class);
         mView = getLayoutInflater().inflate(R.layout.bluetooth_access, null);
         messageView = (TextView)mView.findViewById(R.id.message);
         messageView.setText(getString(R.string.bluetooth_sim_card_access_dialog_content,
-                mRemoteName, mRemoteName, tm.getLine1Number()));
+                mRemoteName, mRemoteName, getAnyPhoneNumberFromSubscriptions()));
         return mView;
     }
 
@@ -208,6 +210,14 @@ public class BluetoothPermissionActivity extends AlertActivity implements
 
     @VisibleForTesting
     void sendReplyIntentToReceiver(final boolean allowed, final boolean always) {
+        String bluetoothName;
+        try {
+            bluetoothName = Utils.findBluetoothPackageName(this);
+        } catch (NameNotFoundException e) {
+            Log.e(TAG, "Failed to find bluetooth package name", e);
+            return;
+        }
+
         Intent intent = new Intent(BluetoothDevice.ACTION_CONNECTION_ACCESS_REPLY);
 
         if (DEBUG) {
@@ -215,6 +225,7 @@ public class BluetoothPermissionActivity extends AlertActivity implements
                     + " mReturnPackage");
         }
 
+        intent.setPackage(bluetoothName);
         intent.putExtra(BluetoothDevice.EXTRA_CONNECTION_ACCESS_RESULT,
                         allowed ? BluetoothDevice.CONNECTION_ACCESS_YES
                                 : BluetoothDevice.CONNECTION_ACCESS_NO);
@@ -249,5 +260,18 @@ public class BluetoothPermissionActivity extends AlertActivity implements
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         return true;
+    }
+
+    // find any phone number available from active subscriptions
+    String getAnyPhoneNumberFromSubscriptions() {
+        SubscriptionManager sm = getSystemService(SubscriptionManager.class);
+        List<SubscriptionInfo> subs = SubscriptionUtil.getActiveSubscriptions(sm);
+        if ((subs == null) || (subs.size() == 0)) {
+            return "";
+        }
+        return subs.stream()
+                .map(subinfo -> SubscriptionUtil.getFormattedPhoneNumber(this, subinfo))
+                .filter(phoneNumber -> !TextUtils.isEmpty(phoneNumber))
+                .findAny().orElse("");
     }
 }

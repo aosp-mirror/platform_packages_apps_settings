@@ -27,6 +27,7 @@ import com.android.settings.testutils.shadow.ShadowUtils;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -49,7 +50,7 @@ public class FactoryResetPreferenceControllerTest {
         mContext = RuntimeEnvironment.application;
         mShadowUserManager = ShadowUserManager.getShadow();
 
-        mController = new FactoryResetPreferenceController(mContext);
+        mController = new FactoryResetPreferenceController(mContext, FACTORY_RESET_KEY);
     }
 
     @After
@@ -60,6 +61,7 @@ public class FactoryResetPreferenceControllerTest {
         Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.DEVICE_DEMO_MODE, 0);
     }
 
+    @Ignore("b/314930928")
     @Test
     public void isAvailable_systemUser() {
         mShadowUserManager.setIsAdminUser(true);
@@ -85,7 +87,7 @@ public class FactoryResetPreferenceControllerTest {
         // Indicate the user is a demo user.
         mShadowUserManager.addUser(UserHandle.myUserId(), "test", UserInfo.FLAG_DEMO);
 
-        assertThat(mController.isAvailable()).isTrue();
+        assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test

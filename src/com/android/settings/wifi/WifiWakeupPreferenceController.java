@@ -31,7 +31,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
@@ -53,7 +53,7 @@ public class WifiWakeupPreferenceController extends TogglePreferenceController i
     private Fragment mFragment;
 
     @VisibleForTesting
-    SwitchPreference mPreference;
+    TwoStatePreference mPreference;
 
     @VisibleForTesting
     LocationManager mLocationManager;
@@ -113,6 +113,7 @@ public class WifiWakeupPreferenceController extends TogglePreferenceController i
                 if (mFragment == null) {
                     throw new IllegalStateException("No fragment to start activity");
                 }
+
                 final Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                 mFragment.startActivityForResult(intent, WIFI_WAKEUP_REQUEST_CODE);
                 return false;

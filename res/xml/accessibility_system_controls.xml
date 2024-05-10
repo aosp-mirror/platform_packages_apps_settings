@@ -36,7 +36,7 @@
         settings:searchable="false"
         settings:controller="com.android.settings.gestures.OneHandedEnablePreferenceController"/>
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="toggle_power_button_ends_call_preference"
         android:persistent="false"
         android:title="@string/accessibility_power_button_ends_call_prerefence_title"
@@ -44,7 +44,7 @@
 
     <!-- Standard auto-rotation preference that will be shown when device state based auto-rotation
          settings are NOT available. -->
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="toggle_lock_screen_rotation_preference"
         android:persistent="false"
         android:title="@string/accelerometer_title"

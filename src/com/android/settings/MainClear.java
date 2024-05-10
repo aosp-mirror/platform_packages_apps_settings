@@ -26,11 +26,13 @@ import android.accounts.AccountManager;
 import android.accounts.AuthenticatorDescription;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -43,8 +45,8 @@ import android.os.Environment;
 import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.os.image.DynamicSystemManager;
 import android.provider.Settings;
-import android.sysprop.VoldProperties;
 import android.telephony.euicc.EuiccManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -64,6 +66,8 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
+import com.android.settings.flags.Flags;
+import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.ConfirmLockPattern;
 import com.android.settingslib.RestrictedLockUtilsInternal;
@@ -94,7 +98,6 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
     static final int KEYGUARD_REQUEST = 55;
     @VisibleForTesting
     static final int CREDENTIAL_CONFIRM_REQUEST = 56;
-
     private static final String KEY_SHOW_ESIM_RESET_CHECKBOX =
             "masterclear.allow_retain_esim_profiles_after_fdr";
 
@@ -266,6 +269,19 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
                 return;
             }
 
+            final DynamicSystemManager dsuManager = (DynamicSystemManager)
+                    getActivity().getSystemService(Context.DYNAMIC_SYSTEM_SERVICE);
+            if (dsuManager.isInUse()) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle(R.string.dsu_is_running);
+                builder.setPositiveButton(R.string.okay, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {}
+                });
+                AlertDialog dsuAlertdialog = builder.create();
+                dsuAlertdialog.show();
+                return;
+            }
+
             if (runKeyguardConfirmation(KEYGUARD_REQUEST)) {
                 return;
             }
@@ -309,12 +325,9 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
          * If the external storage is emulated, it will be erased with a factory
          * reset at any rate. There is no need to have a separate option until
          * we have a factory reset that only erases some directories and not
-         * others. Likewise, if it's non-removable storage, it could potentially have been
-         * encrypted, and will also need to be wiped.
+         * others.
          */
-        boolean isExtStorageEmulated = Environment.isExternalStorageEmulated();
-        if (isExtStorageEmulated
-                || (!Environment.isExternalStorageRemovable() && isExtStorageEncrypted())) {
+        if (Environment.isExternalStorageEmulated()) {
             mExternalStorageContainer.setVisibility(View.GONE);
 
             final View externalOption = mContentView.findViewById(R.id.erase_external_option_text);
@@ -323,9 +336,7 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
             final View externalAlsoErased = mContentView.findViewById(R.id.also_erases_external);
             externalAlsoErased.setVisibility(View.VISIBLE);
 
-            // If it's not emulated, it is on a separate partition but it means we're doing
-            // a force wipe due to encryption.
-            mExternalStorage.setChecked(!isExtStorageEmulated);
+            mExternalStorage.setChecked(false);
         } else {
             mExternalStorageContainer.setOnClickListener(new View.OnClickListener() {
 
@@ -382,6 +393,14 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
     }
 
     /**
+     * Whether to show any UI which is SIM related.
+     */
+    @VisibleForTesting
+    boolean showAnySubscriptionInfo(Context context) {
+        return (context != null) && SubscriptionUtil.isSimHardwareVisible(context);
+    }
+
+    /**
      * Whether to show strings indicating that the eUICC will be wiped.
      *
      * <p>We show the strings on any device which supports eUICC as long as the eUICC was ever
@@ -390,7 +409,7 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
     @VisibleForTesting
     boolean showWipeEuicc() {
         Context context = getContext();
-        if (!isEuiccEnabled(context)) {
+        if (!showAnySubscriptionInfo(context) || !isEuiccEnabled(context)) {
             return false;
         }
         ContentResolver cr = context.getContentResolver();
@@ -429,14 +448,24 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
 
         final GlifLayout layout = mContentView.findViewById(R.id.setup_wizard_layout);
         final FooterBarMixin mixin = layout.getMixin(FooterBarMixin.class);
+        final Activity activity = getActivity();
         mixin.setPrimaryButton(
-                new FooterButton.Builder(getActivity())
+                new FooterButton.Builder(activity)
                         .setText(R.string.main_clear_button_text)
                         .setListener(mInitiateListener)
                         .setButtonType(ButtonType.OTHER)
-                        .setTheme(R.style.SudGlifButton_Primary)
-                        .build()
-        );
+                        .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Primary)
+                        .build());
+        if (Flags.showFactoryResetCancelButton()) {
+            mixin.setSecondaryButton(
+                    new FooterButton.Builder(activity)
+                            .setText(android.R.string.cancel)
+                            .setListener(view -> activity.onBackPressed())
+                            .setButtonType(ButtonType.CANCEL)
+                            .setTheme(
+                                    com.google.android.setupdesign.R.style.SudGlifButton_Secondary)
+                            .build());
+        }
         mInitiateButton = mixin.getPrimaryButton();
     }
 
@@ -455,11 +484,6 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
             description.append(vText.getText());
             description.append(","); // Allow Talkback to pause between sections.
         }
-    }
-
-    private boolean isExtStorageEncrypted() {
-        String state = VoldProperties.decrypt().orElse("");
-        return !"".equals(state);
     }
 
     private void loadAccountList(final UserManager um) {
@@ -503,10 +527,12 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
 
                 if (userInfo.isManagedProfile()) {
                     titleText.setText(devicePolicyManager.getResources().getString(
-                            WORK_CATEGORY_HEADER, () -> getString(R.string.category_work)));
+                            WORK_CATEGORY_HEADER, () -> getString(
+                                    com.android.settingslib.R.string.category_work)));
                 } else {
                     titleText.setText(devicePolicyManager.getResources().getString(
-                            PERSONAL_CATEGORY_HEADER, () -> getString(R.string.category_personal)));
+                            PERSONAL_CATEGORY_HEADER, () -> getString(
+                                    com.android.settingslib.R.string.category_personal)));
                 }
                 contents.addView(titleView);
             }
@@ -571,7 +597,7 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
                         UserHandle.myUserId());
         if (disallow && !Utils.isDemoUser(context)) {
             return inflater.inflate(R.layout.main_clear_disallowed_screen, null);
-        } else if (admin != null) {
+        } else if (admin != null && !Utils.isDemoUser(context)) {
             new ActionDisabledByAdminDialogHelper(getActivity())
                     .prepareDialogBuilder(UserManager.DISALLOW_FACTORY_RESET, admin)
                     .setOnDismissListener(__ -> getActivity().finish())

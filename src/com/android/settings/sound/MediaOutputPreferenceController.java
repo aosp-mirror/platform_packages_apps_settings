@@ -16,6 +16,9 @@
 
 package com.android.settings.sound;
 
+import static com.android.settingslib.media.flags.Flags.enableOutputSwitcherForSystemRouting;
+
+import android.annotation.Nullable;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.Intent;
@@ -46,21 +49,22 @@ import java.util.List;
  */
 public class MediaOutputPreferenceController extends AudioSwitchPreferenceController {
 
-    private MediaController mMediaController;
+    private static final String TAG = "MediaOutputPreferenceController";
+    @Nullable private MediaController mMediaController;
+    private MediaSessionManager mMediaSessionManager;
 
     public MediaOutputPreferenceController(Context context, String key) {
         super(context, key);
-        mMediaController = MediaOutputUtils.getActiveLocalMediaController(context.getSystemService(
-                MediaSessionManager.class));
+        mMediaSessionManager = context.getSystemService(MediaSessionManager.class);
+        mMediaController = MediaOutputUtils.getActiveLocalMediaController(mMediaSessionManager);
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
 
-        if (!Utils.isAudioModeOngoingCall(mContext) && mMediaController != null) {
-            mPreference.setVisible(true);
-        }
+        mPreference.setVisible(!Utils.isAudioModeOngoingCall(mContext)
+                && (enableOutputSwitcherForSystemRouting() ? true : mMediaController != null));
     }
 
     @Override
@@ -70,10 +74,15 @@ public class MediaOutputPreferenceController extends AudioSwitchPreferenceContro
             return;
         }
 
-        if (mMediaController == null) {
-            // No active local playback
-            return;
+        if (enableOutputSwitcherForSystemRouting()) {
+            mMediaController = MediaOutputUtils.getActiveLocalMediaController(mMediaSessionManager);
+        } else {
+            if (mMediaController == null) {
+                // No active local playback
+                return;
+            }
         }
+
 
         if (Utils.isAudioModeOngoingCall(mContext)) {
             // Ongoing call status, switch entry for media will be disabled.
@@ -88,14 +97,21 @@ public class MediaOutputPreferenceController extends AudioSwitchPreferenceContro
         // Find active device and set its name as the preference's summary
         List<BluetoothDevice> connectedA2dpDevices = getConnectedA2dpDevices();
         List<BluetoothDevice> connectedHADevices = getConnectedHearingAidDevices();
+        List<BluetoothDevice> connectedLeAudioDevices = getConnectedLeAudioDevices();
         if (mAudioManager.getMode() == AudioManager.MODE_NORMAL
                 && ((connectedA2dpDevices != null && !connectedA2dpDevices.isEmpty())
-                || (connectedHADevices != null && !connectedHADevices.isEmpty()))) {
+                || (connectedHADevices != null && !connectedHADevices.isEmpty())
+                || (connectedLeAudioDevices != null && !connectedLeAudioDevices.isEmpty()))) {
             activeDevice = findActiveDevice();
         }
-        mPreference.setTitle(mContext.getString(R.string.media_output_label_title,
-                com.android.settings.Utils.getApplicationLabel(mContext,
-                        mMediaController.getPackageName())));
+
+        if (mMediaController == null) {
+            mPreference.setTitle(mContext.getString(R.string.media_output_title_without_playing));
+        } else {
+            mPreference.setTitle(mContext.getString(R.string.media_output_label_title,
+                    com.android.settings.Utils.getApplicationLabel(mContext,
+                    mMediaController.getPackageName())));
+        }
         mPreference.setSummary((activeDevice == null) ?
                 mContext.getText(R.string.media_output_default_summary) :
                 activeDevice.getAlias());
@@ -103,13 +119,23 @@ public class MediaOutputPreferenceController extends AudioSwitchPreferenceContro
 
     @Override
     public BluetoothDevice findActiveDevice() {
-        BluetoothDevice activeDevice = findActiveHearingAidDevice();
+        BluetoothDevice haActiveDevice = findActiveHearingAidDevice();
+        BluetoothDevice leAudioActiveDevice = findActiveLeAudioDevice();
         final A2dpProfile a2dpProfile = mProfileManager.getA2dpProfile();
 
-        if (activeDevice == null && a2dpProfile != null) {
-            activeDevice = a2dpProfile.getActiveDevice();
+        if (haActiveDevice != null) {
+            return haActiveDevice;
         }
-        return activeDevice;
+
+        if (leAudioActiveDevice != null) {
+            return leAudioActiveDevice;
+        }
+
+        if (a2dpProfile != null && a2dpProfile.getActiveDevice() != null) {
+            return a2dpProfile.getActiveDevice();
+        }
+
+        return null;
     }
 
     /**
@@ -133,13 +159,19 @@ public class MediaOutputPreferenceController extends AudioSwitchPreferenceContro
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (TextUtils.equals(preference.getKey(), getPreferenceKey())) {
-            mContext.sendBroadcast(new Intent()
-                    .setAction(MediaOutputConstants.ACTION_LAUNCH_MEDIA_OUTPUT_DIALOG)
-                    .setPackage(MediaOutputConstants.SYSTEMUI_PACKAGE_NAME)
-                    .putExtra(MediaOutputConstants.EXTRA_PACKAGE_NAME,
-                            mMediaController.getPackageName())
-                    .putExtra(MediaOutputConstants.KEY_MEDIA_SESSION_TOKEN,
-                            mMediaController.getSessionToken()));
+            if (enableOutputSwitcherForSystemRouting() && mMediaController == null) {
+                mContext.sendBroadcast(new Intent()
+                        .setAction(MediaOutputConstants.ACTION_LAUNCH_SYSTEM_MEDIA_OUTPUT_DIALOG)
+                        .setPackage(MediaOutputConstants.SYSTEMUI_PACKAGE_NAME));
+            } else if (mMediaController != null) {
+                mContext.sendBroadcast(new Intent()
+                        .setAction(MediaOutputConstants.ACTION_LAUNCH_MEDIA_OUTPUT_DIALOG)
+                        .setPackage(MediaOutputConstants.SYSTEMUI_PACKAGE_NAME)
+                        .putExtra(MediaOutputConstants.EXTRA_PACKAGE_NAME,
+                                mMediaController.getPackageName())
+                        .putExtra(MediaOutputConstants.KEY_MEDIA_SESSION_TOKEN,
+                                mMediaController.getSessionToken()));
+            }
             return true;
         }
         return false;

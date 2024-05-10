@@ -41,11 +41,12 @@ import android.widget.TextView;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
-import com.android.settings.SetupWizardUtils;
+import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupdesign.GlifLayout;
+import com.google.android.setupdesign.template.HeaderMixin;
 import com.google.android.setupdesign.util.ThemeHelper;
 import com.google.android.setupdesign.util.ThemeResolver;
 
@@ -84,6 +85,7 @@ public abstract class StorageWizardBase extends FragmentActivity {
         this.setTheme(sudTheme);
         ThemeHelper.trySetDynamicColor(this);
         super.onCreate(savedInstanceState);
+        getLifecycle().addObserver(new HideNonSystemOverlayMixin(this));
 
         mStorage = getSystemService(StorageManager.class);
 
@@ -114,7 +116,7 @@ public abstract class StorageWizardBase extends FragmentActivity {
                 .setText(R.string.wizard_back)
                 .setListener(this::onNavigateBack)
                 .setButtonType(FooterButton.ButtonType.OTHER)
-                .setTheme(R.style.SudGlifButton_Secondary)
+                .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Secondary)
                 .build()
         );
         mFooterBarMixin.setPrimaryButton(
@@ -122,7 +124,7 @@ public abstract class StorageWizardBase extends FragmentActivity {
                 .setText(R.string.wizard_next)
                 .setListener(this::onNavigateNext)
                 .setButtonType(FooterButton.ButtonType.NEXT)
-                .setTheme(R.style.SudGlifButton_Primary)
+                .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Primary)
                 .build()
         );
         mBack = mFooterBarMixin.getSecondaryButton();
@@ -167,7 +169,9 @@ public abstract class StorageWizardBase extends FragmentActivity {
 
     protected void setHeaderText(int resId, CharSequence... args) {
         final CharSequence headerText = TextUtils.expandTemplate(getText(resId), args);
-        getGlifLayout().setHeaderText(headerText);
+        final GlifLayout layout = getGlifLayout();
+        layout.setHeaderText(headerText);
+        layout.getMixin(HeaderMixin.class).setAutoTextSizeEnabled(false);
         setTitle(headerText);
     }
 

@@ -86,6 +86,7 @@ public class AccountTypePreference extends AppPreference implements OnPreference
 
         setKey(buildKey(account));
         setTitle(mTitle);
+        setSingleLineTitle(true);
         setSummary(summary);
         setIcon(icon);
 

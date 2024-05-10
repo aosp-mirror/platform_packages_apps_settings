@@ -29,6 +29,8 @@ import android.util.Log;
 import android.util.LongSparseArray;
 import android.util.SparseArray;
 
+import androidx.annotation.WorkerThread;
+
 import com.android.internal.app.ProcessMap;
 import com.android.internal.app.procstats.DumpUtils;
 import com.android.internal.app.procstats.IProcessStats;
@@ -85,22 +87,8 @@ public class ProcStatsData {
         }
     }
 
-    public void setTotalTime(int totalTime) {
-        memTotalTime = totalTime;
-    }
-
     public void xferStats() {
         sStatsXfer = mStats;
-    }
-
-    public void setMemStates(int[] memStates) {
-        mMemStates = memStates;
-        refreshStats(false);
-    }
-
-    public void setStats(int[] stats) {
-        this.mStates = stats;
-        refreshStats(false);
     }
 
     public int getMemState() {
@@ -118,15 +106,13 @@ public class ProcStatsData {
         return mMemInfo;
     }
 
-    public long getElapsedTime() {
-        return mStats.mTimePeriodEndRealtime - mStats.mTimePeriodStartRealtime;
-    }
-
+    /**
+     * Sets the duration.
+     *
+     * <p>Note: {@link #refreshStats(boolean)} needs to called manually to take effect.
+     */
     public void setDuration(long duration) {
-        if (duration != mDuration) {
-            mDuration = duration;
-            refreshStats(true);
-        }
+        mDuration = duration;
     }
 
     public long getDuration() {
@@ -137,6 +123,12 @@ public class ProcStatsData {
         return pkgEntries;
     }
 
+    /**
+     * Refreshes the stats.
+     *
+     * <p>Note: This needs to be called manually to take effect.
+     */
+    @WorkerThread
     public void refreshStats(boolean forceLoad) {
         if (mStats == null || forceLoad) {
             load();

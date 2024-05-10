@@ -29,7 +29,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.LinkifyUtils;
-import com.android.settingslib.R;
+import com.android.settings.R;
 
 /**
  * A preference with a title that can have linkable content on click.
@@ -49,7 +49,8 @@ public class LinkablePreference extends Preference {
 
     public LinkablePreference(Context ctx, AttributeSet attrs) {
         this(ctx, attrs, TypedArrayUtils.getAttr(
-                ctx, R.attr.footerPreferenceStyle, android.R.attr.preferenceStyle));
+                ctx, com.android.settingslib.widget.theme.R.attr.footerPreferenceStyle,
+                android.R.attr.preferenceStyle));
     }
 
     public LinkablePreference(Context ctx) {

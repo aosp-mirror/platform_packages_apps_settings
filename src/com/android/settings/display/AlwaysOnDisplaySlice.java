@@ -28,6 +28,7 @@ import android.hardware.display.AmbientDisplayConfiguration;
 import android.net.Uri;
 import android.os.UserHandle;
 import android.provider.Settings;
+import android.text.TextUtils;
 
 import androidx.slice.Slice;
 import androidx.slice.builders.ListBuilder;
@@ -35,10 +36,12 @@ import androidx.slice.builders.SliceAction;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.aware.AwareFeatureProvider;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.slices.CustomSliceable;
+
+import java.util.Arrays;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Custom {@link Slice} for Always on Display.
@@ -54,12 +57,10 @@ public class AlwaysOnDisplaySlice implements CustomSliceable {
 
     private final Context mContext;
     private final AmbientDisplayConfiguration mConfig;
-    private final AwareFeatureProvider mFeatureProvider;
 
     public AlwaysOnDisplaySlice(Context context) {
         mContext = context;
         mConfig = new AmbientDisplayConfiguration(mContext);
-        mFeatureProvider = FeatureFactory.getFactory(context).getAwareFeatureProvider();
     }
 
     @Override
@@ -75,6 +76,7 @@ public class AlwaysOnDisplaySlice implements CustomSliceable {
         return new ListBuilder(mContext, CustomSliceRegistry.ALWAYS_ON_SLICE_URI,
                 ListBuilder.INFINITY)
                 .setAccentColor(color)
+                .setKeywords(getKeywords())
                 .addRow(new ListBuilder.RowBuilder()
                         .setTitle(mContext.getText(R.string.doze_always_on_title))
                         .setSubtitle(mContext.getText(R.string.doze_always_on_summary))
@@ -82,6 +84,13 @@ public class AlwaysOnDisplaySlice implements CustomSliceable {
                                 SliceAction.createToggle(toggleAction, null /* actionTitle */,
                                         isChecked)))
                 .build();
+    }
+
+    private Set<String> getKeywords() {
+        final String keywords = mContext.getString(R.string.keywords_always_show_time_info);
+        return Arrays.stream(TextUtils.split(keywords, ","))
+                .map(String::trim)
+                .collect(Collectors.toSet());
     }
 
     @Override
@@ -94,12 +103,9 @@ public class AlwaysOnDisplaySlice implements CustomSliceable {
         final boolean isChecked = intent.getBooleanExtra(android.app.slice.Slice.EXTRA_TOGGLE_STATE,
                 false);
         final ContentResolver resolver = mContext.getContentResolver();
-        final boolean isAwareSupported = mFeatureProvider.isSupported(mContext);
-        final boolean isAwareEnabled = mFeatureProvider.isEnabled(mContext);
 
         Settings.Secure.putInt(resolver, DOZE_ALWAYS_ON, isChecked ? 1 : 0);
-        Settings.Secure.putInt(resolver, DOZE_WAKE_DISPLAY_GESTURE,
-                (isAwareEnabled && isAwareSupported && isChecked) ? 1 : 0);
+        Settings.Secure.putInt(resolver, DOZE_WAKE_DISPLAY_GESTURE, 0);
     }
 
     @Override

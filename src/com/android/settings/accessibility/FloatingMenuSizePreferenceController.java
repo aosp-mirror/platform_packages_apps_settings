@@ -22,7 +22,6 @@ import android.database.ContentObserver;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
-import android.util.ArrayMap;
 
 import androidx.annotation.IntDef;
 import androidx.annotation.VisibleForTesting;
@@ -30,7 +29,6 @@ import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
@@ -52,16 +50,14 @@ public class FloatingMenuSizePreferenceController extends BasePreferenceControll
     @VisibleForTesting
     ListPreference mPreference;
 
-    private final ArrayMap<String, String> mValueTitleMap = new ArrayMap<>();
-    private int mDefaultSize;
-
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({
+            Size.UNKNOWN,
             Size.SMALL,
             Size.LARGE,
     })
-    @VisibleForTesting
-    @interface Size {
+    public @interface Size {
+        int UNKNOWN = -1;
         int SMALL = 0;
         int LARGE = 1;
     }
@@ -75,8 +71,6 @@ public class FloatingMenuSizePreferenceController extends BasePreferenceControll
                 updateAvailabilityStatus();
             }
         };
-
-        initValueTitleMap();
     }
 
     @Override
@@ -94,11 +88,9 @@ public class FloatingMenuSizePreferenceController extends BasePreferenceControll
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        final ListPreference listPreference = (ListPreference) preference;
         final Integer value = Ints.tryParse((String) newValue);
         if (value != null) {
             putAccessibilityFloatingMenuSize(value);
-            updateState(listPreference);
         }
         return true;
     }
@@ -108,7 +100,7 @@ public class FloatingMenuSizePreferenceController extends BasePreferenceControll
         super.updateState(preference);
         final ListPreference listPreference = (ListPreference) preference;
 
-        listPreference.setValue(String.valueOf(getAccessibilityFloatingMenuSize(mDefaultSize)));
+        listPreference.setValue(String.valueOf(getAccessibilityFloatingMenuSize()));
     }
 
     @Override
@@ -129,25 +121,10 @@ public class FloatingMenuSizePreferenceController extends BasePreferenceControll
         mPreference.setEnabled(AccessibilityUtil.isFloatingMenuEnabled(mContext));
     }
 
-    private void initValueTitleMap() {
-        if (mValueTitleMap.size() == 0) {
-            final String[] values = mContext.getResources().getStringArray(
-                    R.array.accessibility_button_size_selector_values);
-            final String[] titles = mContext.getResources().getStringArray(
-                    R.array.accessibility_button_size_selector_titles);
-            final int mapSize = values.length;
-
-            mDefaultSize = Integer.parseInt(values[0]);
-            for (int i = 0; i < mapSize; i++) {
-                mValueTitleMap.put(values[i], titles[i]);
-            }
-        }
-    }
-
     @Size
-    private int getAccessibilityFloatingMenuSize(@Size int defaultValue) {
+    private int getAccessibilityFloatingMenuSize() {
         return Settings.Secure.getInt(mContentResolver,
-                Settings.Secure.ACCESSIBILITY_FLOATING_MENU_SIZE, defaultValue);
+                Settings.Secure.ACCESSIBILITY_FLOATING_MENU_SIZE, Size.SMALL);
     }
 
     private void putAccessibilityFloatingMenuSize(@Size int value) {

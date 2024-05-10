@@ -20,12 +20,24 @@ import static android.view.WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTE
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.ActivityManager;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.view.View;
 import android.view.Window;
@@ -36,10 +48,13 @@ import androidx.fragment.app.Fragment;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProviderImpl;
-import com.android.settings.homepage.contextualcards.slices.BatteryFixSliceTest;
+import com.android.settings.testutils.shadow.ShadowActivityEmbeddingUtils;
+import com.android.settings.testutils.shadow.ShadowActivityManager;
+import com.android.settings.testutils.shadow.ShadowPasswordUtils;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -53,17 +68,24 @@ import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.shadow.api.Shadow;
-import org.robolectric.shadows.ShadowActivityManager;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowUserManager.class,
-        SettingsHomepageActivityTest.ShadowSuggestionFeatureProviderImpl.class})
+@Config(shadows = {
+        ShadowUserManager.class,
+        SettingsHomepageActivityTest.ShadowSuggestionFeatureProviderImpl.class,
+        ShadowActivityManager.class,
+})
 public class SettingsHomepageActivityTest {
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+    }
+
+    @After
+    public void tearDown() {
+        ShadowPasswordUtils.reset();
     }
 
     @Test
@@ -147,9 +169,6 @@ public class SettingsHomepageActivityTest {
     }
 
     @Test
-    @Config(shadows = {
-            BatteryFixSliceTest.ShadowBatteryTipLoader.class
-    })
     public void onStart_isNotDebuggable_shouldHideSystemOverlay() {
         ReflectionHelpers.setStaticField(Build.class, "IS_DEBUGGABLE", false);
 
@@ -166,9 +185,6 @@ public class SettingsHomepageActivityTest {
     }
 
     @Test
-    @Config(shadows = {
-            BatteryFixSliceTest.ShadowBatteryTipLoader.class,
-    })
     public void onStop_isNotDebuggable_shouldRemoveHideSystemOverlay() {
         ReflectionHelpers.setStaticField(Build.class, "IS_DEBUGGABLE", false);
 
@@ -193,6 +209,128 @@ public class SettingsHomepageActivityTest {
         verify(window).setAttributes(paramCaptor.capture());
         assertThat(paramCaptor.getValue().privateFlags
                 & SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS).isEqualTo(0);
+    }
+
+    @Test
+    public void onCreate_notTaskRoot_shouldFinishActivity() {
+        SettingsHomepageActivity activity =
+                spy(Robolectric.buildActivity(SettingsHomepageActivity.class).get());
+        doReturn(false).when(activity).isTaskRoot();
+
+        activity.onCreate(/* savedInstanceState */ null);
+
+        verify(activity).finish();
+    }
+
+    @Test
+    public void onCreate_singleTaskActivity_shouldNotFinishActivity() {
+        SettingsHomepageActivity activity =
+                spy(Robolectric.buildActivity(DeepLinkHomepageActivity.class).get());
+        doReturn(false).when(activity).isTaskRoot();
+
+        activity.onCreate(/* savedInstanceState */ null);
+
+        verify(activity, never()).finish();
+    }
+
+    /** This test is for large screen devices Activity embedding. */
+    @Test
+    @Config(shadows = ShadowActivityEmbeddingUtils.class)
+    public void onCreate_flagClearTop_shouldInitRules() {
+        ShadowActivityEmbeddingUtils.setIsEmbeddingActivityEnabled(true);
+        SettingsHomepageActivity activity =
+                spy(Robolectric.buildActivity(SettingsHomepageActivity.class).get());
+        doReturn(new Intent().setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)).when(activity).getIntent();
+
+        activity.onCreate(/* savedInstanceState */ null);
+
+        verify(activity).initSplitPairRules();
+    }
+
+    @Test
+    public void getInitialReferrer_differentPackage_returnCurrentReferrer() {
+        SettingsHomepageActivity activity =
+                spy(Robolectric.buildActivity(SettingsHomepageActivity.class).get());
+        String referrer = "com.abc";
+        doReturn(referrer).when(activity).getCurrentReferrer();
+
+        assertEquals(activity.getInitialReferrer(), referrer);
+    }
+
+    @Test
+    public void getInitialReferrer_noReferrerExtra_returnCurrentReferrer() {
+        SettingsHomepageActivity activity =
+                spy(Robolectric.buildActivity(SettingsHomepageActivity.class).get());
+        String referrer = activity.getPackageName();
+        doReturn(referrer).when(activity).getCurrentReferrer();
+
+        assertEquals(activity.getInitialReferrer(), referrer);
+    }
+
+    @Test
+    public void getInitialReferrer_hasReferrerExtra_returnGivenReferrer() {
+        SettingsHomepageActivity activity =
+                spy(Robolectric.buildActivity(SettingsHomepageActivity.class).get());
+        doReturn(activity.getPackageName()).when(activity).getCurrentReferrer();
+        String referrer = "com.abc";
+        activity.setIntent(new Intent().putExtra(SettingsHomepageActivity.EXTRA_INITIAL_REFERRER,
+                referrer));
+
+        assertEquals(activity.getInitialReferrer(), referrer);
+    }
+
+    @Test
+    public void getCurrentReferrer_hasReferrerExtra_shouldNotEqual() {
+        String referrer = "com.abc";
+        Uri uri = new Uri.Builder().scheme("android-app").authority(referrer).build();
+        SettingsHomepageActivity activity =
+                spy(Robolectric.buildActivity(SettingsHomepageActivity.class).get());
+        activity.setIntent(new Intent().putExtra(Intent.EXTRA_REFERRER, uri));
+
+        assertNotEquals(activity.getCurrentReferrer(), referrer);
+    }
+
+    @Test
+    public void getCurrentReferrer_hasReferrerNameExtra_shouldNotEqual() {
+        String referrer = "com.abc";
+        SettingsHomepageActivity activity =
+                spy(Robolectric.buildActivity(SettingsHomepageActivity.class).get());
+        activity.setIntent(new Intent().putExtra(Intent.EXTRA_REFERRER_NAME, referrer));
+
+        assertNotEquals(activity.getCurrentReferrer(), referrer);
+    }
+
+    @Test
+    public void isCallingAppPermitted_emptyPermission_returnTrue() {
+        SettingsHomepageActivity activity =
+                spy(Robolectric.buildActivity(SettingsHomepageActivity.class).get());
+        doReturn(PackageManager.PERMISSION_DENIED).when(activity)
+                .checkPermission(anyString(), anyInt(), anyInt());
+
+        assertTrue(activity.isCallingAppPermitted("", 1000));
+    }
+
+    @Test
+    public void isCallingAppPermitted_notGrantedPermission_returnFalse() {
+        SettingsHomepageActivity activity =
+                spy(Robolectric.buildActivity(SettingsHomepageActivity.class).get());
+        doReturn(PackageManager.PERMISSION_DENIED).when(activity)
+                .checkPermission(anyString(), anyInt(), anyInt());
+
+        assertFalse(activity.isCallingAppPermitted("android.permission.TEST", 1000));
+    }
+
+    @Test
+    public void isCallingAppPermitted_grantedPermission_returnTrue() {
+        SettingsHomepageActivity activity =
+                spy(Robolectric.buildActivity(SettingsHomepageActivity.class).get());
+        String permission = "android.permission.TEST";
+        doReturn(PackageManager.PERMISSION_DENIED).when(activity)
+                .checkPermission(anyString(), anyInt(), anyInt());
+        doReturn(PackageManager.PERMISSION_GRANTED).when(activity)
+                .checkPermission(eq(permission), anyInt(), eq(1000));
+
+        assertTrue(activity.isCallingAppPermitted(permission, 1000));
     }
 
     @Implements(SuggestionFeatureProviderImpl.class)

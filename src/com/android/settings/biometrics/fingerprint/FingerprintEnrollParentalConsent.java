@@ -131,4 +131,12 @@ public class FingerprintEnrollParentalConsent extends FingerprintEnrollIntroduct
     public int getMetricsCategory() {
         return SettingsEnums.FINGERPRINT_PARENTAL_CONSENT;
     }
+
+
+    @Override
+    protected void updateDescriptionText() {
+        super.updateDescriptionText();
+        setDescriptionText(
+                R.string.security_settings_fingerprint_enroll_introduction_consent_message);
+    }
 }

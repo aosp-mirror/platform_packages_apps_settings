@@ -26,6 +26,7 @@ import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.users.UserFeatureProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.utils.StringUtil;
 
 public class EnterpriseSetDefaultAppsPreferenceController
         extends AbstractPreferenceController implements PreferenceControllerMixin {
@@ -36,16 +37,16 @@ public class EnterpriseSetDefaultAppsPreferenceController
 
     public EnterpriseSetDefaultAppsPreferenceController(Context context) {
         super(context);
-        final FeatureFactory factory = FeatureFactory.getFactory(context);
-        mApplicationFeatureProvider = factory.getApplicationFeatureProvider(context);
-        mUserFeatureProvider = factory.getUserFeatureProvider(context);
+        final FeatureFactory factory = FeatureFactory.getFeatureFactory();
+        mApplicationFeatureProvider = factory.getApplicationFeatureProvider();
+        mUserFeatureProvider = factory.getUserFeatureProvider();
     }
 
     @Override
     public void updateState(Preference preference) {
         final int num = getNumberOfEnterpriseSetDefaultApps();
-        preference.setSummary(mContext.getResources().getQuantityString(
-                R.plurals.enterprise_privacy_number_packages, num, num));
+        preference.setSummary(StringUtil.getIcuPluralsString(mContext, num,
+                R.string.enterprise_privacy_number_packages));
     }
 
     @Override

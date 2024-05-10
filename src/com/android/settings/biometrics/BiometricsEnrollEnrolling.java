@@ -21,7 +21,6 @@ import android.content.Intent;
 import android.os.UserHandle;
 import android.view.View;
 
-import com.android.settings.R;
 import com.android.settings.password.ChooseLockSettingsHelper;
 
 /**
@@ -120,7 +119,6 @@ public abstract class BiometricsEnrollEnrolling extends BiometricEnrollBase
             intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
         }
         startActivity(intent);
-        overridePendingTransition(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out);
         finish();
     }
 

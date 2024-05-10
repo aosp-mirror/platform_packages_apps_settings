@@ -31,10 +31,11 @@ import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.inOrder;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.verifyNoInteractions;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 import android.app.AppOpsManager;
@@ -47,6 +48,7 @@ import android.content.pm.UserInfo;
 import android.os.UserManager;
 import android.util.ArraySet;
 
+import com.android.settings.fuelgauge.BatteryOptimizeHistoricalLogEntry.Action;
 import com.android.settingslib.fuelgauge.PowerAllowlistBackend;
 
 import org.junit.Before;
@@ -92,38 +94,35 @@ public class BatteryOptimizeUtilsTest {
 
     @Test
     public void testGetAppOptimizationMode_returnRestricted() {
-        when(mMockBackend.isAllowlisted(anyString())).thenReturn(false);
+        when(mMockBackend.isAllowlisted(anyString(), anyInt())).thenReturn(false);
         when(mMockAppOpsManager.checkOpNoThrow(anyInt(), anyInt(), anyString()))
                 .thenReturn(AppOpsManager.MODE_IGNORED);
 
-        assertThat(mBatteryOptimizeUtils.getAppOptimizationMode())
-                .isEqualTo(MODE_RESTRICTED);
+        assertThat(mBatteryOptimizeUtils.getAppOptimizationMode()).isEqualTo(MODE_RESTRICTED);
     }
 
     @Test
     public void testGetAppOptimizationMode_returnUnrestricted() {
-        when(mMockBackend.isAllowlisted(anyString())).thenReturn(true);
+        when(mMockBackend.isAllowlisted(anyString(), anyInt())).thenReturn(true);
         when(mMockAppOpsManager.checkOpNoThrow(anyInt(), anyInt(), anyString()))
                 .thenReturn(AppOpsManager.MODE_ALLOWED);
 
-        assertThat(mBatteryOptimizeUtils.getAppOptimizationMode())
-                .isEqualTo(MODE_UNRESTRICTED);
+        assertThat(mBatteryOptimizeUtils.getAppOptimizationMode()).isEqualTo(MODE_UNRESTRICTED);
     }
 
     @Test
     public void testGetAppOptimizationMode_returnOptimized() {
-        when(mMockBackend.isAllowlisted(anyString())).thenReturn(false);
+        when(mMockBackend.isAllowlisted(anyString(), anyInt())).thenReturn(false);
         when(mMockAppOpsManager.checkOpNoThrow(anyInt(), anyInt(), anyString()))
                 .thenReturn(AppOpsManager.MODE_ALLOWED);
 
-        assertThat(mBatteryOptimizeUtils.getAppOptimizationMode())
-                .isEqualTo(MODE_OPTIMIZED);
+        assertThat(mBatteryOptimizeUtils.getAppOptimizationMode()).isEqualTo(MODE_OPTIMIZED);
     }
 
     @Test
     public void testIsSystemOrDefaultApp_isSystemOrDefaultApp_returnTrue() {
-        when(mMockBackend.isAllowlisted(anyString())).thenReturn(true);
-        when(mMockBackend.isDefaultActiveApp(anyString())).thenReturn(true);
+        when(mMockBackend.isAllowlisted(anyString(), anyInt())).thenReturn(true);
+        when(mMockBackend.isDefaultActiveApp(anyString(), anyInt())).thenReturn(true);
 
         assertThat(mBatteryOptimizeUtils.isSystemOrDefaultApp()).isTrue();
     }
@@ -134,25 +133,26 @@ public class BatteryOptimizeUtilsTest {
     }
 
     @Test
-    public void testIsValidPackageName_InvalidPackageName_returnFalse() {
+    public void isDisabledForOptimizeModeOnly_invalidPackageName_returnTrue() {
         final BatteryOptimizeUtils testBatteryOptimizeUtils =
                 new BatteryOptimizeUtils(mContext, UID, null);
 
-        assertThat(testBatteryOptimizeUtils.isValidPackageName()).isFalse();
+        assertThat(testBatteryOptimizeUtils.isDisabledForOptimizeModeOnly()).isTrue();
     }
 
     @Test
-    public void testIsValidPackageName_validPackageName_returnTrue() {
-        assertThat(mBatteryOptimizeUtils.isValidPackageName()).isTrue();
+    public void isDisabledForOptimizeModeOnly_validPackageName_returnFalse() {
+        assertThat(mBatteryOptimizeUtils.isDisabledForOptimizeModeOnly()).isFalse();
     }
 
     @Test
     public void testSetAppUsageState_Restricted_verifyAction() throws Exception {
         // Sets the current mode as MODE_UNRESTRICTED.
-        mBatteryOptimizeUtils.mAllowListed = false;
-        mBatteryOptimizeUtils.mMode = AppOpsManager.MODE_ALLOWED;
+        when(mMockBackend.isAllowlisted(anyString(), anyInt())).thenReturn(true);
+        when(mMockAppOpsManager.checkOpNoThrow(anyInt(), anyInt(), anyString()))
+                .thenReturn(AppOpsManager.MODE_ALLOWED);
 
-        mBatteryOptimizeUtils.setAppUsageState(MODE_RESTRICTED);
+        mBatteryOptimizeUtils.setAppUsageState(MODE_RESTRICTED, Action.UNKNOWN);
         TimeUnit.SECONDS.sleep(1);
 
         verifySetAppOptimizationMode(AppOpsManager.MODE_IGNORED, /* allowListed */ false);
@@ -160,7 +160,12 @@ public class BatteryOptimizeUtilsTest {
 
     @Test
     public void testSetAppUsageState_Unrestricted_verifyAction() throws Exception {
-        mBatteryOptimizeUtils.setAppUsageState(MODE_UNRESTRICTED);
+        // Sets the current mode as MODE_RESTRICTED.
+        when(mMockBackend.isAllowlisted(anyString(), anyInt())).thenReturn(false);
+        when(mMockAppOpsManager.checkOpNoThrow(anyInt(), anyInt(), anyString()))
+                .thenReturn(AppOpsManager.MODE_IGNORED);
+
+        mBatteryOptimizeUtils.setAppUsageState(MODE_UNRESTRICTED, Action.UNKNOWN);
         TimeUnit.SECONDS.sleep(1);
 
         verifySetAppOptimizationMode(AppOpsManager.MODE_ALLOWED, /* allowListed */ true);
@@ -168,7 +173,12 @@ public class BatteryOptimizeUtilsTest {
 
     @Test
     public void testSetAppUsageState_Optimized_verifyAction() throws Exception {
-        mBatteryOptimizeUtils.setAppUsageState(MODE_OPTIMIZED);
+        // Sets the current mode as MODE_UNRESTRICTED.
+        when(mMockBackend.isAllowlisted(anyString(), anyInt())).thenReturn(true);
+        when(mMockAppOpsManager.checkOpNoThrow(anyInt(), anyInt(), anyString()))
+                .thenReturn(AppOpsManager.MODE_ALLOWED);
+
+        mBatteryOptimizeUtils.setAppUsageState(MODE_OPTIMIZED, Action.UNKNOWN);
         TimeUnit.SECONDS.sleep(1);
 
         verifySetAppOptimizationMode(AppOpsManager.MODE_ALLOWED, /* allowListed */ false);
@@ -177,30 +187,33 @@ public class BatteryOptimizeUtilsTest {
     @Test
     public void testSetAppUsageState_sameUnrestrictedMode_verifyNoAction() throws Exception {
         // Sets the current mode as MODE_UNRESTRICTED.
-        mBatteryOptimizeUtils.mAllowListed = true;
-        mBatteryOptimizeUtils.mMode = AppOpsManager.MODE_ALLOWED;
+        when(mMockBackend.isAllowlisted(anyString(), anyInt())).thenReturn(true);
+        when(mMockAppOpsManager.checkOpNoThrow(anyInt(), anyInt(), anyString()))
+                .thenReturn(AppOpsManager.MODE_ALLOWED);
 
-        mBatteryOptimizeUtils.setAppUsageState(MODE_UNRESTRICTED);
+        mBatteryOptimizeUtils.setAppUsageState(MODE_UNRESTRICTED, Action.UNKNOWN);
         TimeUnit.SECONDS.sleep(1);
 
-        verifyNoInteractions(mMockBackend);
-        verifyNoInteractions(mMockBatteryUtils);
+        verify(mMockBatteryUtils, never()).setForceAppStandby(anyInt(), anyString(), anyInt());
+        verify(mMockBackend, never()).addApp(anyString());
+        verify(mMockBackend, never()).removeApp(anyString());
     }
 
     @Test
     public void testGetInstalledApplications_returnEmptyArray() {
-        assertTrue(BatteryOptimizeUtils.getInstalledApplications(mContext, mMockIPackageManager)
-                .isEmpty());
+        assertTrue(
+                BatteryOptimizeUtils.getInstalledApplications(mContext, mMockIPackageManager)
+                        .isEmpty());
     }
 
     @Test
     public void testGetInstalledApplications_returnNull() throws Exception {
         final UserInfo userInfo =
-                new UserInfo(/*userId=*/ 0, /*userName=*/ "google", /*flag=*/ 0);
+                new UserInfo(/* userId= */ 0, /* userName= */ "google", /* flag= */ 0);
         doReturn(Arrays.asList(userInfo)).when(mMockUserManager).getProfiles(anyInt());
         doThrow(new RuntimeException())
-            .when(mMockIPackageManager)
-            .getInstalledApplications(anyLong(), anyInt());
+                .when(mMockIPackageManager)
+                .getInstalledApplications(anyLong(), anyInt());
 
         assertNull(BatteryOptimizeUtils.getInstalledApplications(mContext, mMockIPackageManager));
     }
@@ -208,7 +221,7 @@ public class BatteryOptimizeUtilsTest {
     @Test
     public void testGetInstalledApplications_returnInstalledApps() throws Exception {
         final UserInfo userInfo =
-                new UserInfo(/*userId=*/ 0, /*userName=*/ "google", /*flag=*/ 0);
+                new UserInfo(/* userId= */ 0, /* userName= */ "google", /* flag= */ 0);
         doReturn(Arrays.asList(userInfo)).when(mMockUserManager).getProfiles(anyInt());
 
         final ApplicationInfo applicationInfo1 = new ApplicationInfo();
@@ -226,10 +239,15 @@ public class BatteryOptimizeUtilsTest {
         applicationInfo4.enabled = true;
         applicationInfo4.uid = 4;
         applicationInfo4.enabledSetting = PackageManager.COMPONENT_ENABLED_STATE_DISABLED_USER;
-        doReturn(new ParceledListSlice<ApplicationInfo>(
-            Arrays.asList(applicationInfo1, applicationInfo2, applicationInfo3, applicationInfo4)))
-            .when(mMockIPackageManager)
-            .getInstalledApplications(anyLong(), anyInt());
+        doReturn(
+                        new ParceledListSlice<ApplicationInfo>(
+                                Arrays.asList(
+                                        applicationInfo1,
+                                        applicationInfo2,
+                                        applicationInfo3,
+                                        applicationInfo4)))
+                .when(mMockIPackageManager)
+                .getInstalledApplications(anyLong(), anyInt());
 
         final ArraySet<ApplicationInfo> applications =
                 BatteryOptimizeUtils.getInstalledApplications(mContext, mMockIPackageManager);
@@ -244,28 +262,30 @@ public class BatteryOptimizeUtilsTest {
     @Test
     public void testResetAppOptimizationMode_Optimized_verifyAction() throws Exception {
         runTestForResetWithMode(
-                AppOpsManager.MODE_ALLOWED, /* allowListed */ false,
+                AppOpsManager.MODE_ALLOWED, /* allowListed */
+                false,
                 /* isSystemOrDefaultApp */ false);
 
         verifyNoInteractions(mMockBatteryUtils);
 
         final InOrder inOrder = inOrder(mMockBackend);
         inOrder.verify(mMockBackend).refreshList();
-        inOrder.verify(mMockBackend).isAllowlisted(PACKAGE_NAME);
+        inOrder.verify(mMockBackend).isAllowlisted(PACKAGE_NAME, UID);
         verifyNoMoreInteractions(mMockBackend);
     }
 
     @Test
     public void testResetAppOptimizationMode_SystemOrDefault_verifyAction() throws Exception {
         runTestForResetWithMode(
-                AppOpsManager.MODE_ALLOWED, /* allowListed */ true,
+                AppOpsManager.MODE_ALLOWED, /* allowListed */
+                true,
                 /* isSystemOrDefaultApp */ true);
 
         verifyNoInteractions(mMockBatteryUtils);
 
         final InOrder inOrder = inOrder(mMockBackend);
         inOrder.verify(mMockBackend).refreshList();
-        inOrder.verify(mMockBackend).isAllowlisted(PACKAGE_NAME);
+        inOrder.verify(mMockBackend).isAllowlisted(PACKAGE_NAME, UID);
         inOrder.verify(mMockBackend).isSysAllowlisted(PACKAGE_NAME);
         verifyNoMoreInteractions(mMockBackend);
     }
@@ -273,7 +293,8 @@ public class BatteryOptimizeUtilsTest {
     @Test
     public void testResetAppOptimizationMode_Restricted_verifyAction() throws Exception {
         runTestForResetWithMode(
-                AppOpsManager.MODE_IGNORED, /* allowListed */ false,
+                AppOpsManager.MODE_IGNORED, /* allowListed */
+                false,
                 /* isSystemOrDefaultApp */ false);
 
         verifySetAppOptimizationMode(AppOpsManager.MODE_ALLOWED, /* allowListed */ false);
@@ -282,7 +303,8 @@ public class BatteryOptimizeUtilsTest {
     @Test
     public void testResetAppOptimizationMode_Unrestricted_verifyAction() throws Exception {
         runTestForResetWithMode(
-                AppOpsManager.MODE_ALLOWED, /* allowListed */ true,
+                AppOpsManager.MODE_ALLOWED, /* allowListed */
+                true,
                 /* isSystemOrDefaultApp */ false);
 
         verifySetAppOptimizationMode(AppOpsManager.MODE_ALLOWED, /* allowListed */ false);
@@ -292,32 +314,28 @@ public class BatteryOptimizeUtilsTest {
             int appStandbyMode, boolean allowListed, boolean isSystemOrDefaultApp)
             throws Exception {
         final UserInfo userInfo =
-                new UserInfo(/*userId=*/ 0, /*userName=*/ "google", /*flag=*/ 0);
+                new UserInfo(/* userId= */ 0, /* userName= */ "google", /* flag= */ 0);
         doReturn(Arrays.asList(userInfo)).when(mMockUserManager).getProfiles(anyInt());
         final ApplicationInfo applicationInfo = new ApplicationInfo();
         applicationInfo.uid = UID;
         applicationInfo.packageName = PACKAGE_NAME;
         applicationInfo.enabled = true;
-        doReturn(new ParceledListSlice<ApplicationInfo>(
-                Arrays.asList(applicationInfo)))
+        doReturn(new ParceledListSlice<ApplicationInfo>(Arrays.asList(applicationInfo)))
                 .when(mMockIPackageManager)
                 .getInstalledApplications(anyLong(), anyInt());
 
         doReturn(appStandbyMode)
                 .when(mMockAppOpsManager)
                 .checkOpNoThrow(anyInt(), anyInt(), anyString());
-        doReturn(allowListed)
-                .when(mMockBackend)
-                .isAllowlisted(anyString());
-        doReturn(isSystemOrDefaultApp)
-                .when(mMockBackend)
-                .isSysAllowlisted(anyString());
-        doReturn(isSystemOrDefaultApp)
-                .when(mMockBackend)
-                .isDefaultActiveApp(anyString());
+        doReturn(allowListed).when(mMockBackend).isAllowlisted(anyString(), anyInt());
+        doReturn(isSystemOrDefaultApp).when(mMockBackend).isSysAllowlisted(anyString());
+        doReturn(isSystemOrDefaultApp).when(mMockBackend).isDefaultActiveApp(anyString(), anyInt());
 
         BatteryOptimizeUtils.resetAppOptimizationMode(
-                mContext, mMockIPackageManager, mMockAppOpsManager, mMockBackend,
+                mContext,
+                mMockIPackageManager,
+                mMockAppOpsManager,
+                mMockBackend,
                 mMockBatteryUtils);
         TimeUnit.SECONDS.sleep(1);
     }

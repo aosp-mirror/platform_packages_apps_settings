@@ -22,18 +22,26 @@ import android.accounts.AccountManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.pm.UserInfo;
+import android.credentials.CredentialManager;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
 import com.android.settings.applications.autofill.PasswordsPreferenceController;
+import com.android.settings.applications.credentials.CredentialManagerPreferenceController;
+import com.android.settings.applications.credentials.DefaultCombinedPreferenceController;
+import com.android.settings.applications.credentials.DefaultPrivateCombinedPreferenceController;
+import com.android.settings.applications.credentials.DefaultWorkCombinedPreferenceController;
 import com.android.settings.applications.defaultapps.DefaultAutofillPreferenceController;
+import com.android.settings.applications.defaultapps.DefaultPrivateAutofillPreferenceController;
 import com.android.settings.applications.defaultapps.DefaultWorkAutofillPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.users.AutoSyncDataPreferenceController;
 import com.android.settings.users.AutoSyncPersonalDataPreferenceController;
+import com.android.settings.users.AutoSyncPrivateDataPreferenceController;
 import com.android.settings.users.AutoSyncWorkDataPreferenceController;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
@@ -44,9 +52,7 @@ import java.util.List;
 
 @SearchIndexable
 public class AccountDashboardFragment extends DashboardFragment {
-
     private static final String TAG = "AccountDashboardFrag";
-
 
     @Override
     public int getMetricsCategory() {
@@ -60,7 +66,7 @@ public class AccountDashboardFragment extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.accounts_dashboard_settings;
+        return getPreferenceLayoutResId(this.getContext());
     }
 
     @Override
@@ -71,7 +77,22 @@ public class AccountDashboardFragment extends DashboardFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        getSettingsLifecycle().addObserver(use(PasswordsPreferenceController.class));
+        if (CredentialManager.isServiceEnabled(context)) {
+            CredentialManagerPreferenceController cmpp =
+                    use(CredentialManagerPreferenceController.class);
+            CredentialManagerPreferenceController.Delegate delegate =
+                    new CredentialManagerPreferenceController.Delegate() {
+                public void setActivityResult(int resultCode) {
+                    getActivity().setResult(resultCode);
+                }
+                public void forceDelegateRefresh() {
+                    forceUpdatePreferences();
+                }
+            };
+            cmpp.init(this, getFragmentManager(), getIntent(), delegate, /*isWorkProfile=*/false);
+        } else {
+            getSettingsLifecycle().addObserver(use(PasswordsPreferenceController.class));
+        }
     }
 
     @Override
@@ -90,16 +111,25 @@ public class AccountDashboardFragment extends DashboardFragment {
 
     static void buildAutofillPreferenceControllers(
             Context context, List<AbstractPreferenceController> controllers) {
-        controllers.add(new DefaultAutofillPreferenceController(context));
-        controllers.add(new DefaultWorkAutofillPreferenceController(context));
+        if (CredentialManager.isServiceEnabled(context)) {
+            controllers.add(new DefaultCombinedPreferenceController(context));
+            controllers.add(new DefaultWorkCombinedPreferenceController(context));
+            controllers.add(new DefaultPrivateCombinedPreferenceController(context));
+        } else {
+            controllers.add(new DefaultAutofillPreferenceController(context));
+            controllers.add(new DefaultWorkAutofillPreferenceController(context));
+            controllers.add(new DefaultPrivateAutofillPreferenceController(context));
+        }
     }
 
     private static void buildAccountPreferenceControllers(
-            Context context, DashboardFragment parent, String[] authorities,
+            Context context,
+            DashboardFragment parent,
+            String[] authorities,
             List<AbstractPreferenceController> controllers) {
         final AccountPreferenceController accountPrefController =
-                new AccountPreferenceController(context, parent, authorities,
-                        ProfileSelectFragment.ProfileType.ALL);
+                new AccountPreferenceController(
+                        context, parent, authorities, ProfileSelectFragment.ProfileType.ALL);
         if (parent != null) {
             parent.getSettingsLifecycle().addObserver(accountPrefController);
         }
@@ -107,10 +137,24 @@ public class AccountDashboardFragment extends DashboardFragment {
         controllers.add(new AutoSyncDataPreferenceController(context, parent));
         controllers.add(new AutoSyncPersonalDataPreferenceController(context, parent));
         controllers.add(new AutoSyncWorkDataPreferenceController(context, parent));
+        controllers.add(new AutoSyncPrivateDataPreferenceController(context, parent));
+    }
+
+    private static int getPreferenceLayoutResId(Context context) {
+        return (context != null && CredentialManager.isServiceEnabled(context))
+                ? R.xml.accounts_dashboard_settings_credman
+                : R.xml.accounts_dashboard_settings;
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.accounts_dashboard_settings) {
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(
+                        Context context, boolean enabled) {
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = getPreferenceLayoutResId(context);
+                    return List.of(sir);
+                }
 
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(
@@ -124,11 +168,11 @@ public class AccountDashboardFragment extends DashboardFragment {
 
                 @SuppressWarnings("MissingSuperCall") // TODO: Fix me
                 @Override
-                public List<SearchIndexableRaw> getDynamicRawDataToIndex(Context context,
-                        boolean enabled) {
+                public List<SearchIndexableRaw> getDynamicRawDataToIndex(
+                        Context context, boolean enabled) {
                     final List<SearchIndexableRaw> indexRaws = new ArrayList<>();
-                    final UserManager userManager = (UserManager) context.getSystemService(
-                            Context.USER_SERVICE);
+                    final UserManager userManager =
+                            (UserManager) context.getSystemService(Context.USER_SERVICE);
                     final List<UserInfo> profiles = userManager.getProfiles(UserHandle.myUserId());
                     for (final UserInfo userInfo : profiles) {
                         if (userInfo.isManagedProfile()) {

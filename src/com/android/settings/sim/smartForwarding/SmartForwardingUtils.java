@@ -80,13 +80,12 @@ public class SmartForwardingUtils {
         preferences.clear().commit();
     }
 
-    public static boolean[] getAllSlotCallWaitingStatus(Context context, SubscriptionManager sm,
-            TelephonyManager tm) {
+    public static boolean[] getAllSlotCallWaitingStatus(Context context, TelephonyManager tm) {
         int phoneCount = tm.getActiveModemCount();
         boolean[] allStatus = new boolean[phoneCount];
 
         for (int i = 0; i < phoneCount; i++) {
-            int subId = sm.getSubscriptionIds(i)[0];
+            int subId = SubscriptionManager.getSubscriptionId(i);
             boolean callWaitingStatus = getBackupCallWaitingStatus(context, subId);
             allStatus[i] = callWaitingStatus;
         }
@@ -99,7 +98,7 @@ public class SmartForwardingUtils {
         CallForwardingInfo[] allStatus = new CallForwardingInfo[phoneCount];
 
         for (int i = 0; i < phoneCount; i++) {
-            int subId = sm.getSubscriptionIds(i)[0];
+            int subId = SubscriptionManager.getSubscriptionId(i);
             CallForwardingInfo callWaitingStatus = getBackupCallForwardingStatus(context, subId);
             allStatus[i] = callWaitingStatus;
         }
@@ -110,7 +109,7 @@ public class SmartForwardingUtils {
             TelephonyManager tm) {
         int phoneCount = tm.getActiveModemCount();
         for (int i = 0; i < phoneCount; i++) {
-            int subId = sm.getSubscriptionIds(i)[0];
+            int subId = SubscriptionManager.getSubscriptionId(i);
             clearBackupData(context, subId);
         }
     }
@@ -134,12 +133,8 @@ public class SmartForwardingUtils {
     public static String getPhoneNumber(Context context, int slotId) {
         SubscriptionManager subscriptionManager = context.getSystemService(
                 SubscriptionManager.class);
-        int[] subIdList = subscriptionManager.getSubscriptionIds(slotId);
-        if (subIdList != null) {
-            SubscriptionInfo subInfo = subscriptionManager.getActiveSubscriptionInfo(subIdList[0]);
-            return (subInfo != null) ? subInfo.getNumber() : "";
-        } else {
-            return "";
-        }
+        SubscriptionInfo subInfo = subscriptionManager.getActiveSubscriptionInfo(
+                SubscriptionManager.getSubscriptionId(slotId));
+        return (subInfo != null) ? subInfo.getNumber() : "";
     }
 }

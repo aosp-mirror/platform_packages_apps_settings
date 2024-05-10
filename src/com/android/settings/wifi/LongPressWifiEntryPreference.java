@@ -16,11 +16,13 @@
 package com.android.settings.wifi;
 
 import android.content.Context;
+import android.os.UserManager;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceViewHolder;
 
+import com.android.settingslib.RestrictedLockUtils;
 import com.android.wifitrackerlib.WifiEntry;
 
 /**
@@ -33,6 +35,7 @@ public class LongPressWifiEntryPreference extends WifiEntryPreference {
     public LongPressWifiEntryPreference(Context context, WifiEntry wifiEntry, Fragment fragment) {
         super(context, wifiEntry);
         mFragment = fragment;
+        checkRestrictionAndSetDisabled();
     }
 
     @Override
@@ -62,5 +65,23 @@ public class LongPressWifiEntryPreference extends WifiEntryPreference {
             enabled = true;
         }
         return enabled;
+    }
+
+    @VisibleForTesting
+    void checkRestrictionAndSetDisabled() {
+        if (!getWifiEntry().hasAdminRestrictions()) {
+            return;
+        }
+        RestrictedLockUtils.EnforcedAdmin admin = null;
+        Context context = getContext();
+        if (context != null) {
+            admin = RestrictedLockUtils.getProfileOrDeviceOwner(context, context.getUser());
+        }
+        if (admin == null) {
+            // Use UserManager.DISALLOW_ADD_WIFI_CONFIG as default Wi-Fi network restriction.
+            admin = RestrictedLockUtils.EnforcedAdmin.createDefaultEnforcedAdminWithRestriction(
+                    UserManager.DISALLOW_ADD_WIFI_CONFIG);
+        }
+        setDisabledByAdmin(admin);
     }
 }

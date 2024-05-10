@@ -16,25 +16,27 @@
 
 package com.android.settings.datetime;
 
-import android.app.Activity;
+import static android.app.time.Capabilities.CAPABILITY_POSSESSED;
+
 import android.app.TimePickerDialog;
+import android.app.time.TimeCapabilities;
+import android.app.time.TimeManager;
 import android.app.timedetector.ManualTimeSuggestion;
 import android.app.timedetector.TimeDetector;
 import android.content.Context;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.widget.TimePicker;
 
 import androidx.preference.Preference;
 
-import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.RestrictedPreference;
-import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settings.core.BasePreferenceController;
 
 import java.util.Calendar;
 
-public class TimePreferenceController extends AbstractPreferenceController
-        implements PreferenceControllerMixin, TimePickerDialog.OnTimeSetListener {
+public class TimePreferenceController extends BasePreferenceController
+        implements TimePickerDialog.OnTimeSetListener {
 
     public interface TimePreferenceHost extends UpdateTimeAndDateCallback {
         void showTimePicker();
@@ -42,49 +44,44 @@ public class TimePreferenceController extends AbstractPreferenceController
 
     public static final int DIALOG_TIMEPICKER = 1;
 
-    private static final String KEY_TIME = "time";
+    private static final String TAG = "TimePreferenceController";
 
-    private final AutoTimePreferenceController mAutoTimePreferenceController;
-    private final TimePreferenceHost mHost;
+    private TimePreferenceHost mHost;
+    private TimeManager mTimeManager;
 
+    public TimePreferenceController(Context context, String preferenceKey) {
+        super(context, preferenceKey);
+        mTimeManager = context.getSystemService(TimeManager.class);
+    }
 
-    public TimePreferenceController(Context context,
-            TimePreferenceHost callback,
-            AutoTimePreferenceController autoTimePreferenceController) {
-        super(context);
-        mHost = callback;
-        mAutoTimePreferenceController = autoTimePreferenceController;
+    public void setHost(TimePreferenceHost host) {
+        mHost = host;
     }
 
     @Override
-    public boolean isAvailable() {
-        return true;
+    public int getAvailabilityStatus() {
+        return isEnabled() ? AVAILABLE : DISABLED_DEPENDENT_SETTING;
     }
 
     @Override
     public void updateState(Preference preference) {
-        if (!(preference instanceof RestrictedPreference)) {
-            return;
-        }
-        final Calendar now = Calendar.getInstance();
-        preference.setSummary(DateFormat.getTimeFormat(mContext).format(now.getTime()));
-        if (!((RestrictedPreference) preference).isDisabledByAdmin()) {
-            preference.setEnabled(!mAutoTimePreferenceController.isEnabled());
-        }
+        super.updateState(preference);
+        preference.setEnabled(isEnabled());
+    }
+
+    @Override
+    public CharSequence getSummary() {
+        Calendar now = Calendar.getInstance();
+        return DateFormat.getTimeFormat(mContext).format(now.getTime());
     }
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-        if (!TextUtils.equals(KEY_TIME, preference.getKey())) {
+        if (!TextUtils.equals(getPreferenceKey(), preference.getKey())) {
             return false;
         }
         mHost.showTimePicker();
         return true;
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return KEY_TIME;
     }
 
     @Override
@@ -98,14 +95,17 @@ public class TimePreferenceController extends AbstractPreferenceController
         // SystemClock time.
     }
 
-    public TimePickerDialog buildTimePicker(Activity activity) {
+    /**
+     * Builds a {@link TimePickerDialog} that can be used to request the current time from the user.
+     */
+    public TimePickerDialog buildTimePicker(Context parentContext) {
         final Calendar calendar = Calendar.getInstance();
         return new TimePickerDialog(
-                activity,
+                parentContext,
                 this,
                 calendar.get(Calendar.HOUR_OF_DAY),
                 calendar.get(Calendar.MINUTE),
-                DateFormat.is24HourFormat(activity));
+                DateFormat.is24HourFormat(parentContext));
     }
 
     void setTime(int hourOfDay, int minute) {
@@ -115,13 +115,28 @@ public class TimePreferenceController extends AbstractPreferenceController
         c.set(Calendar.MINUTE, minute);
         c.set(Calendar.SECOND, 0);
         c.set(Calendar.MILLISECOND, 0);
-        long when = Math.max(c.getTimeInMillis(), TimePreferenceHost.MIN_DATE);
+        long when = c.getTimeInMillis();
 
-        if (when / 1000 < Integer.MAX_VALUE) {
-            TimeDetector timeDetector = mContext.getSystemService(TimeDetector.class);
-            ManualTimeSuggestion manualTimeSuggestion =
-                    TimeDetector.createManualTimeSuggestion(when, "Settings: Set time");
-            timeDetector.suggestManualTime(manualTimeSuggestion);
+        TimeDetector timeDetector = mContext.getSystemService(TimeDetector.class);
+        ManualTimeSuggestion manualTimeSuggestion =
+                TimeDetector.createManualTimeSuggestion(when, "Settings: Set time");
+        boolean success = timeDetector.suggestManualTime(manualTimeSuggestion);
+        if (!success) {
+            // This implies the system server is applying tighter bounds than the settings app or
+            // the date/time cannot be set for other reasons, e.g. perhaps "auto time" is turned on.
+            Log.w(TAG, "Unable to set time with suggestion=" + manualTimeSuggestion);
         }
+    }
+
+    /**
+     * Returns whether selecting the preference should prompt for the user to enter the date
+     * manually. Exposed as public so that the time controller can easily share the same logic as
+     * the rules are identical for time.
+     */
+    public boolean isEnabled() {
+        TimeCapabilities timeZoneCapabilities =
+                mTimeManager.getTimeCapabilitiesAndConfig().getCapabilities();
+        int suggestManualTimeCapability = timeZoneCapabilities.getSetManualTimeCapability();
+        return suggestManualTimeCapability == CAPABILITY_POSSESSED;
     }
 }

@@ -59,12 +59,12 @@ public class AmbientDisplayAlwaysOnPreferenceController extends TogglePreference
 
     @Override
     public boolean isSliceable() {
-        return TextUtils.equals(getPreferenceKey(), "ambient_display_always_on");
+        return true;
     }
 
     @Override
     public boolean isPublicSlice() {
-        return true;
+        return TextUtils.equals(getPreferenceKey(), "ambient_display_always_on");
     }
 
     @Override
@@ -121,7 +121,7 @@ public class AmbientDisplayAlwaysOnPreferenceController extends TogglePreference
         final PowerManager powerManager = context.getSystemService(PowerManager.class);
         final PackageManager packageManager = context.getPackageManager();
         final String packageName = context.getString(
-                com.android.internal.R.string.config_defaultWellbeingPackage);
+                com.android.internal.R.string.config_systemWellbeing);
         try {
             uid = packageManager.getApplicationInfo(packageName, /* flags= */ 0).uid;
         } catch (PackageManager.NameNotFoundException e) {

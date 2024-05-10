@@ -15,6 +15,7 @@
  */
 package com.android.settings.network;
 
+import static com.android.settings.network.MobileIconGroupExtKt.maybeToHtml;
 import static com.android.settings.network.telephony.MobileNetworkUtils.NO_CELL_DATA_TYPE_ICON;
 
 import android.app.PendingIntent;
@@ -31,7 +32,6 @@ import android.telephony.SignalStrength;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
-import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -61,6 +61,7 @@ import java.util.stream.Collectors;
 
 /**
  * The helper is for slice of carrier and non-Carrier, used by ProviderModelSlice.
+ * TODO: Remove the class in U because Settings does not use slice anymore.
  */
 public class ProviderModelSliceHelper {
     private static final String TAG = "ProviderModelSlice";
@@ -140,7 +141,7 @@ public class ProviderModelSliceHelper {
             numLevels += 1;
         }
         return MobileNetworkUtils.getSignalStrengthIcon(mContext, level, numLevels,
-                NO_CELL_DATA_TYPE_ICON, false);
+                NO_CELL_DATA_TYPE_ICON, false, false);
     }
 
     /**
@@ -175,7 +176,7 @@ public class ProviderModelSliceHelper {
 
     protected ListBuilder.RowBuilder createCarrierRow(String networkTypeDescription) {
         final String title = getMobileTitle();
-        final String summary = getMobileSummary(networkTypeDescription);
+        final CharSequence summary = getMobileSummary(networkTypeDescription);
         Drawable drawable = mContext.getDrawable(
                 R.drawable.ic_signal_strength_zero_bar_no_internet);
         try {
@@ -194,7 +195,7 @@ public class ProviderModelSliceHelper {
                 .setTitleItem(levelIcon, ListBuilder.ICON_IMAGE)
                 .addEndItem(toggleAction)
                 .setPrimaryAction(primaryAction)
-                .setSubtitle(Html.fromHtml(summary, Html.FROM_HTML_MODE_LEGACY));
+                .setSubtitle(summary);
         return rowBuilder;
     }
 
@@ -254,7 +255,7 @@ public class ProviderModelSliceHelper {
         return drawable;
     }
 
-    private String getMobileSummary(String networkTypeDescription) {
+    private CharSequence getMobileSummary(String networkTypeDescription) {
         if (!isMobileDataEnabled()) {
             return mContext.getString(R.string.mobile_data_off_summary);
         }
@@ -267,7 +268,7 @@ public class ProviderModelSliceHelper {
                     mContext.getString(R.string.mobile_data_connection_active),
                     networkTypeDescription);
         }
-        return summary;
+        return maybeToHtml(summary);
     }
 
     protected String getMobileTitle() {

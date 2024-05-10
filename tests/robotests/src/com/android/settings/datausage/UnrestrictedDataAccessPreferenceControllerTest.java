@@ -37,7 +37,6 @@ import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.R;
 import com.android.settings.applications.AppStateBaseBridge;
 import com.android.settings.datausage.AppStateDataUsageBridge.DataUsageState;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -141,7 +140,8 @@ public class UnrestrictedDataAccessPreferenceControllerTest {
             } else if (testPkg2.equals(entry.info.packageName)) {
                 assertThat(preference.isDisabledByAdmin()).isTrue();
                 assertThat(preference.getSummary()).isEqualTo(
-                        mContext.getString(R.string.disabled_by_admin));
+                        mContext.getString(
+                                com.android.settingslib.widget.restricted.R.string.disabled_by_admin));
             }
             assertThat(preference.isChecked()).isFalse();
             preference.performClick();

@@ -66,9 +66,7 @@ abstract public class AbstractZenModeAutomaticRulePreferenceController extends
     }
 
     protected Map.Entry<String, AutomaticZenRule>[] getRules() {
-        if (mRules == null) {
-            mRules = mBackend.getAutomaticZenRules();
-        }
+        mRules = mBackend.getAutomaticZenRules();
         return mRules;
     }
 
