@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.accessibility;
+package com.android.settings.display;
 
 import static android.app.UiModeManager.ContrastUtils.CONTRAST_LEVEL_HIGH;
 import static android.app.UiModeManager.ContrastUtils.CONTRAST_LEVEL_MEDIUM;
