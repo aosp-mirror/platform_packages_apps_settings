@@ -22,7 +22,7 @@ import java.util.concurrent.Executor
 
 /** A fake implementation of [BaseThreadNetworkController] for unit tests. */
 class FakeThreadNetworkController : BaseThreadNetworkController {
-    var isEnabled = true
+    var isEnabled = false
         private set
     var registeredStateCallback: ThreadNetworkController.StateCallback? = null
         private set
