@@ -17,7 +17,6 @@ package com.android.settings.connecteddevice.threadnetwork
 
 import android.content.Context
 import android.platform.test.flag.junit.SetFlagsRule
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.preference.PreferenceManager
@@ -51,7 +50,7 @@ class ThreadNetworkToggleControllerTest {
     fun setUp() {
         mSetFlagsRule.enableFlags(Flags.FLAG_THREAD_SETTINGS_ENABLED)
         context = spy(ApplicationProvider.getApplicationContext<Context>())
-        executor = ContextCompat.getMainExecutor(context)
+        executor =  Executor { runnable: Runnable -> runnable.run() }
         fakeThreadNetworkController = FakeThreadNetworkController()
         controller = newControllerWithThreadFeatureSupported(true)
         val preferenceManager = PreferenceManager(context)
