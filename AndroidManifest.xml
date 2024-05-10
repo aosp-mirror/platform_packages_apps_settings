@@ -5146,7 +5146,8 @@
             android:name="com.android.settings.network.SatelliteWarningDialogActivity"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize|screenLayout|smallestScreenSize"
             android:excludeFromRecents="true"
-            android:exported="false"
+            android:exported="true"
+            android:permission="android.permission.NETWORK_SETTINGS"
             android:theme="@style/Theme.SpaLib.Dialog">
         </activity>
 
