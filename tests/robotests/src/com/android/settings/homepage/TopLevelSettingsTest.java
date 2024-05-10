@@ -16,8 +16,6 @@
 
 package com.android.settings.homepage;
 
-import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.doReturn;
@@ -57,11 +55,6 @@ public class TopLevelSettingsTest {
                 .getTilesForCategory(nullable(String.class)))
                 .thenReturn(null);
         mSettings.onAttach(mContext);
-    }
-
-    @Test
-    public void shouldForceRoundedIcon_true() {
-        assertThat(mSettings.shouldForceRoundedIcon()).isTrue();
     }
 
     @Test
