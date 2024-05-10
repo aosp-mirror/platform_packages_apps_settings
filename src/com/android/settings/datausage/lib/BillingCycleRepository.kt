@@ -19,10 +19,15 @@ package com.android.settings.datausage.lib
 import android.content.Context
 import android.os.INetworkManagementService
 import android.os.ServiceManager
-import android.telephony.TelephonyManager
 import android.util.Log
 import androidx.annotation.OpenForTesting
+import com.android.settings.network.telephony.TelephonyRepository
 import com.android.settingslib.spaprivileged.framework.common.userManager
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.conflate
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
 
 @OpenForTesting
 open class BillingCycleRepository @JvmOverloads constructor(
@@ -31,12 +36,14 @@ open class BillingCycleRepository @JvmOverloads constructor(
         INetworkManagementService.Stub.asInterface(
             ServiceManager.getService(Context.NETWORKMANAGEMENT_SERVICE)
         ),
+    private val telephonyRepository: TelephonyRepository = TelephonyRepository(context),
 ) {
     private val userManager = context.userManager
-    private val telephonyManager = context.getSystemService(TelephonyManager::class.java)!!
 
-    fun isModifiable(subId: Int): Boolean =
-        isBandwidthControlEnabled() && userManager.isAdminUser && isDataEnabled(subId)
+    fun isModifiableFlow(subId: Int): Flow<Boolean> =
+        telephonyRepository.isDataEnabledFlow(subId).map { isDataEnabled ->
+            isDataEnabled && isBandwidthControlEnabled() && userManager.isAdminUser
+        }.conflate().flowOn(Dispatchers.Default)
 
     open fun isBandwidthControlEnabled(): Boolean = try {
         networkService.isBandwidthControlEnabled
@@ -44,10 +51,6 @@ open class BillingCycleRepository @JvmOverloads constructor(
         Log.w(TAG, "problem talking with INetworkManagementService: ", e)
         false
     }
-
-    private fun isDataEnabled(subId: Int): Boolean =
-        telephonyManager.createForSubscriptionId(subId)
-            .isDataEnabledForReason(TelephonyManager.DATA_ENABLED_REASON_USER)
 
     companion object {
         private const val TAG = "BillingCycleRepository"
