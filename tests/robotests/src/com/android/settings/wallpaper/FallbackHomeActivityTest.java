@@ -30,6 +30,7 @@ import android.os.Handler;
 import com.android.settings.FallbackHome;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
@@ -64,6 +65,7 @@ public class FallbackHomeActivityTest {
         mController = Robolectric.buildActivity(FallbackHome.class);
     }
 
+    @Ignore("b/315124270")
     @Test
     @Config(shadows = ShadowWallpaperManager.class)
     public void wallpaperColorsChangedListener_ensured_removed() {

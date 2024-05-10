@@ -17,11 +17,32 @@
 package com.android.settings.applications;
 
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.util.FeatureFlagUtils;
 
 import com.android.settings.SettingsActivity;
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
+import com.android.settings.spa.SpaActivity;
+import com.android.settings.spa.app.appinfo.AppInfoSettingsProvider;
 
 public class InstalledAppDetailsTop extends SettingsActivity {
+
+    @Override
+    protected void onCreate(Bundle savedState) {
+        super.onCreate(savedState);
+        if (isFinishing() ||
+                !FeatureFlagUtils.isEnabled(this, FeatureFlagUtils.SETTINGS_ENABLE_SPA)) {
+            return;
+        }
+        Uri data = super.getIntent().getData();
+        if (data != null) {
+            String packageName = data.getSchemeSpecificPart();
+            String route = AppInfoSettingsProvider.INSTANCE.getRoute(packageName, getUserId());
+            SpaActivity.startSpaActivity(this, route);
+        }
+        finish();
+    }
 
     @Override
     public Intent getIntent() {

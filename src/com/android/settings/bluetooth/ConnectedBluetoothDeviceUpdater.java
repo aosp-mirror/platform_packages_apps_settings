@@ -24,7 +24,6 @@ import android.util.Log;
 import androidx.preference.Preference;
 
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
-import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 
 /**
@@ -33,15 +32,15 @@ import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 public class ConnectedBluetoothDeviceUpdater extends BluetoothDeviceUpdater {
 
     private static final String TAG = "ConnBluetoothDeviceUpdater";
-    private static final boolean DBG = Log.isLoggable(TAG, Log.DEBUG);
+    private static final boolean DBG = Log.isLoggable(BluetoothDeviceUpdater.TAG, Log.DEBUG);
 
     private static final String PREF_KEY = "connected_bt";
 
     private final AudioManager mAudioManager;
 
-    public ConnectedBluetoothDeviceUpdater(Context context, DashboardFragment fragment,
-            DevicePreferenceCallback devicePreferenceCallback) {
-        super(context, fragment, devicePreferenceCallback);
+    public ConnectedBluetoothDeviceUpdater(Context context,
+            DevicePreferenceCallback devicePreferenceCallback, int metricsCategory) {
+        super(context, devicePreferenceCallback, metricsCategory);
         mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
     }
 
@@ -72,7 +71,7 @@ public class ConnectedBluetoothDeviceUpdater extends BluetoothDeviceUpdater {
             }
             // If device is Hearing Aid or LE Audio, it is compatible with HFP and A2DP.
             // It would not show in Connected Devices group.
-            if (cachedDevice.isConnectedHearingAidDevice()
+            if (cachedDevice.isConnectedAshaHearingAidDevice()
                     || cachedDevice.isConnectedLeAudioDevice()) {
                 return false;
             }
@@ -118,5 +117,16 @@ public class ConnectedBluetoothDeviceUpdater extends BluetoothDeviceUpdater {
     @Override
     protected String getPreferenceKey() {
         return PREF_KEY;
+    }
+
+    @Override
+    protected String getLogTag() {
+        return TAG;
+    }
+
+    @Override
+    protected void update(CachedBluetoothDevice cachedBluetoothDevice) {
+        super.update(cachedBluetoothDevice);
+        Log.d(TAG, "Map : " + mPreferenceMap);
     }
 }

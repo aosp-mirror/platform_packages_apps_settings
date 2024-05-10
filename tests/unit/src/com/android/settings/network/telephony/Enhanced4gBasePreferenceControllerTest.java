@@ -28,9 +28,8 @@ import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
-import android.telephony.ims.ProvisioningManager;
 
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
@@ -57,13 +56,11 @@ public class Enhanced4gBasePreferenceControllerTest {
     private SubscriptionManager mSubscriptionManager;
     @Mock
     private CarrierConfigCache mCarrierConfigCache;
-    @Mock
-    private ProvisioningManager mProvisioningManager;
 
     private MockVolteQueryImsState mQueryImsState;
 
     private Enhanced4gLtePreferenceController mController;
-    private SwitchPreference mPreference;
+    private TwoStatePreference mPreference;
     private PersistableBundle mCarrierConfig;
     private Context mContext;
 

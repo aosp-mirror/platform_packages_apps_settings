@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Looper;
+import android.os.UserHandle;
 import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -42,7 +43,6 @@ import com.android.settings.sim.SwitchToEsimConfirmDialogActivity;
 
 import com.google.common.collect.ImmutableList;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -99,6 +99,9 @@ public class SimSlotChangeHandler {
 
         int lastRemovableSlotState = getLastRemovableSimSlotState(mContext);
         int currentRemovableSlotState = removableSlotInfo.getCardStateInfo();
+        Log.i(TAG,
+                "lastRemovableSlotState: " + lastRemovableSlotState + ",currentRemovableSlotState: "
+                        + currentRemovableSlotState);
         boolean isRemovableSimInserted =
                 lastRemovableSlotState == UiccSlotInfo.CARD_STATE_INFO_ABSENT
                         && currentRemovableSlotState == UiccSlotInfo.CARD_STATE_INFO_PRESENT;
@@ -258,7 +261,7 @@ public class SimSlotChangeHandler {
         }
 
         List<SubscriptionInfo> subscriptionInfos = getAvailableRemovableSubscription();
-        if (subscriptionInfos == null || subscriptionInfos.get(0) == null) {
+        if (subscriptionInfos.isEmpty()) {
             Log.e(TAG, "Unable to find the removable subscriptionInfo. Do nothing.");
             return;
         }
@@ -274,6 +277,7 @@ public class SimSlotChangeHandler {
     private void setRemovableSimSlotState(Context context, int state) {
         final SharedPreferences prefs = context.getSharedPreferences(EUICC_PREFS, MODE_PRIVATE);
         prefs.edit().putInt(KEY_REMOVABLE_SLOT_STATE, state).apply();
+        Log.d(TAG, "setRemovableSimSlotState: " + state);
     }
 
     private int getSuwRemovableSlotAction(Context context) {
@@ -331,33 +335,34 @@ public class SimSlotChangeHandler {
     }
 
     protected List<SubscriptionInfo> getAvailableRemovableSubscription() {
-        List<SubscriptionInfo> subList = new ArrayList<>();
-        for (SubscriptionInfo info : SubscriptionUtil.getAvailableSubscriptions(mContext)) {
-            if (!info.isEmbedded()) {
-                subList.add(info);
-            }
-        }
-        return subList;
+        List<SubscriptionInfo> removableSubscriptions =
+                SubscriptionUtil.getAvailableSubscriptions(mContext);
+        return ImmutableList.copyOf(
+                removableSubscriptions.stream()
+                        // ToDo: This condition is for psim only. If device supports removable
+                        //  esim, it needs an new condition.
+                        .filter(sub -> !sub.isEmbedded())
+                        .collect(Collectors.toList()));
     }
 
     private void startChooseSimActivity(boolean psimInserted) {
         Intent intent = ChooseSimActivity.getIntent(mContext);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra(ChooseSimActivity.KEY_HAS_PSIM, psimInserted);
-        mContext.startActivity(intent);
+        mContext.startActivityAsUser(intent, UserHandle.SYSTEM);
     }
 
     private void startSwitchSlotConfirmDialogActivity(SubscriptionInfo subscriptionInfo) {
         Intent intent = new Intent(mContext, SwitchToEsimConfirmDialogActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra(SwitchToEsimConfirmDialogActivity.KEY_SUB_TO_ENABLE, subscriptionInfo);
-        mContext.startActivity(intent);
+        mContext.startActivityAsUser(intent, UserHandle.SYSTEM);
     }
 
     private void startDsdsDialogActivity() {
         Intent intent = new Intent(mContext, DsdsDialogActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        mContext.startActivity(intent);
+        mContext.startActivityAsUser(intent, UserHandle.SYSTEM);
     }
 
     private void startSimConfirmDialogActivity(int subId) {
@@ -368,7 +373,7 @@ public class SimSlotChangeHandler {
         Log.d(TAG, "Start ToggleSubscriptionDialogActivity with " + subId + " under DSDS+Mep.");
         Intent intent = ToggleSubscriptionDialogActivity.getIntent(mContext, subId, true);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        mContext.startActivity(intent);
+        mContext.startActivityAsUser(intent, UserHandle.SYSTEM);
     }
 
     private boolean isMultipleEnabledProfilesSupported() {

@@ -57,10 +57,6 @@ public class DisableSmartForwardingTask implements Runnable {
     }
 
     private int getSubId(int slotIndex) {
-        int[] subId = SubscriptionManager.getSubId(slotIndex);
-        if (subId != null && subId.length > 0) {
-            return subId[0];
-        }
-        return SubscriptionManager.INVALID_SUBSCRIPTION_ID;
+        return SubscriptionManager.getSubscriptionId(slotIndex);
     }
 }

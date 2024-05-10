@@ -23,6 +23,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -34,6 +35,7 @@ import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -46,7 +48,6 @@ import com.android.settings.R;
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 import com.android.settings.testutils.shadow.ShadowInputMethodManagerWithMethodList;
 import com.android.settings.testutils.shadow.ShadowSecureSettings;
-import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.inputmethod.InputMethodPreference;
 import com.android.settingslib.inputmethod.InputMethodSettingValuesWrapper;
 
@@ -66,13 +67,14 @@ import java.util.List;
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
         ShadowSecureSettings.class,
-        ShadowInputMethodManagerWithMethodList.class,
-        ShadowUserManager.class
+        ShadowInputMethodManagerWithMethodList.class
 })
 public class AvailableVirtualKeyboardFragmentTest {
 
     @Mock
     private InputMethodManager mInputMethodManager;
+    @Mock
+    private UserManager mUserManager;
     @Mock
     private InputMethodSettingValuesWrapper mValuesWrapper;
     @Mock
@@ -90,6 +92,27 @@ public class AvailableVirtualKeyboardFragmentTest {
         mContext = spy(RuntimeEnvironment.application);
         initFragment();
         initMock();
+    }
+
+    @Test
+    public void onAttachPersonalProfile_noProfileParent() {
+        doReturn(null).when(mUserManager).getProfileParent(any(UserHandle.class));
+
+        mFragment.onAttach(mContext);
+
+        assertThat(mFragment.mUserAwareContext).isEqualTo(mContext);
+    }
+
+    @Test
+    public void onAttachPersonalProfile_hasProfileParent() {
+        final UserHandle profileParent = new UserHandle(0);
+        final Context mockContext = mock(Context.class);
+        doReturn(profileParent).when(mUserManager).getProfileParent(any(UserHandle.class));
+        doReturn(mockContext).when(mContext).createContextAsUser(any(UserHandle.class), anyInt());
+
+        mFragment.onAttach(mContext);
+
+        assertThat(mFragment.mUserAwareContext).isEqualTo(mockContext);
     }
 
     @Test
@@ -136,7 +159,7 @@ public class AvailableVirtualKeyboardFragmentTest {
         mFragment.updateInputMethodPreferenceViews();
 
         verify(mValuesWrapper).getInputMethodList();
-        verify(mInputMethodManager).getEnabledInputMethodListAsUser(anyInt());
+        verify(mInputMethodManager).getEnabledInputMethodListAsUser(any(UserHandle.class));
     }
 
     @Test
@@ -175,7 +198,7 @@ public class AvailableVirtualKeyboardFragmentTest {
         when(mFragment.getPreferenceScreen()).thenReturn(mPreferenceScreen);
         when(mPreferenceManager.getContext()).thenReturn(mContext);
         when(mContext.getSystemService(InputMethodManager.class)).thenReturn(mInputMethodManager);
-        doReturn(mContext).when(mContext).createContextAsUser(any(UserHandle.class), anyInt());
+        when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
     }
 
     private List<InputMethodInfo> createFakeInputMethodInfoList(final String name, int num) {

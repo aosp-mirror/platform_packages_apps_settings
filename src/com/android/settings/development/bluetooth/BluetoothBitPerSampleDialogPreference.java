@@ -61,12 +61,12 @@ public class BluetoothBitPerSampleDialogPreference extends BaseBluetoothDialogPr
         mRadioButtonIds.add(R.id.bluetooth_audio_bit_per_sample_24);
         mRadioButtonIds.add(R.id.bluetooth_audio_bit_per_sample_32);
         String[] stringArray = context.getResources().getStringArray(
-                R.array.bluetooth_a2dp_codec_bits_per_sample_titles);
+                com.android.settingslib.R.array.bluetooth_a2dp_codec_bits_per_sample_titles);
         for (int i = 0; i < stringArray.length; i++) {
             mRadioButtonStrings.add(stringArray[i]);
         }
         stringArray = context.getResources().getStringArray(
-                R.array.bluetooth_a2dp_codec_bits_per_sample_summaries);
+                com.android.settingslib.R.array.bluetooth_a2dp_codec_bits_per_sample_summaries);
         for (int i = 0; i < stringArray.length; i++) {
             mSummaryStrings.add(stringArray[i]);
         }

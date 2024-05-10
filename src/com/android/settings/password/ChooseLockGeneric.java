@@ -30,9 +30,12 @@ import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROF
 
 import static com.android.settings.password.ChooseLockPassword.ChooseLockPasswordFragment.RESULT_FINISHED;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_CALLER_APP_NAME;
+import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_CHOOSE_LOCK_SCREEN_DESCRIPTION;
+import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_CHOOSE_LOCK_SCREEN_TITLE;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_DEVICE_PASSWORD_REQUIREMENT_ONLY;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_IS_CALLING_APP_ADMIN;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_REQUESTED_MIN_COMPLEXITY;
+import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_WRITE_REPAIR_MODE_PW;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -54,9 +57,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.accessibility.AccessibilityManager;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
@@ -67,14 +70,15 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockscreenCredential;
-import com.android.settings.EncryptionInterstitial;
 import com.android.settings.EventLogTags;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.SetupWizardUtils;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollActivity;
 import com.android.settings.biometrics.BiometricEnrollBase;
+import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.safetycenter.LockScreenSafetySource;
@@ -84,6 +88,10 @@ import com.android.settingslib.widget.FooterPreference;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
+/**
+ * Activity class that provides a generic implementation for displaying options to choose a lock
+ * type, either for setting up a new lock or updating an existing lock.
+ */
 public class ChooseLockGeneric extends SettingsActivity {
     public static final String CONFIRM_CREDENTIALS = "confirm_credentials";
 
@@ -143,8 +151,6 @@ public class ChooseLockGeneric extends SettingsActivity {
         @VisibleForTesting
         static final int CONFIRM_EXISTING_REQUEST = 100;
         @VisibleForTesting
-        static final int ENABLE_ENCRYPTION_REQUEST = 101;
-        @VisibleForTesting
         static final int CHOOSE_LOCK_REQUEST = 102;
         @VisibleForTesting
         static final int CHOOSE_LOCK_BEFORE_BIOMETRIC_REQUEST = 103;
@@ -156,7 +162,6 @@ public class ChooseLockGeneric extends SettingsActivity {
         private boolean mRequestGatekeeperPasswordHandle = false;
         private boolean mPasswordConfirmed = false;
         private boolean mWaitingForConfirmation = false;
-        private boolean mForChangeCredRequiredForBoot = false;
         private LockscreenCredential mUserPassword;
         private FingerprintManager mFingerprintManager;
         private FaceManager mFaceManager;
@@ -195,6 +200,8 @@ public class ChooseLockGeneric extends SettingsActivity {
         protected boolean mForBiometrics = false;
 
         private boolean mOnlyEnforceDevicePasswordRequirement = false;
+        private int mExtraLockScreenTitleResId;
+        private int mExtraLockScreenDescriptionResId;
 
         @Override
         public int getMetricsCategory() {
@@ -243,6 +250,10 @@ public class ChooseLockGeneric extends SettingsActivity {
             mForBiometrics = intent.getBooleanExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_FOR_BIOMETRICS, false);
 
+            mExtraLockScreenTitleResId = intent.getIntExtra(EXTRA_KEY_CHOOSE_LOCK_SCREEN_TITLE, -1);
+            mExtraLockScreenDescriptionResId =
+                    intent.getIntExtra(EXTRA_KEY_CHOOSE_LOCK_SCREEN_DESCRIPTION, -1);
+
             mRequestedMinComplexity = intent.getIntExtra(
                     EXTRA_KEY_REQUESTED_MIN_COMPLEXITY, PASSWORD_COMPLEXITY_NONE);
             mOnlyEnforceDevicePasswordRequirement = intent.getBooleanExtra(
@@ -250,8 +261,6 @@ public class ChooseLockGeneric extends SettingsActivity {
 
             mIsCallingAppAdmin = intent
                     .getBooleanExtra(EXTRA_KEY_IS_CALLING_APP_ADMIN, /* defValue= */ false);
-            mForChangeCredRequiredForBoot = arguments != null && arguments.getBoolean(
-                    ChooseLockSettingsHelper.EXTRA_KEY_FOR_CHANGE_CRED_REQUIRED_FOR_BOOT);
             mUserManager = UserManager.get(activity);
 
             if (arguments != null) {
@@ -299,10 +308,6 @@ public class ChooseLockGeneric extends SettingsActivity {
 
             if (mPasswordConfirmed) {
                 updatePreferencesOrFinish(savedInstanceState != null);
-                if (mForChangeCredRequiredForBoot) {
-                    maybeEnableEncryption(mLockPatternUtils.getKeyguardStoredPasswordQuality(
-                            mUserId), false);
-                }
             } else if (!mWaitingForConfirmation) {
                 final ChooseLockSettingsHelper.Builder builder =
                         new ChooseLockSettingsHelper.Builder(activity, this);
@@ -350,13 +355,19 @@ public class ChooseLockGeneric extends SettingsActivity {
                 if (updateExistingLock) {
                     getActivity().setTitle(mDpm.getResources().getString(
                             LOCK_SETTINGS_UPDATE_PROFILE_LOCK_TITLE,
-                            () -> getString(
-                                    R.string.lock_settings_picker_update_profile_lock_title)));
+                            () -> getString(mExtraLockScreenTitleResId != -1
+                                    ? mExtraLockScreenTitleResId
+                                    : R.string.lock_settings_picker_update_profile_lock_title)));
                 } else {
                     getActivity().setTitle(mDpm.getResources().getString(
                             LOCK_SETTINGS_NEW_PROFILE_LOCK_TITLE,
-                            () -> getString(R.string.lock_settings_picker_new_profile_lock_title)));
+                            () -> getString(mExtraLockScreenTitleResId != -1
+                                    ? mExtraLockScreenTitleResId
+                                    : R.string.lock_settings_picker_new_profile_lock_title)));
                 }
+            } else if (mExtraLockScreenTitleResId != -1) {
+                // Show customized screen lock title if it is passed as an extra in the intent.
+                getActivity().setTitle(mExtraLockScreenTitleResId);
             } else {
                 updateExistingLock = mLockPatternUtils.isSecure(mUserId);
                 if (updateExistingLock) {
@@ -384,7 +395,16 @@ public class ChooseLockGeneric extends SettingsActivity {
             setHeaderView(R.layout.choose_lock_generic_biometric_header);
             TextView textView = getHeaderView().findViewById(R.id.biometric_header_description);
 
-            if (mForFingerprint) {
+            if (mIsManagedProfile) {
+                textView.setText(mDpm.getResources().getString(
+                        WORK_PROFILE_SCREEN_LOCK_SETUP_MESSAGE,
+                        () -> getString(mExtraLockScreenDescriptionResId != -1
+                                ? mExtraLockScreenDescriptionResId
+                                : R.string.lock_settings_picker_profile_message)));
+            } else if (mExtraLockScreenDescriptionResId != -1) {
+                // Show customized description in screen lock if passed as an extra in the intent.
+                textView.setText(mExtraLockScreenDescriptionResId);
+            } else if (mForFingerprint) {
                 if (mIsSetNewPassword) {
                     textView.setText(R.string.fingerprint_unlock_title);
                 } else {
@@ -403,13 +423,7 @@ public class ChooseLockGeneric extends SettingsActivity {
                     textView.setText(R.string.lock_settings_picker_biometric_message);
                 }
             } else {
-                if (mIsManagedProfile) {
-                    textView.setText(mDpm.getResources().getString(
-                            WORK_PROFILE_SCREEN_LOCK_SETUP_MESSAGE,
-                            () -> getString(R.string.lock_settings_picker_profile_message)));
-                } else {
-                    textView.setText("");
-                }
+                textView.setText("");
             }
         }
 
@@ -428,8 +442,13 @@ public class ChooseLockGeneric extends SettingsActivity {
                 Intent chooseLockGenericIntent = new Intent(getActivity(),
                     getInternalActivityClass());
                 chooseLockGenericIntent.setAction(getIntent().getAction());
+                if (WizardManagerHelper.isAnySetupWizard(getIntent())) {
+                    SetupWizardUtils.copySetupExtras(getIntent(), chooseLockGenericIntent);
+                }
                 // Forward the target user id to  ChooseLockGeneric.
                 chooseLockGenericIntent.putExtra(Intent.EXTRA_USER_ID, mUserId);
+                chooseLockGenericIntent.putExtra(
+                        EXTRA_KEY_CHOOSE_LOCK_SCREEN_TITLE, mExtraLockScreenTitleResId);
                 chooseLockGenericIntent.putExtra(CONFIRM_CREDENTIALS, !mPasswordConfirmed);
                 chooseLockGenericIntent.putExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY,
                         mRequestedMinComplexity);
@@ -447,58 +466,6 @@ public class ChooseLockGeneric extends SettingsActivity {
             }
         }
 
-        /**
-         * If the device has encryption already enabled, then ask the user if they
-         * also want to encrypt the phone with this password.
-         *
-         * @param quality
-         * @param disabled
-         */
-        // TODO: why does this take disabled, its always called with a quality higher than
-        //  what makes sense with disabled == true
-        private void maybeEnableEncryption(int quality, boolean disabled) {
-            DevicePolicyManager dpm = (DevicePolicyManager) getSystemService(DEVICE_POLICY_SERVICE);
-            if (UserManager.get(getActivity()).isAdminUser()
-                    && mUserId == UserHandle.myUserId()
-                    && LockPatternUtils.isDeviceEncryptionEnabled()
-                    && !LockPatternUtils.isFileEncryptionEnabled()
-                    && !dpm.getDoNotAskCredentialsOnBoot()) {
-                // Get the intent that the encryption interstitial should start for creating
-                // the new unlock method.
-                Intent unlockMethodIntent = getIntentForUnlockMethod(quality);
-                unlockMethodIntent.putExtra(
-                        ChooseLockSettingsHelper.EXTRA_KEY_FOR_CHANGE_CRED_REQUIRED_FOR_BOOT,
-                        mForChangeCredRequiredForBoot);
-                final Context context = getActivity();
-                // If accessibility is enabled and the user hasn't seen this dialog before, set the
-                // default state to agree with that which is compatible with accessibility
-                // (password not required).
-                final boolean accEn = AccessibilityManager.getInstance(context).isEnabled();
-                final boolean required = mLockPatternUtils.isCredentialRequiredToDecrypt(!accEn);
-                Intent intent = getEncryptionInterstitialIntent(context, quality, required,
-                        unlockMethodIntent);
-                intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT,
-                        mForFingerprint);
-                intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FACE, mForFace);
-                intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_BIOMETRICS, mForBiometrics);
-                // If the caller requested Gatekeeper Password to be returned, we assume it came
-                // from biometric enrollment. This should be cleaned up, since requesting
-                // Gatekeeper Password should not imply it came from biometric setup/settings.
-                startActivityForResult(
-                        intent,
-                        mIsSetNewPassword && mRequestGatekeeperPasswordHandle
-                                ? CHOOSE_LOCK_BEFORE_BIOMETRIC_REQUEST
-                                : ENABLE_ENCRYPTION_REQUEST);
-            } else {
-                if (mForChangeCredRequiredForBoot) {
-                    // Welp, couldn't change it. Oh well.
-                    finish();
-                    return;
-                }
-                updateUnlockMethodAndFinish(quality, disabled, false /* chooseLockSkipped */);
-            }
-        }
-
         @Override
         public void onActivityResult(int requestCode, int resultCode, Intent data) {
             super.onActivityResult(requestCode, resultCode, data);
@@ -509,17 +476,8 @@ public class ChooseLockGeneric extends SettingsActivity {
                     ? data.getParcelableExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD)
                     : null;
                 updatePreferencesOrFinish(false /* isRecreatingActivity */);
-                if (mForChangeCredRequiredForBoot) {
-                    if (mUserPassword != null && !mUserPassword.isNone()) {
-                        maybeEnableEncryption(
-                                mLockPatternUtils.getKeyguardStoredPasswordQuality(mUserId), false);
-                    } else {
-                        finish();
-                    }
-                }
-            } else if (requestCode == CHOOSE_LOCK_REQUEST
-                    || requestCode == ENABLE_ENCRYPTION_REQUEST) {
-                if (resultCode != RESULT_CANCELED || mForChangeCredRequiredForBoot) {
+            } else if (requestCode == CHOOSE_LOCK_REQUEST) {
+                if (resultCode != RESULT_CANCELED) {
                     getActivity().setResult(resultCode, data);
                     finish();
                 } else {
@@ -559,9 +517,6 @@ public class ChooseLockGeneric extends SettingsActivity {
                 getActivity().setResult(Activity.RESULT_CANCELED);
                 finish();
             }
-            if (requestCode == Activity.RESULT_CANCELED && mForChangeCredRequiredForBoot) {
-                finish();
-            }
         }
 
         protected Intent getBiometricEnrollIntent(Context context) {
@@ -587,11 +542,11 @@ public class ChooseLockGeneric extends SettingsActivity {
         void updatePreferencesOrFinish(boolean isRecreatingActivity) {
             Intent intent = getActivity().getIntent();
             int quality = -1;
-            if (StorageManager.isFileEncryptedNativeOrEmulated()) {
+            if (StorageManager.isFileEncrypted()) {
                 quality = intent.getIntExtra(LockPatternUtils.PASSWORD_TYPE_KEY, -1);
             } else {
-                // For non-file encrypted devices we need to show encryption interstitial, so always
-                // show the lock type picker and ignore PASSWORD_TYPE_KEY.
+                // For unencrypted devices, always show the lock type picker and ignore
+                // PASSWORD_TYPE_KEY.
                 Log.i(TAG, "Ignoring PASSWORD_TYPE_KEY because device is not file encrypted");
             }
             if (quality == -1) {
@@ -699,10 +654,11 @@ public class ChooseLockGeneric extends SettingsActivity {
                         R.string.face_unlock_set_unlock_password);
             } else if (mForBiometrics) {
                 setPreferenceTitle(ScreenLockType.PATTERN,
-                        R.string.biometrics_unlock_set_unlock_pattern);
-                setPreferenceTitle(ScreenLockType.PIN, R.string.biometrics_unlock_set_unlock_pin);
+                        getBiometricsPreferenceTitle(ScreenLockType.PATTERN));
+                setPreferenceTitle(ScreenLockType.PIN,
+                        getBiometricsPreferenceTitle(ScreenLockType.PIN));
                 setPreferenceTitle(ScreenLockType.PASSWORD,
-                        R.string.biometrics_unlock_set_unlock_password);
+                        getBiometricsPreferenceTitle(ScreenLockType.PASSWORD));
             }
 
             if (mManagedPasswordProvider.isSettingManagedPasswordSupported()) {
@@ -720,6 +676,24 @@ public class ChooseLockGeneric extends SettingsActivity {
             }
             if (!(mForBiometrics && mIsSetNewPassword)) {
                 removePreference(KEY_SKIP_BIOMETRICS);
+            }
+        }
+
+        @VisibleForTesting
+        String getBiometricsPreferenceTitle(@NonNull ScreenLockType secureType) {
+            final boolean hasFingerprint = Utils.hasFingerprintHardware(getContext());
+            final boolean hasFace = Utils.hasFaceHardware(getContext());
+            final boolean isSuw = WizardManagerHelper.isAnySetupWizard(getIntent());
+            final boolean isFaceSupported =
+                    hasFace && (!isSuw || BiometricUtils.isFaceSupportedInSuw(getContext()));
+
+            // Assume the flow is "Screen Lock" + "Face" + "Fingerprint"
+            if (mController != null) {
+                return BiometricUtils.getCombinedScreenLockOptions(getContext(),
+                        mController.getTitle(secureType), hasFingerprint, isFaceSupported);
+            } else {
+                Log.e(TAG, "ChooseLockGenericController is null!");
+                return getResources().getString(R.string.error_title);
             }
         }
 
@@ -821,12 +795,6 @@ public class ChooseLockGeneric extends SettingsActivity {
             return builder.build();
         }
 
-        protected Intent getEncryptionInterstitialIntent(Context context, int quality,
-                boolean required, Intent unlockMethodIntent) {
-            return EncryptionInterstitial.createStartIntent(context, quality, required,
-                    unlockMethodIntent);
-        }
-
         /**
          * Invokes an activity to change the user's pattern, password or PIN based on given quality
          * and minimum quality specified by DevicePolicyManager. If quality is
@@ -850,6 +818,9 @@ public class ChooseLockGeneric extends SettingsActivity {
             if (intent != null) {
                 if (getIntent().getBooleanExtra(EXTRA_SHOW_OPTIONS_BUTTON, false)) {
                     intent.putExtra(EXTRA_SHOW_OPTIONS_BUTTON, chooseLockSkipped);
+                }
+                if (getIntent().getBooleanExtra(EXTRA_KEY_REQUEST_WRITE_REPAIR_MODE_PW, false)) {
+                    intent.putExtra(EXTRA_KEY_REQUEST_WRITE_REPAIR_MODE_PW, true);
                 }
                 intent.putExtra(EXTRA_CHOOSE_LOCK_GENERIC_EXTRAS, getIntent().getExtras());
                 // If the caller requested Gatekeeper Password Handle to be returned, we assume it
@@ -890,6 +861,19 @@ public class ChooseLockGeneric extends SettingsActivity {
                 intent = getLockPatternIntent();
             }
             return intent;
+        }
+
+        @Override
+        public void onStop() {
+            super.onStop();
+            // hasCredential checks to see if user chooses a password for screen lock. If the
+            // screen lock is None or Swipe, we do not want to call getActivity().finish().
+            // Otherwise, bugs would be caused. (e.g. b/278488549, b/278530059)
+            final boolean hasCredential = mLockPatternUtils.isSecure(mUserId);
+            if (!getActivity().isChangingConfigurations()
+                    && !mWaitingForConfirmation && hasCredential) {
+                getActivity().finish();
+            }
         }
 
         @Override
@@ -992,16 +976,14 @@ public class ChooseLockGeneric extends SettingsActivity {
                 switch (lock) {
                     case NONE:
                     case SWIPE:
-                        updateUnlockMethodAndFinish(
-                                lock.defaultQuality,
-                                lock == ScreenLockType.NONE,
-                                false /* chooseLockSkipped */);
-                        return true;
                     case PATTERN:
                     case PIN:
                     case PASSWORD:
                     case MANAGED:
-                        maybeEnableEncryption(lock.defaultQuality, false);
+                        updateUnlockMethodAndFinish(
+                                lock.defaultQuality,
+                                lock == ScreenLockType.NONE,
+                                false /* chooseLockSkipped */);
                         return true;
                 }
             }

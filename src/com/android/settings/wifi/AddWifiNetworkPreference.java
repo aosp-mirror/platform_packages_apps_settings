@@ -19,40 +19,41 @@ package com.android.settings.wifi;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.os.UserManager;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.ImageButton;
 
 import androidx.annotation.DrawableRes;
-import androidx.preference.Preference;
+import androidx.annotation.Nullable;
 import androidx.preference.PreferenceViewHolder;
 
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.wifi.dpp.WifiDppUtils;
-import com.android.settingslib.wifi.WifiEnterpriseRestrictionUtils;
+import com.android.settingslib.RestrictedPreference;
 
 /**
  * The Preference for users to add Wi-Fi networks in WifiSettings
  */
-public class AddWifiNetworkPreference extends Preference {
+public class AddWifiNetworkPreference extends RestrictedPreference {
 
     private static final String TAG = "AddWifiNetworkPreference";
 
     private final Drawable mScanIconDrawable;
-    @VisibleForTesting
-    boolean mIsAddWifiConfigAllow;
 
     public AddWifiNetworkPreference(Context context) {
-        super(context);
+        this(context, null);
+    }
 
+    public AddWifiNetworkPreference(Context context, @Nullable AttributeSet attrs) {
+        super(context, attrs);
         setLayoutResource(com.android.settingslib.R.layout.preference_access_point);
         setWidgetLayoutResource(R.layout.wifi_button_preference_widget);
         setIcon(R.drawable.ic_add_24dp);
         setTitle(R.string.wifi_add_network);
 
         mScanIconDrawable = getDrawable(R.drawable.ic_scan_24dp);
-        mIsAddWifiConfigAllow = WifiEnterpriseRestrictionUtils.isAddWifiConfigAllowed(context);
-        updatePreferenceForRestriction();
+        checkRestrictionAndSetDisabled(UserManager.DISALLOW_ADD_WIFI_CONFIG);
     }
 
     @Override
@@ -78,13 +79,5 @@ public class AddWifiNetworkPreference extends Preference {
             Log.e(TAG, "Resource does not exist: " + iconResId);
         }
         return buttonIcon;
-    }
-
-    @VisibleForTesting
-    void updatePreferenceForRestriction() {
-        if (!mIsAddWifiConfigAllow) {
-            setEnabled(false);
-            setSummary(R.string.not_allowed_by_ent);
-        }
     }
 }

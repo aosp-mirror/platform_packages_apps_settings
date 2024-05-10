@@ -33,7 +33,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.preference.PreferenceCategory;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
@@ -49,22 +49,33 @@ import java.util.List;
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class ToggleReduceBrightColorsPreferenceFragment extends ToggleFeaturePreferenceFragment {
 
-    private static final String REDUCE_BRIGHT_COLORS_ACTIVATED_KEY =
-            Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED;
+    private static final String TAG = "ToggleReduceBrightColorsPreferenceFragment";
     private static final String KEY_INTENSITY = "rbc_intensity";
     private static final String KEY_PERSIST = "rbc_persist";
+    private static final String REDUCE_BRIGHT_COLORS_ACTIVATED_KEY =
+            Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED;
 
     private ReduceBrightColorsIntensityPreferenceController mRbcIntensityPreferenceController;
     private ReduceBrightColorsPersistencePreferenceController mRbcPersistencePreferenceController;
     private ColorDisplayManager mColorDisplayManager;
 
     @Override
+    protected void registerKeysToObserverCallback(
+            AccessibilitySettingsContentObserver contentObserver) {
+        super.registerKeysToObserverCallback(contentObserver);
+
+        final List<String> enableServiceFeatureKeys = new ArrayList<>(/* initialCapacity= */ 1);
+        enableServiceFeatureKeys.add(REDUCE_BRIGHT_COLORS_ACTIVATED_KEY);
+        contentObserver.registerKeysToObserverCallback(enableServiceFeatureKeys,
+                key -> updateSwitchBarToggleSwitch());
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-
         mImageUri = new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
                 .authority(getPrefContext().getPackageName())
-                .appendPath(String.valueOf(R.raw.extra_dim_banner))
+                .appendPath(String.valueOf(R.raw.a11y_extra_dim_banner))
                 .build();
         mComponentName = REDUCE_BRIGHT_COLORS_COMPONENT_NAME;
         mPackageName = getText(R.string.reduce_bright_colors_preference_title);
@@ -85,24 +96,13 @@ public class ToggleReduceBrightColorsPreferenceFragment extends ToggleFeaturePre
         return view;
     }
 
-    @Override
-    protected void registerKeysToObserverCallback(
-            AccessibilitySettingsContentObserver contentObserver) {
-        super.registerKeysToObserverCallback(contentObserver);
-
-        final List<String> enableServiceFeatureKeys = new ArrayList<>(/* initialCapacity= */ 1);
-        enableServiceFeatureKeys.add(REDUCE_BRIGHT_COLORS_ACTIVATED_KEY);
-        contentObserver.registerKeysToObserverCallback(enableServiceFeatureKeys,
-                key -> updateSwitchBarToggleSwitch());
-    }
-
     private void updateGeneralCategoryOrder() {
         final PreferenceCategory generalCategory = findPreference(KEY_GENERAL_CATEGORY);
         final SeekBarPreference intensity = findPreference(KEY_INTENSITY);
         getPreferenceScreen().removePreference(intensity);
         intensity.setOrder(mShortcutPreference.getOrder() - 2);
         generalCategory.addPreference(intensity);
-        final SwitchPreference persist = findPreference(KEY_PERSIST);
+        final TwoStatePreference persist = findPreference(KEY_PERSIST);
         getPreferenceScreen().removePreference(persist);
         persist.setOrder(mShortcutPreference.getOrder() - 1);
         generalCategory.addPreference(persist);
@@ -115,19 +115,9 @@ public class ToggleReduceBrightColorsPreferenceFragment extends ToggleFeaturePre
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-    }
-
-    @Override
     public void onResume() {
         super.onResume();
         updateSwitchBarToggleSwitch();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
     }
 
     @Override
@@ -137,13 +127,18 @@ public class ToggleReduceBrightColorsPreferenceFragment extends ToggleFeaturePre
 
     @Override
     public int getHelpResource() {
-        // TODO(170973645): Link to help support page
+        // TODO(b/170973645): Link to help support page
         return 0;
     }
 
     @Override
     protected int getPreferenceScreenResId() {
         return R.xml.reduce_bright_colors_settings;
+    }
+
+    @Override
+    protected String getLogTag() {
+        return TAG;
     }
 
     @Override
@@ -186,8 +181,8 @@ public class ToggleReduceBrightColorsPreferenceFragment extends ToggleFeaturePre
     @Override
     CharSequence getTileTooltipContent(@QuickSettingsTooltipType int type) {
         return getText(type == QuickSettingsTooltipType.GUIDE_TO_EDIT
-                 ? R.string.accessibility_reduce_bright_colors_qs_tooltip_content
-                 : R.string.accessibility_reduce_bright_colors_auto_added_qs_tooltip_content);
+                ? R.string.accessibility_reduce_bright_colors_qs_tooltip_content
+                : R.string.accessibility_reduce_bright_colors_auto_added_qs_tooltip_content);
     }
 
     @Override

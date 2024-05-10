@@ -17,13 +17,11 @@
 package com.android.settings.development.featureflags;
 
 import android.content.Context;
-import android.provider.Settings;
-import android.text.TextUtils;
 import android.util.FeatureFlagUtils;
 
-import androidx.preference.SwitchPreference;
+import androidx.preference.SwitchPreferenceCompat;
 
-public class FeatureFlagPreference extends SwitchPreference {
+public class FeatureFlagPreference extends SwitchPreferenceCompat {
 
     private final String mKey;
     private final boolean mIsPersistent;
@@ -50,14 +48,6 @@ public class FeatureFlagPreference extends SwitchPreference {
             FeatureFlagPersistent.setEnabled(getContext(), mKey, isChecked);
         } else {
             FeatureFlagUtils.setEnabled(getContext(), mKey, isChecked);
-        }
-
-        // A temporary logic for settings_hide_second_layer_page_navigate_up_button_in_two_pane
-        // Remove it before Android T release.
-        if (TextUtils.equals(mKey,
-                FeatureFlagUtils.SETTINGS_HIDE_SECOND_LAYER_PAGE_NAVIGATE_UP_BUTTON_IN_TWO_PANE)) {
-            Settings.Global.putString(getContext().getContentResolver(),
-                    mKey, String.valueOf(isChecked));
         }
     }
 }

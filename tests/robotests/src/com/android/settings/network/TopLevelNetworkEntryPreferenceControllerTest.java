@@ -25,9 +25,11 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.os.UserManager;
 import android.text.BidiFormatter;
+import android.util.FeatureFlagUtils;
 
 import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal;
+import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.testutils.shadow.ShadowUtils;
 
 import org.junit.After;
@@ -38,13 +40,16 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowUserManager;
+import org.robolectric.shadow.api.Shadow;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowRestrictedLockUtilsInternal.class, ShadowUtils.class})
+@Config(shadows = {
+        ShadowRestrictedLockUtilsInternal.class,
+        ShadowUtils.class,
+        ShadowUserManager.class,
+})
 public class TopLevelNetworkEntryPreferenceControllerTest {
 
     @Mock
@@ -57,7 +62,7 @@ public class TopLevelNetworkEntryPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        final ShadowUserManager um = Shadows.shadowOf(
+        final ShadowUserManager um = Shadow.extract(
                 RuntimeEnvironment.application.getSystemService(UserManager.class));
         um.setIsAdminUser(true);
 
@@ -73,8 +78,9 @@ public class TopLevelNetworkEntryPreferenceControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_demoUser_unsupported() {
+    public void getAvailabilityStatus_demoUser_nonLargeScreen_unsupported() {
         ShadowUtils.setIsDemoUser(true);
+        FeatureFlagUtils.setEnabled(mContext, "settings_support_large_screen", false);
         assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 

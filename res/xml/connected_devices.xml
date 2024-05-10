@@ -27,6 +27,19 @@
         settings:allowDividerBelow="true"/>
 
     <PreferenceCategory
+        android:key="audio_sharing_device_list"
+        android:title="@string/audio_sharing_title"
+        settings:controller="com.android.settings.connecteddevice.audiosharing.AudioSharingDevicePreferenceController">
+        <Preference
+            android:fragment="com.android.settings.connecteddevice.audiosharing.AudioSharingDashboardFragment"
+            android:key="connected_device_audio_sharing_settings"
+            android:title="@string/audio_sharing_title"
+            android:icon="@drawable/ic_bt_audio_sharing"
+            android:order="10"
+            settings:controller="com.android.settings.connecteddevice.audiosharing.AudioSharingPreferenceController"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
         android:key="available_device_list"
         android:title="@string/connected_device_media_device_title"
         settings:controller="com.android.settings.connecteddevice.AvailableMediaDeviceGroupController"/>
@@ -59,6 +72,22 @@
             android:order="10"
             settings:searchable="false"
             android:fragment="com.android.settings.connecteddevice.PreviouslyConnectedDeviceDashboardFragment"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="fast_pair_devices"
+        android:title="@string/connected_device_previously_associated_fast_pair_device_title"
+        settings:controller=
+            "com.android.settings.connecteddevice.fastpair.FastPairDevicePreferenceController">
+
+        <Preference
+            android:key="fast_pair_devices_see_all"
+            android:title="@string/connected_device_fast_pair_device_see_all"
+            android:icon="@drawable/ic_chevron_right_24dp"
+            android:order="10"
+            settings:searchable="false"
+            android:fragment=
+                "com.android.settings.connecteddevice.fastpair.FastPairDeviceDashboardFragment"/>
     </PreferenceCategory>
 
     <Preference

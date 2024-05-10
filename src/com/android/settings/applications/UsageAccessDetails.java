@@ -30,13 +30,15 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.text.TextUtils;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.Preference.OnPreferenceClickListener;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.applications.AppStateUsageBridge.UsageState;
@@ -46,6 +48,7 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 public class UsageAccessDetails extends AppInfoWithHeader implements OnPreferenceChangeListener,
         OnPreferenceClickListener {
 
+    private static final String TAG = UsageAccessDetails.class.getSimpleName();
     private static final String KEY_APP_OPS_PREFERENCE_SCREEN = "app_ops_preference_screen";
     private static final String KEY_APP_OPS_SETTINGS_SWITCH = "app_ops_settings_switch";
     private static final String KEY_APP_OPS_SETTINGS_DESC = "app_ops_settings_description";
@@ -54,7 +57,7 @@ public class UsageAccessDetails extends AppInfoWithHeader implements OnPreferenc
     // TODO: Break out this functionality into its own class.
     private AppStateUsageBridge mUsageBridge;
     private AppOpsManager mAppOpsManager;
-    private SwitchPreference mSwitchPref;
+    private TwoStatePreference mSwitchPref;
     private Preference mUsageDesc;
     private Intent mSettingsIntent;
     private UsageState mUsageState;
@@ -65,12 +68,17 @@ public class UsageAccessDetails extends AppInfoWithHeader implements OnPreferenc
         super.onCreate(savedInstanceState);
 
         Context context = getActivity();
+        if (TextUtils.equals(mPackageName, context.getPackageName())) {
+            Log.w(TAG, "Unsupported app package.");
+            finish();
+        }
+
         mUsageBridge = new AppStateUsageBridge(context, mState, null);
         mAppOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
         mDpm = context.getSystemService(DevicePolicyManager.class);
 
         addPreferencesFromResource(R.xml.app_ops_permissions_details);
-        mSwitchPref = (SwitchPreference) findPreference(KEY_APP_OPS_SETTINGS_SWITCH);
+        mSwitchPref = (TwoStatePreference) findPreference(KEY_APP_OPS_SETTINGS_SWITCH);
         mUsageDesc = findPreference(KEY_APP_OPS_SETTINGS_DESC);
 
         getPreferenceScreen().setTitle(R.string.usage_access);
@@ -140,7 +148,7 @@ public class UsageAccessDetails extends AppInfoWithHeader implements OnPreferenc
         int logCategory = newState ? SettingsEnums.APP_SPECIAL_PERMISSION_USAGE_VIEW_ALLOW
                 : SettingsEnums.APP_SPECIAL_PERMISSION_USAGE_VIEW_DENY;
         final MetricsFeatureProvider metricsFeatureProvider =
-                FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider();
+                FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
         metricsFeatureProvider.action(
                 metricsFeatureProvider.getAttribution(getActivity()),
                 logCategory,

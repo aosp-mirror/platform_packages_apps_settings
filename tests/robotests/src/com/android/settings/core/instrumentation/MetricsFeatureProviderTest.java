@@ -43,9 +43,9 @@ public class MetricsFeatureProviderTest {
     @Test
     public void getFactory_shouldReuseCachedInstance() {
         MetricsFeatureProvider feature1 =
-                FeatureFactory.getFactory(mContext).getMetricsFeatureProvider();
+                FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
         MetricsFeatureProvider feature2 =
-                FeatureFactory.getFactory(mContext).getMetricsFeatureProvider();
+                FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
 
         assertThat(feature1).isSameInstanceAs(feature2);
     }

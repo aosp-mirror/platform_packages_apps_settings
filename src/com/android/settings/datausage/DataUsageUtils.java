@@ -17,16 +17,17 @@ package com.android.settings.datausage;
 import static android.content.pm.PackageManager.FEATURE_ETHERNET;
 import static android.content.pm.PackageManager.FEATURE_USB_HOST;
 import static android.content.pm.PackageManager.FEATURE_WIFI;
-import static android.telephony.TelephonyManager.SIM_STATE_READY;
 
 import android.app.usage.NetworkStats.Bucket;
 import android.app.usage.NetworkStatsManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkTemplate;
 import android.os.RemoteException;
 import android.os.SystemProperties;
+import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -39,14 +40,14 @@ import com.android.settings.datausage.lib.DataUsageLib;
 import com.android.settings.network.ProxySubscriptionManager;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Utility methods for data usage classes.
  */
-public final class DataUsageUtils extends com.android.settingslib.net.DataUsageUtils {
+public final class DataUsageUtils {
     static final boolean TEST_RADIOS = false;
     static final String TEST_RADIOS_PROP = "test.radios";
-    private static final boolean LOGD = false;
     private static final String ETHERNET = "ethernet";
     private static final String TAG = "DataUsageUtils";
 
@@ -104,44 +105,6 @@ public final class DataUsageUtils extends com.android.settingslib.net.DataUsageU
     }
 
     /**
-     * Test if device has a mobile data radio with SIM in ready state.
-     */
-    public static boolean hasReadyMobileRadio(Context context) {
-        if (DataUsageUtils.TEST_RADIOS) {
-            return SystemProperties.get(DataUsageUtils.TEST_RADIOS_PROP).contains("mobile");
-        }
-        final List<SubscriptionInfo> subInfoList =
-                ProxySubscriptionManager.getInstance(context)
-                .getActiveSubscriptionsInfo();
-        // No activated Subscriptions
-        if (subInfoList == null) {
-            if (LOGD) {
-                Log.d(TAG, "hasReadyMobileRadio: subInfoList=null");
-            }
-            return false;
-        }
-        final TelephonyManager tele = context.getSystemService(TelephonyManager.class);
-        // require both supported network and ready SIM
-        boolean isReady = true;
-        for (SubscriptionInfo subInfo : subInfoList) {
-            isReady = isReady & tele.getSimState(subInfo.getSimSlotIndex()) == SIM_STATE_READY;
-            if (LOGD) {
-                Log.d(TAG, "hasReadyMobileRadio: subInfo=" + subInfo);
-            }
-        }
-
-        final boolean isDataCapable = tele.isDataCapable();
-        final boolean retVal = isDataCapable && isReady;
-        if (LOGD) {
-            Log.d(TAG, "hasReadyMobileRadio:"
-                    + " telephonManager.isDataCapable()="
-                    + isDataCapable
-                    + " isReady=" + isReady);
-        }
-        return retVal;
-    }
-
-    /**
      * Whether device has a Wi-Fi data radio.
      */
     public static boolean hasWifiRadio(Context context) {
@@ -193,4 +156,22 @@ public final class DataUsageUtils extends com.android.settingslib.net.DataUsageU
         }
     }
 
+    /**
+     * Returns a mobile NetworkTemplate if EXTRA_SUB_ID of the Intent is available and the subId
+     * is valid & hasMobileData. Otherwise, returns empty data.
+     */
+    public static Optional<NetworkTemplate> getMobileNetworkTemplateFromSubId(Context context,
+            Intent intent) {
+        if (intent == null || !intent.hasExtra(Settings.EXTRA_SUB_ID)) {
+            return Optional.empty();
+        }
+
+        int subId = intent.getIntExtra(Settings.EXTRA_SUB_ID,
+                SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+        if (SubscriptionManager.isValidSubscriptionId(subId) && hasMobileData(context)) {
+            return Optional.of(DataUsageLib.getMobileTemplate(context, subId));
+        }
+
+        return  Optional.empty();
+    }
 }

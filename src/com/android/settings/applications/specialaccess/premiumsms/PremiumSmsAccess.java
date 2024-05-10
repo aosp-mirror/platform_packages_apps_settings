@@ -126,7 +126,7 @@ public class PremiumSmsAccess extends EmptyTextSettings
         if (category != SmsManager.PREMIUM_SMS_CONSENT_UNKNOWN) {
             // TODO(117860032): Category is wrong. It should be defined in SettingsEnums.
             final MetricsFeatureProvider metricsFeatureProvider =
-                    FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider();
+                    FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
             metricsFeatureProvider.action(
                     metricsFeatureProvider.getAttribution(getActivity()),
                     category,

@@ -16,10 +16,14 @@
 
 package com.android.settings.display;
 
+import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.spy;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.res.Resources;
 import android.provider.Settings;
 
 import androidx.preference.Preference;
@@ -42,6 +46,8 @@ public class LockscreenClockPreferenceControllerTest {
     private ContentResolver mContentResolver;
     private LockscreenClockPreferenceController mController;
 
+    private Resources mResources;
+
     @Mock
     private Preference mPreference;
 
@@ -51,11 +57,17 @@ public class LockscreenClockPreferenceControllerTest {
         mContext = RuntimeEnvironment.application;
         mContentResolver = mContext.getContentResolver();
         mController = new LockscreenClockPreferenceController(mContext, TEST_KEY);
+        mResources = spy(mContext.getResources());
+        Context mClockContext = org.mockito.Mockito.mock(Context.class);
+        when(mClockContext.getResources()).thenReturn(mResources);
     }
 
     @Test
     public void isChecked_SettingIs1_returnTrue() {
         Settings.Secure.putInt(mContentResolver, SETTING_KEY, 1);
+
+        when(mResources.getInteger(com.android.internal.R.integer.config_doublelineClockDefault))
+            .thenReturn(1);
 
         assertThat(mController.isChecked()).isTrue();
     }
@@ -63,6 +75,9 @@ public class LockscreenClockPreferenceControllerTest {
     @Test
     public void isChecked_SettingIs0_returnFalse() {
         Settings.Secure.putInt(mContentResolver, SETTING_KEY, 0);
+
+        when(mResources.getInteger(com.android.internal.R.integer.config_doublelineClockDefault))
+            .thenReturn(0);
 
         assertThat(mController.isChecked()).isFalse();
     }

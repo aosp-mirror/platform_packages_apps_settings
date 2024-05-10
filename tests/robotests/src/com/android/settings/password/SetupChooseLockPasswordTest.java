@@ -26,6 +26,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AlertDialog;
 
@@ -46,6 +47,7 @@ import com.google.android.setupcompat.template.FooterBarMixin;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -54,6 +56,7 @@ import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
+import org.robolectric.annotation.LooperMode;
 import org.robolectric.shadows.ShadowActivity;
 import org.robolectric.shadows.ShadowDialog;
 import org.robolectric.shadows.ShadowInputMethodManager;
@@ -62,6 +65,7 @@ import java.util.Collections;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
+@LooperMode(LooperMode.Mode.LEGACY)
 @Config(
         shadows = {
                 SettingsShadowResources.class,
@@ -104,7 +108,22 @@ public class SetupChooseLockPasswordTest {
     }
 
     @Test
+    public void createActivity_withShowOptionsButtonExtra_shouldShowButtonUnderSudHeader() {
+        SetupChooseLockPassword activity = createSetupChooseLockPassword();
+        final LinearLayout headerLayout = activity.findViewById(
+                com.google.android.setupdesign.R.id.sud_layout_header);
+        assertThat(headerLayout).isNotNull();
+
+        final Button optionsButton = headerLayout.findViewById(R.id.screen_lock_options);
+        assertThat(optionsButton).isNotNull();
+
+        optionsButton.performClick();
+        assertThat(ShadowDialog.getLatestDialog()).isNotNull();
+    }
+
+    @Test
     @Config(shadows = ShadowChooseLockGenericController.class)
+    @Ignore("b/295325503")
     public void createActivity_withShowOptionsButtonExtra_buttonNotVisibleIfNoVisibleLockTypes() {
         SetupChooseLockPassword activity = createSetupChooseLockPassword();
         Button optionsButton = activity.findViewById(R.id.screen_lock_options);

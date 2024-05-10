@@ -20,6 +20,7 @@ import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.net.wifi.WifiConfiguration;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +29,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.VisibleForTesting;
 
@@ -50,6 +52,8 @@ public class AddNetworkFragment extends InstrumentedFragment implements WifiConf
     final static int SSID_SCANNER_BUTTON_ID = R.id.ssid_scanner_button;
 
     private static final int REQUEST_CODE_WIFI_DPP_ENROLLEE_QR_CODE_SCANNER = 0;
+
+    private static final String EXTRA_SAVE_WHEN_SUBMIT = ":settings:save_when_submit";
 
     private WifiConfigController2 mUIController;
     private Button mSubmitBtn;
@@ -196,11 +200,35 @@ public class AddNetworkFragment extends InstrumentedFragment implements WifiConf
     }
 
     private void successfullyFinish(WifiConfiguration config) {
-        final Intent intent = new Intent();
-        final Activity activity = getActivity();
-        intent.putExtra(WIFI_CONFIG_KEY, config);
-        activity.setResult(Activity.RESULT_OK, intent);
-        activity.finish();
+        Activity activity = getActivity();
+        boolean autoSave = activity.getIntent().getBooleanExtra(EXTRA_SAVE_WHEN_SUBMIT, false);
+        if (autoSave && config != null) {
+            WifiManager.ActionListener saveListener = new WifiManager.ActionListener() {
+                @Override
+                public void onSuccess() {
+                    if (activity != null && !activity.isFinishing()) {
+                        activity.setResult(Activity.RESULT_OK);
+                        activity.finish();
+                    }
+                }
+
+                @Override
+                public void onFailure(int reason) {
+                    if (activity != null && !activity.isFinishing()) {
+                        Toast.makeText(activity, R.string.wifi_failed_save_message,
+                                Toast.LENGTH_SHORT).show();
+                        activity.finish();
+                    }
+                }
+            };
+
+            activity.getSystemService(WifiManager.class).save(config, saveListener);
+        } else {
+            Intent intent = new Intent();
+            intent.putExtra(WIFI_CONFIG_KEY, config);
+            activity.setResult(Activity.RESULT_OK, intent);
+            activity.finish();
+        }
     }
 
     @VisibleForTesting

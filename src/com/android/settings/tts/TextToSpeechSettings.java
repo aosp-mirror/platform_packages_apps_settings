@@ -38,7 +38,7 @@ import android.util.Log;
 import android.util.Pair;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 
@@ -208,7 +208,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
         }
 
         final TextToSpeechViewModel ttsViewModel =
-                ViewModelProviders.of(this).get(TextToSpeechViewModel.class);
+                new ViewModelProvider(this).get(TextToSpeechViewModel.class);
         Pair<TextToSpeech, Boolean> ttsAndNew = ttsViewModel.getTtsAndWhetherNew(mInitListener);
         mTts = ttsAndNew.first;
         // If the TTS object is not newly created, we need to run the setup on the settings side to
@@ -237,7 +237,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
         }
         if (!mTts.getDefaultEngine().equals(mTts.getCurrentEngine())) {
             final TextToSpeechViewModel ttsViewModel =
-                    ViewModelProviders.of(this).get(TextToSpeechViewModel.class);
+                    new ViewModelProvider(this).get(TextToSpeechViewModel.class);
             try {
                 // If the current engine isn't the default engine shut down the current engine in
                 // preparation for creating the new engine.
@@ -548,7 +548,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
         CharSequence[] entries = new CharSequence[availableLangs.size() + 1];
         CharSequence[] entryValues = new CharSequence[availableLangs.size() + 1];
 
-        entries[0] = getActivity().getString(R.string.tts_lang_use_system);
+        entries[0] = getActivity().getString(com.android.settingslib.R.string.tts_lang_use_system);
         entryValues[0] = "";
 
         int i = 1;
@@ -570,7 +570,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
     private void setLocalePreference(int index) {
         if (index < 0) {
             mLocalePreference.setValue("");
-            mLocalePreference.setSummary(R.string.tts_lang_not_selected);
+            mLocalePreference.setSummary(com.android.settingslib.R.string.tts_lang_not_selected);
         } else {
             mLocalePreference.setValueIndex(index);
             mLocalePreference.setSummary(mLocalePreference.getEntries()[index]);
@@ -583,9 +583,9 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
             try {
                 final String currentLang = mTts.getLanguage().getISO3Language();
                 String[] strings = getActivity().getResources().getStringArray(
-                        R.array.tts_demo_strings);
+                        com.android.settingslib.R.array.tts_demo_strings);
                 String[] langs = getActivity().getResources().getStringArray(
-                        R.array.tts_demo_string_langs);
+                        com.android.settingslib.R.array.tts_demo_string_langs);
 
                 for (int i = 0; i < strings.length; ++i) {
                     if (langs[i].equals(currentLang)) {
@@ -597,7 +597,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
                 // Ignore and fall back to default sample string
             }
         }
-        return getString(R.string.tts_default_sample_string);
+        return getString(com.android.settingslib.R.string.tts_default_sample_string);
     }
 
     private boolean isNetworkRequiredForSynthesis() {
@@ -746,7 +746,8 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
     private void displayNetworkAlert() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(android.R.string.dialog_alert_title)
-                .setMessage(getActivity().getString(R.string.tts_engine_network_required))
+                .setMessage(getActivity()
+                        .getString(com.android.settingslib.R.string.tts_engine_network_required))
                 .setCancelable(false)
                 .setPositiveButton(android.R.string.ok, null);
 
@@ -805,12 +806,20 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
             } else {
                 Log.e(TAG, "settingsIntent is null");
             }
-            FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider()
+            FeatureFactory.getFeatureFactory().getMetricsFeatureProvider()
                     .logClickedPreference(p, getMetricsCategory());
         }
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.tts_settings);
+            new BaseSearchIndexProvider(R.xml.tts_settings) {
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    TtsEngines ttsEngines = new TtsEngines(context);
+                    return !ttsEngines.getEngines().isEmpty() &&
+                            context.getResources().getBoolean(
+                                    R.bool.config_show_tts_settings_summary);
+                }
+            };
 
 }

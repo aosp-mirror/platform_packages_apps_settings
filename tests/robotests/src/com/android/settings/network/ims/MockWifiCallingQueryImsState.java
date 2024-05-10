@@ -29,6 +29,7 @@ public class MockWifiCallingQueryImsState extends WifiCallingQueryImsState {
     private Boolean mIsProvisionedOnDevice;
     private Boolean mIsServiceStateReady;
     private Boolean mIsEnabledByUser;
+    private Boolean mIsReadyToWifiCalling;
 
     /**
      * Constructor
@@ -101,6 +102,18 @@ public class MockWifiCallingQueryImsState extends WifiCallingQueryImsState {
             return mIsEnabledByUser;
         }
         return super.isEnabledByUser(subId);
+    }
+
+    public void setIsReadyToWifiCalling(boolean isReady) {
+        mIsReadyToWifiCalling = isReady;
+    }
+
+    @Override
+    public boolean isReadyToWifiCalling() {
+        if (mIsReadyToWifiCalling != null) {
+            return mIsReadyToWifiCalling;
+        }
+        return super.isReadyToWifiCalling();
     }
 
 }

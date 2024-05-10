@@ -19,60 +19,44 @@ package com.android.settings.datetime;
 import android.content.Context;
 import android.provider.Settings;
 import android.provider.Settings.System;
-import android.text.TextUtils;
 import android.text.format.DateFormat;
 
-import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
-import androidx.preference.TwoStatePreference;
-
-import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settings.R;
+import com.android.settings.core.TogglePreferenceController;
 
 import java.util.Locale;
 
-public class AutoTimeFormatPreferenceController extends AbstractPreferenceController
-          implements PreferenceControllerMixin {
+public class AutoTimeFormatPreferenceController extends TogglePreferenceController {
 
-    private static final String KEY_AUTO_24_HOUR = "auto_24hour";
-
-    public AutoTimeFormatPreferenceController(Context context, UpdateTimeAndDateCallback callback) {
-        super(context);
+    public AutoTimeFormatPreferenceController(Context context, String preferenceKey) {
+        super(context, preferenceKey);
     }
 
     @Override
-    public boolean isAvailable() {
-        return true;
+    public int getAvailabilityStatus() {
+        return AVAILABLE;
     }
 
     @Override
-    public String getPreferenceKey() {
-        return KEY_AUTO_24_HOUR;
+    public boolean isChecked() {
+        return isAutoTimeFormatSelection(mContext);
     }
 
     @Override
-    public void updateState(Preference preference) {
-        if (!(preference instanceof SwitchPreference)) {
-            return;
-        }
-        ((SwitchPreference) preference).setChecked(isAutoTimeFormatSelection(mContext));
-    }
-
-    @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        if (!(preference instanceof TwoStatePreference)
-            || !TextUtils.equals(KEY_AUTO_24_HOUR, preference.getKey())) {
-            return false;
-        }
-        boolean auto24HourEnabled = ((SwitchPreference) preference).isChecked();
+    public boolean setChecked(boolean isChecked) {
         Boolean is24Hour;
-        if (auto24HourEnabled) {
+        if (isChecked) {
             is24Hour = null;
         } else {
             is24Hour = is24HourLocale(mContext.getResources().getConfiguration().locale);
         }
         TimeFormatPreferenceController.update24HourFormat(mContext, is24Hour);
         return true;
+    }
+
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_system;
     }
 
     boolean is24HourLocale(Locale locale) {

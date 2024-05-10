@@ -58,7 +58,7 @@ public class DefaultPaymentSettings extends DefaultAppPickerFragment {
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.NFC_PAYMENT;
+        return SettingsEnums.NFC_DEFAULT_PAYMENT;
     }
 
     @Override

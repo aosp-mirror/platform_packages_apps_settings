@@ -24,9 +24,7 @@ import android.util.Log;
 
 import com.android.settingslib.utils.AsyncLoaderCompat;
 
-/**
- * Loader to get new {@link BatteryUsageStats} in the background
- */
+/** Loader to get new {@link BatteryUsageStats} in the background */
 public class BatteryUsageStatsLoader extends AsyncLoaderCompat<BatteryUsageStats> {
     private static final String TAG = "BatteryUsageStatsLoader";
     private final BatteryStatsManager mBatteryStatsManager;
@@ -45,7 +43,8 @@ public class BatteryUsageStatsLoader extends AsyncLoaderCompat<BatteryUsageStats
             builder.includeBatteryHistory();
         }
         try {
-            return mBatteryStatsManager.getBatteryUsageStats(builder.build());
+            return mBatteryStatsManager.getBatteryUsageStats(
+                    builder.includeProcessStateData().build());
         } catch (RuntimeException e) {
             Log.e(TAG, "loadInBackground() for getBatteryUsageStats()", e);
             // Use default BatteryUsageStats.
@@ -54,6 +53,5 @@ public class BatteryUsageStatsLoader extends AsyncLoaderCompat<BatteryUsageStats
     }
 
     @Override
-    protected void onDiscardResult(BatteryUsageStats result) {
-    }
+    protected void onDiscardResult(BatteryUsageStats result) {}
 }

@@ -25,7 +25,6 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.media.MediaRouter2Manager;
 import android.media.RoutingSessionInfo;
 import android.net.Uri;
 import android.text.SpannableString;
@@ -33,7 +32,6 @@ import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 
-import androidx.annotation.VisibleForTesting;
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
 import androidx.slice.builders.ListBuilder;
@@ -66,9 +64,6 @@ public class RemoteMediaSlice implements CustomSliceable {
     private final Context mContext;
 
     private MediaDeviceUpdateWorker mWorker;
-
-    @VisibleForTesting
-    MediaRouter2Manager mRouterManager;
 
     public RemoteMediaSlice(Context context) {
         mContext = context;
@@ -105,18 +100,16 @@ public class RemoteMediaSlice implements CustomSliceable {
             Log.e(TAG, "Unable to get the slice worker.");
             return listBuilder.build();
         }
-        if (mRouterManager == null) {
-            mRouterManager = MediaRouter2Manager.getInstance(mContext);
-        }
+
         // Only displaying remote devices
-        final List<RoutingSessionInfo> infos = getWorker().getActiveRemoteMediaDevice();
+        final List<RoutingSessionInfo> infos = getWorker().getActiveRemoteMediaDevices();
         if (infos.isEmpty()) {
             Log.d(TAG, "No active remote media device");
             return listBuilder.build();
         }
         final CharSequence castVolume = mContext.getText(R.string.remote_media_volume_option_title);
         final IconCompat icon = IconCompat.createWithResource(mContext,
-                R.drawable.ic_volume_remote);
+                com.android.settingslib.R.drawable.ic_volume_remote);
         // To create an empty icon to indent the row
         final IconCompat emptyIcon = createEmptyIcon();
         for (RoutingSessionInfo info : infos) {
@@ -206,7 +199,8 @@ public class RemoteMediaSlice implements CustomSliceable {
                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         final SliceAction primarySliceAction = SliceAction.createDeeplink(
                 primaryBroadcastIntent,
-                IconCompat.createWithResource(mContext, R.drawable.ic_volume_remote),
+                IconCompat.createWithResource(
+                        mContext, com.android.settingslib.R.drawable.ic_volume_remote),
                 ListBuilder.ICON_IMAGE,
                 mContext.getString(R.string.media_output_label_title,
                         Utils.getApplicationLabel(mContext, info.getClientPackageName())));

@@ -31,19 +31,12 @@ public class ProfileSelectManageApplications extends ProfileSelectFragment {
 
     @Override
     public Fragment[] getFragments() {
-        final Bundle workOnly = getArguments() != null ? getArguments().deepCopy() : new Bundle();
-        workOnly.putInt(EXTRA_PROFILE, ProfileSelectFragment.ProfileType.WORK);
-        final Fragment workFragment = new ManageApplications();
-        workFragment.setArguments(workOnly);
-
-        final Bundle personalOnly = getArguments() != null ? getArguments() : new Bundle();
-        personalOnly.putInt(EXTRA_PROFILE, ProfileSelectFragment.ProfileType.PERSONAL);
-        final Fragment personalFragment = new ManageApplications();
-        personalFragment.setArguments(personalOnly);
-        return new Fragment[]{
-                personalFragment, //0
-                workFragment
-        };
+        return ProfileSelectFragment.getFragments(
+                getContext(),
+                getArguments(),
+                ManageApplications::new,
+                ManageApplications::new,
+                ManageApplications::new);
     }
 
     @Override

@@ -43,7 +43,10 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollIntroduction;
 import com.android.settings.biometrics.BiometricUtils;
+import com.android.settings.biometrics.GatekeeperPasswordProvider;
 import com.android.settings.biometrics.MultiBiometricEnrollHelper;
+import com.android.settings.flags.Flags;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settingslib.HelpUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
@@ -51,6 +54,7 @@ import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.span.LinkSpan;
+import com.google.android.setupdesign.util.DeviceHelper;
 
 import java.util.List;
 
@@ -65,10 +69,12 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
 
     private DevicePolicyManager mDevicePolicyManager;
     private boolean mCanAssumeUdfps;
+    @Nullable
+    private UdfpsEnrollCalibrator mCalibrator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        mFingerprintManager = Utils.getFingerprintManagerOrNull(this);
+        mFingerprintManager = getFingerprintManager();
         if (mFingerprintManager == null) {
             Log.e(TAG, "Null FingerprintManager");
             finish();
@@ -82,6 +88,11 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
         mCanAssumeUdfps = props != null && props.size() == 1 && props.get(0).isAnyUdfpsType();
 
         mDevicePolicyManager = getSystemService(DevicePolicyManager.class);
+
+        if (Flags.udfpsEnrollCalibration()) {
+            mCalibrator = FeatureFactory.getFeatureFactory().getFingerprintFeatureProvider()
+                    .getUdfpsEnrollCalibrator(getApplicationContext(), savedInstanceState, null);
+        }
 
         final ImageView iconFingerprint = findViewById(R.id.icon_fingerprint);
         final ImageView iconDeviceLocked = findViewById(R.id.icon_device_locked);
@@ -125,13 +136,74 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
         footerTitle1.setText(getFooterTitle1());
         footerTitle2.setText(getFooterTitle2());
 
-        final ScrollView scrollView = findViewById(R.id.sud_scroll_view);
+        final ScrollView scrollView =
+                findViewById(com.google.android.setupdesign.R.id.sud_scroll_view);
         scrollView.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_YES);
+
+        final Intent intent = getIntent();
+        if (mFromSettingsSummary
+                && GatekeeperPasswordProvider.containsGatekeeperPasswordHandle(intent)) {
+            overridePendingTransition(
+                    com.google.android.setupdesign.R.anim.sud_slide_next_in,
+                    com.google.android.setupdesign.R.anim.sud_slide_next_out);
+            getNextButton().setEnabled(false);
+            getChallenge(((sensorId, userId, challenge) -> {
+                if (isFinishing()) {
+                    // Do nothing if activity is finishing
+                    Log.w(TAG, "activity finished before challenge callback launched.");
+                    return;
+                }
+
+                mSensorId = sensorId;
+                mChallenge = challenge;
+                final GatekeeperPasswordProvider provider = getGatekeeperPasswordProvider();
+                mToken = provider.requestGatekeeperHat(intent, challenge, mUserId);
+                provider.removeGatekeeperPasswordHandle(intent, true);
+                getNextButton().setEnabled(true);
+            }));
+        }
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (Flags.udfpsEnrollCalibration()) {
+            if (mCalibrator != null) {
+                mCalibrator.onSaveInstanceState(outState);
+            }
+        }
+    }
+
+    @Override
+    protected void initViews() {
+        setDescriptionText(getString(
+                R.string.security_settings_fingerprint_enroll_introduction_v3_message,
+                DeviceHelper.getDeviceName(this)));
+
+        super.initViews();
+    }
+
+    @VisibleForTesting
+    @Nullable
+    protected FingerprintManager getFingerprintManager() {
+        return Utils.getFingerprintManagerOrNull(this);
+    }
+
+    /**
+     * Returns the intent extra data for setResult(), null means nothing need to been sent back
+     */
+    @Nullable
+    @Override
+    protected Intent getSetResultIntentExtra(@Nullable Intent activityResultIntent) {
+        Intent intent = super.getSetResultIntentExtra(activityResultIntent);
+        if (mFromSettingsSummary && mToken != null && mChallenge != -1L) {
+            if (intent == null) {
+                intent = new Intent();
+            }
+            intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, mToken);
+            intent.putExtra(EXTRA_KEY_CHALLENGE, mChallenge);
+        }
+        return intent;
     }
 
     @Override
@@ -295,11 +367,6 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
 
     @Override
     protected void getChallenge(GenerateChallengeCallback callback) {
-        mFingerprintManager = Utils.getFingerprintManagerOrNull(this);
-        if (mFingerprintManager == null) {
-            callback.onChallengeGenerated(0, 0, 0L);
-            return;
-        }
         mFingerprintManager.generateChallenge(mUserId, callback::onChallengeGenerated);
     }
 
@@ -316,6 +383,11 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
             intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE,
                     BiometricUtils.getGatekeeperPasswordHandle(getIntent()));
         }
+        if (Flags.udfpsEnrollCalibration()) {
+            if (mCalibrator != null) {
+                intent.putExtras(mCalibrator.getExtrasForNextIntent(false));
+            }
+        }
         return intent;
     }
 
@@ -331,7 +403,7 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
 
     @Override
     public void onClick(LinkSpan span) {
-        if ("url".equals(span.getId())) {
+        if ("url".equals(span.getLink())) {
             String url = getString(R.string.help_url_fingerprint);
             Intent intent = HelpUtils.getHelpIntent(this, url, getClass().getName());
             if (intent == null) {
@@ -361,7 +433,7 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
                     .setText(R.string.security_settings_fingerprint_enroll_introduction_agree)
                     .setListener(this::onNextButtonClick)
                     .setButtonType(FooterButton.ButtonType.OPT_IN)
-                    .setTheme(R.style.SudGlifButton_Primary)
+                    .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Primary)
                     .build();
         }
         return mPrimaryFooterButton;
@@ -375,7 +447,7 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
                     .setText(getNegativeButtonTextId())
                     .setListener(this::onSkipButtonClick)
                     .setButtonType(FooterButton.ButtonType.NEXT)
-                    .setTheme(R.style.SudGlifButton_Primary)
+                    .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Primary)
                     .build();
         }
         return mSecondaryFooterButton;

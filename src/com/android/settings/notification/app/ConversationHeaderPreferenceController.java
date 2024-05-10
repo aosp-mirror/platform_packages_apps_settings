@@ -89,8 +89,7 @@ public class ConversationHeaderPreferenceController extends NotificationPreferen
                     .setButtonActions(EntityHeaderController.ActionType.ACTION_NOTIF_PREFERENCE,
                             EntityHeaderController.ActionType.ACTION_NONE)
                     .setHasAppInfoLink(true)
-                    .setRecyclerView(mFragment.getListView(), mFragment.getSettingsLifecycle())
-                    .done(activity, mContext);
+                    .done(mContext);
 
             pref.findViewById(R.id.entity_header).setVisibility(View.VISIBLE);
             pref.findViewById(R.id.entity_header).setBackground(null);

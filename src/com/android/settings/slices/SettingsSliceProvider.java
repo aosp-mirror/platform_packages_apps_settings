@@ -17,8 +17,10 @@
 package com.android.settings.slices;
 
 import static android.Manifest.permission.READ_SEARCH_INDEXABLES;
+import static android.app.slice.Slice.HINT_PARTIAL;
 
 import android.app.PendingIntent;
+import android.app.settings.SettingsEnums;
 import android.app.slice.SliceManager;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -28,6 +30,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Binder;
 import android.os.StrictMode;
+import android.os.UserManager;
 import android.provider.Settings;
 import android.provider.SettingsSlicesContract;
 import android.text.TextUtils;
@@ -161,9 +164,16 @@ public class SettingsSliceProvider extends SliceProvider {
             Log.d(TAG, "onSlicePinned: " + sliceUri);
             mFirstSlicePinned = true;
         }
+        FeatureFactory.getFeatureFactory().getMetricsFeatureProvider()
+                .action(SettingsEnums.PAGE_UNKNOWN,
+                        SettingsEnums.ACTION_SETTINGS_SLICE_REQUESTED,
+                        SettingsEnums.PAGE_UNKNOWN,
+                        sliceUri.getLastPathSegment(),
+                        0);
+
         if (CustomSliceRegistry.isValidUri(sliceUri)) {
             final Context context = getContext();
-            final CustomSliceable sliceable = FeatureFactory.getFactory(context)
+            final CustomSliceable sliceable = FeatureFactory.getFeatureFactory()
                     .getSlicesFeatureProvider().getSliceableFromUri(context, sliceUri);
             final IntentFilter filter = sliceable.getIntentFilter();
             if (filter != null) {
@@ -187,6 +197,7 @@ public class SettingsSliceProvider extends SliceProvider {
 
     @Override
     public void onSliceUnpinned(Uri sliceUri) {
+        mSliceWeakDataCache.remove(sliceUri);
         final Context context = getContext();
         if (!VolumeSliceHelper.unregisterUri(context, sliceUri)) {
             SliceBroadcastRelay.unregisterReceivers(context, sliceUri);
@@ -216,24 +227,32 @@ public class SettingsSliceProvider extends SliceProvider {
             final boolean nightMode = Utils.isNightMode(getContext());
             if (mNightMode == null) {
                 mNightMode = nightMode;
-                getContext().setTheme(R.style.Theme_SettingsBase);
+                getContext().setTheme(com.android.settingslib.widget.theme.R.style.Theme_SettingsBase);
             } else if (mNightMode != nightMode) {
                 Log.d(TAG, "Night mode changed, reload theme");
                 mNightMode = nightMode;
                 getContext().getTheme().rebase();
             }
 
+            // Checking if some semi-sensitive slices are requested by a guest user. If so, will
+            // return an empty slice.
+            final UserManager userManager = getContext().getSystemService(UserManager.class);
+            if (userManager.isGuestUser() && RestrictedSliceUtils.isGuestRestricted(sliceUri)) {
+                Log.i(TAG, "Guest user access denied.");
+                return null;
+            }
+
             // Before adding a slice to {@link CustomSliceManager}, please get approval
             // from the Settings team.
             if (CustomSliceRegistry.isValidUri(sliceUri)) {
                 final Context context = getContext();
-                return FeatureFactory.getFactory(context)
+                return FeatureFactory.getFeatureFactory()
                         .getSlicesFeatureProvider().getSliceableFromUri(context, sliceUri)
                         .getSlice();
             }
 
             if (CustomSliceRegistry.WIFI_CALLING_URI.equals(sliceUri)) {
-                return FeatureFactory.getFactory(getContext())
+                return FeatureFactory.getFeatureFactory()
                         .getSlicesFeatureProvider()
                         .getNewWifiCallingSliceHelper(getContext())
                         .createWifiCallingSlice(sliceUri);
@@ -242,12 +261,12 @@ public class SettingsSliceProvider extends SliceProvider {
             } else if (CustomSliceRegistry.BLUETOOTH_URI.equals(sliceUri)) {
                 return BluetoothSliceBuilder.getSlice(getContext());
             } else if (CustomSliceRegistry.ENHANCED_4G_SLICE_URI.equals(sliceUri)) {
-                return FeatureFactory.getFactory(getContext())
+                return FeatureFactory.getFeatureFactory()
                         .getSlicesFeatureProvider()
                         .getNewEnhanced4gLteSliceHelper(getContext())
                         .createEnhanced4gLteSlice(sliceUri);
             } else if (CustomSliceRegistry.WIFI_CALLING_PREFERENCE_URI.equals(sliceUri)) {
-                return FeatureFactory.getFactory(getContext())
+                return FeatureFactory.getFeatureFactory()
                         .getSlicesFeatureProvider()
                         .getNewWifiCallingSliceHelper(getContext())
                         .createWifiCallingPreferenceSlice(sliceUri);
@@ -257,11 +276,6 @@ public class SettingsSliceProvider extends SliceProvider {
             if (cachedSliceData == null) {
                 loadSliceInBackground(sliceUri);
                 return getSliceStub(sliceUri);
-            }
-
-            // Remove the SliceData from the cache after it has been used to prevent a memory-leak.
-            if (!getPinnedSlices().contains(sliceUri)) {
-                mSliceWeakDataCache.remove(sliceUri);
             }
             return SliceBuilderUtils.buildSlice(getContext(), cachedSliceData);
         } finally {
@@ -388,6 +402,10 @@ public class SettingsSliceProvider extends SliceProvider {
 
     @VisibleForTesting
     void loadSlice(Uri uri) {
+        if (mSliceWeakDataCache.containsKey(uri)) {
+            Log.d(TAG, uri + " loaded from cache");
+            return;
+        }
         long startBuildTime = System.currentTimeMillis();
 
         final SliceData sliceData;
@@ -456,18 +474,25 @@ public class SettingsSliceProvider extends SliceProvider {
 
     @VisibleForTesting
     boolean isPrivateSlicesNeeded(Uri uri) {
-        final String queryUri = getContext().getString(R.string.config_non_public_slice_query_uri);
+        final Context context = getContext();
+        final String queryUri = context.getString(R.string.config_non_public_slice_query_uri);
 
         if (!TextUtils.isEmpty(queryUri) && TextUtils.equals(uri.toString(), queryUri)) {
             // check if the calling package is eligible for private slices
             final int callingUid = Binder.getCallingUid();
-            final boolean hasPermission = getContext().checkPermission(
-                    android.Manifest.permission.READ_SEARCH_INDEXABLES, Binder.getCallingPid(),
-                    callingUid) == PackageManager.PERMISSION_GRANTED;
-            final String callingPackage = getContext().getPackageManager()
-                    .getPackagesForUid(callingUid)[0];
-            return hasPermission && TextUtils.equals(callingPackage,
-                    getContext().getString(R.string.config_settingsintelligence_package_name));
+            final boolean hasPermission =
+                    context.checkPermission(
+                                    android.Manifest.permission.READ_SEARCH_INDEXABLES,
+                                    Binder.getCallingPid(),
+                                    callingUid)
+                            == PackageManager.PERMISSION_GRANTED;
+            final String[] packages = context.getPackageManager().getPackagesForUid(callingUid);
+            final String callingPackage =
+                    packages != null && packages.length > 0 ? packages[0] : null;
+            return hasPermission
+                    && TextUtils.equals(
+                            callingPackage,
+                            context.getString(R.string.config_settingsintelligence_package_name));
         }
         return false;
     }
@@ -504,7 +529,7 @@ public class SettingsSliceProvider extends SliceProvider {
      */
     private static Slice getSliceStub(Uri uri) {
         // TODO: Switch back to ListBuilder when slice loading states are fixed.
-        return new Slice.Builder(uri).build();
+        return new Slice.Builder(uri).addHints(HINT_PARTIAL).build();
     }
 
     private static String[] parseStringArray(String value) {

@@ -46,6 +46,7 @@
         android:key="provider_model_mobile_network"
         android:title="@string/summary_placeholder"
         android:layout="@layout/preference_category_no_label"
+        settings:isPreferenceVisible="@bool/config_show_sim_info"
         settings:controller="com.android.settings.network.NetworkMobileProviderController"/>
 
     <com.android.settingslib.RestrictedSwitchPreference
@@ -64,7 +65,13 @@
 
     <PreferenceCategory
         android:key="access_points"
-        android:layout="@layout/preference_category_no_label"/>
+        android:layout="@layout/preference_category_no_label">
+
+        <com.android.settings.wifi.AddWifiNetworkPreference
+            android:key="add_wifi_network"
+            android:title="@string/wifi_add_network"
+            android:icon="@drawable/ic_add_24dp"/>
+    </PreferenceCategory>
 
     <Preference
         android:key="configure_network_settings"

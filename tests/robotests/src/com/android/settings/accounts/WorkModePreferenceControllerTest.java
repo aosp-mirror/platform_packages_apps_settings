@@ -19,62 +19,91 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.pm.UserInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.widget.Switch;
 
-import androidx.preference.SwitchPreference;
+import androidx.preference.PreferenceScreen;
+import androidx.test.core.app.ApplicationProvider;
 
-import com.android.settings.R;
+import com.android.settingslib.widget.MainSwitchPreference;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.ParameterizedRobolectricTestRunner;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 public class WorkModePreferenceControllerTest {
 
     private static final String PREF_KEY = "work_mode";
+    private static final int MANAGED_USER_ID = 10;
 
+    private Context mContext;
+    private WorkModePreferenceController mController;
+    private MainSwitchPreference mPreference;
+
+    @ParameterizedRobolectricTestRunner.Parameters
+    public static List<?> params() {
+        return Arrays.asList(true, false);
+    }
+    final boolean mEnable;
     @Mock
     private UserManager mUserManager;
     @Mock
     private UserHandle mManagedUser;
+    @Mock
+    private UserInfo mUserInfo;
+    @Mock
+    private PreferenceScreen mScreen;
+    @Mock
+    Switch mSwitch;
 
-    private Context mContext;
-    private WorkModePreferenceController mController;
-    private SwitchPreference mPreference;
+    public WorkModePreferenceControllerTest(boolean enable) {
+        mEnable = enable;
+    }
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = spy(RuntimeEnvironment.application);
-        when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
-
+        mContext = spy(ApplicationProvider.getApplicationContext());
+        when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
+        mPreference = new MainSwitchPreference(mContext);
+        when(mUserInfo.isManagedProfile()).thenReturn(true);
+        when(mUserManager.getUserInfo(anyInt())).thenReturn(mUserInfo);
+        when(mUserManager.getProcessUserId()).thenReturn(0);
+        when(mUserManager.getUserProfiles()).thenReturn(Collections.singletonList(mManagedUser));
+        when(mManagedUser.getIdentifier()).thenReturn(MANAGED_USER_ID);
+        when(mScreen.findPreference(anyString())).thenReturn(mPreference);
         mController = new WorkModePreferenceController(mContext, PREF_KEY);
-        mController.setManagedUser(mManagedUser);
-        mPreference = new SwitchPreference(mContext);
+        mController.displayPreference(mScreen);
     }
 
     @Test
     public void getAvailabilityStatus_noManagedUser_DISABLED() {
-        mController.setManagedUser(null);
+        when(mUserManager.getProcessUserId()).thenReturn(MANAGED_USER_ID);
+        mController = new WorkModePreferenceController(mContext, PREF_KEY);
+
         assertThat(mController.getAvailabilityStatus())
                 .isNotEqualTo(WorkModePreferenceController.AVAILABLE);
     }
 
     @Test
     public void getAvailabilityStatus_hasManagedUser_AVAILABLE() {
-        mController.setManagedUser(mManagedUser);
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(WorkModePreferenceController.AVAILABLE);
     }
@@ -82,41 +111,19 @@ public class WorkModePreferenceControllerTest {
     @Test
     public void updateState_shouldRefreshContent() {
         when(mUserManager.isQuietModeEnabled(any(UserHandle.class)))
-                .thenReturn(false);
-        mController.updateState(mPreference);
-        assertThat(mPreference.isChecked()).isTrue();
-        assertThat(mPreference.getSummary())
-                .isEqualTo(mContext.getText(R.string.work_mode_on_summary));
+                .thenReturn(mEnable);
 
-        when(mUserManager.isQuietModeEnabled(any(UserHandle.class)))
-                .thenReturn(true);
         mController.updateState(mPreference);
-        assertThat(mPreference.isChecked()).isFalse();
-        assertThat(mPreference.getSummary())
-                .isEqualTo(mContext.getText(R.string.work_mode_off_summary));
+
+        assertThat(mPreference.isChecked()).isEqualTo(!mEnable);
     }
 
     @Test
     public void onPreferenceChange_shouldRequestQuietModeEnabled() {
-        mController.onPreferenceChange(mPreference, true);
-        verify(mUserManager).requestQuietModeEnabled(false, mManagedUser);
+        when(mUserManager.isQuietModeEnabled(any(UserHandle.class))).thenReturn(mEnable);
 
-        mController.onPreferenceChange(mPreference, false);
-        verify(mUserManager).requestQuietModeEnabled(true, mManagedUser);
-    }
+        mController.onCheckedChanged(mSwitch, mEnable);
 
-    @Test
-    public void onStart_shouldRegisterReceiver() {
-        mController.onStart();
-        verify(mContext).registerReceiver(eq(mController.mReceiver), any(), anyInt());
-    }
-
-    @Test
-    public void onStop_shouldUnregisterReceiver() {
-        // register it first
-        mContext.registerReceiver(mController.mReceiver, null);
-
-        mController.onStop();
-        verify(mContext).unregisterReceiver(mController.mReceiver);
+        verify(mUserManager).requestQuietModeEnabled(!mEnable, mManagedUser);
     }
 }

@@ -22,11 +22,8 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 import android.view.View;
-import android.widget.ImageView;
 
 import androidx.preference.PreferenceViewHolder;
-
-import com.android.settings.R;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -53,20 +50,9 @@ public class SettingsMainSwitchPreferenceTest {
         mPreference = new SettingsMainSwitchPreference(context);
         ReflectionHelpers.setField(mPreference, "mEnforcedAdmin", mEnforcedAdmin);
         ReflectionHelpers.setField(mPreference, "mMainSwitchBar", switchBar);
-        final View rootView = View.inflate(context, R.layout.preference_widget_main_switch,
+        final View rootView = View.inflate(context, com.android.settings.R.layout.preference_widget_main_switch,
                 null /* parent */);
         mHolder = PreferenceViewHolder.createInstanceForTests(rootView);
-    }
-
-    @Test
-    public void onBindViewHolder_isRestricted_restrictIconShouldDisplay() {
-        mPreference.onBindViewHolder(mHolder);
-
-        final SettingsMainSwitchBar switchBar = mPreference.getSwitchBar();
-        final ImageView restrictedIcon = switchBar.findViewById(
-                com.android.settingslib.widget.R.id.restricted_icon);
-
-        assertThat(restrictedIcon.getVisibility() == View.VISIBLE).isTrue();
     }
 
     @Test

@@ -17,6 +17,8 @@
 package com.android.settings.applications.intentpicker;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +31,7 @@ import java.util.List;
 
 /** This adapter is for supported links dialog. */
 public class SupportedLinksAdapter extends BaseAdapter {
+    private static final String TAG = "SupportedLinksAdapter";
     private final Context mContext;
     private final List<SupportedLinkWrapper> mWrapperList;
 
@@ -62,6 +65,14 @@ public class SupportedLinksAdapter extends BaseAdapter {
                     R.layout.supported_links_dialog_item, /* root= */ null);
         }
         final CheckedTextView textView = convertView.findViewById(android.R.id.text1);
+        Drawable[] drawables = textView.getCompoundDrawables();
+        if (mContext.getResources().getConfiguration().getLayoutDirection()
+                == View.LAYOUT_DIRECTION_RTL && drawables[0] != null) {
+            Log.d(TAG, "getView: RTL direction.");
+            // Set a checkbox position. It is same as the android:drawableRight attribute.
+            textView.setCompoundDrawables(/* left= */ null, /* top= */ null, drawables[0],
+                /* bottom= */ null);
+        }
         textView.setText(mWrapperList.get(position).getDisplayTitle(mContext));
         textView.setEnabled(mWrapperList.get(position).isEnabled());
         textView.setChecked(mWrapperList.get(position).isChecked());

@@ -29,14 +29,10 @@ import com.android.settings.Utils;
 import com.android.settingslib.graph.ThemedBatteryDrawable;
 
 public class BatteryMeterView extends ImageView {
-    @VisibleForTesting
-    BatteryMeterDrawable mDrawable;
-    @VisibleForTesting
-    ColorFilter mErrorColorFilter;
-    @VisibleForTesting
-    ColorFilter mAccentColorFilter;
-    @VisibleForTesting
-    ColorFilter mForegroundColorFilter;
+    @VisibleForTesting BatteryMeterDrawable mDrawable;
+    @VisibleForTesting ColorFilter mErrorColorFilter;
+    @VisibleForTesting ColorFilter mAccentColorFilter;
+    @VisibleForTesting ColorFilter mForegroundColorFilter;
 
     public BatteryMeterView(Context context) {
         this(context, null, 0);
@@ -49,13 +45,17 @@ public class BatteryMeterView extends ImageView {
     public BatteryMeterView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
-        final int frameColor = context.getColor(R.color.meter_background_color);
-        mAccentColorFilter = Utils.getAlphaInvariantColorFilterForColor(
-                Utils.getColorAttrDefaultColor(context, android.R.attr.colorAccent));
-        mErrorColorFilter = Utils.getAlphaInvariantColorFilterForColor(
-                context.getColor(R.color.battery_icon_color_error));
-        mForegroundColorFilter = Utils.getAlphaInvariantColorFilterForColor(
-                Utils.getColorAttrDefaultColor(context, android.R.attr.colorForeground));
+        final int frameColor =
+                context.getColor(com.android.settingslib.R.color.meter_background_color);
+        mAccentColorFilter =
+                Utils.getAlphaInvariantColorFilterForColor(
+                        Utils.getColorAttrDefaultColor(context, android.R.attr.colorAccent));
+        mErrorColorFilter =
+                Utils.getAlphaInvariantColorFilterForColor(
+                        context.getColor(R.color.battery_icon_color_error));
+        mForegroundColorFilter =
+                Utils.getAlphaInvariantColorFilterForColor(
+                        Utils.getColorAttrDefaultColor(context, android.R.attr.colorForeground));
         mDrawable = new BatteryMeterDrawable(context, frameColor);
         mDrawable.setColorFilter(mAccentColorFilter);
         setImageDrawable(mDrawable);
@@ -107,10 +107,10 @@ public class BatteryMeterView extends ImageView {
         public BatteryMeterDrawable(Context context, int frameColor) {
             super(context, frameColor);
 
-            mIntrinsicWidth = context.getResources()
-                    .getDimensionPixelSize(R.dimen.battery_meter_width);
-            mIntrinsicHeight = context.getResources()
-                    .getDimensionPixelSize(R.dimen.battery_meter_height);
+            mIntrinsicWidth =
+                    context.getResources().getDimensionPixelSize(R.dimen.battery_meter_width);
+            mIntrinsicHeight =
+                    context.getResources().getDimensionPixelSize(R.dimen.battery_meter_height);
         }
 
         public BatteryMeterDrawable(Context context, int frameColor, int width, int height) {

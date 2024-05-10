@@ -100,7 +100,7 @@ public class FaceEnrollEnrolling extends BiometricsEnrollEnrolling {
                         .setText(R.string.security_settings_face_enroll_enrolling_skip)
                         .setListener(this::onSkipButtonClick)
                         .setButtonType(FooterButton.ButtonType.SKIP)
-                        .setTheme(R.style.SudGlifButton_Secondary)
+                        .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Secondary)
                         .build()
         );
 

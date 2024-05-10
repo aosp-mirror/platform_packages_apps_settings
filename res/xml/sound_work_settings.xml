@@ -19,7 +19,7 @@
     android:title="@string/sound_work_settings">
 
     <!-- Use the same sounds of the work profile -->
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="work_use_personal_sounds"
         android:title="@string/work_use_personal_sounds_title"
         android:summary="@string/work_use_personal_sounds_summary"

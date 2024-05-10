@@ -19,17 +19,15 @@ package com.android.settings;
 import static android.provider.Settings.ACTION_PRIVACY_SETTINGS;
 
 import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.ims.ImsRcsManager;
 import android.text.TextUtils;
-import android.util.FeatureFlagUtils;
 import android.util.Log;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.biometrics.face.FaceSettings;
-import com.android.settings.core.FeatureFlags;
+import com.android.settings.communal.CommunalPreferenceController;
 import com.android.settings.enterprise.EnterprisePrivacySettings;
 import com.android.settings.network.MobileNetworkIntentConverter;
 import com.android.settings.overlay.FeatureFactory;
@@ -46,51 +44,19 @@ public class Settings extends SettingsActivity {
     /*
     * Settings subclasses for launching independently.
     */
-    public static class AssistGestureSettingsActivity extends SettingsActivity { /* empty */}
+
+    public static class MemtagPageActivity extends SettingsActivity { /* empty */}
     public static class BluetoothSettingsActivity extends SettingsActivity { /* empty */ }
     public static class CreateShortcutActivity extends SettingsActivity { /* empty */ }
     public static class FaceSettingsActivity extends SettingsActivity { /* empty */ }
     /** Container for {@link FaceSettings} to use with a pre-defined task affinity. */
     public static class FaceSettingsInternalActivity extends SettingsActivity { /* empty */ }
     public static class FingerprintSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class FingerprintSettingsActivityV2 extends SettingsActivity { /* empty */ }
     public static class CombinedBiometricSettingsActivity extends SettingsActivity { /* empty */ }
     public static class CombinedBiometricProfileSettingsActivity extends SettingsActivity { /* empty */ }
-    public static class TetherSettingsActivity extends SettingsActivity {
-        // TODO(b/147675042): Clean the override up when we enable the new Fragment persistently.
-        @Override
-        public Intent getIntent() {
-            return wrapIntentWithAllInOneTetherSettingsIfNeeded(
-                    getApplicationContext(), super.getIntent());
-        }
-    }
-    public static class WifiTetherSettingsActivity extends SettingsActivity {
-        // TODO(b/147675042): Clean the override up when we enable the new Fragment persistently.
-        @Override
-        public Intent getIntent() {
-            return wrapIntentWithAllInOneTetherSettingsIfNeeded(
-                    getApplicationContext(), super.getIntent());
-        }
-    }
-
-    private static Intent wrapIntentWithAllInOneTetherSettingsIfNeeded(
-            Context context, Intent superIntent) {
-        if (!FeatureFlagUtils.isEnabled(context, FeatureFlags.TETHER_ALL_IN_ONE)) {
-            return superIntent;
-        }
-
-        final Intent modIntent = new Intent(superIntent);
-        modIntent.putExtra(EXTRA_SHOW_FRAGMENT,
-                AllInOneTetherSettings.class.getCanonicalName());
-        Bundle args = superIntent.getBundleExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS);
-        if (args != null) {
-            args = new Bundle(args);
-        } else {
-            args = new Bundle();
-        }
-        args.putParcelable("intent", superIntent);
-        modIntent.putExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS, args);
-        return modIntent;
-    }
+    public static class TetherSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class WifiTetherSettingsActivity extends SettingsActivity { /* empty */ }
 
     public static class VpnSettingsActivity extends SettingsActivity { /* empty */ }
     /** Activity for Data saver settings. */
@@ -111,6 +77,12 @@ public class Settings extends SettingsActivity {
     public static class SpellCheckersSettingsActivity extends SettingsActivity { /* empty */ }
     public static class LocalePickerActivity extends SettingsActivity { /* empty */ }
     public static class LanguageAndInputSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class LanguageSettingsActivity extends SettingsActivity { /* empty */ }
+    /** Activity for the regional preferences settings. */
+    public static class RegionalPreferencesActivity extends SettingsActivity { /* empty */ }
+    public static class KeyboardSettingsActivity extends SettingsActivity { /* empty */ }
+    /** Activity for the navigation mode settings. */
+    public static class NavigationModeSettingsActivity extends SettingsActivity { /* empty */ }
     public static class UserDictionarySettingsActivity extends SettingsActivity { /* empty */ }
     public static class DarkThemeSettingsActivity extends SettingsActivity { /* empty */ }
     public static class DisplaySettingsActivity extends SettingsActivity { /* empty */ }
@@ -125,7 +97,7 @@ public class Settings extends SettingsActivity {
     public static class HighPowerApplicationsActivity extends SettingsActivity { /* empty */ }
     public static class BackgroundCheckSummaryActivity extends SettingsActivity { /* empty */ }
     public static class StorageUseActivity extends SettingsActivity { /* empty */ }
-    public static class DevelopmentSettingsDashboardActivity extends SettingsActivity { /* empty */ }
+    public static class DevelopmentSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AccessibilitySettingsActivity extends SettingsActivity { /* empty */ }
     public static class AccessibilityDetailsSettingsActivity extends SettingsActivity { /* empty */ }
     public static class CaptioningSettingsActivity extends SettingsActivity { /* empty */ }
@@ -138,6 +110,10 @@ public class Settings extends SettingsActivity {
     public static class BlueToothPairingActivity extends SettingsActivity { /* empty */ }
     /** Activity for Reduce Bright Colors. */
     public static class ReduceBrightColorsSettingsActivity extends SettingsActivity { /* empty */ }
+    /** Activity for text reading settings. */
+    public static class TextReadingSettingsActivity extends SettingsActivity { /* empty */ }
+    /** Activity for text color and motion settings. */
+    public static class ColorAndMotionActivity extends SettingsActivity { /* empty */ }
     /** Activity for the security dashboard. */
     public static class SecurityDashboardActivity extends SettingsActivity {
 
@@ -152,6 +128,11 @@ public class Settings extends SettingsActivity {
         /** Redirects to SafetyCenter if enabled. */
         @VisibleForTesting
         public void handleSafetyCenterRedirection() {
+            if (isFinishing()) {
+                // Don't trampoline if already exiting this activity.
+                return;
+            }
+
             if (SafetyCenterManagerWrapper.get().isEnabled(this)) {
                 try {
                     startActivity(new Intent(Intent.ACTION_SAFETY_CENTER));
@@ -184,7 +165,7 @@ public class Settings extends SettingsActivity {
         private String getAlternativeFragmentName() {
             String alternativeFragmentClassname = null;
             final SecuritySettingsFeatureProvider securitySettingsFeatureProvider =
-                    FeatureFactory.getFactory(this).getSecuritySettingsFeatureProvider();
+                    FeatureFactory.getFeatureFactory().getSecuritySettingsFeatureProvider();
             if (securitySettingsFeatureProvider.hasAlternativeSecuritySettingsFragment()) {
                 alternativeFragmentClassname = securitySettingsFeatureProvider
                         .getAlternativeSecuritySettingsFragmentClassname();
@@ -193,7 +174,35 @@ public class Settings extends SettingsActivity {
         }
     }
     /** Activity for the Advanced security settings. */
-    public static class SecurityAdvancedSettings extends SettingsActivity { /* empty */ }
+    public static class SecurityAdvancedSettings extends SettingsActivity {
+        private static final String TAG = "SecurityAdvancedActivity";
+        @Override
+        protected void onCreate(Bundle savedState) {
+            super.onCreate(savedState);
+            handleMoreSettingsRedirection();
+        }
+
+        /** Redirects to More Settings if Safety center is enabled. */
+        @VisibleForTesting
+        public void handleMoreSettingsRedirection() {
+            if (isFinishing()) {
+                // Don't trampoline if already exiting this activity.
+                return;
+            }
+
+            if (SafetyCenterManagerWrapper.get().isEnabled(this)) {
+                try {
+                    startActivity(
+                            new Intent("com.android.settings.MORE_SECURITY_PRIVACY_SETTINGS"));
+                    finish();
+                } catch (ActivityNotFoundException e) {
+                    Log.e(TAG, "Unable to open More Settings", e);
+                }
+            }
+        }
+    }
+    /** Activity for the More settings page. */
+    public static class MoreSecurityPrivacySettingsActivity extends SettingsActivity { /* empty */ }
     public static class UsageAccessSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AppUsageAccessSettingsActivity extends SettingsActivity { /* empty */ }
     public static class LocationSettingsActivity extends SettingsActivity { /* empty */ }
@@ -213,6 +222,11 @@ public class Settings extends SettingsActivity {
         /** Redirects to SafetyCenter if enabled. */
         @VisibleForTesting
         public void handleSafetyCenterRedirection() {
+            if (isFinishing()) {
+                // Don't trampoline if already exiting this activity.
+                return;
+            }
+
             if (ACTION_PRIVACY_SETTINGS.equals(getIntent().getAction())
                     && SafetyCenterManagerWrapper.get().isEnabled(this)) {
                 try {
@@ -263,9 +277,18 @@ public class Settings extends SettingsActivity {
     public static class ConfigureWifiSettingsActivity extends SettingsActivity { /* empty */ }
     public static class SavedAccessPointsSettingsActivity extends SettingsActivity { /* empty */ }
     public static class TextToSpeechSettingsActivity extends SettingsActivity { /* empty */ }
-    public static class AndroidBeamSettingsActivity extends SettingsActivity { /* empty */ }
     public static class WifiDisplaySettingsActivity extends SettingsActivity { /* empty */ }
     public static class DreamSettingsActivity extends SettingsActivity { /* empty */ }
+    /** Activity to manage communal settings */
+    public static class CommunalSettingsActivity extends SettingsActivity {
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            if (!CommunalPreferenceController.isAvailable(this)) {
+                finish();
+            }
+        }
+    }
     public static class NotificationStationActivity extends SettingsActivity { /* empty */ }
     public static class UserSettingsActivity extends SettingsActivity { /* empty */ }
     public static class NotificationAccessSettingsActivity extends SettingsActivity { /* empty */ }
@@ -274,6 +297,7 @@ public class Settings extends SettingsActivity {
     public static class PremiumSmsAccessActivity extends SettingsActivity { /* empty */ }
     public static class PictureInPictureSettingsActivity extends SettingsActivity { /* empty */ }
     public static class TurnScreenOnSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class AppTurnScreenOnSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AppPictureInPictureSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ZenAccessSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ZenAccessDetailSettingsActivity extends SettingsActivity {}
@@ -296,6 +320,12 @@ public class Settings extends SettingsActivity {
     public static class AppBubbleNotificationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class NotificationAssistantSettingsActivity extends SettingsActivity{ /* empty */ }
     public static class NotificationAppListActivity extends SettingsActivity { /* empty */ }
+    /** Activity to manage Cloned Apps page */
+    public static class ClonedAppsListActivity extends SettingsActivity { /* empty */ }
+    /** Activity to manage Aspect Ratio app list page */
+    public static class UserAspectRatioAppListActivity extends SettingsActivity { /* empty */ }
+    /** Activity to manage Aspect Ratio app page */
+    public static class UserAspectRatioAppActivity extends SettingsActivity { /* empty */ }
     public static class NotificationReviewPermissionsActivity extends SettingsActivity { /* empty */ }
     public static class AppNotificationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ChannelNotificationSettingsActivity extends SettingsActivity { /* empty */ }
@@ -324,6 +354,8 @@ public class Settings extends SettingsActivity {
     public static class AppMediaManagementAppsActivity extends SettingsActivity { /* empty */ }
     public static class WriteSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ChangeWifiStateActivity extends SettingsActivity { /* empty */ }
+    /** Activity to manage NFC Tag applications. */
+    public static class ChangeNfcTagAppsActivity extends SettingsActivity { /* empty */ }
     public static class AppDrawOverlaySettingsActivity extends SettingsActivity { /* empty */ }
     public static class AppWriteSettingsActivity extends SettingsActivity { /* empty */ }
     /** Activity to manage app battery usage details. */
@@ -350,8 +382,7 @@ public class Settings extends SettingsActivity {
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            if (FeatureFactory.getFactory(this)
-                    .getEnterprisePrivacyFeatureProvider(this)
+            if (FeatureFactory.getFeatureFactory().getEnterprisePrivacyFeatureProvider()
                     .showParentalControls()) {
                 finish();
             } else if (!EnterprisePrivacySettings.isPageEnabled(this)) {
@@ -361,7 +392,9 @@ public class Settings extends SettingsActivity {
     }
     public static class WebViewAppPickerActivity extends SettingsActivity { /* empty */ }
     public static class AdvancedConnectedDeviceActivity extends SettingsActivity { /* empty */ }
+    public static class NfcSettingsActivity extends SettingsActivity { /* empty */ }
     public static class BluetoothDeviceDetailActivity extends SettingsActivity { /* empty */ }
+    public static class StylusUsiDetailsActivity extends SettingsActivity { /* empty */ }
     public static class BluetoothBroadcastActivity extends SettingsActivity { /* empty */ }
     public static class BluetoothFindBroadcastsActivity extends SettingsActivity { /* empty */ }
     public static class WifiCallingDisclaimerActivity extends SettingsActivity { /* empty */ }
@@ -409,6 +442,11 @@ public class Settings extends SettingsActivity {
         }
     }
 
+    /** Actviity to manage apps with {@link android.Manifest.permission#RUN_USER_INITIATED_JOBS} */
+    public static class LongBackgroundTasksActivity extends SettingsActivity { /* empty */ }
+    /** App specific version of {@link LongBackgroundTasksActivity} */
+    public static class LongBackgroundTasksAppActivity extends SettingsActivity { /* empty */ }
+
     /**
      * Activity for BugReportHandlerPicker.
      */
@@ -438,4 +476,8 @@ public class Settings extends SettingsActivity {
      * Activity for OneHandedSettings
      */
     public static class OneHandedSettingsActivity extends SettingsActivity { /* empty */ }
+
+    public static class PreviouslyConnectedDeviceActivity extends SettingsActivity { /* empty */ }
+
+    public static class ScreenTimeoutActivity extends SettingsActivity { /* empty */ }
 }

@@ -22,7 +22,7 @@ import android.provider.Settings;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
@@ -59,7 +59,7 @@ public class BugReportInPowerPreferenceController extends
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final boolean isEnabled = (Boolean) newValue;
         Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Global.BUGREPORT_IN_POWER_MENU,
+                Settings.Secure.BUGREPORT_IN_POWER_MENU,
                 isEnabled ? SETTING_VALUE_ON : SETTING_VALUE_OFF);
         return true;
     }
@@ -67,15 +67,15 @@ public class BugReportInPowerPreferenceController extends
     @Override
     public void updateState(Preference preference) {
         final int mode = Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Global.BUGREPORT_IN_POWER_MENU, SETTING_VALUE_OFF);
-        ((SwitchPreference) mPreference).setChecked(mode != SETTING_VALUE_OFF);
+                Settings.Secure.BUGREPORT_IN_POWER_MENU, SETTING_VALUE_OFF);
+        ((TwoStatePreference) mPreference).setChecked(mode != SETTING_VALUE_OFF);
     }
 
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
         super.onDeveloperOptionsSwitchDisabled();
         Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Global.BUGREPORT_IN_POWER_MENU, SETTING_VALUE_OFF);
-        ((SwitchPreference) mPreference).setChecked(false);
+                Settings.Secure.BUGREPORT_IN_POWER_MENU, SETTING_VALUE_OFF);
+        ((TwoStatePreference) mPreference).setChecked(false);
     }
 }

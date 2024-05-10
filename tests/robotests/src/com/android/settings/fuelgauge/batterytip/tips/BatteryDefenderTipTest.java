@@ -17,18 +17,13 @@ package com.android.settings.fuelgauge.batterytip.tips;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.os.BatteryManager;
 import android.util.Log;
 
 import androidx.preference.Preference;
@@ -66,7 +61,8 @@ public class BatteryDefenderTipTest {
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mMetricsFeatureProvider = mFeatureFactory.metricsFeatureProvider;
         mContext = RuntimeEnvironment.application;
-        mBatteryDefenderTip = new BatteryDefenderTip(BatteryTip.StateType.NEW);
+        mBatteryDefenderTip =
+                new BatteryDefenderTip(BatteryTip.StateType.NEW, false /* isPluggedIn */);
 
         when(mPreference.getContext()).thenReturn(mContext);
         when(mCardPreference.getContext()).thenReturn(mContext);
@@ -79,23 +75,15 @@ public class BatteryDefenderTipTest {
     }
 
     @Test
-    public void getSummary_notExtraDefended_showNonExtraDefendedSummary() {
+    public void getSummary_showSummary() {
         assertThat(mBatteryDefenderTip.getSummary(mContext))
                 .isEqualTo(mContext.getString(R.string.battery_tip_limited_temporarily_summary));
     }
 
     @Test
-    public void getSummary_extraDefended_showExtraDefendedSummary() {
-        BatteryDefenderTip defenderTip = new BatteryDefenderTip(
-                BatteryTip.StateType.NEW, /* extraDefended= */ true);
-
-        assertThat(defenderTip.getSummary(mContext).toString()).isEqualTo("12%");
-    }
-
-    @Test
     public void getIcon_showIcon() {
         assertThat(mBatteryDefenderTip.getIconId())
-                .isEqualTo(R.drawable.ic_battery_status_good_24dp);
+                .isEqualTo(R.drawable.ic_battery_status_good_theme);
     }
 
     @Test
@@ -103,8 +91,8 @@ public class BatteryDefenderTipTest {
         mBatteryDefenderTip.updateState(mBatteryTip);
         mBatteryDefenderTip.log(mContext, mMetricsFeatureProvider);
 
-        verify(mMetricsFeatureProvider).action(mContext,
-                SettingsEnums.ACTION_BATTERY_DEFENDER_TIP, mBatteryTip.mState);
+        verify(mMetricsFeatureProvider)
+                .action(mContext, SettingsEnums.ACTION_BATTERY_DEFENDER_TIP, mBatteryTip.mState);
     }
 
     @Test
@@ -141,7 +129,8 @@ public class BatteryDefenderTipTest {
 
     @Test
     public void updatePreference_whenCharging_setPrimaryButtonVisibleToBeTrue() {
-        fakeDeviceIsCharging(true);
+        mBatteryDefenderTip =
+                new BatteryDefenderTip(BatteryTip.StateType.NEW, true /* isPluggedIn */);
 
         mBatteryDefenderTip.updatePreference(mCardPreference);
 
@@ -150,8 +139,6 @@ public class BatteryDefenderTipTest {
 
     @Test
     public void updatePreference_whenNotCharging_setPrimaryButtonVisibleToBeFalse() {
-        fakeDeviceIsCharging(false);
-
         mBatteryDefenderTip.updatePreference(mCardPreference);
 
         verify(mCardPreference).setPrimaryButtonVisible(false);
@@ -166,23 +153,10 @@ public class BatteryDefenderTipTest {
         verify(mCardPreference).setPrimaryButtonVisible(false);
     }
 
-    private void fakeDeviceIsCharging(boolean charging) {
-        int charged = charging ? 1 : 0; // 1 means charging, 0:not charging
-        Intent batteryChangedIntent = new Intent(Intent.ACTION_BATTERY_CHANGED);
-        batteryChangedIntent.putExtra(BatteryManager.EXTRA_PLUGGED, charged);
-
-        Context mockContext = mock(Context.class);
-        when(mockContext.getString(anyInt())).thenReturn("fake_string");
-        when(mCardPreference.getContext()).thenReturn(mockContext);
-        when(mockContext.registerReceiver(eq(null), any(IntentFilter.class)))
-                .thenReturn(batteryChangedIntent);
-    }
-
     private void fakeGetChargingStatusFailed() {
         Context mockContext = mock(Context.class);
         when(mockContext.getString(anyInt())).thenReturn("fake_string");
         when(mCardPreference.getContext()).thenReturn(mockContext);
-        when(mockContext.registerReceiver(eq(null), any(IntentFilter.class))).thenReturn(null);
     }
 
     private String getLastErrorLog() {

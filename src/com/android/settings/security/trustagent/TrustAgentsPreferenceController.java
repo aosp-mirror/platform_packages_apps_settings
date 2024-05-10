@@ -34,7 +34,7 @@ import android.util.IconDrawableFactory;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.core.BasePreferenceController;
@@ -70,7 +70,7 @@ public class TrustAgentsPreferenceController extends BasePreferenceController
         mDevicePolicyManager = context.getSystemService(DevicePolicyManager.class);
         mIconDrawableFactory = IconDrawableFactory.newInstance(context);
         final SecurityFeatureProvider securityFeatureProvider =
-                FeatureFactory.getFactory(context).getSecurityFeatureProvider();
+                FeatureFactory.getFeatureFactory().getSecurityFeatureProvider();
         mTrustAgentManager = securityFeatureProvider.getTrustAgentManager();
         mLockPatternUtils = securityFeatureProvider.getLockPatternUtils(context);
         mPackageManager = context.getPackageManager();
@@ -172,7 +172,7 @@ public class TrustAgentsPreferenceController extends BasePreferenceController
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (!(preference instanceof SwitchPreference)) {
+        if (!(preference instanceof TwoStatePreference)) {
             return false;
         }
         for (TrustAgentInfo agent : mAvailableAgents.values()) {

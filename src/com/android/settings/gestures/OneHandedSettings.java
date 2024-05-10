@@ -22,12 +22,14 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.util.Log;
 
 import com.android.internal.accessibility.AccessibilityShortcutController;
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityShortcutPreferenceFragment;
 import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.IllustrationPreference;
 import com.android.settingslib.widget.MainSwitchPreference;
 
@@ -37,14 +39,23 @@ import com.android.settingslib.widget.MainSwitchPreference;
  * <p>The child {@link AccessibilityShortcutPreferenceFragment} shows the actual UI for
  * providing basic accessibility shortcut service setup.
  */
+@SearchIndexable(forTarget = SearchIndexable.MOBILE)
 public class OneHandedSettings extends AccessibilityShortcutPreferenceFragment {
 
+    private static final String TAG = "OneHandedSettings";
     private static final String ONE_HANDED_SHORTCUT_KEY = "one_handed_shortcuts_preference";
     private static final String ONE_HANDED_ILLUSTRATION_KEY = "one_handed_header";
     protected static final String ONE_HANDED_MAIN_SWITCH_KEY =
             "gesture_one_handed_mode_enabled_main_switch";
     private String mFeatureName;
     private OneHandedSettingsUtils mUtils;
+
+    /**
+     * One handed settings no need to set any restriction key for pin protected.
+     */
+    public OneHandedSettings() {
+        super(/* restrictionKey= */ null);
+    }
 
     @Override
     protected void updatePreferenceStates() {
@@ -131,9 +142,15 @@ public class OneHandedSettings extends AccessibilityShortcutPreferenceFragment {
 
     @Override
     protected CharSequence getTileTooltipContent(@QuickSettingsTooltipType int type) {
+        final Context context = getContext();
+        if (context == null) {
+            Log.w(TAG, "OneHandedSettings not attached to a context.");
+            return null;
+        }
         return type == QuickSettingsTooltipType.GUIDE_TO_EDIT
-                ? getText(R.string.accessibility_one_handed_mode_qs_tooltip_content)
-                : getText(R.string.accessibility_one_handed_mode_auto_added_qs_tooltip_content);
+                ? context.getText(R.string.accessibility_one_handed_mode_qs_tooltip_content)
+                : context.getText(
+                        R.string.accessibility_one_handed_mode_auto_added_qs_tooltip_content);
     }
 
     @Override
@@ -143,7 +160,7 @@ public class OneHandedSettings extends AccessibilityShortcutPreferenceFragment {
 
     @Override
     protected String getLogTag() {
-        return null;
+        return TAG;
     }
 
     @Override

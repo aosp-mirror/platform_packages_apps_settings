@@ -18,7 +18,10 @@ package com.android.settings.fuelgauge.batterytip;
 
 import android.annotation.Nullable;
 import android.content.Context;
+import android.os.BadParcelableException;
 import android.os.Bundle;
+import android.util.ArrayMap;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -33,13 +36,11 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.CardPreference;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
-/**
- * Controller in charge of the battery tip group
- */
+/** Controller in charge of the battery tip group */
 public class BatteryTipPreferenceController extends BasePreferenceController {
 
     public static final String PREF_NAME = "battery_tip";
@@ -54,16 +55,14 @@ public class BatteryTipPreferenceController extends BasePreferenceController {
     private SettingsActivity mSettingsActivity;
     private MetricsFeatureProvider mMetricsFeatureProvider;
     private boolean mNeedUpdate;
-    @VisibleForTesting
-    CardPreference mCardPreference;
-    @VisibleForTesting
-    Context mPrefContext;
+    @VisibleForTesting CardPreference mCardPreference;
+    @VisibleForTesting Context mPrefContext;
     InstrumentedPreferenceFragment mFragment;
 
     public BatteryTipPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
-        mBatteryTipMap = new HashMap<>();
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mBatteryTipMap = new ArrayMap<>();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
         mNeedUpdate = true;
     }
 
@@ -98,15 +97,7 @@ public class BatteryTipPreferenceController extends BasePreferenceController {
         if (batteryTips == null) {
             return;
         }
-        if (mBatteryTips == null) {
-            mBatteryTips = batteryTips;
-        } else {
-            // mBatteryTips and batteryTips always have the same length and same sequence.
-            for (int i = 0, size = batteryTips.size(); i < size; i++) {
-                mBatteryTips.get(i).updateState(batteryTips.get(i));
-            }
-        }
-
+        mBatteryTips = batteryTips;
         mCardPreference.setVisible(false);
         for (int i = 0, size = batteryTips.size(); i < size; i++) {
             final BatteryTip batteryTip = mBatteryTips.get(i);
@@ -127,13 +118,15 @@ public class BatteryTipPreferenceController extends BasePreferenceController {
         final BatteryTip batteryTip = mBatteryTipMap.get(preference.getKey());
         if (batteryTip != null) {
             if (batteryTip.shouldShowDialog()) {
-                BatteryTipDialogFragment dialogFragment = BatteryTipDialogFragment.newInstance(
-                        batteryTip, mFragment.getMetricsCategory());
+                BatteryTipDialogFragment dialogFragment =
+                        BatteryTipDialogFragment.newInstance(
+                                batteryTip, mFragment.getMetricsCategory());
                 dialogFragment.setTargetFragment(mFragment, REQUEST_ANOMALY_ACTION);
                 dialogFragment.show(mFragment.getFragmentManager(), TAG);
             } else {
-                final BatteryTipAction action = BatteryTipUtils.getActionForBatteryTip(batteryTip,
-                        mSettingsActivity, mFragment);
+                final BatteryTipAction action =
+                        BatteryTipUtils.getActionForBatteryTip(
+                                batteryTip, mSettingsActivity, mFragment);
                 if (action != null) {
                     action.handlePositiveAction(mFragment.getMetricsCategory());
                 }
@@ -149,14 +142,26 @@ public class BatteryTipPreferenceController extends BasePreferenceController {
     }
 
     public void restoreInstanceState(Bundle bundle) {
-        if (bundle != null) {
+        if (bundle == null) {
+            return;
+        }
+        try {
             List<BatteryTip> batteryTips = bundle.getParcelableArrayList(KEY_BATTERY_TIPS);
             updateBatteryTips(batteryTips);
+        } catch (BadParcelableException e) {
+            Log.e(TAG, "failed to invoke restoreInstanceState()", e);
         }
     }
 
-    public void saveInstanceState(Bundle outState) {
-        outState.putParcelableList(KEY_BATTERY_TIPS, mBatteryTips);
+    public void saveInstanceState(Bundle bundle) {
+        if (bundle == null) {
+            return;
+        }
+        try {
+            bundle.putParcelableList(KEY_BATTERY_TIPS, mBatteryTips);
+        } catch (BadParcelableException e) {
+            Log.e(TAG, "failed to invoke saveInstanceState()", e);
+        }
     }
 
     public boolean needUpdate() {
@@ -171,18 +176,16 @@ public class BatteryTipPreferenceController extends BasePreferenceController {
         if (mBatteryTips == null) {
             return null;
         }
-
-        return mBatteryTips.stream().anyMatch(BatteryTip::isVisible)
-                ? mBatteryTips.stream().filter(BatteryTip::isVisible).findFirst().get() : null;
+        Optional<BatteryTip> visibleBatteryTip =
+                mBatteryTips.stream().filter(BatteryTip::isVisible).findFirst();
+        return visibleBatteryTip.orElse(null);
     }
 
-    /**
-     * Listener to give the control back to target fragment
-     */
+    /** Listener to give the control back to target fragment */
     public interface BatteryTipListener {
         /**
-         * This method is invoked once battery tip is handled, then target fragment could do
-         * extra work.
+         * This method is invoked once battery tip is handled, then target fragment could do extra
+         * work.
          *
          * @param batteryTip that has been handled
          */

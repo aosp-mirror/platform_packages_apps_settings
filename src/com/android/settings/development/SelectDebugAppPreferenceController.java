@@ -19,17 +19,20 @@ package com.android.settings.development;
 import static com.android.settings.development.DevelopmentOptionsActivityRequestCodes.REQUEST_CODE_DEBUG_APP;
 
 import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.os.Bundle;
 import android.provider.Settings;
+import android.text.TextUtils;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
-import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
 public class SelectDebugAppPreferenceController extends DeveloperOptionsPreferenceController
@@ -54,13 +57,29 @@ public class SelectDebugAppPreferenceController extends DeveloperOptionsPreferen
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-        if (DEBUG_APP_KEY.equals(preference.getKey())) {
+        if (!TextUtils.equals(preference.getKey(), getPreferenceKey())) {
+            return false;
+        }
+
+        if (Flags.deprecateListActivity()) {
+            final Bundle args = new Bundle();
+            args.putBoolean(DevelopmentAppPicker.EXTRA_DEBUGGABLE, true /* value */);
+            final String debugApp = Settings.Global.getString(
+                    mContext.getContentResolver(), Settings.Global.DEBUG_APP);
+            args.putString(DevelopmentAppPicker.EXTRA_SELECTING_APP, debugApp);
+            new SubSettingLauncher(mContext)
+                    .setDestination(DevelopmentAppPicker.class.getName())
+                    .setSourceMetricsCategory(SettingsEnums.DEVELOPMENT)
+                    .setArguments(args)
+                    .setTitleRes(com.android.settingslib.R.string.select_application)
+                    .setResultListener(mFragment, REQUEST_CODE_DEBUG_APP)
+                    .launch();
+        } else {
             final Intent intent = getActivityStartIntent();
             intent.putExtra(AppPicker.EXTRA_DEBUGGABLE, true /* value */);
             mFragment.startActivityForResult(intent, REQUEST_CODE_DEBUG_APP);
-            return true;
         }
-        return false;
+        return true;
     }
 
     @Override
@@ -82,7 +101,8 @@ public class SelectDebugAppPreferenceController extends DeveloperOptionsPreferen
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
         super.onDeveloperOptionsSwitchDisabled();
-        mPreference.setSummary(mContext.getResources().getString(R.string.debug_app_not_set));
+        mPreference.setSummary(mContext.getResources()
+                .getString(com.android.settingslib.R.string.debug_app_not_set));
     }
 
     @VisibleForTesting
@@ -94,10 +114,12 @@ public class SelectDebugAppPreferenceController extends DeveloperOptionsPreferen
         final String debugApp = Settings.Global.getString(
                 mContext.getContentResolver(), Settings.Global.DEBUG_APP);
         if (debugApp != null && debugApp.length() > 0) {
-            mPreference.setSummary(mContext.getResources().getString(R.string.debug_app_set,
-                    getAppLabel(debugApp)));
+            mPreference.setSummary(mContext.getResources()
+                    .getString(com.android.settingslib.R.string.debug_app_set,
+                            getAppLabel(debugApp)));
         } else {
-            mPreference.setSummary(mContext.getResources().getString(R.string.debug_app_not_set));
+            mPreference.setSummary(mContext.getResources()
+                    .getString(com.android.settingslib.R.string.debug_app_not_set));
         }
     }
 

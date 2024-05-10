@@ -62,6 +62,8 @@ public class NotificationsOffPreferenceController extends NotificationPreference
                 preference.setTitle(R.string.channel_notifications_off_desc);
             } else if (mChannelGroup != null) {
                 preference.setTitle(R.string.channel_group_notifications_off_desc);
+            } else if (mAppRow.permissionStateLocked) {
+                preference.setTitle(R.string.app_notifications_not_send_desc);
             } else {
                 preference.setTitle(R.string.app_notifications_off_desc);
             }

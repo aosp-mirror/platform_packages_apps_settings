@@ -16,17 +16,18 @@
 
 package com.android.settings.development;
 
+import static com.android.window.flags.Flags.predictiveBackSystemAnimations;
+
+import android.annotation.Nullable;
 import android.content.Context;
 import android.provider.Settings;
 
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
-
-import java.util.Objects;
 
 /**
  * PreferenceController for enabling/disabling animation related to back button and back gestures.
@@ -49,10 +50,14 @@ public class BackAnimationPreferenceController extends DeveloperOptionsPreferenc
 
 
     public BackAnimationPreferenceController(Context context,
-            DevelopmentSettingsDashboardFragment fragment) {
+            @Nullable DevelopmentSettingsDashboardFragment fragment) {
         super(context);
-        Objects.requireNonNull(fragment);
         mFragment = fragment;
+    }
+
+    @Override
+    public boolean isAvailable() {
+        return !predictiveBackSystemAnimations();
     }
 
     @Override
@@ -76,7 +81,7 @@ public class BackAnimationPreferenceController extends DeveloperOptionsPreferenc
     public void updateState(Preference preference) {
         final int mode = Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.ENABLE_BACK_ANIMATION, SETTING_VALUE_OFF);
-        ((SwitchPreference) mPreference).setChecked(mode != SETTING_VALUE_OFF);
+        ((TwoStatePreference) mPreference).setChecked(mode != SETTING_VALUE_OFF);
     }
 
     @Override
@@ -84,6 +89,6 @@ public class BackAnimationPreferenceController extends DeveloperOptionsPreferenc
         super.onDeveloperOptionsSwitchDisabled();
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.ENABLE_BACK_ANIMATION, SETTING_VALUE_OFF);
-        ((SwitchPreference) mPreference).setChecked(false);
+        ((TwoStatePreference) mPreference).setChecked(false);
     }
 }

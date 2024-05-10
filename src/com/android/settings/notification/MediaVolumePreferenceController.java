@@ -52,6 +52,7 @@ public class MediaVolumePreferenceController extends VolumeSeekBarPreferenceCont
 
     public MediaVolumePreferenceController(Context context) {
         super(context, KEY_MEDIA_VOLUME);
+        mVolumePreferenceListener = this::updateContentDescription;
     }
 
     @Override
@@ -93,7 +94,8 @@ public class MediaVolumePreferenceController extends VolumeSeekBarPreferenceCont
 
     @VisibleForTesting
     boolean isSupportEndItem() {
-        return isConnectedBLEDevice();
+        return getWorker() != null && getWorker().isBroadcastSupported()
+                && (getWorker().isDeviceBroadcasting() || isConnectedBLEDevice());
     }
 
     private boolean isConnectedBLEDevice() {
@@ -106,6 +108,18 @@ public class MediaVolumePreferenceController extends VolumeSeekBarPreferenceCont
             return mMediaDevice.isBLEDevice();
         }
         return false;
+    }
+
+    private void updateContentDescription() {
+        if (mPreference != null) {
+            if (mPreference.isMuted()) {
+                mPreference.updateContentDescription(
+                        mContext.getString(R.string.volume_content_description_silent_mode,
+                        mPreference.getTitle()));
+            } else {
+                mPreference.updateContentDescription(mPreference.getTitle());
+            }
+        }
     }
 
     @Override
@@ -124,7 +138,7 @@ public class MediaVolumePreferenceController extends VolumeSeekBarPreferenceCont
                     getWorker().getActiveLocalMediaController().getPackageName());
 
             pi = PendingIntent.getBroadcast(context, 0 /* requestCode */, intent,
-                    PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
+                    PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         } else {
             final CachedBluetoothDevice bluetoothDevice =
                     ((BluetoothMediaDevice) mMediaDevice).getCachedDevice();
@@ -141,7 +155,7 @@ public class MediaVolumePreferenceController extends VolumeSeekBarPreferenceCont
                     && getWorker().getActiveLocalMediaController() != null);
 
             pi = PendingIntent.getActivity(context, 0 /* requestCode */, intent,
-                    PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
+                    PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         }
 
         final IconCompat icon = getBroadcastIcon(context);

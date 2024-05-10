@@ -46,6 +46,7 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
+import com.android.settingslib.utils.StringUtil;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
@@ -69,7 +70,7 @@ public class BuildNumberPreferenceController extends BasePreferenceController im
     public BuildNumberPreferenceController(Context context, String key) {
         super(context, key);
         mUm = (UserManager) context.getSystemService(Context.USER_SERVICE);
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     public void setHost(InstrumentedPreferenceFragment fragment) {
@@ -181,9 +182,8 @@ public class BuildNumberPreferenceController extends BasePreferenceController im
                     mDevHitToast.cancel();
                 }
                 mDevHitToast = Toast.makeText(mContext,
-                        mContext.getResources().getQuantityString(
-                                R.plurals.show_dev_countdown, mDevHitCountdown,
-                                mDevHitCountdown),
+                        StringUtil.getIcuPluralsString(mContext, mDevHitCountdown,
+                                R.string.show_dev_countdown),
                         Toast.LENGTH_SHORT);
                 mDevHitToast.show();
             }
@@ -240,6 +240,8 @@ public class BuildNumberPreferenceController extends BasePreferenceController im
         mDevHitToast = Toast.makeText(mContext, R.string.show_dev_on,
                 Toast.LENGTH_LONG);
         mDevHitToast.show();
+
+        FeatureFactory.getFeatureFactory().getSearchFeatureProvider().sendPreIndexIntent(mContext);
     }
 
     @VisibleForTesting

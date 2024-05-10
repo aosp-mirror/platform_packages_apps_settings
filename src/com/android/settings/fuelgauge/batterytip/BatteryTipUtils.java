@@ -44,21 +44,17 @@ import com.android.settings.fuelgauge.batterytip.tips.UnrestrictAppTip;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Utility class for {@link BatteryTip}
- */
+/** Utility class for {@link BatteryTip} */
 public class BatteryTipUtils {
     private static final int REQUEST_CODE = 0;
 
-    /**
-     * Get a list of restricted apps with {@link AppOpsManager#OP_RUN_ANY_IN_BACKGROUND}
-     */
+    /** Get a list of restricted apps with {@link AppOpsManager#OP_RUN_ANY_IN_BACKGROUND} */
     @NonNull
-    public static List<AppInfo> getRestrictedAppsList(AppOpsManager appOpsManager,
-            UserManager userManager) {
+    public static List<AppInfo> getRestrictedAppsList(
+            AppOpsManager appOpsManager, UserManager userManager) {
         final List<UserHandle> userHandles = userManager.getUserProfiles();
-        final List<AppOpsManager.PackageOps> packageOpsList = appOpsManager.getPackagesForOps(
-                new int[]{AppOpsManager.OP_RUN_ANY_IN_BACKGROUND});
+        final List<AppOpsManager.PackageOps> packageOpsList =
+                appOpsManager.getPackagesForOps(new int[] {AppOpsManager.OP_RUN_ANY_IN_BACKGROUND});
         final List<AppInfo> appInfos = new ArrayList<>();
 
         for (int i = 0, size = CollectionUtils.size(packageOpsList); i < size; i++) {
@@ -71,11 +67,12 @@ public class BatteryTipUtils {
                 }
                 if (entry.getMode() != AppOpsManager.MODE_ALLOWED
                         && userHandles.contains(
-                        new UserHandle(UserHandle.getUserId(packageOps.getUid())))) {
-                    appInfos.add(new AppInfo.Builder()
-                            .setPackageName(packageOps.getPackageName())
-                            .setUid(packageOps.getUid())
-                            .build());
+                                new UserHandle(UserHandle.getUserId(packageOps.getUid())))) {
+                    appInfos.add(
+                            new AppInfo.Builder()
+                                    .setPackageName(packageOps.getPackageName())
+                                    .setUid(packageOps.getUid())
+                                    .build());
                 }
             }
         }
@@ -85,13 +82,16 @@ public class BatteryTipUtils {
 
     /**
      * Get a corresponding action based on {@code batteryTip}
+     *
      * @param batteryTip used to detect which action to choose
      * @param settingsActivity used to populate {@link BatteryTipAction}
      * @param fragment used to populate {@link BatteryTipAction}
      * @return an action for {@code batteryTip}
      */
-    public static BatteryTipAction getActionForBatteryTip(BatteryTip batteryTip,
-            SettingsActivity settingsActivity, InstrumentedPreferenceFragment fragment) {
+    public static BatteryTipAction getActionForBatteryTip(
+            BatteryTip batteryTip,
+            SettingsActivity settingsActivity,
+            InstrumentedPreferenceFragment fragment) {
         switch (batteryTip.getType()) {
             case BatteryTip.TipType.SMART_BATTERY_MANAGER:
                 return new SmartBatteryAction(settingsActivity, fragment);
@@ -113,26 +113,33 @@ public class BatteryTipUtils {
 
     /**
      * Upload the {@link PendingIntent} to {@link StatsManager} for anomaly detection
+     *
      * @throws StatsManager.StatsUnavailableException if failed to communicate with stats service
      */
     public static void uploadAnomalyPendingIntent(Context context, StatsManager statsManager)
             throws StatsManager.StatsUnavailableException {
         final Intent extraIntent = new Intent(context, AnomalyDetectionReceiver.class);
-        final PendingIntent pendingIntent = PendingIntent.getBroadcast(context, REQUEST_CODE,
-                extraIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
-        statsManager.setBroadcastSubscriber(pendingIntent,
-                StatsManagerConfig.ANOMALY_CONFIG_KEY, StatsManagerConfig.SUBSCRIBER_ID);
+        final PendingIntent pendingIntent =
+                PendingIntent.getBroadcast(
+                        context,
+                        REQUEST_CODE,
+                        extraIntent,
+                        PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
+        statsManager.setBroadcastSubscriber(
+                pendingIntent,
+                StatsManagerConfig.ANOMALY_CONFIG_KEY,
+                StatsManagerConfig.SUBSCRIBER_ID);
     }
 
-    /**
-     * Detect and return anomaly apps after {@code timeAfterMs}
-     */
+    /** Detect and return anomaly apps after {@code timeAfterMs} */
     public static List<AppInfo> detectAnomalies(Context context, long timeAfterMs) {
-        final List<AppInfo> highUsageApps = BatteryDatabaseManager.getInstance(context)
-                .queryAllAnomalies(timeAfterMs, AnomalyDatabaseHelper.State.NEW);
+        final List<AppInfo> highUsageApps =
+                BatteryDatabaseManager.getInstance(context)
+                        .queryAllAnomalies(timeAfterMs, AnomalyDatabaseHelper.State.NEW);
         // Remove it if it doesn't have label or been restricted
-        highUsageApps.removeIf(AppLabelPredicate.getInstance(context)
-                .or(AppRestrictionPredicate.getInstance(context)));
+        highUsageApps.removeIf(
+                AppLabelPredicate.getInstance(context)
+                        .or(AppRestrictionPredicate.getInstance(context)));
 
         return highUsageApps;
     }

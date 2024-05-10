@@ -120,7 +120,7 @@ public class AccountDetailDashboardFragment extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.ACCOUNT;
+        return SettingsEnums.ACCOUNT_DETAIL;
     }
 
     @Override

@@ -74,7 +74,7 @@ public class AmbientDisplayAlwaysOnPreferenceControllerTest {
         mController.setConfig(mConfig);
 
         mApplicationInfo.uid = 1;
-        when(mContext.getString(R.string.config_defaultWellbeingPackage)).thenReturn(TEST_PACKAGE);
+        when(mContext.getString(R.string.config_systemWellbeing)).thenReturn(TEST_PACKAGE);
 
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
         doReturn(mApplicationInfo).when(mPackageManager).getApplicationInfo(
@@ -132,23 +132,23 @@ public class AmbientDisplayAlwaysOnPreferenceControllerTest {
     }
 
     @Test
-    public void isSliceableCorrectKey_returnsTrue() {
+    public void isPublicSliceCorrectKey_returnsTrue() {
         final AmbientDisplayAlwaysOnPreferenceController controller =
                 new AmbientDisplayAlwaysOnPreferenceController(mContext,
                         "ambient_display_always_on");
-        assertThat(controller.isSliceable()).isTrue();
+        assertThat(controller.isPublicSlice()).isTrue();
     }
 
     @Test
-    public void isSliceableIncorrectKey_returnsFalse() {
+    public void isPublicSliceIncorrectKey_returnsFalse() {
         final AmbientDisplayAlwaysOnPreferenceController controller =
                 new AmbientDisplayAlwaysOnPreferenceController(mContext, "bad_key");
-        assertThat(controller.isSliceable()).isFalse();
+        assertThat(controller.isPublicSlice()).isFalse();
     }
 
     @Test
-    public void isPublicSlice_returnTrue() {
-        assertThat(mController.isPublicSlice()).isTrue();
+    public void isSliceable_returnTrue() {
+        assertThat(mController.isSliceable()).isTrue();
     }
 
     @Test

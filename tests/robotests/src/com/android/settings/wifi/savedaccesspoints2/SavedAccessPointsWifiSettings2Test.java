@@ -47,6 +47,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
+@Ignore("b/314867581")
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowInteractionJankMonitor.class)
 public class SavedAccessPointsWifiSettings2Test {

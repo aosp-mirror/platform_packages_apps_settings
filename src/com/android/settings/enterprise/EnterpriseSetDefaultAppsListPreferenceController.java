@@ -40,6 +40,7 @@ import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.users.UserFeatureProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.utils.StringUtil;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.ArrayList;
@@ -68,10 +69,10 @@ public class EnterpriseSetDefaultAppsListPreferenceController extends
         super(context);
         mPm = packageManager;
         mParent = parent;
-        final FeatureFactory factory = FeatureFactory.getFactory(context);
-        mApplicationFeatureProvider = factory.getApplicationFeatureProvider(context);
-        mEnterprisePrivacyFeatureProvider = factory.getEnterprisePrivacyFeatureProvider(context);
-        mUserFeatureProvider = factory.getUserFeatureProvider(context);
+        final FeatureFactory factory = FeatureFactory.getFeatureFactory();
+        mApplicationFeatureProvider = factory.getApplicationFeatureProvider();
+        mEnterprisePrivacyFeatureProvider = factory.getEnterprisePrivacyFeatureProvider();
+        mUserFeatureProvider = factory.getUserFeatureProvider();
         buildAppList();
     }
 
@@ -136,11 +137,13 @@ public class EnterpriseSetDefaultAppsListPreferenceController extends
                 if (userInfo.isManagedProfile()) {
                     category.setTitle(devicePolicyManager.getResources().getString(
                             WORK_CATEGORY_HEADER,
-                            () -> mContext.getString(R.string.category_work)));
+                            () -> mContext.getString(
+                                    com.android.settingslib.R.string.category_work)));
                 } else {
                     category.setTitle(devicePolicyManager.getResources().getString(
                             PERSONAL_CATEGORY_HEADER,
-                            () -> mContext.getString(R.string.category_personal)));
+                            () -> mContext.getString(
+                                    com.android.settingslib.R.string.category_personal)));
                 }
                 category.setOrder(i);
                 createPreferences(prefContext, category, mApps.get(i));
@@ -192,16 +195,16 @@ public class EnterpriseSetDefaultAppsListPreferenceController extends
             case CONTACTS:
                 return context.getString(R.string.default_contacts_app_title);
             case PHONE:
-                return context.getResources()
-                        .getQuantityString(R.plurals.default_phone_app_title, appCount);
+                return StringUtil.getIcuPluralsString(context, appCount,
+                        R.string.default_phone_app_title);
             case MAP:
                 return context.getString(R.string.default_map_app_title);
             case EMAIL:
-                return context.getResources()
-                        .getQuantityString(R.plurals.default_email_app_title, appCount);
+                return StringUtil.getIcuPluralsString(context, appCount,
+                        R.string.default_email_app_title);
             case CAMERA:
-                return context.getResources()
-                        .getQuantityString(R.plurals.default_camera_app_title, appCount);
+                return StringUtil.getIcuPluralsString(context, appCount,
+                        R.string.default_camera_app_title);
             default:
                 throw new IllegalStateException("Unknown type of default " + typeOfDefault);
         }

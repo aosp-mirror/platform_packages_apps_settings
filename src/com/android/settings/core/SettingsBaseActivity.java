@@ -22,6 +22,7 @@ import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.graphics.text.LineBreakConfig;
 import android.os.Bundle;
@@ -49,6 +50,7 @@ import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.resources.TextAppearanceConfig;
 import com.google.android.setupcompat.util.WizardManagerHelper;
+import com.google.android.setupdesign.transition.TransitionHelper;
 import com.google.android.setupdesign.util.ThemeHelper;
 
 /** Base activity for Settings pages */
@@ -76,6 +78,11 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        final boolean isAnySetupWizard = WizardManagerHelper.isAnySetupWizard(getIntent());
+        if (isAnySetupWizard) {
+            TransitionHelper.applyForwardTransition(this);
+            TransitionHelper.applyBackwardTransition(this);
+        }
         super.onCreate(savedInstanceState);
         if (isFinishing()) {
             return;
@@ -96,7 +103,6 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
             requestWindowFeature(Window.FEATURE_NO_TITLE);
         }
         // Apply SetupWizard light theme during setup flow. This is for SubSettings pages.
-        final boolean isAnySetupWizard = WizardManagerHelper.isAnySetupWizard(getIntent());
         if (isAnySetupWizard && this instanceof SubSettings) {
             setTheme(SetupWizardUtils.getTheme(this, getIntent()));
             setTheme(R.style.SettingsPreferenceTheme_SetupWizard);
@@ -104,8 +110,10 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
         }
 
         if (isToolbarEnabled() && !isAnySetupWizard) {
-            super.setContentView(R.layout.collapsing_toolbar_base_layout);
-            mCollapsingToolbarLayout = findViewById(R.id.collapsing_toolbar);
+            super.setContentView(
+                    com.android.settingslib.collapsingtoolbar.R.layout.collapsing_toolbar_base_layout);
+            mCollapsingToolbarLayout =
+                    findViewById(com.android.settingslib.collapsingtoolbar.R.id.collapsing_toolbar);
             mAppBarLayout = findViewById(R.id.app_bar);
             if (mCollapsingToolbarLayout != null) {
                 mCollapsingToolbarLayout.setLineSpacingMultiplier(TOOLBAR_LINE_SPACING_MULTIPLIER);
@@ -117,7 +125,7 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
                                                 LineBreakConfig.LINE_BREAK_WORD_STYLE_PHRASE)
                                         .build()));
             }
-            disableCollapsingToolbarLayoutScrollingBehavior();
+            autoSetCollapsingToolbarLayoutScrolling();
         } else {
             super.setContentView(R.layout.settings_base_layout);
         }
@@ -156,9 +164,12 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
         final int transitionType = getTransitionType(intent);
         super.startActivityForResult(intent, requestCode, options);
         if (transitionType == TransitionType.TRANSITION_SLIDE) {
-            overridePendingTransition(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out);
+            overridePendingTransition(
+                    com.google.android.setupdesign.R.anim.sud_slide_next_in,
+                    com.google.android.setupdesign.R.anim.sud_slide_next_out);
         } else if (transitionType == TransitionType.TRANSITION_FADE) {
-            overridePendingTransition(android.R.anim.fade_in, R.anim.sud_stay);
+            overridePendingTransition(
+                    android.R.anim.fade_in, com.google.android.setupdesign.R.anim.sud_stay);
         }
     }
 
@@ -166,7 +177,8 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
     protected void onPause() {
         // For accessibility activities launched from setup wizard.
         if (getTransitionType(getIntent()) == TransitionType.TRANSITION_FADE) {
-            overridePendingTransition(R.anim.sud_stay, android.R.anim.fade_out);
+            overridePendingTransition(
+                    com.google.android.setupdesign.R.anim.sud_stay, android.R.anim.fade_out);
         }
         super.onPause();
     }
@@ -252,7 +264,7 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
         return false;
     }
 
-    private void disableCollapsingToolbarLayoutScrollingBehavior() {
+    private void autoSetCollapsingToolbarLayoutScrolling() {
         if (mAppBarLayout == null) {
             return;
         }
@@ -263,7 +275,9 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
                 new AppBarLayout.Behavior.DragCallback() {
                     @Override
                     public boolean canDrag(@NonNull AppBarLayout appBarLayout) {
-                        return false;
+                        // Header can be scrolling while device in landscape mode.
+                        return appBarLayout.getResources().getConfiguration().orientation
+                                == Configuration.ORIENTATION_LANDSCAPE;
                     }
                 });
         params.setBehavior(behavior);

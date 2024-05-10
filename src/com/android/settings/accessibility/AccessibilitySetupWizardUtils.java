@@ -19,9 +19,13 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.widget.LinearLayout;
 
-import com.android.settings.R;
+import androidx.annotation.StringRes;
 
+import com.google.android.setupcompat.template.FooterBarMixin;
+import com.google.android.setupcompat.template.FooterButton;
+import com.google.android.setupcompat.template.Mixin;
 import com.google.android.setupdesign.GlifPreferenceLayout;
+import com.google.android.setupdesign.R;
 import com.google.android.setupdesign.util.ThemeHelper;
 
 /** Provides utility methods to accessibility settings for Setup Wizard only. */
@@ -30,7 +34,7 @@ class AccessibilitySetupWizardUtils {
     private AccessibilitySetupWizardUtils(){}
 
     /**
-     * Update the {@link GlifPreferenceLayout} attributes if they have previously been initialized.
+     * Updates the {@link GlifPreferenceLayout} attributes if they have previously been initialized.
      * When the SetupWizard supports the extended partner configs, it means the material layout
      * would be applied. It should set a different padding/margin in views to align Settings style
      * for accessibility feature pages.
@@ -54,5 +58,47 @@ class AccessibilitySetupWizardUtils {
                         layout.getPaddingBottom());
             }
         }
+    }
+
+    /**
+     * Sets primary button for footer of the {@link GlifPreferenceLayout}.
+     *
+     * <p> This will be the initial by given material theme style.
+     *
+     * @param context A {@link Context}
+     * @param mixin A {@link Mixin} for managing buttons.
+     * @param text The {@code text} by resource.
+     * @param runnable The {@link Runnable} to run.
+     */
+    public static void setPrimaryButton(Context context, FooterBarMixin mixin, @StringRes int text,
+            Runnable runnable) {
+        mixin.setPrimaryButton(
+                new FooterButton.Builder(context)
+                        .setText(text)
+                        .setListener(l -> runnable.run())
+                        .setButtonType(FooterButton.ButtonType.DONE)
+                        .setTheme(R.style.SudGlifButton_Primary)
+                        .build());
+    }
+
+    /**
+     * Sets secondary button for the footer of the {@link GlifPreferenceLayout}.
+     *
+     * <p> This will be the initial by given material theme style.
+     *
+     * @param context A {@link Context}
+     * @param mixin A {@link Mixin} for managing buttons.
+     * @param text The {@code text} by resource.
+     * @param runnable The {@link Runnable} to run.
+     */
+    public static void setSecondaryButton(Context context, FooterBarMixin mixin,
+            @StringRes int text, Runnable runnable) {
+        mixin.setSecondaryButton(
+                new FooterButton.Builder(context)
+                        .setText(text)
+                        .setListener(l -> runnable.run())
+                        .setButtonType(FooterButton.ButtonType.CLEAR)
+                        .setTheme(R.style.SudGlifButton_Secondary)
+                        .build());
     }
 }

@@ -136,7 +136,7 @@ public class BaseSearchIndexProvider implements Indexable.SearchIndexProvider {
         try {
             controllersFromCode = createPreferenceControllers(context);
         } catch (Exception e) {
-            Log.w(TAG, "Error initial controller");
+            Log.w(TAG, "Error initializing controller in fragment: " + this + ", e: " + e);
         }
 
         final List<SearchIndexableResource> res = getXmlResourcesToIndex(context, true);

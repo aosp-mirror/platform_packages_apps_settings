@@ -22,9 +22,11 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.PersistableBundle;
 import android.os.UserManager;
 import android.telephony.CarrierConfigManager;
@@ -35,6 +37,7 @@ import android.telephony.TelephonyManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
 import org.junit.Before;
@@ -66,6 +69,7 @@ public class SimLockPreferenceControllerTest {
     private SimLockPreferenceController mController;
     private Preference mPreference;
     private Context mContext;
+    private Resources mResources;
 
     @Before
     public void setUp() {
@@ -76,7 +80,11 @@ public class SimLockPreferenceControllerTest {
         shadowApplication.setSystemService(Context.CARRIER_CONFIG_SERVICE, mCarrierManager);
         shadowApplication.setSystemService(Context.USER_SERVICE, mUserManager);
         shadowApplication.setSystemService(Context.TELEPHONY_SERVICE, mTelephonyManager);
-        mContext = RuntimeEnvironment.application;
+        mContext = spy(RuntimeEnvironment.application);
+
+        mResources = spy(mContext.getResources());
+        when(mContext.getResources()).thenReturn(mResources);
+
         mController = new SimLockPreferenceController(mContext, "key");
         mPreference = new Preference(mContext);
         mPreference.setKey(mController.getPreferenceKey());
@@ -84,7 +92,16 @@ public class SimLockPreferenceControllerTest {
     }
 
     @Test
+    public void isAvailable_notShowSimUi_false() {
+        when(mResources.getBoolean(R.bool.config_show_sim_info)).thenReturn(false);
+
+        assertThat(mController.getAvailabilityStatus())
+                .isEqualTo(BasePreferenceController.UNSUPPORTED_ON_DEVICE);
+    }
+
+    @Test
     public void isAvailable_notAdmin_false() {
+        when(mResources.getBoolean(R.bool.config_show_sim_info)).thenReturn(true);
         when(mUserManager.isAdminUser()).thenReturn(false);
 
         assertThat(mController.getAvailabilityStatus())
@@ -93,6 +110,7 @@ public class SimLockPreferenceControllerTest {
 
     @Test
     public void isAvailable_simIccNotReady_false() {
+        when(mResources.getBoolean(R.bool.config_show_sim_info)).thenReturn(true);
         when(mUserManager.isAdminUser()).thenReturn(true);
 
         assertThat(mController.getAvailabilityStatus())
@@ -124,6 +142,7 @@ public class SimLockPreferenceControllerTest {
 
     @Test
     public void displayPreference_simReady_enablePreference() {
+        when(mResources.getBoolean(R.bool.config_show_sim_info)).thenReturn(true);
         mController.displayPreference(mScreen);
 
         assertThat(mPreference.isEnabled()).isFalse();
@@ -140,12 +159,14 @@ public class SimLockPreferenceControllerTest {
 
     @Test
     public void getPreferenceKey_whenGivenValue_returnsGivenValue() {
+        when(mResources.getBoolean(R.bool.config_show_sim_info)).thenReturn(true);
         mController = new SimLockPreferenceController(mContext, "key");
 
         assertThat(mController.getPreferenceKey()).isEqualTo("key");
     }
 
     private void setupMockIcc() {
+        when(mResources.getBoolean(R.bool.config_show_sim_info)).thenReturn(true);
         final List<SubscriptionInfo> subscriptionInfoList = new ArrayList<>();
         SubscriptionInfo info = mock(SubscriptionInfo.class);
         subscriptionInfoList.add(info);
@@ -156,6 +177,7 @@ public class SimLockPreferenceControllerTest {
     }
 
     private void setupMockSimReady() {
+        when(mResources.getBoolean(R.bool.config_show_sim_info)).thenReturn(true);
         final List<SubscriptionInfo> subscriptionInfoList = new ArrayList<>();
         SubscriptionInfo info = mock(SubscriptionInfo.class);
         subscriptionInfoList.add(info);

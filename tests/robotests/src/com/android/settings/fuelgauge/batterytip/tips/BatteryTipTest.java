@@ -20,11 +20,14 @@ import static com.google.common.truth.Truth.assertThat;
 import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.view.View;
 
-import androidx.annotation.IdRes;
+import androidx.annotation.DrawableRes;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
+import com.android.settings.widget.CardPreference;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.testutils.DrawableTestHelper;
 
@@ -42,8 +45,7 @@ public class BatteryTipTest {
 
     private static final String TITLE = "title";
     private static final String SUMMARY = "summary";
-    @IdRes
-    private static final int ICON_ID = R.drawable.ic_fingerprint;
+    @DrawableRes private static final int ICON_ID = R.drawable.ic_fingerprint;
 
     private Context mContext;
     private TestBatteryTip mBatteryTip;
@@ -81,6 +83,23 @@ public class BatteryTipTest {
     }
 
     @Test
+    public void updatePreference_resetLayoutState() {
+        mContext.setTheme(R.style.Theme_Settings);
+        PreferenceViewHolder holder =
+                PreferenceViewHolder.createInstanceForTests(
+                        View.inflate(
+                                mContext, R.layout.card_preference_layout, /* parent= */ null));
+        CardPreference cardPreference = new CardPreference(mContext);
+        cardPreference.onBindViewHolder(holder);
+        cardPreference.setPrimaryButtonVisible(true);
+
+        mBatteryTip.updatePreference(cardPreference);
+
+        View view = holder.findViewById(R.id.card_preference_buttons);
+        assertThat(view.getVisibility()).isEqualTo(View.GONE);
+    }
+
+    @Test
     public void tipOrder_orderUnique() {
         final List<Integer> orders = new ArrayList<>();
         for (int i = 0, size = BatteryTip.TIP_ORDER.size(); i < size; i++) {
@@ -95,9 +114,7 @@ public class BatteryTipTest {
         assertThat(mBatteryTip.toString()).isEqualTo("type=6 state=0");
     }
 
-    /**
-     * Used to test the non abstract methods in {@link TestBatteryTip}
-     */
+    /** Used to test the non abstract methods in {@link TestBatteryTip} */
     public static class TestBatteryTip extends BatteryTip {
         TestBatteryTip() {
             super(TipType.SUMMARY, StateType.NEW, true);
@@ -132,14 +149,15 @@ public class BatteryTipTest {
             // do nothing
         }
 
-        public final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-            public BatteryTip createFromParcel(Parcel in) {
-                return new TestBatteryTip(in);
-            }
+        public final Parcelable.Creator CREATOR =
+                new Parcelable.Creator() {
+                    public BatteryTip createFromParcel(Parcel in) {
+                        return new TestBatteryTip(in);
+                    }
 
-            public BatteryTip[] newArray(int size) {
-                return new TestBatteryTip[size];
-            }
-        };
+                    public BatteryTip[] newArray(int size) {
+                        return new TestBatteryTip[size];
+                    }
+                };
     }
 }

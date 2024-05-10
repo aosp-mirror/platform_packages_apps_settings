@@ -84,7 +84,7 @@ public class DarkModeScheduleSelectorControllerTest {
         when(mContext.getSystemService(LocationManager.class)).thenReturn(mLocationManager);
         when(mContext.getResources()).thenReturn(mResources);
         when(mResources.getConfiguration()).thenReturn(mConfigNightNo);
-        when(mResources.getString(com.android.internal.R.string.config_defaultWellbeingPackage))
+        when(mResources.getString(com.android.internal.R.string.config_systemWellbeing))
                 .thenReturn("wellbeing");
 
         when(mContext.getString(R.string.dark_ui_auto_mode_never)).thenReturn("never");

@@ -45,6 +45,9 @@ import org.robolectric.annotation.Implements;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class ConfigureWifiSettingsTest {
 
     @Rule

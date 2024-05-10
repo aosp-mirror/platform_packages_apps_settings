@@ -16,14 +16,11 @@
 
 package com.android.settings.wifi.tether;
 
-import static com.android.settings.AllInOneTetherSettings.DEDUP_POSTFIX;
-
 import android.annotation.NonNull;
 import android.content.Context;
 import android.net.wifi.SoftApCapability;
 import android.net.wifi.SoftApConfiguration;
 import android.net.wifi.WifiManager;
-import android.util.FeatureFlagUtils;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
@@ -31,7 +28,7 @@ import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.core.FeatureFlags;
+import com.android.settings.overlay.FeatureFactory;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -48,10 +45,19 @@ public class WifiTetherSecurityPreferenceController extends WifiTetherBasePrefer
     private int mSecurityValue;
     @VisibleForTesting
     boolean mIsWpa3Supported = true;
+    @VisibleForTesting
+    boolean mShouldHidePreference;
 
     public WifiTetherSecurityPreferenceController(Context context,
             OnTetherConfigUpdateListener listener) {
         super(context, listener);
+        // If the Wi-Fi Hotspot Speed Feature available, then hide this controller.
+        mShouldHidePreference = FeatureFactory.getFeatureFactory()
+                .getWifiFeatureProvider().getWifiHotspotRepository().isSpeedFeatureAvailable();
+        Log.d(TAG, "shouldHidePreference():" + mShouldHidePreference);
+        if (mShouldHidePreference) {
+            return;
+        }
         final String[] securityNames = mContext.getResources().getStringArray(
                 R.array.wifi_tether_security);
         final String[] securityValues = mContext.getResources().getStringArray(
@@ -63,9 +69,16 @@ public class WifiTetherSecurityPreferenceController extends WifiTetherBasePrefer
     }
 
     @Override
+    public boolean isAvailable() {
+        if (mShouldHidePreference) {
+            return false;
+        }
+        return super.isAvailable();
+    }
+
+    @Override
     public String getPreferenceKey() {
-        return FeatureFlagUtils.isEnabled(mContext, FeatureFlags.TETHER_ALL_IN_ONE)
-                ? PREF_KEY + DEDUP_POSTFIX : PREF_KEY;
+        return PREF_KEY;
     }
 
     @Override

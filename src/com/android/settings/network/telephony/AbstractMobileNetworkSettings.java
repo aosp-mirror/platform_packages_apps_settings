@@ -18,7 +18,6 @@ package com.android.settings.network.telephony;
 
 import android.os.SystemClock;
 import android.text.TextUtils;
-import android.util.Log;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -66,8 +65,7 @@ abstract class AbstractMobileNetworkSettings extends RestrictedDashboardFragment
 
     TelephonyStatusControlSession setTelephonyAvailabilityStatus(
             Collection<AbstractPreferenceController> listOfPrefControllers) {
-        return (new TelephonyStatusControlSession.Builder(listOfPrefControllers))
-                .build();
+        return new TelephonyStatusControlSession(listOfPrefControllers, getLifecycle());
     }
 
     @Override

@@ -40,23 +40,18 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.fuelgauge.PowerAllowlistBackend;
 
-public class HighPowerDetail extends InstrumentedDialogFragment implements OnClickListener,
-        View.OnClickListener {
+public class HighPowerDetail extends InstrumentedDialogFragment
+        implements OnClickListener, View.OnClickListener {
 
     private static final String ARG_DEFAULT_ON = "default_on";
 
-    @VisibleForTesting
-    PowerAllowlistBackend mBackend;
-    @VisibleForTesting
-    BatteryUtils mBatteryUtils;
-    @VisibleForTesting
-    String mPackageName;
-    @VisibleForTesting
-    int mPackageUid;
+    @VisibleForTesting PowerAllowlistBackend mBackend;
+    @VisibleForTesting BatteryUtils mBatteryUtils;
+    @VisibleForTesting String mPackageName;
+    @VisibleForTesting int mPackageUid;
     private CharSequence mLabel;
     private boolean mDefaultOn;
-    @VisibleForTesting
-    boolean mIsEnabled;
+    @VisibleForTesting boolean mIsEnabled;
     private Checkable mOptionOn;
     private Checkable mOptionOff;
 
@@ -81,14 +76,17 @@ public class HighPowerDetail extends InstrumentedDialogFragment implements OnCli
             mLabel = mPackageName;
         }
         mDefaultOn = getArguments().getBoolean(ARG_DEFAULT_ON);
-        mIsEnabled = mDefaultOn || mBackend.isAllowlisted(mPackageName);
+        mIsEnabled = mDefaultOn || mBackend.isAllowlisted(mPackageName, mPackageUid);
     }
 
     public Checkable setup(View view, boolean on) {
-        ((TextView) view.findViewById(android.R.id.title)).setText(on
-                ? R.string.ignore_optimizations_on : R.string.ignore_optimizations_off);
-        ((TextView) view.findViewById(android.R.id.summary)).setText(on
-                ? R.string.ignore_optimizations_on_desc : R.string.ignore_optimizations_off_desc);
+        ((TextView) view.findViewById(android.R.id.title))
+                .setText(on ? R.string.ignore_optimizations_on : R.string.ignore_optimizations_off);
+        ((TextView) view.findViewById(android.R.id.summary))
+                .setText(
+                        on
+                                ? R.string.ignore_optimizations_on_desc
+                                : R.string.ignore_optimizations_off_desc);
         view.setClickable(true);
         view.setOnClickListener(this);
         if (!on && mBackend.isSysAllowlisted(mPackageName)) {
@@ -99,10 +97,11 @@ public class HighPowerDetail extends InstrumentedDialogFragment implements OnCli
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder b = new AlertDialog.Builder(getContext())
-                .setTitle(mLabel)
-                .setNegativeButton(R.string.cancel, null)
-                .setView(R.layout.ignore_optimizations_content);
+        AlertDialog.Builder b =
+                new AlertDialog.Builder(getContext())
+                        .setTitle(mLabel)
+                        .setNegativeButton(R.string.cancel, null)
+                        .setView(R.layout.ignore_optimizations_content);
         if (!mBackend.isSysAllowlisted(mPackageName)) {
             b.setPositiveButton(R.string.done, this);
         }
@@ -137,12 +136,12 @@ public class HighPowerDetail extends InstrumentedDialogFragment implements OnCli
     public void onClick(DialogInterface dialog, int which) {
         if (which == DialogInterface.BUTTON_POSITIVE) {
             boolean newValue = mIsEnabled;
-            boolean oldValue = mBackend.isAllowlisted(mPackageName);
+            boolean oldValue = mBackend.isAllowlisted(mPackageName, mPackageUid);
             if (newValue != oldValue) {
                 logSpecialPermissionChange(newValue, mPackageName, getContext());
                 if (newValue) {
-                    mBatteryUtils.setForceAppStandby(mPackageUid, mPackageName,
-                            AppOpsManager.MODE_ALLOWED);
+                    mBatteryUtils.setForceAppStandby(
+                            mPackageUid, mPackageName, AppOpsManager.MODE_ALLOWED);
                     mBackend.addApp(mPackageName);
                 } else {
                     mBackend.removeApp(mPackageName);
@@ -153,10 +152,13 @@ public class HighPowerDetail extends InstrumentedDialogFragment implements OnCli
 
     @VisibleForTesting
     static void logSpecialPermissionChange(boolean allowlist, String packageName, Context context) {
-        int logCategory = allowlist ? SettingsEnums.APP_SPECIAL_PERMISSION_BATTERY_DENY
-                : SettingsEnums.APP_SPECIAL_PERMISSION_BATTERY_ALLOW;
-        FeatureFactory.getFactory(context).getMetricsFeatureProvider().action(context, logCategory,
-                packageName);
+        int logCategory =
+                allowlist
+                        ? SettingsEnums.APP_SPECIAL_PERMISSION_BATTERY_DENY
+                        : SettingsEnums.APP_SPECIAL_PERMISSION_BATTERY_ALLOW;
+        FeatureFactory.getFeatureFactory()
+                .getMetricsFeatureProvider()
+                .action(context, logCategory, packageName);
     }
 
     @Override
@@ -169,20 +171,20 @@ public class HighPowerDetail extends InstrumentedDialogFragment implements OnCli
     }
 
     public static CharSequence getSummary(Context context, AppEntry entry) {
-        return getSummary(context, entry.info.packageName);
+        return getSummary(context, entry.info.packageName, entry.info.uid);
     }
 
-    public static CharSequence getSummary(Context context, String pkg) {
-        return getSummary(context, PowerAllowlistBackend.getInstance(context), pkg);
+    public static CharSequence getSummary(Context context, String pkg, int uid) {
+        return getSummary(context, PowerAllowlistBackend.getInstance(context), pkg, uid);
     }
 
     @VisibleForTesting
-    static CharSequence getSummary(Context context, PowerAllowlistBackend powerAllowlist,
-            String pkg) {
+    static CharSequence getSummary(
+            Context context, PowerAllowlistBackend powerAllowlist, String pkg, int uid) {
         return context.getString(
-                powerAllowlist.isSysAllowlisted(pkg) || powerAllowlist.isDefaultActiveApp(pkg)
+                powerAllowlist.isSysAllowlisted(pkg) || powerAllowlist.isDefaultActiveApp(pkg, uid)
                         ? R.string.high_power_system
-                        : powerAllowlist.isAllowlisted(pkg)
+                        : powerAllowlist.isAllowlisted(pkg, uid)
                                 ? R.string.high_power_on
                                 : R.string.high_power_off);
     }

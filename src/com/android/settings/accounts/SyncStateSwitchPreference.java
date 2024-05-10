@@ -26,12 +26,12 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.preference.PreferenceViewHolder;
-import androidx.preference.SwitchPreference;
+import androidx.preference.SwitchPreferenceCompat;
 
 import com.android.settings.R;
 import com.android.settingslib.widget.AnimatedImageView;
 
-public class SyncStateSwitchPreference extends SwitchPreference {
+public class SyncStateSwitchPreference extends SwitchPreferenceCompat {
 
     private boolean mIsActive = false;
     private boolean mIsPending = false;
@@ -84,7 +84,7 @@ public class SyncStateSwitchPreference extends SwitchPreference {
         final boolean failedVisible = mFailed && !activeVisible;
         syncFailedView.setVisibility(failedVisible ? View.VISIBLE : View.GONE);
 
-        View switchView = view.findViewById(com.android.internal.R.id.switch_widget);
+        View switchView = view.findViewById(androidx.preference.R.id.switchWidget);
         if (mOneTimeSyncMode) {
             switchView.setVisibility(View.GONE);
 

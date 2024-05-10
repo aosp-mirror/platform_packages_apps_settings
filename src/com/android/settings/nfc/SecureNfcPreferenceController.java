@@ -20,7 +20,7 @@ import android.nfc.NfcAdapter;
 import android.os.UserManager;
 
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
@@ -49,7 +49,7 @@ public class SecureNfcPreferenceController extends TogglePreferenceController
             return;
         }
 
-        final SwitchPreference switchPreference = screen.findPreference(getPreferenceKey());
+        final TwoStatePreference switchPreference = screen.findPreference(getPreferenceKey());
 
         mSecureNfcEnabler = new SecureNfcEnabler(mContext, switchPreference);
     }
@@ -109,7 +109,7 @@ public class SecureNfcPreferenceController extends TogglePreferenceController
     }
 
     private boolean isToggleable() {
-        if (mUserManager.isGuestUser()) {
+        if (!mUserManager.isPrimaryUser()) {
             return false;
         }
         return true;

@@ -52,8 +52,6 @@ import java.util.List;
 @RunWith(RobolectricTestRunner.class)
 public class BluetoothCodecDialogPreferenceControllerTest {
 
-    private static final int SOURCE_CODEC_TYPE_OPUS = 6; // TODO(b/240635097): remove in U
-
     private static final String DEVICE_ADDRESS = "00:11:22:33:44:55";
 
     @Mock
@@ -123,7 +121,7 @@ public class BluetoothCodecDialogPreferenceControllerTest {
                 .setCodecType(BluetoothCodecConfig.SOURCE_CODEC_TYPE_LDAC)
                 .build();
         mCodecConfigOPUS = new BluetoothCodecConfig.Builder()
-                .setCodecType(SOURCE_CODEC_TYPE_OPUS)
+                .setCodecType(BluetoothCodecConfig.SOURCE_CODEC_TYPE_OPUS)
                 .build();
         when(mBluetoothAdapter.getActiveDevices(eq(BluetoothProfile.A2DP)))
                 .thenReturn(Arrays.asList(mActiveDevice));
@@ -143,8 +141,8 @@ public class BluetoothCodecDialogPreferenceControllerTest {
         mController.onBluetoothServiceConnected(mBluetoothA2dp);
 
         mController.writeConfigurationValues(0);
-                                                // TODO(b/240635097): update in U
-        verify(mBluetoothA2dpConfigStore).setCodecType(SOURCE_CODEC_TYPE_OPUS);
+        verify(mBluetoothA2dpConfigStore).setCodecType(
+                BluetoothCodecConfig.SOURCE_CODEC_TYPE_OPUS);
     }
 
     @Test
@@ -176,8 +174,8 @@ public class BluetoothCodecDialogPreferenceControllerTest {
         verify(mBluetoothA2dpConfigStore).setCodecType(BluetoothCodecConfig.SOURCE_CODEC_TYPE_LDAC);
 
         mController.writeConfigurationValues(7);
-                                                // TODO(b/240635097): update in U
-        verify(mBluetoothA2dpConfigStore).setCodecType(SOURCE_CODEC_TYPE_OPUS);
+        verify(mBluetoothA2dpConfigStore).setCodecType(
+                BluetoothCodecConfig.SOURCE_CODEC_TYPE_OPUS);
     }
 
     @Test
@@ -211,8 +209,8 @@ public class BluetoothCodecDialogPreferenceControllerTest {
     @Test
     public void getCurrentIndexByConfig_verifyOpusIndex() {
         assertThat(mController.getCurrentIndexByConfig(mCodecConfigOPUS)).isEqualTo(
-                mController.convertCfgToBtnIndex(SOURCE_CODEC_TYPE_OPUS));
-                                             // TODO(b/240635097): update in U
+                mController.convertCfgToBtnIndex(
+                    BluetoothCodecConfig.SOURCE_CODEC_TYPE_OPUS));
     }
 
 
@@ -239,7 +237,7 @@ public class BluetoothCodecDialogPreferenceControllerTest {
         mController.onHDAudioEnabled(/* enabled= */ true);
 
         verify(mBluetoothA2dpConfigStore, atLeastOnce()).setCodecType(
-                eq(SOURCE_CODEC_TYPE_OPUS)); // TODO(b/240635097): update in U
+                eq(BluetoothCodecConfig.SOURCE_CODEC_TYPE_OPUS));
     }
 
     @Test

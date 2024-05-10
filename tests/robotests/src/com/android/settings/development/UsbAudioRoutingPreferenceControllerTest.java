@@ -75,8 +75,7 @@ public class UsbAudioRoutingPreferenceControllerTest {
 
     @Test
     public void updateState_usbAudioRoutingEnabled_shouldCheckedPreference() {
-        when(mDevicePolicyManager.isUsbDataSignalingEnabledForUser(
-                UserHandle.myUserId())).thenReturn(true);
+        when(mDevicePolicyManager.isUsbDataSignalingEnabled()).thenReturn(true);
         when(mDevicePolicyManager.getProfileOwner()).thenReturn(TEST_COMPONENT_NAME);
         Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.USB_AUDIO_AUTOMATIC_ROUTING_DISABLED,
@@ -89,8 +88,7 @@ public class UsbAudioRoutingPreferenceControllerTest {
 
     @Test
     public void updateState_usbAudioRoutingDisabled_shouldUncheckedPreference() {
-        when(mDevicePolicyManager.isUsbDataSignalingEnabledForUser(
-                UserHandle.myUserId())).thenReturn(true);
+        when(mDevicePolicyManager.isUsbDataSignalingEnabled()).thenReturn(true);
         when(mDevicePolicyManager.getProfileOwner()).thenReturn(TEST_COMPONENT_NAME);
         Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.USB_AUDIO_AUTOMATIC_ROUTING_DISABLED,
@@ -103,8 +101,7 @@ public class UsbAudioRoutingPreferenceControllerTest {
 
     @Test
     public void updateState_usbDataSignalingDisabled_shouldDisablePreference() {
-        when(mDevicePolicyManager.isUsbDataSignalingEnabledForUser(
-                UserHandle.myUserId())).thenReturn(false);
+        when(mDevicePolicyManager.isUsbDataSignalingEnabled()).thenReturn(false);
         when(mDevicePolicyManager.getProfileOwner()).thenReturn(TEST_COMPONENT_NAME);
 
         mController.updateState(mPreference);
@@ -150,8 +147,7 @@ public class UsbAudioRoutingPreferenceControllerTest {
 
     @Test
     public void onDeveloperOptionsSwitchEnabled_usbEnabled_shouldNotDisablePreference() {
-        when(mDevicePolicyManager.isUsbDataSignalingEnabledForUser(
-                UserHandle.myUserId())).thenReturn(true);
+        when(mDevicePolicyManager.isUsbDataSignalingEnabled()).thenReturn(true);
         when(mDevicePolicyManager.getProfileOwner()).thenReturn(TEST_COMPONENT_NAME);
 
         mController.onDeveloperOptionsSwitchEnabled();
@@ -161,8 +157,7 @@ public class UsbAudioRoutingPreferenceControllerTest {
 
     @Test
     public void onDeveloperOptionsSwitchEnabled_usbDisabled_shouldDisablePreference() {
-        when(mDevicePolicyManager.isUsbDataSignalingEnabledForUser(
-                UserHandle.myUserId())).thenReturn(false);
+        when(mDevicePolicyManager.isUsbDataSignalingEnabled()).thenReturn(false);
         when(mDevicePolicyManager.getProfileOwner()).thenReturn(TEST_COMPONENT_NAME);
 
         mController.onDeveloperOptionsSwitchEnabled();

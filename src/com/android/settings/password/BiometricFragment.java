@@ -126,7 +126,7 @@ public class BiometricFragment extends InstrumentedFragment {
         final Bundle bundle = getArguments();
         final PromptInfo promptInfo = bundle.getParcelable(KEY_PROMPT_INFO);
 
-        mBiometricPrompt = new BiometricPrompt.Builder(getContext())
+        BiometricPrompt.Builder promptBuilder = new BiometricPrompt.Builder(getContext())
                 .setTitle(promptInfo.getTitle())
                 .setUseDefaultTitle() // use default title if title is null/empty
                 .setDeviceCredentialAllowed(true)
@@ -139,8 +139,15 @@ public class BiometricFragment extends InstrumentedFragment {
                 .setConfirmationRequired(promptInfo.isConfirmationRequested())
                 .setDisallowBiometricsIfPolicyExists(
                         promptInfo.isDisallowBiometricsIfPolicyExists())
+                .setShowEmergencyCallButton(promptInfo.isShowEmergencyCallButton())
                 .setReceiveSystemEvents(true)
-                .build();
+                .setAllowBackgroundAuthentication(true);
+
+        // Check if the default subtitle should be used if subtitle is null/empty
+        if (promptInfo.isUseDefaultSubtitle()) {
+            promptBuilder.setUseDefaultSubtitle();
+        }
+        mBiometricPrompt = promptBuilder.build();
     }
 
     @Override

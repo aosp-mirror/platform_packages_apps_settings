@@ -16,6 +16,7 @@
 
 package com.android.settings.widget;
 
+import android.annotation.AnyRes;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -33,11 +34,12 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
-import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.PreferenceXmlParserUtils;
 import com.android.settings.core.PreferenceXmlParserUtils.MetadataFlag;
 import com.android.settingslib.widget.CandidateInfo;
+import com.android.settingslib.widget.IllustrationPreference;
 import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import org.xmlpull.v1.XmlPullParserException;
@@ -46,7 +48,10 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFragment implements
+/**
+ * A fragment to handle general radio button picker
+ */
+public abstract class RadioButtonPickerFragment extends SettingsPreferenceFragment implements
         SelectorWithWidgetPreference.OnClickListener {
 
     @VisibleForTesting
@@ -61,7 +66,7 @@ public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFr
     protected int mUserId;
     private int mIllustrationId;
     private int mIllustrationPreviewId;
-    private VideoPreference mVideoPreference;
+    private IllustrationType mIllustrationType;
 
     @Override
     public void onAttach(Context context) {
@@ -249,18 +254,41 @@ public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFr
     /**
      * Allows you to set an illustration at the top of this screen. Set the illustration id to 0
      * if you want to remove the illustration.
-     * @param illustrationId The res id for the raw of the illustration.
-     * @param previewId The res id for the drawable of the illustration
+     *
+     * @param illustrationId   The res id for the raw of the illustration.
+     * @param previewId        The res id for the drawable of the illustration.
+     * @param illustrationType The illustration type for the raw of the illustration.
      */
-    protected void setIllustration(int illustrationId, int previewId) {
+    protected void setIllustration(@AnyRes int illustrationId, @AnyRes int previewId,
+            IllustrationType illustrationType) {
         mIllustrationId = illustrationId;
         mIllustrationPreviewId = previewId;
+        mIllustrationType = illustrationType;
+    }
+
+    /**
+     * Allows you to set an illustration at the top of this screen. Set the illustration id to 0
+     * if you want to remove the illustration.
+     *
+     * @param illustrationId   The res id for the raw of the illustration.
+     * @param illustrationType The illustration type for the raw of the illustration.
+     */
+    protected void setIllustration(@AnyRes int illustrationId, IllustrationType illustrationType) {
+        setIllustration(illustrationId, 0, illustrationType);
     }
 
     private void addIllustration(PreferenceScreen screen) {
-        mVideoPreference = new VideoPreference(getContext());
-        mVideoPreference.setVideo(mIllustrationId, mIllustrationPreviewId);
-        screen.addPreference(mVideoPreference);
+        switch (mIllustrationType) {
+            case LOTTIE_ANIMATION:
+                IllustrationPreference illustrationPreference = new IllustrationPreference(
+                        getContext());
+                illustrationPreference.setLottieAnimationResId(mIllustrationId);
+                screen.addPreference(illustrationPreference);
+                break;
+            default:
+                throw new IllegalArgumentException(
+                        "Invalid illustration type: " + mIllustrationType);
+        }
     }
 
     protected abstract List<? extends CandidateInfo> getCandidates();
@@ -279,6 +307,10 @@ public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFr
     @LayoutRes
     protected int getRadioButtonPreferenceCustomLayoutResId() {
         return 0;
+    }
+
+    protected enum IllustrationType {
+        LOTTIE_ANIMATION
     }
 
 }

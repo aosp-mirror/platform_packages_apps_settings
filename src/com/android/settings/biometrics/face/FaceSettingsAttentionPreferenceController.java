@@ -23,7 +23,7 @@ import android.hardware.face.FaceManager.SetFeatureCallback;
 import android.provider.Settings;
 
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.Utils;
 
@@ -37,7 +37,7 @@ public class FaceSettingsAttentionPreferenceController extends FaceSettingsPrefe
 
     private byte[] mToken;
     private FaceManager mFaceManager;
-    private SwitchPreference mPreference;
+    private TwoStatePreference mPreference;
 
     private final SetFeatureCallback mSetFeatureCallback = new SetFeatureCallback() {
         @Override

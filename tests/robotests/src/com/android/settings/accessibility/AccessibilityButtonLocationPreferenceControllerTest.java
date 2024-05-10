@@ -16,7 +16,6 @@
 
 package com.android.settings.accessibility;
 
-import static android.provider.Settings.Secure.ACCESSIBILITY_BUTTON_MODE_FLOATING_MENU;
 import static android.provider.Settings.Secure.ACCESSIBILITY_BUTTON_MODE_NAVIGATION_BAR;
 import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_2BUTTON;
 import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL;
@@ -93,14 +92,5 @@ public class AccessibilityButtonLocationPreferenceControllerTest {
 
         final String navigationBarValue = String.valueOf(ACCESSIBILITY_BUTTON_MODE_NAVIGATION_BAR);
         assertThat(mListPreference.getValue()).isEqualTo(navigationBarValue);
-    }
-
-    @Test
-    public void onPreferenceChange_a11yBtnModeFloatingMenu_floatingMenuValue() {
-        final String floatingMenuValue = String.valueOf(ACCESSIBILITY_BUTTON_MODE_FLOATING_MENU);
-
-        mController.onPreferenceChange(mListPreference, floatingMenuValue);
-
-        assertThat(mListPreference.getValue()).isEqualTo(floatingMenuValue);
     }
 }

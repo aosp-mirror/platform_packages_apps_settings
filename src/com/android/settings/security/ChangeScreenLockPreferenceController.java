@@ -56,12 +56,12 @@ public class ChangeScreenLockPreferenceController extends AbstractPreferenceCont
     public ChangeScreenLockPreferenceController(Context context, SettingsPreferenceFragment host) {
         super(context);
         mUm = (UserManager) context.getSystemService(Context.USER_SERVICE);
-        mLockPatternUtils = FeatureFactory.getFactory(context)
+        mLockPatternUtils = FeatureFactory.getFeatureFactory()
                 .getSecurityFeatureProvider()
                 .getLockPatternUtils(context);
         mHost = host;
         mProfileChallengeUserId = Utils.getManagedProfileId(mUm, mUserId);
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
         mScreenLockPreferenceDetailUtils = new ScreenLockPreferenceDetailsUtils(context);
     }
 

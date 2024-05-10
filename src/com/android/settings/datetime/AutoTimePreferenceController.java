@@ -16,69 +16,90 @@
 
 package com.android.settings.datetime;
 
+import static android.app.time.Capabilities.CAPABILITY_NOT_ALLOWED;
+import static android.app.time.Capabilities.CAPABILITY_NOT_APPLICABLE;
+import static android.app.time.Capabilities.CAPABILITY_NOT_SUPPORTED;
+import static android.app.time.Capabilities.CAPABILITY_POSSESSED;
+
+import android.app.time.TimeCapabilities;
+import android.app.time.TimeCapabilitiesAndConfig;
+import android.app.time.TimeConfiguration;
+import android.app.time.TimeManager;
 import android.content.Context;
-import android.os.UserHandle;
-import android.os.UserManager;
-import android.provider.Settings;
 
-import androidx.preference.Preference;
+import com.android.internal.annotations.VisibleForTesting;
+import com.android.settings.R;
+import com.android.settings.core.TogglePreferenceController;
 
-import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.RestrictedLockUtils;
-import com.android.settingslib.RestrictedLockUtilsInternal;
-import com.android.settingslib.RestrictedSwitchPreference;
-import com.android.settingslib.core.AbstractPreferenceController;
+public class AutoTimePreferenceController extends TogglePreferenceController {
 
-public class AutoTimePreferenceController extends AbstractPreferenceController
-        implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener {
+    private UpdateTimeAndDateCallback mCallback;
+    private final TimeManager mTimeManager;
 
-    private static final String KEY_AUTO_TIME = "auto_time";
-    private final UpdateTimeAndDateCallback mCallback;
+    public AutoTimePreferenceController(Context context, String preferenceKey) {
+        super(context, preferenceKey);
+        mTimeManager = context.getSystemService(TimeManager.class);
+    }
 
-    public AutoTimePreferenceController(Context context, UpdateTimeAndDateCallback callback) {
-        super(context);
+    public void setDateAndTimeCallback(UpdateTimeAndDateCallback callback) {
         mCallback = callback;
     }
 
     @Override
-    public boolean isAvailable() {
-        return true;
-    }
+    public int getAvailabilityStatus() {
+        TimeCapabilities timeCapabilities =
+                getTimeCapabilitiesAndConfig().getCapabilities();
+        int capability = timeCapabilities.getConfigureAutoDetectionEnabledCapability();
 
-    @Override
-    public void updateState(Preference preference) {
-        if (!(preference instanceof RestrictedSwitchPreference)) {
-            return;
+        // The preference has three states: visible, not visible, and visible but disabled.
+        // This method handles the "is visible?" check.
+        switch (capability) {
+            case CAPABILITY_NOT_SUPPORTED:
+                return DISABLED_DEPENDENT_SETTING;
+            case CAPABILITY_POSSESSED:
+            case CAPABILITY_NOT_ALLOWED:
+                // This case is expected for enterprise restrictions, where the toggle should be
+                // present but disabled. Disabling is handled declaratively via the
+                // settings:userRestriction attribute in .xml. The client-side logic is expected to
+                // concur with the capabilities logic in the system server.
+            case CAPABILITY_NOT_APPLICABLE:
+                // CAPABILITY_NOT_APPLICABLE is not currently expected, so this is return value is
+                // arbitrary.
+                return AVAILABLE;
+            default:
+                throw new IllegalStateException("Unknown capability=" + capability);
         }
-        if (!((RestrictedSwitchPreference) preference).isDisabledByAdmin()) {
-            ((RestrictedSwitchPreference) preference).setDisabledByAdmin(
-                    getEnforcedAdminProperty());
-        }
-        ((RestrictedSwitchPreference) preference).setChecked(isEnabled());
     }
 
     @Override
-    public String getPreferenceKey() {
-        return KEY_AUTO_TIME;
+    public boolean isChecked() {
+        return isEnabled();
     }
 
     @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        boolean autoEnabled = (Boolean) newValue;
-        Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.AUTO_TIME,
-                autoEnabled ? 1 : 0);
+    public boolean setChecked(boolean isChecked) {
+        TimeConfiguration configuration = new TimeConfiguration.Builder()
+                .setAutoDetectionEnabled(isChecked)
+                .build();
+        boolean result = mTimeManager.updateTimeConfiguration(configuration);
+
         mCallback.updateTimeAndDateDisplay(mContext);
-        return true;
+        return result;
     }
 
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_system;
+    }
+
+    /** Returns whether the preference should be "checked", i.e. set to the "on" position. */
+    @VisibleForTesting
     public boolean isEnabled() {
-        return Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.AUTO_TIME, 0) > 0;
+        TimeConfiguration config = getTimeCapabilitiesAndConfig().getConfiguration();
+        return config.isAutoDetectionEnabled();
     }
 
-    private RestrictedLockUtils.EnforcedAdmin getEnforcedAdminProperty() {
-        return RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
-                mContext, UserManager.DISALLOW_CONFIG_DATE_TIME,
-                UserHandle.myUserId());
+    private TimeCapabilitiesAndConfig getTimeCapabilitiesAndConfig() {
+        return mTimeManager.getTimeCapabilitiesAndConfig();
     }
 }

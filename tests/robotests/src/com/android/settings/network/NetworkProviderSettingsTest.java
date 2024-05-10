@@ -15,11 +15,14 @@
  */
 package com.android.settings.network;
 
+import static com.android.settings.network.NetworkProviderSettings.MENU_FIX_CONNECTIVITY;
 import static com.android.settings.network.NetworkProviderSettings.MENU_ID_DISCONNECT;
 import static com.android.settings.network.NetworkProviderSettings.MENU_ID_FORGET;
+import static com.android.settings.network.NetworkProviderSettings.MENU_ID_MODIFY;
 import static com.android.settings.network.NetworkProviderSettings.MENU_ID_SHARE;
 import static com.android.settings.wifi.WifiConfigUiBase2.MODE_CONNECT;
 import static com.android.settings.wifi.WifiConfigUiBase2.MODE_MODIFY;
+import static com.android.wifitrackerlib.WifiEntry.CONNECTED_STATE_DISCONNECTED;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -72,12 +75,14 @@ import com.android.settings.wifi.ConnectedWifiEntryPreference;
 import com.android.settings.wifi.LongPressWifiEntryPreference;
 import com.android.settings.wifi.WifiConfigController2;
 import com.android.settings.wifi.WifiDialog2;
+import com.android.settingslib.utils.StringUtil;
 import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.LayoutPreference;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiPickerTracker;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -95,6 +100,9 @@ import org.robolectric.shadows.ShadowToast;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class NetworkProviderSettingsTest {
 
     private static final int XML_RES = R.xml.wifi_tether_settings;
@@ -133,6 +141,8 @@ public class NetworkProviderSettingsTest {
     @Mock
     private ContextMenu mContextMenu;
     @Mock
+    private Menu mMenu;
+    @Mock
     private MenuItem mMenuItem;
     @Mock
     InternetUpdater mInternetUpdater;
@@ -145,7 +155,12 @@ public class NetworkProviderSettingsTest {
 
     @Before
     public void setUp() {
-        mNetworkProviderSettings = spy(new NetworkProviderSettings());
+        when(mMenu.add(anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(mMenuItem);
+
+        mNetworkProviderSettings = spy(new NetworkProviderSettings() {
+            @Override
+            boolean showAnySubscriptionInfo(Context context) { return true; }
+        });
         doReturn(mContext).when(mNetworkProviderSettings).getContext();
         doReturn(mPreferenceManager).when(mNetworkProviderSettings).getPreferenceManager();
         doReturn(mPowerManager).when(mContext).getSystemService(PowerManager.class);
@@ -196,9 +211,8 @@ public class NetworkProviderSettingsTest {
 
         assertThat(mNetworkProviderSettings.mSavedNetworksPreference.isVisible()).isTrue();
         assertThat(mNetworkProviderSettings.mSavedNetworksPreference.getSummary()).isEqualTo(
-                mContext.getResources().getQuantityString(
-                        R.plurals.wifi_saved_access_points_summary,
-                        NUM_NETWORKS, NUM_NETWORKS));
+                StringUtil.getIcuPluralsString(mContext, NUM_NETWORKS,
+                        R.string.wifi_saved_access_points_summary));
     }
 
     @Test
@@ -210,9 +224,8 @@ public class NetworkProviderSettingsTest {
 
         assertThat(mNetworkProviderSettings.mSavedNetworksPreference.isVisible()).isTrue();
         assertThat(mNetworkProviderSettings.mSavedNetworksPreference.getSummary()).isEqualTo(
-                mContext.getResources().getQuantityString(
-                        R.plurals.wifi_saved_passpoint_access_points_summary,
-                        NUM_NETWORKS, NUM_NETWORKS));
+                StringUtil.getIcuPluralsString(mContext, NUM_NETWORKS,
+                        R.string.wifi_saved_passpoint_access_points_summary));
     }
 
     @Test
@@ -224,9 +237,8 @@ public class NetworkProviderSettingsTest {
 
         assertThat(mNetworkProviderSettings.mSavedNetworksPreference.isVisible()).isTrue();
         assertThat(mNetworkProviderSettings.mSavedNetworksPreference.getSummary()).isEqualTo(
-                mContext.getResources().getQuantityString(
-                R.plurals.wifi_saved_all_access_points_summary,
-                NUM_NETWORKS * 2, NUM_NETWORKS * 2));
+                StringUtil.getIcuPluralsString(mContext, NUM_NETWORKS * 2,
+                        R.string.wifi_saved_all_access_points_summary));
     }
 
     @Test
@@ -275,7 +287,8 @@ public class NetworkProviderSettingsTest {
 
     private void setUpForOnCreate() {
         final FragmentActivity activity = mock(FragmentActivity.class);
-        when(mNetworkProviderSettings.getActivity()).thenReturn(activity);
+        doReturn(activity).when(mNetworkProviderSettings).requireActivity();
+        doReturn(activity).when(mNetworkProviderSettings).getActivity();
         final Resources.Theme theme = mContext.getTheme();
         when(activity.getTheme()).thenReturn(theme);
         UserManager userManager = mock(UserManager.class);
@@ -306,7 +319,7 @@ public class NetworkProviderSettingsTest {
         mNetworkProviderSettings.onCreate(Bundle.EMPTY);
 
         verify(mDataUsagePreference).setVisible(true);
-        verify(mDataUsagePreference).setTemplate(any(), eq(0) /*subId*/, eq(null) /*service*/);
+        verify(mDataUsagePreference).setTemplate(any(), eq(0) /*subId*/);
     }
 
     @Test
@@ -385,6 +398,7 @@ public class NetworkProviderSettingsTest {
         verify(mContextMenu, never()).add(anyInt(), eq(MENU_ID_SHARE), anyInt(), anyInt());
     }
 
+    @Ignore("b/313585353")
     @Test
     public void onWifiEntriesChanged_shouldChangeNextButtonState() {
         mNetworkProviderSettings.onWifiEntriesChanged();
@@ -471,46 +485,97 @@ public class NetworkProviderSettingsTest {
         when(mWifiEntry.canConnect()).thenReturn(true);
         final WifiConfigController2 controller = mock(WifiConfigController2.class);
         when(controller.getConfig()).thenReturn(config);
-        final WifiDialog2 wifiDialog2 = spy(WifiDialog2.createModal(mContext, null /* listener */,
-                mWifiEntry, mode));
-        when(wifiDialog2.getController()).thenReturn(controller);
+        WifiDialog2.WifiDialog2Listener listener = mock(WifiDialog2.WifiDialog2Listener.class);
+        final WifiDialog2 wifiDialog2 = spy(new WifiDialog2(mContext, listener, mWifiEntry, mode));
+        doReturn(controller).when(wifiDialog2).getController();
         return wifiDialog2;
     }
 
-    @Test
-    public void onCreateOptionsMenu_airplanModeOn_fixConnectivityMenuInvisible() {
-        doReturn(true).when(mAirplaneModeEnabler).isAirplaneModeOn();
-        final Menu menu = mock(Menu.class);
-        mNetworkProviderSettings.onCreateOptionsMenu(menu, null /* inflater */);
+    private void mockMenuConditions(boolean isGuest, boolean isAirplaneModeOn, boolean isWifiOn) {
+        mNetworkProviderSettings.mIsGuest = isGuest;
+        doReturn(isAirplaneModeOn).when(mAirplaneModeEnabler).isAirplaneModeOn();
+        when(mMockWifiPickerTracker.getWifiState()).thenReturn(
+                isWifiOn ? WifiManager.WIFI_STATE_ENABLED : WifiManager.WIFI_STATE_DISABLED);
 
-        verify(menu, never()).add(anyInt(), eq(NetworkProviderSettings.MENU_FIX_CONNECTIVITY),
-            anyInt(), eq(R.string.fix_connectivity));
+        doReturn(mMenuItem).when(mMenu).findItem(MENU_FIX_CONNECTIVITY);
+        mNetworkProviderSettings.mAirplaneModeEnabler = mAirplaneModeEnabler;
+        mNetworkProviderSettings.mWifiPickerTracker = mMockWifiPickerTracker;
+
     }
 
     @Test
-    public void onCreateOptionsMenu_airplanModeOff_fixConnectivityMenuVisible() {
-        doReturn(false).when(mAirplaneModeEnabler).isAirplaneModeOn();
-        final Menu menu = mock(Menu.class);
-        when(menu.add(anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(mock(MenuItem.class));
-        mNetworkProviderSettings.onCreateOptionsMenu(menu, null /* inflater */);
+    public void onCreateOptionsMenu_isGuest_hideFixConnectivityMenu() {
+        setUpForOnCreate();
+        mNetworkProviderSettings.onCreate(null);
+        mockMenuConditions(/*isGuest=*/ true, /*isAirplaneModeOn=*/ false, /*isWifiOn=*/ true);
 
-        verify(menu).add(anyInt(), eq(NetworkProviderSettings.MENU_FIX_CONNECTIVITY),
-            anyInt(), eq(R.string.fix_connectivity));
+        mNetworkProviderSettings.mMenuProvider.onPrepareMenu(mMenu);
+
+        verify(mMenuItem).setVisible(false);
+
+    }
+
+    @Test
+    public void onCreateOptionsMenu_isNotGuest_showFixConnectivityMenu() {
+        setUpForOnCreate();
+        mNetworkProviderSettings.onCreate(null);
+        mockMenuConditions(/*isGuest=*/ false, /*isAirplaneModeOn=*/ false, /*isWifiOn=*/ true);
+
+        mNetworkProviderSettings.mMenuProvider.onPrepareMenu(mMenu);
+
+        verify(mMenuItem).setVisible(true);
+
+    }
+
+    @Test
+    public void onCreateOptionsMenu_isAirplaneModeOnAndWifiOff_hideFixConnectivityMenu() {
+        setUpForOnCreate();
+        mNetworkProviderSettings.onCreate(null);
+        mockMenuConditions(/*isGuest=*/ false, /*isAirplaneModeOn=*/ true, /*isWifiOn=*/ false);
+
+        mNetworkProviderSettings.mMenuProvider.onPrepareMenu(mMenu);
+
+        verify(mMenuItem).setVisible(false);
+    }
+
+    @Test
+    public void onCreateOptionsMenu_isAirplaneModeOnAndWifiOn_showFixConnectivityMenu() {
+        setUpForOnCreate();
+        mNetworkProviderSettings.onCreate(null);
+        mockMenuConditions(/*isGuest=*/ false, /*isAirplaneModeOn=*/ true, /*isWifiOn=*/ true);
+
+        mNetworkProviderSettings.mMenuProvider.onPrepareMenu(mMenu);
+
+        verify(mMenuItem).setVisible(true);
+    }
+
+    @Test
+    public void onCreateOptionsMenu_isNotAirplaneModeOn_showFixConnectivityMenu() {
+        setUpForOnCreate();
+        mNetworkProviderSettings.onCreate(null);
+        mockMenuConditions(/*isGuest=*/ false, /*isAirplaneModeOn=*/ false, /*isWifiOn=*/ true);
+
+        mNetworkProviderSettings.mMenuProvider.onPrepareMenu(mMenu);
+
+        verify(mMenuItem).setVisible(true);
     }
 
     @Test
     public void onOptionsItemSelected_fixConnectivity_restartInternet() {
-        mNetworkProviderSettings.mInternetResetHelper = mInternetResetHelper;
+        setUpForOnCreate();
         doReturn(false).when(mNetworkProviderSettings).isPhoneOnCall();
-        doReturn(NetworkProviderSettings.MENU_FIX_CONNECTIVITY).when(mMenuItem).getItemId();
+        doReturn(MENU_FIX_CONNECTIVITY).when(mMenuItem).getItemId();
+        mNetworkProviderSettings.onCreate(null);
+        mNetworkProviderSettings.mInternetResetHelper = mInternetResetHelper;
 
-        mNetworkProviderSettings.onOptionsItemSelected(mMenuItem);
+        mNetworkProviderSettings.mMenuProvider.onMenuItemSelected(mMenuItem);
 
         verify(mInternetResetHelper).restart();
     }
 
     @Test
     public void onAirplaneModeChanged_apmIsOn_showApmMsg() {
+        setUpForOnCreate();
         mNetworkProviderSettings.onAirplaneModeChanged(true);
 
         verify(mAirplaneModeMsgPreference).setVisible(true);
@@ -518,6 +583,7 @@ public class NetworkProviderSettingsTest {
 
     @Test
     public void onAirplaneModeChanged_apmIsOff_hideApmMsg() {
+        setUpForOnCreate();
         mNetworkProviderSettings.onAirplaneModeChanged(false);
 
         verify(mAirplaneModeMsgPreference).setVisible(false);
@@ -730,6 +796,28 @@ public class NetworkProviderSettingsTest {
     }
 
     @Test
+    public void addModifyMenuIfSuitable_isAdmin_addMenu() {
+        mNetworkProviderSettings.mIsAdmin = true;
+        when(mWifiEntry.isSaved()).thenReturn(true);
+        when(mWifiEntry.getConnectedState()).thenReturn(CONNECTED_STATE_DISCONNECTED);
+
+        mNetworkProviderSettings.addModifyMenuIfSuitable(mContextMenu, mWifiEntry);
+
+        verify(mContextMenu).add(anyInt(), eq(MENU_ID_MODIFY), anyInt(), anyInt());
+    }
+
+    @Test
+    public void addModifyMenuIfSuitable_isNotAdmin_notAddMenu() {
+        mNetworkProviderSettings.mIsAdmin = false;
+        when(mWifiEntry.isSaved()).thenReturn(true);
+        when(mWifiEntry.getConnectedState()).thenReturn(CONNECTED_STATE_DISCONNECTED);
+
+        mNetworkProviderSettings.addModifyMenuIfSuitable(mContextMenu, mWifiEntry);
+
+        verify(mContextMenu, never()).add(anyInt(), eq(MENU_ID_MODIFY), anyInt(), anyInt());
+    }
+
+    @Test
     public void getNonIndexableKeys_allowedChangeWifiState_keyNotReturned() {
         when(mWifiRestriction.isChangeWifiStateAllowed(mContext)).thenReturn(true);
         NetworkProviderSettings.SearchIndexProvider searchIndexProvider =
@@ -749,6 +837,28 @@ public class NetworkProviderSettingsTest {
         final List<String> keys = searchIndexProvider.getNonIndexableKeys(mContext);
 
         assertThat(keys).contains(NetworkProviderSettings.PREF_KEY_WIFI_TOGGLE);
+    }
+
+    @Test
+    public void getNonIndexableKeys_wifiStateEnabled_addWifiNetworkKeyNotReturned() {
+        when(mWifiManager.getWifiState()).thenReturn(WifiManager.WIFI_STATE_ENABLED);
+        NetworkProviderSettings.SearchIndexProvider searchIndexProvider =
+                new NetworkProviderSettings.SearchIndexProvider(XML_RES, mWifiRestriction);
+
+        final List<String> keys = searchIndexProvider.getNonIndexableKeys(mContext);
+
+        assertThat(keys).doesNotContain(NetworkProviderSettings.PREF_KEY_ADD_WIFI_NETWORK);
+    }
+
+    @Test
+    public void getNonIndexableKeys_wifiStateDisabled_addWifiNetworkKeyReturned() {
+        when(mWifiManager.getWifiState()).thenReturn(WifiManager.WIFI_STATE_DISABLED);
+        NetworkProviderSettings.SearchIndexProvider searchIndexProvider =
+                new NetworkProviderSettings.SearchIndexProvider(XML_RES, mWifiRestriction);
+
+        final List<String> keys = searchIndexProvider.getNonIndexableKeys(mContext);
+
+        assertThat(keys).contains(NetworkProviderSettings.PREF_KEY_ADD_WIFI_NETWORK);
     }
 
     @Test

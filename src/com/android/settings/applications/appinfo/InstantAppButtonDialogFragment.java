@@ -49,7 +49,7 @@ public class InstantAppButtonDialogFragment extends InstrumentedDialogFragment i
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.DIALOG_APP_INFO_ACTION;
+        return SettingsEnums.DIALOG_INSTANT_APP_INFO_ACTION;
     }
 
     @Override
@@ -63,7 +63,7 @@ public class InstantAppButtonDialogFragment extends InstrumentedDialogFragment i
     public void onClick(DialogInterface dialog, int which) {
         final Context context = getContext();
         final PackageManager packageManager = context.getPackageManager();
-        FeatureFactory.getFactory(context).getMetricsFeatureProvider()
+        FeatureFactory.getFeatureFactory().getMetricsFeatureProvider()
             .action(context, SettingsEnums.ACTION_SETTINGS_CLEAR_INSTANT_APP, mPackageName);
         packageManager.deletePackageAsUser(mPackageName, null, 0, UserHandle.myUserId());
     }

@@ -80,7 +80,7 @@ public class AutomaticStorageManagerSwitchBarControllerTest {
 
     @Test
     public void onSwitchChanged_false_recordsAMetric() {
-        mController.onSwitchChanged(null, false);
+        mController.onCheckedChanged(null, false);
 
         verify(mMetricsFeatureProvider)
                 .action(
@@ -91,7 +91,7 @@ public class AutomaticStorageManagerSwitchBarControllerTest {
 
     @Test
     public void onSwitchChanged_true_recordsAMetric() {
-        mController.onSwitchChanged(null, true);
+        mController.onCheckedChanged(null, true);
 
         verify(mMetricsFeatureProvider)
                 .action(
@@ -102,7 +102,7 @@ public class AutomaticStorageManagerSwitchBarControllerTest {
 
     @Test
     public void onSwitchChanged_showWarningFragmentIfNotEnabledByDefault() {
-        mController.onSwitchChanged(null, true);
+        mController.onCheckedChanged(null, true);
 
         verify(mFragmentManager.beginTransaction())
                 .add(any(Fragment.class), eq(ActivationWarningFragment.TAG));
@@ -112,7 +112,7 @@ public class AutomaticStorageManagerSwitchBarControllerTest {
     public void onSwitchChange_doNotShowWarningFragmentIfEnabledByDefault() {
         SystemProperties.set("ro.storage_manager.enabled", "true");
 
-        mController.onSwitchChanged(null, true);
+        mController.onCheckedChanged(null, true);
 
         verify(mFragmentManager.beginTransaction(), never())
                 .add(any(Fragment.class), eq(ActivationWarningFragment.TAG));

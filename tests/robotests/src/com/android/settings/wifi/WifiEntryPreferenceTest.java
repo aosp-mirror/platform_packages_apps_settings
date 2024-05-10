@@ -18,11 +18,17 @@ package com.android.settings.wifi;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.net.wifi.sharedconnectivity.app.NetworkProviderInfo;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -31,6 +37,7 @@ import androidx.preference.PreferenceViewHolder;
 
 import com.android.settingslib.R;
 import com.android.settingslib.wifi.WifiUtils;
+import com.android.wifitrackerlib.HotspotNetworkEntry;
 import com.android.wifitrackerlib.WifiEntry;
 
 import org.junit.Before;
@@ -51,6 +58,8 @@ public class WifiEntryPreferenceTest {
 
     @Mock
     private WifiEntry mMockWifiEntry;
+    @Mock
+    private HotspotNetworkEntry mHotspotNetworkEntry;
     @Mock
     private WifiUtils.InternetIconInjector mMockIconInjector;
 
@@ -80,6 +89,8 @@ public class WifiEntryPreferenceTest {
     private static final String MOCK_SUMMARY = "summary";
     private static final String FAKE_URI_STRING = "fakeuri";
 
+    WifiEntryPreference mPref;
+
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
@@ -88,6 +99,9 @@ public class WifiEntryPreferenceTest {
 
         when(mMockWifiEntry.getTitle()).thenReturn(MOCK_TITLE);
         when(mMockWifiEntry.getSummary(false /* concise */)).thenReturn(MOCK_SUMMARY);
+        when(mMockWifiEntry.getLevel()).thenReturn(0);
+        when(mMockWifiEntry.shouldShowXLevelIcon()).thenReturn(false);
+        when(mMockWifiEntry.getConnectedState()).thenReturn(WifiEntry.CONNECTED_STATE_DISCONNECTED);
 
         when(mMockIconInjector.getIcon(false /* showX */, 0)).thenReturn(mMockDrawable0);
         when(mMockIconInjector.getIcon(false /* showX */, 1)).thenReturn(mMockDrawable1);
@@ -105,6 +119,8 @@ public class WifiEntryPreferenceTest {
                 .thenReturn(mMockShowXDrawable3);
         when(mMockIconInjector.getIcon(true /* showX */, 4))
                 .thenReturn(mMockShowXDrawable4);
+
+        mPref = spy(new WifiEntryPreference(mContext, mMockWifiEntry, mMockIconInjector));
     }
 
     @Test
@@ -127,53 +143,68 @@ public class WifiEntryPreferenceTest {
     }
 
     @Test
+    public void setWifiEntry_connectedStateChanged_setIconAndSummary() {
+        when(mMockWifiEntry.getLevel()).thenReturn(4);
+        when(mMockWifiEntry.getConnectedState()).thenReturn(WifiEntry.CONNECTED_STATE_CONNECTED);
+
+        mPref.setWifiEntry(mMockWifiEntry);
+
+        verify(mPref).setIcon(any());
+        verify(mPref).setSummary(anyString());
+
+        // Only the connection state changes.
+        when(mMockWifiEntry.getConnectedState()).thenReturn(WifiEntry.CONNECTED_STATE_DISCONNECTED);
+        reset(mPref);
+
+        mPref.setWifiEntry(mMockWifiEntry);
+
+        // The icon and summary should be set in case.
+        verify(mPref).setIcon(any());
+        verify(mPref).setSummary(anyString());
+    }
+
+    @Test
     public void titleChanged_refresh_shouldUpdateTitle() {
-        final WifiEntryPreference pref =
-                new WifiEntryPreference(mContext, mMockWifiEntry, mMockIconInjector);
         final String updatedTitle = "updated title";
         when(mMockWifiEntry.getTitle()).thenReturn(updatedTitle);
 
-        pref.refresh();
+        mPref.refresh();
 
-        assertThat(pref.getTitle()).isEqualTo(updatedTitle);
+        assertThat(mPref.getTitle().toString()).isEqualTo(updatedTitle);
     }
 
     @Test
     public void summaryChanged_refresh_shouldUpdateSummary() {
-        final WifiEntryPreference pref =
-                new WifiEntryPreference(mContext, mMockWifiEntry, mMockIconInjector);
         final String updatedSummary = "updated summary";
         when(mMockWifiEntry.getSummary(false /* concise */)).thenReturn(updatedSummary);
 
-        pref.refresh();
+        mPref.refresh();
 
-        assertThat(pref.getSummary()).isEqualTo(updatedSummary);
+        assertThat(mPref.getSummary().toString()).isEqualTo(updatedSummary);
     }
 
     @Test
     public void levelChanged_refresh_shouldUpdateLevelIcon() {
         final List<Drawable> iconList = new ArrayList<>();
-        final WifiEntryPreference pref =
-                new WifiEntryPreference(mContext, mMockWifiEntry, mMockIconInjector);
 
         when(mMockWifiEntry.getLevel()).thenReturn(0);
-        pref.refresh();
-        iconList.add(pref.getIcon());
+        mPref.refresh();
+        iconList.add(mPref.getIcon());
         when(mMockWifiEntry.getLevel()).thenReturn(1);
-        pref.refresh();
-        iconList.add(pref.getIcon());
+        mPref.refresh();
+        iconList.add(mPref.getIcon());
         when(mMockWifiEntry.getLevel()).thenReturn(2);
-        pref.refresh();
-        iconList.add(pref.getIcon());
+        mPref.refresh();
+        iconList.add(mPref.getIcon());
         when(mMockWifiEntry.getLevel()).thenReturn(3);
-        pref.refresh();
-        iconList.add(pref.getIcon());
+        mPref.refresh();
+        iconList.add(mPref.getIcon());
         when(mMockWifiEntry.getLevel()).thenReturn(4);
-        pref.refresh();
-        iconList.add(pref.getIcon());
+        mPref.refresh();
+        iconList.add(mPref.getIcon());
         when(mMockWifiEntry.getLevel()).thenReturn(-1);
-        pref.refresh();
-        iconList.add(pref.getIcon());
+        mPref.refresh();
+        iconList.add(mPref.getIcon());
 
         assertThat(iconList).containsExactly(mMockDrawable0, mMockDrawable1,
                 mMockDrawable2, mMockDrawable3, mMockDrawable4, null);
@@ -183,27 +214,25 @@ public class WifiEntryPreferenceTest {
     public void levelChanged_showXWifiRefresh_shouldUpdateLevelIcon() {
         final List<Drawable> iconList = new ArrayList<>();
         when(mMockWifiEntry.shouldShowXLevelIcon()).thenReturn(true);
-        final WifiEntryPreference pref =
-                new WifiEntryPreference(mContext, mMockWifiEntry, mMockIconInjector);
 
         when(mMockWifiEntry.getLevel()).thenReturn(0);
-        pref.refresh();
-        iconList.add(pref.getIcon());
+        mPref.refresh();
+        iconList.add(mPref.getIcon());
         when(mMockWifiEntry.getLevel()).thenReturn(1);
-        pref.refresh();
-        iconList.add(pref.getIcon());
+        mPref.refresh();
+        iconList.add(mPref.getIcon());
         when(mMockWifiEntry.getLevel()).thenReturn(2);
-        pref.refresh();
-        iconList.add(pref.getIcon());
+        mPref.refresh();
+        iconList.add(mPref.getIcon());
         when(mMockWifiEntry.getLevel()).thenReturn(3);
-        pref.refresh();
-        iconList.add(pref.getIcon());
+        mPref.refresh();
+        iconList.add(mPref.getIcon());
         when(mMockWifiEntry.getLevel()).thenReturn(4);
-        pref.refresh();
-        iconList.add(pref.getIcon());
+        mPref.refresh();
+        iconList.add(mPref.getIcon());
         when(mMockWifiEntry.getLevel()).thenReturn(-1);
-        pref.refresh();
-        iconList.add(pref.getIcon());
+        mPref.refresh();
+        iconList.add(mPref.getIcon());
 
         assertThat(iconList).containsExactly(mMockShowXDrawable0, mMockShowXDrawable1,
                 mMockShowXDrawable2, mMockShowXDrawable3, mMockShowXDrawable4, null);
@@ -212,14 +241,12 @@ public class WifiEntryPreferenceTest {
     @Test
     public void notNull_whenGetHelpUriString_shouldSetImageButtonVisible() {
         when(mMockWifiEntry.getHelpUriString()).thenReturn(FAKE_URI_STRING);
-        final WifiEntryPreference pref =
-                new WifiEntryPreference(mContext, mMockWifiEntry, mMockIconInjector);
         final LayoutInflater inflater = LayoutInflater.from(mContext);
-        final View view = inflater.inflate(pref.getLayoutResource(), new LinearLayout(mContext),
+        final View view = inflater.inflate(mPref.getLayoutResource(), new LinearLayout(mContext),
                 false);
         final PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(view);
 
-        pref.onBindViewHolder(holder);
+        mPref.onBindViewHolder(holder);
 
         assertThat(view.findViewById(R.id.icon_button).getVisibility()).isEqualTo(View.VISIBLE);
     }
@@ -227,14 +254,12 @@ public class WifiEntryPreferenceTest {
     @Test
     public void helpButton_whenGetHelpUriStringNotNull_shouldSetCorrectContentDescription() {
         when(mMockWifiEntry.getHelpUriString()).thenReturn(FAKE_URI_STRING);
-        final WifiEntryPreference pref =
-                new WifiEntryPreference(mContext, mMockWifiEntry, mMockIconInjector);
         final LayoutInflater inflater = LayoutInflater.from(mContext);
-        final View view = inflater.inflate(pref.getLayoutResource(), new LinearLayout(mContext),
+        final View view = inflater.inflate(mPref.getLayoutResource(), new LinearLayout(mContext),
                 false);
         final PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(view);
 
-        pref.onBindViewHolder(holder);
+        mPref.onBindViewHolder(holder);
 
         assertThat(view.findViewById(R.id.icon_button).getContentDescription()).isEqualTo(
                 mContext.getString(R.string.help_label));
@@ -243,25 +268,49 @@ public class WifiEntryPreferenceTest {
     @Test
     public void subscriptionEntry_shouldSetImageButtonGone() {
         when(mMockWifiEntry.isSubscription()).thenReturn(true);
-        final WifiEntryPreference pref =
-                new WifiEntryPreference(mContext, mMockWifiEntry, mMockIconInjector);
         final LayoutInflater inflater = LayoutInflater.from(mContext);
-        final View view = inflater.inflate(pref.getLayoutResource(), new LinearLayout(mContext),
+        final View view = inflater.inflate(mPref.getLayoutResource(), new LinearLayout(mContext),
                 false);
         final PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(view);
 
-        pref.onBindViewHolder(holder);
+        mPref.onBindViewHolder(holder);
 
         assertThat(view.findViewById(R.id.icon_button).getVisibility()).isEqualTo(View.GONE);
     }
 
     @Test
-    public void updateIcon_ShouldSetTintListForDrawable() {
-        WifiEntryPreference pref =
-                new WifiEntryPreference(mContext, mMockWifiEntry, mMockIconInjector);
+    public void updateIcon_shouldSetTintListForDrawable() {
+        reset(mMockDrawable4);
 
-        pref.updateIcon(false /* showX */, 4 /* level */);
+        mPref.updateIcon(false /* showX */, 4 /* level */);
 
         verify(mMockDrawable4).setTintList(any());
+    }
+
+    @Test
+    public void getSecondTargetResId_shouldNotReturnZero() {
+        assertThat(mPref.getSecondTargetResId()).isNotEqualTo(0);
+    }
+
+    @Test
+    public void refresh_itsHotspotNetworkEntry_shouldUpdateHotspotIcon() {
+        int deviceType = NetworkProviderInfo.DEVICE_TYPE_PHONE;
+        when(mHotspotNetworkEntry.getDeviceType()).thenReturn(deviceType);
+        WifiEntryPreference pref = spy(
+                new WifiEntryPreference(mContext, mHotspotNetworkEntry, mMockIconInjector));
+
+        pref.refresh();
+
+        verify(pref).updateHotspotIcon(deviceType);
+    }
+
+    @Test
+    public void refresh_notHotspotNetworkEntry_shouldNotUpdateHotspotIcon() {
+        WifiEntryPreference pref = spy(
+                new WifiEntryPreference(mContext, mMockWifiEntry, mMockIconInjector));
+
+        pref.refresh();
+
+        verify(pref, never()).updateHotspotIcon(anyInt());
     }
 }

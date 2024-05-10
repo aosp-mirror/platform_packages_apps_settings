@@ -1,5 +1,7 @@
 package com.android.settings.fuelgauge.batterysaver;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
@@ -52,16 +54,6 @@ public final class BatterySaverScheduleSettingsTest {
     }
 
     @Test
-    public void onPause_withRoutineScheduleType_logExpectedData() {
-        int expectedPercentage = 0;
-        setSchedule(PowerManager.POWER_SAVE_MODE_TRIGGER_DYNAMIC, expectedPercentage);
-
-        mBatterySaverScheduleSettings.onPause();
-
-        verifySchedule("key_battery_saver_routine", expectedPercentage);
-    }
-
-    @Test
     public void onPause_withPercentageScheduleType_logExpectedData() {
         int expectedPercentage = 10;
         setSchedule(PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE, expectedPercentage);
@@ -92,19 +84,32 @@ public final class BatterySaverScheduleSettingsTest {
         verifySchedule("key_battery_saver_percentage", expectedPercentage);
     }
 
+    @Test
+    public void getMetricsCategory_returnExpectedResult() {
+        assertThat(mBatterySaverScheduleSettings.getMetricsCategory())
+                .isEqualTo(SettingsEnums.FUELGAUGE_BATTERY_SAVER_SCHEDULE);
+    }
+
     private void setSchedule(int scheduleType, int schedulePercentage) {
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.AUTOMATIC_POWER_SAVE_MODE, scheduleType);
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL, schedulePercentage);
+        Settings.Global.putInt(
+                mContext.getContentResolver(),
+                Settings.Global.AUTOMATIC_POWER_SAVE_MODE,
+                scheduleType);
+        Settings.Global.putInt(
+                mContext.getContentResolver(),
+                Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL,
+                schedulePercentage);
     }
 
     private void verifySchedule(String scheduleTypeKey, int schedulePercentage) {
         waitAWhile();
-        verify(mMetricsFeatureProvider).action(SettingsEnums.FUELGAUGE_BATTERY_SAVER,
-                SettingsEnums.FIELD_BATTERY_SAVER_SCHEDULE_TYPE,
-                SettingsEnums.FIELD_BATTERY_SAVER_PERCENTAGE_VALUE,
-                scheduleTypeKey, schedulePercentage);
+        verify(mMetricsFeatureProvider)
+                .action(
+                        SettingsEnums.FUELGAUGE_BATTERY_SAVER,
+                        SettingsEnums.FIELD_BATTERY_SAVER_SCHEDULE_TYPE,
+                        SettingsEnums.FIELD_BATTERY_SAVER_PERCENTAGE_VALUE,
+                        scheduleTypeKey,
+                        schedulePercentage);
     }
 
     private void waitAWhile() {

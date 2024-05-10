@@ -53,7 +53,7 @@ import android.widget.TextView;
 import androidx.annotation.StringRes;
 import androidx.annotation.UiThread;
 import androidx.annotation.VisibleForTesting;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
@@ -298,7 +298,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
         }
 
         final WifiDppInitiatorViewModel model =
-                ViewModelProviders.of(this).get(WifiDppInitiatorViewModel.class);
+                new ViewModelProvider(this).get(WifiDppInitiatorViewModel.class);
 
         model.getEnrolleeSuccessNetworkId().observe(this, networkId -> {
             // After configuration change, observe callback will be triggered,
@@ -400,7 +400,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
             }
         };
         final Context context = getContext();
-        mWifiPickerTracker = FeatureFactory.getFactory(context)
+        mWifiPickerTracker = FeatureFactory.getFeatureFactory()
                 .getWifiTrackerLibProvider()
                 .createWifiPickerTracker(getSettingsLifecycle(), context,
                         new Handler(Looper.getMainLooper()),
@@ -719,7 +719,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
 
     private void startWifiDppEnrolleeInitiator(WifiQrCode wifiQrCode) {
         final WifiDppInitiatorViewModel model =
-                ViewModelProviders.of(this).get(WifiDppInitiatorViewModel.class);
+                new ViewModelProvider(this).get(WifiDppInitiatorViewModel.class);
 
         model.startEasyConnectAsEnrolleeInitiator(wifiQrCode.getQrCode());
     }
@@ -765,7 +765,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
     // Check is Easy Connect handshaking or not
     private boolean isWifiDppHandshaking() {
         final WifiDppInitiatorViewModel model =
-                ViewModelProviders.of(this).get(WifiDppInitiatorViewModel.class);
+                new ViewModelProvider(this).get(WifiDppInitiatorViewModel.class);
 
         return model.isWifiDppHandshaking();
     }

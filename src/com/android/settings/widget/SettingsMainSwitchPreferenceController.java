@@ -17,20 +17,20 @@
 package com.android.settings.widget;
 
 import android.content.Context;
-import android.widget.Switch;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settingslib.widget.MainSwitchPreference;
-import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 /**
  * Preference controller for MainSwitchPreference.
  */
 public abstract class SettingsMainSwitchPreferenceController extends
-        TogglePreferenceController implements OnMainSwitchChangeListener {
+        TogglePreferenceController implements OnCheckedChangeListener {
 
     protected MainSwitchPreference mSwitchPreference;
 
@@ -49,7 +49,7 @@ public abstract class SettingsMainSwitchPreferenceController extends
     }
 
     @Override
-    public void onSwitchChanged(Switch switchView, boolean isChecked) {
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         mSwitchPreference.setChecked(isChecked);
         setChecked(isChecked);
     }

@@ -16,14 +16,15 @@
 
 package com.android.settings.accessibility;
 
-import static com.android.settings.display.ToggleFontSizePreferenceFragment.fontSizeValueToIndex;
+import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
+import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
 
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Resources;
 import android.provider.Settings;
 
-import com.android.settings.R;
+import com.android.settingslib.R;
 
 import java.util.Arrays;
 import java.util.List;
@@ -52,7 +53,29 @@ final class FontSizeData extends PreviewSizeData<Float> {
     @Override
     void commit(int currentProgress) {
         final ContentResolver resolver = getContext().getContentResolver();
+        if (Settings.Secure.getInt(resolver,
+                Settings.Secure.ACCESSIBILITY_FONT_SCALING_HAS_BEEN_CHANGED,
+                /* def= */ OFF) != ON) {
+            Settings.Secure.putInt(resolver,
+                    Settings.Secure.ACCESSIBILITY_FONT_SCALING_HAS_BEEN_CHANGED, ON);
+        }
         Settings.System.putFloat(resolver, Settings.System.FONT_SCALE,
                 getValues().get(currentProgress));
+    }
+
+    /**
+     * Utility function that returns the index in a string array with which the represented value is
+     * the closest to a given float value.
+     */
+    private static int fontSizeValueToIndex(float val, String[] indices) {
+        float lastVal = Float.parseFloat(indices[0]);
+        for (int i = 1; i < indices.length; i++) {
+            float thisVal = Float.parseFloat(indices[i]);
+            if (val < (lastVal + (thisVal - lastVal) * .5f)) {
+                return i - 1;
+            }
+            lastVal = thisVal;
+        }
+        return indices.length - 1;
     }
 }

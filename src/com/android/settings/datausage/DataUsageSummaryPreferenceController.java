@@ -18,14 +18,8 @@ package com.android.settings.datausage;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.INetworkPolicyManager;
-import android.net.NetworkPolicyManager;
 import android.net.NetworkTemplate;
-import android.os.ServiceManager;
 import android.telephony.SubscriptionInfo;
-import android.telephony.SubscriptionManager;
 import android.telephony.SubscriptionPlan;
 import android.text.TextUtils;
 import android.util.Log;
@@ -33,8 +27,6 @@ import android.util.RecurrenceRule;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceFragmentCompat;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.internal.util.CollectionUtils;
 import com.android.settings.R;
@@ -42,11 +34,6 @@ import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.datausage.lib.DataUsageLib;
 import com.android.settings.network.ProxySubscriptionManager;
 import com.android.settings.network.telephony.TelephonyBasePreferenceController;
-import com.android.settings.widget.EntityHeaderController;
-import com.android.settingslib.NetworkPolicyEditor;
-import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.core.lifecycle.LifecycleObserver;
-import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.net.DataUsageController;
 import com.android.settingslib.utils.ThreadUtils;
 
@@ -59,22 +46,15 @@ import java.util.concurrent.Future;
  * framework and falls back to legacy usage data if none are available.
  */
 public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenceController
-        implements PreferenceControllerMixin, LifecycleObserver, OnStart {
+        implements PreferenceControllerMixin {
 
     private static final String TAG = "DataUsageController";
     private static final String KEY = "status_header";
     private static final long PETA = 1000000000000000L;
-    private static final float RELATIVE_SIZE_LARGE = 1.25f * 1.25f;  // (1/0.8)^2
-    private static final float RELATIVE_SIZE_SMALL = 1.0f / RELATIVE_SIZE_LARGE;  // 0.8^2
 
-    private EntityHeaderController mEntityHeaderController;
-    private final Lifecycle mLifecycle;
-    private final PreferenceFragmentCompat mFragment;
     protected DataUsageController mDataUsageController;
     protected DataUsageInfoController mDataInfoController;
     private NetworkTemplate mDefaultTemplate;
-    protected NetworkPolicyEditor mPolicyEditor;
-    private int mDataUsageTemplate;
     private boolean mHasMobileData;
 
     /** Name of the carrier, or null if not available */
@@ -95,21 +75,14 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
     private long mDataBarSize;
     /** The number of bytes used since the start of the cycle. */
     private long mDataplanUse;
-    /** The starting time of the billing cycle in ms since the epoch */
-    private long mCycleStart;
     /** The ending time of the billing cycle in ms since the epoch */
     private long mCycleEnd;
 
-    private Intent mManageSubscriptionIntent;
-
     private Future<Long> mHistoricalUsageLevel;
 
-    public DataUsageSummaryPreferenceController(Activity activity,
-            Lifecycle lifecycle, PreferenceFragmentCompat fragment, int subscriptionId) {
+    public DataUsageSummaryPreferenceController(Activity activity, int subscriptionId) {
         super(activity, KEY);
 
-        mLifecycle = lifecycle;
-        mFragment = fragment;
         init(subscriptionId);
     }
 
@@ -125,23 +98,12 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
 
     protected void updateConfiguration(Context context,
             int subscriptionId, SubscriptionInfo subInfo) {
-        final NetworkPolicyManager policyManager =
-                context.getSystemService(NetworkPolicyManager.class);
-        mPolicyEditor = new NetworkPolicyEditor(policyManager);
-
         mDataUsageController = createDataUsageController(context);
         mDataUsageController.setSubscriptionId(subscriptionId);
         mDataInfoController = new DataUsageInfoController();
 
         if (subInfo != null) {
-            mDataUsageTemplate = R.string.cell_data_template;
             mDefaultTemplate = DataUsageLib.getMobileTemplate(context, subscriptionId);
-        } else if (DataUsageUtils.hasWifiRadio(context)) {
-            mDataUsageTemplate = R.string.wifi_data_template;
-            mDefaultTemplate = new NetworkTemplate.Builder(NetworkTemplate.MATCH_WIFI).build();
-        } else {
-            mDataUsageTemplate = R.string.ethernet_data_template;
-            mDefaultTemplate = DataUsageUtils.getDefaultTemplate(context, subscriptionId);
         }
     }
 
@@ -155,34 +117,14 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
             DataUsageController dataUsageController,
             DataUsageInfoController dataInfoController,
             NetworkTemplate defaultTemplate,
-            NetworkPolicyEditor policyEditor,
-            int dataUsageTemplate,
             Activity activity,
-            Lifecycle lifecycle,
-            EntityHeaderController entityHeaderController,
-            PreferenceFragmentCompat fragment,
             int subscriptionId) {
         super(activity, KEY);
         mDataUsageController = dataUsageController;
         mDataInfoController = dataInfoController;
         mDefaultTemplate = defaultTemplate;
-        mPolicyEditor = policyEditor;
-        mDataUsageTemplate = dataUsageTemplate;
         mHasMobileData = true;
-        mLifecycle = lifecycle;
-        mEntityHeaderController = entityHeaderController;
-        mFragment = fragment;
         mSubId = subscriptionId;
-    }
-
-    @Override
-    public void onStart() {
-        if (mEntityHeaderController == null) {
-            mEntityHeaderController =
-                    EntityHeaderController.newInstance((Activity) mContext, mFragment, null);
-        }
-        RecyclerView view = mFragment.getListView();
-        mEntityHeaderController.setRecyclerView(view, mLifecycle);
     }
 
     @VisibleForTesting
@@ -201,8 +143,7 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
 
     @Override
     public int getAvailabilityStatus(int subId) {
-        return (getSubscriptionInfo(subId) != null)
-                || DataUsageUtils.hasWifiRadio(mContext) ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+        return getSubscriptionInfo(subId) != null ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override
@@ -210,6 +151,9 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
         DataUsageSummaryPreference summaryPreference = (DataUsageSummaryPreference) preference;
 
         final SubscriptionInfo subInfo = getSubscriptionInfo(mSubId);
+        if (subInfo == null) {
+            return;
+        }
         if (mDataUsageController == null) {
             updateConfiguration(mContext, mSubId, subInfo);
         }
@@ -221,26 +165,6 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
                 mDataUsageController.getDataUsageInfo(mDefaultTemplate);
 
         long usageLevel = info.usageLevel;
-
-        if (subInfo != null) {
-            mDataInfoController.updateDataLimit(info, mPolicyEditor.getPolicy(mDefaultTemplate));
-            summaryPreference.setWifiMode(/* isWifiMode */ false,
-                    /* usagePeriod */ null, /* isSingleWifi */ false);
-        } else {
-            summaryPreference.setWifiMode(/* isWifiMode */ true, /* usagePeriod */
-                    info.period, /* isSingleWifi */ false);
-            summaryPreference.setLimitInfo(null);
-            summaryPreference.setUsageNumbers(displayUsageLevel(usageLevel),
-                    /* dataPlanSize */ -1L,
-                    /* hasMobileData */ true);
-            summaryPreference.setChartEnabled(false);
-            summaryPreference.setUsageInfo(info.cycleEnd,
-                    /* snapshotTime */ -1L,
-                    /* carrierName */ null,
-                    /* numPlans */ 0,
-                    /* launchIntent */ null);
-            return;
-        }
 
         refreshDataplanInfo(info, subInfo);
 
@@ -277,8 +201,7 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
                     DataUsageUtils.formatDataUsage(mContext, mDataBarSize));
             summaryPreference.setProgress(mDataplanUse / (float) mDataBarSize);
         }
-        summaryPreference.setUsageInfo(mCycleEnd, mSnapshotTime, mCarrierName,
-                mDataplanCount, mManageSubscriptionIntent);
+        summaryPreference.setUsageInfo(mCycleEnd, mSnapshotTime, mCarrierName, mDataplanCount);
     }
 
     private long displayUsageLevel(long usageLevel) {
@@ -302,7 +225,6 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
         mDataplanSize = -1L;
         mDataBarSize = mDataInfoController.getSummaryLimit(info);
         mDataplanUse = info.usageLevel;
-        mCycleStart = info.cycleStart;
         mCycleEnd = info.cycleEnd;
         mSnapshotTime = -1L;
 
@@ -322,59 +244,12 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
 
                 RecurrenceRule rule = primaryPlan.getCycleRule();
                 if (rule != null && rule.start != null && rule.end != null) {
-                    mCycleStart = rule.start.toEpochSecond() * 1000L;
                     mCycleEnd = rule.end.toEpochSecond() * 1000L;
                 }
                 mSnapshotTime = primaryPlan.getDataUsageTime();
             }
         }
-        // Temporarily return null, since no current users of SubscriptionPlan have this intent set.
-        // TODO (b/170330084): Remove after refactoring 5G SubscriptionPlan logic.
-        // mManageSubscriptionIntent = createManageSubscriptionIntent(mSubId);
-        mManageSubscriptionIntent = null;
-        Log.i(TAG, "Have " + mDataplanCount + " plans, dflt sub-id " + mSubId
-                + ", intent " + mManageSubscriptionIntent);
-    }
-
-    /**
-     * Create an {@link Intent} that can be launched towards the carrier app
-     * that is currently defining the billing relationship plan through
-     * {@link INetworkPolicyManager#setSubscriptionPlans(int, SubscriptionPlan [], String)}.
-     *
-     * @return ready to launch Intent targeted towards the carrier app, or
-     *         {@code null} if no carrier app is defined, or if the defined
-     *         carrier app provides no management activity.
-     */
-    @VisibleForTesting
-    Intent createManageSubscriptionIntent(int subId) {
-        final INetworkPolicyManager iNetPolicyManager = INetworkPolicyManager.Stub.asInterface(
-                ServiceManager.getService(Context.NETWORK_POLICY_SERVICE));
-        String owner = "";
-        try {
-            owner = iNetPolicyManager.getSubscriptionPlansOwner(subId);
-        } catch (Exception ex) {
-            Log.w(TAG, "Fail to get subscription plan owner for subId " + subId, ex);
-        }
-
-        if (TextUtils.isEmpty(owner)) {
-            return null;
-        }
-
-        final List<SubscriptionPlan> plans = getSubscriptionPlans(subId);
-        if (plans.isEmpty()) {
-            return null;
-        }
-
-        final Intent intent = new Intent(SubscriptionManager.ACTION_MANAGE_SUBSCRIPTION_PLANS);
-        intent.setPackage(owner);
-        intent.putExtra(SubscriptionManager.EXTRA_SUBSCRIPTION_INDEX, subId);
-
-        if (mContext.getPackageManager().queryIntentActivities(intent,
-                PackageManager.MATCH_DEFAULT_ONLY).isEmpty()) {
-            return null;
-        }
-
-        return intent;
+        Log.i(TAG, "Have " + mDataplanCount + " plans, dflt sub-id " + mSubId);
     }
 
     private static SubscriptionPlan getPrimaryPlan(List<SubscriptionPlan> plans) {

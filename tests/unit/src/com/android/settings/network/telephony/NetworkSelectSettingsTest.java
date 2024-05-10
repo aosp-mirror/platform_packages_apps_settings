@@ -25,7 +25,6 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.PersistableBundle;
-import android.provider.Settings;
 import android.telephony.CarrierConfigManager;
 import android.telephony.CellIdentity;
 import android.telephony.CellIdentityGsm;
@@ -37,6 +36,7 @@ import android.telephony.CellSignalStrengthGsm;
 import android.telephony.CellSignalStrengthLte;
 import android.telephony.TelephonyManager;
 
+import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
@@ -309,5 +309,14 @@ public class NetworkSelectSettingsTest {
         cellInfoGsm.setCellIdentity(cig);
         cellInfoGsm.setCellSignalStrength(cssg);
         return cellInfoGsm;
+    }
+
+    @Test
+    @UiThreadTest
+    public void onPreferenceTreeClick_notNetworkOperatorPreference_noCrash() {
+        mNetworkSelectSettings.onCreateInitialization();
+        mNetworkSelectSettings.enablePreferenceScreen(true);
+
+        mNetworkSelectSettings.onPreferenceTreeClick(new Preference(mContext));
     }
 }

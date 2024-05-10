@@ -43,6 +43,7 @@ import androidx.lifecycle.LifecycleOwner;
 import com.android.settings.R;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.utils.StringUtil;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -119,8 +120,8 @@ public class PrintSettingsPreferenceControllerTest {
         mController.updateState(mPreference);
 
         assertThat(mPreference.getSummary())
-                .isEqualTo(mContext.getResources()
-                        .getQuantityString(R.plurals.print_jobs_summary, 1, 1));
+                .isEqualTo(StringUtil.getIcuPluralsString(mContext, 1,
+                        R.string.print_jobs_summary));
     }
 
     @Test
@@ -135,8 +136,8 @@ public class PrintSettingsPreferenceControllerTest {
         mController.updateState(mPreference);
 
         assertThat(mPreference.getSummary())
-                .isEqualTo(mContext.getResources()
-                        .getQuantityString(R.plurals.print_settings_summary, 2, 2));
+                .isEqualTo(StringUtil.getIcuPluralsString(mContext, 2,
+                        R.string.print_settings_summary));
 
         // No service
         when(mPrintManager.getPrintServices(PrintManager.ENABLED_SERVICES)).thenReturn(null);

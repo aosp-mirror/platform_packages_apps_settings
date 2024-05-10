@@ -61,6 +61,16 @@
         <intent android:action="android.intent.action.MANAGE_PERMISSIONS"/>
     </Preference>
 
+    <!-- App Data Sharing Update -->
+    <Preference
+        android:key="privacy_app_data_sharing_updates"
+        android:title="@string/app_data_sharing_updates_title"
+        android:summary="@string/app_data_sharing_updates_summary"
+        settings:controller="com.android.settings.privacy.AppDataSharingUpdatesPreferenceController">
+        <intent android:action="android.intent.action.REVIEW_APP_DATA_SHARING_UPDATES"/>
+    </Preference>
+
+
     <!-- Camera toggle -->
     <com.android.settingslib.RestrictedSwitchPreference
         android:key="privacy_camera_toggle"
@@ -76,7 +86,7 @@
         settings:controller="com.android.settings.privacy.MicToggleController"/>
 
     <!-- Show passwords -->
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="show_password"
         android:title="@string/show_password"
         android:summary="@string/show_password_summary"
@@ -86,11 +96,10 @@
     <com.android.settings.RestrictedListPreference
         android:key="privacy_lock_screen_notifications"
         android:title="@string/lock_screen_notifs_title"
-        android:summary="@string/summary_placeholder"
-        settings:searchable="false"/>
+        android:summary="@string/summary_placeholder"/>
 
     <!-- Show media on lock screen -->
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="privacy_media_controls_lockscreen"
         android:title="@string/media_controls_lockscreen_title"
         android:summary="@string/media_controls_lockscreen_description"
@@ -117,8 +126,7 @@
             android:key="privacy_lock_screen_work_profile_notifications"
             android:title="@string/locked_work_profile_notification_title"
             android:summary="@string/summary_placeholder"
-            android:order="999"
-            settings:searchable="false"/>
+            android:order="999"/>
     </PreferenceCategory>
 
     <!-- Content Capture -->
@@ -128,7 +136,7 @@
          Hence, we show both here, but the controller itself will decide if it's available or not.
     -->
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="content_capture"
         android:title="@string/content_capture"
         android:summary="@string/content_capture_summary"
@@ -141,7 +149,7 @@
         settings:controller="com.android.settings.privacy.EnableContentCaptureWithServiceSettingsPreferenceController"/>
 
     <!-- Clipboard access notifications -->
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="show_clip_access_notification"
         android:title="@string/show_clip_access_notification"
         android:summary="@string/show_clip_access_notification_summary"

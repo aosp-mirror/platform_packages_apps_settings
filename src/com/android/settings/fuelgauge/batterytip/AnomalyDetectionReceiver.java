@@ -23,9 +23,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
-/**
- * Receive the anomaly info from {@link StatsManager}
- */
+/** Receive the anomaly info from {@link StatsManager} */
 public class AnomalyDetectionReceiver extends BroadcastReceiver {
     private static final String TAG = "SettingsAnomalyReceiver";
 
@@ -35,10 +33,16 @@ public class AnomalyDetectionReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         final long configUid = intent.getLongExtra(StatsManager.EXTRA_STATS_CONFIG_UID, -1);
         final long configKey = intent.getLongExtra(StatsManager.EXTRA_STATS_CONFIG_KEY, -1);
-        final long subscriptionId = intent.getLongExtra(StatsManager.EXTRA_STATS_SUBSCRIPTION_ID,
-                -1);
-        Log.i(TAG, "Anomaly intent received.  configUid = " + configUid + " configKey = "
-                + configKey + " subscriptionId = " + subscriptionId);
+        final long subscriptionId =
+                intent.getLongExtra(StatsManager.EXTRA_STATS_SUBSCRIPTION_ID, -1);
+        Log.i(
+                TAG,
+                "Anomaly intent received.  configUid = "
+                        + configUid
+                        + " configKey = "
+                        + configKey
+                        + " subscriptionId = "
+                        + subscriptionId);
 
         final Bundle bundle = intent.getExtras();
         if (bundle == null) {

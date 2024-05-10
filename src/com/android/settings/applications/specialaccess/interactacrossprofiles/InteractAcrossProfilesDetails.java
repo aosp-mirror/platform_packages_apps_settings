@@ -51,8 +51,9 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.stats.devicepolicy.DevicePolicyEnums;
 import android.util.IconDrawableFactory;
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -98,7 +99,6 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         mContext = getContext();
         mCrossProfileApps = mContext.getSystemService(CrossProfileApps.class);
         mUserManager = mContext.getSystemService(UserManager.class);
@@ -113,6 +113,12 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
         mInstallAppIntent = AppStoreUtil.getAppStoreLink(mContext, mPackageName);
 
         addPreferencesFromResource(R.xml.interact_across_profiles_permissions_details);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
+        final View view =  super.onCreateView(inflater, container, savedInstanceState);
 
         replaceEnterprisePreferenceScreenTitle(CONNECTED_WORK_AND_PERSONAL_APPS_TITLE,
                 R.string.interact_across_profiles_title);
@@ -125,7 +131,6 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
         replaceEnterpriseStringSummary("interact_across_profiles_extra_summary",
                 HOW_TO_DISCONNECT_APPS,
                 R.string.interact_across_profiles_summary_3);
-
 
         mSwitchPref = findPreference(INTERACT_ACROSS_PROFILES_SETTINGS_SWITCH);
         mSwitchPref.setOnPreferenceClickListener(this);
@@ -146,6 +151,8 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
         styleActionBar();
         maybeShowExtraSummary();
         logPageLaunchMetrics();
+
+        return view;
     }
 
     private void maybeShowExtraSummary() {
@@ -201,7 +208,8 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
             title.setText(appLabel);
         }
 
-        final ImageView personalIconView = mHeader.findViewById(R.id.entity_header_icon_personal);
+        final ImageView personalIconView = mHeader.findViewById(
+                com.android.settingslib.widget.preference.layout.R.id.entity_header_icon_personal);
         if (personalIconView != null) {
             Drawable icon = IconDrawableFactory.newInstance(mContext)
                     .getBadgedIcon(mPackageInfo.applicationInfo, personalProfile.getIdentifier())
@@ -212,7 +220,8 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
             personalIconView.setImageDrawable(icon);
         }
 
-        final ImageView workIconView = mHeader.findViewById(R.id.entity_header_icon_work);
+        final ImageView workIconView = mHeader.findViewById(
+                com.android.settingslib.widget.preference.layout.R.id.entity_header_icon_work);
         if (workIconView != null) {
             Drawable icon = IconDrawableFactory.newInstance(mContext)
                     .getBadgedIcon(mPackageInfo.applicationInfo, workProfile.getIdentifier())
@@ -395,8 +404,7 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
      * @return the summary for the current state of whether the app associated with the given
      * {@code packageName} is allowed to interact across profiles.
      */
-    public static CharSequence getPreferenceSummary(
-            Context context, String packageName) {
+    public static String getPreferenceSummary(Context context, String packageName) {
         return context.getString(isInteractAcrossProfilesEnabled(context, packageName)
                 ? R.string.interact_across_profiles_summary_allowed
                 : R.string.interact_across_profiles_summary_not_allowed);
@@ -493,20 +501,24 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
     private void enableSwitchPref() {
         mSwitchPref.setChecked(true);
         mSwitchPref.setTitle(R.string.interact_across_profiles_switch_enabled);
-        final ImageView horizontalArrowIcon = mHeader.findViewById(R.id.entity_header_swap_horiz);
+        final ImageView horizontalArrowIcon =
+                mHeader.findViewById(com.android.settingslib.widget.preference.layout.R.id.entity_header_swap_horiz);
         if (horizontalArrowIcon != null) {
             horizontalArrowIcon.setImageDrawable(
-                    mContext.getDrawable(R.drawable.ic_swap_horiz_blue));
+                    mContext.getDrawable(
+                            com.android.settingslib.widget.preference.layout.R.drawable.ic_swap_horiz_blue));
         }
     }
 
     private void disableSwitchPref() {
         mSwitchPref.setChecked(false);
         mSwitchPref.setTitle(R.string.interact_across_profiles_switch_disabled);
-        final ImageView horizontalArrowIcon = mHeader.findViewById(R.id.entity_header_swap_horiz);
+        final ImageView horizontalArrowIcon =
+                mHeader.findViewById(com.android.settingslib.widget.preference.layout.R.id.entity_header_swap_horiz);
         if (horizontalArrowIcon != null) {
             horizontalArrowIcon.setImageDrawable(
-                    mContext.getDrawable(R.drawable.ic_swap_horiz_grey));
+                    mContext.getDrawable(
+                            com.android.settingslib.widget.preference.layout.R.drawable.ic_swap_horiz_grey));
         }
     }
 

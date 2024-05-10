@@ -150,7 +150,7 @@ public class WifiTetherSwitchBarControllerTest {
     public void onSwitchChanged_switchNotEnabled_doNothingForTethering() {
         when(mSwitch.isEnabled()).thenReturn(false);
 
-        mController.onSwitchChanged(mSwitch, mSwitch.isChecked());
+        mController.onCheckedChanged(mSwitch, true);
 
         verify(mConnectivityManager, never()).startTethering(anyInt(), anyBoolean(), any(), any());
         verify(mConnectivityManager, never()).stopTethering(anyInt());
@@ -158,9 +158,7 @@ public class WifiTetherSwitchBarControllerTest {
 
     @Test
     public void onSwitchChanged_isChecked_startTethering() {
-        when(mSwitch.isChecked()).thenReturn(true);
-
-        mController.onSwitchChanged(mSwitch, mSwitch.isChecked());
+        mController.onCheckedChanged(mSwitch, true);
 
         verify(mConnectivityManager).startTethering(anyInt(), anyBoolean(), any(), any());
     }
@@ -168,9 +166,7 @@ public class WifiTetherSwitchBarControllerTest {
     @Test
     public void onSwitchChanged_isNotChecked_stopTethering() {
         when(mWifiManager.getWifiApState()).thenReturn(WIFI_AP_STATE_ENABLED);
-        when(mSwitch.isChecked()).thenReturn(false);
-
-        mController.onSwitchChanged(mSwitch, mSwitch.isChecked());
+        mController.onCheckedChanged(mSwitch, false);
 
         verify(mConnectivityManager).stopTethering(anyInt());
     }

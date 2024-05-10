@@ -18,11 +18,21 @@ package com.android.settings.applications;
 
 
 import android.content.Context;
+import android.permission.PermissionControllerManager;
+import android.provider.DeviceConfig;
 
+import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.OnLifecycleEvent;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+
+import com.google.common.annotations.VisibleForTesting;
+
+import java.util.concurrent.Executor;
 
 /**
  * Preference controller for handling the app battery usage list preference.
@@ -43,4 +53,3 @@ public final class AppBatteryUsagePreferenceController extends BasePreferenceCon
         return mEnableAppBatteryUsagePage ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 }
-

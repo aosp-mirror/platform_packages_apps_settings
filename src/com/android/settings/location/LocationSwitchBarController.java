@@ -15,7 +15,9 @@ package com.android.settings.location;
 
 import android.content.Context;
 import android.os.UserHandle;
-import android.widget.Switch;
+import android.os.UserManager;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settingslib.RestrictedLockUtils;
@@ -23,12 +25,11 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
-import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 /**
  * The switch controller for the location.
  */
-public class LocationSwitchBarController implements OnMainSwitchChangeListener,
+public class LocationSwitchBarController implements OnCheckedChangeListener,
         LocationEnabler.LocationModeChangeListener, LifecycleObserver, OnStart, OnStop {
 
     private final SettingsMainSwitchBar mSwitchBar;
@@ -75,8 +76,12 @@ public class LocationSwitchBarController implements OnMainSwitchChangeListener,
         // only, it would be re-enabled again if the switch bar is not disabled.
         if (!hasBaseUserRestriction && admin != null) {
             mSwitchBar.setDisabledByAdmin(admin);
+        } else if (restricted) {
+            RestrictedLockUtils.EnforcedAdmin enforcedAdmin = RestrictedLockUtils.EnforcedAdmin
+                    .createDefaultEnforcedAdminWithRestriction(UserManager.DISALLOW_SHARE_LOCATION);
+            mSwitchBar.setDisabledByAdmin(enforcedAdmin);
         } else {
-            mSwitchBar.setEnabled(!restricted);
+            mSwitchBar.setEnabled(true);
         }
 
         if (enabled != mSwitchBar.isChecked()) {
@@ -95,7 +100,7 @@ public class LocationSwitchBarController implements OnMainSwitchChangeListener,
      * Listens to the state change of the location primary switch.
      */
     @Override
-    public void onSwitchChanged(Switch switchView, boolean isChecked) {
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         mLocationEnabler.setLocationEnabled(isChecked);
     }
 }

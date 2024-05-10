@@ -27,6 +27,7 @@ import androidx.preference.Preference;
 import com.android.settings.core.BasePreferenceController;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
@@ -50,12 +51,14 @@ public class WallpaperTypePreferenceControllerTest {
         mPreference = new Preference(mContext);
     }
 
+    @Ignore("b/315124270")
     @Test
     public void getAvailabilityStatus_byDefault_shouldBeShown() {
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.AVAILABLE);
     }
 
+    @Ignore("b/315124270")
     @Test
     public void testHandlePreferenceTreeClick_intentNull_shouldDoNothing() {
         mPreference.setIntent(null);
@@ -65,6 +68,7 @@ public class WallpaperTypePreferenceControllerTest {
         assertThat(handled).isFalse();
     }
 
+    @Ignore("b/315124270")
     @Test
     public void testHandlePreferenceTreeClick_shouldLaunchIntent() {
         mPreference.setIntent(mIntent);

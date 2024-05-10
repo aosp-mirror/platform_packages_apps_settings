@@ -15,6 +15,21 @@
  */
 package com.android.settings;
 
+import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_KEY;
+import static com.android.settings.core.PreferenceXmlParserUtils.MetadataFlag.FLAG_INCLUDE_PREF_SCREEN;
+import static com.android.settings.core.PreferenceXmlParserUtils.MetadataFlag.FLAG_NEED_KEY;
+
+import android.annotation.XmlRes;
+import android.content.Context;
+import android.os.Bundle;
+import android.provider.SearchIndexableResource;
+
+import com.android.settings.core.PreferenceXmlParserUtils;
+import com.android.settings.search.BaseSearchIndexProvider;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Convenience methods and constants for testing.
  */
@@ -22,4 +37,30 @@ public class TestUtils {
     public static final long KILOBYTE = 1024L; // TODO: Change to 1000 in O Robolectric.
     public static final long MEGABYTE = KILOBYTE * KILOBYTE;
     public static final long GIGABYTE = KILOBYTE * MEGABYTE;
+
+    public static List<String> getAllXmlKeys(
+            Context context, BaseSearchIndexProvider indexProvider)
+            throws Exception {
+        final List<SearchIndexableResource> resources = indexProvider.getXmlResourcesToIndex(
+                context, true /* not used*/);
+        if (resources == null || resources.isEmpty()) {
+            return new ArrayList<>();
+        }
+        final List<String> keys = new ArrayList<>();
+        for (SearchIndexableResource res : resources) {
+            keys.addAll(getKeysFromXml(res.xmlResId, context));
+        }
+        return keys;
+    }
+
+    private static List<String> getKeysFromXml(@XmlRes int xmlResId, Context context)
+            throws Exception {
+        final List<String> keys = new ArrayList<>();
+        final List<Bundle> metadata = PreferenceXmlParserUtils.extractMetadata(context, xmlResId,
+                FLAG_NEED_KEY | FLAG_INCLUDE_PREF_SCREEN);
+        for (Bundle bundle : metadata) {
+            keys.add(bundle.getString(METADATA_KEY));
+        }
+        return keys;
+    }
 }

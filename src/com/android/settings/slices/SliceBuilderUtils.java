@@ -24,11 +24,11 @@ import static com.android.settings.slices.SettingsSliceProvider.EXTRA_SLICE_KEY;
 
 import android.annotation.ColorInt;
 import android.app.PendingIntent;
-import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.provider.SettingsSlicesContract;
 import android.text.TextUtils;
 import android.util.ArraySet;
@@ -51,7 +51,8 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.SliderPreferenceController;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.TogglePreferenceController;
-import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.Arrays;
@@ -78,12 +79,6 @@ public class SliceBuilderUtils {
     public static Slice buildSlice(Context context, SliceData sliceData) {
         Log.d(TAG, "Creating slice for: " + sliceData.getPreferenceController());
         final BasePreferenceController controller = getPreferenceController(context, sliceData);
-        FeatureFactory.getFactory(context).getMetricsFeatureProvider()
-                .action(SettingsEnums.PAGE_UNKNOWN,
-                        SettingsEnums.ACTION_SETTINGS_SLICE_REQUESTED,
-                        SettingsEnums.PAGE_UNKNOWN,
-                        sliceData.getKey(),
-                        0);
 
         if (!controller.isAvailable()) {
             // Cannot guarantee setting page is accessible, let the presenter handle error case.
@@ -92,6 +87,16 @@ public class SliceBuilderUtils {
 
         if (controller.getAvailabilityStatus() == DISABLED_DEPENDENT_SETTING) {
             return buildUnavailableSlice(context, sliceData);
+        }
+
+        String userRestriction = sliceData.getUserRestriction();
+        if (!TextUtils.isEmpty(userRestriction)) {
+            RestrictedLockUtils.EnforcedAdmin admin =
+                    RestrictedLockUtilsInternal.checkIfRestrictionEnforced(context,
+                            userRestriction, UserHandle.myUserId());
+            if (admin != null) {
+                return buildIntentSlice(context, sliceData, controller);
+            }
         }
 
         switch (sliceData.getSliceType()) {

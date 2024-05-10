@@ -25,8 +25,8 @@ import static android.app.NotificationManager.IMPORTANCE_LOW;
 import static android.app.NotificationManager.IMPORTANCE_NONE;
 import static android.provider.Settings.Secure.NOTIFICATION_BUBBLES;
 
-import static com.android.settings.notification.app.BubblePreferenceController.SYSTEM_WIDE_OFF;
-import static com.android.settings.notification.app.BubblePreferenceController.SYSTEM_WIDE_ON;
+import static com.android.settings.notification.BubbleHelper.SYSTEM_WIDE_OFF;
+import static com.android.settings.notification.BubbleHelper.SYSTEM_WIDE_ON;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -57,6 +57,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.notification.NotificationBackend;
+import com.android.settings.testutils.shadow.ShadowActivityManager;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedSwitchPreference;
 
@@ -70,14 +71,17 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
-import org.robolectric.shadows.ShadowActivityManager;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        ShadowActivityManager.class,
+})
 public class BubblePreferenceControllerTest {
 
     private Context mContext;

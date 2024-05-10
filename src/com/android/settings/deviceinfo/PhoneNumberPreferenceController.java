@@ -29,7 +29,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settingslib.DeviceInfoUtils;
+import com.android.settings.network.SubscriptionUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +51,8 @@ public class PhoneNumberPreferenceController extends BasePreferenceController {
 
     @Override
     public int getAvailabilityStatus() {
-        return mTelephonyManager.isVoiceCapable() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        return SubscriptionUtil.isSimHardwareVisible(mContext) ?
+                AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
@@ -79,6 +80,9 @@ public class PhoneNumberPreferenceController extends BasePreferenceController {
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
+        if (!SubscriptionUtil.isSimHardwareVisible(mContext)) {
+            return;
+        }
         final Preference preference = screen.findPreference(getPreferenceKey());
         final PreferenceCategory category = screen.findPreference(KEY_PREFERENCE_CATEGORY);
         mPreferenceList.add(preference);
@@ -88,6 +92,7 @@ public class PhoneNumberPreferenceController extends BasePreferenceController {
         for (int simSlotNumber = 1; simSlotNumber < mTelephonyManager.getPhoneCount();
                 simSlotNumber++) {
             final Preference multiSimPreference = createNewPreference(screen.getContext());
+            multiSimPreference.setSelectable(false);
             multiSimPreference.setCopyingEnabled(true);
             multiSimPreference.setOrder(phonePreferenceOrder + simSlotNumber);
             multiSimPreference.setKey(KEY_PHONE_NUMBER + simSlotNumber);
@@ -152,7 +157,7 @@ public class PhoneNumberPreferenceController extends BasePreferenceController {
 
     @VisibleForTesting
     protected CharSequence getFormattedPhoneNumber(SubscriptionInfo subscriptionInfo) {
-        final String phoneNumber = DeviceInfoUtils.getBidiFormattedPhoneNumber(mContext,
+        final String phoneNumber = SubscriptionUtil.getBidiFormattedPhoneNumber(mContext,
                 subscriptionInfo);
         return TextUtils.isEmpty(phoneNumber) ? mContext.getString(R.string.device_info_default)
                 : phoneNumber;

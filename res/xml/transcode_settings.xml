@@ -21,27 +21,27 @@
     android:title="@string/transcode_settings_title"
     settings:searchable="false">
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="transcode_user_control"
         android:title="@string/transcode_user_control"
         settings:controller="com.android.settings.development.transcode.TranscodeUserControlPreferenceController" />
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="transcode_enable_all"
         android:title="@string/transcode_enable_all"
         settings:controller="com.android.settings.development.transcode.TranscodeGlobalTogglePreferenceController" />
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="transcode_default"
         android:title="@string/transcode_default"
         settings:controller="com.android.settings.development.transcode.TranscodeDefaultOptionPreferenceController" />
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="transcode_notification"
         android:title="@string/transcode_notification"
         settings:controller="com.android.settings.development.transcode.TranscodeNotificationPreferenceController" />
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="transcode_disable_cache"
         android:title="@string/transcode_disable_cache"
         settings:controller="com.android.settings.development.transcode.TranscodeDisableCachePreferenceController" />

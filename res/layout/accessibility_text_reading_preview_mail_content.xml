@@ -15,35 +15,43 @@
     limitations under the License.
 -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:importantForAccessibility="noHideDescendants">
 
-    <TextView
-        android:id="@+id/subject"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/accessibility_text_reading_preview_mail_subject"
-        android:textSize="14sp"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="?android:attr/textColorPrimary"/>
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/from"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="16dp"
-        android:paddingTop="11dp"
-        android:textSize="12sp"
-        android:text="@string/accessibility_text_reading_preview_mail_from"
-        android:textColor="?android:attr/textColorSecondary" />
+        <TextView
+            android:id="@+id/subject"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/accessibility_text_reading_preview_mail_subject"
+            android:textSize="14sp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="?android:attr/textColorPrimary"/>
 
-    <TextView
-        android:id="@+id/content"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="13sp"
-        android:text="@string/accessibility_text_reading_preview_mail_content"
-        android:textColor="?android:attr/textColorPrimary"/>
-</LinearLayout>
+        <TextView
+            android:id="@+id/from"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="16dp"
+            android:paddingTop="11dp"
+            android:textSize="12sp"
+            android:text="@string/accessibility_text_reading_preview_mail_from"
+            android:textColor="?android:attr/textColorSecondary"/>
+
+        <TextView
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:text="@string/accessibility_text_reading_preview_mail_content"
+            android:textColor="?android:attr/textColorPrimary"/>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

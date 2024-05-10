@@ -22,7 +22,7 @@ import android.os.SystemProperties;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -43,7 +43,7 @@ public class BootSoundPreferenceController extends AbstractPreferenceController
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         if (isAvailable()) {
-            SwitchPreference preference = screen.findPreference(KEY_BOOT_SOUNDS);
+            TwoStatePreference preference = screen.findPreference(KEY_BOOT_SOUNDS);
             preference.setChecked(SystemProperties.getBoolean(PROPERTY_BOOT_SOUNDS, true));
         }
     }
@@ -51,7 +51,7 @@ public class BootSoundPreferenceController extends AbstractPreferenceController
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (KEY_BOOT_SOUNDS.equals(preference.getKey())) {
-            SwitchPreference switchPreference = (SwitchPreference) preference;
+            TwoStatePreference switchPreference = (TwoStatePreference) preference;
             SystemProperties.set(PROPERTY_BOOT_SOUNDS, switchPreference.isChecked() ? "1" : "0");
         }
         return false;

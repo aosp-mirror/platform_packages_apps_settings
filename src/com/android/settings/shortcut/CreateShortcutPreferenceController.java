@@ -45,11 +45,16 @@ import androidx.preference.PreferenceGroup;
 
 import com.android.settings.R;
 import com.android.settings.Settings;
+import com.android.settings.Settings.DataUsageSummaryActivity;
 import com.android.settings.Settings.TetherSettingsActivity;
+import com.android.settings.Settings.WifiTetherSettingsActivity;
 import com.android.settings.activityembedding.ActivityEmbeddingUtils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.gestures.OneHandedSettingsUtils;
+import com.android.settings.network.SubscriptionUtil;
+import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.wifi.WifiUtils;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import java.util.ArrayList;
@@ -81,7 +86,7 @@ public class CreateShortcutPreferenceController extends BasePreferenceController
                 (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         mShortcutManager = context.getSystemService(ShortcutManager.class);
         mPackageManager = context.getPackageManager();
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context)
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory()
                 .getMetricsFeatureProvider();
     }
 
@@ -192,14 +197,37 @@ public class CreateShortcutPreferenceController extends BasePreferenceController
                     continue;
                 }
             }
+            if (info.activityInfo.name.endsWith(WifiTetherSettingsActivity.class.getSimpleName())) {
+                if (!canShowWifiHotspot()) {
+                    Log.d(TAG, "Skipping Wi-Fi hotspot settings:" + info.activityInfo);
+                    continue;
+                }
+            }
             if (!info.activityInfo.applicationInfo.isSystemApp()) {
                 Log.d(TAG, "Skipping non-system app: " + info.activityInfo);
                 continue;
+            }
+            if (info.activityInfo.name.endsWith(DataUsageSummaryActivity.class.getSimpleName())) {
+                if (!canShowDataUsage()) {
+                    Log.d(TAG, "Skipping data usage settings:" + info.activityInfo);
+                    continue;
+                }
             }
             shortcuts.add(info);
         }
         Collections.sort(shortcuts, SHORTCUT_COMPARATOR);
         return shortcuts;
+    }
+
+    @VisibleForTesting
+    boolean canShowDataUsage() {
+        return SubscriptionUtil.isSimHardwareVisible(mContext)
+                && !MobileNetworkUtils.isMobileNetworkUserRestricted(mContext);
+    }
+
+    @VisibleForTesting
+    boolean canShowWifiHotspot() {
+        return WifiUtils.canShowWifiHotspot(mContext);
     }
 
     private void logCreateShortcut(ResolveInfo info) {

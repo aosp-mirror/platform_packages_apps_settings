@@ -34,6 +34,16 @@
         <item name="android:colorBackground">@*android:color/surface_dark</item>
     </style>
 
+    <style name="Theme.Panel.Material" parent="Theme.Panel" >
+        <item name="notification_importance_button_background_color_unselected">@android:color/transparent</item>
+        <item name="notification_importance_button_border_color_unselected">@android:color/system_outline_variant_dark</item>
+        <item name="notification_importance_button_foreground_color_unselected">@android:color/system_on_surface_variant_dark</item>
+
+        <item name="notification_importance_button_background_color_selected">@android:color/system_secondary_container_dark</item>
+        <item name="notification_importance_button_border_color_selected">@android:color/system_on_secondary_container_dark</item>
+        <item name="notification_importance_button_foreground_color_selected">@android:color/system_on_secondary_container_dark</item>
+    </style>
+
     <!-- Material theme for the pages containing TabLayout and ViewPager -->
     <style name="Theme.TabTheme" parent="@style/Theme.MaterialComponents.DayNight">
         <item name="colorPrimary">@*android:color/edge_effect_device_default_dark</item>

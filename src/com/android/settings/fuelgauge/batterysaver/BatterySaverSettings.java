@@ -28,9 +28,7 @@ import com.android.settingslib.HelpUtils;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.FooterPreference;
 
-/**
- * Battery saver settings page
- */
+/** Battery saver settings page */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class BatterySaverSettings extends DashboardFragment {
     private static final String TAG = "BatterySaverSettings";
@@ -63,9 +61,7 @@ public class BatterySaverSettings extends DashboardFragment {
         return R.string.help_url_battery_saver_settings;
     }
 
-    /**
-     * For Search.
-     */
+    /** For Search. */
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.battery_saver_settings);
 
@@ -83,13 +79,17 @@ public class BatterySaverSettings extends DashboardFragment {
     void addHelpLink() {
         FooterPreference pref = getPreferenceScreen().findPreference(KEY_FOOTER_PREFERENCE);
         if (pref != null) {
-            pref.setLearnMoreAction(v -> {
-                mMetricsFeatureProvider.action(getContext(),
-                        SettingsEnums.ACTION_APP_BATTERY_LEARN_MORE);
-                startActivityForResult(HelpUtils.getHelpIntent(getContext(),
-                        getString(R.string.help_url_battery_saver_settings),
-                        /*backupContext=*/ ""), /*requestCode=*/ 0);
-            });
+            pref.setLearnMoreAction(
+                    v -> {
+                        mMetricsFeatureProvider.action(
+                                getContext(), SettingsEnums.ACTION_APP_BATTERY_LEARN_MORE);
+                        startActivityForResult(
+                                HelpUtils.getHelpIntent(
+                                        getContext(),
+                                        getString(R.string.help_url_battery_saver_settings),
+                                        /* backupContext= */ ""),
+                                /* requestCode= */ 0);
+                    });
             pref.setLearnMoreText(getString(R.string.battery_saver_link_a11y));
         }
     }

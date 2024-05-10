@@ -36,7 +36,7 @@ import com.android.settingslib.wifi.WifiStatusTracker;
  * Helper class that listeners to wifi callback and notify client when there is update in
  * wifi summary info.
  */
-public final class WifiSummaryUpdater extends SummaryUpdater {
+public class WifiSummaryUpdater extends SummaryUpdater {
 
     private final WifiStatusTracker mWifiTracker;
     private final BroadcastReceiver mReceiver;

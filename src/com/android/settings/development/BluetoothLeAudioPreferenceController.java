@@ -24,7 +24,7 @@ import android.os.SystemProperties;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
@@ -36,13 +36,13 @@ public class BluetoothLeAudioPreferenceController
         extends DeveloperOptionsPreferenceController
         implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
 
-    private static final String PREFERENCE_KEY = "bluetooth_enable_leaudio";
+    private static final String PREFERENCE_KEY = "bluetooth_disable_leaudio";
 
     private static final String LE_AUDIO_DYNAMIC_SWITCH_PROPERTY =
             "ro.bluetooth.leaudio_switcher.supported";
     @VisibleForTesting
-    static final String LE_AUDIO_DYNAMIC_ENABLED_PROPERTY =
-            "persist.bluetooth.leaudio_switcher.enabled";
+    static final String LE_AUDIO_SWITCHER_DISABLED_PROPERTY =
+            "persist.bluetooth.leaudio_switcher.disabled";
 
     private final DevelopmentSettingsDashboardFragment mFragment;
 
@@ -77,17 +77,19 @@ public class BluetoothLeAudioPreferenceController
             return;
         }
 
-        final boolean leAudioEnabled =
-                (mBluetoothAdapter.isLeAudioSupported() == BluetoothStatusCodes.FEATURE_SUPPORTED);
-        ((SwitchPreference) mPreference).setChecked(leAudioEnabled);
-
         final boolean leAudioSwitchSupported =
                 SystemProperties.getBoolean(LE_AUDIO_DYNAMIC_SWITCH_PROPERTY, false);
-        if (!leAudioSwitchSupported) {
+
+        final int isLeAudioSupportedStatus = mBluetoothAdapter.isLeAudioSupported();
+        final boolean leAudioEnabled =
+                (isLeAudioSupportedStatus == BluetoothStatusCodes.FEATURE_SUPPORTED);
+
+        ((TwoStatePreference) mPreference).setChecked(!leAudioEnabled);
+
+        // Disable option if Bluetooth is disabled or if switch is not supported
+        if (isLeAudioSupportedStatus == BluetoothStatusCodes.ERROR_BLUETOOTH_NOT_ENABLED
+                || !leAudioSwitchSupported) {
             mPreference.setEnabled(false);
-        } else {
-            SystemProperties.set(LE_AUDIO_DYNAMIC_ENABLED_PROPERTY,
-                    Boolean.toString(leAudioEnabled));
         }
     }
 
@@ -99,10 +101,10 @@ public class BluetoothLeAudioPreferenceController
             return;
         }
 
-        final boolean leAudioEnabled =
-                (mBluetoothAdapter.isLeAudioSupported() == BluetoothStatusCodes.FEATURE_SUPPORTED);
-        SystemProperties.set(LE_AUDIO_DYNAMIC_ENABLED_PROPERTY,
-                Boolean.toString(!leAudioEnabled));
+        final boolean leAudioDisabled =
+                (mBluetoothAdapter.isLeAudioSupported() != BluetoothStatusCodes.FEATURE_SUPPORTED);
+        SystemProperties.set(LE_AUDIO_SWITCHER_DISABLED_PROPERTY,
+                Boolean.toString(!leAudioDisabled));
     }
 
     /**

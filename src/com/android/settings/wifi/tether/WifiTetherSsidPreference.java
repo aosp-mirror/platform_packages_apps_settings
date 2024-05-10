@@ -68,7 +68,7 @@ public class WifiTetherSsidPreference extends ValidatedEditTextPreference {
 
     private void initialize() {
         // TODO(b/129019971): use methods of divider line in parent object
-        setLayoutResource(com.android.settingslib.R.layout.preference_two_target);
+        setLayoutResource(com.android.settingslib.widget.preference.twotarget.R.layout.preference_two_target);
         setWidgetLayoutResource(R.layout.wifi_button_preference_widget);
 
         mShareIconDrawable = getDrawable(R.drawable.ic_qrcode_24dp);
@@ -79,7 +79,8 @@ public class WifiTetherSsidPreference extends ValidatedEditTextPreference {
         super.onBindViewHolder(holder);
 
         final ImageButton shareButton = (ImageButton) holder.findViewById(R.id.button_icon);
-        final View dividerView = holder.findViewById(R.id.two_target_divider);
+        final View dividerView = holder.findViewById(
+                com.android.settingslib.widget.preference.twotarget.R.id.two_target_divider);
 
         if (mVisible) {
             shareButton.setOnClickListener(mClickListener);

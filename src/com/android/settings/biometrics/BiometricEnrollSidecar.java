@@ -40,6 +40,24 @@ public abstract class BiometricEnrollSidecar extends InstrumentedFragment {
         void onEnrollmentHelp(int helpMsgId, CharSequence helpString);
         void onEnrollmentError(int errMsgId, CharSequence errString);
         void onEnrollmentProgressChange(int steps, int remaining);
+        /**
+         * Called when a fingerprint image has been acquired.
+         * @param isAcquiredGood whether the fingerprint image was good.
+         */
+        default void onAcquired(boolean isAcquiredGood) { }
+        /**
+         * Called when a pointer down event has occurred.
+         */
+        default void onUdfpsPointerDown(int sensorId) { }
+        /**
+         * Called when a pointer up event has occurred.
+         */
+        default void onUdfpsPointerUp(int sensorId) { }
+
+        /**
+         * Called when udfps overlay is shown.
+         */
+        default void onUdfpsOverlayShown() { }
     }
 
     private int mEnrollmentSteps = -1;
@@ -97,6 +115,52 @@ public abstract class BiometricEnrollSidecar extends InstrumentedFragment {
         @Override
         public void send(Listener listener) {
             listener.onEnrollmentError(errMsgId, errString);
+        }
+    }
+
+    private class QueuedAcquired extends QueuedEvent {
+        private final boolean isAcquiredGood;
+
+        public QueuedAcquired(boolean isAcquiredGood) {
+            this.isAcquiredGood = isAcquiredGood;
+        }
+
+        @Override
+        public void send(Listener listener) {
+            listener.onAcquired(isAcquiredGood);
+        }
+    }
+
+    private class QueuedUdfpsPointerDown extends QueuedEvent {
+        private final int sensorId;
+
+        QueuedUdfpsPointerDown(int sensorId) {
+            this.sensorId = sensorId;
+        }
+
+        @Override
+        public void send(Listener listener) {
+            listener.onUdfpsPointerDown(sensorId);
+        }
+    }
+
+    private class QueuedUdfpsPointerUp extends QueuedEvent {
+        private final int sensorId;
+
+        QueuedUdfpsPointerUp(int sensorId) {
+            this.sensorId = sensorId;
+        }
+
+        @Override
+        public void send(Listener listener) {
+            listener.onUdfpsPointerUp(sensorId);
+        }
+    }
+
+    private class QueuedUdfpsOverlayShown extends QueuedEvent {
+        @Override
+        public void send(Listener listener) {
+            listener.onUdfpsOverlayShown();
         }
     }
 
@@ -187,6 +251,38 @@ public abstract class BiometricEnrollSidecar extends InstrumentedFragment {
             mQueuedEvents.add(new QueuedEnrollmentError(errMsgId, errString));
         }
         mEnrolling = false;
+    }
+
+    protected void onAcquired(boolean isAcquiredGood) {
+        if (mListener != null) {
+            mListener.onAcquired(isAcquiredGood);
+        } else {
+            mQueuedEvents.add(new QueuedAcquired(isAcquiredGood));
+        }
+    }
+
+    protected void onUdfpsPointerDown(int sensorId) {
+        if (mListener != null) {
+            mListener.onUdfpsPointerDown(sensorId);
+        } else {
+            mQueuedEvents.add(new QueuedUdfpsPointerDown(sensorId));
+        }
+    }
+
+    protected void onUdfpsPointerUp(int sensorId) {
+        if (mListener != null) {
+            mListener.onUdfpsPointerUp(sensorId);
+        } else {
+            mQueuedEvents.add(new QueuedUdfpsPointerUp(sensorId));
+        }
+    }
+
+    protected void onUdfpsOverlayShown() {
+        if (mListener != null) {
+            mListener.onUdfpsOverlayShown();
+        } else {
+            mQueuedEvents.add(new QueuedUdfpsOverlayShown());
+        }
     }
 
     public void setListener(Listener listener) {

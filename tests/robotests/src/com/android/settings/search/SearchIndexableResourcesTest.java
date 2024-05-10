@@ -28,9 +28,9 @@ import static org.mockito.Mockito.when;
 import android.database.Cursor;
 import android.text.TextUtils;
 
+import com.android.settings.network.NetworkProviderSettings;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.FakeIndexProvider;
-import com.android.settings.wifi.WifiSettings;
 import com.android.settingslib.search.SearchIndexableData;
 
 import org.junit.After;
@@ -77,16 +77,16 @@ public class SearchIndexableResourcesTest {
     }
 
     @Test
-    public void testIndexHasWifiSettings() {
-        boolean hasWifi = false;
+    public void testIndexHasNetworkProviderSettings() {
+        boolean hasNetworkProvider = false;
         for (SearchIndexableData bundle :
                 mSearchProvider.getSearchIndexableResources().getProviderValues()) {
-            if (bundle.getTargetClass().getName().equals(WifiSettings.class.getName())) {
-                hasWifi = true;
+            if (bundle.getTargetClass().getName().equals(NetworkProviderSettings.class.getName())) {
+                hasNetworkProvider = true;
                 break;
             }
         }
-        assertThat(hasWifi).isTrue();
+        assertThat(hasNetworkProvider).isTrue();
     }
 
     @Test

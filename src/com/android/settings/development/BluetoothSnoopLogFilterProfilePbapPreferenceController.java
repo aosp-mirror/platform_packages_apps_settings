@@ -56,10 +56,12 @@ public class BluetoothSnoopLogFilterProfilePbapPreferenceController
         super(context);
         mListValues =
                 context.getResources()
-                        .getStringArray(R.array.bt_hci_snoop_log_profile_filter_values);
+                        .getStringArray(com.android.settingslib.R
+                                .array.bt_hci_snoop_log_profile_filter_values);
         mListEntries =
                 context.getResources()
-                        .getStringArray(R.array.bt_hci_snoop_log_profile_filter_entries);
+                        .getStringArray(com.android.settingslib.R
+                                .array.bt_hci_snoop_log_profile_filter_entries);
         mProfilesFilterDisabledEntry =
                 context.getResources()
                         .getString(R.string.bt_hci_snoop_log_filtered_mode_disabled_summary);

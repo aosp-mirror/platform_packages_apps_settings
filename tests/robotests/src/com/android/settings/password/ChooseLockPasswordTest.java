@@ -43,6 +43,9 @@ import android.app.admin.PasswordMetrics;
 import android.app.admin.PasswordPolicy;
 import android.content.Intent;
 import android.os.UserHandle;
+import android.view.View;
+import android.widget.CheckBox;
+import android.widget.TextView;
 
 import com.android.internal.widget.LockscreenCredential;
 import com.android.settings.R;
@@ -52,6 +55,7 @@ import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowUtils;
+import com.android.settings.widget.ScrollToParentEditText;
 
 import com.google.android.setupdesign.GlifLayout;
 
@@ -73,7 +77,6 @@ import org.robolectric.shadows.ShadowDrawable;
         ShadowDevicePolicyManager.class,
 })
 public class ChooseLockPasswordTest {
-
     @Before
     public void setUp() {
         SettingsShadowResources.overrideResource(
@@ -175,6 +178,24 @@ public class ChooseLockPasswordTest {
     }
 
     @Test
+    public void processAndValidatePasswordRequirements_cannotIncludeInvalidChar() {
+        PasswordPolicy policy = new PasswordPolicy();
+        policy.quality = PASSWORD_QUALITY_UNSPECIFIED;
+        // Only ASCII 31–127 should be allowed.  The invalid character error should also take
+        // priority over the error that says the password is too short.
+        String[] passwords = new String[] { "§µ¿¶¥£", "™™™™", "\n\n\n\n", "¡", "é" };
+
+        for (String password : passwords) {
+            assertPasswordValidationResult(
+                    /* minMetrics */ policy.getMinMetrics(),
+                    /* minComplexity= */ PASSWORD_COMPLEXITY_NONE,
+                    /* passwordType= */ PASSWORD_QUALITY_ALPHABETIC,
+                    /* userEnteredPassword= */ LockscreenCredential.createPassword(password),
+                    "This can't include an invalid character");
+        }
+    }
+
+    @Test
     public void processAndValidatePasswordRequirements_noMinPasswordComplexity() {
         PasswordPolicy policy = new PasswordPolicy();
         policy.quality = PASSWORD_QUALITY_ALPHABETIC;
@@ -184,7 +205,7 @@ public class ChooseLockPasswordTest {
                 /* minMetrics */ policy.getMinMetrics(),
                 /* minComplexity= */ PASSWORD_COMPLEXITY_NONE,
                 /* passwordType= */ PASSWORD_QUALITY_ALPHABETIC,
-                /* userEnteredPassword= */ LockscreenCredential.createNone(),
+                /* userEnteredPassword= */ LockscreenCredential.createPassword(""),
                 "Must contain at least 1 non-numerical character",
                 "Must be at least 10 characters");
     }
@@ -198,7 +219,7 @@ public class ChooseLockPasswordTest {
                 /* minMetrics */ policy.getMinMetrics(),
                 /* minComplexity= */ PASSWORD_COMPLEXITY_HIGH,
                 /* passwordType= */ PASSWORD_QUALITY_NUMERIC,
-                /* userEnteredPassword= */ LockscreenCredential.createNone(),
+                /* userEnteredPassword= */ LockscreenCredential.createPin(""),
                 "PIN must be at least 8 digits");
     }
 
@@ -211,7 +232,7 @@ public class ChooseLockPasswordTest {
                 /* minMetrics */ policy.getMinMetrics(),
                 /* minComplexity= */ PASSWORD_COMPLEXITY_MEDIUM,
                 /* passwordType= */ PASSWORD_QUALITY_ALPHABETIC,
-                /* userEnteredPassword= */ LockscreenCredential.createNone(),
+                /* userEnteredPassword= */ LockscreenCredential.createPassword(""),
                 "Must be at least 4 characters");
     }
 
@@ -225,7 +246,7 @@ public class ChooseLockPasswordTest {
                 /* minMetrics */ policy.getMinMetrics(),
                 /* minComplexity= */ PASSWORD_COMPLEXITY_LOW,
                 /* passwordType= */ PASSWORD_QUALITY_ALPHABETIC,
-                /* userEnteredPassword= */ LockscreenCredential.createNone(),
+                /* userEnteredPassword= */ LockscreenCredential.createPassword(""),
                 "Must contain at least 1 non-numerical character",
                 "Must contain at least 1 numerical digit",
                 "Must be at least 9 characters");
@@ -241,7 +262,7 @@ public class ChooseLockPasswordTest {
                 /* minMetrics */ policy.getMinMetrics(),
                 /* minComplexity= */ PASSWORD_COMPLEXITY_MEDIUM,
                 /* passwordType= */ PASSWORD_QUALITY_NUMERIC,
-                /* userEnteredPassword= */ LockscreenCredential.createNone(),
+                /* userEnteredPassword= */ LockscreenCredential.createPin(""),
                 "PIN must be at least 11 digits");
     }
 
@@ -255,7 +276,7 @@ public class ChooseLockPasswordTest {
                 /* minMetrics */ policy.getMinMetrics(),
                 /* minComplexity= */ PASSWORD_COMPLEXITY_HIGH,
                 /* passwordType= */ PASSWORD_QUALITY_ALPHABETIC,
-                /* userEnteredPassword= */ LockscreenCredential.createNone(),
+                /* userEnteredPassword= */ LockscreenCredential.createPassword(""),
                 "Must contain at least 2 special symbols",
                 "Must be at least 6 characters",
                 "Must contain at least 1 letter",
@@ -341,7 +362,7 @@ public class ChooseLockPasswordTest {
                 /* minMetrics */ policy.getMinMetrics(),
                 /* minComplexity= */ PASSWORD_COMPLEXITY_HIGH,
                 /* passwordType= */ PASSWORD_QUALITY_ALPHABETIC,
-                /* userEnteredPassword= */ LockscreenCredential.createNone(),
+                /* userEnteredPassword= */ LockscreenCredential.createPassword(""),
                 "Must be at least 6 characters",
                 "If using only numbers, must be at least 8 digits");
     }
@@ -396,7 +417,8 @@ public class ChooseLockPasswordTest {
                 /* minComplexity= */ PASSWORD_COMPLEXITY_NONE,
                 /* passwordType= */ PASSWORD_QUALITY_NUMERIC,
                 /* userEnteredPassword= */ LockscreenCredential.createPassword("11"),
-                "PIN must be at least 4 digits");
+                "PIN must be at least 4 digits"
+                        + ", but a 6-digit PIN is recommended for added security");
     }
 
     @Test
@@ -420,8 +442,89 @@ public class ChooseLockPasswordTest {
                 /* minMetrics */ null,
                 /* minComplexity= */ PASSWORD_COMPLEXITY_HIGH,
                 /* passwordType= */ PASSWORD_QUALITY_NUMERIC,
-                /* userEnteredPassword= */ LockscreenCredential.createNone(),
+                /* userEnteredPassword= */ LockscreenCredential.createPin(""),
                 "PIN must be at least 8 digits");
+    }
+
+    @Test
+    public void autoPinConfirmOption_featureEnabledAndUntouchedByUser_changeStateAsPerRules() {
+        ChooseLockPassword passwordActivity = setupActivityWithPinTypeAndDefaultPolicy();
+
+        ChooseLockPasswordFragment fragment = getChooseLockPasswordFragment(passwordActivity);
+        ScrollToParentEditText passwordEntry = passwordActivity.findViewById(R.id.password_entry);
+        CheckBox pinAutoConfirmOption = passwordActivity
+                .findViewById(R.id.auto_pin_confirm_enabler);
+        TextView securityMessage =
+                passwordActivity.findViewById(R.id.auto_pin_confirm_security_message);
+
+        passwordEntry.setText("1234");
+        fragment.updateUi();
+        assertThat(pinAutoConfirmOption.getVisibility()).isEqualTo(View.GONE);
+        assertThat(securityMessage.getVisibility()).isEqualTo(View.GONE);
+        assertThat(pinAutoConfirmOption.isChecked()).isFalse();
+
+        passwordEntry.setText("123456");
+        fragment.updateUi();
+        assertThat(pinAutoConfirmOption.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(securityMessage.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(pinAutoConfirmOption.isChecked()).isTrue();
+
+        passwordEntry.setText("12345678");
+        fragment.updateUi();
+        assertThat(pinAutoConfirmOption.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(securityMessage.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(pinAutoConfirmOption.isChecked()).isFalse();
+
+        passwordEntry.setText("123456");
+        fragment.updateUi();
+        assertThat(pinAutoConfirmOption.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(securityMessage.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(pinAutoConfirmOption.isChecked()).isTrue();
+    }
+
+    @Test
+    public void autoPinConfirmOption_featureEnabledAndModifiedByUser_shouldChangeStateAsPerRules() {
+        ChooseLockPassword passwordActivity = setupActivityWithPinTypeAndDefaultPolicy();
+
+        ChooseLockPasswordFragment fragment = getChooseLockPasswordFragment(passwordActivity);
+        ScrollToParentEditText passwordEntry = passwordActivity.findViewById(R.id.password_entry);
+        CheckBox pinAutoConfirmOption = passwordActivity
+                .findViewById(R.id.auto_pin_confirm_enabler);
+        TextView securityMessage =
+                passwordActivity.findViewById(R.id.auto_pin_confirm_security_message);
+
+        passwordEntry.setText("123456");
+        fragment.updateUi();
+        assertThat(pinAutoConfirmOption.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(securityMessage.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(pinAutoConfirmOption.isChecked()).isTrue();
+
+        pinAutoConfirmOption.performClick();
+        assertThat(pinAutoConfirmOption.isChecked()).isFalse();
+
+        passwordEntry.setText("12345678");
+        fragment.updateUi();
+        assertThat(pinAutoConfirmOption.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(securityMessage.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(pinAutoConfirmOption.isChecked()).isFalse();
+
+        passwordEntry.setText("123456");
+        fragment.updateUi();
+        assertThat(pinAutoConfirmOption.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(securityMessage.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(pinAutoConfirmOption.isChecked()).isFalse();
+    }
+
+    private ChooseLockPassword setupActivityWithPinTypeAndDefaultPolicy() {
+        PasswordPolicy policy = new PasswordPolicy();
+        policy.quality = PASSWORD_QUALITY_UNSPECIFIED;
+
+        return buildChooseLockPasswordActivity(
+                new IntentBuilder(application)
+                        .setUserId(UserHandle.myUserId())
+                        .setPasswordType(PASSWORD_QUALITY_NUMERIC)
+                        .setPasswordRequirement(PASSWORD_COMPLEXITY_NONE, policy.getMinMetrics())
+                        .build());
     }
 
     private ChooseLockPassword buildChooseLockPasswordActivity(Intent intent) {

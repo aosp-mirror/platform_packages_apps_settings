@@ -35,8 +35,8 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.notification.app.AppNotificationSettings;
 import com.android.settings.notification.NotificationBackend;
+import com.android.settings.notification.app.AppNotificationSettings;
 import com.android.settingslib.applications.ApplicationsState;
 
 import org.junit.Before;
@@ -46,9 +46,13 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class AppNotificationPreferenceControllerTest {
 
     @Mock

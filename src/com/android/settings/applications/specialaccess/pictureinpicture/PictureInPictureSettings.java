@@ -38,6 +38,7 @@ import androidx.preference.Preference.OnPreferenceClickListener;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.EmptyTextSettings;
@@ -57,7 +58,7 @@ public class PictureInPictureSettings extends EmptyTextSettings {
     static final List<String> IGNORE_PACKAGE_LIST = new ArrayList<>();
 
     static {
-        IGNORE_PACKAGE_LIST.add("com.android.systemui");
+        IGNORE_PACKAGE_LIST.add(Utils.SYSTEMUI_PACKAGE_NAME);
     }
 
     /**

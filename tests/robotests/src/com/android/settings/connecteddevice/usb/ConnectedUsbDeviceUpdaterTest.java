@@ -82,8 +82,7 @@ public class ConnectedUsbDeviceUpdaterTest {
 
     @Test
     public void initUsbPreference_preferenceInit() {
-        when(mDevicePolicyManager.isUsbDataSignalingEnabledForUser(
-                UserHandle.myUserId())).thenReturn(true);
+        when(mDevicePolicyManager.isUsbDataSignalingEnabled()).thenReturn(true);
 
         mDeviceUpdater.initUsbPreference(mContext);
 

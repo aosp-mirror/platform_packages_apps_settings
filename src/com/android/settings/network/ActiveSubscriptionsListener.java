@@ -16,6 +16,7 @@
 
 package com.android.settings.network;
 
+import android.annotation.NonNull;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -275,6 +276,15 @@ public abstract class ActiveSubscriptionsListener
             }
         }
         return null;
+    }
+
+    /**
+     * Gets a list of active, visible subscription Id(s) of the currently active SIM(s).
+     *
+     * @return the list of subId's that are active and visible; the length may be 0.
+     */
+    public @NonNull int[] getActiveSubscriptionIdList() {
+        return getSubscriptionManager().getActiveSubscriptionIdList();
     }
 
     /**

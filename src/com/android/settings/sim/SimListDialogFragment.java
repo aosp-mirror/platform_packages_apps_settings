@@ -16,6 +16,8 @@
 
 package com.android.settings.sim;
 
+import static android.telephony.SubscriptionManager.PROFILE_CLASS_PROVISIONING;
+
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -37,6 +39,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 
+import com.android.internal.telephony.flags.Flags;
 import com.android.settings.R;
 import com.android.settings.network.SubscriptionUtil;
 
@@ -54,7 +57,8 @@ public class SimListDialogFragment extends SimDialogFragment {
 
     protected SelectSubscriptionAdapter mAdapter;
     @VisibleForTesting
-    List<SubscriptionInfo> mSubscriptions;
+    @NonNull
+    List<SubscriptionInfo> mSubscriptions = new ArrayList<>();
 
     public static SimListDialogFragment newInstance(int dialogType, int titleResId,
             boolean includeAskEveryTime, boolean isCancelItemShowed) {
@@ -69,8 +73,6 @@ public class SimListDialogFragment extends SimDialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        mSubscriptions = new ArrayList<>();
-
         final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         View titleView = LayoutInflater.from(getContext()).inflate(
                 R.layout.sim_confirm_dialog_title_multiple_enabled_profiles_supported, null);
@@ -107,16 +109,18 @@ public class SimListDialogFragment extends SimDialogFragment {
      * @param selectionIndex the index of item in the list.
      */
     public void onClick(int selectionIndex) {
+        final SimDialogActivity activity = (SimDialogActivity) getActivity();
         if (selectionIndex >= 0 && selectionIndex < mSubscriptions.size()) {
             int subId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
             final SubscriptionInfo subscription = mSubscriptions.get(selectionIndex);
             if (subscription != null) {
                 subId = subscription.getSubscriptionId();
             }
-            final SimDialogActivity activity = (SimDialogActivity) getActivity();
             activity.onSubscriptionSelected(getDialogType(), subId);
         }
-        dismiss();
+        Log.d(TAG, "Start showing auto data switch dialog");
+        activity.showEnableAutoDataSwitchDialog();
+        if (getDialog() != null) getDialog().dismiss();
     }
 
     protected List<SubscriptionInfo> getCurrentSubscriptions() {
@@ -137,6 +141,12 @@ public class SimListDialogFragment extends SimDialogFragment {
             dismiss();
             return;
         }
+
+        // Remove the provisioning or satellite eSIM from the subscription list.
+        currentSubscriptions.removeIf(info -> info.isEmbedded()
+            && (info.getProfileClass() == PROFILE_CLASS_PROVISIONING
+                || (Flags.oemEnabledSatelliteFlag() && info.isOnlyNonTerrestrialNetwork())));
+
         boolean includeAskEveryTime = getArguments().getBoolean(KEY_INCLUDE_ASK_EVERY_TIME);
         boolean isCancelItemShowed = getArguments().getBoolean(KEY_SHOW_CANCEL_ITEM);
         if (includeAskEveryTime || isCancelItemShowed) {

@@ -37,9 +37,8 @@ import android.view.accessibility.AccessibilityManager;
 
 import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
 import androidx.annotation.VisibleForTesting;
-
-import com.android.settings.R;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -95,6 +94,7 @@ public final class AccessibilityUtil {
             UserShortcutType.SOFTWARE,
             UserShortcutType.HARDWARE,
             UserShortcutType.TRIPLETAP,
+            UserShortcutType.TWOFINGERTRIPLETAP,
     })
 
     /** Denotes the user shortcut type. */
@@ -103,6 +103,7 @@ public final class AccessibilityUtil {
         int SOFTWARE = 1; // 1 << 0
         int HARDWARE = 2; // 1 << 1
         int TRIPLETAP = 4; // 1 << 2
+        int TWOFINGERTRIPLETAP = 8; // 1 << 3
     }
 
     /**
@@ -124,15 +125,15 @@ public final class AccessibilityUtil {
     }
 
     /**
-     * Return On/Off string according to the setting which specifies the integer value 1 or 0. This
+     * Returns On/Off string according to the setting which specifies the integer value 1 or 0. This
      * setting is defined in the secure system settings {@link android.provider.Settings.Secure}.
      */
-    static CharSequence getSummary(Context context, String settingsSecureKey) {
-        final boolean enabled = Settings.Secure.getInt(context.getContentResolver(),
+    static CharSequence getSummary(
+            Context context, String settingsSecureKey, @StringRes int enabledString,
+            @StringRes int disabledString) {
+        boolean enabled = Settings.Secure.getInt(context.getContentResolver(),
                 settingsSecureKey, State.OFF) == State.ON;
-        final int resId = enabled ? R.string.accessibility_feature_state_on
-                : R.string.accessibility_feature_state_off;
-        return context.getResources().getText(resId);
+        return context.getResources().getText(enabled ? enabledString : disabledString);
     }
 
     /**

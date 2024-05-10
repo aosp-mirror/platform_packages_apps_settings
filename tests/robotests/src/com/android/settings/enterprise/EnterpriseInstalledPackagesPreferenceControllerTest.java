@@ -33,6 +33,7 @@ import androidx.preference.Preference;
 import com.android.settings.R;
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settingslib.utils.StringUtil;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -75,6 +76,8 @@ public class EnterpriseInstalledPackagesPreferenceControllerTest {
             }
         }).when(mFeatureFactory.applicationFeatureProvider)
                 .calculateNumberOfPolicyInstalledApps(eq(async), any());
+        when(mContext.getResources().getString(R.string.enterprise_privacy_number_packages_lower_bound))
+                .thenReturn("Minimum # apps");
     }
 
     @Test
@@ -87,8 +90,8 @@ public class EnterpriseInstalledPackagesPreferenceControllerTest {
         assertThat(preference.isVisible()).isFalse();
 
         setNumberOfEnterpriseInstalledPackages(20, true /* async */);
-        when(mContext.getResources().getQuantityString(
-                R.plurals.enterprise_privacy_number_packages_lower_bound, 20, 20))
+        when(StringUtil.getIcuPluralsString(mContext, 20,
+                R.string.enterprise_privacy_number_packages_lower_bound))
                 .thenReturn("minimum 20 apps");
         mController.updateState(preference);
         assertThat(preference.getSummary()).isEqualTo("minimum 20 apps");

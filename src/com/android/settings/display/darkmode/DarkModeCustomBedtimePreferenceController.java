@@ -20,6 +20,7 @@ import static android.app.UiModeManager.MODE_NIGHT_CUSTOM_TYPE_BEDTIME;
 
 import android.app.UiModeManager;
 import android.content.Context;
+import android.content.Intent;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -52,7 +53,12 @@ public class DarkModeCustomBedtimePreferenceController extends BasePreferenceCon
         super.displayPreference(screen);
         mFooterPreference = screen.findPreference(getPreferenceKey());
         mFooterPreference.setLearnMoreAction(
-                v -> v.getContext().startActivity(mBedtimeSettings.getBedtimeSettingsIntent()));
+                v -> {
+                    Intent bedtimeSettingsIntent = mBedtimeSettings.getBedtimeSettingsIntent();
+                    if (bedtimeSettingsIntent != null) {
+                        v.getContext().startActivity(bedtimeSettingsIntent);
+                    }
+                });
         mFooterPreference.setLearnMoreText(
                 mContext.getString(R.string.dark_ui_bedtime_footer_action));
     }

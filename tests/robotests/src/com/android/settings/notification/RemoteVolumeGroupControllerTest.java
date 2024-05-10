@@ -31,6 +31,7 @@ import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageStats;
+import android.media.MediaRoute2Info;
 import android.media.MediaRouter2Manager;
 import android.media.RoutingSessionInfo;
 import android.media.session.MediaSessionManager;
@@ -83,6 +84,8 @@ public class RemoteVolumeGroupControllerTest {
     private SharedPreferences mSharedPreferences;
     @Mock
     private MediaSessionManager mMediaSessionManager;
+    @Mock
+    private MediaRouter2Manager mRouterManager;
 
     private final List<RoutingSessionInfo> mRoutingSessionInfos = new ArrayList<>();
 
@@ -102,7 +105,7 @@ public class RemoteVolumeGroupControllerTest {
                 Context.MEDIA_SESSION_SERVICE);
         mController = new RemoteVolumeGroupController(mContext, KEY_REMOTE_VOLUME_GROUP);
         mController.mLocalMediaManager = mLocalMediaManager;
-        mController.mRouterManager = mock(MediaRouter2Manager.class);
+        mController.mRouterManager = mRouterManager;
         mPreferenceCategory = spy(new PreferenceCategory(mContext));
         mPreferenceCategory.setKey(mController.getPreferenceKey());
 
@@ -118,7 +121,7 @@ public class RemoteVolumeGroupControllerTest {
         when(remoteSessionInfo.getClientPackageName()).thenReturn(TEST_PACKAGE_NAME);
         when(remoteSessionInfo.isSystemSession()).thenReturn(false);
         mRoutingSessionInfos.add(remoteSessionInfo);
-        when(mLocalMediaManager.getActiveMediaSession()).thenReturn(mRoutingSessionInfos);
+        when(mLocalMediaManager.getRemoteRoutingSessions()).thenReturn(mRoutingSessionInfos);
     }
 
     @Test
@@ -178,6 +181,10 @@ public class RemoteVolumeGroupControllerTest {
 
     @Test
     public void displayPreference_withActiveSession_checkSwitcherPreferenceTitle() {
+        // Preference title needs media output to be enabled.
+        when(mRouterManager.getTransferableRoutes(TEST_PACKAGE_NAME)).thenReturn(List.of(mock(
+                MediaRoute2Info.class)));
+
         initPackage();
         mShadowPackageManager.addPackage(mPackageInfo, mPackageStats);
         mController.displayPreference(mScreen);

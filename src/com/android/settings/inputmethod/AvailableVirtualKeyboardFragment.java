@@ -55,7 +55,10 @@ public class AvailableVirtualKeyboardFragment extends DashboardFragment
 
     @VisibleForTesting
     InputMethodSettingValuesWrapper mInputMethodSettingValues;
-    private Context mUserAwareContext;
+
+    @VisibleForTesting
+    Context mUserAwareContext;
+
     private int mUserId;
 
     @Override
@@ -81,10 +84,27 @@ public class AvailableVirtualKeyboardFragment extends DashboardFragment
                 newUserAwareContext = context.createContextAsUser(UserHandle.of(newUserId), 0);
                 break;
             }
+            case ProfileSelectFragment.ProfileType.PRIVATE: {
+                // If the user is a private profile user, use currentUserId directly. Or get the
+                // private profile userId instead.
+                newUserId = userManager.isPrivateProfile()
+                        ? currentUserId
+                        : Utils.getCurrentUserIdOfType(
+                                userManager, ProfileSelectFragment.ProfileType.PRIVATE);
+                newUserAwareContext = context.createContextAsUser(UserHandle.of(newUserId), 0);
+                break;
+            }
             case ProfileSelectFragment.ProfileType.PERSONAL: {
-                final UserHandle primaryUser = userManager.getPrimaryUser().getUserHandle();
-                newUserId = primaryUser.getIdentifier();
-                newUserAwareContext = context.createContextAsUser(primaryUser, 0);
+                // Use the parent user of the current user if the current user is profile.
+                final UserHandle currentUser = UserHandle.of(currentUserId);
+                final UserHandle userProfileParent = userManager.getProfileParent(currentUser);
+                if (userProfileParent != null) {
+                    newUserId = userProfileParent.getIdentifier();
+                    newUserAwareContext = context.createContextAsUser(userProfileParent, 0);
+                } else {
+                    newUserId = currentUserId;
+                    newUserAwareContext = context;
+                }
                 break;
             }
             default:
@@ -145,7 +165,7 @@ public class AvailableVirtualKeyboardFragment extends DashboardFragment
         final Context prefContext = getPrefContext();
         final List<InputMethodInfo> imis = mInputMethodSettingValues.getInputMethodList();
         final List<InputMethodInfo> enabledImis = getContext().getSystemService(
-                InputMethodManager.class).getEnabledInputMethodListAsUser(mUserId);
+                InputMethodManager.class).getEnabledInputMethodListAsUser(UserHandle.of(mUserId));
         final int numImis = (imis == null ? 0 : imis.size());
         for (int i = 0; i < numImis; ++i) {
             final InputMethodInfo imi = imis.get(i);

@@ -168,8 +168,8 @@ public class EnterprisePrivacySettings extends DashboardFragment {
     }
 
     public static boolean isPageEnabled(Context context) {
-        return FeatureFactory.getFactory(context)
-                .getEnterprisePrivacyFeatureProvider(context)
+        return FeatureFactory.getFeatureFactory()
+                .getEnterprisePrivacyFeatureProvider()
                 .hasDeviceOwner();
     }
 

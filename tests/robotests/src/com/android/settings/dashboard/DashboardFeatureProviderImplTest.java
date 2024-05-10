@@ -43,6 +43,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -57,6 +58,7 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Pair;
 
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
@@ -65,7 +67,12 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
+import com.android.settings.homepage.TopLevelHighlightMixin;
+import com.android.settings.homepage.TopLevelSettings;
+import com.android.settings.search.SearchFeatureProviderImpl;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.shadow.ShadowActivityEmbeddingUtils;
+import com.android.settings.testutils.shadow.ShadowSplitController;
 import com.android.settings.testutils.shadow.ShadowTileUtils;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -76,6 +83,7 @@ import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.drawer.TileUtils;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -195,6 +203,27 @@ public class DashboardFeatureProviderImplTest {
     }
 
     @Test
+    public void bindPreference_providerTileWithPendingIntent_shouldBindIntent() {
+        final Preference preference = new SwitchPreference(RuntimeEnvironment.application);
+        Bundle metaData = new Bundle();
+        metaData.putInt(META_DATA_PREFERENCE_TITLE, R.string.settings_label);
+        metaData.putInt(META_DATA_PREFERENCE_SUMMARY, R.string.about_settings_summary);
+        metaData.putInt(META_DATA_KEY_ORDER, 10);
+        metaData.putString(META_DATA_PREFERENCE_KEYHINT, KEY);
+        final Tile tile = new ProviderTile(mProviderInfo, CategoryKey.CATEGORY_HOMEPAGE, metaData);
+        PendingIntent pendingIntent =
+                PendingIntent.getActivity(RuntimeEnvironment.application, 0, new Intent("test"), 0);
+        tile.pendingIntentMap.put(UserHandle.CURRENT, pendingIntent);
+
+        mImpl.bindPreferenceToTileAndGetObservers(mActivity, mFragment, mForceRoundedIcon,
+                preference, tile, "123", Preference.DEFAULT_ORDER);
+
+        assertThat(preference.getFragment()).isNull();
+        assertThat(preference.getOnPreferenceClickListener()).isNotNull();
+        assertThat(preference.getOrder()).isEqualTo(tile.getOrder());
+    }
+
+    @Test
     public void bindPreference_noFragmentMetadata_shouldBindIntent() {
         final Preference preference = new Preference(RuntimeEnvironment.application);
         mActivityInfo.metaData.putInt(META_DATA_KEY_ORDER, 10);
@@ -208,6 +237,7 @@ public class DashboardFeatureProviderImplTest {
         assertThat(preference.getOrder()).isEqualTo(tile.getOrder());
     }
 
+    @Ignore("b/313569889")
     @Test
     public void bindPreference_noFragmentMetadata_shouldBindToProfileSelector() {
         final Preference preference = new Preference(RuntimeEnvironment.application);
@@ -542,6 +572,68 @@ public class DashboardFeatureProviderImplTest {
                 .isEqualTo(MetricsEvent.SETTINGS_GESTURES);
     }
 
+    /** This test is for large screen devices Activity embedding. */
+    @Test
+    @Config(shadows = {ShadowActivityEmbeddingUtils.class, ShadowSplitController.class})
+    public void bindPreference_clickHighlightedPreference_shouldNotStartActivity() {
+        ShadowSplitController.setIsActivityEmbedded(true);
+        ShadowActivityEmbeddingUtils.setIsEmbeddingActivityEnabled(true);
+        mFeatureFactory.searchFeatureProvider = new SearchFeatureProviderImpl();
+
+        String clickPrefKey = "highlight_pref_key";
+        String highlightMixinPrefKey = "highlight_pref_key";
+        FragmentActivity activity = Robolectric.buildActivity(FragmentActivity.class).get();
+        Preference preference = new Preference(RuntimeEnvironment.application);
+        Tile tile = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
+        mActivityInfo.metaData.putString(META_DATA_PREFERENCE_KEYHINT, "key");
+        mActivityInfo.metaData.putString("com.android.settings.intent.action", "TestAction");
+        tile.userHandle = null;
+
+        TopLevelSettings largeScreenTopLevelSettings = spy(new TopLevelSettings(
+                new TestTopLevelHighlightMixin(highlightMixinPrefKey,
+                true /* activityEmbedded */)));
+        doReturn(true).when(largeScreenTopLevelSettings).isActivityEmbedded();
+        largeScreenTopLevelSettings.setHighlightPreferenceKey(clickPrefKey);
+
+        mImpl.bindPreferenceToTileAndGetObservers(activity, largeScreenTopLevelSettings,
+                mForceRoundedIcon, preference, tile, clickPrefKey, Preference.DEFAULT_ORDER);
+        preference.performClick();
+
+        ShadowActivity shadowActivity = Shadows.shadowOf(activity);
+        assertThat(shadowActivity.getNextStartedActivityForResult()).isEqualTo(null);
+    }
+
+    /** This test is for large screen devices Activity embedding. */
+    @Test
+    @Config(shadows = {ShadowActivityEmbeddingUtils.class, ShadowSplitController.class})
+    public void bindPreference_clickNotHighlightedPreference_shouldStartActivity() {
+        ShadowSplitController.setIsActivityEmbedded(true);
+        ShadowActivityEmbeddingUtils.setIsEmbeddingActivityEnabled(true);
+        mFeatureFactory.searchFeatureProvider = new SearchFeatureProviderImpl();
+
+        String clickPrefKey = "not_highlight_pref_key";
+        String highlightMixinPrefKey = "highlight_pref_key";
+        FragmentActivity activity = Robolectric.buildActivity(FragmentActivity.class).get();
+        Preference preference = new Preference(RuntimeEnvironment.application);
+        Tile tile = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
+        mActivityInfo.metaData.putString(META_DATA_PREFERENCE_KEYHINT, "key");
+        mActivityInfo.metaData.putString("com.android.settings.intent.action", "TestAction");
+        tile.userHandle = null;
+
+        TopLevelSettings largeScreenTopLevelSettings = spy(new TopLevelSettings(
+                new TestTopLevelHighlightMixin(highlightMixinPrefKey,
+                true /* activityEmbedded */)));
+        doReturn(true).when(largeScreenTopLevelSettings).isActivityEmbedded();
+        largeScreenTopLevelSettings.setHighlightPreferenceKey(clickPrefKey);
+
+        mImpl.bindPreferenceToTileAndGetObservers(activity, largeScreenTopLevelSettings,
+                mForceRoundedIcon, preference, tile, clickPrefKey, Preference.DEFAULT_ORDER);
+        preference.performClick();
+
+        Intent launchIntent = Shadows.shadowOf(activity).getNextStartedActivityForResult().intent;
+        assertThat(launchIntent.getAction()).isEqualTo("TestAction");
+    }
+
     @Test
     public void clickPreference_withUnresolvableIntent_shouldNotLaunchAnything() {
         ReflectionHelpers.setField(
@@ -564,6 +656,56 @@ public class DashboardFeatureProviderImplTest {
     }
 
     @Test
+    public void clickPreference_providerTileWithPendingIntent_singleUser_executesPendingIntent() {
+        final Preference preference = new SwitchPreference(RuntimeEnvironment.application);
+        Bundle metaData = new Bundle();
+        metaData.putInt(META_DATA_PREFERENCE_TITLE, R.string.settings_label);
+        metaData.putInt(META_DATA_PREFERENCE_SUMMARY, R.string.about_settings_summary);
+        metaData.putInt(META_DATA_KEY_ORDER, 10);
+        metaData.putString(META_DATA_PREFERENCE_KEYHINT, KEY);
+        final Tile tile = new ProviderTile(mProviderInfo, CategoryKey.CATEGORY_HOMEPAGE, metaData);
+        PendingIntent pendingIntent =
+                PendingIntent.getActivity(RuntimeEnvironment.application, 0, new Intent("test"), 0);
+        tile.pendingIntentMap.put(UserHandle.CURRENT, pendingIntent);
+
+        mImpl.bindPreferenceToTileAndGetObservers(mActivity, mFragment, mForceRoundedIcon,
+                preference, tile, "123", Preference.DEFAULT_ORDER);
+        preference.performClick();
+
+        Intent nextStartedActivity =
+                Shadows.shadowOf(RuntimeEnvironment.application).peekNextStartedActivity();
+        assertThat(nextStartedActivity).isNotNull();
+        assertThat(nextStartedActivity.getAction()).isEqualTo("test");
+    }
+
+    @Test
+    public void clickPreference_providerTileWithPendingIntent_multiUser_showsProfileDialog() {
+        final Preference preference = new SwitchPreference(RuntimeEnvironment.application);
+        Bundle metaData = new Bundle();
+        metaData.putInt(META_DATA_PREFERENCE_TITLE, R.string.settings_label);
+        metaData.putInt(META_DATA_PREFERENCE_SUMMARY, R.string.about_settings_summary);
+        metaData.putInt(META_DATA_KEY_ORDER, 10);
+        metaData.putString(META_DATA_PREFERENCE_KEYHINT, KEY);
+        final Tile tile = new ProviderTile(mProviderInfo, CategoryKey.CATEGORY_HOMEPAGE, metaData);
+        PendingIntent pendingIntent =
+                PendingIntent.getActivity(RuntimeEnvironment.application, 0, new Intent("test"), 0);
+        tile.pendingIntentMap.put(UserHandle.CURRENT, pendingIntent);
+        tile.pendingIntentMap.put(new UserHandle(10), pendingIntent);
+
+        mImpl.bindPreferenceToTileAndGetObservers(mActivity, mFragment, mForceRoundedIcon,
+                preference, tile, "123", Preference.DEFAULT_ORDER);
+        preference.performClick();
+
+        Fragment dialogFragment =
+                mActivity.getSupportFragmentManager().findFragmentByTag("select_profile");
+        assertThat(dialogFragment).isNotNull();
+        Intent nextStartedActivity =
+                Shadows.shadowOf(RuntimeEnvironment.application).peekNextStartedActivity();
+        assertThat(nextStartedActivity).isNull();
+    }
+
+    @Ignore("b/313569889")
+    @Test
     public void openTileIntent_profileSelectionDialog_shouldShow() {
         ShadowUserManager.getShadow().addUser(10, "Someone", 0);
 
@@ -579,6 +721,7 @@ public class DashboardFeatureProviderImplTest {
         verify(mActivity).getSupportFragmentManager();
     }
 
+    @Ignore("b/313569889")
     @Test
     public void openTileIntent_profileSelectionDialog_explicitMetadataShouldShow() {
         ShadowUserManager.getShadow().addUser(10, "Someone", 0);
@@ -596,6 +739,7 @@ public class DashboardFeatureProviderImplTest {
         verify(mActivity).getSupportFragmentManager();
     }
 
+    @Ignore("b/313569889")
     @Test
     public void openTileIntent_profileSelectionDialog_shouldNotShow() {
         ShadowUserManager.getShadow().addUser(10, "Someone", 0);
@@ -613,6 +757,7 @@ public class DashboardFeatureProviderImplTest {
         verify(mActivity, never()).getSupportFragmentManager();
     }
 
+    @Ignore("b/313569889")
     @Test
     public void openTileIntent_profileSelectionDialog_validUserHandleShouldNotShow() {
         final int userId = 10;
@@ -635,6 +780,7 @@ public class DashboardFeatureProviderImplTest {
         verify(mActivity, never()).getSupportFragmentManager();
     }
 
+    @Ignore("b/313569889")
     @Test
     public void openTileIntent_profileSelectionDialog_invalidUserHandleShouldShow() {
         ShadowUserManager.getShadow().addUser(10, "Someone", 0);
@@ -653,6 +799,7 @@ public class DashboardFeatureProviderImplTest {
         verify(mActivity).getSupportFragmentManager();
     }
 
+    @Ignore("b/313569889")
     @Test
     public void openTileIntent_profileSelectionDialog_unresolvableWorkProfileIntentShouldNotShow() {
         final int userId = 10;
@@ -692,6 +839,21 @@ public class DashboardFeatureProviderImplTest {
         @Override
         protected String getLogTag() {
             return "TestFragment";
+        }
+    }
+
+    private static class TestTopLevelHighlightMixin extends TopLevelHighlightMixin {
+        private final String mHighlightPreferenceKey;
+
+        TestTopLevelHighlightMixin(String highlightPreferenceKey,
+                boolean activityEmbedded) {
+            super(activityEmbedded);
+            mHighlightPreferenceKey = highlightPreferenceKey;
+        }
+
+        @Override
+        public String getHighlightPreferenceKey() {
+            return mHighlightPreferenceKey;
         }
     }
 }

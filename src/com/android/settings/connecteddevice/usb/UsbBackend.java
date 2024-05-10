@@ -53,6 +53,7 @@ public class UsbBackend {
     private final boolean mTetheringRestrictedBySystem;
     private final boolean mMidiSupported;
     private final boolean mTetheringSupported;
+    private final boolean mUVCEnabled;
     private final boolean mIsAdminUser;
 
     private UsbManager mUsbManager;
@@ -74,12 +75,12 @@ public class UsbBackend {
         mFileTransferRestrictedBySystem = isUsbFileTransferRestrictedBySystem(userManager);
         mTetheringRestricted = isUsbTetheringRestricted(userManager);
         mTetheringRestrictedBySystem = isUsbTetheringRestrictedBySystem(userManager);
+        mUVCEnabled = isUvcEnabled();
         mIsAdminUser = userManager.isAdminUser();
 
         mMidiSupported = context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_MIDI);
         final TetheringManager tm = context.getSystemService(TetheringManager.class);
         mTetheringSupported = tm.isTetheringSupported();
-
         updatePorts();
     }
 
@@ -200,6 +201,10 @@ public class UsbBackend {
                 UserManager.DISALLOW_CONFIG_TETHERING, UserHandle.of(UserHandle.myUserId()));
     }
 
+    private static boolean isUvcEnabled() {
+        return UsbManager.isUvcSupportEnabled();
+    }
+
     private boolean areFunctionDisallowed(long functions) {
         return (mFileTransferRestricted && ((functions & UsbManager.FUNCTION_MTP) != 0
                 || (functions & UsbManager.FUNCTION_PTP) != 0))
@@ -209,7 +214,8 @@ public class UsbBackend {
     private boolean areFunctionsDisallowedBySystem(long functions) {
         return (mFileTransferRestrictedBySystem && ((functions & UsbManager.FUNCTION_MTP) != 0
                 || (functions & UsbManager.FUNCTION_PTP) != 0))
-                || (mTetheringRestrictedBySystem && ((functions & UsbManager.FUNCTION_RNDIS) != 0));
+                || (mTetheringRestrictedBySystem && ((functions & UsbManager.FUNCTION_RNDIS) != 0))
+                || (!mUVCEnabled && ((functions & UsbManager.FUNCTION_UVC) != 0));
     }
 
     @VisibleForTesting

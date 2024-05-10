@@ -25,7 +25,6 @@ import android.annotation.UiThread;
 import android.app.Activity;
 import android.app.KeyguardManager;
 import android.app.admin.DevicePolicyManager;
-import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -53,13 +52,13 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.CompoundButton;
 import android.widget.ExpandableListView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -68,7 +67,7 @@ import com.android.internal.annotations.GuardedBy;
 import com.android.internal.app.UnlaunchableAppActivity;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.TrustedCredentialsSettings.Tab;
-import com.android.settings.core.InstrumentedFragment;
+import com.android.settingslib.core.lifecycle.ObservableFragment;
 
 import java.security.cert.CertificateEncodingException;
 import java.security.cert.X509Certificate;
@@ -81,7 +80,7 @@ import java.util.function.IntConsumer;
 /**
  * Fragment to display trusted credentials settings for one tab.
  */
-public class TrustedCredentialsFragment extends InstrumentedFragment
+public class TrustedCredentialsFragment extends ObservableFragment
         implements TrustedCredentialsDialogBuilder.DelegateInterface {
 
     public static final String ARG_POSITION = "tab";
@@ -174,11 +173,6 @@ public class TrustedCredentialsFragment extends InstrumentedFragment
             createChildView(inflater, contentView, childState, i);
         }
         return mFragmentView;
-    }
-
-    @Override
-    public int getMetricsCategory() {
-        return SettingsEnums.TRUSTED_CREDENTIALS;
     }
 
     private void createChildView(
@@ -339,11 +333,11 @@ public class TrustedCredentialsFragment extends InstrumentedFragment
             TextView title = convertView.findViewById(android.R.id.title);
             if (getUserInfoByGroup(groupPosition).isManagedProfile()) {
                 title.setText(mDevicePolicyManager.getResources().getString(WORK_CATEGORY_HEADER,
-                        () -> getString(R.string.category_work)));
+                        () -> getString(com.android.settingslib.R.string.category_work)));
             } else {
                 title.setText(mDevicePolicyManager.getResources().getString(
                         PERSONAL_CATEGORY_HEADER,
-                        () -> getString(R.string.category_personal)));
+                        () -> getString(com.android.settingslib.R.string.category_personal)));
 
             }
             title.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_END);
@@ -462,10 +456,10 @@ public class TrustedCredentialsFragment extends InstrumentedFragment
             return "Group" + getUserIdByGroup(groupPosition);
         }
 
-        private class ViewHolder {
+        private static class ViewHolder {
             private TextView mSubjectPrimaryView;
             private TextView mSubjectSecondaryView;
-            private Switch mSwitch;
+            private CompoundButton mSwitch;
         }
     }
 

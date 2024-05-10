@@ -1,8 +1,5 @@
-    //############################################################
-// Build SettingsRoboTestStub.apk which includes test-only resources.#
-//############################################################
-
 package {
+    default_team: "trendy_team_android_settings_app",
     // See: http://go/android-license-faq
     // A large-scale-change added 'default_applicable_licenses' to import
     // all of the 'license_kinds' from "packages_apps_Settings_license"
@@ -11,6 +8,7 @@ package {
     default_applicable_licenses: ["packages_apps_Settings_license"],
 }
 
+// Build SettingsRoboTestStub.apk which includes test-only resources.
 android_app {
     name: "SettingsRoboTestStub",
     defaults: [
@@ -20,37 +18,16 @@ android_app {
     platform_apis: true,
     certificate: "platform",
     privileged: true,
-
+    use_resource_processor: true,
     resource_dirs: ["res"],
 
     static_libs: [
         "Settings-core",
-        "androidx-constraintlayout_constraintlayout",
-        "androidx.slice_slice-builders",
-        "androidx.slice_slice-core",
-        "androidx.slice_slice-view",
-        "androidx.core_core",
-        "androidx.appcompat_appcompat",
-        "androidx.cardview_cardview",
-        "androidx.preference_preference",
-        "androidx.recyclerview_recyclerview",
-        "androidx.window_window",
-        "com.google.android.material_material",
-        "setupcompat",
-        "setupdesign",
-        "androidx.lifecycle_lifecycle-runtime",
-        "androidx.lifecycle_lifecycle-extensions",
-        "androidx.test.core",
-        "androidx.test.runner",
-        "androidx.test.ext.junit",
-        "guava",
-        "jsr305",
-        "settings-contextual-card-protos-lite",
-        "settings-log-bridge-protos-lite",
-	"settings-telephony-protos-lite",
-        "contextualcards",
-        "settings-logtags",
-        "zxing-core-1.7",
+        "androidx.fragment_fragment-testing",
+        "frameworks-base-testutils",
+        "androidx.fragment_fragment",
+        "androidx.lifecycle_lifecycle-runtime-testing",
+        "kotlinx_coroutines_test",
     ],
 
     aaptflags: ["--extra-packages com.android.settings"],
@@ -66,29 +43,43 @@ android_app {
     ],
 }
 
-//############################################################
-// Settings Robolectric test target.                         #
-//############################################################
+// Settings Robolectric test target.
 android_robolectric_test {
     name: "SettingsRoboTests",
     srcs: [
         "src/**/*.java",
+        "src/**/*.kt",
     ],
 
+    // test_suites attribute is not needed. This module will be configured in ATP GCL file.
+
     static_libs: [
+        "Robolectric_shadows_androidx_fragment_upstream",
+        "Settings_robolectric_meta_service_file",
         "SettingsLib-robo-testutils",
-        "android-support-annotations",
+        "Settings-robo-testutils",
         "androidx.test.core",
-        "androidx.test.runner",
-        "androidx.test.ext.junit",
         "androidx.test.espresso.core",
+        "androidx.test.ext.junit",
+        "androidx.test.rules",
+        "androidx.test.runner",
+        "flag-junit",
+        "flag-junit-base",
+        "aconfig_settings_flags_lib",
+        "platform-test-annotations",
+        "Settings-testutils2",
+        "notification_flags_lib",
+        "com_android_server_accessibility_flags_lib",
     ],
 
     libs: [
         "ims-common",
     ],
 
-    java_resource_dirs: ["config", "resources"],
+    java_resource_dirs: [
+        "config",
+        "resources",
+    ],
 
     instrumentation_for: "SettingsRoboTestStub",
 
@@ -102,16 +93,17 @@ android_robolectric_test {
         "SettingsLib",
         "SettingsLib-search",
     ],
+
+    upstream: true,
 }
 
 java_library {
     name: "Settings-robo-testutils",
-    srcs: ["src/com/android/settings/testutils/**/*.java"],
-
+    srcs: ["testutils/**/*.java"],
     libs: [
+        "Robolectric_all-target_upstream",
         "Settings-core",
-        "Robolectric_all-target",
         "mockito-robolectric-prebuilt",
-        "truth-prebuilt",
+        "truth",
     ],
 }

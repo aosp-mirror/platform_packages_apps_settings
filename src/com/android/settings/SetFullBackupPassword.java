@@ -25,6 +25,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,7 +49,8 @@ public class SetFullBackupPassword extends Activity {
                     // Mismatch between new pw and its confirmation re-entry
                     Log.i(TAG, "password mismatch");
                     Toast.makeText(SetFullBackupPassword.this,
-                            R.string.local_backup_password_toast_confirmation_mismatch,
+                            com.android.settingslib.R
+                                    .string.local_backup_password_toast_confirmation_mismatch,
                             Toast.LENGTH_LONG).show();
                     return;
                 }
@@ -59,14 +61,15 @@ public class SetFullBackupPassword extends Activity {
                     // success
                     Log.i(TAG, "password set successfully");
                     Toast.makeText(SetFullBackupPassword.this,
-                            R.string.local_backup_password_toast_success,
+                            com.android.settingslib.R.string.local_backup_password_toast_success,
                             Toast.LENGTH_LONG).show();
                     finish();
                 } else {
                     // failure -- bad existing pw, usually
                     Log.i(TAG, "failure; password mismatch?");
                     Toast.makeText(SetFullBackupPassword.this,
-                            R.string.local_backup_password_toast_validation_failure,
+                            com.android.settingslib.R
+                                    .string.local_backup_password_toast_validation_failure,
                             Toast.LENGTH_LONG).show();
                 }
             } else if (v == mCancel) {
@@ -80,6 +83,7 @@ public class SetFullBackupPassword extends Activity {
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
 
         mBackupManager = IBackupManager.Stub.asInterface(ServiceManager.getService("backup"));
 

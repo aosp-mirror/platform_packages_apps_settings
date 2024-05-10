@@ -23,6 +23,7 @@ import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
 
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -43,10 +44,15 @@ import org.mockito.junit.MockitoRule;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
+import org.robolectric.annotation.LooperMode;
 
-
+/** Tests for {@link HearingAidDialogFragment}. */
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = ShadowAlertDialogCompat.class)
+@LooperMode(LooperMode.Mode.LEGACY)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+        ShadowAlertDialogCompat.class,
+})
 public class HearingAidDialogFragmentTest {
 
     @Rule
@@ -89,5 +95,11 @@ public class HearingAidDialogFragmentTest {
         dialog.getButton(DialogInterface.BUTTON_NEGATIVE).performClick();
 
         assertThat(dialog.isShowing()).isFalse();
+    }
+
+    @Test
+    public void getMetricsCategory_returnsCorrectCategory() {
+        assertThat(mFragment.getMetricsCategory()).isEqualTo(
+                SettingsEnums.DIALOG_ACCESSIBILITY_HEARINGAID);
     }
 }

@@ -16,6 +16,8 @@
 
 package com.android.settings.applications.manageapplications;
 
+import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_NONE;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.mock;
@@ -26,7 +28,6 @@ import android.content.pm.PackageManager;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import com.android.settings.R;
 import com.android.settingslib.applications.ApplicationsState;
 
 import org.junit.Before;
@@ -59,7 +60,8 @@ public class ApplicationViewHolderTest {
         info.enabledSetting = PackageManager.COMPONENT_ENABLED_STATE_DISABLED_UNTIL_USED;
         mHolder.updateDisableView(info);
 
-        assertThat(mHolder.mDisabled.getText()).isEqualTo(mContext.getText(R.string.disabled));
+        assertThat(mHolder.mDisabled.getText())
+                .isEqualTo(mContext.getText(com.android.settingslib.R.string.disabled));
     }
 
     @Test
@@ -67,8 +69,9 @@ public class ApplicationViewHolderTest {
         mHolder.setSummary("hello");
         assertThat(mHolder.mSummary.getText()).isEqualTo("hello");
 
-        mHolder.setSummary(R.string.disabled);
-        assertThat(mHolder.mSummary.getText()).isEqualTo(mContext.getText(R.string.disabled));
+        mHolder.setSummary(com.android.settingslib.R.string.disabled);
+        assertThat(mHolder.mSummary.getText())
+                .isEqualTo(mContext.getText(com.android.settingslib.R.string.disabled));
     }
 
     @Test
@@ -117,7 +120,8 @@ public class ApplicationViewHolderTest {
 
     @Test
     public void twoTouchTarget() {
-        mView = ApplicationViewHolder.newView(new FrameLayout(mContext), true);
+        mView = ApplicationViewHolder.newView(new FrameLayout(mContext), true,
+                LIST_TYPE_NONE);
         mHolder = new ApplicationViewHolder(mView);
         assertThat(mHolder.mSwitch).isNotNull();
         assertThat(mHolder.mWidgetContainer.getChildCount()).isEqualTo(1);
@@ -126,7 +130,8 @@ public class ApplicationViewHolderTest {
     @Test
     public void updateSwitch() {
         final CountDownLatch latch = new CountDownLatch(1);
-        mView = ApplicationViewHolder.newView(new FrameLayout(mContext), true);
+        mView = ApplicationViewHolder.newView(new FrameLayout(mContext), true,
+                LIST_TYPE_NONE);
         mHolder = new ApplicationViewHolder(mView);
         mHolder.updateSwitch((buttonView, isChecked) -> latch.countDown(), true, true);
 

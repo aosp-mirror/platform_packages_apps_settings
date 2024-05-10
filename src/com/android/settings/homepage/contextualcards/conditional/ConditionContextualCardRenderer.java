@@ -61,8 +61,8 @@ public class ConditionContextualCardRenderer implements ContextualCardRenderer {
     public void bindView(RecyclerView.ViewHolder holder, ContextualCard contextualCard) {
         final ConditionalCardHolder view = (ConditionalCardHolder) holder;
         final ConditionalContextualCard card = (ConditionalContextualCard) contextualCard;
-        final MetricsFeatureProvider metricsFeatureProvider = FeatureFactory.getFactory(
-                mContext).getMetricsFeatureProvider();
+        final MetricsFeatureProvider metricsFeatureProvider =
+                FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
 
         metricsFeatureProvider.visible(mContext, SettingsEnums.SETTINGS_HOMEPAGE,
                 card.getMetricsConstant(), 0);

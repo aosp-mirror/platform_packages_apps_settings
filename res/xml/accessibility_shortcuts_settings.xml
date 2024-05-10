@@ -28,7 +28,7 @@
         android:summary="@string/accessibility_button_summary"
         settings:controller="com.android.settings.accessibility.AccessibilityButtonPreferenceController"/>
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="accessibility_shortcut_preference"
         android:persistent="false"
         android:title="@string/accessibility_shortcut_service_on_lock_screen_title"

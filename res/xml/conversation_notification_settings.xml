@@ -25,6 +25,9 @@
         android:layout="@layout/settings_entity_header"
         settings:allowDividerBelow="true"/>
 
+    <com.android.settings.widget.SettingsMainSwitchPreference
+        android:key="block" />
+
     <!-- important conversation -->
     <com.android.settings.notification.app.ConversationPriorityPreference
         android:key="priority"
@@ -92,5 +95,12 @@
         android:title="@string/demote_conversation_title"
         android:summary="@string/demote_conversation_summary"
         settings:allowDividerAbove="true"/>
+
+    <!-- only used in ChannelPanelActivity -->
+    <Preference
+        android:key="convo_promote"
+        android:icon="@drawable/ic_promote_conversation"
+        android:title="@string/promote_conversation_title"
+        android:summary="@string/promote_conversation_summary" />
 
 </PreferenceScreen>

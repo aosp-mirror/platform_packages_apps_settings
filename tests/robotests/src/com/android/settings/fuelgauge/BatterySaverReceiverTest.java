@@ -32,10 +32,8 @@ import org.robolectric.RobolectricTestRunner;
 @RunWith(RobolectricTestRunner.class)
 public class BatterySaverReceiverTest {
 
-    @Mock
-    private BatterySaverReceiver.BatterySaverListener mBatterySaverListener;
-    @Mock
-    private Context mContext;
+    @Mock private BatterySaverReceiver.BatterySaverListener mBatterySaverListener;
+    @Mock private Context mContext;
     private BatterySaverReceiver mBatterySaverReceiver;
 
     @Before

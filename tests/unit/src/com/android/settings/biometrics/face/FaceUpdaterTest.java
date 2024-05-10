@@ -99,7 +99,9 @@ public class FaceUpdaterTest {
                 same(HARDWARE_AUTH_TOKEN),
                 same(CANCELLATION_SIGNAL),
                 callbackCaptor.capture(),
-                same(DISABLED_FEATURES));
+                same(DISABLED_FEATURES),
+                same(null),
+                eq(false));
         FaceManager.EnrollmentCallback callback = callbackCaptor.getValue();
 
         callback.onEnrollmentError(ERR_MSG_ID, ERR_STRING);
@@ -125,12 +127,14 @@ public class FaceUpdaterTest {
                 same(HARDWARE_AUTH_TOKEN),
                 same(CANCELLATION_SIGNAL),
                 callbackCaptor.capture(),
-                same(DISABLED_FEATURES));
+                same(DISABLED_FEATURES),
+                same(null),
+                eq(false));
         FaceManager.EnrollmentCallback callback = callbackCaptor.getValue();
 
         callback.onEnrollmentProgress(/* remaining= */ 0);
 
-        verify(mSafetyCenterManagerWrapper).isEnabled(mContext);
+        verify(mSafetyCenterManagerWrapper, atLeast(1)).isEnabled(mContext);
     }
 
     @Test
@@ -144,7 +148,9 @@ public class FaceUpdaterTest {
                 same(HARDWARE_AUTH_TOKEN),
                 same(CANCELLATION_SIGNAL),
                 callbackCaptor.capture(),
-                same(DISABLED_FEATURES));
+                same(DISABLED_FEATURES),
+                same(null),
+                eq(false));
         FaceManager.EnrollmentCallback callback = callbackCaptor.getValue();
 
         callback.onEnrollmentProgress(/* remaining= */ 1);

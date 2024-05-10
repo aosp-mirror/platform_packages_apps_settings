@@ -29,7 +29,7 @@ import android.util.Log;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.network.CarrierConfigCache;
 import com.android.settings.network.MobileDataEnabledListener;
@@ -94,7 +94,7 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
             Log.d(TAG, "Skip update under mCallState=" + mCallState);
             return;
         }
-        final SwitchPreference switchPreference = (SwitchPreference) preference;
+        final TwoStatePreference switchPreference = (TwoStatePreference) preference;
         final boolean videoCallEnabled = isVideoCallEnabled(mSubId);
         switchPreference.setVisible(videoCallEnabled);
         if (videoCallEnabled) {

@@ -25,10 +25,7 @@ import androidx.annotation.VisibleForTesting;
 
 import java.time.Duration;
 
-/**
- * Class to store the policy for battery tips, which comes from
- * {@link Settings.Global}
- */
+/** Class to store the policy for battery tips, which comes from {@link Settings.Global} */
 public class BatteryTipPolicy {
     public static final String TAG = "BatteryTipPolicy";
 
@@ -102,9 +99,9 @@ public class BatteryTipPolicy {
     public final long highUsagePeriodMs;
 
     /**
-     * The battery draining threshold to detect whether device is heavily used.
-     * If battery drains more than {@link #highUsageBatteryDraining} in last {@link
-     * #highUsagePeriodMs}, treat device as heavily used.
+     * The battery draining threshold to detect whether device is heavily used. If battery drains
+     * more than {@link #highUsageBatteryDraining} in last {@link #highUsagePeriodMs}, treat device
+     * as heavily used.
      *
      * @see Settings.Global#BATTERY_TIP_CONSTANTS
      * @see #KEY_HIGH_USAGE_BATTERY_DRAINING
@@ -171,8 +168,8 @@ public class BatteryTipPolicy {
     /**
      * Battery drain percentage threshold for excessive background anomaly(i.e. 10%)
      *
-     * This is an additional check for excessive background, to check whether battery drain
-     * for an app is larger than x%
+     * <p>This is an additional check for excessive background, to check whether battery drain for
+     * an app is larger than x%
      *
      * @see Settings.Global#BATTERY_TIP_CONSTANTS
      * @see #KEY_EXCESSIVE_BG_DRAIN_PERCENTAGE
@@ -220,8 +217,9 @@ public class BatteryTipPolicy {
     @VisibleForTesting
     BatteryTipPolicy(Context context, KeyValueListParser parser) {
         mParser = parser;
-        final String value = Settings.Global.getString(context.getContentResolver(),
-                Settings.Global.BATTERY_TIP_CONSTANTS);
+        final String value =
+                Settings.Global.getString(
+                        context.getContentResolver(), Settings.Global.BATTERY_TIP_CONSTANTS);
 
         try {
             mParser.setString(value);
@@ -234,8 +232,8 @@ public class BatteryTipPolicy {
         batterySaverTipEnabled = mParser.getBoolean(KEY_BATTERY_SAVER_TIP_ENABLED, true);
         highUsageEnabled = mParser.getBoolean(KEY_HIGH_USAGE_ENABLED, true);
         highUsageAppCount = mParser.getInt(KEY_HIGH_USAGE_APP_COUNT, 3);
-        highUsagePeriodMs = mParser.getLong(KEY_HIGH_USAGE_PERIOD_MS,
-                Duration.ofHours(2).toMillis());
+        highUsagePeriodMs =
+                mParser.getLong(KEY_HIGH_USAGE_PERIOD_MS, Duration.ofHours(2).toMillis());
         highUsageBatteryDraining = mParser.getInt(KEY_HIGH_USAGE_BATTERY_DRAINING, 25);
         appRestrictionEnabled = mParser.getBoolean(KEY_APP_RESTRICTION_ENABLED, true);
         appRestrictionActiveHour = mParser.getInt(KEY_APP_RESTRICTION_ACTIVE_HOUR, 24);
@@ -251,5 +249,4 @@ public class BatteryTipPolicy {
         testSmartBatteryTip = mParser.getBoolean(KEY_TEST_SMART_BATTERY_TIP, false);
         testLowBatteryTip = mParser.getBoolean(KEY_TEST_LOW_BATTERY_TIP, false);
     }
-
 }

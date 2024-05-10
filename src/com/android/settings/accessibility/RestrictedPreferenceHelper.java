@@ -37,6 +37,7 @@ import androidx.core.content.ContextCompat;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
@@ -118,9 +119,12 @@ public class RestrictedPreferenceHelper {
             final String htmlDescription = info.loadHtmlDescription(mPm);
             final String settingsClassName = info.getSettingsActivityName();
             final String tileServiceClassName = info.getTileServiceName();
+            final int metricsCategory = FeatureFactory.getFeatureFactory()
+                    .getAccessibilityMetricsFeatureProvider()
+                    .getDownloadedFeatureMetricsCategory(componentName);
 
             putBasicExtras(preference, prefKey, title, intro, description, imageRes,
-                    htmlDescription, componentName);
+                    htmlDescription, componentName, metricsCategory);
             putServiceExtras(preference, resolveInfo, serviceEnabled);
             putSettingsExtras(preference, packageName, settingsClassName);
             putTileServiceExtras(preference, packageName, tileServiceClassName);
@@ -178,9 +182,12 @@ public class RestrictedPreferenceHelper {
             final String htmlDescription = info.loadHtmlDescription(mPm);
             final String settingsClassName = info.getSettingsActivityName();
             final String tileServiceClassName = info.getTileServiceName();
+            final int metricsCategory = FeatureFactory.getFeatureFactory()
+                    .getAccessibilityMetricsFeatureProvider()
+                    .getDownloadedFeatureMetricsCategory(componentName);
 
             putBasicExtras(preference, prefKey, title, intro, description, imageRes,
-                    htmlDescription, componentName);
+                    htmlDescription, componentName, metricsCategory);
             putSettingsExtras(preference, componentName.getPackageName(), settingsClassName);
             putTileServiceExtras(preference, componentName.getPackageName(),
                     tileServiceClassName);
@@ -227,6 +234,32 @@ public class RestrictedPreferenceHelper {
         // permittedServices null means all accessibility services are allowed.
         boolean serviceAllowed = permittedServices == null || permittedServices.contains(
                 preference.getPackageName());
+
+        if (android.security.Flags.extendEcmToAllSettings()) {
+            preference.checkEcmRestrictionAndSetDisabled(
+                    AppOpsManager.OPSTR_BIND_ACCESSIBILITY_SERVICE,
+                    preference.getPackageName(), preference.getUid());
+            if (preference.isDisabledByEcm()) {
+                serviceAllowed = false;
+            }
+
+            if (serviceAllowed || serviceEnabled) {
+                preference.setEnabled(true);
+            } else {
+                // Disable accessibility service that are not permitted.
+                final RestrictedLockUtils.EnforcedAdmin admin =
+                        RestrictedLockUtilsInternal.checkIfAccessibilityServiceDisallowed(
+                                mContext, preference.getPackageName(), UserHandle.myUserId());
+
+                if (admin != null) {
+                    preference.setDisabledByAdmin(admin);
+                } else if (!preference.isDisabledByEcm()) {
+                    preference.setEnabled(false);
+                }
+            }
+            return;
+        }
+
         boolean appOpsAllowed;
         if (serviceAllowed) {
             try {
@@ -265,7 +298,7 @@ public class RestrictedPreferenceHelper {
     /** Puts the basic extras into {@link RestrictedPreference}'s getExtras(). */
     private void putBasicExtras(RestrictedPreference preference, String prefKey,
             CharSequence title, CharSequence intro, CharSequence summary, int imageRes,
-            String htmlDescription, ComponentName componentName) {
+            String htmlDescription, ComponentName componentName, int metricsCategory) {
         final Bundle extras = preference.getExtras();
         extras.putString(AccessibilitySettings.EXTRA_PREFERENCE_KEY, prefKey);
         extras.putCharSequence(AccessibilitySettings.EXTRA_TITLE, title);
@@ -274,6 +307,7 @@ public class RestrictedPreferenceHelper {
         extras.putParcelable(AccessibilitySettings.EXTRA_COMPONENT_NAME, componentName);
         extras.putInt(AccessibilitySettings.EXTRA_ANIMATED_IMAGE_RES, imageRes);
         extras.putString(AccessibilitySettings.EXTRA_HTML_DESCRIPTION, htmlDescription);
+        extras.putInt(AccessibilitySettings.EXTRA_METRICS_CATEGORY, metricsCategory);
     }
 
     /**

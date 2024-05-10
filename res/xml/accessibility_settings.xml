@@ -19,7 +19,8 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="accessibility_settings_screen"
     android:persistent="false"
-    android:title="@string/accessibility_settings">
+    android:title="@string/accessibility_settings"
+    settings:keywords="@string/keywords_accessibility">
 
     <PreferenceCategory
         android:key="user_installed_services_category"
@@ -62,7 +63,7 @@
             settings:controller="com.android.settings.accessibility.ReduceBrightColorsPreferenceController"/>
 
         <Preference
-            android:fragment="com.android.settings.accessibility.MagnificationPreferenceFragment"
+            android:fragment="com.android.settings.accessibility.ToggleScreenMagnificationPreferenceFragment"
             android:key="magnification_preference_screen"
             android:icon="@drawable/ic_accessibility_magnification"
             android:persistent="false"
@@ -119,10 +120,9 @@
             settings:controller="com.android.settings.accessibility.LiveCaptionPreferenceController"/>
 
         <Preference
-            android:fragment="com.android.settings.accessibility.CaptionPropertiesFragment"
+            android:fragment="com.android.settings.accessibility.CaptioningPropertiesFragment"
             android:key="captioning_preference_screen"
             android:icon="@drawable/ic_captioning"
-            android:persistent="false"
             android:title="@string/accessibility_captioning_title"
             settings:controller="com.android.settings.accessibility.CaptioningPreferenceController"/>
 
@@ -141,7 +141,7 @@
         android:persistent="false"
         android:title="@string/audio_category_title">
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="toggle_audio_description"
             android:persistent="false"
             android:icon="@drawable/ic_audio_description"
@@ -150,6 +150,16 @@
             settings:keywords="@string/keywords_audio_description"
             settings:searchable="true"
             settings:controller="com.android.settings.accessibility.AudioDescriptionPreferenceController"/>
+
+        <Preference
+            android:fragment="com.android.settings.accessibility.FlashNotificationsPreferenceFragment"
+            android:key="flash_notifications_preference_accessibility"
+            android:icon="@drawable/ic_flash_notification"
+            android:persistent="false"
+            android:title="@string/flash_notifications_title"
+            settings:keywords="@string/flash_notifications_keywords"
+            settings:searchable="true"
+            settings:controller="com.android.settings.accessibility.FlashNotificationsPreferenceController" />
 
         <Preference
             android:key="hearing_aid_preference"
@@ -169,6 +179,11 @@
             settings:searchable="true"/>
 
     </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="speech_category"
+        android:persistent="false"
+        android:title="@string/speech_category_title"/>
 
     <PreferenceCategory
         android:persistent="false"

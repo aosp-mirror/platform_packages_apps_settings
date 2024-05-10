@@ -48,4 +48,13 @@
         settings:controller="com.android.settings.deviceinfo.hardwareinfo.HardwareRevisionPreferenceController"
         settings:enableCopying="true"/>
 
+    <!-- Manufactured year -->
+    <Preference
+        android:key="hardware_info_manufactured_year"
+        android:title="@string/manufactured_year"
+        android:summary="@string/summary_placeholder"
+        android:selectable="false"
+        settings:controller="com.android.settings.deviceinfo.hardwareinfo.ManufacturedYearPreferenceController"
+        settings:enableCopying="true"/>
+
 </PreferenceScreen>

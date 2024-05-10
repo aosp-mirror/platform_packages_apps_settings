@@ -48,7 +48,7 @@ public class PrivateVolumeForget extends InstrumentedFragment {
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.DEVICEINFO_STORAGE;
+        return SettingsEnums.PRIVATE_VOLUME_FORGET;
     }
 
     @Override

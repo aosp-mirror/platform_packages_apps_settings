@@ -21,17 +21,15 @@ import static android.app.NotificationManager.IMPORTANCE_LOW;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.util.Pair;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.TextView;
 
 import androidx.preference.PreferenceViewHolder;
 
@@ -50,7 +48,8 @@ public class ConversationPriorityPreferenceTest {
 
     @Before
     public void setUp() {
-        mContext = RuntimeEnvironment.application;
+        Context context = spy(RuntimeEnvironment.application.getApplicationContext());
+        mContext = new ContextThemeWrapper(context, R.style.Theme_Settings);
     }
 
     @Test

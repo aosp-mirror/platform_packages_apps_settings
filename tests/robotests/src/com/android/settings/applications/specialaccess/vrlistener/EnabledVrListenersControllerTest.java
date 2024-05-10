@@ -33,6 +33,9 @@ import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowActivityManager;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        ShadowActivityManager.class,
+})
 public class EnabledVrListenersControllerTest {
 
     private Context mContext;

@@ -34,6 +34,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
+import com.android.settingslib.utils.StringUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -193,8 +194,8 @@ public class CredentialManagementAppAdapter extends RecyclerView.Adapter<Recycle
         }
 
         private String getNumberOfUrlsText(Map<Uri, String> urisToAliases) {
-            return mContext.getResources().getQuantityString(R.plurals.number_of_urls,
-                    urisToAliases.size(), urisToAliases.size());
+            return StringUtil.getIcuPluralsString(mContext, urisToAliases.size(),
+                    R.string.number_of_urls);
         }
     }
 

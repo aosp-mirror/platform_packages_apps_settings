@@ -17,9 +17,9 @@ package com.android.settings.datausage;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 
-import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settingslib.AppItem;
 
@@ -61,14 +61,12 @@ public class AppDataUsageActivity extends SettingsActivity {
         args.putParcelable(AppDataUsage.ARG_APP_ITEM, appItem);
         intent.putExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS, args);
         intent.putExtra(EXTRA_SHOW_FRAGMENT, AppDataUsage.class.getName());
-        intent.putExtra(EXTRA_SHOW_FRAGMENT_TITLE_RESID, R.string.data_usage_app_summary_title);
 
         super.onCreate(savedInstanceState);
     }
 
     @Override
     protected boolean isValidFragment(String fragmentName) {
-        return super.isValidFragment(fragmentName)
-                || AppDataUsage.class.getName().equals(fragmentName);
+        return AppDataUsage.class.getName().equals(fragmentName);
     }
 }

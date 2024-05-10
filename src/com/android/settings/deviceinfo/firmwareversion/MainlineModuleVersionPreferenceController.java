@@ -28,6 +28,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.flags.Flags;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -40,16 +41,16 @@ import java.util.TimeZone;
 
 public class MainlineModuleVersionPreferenceController extends BasePreferenceController {
 
-    private static final String TAG = "MainlineModuleControl";
-    private static final List<String> VERSION_NAME_DATE_PATTERNS = Arrays.asList("yyyy-MM-dd",
-            "yyyy-MM");
-
     @VisibleForTesting
     static final Intent MODULE_UPDATE_INTENT =
             new Intent("android.settings.MODULE_UPDATE_SETTINGS");
     @VisibleForTesting
     static final Intent MODULE_UPDATE_V2_INTENT =
             new Intent("android.settings.MODULE_UPDATE_VERSIONS");
+
+    private static final String TAG = "MainlineModuleControl";
+    private static final List<String> VERSION_NAME_DATE_PATTERNS = Arrays.asList("yyyy-MM-dd",
+            "yyyy-MM");
 
     private final PackageManager mPackageManager;
 
@@ -58,6 +59,12 @@ public class MainlineModuleVersionPreferenceController extends BasePreferenceCon
     public MainlineModuleVersionPreferenceController(Context context, String key) {
         super(context, key);
         mPackageManager = mContext.getPackageManager();
+        if (Flags.mainlineModuleExplicitIntent()) {
+            String packageName = mContext
+                    .getString(com.android.settings.R.string.config_mainline_module_update_package);
+            MODULE_UPDATE_INTENT.setPackage(packageName);
+            MODULE_UPDATE_V2_INTENT.setPackage(packageName);
+        }
         initModules();
     }
 

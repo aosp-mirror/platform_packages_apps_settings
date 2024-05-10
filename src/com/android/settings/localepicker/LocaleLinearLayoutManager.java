@@ -43,6 +43,7 @@ import com.android.settings.R;
 public class LocaleLinearLayoutManager extends LinearLayoutManager {
     private final LocaleDragAndDropAdapter mAdapter;
     private final Context mContext;
+    private LocaleListEditor mLocaleListEditor;
 
     private final AccessibilityNodeInfoCompat.AccessibilityActionCompat mActionMoveUp;
     private final AccessibilityNodeInfoCompat.AccessibilityActionCompat mActionMoveDown;
@@ -86,7 +87,7 @@ public class LocaleLinearLayoutManager extends LinearLayoutManager {
         // any language can handle it. And we want the position to be part of it.
         // So we use something like "2, French (France)"
         final String description =
-                (position + 1) + ", " + dragCell.getCheckbox().getContentDescription();
+                (position + 1) + ", " + dragCell.getLabelView().getContentDescription();
         info.setContentDescription(description);
 
         if (mAdapter.isRemoveMode()) { // We don't move things around in remove mode
@@ -147,8 +148,12 @@ public class LocaleLinearLayoutManager extends LinearLayoutManager {
         }
 
         if (result) {
-            mAdapter.doTheUpdate();
+            mLocaleListEditor.showConfirmDialog(false, mAdapter.getFeedItemList().get(0));
         }
         return result;
+    }
+
+    public void setLocaleListEditor(LocaleListEditor localeListEditor) {
+        mLocaleListEditor = localeListEditor;
     }
 }

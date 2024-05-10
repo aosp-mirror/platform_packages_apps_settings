@@ -63,16 +63,7 @@ public class PreUpgradePreferenceControllerTest {
     }
 
     @Test
-    public void testAvailable_notGranted() {
-        when(mNm.isNotificationListenerAccessGranted(any())).thenReturn(false);
-        mController.setTargetSdk(Build.VERSION_CODES.S);
-
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
-    }
-
-    @Test
     public void testAvailable_lowTargetSdk_noCustomizations() {
-        when(mNm.isNotificationListenerAccessGranted(any())).thenReturn(true);
         mController.setTargetSdk(Build.VERSION_CODES.S);
         when(mNm.getListenerFilter(mCn, 0)).thenReturn(new NotificationListenerFilter());
 
@@ -81,7 +72,6 @@ public class PreUpgradePreferenceControllerTest {
 
     @Test
     public void testAvailable_lowTargetSdk_customizations() {
-        when(mNm.isNotificationListenerAccessGranted(any())).thenReturn(true);
         mController.setTargetSdk(Build.VERSION_CODES.S);
         NotificationListenerFilter nlf = new NotificationListenerFilter();
         nlf.setTypes(FLAG_FILTER_TYPE_CONVERSATIONS);
@@ -92,7 +82,6 @@ public class PreUpgradePreferenceControllerTest {
 
     @Test
     public void testAvailable_highTargetSdk_noCustomizations() {
-        when(mNm.isNotificationListenerAccessGranted(any())).thenReturn(true);
         mController.setTargetSdk(Build.VERSION_CODES.CUR_DEVELOPMENT + 1);
         when(mNm.getListenerFilter(mCn, 0)).thenReturn(new NotificationListenerFilter());
 

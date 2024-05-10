@@ -89,8 +89,8 @@ public class PrivateDnsPreferenceController extends BasePreferenceController
             return UNSUPPORTED_ON_DEVICE;
         }
         final UserManager userManager = mContext.getSystemService(UserManager.class);
-        if (userManager.isGuestUser()) return DISABLED_FOR_USER;
-        return AVAILABLE;
+        if (userManager.isAdminUser()) return AVAILABLE;
+        return DISABLED_FOR_USER;
     }
 
     @Override
@@ -128,14 +128,16 @@ public class PrivateDnsPreferenceController extends BasePreferenceController
         final boolean dnsesResolved = !ArrayUtils.isEmpty(dnses);
         switch (mode) {
             case PRIVATE_DNS_MODE_OFF:
-                return res.getString(R.string.private_dns_mode_off);
+                return res.getString(com.android.settingslib.R.string.private_dns_mode_off);
             case PRIVATE_DNS_MODE_OPPORTUNISTIC:
                 return dnsesResolved ? res.getString(R.string.private_dns_mode_on)
-                        : res.getString(R.string.private_dns_mode_opportunistic);
+                        : res.getString(
+                                com.android.settingslib.R.string.private_dns_mode_opportunistic);
             case PRIVATE_DNS_MODE_PROVIDER_HOSTNAME:
                 return dnsesResolved
                         ? PrivateDnsModeDialogPreference.getHostnameFromSettings(cr)
-                        : res.getString(R.string.private_dns_mode_provider_failure);
+                        : res.getString(
+                                com.android.settingslib.R.string.private_dns_mode_provider_failure);
         }
         return "";
     }

@@ -32,12 +32,6 @@ public class SettingsContextualCardProvider extends ContextualCardProvider {
     @Override
     @Nullable
     public ContextualCardList getContextualCards() {
-        final ContextualCard wifiCard =
-                ContextualCard.newBuilder()
-                        .setSliceUri(CustomSliceRegistry.CONTEXTUAL_WIFI_SLICE_URI.toString())
-                        .setCardName(CustomSliceRegistry.CONTEXTUAL_WIFI_SLICE_URI.toString())
-                        .setCardCategory(ContextualCard.Category.IMPORTANT)
-                        .build();
         final ContextualCard connectedDeviceCard =
                 ContextualCard.newBuilder()
                         .setSliceUri(CustomSliceRegistry.BLUETOOTH_DEVICES_SLICE_URI.toString())
@@ -48,12 +42,6 @@ public class SettingsContextualCardProvider extends ContextualCardProvider {
                 ContextualCard.newBuilder()
                         .setSliceUri(CustomSliceRegistry.LOW_STORAGE_SLICE_URI.toString())
                         .setCardName(CustomSliceRegistry.LOW_STORAGE_SLICE_URI.toString())
-                        .setCardCategory(ContextualCard.Category.IMPORTANT)
-                        .build();
-        final ContextualCard batteryFixCard =
-                ContextualCard.newBuilder()
-                        .setSliceUri(CustomSliceRegistry.BATTERY_FIX_SLICE_URI.toString())
-                        .setCardName(CustomSliceRegistry.BATTERY_FIX_SLICE_URI.toString())
                         .setCardCategory(ContextualCard.Category.IMPORTANT)
                         .build();
         final String contextualAdaptiveSleepSliceUri =
@@ -77,10 +65,8 @@ public class SettingsContextualCardProvider extends ContextualCardProvider {
                         .setCardCategory(ContextualCard.Category.IMPORTANT)
                         .build();
         final ContextualCardList cards = ContextualCardList.newBuilder()
-                .addCard(wifiCard)
                 .addCard(connectedDeviceCard)
                 .addCard(lowStorageCard)
-                .addCard(batteryFixCard)
                 .addCard(contextualAdaptiveSleepCard)
                 .addCard(contextualFaceSettingsCard)
                 .addCard(darkThemeCard)

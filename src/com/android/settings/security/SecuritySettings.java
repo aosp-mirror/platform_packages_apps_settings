@@ -127,7 +127,7 @@ public class SecuritySettings extends DashboardFragment {
 
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    return !FeatureFactory.getFactory(context).getSecuritySettingsFeatureProvider()
+                    return !FeatureFactory.getFeatureFactory().getSecuritySettingsFeatureProvider()
                             .hasAlternativeSecuritySettingsFragment()
                             && !SafetyCenterManagerWrapper.get().isEnabled(context);
                 }

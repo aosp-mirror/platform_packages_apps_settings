@@ -19,18 +19,22 @@ package com.android.settings.ui;
 import android.content.ContentResolver;
 import android.os.SystemClock;
 import android.provider.Settings;
-import android.support.test.uiautomator.By;
-import android.support.test.uiautomator.UiDevice;
-import android.support.test.uiautomator.UiObject2;
-import android.support.test.uiautomator.Until;
 import android.system.helpers.SettingsHelper;
 import android.system.helpers.SettingsHelper.SettingsType;
 import android.test.InstrumentationTestCase;
 import android.test.suitebuilder.annotation.MediumTest;
 import android.test.suitebuilder.annotation.Suppress;
 
+import androidx.test.uiautomator.By;
+import androidx.test.uiautomator.UiDevice;
+import androidx.test.uiautomator.UiObject2;
+import androidx.test.uiautomator.Until;
+
+import org.junit.Ignore;
+
 import java.util.Map;
 
+@Ignore
 public class SoundSettingsTest extends InstrumentationTestCase {
     private static final String PAGE = Settings.ACTION_SOUND_SETTINGS;
     private static final int TIMEOUT = 2000;

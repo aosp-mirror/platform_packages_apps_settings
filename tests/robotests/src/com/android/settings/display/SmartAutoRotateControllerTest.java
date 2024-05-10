@@ -42,6 +42,7 @@ import com.android.settings.testutils.ResolveInfoBuilder;
 import com.android.settings.testutils.shadow.ShadowDeviceStateRotationLockSettingsManager;
 import com.android.settings.testutils.shadow.ShadowRotationPolicy;
 import com.android.settings.testutils.shadow.ShadowSensorPrivacyManager;
+import com.android.settings.testutils.shadow.ShadowSystemSettings;
 import com.android.settingslib.devicestate.DeviceStateRotationLockSettingsManager;
 
 import org.junit.Before;
@@ -53,9 +54,10 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadow.api.Shadow;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = ShadowSensorPrivacyManager.class)
+@Config(shadows = {ShadowSensorPrivacyManager.class, ShadowSystemSettings.class})
 public class SmartAutoRotateControllerTest {
 
     private static final String PACKAGE_NAME = "package_name";
@@ -171,16 +173,14 @@ public class SmartAutoRotateControllerTest {
     }
 
     private void lockDeviceStateRotation() {
-        mDeviceStateAutoRotateSettingsManager.updateSetting(
-                /* deviceState= */0, /* rotationLocked= */ true);
-        mDeviceStateAutoRotateSettingsManager.updateSetting(
-                /* deviceState= */1, /* rotationLocked= */ true);
+        ShadowDeviceStateRotationLockSettingsManager shadowManager =
+                Shadow.extract(mDeviceStateAutoRotateSettingsManager);
+        shadowManager.setRotationLockedForAllStates(true);
     }
 
     private void unlockDeviceStateRotation() {
-        mDeviceStateAutoRotateSettingsManager.updateSetting(
-                /* deviceState= */0, /* rotationLocked= */ false);
-        mDeviceStateAutoRotateSettingsManager.updateSetting(
-                /* deviceState= */1, /* rotationLocked= */ true);
+        ShadowDeviceStateRotationLockSettingsManager shadowManager =
+                Shadow.extract(mDeviceStateAutoRotateSettingsManager);
+        shadowManager.setRotationLockedForAllStates(false);
     }
 }

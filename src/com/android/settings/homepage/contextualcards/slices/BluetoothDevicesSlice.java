@@ -332,12 +332,13 @@ public class BluetoothDevicesSlice implements CustomSliceable {
     private void lazyInitUpdaters() {
         if (mAvailableMediaBtDeviceUpdater == null) {
             mAvailableMediaBtDeviceUpdater = new AvailableMediaBluetoothDeviceUpdater(mContext,
-                    null /* fragment */, null /* devicePreferenceCallback */);
+                    /* devicePreferenceCallback= */ null, /* metricsCategory= */ 0);
         }
 
         if (mSavedBtDeviceUpdater == null) {
             mSavedBtDeviceUpdater = new SavedBluetoothDeviceUpdater(mContext,
-                    null /* fragment */, null /* devicePreferenceCallback */);
+                    /* devicePreferenceCallback= */ null, /* showConnectedDevice= */
+                    false, /* metricsCategory= */ 0);
         }
     }
 

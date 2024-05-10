@@ -25,12 +25,4 @@ public interface DevelopmentOptionsActivityRequestCodes {
     int REQUEST_CODE_DEBUG_APP = 1;
 
     int REQUEST_MOCK_LOCATION_APP = 2;
-
-    int REQUEST_CODE_ANGLE_ALL_USE_ANGLE = 3;
-
-    int REQUEST_CODE_ANGLE_DRIVER_PKGS = 4;
-
-    int REQUEST_CODE_ANGLE_DRIVER_VALUES = 5;
-
-    int REQUEST_COMPAT_CHANGE_APP = 6;
 }

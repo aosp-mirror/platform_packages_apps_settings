@@ -28,7 +28,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
 public class BluetoothFeatureProviderImplTest {
@@ -47,8 +46,7 @@ public class BluetoothFeatureProviderImplTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mBluetoothFeatureProvider = new BluetoothFeatureProviderImpl(
-                RuntimeEnvironment.application);
+        mBluetoothFeatureProvider = new BluetoothFeatureProviderImpl();
     }
 
     @Test

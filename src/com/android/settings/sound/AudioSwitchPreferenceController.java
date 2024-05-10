@@ -18,6 +18,9 @@ package com.android.settings.sound;
 
 import static android.media.AudioManager.STREAM_DEVICES_CHANGED_ACTION;
 
+import static com.android.settingslib.media.flags.Flags.enableOutputSwitcherForSystemRouting;
+
+import android.annotation.Nullable;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -28,6 +31,8 @@ import android.media.AudioDeviceCallback;
 import android.media.AudioDeviceInfo;
 import android.media.AudioManager;
 import android.media.MediaRouter;
+import android.media.session.MediaController;
+import android.media.session.MediaSessionManager;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.FeatureFlagUtils;
@@ -45,6 +50,7 @@ import com.android.settingslib.bluetooth.BluetoothCallback;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.HeadsetProfile;
 import com.android.settingslib.bluetooth.HearingAidProfile;
+import com.android.settingslib.bluetooth.LeAudioProfile;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -52,6 +58,7 @@ import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
@@ -77,6 +84,8 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
     private final WiredHeadsetBroadcastReceiver mReceiver;
     private final Handler mHandler;
     private LocalBluetoothManager mLocalBluetoothManager;
+    @Nullable private MediaSessionManager.OnActiveSessionsChangedListener mSessionListener;
+    @Nullable private MediaSessionManager mMediaSessionManager;
 
     public interface AudioSwitchCallback {
         void onPreferenceDataChanged(ListPreference preference);
@@ -105,6 +114,14 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
             return;
         }
         mProfileManager = mLocalBluetoothManager.getProfileManager();
+
+        if (enableOutputSwitcherForSystemRouting()) {
+            mMediaSessionManager = context.getSystemService(MediaSessionManager.class);
+            mSessionListener = new SessionChangeListener();
+        } else {
+            mMediaSessionManager = null;
+            mSessionListener = null;
+        }
     }
 
     /**
@@ -215,6 +232,41 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
     }
 
     /**
+     * Get LE Audio profile connected devices
+     */
+    protected List<BluetoothDevice> getConnectedLeAudioDevices() {
+        final List<BluetoothDevice> connectedDevices = new ArrayList<>();
+        final LeAudioProfile leAudioProfile = mProfileManager.getLeAudioProfile();
+        if (leAudioProfile == null) {
+            Log.d(TAG, "LeAudioProfile is null");
+            return connectedDevices;
+        }
+        final List<BluetoothDevice> devices = leAudioProfile.getConnectedDevices();
+        for (BluetoothDevice device : devices) {
+            if (device.isConnected() && isDeviceInCachedList(device)) {
+                connectedDevices.add(device);
+            }
+        }
+        return connectedDevices;
+    }
+
+    /**
+     * Confirm if the device exists in the cached devices list. If return true, it means
+     * the device is main device in the LE Audio device group. Otherwise, the device is the member
+     * device in the group.
+     */
+    protected boolean isDeviceInCachedList(BluetoothDevice device) {
+        Collection<CachedBluetoothDevice> cachedDevices =
+                mLocalBluetoothManager.getCachedDeviceManager().getCachedDevicesCopy();
+        for (CachedBluetoothDevice cachedDevice : cachedDevices) {
+            if (cachedDevice.getDevice().equals(device)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * get hearing aid profile connected device, exclude other devices with same hiSyncId.
      */
     protected List<BluetoothDevice> getConnectedHearingAidDevices() {
@@ -260,6 +312,24 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
     }
 
     /**
+     * Find active LE Audio device
+     */
+    protected BluetoothDevice findActiveLeAudioDevice() {
+        final LeAudioProfile leAudioProfile = mProfileManager.getLeAudioProfile();
+
+        if (leAudioProfile != null) {
+            List<BluetoothDevice> activeDevices = leAudioProfile.getActiveDevices();
+            for (BluetoothDevice leAudioDevice : activeDevices) {
+                if (leAudioDevice != null) {
+                    return leAudioDevice;
+                }
+            }
+        }
+        Log.d(TAG, "There is no LE audio profile or no active LE audio device");
+        return null;
+    }
+
+    /**
      * Find the active device from the corresponding profile.
      *
      * @return the active device. Return null if the
@@ -274,13 +344,27 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
         // Register for misc other intent broadcasts.
         IntentFilter intentFilter = new IntentFilter(Intent.ACTION_HEADSET_PLUG);
         intentFilter.addAction(STREAM_DEVICES_CHANGED_ACTION);
-        mContext.registerReceiver(mReceiver, intentFilter);
+
+        if (enableOutputSwitcherForSystemRouting()) {
+            mContext.registerReceiver(mReceiver, intentFilter, Context.RECEIVER_NOT_EXPORTED);
+            if (mMediaSessionManager != null) {
+                mMediaSessionManager.addOnActiveSessionsChangedListener(
+                        mSessionListener, null, mHandler);
+            }
+        } else {
+            mContext.registerReceiver(mReceiver, intentFilter);
+        }
     }
 
     private void unregister() {
         mLocalBluetoothManager.getEventManager().unregisterCallback(this);
         mAudioManager.unregisterAudioDeviceCallback(mAudioManagerAudioDeviceCallback);
         mContext.unregisterReceiver(mReceiver);
+        if (enableOutputSwitcherForSystemRouting()) {
+            if (mMediaSessionManager != null) {
+                mMediaSessionManager.removeOnActiveSessionsChangedListener(mSessionListener);
+            }
+        }
     }
 
     /** Notifications of audio device connection and disconnection events. */
@@ -305,6 +389,14 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
                     AudioManager.STREAM_DEVICES_CHANGED_ACTION.equals(action)) {
                 updateState(mPreference);
             }
+        }
+    }
+
+    private class SessionChangeListener
+            implements MediaSessionManager.OnActiveSessionsChangedListener {
+        @Override
+        public void onActiveSessionsChanged(List<MediaController> controllers) {
+            updateState(mPreference);
         }
     }
 }
