@@ -50,16 +50,13 @@ import com.android.internal.telephony.flags.Flags;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.network.telephony.scan.NetworkScanRepository;
-import com.android.settings.network.telephony.scan.NetworkScanRepository.NetworkScanCellInfos;
-import com.android.settings.network.telephony.scan.NetworkScanRepository.NetworkScanComplete;
-import com.android.settings.network.telephony.scan.NetworkScanRepository.NetworkScanError;
-import com.android.settings.network.telephony.scan.NetworkScanRepository.NetworkScanResult;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.utils.ThreadUtils;
 
+import com.google.common.collect.ImmutableList;
+
 import kotlin.Unit;
-import kotlin.jvm.functions.Function1;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -87,7 +84,8 @@ public class NetworkSelectSettings extends DashboardFragment {
     private View mProgressHeader;
     private Preference mStatusMessagePreference;
     @VisibleForTesting
-    List<CellInfo> mCellInfoList;
+    @NonNull
+    List<CellInfo> mCellInfoList = ImmutableList.of();
     private int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     private TelephonyManager mTelephonyManager;
     private SatelliteManager mSatelliteManager;
@@ -100,7 +98,6 @@ public class NetworkSelectSettings extends DashboardFragment {
     private AtomicBoolean mShouldFilterOutSatellitePlmn = new AtomicBoolean();
 
     private NetworkScanRepository mNetworkScanRepository;
-    private boolean mUpdateScanResult = false;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -208,40 +205,14 @@ public class NetworkSelectSettings extends DashboardFragment {
     }
 
     private void launchNetworkScan() {
-        mNetworkScanRepository.launchNetworkScan(getViewLifecycleOwner(), new Function1<>() {
-            @Override
-            public Unit invoke(@NonNull NetworkScanResult networkScanResult) {
-                if (!mUpdateScanResult) {
-                    // Not update UI if not in scan mode.
-                    return Unit.INSTANCE;
-                }
-                if (networkScanResult instanceof NetworkScanCellInfos networkScanCellInfos) {
-                    scanResultHandler(networkScanCellInfos.getCellInfos());
-                    return Unit.INSTANCE;
-                }
-                if (!isPreferenceScreenEnabled()) {
-                    clearPreferenceSummary();
-                    enablePreferenceScreen(true);
-                } else if (networkScanResult instanceof NetworkScanComplete
-                        && mCellInfoList == null) {
-                    // In case the scan timeout before getting any results
-                    addMessagePreference(R.string.empty_networks_list);
-                } else if (networkScanResult instanceof NetworkScanError) {
-                    addMessagePreference(R.string.network_query_error);
-                }
-
-                return Unit.INSTANCE;
-            }
-        });
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        updateForbiddenPlmns();
         setProgressBarVisible(true);
-        mUpdateScanResult = true;
+        mNetworkScanRepository.launchNetworkScan(getViewLifecycleOwner(), (networkScanResult) -> {
+            if (isPreferenceScreenEnabled()) {
+                scanResultHandler(networkScanResult);
+            }
+
+            return Unit.INSTANCE;
+        });
     }
 
     /**
@@ -266,8 +237,6 @@ public class NetworkSelectSettings extends DashboardFragment {
             Log.d(TAG, "onPreferenceTreeClick: preference is not the NetworkOperatorPreference.");
             return false;
         }
-
-        mUpdateScanResult = false;
 
         // Refresh the last selected item in case users reselect network.
         clearPreferenceSummary();
@@ -373,27 +342,19 @@ public class NetworkSelectSettings extends DashboardFragment {
         }
     }
 
-    @Keep
     @VisibleForTesting
-    protected void scanResultHandler(List<CellInfo> results) {
-        mCellInfoList = filterOutSatellitePlmn(results);
+    protected void scanResultHandler(NetworkScanRepository.NetworkScanResult results) {
+        mCellInfoList = filterOutSatellitePlmn(results.getCellInfos());
         Log.d(TAG, "CellInfoList: " + CellInfoUtil.cellInfoListToString(mCellInfoList));
-        if (mCellInfoList != null && mCellInfoList.size() != 0) {
-            final NetworkOperatorPreference connectedPref = updateAllPreferenceCategory();
-            if (connectedPref != null) {
-                // update selected preference instance into connected preference
-                if (mSelectedPreference != null) {
-                    mSelectedPreference = connectedPref;
-                }
-            } else if (!isPreferenceScreenEnabled()) {
-                mSelectedPreference.setSummary(R.string.network_connecting);
-            }
-            enablePreferenceScreen(true);
-        } else if (isPreferenceScreenEnabled()) {
+        updateAllPreferenceCategory();
+        NetworkScanRepository.NetworkScanState state = results.getState();
+        if (state == NetworkScanRepository.NetworkScanState.ERROR) {
+            addMessagePreference(R.string.network_query_error);
+        } else if (mCellInfoList.isEmpty()) {
             addMessagePreference(R.string.empty_networks_list);
-            // keep showing progress bar, it will be stopped when error or completed
-            setProgressBarVisible(true);
         }
+        // keep showing progress bar, it will be stopped when error or completed
+        setProgressBarVisible(state == NetworkScanRepository.NetworkScanState.ACTIVE);
     }
 
     @Keep
@@ -410,11 +371,8 @@ public class NetworkSelectSettings extends DashboardFragment {
 
     /**
      * Update the content of network operators list.
-     *
-     * @return preference which shows connected
      */
-    @Nullable
-    private NetworkOperatorPreference updateAllPreferenceCategory() {
+    private void updateAllPreferenceCategory() {
         int numberOfPreferences = mPreferenceCategory.getPreferenceCount();
 
         // remove unused preferences
@@ -425,7 +383,6 @@ public class NetworkSelectSettings extends DashboardFragment {
         }
 
         // update the content of preference
-        NetworkOperatorPreference connectedPref = null;
         for (int index = 0; index < mCellInfoList.size(); index++) {
             final CellInfo cellInfo = mCellInfoList.get(index);
 
@@ -450,23 +407,10 @@ public class NetworkSelectSettings extends DashboardFragment {
 
             if (mCellInfoList.get(index).isRegistered()) {
                 pref.setSummary(R.string.network_connected);
-                connectedPref = pref;
             } else {
                 pref.setSummary(null);
             }
         }
-
-        // update selected preference instance by index
-        for (int index = 0; index < mCellInfoList.size(); index++) {
-            final CellInfo cellInfo = mCellInfoList.get(index);
-
-            if ((mSelectedPreference != null) && mSelectedPreference.isSameCell(cellInfo)) {
-                mSelectedPreference = (NetworkOperatorPreference)
-                        (mPreferenceCategory.getPreference(index));
-            }
-        }
-
-        return connectedPref;
     }
 
     /**
@@ -535,13 +479,6 @@ public class NetworkSelectSettings extends DashboardFragment {
         }
     }
 
-    private boolean isProgressBarVisible() {
-        if (mProgressHeader == null) {
-            return false;
-        }
-        return (mProgressHeader.getVisibility() == View.VISIBLE);
-    }
-
     protected void setProgressBarVisible(boolean visible) {
         if (mProgressHeader != null) {
             mProgressHeader.setVisibility(visible ? View.VISIBLE : View.GONE);
@@ -549,7 +486,6 @@ public class NetworkSelectSettings extends DashboardFragment {
     }
 
     private void addMessagePreference(int messageId) {
-        setProgressBarVisible(false);
         mStatusMessagePreference.setTitle(messageId);
         mPreferenceCategory.removeAll();
         mPreferenceCategory.addPreference(mStatusMessagePreference);

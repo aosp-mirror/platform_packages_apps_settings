@@ -44,7 +44,11 @@ import androidx.preference.PreferenceManager;
 import androidx.test.annotation.UiThreadTest;
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.network.telephony.scan.NetworkScanRepository;
+import com.android.settings.network.telephony.scan.NetworkScanRepository.NetworkScanResult;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+
+import com.google.common.collect.ImmutableList;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -163,8 +167,7 @@ public class NetworkSelectSettingsTest {
         }
 
         @Override
-        protected NetworkOperatorPreference
-                createNetworkOperatorPreference(CellInfo cellInfo) {
+        protected NetworkOperatorPreference createNetworkOperatorPreference(CellInfo cellInfo) {
             NetworkOperatorPreference pref = super.createNetworkOperatorPreference(cellInfo);
             if (cellInfo == mTestEnv.mCellInfo1) {
                 pref.updateCell(cellInfo, mTestEnv.mCellId1);
@@ -183,9 +186,14 @@ public class NetworkSelectSettingsTest {
     @Test
     @UiThreadTest
     public void updateAllPreferenceCategory_correctOrderingPreference() {
+        NetworkScanResult result = new NetworkScanResult(
+                NetworkScanRepository.NetworkScanState.COMPLETE,
+                ImmutableList.of(mCellInfo1, mCellInfo2));
         mNetworkSelectSettings.onCreateInitialization();
         mNetworkSelectSettings.enablePreferenceScreen(true);
-        mNetworkSelectSettings.scanResultHandler(Arrays.asList(mCellInfo1, mCellInfo2));
+
+        mNetworkSelectSettings.scanResultHandler(result);
+
         assertThat(mPreferenceCategory.getPreferenceCount()).isEqualTo(2);
         final NetworkOperatorPreference preference =
                 (NetworkOperatorPreference) mPreferenceCategory.getPreference(1);
