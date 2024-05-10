@@ -164,7 +164,9 @@ public abstract class BaseTimeZonePicker extends InstrumentedFragment
     @Override
     public boolean onMenuItemActionExpand(MenuItem item) {
         // To prevent a large space on tool bar.
-        mAppBarLayout.setExpanded(false /*expanded*/, false /*animate*/);
+        if (mAppBarLayout != null) {
+            mAppBarLayout.setExpanded(false /*expanded*/, false /*animate*/);
+        }
         // To prevent user can expand the collapsing tool bar view.
         ViewCompat.setNestedScrollingEnabled(mRecyclerView, false);
         return true;
@@ -173,7 +175,9 @@ public abstract class BaseTimeZonePicker extends InstrumentedFragment
     @Override
     public boolean onMenuItemActionCollapse(MenuItem item) {
         // We keep the collapsed status after user cancel the search function.
-        mAppBarLayout.setExpanded(false /*expanded*/, false /*animate*/);
+        if (mAppBarLayout != null) {
+            mAppBarLayout.setExpanded(false /*expanded*/, false /*animate*/);
+        }
         ViewCompat.setNestedScrollingEnabled(mRecyclerView, true);
         return true;
     }
@@ -196,6 +200,10 @@ public abstract class BaseTimeZonePicker extends InstrumentedFragment
     }
 
     private void autoSetCollapsingToolbarLayoutScrolling() {
+        if (mAppBarLayout == null) {
+            return;
+        }
+
         CoordinatorLayout.LayoutParams params =
                 (CoordinatorLayout.LayoutParams) mAppBarLayout.getLayoutParams();
         AppBarLayout.Behavior behavior = new AppBarLayout.Behavior();
