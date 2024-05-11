@@ -2551,9 +2551,9 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.accessibility.ColorContrastFragment" />
+                android:value="com.android.settings.display.ColorContrastFragment" />
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                android:value="@string/menu_key_accessibility"/>
+                android:value="@string/menu_key_display"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -3343,6 +3343,7 @@
                 <action android:name="com.google.android.setupwizard.SETUP_WIZARD_FINISHED"/>
                 <action android:name="com.android.settings.battery.action.PERIODIC_JOB_RECHECK"/>
                 <action android:name="android.intent.action.TIME_SET"/>
+                <action android:name="android.intent.action.TIMEZONE_CHANGED"/>
             </intent-filter>
         </receiver>
 
@@ -5138,8 +5139,6 @@
                 <action android:name="com.android.settings.action.OPEN_PRIVATE_SPACE_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_security"/>
         </activity>
 
         <activity android:name=".privatespace.PrivateProfileContextHelperActivity" android:exported="false"/>

@@ -34,6 +34,7 @@ import androidx.window.embedding.ActivityEmbeddingController;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.flags.Flags;
 import com.android.settings.homepage.SettingsHomepageActivity;
 
 /**
@@ -46,9 +47,13 @@ public class HighlightableTopLevelPreferenceAdapter extends PreferenceGroupAdapt
 
     static final long DELAY_HIGHLIGHT_DURATION_MILLIS = 100L;
     private static final int RES_NORMAL_BACKGROUND =
-            R.drawable.homepage_selectable_item_background;
+            Flags.homepageRevamp()
+                    ? R.drawable.homepage_selectable_item_background_v2
+                    : R.drawable.homepage_selectable_item_background;
     private static final int RES_HIGHLIGHTED_BACKGROUND =
-            R.drawable.homepage_highlighted_item_background;
+            Flags.homepageRevamp()
+                    ? R.drawable.homepage_highlighted_item_background_v2
+                    : R.drawable.homepage_highlighted_item_background;
 
     private final int mTitleColorNormal;
     private final int mTitleColorHighlight;

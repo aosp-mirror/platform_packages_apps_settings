@@ -672,8 +672,10 @@
     <string name="location_settings_footer_learn_more_content_description">
         Learn more about Location settings
     </string>
-    <!-- Tooltip for switchbar on Chrome devices. [CHAR LIMIT=90]-->
-    <string name="location_settings_tooltip_text_for_chrome">To change location access, go to Settings > Security and Privacy > Privacy controls</string>
+    <!-- Tooltip for switchbar on ChromeOS devices. [CHAR LIMIT=NONE]-->
+    <string name="location_settings_tooltip_text_for_chrome">
+        To change go to ChromeOS Settings > Privacy and security > Privacy controls > Location access
+    </string>
 
     <!-- Main Settings screen setting option title for the item to take you to the accounts screen [CHAR LIMIT=22] -->
     <string name="account_settings_title">Accounts</string>
@@ -4688,8 +4690,6 @@
     <string name="accessibility_color_contrast_intro">Higher contrast makes text, buttons, and icons stand out more. Choose the contrast that looks best to you.</string>
     <!-- Notes in color contrast page footer for something should be aware. [CHAR LIMIT=NONE]  -->
     <string name="color_contrast_note">Some apps may not support all color and text contrast settings</string>
-    <!-- Summary for the accessibility color setting. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_color_contrast_summary">Adjust how colors and text look against your screen\'s background color</string>
     <!-- Preview screen title on the color contrast page. [CHAR LIMIT=20]  -->
     <string name="color_contrast_preview">Preview</string>
     <!-- Preview screen email sender's name on the color contrast page. [CHAR LIMIT=15]  -->
@@ -12579,11 +12579,17 @@
     <!-- Title for Thread network preference [CHAR_LIMIT=60] -->
     <string name="thread_network_settings_title">Thread</string>
 
-    <!-- Summary for Thread network preference. [CHAR_LIMIT=NONE]-->
-    <string name="thread_network_settings_summary">Connect to compatible devices using Thread for a seamless smart home experience</string>
+    <!-- Title for Thread network settings main switch [CHAR_LIMIT=60] -->
+    <string name="thread_network_settings_main_switch_title">Use Thread</string>
 
-    <!-- Summary for Thread network preference when airplane mode is enabled. [CHAR_LIMIT=NONE]-->
-    <string name="thread_network_settings_summary_airplane_mode">Turn off airplane mode to use Thread</string>
+    <!-- Title for Thread network settings footer [CHAR_LIMIT=NONE] -->
+    <string name="thread_network_settings_footer_title">Thread helps connect your smart home devices, boosting efficiency, and performance.\n\nWhen enabled, this device is eligible to join a Thread network, allowing control of Matter supported devices through this phone.</string>
+
+    <!-- Text for Thread network settings learn more link [CHAR_LIMIT=NONE] -->
+    <string name="thread_network_settings_learn_more">Learn more about Thread</string>
+
+    <!-- URL for Thread network settings learn more link [CHAR_LIMIT=NONE] -->
+    <string name="thread_network_settings_learn_more_link" translatable="false">https://developers.home.google.com</string>
 
     <!-- Label for the camera use toggle [CHAR LIMIT=40] -->
     <string name="camera_toggle_title">Camera access</string>

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.accessibility;
+package com.android.settings.display;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -28,6 +28,7 @@ import android.content.Context;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
+import com.android.settings.accessibility.ShortcutsSettingsFragment;
 import com.android.settings.testutils.XmlTestUtils;
 
 import org.junit.Before;

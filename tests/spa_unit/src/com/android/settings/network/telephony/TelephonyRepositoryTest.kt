@@ -93,7 +93,7 @@ class TelephonyRepositoryTest {
 
     @Test
     fun isDataEnabled_invalidSub_returnFalse() = runBlocking {
-        val state = repository.isDataEnabled(
+        val state = repository.isDataEnabledFlow(
             subId = SubscriptionManager.INVALID_SUBSCRIPTION_ID,
         )
 
@@ -108,9 +108,7 @@ class TelephonyRepositoryTest {
             } doReturn true
         }
 
-        val state = repository.isDataEnabled(
-            subId = SUB_ID,
-        )
+        val state = repository.isDataEnabledFlow(subId = SUB_ID)
 
         assertThat(state.firstWithTimeoutOrNull()).isTrue()
     }

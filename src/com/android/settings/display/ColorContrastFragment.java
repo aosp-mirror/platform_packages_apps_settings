@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.accessibility;
+package com.android.settings.display;
 
 import android.app.settings.SettingsEnums;
 
@@ -28,7 +28,6 @@ import com.android.settingslib.search.SearchIndexable;
 public class ColorContrastFragment extends DashboardFragment {
 
     private static final String TAG = "ColorContrastFragment";
-
 
     @Override
     protected int getPreferenceScreenResId() {

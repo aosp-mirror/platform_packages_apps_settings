@@ -111,6 +111,14 @@
             android:fragment="com.android.settings.display.ColorModePreferenceFragment"
             settings:controller="com.android.settings.display.ColorModePreferenceController"
             settings:keywords="@string/keywords_color_mode"/>
+
+        <Preference
+            android:fragment="com.android.settings.display.ColorContrastFragment"
+            android:key="color_contrast"
+            android:persistent="false"
+            android:title="@string/accessibility_color_contrast_title"
+            settings:controller="com.android.settings.display.ContrastPreferenceController"
+            settings:searchable="true"/>
     </PreferenceCategory>
 
     <PreferenceCategory

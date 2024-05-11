@@ -36,6 +36,8 @@ import kotlinx.coroutines.flow.onEach
 private const val TAG = "SubscriptionRepository"
 
 class SubscriptionRepository(private val context: Context) {
+    private val subscriptionManager = context.requireSubscriptionManager()
+
     /**
      * Return a list of subscriptions that are available and visible to the user.
      *
@@ -55,6 +57,7 @@ class SubscriptionRepository(private val context: Context) {
         isSubscriptionEnabledFlow(subId).collectLatestWithLifecycle(lifecycleOwner, action = action)
     }
 
+    fun canDisablePhysicalSubscription() = subscriptionManager.canDisablePhysicalSubscription()
 }
 
 val Context.subscriptionManager: SubscriptionManager?

@@ -47,6 +47,17 @@
         settings:keywords="@string/keywords_wifi_display_settings" />
 
     <com.android.settingslib.RestrictedPreference
+        android:fragment="com.android.settings.connecteddevice.threadnetwork.ThreadNetworkFragment"
+        android:key="thread_network_settings"
+        android:title="@string/thread_network_settings_title"
+        android:icon="@*android:drawable/ic_thread_network"
+        android:order="-5"
+        settings:searchable="false"
+        settings:controller="com.android.settings.connecteddevice.threadnetwork.ThreadNetworkFragmentController"
+        settings:userRestriction="no_thread_network"
+        settings:useAdminDisabledSummary="true"/>
+
+    <com.android.settingslib.RestrictedPreference
         android:fragment="com.android.settings.print.PrintSettingsFragment"
         android:icon="@*android:drawable/ic_settings_print"
         android:key="connected_device_printing"
@@ -62,15 +73,6 @@
         settings:controller="com.android.settings.uwb.UwbPreferenceController"
         settings:useAdminDisabledSummary="true"
         settings:userRestriction="no_ultra_wideband_radio" />
-
-    <com.android.settingslib.RestrictedSwitchPreference
-        android:key="thread_network_settings"
-        android:title="@string/thread_network_settings_title"
-        android:order="110"
-        android:summary="@string/summary_placeholder"
-        settings:controller="com.android.settings.connecteddevice.threadnetwork.ThreadNetworkPreferenceController"
-        settings:userRestriction="no_thread_network"
-        settings:useAdminDisabledSummary="true"/>
 
     <PreferenceCategory
         android:key="dashboard_tile_placeholder"
