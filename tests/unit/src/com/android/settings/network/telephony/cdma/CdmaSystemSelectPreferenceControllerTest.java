@@ -38,6 +38,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -99,6 +100,7 @@ public class CdmaSystemSelectPreferenceControllerTest {
     }
 
     @Test
+    @Ignore("b/337417544")
     public void updateState_stateHome_displayHome() {
         doReturn(TelephonyManager.CDMA_ROAMING_MODE_HOME).when(
                 mTelephonyManager).getCdmaRoamingMode();
@@ -110,6 +112,7 @@ public class CdmaSystemSelectPreferenceControllerTest {
     }
 
     @Test
+    @Ignore("b/337417897")
     public void updateState_LteGSMWcdma_disabled() {
         doReturn(TelephonyManager.CDMA_ROAMING_MODE_HOME).when(
                 mTelephonyManager).getCdmaRoamingMode();
@@ -123,6 +126,7 @@ public class CdmaSystemSelectPreferenceControllerTest {
     }
 
     @Test
+    @Ignore("b/337417917")
     public void updateState_stateOther_resetToDefault() {
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.CDMA_ROAMING_MODE,

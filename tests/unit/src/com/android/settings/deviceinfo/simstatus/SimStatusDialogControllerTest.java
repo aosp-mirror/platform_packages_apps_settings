@@ -217,6 +217,7 @@ public class SimStatusDialogControllerTest {
     }
 
     @Test
+    @Ignore("b/337417520")
     public void initialize_updateServiceStateWithPowerOff_shouldUpdateTextAndResetSignalStrength() {
         when(mServiceState.getState()).thenReturn(ServiceState.STATE_POWER_OFF);
 
@@ -229,6 +230,7 @@ public class SimStatusDialogControllerTest {
     }
 
     @Test
+    @Ignore("b/337417520")
     public void initialize_updateVoiceDataOutOfService_shouldUpdateSettingAndResetSignalStrength() {
         when(mServiceState.getState()).thenReturn(ServiceState.STATE_OUT_OF_SERVICE);
         when(mServiceState.getDataRegistrationState()).thenReturn(

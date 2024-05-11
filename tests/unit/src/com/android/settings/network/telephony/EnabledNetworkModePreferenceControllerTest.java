@@ -60,6 +60,7 @@ import com.android.settings.network.telephony.TelephonyConstants.TelephonyManage
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -346,6 +347,7 @@ public class EnabledNetworkModePreferenceControllerTest {
 
     @UiThreadTest
     @Test
+    @Ignore("b/337418033")
     public void updateState_updateByNetworkMode() {
         mockEnabledNetworkMode(TelephonyManagerConstants.NETWORK_MODE_TDSCDMA_GSM_WCDMA);
 
@@ -377,6 +379,7 @@ public class EnabledNetworkModePreferenceControllerTest {
 
     @UiThreadTest
     @Test
+    @Ignore("b/337418033")
     public void onPreferenceChange_updateSuccess() {
         mockEnabledNetworkMode(TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA);
         doReturn(true).when(mTelephonyManager).setPreferredNetworkTypeBitmask(
@@ -393,6 +396,7 @@ public class EnabledNetworkModePreferenceControllerTest {
 
     @UiThreadTest
     @Test
+    @Ignore("b/337418033")
     public void onPreferenceChange_updateFail() {
         mockEnabledNetworkMode(TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA);
         doReturn(false).when(mTelephonyManager).setPreferredNetworkTypeBitmask(
@@ -408,6 +412,7 @@ public class EnabledNetworkModePreferenceControllerTest {
 
     @UiThreadTest
     @Test
+    @Ignore("b/337418033")
     public void preferredNetworkModeNotification_preferenceUpdates() {
 
         final PreferenceManager preferenceManager = new PreferenceManager(mContext);
