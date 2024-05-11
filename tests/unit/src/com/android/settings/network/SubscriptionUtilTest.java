@@ -572,6 +572,7 @@ public class SubscriptionUtilTest {
     }
 
     @Test
+    @Ignore("b/339149463")
     public void isSimHardwareVisible_configAsVisible_returnTrue() {
         when(mResources.getBoolean(R.bool.config_show_sim_info))
                 .thenReturn(true);

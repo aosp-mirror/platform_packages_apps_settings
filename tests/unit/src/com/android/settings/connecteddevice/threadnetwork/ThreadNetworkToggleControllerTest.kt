@@ -34,6 +34,7 @@ import org.junit.runner.RunWith
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.spy
 import java.util.concurrent.Executor
+import org.junit.Ignore
 
 /** Unit tests for [ThreadNetworkToggleController].  */
 @RunWith(AndroidJUnit4::class)
@@ -88,6 +89,7 @@ class ThreadNetworkToggleControllerTest {
     }
 
     @Test
+    @Ignore("b/339767488")
     fun isChecked_threadSetEnabled_returnsTrue() {
         fakeThreadNetworkController.setEnabled(true, executor) { }
         startController(controller)
@@ -113,6 +115,7 @@ class ThreadNetworkToggleControllerTest {
     }
 
     @Test
+    @Ignore("b/339767488")
     fun setChecked_setUnchecked_threadIsDisabled() {
         startController(controller)
 

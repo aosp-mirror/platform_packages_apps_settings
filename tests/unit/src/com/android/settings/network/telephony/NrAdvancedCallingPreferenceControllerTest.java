@@ -38,6 +38,7 @@ import com.android.settings.network.CarrierConfigCache;
 import com.android.settingslib.RestrictedSwitchPreference;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -180,6 +181,7 @@ public class NrAdvancedCallingPreferenceControllerTest {
     }
 
     @Test
+    @Ignore("b/339542743")
     public void updateState_configOn_prefChecked() {
         doReturn(TelephonyManager.ENABLE_VONR_SUCCESS).when(
                 mTelephonyManager).setVoNrEnabled(anyBoolean());

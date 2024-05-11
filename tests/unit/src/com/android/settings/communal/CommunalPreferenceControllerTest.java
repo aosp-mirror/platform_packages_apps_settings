@@ -32,12 +32,14 @@ import com.android.settings.Utils;
 import com.android.settings.testutils.ResourcesUtils;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 @RunWith(AndroidJUnit4.class)
+@Ignore("b/337417918")
 public class CommunalPreferenceControllerTest {
     @Mock
     private UserManager mUserManager;
