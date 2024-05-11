@@ -384,6 +384,13 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                         || enableAngleController.isDefaultValue())) {
                     disableDeveloperOptions();
                 } else {
+                    // Disabling developer options in page-agnostic mode isn't supported as device
+                    // isn't in production state
+                    if (Enable16kUtils.isPageAgnosticModeOn(getContext())) {
+                        Enable16kUtils.showPageAgnosticWarning(getContext());
+                        onDisableDevelopmentOptionsRejected();
+                        return;
+                    }
                     DisableDevSettingsDialogFragment.show(this /* host */);
                 }
             }
