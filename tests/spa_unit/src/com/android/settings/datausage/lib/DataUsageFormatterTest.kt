@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 The Android Open Source Project
+ * Copyright (C) 2024 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.android.settings.datausage
+package com.android.settings.datausage.lib
 
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.android.settings.datausage.DataUsageFormatter.getBytesDisplayUnit
+import com.android.settings.datausage.lib.DataUsageFormatter.Companion.getBytesDisplayUnit
 import com.google.common.truth.Truth.assertThat
 
 import org.junit.Test
@@ -28,6 +28,32 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class DataUsageFormatterTest {
     private val context: Context = ApplicationProvider.getApplicationContext()
+
+    private val dataUsageFormatter = DataUsageFormatter(context)
+
+    @Test
+    fun formatDataUsage_0() {
+        val (displayText, contentDescription) = dataUsageFormatter.formatDataUsage(0)
+
+        assertThat(displayText).isEqualTo("0 B")
+        assertThat(contentDescription).isEqualTo("0 byte")
+    }
+
+    @Test
+    fun formatDataUsage_1000() {
+        val (displayText, contentDescription) = dataUsageFormatter.formatDataUsage(1000)
+
+        assertThat(displayText).isEqualTo("0.98 kB")
+        assertThat(contentDescription).isEqualTo("0.98 kB")
+    }
+
+    @Test
+    fun formatDataUsage_2000000() {
+        val (displayText, contentDescription) = dataUsageFormatter.formatDataUsage(2000000)
+
+        assertThat(displayText).isEqualTo("1.91 MB")
+        assertThat(contentDescription).isEqualTo("1.91 MB")
+    }
 
     @Test
     fun getUnitDisplayName_megaByte() {
