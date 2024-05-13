@@ -27,6 +27,7 @@ import com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILA
 import com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE
 import com.android.settings.flags.Flags
 import com.google.common.truth.Truth.assertThat
+import com.google.common.util.concurrent.MoreExecutors
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -50,7 +51,7 @@ class ThreadNetworkToggleControllerTest {
     fun setUp() {
         mSetFlagsRule.enableFlags(Flags.FLAG_THREAD_SETTINGS_ENABLED)
         context = spy(ApplicationProvider.getApplicationContext<Context>())
-        executor =  Executor { runnable: Runnable -> runnable.run() }
+        executor = MoreExecutors.directExecutor()
         fakeThreadNetworkController = FakeThreadNetworkController()
         controller = newControllerWithThreadFeatureSupported(true)
         val preferenceManager = PreferenceManager(context)
