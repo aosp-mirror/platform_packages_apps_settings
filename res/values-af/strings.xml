@@ -286,7 +286,8 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Apps met die Toestelle in die Omtrek-toestemming kan die relatiewe posisie van gekoppelde toestelle bepaal."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Liggingtoegang is af vir apps en dienste. Jou toestelligging kan steeds aan nooddienste gestuur word wanneer jy \'n noodnommer bel of \'n SMS daarheen stuur."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Meer inligting oor ligginginstellings"</string>
-    <string name="location_settings_tooltip_text_for_chrome" msgid="3574930966097093550">"Om liggingtoegang te verander, gaan na Instellings &gt; Sekuriteit en Privaatheid &gt; Privaatheidkontroles."</string>
+    <!-- no translation found for location_settings_tooltip_text_for_chrome (5781821709250544575) -->
+    <skip />
     <string name="account_settings_title" msgid="9138880127246241885">"Rekeninge"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Sekuriteit"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Enkripsie en eiebewyse"</string>
@@ -2017,7 +2018,6 @@
     <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"Kleurkontras"</string>
     <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"Hoër kontras laat teks, knoppies en ikone meer uitstaan. Kies die kontras wat vir jou die beste lyk."</string>
     <string name="color_contrast_note" msgid="7592686603372566198">"Sommige apps steun dalk nie alle kleur- en tekskontrasinstellings nie"</string>
-    <string name="accessibility_color_contrast_summary" msgid="7563237683500106632">"Verstel hoe kleure en teks teen jou skerm se agtergrondkleur lyk"</string>
     <string name="color_contrast_preview" msgid="6791430227535363883">"Voorbeskou"</string>
     <string name="color_contrast_preview_sender_name" msgid="8641943417589238147">"Helen, Adam"</string>
     <string name="color_contrast_preview_email_send_date" msgid="2108702726171600080">"2 dae gelede"</string>
@@ -2291,9 +2291,9 @@
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Bind gehoortoestelle saam"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"Tik op die volgende skerm op jou gehoortoestelle. Jy sal dalk die linker- en regteroor apart moet saambind.\n\nMaak seker dat jou gehoortoestelle aangeskakel en gereed is om saam te bind."</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> is aktief"</string>
-    <string name="accessibility_hearingaid_left_side_device_summary" msgid="12349058624943107">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>/net linkerkant"</string>
-    <string name="accessibility_hearingaid_right_side_device_summary" msgid="8645789702686724188">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>/net regterkant"</string>
-    <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="3314103411842694197">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>/linkerkant en regterkant"</string>
+    <string name="accessibility_hearingaid_left_side_device_summary" msgid="12349058624943107">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> / net links"</string>
+    <string name="accessibility_hearingaid_right_side_device_summary" msgid="8645789702686724188">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> / net regs"</string>
+    <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="3314103411842694197">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> / links en regs"</string>
     <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> + nog 1"</string>
     <string name="accessibility_hearing_device_pairing_title" msgid="2701812183769537320">"Bind nuwe toestel saam"</string>
     <string name="accessibility_hearing_device_connected_title" msgid="3785140037249487287">"Gehoortoestelle"</string>
@@ -4097,7 +4097,7 @@
     <string name="data_warning_footnote" msgid="5991901765915710592">"Datawaarskuwing en datalimiet word deur jou toestel gemeet. Dit kan van die diensverskafferdata verskil."</string>
     <string name="set_data_limit" msgid="9010326815874642680">"Stel datalimiet"</string>
     <string name="data_limit" msgid="8731731657513652363">"Datalimiet"</string>
-    <string name="data_usage_template" msgid="3822452362629968010">"<xliff:g id="ID_1">%1$s</xliff:g> in <xliff:g id="ID_2">%2$s</xliff:g> gebruik"</string>
+    <string name="data_usage_template" msgid="3822452362629968010">"<xliff:g id="ID_1">%1$s</xliff:g> tydens <xliff:g id="ID_2">%2$s</xliff:g> gebruik"</string>
     <string name="configure" msgid="1499586749829665889">"Stel op"</string>
     <string name="data_usage_other_apps" msgid="5649047093607329537">"Ander programme wat by gebruik ingesluit is"</string>
     <string name="data_saver_unrestricted_summary" msgid="7343571401172437542">"{count,plural, =1{1 app word toegelaat om onbeperkte data te gebruik wanneer Databespaarder aan is}other{# apps word toegelaat om onbeperkte data te gebruik wanneer Databespaarder aan is}}"</string>
@@ -4990,8 +4990,12 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Skakel vliegtuigmodus af om UWB te gebruik"</string>
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"UWB is nie in die huidige ligging beskikbaar nie"</string>
     <string name="thread_network_settings_title" msgid="4212301030523859220">"Thread"</string>
-    <string name="thread_network_settings_summary" msgid="8065599651021748339">"Koppel met Thread aan versoenbare toestelle vir ’n moeitelose slimhuiservaring"</string>
-    <string name="thread_network_settings_summary_airplane_mode" msgid="7207252895832446979">"Skakel vliegtuigmodus af om Thread te gebruik"</string>
+    <!-- no translation found for thread_network_settings_main_switch_title (3859168481929323474) -->
+    <skip />
+    <!-- no translation found for thread_network_settings_footer_title (7385600318850220927) -->
+    <skip />
+    <!-- no translation found for thread_network_settings_learn_more (8278498005848565050) -->
+    <skip />
     <string name="camera_toggle_title" msgid="8952668677727244992">"Kameratoegang"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Mikrofoontoegang"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"Vir apps en dienste"</string>
