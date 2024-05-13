@@ -4,21 +4,20 @@
 ## The full suite
 ```
 $ croot
-$ make RunSettingsRoboTests
+$ atest SettingsRoboTests
 ```
 
 ## Running a single test class
 
+With a filter
+
 ```
 $ croot
-$ make RunSettingsRoboTests ROBOTEST_FILTER=<ClassName>
+$ atest SettingsRoboTests:com.android.settings.display.AdaptiveSleepPreferenceControllerTest
 ```
 
-For example:
+You can also run any single test class with atest (it will try to find the correct path)
 
 ```
-make RunSettingsRoboTests ROBOTEST_FILTER=CodeInspectionTest
+$ atest AdaptiveSleepPreferenceControllerTest
 ```
-
-You can also use partial class name in ROBOTEST_FILTER. If the partial class name matches
-multiple file names, all of them will be executed.

@@ -17,7 +17,6 @@ package com.android.settings.connecteddevice.threadnetwork
 
 import android.content.Context
 import android.platform.test.flag.junit.SetFlagsRule
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.test.core.app.ApplicationProvider
@@ -27,6 +26,7 @@ import com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILA
 import com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE
 import com.android.settings.flags.Flags
 import com.google.common.truth.Truth.assertThat
+import com.google.common.util.concurrent.MoreExecutors
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -50,7 +50,7 @@ class ThreadNetworkFragmentControllerTest {
     fun setUp() {
         mSetFlagsRule.enableFlags(Flags.FLAG_THREAD_SETTINGS_ENABLED)
         context = spy(ApplicationProvider.getApplicationContext<Context>())
-        executor = ContextCompat.getMainExecutor(context)
+        executor = MoreExecutors.directExecutor()
         fakeThreadNetworkController = FakeThreadNetworkController()
         controller = newControllerWithThreadFeatureSupported(true)
     }

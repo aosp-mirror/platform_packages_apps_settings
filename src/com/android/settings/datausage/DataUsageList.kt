@@ -178,7 +178,7 @@ open class DataUsageList : DashboardFragment() {
     private fun updateSelectedCycle(usageData: NetworkUsageData) {
         Log.d(TAG, "showing cycle $usageData")
 
-        usageAmount?.title = usageData.getDataUsedString(requireContext())
+        usageAmount?.title = usageData.getDataUsedString(requireContext()).displayText
         viewModel.selectedCycleFlow.value = usageData
 
         updateApps(usageData)

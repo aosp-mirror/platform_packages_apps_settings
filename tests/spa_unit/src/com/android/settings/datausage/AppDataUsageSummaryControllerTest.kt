@@ -19,8 +19,9 @@ package com.android.settings.datausage
 import android.content.Context
 import android.util.Range
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.hasTextExactly
 import androidx.compose.ui.test.junit4.createComposeRule
-import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.datausage.lib.NetworkUsageDetailsData
@@ -52,9 +53,34 @@ class AppDataUsageSummaryControllerTest {
             controller.Content()
         }
 
-        composeTestRule.onNodeWithText("6.75 kB").assertIsDisplayed()
-        composeTestRule.onNodeWithText("5.54 kB").assertIsDisplayed()
-        composeTestRule.onNodeWithText("1.21 kB").assertIsDisplayed()
+        composeTestRule.onNode(hasTextExactly("Total", "6.75 kB")).assertIsDisplayed()
+        composeTestRule.onNode(hasTextExactly("Foreground", "5.54 kB")).assertIsDisplayed()
+        composeTestRule.onNode(hasTextExactly("Background", "1.21 kB")).assertIsDisplayed()
+        composeTestRule.onNodeWithContentDescription("6.75 kB").assertIsDisplayed()
+        composeTestRule.onNodeWithContentDescription("5.54 kB").assertIsDisplayed()
+        composeTestRule.onNodeWithContentDescription("1.21 kB").assertIsDisplayed()
+    }
+
+    @Test
+    fun summary_zero() {
+        val appUsage = NetworkUsageDetailsData(
+            range = Range(1L, 2L),
+            totalUsage = 3,
+            foregroundUsage = 1,
+            backgroundUsage = 2,
+        )
+
+        controller.update(appUsage)
+        composeTestRule.setContent {
+            controller.Content()
+        }
+
+        composeTestRule.onNode(hasTextExactly("Total", "3 B")).assertIsDisplayed()
+        composeTestRule.onNode(hasTextExactly("Foreground", "1 B")).assertIsDisplayed()
+        composeTestRule.onNode(hasTextExactly("Background", "2 B")).assertIsDisplayed()
+        composeTestRule.onNodeWithContentDescription("3 byte").assertIsDisplayed()
+        composeTestRule.onNodeWithContentDescription("1 byte").assertIsDisplayed()
+        composeTestRule.onNodeWithContentDescription("2 byte").assertIsDisplayed()
     }
 
     private companion object {

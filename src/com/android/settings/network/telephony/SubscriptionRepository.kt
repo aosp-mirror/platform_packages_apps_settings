@@ -26,9 +26,11 @@ import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.asExecutor
 import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.conflate
 import kotlinx.coroutines.flow.filterNot
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
@@ -46,7 +48,15 @@ class SubscriptionRepository(private val context: Context) {
     fun getSelectableSubscriptionInfoList(): List<SubscriptionInfo> =
         context.getSelectableSubscriptionInfoList()
 
-    fun isSubscriptionEnabledFlow(subId: Int) = context.isSubscriptionEnabledFlow(subId)
+    /** Flow of whether the subscription enabled for the given [subId]. */
+    fun isSubscriptionEnabledFlow(subId: Int): Flow<Boolean> {
+        if (!SubscriptionManager.isValidSubscriptionId(subId)) return flowOf(false)
+        return context.subscriptionsChangedFlow()
+            .map { subscriptionManager.isSubscriptionEnabled(subId) }
+            .conflate()
+            .onEach { Log.d(TAG, "[$subId] isSubscriptionEnabledFlow: $it") }
+            .flowOn(Dispatchers.Default)
+    }
 
     /** TODO: Move this to UI layer, when UI layer migrated to Kotlin. */
     fun collectSubscriptionEnabled(
@@ -64,11 +74,6 @@ val Context.subscriptionManager: SubscriptionManager?
     get() = getSystemService(SubscriptionManager::class.java)
 
 fun Context.requireSubscriptionManager(): SubscriptionManager = subscriptionManager!!
-
-fun Context.isSubscriptionEnabledFlow(subId: Int) = subscriptionsChangedFlow().map {
-    subscriptionManager?.isSubscriptionEnabled(subId) ?: false
-}.conflate().onEach { Log.d(TAG, "[$subId] isSubscriptionEnabledFlow: $it") }
-    .flowOn(Dispatchers.Default)
 
 fun Context.phoneNumberFlow(subscriptionInfo: SubscriptionInfo) = subscriptionsChangedFlow().map {
     SubscriptionUtil.getBidiFormattedPhoneNumber(this, subscriptionInfo)
