@@ -286,7 +286,8 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Aplicațiile cu permisiunea pentru Dispozitive din apropiere pot stabili poziția relativă a dispozitivelor conectate."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Accesul la locație este dezactivat pentru aplicații și servicii. Locația dispozitivului poate fi trimisă serviciilor de urgență atunci când suni sau trimiți un mesaj la un număr de urgență."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Află mai multe despre Setările privind locația"</string>
-    <string name="location_settings_tooltip_text_for_chrome" msgid="3574930966097093550">"Pentru a schimba accesul în locație, accesează Setări &gt; Securitate și confidențialitate &gt; Opțiuni de confidențialitate"</string>
+    <!-- no translation found for location_settings_tooltip_text_for_chrome (5781821709250544575) -->
+    <skip />
     <string name="account_settings_title" msgid="9138880127246241885">"Conturi"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Securitate"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Criptare și date de conectare"</string>
@@ -2017,7 +2018,6 @@
     <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"Contrastul culorilor"</string>
     <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"Contrastul mai înalt scoate în evidență textul, butoanele și pictogramele. Alege contrastul care ți se pare cel mai potrivit."</string>
     <string name="color_contrast_note" msgid="7592686603372566198">"Este posibil ca unele aplicații să nu accepte toate setările pentru contrastul culorilor și al textului"</string>
-    <string name="accessibility_color_contrast_summary" msgid="7563237683500106632">"Ajustează felul în care arată culorile și textul peste culoarea de fundal a ecranului"</string>
     <string name="color_contrast_preview" msgid="6791430227535363883">"Previzualizează"</string>
     <string name="color_contrast_preview_sender_name" msgid="8641943417589238147">"Elena, Andrei"</string>
     <string name="color_contrast_preview_email_send_date" msgid="2108702726171600080">"Acum 2 zile"</string>
@@ -2572,8 +2572,7 @@
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Prelungește autonomia bateriei"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Dezactivează când este încărcat complet"</string>
     <string name="battery_saver_sticky_title_percentage" msgid="1178162022087559148">"Dezactivează la <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <!-- no translation found for battery_saver_sticky_description_new (8543277078136947874) -->
-    <skip />
+    <string name="battery_saver_sticky_description_new" msgid="8543277078136947874">"Economisirea bateriei se dezactivează când bateria se încarcă peste <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Activează"</string>
@@ -4804,46 +4803,27 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"Informații despre politica de serviciu"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"Setări gestionate de administratorul IT"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
-    <!-- no translation found for enable_16k_pages (8001470927566110689) -->
-    <skip />
-    <!-- no translation found for enable_16k_pages_summary (1964363364670306912) -->
-    <skip />
-    <!-- no translation found for confirm_enable_16k_pages_title (1286925577014793351) -->
-    <skip />
-    <!-- no translation found for confirm_enable_16k_pages_text (570198382662424714) -->
-    <skip />
-    <!-- no translation found for confirm_enable_4k_pages_title (3210360137887034659) -->
-    <skip />
-    <!-- no translation found for confirm_enable_4k_pages_text (155070605667160083) -->
-    <skip />
+    <string name="enable_16k_pages" msgid="8001470927566110689">"Pornește cu pagini de 16 KB"</string>
+    <string name="enable_16k_pages_summary" msgid="1964363364670306912">"Pornește cu nucleu compatibil cu pagini de 16 KB"</string>
+    <string name="confirm_enable_16k_pages_title" msgid="1286925577014793351">"Treci de la modul pe 4 KB la modul pe 16 KB"</string>
+    <string name="confirm_enable_16k_pages_text" msgid="570198382662424714">"Ești în modul independent de dimensiunea paginii, care rulează un nucleu de 4 KB, și treci la modul pe 16 KB. Integritatea software-ului nu poate fi garantată în acest mod și toate datele stocate pe telefon cât timp bootloaderul este deblocat pot fi în pericol. Această acțiune va reporni dispozitivul. Unele funcții vor fi dezactivate în aceste moduri, prin urmare este posibil ca unele aplicații să nu funcționeze. Pentru a readuce dispozitivul în modul de producție, trebuie să revii la modul pe 4 KB și să blochezi bootloaderul, acțiune care aduce dispozitivul la setările din fabrică. După ce dispozitivul pornește în sistemul Android, dezactivează deblocarea OEM în Opțiuni pentru dezvoltatori."</string>
+    <string name="confirm_enable_4k_pages_title" msgid="3210360137887034659">"Treci de la modul pe 16 KB la modul pe 4 KB"</string>
+    <string name="confirm_enable_4k_pages_text" msgid="155070605667160083">"Ești în modul independent de dimensiunea paginii, care rulează un nucleu de 16 KB, și treci la modul pe 4 KB. Integritatea software-ului nu poate fi garantată în acest mod și toate datele stocate pe telefon cât timp bootloaderul este deblocat pot fi în pericol. Această acțiune va reporni dispozitivul. Unele funcții vor fi dezactivate în aceste moduri, prin urmare este posibil ca unele aplicații să nu funcționeze. Pentru a readuce dispozitivul în modul de producție, trebuie să blochezi bootloaderul, acțiune care aduce dispozitivul la setările din fabrică. După ce dispozitivul pornește în sistemul Android, dezactivează deblocarea OEM în Opțiuni pentru dezvoltatori."</string>
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"Nu s-a putut actualiza nucleul la unul compatibil cu pagini pe 16 KB."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Se aplică modificarea"</string>
-    <!-- no translation found for confirm_format_ext4_title (6696191800594435577) -->
-    <skip />
-    <!-- no translation found for confirm_format_ext4_text (7940372488624630214) -->
-    <skip />
-    <!-- no translation found for format_ext4_failure_toast (8059453995800471549) -->
-    <skip />
-    <!-- no translation found for confirm_oem_unlock_for_16k_title (5374451262432025419) -->
-    <skip />
-    <!-- no translation found for confirm_oem_unlock_for_16k_text (3583604865119937957) -->
-    <skip />
-    <!-- no translation found for page_agnostic_4k_pages_title (1184703958249093215) -->
-    <skip />
-    <!-- no translation found for page_agnostic_4k_pages_text_short (2894243902906666242) -->
-    <skip />
-    <!-- no translation found for page_agnostic_4k_pages_text (8284806650260868833) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_title (7762533464569818498) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text_short (269039281591806585) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text (6208765386837706582) -->
-    <skip />
-    <!-- no translation found for page_agnostic_notification_channel_name (1658444283036376361) -->
-    <skip />
-    <!-- no translation found for page_agnostic_notification_action (2309805437430150456) -->
-    <skip />
+    <string name="confirm_format_ext4_title" msgid="6696191800594435577">"Reformatezi dispozitivul cu ext4? (Necesar pentru modul pe 16 KB)"</string>
+    <string name="confirm_format_ext4_text" msgid="7940372488624630214">"Partiția de date a acestui dispozitiv trebuie schimbată la ext4 înainte de a folosi opțiunea pentru dezvoltatori pe 16 KB. Integritatea software-ului nu poate fi garantată în acest mod și toate datele stocate pe telefon cât timp bootloaderul este deblocat pot fi în pericol. Activarea opțiunii pe 16 KB va necesita încă o repornire după această acțiune. Când te afli în acest mod, poți să comuți între modul de 4 KB și cel de 16 KB printr-o repornire. Unele funcții vor fi dezactivate în aceste moduri, prin urmare este posibil ca unele aplicații să nu funcționeze. Pentru a readuce dispozitivul în modul de producție, trebuie să revii la modul pe 4 KB, apoi să blochezi bootloaderul, acțiune care aduce dispozitivul la setările din fabrică. După ce dispozitivul pornește în sistemul Android, dezactivează deblocarea OEM în Opțiuni pentru dezvoltatori. Datele de pe dispozitiv vor fi șterse și sistemul de fișiere se va schimba în ext4 după confirmare. După finalizarea acțiunii, reactivează modul pe 16 KB."</string>
+    <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Nu s-a putut reformata și golește partiția de date cu ext4."</string>
+    <string name="confirm_oem_unlock_for_16k_title" msgid="5374451262432025419">"Este necesară deblocarea bootloaderului pentru modul pe 16 KB"</string>
+    <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"Bootloaderul dispozitivului trebuie deblocat înainte de a folosi opțiunea pentru dezvoltatori pe 16 KB. Integritatea software-ului nu poate fi garantată în acest mod și toate datele stocate pe telefon cât timp bootloaderul este deblocat pot fi în pericol. Toate datele și setările utilizatorului vor fi șterse la activarea modului pe 16 KB. După deblocarea bootloaderului, activarea opțiunii pe 16 KB va necesita două reporniri. Când te afli în acest mod, poți să comuți între modul de 4 KB și cel de 16 KB printr-o repornire. Unele funcții vor fi dezactivate în aceste moduri, prin urmare este posibil ca unele aplicații să nu funcționeze. Pentru a readuce dispozitivul în modul de producție, trebuie să revii la modul pe 4 KB, apoi să blochezi OEM / bootloaderul dispozitivului (acțiune care aduce dispozitivul la setările din fabrică). Deblochează bootloaderul și încearcă din nou. Găsești instrucțiuni pentru acest proces la &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
+    <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"Se folosește modul pe 4 KB independent de dimensiunea paginii."</string>
+    <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"Ești în modul pe 4 KB independent de dimensiunea paginii. Integritatea software-ului nu poate fi garantată în acest mod și toate datele stocate pe telefon cât timp bootloaderul este deblocat pot fi în pericol. Unele funcții vor fi dezactivate în aceste moduri, prin urmare este posibil ca unele aplicații să nu funcționeze. Pentru a intra din nou în modul de producție, trebuie să blochezi bootloaderul dispozitivului. Atinge pentru a citi mai multe."</string>
+    <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"Ești în modul pe 4 KB independent de dimensiunea paginii. Integritatea software-ului nu poate fi garantată în acest mod și toate datele stocate pe telefon cât timp bootloaderul este deblocat pot fi în pericol. Unele funcții vor fi dezactivate în aceste moduri, prin urmare este posibil ca unele aplicații să nu funcționeze. Pentru a intra din nou în modul de producție, trebuie să blochezi bootloaderul dispozitivului. Astfel, dispozitivul revine din nou la setările din fabrică și este restabilit la setările de producție. După ce dispozitivul pornește în sistemul Android, dezactivează deblocarea OEM în Opțiuni pentru dezvoltatori. Dacă dispozitivul nu pornește în sistemul Android sau este instabil, reinstalează cele mai recente configurații din fabrică pe dispozitiv de la &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; sau accesează &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; și selectează Wipe Device (Șterge datele de pe dispozitiv) > Lock Bootloader (Blochează bootloaderul) > Force Flash all partitions (Instalează forțat pe toate partițiile)."</string>
+    <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"Se folosește modul pe 16 KB independent de dimensiunea paginii."</string>
+    <string name="page_agnostic_16k_pages_text_short" msgid="269039281591806585">"Ești în modul pe 16 KB independent de dimensiunea paginii. Integritatea software-ului nu poate fi garantată în acest mod și toate datele stocate pe telefon cât timp bootloaderul este deblocat pot fi în pericol. Unele funcții vor fi dezactivate în aceste moduri, prin urmare este posibil ca unele aplicații să nu funcționeze. Pentru a intra din nou în modul de producție, trebuie să revii la modul pe 4 KB, apoi să blochezi bootloaderul dispozitivului. Atinge pentru a citi mai multe."</string>
+    <string name="page_agnostic_16k_pages_text" msgid="6208765386837706582">"Ești în modul pe 16 KB independent de dimensiunea paginii. Integritatea software-ului nu poate fi garantată în acest mod și toate datele stocate pe telefon cât timp bootloaderul este deblocat pot fi în pericol. Unele funcții vor fi dezactivate în aceste moduri, prin urmare este posibil ca unele aplicații să nu funcționeze. Pentru a intra din nou în modul de producție, trebuie să revii la modul pe 4 KB, apoi să blochezi bootloaderul dispozitivului. Astfel, dispozitivul revine din nou la setările din fabrică și este restabilit la setările de producție. După ce dispozitivul pornește în sistemul Android, dezactivează deblocarea OEM în Opțiuni pentru dezvoltatori. Dacă dispozitivul nu pornește în sistemul Android sau este instabil, reinstalează cele mai recente configurații din fabrică pe dispozitiv de la &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; sau accesează &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; și selectează Wipe Device (Șterge datele de pe dispozitiv) > Lock Bootloader (Blochează bootloaderul) > Force Flash all partitions (Instalează forțat pe toate partițiile)."</string>
+    <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"Modul pe 16 KB independent de dimensiunea paginii"</string>
+    <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Citește mai multe"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Handler pentru rapoartele de eroare"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Stabilește ce aplicație gestionează comanda rapidă pentru Raportul de eroare pe dispozitivul tău."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Personal"</string>
@@ -5011,8 +4991,12 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Dezactivează modul Avion pentru a folosi UWB"</string>
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"Tehnologia UWB nu este disponibilă în locația actuală"</string>
     <string name="thread_network_settings_title" msgid="4212301030523859220">"Thread"</string>
-    <string name="thread_network_settings_summary" msgid="8065599651021748339">"Conectează-te la dispozitivele compatibile folosind Thread pentru o experiență fluidă cu casa inteligentă"</string>
-    <string name="thread_network_settings_summary_airplane_mode" msgid="7207252895832446979">"Dezactivează modul Avion pentru a folosi Thread"</string>
+    <!-- no translation found for thread_network_settings_main_switch_title (3859168481929323474) -->
+    <skip />
+    <!-- no translation found for thread_network_settings_footer_title (7385600318850220927) -->
+    <skip />
+    <!-- no translation found for thread_network_settings_learn_more (8278498005848565050) -->
+    <skip />
     <string name="camera_toggle_title" msgid="8952668677727244992">"Acces la cameră"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Acces la microfon"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"Pentru aplicații și servicii"</string>

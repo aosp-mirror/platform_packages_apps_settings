@@ -286,7 +286,8 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Appar med behörighet att upptäcka enheter i närheten kan beräkna anslutna enheters relativa position."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Platsåtkomst har inaktiverats för appar och tjänster. Enhetens plats kan fortfarande skickas till räddningstjänst när du ringer eller skickar sms till ett nödnummer."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Läs mer om platsinställningar"</string>
-    <string name="location_settings_tooltip_text_for_chrome" msgid="3574930966097093550">"Ändra platsåtkomst i Inställningar &gt; Säkerhet och integritet &gt; Integritetsinställningar"</string>
+    <!-- no translation found for location_settings_tooltip_text_for_chrome (5781821709250544575) -->
+    <skip />
     <string name="account_settings_title" msgid="9138880127246241885">"Konton"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Säkerhet"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Kryptering och användaruppgifter"</string>
@@ -2017,7 +2018,6 @@
     <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"Färgkontrast"</string>
     <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"Högre kontrast gör att text, knappar och ikoner syns bättre. Välj kontrasten som ser bäst ut för dig."</string>
     <string name="color_contrast_note" msgid="7592686603372566198">"Vissa appar kanske inte har stöd för alla inställningar för färg- och textkontrast"</string>
-    <string name="accessibility_color_contrast_summary" msgid="7563237683500106632">"Justera hur färger och text ser ut mot skärmens bakgrundsfärg"</string>
     <string name="color_contrast_preview" msgid="6791430227535363883">"Förhandsgranska"</string>
     <string name="color_contrast_preview_sender_name" msgid="8641943417589238147">"Helen, Adam"</string>
     <string name="color_contrast_preview_email_send_date" msgid="2108702726171600080">"2 dagar sedan"</string>
@@ -2572,8 +2572,7 @@
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Utöka batteritiden"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Stäng av när enheten är laddad"</string>
     <string name="battery_saver_sticky_title_percentage" msgid="1178162022087559148">"Inaktivera vid <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <!-- no translation found for battery_saver_sticky_description_new (8543277078136947874) -->
-    <skip />
+    <string name="battery_saver_sticky_description_new" msgid="8543277078136947874">"Batterisparläget inaktiveras när batteriet laddas över <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Aktivera"</string>
@@ -4804,46 +4803,27 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"Information om jobbpolicy"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"Inställningar som hanteras av IT-administratören"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"Grafikprocessor"</string>
-    <!-- no translation found for enable_16k_pages (8001470927566110689) -->
-    <skip />
-    <!-- no translation found for enable_16k_pages_summary (1964363364670306912) -->
-    <skip />
-    <!-- no translation found for confirm_enable_16k_pages_title (1286925577014793351) -->
-    <skip />
-    <!-- no translation found for confirm_enable_16k_pages_text (570198382662424714) -->
-    <skip />
-    <!-- no translation found for confirm_enable_4k_pages_title (3210360137887034659) -->
-    <skip />
-    <!-- no translation found for confirm_enable_4k_pages_text (155070605667160083) -->
-    <skip />
+    <string name="enable_16k_pages" msgid="8001470927566110689">"Starta med sidstorlek på 16 kB"</string>
+    <string name="enable_16k_pages_summary" msgid="1964363364670306912">"Starta med kärna kompatibel med sidor på 16 kB"</string>
+    <string name="confirm_enable_16k_pages_title" msgid="1286925577014793351">"Byt från 4 kB-läge till 16 kB-läge"</string>
+    <string name="confirm_enable_16k_pages_text" msgid="570198382662424714">"Du använder ett sidoberoende läge med en kärna på 4 kB och byter till läget med 16 KB. Det går inte att garantera mjukvarans integritet i detta läge och all data som lagras på telefonen när starthanteraren är olåst kan vara i farozonen. Åtgärden startar om enheten. En del funktioner inaktiveras i dessa lägen. Det kan innebära att vissa program inte fungerar. Om du vill återställa produktionsläget på enheten måste du byta tillbaka till 4 kB-läget och låsa starthanteraren. Enheten återställs då till standardinställningarna. När enheten startas med Android ska du inaktivera OEM-upplåsning i utvecklaralternativen."</string>
+    <string name="confirm_enable_4k_pages_title" msgid="3210360137887034659">"Byt från 16 kB-läge till 4 kB-läge"</string>
+    <string name="confirm_enable_4k_pages_text" msgid="155070605667160083">"Du använder ett sidoberoende läge med en kärna på 16 kB och byter till läget med 4 KB. Det går inte att garantera mjukvarans integritet i detta läge och all data som lagras på telefonen när starthanteraren är olåst kan vara i farozonen. Åtgärden startar om enheten. En del funktioner inaktiveras i dessa lägen. Det kan innebära att vissa program inte fungerar. Om du vill återställa produktionsläget på enheten måste du låsa starthanteraren. Enheten återställs då till standardinställningarna. När enheten startas med Android ska du inaktivera OEM-upplåsning i utvecklaralternativen."</string>
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"Det gick inte att uppdatera kärnan till en kärna som är kompatibel med sidor på 16 kB."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Tillämpar ändring"</string>
-    <!-- no translation found for confirm_format_ext4_title (6696191800594435577) -->
-    <skip />
-    <!-- no translation found for confirm_format_ext4_text (7940372488624630214) -->
-    <skip />
-    <!-- no translation found for format_ext4_failure_toast (8059453995800471549) -->
-    <skip />
-    <!-- no translation found for confirm_oem_unlock_for_16k_title (5374451262432025419) -->
-    <skip />
-    <!-- no translation found for confirm_oem_unlock_for_16k_text (3583604865119937957) -->
-    <skip />
-    <!-- no translation found for page_agnostic_4k_pages_title (1184703958249093215) -->
-    <skip />
-    <!-- no translation found for page_agnostic_4k_pages_text_short (2894243902906666242) -->
-    <skip />
-    <!-- no translation found for page_agnostic_4k_pages_text (8284806650260868833) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_title (7762533464569818498) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text_short (269039281591806585) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text (6208765386837706582) -->
-    <skip />
-    <!-- no translation found for page_agnostic_notification_channel_name (1658444283036376361) -->
-    <skip />
-    <!-- no translation found for page_agnostic_notification_action (2309805437430150456) -->
-    <skip />
+    <string name="confirm_format_ext4_title" msgid="6696191800594435577">"Vill du formatera om enheten till ext4? (krävs för 16 kB-läge)"</string>
+    <string name="confirm_format_ext4_text" msgid="7940372488624630214">"Du måste konvertera enhetens datapartition till ext4 innan du använder utvecklaralternativet för 16 kB. Det går inte att garantera mjukvarans integritet i detta läge och all data som lagras på telefonen när starthanteraren är olåst kan vara i farozonen. Om du aktiverar 16 kB-alternativet måste du starta om en gång till efteråt. När läget är aktiverat kan du byta fram och tillbaka mellan 4 kB och 16 kB genom att starta om. En del funktioner inaktiveras i dessa lägen. Det kan innebära att vissa program inte fungerar. Om du vill återställa produktionsläget på enheten måste du byta tillbaka till 4 kB-läget och låsa starthanteraren. Enheten återställs då till standardinställningarna. När enheten startas med Android ska du inaktivera OEM-upplåsning i utvecklaralternativen. Enheten rensas och filsystemet ändras till ext4 när du har bekräftat. När det är klart kommer du tillbaka för att aktivera 16 kB igen."</string>
+    <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Det gick inte att formatera om och rensa datapartionen till ext4."</string>
+    <string name="confirm_oem_unlock_for_16k_title" msgid="5374451262432025419">"Starthanteraren måste vara upplåst för 16 kB-läge"</string>
+    <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"Starthanteraren måste vara upplåst på den här enheten innan du kan använda utvecklaralternativet för 16 kB. Det går inte att garantera mjukvarans integritet i detta läge och all data som lagras på telefonen när starthanteraren är olåst kan vara i farozonen. Alla användaruppgifter och inställningar rensas när 16 kB-läget aktiveras. När starthanteraren har låsts upp krävs två omstarter för att aktivera 16 kB-alternativet. När läget är aktiverat kan du byta fram och tillbaka mellan 4 kB och 16 kB genom att starta om. En del funktioner inaktiveras i dessa lägen. Det kan innebära att vissa program inte fungerar. Om du vill återställa produktionsläget på enheten måste du byta tillbaka till 4 kB-läget och låsa OEM/starthanteraren. Enheten återställs då till standardinställningarna. Lås upp starthanteraren och försök igen. Du hittar anvisningar om hur du gör detta på &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
+    <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"4 kB-versionen av det sidoberoende läget används"</string>
+    <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"Du använder 4 kB-versionen av det sidoberoende läget. Det går inte att garantera mjukvarans integritet i detta läge och all data som lagras på telefonen när starthanteraren är olåst kan vara i farozonen. En del funktioner inaktiveras i dessa lägen. Det kan innebära att vissa program inte fungerar. Om du vill återgå till produktionsläget måste du låsa starthanteraren på enheten. Tryck för att läsa mer."</string>
+    <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"Du använder 4 kB-versionen av det sidoberoende läget. Det går inte att garantera mjukvarans integritet i detta läge och all data som lagras på telefonen när starthanteraren är olåst kan vara i farozonen. En del funktioner inaktiveras i dessa lägen. Det kan innebära att vissa program inte fungerar. Om du vill återgå till produktionsläget måste du låsa starthanteraren på enheten. Detta återställer enheten till produktionsinställningarna igen. När enheten startas med Android ska du inaktivera OEM-upplåsning i utvecklaralternativen. Om det inte går att starta enheten med Android eller om den inte är stabil flashar du om enheten med de senaste systemavbildningarna från &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; or use &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; och väljer Rensa enhet, Lås starthanteraren och Tvångsflasha alla partitioner."</string>
+    <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"16 kB-versionen av det sidoberoende läget används"</string>
+    <string name="page_agnostic_16k_pages_text_short" msgid="269039281591806585">"Du använder 16 kB-versionen av det sidoberoende läget. Det går inte att garantera mjukvarans integritet i detta läge och all data som lagras på telefonen när starthanteraren är olåst kan vara i farozonen. En del funktioner inaktiveras i dessa lägen. Det kan innebära att vissa program inte fungerar. Om du vill återgå till produktionsläget måste du byta tillbaka till 4 kB-läget och sedan låsa starthanteraren på enheten. Tryck för att läsa mer."</string>
+    <string name="page_agnostic_16k_pages_text" msgid="6208765386837706582">"Du använder 16 kB-versionen av det sidoberoende läget. Det går inte att garantera mjukvarans integritet i detta läge och all data som lagras på telefonen när starthanteraren är olåst kan vara i farozonen. En del funktioner inaktiveras i dessa lägen. Det kan innebära att vissa program inte fungerar. Om du vill återgå till produktionsläget måste du byta tillbaka till 4 kB-läget och sedan låsa starthanteraren på enheten. Detta återställer enheten till produktionsinställningarna igen. När enheten startas med Android ska du inaktivera OEM-upplåsning i utvecklaralternativen. Om det inte går att starta enheten med Android eller om den inte är stabil flashar du om enheten med de senaste systemavbildningarna från &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; or use &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; och väljer Rensa enhet, Lås starthanteraren och Tvångsflasha alla partitioner."</string>
+    <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"16 kB-versionen av det sidoberoende läget"</string>
+    <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Läs mer"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Felrapportshanterare"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Avgör vilken app som hanterar Genväg till felrapport på enheten."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Privat"</string>
@@ -5010,8 +4990,12 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Inaktivera flygplansläge för att använda UWB"</string>
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"UWB är inte tillgängligt på den aktuella platsen"</string>
     <string name="thread_network_settings_title" msgid="4212301030523859220">"Thread"</string>
-    <string name="thread_network_settings_summary" msgid="8065599651021748339">"Anslut till kompatibla enheter via Thread för en sömlös smart hemupplevelse"</string>
-    <string name="thread_network_settings_summary_airplane_mode" msgid="7207252895832446979">"Inaktivera flygplansläge för att använda Thread"</string>
+    <!-- no translation found for thread_network_settings_main_switch_title (3859168481929323474) -->
+    <skip />
+    <!-- no translation found for thread_network_settings_footer_title (7385600318850220927) -->
+    <skip />
+    <!-- no translation found for thread_network_settings_learn_more (8278498005848565050) -->
+    <skip />
     <string name="camera_toggle_title" msgid="8952668677727244992">"Kameraåtkomst"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Mikrofonåtkomst"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"För appar och tjänster"</string>

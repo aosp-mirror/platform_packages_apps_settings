@@ -286,7 +286,8 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Les aplicacions amb permís per trobar dispositius propers poden determinar la posició relativa dels dispositius connectats."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"L\'accés a la ubicació està desactivat per a aplicacions i serveis. Tanmateix, la ubicació del dispositiu es pot continuar enviant als serveis d\'emergències quan truquis o enviïs un missatge de text a un número d\'emergència."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Més informació sobre la configuració d\'ubicació"</string>
-    <string name="location_settings_tooltip_text_for_chrome" msgid="3574930966097093550">"Canvia l\'accés a la ubicació a Configuració &gt; Seguretat i priv. &gt; Controls de priv."</string>
+    <!-- no translation found for location_settings_tooltip_text_for_chrome (5781821709250544575) -->
+    <skip />
     <string name="account_settings_title" msgid="9138880127246241885">"Comptes"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Seguretat"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Encriptació i credencials"</string>
@@ -2017,7 +2018,6 @@
     <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"Contrast de color"</string>
     <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"Un contrast més alt fa que el text, els botons i les icones destaquin més. Tria el contrast que més t\'agradi."</string>
     <string name="color_contrast_note" msgid="7592686603372566198">"Pot ser que algunes aplicacions encara no admetin totes les opcions de configuració de contrast de color i text"</string>
-    <string name="accessibility_color_contrast_summary" msgid="7563237683500106632">"Ajusta com es veuen els colors i el text sobre el color del fons de pantalla"</string>
     <string name="color_contrast_preview" msgid="6791430227535363883">"Previsualitza"</string>
     <string name="color_contrast_preview_sender_name" msgid="8641943417589238147">"Helen, Adam"</string>
     <string name="color_contrast_preview_email_send_date" msgid="2108702726171600080">"Fa 2 dies"</string>
@@ -2572,8 +2572,7 @@
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Allarga la durada de la bateria"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Desactiva quan estigui carregada"</string>
     <string name="battery_saver_sticky_title_percentage" msgid="1178162022087559148">"Desactiva quan arribi al <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <!-- no translation found for battery_saver_sticky_description_new (8543277078136947874) -->
-    <skip />
+    <string name="battery_saver_sticky_description_new" msgid="8543277078136947874">"Estalvi de bateria es desactiva quan se supera el <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> de bateria"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Activa"</string>
@@ -4804,46 +4803,27 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"Informació de les teves polítiques professionals"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"Configuració gestionada per l\'administrador de TI"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
-    <!-- no translation found for enable_16k_pages (8001470927566110689) -->
-    <skip />
-    <!-- no translation found for enable_16k_pages_summary (1964363364670306912) -->
-    <skip />
-    <!-- no translation found for confirm_enable_16k_pages_title (1286925577014793351) -->
-    <skip />
-    <!-- no translation found for confirm_enable_16k_pages_text (570198382662424714) -->
-    <skip />
-    <!-- no translation found for confirm_enable_4k_pages_title (3210360137887034659) -->
-    <skip />
-    <!-- no translation found for confirm_enable_4k_pages_text (155070605667160083) -->
-    <skip />
+    <string name="enable_16k_pages" msgid="8001470927566110689">"Inicia amb pàgines de 16 kB"</string>
+    <string name="enable_16k_pages_summary" msgid="1964363364670306912">"Inicia amb un nucli compatible amb pàgines de 16 kB"</string>
+    <string name="confirm_enable_16k_pages_title" msgid="1286925577014793351">"Canvia del mode de 4 kB al mode de 16 kB"</string>
+    <string name="confirm_enable_16k_pages_text" msgid="570198382662424714">"Estàs en mode independent de la pàgina executant un nucli de 4 kB i canviaràs al mode de 16 kB. No es pot garantir la integritat del programari en aquest mode, i les dades que estiguin emmagatzemades al dispositiu mentre el bootloader està desbloquejat poden estar en perill. Aquesta acció reiniciarà el dispositiu. Com que es desactivaran algunes funcions en aquests modes, és possible que algunes aplicacions no funcionin. Per fer que el dispositiu torni al mode de producció, hauràs de tornar al mode de 4 kB i, a continuació, bloquejar el bootloader, que restablirà les dades de fàbrica del dispositiu. Quan el dispositiu s\'iniciï a Android correctament, desactiva el desbloqueig OEM a Opcions per a desenvolupadors."</string>
+    <string name="confirm_enable_4k_pages_title" msgid="3210360137887034659">"Canvia del mode de 16 kB al mode de 4 kB"</string>
+    <string name="confirm_enable_4k_pages_text" msgid="155070605667160083">"Estàs en mode independent de la pàgina executant un nucli de 16 kB i canviaràs al mode de 4 kB. No es pot garantir la integritat del programari en aquest mode, i les dades que estiguin emmagatzemades al dispositiu mentre el bootloader està desbloquejat poden estar en perill. Aquesta acció reiniciarà el dispositiu. Com que es desactivaran algunes funcions en aquests modes, és possible que algunes aplicacions no funcionin. Per fer que el dispositiu torni al mode de producció, hauràs de tornar a bloquejar el bootloader, que restablirà les dades de fàbrica del dispositiu. Quan el dispositiu s\'iniciï a Android correctament, desactiva el desbloqueig OEM a Opcions per a desenvolupadors."</string>
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"No s\'ha pogut actualitzar el nucli a un compatible amb pàgines de 16 kB."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"S\'està aplicant el canvi"</string>
-    <!-- no translation found for confirm_format_ext4_title (6696191800594435577) -->
-    <skip />
-    <!-- no translation found for confirm_format_ext4_text (7940372488624630214) -->
-    <skip />
-    <!-- no translation found for format_ext4_failure_toast (8059453995800471549) -->
-    <skip />
-    <!-- no translation found for confirm_oem_unlock_for_16k_title (5374451262432025419) -->
-    <skip />
-    <!-- no translation found for confirm_oem_unlock_for_16k_text (3583604865119937957) -->
-    <skip />
-    <!-- no translation found for page_agnostic_4k_pages_title (1184703958249093215) -->
-    <skip />
-    <!-- no translation found for page_agnostic_4k_pages_text_short (2894243902906666242) -->
-    <skip />
-    <!-- no translation found for page_agnostic_4k_pages_text (8284806650260868833) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_title (7762533464569818498) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text_short (269039281591806585) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text (6208765386837706582) -->
-    <skip />
-    <!-- no translation found for page_agnostic_notification_channel_name (1658444283036376361) -->
-    <skip />
-    <!-- no translation found for page_agnostic_notification_action (2309805437430150456) -->
-    <skip />
+    <string name="confirm_format_ext4_title" msgid="6696191800594435577">"Vols canviar el format del dispositiu a ext4? (necessari per al mode de 16 kB)"</string>
+    <string name="confirm_format_ext4_text" msgid="7940372488624630214">"La partició de dades d\'aquest dispositiu s\'ha de convertir al format ext4 abans d\'utilitzar l\'opció per a desenvolupadors de 16 kB. No es pot garantir la integritat del programari en aquest mode, i les dades que estiguin emmagatzemades al dispositiu mentre el bootloader està desbloquejat poden estar en perill. Per activar l\'opció de 16 kB, caldrà que el dispositiu es reiniciï una vegada més. Quan estiguis en aquest mode, podràs alternar entre el mode de 4 kB i el mode de 16 kB amb un sol reinici. Com que es desactivaran algunes funcions en aquests modes, és possible que algunes aplicacions no funcionin. Per fer que el dispositiu torni al mode de producció, hauràs de tornar al mode de 4 kB i, a continuació, bloquejar el bootloader, que restablirà les dades de fàbrica del dispositiu. Quan el dispositiu s\'iniciï a Android correctament, desactiva el desbloqueig OEM a Opcions per a desenvolupadors. Es netejaran les dades del dispositiu i el sistema de fitxers es canviarà al format ext4 després de la confirmació. Quan es completi aquesta acció, torna i activa el mode de 16 kB de nou."</string>
+    <string name="format_ext4_failure_toast" msgid="8059453995800471549">"No s\'ha pogut canviar el format a ext4 ni netejar-ne la partició de dades."</string>
+    <string name="confirm_oem_unlock_for_16k_title" msgid="5374451262432025419">"Es requereix el desbloqueig del bootloader per al mode de 16 kB"</string>
+    <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"Aquest dispositiu ha de tenir el bootloader desbloquejat abans d\'utilitzar l\'opció per a desenvolupadors de 16 kB. No es pot garantir la integritat del programari en aquest mode, i les dades que estiguin emmagatzemades al dispositiu mentre el bootloader està desbloquejat poden estar en perill. En activar el mode de 16 kB, es netejaran totes les dades d\'usuari i opcions de configuració. Quan s\'hagi desbloquejat el bootloader, caldrà que el dispositiu es reiniciï dues vegades per activar l\'opció de 16 kB. Quan estiguis en aquest mode, podràs alternar entre el mode de 4 kB i el mode de 16 kB amb un sol reinici. Com que es desactivaran algunes funcions en aquests modes, és possible que algunes aplicacions no funcionin. Per fer que el dispositiu torni al mode de producció, hauràs de tornar al mode de 4 kB i, a continuació, bloquejar l\'OEM o el bootloader, que restablirà les dades de fàbrica del dispositiu. Desbloqueja el bootloader i torna-ho a provar. Pots consultar les instruccions per fer-ho a &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
+    <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"S\'està utilitzant el mode independent de la pàgina de 4 kB"</string>
+    <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"Estàs utilitzant l\'opció de 4 kB del mode independent de la pàgina. No es pot garantir la integritat del programari en aquest mode, i les dades que estiguin emmagatzemades al dispositiu mentre el bootloader està desbloquejat poden estar en perill. Com que es desactivaran algunes funcions en aquests modes, és possible que algunes aplicacions no funcionin. Per tornar a entrar al mode de producció, has de bloquejar el bootloader del dispositiu. Toca per obtenir més informació."</string>
+    <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"Estàs utilitzant l\'opció de 4 kB del mode independent de la pàgina. No es pot garantir la integritat del programari en aquest mode, i les dades que estiguin emmagatzemades al dispositiu mentre el bootloader està desbloquejat poden estar en perill. Com que es desactivaran algunes funcions en aquests modes, és possible que algunes aplicacions no funcionin. Per tornar a entrar al mode de producció, has de bloquejar el bootloader del dispositiu. Aquesta acció tornarà a restablir les dades de fàbrica del dispositiu i en restaurarà la configuració de producció. Quan el dispositiu s\'iniciï a Android correctament, desactiva el desbloqueig OEM a Opcions per a desenvolupadors. Si el dispositiu no es pot iniciar a Android o és inestable, torna a instal·lar-hi les darreres imatges de fàbrica des de &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; o utilitza &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; i selecciona Neteja el dispositiu, Bloqueja el bootloader i Força la instal·lació de totes les particions."</string>
+    <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"S\'està utilitzant el mode independent de la pàgina de 16 kB"</string>
+    <string name="page_agnostic_16k_pages_text_short" msgid="269039281591806585">"Estàs utilitzant l\'opció de 16 kB del mode independent de la pàgina. No es pot garantir la integritat del programari en aquest mode, i les dades que estiguin emmagatzemades al dispositiu mentre el bootloader està desbloquejat poden estar en perill. Com que es desactivaran algunes funcions en aquests modes, és possible que algunes aplicacions no funcionin. Per entrar al mode de producció de nou, has de tornar al mode de 4 kB i, a continuació, bloquejar el bootloader del dispositiu. Toca per obtenir més informació."</string>
+    <string name="page_agnostic_16k_pages_text" msgid="6208765386837706582">"Estàs utilitzant l\'opció de 16 kB del mode independent de la pàgina. No es pot garantir la integritat del programari en aquest mode, i les dades que estiguin emmagatzemades al dispositiu mentre el bootloader està desbloquejat poden estar en perill. Com que es desactivaran algunes funcions en aquests modes, és possible que algunes aplicacions no funcionin. Per entrar al mode de producció de nou, has de tornar al mode de 4 kB i, a continuació, bloquejar el bootloader del dispositiu. Aquesta acció tornarà a restablir les dades de fàbrica del dispositiu i en restaurarà la configuració de producció. Quan el dispositiu s\'iniciï a Android correctament, desactiva el desbloqueig OEM a Opcions per a desenvolupadors. Si el dispositiu no es pot iniciar a Android o és inestable, torna a instal·lar-hi les darreres imatges de fàbrica des de &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; o utilitza &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; i selecciona Neteja el dispositiu, Bloqueja el bootloader i Força la instal·lació de totes les particions."</string>
+    <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"Mode independent de la pàgina de 16 kB"</string>
+    <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Més informació"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Gestor d\'informes d\'errors"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Determina quina aplicació gestiona la drecera de l\'informe d\'errors al dispositiu."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Personal"</string>
@@ -5010,8 +4990,12 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Desactiva el mode d\'avió per utilitzar la banda ultraampla"</string>
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"La banda ultraampla no està disponible a la ubicació actual"</string>
     <string name="thread_network_settings_title" msgid="4212301030523859220">"Thread"</string>
-    <string name="thread_network_settings_summary" msgid="8065599651021748339">"Connecta\'t a dispositius compatibles mitjançant Thread per gaudir d\'una experiència domèstica intel·ligent fluida"</string>
-    <string name="thread_network_settings_summary_airplane_mode" msgid="7207252895832446979">"Desactiva el mode d\'avió per utilitzar Thread"</string>
+    <!-- no translation found for thread_network_settings_main_switch_title (3859168481929323474) -->
+    <skip />
+    <!-- no translation found for thread_network_settings_footer_title (7385600318850220927) -->
+    <skip />
+    <!-- no translation found for thread_network_settings_learn_more (8278498005848565050) -->
+    <skip />
     <string name="camera_toggle_title" msgid="8952668677727244992">"Accés a la càmera"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Accés al micròfon"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"Per a aplicacions i serveis"</string>
