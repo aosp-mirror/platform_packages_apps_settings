@@ -22,10 +22,7 @@ import android.content.Context;
 
 import androidx.test.core.app.ApplicationProvider;
 
-import com.android.settings.connecteddevice.AvailableMediaDeviceGroupController;
-import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
-import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -37,40 +34,28 @@ import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 
 @RunWith(RobolectricTestRunner.class)
-public class AudioSharingFeatureProviderImplTest {
+public class AudioSharingDeviceVolumePreferenceTest {
     @Rule public final MockitoRule mMockitoRule = MockitoJUnit.rule();
 
     @Mock private CachedBluetoothDevice mCachedDevice;
-    @Mock private LocalBluetoothManager mLocalBtManager;
-    @Mock private DashboardFragment mFragment;
     private Context mContext;
-    private AudioSharingFeatureProviderImpl mFeatureProvider;
+    private AudioSharingDeviceVolumePreference mPreference;
 
     @Before
-    public void setUp() {
+    public void setup() {
         mContext = ApplicationProvider.getApplicationContext();
-        mFeatureProvider = new AudioSharingFeatureProviderImpl();
+        mPreference = new AudioSharingDeviceVolumePreference(mContext, mCachedDevice);
     }
 
     @Test
-    public void createAudioSharingDevicePreferenceController_returnsNull() {
-        assertThat(
-                        mFeatureProvider.createAudioSharingDevicePreferenceController(
-                                mContext, mFragment, /* lifecycle= */ null))
-                .isNull();
+    public void getCachedDevice_returnsDevice() {
+        assertThat(mPreference.getCachedDevice()).isEqualTo(mCachedDevice);
     }
 
     @Test
-    public void createAvailableMediaDeviceGroupController_returnsNull() {
-        assertThat(
-                        mFeatureProvider.createAvailableMediaDeviceGroupController(
-                                mContext, /* fragment= */ null, /* lifecycle= */ null))
-                .isInstanceOf(AvailableMediaDeviceGroupController.class);
-    }
-
-    @Test
-    public void isAudioSharingFilterMatched_returnsFalse() {
-        assertThat(mFeatureProvider.isAudioSharingFilterMatched(mCachedDevice, mLocalBtManager))
-                .isFalse();
+    public void initialize_setupMaxMin() {
+        mPreference.initialize();
+        assertThat(mPreference.getMax()).isEqualTo(AudioSharingDeviceVolumePreference.MAX_VOLUME);
+        assertThat(mPreference.getMin()).isEqualTo(AudioSharingDeviceVolumePreference.MIN_VOLUME);
     }
 }
