@@ -72,14 +72,18 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
 
     public MobileDataPreferenceController(Context context, String key, Lifecycle lifecycle,
             LifecycleOwner lifecycleOwner, int subId) {
-        super(context, key);
+        this(context, key);
         mSubId = subId;
-        mSubscriptionManager = context.getSystemService(SubscriptionManager.class);
-        mMobileNetworkRepository = MobileNetworkRepository.getInstance(context);
         mLifecycleOwner = lifecycleOwner;
         if (lifecycle != null) {
             lifecycle.addObserver(this);
         }
+    }
+
+    public MobileDataPreferenceController(Context context, String key) {
+        super(context, key);
+        mSubscriptionManager = context.getSystemService(SubscriptionManager.class);
+        mMobileNetworkRepository = MobileNetworkRepository.getInstance(context);
     }
 
     @Override
