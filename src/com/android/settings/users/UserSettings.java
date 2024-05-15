@@ -287,7 +287,7 @@ public class UserSettings extends SettingsPreferenceFragment
         final SettingsActivity activity = (SettingsActivity) getActivity();
         final SettingsMainSwitchBar switchBar = activity.getSwitchBar();
         switchBar.setTitle(getContext().getString(R.string.multiple_users_main_switch_title));
-        if (isCurrentUserAdmin()) {
+        if (!mUserCaps.mIsGuest) {
             switchBar.show();
         } else {
             switchBar.hide();
