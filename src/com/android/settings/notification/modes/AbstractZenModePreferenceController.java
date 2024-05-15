@@ -17,6 +17,7 @@
 package com.android.settings.notification.modes;
 
 import android.app.AutomaticZenRule;
+import android.app.Flags;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
@@ -53,6 +54,11 @@ abstract class AbstractZenModePreferenceController extends AbstractPreferenceCon
     @NonNull
     public String getPreferenceKey() {
         return mKey;
+    }
+
+    @Override
+    public boolean isAvailable() {
+        return Flags.modesUi();
     }
 
     // Called by the parent Fragment onStart, which means it will happen before resume.

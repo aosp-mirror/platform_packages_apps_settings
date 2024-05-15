@@ -18,6 +18,7 @@ package com.android.settings.notification.modes;
 import android.app.AutomaticZenRule;
 import android.app.Flags;
 import android.content.Context;
+import android.content.res.Resources;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,9 +26,12 @@ import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 
-import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settings.R;
+import com.android.settings.core.BasePreferenceController;
+import com.android.settingslib.search.SearchIndexableRaw;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -35,7 +39,7 @@ import java.util.Map;
  * containing links to each individual mode. This is a central controller that populates and updates
  * all the preferences that then lead to a mode configuration page.
  */
-public class ZenModesListPreferenceController extends AbstractPreferenceController {
+public class ZenModesListPreferenceController extends BasePreferenceController {
     protected static final String KEY = "zen_modes_list";
 
     @Nullable
@@ -44,7 +48,7 @@ public class ZenModesListPreferenceController extends AbstractPreferenceControll
 
     public ZenModesListPreferenceController(Context context, @Nullable Fragment parent,
             @NonNull ZenModesBackend backend) {
-        super(context);
+        super(context, KEY);
         mParent = parent;
         mBackend = backend;
     }
@@ -55,8 +59,9 @@ public class ZenModesListPreferenceController extends AbstractPreferenceControll
     }
 
     @Override
-    public boolean isAvailable() {
-        return Flags.modesUi();
+    @AvailabilityStatus
+    public int getAvailabilityStatus() {
+        return Flags.modesUi() ? AVAILABLE_UNSEARCHABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
@@ -93,6 +98,29 @@ public class ZenModesListPreferenceController extends AbstractPreferenceControll
         // Remove preferences that no longer have a rule
         for (String key : originalPreferences.keySet()) {
             category.removePreferenceRecursively(key);
+        }
+    }
+
+    // Provide search data for the modes, which will allow users to reach the modes page if they
+    // search for a mode name.
+    @Override
+    public void updateDynamicRawDataToIndex(List<SearchIndexableRaw> rawData) {
+        // Don't add anything if flag is off. In theory this preference controller itself shouldn't
+        // be available in that case, but we check anyway to be sure.
+        if (!Flags.modesUi()) {
+            return;
+        }
+        if (mBackend == null) {
+            return;
+        }
+
+        final Resources res = mContext.getResources();
+        for (ZenMode mode : mBackend.getModes()) {
+            SearchIndexableRaw data = new SearchIndexableRaw(mContext);
+            data.key = mode.getId();
+            data.title = mode.getRule().getName();
+            data.screenTitle = res.getString(R.string.zen_modes_list_title);
+            rawData.add(data);
         }
     }
 }
