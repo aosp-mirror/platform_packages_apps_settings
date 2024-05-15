@@ -98,6 +98,13 @@
         settings:controller="com.android.settings.system.DeveloperOptionsController"/>
 
     <Preference
+        android:key="device_diagnostics"
+        android:title="@string/device_diagnostics_title"
+        android:order="-35"
+        android:icon="@drawable/ic_device_diagnostics"
+        settings:controller="com.android.settings.system.DeviceDiagnosticsPreferenceController"/>
+
+    <Preference
         android:key="reset_dashboard"
         android:title="@string/reset_dashboard_title"
         android:icon="@drawable/ic_restore"
