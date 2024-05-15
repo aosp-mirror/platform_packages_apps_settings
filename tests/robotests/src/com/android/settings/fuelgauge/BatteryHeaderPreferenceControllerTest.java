@@ -35,7 +35,6 @@ import android.os.SystemProperties;
 
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.LowBatteryTip;
@@ -483,11 +482,10 @@ public class BatteryHeaderPreferenceControllerTest {
     }
 
     @Test
-    public void displayPreference_init_showLoading() {
+    public void displayPreference_init_showEmptySpace() {
         mController.displayPreference(mPreferenceScreen);
 
-        verify(mBatteryUsageProgressBarPref)
-                .setBottomSummary(mContext.getString(R.string.settings_license_activity_loading));
+        verify(mBatteryUsageProgressBarPref).setBottomSummary(" ");
     }
 
     private CharSequence formatBatteryPercentageText() {
