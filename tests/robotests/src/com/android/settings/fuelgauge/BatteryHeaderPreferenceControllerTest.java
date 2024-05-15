@@ -286,8 +286,9 @@ public class BatteryHeaderPreferenceControllerTest {
                         /* isFastCharging= */ true,
                         /* isChargingStringV2= */ true);
         batteryInfo.pluggedStatus = BatteryManager.BATTERY_PLUGGED_WIRELESS;
-        when(mFactory.batterySettingsFeatureProvider.getWirelessChargingLabel(eq(mContext),
-                any(BatteryInfo.class))).thenReturn(label);
+        when(mFactory.batterySettingsFeatureProvider.getWirelessChargingLabel(
+                        eq(mContext), any(BatteryInfo.class)))
+                .thenReturn(label);
 
         mController.updateBatteryStatus(/* label= */ null, batteryInfo);
 
@@ -326,14 +327,64 @@ public class BatteryHeaderPreferenceControllerTest {
         verify(mBatteryUsageProgressBarPref).setBottomSummary(expectedChargingString);
     }
 
+    @Test
+    public void updateBatteryStatus_chargingOptimizationMode_remainingLabel() {
+        var batteryInfo =
+                arrangeUpdateBatteryStatusTestWithRemainingLabel(
+                        /* remainingLabel= */ "Expected remaining label",
+                        /* statusLabel= */ "Fast Charging",
+                        /* isFastCharging= */ true,
+                        /* isChargingStringV2= */ true);
+        var expectedChargingString = batteryInfo.remainingLabel;
+        when(mFactory.batterySettingsFeatureProvider.isChargingOptimizationMode(mContext))
+                .thenReturn(true);
+
+        mController.updateBatteryStatus(/* label= */ null, batteryInfo);
+
+        verify(mBatteryUsageProgressBarPref).setBottomSummary(expectedChargingString);
+    }
+
+    @Test
+    public void updateBatteryStatus_chargingOptimizationModeNoRemainingLabel_statusLabel() {
+        var batteryInfo =
+                arrangeUpdateBatteryStatusTestWithRemainingLabel(
+                        /* remainingLabel= */ null,
+                        /* statusLabel= */ "Fast Charging",
+                        /* isFastCharging= */ true,
+                        /* isChargingStringV2= */ true);
+        var expectedChargingString = batteryInfo.statusLabel;
+        when(mFactory.batterySettingsFeatureProvider.isChargingOptimizationMode(mContext))
+                .thenReturn(true);
+
+        mController.updateBatteryStatus(/* label= */ null, batteryInfo);
+
+        verify(mBatteryUsageProgressBarPref).setBottomSummary(expectedChargingString);
+    }
+
+    @Test
+    public void updateBatteryStatus_notChargingOptimizationMode_statusWithRemainingLabel() {
+        var batteryInfo =
+                arrangeUpdateBatteryStatusTestWithRemainingLabel(
+                        /* remainingLabel= */ "Full by 1:30 PM",
+                        /* statusLabel= */ "Fast Charging",
+                        /* isFastCharging= */ true,
+                        /* isChargingStringV2= */ true);
+        var expectedChargingString = batteryInfo.statusLabel + " • " + batteryInfo.remainingLabel;
+        when(mFactory.batterySettingsFeatureProvider.isChargingOptimizationMode(mContext))
+                .thenReturn(false);
+
+        mController.updateBatteryStatus(/* label= */ null, batteryInfo);
+
+        verify(mBatteryUsageProgressBarPref).setBottomSummary(expectedChargingString);
+    }
+
     private BatteryInfo arrangeUpdateBatteryStatusTestWithRemainingLabel(
             String remainingLabel,
             String statusLabel,
             boolean isFastCharging,
             boolean isChargingStringV2) {
         SystemProperties.set(
-                BatteryUtils.PROPERTY_CHARGING_STRING_V2_KEY,
-                String.valueOf(isChargingStringV2));
+                BatteryUtils.PROPERTY_CHARGING_STRING_V2_KEY, String.valueOf(isChargingStringV2));
         mBatteryInfo.isBatteryDefender = false;
         mBatteryInfo.remainingLabel = remainingLabel;
         mBatteryInfo.statusLabel = statusLabel;
@@ -389,8 +440,11 @@ public class BatteryHeaderPreferenceControllerTest {
 
         mController.updateHeaderPreference(mBatteryInfo);
 
-        verify(mBatteryUsageProgressBarPref).setBottomSummary(mContext.getString(
-                com.android.settingslib.R.string.battery_info_status_charging_on_hold));
+        verify(mBatteryUsageProgressBarPref)
+                .setBottomSummary(
+                        mContext.getString(
+                                com.android.settingslib.R.string
+                                        .battery_info_status_charging_on_hold));
     }
 
     @Test

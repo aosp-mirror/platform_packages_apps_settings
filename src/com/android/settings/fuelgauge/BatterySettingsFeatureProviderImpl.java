@@ -76,7 +76,11 @@ public class BatterySettingsFeatureProviderImpl implements BatterySettingsFeatur
     @Nullable
     @Override
     public CharSequence getChargingOptimizationRemainingLabel(
-            @NonNull Context context, long chargeRemainingTimeMs, long currentTimeMs) {
+            @NonNull Context context,
+            int batteryLevel,
+            int pluggedStatus,
+            long chargeRemainingTimeMs,
+            long currentTimeMs) {
         return null;
     }
 
@@ -84,7 +88,8 @@ public class BatterySettingsFeatureProviderImpl implements BatterySettingsFeatur
     @Override
     public CharSequence getChargingOptimizationChargeLabel(
             @NonNull Context context,
-            @NonNull String batteryPercentageString,
+            int batteryLevel,
+            String batteryPercentageString,
             long chargeRemainingTimeMs,
             long currentTimeMs) {
         return null;

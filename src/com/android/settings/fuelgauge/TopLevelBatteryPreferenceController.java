@@ -159,6 +159,11 @@ public class TopLevelBatteryPreferenceController extends BasePreferenceControlle
                     com.android.settingslib.R.string.power_charging_on_hold_settings_home_page,
                     info.batteryPercentString);
         }
+        final BatterySettingsFeatureProvider featureProvider =
+                FeatureFactory.getFeatureFactory().getBatterySettingsFeatureProvider();
+        if (info.chargeLabel != null && featureProvider.isChargingOptimizationMode(mContext)) {
+            return info.chargeLabel;
+        }
         if (info.batteryStatus == BatteryManager.BATTERY_STATUS_NOT_CHARGING) {
             // Present status only if no remaining time or status anomalous
             return info.statusLabel;
