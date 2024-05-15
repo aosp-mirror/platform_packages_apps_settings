@@ -183,16 +183,15 @@ public class DefaultCombinedPreferenceController extends DefaultAppPreferenceCon
         final List<AutofillServiceInfo> autofillProviders =
                 AutofillServiceInfo.getAvailableServices(mContext, userId);
         final String selectedAutofillProvider =
-                Settings.Secure.getStringForUser(
-                        mContext.getContentResolver(),
-                        DefaultCombinedPicker.AUTOFILL_SETTING,
-                        userId);
+                CredentialManagerPreferenceController
+                .getSelectedAutofillProvider(mContext, userId, TAG);
 
         final List<CredentialProviderInfo> credManProviders = new ArrayList<>();
         if (mCredentialManager != null) {
             credManProviders.addAll(
                     mCredentialManager.getCredentialProviderServices(
-                            userId, CredentialManager.PROVIDER_FILTER_USER_PROVIDERS_ONLY));
+                            userId,
+                            CredentialManager.PROVIDER_FILTER_USER_PROVIDERS_INCLUDING_HIDDEN));
         }
 
         return CombinedProviderInfo.buildMergedList(
@@ -226,6 +225,12 @@ public class DefaultCombinedPreferenceController extends DefaultAppPreferenceCon
             return;
         }
 
+        // Clean the autofill provider settings
+        Settings.Secure.putStringForUser(
+                mContext.getContentResolver(),
+                DefaultCombinedPicker.AUTOFILL_SETTING, null, getUser());
+
+        // Clean the credman provider settings.
         mCredentialManager.setEnabledProviders(
                 List.of(), // empty primary provider.
                 List.of(), // empty enabled providers.
