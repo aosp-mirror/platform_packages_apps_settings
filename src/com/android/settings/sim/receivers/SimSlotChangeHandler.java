@@ -108,19 +108,18 @@ public class SimSlotChangeHandler {
         setRemovableSimSlotState(mContext, currentRemovableSlotState);
 
         if (mTelMgr.getActiveModemCount() > 1) {
-            if (!Flags.isDualSimOnboardingEnabled() && !isMultipleEnabledProfilesSupported()) {
-                Log.d(TAG, "The device is already in DSDS mode and no MEP. Do nothing.");
-                return;
-            }
             if (!isRemovableSimInserted) {
                 Log.d(TAG, "Removable Sim is not inserted in DSDS mode. Do nothing.");
                 return;
             }
-            boolean isDdsInvalidForNewUi = Flags.isDualSimOnboardingEnabled()
-                    && SubscriptionManager.getDefaultDataSubscriptionId()
-                            == SubscriptionManager.INVALID_SUBSCRIPTION_ID;
-            if (isDdsInvalidForNewUi) {
-                handleRemovableSimInsertWhenDsdsAndNoDds();
+
+            if (Flags.isDualSimOnboardingEnabled()) {
+                // ForNewUi, when the user inserts the psim, showing the sim onboarding for the user
+                // to setup the sim switching or the default data subscription.
+                handleRemovableSimInsertWhenDsds();
+            } else if (!isMultipleEnabledProfilesSupported()) {
+                Log.d(TAG, "The device is already in DSDS mode and no MEP. Do nothing.");
+                return;
             } else if (isMultipleEnabledProfilesSupported()) {
                 handleRemovableSimInsertUnderDsdsMep(removableSlotInfo);
                 return;
@@ -259,13 +258,13 @@ public class SimSlotChangeHandler {
         startChooseSimActivity(false);
     }
 
-    private void handleRemovableSimInsertWhenDsdsAndNoDds() {
+    private void handleRemovableSimInsertWhenDsds() {
         List<SubscriptionInfo> subscriptionInfos = getAvailableRemovableSubscription();
         if (subscriptionInfos.isEmpty()) {
             Log.e(TAG, "Unable to find the removable subscriptionInfo. Do nothing.");
             return;
         }
-        Log.d(TAG, "isDdsInvalidForNewUi and getAvailableRemovableSubscription:"
+        Log.d(TAG, "ForNewUi and getAvailableRemovableSubscription:"
                 + subscriptionInfos);
         startSimConfirmDialogActivity(subscriptionInfos.get(0).getSubscriptionId());
     }
