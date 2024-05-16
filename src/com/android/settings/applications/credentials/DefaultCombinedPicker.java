@@ -275,15 +275,13 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
                             CredentialManager.PROVIDER_FILTER_USER_PROVIDERS_INCLUDING_HIDDEN));
         }
 
-        final String selectedAutofillProvider = getSelectedAutofillProvider(context, userId);
+        final String selectedAutofillProvider =
+                CredentialManagerPreferenceController
+                    .getSelectedAutofillProvider(context, userId, TAG);
         return CombinedProviderInfo.buildMergedList(
                 autofillProviders, credManProviders, selectedAutofillProvider);
     }
 
-    public static String getSelectedAutofillProvider(Context context, int userId) {
-        return Settings.Secure.getStringForUser(
-                context.getContentResolver(), AUTOFILL_SETTING, userId);
-    }
 
     protected List<DefaultAppInfo> getCandidates() {
         final Context context = getContext();
