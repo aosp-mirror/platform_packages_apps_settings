@@ -25,6 +25,10 @@ import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.notification.zen.ZenModeSettings;
 import com.android.settingslib.RestrictedPreference;
 
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+
 /**
  * Preference representing a single mode item on the modes aggregator page. Clicking on this
  * preference leads to an individual mode's configuration page.
@@ -36,10 +40,8 @@ public class ZenModeListPreference extends RestrictedPreference {
     ZenModeListPreference(Context context, ZenMode zenMode) {
         super(context);
         mContext = context;
-        mZenMode = zenMode;
-        setTitle(mZenMode.getRule().getName());
-        setSummary((mZenMode.isActive() ? "ACTIVE" : "inactive") + ": "
-                + mZenMode.getRule().getTriggerDescription());
+        setZenMode(zenMode);
+        setKey(zenMode.getId());
     }
 
     @Override
@@ -60,6 +62,16 @@ public class ZenModeListPreference extends RestrictedPreference {
                     .setSourceMetricsCategory(SettingsEnums.NOTIFICATION_ZEN_MODE_AUTOMATION)
                     .launch();
         }
+    }
 
+    public void setZenMode(ZenMode zenMode) {
+        mZenMode = zenMode;
+        setTitle(mZenMode.getRule().getName());
+        setSummary(mZenMode.getRule().getTriggerDescription());
+        try {
+            setIcon(mZenMode.getIcon(mContext).get(200, TimeUnit.MILLISECONDS));
+        } catch (Exception e) {
+            // no icon
+        }
     }
 }
