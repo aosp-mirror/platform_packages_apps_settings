@@ -20,8 +20,8 @@ import android.Manifest
 import android.app.AppOpsManager
 import android.app.settings.SettingsEnums
 import android.content.Context
-import com.android.settings.R
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
+import com.android.settingslib.spaprivileged.model.app.AppOps
 import com.android.settingslib.spaprivileged.template.app.AppOpPermissionListModel
 import com.android.settingslib.spaprivileged.template.app.AppOpPermissionRecord
 import com.android.settingslib.spaprivileged.template.app.TogglePermissionAppListProvider
@@ -35,9 +35,11 @@ class TurnScreenOnAppsListModel(context: Context) : AppOpPermissionListModel(con
     override val pageTitleResId = com.android.settingslib.R.string.turn_screen_on_title
     override val switchTitleResId = com.android.settingslib.R.string.allow_turn_screen_on
     override val footerResId = com.android.settingslib.R.string.allow_turn_screen_on_description
-    override val appOp = AppOpsManager.OP_TURN_SCREEN_ON
+    override val appOps = AppOps(
+        op = AppOpsManager.OP_TURN_SCREEN_ON,
+        setModeByUid = true,
+    )
     override val permission = Manifest.permission.TURN_SCREEN_ON
-    override val setModeByUid = true
 
     override fun setAllowed(record: AppOpPermissionRecord, newAllowed: Boolean) {
         super.setAllowed(record, newAllowed)

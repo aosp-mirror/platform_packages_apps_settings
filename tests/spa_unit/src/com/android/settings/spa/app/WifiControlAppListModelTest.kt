@@ -269,7 +269,7 @@ class WifiControlAppListModelTest {
 private class FakeAppOpsController(private val fakeMode: Int) : IAppOpsController {
     var setAllowedCalledWith: Boolean? = null
 
-    override val mode = flowOf(fakeMode)
+    override val modeFlow = flowOf(fakeMode)
 
     override fun setAllowed(allowed: Boolean) {
         setAllowedCalledWith = allowed

@@ -29,6 +29,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.media.flags.Flags
 import com.android.settings.R
 import com.android.settings.testutils.FakeFeatureFactory
+import com.android.settingslib.spaprivileged.model.app.AppOps
 import com.android.settingslib.spaprivileged.model.app.IAppOpsController
 import com.android.settingslib.spaprivileged.template.app.AppOpPermissionRecord
 import com.google.common.truth.Truth.assertThat
@@ -74,9 +75,13 @@ class MediaRoutingControlTest {
         assertThat(listModel.pageTitleResId).isEqualTo(R.string.media_routing_control_title)
         assertThat(listModel.switchTitleResId).isEqualTo(R.string.allow_media_routing_control)
         assertThat(listModel.footerResId).isEqualTo(R.string.allow_media_routing_description)
-        assertThat(listModel.appOp).isEqualTo(AppOpsManager.OP_MEDIA_ROUTING_CONTROL)
+        assertThat(listModel.appOps).isEqualTo(
+            AppOps(
+                op = AppOpsManager.OP_MEDIA_ROUTING_CONTROL,
+                setModeByUid = true,
+            )
+        )
         assertThat(listModel.permission).isEqualTo(Manifest.permission.MEDIA_ROUTING_CONTROL)
-        assertThat(listModel.setModeByUid).isTrue()
     }
 
     @Test
@@ -223,13 +228,13 @@ class MediaRoutingControlTest {
 
     private class FakeAppOpsController(fakeMode: Int) : IAppOpsController {
 
-        override val mode = MutableStateFlow(fakeMode)
+        override val modeFlow = MutableStateFlow(fakeMode)
 
         override fun setAllowed(allowed: Boolean) {
-            mode.value = if (allowed) AppOpsManager.MODE_ALLOWED else AppOpsManager.MODE_ERRORED
+            modeFlow.value = if (allowed) AppOpsManager.MODE_ALLOWED else AppOpsManager.MODE_ERRORED
         }
 
-        override fun getMode(): Int = mode.value
+        override fun getMode(): Int = modeFlow.value
     }
 
     companion object {
