@@ -60,6 +60,7 @@ public class SpinnerPreference extends Preference {
         mSpinner = (Spinner) view.findViewById(R.id.spinner);
         mSpinner.setAdapter(new SpinnerAdapter(getContext(), mItems));
         mSpinner.setSelection(mSavedSpinnerPosition);
+        mSpinner.setLongClickable(false);
         if (mOnItemSelectedListener != null) {
             mSpinner.setOnItemSelectedListener(mOnItemSelectedListener);
         }
