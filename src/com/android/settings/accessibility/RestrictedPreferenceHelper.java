@@ -16,6 +16,7 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.settings.accessibility.AccessibilitySettings.VOICE_ACCESS_SERVICE;
 import static com.android.settingslib.widget.TwoTargetPreference.ICON_SIZE_MEDIUM;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
@@ -37,6 +38,7 @@ import androidx.core.content.ContextCompat;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.development.Enable16kUtils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
@@ -89,6 +91,11 @@ public class RestrictedPreferenceHelper {
             final AccessibilityServiceInfo info = installedServices.get(i);
             final ResolveInfo resolveInfo = info.getResolveInfo();
             final String packageName = resolveInfo.serviceInfo.packageName;
+            // TODO(b/335443194) Voice access is not available in 16kB mode.
+            if (packageName.contains(VOICE_ACCESS_SERVICE)
+                    && Enable16kUtils.isPageAgnosticModeOn(mContext)) {
+                continue;
+            }
             final ComponentName componentName = new ComponentName(packageName,
                     resolveInfo.serviceInfo.name);
 

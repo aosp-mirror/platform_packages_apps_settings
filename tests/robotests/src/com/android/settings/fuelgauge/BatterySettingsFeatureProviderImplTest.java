@@ -19,6 +19,7 @@ package com.android.settings.fuelgauge;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
+import android.os.BatteryManager;
 
 import androidx.test.core.app.ApplicationProvider;
 
@@ -87,12 +88,15 @@ public class BatterySettingsFeatureProviderImplTest {
 
     @Test
     public void getChargingOptimizationRemainingLabel_default_returnNull() {
-        assertThat(mImpl.getChargingOptimizationRemainingLabel(mContext, 1000L, 1000L)).isNull();
+        assertThat(
+                        mImpl.getChargingOptimizationRemainingLabel(
+                                mContext, 75, BatteryManager.BATTERY_PLUGGED_AC, 1000L, 1000L))
+                .isNull();
     }
 
     @Test
     public void getChargingOptimizationChargeLabel_default_returnNull() {
-        assertThat(mImpl.getChargingOptimizationChargeLabel(mContext, "70%", 1000L, 1000L))
+        assertThat(mImpl.getChargingOptimizationChargeLabel(mContext, 70, "70%", 1000L, 1000L))
                 .isNull();
     }
 }

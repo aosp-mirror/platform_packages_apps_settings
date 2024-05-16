@@ -60,13 +60,18 @@ public interface BatterySettingsFeatureProvider {
     /** Return a charging remaining time label for charging optimization mode. */
     @Nullable
     CharSequence getChargingOptimizationRemainingLabel(
-            @NonNull Context context, long chargeRemainingTimeMs, long currentTimeMs);
+            @NonNull Context context,
+            int batteryLevel,
+            int pluggedStatus,
+            long chargeRemainingTimeMs,
+            long currentTimeMs);
 
     /** Return a charge label for charging optimization mode. */
     @Nullable
     CharSequence getChargingOptimizationChargeLabel(
             @NonNull Context context,
-            @NonNull String batteryPercentageString,
+            int batteryLevel,
+            String batteryPercentageString,
             long chargeRemainingTimeMs,
             long currentTimeMs);
 }

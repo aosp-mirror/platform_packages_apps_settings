@@ -724,15 +724,15 @@ public class BatteryInfoTest {
         Intent batteryIntent =
                 createIntentForGetBatteryInfoTest(
                         ChargingType.WIRED, ChargingSpeed.REGULAR, /* batteryLevel= */ 65);
-        var expectedRemainingLabel = "Done charging by";
+        var expectedRemainingLabel = "Expected remaining label";
         var expectedChargeLabel = "65% - " + expectedRemainingLabel;
         when(mFeatureFactory.batterySettingsFeatureProvider.isChargingOptimizationMode(mContext))
                 .thenReturn(true);
         when(mFeatureFactory.batterySettingsFeatureProvider.getChargingOptimizationRemainingLabel(
-                        eq(mContext), anyLong(), anyLong()))
+                        eq(mContext), anyInt(), anyInt(), anyLong(), anyLong()))
                 .thenReturn(expectedRemainingLabel);
         when(mFeatureFactory.batterySettingsFeatureProvider.getChargingOptimizationChargeLabel(
-                        eq(mContext), anyString(), anyLong(), anyLong()))
+                        eq(mContext), anyInt(), anyString(), anyLong(), anyLong()))
                 .thenReturn(expectedChargeLabel);
         var expectedStatusLabel = "Charging";
 

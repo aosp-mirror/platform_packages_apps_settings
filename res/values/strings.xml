@@ -1257,8 +1257,8 @@
     <string name="private_space_auto_lock_page_summary">You can lock your private space automatically if you haven\’t used your device for a period of time</string>
     <!-- Configure auto lock: Value for auto lock configuration to lock private space every time device locks. [CHAR LIMIT=40] -->
     <string name="private_space_auto_lock_every_time">Every time device locks</string>
-    <!-- Configure auto lock: Value for auto lock configuration to lock private space after 5 minutes of inactivity. [CHAR LIMIT=40] -->
-    <string name="private_space_auto_lock_after_inactivity">After 5 minutes of inactivity</string>
+    <!-- Configure auto lock: Value for auto lock configuration to lock private space after 5 minutes of inactivity post screen timeout. [CHAR LIMIT=40] -->
+    <string name="private_space_auto_lock_after_inactivity">5 minutes after screen timeout</string>
     <!-- Configure auto lock: Value for auto lock configuration to lock private space only after device restarts. [CHAR LIMIT=40] -->
     <string name="private_space_auto_lock_after_device_restart">Only after device restarts</string>
     <!-- Title for the settings page for hiding private space. [CHAR LIMIT=45] -->
@@ -2732,6 +2732,10 @@
     <!-- Display settings screen, Color mode option for "Adaptive color"  [CHAR LIMIT=45] -->
     <string name="color_mode_option_automatic">Adaptive</string>
 
+    <!-- Key for the brightness level preference -->
+    <string name="preference_key_brightness_level" translatable="false">brightness</string>
+    <!-- Key for the auto brightness preference -->
+    <string name="preference_key_auto_brightness" translatable="false">auto_brightness_entry</string>
     <!-- Sound & display settings screen, setting option name to change brightness level -->
     <string name="brightness">Brightness level</string>
     <!-- Sound & display settings screen, setting option name to enable adaptive brightness [CHAR LIMIT=30] -->
@@ -7889,6 +7893,9 @@
     <!-- Sound: Title for the Do not Disturb option and associated settings page. [CHAR LIMIT=50]-->
     <string name="zen_mode_settings_title">Do Not Disturb</string>
 
+    <!-- Sound: Title for the Modes option and associated settings page. [CHAR LIMIT=50]-->
+    <string name="zen_modes_list_title">Priority Modes</string>
+
     <!-- Sound: Summary for the Do not Disturb option and associated settings page. [CHAR LIMIT=240]-->
     <string name="zen_mode_settings_summary">Only get notified by important people and apps</string>
 
@@ -12947,17 +12954,17 @@
     <string name="bluetooth_details_permissions_sync_summary">Give your watch the same app permissions that you’ve allowed on this phone</string>
 
     <!-- The title of the bluetooth audio device type selection [CHAR LIMIT=none] -->
-    <string name="bluetooth_details_audio_device_types_title">Audio Device Type</string>
-    <!-- The audio device type corresponding to unknown device type [CHAR LIMIT=none] -->
-    <string name="bluetooth_details_audio_device_type_unknown">Unknown</string>
+    <string name="bluetooth_details_audio_device_types_title">Audio device type</string>
+    <!-- The audio device type corresponding to a not set device type [CHAR LIMIT=none] -->
+    <string name="bluetooth_details_audio_device_type_unknown">Not set</string>
     <!-- The audio device type corresponding to speakers [CHAR LIMIT=none] -->
     <string name="bluetooth_details_audio_device_type_speaker">Speaker</string>
     <!-- The audio device type corresponding to headphones [CHAR LIMIT=none] -->
     <string name="bluetooth_details_audio_device_type_headphones">Headphones</string>
-    <!-- The audio device type corresponding to hearing aid [CHAR LIMIT=none] -->
-    <string name="bluetooth_details_audio_device_type_hearing_aid">Hearing Aid</string>
+    <!-- The audio device type corresponding to hearing device [CHAR LIMIT=none] -->
+    <string name="bluetooth_details_audio_device_type_hearing_aid">Hearing device</string>
     <!-- The audio device type corresponding to car kit [CHAR LIMIT=none] -->
-    <string name="bluetooth_details_audio_device_type_carkit">Car Kit</string>
+    <string name="bluetooth_details_audio_device_type_carkit">Car</string>
     <!-- The audio device type corresponding to other device type [CHAR LIMIT=none] -->
     <string name="bluetooth_details_audio_device_type_other">Other</string>
 
@@ -13258,4 +13265,9 @@
 
     <!--Title for Sync Across Devices category-->
     <string name="sync_across_devices_title">Sync across devices</string>
+
+    <!-- Device Diagnostics -->
+
+    <!-- Title for System dashboard fragment -->
+    <string name="device_diagnostics_title">Device diagnostics</string>
 </resources>

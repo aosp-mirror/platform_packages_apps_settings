@@ -18,8 +18,6 @@ package com.android.settings.localepicker;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.spy;
-
 import android.app.GrammaticalInflectionManager;
 import android.content.Context;
 import android.content.res.Configuration;
@@ -34,7 +32,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import com.android.settings.widget.TickButtonPreference;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
@@ -62,7 +59,7 @@ public class TermsOfAddressNeutralControllerTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        mContext = spy(ApplicationProvider.getApplicationContext());
+        mContext = ApplicationProvider.getApplicationContext();
 
         if (Looper.myLooper() == null) {
             Looper.prepare();
@@ -93,7 +90,6 @@ public class TermsOfAddressNeutralControllerTest {
     }
 
     @Test
-    @Ignore("b/339543490")
     public void displayPreference_setGrammaticalGenderIsNotSpecified_NeutralIsSelected() {
         TickButtonPreference selectedPreference =
                 (TickButtonPreference) mPreferenceScreen.getPreference(4);
