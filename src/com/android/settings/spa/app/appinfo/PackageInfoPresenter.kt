@@ -160,7 +160,8 @@ class PackageInfoPresenter(
                 context.activityManager.noteAppRestrictionEnabled(
                     packageName, uid,
                     ActivityManager.RESTRICTION_LEVEL_FORCE_STOPPED, true,
-                    ActivityManager.RESTRICTION_REASON_USER, "settings", 0)
+                    ActivityManager.RESTRICTION_REASON_USER, "settings",
+                    ActivityManager.RESTRICTION_SOURCE_USER, 0)
             }
             context.activityManager.forceStopPackageAsUser(packageName, userId)
         }
