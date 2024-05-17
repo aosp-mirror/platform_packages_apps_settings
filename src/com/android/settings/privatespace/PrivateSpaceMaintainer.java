@@ -448,7 +448,7 @@ public class PrivateSpaceMaintainer {
     private void removeSettingsAllTasks() {
         List<ActivityManager.AppTask> appTasks = mActivityManager.getAppTasks();
         for (var appTask : appTasks) {
-            if (!appTask.getTaskInfo().isVisible()) {
+            if (!(appTask.getTaskInfo().isVisible() || appTask.getTaskInfo().isFocused)) {
                 appTask.finishAndRemoveTask();
             }
         }
