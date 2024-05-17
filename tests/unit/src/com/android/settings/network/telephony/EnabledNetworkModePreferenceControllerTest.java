@@ -48,6 +48,7 @@ import android.telephony.TelephonyManager;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.testing.TestLifecycleOwner;
 import androidx.preference.ListPreference;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
@@ -60,7 +61,6 @@ import com.android.settings.network.telephony.TelephonyConstants.TelephonyManage
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -113,6 +113,7 @@ public class EnabledNetworkModePreferenceControllerTest {
         doReturn(mPersistableBundle).when(mCarrierConfigCache).getConfig();
         doReturn(mPersistableBundle).when(mCarrierConfigCache).getConfigForSubId(SUB_ID);
         mPersistableBundle.putBoolean(CarrierConfigManager.KEY_CARRIER_CONFIG_APPLIED_BOOL, true);
+        mPersistableBundle.putBoolean(CarrierConfigManager.KEY_PREFER_3G_VISIBILITY_BOOL, true);
         mPreference = new ListPreference(mContext);
         mController = new EnabledNetworkModePreferenceController(mContext, KEY);
         mockAllowedNetworkTypes(ALLOWED_ALL_NETWORK_TYPE);
@@ -347,7 +348,6 @@ public class EnabledNetworkModePreferenceControllerTest {
 
     @UiThreadTest
     @Test
-    @Ignore("b/337418033")
     public void updateState_updateByNetworkMode() {
         mockEnabledNetworkMode(TelephonyManagerConstants.NETWORK_MODE_TDSCDMA_GSM_WCDMA);
 
@@ -379,7 +379,6 @@ public class EnabledNetworkModePreferenceControllerTest {
 
     @UiThreadTest
     @Test
-    @Ignore("b/337418033")
     public void onPreferenceChange_updateSuccess() {
         mockEnabledNetworkMode(TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA);
         doReturn(true).when(mTelephonyManager).setPreferredNetworkTypeBitmask(
@@ -387,6 +386,7 @@ public class EnabledNetworkModePreferenceControllerTest {
                         TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA));
 
         mController.updateState(mPreference);
+        mController.onViewCreated(new TestLifecycleOwner());
         mController.onPreferenceChange(mPreference,
                 String.valueOf(TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA));
 
@@ -396,13 +396,13 @@ public class EnabledNetworkModePreferenceControllerTest {
 
     @UiThreadTest
     @Test
-    @Ignore("b/337418033")
     public void onPreferenceChange_updateFail() {
         mockEnabledNetworkMode(TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA);
         doReturn(false).when(mTelephonyManager).setPreferredNetworkTypeBitmask(
                 getRafFromNetworkType(TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA));
 
         mController.updateState(mPreference);
+        mController.onViewCreated(new TestLifecycleOwner());
         mController.onPreferenceChange(mPreference,
                 String.valueOf(TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA));
 
@@ -412,7 +412,6 @@ public class EnabledNetworkModePreferenceControllerTest {
 
     @UiThreadTest
     @Test
-    @Ignore("b/337418033")
     public void preferredNetworkModeNotification_preferenceUpdates() {
 
         final PreferenceManager preferenceManager = new PreferenceManager(mContext);
