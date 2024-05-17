@@ -22,7 +22,6 @@ import android.content.Context
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
-import com.android.settingslib.spaprivileged.model.app.AppOps
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -38,12 +37,8 @@ class AllFilesAccessTest {
         assertThat(listModel.pageTitleResId).isEqualTo(R.string.manage_external_storage_title)
         assertThat(listModel.switchTitleResId).isEqualTo(R.string.permit_manage_external_storage)
         assertThat(listModel.footerResId).isEqualTo(R.string.allow_manage_external_storage_description)
-        assertThat(listModel.appOps).isEqualTo(
-            AppOps(
-                op = AppOpsManager.OP_MANAGE_EXTERNAL_STORAGE,
-                setModeByUid = true,
-            )
-        )
+        assertThat(listModel.appOp).isEqualTo(AppOpsManager.OP_MANAGE_EXTERNAL_STORAGE)
         assertThat(listModel.permission).isEqualTo(Manifest.permission.MANAGE_EXTERNAL_STORAGE)
+        assertThat(listModel.setModeByUid).isTrue()
     }
 }
