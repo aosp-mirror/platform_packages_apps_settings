@@ -303,9 +303,6 @@
     <!-- Name shown in the title of individual stylus preference in the connected devices page [CHAR LIMIT=60] -->
     <string name="stylus_connected_devices_title">Stylus</string>
 
-    <!--Text that appears when scanning for nearby audio streams is finished and no streams were found [CHAR LIMIT=40]-->
-    <string name="audio_streams_empty">No nearby audio streams were found.</string>
-
     <!-- Date & time settings screen title -->
     <string name="date_and_time">Date &amp; time</string>
 
@@ -7317,8 +7314,6 @@
     <string name="help_url_insecure_vpn" translatable="false"></string>
     <!-- url for learning more about IT admin policy disabling -->
     <string name="help_url_action_disabled_by_it_admin" translatable="false"></string>
-    <!-- url for learning more about bluetooth audio sharing -->
-    <string name="help_url_audio_sharing" translatable="false"></string>
 
     <!-- User account title [CHAR LIMIT=30] -->
     <string name="user_account_title">Account for content</string>
@@ -13272,4 +13267,198 @@
 
     <!-- Title for System dashboard fragment -->
     <string name="device_diagnostics_title">Device diagnostics</string>
+
+    <!-- Title for audio sharing page [CHAR LIMIT=none]-->
+    <string name="audio_sharing_title">Audio sharing</string>
+    <!-- Title for audio sharing primary switch [CHAR LIMIT=none]-->
+    <string name="audio_sharing_switch_title">Share audio</string>
+    <!-- Title for calls and alarms device on audio sharing page [CHAR LIMIT=none]-->
+    <string name="calls_and_alarms_device_title">Calls and alarms</string>
+    <!-- Description for audio sharing page [CHAR LIMIT=none]-->
+    <string name="audio_sharing_description">Let people listen to your media along with you. Listeners need their own LE Audio headphones.</string>
+    <!-- Title for audio sharing device group [CHAR LIMIT=none]-->
+    <string name="audio_sharing_device_group_title">Active media devices</string>
+    <!-- Title for call audio on audio sharing page [CHAR LIMIT=none]-->
+    <string name="audio_sharing_call_audio_title">Call audio</string>
+    <!-- Description for call audio on audio sharing page [CHAR LIMIT=none]-->
+    <string name="audio_sharing_call_audio_description">Play only on <xliff:g example="My buds" id="device_name">%1$s</xliff:g></string>
+    <!-- Title for play test sound on audio sharing page [CHAR LIMIT=none]-->
+    <string name="audio_sharing_test_sound_title">Play a test sound</string>
+    <!-- Description for play test sound on audio sharing page [CHAR LIMIT=none]-->
+    <string name="audio_sharing_test_sound_description">Everyone listening should hear it</string>
+    <!-- Title for stream settings group on audio sharing page [CHAR LIMIT=none]-->
+    <string name="audio_sharing_stream_settings_title">Audio stream settings</string>
+    <!-- Title for stream name on audio sharing page, under stream settings group [CHAR LIMIT=none]-->
+    <string name="audio_sharing_stream_name_title">Name</string>
+    <!-- Title for stream password on audio sharing page, under stream settings group [CHAR LIMIT=none]-->
+    <string name="audio_sharing_stream_password_title">Password</string>
+    <!-- Title for stream compatibility on audio sharing page, under stream settings group [CHAR LIMIT=none]-->
+    <string name="audio_sharing_stream_compatibility_title">Improve compatibility</string>
+    <!-- Description for stream compatibility on audio sharing page [CHAR LIMIT=none]-->
+    <string name="audio_sharing_stream_compatibility_description">Helps some devices, like hearing aids, connect by reducing audio quality</string>
+    <!-- Description for stream compatibility on audio sharing page when audio sharing is on [CHAR LIMIT=none]-->
+    <string name="audio_sharing_stream_compatibility_disabled_description">Turns off the audio sharing to config the compatibility</string>
+    <!-- Title for nearby audio group on audio sharing page [CHAR LIMIT=none]-->
+    <string name="audio_sharing_nearby_audio_title">Listen to nearby audio</string>
+    <!-- Description for audio sharing page footer [CHAR LIMIT=none]-->
+    <string name="audio_sharing_footer_description">Audio sharing supports Auracast™</string>
+    <!-- Title for stream name dialog [CHAR LIMIT=none]-->
+    <string name="audio_sharing_stream_name_dialog_title">Audio stream name</string>
+    <!-- Title for stream password dialog [CHAR LIMIT=none]-->
+    <string name="audio_sharing_stream_password_dialog_title">Audio stream password</string>
+    <!-- Title for media device group during audio sharing [CHAR LIMIT=none]-->
+    <string name="audio_sharing_media_device_group_title">Other media devices</string>
+    <!-- Summary for audio sharing on [CHAR LIMIT=none]-->
+    <string name="audio_sharing_summary_on">On</string>
+    <!-- Summary for audio sharing off [CHAR LIMIT=none]-->
+    <string name="audio_sharing_summary_off">Off</string>
+    <!-- Title for audio sharing share dialog [CHAR LIMIT=none]-->
+    <string name="audio_sharing_share_dialog_title">Share your audio</string>
+    <!-- Subtitle for audio sharing share dialog [CHAR LIMIT=none]-->
+    <string name="audio_sharing_share_dialog_subtitle"><xliff:g example="My buds1" id="device_name1">%1$s</xliff:g> and <xliff:g example="My buds2" id="device_name2">%2$s</xliff:g></string>
+    <!-- Text for audio sharing share button [CHAR LIMIT=none]-->
+    <string name="audio_sharing_share_button_label">Share audio</string>
+    <!-- Text for audio sharing no thanks button [CHAR LIMIT=none]-->
+    <string name="audio_sharing_no_thanks_button_label">No thanks</string>
+    <!-- Title for audio sharing share dialog with one device [CHAR LIMIT=none]-->
+    <string name="audio_sharing_share_with_dialog_title">Share audio with <xliff:g example="My buds" id="device_name">%1$s</xliff:g>?</string>
+    <!-- Title for audio sharing share dialog with more devices [CHAR LIMIT=none]-->
+    <string name="audio_sharing_share_with_more_dialog_title">Share audio with another device</string>
+    <!-- Text for audio sharing share with button [CHAR LIMIT=none]-->
+    <string name="audio_sharing_share_with_button_label">Share with <xliff:g example="My buds" id="device_name">%1$s</xliff:g></string>
+    <!-- Text for audio sharing close button [CHAR LIMIT=none]-->
+    <string name="audio_sharing_close_button_label">Close</string>
+    <!-- Content for audio sharing share dialog with no device, ask users to connect device  [CHAR LIMIT=none]-->
+    <string name="audio_sharing_dialog_connect_device_content">Connect another pair of compatible headphones, or share your stream\'s name and password with the other person</string>
+    <!-- Content for audio sharing share dialog with no device, ask users to pair device  [CHAR LIMIT=none]-->
+    <string name="audio_sharing_dialog_pair_device_content">Pair another set of compatible headphones, or share your audio stream QR code with the other person</string>
+    <!-- Text for sharing audio sharing state [CHAR LIMIT=none]-->
+    <string name="audio_sharing_sharing_label">Sharing audio</string>
+    <!-- Text for audio sharing pair button [CHAR LIMIT=none]-->
+    <string name="audio_sharing_pair_button_label">Pair new device</string>
+    <!-- Text for audio sharing qrcode button [CHAR LIMIT=none]-->
+    <string name="audio_sharing_qrcode_button_label">Show QR code</string>
+    <!-- Title for audio sharing notification [CHAR LIMIT=none]-->
+    <string name="audio_sharing_notification_title">You\'re sharing audio</string>
+    <!-- Content for audio sharing notification [CHAR LIMIT=none]-->
+    <string name="audio_sharing_notification_content">People listening can hear your media. They won\'t hear calls.</string>
+    <!-- Text for audio sharing stop button [CHAR LIMIT=none]-->
+    <string name="audio_sharing_stop_button_label">Stop sharing</string>
+    <!-- Text for audio sharing settings button [CHAR LIMIT=none]-->
+    <string name="audio_sharing_settings_button_label">Settings</string>
+    <!-- Title for audio sharing disconnect dialog [CHAR LIMIT=none]-->
+    <string name="audio_sharing_disconnect_dialog_title">Choose a device to disconnect</string>
+    <!-- Content for audio sharing disconnect dialog [CHAR LIMIT=none]-->
+    <string name="audio_sharing_dialog_disconnect_content">Only 2 devices can share audio at a time</string>
+    <!-- Text for audio sharing disconnect device button [CHAR LIMIT=none]-->
+    <string name="audio_sharing_disconnect_device_button_label">Disconnect <xliff:g example="My buds" id="device_name">%1$s</xliff:g></string>
+    <!-- Title for audio sharing stop dialog [CHAR LIMIT=none]-->
+    <string name="audio_sharing_stop_dialog_title">Connect <xliff:g example="My buds" id="device_name">%1$s</xliff:g> ?</string>
+    <!-- Content for audio sharing stop dialog [CHAR LIMIT=none]-->
+    <string name="audio_sharing_stop_dialog_content">You\'ll stop sharing audio with <xliff:g example="My buds" id="device_name">%1$s</xliff:g></string>
+    <!-- Content for audio sharing stop dialog with two devices [CHAR LIMIT=none]-->
+    <string name="audio_sharing_stop_dialog_with_two_content">You\'ll stop sharing audio with <xliff:g example="My buds1" id="device_name1">%1$s</xliff:g> and <xliff:g example="My buds2" id="device_name2">%2$s</xliff:g></string>
+    <!-- Content for audio sharing stop dialog with more devices  [CHAR LIMIT=none]-->
+    <string name="audio_sharing_stop_dialog_with_more_content">You\'ll stop sharing audio with the connected headphones</string>
+    <!-- Text for audio sharing connect button [CHAR LIMIT=none]-->
+    <string name="audio_sharing_connect_button_label">Connect</string>
+    <!-- Text for sharing audio stop state [CHAR LIMIT=none]-->
+    <string name="audio_sharing_sharing_stopped_label">Audio sharing stopped</string>
+    <!-- Title for audio sharing confirm dialog [CHAR LIMIT=none]-->
+    <string name="audio_sharing_confirm_dialog_title">Connect a compatible device</string>
+    <!-- Content for audio sharing confirm dialog [CHAR LIMIT=none]-->
+    <string name="audio_sharing_comfirm_dialog_content">To start sharing audio, first connect LE Audio headphones to your phone</string>
+
+    <!-- Title for audio streams preference category [CHAR LIMIT=none]-->
+    <string name="audio_streams_category_title">Connect to a LE audio stream</string>
+    <!-- Title for audio streams preference [CHAR LIMIT=none]-->
+    <string name="audio_streams_pref_title">Nearby audio streams</string>
+    <!-- Title for audio streams page [CHAR LIMIT=none]-->
+    <string name="audio_streams_title">Audio streams</string>
+    <!-- Summary for QR code scanning in audio streams page [CHAR LIMIT=none]-->
+    <string name="audio_streams_qr_code_summary">Connect to an audio stream using QR code</string>
+    <!--Text that appears when scanning for nearby audio streams is finished and no streams were found [CHAR LIMIT=40]-->
+    <string name="audio_streams_empty">No nearby audio streams were found.</string>
+    <!-- Disconnect from an audio stream [CHAR LIMIT=none]-->
+    <string name="audio_streams_disconnect">Disconnect</string>
+    <!-- Connect an audio stream [CHAR LIMIT=none]-->
+    <string name="audio_streams_connect">Connect</string>
+    <!-- Hint for QR code process failure [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_qr_code_is_not_valid_format">QR code isn\u0027t a valid format</string>
+    <!-- Le audio QR code scanner sub-title [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_qr_code_scanner">To start listening, center the QR code below</string>
+    <!-- The preference summary when add source response is bad code [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_add_source_bad_code_state_summary">Check password and try again</string>
+    <!-- The preference summary when add source response results in general failure [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_add_source_failed_state_summary">Can\u0027t connect. Try again.</string>
+    <!-- The preference summary when waiting for add source response [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_add_source_wait_for_response_summary">Connecting\u2026</string>
+    <!-- The preference summary when waiting for sync [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_wait_for_sync_state_summary">Scanning\u2026</string>
+    <!-- Le audio streams audio lost dialog title [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_dialog_stream_is_not_available">Audio stream isn\u0027t available</string>
+    <!-- Le audio streams audio lost dialog subtitle [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_is_not_playing">This audio stream isn\u0027t playing anything right now</string>
+    <!-- Le audio streams dialog close [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_dialog_close">Close</string>
+    <!-- Le audio streams dialog listen [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_dialog_listen">Listen</string>
+    <!-- Le audio streams dialog retry button [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_dialog_retry">Try again</string>
+    <!-- Le audio streams confirmation dialog title [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_dialog_listen_to_audio_stream">Listen to audio stream</string>
+    <!-- Le audio streams confirmation dialog subtitle [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_dialog_control_volume">The audio stream will play on <xliff:g example="LE headset" id="device_name">%1$s</xliff:g>. Use this device to control the volume.</string>
+    <!-- Le audio streams failure dialog title [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_dialog_cannot_listen">Can\u0027t listen to audio stream</string>
+    <!-- Le audio streams confirm dialog default device [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_dialog_default_device">connected compatible headphones</string>
+    <!-- Le audio streams activity title [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_activity_title">Broadcasts</string>
+    <!-- Le audio streams no password summary [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_no_password_summary">No password</string>
+    <!-- Le audio streams failure dialog subtitle [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_dialog_learn_more">Learn more</string>
+    <!-- Le audio streams failure dialog subtitle [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_dialog_cannot_play">Can\u0027t play this audio stream on <xliff:g example="LE headset" id="device_name">%1$s</xliff:g>.</string>
+    <!-- The preference summary when add source succeed [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_listening_now">Listening now</string>
+    <!-- Le audio streams service notification leave broadcast text [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_media_service_notification_leave_broadcast_text">Stop listening</string>
+    <!-- Le audio streams no le device dialog title [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_dialog_no_le_device_title">Connect compatible headphones</string>
+    <!-- Le audio streams no le device dialog button [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_dialog_no_le_device_button">Connect a device</string>
+    <!-- Le audio streams detail page title [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_detail_page_title">Audio stream details</string>
+    <!-- Le audio streams qr code page title [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_qr_code_page_title">Audio stream QR code</string>
+    <!-- Le audio streams qr code page password text [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_qr_code_page_password">Password: <xliff:g example="123" id="password">%1$s</xliff:g></string>
+    <!-- Le audio streams qr code page description [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_qr_code_page_description">To listen to <xliff:g example="Local Music" id="stream_name">%1$s</xliff:g>, other people can connect compatible headphones to their Android device. They can then scan this QR code.</string>
+    <!-- Le audio streams main page title [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_main_page_title">Find an audio stream</string>
+    <!-- Le audio streams main page subtitle [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_main_page_subtitle">Listen to a device that\u0027s sharing audio or to a nearby Auracast broadcast</string>
+    <!-- Le audio streams main page device preference title [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_main_page_device_title">Your audio device</string>
+    <!-- Le audio streams main page device preference no device summary [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_main_page_no_device_summary">Connect compatible headphones</string>
+    <!-- Le audio streams main page scanning section title [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_main_page_scan_section_title">Audio streams nearby</string>
+    <!-- Le audio streams main page scan qr code preference title [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_main_page_scan_qr_code_title">Scan QR code</string>
+    <!-- Le audio streams main page scan qr code preference summary [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_main_page_scan_qr_code_summary">Start listening by scanning a stream\u0027s QR code</string>
+    <!-- Le audio streams main page password dialog join button [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_main_page_password_dialog_join_button">Listen to stream</string>
+    <!-- Le audio streams main page qr code scanner summary [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_main_page_qr_code_scanner_summary">Scan an audio stream QR code to listen with <xliff:g example="LE headset" id="device_name">%1$s</xliff:g></string>
+    <!-- Le audio streams password dialog  [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_main_page_password_dialog_cannot_edit">Can\u0027t edit password while sharing. To change the password, first turn off audio sharing.</string>
+
+
+    <!-- url for learning more about bluetooth audio sharing -->
+    <string name="help_url_audio_sharing" translatable="false"></string>
 </resources>
