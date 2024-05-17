@@ -479,7 +479,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         }
 
         if (Flags.homepageRevamp()) {
-            mSuggestionView = findViewById(R.id.unified_suggestion_content);
+            mSuggestionView = findViewById(R.id.suggestion_content);
         } else {
             mSuggestionView = findViewById(R.id.suggestion_content);
             mTwoPaneSuggestionView = findViewById(R.id.two_pane_suggestion_content);
@@ -493,7 +493,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
                 HOMEPAGE_LOADING_TIMEOUT_MS);
         if (Flags.homepageRevamp()) {
             showFragment(new SuggestionFragCreator(fragmentClass, true),
-                    R.id.unified_suggestion_content);
+                    R.id.suggestion_content);
         } else {
             showFragment(new SuggestionFragCreator(fragmentClass, /* isTwoPaneLayout= */ false),
                     R.id.suggestion_content);

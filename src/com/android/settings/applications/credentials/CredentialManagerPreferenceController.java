@@ -521,16 +521,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         // Get the selected autofill provider. If it is the placeholder then replace it with an
         // empty string.
         String selectedAutofillProvider =
-                DefaultCombinedPicker.getSelectedAutofillProvider(mContext, getUser());
-        String credentialAutofillService = "";
-        if (android.service.autofill.Flags.autofillCredmanDevIntegration()) {
-            credentialAutofillService = getCredentialAutofillService(mContext, TAG);
-        }
-        if (TextUtils.equals(selectedAutofillProvider, credentialAutofillService)
-                || TextUtils.equals(
-                        selectedAutofillProvider, AUTOFILL_CREDMAN_ONLY_PROVIDER_PLACEHOLDER)) {
-            selectedAutofillProvider = "";
-        }
+                getSelectedAutofillProvider(mContext, getUser(), TAG);
 
         // Get the list of combined providers.
         List<CombinedProviderInfo> providers =
@@ -693,6 +684,31 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
             Log.e(tag, "Failed to find credential autofill service.", e);
         }
         return "";
+    }
+
+    /** Gets the selected autofill provider name. This will filter out place holder names. **/
+    public static @Nullable String getSelectedAutofillProvider(
+            Context context, int userId, String tag) {
+        String providerName = Settings.Secure.getStringForUser(
+                context.getContentResolver(), Settings.Secure.AUTOFILL_SERVICE, userId);
+
+        if (TextUtils.isEmpty(providerName)) {
+            return providerName;
+        }
+
+        if (providerName.equals(AUTOFILL_CREDMAN_ONLY_PROVIDER_PLACEHOLDER)) {
+            return "";
+        }
+
+        String credentialAutofillService = "";
+        if (android.service.autofill.Flags.autofillCredmanDevIntegration()) {
+            credentialAutofillService = getCredentialAutofillService(context, tag);
+        }
+        if (providerName.equals(credentialAutofillService)) {
+            return "";
+        }
+
+        return providerName;
     }
 
     private CombiPreference addProviderPreference(
