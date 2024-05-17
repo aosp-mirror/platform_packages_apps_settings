@@ -21,11 +21,9 @@ import android.telephony.CellIdentityGsm
 import android.telephony.CellInfoCdma
 import android.telephony.CellInfoGsm
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.android.internal.telephony.OperatorInfo
 import com.android.settings.network.telephony.CellInfoUtil.getNetworkTitle
 import com.android.settings.network.telephony.CellInfoUtil.getOperatorNumeric
 import com.google.common.truth.Truth.assertThat
-import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -97,20 +95,6 @@ class CellInfoUtilTest {
     }
 
     @Test
-    @Ignore("b/337417936")
-    fun convertOperatorInfoToCellInfo() {
-        val operatorInfo = OperatorInfo(LONG, SHORT, "12301")
-
-        val cellInfo = CellInfoUtil.convertOperatorInfoToCellInfo(operatorInfo)
-
-        assertThat(cellInfo.cellIdentity.mccString).isEqualTo("123")
-        assertThat(cellInfo.cellIdentity.mncString).isEqualTo("01")
-        assertThat(cellInfo.cellIdentity.operatorAlphaLong).isEqualTo(LONG)
-        assertThat(cellInfo.cellIdentity.operatorAlphaShort).isEqualTo(SHORT)
-    }
-
-    @Test
-    @Ignore("b/337417222")
     fun cellInfoListToString() {
         val cellInfoList =
             listOf(
@@ -127,7 +111,7 @@ class CellInfoUtilTest {
 
         assertThat(string).isEqualTo(
             "{CellType = CellInfoCdma, isRegistered = false, " +
-                "mcc = null, mnc = null, alphaL = Long, alphaS = Short}, " +
+                "mcc = null, mnc = null, alphaL = Long, alphaS = Short}${System.lineSeparator()}" +
                 "{CellType = CellInfoGsm, isRegistered = true, " +
                 "mcc = 123, mnc = 01, alphaL = Long, alphaS = Short}"
         )
