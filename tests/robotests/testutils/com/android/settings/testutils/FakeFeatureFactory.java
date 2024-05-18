@@ -27,7 +27,6 @@ import com.android.settings.biometrics.face.FaceFeatureProvider;
 import com.android.settings.biometrics.fingerprint.FingerprintFeatureProvider;
 import com.android.settings.biometrics2.factory.BiometricsRepositoryProvider;
 import com.android.settings.bluetooth.BluetoothFeatureProvider;
-import com.android.settings.connecteddevice.audiosharing.AudioSharingFeatureProvider;
 import com.android.settings.connecteddevice.fastpair.FastPairFeatureProvider;
 import com.android.settings.connecteddevice.stylus.StylusFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProvider;
@@ -103,7 +102,6 @@ public class FakeFeatureFactory extends FeatureFactory {
     public FastPairFeatureProvider mFastPairFeatureProvider;
     public PrivateSpaceLoginFeatureProvider mPrivateSpaceLoginFeatureProvider;
     public DisplayFeatureProvider mDisplayFeatureProvider;
-    public AudioSharingFeatureProvider mAudioSharingFeatureProvider;
     public SyncAcrossDevicesFeatureProvider mSyncAcrossDevicesFeatureProvider;
 
     /**
@@ -154,7 +152,6 @@ public class FakeFeatureFactory extends FeatureFactory {
         mFastPairFeatureProvider = mock(FastPairFeatureProvider.class);
         mPrivateSpaceLoginFeatureProvider = mock(PrivateSpaceLoginFeatureProvider.class);
         mDisplayFeatureProvider = mock(DisplayFeatureProvider.class);
-        mAudioSharingFeatureProvider = mock(AudioSharingFeatureProvider.class);
         mSyncAcrossDevicesFeatureProvider = mock(SyncAcrossDevicesFeatureProvider.class);
     }
 
@@ -337,11 +334,6 @@ public class FakeFeatureFactory extends FeatureFactory {
     @Override
     public DisplayFeatureProvider getDisplayFeatureProvider() {
         return mDisplayFeatureProvider;
-    }
-
-    @Override
-    public AudioSharingFeatureProvider getAudioSharingFeatureProvider() {
-        return mAudioSharingFeatureProvider;
     }
 
     @Override

@@ -16,6 +16,7 @@
 
 package com.android.settings.network.telephony;
 
+import static android.telephony.CarrierConfigManager.KEY_SATELLITE_ATTACH_SUPPORTED_BOOL;
 import static android.telephony.CarrierConfigManager.KEY_SATELLITE_INFORMATION_REDIRECT_URL_STRING;
 
 import android.app.Activity;
@@ -43,6 +44,7 @@ import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 
+import com.android.internal.telephony.flags.Flags;
 import com.android.settings.R;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settingslib.HelpUtils;
@@ -82,12 +84,27 @@ public class SatelliteSetting extends RestrictedDashboardFragment {
     public void onCreate(@NonNull Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // In case carrier roaming satellite is not supported, do nothing.
+        if (!Flags.carrierEnabledSatelliteFlag()) {
+            Log.d(TAG, "SatelliteSettings: satellite feature is not supported, do nothing.");
+            finish();
+            return;
+        }
+
         mActivity = getActivity();
-        mTelephonymanager = mActivity.getSystemService(TelephonyManager.class);
-        mCarrierConfigManager = mActivity.getSystemService(CarrierConfigManager.class);
-        mSatelliteManager = mActivity.getSystemService(SatelliteManager.class);
         mSubId = mActivity.getIntent().getIntExtra(SUB_ID,
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+
+        mCarrierConfigManager = mActivity.getSystemService(CarrierConfigManager.class);
+        if (!isSatelliteAttachSupported(mSubId)) {
+            Log.d(TAG, "SatelliteSettings: KEY_SATELLITE_ATTACH_SUPPORTED_BOOL is false, "
+                    + "do nothing.");
+            finish();
+            return;
+        }
+
+        mTelephonymanager = mActivity.getSystemService(TelephonyManager.class);
+        mSatelliteManager = mActivity.getSystemService(SatelliteManager.class);
     }
 
     @Override
@@ -209,6 +226,16 @@ public class SatelliteSetting extends RestrictedDashboardFragment {
             }
         }
         return mConfigBundle.getString(KEY_SATELLITE_INFORMATION_REDIRECT_URL_STRING, "");
+    }
+
+    private boolean isSatelliteAttachSupported(int subId) {
+        PersistableBundle bundle = mCarrierConfigManager.getConfigForSubId(subId,
+                KEY_SATELLITE_ATTACH_SUPPORTED_BOOL);
+        if (bundle.isEmpty()) {
+            Log.d(TAG, "SatelliteSettings: getDefaultConfig");
+            bundle = CarrierConfigManager.getDefaultConfig();
+        }
+        return bundle.getBoolean(KEY_SATELLITE_ATTACH_SUPPORTED_BOOL, false);
     }
 
     private static void loge(String message) {

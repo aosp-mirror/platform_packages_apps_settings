@@ -24,26 +24,32 @@ import static org.mockito.Mockito.when;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothLeBroadcastReceiveState;
 import android.bluetooth.BluetoothProfile;
+import android.bluetooth.BluetoothStatusCodes;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.util.Pair;
 
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
-import com.android.settings.connecteddevice.audiosharing.AudioSharingFeatureProvider;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowAudioManager;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
+import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
+import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
+import com.android.settingslib.flags.Flags;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -55,6 +61,7 @@ import org.robolectric.shadow.api.Shadow;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(
@@ -66,6 +73,8 @@ import java.util.Collection;
 public class AvailableMediaBluetoothDeviceUpdaterTest {
     private static final String MAC_ADDRESS = "04:52:C7:0B:D8:3C";
 
+    @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+
     @Mock private DashboardFragment mDashboardFragment;
     @Mock private DevicePreferenceCallback mDevicePreferenceCallback;
     @Mock private CachedBluetoothDevice mCachedBluetoothDevice;
@@ -73,6 +82,9 @@ public class AvailableMediaBluetoothDeviceUpdaterTest {
     @Mock private Drawable mDrawable;
     @Mock private LocalBluetoothManager mLocalBtManager;
     @Mock private CachedBluetoothDeviceManager mCachedDeviceManager;
+    @Mock private LocalBluetoothProfileManager mProfileManager;
+    @Mock private LocalBluetoothLeBroadcastAssistant mAssistant;
+    @Mock private BluetoothLeBroadcastReceiveState mBroadcastReceiveState;
 
     private Context mContext;
     private AvailableMediaBluetoothDeviceUpdater mBluetoothDeviceUpdater;
@@ -80,20 +92,24 @@ public class AvailableMediaBluetoothDeviceUpdaterTest {
     private AudioManager mAudioManager;
     private BluetoothDevicePreference mPreference;
     private ShadowBluetoothAdapter mShadowBluetoothAdapter;
-    private AudioSharingFeatureProvider mFeatureProvider;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
         mContext = RuntimeEnvironment.application;
-        mFeatureProvider = FakeFeatureFactory.setupForTest().getAudioSharingFeatureProvider();
         mAudioManager = mContext.getSystemService(AudioManager.class);
         ShadowBluetoothUtils.sLocalBluetoothManager = mLocalBtManager;
         mLocalBtManager = Utils.getLocalBtManager(mContext);
+        when(mProfileManager.getLeAudioBroadcastAssistantProfile()).thenReturn(mAssistant);
+        when(mLocalBtManager.getProfileManager()).thenReturn(mProfileManager);
         when(mLocalBtManager.getCachedDeviceManager()).thenReturn(mCachedDeviceManager);
         mShadowBluetoothAdapter = Shadow.extract(BluetoothAdapter.getDefaultAdapter());
         mShadowBluetoothAdapter.setEnabled(true);
+        mShadowBluetoothAdapter.setIsLeAudioBroadcastSourceSupported(
+                BluetoothStatusCodes.FEATURE_SUPPORTED);
+        mShadowBluetoothAdapter.setIsLeAudioBroadcastAssistantSupported(
+                BluetoothStatusCodes.FEATURE_SUPPORTED);
         mCachedDevices = new ArrayList<>();
         mCachedDevices.add(mCachedBluetoothDevice);
         when(mCachedDeviceManager.getCachedDevicesCopy()).thenReturn(mCachedDevices);
@@ -252,14 +268,16 @@ public class AvailableMediaBluetoothDeviceUpdaterTest {
 
     @Test
     public void
-            onProfileConnectionStateChanged_leaDeviceConnected_notInCallNoSharing_addsPreference() {
+            onProfileConnectionStateChanged_leaConnected_notInCallSharingFlagOff_addsPreference() {
+        mSetFlagsRule.disableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         mAudioManager.setMode(AudioManager.MODE_NORMAL);
         when(mBluetoothDeviceUpdater.isDeviceConnected(any(CachedBluetoothDevice.class)))
                 .thenReturn(true);
         when(mCachedBluetoothDevice.isConnectedLeAudioDevice()).thenReturn(true);
-        when(mFeatureProvider.isAudioSharingFilterMatched(
-                        any(CachedBluetoothDevice.class), any(LocalBluetoothManager.class)))
-                .thenReturn(false);
+        when(mAssistant.getAllSources(any())).thenReturn(ImmutableList.of(mBroadcastReceiveState));
+        List<Long> bisSyncState = new ArrayList<>();
+        bisSyncState.add(1L);
+        when(mBroadcastReceiveState.getBisSyncState()).thenReturn(bisSyncState);
 
         mBluetoothDeviceUpdater.onProfileConnectionStateChanged(
                 mCachedBluetoothDevice,
@@ -271,14 +289,50 @@ public class AvailableMediaBluetoothDeviceUpdaterTest {
 
     @Test
     public void
-            onProfileConnectionStateChanged_leaDeviceConnected_inCallNoSharing_addsPreference() {
+            onProfileConnectionStateChanged_leaConnected_notInCallNotInSharing_addsPreference() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
+        mAudioManager.setMode(AudioManager.MODE_NORMAL);
+        when(mBluetoothDeviceUpdater.isDeviceConnected(any(CachedBluetoothDevice.class)))
+                .thenReturn(true);
+        when(mCachedBluetoothDevice.isConnectedLeAudioDevice()).thenReturn(true);
+        when(mAssistant.getAllSources(any())).thenReturn(ImmutableList.of());
+
+        mBluetoothDeviceUpdater.onProfileConnectionStateChanged(
+                mCachedBluetoothDevice,
+                BluetoothProfile.STATE_CONNECTED,
+                BluetoothProfile.LE_AUDIO);
+
+        verify(mBluetoothDeviceUpdater).addPreference(mCachedBluetoothDevice);
+    }
+
+    @Test
+    public void onProfileConnectionStateChanged_leaConnected_inCallSharingFlagOff_addsPreference() {
+        mSetFlagsRule.disableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         mAudioManager.setMode(AudioManager.MODE_IN_CALL);
         when(mBluetoothDeviceUpdater.isDeviceConnected(any(CachedBluetoothDevice.class)))
                 .thenReturn(true);
         when(mCachedBluetoothDevice.isConnectedLeAudioDevice()).thenReturn(true);
-        when(mFeatureProvider.isAudioSharingFilterMatched(
-                        any(CachedBluetoothDevice.class), any(LocalBluetoothManager.class)))
-                .thenReturn(false);
+        when(mAssistant.getAllSources(any())).thenReturn(ImmutableList.of(mBroadcastReceiveState));
+        List<Long> bisSyncState = new ArrayList<>();
+        bisSyncState.add(1L);
+        when(mBroadcastReceiveState.getBisSyncState()).thenReturn(bisSyncState);
+
+        mBluetoothDeviceUpdater.onProfileConnectionStateChanged(
+                mCachedBluetoothDevice,
+                BluetoothProfile.STATE_CONNECTED,
+                BluetoothProfile.LE_AUDIO);
+
+        verify(mBluetoothDeviceUpdater).addPreference(mCachedBluetoothDevice);
+    }
+
+    @Test
+    public void onProfileConnectionStateChanged_leaConnected_inCallNotInSharing_addsPreference() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
+        mAudioManager.setMode(AudioManager.MODE_IN_CALL);
+        when(mBluetoothDeviceUpdater.isDeviceConnected(any(CachedBluetoothDevice.class)))
+                .thenReturn(true);
+        when(mCachedBluetoothDevice.isConnectedLeAudioDevice()).thenReturn(true);
+        when(mAssistant.getAllSources(any())).thenReturn(ImmutableList.of());
 
         mBluetoothDeviceUpdater.onProfileConnectionStateChanged(
                 mCachedBluetoothDevice,
@@ -291,14 +345,16 @@ public class AvailableMediaBluetoothDeviceUpdaterTest {
     @Test
     public void
             onProfileConnectionStateChanged_leaDeviceConnected_notInCallInSharing_removesPref() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         mAudioManager.setMode(AudioManager.MODE_NORMAL);
         when(mBluetoothDeviceUpdater.isDeviceConnected(any(CachedBluetoothDevice.class)))
                 .thenReturn(true);
         when(mCachedBluetoothDevice.isConnectedLeAudioDevice()).thenReturn(true);
         when(mCachedBluetoothDevice.isConnectedA2dpDevice()).thenReturn(true);
-        when(mFeatureProvider.isAudioSharingFilterMatched(
-                        any(CachedBluetoothDevice.class), any(LocalBluetoothManager.class)))
-                .thenReturn(true);
+        when(mAssistant.getAllSources(any())).thenReturn(ImmutableList.of(mBroadcastReceiveState));
+        List<Long> bisSyncState = new ArrayList<>();
+        bisSyncState.add(1L);
+        when(mBroadcastReceiveState.getBisSyncState()).thenReturn(bisSyncState);
 
         mBluetoothDeviceUpdater.onProfileConnectionStateChanged(
                 mCachedBluetoothDevice,
@@ -310,14 +366,16 @@ public class AvailableMediaBluetoothDeviceUpdaterTest {
 
     @Test
     public void onProfileConnectionStateChanged_leaDeviceConnected_inCallInSharing_removesPref() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         mAudioManager.setMode(AudioManager.MODE_NORMAL);
         when(mBluetoothDeviceUpdater.isDeviceConnected(any(CachedBluetoothDevice.class)))
                 .thenReturn(true);
         when(mCachedBluetoothDevice.isConnectedLeAudioDevice()).thenReturn(true);
         when(mCachedBluetoothDevice.isConnectedHfpDevice()).thenReturn(true);
-        when(mFeatureProvider.isAudioSharingFilterMatched(
-                        any(CachedBluetoothDevice.class), any(LocalBluetoothManager.class)))
-                .thenReturn(true);
+        when(mAssistant.getAllSources(any())).thenReturn(ImmutableList.of(mBroadcastReceiveState));
+        List<Long> bisSyncState = new ArrayList<>();
+        bisSyncState.add(1L);
+        when(mBroadcastReceiveState.getBisSyncState()).thenReturn(bisSyncState);
 
         mBluetoothDeviceUpdater.onProfileConnectionStateChanged(
                 mCachedBluetoothDevice,

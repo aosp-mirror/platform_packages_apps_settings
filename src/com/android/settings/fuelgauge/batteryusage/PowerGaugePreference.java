@@ -42,7 +42,7 @@ public class PowerGaugePreference extends AppPreference {
     // Please see go/battery-usage-app-list-alpha
     private static final float SELECTABLE_ALPHA = 1f;
     private static final float UNSELECTABLE_ALPHA_LIGHT_MODE = 0.65f;
-    private static final float UNSELECTABLE_ALPHA_DARK_MODE = 0.5f;
+    private static final float UNSELECTABLE_ALPHA_DARK_MODE = 0.65f;
 
     private BatteryEntry mInfo;
     private BatteryDiffEntry mBatteryDiffEntry;

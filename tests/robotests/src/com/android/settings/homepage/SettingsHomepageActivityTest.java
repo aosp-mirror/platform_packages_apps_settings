@@ -42,6 +42,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.UserHandle;
 import android.platform.test.annotations.DisableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 import android.util.ArraySet;
 import android.view.View;
@@ -89,6 +90,8 @@ import java.util.Set;
 public class SettingsHomepageActivityTest {
     @Rule
     public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     @Before
     public void setup() {

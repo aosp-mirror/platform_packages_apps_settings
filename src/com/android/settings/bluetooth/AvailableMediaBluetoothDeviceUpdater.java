@@ -23,7 +23,8 @@ import android.util.Log;
 import androidx.preference.Preference;
 
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
-import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.connecteddevice.audiosharing.AudioSharingUtils;
+import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
@@ -76,11 +77,17 @@ public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
             // It would show in Available Devices group if the audio sharing flag is disabled or
             // the device is not in the audio sharing session.
             if (cachedDevice.isConnectedLeAudioDevice()) {
-                boolean isAudioSharingFilterMatched =
-                        FeatureFactory.getFeatureFactory()
-                                .getAudioSharingFeatureProvider()
-                                .isAudioSharingFilterMatched(cachedDevice, mLocalManager);
-                if (!isAudioSharingFilterMatched) {
+                if (AudioSharingUtils.isFeatureEnabled()
+                        && BluetoothUtils.hasConnectedBroadcastSource(
+                                cachedDevice, mLocalBtManager)) {
+                    Log.d(
+                            TAG,
+                            "Filter out device : "
+                                    + cachedDevice.getName()
+                                    + ", it is in audio sharing.");
+                    return false;
+
+                } else {
                     Log.d(
                             TAG,
                             "isFilterMatched() device : "
@@ -88,13 +95,6 @@ public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
                                     + ", the LE Audio profile is connected and not in sharing "
                                     + "if broadcast enabled.");
                     return true;
-                } else {
-                    Log.d(
-                            TAG,
-                            "Filter out device : "
-                                    + cachedDevice.getName()
-                                    + ", it is in audio sharing.");
-                    return false;
                 }
             }
 

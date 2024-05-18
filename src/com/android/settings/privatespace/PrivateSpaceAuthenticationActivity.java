@@ -22,7 +22,6 @@ import static com.android.internal.app.SetScreenLockDialogActivity.LAUNCH_REASON
 import static com.android.settings.activityembedding.EmbeddedDeepLinkUtils.tryStartMultiPaneDeepLink;
 
 import android.app.ActivityOptions;
-import android.app.AlertDialog;
 import android.app.KeyguardManager;
 import android.app.PendingIntent;
 import android.app.settings.SettingsEnums;
@@ -37,6 +36,7 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.internal.annotations.VisibleForTesting;
@@ -152,7 +152,7 @@ public class PrivateSpaceAuthenticationActivity extends FragmentActivity {
             startActivity(setScreenLockPromptIntent);
             finish();
         } else {
-            new AlertDialog.Builder(this)
+            new AlertDialog.Builder(this, R.style.Theme_AlertDialog)
                     .setTitle(R.string.no_device_lock_title)
                     .setMessage(R.string.no_device_lock_summary)
                     .setPositiveButton(

@@ -17,12 +17,9 @@
 package com.android.settings.network.telephony
 
 import android.telephony.CellIdentity
-import android.telephony.CellIdentityGsm
 import android.telephony.CellInfo
-import android.telephony.CellInfoGsm
 import android.text.BidiFormatter
 import android.text.TextDirectionHeuristics
-import com.android.internal.telephony.OperatorInfo
 
 /**
  * Add static Utility functions to get information from the CellInfo object.
@@ -45,36 +42,6 @@ object CellInfoUtil {
         val operatorNumeric = getOperatorNumeric() ?: return null
         val bidiFormatter = BidiFormatter.getInstance()
         return bidiFormatter.unicodeWrap(operatorNumeric, TextDirectionHeuristics.LTR)
-    }
-
-    /**
-     * Creates a CellInfo object from OperatorInfo. GsmCellInfo is used here only because
-     * operatorInfo does not contain technology type while CellInfo is an abstract object that
-     * requires to specify technology type. It doesn't matter which CellInfo type to use here, since
-     * we only want to wrap the operator info and PLMN to a CellInfo object.
-     */
-    @JvmStatic
-    fun convertOperatorInfoToCellInfo(operatorInfo: OperatorInfo): CellInfo {
-        val operatorNumeric = operatorInfo.operatorNumeric
-        var mcc: String? = null
-        var mnc: String? = null
-        if (operatorNumeric?.matches("^[0-9]{5,6}$".toRegex()) == true) {
-            mcc = operatorNumeric.substring(0, 3)
-            mnc = operatorNumeric.substring(3)
-        }
-        return CellInfoGsm().apply {
-            cellIdentity = CellIdentityGsm(
-                /* lac = */ Int.MAX_VALUE,
-                /* cid = */ Int.MAX_VALUE,
-                /* arfcn = */ Int.MAX_VALUE,
-                /* bsic = */ Int.MAX_VALUE,
-                /* mccStr = */ mcc,
-                /* mncStr = */ mnc,
-                /* alphal = */ operatorInfo.operatorAlphaLong,
-                /* alphas = */ operatorInfo.operatorAlphaShort,
-                /* additionalPlmns = */ emptyList(),
-            )
-        }
     }
 
     /**
