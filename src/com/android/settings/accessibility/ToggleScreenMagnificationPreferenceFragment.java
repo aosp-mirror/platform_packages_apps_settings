@@ -304,6 +304,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
         var oneFingerPanningPreferenceController =
                 new MagnificationOneFingerPanningPreferenceController(getContext());
+        oneFingerPanningPreferenceController.setInSetupWizard(mInSetupWizard);
         getSettingsLifecycle().addObserver(oneFingerPanningPreferenceController);
         oneFingerPanningPreferenceController.displayPreference(getPreferenceScreen());
         addPreferenceController(oneFingerPanningPreferenceController);
