@@ -41,6 +41,8 @@ public class ZenModeFragment extends ZenModeFragmentBase {
         prefControllers.add(new ZenModeHeaderController(context, "header", this, mBackend));
         prefControllers.add(new ZenModePeopleLinkPreferenceController(
                 context, "zen_mode_people", mBackend));
+        prefControllers.add(new ZenModeOtherLinkPreferenceController(
+                context, "zen_other_settings", mBackend));
         return prefControllers;
     }
 
