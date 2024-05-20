@@ -22,6 +22,7 @@ import android.app.settings.SettingsEnums
 import android.content.Context
 import com.android.settings.R
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
+import com.android.settingslib.spaprivileged.model.app.AppOps
 import com.android.settingslib.spaprivileged.template.app.AppOpPermissionListModel
 import com.android.settingslib.spaprivileged.template.app.AppOpPermissionRecord
 import com.android.settingslib.spaprivileged.template.app.TogglePermissionAppListProvider
@@ -35,9 +36,8 @@ class BackupTasksAppsListModel(context: Context) : AppOpPermissionListModel(cont
     override val pageTitleResId = R.string.run_backup_tasks_title
     override val switchTitleResId = R.string.run_backup_tasks_switch_title
     override val footerResId = R.string.run_backup_tasks_footer_title
-    override val appOp = AppOpsManager.OP_RUN_BACKUP_JOBS
+    override val appOps = AppOps(op = AppOpsManager.OP_RUN_BACKUP_JOBS, setModeByUid = true)
     override val permission = Manifest.permission.RUN_BACKUP_JOBS
-    override val setModeByUid = true
 
     override fun setAllowed(record: AppOpPermissionRecord, newAllowed: Boolean) {
         super.setAllowed(record, newAllowed)
