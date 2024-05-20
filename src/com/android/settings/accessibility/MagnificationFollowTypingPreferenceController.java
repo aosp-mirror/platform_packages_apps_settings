@@ -23,10 +23,10 @@ import android.content.Context;
 import android.provider.Settings;
 
 import com.android.settings.R;
-import com.android.settings.core.TogglePreferenceController;
 
 /** Controller that accesses and switches the preference status of following typing feature */
-public class MagnificationFollowTypingPreferenceController extends TogglePreferenceController {
+public class MagnificationFollowTypingPreferenceController extends
+        MagnificationFeaturePreferenceController {
 
     private static final String TAG =
             MagnificationFollowTypingPreferenceController.class.getSimpleName();
@@ -38,7 +38,7 @@ public class MagnificationFollowTypingPreferenceController extends TogglePrefere
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        return isInSetupWizard() ? CONDITIONALLY_UNAVAILABLE : AVAILABLE;
     }
 
     @Override

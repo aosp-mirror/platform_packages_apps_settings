@@ -82,8 +82,6 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     private static final TextUtils.SimpleStringSplitter sStringColonSplitter =
             new TextUtils.SimpleStringSplitter(COMPONENT_NAME_SEPARATOR);
 
-    protected TwoStatePreference mFollowingTypingSwitchPreference;
-
     // TODO(b/147021230): Move duplicated functions with android/internal/accessibility into util.
     private TouchExplorationStateChangeListener mTouchExplorationStateChangeListener;
     private CheckBox mSoftwareTypeCheckBox;
@@ -243,17 +241,18 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     }
 
     private void addFollowTypingSetting(PreferenceCategory generalCategory) {
-        mFollowingTypingSwitchPreference = new SwitchPreferenceCompat(getPrefContext());
-        mFollowingTypingSwitchPreference.setTitle(
+        var followingTypingSwitchPreference = new SwitchPreferenceCompat(getPrefContext());
+        followingTypingSwitchPreference.setTitle(
                 R.string.accessibility_screen_magnification_follow_typing_title);
-        mFollowingTypingSwitchPreference.setSummary(
+        followingTypingSwitchPreference.setSummary(
                 R.string.accessibility_screen_magnification_follow_typing_summary);
-        mFollowingTypingSwitchPreference.setKey(
+        followingTypingSwitchPreference.setKey(
                 MagnificationFollowTypingPreferenceController.PREF_KEY);
-        generalCategory.addPreference(mFollowingTypingSwitchPreference);
+        generalCategory.addPreference(followingTypingSwitchPreference);
 
         var followTypingPreferenceController = new MagnificationFollowTypingPreferenceController(
                 getContext(), MagnificationFollowTypingPreferenceController.PREF_KEY);
+        followTypingPreferenceController.setInSetupWizard(mInSetupWizard);
         followTypingPreferenceController.displayPreference(getPreferenceScreen());
         addPreferenceController(followTypingPreferenceController);
     }
