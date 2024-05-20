@@ -23,6 +23,7 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth.assertThat
 import com.android.settings.R
+import com.android.settingslib.spaprivileged.model.app.AppOps
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -37,8 +38,12 @@ class LongBackgroundTasksAppsTest {
         assertThat(listModel.pageTitleResId).isEqualTo(R.string.long_background_tasks_title)
         assertThat(listModel.switchTitleResId).isEqualTo(R.string.long_background_tasks_switch_title)
         assertThat(listModel.footerResId).isEqualTo(R.string.long_background_tasks_footer_title)
-        assertThat(listModel.appOp).isEqualTo(AppOpsManager.OP_RUN_USER_INITIATED_JOBS)
+        assertThat(listModel.appOps).isEqualTo(
+            AppOps(
+                op = AppOpsManager.OP_RUN_USER_INITIATED_JOBS,
+                setModeByUid = true,
+            )
+        )
         assertThat(listModel.permission).isEqualTo(Manifest.permission.RUN_USER_INITIATED_JOBS)
-        assertThat(listModel.setModeByUid).isTrue()
     }
 }

@@ -21,6 +21,7 @@ import android.app.AppOpsManager
 import android.app.AppOpsManager.MODE_IGNORED
 import android.content.Context
 import com.android.settings.R
+import com.android.settingslib.spaprivileged.model.app.AppOps
 import com.android.settingslib.spaprivileged.model.app.IPackageManagers
 import com.android.settingslib.spaprivileged.model.app.PackageManagers
 import com.android.settingslib.spaprivileged.template.app.AppOpPermissionListModel
@@ -39,11 +40,13 @@ class WifiControlAppListModel(
     override val switchTitleResId = R.string.change_wifi_state_app_detail_switch
     override val footerResId = R.string.change_wifi_state_app_detail_summary
 
-    override val appOp = AppOpsManager.OP_CHANGE_WIFI_STATE
+    override val appOps = AppOps(
+        op = AppOpsManager.OP_CHANGE_WIFI_STATE,
+        modeForNotAllowed = MODE_IGNORED,
+    )
     override val permission = Manifest.permission.CHANGE_WIFI_STATE
 
     /** NETWORK_SETTINGS permission trumps CHANGE_WIFI_CONFIG. */
     override val broaderPermission = Manifest.permission.NETWORK_SETTINGS
     override val permissionHasAppOpFlag = false
-    override val modeForNotAllowed = MODE_IGNORED
 }
