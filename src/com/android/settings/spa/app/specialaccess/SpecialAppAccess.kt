@@ -67,7 +67,6 @@ object SpecialAppAccessPageProvider : SettingsPageProvider {
                 PictureInPictureListProvider,
                 InstallUnknownAppsListProvider,
                 AlarmsAndRemindersAppListProvider,
-                VoiceActivationAppsListProvider,
                 WifiControlAppListProvider,
                 LongBackgroundTasksAppListProvider,
                 TurnScreenOnAppsAppListProvider,
