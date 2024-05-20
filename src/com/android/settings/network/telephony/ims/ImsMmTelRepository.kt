@@ -21,7 +21,10 @@ import android.telephony.AccessNetworkConstants
 import android.telephony.ims.ImsManager
 import android.telephony.ims.ImsMmTelManager
 import android.telephony.ims.ImsMmTelManager.WiFiCallingMode
+import android.telephony.ims.ImsReasonInfo
+import android.telephony.ims.ImsRegistrationAttributes
 import android.telephony.ims.ImsStateCallback
+import android.telephony.ims.RegistrationManager
 import android.telephony.ims.feature.MmTelFeature
 import android.util.Log
 import kotlin.coroutines.resume
@@ -39,7 +42,11 @@ import kotlinx.coroutines.withContext
 interface ImsMmTelRepository {
     @WiFiCallingMode
     fun getWiFiCallingMode(useRoamingMode: Boolean): Int
+
+    fun imsRegisteredFlow(): Flow<Boolean>
+
     fun imsReadyFlow(): Flow<Boolean>
+
     suspend fun isSupported(
         @MmTelFeature.MmTelCapabilities.MmTelCapability capability: Int,
         @AccessNetworkConstants.TransportType transportType: Int,
@@ -63,6 +70,36 @@ class ImsMmTelRepositoryImpl(
         Log.w(TAG, "[$subId] getWiFiCallingMode failed useRoamingMode=$useRoamingMode", e)
         ImsMmTelManager.WIFI_MODE_UNKNOWN
     }
+
+    override fun imsRegisteredFlow(): Flow<Boolean> = callbackFlow {
+        val callback = object : RegistrationManager.RegistrationCallback() {
+            override fun onRegistered(attributes: ImsRegistrationAttributes) {
+                Log.d(TAG, "[$subId] IMS onRegistered")
+                trySend(true)
+            }
+
+            override fun onRegistering(imsTransportType: Int) {
+                Log.d(TAG, "[$subId] IMS onRegistering")
+                trySend(false)
+            }
+
+            override fun onTechnologyChangeFailed(imsTransportType: Int, info: ImsReasonInfo) {
+                Log.d(TAG, "[$subId] IMS onTechnologyChangeFailed")
+                trySend(false)
+            }
+
+            override fun onUnregistered(info: ImsReasonInfo) {
+                Log.d(TAG, "[$subId] IMS onUnregistered")
+                trySend(false)
+            }
+        }
+
+        imsMmTelManager.registerImsRegistrationCallback(Dispatchers.Default.asExecutor(), callback)
+
+        awaitClose { imsMmTelManager.unregisterImsRegistrationCallback(callback) }
+    }.catch { e ->
+        Log.w(TAG, "[$subId] error while imsRegisteredFlow", e)
+    }.conflate().flowOn(Dispatchers.Default)
 
     override fun imsReadyFlow(): Flow<Boolean> = callbackFlow {
         val callback = object : ImsStateCallback() {
