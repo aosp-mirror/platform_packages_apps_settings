@@ -285,6 +285,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
         var alwaysOnPreferenceController = new MagnificationAlwaysOnPreferenceController(
                 getContext(), MagnificationAlwaysOnPreferenceController.PREF_KEY);
+        alwaysOnPreferenceController.setInSetupWizard(mInSetupWizard);
         getSettingsLifecycle().addObserver(alwaysOnPreferenceController);
         alwaysOnPreferenceController.displayPreference(getPreferenceScreen());
         addPreferenceController(alwaysOnPreferenceController);
