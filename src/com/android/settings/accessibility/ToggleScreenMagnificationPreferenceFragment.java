@@ -333,6 +333,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                         getContext(),
                         MagnificationJoystickPreferenceController.PREF_KEY
                 );
+        joystickPreferenceController.setInSetupWizard(mInSetupWizard);
         joystickPreferenceController.displayPreference(getPreferenceScreen());
         addPreferenceController(joystickPreferenceController);
     }
