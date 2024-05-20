@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 The Android Open Source Project
+ * Copyright (C) 2024 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.rfps.ui.widget
+package com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.common.widget
 
 import android.app.AlertDialog
 import android.app.Dialog
@@ -28,8 +28,6 @@ import com.android.settings.biometrics.fingerprint2.lib.model.FingerEnrollState
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment
 import kotlin.coroutines.resume
 import kotlinx.coroutines.suspendCancellableCoroutine
-
-private const val TAG = "FingerprintErrorDialog"
 
 /** A Dialog used for fingerprint enrollment when an error occurs. */
 class FingerprintErrorDialog : InstrumentedDialogFragment() {
@@ -82,6 +80,7 @@ class FingerprintErrorDialog : InstrumentedDialogFragment() {
   }
 
   companion object {
+    private const val TAG = "FingerprintErrorDialog"
     private const val KEY_MESSAGE = "fingerprint_message"
     private const val KEY_TITLE = "fingerprint_title"
     private const val KEY_SHOULD_TRY_AGAIN = "should_try_again"

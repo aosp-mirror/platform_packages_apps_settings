@@ -17,9 +17,7 @@ package com.android.settings.tests.screenshot.biometrics.fingerprint.fragment
  */
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.android.settings.biometrics.fingerprint2.ui.enrollment.fragment.FingerprintEnrollFindSensorV2Fragment
-import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintNavigationStep
-import com.android.settings.tests.screenshot.biometrics.fingerprint.Injector
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.fragment.education.RfpsEnrollFindSensorFragment
 import com.android.settings.tests.screenshot.biometrics.fingerprint.Injector.Companion.BiometricFragmentScreenShotRule
 import org.junit.Rule
 import org.junit.Test
@@ -28,10 +26,7 @@ import platform.test.screenshot.FragmentScreenshotTestRule
 import platform.test.screenshot.ViewScreenshotTestRule.Mode
 
 @RunWith(AndroidJUnit4::class)
-class FingerprintEnrollFindSensorScreenshotTest {
-  private val injector: Injector =
-    Injector(FingerprintNavigationStep.Education(Injector.interactor.sensorProp))
-
+class RfpsEnrollFindSensorScreenshotTest {
   @Rule @JvmField var rule: FragmentScreenshotTestRule = BiometricFragmentScreenShotRule()
 
   @Test
@@ -39,7 +34,7 @@ class FingerprintEnrollFindSensorScreenshotTest {
     rule.screenshotTest(
       "fp_enroll_find_sensor",
       Mode.MatchSize,
-      FingerprintEnrollFindSensorV2Fragment(injector.fingerprintSensor.sensorType, injector.factory),
+      RfpsEnrollFindSensorFragment(),
     )
   }
 }

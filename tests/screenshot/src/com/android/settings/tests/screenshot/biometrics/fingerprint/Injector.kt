@@ -91,6 +91,7 @@ class Injector(step: FingerprintNavigationStep.UiStep) {
     object : OrientationInteractor {
       override val orientation: Flow<Int> = flowOf(Configuration.ORIENTATION_LANDSCAPE)
       override val rotation: Flow<Int> = flowOf(Surface.ROTATION_0)
+      override val rotationFromDefault: Flow<Int> = rotation
 
       override fun getRotationFromDefault(rotation: Int): Int = rotation
     }

@@ -25,28 +25,28 @@ import android.graphics.Paint
 import android.graphics.PixelFormat
 import android.graphics.Rect
 import android.graphics.drawable.Drawable
-import android.os.Process
-import android.os.VibrationAttributes
-import android.os.VibrationEffect
-import android.os.Vibrator
 import android.util.AttributeSet
 import android.util.DisplayMetrics
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.Interpolator
+import android.view.animation.OvershootInterpolator
 import androidx.annotation.ColorInt
 import androidx.core.animation.doOnEnd
 import androidx.core.graphics.toRectF
 import com.android.internal.annotations.VisibleForTesting
 import com.android.settings.R
+import kotlin.math.cos
 import kotlin.math.max
+import kotlin.math.sin
 
 /**
  * UDFPS enrollment progress bar. This view is responsible for drawing the progress ring and its
  * fill around the center of the UDFPS sensor.
  */
-class UdfpsEnrollProgressBarDrawableV2(private val mContext: Context, attrs: AttributeSet?) :
+class UdfpsEnrollProgressBarDrawableV2(private val context: Context, attrs: AttributeSet?) :
   Drawable() {
   private val sensorRect: Rect = Rect()
+  private var rotation: Int = 0
   private val strokeWidthPx: Float
 
   @ColorInt private val progressColor: Int
@@ -56,7 +56,6 @@ class UdfpsEnrollProgressBarDrawableV2(private val mContext: Context, attrs: Att
   private val backgroundPaint: Paint
 
   @VisibleForTesting val fillPaint: Paint
-  private val vibrator: Vibrator
   private var isAccessibilityEnabled: Boolean = false
   private var afterFirstTouch = false
   private var remainingSteps = 0
@@ -64,22 +63,27 @@ class UdfpsEnrollProgressBarDrawableV2(private val mContext: Context, attrs: Att
   private var progress = 0f
   private var progressAnimator: ValueAnimator? = null
   private val progressUpdateListener: AnimatorUpdateListener
-  private var showingHelp = false
   private var fillColorAnimator: ValueAnimator? = null
   private val fillColorUpdateListener: AnimatorUpdateListener
   private var backgroundColorAnimator: ValueAnimator? = null
   private val backgroundColorUpdateListener: AnimatorUpdateListener
-  private var complete = false
   private var movingTargetFill = 0
   private var movingTargetFillError = 0
   private var enrollProgressColor = 0
   private var enrollProgressHelp = 0
   private var enrollProgressHelpWithTalkback = 0
   private val progressBarRadius: Int
+  private var checkMarkDrawable: Drawable
+  private var checkMarkAnimator: ValueAnimator? = null
+
+  private var fillColorAnimationDuration = FILL_COLOR_ANIMATION_DURATION_MS
+  private var animateArcDuration = PROGRESS_ANIMATION_DURATION_MS
+  private var checkmarkAnimationDelayDuration = CHECKMARK_ANIMATION_DELAY_MS
+  private var checkmarkAnimationDuration = CHECKMARK_ANIMATION_DURATION_MS
 
   init {
     val ta =
-      mContext.obtainStyledAttributes(
+      context.obtainStyledAttributes(
         attrs,
         R.styleable.BiometricsEnrollView,
         R.attr.biometricsEnrollStyle,
@@ -94,30 +98,33 @@ class UdfpsEnrollProgressBarDrawableV2(private val mContext: Context, attrs: Att
     enrollProgressHelpWithTalkback =
       ta.getColor(R.styleable.BiometricsEnrollView_biometricsEnrollProgressHelpWithTalkback, 0)
     ta.recycle()
-    val density = mContext.resources.displayMetrics.densityDpi.toFloat()
+    val density = context.resources.displayMetrics.densityDpi.toFloat()
     strokeWidthPx = STROKE_WIDTH_DP * (density / DisplayMetrics.DENSITY_DEFAULT)
     progressColor = enrollProgressColor
     onFirstBucketFailedColor = movingTargetFillError
     updateHelpColor()
-    backgroundPaint = Paint().apply {
-      strokeWidth = strokeWidthPx
-      setColor(movingTargetFill)
-      isAntiAlias = true
-      style = Paint.Style.STROKE
-      strokeCap = Paint.Cap.ROUND
-    }
+    backgroundPaint =
+      Paint().apply {
+        strokeWidth = strokeWidthPx
+        setColor(movingTargetFill)
+        isAntiAlias = true
+        style = Paint.Style.STROKE
+        strokeCap = Paint.Cap.ROUND
+      }
+
+    checkMarkDrawable = context.getDrawable(R.drawable.udfps_enroll_checkmark)!!
 
     // Progress fill should *not* use the extracted system color.
-    fillPaint = Paint().apply {
-      strokeWidth = strokeWidthPx
-      setColor(progressColor)
-      isAntiAlias = true
-      style = Paint.Style.STROKE
-      strokeCap = Paint.Cap.ROUND
-    }
-    vibrator = mContext.getSystemService(Vibrator::class.java)!!
+    fillPaint =
+      Paint().apply {
+        strokeWidth = strokeWidthPx
+        setColor(progressColor)
+        isAntiAlias = true
+        style = Paint.Style.STROKE
+        strokeCap = Paint.Cap.ROUND
+      }
 
-    progressBarRadius = mContext.resources.getInteger(R.integer.config_udfpsEnrollProgressBar)
+    progressBarRadius = context.resources.getInteger(R.integer.config_udfpsEnrollProgressBar)
 
     progressUpdateListener = AnimatorUpdateListener { animation: ValueAnimator ->
       progress = animation.getAnimatedValue() as Float
@@ -134,9 +141,10 @@ class UdfpsEnrollProgressBarDrawableV2(private val mContext: Context, attrs: Att
   }
 
   /** Indicates enrollment progress has occurred. */
-  fun onEnrollmentProgress(remaining: Int, totalSteps: Int) {
+  fun onEnrollmentProgress(remaining: Int, totalSteps: Int, isRecreating: Boolean = false) {
+
     afterFirstTouch = true
-    updateProgress(remaining, totalSteps)
+    updateProgress(remaining, totalSteps, isRecreating)
   }
 
   /** Indicates enrollment help has occurred. */
@@ -157,18 +165,12 @@ class UdfpsEnrollProgressBarDrawableV2(private val mContext: Context, attrs: Att
 
     canvas.save()
     // This takes the sensors bounding box and expands it by [progressBarRadius] in all directions
-    val sensorProgressRect = Rect(sensorRect)
-    sensorProgressRect.inset(
-      -progressBarRadius,
-      -progressBarRadius,
-      -progressBarRadius,
-      -progressBarRadius,
-    )
+    val sensorProgressRect = getSensorProgressRect()
 
     // Rotate -90 degrees to make the progress start from the top right and not the bottom
     // right
     canvas.rotate(
-      -90f,
+      rotation - 90f,
       sensorProgressRect.centerX().toFloat(),
       sensorProgressRect.centerY().toFloat(),
     )
@@ -176,9 +178,9 @@ class UdfpsEnrollProgressBarDrawableV2(private val mContext: Context, attrs: Att
       // Draw the background color of the progress circle.
       canvas.drawArc(
         sensorProgressRect.toRectF(),
-        0f /* startAngle */,
-        360f /* sweepAngle */,
-        false /* useCenter */,
+        0f, /* startAngle */
+        360f, /* sweepAngle */
+        false, /* useCenter */
         backgroundPaint,
       )
     }
@@ -186,13 +188,15 @@ class UdfpsEnrollProgressBarDrawableV2(private val mContext: Context, attrs: Att
       // Draw the filled portion of the progress circle.
       canvas.drawArc(
         sensorProgressRect.toRectF(),
-        0f /* startAngle */,
-        360f * progress /* sweepAngle */,
-        false /* useCenter */,
+        0f, /* startAngle */
+        360f * progress, /* sweepAngle */
+        false, /* useCenter */
         fillPaint,
       )
     }
+
     canvas.restore()
+    checkMarkDrawable.draw(canvas)
   }
 
   /** Do nothing here, we will control the alpha internally. */
@@ -211,6 +215,7 @@ class UdfpsEnrollProgressBarDrawableV2(private val mContext: Context, attrs: Att
    */
   fun drawProgressAt(sensorRect: Rect) {
     this.sensorRect.set(sensorRect)
+    invalidateSelf()
   }
 
   /** Indicates if accessibility is enabled or not. */
@@ -228,47 +233,21 @@ class UdfpsEnrollProgressBarDrawableV2(private val mContext: Context, attrs: Att
       }
   }
 
-  private fun updateProgress(remainingSteps: Int, totalSteps: Int) {
+  private fun updateProgress(remainingSteps: Int, totalSteps: Int, isRecreating: Boolean) {
     if (this.remainingSteps == remainingSteps && this.totalSteps == totalSteps) {
       return
     }
+
+    // If we are restoring this view from a saved state, set animation duration to 0 to avoid
+    // animating progress that has already occurred.
+    if (isRecreating) {
+      setAnimationTimeToZero()
+    } else {
+      restoreAnimationTime()
+    }
+
     this.remainingSteps = remainingSteps
     this.totalSteps = totalSteps
-    if (this.showingHelp) {
-      if (vibrator != null && isAccessibilityEnabled) {
-        vibrator.vibrate(
-          Process.myUid(),
-          mContext.opPackageName,
-          VIBRATE_EFFECT_ERROR,
-          javaClass.getSimpleName() + "::onEnrollmentHelp",
-          FINGERPRINT_ENROLLING_SONFICATION_ATTRIBUTES,
-        )
-      }
-    } else {
-      // If the first touch is an error, remainingSteps will be -1 and the callback
-      // doesn't come from onEnrollmentHelp. If we are in the accessibility flow,
-      // we still would like to vibrate.
-      if (vibrator != null) {
-        if (remainingSteps == -1 && isAccessibilityEnabled) {
-          vibrator.vibrate(
-            Process.myUid(),
-            mContext.opPackageName,
-            VIBRATE_EFFECT_ERROR,
-            javaClass.getSimpleName() + "::onFirstTouchError",
-            FINGERPRINT_ENROLLING_SONFICATION_ATTRIBUTES,
-          )
-        } else if (remainingSteps != -1 && !isAccessibilityEnabled) {
-          vibrator.vibrate(
-            Process.myUid(),
-            mContext.opPackageName,
-            SUCCESS_VIBRATION_EFFECT,
-            javaClass.getSimpleName() + "::OnEnrollmentProgress",
-            HARDWARE_FEEDBACK_VIBRATION_ATTRIBUTES,
-          )
-        }
-      }
-    }
-    this.showingHelp = showingHelp
     this.remainingSteps = remainingSteps
     this.totalSteps = totalSteps
     val targetProgress = (totalSteps - remainingSteps).toFloat().div(max(1, totalSteps))
@@ -276,12 +255,69 @@ class UdfpsEnrollProgressBarDrawableV2(private val mContext: Context, attrs: Att
     if (progressAnimator != null && progressAnimator!!.isRunning) {
       progressAnimator!!.cancel()
     }
+    /** The [progressUpdateListener] will force re-[draw]s to occur depending on the progress. */
     progressAnimator =
       ValueAnimator.ofFloat(progress, targetProgress).also {
-        it.setDuration(PROGRESS_ANIMATION_DURATION_MS)
+        it.setDuration(animateArcDuration)
         it.addUpdateListener(progressUpdateListener)
         it.start()
       }
+    if (remainingSteps == 0) {
+      runCompletionAnimation()
+    }
+  }
+
+  private fun runCompletionAnimation() {
+    checkMarkAnimator?.cancel()
+
+    checkMarkAnimator = ValueAnimator.ofFloat(0f, 1f)
+    checkMarkAnimator?.apply {
+      startDelay = checkmarkAnimationDelayDuration
+      setDuration(checkmarkAnimationDuration)
+      interpolator = OvershootInterpolator()
+      addUpdateListener {
+        val newBounds = getCheckMarkStartBounds()
+        val scale = it.animatedFraction
+        newBounds.set(
+          newBounds.left,
+          newBounds.top,
+          (newBounds.left + (newBounds.width() * scale)).toInt(),
+          (newBounds.top + (newBounds.height() * scale)).toInt(),
+        )
+        checkMarkDrawable.bounds = newBounds
+        checkMarkDrawable.setVisible(true, false)
+      }
+      start()
+    }
+  }
+
+  /**
+   * This returns the bounds for which the checkmark drawable should be drawn at. It should be drawn
+   * on the arc of the progress bar at the 315 degree mark.
+   */
+  private fun getCheckMarkStartBounds(): Rect {
+    val progressBounds = getSensorProgressRect()
+    val radius = progressBounds.width() / 2.0
+
+    var x = (cos(Math.toRadians(315.0)) * radius).toInt() + progressBounds.centerX()
+    // Remember to negate this value as sin(>180) will return negative value
+    var y = (-sin(Math.toRadians(315.0)) * radius).toInt() + progressBounds.centerY()
+    // Subtract height|width /2 to make sure we draw in the middle of the arc.
+    x -= (checkMarkDrawable.intrinsicWidth / 2.0).toInt()
+    y -= (checkMarkDrawable.intrinsicHeight / 2.0).toInt()
+
+    return Rect(x, y, x + checkMarkDrawable.intrinsicWidth, y + checkMarkDrawable.intrinsicHeight)
+  }
+
+  private fun getSensorProgressRect(): Rect {
+    val sensorProgressRect = Rect(sensorRect)
+    sensorProgressRect.inset(
+      -progressBarRadius,
+      -progressBarRadius,
+      -progressBarRadius,
+      -progressBarRadius,
+    )
+    return sensorProgressRect
   }
 
   /**
@@ -294,7 +330,7 @@ class UdfpsEnrollProgressBarDrawableV2(private val mContext: Context, attrs: Att
     }
     backgroundColorAnimator =
       ValueAnimator.ofArgb(backgroundPaint.color, onFirstBucketFailedColor).also {
-        it.setDuration(FILL_COLOR_ANIMATION_DURATION_MS)
+        it.setDuration(fillColorAnimationDuration)
         it.repeatCount = 1
         it.repeatMode = ValueAnimator.REVERSE
         it.interpolator = DEACCEL
@@ -315,7 +351,7 @@ class UdfpsEnrollProgressBarDrawableV2(private val mContext: Context, attrs: Att
     @ColorInt val targetColor = helpColor
     fillColorAnimator =
       ValueAnimator.ofArgb(fillPaint.color, targetColor).also {
-        it.setDuration(FILL_COLOR_ANIMATION_DURATION_MS)
+        it.setDuration(fillColorAnimationDuration)
         it.repeatCount = 1
         it.repeatMode = ValueAnimator.REVERSE
         it.interpolator = DEACCEL
@@ -325,33 +361,32 @@ class UdfpsEnrollProgressBarDrawableV2(private val mContext: Context, attrs: Att
       }
   }
 
-  private fun startCompletionAnimation() {
-    if (complete) {
-      return
-    }
-    complete = true
+  /**
+   * This sets animation time to 0. This typically happens after an activity recreation, we don't
+   * want to re-animate the progress/success animation with the default timer
+   */
+  private fun setAnimationTimeToZero() {
+    fillColorAnimationDuration = 0
+    animateArcDuration = 0
+    checkmarkAnimationDelayDuration = 0
+    checkmarkAnimationDuration = 0
   }
 
-  private fun rollBackCompletionAnimation() {
-    if (!complete) {
-      return
-    }
-    complete = false
+  /** This sets animation timers back to normal, this happens after we have */
+  private fun restoreAnimationTime() {
+    fillColorAnimationDuration = FILL_COLOR_ANIMATION_DURATION_MS
+    animateArcDuration = PROGRESS_ANIMATION_DURATION_MS
+    checkmarkAnimationDelayDuration = CHECKMARK_ANIMATION_DELAY_MS
+    checkmarkAnimationDuration = CHECKMARK_ANIMATION_DURATION_MS
   }
-
-  private fun loadResources(context: Context, attrs: AttributeSet?) {}
 
   companion object {
     private const val TAG = "UdfpsProgressBar"
     private const val FILL_COLOR_ANIMATION_DURATION_MS = 350L
     private const val PROGRESS_ANIMATION_DURATION_MS = 400L
+    private const val CHECKMARK_ANIMATION_DELAY_MS = 200L
+    private const val CHECKMARK_ANIMATION_DURATION_MS = 300L
     private const val STROKE_WIDTH_DP = 12f
     private val DEACCEL: Interpolator = DecelerateInterpolator()
-    private val VIBRATE_EFFECT_ERROR = VibrationEffect.createWaveform(longArrayOf(0, 5, 55, 60), -1)
-    private val FINGERPRINT_ENROLLING_SONFICATION_ATTRIBUTES =
-      VibrationAttributes.createForUsage(VibrationAttributes.USAGE_ACCESSIBILITY)
-    private val HARDWARE_FEEDBACK_VIBRATION_ATTRIBUTES =
-      VibrationAttributes.createForUsage(VibrationAttributes.USAGE_HARDWARE_FEEDBACK)
-    private val SUCCESS_VIBRATION_EFFECT = VibrationEffect.get(VibrationEffect.EFFECT_CLICK)
   }
 }

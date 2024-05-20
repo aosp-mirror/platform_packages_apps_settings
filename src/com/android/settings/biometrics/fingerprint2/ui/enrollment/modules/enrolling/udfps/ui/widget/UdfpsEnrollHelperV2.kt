@@ -20,7 +20,7 @@ import android.content.Context
 import android.graphics.PointF
 import android.util.TypedValue
 import android.view.accessibility.AccessibilityManager
-import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.udfps.ui.viewmodel.StageViewModel
+import com.android.settings.biometrics.fingerprint2.lib.model.StageViewModel
 
 /** Keeps track of which guided enrollment point we should be using */
 class UdfpsEnrollHelperV2(private val mContext: Context) {
@@ -28,6 +28,7 @@ class UdfpsEnrollHelperV2(private val mContext: Context) {
   private var isGuidedEnrollment: Boolean = false
   private val accessibilityEnabled: Boolean
   private val guidedEnrollmentPoints: MutableList<PointF>
+  /** The current index of [guidedEnrollmentPoints] for the guided enrollment. */
   private var index = 0
 
   init {
@@ -76,7 +77,7 @@ class UdfpsEnrollHelperV2(private val mContext: Context) {
       if (accessibilityEnabled || !isGuidedEnrollment) {
         return null
       }
-      var scale = SCALE
+      val scale = SCALE
       val originalPoint = guidedEnrollmentPoints[index % guidedEnrollmentPoints.size]
       return PointF(originalPoint.x * scale, originalPoint.y * scale)
     }
