@@ -19,13 +19,15 @@ package com.android.settings.connecteddevice.audiosharing.audiostreams;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 
 public class AudioStreamDetailsFragment extends DashboardFragment {
     static final String BROADCAST_NAME_ARG = "broadcast_name";
     static final String BROADCAST_ID_ARG = "broadcast_id";
-    private static final String TAG = "AudioStreamDetailsFragment";
+    @VisibleForTesting static final String TAG = "AudioStreamDetailsFragment";
 
     @Override
     public void onAttach(Context context) {
