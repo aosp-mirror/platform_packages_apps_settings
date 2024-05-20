@@ -117,7 +117,6 @@ class ZenModesBackend {
                 .setManualInvocationAllowed(true)
                 .setConfigurationActivity(null) // No further settings
                 .setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_PRIORITY)
-                .setIconResId(com.android.internal.R.drawable.ic_zen_24dp)
                 .build();
 
         return ZenMode.manualDndMode(manualDndRule,
