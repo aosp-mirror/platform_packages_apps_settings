@@ -15,6 +15,7 @@
  */
 package com.android.settings.notification.modes;
 
+import android.app.AutomaticZenRule;
 import android.app.Flags;
 import android.content.Context;
 
@@ -25,6 +26,9 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 
 import com.android.settingslib.core.AbstractPreferenceController;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Controller for the PreferenceCategory on the modes aggregator page ({@link ZenModesListFragment})
@@ -65,16 +69,30 @@ public class ZenModesListPreferenceController extends AbstractPreferenceControll
         // category for each rule that exists.
         PreferenceCategory category = (PreferenceCategory) preference;
 
-        // TODO: b/322373473 - This is not the right way to replace these preferences; we should
-        //                     follow something similar to what
-        //                     ZenModeAutomaticRulesPreferenceController does to change rules
-        //                     only as necessary and update them.
-        category.removeAll();
+        Map<String, ZenModeListPreference> originalPreferences = new HashMap<>();
+        for (int i = 0; i < category.getPreferenceCount(); i++) {
+            ZenModeListPreference pref = (ZenModeListPreference) category.getPreference(i);
+            originalPreferences.put(pref.getKey(), pref);
+        }
 
+        // Loop through each rule, either updating the existing rule or creating the rule's
+        // preference
         for (ZenMode mode : mBackend.getModes()) {
-            Preference pref = new ZenModeListPreference(mContext, mode);
-            category.addPreference(pref);
+            if (originalPreferences.containsKey(mode.getId())) {
+                // existing rule; update its info if it's changed since the last display
+                AutomaticZenRule rule = mode.getRule();
+                originalPreferences.get(mode.getId()).setZenMode(mode);
+            } else {
+                // new rule; create a new ZenRulePreference & add it to the preference category
+                Preference pref = new ZenModeListPreference(mContext, mode);
+                category.addPreference(pref);
+            }
+
+            originalPreferences.remove(mode.getId());
+        }
+        // Remove preferences that no longer have a rule
+        for (String key : originalPreferences.keySet()) {
+            category.removePreferenceRecursively(key);
         }
     }
-
 }

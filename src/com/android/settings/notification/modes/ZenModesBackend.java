@@ -33,6 +33,7 @@ import com.android.settings.R;
 
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -77,7 +78,15 @@ class ZenModesBackend {
                     isRuleActive(ruleId, currentConfig)));
         }
 
-        // TODO: b/331429435 - Sort modes.
+        modes.sort((l, r) -> {
+            if (l.isManualDnd()) {
+                return -1;
+            } else if (r.isManualDnd()) {
+                return 1;
+            }
+            return l.getRule().getName().compareTo(r.getRule().getName());
+        });
+
         return modes;
     }
 
@@ -105,10 +114,10 @@ class ZenModesBackend {
                 .setZenPolicy(ZenAdapters.notificationPolicyToZenPolicy(
                         mNotificationManager.getNotificationPolicy()))
                 .setDeviceEffects(null)
-                .setTriggerDescription(mContext.getString(R.string.zen_mode_settings_summary))
                 .setManualInvocationAllowed(true)
                 .setConfigurationActivity(null) // No further settings
                 .setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_PRIORITY)
+                .setIconResId(com.android.internal.R.drawable.ic_zen_24dp)
                 .build();
 
         return ZenMode.manualDndMode(manualDndRule,

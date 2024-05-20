@@ -41,6 +41,7 @@ public class ZenModeFragment extends ZenModeFragmentBase {
         // TODO: fill in with all the elements of this page. Each should be an instance of
         //       {@link AbstractZenModePreferenceController}.
         List<AbstractPreferenceController> prefControllers = new ArrayList<>();
+        prefControllers.add(new ZenModeHeaderController(context, "header", this, mBackend));
         return prefControllers;
     }
 
@@ -55,19 +56,6 @@ public class ZenModeFragment extends ZenModeFragmentBase {
             return;
         }
         getActivity().setTitle(azr.getName());
-
-        // TODO: b/308819292 - implement the real screen!
-        final PreferenceScreen screen = getPreferenceScreen();
-        if (screen == null) {
-            return;
-        }
-
-        Preference tmpPref = screen.findPreference("zen_mode_test");
-        if (tmpPref == null) {
-            return;
-        }
-        tmpPref.setTitle(azr.getTriggerDescription());
-        tmpPref.setSummary("active?: " + mode.isActive());
     }
 
     @Override
