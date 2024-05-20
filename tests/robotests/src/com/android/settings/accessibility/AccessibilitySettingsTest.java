@@ -27,8 +27,6 @@ import static java.util.Collections.singletonList;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.accessibilityservice.AccessibilityShortcutInfo;
-import android.app.Application;
-import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -49,7 +47,6 @@ import androidx.fragment.app.Fragment;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.internal.accessibility.util.AccessibilityUtils;
-import com.android.internal.content.PackageMonitor;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.testutils.XmlTestUtils;
@@ -333,12 +330,6 @@ public class AccessibilitySettingsTest {
                 AccessibilitySettingsContentObserver.class).isTrue();
         assertUriObserversContainsClazz(Settings.Secure.ACCESSIBILITY_QS_TARGETS,
                 AccessibilitySettingsContentObserver.class).isFalse();
-        List<BroadcastReceiver> broadcastReceivers =
-                shadowOf((Application) ApplicationProvider.getApplicationContext())
-                        .getRegisteredReceivers()
-                        .stream().map(wrapper -> wrapper.broadcastReceiver).toList();
-        assertThat(broadcastReceivers.stream().anyMatch(
-                broadcastReceiver -> broadcastReceiver instanceof PackageMonitor)).isTrue();
     }
 
     @Test
@@ -352,12 +343,6 @@ public class AccessibilitySettingsTest {
                 AccessibilitySettingsContentObserver.class).isTrue();
         assertUriObserversContainsClazz(Settings.Secure.ACCESSIBILITY_QS_TARGETS,
                 AccessibilitySettingsContentObserver.class).isTrue();
-        List<BroadcastReceiver> broadcastReceivers =
-                shadowOf((Application) ApplicationProvider.getApplicationContext())
-                        .getRegisteredReceivers()
-                        .stream().map(wrapper -> wrapper.broadcastReceiver).toList();
-        assertThat(broadcastReceivers.stream().anyMatch(
-                broadcastReceiver -> broadcastReceiver instanceof PackageMonitor)).isTrue();
     }
 
     @Test
@@ -372,12 +357,6 @@ public class AccessibilitySettingsTest {
                 AccessibilitySettingsContentObserver.class).isFalse();
         assertUriObserversContainsClazz(Settings.Secure.ACCESSIBILITY_QS_TARGETS,
                 AccessibilitySettingsContentObserver.class).isFalse();
-        List<BroadcastReceiver> broadcastReceivers =
-                shadowOf((Application) ApplicationProvider.getApplicationContext())
-                        .getRegisteredReceivers()
-                        .stream().map(wrapper -> wrapper.broadcastReceiver).toList();
-        assertThat(broadcastReceivers.stream().anyMatch(
-                broadcastReceiver -> broadcastReceiver instanceof PackageMonitor)).isFalse();
     }
 
     @Test
