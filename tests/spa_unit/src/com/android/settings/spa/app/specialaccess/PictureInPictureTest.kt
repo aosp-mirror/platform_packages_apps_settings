@@ -27,6 +27,7 @@ import android.os.DeadSystemRuntimeException
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
+import com.android.settingslib.spaprivileged.model.app.AppOps
 import com.android.settingslib.spaprivileged.model.app.AppOpsController
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.flow.first
@@ -179,7 +180,7 @@ class PictureInPictureTest {
         appOpsController = AppOpsController(
             context = context,
             app = PICTURE_IN_PICTURE_APP,
-            op = AppOpsManager.OP_PICTURE_IN_PICTURE,
+            appOps = AppOps(AppOpsManager.OP_PICTURE_IN_PICTURE),
         ),
     )
 
