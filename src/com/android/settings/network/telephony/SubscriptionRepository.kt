@@ -109,21 +109,21 @@ fun Context.getSelectableSubscriptionInfoList(): List<SubscriptionInfo> {
         // to users so they should never be returned.
         SubscriptionUtil.isSubscriptionVisible(subscriptionManager, this, subInfo)
     }
-    // Multiple subscriptions in a group should only have one representative.
-    // It should be the current active primary subscription if any, or any primary subscription.
-    val groupUuidToSelectedIdMap = visibleList
-        .groupBy { it.groupUuid }
-        .mapValues { (_, subInfos) ->
-            subInfos.filter { it.simSlotIndex != SubscriptionManager.INVALID_SIM_SLOT_INDEX }
-                .ifEmpty { subInfos }
-                .minOf { it.subscriptionId }
-        }
-
     return visibleList
-        .filter { subInfo ->
-            val groupUuid = subInfo.groupUuid ?: return@filter true
-            groupUuidToSelectedIdMap[groupUuid] == subInfo.subscriptionId
+        .groupBy { it.groupUuid }
+        .flatMap { (groupUuid, subInfos) ->
+            if (groupUuid == null) {
+                subInfos
+            } else {
+                // Multiple subscriptions in a group should only have one representative.
+                // It should be the current active primary subscription if any, or the primary
+                // subscription with minimum subscription id.
+                subInfos.filter { it.simSlotIndex != SubscriptionManager.INVALID_SIM_SLOT_INDEX }
+                    .ifEmpty { subInfos.sortedBy { it.subscriptionId } }
+                    .take(1)
+            }
         }
-        .sortedBy { it.subscriptionId }
+        // Matching the sorting order in SubscriptionManagerService.getAvailableSubscriptionInfoList
+        .sortedWith(compareBy({ it.simSlotIndex }, { it.subscriptionId }))
         .also { Log.d(TAG, "getSelectableSubscriptionInfoList: $it") }
 }
