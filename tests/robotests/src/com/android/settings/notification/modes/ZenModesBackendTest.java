@@ -142,13 +142,11 @@ public class ZenModesBackendTest {
                                 .setType(AutomaticZenRule.TYPE_OTHER)
                                 .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
                                 .setZenPolicy(ZenAdapters.notificationPolicyToZenPolicy(dndPolicy))
-                                .setTriggerDescription(
-                                        mContext.getString(R.string.zen_mode_settings_summary))
                                 .setManualInvocationAllowed(true)
                                 .build(),
                         false),
-                new ZenMode("rule1", ZEN_RULE, false),
-                new ZenMode("rule2", rule2, false))
+                new ZenMode("rule2", rule2, false),
+                new ZenMode("rule1", ZEN_RULE, false))
                 .inOrder();
     }
 
@@ -167,8 +165,6 @@ public class ZenModesBackendTest {
                                 .setType(AutomaticZenRule.TYPE_OTHER)
                                 .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
                                 .setZenPolicy(ZenAdapters.notificationPolicyToZenPolicy(dndPolicy))
-                                .setTriggerDescription(
-                                        mContext.getString(R.string.zen_mode_settings_summary))
                                 .setManualInvocationAllowed(true)
                                 .build(), false));
     }
