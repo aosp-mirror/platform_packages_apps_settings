@@ -25,35 +25,32 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceGroup;
-import androidx.preference.PreferenceGroupAdapter;
 import androidx.preference.PreferenceViewHolder;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.window.embedding.ActivityEmbeddingController;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.core.RoundCornerPreferenceAdapter;
 import com.android.settings.flags.Flags;
 import com.android.settings.homepage.SettingsHomepageActivity;
 
 /**
  *  Adapter for highlighting top level preferences
  */
-public class HighlightableTopLevelPreferenceAdapter extends PreferenceGroupAdapter implements
+public class HighlightableTopLevelPreferenceAdapter extends RoundCornerPreferenceAdapter implements
         SettingsHomepageActivity.HomepageLoadedListener {
 
     private static final String TAG = "HighlightableTopLevelAdapter";
 
     static final long DELAY_HIGHLIGHT_DURATION_MILLIS = 100L;
     private static final int RES_NORMAL_BACKGROUND =
-            Flags.homepageRevamp()
-                    ? R.drawable.homepage_selectable_item_background_v2
-                    : R.drawable.homepage_selectable_item_background;
+            R.drawable.homepage_selectable_item_background;
     private static final int RES_HIGHLIGHTED_BACKGROUND =
-            Flags.homepageRevamp()
-                    ? R.drawable.homepage_highlighted_item_background_v2
-                    : R.drawable.homepage_highlighted_item_background;
+            R.drawable.homepage_highlighted_item_background;
 
     private final int mTitleColorNormal;
     private final int mTitleColorHighlight;
@@ -101,7 +98,7 @@ public class HighlightableTopLevelPreferenceAdapter extends PreferenceGroupAdapt
     @VisibleForTesting
     void updateBackground(PreferenceViewHolder holder, int position) {
         if (!isHighlightNeeded()) {
-            removeHighlightBackground(holder);
+            removeHighlightBackground(holder, position);
             return;
         }
 
@@ -109,9 +106,9 @@ public class HighlightableTopLevelPreferenceAdapter extends PreferenceGroupAdapt
                 && mHighlightKey != null
                 && TextUtils.equals(mHighlightKey, getItem(position).getKey())) {
             // This position should be highlighted.
-            addHighlightBackground(holder);
+            addHighlightBackground(holder, position);
         } else {
-            removeHighlightBackground(holder);
+            removeHighlightBackground(holder, position);
         }
     }
 
@@ -226,31 +223,41 @@ public class HighlightableTopLevelPreferenceAdapter extends PreferenceGroupAdapt
             // De-highlight the existing preference view holder at an early stage
             final PreferenceViewHolder holder = mViewHolders.get(position);
             if (holder != null) {
-                removeHighlightBackground(holder);
+                removeHighlightBackground(holder, position);
             }
             notifyItemChanged(position);
         }
     }
 
-    private void addHighlightBackground(PreferenceViewHolder holder) {
+    private void addHighlightBackground(PreferenceViewHolder holder, int position) {
         final View v = holder.itemView;
-        v.setBackgroundResource(RES_HIGHLIGHTED_BACKGROUND);
-        ((TextView) v.findViewById(android.R.id.title)).setTextColor(mTitleColorHighlight);
-        ((TextView) v.findViewById(android.R.id.summary)).setTextColor(mSummaryColorHighlight);
-        final Drawable drawable = ((ImageView) v.findViewById(android.R.id.icon)).getDrawable();
-        if (drawable != null) {
-            drawable.setTint(mIconColorHighlight);
+        if (Flags.homepageRevamp()) {
+            @DrawableRes int bgRes = getRoundCornerDrawableRes(position, true /*isSelected*/);
+            v.setBackgroundResource(bgRes);
+        } else {
+            v.setBackgroundResource(RES_HIGHLIGHTED_BACKGROUND);
+            ((TextView) v.findViewById(android.R.id.title)).setTextColor(mTitleColorHighlight);
+            ((TextView) v.findViewById(android.R.id.summary)).setTextColor(mSummaryColorHighlight);
+            final Drawable drawable = ((ImageView) v.findViewById(android.R.id.icon)).getDrawable();
+            if (drawable != null) {
+                drawable.setTint(mIconColorHighlight);
+            }
         }
     }
 
-    private void removeHighlightBackground(PreferenceViewHolder holder) {
+    private void removeHighlightBackground(PreferenceViewHolder holder, int position) {
         final View v = holder.itemView;
-        v.setBackgroundResource(RES_NORMAL_BACKGROUND);
-        ((TextView) v.findViewById(android.R.id.title)).setTextColor(mTitleColorNormal);
-        ((TextView) v.findViewById(android.R.id.summary)).setTextColor(mSummaryColorNormal);
-        final Drawable drawable = ((ImageView) v.findViewById(android.R.id.icon)).getDrawable();
-        if (drawable != null) {
-            drawable.setTint(mIconColorNormal);
+        if (Flags.homepageRevamp()) {
+            @DrawableRes int bgRes = getRoundCornerDrawableRes(position, false /*isSelected*/);
+            v.setBackgroundResource(bgRes);
+        } else {
+            v.setBackgroundResource(RES_NORMAL_BACKGROUND);
+            ((TextView) v.findViewById(android.R.id.title)).setTextColor(mTitleColorNormal);
+            ((TextView) v.findViewById(android.R.id.summary)).setTextColor(mSummaryColorNormal);
+            final Drawable drawable = ((ImageView) v.findViewById(android.R.id.icon)).getDrawable();
+            if (drawable != null) {
+                drawable.setTint(mIconColorNormal);
+            }
         }
     }
 

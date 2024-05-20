@@ -17,28 +17,34 @@
 
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/SearchBarStyle"
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:layout_weight="1">
-    <Toolbar
-        android:id="@+id/search_action_bar_unified"
+    style="@style/SearchBarStyle_v2"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/search_action_bar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/search_bar_height"
-        android:paddingStart="8dp"
+        android:layout_height="wrap_content"
+        android:minHeight="72dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="24dp"
         android:paddingEnd="24dp"
-        android:background="@drawable/search_bar_selected_background"
-        android:touchscreenBlocksFocus="false"
-        android:nextFocusForward="@+id/homepage_container"
-        android:contentInsetStartWithNavigation="@dimen/search_bar_content_inset"
-        android:navigationIcon="@drawable/ic_homepage_search">
+        android:background="@drawable/search_bar_selected_background">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_homepage_search" />
         <TextView
             android:id="@+id/search_bar_title"
             style="@style/TextAppearance.SearchBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingStart="8dp"
-            android:layout_gravity="start"
+            android:paddingEnd="8dp"
             android:text="@string/search_settings"/>
-    </Toolbar>
+    </LinearLayout>
 </com.google.android.material.card.MaterialCardView>
