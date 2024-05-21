@@ -16,6 +16,8 @@
 
 package com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.udfps.ui.viewmodel
 
+import com.android.settings.biometrics.fingerprint2.lib.model.StageViewModel
+
 /** Represents the description text for UDFPS enrollment */
 data class DescriptionText(
   val isSuw: Boolean,

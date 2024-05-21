@@ -22,12 +22,14 @@
 
     <PreferenceCategory
         android:order="-140"
-        android:key="top_level_account_category">
+        android:key="top_level_account_category"
+        android:layout="@layout/settingslib_preference_category_no_title">
     </PreferenceCategory>
 
     <PreferenceCategory
         android:order="-130"
-        android:key="top_level_connectivity_category">
+        android:key="top_level_connectivity_category"
+        android:layout="@layout/settingslib_preference_category_no_title">
         <com.android.settings.widget.HomepagePreference
             android:fragment="com.android.settings.network.NetworkDashboardFragment"
             android:icon="@drawable/ic_settings_wireless_filled"
@@ -51,7 +53,8 @@
 
     <PreferenceCategory
         android:order="-120"
-        android:key="top_level_personalize_category">
+        android:key="top_level_personalize_category"
+        android:layout="@layout/settingslib_preference_category_no_title">
         <com.android.settings.widget.HomepagePreference
             android:fragment="com.android.settings.applications.AppDashboardFragment"
             android:icon="@drawable/ic_apps_filled"
@@ -111,7 +114,8 @@
 
     <PreferenceCategory
         android:order="-110"
-        android:key="top_level_system_info_category">
+        android:key="top_level_system_info_category"
+        android:layout="@layout/settingslib_preference_category_no_title">
         <com.android.settings.widget.HomepagePreference
             android:fragment="com.android.settings.deviceinfo.StorageDashboardFragment"
             android:icon="@drawable/ic_storage_filled"
@@ -154,7 +158,8 @@
 
     <PreferenceCategory
         android:order="-100"
-        android:key="top_level_security_privacy_category">
+        android:key="top_level_security_privacy_category"
+        android:layout="@layout/settingslib_preference_category_no_title">
         <com.android.settings.widget.HomepagePreference
             android:icon="@drawable/ic_settings_safety_center_filled"
             android:key="top_level_safety_center"
@@ -203,20 +208,22 @@
             android:summary="@string/summary_placeholder"
             settings:highlightableMenuKey="@string/menu_key_accounts"
             settings:controller="com.android.settings.accounts.TopLevelAccountEntryPreferenceController"/>
-    </PreferenceCategory>
 
-    <PreferenceCategory
-        android:order="100"
-        android:key="top_level_support_category">
         <com.android.settings.widget.HomepagePreference
             android:key="top_level_emergency"
             android:title="@string/emergency_settings_preference_title"
             android:summary="@string/emergency_dashboard_summary"
             android:icon="@drawable/ic_settings_emergency_filled"
-            android:order="-30"
+            android:order="10"
             android:fragment="com.android.settings.emergency.EmergencyDashboardFragment"
             settings:isPreferenceVisible="@bool/config_show_emergency_settings"
             settings:highlightableMenuKey="@string/menu_key_emergency"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:order="100"
+        android:key="top_level_support_category"
+        android:layout="@layout/settingslib_preference_category_no_title">
 
         <com.android.settings.widget.HomepagePreference
             android:fragment="com.android.settings.accessibility.AccessibilitySettings"

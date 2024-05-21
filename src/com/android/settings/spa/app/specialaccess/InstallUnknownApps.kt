@@ -20,7 +20,6 @@ import android.Manifest
 import android.app.AppGlobals
 import android.app.AppOpsManager
 import android.app.AppOpsManager.MODE_DEFAULT
-import android.app.AppOpsManager.OP_REQUEST_INSTALL_PACKAGES
 import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.os.Process
@@ -28,6 +27,7 @@ import android.os.UserManager
 import androidx.compose.runtime.Composable
 import com.android.settings.R
 import com.android.settingslib.spa.lifecycle.collectAsCallbackWithLifecycle
+import com.android.settingslib.spaprivileged.model.app.AppOps
 import com.android.settingslib.spaprivileged.model.app.AppOpsController
 import com.android.settingslib.spaprivileged.model.app.AppRecord
 import com.android.settingslib.spaprivileged.model.app.userId
@@ -62,12 +62,7 @@ class InstallUnknownAppsListModel(private val context: Context) :
     override fun transformItem(app: ApplicationInfo) =
         InstallUnknownAppsRecord(
             app = app,
-            appOpsController =
-                AppOpsController(
-                    context = context,
-                    app = app,
-                    op = OP_REQUEST_INSTALL_PACKAGES,
-                ),
+            appOpsController = AppOpsController(context = context, app = app, appOps = APP_OPS),
         )
 
     override fun filter(
@@ -92,6 +87,8 @@ class InstallUnknownAppsListModel(private val context: Context) :
     }
 
     companion object {
+        private val APP_OPS = AppOps(AppOpsManager.OP_REQUEST_INSTALL_PACKAGES)
+
         private fun isChangeable(
             record: InstallUnknownAppsRecord,
             potentialPackageNames: Set<String>,

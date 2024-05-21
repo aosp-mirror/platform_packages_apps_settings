@@ -2777,6 +2777,7 @@
         <activity android:name=".biometrics.fingerprint2.ui.enrollment.activity.FingerprintEnrollmentV2Activity"
             android:exported="true"
             android:permission="android.permission.MANAGE_FINGERPRINT"
+            android:configChanges="density"
             android:theme="@style/GlifTheme.Light">
             <intent-filter>
                 <action android:name="android.settings.FINGERPRINT_SETUP" />

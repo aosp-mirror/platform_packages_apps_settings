@@ -66,10 +66,11 @@ class SubscriptionRepositoryTest {
     @Test
     fun isSubscriptionEnabledFlow_enabled() = runBlocking {
         mockSubscriptionManager.stub {
-            on { isSubscriptionEnabled(SUB_ID_1) } doReturn true
+            on { isSubscriptionEnabled(SUB_ID_IN_SLOT_0) } doReturn true
         }
 
-        val isEnabled = repository.isSubscriptionEnabledFlow(SUB_ID_1).firstWithTimeoutOrNull()
+        val isEnabled =
+            repository.isSubscriptionEnabledFlow(SUB_ID_IN_SLOT_0).firstWithTimeoutOrNull()
 
         assertThat(isEnabled).isTrue()
     }
@@ -94,21 +95,24 @@ class SubscriptionRepositoryTest {
     }
 
     @Test
-    fun getSelectableSubscriptionInfoList_sortedBySubId() {
+    fun getSelectableSubscriptionInfoList_sortedBySimSlotIndex() {
         mockSubscriptionManager.stub {
             on { getAvailableSubscriptionInfoList() } doReturn listOf(
                 SubscriptionInfo.Builder().apply {
-                    setId(SUB_ID_2)
+                    setSimSlotIndex(SIM_SLOT_INDEX_0)
+                    setId(SUB_ID_IN_SLOT_0)
                 }.build(),
                 SubscriptionInfo.Builder().apply {
-                    setId(SUB_ID_1)
+                    setSimSlotIndex(SIM_SLOT_INDEX_1)
+                    setId(SUB_ID_IN_SLOT_1)
                 }.build(),
             )
         }
 
         val subInfos = context.getSelectableSubscriptionInfoList()
 
-        assertThat(subInfos.map { it.subscriptionId }).containsExactly(SUB_ID_1, SUB_ID_2).inOrder()
+        assertThat(subInfos.map { it.simSlotIndex })
+            .containsExactly(SIM_SLOT_INDEX_0, SIM_SLOT_INDEX_1).inOrder()
     }
 
     @Test
@@ -116,20 +120,21 @@ class SubscriptionRepositoryTest {
         mockSubscriptionManager.stub {
             on { getAvailableSubscriptionInfoList() } doReturn listOf(
                 SubscriptionInfo.Builder().apply {
-                    setId(SUB_ID_1)
+                    setSimSlotIndex(SubscriptionManager.INVALID_SIM_SLOT_INDEX)
+                    setId(SUB_ID_3_NOT_IN_SLOT)
                     setGroupUuid(GROUP_UUID)
                 }.build(),
                 SubscriptionInfo.Builder().apply {
-                    setId(SUB_ID_2)
+                    setSimSlotIndex(SIM_SLOT_INDEX_0)
+                    setId(SUB_ID_IN_SLOT_0)
                     setGroupUuid(GROUP_UUID)
-                    setSimSlotIndex(SIM_SLOT_INDEX)
                 }.build(),
             )
         }
 
         val subInfos = context.getSelectableSubscriptionInfoList()
 
-        assertThat(subInfos.map { it.subscriptionId }).containsExactly(SUB_ID_2)
+        assertThat(subInfos.map { it.subscriptionId }).containsExactly(SUB_ID_IN_SLOT_0)
     }
 
     @Test
@@ -137,11 +142,11 @@ class SubscriptionRepositoryTest {
         mockSubscriptionManager.stub {
             on { getAvailableSubscriptionInfoList() } doReturn listOf(
                 SubscriptionInfo.Builder().apply {
-                    setId(SUB_ID_2)
+                    setId(SUB_ID_4_NOT_IN_SLOT)
                     setGroupUuid(GROUP_UUID)
                 }.build(),
                 SubscriptionInfo.Builder().apply {
-                    setId(SUB_ID_1)
+                    setId(SUB_ID_3_NOT_IN_SLOT)
                     setGroupUuid(GROUP_UUID)
                 }.build(),
             )
@@ -149,16 +154,16 @@ class SubscriptionRepositoryTest {
 
         val subInfos = context.getSelectableSubscriptionInfoList()
 
-        assertThat(subInfos.map { it.subscriptionId }).containsExactly(SUB_ID_1)
+        assertThat(subInfos.map { it.subscriptionId }).containsExactly(SUB_ID_3_NOT_IN_SLOT)
     }
 
     @Test
     fun phoneNumberFlow() = runBlocking {
         mockSubscriptionManager.stub {
-            on { getPhoneNumber(SUB_ID_1) } doReturn NUMBER_1
+            on { getPhoneNumber(SUB_ID_IN_SLOT_1) } doReturn NUMBER_1
         }
         val subInfo = SubscriptionInfo.Builder().apply {
-            setId(SUB_ID_1)
+            setId(SUB_ID_IN_SLOT_1)
             setMcc(MCC)
         }.build()
 
@@ -168,10 +173,13 @@ class SubscriptionRepositoryTest {
     }
 
     private companion object {
-        const val SUB_ID_1 = 1
-        const val SUB_ID_2 = 2
+        const val SIM_SLOT_INDEX_0 = 0
+        const val SUB_ID_IN_SLOT_0 = 2
+        const val SIM_SLOT_INDEX_1 = 1
+        const val SUB_ID_IN_SLOT_1 = 1
+        const val SUB_ID_3_NOT_IN_SLOT = 3
+        const val SUB_ID_4_NOT_IN_SLOT = 4
         val GROUP_UUID = UUID.randomUUID().toString()
-        const val SIM_SLOT_INDEX = 1
         const val NUMBER_1 = "000000001"
         const val MCC = "310"
     }

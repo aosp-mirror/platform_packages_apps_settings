@@ -406,7 +406,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
 
     private void initSearchBarView() {
         if (Flags.homepageRevamp()) {
-            Toolbar toolbar = findViewById(R.id.search_action_bar_unified);
+            View toolbar = findViewById(R.id.search_action_bar);
             FeatureFactory.getFeatureFactory().getSearchFeatureProvider()
                     .initSearchToolbar(this /* activity */, toolbar,
                             SettingsEnums.SETTINGS_HOMEPAGE);
@@ -469,6 +469,10 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         window.setStatusBarColor(color);
         // Update content background.
         findViewById(android.R.id.content).setBackgroundColor(color);
+        if (Flags.homepageRevamp()) {
+            //Update search bar background
+            findViewById(R.id.app_bar_container).setBackgroundColor(color);
+        }
     }
 
     private void showSuggestionFragment(boolean scrollNeeded) {

@@ -20,6 +20,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
@@ -27,6 +28,7 @@ import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceGroupAdapter;
 import androidx.preference.PreferenceViewHolder;
 
+import com.android.settings.flags.Flags;
 import com.android.settingslib.widget.theme.R;
 
 import java.util.ArrayList;
@@ -68,14 +70,47 @@ public class RoundCornerPreferenceAdapter extends PreferenceGroupAdapter {
     @Override
     public void onBindViewHolder(@NonNull PreferenceViewHolder holder, int position) {
         super.onBindViewHolder(holder, position);
-        updateBackground(holder, position);
+        if (Flags.homepageRevamp()) {
+            updateBackground(holder, position);
+        }
+    }
+
+    protected @DrawableRes int getRoundCornerDrawableRes(int position, boolean isSelected) {
+        int CornerType = mRoundCornerMappingList.get(position);
+
+        if ((CornerType & ROUND_CORNER_CENTER) == 0) {
+            return 0;
+        }
+
+        if (((CornerType & ROUND_CORNER_TOP) != 0) && ((CornerType & ROUND_CORNER_BOTTOM) == 0)) {
+            // the first
+            return isSelected ? R.drawable.settingslib_round_background_top_selected
+                    : R.drawable.settingslib_round_background_top;
+        } else if (((CornerType & ROUND_CORNER_BOTTOM) != 0)
+                && ((CornerType & ROUND_CORNER_TOP) == 0)) {
+            // the last
+            return isSelected ? R.drawable.settingslib_round_background_bottom_selected
+                    : R.drawable.settingslib_round_background_bottom;
+        } else if (((CornerType & ROUND_CORNER_TOP) != 0)
+                && ((CornerType & ROUND_CORNER_BOTTOM) != 0)) {
+            // the only one preference
+            return isSelected ? R.drawable.settingslib_round_background_selected
+                    : R.drawable.settingslib_round_background;
+        } else {
+            // in the center
+            return isSelected ? R.drawable.settingslib_round_background_center_selected
+                    : R.drawable.settingslib_round_background_center;
+        }
     }
 
     @SuppressWarnings("WeakerAccess") /* synthetic access */
     private void updatePreferences() {
-        mRoundCornerMappingList = new ArrayList<>();
-        mappingPreferenceGroup(mRoundCornerMappingList, mPreferenceGroup);
+        if (Flags.homepageRevamp()) {
+            mRoundCornerMappingList = new ArrayList<>();
+            mappingPreferenceGroup(mRoundCornerMappingList, mPreferenceGroup);
+        }
     }
+
     private void mappingPreferenceGroup(List<Integer> visibleList, PreferenceGroup group) {
         int groupSize = group.getPreferenceCount();
         int firstVisible = 0;
@@ -125,27 +160,9 @@ public class RoundCornerPreferenceAdapter extends PreferenceGroupAdapter {
 
     /** handle roundCorner background */
     private void updateBackground(PreferenceViewHolder holder, int position) {
-        int CornerType = mRoundCornerMappingList.get(position);
-
-        if ((CornerType & ROUND_CORNER_CENTER) == 0) {
-            return;
-        }
+        @DrawableRes int backgroundRes = getRoundCornerDrawableRes(position, false /* isSelected*/);
 
         View v = holder.itemView;
-        if (((CornerType & ROUND_CORNER_TOP) != 0) && ((CornerType & ROUND_CORNER_BOTTOM) == 0)) {
-            // the first
-            v.setBackgroundResource(R.drawable.settingslib_round_background_top);
-        } else if (((CornerType & ROUND_CORNER_BOTTOM) != 0)
-                && ((CornerType & ROUND_CORNER_TOP) == 0)) {
-            // the last
-            v.setBackgroundResource(R.drawable.settingslib_round_background_bottom);
-        } else if (((CornerType & ROUND_CORNER_TOP) != 0)
-                && ((CornerType & ROUND_CORNER_BOTTOM) != 0)) {
-            // the only one preference
-            v.setBackgroundResource(R.drawable.settingslib_round_background);
-        } else {
-            // in the center
-            v.setBackgroundResource(R.drawable.settingslib_round_background_center);
-        }
+        v.setBackgroundResource(backgroundRes);
     }
 }
