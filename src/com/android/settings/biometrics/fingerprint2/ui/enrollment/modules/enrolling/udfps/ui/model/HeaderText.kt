@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.udfps.ui.viewmodel
+package com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.udfps.ui.model
 
-import com.android.settings.biometrics.fingerprint2.lib.model.StageViewModel
+import com.android.settings.biometrics.fingerprint2.data.model.EnrollStageModel
 
-/** Represents the description text for UDFPS enrollment */
-data class DescriptionText(
+/** Represents the header text for UDFPS enrollment */
+data class HeaderText(
   val isSuw: Boolean,
   val isAccessibility: Boolean,
-  val stageViewModel: StageViewModel,
+  val enrollStageModel: EnrollStageModel,
 )

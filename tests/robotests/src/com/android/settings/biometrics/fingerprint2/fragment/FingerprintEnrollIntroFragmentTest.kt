@@ -90,7 +90,7 @@ class FingerprintEnrollIntroFragmentTest {
 
   private val navigationViewModel =
     FingerprintNavigationViewModel(
-      Introduction,
+      Introduction(),
       false,
       flowViewModel,
       interactor

@@ -24,6 +24,7 @@ import android.graphics.Canvas
 import android.graphics.ColorFilter
 import android.graphics.Paint
 import android.graphics.PixelFormat
+import android.graphics.PointF
 import android.graphics.Rect
 import android.graphics.RectF
 import android.graphics.drawable.Drawable
@@ -37,7 +38,6 @@ import androidx.core.animation.addListener
 import androidx.core.graphics.toRect
 import androidx.core.graphics.toRectF
 import com.android.settings.R
-import com.android.settings.biometrics.fingerprint2.lib.model.StageViewModel
 import kotlin.math.sin
 
 /**
@@ -51,11 +51,11 @@ class UdfpsEnrollIconV2 internal constructor(context: Context, attrs: AttributeS
   private val fingerprintDrawable: ShapeDrawable
   private val sensorOutlinePaint: Paint
   private val blueFill: Paint
-  private val helper = UdfpsEnrollHelperV2(context)
   @ColorInt private var enrollIconColor = 0
   @ColorInt private var movingTargetFill = 0
   private var currentScale = 1.0f
   private var alpha = 0
+  private var guidedEnrollmentOffset: PointF? = null
 
   /**
    * This is the physical location of the sensor. This rect will be updated by [drawSensorRectAt]
@@ -143,45 +143,6 @@ class UdfpsEnrollIconV2 internal constructor(context: Context, attrs: AttributeS
     invalidateSelf()
   }
 
-  /** Update the progress of the icon */
-  fun onEnrollmentProgress(remaining: Int, totalSteps: Int, isRecreating: Boolean = false) {
-    restoreAnimationTime()
-    // If we are restoring this view from a saved state, set animation duration to 0 to avoid
-    // animating progress that has already occurred.
-    if (isRecreating) {
-      setAnimationTimeToZero()
-    } else {
-      restoreAnimationTime()
-    }
-
-    helper.onEnrollmentProgress(remaining, totalSteps)
-    val offset = helper.guidedEnrollmentLocation
-    val currentBounds = getCurrLocation().toRect()
-    if (offset != null) {
-      // This is the desired location of the sensor rect, the [EnrollHelper]
-      // offsets the initial sensor rect by a bit to get the user to move their finger a bit more.
-      val targetRect = Rect(sensorRectBounds).toRectF()
-      targetRect.offset(offset.x, offset.y)
-      val shouldAnimateMovement =
-        !currentBounds.equals(targetRect) && offset.x != 0f && offset.y != 0f
-      if (shouldAnimateMovement) {
-        targetAnimatorSet?.cancel()
-        animateMovement(currentBounds, targetRect, true)
-      }
-    } else {
-      // If we are not offsetting the sensor, move it back to its original place
-      animateMovement(currentBounds, sensorRectBounds.toRectF(), false)
-    }
-
-    invalidateSelf()
-  }
-
-  /** Update the stage of the icon */
-  fun updateStage(it: StageViewModel) {
-    helper.onUpdateStage(it)
-    invalidateSelf()
-  }
-
   /** Stop drawing the fingerprint icon. */
   fun stopDrawing() {
     alpha = 0
@@ -211,6 +172,7 @@ class UdfpsEnrollIconV2 internal constructor(context: Context, attrs: AttributeS
     if (currentBounds.equals(offsetRect)) {
       return
     }
+
     val xAnimator = ValueAnimator.ofFloat(currentBounds.left.toFloat(), offsetRect.left)
     xAnimator.addUpdateListener {
       currX = it.animatedValue as Float
@@ -258,6 +220,40 @@ class UdfpsEnrollIconV2 internal constructor(context: Context, attrs: AttributeS
   /** This sets animation timers back to normal, this happens after we have */
   private fun restoreAnimationTime() {
     targetAnimationDuration = TARGET_ANIM_DURATION_LONG
+  }
+
+  /**
+   * Indicates a change to guided enrollment has occurred. Also indicates if we are recreating the
+   * view, in which case their is no need to animate the icon to whatever position it was in.
+   */
+  fun updateGuidedEnrollment(point: PointF,  isRecreating: Boolean) {
+    guidedEnrollmentOffset = point
+    if (isRecreating) {
+      setAnimationTimeToZero()
+    } else {
+      restoreAnimationTime()
+    }
+
+    val currentBounds = getCurrLocation().toRect()
+    val offset = guidedEnrollmentOffset
+    if (offset?.x != 0f && offset?.y != 0f) {
+      val targetRect = Rect(sensorRectBounds).toRectF()
+      // This is the desired location of the sensor rect, the [EnrollHelper]
+      // offsets the initial sensor rect by a bit to get the user to move their finger a bit more.
+      targetRect.offset(offset!!.x, offset!!.y)
+      val shouldAnimateMovement = !currentBounds.equals(targetRect)
+      if (shouldAnimateMovement) {
+        targetAnimatorSet?.cancel()
+        animateMovement(currentBounds, targetRect, true)
+      } else {
+        // If we are not offsetting the sensor, move it back to its original place
+        animateMovement(currentBounds, sensorRectBounds.toRectF(), false)
+      }
+    } else {
+      // If we are not offsetting the sensor, move it back to its original place
+      animateMovement(currentBounds, sensorRectBounds.toRectF(), false)
+    }
+    invalidateSelf()
   }
 
   companion object {

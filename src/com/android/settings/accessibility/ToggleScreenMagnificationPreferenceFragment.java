@@ -82,8 +82,6 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     private static final TextUtils.SimpleStringSplitter sStringColonSplitter =
             new TextUtils.SimpleStringSplitter(COMPONENT_NAME_SEPARATOR);
 
-    protected TwoStatePreference mFollowingTypingSwitchPreference;
-
     // TODO(b/147021230): Move duplicated functions with android/internal/accessibility into util.
     private TouchExplorationStateChangeListener mTouchExplorationStateChangeListener;
     private CheckBox mSoftwareTypeCheckBox;
@@ -92,10 +90,13 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     @Nullable private CheckBox mTwoFingerTripleTapTypeCheckBox;
     private DialogCreatable mDialogDelegate;
 
+    private boolean mInSetupWizard;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getActivity().setTitle(R.string.accessibility_screen_magnification_title);
+        mInSetupWizard = WizardManagerHelper.isAnySetupWizard(getIntent());
     }
 
     @Override
@@ -169,7 +170,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                         .showAccessibilityGestureTutorialDialog(getPrefContext());
             case DialogEnums.MAGNIFICATION_EDIT_SHORTCUT:
                 final CharSequence dialogTitle = getShortcutTitle();
-                final int dialogType = WizardManagerHelper.isAnySetupWizard(getIntent())
+                final int dialogType = mInSetupWizard
                         ? DialogType.EDIT_SHORTCUT_MAGNIFICATION_SUW
                         : DialogType.EDIT_SHORTCUT_MAGNIFICATION;
                 mDialog = AccessibilityDialogUtils.showEditShortcutDialog(getPrefContext(),
@@ -240,17 +241,18 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     }
 
     private void addFollowTypingSetting(PreferenceCategory generalCategory) {
-        mFollowingTypingSwitchPreference = new SwitchPreferenceCompat(getPrefContext());
-        mFollowingTypingSwitchPreference.setTitle(
+        var followingTypingSwitchPreference = new SwitchPreferenceCompat(getPrefContext());
+        followingTypingSwitchPreference.setTitle(
                 R.string.accessibility_screen_magnification_follow_typing_title);
-        mFollowingTypingSwitchPreference.setSummary(
+        followingTypingSwitchPreference.setSummary(
                 R.string.accessibility_screen_magnification_follow_typing_summary);
-        mFollowingTypingSwitchPreference.setKey(
+        followingTypingSwitchPreference.setKey(
                 MagnificationFollowTypingPreferenceController.PREF_KEY);
-        generalCategory.addPreference(mFollowingTypingSwitchPreference);
+        generalCategory.addPreference(followingTypingSwitchPreference);
 
         var followTypingPreferenceController = new MagnificationFollowTypingPreferenceController(
                 getContext(), MagnificationFollowTypingPreferenceController.PREF_KEY);
+        followTypingPreferenceController.setInSetupWizard(mInSetupWizard);
         followTypingPreferenceController.displayPreference(getPreferenceScreen());
         addPreferenceController(followTypingPreferenceController);
     }
@@ -282,6 +284,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
         var alwaysOnPreferenceController = new MagnificationAlwaysOnPreferenceController(
                 getContext(), MagnificationAlwaysOnPreferenceController.PREF_KEY);
+        alwaysOnPreferenceController.setInSetupWizard(mInSetupWizard);
         getSettingsLifecycle().addObserver(alwaysOnPreferenceController);
         alwaysOnPreferenceController.displayPreference(getPreferenceScreen());
         addPreferenceController(alwaysOnPreferenceController);
@@ -301,6 +304,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
         var oneFingerPanningPreferenceController =
                 new MagnificationOneFingerPanningPreferenceController(getContext());
+        oneFingerPanningPreferenceController.setInSetupWizard(mInSetupWizard);
         getSettingsLifecycle().addObserver(oneFingerPanningPreferenceController);
         oneFingerPanningPreferenceController.displayPreference(getPreferenceScreen());
         addPreferenceController(oneFingerPanningPreferenceController);
@@ -329,6 +333,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                         getContext(),
                         MagnificationJoystickPreferenceController.PREF_KEY
                 );
+        joystickPreferenceController.setInSetupWizard(mInSetupWizard);
         joystickPreferenceController.displayPreference(getPreferenceScreen());
         addPreferenceController(joystickPreferenceController);
     }

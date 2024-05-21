@@ -20,9 +20,6 @@ import android.app.AutomaticZenRule;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
-
 import com.android.settings.R;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -42,6 +39,10 @@ public class ZenModeFragment extends ZenModeFragmentBase {
         //       {@link AbstractZenModePreferenceController}.
         List<AbstractPreferenceController> prefControllers = new ArrayList<>();
         prefControllers.add(new ZenModeHeaderController(context, "header", this, mBackend));
+        prefControllers.add(new ZenModePeopleLinkPreferenceController(
+                context, "zen_mode_people", mBackend));
+        prefControllers.add(new ZenModeOtherLinkPreferenceController(
+                context, "zen_other_settings", mBackend));
         return prefControllers;
     }
 

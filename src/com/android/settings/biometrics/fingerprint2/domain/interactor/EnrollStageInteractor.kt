@@ -16,11 +16,11 @@
 
 package com.android.settings.biometrics.fingerprint2.domain.interactor
 
-import com.android.settings.biometrics.fingerprint2.lib.model.StageViewModel
+import com.android.settings.biometrics.fingerprint2.data.model.EnrollStageModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 
-typealias EnrollStageThresholds = Map<Float, StageViewModel>
+typealias EnrollStageThresholds = Map<Float, EnrollStageModel>
 
 /** Interactor that provides enroll stages for enrollment. */
 interface EnrollStageInteractor {
@@ -33,11 +33,11 @@ class EnrollStageInteractorImpl() : EnrollStageInteractor {
   override val enrollStageThresholds: Flow<EnrollStageThresholds> =
     flowOf(
       mapOf(
-        0.0f to StageViewModel.Center,
-        0.25f to StageViewModel.Guided,
-        0.5f to StageViewModel.Fingertip,
-        0.75f to StageViewModel.LeftEdge,
-        0.875f to StageViewModel.RightEdge,
+        0.0f to EnrollStageModel.Center,
+        0.25f to EnrollStageModel.Guided,
+        0.5f to EnrollStageModel.Fingertip,
+        0.75f to EnrollStageModel.LeftEdge,
+        0.875f to EnrollStageModel.RightEdge,
       )
     )
 }

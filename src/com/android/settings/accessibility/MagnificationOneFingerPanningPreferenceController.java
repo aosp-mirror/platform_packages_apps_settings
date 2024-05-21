@@ -35,13 +35,12 @@ import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.accessibility.MagnificationCapabilities.MagnificationMode;
-import com.android.settings.core.TogglePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
-public class MagnificationOneFingerPanningPreferenceController
-        extends TogglePreferenceController implements LifecycleObserver, OnResume, OnPause {
+public class MagnificationOneFingerPanningPreferenceController extends
+        MagnificationFeaturePreferenceController implements LifecycleObserver, OnResume, OnPause {
     static final String PREF_KEY = Settings.Secure.ACCESSIBILITY_SINGLE_FINGER_PANNING_ENABLED;
 
     private TwoStatePreference mSwitchPreference;
@@ -82,7 +81,7 @@ public class MagnificationOneFingerPanningPreferenceController
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        return isInSetupWizard() ? CONDITIONALLY_UNAVAILABLE : AVAILABLE;
     }
 
     @Override

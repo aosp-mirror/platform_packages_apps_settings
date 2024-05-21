@@ -34,7 +34,6 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.accessibility.MagnificationCapabilities.MagnificationMode;
-import com.android.settings.core.TogglePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
@@ -44,8 +43,8 @@ import com.android.settingslib.core.lifecycle.events.OnResume;
  * feature, where the magnifier will not deactivate on Activity transitions; it will only zoom out
  * to 100%.
  */
-public class MagnificationAlwaysOnPreferenceController extends TogglePreferenceController
-        implements LifecycleObserver, OnResume, OnPause {
+public class MagnificationAlwaysOnPreferenceController extends
+        MagnificationFeaturePreferenceController implements LifecycleObserver, OnResume, OnPause {
 
     private static final String TAG =
             MagnificationAlwaysOnPreferenceController.class.getSimpleName();
@@ -89,7 +88,7 @@ public class MagnificationAlwaysOnPreferenceController extends TogglePreferenceC
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        return isInSetupWizard() ? CONDITIONALLY_UNAVAILABLE : AVAILABLE;
     }
 
     @Override

@@ -18,6 +18,7 @@ package com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrol
 
 import android.content.Context
 import android.graphics.Point
+import android.graphics.PointF
 import android.graphics.Rect
 import android.util.AttributeSet
 import android.util.Log
@@ -31,7 +32,6 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import com.android.settings.R
 import com.android.settings.biometrics.fingerprint2.lib.model.FingerEnrollState
-import com.android.settings.biometrics.fingerprint2.lib.model.StageViewModel
 import com.android.systemui.biometrics.UdfpsUtils
 import com.android.systemui.biometrics.shared.model.FingerprintSensorType
 import com.android.systemui.biometrics.shared.model.UdfpsOverlayParams
@@ -53,6 +53,13 @@ class UdfpsEnrollViewV2(context: Context, attrs: AttributeSet?) : FrameLayout(co
   private val udfpsUtils: UdfpsUtils = UdfpsUtils()
   private lateinit var touchExplorationAnnouncer: TouchExplorationAnnouncer
   private var isRecreating = false
+  private var onFinishedCompletionAnimation: (() -> Unit)? = null
+
+  init {
+    fingerprintProgressDrawable.setFinishAnimationCompleted {
+      onFinishedCompletionAnimation?.let { it() }
+    }
+  }
 
   /**
    * This function computes the center (x,y) location with respect to the parent [FrameLayout] for
@@ -112,11 +119,6 @@ class UdfpsEnrollViewV2(context: Context, attrs: AttributeSet?) : FrameLayout(co
     touchExplorationAnnouncer = TouchExplorationAnnouncer(context, this, overlayParams, udfpsUtils)
   }
 
-  /** Updates the current enrollment stage. */
-  fun updateStage(it: StageViewModel) {
-    fingerprintIcon.updateStage(it)
-  }
-
   /** Receive enroll progress event */
   fun onUdfpsEvent(event: FingerEnrollState) {
     when (event) {
@@ -174,7 +176,6 @@ class UdfpsEnrollViewV2(context: Context, attrs: AttributeSet?) : FrameLayout(co
 
   /** Receive enroll progress event */
   private fun onEnrollmentProgress(remaining: Int, totalSteps: Int) {
-    fingerprintIcon.onEnrollmentProgress(remaining, totalSteps)
     fingerprintProgressDrawable.onEnrollmentProgress(remaining, totalSteps)
   }
 
@@ -241,8 +242,23 @@ class UdfpsEnrollViewV2(context: Context, attrs: AttributeSet?) : FrameLayout(co
 
   /** Indicates we should should restore the views saved state. */
   fun onEnrollProgressSaved(it: FingerEnrollState.EnrollProgress) {
-    fingerprintIcon.onEnrollmentProgress(it.remainingSteps, it.totalStepsRequired, true)
     fingerprintProgressDrawable.onEnrollmentProgress(it.remainingSteps, it.totalStepsRequired, true)
+  }
+
+  /** Indicates we are recreating the UI from a saved state. */
+  fun onGuidedPointSaved(it: PointF) {
+    fingerprintIcon.updateGuidedEnrollment(it, true)
+  }
+
+  /**
+   * Indicates that the finish animation has completed, and enrollment can proceed to the next stage
+   */
+  fun setFinishAnimationCompleted(onFinishedAnimation: () -> Unit) {
+    this.onFinishedCompletionAnimation = onFinishedAnimation
+  }
+
+  fun updateGuidedEnrollment(point: PointF) {
+    fingerprintIcon.updateGuidedEnrollment(point, false)
   }
 
   companion object {
