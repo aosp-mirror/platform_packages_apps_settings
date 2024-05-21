@@ -28,7 +28,7 @@ import com.android.settingslib.utils.ThreadUtils;
 class AddSourceWaitForResponseState extends AudioStreamStateHandler {
     @VisibleForTesting
     static final int AUDIO_STREAM_ADD_SOURCE_WAIT_FOR_RESPONSE_STATE_SUMMARY =
-            R.string.audio_streams_add_source_wait_for_response_summary;
+            R.string.audio_streams_connecting_summary;
 
     @VisibleForTesting static final int ADD_SOURCE_WAIT_FOR_RESPONSE_TIMEOUT_MILLIS = 20000;
 
