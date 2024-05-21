@@ -48,9 +48,9 @@
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"Seulement pour les jeux, les vidéos et autres"</string>
     <string name="selective_stay_awake_summary" msgid="9055967322921984543">"L\'écran frontal s\'allume pour les applis qui empêchent la mise en veille de l\'écran"</string>
     <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Balayer vers le haut pour continuer"</string>
-    <string name="stay_awake_on_lockscreen_summary" msgid="2299351813382522952">"Pliez votre téléphone et balayez vers le haut sur l\'écran frontal pour continuer à utiliser l\'application, ou attendez quelques secondes pour que l\'écran se verrouille"</string>
+    <string name="stay_awake_on_lockscreen_summary" msgid="8825321939913726566">"Pliez votre téléphone et balayez vers le haut sur l\'écran frontal pour continuer à utiliser l\'application, ou attendez quelques secondes pour que l\'écran se verrouille. Les applications vidéo et jeux resteront automatiquement ouverts."</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"Jamais"</string>
-    <string name="sleep_on_fold_summary" msgid="7737992842459588846">"L\'écran frontal se verrouille lorsque vous pliez votre appareil"</string>
+    <string name="sleep_on_fold_summary" msgid="4191753338303043456">"L\'écran frontal se désactive et se verrouille lorsque vous pliez votre appareil"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Utiliser la rotation automatique"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"La détection de visages utilise la caméra avant pour améliorer la précision de la rotation automatique. Les images ne sont jamais stockées ni envoyées à Google."</string>
     <string name="bluetooth" msgid="8898478620943459654">"Bluetooth"</string>
@@ -1998,14 +1998,14 @@
     <string name="accessibility_color_and_motion_title" msgid="2323301706545305874">"Couleur et mouvement"</string>
     <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"Contraste des couleurs"</string>
     <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"Un contraste plus élevé fait ressortir le texte, les boutons et les icônes. Choisissez le contraste en fonction de vos préférences."</string>
-    <string name="color_contrast_note" msgid="7592686603372566198">"Certaines applis sont susceptibles de ne pas prendre en charge tous les paramètres relatifs au contraste du texte et des couleurs"</string>
+    <string name="color_contrast_note" msgid="7592686603372566198">"Il est possible que certaines applis ne prennent pas en charge tous les paramètres de contraste du texte et des couleurs"</string>
     <string name="accessibility_color_contrast_summary" msgid="7563237683500106632">"Ajustez la manière dont les couleurs ainsi que le texte s\'affichent sur l\'arrière-plan de votre écran"</string>
     <string name="color_contrast_preview" msgid="6791430227535363883">"Aperçu"</string>
     <string name="color_contrast_preview_sender_name" msgid="8641943417589238147">"Helen, Adam"</string>
     <string name="color_contrast_preview_email_send_date" msgid="2108702726171600080">"Il y a 2 jours"</string>
     <string name="color_contrast_preview_email_badge" msgid="4845484039428505392">"Suivre ?"</string>
     <string name="color_contrast_preview_email_title" msgid="198712116139754823">"Rapport du déplacement professionnel"</string>
-    <string name="color_contrast_preview_email_body" msgid="4139331665325624199">"Pour plus d\'aide, veuillez contacter \nHelen ou moi-même. Ce rapport sera"</string>
+    <string name="color_contrast_preview_email_body" msgid="4139331665325624199">"Si vous avez des questions, veuillez contacter \nHelen ou moi-même. Ce rapport sera"</string>
     <string name="color_contrast_preview_email_attachment_name" msgid="852407311884814746">"Dépenses du client"</string>
     <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"Assombrir l\'écran"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Commandes d\'interaction"</string>
@@ -2143,7 +2143,7 @@
     <string name="accessibility_button_high_label" msgid="9138077512008190896">"Opaque"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Texte avec contraste élevé"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Mettre le texte en noir ou blanc pour maximiser le contraste avec l\'arrière-plan"</string>
-    <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"Maximiser le contraste du texte"</string>
+    <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"Optimiser le contraste du texte"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="5493999083693403489">"Mettez le texte en noir ou blanc pour accentuer le contraste avec l\'arrière-plan."</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Mise à jour auto de la loupe"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Mettre à jour la loupe si transition entre applis"</string>
@@ -3924,9 +3924,6 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Autoriser l\'accès pour gérer tous les fichiers"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Autoriser cette appli à lire, modifier et supprimer tous les fichiers sur cet appareil ou sur n\'importe quel volume de stockage connecté. Si cette option est activée, l\'appli pourra accéder à des fichiers à votre insu."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Peut peut accéder à tous les fichiers"</string>
-    <string name="voice_activation_apps_title" msgid="7130045161611529825">"Applications d\'activation vocale"</string>
-    <string name="permit_voice_activation_apps" msgid="9152780172988949319">"Autoriser l\'activation vocale"</string>
-    <string name="allow_voice_activation_apps_description" msgid="6369745626995060656">"L\'activation vocale active les applis approuvées, en mode mains libres, par commande vocale. Le capteur adaptatif intégré garantit que vos données restent privées.\n\n"<a href="">"En savoir plus sur le capteur adaptatif protégé"</a></string>
     <string name="full_screen_intent_title" msgid="747270185715224130">"Notifications en plein écran"</string>
     <string name="permit_full_screen_intent" msgid="9035367640019960861">"Autoriser l\'appli à afficher les notifications en plein écran"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Autoriser cette appli à afficher des notifications occupant tout l\'écran lorsque l\'appareil est verrouillé. Les applis peuvent les utiliser pour mettre en avant les alarmes, les appels entrants ou d\'autres notifications urgentes."</string>

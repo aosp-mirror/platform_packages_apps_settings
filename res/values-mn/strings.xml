@@ -48,9 +48,9 @@
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"Зөвхөн тоглоом, видео болон бусад"</string>
     <string name="selective_stay_awake_summary" msgid="9055967322921984543">"Таны дэлгэцийг идэвхгүй болохыг зогсоодог аппуудад урд талын дэлгэц асдаг"</string>
     <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Үргэлжлүүлэхийн тулд дээш шудрах"</string>
-    <string name="stay_awake_on_lockscreen_summary" msgid="2299351813382522952">"Аппыг үргэлжлүүлэн ашиглахын тулд утсаа эвхээд, урд талын дэлгэц дээр дээш шудрах эсвэл дэлгэцийг түгжигдэх хүртэл хэдэн секунд хүлээнэ үү"</string>
+    <string name="stay_awake_on_lockscreen_summary" msgid="8825321939913726566">"Аппыг үргэлжлүүлэн ашиглахын тулд утсаа эвхээд, урд талын дэлгэц дээр дээш шудрах эсвэл дэлгэцийг түгжигдэх хүртэл хэдэн секунд хүлээнэ үү. Тоглоом, видеоны апп автоматаар үргэлжилнэ."</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"Хэзээ ч үгүй"</string>
-    <string name="sleep_on_fold_summary" msgid="7737992842459588846">"Таныг төхөөрөмжөө эвхэх үед урд талын дэлгэц түгжигдэнэ"</string>
+    <string name="sleep_on_fold_summary" msgid="4191753338303043456">"Таныг төхөөрөмжөө эвхэх үед урд талын дэлгэц унтарч, түгжигдэнэ"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Автоматаар эргүүлэх онцлогийг ашиглах"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"Царай илрүүлэх нь автоматаар эргүүлэх онцлогийн оновчлолыг сайжруулахын тулд урд талын камерыг ашиглана. Зургийг Google-д хадгалдаггүйгээс гадна илгээдэггүй."</string>
     <string name="bluetooth" msgid="8898478620943459654">"Bluetooth"</string>
@@ -418,7 +418,7 @@
     <string name="security_settings_remoteauth_enroll_introduction_youre_in_control_title" msgid="7974976673323638524">"Хяналт таны гарт"</string>
     <string name="security_settings_remoteauth_enroll_introduction_info_remove_watch" msgid="1888318677088986801">"Та цагаа Тохиргоо хэсэгт Утасны түгжээг цагаараа тайлах онцлогоос хүссэн үедээ хасах боломжтой"</string>
     <string name="security_settings_remoteauth_enroll_introduction_animation_tap_notification" msgid="1597397399097952974">"Мэдэгдлийг товшоорой"</string>
-    <string name="security_settings_remoteauth_enroll_introduction_animation_swipe_up" msgid="2129230804324634653">"Түгжээтэй дэлгэцэд дээш шудрах"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_animation_swipe_up" msgid="2129230804324634653">"Түгжээтэй дэлгэц дээр дээш шудрах"</string>
     <string name="security_settings_remoteauth_enroll_enrolling_title" msgid="313016997943607675">"Цагаа сонгоно уу"</string>
     <string name="security_settings_remoteauth_enroll_enrolling_list_heading" msgid="8227585438932911013">"Боломжтой цагнууд"</string>
     <string name="security_settings_remoteauth_enroll_enrolling_disagree" msgid="1670201454188049863">"Цуцлах"</string>
@@ -3924,9 +3924,6 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Бүх файлыг удирдахын тулд хандахыг зөвшөөрөх"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Энэ аппад энэ төхөөрөмж дээрх эсвэл холбогдсон дурын хадгалах сангийн бүх файлыг унших, өөрчлөх болон устгахыг зөвшөөрөх. Зөвшөөрөл олгогдсон бол апп нь танд тодорхойлон мэдэгдэлгүйгээр файлд хандаж болзошгүй."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Бүх файлд хандах боломжтой"</string>
-    <string name="voice_activation_apps_title" msgid="7130045161611529825">"Дуут идэвхжүүлэлтийн аппууд"</string>
-    <string name="permit_voice_activation_apps" msgid="9152780172988949319">"Дуут идэвхжүүлэлтийг зөвшөөрөх"</string>
-    <string name="allow_voice_activation_apps_description" msgid="6369745626995060656">"Дуут идэвхжүүлэлт дуут тушаалыг ашиглан гараас хамаарахгүйгээр зөвшөөрөгдсөн аппуудыг асаана. Бүрэлдэхүүн дасан зохицох мэдрэгч нь өгөгдөл зөвхөн танд хувийн байхыг баталгаажуулдаг.\n\n"<a href="">"Хамгаалалттай дасан зохицох мэдрэгчийн талаарх дэлгэрэнгүй"</a></string>
     <string name="full_screen_intent_title" msgid="747270185715224130">"Бүтэн дэлгэцийн мэдэгдэл"</string>
     <string name="permit_full_screen_intent" msgid="9035367640019960861">"Энэ аппаас бүтэн дэлгэцийн мэдэгдлийг зөвшөөрөх"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Төхөөрөмжийг түгжээтэй үед энэ аппад бүтэн дэлгэцийг эзлэх мэдэгдэл харуулахыг зөвшөөрнө үү. Сэрүүлэг, ирсэн дуудлага эсвэл бусад яаралтай мэдэгдлийг онцлоход аппууд эдгээрийг ашиглаж магадгүй."</string>

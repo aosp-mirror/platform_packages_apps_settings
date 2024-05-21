@@ -48,9 +48,9 @@
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"Endast spel, videor med mera"</string>
     <string name="selective_stay_awake_summary" msgid="9055967322921984543">"Främre skärmen slås på för appar som förhindrar att skärmen inaktiveras"</string>
     <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Svep uppåt för att fortsätta"</string>
-    <string name="stay_awake_on_lockscreen_summary" msgid="2299351813382522952">"Vik telefonen och svep uppåt på den främre skärmen för att fortsätta använda appen, eller vänta i några sekunder tills skärmen låses"</string>
+    <string name="stay_awake_on_lockscreen_summary" msgid="8825321939913726566">"Vik telefonen och svep uppåt på den främre skärmen för att fortsätta använda appen, eller vänta i några sekunder tills skärmen låses. Spel och videoappar fortsätter automatiskt."</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"Aldrig"</string>
-    <string name="sleep_on_fold_summary" msgid="7737992842459588846">"Främre skärmen låses när du viker enheten"</string>
+    <string name="sleep_on_fold_summary" msgid="4191753338303043456">"Främre skärmen stängs av och låses när du viker enheten"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Använd automatisk rotation"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"Ansiktsigenkänning använder den framåtvända kameran för att förbättra inställningen för att rotera automatiskt. Inga bilder sparas eller skickas till Google."</string>
     <string name="bluetooth" msgid="8898478620943459654">"Bluetooth"</string>
@@ -115,7 +115,7 @@
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"Starta om"</string>
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Avbryt"</string>
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Inaktivera Bluetooth LE Audio"</string>
-    <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Inaktiverar Bluetooth LE Audio-funktionen om enheten har stöd för funktioner för LE Audio-maskinvara."</string>
+    <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Inaktiverar Bluetooth LE Audio-funktionen om enheten har stöd för funktioner för LE Audio-hårdvara."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Bluetooth LE Audio-läge"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Visa reglage för LE Audio i Enhetsinfo"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Hoppa över godkännandelistan för Bluetooth LE Audio"</string>
@@ -2340,7 +2340,7 @@
     <string name="accessibility_service_screen_control_title" msgid="324795030658109870">"Visa och styra skärmen"</string>
     <string name="accessibility_service_screen_control_description" msgid="8431940515157990426">"Den kan läsa allt innehåll på skärmen och visa innehåll över andra appar."</string>
     <string name="accessibility_service_action_perform_title" msgid="1449360056585337833">"Visa och vidta åtgärder"</string>
-    <string name="accessibility_service_action_perform_description" msgid="7807832069800034738">"Den kan registrera din användning av en app eller maskinvarusensor och interagera med appar åt dig."</string>
+    <string name="accessibility_service_action_perform_description" msgid="7807832069800034738">"Den kan registrera din användning av en app eller hårdvarusensor och interagera med appar åt dig."</string>
     <string name="accessibility_dialog_button_allow" msgid="8274918676473216697">"Tillåt"</string>
     <string name="accessibility_dialog_button_deny" msgid="2037249860078259284">"Neka"</string>
     <string name="accessibility_dialog_button_stop" msgid="7584815613743292151">"Inaktivera"</string>
@@ -3924,9 +3924,6 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Tillåt hanteringsåtkomst för alla filer"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Tillåt att den här appen får läsa, redigera och radera alla filer på enheten och eventuella anslutna lagringsutrymmen. Om du beviljar behörigheten kan appen komma åt filer utan att du informeras."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Har åtkomst till alla filer"</string>
-    <string name="voice_activation_apps_title" msgid="7130045161611529825">"Röstaktiveringsappar"</string>
-    <string name="permit_voice_activation_apps" msgid="9152780172988949319">"Tillåt röstaktivering"</string>
-    <string name="allow_voice_activation_apps_description" msgid="6369745626995060656">"Röstaktivering aktiverar godkända appar via rösten med dina röstkommandon. Inbyggda adaptiva sensorer ser till att data förblir privat för dig.\n\n"<a href="">"Mer om skyddade och adaptiva sensorer"</a></string>
     <string name="full_screen_intent_title" msgid="747270185715224130">"Aviseringar i helskärm"</string>
     <string name="permit_full_screen_intent" msgid="9035367640019960861">"Tillåt aviseringar i helskärm från den här appen"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Tillåt att den här appen visar aviseringar som täcker hela skärmen när enheten är låst. Sådana aviseringar kan användas i appar för att lyfta fram alarm, inkommande samtal och andra brådskande aviseringar."</string>
@@ -4256,7 +4253,7 @@
     <string name="enterprise_privacy_settings" msgid="786350385374794180">"Information om hanterad enhet"</string>
     <string name="enterprise_privacy_settings_summary_generic" msgid="5471858290610344646">"Ändringar och inställningar som hanteras av organisationen"</string>
     <string name="enterprise_privacy_settings_summary_with_name" msgid="1315413275836515937">"Ändringar och inställningar som hanteras av <xliff:g id="ORGANIZATION_NAME">%s</xliff:g>"</string>
-    <string name="enterprise_privacy_header" msgid="4626225398848641603">"Organisationen kan ändra inställningar och installera programvara på enheten för att ge dig tillgång till jobbrelaterad information.\n\nKontakta organisationens administratör om du vill veta mer."</string>
+    <string name="enterprise_privacy_header" msgid="4626225398848641603">"Organisationen kan ändra inställningar och installera mjukvara på enheten för att ge dig tillgång till jobbrelaterad information.\n\nKontakta organisationens administratör om du vill veta mer."</string>
     <string name="enterprise_privacy_exposure_category" msgid="2507761423540037308">"Vilken typ av information som visas för organisationen"</string>
     <string name="enterprise_privacy_exposure_changes_category" msgid="5459989751333816587">"Ändringar som organisationens administratör har gjort"</string>
     <string name="enterprise_privacy_device_access_category" msgid="140157499478630004">"Din åtkomst till den här enheten"</string>
@@ -4298,7 +4295,7 @@
     <string name="toast_allows_restricted_settings_successfully" msgid="1219116121291466102">"Blockerade inställningar har tillåtits för <xliff:g id="APP_NAME">%s</xliff:g>"</string>
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"Av säkerhetsskäl är den här inställningen inte tillgänglig för närvarande."</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"Information om finansierad enhet"</string>
-    <string name="financed_privacy_intro" msgid="7836497475568741579">"Långivaren kan ändra inställningar och installera programvara på enheten under konfigureringen.\n\nOm en betalning uteblir kan långivaren låsa enheten och ändra enhetsinställningarna.\n\nKontakta långivaren om du vill veta mer."</string>
+    <string name="financed_privacy_intro" msgid="7836497475568741579">"Långivaren kan ändra inställningar och installera mjukvara på enheten under konfigureringen.\n\nOm en betalning uteblir kan långivaren låsa enheten och ändra enhetsinställningarna.\n\nKontakta långivaren om du vill veta mer."</string>
     <string name="financed_privacy_restrictions_category" msgid="2472659467919651602">"Om enheten är finansierad kan du inte göra följande:"</string>
     <string name="financed_privacy_install_apps" msgid="7381718005710210851">"Installera appar utanför Play Butik"</string>
     <string name="financed_privacy_safe_mode" msgid="5362149445732602578">"Starta om enheten i säkert läge"</string>
@@ -4809,8 +4806,8 @@
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Dölj spelare"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"Visa spelare"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"media"</string>
-    <string name="camera_extensions_fallback_title" msgid="3604579046777004989">"Tillåt programvarutillägg för kameran"</string>
-    <string name="camera_extensions_fallback_description" msgid="6939818294458854536">"Aktiverar implementeringen av standardprogramvaran för avancerade kamerafunktioner, till exempel videoinspelning utan att använda ögonen."</string>
+    <string name="camera_extensions_fallback_title" msgid="3604579046777004989">"Tillåt mjukvarutillägg för kameran"</string>
+    <string name="camera_extensions_fallback_description" msgid="6939818294458854536">"Aktiverar implementeringen av standardmjukvaran för avancerade kamerafunktioner, till exempel videoinspelning utan att använda ögonen."</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth aktiveras"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"Internet"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM-kort"</string>

@@ -48,9 +48,9 @@
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"Samo igre, videi i drugo"</string>
     <string name="selective_stay_awake_summary" msgid="9055967322921984543">"Prednji ekran se uključuje za aplikacije koje onemogućavaju da ekran bude neaktivan"</string>
     <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Prevucite nagore da biste nastavili"</string>
-    <string name="stay_awake_on_lockscreen_summary" msgid="2299351813382522952">"Zatvorite telefon i prevucite nagore na prednjem ekranu da biste i dalje korisili aplikaciju ili sačekajte nekoliko sekundi da se ekran zaključa"</string>
+    <string name="stay_awake_on_lockscreen_summary" msgid="8825321939913726566">"Zatvorite telefon i prevucite nagore na prednjem ekranu da biste i dalje koristili aplikaciju ili sačekajte nekoliko sekundi da se ekran zaključa. Igre i video aplikacije se nastavljaju automatski."</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"Nikad"</string>
-    <string name="sleep_on_fold_summary" msgid="7737992842459588846">"Prednji ekran se zaključava kada zatvorite uređaj"</string>
+    <string name="sleep_on_fold_summary" msgid="4191753338303043456">"Prednji ekran se isključuje i zaključava kada zatvorite uređaj"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Koristi automatsko rotiranje"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"Prepoznavanje lica koristi prednju kameru za poboljšanje preciznosti automatskog rotiranja. Slike se nikada ne čuvaju niti šalju Google-u."</string>
     <string name="bluetooth" msgid="8898478620943459654">"Bluetooth"</string>
@@ -1237,8 +1237,8 @@
     <string name="dark_ui_summary_on_auto_mode_custom" msgid="2526935680241734784">"Isključuje se automatski u <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_on_auto_mode_custom_bedtime" msgid="1976993025762551246">"Isključuje se automatski posle vremena za spavanje"</string>
     <string name="dark_ui_text" msgid="4392646155331126666">"Tamna tema koristi crnu pozadinu da bi baterija trajala duže na nekim ekranima. Rasporedi tamne teme se uključuju tek kada se ekran isključi."</string>
-    <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Tamna tema trenutno prati raspored noćnog režima"</string>
-    <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Podešavanja noćnog režima"</string>
+    <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Tamna tema trenutno prati raspored režima za spavanje"</string>
+    <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Podešavanja režima za spavanje"</string>
     <string name="even_dimmer_display_title" msgid="8589063452814896327">"Još slabije osvetljenje"</string>
     <string name="even_dimmer_display_summary" msgid="120301078873242172">"Dozvolite da osvetljenje uređaja bude slabije nego obično"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Gašenje ekrana"</string>
@@ -1254,7 +1254,7 @@
     <string name="style_suggestion_summary" msgid="4271131877800968159">"Probajte drugačije stilove, pozadine i još toga"</string>
     <string name="screensaver_settings_title" msgid="3588535639672365395">"Čuvar ekrana"</string>
     <string name="keywords_screensaver" msgid="7249337959432229172">"čuvar ekrana"</string>
-    <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"Nedostupno je jer je noćni režim uključen"</string>
+    <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"Nedostupno je jer je režim za spavanje uključen"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Koristi čuvar ekrana"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Tokom punjenja ili na baznoj stanici"</string>
     <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"Dok je na baznoj stanici i puni se"</string>
@@ -2005,7 +2005,7 @@
     <string name="color_contrast_preview_email_send_date" msgid="2108702726171600080">"Pre 2 dana"</string>
     <string name="color_contrast_preview_email_badge" msgid="4845484039428505392">"Dodatni upit?"</string>
     <string name="color_contrast_preview_email_title" msgid="198712116139754823">"Izveštaj o poslovnom putu"</string>
-    <string name="color_contrast_preview_email_body" msgid="4139331665325624199">"Da biste dobili dodatnu pomoć, obratite se \nmeni ili Heleni. Ovaj izveštaj će biti"</string>
+    <string name="color_contrast_preview_email_body" msgid="4139331665325624199">"Za dodatnu pomoć se obratite \nmeni ili Heleni."</string>
     <string name="color_contrast_preview_email_attachment_name" msgid="852407311884814746">"Troškovi klijenta"</string>
     <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"Zatamnjuje ekran"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Kontrole interakcije"</string>
@@ -3924,9 +3924,6 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Dozvoli pristup za upravljanje svim datotekama"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Dozvolite da ova aplikacija čita, menja i briše sve datoteke na ovom uređaju ili svim povezanim uređajima za skladištenje. Ako to dozvolite, aplikacija može da pristupa datotekama bez vašeg znanja."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Može da pristupa svim datotekama"</string>
-    <string name="voice_activation_apps_title" msgid="7130045161611529825">"Aplikacije sa aktivacijom glasom"</string>
-    <string name="permit_voice_activation_apps" msgid="9152780172988949319">"Dozvoli aktivaciju glasom"</string>
-    <string name="allow_voice_activation_apps_description" msgid="6369745626995060656">"Glasovna aktivacija uključuje odobrene aplikacije hendsfri pomoću glasovne komande. Ugrađeno prilagodljivo otkrivanje garantuje da će vaši podaci ostati privatni.\n\n"<a href="">"Još o zaštićenom prilagodljivom otkrivanju"</a></string>
     <string name="full_screen_intent_title" msgid="747270185715224130">"Obaveštenja preko celog ekrana"</string>
     <string name="permit_full_screen_intent" msgid="9035367640019960861">"Dozvoli obaveštenja preko celog ekrana od ove aplikacije"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Dozvolite ovoj aplikaciji da prikazuje obaveštenja preko celog ekrana kada je uređaj zaključan. Aplikacije mogu da ih koriste radi isticanja alarma, dolaznih poziva ili drugih hitnih obaveštenja."</string>
@@ -4857,7 +4854,7 @@
     <string name="mobile_data_disable_message" msgid="7829414836454769970">"Nećete imati pristup podacima ili internetu preko mobilnog operatera <xliff:g id="CARRIER">%s</xliff:g>. Internet će biti dostupan samo preko WiFi-a."</string>
     <string name="mobile_data_disable_message_default_carrier" msgid="4449469407705838612">"mobilni operater"</string>
     <string name="not_allowed_by_ent" msgid="1958611623122304411">"Ne dozvoljava vaša organizacija"</string>
-    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Nedostupno je jer je noćni režim uključen"</string>
+    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Nedostupno je jer je režim za spavanje uključen"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Resetovanje važnosti obaveštenja je dovršeno."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Aplikacije"</string>
     <string name="bluetooth_message_access_notification_content" msgid="5111712860712823893">"Uređaj želi da pristupa porukama. Dodirnite za detalje."</string>

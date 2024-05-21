@@ -48,9 +48,9 @@
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"רק משחקים, סרטונים ועוד"</string>
     <string name="selective_stay_awake_summary" msgid="9055967322921984543">"המסך החיצוני מופעל בשביל אפליקציות שנעצרות במצב בו המסך נכבה בעקבות חוסר פעילות"</string>
     <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"מחליקים למעלה כדי להמשיך"</string>
-    <string name="stay_awake_on_lockscreen_summary" msgid="2299351813382522952">"מקפלים את הטלפון ומחליקים כלפי מעלה במסך החיצוני כדי להמשיך להשתמש באפליקציה, או ממתינים כמה שניות עד שהמסך יינעל"</string>
+    <string name="stay_awake_on_lockscreen_summary" msgid="8825321939913726566">"מקפלים את הטלפון ומחליקים כלפי מעלה במסך החיצוני כדי להמשיך להשתמש באפליקציה, או ממתינים כמה שניות עד שהמסך יינעל. אפליקציות של משחקים וסרטונים ימשיכו לפעול אוטומטית."</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"אף פעם"</string>
-    <string name="sleep_on_fold_summary" msgid="7737992842459588846">"המסך החיצוני ננעל כשמקפלים את המכשיר"</string>
+    <string name="sleep_on_fold_summary" msgid="4191753338303043456">"המסך החיצוני נכבה וננעל כשמקפלים את המכשיר"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"שימוש בסיבוב האוטומטי"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"‏בזיהוי הפנים נעשה שימוש במצלמה הקדמית כדי לשפר את הדיוק של הסיבוב האוטומטי. התמונות אף פעם לא נשמרות ולא נשלחות אל Google."</string>
     <string name="bluetooth" msgid="8898478620943459654">"Bluetooth"</string>
@@ -1323,7 +1323,7 @@
     <string name="storage_settings_title" msgid="486118156723194815">"הגדרות אחסון"</string>
     <string name="status_eid" msgid="7532406028683438634">"EID"</string>
     <string name="eid_multi_sim" msgid="9087924808336397804">"‏EID (חריץ SIM <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>)"</string>
-    <string name="imei_multi_sim" msgid="9001570420423929507">"‏IMEI (חריץ SIM ‏<xliff:g id="IMEI_SLOT_ID">%1$d</xliff:g>)"</string>
+    <string name="imei_multi_sim" msgid="9001570420423929507">"‏IMEI (חריץ <xliff:g id="IMEI_SLOT_ID">%1$d</xliff:g> ‏SIM )"</string>
     <string name="imei_multi_sim_primary" msgid="7914653040843734282">"‏IMEI (חריץ SIM <xliff:g id="IMEI_SLOT_ID_PRIMARY">%1$d</xliff:g>) (ראשי)"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"יש לבחור רשת שמורה כדי להציג"</string>
     <string name="status_imei" msgid="5719752369250485007">"IMEI"</string>
@@ -1998,7 +1998,7 @@
     <string name="accessibility_color_and_motion_title" msgid="2323301706545305874">"צבע ותנועה"</string>
     <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"ניגודיות של צבעים"</string>
     <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"ניגודיות גבוהה יותר מבליטה את הטקסט, הלחצנים והסמלים. כדאי לבחור את הניגודיות שמתאימה לך."</string>
-    <string name="color_contrast_note" msgid="7592686603372566198">"חלק מהאפליקציות לא תומכות בכל הגדרות הצבע והניגודיות של הטקסט"</string>
+    <string name="color_contrast_note" msgid="7592686603372566198">"חלק מהאפליקציות לא תומכות בכל הגדרות הניגודיות של הצבעים והטקסטים"</string>
     <string name="accessibility_color_contrast_summary" msgid="7563237683500106632">"אפשר להתאים את מראה הצבעים והטקסט לצבע הרקע של המסך"</string>
     <string name="color_contrast_preview" msgid="6791430227535363883">"תצוגה מקדימה"</string>
     <string name="color_contrast_preview_sender_name" msgid="8641943417589238147">"ציפורה, פנחס"</string>
@@ -3924,9 +3924,6 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"הרשאת גישה לניהול כל הקבצים"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"לאפליקציה הזו תהיה הרשאה לקרוא, לשנות ולמחוק את כל הקבצים במכשיר הזה או בכל אחסון שמחובר אליו. אם ההרשאה ניתנת, האפליקציה תורשה לגשת לקבצים מבלי ליידע אותך במפורש."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"יכולת גישה לכל הקבצים"</string>
-    <string name="voice_activation_apps_title" msgid="7130045161611529825">"אפליקציות בהפעלה קולית"</string>
-    <string name="permit_voice_activation_apps" msgid="9152780172988949319">"אישור הפעלה קולית"</string>
-    <string name="allow_voice_activation_apps_description" msgid="6369745626995060656">"הפעלה קולית מפעילה אפליקציות שאושרו, באמצעות פקודה קולית. החישה האדפטיבית המובנית מבטיחה שהנתונים יישארו פרטיים רק לך.\n\n"<a href="">"מידע נוסף על חישה אדפטיבית מוגנת"</a></string>
     <string name="full_screen_intent_title" msgid="747270185715224130">"התראות במסך מלא"</string>
     <string name="permit_full_screen_intent" msgid="9035367640019960861">"מתן הרשאה להצגת התראות במסך מלא מהאפליקציה הזו"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"מתן הרשאה לאפליקציה הזו להציג התראות במסך מלא כשהמכשיר נעול. אפליקציות יכולות להשתמש בהרשאה הזו כדי להציג התראות, שיחות נכנסות או הודעות דחופות אחרות."</string>
@@ -4248,7 +4245,7 @@
     <string name="automatic_storage_manager_activation_warning" msgid="170508173207142665">"האחסון שלך מנוהל כעת על ידי מנהל האחסון"</string>
     <string name="account_for_section_header" msgid="7466759342105251096">"חשבונות של <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="auto_sync_account_title" msgid="1070908045600374254">"סנכרון אוטומטי של נתוני האפליקציות"</string>
-    <string name="auto_sync_account_summary" msgid="7580352130028957346">"אישור לאפליקציות לרענן נתונים באופן אוטומטי"</string>
+    <string name="auto_sync_account_summary" msgid="7580352130028957346">"אפליקציות יוכלו לרענן נתונים באופן אוטומטי"</string>
     <string name="account_sync_title" msgid="7036067017433297574">"סנכרון חשבון"</string>
     <string name="account_sync_summary_some_on" msgid="911460286297968724">"הסנכרון פועל ל-<xliff:g id="ID_1">%1$d</xliff:g> מתוך <xliff:g id="ID_2">%2$d</xliff:g> פריטים"</string>
     <string name="account_sync_summary_all_on" msgid="2953682111836599841">"הסנכרון פועל לכל הפריטים"</string>
