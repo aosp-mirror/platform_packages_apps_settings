@@ -57,9 +57,9 @@ abstract class ZenModesFragmentBase extends RestrictedDashboardFragment {
 
     @Override
     public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
         mContext = context;
         mBackend = ZenModesBackend.getInstance(context);
+        super.onAttach(context);
     }
 
     @Override
@@ -75,6 +75,12 @@ abstract class ZenModesFragmentBase extends RestrictedDashboardFragment {
                 finish();
             }
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateZenModeState();
     }
 
     @Override

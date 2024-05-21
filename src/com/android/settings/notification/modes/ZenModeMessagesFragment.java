@@ -16,50 +16,42 @@
 
 package com.android.settings.notification.modes;
 
-import android.app.AutomaticZenRule;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-
 import com.android.settings.R;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ZenModeFragment extends ZenModeFragmentBase {
-
-    @Override
-    protected int getPreferenceScreenResId() {
-        return R.xml.modes_rule_settings;
-    }
+/**
+ * DND Messages Settings page to determine which priority senders can bypass DND.
+ * "Messages" include SMS, MMS, and messaging apps.
+ */
+public class ZenModeMessagesFragment extends ZenModeFragmentBase {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        // TODO: fill in with all the elements of this page. Each should be an instance of
-        //       {@link AbstractZenModePreferenceController}.
-        List<AbstractPreferenceController> prefControllers = new ArrayList<>();
-        prefControllers.add(new ZenModeHeaderController(context, "header", this, mBackend));
-        prefControllers.add(new ZenModePeopleLinkPreferenceController(
-                context, "zen_mode_people", mBackend));
-        return prefControllers;
+        List<AbstractPreferenceController> controllers = new ArrayList<>();
+        controllers.add(new ZenModePrioritySendersPreferenceController(context,
+                "zen_mode_settings_category_messages", true, mBackend));
+        return controllers;
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-
-        // Set title for the entire screen
-        ZenMode mode = getMode();
-        AutomaticZenRule azr = getAZR();
-        if (mode == null || azr == null) {
-            return;
-        }
-        getActivity().setTitle(azr.getName());
+    protected int getPreferenceScreenResId() {
+        return R.xml.modes_messages_settings;
     }
 
     @Override
     public int getMetricsCategory() {
         // TODO: b/332937635 - make this the correct metrics category
-        return SettingsEnums.NOTIFICATION_ZEN_MODE_AUTOMATION;
+        return SettingsEnums.DND_MESSAGES;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        use(ZenModePrioritySendersPreferenceController.class).onResume();
     }
 }
