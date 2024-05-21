@@ -48,9 +48,9 @@
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"Csak játékok, videók és egyebek"</string>
     <string name="selective_stay_awake_summary" msgid="9055967322921984543">"Az elülső kijelző bekapcsol az olyan alkalmazásoknál, amelyek megakadályozzák, hogy a képernyő tétlen módba lépjen."</string>
     <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Folytatás felfelé csúsztatással"</string>
-    <string name="stay_awake_on_lockscreen_summary" msgid="2299351813382522952">"Hajtsa össze a telefont, és az alkalmazás használatának folytatásához csúsztassa felfelé az ujját az elülső kijelzőn, vagy várjon néhány másodpercet a képernyő zárolásáig."</string>
+    <string name="stay_awake_on_lockscreen_summary" msgid="8825321939913726566">"Hajtsa össze a telefont, és az alkalmazás használatának folytatásához csúsztassa felfelé az ujját az elülső kijelzőn, vagy várjon néhány másodpercet a képernyő zárolásáig. A játék- és videóalkalmazások automatikusan folytatódni fognak."</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"Soha"</string>
-    <string name="sleep_on_fold_summary" msgid="7737992842459588846">"Az eszköz összehajtásakor az elülső kijelző zárolódik"</string>
+    <string name="sleep_on_fold_summary" msgid="4191753338303043456">"Az eszköz összehajtásakor az elülső kijelző kikapcsol és zárolódik"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Automatikus forgatás használata"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"Az arcfelismerés az előlapi kamerát használja az automatikus forgatás pontosságának javításához. A rendszer a képeket semmilyen esetben nem tárolja, és nem is küldi el őket a Google-nak."</string>
     <string name="bluetooth" msgid="8898478620943459654">"Bluetooth"</string>
@@ -139,7 +139,6 @@
     <string name="stylus_textfield_handwriting" msgid="2363579035338976327">"Írás a szövegmezőkben"</string>
     <string name="stylus_ignore_button" msgid="7734540973145241391">"Az érintőceruza összes gombnyomásának figyelmen kívül hagyása"</string>
     <string name="stylus_connected_devices_title" msgid="2823967577941359812">"Érintőceruza"</string>
-    <string name="audio_streams_empty" msgid="8803517701437394982">"Nem találtunk közeli audiostreamet."</string>
     <string name="date_and_time" msgid="1788358029823431692">"Dátum és idő"</string>
     <string name="proxy_settings_title" msgid="4201866858226087066">"Proxy"</string>
     <string name="proxy_clear_text" msgid="6529658759984031149">"Törlés"</string>
@@ -286,8 +285,7 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"A közeli eszközökre vonatkozó engedéllyel rendelkező alkalmazások meghatározhatják a csatlakoztatott eszközök relatív pozícióját."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"A helyhozzáférés ki van kapcsolva az alkalmazásoknál és a szolgáltatásoknál. A rendszer azonban így is elküldheti az eszköz helyét a segélyszolgálatoknak, ha Ön segélyhívó számot hív, vagy SMS-t küld rá."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"További információ a helybeállításokról"</string>
-    <!-- no translation found for location_settings_tooltip_text_for_chrome (5781821709250544575) -->
-    <skip />
+    <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"A módosításához lépjen a következő menübe ChromeOS-eszközén: Beállítások &gt; Adatvédelem és biztonság &gt; Adatvédelmi beállítások &gt; Helyhozzáférés"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Fiókok"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Biztonság"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Titkosítás és hitelesítési adatok"</string>
@@ -546,82 +544,83 @@
     <string name="security_header" msgid="961514795852103424">"Biztonság"</string>
     <string name="privacy_header" msgid="5526002421324257007">"Adatvédelem"</string>
     <string name="work_profile_category_header" msgid="85707750968948517">"Munkaprofil"</string>
-    <string name="private_space_title" msgid="1752064212078238723">"Magánterület"</string>
+    <string name="private_space_title" msgid="1752064212078238723">"Privát terület"</string>
     <string name="private_space_summary" msgid="2274405892301976238">"Privát alkalmazások zárolásának és rejtve tartásának fenntartása"</string>
     <string name="private_space_description" msgid="4059594203775816136">"Tárolja olyan külön területen a privát alkalmazásokat, amelyet elrejthet vagy zárolhat"</string>
-    <string name="private_space_lock_title" msgid="7230836881433350526">"Magánterület zárolása"</string>
-    <string name="private_space_one_lock_summary" msgid="2106513606571219068">"A magánterület zárolását feloldhatja ugyanúgy, ahogyan az eszközét is, vagy kiválaszthat másik zárolási lehetőséget"</string>
+    <string name="private_space_lock_title" msgid="7230836881433350526">"Privát terület zárolása"</string>
+    <string name="private_space_one_lock_summary" msgid="2106513606571219068">"A privát terület zárolását feloldhatja ugyanúgy, ahogyan az eszközét is, vagy kiválaszthat másik zárolási lehetőséget"</string>
     <string name="private_space_screen_lock_title" msgid="8679383894967823163">"Az eszköz képernyőzárának használata"</string>
     <string name="private_space_biometric_title" msgid="3934339826674553174">"Arcalapú feloldás és Feloldás ujjlenyomattal"</string>
     <string name="private_space_fingerprint_title" msgid="5989254643211889931">"Feloldás ujjlenyomattal"</string>
     <string name="private_space_face_title" msgid="3290402865367663079">"Arcalapú feloldás"</string>
     <string name="private_space_biometric_summary" msgid="4403837276018724581">"Koppintson ide a beállításhoz"</string>
-    <string name="private_space_fingerprint_unlock_title" msgid="3614016453395789051">"Ujjlenyomattal való feloldás a magánterülethez"</string>
-    <string name="private_space_face_unlock_title" msgid="462248384776453613">"Arcalapú feloldás a magánterülethez"</string>
+    <string name="private_space_fingerprint_unlock_title" msgid="3614016453395789051">"Ujjlenyomattal való feloldás a privát területhez"</string>
+    <string name="private_space_face_unlock_title" msgid="462248384776453613">"Arcalapú feloldás a privát területhez"</string>
     <string name="private_space_category_ways_to_unlock" msgid="4356631225316950046">"Feloldási módszerek"</string>
     <string name="private_space_screen_lock_summary" msgid="394837965365561070">"Ugyanaz, mint az eszköz képernyőzára"</string>
-    <string name="private_space_new_lock_title" msgid="9056139964133004094">"Új zárolást választ a magánterülethez?"</string>
+    <string name="private_space_new_lock_title" msgid="9056139964133004094">"Új zárolást választ a privát területhez?"</string>
     <string name="private_space_new_lock_message" msgid="3117703578905489206">"A következő képernyőn meg kell adnia eszköze PIN-kódját, mintáját vagy jelszavát."</string>
-    <string name="private_space_auto_lock_title" msgid="8663409382910601261">"Magánterület automatikus zárolása"</string>
-    <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"Automatikusan zárolhatja a magánterületet, ha bizonyos ideje nem használta az eszközt."</string>
+    <string name="private_space_auto_lock_title" msgid="8663409382910601261">"Privát terület automatikus zárolása"</string>
+    <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"Automatikusan zárolhatja a privát területet, ha bizonyos ideje nem használta az eszközt."</string>
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"Minden alkalommal az eszköz zárolásakor"</string>
-    <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"5 perces inaktivitás után"</string>
+    <!-- no translation found for private_space_auto_lock_after_inactivity (7107814517866649733) -->
+    <skip />
     <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"Csak az eszköz újraindulása után"</string>
     <string name="private_space_hide_page_title" msgid="3364639176511877414">"Privát terület elrejtése"</string>
     <string name="private_space_hide_when_locked" msgid="6219472348124151797">"Privát terület elrejtése, amikor zárolva van"</string>
-    <string name="private_space_hide_page_summary" msgid="6247773353685839242">"Ha nem szeretné, hogy mások tudjanak arról, hogy magánterület van az eszközén, elrejtheti az alkalmazáslistában."</string>
-    <string name="private_space_access_header" msgid="1077082416567150819">"Hozzáférés a magánterülethez rejtett állapotban"</string>
-    <string name="private_space_search_description" msgid="1538155187658429618">"Írja be a keresősávba a „magánterület” szót."</string>
-    <string name="private_space_tap_tile_description" msgid="6173556870938267361">"Koppintson a "<b>"Magánterület"</b>" elemre."</string>
-    <string name="private_space_unlock_description" msgid="5527228922778630361">"Oldja fel a magánterület zárolását."</string>
+    <string name="private_space_hide_page_summary" msgid="6247773353685839242">"Ha nem szeretné, hogy mások tudjanak arról, hogy privát terület van az eszközén, elrejtheti az alkalmazáslistában."</string>
+    <string name="private_space_access_header" msgid="1077082416567150819">"Hozzáférés a privát területhez rejtett állapotban"</string>
+    <string name="private_space_search_description" msgid="1538155187658429618">"Írja be a keresősávba a „privát terület” szót."</string>
+    <string name="private_space_tap_tile_description" msgid="6173556870938267361">"Koppintson a "<b>"Privát terület"</b>" elemre."</string>
+    <string name="private_space_unlock_description" msgid="5527228922778630361">"Oldja fel a privát terület zárolását."</string>
     <string name="private_space_hide_off_summary" msgid="8565973976602078315">"Ki"</string>
     <string name="private_space_hide_on_summary" msgid="3450844101901438867">"Be"</string>
-    <string name="private_space_hide_dialog_title" msgid="6439207708506990156">"A magánterület el lesz rejtve, amikor legközelebb zárolja"</string>
-    <string name="private_space_hide_dialog_message" msgid="618693520130744836">"A magánterülethez való hozzáféréshez írja be az applista keresősávjába ezt: magánterület."</string>
+    <string name="private_space_hide_dialog_title" msgid="6439207708506990156">"A privát terület el lesz rejtve, amikor legközelebb zárolja"</string>
+    <string name="private_space_hide_dialog_message" msgid="618693520130744836">"A privát területhez való hozzáféréshez írja be az applista keresősávjába ezt: privát terület."</string>
     <string name="private_space_hide_dialog_button" msgid="4157191429310035457">"Értem"</string>
     <string name="private_space_category_system" msgid="1286843321867285700">"Rendszer"</string>
     <string name="private_space_delete_title" msgid="636873505724100006">"Privát terület törlése"</string>
-    <string name="private_space_delete_header" msgid="4594429153176776184">"Törli a magánterületet?"</string>
+    <string name="private_space_delete_header" msgid="4594429153176776184">"Törli a privát területet?"</string>
     <string name="private_space_delete_summary" msgid="3344372988408565545">"A magánterületét eltávolítjuk az eszközről. Az összes privát alkalmazás és adat törlődik. Ez a művelet nem vonható vissza."</string>
     <string name="private_space_accounts" msgid="1078277762792056395">"A következő fiókokat eltávolítjuk az Ön magánterületéről:"</string>
     <string name="private_space_delete_button_label" msgid="1256981385318225002">"Törlés"</string>
-    <string name="private_space_confirm_deletion_header" msgid="3468651585498942977">"Magánterület törlése…"</string>
-    <string name="private_space_deleted" msgid="7692240901492540053">"Magánterület törölve"</string>
-    <string name="private_space_delete_failed" msgid="7705795653796174741">"Nem sikerült törölni a magánterületet"</string>
-    <string name="private_space_unlocked" msgid="9091600948712932046">"Magánterület feloldva"</string>
+    <string name="private_space_confirm_deletion_header" msgid="3468651585498942977">"Privát terület törlése…"</string>
+    <string name="private_space_deleted" msgid="7692240901492540053">"Privát terület törölve"</string>
+    <string name="private_space_delete_failed" msgid="7705795653796174741">"Nem sikerült törölni a privát területet"</string>
+    <string name="private_space_unlocked" msgid="9091600948712932046">"Privát terület feloldva"</string>
     <string name="no_device_lock_title" msgid="1078223464721029954">"Képernyőzár beállítása"</string>
     <string name="no_device_lock_summary" msgid="7436025227616244687">"A privát terület használatához állítson be képernyőzárat"</string>
     <string name="no_device_lock_action_label" msgid="2640487005629001288">"Képernyőzár beállítása"</string>
     <string name="no_device_lock_cancel" msgid="4412602160321228863">"Mégse"</string>
     <string name="private_space_cancel_label" msgid="379259667396956886">"Mégse"</string>
     <string name="private_space_setup_button_label" msgid="2094882154623560585">"Beállítás"</string>
-    <string name="private_space_setup_title" msgid="2272968244329821450">"Magánterület"</string>
+    <string name="private_space_setup_title" msgid="2272968244329821450">"Privát terület"</string>
     <string name="private_space_hide_apps_summary" msgid="4418722947376042418">"Elrejthet vagy zárolhat privát alkalmazásokat egy külön területen. Használjon egy erre kijelölt Google-alkalmazást a fokozott biztonság érdekében."</string>
-    <string name="private_space_setup_sub_header" msgid="5454598292017819146">"Magánterület beállítása"</string>
+    <string name="private_space_setup_sub_header" msgid="5454598292017819146">"Privát terület beállítása"</string>
     <string name="private_space_separate_account_text" msgid="4492251315012955548"><b>"Google-fiók kiválasztása a területhez"</b>\n"Egy külön fiók használata segít megakadályozni a szinkronizált filmeknek, fotóknak és e-maileknek a területen kívüli megjelenítését."</string>
     <string name="private_space_protected_lock_text" msgid="9123250938334372735"><b>"Zárolás beállítása"</b>\n"Területének zárolásával megakadályozhatja mások hozzáférését."</string>
     <string name="private_space_install_apps_text" msgid="5693139160766464498"><b>"Alkalmazások telepítése"</b>\n"Használhatja a magánterületén belüli Play Áruházat alkalmazások egyszerű telepítéséhez."</string>
-    <string name="private_space_apps_permission_text" msgid="7030946025253366172">"A magánterület alkalmazásai nem jelennek meg az engedélykezelőben, az adatvédelmi irányítópulton és más beállításokban, amikor a magánterület le van zárva.\n\nA magánterület nem helyezhető át új eszközre. Ha másik eszközön szeretné használni, akkor másik magánterületet kell beállítania.\n\nBárki, aki az Ön eszközét számítógéphez csatlakoztatja, vagy kártékony alkalmazást telepít az Ön eszközére, hozzá tud férni a magánterülethez."</string>
+    <string name="private_space_apps_permission_text" msgid="7030946025253366172">"A privát terület alkalmazásai nem jelennek meg az engedélykezelőben, az adatvédelmi irányítópulton és más beállításokban, amikor a privát terület le van zárva.\n\nA privát terület nem helyezhető át új eszközre. Ha másik eszközön szeretné használni, akkor másik privát területet kell beállítania.\n\nBárki, aki az Ön eszközét számítógéphez csatlakoztatja, vagy kártékony alkalmazást telepít az Ön eszközére, hozzá tud férni a privát területhez."</string>
     <string name="private_space_learn_more_text" msgid="5314198983263277586">"További információ a magánterületről"</string>
     <string name="private_space_few_moments_text" msgid="7166883272914424011">"Ez eltart egy kis ideig"</string>
-    <string name="private_space_setting_up_text" msgid="8458035555212009528">"A magánterület beállítása…"</string>
-    <string name="private_space_error_screen_title" msgid="739381738044418346">"Nem sikerült a magánterület beállítása"</string>
+    <string name="private_space_setting_up_text" msgid="8458035555212009528">"A privát terület beállítása…"</string>
+    <string name="private_space_error_screen_title" msgid="739381738044418346">"Nem sikerült a privát terület beállítása"</string>
     <string name="private_space_tryagain_label" msgid="8305362615231738367">"Újra"</string>
-    <string name="private_space_lockscreen_title" msgid="5785259588888586366">"Új zárolást választ a magánterülethez?"</string>
-    <string name="private_space_lockscreen_summary" msgid="3053836076639653805">"Beállíthat egy új zárolást csak a magánterület számára, vagy használhatja ugyanazt a zárolást, amelyet a készülék feloldásához használ."</string>
+    <string name="private_space_lockscreen_title" msgid="5785259588888586366">"Új zárolást választ a privát területhez?"</string>
+    <string name="private_space_lockscreen_summary" msgid="3053836076639653805">"Beállíthat egy új zárolást csak a privát terület számára, vagy használhatja ugyanazt a zárolást, amelyet a készülék feloldásához használ."</string>
     <string name="private_space_use_screenlock_label" msgid="9182153443192032782">"Képernyőzár használata"</string>
     <string name="private_space_set_lock_label" msgid="1790408277477408475">"Új zárolás kiválasztása"</string>
     <string name="private_space_pre_finish_title" msgid="2314776598615113267">"Egy pillanat…"</string>
     <string name="private_space_success_title" msgid="4351904015352046118">"Kész is!"</string>
     <string name="private_space_access_text" msgid="4433988836344567888">"A magánterülete megkereséséhez lépjen az alkalmazáslistához, majd görgessen le"</string>
     <string name="private_space_done_label" msgid="1020482651595246071">"Kész"</string>
-    <string name="private_space_scrolldown_to_access" msgid="4820954877349434545">"A magánterület megtalálásához görgessen le"</string>
+    <string name="private_space_scrolldown_to_access" msgid="4820954877349434545">"A privát terület megtalálásához görgessen le"</string>
     <string name="private_space_retry_signin_title" msgid="8090276618867918844">"Bejelentkezés"</string>
     <string name="private_space_retry_summary" msgid="1920444015972648774">"Jelentkezzen be fiókjába, hogy használni tudja a magánterületével"</string>
     <string name="private_space_skip_login_label" msgid="7078019409056628192">"Most nem"</string>
     <string name="private_space_continue_login_label" msgid="7779965766333065391">"Tovább"</string>
-    <string name="private_space_lock_setup_title" msgid="6541564212199510787">"Válasszon zárolást a magánterülethez"</string>
-    <string name="private_space_lock_setup_description" msgid="423405593476300918">"Ujjlenyomata segítségével feloldhatja a magánterület zárolását. Biztonsági okokból ennek a beállításnak az esetében szükség van biztonsági zárolásra is."</string>
+    <string name="private_space_lock_setup_title" msgid="6541564212199510787">"Válasszon zárolást a privát területhez"</string>
+    <string name="private_space_lock_setup_description" msgid="423405593476300918">"Ujjlenyomata segítségével feloldhatja a privát terület zárolását. Biztonsági okokból ennek a beállításnak az esetében szükség van biztonsági zárolásra is."</string>
     <string name="private_space_choose_your_pin_header" msgid="4560802934975898265">"PIN-kód beállítása a privát területhez"</string>
     <string name="private_space_choose_your_password_header" msgid="7660259341095044434">"Jelszó beállítása a privát területhez"</string>
     <string name="private_space_choose_your_pattern_header" msgid="2165607102459936724">"Minta beállítása a privát területhez"</string>
@@ -631,7 +630,7 @@
     <string name="private_space_gaia_education_bullet1" msgid="641701340908301992">"Szinkronizált fotók, fájlok, e-mailek, névjegyek, naptáresemények és egyéb adatok"</string>
     <string name="private_space_gaia_education_bullet2" msgid="3679859681253672976">"Alkalmazásletöltési előzmények és ajánlások"</string>
     <string name="private_space_gaia_education_bullet3" msgid="1703614225321289717">"Böngészési előzmények, könyvjelzők és mentett jelszavak"</string>
-    <string name="private_space_gaia_education_bullet4" msgid="515761604505366164">"Javasolt tartalmak a magánterület alkalmazásaiban végzett tevékenységei alapján"</string>
+    <string name="private_space_gaia_education_bullet4" msgid="515761604505366164">"Javasolt tartalmak a privát terület alkalmazásaiban végzett tevékenységei alapján"</string>
     <string name="private_space_gaia_education_got_it" msgid="7824029819615566806">"Értem"</string>
     <string name="private_space_category_lock" msgid="1917657024358778169">"Zárolás"</string>
     <string name="private_space_category_hide" msgid="3236587591523126649">"Elrejtés"</string>
@@ -1498,8 +1497,8 @@
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"A hálózati beállítások vissza lettek állítva."</string>
     <string name="reset_esim_error_title" msgid="6516110227665862295">"Az eSIM-ek nem törölhetők"</string>
     <string name="reset_esim_error_msg" msgid="8459527827897797168">"Hiba történt, ezért nem sikerült az eSIM-ek törlése.\n\nIndítsa újra az eszközt, majd próbálja újra."</string>
-    <string name="reset_private_space_delete_title" msgid="2555885198282572990">"Magánterület törlése"</string>
-    <string name="reset_private_space_delete_dialog" msgid="7506471054091800883">"Ha van magánterület az eszközén, véglegesen törlődni fog, továbbá el lesz távolítva a területhez hozzáadott Google-fiók.\n\nA területén található összes app és azok adatai véglegesen törölve lesznek."</string>
+    <string name="reset_private_space_delete_title" msgid="2555885198282572990">"Privát terület törlése"</string>
+    <string name="reset_private_space_delete_dialog" msgid="7506471054091800883">"Ha van privát terület az eszközén, véglegesen törlődni fog, továbbá el lesz távolítva a területhez hozzáadott Google-fiók.\n\nA területén található összes app és azok adatai véglegesen törölve lesznek."</string>
     <string name="main_clear_title" msgid="277664302144837723">"Összes adat törlése (gyári beállítások visszaállítása)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Összes adat törlése"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"a zenéket"</li>\n<li>"a fotókat"</li>\n<li>"más felhasználói adatokat"</li></string>
@@ -1753,7 +1752,7 @@
     <string name="enable_text" msgid="8570798764647110430">"Engedélyezés"</string>
     <string name="clear_user_data_text" msgid="6773186434260397947">"Tárhely törlése"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"Frissítések eltávolítása"</string>
-    <string name="app_restricted_settings_lockscreen_title" msgid="796413224212436400">"Korlátozott engedélyek megadása"</string>
+    <string name="app_restricted_settings_lockscreen_title" msgid="5993061278264872648">"Korlátozott beállítások engedélyezése"</string>
     <string name="auto_launch_enable_text" msgid="8912714475823807798">"Egyes kiválasztott tevékenységek alapértelmezés szerint ebben az alkalmazásban nyílnak meg."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"Ön engedélyezte az alkalmazás számára modulok létrehozását, illetve az adataikhoz való hozzáférést."</string>
     <string name="auto_launch_disable_text" msgid="502648841250936209">"Nincs alapbeállítás."</string>
@@ -2325,6 +2324,8 @@
     <string name="daltonizer_mode_protanomaly_title" msgid="6392456967103014723">"Vörös-zöld"</string>
     <string name="daltonizer_mode_tritanomaly_title" msgid="2278786218762602022">"Kék-sárga"</string>
     <string name="daltonizer_mode_grayscale_title" msgid="152005391387952588">"Szürkeárnyalatos"</string>
+    <!-- no translation found for daltonizer_saturation_title (2999486412114963068) -->
+    <skip />
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="2117727423019598455">"Zöldszín-tévesztés (deuteranomália)"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="4617032854982040748">"Vörösszín-tévesztés (protanomália)"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Tritanomália"</string>
@@ -2405,7 +2406,6 @@
     <string name="keywords_select_to_speak" msgid="2872704811610888719"></string>
     <string name="keywords_color_correction" msgid="8540442886990423681">"szín módosítása"</string>
     <string name="keywords_color_inversion" msgid="4291058365873221962">"képernyő sötétítése, képernyő világosítása"</string>
-    <string name="keywords_contrast" msgid="4668393735398949873">"színkontraszt"</string>
     <string name="keywords_accessibility_menu" msgid="4300579436464706608"></string>
     <string name="keywords_switch_access" msgid="5813094504384313402"></string>
     <string name="keywords_auto_click" msgid="6811744211216280998">"mozgás, egér, külső egér, fejegér, adaptív egér, kerekesszék, joystick"</string>
@@ -3306,6 +3306,8 @@
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Csatlakoztatott eszközök beállításai"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Nincs}=1{1 ütemezés beállítva}other{# ütemezés beállítva}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Ne zavarjanak"</string>
+    <!-- no translation found for zen_modes_list_title (5138745349253275428) -->
+    <skip />
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Értesítés fogadása csak fontos személyektől és alkalmazásoktól"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"A megszakítások korlátozása"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"A Ne zavarjanak mód bekapcsolása"</string>
@@ -3532,7 +3534,7 @@
     <string name="notifications_sent_daily" msgid="10274479224185437">"{count,plural, =1{Nagyjából # értesítés naponta}other{Nagyjából # értesítés naponta}}"</string>
     <string name="notifications_sent_weekly" msgid="7895656213187555346">"{count,plural, =1{Nagyjából # értesítés hetente}other{Nagyjából # értesítés hetente}}"</string>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Soha"</string>
-    <string name="manage_notification_access_title" msgid="6481256069087219982">"Eszköz- és alkalmazásértesítések"</string>
+    <string name="manage_notification_access_title" msgid="4154723216570646451">"Értesítés elolvasása, válasz és vezérlés"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"Vezérelheti, hogy mely alkalmazások és eszközök olvashatják az értesítéseket"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8643809206612366067">"A munkaprofil értesítéseihez való hozzáférés letiltva"</string>
     <string name="notification_assistant_title" msgid="5889201903272393099">"Bővített értesítések"</string>
@@ -3632,7 +3634,7 @@
     <string name="app_notification_block_summary" msgid="1804611676339341551">"Soha ne jelenjenek meg ezek az értesítések"</string>
     <string name="notification_content_block_title" msgid="6689085826061361351">"Értesítések megjelenítése"</string>
     <string name="notification_content_block_summary" msgid="329171999992248925">"Soha ne jelenjen meg értesítés az értesítési felületen és a perifériás eszközökön"</string>
-    <string name="app_notification_fsi_permission_title" msgid="5424116606034705020">"Teljes képernyős értesítések engedélyezése"</string>
+    <string name="app_notification_fsi_permission_title" msgid="2260977598430154428">"Teljes képernyős értesítések engedélyezése"</string>
     <string name="app_notification_fsi_permission_summary" msgid="7673487977631068039">"Teljes képernyős értesítések megjelenítésének engedélyezése, amikor az eszköz zárolva van"</string>
     <string name="notification_badge_title" msgid="6854537463548411313">"Értesítési pötty engedélyezése"</string>
     <string name="notification_channel_badge_title" msgid="6505542437385640049">"Értesítési pötty megjelenítése"</string>
@@ -3981,8 +3983,8 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Hozzáférés megadása minden fájl kezeléséhez"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Engedélyezi ennek az alkalmazásnak az eszközön és a csatlakoztatott tárolóköteteken található összes fájl olvasását, módosítását és törlését. Ha engedélyezve van, az alkalmazás anélkül férhet hozzá a fájlokhoz, hogy Önt külön tájékoztatná róla."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Minden fájlhoz hozzáférhet"</string>
-    <string name="full_screen_intent_title" msgid="747270185715224130">"Teljes képernyős értesítések"</string>
-    <string name="permit_full_screen_intent" msgid="9035367640019960861">"Teljes képernyős értesítések engedélyezése ettől az alkalmazástól"</string>
+    <string name="full_screen_intent_title" msgid="5888548315628268674">"Teljes képernyős értesítések"</string>
+    <string name="permit_full_screen_intent" msgid="2414307667550523630">"Teljes képernyős értesítések engedélyezése ettől az alkalmazástól"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Teljes képernyős értesítések megjelenítésének engedélyezése az alkalmazásnak, amikor az eszköz zárolva van. Az alkalmazások ébresztések, bejövő hívások vagy más sürgős értesítések kiemelésére használhatják ezt a funkciót."</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"Médiakezelő alkalmazások"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Az alkalmazás kezelheti a médiafájlokat"</string>
@@ -4100,7 +4102,7 @@
     <string name="data_usage_template" msgid="3822452362629968010">"<xliff:g id="ID_1">%1$s</xliff:g> felhasználva (<xliff:g id="ID_2">%2$s</xliff:g>)"</string>
     <string name="configure" msgid="1499586749829665889">"Beállítás"</string>
     <string name="data_usage_other_apps" msgid="5649047093607329537">"Adathasználat – egyéb alkalmazások"</string>
-    <string name="data_saver_unrestricted_summary" msgid="7343571401172437542">"{count,plural, =1{1 alkalmazás számára engedélyezett a korlátlan adathasználat, ha az Adatforgalom-csökkentő be van kapcsolva.}other{# alkalmazás számára engedélyezett a korlátlan adathasználat, ha az Adatforgalom-csökkentő be van kapcsolva.}}"</string>
+    <string name="data_saver_unrestricted_summary" msgid="559673440849071149">"{count,plural, =1{1 alkalmazás számára engedélyezett a korlátlan mobiladatcsomag, ha az Adatforgalom-csökkentő be van kapcsolva.}other{# alkalmazás számára engedélyezett a korlátlan mobiladatcsomag, ha az Adatforgalom-csökkentő be van kapcsolva.}}"</string>
     <string name="data_usage_title" msgid="4039024073687469094">"Elsődleges Adat"</string>
     <string name="data_usage_wifi_title" msgid="1060495519280456926">"Wi‑Fi-adatok"</string>
     <string name="data_used_formatted" msgid="7913920278059077938">"<xliff:g id="ID_1">^1</xliff:g> <xliff:g id="ID_2">^2</xliff:g> felhasználva"</string>
@@ -4117,13 +4119,13 @@
     <string name="no_carrier_update_now_text" msgid="7898004907837200752">"Most frissítve"</string>
     <string name="launch_wifi_text" msgid="976421974332512894">"Részletek"</string>
     <string name="data_saver_title" msgid="2593804270788863815">"Adatforgalom-csökkentő"</string>
-    <string name="unrestricted_data_saver" msgid="7922563266857367495">"Korlátlan adat"</string>
+    <string name="unrestricted_data_saver" msgid="5913547065342097274">"Korlátlan mobiladatcsomag"</string>
     <string name="restrict_background_blocklisted" msgid="2308345280442438232">"Háttéradatok kikapcsolva"</string>
     <string name="data_saver_on" msgid="7848893946018448793">"Be"</string>
     <string name="data_saver_off" msgid="5891210864117269045">"Ki"</string>
     <string name="data_saver_switch_title" msgid="7111538580123722959">"Adatforgalom-csökkentő használata"</string>
-    <string name="unrestricted_app_title" msgid="7117585996574329284">"Korlátlan adathasználat"</string>
-    <string name="unrestricted_app_summary" msgid="282698963532000403">"Adatforgalom-csökkentővel korlátlan adathozzáférés"</string>
+    <string name="unrestricted_app_title" msgid="8531936851059106374">"Korlátlan mobiladat-használat"</string>
+    <string name="unrestricted_app_summary" msgid="8320813971858627624">"Korlátlan mobiladat-hozzáférés engedélyezése, amikor be van kapcsolva az Adatforgalom-csökkentő"</string>
     <string name="home_app" msgid="6056850504746902747">"Kezdőalkalmazás"</string>
     <string name="suggestion_additional_fingerprints" msgid="4726777300101156208">"Másik ujjlenyomat megadása"</string>
     <string name="suggestion_additional_fingerprints_summary" msgid="2825364645039666674">"Feloldás egy másik ujjal"</string>
@@ -4197,9 +4199,9 @@
     <string name="notification_suggestion_summary" msgid="7615611244249276113">"Értesítéstartalom megjelenítése vagy elrejtése"</string>
     <string name="page_tab_title_support" msgid="3235725053332345773">"Tippek és támogatás"</string>
     <string name="developer_smallest_width" msgid="632354817870920911">"Legkeskenyebb szélesség"</string>
-    <string name="premium_sms_none" msgid="8737045049886416739">"Egy telepített alkalmazás sem kért hozzáférést emelt díjas SMS küldéséhez"</string>
+    <string name="premium_sms_none" msgid="4718916765158062108">"Egy telepített alkalmazás sem kért emelt díjas SMS-t"</string>
     <string name="premium_sms_warning" msgid="2192300872411073324">"A Prémium sms-ek használata pénzbe kerülhet Önnek, és a szolgáltató által kiállított számlák végösszegét növeli. Ha engedélyt ad valamelyik alkalmazásnak, akkor azzal lehetősége lesz prémium sms-eket küldeni."</string>
-    <string name="premium_sms_access" msgid="5605970342699013212">"Emelt díjas SMS küldése"</string>
+    <string name="premium_sms_access" msgid="8487315743197916530">"Emelt díjas SMS"</string>
     <string name="bluetooth_disabled" msgid="835838280837359514">"Kikapcsolva"</string>
     <string name="bluetooth_connected_summary" msgid="8043167194934315712">"<xliff:g id="ID_1">%1$s</xliff:g> – csatlakoztatva"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="2294954614327771844">"Több eszközhöz csatlakozik"</string>
@@ -4990,12 +4992,9 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Kapcsolja ki a Repülős üzemmódot az UWB használatához"</string>
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"Aktuális tartózkodási helyén nem áll rendelkezésre az UWB szolgáltatás"</string>
     <string name="thread_network_settings_title" msgid="4212301030523859220">"Thread"</string>
-    <!-- no translation found for thread_network_settings_main_switch_title (3859168481929323474) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_footer_title (7385600318850220927) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_learn_more (8278498005848565050) -->
-    <skip />
+    <string name="thread_network_settings_main_switch_title" msgid="3859168481929323474">"Thread használata"</string>
+    <string name="thread_network_settings_footer_title" msgid="7385600318850220927">"A Thread segítségével összekapcsolhatja okosotthoni eszközeit, hogy javítsa a hatékonyságukat és a teljesítményüket.\n\nHa engedélyezve van, ez az eszköz csatlakozhat egy Thread-hálózathoz, lehetővé téve a Matter-kompatibilis eszközök vezérlését ezen a telefonon keresztül."</string>
+    <string name="thread_network_settings_learn_more" msgid="8278498005848565050">"További információ a Threadről"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"Hozzáférés a kamerához"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Hozzáférés a mikrofonhoz"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"Alkalmazásoknál és szolgáltatásoknál"</string>
@@ -5080,12 +5079,12 @@
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"Feje mozgatásával változik a hang, hogy természetesebbnek tűnjön"</string>
     <string name="bluetooth_details_permissions_sync_title" msgid="7277580382321003521">"Engedélyek szinkronizálása a telefonról"</string>
     <string name="bluetooth_details_permissions_sync_summary" msgid="8125037984381432059">"Biztosítsa óráján is az ezen a telefonon már engedélyezett alkalmazásengedélyeket"</string>
-    <string name="bluetooth_details_audio_device_types_title" msgid="3381941189346781614">"Audioeszköz típusa"</string>
-    <string name="bluetooth_details_audio_device_type_unknown" msgid="839337391037998014">"Ismeretlen"</string>
+    <string name="bluetooth_details_audio_device_types_title" msgid="1889644189800180316">"Audioeszköz típusa"</string>
+    <string name="bluetooth_details_audio_device_type_unknown" msgid="5299284975435974206">"Nincs beállítva"</string>
     <string name="bluetooth_details_audio_device_type_speaker" msgid="3706227767994792124">"Hangszóró"</string>
     <string name="bluetooth_details_audio_device_type_headphones" msgid="7644588291215033798">"Fejhallgató"</string>
-    <string name="bluetooth_details_audio_device_type_hearing_aid" msgid="1310631131071939859">"Hallókészülék"</string>
-    <string name="bluetooth_details_audio_device_type_carkit" msgid="4439017600454703229">"Autós készlet"</string>
+    <string name="bluetooth_details_audio_device_type_hearing_aid" msgid="6311786545025321187">"Hallókészülék"</string>
+    <string name="bluetooth_details_audio_device_type_carkit" msgid="1866236563013629394">"Autó"</string>
     <string name="bluetooth_details_audio_device_type_other" msgid="7019481234617207563">"Egyéb"</string>
     <string name="ingress_rate_limit_title" msgid="2106694002836274350">"Hálózat letöltési sebességére vonatkozó korlátozás"</string>
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"Konfigurálhatja a hálózati sávszélesség beáramlási értékének korlátozását, amely az internetkapcsolatot biztosító minden hálózatra vonatkozik."</string>
@@ -5170,8 +5169,6 @@
     <string name="screen_flash_color_violet" msgid="1279950780509029495">"Ibolyaszín"</string>
     <string name="color_selector_dialog_done" msgid="121253968943363376">"Kész"</string>
     <string name="color_selector_dialog_cancel" msgid="8667350644753900701">"Mégse"</string>
-    <string name="contrast_title" msgid="6885768151336508075">"Kontraszt"</string>
-    <string name="contrast_standard" msgid="1097297089917185235">"Normál"</string>
     <string name="contrast_default" msgid="8918545965525226966">"Alapértelmezett"</string>
     <string name="contrast_medium" msgid="384414510709285811">"Közepes"</string>
     <string name="contrast_high" msgid="3988567609694797696">"Nagy"</string>
@@ -5208,4 +5205,100 @@
     <string name="fingerprint_acquired_imager_dirty_udfps" msgid="7005042288289506776">"Tisztítsa meg a képernyőt az érzékelő mellett, és próbálja újra."</string>
     <string name="sim_category_converted_sim" msgid="8575548015816988908">"eSIM-mé konvertálva. Távolítsa el és dobja el."</string>
     <string name="sync_across_devices_title" msgid="3447757705383089345">"Szinkronizálás az eszközök között"</string>
+    <!-- no translation found for device_diagnostics_title (2914523189695727897) -->
+    <skip />
+    <string name="audio_sharing_title" msgid="4144157137502923821">"Hang megosztása"</string>
+    <string name="audio_sharing_switch_title" msgid="7052827328670825701">"Hang megosztása"</string>
+    <string name="calls_and_alarms_device_title" msgid="6993559028175454198">"Hívások és riasztások"</string>
+    <string name="audio_sharing_description" msgid="1660255584523640628">"Lehetővé teheti, hogy mások Önnel együtt hallgassák az Ön médiatartalmát. A hallgatóknak saját, alacsony energiaszintű hangátvitelre képes fejhallgatóra van szükségük."</string>
+    <string name="audio_sharing_device_group_title" msgid="3019780581643956943">"Aktív médiaeszközök"</string>
+    <string name="audio_sharing_call_audio_title" msgid="7978867452289583929">"Hívás hangja"</string>
+    <string name="audio_sharing_call_audio_description" msgid="6573621048260616924">"Lejátszás csak ezen: <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_sharing_test_sound_title" msgid="6438868185641027763">"Teszthang lejátszása"</string>
+    <string name="audio_sharing_test_sound_description" msgid="4072462502371937399">"Minden társhallgatónak hallania kellene"</string>
+    <string name="audio_sharing_stream_settings_title" msgid="1374391898689242036">"Audiostream beállításai"</string>
+    <string name="audio_sharing_stream_name_title" msgid="8156859441897180940">"Név"</string>
+    <string name="audio_sharing_stream_password_title" msgid="7026649168165764602">"Jelszó"</string>
+    <string name="audio_sharing_stream_compatibility_title" msgid="5690947186724469918">"A kompatibilitás javítása"</string>
+    <string name="audio_sharing_stream_compatibility_description" msgid="8170241188606110963">"A hangminőség csökkentésével segíti bizonyos eszközök (például hallókészülék) csatlakoztatását."</string>
+    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="2586408353546825682">"A kompatibilitás konfigurálása érdekében kikapcsolja a hangmegosztást"</string>
+    <string name="audio_sharing_nearby_audio_title" msgid="4795438407040677177">"Közeli hangforrás hallgatása"</string>
+    <string name="audio_sharing_footer_description" msgid="4786942197840271680">"A hangmegosztás támogatja az Auracast™ funkciót"</string>
+    <string name="audio_sharing_stream_name_dialog_title" msgid="6706027295417556499">"Audiostream neve"</string>
+    <string name="audio_sharing_stream_password_dialog_title" msgid="4148196538860845705">"Audiostream jelszava"</string>
+    <string name="audio_sharing_media_device_group_title" msgid="4850674234590549565">"Más médiaeszközök"</string>
+    <string name="audio_sharing_summary_on" msgid="611197542982323788">"Be"</string>
+    <string name="audio_sharing_summary_off" msgid="8833198995257547378">"Ki"</string>
+    <string name="audio_sharing_share_dialog_title" msgid="427514648577553621">"Hang megosztása"</string>
+    <string name="audio_sharing_share_dialog_subtitle" msgid="5208582843732057871">"<xliff:g id="DEVICE_NAME1">%1$s</xliff:g> és <xliff:g id="DEVICE_NAME2">%2$s</xliff:g>"</string>
+    <string name="audio_sharing_share_button_label" msgid="3895900668317105537">"Hang megosztása"</string>
+    <string name="audio_sharing_no_thanks_button_label" msgid="5822491984114744357">"Most nem"</string>
+    <string name="audio_sharing_share_with_dialog_title" msgid="3934377530640830364">"Megosztja a hangot ezzel: <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
+    <string name="audio_sharing_share_with_more_dialog_title" msgid="2840069088858232267">"Hang megosztása másik eszközzel"</string>
+    <string name="audio_sharing_share_with_button_label" msgid="4146194430380237357">"Megosztás a következővel: <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_sharing_close_button_label" msgid="2666534149100498574">"Bezárás"</string>
+    <string name="audio_sharing_dialog_connect_device_content" msgid="2873230647152283734">"Csatlakoztasson egy másik kompatibilis fejhallgatót, vagy ossza meg a stream nevét és jelszavát a másik személlyel"</string>
+    <string name="audio_sharing_dialog_pair_device_content" msgid="3136997898244863470">"Párosítson másik kompatibilis fejhallgatót, vagy ossza meg az audiostream QR-kódját a másik személlyel"</string>
+    <string name="audio_sharing_sharing_label" msgid="1038021053061111508">"Hang megosztása…"</string>
+    <string name="audio_sharing_pair_button_label" msgid="7987236990273083588">"Új eszköz párosítása"</string>
+    <string name="audio_sharing_qrcode_button_label" msgid="3207039106555097659">"QR-kód megjelenítése"</string>
+    <string name="audio_sharing_notification_title" msgid="1204798942946033005">"Ön most hangot oszt meg"</string>
+    <string name="audio_sharing_notification_content" msgid="1577180829878785642">"A társhallgatók hallhatják lejátszott médiatartalmát. A hívások nem hallhatók számukra."</string>
+    <string name="audio_sharing_stop_button_label" msgid="8770519671470608849">"Megosztás leállítása"</string>
+    <string name="audio_sharing_settings_button_label" msgid="8574808650318270491">"Beállítások"</string>
+    <string name="audio_sharing_disconnect_dialog_title" msgid="2192751727237748602">"Válassza ki a leválasztani kívánt eszközt"</string>
+    <string name="audio_sharing_dialog_disconnect_content" msgid="3840488888970653308">"Egyszerre csak két eszköz osztozhat a hangon"</string>
+    <string name="audio_sharing_disconnect_device_button_label" msgid="4272897217708930576">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> leválasztása"</string>
+    <string name="audio_sharing_stop_dialog_title" msgid="4872853738164232075">"Csatlakozik ehhez az eszközhöz: <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
+    <string name="audio_sharing_stop_dialog_content" msgid="6371546856710692910">"Leállítja a hang megosztását ezzel: <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_sharing_stop_dialog_with_two_content" msgid="2119020725467967219">"Leállítja a hangmegosztást ezekkel az eszközökkel: <xliff:g id="DEVICE_NAME1">%1$s</xliff:g> és <xliff:g id="DEVICE_NAME2">%2$s</xliff:g>"</string>
+    <string name="audio_sharing_stop_dialog_with_more_content" msgid="5262441138981618703">"Leállítja a hangmegosztást a csatlakoztatott fejhallgatókkal"</string>
+    <string name="audio_sharing_connect_button_label" msgid="4241911519063029982">"Csatlakozás"</string>
+    <string name="audio_sharing_sharing_stopped_label" msgid="8128194452354240996">"Hangmegosztás leállítva"</string>
+    <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"Kompatibilis eszköz csatlakoztatása"</string>
+    <string name="audio_sharing_comfirm_dialog_content" msgid="3479217934447446066">"A hang megosztásának megkezdéséhez először csatlakoztasson egy Alacsony energiaszintű hangátvitelt támogató fejhallgatót a telefonjához"</string>
+    <string name="audio_streams_category_title" msgid="4878022761829895463">"Csatlakozás alacsony energiaszintű hangátvitelt használó streamhez"</string>
+    <string name="audio_streams_pref_title" msgid="6320485086288646209">"Közeli audiostreamek"</string>
+    <string name="audio_streams_title" msgid="6617990880383079165">"Audiostreamek"</string>
+    <string name="audio_streams_qr_code_summary" msgid="2838923349871884871">"Csatlakozhat audiostreamhez QR-kóddal"</string>
+    <string name="audio_streams_empty" msgid="8803517701437394982">"Nem találtunk közeli audiostreamet."</string>
+    <string name="audio_streams_disconnect" msgid="1755594831469579161">"Leválasztás"</string>
+    <string name="audio_streams_connect" msgid="1955964373102927954">"Csatlakozás"</string>
+    <string name="audio_streams_qr_code_is_not_valid_format" msgid="4856288389653121830">"A QR-kód formátuma nem érvényes"</string>
+    <string name="audio_streams_qr_code_scanner" msgid="525396804963685478">"A hallgatás megkezdéséhez igazítsa a QR-kódot az alábbi panel közepére"</string>
+    <string name="audio_streams_add_source_bad_code_state_summary" msgid="6527086906921868757">"Ellenőrizze a jelszót, majd próbálkozzon újra"</string>
+    <string name="audio_streams_add_source_failed_state_summary" msgid="3937546443978562322">"Nem lehet csatlakozni. Próbálkozzon újra."</string>
+    <string name="audio_streams_add_source_wait_for_response_summary" msgid="3763240901110974606">"Csatlakozás…"</string>
+    <string name="audio_streams_wait_for_sync_state_summary" msgid="11905744690831864">"Keresés…"</string>
+    <string name="audio_streams_dialog_stream_is_not_available" msgid="4032878851270690546">"Az audiostream nem áll rendelkezésre"</string>
+    <string name="audio_streams_is_not_playing" msgid="8480293894696007941">"Ez az audiostream jelenleg semmit nem közvetít"</string>
+    <string name="audio_streams_dialog_close" msgid="8177201719298408431">"Bezárás"</string>
+    <string name="audio_streams_dialog_listen" msgid="7290340191504987685">"Hallgatás"</string>
+    <string name="audio_streams_dialog_retry" msgid="4456843891970998556">"Újra"</string>
+    <string name="audio_streams_dialog_listen_to_audio_stream" msgid="8585253007762261528">"Audiostream hallgatása"</string>
+    <string name="audio_streams_dialog_control_volume" msgid="7615062686016713544">"Az audiostream a következő eszközön lesz hallható: <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. A hangerő az eszközzel szabályozható."</string>
+    <string name="audio_streams_dialog_cannot_listen" msgid="4432257183698209966">"Az audiostream hallgatása nem lehetséges"</string>
+    <string name="audio_streams_dialog_default_device" msgid="6159800303379303266">"csatlakoztatott kompatibilis fejhallgató"</string>
+    <string name="audio_streams_activity_title" msgid="9011162151277443663">"Közvetítések"</string>
+    <string name="audio_streams_no_password_summary" msgid="8976357323034830144">"Nincs jelszó"</string>
+    <string name="audio_streams_dialog_learn_more" msgid="6711241053442211345">"További információ"</string>
+    <string name="audio_streams_dialog_cannot_play" msgid="1358828316927479091">"Ez az audiostream nem játszható le ezen az eszközön: <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
+    <string name="audio_streams_listening_now" msgid="4205614429222949176">"Tartalom hallgatása"</string>
+    <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"Hallgatás leállítása"</string>
+    <string name="audio_streams_dialog_no_le_device_title" msgid="3931163990976742282">"Kompatibilis fejhallgatók csatlakoztatása"</string>
+    <string name="audio_streams_dialog_no_le_device_button" msgid="4484355549428642588">"Eszköz csatlakoztatása"</string>
+    <string name="audio_streams_detail_page_title" msgid="7884132061275273766">"Audiostream részletei"</string>
+    <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"Audiostream QR-kódja"</string>
+    <string name="audio_streams_qr_code_page_password" msgid="7268475614131297060">"Jelszó: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
+    <string name="audio_streams_qr_code_page_description" msgid="1317961663706630428">"<xliff:g id="STREAM_NAME">%1$s</xliff:g>: a stream hallgatásához más személyek kompatibilis fejhallgatójukkal saját Android-eszközükhöz csatlakozhatnak. Ha ez megtörtént, beolvashatják ezt a QR-kódot."</string>
+    <string name="audio_streams_main_page_title" msgid="1838380471076527639">"Audiostream kezelése"</string>
+    <string name="audio_streams_main_page_subtitle" msgid="3251995732921981539">"Hangot megosztó eszköz vagy közeli Auracast-közvetítés hallgatása."</string>
+    <string name="audio_streams_main_page_device_title" msgid="2635744035523908253">"Az Ön saját audioeszköze"</string>
+    <string name="audio_streams_main_page_no_device_summary" msgid="2936000845397406389">"Kompatibilis fejhallgatók csatlakoztatása"</string>
+    <string name="audio_streams_main_page_scan_section_title" msgid="2778235929304061163">"Közeli audiostreamek"</string>
+    <string name="audio_streams_main_page_scan_qr_code_title" msgid="8337270277392468895">"QR-kód beolvasása"</string>
+    <string name="audio_streams_main_page_scan_qr_code_summary" msgid="1991792283368249499">"Hallgatás megkezdése a kívánt stream QR-kódjának beolvasásával"</string>
+    <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Stream hallgatása"</string>
+    <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Audiostream QR-kódjának beolvasása a(z) <xliff:g id="DEVICE_NAME">%1$s</xliff:g> eszközön való hallgatáshoz"</string>
+    <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Megosztás közben a jelszó nem módosítható. Ha módosítani kívánja a jelszót, először kapcsolja ki a hang megosztását."</string>
 </resources>

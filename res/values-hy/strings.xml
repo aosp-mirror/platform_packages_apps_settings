@@ -48,9 +48,9 @@
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"Միայն խաղեր, տեսանյութեր և այլն"</string>
     <string name="selective_stay_awake_summary" msgid="9055967322921984543">"Առջևի էկրանը միանում է այն հավելվածների համար, որոնք թույլ չեն տալիս, որ էկրանն անցնի անգործուն ռեժիմի"</string>
     <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Սահեցնել վերև՝ շարունակելու համար"</string>
-    <string name="stay_awake_on_lockscreen_summary" msgid="2299351813382522952">"Ծալեք ձեր հեռախոսը և սահեցրեք վերև՝ առջևի էկրանին, որպեսզի շարունակեք օգտվել հավելվածից, կամ սպասեք մի քանի վայրկյան, մինչև էկրանը կողպվի"</string>
+    <string name="stay_awake_on_lockscreen_summary" msgid="8825321939913726566">"Ծալեք ձեր հեռախոսը և սահեցրեք վերև առջևի էկրանին, որպեսզի շարունակեք օգտագործել հավելվածը, կամ սպասեք մի քանի վայրկյան, մինչև էկրանը կողպվի։ Խաղերը և վիդեո հավելվածները ավտոմատ կշարունակեն աշխատել։"</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"Երբեք"</string>
-    <string name="sleep_on_fold_summary" msgid="7737992842459588846">"Առջևի էկրանը կողպվում է, երբ սարքը ծալում եք"</string>
+    <string name="sleep_on_fold_summary" msgid="4191753338303043456">"Առջևի էկրանն անջատվում և կողպվում է, երբ սարքը ծալում եք"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Օգտագործել ավտոմատ պտտումը"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"Դիմաճանաչումն օգտագործում է առջևի տեսախցիկը՝ ինքնապտտման ճշգրտությունը բարելավելու համար։ Պատկերները չեն պահվում և չեն ուղարկվում Google-ին։"</string>
     <string name="bluetooth" msgid="8898478620943459654">"Bluetooth"</string>
@@ -139,7 +139,6 @@
     <string name="stylus_textfield_handwriting" msgid="2363579035338976327">"Գրել տեքստային դաշտերում"</string>
     <string name="stylus_ignore_button" msgid="7734540973145241391">"Անտեսել կոճակների սեղմումները ստիլուսով"</string>
     <string name="stylus_connected_devices_title" msgid="2823967577941359812">"Ստիլուս"</string>
-    <string name="audio_streams_empty" msgid="8803517701437394982">"Մոտակայքում աուդիո հոսքեր չեն գտնվել։"</string>
     <string name="date_and_time" msgid="1788358029823431692">"Ամսաթիվ և ժամ"</string>
     <string name="proxy_settings_title" msgid="4201866858226087066">"Պրոքսի"</string>
     <string name="proxy_clear_text" msgid="6529658759984031149">"Մաքրել"</string>
@@ -286,8 +285,7 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Հավելվածները, որոնց հասանելի են մոտակա սարքերը, կարող են որոշել միացված սարքերի հարաբերական դիրքավորումը։"</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Տեղադրության տվյալների օգտագործման թույլտվությունն անջատված է հավելվածների և ծառայությունների համար։ Ձեր սարքի տեղադրության տվյալները կարող են ուղարկվել փրկարար ծառայություններին, եթե դուք զանգեք կամ հաղորդագրություն գրեք արտակարգ իրավիճակների հեռախոսահամարով։"</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Իմանալ ավելին տեղադրության կարգավորումների մասին"</string>
-    <!-- no translation found for location_settings_tooltip_text_for_chrome (5781821709250544575) -->
-    <skip />
+    <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"Փոխելու համար անցեք ChromeOS-ի կարգավորումներ &gt; Գաղտնիություն և անվտանգություն &gt; Գաղտնիության կարգավորումներ &gt; Տեղորոշման թույլտվություն"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Հաշիվներ"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Անվտանգություն"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Գաղտնագրում և մուտքի տվյալներ"</string>
@@ -565,9 +563,10 @@
     <string name="private_space_auto_lock_title" msgid="8663409382910601261">"Մասնավոր տարածքի ավտոմատ կողպում"</string>
     <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"Կարող եք այնպես անել, որ ձեր մասնավոր տարածքն ավտոմատ կողպվի, եթե որոշ ժամանակ չօգտագործեք ձեր սարքը"</string>
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"Ամեն անգամ, երբ սարքը կողպվում է"</string>
-    <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"Անգործուն մնալուց 5 րոպե հետո"</string>
+    <!-- no translation found for private_space_auto_lock_after_inactivity (7107814517866649733) -->
+    <skip />
     <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"Միայն երբ սարքը վերագործարկվում է"</string>
-    <string name="private_space_hide_page_title" msgid="3364639176511877414">"Մասնավոր տարածքի թաքցնում"</string>
+    <string name="private_space_hide_page_title" msgid="3364639176511877414">"Թաքցնել մասնավոր տարածքը"</string>
     <string name="private_space_hide_when_locked" msgid="6219472348124151797">"Թացքնել մասնավոր տարածքը, երբ այն կողպված է"</string>
     <string name="private_space_hide_page_summary" msgid="6247773353685839242">"Որպեսզի այլ մարդիկ չիմանան ձեր մասնավոր տարածքի մասին, կարող եք այն թաքցնել հավելվածների ցանկից"</string>
     <string name="private_space_access_header" msgid="1077082416567150819">"Մասնավոր տարածքի հասանելիություն, երբ այն թաքցված է"</string>
@@ -807,7 +806,7 @@
     <string name="bluetooth_pin_values_hint" msgid="2753202519050044670">"Սովորաբար 0000 կամ 1234"</string>
     <string name="bluetooth_pin_values_hint_16_digits" msgid="5603928271430883558">"Պետք է պարունակի 16 թվանշան"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="6737778699899780717">"Հնարավոր է պետք լինի մուտքագրել այս PIN-ը մյուս սարքերի վրա ևս:"</string>
-    <string name="bluetooth_enter_passkey_other_device" msgid="8270426446247344709">"Հնարավոր է պետք լինի մուտքագրել այս անցաբառը այլ սարքերում:"</string>
+    <string name="bluetooth_enter_passkey_other_device" msgid="8270426446247344709">"Հնարավոր է պետք լինի մուտքագրել այս մուտքի բանալին այլ սարքերում:"</string>
     <string name="bluetooth_paring_group_msg" msgid="2455293929036668131">"Հաստատեք՝ աուդիո սարքի հետ զուգակցելու համար"</string>
     <string name="bluetooth_pairing_shares_phonebook" msgid="4329325125260724843">"Թույլատրել կոնտակտների ու զանգերի պատմության հասանելիությունը"</string>
     <string name="bluetooth_pairing_phonebook_toggle_text" msgid="2474015367387690034">"Նաև հասանելի դարձնել կոնտակտները և զանգերի պատմությունը"</string>
@@ -823,7 +822,7 @@
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Երբ Bluetooth-ը միացված է, ձեր սարքը կարող է հաղորդակցվել մոտակայքում գտնվող Bluetooth սարքերի հետ։\n\nՍարքի աշխատանքը բարելավելու նպատակով հավելվածներն ու ծառայությունները կորոնեն մոտակայքում գտնվող սարքեր, նույնիսկ երբ Bluetooth-ն անջատված է։ Դա կարելի է օգտագործել, օրինակ, տեղադրության տվյալների վրա հիմնված գործառույթների և ծառայությունների աշխատանքը բարելավելու համար։ Այս պարամետրը կարող եք փոխել Bluetooth-ի որոնման կարգավորումներում։"</string>
     <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"Երբ Bluetooth-ը միացված է, ձեր սարքը կարող է հաղորդակցվել մոտակայքում գտնվող Bluetooth սարքերի հետ: Bluetooth-ն օգտագործում են, օրինակ, Quick Share և «Գտնել իմ սարքը» գործառույթները։\n\nՀավելվածներն ու ծառայությունները կարող են նախկինի պես որոնել մոտակայքում գտնվող սարքեր, նույնիսկ երբ Bluetooth-ն անջատված է։ Դա կարող է օգտագործվել, օրինակ, տեղադրության տվյալների վրա հիմնված գործառույթների և ծառայությունների աշխատանքը բարելավելու համար։ Այս պարամետրը ցանկացած ժամանակ կարող եք փոխել Bluetooth սարքերի որոնման կարգավորումներում։"</string>
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"Փոխել"</string>
-    <string name="device_details_title" msgid="1155622417516195481">"Սարքի տվյալները"</string>
+    <string name="device_details_title" msgid="1155622417516195481">"Սարքի տվյալներ"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Ստեղնաշարի կարգավորումներ"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Սարքի Bluetooth հասցեն՝ <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_multuple_devices_mac_address" msgid="4974301550897923376">"Սարքի Bluetooth հասցեն՝\n<xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
@@ -1753,7 +1752,7 @@
     <string name="enable_text" msgid="8570798764647110430">"Միացնել"</string>
     <string name="clear_user_data_text" msgid="6773186434260397947">"Մաքրել հիշողությունը"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"Ապատեղադրել թարմացումները"</string>
-    <string name="app_restricted_settings_lockscreen_title" msgid="796413224212436400">"Հասանելի դարձնել սահմանափակված թույլտվությունները"</string>
+    <string name="app_restricted_settings_lockscreen_title" msgid="5993061278264872648">"Թույլատրել սահմանափակ ռեժիմի կարգավորումները"</string>
     <string name="auto_launch_enable_text" msgid="8912714475823807798">"Ձեր ընտրած որոշ գործողություններ ըստ կանխադրման բացվում են այս հավելվածում։"</string>
     <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"Դուք ընտրել եք թույտարել այս ծրագրին ստեղծել վիջեթներ և մուտք գործել իրենց տվյալներ:"</string>
     <string name="auto_launch_disable_text" msgid="502648841250936209">"Լռելյայները կարգավորված չեն:"</string>
@@ -1808,7 +1807,7 @@
     <string name="force_stop_dlg_title" msgid="86745852555490146">"Կանգնեցնե՞լ"</string>
     <string name="force_stop_dlg_text" msgid="1527286468544457368">"Հավելվածի ստիպողական դադարեցումը կարող է ազդել դրա աշխատանքի վրա։"</string>
     <string name="app_disable_dlg_positive" msgid="1414218905322009505">"Անջատել հավելվածը"</string>
-    <string name="app_disable_dlg_text" msgid="2449382902751908916">"Եթե անջատեք այս հավելվածը, համակարգը և այլ հավելվածներ հնարավոր է՝ սխալներով աշխատեն: Դուք չեք կարող ջնջել այս հավելվածը, քանի որ այն նախապես տեղադրված է եղել ձեր սարքում։ Անջատելու դեպքում հավելվածը կդադարի աշխատել և կթաքցվի։"</string>
+    <string name="app_disable_dlg_text" msgid="2449382902751908916">"Եթե անջատեք այս հավելվածը, համակարգը և այլ հավելվածներ հնարավոր է սխալներով աշխատեն: Դուք չեք կարող ջնջել այս հավելվածը, քանի որ այն նախապես տեղադրված է եղել ձեր սարքում։ Անջատելու դեպքում հավելվածը կդադարի աշխատել և կթաքցվի։"</string>
     <string name="app_install_details_group_title" msgid="1172114479073704677">"Խանութ"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"Հավելվածի մասին"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"Հավելվածը տեղադրվել է <xliff:g id="APP_STORE">%1$s</xliff:g>ից"</string>
@@ -2016,8 +2015,8 @@
     <string name="display_category_title" msgid="6638191682294461408">"Էկրան"</string>
     <string name="accessibility_color_and_motion_title" msgid="2323301706545305874">"Գույն և շարժում"</string>
     <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"Գույների կոնտրաստ"</string>
-    <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"Բարձր կոնտրաստն ավելի է առանձնացնում տեքստը, կոճակները և պատկերակները։ Ընտրեք ձեզ հարմարավետ կոնտրաստ։"</string>
-    <string name="color_contrast_note" msgid="7592686603372566198">"Որոշ հավելվածներ հնարավոր է՝ չաջակցեն գույների և տեքստի կոնտրաստի կարգավորումները"</string>
+    <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"Բարձր կոնտրաստն ավելի է առանձնացնում տեքստը, կոճակները և պատկերակները։ Ընտրեք ձեզ հարմար կոնտրաստ։"</string>
+    <string name="color_contrast_note" msgid="7592686603372566198">"Որոշ հավելվածներ հնարավոր է չաջակցեն գույների և տեքստի կոնտրաստի կարգավորումները"</string>
     <string name="color_contrast_preview" msgid="6791430227535363883">"Նախադիտում"</string>
     <string name="color_contrast_preview_sender_name" msgid="8641943417589238147">"Հելեն, Ադամ"</string>
     <string name="color_contrast_preview_email_send_date" msgid="2108702726171600080">"2 օր առաջ"</string>
@@ -2325,6 +2324,8 @@
     <string name="daltonizer_mode_protanomaly_title" msgid="6392456967103014723">"Կարմիր-կանաչ"</string>
     <string name="daltonizer_mode_tritanomaly_title" msgid="2278786218762602022">"Կապույտ-դեղին"</string>
     <string name="daltonizer_mode_grayscale_title" msgid="152005391387952588">"Մոխրագույնի երանգներ"</string>
+    <!-- no translation found for daltonizer_saturation_title (2999486412114963068) -->
+    <skip />
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="2117727423019598455">"Դեյտերանոմալիա"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="4617032854982040748">"Պրոտանոմալիա"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Տրիտանոմալիա"</string>
@@ -2405,7 +2406,6 @@
     <string name="keywords_select_to_speak" msgid="2872704811610888719"></string>
     <string name="keywords_color_correction" msgid="8540442886990423681">"կարգավորել գույնը"</string>
     <string name="keywords_color_inversion" msgid="4291058365873221962">"մգեցնել էկրանը, բացացնել էկրանը"</string>
-    <string name="keywords_contrast" msgid="4668393735398949873">"գույների կոնտրաստ"</string>
     <string name="keywords_accessibility_menu" msgid="4300579436464706608"></string>
     <string name="keywords_switch_access" msgid="5813094504384313402"></string>
     <string name="keywords_auto_click" msgid="6811744211216280998">"մոտորիկա, մկնիկ, արտաքին մկնիկ, գլխի մկնիկ, հարմարվող մկնիկ, անվասայլակ, ջոյսթիք"</string>
@@ -3306,6 +3306,8 @@
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Կապված սարքերի կարգավորումներ"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Ոչ մի ժամանակացույց}=1{Սահմանված է 1 ժամանակացույց}one{Սահմանված է # ժամանակացույց}other{Սահմանված է # ժամանակացույց}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Չանհանգստացնել"</string>
+    <!-- no translation found for zen_modes_list_title (5138745349253275428) -->
+    <skip />
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Ծանուցում ստանալ միայն կարևոր մարդկանցից և հավելվածներից"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Ընդհատումների սահմանափակում"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Միացրեք «Չանհանգստացնել» ռեժիմը"</string>
@@ -3532,7 +3534,7 @@
     <string name="notifications_sent_daily" msgid="10274479224185437">"{count,plural, =1{Օրական մոտավորապես # ծանուցում}one{Օրական մոտավորապես # ծանուցում}other{Օրական մոտավորապես # ծանուցում}}"</string>
     <string name="notifications_sent_weekly" msgid="7895656213187555346">"{count,plural, =1{Շաբաթական մոտավորապես # ծանուցում}one{Շաբաթական մոտավորապես # ծանուցում}other{Շաբաթական մոտավորապես # ծանուցում}}"</string>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Երբեք"</string>
-    <string name="manage_notification_access_title" msgid="6481256069087219982">"Սարքերի և հավելվածների ծանուցումներ"</string>
+    <string name="manage_notification_access_title" msgid="4154723216570646451">"Ծանուցումների ընթերցում, պատասխանում և կառավարում"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"Ընտրել հավելվածներն ու սարքերը, որոնք կարող են կարդալ ծանուցումները"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8643809206612366067">"Աշխատանքային պրոֆիլի ծանուցումների մուտքն արգելափակված է"</string>
     <string name="notification_assistant_title" msgid="5889201903272393099">"Ընդլայնված ծանուցումներ"</string>
@@ -3632,7 +3634,7 @@
     <string name="app_notification_block_summary" msgid="1804611676339341551">"Երբեք չցուցադրել այս ծանուցումները"</string>
     <string name="notification_content_block_title" msgid="6689085826061361351">"Ցույց տալ ծանուցումները"</string>
     <string name="notification_content_block_summary" msgid="329171999992248925">"Երբեք չցուցադրել ծանուցումները ստվերում կամ արտաքին սարքերի վրա"</string>
-    <string name="app_notification_fsi_permission_title" msgid="5424116606034705020">"Թույլատրել ծանուցումների լիաէկրան ցուցադրումը"</string>
+    <string name="app_notification_fsi_permission_title" msgid="2260977598430154428">"Թույլատրել ծանուցումների լիաէկրան ցուցադրումը"</string>
     <string name="app_notification_fsi_permission_summary" msgid="7673487977631068039">"Թույլատրել ծանուցումների ցուցադրումը ամբողջ էկրանով, երբ սարքը կողպված է"</string>
     <string name="notification_badge_title" msgid="6854537463548411313">"Ցույց տալ ծանուցման կետիկը"</string>
     <string name="notification_channel_badge_title" msgid="6505542437385640049">"Ցույց տալ ծանուցման կետիկը"</string>
@@ -3981,8 +3983,8 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Բոլոր ֆայլերը կառավարելու թույլտվություն տալ"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Դուք կարող եք թույլատրել այս հավելվածին կարդալ, փոփոխել և ջնջել այս սարքի կամ միացված կրիչների բոլոր ֆայլերը։ Եթե թույլատրեք, հավելվածը կկարողանա օգտվել ֆայյլերից առանց ձեր իմացության։"</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Հասանելիություն ունեն բոլոր ֆայլերին"</string>
-    <string name="full_screen_intent_title" msgid="747270185715224130">"Ծանուցումներ լիաէկրան ռեժիմում"</string>
-    <string name="permit_full_screen_intent" msgid="9035367640019960861">"Թույլատրել այս հավելվածին ցույց տալ ծանուցումներ լիաէկրան ռեժիմում"</string>
+    <string name="full_screen_intent_title" msgid="5888548315628268674">"Ծանուցումներ լիաէկրան ռեժիմում"</string>
+    <string name="permit_full_screen_intent" msgid="2414307667550523630">"Թույլատրել այս հավելվածին ցույց տալ ծանուցումներ լիաէկրան ռեժիմում"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Թույլատրել այս հավելվածին ցույց տալ ծանուցումներ լիաէկրան ռեժիմում, երբ սարքը կողպված է։ Հավելվածները կարող են օգտագործել այս գործառույթը՝ զարթուցիչներ, մուտքային զանգեր և այլ շտապ ծանուցումներ ցուցադրելու համար։"</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"Մեդիա ֆայլերի կառավարման հավելվածներ"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Թույլատրել հավելվածին կառավարել մեդիա ֆայլերը"</string>
@@ -4100,7 +4102,7 @@
     <string name="data_usage_template" msgid="3822452362629968010">"<xliff:g id="ID_1">%1$s</xliff:g> օգտագործված <xliff:g id="ID_2">%2$s</xliff:g> ժամանակահատվածում"</string>
     <string name="configure" msgid="1499586749829665889">"Կարգավորել"</string>
     <string name="data_usage_other_apps" msgid="5649047093607329537">"Օգտագործման մեջ ներառված այլ հավելվածներ"</string>
-    <string name="data_saver_unrestricted_summary" msgid="7343571401172437542">"{count,plural, =1{1 հավելվածի թույլատրված է անսահմանափակ օգտագործել բջջային ինտերնետը, երբ թրաֆիկի տնտեսումը միացված է}one{# հավելվածի թույլատրված է անսահմանափակ օգտագործել բջջային ինտերնետը, երբ թրաֆիկի տնտեսումը միացված է}other{# հավելվածի թույլատրված է անսահմանափակ օգտագործել բջջային ինտերնետը, երբ թրաֆիկի տնտեսումը միացված է}}"</string>
+    <string name="data_saver_unrestricted_summary" msgid="559673440849071149">"{count,plural, =1{1 հավելվածի թույլատրված է անսահմանափակ օգտագործել բջջային ինտերնետը, երբ թրաֆիկի տնտեսումը միացված է}one{# հավելվածի թույլատրված է անսահմանափակ օգտագործել բջջային ինտերնետը, երբ թրաֆիկի տնտեսումը միացված է}other{# հավելվածի թույլատրված է անսահմանափակ օգտագործել բջջային ինտերնետը, երբ թրաֆիկի տնտեսումը միացված է}}"</string>
     <string name="data_usage_title" msgid="4039024073687469094">"Հիմնական տվյալներ"</string>
     <string name="data_usage_wifi_title" msgid="1060495519280456926">"Wi‑Fi թրաֆիկ"</string>
     <string name="data_used_formatted" msgid="7913920278059077938">"Օգտագործվել է <xliff:g id="ID_1">^1</xliff:g> <xliff:g id="ID_2">^2</xliff:g>"</string>
@@ -4117,13 +4119,13 @@
     <string name="no_carrier_update_now_text" msgid="7898004907837200752">"Թարմացվել է հենց նոր"</string>
     <string name="launch_wifi_text" msgid="976421974332512894">"Տեսնել մանրամասները"</string>
     <string name="data_saver_title" msgid="2593804270788863815">"Թրաֆիկի տնտեսում"</string>
-    <string name="unrestricted_data_saver" msgid="7922563266857367495">"Տվյալների անսահմանափակ օգտագործում"</string>
+    <string name="unrestricted_data_saver" msgid="5913547065342097274">"Անսահմանափակ բջջային ինտերնետ"</string>
     <string name="restrict_background_blocklisted" msgid="2308345280442438232">"Տվյալների փոխանակման ֆոնային ռեժիմն անջատված է"</string>
     <string name="data_saver_on" msgid="7848893946018448793">"Միացված է"</string>
     <string name="data_saver_off" msgid="5891210864117269045">"Անջատված է"</string>
     <string name="data_saver_switch_title" msgid="7111538580123722959">"Միացնել թրաֆիկի տնտեսումը"</string>
-    <string name="unrestricted_app_title" msgid="7117585996574329284">"Տվյալների անսահմանափակ փոխանցում"</string>
-    <string name="unrestricted_app_summary" msgid="282698963532000403">"Թույլ տալ տվյալների անսահմանափակ օգտագործում, երբ թրաֆիկի տնտեսումը միացված է"</string>
+    <string name="unrestricted_app_title" msgid="8531936851059106374">"Անսահմանափակ բջջային ինտերնետի օգտագործում"</string>
+    <string name="unrestricted_app_summary" msgid="8320813971858627624">"Թույլ տալ անսահմանափակ բջջային ինտերնետի օգտագործում, երբ թրաֆիկի տնտեսումը միացված է"</string>
     <string name="home_app" msgid="6056850504746902747">"Գլխավոր հավելված"</string>
     <string name="suggestion_additional_fingerprints" msgid="4726777300101156208">"Ավելացրեք ևս մեկ մատնահետք"</string>
     <string name="suggestion_additional_fingerprints_summary" msgid="2825364645039666674">"Ապակողպում այլ մատով"</string>
@@ -4197,9 +4199,9 @@
     <string name="notification_suggestion_summary" msgid="7615611244249276113">"Ցույց տալ կամ թաքցնել ծանուցման բովանդակությունը"</string>
     <string name="page_tab_title_support" msgid="3235725053332345773">"Խորհուրդներ և օգնություն"</string>
     <string name="developer_smallest_width" msgid="632354817870920911">"Ամենափոքր լայնությունը"</string>
-    <string name="premium_sms_none" msgid="8737045049886416739">"Տեղադրված հավելվածներից ոչ մեկը վճարովի SMS-ների օգտագործման հարցում չի կատարել"</string>
+    <string name="premium_sms_none" msgid="4718916765158062108">"Տեղադրված հավելվածներից ոչ մեկը վճարովի SMS-ների հասանելիության հարցում չի կատարել"</string>
     <string name="premium_sms_warning" msgid="2192300872411073324">"Վճարովի SMS-ները կարող են լրացուցիչ ծախսեր առաջացնել: Հավելվածին թույտվություն տալու դեպքում կկարողանաք դրա միջոցով վճարովի SMS-ներ ուղարկել։"</string>
-    <string name="premium_sms_access" msgid="5605970342699013212">"Վճարովի SMS"</string>
+    <string name="premium_sms_access" msgid="8487315743197916530">"Վճարովի SMS"</string>
     <string name="bluetooth_disabled" msgid="835838280837359514">"Անջատված է"</string>
     <string name="bluetooth_connected_summary" msgid="8043167194934315712">"Միացված է <xliff:g id="ID_1">%1$s</xliff:g>-ին"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="2294954614327771844">"Միացված է բազմակի շարժական սարքերի"</string>
@@ -4990,12 +4992,9 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Անջատել ավիառեժիմը՝ UWB-ն օգտագործելու համար"</string>
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"UWB-ն անհասանելի է ընթացիկ տեղադրությունում"</string>
     <string name="thread_network_settings_title" msgid="4212301030523859220">"Thread"</string>
-    <!-- no translation found for thread_network_settings_main_switch_title (3859168481929323474) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_footer_title (7385600318850220927) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_learn_more (8278498005848565050) -->
-    <skip />
+    <string name="thread_network_settings_main_switch_title" msgid="3859168481929323474">"Օգտագործել Thread-ը"</string>
+    <string name="thread_network_settings_footer_title" msgid="7385600318850220927">"Thread-ն օգնում է միացնել խելացի տան սարքերը՝ բարձրացնելով ամբողջ համակարգի արդյունավետությունը։\n\nԵթե կարգավորումը միացված է, այս հեռախոսը կարող եք միացնել Thread ցանցին և հեռախոսով կառավարել Matter սարքերը։"</string>
+    <string name="thread_network_settings_learn_more" msgid="8278498005848565050">"Իմանալ ավելին Thread-ի մասին"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"Տեսախցիկն օգտագործելու թույլտվություն"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Խոսափողն օգտագործելու թույլտվություն"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"Հավելվածների և ծառայությունների համար"</string>
@@ -5080,12 +5079,12 @@
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"Երբ դուք շարժում եք ձեր գլուխը, ձայնը դառնում է ավելի բնական"</string>
     <string name="bluetooth_details_permissions_sync_title" msgid="7277580382321003521">"Համաժամացնել թույլտվությունները հեռախոսից"</string>
     <string name="bluetooth_details_permissions_sync_summary" msgid="8125037984381432059">"Ժամացույցում հավելվածին տվեք նույն թույլտվությունները, որոնք տվել եք այս հեռախոսում"</string>
-    <string name="bluetooth_details_audio_device_types_title" msgid="3381941189346781614">"Աուդիո սարքի տեսակը"</string>
-    <string name="bluetooth_details_audio_device_type_unknown" msgid="839337391037998014">"Անհայտ"</string>
+    <string name="bluetooth_details_audio_device_types_title" msgid="1889644189800180316">"Աուդիո սարքի տեսակը"</string>
+    <string name="bluetooth_details_audio_device_type_unknown" msgid="5299284975435974206">"Նշված չէ"</string>
     <string name="bluetooth_details_audio_device_type_speaker" msgid="3706227767994792124">"Բարձրախոս"</string>
     <string name="bluetooth_details_audio_device_type_headphones" msgid="7644588291215033798">"Ականջակալներ"</string>
-    <string name="bluetooth_details_audio_device_type_hearing_aid" msgid="1310631131071939859">"Լսողական սարք"</string>
-    <string name="bluetooth_details_audio_device_type_carkit" msgid="4439017600454703229">"Մեքենայի լրասարքեր"</string>
+    <string name="bluetooth_details_audio_device_type_hearing_aid" msgid="6311786545025321187">"Լսողական սարք"</string>
+    <string name="bluetooth_details_audio_device_type_carkit" msgid="1866236563013629394">"Ավտոմեքենա"</string>
     <string name="bluetooth_details_audio_device_type_other" msgid="7019481234617207563">"Այլ"</string>
     <string name="ingress_rate_limit_title" msgid="2106694002836274350">"Մուտքային թրաֆիկի սահմանաչափ"</string>
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"Կարգավորեք մուտքային թրաֆիկի թողունակության սահմանաչափ։ Այս կարգավորումը կիրառվում է բոլոր ցանցերի նկատմամբ, որոնք տրամադրում են ինտերնետ կապ։"</string>
@@ -5170,8 +5169,6 @@
     <string name="screen_flash_color_violet" msgid="1279950780509029495">"Մանուշակագույն"</string>
     <string name="color_selector_dialog_done" msgid="121253968943363376">"Պատրաստ է"</string>
     <string name="color_selector_dialog_cancel" msgid="8667350644753900701">"Չեղարկել"</string>
-    <string name="contrast_title" msgid="6885768151336508075">"Կոնտրաստ"</string>
-    <string name="contrast_standard" msgid="1097297089917185235">"Սովորական"</string>
     <string name="contrast_default" msgid="8918545965525226966">"Կանխադրված"</string>
     <string name="contrast_medium" msgid="384414510709285811">"Միջին"</string>
     <string name="contrast_high" msgid="3988567609694797696">"Բարձր"</string>
@@ -5208,4 +5205,100 @@
     <string name="fingerprint_acquired_imager_dirty_udfps" msgid="7005042288289506776">"Մատնահետքի հատվածում մաքրեք էկրանը և նորից փորձեք"</string>
     <string name="sim_category_converted_sim" msgid="8575548015816988908">"Վերածվել է eSIM-ի։ Չպահպանել և հեռացնել։"</string>
     <string name="sync_across_devices_title" msgid="3447757705383089345">"Սարքերի միջև համաժամացում"</string>
+    <!-- no translation found for device_diagnostics_title (2914523189695727897) -->
+    <skip />
+    <string name="audio_sharing_title" msgid="4144157137502923821">"Աուդիոյի փոխանցում"</string>
+    <string name="audio_sharing_switch_title" msgid="7052827328670825701">"Փոխանցել աուդիո"</string>
+    <string name="calls_and_alarms_device_title" msgid="6993559028175454198">"Զանգեր և զարթուցիչներ"</string>
+    <string name="audio_sharing_description" msgid="1660255584523640628">"Թույլ տվեք մարդկանք ձեզ հետ միասին լսել ձեր մեդիան։ Լսողները պետք է իրենց LE Audio ականջակալն ունենան։"</string>
+    <string name="audio_sharing_device_group_title" msgid="3019780581643956943">"Ակտիվ մեդիա սարքեր"</string>
+    <string name="audio_sharing_call_audio_title" msgid="7978867452289583929">"Զանգի ձայներանգ"</string>
+    <string name="audio_sharing_call_audio_description" msgid="6573621048260616924">"Նվագարկել միայն <xliff:g id="DEVICE_NAME">%1$s</xliff:g> սարքում"</string>
+    <string name="audio_sharing_test_sound_title" msgid="6438868185641027763">"Միացնել փորձնական ձայն"</string>
+    <string name="audio_sharing_test_sound_description" msgid="4072462502371937399">"Բոլոր լսողները կլսեն այն"</string>
+    <string name="audio_sharing_stream_settings_title" msgid="1374391898689242036">"Աուդիո հոսքի կարգավորումներ"</string>
+    <string name="audio_sharing_stream_name_title" msgid="8156859441897180940">"Անվանում"</string>
+    <string name="audio_sharing_stream_password_title" msgid="7026649168165764602">"Գաղտնաբառ"</string>
+    <string name="audio_sharing_stream_compatibility_title" msgid="5690947186724469918">"Բարելավել համատեղելիությունը"</string>
+    <string name="audio_sharing_stream_compatibility_description" msgid="8170241188606110963">"Օգնում է որոշ սարքերին (օր․՝ լսողական սարքերին) միանալ՝ նվազեցնելով ձայնի որակը"</string>
+    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="2586408353546825682">"Անջատում է աուդիոյի փոխանցումը՝ համատեղելիությունը կազմաձևելու համար"</string>
+    <string name="audio_sharing_nearby_audio_title" msgid="4795438407040677177">"Լսեք մոտակայքում նվագարկվող աուդիո"</string>
+    <string name="audio_sharing_footer_description" msgid="4786942197840271680">"Աուդիոյի փոխանցումն աջակցում է Auracast™"</string>
+    <string name="audio_sharing_stream_name_dialog_title" msgid="6706027295417556499">"Աուդիո հոսքի անվանումը"</string>
+    <string name="audio_sharing_stream_password_dialog_title" msgid="4148196538860845705">"Աուդիո հոսքի գաղտնաբառը"</string>
+    <string name="audio_sharing_media_device_group_title" msgid="4850674234590549565">"Այլ մեդիա սարքեր"</string>
+    <string name="audio_sharing_summary_on" msgid="611197542982323788">"Միացված է"</string>
+    <string name="audio_sharing_summary_off" msgid="8833198995257547378">"Անջատված է"</string>
+    <string name="audio_sharing_share_dialog_title" msgid="427514648577553621">"Փոխանցեք ձեր աուդիոն"</string>
+    <string name="audio_sharing_share_dialog_subtitle" msgid="5208582843732057871">"<xliff:g id="DEVICE_NAME1">%1$s</xliff:g> և <xliff:g id="DEVICE_NAME2">%2$s</xliff:g>"</string>
+    <string name="audio_sharing_share_button_label" msgid="3895900668317105537">"Փոխանցել աուդիո"</string>
+    <string name="audio_sharing_no_thanks_button_label" msgid="5822491984114744357">"Ոչ, շնորհակալություն"</string>
+    <string name="audio_sharing_share_with_dialog_title" msgid="3934377530640830364">"Փոխանցե՞լ աուդիոն <xliff:g id="DEVICE_NAME">%1$s</xliff:g> սարքին"</string>
+    <string name="audio_sharing_share_with_more_dialog_title" msgid="2840069088858232267">"Փոխանցել աուդիոն մեկ այլ սարքի"</string>
+    <string name="audio_sharing_share_with_button_label" msgid="4146194430380237357">"Փոխանցել <xliff:g id="DEVICE_NAME">%1$s</xliff:g> սարքի միջոցով"</string>
+    <string name="audio_sharing_close_button_label" msgid="2666534149100498574">"Փակել"</string>
+    <string name="audio_sharing_dialog_connect_device_content" msgid="2873230647152283734">"Միացրեք մեկ այլ համատեղելի ականջակալ կամ մյուս մարդու հետ կիսվեք ձեր հոսքի անունով և գաղտնաբառով"</string>
+    <string name="audio_sharing_dialog_pair_device_content" msgid="3136997898244863470">"Զուգակցեք մեկ այլ համատեղելի ականջակալ կամ մյուս մարդու հետ կիսվեք ձեր աուդիո հոսքի QR Կոդով"</string>
+    <string name="audio_sharing_sharing_label" msgid="1038021053061111508">"Փոխանցում է աուդիոն"</string>
+    <string name="audio_sharing_pair_button_label" msgid="7987236990273083588">"Նոր սարքի զուգակցում"</string>
+    <string name="audio_sharing_qrcode_button_label" msgid="3207039106555097659">"Ցույց տալ QR կոդը"</string>
+    <string name="audio_sharing_notification_title" msgid="1204798942946033005">"Դուք փոխանցում եք ձեր աուդիոն"</string>
+    <string name="audio_sharing_notification_content" msgid="1577180829878785642">"Լսող մարդիկ կարող եք լսել ձեր մեդիայի ձայները։ Նրանք չեն լսի զանգերը։"</string>
+    <string name="audio_sharing_stop_button_label" msgid="8770519671470608849">"Կանգնեցնել փոխանցումը"</string>
+    <string name="audio_sharing_settings_button_label" msgid="8574808650318270491">"Կարգավորումներ"</string>
+    <string name="audio_sharing_disconnect_dialog_title" msgid="2192751727237748602">"Ընտրեք սարքը՝ կապն անջատելու համար"</string>
+    <string name="audio_sharing_dialog_disconnect_content" msgid="3840488888970653308">"Աուդիոն միաժամանակ կարող է նվագարկվել ոչ ավել, քան երկու սարքերում"</string>
+    <string name="audio_sharing_disconnect_device_button_label" msgid="4272897217708930576">"Չեղարկել <xliff:g id="DEVICE_NAME">%1$s</xliff:g>-ի զուգակցումը"</string>
+    <string name="audio_sharing_stop_dialog_title" msgid="4872853738164232075">"Միացնե՞լ <xliff:g id="DEVICE_NAME">%1$s</xliff:g> սարքը"</string>
+    <string name="audio_sharing_stop_dialog_content" msgid="6371546856710692910">"Դուք կկանգնեցնեք աուդիոյի փոխանցումը <xliff:g id="DEVICE_NAME">%1$s</xliff:g> սարքին"</string>
+    <string name="audio_sharing_stop_dialog_with_two_content" msgid="2119020725467967219">"Դուք կկանգնեցնեք աուդիոյի փոխանցումը <xliff:g id="DEVICE_NAME1">%1$s</xliff:g> և <xliff:g id="DEVICE_NAME2">%2$s</xliff:g> սարքերին"</string>
+    <string name="audio_sharing_stop_dialog_with_more_content" msgid="5262441138981618703">"Դուք կկանգնեցնեք աուդիոյի փոխանցումը միացված ականջակալներին"</string>
+    <string name="audio_sharing_connect_button_label" msgid="4241911519063029982">"Միանալ"</string>
+    <string name="audio_sharing_sharing_stopped_label" msgid="8128194452354240996">"Աուդիոյի փոխանցումը կանգնեցվել է"</string>
+    <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"Միացրեք համատեղելի սարք"</string>
+    <string name="audio_sharing_comfirm_dialog_content" msgid="3479217934447446066">"Աուդիոյի փոխանցումը սկսելու համար նախ LE Audio ականջակալ միացրեք ձեր հեռախոսին"</string>
+    <string name="audio_streams_category_title" msgid="4878022761829895463">"Միացեք LE Audio հոսքի"</string>
+    <string name="audio_streams_pref_title" msgid="6320485086288646209">"Մոտակա սարքերի աուդիո հոսքերը"</string>
+    <string name="audio_streams_title" msgid="6617990880383079165">"Աուդիո հոսքեր"</string>
+    <string name="audio_streams_qr_code_summary" msgid="2838923349871884871">"Միանալ աուդիո հոսքի՝ QR կոդի միջոցով"</string>
+    <string name="audio_streams_empty" msgid="8803517701437394982">"Մոտակայքում աուդիո հոսքեր չեն գտնվել։"</string>
+    <string name="audio_streams_disconnect" msgid="1755594831469579161">"Անջատել"</string>
+    <string name="audio_streams_connect" msgid="1955964373102927954">"Միանալ"</string>
+    <string name="audio_streams_qr_code_is_not_valid_format" msgid="4856288389653121830">"QR կոդի ձևաչափն անվավեր է"</string>
+    <string name="audio_streams_qr_code_scanner" msgid="525396804963685478">"Լսելու համար տեսախցիկը պահեք QR կոդի վրա"</string>
+    <string name="audio_streams_add_source_bad_code_state_summary" msgid="6527086906921868757">"Ստուգեք գաղտնաբառը և նորից փորձեք"</string>
+    <string name="audio_streams_add_source_failed_state_summary" msgid="3937546443978562322">"Կապ չկա։ Նորից փորձեք։"</string>
+    <string name="audio_streams_add_source_wait_for_response_summary" msgid="3763240901110974606">"Միանում է…"</string>
+    <string name="audio_streams_wait_for_sync_state_summary" msgid="11905744690831864">"Սկանավորում…"</string>
+    <string name="audio_streams_dialog_stream_is_not_available" msgid="4032878851270690546">"Աուդիո հոսքն անհասանելի է"</string>
+    <string name="audio_streams_is_not_playing" msgid="8480293894696007941">"Այս աուդիո հոսքում հիմա ոչինչ չի նվագարկվում"</string>
+    <string name="audio_streams_dialog_close" msgid="8177201719298408431">"Փակել"</string>
+    <string name="audio_streams_dialog_listen" msgid="7290340191504987685">"Լսել"</string>
+    <string name="audio_streams_dialog_retry" msgid="4456843891970998556">"Նորից փորձել"</string>
+    <string name="audio_streams_dialog_listen_to_audio_stream" msgid="8585253007762261528">"Լսել աուդիո հոսքը"</string>
+    <string name="audio_streams_dialog_control_volume" msgid="7615062686016713544">"Աուդիո հոսքը կնվագարկվի <xliff:g id="DEVICE_NAME">%1$s</xliff:g> սարքում։ Ձայնի ուժգնությունը կարգավորելու համար օգտագործեք այս սարքը։"</string>
+    <string name="audio_streams_dialog_cannot_listen" msgid="4432257183698209966">"Հնարավոր չէ լսել աուդիո հոսքը"</string>
+    <string name="audio_streams_dialog_default_device" msgid="6159800303379303266">"համատեղելի ականջակալը միացված է"</string>
+    <string name="audio_streams_activity_title" msgid="9011162151277443663">"Հեռարձակումներ"</string>
+    <string name="audio_streams_no_password_summary" msgid="8976357323034830144">"Գաղտնաբառ չի պահանջվում"</string>
+    <string name="audio_streams_dialog_learn_more" msgid="6711241053442211345">"Իմանալ ավելին"</string>
+    <string name="audio_streams_dialog_cannot_play" msgid="1358828316927479091">"Չհաջողվեց նվագարկել այս աուդիո հոսքը <xliff:g id="DEVICE_NAME">%1$s</xliff:g> սարքում։"</string>
+    <string name="audio_streams_listening_now" msgid="4205614429222949176">"Նվագարկվում է"</string>
+    <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"Դուրս գալ լսման ռեժիմից"</string>
+    <string name="audio_streams_dialog_no_le_device_title" msgid="3931163990976742282">"Միացրեք համատեղելի ականջակալ"</string>
+    <string name="audio_streams_dialog_no_le_device_button" msgid="4484355549428642588">"Միացնել սարք"</string>
+    <string name="audio_streams_detail_page_title" msgid="7884132061275273766">"Տեղեկություններ աուդիո հոսքի մասին"</string>
+    <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"Աուդիո հոսքի QR կոդ"</string>
+    <string name="audio_streams_qr_code_page_password" msgid="7268475614131297060">"Գաղտնաբառ՝ <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
+    <string name="audio_streams_qr_code_page_description" msgid="1317961663706630428">"<xliff:g id="STREAM_NAME">%1$s</xliff:g> հոսքը լսելու համար մյուս մարդիկ կարող են համատեղելի ականջակալ միացնել իրենց սարքին։ Այնուհետև կարող են սկանավորել այս QR կոդը։"</string>
+    <string name="audio_streams_main_page_title" msgid="1838380471076527639">"Գտեք աուդիո հոսք"</string>
+    <string name="audio_streams_main_page_subtitle" msgid="3251995732921981539">"Լսեք սարքի աուդիո հոսք կամ մոտակայքում հեռարձակվող Auracast-ը"</string>
+    <string name="audio_streams_main_page_device_title" msgid="2635744035523908253">"Ձեր աուդիո սարքը"</string>
+    <string name="audio_streams_main_page_no_device_summary" msgid="2936000845397406389">"Միացրեք համատեղելի ականջակալ"</string>
+    <string name="audio_streams_main_page_scan_section_title" msgid="2778235929304061163">"Աուդիո հոսքեր մոտակայքում"</string>
+    <string name="audio_streams_main_page_scan_qr_code_title" msgid="8337270277392468895">"Սկանավորել QR կոդը"</string>
+    <string name="audio_streams_main_page_scan_qr_code_summary" msgid="1991792283368249499">"Սկսեք լսել՝ սկանավորելով հոսքի QR կոդը"</string>
+    <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Լսել հոսքը"</string>
+    <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Սկանավորեք աուդիո հոսքի QR կոդը՝ <xliff:g id="DEVICE_NAME">%1$s</xliff:g> սարքով լսելու համար"</string>
+    <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Փոխանցման ժամանակ հնարավոր չէ փոխել գաղտնաբառը։ Գաղտնաբառը փոխելու համար նախ անջատեք աուդիոյի փոխանցումը։"</string>
 </resources>

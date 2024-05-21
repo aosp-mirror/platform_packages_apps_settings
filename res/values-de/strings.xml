@@ -48,9 +48,9 @@
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"Nur Spiele, Videos und mehr"</string>
     <string name="selective_stay_awake_summary" msgid="9055967322921984543">"Frontdisplay wird für Apps eingeschaltet, die das Display aktiv lassen"</string>
     <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Zum Fortfahren hochwischen"</string>
-    <string name="stay_awake_on_lockscreen_summary" msgid="2299351813382522952">"Wenn du die App nach dem Zuklappen weiter verwenden möchtest, kannst du auf dem Frontdisplay nach oben wischen; tust du nichts, wird das Display nach ein paar Sekunden gesperrt"</string>
+    <string name="stay_awake_on_lockscreen_summary" msgid="8825321939913726566">"Wenn du die App nach dem Zuklappen weiter verwenden möchtest, kannst du auf dem Frontdisplay nach oben wischen. Tust du nichts, wird das Display nach ein paar Sekunden gesperrt. Gaming‑ und Video-Apps werden automatisch fortgesetzt."</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"Nie"</string>
-    <string name="sleep_on_fold_summary" msgid="7737992842459588846">"Beim Zuklappen des Geräts wird das Frontdisplay gesperrt"</string>
+    <string name="sleep_on_fold_summary" msgid="4191753338303043456">"Beim Zuklappen des Geräts wird das Frontdisplay ausgeschaltet und gesperrt"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"„Automatisch drehen“ verwenden"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"Bei der Gesichtserkennung wird die Kamera auf der Vorderseite verwendet, um die Genauigkeit beim automatischen Drehen zu verbessern. Bilder werden weder gespeichert noch an Google gesendet."</string>
     <string name="bluetooth" msgid="8898478620943459654">"Bluetooth"</string>
@@ -139,7 +139,6 @@
     <string name="stylus_textfield_handwriting" msgid="2363579035338976327">"Textfelder ausfüllen"</string>
     <string name="stylus_ignore_button" msgid="7734540973145241391">"Drücken der Taste am Eingabestift ignorieren"</string>
     <string name="stylus_connected_devices_title" msgid="2823967577941359812">"Eingabestift"</string>
-    <string name="audio_streams_empty" msgid="8803517701437394982">"Keine Audiostreams in der Nähe gefunden."</string>
     <string name="date_and_time" msgid="1788358029823431692">"Datum &amp; Uhrzeit"</string>
     <string name="proxy_settings_title" msgid="4201866858226087066">"Proxy"</string>
     <string name="proxy_clear_text" msgid="6529658759984031149">"Löschen"</string>
@@ -281,13 +280,12 @@
     <string name="location_settings_title" msgid="8375074508036087178">"Standort"</string>
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"Standort verwenden"</string>
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Aus"</string>
-    <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{An / # App hat Zugriff auf den Standort}other{An / # Apps haben Zugriff auf den Standort}}"</string>
+    <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Aktiviert (# App hat Zugriff auf den Standort)}other{Aktiviert (# Apps haben Zugriff auf den Standort)}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Wird geladen…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Apps mit der Berechtigung zum Zugriff auf Geräte in der Nähe können die relative Position von verbundenen Geräten ermitteln."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Standortzugriff ist für Apps und Dienste deaktiviert. Wenn du eine Notrufnummer wählst oder eine Nachricht an eine solche Nummer schickst, kann dein Standort dennoch an den Notdienst gesendet werden."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Weitere Informationen zu Standorteinstellungen"</string>
-    <!-- no translation found for location_settings_tooltip_text_for_chrome (5781821709250544575) -->
-    <skip />
+    <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"Um Änderungen vorzunehmen, gehe zu den ChromeOS-Einstellungen &gt; Datenschutz und Sicherheit &gt; Datenschutzeinstellungen &gt; Standortzugriff"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Konten"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Sicherheit"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Verschlüsselung &amp; Anmeldedaten"</string>
@@ -546,92 +544,93 @@
     <string name="security_header" msgid="961514795852103424">"Sicherheit"</string>
     <string name="privacy_header" msgid="5526002421324257007">"Datenschutz"</string>
     <string name="work_profile_category_header" msgid="85707750968948517">"Arbeitsprofil"</string>
-    <string name="private_space_title" msgid="1752064212078238723">"Privater Bereich"</string>
+    <string name="private_space_title" msgid="1752064212078238723">"Vertrauliches Profil"</string>
     <string name="private_space_summary" msgid="2274405892301976238">"Hier kannst du deine privaten Apps verbergen und sperren"</string>
-    <string name="private_space_description" msgid="4059594203775816136">"Du kannst für interne Apps einen separaten Bereich nutzen, der sich ausblenden oder sperren lässt"</string>
-    <string name="private_space_lock_title" msgid="7230836881433350526">"Sperrmethode für privaten Bereich"</string>
-    <string name="private_space_one_lock_summary" msgid="2106513606571219068">"Du kannst zum Entsperren des privaten Bereichs dieselbe Methode wie für das Entsperren deines Geräts verwenden oder aber eine andere Sperrmethode einrichten"</string>
+    <string name="private_space_description" msgid="4059594203775816136">"Du kannst für interne Apps einen separates Profil nutzen, das sich ausblenden oder sperren lässt"</string>
+    <string name="private_space_lock_title" msgid="7230836881433350526">"Sperrmethode für vertrauliches Profil"</string>
+    <string name="private_space_one_lock_summary" msgid="2106513606571219068">"Du kannst zum Entsperren des vertraulichen Profils dieselbe Methode wie für das Entsperren deines Geräts verwenden oder aber eine andere Sperrmethode einrichten"</string>
     <string name="private_space_screen_lock_title" msgid="8679383894967823163">"Displaysperre des Geräts verwenden"</string>
     <string name="private_space_biometric_title" msgid="3934339826674553174">"Entsperrung per Gesichtserkennung und Fingerabdruck"</string>
     <string name="private_space_fingerprint_title" msgid="5989254643211889931">"Entsperrung per Fingerabdruck"</string>
     <string name="private_space_face_title" msgid="3290402865367663079">"Entsperrung per Gesichtserkennung"</string>
     <string name="private_space_biometric_summary" msgid="4403837276018724581">"Zum Einrichten tippen"</string>
-    <string name="private_space_fingerprint_unlock_title" msgid="3614016453395789051">"Entsperrung per Fingerabdruck für den privaten Bereich"</string>
-    <string name="private_space_face_unlock_title" msgid="462248384776453613">"Entsperrung per Gesichtserkennung für den privaten Bereich"</string>
+    <string name="private_space_fingerprint_unlock_title" msgid="3614016453395789051">"Entsperrung per Fingerabdruck für das vertrauliche Profil"</string>
+    <string name="private_space_face_unlock_title" msgid="462248384776453613">"Entsperrung per Gesichtserkennung für das vertrauliche Profil"</string>
     <string name="private_space_category_ways_to_unlock" msgid="4356631225316950046">"Entsperrmöglichkeiten"</string>
     <string name="private_space_screen_lock_summary" msgid="394837965365561070">"Gleiche Methode wie für Displaysperre des Geräts verwenden"</string>
-    <string name="private_space_new_lock_title" msgid="9056139964133004094">"Neue Sperrmethode für privaten Bereich festlegen?"</string>
+    <string name="private_space_new_lock_title" msgid="9056139964133004094">"Neue Sperrmethode für vertrauliches Profil festlegen?"</string>
     <string name="private_space_new_lock_message" msgid="3117703578905489206">"Du musst auf dem nächsten Bildschirm deine Geräte-PIN, dein Muster oder dein Passwort eingeben"</string>
-    <string name="private_space_auto_lock_title" msgid="8663409382910601261">"Privaten Bereich automatisch sperren"</string>
-    <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"Du kannst deinen privaten Bereich automatisch sperren lassen, wenn du dein Gerät längere Zeit nicht verwendest"</string>
+    <string name="private_space_auto_lock_title" msgid="8663409382910601261">"Vertrauliches Profil automatisch sperren"</string>
+    <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"Du kannst dein vertrauliches Profil automatisch sperren lassen, wenn du dein Gerät längere Zeit nicht verwendest"</string>
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"Jedes Mal, wenn Gerät gesperrt wird"</string>
-    <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"Nach 5 Minuten Inaktivität"</string>
+    <!-- no translation found for private_space_auto_lock_after_inactivity (7107814517866649733) -->
+    <skip />
     <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"Nur nach einem Neustart des Geräts"</string>
     <string name="private_space_hide_page_title" msgid="3364639176511877414">"Vertrauliches Profil ausblenden"</string>
     <string name="private_space_hide_when_locked" msgid="6219472348124151797">"Vertrauliches Profil ausblenden, wenn gesperrt"</string>
-    <string name="private_space_hide_page_summary" msgid="6247773353685839242">"Damit niemand weiß, dass du auf deinem Gerät einen privaten Bereich hast, kannst du ihn aus deiner App-Liste ausblenden"</string>
-    <string name="private_space_access_header" msgid="1077082416567150819">"Auf privaten Bereich zugreifen, wenn ausgeblendet"</string>
-    <string name="private_space_search_description" msgid="1538155187658429618">"In der Suchleiste „privater Bereich“ eingeben"</string>
-    <string name="private_space_tap_tile_description" msgid="6173556870938267361">"Auf "<b>"Privater Bereich"</b>" tippen"</string>
-    <string name="private_space_unlock_description" msgid="5527228922778630361">"Privaten Bereich entsperren"</string>
+    <string name="private_space_hide_page_summary" msgid="6247773353685839242">"Damit niemand weiß, dass du auf deinem Gerät ein vertrauliches Profil hast, kannst du ihn aus deiner App-Liste ausblenden"</string>
+    <string name="private_space_access_header" msgid="1077082416567150819">"Auf vertrauliches Profil zugreifen, wenn ausgeblendet"</string>
+    <string name="private_space_search_description" msgid="1538155187658429618">"In der Suchleiste „vertrauliches Profil“ eingeben"</string>
+    <string name="private_space_tap_tile_description" msgid="6173556870938267361">"Auf "<b>"Vertrauliches Profil"</b>" tippen"</string>
+    <string name="private_space_unlock_description" msgid="5527228922778630361">"Vertrauliches Profil entsperren"</string>
     <string name="private_space_hide_off_summary" msgid="8565973976602078315">"Aus"</string>
     <string name="private_space_hide_on_summary" msgid="3450844101901438867">"An"</string>
-    <string name="private_space_hide_dialog_title" msgid="6439207708506990156">"Privater Bereich wird beim nächsten Sperren ausgeblendet"</string>
-    <string name="private_space_hide_dialog_message" msgid="618693520130744836">"Du kannst den privaten Bereich über die Suchleiste deiner App-Liste aufrufen."</string>
+    <string name="private_space_hide_dialog_title" msgid="6439207708506990156">"vertrauliches Profil wird beim nächsten Sperren ausgeblendet"</string>
+    <string name="private_space_hide_dialog_message" msgid="618693520130744836">"Du kannst das vertrauliche Profil über die Suchleiste deiner App-Liste aufrufen."</string>
     <string name="private_space_hide_dialog_button" msgid="4157191429310035457">"Ok"</string>
     <string name="private_space_category_system" msgid="1286843321867285700">"System"</string>
-    <string name="private_space_delete_title" msgid="636873505724100006">"Vertraulichen Bereich löschen"</string>
-    <string name="private_space_delete_header" msgid="4594429153176776184">"Vertraulichen Bereich löschen?"</string>
-    <string name="private_space_delete_summary" msgid="3344372988408565545">"Dein privater Bereich wird von deinem Gerät entfernt. Alle privaten Apps und Daten werden gelöscht. Diese Aktion lässt sich nicht rückgängig machen."</string>
-    <string name="private_space_accounts" msgid="1078277762792056395">"Die folgenden Konten werden aus deinem privaten Bereich entfernt:"</string>
+    <string name="private_space_delete_title" msgid="636873505724100006">"Vertrauliches Profil löschen"</string>
+    <string name="private_space_delete_header" msgid="4594429153176776184">"Vertrauliches Profil löschen?"</string>
+    <string name="private_space_delete_summary" msgid="3344372988408565545">"Dein vertrauliches Profil wird von deinem Gerät entfernt. Alle privaten Apps und Daten werden gelöscht. Diese Aktion lässt sich nicht rückgängig machen."</string>
+    <string name="private_space_accounts" msgid="1078277762792056395">"Die folgenden Konten werden aus deinem vertraulichen Profil entfernt:"</string>
     <string name="private_space_delete_button_label" msgid="1256981385318225002">"Löschen"</string>
-    <string name="private_space_confirm_deletion_header" msgid="3468651585498942977">"Privater Bereich wird gelöscht…"</string>
-    <string name="private_space_deleted" msgid="7692240901492540053">"Privater Bereich gelöscht"</string>
-    <string name="private_space_delete_failed" msgid="7705795653796174741">"Privater Bereich konnte nicht gelöscht werden"</string>
-    <string name="private_space_unlocked" msgid="9091600948712932046">"Privater Bereich entsperrt"</string>
+    <string name="private_space_confirm_deletion_header" msgid="3468651585498942977">"vertrauliches Profil wird gelöscht…"</string>
+    <string name="private_space_deleted" msgid="7692240901492540053">"Vertrauliches Profil gelöscht"</string>
+    <string name="private_space_delete_failed" msgid="7705795653796174741">"Vertrauliches Profil konnte nicht gelöscht werden"</string>
+    <string name="private_space_unlocked" msgid="9091600948712932046">"Vertrauliches Profil entsperrt"</string>
     <string name="no_device_lock_title" msgid="1078223464721029954">"Displaysperre einrichten"</string>
-    <string name="no_device_lock_summary" msgid="7436025227616244687">"Richte zur Nutzung deines privaten Bereichs auf dem Gerät die Displaysperre ein"</string>
+    <string name="no_device_lock_summary" msgid="7436025227616244687">"Richte zur Nutzung deines vertraulichen Profils auf dem Gerät die Displaysperre ein"</string>
     <string name="no_device_lock_action_label" msgid="2640487005629001288">"Displaysperre einrichten"</string>
     <string name="no_device_lock_cancel" msgid="4412602160321228863">"Abbrechen"</string>
     <string name="private_space_cancel_label" msgid="379259667396956886">"Abbrechen"</string>
     <string name="private_space_setup_button_label" msgid="2094882154623560585">"Einrichten"</string>
-    <string name="private_space_setup_title" msgid="2272968244329821450">"Privater Bereich"</string>
-    <string name="private_space_hide_apps_summary" msgid="4418722947376042418">"Du kannst private Apps in einem separaten Bereich verbergen, der sich sperren lässt. Für zusätzliche Sicherheit kannst du dafür ein eigenes Google-Konto verwenden."</string>
-    <string name="private_space_setup_sub_header" msgid="5454598292017819146">"Privaten Bereich einrichten"</string>
+    <string name="private_space_setup_title" msgid="2272968244329821450">"Vertrauliches Profil"</string>
+    <string name="private_space_hide_apps_summary" msgid="4418722947376042418">"Du kannst private Apps in einem separaten Profil verbergen, das sich sperren lässt. Für zusätzliche Sicherheit kannst du dafür ein eigenes Google-Konto verwenden."</string>
+    <string name="private_space_setup_sub_header" msgid="5454598292017819146">"Vertrauliches Profil einrichten"</string>
     <string name="private_space_separate_account_text" msgid="4492251315012955548"><b>"Google-Konto für deinen privaten Bereich wählen"</b>\n"Wenn du dafür ein separates Konto verwendest, kannst du vermeiden, dass synchronisierte Dateien, Fotos und E-Mails außerhalb deines privaten Bereichs angesehen werden"</string>
     <string name="private_space_protected_lock_text" msgid="9123250938334372735"><b>"Sperre einrichten"</b>\n"Du kannst deinen privaten Bereich sperren, damit andere nicht darauf zugreifen können"</string>
-    <string name="private_space_install_apps_text" msgid="5693139160766464498"><b>"Apps installieren"</b>\n"In deinem privaten Bereich gibt es einen eigenen Play Store, damit du Apps ganz einfach installieren kannst."</string>
-    <string name="private_space_apps_permission_text" msgid="7030946025253366172">"Wenn dein privater Bereich gesperrt ist, werden Apps in deinem privaten Bereich unter „Berechtigungsmanager“, „Privatsphäredashboard“ und in anderen Einstellungen nicht angezeigt.\n\nDein privater Bereich kann nicht auf ein neues Gerät übertragen werden. Du musst einen weiteren privaten Bereich einrichten, wenn du ihn auf einem anderen Gerät verwenden möchtest.\n\nJeder, der dein Gerät mit einem Computer verbindet oder auf dem Gerät schädliche Apps installiert, kann möglicherweise auf deinen privaten Bereich zugreifen."</string>
-    <string name="private_space_learn_more_text" msgid="5314198983263277586">"Informationen zum privaten Bereich"</string>
+    <string name="private_space_install_apps_text" msgid="5693139160766464498"><b>"Apps installieren"</b>\n"In deinem vertraulichen Profil gibt es einen eigenen Play Store, damit du Apps ganz einfach installieren kannst."</string>
+    <string name="private_space_apps_permission_text" msgid="7030946025253366172">"Wenn dein vertrauliches Profil gesperrt ist, werden Apps in deinem vertraulichen Profil unter „Berechtigungsmanager“, „Privatsphäredashboard“ und in anderen Einstellungen nicht angezeigt.\n\nDein vertrauliches Profil kann nicht auf ein neues Gerät übertragen werden. Du musst ein weiteres vertrauliches Profil einrichten, wenn du es auf einem anderen Gerät verwenden möchtest.\n\nJeder, der dein Gerät mit einem Computer verbindet oder auf dem Gerät schädliche Apps installiert, kann möglicherweise auf dein vertrauliches Profil zugreifen."</string>
+    <string name="private_space_learn_more_text" msgid="5314198983263277586">"Informationen zum vertraulichen Profil"</string>
     <string name="private_space_few_moments_text" msgid="7166883272914424011">"Das kann einen Moment dauern"</string>
-    <string name="private_space_setting_up_text" msgid="8458035555212009528">"Der private Bereich wird eingerichtet…"</string>
-    <string name="private_space_error_screen_title" msgid="739381738044418346">"Der private Bereich konnte nicht eingerichtet werden"</string>
+    <string name="private_space_setting_up_text" msgid="8458035555212009528">"Das vertrauliche Profil wird eingerichtet…"</string>
+    <string name="private_space_error_screen_title" msgid="739381738044418346">"Das vertrauliche Profil konnte nicht eingerichtet werden"</string>
     <string name="private_space_tryagain_label" msgid="8305362615231738367">"Noch einmal versuchen"</string>
-    <string name="private_space_lockscreen_title" msgid="5785259588888586366">"Neue Sperre für privaten Bereich festlegen?"</string>
-    <string name="private_space_lockscreen_summary" msgid="3053836076639653805">"Du kannst für den privaten Bereich eine neue Sperre festlegen oder dieselbe Sperre nutzen, die du zum Entsperren deines Geräts verwendest"</string>
+    <string name="private_space_lockscreen_title" msgid="5785259588888586366">"Neue Sperre für vertrauliches Profil festlegen?"</string>
+    <string name="private_space_lockscreen_summary" msgid="3053836076639653805">"Du kannst für das vertrauliche Profil eine neue Sperre festlegen oder dieselbe Sperre nutzen, die du zum Entsperren deines Geräts verwendest"</string>
     <string name="private_space_use_screenlock_label" msgid="9182153443192032782">"Displaysperre verwenden"</string>
     <string name="private_space_set_lock_label" msgid="1790408277477408475">"Neue Sperre auswählen"</string>
     <string name="private_space_pre_finish_title" msgid="2314776598615113267">"Einen Moment…"</string>
     <string name="private_space_success_title" msgid="4351904015352046118">"Fertig!"</string>
-    <string name="private_space_access_text" msgid="4433988836344567888">"Ruf deine App-Liste auf und scrolle nach unten, um auf deinen privaten Bereich zuzugreifen"</string>
+    <string name="private_space_access_text" msgid="4433988836344567888">"Ruf deine App-Liste auf und scrolle nach unten, um auf dein vertrauliches Profil zuzugreifen"</string>
     <string name="private_space_done_label" msgid="1020482651595246071">"Fertig"</string>
-    <string name="private_space_scrolldown_to_access" msgid="4820954877349434545">"Scrolle nach unten, um auf den privaten Bereich zuzugreifen"</string>
+    <string name="private_space_scrolldown_to_access" msgid="4820954877349434545">"Scrolle nach unten, um auf das vertrauliche Profil zuzugreifen"</string>
     <string name="private_space_retry_signin_title" msgid="8090276618867918844">"Anmelden"</string>
-    <string name="private_space_retry_summary" msgid="1920444015972648774">"Melde dich in einem Konto an, um es in deinem privaten Bereich zu nutzen"</string>
+    <string name="private_space_retry_summary" msgid="1920444015972648774">"Melde dich in einem Konto an, um es mit deinem vertraulichen Profil zu nutzen"</string>
     <string name="private_space_skip_login_label" msgid="7078019409056628192">"Nicht jetzt"</string>
     <string name="private_space_continue_login_label" msgid="7779965766333065391">"Weiter"</string>
-    <string name="private_space_lock_setup_title" msgid="6541564212199510787">"Sperre für privaten Bereich auswählen"</string>
-    <string name="private_space_lock_setup_description" msgid="423405593476300918">"Du kannst deinen privaten Bereich mit deinem Fingerabdruck entsperren. Aus Sicherheitsgründen benötigst du bei dieser Option eine alternative Sperre."</string>
-    <string name="private_space_choose_your_pin_header" msgid="4560802934975898265">"PIN für privaten Bereich einrichten"</string>
-    <string name="private_space_choose_your_password_header" msgid="7660259341095044434">"Passwort für privaten Bereich einrichten"</string>
-    <string name="private_space_choose_your_pattern_header" msgid="2165607102459936724">"Muster für privaten Bereich einrichten"</string>
+    <string name="private_space_lock_setup_title" msgid="6541564212199510787">"Sperre für vertrauliches Profil auswählen"</string>
+    <string name="private_space_lock_setup_description" msgid="423405593476300918">"Du kannst dein vertrauliches Profil mit deinem Fingerabdruck entsperren. Aus Sicherheitsgründen benötigst du bei dieser Option eine alternative Sperre."</string>
+    <string name="private_space_choose_your_pin_header" msgid="4560802934975898265">"PIN für vertrauliches Profil einrichten"</string>
+    <string name="private_space_choose_your_password_header" msgid="7660259341095044434">"Passwort für vertrauliches Profil einrichten"</string>
+    <string name="private_space_choose_your_pattern_header" msgid="2165607102459936724">"Muster für vertrauliches Profil einrichten"</string>
     <string name="private_space_gaia_education_title" msgid="3787414895669666563">"Ein Google-Konto zum Schutz deiner Daten erstellen"</string>
-    <string name="private_space_gaia_education_description" msgid="1592753570023264559">"Auf dem nächsten Bildschirm kannst du dich in einem Konto anmelden, das du für deinen privaten Bereich nutzen möchtest."</string>
-    <string name="private_space_gaia_education_header" msgid="7835879839637613495"><b>"Erstelle ein eigenes Konto, um das Risiko zu minimieren, dass Daten außerhalb des privaten Bereichs erscheinen, wie:"</b></string>
+    <string name="private_space_gaia_education_description" msgid="1592753570023264559">"Auf dem nächsten Bildschirm kannst du dich in einem Konto anmelden, das du für dein vertrauliches Profil nutzen möchtest."</string>
+    <string name="private_space_gaia_education_header" msgid="7835879839637613495"><b>"Erstelle ein eigenes Konto, um das Risiko zu minimieren, dass Daten außerhalb des vertraulichen Profils erscheinen, wie:"</b></string>
     <string name="private_space_gaia_education_bullet1" msgid="641701340908301992">"Synchronisierte Fotos, Dateien, E-Mails, Kontakte, Kalendertermine und andere Daten"</string>
     <string name="private_space_gaia_education_bullet2" msgid="3679859681253672976">"Verlauf der App-Downloads und Empfehlungen"</string>
     <string name="private_space_gaia_education_bullet3" msgid="1703614225321289717">"Browserverlauf, Lesezeichen und gespeicherte Passwörter"</string>
-    <string name="private_space_gaia_education_bullet4" msgid="515761604505366164">"Vorgeschlagene Inhalte in Bezug auf deine Aktivitäten in Apps im privaten Bereich"</string>
+    <string name="private_space_gaia_education_bullet4" msgid="515761604505366164">"Vorgeschlagene Inhalte in Bezug auf deine Aktivitäten in Apps im vertraulichen Profil"</string>
     <string name="private_space_gaia_education_got_it" msgid="7824029819615566806">"Ok"</string>
     <string name="private_space_category_lock" msgid="1917657024358778169">"Sperre"</string>
     <string name="private_space_category_hide" msgid="3236587591523126649">"Ausblenden"</string>
@@ -1498,7 +1497,7 @@
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"Die Netzwerkeinstellungen wurden zurückgesetzt."</string>
     <string name="reset_esim_error_title" msgid="6516110227665862295">"Löschen der eSIMs nicht möglich"</string>
     <string name="reset_esim_error_msg" msgid="8459527827897797168">"Ein Fehler ist aufgetreten und deine eSIMs wurden nicht gelöscht.\n\nStarte dein Gerät neu und versuche es noch einmal."</string>
-    <string name="reset_private_space_delete_title" msgid="2555885198282572990">"Vertraulichen Bereich löschen"</string>
+    <string name="reset_private_space_delete_title" msgid="2555885198282572990">"vertrauliches Profil löschen"</string>
     <string name="reset_private_space_delete_dialog" msgid="7506471054091800883">"Wenn du ein vertrauliches Profil auf deinem Gerät hast, wird dieses endgültig gelöscht und das zu deinem Profil hinzugefügte Google-Konto wird entfernt.\n\nAlle Apps in deinem Profil und deren Daten werden ebenfalls endgültig gelöscht."</string>
     <string name="main_clear_title" msgid="277664302144837723">"Alle Daten löschen (auf Werkseinstellungen zurücksetzen)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Alle Daten löschen"</string>
@@ -1555,7 +1554,7 @@
     <string name="network_scorer_change_active_no_previous_dialog_text" msgid="680685773455072321">"<xliff:g id="NEW_APP">%s</xliff:g> zur Verwaltung von Netzwerkverbindungen nutzen?"</string>
     <string name="location_category_recent_location_requests" msgid="2205900488782832082">"Letzte Standortanfragen"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Standort für Arbeitsprofil"</string>
-    <string name="private_profile_location_switch_title" msgid="4127119143109855789">"Ort für privaten Bereich"</string>
+    <string name="private_profile_location_switch_title" msgid="4127119143109855789">"Ort für  vertrauliches Profil"</string>
     <string name="location_app_level_permissions" msgid="907206607664629759">"Berechtigungen zur Standortermittlung"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"Standortermittlung ist deaktiviert"</string>
     <string name="location_app_permission_summary_location_on" msgid="7552095451731948984">"{count,plural, =1{# von {total} Apps hat Zugriff auf den Standort}other{# von {total} Apps haben Zugriff auf den Standort}}"</string>
@@ -1753,7 +1752,7 @@
     <string name="enable_text" msgid="8570798764647110430">"Aktivieren"</string>
     <string name="clear_user_data_text" msgid="6773186434260397947">"Speicherinhalt löschen"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"Updates deinstallieren"</string>
-    <string name="app_restricted_settings_lockscreen_title" msgid="796413224212436400">"Eingeschränkte Berechtigungen erlauben"</string>
+    <string name="app_restricted_settings_lockscreen_title" msgid="5993061278264872648">"Eingeschränkte Einstellungen zulassen"</string>
     <string name="auto_launch_enable_text" msgid="8912714475823807798">"Einige von dir ausgewählte Aktivitäten werden standardmäßig in dieser App geöffnet."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"Du hast dieser App das Erstellen von Widgets und den Zugriff auf deine Daten erlaubt."</string>
     <string name="auto_launch_disable_text" msgid="502648841250936209">"Kein Standard"</string>
@@ -2325,6 +2324,8 @@
     <string name="daltonizer_mode_protanomaly_title" msgid="6392456967103014723">"Rot-Grün-Sehschwäche"</string>
     <string name="daltonizer_mode_tritanomaly_title" msgid="2278786218762602022">"Blau-Gelb-Sehschwäche"</string>
     <string name="daltonizer_mode_grayscale_title" msgid="152005391387952588">"Graustufen"</string>
+    <!-- no translation found for daltonizer_saturation_title (2999486412114963068) -->
+    <skip />
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="2117727423019598455">"Grün-Sehschwäche, Deuteranomalie"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="4617032854982040748">"Rot-Sehschwäche, Protanomalie"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Tritanomalie"</string>
@@ -2405,7 +2406,6 @@
     <string name="keywords_select_to_speak" msgid="2872704811610888719"></string>
     <string name="keywords_color_correction" msgid="8540442886990423681">"Farbe anpassen"</string>
     <string name="keywords_color_inversion" msgid="4291058365873221962">"Display dunkel machen, Display hell machen"</string>
-    <string name="keywords_contrast" msgid="4668393735398949873">"Farbkontrast"</string>
     <string name="keywords_accessibility_menu" msgid="4300579436464706608"></string>
     <string name="keywords_switch_access" msgid="5813094504384313402"></string>
     <string name="keywords_auto_click" msgid="6811744211216280998">"motorische Einschränkungen, Maus, externe Maus, Kopfmaus, adaptive Maus, Rollstuhl, Joystick"</string>
@@ -2686,7 +2686,7 @@
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Adaptive Konnektivität verwenden"</string>
     <string name="cellular_security_title" msgid="5562899485544677941">"Sicherheit des Mobilfunknetzes"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"Netzwerktyp, Verschlüsselung, Benachrichtigungseinstellungen"</string>
-    <string name="cellular_security_top_intro" msgid="6749166804080092892">"Diese Einstellungen tragen zum Schutz deiner Anrufe, Nachrichten und Daten vor veralteten oder unverschlüsselten Netzwerken bei, in denen du möglicherweise einem Diebstahl von Daten oder einer Überwachung ausgesetzt wirst"</string>
+    <string name="cellular_security_top_intro" msgid="6749166804080092892">"Diese Einstellungen tragen zum Schutz deiner Anrufe, Nachrichten und Daten vor veralteten oder unverschlüsselten Netzwerken bei, in denen möglicherweise das Risiko von Datendiebstahl oder Überwachung besteht"</string>
     <string name="cellular_security_settings_title" msgid="7779141923670352595">"Sicherheit des Mobilfunknetzes"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"Benachrichtigungen"</string>
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"Netzwerkbenachrichtigungen"</string>
@@ -3306,6 +3306,8 @@
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Einstellungen für verbundene Geräte"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Keine}=1{1 Zeitplan festgelegt}other{# Zeitpläne festgelegt}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Bitte nicht stören"</string>
+    <!-- no translation found for zen_modes_list_title (5138745349253275428) -->
+    <skip />
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Benachrichtigungen nur von wichtigen Personen und Apps"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Unterbrechungen einschränken"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"„Bitte nicht stören“ aktivieren"</string>
@@ -3532,7 +3534,7 @@
     <string name="notifications_sent_daily" msgid="10274479224185437">"{count,plural, =1{Etwa # Benachrichtigung pro Tag}other{Etwa # Benachrichtigungen pro Tag}}"</string>
     <string name="notifications_sent_weekly" msgid="7895656213187555346">"{count,plural, =1{Etwa # Benachrichtigung pro Woche}other{Etwa # Benachrichtigungen pro Woche}}"</string>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Nie"</string>
-    <string name="manage_notification_access_title" msgid="6481256069087219982">"Geräte- und App-​Benachrichtigungen"</string>
+    <string name="manage_notification_access_title" msgid="4154723216570646451">"Benachrichtigung lesen, beantworten &amp; verwalten"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"Festlegen, welche Apps und Geräte Benachrichtigungen lesen dürfen"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8643809206612366067">"Zugriff auf Arbeitsprofil-Benachrichtigungen ist blockiert"</string>
     <string name="notification_assistant_title" msgid="5889201903272393099">"Erweiterte Benachrichtigungen"</string>
@@ -3632,7 +3634,7 @@
     <string name="app_notification_block_summary" msgid="1804611676339341551">"Diese Benachrichtigungen nie anzeigen"</string>
     <string name="notification_content_block_title" msgid="6689085826061361351">"Benachrichtigungen anzeigen"</string>
     <string name="notification_content_block_summary" msgid="329171999992248925">"Benachrichtigungen nie in der Leiste oder auf Peripheriegeräten anzeigen"</string>
-    <string name="app_notification_fsi_permission_title" msgid="5424116606034705020">"Vollbildbenachrichtigungen erlauben"</string>
+    <string name="app_notification_fsi_permission_title" msgid="2260977598430154428">"Vollbildbenachrichtigungen erlauben"</string>
     <string name="app_notification_fsi_permission_summary" msgid="7673487977631068039">"Die App darf Benachrichtigungen anzeigen, die das gesamte Display ausfüllen, wenn das Gerät gesperrt ist"</string>
     <string name="notification_badge_title" msgid="6854537463548411313">"App-Benach­rich­ti­gungs­punkt erlauben"</string>
     <string name="notification_channel_badge_title" msgid="6505542437385640049">"App-Benach­richtigungs­punkt anzeigen"</string>
@@ -3981,8 +3983,8 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Zugriff zum Verwalten aller Dateien zulassen"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Du kannst dieser App erlauben, alle Dateien auf diesem Gerät und auf allen verbundenen Laufwerken zu lesen, zu ändern und zu löschen. Sie kann dann ohne deine explizite Zustimmung auf Dateien zugreifen."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Auf alle Dateien zugreifen"</string>
-    <string name="full_screen_intent_title" msgid="747270185715224130">"Vollbildbenachrichtigungen"</string>
-    <string name="permit_full_screen_intent" msgid="9035367640019960861">"Vollbildbenachrichtigungen von dieser App erlauben"</string>
+    <string name="full_screen_intent_title" msgid="5888548315628268674">"Vollbildbenachrichtigungen"</string>
+    <string name="permit_full_screen_intent" msgid="2414307667550523630">"Vollbildbenachrichtigungen von dieser App erlauben"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Diese App darf Benachrichtigungen anzeigen, die das gesamte Display ausfüllen, wenn das Gerät gesperrt ist. Apps können diese verwenden, um Wecker, eingehende Anrufe oder andere dringende Benachrichtigungen hervorzuheben."</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"Apps zur Medienverwaltung"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"App erlauben, Medien zu verwalten"</string>
@@ -4100,7 +4102,7 @@
     <string name="data_usage_template" msgid="3822452362629968010">"Datennutzung im Zeitraum <xliff:g id="ID_2">%2$s</xliff:g>: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="configure" msgid="1499586749829665889">"Konfigurieren"</string>
     <string name="data_usage_other_apps" msgid="5649047093607329537">"Weitere Apps, die ebenfalls Daten verbraucht haben"</string>
-    <string name="data_saver_unrestricted_summary" msgid="7343571401172437542">"{count,plural, =1{1 App darf trotz aktiviertem Datensparmodus uneingeschränkt Daten nutzen}other{# Apps dürfen trotz aktiviertem Datensparmodus uneingeschränkt Daten nutzen}}"</string>
+    <string name="data_saver_unrestricted_summary" msgid="559673440849071149">"{count,plural, =1{1 App darf trotz aktiviertem Datensparmodus unbegrenzte mobile Daten nutzen}other{# Apps dürfen trotz aktiviertem Datensparmodus unbegrenzte mobile Daten nutzen}}"</string>
     <string name="data_usage_title" msgid="4039024073687469094">"Primärdaten"</string>
     <string name="data_usage_wifi_title" msgid="1060495519280456926">"WLAN-Daten"</string>
     <string name="data_used_formatted" msgid="7913920278059077938">"<xliff:g id="ID_1">^1</xliff:g> <xliff:g id="ID_2">^2</xliff:g> verbraucht"</string>
@@ -4117,13 +4119,13 @@
     <string name="no_carrier_update_now_text" msgid="7898004907837200752">"Gerade aktualisiert"</string>
     <string name="launch_wifi_text" msgid="976421974332512894">"Details ansehen"</string>
     <string name="data_saver_title" msgid="2593804270788863815">"Datensparmodus"</string>
-    <string name="unrestricted_data_saver" msgid="7922563266857367495">"Uneingeschränkte Datennutzung"</string>
+    <string name="unrestricted_data_saver" msgid="5913547065342097274">"Unbegrenzte mobile Daten"</string>
     <string name="restrict_background_blocklisted" msgid="2308345280442438232">"Hintergrunddaten sind deaktiviert"</string>
     <string name="data_saver_on" msgid="7848893946018448793">"An"</string>
     <string name="data_saver_off" msgid="5891210864117269045">"Aus"</string>
     <string name="data_saver_switch_title" msgid="7111538580123722959">"Datensparmodus verwenden"</string>
-    <string name="unrestricted_app_title" msgid="7117585996574329284">"Uneingeschränkte Datennutzung"</string>
-    <string name="unrestricted_app_summary" msgid="282698963532000403">"Im Datensparmodus uneingeschränkte Datennutzung erlauben"</string>
+    <string name="unrestricted_app_title" msgid="8531936851059106374">"Nutzung von unbegrenzten mobilen Daten"</string>
+    <string name="unrestricted_app_summary" msgid="8320813971858627624">"Im Datensparmodus Zugriff auf unbegrenzte mobile Daten erlauben"</string>
     <string name="home_app" msgid="6056850504746902747">"Start-App"</string>
     <string name="suggestion_additional_fingerprints" msgid="4726777300101156208">"Weiteren Fingerabdruck hinzufügen"</string>
     <string name="suggestion_additional_fingerprints_summary" msgid="2825364645039666674">"Mit einem anderen Finger entsperren"</string>
@@ -4197,9 +4199,9 @@
     <string name="notification_suggestion_summary" msgid="7615611244249276113">"Benachrichtigungsinhalt ein- oder ausblenden"</string>
     <string name="page_tab_title_support" msgid="3235725053332345773">"Tipps &amp; Support"</string>
     <string name="developer_smallest_width" msgid="632354817870920911">"Geringste Breite"</string>
-    <string name="premium_sms_none" msgid="8737045049886416739">"Keine installierte App hat Zugriff auf Premium-SMS angefordert."</string>
+    <string name="premium_sms_none" msgid="4718916765158062108">"Keine installierte App hat Zugriff auf Premium-SMS angefordert"</string>
     <string name="premium_sms_warning" msgid="2192300872411073324">"Bei Premium-SMS können Kosten entstehen, die über den Mobilfunkanbieter abgerechnet werden. Wenn du für eine App Premium-SMS zulässt, kannst du aus ihr Premium-SMS versenden."</string>
-    <string name="premium_sms_access" msgid="5605970342699013212">"Zugriff auf Premium-SMS"</string>
+    <string name="premium_sms_access" msgid="8487315743197916530">"Premium-SMS"</string>
     <string name="bluetooth_disabled" msgid="835838280837359514">"Aus"</string>
     <string name="bluetooth_connected_summary" msgid="8043167194934315712">"Mit <xliff:g id="ID_1">%1$s</xliff:g> verbunden"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="2294954614327771844">"Mit mehreren Geräten verbunden"</string>
@@ -4990,12 +4992,9 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Flugmodus deaktivieren, um UWB zu verwenden"</string>
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"UWB ist an deinem derzeitigen Standort nicht verfügbar"</string>
     <string name="thread_network_settings_title" msgid="4212301030523859220">"Thread"</string>
-    <!-- no translation found for thread_network_settings_main_switch_title (3859168481929323474) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_footer_title (7385600318850220927) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_learn_more (8278498005848565050) -->
-    <skip />
+    <string name="thread_network_settings_main_switch_title" msgid="3859168481929323474">"Thread verwenden"</string>
+    <string name="thread_network_settings_footer_title" msgid="7385600318850220927">"Ein Thread kann deine Smart-Home-Geräte verbinden und dabei helfen, die Effizienz und Leistung zu steigern.\n\nWenn diese Option aktiviert ist, kann dieses Gerät einem Thread-Netzwerk beitreten, was die Steuerung von Matter-kompatiblen Geräte über dieses Smartphone ermöglicht."</string>
+    <string name="thread_network_settings_learn_more" msgid="8278498005848565050">"Weitere Informationen zu Thread"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"Kamerazugriff"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Mikrofonzugriff"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"Für Apps und Dienste"</string>
@@ -5080,12 +5079,12 @@
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"Änderungen am Ton, während du deinen Kopf bewegst, damit er natürlicher klingt"</string>
     <string name="bluetooth_details_permissions_sync_title" msgid="7277580382321003521">"Berechtigungen von Smartphone synchronisieren"</string>
     <string name="bluetooth_details_permissions_sync_summary" msgid="8125037984381432059">"Gib deiner Smartwatch die gleiche App-Berechtigung, die du auch deinem Smartphone gegeben hast"</string>
-    <string name="bluetooth_details_audio_device_types_title" msgid="3381941189346781614">"Audiogerätetyp"</string>
-    <string name="bluetooth_details_audio_device_type_unknown" msgid="839337391037998014">"Unbekannt"</string>
+    <string name="bluetooth_details_audio_device_types_title" msgid="1889644189800180316">"Audiogerätetyp"</string>
+    <string name="bluetooth_details_audio_device_type_unknown" msgid="5299284975435974206">"Nicht festgelegt"</string>
     <string name="bluetooth_details_audio_device_type_speaker" msgid="3706227767994792124">"Lautsprecher"</string>
     <string name="bluetooth_details_audio_device_type_headphones" msgid="7644588291215033798">"Kopfhörer"</string>
-    <string name="bluetooth_details_audio_device_type_hearing_aid" msgid="1310631131071939859">"Hörgerät"</string>
-    <string name="bluetooth_details_audio_device_type_carkit" msgid="4439017600454703229">"Freisprechanlage"</string>
+    <string name="bluetooth_details_audio_device_type_hearing_aid" msgid="6311786545025321187">"Hörgerät"</string>
+    <string name="bluetooth_details_audio_device_type_carkit" msgid="1866236563013629394">"Auto"</string>
     <string name="bluetooth_details_audio_device_type_other" msgid="7019481234617207563">"Sonstiges"</string>
     <string name="ingress_rate_limit_title" msgid="2106694002836274350">"Ratenbegrenzung für Downloads im Netzwerk"</string>
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"Damit kannst du die Ratenbegrenzung für eingehenden Traffic über die Netzwerkbandbreite konfigurieren, die für alle Netzwerke angewendet wird, die eine Internetverbindung zur Verfügung stellen."</string>
@@ -5170,8 +5169,6 @@
     <string name="screen_flash_color_violet" msgid="1279950780509029495">"Violett"</string>
     <string name="color_selector_dialog_done" msgid="121253968943363376">"Fertig"</string>
     <string name="color_selector_dialog_cancel" msgid="8667350644753900701">"Abbrechen"</string>
-    <string name="contrast_title" msgid="6885768151336508075">"Kontrast"</string>
-    <string name="contrast_standard" msgid="1097297089917185235">"Standard"</string>
     <string name="contrast_default" msgid="8918545965525226966">"Standard"</string>
     <string name="contrast_medium" msgid="384414510709285811">"Mittel"</string>
     <string name="contrast_high" msgid="3988567609694797696">"Hoch"</string>
@@ -5208,4 +5205,100 @@
     <string name="fingerprint_acquired_imager_dirty_udfps" msgid="7005042288289506776">"Reinige das Display in der Nähe des Sensors und versuche es noch einmal"</string>
     <string name="sim_category_converted_sim" msgid="8575548015816988908">"In eSIM umgewandelt. Herausnehmen und entsorgen."</string>
     <string name="sync_across_devices_title" msgid="3447757705383089345">"Synchronisierung zwischen Geräten"</string>
+    <!-- no translation found for device_diagnostics_title (2914523189695727897) -->
+    <skip />
+    <string name="audio_sharing_title" msgid="4144157137502923821">"Audiofreigabe"</string>
+    <string name="audio_sharing_switch_title" msgid="7052827328670825701">"Audioinhalte freigeben"</string>
+    <string name="calls_and_alarms_device_title" msgid="6993559028175454198">"Anrufe und Wecker"</string>
+    <string name="audio_sharing_description" msgid="1660255584523640628">"Wenn du Medien abspielst, kannst du andere mithören lassen. Alle Zuhörer benötigen dazu eigene LE Audio-Kopfhörer."</string>
+    <string name="audio_sharing_device_group_title" msgid="3019780581643956943">"Aktive Mediengeräte"</string>
+    <string name="audio_sharing_call_audio_title" msgid="7978867452289583929">"Telefongespräche"</string>
+    <string name="audio_sharing_call_audio_description" msgid="6573621048260616924">"Nur auf <xliff:g id="DEVICE_NAME">%1$s</xliff:g> abspielen"</string>
+    <string name="audio_sharing_test_sound_title" msgid="6438868185641027763">"Testton abspielen"</string>
+    <string name="audio_sharing_test_sound_description" msgid="4072462502371937399">"Alle Zuhörer sollten ihn hören"</string>
+    <string name="audio_sharing_stream_settings_title" msgid="1374391898689242036">"Einstellungen des Audiostreams"</string>
+    <string name="audio_sharing_stream_name_title" msgid="8156859441897180940">"Name"</string>
+    <string name="audio_sharing_stream_password_title" msgid="7026649168165764602">"Passwort"</string>
+    <string name="audio_sharing_stream_compatibility_title" msgid="5690947186724469918">"Kompatibilität verbessern"</string>
+    <string name="audio_sharing_stream_compatibility_description" msgid="8170241188606110963">"Reduziert die Audioqualität, um bestimmten Geräten, z. B. Hörgeräten, zu helfen, eine Verbindung herzustellen"</string>
+    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="2586408353546825682">"Deaktiviert die Audiofreigabe, um die Konfiguration der Kompatibilität zu ermöglichen"</string>
+    <string name="audio_sharing_nearby_audio_title" msgid="4795438407040677177">"Audiostreams in der Nähe anhören"</string>
+    <string name="audio_sharing_footer_description" msgid="4786942197840271680">"Die Audiofreigabe unterstützt Auracast™"</string>
+    <string name="audio_sharing_stream_name_dialog_title" msgid="6706027295417556499">"Name des Audiostreams"</string>
+    <string name="audio_sharing_stream_password_dialog_title" msgid="4148196538860845705">"Passwort des Audiostreams"</string>
+    <string name="audio_sharing_media_device_group_title" msgid="4850674234590549565">"Andere Mediengeräte"</string>
+    <string name="audio_sharing_summary_on" msgid="611197542982323788">"An"</string>
+    <string name="audio_sharing_summary_off" msgid="8833198995257547378">"Aus"</string>
+    <string name="audio_sharing_share_dialog_title" msgid="427514648577553621">"Audioinhalte freigeben"</string>
+    <string name="audio_sharing_share_dialog_subtitle" msgid="5208582843732057871">"<xliff:g id="DEVICE_NAME1">%1$s</xliff:g> und <xliff:g id="DEVICE_NAME2">%2$s</xliff:g>"</string>
+    <string name="audio_sharing_share_button_label" msgid="3895900668317105537">"Audioinhalte freigeben"</string>
+    <string name="audio_sharing_no_thanks_button_label" msgid="5822491984114744357">"Nein, danke"</string>
+    <string name="audio_sharing_share_with_dialog_title" msgid="3934377530640830364">"Audioinhalte mit <xliff:g id="DEVICE_NAME">%1$s</xliff:g> teilen?"</string>
+    <string name="audio_sharing_share_with_more_dialog_title" msgid="2840069088858232267">"Audioinhalte mit einem anderen Gerät teilen"</string>
+    <string name="audio_sharing_share_with_button_label" msgid="4146194430380237357">"Mit <xliff:g id="DEVICE_NAME">%1$s</xliff:g> teilen"</string>
+    <string name="audio_sharing_close_button_label" msgid="2666534149100498574">"Schließen"</string>
+    <string name="audio_sharing_dialog_connect_device_content" msgid="2873230647152283734">"Verbinde ein weiteres Paar kompatibler Kopfhörer oder teile den Namen des Streams und das Passwort mit der anderen Person"</string>
+    <string name="audio_sharing_dialog_pair_device_content" msgid="3136997898244863470">"Kopple ein weiteres Paar kompatibler Kopfhörer oder teile den QR-Code deines Audiostreams mit der anderen Person"</string>
+    <string name="audio_sharing_sharing_label" msgid="1038021053061111508">"Audioinhalte werden freigegeben"</string>
+    <string name="audio_sharing_pair_button_label" msgid="7987236990273083588">"Neues Gerät koppeln"</string>
+    <string name="audio_sharing_qrcode_button_label" msgid="3207039106555097659">"QR-Code anzeigen"</string>
+    <string name="audio_sharing_notification_title" msgid="1204798942946033005">"Du gibst Audioinhalte frei"</string>
+    <string name="audio_sharing_notification_content" msgid="1577180829878785642">"Zuhörer können sich deine Medien anhören. Sie können allerdings keine Telefongespräche mithören."</string>
+    <string name="audio_sharing_stop_button_label" msgid="8770519671470608849">"Freigabe beenden"</string>
+    <string name="audio_sharing_settings_button_label" msgid="8574808650318270491">"Einstellungen"</string>
+    <string name="audio_sharing_disconnect_dialog_title" msgid="2192751727237748602">"Gerät auswählen, zu dem die Verbindung getrennt werden soll"</string>
+    <string name="audio_sharing_dialog_disconnect_content" msgid="3840488888970653308">"Die Audiofreigabe kann nur von 2 Geräten gleichzeitig genutzt werden"</string>
+    <string name="audio_sharing_disconnect_device_button_label" msgid="4272897217708930576">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> trennen"</string>
+    <string name="audio_sharing_stop_dialog_title" msgid="4872853738164232075">"Mit <xliff:g id="DEVICE_NAME">%1$s</xliff:g> verbinden?"</string>
+    <string name="audio_sharing_stop_dialog_content" msgid="6371546856710692910">"Die Audiofreigabe mit <xliff:g id="DEVICE_NAME">%1$s</xliff:g> wird beendet"</string>
+    <string name="audio_sharing_stop_dialog_with_two_content" msgid="2119020725467967219">"Die Audiofreigabe für <xliff:g id="DEVICE_NAME1">%1$s</xliff:g> und <xliff:g id="DEVICE_NAME2">%2$s</xliff:g> wird beendet"</string>
+    <string name="audio_sharing_stop_dialog_with_more_content" msgid="5262441138981618703">"Die Audiofreigabe mit den verbundenen Kopfhörern wird beendet"</string>
+    <string name="audio_sharing_connect_button_label" msgid="4241911519063029982">"Verbinden"</string>
+    <string name="audio_sharing_sharing_stopped_label" msgid="8128194452354240996">"Die Audiofreigabe wurde beendet"</string>
+    <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"Kompatibles Gerät verbinden"</string>
+    <string name="audio_sharing_comfirm_dialog_content" msgid="3479217934447446066">"Wenn du Audioinhalte freigeben möchtest, verbinde zuerst deine LE Audio-Kopfhörer mit deinem Smartphone"</string>
+    <string name="audio_streams_category_title" msgid="4878022761829895463">"Mit LE Audio-Stream verbinden"</string>
+    <string name="audio_streams_pref_title" msgid="6320485086288646209">"Audiostreams in der Nähe"</string>
+    <string name="audio_streams_title" msgid="6617990880383079165">"Audiostreams"</string>
+    <string name="audio_streams_qr_code_summary" msgid="2838923349871884871">"Über QR-Code mit einem Audiostream verbinden"</string>
+    <string name="audio_streams_empty" msgid="8803517701437394982">"Keine Audiostreams in der Nähe gefunden."</string>
+    <string name="audio_streams_disconnect" msgid="1755594831469579161">"Verbindung trennen"</string>
+    <string name="audio_streams_connect" msgid="1955964373102927954">"Verbindung herstellen"</string>
+    <string name="audio_streams_qr_code_is_not_valid_format" msgid="4856288389653121830">"Das Format des QR-Codes ist ungültig"</string>
+    <string name="audio_streams_qr_code_scanner" msgid="525396804963685478">"Scanne zum Anhören den QR-Code unten"</string>
+    <string name="audio_streams_add_source_bad_code_state_summary" msgid="6527086906921868757">"Prüfe das Passwort und versuche es noch einmal"</string>
+    <string name="audio_streams_add_source_failed_state_summary" msgid="3937546443978562322">"Verbindung nicht möglich. Versuche es noch einmal."</string>
+    <string name="audio_streams_add_source_wait_for_response_summary" msgid="3763240901110974606">"Wird verbunden…"</string>
+    <string name="audio_streams_wait_for_sync_state_summary" msgid="11905744690831864">"Wird gescannt…"</string>
+    <string name="audio_streams_dialog_stream_is_not_available" msgid="4032878851270690546">"Audiostream ist nicht verfügbar"</string>
+    <string name="audio_streams_is_not_playing" msgid="8480293894696007941">"In diesem Audiostream wird derzeit nichts abgespielt"</string>
+    <string name="audio_streams_dialog_close" msgid="8177201719298408431">"Schließen"</string>
+    <string name="audio_streams_dialog_listen" msgid="7290340191504987685">"Anhören"</string>
+    <string name="audio_streams_dialog_retry" msgid="4456843891970998556">"Noch mal versuchen"</string>
+    <string name="audio_streams_dialog_listen_to_audio_stream" msgid="8585253007762261528">"Audiostream anhören"</string>
+    <string name="audio_streams_dialog_control_volume" msgid="7615062686016713544">"Der Audiostream wird auf <xliff:g id="DEVICE_NAME">%1$s</xliff:g> abgespielt. Regle die Lautstärke auf diesem Gerät."</string>
+    <string name="audio_streams_dialog_cannot_listen" msgid="4432257183698209966">"Audiostream kann nicht angehört werden"</string>
+    <string name="audio_streams_dialog_default_device" msgid="6159800303379303266">"verbundene kompatible Kopfhörer"</string>
+    <string name="audio_streams_activity_title" msgid="9011162151277443663">"Übertragungen"</string>
+    <string name="audio_streams_no_password_summary" msgid="8976357323034830144">"Kein Passwort"</string>
+    <string name="audio_streams_dialog_learn_more" msgid="6711241053442211345">"Weitere Informationen"</string>
+    <string name="audio_streams_dialog_cannot_play" msgid="1358828316927479091">"Dieser Audiostream kann nicht auf <xliff:g id="DEVICE_NAME">%1$s</xliff:g> abgespielt werden."</string>
+    <string name="audio_streams_listening_now" msgid="4205614429222949176">"Wird jetzt abgespielt"</string>
+    <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"Zuhören beenden"</string>
+    <string name="audio_streams_dialog_no_le_device_title" msgid="3931163990976742282">"Kompatible Kopfhörer verbinden"</string>
+    <string name="audio_streams_dialog_no_le_device_button" msgid="4484355549428642588">"Gerät verbinden"</string>
+    <string name="audio_streams_detail_page_title" msgid="7884132061275273766">"Details des Audiostreams"</string>
+    <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"QR-Code des Audiostreams"</string>
+    <string name="audio_streams_qr_code_page_password" msgid="7268475614131297060">"Passwort: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
+    <string name="audio_streams_qr_code_page_description" msgid="1317961663706630428">"Wenn andere Personen den Audiostream „<xliff:g id="STREAM_NAME">%1$s</xliff:g>“ anhören möchten, können sie kompatible Kopfhörer mit ihrem Android-Gerät verbinden. Sie können dann diesen QR-Code scannen."</string>
+    <string name="audio_streams_main_page_title" msgid="1838380471076527639">"Audiostream finden"</string>
+    <string name="audio_streams_main_page_subtitle" msgid="3251995732921981539">"Audioinhalte, die auf einem Gerät freigegeben wurden, oder eine Auracast-Übertragung anhören"</string>
+    <string name="audio_streams_main_page_device_title" msgid="2635744035523908253">"Mein Audiogerät"</string>
+    <string name="audio_streams_main_page_no_device_summary" msgid="2936000845397406389">"Kompatible Kopfhörer verbinden"</string>
+    <string name="audio_streams_main_page_scan_section_title" msgid="2778235929304061163">"Audiostreams in der Nähe"</string>
+    <string name="audio_streams_main_page_scan_qr_code_title" msgid="8337270277392468895">"QR-Code scannen"</string>
+    <string name="audio_streams_main_page_scan_qr_code_summary" msgid="1991792283368249499">"Den QR-Code eines Streams scannen, um den Stream anzuhören"</string>
+    <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Stream anhören"</string>
+    <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Den QR-Code eines Audiostreams scannen, um den Stream auf <xliff:g id="DEVICE_NAME">%1$s</xliff:g> anzuhören"</string>
+    <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Während der Freigabe kann das Passwort nicht geändert werden. Wenn du das Passwort ändern möchtest, deaktiviere zuerst die Audiofreigabe."</string>
 </resources>
