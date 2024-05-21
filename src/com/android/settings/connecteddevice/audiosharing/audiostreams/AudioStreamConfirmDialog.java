@@ -54,9 +54,6 @@ public class AudioStreamConfirmDialog extends InstrumentedDialogFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (!AudioSharingUtils.isFeatureEnabled()) {
-            return;
-        }
         setShowsDialog(true);
         mActivity = getActivity();
         if (mActivity == null) {
@@ -84,6 +81,9 @@ public class AudioStreamConfirmDialog extends InstrumentedDialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+        if (!AudioSharingUtils.isFeatureEnabled()) {
+            return getUnsupporteDialog();
+        }
         if (AudioSharingUtils.isAudioSharingProfileReady(mProfileManager)) {
             CachedBluetoothDevice connectedLeDevice =
                     AudioStreamsHelper.getCachedBluetoothDeviceInSharingOrLeConnected(
@@ -129,6 +129,21 @@ public class AudioStreamConfirmDialog extends InstrumentedDialogFragment {
                 .setRightButtonOnClickListener(
                         unused -> {
                             launchAudioStreamsActivity();
+                            dismiss();
+                            if (mActivity != null) {
+                                mActivity.finish();
+                            }
+                        })
+                .build();
+    }
+
+    private Dialog getUnsupporteDialog() {
+        return new AudioStreamsDialogFragment.DialogBuilder(getActivity())
+                .setTitle(getString(R.string.audio_streams_dialog_cannot_listen))
+                .setSubTitle2(getString(R.string.audio_streams_dialog_unsupported_device_subtitle))
+                .setRightButtonText(getString(R.string.audio_streams_dialog_close))
+                .setRightButtonOnClickListener(
+                        unused -> {
                             dismiss();
                             if (mActivity != null) {
                                 mActivity.finish();
