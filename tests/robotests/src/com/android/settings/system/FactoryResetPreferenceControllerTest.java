@@ -145,10 +145,13 @@ public class FactoryResetPreferenceControllerTest {
 
     @Test
     @RequiresFlagsEnabled(com.android.settings.factory_reset.Flags.FLAG_ENABLE_FACTORY_RESET_WIZARD)
-    public void handlePreference_factoryResetWizardEnabled() {
+    public void handlePreference_factoryResetWizardEnabled()
+            throws PackageManager.NameNotFoundException {
         ArgumentCaptor<Intent> intentArgumentCaptor = ArgumentCaptor.forClass(Intent.class);
 
         assertThat(mController.handlePreferenceTreeClick(mPreference)).isTrue();
+        verify(mPackageManager).getPackageInfo(eq(FACTORY_RESET_APP_PACKAGE),
+                eq(PackageManager.GET_PERMISSIONS));
         verify(mFactoryResetLauncher).launch(intentArgumentCaptor.capture());
         assertThat(intentArgumentCaptor.getValue()).isNotNull();
         assertThat(intentArgumentCaptor.getValue().getAction())
