@@ -90,7 +90,7 @@ class ZenMode {
                     .build();
 
     private final String mId;
-    private final AutomaticZenRule mRule;
+    private AutomaticZenRule mRule;
     private final boolean mIsActive;
     private final boolean mIsManualDnd;
 
@@ -188,6 +188,14 @@ class ZenMode {
                         + mRule.getInterruptionFilter());
                 return requireNonNull(mRule.getZenPolicy());
         }
+    }
+
+    /**
+     * Use sparingly. If you're updating a policy field, use
+     * {@link #setPolicy(android.service.notification.ZenPolicy)} instead.
+     */
+    public void setAzr(@NonNull AutomaticZenRule newRule) {
+        mRule = newRule;
     }
 
     /**

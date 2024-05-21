@@ -20,11 +20,14 @@ import static android.app.NotificationManager.INTERRUPTION_FILTER_PRIORITY;
 import static android.service.notification.ZenPolicy.CONVERSATION_SENDERS_ANYONE;
 import static android.service.notification.ZenPolicy.PEOPLE_TYPE_ANYONE;
 import static android.service.notification.ZenPolicy.PEOPLE_TYPE_CONTACTS;
+import static android.service.notification.ZenPolicy.VISUAL_EFFECT_AMBIENT;
+import static android.service.notification.ZenPolicy.VISUAL_EFFECT_LIGHTS;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.app.AutomaticZenRule;
 import android.content.Context;
 import android.net.Uri;
+import android.service.notification.ZenDeviceEffects;
 import android.service.notification.ZenPolicy;
 import org.junit.Before;
 import org.junit.Test;
@@ -164,5 +167,162 @@ public class ZenModesSummaryHelperTest {
 
         assertThat(mSummaryHelper.getOtherSoundCategoriesSummary(zenMode)).isEqualTo(
                 "Alarms, media, and 3 more can interrupt");
+    }
+
+    @Test
+    public void getBlockedEffectsSummary_none() {
+        AutomaticZenRule rule = new AutomaticZenRule.Builder("Bedtime", Uri.parse("bed"))
+                .setType(AutomaticZenRule.TYPE_BEDTIME)
+                .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
+                .setZenPolicy(new ZenPolicy.Builder()
+                        .showAllVisualEffects()
+                        .allowAlarms(true)
+                        .build())
+                .build();
+        ZenMode zenMode = new ZenMode("id", rule, true);
+        assertThat(mSummaryHelper.getBlockedEffectsSummary(zenMode))
+                .isEqualTo("Notifications shown");
+    }
+
+    @Test
+    public void getBlockedEffectsSummary_some() {
+        AutomaticZenRule rule = new AutomaticZenRule.Builder("Bedtime", Uri.parse("bed"))
+                .setType(AutomaticZenRule.TYPE_BEDTIME)
+                .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
+                .setZenPolicy(new ZenPolicy.Builder()
+                        .allowAlarms(true)
+                        .showAllVisualEffects()
+                        .showVisualEffect(VISUAL_EFFECT_AMBIENT, false)
+                        .build())
+                .build();
+        ZenMode zenMode = new ZenMode("id", rule, true);
+        assertThat(mSummaryHelper.getBlockedEffectsSummary(zenMode))
+                .isEqualTo("Notifications partially hidden");
+    }
+
+    @Test
+    public void getBlockedEffectsSummary_all() {
+        AutomaticZenRule rule = new AutomaticZenRule.Builder("Bedtime", Uri.parse("bed"))
+                .setType(AutomaticZenRule.TYPE_BEDTIME)
+                .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
+                .setZenPolicy(new ZenPolicy.Builder()
+                        .allowAlarms(true)
+                        .hideAllVisualEffects()
+                        .build())
+                .build();
+        ZenMode zenMode = new ZenMode("id", rule, true);
+        assertThat(mSummaryHelper.getBlockedEffectsSummary(zenMode))
+                .isEqualTo("Notifications hidden");
+    }
+
+    @Test
+    public void getDisplayEffectsSummary_single_notifVis() {
+        AutomaticZenRule rule = new AutomaticZenRule.Builder("Bedtime", Uri.parse("bed"))
+                .setType(AutomaticZenRule.TYPE_BEDTIME)
+                .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
+                .setZenPolicy(new ZenPolicy.Builder()
+                        .showAllVisualEffects()
+                        .showVisualEffect(VISUAL_EFFECT_AMBIENT, false)
+                        .build())
+                .build();
+        ZenMode zenMode = new ZenMode("id", rule, true);
+
+        assertThat(mSummaryHelper.getDisplayEffectsSummary(zenMode)).isEqualTo(
+                "Notifications partially hidden");
+    }
+
+    @Test
+    public void getDisplayEffectsSummary_single_notifVis_unusedEffect() {
+        AutomaticZenRule rule = new AutomaticZenRule.Builder("Bedtime", Uri.parse("bed"))
+                .setType(AutomaticZenRule.TYPE_BEDTIME)
+                .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
+                .setZenPolicy(new ZenPolicy.Builder()
+                        .showAllVisualEffects()
+                        .showVisualEffect(VISUAL_EFFECT_LIGHTS, false)
+                        .build())
+                .build();
+        ZenMode zenMode = new ZenMode("id", rule, true);
+
+        assertThat(mSummaryHelper.getDisplayEffectsSummary(zenMode)).isEqualTo(
+                "Notifications shown");
+    }
+
+    @Test
+    public void getDisplayEffectsSummary_single_displayEffect() {
+        AutomaticZenRule rule = new AutomaticZenRule.Builder("Bedtime", Uri.parse("bed"))
+                .setType(AutomaticZenRule.TYPE_BEDTIME)
+                .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
+                .setZenPolicy(new ZenPolicy.Builder().showAllVisualEffects().build())
+                .setDeviceEffects(new ZenDeviceEffects.Builder()
+                        .setShouldDimWallpaper(true)
+                        .build())
+                .build();
+        ZenMode zenMode = new ZenMode("id", rule, true);
+
+        assertThat(mSummaryHelper.getDisplayEffectsSummary(zenMode)).isEqualTo(
+                "Dim the wallpaper");
+    }
+
+    @Test
+    public void getDisplayEffectsSummary_duo() {
+        AutomaticZenRule rule = new AutomaticZenRule.Builder("Bedtime", Uri.parse("bed"))
+                .setType(AutomaticZenRule.TYPE_BEDTIME)
+                .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
+                .setZenPolicy(new ZenPolicy.Builder().showAllVisualEffects().build())
+                .setDeviceEffects(new ZenDeviceEffects.Builder()
+                        .setShouldDimWallpaper(true)
+                        .setShouldDisplayGrayscale(true)
+                        .build())
+                .build();
+        ZenMode zenMode = new ZenMode("id", rule, true);
+
+        assertThat(mSummaryHelper.getDisplayEffectsSummary(zenMode)).isEqualTo(
+                "Grayscale and dim the wallpaper");
+    }
+
+    @Test
+    public void getDisplayEffectsSummary_trio() {
+        AutomaticZenRule rule = new AutomaticZenRule.Builder("Bedtime", Uri.parse("bed"))
+                .setType(AutomaticZenRule.TYPE_BEDTIME)
+                .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
+                .setZenPolicy(new ZenPolicy.Builder()
+                        .hideAllVisualEffects()
+                        .allowAlarms(true)
+                        .allowMedia(true)
+                        .allowSystem(true)
+                        .build())
+                .setDeviceEffects(new ZenDeviceEffects.Builder()
+                        .setShouldDisplayGrayscale(true)
+                        .setShouldDimWallpaper(true)
+                        .build())
+                .build();
+        ZenMode zenMode = new ZenMode("id", rule, true);
+
+        assertThat(mSummaryHelper.getDisplayEffectsSummary(zenMode)).isEqualTo(
+                "Notifications hidden, grayscale, and dim the wallpaper");
+    }
+
+    @Test
+    public void getDisplayEffectsSummary_quad() {
+        AutomaticZenRule rule = new AutomaticZenRule.Builder("Bedtime", Uri.parse("bed"))
+                .setType(AutomaticZenRule.TYPE_BEDTIME)
+                .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
+                .setZenPolicy(new ZenPolicy.Builder()
+                        .showAllVisualEffects()
+                        .showVisualEffect(VISUAL_EFFECT_AMBIENT, false)
+                        .allowAlarms(true)
+                        .allowMedia(true)
+                        .allowSystem(true)
+                        .build())
+                .setDeviceEffects(new ZenDeviceEffects.Builder()
+                        .setShouldDimWallpaper(true)
+                        .setShouldDisplayGrayscale(true)
+                        .setShouldUseNightMode(true)
+                        .build())
+                .build();
+        ZenMode zenMode = new ZenMode("id", rule, true);
+
+        assertThat(mSummaryHelper.getDisplayEffectsSummary(zenMode)).isEqualTo(
+                "Notifications partially hidden, grayscale, and 2 more");
     }
 }
