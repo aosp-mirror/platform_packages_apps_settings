@@ -48,9 +48,9 @@
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"الألعاب والفيديوهات فقط وغير ذلك"</string>
     <string name="selective_stay_awake_summary" msgid="9055967322921984543">"يتم تشغيل الشاشة الأمامية للتطبيقات التي تمنع انتقال الشاشة إلى \"وضع عدم النشاط\"."</string>
     <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"التمرير سريعًا للأعلى لمواصلة استخدام التطبيق"</string>
-    <string name="stay_awake_on_lockscreen_summary" msgid="2299351813382522952">"عليك طي هاتفك ثم التمرير سريعًا للأعلى على الشاشة الأمامية لمواصلة استخدام التطبيق، أو الانتظار بضع لحظات إلى أن يتم قفل الشاشة."</string>
+    <string name="stay_awake_on_lockscreen_summary" msgid="8825321939913726566">"عليك طيّ هاتفك ثم التمرير سريعًا للأعلى على الشاشة الأمامية لمواصلة استخدام التطبيق، أو الانتظار بضع لحظات إلى أن يتم قفل الشاشة. سيستمر تشغيل الألعاب وتطبيقات الفيديو تلقائيًا."</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"أبدًا"</string>
-    <string name="sleep_on_fold_summary" msgid="7737992842459588846">"يتم قفل الشاشة الأمامية عند طيّ الجهاز."</string>
+    <string name="sleep_on_fold_summary" msgid="4191753338303043456">"يتم إطفاء الشاشة الأمامية وقفلها عند طيّ الجهاز"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"استخدام التدوير التلقائي"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"‏تستخدم ميزة \"التعرّف على الوجوه\" الكاميرا الأمامية لتحسين دقة التدوير التلقائي. لا يتم تخزين الصور أو إرسالها إلى Google مطلقًا."</string>
     <string name="bluetooth" msgid="8898478620943459654">"بلوتوث"</string>
@@ -357,7 +357,7 @@
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"بصمة الإصبع"</string>
     <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"عند استخدام ميزة \"فتح الجهاز ببصمة الإصبع\""</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"بصمة الإصبع لملف العمل"</string>
-    <string name="fingerprint_add_title" msgid="1837610443487902050">"إضافة بصمة إصبع"</string>
+    <string name="fingerprint_add_title" msgid="1837610443487902050">"إضافة بصمة الإصبع"</string>
     <string name="security_settings_fingerprint_preference_summary" msgid="8486134175759676037">"{count,plural, =1{تمت إضافة بصمة إصبع واحدة}zero{تمت إضافة # بصمة إصبع}two{تمت إضافة بصمتَى إصبعَين}few{تمت إضافة # بصمات أصابع}many{تمت إضافة # بصمة إصبع}other{تمت إضافة # بصمة إصبع}}"</string>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1146977379031250790">"يجب ضبط الإعدادات"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"إعداد بصمة الإصبع"</string>
@@ -3924,9 +3924,6 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"السماح بالوصول إلى كل الملفات لإدارتها"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"يسمح هذا الإعداد لهذا التطبيق بقراءة كل الملفات وتعديلها وحذفها من هذا الجهاز أو أي وحدات تخزين متصلة. في حال تفعيله، يمكن أن يصل التطبيق إلى الملفات بدون إعلامك بذلك."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"يمكن الوصول إلى كل الملفات"</string>
-    <string name="voice_activation_apps_title" msgid="7130045161611529825">"التطبيقات التي تستخدم التشغيل بالصوت"</string>
-    <string name="permit_voice_activation_apps" msgid="9152780172988949319">"السماح بميزة التشغيل بالصوت"</string>
-    <string name="allow_voice_activation_apps_description" msgid="6369745626995060656">"توفِّر ميزة التشغيل بالصوت إمكانية تشغيل التطبيقات المُعتمَدة باستخدام الطلبات الصوتية وبدون لمس الجهاز. يضمن نظام الاستشعار التكيُّفي والمدمَج أن تظل البيانات خاصة بك فقط.\n\n"<a href="">"مزيد من المعلومات حول نظام الاستشعار التكيُّفي المحمي"</a></string>
     <string name="full_screen_intent_title" msgid="747270185715224130">"الإشعارات بملء الشاشة"</string>
     <string name="permit_full_screen_intent" msgid="9035367640019960861">"السماح بعرض الإشعارات من هذا التطبيق بملء الشاشة"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"يتم السماح لهذا التطبيق بعرض إشعارات بملء الشاشة عندما يكون الجهاز مُقفَلاً. قد تستخدم التطبيقات هذا الإذن لإبراز المنبّهات أو المكالمات الواردة أو غيرها من الإشعارات العاجلة."</string>

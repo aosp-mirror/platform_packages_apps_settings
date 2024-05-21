@@ -48,9 +48,9 @@
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"Alleen games, video\'s en meer"</string>
     <string name="selective_stay_awake_summary" msgid="9055967322921984543">"Het scherm aan de voorkant gaat aan voor apps die voorkomen dat je scherm inactief wordt"</string>
     <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Swipe omhoog om door te gaan"</string>
-    <string name="stay_awake_on_lockscreen_summary" msgid="2299351813382522952">"Vouw je telefoon dicht en swipe omhoog op het scherm aan de voorkant om de app te blijven gebruiken, of wacht een paar seconden totdat het scherm is vergrendeld"</string>
+    <string name="stay_awake_on_lockscreen_summary" msgid="8825321939913726566">"Vouw je telefoon dicht en swipe omhoog op het scherm aan de voorkant om de app te blijven gebruiken, of wacht een paar seconden totdat het scherm is vergrendeld. Games en video-apps gaan automatisch verder."</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"Nooit"</string>
-    <string name="sleep_on_fold_summary" msgid="7737992842459588846">"Het scherm aan de voorkant wordt vergrendeld als je het apparaat dichtvouwt"</string>
+    <string name="sleep_on_fold_summary" msgid="4191753338303043456">"Het scherm aan de voorkant gaat uit en wordt vergrendeld als je het apparaat dichtvouwt"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Automatisch draaien gebruiken"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"Gezichtsherkenning gebruikt de camera aan de voorzijde om de nauwkeurigheid van automatisch draaien te verbeteren. Afbeeldingen worden nooit opgeslagen of naar Google gestuurd."</string>
     <string name="bluetooth" msgid="8898478620943459654">"Bluetooth"</string>
@@ -984,7 +984,7 @@
     <string name="wifi_dpp_sharing_wifi_with_this_device" msgid="7250369936882080107">"Wifi delen met dit apparaat…"</string>
     <string name="wifi_dpp_connecting" msgid="2312769193202897589">"Verbinden…"</string>
     <string name="wifi_dpp_share_hotspot" msgid="6186452780604755316">"Hotspot delen"</string>
-    <string name="wifi_dpp_lockscreen_title" msgid="5246641326066972419">"Bevestig dat jij het bent"</string>
+    <string name="wifi_dpp_lockscreen_title" msgid="5246641326066972419">"Laat verifiëren dat jij het bent"</string>
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Wifi-wachtwoord: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"Wachtwoord hotspot: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"Automatisch verbinding maken"</string>
@@ -1353,7 +1353,7 @@
     <string name="status_up_time" msgid="1274778533719495438">"Bedrijfstijd"</string>
     <string name="battery_manufacture_date" msgid="7139426520156833987">"Productiedatum"</string>
     <string name="battery_first_use_date" msgid="3157207331722711317">"Datum van eerste gebruik"</string>
-    <string name="battery_cycle_count" msgid="2912949283386571900">"Aantal cyclussen"</string>
+    <string name="battery_cycle_count" msgid="2912949283386571900">"Aantal cycli"</string>
     <string name="battery_cycle_count_not_available" msgid="2426584515665184664">"Niet beschikbaar"</string>
     <string name="memory_calculating_size" msgid="3898240439798661242">"Berekenen…"</string>
     <string name="storage_menu_rename" msgid="8549835371429159336">"Naam wijzigen"</string>
@@ -3163,7 +3163,7 @@
     <string name="keywords_sim_status_iccid_esim" msgid="4634015619840979184">"netwerk, status mobiel netwerk, servicestatus, signaalsterkte, type mobiel netwerk, roaming, iccid, eid"</string>
     <string name="keywords_esim_eid" msgid="8128175058237372457">"eid"</string>
     <string name="keywords_model_and_hardware" msgid="4723665865709965044">"serienummer, hardwareversie"</string>
-    <string name="keywords_battery_info" msgid="3319796850366687033">"batterij-informatie, productiedatum, aantal cyclussen, eerste gebruik"</string>
+    <string name="keywords_battery_info" msgid="3319796850366687033">"batterij-informatie, productiedatum, aantal cycli, eerste gebruik"</string>
     <string name="keywords_android_version" msgid="1629882125290323070">"niveau van android-beveiligingspatch, smalbandversie, kernel-versie"</string>
     <string name="keywords_dark_ui_mode" msgid="6373999418195344014">"thema, licht, donker, modus, lichtgevoeligheid, fotofobie, donkerder maken, donkerder, donkere modus, migraine"</string>
     <string name="keywords_systemui_theme" msgid="6341194275296707801">"donker thema"</string>
@@ -3684,7 +3684,7 @@
     <string name="zen_mode_bypassing_apps_title" msgid="371050263563164059">"Apps"</string>
     <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"Meldingen die mogen onderbreken"</string>
     <string name="zen_mode_bypassing_app_channels_toggle_all" msgid="1449462656358219116">"Alle meldingen toestaan"</string>
-    <string name="zen_mode_other_sounds_summary" msgid="8784400697494837032">"{count,plural,offset:2 =0{Niets mag onderbreken}=1{{sound_category_1} mag onderbreken}=2{{sound_category_1} en {sound_category_2} mogen onderbreken}=3{{sound_category_1}, {sound_category_2} en {sound_category_3} mogen onderbreken}other{{sound_category_1}, {sound_category_2} en nog # mogen onderbreken}}"</string>
+    <string name="zen_mode_other_sounds_summary" msgid="8784400697494837032">"{count,plural,offset:2 =0{Niets mag je storen}=1{{sound_category_1} mag je storen}=2{{sound_category_1} en {sound_category_2} mogen je storen}=3{{sound_category_1}, {sound_category_2} en {sound_category_3} mogen je storen}other{{sound_category_1}, {sound_category_2} en nog # mogen je storen}}"</string>
     <string name="zen_mode_sounds_none" msgid="6557474361948269420">"Niets mag onderbreken"</string>
     <string name="zen_mode_people_none" msgid="4613147461974255046">"Niemand mag onderbreken"</string>
     <string name="zen_mode_people_some" msgid="9101872681298810281">"Bepaalde mensen mogen je storen"</string>
@@ -3924,9 +3924,6 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Toegang geven om alle bestanden te beheren"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Sta toe dat deze app alle bestanden op dit apparaat of gekoppelde opslagvolumes kan lezen, aanpassen of verwijderen. Als je dit toestaat, kan de app zonder jouw medeweten toegang tot bestanden krijgen."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Mag toegang tot alle bestanden hebben"</string>
-    <string name="voice_activation_apps_title" msgid="7130045161611529825">"Apps met spraakactivering"</string>
-    <string name="permit_voice_activation_apps" msgid="9152780172988949319">"Spraakactivering toestaan"</string>
-    <string name="allow_voice_activation_apps_description" msgid="6369745626995060656">"Met spraakactivering zet je goedgekeurde apps handsfree aan met spraakopdrachten. Dankzij ingebouwde adaptieve detectie blijven gegevens privé.\n\n"<a href="">"Meer informatie over beveiligde adaptieve detectie"</a></string>
     <string name="full_screen_intent_title" msgid="747270185715224130">"Meldingen op volledig scherm"</string>
     <string name="permit_full_screen_intent" msgid="9035367640019960861">"Meldingen van deze app op volledig scherm toestaan"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Sta toe dat deze app meldingen op het volledige scherm toont als het apparaat is vergrendeld. Apps kunnen zo wekkers, inkomende gesprekken of andere urgente meldingen onder de aandacht brengen."</string>

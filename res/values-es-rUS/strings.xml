@@ -48,9 +48,9 @@
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"Solo juegos, videos y otros"</string>
     <string name="selective_stay_awake_summary" msgid="9055967322921984543">"La pantalla frontal se enciende para las apps que evitan que la pantalla quede inactiva."</string>
     <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Deslizar el dedo hacia arriba para continuar"</string>
-    <string name="stay_awake_on_lockscreen_summary" msgid="2299351813382522952">"Cierra el teléfono y desliza el dedo hacia arriba en la pantalla frontal para continuar usando la app, o bien espera unos segundos para que se bloquee la pantalla"</string>
+    <string name="stay_awake_on_lockscreen_summary" msgid="8825321939913726566">"Pliega el teléfono y desliza el dedo hacia arriba en la pantalla frontal para continuar usando la app, o bien espera unos segundos hasta que se bloquee la pantalla (los juegos y las apps de video seguirán ejecutándose automáticamente)"</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"Nunca"</string>
-    <string name="sleep_on_fold_summary" msgid="7737992842459588846">"La pantalla frontal se bloquea cuando pliegas el dispositivo"</string>
+    <string name="sleep_on_fold_summary" msgid="4191753338303043456">"La pantalla frontal se apaga y se bloquea cuando pliegas el dispositivo"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Girar automáticamente"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"La detección de rostro usa la cámara frontal para mejorar la exactitud de la opción Girar automáticamente. Las imágenes nunca se almacenan ni se envían a Google."</string>
     <string name="bluetooth" msgid="8898478620943459654">"Bluetooth"</string>
@@ -259,7 +259,7 @@
     <string name="date_time_select_fixed_offset_time_zones" msgid="594848300882055361">"Seleccionar compensación de UTC"</string>
     <string name="zone_info_exemplar_location_and_offset" msgid="2186042522225153092">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g> (<xliff:g id="OFFSET">%2$s</xliff:g>)"</string>
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
-    <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"Usa <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g> <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>."</string>
+    <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"Zona horaria: <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
     <string name="zone_info_footer_second_sentence" msgid="6472889173541729110">"<xliff:g id="DST_TIME_TYPE">%1$s</xliff:g> comienza el <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>."</string>
     <string name="zone_info_footer_no_dst" msgid="8399585343328811158">"Zona horaria: <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. Sin horario de verano."</string>
     <string name="zone_time_type_dst" msgid="9189689342265305808">"Horario de verano"</string>
@@ -2143,7 +2143,7 @@
     <string name="accessibility_button_high_label" msgid="9138077512008190896">"No transparente"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Texto de alto contraste"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Cambia el color del texto a blanco o negro. Maximiza el contraste con el fondo"</string>
-    <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"Maximiza el contraste del texto"</string>
+    <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"Maximizar el contraste del texto"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="5493999083693403489">"Cambia el color del texto a blanco o negro para aumentar el contraste con el fondo."</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Actualizar automáticamente la ampliación de pantalla"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Actualizar la ampliación de pantalla al cambiar de aplicaciones"</string>
@@ -3924,9 +3924,6 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Permitir administrar todos los archivos"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Permite que esta app lea, modifique y borre todos los archivos en el dispositivo o cualquier volumen de almacenamiento conectado. Si habilitas el permiso, es posible que la app acceda a archivos sin tu conocimiento explícito."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Pueden acceder a todos los archivos"</string>
-    <string name="voice_activation_apps_title" msgid="7130045161611529825">"Apps con activación por voz"</string>
-    <string name="permit_voice_activation_apps" msgid="9152780172988949319">"Permitir la activación por voz"</string>
-    <string name="allow_voice_activation_apps_description" msgid="6369745626995060656">"Las activaciones por voz inician apps aprobadas, sin usar las manos, a través de comandos por voz. Los sensores incorporados y adaptativos garantizan que los datos sean privados solo para ti.\n\n"<a href="">"Más información sobre los sensores adaptativos protegidos"</a></string>
     <string name="full_screen_intent_title" msgid="747270185715224130">"Notificaciones de pantalla completa"</string>
     <string name="permit_full_screen_intent" msgid="9035367640019960861">"Permitir notificaciones de pantalla completa de esta app"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Permite que esta app muestre notificaciones que ocupan toda la pantalla cuando el dispositivo está bloqueado. Las apps pueden usarlas para destacar alarmas, llamadas entrantes y otras notificaciones urgentes."</string>

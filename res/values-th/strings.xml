@@ -48,9 +48,9 @@
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"เฉพาะเกม วิดีโอ และอื่นๆ"</string>
     <string name="selective_stay_awake_summary" msgid="9055967322921984543">"หน้าจอด้านหน้าจะเปิดขึ้นสำหรับแอปที่ทำให้หน้าจอของคุณไม่มีการใช้งาน"</string>
     <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"ปัดขึ้นเพื่อดำเนินการต่อ"</string>
-    <string name="stay_awake_on_lockscreen_summary" msgid="2299351813382522952">"พับโทรศัพท์แล้วปัดขึ้นบนหน้าจอด้านหน้าเพื่อใช้แอปต่อ หรือรอไม่กี่วินาทีเพื่อให้หน้าจอล็อก"</string>
+    <string name="stay_awake_on_lockscreen_summary" msgid="8825321939913726566">"พับโทรศัพท์แล้วปัดหน้าจอด้านหน้าขึ้นเพื่อใช้แอปต่อ หรือรอให้หน้าจอล็อกสักครู่ แอปเกมและวิดีโอจะทำงานต่อโดยอัตโนมัติ"</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"ไม่ต้องเลย"</string>
-    <string name="sleep_on_fold_summary" msgid="7737992842459588846">"หน้าจอด้านหน้าจะล็อกเมื่อคุณพับอุปกรณ์"</string>
+    <string name="sleep_on_fold_summary" msgid="4191753338303043456">"หน้าจอด้านหน้าจะปิดและล็อกเมื่อคุณพับอุปกรณ์"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"ใช้การหมุนอัตโนมัติ"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"การตรวจจับใบหน้าใช้กล้องหน้าเพื่อเพิ่มความแม่นยำในการหมุนอัตโนมัติ ระบบจะไม่จัดเก็บหรือส่งรูปภาพไปยัง Google"</string>
     <string name="bluetooth" msgid="8898478620943459654">"บลูทูธ"</string>
@@ -803,7 +803,7 @@
     <string name="bluetooth_paring_group_msg" msgid="2455293929036668131">"ยืนยันการจับคู่กับอุปกรณ์เสียง"</string>
     <string name="bluetooth_pairing_shares_phonebook" msgid="4329325125260724843">"ให้สิทธิ์เข้าถึงรายชื่อติดต่อและประวัติการโทร"</string>
     <string name="bluetooth_pairing_phonebook_toggle_text" msgid="2474015367387690034">"อนุญาตให้เข้าถึงรายชื่อติดต่อและประวัติการโทรด้วย"</string>
-    <string name="bluetooth_pairing_phonebook_toggle_details" msgid="1367197978487212581">"จะมีการใช้ข้อมูลเพื่อประกาศการโทรและอื่นๆ"</string>
+    <string name="bluetooth_pairing_phonebook_toggle_details" msgid="1367197978487212581">"ข้อมูลนี้จะถูกใช้เพื่อแจ้งการโทรและอื่นๆ"</string>
     <string name="bluetooth_error_title" msgid="2284738188253690278"></string>
     <string name="bluetooth_connecting_error_message" msgid="3941893154784152112">"ไม่สามารถเชื่อมต่อกับ <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_preference_found_media_devices" msgid="830061195998352840">"อุปกรณ์ที่ใช้ได้"</string>
@@ -3924,9 +3924,6 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"อนุญาตให้เข้าถึงเพื่อจัดการไฟล์ทั้งหมด"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"อนุญาตให้แอปนี้อ่าน แก้ไข และลบไฟล์ทั้งหมดในอุปกรณ์นี้หรือวอลุ่มของพื้นที่เก็บข้อมูลใดๆ ที่เชื่อมต่อ หากได้รับอนุญาต ​แอปอาจเข้าถึงไฟล์ได้โดยที่คุณไม่ทราบอย่างชัดแจ้ง"</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"เข้าถึงไฟล์ทั้งหมดได้"</string>
-    <string name="voice_activation_apps_title" msgid="7130045161611529825">"แอปการเปิดใช้งานด้วยเสียง"</string>
-    <string name="permit_voice_activation_apps" msgid="9152780172988949319">"อนุญาตการเปิดใช้งานด้วยเสียง"</string>
-    <string name="allow_voice_activation_apps_description" msgid="6369745626995060656">"การเปิดใช้งานด้วยเสียงจะเปิดแอปที่ได้รับอนุมัติแบบแฮนด์ฟรีโดยใช้คำสั่งเสียง การตรวจจับแบบปรับอัตโนมัติในตัวช่วยให้มั่นใจได้ว่าข้อมูลจะเป็นส่วนตัวสำหรับคุณเท่านั้น\n\n"<a href="">"ข้อมูลเพิ่มเติมเกี่ยวกับการตรวจจับแบบปรับอัตโนมัติที่มีการป้องกัน"</a></string>
     <string name="full_screen_intent_title" msgid="747270185715224130">"การแจ้งเตือนแบบเต็มหน้าจอ"</string>
     <string name="permit_full_screen_intent" msgid="9035367640019960861">"อนุญาตให้แอปนี้แสดงการแจ้งเตือนแบบเต็มหน้าจอ"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"อนุญาตให้แอปนี้แสดงการแจ้งเตือนได้เต็มหน้าจอเมื่ออุปกรณ์ล็อกอยู่ แอปอาจใช้การแจ้งเตือนเหล่านี้เพื่อให้เห็นการปลุก สายเรียกเข้า หรือการแจ้งเตือนอื่นๆ ที่เร่งด่วนได้อย่างเด่นชัด"</string>
@@ -4352,7 +4349,7 @@
     <string name="autofill_app" msgid="7595308061826307921">"บริการป้อนข้อความอัตโนมัติ"</string>
     <string name="default_autofill_app" msgid="372234803718251606">"บริการป้อนข้อความอัตโนมัติเริ่มต้น"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"รหัสผ่าน"</string>
-    <string name="credman_chosen_app_title" msgid="7735183808067729319">"บริการที่ต้องการ"</string>
+    <string name="credman_chosen_app_title" msgid="7735183808067729319">"บริการที่ต้องการใช้"</string>
     <string name="credman_credentials" msgid="2620352336624160642">"บริการเพิ่มเติม"</string>
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{รหัสผ่าน # รายการ}other{รหัสผ่าน # รายการ}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"อัตโนมัติ ป้อนข้อความ ป้อนข้อความอัตโนมัติ รหัสผ่าน"</string>
@@ -4363,7 +4360,7 @@
     <string name="credman_app_list_preference_none" msgid="2509646651254971448">"ไม่มีรายการที่เลือก"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;ตรวจดูว่าคุณเชื่อถือแอปนี้ได้&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google ป้อนอัตโนมัติ&gt;%1$s&lt;/xliff:g&gt; ใช้สิ่งที่อยู่บนหน้าจอเพื่อดูว่าจะป้อนข้อมูลใดโดยอัตโนมัติได้บ้าง"</string>
     <string name="credman_autofill_confirmation_message" msgid="843829628024668466">"&lt;b&gt;ใช้ &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; ระบบจะบันทึกรหัสผ่านใหม่ พาสคีย์ และข้อมูลอื่นๆ ไว้ที่นี่นับจากนี้เป็นต้นไป &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; อาจใช้สิ่งที่อยู่บนหน้าจอเพื่อดูว่าจะป้อนข้อมูลใดโดยอัตโนมัติได้บ้าง"</string>
-    <string name="credman_picker_title" msgid="8442086614222006564">"บริการที่ต้องการสำหรับรหัสผ่าน พาสคีย์ และป้อนข้อความอัตโนมัติ"</string>
+    <string name="credman_picker_title" msgid="8442086614222006564">"บริการที่ต้องการใช้รหัสผ่าน พาสคีย์ และการป้อนข้อความอัตโนมัติ"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"ปิด %1$s ไหม"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;ปิดบริการนี้ไหม&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; ระบบจะไม่กรอกข้อมูลที่บันทึกไว้ เช่น รหัสผ่าน พาสคีย์ วิธีการชำระเงิน และข้อมูลอื่นๆ เมื่อคุณลงชื่อเข้าใช้ หากต้องการใช้ข้อมูลที่บันทึกไว้ ให้เลือกรหัสผ่าน พาสคีย์ หรือบริการข้อมูล"</string>
     <string name="account_dashboard_title_with_passkeys" msgid="6214673787161409996">"รหัสผ่าน พาสคีย์ และป้อนข้อความอัตโนมัติ"</string>
