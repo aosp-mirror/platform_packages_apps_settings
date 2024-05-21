@@ -14,38 +14,38 @@
  * limitations under the License.
  */
 
-package com.android.settings.biometrics.fingerprint2.lib.model
+package com.android.settings.biometrics.fingerprint2.data.model
 
 /**
  * A view model that describes the various stages of UDFPS Enrollment. This stages typically update
  * the enrollment UI in a major way, such as changing the lottie animation or changing the location
  * of the where the user should press their fingerprint
  */
-sealed class StageViewModel {
+sealed class EnrollStageModel {
   /** Unknown stage */
-  data object Unknown : StageViewModel()
+  data object Unknown : EnrollStageModel()
 
   /** This is the stage that moves the fingerprint icon around during enrollment. */
-  data object Guided : StageViewModel()
+  data object Guided : EnrollStageModel()
 
   /** The center stage is the initial stage of enrollment. */
-  data object Center : StageViewModel()
+  data object Center : EnrollStageModel()
 
   /**
    * Fingerprint stage of enrollment. Typically there is some sort of indication that a user should
    * be using their finger tip to enroll.
    */
-  data object Fingertip : StageViewModel()
+  data object Fingertip : EnrollStageModel()
 
   /**
    * Left edge stage of enrollment. Typically there is an indication that a user should be using the
    * left edge of their fingerprint.
    */
-  data object LeftEdge : StageViewModel()
+  data object LeftEdge : EnrollStageModel()
 
   /**
    * Right edge stage of enrollment. Typically there is an indication that a user should be using
    * the right edge of their fingerprint.
    */
-  data object RightEdge : StageViewModel()
+  data object RightEdge : EnrollStageModel()
 }

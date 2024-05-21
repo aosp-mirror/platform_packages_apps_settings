@@ -27,10 +27,12 @@ import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.util.DisplayMetrics
+import android.util.Log
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.Interpolator
 import android.view.animation.OvershootInterpolator
 import androidx.annotation.ColorInt
+import androidx.core.animation.addListener
 import androidx.core.animation.doOnEnd
 import androidx.core.graphics.toRectF
 import com.android.internal.annotations.VisibleForTesting
@@ -46,6 +48,7 @@ import kotlin.math.sin
 class UdfpsEnrollProgressBarDrawableV2(private val context: Context, attrs: AttributeSet?) :
   Drawable() {
   private val sensorRect: Rect = Rect()
+  private var onFinishedCompletionAnimation: (() -> Unit)? = null
   private var rotation: Int = 0
   private val strokeWidthPx: Float
 
@@ -287,6 +290,12 @@ class UdfpsEnrollProgressBarDrawableV2(private val context: Context, attrs: Attr
         checkMarkDrawable.bounds = newBounds
         checkMarkDrawable.setVisible(true, false)
       }
+      doOnEnd {
+        onFinishedCompletionAnimation?.let{
+          it()
+        }
+
+      }
       start()
     }
   }
@@ -378,6 +387,13 @@ class UdfpsEnrollProgressBarDrawableV2(private val context: Context, attrs: Attr
     animateArcDuration = PROGRESS_ANIMATION_DURATION_MS
     checkmarkAnimationDelayDuration = CHECKMARK_ANIMATION_DELAY_MS
     checkmarkAnimationDuration = CHECKMARK_ANIMATION_DURATION_MS
+  }
+
+  /**
+   * Indicates that the finish animation has completed, and enrollment can proceed to the next stage
+   */
+  fun setFinishAnimationCompleted(onFinishedAnimation: () -> Unit) {
+    this.onFinishedCompletionAnimation = onFinishedAnimation
   }
 
   companion object {

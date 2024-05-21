@@ -28,7 +28,7 @@ import platform.test.screenshot.ViewScreenshotTestRule.Mode
 
 @RunWith(AndroidJUnit4::class)
 class FingerprintEnrollIntroScreenshotTest {
-  private val injector: Injector = Injector(FingerprintNavigationStep.Introduction)
+  private val injector: Injector = Injector(FingerprintNavigationStep.Introduction())
 
   @Rule
   @JvmField

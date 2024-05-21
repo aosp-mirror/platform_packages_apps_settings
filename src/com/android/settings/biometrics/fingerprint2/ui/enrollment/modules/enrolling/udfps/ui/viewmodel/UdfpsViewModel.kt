@@ -17,20 +17,24 @@
 package com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.udfps.ui.viewmodel
 
 import android.graphics.Point
+import android.graphics.PointF
 import android.view.Surface
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.android.settings.biometrics.fingerprint2.data.repository.FingerprintSensorRepository
+import com.android.settings.biometrics.fingerprint2.data.model.EnrollStageModel
 import com.android.settings.biometrics.fingerprint2.data.repository.SimulatedTouchEventsRepository
 import com.android.settings.biometrics.fingerprint2.domain.interactor.DebuggingInteractor
 import com.android.settings.biometrics.fingerprint2.domain.interactor.DisplayDensityInteractor
 import com.android.settings.biometrics.fingerprint2.domain.interactor.EnrollStageInteractor
 import com.android.settings.biometrics.fingerprint2.domain.interactor.FingerprintVibrationEffects
 import com.android.settings.biometrics.fingerprint2.domain.interactor.OrientationInteractor
+import com.android.settings.biometrics.fingerprint2.domain.interactor.UdfpsEnrollInteractor
 import com.android.settings.biometrics.fingerprint2.domain.interactor.VibrationInteractor
 import com.android.settings.biometrics.fingerprint2.lib.model.FingerEnrollState
-import com.android.settings.biometrics.fingerprint2.lib.model.StageViewModel
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.udfps.ui.model.DescriptionText
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.udfps.ui.model.HeaderText
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.BackgroundViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintAction
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollEnrollingViewModel
@@ -61,9 +65,11 @@ class UdfpsViewModel(
   orientationInteractor: OrientationInteractor,
   backgroundViewModel: BackgroundViewModel,
   sensorRepository: FingerprintSensorRepository,
+  udfpsEnrollInteractor: UdfpsEnrollInteractor,
 ) : ViewModel() {
 
   private val isSetupWizard = flowOf(false)
+  private var shouldResetErollment = false
 
   private var _enrollState: Flow<FingerEnrollState?> =
     fingerprintEnrollEnrollingViewModel.enrollFlow
@@ -113,6 +119,17 @@ class UdfpsViewModel(
   }
 
   /**
+   * This indicates at which point the UI should offset the fingerprint sensor icon for guided
+   * enrollment.
+   */
+  val guidedEnrollment: Flow<PointF> =
+    udfpsEnrollInteractor.guidedEnrollmentOffset.distinctUntilChanged()
+
+  /** The saved version of [guidedEnrollment] */
+  val guidedEnrollmentSaved: Flow<PointF> =
+    guidedEnrollment.shareIn(this.viewModelScope, SharingStarted.Eagerly, replay = 1)
+
+  /**
    * This is the saved progress, this is for when views are recreated and need saved state for the
    * first time.
    */
@@ -132,13 +149,13 @@ class UdfpsViewModel(
       }
     }
 
-  /** Determines the current [StageViewModel] enrollment is in */
-  val enrollStage: Flow<StageViewModel> =
+  /** Determines the current [EnrollStageModel] enrollment is in */
+  private val enrollStage: Flow<EnrollStageModel> =
     combine(enrollStageInteractor.enrollStageThresholds, enrollState) { thresholds, event ->
         if (event is FingerEnrollState.EnrollProgress) {
           val progress =
             (event.totalStepsRequired - event.remainingSteps).toFloat() / event.totalStepsRequired
-          var stageToReturn: StageViewModel = StageViewModel.Center
+          var stageToReturn: EnrollStageModel = EnrollStageModel.Center
           thresholds.forEach { (threshold, stage) ->
             if (progress < threshold) {
               return@forEach
@@ -152,6 +169,40 @@ class UdfpsViewModel(
       }
       .filterNotNull()
       .shareIn(this.viewModelScope, SharingStarted.Eagerly, replay = 1)
+
+  init {
+    viewModelScope.launch {
+      enrollState
+        .combine(accessibilityEnabled) { event, isEnabled -> Pair(event, isEnabled) }
+        .collect {
+          if (
+            when (it.first) {
+              is FingerEnrollState.EnrollError -> true
+              is FingerEnrollState.EnrollHelp -> it.second
+              is FingerEnrollState.EnrollProgress -> true
+              else -> false
+            }
+          ) {
+            vibrate(it.first)
+          }
+        }
+    }
+    viewModelScope.launch {
+      enrollStage.collect {
+        udfpsEnrollInteractor.updateGuidedEnrollment(it is EnrollStageModel.Guided)
+      }
+    }
+
+    viewModelScope.launch {
+      enrollState.filterIsInstance<FingerEnrollState.EnrollProgress>().collect {
+        udfpsEnrollInteractor.onEnrollmentStep(it.remainingSteps, it.totalStepsRequired)
+      }
+    }
+
+    viewModelScope.launch {
+      backgroundViewModel.background.filter { true }.collect { didGoToBackground() }
+    }
+  }
 
   /** Indicates if we should show the lottie. */
   val shouldShowLottie: Flow<Boolean> =
@@ -183,7 +234,7 @@ class UdfpsViewModel(
       }
       .shareIn(this.viewModelScope, SharingStarted.Eagerly, replay = 1)
 
-  private val shouldClearDescriptionText = enrollStage.map { it is StageViewModel.Unknown }
+  private val shouldClearDescriptionText = enrollStage.map { it is EnrollStageModel.Unknown }
 
   /** The description text for UDFPS enrollment */
   val descriptionText: Flow<DescriptionText?> =
@@ -202,6 +253,10 @@ class UdfpsViewModel(
 
   /** Indicates if the consumer is ready for enrollment */
   fun readyForEnrollment() {
+    if (shouldResetErollment) {
+      shouldResetErollment = false
+      _enrollState = fingerprintEnrollEnrollingViewModel.enrollFlow
+    }
     fingerprintEnrollEnrollingViewModel.canEnroll()
   }
 
@@ -237,8 +292,12 @@ class UdfpsViewModel(
   }
 
   private fun doReset() {
-    /** Indicates if the icon should be animating or not */
     _enrollState = fingerprintEnrollEnrollingViewModel.enrollFlow
+    progressSaved =
+      enrollState
+        .filterIsInstance<FingerEnrollState.EnrollProgress>()
+        .filterNotNull()
+        .shareIn(this.viewModelScope, SharingStarted.Eagerly, replay = 1)
   }
 
   /** The lottie that should be shown for UDFPS Enrollment */
@@ -272,6 +331,7 @@ class UdfpsViewModel(
     private val orientationInteractor: OrientationInteractor,
     private val backgroundViewModel: BackgroundViewModel,
     private val sensorRepository: FingerprintSensorRepository,
+    private val udfpsEnrollInteractor: UdfpsEnrollInteractor,
   ) : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")
@@ -287,6 +347,7 @@ class UdfpsViewModel(
         orientationInteractor,
         backgroundViewModel,
         sensorRepository,
+        udfpsEnrollInteractor,
       )
         as T
     }
