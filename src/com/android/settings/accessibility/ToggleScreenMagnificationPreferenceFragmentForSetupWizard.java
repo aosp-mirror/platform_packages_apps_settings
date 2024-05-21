@@ -72,10 +72,6 @@ public class ToggleScreenMagnificationPreferenceFragmentForSetupWizard
         if (mSettingsPreference != null) {
             mSettingsPreference.setVisible(false);
         }
-        // Setting of following typing
-        if (mFollowingTypingSwitchPreference != null) {
-            mFollowingTypingSwitchPreference.setVisible(false);
-        }
     }
 
     @Override

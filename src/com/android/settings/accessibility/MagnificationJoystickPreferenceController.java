@@ -23,12 +23,12 @@ import android.content.Context;
 import android.provider.Settings;
 
 import com.android.settings.R;
-import com.android.settings.core.TogglePreferenceController;
 
 /**
  * Controller that accesses and switches the preference status of the magnification joystick feature
  */
-public class MagnificationJoystickPreferenceController extends TogglePreferenceController {
+public class MagnificationJoystickPreferenceController extends
+        MagnificationFeaturePreferenceController {
 
     private static final String TAG =
             MagnificationJoystickPreferenceController.class.getSimpleName();
@@ -40,7 +40,7 @@ public class MagnificationJoystickPreferenceController extends TogglePreferenceC
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        return isInSetupWizard() ? CONDITIONALLY_UNAVAILABLE : AVAILABLE;
     }
 
     @Override
