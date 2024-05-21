@@ -19,16 +19,12 @@ package com.android.settings.connecteddevice.audiosharing.audiostreams;
 import android.os.Bundle;
 
 import com.android.settings.SettingsActivity;
-import com.android.settings.connecteddevice.audiosharing.AudioSharingUtils;
 
 public class AudioStreamConfirmDialogActivity extends SettingsActivity {
 
     @Override
     protected void onCreate(Bundle savedState) {
         super.onCreate(savedState);
-        if (!AudioSharingUtils.isFeatureEnabled()) {
-            finish();
-        }
     }
 
     @Override
