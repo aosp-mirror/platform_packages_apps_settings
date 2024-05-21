@@ -41,7 +41,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import com.google.common.collect.ImmutableList;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -754,12 +753,11 @@ public class UiccSlotUtilTest {
     }
 
     @Test
-    @Ignore("b/337417975")
     public void onReceiveSimCardStateChangeReceiver_receiveAction_timerCountDown() {
         CountDownLatch latch = spy(new CountDownLatch(1));
         UiccSlotUtil.SimCardStateChangeReceiver receive =
                 new UiccSlotUtil.SimCardStateChangeReceiver(latch);
-        Intent intent = new Intent(TelephonyManager.ACTION_SIM_SLOT_STATUS_CHANGED);
+        Intent intent = new Intent(TelephonyManager.ACTION_SIM_CARD_STATE_CHANGED);
         intent.putExtra(TelephonyManager.EXTRA_SIM_STATE, TelephonyManager.SIM_STATE_PRESENT);
 
         receive.onReceive(mContext, intent);
