@@ -23,6 +23,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
@@ -60,7 +61,8 @@ class AudioStreamPreference extends TwoTargetPreference {
         notifyChanged();
     }
 
-    private AudioStreamPreference(Context context, @Nullable AttributeSet attrs) {
+    @VisibleForTesting
+    AudioStreamPreference(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         setIcon(com.android.settingslib.R.drawable.ic_bt_le_audio_sharing);
     }
