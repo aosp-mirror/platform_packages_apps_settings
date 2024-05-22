@@ -18,7 +18,6 @@ package com.android.settings.accessibility;
 
 import static com.android.settings.accessibility.AccessibilityDialogUtils.DialogEnums;
 import static com.android.settings.accessibility.AccessibilityStatsLogUtils.logAccessibilityServiceEnabled;
-import static com.android.settings.accessibility.PreferredShortcuts.retrieveUserShortcutType;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.AlertDialog;
@@ -327,8 +326,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
 
     @Override
     public void onToggleClicked(ShortcutPreference preference) {
-        final int shortcutTypes = retrieveUserShortcutType(getPrefContext(),
-                mComponentName.flattenToString(), getDefaultShortcutTypes());
+        final int shortcutTypes = getUserPreferredShortcutTypes();
         if (preference.isChecked()) {
             final boolean isWarningRequired =
                     getPrefContext().getSystemService(AccessibilityManager.class)
@@ -507,8 +505,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     void onAllowButtonFromShortcutToggleClicked() {
         mShortcutPreference.setChecked(true);
 
-        final int shortcutTypes = retrieveUserShortcutType(getPrefContext(),
-                mComponentName.flattenToString(), getDefaultShortcutTypes());
+        final int shortcutTypes = getUserPreferredShortcutTypes();
         AccessibilityUtil.optInAllValuesToSettings(getPrefContext(), shortcutTypes, mComponentName);
 
         mIsDialogShown.set(false);
