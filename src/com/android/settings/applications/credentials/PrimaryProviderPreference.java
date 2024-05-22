@@ -168,7 +168,7 @@ public class PrimaryProviderPreference extends GearPreference {
         mButtonFrameView.setPadding(
             paddingLeft,
             mButtonFrameView.getPaddingTop(),
-            mButtonFrameView.getPaddingRight(),
+            paddingLeft,
             mButtonFrameView.getPaddingBottom());
     }
 
