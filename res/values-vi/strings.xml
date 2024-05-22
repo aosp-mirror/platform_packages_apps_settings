@@ -48,9 +48,9 @@
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"Chỉ trò chơi, video và nhiều nội dung khác"</string>
     <string name="selective_stay_awake_summary" msgid="9055967322921984543">"Màn hình ngoài bật đối với các ứng dụng ngăn không cho màn hình chuyển sang chế độ rảnh"</string>
     <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Vuốt lên để tiếp tục"</string>
-    <string name="stay_awake_on_lockscreen_summary" msgid="2299351813382522952">"Gập điện thoại và vuốt lên trên màn hình ngoài để tiếp tục sử dụng ứng dụng, hoặc đợi vài giây để màn hình tự khoá lại"</string>
+    <string name="stay_awake_on_lockscreen_summary" msgid="8825321939913726566">"Gập điện thoại và vuốt lên trên màn hình ngoài để tiếp tục dùng ứng dụng, hoặc đợi vài giây để màn hình tự khoá lại. Các ứng dụng trò chơi và video sẽ tự động tiếp tục chạy."</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"Không bao giờ"</string>
-    <string name="sleep_on_fold_summary" msgid="7737992842459588846">"Màn hình ngoài sẽ khoá khi bạn gập thiết bị"</string>
+    <string name="sleep_on_fold_summary" msgid="4191753338303043456">"Màn hình ngoài sẽ tắt và khoá khi bạn gập thiết bị"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Sử dụng chế độ tự động xoay"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"Công nghệ Phát hiện khuôn mặt sử dụng máy ảnh trước để cải thiện độ chính xác của chế độ tự động xoay. Hình ảnh không bao giờ được lưu trữ hoặc gửi cho Google."</string>
     <string name="bluetooth" msgid="8898478620943459654">"Bluetooth"</string>
@@ -139,7 +139,6 @@
     <string name="stylus_textfield_handwriting" msgid="2363579035338976327">"Viết vào trường văn bản"</string>
     <string name="stylus_ignore_button" msgid="7734540973145241391">"Bỏ qua tất cả các lần nhấn nút bằng bút cảm ứng"</string>
     <string name="stylus_connected_devices_title" msgid="2823967577941359812">"Bút cảm ứng"</string>
-    <string name="audio_streams_empty" msgid="8803517701437394982">"Không tìm thấy luồng âm thanh ở gần nào."</string>
     <string name="date_and_time" msgid="1788358029823431692">"Ngày và giờ"</string>
     <string name="proxy_settings_title" msgid="4201866858226087066">"Proxy"</string>
     <string name="proxy_clear_text" msgid="6529658759984031149">"Xóa"</string>
@@ -286,8 +285,7 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Những ứng dụng có quyền đối với các Thiết bị ở gần có thể xác định vị trí tương đối của các thiết bị đã kết nối."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Các ứng dụng và dịch vụ sẽ không có quyền truy cập vào thông tin vị trí. Khi bạn gọi điện hoặc nhắn tin đến một số khẩn cấp, nhân viên ứng cứu khẩn cấp vẫn có thể nhận được thông tin vị trí thiết bị của bạn."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Tìm hiểu thêm về chế độ Cài đặt vị trí"</string>
-    <!-- no translation found for location_settings_tooltip_text_for_chrome (5781821709250544575) -->
-    <skip />
+    <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"Để thay đổi, hãy chuyển đến phần Cài đặt ChromeOS &gt; Quyền riêng tư và bảo mật &gt; Chế độ kiểm soát quyền riêng tư &gt; Quyền truy cập thông tin vị trí"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Tài khoản"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Bảo mật"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Mã hóa và thông tin xác thực"</string>
@@ -565,7 +563,7 @@
     <string name="private_space_auto_lock_title" msgid="8663409382910601261">"Tự động khoá không gian riêng tư"</string>
     <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"Bạn có thể tự động khoá không gian riêng tư của mình nếu không sử dụng thiết bị trong một khoảng thời gian"</string>
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"Mỗi khi khoá thiết bị"</string>
-    <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"Sau 5 phút không hoạt động"</string>
+    <string name="private_space_auto_lock_after_inactivity" msgid="7107814517866649733">"5 phút sau thời gian chờ khoá màn hình"</string>
     <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"Chỉ sau khi khởi động lại thiết bị"</string>
     <string name="private_space_hide_page_title" msgid="3364639176511877414">"Ẩn không gian riêng tư"</string>
     <string name="private_space_hide_when_locked" msgid="6219472348124151797">"Ẩn không gian riêng tư khi không gian này bị khoá"</string>
@@ -1753,7 +1751,7 @@
     <string name="enable_text" msgid="8570798764647110430">"Bật"</string>
     <string name="clear_user_data_text" msgid="6773186434260397947">"Xóa bộ nhớ"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"Gỡ cài đặt bản cập nhật"</string>
-    <string name="app_restricted_settings_lockscreen_title" msgid="796413224212436400">"Cấp quyền bị hạn chế"</string>
+    <string name="app_restricted_settings_lockscreen_title" msgid="5993061278264872648">"Cho phép các chế độ cài đặt bị hạn chế"</string>
     <string name="auto_launch_enable_text" msgid="8912714475823807798">"Theo mặc định, một số hoạt động mà bạn đã chọn sẽ mở trong ứng dụng này."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"Bạn đã chọn cho phép ứng dụng này tạo các tiện ích và truy cập dữ liệu của chúng."</string>
     <string name="auto_launch_disable_text" msgid="502648841250936209">"Chưa đặt mặc định."</string>
@@ -2325,6 +2323,7 @@
     <string name="daltonizer_mode_protanomaly_title" msgid="6392456967103014723">"Đỏ – xanh lục"</string>
     <string name="daltonizer_mode_tritanomaly_title" msgid="2278786218762602022">"Xanh lam – vàng"</string>
     <string name="daltonizer_mode_grayscale_title" msgid="152005391387952588">"Thang màu xám"</string>
+    <string name="daltonizer_saturation_title" msgid="2999486412114963068">"Cường độ"</string>
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="2117727423019598455">"Phân biệt màu lục kém, mù màu xanh lục"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="4617032854982040748">"Phân biệt màu đỏ kém, mù màu đỏ"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Mù màu lam vàng"</string>
@@ -2405,7 +2404,6 @@
     <string name="keywords_select_to_speak" msgid="2872704811610888719"></string>
     <string name="keywords_color_correction" msgid="8540442886990423681">"điều chỉnh màu sắc"</string>
     <string name="keywords_color_inversion" msgid="4291058365873221962">"chuyển sang màn hình tối, chuyển sang màn hình sáng"</string>
-    <string name="keywords_contrast" msgid="4668393735398949873">"độ tương phản màu"</string>
     <string name="keywords_accessibility_menu" msgid="4300579436464706608"></string>
     <string name="keywords_switch_access" msgid="5813094504384313402"></string>
     <string name="keywords_auto_click" msgid="6811744211216280998">"vận động, chuột, chuột gắn ngoài, chuột gắn đầu, chuột thích ứng, xe lăn, cần điều khiển"</string>
@@ -3306,6 +3304,7 @@
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Cài đặt thiết bị được kết nối"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Không có}=1{Đã đặt 1 lịch biểu}other{Đã đặt # lịch biểu}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Không làm phiền"</string>
+    <string name="zen_modes_list_title" msgid="5138745349253275428">"Chế độ ưu tiên"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Chỉ nhận thông báo của những người và ứng dụng quan trọng"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Hạn chế bị gián đoạn"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Bật chế độ Không làm phiền"</string>
@@ -3532,7 +3531,7 @@
     <string name="notifications_sent_daily" msgid="10274479224185437">"{count,plural, =1{Khoảng # thông báo mỗi ngày}other{Khoảng # thông báo mỗi ngày}}"</string>
     <string name="notifications_sent_weekly" msgid="7895656213187555346">"{count,plural, =1{Khoảng # thông báo mỗi tuần}other{Khoảng # thông báo mỗi tuần}}"</string>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Không bao giờ"</string>
-    <string name="manage_notification_access_title" msgid="6481256069087219982">"Thông báo của thiết bị và ứng dụng"</string>
+    <string name="manage_notification_access_title" msgid="4154723216570646451">"Đọc, trả lời và kiểm soát thông báo"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"Kiểm soát những ứng dụng và thiết bị nào có thể đọc thông báo"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8643809206612366067">"Quyền truy cập vào thông báo hồ sơ công việc bị chặn"</string>
     <string name="notification_assistant_title" msgid="5889201903272393099">"Thông báo nâng cao"</string>
@@ -3632,7 +3631,7 @@
     <string name="app_notification_block_summary" msgid="1804611676339341551">"Không bao giờ hiển thị các thông báo này"</string>
     <string name="notification_content_block_title" msgid="6689085826061361351">"Hiện thông báo"</string>
     <string name="notification_content_block_summary" msgid="329171999992248925">"Không bao giờ hiển thị thông báo trong ngăn thông báo hoặc trên thiết bị ngoại vi"</string>
-    <string name="app_notification_fsi_permission_title" msgid="5424116606034705020">"Cho phép thông báo toàn màn hình"</string>
+    <string name="app_notification_fsi_permission_title" msgid="2260977598430154428">"Cho phép thông báo toàn màn hình"</string>
     <string name="app_notification_fsi_permission_summary" msgid="7673487977631068039">"Cho phép thông báo hiện toàn màn hình trong khi thiết bị đang khoá"</string>
     <string name="notification_badge_title" msgid="6854537463548411313">"Cho phép dấu chấm thông báo"</string>
     <string name="notification_channel_badge_title" msgid="6505542437385640049">"Hiện dấu chấm thông báo"</string>
@@ -3981,8 +3980,8 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Cho phép truy cập để quản lý tất cả các tệp"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Cho phép ứng dụng này đọc, sửa đổi và xóa tất cả các tệp trên thiết bị này hoặc bất kỳ thiết bị lưu trữ nào đã kết nối. Nếu bạn cho phép, ứng dụng có thể truy cập vào các tệp mà không cần thông báo rõ ràng cho bạn."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Có thể truy cập vào tất cả các tệp"</string>
-    <string name="full_screen_intent_title" msgid="747270185715224130">"Thông báo toàn màn hình"</string>
-    <string name="permit_full_screen_intent" msgid="9035367640019960861">"Cho phép ứng dụng này hiển thị thông báo toàn màn hình"</string>
+    <string name="full_screen_intent_title" msgid="5888548315628268674">"Thông báo toàn màn hình"</string>
+    <string name="permit_full_screen_intent" msgid="2414307667550523630">"Cho phép ứng dụng này hiện thông báo toàn màn hình"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Cho phép ứng dụng hiển thị các thông báo chiếm toàn màn hình khi thiết bị ở trạng thái khoá. Các ứng dụng có thể dùng những thông báo này để làm nổi bật chuông báo, cuộc gọi đến hoặc thông báo khẩn cấp khác."</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"Ứng dụng quản lý nội dung nghe nhìn"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Cho phép ứng dụng quản lý nội dung nghe nhìn"</string>
@@ -4100,7 +4099,7 @@
     <string name="data_usage_template" msgid="3822452362629968010">"Đã dùng <xliff:g id="ID_1">%1$s</xliff:g> từ <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="configure" msgid="1499586749829665889">"Định cấu hình"</string>
     <string name="data_usage_other_apps" msgid="5649047093607329537">"Những ứng dụng khác được bao gồm trong mức sử dụng"</string>
-    <string name="data_saver_unrestricted_summary" msgid="7343571401172437542">"{count,plural, =1{1 ứng dụng được phép sử dụng dữ liệu không hạn chế khi Trình tiết kiệm dữ liệu ở trạng thái bật}other{# ứng dụng được phép sử dụng dữ liệu không hạn chế khi Trình tiết kiệm dữ liệu ở trạng thái bật}}"</string>
+    <string name="data_saver_unrestricted_summary" msgid="559673440849071149">"{count,plural, =1{1 ứng dụng được phép dùng dữ liệu di động không bị hạn chế khi Trình tiết kiệm dữ liệu đang bật}other{# ứng dụng được phép dùng dữ liệu di động không bị hạn chế khi Trình tiết kiệm dữ liệu đang bật}}"</string>
     <string name="data_usage_title" msgid="4039024073687469094">"Dữ liệu chính"</string>
     <string name="data_usage_wifi_title" msgid="1060495519280456926">"Dữ liệu Wi‑Fi"</string>
     <string name="data_used_formatted" msgid="7913920278059077938">"Đã dùng <xliff:g id="ID_1">^1</xliff:g> <xliff:g id="ID_2">^2</xliff:g>"</string>
@@ -4117,13 +4116,13 @@
     <string name="no_carrier_update_now_text" msgid="7898004907837200752">"Vừa cập nhật xong"</string>
     <string name="launch_wifi_text" msgid="976421974332512894">"Xem chi tiết"</string>
     <string name="data_saver_title" msgid="2593804270788863815">"Trình tiết kiệm dữ liệu"</string>
-    <string name="unrestricted_data_saver" msgid="7922563266857367495">"Dữ liệu không hạn chế"</string>
+    <string name="unrestricted_data_saver" msgid="5913547065342097274">"Dữ liệu di động không bị hạn chế"</string>
     <string name="restrict_background_blocklisted" msgid="2308345280442438232">"Dữ liệu nền đang tắt"</string>
     <string name="data_saver_on" msgid="7848893946018448793">"Đang bật"</string>
     <string name="data_saver_off" msgid="5891210864117269045">"Đang tắt"</string>
     <string name="data_saver_switch_title" msgid="7111538580123722959">"Sử dụng Trình tiết kiệm dữ liệu"</string>
-    <string name="unrestricted_app_title" msgid="7117585996574329284">"Sử dụng dữ liệu không hạn chế"</string>
-    <string name="unrestricted_app_summary" msgid="282698963532000403">"Cho phép sử dụng dữ liệu không hạn chế khi Trình tiết kiệm dữ liệu đang bật"</string>
+    <string name="unrestricted_app_title" msgid="8531936851059106374">"Sử dụng dữ liệu di động không bị hạn chế"</string>
+    <string name="unrestricted_app_summary" msgid="8320813971858627624">"Cho phép sử dụng dữ liệu di động không bị hạn chế khi Trình tiết kiệm dữ liệu đang bật"</string>
     <string name="home_app" msgid="6056850504746902747">"Ứng dụng trên màn hình chính"</string>
     <string name="suggestion_additional_fingerprints" msgid="4726777300101156208">"Thêm một vân tay khác"</string>
     <string name="suggestion_additional_fingerprints_summary" msgid="2825364645039666674">"Mở khóa bằng vân tay khác"</string>
@@ -4197,9 +4196,9 @@
     <string name="notification_suggestion_summary" msgid="7615611244249276113">"Hiển thị hoặc ẩn nội dung thông báo"</string>
     <string name="page_tab_title_support" msgid="3235725053332345773">"Mẹo và hỗ trợ"</string>
     <string name="developer_smallest_width" msgid="632354817870920911">"Độ rộng nhỏ nhất"</string>
-    <string name="premium_sms_none" msgid="8737045049886416739">"Không có ứng dụng đã cài đặt nào yêu cầu quyền truy cập Tin nhắn dịch vụ"</string>
+    <string name="premium_sms_none" msgid="4718916765158062108">"Chưa có ứng dụng đã cài đặt nào yêu cầu truy cập Tin nhắn dịch vụ"</string>
     <string name="premium_sms_warning" msgid="2192300872411073324">"Tin nhắn dịch vụ có thể làm bạn mất tiền và sẽ tính thêm vào hóa đơn nhà mạng của bạn. Nếu bạn bật quyền cho một ứng dụng, bạn sẽ có thể gửi Tin nhắn dịch vụ bằng ứng dụng đó."</string>
-    <string name="premium_sms_access" msgid="5605970342699013212">"Truy cập Tin nhắn dịch vụ"</string>
+    <string name="premium_sms_access" msgid="8487315743197916530">"Tin nhắn dịch vụ"</string>
     <string name="bluetooth_disabled" msgid="835838280837359514">"Tắt"</string>
     <string name="bluetooth_connected_summary" msgid="8043167194934315712">"Đã kết nối với <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="2294954614327771844">"Đã kết nối với nhiều thiết bị"</string>
@@ -4885,7 +4884,7 @@
     <string name="media_controls_show_player" msgid="8504571042365814021">"Hiện trình phát"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"nội dung nghe nhìn"</string>
     <string name="camera_extensions_fallback_title" msgid="3604579046777004989">"Cho phép tiện ích phần mềm camera"</string>
-    <string name="camera_extensions_fallback_description" msgid="4306833827773277263">"Cho phép mặc định triển khai các tính năng phần mềm nâng cao của camera, chẳng hạn như HDR, Ban đêm hoặc các tiện ích camera khác."</string>
+    <string name="camera_extensions_fallback_description" msgid="4306833827773277263">"Cho phép triển khai phần mềm mặc định về các tính năng nâng cao của camera, chẳng hạn như HDR, Ban đêm hoặc các tiện ích camera khác."</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth sẽ bật"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"Internet"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM"</string>
@@ -4990,12 +4989,9 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Tắt chế độ trên máy bay để dùng UWB"</string>
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"UWB (băng tần siêu rộng) không sử dụng được ở vị trí hiện tại"</string>
     <string name="thread_network_settings_title" msgid="4212301030523859220">"Giao thức Thread"</string>
-    <!-- no translation found for thread_network_settings_main_switch_title (3859168481929323474) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_footer_title (7385600318850220927) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_learn_more (8278498005848565050) -->
-    <skip />
+    <string name="thread_network_settings_main_switch_title" msgid="3859168481929323474">"Dùng giao thức Thread"</string>
+    <string name="thread_network_settings_footer_title" msgid="7385600318850220927">"Giao thức Thread giúp kết nối các thiết bị nhà thông minh, tăng cường hiệu quả và hiệu suất.\n\nKhi được bật, thiết bị này đủ điều kiện tham gia vào mạng Thread để có thể kiểm soát các thiết bị được hỗ trợ theo tiêu chuẩn Matter thông qua điện thoại này."</string>
+    <string name="thread_network_settings_learn_more" msgid="8278498005848565050">"Tìm hiểu thêm về giao thức Thread"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"Quyền truy cập camera"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Quyền truy cập vào micrô"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"Áp dụng cho các ứng dụng và dịch vụ"</string>
@@ -5080,12 +5076,12 @@
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"Âm thanh sẽ thay đổi khi bạn di chuyển đầu nhằm mang lại trải nghiệm nghe tự nhiên hơn"</string>
     <string name="bluetooth_details_permissions_sync_title" msgid="7277580382321003521">"Đồng bộ hoá các quyền từ điện thoại"</string>
     <string name="bluetooth_details_permissions_sync_summary" msgid="8125037984381432059">"Cấp quyền cho ứng dụng trên đồng hồ của bạn tương tự như các quyền mà bạn đã cấp trên điện thoại này"</string>
-    <string name="bluetooth_details_audio_device_types_title" msgid="3381941189346781614">"Loại thiết bị âm thanh"</string>
-    <string name="bluetooth_details_audio_device_type_unknown" msgid="839337391037998014">"Không xác định"</string>
+    <string name="bluetooth_details_audio_device_types_title" msgid="1889644189800180316">"Loại thiết bị âm thanh"</string>
+    <string name="bluetooth_details_audio_device_type_unknown" msgid="5299284975435974206">"Chưa được đặt"</string>
     <string name="bluetooth_details_audio_device_type_speaker" msgid="3706227767994792124">"Loa"</string>
     <string name="bluetooth_details_audio_device_type_headphones" msgid="7644588291215033798">"Tai nghe"</string>
-    <string name="bluetooth_details_audio_device_type_hearing_aid" msgid="1310631131071939859">"Thiết bị trợ thính"</string>
-    <string name="bluetooth_details_audio_device_type_carkit" msgid="4439017600454703229">"Bộ công cụ dành cho ô tô"</string>
+    <string name="bluetooth_details_audio_device_type_hearing_aid" msgid="6311786545025321187">"Thiết bị trợ thính"</string>
+    <string name="bluetooth_details_audio_device_type_carkit" msgid="1866236563013629394">"Ô tô"</string>
     <string name="bluetooth_details_audio_device_type_other" msgid="7019481234617207563">"Khác"</string>
     <string name="ingress_rate_limit_title" msgid="2106694002836274350">"Giới hạn tốc độ tải xuống của mạng"</string>
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"Định cấu hình giới hạn tốc độ truy cập băng thông mạng để áp dụng cho tất cả các mạng cung cấp khả năng kết nối Internet."</string>
@@ -5170,8 +5166,6 @@
     <string name="screen_flash_color_violet" msgid="1279950780509029495">"Tím"</string>
     <string name="color_selector_dialog_done" msgid="121253968943363376">"Xong"</string>
     <string name="color_selector_dialog_cancel" msgid="8667350644753900701">"Huỷ"</string>
-    <string name="contrast_title" msgid="6885768151336508075">"Độ tương phản"</string>
-    <string name="contrast_standard" msgid="1097297089917185235">"Chuẩn"</string>
     <string name="contrast_default" msgid="8918545965525226966">"Mặc định"</string>
     <string name="contrast_medium" msgid="384414510709285811">"Vừa"</string>
     <string name="contrast_high" msgid="3988567609694797696">"Cao"</string>
@@ -5208,4 +5202,99 @@
     <string name="fingerprint_acquired_imager_dirty_udfps" msgid="7005042288289506776">"Hãy làm sạch phần màn hình ở gần cảm biến rồi thử lại"</string>
     <string name="sim_category_converted_sim" msgid="8575548015816988908">"Đã chuyển đổi sang eSIM. Hãy tháo và bỏ thẻ SIM."</string>
     <string name="sync_across_devices_title" msgid="3447757705383089345">"Đồng bộ hoá thiết bị"</string>
+    <string name="device_diagnostics_title" msgid="2914523189695727897">"Chẩn đoán thiết bị"</string>
+    <string name="audio_sharing_title" msgid="4144157137502923821">"Chia sẻ âm thanh"</string>
+    <string name="audio_sharing_switch_title" msgid="7052827328670825701">"Chia sẻ âm thanh"</string>
+    <string name="calls_and_alarms_device_title" msgid="6993559028175454198">"Cuộc gọi và chuông báo"</string>
+    <string name="audio_sharing_description" msgid="1660255584523640628">"Hãy để mọi người nghe nội dung đa phương tiện cùng bạn Người nghe cần có tai nghe Âm thanh năng lượng thấp của riêng mình."</string>
+    <string name="audio_sharing_device_group_title" msgid="3019780581643956943">"Thiết bị đa phương tiện đang hoạt động"</string>
+    <string name="audio_sharing_call_audio_title" msgid="7978867452289583929">"Âm thanh cuộc gọi"</string>
+    <string name="audio_sharing_call_audio_description" msgid="6573621048260616924">"Chỉ phát trên <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_sharing_test_sound_title" msgid="6438868185641027763">"Phát thử âm thanh"</string>
+    <string name="audio_sharing_test_sound_description" msgid="4072462502371937399">"Tất cả những ai đang nghe sẽ nghe thấy"</string>
+    <string name="audio_sharing_stream_settings_title" msgid="1374391898689242036">"Chế độ cài đặt luồng âm thanh"</string>
+    <string name="audio_sharing_stream_name_title" msgid="8156859441897180940">"Tên"</string>
+    <string name="audio_sharing_stream_password_title" msgid="7026649168165764602">"Mật khẩu"</string>
+    <string name="audio_sharing_stream_compatibility_title" msgid="5690947186724469918">"Cải thiện khả năng tương thích"</string>
+    <string name="audio_sharing_stream_compatibility_description" msgid="8170241188606110963">"Giúp một số thiết bị (như thiết bị trợ thính) kết nối bằng cách giảm chất lượng âm thanh"</string>
+    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="2586408353546825682">"Tắt tính năng chia sẻ âm thanh để định cấu hình khả năng tương thích"</string>
+    <string name="audio_sharing_nearby_audio_title" msgid="4795438407040677177">"Nghe âm thanh ở gần"</string>
+    <string name="audio_sharing_footer_description" msgid="4786942197840271680">"Tính năng chia sẻ âm thanh có hỗ trợ Auracast™"</string>
+    <string name="audio_sharing_stream_name_dialog_title" msgid="6706027295417556499">"Tên luồng âm thanh"</string>
+    <string name="audio_sharing_stream_password_dialog_title" msgid="4148196538860845705">"Mật khẩu luồng âm thanh"</string>
+    <string name="audio_sharing_media_device_group_title" msgid="4850674234590549565">"Các thiết bị đa phương tiện khác"</string>
+    <string name="audio_sharing_summary_on" msgid="611197542982323788">"Đang bật"</string>
+    <string name="audio_sharing_summary_off" msgid="8833198995257547378">"Đang tắt"</string>
+    <string name="audio_sharing_share_dialog_title" msgid="427514648577553621">"Chia sẻ âm thanh của bạn"</string>
+    <string name="audio_sharing_share_dialog_subtitle" msgid="5208582843732057871">"<xliff:g id="DEVICE_NAME1">%1$s</xliff:g> và <xliff:g id="DEVICE_NAME2">%2$s</xliff:g>"</string>
+    <string name="audio_sharing_share_button_label" msgid="3895900668317105537">"Chia sẻ âm thanh"</string>
+    <string name="audio_sharing_no_thanks_button_label" msgid="5822491984114744357">"Không, cảm ơn"</string>
+    <string name="audio_sharing_share_with_dialog_title" msgid="3934377530640830364">"Chia sẻ âm thanh với <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
+    <string name="audio_sharing_share_with_more_dialog_title" msgid="2840069088858232267">"Chia sẻ âm thanh với một thiết bị khác"</string>
+    <string name="audio_sharing_share_with_button_label" msgid="4146194430380237357">"Chia sẻ với <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_sharing_close_button_label" msgid="2666534149100498574">"Đóng"</string>
+    <string name="audio_sharing_dialog_connect_device_content" msgid="2873230647152283734">"Kết nối một bộ tai nghe tương thích khác, hoặc chia sẻ tên và mật khẩu luồng âm thanh của bạn với người khác"</string>
+    <string name="audio_sharing_dialog_pair_device_content" msgid="3136997898244863470">"Hãy ghép nối một bộ tai nghe tương thích khác hoặc chia sẻ mã QR luồng âm thanh của bạn với người khác"</string>
+    <string name="audio_sharing_sharing_label" msgid="1038021053061111508">"Đang chia sẻ âm thanh"</string>
+    <string name="audio_sharing_pair_button_label" msgid="7987236990273083588">"Ghép nối thiết bị mới"</string>
+    <string name="audio_sharing_qrcode_button_label" msgid="3207039106555097659">"Hiện mã QR"</string>
+    <string name="audio_sharing_notification_title" msgid="1204798942946033005">"Bạn đang chia sẻ âm thanh"</string>
+    <string name="audio_sharing_notification_content" msgid="1577180829878785642">"Những người đang nghe có thể nghe thấy nội dung đa phương tiện của bạn. Họ sẽ không nghe được các cuộc gọi."</string>
+    <string name="audio_sharing_stop_button_label" msgid="8770519671470608849">"Dừng chia sẻ"</string>
+    <string name="audio_sharing_settings_button_label" msgid="8574808650318270491">"Cài đặt"</string>
+    <string name="audio_sharing_disconnect_dialog_title" msgid="2192751727237748602">"Chọn một thiết bị để ngắt kết nối"</string>
+    <string name="audio_sharing_dialog_disconnect_content" msgid="3840488888970653308">"Chỉ 2 thiết bị mới có thể chia sẻ âm thanh cùng lúc"</string>
+    <string name="audio_sharing_disconnect_device_button_label" msgid="4272897217708930576">"Ngắt kết nối <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_sharing_stop_dialog_title" msgid="4872853738164232075">"Kết nối <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ?"</string>
+    <string name="audio_sharing_stop_dialog_content" msgid="6371546856710692910">"Bạn sẽ dừng chia sẻ âm thanh với <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_sharing_stop_dialog_with_two_content" msgid="2119020725467967219">"Bạn sẽ dừng chia sẻ âm thanh với <xliff:g id="DEVICE_NAME1">%1$s</xliff:g> và <xliff:g id="DEVICE_NAME2">%2$s</xliff:g>"</string>
+    <string name="audio_sharing_stop_dialog_with_more_content" msgid="5262441138981618703">"Bạn sẽ dừng chia sẻ âm thanh với những tai nghe đã kết nối"</string>
+    <string name="audio_sharing_connect_button_label" msgid="4241911519063029982">"Kết nối"</string>
+    <string name="audio_sharing_sharing_stopped_label" msgid="8128194452354240996">"Đã dừng chia sẻ âm thanh"</string>
+    <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"Kết nối một thiết bị tương thích"</string>
+    <string name="audio_sharing_comfirm_dialog_content" msgid="3479217934447446066">"Để bắt đầu chia sẻ âm thanh, trước tiên, hãy kết nối tai nghe Âm thanh năng lượng thấp với chiếc điện thoại của bạn"</string>
+    <string name="audio_streams_category_title" msgid="4878022761829895463">"Kết nối với luồng Âm thanh năng lượng thấp"</string>
+    <string name="audio_streams_pref_title" msgid="6320485086288646209">"Luồng âm thanh ở gần"</string>
+    <string name="audio_streams_title" msgid="6617990880383079165">"Luồng âm thanh"</string>
+    <string name="audio_streams_qr_code_summary" msgid="2838923349871884871">"Kết nối với một luồng âm thanh bằng mã QR"</string>
+    <string name="audio_streams_empty" msgid="8803517701437394982">"Không tìm thấy luồng âm thanh ở gần nào."</string>
+    <string name="audio_streams_disconnect" msgid="1755594831469579161">"Ngắt kết nối"</string>
+    <string name="audio_streams_connect" msgid="1955964373102927954">"Kết nối"</string>
+    <string name="audio_streams_qr_code_is_not_valid_format" msgid="4856288389653121830">"Định dạng của mã QR không hợp lệ"</string>
+    <string name="audio_streams_qr_code_scanner" msgid="525396804963685478">"Để bắt đầu nghe, hãy căn sao cho mã QR ở bên dưới nằm chính giữa"</string>
+    <string name="audio_streams_add_source_bad_code_state_summary" msgid="6527086906921868757">"Kiểm tra mật khẩu rồi thử lại"</string>
+    <string name="audio_streams_add_source_failed_state_summary" msgid="3937546443978562322">"Không kết nối được. Vui lòng thử lại."</string>
+    <string name="audio_streams_add_source_wait_for_response_summary" msgid="3763240901110974606">"Đang kết nối…"</string>
+    <string name="audio_streams_wait_for_sync_state_summary" msgid="11905744690831864">"Đang quét…"</string>
+    <string name="audio_streams_dialog_stream_is_not_available" msgid="4032878851270690546">"Không có luồng âm thanh"</string>
+    <string name="audio_streams_is_not_playing" msgid="8480293894696007941">"Luồng âm thanh này hiện không phát nội dung nào"</string>
+    <string name="audio_streams_dialog_close" msgid="8177201719298408431">"Đóng"</string>
+    <string name="audio_streams_dialog_listen" msgid="7290340191504987685">"Nghe"</string>
+    <string name="audio_streams_dialog_retry" msgid="4456843891970998556">"Thử lại"</string>
+    <string name="audio_streams_dialog_listen_to_audio_stream" msgid="8585253007762261528">"Nghe luồng âm thanh"</string>
+    <string name="audio_streams_dialog_control_volume" msgid="7615062686016713544">"Luồng âm thanh sẽ phát trên <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Hãy dùng thiết bị này để điều khiển âm lượng."</string>
+    <string name="audio_streams_dialog_cannot_listen" msgid="4432257183698209966">"Không thể nghe luồng âm thanh"</string>
+    <string name="audio_streams_dialog_default_device" msgid="6159800303379303266">"tai nghe tương thích được kết nối"</string>
+    <string name="audio_streams_activity_title" msgid="9011162151277443663">"Truyền phát"</string>
+    <string name="audio_streams_no_password_summary" msgid="8976357323034830144">"Không có mật khẩu"</string>
+    <string name="audio_streams_dialog_learn_more" msgid="6711241053442211345">"Tìm hiểu thêm"</string>
+    <string name="audio_streams_dialog_cannot_play" msgid="1358828316927479091">"Không phát được luồng âm thanh này trên <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
+    <string name="audio_streams_listening_now" msgid="4205614429222949176">"Đang nghe"</string>
+    <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"Dừng nghe"</string>
+    <string name="audio_streams_dialog_no_le_device_title" msgid="3931163990976742282">"Hãy kết nối tai nghe tương thích"</string>
+    <string name="audio_streams_dialog_no_le_device_button" msgid="4484355549428642588">"Kết nối thiết bị"</string>
+    <string name="audio_streams_detail_page_title" msgid="7884132061275273766">"Thông tin về luồng âm thanh"</string>
+    <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"Mã QR của luồng âm thanh"</string>
+    <string name="audio_streams_qr_code_page_password" msgid="7268475614131297060">"Mật khẩu: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
+    <string name="audio_streams_qr_code_page_description" msgid="1317961663706630428">"Để nghe <xliff:g id="STREAM_NAME">%1$s</xliff:g>, những người khác có thể kết nối tai nghe tương thích với thiết bị Android của họ. Sau đó họ có thể quét mã QR này."</string>
+    <string name="audio_streams_main_page_title" msgid="1838380471076527639">"Tìm một luồng âm thanh"</string>
+    <string name="audio_streams_main_page_subtitle" msgid="3251995732921981539">"Nghe âm thanh do một thiết bị đang chia sẻ hoặc một nguồn phát Auracast ở gần"</string>
+    <string name="audio_streams_main_page_device_title" msgid="2635744035523908253">"Thiết bị âm thanh của bạn"</string>
+    <string name="audio_streams_main_page_no_device_summary" msgid="2936000845397406389">"Hãy kết nối tai nghe tương thích"</string>
+    <string name="audio_streams_main_page_scan_section_title" msgid="2778235929304061163">"Luồng âm thanh gần đây"</string>
+    <string name="audio_streams_main_page_scan_qr_code_title" msgid="8337270277392468895">"Quét mã QR"</string>
+    <string name="audio_streams_main_page_scan_qr_code_summary" msgid="1991792283368249499">"Bắt đầu nghe bằng cách quét mã QR của luồng âm thanh"</string>
+    <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Nghe luồng âm thanh"</string>
+    <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Hãy dùng <xliff:g id="DEVICE_NAME">%1$s</xliff:g> để quét mã QR của luồng âm thanh mà bạn muốn nghe"</string>
+    <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Không thể chỉnh sửa mật khẩu trong khi chia sẻ. Để đổi mật khẩu, trước tiên hãy tắt tính năng chia sẻ âm thanh."</string>
 </resources>

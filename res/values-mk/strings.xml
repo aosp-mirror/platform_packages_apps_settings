@@ -48,9 +48,9 @@
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"Само игри, видеа и друго"</string>
     <string name="selective_stay_awake_summary" msgid="9055967322921984543">"Предниот екран се вклучува за апликациите што го спречуваат вашиот екран да работи при мирување"</string>
     <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Повлечете нагоре за да продолжите"</string>
-    <string name="stay_awake_on_lockscreen_summary" msgid="2299351813382522952">"Затворете го телефонот и повлечете нагоре на предниот екран за да продолжите да ја користите апликацијата или почекајте неколку секунди да се заклучи екранот"</string>
+    <string name="stay_awake_on_lockscreen_summary" msgid="8825321939913726566">"Затворете го телефонот и повлечете нагоре на предниот екран за да продолжите да ја користите апликацијата или почекајте неколку секунди да се заклучи екранот. Апликациите за игри и видеа ќе продолжат автоматски."</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"Никогаш"</string>
-    <string name="sleep_on_fold_summary" msgid="7737992842459588846">"Предниот екран се заклучува кога ќе го преклопите уредот"</string>
+    <string name="sleep_on_fold_summary" msgid="4191753338303043456">"Предниот екран се исклучува и се заклучува кога ќе го затворите уредот"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Користи „Автоматско ротирање“"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"„Откривање лица“ ја користи предната камера за подобрување на прецизноста на автоматското ротирање. Сликите никогаш не се складираат и не се испраќаат во Google."</string>
     <string name="bluetooth" msgid="8898478620943459654">"Bluetooth"</string>
@@ -139,7 +139,6 @@
     <string name="stylus_textfield_handwriting" msgid="2363579035338976327">"Пишување во текстуалните полиња"</string>
     <string name="stylus_ignore_button" msgid="7734540973145241391">"Игнорирај ги сите притискања на копчињата на пенкалото"</string>
     <string name="stylus_connected_devices_title" msgid="2823967577941359812">"Пенкало"</string>
-    <string name="audio_streams_empty" msgid="8803517701437394982">"Не се најдени аудиостримови во близина."</string>
     <string name="date_and_time" msgid="1788358029823431692">"Датум и време"</string>
     <string name="proxy_settings_title" msgid="4201866858226087066">"Прокси"</string>
     <string name="proxy_clear_text" msgid="6529658759984031149">"Избриши"</string>
@@ -286,8 +285,7 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Апликациите со дозвола за пристап до уредите во близина може да ја утврдуваат релативната положба на поврзаните уреди."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Пристапот до локацијата е исклучен за апликации и услуги. Сепак, можно е локацијата на уредот да се испрати до службите за спасување во итни случаи кога ќе ги повикате или кога ќе испратите порака на број за итни случаи."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Дознајте повеќе за „Поставките за локација“"</string>
-    <!-- no translation found for location_settings_tooltip_text_for_chrome (5781821709250544575) -->
-    <skip />
+    <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"За да промените, одете во „Поставките за ChromeOS &gt; Приватност и безбедност &gt; Контроли на приватноста &gt; Пристап до локацијата“"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Сметки"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Безбедност"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Шифрирање и акредитиви"</string>
@@ -565,7 +563,8 @@
     <string name="private_space_auto_lock_title" msgid="8663409382910601261">"Автоматско заклучување на „Приватен простор“"</string>
     <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"Може да го заклучите вашиот „Приватен простор“ автоматски ако не сте го користеле уредот одреден временски период"</string>
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"При секое заклучување на уредот"</string>
-    <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"По неактивност од 5 минути"</string>
+    <!-- no translation found for private_space_auto_lock_after_inactivity (7107814517866649733) -->
+    <skip />
     <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"Само по рестартирање на уредот"</string>
     <string name="private_space_hide_page_title" msgid="3364639176511877414">"Скриј го „Приватниот простор“"</string>
     <string name="private_space_hide_when_locked" msgid="6219472348124151797">"Скриј го „Приватниот простор“ кога е заклучен"</string>
@@ -821,7 +820,7 @@
     <string name="bluetooth_empty_list_bluetooth_off" msgid="7326727272747345476">"Кога е вклучен Bluetooth, уредот може да комуницира со други уреди со Bluetooth во близина"</string>
     <string name="bluetooth_empty_list_bluetooth_off_auto_on_available" msgid="3430864468105204282">"Кога е вклучен Bluetooth, уредот може да комуницира со други уреди со Bluetooth во близина. Функциите како „Брзо споделување“ и „Најди го мојот уред“ користат Bluetooth."</string>
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Кога Bluetooth е вклучен, вашиот уред може да комуницира со другите уреди со Bluetooth во близина.\n\nЗа да се подобри доживувањето со уредот, апликациите и услугите сепак може да скенираат уреди во близина во секое време, дури и кога Bluetooth е исклучен. Ова може да се користи, на пример, за да се подобрат функциите и услугите според локација. Може да го промените во поставките за „Скенирање за Bluetooth“."</string>
-    <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"Кога е вклучен Bluetooth, уредот може да комуницира со други уреди со Bluetooth во близина. Функциите како „Брзо споделување“ и „Најди го мојот уред“ користат Bluetooth.\n\nАпликациите и услугите сѐ уште може да скенираат уреди во близина во секое време, дури и кога е исклучен Bluetooth. На пример, ова може да се користи за да се подобрат функциите и услугите според локација. Ова може да го промените во поставките за скенирање за Bluetooth."</string>
+    <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"Кога е вклучен Bluetooth, уредот може да комуницира со други уреди со Bluetooth во близина. Функциите како „Брзо споделување“ и „Најди го мојот уред“ користат Bluetooth.\n\nАпликациите и услугите може да скенираат за уреди во близина во секое време, дури и кога е исклучен Bluetooth. Ова може да се користи, на пример, за да се подобрат функциите и услугите според локација. Ова може да го промените во поставките за скенирање за Bluetooth."</string>
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"Промени"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Детали за уредот"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Поставки за тастатурата"</string>
@@ -1753,7 +1752,7 @@
     <string name="enable_text" msgid="8570798764647110430">"Овозможи"</string>
     <string name="clear_user_data_text" msgid="6773186434260397947">"Избриши ги податоците"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"Деинсталирај ажурирања"</string>
-    <string name="app_restricted_settings_lockscreen_title" msgid="796413224212436400">"Дозволете ограничени дозволи"</string>
+    <string name="app_restricted_settings_lockscreen_title" msgid="5993061278264872648">"Дозволете ограничени поставки"</string>
     <string name="auto_launch_enable_text" msgid="8912714475823807798">"Некои од активностите што ги избравте стандардно се отвораат во апликацијава."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"Сте одбрале да ѝ дозволите за апликацијата да создава виџети и да пристапува кон нивните податоци."</string>
     <string name="auto_launch_disable_text" msgid="502648841250936209">"Нема поставени стандардни вредности."</string>
@@ -2325,6 +2324,8 @@
     <string name="daltonizer_mode_protanomaly_title" msgid="6392456967103014723">"Црвена и зелена"</string>
     <string name="daltonizer_mode_tritanomaly_title" msgid="2278786218762602022">"Сина и жолта"</string>
     <string name="daltonizer_mode_grayscale_title" msgid="152005391387952588">"Сиви тонови"</string>
+    <!-- no translation found for daltonizer_saturation_title (2999486412114963068) -->
+    <skip />
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="2117727423019598455">"Слаба зелена, девтераномалија"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="4617032854982040748">"Слаба црвена, протаномалија"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Тританомалија"</string>
@@ -2405,7 +2406,6 @@
     <string name="keywords_select_to_speak" msgid="2872704811610888719"></string>
     <string name="keywords_color_correction" msgid="8540442886990423681">"приспособи боја"</string>
     <string name="keywords_color_inversion" msgid="4291058365873221962">"вклучување темен екран, вклучување светол екран"</string>
-    <string name="keywords_contrast" msgid="4668393735398949873">"контраст на бојата"</string>
     <string name="keywords_accessibility_menu" msgid="4300579436464706608"></string>
     <string name="keywords_switch_access" msgid="5813094504384313402"></string>
     <string name="keywords_auto_click" msgid="6811744211216280998">"подвижност, глувче, надворешно глувче, специјално глувче, адаптивно глувче, инвалидска количка, џојстик"</string>
@@ -2684,13 +2684,13 @@
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"Вклучено"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"Исклучено"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Користи „Адаптивно поврзување“"</string>
-    <string name="cellular_security_title" msgid="5562899485544677941">"Безбедност на мобилна мрежа"</string>
+    <string name="cellular_security_title" msgid="5562899485544677941">"Безбедност на мобилната мрежа"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"Тип мрежа, шифрирање, контроли за известувања"</string>
-    <string name="cellular_security_top_intro" msgid="6749166804080092892">"Овие поставки помагаат да се заштитат вашите повици, пораки и податоци од застарени или нешифрирани мрежи што може да доведат до кражба или надзор на податоците"</string>
-    <string name="cellular_security_settings_title" msgid="7779141923670352595">"Безбедност на мобилна мрежа"</string>
+    <string name="cellular_security_top_intro" msgid="6749166804080092892">"Овие поставки помагаат да се заштитат вашите повици, пораки и податоци од застарени или нешифрирани мрежи што може да ве изложат на ризик од кражба на податоците или надзор"</string>
+    <string name="cellular_security_settings_title" msgid="7779141923670352595">"Безбедност на мобилната мрежа"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"Известувања"</string>
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"Известувања за мрежата"</string>
-    <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"Добијте известување кога вашиот уред ќе се поврзе на нешифрирана мрежа или кога мрежата ќе го снима уникатниот ID на уредот или на SIM-картичката"</string>
+    <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"Добивајте известувања кога вашиот уред ќе се поврзе на нешифрирана мрежа или кога мрежата ќе го евидентира уникатниот ID на уредот или на SIM-картичката"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"Шифрирање"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"Генерации на мрежата"</string>
     <string name="cellular_security_network_generations_summary" msgid="139087814553929402">"Може да ја конфигурирате секоја инсталирана SIM-картичка да се поврзува само на мрежи што поддржуваат 3G, 4G и 5G. SIM-картичката нема да се поврзува на постари, небезбедни 2G-мрежи. Оваа поставка може да ви ја ограничи поврзливоста во случаите кога единствената достапна мрежа е 2G. Во итни случаи, може да се користи 2G."</string>
@@ -3306,6 +3306,8 @@
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Поставки за поврзани уреди"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Ниеден}=1{Поставен е 1 распоред}one{Поставен е # распоред}other{Поставени се # распореди}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Не вознемирувај"</string>
+    <!-- no translation found for zen_modes_list_title (5138745349253275428) -->
+    <skip />
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Добивајте известувања само од важни луѓе и апликации"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Ограничете ги прекините"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Исклучување на „Не вознемирувај“"</string>
@@ -3532,7 +3534,7 @@
     <string name="notifications_sent_daily" msgid="10274479224185437">"{count,plural, =1{Околу # известување дневно}one{Околу # известување дневно}other{Околу # известувања дневно}}"</string>
     <string name="notifications_sent_weekly" msgid="7895656213187555346">"{count,plural, =1{Околу # известување седмично}one{Околу # известување седмично}other{Околу # известувања седмично}}"</string>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Никогаш"</string>
-    <string name="manage_notification_access_title" msgid="6481256069087219982">"Известувања од уредот и апликациите"</string>
+    <string name="manage_notification_access_title" msgid="4154723216570646451">"Читање, одговарање и контролирање на известувањата"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"Контролирајте кои апликации и уреди може да ги читаат известувањата"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8643809206612366067">"Пристапот до известувањата на работниот профил е блокиран"</string>
     <string name="notification_assistant_title" msgid="5889201903272393099">"Подобрени известувања"</string>
@@ -3632,7 +3634,7 @@
     <string name="app_notification_block_summary" msgid="1804611676339341551">"Никогаш не прикажувај ги известувањава"</string>
     <string name="notification_content_block_title" msgid="6689085826061361351">"Прикажувај известувања"</string>
     <string name="notification_content_block_summary" msgid="329171999992248925">"Никогаш не прикажувај известувања во сенка или на периферни уреди"</string>
-    <string name="app_notification_fsi_permission_title" msgid="5424116606034705020">"Дозволете известувања на цел екран"</string>
+    <string name="app_notification_fsi_permission_title" msgid="2260977598430154428">"Дозволи известувања на цел екран"</string>
     <string name="app_notification_fsi_permission_summary" msgid="7673487977631068039">"Дозволете известувањата да го заземаат целиот екран кога уредот е заклучен"</string>
     <string name="notification_badge_title" msgid="6854537463548411313">"Дозволи точка за известување"</string>
     <string name="notification_channel_badge_title" msgid="6505542437385640049">"Прикажувај точка за известување"</string>
@@ -3981,8 +3983,8 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Дозволи пристап за управување со сите датотеки"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Дозволете апликацијава да ги чита, менува и брише сите датотеки на уредов или на поврзаните мемориски уреди. Ако се дозволи, апликацијата може да пристапува до датотеките без ваше изречно знаење."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Може да пристапува до сите датотеки"</string>
-    <string name="full_screen_intent_title" msgid="747270185715224130">"Известувања на цел екран"</string>
-    <string name="permit_full_screen_intent" msgid="9035367640019960861">"Дозволи известувања на цел екран од апликацијава"</string>
+    <string name="full_screen_intent_title" msgid="5888548315628268674">"Известувања на цел екран"</string>
+    <string name="permit_full_screen_intent" msgid="2414307667550523630">"Дозволи известувања на цел екран од апликацијава"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Дозволете апликацијава да прикажува известувања што го заземаат целиот екран кога уредот е заклучен. Апликациите може да ги користат овие известувања за да ги истакнуваат алармите, дојдовните повици или други итни известувања."</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"Апликации за управување со содржини"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Дозволи апликацијата да управува со аудиовизуелни содржини"</string>
@@ -4100,7 +4102,7 @@
     <string name="data_usage_template" msgid="3822452362629968010">"Потрошено: <xliff:g id="ID_1">%1$s</xliff:g> (<xliff:g id="ID_2">%2$s</xliff:g>)"</string>
     <string name="configure" msgid="1499586749829665889">"Конфигурирај"</string>
     <string name="data_usage_other_apps" msgid="5649047093607329537">"Други апликации вклучени во употребата"</string>
-    <string name="data_saver_unrestricted_summary" msgid="7343571401172437542">"{count,plural, =1{1 апликација има дозвола да користи неограничен мобилен интернет кога е вклучен „Штедачот на интернет“}one{# апликација имаат дозвола да користат неограничен мобилен интернет кога е вклучен „Штедачот на интернет“}other{# апликации имаат дозвола да користат неограничен мобилен интернет кога е вклучен „Штедачот на интернет“}}"</string>
+    <string name="data_saver_unrestricted_summary" msgid="559673440849071149">"{count,plural, =1{1 апликација има дозвола да користи неограничен мобилен интернет кога е вклучена „Штедач на интернет“}one{# апликација имаат дозвола да користат неограничен мобилен интернет кога е вклучена „Штедач на интернет“}other{# апликации имаат дозвола да користат неограничен мобилен интернет кога е вклучена „Штедач на интернет“}}"</string>
     <string name="data_usage_title" msgid="4039024073687469094">"Примарни податоци"</string>
     <string name="data_usage_wifi_title" msgid="1060495519280456926">"Wi‑Fi-сообраќај"</string>
     <string name="data_used_formatted" msgid="7913920278059077938">"Потрошено: <xliff:g id="ID_1">^1</xliff:g> <xliff:g id="ID_2">^2</xliff:g>"</string>
@@ -4117,13 +4119,13 @@
     <string name="no_carrier_update_now_text" msgid="7898004907837200752">"Се ажурираше пред малку."</string>
     <string name="launch_wifi_text" msgid="976421974332512894">"Прикажи ги деталите"</string>
     <string name="data_saver_title" msgid="2593804270788863815">"Штедач на интернет"</string>
-    <string name="unrestricted_data_saver" msgid="7922563266857367495">"Неограничен мобилен интернет"</string>
+    <string name="unrestricted_data_saver" msgid="5913547065342097274">"Неограничен мобилен интернет"</string>
     <string name="restrict_background_blocklisted" msgid="2308345280442438232">"Интернетот во заднина е исклучен"</string>
     <string name="data_saver_on" msgid="7848893946018448793">"Вклучено"</string>
     <string name="data_saver_off" msgid="5891210864117269045">"Исклучено"</string>
     <string name="data_saver_switch_title" msgid="7111538580123722959">"Користи „Штедач на интернет“"</string>
-    <string name="unrestricted_app_title" msgid="7117585996574329284">"Неограничен мобилен интернет"</string>
-    <string name="unrestricted_app_summary" msgid="282698963532000403">"Дозволи неограничен пристап до мобилен интернет кога е вклучен „Штедач на интернет“"</string>
+    <string name="unrestricted_app_title" msgid="8531936851059106374">"Користење неограничен мобилен интернет"</string>
+    <string name="unrestricted_app_summary" msgid="8320813971858627624">"Дозволи пристап до неограничен мобилен интернет кога е вклучен „Штедачот на интернет“"</string>
     <string name="home_app" msgid="6056850504746902747">"Почетна апликација"</string>
     <string name="suggestion_additional_fingerprints" msgid="4726777300101156208">"Додајте уште еден отпечаток"</string>
     <string name="suggestion_additional_fingerprints_summary" msgid="2825364645039666674">"Отклучувајте со друг прст"</string>
@@ -4197,9 +4199,9 @@
     <string name="notification_suggestion_summary" msgid="7615611244249276113">"Прикажете или сокријте содржина на известување"</string>
     <string name="page_tab_title_support" msgid="3235725053332345773">"Совети и поддршка"</string>
     <string name="developer_smallest_width" msgid="632354817870920911">"Најмала ширина"</string>
-    <string name="premium_sms_none" msgid="8737045049886416739">"Ниедна од инсталираните апликации не побара пристап до премиум SMS"</string>
+    <string name="premium_sms_none" msgid="4718916765158062108">"Ниедна од инсталираните апликации не побара премиум SMS"</string>
     <string name="premium_sms_warning" msgid="2192300872411073324">"Премиум SMS може да ве чини пари, а сумата ќе се додаде на сметките од операторот. Ако овозможите дозвола за апликацијата, ќе може да испраќате премиум SMS со неа."</string>
-    <string name="premium_sms_access" msgid="5605970342699013212">"Пристап до премиум SMS"</string>
+    <string name="premium_sms_access" msgid="8487315743197916530">"Премиум SMS"</string>
     <string name="bluetooth_disabled" msgid="835838280837359514">"Исклучено"</string>
     <string name="bluetooth_connected_summary" msgid="8043167194934315712">"Поврзан со <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="2294954614327771844">"Поврзан со повеќе уреди"</string>
@@ -4978,8 +4980,8 @@
     <string name="enable_2g_title" msgid="8184757884636162942">"Дозволи 2G"</string>
     <string name="enable_2g_summary" msgid="2794534052372565914">"2G е помалку безбедна, но може да ја подобри врската на некои локации. За итни повици, 2G е секогаш дозволена."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> има потреба од 2G за да биде достапен"</string>
-    <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Овозможи ги само шифрираните мрежи"</string>
-    <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"Ова е побезбедно, но може да ја ограничи врската на вашата мобилна мрежа на некои локации. Итните повици се секогаш дозволени."</string>
+    <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Дозволи само шифрирани мрежи"</string>
+    <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"Ова е побезбедно, но може да ја ограничи врската со мобилната мрежа на некои локации. Итните повици се секогаш дозволени."</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Сите услуги"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Известувај за пристап до привремената меморија"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Нека се прикажува известување кога апликациите пристапуваат до текст, слики или други содржини што сте ги копирале"</string>
@@ -4990,12 +4992,9 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Исклучете „Авионски режим“ за да користите UWB"</string>
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"UWB е недостапен на тековната локација"</string>
     <string name="thread_network_settings_title" msgid="4212301030523859220">"Thread"</string>
-    <!-- no translation found for thread_network_settings_main_switch_title (3859168481929323474) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_footer_title (7385600318850220927) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_learn_more (8278498005848565050) -->
-    <skip />
+    <string name="thread_network_settings_main_switch_title" msgid="3859168481929323474">"Користете Thread"</string>
+    <string name="thread_network_settings_footer_title" msgid="7385600318850220927">"Thread помага да ги поврзете вашите уреди за паметен дом, зголемувајќи ја ефикасноста и изведбата.\n\nКога е овозможен, уредов може да се приклучи на мрежата на Thread, што овозможува контрола на уредите што поддржуваат Matter преку телефонов."</string>
+    <string name="thread_network_settings_learn_more" msgid="8278498005848565050">"Дознајте повеќе за Thread"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"Пристап до камерата"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Пристап до микрофонот"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"За апликации и услуги"</string>
@@ -5080,12 +5079,12 @@
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"Звукот се менува како што ја движите главата за да звучи поприродно"</string>
     <string name="bluetooth_details_permissions_sync_title" msgid="7277580382321003521">"Синхронизирајте ги дозволите од телефонот"</string>
     <string name="bluetooth_details_permissions_sync_summary" msgid="8125037984381432059">"Дајте му ги на вашиот часовник истите дозволи за апликацијата што сте ги дале на телефонов"</string>
-    <string name="bluetooth_details_audio_device_types_title" msgid="3381941189346781614">"Тип аудиоуред"</string>
-    <string name="bluetooth_details_audio_device_type_unknown" msgid="839337391037998014">"Непознато"</string>
+    <string name="bluetooth_details_audio_device_types_title" msgid="1889644189800180316">"Тип аудиоуред"</string>
+    <string name="bluetooth_details_audio_device_type_unknown" msgid="5299284975435974206">"Не е поставено"</string>
     <string name="bluetooth_details_audio_device_type_speaker" msgid="3706227767994792124">"Звучник"</string>
     <string name="bluetooth_details_audio_device_type_headphones" msgid="7644588291215033798">"Слушалки"</string>
-    <string name="bluetooth_details_audio_device_type_hearing_aid" msgid="1310631131071939859">"Слушно помагало"</string>
-    <string name="bluetooth_details_audio_device_type_carkit" msgid="4439017600454703229">"Комплет за автомобил"</string>
+    <string name="bluetooth_details_audio_device_type_hearing_aid" msgid="6311786545025321187">"Слушен апарат"</string>
+    <string name="bluetooth_details_audio_device_type_carkit" msgid="1866236563013629394">"Автомобил"</string>
     <string name="bluetooth_details_audio_device_type_other" msgid="7019481234617207563">"Друго"</string>
     <string name="ingress_rate_limit_title" msgid="2106694002836274350">"Ограничување за мрежна брзина на преземање"</string>
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"Конфигурирајте го ограничувањето за брзина на пристап до мрежата што ќе се примени на сите мрежи што овозможуваат поврзување на интернет."</string>
@@ -5170,11 +5169,9 @@
     <string name="screen_flash_color_violet" msgid="1279950780509029495">"Виолетова"</string>
     <string name="color_selector_dialog_done" msgid="121253968943363376">"Готово"</string>
     <string name="color_selector_dialog_cancel" msgid="8667350644753900701">"Откажи"</string>
-    <string name="contrast_title" msgid="6885768151336508075">"Контраст"</string>
-    <string name="contrast_standard" msgid="1097297089917185235">"Стандарден"</string>
     <string name="contrast_default" msgid="8918545965525226966">"Стандардно"</string>
-    <string name="contrast_medium" msgid="384414510709285811">"Среден"</string>
-    <string name="contrast_high" msgid="3988567609694797696">"Висок"</string>
+    <string name="contrast_medium" msgid="384414510709285811">"Средно"</string>
+    <string name="contrast_high" msgid="3988567609694797696">"Високо"</string>
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"Апликацијава може да се отвори само во еден прозорец"</string>
     <string name="generic_accessibility_service_on" msgid="4466229372357726824">"Вклучено"</string>
     <string name="generic_accessibility_service_off" msgid="4759859497651675724">"Исклучено"</string>
@@ -5208,4 +5205,100 @@
     <string name="fingerprint_acquired_imager_dirty_udfps" msgid="7005042288289506776">"Исчистете го екранот во близина на сензорот и обидете се повторно"</string>
     <string name="sim_category_converted_sim" msgid="8575548015816988908">"Конвертирано во eSIM. Отстранете и отфрлете."</string>
     <string name="sync_across_devices_title" msgid="3447757705383089345">"Синхронизирајте на уредите"</string>
+    <!-- no translation found for device_diagnostics_title (2914523189695727897) -->
+    <skip />
+    <string name="audio_sharing_title" msgid="4144157137502923821">"Споделување аудио"</string>
+    <string name="audio_sharing_switch_title" msgid="7052827328670825701">"Споделете го аудиото"</string>
+    <string name="calls_and_alarms_device_title" msgid="6993559028175454198">"Повици и аларми"</string>
+    <string name="audio_sharing_description" msgid="1660255584523640628">"Дозволете им на луѓето да ги слушаат аудиовизуелните содржини заедно со вас. Слушателите треба да имаат сопствени слушалки со LE Audio."</string>
+    <string name="audio_sharing_device_group_title" msgid="3019780581643956943">"Активни преносливи уреди"</string>
+    <string name="audio_sharing_call_audio_title" msgid="7978867452289583929">"Аудио од повик"</string>
+    <string name="audio_sharing_call_audio_description" msgid="6573621048260616924">"Пушти само на <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_sharing_test_sound_title" msgid="6438868185641027763">"Пуштете пробен звук"</string>
+    <string name="audio_sharing_test_sound_description" msgid="4072462502371937399">"Секој што слуша треба да го слушне"</string>
+    <string name="audio_sharing_stream_settings_title" msgid="1374391898689242036">"Поставки за аудиостримот"</string>
+    <string name="audio_sharing_stream_name_title" msgid="8156859441897180940">"Име"</string>
+    <string name="audio_sharing_stream_password_title" msgid="7026649168165764602">"Лозинка"</string>
+    <string name="audio_sharing_stream_compatibility_title" msgid="5690947186724469918">"Подобрете ја компатибилноста"</string>
+    <string name="audio_sharing_stream_compatibility_description" msgid="8170241188606110963">"Им помага на некои уреди, како слушните помагала, да се поврзат, така што го намалува квалитетот на звукот"</string>
+    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="2586408353546825682">"Го исклучува споделувањето аудио за да ја конфигурира компатибилноста"</string>
+    <string name="audio_sharing_nearby_audio_title" msgid="4795438407040677177">"Слушајте аудио во близина"</string>
+    <string name="audio_sharing_footer_description" msgid="4786942197840271680">"Споделувањето аудио поддржува Auracast™"</string>
+    <string name="audio_sharing_stream_name_dialog_title" msgid="6706027295417556499">"Име на аудиостримот"</string>
+    <string name="audio_sharing_stream_password_dialog_title" msgid="4148196538860845705">"Лозинка на аудиостримот"</string>
+    <string name="audio_sharing_media_device_group_title" msgid="4850674234590549565">"Други преносливи уреди"</string>
+    <string name="audio_sharing_summary_on" msgid="611197542982323788">"Вклучено"</string>
+    <string name="audio_sharing_summary_off" msgid="8833198995257547378">"Исклучено"</string>
+    <string name="audio_sharing_share_dialog_title" msgid="427514648577553621">"Споделете го аудиото"</string>
+    <string name="audio_sharing_share_dialog_subtitle" msgid="5208582843732057871">"<xliff:g id="DEVICE_NAME1">%1$s</xliff:g> и <xliff:g id="DEVICE_NAME2">%2$s</xliff:g>"</string>
+    <string name="audio_sharing_share_button_label" msgid="3895900668317105537">"Сподели аудио"</string>
+    <string name="audio_sharing_no_thanks_button_label" msgid="5822491984114744357">"Не, фала"</string>
+    <string name="audio_sharing_share_with_dialog_title" msgid="3934377530640830364">"Да се сподели аудио со <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
+    <string name="audio_sharing_share_with_more_dialog_title" msgid="2840069088858232267">"Споделете аудио со друг уред"</string>
+    <string name="audio_sharing_share_with_button_label" msgid="4146194430380237357">"Сподели со <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_sharing_close_button_label" msgid="2666534149100498574">"Затвори"</string>
+    <string name="audio_sharing_dialog_connect_device_content" msgid="2873230647152283734">"Поврзете друг пар компатибилни слушалки или споделете ги името и лозинката на вашиот стрим со другото лице"</string>
+    <string name="audio_sharing_dialog_pair_device_content" msgid="3136997898244863470">"Спарете други компатибилни слушалки или споделете го QR-кодот на вашиот аудиострим со другото лице"</string>
+    <string name="audio_sharing_sharing_label" msgid="1038021053061111508">"Се споделува аудио"</string>
+    <string name="audio_sharing_pair_button_label" msgid="7987236990273083588">"Спари нов уред"</string>
+    <string name="audio_sharing_qrcode_button_label" msgid="3207039106555097659">"Прикажи QR-код"</string>
+    <string name="audio_sharing_notification_title" msgid="1204798942946033005">"Споделувате аудио"</string>
+    <string name="audio_sharing_notification_content" msgid="1577180829878785642">"Луѓето што слушаат може да ги слушнат вашите аудиовизуелни содржини. Нема да ги слушнат повиците."</string>
+    <string name="audio_sharing_stop_button_label" msgid="8770519671470608849">"Сопри споделување"</string>
+    <string name="audio_sharing_settings_button_label" msgid="8574808650318270491">"Поставки"</string>
+    <string name="audio_sharing_disconnect_dialog_title" msgid="2192751727237748602">"Изберете уред за прекинување на врската"</string>
+    <string name="audio_sharing_dialog_disconnect_content" msgid="3840488888970653308">"Аудио може да споделуваат само 2 уреда истовремено"</string>
+    <string name="audio_sharing_disconnect_device_button_label" msgid="4272897217708930576">"Прекини ја врската со <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_sharing_stop_dialog_title" msgid="4872853738164232075">"Да се поврзе <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
+    <string name="audio_sharing_stop_dialog_content" msgid="6371546856710692910">"Ќе сопрете со споделување аудио со <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_sharing_stop_dialog_with_two_content" msgid="2119020725467967219">"Ќе сопрете со споделување аудио со <xliff:g id="DEVICE_NAME1">%1$s</xliff:g> и <xliff:g id="DEVICE_NAME2">%2$s</xliff:g>"</string>
+    <string name="audio_sharing_stop_dialog_with_more_content" msgid="5262441138981618703">"Ќе сопрете со споделување аудио со поврзаните слушалки"</string>
+    <string name="audio_sharing_connect_button_label" msgid="4241911519063029982">"Поврзи"</string>
+    <string name="audio_sharing_sharing_stopped_label" msgid="8128194452354240996">"Споделувањето аудио сопре"</string>
+    <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"Поврзете компатибилен уред"</string>
+    <string name="audio_sharing_comfirm_dialog_content" msgid="3479217934447446066">"За да започнете да споделувате аудио, прво поврзете ги слушалките со LE Audio на вашиот телефон"</string>
+    <string name="audio_streams_category_title" msgid="4878022761829895463">"Поврзете се со стрим на LE Audio"</string>
+    <string name="audio_streams_pref_title" msgid="6320485086288646209">"Аудиостримови во близина"</string>
+    <string name="audio_streams_title" msgid="6617990880383079165">"Аудиостримови"</string>
+    <string name="audio_streams_qr_code_summary" msgid="2838923349871884871">"Поврзете се со аудиострим со QR-код"</string>
+    <string name="audio_streams_empty" msgid="8803517701437394982">"Не се најдени аудиостримови во близина."</string>
+    <string name="audio_streams_disconnect" msgid="1755594831469579161">"Прекинете ја врската"</string>
+    <string name="audio_streams_connect" msgid="1955964373102927954">"Поврзете"</string>
+    <string name="audio_streams_qr_code_is_not_valid_format" msgid="4856288389653121830">"Форматот на QR-кодот е неважечки"</string>
+    <string name="audio_streams_qr_code_scanner" msgid="525396804963685478">"За да започне слушањето, центрирајте го QR-кодот долу"</string>
+    <string name="audio_streams_add_source_bad_code_state_summary" msgid="6527086906921868757">"Проверете ја лозинката и обидете се повторно"</string>
+    <string name="audio_streams_add_source_failed_state_summary" msgid="3937546443978562322">"Не може да се поврзе. Обидете се повторно."</string>
+    <string name="audio_streams_add_source_wait_for_response_summary" msgid="3763240901110974606">"Се поврзува…"</string>
+    <string name="audio_streams_wait_for_sync_state_summary" msgid="11905744690831864">"Се скенира…"</string>
+    <string name="audio_streams_dialog_stream_is_not_available" msgid="4032878851270690546">"Аудиостримот не е достапен"</string>
+    <string name="audio_streams_is_not_playing" msgid="8480293894696007941">"Аудиостримов не пушта ништо во моментов"</string>
+    <string name="audio_streams_dialog_close" msgid="8177201719298408431">"Затвори"</string>
+    <string name="audio_streams_dialog_listen" msgid="7290340191504987685">"Слушајте"</string>
+    <string name="audio_streams_dialog_retry" msgid="4456843891970998556">"Обиди се повторно"</string>
+    <string name="audio_streams_dialog_listen_to_audio_stream" msgid="8585253007762261528">"Слушајте го аудиостримот"</string>
+    <string name="audio_streams_dialog_control_volume" msgid="7615062686016713544">"Аудиостримот ќе се пушти на <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Користете го уредов за да ја контролирате јачината на звукот."</string>
+    <string name="audio_streams_dialog_cannot_listen" msgid="4432257183698209966">"Не може да се слуша аудиостримот"</string>
+    <string name="audio_streams_dialog_default_device" msgid="6159800303379303266">"поврзани компатибилни слушалки"</string>
+    <string name="audio_streams_activity_title" msgid="9011162151277443663">"Емитувања"</string>
+    <string name="audio_streams_no_password_summary" msgid="8976357323034830144">"Без лозинка"</string>
+    <string name="audio_streams_dialog_learn_more" msgid="6711241053442211345">"Дознајте повеќе"</string>
+    <string name="audio_streams_dialog_cannot_play" msgid="1358828316927479091">"Аудиостримов не може да се пушти на <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
+    <string name="audio_streams_listening_now" msgid="4205614429222949176">"Слушајте сега"</string>
+    <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"Сопрете со слушање"</string>
+    <string name="audio_streams_dialog_no_le_device_title" msgid="3931163990976742282">"Поврзете компатибилни слушалки"</string>
+    <string name="audio_streams_dialog_no_le_device_button" msgid="4484355549428642588">"Поврзете уред"</string>
+    <string name="audio_streams_detail_page_title" msgid="7884132061275273766">"Детали за аудиостримот"</string>
+    <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"QR-код на аудиостримот"</string>
+    <string name="audio_streams_qr_code_page_password" msgid="7268475614131297060">"Лозинка: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
+    <string name="audio_streams_qr_code_page_description" msgid="1317961663706630428">"За слушање на стримот <xliff:g id="STREAM_NAME">%1$s</xliff:g>, други луѓе може да поврзат компатибилни слушалки на нивниот уред со Android. Потоа може да го скенираат QR-кодов."</string>
+    <string name="audio_streams_main_page_title" msgid="1838380471076527639">"Најдете аудиострим"</string>
+    <string name="audio_streams_main_page_subtitle" msgid="3251995732921981539">"Слушајте уред што споделува аудио или емитување на Auracast во близина"</string>
+    <string name="audio_streams_main_page_device_title" msgid="2635744035523908253">"Вашиот аудиоуред"</string>
+    <string name="audio_streams_main_page_no_device_summary" msgid="2936000845397406389">"Поврзете компатибилни слушалки"</string>
+    <string name="audio_streams_main_page_scan_section_title" msgid="2778235929304061163">"Аудиостримови во близина"</string>
+    <string name="audio_streams_main_page_scan_qr_code_title" msgid="8337270277392468895">"Скенирајте QR-код"</string>
+    <string name="audio_streams_main_page_scan_qr_code_summary" msgid="1991792283368249499">"Започнете да слушате со скенирање на QR-кодот на стримот"</string>
+    <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Слушнете го стримот"</string>
+    <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Скенирајте го QR-кодот на аудиостримот за да слушате со <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Лозинката не може да се измени додека се споделува. За промена на лозинката, прво исклучете го споделувањето аудио."</string>
 </resources>

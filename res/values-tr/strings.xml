@@ -48,9 +48,9 @@
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"Yalnızca oyunlar, videolar ve daha fazlası"</string>
     <string name="selective_stay_awake_summary" msgid="9055967322921984543">"Ön ekran, ekranınızın boşta kalmasını engelleyen uygulamalar için açılır"</string>
     <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Devam etmek için yukarı kaydırın"</string>
-    <string name="stay_awake_on_lockscreen_summary" msgid="2299351813382522952">"Uygulamayı kullanmaya devam etmek için telefonunuzu katlayıp ön ekranda yukarı kaydırın veya ekranın kilitlenmesi için birkaç saniye bekleyin"</string>
+    <string name="stay_awake_on_lockscreen_summary" msgid="8825321939913726566">"Uygulamayı kullanmaya devam etmek için telefonunuzu katlayıp ön ekranda yukarı kaydırın veya ekranın kilitlenmesi için birkaç saniye bekleyin. Oyunlar ve video uygulamaları otomatik olarak devam eder."</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"Hiçbir zaman"</string>
-    <string name="sleep_on_fold_summary" msgid="7737992842459588846">"Ön ekran, cihazınızı katladığınızda kilitlenir"</string>
+    <string name="sleep_on_fold_summary" msgid="4191753338303043456">"Cihazınızı katladığınızda ön ekran kapanır ve kilitlenir."</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Otomatik döndürmeyi kullan"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"Yüz Algılama işlevi, otomatik döndürme doğruluğunu iyileştirmek için ön kamerayı kullanır. Görüntüler hiçbir zaman saklanmaz veya Google\'a gönderilmez."</string>
     <string name="bluetooth" msgid="8898478620943459654">"Bluetooth"</string>
@@ -139,7 +139,6 @@
     <string name="stylus_textfield_handwriting" msgid="2363579035338976327">"Metin alanlarına yaz"</string>
     <string name="stylus_ignore_button" msgid="7734540973145241391">"Ekran kalemiyle basılan düğmeleri yoksay"</string>
     <string name="stylus_connected_devices_title" msgid="2823967577941359812">"Ekran kalemi"</string>
-    <string name="audio_streams_empty" msgid="8803517701437394982">"Yakında ses akışı bulunamadı."</string>
     <string name="date_and_time" msgid="1788358029823431692">"Tarih ve saat"</string>
     <string name="proxy_settings_title" msgid="4201866858226087066">"Proxy"</string>
     <string name="proxy_clear_text" msgid="6529658759984031149">"Temizle"</string>
@@ -286,8 +285,7 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Yakındaki cihazlarla bağlanma izni olan uygulamalar, bağlı cihazların göreli konumunu belirleyebilir."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Uygulamaların ve hizmetlerin konum erişimi kapalı. Yine de arayarak veya mesaj göndererek bir acil durum numarasına ulaştığınızda cihazınızın konumu acil durum müdahale ekiplerine gönderilebilir."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Konum ayarları hakkında daha fazla bilgi edinin"</string>
-    <!-- no translation found for location_settings_tooltip_text_for_chrome (5781821709250544575) -->
-    <skip />
+    <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"Değiştirmek için ChromeOS Ayarları &gt; Gizlilik ve güvenlik &gt; Gizlilik denetimleri &gt; Konum erişimi bölümüne gidin"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Hesaplar"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Güvenlik"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Şifreleme ve kimlik bilgileri"</string>
@@ -565,7 +563,8 @@
     <string name="private_space_auto_lock_title" msgid="8663409382910601261">"Özel alanı otomatik olarak kilitle"</string>
     <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"Cihazınızı bir süredir kullanmadıysanız özel alanınızı otomatik olarak kilitleyebilirsiniz"</string>
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"Cihaz her kilitlendiğinde"</string>
-    <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"5 dakika etkinlik olmaması durumunda"</string>
+    <!-- no translation found for private_space_auto_lock_after_inactivity (7107814517866649733) -->
+    <skip />
     <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"Yalnızca cihaz yeniden başlatıldıktan sonra"</string>
     <string name="private_space_hide_page_title" msgid="3364639176511877414">"Özel alanı gizleyin"</string>
     <string name="private_space_hide_when_locked" msgid="6219472348124151797">"Kilitli olduğunda özel alanı gizleyin"</string>
@@ -577,7 +576,7 @@
     <string name="private_space_hide_off_summary" msgid="8565973976602078315">"Kapalı"</string>
     <string name="private_space_hide_on_summary" msgid="3450844101901438867">"Açık"</string>
     <string name="private_space_hide_dialog_title" msgid="6439207708506990156">"Özel alan, bir dahaki sefere kilitlediğinizde gizlenir"</string>
-    <string name="private_space_hide_dialog_message" msgid="618693520130744836">"Özel alana erişmek için uygulama listenizdeki arama çubuğuna özel alan yazın."</string>
+    <string name="private_space_hide_dialog_message" msgid="618693520130744836">"Özel alana erişmek için uygulama listenizdeki arama çubuğuna \"özel alan\" yazın."</string>
     <string name="private_space_hide_dialog_button" msgid="4157191429310035457">"Anladım"</string>
     <string name="private_space_category_system" msgid="1286843321867285700">"Sistem"</string>
     <string name="private_space_delete_title" msgid="636873505724100006">"Gizli alanı sil"</string>
@@ -1753,7 +1752,7 @@
     <string name="enable_text" msgid="8570798764647110430">"Etkinleştir"</string>
     <string name="clear_user_data_text" msgid="6773186434260397947">"Depolama alanını temizle"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"Güncellemeleri kaldır"</string>
-    <string name="app_restricted_settings_lockscreen_title" msgid="796413224212436400">"Kısıtlı izinleri onaylayın"</string>
+    <string name="app_restricted_settings_lockscreen_title" msgid="5993061278264872648">"Kısıtlanmış ayarlara izin verme"</string>
     <string name="auto_launch_enable_text" msgid="8912714475823807798">"Seçtiğiniz bazı etkinlikler varsayılan olarak bu uygulamada açılır."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"Bu uygulamanın widget oluşturmasına ve oluşturulan widget\'ların verilerine erişmesine izin vermeyi seçtiniz."</string>
     <string name="auto_launch_disable_text" msgid="502648841250936209">"Hiçbir varsayılan ayarlanmadı."</string>
@@ -2325,6 +2324,8 @@
     <string name="daltonizer_mode_protanomaly_title" msgid="6392456967103014723">"Kırmızı-yeşil"</string>
     <string name="daltonizer_mode_tritanomaly_title" msgid="2278786218762602022">"Mavi-sarı"</string>
     <string name="daltonizer_mode_grayscale_title" msgid="152005391387952588">"Gri tonlama"</string>
+    <!-- no translation found for daltonizer_saturation_title (2999486412114963068) -->
+    <skip />
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="2117727423019598455">"Yeşil zayıf, yeşil renk körlüğü"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="4617032854982040748">"Kırmızı zayıf, protanomali"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Tritanomali"</string>
@@ -2405,7 +2406,6 @@
     <string name="keywords_select_to_speak" msgid="2872704811610888719"></string>
     <string name="keywords_color_correction" msgid="8540442886990423681">"renk ayarlama"</string>
     <string name="keywords_color_inversion" msgid="4291058365873221962">"ekran karartma, ekran rengini açma"</string>
-    <string name="keywords_contrast" msgid="4668393735398949873">"renk kontrastı"</string>
     <string name="keywords_accessibility_menu" msgid="4300579436464706608"></string>
     <string name="keywords_switch_access" msgid="5813094504384313402"></string>
     <string name="keywords_auto_click" msgid="6811744211216280998">"motor, fare, harici fare, kafa faresi, uyarlanan fare, tekerlekli sandalye, kontrol çubuğu"</string>
@@ -3306,6 +3306,8 @@
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Bağlı cihaz ayarları"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Yok}=1{1 program ayarlandı}other{# program ayarlandı}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Rahatsız Etmeyin"</string>
+    <!-- no translation found for zen_modes_list_title (5138745349253275428) -->
+    <skip />
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Yalnızca önemli kişiler ve uygulamalardan gelen bildirimleri alın"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Kesintileri sınırlayın"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Rahatsız Etmeyin\'i açın"</string>
@@ -3532,7 +3534,7 @@
     <string name="notifications_sent_daily" msgid="10274479224185437">"{count,plural, =1{Günde yaklaşık # bildirim}other{Günde yaklaşık # bildirim}}"</string>
     <string name="notifications_sent_weekly" msgid="7895656213187555346">"{count,plural, =1{Haftada yaklaşık # bildirim}other{Haftada yaklaşık # bildirim}}"</string>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Hiçbir zaman"</string>
-    <string name="manage_notification_access_title" msgid="6481256069087219982">"Cihaz ve uygulama bildirimleri"</string>
+    <string name="manage_notification_access_title" msgid="4154723216570646451">"Bildirimi okuma, yanıtlama ve kontrol etme"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"Bildirimlerin hangi uygulama ve cihazlar tarafından okunabileceğini kontrol edin"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8643809206612366067">"İş profili bildirimlerine erişim engellendi"</string>
     <string name="notification_assistant_title" msgid="5889201903272393099">"Gelişmiş bildirimler"</string>
@@ -3632,7 +3634,7 @@
     <string name="app_notification_block_summary" msgid="1804611676339341551">"Bu bildirimleri hiçbir zaman gösterme"</string>
     <string name="notification_content_block_title" msgid="6689085826061361351">"Bildirimleri göster"</string>
     <string name="notification_content_block_summary" msgid="329171999992248925">"Bildirimleri hiçbir zaman gölgede veya çevre birimi cihazlarında gösterme"</string>
-    <string name="app_notification_fsi_permission_title" msgid="5424116606034705020">"Tam ekran bildirimlere izin ver"</string>
+    <string name="app_notification_fsi_permission_title" msgid="2260977598430154428">"Tam ekran bildirimlere izin ver"</string>
     <string name="app_notification_fsi_permission_summary" msgid="7673487977631068039">"Cihaz kilitliyken bildirimlerin tüm ekranı kaplamasına izin ver"</string>
     <string name="notification_badge_title" msgid="6854537463548411313">"Bildirim noktasına izin ver"</string>
     <string name="notification_channel_badge_title" msgid="6505542437385640049">"Bildirim noktasını göster"</string>
@@ -3981,8 +3983,8 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Tüm dosyaları yönetme erişimine izin ver"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Bu uygulamanın, bu cihazdaki veya cihaza bağlı depolama birimlerindeki tüm dosyaları okumasına, değiştirmesine ve silmesine izin verin. İzin verilirse uygulama size açıkça bildirmeden dosyalara erişebilir."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Tüm dosyalara erişebilir"</string>
-    <string name="full_screen_intent_title" msgid="747270185715224130">"Tam ekran bildirimler"</string>
-    <string name="permit_full_screen_intent" msgid="9035367640019960861">"Bu uygulamanın tam ekran bildirim göstermesine izin ver"</string>
+    <string name="full_screen_intent_title" msgid="5888548315628268674">"Tam ekran bildirimler"</string>
+    <string name="permit_full_screen_intent" msgid="2414307667550523630">"Bu uygulamanın tam ekran bildirim göstermesine izin ver"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Cihaz kilitliyken bu uygulamanın tüm ekranı kaplayan bildirimler göstermesine izin verin. Uygulamalar bunu alarmları, gelen aramaları ve diğer acil bildirimleri göstermek için kullanabilir."</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"Medya yönetimi uygulamaları"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Uygulamaya medya dosyalarını yönetme izni ver"</string>
@@ -4100,7 +4102,7 @@
     <string name="data_usage_template" msgid="3822452362629968010">"<xliff:g id="ID_2">%2$s</xliff:g> arasında <xliff:g id="ID_1">%1$s</xliff:g> kullanıldı"</string>
     <string name="configure" msgid="1499586749829665889">"Yapılandır"</string>
     <string name="data_usage_other_apps" msgid="5649047093607329537">"Kullanıma dahil olan diğer uygulamalar"</string>
-    <string name="data_saver_unrestricted_summary" msgid="7343571401172437542">"{count,plural, =1{Veri Tasarrufu açıkken 1 uygulamanın sınırsız veri kullanmasına izin verildi}other{Veri Tasarrufu açıkken # uygulamanın sınırsız veri kullanmasına izin verildi}}"</string>
+    <string name="data_saver_unrestricted_summary" msgid="559673440849071149">"{count,plural, =1{Veri Tasarrufu açıkken 1 uygulamanın sınırsız mobil veri kullanmasına izin verildi}other{Veri Tasarrufu açıkken # uygulamanın sınırsız mobil veri kullanmasına izin verildi}}"</string>
     <string name="data_usage_title" msgid="4039024073687469094">"Birincil veri"</string>
     <string name="data_usage_wifi_title" msgid="1060495519280456926">"Kablosuz ağ verisi"</string>
     <string name="data_used_formatted" msgid="7913920278059077938">"<xliff:g id="ID_1">^1</xliff:g> <xliff:g id="ID_2">^2</xliff:g> kullanıldı"</string>
@@ -4117,13 +4119,13 @@
     <string name="no_carrier_update_now_text" msgid="7898004907837200752">"Az önce güncellendi"</string>
     <string name="launch_wifi_text" msgid="976421974332512894">"Ayrıntıları göster"</string>
     <string name="data_saver_title" msgid="2593804270788863815">"Veri Tasarrufu"</string>
-    <string name="unrestricted_data_saver" msgid="7922563266857367495">"Kısıtlanmamış veri"</string>
+    <string name="unrestricted_data_saver" msgid="5913547065342097274">"Sınırsız mobil veri"</string>
     <string name="restrict_background_blocklisted" msgid="2308345280442438232">"Arka plan verisi kapalı"</string>
     <string name="data_saver_on" msgid="7848893946018448793">"Açık"</string>
     <string name="data_saver_off" msgid="5891210864117269045">"Kapalı"</string>
     <string name="data_saver_switch_title" msgid="7111538580123722959">"Veri Tasarrufu\'nu kullan"</string>
-    <string name="unrestricted_app_title" msgid="7117585996574329284">"Sınırsız veri kullanımı"</string>
-    <string name="unrestricted_app_summary" msgid="282698963532000403">"Veri Tasarrufu açıkken sınırsız veri erişimine izin ver"</string>
+    <string name="unrestricted_app_title" msgid="8531936851059106374">"Sınırsız mobil veri kullanımı"</string>
+    <string name="unrestricted_app_summary" msgid="8320813971858627624">"Veri Tasarrufu açıkken sınırsız mobil veri erişimine izin ver"</string>
     <string name="home_app" msgid="6056850504746902747">"Ana ekran uygulaması"</string>
     <string name="suggestion_additional_fingerprints" msgid="4726777300101156208">"Başka parmak izi ekleyin"</string>
     <string name="suggestion_additional_fingerprints_summary" msgid="2825364645039666674">"Kilidi farklı bir parmakla açın"</string>
@@ -4197,9 +4199,9 @@
     <string name="notification_suggestion_summary" msgid="7615611244249276113">"Bildirim içeriğini gösterin veya gizleyin"</string>
     <string name="page_tab_title_support" msgid="3235725053332345773">"İpuçları ve destek"</string>
     <string name="developer_smallest_width" msgid="632354817870920911">"En küçük genişlik"</string>
-    <string name="premium_sms_none" msgid="8737045049886416739">"Yüklü hiçbir uygulama, Premium SMS erişimi isteğinde bulunmadı"</string>
+    <string name="premium_sms_none" msgid="4718916765158062108">"Yüklü hiçbir uygulama, Premium SMS isteğinde bulunmadı"</string>
     <string name="premium_sms_warning" msgid="2192300872411073324">"Premium SMS kullanımı, para ödemenizi gerektirebilir ve bu ücret operatör faturanıza eklenir. Bir uygulamaya bu izni verdiğinizde söz konusu uygulamayı kullanarak ücretli SMS gönderebilirsiniz."</string>
-    <string name="premium_sms_access" msgid="5605970342699013212">"Premium SMS erişimi"</string>
+    <string name="premium_sms_access" msgid="8487315743197916530">"Premium SMS"</string>
     <string name="bluetooth_disabled" msgid="835838280837359514">"Kapalı"</string>
     <string name="bluetooth_connected_summary" msgid="8043167194934315712">"<xliff:g id="ID_1">%1$s</xliff:g> ile bağlı"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="2294954614327771844">"Birden çok cihaza bağlı"</string>
@@ -4990,12 +4992,9 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Ultra Geniş Bant\'ı kullanmak için uçak modunu kapatın"</string>
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"Ultra Geniş Bant geçerli konumda kullanılamaz"</string>
     <string name="thread_network_settings_title" msgid="4212301030523859220">"Thread"</string>
-    <!-- no translation found for thread_network_settings_main_switch_title (3859168481929323474) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_footer_title (7385600318850220927) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_learn_more (8278498005848565050) -->
-    <skip />
+    <string name="thread_network_settings_main_switch_title" msgid="3859168481929323474">"Thread\'i kullanın"</string>
+    <string name="thread_network_settings_footer_title" msgid="7385600318850220927">"Thread, akıllı ev cihazlarınızı bağlamanıza yardımcı olarak verimliliği ve performansı artırır.\n\nEtkinleştirildiğinde bu cihaz bir Thread ağına katılmaya uygun olur ve Matter destekli cihazlar bu telefon aracılığıyla kontrol edilebilir."</string>
+    <string name="thread_network_settings_learn_more" msgid="8278498005848565050">"Thread hakkında daha fazla bilgi"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"Kamera erişimi"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Mikrofon erişimi"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"Uygulamalar ve hizmetler için"</string>
@@ -5076,16 +5075,16 @@
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Sonra yeniden başlat"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"Üç Boyutlu Ses"</string>
     <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"Uyumlu medyadaki sesler daha yoğun gelir"</string>
-    <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"Kafa hareketi izleme"</string>
+    <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"Baş takibi"</string>
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"Ses, kulağa daha doğal gelmesi için kafanızı hareket ettirdikçe değişir"</string>
     <string name="bluetooth_details_permissions_sync_title" msgid="7277580382321003521">"Telefondaki izinleri senkronize et"</string>
     <string name="bluetooth_details_permissions_sync_summary" msgid="8125037984381432059">"Bu telefonda etkinleştirdiğiniz uygulama izinleri kol saatinizde de etkinleştirilir"</string>
-    <string name="bluetooth_details_audio_device_types_title" msgid="3381941189346781614">"Ses Cihazı Türü"</string>
-    <string name="bluetooth_details_audio_device_type_unknown" msgid="839337391037998014">"Bilinmiyor"</string>
+    <string name="bluetooth_details_audio_device_types_title" msgid="1889644189800180316">"Ses cihazı türü"</string>
+    <string name="bluetooth_details_audio_device_type_unknown" msgid="5299284975435974206">"Ayarlanmadı"</string>
     <string name="bluetooth_details_audio_device_type_speaker" msgid="3706227767994792124">"Hoparlör"</string>
     <string name="bluetooth_details_audio_device_type_headphones" msgid="7644588291215033798">"Kulaklık"</string>
-    <string name="bluetooth_details_audio_device_type_hearing_aid" msgid="1310631131071939859">"İşitme Cihazı"</string>
-    <string name="bluetooth_details_audio_device_type_carkit" msgid="4439017600454703229">"Araç Kiti"</string>
+    <string name="bluetooth_details_audio_device_type_hearing_aid" msgid="6311786545025321187">"İşitme cihazı"</string>
+    <string name="bluetooth_details_audio_device_type_carkit" msgid="1866236563013629394">"Araba"</string>
     <string name="bluetooth_details_audio_device_type_other" msgid="7019481234617207563">"Diğer"</string>
     <string name="ingress_rate_limit_title" msgid="2106694002836274350">"Ağ indirme hızı sınırı"</string>
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"İnternet bağlantısı sağlayan tüm ağlarda geçerli ağ bant genişliği indirme hızı sınırını yapılandırın."</string>
@@ -5170,8 +5169,6 @@
     <string name="screen_flash_color_violet" msgid="1279950780509029495">"Mor"</string>
     <string name="color_selector_dialog_done" msgid="121253968943363376">"Bitti"</string>
     <string name="color_selector_dialog_cancel" msgid="8667350644753900701">"İptal"</string>
-    <string name="contrast_title" msgid="6885768151336508075">"Kontrast"</string>
-    <string name="contrast_standard" msgid="1097297089917185235">"Standart"</string>
     <string name="contrast_default" msgid="8918545965525226966">"Varsayılan"</string>
     <string name="contrast_medium" msgid="384414510709285811">"Orta"</string>
     <string name="contrast_high" msgid="3988567609694797696">"Yüksek"</string>
@@ -5208,4 +5205,100 @@
     <string name="fingerprint_acquired_imager_dirty_udfps" msgid="7005042288289506776">"Ekranın, sensörün yanındaki kısımlarını temizleyip tekrar deneyin"</string>
     <string name="sim_category_converted_sim" msgid="8575548015816988908">"eSIM\'e dönüştürüldü. Çıkarın ve imha edin."</string>
     <string name="sync_across_devices_title" msgid="3447757705383089345">"Cihazlar arası senkronizasyon"</string>
+    <!-- no translation found for device_diagnostics_title (2914523189695727897) -->
+    <skip />
+    <string name="audio_sharing_title" msgid="4144157137502923821">"Ses paylaşımı"</string>
+    <string name="audio_sharing_switch_title" msgid="7052827328670825701">"Sesi paylaş"</string>
+    <string name="calls_and_alarms_device_title" msgid="6993559028175454198">"Aramalar ve alarmlar"</string>
+    <string name="audio_sharing_description" msgid="1660255584523640628">"Diğer kullanıcıların medya içeriklerinizi sizinle birlikte dinlemesine izin verin. Dinleyen kullanıcıların da LE Audio kulaklığı olması gerekir."</string>
+    <string name="audio_sharing_device_group_title" msgid="3019780581643956943">"Etkin medya cihazları"</string>
+    <string name="audio_sharing_call_audio_title" msgid="7978867452289583929">"Görüşme sesi"</string>
+    <string name="audio_sharing_call_audio_description" msgid="6573621048260616924">"Yalnızca <xliff:g id="DEVICE_NAME">%1$s</xliff:g> adlı cihazda oynatın"</string>
+    <string name="audio_sharing_test_sound_title" msgid="6438868185641027763">"Test sesi çal"</string>
+    <string name="audio_sharing_test_sound_description" msgid="4072462502371937399">"Dinleyen herkes duyabilir"</string>
+    <string name="audio_sharing_stream_settings_title" msgid="1374391898689242036">"Ses yayını ayarları"</string>
+    <string name="audio_sharing_stream_name_title" msgid="8156859441897180940">"Ad"</string>
+    <string name="audio_sharing_stream_password_title" msgid="7026649168165764602">"Şifre"</string>
+    <string name="audio_sharing_stream_compatibility_title" msgid="5690947186724469918">"Uyumluluğu iyileştirin"</string>
+    <string name="audio_sharing_stream_compatibility_description" msgid="8170241188606110963">"Ses kalitesini azaltarak işitme cihazı gibi bazı cihazların bağlanmasına yardımcı olur"</string>
+    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="2586408353546825682">"Uyumluluğu yapılandırmak için ses paylaşımını kapatır"</string>
+    <string name="audio_sharing_nearby_audio_title" msgid="4795438407040677177">"Yakındaki sesleri dinleyin"</string>
+    <string name="audio_sharing_footer_description" msgid="4786942197840271680">"Ses paylaşımı, Auracast™ özelliğini destekler"</string>
+    <string name="audio_sharing_stream_name_dialog_title" msgid="6706027295417556499">"Ses yayını adı"</string>
+    <string name="audio_sharing_stream_password_dialog_title" msgid="4148196538860845705">"Ses yayını şifresi"</string>
+    <string name="audio_sharing_media_device_group_title" msgid="4850674234590549565">"Diğer medya cihazları"</string>
+    <string name="audio_sharing_summary_on" msgid="611197542982323788">"Açık"</string>
+    <string name="audio_sharing_summary_off" msgid="8833198995257547378">"Kapalı"</string>
+    <string name="audio_sharing_share_dialog_title" msgid="427514648577553621">"Sesi paylaş"</string>
+    <string name="audio_sharing_share_dialog_subtitle" msgid="5208582843732057871">"<xliff:g id="DEVICE_NAME1">%1$s</xliff:g> ve <xliff:g id="DEVICE_NAME2">%2$s</xliff:g>"</string>
+    <string name="audio_sharing_share_button_label" msgid="3895900668317105537">"Sesi paylaş"</string>
+    <string name="audio_sharing_no_thanks_button_label" msgid="5822491984114744357">"Hayır, teşekkürler"</string>
+    <string name="audio_sharing_share_with_dialog_title" msgid="3934377530640830364">"Ses, <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ile paylaşılsın mı?"</string>
+    <string name="audio_sharing_share_with_more_dialog_title" msgid="2840069088858232267">"Sesi başka bir cihazla paylaşın"</string>
+    <string name="audio_sharing_share_with_button_label" msgid="4146194430380237357">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ile paylaşın"</string>
+    <string name="audio_sharing_close_button_label" msgid="2666534149100498574">"Kapat"</string>
+    <string name="audio_sharing_dialog_connect_device_content" msgid="2873230647152283734">"Başka bir uyumlu kulaklık bağlayın ya da diğer kullanıcıyla yayınınızın adını ve şifresini paylaşın"</string>
+    <string name="audio_sharing_dialog_pair_device_content" msgid="3136997898244863470">"Başka bir uyumlu kulaklık eşleyin ya da ses yayınınızın QR kodunu diğer kullanıcıyla paylaşın"</string>
+    <string name="audio_sharing_sharing_label" msgid="1038021053061111508">"Ses paylaşılıyor"</string>
+    <string name="audio_sharing_pair_button_label" msgid="7987236990273083588">"Yeni cihaz eşle"</string>
+    <string name="audio_sharing_qrcode_button_label" msgid="3207039106555097659">"QR kodunu göster"</string>
+    <string name="audio_sharing_notification_title" msgid="1204798942946033005">"Ses paylaşıyorsunuz"</string>
+    <string name="audio_sharing_notification_content" msgid="1577180829878785642">"Dinleyen kişiler medya içeriklerinizi duyabilir. Telefon görüşmelerini duymazlar."</string>
+    <string name="audio_sharing_stop_button_label" msgid="8770519671470608849">"Paylaşımı durdur"</string>
+    <string name="audio_sharing_settings_button_label" msgid="8574808650318270491">"Ayarlar"</string>
+    <string name="audio_sharing_disconnect_dialog_title" msgid="2192751727237748602">"Bağlantısı kesilecek bir cihaz seçin"</string>
+    <string name="audio_sharing_dialog_disconnect_content" msgid="3840488888970653308">"Aynı anda yalnızca 2 cihaz ses paylaşabilir"</string>
+    <string name="audio_sharing_disconnect_device_button_label" msgid="4272897217708930576">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> bağlantısını kes"</string>
+    <string name="audio_sharing_stop_dialog_title" msgid="4872853738164232075">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ile bağlantı kurulsun mu?"</string>
+    <string name="audio_sharing_stop_dialog_content" msgid="6371546856710692910">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ile ses paylaşımını durduracaksınız"</string>
+    <string name="audio_sharing_stop_dialog_with_two_content" msgid="2119020725467967219">"<xliff:g id="DEVICE_NAME1">%1$s</xliff:g> ve <xliff:g id="DEVICE_NAME2">%2$s</xliff:g> ile ses paylaşımını durduracaksınız"</string>
+    <string name="audio_sharing_stop_dialog_with_more_content" msgid="5262441138981618703">"Bağlı kulaklıkla ses paylaşımını durduracaksınız"</string>
+    <string name="audio_sharing_connect_button_label" msgid="4241911519063029982">"Bağlan"</string>
+    <string name="audio_sharing_sharing_stopped_label" msgid="8128194452354240996">"Ses paylaşımı durduruldu"</string>
+    <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"Uyumlu bir cihaz bağlayın"</string>
+    <string name="audio_sharing_comfirm_dialog_content" msgid="3479217934447446066">"Ses paylaşmaya başlamak için önce LE Audio kulaklığınızı telefonunuza bağlayın"</string>
+    <string name="audio_streams_category_title" msgid="4878022761829895463">"LE ses akışına bağlanın"</string>
+    <string name="audio_streams_pref_title" msgid="6320485086288646209">"Yakındaki ses akışları"</string>
+    <string name="audio_streams_title" msgid="6617990880383079165">"Ses akışları"</string>
+    <string name="audio_streams_qr_code_summary" msgid="2838923349871884871">"QR kodu kullanarak ses akışına bağlanın"</string>
+    <string name="audio_streams_empty" msgid="8803517701437394982">"Yakında ses akışı bulunamadı."</string>
+    <string name="audio_streams_disconnect" msgid="1755594831469579161">"Bağlantıyı kes"</string>
+    <string name="audio_streams_connect" msgid="1955964373102927954">"Bağlan"</string>
+    <string name="audio_streams_qr_code_is_not_valid_format" msgid="4856288389653121830">"QR kodu geçerli bir biçim değil"</string>
+    <string name="audio_streams_qr_code_scanner" msgid="525396804963685478">"Dinlemeye başlamak için aşağıdaki QR kodunu ortalayın"</string>
+    <string name="audio_streams_add_source_bad_code_state_summary" msgid="6527086906921868757">"Şifreyi kontrol edin ve tekrar deneyin"</string>
+    <string name="audio_streams_add_source_failed_state_summary" msgid="3937546443978562322">"Bağlanılamıyor. Tekrar deneyin."</string>
+    <string name="audio_streams_add_source_wait_for_response_summary" msgid="3763240901110974606">"Bağlanıyor…"</string>
+    <string name="audio_streams_wait_for_sync_state_summary" msgid="11905744690831864">"Taranıyor…"</string>
+    <string name="audio_streams_dialog_stream_is_not_available" msgid="4032878851270690546">"Ses yayını kullanılamıyor"</string>
+    <string name="audio_streams_is_not_playing" msgid="8480293894696007941">"Bu ses yayınında şu anda hiçbir şey oynatılmıyor"</string>
+    <string name="audio_streams_dialog_close" msgid="8177201719298408431">"Kapat"</string>
+    <string name="audio_streams_dialog_listen" msgid="7290340191504987685">"Dinle"</string>
+    <string name="audio_streams_dialog_retry" msgid="4456843891970998556">"Tekrar deneyin"</string>
+    <string name="audio_streams_dialog_listen_to_audio_stream" msgid="8585253007762261528">"Ses yayınını dinleyin"</string>
+    <string name="audio_streams_dialog_control_volume" msgid="7615062686016713544">"Ses yayını, <xliff:g id="DEVICE_NAME">%1$s</xliff:g> adlı cihazda oynatılacak. Ses seviyesini kontrol etmek için bu cihazı kullanın."</string>
+    <string name="audio_streams_dialog_cannot_listen" msgid="4432257183698209966">"Ses yayını dinlenemiyor"</string>
+    <string name="audio_streams_dialog_default_device" msgid="6159800303379303266">"uyumlu kulaklık bağlandı"</string>
+    <string name="audio_streams_activity_title" msgid="9011162151277443663">"Yayınlar"</string>
+    <string name="audio_streams_no_password_summary" msgid="8976357323034830144">"Şifre yok"</string>
+    <string name="audio_streams_dialog_learn_more" msgid="6711241053442211345">"Daha fazla bilgi"</string>
+    <string name="audio_streams_dialog_cannot_play" msgid="1358828316927479091">"Bu ses yayını, <xliff:g id="DEVICE_NAME">%1$s</xliff:g> adlı cihazda oynatılamıyor."</string>
+    <string name="audio_streams_listening_now" msgid="4205614429222949176">"Şu anda dinleniyor"</string>
+    <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"Dinlemeyi bırak"</string>
+    <string name="audio_streams_dialog_no_le_device_title" msgid="3931163990976742282">"Uyumlu kulaklık bağlayın"</string>
+    <string name="audio_streams_dialog_no_le_device_button" msgid="4484355549428642588">"Cihaz bağla"</string>
+    <string name="audio_streams_detail_page_title" msgid="7884132061275273766">"Ses yayını ayrıntıları"</string>
+    <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"Ses yayını QR kodu"</string>
+    <string name="audio_streams_qr_code_page_password" msgid="7268475614131297060">"Şifre: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
+    <string name="audio_streams_qr_code_page_description" msgid="1317961663706630428">"Diğer kullanıcılar, <xliff:g id="STREAM_NAME">%1$s</xliff:g> yayınını dinlemek için uyumlu kulaklıkları Android cihazlarına bağlayabilir. Ardından bu QR kodunu tarayabilirler."</string>
+    <string name="audio_streams_main_page_title" msgid="1838380471076527639">"Ses yayını bulun"</string>
+    <string name="audio_streams_main_page_subtitle" msgid="3251995732921981539">"Ses paylaşan bir cihazı veya yakındaki bir Auracast yayınını dinleyin"</string>
+    <string name="audio_streams_main_page_device_title" msgid="2635744035523908253">"Ses sisteminiz"</string>
+    <string name="audio_streams_main_page_no_device_summary" msgid="2936000845397406389">"Uyumlu kulaklık bağlayın"</string>
+    <string name="audio_streams_main_page_scan_section_title" msgid="2778235929304061163">"Yakındaki ses yayınları"</string>
+    <string name="audio_streams_main_page_scan_qr_code_title" msgid="8337270277392468895">"QR kodunu tara"</string>
+    <string name="audio_streams_main_page_scan_qr_code_summary" msgid="1991792283368249499">"Bir yayının QR kodunu tarayarak dinlemeye başlayın"</string>
+    <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Yayını dinle"</string>
+    <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> adlı cihazda dinlemek için ses yayını QR kodunu tarayın"</string>
+    <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Şifre, paylaşım sırasında düzenlenemez. Şifreyi değiştirmek için önce ses paylaşımını kapatın."</string>
 </resources>

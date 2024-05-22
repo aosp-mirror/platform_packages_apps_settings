@@ -48,9 +48,9 @@
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"Hanya game, video, dan lainnya"</string>
     <string name="selective_stay_awake_summary" msgid="9055967322921984543">"Layar depan aktif untuk aplikasi agar layar tetap ada aktivitas"</string>
     <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Geser ke atas untuk melanjutkan"</string>
-    <string name="stay_awake_on_lockscreen_summary" msgid="2299351813382522952">"Lipat ponsel dan geser ke atas di bagian layar depan untuk melanjutkan penggunaan aplikasi, atau tunggu beberapa detik agar layar terkunci"</string>
+    <string name="stay_awake_on_lockscreen_summary" msgid="8825321939913726566">"Lipat ponsel dan geser ke atas di bagian layar depan untuk melanjutkan penggunaan aplikasi, atau tunggu beberapa detik agar layar terkunci. Aplikasi game dan video akan dilanjutkan secara otomatis"</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"Jangan pernah"</string>
-    <string name="sleep_on_fold_summary" msgid="7737992842459588846">"Layar depan dikunci saat perangkat dilipat"</string>
+    <string name="sleep_on_fold_summary" msgid="4191753338303043456">"Layar depan dinonaktifkan dan dikunci saat perangkat dilipat"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Gunakan putar otomatis"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"Fitur Deteksi Wajah menggunakan kamera depan untuk meningkatkan akurasi putar otomatis. Gambar tidak pernah disimpan atau dikirim ke Google."</string>
     <string name="bluetooth" msgid="8898478620943459654">"Bluetooth"</string>
@@ -139,7 +139,6 @@
     <string name="stylus_textfield_handwriting" msgid="2363579035338976327">"Tulis di kolom teks"</string>
     <string name="stylus_ignore_button" msgid="7734540973145241391">"Abaikan semua penekanan tombol dengan stilus"</string>
     <string name="stylus_connected_devices_title" msgid="2823967577941359812">"Stilus"</string>
-    <string name="audio_streams_empty" msgid="8803517701437394982">"Tidak ada streaming audio di sekitar."</string>
     <string name="date_and_time" msgid="1788358029823431692">"Tanggal &amp; waktu"</string>
     <string name="proxy_settings_title" msgid="4201866858226087066">"Proxy"</string>
     <string name="proxy_clear_text" msgid="6529658759984031149">"Bersihkan"</string>
@@ -286,8 +285,7 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Aplikasi dengan izin Perangkat di sekitar dapat menentukan posisi relatif perangkat terhubung."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Akses lokasi dinonaktifkan untuk aplikasi dan layanan. Lokasi perangkat Anda tetap dapat dikirimkan ke petugas tanggap darurat saat Anda menelepon atau mengirim SMS ke nomor darurat."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Pelajari lebih lanjut Setelan lokasi"</string>
-    <!-- no translation found for location_settings_tooltip_text_for_chrome (5781821709250544575) -->
-    <skip />
+    <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"Untuk mengubahnya, buka Setelan ChromeOS &gt; Privasi dan keamanan &gt; Kontrol privasi &gt; Akses lokasi"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Akun"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Keamanan"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Enkripsi &amp; kredensial"</string>
@@ -565,7 +563,8 @@
     <string name="private_space_auto_lock_title" msgid="8663409382910601261">"Kunci otomatis ruang privasi"</string>
     <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"Anda dapat mengunci ruang privasi secara otomatis jika Anda tidak menggunakan perangkat selama jangka waktu tertentu"</string>
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"Setiap kali perangkat terkunci"</string>
-    <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"Setelah 5 menit tidak aktif"</string>
+    <!-- no translation found for private_space_auto_lock_after_inactivity (7107814517866649733) -->
+    <skip />
     <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"Hanya setelah perangkat dimulai ulang"</string>
     <string name="private_space_hide_page_title" msgid="3364639176511877414">"Sembunyikan ruang privasi"</string>
     <string name="private_space_hide_when_locked" msgid="6219472348124151797">"Sembunyikan ruang privasi saat dikunci"</string>
@@ -821,7 +820,7 @@
     <string name="bluetooth_empty_list_bluetooth_off" msgid="7326727272747345476">"Jika Bluetooth aktif, perangkat dapat berkomunikasi dengan perangkat Bluetooth lain di sekitar"</string>
     <string name="bluetooth_empty_list_bluetooth_off_auto_on_available" msgid="3430864468105204282">"Jika Bluetooth aktif, perangkat dapat berkomunikasi dengan perangkat Bluetooth lain di sekitar. Fitur seperti Quick Share dan Temukan Perangkat Saya menggunakan Bluetooth."</string>
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Jika Bluetooth diaktifkan, perangkat Anda dapat berkomunikasi dengan perangkat Bluetooth di sekitar.\n\nUntuk meningkatkan fungsi perangkat, aplikasi dan layanan tetap dapat memindai perangkat di sekitar kapan saja, bahkan saat Bluetooth nonaktif. Pemindaian ini dapat digunakan, misalnya, untuk meningkatkan kualitas fitur dan layanan berbasis lokasi. Anda dapat mengubahnya di setelan pemindaian Bluetooth."</string>
-    <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"Jika Bluetooth aktif, perangkat dapat berkomunikasi dengan perangkat Bluetooth lain di sekitar. Fitur seperti Quick Share dan Temukan Perangkat Saya menggunakan Bluetooth.\n\nAplikasi dan layanan masih dapat memindai perangkat di sekitar kapan saja, meskipun Bluetooth mati. Fitur ini dapat digunakan, misalnya, untuk meningkatkan fitur dan layanan berbasis lokasi. Anda dapat mengubahnya di setelan pemindaian Bluetooth."</string>
+    <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"Jika Bluetooth diaktifkan, perangkat Anda dapat berkomunikasi dengan perangkat Bluetooth di sekitar. Fitur seperti Quick Share dan Temukan Perangkat Saya menggunakan Bluetooth.\n\nAplikasi dan layanan tetap dapat memindai perangkat di sekitar kapan saja, bahkan saat Bluetooth nonaktif. Pemindaian ini dapat digunakan, misalnya, untuk meningkatkan kualitas fitur dan layanan berbasis lokasi. Anda dapat mengubahnya di setelan pemindaian Bluetooth."</string>
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"Ubah"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Detail perangkat"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Setelan keyboard"</string>
@@ -1753,7 +1752,7 @@
     <string name="enable_text" msgid="8570798764647110430">"Aktifkan"</string>
     <string name="clear_user_data_text" msgid="6773186434260397947">"Hapus penyimpanan"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"Uninstal pembaruan"</string>
-    <string name="app_restricted_settings_lockscreen_title" msgid="796413224212436400">"Izinkan izin terbatas"</string>
+    <string name="app_restricted_settings_lockscreen_title" msgid="5993061278264872648">"Izinkan setelan terbatas"</string>
     <string name="auto_launch_enable_text" msgid="8912714475823807798">"Beberapa aktivitas yang Anda pilih terbuka di aplikasi ini secara default."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"Anda telah memilih untuk mengizinkan aplikasi ini untuk membuat widget dan mengakses data mereka."</string>
     <string name="auto_launch_disable_text" msgid="502648841250936209">"Tidak ada setelan default."</string>
@@ -2325,6 +2324,8 @@
     <string name="daltonizer_mode_protanomaly_title" msgid="6392456967103014723">"Merah-hijau"</string>
     <string name="daltonizer_mode_tritanomaly_title" msgid="2278786218762602022">"Biru-kuning"</string>
     <string name="daltonizer_mode_grayscale_title" msgid="152005391387952588">"Hitam putih"</string>
+    <!-- no translation found for daltonizer_saturation_title (2999486412114963068) -->
+    <skip />
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="2117727423019598455">"Lemah hijau, deuteranomali"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="4617032854982040748">"Lemah merah, protanomali"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Tritanomali"</string>
@@ -2405,7 +2406,6 @@
     <string name="keywords_select_to_speak" msgid="2872704811610888719"></string>
     <string name="keywords_color_correction" msgid="8540442886990423681">"sesuaikan warna"</string>
     <string name="keywords_color_inversion" msgid="4291058365873221962">"gelapkan layar, cerahkan layar"</string>
-    <string name="keywords_contrast" msgid="4668393735398949873">"kontras warna"</string>
     <string name="keywords_accessibility_menu" msgid="4300579436464706608"></string>
     <string name="keywords_switch_access" msgid="5813094504384313402"></string>
     <string name="keywords_auto_click" msgid="6811744211216280998">"motorik, mouse, mouse eksternal, mouse kepala, mouse adaptif, kursi roda, joystick"</string>
@@ -3306,6 +3306,8 @@
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Setelan perangkat terhubung"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Tidak ada}=1{1 jadwal disetel}other{# jadwal disetel}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Jangan Ganggu"</string>
+    <!-- no translation found for zen_modes_list_title (5138745349253275428) -->
+    <skip />
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Hanya dapatkan notifikasi dari aplikasi dan orang yang penting"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Batasi gangguan"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Aktifkan mode Jangan Ganggu"</string>
@@ -3532,7 +3534,7 @@
     <string name="notifications_sent_daily" msgid="10274479224185437">"{count,plural, =1{Sekitar # notifikasi per hari}other{Sekitar # notifikasi per hari}}"</string>
     <string name="notifications_sent_weekly" msgid="7895656213187555346">"{count,plural, =1{Sekitar # notifikasi per minggu}other{Sekitar # notifikasi per minggu}}"</string>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Tidak pernah"</string>
-    <string name="manage_notification_access_title" msgid="6481256069087219982">"Notifikasi perangkat dan aplikasi"</string>
+    <string name="manage_notification_access_title" msgid="4154723216570646451">"Membaca, membalas &amp; mengontrol notifikasi"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"Kontrol aplikasi dan perangkat mana yang dapat membaca notifikasi"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8643809206612366067">"Akses ke notifikasi profil kerja diblokir"</string>
     <string name="notification_assistant_title" msgid="5889201903272393099">"Notifikasi yang ditingkatkan"</string>
@@ -3632,7 +3634,7 @@
     <string name="app_notification_block_summary" msgid="1804611676339341551">"Jangan pernah tampilkan notifikasi ini"</string>
     <string name="notification_content_block_title" msgid="6689085826061361351">"Tampilkan notifikasi"</string>
     <string name="notification_content_block_summary" msgid="329171999992248925">"Jangan pernah tampilkan notifikasi di bayangan atau di perangkat periferal"</string>
-    <string name="app_notification_fsi_permission_title" msgid="5424116606034705020">"Izinkan notifikasi mode layar penuh"</string>
+    <string name="app_notification_fsi_permission_title" msgid="2260977598430154428">"Izinkan notifikasi layar penuh"</string>
     <string name="app_notification_fsi_permission_summary" msgid="7673487977631068039">"Izinkan notifikasi ditampilkan dalam mode layar penuh ketika perangkat terkunci"</string>
     <string name="notification_badge_title" msgid="6854537463548411313">"Izinkan titik notifikasi"</string>
     <string name="notification_channel_badge_title" msgid="6505542437385640049">"Tampilkan titik notifikasi"</string>
@@ -3981,8 +3983,8 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Izinkan akses untuk mengelola semua file"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Mengizinkan aplikasi ini membaca, mengubah, dan menghapus semua file di perangkat ini atau media penyimpanan yang terpasang. Jika diizinkan, aplikasi dapat mengakses file tanpa sepengetahuan Anda."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Dapat mengakses semua file"</string>
-    <string name="full_screen_intent_title" msgid="747270185715224130">"Notifikasi layar penuh"</string>
-    <string name="permit_full_screen_intent" msgid="9035367640019960861">"Izinkan notifikasi layar penuh dari aplikasi ini"</string>
+    <string name="full_screen_intent_title" msgid="5888548315628268674">"Notifikasi layar penuh"</string>
+    <string name="permit_full_screen_intent" msgid="2414307667550523630">"Izinkan notifikasi layar penuh dari aplikasi ini"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Mengizinkan aplikasi ini menampilkan notifikasi dalam layar penuh ketika perangkat terkunci. Aplikasi mungkin menggunakan tindakan ini untuk memperjelas alarm, panggilan masuk, atau notifikasi penting lainnya."</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"Aplikasi pengelolaan media"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Izinkan aplikasi mengelola media"</string>
@@ -4100,7 +4102,7 @@
     <string name="data_usage_template" msgid="3822452362629968010">"<xliff:g id="ID_1">%1$s</xliff:g> digunakan <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="configure" msgid="1499586749829665889">"Konfigurasi"</string>
     <string name="data_usage_other_apps" msgid="5649047093607329537">"Aplikasi lain yang disertakan dalam penggunaan"</string>
-    <string name="data_saver_unrestricted_summary" msgid="7343571401172437542">"{count,plural, =1{1 aplikasi diizinkan menggunakan data yang tidak dibatasi jika Penghemat Data aktif}other{# aplikasi diizinkan menggunakan data yang tidak dibatasi jika Penghemat Data aktif}}"</string>
+    <string name="data_saver_unrestricted_summary" msgid="559673440849071149">"{count,plural, =1{1 aplikasi diizinkan untuk menggunakan data seluler tak terbatas jika Penghemat Data aktif}other{# aplikasi diizinkan untuk menggunakan data seluler tak terbatas jika Penghemat Data aktif}}"</string>
     <string name="data_usage_title" msgid="4039024073687469094">"Kuota utama"</string>
     <string name="data_usage_wifi_title" msgid="1060495519280456926">"Data Wi-Fi"</string>
     <string name="data_used_formatted" msgid="7913920278059077938">"<xliff:g id="ID_1">^1</xliff:g> <xliff:g id="ID_2">^2</xliff:g> digunakan"</string>
@@ -4117,13 +4119,13 @@
     <string name="no_carrier_update_now_text" msgid="7898004907837200752">"Baru saja diupdate"</string>
     <string name="launch_wifi_text" msgid="976421974332512894">"Lihat detail"</string>
     <string name="data_saver_title" msgid="2593804270788863815">"Penghemat Data"</string>
-    <string name="unrestricted_data_saver" msgid="7922563266857367495">"Data tidak dibatasi"</string>
+    <string name="unrestricted_data_saver" msgid="5913547065342097274">"Data seluler tak terbatas"</string>
     <string name="restrict_background_blocklisted" msgid="2308345280442438232">"Data latar belakang nonaktif"</string>
     <string name="data_saver_on" msgid="7848893946018448793">"Aktif"</string>
     <string name="data_saver_off" msgid="5891210864117269045">"Nonaktif"</string>
     <string name="data_saver_switch_title" msgid="7111538580123722959">"Gunakan Penghemat Data"</string>
-    <string name="unrestricted_app_title" msgid="7117585996574329284">"Penggunaan data tidak dibatasi"</string>
-    <string name="unrestricted_app_summary" msgid="282698963532000403">"Izinkan akses data tanpa dibatasi saat Penghemat Data aktif"</string>
+    <string name="unrestricted_app_title" msgid="8531936851059106374">"Penggunaan data seluler tak terbatas"</string>
+    <string name="unrestricted_app_summary" msgid="8320813971858627624">"Izinkan akses data seluler tak terbatas saat Penghemat Data aktif"</string>
     <string name="home_app" msgid="6056850504746902747">"Aplikasi layar utama"</string>
     <string name="suggestion_additional_fingerprints" msgid="4726777300101156208">"Tambahkan sidik jari lain"</string>
     <string name="suggestion_additional_fingerprints_summary" msgid="2825364645039666674">"Buka kunci dengan jari lain"</string>
@@ -4197,9 +4199,9 @@
     <string name="notification_suggestion_summary" msgid="7615611244249276113">"Menampilkan atau menyembunyikan konten notifikasi"</string>
     <string name="page_tab_title_support" msgid="3235725053332345773">"Tips &amp; dukungan"</string>
     <string name="developer_smallest_width" msgid="632354817870920911">"Lebar terkecil"</string>
-    <string name="premium_sms_none" msgid="8737045049886416739">"Tidak ada aplikasi terinstal yang meminta akses SMS Premium"</string>
+    <string name="premium_sms_none" msgid="4718916765158062108">"Tidak ada aplikasi terinstal yang meminta SMS Premium"</string>
     <string name="premium_sms_warning" msgid="2192300872411073324">"SMS Premium mungkin memerlukan biaya dan akan menambah tagihan operator. Jika izin aplikasi diaktifkan, Anda dapat mengirim SMS premium menggunakan aplikasi tersebut."</string>
-    <string name="premium_sms_access" msgid="5605970342699013212">"Akses SMS Premium"</string>
+    <string name="premium_sms_access" msgid="8487315743197916530">"SMS Premium"</string>
     <string name="bluetooth_disabled" msgid="835838280837359514">"Nonaktif"</string>
     <string name="bluetooth_connected_summary" msgid="8043167194934315712">"Terhubung ke <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="2294954614327771844">"Terhubung ke beberapa perangkat"</string>
@@ -4806,23 +4808,23 @@
     <string name="enable_16k_pages" msgid="8001470927566110689">"Booting dengan ukuran halaman 16KB"</string>
     <string name="enable_16k_pages_summary" msgid="1964363364670306912">"Booting perangkat menggunakan kernel yang mendukung ukuran halaman 16KB"</string>
     <string name="confirm_enable_16k_pages_title" msgid="1286925577014793351">"Beralih dari mode 4KB ke mode 16KB"</string>
-    <string name="confirm_enable_16k_pages_text" msgid="570198382662424714">"Anda berada dalam mode halaman-agnostik yang menjalankan kernel 4KB, dan Anda beralih ke mode 16KB. Integritas software tidak dapat dijamin dalam mode ini, dan data apa pun yang disimpan di ponsel saat bootloader dibuka kuncinya mungkin berisiko. Tindakan ini akan memulai ulang perangkat. Beberapa fitur akan dinonaktifkan dalam mode ini, sehingga beberapa aplikasi mungkin tidak berfungsi. Untuk mengembalikan perangkat ke mode produksi, Anda perlu beralih kembali ke mode 4KB dan mengunci bootloader, yang akan mereset perangkat ke setelan pabrik. Setelah perangkat berhasil melakukan booting ke Android, nonaktifkan pembukaan kunci OEM di Opsi developer."</string>
+    <string name="confirm_enable_16k_pages_text" msgid="570198382662424714">"Anda berada dalam mode agnostik halaman yang menjalankan kernel 4KB, dan Anda beralih ke mode 16KB. Integritas software tidak dapat dijamin dalam mode ini, dan data apa pun yang disimpan di ponsel saat bootloader dibuka kuncinya dapat berpotensi terkena bahaya. Tindakan ini akan memulai ulang perangkat. Beberapa fitur akan dinonaktifkan dalam mode ini, sehingga beberapa aplikasi mungkin tidak berfungsi. Untuk mengembalikan perangkat ke mode produksi, Anda perlu beralih kembali ke mode 4KB dan mengunci bootloader, yang akan mereset perangkat ke setelan pabrik. Setelah perangkat berhasil melakukan booting ke Android, nonaktifkan pembukaan kunci OEM di Opsi developer."</string>
     <string name="confirm_enable_4k_pages_title" msgid="3210360137887034659">"Beralih dari mode 16KB ke mode 4KB"</string>
-    <string name="confirm_enable_4k_pages_text" msgid="155070605667160083">"Anda berada dalam mode halaman-agnostik yang menjalankan kernel 16KB, dan Anda beralih ke mode 4KB. Integritas software tidak dapat dijamin dalam mode ini, dan data apa pun yang disimpan di ponsel saat bootloader dibuka kuncinya mungkin berisiko. Tindakan ini akan memulai ulang perangkat. Beberapa fitur akan dinonaktifkan dalam mode ini, sehingga beberapa aplikasi mungkin tidak berfungsi. Untuk mengembalikan perangkat ke mode produksi, Anda perlu mengunci bootloader, yang akan mereset perangkat ke setelan pabrik. Setelah perangkat berhasil melakukan booting ke Android, nonaktifkan pembukaan kunci OEM di Opsi developer."</string>
+    <string name="confirm_enable_4k_pages_text" msgid="155070605667160083">"Anda berada dalam mode agnostik halaman yang menjalankan kernel 16KB, dan Anda beralih ke mode 4KB. Integritas software tidak dapat dijamin dalam mode ini, dan data apa pun yang disimpan di ponsel saat bootloader dibuka kuncinya dapat berpotensi terkena bahaya. Tindakan ini akan memulai ulang perangkat. Beberapa fitur akan dinonaktifkan dalam mode ini, sehingga beberapa aplikasi mungkin tidak berfungsi. Untuk mengembalikan perangkat ke mode produksi, Anda perlu mengunci bootloader, yang akan mereset perangkat ke setelan pabrik. Setelah perangkat berhasil melakukan booting ke Android, nonaktifkan pembukaan kunci OEM di Opsi developer."</string>
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"Gagal mengupdate kernel ke kernel yang kompatibel dengan halaman 16K."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Menerapkan perubahan"</string>
     <string name="confirm_format_ext4_title" msgid="6696191800594435577">"Format ulang perangkat ke ext4? (diperlukan untuk mode 16KB)"</string>
-    <string name="confirm_format_ext4_text" msgid="7940372488624630214">"Partisi data perangkat ini perlu dikonversi ke ext4 sebelum menggunakan opsi developer 16KB. Integritas software tidak dapat dijamin dalam mode ini, dan data apa pun yang disimpan di ponsel saat bootloader dibuka kuncinya mungkin berisiko. Mengaktifkan opsi 16KB akan memerlukan mulai ulang sekali lagi setelah ini. Setelah Anda berada dalam mode ini, Anda dapat beralih antara mode 4KB dan 16KB dengan sekali mulai ulang. Beberapa fitur akan dinonaktifkan dalam mode ini, sehingga beberapa aplikasi mungkin tidak berfungsi. Untuk mengembalikan perangkat ke mode produksi, Anda perlu beralih kembali ke mode 4KB dan mengunci bootloader, yang akan mereset perangkat ke setelan pabrik. Setelah perangkat berhasil melakukan booting ke Android, nonaktifkan pembukaan kunci OEM di Opsi developer. Perangkat akan dihapus total dan sistem file akan diubah menjadi ext4 setelah konfirmasi. Setelah selesai, kembali untuk mengaktifkan 16KB lagi."</string>
+    <string name="confirm_format_ext4_text" msgid="7940372488624630214">"Partisi data perangkat ini perlu dikonversi ke ext4 sebelum menggunakan opsi developer 16KB. Integritas software tidak dapat dijamin dalam mode ini, dan data apa pun yang disimpan di ponsel saat bootloader dibuka kuncinya dapat berpotensi terkena bahaya. Mengaktifkan opsi 16KB akan memerlukan mulai ulang sekali lagi setelah ini. Setelah Anda berada dalam mode ini, Anda dapat beralih antara mode 4KB dan 16KB dengan sekali mulai ulang. Beberapa fitur akan dinonaktifkan dalam mode ini, sehingga beberapa aplikasi mungkin tidak berfungsi. Untuk mengembalikan perangkat ke mode produksi, Anda perlu beralih kembali ke mode 4KB dan mengunci bootloader, yang akan mereset perangkat ke setelan pabrik. Setelah perangkat berhasil melakukan booting ke Android, nonaktifkan pembukaan kunci OEM di Opsi developer. Perangkat akan dihapus total dan sistem file akan diubah menjadi ext4 setelah konfirmasi. Setelah selesai, kembali untuk mengaktifkan 16KB lagi."</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Gagal memformat ulang dan menghapus total partisi data ke ext4."</string>
     <string name="confirm_oem_unlock_for_16k_title" msgid="5374451262432025419">"Buka Kunci Bootloader Diperlukan untuk menggunakan Mode 16KB"</string>
-    <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"Perangkat ini harus membuka kunci bootloader sebelum menggunakan opsi developer 16KB. Integritas software tidak dapat dijamin dalam mode ini, dan data apa pun yang disimpan di ponsel saat bootloader dibuka kuncinya mungkin berisiko. Semua data dan setelan pengguna akan dihapus total saat mengaktifkan mode 16KB. Setelah bootloader dibuka kuncinya, mengaktifkan opsi 16KB akan memerlukan dua kali mulai ulang. Setelah Anda berada dalam mode ini, Anda dapat beralih antara mode 4KB dan 16KB dengan sekali mulai ulang. Beberapa fitur akan dinonaktifkan dalam mode ini, sehingga beberapa aplikasi mungkin tidak berfungsi. Untuk mengembalikan perangkat ke mode produksi, Anda perlu beralih kembali ke mode 4KB dan mengunci bootloader/OEM perangkat (yang akan mereset perangkat setelan pabrik). Buka kunci bootloader dan coba lagi. Anda dapat melihat petunjuk cara melakukannya di &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
-    <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"Menggunakan mode halaman-agnostik 4KB"</string>
-    <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"Anda berada dalam mode 4KB dari mode halaman-agnostik. Integritas software tidak dapat dijamin dalam mode ini, dan data apa pun yang disimpan di ponsel saat bootloader dibuka kuncinya mungkin berisiko. Beberapa fitur akan dinonaktifkan dalam mode ini, sehingga beberapa aplikasi mungkin tidak berfungsi. Agar dapat kembali masuk ke mode produksi, Anda harus mengunci bootloader perangkat. Ketuk untuk membaca selengkapnya."</string>
-    <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"Anda berada dalam mode 4KB dari mode halaman-agnostik. Integritas software tidak dapat dijamin dalam mode ini, dan data apa pun yang disimpan di ponsel saat bootloader dibuka kuncinya mungkin berisiko. Beberapa fitur akan dinonaktifkan dalam mode ini, sehingga beberapa aplikasi mungkin tidak berfungsi. Agar dapat kembali masuk ke mode produksi, Anda harus mengunci bootloader perangkat. Tindakan ini akan mereset perangkat ke setelan pabrik dan memulihkannya ke setelan produksi. Setelah perangkat berhasil melakukan booting ke Android, nonaktifkan pembukaan kunci OEM di Opsi developer. Jika perangkat gagal melakukan booting ke Android atau tidak stabil, flash ulang perangkat dengan setelan pabrik terbaru dari &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; or use &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; dan pilih \'Hapus Total Perangkat\', \'Kunci Bootloader\', dan \'Paksa Flash semua partisi\'."</string>
-    <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"Menggunakan mode halaman-agnostik 16KB"</string>
-    <string name="page_agnostic_16k_pages_text_short" msgid="269039281591806585">"Anda berada dalam mode 16KB dari mode halaman-agnostik. Integritas software tidak dapat dijamin dalam mode ini, dan data apa pun yang disimpan di ponsel saat bootloader dibuka kuncinya mungkin berisiko. Beberapa fitur akan dinonaktifkan dalam mode ini, sehingga beberapa aplikasi mungkin tidak berfungsi. Agar dapat kembali masuk ke mode produksi, Anda harus beralih kembali ke mode 4K dan kemudian mengunci bootloader perangkat. Ketuk untuk membaca selengkapnya."</string>
-    <string name="page_agnostic_16k_pages_text" msgid="6208765386837706582">"Anda berada dalam mode 16KB dari mode halaman-agnostik. Integritas software tidak dapat dijamin dalam mode ini, dan data apa pun yang disimpan di ponsel saat bootloader dibuka kuncinya mungkin berisiko. Beberapa fitur akan dinonaktifkan dalam mode ini, sehingga beberapa aplikasi mungkin tidak berfungsi. Agar dapat kembali masuk ke mode produksi, Anda harus beralih kembali ke mode 4K dan kemudian mengunci bootloader perangkat. Tindakan ini akan mereset perangkat ke setelan pabrik dan memulihkannya ke setelan produksi. Setelah perangkat berhasil melakukan booting ke Android, nonaktifkan pembukaan kunci OEM di Opsi developer. Jika perangkat gagal melakukan booting ke Android atau tidak stabil, flash ulang perangkat dengan setelan pabrik terbaru dari &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; or use &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; dan pilih \'Hapus Total Perangkat\', \'Kunci Bootloader\', dan \'Paksa Flash semua partisi\'."</string>
-    <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"Mode Halaman-agnostik 16KB"</string>
+    <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"Perangkat ini harus membuka kunci bootloader sebelum menggunakan opsi developer 16KB. Integritas software tidak dapat dijamin dalam mode ini, dan data apa pun yang disimpan di ponsel saat bootloader dibuka kuncinya dapat berpotensi terkena bahaya. Semua data dan setelan pengguna akan dihapus total saat mengaktifkan mode 16KB. Setelah bootloader dibuka kuncinya, mengaktifkan opsi 16KB akan memerlukan dua kali mulai ulang. Setelah Anda berada dalam mode ini, Anda dapat beralih antara mode 4KB dan 16KB dengan sekali mulai ulang. Beberapa fitur akan dinonaktifkan dalam mode ini, sehingga beberapa aplikasi mungkin tidak berfungsi. Untuk mengembalikan perangkat ke mode produksi, Anda perlu beralih kembali ke mode 4KB dan mengunci bootloader/OEM perangkat (yang akan mereset perangkat setelan pabrik). Buka kunci bootloader dan coba lagi. Anda dapat melihat petunjuk cara melakukannya di &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
+    <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"Menggunakan mode agnostik halaman 4KB"</string>
+    <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"Anda berada dalam mode 4KB dari mode agnostik halaman. Integritas software tidak dapat dijamin dalam mode ini, dan data apa pun yang disimpan di ponsel saat bootloader dibuka kuncinya dapat berpotensi terkena bahaya. Beberapa fitur akan dinonaktifkan dalam mode ini, sehingga beberapa aplikasi mungkin tidak berfungsi. Agar dapat kembali masuk ke mode produksi, Anda harus mengunci bootloader perangkat. Ketuk untuk membaca selengkapnya."</string>
+    <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"Anda berada dalam mode 4KB dari mode agnostik halaman. Integritas software tidak dapat dijamin dalam mode ini, dan data apa pun yang disimpan di ponsel saat bootloader dibuka kuncinya dapat berpotensi terkena bahaya. Beberapa fitur akan dinonaktifkan dalam mode ini, sehingga beberapa aplikasi mungkin tidak berfungsi. Agar dapat kembali masuk ke mode produksi, Anda harus mengunci bootloader perangkat. Tindakan ini akan mereset perangkat ke setelan pabrik dan memulihkannya ke setelan produksi. Setelah perangkat berhasil melakukan booting ke Android, nonaktifkan pembukaan kunci OEM di Opsi developer. Jika perangkat gagal melakukan booting ke Android atau tidak stabil, flash ulang perangkat dengan setelan pabrik terbaru dari &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; atau gunakan &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; dan pilih \'Hapus Total Perangkat\', \'Kunci Bootloader\', dan \'Paksa Flash semua partisi\'."</string>
+    <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"Menggunakan mode agnostik halaman 16KB"</string>
+    <string name="page_agnostic_16k_pages_text_short" msgid="269039281591806585">"Anda berada dalam mode 16KB dari mode agnostik halaman. Integritas software tidak dapat dijamin dalam mode ini, dan data apa pun yang disimpan di ponsel saat bootloader dibuka kuncinya dapat berpotensi terkena bahaya. Beberapa fitur akan dinonaktifkan dalam mode ini, sehingga beberapa aplikasi mungkin tidak berfungsi. Agar dapat kembali masuk ke mode produksi, Anda harus beralih kembali ke mode 4K dan kemudian mengunci bootloader perangkat. Ketuk untuk membaca selengkapnya."</string>
+    <string name="page_agnostic_16k_pages_text" msgid="6208765386837706582">"Anda berada dalam mode 16KB dari mode agnostik halaman. Integritas software tidak dapat dijamin dalam mode ini, dan data apa pun yang disimpan di ponsel saat bootloader dibuka kuncinya dapat berpotensi terkena bahaya. Beberapa fitur akan dinonaktifkan dalam mode ini, sehingga beberapa aplikasi mungkin tidak berfungsi. Agar dapat kembali masuk ke mode produksi, Anda harus beralih kembali ke mode 4K dan kemudian mengunci bootloader perangkat. Tindakan ini akan mereset perangkat ke setelan pabrik dan memulihkannya ke setelan produksi. Setelah perangkat berhasil melakukan booting ke Android, nonaktifkan pembukaan kunci OEM di Opsi developer. Jika perangkat gagal melakukan booting ke Android atau tidak stabil, flash ulang perangkat dengan setelan pabrik terbaru dari &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; atau gunakan &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; dan pilih \'Hapus Total Perangkat\', \'Kunci Bootloader\', dan \'Paksa Flash semua partisi\'."</string>
+    <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"Mode Agnostik halaman 16KB"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Baca selengkapnya"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Pengendali laporan bug"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Menentukan aplikasi mana yang menangani pintasan Laporan Bug di perangkat."</string>
@@ -4990,12 +4992,9 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Nonaktifkan mode pesawat untuk menggunakan UWB"</string>
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"UWB tidak tersedia di lokasi saat ini"</string>
     <string name="thread_network_settings_title" msgid="4212301030523859220">"Thread"</string>
-    <!-- no translation found for thread_network_settings_main_switch_title (3859168481929323474) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_footer_title (7385600318850220927) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_learn_more (8278498005848565050) -->
-    <skip />
+    <string name="thread_network_settings_main_switch_title" msgid="3859168481929323474">"Gunakan Thread"</string>
+    <string name="thread_network_settings_footer_title" msgid="7385600318850220927">"Thread membantu menghubungkan perangkat smart home Anda, meningkatkan efisiensi, dan performa.\n\nJika diaktifkan, perangkat ini memenuhi syarat untuk bergabung dengan jaringan Thread sehingga memungkinkan kontrol atas perangkat yang didukung Matter melalui ponsel ini."</string>
+    <string name="thread_network_settings_learn_more" msgid="8278498005848565050">"Pelajari lebih lanjut Thread"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"Akses kamera"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Akses mikrofon"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"Untuk aplikasi dan layanan"</string>
@@ -5080,12 +5079,12 @@
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"Audio akan berubah saat Anda menggerakkan kepala agar terdengar lebih alami"</string>
     <string name="bluetooth_details_permissions_sync_title" msgid="7277580382321003521">"Sinkronkan izin dari ponsel"</string>
     <string name="bluetooth_details_permissions_sync_summary" msgid="8125037984381432059">"Memberi smartwatch izin aplikasi yang sama dengan yang Anda berikan di ponsel ini"</string>
-    <string name="bluetooth_details_audio_device_types_title" msgid="3381941189346781614">"Jenis Perangkat Audio"</string>
-    <string name="bluetooth_details_audio_device_type_unknown" msgid="839337391037998014">"Tidak diketahui"</string>
+    <string name="bluetooth_details_audio_device_types_title" msgid="1889644189800180316">"Jenis perangkat audio"</string>
+    <string name="bluetooth_details_audio_device_type_unknown" msgid="5299284975435974206">"Tidak disetel"</string>
     <string name="bluetooth_details_audio_device_type_speaker" msgid="3706227767994792124">"Speaker"</string>
     <string name="bluetooth_details_audio_device_type_headphones" msgid="7644588291215033798">"Headphone"</string>
-    <string name="bluetooth_details_audio_device_type_hearing_aid" msgid="1310631131071939859">"Alat Bantu Dengar"</string>
-    <string name="bluetooth_details_audio_device_type_carkit" msgid="4439017600454703229">"Kit Mobil"</string>
+    <string name="bluetooth_details_audio_device_type_hearing_aid" msgid="6311786545025321187">"Alat bantu dengar"</string>
+    <string name="bluetooth_details_audio_device_type_carkit" msgid="1866236563013629394">"Mobil"</string>
     <string name="bluetooth_details_audio_device_type_other" msgid="7019481234617207563">"Lainnya"</string>
     <string name="ingress_rate_limit_title" msgid="2106694002836274350">"Batas kecepatan download jaringan"</string>
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"Konfigurasi batas kecepatan masuk bandwidth jaringan yang diterapkan ke semua jaringan yang menyediakan koneksi internet."</string>
@@ -5170,8 +5169,6 @@
     <string name="screen_flash_color_violet" msgid="1279950780509029495">"Violet"</string>
     <string name="color_selector_dialog_done" msgid="121253968943363376">"Selesai"</string>
     <string name="color_selector_dialog_cancel" msgid="8667350644753900701">"Batal"</string>
-    <string name="contrast_title" msgid="6885768151336508075">"Kontras"</string>
-    <string name="contrast_standard" msgid="1097297089917185235">"Standar"</string>
     <string name="contrast_default" msgid="8918545965525226966">"Default"</string>
     <string name="contrast_medium" msgid="384414510709285811">"Sedang"</string>
     <string name="contrast_high" msgid="3988567609694797696">"Tinggi"</string>
@@ -5208,4 +5205,100 @@
     <string name="fingerprint_acquired_imager_dirty_udfps" msgid="7005042288289506776">"Bersihkan layar di dekat sensor, lalu coba lagi"</string>
     <string name="sim_category_converted_sim" msgid="8575548015816988908">"Dikonversi ke eSIM. Hapus."</string>
     <string name="sync_across_devices_title" msgid="3447757705383089345">"Sinkronkan di seluruh perangkat"</string>
+    <!-- no translation found for device_diagnostics_title (2914523189695727897) -->
+    <skip />
+    <string name="audio_sharing_title" msgid="4144157137502923821">"Berbagi audio"</string>
+    <string name="audio_sharing_switch_title" msgid="7052827328670825701">"Bagikan audio"</string>
+    <string name="calls_and_alarms_device_title" msgid="6993559028175454198">"Panggilan dan alarm"</string>
+    <string name="audio_sharing_description" msgid="1660255584523640628">"Izinkan orang lain mendengarkan media bersama Anda. Pendengar memerlukan headphone LE Audio mereka sendiri."</string>
+    <string name="audio_sharing_device_group_title" msgid="3019780581643956943">"Perangkat media yang aktif"</string>
+    <string name="audio_sharing_call_audio_title" msgid="7978867452289583929">"Audio panggilan"</string>
+    <string name="audio_sharing_call_audio_description" msgid="6573621048260616924">"Hanya diputar di <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_sharing_test_sound_title" msgid="6438868185641027763">"Putar suara uji coba"</string>
+    <string name="audio_sharing_test_sound_description" msgid="4072462502371937399">"Semua orang yang mendengarkan seharusnya dapat mendengarnya"</string>
+    <string name="audio_sharing_stream_settings_title" msgid="1374391898689242036">"Setelan streaming audio"</string>
+    <string name="audio_sharing_stream_name_title" msgid="8156859441897180940">"Nama"</string>
+    <string name="audio_sharing_stream_password_title" msgid="7026649168165764602">"Sandi"</string>
+    <string name="audio_sharing_stream_compatibility_title" msgid="5690947186724469918">"Meningkatkan kompatibilitas"</string>
+    <string name="audio_sharing_stream_compatibility_description" msgid="8170241188606110963">"Membantu beberapa perangkat, seperti alat bantu dengar, terhubung dengan mengurangi kualitas audio"</string>
+    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="2586408353546825682">"Menonaktifkan berbagi audio untuk mengonfigurasi kompatibilitas"</string>
+    <string name="audio_sharing_nearby_audio_title" msgid="4795438407040677177">"Dengarkan audio di sekitar"</string>
+    <string name="audio_sharing_footer_description" msgid="4786942197840271680">"Berbagi audio mendukung Auracast™"</string>
+    <string name="audio_sharing_stream_name_dialog_title" msgid="6706027295417556499">"Nama streaming audio"</string>
+    <string name="audio_sharing_stream_password_dialog_title" msgid="4148196538860845705">"Sandi streaming audio"</string>
+    <string name="audio_sharing_media_device_group_title" msgid="4850674234590549565">"Perangkat media lainnya"</string>
+    <string name="audio_sharing_summary_on" msgid="611197542982323788">"Aktif"</string>
+    <string name="audio_sharing_summary_off" msgid="8833198995257547378">"Nonaktif"</string>
+    <string name="audio_sharing_share_dialog_title" msgid="427514648577553621">"Bagikan audio Anda"</string>
+    <string name="audio_sharing_share_dialog_subtitle" msgid="5208582843732057871">"<xliff:g id="DEVICE_NAME1">%1$s</xliff:g> dan <xliff:g id="DEVICE_NAME2">%2$s</xliff:g>"</string>
+    <string name="audio_sharing_share_button_label" msgid="3895900668317105537">"Bagikan audio"</string>
+    <string name="audio_sharing_no_thanks_button_label" msgid="5822491984114744357">"Lain kali"</string>
+    <string name="audio_sharing_share_with_dialog_title" msgid="3934377530640830364">"Bagikan audio dengan <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
+    <string name="audio_sharing_share_with_more_dialog_title" msgid="2840069088858232267">"Membagikan audio dengan perangkat lain"</string>
+    <string name="audio_sharing_share_with_button_label" msgid="4146194430380237357">"Berbagi dengan <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_sharing_close_button_label" msgid="2666534149100498574">"Tutup"</string>
+    <string name="audio_sharing_dialog_connect_device_content" msgid="2873230647152283734">"Hubungkan headphone lain yang kompatibel, atau bagikan nama dan sandi streaming Anda dengan orang lain"</string>
+    <string name="audio_sharing_dialog_pair_device_content" msgid="3136997898244863470">"Sambungkan headphone lain yang kompatibel, atau bagikan kode QR streaming audio Anda dengan orang lain"</string>
+    <string name="audio_sharing_sharing_label" msgid="1038021053061111508">"Berbagi audio"</string>
+    <string name="audio_sharing_pair_button_label" msgid="7987236990273083588">"Sambungkan perangkat baru"</string>
+    <string name="audio_sharing_qrcode_button_label" msgid="3207039106555097659">"Tampilkan kode QR"</string>
+    <string name="audio_sharing_notification_title" msgid="1204798942946033005">"Anda membagikan audio"</string>
+    <string name="audio_sharing_notification_content" msgid="1577180829878785642">"Orang yang mendengarkan dapat mendengar media Anda. Mereka tidak dapat mendengarkan panggilan."</string>
+    <string name="audio_sharing_stop_button_label" msgid="8770519671470608849">"Berhenti berbagi"</string>
+    <string name="audio_sharing_settings_button_label" msgid="8574808650318270491">"Setelan"</string>
+    <string name="audio_sharing_disconnect_dialog_title" msgid="2192751727237748602">"Memilih perangkat yang ingin diputuskan sambungannya"</string>
+    <string name="audio_sharing_dialog_disconnect_content" msgid="3840488888970653308">"Hanya 2 perangkat yang dapat membagikan audio pada satu waktu"</string>
+    <string name="audio_sharing_disconnect_device_button_label" msgid="4272897217708930576">"Putuskan sambungan <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_sharing_stop_dialog_title" msgid="4872853738164232075">"Hubungkan <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
+    <string name="audio_sharing_stop_dialog_content" msgid="6371546856710692910">"Anda akan berhenti berbagi audio dengan <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_sharing_stop_dialog_with_two_content" msgid="2119020725467967219">"Anda akan berhenti berbagi audio dengan <xliff:g id="DEVICE_NAME1">%1$s</xliff:g> dan <xliff:g id="DEVICE_NAME2">%2$s</xliff:g>"</string>
+    <string name="audio_sharing_stop_dialog_with_more_content" msgid="5262441138981618703">"Anda akan berhenti berbagi audio dengan headphone yang terhubung"</string>
+    <string name="audio_sharing_connect_button_label" msgid="4241911519063029982">"Hubungkan"</string>
+    <string name="audio_sharing_sharing_stopped_label" msgid="8128194452354240996">"Berbagi audio dihentikan"</string>
+    <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"Hubungkan perangkat yang kompatibel"</string>
+    <string name="audio_sharing_comfirm_dialog_content" msgid="3479217934447446066">"Untuk mulai berbagi audio, hubungkan headphone LE Audio ke ponsel Anda terlebih dahulu"</string>
+    <string name="audio_streams_category_title" msgid="4878022761829895463">"Hubungkan ke streaming LE audio"</string>
+    <string name="audio_streams_pref_title" msgid="6320485086288646209">"Streaming audio di sekitar"</string>
+    <string name="audio_streams_title" msgid="6617990880383079165">"Streaming audio"</string>
+    <string name="audio_streams_qr_code_summary" msgid="2838923349871884871">"Hubungkan ke streaming audio menggunakan kode QR"</string>
+    <string name="audio_streams_empty" msgid="8803517701437394982">"Tidak ada streaming audio di sekitar."</string>
+    <string name="audio_streams_disconnect" msgid="1755594831469579161">"Berhenti menghubungkan"</string>
+    <string name="audio_streams_connect" msgid="1955964373102927954">"Hubungkan"</string>
+    <string name="audio_streams_qr_code_is_not_valid_format" msgid="4856288389653121830">"Format kode QR tidak valid"</string>
+    <string name="audio_streams_qr_code_scanner" msgid="525396804963685478">"Untuk mulai mendengarkan, pusatkan kode QR di bawah"</string>
+    <string name="audio_streams_add_source_bad_code_state_summary" msgid="6527086906921868757">"Periksa sandi dan coba lagi"</string>
+    <string name="audio_streams_add_source_failed_state_summary" msgid="3937546443978562322">"Tidak dapat terhubung. Coba lagi."</string>
+    <string name="audio_streams_add_source_wait_for_response_summary" msgid="3763240901110974606">"Menghubungkan…"</string>
+    <string name="audio_streams_wait_for_sync_state_summary" msgid="11905744690831864">"Memindai…"</string>
+    <string name="audio_streams_dialog_stream_is_not_available" msgid="4032878851270690546">"Streaming audio tidak tersedia"</string>
+    <string name="audio_streams_is_not_playing" msgid="8480293894696007941">"Streaming audio ini tidak memutar apa pun saat ini"</string>
+    <string name="audio_streams_dialog_close" msgid="8177201719298408431">"Tutup"</string>
+    <string name="audio_streams_dialog_listen" msgid="7290340191504987685">"Dengarkan"</string>
+    <string name="audio_streams_dialog_retry" msgid="4456843891970998556">"Coba lagi"</string>
+    <string name="audio_streams_dialog_listen_to_audio_stream" msgid="8585253007762261528">"Mendengarkan streaming audio"</string>
+    <string name="audio_streams_dialog_control_volume" msgid="7615062686016713544">"Streaming audio akan diputar di <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Gunakan perangkat ini untuk mengontrol volume."</string>
+    <string name="audio_streams_dialog_cannot_listen" msgid="4432257183698209966">"Tidak dapat mendengarkan streaming audio"</string>
+    <string name="audio_streams_dialog_default_device" msgid="6159800303379303266">"headphone kompatibel yang terhubung"</string>
+    <string name="audio_streams_activity_title" msgid="9011162151277443663">"Siaran"</string>
+    <string name="audio_streams_no_password_summary" msgid="8976357323034830144">"Tidak ada sandi"</string>
+    <string name="audio_streams_dialog_learn_more" msgid="6711241053442211345">"Pelajari lebih lanjut"</string>
+    <string name="audio_streams_dialog_cannot_play" msgid="1358828316927479091">"Tidak dapat memutar streaming audio ini di <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
+    <string name="audio_streams_listening_now" msgid="4205614429222949176">"Mendengarkan sekarang"</string>
+    <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"Berhenti mendengarkan"</string>
+    <string name="audio_streams_dialog_no_le_device_title" msgid="3931163990976742282">"Hubungkan headphone yang kompatibel"</string>
+    <string name="audio_streams_dialog_no_le_device_button" msgid="4484355549428642588">"Hubungkan perangkat"</string>
+    <string name="audio_streams_detail_page_title" msgid="7884132061275273766">"Detail streaming audio"</string>
+    <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"Kode QR streaming audio"</string>
+    <string name="audio_streams_qr_code_page_password" msgid="7268475614131297060">"Sandi: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
+    <string name="audio_streams_qr_code_page_description" msgid="1317961663706630428">"Untuk mendengarkan <xliff:g id="STREAM_NAME">%1$s</xliff:g>, orang lain dapat menghubungkan headphone yang kompatibel ke perangkat Android mereka. Kemudian, mereka dapat memindai kode QR ini."</string>
+    <string name="audio_streams_main_page_title" msgid="1838380471076527639">"Temukan streaming audio"</string>
+    <string name="audio_streams_main_page_subtitle" msgid="3251995732921981539">"Mendengarkan perangkat yang membagikan audio atau siaran Auracast di sekitar"</string>
+    <string name="audio_streams_main_page_device_title" msgid="2635744035523908253">"Perangkat audio Anda"</string>
+    <string name="audio_streams_main_page_no_device_summary" msgid="2936000845397406389">"Hubungkan headphone yang kompatibel"</string>
+    <string name="audio_streams_main_page_scan_section_title" msgid="2778235929304061163">"Streaming audio di sekitar"</string>
+    <string name="audio_streams_main_page_scan_qr_code_title" msgid="8337270277392468895">"Pindai kode QR"</string>
+    <string name="audio_streams_main_page_scan_qr_code_summary" msgid="1991792283368249499">"Mulai mendengarkan dengan memindai kode QR streaming"</string>
+    <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Dengarkan streaming"</string>
+    <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Pindai kode QR streaming audio agar dapat mendengarkan dengan <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Tidak dapat mengedit sandi saat sedang membagikan audio. Untuk mengubah sandi, nonaktifkan berbagi audio terlebih dahulu."</string>
 </resources>

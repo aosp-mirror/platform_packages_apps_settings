@@ -48,9 +48,9 @@
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"Pouze hry, videa a další"</string>
     <string name="selective_stay_awake_summary" msgid="9055967322921984543">"U aplikací, které obrazovce brání v přechodu do režimu nečinnosti, se zapne přední displej"</string>
     <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Pokračovat přejetím nahoru"</string>
-    <string name="stay_awake_on_lockscreen_summary" msgid="2299351813382522952">"Pokud chcete aplikaci dál používat, složte telefon a po předním displeji přejeďte prstem nahoru nebo pár sekund počkejte, než se obrazovka zamkne"</string>
+    <string name="stay_awake_on_lockscreen_summary" msgid="8825321939913726566">"Pokud chcete aplikaci dál používat, složte telefon a po předním displeji přejeďte prstem nahoru nebo pár sekund počkejte, než se obrazovka zamkne. Hry a aplikace s videem budou automaticky pokračovat."</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"Nikdy"</string>
-    <string name="sleep_on_fold_summary" msgid="7737992842459588846">"Když zařízení složíte, přední displej se uzamkne"</string>
+    <string name="sleep_on_fold_summary" msgid="4191753338303043456">"Když zařízení složíte, přední displej se vypne a uzamkne"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Automaticky otáčet obrazovku"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"Rozpoznání obličeje používá přední fotoaparát ke zvýšení přesnosti automatického otáčení. Fotky se neukládají ani neodesílají do Googlu."</string>
     <string name="bluetooth" msgid="8898478620943459654">"Bluetooth"</string>
@@ -139,7 +139,6 @@
     <string name="stylus_textfield_handwriting" msgid="2363579035338976327">"Psát do textových polí"</string>
     <string name="stylus_ignore_button" msgid="7734540973145241391">"Ignorovat všechna stisknutí tlačítka na dotykovém peru"</string>
     <string name="stylus_connected_devices_title" msgid="2823967577941359812">"Dotykové pero"</string>
-    <string name="audio_streams_empty" msgid="8803517701437394982">"Nebyly nalezeny žádné zvukové streamy v okolí."</string>
     <string name="date_and_time" msgid="1788358029823431692">"Datum a čas"</string>
     <string name="proxy_settings_title" msgid="4201866858226087066">"Proxy server"</string>
     <string name="proxy_clear_text" msgid="6529658759984031149">"Vymazat"</string>
@@ -286,8 +285,7 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Aplikace s oprávněním pro přístup k zařízením v okolí mohou zjišťovat relativní polohu připojených zařízení."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Přístup aplikací a služeb k poloze je vypnutý. Poloha zařízení může být přesto odesílána záchranářům, když vytočíte číslo tísňového volání nebo na něj pošlete SMS."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Další informace o nastavení polohy"</string>
-    <!-- no translation found for location_settings_tooltip_text_for_chrome (5781821709250544575) -->
-    <skip />
+    <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"Pokud chcete tuto možnost změnit, přejděte do nastavení systému ChromeOS &gt; Ochrana soukromí a zabezpečení &gt; Nastavení ochrany soukromí &gt; Přístup k poloze"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Účty"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Zabezpečení"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Šifrování a pověření"</string>
@@ -565,7 +563,7 @@
     <string name="private_space_auto_lock_title" msgid="8663409382910601261">"Automaticky zamykat soukromý prostor"</string>
     <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"Pokud zařízení nějakou dobu nepoužijete, soukromý prostor se může automaticky zamknout"</string>
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"Vždy, když se zařízení zamkne"</string>
-    <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"Po 5 minutách nečinnosti"</string>
+    <string name="private_space_auto_lock_after_inactivity" msgid="7107814517866649733">"5 minut po vypnutí obrazovky"</string>
     <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"Pouze po restartu zařízení"</string>
     <string name="private_space_hide_page_title" msgid="3364639176511877414">"Skrýt soukromý prostor"</string>
     <string name="private_space_hide_when_locked" msgid="6219472348124151797">"Skrýt soukromý prostor, když je uzamčený"</string>
@@ -821,7 +819,7 @@
     <string name="bluetooth_empty_list_bluetooth_off" msgid="7326727272747345476">"Když je připojení Bluetooth zapnuto, vaše zařízení může komunikovat s ostatními zařízeními Bluetooth v okolí."</string>
     <string name="bluetooth_empty_list_bluetooth_off_auto_on_available" msgid="3430864468105204282">"Když je zapnuté připojení Bluetooth, zařízení může komunikovat s ostatními zařízeními Bluetooth v okolí. Funkce jako Quick Share a Najdi moje zařízení využívají Bluetooth."</string>
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Když je připojení Bluetooth zapnuté, zařízení může komunikovat s ostatními zařízeními Bluetooth v okolí.\n\nZa účelem vylepšení funkcí však můžou aplikace a služby vyhledávat zařízení v okolí kdykoliv, dokonce i tehdy, když je Bluetooth vypnuté. Je tak například možné vylepšit funkce a služby založené na poloze. Toto chování můžete změnit v nastavení vyhledávání Bluetooth."</string>
-    <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"Když je zapnuté připojení Bluetooth, zařízení může komunikovat s ostatními zařízeními Bluetooth v okolí. Funkce jako Quick Share a Najdi moje zařízení využívají Bluetooth.\n\nAplikace a služby mohou vyhledávat zařízení v okolí, i když je rozhraní Bluetooth vypnuté. Lze to využít například ke zlepšení funkcí a služeb založených na poloze. Toto chování můžete změnit v nastavení vyhledávání Bluetooth."</string>
+    <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"Když je zapnuté připojení Bluetooth, zařízení může komunikovat s ostatními zařízeními Bluetooth v okolí. Bluetooth využívají například funkce jako Quick Share a Najdi moje zařízení.\n\nAplikace a služby mohou vyhledávat zařízení v okolí, i když je rozhraní Bluetooth vypnuté. Lze to využít například ke zlepšení funkcí a služeb založených na poloze. Toto chování můžete změnit v nastavení vyhledávání Bluetooth."</string>
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"Změnit"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Podrobnosti o zařízení"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Nastavení klávesnice"</string>
@@ -1753,7 +1751,7 @@
     <string name="enable_text" msgid="8570798764647110430">"Aktivovat"</string>
     <string name="clear_user_data_text" msgid="6773186434260397947">"Vymazat úložiště"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"Odinstalovat aktualizace"</string>
-    <string name="app_restricted_settings_lockscreen_title" msgid="796413224212436400">"Povolit omezená oprávnění"</string>
+    <string name="app_restricted_settings_lockscreen_title" msgid="5993061278264872648">"Povolit omezená nastavení"</string>
     <string name="auto_launch_enable_text" msgid="8912714475823807798">"Některé aktivity, které jste vybrali, se otevírají v této aplikaci podle výchozího nastavení."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"Této aplikaci jste povolili vytváření widgetů a přístup k jejich datům."</string>
     <string name="auto_launch_disable_text" msgid="502648841250936209">"Aplikace není nastavena jako výchozí pro žádné akce."</string>
@@ -2325,6 +2323,7 @@
     <string name="daltonizer_mode_protanomaly_title" msgid="6392456967103014723">"Červená a zelená"</string>
     <string name="daltonizer_mode_tritanomaly_title" msgid="2278786218762602022">"Modrá a žlutá"</string>
     <string name="daltonizer_mode_grayscale_title" msgid="152005391387952588">"Zešednutí obrazovky"</string>
+    <string name="daltonizer_saturation_title" msgid="2999486412114963068">"Intenzita"</string>
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="2117727423019598455">"Oslabené vidění zelené barvy, deuteranomálie"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="4617032854982040748">"Oslabené vidění červené barvy, protanomálie"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Tritanomálie"</string>
@@ -2405,7 +2404,6 @@
     <string name="keywords_select_to_speak" msgid="2872704811610888719"></string>
     <string name="keywords_color_correction" msgid="8540442886990423681">"upravit barvu"</string>
     <string name="keywords_color_inversion" msgid="4291058365873221962">"ztmavení obrazovky, zesvětlení obrazovky"</string>
-    <string name="keywords_contrast" msgid="4668393735398949873">"barevný kontrast"</string>
     <string name="keywords_accessibility_menu" msgid="4300579436464706608"></string>
     <string name="keywords_switch_access" msgid="5813094504384313402"></string>
     <string name="keywords_auto_click" msgid="6811744211216280998">"pohyb, myš, externí myš, náhlavní myš, adaptivní myš, invalidní vozík, joystick"</string>
@@ -2690,7 +2688,7 @@
     <string name="cellular_security_settings_title" msgid="7779141923670352595">"Zabezpečení mobilních sítí"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"Oznámení"</string>
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"Oznámení o sítích"</string>
-    <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"Zaslat oznámení, když se zařízení připojí k nezašifrované síti nebo když síť zaznamená jedinečný identifikátor zařízení nebo SIM karty"</string>
+    <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"Zasílat oznámení, když se zařízení připojí k nezašifrované síti nebo když síť zaznamená jedinečný identifikátor zařízení nebo SIM karty."</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"Šifrování"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"Generace sítí"</string>
     <string name="cellular_security_network_generations_summary" msgid="139087814553929402">"Každou nainstalovanou SIM kartu můžete nakonfigurovat, aby se připojovala pouze k sítím, které podporují 3G, 4G a 5G. Ke starším, nezabezpečeným sítím 2G, se SIM karta připojovat nebude. Toto nastavení může omezit možnost připojení v situacích, kdy bude k dispozici pouze síť 2G. V případě naléhavé události může být síť 2G použita."</string>
@@ -3299,13 +3297,14 @@
     <string name="live_caption_summary" msgid="2898451867595161809">"Automatické přepisy médií"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Sluchátka s kabelem"</string>
     <string name="spatial_audio_text" msgid="8201387855375146000">"Zvuk z kompatibilních médií bude realističtější"</string>
-    <string name="spatial_summary_off" msgid="8272678804629774378">"Vypnuto"</string>
+    <string name="spatial_summary_off" msgid="8272678804629774378">"Vypnutý"</string>
     <string name="spatial_summary_on_one" msgid="6239933399496282994">"Zapnuto / <xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"Zapnuto / <xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> a <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
     <string name="spatial_audio_footer_title" msgid="8775010547623606088">"Prostorový zvuk můžete zapnout také pro zařízení Bluetooth."</string>
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Nastavení připojených zařízení"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Žádný}=1{Nastaven 1 plán}few{Nastaveny # plány}many{Nastaveno # plánu}other{Nastaveno # plánů}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Nerušit"</string>
+    <string name="zen_modes_list_title" msgid="5138745349253275428">"Režim priority"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Přijímat pouze oznámení od důležitých lidí a z důležitých aplikací"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Omezení vyrušení"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Zapněte funkci Nerušit"</string>
@@ -3532,7 +3531,7 @@
     <string name="notifications_sent_daily" msgid="10274479224185437">"{count,plural, =1{Přibližně # oznámení za den}few{Přibližně # oznámení za den}many{Přibližně # oznámení za den}other{Přibližně # oznámení za den}}"</string>
     <string name="notifications_sent_weekly" msgid="7895656213187555346">"{count,plural, =1{Přibližně # oznámení za týden}few{Přibližně # oznámení za týden}many{Přibližně # oznámení za týden}other{Přibližně # oznámení za týden}}"</string>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Nikdy"</string>
-    <string name="manage_notification_access_title" msgid="6481256069087219982">"Oznámení ze zařízení a aplikací"</string>
+    <string name="manage_notification_access_title" msgid="4154723216570646451">"Ovládání a čtení oznámení a odpovídání na ně"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"Ovládat, které aplikace a zařízení mohou číst oznámení"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8643809206612366067">"Přístup k oznámením pracovního profilu je zablokován"</string>
     <string name="notification_assistant_title" msgid="5889201903272393099">"Vylepšená oznámení"</string>
@@ -3632,7 +3631,7 @@
     <string name="app_notification_block_summary" msgid="1804611676339341551">"Tato oznámení nikdy nezobrazovat"</string>
     <string name="notification_content_block_title" msgid="6689085826061361351">"Zobrazovat oznámení"</string>
     <string name="notification_content_block_summary" msgid="329171999992248925">"Nezobrazovat oznámení na panelu ani v periferních zařízeních"</string>
-    <string name="app_notification_fsi_permission_title" msgid="5424116606034705020">"Povolit oznámení na celou obrazovku"</string>
+    <string name="app_notification_fsi_permission_title" msgid="2260977598430154428">"Povolit oznámení na celou obrazovku"</string>
     <string name="app_notification_fsi_permission_summary" msgid="7673487977631068039">"Povolte oznámení na celou obrazovku, když bude zařízení zamknuté"</string>
     <string name="notification_badge_title" msgid="6854537463548411313">"Povolit puntík s oznámením"</string>
     <string name="notification_channel_badge_title" msgid="6505542437385640049">"Zobrazovat puntík s oznámením"</string>
@@ -3981,8 +3980,8 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Povolit přístup ke správě všech souborů"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Když tuto možnost povolíte, aplikace bude moci načítat, upravovat a mazat soubory v tomto zařízení a v připojených úložištích. Aplikace bude mít přístup k souborům i bez vašeho vědomí."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Mají přístup ke všem souborům"</string>
-    <string name="full_screen_intent_title" msgid="747270185715224130">"Oznámení na celou obrazovku"</string>
-    <string name="permit_full_screen_intent" msgid="9035367640019960861">"Povolit oznámení z této aplikace na celou obrazovku"</string>
+    <string name="full_screen_intent_title" msgid="5888548315628268674">"Oznámení na celou obrazovku"</string>
+    <string name="permit_full_screen_intent" msgid="2414307667550523630">"Povolit oznámení z této aplikace na celou obrazovku"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Aplikaci můžete povolit zobrazovat oznámení přes celou obrazovku, když bude zařízení zamknuté. Aplikace tak mohou zvýraznit budíky, příchozí hovory a další důležitá oznámení."</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"Aplikace pro správu médií"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Povolit aplikaci spravovat média"</string>
@@ -4100,7 +4099,7 @@
     <string name="data_usage_template" msgid="3822452362629968010">"Využito <xliff:g id="ID_1">%1$s</xliff:g> (<xliff:g id="ID_2">%2$s</xliff:g>)"</string>
     <string name="configure" msgid="1499586749829665889">"Konfigurovat"</string>
     <string name="data_usage_other_apps" msgid="5649047093607329537">"Ostatní aplikace zahrnuté do využití"</string>
-    <string name="data_saver_unrestricted_summary" msgid="7343571401172437542">"{count,plural, =1{1 aplikace má povoleno využívat neomezená data, i když je zapnutý Spořič dat}few{# aplikace mají povoleno využívat neomezená data, i když je zapnutý Spořič dat}many{# aplikace má povoleno využívat neomezená data, i když je zapnutý Spořič dat}other{# aplikací má povoleno využívat neomezená data, i když je zapnutý Spořič dat}}"</string>
+    <string name="data_saver_unrestricted_summary" msgid="559673440849071149">"{count,plural, =1{1 aplikace má povoleno využívat neomezená mobilní data, i když je zapnutý Spořič dat}few{# aplikace mají povoleno využívat neomezená mobilní data, i když je zapnutý Spořič dat}many{# aplikace má povoleno využívat neomezená mobilní data, i když je zapnutý Spořič dat}other{# aplikací má povoleno využívat neomezená mobilní data, i když je zapnutý Spořič dat}}"</string>
     <string name="data_usage_title" msgid="4039024073687469094">"Primární data"</string>
     <string name="data_usage_wifi_title" msgid="1060495519280456926">"Data přes Wi‑Fi"</string>
     <string name="data_used_formatted" msgid="7913920278059077938">"Využito <xliff:g id="ID_1">^1</xliff:g> <xliff:g id="ID_2">^2</xliff:g>"</string>
@@ -4117,13 +4116,13 @@
     <string name="no_carrier_update_now_text" msgid="7898004907837200752">"Aktualizováno teď"</string>
     <string name="launch_wifi_text" msgid="976421974332512894">"Zobrazit podrobnosti"</string>
     <string name="data_saver_title" msgid="2593804270788863815">"Spořič dat"</string>
-    <string name="unrestricted_data_saver" msgid="7922563266857367495">"Neomezená data"</string>
+    <string name="unrestricted_data_saver" msgid="5913547065342097274">"Neomezená mobilní data"</string>
     <string name="restrict_background_blocklisted" msgid="2308345280442438232">"Data na pozadí jsou vypnuta"</string>
     <string name="data_saver_on" msgid="7848893946018448793">"Zapnutý"</string>
     <string name="data_saver_off" msgid="5891210864117269045">"Vypnutý"</string>
     <string name="data_saver_switch_title" msgid="7111538580123722959">"Používat spořič dat"</string>
-    <string name="unrestricted_app_title" msgid="7117585996574329284">"Neomezené využívání dat"</string>
-    <string name="unrestricted_app_summary" msgid="282698963532000403">"Povolit neomezený přístup k datům, když je zapnutý spořič dat"</string>
+    <string name="unrestricted_app_title" msgid="8531936851059106374">"Neomezený přístup k mobilním datům"</string>
+    <string name="unrestricted_app_summary" msgid="8320813971858627624">"Povolit neomezený přístup k mobilním datům, když je zapnutý spořič dat"</string>
     <string name="home_app" msgid="6056850504746902747">"Vstupní aplikace"</string>
     <string name="suggestion_additional_fingerprints" msgid="4726777300101156208">"Přidejte další otisk"</string>
     <string name="suggestion_additional_fingerprints_summary" msgid="2825364645039666674">"Odemknout jiným prstem"</string>
@@ -4197,9 +4196,9 @@
     <string name="notification_suggestion_summary" msgid="7615611244249276113">"Zobrazit nebo skrýt obsah oznámení"</string>
     <string name="page_tab_title_support" msgid="3235725053332345773">"Tipy a podpora"</string>
     <string name="developer_smallest_width" msgid="632354817870920911">"Minimální šířka"</string>
-    <string name="premium_sms_none" msgid="8737045049886416739">"Žádné nainstalované aplikace o přístup k prémiovým SMS nepožádaly"</string>
+    <string name="premium_sms_none" msgid="4718916765158062108">"Žádné nainstalované aplikace o prémiové SMS nepožádaly"</string>
     <string name="premium_sms_warning" msgid="2192300872411073324">"Prémiové SMS mohou být zpoplatněny a jejich cena se přičte k fakturaci operátora. Pokud aplikaci udělíte příslušné oprávnění, budete pomocí této aplikace moci odesílat prémiové SMS."</string>
-    <string name="premium_sms_access" msgid="5605970342699013212">"Přístup k prémiovým SMS"</string>
+    <string name="premium_sms_access" msgid="8487315743197916530">"Prémiová SMS"</string>
     <string name="bluetooth_disabled" msgid="835838280837359514">"Vypnuto"</string>
     <string name="bluetooth_connected_summary" msgid="8043167194934315712">"Připojeno k zařízení <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="2294954614327771844">"Připojeno k několika zařízením"</string>
@@ -4887,7 +4886,7 @@
     <string name="media_controls_show_player" msgid="8504571042365814021">"Zobrazit přehrávač"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"média"</string>
     <string name="camera_extensions_fallback_title" msgid="3604579046777004989">"Povolit softwarová rozšíření fotoaparátu"</string>
-    <string name="camera_extensions_fallback_description" msgid="4306833827773277263">"Aktivuje výchozí implementaci softwaru pro pokročilé funkce fotoaparátu, jako je HDR, noční režim nebo jiná rozšíření fotoaparátu."</string>
+    <string name="camera_extensions_fallback_description" msgid="4306833827773277263">"Aktivuje výchozí implementaci softwaru pro pokročilé funkce fotoaparátu, jako je HDR, noční režim nebo jiná rozšíření fotoaparátu"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Zapne se Bluetooth"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"Internet"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM karty"</string>
@@ -4992,12 +4991,9 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Pokud chcete používat technologii UWB, vypněte režim Letadlo"</string>
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"UWB v aktuální lokalitě není k dispozici"</string>
     <string name="thread_network_settings_title" msgid="4212301030523859220">"Thread"</string>
-    <!-- no translation found for thread_network_settings_main_switch_title (3859168481929323474) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_footer_title (7385600318850220927) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_learn_more (8278498005848565050) -->
-    <skip />
+    <string name="thread_network_settings_main_switch_title" msgid="3859168481929323474">"Použít síť Thread"</string>
+    <string name="thread_network_settings_footer_title" msgid="7385600318850220927">"Thread pomáhá propojit zařízení pro chytrou domácnost a zvyšuje přitom efektivitu i výkon.\n\nKdyž je tato možnost povolená, toto zařízení se může připojit k síti Thread, což umožní ovládat prostřednictvím tohoto telefonu zařízení podporující standard Matter."</string>
+    <string name="thread_network_settings_learn_more" msgid="8278498005848565050">"Další informace o síti Thread"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"Přístup k fotoaparátu"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Přístup k mikrofonu"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"Aplikace a služby"</string>
@@ -5082,12 +5078,12 @@
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"Při pohybu hlavou se zvuk mění, aby zněl přirozeněji"</string>
     <string name="bluetooth_details_permissions_sync_title" msgid="7277580382321003521">"Synchronizace oprávnění z telefonu"</string>
     <string name="bluetooth_details_permissions_sync_summary" msgid="8125037984381432059">"Dejte hodinkám stejná oprávnění pro aplikace, jaká jste povolili v telefonu"</string>
-    <string name="bluetooth_details_audio_device_types_title" msgid="3381941189346781614">"Typ zvukového zařízení"</string>
-    <string name="bluetooth_details_audio_device_type_unknown" msgid="839337391037998014">"Neznámé"</string>
+    <string name="bluetooth_details_audio_device_types_title" msgid="1889644189800180316">"Typ zvukového zařízení"</string>
+    <string name="bluetooth_details_audio_device_type_unknown" msgid="5299284975435974206">"Nenastaveno"</string>
     <string name="bluetooth_details_audio_device_type_speaker" msgid="3706227767994792124">"Reproduktor"</string>
     <string name="bluetooth_details_audio_device_type_headphones" msgid="7644588291215033798">"Sluchátka"</string>
-    <string name="bluetooth_details_audio_device_type_hearing_aid" msgid="1310631131071939859">"Naslouchátko"</string>
-    <string name="bluetooth_details_audio_device_type_carkit" msgid="4439017600454703229">"Sada handsfree do auta"</string>
+    <string name="bluetooth_details_audio_device_type_hearing_aid" msgid="6311786545025321187">"Naslouchátko"</string>
+    <string name="bluetooth_details_audio_device_type_carkit" msgid="1866236563013629394">"Auto"</string>
     <string name="bluetooth_details_audio_device_type_other" msgid="7019481234617207563">"Jiné"</string>
     <string name="ingress_rate_limit_title" msgid="2106694002836274350">"Limit rychlosti stahování v síti"</string>
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"Možnost nakonfigurovat limit rychlosti připojení k síti u příchozích přenosů, který bude platit pro všechny sítě poskytující připojení k internetu."</string>
@@ -5172,8 +5168,6 @@
     <string name="screen_flash_color_violet" msgid="1279950780509029495">"Fialová"</string>
     <string name="color_selector_dialog_done" msgid="121253968943363376">"Hotovo"</string>
     <string name="color_selector_dialog_cancel" msgid="8667350644753900701">"Zrušit"</string>
-    <string name="contrast_title" msgid="6885768151336508075">"Kontrast"</string>
-    <string name="contrast_standard" msgid="1097297089917185235">"Standardní"</string>
     <string name="contrast_default" msgid="8918545965525226966">"Výchozí"</string>
     <string name="contrast_medium" msgid="384414510709285811">"Střední"</string>
     <string name="contrast_high" msgid="3988567609694797696">"Vysoká"</string>
@@ -5210,4 +5204,99 @@
     <string name="fingerprint_acquired_imager_dirty_udfps" msgid="7005042288289506776">"Očistěte obrazovku v okolí senzoru a zkuste to znovu"</string>
     <string name="sim_category_converted_sim" msgid="8575548015816988908">"Převedeno na eSIM. Vyjměte a zlikvidujte."</string>
     <string name="sync_across_devices_title" msgid="3447757705383089345">"Synchronizace mezi zařízeními"</string>
+    <string name="device_diagnostics_title" msgid="2914523189695727897">"Diagnostika zařízení"</string>
+    <string name="audio_sharing_title" msgid="4144157137502923821">"Sdílení zvuku"</string>
+    <string name="audio_sharing_switch_title" msgid="7052827328670825701">"Sdílet zvuk"</string>
+    <string name="calls_and_alarms_device_title" msgid="6993559028175454198">"Hovory a budíky"</string>
+    <string name="audio_sharing_description" msgid="1660255584523640628">"Umožněte lidem poslouchat vaše média spolu s vámi. Posluchači potřebují vlastní sluchátka LE Audio."</string>
+    <string name="audio_sharing_device_group_title" msgid="3019780581643956943">"Aktivní mediální zařízení"</string>
+    <string name="audio_sharing_call_audio_title" msgid="7978867452289583929">"Zvuk hovoru"</string>
+    <string name="audio_sharing_call_audio_description" msgid="6573621048260616924">"Přehrát pouze na zařízení <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_sharing_test_sound_title" msgid="6438868185641027763">"Přehrát zkušební zvuk"</string>
+    <string name="audio_sharing_test_sound_description" msgid="4072462502371937399">"Měl by ho slyšet každý, kdo poslouchá"</string>
+    <string name="audio_sharing_stream_settings_title" msgid="1374391898689242036">"Nastavení zvukového streamu"</string>
+    <string name="audio_sharing_stream_name_title" msgid="8156859441897180940">"Název"</string>
+    <string name="audio_sharing_stream_password_title" msgid="7026649168165764602">"Heslo"</string>
+    <string name="audio_sharing_stream_compatibility_title" msgid="5690947186724469918">"Zlepšit kompatibilitu"</string>
+    <string name="audio_sharing_stream_compatibility_description" msgid="8170241188606110963">"Pomáhá s připojením některých zařízení (například naslouchátek) tím, že snižuje kvalitu zvuku"</string>
+    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="2586408353546825682">"Vypne sdílení zvuku, aby bylo možné nakonfigurovat kompatibilitu"</string>
+    <string name="audio_sharing_nearby_audio_title" msgid="4795438407040677177">"Poslouchejte zvuk v okolí"</string>
+    <string name="audio_sharing_footer_description" msgid="4786942197840271680">"Sdílení zvuku podporuje Auracast™"</string>
+    <string name="audio_sharing_stream_name_dialog_title" msgid="6706027295417556499">"Název zvukového streamu"</string>
+    <string name="audio_sharing_stream_password_dialog_title" msgid="4148196538860845705">"Heslo zvukového streamu"</string>
+    <string name="audio_sharing_media_device_group_title" msgid="4850674234590549565">"Další mediální zařízení"</string>
+    <string name="audio_sharing_summary_on" msgid="611197542982323788">"Zapnuto"</string>
+    <string name="audio_sharing_summary_off" msgid="8833198995257547378">"Vypnuto"</string>
+    <string name="audio_sharing_share_dialog_title" msgid="427514648577553621">"Sdílet zvuk"</string>
+    <string name="audio_sharing_share_dialog_subtitle" msgid="5208582843732057871">"<xliff:g id="DEVICE_NAME1">%1$s</xliff:g> a <xliff:g id="DEVICE_NAME2">%2$s</xliff:g>"</string>
+    <string name="audio_sharing_share_button_label" msgid="3895900668317105537">"Sdílet zvuk"</string>
+    <string name="audio_sharing_no_thanks_button_label" msgid="5822491984114744357">"Ne, díky"</string>
+    <string name="audio_sharing_share_with_dialog_title" msgid="3934377530640830364">"Sdílet zvuk se zařízením <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
+    <string name="audio_sharing_share_with_more_dialog_title" msgid="2840069088858232267">"Sdílejte zvuk s dalším zařízením"</string>
+    <string name="audio_sharing_share_with_button_label" msgid="4146194430380237357">"Sdílet se zařízením <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_sharing_close_button_label" msgid="2666534149100498574">"Zavřít"</string>
+    <string name="audio_sharing_dialog_connect_device_content" msgid="2873230647152283734">"Připojte další kompatibilní sluchátka nebo druhé osobě sdělte název a heslo svého streamu"</string>
+    <string name="audio_sharing_dialog_pair_device_content" msgid="3136997898244863470">"Spárujte další kompatibilní sluchátka nebo s druhou osobou sdílejte QR kód zvukového streamu"</string>
+    <string name="audio_sharing_sharing_label" msgid="1038021053061111508">"Zvuk se sdílí"</string>
+    <string name="audio_sharing_pair_button_label" msgid="7987236990273083588">"Spárovat nové zařízení"</string>
+    <string name="audio_sharing_qrcode_button_label" msgid="3207039106555097659">"Zobrazit QR kód"</string>
+    <string name="audio_sharing_notification_title" msgid="1204798942946033005">"Sdílíte zvuk"</string>
+    <string name="audio_sharing_notification_content" msgid="1577180829878785642">"Poslouchající lidé mohou slyšet vaše média. Hovory neuslyší."</string>
+    <string name="audio_sharing_stop_button_label" msgid="8770519671470608849">"Ukončit sdílení"</string>
+    <string name="audio_sharing_settings_button_label" msgid="8574808650318270491">"Nastavení"</string>
+    <string name="audio_sharing_disconnect_dialog_title" msgid="2192751727237748602">"Vyberte zařízení, které chcete odpojit"</string>
+    <string name="audio_sharing_dialog_disconnect_content" msgid="3840488888970653308">"Zvuk mohou sdílet pouze dvě zařízení najednou"</string>
+    <string name="audio_sharing_disconnect_device_button_label" msgid="4272897217708930576">"Odpojit zařízení <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_sharing_stop_dialog_title" msgid="4872853738164232075">"Připojit zařízení <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
+    <string name="audio_sharing_stop_dialog_content" msgid="6371546856710692910">"Přestanete sdílet zvuk se zařízením <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_sharing_stop_dialog_with_two_content" msgid="2119020725467967219">"Přestanete sdílet zvuk se zařízeními <xliff:g id="DEVICE_NAME1">%1$s</xliff:g> a <xliff:g id="DEVICE_NAME2">%2$s</xliff:g>"</string>
+    <string name="audio_sharing_stop_dialog_with_more_content" msgid="5262441138981618703">"Přestanete sdílet zvuk s připojenými sluchátky"</string>
+    <string name="audio_sharing_connect_button_label" msgid="4241911519063029982">"Připojit"</string>
+    <string name="audio_sharing_sharing_stopped_label" msgid="8128194452354240996">"Sdílení zvuku bylo zastaveno"</string>
+    <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"Připojte kompatibilní zařízení"</string>
+    <string name="audio_sharing_comfirm_dialog_content" msgid="3479217934447446066">"Pokud chcete zahájit sdílení zvuku, nejdřív k telefonu připojte sluchátka LE Audio"</string>
+    <string name="audio_streams_category_title" msgid="4878022761829895463">"Připojení ke zvukovému streamu LE Audio"</string>
+    <string name="audio_streams_pref_title" msgid="6320485086288646209">"Okolní zvukové streamy"</string>
+    <string name="audio_streams_title" msgid="6617990880383079165">"Zvukové streamy"</string>
+    <string name="audio_streams_qr_code_summary" msgid="2838923349871884871">"Připojení ke zvukovému streamu pomocí QR kódu"</string>
+    <string name="audio_streams_empty" msgid="8803517701437394982">"Nebyly nalezeny žádné zvukové streamy v okolí."</string>
+    <string name="audio_streams_disconnect" msgid="1755594831469579161">"Odpojit"</string>
+    <string name="audio_streams_connect" msgid="1955964373102927954">"Připojit"</string>
+    <string name="audio_streams_qr_code_is_not_valid_format" msgid="4856288389653121830">"QR kód není platný formát"</string>
+    <string name="audio_streams_qr_code_scanner" msgid="525396804963685478">"Pokud chcete začít poslouchat, zaměřte QR kód níže"</string>
+    <string name="audio_streams_add_source_bad_code_state_summary" msgid="6527086906921868757">"Zkontrolujte heslo a zkuste to znovu"</string>
+    <string name="audio_streams_add_source_failed_state_summary" msgid="3937546443978562322">"Nejde se připojit. Zkuste to znovu."</string>
+    <string name="audio_streams_add_source_wait_for_response_summary" msgid="3763240901110974606">"Připojování…"</string>
+    <string name="audio_streams_wait_for_sync_state_summary" msgid="11905744690831864">"Vyhledávání…"</string>
+    <string name="audio_streams_dialog_stream_is_not_available" msgid="4032878851270690546">"Zvukový stream není k dispozici"</string>
+    <string name="audio_streams_is_not_playing" msgid="8480293894696007941">"Tento zvukový stream momentálně nic nepřehrává"</string>
+    <string name="audio_streams_dialog_close" msgid="8177201719298408431">"Zavřít"</string>
+    <string name="audio_streams_dialog_listen" msgid="7290340191504987685">"Poslouchat"</string>
+    <string name="audio_streams_dialog_retry" msgid="4456843891970998556">"Zkusit znovu"</string>
+    <string name="audio_streams_dialog_listen_to_audio_stream" msgid="8585253007762261528">"Poslouchat zvukový stream"</string>
+    <string name="audio_streams_dialog_control_volume" msgid="7615062686016713544">"Zvukový stream se bude přehrávat na zařízení <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Hlasitost ovládejte na tomto zařízení."</string>
+    <string name="audio_streams_dialog_cannot_listen" msgid="4432257183698209966">"Zvukový stream nelze poslouchat"</string>
+    <string name="audio_streams_dialog_default_device" msgid="6159800303379303266">"kompatibilní sluchátka připojena"</string>
+    <string name="audio_streams_activity_title" msgid="9011162151277443663">"Vysílání"</string>
+    <string name="audio_streams_no_password_summary" msgid="8976357323034830144">"Žádné heslo"</string>
+    <string name="audio_streams_dialog_learn_more" msgid="6711241053442211345">"Další informace"</string>
+    <string name="audio_streams_dialog_cannot_play" msgid="1358828316927479091">"Na zařízení <xliff:g id="DEVICE_NAME">%1$s</xliff:g> tento zvukový stream přehrát nelze."</string>
+    <string name="audio_streams_listening_now" msgid="4205614429222949176">"Probíhá poslech"</string>
+    <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"Ukončit poslech"</string>
+    <string name="audio_streams_dialog_no_le_device_title" msgid="3931163990976742282">"Připojit kompatibilní sluchátka"</string>
+    <string name="audio_streams_dialog_no_le_device_button" msgid="4484355549428642588">"Připojit zařízení"</string>
+    <string name="audio_streams_detail_page_title" msgid="7884132061275273766">"Podrobnosti o zvukovém streamu"</string>
+    <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"QR kód zvukového streamu"</string>
+    <string name="audio_streams_qr_code_page_password" msgid="7268475614131297060">"Heslo: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
+    <string name="audio_streams_qr_code_page_description" msgid="1317961663706630428">"Další lidé mohou stream <xliff:g id="STREAM_NAME">%1$s</xliff:g> poslouchat tak, že ke svému zařízení Android připojí kompatibilní sluchátka a poté naskenují tento QR kód."</string>
+    <string name="audio_streams_main_page_title" msgid="1838380471076527639">"Najděte zvukový stream"</string>
+    <string name="audio_streams_main_page_subtitle" msgid="3251995732921981539">"Poslouchejte zařízení, které sdílí zvuk, nebo vysílání Auracast v okolí"</string>
+    <string name="audio_streams_main_page_device_title" msgid="2635744035523908253">"Vaše zvukové zařízení"</string>
+    <string name="audio_streams_main_page_no_device_summary" msgid="2936000845397406389">"Připojit kompatibilní sluchátka"</string>
+    <string name="audio_streams_main_page_scan_section_title" msgid="2778235929304061163">"Zvukové streamy v okolí"</string>
+    <string name="audio_streams_main_page_scan_qr_code_title" msgid="8337270277392468895">"Naskenujte QR kód"</string>
+    <string name="audio_streams_main_page_scan_qr_code_summary" msgid="1991792283368249499">"Začněte poslouchat naskenováním QR kódu streamu"</string>
+    <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Poslouchat stream"</string>
+    <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Naskenujte QR kód zvukového streamu a poslouchejte na zařízení <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Heslo nelze upravit během sdílení. Pokud chcete změnit heslo, nejdříve vypněte sdílení zvuku."</string>
 </resources>

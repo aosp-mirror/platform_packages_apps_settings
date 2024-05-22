@@ -48,9 +48,9 @@
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"Только игры, видео и т. п."</string>
     <string name="selective_stay_awake_summary" msgid="9055967322921984543">"Передний экран включается для приложений, которые не дают используемому экрану перейти в режим ожидания"</string>
     <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Если провести по экрану вверх"</string>
-    <string name="stay_awake_on_lockscreen_summary" msgid="2299351813382522952">"Сложите телефон и проведите по переднему экрану вверх, чтобы продолжить использовать приложение, или подождите несколько секунд, чтобы экран заблокировался"</string>
+    <string name="stay_awake_on_lockscreen_summary" msgid="8825321939913726566">"Сложите телефон и проведите по переднему экрану вверх, чтобы продолжить использовать приложение, или подождите несколько секунд, чтобы экран заблокировался. Приложения для видео и игры продолжат работать. Дополнительных действий для этого предпринимать не потребуется."</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"Никогда"</string>
-    <string name="sleep_on_fold_summary" msgid="7737992842459588846">"Передний экран блокируется при складывании устройства"</string>
+    <string name="sleep_on_fold_summary" msgid="4191753338303043456">"Передний экран отключается и блокируется при складывании устройства"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Включить автоповорот"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"Функция \"Распознавание лица\" улучшает точность автоповорота с помощью фронтальной камеры. Изображения никогда не сохраняются и не отправляются в Google."</string>
     <string name="bluetooth" msgid="8898478620943459654">"Bluetooth"</string>
@@ -139,7 +139,6 @@
     <string name="stylus_textfield_handwriting" msgid="2363579035338976327">"Разрешить рукописный ввод в текстовых полях"</string>
     <string name="stylus_ignore_button" msgid="7734540973145241391">"Игнорировать нажатия кнопок стилусом"</string>
     <string name="stylus_connected_devices_title" msgid="2823967577941359812">"Стилус"</string>
-    <string name="audio_streams_empty" msgid="8803517701437394982">"Аудиопотоки поблизости не найдены."</string>
     <string name="date_and_time" msgid="1788358029823431692">"Дата и время"</string>
     <string name="proxy_settings_title" msgid="4201866858226087066">"Прокси-сервер"</string>
     <string name="proxy_clear_text" msgid="6529658759984031149">"Очистить"</string>
@@ -286,8 +285,7 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Приложения с доступом к устройствам поблизости могут определять относительное местоположение подключенных устройств."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Доступ к данным о местоположении для приложений и сервисов отключен. Если вы позвоните по номеру экстренной службы или отправите на него сообщение, данные о местоположении вашего устройства могут быть переданы спасателям."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Подробнее о настройках местоположения…"</string>
-    <!-- no translation found for location_settings_tooltip_text_for_chrome (5781821709250544575) -->
-    <skip />
+    <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"Чтобы внести изменения, выберите \"Настройки ChromeOS &gt; Конфиденциальность и безопасность &gt; Настройки конфиденциальности &gt; Доступ к геоданным\""</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Аккаунты"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Безопасность"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Шифрование и учетные данные"</string>
@@ -565,7 +563,8 @@
     <string name="private_space_auto_lock_title" msgid="8663409382910601261">"Автоматически блокировать частное пространство"</string>
     <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"Можно сделать так, чтобы частное пространство автоматически блокировалось, если вы не используете устройство какое-то время."</string>
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"Каждый раз при блокировке устройства"</string>
-    <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"Через 5 минут бездействия"</string>
+    <!-- no translation found for private_space_auto_lock_after_inactivity (7107814517866649733) -->
+    <skip />
     <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"Только после перезапуска устройства"</string>
     <string name="private_space_hide_page_title" msgid="3364639176511877414">"Скрывать частное пространство"</string>
     <string name="private_space_hide_when_locked" msgid="6219472348124151797">"Скрывать частное пространство, когда оно заблокировано"</string>
@@ -1753,7 +1752,7 @@
     <string name="enable_text" msgid="8570798764647110430">"Включить"</string>
     <string name="clear_user_data_text" msgid="6773186434260397947">"Очистить хранилище"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"Удалить обновления"</string>
-    <string name="app_restricted_settings_lockscreen_title" msgid="796413224212436400">"Предоставить ограниченные разрешения"</string>
+    <string name="app_restricted_settings_lockscreen_title" msgid="5993061278264872648">"Разрешить доступ к настройкам"</string>
     <string name="auto_launch_enable_text" msgid="8912714475823807798">"Некоторые выбранные вами действия выполняются в этом приложении по умолчанию."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"Это приложение может создавать виджеты и получать их данные."</string>
     <string name="auto_launch_disable_text" msgid="502648841250936209">"Значения по умолчанию не установлены."</string>
@@ -2017,7 +2016,7 @@
     <string name="accessibility_color_and_motion_title" msgid="2323301706545305874">"Цвет и движение"</string>
     <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"Цветовая контрастность"</string>
     <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"Настройте контрастность. Чем она выше, тем заметнее текст, кнопки и значки."</string>
-    <string name="color_contrast_note" msgid="7592686603372566198">"Некоторые настройки контрастности цвета и текста поддерживаются не во всех приложениях."</string>
+    <string name="color_contrast_note" msgid="7592686603372566198">"Некоторые приложения могут поддерживать не все настройки контрастности цвета и текста."</string>
     <string name="color_contrast_preview" msgid="6791430227535363883">"Предпросмотр"</string>
     <string name="color_contrast_preview_sender_name" msgid="8641943417589238147">"Елена, Адам"</string>
     <string name="color_contrast_preview_email_send_date" msgid="2108702726171600080">"2 дня назад"</string>
@@ -2325,6 +2324,8 @@
     <string name="daltonizer_mode_protanomaly_title" msgid="6392456967103014723">"Красный и зеленый"</string>
     <string name="daltonizer_mode_tritanomaly_title" msgid="2278786218762602022">"Синий и желтый"</string>
     <string name="daltonizer_mode_grayscale_title" msgid="152005391387952588">"Оттенки серого"</string>
+    <!-- no translation found for daltonizer_saturation_title (2999486412114963068) -->
+    <skip />
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="2117727423019598455">"Дейтераномалия (нарушено восприятие зеленого)"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="4617032854982040748">"Протаномалия (нарушено восприятие красного)"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Тританомалия"</string>
@@ -2405,7 +2406,6 @@
     <string name="keywords_select_to_speak" msgid="2872704811610888719"></string>
     <string name="keywords_color_correction" msgid="8540442886990423681">"настройка цвета"</string>
     <string name="keywords_color_inversion" msgid="4291058365873221962">"темный экран, светлый экран"</string>
-    <string name="keywords_contrast" msgid="4668393735398949873">"цветовая контрастность"</string>
     <string name="keywords_accessibility_menu" msgid="4300579436464706608"></string>
     <string name="keywords_switch_access" msgid="5813094504384313402"></string>
     <string name="keywords_auto_click" msgid="6811744211216280998">"моторика, мышь, внешняя мышь, управление курсором с помощью движений головы, адаптивная мышь, инвалидная коляска, джойстик"</string>
@@ -2686,7 +2686,7 @@
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Использование адаптивного подключения"</string>
     <string name="cellular_security_title" msgid="5562899485544677941">"Безопасность мобильной сети"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"Тип сети, шифрование, управление уведомлениями"</string>
-    <string name="cellular_security_top_intro" msgid="6749166804080092892">"Эти настройки помогают вам защищать свои звонки, сообщения и данные от устаревших и незашифрованных сетей, из-за которых вы можете подвергнуться краже данных или отслеживанию."</string>
+    <string name="cellular_security_top_intro" msgid="6749166804080092892">"Эти настройки помогают вам защищать свои звонки, сообщения и информацию от устаревших и незашифрованных сетей, из-за которых возникает риск кражи данных или отслеживания."</string>
     <string name="cellular_security_settings_title" msgid="7779141923670352595">"Безопасность мобильной сети"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"Уведомления"</string>
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"Уведомления о сетях"</string>
@@ -3306,6 +3306,8 @@
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Настройки подключенных устройств"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Нет настроенных расписаний}=1{Настроено 1 расписание}one{Настроено # расписание}few{Настроено # расписания}many{Настроено # расписаний}other{Настроено # расписания}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Не беспокоить"</string>
+    <!-- no translation found for zen_modes_list_title (5138745349253275428) -->
+    <skip />
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Получать уведомления только от важных людей и приложений."</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Отключение уведомлений"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Включите режим \"Не беспокоить\""</string>
@@ -3532,7 +3534,7 @@
     <string name="notifications_sent_daily" msgid="10274479224185437">"{count,plural, =1{Примерно # уведомление в день}one{Примерно # уведомление в день}few{Примерно # уведомления в день}many{Примерно # уведомлений в день}other{Примерно # уведомления в день}}"</string>
     <string name="notifications_sent_weekly" msgid="7895656213187555346">"{count,plural, =1{Примерно # уведомление в неделю}one{Примерно # уведомление в неделю}few{Примерно # уведомления в неделю}many{Примерно # уведомлений в неделю}other{Примерно # уведомления в неделю}}"</string>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Никогда"</string>
-    <string name="manage_notification_access_title" msgid="6481256069087219982">"Уведомления на устройствах и в приложениях"</string>
+    <string name="manage_notification_access_title" msgid="4154723216570646451">"Чтение уведомлений, управление ими и ответы на них"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"Выбрать приложения и устройства, у которых есть доступ к уведомлениям"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8643809206612366067">"Доступ к уведомлениям в рабочем профиле заблокирован"</string>
     <string name="notification_assistant_title" msgid="5889201903272393099">"Улучшенные уведомления"</string>
@@ -3632,7 +3634,7 @@
     <string name="app_notification_block_summary" msgid="1804611676339341551">"Не показывать эти уведомления"</string>
     <string name="notification_content_block_title" msgid="6689085826061361351">"Включить уведомления"</string>
     <string name="notification_content_block_summary" msgid="329171999992248925">"Не показывать уведомления на фоне или на периферийных устройствах"</string>
-    <string name="app_notification_fsi_permission_title" msgid="5424116606034705020">"Разрешить уведомления в полноэкранном режиме"</string>
+    <string name="app_notification_fsi_permission_title" msgid="2260977598430154428">"Разрешить уведомления в полноэкранном режиме"</string>
     <string name="app_notification_fsi_permission_summary" msgid="7673487977631068039">"Разрешить уведомления в полноэкранном режиме, когда устройство заблокировано"</string>
     <string name="notification_badge_title" msgid="6854537463548411313">"Показывать значок уведомления"</string>
     <string name="notification_channel_badge_title" msgid="6505542437385640049">"Показывать значок уведомления"</string>
@@ -3981,8 +3983,8 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Разрешить доступ к управлению всеми файлами"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Приложение сможет читать, изменять и удалять все файлы на этом устройстве и любых подключенных носителях. Доступ к файлам будет осуществляться без дополнительного уведомления."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Приложения, имеющие доступ ко всем файлам"</string>
-    <string name="full_screen_intent_title" msgid="747270185715224130">"Уведомления в полноэкранном режиме"</string>
-    <string name="permit_full_screen_intent" msgid="9035367640019960861">"Разрешить уведомления в полноэкранном режиме от этого приложения"</string>
+    <string name="full_screen_intent_title" msgid="5888548315628268674">"Уведомления в полноэкранном режиме"</string>
+    <string name="permit_full_screen_intent" msgid="2414307667550523630">"Разрешить этому приложению отправлять уведомления в полноэкранном режиме"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Разрешить этому приложению показывать уведомления в полноэкранном режиме, когда устройство заблокировано. Так приложение сможет сообщать о будильниках, входящих вызовах и других срочных уведомлениях."</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"Управление медиафайлами"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Разрешить приложению управлять медиафайлами"</string>
@@ -4100,7 +4102,7 @@
     <string name="data_usage_template" msgid="3822452362629968010">"Всего <xliff:g id="ID_1">%1$s</xliff:g> (<xliff:g id="ID_2">%2$s</xliff:g>)"</string>
     <string name="configure" msgid="1499586749829665889">"Настроить"</string>
     <string name="data_usage_other_apps" msgid="5649047093607329537">"Другие приложения"</string>
-    <string name="data_saver_unrestricted_summary" msgid="7343571401172437542">"{count,plural, =1{1 приложение может без ограничений передавать данные в режиме экономии трафика}one{# приложение может без ограничений передавать данные в режиме экономии трафика}few{# приложения могут без ограничений передавать данные в режиме экономии трафика}many{# приложений могут без ограничений передавать данные в режиме экономии трафика}other{# приложения могут без ограничений передавать данные в режиме экономии трафика}}"</string>
+    <string name="data_saver_unrestricted_summary" msgid="559673440849071149">"{count,plural, =1{1 приложение может использовать безлимитный мобильный интернет в режиме экономии трафика}one{# приложение может использовать безлимитный мобильный интернет в режиме экономии трафика}few{# приложения могут использовать безлимитный мобильный интернет в режиме экономии трафика}many{# приложений могут использовать безлимитный мобильный интернет в режиме экономии трафика}other{# приложения могут использовать безлимитный мобильный интернет в режиме экономии трафика}}"</string>
     <string name="data_usage_title" msgid="4039024073687469094">"Основные данные"</string>
     <string name="data_usage_wifi_title" msgid="1060495519280456926">"Трафик Wi‑Fi"</string>
     <string name="data_used_formatted" msgid="7913920278059077938">"Расход: <xliff:g id="ID_1">^1</xliff:g> <xliff:g id="ID_2">^2</xliff:g>"</string>
@@ -4117,13 +4119,13 @@
     <string name="no_carrier_update_now_text" msgid="7898004907837200752">"Обновлено только что"</string>
     <string name="launch_wifi_text" msgid="976421974332512894">"Подробнее"</string>
     <string name="data_saver_title" msgid="2593804270788863815">"Экономия трафика"</string>
-    <string name="unrestricted_data_saver" msgid="7922563266857367495">"Неограниченный мобильный интернет"</string>
+    <string name="unrestricted_data_saver" msgid="5913547065342097274">"Безлимитный мобильный интернет"</string>
     <string name="restrict_background_blocklisted" msgid="2308345280442438232">"Фоновый режим выключен"</string>
     <string name="data_saver_on" msgid="7848893946018448793">"Включено"</string>
     <string name="data_saver_off" msgid="5891210864117269045">"Отключено"</string>
     <string name="data_saver_switch_title" msgid="7111538580123722959">"Экономия трафика"</string>
-    <string name="unrestricted_app_title" msgid="7117585996574329284">"Неогранич. передача данных"</string>
-    <string name="unrestricted_app_summary" msgid="282698963532000403">"Разрешить в режиме экономии трафика"</string>
+    <string name="unrestricted_app_title" msgid="8531936851059106374">"Доступ к безлимитному мобильному интернету"</string>
+    <string name="unrestricted_app_summary" msgid="8320813971858627624">"Разрешить доступ к безлимитному мобильному интернету в режиме экономии трафика"</string>
     <string name="home_app" msgid="6056850504746902747">"Главное приложение"</string>
     <string name="suggestion_additional_fingerprints" msgid="4726777300101156208">"Добавьте ещё один отпечаток"</string>
     <string name="suggestion_additional_fingerprints_summary" msgid="2825364645039666674">"Добавьте отпечаток другого пальца"</string>
@@ -4197,9 +4199,9 @@
     <string name="notification_suggestion_summary" msgid="7615611244249276113">"Скрыть или показать содержание уведомлений"</string>
     <string name="page_tab_title_support" msgid="3235725053332345773">"Помощь и советы"</string>
     <string name="developer_smallest_width" msgid="632354817870920911">"Минимальная ширина"</string>
-    <string name="premium_sms_none" msgid="8737045049886416739">"Установленные приложения не запрашивали доступ к платным SMS."</string>
+    <string name="premium_sms_none" msgid="4718916765158062108">"Нет установленных приложений, которым требуется доступ к платным SMS"</string>
     <string name="premium_sms_warning" msgid="2192300872411073324">"Обратите внимание, что такие SMS могут оплачиваться дополнительно. Предоставив разрешение приложению, вы сможете отправлять платные SMS с его помощью."</string>
-    <string name="premium_sms_access" msgid="5605970342699013212">"Доступ к платным SMS"</string>
+    <string name="premium_sms_access" msgid="8487315743197916530">"Платные SMS"</string>
     <string name="bluetooth_disabled" msgid="835838280837359514">"Отключено"</string>
     <string name="bluetooth_connected_summary" msgid="8043167194934315712">"Подключено к устройству <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="2294954614327771844">"Подключено к нескольким устройствам"</string>
@@ -4992,12 +4994,9 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Выключает режим полета, чтобы использовать сверхширокополосную связь"</string>
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"Сверхширокополосная связь недоступна в вашем регионе"</string>
     <string name="thread_network_settings_title" msgid="4212301030523859220">"Thread"</string>
-    <!-- no translation found for thread_network_settings_main_switch_title (3859168481929323474) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_footer_title (7385600318850220927) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_learn_more (8278498005848565050) -->
-    <skip />
+    <string name="thread_network_settings_main_switch_title" msgid="3859168481929323474">"Использовать Thread"</string>
+    <string name="thread_network_settings_footer_title" msgid="7385600318850220927">"Thread помогает связать устройства умного дома, повышая экономичность эффективность всей системы\n\nЕсли настройка включена, этот телефон можно присоединить к сети Thread и с него управлять устройствами с поддержкой Matter."</string>
+    <string name="thread_network_settings_learn_more" msgid="8278498005848565050">"Подробнее о Thread…"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"Доступ к камере"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Доступ к микрофону"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"Для приложений и сервисов"</string>
@@ -5082,12 +5081,12 @@
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"Звук меняется, когда вы двигаете головой, и становится более естественным."</string>
     <string name="bluetooth_details_permissions_sync_title" msgid="7277580382321003521">"Синхронизировать разрешения с телефона"</string>
     <string name="bluetooth_details_permissions_sync_summary" msgid="8125037984381432059">"Предоставить на часах такие же разрешения для приложений, как и на телефоне"</string>
-    <string name="bluetooth_details_audio_device_types_title" msgid="3381941189346781614">"Тип аудиоустройства"</string>
-    <string name="bluetooth_details_audio_device_type_unknown" msgid="839337391037998014">"Неизвестно"</string>
+    <string name="bluetooth_details_audio_device_types_title" msgid="1889644189800180316">"Тип аудиоустройства"</string>
+    <string name="bluetooth_details_audio_device_type_unknown" msgid="5299284975435974206">"Не указан"</string>
     <string name="bluetooth_details_audio_device_type_speaker" msgid="3706227767994792124">"Колонка"</string>
     <string name="bluetooth_details_audio_device_type_headphones" msgid="7644588291215033798">"Наушники"</string>
-    <string name="bluetooth_details_audio_device_type_hearing_aid" msgid="1310631131071939859">"Слуховой аппарат"</string>
-    <string name="bluetooth_details_audio_device_type_carkit" msgid="4439017600454703229">"Устройство связи в автомобиле"</string>
+    <string name="bluetooth_details_audio_device_type_hearing_aid" msgid="6311786545025321187">"Слуховой аппарат"</string>
+    <string name="bluetooth_details_audio_device_type_carkit" msgid="1866236563013629394">"Автомобиль"</string>
     <string name="bluetooth_details_audio_device_type_other" msgid="7019481234617207563">"Другое"</string>
     <string name="ingress_rate_limit_title" msgid="2106694002836274350">"Ограничение скорости скачивания"</string>
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"Ограничить пропускную способность входящего трафика. Эта настройка применяется ко всем сетям, подключенным к интернету."</string>
@@ -5172,9 +5171,7 @@
     <string name="screen_flash_color_violet" msgid="1279950780509029495">"Фиолетовый"</string>
     <string name="color_selector_dialog_done" msgid="121253968943363376">"Готово"</string>
     <string name="color_selector_dialog_cancel" msgid="8667350644753900701">"Отмена"</string>
-    <string name="contrast_title" msgid="6885768151336508075">"Контрастность"</string>
-    <string name="contrast_standard" msgid="1097297089917185235">"Стандартная"</string>
-    <string name="contrast_default" msgid="8918545965525226966">"По умолчанию"</string>
+    <string name="contrast_default" msgid="8918545965525226966">"Стандартная"</string>
     <string name="contrast_medium" msgid="384414510709285811">"Средняя"</string>
     <string name="contrast_high" msgid="3988567609694797696">"Высокая"</string>
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"Это приложение можно открыть только в одном окне."</string>
@@ -5210,4 +5207,100 @@
     <string name="fingerprint_acquired_imager_dirty_udfps" msgid="7005042288289506776">"Очистите экран рядом с датчиком и повторите попытку."</string>
     <string name="sim_category_converted_sim" msgid="8575548015816988908">"Преобразовано в eSIM. Извлеките и утилизируйте."</string>
     <string name="sync_across_devices_title" msgid="3447757705383089345">"Синхронизация между устройствами"</string>
+    <!-- no translation found for device_diagnostics_title (2914523189695727897) -->
+    <skip />
+    <string name="audio_sharing_title" msgid="4144157137502923821">"Передача аудио"</string>
+    <string name="audio_sharing_switch_title" msgid="7052827328670825701">"Передавать аудио"</string>
+    <string name="calls_and_alarms_device_title" msgid="6993559028175454198">"Звонки и будильники"</string>
+    <string name="audio_sharing_description" msgid="1660255584523640628">"Прослушивайте медиафайлы вместе с другими людьми. Каждому пользователю нужны наушники с поддержкой LE Audio."</string>
+    <string name="audio_sharing_device_group_title" msgid="3019780581643956943">"Используемые медиаустройства"</string>
+    <string name="audio_sharing_call_audio_title" msgid="7978867452289583929">"Аудио звонков"</string>
+    <string name="audio_sharing_call_audio_description" msgid="6573621048260616924">"Воспроизводится только на устройстве \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\""</string>
+    <string name="audio_sharing_test_sound_title" msgid="6438868185641027763">"Проверить звук"</string>
+    <string name="audio_sharing_test_sound_description" msgid="4072462502371937399">"Он должен быть слышен всем подключенным пользователям"</string>
+    <string name="audio_sharing_stream_settings_title" msgid="1374391898689242036">"Настройки аудиопотока"</string>
+    <string name="audio_sharing_stream_name_title" msgid="8156859441897180940">"Название"</string>
+    <string name="audio_sharing_stream_password_title" msgid="7026649168165764602">"Пароль"</string>
+    <string name="audio_sharing_stream_compatibility_title" msgid="5690947186724469918">"Улучшить совместимость"</string>
+    <string name="audio_sharing_stream_compatibility_description" msgid="8170241188606110963">"Снизить качество звука, чтобы некоторым устройствам, например слуховым аппаратам, было проще подключаться"</string>
+    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="2586408353546825682">"Отключить отправку аудио, чтобы задать настройки совместимости"</string>
+    <string name="audio_sharing_nearby_audio_title" msgid="4795438407040677177">"Аудио поблизости"</string>
+    <string name="audio_sharing_footer_description" msgid="4786942197840271680">"Функция \"Отправка аудио\" поддерживает технологию Auracast™."</string>
+    <string name="audio_sharing_stream_name_dialog_title" msgid="6706027295417556499">"Название аудиопотока"</string>
+    <string name="audio_sharing_stream_password_dialog_title" msgid="4148196538860845705">"Пароль аудиопотока"</string>
+    <string name="audio_sharing_media_device_group_title" msgid="4850674234590549565">"Другие медиаустройства"</string>
+    <string name="audio_sharing_summary_on" msgid="611197542982323788">"Включено"</string>
+    <string name="audio_sharing_summary_off" msgid="8833198995257547378">"Отключено"</string>
+    <string name="audio_sharing_share_dialog_title" msgid="427514648577553621">"Отправка аудио"</string>
+    <string name="audio_sharing_share_dialog_subtitle" msgid="5208582843732057871">"Устройства \"<xliff:g id="DEVICE_NAME1">%1$s</xliff:g>\" и \"<xliff:g id="DEVICE_NAME2">%2$s</xliff:g>\"."</string>
+    <string name="audio_sharing_share_button_label" msgid="3895900668317105537">"Отправить аудио"</string>
+    <string name="audio_sharing_no_thanks_button_label" msgid="5822491984114744357">"Нет, спасибо"</string>
+    <string name="audio_sharing_share_with_dialog_title" msgid="3934377530640830364">"Отправить аудио на устройство \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\"?"</string>
+    <string name="audio_sharing_share_with_more_dialog_title" msgid="2840069088858232267">"Отправка аудио на другое устройство"</string>
+    <string name="audio_sharing_share_with_button_label" msgid="4146194430380237357">"Отправить на устройство \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\""</string>
+    <string name="audio_sharing_close_button_label" msgid="2666534149100498574">"Закрыть"</string>
+    <string name="audio_sharing_dialog_connect_device_content" msgid="2873230647152283734">"Подключите ещё одну пару совместимых наушников или отправьте другому пользователю название и пароль вашего потока."</string>
+    <string name="audio_sharing_dialog_pair_device_content" msgid="3136997898244863470">"Подключите ещё одну пару совместимых наушников или отправьте другому пользователю QR-код вашего потока."</string>
+    <string name="audio_sharing_sharing_label" msgid="1038021053061111508">"Включена отправка аудио"</string>
+    <string name="audio_sharing_pair_button_label" msgid="7987236990273083588">"Подключить новое устройство"</string>
+    <string name="audio_sharing_qrcode_button_label" msgid="3207039106555097659">"Показать QR-код"</string>
+    <string name="audio_sharing_notification_title" msgid="1204798942946033005">"Включена отправка аудио"</string>
+    <string name="audio_sharing_notification_content" msgid="1577180829878785642">"Другие пользователи могут слушать ваши медиафайлы, но не звонки."</string>
+    <string name="audio_sharing_stop_button_label" msgid="8770519671470608849">"Остановить отправку"</string>
+    <string name="audio_sharing_settings_button_label" msgid="8574808650318270491">"Настройки"</string>
+    <string name="audio_sharing_disconnect_dialog_title" msgid="2192751727237748602">"Выберите, какое устройство нужно отключить"</string>
+    <string name="audio_sharing_dialog_disconnect_content" msgid="3840488888970653308">"Воспроизводить аудио можно одновременно только на двух устройствах."</string>
+    <string name="audio_sharing_disconnect_device_button_label" msgid="4272897217708930576">"Отключить устройство \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\""</string>
+    <string name="audio_sharing_stop_dialog_title" msgid="4872853738164232075">"Подключить устройство \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\"?"</string>
+    <string name="audio_sharing_stop_dialog_content" msgid="6371546856710692910">"Аудио больше не будет отправляться на устройство \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\"."</string>
+    <string name="audio_sharing_stop_dialog_with_two_content" msgid="2119020725467967219">"Аудио больше не будет отправляться на устройства \"<xliff:g id="DEVICE_NAME1">%1$s</xliff:g>\" и \"<xliff:g id="DEVICE_NAME2">%2$s</xliff:g>\"."</string>
+    <string name="audio_sharing_stop_dialog_with_more_content" msgid="5262441138981618703">"Аудио больше не будет отправляться на подключенные наушники."</string>
+    <string name="audio_sharing_connect_button_label" msgid="4241911519063029982">"Подключить"</string>
+    <string name="audio_sharing_sharing_stopped_label" msgid="8128194452354240996">"Отправка аудио остановлена"</string>
+    <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"Подключите совместимое устройство"</string>
+    <string name="audio_sharing_comfirm_dialog_content" msgid="3479217934447446066">"Перед началом отправки аудио подключите к телефону наушники с поддержкой LE Audio."</string>
+    <string name="audio_streams_category_title" msgid="4878022761829895463">"Подключение к потоку LE Audio"</string>
+    <string name="audio_streams_pref_title" msgid="6320485086288646209">"Аудиопотоки рядом"</string>
+    <string name="audio_streams_title" msgid="6617990880383079165">"Аудиопотоки"</string>
+    <string name="audio_streams_qr_code_summary" msgid="2838923349871884871">"Подключиться к аудиопотоку, используя QR-код"</string>
+    <string name="audio_streams_empty" msgid="8803517701437394982">"Аудиопотоки поблизости не найдены."</string>
+    <string name="audio_streams_disconnect" msgid="1755594831469579161">"Отключить"</string>
+    <string name="audio_streams_connect" msgid="1955964373102927954">"Подключить"</string>
+    <string name="audio_streams_qr_code_is_not_valid_format" msgid="4856288389653121830">"Недопустимый формат QR-кода."</string>
+    <string name="audio_streams_qr_code_scanner" msgid="525396804963685478">"Чтобы прослушать аудио, поместите QR-код в центр."</string>
+    <string name="audio_streams_add_source_bad_code_state_summary" msgid="6527086906921868757">"Проверьте пароль и повторите попытку."</string>
+    <string name="audio_streams_add_source_failed_state_summary" msgid="3937546443978562322">"Ошибка подключения. Повторите попытку."</string>
+    <string name="audio_streams_add_source_wait_for_response_summary" msgid="3763240901110974606">"Подключение…"</string>
+    <string name="audio_streams_wait_for_sync_state_summary" msgid="11905744690831864">"Поиск…"</string>
+    <string name="audio_streams_dialog_stream_is_not_available" msgid="4032878851270690546">"Аудиопоток недоступен"</string>
+    <string name="audio_streams_is_not_playing" msgid="8480293894696007941">"В нем сейчас нет контента."</string>
+    <string name="audio_streams_dialog_close" msgid="8177201719298408431">"Закрыть"</string>
+    <string name="audio_streams_dialog_listen" msgid="7290340191504987685">"Прослушивание"</string>
+    <string name="audio_streams_dialog_retry" msgid="4456843891970998556">"Повторить попытку"</string>
+    <string name="audio_streams_dialog_listen_to_audio_stream" msgid="8585253007762261528">"Прослушивание аудиопотока"</string>
+    <string name="audio_streams_dialog_control_volume" msgid="7615062686016713544">"Аудиопоток будет воспроизводиться на определенном устройстве (<xliff:g id="DEVICE_NAME">%1$s</xliff:g>). Используйте его, чтобы регулировать громкость."</string>
+    <string name="audio_streams_dialog_cannot_listen" msgid="4432257183698209966">"Ошибка воспроизведения"</string>
+    <string name="audio_streams_dialog_default_device" msgid="6159800303379303266">"Совместимые наушники подключены"</string>
+    <string name="audio_streams_activity_title" msgid="9011162151277443663">"Трансляции"</string>
+    <string name="audio_streams_no_password_summary" msgid="8976357323034830144">"Без пароля"</string>
+    <string name="audio_streams_dialog_learn_more" msgid="6711241053442211345">"Подробнее…"</string>
+    <string name="audio_streams_dialog_cannot_play" msgid="1358828316927479091">"Не удается воспроизвести аудиопоток на устройстве (<xliff:g id="DEVICE_NAME">%1$s</xliff:g>)."</string>
+    <string name="audio_streams_listening_now" msgid="4205614429222949176">"Прослушивается"</string>
+    <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"Остановить прослушивание"</string>
+    <string name="audio_streams_dialog_no_le_device_title" msgid="3931163990976742282">"Подключение совместимых наушников"</string>
+    <string name="audio_streams_dialog_no_le_device_button" msgid="4484355549428642588">"Подключить устройство"</string>
+    <string name="audio_streams_detail_page_title" msgid="7884132061275273766">"Информация об аудиопотоке"</string>
+    <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"QR-код аудиопотока"</string>
+    <string name="audio_streams_qr_code_page_password" msgid="7268475614131297060">"Пароль: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
+    <string name="audio_streams_qr_code_page_description" msgid="1317961663706630428">"Чтобы слушать аудиопоток \"<xliff:g id="STREAM_NAME">%1$s</xliff:g>\", другие пользователи могут подключить совместимые наушники к своим устройствам Android, отсканировав QR-код."</string>
+    <string name="audio_streams_main_page_title" msgid="1838380471076527639">"Поиск аудиопотока"</string>
+    <string name="audio_streams_main_page_subtitle" msgid="3251995732921981539">"Подключитесь к устройству, отправляющему аудио, или трансляции Auracast поблизости."</string>
+    <string name="audio_streams_main_page_device_title" msgid="2635744035523908253">"Ваше аудиоустройство"</string>
+    <string name="audio_streams_main_page_no_device_summary" msgid="2936000845397406389">"Подключите совместимые наушники"</string>
+    <string name="audio_streams_main_page_scan_section_title" msgid="2778235929304061163">"Аудиопотоки рядом"</string>
+    <string name="audio_streams_main_page_scan_qr_code_title" msgid="8337270277392468895">"Сканирование QR-кода"</string>
+    <string name="audio_streams_main_page_scan_qr_code_summary" msgid="1991792283368249499">"Чтобы начать прослушивание, отсканируйте QR-код"</string>
+    <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Подключиться к потоку"</string>
+    <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Отсканируйте QR-код аудиопотока для прослушивания на устройстве (<xliff:g id="DEVICE_NAME">%1$s</xliff:g>)"</string>
+    <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Нельзя изменить пароль во время отправки аудио. Сначала отключите ее."</string>
 </resources>

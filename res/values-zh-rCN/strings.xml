@@ -44,13 +44,13 @@
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"缩小"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"放大"</string>
     <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"始终"</string>
-    <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"当您折叠设备时，外屏会开启"</string>
+    <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"折叠设备时，外屏会开启"</string>
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"仅限游戏、视频等"</string>
     <string name="selective_stay_awake_summary" msgid="9055967322921984543">"当使用可阻止屏幕进入空闲状态的应用时，外屏会开启"</string>
     <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"向上滑动以继续"</string>
-    <string name="stay_awake_on_lockscreen_summary" msgid="2299351813382522952">"折叠您的手机并在外屏上向上滑动以继续使用该应用，或者等待几秒钟直到屏幕锁定"</string>
+    <string name="stay_awake_on_lockscreen_summary" msgid="8825321939913726566">"折叠手机后，可在外屏上向上滑动以继续使用该应用，也可等待几秒钟直到屏幕锁定。游戏和视频应用会自动继续运行。"</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"永不"</string>
-    <string name="sleep_on_fold_summary" msgid="7737992842459588846">"当您折叠设备时，外屏会锁定"</string>
+    <string name="sleep_on_fold_summary" msgid="4191753338303043456">"折叠设备时，外屏会关闭并锁定"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"使用自动屏幕旋转功能"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"人脸检测功能会使用前置摄像头提高屏幕自动旋转的准确性。系统绝不会存储相关图像，也不会将其发送给 Google。"</string>
     <string name="bluetooth" msgid="8898478620943459654">"蓝牙"</string>
@@ -139,7 +139,6 @@
     <string name="stylus_textfield_handwriting" msgid="2363579035338976327">"在文本字段中书写"</string>
     <string name="stylus_ignore_button" msgid="7734540973145241391">"忽略所有通过触控笔按下按钮的动作"</string>
     <string name="stylus_connected_devices_title" msgid="2823967577941359812">"触控笔"</string>
-    <string name="audio_streams_empty" msgid="8803517701437394982">"在附近未发现音频流。"</string>
     <string name="date_and_time" msgid="1788358029823431692">"日期和时间"</string>
     <string name="proxy_settings_title" msgid="4201866858226087066">"代理"</string>
     <string name="proxy_clear_text" msgid="6529658759984031149">"清除"</string>
@@ -286,8 +285,7 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"具有附近设备权限的应用可以确定已连接的设备的相对位置。"</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"应用和服务的位置信息使用权处于关闭状态。在您拨打紧急电话号码或向该号码发送短信时，系统可能仍会将您的设备位置信息发送给紧急救援人员。"</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"详细了解位置信息设置"</string>
-    <!-- no translation found for location_settings_tooltip_text_for_chrome (5781821709250544575) -->
-    <skip />
+    <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"如要进行更改，请依次前往 ChromeOS 的“设置”&gt;“隐私和安全”&gt;“隐私控制”&gt;“位置信息使用权”"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"账号"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"安全"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"加密与凭据"</string>
@@ -565,7 +563,8 @@
     <string name="private_space_auto_lock_title" msgid="8663409382910601261">"自动锁定私密空间"</string>
     <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"设备可在闲置一段时间后自动锁定私密空间"</string>
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"每次设备锁定时"</string>
-    <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"无操作 5 分钟后"</string>
+    <!-- no translation found for private_space_auto_lock_after_inactivity (7107814517866649733) -->
+    <skip />
     <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"仅在设备重启后"</string>
     <string name="private_space_hide_page_title" msgid="3364639176511877414">"隐藏私密空间"</string>
     <string name="private_space_hide_when_locked" msgid="6219472348124151797">"当私密空间处于锁定状态时将其隐藏"</string>
@@ -1753,7 +1752,7 @@
     <string name="enable_text" msgid="8570798764647110430">"启用"</string>
     <string name="clear_user_data_text" msgid="6773186434260397947">"清空存储空间"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"卸载更新"</string>
-    <string name="app_restricted_settings_lockscreen_title" msgid="796413224212436400">"允许授予受限权限"</string>
+    <string name="app_restricted_settings_lockscreen_title" msgid="5993061278264872648">"允许受限制的设置"</string>
     <string name="auto_launch_enable_text" msgid="8912714475823807798">"您已选择的一些活动默认会在此应用中打开。"</string>
     <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"您已选择允许该应用创建微件并查看其数据。"</string>
     <string name="auto_launch_disable_text" msgid="502648841250936209">"无默认设置。"</string>
@@ -2325,6 +2324,8 @@
     <string name="daltonizer_mode_protanomaly_title" msgid="6392456967103014723">"红绿不分"</string>
     <string name="daltonizer_mode_tritanomaly_title" msgid="2278786218762602022">"蓝黄不分"</string>
     <string name="daltonizer_mode_grayscale_title" msgid="152005391387952588">"灰度模式"</string>
+    <!-- no translation found for daltonizer_saturation_title (2999486412114963068) -->
+    <skip />
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="2117727423019598455">"绿色弱、绿色盲"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="4617032854982040748">"红色弱、红色盲"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"蓝色弱视"</string>
@@ -2405,7 +2406,6 @@
     <string name="keywords_select_to_speak" msgid="2872704811610888719"></string>
     <string name="keywords_color_correction" msgid="8540442886990423681">"调整颜色, adjust color"</string>
     <string name="keywords_color_inversion" msgid="4291058365873221962">"调暗屏幕, 调亮屏幕, turn screen dark, turn screen light"</string>
-    <string name="keywords_contrast" msgid="4668393735398949873">"色彩对比度"</string>
     <string name="keywords_accessibility_menu" msgid="4300579436464706608"></string>
     <string name="keywords_switch_access" msgid="5813094504384313402"></string>
     <string name="keywords_auto_click" msgid="6811744211216280998">"运动, 鼠标, 外部鼠标, 头部鼠标, 自适应鼠标, 轮椅, 操纵杆, motor, mouse, external mouse, head mouse, adaptive mouse, wheelchair, joystick"</string>
@@ -2690,7 +2690,7 @@
     <string name="cellular_security_settings_title" msgid="7779141923670352595">"移动网络安全"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"通知"</string>
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"网络通知"</string>
-    <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"当您的设备连接到未加密的网络时，或当有网络记录您设备的唯一 ID 或 SIM 卡 ID 时，您会收到通知"</string>
+    <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"设备连接到未加密的网络，或有网络记录设备的唯一 ID 或 SIM 卡 ID 时接收通知"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"加密"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"网络级别"</string>
     <string name="cellular_security_network_generations_summary" msgid="139087814553929402">"您可以将安装的每个 SIM 卡配置为仅连接到支持 3G、4G 和 5G 的网络。SIM 卡将不会连接到版本更低的不安全 2G 网络。如果只有 2G 网络可用，此设置可能会影响网络连接性。但出现紧急情况时，您可以使用 2G 网络。"</string>
@@ -3306,6 +3306,8 @@
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"设置已连接的设备"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{无}=1{已设置 1 个时间表}other{已设置 # 个时间表}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"勿扰模式"</string>
+    <!-- no translation found for zen_modes_list_title (5138745349253275428) -->
+    <skip />
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"仅接收来自重要联系人和重要应用的通知"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"限制打扰"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"开启勿扰模式"</string>
@@ -3532,7 +3534,7 @@
     <string name="notifications_sent_daily" msgid="10274479224185437">"{count,plural, =1{每天大约 # 条通知}other{每天大约 # 条通知}}"</string>
     <string name="notifications_sent_weekly" msgid="7895656213187555346">"{count,plural, =1{每周大约 # 条通知}other{每周大约 # 条通知}}"</string>
     <string name="notifications_sent_never" msgid="9081278709126812062">"永不"</string>
-    <string name="manage_notification_access_title" msgid="6481256069087219982">"设备和应用通知"</string>
+    <string name="manage_notification_access_title" msgid="4154723216570646451">"阅读、回复和控制通知"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"控制哪些应用和设备能够读取通知"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8643809206612366067">"已禁止访问工作资料通知"</string>
     <string name="notification_assistant_title" msgid="5889201903272393099">"增强型通知"</string>
@@ -3632,7 +3634,7 @@
     <string name="app_notification_block_summary" msgid="1804611676339341551">"一律不显示这类通知"</string>
     <string name="notification_content_block_title" msgid="6689085826061361351">"显示通知"</string>
     <string name="notification_content_block_summary" msgid="329171999992248925">"一律不在通知栏或外围设备上显示通知"</string>
-    <string name="app_notification_fsi_permission_title" msgid="5424116606034705020">"允许显示全屏通知"</string>
+    <string name="app_notification_fsi_permission_title" msgid="2260977598430154428">"允许显示全屏通知"</string>
     <string name="app_notification_fsi_permission_summary" msgid="7673487977631068039">"允许在设备锁定时显示占据整个屏幕空间的通知"</string>
     <string name="notification_badge_title" msgid="6854537463548411313">"允许使用通知圆点"</string>
     <string name="notification_channel_badge_title" msgid="6505542437385640049">"显示通知圆点"</string>
@@ -3769,7 +3771,7 @@
     <string name="device_feedback" msgid="5351614458411688608">"发送有关此设备的反馈"</string>
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"输入管理员 PIN 码"</string>
     <string name="switch_on_text" msgid="5664542327776075105">"开启"</string>
-    <string name="switch_off_text" msgid="1315547447393646667">"关闭"</string>
+    <string name="switch_off_text" msgid="1315547447393646667">"已关闭"</string>
     <string name="nfc_setting_on" msgid="7701896496026725772">"已开启"</string>
     <string name="nfc_setting_off" msgid="7142103438532732309">"已关闭"</string>
     <string name="screen_pinning_switch_on_text" msgid="6971386830247542552">"已开启"</string>
@@ -3981,8 +3983,8 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"授予管理所有文件的权限"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"允许此应用读取、修改和删除此设备或任何已连接存储卷上的所有文件。如果您授予该权限，应用无需明确通知您即可访问文件。"</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"可以访问所有文件"</string>
-    <string name="full_screen_intent_title" msgid="747270185715224130">"全屏通知"</string>
-    <string name="permit_full_screen_intent" msgid="9035367640019960861">"允许此应用显示全屏通知"</string>
+    <string name="full_screen_intent_title" msgid="5888548315628268674">"全屏通知"</string>
+    <string name="permit_full_screen_intent" msgid="2414307667550523630">"允许此应用显示全屏通知"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"允许此应用在设备锁定时全屏显示通知。应用可利用全屏通知突出显示闹钟、来电或其他紧急通知。"</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"媒体管理应用"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"允许应用管理媒体"</string>
@@ -4100,7 +4102,7 @@
     <string name="data_usage_template" msgid="3822452362629968010">"<xliff:g id="ID_2">%2$s</xliff:g>期间已使用 <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="configure" msgid="1499586749829665889">"配置"</string>
     <string name="data_usage_other_apps" msgid="5649047093607329537">"其他消耗流量的应用"</string>
-    <string name="data_saver_unrestricted_summary" msgid="7343571401172437542">"{count,plural, =1{已允许 1 个应用在省流模式开启时无限量使用数据流量}other{已允许 # 个应用在省流模式开启时无限量使用数据流量}}"</string>
+    <string name="data_saver_unrestricted_summary" msgid="559673440849071149">"{count,plural, =1{已允许 1 个应用在流量节省程序开启时使用无限移动数据网络}other{已允许 # 个应用在流量节省程序开启时使用无限移动数据网络}}"</string>
     <string name="data_usage_title" msgid="4039024073687469094">"主要数据"</string>
     <string name="data_usage_wifi_title" msgid="1060495519280456926">"WLAN 数据"</string>
     <string name="data_used_formatted" msgid="7913920278059077938">"已使用 <xliff:g id="ID_1">^1</xliff:g> <xliff:g id="ID_2">^2</xliff:g>"</string>
@@ -4117,13 +4119,13 @@
     <string name="no_carrier_update_now_text" msgid="7898004907837200752">"刚刚更新"</string>
     <string name="launch_wifi_text" msgid="976421974332512894">"查看详情"</string>
     <string name="data_saver_title" msgid="2593804270788863815">"省流模式"</string>
-    <string name="unrestricted_data_saver" msgid="7922563266857367495">"不受流量限制"</string>
+    <string name="unrestricted_data_saver" msgid="5913547065342097274">"无限移动数据网络"</string>
     <string name="restrict_background_blocklisted" msgid="2308345280442438232">"后台数据已关闭"</string>
     <string name="data_saver_on" msgid="7848893946018448793">"已开启"</string>
     <string name="data_saver_off" msgid="5891210864117269045">"已关闭"</string>
     <string name="data_saver_switch_title" msgid="7111538580123722959">"使用省流模式"</string>
-    <string name="unrestricted_app_title" msgid="7117585996574329284">"不限制数据流量用量"</string>
-    <string name="unrestricted_app_summary" msgid="282698963532000403">"允许在省流模式开启时无限量使用数据流量"</string>
+    <string name="unrestricted_app_title" msgid="8531936851059106374">"使用无限移动数据网络"</string>
+    <string name="unrestricted_app_summary" msgid="8320813971858627624">"允许在开启流量节省程序时使用无限移动数据网络"</string>
     <string name="home_app" msgid="6056850504746902747">"主屏幕应用"</string>
     <string name="suggestion_additional_fingerprints" msgid="4726777300101156208">"添加其他指纹"</string>
     <string name="suggestion_additional_fingerprints_summary" msgid="2825364645039666674">"使用其他指纹解锁"</string>
@@ -4197,9 +4199,9 @@
     <string name="notification_suggestion_summary" msgid="7615611244249276113">"显示或隐藏通知内容"</string>
     <string name="page_tab_title_support" msgid="3235725053332345773">"提示和支持"</string>
     <string name="developer_smallest_width" msgid="632354817870920911">"最小宽度"</string>
-    <string name="premium_sms_none" msgid="8737045049886416739">"没有任何已安装的应用申请付费短信权限"</string>
+    <string name="premium_sms_none" msgid="4718916765158062108">"没有任何已安装的应用申请付费短信"</string>
     <string name="premium_sms_warning" msgid="2192300872411073324">"“付费短信”可能会产生费用，而且相关费用将计入您的运营商账单。如果您为某个应用启用该权限，那么您将能够使用该应用发送付费短信。"</string>
-    <string name="premium_sms_access" msgid="5605970342699013212">"付费短信权限"</string>
+    <string name="premium_sms_access" msgid="8487315743197916530">"付费短信"</string>
     <string name="bluetooth_disabled" msgid="835838280837359514">"已关闭"</string>
     <string name="bluetooth_connected_summary" msgid="8043167194934315712">"已连接到“<xliff:g id="ID_1">%1$s</xliff:g>”"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="2294954614327771844">"已连接到多部设备"</string>
@@ -4979,7 +4981,7 @@
     <string name="enable_2g_summary" msgid="2794534052372565914">"2G 网络的安全性较低，但在某些地方可能会改善您的连接质量。您始终都能通过 2G 网络拨打紧急电话。"</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"必须启用 2G 网络才能使用<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g>的服务"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"只允许使用加密网络"</string>
-    <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"这样虽然更加安全，但可能会致使您的移动网络连接在某些地方受限。始终允许进行紧急呼叫。"</string>
+    <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"这样虽然更安全，但可能导致移动网络连接在某些地方受限。紧急呼叫服务则随时可用，不受任何影响。"</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"所有服务"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"显示剪贴板访问通知"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"系统会在应用访问您复制的文字、图片或其他内容时显示一条消息"</string>
@@ -4990,12 +4992,9 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"会关闭飞行模式，以使用超宽带 (UWB)"</string>
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"UWB 在当前位置不可用"</string>
     <string name="thread_network_settings_title" msgid="4212301030523859220">"Thread"</string>
-    <!-- no translation found for thread_network_settings_main_switch_title (3859168481929323474) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_footer_title (7385600318850220927) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_learn_more (8278498005848565050) -->
-    <skip />
+    <string name="thread_network_settings_main_switch_title" msgid="3859168481929323474">"使用 Thread"</string>
+    <string name="thread_network_settings_footer_title" msgid="7385600318850220927">"Thread 可连接智能家居设备，从而提升效率和性能。\n\n启用此设置后，这部设备便可以加入 Thread 网络，这样你就能通过这部手机控制支持 Matter 的设备。"</string>
+    <string name="thread_network_settings_learn_more" msgid="8278498005848565050">"详细了解 Thread"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"摄像头使用权限"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"麦克风使用权限"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"会影响应用和服务"</string>
@@ -5080,12 +5079,12 @@
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"音频会随着头部移动而变化，让聆听效果更加自然"</string>
     <string name="bluetooth_details_permissions_sync_title" msgid="7277580382321003521">"从手机同步权限"</string>
     <string name="bluetooth_details_permissions_sync_summary" msgid="8125037984381432059">"为手表授予您已在这部手机上授予的那些应用权限"</string>
-    <string name="bluetooth_details_audio_device_types_title" msgid="3381941189346781614">"音频设备类型"</string>
-    <string name="bluetooth_details_audio_device_type_unknown" msgid="839337391037998014">"未知"</string>
+    <string name="bluetooth_details_audio_device_types_title" msgid="1889644189800180316">"音频设备类型"</string>
+    <string name="bluetooth_details_audio_device_type_unknown" msgid="5299284975435974206">"未设置"</string>
     <string name="bluetooth_details_audio_device_type_speaker" msgid="3706227767994792124">"扬声器"</string>
     <string name="bluetooth_details_audio_device_type_headphones" msgid="7644588291215033798">"耳机"</string>
-    <string name="bluetooth_details_audio_device_type_hearing_aid" msgid="1310631131071939859">"助听器"</string>
-    <string name="bluetooth_details_audio_device_type_carkit" msgid="4439017600454703229">"车载套件"</string>
+    <string name="bluetooth_details_audio_device_type_hearing_aid" msgid="6311786545025321187">"助听装置"</string>
+    <string name="bluetooth_details_audio_device_type_carkit" msgid="1866236563013629394">"汽车"</string>
     <string name="bluetooth_details_audio_device_type_other" msgid="7019481234617207563">"其他"</string>
     <string name="ingress_rate_limit_title" msgid="2106694002836274350">"网络下载速率限制"</string>
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"配置网络带宽入站流量速率限制，此速率限制将应用到提供互联网连接的所有网络中。"</string>
@@ -5170,8 +5169,6 @@
     <string name="screen_flash_color_violet" msgid="1279950780509029495">"紫色"</string>
     <string name="color_selector_dialog_done" msgid="121253968943363376">"完成"</string>
     <string name="color_selector_dialog_cancel" msgid="8667350644753900701">"取消"</string>
-    <string name="contrast_title" msgid="6885768151336508075">"对比度"</string>
-    <string name="contrast_standard" msgid="1097297089917185235">"标准"</string>
     <string name="contrast_default" msgid="8918545965525226966">"默认"</string>
     <string name="contrast_medium" msgid="384414510709285811">"中"</string>
     <string name="contrast_high" msgid="3988567609694797696">"高"</string>
@@ -5208,4 +5205,100 @@
     <string name="fingerprint_acquired_imager_dirty_udfps" msgid="7005042288289506776">"请将传感器附近的屏幕擦干净，然后重试"</string>
     <string name="sim_category_converted_sim" msgid="8575548015816988908">"已转换成 eSIM 卡。请将实体卡取出并丢弃。"</string>
     <string name="sync_across_devices_title" msgid="3447757705383089345">"在设备之间保持同步"</string>
+    <!-- no translation found for device_diagnostics_title (2914523189695727897) -->
+    <skip />
+    <string name="audio_sharing_title" msgid="4144157137502923821">"音频分享"</string>
+    <string name="audio_sharing_switch_title" msgid="7052827328670825701">"分享音频"</string>
+    <string name="calls_and_alarms_device_title" msgid="6993559028175454198">"来电和闹钟"</string>
+    <string name="audio_sharing_description" msgid="1660255584523640628">"允许其他人和您一起收听您的媒体。收听者需要自备 LE 音频耳机。"</string>
+    <string name="audio_sharing_device_group_title" msgid="3019780581643956943">"使用中的媒体设备"</string>
+    <string name="audio_sharing_call_audio_title" msgid="7978867452289583929">"通话音频"</string>
+    <string name="audio_sharing_call_audio_description" msgid="6573621048260616924">"仅通过“<xliff:g id="DEVICE_NAME">%1$s</xliff:g>”播放"</string>
+    <string name="audio_sharing_test_sound_title" msgid="6438868185641027763">"播放测试音效"</string>
+    <string name="audio_sharing_test_sound_description" msgid="4072462502371937399">"每个正在收听的人应该都会听到它"</string>
+    <string name="audio_sharing_stream_settings_title" msgid="1374391898689242036">"音频流设置"</string>
+    <string name="audio_sharing_stream_name_title" msgid="8156859441897180940">"名称"</string>
+    <string name="audio_sharing_stream_password_title" msgid="7026649168165764602">"密码"</string>
+    <string name="audio_sharing_stream_compatibility_title" msgid="5690947186724469918">"改进兼容性"</string>
+    <string name="audio_sharing_stream_compatibility_description" msgid="8170241188606110963">"通过降低音频质量，帮助某些设备（例如助听器）连接"</string>
+    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="2586408353546825682">"关闭“音频分享”功能以配置兼容性"</string>
+    <string name="audio_sharing_nearby_audio_title" msgid="4795438407040677177">"收听附近的音频"</string>
+    <string name="audio_sharing_footer_description" msgid="4786942197840271680">"“音频分享”功能支持 Auracast™"</string>
+    <string name="audio_sharing_stream_name_dialog_title" msgid="6706027295417556499">"音频流名称"</string>
+    <string name="audio_sharing_stream_password_dialog_title" msgid="4148196538860845705">"音频流密码"</string>
+    <string name="audio_sharing_media_device_group_title" msgid="4850674234590549565">"其他媒体设备"</string>
+    <string name="audio_sharing_summary_on" msgid="611197542982323788">"已开启"</string>
+    <string name="audio_sharing_summary_off" msgid="8833198995257547378">"已关闭"</string>
+    <string name="audio_sharing_share_dialog_title" msgid="427514648577553621">"分享您的音频"</string>
+    <string name="audio_sharing_share_dialog_subtitle" msgid="5208582843732057871">"“<xliff:g id="DEVICE_NAME1">%1$s</xliff:g>”和“<xliff:g id="DEVICE_NAME2">%2$s</xliff:g>”"</string>
+    <string name="audio_sharing_share_button_label" msgid="3895900668317105537">"分享音频"</string>
+    <string name="audio_sharing_no_thanks_button_label" msgid="5822491984114744357">"不了，谢谢"</string>
+    <string name="audio_sharing_share_with_dialog_title" msgid="3934377530640830364">"与“<xliff:g id="DEVICE_NAME">%1$s</xliff:g>”分享音频？"</string>
+    <string name="audio_sharing_share_with_more_dialog_title" msgid="2840069088858232267">"与另一部设备分享音频"</string>
+    <string name="audio_sharing_share_with_button_label" msgid="4146194430380237357">"与“<xliff:g id="DEVICE_NAME">%1$s</xliff:g>”分享"</string>
+    <string name="audio_sharing_close_button_label" msgid="2666534149100498574">"关闭"</string>
+    <string name="audio_sharing_dialog_connect_device_content" msgid="2873230647152283734">"再连接一对兼容耳机，或者与对方分享您的音频流名称和密码"</string>
+    <string name="audio_sharing_dialog_pair_device_content" msgid="3136997898244863470">"再连接一对兼容耳机，或者与对方分享您的音频流二维码"</string>
+    <string name="audio_sharing_sharing_label" msgid="1038021053061111508">"正在分享音频"</string>
+    <string name="audio_sharing_pair_button_label" msgid="7987236990273083588">"与新设备配对"</string>
+    <string name="audio_sharing_qrcode_button_label" msgid="3207039106555097659">"显示二维码"</string>
+    <string name="audio_sharing_notification_title" msgid="1204798942946033005">"您正在分享音频"</string>
+    <string name="audio_sharing_notification_content" msgid="1577180829878785642">"其他人可以听到您分享的媒体，但不会听到通话。"</string>
+    <string name="audio_sharing_stop_button_label" msgid="8770519671470608849">"停止分享"</string>
+    <string name="audio_sharing_settings_button_label" msgid="8574808650318270491">"设置"</string>
+    <string name="audio_sharing_disconnect_dialog_title" msgid="2192751727237748602">"选择要断开连接的设备"</string>
+    <string name="audio_sharing_dialog_disconnect_content" msgid="3840488888970653308">"一次只能有 2 部设备分享音频"</string>
+    <string name="audio_sharing_disconnect_device_button_label" msgid="4272897217708930576">"断开与“<xliff:g id="DEVICE_NAME">%1$s</xliff:g>”的连接"</string>
+    <string name="audio_sharing_stop_dialog_title" msgid="4872853738164232075">"连接“<xliff:g id="DEVICE_NAME">%1$s</xliff:g>”？"</string>
+    <string name="audio_sharing_stop_dialog_content" msgid="6371546856710692910">"您将停止与“<xliff:g id="DEVICE_NAME">%1$s</xliff:g>”分享音频"</string>
+    <string name="audio_sharing_stop_dialog_with_two_content" msgid="2119020725467967219">"您将停止与“<xliff:g id="DEVICE_NAME1">%1$s</xliff:g>”和“<xliff:g id="DEVICE_NAME2">%2$s</xliff:g>”分享音频"</string>
+    <string name="audio_sharing_stop_dialog_with_more_content" msgid="5262441138981618703">"您将停止与已连接的耳机分享音频"</string>
+    <string name="audio_sharing_connect_button_label" msgid="4241911519063029982">"连接"</string>
+    <string name="audio_sharing_sharing_stopped_label" msgid="8128194452354240996">"已停止分享音频"</string>
+    <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"连接兼容设备"</string>
+    <string name="audio_sharing_comfirm_dialog_content" msgid="3479217934447446066">"如要开始分享音频，请先将 LE 音频耳机连接到手机"</string>
+    <string name="audio_streams_category_title" msgid="4878022761829895463">"连接到 LE 音频串流"</string>
+    <string name="audio_streams_pref_title" msgid="6320485086288646209">"附近的音频流"</string>
+    <string name="audio_streams_title" msgid="6617990880383079165">"音频流"</string>
+    <string name="audio_streams_qr_code_summary" msgid="2838923349871884871">"使用二维码连接到音频流"</string>
+    <string name="audio_streams_empty" msgid="8803517701437394982">"在附近未发现音频流。"</string>
+    <string name="audio_streams_disconnect" msgid="1755594831469579161">"断开连接"</string>
+    <string name="audio_streams_connect" msgid="1955964373102927954">"连接"</string>
+    <string name="audio_streams_qr_code_is_not_valid_format" msgid="4856288389653121830">"二维码的格式无效"</string>
+    <string name="audio_streams_qr_code_scanner" msgid="525396804963685478">"将取景框对准下方的二维码，即可开始收听"</string>
+    <string name="audio_streams_add_source_bad_code_state_summary" msgid="6527086906921868757">"请检查密码，然后重试"</string>
+    <string name="audio_streams_add_source_failed_state_summary" msgid="3937546443978562322">"无法连接。请重试。"</string>
+    <string name="audio_streams_add_source_wait_for_response_summary" msgid="3763240901110974606">"正在连接…"</string>
+    <string name="audio_streams_wait_for_sync_state_summary" msgid="11905744690831864">"正在扫描…"</string>
+    <string name="audio_streams_dialog_stream_is_not_available" msgid="4032878851270690546">"无法获取音频流"</string>
+    <string name="audio_streams_is_not_playing" msgid="8480293894696007941">"该音频流此刻未播放任何声音"</string>
+    <string name="audio_streams_dialog_close" msgid="8177201719298408431">"关闭"</string>
+    <string name="audio_streams_dialog_listen" msgid="7290340191504987685">"收听"</string>
+    <string name="audio_streams_dialog_retry" msgid="4456843891970998556">"重试"</string>
+    <string name="audio_streams_dialog_listen_to_audio_stream" msgid="8585253007762261528">"收听音频流"</string>
+    <string name="audio_streams_dialog_control_volume" msgid="7615062686016713544">"该音频流将通过“<xliff:g id="DEVICE_NAME">%1$s</xliff:g>”播放。您可以使用这部设备控制音量。"</string>
+    <string name="audio_streams_dialog_cannot_listen" msgid="4432257183698209966">"无法收听音频流"</string>
+    <string name="audio_streams_dialog_default_device" msgid="6159800303379303266">"已连接的兼容耳机"</string>
+    <string name="audio_streams_activity_title" msgid="9011162151277443663">"广播"</string>
+    <string name="audio_streams_no_password_summary" msgid="8976357323034830144">"没有密码"</string>
+    <string name="audio_streams_dialog_learn_more" msgid="6711241053442211345">"了解详情"</string>
+    <string name="audio_streams_dialog_cannot_play" msgid="1358828316927479091">"无法通过“<xliff:g id="DEVICE_NAME">%1$s</xliff:g>”播放该音频流。"</string>
+    <string name="audio_streams_listening_now" msgid="4205614429222949176">"正在收听"</string>
+    <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"停止收听"</string>
+    <string name="audio_streams_dialog_no_le_device_title" msgid="3931163990976742282">"连接兼容耳机"</string>
+    <string name="audio_streams_dialog_no_le_device_button" msgid="4484355549428642588">"连接设备"</string>
+    <string name="audio_streams_detail_page_title" msgid="7884132061275273766">"音频流详情"</string>
+    <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"音频流二维码"</string>
+    <string name="audio_streams_qr_code_page_password" msgid="7268475614131297060">"密码：<xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
+    <string name="audio_streams_qr_code_page_description" msgid="1317961663706630428">"若要收听“<xliff:g id="STREAM_NAME">%1$s</xliff:g>”，其他人可先为各自的 Android 设备连接兼容耳机，然后扫描此二维码。"</string>
+    <string name="audio_streams_main_page_title" msgid="1838380471076527639">"查找音频流"</string>
+    <string name="audio_streams_main_page_subtitle" msgid="3251995732921981539">"收听其他设备分享的音频或附近的 Auracast 广播音频"</string>
+    <string name="audio_streams_main_page_device_title" msgid="2635744035523908253">"您的音频设备"</string>
+    <string name="audio_streams_main_page_no_device_summary" msgid="2936000845397406389">"连接兼容耳机"</string>
+    <string name="audio_streams_main_page_scan_section_title" msgid="2778235929304061163">"附近的音频流"</string>
+    <string name="audio_streams_main_page_scan_qr_code_title" msgid="8337270277392468895">"扫描二维码"</string>
+    <string name="audio_streams_main_page_scan_qr_code_summary" msgid="1991792283368249499">"扫描音频流二维码即可开始收听"</string>
+    <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"收听音频流"</string>
+    <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"扫描音频流二维码即可通过“<xliff:g id="DEVICE_NAME">%1$s</xliff:g>”收听"</string>
+    <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"分享期间无法修改密码。若要更改密码，请先关闭“音频分享”功能。"</string>
 </resources>
