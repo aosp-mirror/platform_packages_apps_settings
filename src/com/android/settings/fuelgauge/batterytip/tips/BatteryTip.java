@@ -23,11 +23,10 @@ import android.util.SparseIntArray;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.IntDef;
-import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
-import com.android.settings.widget.TipCardPreference;
+import com.android.settings.widget.CardPreference;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import java.lang.annotation.Retention;
@@ -169,7 +168,7 @@ public abstract class BatteryTip implements Comparable<BatteryTip>, Parcelable {
         preference.setTitle(getTitle(context));
         preference.setSummary(getSummary(context));
         preference.setIcon(getIconId());
-        final TipCardPreference cardPreference = castToTipCardPreferenceSafely(preference);
+        final CardPreference cardPreference = castToCardPreferenceSafely(preference);
         if (cardPreference != null) {
             cardPreference.resetLayoutState();
         }
@@ -210,9 +209,7 @@ public abstract class BatteryTip implements Comparable<BatteryTip>, Parcelable {
         return "type=" + mType + " state=" + mState;
     }
 
-    /** Returns the converted {@link TipCardPreference} if it is valid. */
-    @Nullable
-    public TipCardPreference castToTipCardPreferenceSafely(Preference preference) {
-        return preference instanceof TipCardPreference ? (TipCardPreference) preference : null;
+    public CardPreference castToCardPreferenceSafely(Preference preference) {
+        return preference instanceof CardPreference ? (CardPreference) preference : null;
     }
 }

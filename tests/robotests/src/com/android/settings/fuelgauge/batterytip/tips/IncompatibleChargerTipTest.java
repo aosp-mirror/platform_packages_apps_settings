@@ -29,7 +29,7 @@ import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.widget.TipCardPreference;
+import com.android.settings.widget.CardPreference;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Before;
@@ -49,7 +49,7 @@ public final class IncompatibleChargerTipTest {
     private FakeFeatureFactory mFeatureFactory;
     private IncompatibleChargerTip mIncompatibleChargerTip;
     private MetricsFeatureProvider mMetricsFeatureProvider;
-    private TipCardPreference mCardPreference;
+    private CardPreference mCardPreference;
 
     @Rule public MockitoRule mMockitoRule = MockitoJUnit.rule();
     @Mock private BatteryTip mBatteryTip;
@@ -61,7 +61,7 @@ public final class IncompatibleChargerTipTest {
         mMetricsFeatureProvider = mFeatureFactory.metricsFeatureProvider;
         mContext = ApplicationProvider.getApplicationContext();
         mIncompatibleChargerTip = new IncompatibleChargerTip(BatteryTip.StateType.NEW);
-        mCardPreference = new TipCardPreference(mContext);
+        mCardPreference = new CardPreference(mContext);
 
         when(mPreference.getContext()).thenReturn(mContext);
     }

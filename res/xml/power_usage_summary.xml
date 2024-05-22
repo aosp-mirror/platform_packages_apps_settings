@@ -33,7 +33,7 @@
         android:selectable="false"
         settings:searchable="false" />
 
-    <com.android.settings.widget.TipCardPreference
+    <com.android.settings.widget.CardPreference
         android:key="battery_tip"
         android:title="@string/summary_placeholder"
         settings:controller="com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController" />

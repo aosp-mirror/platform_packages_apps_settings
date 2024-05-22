@@ -33,7 +33,7 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
-import com.android.settings.widget.TipCardPreference;
+import com.android.settings.widget.CardPreference;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -61,7 +61,7 @@ public class BatteryTipPreferenceControllerTest {
     @Mock private InstrumentedPreferenceFragment mFragment;
 
     private Context mContext;
-    private TipCardPreference mCardPreference;
+    private CardPreference mCardPreference;
     private BatteryTipPreferenceController mBatteryTipPreferenceController;
     private List<BatteryTip> mNewBatteryTips;
 
@@ -69,7 +69,7 @@ public class BatteryTipPreferenceControllerTest {
     public void setUp() {
         mContext = ApplicationProvider.getApplicationContext();
 
-        mCardPreference = new TipCardPreference(mContext);
+        mCardPreference = new CardPreference(mContext);
         when(mPreferenceScreen.getContext()).thenReturn(mContext);
         doReturn(mCardPreference).when(mPreferenceScreen).findPreference(KEY_PREF);
 

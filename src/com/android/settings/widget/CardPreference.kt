@@ -27,7 +27,7 @@ import com.android.settingslib.spa.widget.card.CardModel
 import com.android.settingslib.spa.widget.card.SettingsCard
 
 /** A preference for settings banner tips card. */
-class TipCardPreference
+class CardPreference
 @JvmOverloads
 constructor(
     context: Context,

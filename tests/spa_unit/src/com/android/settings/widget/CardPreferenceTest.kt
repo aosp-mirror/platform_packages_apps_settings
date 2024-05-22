@@ -35,7 +35,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class TipCardPreferenceTest {
+class CardPreferenceTest {
 
     @get:Rule val composeTestRule = createComposeRule()
     private lateinit var context: Context
@@ -179,7 +179,7 @@ class TipCardPreferenceTest {
     fun resetLayoutState_shouldRemoveThePrimaryButton() {
         val buttonText = "9527"
         val cardPreference =
-            TipCardPreference(context)
+            CardPreference(context)
                 .apply {
                     primaryButtonText = buttonText
                     primaryButtonVisibility = true
@@ -196,7 +196,7 @@ class TipCardPreferenceTest {
     fun resetLayoutState_shouldRemoveTheSecondaryButton() {
         val buttonText = "4567"
         val cardPreference =
-            TipCardPreference(context)
+            CardPreference(context)
                 .apply {
                     secondaryButtonText = buttonText
                     secondaryButtonVisibility = true
@@ -222,7 +222,7 @@ class TipCardPreferenceTest {
         secondaryButtonVisibility: Boolean = false,
         enableDismiss: Boolean = true,
     ) =
-        TipCardPreference(context)
+        CardPreference(context)
             .apply {
                 this.iconResId = iconResId
                 this.primaryButtonText = primaryButtonText
