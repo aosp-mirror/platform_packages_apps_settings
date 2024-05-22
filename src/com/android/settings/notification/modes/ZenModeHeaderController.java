@@ -17,7 +17,6 @@ package com.android.settings.notification.modes;
 
 import android.app.Flags;
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,9 +27,7 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.widget.LayoutPreference;
 
-import java.util.concurrent.TimeUnit;
-
-public class ZenModeHeaderController extends AbstractZenModePreferenceController {
+class ZenModeHeaderController extends AbstractZenModePreferenceController {
 
     private final DashboardFragment mFragment;
     private EntityHeaderController mHeaderController;
@@ -51,7 +48,8 @@ public class ZenModeHeaderController extends AbstractZenModePreferenceController
 
     @Override
     public void updateState(Preference preference) {
-        if (getAZR() == null || mFragment == null) {
+        ZenMode mode = getMode();
+        if (mode == null || mFragment == null) {
             return;
         }
 
@@ -62,14 +60,12 @@ public class ZenModeHeaderController extends AbstractZenModePreferenceController
                     mFragment,
                     pref.findViewById(R.id.entity_header));
         }
-        Drawable icon = null;
-        try {
-            icon = getMode().getIcon(mContext).get(200, TimeUnit.MILLISECONDS);
-        } catch (Exception e) {
-            // no icon
-        }
-        mHeaderController.setIcon(icon)
-                .setLabel(getAZR().getName())
-                .done(false /* rebindActions */);
+
+        FutureUtil.whenDone(
+                mode.getIcon(IconLoader.getInstance(mContext)),
+                icon -> mHeaderController.setIcon(icon)
+                        .setLabel(mode.getRule().getName())
+                        .done(false /* rebindActions */),
+                mContext.getMainExecutor());
     }
 }

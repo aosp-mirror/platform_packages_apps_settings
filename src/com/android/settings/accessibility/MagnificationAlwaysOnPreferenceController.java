@@ -67,16 +67,12 @@ public class MagnificationAlwaysOnPreferenceController extends
 
     @Override
     public void onResume() {
-        if (Flags.hideMagnificationAlwaysOnToggleWhenWindowModeOnly()) {
-            MagnificationCapabilities.registerObserver(mContext, mContentObserver);
-        }
+        MagnificationCapabilities.registerObserver(mContext, mContentObserver);
     }
 
     @Override
     public void onPause() {
-        if (Flags.hideMagnificationAlwaysOnToggleWhenWindowModeOnly()) {
-            MagnificationCapabilities.unregisterObserver(mContext, mContentObserver);
-        }
+        MagnificationCapabilities.unregisterObserver(mContext, mContentObserver);
     }
 
     @Override
@@ -111,10 +107,6 @@ public class MagnificationAlwaysOnPreferenceController extends
 
     @Override
     public CharSequence getSummary() {
-        if (!Flags.hideMagnificationAlwaysOnToggleWhenWindowModeOnly()) {
-            return super.getSummary();
-        }
-
         @StringRes int resId = mPreference.isEnabled()
                 ? R.string.accessibility_screen_magnification_always_on_summary
                 : R.string.accessibility_screen_magnification_always_on_unavailable_summary;
@@ -124,9 +116,6 @@ public class MagnificationAlwaysOnPreferenceController extends
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        if (!Flags.hideMagnificationAlwaysOnToggleWhenWindowModeOnly()) {
-            return;
-        }
 
         if (preference == null) {
             return;
