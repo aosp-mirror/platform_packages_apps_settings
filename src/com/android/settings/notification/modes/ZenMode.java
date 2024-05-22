@@ -25,15 +25,12 @@ import android.annotation.SuppressLint;
 import android.app.AutomaticZenRule;
 import android.app.NotificationManager;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
-import android.service.notification.SystemZenRules;
 import android.service.notification.ZenPolicy;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.content.res.AppCompatResources;
 
 import com.android.settings.R;
 
@@ -94,8 +91,6 @@ class ZenMode {
     private final boolean mIsActive;
     private final boolean mIsManualDnd;
 
-//    private ZenPolicy mPreviousPolicy;
-
     ZenMode(String id, AutomaticZenRule rule, boolean isActive) {
         this(id, rule, isActive, false);
     }
@@ -122,49 +117,14 @@ class ZenMode {
     }
 
     @NonNull
-    public ListenableFuture<Drawable> getIcon(@NonNull Context context) {
-        // TODO: b/333528586 - Load the icons asynchronously, and cache them
+    public ListenableFuture<Drawable> getIcon(@NonNull IconLoader iconLoader) {
+        Context context = iconLoader.getContext();
         if (mIsManualDnd) {
-            return Futures.immediateFuture(
-                    requireNonNull(context.getDrawable(R.drawable.ic_do_not_disturb_on_24dp)));
+            return Futures.immediateFuture(requireNonNull(
+                    context.getDrawable(R.drawable.ic_do_not_disturb_on_24dp)));
         }
 
-        int iconResId = mRule.getIconResId();
-        Drawable customIcon = null;
-        if (iconResId != 0) {
-            if (SystemZenRules.PACKAGE_ANDROID.equals(mRule.getPackageName())) {
-                customIcon = context.getDrawable(mRule.getIconResId());
-            } else {
-                try {
-                    Context appContext = context.createPackageContext(mRule.getPackageName(), 0);
-                    customIcon = AppCompatResources.getDrawable(appContext, mRule.getIconResId());
-                } catch (PackageManager.NameNotFoundException e) {
-                    Log.wtf(TAG,
-                            "Package " + mRule.getPackageName() + " used in rule " + mId
-                                    + " not found?", e);
-                    // Continue down to use a default icon.
-                }
-            }
-        }
-        if (customIcon != null) {
-            return Futures.immediateFuture(customIcon);
-        }
-
-        // Derive a default icon from the rule type.
-        // TODO: b/333528437 - Use correct icons
-        int iconResIdFromType = switch (mRule.getType()) {
-            case AutomaticZenRule.TYPE_UNKNOWN -> R.drawable.ic_do_not_disturb_on_24dp;
-            case AutomaticZenRule.TYPE_OTHER -> R.drawable.ic_do_not_disturb_on_24dp;
-            case AutomaticZenRule.TYPE_SCHEDULE_TIME -> R.drawable.ic_modes_time;
-            case AutomaticZenRule.TYPE_SCHEDULE_CALENDAR -> R.drawable.ic_modes_event;
-            case AutomaticZenRule.TYPE_BEDTIME -> R.drawable.ic_do_not_disturb_on_24dp;
-            case AutomaticZenRule.TYPE_DRIVING -> R.drawable.ic_do_not_disturb_on_24dp;
-            case AutomaticZenRule.TYPE_IMMERSIVE -> R.drawable.ic_do_not_disturb_on_24dp;
-            case AutomaticZenRule.TYPE_THEATER -> R.drawable.ic_do_not_disturb_on_24dp;
-            case AutomaticZenRule.TYPE_MANAGED -> R.drawable.ic_do_not_disturb_on_24dp;
-            default -> R.drawable.ic_do_not_disturb_on_24dp;
-        };
-        return Futures.immediateFuture(requireNonNull(context.getDrawable(iconResIdFromType)));
+        return iconLoader.getIcon(mRule);
     }
 
     @NonNull
