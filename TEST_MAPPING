@@ -6,25 +6,22 @@
     {
       "name": "SettingsUnitTests",
       "options": [
-        {
-          "include-filter": "com.android.settings.biometrics"
-        },
-        {
-          "include-filter": "com.android.settings.biometrics2"
-        },
-        {
-          "include-filter": "com.android.settings.password"
-        },
-	 {
-          "include-filter": "com.android.settings.privatespace"
-        },
-        {
-          "include-filter": "com.android.settings.safetycenter"
-        },
-        {
-          "include-filter": "com.android.settings.security"
-        }
-      ]
+              {
+                "exclude-filter": "com.android.settings.fuelgauge.batterysaver"
+              },
+              {
+                "exclude-filter": "com.android.settings.network.telephony"
+              },
+              {
+                "exclude-filter": "com.android.settings.privatespace"
+              },
+              {
+                "exclude-filter": "com.android.settings.regionalpreferences"
+              },
+              {
+                "exclude-filter": "com.android.settings.vpn2"
+              }
+            ]
     }
   ],
   "postsubmit": [

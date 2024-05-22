@@ -32,9 +32,6 @@ import android.telephony.TelephonyManager.NETWORK_CLASS_BITMASK_5G
 import android.telephony.TelephonyScanManager
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.android.settings.network.telephony.scan.NetworkScanRepository.NetworkScanCellInfos
-import com.android.settings.network.telephony.scan.NetworkScanRepository.NetworkScanComplete
-import com.android.settings.network.telephony.scan.NetworkScanRepository.NetworkScanError
 import com.android.settingslib.spa.testutils.firstWithTimeoutOrNull
 import com.android.settingslib.spa.testutils.toListWithTimeout
 import com.google.common.truth.Truth.assertThat
@@ -88,7 +85,12 @@ class NetworkScanRepositoryTest {
 
         callback?.onResults(cellInfos)
 
-        assertThat(listDeferred.await()).containsExactly(NetworkScanCellInfos(cellInfos))
+        assertThat(listDeferred.await()).containsExactly(
+            NetworkScanRepository.NetworkScanResult(
+                state = NetworkScanRepository.NetworkScanState.ACTIVE,
+                cellInfos = cellInfos,
+            )
+        )
     }
 
     @Test
@@ -100,7 +102,12 @@ class NetworkScanRepositoryTest {
 
         callback?.onComplete()
 
-        assertThat(listDeferred.await()).containsExactly(NetworkScanComplete)
+        assertThat(listDeferred.await()).containsExactly(
+            NetworkScanRepository.NetworkScanResult(
+                state = NetworkScanRepository.NetworkScanState.COMPLETE,
+                cellInfos = emptyList(),
+            )
+        )
     }
 
     @Test
@@ -112,7 +119,12 @@ class NetworkScanRepositoryTest {
 
         callback?.onError(1)
 
-        assertThat(listDeferred.await()).containsExactly(NetworkScanError(1))
+        assertThat(listDeferred.await()).containsExactly(
+            NetworkScanRepository.NetworkScanResult(
+                state = NetworkScanRepository.NetworkScanState.ERROR,
+                cellInfos = emptyList(),
+            )
+        )
     }
 
     @Test
@@ -133,12 +145,13 @@ class NetworkScanRepositoryTest {
         callback?.onResults(cellInfos)
 
         assertThat(listDeferred.await()).containsExactly(
-            NetworkScanCellInfos(
-                listOf(
+            NetworkScanRepository.NetworkScanResult(
+                state = NetworkScanRepository.NetworkScanState.ACTIVE,
+                cellInfos = listOf(
                     createCellInfoLte("123", false),
                     createCellInfoLte("124", true),
                     createCellInfoGsm("123", false),
-                )
+                ),
             )
         )
     }
@@ -162,8 +175,9 @@ class NetworkScanRepositoryTest {
         callback?.onResults(cellInfos)
 
         assertThat(listDeferred.await()).containsExactly(
-            NetworkScanCellInfos(
-                listOf(
+            NetworkScanRepository.NetworkScanResult(
+                state = NetworkScanRepository.NetworkScanState.ACTIVE,
+                cellInfos = listOf(
                     createCellInfoLte("123", false),
                     createCellInfoLte("123", true),
                     createCellInfoLte("124", false),

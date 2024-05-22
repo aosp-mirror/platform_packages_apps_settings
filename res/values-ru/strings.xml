@@ -274,7 +274,7 @@
     <string name="lock_after_timeout" msgid="8682769000437403444">"Блокировать после отключения"</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> после отключения"</string>
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"Сразу по истечении времени ожидания (если блокировка экрана не контролируется функцией <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>)"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>, если функция <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> отключена"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>, если функция \"<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>\" отключена"</string>
     <string name="owner_info_settings_title" msgid="3555626140700093017">"Текст на заблокированном экране"</string>
     <string name="owner_info_settings_summary" msgid="347238313388083297">"Нет текста"</string>
     <string name="owner_info_settings_edit_text_hint" msgid="841926875876050274">"Например, Android Саши"</string>
@@ -286,7 +286,8 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Приложения с доступом к устройствам поблизости могут определять относительное местоположение подключенных устройств."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Доступ к данным о местоположении для приложений и сервисов отключен. Если вы позвоните по номеру экстренной службы или отправите на него сообщение, данные о местоположении вашего устройства могут быть переданы спасателям."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Подробнее о настройках местоположения…"</string>
-    <string name="location_settings_tooltip_text_for_chrome" msgid="3574930966097093550">"Настроить доступ к геоданным можно в разделе \"Настройки &gt; Безопасность и конфиденциальность &gt; Настройки конфиденциальности\""</string>
+    <!-- no translation found for location_settings_tooltip_text_for_chrome (5781821709250544575) -->
+    <skip />
     <string name="account_settings_title" msgid="9138880127246241885">"Аккаунты"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Безопасность"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Шифрование и учетные данные"</string>
@@ -566,7 +567,8 @@
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"Каждый раз при блокировке устройства"</string>
     <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"Через 5 минут бездействия"</string>
     <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"Только после перезапуска устройства"</string>
-    <string name="private_space_hide_page_title" msgid="4351404195904146088">"Прятать частное пространство, когда оно заблокировано"</string>
+    <string name="private_space_hide_page_title" msgid="3364639176511877414">"Скрывать частное пространство"</string>
+    <string name="private_space_hide_when_locked" msgid="6219472348124151797">"Скрывать частное пространство, когда оно заблокировано"</string>
     <string name="private_space_hide_page_summary" msgid="6247773353685839242">"Вы можете скрыть частное пространство из списка приложений на устройстве. Так никто не узнает, что вы пользуетесь этой функцией."</string>
     <string name="private_space_access_header" msgid="1077082416567150819">"Доступ к личному пространству, когда оно скрыто"</string>
     <string name="private_space_search_description" msgid="1538155187658429618">"Введите \"частное пространство\" в строке поиска."</string>
@@ -621,7 +623,7 @@
     <string name="private_space_lock_setup_title" msgid="6541564212199510787">"Выберите способ разблокировки личного пространства"</string>
     <string name="private_space_lock_setup_description" msgid="423405593476300918">"Вы можете разблокировать частное пространство с помощью отпечатка пальца. В целях безопасности потребуется установить дополнительный способ разблокировки."</string>
     <string name="private_space_choose_your_pin_header" msgid="4560802934975898265">"Задайте PIN-код для личного пространства"</string>
-    <string name="private_space_choose_your_password_header" msgid="7660259341095044434">"Задайте пароль для личного пространства"</string>
+    <string name="private_space_choose_your_password_header" msgid="7660259341095044434">"Задайте пароль для частного пространства"</string>
     <string name="private_space_choose_your_pattern_header" msgid="2165607102459936724">"Создайте ключ для личного пространства"</string>
     <string name="private_space_gaia_education_title" msgid="3787414895669666563">"Создайте аккаунт Google для защиты своих данных"</string>
     <string name="private_space_gaia_education_description" msgid="1592753570023264559">"На следующем экране вы сможете войти в аккаунт, чтобы использовать его в личном пространстве."</string>
@@ -1694,7 +1696,7 @@
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"Показывать графический ключ"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"Виброотклик"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"Блокировать кнопкой питания"</string>
-    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="2202430156268094229">"Если функция <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> отключена"</string>
+    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="2202430156268094229">"Если функция \"<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>\" отключена"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="2193588309557281466">"Установить ключ"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="7614155083815661347">"Изменить ключ"</string>
     <string name="lockpattern_settings_help_how_to_record" msgid="2093801939046625774">"Как начертить графический ключ разблокировки"</string>
@@ -2016,7 +2018,6 @@
     <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"Цветовая контрастность"</string>
     <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"Настройте контрастность. Чем она выше, тем заметнее текст, кнопки и значки."</string>
     <string name="color_contrast_note" msgid="7592686603372566198">"Некоторые настройки контрастности цвета и текста поддерживаются не во всех приложениях."</string>
-    <string name="accessibility_color_contrast_summary" msgid="7563237683500106632">"Сделайте цвета и текст заметнее на экране"</string>
     <string name="color_contrast_preview" msgid="6791430227535363883">"Предпросмотр"</string>
     <string name="color_contrast_preview_sender_name" msgid="8641943417589238147">"Елена, Адам"</string>
     <string name="color_contrast_preview_email_send_date" msgid="2108702726171600080">"2 дня назад"</string>
@@ -2571,8 +2572,7 @@
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Продление времени работы от батареи"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Отключать при полном заряде"</string>
     <string name="battery_saver_sticky_title_percentage" msgid="1178162022087559148">"Отключать, когда уровень заряда достигает <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <!-- no translation found for battery_saver_sticky_description_new (8543277078136947874) -->
-    <skip />
+    <string name="battery_saver_sticky_description_new" msgid="8543277078136947874">"Режим энергосбережения отключается, когда уровень заряда батареи выше <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>."</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Включить"</string>
@@ -2686,11 +2686,11 @@
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Использование адаптивного подключения"</string>
     <string name="cellular_security_title" msgid="5562899485544677941">"Безопасность мобильной сети"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"Тип сети, шифрование, управление уведомлениями"</string>
-    <string name="cellular_security_top_intro" msgid="6749166804080092892">"Эти настройки защищают звонки, сообщения и информацию от устаревших или незашифрованных сетей, которые могут подвергнуть ваши данные краже или отслеживанию."</string>
+    <string name="cellular_security_top_intro" msgid="6749166804080092892">"Эти настройки помогают вам защищать свои звонки, сообщения и данные от устаревших и незашифрованных сетей, из-за которых вы можете подвергнуться краже данных или отслеживанию."</string>
     <string name="cellular_security_settings_title" msgid="7779141923670352595">"Безопасность мобильной сети"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"Уведомления"</string>
-    <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"Сетевые уведомления"</string>
-    <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"Получайте уведомления, когда устройство подключается к незашифрованной сети или когда сеть записывает уникальный идентификатор устройства/SIM-карты."</string>
+    <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"Уведомления о сетях"</string>
+    <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"Получать уведомления, когда устройство подключается к незашифрованной сети или когда сеть записывает уникальный идентификатор устройства/SIM-карты"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"Шифрование"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"Поколения сетей"</string>
     <string name="cellular_security_network_generations_summary" msgid="139087814553929402">"Вы можете настроить каждую из установленных SIM-карт так, что она будет подключаться только к сетям, поддерживающим 3G, 4G и 5G. Подключение к старым небезопасным 2G-сетям станет невозможным. Если единственная доступная сеть поддерживает только 2G, обмен данными может быть ограничен. Технология 2G может быть использована в экстренных случаях."</string>
@@ -2963,8 +2963,7 @@
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{Администратор домена {orgName} установил сертификат ЦС для вашего рабочего профиля. Это позволяет отслеживать ваши действия в рабочей сети, включая использование электронной почты и приложений, а также просмотр сайтов.\n\nЗа дополнительной информацией обращайтесь к администратору.}one{Администратор домена {orgName} установил сертификаты ЦС для вашего рабочего профиля. Это позволяет отслеживать ваши действия в рабочей сети, включая использование электронной почты и приложений, а также просмотр сайтов.\n\nЗа дополнительной информацией обращайтесь к администратору.}few{Администратор домена {orgName} установил сертификаты ЦС для вашего рабочего профиля. Это позволяет отслеживать ваши действия в рабочей сети, включая использование электронной почты и приложений, а также просмотр сайтов.\n\nЗа дополнительной информацией обращайтесь к администратору.}many{Администратор домена {orgName} установил сертификаты ЦС для вашего рабочего профиля. Это позволяет отслеживать ваши действия в рабочей сети, включая использование электронной почты и приложений, а также просмотр сайтов.\n\nЗа дополнительной информацией обращайтесь к администратору.}other{Администратор домена {orgName} установил сертификаты ЦС для вашего рабочего профиля. Это позволяет отслеживать ваши действия в рабочей сети, включая использование электронной почты и приложений, а также просмотр сайтов.\n\nЗа дополнительной информацией обращайтесь к администратору.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"Третья сторона может отслеживать ваши действия в сети. (например, просматривать ваши письма, приложения и список посещенных сайтов).\n\nЭто возможно благодаря надежному сертификату, установленному на устройстве."</string>
     <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{Проверить сертификат}one{Проверить сертификаты}few{Проверить сертификаты}many{Проверить сертификаты}other{Проверить сертификаты}}"</string>
-    <!-- no translation found for user_settings_title (9208831545558787202) -->
-    <skip />
+    <string name="user_settings_title" msgid="9208831545558787202">"Пользователи"</string>
     <string name="user_list_title" msgid="1387379079186123404">"Пользователи и профили"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"Добавить пользователя или профиль"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"Профиль с ограниченным доступом"</string>
@@ -3063,7 +3062,7 @@
     <string name="network_operators_settings" msgid="5105453353329748954">"Операторы связи"</string>
     <string name="access_point_names" msgid="5768430498022188057">"Названия точек доступа"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
-    <string name="enhanced_4g_lte_mode_title_advanced_calling" msgid="7066009898031465265">"Расширенные настройки звонков"</string>
+    <string name="enhanced_4g_lte_mode_title_advanced_calling" msgid="7066009898031465265">"Расширенные вызовы"</string>
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"Звонки по сети 4G"</string>
     <string name="enhanced_4g_lte_mode_summary" msgid="1067066329756036427">"Использовать сервисы LTE, чтобы улучшить качество голосовых вызовов (рекомендуется)"</string>
     <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="2575004054914178405">"Использовать сервисы 4G, чтобы улучшить качество голосовых вызовов (рекомендуется)"</string>
@@ -4804,46 +4803,27 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"Сведения о правилах организации"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"Настройки, доступные системному администратору"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"Графический процессор"</string>
-    <!-- no translation found for enable_16k_pages (8001470927566110689) -->
-    <skip />
-    <!-- no translation found for enable_16k_pages_summary (1964363364670306912) -->
-    <skip />
-    <!-- no translation found for confirm_enable_16k_pages_title (1286925577014793351) -->
-    <skip />
-    <!-- no translation found for confirm_enable_16k_pages_text (570198382662424714) -->
-    <skip />
-    <!-- no translation found for confirm_enable_4k_pages_title (3210360137887034659) -->
-    <skip />
-    <!-- no translation found for confirm_enable_4k_pages_text (155070605667160083) -->
-    <skip />
+    <string name="enable_16k_pages" msgid="8001470927566110689">"Загрузка с размером страницы 16 кБ"</string>
+    <string name="enable_16k_pages_summary" msgid="1964363364670306912">"Загрузка с ядром, совместимым с размером 16 кБ"</string>
+    <string name="confirm_enable_16k_pages_title" msgid="1286925577014793351">"Увеличение размера страницы памяти с 4 до 16 кБ"</string>
+    <string name="confirm_enable_16k_pages_text" msgid="570198382662424714">"Вы используете режим работы, который не зависит от страниц памяти, и ядро с размером страницы 4 кБ. Вы собираетесь увеличить размер до 16 кБ. После этого гарантировать целостность программного обеспечения будет невозможно. Любые данные, сохраненные на телефоне, пока загрузчик операционной системы разблокирован, могут быть под угрозой. Устройство будет перезагружено. Некоторые функции будут отключены, поэтому отдельные приложения могут не работать. Чтобы сбросить настройки и вернуть устройство в производственный режим, вновь уменьшите размер страницы памяти до 4 кБ и заблокируйте загрузчик операционной системы. После успешного запуска Android отключите разблокировку загрузчика в разделе \"Для разработчиков\"."</string>
+    <string name="confirm_enable_4k_pages_title" msgid="3210360137887034659">"Уменьшение размера страницы памяти с 16 до 4 кБ"</string>
+    <string name="confirm_enable_4k_pages_text" msgid="155070605667160083">"Вы используете режим работы, который не зависит от страниц памяти, и ядро с размером страницы 16 кБ. Вы собираетесь уменьшить размер до 4 кБ. После этого гарантировать целостность программного обеспечения будет невозможно. Любые данные, сохраненные на телефоне, пока загрузчик операционной системы разблокирован, могут быть под угрозой. Устройство будет перезагружено. Некоторые функции будут отключены, поэтому отдельные приложения могут не работать. Чтобы сбросить настройки и вернуть устройство в производственный режим, заблокируйте загрузчик операционной системы. После успешного запуска Android отключите разблокировку загрузчика в разделе \"Для разработчиков\"."</string>
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"Не удалось обеспечить совместимость ядра с размером страницы 16 КБ."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Применение изменения…"</string>
-    <!-- no translation found for confirm_format_ext4_title (6696191800594435577) -->
-    <skip />
-    <!-- no translation found for confirm_format_ext4_text (7940372488624630214) -->
-    <skip />
-    <!-- no translation found for format_ext4_failure_toast (8059453995800471549) -->
-    <skip />
-    <!-- no translation found for confirm_oem_unlock_for_16k_title (5374451262432025419) -->
-    <skip />
-    <!-- no translation found for confirm_oem_unlock_for_16k_text (3583604865119937957) -->
-    <skip />
-    <!-- no translation found for page_agnostic_4k_pages_title (1184703958249093215) -->
-    <skip />
-    <!-- no translation found for page_agnostic_4k_pages_text_short (2894243902906666242) -->
-    <skip />
-    <!-- no translation found for page_agnostic_4k_pages_text (8284806650260868833) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_title (7762533464569818498) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text_short (269039281591806585) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text (6208765386837706582) -->
-    <skip />
-    <!-- no translation found for page_agnostic_notification_channel_name (1658444283036376361) -->
-    <skip />
-    <!-- no translation found for page_agnostic_notification_action (2309805437430150456) -->
-    <skip />
+    <string name="confirm_format_ext4_title" msgid="6696191800594435577">"Отформатировать устройство и изменить файловую систему на ext4? Обязательно при размере страницы 16 кБ"</string>
+    <string name="confirm_format_ext4_text" msgid="7940372488624630214">"Прежде чем использовать параметр для разработчиков и менять размер страницы памяти на 16 кБ, преобразуйте раздел данных на этом устройстве в файловую систему ext4. После этого гарантировать целостность программного обеспечения будет невозможно. Любые данные, сохраненные на телефоне, пока загрузчик операционной системы разблокирован, могут быть под угрозой. При выполнении процедуры устройство нужно будет перезагрузить ещё раз. В этом режиме для переключения между размерами страницы памяти (4 кБ и 16 кБ) требуется одна перезагрузка. Некоторые функции будут отключены, поэтому отдельные приложения могут не работать. Чтобы сбросить настройки и вернуть устройство в производственный режим, вновь уменьшите размер страницы памяти до 4 кБ и заблокируйте загрузчик операционной системы. После успешного запуска Android отключите разблокировку загрузчика в разделе \"Для разработчиков\". При подтверждении данные с вашего устройства будут удалены, а файловая система будет изменена на ext4. Затем снова увеличьте размер страницы памяти до 16 кБ."</string>
+    <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Не удалось отформатировать раздел данных и сменить файловую систему на ext4."</string>
+    <string name="confirm_oem_unlock_for_16k_title" msgid="5374451262432025419">"Чтобы изменить размер страницы памяти на 16 кБ, разблокируйте загрузчик операционной системы"</string>
+    <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"Прежде чем использовать параметр для разработчиков и менять размер страницы памяти на 16 кБ, разблокируйте загрузчик операционной системы на этом устройстве. После этого гарантировать целостность программного обеспечения будет невозможно. Любые данные, сохраненные на телефоне, пока загрузчик операционной системы разблокирован, могут быть под угрозой. При повышении размера до 16 кБ все пользовательские данные и настройки будут удалены. После разблокировки загрузчика операционной системы потребуется перезагрузить устройство два раза. В этом режиме для переключения между размерами страницы памяти (4 кБ и 16 кБ) требуется одна перезагрузка. Некоторые функции будут отключены, поэтому отдельные приложения могут не работать. Чтобы сбросить настройки и вернуть устройство в производственный режим, вновь уменьшите размер до 4 кБ и заблокируйте загрузчик операционной системы. Разблокируйте загрузчик и повторите попытку. Сведения о том, как это сделать, опубликованы на странице &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;."</string>
+    <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"Используется режим работы, который не зависит от страниц, с размером страницы 4 кБ."</string>
+    <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"Вы используете режим работы, который не зависит от страниц, с размером страницы 4 кБ. Гарантировать целостность программного обеспечения при этом невозможно. Любые данные, сохраненные на телефоне, пока загрузчик операционной системы разблокирован, могут быть под угрозой. Некоторые функции будут отключены, поэтому отдельные приложения могут не работать. Чтобы вернуться в производственный режим, заблокируйте загрузчик операционной системы. Нажмите, чтобы узнать подробности."</string>
+    <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"Вы используете режим работы, который не зависит от страниц, с размером страницы 4 кБ. Гарантировать целостность программного обеспечения при этом невозможно. Любые данные, сохраненные на телефоне, пока загрузчик операционной системы разблокирован, могут быть под угрозой. Некоторые функции будут отключены, поэтому отдельные приложения могут не работать. Чтобы вернуться в производственный режим, заблокируйте загрузчик операционной системы. Настройки устройства при этом сбросятся. После успешного запуска Android отключите разблокировку загрузчика в разделе \"Для разработчиков\". Перепрошейте устройство, если оно работает нестабильно или Android на нем не запускается. Для этого используйте последние заводские образы с сайта &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; или &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&amp;gt. Затем нажмите \"Удалить данные с устройства\", \"Заблокировать загрузчик операционной системы\" и \"Принудительно прошить все разделы\"."</string>
+    <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"Используется режим работы, который не зависит от страниц, с размером страницы 16 кБ."</string>
+    <string name="page_agnostic_16k_pages_text_short" msgid="269039281591806585">"Вы используете режим работы, который не зависит от страниц памяти, с размером страницы 16 кБ. Гарантировать целостность программного обеспечения при этом невозможно. Любые данные, сохраненные на телефоне, пока загрузчик операционной системы разблокирован, могут быть под угрозой. Некоторые функции будут отключены, поэтому отдельные приложения могут не работать. Чтобы вернуться в производственный режим, вновь уменьшите размер страницы памяти до 4 кБ и заблокируйте загрузчик операционной системы. Нажмите, чтобы узнать подробности."</string>
+    <string name="page_agnostic_16k_pages_text" msgid="6208765386837706582">"Вы используете режим работы, который не зависит от страниц памяти, с размером страницы 16 кБ. Гарантировать целостность программного обеспечения при этом невозможно. Любые данные, сохраненные на телефоне, пока загрузчик операционной системы разблокирован, могут быть под угрозой. Некоторые функции будут отключены, поэтому отдельные приложения могут не работать. Чтобы вернуться в производственный режим, вновь уменьшите размер страницы памяти до 4 кБ и заблокируйте загрузчик операционной системы. Настройки устройства при этом сбросятся. После успешного запуска Android отключите разблокировку загрузчика в разделе \"Для разработчиков\". Перепрошейте устройство, если оно работает нестабильно или Android на нем не запускается. Для этого используйте последние заводские образы с сайта &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; или &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&amp;gt. Затем нажмите \"Удалить данные с устройства\", \"Заблокировать загрузчик операционной системы\" и \"Принудительно прошить все разделы\"."</string>
+    <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"Режим работы, который не зависит от страниц, с размером страницы 16 кБ."</string>
+    <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Ещё"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Обработчик отчетов об ошибках"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Выбранное приложение будет запускаться при нажатии быстрой клавиши для отправки отчета об ошибке."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Личный профиль"</string>
@@ -4977,8 +4957,7 @@
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Использовать службу печати"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Разрешить добавлять несколько пользователей"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"разрешить, несколько, пользователь, разрешение, много"</string>
-    <!-- no translation found for multiple_users_title_keywords (2395593167746225172) -->
-    <skip />
+    <string name="multiple_users_title_keywords" msgid="2395593167746225172">"несколько, пользователи, профили, люди, аккаунты, переключиться, много"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Использовать отладку по Wi-Fi"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Изменение настроек графического драйвера"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"Ночная подсветка"</string>
@@ -5013,8 +4992,12 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Выключает режим полета, чтобы использовать сверхширокополосную связь"</string>
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"Сверхширокополосная связь недоступна в вашем регионе"</string>
     <string name="thread_network_settings_title" msgid="4212301030523859220">"Thread"</string>
-    <string name="thread_network_settings_summary" msgid="8065599651021748339">"Подключайтесь к совместимым устройствам умного дома по сети Thread"</string>
-    <string name="thread_network_settings_summary_airplane_mode" msgid="7207252895832446979">"Чтобы использовать сеть Thread, отключите режим полета"</string>
+    <!-- no translation found for thread_network_settings_main_switch_title (3859168481929323474) -->
+    <skip />
+    <!-- no translation found for thread_network_settings_footer_title (7385600318850220927) -->
+    <skip />
+    <!-- no translation found for thread_network_settings_learn_more (8278498005848565050) -->
+    <skip />
     <string name="camera_toggle_title" msgid="8952668677727244992">"Доступ к камере"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Доступ к микрофону"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"Для приложений и сервисов"</string>

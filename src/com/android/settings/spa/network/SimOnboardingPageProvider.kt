@@ -16,15 +16,16 @@
 
 package com.android.settings.spa.network
 
-
 import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
 import android.os.Bundle
-import android.util.Log
 import androidx.annotation.VisibleForTesting
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -40,8 +41,10 @@ import com.android.settingslib.spa.framework.common.SettingsEntryBuilder
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
 import com.android.settingslib.spa.framework.common.createSettingsPage
 import com.android.settingslib.spa.framework.compose.navigator
+import com.android.settingslib.spa.framework.theme.SettingsDimension
 import com.android.settingslib.spa.widget.preference.Preference
 import com.android.settingslib.spa.widget.preference.PreferenceModel
+import com.android.settingslib.spa.widget.ui.SettingsBody
 
 const val SUB_ID = "subId"
 
@@ -135,5 +138,18 @@ fun PageImpl(onboardingService:SimOnboardingService,navHostController: NavHostCo
                 onboardingService = onboardingService
             )
         }
+    }
+}
+
+@Composable
+fun SimOnboardingMessage(text: String) {
+    Column(
+        Modifier.padding(
+            start = SettingsDimension.itemPaddingStart,
+            end = SettingsDimension.itemPaddingEnd,
+            bottom = SettingsDimension.paddingExtraLarge,
+        )
+    ) {
+        SettingsBody(text)
     }
 }

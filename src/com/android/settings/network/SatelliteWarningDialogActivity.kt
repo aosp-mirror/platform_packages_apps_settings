@@ -27,6 +27,7 @@ import com.android.settings.R
 import com.android.settingslib.spa.SpaDialogWindowTypeActivity
 import com.android.settingslib.spa.widget.dialog.AlertDialogButton
 import com.android.settingslib.spa.widget.dialog.SettingsAlertDialogContent
+import com.android.settingslib.wifi.WifiUtils
 
 /** A dialog to show the warning message when device is under satellite mode. */
 class SatelliteWarningDialogActivity : SpaDialogWindowTypeActivity() {
@@ -41,7 +42,10 @@ class SatelliteWarningDialogActivity : SpaDialogWindowTypeActivity() {
     }
 
     override fun getDialogWindowType(): Int {
-        return WindowManager.LayoutParams.FIRST_APPLICATION_WINDOW
+        return intent.getIntExtra(
+            WifiUtils.DIALOG_WINDOW_TYPE,
+            WindowManager.LayoutParams.LAST_APPLICATION_WINDOW
+        )
     }
 
     @Composable

@@ -17,6 +17,7 @@
 package com.android.settings.password;
 
 import android.app.settings.SettingsEnums;
+import android.content.ComponentName;
 import android.hardware.biometrics.BiometricPrompt;
 import android.hardware.biometrics.BiometricPrompt.AuthenticationCallback;
 import android.hardware.biometrics.BiometricPrompt.AuthenticationResult;
@@ -39,6 +40,7 @@ public class BiometricFragment extends InstrumentedFragment {
     private static final String TAG = "ConfirmDeviceCredential/BiometricFragment";
 
     private static final String KEY_PROMPT_INFO = "prompt_info";
+    private static final String KEY_CALLING_ACTIVITY = "calling_activity";
 
     // Re-set by the application. Should be done upon orientation changes, etc
     private Executor mClientExecutor;
@@ -88,10 +90,13 @@ public class BiometricFragment extends InstrumentedFragment {
      * @param promptInfo
      * @return
      */
-    public static BiometricFragment newInstance(PromptInfo promptInfo) {
+    public static BiometricFragment newInstance(PromptInfo promptInfo,
+            ComponentName callingActivity) {
         BiometricFragment biometricFragment = new BiometricFragment();
         final Bundle bundle = new Bundle();
         bundle.putParcelable(KEY_PROMPT_INFO, promptInfo);
+
+        bundle.putParcelable(KEY_CALLING_ACTIVITY, callingActivity);
         biometricFragment.setArguments(bundle);
         return biometricFragment;
     }
@@ -126,6 +131,7 @@ public class BiometricFragment extends InstrumentedFragment {
 
         final Bundle bundle = getArguments();
         final PromptInfo promptInfo = bundle.getParcelable(KEY_PROMPT_INFO);
+        final ComponentName callingActivity = bundle.getParcelable(KEY_CALLING_ACTIVITY);
 
         BiometricPrompt.Builder promptBuilder = new BiometricPrompt.Builder(getContext())
                 .setTitle(promptInfo.getTitle())
@@ -141,7 +147,8 @@ public class BiometricFragment extends InstrumentedFragment {
                 .setDisallowBiometricsIfPolicyExists(
                         promptInfo.isDisallowBiometricsIfPolicyExists())
                 .setShowEmergencyCallButton(promptInfo.isShowEmergencyCallButton())
-                .setReceiveSystemEvents(true);
+                .setReceiveSystemEvents(true)
+                .setComponentNameForConfirmDeviceCredentialActivity(callingActivity);
 
         if (android.os.Flags.allowPrivateProfile() && Flags.enablePrivateSpaceFeatures()
                 && Flags.enableBiometricsToUnlockPrivateSpace()) {

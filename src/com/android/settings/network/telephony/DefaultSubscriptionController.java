@@ -64,16 +64,20 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
 
     public DefaultSubscriptionController(Context context, String preferenceKey, Lifecycle lifecycle,
             LifecycleOwner lifecycleOwner) {
+        this(context, preferenceKey);
+        mLifecycleOwner = lifecycleOwner;
+        if (lifecycle != null) {
+            lifecycle.addObserver(this);
+        }
+    }
+
+    public DefaultSubscriptionController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         mManager = context.getSystemService(SubscriptionManager.class);
         mIsRtlMode = context.getResources().getConfiguration().getLayoutDirection()
                 == View.LAYOUT_DIRECTION_RTL;
         mMobileNetworkRepository = MobileNetworkRepository.getInstance(context);
         mDataSubscriptionChangedReceiver = new DefaultSubscriptionReceiver(context, this);
-        mLifecycleOwner = lifecycleOwner;
-        if (lifecycle != null) {
-            lifecycle.addObserver(this);
-        }
     }
 
     /** @return the id of the default subscription for the service, or
@@ -100,9 +104,6 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
         mMobileNetworkRepository.addRegister(mLifecycleOwner, this,
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
         mMobileNetworkRepository.updateEntity();
-        // Can not get default subId from database until get the callback, add register by subId
-        // later.
-        mMobileNetworkRepository.addRegisterBySubId(getDefaultSubscriptionId());
         mDataSubscriptionChangedReceiver.registerReceiver();
     }
 

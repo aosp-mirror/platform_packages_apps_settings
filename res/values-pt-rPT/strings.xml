@@ -286,7 +286,8 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"As apps com a autorização Dispositivos próximos podem determinar a posição relativa dos dispositivos ligados."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"O acesso à localização está desativado para apps e serviços. A localização do dispositivo ainda pode ser enviada para os contactos de resposta a emergências quando liga ou envia uma mensagem de texto para um número de emergência."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Saiba mais acerca das definições de localização"</string>
-    <string name="location_settings_tooltip_text_for_chrome" msgid="3574930966097093550">"Alterar acesso localização: Definições &gt; Segurança e privacidade &gt; Controlos privac."</string>
+    <!-- no translation found for location_settings_tooltip_text_for_chrome (5781821709250544575) -->
+    <skip />
     <string name="account_settings_title" msgid="9138880127246241885">"Contas"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Segurança"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Encriptação e credenciais"</string>
@@ -566,7 +567,8 @@
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"Sempre que o dispositivo é bloqueado"</string>
     <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"Após 5 minutos de inatividade"</string>
     <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"Apenas após o dispositivo reiniciar"</string>
-    <string name="private_space_hide_page_title" msgid="4351404195904146088">"Ocultar espaço privado quando bloqueado"</string>
+    <string name="private_space_hide_page_title" msgid="3364639176511877414">"Oculte o espaço privado"</string>
+    <string name="private_space_hide_when_locked" msgid="6219472348124151797">"Oculte o espaço privado quando estiver bloqueado"</string>
     <string name="private_space_hide_page_summary" msgid="6247773353685839242">"Para impedir que outras pessoas saibam que tem um espaço privado no seu dispositivo, pode ocultá-lo da sua lista de apps"</string>
     <string name="private_space_access_header" msgid="1077082416567150819">"Aceda ao espaço privado quando estiver oculto"</string>
     <string name="private_space_search_description" msgid="1538155187658429618">"Na barra de pesquisa, introduza \"espaço privado\""</string>
@@ -1810,8 +1812,7 @@
     <string name="app_install_details_group_title" msgid="1172114479073704677">"Loja"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"Detalhes da aplicação"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"App instalada a partir da <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
-    <!-- no translation found for app_install_details_different_initiating_package_summary (6093306593167176688) -->
-    <skip />
+    <string name="app_install_details_different_initiating_package_summary" msgid="6093306593167176688">"App instalada a partir da <xliff:g id="APP_STORE1">%1$s</xliff:g> (através da <xliff:g id="APP_STORE2">%2$s</xliff:g>)"</string>
     <string name="instant_app_details_summary" msgid="417197491598208216">"Mais informações sobre <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
     <string name="app_ops_running" msgid="6127474473137428721">"Em execução"</string>
     <string name="app_ops_never_used" msgid="9038133162371204506">"(Nunca utilizado)"</string>
@@ -2017,7 +2018,6 @@
     <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"Contraste de cor"</string>
     <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"Um contraste mais elevado faz com que o texto, os botões e os ícones sobressaiam mais. Escolha o contraste que lhe parecer melhor."</string>
     <string name="color_contrast_note" msgid="7592686603372566198">"Algumas apps podem não suportar todas as definições de contraste de cor e texto"</string>
-    <string name="accessibility_color_contrast_summary" msgid="7563237683500106632">"Ajuste o aspeto das cores e do texto em relação à cor de fundo do ecrã"</string>
     <string name="color_contrast_preview" msgid="6791430227535363883">"Pré-visualização"</string>
     <string name="color_contrast_preview_sender_name" msgid="8641943417589238147">"Helen, Adam"</string>
     <string name="color_contrast_preview_email_send_date" msgid="2108702726171600080">"Há 2 dias"</string>
@@ -2572,8 +2572,7 @@
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Prolongue a autonomia da bateria"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Desativar após o carregamento"</string>
     <string name="battery_saver_sticky_title_percentage" msgid="1178162022087559148">"Desativar ao alcançar <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <!-- no translation found for battery_saver_sticky_description_new (8543277078136947874) -->
-    <skip />
+    <string name="battery_saver_sticky_description_new" msgid="8543277078136947874">"A Poupança de bateria desliga-se quando a bateria carrega acima de <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Ativar"</string>
@@ -2964,8 +2963,7 @@
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{{orgName} instalou uma autoridade de certificação para o seu perfil de trabalho, o que pode permitir monitorizar a atividade na rede de trabalho, incluindo emails, apps e Websites seguros.\n\nPara obter mais informações sobre este certificado, contacte o administrador.}other{{orgName} instalou autoridades de certificação para o seu perfil de trabalho, o que pode permitir monitorizar a atividade na rede de trabalho, incluindo emails, apps e Websites seguros.\n\nPara obter mais informações sobre estes certificados, contacte o administrador.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"A sua atividade de rede, incluindo emails, aplicações e Sites seguros, pode ser monitorizada por terceiros.\n\nIsto é possível através de uma credencial fidedigna instalada no seu dispositivo."</string>
     <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{Rever certificado}other{Rever certificados}}"</string>
-    <!-- no translation found for user_settings_title (9208831545558787202) -->
-    <skip />
+    <string name="user_settings_title" msgid="9208831545558787202">"Utilizadores"</string>
     <string name="user_list_title" msgid="1387379079186123404">"Utilizadores e perfis"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"Adicionar utilizador ou perfil"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"Perfil restrito"</string>
@@ -4642,10 +4640,8 @@
     <string name="summary_supported_service" msgid="4320535903444834786">"Pode enviar mensagens de texto a qualquer pessoa, incluindo aos serviços de emergência. O seu telemóvel vai voltar a ligar-se a uma rede móvel quando esta estiver disponível."</string>
     <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"As mensagens por satélite podem demorar mais tempo e só estão disponíveis em algumas zonas. As condições meteorológicas e determinadas estruturas podem afetar a sua ligação por satélite. As chamadas por satélite não estão disponíveis. Pode continuar a fazer chamadas de emergência.\n\nPode demorar algum tempo até que as alterações à conta sejam apresentadas nas Definições. Contacte a sua operadora para mais detalhes."</string>
     <string name="more_about_satellite_messaging" msgid="3385673133561348509">"Mais acerca das mensagens por satélite"</string>
-    <!-- no translation found for satellite_warning_dialog_title (1610117852475376931) -->
-    <skip />
-    <!-- no translation found for satellite_warning_dialog_content (936419945275934955) -->
-    <skip />
+    <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"Não é possível ativar a função <xliff:g id="FUNCTION">%1$s</xliff:g>"</string>
+    <string name="satellite_warning_dialog_content" msgid="936419945275934955">"Para ativar a função <xliff:g id="FUNCTION">%1$s</xliff:g>, termine primeiro a ligação por satélite"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Nomes dos pontos de acesso"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Indisponível quando ligado a <xliff:g id="CARRIER">%1$s</xliff:g>."</string>
@@ -4807,46 +4803,27 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"As suas informações da política de trabalho"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"Definições geridas pelo seu administrador de TI."</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
-    <!-- no translation found for enable_16k_pages (8001470927566110689) -->
-    <skip />
-    <!-- no translation found for enable_16k_pages_summary (1964363364670306912) -->
-    <skip />
-    <!-- no translation found for confirm_enable_16k_pages_title (1286925577014793351) -->
-    <skip />
-    <!-- no translation found for confirm_enable_16k_pages_text (570198382662424714) -->
-    <skip />
-    <!-- no translation found for confirm_enable_4k_pages_title (3210360137887034659) -->
-    <skip />
-    <!-- no translation found for confirm_enable_4k_pages_text (155070605667160083) -->
-    <skip />
+    <string name="enable_16k_pages" msgid="8001470927566110689">"Reiniciar com páginas de 16 KB"</string>
+    <string name="enable_16k_pages_summary" msgid="1964363364670306912">"Reinicie com o kernel compatível com pág. de 16 KB"</string>
+    <string name="confirm_enable_16k_pages_title" msgid="1286925577014793351">"Mude do modo de 4 KB para o modo de 16 KB"</string>
+    <string name="confirm_enable_16k_pages_text" msgid="570198382662424714">"Está no modo sem página a executar um kernel de 4 KB e está a mudar para o modo de 16 KB. A integridade do software não pode ser garantida neste modo e quaisquer dados armazenados no telemóvel enquanto o carregador de arranque estiver desbloqueado podem estar em risco. Esta ação vai reiniciar o dispositivo. Algumas funcionalidades são desativadas nestes modos, por isso, algumas apps podem não funcionar. Para voltar a definir o modo de produção no dispositivo, precisa de voltar a ativar o modo de 4 KB e bloquear o carregador de arranque, o que repõe as definições de fábrica do dispositivo. Depois de o dispositivo arrancar com êxito no Android, desative o desbloqueio pelo OEM nas Opções de programador."</string>
+    <string name="confirm_enable_4k_pages_title" msgid="3210360137887034659">"Mude do modo de 16 KB para o modo de 4 KB"</string>
+    <string name="confirm_enable_4k_pages_text" msgid="155070605667160083">"Está no modo sem página a executar um kernel de 16 KB e está a mudar para o modo de 4 KB. A integridade do software não pode ser garantida neste modo e quaisquer dados armazenados no telemóvel enquanto o carregador de arranque estiver desbloqueado podem estar em risco. Esta ação vai reiniciar o dispositivo. Algumas funcionalidades são desativadas nestes modos, por isso, algumas apps podem não funcionar. Para voltar a definir o modo de produção no dispositivo, precisa de bloquear o carregador de arranque, o que repõe as definições de fábrica do dispositivo. Depois de o dispositivo arrancar com êxito no Android, desative o desbloqueio pelo OEM nas Opções de programador."</string>
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"Falha ao fazer a atualização para o kernel compatível com páginas de 16 KB."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"A aplicar a alteração"</string>
-    <!-- no translation found for confirm_format_ext4_title (6696191800594435577) -->
-    <skip />
-    <!-- no translation found for confirm_format_ext4_text (7940372488624630214) -->
-    <skip />
-    <!-- no translation found for format_ext4_failure_toast (8059453995800471549) -->
-    <skip />
-    <!-- no translation found for confirm_oem_unlock_for_16k_title (5374451262432025419) -->
-    <skip />
-    <!-- no translation found for confirm_oem_unlock_for_16k_text (3583604865119937957) -->
-    <skip />
-    <!-- no translation found for page_agnostic_4k_pages_title (1184703958249093215) -->
-    <skip />
-    <!-- no translation found for page_agnostic_4k_pages_text_short (2894243902906666242) -->
-    <skip />
-    <!-- no translation found for page_agnostic_4k_pages_text (8284806650260868833) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_title (7762533464569818498) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text_short (269039281591806585) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text (6208765386837706582) -->
-    <skip />
-    <!-- no translation found for page_agnostic_notification_channel_name (1658444283036376361) -->
-    <skip />
-    <!-- no translation found for page_agnostic_notification_action (2309805437430150456) -->
-    <skip />
+    <string name="confirm_format_ext4_title" msgid="6696191800594435577">"Reformatar o dispositivo para ext4? (exigido para o modo de 16 KB)"</string>
+    <string name="confirm_format_ext4_text" msgid="7940372488624630214">"A partição de dados deste dispositivo tem de ser convertida em ext4 antes de usar a opção de programador de 16 KB. A integridade do software não pode ser garantida neste modo e quaisquer dados armazenados no telemóvel enquanto o carregador de arranque estiver desbloqueado podem estar em risco. A ativação da opção de 16 KB exige reiniciar mais uma vez depois desta ação. Quando este modo estiver ativado, pode alternar entre os modos de 4 KB e 16 KB depois de reiniciar uma vez. Algumas funcionalidades são desativadas nestes modos, por isso, algumas apps podem não funcionar. Para voltar a definir o modo de produção no dispositivo, precisa de voltar a ativar o modo de 4 KB e, de seguida, bloquear o carregador de arranque, o que repõe as definições de fábrica do dispositivo. Depois de o dispositivo arrancar com êxito no Android, desative o desbloqueio pelo OEM nas Opções de programador. O dispositivo vai ser limpo e o sistema de ficheiros vai ser alterado para ext4 após a confirmação. Concluído este passo, ative novamente o modo de 16 KB."</string>
+    <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Falha ao reformatar e limpar a partição de dados para ext4."</string>
+    <string name="confirm_oem_unlock_for_16k_title" msgid="5374451262432025419">"Desbloqueio do carregador de arranque necessário para o modo de 16 KB"</string>
+    <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"Este dispositivo precisa de desbloquear o carregador de arranque antes de usar a opção de programador de 16 KB. A integridade do software não pode ser garantida neste modo e quaisquer dados armazenados no telemóvel enquanto o carregador de arranque estiver desbloqueado podem estar em risco. Todos os dados e definições do utilizador são limpos com a ativação do modo de 16 KB. Uma vez desbloqueado o carregador de arranque, a ativação da opção de 16 KB exige reiniciar duas vezes. Quando este modo estiver ativado, pode alternar entre os modos de 4 KB e 16 KB depois de reiniciar uma vez. Algumas funcionalidades são desativadas nestes modos, por isso, algumas apps podem não funcionar. Para voltar a definir o modo de produção no dispositivo, precisa de voltar a ativar o modo de 4 KB e, de seguida, bloquear o OEM/carregador de arranque (o que repõe as definições de fábrica do dispositivo). Desbloqueie o carregador de arranque e tente novamente. Pode ver instruções sobre como o fazer em &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
+    <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"A usar o modo sem página de 4 KB"</string>
+    <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"Está no modo de 4 KB do modo sem página. A integridade do software não pode ser garantida neste modo e quaisquer dados armazenados no telemóvel enquanto o carregador de arranque estiver desbloqueado podem estar em risco. Algumas funcionalidades são desativadas nestes modos, por isso, algumas apps podem não funcionar. Para voltar a ativar o modo de produção, tem de bloquear o carregador de arranque do dispositivo. Toque para ler mais."</string>
+    <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"Está no modo de 4 KB do modo sem página. A integridade do software não pode ser garantida neste modo e quaisquer dados armazenados no telemóvel enquanto o carregador de arranque estiver desbloqueado podem estar em risco. Algumas funcionalidades são desativadas nestes modos, por isso, algumas apps podem não funcionar. Para voltar a ativar o modo de produção, tem de bloquear o carregador de arranque do dispositivo. Esta ação permite fazer uma reposição de fábrica do dispositivo e restaurá-lo para as definições de produção. Depois de o dispositivo arrancar com êxito no Android, desative o desbloqueio pelo OEM nas Opções de programador. Se o dispositivo não conseguir arrancar no Android ou estiver instável, volte a atualizar o dispositivo com as imagens de fábrica mais recentes de &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; ou use &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; e selecione \"Limpar dispositivo\", \"Bloquear carregador de arranque\" e \"Forçar a atualização de todas as partições\"."</string>
+    <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"A usar o modo sem página de 16 KB"</string>
+    <string name="page_agnostic_16k_pages_text_short" msgid="269039281591806585">"Está ativado o modo de 16 KB do modo sem página. A integridade do software não pode ser garantida neste modo e quaisquer dados armazenados no telemóvel enquanto o carregador de arranque estiver desbloqueado podem estar em risco. Algumas funcionalidades são desativadas nestes modos, por isso, algumas apps podem não funcionar. Para voltar a ativar o modo de produção, tem de voltar ao modo de 4K e, de seguida, bloquear o carregador de arranque do dispositivo. Toque para ler mais."</string>
+    <string name="page_agnostic_16k_pages_text" msgid="6208765386837706582">"Está ativado o modo de 16 KB do modo sem página. A integridade do software não pode ser garantida neste modo e quaisquer dados armazenados no telemóvel enquanto o carregador de arranque estiver desbloqueado podem estar em risco. Algumas funcionalidades são desativadas nestes modos, por isso, algumas apps podem não funcionar. Para voltar a ativar o modo de produção, tem de voltar ao modo de 4K e, de seguida, bloquear o carregador de arranque do dispositivo. Esta ação permite fazer uma reposição de fábrica do dispositivo e restaurá-lo para as definições de produção. Depois de o dispositivo arrancar com êxito no Android, desative o desbloqueio pelo OEM nas Opções de programador. Se o dispositivo não conseguir arrancar no Android ou estiver instável, volte a atualizar o dispositivo com as imagens de fábrica mais recentes de &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; ou use &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; e selecione \"Limpar dispositivo\", \"Bloquear carregador de arranque\" e \"Forçar a atualização de todas as partições\"."</string>
+    <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"Modo sem página de 16 KB"</string>
+    <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Ler mais"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Controlador do relatório de erro"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Determina que aplicação processa o atalho para Relatório de erro no seu dispositivo."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Pessoal"</string>
@@ -4908,8 +4885,7 @@
     <string name="media_controls_show_player" msgid="8504571042365814021">"Mostrar leitor"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"multimédia"</string>
     <string name="camera_extensions_fallback_title" msgid="3604579046777004989">"Permitir extensões do software da câmara"</string>
-    <!-- no translation found for camera_extensions_fallback_description (4306833827773277263) -->
-    <skip />
+    <string name="camera_extensions_fallback_description" msgid="4306833827773277263">"Permite a implementação do software predefinido de funcionalidades de câmara avançadas, como HDR, Noturna ou outras extensões da câmara."</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"O Bluetooth será ativado"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"Internet"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"SIMs"</string>
@@ -4979,8 +4955,7 @@
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Usar serviço de impressão"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Permitir vários utilizadores"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"autorizar, vários, utilizador, permitir, muitos"</string>
-    <!-- no translation found for multiple_users_title_keywords (2395593167746225172) -->
-    <skip />
+    <string name="multiple_users_title_keywords" msgid="2395593167746225172">"vários, utilizadores, perfis, pessoas, contas, mudar, muitos"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Usar depuração sem fios"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Usar preferências da placa gráfica"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"Usar Luz noturna"</string>
@@ -5015,8 +4990,12 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Desative o modo de avião para utilizar UWB"</string>
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"A UWB (banda ultralarga) está indisponível na localização atual"</string>
     <string name="thread_network_settings_title" msgid="4212301030523859220">"Thread"</string>
-    <string name="thread_network_settings_summary" msgid="8065599651021748339">"Ligue-se a dispositivos compatíveis usando o Thread para uma experiência de casa inteligente sem falhas"</string>
-    <string name="thread_network_settings_summary_airplane_mode" msgid="7207252895832446979">"Desative o modo de avião para usar o Thread"</string>
+    <!-- no translation found for thread_network_settings_main_switch_title (3859168481929323474) -->
+    <skip />
+    <!-- no translation found for thread_network_settings_footer_title (7385600318850220927) -->
+    <skip />
+    <!-- no translation found for thread_network_settings_learn_more (8278498005848565050) -->
+    <skip />
     <string name="camera_toggle_title" msgid="8952668677727244992">"Acesso à câmara"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Acesso ao microfone"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"Para apps e serviços"</string>

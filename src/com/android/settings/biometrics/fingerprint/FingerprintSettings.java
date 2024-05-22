@@ -686,10 +686,16 @@ public class FingerprintSettings extends SubSettings {
             // retryFingerprint() will be called when remove finishes
             // need to disable enroll or have a way to determine if enroll is in progress
             final boolean removalInProgress = mRemovalSidecar.inProgress();
+            final boolean isDeviceOwnerBlockingAuth =
+                    RestrictedLockUtilsInternal.checkIfKeyguardFeaturesDisabled(
+                            getContext(), DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT,
+                            mUserId) != null;
+
             CharSequence maxSummary = tooMany ?
                     getContext().getString(R.string.fingerprint_add_max, max) : "";
             mAddFingerprintPreference.setSummary(maxSummary);
-            mAddFingerprintPreference.setEnabled(!tooMany && !removalInProgress && mToken != null);
+            mAddFingerprintPreference.setEnabled(!isDeviceOwnerBlockingAuth
+                    && !tooMany && !removalInProgress && mToken != null);
         }
 
         private void createFooterPreference(PreferenceGroup root) {

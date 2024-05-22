@@ -16,7 +16,6 @@
 package com.android.settings.network.helper;
 
 import android.content.Context;
-import android.os.ParcelUuid;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 
@@ -35,13 +34,10 @@ public class SubscriptionAnnotation {
     private static final String TAG = "SubscriptionAnnotation";
 
     private SubscriptionInfo mSubInfo;
-    private int mOrderWithinList;
     private int mType = TYPE_UNKNOWN;
     private boolean mIsExisted;
     private boolean mIsActive;
     private boolean mIsAllowToDisplay;
-
-    public static final ParcelUuid EMPTY_UUID = ParcelUuid.fromString("0-0-0-0-0");
 
     public static final int TYPE_UNKNOWN = 0x0;
     public static final int TYPE_PSIM = 0x1;
@@ -52,8 +48,8 @@ public class SubscriptionAnnotation {
      */
     public static class Builder {
 
-        private List<SubscriptionInfo> mSubInfoList;
-        private int mIndexWithinList;
+        private final List<SubscriptionInfo> mSubInfoList;
+        private final int mIndexWithinList;
 
         /**
          * Constructor of builder
@@ -65,10 +61,9 @@ public class SubscriptionAnnotation {
             mIndexWithinList = indexWithinList;
         }
 
-        public SubscriptionAnnotation build(Context context, List<Integer> eSimCardId,
-                List<Integer> simSlotIndex, List<Integer> activeSimSlotIndex) {
+        public SubscriptionAnnotation build(Context context, List<Integer> activeSimSlotIndex) {
             return new SubscriptionAnnotation(mSubInfoList, mIndexWithinList, context,
-                    eSimCardId, simSlotIndex, activeSimSlotIndex);
+                    activeSimSlotIndex);
         }
     }
 
@@ -78,8 +73,7 @@ public class SubscriptionAnnotation {
     @Keep
     @VisibleForTesting
     protected SubscriptionAnnotation(List<SubscriptionInfo> subInfoList, int subInfoIndex,
-            Context context, List<Integer> eSimCardId,
-            List<Integer> simSlotIndex, List<Integer> activeSimSlotIndexList) {
+            Context context, List<Integer> activeSimSlotIndexList) {
         if ((subInfoIndex < 0) || (subInfoIndex >= subInfoList.size())) {
             return;
         }
@@ -88,7 +82,6 @@ public class SubscriptionAnnotation {
             return;
         }
 
-        mOrderWithinList = subInfoIndex;
         mType = mSubInfo.isEmbedded() ? TYPE_ESIM : TYPE_PSIM;
         mIsExisted = true;
         if (mType == TYPE_ESIM) {
@@ -102,12 +95,6 @@ public class SubscriptionAnnotation {
         mIsActive = (mSubInfo.getSimSlotIndex() > SubscriptionManager.INVALID_SIM_SLOT_INDEX)
             && activeSimSlotIndexList.contains(mSubInfo.getSimSlotIndex());
         mIsAllowToDisplay = isDisplayAllowed(context);
-    }
-
-    // the index provided during construction of Builder
-    @Keep
-    public int getOrderingInList() {
-        return mOrderWithinList;
     }
 
     // type of subscription
@@ -139,12 +126,6 @@ public class SubscriptionAnnotation {
     public int getSubscriptionId() {
         return (mSubInfo == null) ? SubscriptionManager.INVALID_SUBSCRIPTION_ID :
                 mSubInfo.getSubscriptionId();
-    }
-
-    // the grouping UUID
-    @Keep
-    public ParcelUuid getGroupUuid() {
-        return (mSubInfo == null) ? null : mSubInfo.getGroupUuid();
     }
 
     // the SubscriptionInfo

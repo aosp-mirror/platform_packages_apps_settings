@@ -20,6 +20,7 @@ message BatteryOptimizeHistoricalLogEntry {
     RESTORE = 4;
     BACKUP = 5;
     FORCE_RESET = 6;
+    EXTERNAL_UPDATE = 7;
   }
 
   optional string package_name = 1;
@@ -44,6 +45,7 @@ message BatteryUsageHistoricalLogEntry {
     FETCH_USAGE_DATA = 4;
     INSERT_USAGE_DATA = 5;
     TIME_UPDATED = 6;
+    TIMEZONE_UPDATED = 7;
   }
 
   optional int64 timestamp = 1;

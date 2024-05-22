@@ -286,7 +286,8 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"근처 기기 액세스 권한이 있는 앱은 연결된 기기 간의 상대적인 위치를 파악할 수 있습니다."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"앱 및 서비스에 대한 위치 정보 액세스가 사용 중지되어 있습니다. 그래도 긴급 전화번호로 전화를 걸거나 문자 메시지를 보내면 기기의 위치 정보가 긴급 구조원에게 전달될 수 있습니다."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"위치 설정에 대해 자세히 알아보기"</string>
-    <string name="location_settings_tooltip_text_for_chrome" msgid="3574930966097093550">"위치 액세스 권한을 변경하려면 설정 &gt; 보안 및 개인 정보 보호 &gt; 개인 정보 보호 설정으로 이동하세요."</string>
+    <!-- no translation found for location_settings_tooltip_text_for_chrome (5781821709250544575) -->
+    <skip />
     <string name="account_settings_title" msgid="9138880127246241885">"계정"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"보안"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"암호화 및 사용자 인증 정보"</string>
@@ -566,7 +567,8 @@
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"기기를 잠글 때마다"</string>
     <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"5분 동안 사용하지 않은 경우"</string>
     <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"기기를 다시 시작한 후에만"</string>
-    <string name="private_space_hide_page_title" msgid="4351404195904146088">"잠겨 있을 때 비공개 스페이스 숨기기"</string>
+    <string name="private_space_hide_page_title" msgid="3364639176511877414">"비공개 스페이스 숨기기"</string>
+    <string name="private_space_hide_when_locked" msgid="6219472348124151797">"잠겨 있을 때 비공개 스페이스 숨기기"</string>
     <string name="private_space_hide_page_summary" msgid="6247773353685839242">"기기에 비공개 스페이스가 있다는 사실을 다른 사람이 알지 못하도록 앱 목록에서 숨길 수 있습니다."</string>
     <string name="private_space_access_header" msgid="1077082416567150819">"숨겨져 있을 때 비공개 스페이스에 액세스"</string>
     <string name="private_space_search_description" msgid="1538155187658429618">"검색창에 \'비공개 스페이스\'를 입력합니다."</string>
@@ -1810,8 +1812,7 @@
     <string name="app_install_details_group_title" msgid="1172114479073704677">"스토어"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"앱 세부정보"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"<xliff:g id="APP_STORE">%1$s</xliff:g>에서 다운로드한 앱"</string>
-    <!-- no translation found for app_install_details_different_initiating_package_summary (6093306593167176688) -->
-    <skip />
+    <string name="app_install_details_different_initiating_package_summary" msgid="6093306593167176688">"<xliff:g id="APP_STORE1">%1$s</xliff:g>(<xliff:g id="APP_STORE2">%2$s</xliff:g>)에서 설치한 앱"</string>
     <string name="instant_app_details_summary" msgid="417197491598208216">"<xliff:g id="APP_STORE">%1$s</xliff:g>에서 자세히 알아보기"</string>
     <string name="app_ops_running" msgid="6127474473137428721">"실행 중"</string>
     <string name="app_ops_never_used" msgid="9038133162371204506">"(사용 안 함)"</string>
@@ -2017,7 +2018,6 @@
     <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"색상 대비"</string>
     <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"고대비를 사용하면 텍스트, 버튼, 아이콘이 더 선명하게 보입니다. 자신에게 가장 괜찮아 보이는 대비를 선택하세요."</string>
     <string name="color_contrast_note" msgid="7592686603372566198">"일부 앱에서는 모든 색상 및 텍스트 대조 설정을 지원하지 않습니다."</string>
-    <string name="accessibility_color_contrast_summary" msgid="7563237683500106632">"화면의 배경 색상과 대조하여 색상과 텍스트를 어떻게 표시할지 조정합니다."</string>
     <string name="color_contrast_preview" msgid="6791430227535363883">"미리보기"</string>
     <string name="color_contrast_preview_sender_name" msgid="8641943417589238147">"헬렌, 아담"</string>
     <string name="color_contrast_preview_email_send_date" msgid="2108702726171600080">"2일 전"</string>
@@ -2572,8 +2572,7 @@
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"배터리 수명 연장"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"충전 완료 시 사용 중지"</string>
     <string name="battery_saver_sticky_title_percentage" msgid="1178162022087559148">"<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>에 절전 모드 끄기"</string>
-    <!-- no translation found for battery_saver_sticky_description_new (8543277078136947874) -->
-    <skip />
+    <string name="battery_saver_sticky_description_new" msgid="8543277078136947874">"배터리가 <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> 이상 충전되면 절전 모드가 사용 중지됩니다."</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"사용 설정"</string>
@@ -2964,8 +2963,7 @@
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{{orgName}에서 내 직장 프로필에 인증 기관의 인증서를 설치했으며, 인증서를 통해 관리자가 이메일, 앱, 보안 웹사이트를 포함한 내 직장 프로필의 네트워크 활동을 모니터링할 수 있습니다.\n\n이 인증서에 관해 자세히 알아보려면 관리자에게 문의하세요.}other{{orgName}에서 내 직장 프로필에 인증 기관의 인증서를 설치했으며, 인증서를 통해 관리자가 이메일, 앱, 보안 웹사이트를 포함한 내 직장 프로필의 네트워크 활동을 모니터링할 수 있습니다.\n\n이 인증서에 관해 자세히 알아보려면 관리자에게 문의하세요.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"기기에 신뢰할 수 있는 자격증명이 설치되어 있기 때문에\n제3자가 이메일, 앱, 보안 웹사이트를 포함한 네트워크 활동을 모니터링 할 수 있습니다.\n"</string>
     <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{인증서 확인}other{인증서 확인}}"</string>
-    <!-- no translation found for user_settings_title (9208831545558787202) -->
-    <skip />
+    <string name="user_settings_title" msgid="9208831545558787202">"사용자"</string>
     <string name="user_list_title" msgid="1387379079186123404">"사용자 및 프로필"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"사용자 또는 프로필 추가"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"제한된 프로필"</string>
@@ -4642,10 +4640,8 @@
     <string name="summary_supported_service" msgid="4320535903444834786">"응급 서비스를 포함해 누구에게나 문자 메시지를 보낼 수 있습니다. 모바일 네트워크가 사용 가능해지면 휴대전화가 네트워크에 다시 연결됩니다."</string>
     <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"위성 메시지는 시간이 더 오래 소요될 수 있으며 일부 지역에서만 사용 가능합니다. 날씨 및 특정 구조물이 위성 연결에 영향을 미칠 수 있습니다. 위성 통화를 사용할 수 없습니다. 긴급 전화는 연결될 수 있습니다.\n\n계정 변경사항이 설정에 표시되는 데 다소 시간이 걸릴 수 있습니다. 자세한 내용은 이동통신사에 문의하세요."</string>
     <string name="more_about_satellite_messaging" msgid="3385673133561348509">"위성 메시지 자세히 알아보기"</string>
-    <!-- no translation found for satellite_warning_dialog_title (1610117852475376931) -->
-    <skip />
-    <!-- no translation found for satellite_warning_dialog_content (936419945275934955) -->
-    <skip />
+    <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"<xliff:g id="FUNCTION">%1$s</xliff:g> 기능을 사용 설정할 수 없음"</string>
+    <string name="satellite_warning_dialog_content" msgid="936419945275934955">"<xliff:g id="FUNCTION">%1$s</xliff:g> 기능을 사용 설정하려면 먼저 위성 연결을 해제하세요."</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"액세스 포인트 네임(APN)"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"<xliff:g id="CARRIER">%1$s</xliff:g>에 연결된 경우 사용할 수 없음"</string>
@@ -4807,46 +4803,27 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"직장용 정책 정보"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"IT 관리자가 관리하는 설정"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
-    <!-- no translation found for enable_16k_pages (8001470927566110689) -->
-    <skip />
-    <!-- no translation found for enable_16k_pages_summary (1964363364670306912) -->
-    <skip />
-    <!-- no translation found for confirm_enable_16k_pages_title (1286925577014793351) -->
-    <skip />
-    <!-- no translation found for confirm_enable_16k_pages_text (570198382662424714) -->
-    <skip />
-    <!-- no translation found for confirm_enable_4k_pages_title (3210360137887034659) -->
-    <skip />
-    <!-- no translation found for confirm_enable_4k_pages_text (155070605667160083) -->
-    <skip />
+    <string name="enable_16k_pages" msgid="8001470927566110689">"16KB 페이지 크기로 부팅"</string>
+    <string name="enable_16k_pages_summary" msgid="1964363364670306912">"16KB 페이지 크기 지원 커널을 사용하여 기기 부팅"</string>
+    <string name="confirm_enable_16k_pages_title" msgid="1286925577014793351">"4KB 모드에서 16KB 모드로 전환"</string>
+    <string name="confirm_enable_16k_pages_text" msgid="570198382662424714">"페이지에 구속받지 않는 모드에서 4KB 커널을 실행하고 있으며, 16KB 모드로 전환합니다. 이 모드에서는 소프트웨어 무결성이 보장되지 않기 때문에 부트로더가 잠금 해제된 상태에서는 휴대전화에 저장된 모든 데이터가 위험에 노출될 수 있습니다. 이로 인해 기기가 재부팅됩니다. 이 모드에서는 일부 기능이 사용 중지되므로 일부 애플리케이션이 작동하지 않을 수 있습니다. 기기를 프로덕션 모드로 되돌리려면 4KB 모드로 다시 전환한 후 부트로더를 잠가야 하며, 이렇게 하면 기기가 초기화됩니다. 기기를 Android로 부팅 완료한 후에는 개발자 옵션에서 OEM 잠금 해제를 사용 중지하세요."</string>
+    <string name="confirm_enable_4k_pages_title" msgid="3210360137887034659">"16KB 모드에서 4KB 모드로 전환"</string>
+    <string name="confirm_enable_4k_pages_text" msgid="155070605667160083">"페이지에 구속받지 않는 모드에서 16KB 커널을 실행하고 있으며, 4KB 모드로 전환합니다. 이 모드에서는 소프트웨어 무결성이 보장되지 않기 때문에 부트로더가 잠금 해제된 상태에서는 휴대전화에 저장된 모든 데이터가 위험에 노출될 수 있습니다. 이로 인해 기기가 재부팅됩니다. 이 모드에서는 일부 기능이 사용 중지되므로 일부 애플리케이션이 작동하지 않을 수 있습니다. 기기를 프로덕션 모드로 되돌리려면 부트로더를 잠가야 하며, 이렇게 하면 기기가 초기화됩니다. 기기를 Android로 부팅 완료한 후에는 개발자 옵션에서 OEM 잠금 해제를 사용 중지하세요."</string>
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"16KB 페이지 호환 커널로 커널을 업데이트할 수 없습니다."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"변경사항 적용 중"</string>
-    <!-- no translation found for confirm_format_ext4_title (6696191800594435577) -->
-    <skip />
-    <!-- no translation found for confirm_format_ext4_text (7940372488624630214) -->
-    <skip />
-    <!-- no translation found for format_ext4_failure_toast (8059453995800471549) -->
-    <skip />
-    <!-- no translation found for confirm_oem_unlock_for_16k_title (5374451262432025419) -->
-    <skip />
-    <!-- no translation found for confirm_oem_unlock_for_16k_text (3583604865119937957) -->
-    <skip />
-    <!-- no translation found for page_agnostic_4k_pages_title (1184703958249093215) -->
-    <skip />
-    <!-- no translation found for page_agnostic_4k_pages_text_short (2894243902906666242) -->
-    <skip />
-    <!-- no translation found for page_agnostic_4k_pages_text (8284806650260868833) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_title (7762533464569818498) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text_short (269039281591806585) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text (6208765386837706582) -->
-    <skip />
-    <!-- no translation found for page_agnostic_notification_channel_name (1658444283036376361) -->
-    <skip />
-    <!-- no translation found for page_agnostic_notification_action (2309805437430150456) -->
-    <skip />
+    <string name="confirm_format_ext4_title" msgid="6696191800594435577">"기기를 ext4로 재포맷하시겠습니까? (16KB 모드에 필요함)"</string>
+    <string name="confirm_format_ext4_text" msgid="7940372488624630214">"16KB 개발자 옵션을 사용하기 전에 이 기기의 데이터 파티션을 ext4로 변환해야 합니다. 이 모드에서는 소프트웨어 무결성이 보장되지 않기 때문에 부트로더가 잠금 해제된 상태에서는 휴대전화에 저장된 모든 데이터가 위험에 노출될 수 있습니다. 16KB 옵션을 활성화하려면 이후에 한 번 더 재부팅해야 합니다. 이 모드에서는 한 번의 재부팅으로 4KB와 16KB 모드 사이를 오가며 전환할 수 있습니다. 이 모드에서는 일부 기능이 사용 중지되므로 일부 애플리케이션이 작동하지 않을 수 있습니다. 기기를 프로덕션 모드로 되돌리려면 4KB 모드로 다시 전환한 후 부트로더를 잠가야 하며, 이렇게 하면 기기가 초기화됩니다. 기기를 Android로 부팅 완료한 후에는 개발자 옵션에서 OEM 잠금 해제를 사용 중지하세요. 확인 후에는 기기가 완전 삭제되며 파일 시스템이 ext4로 변경됩니다. 이 과정을 완료한 후에는 다시 돌아와 16KB를 사용 설정하세요."</string>
+    <string name="format_ext4_failure_toast" msgid="8059453995800471549">"데이터 파티션을 ext4로 재포맷하고 완전 삭제할 수 없습니다."</string>
+    <string name="confirm_oem_unlock_for_16k_title" msgid="5374451262432025419">"16KB 모드에 필요한 부트로더 잠금 해제"</string>
+    <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"16KB 개발자 옵션을 사용하기 전에 이 기기의 부트로더가 잠금해제되어 있어야 합니다. 이 모드에서는 소프트웨어 무결성이 보장되지 않기 때문에 부트로더가 잠금 해제된 상태에서는 휴대전화에 저장된 모든 데이터가 위험에 노출될 수 있습니다. 16KB 모드를 활성화하면 모든 사용자 데이터와 설정이 완전 삭제됩니다. 부트로더가 잠금 해제되고 나서 16KB 옵션을 활성화하려면 두 번 재부팅해야 합니다. 이 모드에서는 한 번의 재부팅으로 4KB와 16KB 모드 사이를 오가며 전환할 수 있습니다. 이 모드에서는 일부 기능이 사용 중지되므로 일부 애플리케이션이 작동하지 않을 수 있습니다. 기기를 프로덕션 모드로 되돌리려면 4KB 모드로 다시 전환한 후 OEM/부트로더로 기기를 잠가 초기화해야 합니다. 부트로더를 잠금 해제한 후 다시 시도해 주세요. &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;에서 방법에 대한 안내를 참고하세요."</string>
+    <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"페이지에 구속받지 않는 4KB 모드 사용"</string>
+    <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"현재 페이지에 구속받지 않는 4KB 모드입니다. 이 모드에서는 소프트웨어 무결성이 보장되지 않기 때문에 부트로더가 잠금 해제된 상태에서는 휴대전화에 저장된 모든 데이터가 위험에 노출될 수 있습니다. 이 모드에서는 일부 기능이 사용 중지되므로 일부 애플리케이션이 작동하지 않을 수 있습니다. 프로덕션 모드로 다시 들어가려면 기기의 부트로더를 잠가야 합니다. 탭하여 자세히 알아보세요."</string>
+    <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"현재 페이지에 구속받지 않는 4KB 모드입니다. 이 모드에서는 소프트웨어 무결성이 보장되지 않기 때문에 부트로더가 잠금 해제된 상태에서는 휴대전화에 저장된 모든 데이터가 위험에 노출될 수 있습니다. 이 모드에서는 일부 기능이 사용 중지되므로 일부 애플리케이션이 작동하지 않을 수 있습니다. 프로덕션 모드로 다시 들어가려면 기기의 부트로더를 잠가야 합니다. 이렇게 하면 기기가 다시 초기화되고 프로덕션 설정으로 복원됩니다. 기기를 Android로 부팅 완료한 후에는 개발자 옵션에서 OEM 잠금 해제를 사용 중지하세요. 기기가 Android로 부팅되지 않거나 불안정한 경우 &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt;의 최신 공장 출고 시 이미지로 기기를 다시 플래시하거나 &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt;을 사용하여 \'기기 완전 삭제\', \'부트로더 잠금\', \'모든 파티션 강제 플래시\'를 선택하세요."</string>
+    <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"페이지에 구속받지 않는 16KB 모드 사용"</string>
+    <string name="page_agnostic_16k_pages_text_short" msgid="269039281591806585">"현재 페이지에 구속받지 않는 16KB 모드입니다. 이 모드에서는 소프트웨어 무결성이 보장되지 않기 때문에 부트로더가 잠금 해제된 상태에서는 휴대전화에 저장된 모든 데이터가 위험에 노출될 수 있습니다. 이 모드에서는 일부 기능이 사용 중지되므로 일부 애플리케이션이 작동하지 않을 수 있습니다. 프로덕션 모드로 다시 들어가려면 4K 모드로 다시 전환한 후 기기의 부트로더를 잠가야 합니다. 탭하여 자세히 알아보세요."</string>
+    <string name="page_agnostic_16k_pages_text" msgid="6208765386837706582">"현재 페이지에 구속받지 않는 16KB 모드입니다. 이 모드에서는 소프트웨어 무결성이 보장되지 않기 때문에 부트로더가 잠금 해제된 상태에서는 휴대전화에 저장된 모든 데이터가 위험에 노출될 수 있습니다. 이 모드에서는 일부 기능이 사용 중지되므로 일부 애플리케이션이 작동하지 않을 수 있습니다. 프로덕션 모드로 다시 들어가려면 4K 모드로 다시 전환한 후 기기의 부트로더를 잠가야 합니다. 이렇게 하면 기기가 다시 초기화되고 프로덕션 설정으로 복원됩니다. 기기를 Android로 부팅 완료한 후에는 개발자 옵션에서 OEM 잠금 해제를 사용 중지하세요. 기기가 Android로 부팅되지 않거나 불안정한 경우 &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt;의 최신 공장 출고 시 이미지로 기기를 다시 플래시하거나 &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt;을 사용하여 \'기기 완전 삭제\', \'부트로더 잠금\', \'모든 파티션 강제 플래시\'를 선택하세요."</string>
+    <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"페이지에 구속받지 않는 16KB 모드"</string>
+    <string name="page_agnostic_notification_action" msgid="2309805437430150456">"자세히 알아보기"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"버그 신고 핸들러"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"어떤 앱이 기기의 버그 신고 바로가기를 처리하는지 정합니다."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"개인"</string>
@@ -4908,8 +4885,7 @@
     <string name="media_controls_show_player" msgid="8504571042365814021">"플레이어 표시"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"미디어"</string>
     <string name="camera_extensions_fallback_title" msgid="3604579046777004989">"카메라 소프트웨어 확장 프로그램 허용"</string>
-    <!-- no translation found for camera_extensions_fallback_description (4306833827773277263) -->
-    <skip />
+    <string name="camera_extensions_fallback_description" msgid="4306833827773277263">"HDR, 야간 모드 또는 기타 카메라 확장 프로그램과 같은 고급 카메라 기능의 기본 소프트웨어 구현을 사용 설정합니다."</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"블루투스를 사용 설정함"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"인터넷"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM"</string>
@@ -4979,8 +4955,7 @@
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"인쇄 서비스 사용"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"여러 사용자 허용"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"허용, 멀티, 사용자, 허가, 다수"</string>
-    <!-- no translation found for multiple_users_title_keywords (2395593167746225172) -->
-    <skip />
+    <string name="multiple_users_title_keywords" msgid="2395593167746225172">"다중, 사용자, 프로필, 사람, 계정, 전환, 다수"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"무선 디버깅 사용"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"그래픽 드라이버 환경설정 사용"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"야간 조명 사용"</string>
@@ -5004,7 +4979,7 @@
     <string name="enable_2g_summary" msgid="2794534052372565914">"2G는 보안이 약한 대신 일부 위치에서 연결 품질을 개선할 수 있습니다. 긴급 전화의 경우 2G는 항상 허용됩니다."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> 이동통신사 사용 시 2G 필요"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"암호화된 네트워크만 허용"</string>
-    <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"이는 보안을 강화하지만 일부 위치에서 모바일 네트워크 연결이 제한될 수 있습니다. 긴급 전화는 항상 허용됩니다."</string>
+    <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"이렇게 하면 보안을 강화하지만 일부 위치에서 모바일 네트워크 연결이 제한될 수 있습니다. 긴급 전화는 항상 허용됩니다."</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"모든 서비스"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"클립보드 액세스 표시"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"앱이 복사된 텍스트, 이미지 또는 기타 콘텐츠에 액세스할 때 메시지 표시"</string>
@@ -5015,8 +4990,12 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"UWB를 사용하려면 비행기 모드를 사용 중지하세요."</string>
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"현재 위치에서는 UWB를 사용할 수 없습니다."</string>
     <string name="thread_network_settings_title" msgid="4212301030523859220">"스레드"</string>
-    <string name="thread_network_settings_summary" msgid="8065599651021748339">"원활한 스마트 홈 환경을 위해 스레드를 사용해 호환되는 기기에 연결하세요"</string>
-    <string name="thread_network_settings_summary_airplane_mode" msgid="7207252895832446979">"스레드를 사용하려면 비행기 모드를 사용 중지하세요"</string>
+    <!-- no translation found for thread_network_settings_main_switch_title (3859168481929323474) -->
+    <skip />
+    <!-- no translation found for thread_network_settings_footer_title (7385600318850220927) -->
+    <skip />
+    <!-- no translation found for thread_network_settings_learn_more (8278498005848565050) -->
+    <skip />
     <string name="camera_toggle_title" msgid="8952668677727244992">"카메라 액세스"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"마이크 액세스"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"앱 및 서비스에 적용"</string>

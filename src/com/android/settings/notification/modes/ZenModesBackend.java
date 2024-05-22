@@ -21,18 +21,27 @@ import static java.util.Objects.requireNonNull;
 import android.annotation.Nullable;
 import android.app.ActivityManager;
 import android.app.AutomaticZenRule;
+import android.app.INotificationManager;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.pm.ParceledListSlice;
+import android.database.Cursor;
 import android.net.Uri;
+import android.os.ServiceManager;
+import android.provider.ContactsContract;
 import android.provider.Settings;
 import android.service.notification.Condition;
+import android.service.notification.ConversationChannelWrapper;
 import android.service.notification.ZenAdapters;
 import android.service.notification.ZenModeConfig;
 
+import android.util.Log;
+import androidx.annotation.VisibleForTesting;
 import com.android.settings.R;
 
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -50,6 +59,8 @@ class ZenModesBackend {
     private static ZenModesBackend sInstance;
 
     private final NotificationManager mNotificationManager;
+    static INotificationManager sINM = INotificationManager.Stub.asInterface(
+            ServiceManager.getService(Context.NOTIFICATION_SERVICE));
 
     private final Context mContext;
 
@@ -77,7 +88,15 @@ class ZenModesBackend {
                     isRuleActive(ruleId, currentConfig)));
         }
 
-        // TODO: b/331429435 - Sort modes.
+        modes.sort((l, r) -> {
+            if (l.isManualDnd()) {
+                return -1;
+            } else if (r.isManualDnd()) {
+                return 1;
+            }
+            return l.getRule().getName().compareTo(r.getRule().getName());
+        });
+
         return modes;
     }
 
@@ -96,6 +115,54 @@ class ZenModesBackend {
         }
     }
 
+    public ParceledListSlice<ConversationChannelWrapper> getConversations(boolean onlyImportant) {
+        try {
+            return sINM.getConversations(onlyImportant);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return ParceledListSlice.emptyList();
+        }
+    }
+
+    public List<String> getStarredContacts() {
+        Cursor cursor = null;
+        try {
+            cursor = queryStarredContactsData();
+            return getStarredContacts(cursor);
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+    }
+
+    @VisibleForTesting
+    List<String> getStarredContacts(Cursor cursor) {
+        List<String> starredContacts = new ArrayList<>();
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                String contact = cursor.getString(0);
+                starredContacts.add(contact != null ? contact :
+                        mContext.getString(R.string.zen_mode_starred_contacts_empty_name));
+
+            } while (cursor.moveToNext());
+        }
+        return starredContacts;
+    }
+
+    private Cursor queryStarredContactsData() {
+        return mContext.getContentResolver().query(ContactsContract.Contacts.CONTENT_URI,
+                new String[]{ContactsContract.Contacts.DISPLAY_NAME_PRIMARY},
+                ContactsContract.Data.STARRED + "=1", null,
+                ContactsContract.Data.TIMES_CONTACTED);
+    }
+
+    Cursor queryAllContactsData() {
+        return mContext.getContentResolver().query(ContactsContract.Contacts.CONTENT_URI,
+                new String[]{ContactsContract.Contacts.DISPLAY_NAME_PRIMARY},
+                null, null, null);
+    }
+
     private ZenMode getManualDndMode(ZenModeConfig config) {
         // TODO: b/333530553 - Read ZenDeviceEffects of manual DND.
         // TODO: b/333682392 - Replace with final strings for name & trigger description
@@ -105,7 +172,6 @@ class ZenModesBackend {
                 .setZenPolicy(ZenAdapters.notificationPolicyToZenPolicy(
                         mNotificationManager.getNotificationPolicy()))
                 .setDeviceEffects(null)
-                .setTriggerDescription(mContext.getString(R.string.zen_mode_settings_summary))
                 .setManualInvocationAllowed(true)
                 .setConfigurationActivity(null) // No further settings
                 .setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_PRIORITY)

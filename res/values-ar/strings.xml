@@ -286,7 +286,8 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"يمكن للتطبيقات التي لديها إذن بالوصول إلى الأجهزة المجاورة تحديد الموضع النسبي للأجهزة المتصلة بجهازك."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"ميزة وصول التطبيقات والخدمات إلى الموقع الجغرافي غير مفّعلة. قد يستمر إرسال الموقع الجغرافي لجهازك إلى مسؤولي الاستجابة لحالات الطوارئ عند الاتصال برقم طوارئ أو مراسلته نصيًا."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"مزيد من المعلومات حول إعدادات الموقع الجغرافي"</string>
-    <string name="location_settings_tooltip_text_for_chrome" msgid="3574930966097093550">"‏لتغيير إذن الوصول إلى الموقع الجغرافي، انتقِل إلى الإعدادات &gt; الأمان والخصوصية &gt; عناصر التحكّم في الخصوصية."</string>
+    <!-- no translation found for location_settings_tooltip_text_for_chrome (5781821709250544575) -->
+    <skip />
     <string name="account_settings_title" msgid="9138880127246241885">"الحسابات"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"الأمان"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"التشفير وبيانات الاعتماد"</string>
@@ -566,7 +567,8 @@
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"في كل مرة يتم فيها قفل الجهاز"</string>
     <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"بعد توقّف النشاط لمدة 5 دقائق"</string>
     <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"بعد إعادة تشغيل الجهاز فقط"</string>
-    <string name="private_space_hide_page_title" msgid="4351404195904146088">"إخفاء المساحة الخاصة عندما تكون مقفلة"</string>
+    <string name="private_space_hide_page_title" msgid="3364639176511877414">"إخفاء المساحة الخاصّة"</string>
+    <string name="private_space_hide_when_locked" msgid="6219472348124151797">"إخفاء المساحة الخاصّة عندما تكون مقفلة"</string>
     <string name="private_space_hide_page_summary" msgid="6247773353685839242">"إذا أردت ألّا يعرف الآخرون بأنّ لديك مساحة خاصة على جهازك، يمكنك إخفاؤها من قائمة التطبيقات"</string>
     <string name="private_space_access_header" msgid="1077082416567150819">"الوصول إلى المساحة الخاصة بعد إخفائها"</string>
     <string name="private_space_search_description" msgid="1538155187658429618">"أدخِل \"المساحة الخاصة\" في شريط البحث"</string>
@@ -1721,7 +1723,7 @@
     <string name="forgot_password_text" msgid="2583194470767613163">"يمكن أن يساعدك مشرف تكنولوجيا المعلومات في إعادة ضبط رقم التعريف الشخصي أو النقش أو كلمة المرور."</string>
     <string name="advanced_settings" msgid="2368905204839169094">"الإعدادات المتقدمة"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"تفعيل المزيد من خيارات الإعدادات."</string>
-    <string name="application_info_label" msgid="1015706497694165866">"معلومات عن التطبيقات"</string>
+    <string name="application_info_label" msgid="1015706497694165866">"معلومات التطبيق"</string>
     <string name="storage_label" msgid="2522307545547515733">"التخزين"</string>
     <string name="auto_launch_label" msgid="4069860409309364872">"الفتح تلقائيًا"</string>
     <string name="auto_launch_label_generic" msgid="5033137408273064599">"الإعدادات التلقائية"</string>
@@ -2016,7 +2018,6 @@
     <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"تباين الألوان"</string>
     <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"يعمل التباين العالي على زيادة بروز النص والأزرار والرموز. يمكنك اختيار مستوى التباين الأنسب لك."</string>
     <string name="color_contrast_note" msgid="7592686603372566198">"قد لا تتوافق بعض التطبيقات مع كل إعدادات التباين في اللون والنص."</string>
-    <string name="accessibility_color_contrast_summary" msgid="7563237683500106632">"يمكنك تعديل مظهر الألوان والنص بما يتوافق مع لون خلفية الشاشة."</string>
     <string name="color_contrast_preview" msgid="6791430227535363883">"معاينة"</string>
     <string name="color_contrast_preview_sender_name" msgid="8641943417589238147">"شروق، وآدم"</string>
     <string name="color_contrast_preview_email_send_date" msgid="2108702726171600080">"قبل يومَين"</string>
@@ -2963,8 +2964,7 @@
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{يتم تثبيت مرجع تصديق واحد من قِبل \"{orgName}\" لملفك الشخصي للعمل، وهذا قد يسمح لمَن أجرى التثبيت بمراقبة النشاط على شبكة العمل، بما في ذلك الرسائل الإلكترونية والتطبيقات والمواقع الإلكترونية الآمنة.\n\nللحصول على مزيد من المعلومات حول هذه الشهادة، يُرجى التواصُل مع المشرف.}zero{يتم تثبيت مرجع تصديق من قِبل \"{orgName}\" لملفك الشخصي للعمل، وهذا قد يسمح لمَن أجرى التثبيت بمراقبة النشاط على شبكة العمل، بما في ذلك الرسائل الإلكترونية والتطبيقات والمواقع الإلكترونية الآمنة.\n\nللحصول على مزيد من المعلومات حول هذه الشهادات، يُرجى التواصُل مع المشرف.}two{يتم تثبيت مرجعَي تصديق من قِبل \"{orgName}\" لملفك الشخصي للعمل، وهذا قد يسمح لمَن أجرى التثبيت بمراقبة النشاط على شبكة العمل، بما في ذلك الرسائل الإلكترونية والتطبيقات والمواقع الإلكترونية الآمنة.\n\nللحصول على مزيد من المعلومات حول هذه الشهادات، يُرجى التواصُل مع المشرف.}few{يتم تثبيت مراجع تصديق من قِبل \"{orgName}\" لملفك الشخصي للعمل، وهذا قد يسمح لمَن أجرى التثبيت بمراقبة النشاط على شبكة العمل، بما في ذلك الرسائل الإلكترونية والتطبيقات والمواقع الإلكترونية الآمنة.\n\nللحصول على مزيد من المعلومات حول هذه الشهادات، يُرجى التواصُل مع المشرف.}many{يتم تثبيت مرجع تصديق من قِبل \"{orgName}\" لملفك الشخصي للعمل، وهذا قد يسمح لمَن أجرى التثبيت بمراقبة النشاط على شبكة العمل، بما في ذلك الرسائل الإلكترونية والتطبيقات والمواقع الإلكترونية الآمنة.\n\nللحصول على مزيد من المعلومات حول هذه الشهادات، يُرجى التواصُل مع المشرف.}other{يتم تثبيت مرجع تصديق من قِبل \"{orgName}\" لملفك الشخصي للعمل، وهذا قد يسمح لمَن أجرى التثبيت بمراقبة النشاط على شبكة العمل، بما في ذلك الرسائل الإلكترونية والتطبيقات والمواقع الإلكترونية الآمنة.\n\nللحصول على مزيد من المعلومات حول هذه الشهادات، يُرجى التواصُل مع المشرف.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"يُمكن لأي جهة خارجية مراقبة نشاط الشبكة، بما في ذلك الرسائل الإلكترونية والتطبيقات ومواقع الويب الآمنة.\n\nويُمكن لبيانات اعتماد موثوقة ومثبتة على جهاز الكمبيوتر إتاحة إجراء ذلك."</string>
     <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{الاطّلاع على الشهادة}zero{الاطّلاع على الشهادات}two{الاطّلاع على الشهادتَين}few{الاطّلاع على الشهادات}many{الاطّلاع على الشهادات}other{الاطّلاع على الشهادات}}"</string>
-    <!-- no translation found for user_settings_title (9208831545558787202) -->
-    <skip />
+    <string name="user_settings_title" msgid="9208831545558787202">"المستخدمون"</string>
     <string name="user_list_title" msgid="1387379079186123404">"المستخدمون والملفات الشخصية"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"إضافة مستخدم أو ملف شخصي"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"ملف شخصي محظور"</string>
@@ -4979,8 +4979,7 @@
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"استخدام خدمة الطباعة"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"السماح لمستخدمين متعددين"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"السماح، متعدد، مستخدم، سماح، عديد"</string>
-    <!-- no translation found for multiple_users_title_keywords (2395593167746225172) -->
-    <skip />
+    <string name="multiple_users_title_keywords" msgid="2395593167746225172">"مستخدمون متعددون، مستخدمون، ملفات شخصية، أشخاص، حسابات، تبديل، غير ذلك"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"استخدام ميزة \"تصحيح الأخطاء اللاسلكي\""</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"استخدام الإعدادات المفضّلة لبرنامج تشغيل الرسومات"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"استخدام ميزة \"الإضاءة الليلية\""</string>
@@ -5015,8 +5014,12 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"يجب إيقاف وضع الطيران لاستخدام النطاق الواسع جدًا."</string>
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"‏النطاق الفائق العرض (UWB) غير متاح في الموقع الجغرافي الحالي."</string>
     <string name="thread_network_settings_title" msgid="4212301030523859220">"Thread"</string>
-    <string name="thread_network_settings_summary" msgid="8065599651021748339">"‏اتّصل بالأجهزة المتوافقة باستخدام Thread للحصول على تجربة سلسة في المنزل المزوَّد بأجهزة ذكية"</string>
-    <string name="thread_network_settings_summary_airplane_mode" msgid="7207252895832446979">"‏يجب إيقاف وضع الطيران لاستخدام Thread."</string>
+    <!-- no translation found for thread_network_settings_main_switch_title (3859168481929323474) -->
+    <skip />
+    <!-- no translation found for thread_network_settings_footer_title (7385600318850220927) -->
+    <skip />
+    <!-- no translation found for thread_network_settings_learn_more (8278498005848565050) -->
+    <skip />
     <string name="camera_toggle_title" msgid="8952668677727244992">"الوصول إلى الكاميرا"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"الوصول إلى الميكروفون"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"للتطبيقات والخدمات"</string>
@@ -5200,7 +5203,7 @@
     <string name="generic_accessibility_service_on" msgid="4466229372357726824">"الميزة مفعّلة"</string>
     <string name="generic_accessibility_service_off" msgid="4759859497651675724">"الميزة غير مفعّلة"</string>
     <string name="generic_accessibility_feature_shortcut_off" msgid="4022872394514077907">"الاختصار غير مفعَّل"</string>
-    <string name="accessibility_shortcut_state_off" msgid="8158137799007601475">"الاختصار غير مفعَّل"</string>
+    <string name="accessibility_shortcut_state_off" msgid="8158137799007601475">"غير مفعَّل"</string>
     <string name="daltonizer_state_on" msgid="131013270022603983">"الميزة مفعَّلة"</string>
     <string name="daltonizer_state_off" msgid="1162285688069856179">"الميزة غير مفعَّلة"</string>
     <string name="color_inversion_state_on" msgid="1160969033636440368">"الميزة مفعَّلة"</string>

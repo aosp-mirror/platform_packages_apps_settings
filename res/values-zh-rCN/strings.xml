@@ -286,7 +286,8 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"具有附近设备权限的应用可以确定已连接的设备的相对位置。"</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"应用和服务的位置信息使用权处于关闭状态。在您拨打紧急电话号码或向该号码发送短信时，系统可能仍会将您的设备位置信息发送给紧急救援人员。"</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"详细了解位置信息设置"</string>
-    <string name="location_settings_tooltip_text_for_chrome" msgid="3574930966097093550">"若要更改位置信息访问权限，请依次前往“设置”&gt;“安全和隐私设置”&gt;“隐私控制”"</string>
+    <!-- no translation found for location_settings_tooltip_text_for_chrome (5781821709250544575) -->
+    <skip />
     <string name="account_settings_title" msgid="9138880127246241885">"账号"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"安全"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"加密与凭据"</string>
@@ -566,7 +567,8 @@
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"每次设备锁定时"</string>
     <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"无操作 5 分钟后"</string>
     <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"仅在设备重启后"</string>
-    <string name="private_space_hide_page_title" msgid="4351404195904146088">"私密空间处于锁定状态时，隐藏私密空间"</string>
+    <string name="private_space_hide_page_title" msgid="3364639176511877414">"隐藏私密空间"</string>
+    <string name="private_space_hide_when_locked" msgid="6219472348124151797">"当私密空间处于锁定状态时将其隐藏"</string>
     <string name="private_space_hide_page_summary" msgid="6247773353685839242">"如要防止其他人知道您的设备上有私密空间，您可以从应用列表中将其隐藏"</string>
     <string name="private_space_access_header" msgid="1077082416567150819">"访问隐藏的私密空间"</string>
     <string name="private_space_search_description" msgid="1538155187658429618">"在搜索栏中输入“私密空间”"</string>
@@ -579,7 +581,7 @@
     <string name="private_space_hide_dialog_button" msgid="4157191429310035457">"知道了"</string>
     <string name="private_space_category_system" msgid="1286843321867285700">"系统"</string>
     <string name="private_space_delete_title" msgid="636873505724100006">"删除私密空间"</string>
-    <string name="private_space_delete_header" msgid="4594429153176776184">"删除私密空间？"</string>
+    <string name="private_space_delete_header" msgid="4594429153176776184">"要删除私密空间吗？"</string>
     <string name="private_space_delete_summary" msgid="3344372988408565545">"您的私密空间将从设备上移除。所有专用应用和数据都会被删除。此操作一经执行便无法撤消。"</string>
     <string name="private_space_accounts" msgid="1078277762792056395">"以下账号将被从您的私密空间中移除："</string>
     <string name="private_space_delete_button_label" msgid="1256981385318225002">"删除"</string>
@@ -2016,7 +2018,6 @@
     <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"颜色对比度"</string>
     <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"对比度越高，文字、按钮和图标越引人注目。请选择最符合您需求的对比度。"</string>
     <string name="color_contrast_note" msgid="7592686603372566198">"某些应用可能仅支持部分颜色和文字对比度设置"</string>
-    <string name="accessibility_color_contrast_summary" msgid="7563237683500106632">"调整颜色和文字与屏幕背景颜色的对比度"</string>
     <string name="color_contrast_preview" msgid="6791430227535363883">"预览"</string>
     <string name="color_contrast_preview_sender_name" msgid="8641943417589238147">"Helen、Adam"</string>
     <string name="color_contrast_preview_email_send_date" msgid="2108702726171600080">"2 天前"</string>
@@ -2571,8 +2572,7 @@
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"延长电池续航时间"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"充够电时关闭"</string>
     <string name="battery_saver_sticky_title_percentage" msgid="1178162022087559148">"电量充到 <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> 时关闭"</string>
-    <!-- no translation found for battery_saver_sticky_description_new (8543277078136947874) -->
-    <skip />
+    <string name="battery_saver_sticky_description_new" msgid="8543277078136947874">"当电量充到 <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> 以上时，省电模式就会关闭"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"开启"</string>
@@ -2963,15 +2963,14 @@
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{{orgName}已为您的工作资料安装证书授权机构颁发的证书，借此监控工作网络活动，包括电子邮件、应用和安全网站。\n\n如需详细了解此证书，请与您的管理员联系。}other{{orgName}已为您的工作资料安装证书授权机构颁发的证书，借此监控工作网络活动，包括电子邮件、应用和安全网站。\n\n如需详细了解这些证书，请与您的管理员联系。}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"第三方可以监控您的网络活动，包括收发电子邮件、使用应用和浏览安全网站。\n\n出现这种情况的原因是您在设备上安装了信任的凭据。"</string>
     <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{检查证书}other{检查证书}}"</string>
-    <!-- no translation found for user_settings_title (9208831545558787202) -->
-    <skip />
+    <string name="user_settings_title" msgid="9208831545558787202">"用户"</string>
     <string name="user_list_title" msgid="1387379079186123404">"用户和个人资料"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"添加用户或个人资料"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"受限个人资料"</string>
     <string name="user_summary_not_set_up" msgid="4602868481732886115">"未设置"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1658946988920104613">"未设置 - 受限个人资料"</string>
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"未设置 - 工作资料"</string>
-    <string name="user_owner" msgid="2079206733011361994">"所有者"</string>
+    <string name="user_owner" msgid="2079206733011361994">"机主"</string>
     <string name="user_admin" msgid="4024553191395768119">"管理员"</string>
     <string name="user_you" msgid="3070562015202859996">"您（<xliff:g id="NAME">%s</xliff:g>）"</string>
     <string name="user_add_max_count" msgid="3328539978480663740">"您无法再添加任何用户。若要添加新用户，请先移除一个现有用户。"</string>
@@ -4431,7 +4430,7 @@
     <string name="credman_confirmation_change_provider_positive_button" msgid="7732302992885116967">"更改"</string>
     <string name="credman_limit_error_msg_title" msgid="1525814645803612135">"您只能开启 5 项服务"</string>
     <string name="credman_limit_error_msg" msgid="2521803280130310063">"至少关闭 1 项服务才能添加另 1 项服务"</string>
-    <string name="credman_main_settings_intro_text" msgid="4981603639240772620">"选择您偏好的服务来存储用于登录和自动填充建议的数据。如果您希望其他服务也提供建议，请开启相应服务。"</string>
+    <string name="credman_main_settings_intro_text" msgid="4981603639240772620">"选择您希望哪项服务来存储用于登录和自动填充建议的数据。如果您希望其他服务也提供建议，请开启相应服务。"</string>
     <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"%1$s会根据屏幕上的内容判断可以自动填充的内容。"</string>
     <string name="credman_error_message_title" msgid="4099557206946333568">"密码、通行密钥和数据服务限制"</string>
     <string name="credman_error_message" msgid="8334797097200415449">"同时最多可以启用 5 个密码、通行密钥和数据服务。若要添加其他服务，请先关闭一个已启用的服务。"</string>
@@ -4688,12 +4687,12 @@
     <string name="sim_onboarding_select_sim_title" msgid="5895262188167744055">"选择要使用哪些 SIM 卡"</string>
     <string name="sim_onboarding_select_sim_msg" msgid="5638859405391915048">"可以同时使用 2 张 SIM 卡"</string>
     <string name="sim_onboarding_primary_sim_title" msgid="2793090401371135675">"设置主 SIM 卡"</string>
-    <string name="sim_onboarding_primary_sim_msg" msgid="5484656671490558032">"选择在拨打电话、发送短信和使用移动网络时默认使用的 SIM 卡"</string>
+    <string name="sim_onboarding_primary_sim_msg" msgid="5484656671490558032">"选择在拨打电话、发送短信和使用移动数据流量时默认使用的 SIM 卡"</string>
     <string name="primary_sim_title" msgid="2508161011657571566">"主 SIM 卡"</string>
     <string name="primary_sim_calls_title" msgid="4961189133582615685">"通话"</string>
     <string name="primary_sim_texts_title" msgid="1287584042733097749">"短信"</string>
     <string name="primary_sim_automatic_data_title" msgid="1265528923229642480">"自动切换数据网络"</string>
-    <string name="primary_sim_automatic_data_msg" msgid="1612203837010785203">"根据信号覆盖率和可用性来选择使用哪张 SIM 卡的移动网络"</string>
+    <string name="primary_sim_automatic_data_msg" msgid="1612203837010785203">"根据信号覆盖和剩余流量情况，自动选择一张最合适的 SIM 卡"</string>
     <string name="sim_action_restart_dialog_title" msgid="3507413479633430120">"重启后可以使用 2 个 SIM 卡"</string>
     <string name="sim_action_restart_dialog_msg" msgid="4737611046767629774">"若要同时使用 2 个 SIM 卡，请重启您的设备，然后开启这两个 SIM 卡"</string>
     <string name="sim_action_restart_dialog_cancel" msgid="665560106686565624">"仅使用<xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
@@ -4804,46 +4803,27 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"您的工作政策信息"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"由 IT 管理员管理的设置"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
-    <!-- no translation found for enable_16k_pages (8001470927566110689) -->
-    <skip />
-    <!-- no translation found for enable_16k_pages_summary (1964363364670306912) -->
-    <skip />
-    <!-- no translation found for confirm_enable_16k_pages_title (1286925577014793351) -->
-    <skip />
-    <!-- no translation found for confirm_enable_16k_pages_text (570198382662424714) -->
-    <skip />
-    <!-- no translation found for confirm_enable_4k_pages_title (3210360137887034659) -->
-    <skip />
-    <!-- no translation found for confirm_enable_4k_pages_text (155070605667160083) -->
-    <skip />
+    <string name="enable_16k_pages" msgid="8001470927566110689">"以 16KB 页面大小启动设备"</string>
+    <string name="enable_16k_pages_summary" msgid="1964363364670306912">"使用 16KB 页面大小所支持的内核启动设备"</string>
+    <string name="confirm_enable_16k_pages_title" msgid="1286925577014793351">"从 4KB 模式切换到 16KB 模式"</string>
+    <string name="confirm_enable_16k_pages_text" msgid="570198382662424714">"您正处于运行 4KB 内核的页面通用模式，即将切换到 16KB 模式。在该模式下，无法保证软件完整性；而且在引导加载程序处于解锁状态时，存储在手机上的所有数据都可能会面临风险。此操作会重新启动设备。在这些模式下，某些功能会被停用，所以某些应用可能无法正常运作。如果想让设备返回到生产模式，您需要切换回 4KB 模式并锁定引导加载程序，这样就会将设备恢复出厂设置。待设备成功启动到 Android 系统后，在开发者选项中停用 OEM 解锁。"</string>
+    <string name="confirm_enable_4k_pages_title" msgid="3210360137887034659">"从 16KB 模式切换到 4KB 模式"</string>
+    <string name="confirm_enable_4k_pages_text" msgid="155070605667160083">"您正处于运行 16KB 内核的页面通用模式，即将切换到 4KB 模式。在该模式下，无法保证软件完整性；而且在引导加载程序处于解锁状态时，存储在手机上的所有数据都可能会面临风险。此操作会重新启动设备。在这些模式下，某些功能会被停用，所以某些应用可能无法正常运作。如果想让设备返回到生产模式，您需要锁定引导加载程序，这样就会将设备恢复出厂设置。待设备成功启动到 Android 系统后，在开发者选项中停用 OEM 解锁。"</string>
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"无法将内核更新为 16KB 页面兼容的内核。"</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"正在应用更改"</string>
-    <!-- no translation found for confirm_format_ext4_title (6696191800594435577) -->
-    <skip />
-    <!-- no translation found for confirm_format_ext4_text (7940372488624630214) -->
-    <skip />
-    <!-- no translation found for format_ext4_failure_toast (8059453995800471549) -->
-    <skip />
-    <!-- no translation found for confirm_oem_unlock_for_16k_title (5374451262432025419) -->
-    <skip />
-    <!-- no translation found for confirm_oem_unlock_for_16k_text (3583604865119937957) -->
-    <skip />
-    <!-- no translation found for page_agnostic_4k_pages_title (1184703958249093215) -->
-    <skip />
-    <!-- no translation found for page_agnostic_4k_pages_text_short (2894243902906666242) -->
-    <skip />
-    <!-- no translation found for page_agnostic_4k_pages_text (8284806650260868833) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_title (7762533464569818498) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text_short (269039281591806585) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text (6208765386837706582) -->
-    <skip />
-    <!-- no translation found for page_agnostic_notification_channel_name (1658444283036376361) -->
-    <skip />
-    <!-- no translation found for page_agnostic_notification_action (2309805437430150456) -->
-    <skip />
+    <string name="confirm_format_ext4_title" msgid="6696191800594435577">"将设备重新格式化为 ext4？（必须这样做，才能使用 16KB 模式）"</string>
+    <string name="confirm_format_ext4_text" msgid="7940372488624630214">"需要先将此设备的数据分区转换成 ext4，然后才能使用 16KB 开发者选项。在该模式下，无法保证软件完整性；而且在引导加载程序处于解锁状态时，存储在手机上的所有数据都可能会面临风险。在此之后，需要再重启设备一次，才能启用 16KB 选项。进入该模式后，您只需重启设备 1 次便可在 4KB 模式和 16KB 模式之间来回切换。在这些模式下，某些功能会被停用，所以某些应用可能无法正常运作。如果想让设备返回到生产模式，您需要切换回 4KB 模式并锁定引导加载程序，这样就会将设备恢复出厂设置。待设备成功启动到 Android 系统后，在开发者选项中停用 OEM 解锁。当您确认后，设备上的所有数据都会被擦除，而且文件系统会被更改为 ext4。完成以上步骤后，请再次返回启用 16KB 模式。"</string>
+    <string name="format_ext4_failure_toast" msgid="8059453995800471549">"未能擦除数据分区并重新格式化为 ext4。"</string>
+    <string name="confirm_oem_unlock_for_16k_title" msgid="5374451262432025419">"必须解锁引导加载程序，才能使用 16KB 模式"</string>
+    <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"需要先为此设备解锁引导加载程序，然后才能使用 16KB 开发者选项。在该模式下，无法保证软件完整性；而且在引导加载程序处于解锁状态时，存储在手机上的所有数据都可能会面临风险。启用 16KB 模式后，所有用户数据及设置都会被擦除。待引导加载程序解锁后，需要进行 2 次重新启动才能启用 16KB 选项。进入该模式后，您只需重启设备 1 次便可在 4KB 模式和 16KB 模式之间来回切换。在这些模式下，某些功能会被停用，所以某些应用可能无法正常运作。如果想让设备返回到生产模式，您将需要切换回 4KB 模式并锁定 OEM/引导加载程序，这样就会将设备恢复出厂设置。请解锁引导加载程序，然后重试。如要查看详细操作说明，请访问：&lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
+    <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"正在使用 4KB 页面通用模式"</string>
+    <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"您正处于 4KB 页面通用模式。在该模式下，无法保证软件完整性；而且在引导加载程序处于解锁状态时，存储在手机上的所有数据都可能会面临风险。在这些模式下，某些功能会被停用，所以某些应用可能无法正常运作。如果想重新进入生产模式，您必须锁定设备的引导加载程序。点按即可了解详情。"</string>
+    <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"您正处于 4KB 页面通用模式。在该模式下，无法保证软件完整性；而且在引导加载程序处于解锁状态时，存储在手机上的所有数据都可能会面临风险。在这些模式下，某些功能会被停用，所以某些应用可能无法正常运作。如果想重新进入生产模式，您必须锁定设备的引导加载程序。这样会再次将设备恢复出厂设置，使其还原为生产设置。待设备成功启动到 Android 系统后，在开发者选项中停用 OEM 解锁。如果设备未能启动到 Android 系统或不稳定，请使用最新出厂映像 (&lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt;) 重新刷写设备，或者前往 &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; 选择“擦除设备数据”>“锁定引导加载程序”>“强制刷写所有分区”。"</string>
+    <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"目前使用 16KB 页面通用模式"</string>
+    <string name="page_agnostic_16k_pages_text_short" msgid="269039281591806585">"您正处于 16KB 页面通用模式。在该模式下，无法保证软件完整性；而且在引导加载程序处于解锁状态时，存储在手机上的所有数据都可能会面临风险。在这些模式下，某些功能会被停用，所以某些应用可能无法正常运作。如果想重新进入生产模式，您必须切换回 4KB 模式并锁定设备的引导加载程序。点按即可了解详情。"</string>
+    <string name="page_agnostic_16k_pages_text" msgid="6208765386837706582">"您正处于 16KB 页面通用模式。在该模式下，无法保证软件完整性；而且在引导加载程序处于解锁状态时，存储在手机上的所有数据都可能会面临风险。在这些模式下，某些功能会被停用，所以某些应用可能无法正常运作。如果想重新进入生产模式，您必须切换回 4KB 模式并锁定设备的引导加载程序。这样会再次将设备恢复出厂设置，使其还原为生产设置。待设备成功启动到 Android 系统后，在开发者选项中停用 OEM 解锁。如果设备未能启动到 Android 系统或不稳定，请使用最新出厂映像 (&lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt;) 重新刷写设备，或者前往 &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; 选择“擦除设备数据”>“锁定引导加载程序”>“强制刷写所有分区”。"</string>
+    <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"16KB 页面通用模式"</string>
+    <string name="page_agnostic_notification_action" msgid="2309805437430150456">"了解详情"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Bug 报告处理程序"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"确定要使用哪款应用来处理设备上的错误报告快捷方式。"</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"个人"</string>
@@ -4898,7 +4878,7 @@
     <string name="media_controls_resume_title" msgid="855076860336652370">"固定媒体播放器"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"为了方便您快速恢复播放，媒体播放器会在“快捷设置”中保持打开状态"</string>
     <string name="media_controls_lockscreen_title" msgid="2188311721857512510">"在锁定的屏幕上显示媒体"</string>
-    <string name="media_controls_lockscreen_description" msgid="3320333660404439510">"为了方便您快速恢复播放，媒体播放器会在锁定的屏幕上保持打开状态"</string>
+    <string name="media_controls_lockscreen_description" msgid="3320333660404439510">"为了方便您快速恢复播放，媒体播放器会在锁定的屏幕上保持开启状态"</string>
     <string name="media_controls_recommendations_title" msgid="3012692549413927608">"显示 Google 助理推荐的媒体内容"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"根据您的活动"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"隐藏播放器"</string>
@@ -4975,8 +4955,7 @@
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"使用打印服务"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"允许多人设备共用"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"允许, 多位, 用户, 许可, 多个, allow, multiple, user, permit, many"</string>
-    <!-- no translation found for multiple_users_title_keywords (2395593167746225172) -->
-    <skip />
+    <string name="multiple_users_title_keywords" msgid="2395593167746225172">"多个, 用户, 个人资料, 人员, 账号, 切换, 很多, multiple, users, profiles, people, accounts, switch, many"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"使用“无线调试”"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"使用“显卡驱动程序偏好设置”"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"启用护眼模式"</string>
@@ -5011,8 +4990,12 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"会关闭飞行模式，以使用超宽带 (UWB)"</string>
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"UWB 在当前位置不可用"</string>
     <string name="thread_network_settings_title" msgid="4212301030523859220">"Thread"</string>
-    <string name="thread_network_settings_summary" msgid="8065599651021748339">"使用 Thread 连接到兼容的设备，享受顺畅的智能家居体验"</string>
-    <string name="thread_network_settings_summary_airplane_mode" msgid="7207252895832446979">"关闭飞行模式，以使用 Thread"</string>
+    <!-- no translation found for thread_network_settings_main_switch_title (3859168481929323474) -->
+    <skip />
+    <!-- no translation found for thread_network_settings_footer_title (7385600318850220927) -->
+    <skip />
+    <!-- no translation found for thread_network_settings_learn_more (8278498005848565050) -->
+    <skip />
     <string name="camera_toggle_title" msgid="8952668677727244992">"摄像头使用权限"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"麦克风使用权限"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"会影响应用和服务"</string>

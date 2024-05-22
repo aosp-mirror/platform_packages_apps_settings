@@ -63,14 +63,18 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
 
     public RoamingPreferenceController(Context context, String key, Lifecycle lifecycle,
             LifecycleOwner lifecycleOwner, int subId) {
-        super(context, key);
+        this(context, key);
         mSubId = subId;
-        mCarrierConfigManager = context.getSystemService(CarrierConfigManager.class);
-        mMobileNetworkRepository = MobileNetworkRepository.getInstance(context);
         mLifecycleOwner = lifecycleOwner;
         if (lifecycle != null) {
             lifecycle.addObserver(this);
         }
+    }
+
+    public RoamingPreferenceController(Context context, String key) {
+        super(context, key);
+        mCarrierConfigManager = context.getSystemService(CarrierConfigManager.class);
+        mMobileNetworkRepository = MobileNetworkRepository.getInstance(context);
     }
 
     @Override

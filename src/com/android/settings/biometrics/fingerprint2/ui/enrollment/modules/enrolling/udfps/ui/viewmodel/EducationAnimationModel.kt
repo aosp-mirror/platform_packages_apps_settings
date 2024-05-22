@@ -16,9 +16,11 @@
 
 package com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.udfps.ui.viewmodel
 
+import com.android.settings.biometrics.fingerprint2.data.model.EnrollStageModel
+
 /** Represents the lottie for UDFPS enrollment */
 data class EducationAnimationModel(
   val isSuw: Boolean,
   val isAccessibility: Boolean,
-  val stageViewModel: StageViewModel,
+  val enrollStageModel: EnrollStageModel,
 )

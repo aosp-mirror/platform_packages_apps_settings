@@ -53,4 +53,25 @@ public interface BatterySettingsFeatureProvider {
     @Nullable
     CharSequence getWirelessChargingRemainingLabel(
             @NonNull Context context, long remainingTimeMs, long currentTimeMs);
+
+    /** Return true if it's in the charging optimization mode. */
+    boolean isChargingOptimizationMode(@NonNull Context context);
+
+    /** Return a charging remaining time label for charging optimization mode. */
+    @Nullable
+    CharSequence getChargingOptimizationRemainingLabel(
+            @NonNull Context context,
+            int batteryLevel,
+            int pluggedStatus,
+            long chargeRemainingTimeMs,
+            long currentTimeMs);
+
+    /** Return a charge label for charging optimization mode. */
+    @Nullable
+    CharSequence getChargingOptimizationChargeLabel(
+            @NonNull Context context,
+            int batteryLevel,
+            String batteryPercentageString,
+            long chargeRemainingTimeMs,
+            long currentTimeMs);
 }

@@ -33,8 +33,8 @@ import android.os.Handler
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.biometrics.GatekeeperPasswordProvider
 import com.android.settings.biometrics.fingerprint2.data.repository.FingerprintSensorRepository
+import com.android.settings.biometrics.fingerprint2.domain.interactor.FingerprintEnrollInteractorImpl
 import com.android.settings.biometrics.fingerprint2.domain.interactor.FingerprintManagerInteractorImpl
-import com.android.settings.biometrics.fingerprint2.domain.interactor.PressToAuthInteractor
 import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.FingerprintManagerInteractor
 import com.android.settings.biometrics.fingerprint2.lib.model.Default
 import com.android.settings.biometrics.fingerprint2.lib.model.EnrollReason
@@ -82,10 +82,6 @@ class FingerprintManagerInteractorTest {
   @Mock private lateinit var gateKeeperPasswordProvider: GatekeeperPasswordProvider
 
   private var testScope = TestScope(backgroundDispatcher)
-  private var pressToAuthInteractor =
-    object : PressToAuthInteractor {
-      override val isEnabled = flowOf(false)
-    }
 
   @Before
   fun setup() {
@@ -113,9 +109,12 @@ class FingerprintManagerInteractorTest {
         fingerprintManager,
         fingerprintSensorRepository,
         gateKeeperPasswordProvider,
-        pressToAuthInteractor,
-        Default,
-        Intent(),
+        FingerprintEnrollInteractorImpl(
+          context,
+          FingerprintEnrollOptions.Builder().build(),
+          fingerprintManager,
+          Default,
+        ),
       )
   }
 

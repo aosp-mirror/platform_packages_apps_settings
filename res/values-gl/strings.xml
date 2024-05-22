@@ -286,7 +286,8 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"As aplicacións con permiso para buscar dispositivos próximos poden determinar a posición relativa dos dispositivos conectados."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"O acceso á localización está desactivado para as aplicacións e os dispositivos. Con todo, é posible que a localización do dispositivo se envíe aos servizos de emerxencias cando chames a un número de emerxencias ou lle envíes unha mensaxe."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Máis información sobre a configuración de localización"</string>
-    <string name="location_settings_tooltip_text_for_chrome" msgid="3574930966097093550">"Cambio acceso localización: Configuración &gt; Seguranza e privacidade &gt; Controis priv."</string>
+    <!-- no translation found for location_settings_tooltip_text_for_chrome (5781821709250544575) -->
+    <skip />
     <string name="account_settings_title" msgid="9138880127246241885">"Contas"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Seguranza"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Encriptación e credenciais"</string>
@@ -566,7 +567,8 @@
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"Cada vez que se bloquee o dispositivo"</string>
     <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"Despois de 5 minutos de inactividade"</string>
     <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"Só despois do reinicio do dispositivo"</string>
-    <string name="private_space_hide_page_title" msgid="4351404195904146088">"Ocultar espazo privado cando estea bloqueado"</string>
+    <string name="private_space_hide_page_title" msgid="3364639176511877414">"Ocultar o espazo privado"</string>
+    <string name="private_space_hide_when_locked" msgid="6219472348124151797">"Ocultar espazo privado cando estea bloqueado"</string>
     <string name="private_space_hide_page_summary" msgid="6247773353685839242">"Co fin de evitar que outras persoas saiban que tes un espazo privado no dispositivo, podes ocultalo para que non se mostre na lista de aplicacións"</string>
     <string name="private_space_access_header" msgid="1077082416567150819">"Acceso ao espazo privado cando estea oculto"</string>
     <string name="private_space_search_description" msgid="1538155187658429618">"Pon \"espazo privado\" na barra de busca"</string>
@@ -867,8 +869,8 @@
     <string name="wifi_ask_disable" msgid="1663208096020309639">"<xliff:g id="REQUESTER">%s</xliff:g> quere desactivar a wifi"</string>
     <string name="art_verifier_for_debuggable_title" msgid="1926445785190030479">"Verificar o bytecode das aplicacións depurables"</string>
     <string name="art_verifier_for_debuggable_summary" msgid="4802875841862652879">"Permite que ART verifique o bytecode das aplicacións que se poidan depurar"</string>
-    <string name="show_refresh_rate" msgid="5742688821872354973">"Mostrar taxa de actualización"</string>
-    <string name="show_refresh_rate_summary" msgid="3558118122374609663">"Mostra a taxa de actualización actual da pantalla"</string>
+    <string name="show_refresh_rate" msgid="5742688821872354973">"Mostrar frecuencia de actualización"</string>
+    <string name="show_refresh_rate_summary" msgid="3558118122374609663">"Mostra a frecuencia de actualización actual da pantalla"</string>
     <string name="show_hdr_sdr_ratio" msgid="4188007289024955585">"Mostrar proporción HDR/SDR"</string>
     <string name="show_hdr_sdr_ratio_summary" msgid="986292785096013733">"Mostra a proporción HDR/SDR actual"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
@@ -2016,7 +2018,6 @@
     <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"Contraste de cor"</string>
     <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"Se sobes o contraste, destacarán máis os textos, os botóns e as iconas. Elixe o que mellor che cadre."</string>
     <string name="color_contrast_note" msgid="7592686603372566198">"É posible que algunhas aplicacións non admitan todas as opcións de configuración de contraste de cor e texto"</string>
-    <string name="accessibility_color_contrast_summary" msgid="7563237683500106632">"Axusta como se ven as cores e o texto sobre a cor de fondo da túa pantalla"</string>
     <string name="color_contrast_preview" msgid="6791430227535363883">"Vista previa"</string>
     <string name="color_contrast_preview_sender_name" msgid="8641943417589238147">"Helen, Adam"</string>
     <string name="color_contrast_preview_email_send_date" msgid="2108702726171600080">"Hai 2 días"</string>
@@ -2571,8 +2572,7 @@
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Aumenta a duración da batería"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Desactivar cando a batería estea cargada"</string>
     <string name="battery_saver_sticky_title_percentage" msgid="1178162022087559148">"Desactivar cando chegue ao <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <!-- no translation found for battery_saver_sticky_description_new (8543277078136947874) -->
-    <skip />
+    <string name="battery_saver_sticky_description_new" msgid="8543277078136947874">"Aforro de batería desactivarase cando a carga da batería sexa superior ao <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Activar"</string>
@@ -2963,8 +2963,7 @@
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{{orgName} instalou para o teu perfil de traballo unha autoridade de certificación que pode permitirlle supervisar a actividade da rede do traballo, (por exemplo, os correos electrónicos, as aplicacións e os sitios web seguros).\n\nPara obter máis información sobre este certificado, ponte en contacto co teu administrador.}other{{orgName} instalou para o teu perfil de traballo autoridades de certificación que poden permitirlle supervisar a actividade da rede do traballo, (por exemplo, os correos electrónicos, as aplicacións e os sitios web seguros).\n\nPara obter máis información sobre estes certificados, ponte en contacto co teu administrador.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"Un terceiro pode supervisar a túa actividade na rede, incluídos os correos electrónicos, as aplicacións e os sitios web seguros.\n\nUnha credencial de confianza instalada no teu dispositivo fai que isto sexa posible."</string>
     <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{Comprobar certificado}other{Comprobar certificados}}"</string>
-    <!-- no translation found for user_settings_title (9208831545558787202) -->
-    <skip />
+    <string name="user_settings_title" msgid="9208831545558787202">"Usuarios"</string>
     <string name="user_list_title" msgid="1387379079186123404">"Usuarios e perfís"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"Engadir usuario ou perfil"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"Perfil restrinxido"</string>
@@ -3302,7 +3301,7 @@
     <string name="spatial_audio_text" msgid="8201387855375146000">"O audio dos contidos multimedia compatibles ofréceche unha experiencia máis envolvente"</string>
     <string name="spatial_summary_off" msgid="8272678804629774378">"Opción desactivada"</string>
     <string name="spatial_summary_on_one" msgid="6239933399496282994">"Opción activada/<xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
-    <string name="spatial_summary_on_two" msgid="4526919818832483883">"Opción activada (<xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> e <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>)"</string>
+    <string name="spatial_summary_on_two" msgid="4526919818832483883">"Opción activada / <xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> e <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
     <string name="spatial_audio_footer_title" msgid="8775010547623606088">"Tamén podes activar o audio espacial para dispositivos Bluetooth."</string>
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Configuración de dispositivos conectados"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Ningunha planificación}=1{Definiuse 1 planificación}other{Definíronse # planificacións}}"</string>
@@ -4804,46 +4803,27 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"Información sobre a política do teu traballo"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"A configuración xestiónaa o teu equipo de administración de TI"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
-    <!-- no translation found for enable_16k_pages (8001470927566110689) -->
-    <skip />
-    <!-- no translation found for enable_16k_pages_summary (1964363364670306912) -->
-    <skip />
-    <!-- no translation found for confirm_enable_16k_pages_title (1286925577014793351) -->
-    <skip />
-    <!-- no translation found for confirm_enable_16k_pages_text (570198382662424714) -->
-    <skip />
-    <!-- no translation found for confirm_enable_4k_pages_title (3210360137887034659) -->
-    <skip />
-    <!-- no translation found for confirm_enable_4k_pages_text (155070605667160083) -->
-    <skip />
+    <string name="enable_16k_pages" msgid="8001470927566110689">"Arrancar con páxinas de 16 kB"</string>
+    <string name="enable_16k_pages_summary" msgid="1964363364670306912">"Arrancar co núcleo compatible con páxinas de 16 kB"</string>
+    <string name="confirm_enable_16k_pages_title" msgid="1286925577014793351">"Cambiar do modo de 4 kB ao modo de 16 kB"</string>
+    <string name="confirm_enable_16k_pages_text" msgid="570198382662424714">"Estás no modo independente de páxina executando un núcleo de 4 kB e vas cambiar ao modo de 16 kB. A integridade do software non se pode garantir neste modo, e os datos almacenados no teléfono mentres está desbloqueado o cargador de arranque poden correr perigo. Esta acción reiniciará o dispositivo. Desactivaranse algunhas funcións nestes modos, polo que pode que non funcionen algunhas aplicacións. Para facer que o dispositivo retorne ao modo de produción, terás que volver ao modo de 4 kB e bloquear o cargador de arranque, o que restablecerá a configuración de fábrica do dispositivo. Despois de que o dispositivo se inicie correctamente en Android, desactiva o desbloqueo do fabricante do equipo orixinal en Opcións de programador."</string>
+    <string name="confirm_enable_4k_pages_title" msgid="3210360137887034659">"Cambiar do modo de 16 kB ao modo de 4 kB"</string>
+    <string name="confirm_enable_4k_pages_text" msgid="155070605667160083">"Estás no modo independente de páxina executando un núcleo de 16 kB e vas cambiar ao modo de 4 kB. A integridade do software non se pode garantir neste modo, e os datos almacenados no teléfono mentres está desbloqueado o cargador de arranque poden correr perigo. Esta acción reiniciará o dispositivo. Desactivaranse algunhas funcións nestes modos, polo que pode que non funcionen algunhas aplicacións. Para facer que o dispositivo retorne ao modo de produción, terás que bloquear o cargador de arranque, o que restablecerá a configuración de fábrica do dispositivo. Despois de que o dispositivo se inicie correctamente en Android, desactiva o desbloqueo do fabricante do equipo orixinal en Opcións de programador."</string>
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"Produciuse un erro a actualizar o núcleo compatible con páxinas de 16 kB."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Aplicando cambio"</string>
-    <!-- no translation found for confirm_format_ext4_title (6696191800594435577) -->
-    <skip />
-    <!-- no translation found for confirm_format_ext4_text (7940372488624630214) -->
-    <skip />
-    <!-- no translation found for format_ext4_failure_toast (8059453995800471549) -->
-    <skip />
-    <!-- no translation found for confirm_oem_unlock_for_16k_title (5374451262432025419) -->
-    <skip />
-    <!-- no translation found for confirm_oem_unlock_for_16k_text (3583604865119937957) -->
-    <skip />
-    <!-- no translation found for page_agnostic_4k_pages_title (1184703958249093215) -->
-    <skip />
-    <!-- no translation found for page_agnostic_4k_pages_text_short (2894243902906666242) -->
-    <skip />
-    <!-- no translation found for page_agnostic_4k_pages_text (8284806650260868833) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_title (7762533464569818498) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text_short (269039281591806585) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text (6208765386837706582) -->
-    <skip />
-    <!-- no translation found for page_agnostic_notification_channel_name (1658444283036376361) -->
-    <skip />
-    <!-- no translation found for page_agnostic_notification_action (2309805437430150456) -->
-    <skip />
+    <string name="confirm_format_ext4_title" msgid="6696191800594435577">"Queres cambiar o formato do dispositivo a ext4? (opción obrigatoria para o modo de 16 kB)"</string>
+    <string name="confirm_format_ext4_text" msgid="7940372488624630214">"Esta partición de datos do dispositivo debe converterse a ext4 antes de utilizar a función Opcións de programador de 16 kB. A integridade do software non se pode garantir neste modo, e os datos almacenados no teléfono mentres está desbloqueado o cargador de arranque poden correr perigo. Para activar a opción de 16 kB será necesario reiniciar o dispositivo unha vez máis. Unha vez que esteas neste modo, poderás alternar entre o modo de 4 kB e 16 kB só cun reinicio. Desactivaranse algunhas funcións nestes modos, polo que pode que non funcionen algunhas aplicacións. Para facer que o dispositivo retorne ao modo de produción, terás que volver ao modo de 4 kB e bloquear o cargador de arranque, o que restablecerá a configuración de fábrica do dispositivo. Despois de que o dispositivo se inicie correctamente en Android, desactiva o desbloqueo do fabricante do equipo orixinal en Opcións de programador. Tras a confirmación, borraranse os datos do dispositivo e cambiarase o sistema de ficheiros a ext4. Unha vez completada esta operación, volve activar o modo de 16 kB."</string>
+    <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Produciuse un erro ao borrar a partición de datos e cambiar o formato a ext4."</string>
+    <string name="confirm_oem_unlock_for_16k_title" msgid="5374451262432025419">"É necesario desbloquear o cargador de arranque para usar o modo de 16 kB"</string>
+    <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"Cómpre desbloquear o cargador de arranque deste dispositivo antes de utilizar a función Opcións de programador de 16 kB. A integridade do software non se pode garantir neste modo, e os datos almacenados no teléfono mentres está desbloqueado o cargador de arranque poden correr perigo. Borraranse todos os datos e opcións de configuración do usuario cando se active o modo de 16 kB. Despois de desbloquear o cargador de arranque, haberá que reiniciar o dispositivo dúas veces para activar a opción de 16 kB. Unha vez que esteas neste modo, poderás alternar entre o modo de 4 kB e 16 kB só cun reinicio. Desactivaranse algunhas funcións nestes modos, polo que pode que non funcionen algunhas aplicacións. Para facer que o dispositivo retorne ao modo de produción, terás que volver ao modo de 4 kB e bloquear o cargador de arranque ou o fabricante do equipo orixinal, o que restablecerá a configuración de fábrica do dispositivo. Desbloquea o cargador de arranque e téntao de novo. Podes consultar as instrucións deste proceso en &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
+    <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"Estase usando o modo independente de páxina de 4 kB"</string>
+    <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"Estás usando o modo independente de páxina de 4 kB. A integridade do software non se pode garantir neste modo, e os datos almacenados no teléfono mentres está desbloqueado o cargador de arranque poden correr perigo. Desactivaranse algunhas funcións nestes modos, polo que pode que non funcionen algunhas aplicacións. Para facer que retorne ao modo de produción, terás que bloquear o cargador de arranque do dispositivo. Toca para obter máis información."</string>
+    <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"Estás usando o modo independente de páxina de 4 kB. A integridade do software non se pode garantir neste modo, e os datos almacenados no teléfono mentres está desbloqueado o cargador de arranque poden correr perigo. Desactivaranse algunhas funcións nestes modos, polo que pode que non funcionen algunhas aplicacións. Para facer que retorne ao modo de produción, terás que bloquear o cargador de arranque do dispositivo. Esta acción restablecerá de novo a configuración de fábrica do dispositivo e restaurará a súa configuración de produción. Despois de que o dispositivo se inicie correctamente en Android, desactiva o desbloqueo do fabricante do equipo orixinal en Opcións de programador. Se o dispositivo non arranca en Android ou é inestable, volve instalar as últimas imaxes de fábrica desde &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; or use &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; e selecciona as opcións de borrar datos do dispositivo, bloquear o cargador de arranque e forzar a instalación de todas as particións."</string>
+    <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"Estase usando o modo independente de páxina de 16 kB"</string>
+    <string name="page_agnostic_16k_pages_text_short" msgid="269039281591806585">"Estás na opción de 16 kB do modo independente de páxina. A integridade do software non se pode garantir neste modo, e os datos almacenados no teléfono mentres está desbloqueado o cargador de arranque poden correr perigo. Desactivaranse algunhas funcións nestes modos, polo que pode que non funcionen algunhas aplicacións. Para facer que retorne ao modo de produción, terás que volver ao modo de 4 kB e bloquear o cargador de arranque do dispositivo. Toca para obter máis información."</string>
+    <string name="page_agnostic_16k_pages_text" msgid="6208765386837706582">"Estás na opción de 16 kB do modo independente de páxina. A integridade do software non se pode garantir neste modo, e os datos almacenados no teléfono mentres está desbloqueado o cargador de arranque poden correr perigo. Desactivaranse algunhas funcións nestes modos, polo que pode que non funcionen algunhas aplicacións. Para facer que retorne ao modo de produción, terás que volver ao modo de 4 kB e bloquear o cargador de arranque do dispositivo. Esta acción restablecerá de novo a configuración de fábrica do dispositivo e restaurará a súa configuración de produción. Despois de que o dispositivo se inicie correctamente en Android, desactiva o desbloqueo do fabricante do equipo orixinal en Opcións de programador. Se o dispositivo non arranca en Android ou é inestable, volve instalar as últimas imaxes de fábrica desde &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; or use &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; e selecciona as opcións de borrar datos do dispositivo, bloquear o cargador de arranque e forzar a instalación de todas as particións."</string>
+    <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"Modo independente de páxina de 16 kB"</string>
+    <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Ler máis"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Controlador do Informe de erros"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Determina que aplicación xestiona o atallo aos informes de erros no teu dispositivo."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Persoal"</string>
@@ -4975,8 +4955,7 @@
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Usar servizo de impresión"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Permitir varios usuarios"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"permitir, varios, usuario, deixar, moitos"</string>
-    <!-- no translation found for multiple_users_title_keywords (2395593167746225172) -->
-    <skip />
+    <string name="multiple_users_title_keywords" msgid="2395593167746225172">"múltiples, usuarios, perfís, persoas, contas, cambiar, moitos"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Usar depuración sen fíos"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Usar preferencias do controlador de gráficos"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"Usar Luz nocturna"</string>
@@ -5011,8 +4990,12 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Desactiva o modo avión para utilizar a banda ultralarga"</string>
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"A banda ultralarga non está dispoñible na localización actual"</string>
     <string name="thread_network_settings_title" msgid="4212301030523859220">"Thread"</string>
-    <string name="thread_network_settings_summary" msgid="8065599651021748339">"Conéctate a dispositivos compatibles por medio de Thread e desfruta dunha experiencia domótica perfecta"</string>
-    <string name="thread_network_settings_summary_airplane_mode" msgid="7207252895832446979">"Desactiva o modo avión para utilizar Thread"</string>
+    <!-- no translation found for thread_network_settings_main_switch_title (3859168481929323474) -->
+    <skip />
+    <!-- no translation found for thread_network_settings_footer_title (7385600318850220927) -->
+    <skip />
+    <!-- no translation found for thread_network_settings_learn_more (8278498005848565050) -->
+    <skip />
     <string name="camera_toggle_title" msgid="8952668677727244992">"Acceso á cámara"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Acceso ao micrófono"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"Para aplicacións e servizos"</string>

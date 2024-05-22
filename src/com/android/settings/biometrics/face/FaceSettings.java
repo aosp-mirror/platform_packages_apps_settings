@@ -36,6 +36,7 @@ import android.util.Log;
 import android.widget.Button;
 
 import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -46,6 +47,7 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.LayoutPreference;
@@ -68,6 +70,8 @@ public class FaceSettings extends DashboardFragment {
             "security_settings_face_delete_faces_container";
     private static final String PREF_KEY_ENROLL_FACE_UNLOCK =
             "security_settings_face_enroll_faces_container";
+    public static final String SECURITY_SETTINGS_FACE_MANAGE_CATEGORY =
+            "security_settings_face_manage_category";
 
     private UserManager mUserManager;
     private FaceManager mFaceManager;
@@ -175,6 +179,8 @@ public class FaceSettings extends DashboardFragment {
                 : use(FaceSettingsLockscreenBypassPreferenceController.class);
         mLockscreenController.setUserId(mUserId);
 
+        final PreferenceCategory managePref =
+                findPreference(SECURITY_SETTINGS_FACE_MANAGE_CATEGORY);
         Preference keyguardPref = findPreference(FaceSettingsKeyguardPreferenceController.KEY);
         Preference appPref = findPreference(FaceSettingsAppPreferenceController.KEY);
         Preference attentionPref = findPreference(FaceSettingsAttentionPreferenceController.KEY);
@@ -183,6 +189,14 @@ public class FaceSettings extends DashboardFragment {
                 findPreference(mLockscreenController.getPreferenceKey());
         mTogglePreferences = new ArrayList<>(
                 Arrays.asList(keyguardPref, appPref, attentionPref, confirmPref, bypassPref));
+
+        if (RestrictedLockUtilsInternal.checkIfKeyguardFeaturesDisabled(
+                getContext(), DevicePolicyManager.KEYGUARD_DISABLE_FACE, mUserId) != null) {
+            managePref.setTitle(getString(
+                    com.android.settingslib.widget.restricted.R.string.disabled_by_admin));
+        } else {
+            managePref.setTitle(R.string.security_settings_face_settings_preferences_category);
+        }
 
         mRemoveButton = findPreference(FaceSettingsRemoveButtonPreferenceController.KEY);
         mEnrollButton = findPreference(FaceSettingsEnrollButtonPreferenceController.KEY);

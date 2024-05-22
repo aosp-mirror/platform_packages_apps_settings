@@ -18,12 +18,15 @@ package com.android.settings.wifi;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.wifi.WifiManager;
+import android.util.AndroidRuntimeException;
 
 import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal;
 import com.android.settings.widget.SwitchWidgetController;
@@ -64,5 +67,18 @@ public class WifiEnablerTest {
         when(mWifiManager.getWifiApState()).thenReturn(WifiManager.WIFI_AP_STATE_ENABLED);
 
         assertThat(mEnabler.onSwitchToggled(true)).isTrue();
+    }
+
+    @Test
+    public void onSwitchToggled_satelliteOn_startWarningActivity() {
+        mEnabler.mIsSatelliteOn.set(true);
+
+        try {
+            mEnabler.onSwitchToggled(true);
+        } catch (AndroidRuntimeException e) {
+            // Catch exception of starting activity .
+        }
+
+        verify(mContext).startActivity(any());
     }
 }

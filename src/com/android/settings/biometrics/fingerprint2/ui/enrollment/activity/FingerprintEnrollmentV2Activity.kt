@@ -19,9 +19,12 @@ package com.android.settings.biometrics.fingerprint2.ui.enrollment.activity
 import android.app.Activity
 import android.content.Intent
 import android.content.res.Configuration
+import android.hardware.fingerprint.FingerprintEnrollOptions
 import android.hardware.fingerprint.FingerprintManager
 import android.os.Bundle
+import android.os.Vibrator
 import android.util.Log
+import android.util.TypedValue
 import android.view.accessibility.AccessibilityManager
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
@@ -35,21 +38,37 @@ import com.android.settings.Utils.SETTINGS_PACKAGE_NAME
 import com.android.settings.biometrics.BiometricEnrollBase
 import com.android.settings.biometrics.BiometricEnrollBase.CONFIRM_REQUEST
 import com.android.settings.biometrics.BiometricEnrollBase.RESULT_FINISHED
+import com.android.settings.biometrics.BiometricUtils
 import com.android.settings.biometrics.GatekeeperPasswordProvider
+import com.android.settings.biometrics.fingerprint2.data.repository.DebuggingRepositoryImpl
 import com.android.settings.biometrics.fingerprint2.data.repository.FingerprintSensorRepositoryImpl
+import com.android.settings.biometrics.fingerprint2.data.repository.UdfpsEnrollDebugRepositoryImpl
 import com.android.settings.biometrics.fingerprint2.domain.interactor.AccessibilityInteractorImpl
+import com.android.settings.biometrics.fingerprint2.domain.interactor.DebuggingInteractorImpl
+import com.android.settings.biometrics.fingerprint2.domain.interactor.DisplayDensityInteractor
+import com.android.settings.biometrics.fingerprint2.domain.interactor.DisplayDensityInteractorImpl
+import com.android.settings.biometrics.fingerprint2.domain.interactor.EnrollStageInteractor
+import com.android.settings.biometrics.fingerprint2.domain.interactor.EnrollStageInteractorImpl
+import com.android.settings.biometrics.fingerprint2.domain.interactor.FingerprintEnrollInteractorImpl
 import com.android.settings.biometrics.fingerprint2.domain.interactor.FingerprintManagerInteractorImpl
 import com.android.settings.biometrics.fingerprint2.domain.interactor.FoldStateInteractor
 import com.android.settings.biometrics.fingerprint2.domain.interactor.FoldStateInteractorImpl
 import com.android.settings.biometrics.fingerprint2.domain.interactor.OrientationInteractor
 import com.android.settings.biometrics.fingerprint2.domain.interactor.OrientationInteractorImpl
-import com.android.settings.biometrics.fingerprint2.domain.interactor.PressToAuthInteractorImpl
+import com.android.settings.biometrics.fingerprint2.domain.interactor.UdfpsEnrollInteractor
+import com.android.settings.biometrics.fingerprint2.domain.interactor.UdfpsEnrollInteractorImpl
+import com.android.settings.biometrics.fingerprint2.domain.interactor.VibrationInteractor
+import com.android.settings.biometrics.fingerprint2.domain.interactor.VibrationInteractorImpl
 import com.android.settings.biometrics.fingerprint2.lib.model.Default
+import com.android.settings.biometrics.fingerprint2.lib.model.Settings
 import com.android.settings.biometrics.fingerprint2.lib.model.SetupWizard
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.fragment.FingerprintEnrollConfirmationV2Fragment
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.fragment.FingerprintEnrollEnrollingV2Fragment
-import com.android.settings.biometrics.fingerprint2.ui.enrollment.fragment.FingerprintEnrollFindSensorV2Fragment
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.fragment.FingerprintEnrollIntroV2Fragment
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.fragment.education.RfpsEnrollFindSensorFragment
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.fragment.education.SfpsEnrollFindSensorFragment
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.fragment.education.UdfpsEnrollFindSensorFragment
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.common.util.toFingerprintEnrollOptions
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.rfps.ui.fragment.RFPSEnrollFragment
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.rfps.ui.viewmodel.RFPSViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.udfps.ui.fragment.UdfpsEnrollFragment
@@ -73,10 +92,12 @@ import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.Fing
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintNavigationViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintScrollViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.GatekeeperInfo
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.Transition
 import com.android.settings.flags.Flags
 import com.android.settings.password.ChooseLockGeneric
 import com.android.settings.password.ChooseLockSettingsHelper
 import com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE
+import com.android.settingslib.display.DisplayDensityUtils
 import com.android.systemui.biometrics.shared.model.FingerprintSensorType
 import com.google.android.setupcompat.util.WizardManagerHelper
 import com.google.android.setupdesign.util.ThemeHelper
@@ -95,14 +116,18 @@ class FingerprintEnrollmentV2Activity : FragmentActivity() {
   private lateinit var navigationViewModel: FingerprintNavigationViewModel
   private lateinit var gatekeeperViewModel: FingerprintGatekeeperViewModel
   private lateinit var fingerprintEnrollViewModel: FingerprintEnrollViewModel
+  private lateinit var vibrationInteractor: VibrationInteractor
   private lateinit var foldStateInteractor: FoldStateInteractor
   private lateinit var orientationInteractor: OrientationInteractor
+  private lateinit var displayDensityInteractor: DisplayDensityInteractor
+  private lateinit var udfpsEnrollInteractor: UdfpsEnrollInteractor
   private lateinit var fingerprintScrollViewModel: FingerprintScrollViewModel
   private lateinit var backgroundViewModel: BackgroundViewModel
   private lateinit var fingerprintFlowViewModel: FingerprintFlowViewModel
   private lateinit var fingerprintEnrollConfirmationViewModel:
     FingerprintEnrollConfirmationViewModel
   private lateinit var udfpsViewModel: UdfpsViewModel
+  private lateinit var enrollStageInteractor: EnrollStageInteractor
   private val coroutineDispatcher = Dispatchers.Default
 
   /** Result listener for ChooseLock activity flow. */
@@ -135,6 +160,12 @@ class FingerprintEnrollmentV2Activity : FragmentActivity() {
   override fun onConfigurationChanged(newConfig: Configuration) {
     super.onConfigurationChanged(newConfig)
     foldStateInteractor.onConfigurationChange(newConfig)
+    val displayDensityUtils = DisplayDensityUtils(applicationContext)
+    val currIndex = displayDensityUtils.currentIndexForDefaultDisplay
+    displayDensityInteractor.updateFontScale(resources.configuration.fontScale)
+    displayDensityInteractor.updateDisplayDensity(
+      displayDensityUtils.defaultDisplayDensityValues[currIndex]
+    )
   }
 
   private fun onConfirmDevice(resultCode: Int, data: Intent?) {
@@ -193,10 +224,52 @@ class FingerprintEnrollmentV2Activity : FragmentActivity() {
     fingerprintFlowViewModel =
       ViewModelProvider(this, FingerprintFlowViewModel.FingerprintFlowViewModelFactory(enrollType))[
         FingerprintFlowViewModel::class.java]
+    val displayDensityUtils = DisplayDensityUtils(context)
+    val currIndex = displayDensityUtils.currentIndexForDefaultDisplay
+    val defaultDisplayDensity = displayDensityUtils.defaultDensityForDefaultDisplay
+    displayDensityInteractor =
+      DisplayDensityInteractorImpl(
+        resources.configuration.fontScale,
+        displayDensityUtils.defaultDisplayDensityValues[currIndex],
+        defaultDisplayDensity,
+        lifecycleScope,
+      )
+
+    val debuggingRepo = DebuggingRepositoryImpl()
+    val debuggingInteractor = DebuggingInteractorImpl(debuggingRepo)
+    val udfpsEnrollDebugRepositoryImpl = UdfpsEnrollDebugRepositoryImpl()
 
     val fingerprintSensorRepo =
-      FingerprintSensorRepositoryImpl(fingerprintManager, backgroundDispatcher, lifecycleScope)
-    val pressToAuthInteractor = PressToAuthInteractorImpl(context, backgroundDispatcher)
+      if (debuggingRepo.isUdfpsEnrollmentDebuggingEnabled()) udfpsEnrollDebugRepositoryImpl
+      else FingerprintSensorRepositoryImpl(fingerprintManager, backgroundDispatcher, lifecycleScope)
+
+    if (intent.getIntExtra(BiometricUtils.EXTRA_ENROLL_REASON, -1) === -1) {
+      val isSuw: Boolean = WizardManagerHelper.isAnySetupWizard(intent)
+      intent.putExtra(
+        BiometricUtils.EXTRA_ENROLL_REASON,
+        if (isSuw) FingerprintEnrollOptions.ENROLL_REASON_SUW
+        else FingerprintEnrollOptions.ENROLL_REASON_SETTINGS,
+      )
+    }
+
+    val fingerprintEnrollStateRepository =
+      if (debuggingRepo.isUdfpsEnrollmentDebuggingEnabled()) udfpsEnrollDebugRepositoryImpl
+      else
+        FingerprintEnrollInteractorImpl(
+          context.applicationContext,
+          intent.toFingerprintEnrollOptions(),
+          fingerprintManager,
+          Settings,
+        )
+    val accessibilityInteractor =
+      AccessibilityInteractorImpl(
+        getSystemService(AccessibilityManager::class.java)!!,
+        lifecycleScope,
+      )
+
+    val pixelsPerMillimeter =
+      TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_MM, 1f, context.resources.displayMetrics)
+    udfpsEnrollInteractor = UdfpsEnrollInteractorImpl(pixelsPerMillimeter, accessibilityInteractor)
 
     val fingerprintManagerInteractor =
       FingerprintManagerInteractorImpl(
@@ -205,22 +278,14 @@ class FingerprintEnrollmentV2Activity : FragmentActivity() {
         fingerprintManager,
         fingerprintSensorRepo,
         GatekeeperPasswordProvider(LockPatternUtils(context)),
-        pressToAuthInteractor,
-        enrollType,
-        getIntent(),
+        fingerprintEnrollStateRepository,
       )
 
-    var challenge: Long? = intent.getExtra(BiometricEnrollBase.EXTRA_KEY_CHALLENGE) as Long?
+    var challenge = intent.getExtra(BiometricEnrollBase.EXTRA_KEY_CHALLENGE) as Long?
     val token = intent.getByteArrayExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN)
     val gatekeeperInfo = FingerprintGatekeeperViewModel.toGateKeeperInfo(challenge, token)
 
     val hasConfirmedDeviceCredential = gatekeeperInfo is GatekeeperInfo.GatekeeperPasswordInfo
-
-    val accessibilityInteractor =
-      AccessibilityInteractorImpl(
-        getSystemService(AccessibilityManager::class.java)!!,
-        lifecycleScope,
-      )
 
     navigationViewModel =
       ViewModelProvider(
@@ -256,6 +321,8 @@ class FingerprintEnrollmentV2Activity : FragmentActivity() {
     foldStateInteractor.onConfigurationChange(resources.configuration)
 
     orientationInteractor = OrientationInteractorImpl(context, lifecycleScope)
+    vibrationInteractor =
+      VibrationInteractorImpl(context.getSystemService(Vibrator::class.java)!!, context)
 
     // Initialize FingerprintViewModel
     fingerprintEnrollViewModel =
@@ -309,10 +376,24 @@ class FingerprintEnrollmentV2Activity : FragmentActivity() {
       ),
     )[RFPSViewModel::class.java]
 
+    enrollStageInteractor = EnrollStageInteractorImpl()
+
     udfpsViewModel =
       ViewModelProvider(
         this,
-        UdfpsViewModel.UdfpsEnrollmentFactory(),
+        UdfpsViewModel.UdfpsEnrollmentFactory(
+          vibrationInteractor,
+          displayDensityInteractor,
+          navigationViewModel,
+          debuggingInteractor,
+          fingerprintEnrollEnrollingViewModel,
+          udfpsEnrollDebugRepositoryImpl,
+          enrollStageInteractor,
+          orientationInteractor,
+          backgroundViewModel,
+          fingerprintSensorRepo,
+          udfpsEnrollInteractor,
+        ),
       )[UdfpsViewModel::class.java]
 
     fingerprintEnrollConfirmationViewModel =
@@ -348,7 +429,12 @@ class FingerprintEnrollmentV2Activity : FragmentActivity() {
             when (step) {
               Confirmation -> FingerprintEnrollConfirmationV2Fragment()
               is Education -> {
-                FingerprintEnrollFindSensorV2Fragment(step.sensor.sensorType)
+                when (step.sensor.sensorType) {
+                  FingerprintSensorType.REAR -> RfpsEnrollFindSensorFragment()
+                  FingerprintSensorType.UDFPS_OPTICAL,
+                  FingerprintSensorType.UDFPS_ULTRASONIC -> UdfpsEnrollFindSensorFragment()
+                  else -> SfpsEnrollFindSensorFragment()
+                }
               }
               is Enrollment -> {
                 when (step.sensor.sensorType) {
@@ -358,19 +444,19 @@ class FingerprintEnrollmentV2Activity : FragmentActivity() {
                   else -> FingerprintEnrollEnrollingV2Fragment()
                 }
               }
-              Introduction -> FingerprintEnrollIntroV2Fragment()
+              is Introduction -> FingerprintEnrollIntroV2Fragment()
               else -> null
             }
 
           if (theClass != null) {
-            supportFragmentManager.fragments.onEach { fragment ->
-              supportFragmentManager.beginTransaction().remove(fragment).commit()
-            }
-
             supportFragmentManager
               .beginTransaction()
+              .setCustomAnimations(
+                step.enterTransition.toAnimation(),
+                step.exitTransition.toAnimation(),
+              )
               .setReorderingAllowed(true)
-              .add(R.id.fragment_container_view, theClass, null)
+              .add(R.id.fragment_container_view, theClass::class.java, null)
               .commit()
             navigationViewModel.update(
               FingerprintAction.TRANSITION_FINISHED,
@@ -386,7 +472,7 @@ class FingerprintEnrollmentV2Activity : FragmentActivity() {
       navigationViewModel.shouldFinish.filterNotNull().collect {
         Log.d(TAG, "FingerprintSettingsNav.finishing($it)")
         if (it.result != null) {
-          finishActivity(it.result as Int)
+          finishActivity(it.result)
         } else {
           finish()
         }
@@ -433,5 +519,14 @@ class FingerprintEnrollmentV2Activity : FragmentActivity() {
         confirmDeviceResultListener.launch(intent)
       }
     }
+  }
+}
+
+private fun Transition.toAnimation(): Int {
+  return when (this) {
+    Transition.EnterFromLeft -> com.google.android.setupdesign.R.anim.sud_slide_back_in
+    Transition.EnterFromRight -> com.google.android.setupdesign.R.anim.sud_slide_next_in
+    Transition.ExitToLeft -> com.google.android.setupdesign.R.anim.sud_slide_next_out
+    Transition.ExitToRight -> com.google.android.setupdesign.R.anim.sud_slide_back_out
   }
 }

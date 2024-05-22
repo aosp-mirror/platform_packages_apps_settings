@@ -29,10 +29,12 @@ import kotlinx.coroutines.channels.ProducerScope
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.conflate
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
 
 class TelephonyRepository(
     private val context: Context,
@@ -64,19 +66,21 @@ class TelephonyRepository(
         telephonyManager.setMobileDataPolicyEnabled(policy, enabled)
     }
 
-    fun isDataEnabled(
-        subId: Int,
-    ): Flow<Boolean> {
+    fun isDataEnabledFlow(subId: Int): Flow<Boolean> {
         if (!SubscriptionManager.isValidSubscriptionId(subId)) return flowOf(false)
 
-        Log.d(TAG, "register mobileDataEnabledFlow: [$subId]")
         return context.mobileDataEnabledFlow(subId)
             .map {
-                Log.d(TAG, "mobileDataEnabledFlow: receive mobile data [$subId] start")
                 val telephonyManager = context.telephonyManager(subId)
                 telephonyManager.isDataEnabledForReason(TelephonyManager.DATA_ENABLED_REASON_USER)
-                    .also { Log.d(TAG, "mobileDataEnabledFlow: [$subId] isDataEnabled(): $it") }
             }
+            .catch {
+                Log.w(TAG, "[$subId] isDataEnabledFlow: exception", it)
+                emit(false)
+            }
+            .onEach { Log.d(TAG, "[$subId] isDataEnabledFlow: isDataEnabled() = $it") }
+            .conflate()
+            .flowOn(Dispatchers.Default)
     }
 
     fun setMobileData(
@@ -100,6 +104,7 @@ class TelephonyRepository(
             wifiPickerTrackerHelper.setCarrierNetworkEnabled(enabled)
         }
     }
+
     private companion object {
         private const val TAG = "TelephonyRepository"
     }

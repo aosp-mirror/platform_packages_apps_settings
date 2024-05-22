@@ -155,8 +155,8 @@ class ZenMode {
         int iconResIdFromType = switch (mRule.getType()) {
             case AutomaticZenRule.TYPE_UNKNOWN -> R.drawable.ic_do_not_disturb_on_24dp;
             case AutomaticZenRule.TYPE_OTHER -> R.drawable.ic_do_not_disturb_on_24dp;
-            case AutomaticZenRule.TYPE_SCHEDULE_TIME -> R.drawable.ic_do_not_disturb_on_24dp;
-            case AutomaticZenRule.TYPE_SCHEDULE_CALENDAR -> R.drawable.ic_do_not_disturb_on_24dp;
+            case AutomaticZenRule.TYPE_SCHEDULE_TIME -> R.drawable.ic_modes_time;
+            case AutomaticZenRule.TYPE_SCHEDULE_CALENDAR -> R.drawable.ic_modes_event;
             case AutomaticZenRule.TYPE_BEDTIME -> R.drawable.ic_do_not_disturb_on_24dp;
             case AutomaticZenRule.TYPE_DRIVING -> R.drawable.ic_do_not_disturb_on_24dp;
             case AutomaticZenRule.TYPE_IMMERSIVE -> R.drawable.ic_do_not_disturb_on_24dp;

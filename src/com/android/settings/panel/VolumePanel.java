@@ -57,7 +57,10 @@ import java.util.concurrent.FutureTask;
 
 /**
  * Panel data class for Volume settings.
+ *
+ * @deprecated this is no longer used after V and will be removed.
  */
+@Deprecated(forRemoval = true)
 public class VolumePanel implements PanelContent, LifecycleObserver {
     private static final String TAG = "VolumePanel";
 

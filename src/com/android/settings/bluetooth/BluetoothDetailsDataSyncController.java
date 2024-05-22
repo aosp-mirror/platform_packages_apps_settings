@@ -18,6 +18,7 @@ package com.android.settings.bluetooth;
 
 import android.companion.AssociationInfo;
 import android.companion.CompanionDeviceManager;
+import android.companion.Flags;
 import android.companion.datatransfer.PermissionSyncRequest;
 import android.content.Context;
 
@@ -74,6 +75,9 @@ public class BluetoothDetailsDataSyncController extends BluetoothDetailsControll
 
     @Override
     public boolean isAvailable() {
+        if (!Flags.ongoingPermSync()) {
+            return false;
+        }
         if (mAssociationId == DUMMY_ASSOCIATION_ID) {
             return false;
         }

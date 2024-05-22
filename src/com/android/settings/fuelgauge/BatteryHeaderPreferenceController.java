@@ -61,9 +61,8 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mBatteryUsageProgressBarPref = screen.findPreference(getPreferenceKey());
-        // Set up loading text first to prevent layout flaky before info loaded.
-        mBatteryUsageProgressBarPref.setBottomSummary(
-                mContext.getString(R.string.settings_license_activity_loading));
+        // Set up empty space text first to prevent layout flaky before info loaded.
+        mBatteryUsageProgressBarPref.setBottomSummary(" ");
 
         if (com.android.settings.Utils.isBatteryPresent(mContext)) {
             quickUpdateHeaderPreference();
@@ -78,6 +77,22 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
     }
 
     private CharSequence generateLabel(BatteryInfo info) {
+        if (Utils.containsIncompatibleChargers(mContext, TAG)) {
+            return mContext.getString(
+                    com.android.settingslib.R.string.battery_info_status_not_charging);
+        }
+        if (BatteryUtils.isBatteryDefenderOn(info)) {
+            return mContext.getString(
+                    com.android.settingslib.R.string.battery_info_status_charging_on_hold);
+        }
+        if (info.remainingLabel != null
+                && mBatterySettingsFeatureProvider.isChargingOptimizationMode(mContext)) {
+            return info.remainingLabel;
+        }
+        if (info.remainingLabel == null
+                || info.batteryStatus == BatteryManager.BATTERY_STATUS_NOT_CHARGING) {
+            return info.statusLabel;
+        }
         if (info.pluggedStatus == BatteryManager.BATTERY_PLUGGED_WIRELESS) {
             final CharSequence wirelessChargingLabel =
                     mBatterySettingsFeatureProvider.getWirelessChargingLabel(mContext, info);
@@ -85,18 +100,7 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
                 return wirelessChargingLabel;
             }
         }
-
-        if (Utils.containsIncompatibleChargers(mContext, TAG)) {
-            return mContext.getString(
-                    com.android.settingslib.R.string.battery_info_status_not_charging);
-        } else if (BatteryUtils.isBatteryDefenderOn(info)) {
-            return mContext.getString(
-                    com.android.settingslib.R.string.battery_info_status_charging_on_hold);
-        } else if (info.remainingLabel == null
-                || info.batteryStatus == BatteryManager.BATTERY_STATUS_NOT_CHARGING) {
-            // Present status only if no remaining time or status anomalous
-            return info.statusLabel;
-        } else if (info.statusLabel != null && !info.discharging) {
+        if (info.statusLabel != null && !info.discharging) {
             // Charging state
             if (com.android.settingslib.fuelgauge.BatteryUtils.isChargingStringV2Enabled()) {
                 return info.isFastCharging

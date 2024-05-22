@@ -319,6 +319,12 @@ public class BatteryInfo {
         info.isFastCharging =
                 BatteryStatus.getChargingSpeed(context, batteryBroadcast)
                         == BatteryStatus.CHARGING_FAST;
+        if (info.isBatteryDefender) {
+            info.isBatteryDefender =
+                    FeatureFactory.getFeatureFactory()
+                            .getPowerUsageFeatureProvider()
+                            .isBatteryDefend(info);
+        }
         if (!info.mCharging) {
             updateBatteryInfoDischarging(context, shortString, estimate, info);
         } else {
@@ -384,13 +390,39 @@ public class BatteryInfo {
             info.remainingLabel = null;
             int chargingLimitedResId = R.string.power_charging_limited;
             info.chargeLabel = context.getString(chargingLimitedResId, info.batteryPercentString);
-        } else if ((chargeTimeMs > 0
+            return;
+        }
+        final BatterySettingsFeatureProvider featureProvider =
+                FeatureFactory.getFeatureFactory().getBatterySettingsFeatureProvider();
+        if (featureProvider.isChargingOptimizationMode(context)) {
+            final CharSequence chargeLabel =
+                    featureProvider.getChargingOptimizationChargeLabel(
+                            context,
+                            info.batteryLevel,
+                            info.batteryPercentString,
+                            chargeTimeMs,
+                            currentTimeMs);
+            if (chargeLabel != null) {
+                final CharSequence remainingLabel =
+                        featureProvider.getChargingOptimizationRemainingLabel(
+                                context,
+                                info.batteryLevel,
+                                info.pluggedStatus,
+                                chargeTimeMs,
+                                currentTimeMs);
+                if (remainingLabel != null) {
+                    info.chargeLabel = chargeLabel;
+                    info.remainingLabel = remainingLabel;
+                    return;
+                }
+            }
+        }
+        if ((chargeTimeMs > 0
                         && status != BatteryManager.BATTERY_STATUS_FULL
                         && dockDefenderMode == BatteryUtils.DockDefenderMode.DISABLED)
                 || dockDefenderMode == BatteryUtils.DockDefenderMode.TEMPORARILY_BYPASSED) {
             // Battery is charging to full
             info.remainingTimeUs = PowerUtil.convertMsToUs(chargeTimeMs);
-
             int resId = getChargingDurationResId(info.isFastCharging);
             info.remainingLabel =
                     chargeTimeMs <= 0
@@ -400,7 +432,8 @@ public class BatteryInfo {
                                     chargeTimeMs,
                                     info.isFastCharging,
                                     info.pluggedStatus,
-                                    currentTimeMs);
+                                    currentTimeMs,
+                                    featureProvider);
 
             info.chargeLabel =
                     chargeTimeMs <= 0
@@ -436,10 +469,9 @@ public class BatteryInfo {
             long chargeRemainingTimeMs,
             boolean isFastCharging,
             int pluggedStatus,
-            long currentTimeMs) {
+            long currentTimeMs,
+            BatterySettingsFeatureProvider featureProvider) {
         if (pluggedStatus == BatteryManager.BATTERY_PLUGGED_WIRELESS) {
-            BatterySettingsFeatureProvider featureProvider =
-                    FeatureFactory.getFeatureFactory().getBatterySettingsFeatureProvider();
             final CharSequence wirelessChargingRemainingLabel =
                     featureProvider.getWirelessChargingRemainingLabel(
                             context, chargeRemainingTimeMs, currentTimeMs);

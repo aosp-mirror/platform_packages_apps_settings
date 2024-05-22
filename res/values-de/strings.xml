@@ -286,7 +286,8 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Apps mit der Berechtigung zum Zugriff auf Geräte in der Nähe können die relative Position von verbundenen Geräten ermitteln."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Standortzugriff ist für Apps und Dienste deaktiviert. Wenn du eine Notrufnummer wählst oder eine Nachricht an eine solche Nummer schickst, kann dein Standort dennoch an den Notdienst gesendet werden."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Weitere Informationen zu Standorteinstellungen"</string>
-    <string name="location_settings_tooltip_text_for_chrome" msgid="3574930966097093550">"Du kannst den Standortzugriff in den Einstellungen &gt; „Sicherheit und Datenschutz“ &gt; „Datenschutzeinstellungen“ ändern"</string>
+    <!-- no translation found for location_settings_tooltip_text_for_chrome (5781821709250544575) -->
+    <skip />
     <string name="account_settings_title" msgid="9138880127246241885">"Konten"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Sicherheit"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Verschlüsselung &amp; Anmeldedaten"</string>
@@ -566,7 +567,8 @@
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"Jedes Mal, wenn Gerät gesperrt wird"</string>
     <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"Nach 5 Minuten Inaktivität"</string>
     <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"Nur nach einem Neustart des Geräts"</string>
-    <string name="private_space_hide_page_title" msgid="4351404195904146088">"Privaten Bereich ausblenden, wenn gesperrt"</string>
+    <string name="private_space_hide_page_title" msgid="3364639176511877414">"Vertrauliches Profil ausblenden"</string>
+    <string name="private_space_hide_when_locked" msgid="6219472348124151797">"Vertrauliches Profil ausblenden, wenn gesperrt"</string>
     <string name="private_space_hide_page_summary" msgid="6247773353685839242">"Damit niemand weiß, dass du auf deinem Gerät einen privaten Bereich hast, kannst du ihn aus deiner App-Liste ausblenden"</string>
     <string name="private_space_access_header" msgid="1077082416567150819">"Auf privaten Bereich zugreifen, wenn ausgeblendet"</string>
     <string name="private_space_search_description" msgid="1538155187658429618">"In der Suchleiste „privater Bereich“ eingeben"</string>
@@ -1497,7 +1499,7 @@
     <string name="reset_esim_error_title" msgid="6516110227665862295">"Löschen der eSIMs nicht möglich"</string>
     <string name="reset_esim_error_msg" msgid="8459527827897797168">"Ein Fehler ist aufgetreten und deine eSIMs wurden nicht gelöscht.\n\nStarte dein Gerät neu und versuche es noch einmal."</string>
     <string name="reset_private_space_delete_title" msgid="2555885198282572990">"Vertraulichen Bereich löschen"</string>
-    <string name="reset_private_space_delete_dialog" msgid="7506471054091800883">"Wenn du einen privaten Bereich auf deinem Gerät hast, wird dieser endgültig gelöscht und das zu deinem Bereich hinzugefügte Google-Konto wird entfernt.\n\nAlle Apps in deinem Bereich und deren Daten werden ebenfalls endgültig gelöscht."</string>
+    <string name="reset_private_space_delete_dialog" msgid="7506471054091800883">"Wenn du ein vertrauliches Profil auf deinem Gerät hast, wird dieses endgültig gelöscht und das zu deinem Profil hinzugefügte Google-Konto wird entfernt.\n\nAlle Apps in deinem Profil und deren Daten werden ebenfalls endgültig gelöscht."</string>
     <string name="main_clear_title" msgid="277664302144837723">"Alle Daten löschen (auf Werkseinstellungen zurücksetzen)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Alle Daten löschen"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"Musik"</li>\n<li>"Fotos"</li>\n<li>"Sonstige Nutzerdaten"</li></string>
@@ -1810,8 +1812,7 @@
     <string name="app_install_details_group_title" msgid="1172114479073704677">"App-Shop"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"App-Details"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"App vom <xliff:g id="APP_STORE">%1$s</xliff:g> installiert"</string>
-    <!-- no translation found for app_install_details_different_initiating_package_summary (6093306593167176688) -->
-    <skip />
+    <string name="app_install_details_different_initiating_package_summary" msgid="6093306593167176688">"App aus <xliff:g id="APP_STORE1">%1$s</xliff:g> (über <xliff:g id="APP_STORE2">%2$s</xliff:g>) installiert"</string>
     <string name="instant_app_details_summary" msgid="417197491598208216">"Weitere Informationen im <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
     <string name="app_ops_running" msgid="6127474473137428721">"Aktiv"</string>
     <string name="app_ops_never_used" msgid="9038133162371204506">"(Nie verwendet)"</string>
@@ -2017,7 +2018,6 @@
     <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"Farbkontrast"</string>
     <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"Durch einen stärkeren Kontrast stechen Texte, Schaltflächen und Symbole mehr hervor. Wähle den Kontrast, der für dich am besten aussieht."</string>
     <string name="color_contrast_note" msgid="7592686603372566198">"Einige Apps unterstützen eventuell noch nicht alle Farb- und Textkontrasteinstellungen."</string>
-    <string name="accessibility_color_contrast_summary" msgid="7563237683500106632">"Du kannst anpassen, wie Farben und Text vor der Hintergrundfarbe deines Bildschirms dargestellt werden."</string>
     <string name="color_contrast_preview" msgid="6791430227535363883">"Vorschau"</string>
     <string name="color_contrast_preview_sender_name" msgid="8641943417589238147">"Helen, Adam"</string>
     <string name="color_contrast_preview_email_send_date" msgid="2108702726171600080">"Vor 2 Tagen"</string>
@@ -2572,8 +2572,7 @@
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Akkulaufzeit verlängern"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Bei vollem Akku ausschalten"</string>
     <string name="battery_saver_sticky_title_percentage" msgid="1178162022087559148">"Deaktivieren ab <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <!-- no translation found for battery_saver_sticky_description_new (8543277078136947874) -->
-    <skip />
+    <string name="battery_saver_sticky_description_new" msgid="8543277078136947874">"Energiesparmodus wird deaktiviert, wenn Ladestand <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> übersteigt"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Aktivieren"</string>
@@ -2964,15 +2963,14 @@
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{{orgName} hat eine Zertifizierungsstelle für dein Arbeitsprofil installiert. Damit können deine geschäftlichen Netzwerkaktivitäten überwacht werden, einschließlich E-Mails, Apps und sicherer Websites.\n\nWeitere Informationen zu diesem Zertifikat erhältst du von deinem Administrator.}other{{orgName} hat Zertifizierungsstellen für dein Arbeitsprofil installiert. Damit können deine geschäftlichen Netzwerkaktivitäten überwacht werden, einschließlich E-Mails, Apps und sicherer Websites.\n\nWeitere Informationen zu diesen Zertifikaten erhältst du von deinem Administrator.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"Dritte können deine Netzwerkaktivitäten überwachen, einschließlich E-Mails, Apps und sicherer Websites.\n\nDies wird durch vertrauenswürdige Anmeldedaten ermöglicht, die auf deinem Gerät installiert sind."</string>
     <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{Zertifikat prüfen}other{Zertifikate prüfen}}"</string>
-    <!-- no translation found for user_settings_title (9208831545558787202) -->
-    <skip />
+    <string name="user_settings_title" msgid="9208831545558787202">"Nutzer"</string>
     <string name="user_list_title" msgid="1387379079186123404">"Nutzer &amp; Profile"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"Nutzer oder Profil hinzufügen"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"Eingeschränktes Profil"</string>
     <string name="user_summary_not_set_up" msgid="4602868481732886115">"Nicht eingerichtet"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1658946988920104613">"Eingeschränktes Profil nicht eingerichtet"</string>
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"Nicht eingerichtet – Arbeitsprofil"</string>
-    <string name="user_owner" msgid="2079206733011361994">"Inhaber"</string>
+    <string name="user_owner" msgid="2079206733011361994">"Eigentümer"</string>
     <string name="user_admin" msgid="4024553191395768119">"Administrator"</string>
     <string name="user_you" msgid="3070562015202859996">"Ich (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_add_max_count" msgid="3328539978480663740">"Du kannst keine weiteren Nutzer hinzufügen. Entferne dazu zuerst einen bisherigen Nutzer."</string>
@@ -4431,8 +4429,8 @@
     <string name="credman_confirmation_turn_off_positive_button" msgid="5678773011513369161">"Deaktivieren"</string>
     <string name="credman_confirmation_change_provider_positive_button" msgid="7732302992885116967">"Ändern"</string>
     <string name="credman_limit_error_msg_title" msgid="1525814645803612135">"Es können nur fünf Dienste aktiviert sein"</string>
-    <string name="credman_limit_error_msg" msgid="2521803280130310063">"Deaktiviere mindestens einen Dienst, um einen anderen hinzuzufügen"</string>
-    <string name="credman_main_settings_intro_text" msgid="4981603639240772620">"Wähle aus, in welchem Dienst Daten für die Anmeldung und Autofill-Vorschläge gespeichert werden sollen. Wenn auch andere Dienste Vorschläge liefern sollen, kannst du sie hier aktivieren."</string>
+    <string name="credman_limit_error_msg" msgid="2521803280130310063">"Bevor du einen weiteren Dienst hinzufügen kannst, musst du mindestens einen der aktivierten Dienste deaktivieren"</string>
+    <string name="credman_main_settings_intro_text" msgid="4981603639240772620">"Wähle den Dienst aus, in dem Daten Anmeldedaten und Autofill-Vorschläge gespeichert werden sollen („Bevorzugter Dienst“). Wenn auch andere Dienste Vorschläge liefern sollen, kannst du sie unter „Weitere Dienste“ aktivieren."</string>
     <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"%1$s ermittelt anhand der Inhalte auf deinem Bildschirm, welche Informationen automatisch ausgefüllt werden können."</string>
     <string name="credman_error_message_title" msgid="4099557206946333568">"Beschränkung für Passwörter, Passkeys und Datendienste"</string>
     <string name="credman_error_message" msgid="8334797097200415449">"Es können bis zu 5 Passwörter, Passkeys und Datendienste gleichzeitig aktiviert sein. Wenn du einen weiteren Dienst hinzufügen möchtest, deaktiviere einen anderen."</string>
@@ -4642,10 +4640,8 @@
     <string name="summary_supported_service" msgid="4320535903444834786">"Du kannst Nachrichten an beliebige Empfänger versenden, auch an den Rettungsdienst. Sobald wieder ein Mobilfunknetz verfügbar ist, verbindet sich dein Smartphone damit."</string>
     <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"Das Senden von Nachrichten per Satellit kann länger dauern und ist nicht überall verfügbar. Wetterbedingungen und bestimmte Gebäude, Bäume usw. können die Satellitenverbindung beeinträchtigen. Anrufe per Satellit sind nicht verfügbar. Notrufe werden eventuell trotzdem verbunden.\n\nEs kann einige Zeit dauern, bis Kontoänderungen in den Einstellungen angezeigt werden. Weitere Informationen erhältst du bei deinem Mobilfunkanbieter."</string>
     <string name="more_about_satellite_messaging" msgid="3385673133561348509">"Mehr zu Nachrichten per Satellit"</string>
-    <!-- no translation found for satellite_warning_dialog_title (1610117852475376931) -->
-    <skip />
-    <!-- no translation found for satellite_warning_dialog_content (936419945275934955) -->
-    <skip />
+    <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"Aktivieren von „<xliff:g id="FUNCTION">%1$s</xliff:g>“ fehlgeschlagen"</string>
+    <string name="satellite_warning_dialog_content" msgid="936419945275934955">"Um die Funktion „<xliff:g id="FUNCTION">%1$s</xliff:g>“ zu aktivieren, beende zuerst die Satellitenverbindung"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Zugangspunkte (APNs)"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Bei Verbindung mit <xliff:g id="CARRIER">%1$s</xliff:g> nicht verfügbar"</string>
@@ -4807,46 +4803,27 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"Informationen zu den Arbeitsrichtlinien"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"Einstellungen, die von deinem IT-Administrator verwaltet werden"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
-    <!-- no translation found for enable_16k_pages (8001470927566110689) -->
-    <skip />
-    <!-- no translation found for enable_16k_pages_summary (1964363364670306912) -->
-    <skip />
-    <!-- no translation found for confirm_enable_16k_pages_title (1286925577014793351) -->
-    <skip />
-    <!-- no translation found for confirm_enable_16k_pages_text (570198382662424714) -->
-    <skip />
-    <!-- no translation found for confirm_enable_4k_pages_title (3210360137887034659) -->
-    <skip />
-    <!-- no translation found for confirm_enable_4k_pages_text (155070605667160083) -->
-    <skip />
+    <string name="enable_16k_pages" msgid="8001470927566110689">"Mit Seitengröße von 16 KB starten"</string>
+    <string name="enable_16k_pages_summary" msgid="1964363364670306912">"Mit Kernel starten, der 16-KB-Seiten unterstützt"</string>
+    <string name="confirm_enable_16k_pages_title" msgid="1286925577014793351">"Vom 4‑KB-Modus zum 16‑KB-Modus wechseln"</string>
+    <string name="confirm_enable_16k_pages_text" msgid="570198382662424714">"Du befindest dich zurzeit im speicherseitenunabhängigen Modus mit einem 4‑KB-Kernel und bist gerade dabei, zum 16‑KB-Modus zu wechseln. Beachte, dass bei entsperrtem Bootloader die Softwareintegrität nicht sichergestellt werden kann und alle auf dem Smartphone gespeicherten Daten gefährdet sind. Wenn du dennoch wechselst, wird das Gerät neu gestartet. Einige Funktionen werden in diesen Modi deaktiviert, weshalb bestimmte Anwendungen möglicherweise nicht funktionieren. Wenn du das Gerät in den Produktionsmodus zurückversetzen möchtest, musst du zurück in den 4‑KB-Modus wechseln und dann den Bootloader sperren. Dadurch wird das Gerät auf die Werkseinstellungen zurückgesetzt. Nachdem das Gerät hochgefahren und Android gestartet wurde, deaktiviere in den Entwickleroptionen die OEM-Entsperrung."</string>
+    <string name="confirm_enable_4k_pages_title" msgid="3210360137887034659">"Vom 16‑KB-Modus zum 4‑KB-Modus wechseln"</string>
+    <string name="confirm_enable_4k_pages_text" msgid="155070605667160083">"Du befindest dich zurzeit im speicherseitenunabhängigen Modus mit einem 16‑KB-Kernel und bist dabei, zum 4‑KB-Modus zu wechseln. Beachte, dass bei entsperrtem Bootloader die Softwareintegrität nicht sichergestellt werden kann und alle auf dem Smartphone gespeicherten Daten gefährdet sind. Wenn du dennoch wechselst, wird das Gerät neu gestartet. Einige Funktionen werden in diesen Modi deaktiviert, weshalb bestimmte Anwendungen möglicherweise nicht funktionieren. Wenn du das Gerät in den Produktionsmodus zurückversetzen möchtest, musst du zuerst den Bootloader sperren. Dadurch wird das Gerät auf die Werkseinstellungen zurückgesetzt. Nachdem das Gerät hochgefahren und Android gestartet wurde, deaktiviere in den Entwickleroptionen die OEM-Entsperrung."</string>
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"Kernel konnte nicht auf mit 16-KB-Seiten kompatiblen Kernel aktualisiert werden."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Änderung wird übernommen"</string>
-    <!-- no translation found for confirm_format_ext4_title (6696191800594435577) -->
-    <skip />
-    <!-- no translation found for confirm_format_ext4_text (7940372488624630214) -->
-    <skip />
-    <!-- no translation found for format_ext4_failure_toast (8059453995800471549) -->
-    <skip />
-    <!-- no translation found for confirm_oem_unlock_for_16k_title (5374451262432025419) -->
-    <skip />
-    <!-- no translation found for confirm_oem_unlock_for_16k_text (3583604865119937957) -->
-    <skip />
-    <!-- no translation found for page_agnostic_4k_pages_title (1184703958249093215) -->
-    <skip />
-    <!-- no translation found for page_agnostic_4k_pages_text_short (2894243902906666242) -->
-    <skip />
-    <!-- no translation found for page_agnostic_4k_pages_text (8284806650260868833) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_title (7762533464569818498) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text_short (269039281591806585) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text (6208765386837706582) -->
-    <skip />
-    <!-- no translation found for page_agnostic_notification_channel_name (1658444283036376361) -->
-    <skip />
-    <!-- no translation found for page_agnostic_notification_action (2309805437430150456) -->
-    <skip />
+    <string name="confirm_format_ext4_title" msgid="6696191800594435577">"Gerät mit ext4 neu formatieren (für den 16‑KB-Modus erforderlich)?"</string>
+    <string name="confirm_format_ext4_text" msgid="7940372488624630214">"Bevor die 16‑KB-Entwickleroption verwendet werden kann, muss die Datenpartition des Geräts in ext4 umgewandelt werden. Beachte, dass bei entsperrtem Bootloader die Softwareintegrität nicht sichergestellt werden kann und alle auf dem Smartphone gespeicherten Daten gefährdet sind. Zum Aktivieren der 16‑KB-Option muss das Gerät danach noch einmal neu gestartet werden. Wenn du dann in diesem Modus bist, reicht für den Wechsel zwischen dem 4‑KB-Modus und dem 16‑KB-Modus ein einmaliger Neustart aus. Einige Funktionen werden in diesen Modi deaktiviert, weshalb bestimmte Anwendungen möglicherweise nicht funktionieren. Wenn du das Gerät in den Produktionsmodus zurückversetzen möchtest, musst du zurück in den 4‑KB-Modus wechseln und dann den Bootloader sperren. Dadurch wird das Gerät auf die Werkseinstellungen zurückgesetzt. Nachdem das Gerät hochgefahren und Android gestartet wurde, deaktiviere in den Entwickleroptionen die OEM-Entsperrung. Alle Daten auf dem Gerät werden gelöscht und das Dateisystem wird nach entsprechender Bestätigung in ext4 geändert. Nach Abschluss dieses Vorgangs kannst du hierher zurückkehren, um den 16‑KB-Modus zu aktivieren."</string>
+    <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Die Datenpartition konnte nicht gelöscht und mit ext4 neu formatiert werden."</string>
+    <string name="confirm_oem_unlock_for_16k_title" msgid="5374451262432025419">"Für den 16‑KB-Modus muss der Bootloader entsperrt werden"</string>
+    <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"Bevor auf diesem Gerät die 16‑KB-Entwickleroption verwendet werden kann, muss der Bootloader entsperrt werden. Beachte, dass bei entsperrtem Bootloader die Softwareintegrität nicht sichergestellt werden kann und alle auf dem Smartphone gespeicherten Daten gefährdet sind. Durch Aktivieren des 16‑KB-Modus werden alle Nutzerdaten und ‑einstellungen gelöscht. Nachdem der Bootloader entsperrt wurde, sind zur Aktivierung des 16‑KB-Modus zwei Neustarts erforderlich. Wenn du dann in diesem Modus bist, reicht für den Wechsel zwischen dem 4‑KB-Modus und dem 16‑KB-Modus ein einmaliger Neustart aus. Einige Funktionen werden in diesen Modi deaktiviert, weshalb bestimmte Anwendungen möglicherweise nicht funktionieren. Wenn du das Gerät in den Produktionsmodus zurückversetzen möchtest, musst du zurück in den 4‑KB-Modus wechseln und dann die OEM-/Bootloader-Sperre einrichten. Dadurch wird das Gerät auf die Werkseinstellungen zurückgesetzt. Bitte entsperre den Bootloader und versuch es noch einmal. Eine Anleitung hierzu findest du unter &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;."</string>
+    <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"Speicherseitenunabhängigen 4‑KB-Modus verwenden"</string>
+    <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"Du befindest dich im 4‑KB-Modus des speicherseitenunabhängigen Modus. Beachte, dass bei entsperrtem Bootloader die Softwareintegrität nicht sichergestellt werden kann und alle auf dem Smartphone gespeicherten Daten gefährdet sind. Einige Funktionen werden in diesen Modi deaktiviert, weshalb bestimmte Anwendungen möglicherweise nicht funktionieren. Wenn du wieder in den Produktionsmodus wechseln möchtest, musst du den Bootloader des Geräts sperren. Wenn du mehr erfahren möchtest, tippe hier."</string>
+    <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"Du befindest dich im 4‑KB-Modus des speicherseitenunabhängigen Modus. Beachte, dass bei entsperrtem Bootloader die Softwareintegrität nicht sichergestellt werden kann und alle auf dem Smartphone gespeicherten Daten gefährdet sind. Einige Funktionen werden in diesen Modi deaktiviert, weshalb bestimmte Anwendungen möglicherweise nicht funktionieren. Wenn du wieder in den Produktionsmodus wechseln möchtest, musst du den Bootloader des Geräts sperren. Dadurch wird das Gerät wieder auf die Werkseinstellungen zurückgesetzt und die Produktionseinstellungen werden wiederhergestellt. Nachdem das Gerät hochgefahren und Android gestartet wurde, deaktiviere in den Entwickleroptionen die OEM-Entsperrung. Wenn Android auf dem Gerät nicht gestartet werden kann oder das Gerät instabil ist, flashe das aktuelle Factory Image unter &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; oder verwende &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; und wähle „Gerätedaten löschen“, „Bootloader sperren“ und „Flashen aller Partitionen erzwingen“ aus."</string>
+    <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"Speicherseitenunabhängigen 16‑KB-Modus verwenden"</string>
+    <string name="page_agnostic_16k_pages_text_short" msgid="269039281591806585">"Du befindest dich im 16‑KB-Modus des speicherseitenunabhängigen Modus. Beachte, dass bei entsperrtem Bootloader die Softwareintegrität nicht sichergestellt werden kann und alle auf dem Smartphone gespeicherten Daten gefährdet sind. Einige Funktionen werden in diesen Modi deaktiviert, weshalb bestimmte Anwendungen möglicherweise nicht funktionieren. Wenn du wieder in den Produktionsmodus wechseln möchtest, musst du zurück zum 4‑KB-Modus wechseln und dann den Bootloader des Geräts sperren. Wenn du mehr erfahren möchtest, tippe hier."</string>
+    <string name="page_agnostic_16k_pages_text" msgid="6208765386837706582">"Du befindest dich im 16‑KB-Modus des speicherseitenunabhängigen Modus. Beachte, dass bei entsperrtem Bootloader die Softwareintegrität nicht sichergestellt werden kann und alle auf dem Smartphone gespeicherten Daten gefährdet sind. Einige Funktionen werden in diesen Modi deaktiviert, weshalb bestimmte Anwendungen möglicherweise nicht funktionieren. Wenn du wieder in den Produktionsmodus wechseln möchtest, musst du zurück zum 4‑KB-Modus wechseln und dann den Bootloader des Geräts sperren. Dadurch wird das Gerät wieder auf die Werkseinstellungen zurückgesetzt und die Produktionseinstellungen werden wiederhergestellt. Nachdem das Gerät hochgefahren und Android gestartet wurde, deaktiviere in den Entwickleroptionen die OEM-Entsperrung. Wenn Android auf dem Gerät nicht gestartet werden kann oder das Gerät instabil ist, flashe das aktuelle Factory Image unter &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; oder verwende &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; und wähle „Gerätedaten löschen“, „Bootloader sperren“ und „Flashen aller Partitionen erzwingen“ aus."</string>
+    <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"Speicherseitenunabhängiger 16‑KB-Modus"</string>
+    <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Weitere Informationen"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Fehlerbericht-Handler"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Bestimmt, welche App die Verknüpfung zum Fehlerbericht auf deinem Gerät verarbeitet"</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Persönlich"</string>
@@ -4908,8 +4885,7 @@
     <string name="media_controls_show_player" msgid="8504571042365814021">"Player anzeigen"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"Medien"</string>
     <string name="camera_extensions_fallback_title" msgid="3604579046777004989">"Kamerasoftware-Erweiterungen zulassen"</string>
-    <!-- no translation found for camera_extensions_fallback_description (4306833827773277263) -->
-    <skip />
+    <string name="camera_extensions_fallback_description" msgid="4306833827773277263">"Aktiviert die Standard-Software-Implementierung erweiterter Kamerafunktionen, wie „HDR“ oder „Nacht“."</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth wird aktiviert"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"Internet"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM-Karten"</string>
@@ -4979,8 +4955,7 @@
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Druckdienst verwenden"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Mehrere Nutzer zulassen"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"zulassen, mehrere, Nutzer, Erlaubnis, viele"</string>
-    <!-- no translation found for multiple_users_title_keywords (2395593167746225172) -->
-    <skip />
+    <string name="multiple_users_title_keywords" msgid="2395593167746225172">"mehrere, Nutzer, Profile, Personen, Konten, wechseln, viele"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Debugging über WLAN verwenden"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Grafiktreiber-Einstellungen verwenden"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"Nachtlicht verwenden"</string>
@@ -5015,8 +4990,12 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Flugmodus deaktivieren, um UWB zu verwenden"</string>
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"UWB ist an deinem derzeitigen Standort nicht verfügbar"</string>
     <string name="thread_network_settings_title" msgid="4212301030523859220">"Thread"</string>
-    <string name="thread_network_settings_summary" msgid="8065599651021748339">"Verbindung mit kompatiblen Geräten für eine nahtlose Smart-Home-Nutzung mit Thread herstellen"</string>
-    <string name="thread_network_settings_summary_airplane_mode" msgid="7207252895832446979">"Flugmodus deaktivieren, um Thread zu verwenden"</string>
+    <!-- no translation found for thread_network_settings_main_switch_title (3859168481929323474) -->
+    <skip />
+    <!-- no translation found for thread_network_settings_footer_title (7385600318850220927) -->
+    <skip />
+    <!-- no translation found for thread_network_settings_learn_more (8278498005848565050) -->
+    <skip />
     <string name="camera_toggle_title" msgid="8952668677727244992">"Kamerazugriff"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Mikrofonzugriff"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"Für Apps und Dienste"</string>

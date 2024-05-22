@@ -57,8 +57,7 @@ interface FingerprintManagerInteractor {
 
   /**
    * Runs [FingerprintManager.enroll] with the [hardwareAuthToken] and [EnrollReason] for this
-   * enrollment. Returning the [FingerEnrollState] that represents this fingerprint enrollment
-   * state.
+   * enrollment. If successful data in the [fingerprintEnrollState] should be populated.
    */
   suspend fun enroll(
     hardwareAuthToken: ByteArray?,

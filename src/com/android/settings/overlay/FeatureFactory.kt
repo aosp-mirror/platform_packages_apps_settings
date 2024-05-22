@@ -24,7 +24,6 @@ import com.android.settings.biometrics.face.FaceFeatureProvider
 import com.android.settings.biometrics.fingerprint.FingerprintFeatureProvider
 import com.android.settings.biometrics2.factory.BiometricsRepositoryProvider
 import com.android.settings.bluetooth.BluetoothFeatureProvider
-import com.android.settings.connecteddevice.audiosharing.AudioSharingFeatureProvider
 import com.android.settings.connecteddevice.fastpair.FastPairFeatureProvider
 import com.android.settings.connecteddevice.stylus.StylusFeatureProvider
 import com.android.settings.dashboard.DashboardFeatureProvider
@@ -183,11 +182,6 @@ abstract class FeatureFactory {
      * Gets implementation for Display feature.
      */
     abstract val displayFeatureProvider: DisplayFeatureProvider
-
-    /**
-     * Gets implementation for audio sharing related feature.
-     */
-    abstract val audioSharingFeatureProvider: AudioSharingFeatureProvider
 
     /**
      * Gets implementation for sync across devices related feature.

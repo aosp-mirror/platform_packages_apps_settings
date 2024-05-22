@@ -62,13 +62,13 @@ public class Enable16kPagesPreferenceControllerTest {
 
     @Test
     public void onSystemPropertyDisabled_shouldDisablePreference() {
-        SystemProperties.set(Enable16kPagesPreferenceController.DEV_OPTION_PROPERTY, "false");
+        SystemProperties.set(Enable16kUtils.DEV_OPTION_PROPERTY, "false");
         assertThat(mController.isAvailable()).isEqualTo(false);
     }
 
     @Test
     public void onSystemPropertyEnabled_shouldEnablePreference() {
-        SystemProperties.set(Enable16kPagesPreferenceController.DEV_OPTION_PROPERTY, "true");
+        SystemProperties.set(Enable16kUtils.DEV_OPTION_PROPERTY, "true");
         assertThat(mController.isAvailable()).isEqualTo(true);
     }
 

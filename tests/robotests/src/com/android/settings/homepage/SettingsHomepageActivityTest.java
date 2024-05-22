@@ -41,6 +41,8 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.UserHandle;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 import android.util.ArraySet;
 import android.view.View;
@@ -53,6 +55,7 @@ import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProviderImpl;
+import com.android.settings.flags.Flags;
 import com.android.settings.testutils.shadow.ShadowActivityEmbeddingUtils;
 import com.android.settings.testutils.shadow.ShadowPasswordUtils;
 import com.android.settings.testutils.shadow.ShadowUserManager;
@@ -87,6 +90,8 @@ import java.util.Set;
 public class SettingsHomepageActivityTest {
     @Rule
     public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     @Before
     public void setup() {
@@ -120,6 +125,7 @@ public class SettingsHomepageActivityTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_HOMEPAGE_REVAMP)
     public void launch_configDisabled_shouldHideAvatar() {
         final SettingsHomepageActivity activity = Robolectric.buildActivity(
                 SettingsHomepageActivity.class).create().get();
@@ -130,6 +136,7 @@ public class SettingsHomepageActivityTest {
 
     @Test
     @Config(qualifiers = "mcc999")
+    @DisableFlags(Flags.FLAG_HOMEPAGE_REVAMP)
     public void launch_configEnabled_shouldShowAvatar() {
         final SettingsHomepageActivity activity = Robolectric.buildActivity(
                 SettingsHomepageActivity.class).create().get();
@@ -140,6 +147,7 @@ public class SettingsHomepageActivityTest {
 
     @Test
     @Config(qualifiers = "mcc999")
+    @DisableFlags(Flags.FLAG_HOMEPAGE_REVAMP)
     public void launch_LowRamDevice_shouldHideAvatar() {
         final ShadowActivityManager activityManager = Shadow.extract(
                 ApplicationProvider.getApplicationContext().getSystemService(

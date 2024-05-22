@@ -709,12 +709,13 @@ public class MobileNetworkUtils {
         return tm.getNetworkOperatorName();
     }
 
-    private static int[] getActiveSubscriptionIdList(Context context) {
+    @VisibleForTesting
+    static int[] getActiveSubscriptionIdList(Context context) {
         final SubscriptionManager subscriptionManager = context.getSystemService(
                 SubscriptionManager.class).createForAllUserProfiles();
         final List<SubscriptionInfo> subInfoList =
-                subscriptionManager.getActiveSubscriptionInfoList();
-        if (subInfoList == null) {
+                SubscriptionUtil.getActiveSubscriptions(subscriptionManager);
+        if (subInfoList == null || subInfoList.isEmpty()) {
             return new int[0];
         }
         int[] activeSubIds = new int[subInfoList.size()];

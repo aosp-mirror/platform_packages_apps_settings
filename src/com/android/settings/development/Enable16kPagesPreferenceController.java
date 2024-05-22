@@ -23,17 +23,11 @@ import android.os.ParcelFileDescriptor;
 import android.os.PersistableBundle;
 import android.os.PowerManager;
 import android.os.RecoverySystem;
-import android.os.SystemProperties;
 import android.os.SystemUpdateManager;
 import android.os.UpdateEngine;
 import android.os.UpdateEngineStable;
 import android.os.UpdateEngineStableCallback;
-import android.os.UserHandle;
-import android.os.UserManager;
 import android.provider.Settings;
-import android.service.oemlock.OemLockManager;
-import android.system.Os;
-import android.system.OsConstants;
 import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -59,7 +53,6 @@ import com.google.common.util.concurrent.MoreExecutors;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -80,10 +73,6 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
     private static final String TAG = "Enable16kPages";
     private static final String REBOOT_REASON = "toggle16k";
     private static final String ENABLE_16K_PAGES = "enable_16k_pages";
-
-    @VisibleForTesting
-    static final String DEV_OPTION_PROPERTY = "ro.product.build.16k_page.enabled";
-
     private static final int ENABLE_4K_PAGE_SIZE = 0;
     private static final int ENABLE_16K_PAGE_SIZE = 1;
 
@@ -97,9 +86,6 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
     private static final int OFFSET_TO_FILE_NAME = 30;
     public static final String EXPERIMENTAL_UPDATE_TITLE = "Android 16K Kernel Experimental Update";
 
-    private static final long PAGE_SIZE = Os.sysconf(OsConstants._SC_PAGESIZE);
-    private static final int PAGE_SIZE_16KB = 16 * 1024;
-
     private @NonNull DevelopmentSettingsDashboardFragment mFragment;
     private boolean mEnable16k;
 
@@ -112,12 +98,12 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
             @NonNull Context context, @NonNull DevelopmentSettingsDashboardFragment fragment) {
         super(context);
         this.mFragment = fragment;
-        mEnable16k = (PAGE_SIZE == PAGE_SIZE_16KB);
+        mEnable16k = Enable16kUtils.isUsing16kbPages();
     }
 
     @Override
     public boolean isAvailable() {
-        return SystemProperties.getBoolean(DEV_OPTION_PROPERTY, false);
+        return Enable16kUtils.is16KbToggleAvailable();
     }
 
     @Override
@@ -129,12 +115,12 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         mEnable16k = (Boolean) newValue;
         // Prompt user to do oem unlock first
-        if (!isDeviceOEMUnlocked()) {
+        if (!Enable16kUtils.isDeviceOEMUnlocked(mContext)) {
             Enable16KOemUnlockDialog.show(mFragment);
             return false;
         }
 
-        if (isDataf2fs()) {
+        if (!Enable16kUtils.isDataExt4()) {
             EnableExt4WarningDialog.show(mFragment, this);
             return false;
         }
@@ -145,7 +131,7 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
     @Override
     public void updateState(Preference preference) {
         int defaultOptionValue =
-                PAGE_SIZE == PAGE_SIZE_16KB ? ENABLE_16K_PAGE_SIZE : ENABLE_4K_PAGE_SIZE;
+                Enable16kUtils.isUsing16kbPages() ? ENABLE_16K_PAGE_SIZE : ENABLE_4K_PAGE_SIZE;
         final int optionValue =
                 Settings.Global.getInt(
                         mContext.getContentResolver(),
@@ -169,7 +155,7 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
     @Override
     protected void onDeveloperOptionsSwitchEnabled() {
         int currentStatus =
-                PAGE_SIZE == PAGE_SIZE_16KB ? ENABLE_16K_PAGE_SIZE : ENABLE_4K_PAGE_SIZE;
+                Enable16kUtils.isUsing16kbPages() ? ENABLE_16K_PAGE_SIZE : ENABLE_4K_PAGE_SIZE;
         Settings.Global.putInt(
                 mContext.getContentResolver(), Settings.Global.ENABLE_16K_PAGES, currentStatus);
     }
@@ -221,7 +207,10 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
         int status = data.getInt(SystemUpdateManager.KEY_STATUS);
         if (status != SystemUpdateManager.STATUS_UNKNOWN
                 && status != SystemUpdateManager.STATUS_IDLE) {
-            throw new RuntimeException("System has pending update!");
+            throw new RuntimeException(
+                    "System has pending update! Please restart the device to complete applying"
+                            + " pending update. If you are seeing this after using 16KB developer"
+                            + " options, please check configuration and OTA packages!");
         }
 
         // Publish system update info
@@ -327,7 +316,7 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
     }
 
     private void displayToast(String message) {
-        Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(mContext, message, Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -344,7 +333,7 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
 
                     @Override
                     public void onFailure(@NonNull Throwable t) {
-                        Log.e(TAG, "Failed to change the /data partition with ext4");
+                        Log.e(TAG, "Failed to change the /data partition to ext4");
                         displayToast(mContext.getString(R.string.format_ext4_failure_toast));
                     }
                 },
@@ -419,6 +408,7 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
                         LinearLayout.LayoutParams.WRAP_CONTENT,
                         LinearLayout.LayoutParams.WRAP_CONTENT);
         progressBar.setLayoutParams(params);
+        progressBar.setPadding(0, 24, 0, 24);
         builder.setView(progressBar);
         builder.setCancelable(false);
         return builder.create();
@@ -430,51 +420,6 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
         infoBundle.putBoolean(SystemUpdateManager.KEY_IS_SECURITY_UPDATE, false);
         infoBundle.putString(SystemUpdateManager.KEY_TITLE, EXPERIMENTAL_UPDATE_TITLE);
         return infoBundle;
-    }
-
-    private boolean isDataf2fs() {
-        try (BufferedReader br = new BufferedReader(new FileReader("/proc/mounts"))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                final String[] fields = line.split(" ");
-                final String partition = fields[1];
-                final String fsType = fields[2];
-                if (partition.equals("/data") && fsType.equals("f2fs")) {
-                    return true;
-                }
-            }
-        } catch (IOException e) {
-            Log.e(TAG, "Failed to read /proc/mounts");
-            displayToast(mContext.getString(R.string.format_ext4_failure_toast));
-        }
-
-        return false;
-    }
-
-    private boolean isDeviceOEMUnlocked() {
-        // OEM unlock is checked for bootloader, carrier and user. Check all three to ensure
-        // that device is unlocked and it is also allowed by user as well as carrier
-        final OemLockManager oemLockManager = mContext.getSystemService(OemLockManager.class);
-        final UserManager userManager = mContext.getSystemService(UserManager.class);
-        if (oemLockManager == null || userManager == null) {
-            Log.e(TAG, "Required services not found on device to check for OEM unlock state.");
-            return false;
-        }
-
-        // If either of device or carrier is not allowed to unlock, return false
-        if (!oemLockManager.isDeviceOemUnlocked()
-                || !oemLockManager.isOemUnlockAllowedByCarrier()) {
-            Log.e(TAG, "Device is not OEM unlocked or it is not allowed by carrier");
-            return false;
-        }
-
-        final UserHandle userHandle = UserHandle.of(UserHandle.myUserId());
-        if (userManager.hasBaseUserRestriction(UserManager.DISALLOW_FACTORY_RESET, userHandle)) {
-            Log.e(TAG, "Factory reset is not allowed for user.");
-            return false;
-        }
-
-        return true;
     }
 
     // if BOARD_16K_OTA_MOVE_VENDOR, OTAs will be present on the /vendor partition

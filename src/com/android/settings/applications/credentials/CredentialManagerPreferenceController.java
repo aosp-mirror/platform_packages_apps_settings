@@ -87,6 +87,11 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         implements LifecycleObserver {
     public static final String ADD_SERVICE_DEVICE_CONFIG = "credential_manager_service_search_uri";
 
+    private static final String TAG = "CredentialManagerPreferenceController";
+    private static final String ALTERNATE_INTENT = "android.settings.SYNC_SETTINGS";
+    private static final String PRIMARY_INTENT = "android.settings.CREDENTIAL_PROVIDER";
+    private static final int MAX_SELECTABLE_PROVIDERS = 5;
+
     /**
      * In the settings logic we should hide the list of additional credman providers if there is no
      * provider selected at the top. The current logic relies on checking whether the autofill
@@ -94,11 +99,6 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
      * provider is set we will set the autofill setting to be this placeholder.
      */
     public static final String AUTOFILL_CREDMAN_ONLY_PROVIDER_PLACEHOLDER = "credential-provider";
-
-    private static final String TAG = "CredentialManagerPreferenceController";
-    private static final String ALTERNATE_INTENT = "android.settings.SYNC_SETTINGS";
-    private static final String PRIMARY_INTENT = "android.settings.CREDENTIAL_PROVIDER";
-    private static final int MAX_SELECTABLE_PROVIDERS = 5;
 
     private final PackageManager mPm;
     private final List<CredentialProviderInfo> mServices;
@@ -521,11 +521,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         // Get the selected autofill provider. If it is the placeholder then replace it with an
         // empty string.
         String selectedAutofillProvider =
-                DefaultCombinedPicker.getSelectedAutofillProvider(mContext, getUser());
-        if (TextUtils.equals(
-                selectedAutofillProvider, AUTOFILL_CREDMAN_ONLY_PROVIDER_PLACEHOLDER)) {
-            selectedAutofillProvider = "";
-        }
+                getSelectedAutofillProvider(mContext, getUser(), TAG);
 
         // Get the list of combined providers.
         List<CombinedProviderInfo> providers =
@@ -677,6 +673,42 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         // reserve one place for the primary provider so if the max limit is
         // five providers this will be four additional plus the primary.
         return (enabledAdditionalProviderCount + 1) >= MAX_SELECTABLE_PROVIDERS;
+    }
+
+    /** Gets the credential autofill service component name. */
+    public static String getCredentialAutofillService(Context context, String tag) {
+        try {
+            return context.getResources().getString(
+                    com.android.internal.R.string.config_defaultCredentialManagerAutofillService);
+        } catch (Resources.NotFoundException e) {
+            Log.e(tag, "Failed to find credential autofill service.", e);
+        }
+        return "";
+    }
+
+    /** Gets the selected autofill provider name. This will filter out place holder names. **/
+    public static @Nullable String getSelectedAutofillProvider(
+            Context context, int userId, String tag) {
+        String providerName = Settings.Secure.getStringForUser(
+                context.getContentResolver(), Settings.Secure.AUTOFILL_SERVICE, userId);
+
+        if (TextUtils.isEmpty(providerName)) {
+            return providerName;
+        }
+
+        if (providerName.equals(AUTOFILL_CREDMAN_ONLY_PROVIDER_PLACEHOLDER)) {
+            return "";
+        }
+
+        String credentialAutofillService = "";
+        if (android.service.autofill.Flags.autofillCredmanDevIntegration()) {
+            credentialAutofillService = getCredentialAutofillService(context, tag);
+        }
+        if (providerName.equals(credentialAutofillService)) {
+            return "";
+        }
+
+        return providerName;
     }
 
     private CombiPreference addProviderPreference(

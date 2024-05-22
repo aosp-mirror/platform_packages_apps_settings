@@ -118,7 +118,7 @@ open class SettingsSpaEnvironment(context: Context) : SpaEnvironment(context) {
         ApnEditPageProvider,
         SimOnboardingPageProvider,
         BatteryOptimizationModeAppListPageProvider,
-        NetworkCellularGroupProvider,
+        NetworkCellularGroupProvider(),
         WifiPrivacyPageProvider,
     )
 

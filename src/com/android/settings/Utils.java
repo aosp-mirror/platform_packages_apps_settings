@@ -1409,7 +1409,8 @@ public final class Utils extends com.android.settingslib.Utils {
         ViewCompat.setOnApplyWindowInsetsListener(activity.findViewById(android.R.id.content),
                 (v, windowInsets) -> {
                     Insets insets = windowInsets.getInsets(
-                            WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.ime());
+                            WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.ime()
+                                    | WindowInsetsCompat.Type.displayCutout());
                     int statusBarHeight = activity.getWindow().getDecorView().getRootWindowInsets()
                             .getInsets(WindowInsetsCompat.Type.statusBars()).top;
                     // Apply the insets paddings to the view.

@@ -170,7 +170,8 @@ public final class DataProcessManagerTest {
         final Map<Long, Integer> batteryLevelMap1 =
                 Map.of(timestamps1.get(0), 100, timestamps1.get(1), 100, timestamps1.get(2), 100);
         hourlyBatteryLevelsPerDay.add(
-                new BatteryLevelData.PeriodBatteryLevelData(batteryLevelMap1, timestamps1));
+                new BatteryLevelData.PeriodBatteryLevelData(
+                        batteryLevelMap1, timestamps1, /* isStartTimestamp= */ false));
         // Adds the day 2 data.
         hourlyBatteryLevelsPerDay.add(null);
         // Adds the day 3 data.
@@ -178,7 +179,8 @@ public final class DataProcessManagerTest {
         final Map<Long, Integer> batteryLevelMap2 =
                 Map.of(timestamps2.get(0), 100, timestamps2.get(1), 100);
         hourlyBatteryLevelsPerDay.add(
-                new BatteryLevelData.PeriodBatteryLevelData(batteryLevelMap2, timestamps2));
+                new BatteryLevelData.PeriodBatteryLevelData(
+                        batteryLevelMap2, timestamps2, /* isStartTimestamp= */ false));
         // Fake current usage data.
         final UsageEvents.Event event1 =
                 getUsageEvent(UsageEvents.Event.ACTIVITY_RESUMED, /* timestamp= */ 1, packageName);

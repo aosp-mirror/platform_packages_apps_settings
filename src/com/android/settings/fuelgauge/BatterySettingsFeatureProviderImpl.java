@@ -67,4 +67,31 @@ public class BatterySettingsFeatureProviderImpl implements BatterySettingsFeatur
             @NonNull Context context, long remainingTimeMs, long currentTimeMs) {
         return null;
     }
+
+    @Override
+    public boolean isChargingOptimizationMode(@NonNull Context context) {
+        return false;
+    }
+
+    @Nullable
+    @Override
+    public CharSequence getChargingOptimizationRemainingLabel(
+            @NonNull Context context,
+            int batteryLevel,
+            int pluggedStatus,
+            long chargeRemainingTimeMs,
+            long currentTimeMs) {
+        return null;
+    }
+
+    @Nullable
+    @Override
+    public CharSequence getChargingOptimizationChargeLabel(
+            @NonNull Context context,
+            int batteryLevel,
+            String batteryPercentageString,
+            long chargeRemainingTimeMs,
+            long currentTimeMs) {
+        return null;
+    }
 }

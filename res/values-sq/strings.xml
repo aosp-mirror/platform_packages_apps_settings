@@ -286,7 +286,8 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Aplikacionet me lejen \"Pajisjet në afërsi\" mund të përcaktojnë pozicionin e përafërt të pajisjeve të lidhura."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Qasja te vendndodhja është joaktive për aplikacionet dhe shërbimet. Vendndodhja e pajisjes sate mund t\'u dërgohet përsëri personave që përgjigjen në rast urgjence kur telefonon ose dërgon mesazh te një numër urgjence."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Mëso më shumë për \"Cilësimet e vendndodhjes\""</string>
-    <string name="location_settings_tooltip_text_for_chrome" msgid="3574930966097093550">"Për të ndryshuar qasjen te vendndodhja, shko te Cilësimet &gt; Siguria dhe privatësia &gt; Kontrollet e privatësisë"</string>
+    <!-- no translation found for location_settings_tooltip_text_for_chrome (5781821709250544575) -->
+    <skip />
     <string name="account_settings_title" msgid="9138880127246241885">"Llogaritë"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Siguria"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Enkriptimi dhe kredencialet"</string>
@@ -566,7 +567,8 @@
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"Sa herë që kyçet pajisja"</string>
     <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"Pas 5 minutash pa aktivitet"</string>
     <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"Vetëm pasi pajisja të riniset"</string>
-    <string name="private_space_hide_page_title" msgid="4351404195904146088">"Fshihe hapësirën private kur është e kyçur"</string>
+    <string name="private_space_hide_page_title" msgid="3364639176511877414">"Fshihe hapësirën private"</string>
+    <string name="private_space_hide_when_locked" msgid="6219472348124151797">"Fshihe hapësirën private kur është e kyçur"</string>
     <string name="private_space_hide_page_summary" msgid="6247773353685839242">"Për të mos i lejuar të tjerët të dinë se ke një hapësirë private në pajisjen tënde, mund ta fshehësh atë nga lista jote e aplikacioneve"</string>
     <string name="private_space_access_header" msgid="1077082416567150819">"Qasu te hapësira private kur është e fshehur"</string>
     <string name="private_space_search_description" msgid="1538155187658429618">"Në shiritin e kërkimit, shkruaj \"hapësira private\""</string>
@@ -2016,7 +2018,6 @@
     <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"Kontrasti i ngjyrës"</string>
     <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"Kontrasti më i lartë bën që teksti, butonat dhe ikonat të dallohen më shumë. Zgjidh kontrastin që të duket më mirë."</string>
     <string name="color_contrast_note" msgid="7592686603372566198">"Disa aplikacione mund të mos i mbështesin të gjitha cilësimet e kontrastit të tekstit dhe të ngjyrave"</string>
-    <string name="accessibility_color_contrast_summary" msgid="7563237683500106632">"Rregullo se si duken ngjyrat dhe testi në ngjyrën e sfondit të ekranit"</string>
     <string name="color_contrast_preview" msgid="6791430227535363883">"Pamja paraprake"</string>
     <string name="color_contrast_preview_sender_name" msgid="8641943417589238147">"Elena, Adi"</string>
     <string name="color_contrast_preview_email_send_date" msgid="2108702726171600080">"2 ditë më parë"</string>
@@ -2571,8 +2572,7 @@
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Rrit kohëzgjatjen e baterisë"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Çaktivizo kur të karikohet"</string>
     <string name="battery_saver_sticky_title_percentage" msgid="1178162022087559148">"Çaktivizoje në <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <!-- no translation found for battery_saver_sticky_description_new (8543277078136947874) -->
-    <skip />
+    <string name="battery_saver_sticky_description_new" msgid="8543277078136947874">"\"Kursyesi i baterisë\" çaktivizohet kur bateria karikohet mbi <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Aktivizo"</string>
@@ -2963,8 +2963,7 @@
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{{orgName} ka instaluar një autoritet certifikimi për profilin tënd të punës, çka mund ta lejojë atë të monitorojë aktivitetin tënd të rrjetit të punës, duke përfshirë email-et, aplikacionet dhe sajtet e sigurta të uebit.\n\nPër më shumë informacione rreth kësaj certifikate, kontakto me administratorin.}other{{orgName} ka instaluar autoritete certifikimi për profilin tënd të punës, çka mund ta lejojë atë të monitorojë aktivitetin tënd të rrjetit të punës, duke përfshirë email-et, aplikacionet dhe sajtet e sigurta të uebit.\n\nPër më shumë informacione rreth këtyre certifikatave, kontakto me administratorin.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"Një palë e tretë është në gjendje të monitorojë aktivitetin e rrjetit, përfshirë mail-in, aplikacionet dhe faqet e sigurta të internetit.\n\nKëtë po e bën këtë të mundur një kredencial i besuar i instaluar në pajisjen tënde."</string>
     <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{Kontrollo certifikatën}other{Kontrollo certifikatat}}"</string>
-    <!-- no translation found for user_settings_title (9208831545558787202) -->
-    <skip />
+    <string name="user_settings_title" msgid="9208831545558787202">"Përdoruesit"</string>
     <string name="user_list_title" msgid="1387379079186123404">"Përdoruesit dhe profilet"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"Shto një përdorues ose një profil"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"Profil i kufizuar"</string>
@@ -4804,46 +4803,27 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"Informacioni i politikës sate të punës"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"Cilësimet menaxhohen nga administratori yt i TI-së"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
-    <!-- no translation found for enable_16k_pages (8001470927566110689) -->
-    <skip />
-    <!-- no translation found for enable_16k_pages_summary (1964363364670306912) -->
-    <skip />
-    <!-- no translation found for confirm_enable_16k_pages_title (1286925577014793351) -->
-    <skip />
-    <!-- no translation found for confirm_enable_16k_pages_text (570198382662424714) -->
-    <skip />
-    <!-- no translation found for confirm_enable_4k_pages_title (3210360137887034659) -->
-    <skip />
-    <!-- no translation found for confirm_enable_4k_pages_text (155070605667160083) -->
-    <skip />
+    <string name="enable_16k_pages" msgid="8001470927566110689">"Nise me madhësinë e faqeve 16 KB"</string>
+    <string name="enable_16k_pages_summary" msgid="1964363364670306912">"Nise pajisjen duke përdorur bërthamën e mbështetur me madhësinë e faqeve 16 KB"</string>
+    <string name="confirm_enable_16k_pages_title" msgid="1286925577014793351">"Kalo nga modaliteti 4 KB në modalitetin 16 KB"</string>
+    <string name="confirm_enable_16k_pages_text" msgid="570198382662424714">"Je në modalitetin e pavarësisë nga madhësia e faqes duke ekzekutuar një bërthamë 4 KB dhe po kalon në modalitetin me 16 KB. Integriteti i softuerit nuk mund të garantohet në këtë modalitet dhe mund të rrezikohet çdo e dhënë e ruajtur në telefon kur ngarkuesi i fillimit është i shkyçur. Ky veprim do ta rinisë pajisjen. Disa veçori do të çaktivizohen në këto modalitete, kështu që disa aplikacione mund të mos funksionojnë. Për ta kthyer pajisjen në modalitetin e prodhimit, do të duhet që të kthehesh më pas përsëri në modalitetin 4 KB dhe të kyçësh ngarkuesin e fillimit, i cili e rivendos pajisjen në gjendje fabrike. Pasi pajisja të niset me sukses në Android, çaktivizo shkyçjen e OEM-së tek \"Opsionet e zhvilluesit\"."</string>
+    <string name="confirm_enable_4k_pages_title" msgid="3210360137887034659">"Kalo nga modaliteti 16 KB në modalitetin 4 KB"</string>
+    <string name="confirm_enable_4k_pages_text" msgid="155070605667160083">"Je në modalitetin e pavarësisë nga madhësia e faqes duke ekzekutuar një bërthamë 16 KB dhe po kalon në modalitetin me 4 KB. Integriteti i softuerit nuk mund të garantohet në këtë modalitet dhe mund të rrezikohet çdo e dhënë e ruajtur në telefon kur ngarkuesi i fillimit është i shkyçur. Ky veprim do ta rinisë pajisjen. Disa veçori do të çaktivizohen në këto modalitete, kështu që disa aplikacione mund të mos funksionojnë. Për ta kthyer pajisjen në modalitetin e prodhimit, do të duhet që të kyçësh më pas ngarkuesin e fillimit, i cili e rivendos pajisjen në gjendje fabrike. Pasi pajisja të niset me sukses në Android, çaktivizo shkyçjen e OEM-së tek \"Opsionet e zhvilluesit\"."</string>
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"Përditësimi i bërthamës në bërthamën e përputhshme me faqet 16 KB dështoi"</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Ndryshimi po zbatohet"</string>
-    <!-- no translation found for confirm_format_ext4_title (6696191800594435577) -->
-    <skip />
-    <!-- no translation found for confirm_format_ext4_text (7940372488624630214) -->
-    <skip />
-    <!-- no translation found for format_ext4_failure_toast (8059453995800471549) -->
-    <skip />
-    <!-- no translation found for confirm_oem_unlock_for_16k_title (5374451262432025419) -->
-    <skip />
-    <!-- no translation found for confirm_oem_unlock_for_16k_text (3583604865119937957) -->
-    <skip />
-    <!-- no translation found for page_agnostic_4k_pages_title (1184703958249093215) -->
-    <skip />
-    <!-- no translation found for page_agnostic_4k_pages_text_short (2894243902906666242) -->
-    <skip />
-    <!-- no translation found for page_agnostic_4k_pages_text (8284806650260868833) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_title (7762533464569818498) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text_short (269039281591806585) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text (6208765386837706582) -->
-    <skip />
-    <!-- no translation found for page_agnostic_notification_channel_name (1658444283036376361) -->
-    <skip />
-    <!-- no translation found for page_agnostic_notification_action (2309805437430150456) -->
-    <skip />
+    <string name="confirm_format_ext4_title" msgid="6696191800594435577">"Të riformatohet pajisja në ext4? (kërkohet për modalitetin 16 KB)"</string>
+    <string name="confirm_format_ext4_text" msgid="7940372488624630214">"Ndarja e të dhënave të kësaj pajisjeje duhet të konvertohet në ext4 para se të përdoret opsioni i zhvilluesit 16 KB. Integriteti i softuerit nuk mund të garantohet në këtë modalitet dhe mund të rrezikohet çdo e dhënë e ruajtur në telefon kur ngarkuesi i fillimit është i shkyçur. Aktivizimi i opsioni 16 KB do të kërkojë një rinisje tjetër pas kësaj. Pasi të jesh në këtë modalitet, mund t\'i ndërrosh modalitetet 4 KB dhe 16 KB me vetëm një rinisje. Disa veçori do të çaktivizohen në këto modalitete, kështu që disa aplikacione mund të mos funksionojnë. Për ta kthyer pajisjen në modalitetin e prodhimit, do të duhet që të kthehesh përsëri në modalitetin 4 KB dhe të kyçësh më pas ngarkuesin e fillimit, i cili e rivendos pajisjen në gjendje fabrike. Pasi pajisja të niset me sukses në Android, çaktivizo shkyçjen e OEM-së tek \"Opsionet e zhvilluesit\". Pajisja do të pastrohet dhe sistemi i skedarëve do të ndryshohet në ext4 pas konfirmimit. Pasi të përfundojë kjo, kthehu për të aktivizuar përsëri 16 KB."</string>
+    <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Riformatimi dhe pastrimi i ndarjes së të dhënave në ext4 dështoi."</string>
+    <string name="confirm_oem_unlock_for_16k_title" msgid="5374451262432025419">"Shkyçja e ngarkuesit të fillimit kërkohet për modalitetin 16 KB"</string>
+    <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"Kjo pajisje duhet ta ketë të shkyçur ngarkuesin e fillimit para se të përdoret opsioni i zhvilluesit 16 KB. Integriteti i softuerit nuk mund të garantohet në këtë modalitet dhe mund të rrezikohet çdo e dhënë e ruajtur në telefon kur ngarkuesi i fillimit është i shkyçur. Të gjitha të dhënat dhe cilësimet e përdoruesit do të pastrohen kur të aktivizohet modaliteti 16 KB. Kur të shkyçet ngarkuesi i fillimit, aktivizimi i opsionit 16 KB do të kërkojë dy rinisje. Pasi të jesh në këtë modalitet, mund t\'i ndërrosh modalitetet 4 KB dhe 16 KB me vetëm një rinisje. Disa veçori do të çaktivizohen në këto modalitete, kështu që disa aplikacione mund të mos funksionojnë. Për ta kthyer pajisjen në modalitetin e prodhimit, do të duhet që të kthehesh përsëri në modalitetin 4 KB dhe më pas të kyçësh OEM-në/ngarkuesin e fillimit (që e rivendos pajisjen në gjendje fabrike). Shkyçe ngarkuesin e fillimit dhe provo përsëri. Mund t\'i shikosh udhëzimet se si ta bësh këtë në &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
+    <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"Po përdor modalitetin 4 KB të pavarësisë nga madhësia e faqes"</string>
+    <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"Je në modalitetin 4 KB të modalitetit të pavarësisë nga madhësia e faqes. Integriteti i softuerit nuk mund të garantohet në këtë modalitet dhe mund të rrezikohet çdo e dhënë e ruajtur në telefon kur ngarkuesi i fillimit është i shkyçur. Disa veçori do të çaktivizohen në këto modalitete, kështu që disa aplikacione mund të mos funksionojnë. Për të hyrë përsëri në modalitetin e prodhimit, duhet të kyçësh ngarkuesin e fillimit të pajisjes. Trokit për të lexuar më shumë."</string>
+    <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"Je në modalitetin 4 KB të modalitetit të pavarësisë nga madhësia e faqes. Integriteti i softuerit nuk mund të garantohet në këtë modalitet dhe mund të rrezikohet çdo e dhënë e ruajtur në telefon kur ngarkuesi i fillimit është i shkyçur. Disa veçori do të çaktivizohen në këto modalitete, kështu që disa aplikacione mund të mos funksionojnë. Për të hyrë përsëri në modalitetin e prodhimit, duhet të kyçësh ngarkuesin e fillimit të pajisjes. Ky veprim do ta rivendosë pajisjen në gjendje fabrike dhe do ta restaurojë te cilësimet e prodhimit. Pasi pajisja të niset me sukses në Android, çaktivizo shkyçjen e OEM-së tek \"Opsionet e zhvilluesit\". Nëse pajisja nuk arrin të niset në Android ose është e paqëndrueshme, riinstalo në pajisje imazhet më të fundit të fabrikës nga &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; ose përdor &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; dhe zgjidh \"Pastro pajisjen\", \"Kyç ngarkuesin e fillimit\" dhe \"Riinstalo me forcë të gjitha ndarjet\"."</string>
+    <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"Po përdor modalitetin 16 KB të pavarësisë nga madhësia e faqes"</string>
+    <string name="page_agnostic_16k_pages_text_short" msgid="269039281591806585">"Je në modalitetin 16 KB të modalitetit të pavarësisë nga madhësia e faqes. Integriteti i softuerit nuk mund të garantohet në këtë modalitet dhe mund të rrezikohet çdo e dhënë e ruajtur në telefon kur ngarkuesi i fillimit është i shkyçur. Disa veçori do të çaktivizohen në këto modalitete, kështu që disa aplikacione mund të mos funksionojnë. Për të hyrë përsëri në modalitetin e prodhimit, duhet të kthehesh përsëri në modalitetin 4 KB dhe më pas të kyçësh ngarkuesin e fillimit të pajisjes. Trokit për të lexuar më shumë."</string>
+    <string name="page_agnostic_16k_pages_text" msgid="6208765386837706582">"Je në modalitetin 16 KB të modalitetit të pavarësisë nga madhësia e faqes. Integriteti i softuerit nuk mund të garantohet në këtë modalitet dhe mund të rrezikohet çdo e dhënë e ruajtur në telefon kur ngarkuesi i fillimit është i shkyçur. Disa veçori do të çaktivizohen në këto modalitete, kështu që disa aplikacione mund të mos funksionojnë. Për të hyrë përsëri në modalitetin e prodhimit, duhet të kthehesh përsëri në modalitetin 4 KB dhe më pas të kyçësh ngarkuesin e fillimit të pajisjes. Ky veprim do ta rivendosë pajisjen në gjendje fabrike dhe do ta restaurojë te cilësimet e prodhimit. Pasi pajisja të niset me sukses në Android, çaktivizo shkyçjen e OEM-së tek \"Opsionet e zhvilluesit\". Nëse pajisja nuk arrin të niset në Android ose është e paqëndrueshme, riinstalo në pajisje imazhet më të fundit të fabrikës nga &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; ose përdor &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; dhe zgjidh \"Pastro pajisjen\", \"Kyç ngarkuesin e fillimit\" dhe \"Riinstalo me forcë të gjitha ndarjet\"."</string>
+    <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"Modaliteti 16 KB i pavarësisë nga madhësia e faqes"</string>
+    <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Lexo më shumë"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Administruesi i raportit të defekteve në kod"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Përcakton se cili aplikacion administron shkurtoren e \"Raportit të defekteve në kod\" në pajisjen tënde."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Personal"</string>
@@ -4975,8 +4955,7 @@
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Përdor shërbimin e printimit"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Lejo disa përdorues"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"lejo, disa, përdorues, leje, shumë"</string>
-    <!-- no translation found for multiple_users_title_keywords (2395593167746225172) -->
-    <skip />
+    <string name="multiple_users_title_keywords" msgid="2395593167746225172">"disa, përdorues, profile, persona, llogari, shumë"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Përdor korrigjimin përmes Wi-Fi"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Përdor preferencat e drejtuesit të grafikëve"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"Përdor \"Dritën e natës\""</string>
@@ -5011,8 +4990,12 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Çaktivizo \"Modalitetin e aeroplanit\" për të përdorur UWB."</string>
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"Veçoria UWB nuk ofrohet në vendndodhjen aktuale"</string>
     <string name="thread_network_settings_title" msgid="4212301030523859220">"Thread"</string>
-    <string name="thread_network_settings_summary" msgid="8065599651021748339">"Lidhu me pajisjet e përputhshme duke përdorur Thread për një përvojë pa ndërprerje me shtëpinë inteligjente"</string>
-    <string name="thread_network_settings_summary_airplane_mode" msgid="7207252895832446979">"Çaktivizo modalitetin e aeroplanit për të përdorur Thread."</string>
+    <!-- no translation found for thread_network_settings_main_switch_title (3859168481929323474) -->
+    <skip />
+    <!-- no translation found for thread_network_settings_footer_title (7385600318850220927) -->
+    <skip />
+    <!-- no translation found for thread_network_settings_learn_more (8278498005848565050) -->
+    <skip />
     <string name="camera_toggle_title" msgid="8952668677727244992">"Qasja te kamera"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Qasja te mikrofoni"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"Për aplikacionet dhe shërbimet"</string>

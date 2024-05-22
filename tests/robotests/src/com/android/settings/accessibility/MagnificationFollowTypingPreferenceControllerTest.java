@@ -17,6 +17,8 @@
 package com.android.settings.accessibility;
 
 import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -59,6 +61,17 @@ public class MagnificationFollowTypingPreferenceControllerTest {
 
         mController.updateState(mSwitchPreference);
         reset(mSwitchPreference);
+    }
+
+    @Test
+    public void getAvailableStatus_notInSetupWizard_returnAvailable() {
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+    }
+
+    @Test
+    public void getAvailableStatus_inSetupWizard_returnConditionallyUnavailable() {
+        mController.setInSetupWizard(true);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 
     @Test

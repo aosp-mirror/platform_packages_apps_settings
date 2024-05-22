@@ -182,8 +182,10 @@ public class EditShortcutsPreferenceFragment extends DashboardFragment {
                     refreshPreferenceController(QuickSettingsShortcutOptionController.class);
                 }
 
-                PreferredShortcuts.updatePreferredShortcutsFromSettings(
-                        getContext(), mShortcutTargets);
+                if (getContext() != null) {
+                    PreferredShortcuts.updatePreferredShortcutsFromSettings(
+                            getContext(), mShortcutTargets);
+                }
             }
         };
 
@@ -388,7 +390,7 @@ public class EditShortcutsPreferenceFragment extends DashboardFragment {
     private void refreshPreferenceController(
             Class<? extends AbstractPreferenceController> controllerClass) {
         AbstractPreferenceController controller = use(controllerClass);
-        if (controller != null) {
+        if (controller != null && getPreferenceScreen() != null) {
             controller.displayPreference(getPreferenceScreen());
             if (!TextUtils.isEmpty(controller.getPreferenceKey())) {
                 controller.updateState(findPreference(controller.getPreferenceKey()));

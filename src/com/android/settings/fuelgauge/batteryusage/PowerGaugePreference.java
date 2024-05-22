@@ -42,7 +42,9 @@ public class PowerGaugePreference extends AppPreference {
     // Please see go/battery-usage-app-list-alpha
     private static final float SELECTABLE_ALPHA = 1f;
     private static final float UNSELECTABLE_ALPHA_LIGHT_MODE = 0.65f;
-    private static final float UNSELECTABLE_ALPHA_DARK_MODE = 0.5f;
+    private static final float UNSELECTABLE_ALPHA_DARK_MODE = 0.65f;
+
+    private final int mTitleColorNormal;
 
     private BatteryEntry mInfo;
     private BatteryDiffEntry mBatteryDiffEntry;
@@ -78,6 +80,8 @@ public class PowerGaugePreference extends AppPreference {
         mInfo = info;
         mContentDescription = contentDescription;
         mShowAnomalyIcon = false;
+        mTitleColorNormal =
+                Utils.getColorAttrDefaultColor(context, android.R.attr.textColorPrimary);
     }
 
     /** Sets the content description. */
@@ -154,6 +158,13 @@ public class PowerGaugePreference extends AppPreference {
         if (mContentDescription != null) {
             final TextView titleView = (TextView) view.findViewById(android.R.id.title);
             titleView.setContentDescription(mContentDescription);
+        }
+
+        if (!isSelectable()) {
+            // Set colors consistently to meet contrast requirements for non-selectable items
+            ((TextView) view.findViewById(android.R.id.title)).setTextColor(mTitleColorNormal);
+            ((TextView) view.findViewById(android.R.id.summary)).setTextColor(mTitleColorNormal);
+            subtitle.setTextColor(mTitleColorNormal);
         }
     }
 

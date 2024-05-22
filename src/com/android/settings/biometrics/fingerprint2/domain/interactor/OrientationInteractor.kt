@@ -17,6 +17,7 @@
 package com.android.settings.biometrics.fingerprint2.domain.interactor
 
 import android.content.Context
+import android.util.Log
 import android.view.OrientationEventListener
 import com.android.internal.R
 import kotlinx.coroutines.CoroutineScope
@@ -24,16 +25,24 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.shareIn
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.transform
 
-/**
- * Interactor which provides information about orientation
- */
+/** Interactor which provides information about orientation */
 interface OrientationInteractor {
   /** A flow that contains the information about the orientation changing */
   val orientation: Flow<Int>
-  /** A flow that contains the rotation info */
+  /**
+   * A flow that contains the rotation info
+   */
   val rotation: Flow<Int>
+  /**
+   * A flow that contains the rotation info matched against the def [config_reverseDefaultRotation]
+   */
+  val rotationFromDefault: Flow<Int>
+
   /**
    * A Helper function that computes rotation if device is in
    * [R.bool.config_reverseDefaultConfigRotation]
@@ -53,24 +62,11 @@ class OrientationInteractorImpl(private val context: Context, activityScope: Cor
       }
     orientationEventListener.enable()
     awaitClose { orientationEventListener.disable() }
-  }
+  }.shareIn(activityScope, SharingStarted.Eagerly, replay = 1)
 
-  override val rotation: Flow<Int> =
-    callbackFlow {
-      val orientationEventListener =
-        object : OrientationEventListener(context) {
-          override fun onOrientationChanged(orientation: Int) {
-            trySend(getRotationFromDefault(context.display!!.rotation))
-          }
-        }
-      orientationEventListener.enable()
-      awaitClose { orientationEventListener.disable() }
-    }
-      .stateIn(
-        activityScope, // This is tied to the activity scope
-        SharingStarted.WhileSubscribed(), // When no longer subscribed, we removeTheListener
-        context.display!!.rotation,
-      )
+  override val rotation: Flow<Int> = orientation.transform { emit(context.display!!.rotation) }
+
+  override val rotationFromDefault: Flow<Int> = rotation.map { getRotationFromDefault(it) }
 
   override fun getRotationFromDefault(rotation: Int): Int {
     val isReverseDefaultRotation =

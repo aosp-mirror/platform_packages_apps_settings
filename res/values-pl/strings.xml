@@ -286,7 +286,8 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Aplikacje z uprawnieniami dostępu do urządzeń w pobliżu mogą określać położenie połączonych urządzeń względem siebie."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Dostęp aplikacji i usług do lokalizacji jest wyłączony. Informacje o lokalizacji urządzenia mogą jednak zostać przesłane do ratowników, gdy zadzwonisz lub wyślesz SMS-a na numer alarmowy."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Więcej informacji o ustawieniach lokalizacji"</string>
-    <string name="location_settings_tooltip_text_for_chrome" msgid="3574930966097093550">"Aby zmienić dostęp do lokalizacji, kliknij Ustawienia &gt; Prywatność i bezpieczeństwo &gt; Ustawienia prywatności"</string>
+    <!-- no translation found for location_settings_tooltip_text_for_chrome (5781821709250544575) -->
+    <skip />
     <string name="account_settings_title" msgid="9138880127246241885">"Konta"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Zabezpieczenia"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Szyfrowanie i dane logowania"</string>
@@ -566,7 +567,8 @@
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"Przy każdym zablokowaniu urządzenia"</string>
     <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"Po 5 minutach braku aktywności"</string>
     <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"Tylko po ponownym uruchomieniu"</string>
-    <string name="private_space_hide_page_title" msgid="4351404195904146088">"Ukrywaj przestrzeń prywatną po zablokowaniu"</string>
+    <string name="private_space_hide_page_title" msgid="3364639176511877414">"Ukrywaj przestrzeń prywatną"</string>
+    <string name="private_space_hide_when_locked" msgid="6219472348124151797">"Ukrywaj przestrzeń prywatną po zablokowaniu"</string>
     <string name="private_space_hide_page_summary" msgid="6247773353685839242">"Aby inni nie wiedzieli, że na urządzeniu jest przestrzeń prywatna, możesz ukryć ją na liście aplikacji"</string>
     <string name="private_space_access_header" msgid="1077082416567150819">"Dostęp do przestrzeni prywatnej po jej ukryciu"</string>
     <string name="private_space_search_description" msgid="1538155187658429618">"W pasku wyszukiwania wpisz „przestrzeń prywatna”"</string>
@@ -2016,7 +2018,6 @@
     <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"Kontrast kolorów"</string>
     <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"Wyższy kontrast powoduje większe wyróżnienie tekstu, przycisków i ikon. Wybierz poziom kontrastu, który najbardziej Ci odpowiada."</string>
     <string name="color_contrast_note" msgid="7592686603372566198">"Niektóre aplikacje mogą nie obsługiwać wszystkich ustawień kontrastu kolorów i tekstu"</string>
-    <string name="accessibility_color_contrast_summary" msgid="7563237683500106632">"Dostosuj wygląd kolorów i tekstu względem tła na ekranie"</string>
     <string name="color_contrast_preview" msgid="6791430227535363883">"Podgląd"</string>
     <string name="color_contrast_preview_sender_name" msgid="8641943417589238147">"Helena, Adam"</string>
     <string name="color_contrast_preview_email_send_date" msgid="2108702726171600080">"2 dni temu"</string>
@@ -2571,8 +2572,7 @@
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Wydłużanie czasu pracy na baterii"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Wyłącz po naładowaniu"</string>
     <string name="battery_saver_sticky_title_percentage" msgid="1178162022087559148">"Wyłączaj przy <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <!-- no translation found for battery_saver_sticky_description_new (8543277078136947874) -->
-    <skip />
+    <string name="battery_saver_sticky_description_new" msgid="8543277078136947874">"Oszczędzanie baterii wyłączy się, gdy poziom naładowania baterii przekroczy <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Włącz"</string>
@@ -2963,8 +2963,7 @@
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{Organizacja {orgName} zainstalowała w Twoim profilu służbowym certyfikat CA, który może zezwolić jej na monitorowanie aktywności profilu w sieci, w tym e-maili, aplikacji i bezpiecznych stron internetowych.\n\nAby dowiedzieć się więcej o tym certyfikacie, skontaktuj się ze swoim administratorem.}few{Organizacja {orgName} zainstalowała w Twoim profilu służbowym certyfikaty CA, które mogą zezwolić jej na monitorowanie aktywności profilu w sieci, w tym e-maili, aplikacji i bezpiecznych stron internetowych.\n\nAby dowiedzieć się więcej o tym certyfikacie, skontaktuj się ze swoim administratorem.}many{Organizacja {orgName} zainstalowała w Twoim profilu służbowym certyfikaty CA, które mogą zezwolić jej na monitorowanie aktywności profilu w sieci, w tym e-maili, aplikacji i bezpiecznych stron internetowych.\n\nAby dowiedzieć się więcej o tym certyfikacie, skontaktuj się ze swoim administratorem.}other{Organizacja {orgName} zainstalowała w Twoim profilu służbowym certyfikaty CA, które mogą zezwolić jej na monitorowanie aktywności profilu w sieci, w tym e-maili, aplikacji i bezpiecznych stron internetowych.\n\nAby dowiedzieć się więcej o tym certyfikacie, skontaktuj się ze swoim administratorem.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"Podmiot zewnętrzny może monitorować Twoją aktywność w sieci (np. e-maile, aplikacje i bezpieczne strony).\n\nUmożliwiają to dane uwierzytelniające zainstalowane na Twoim urządzeniu."</string>
     <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{Sprawdź certyfikat}few{Sprawdź certyfikaty}many{Sprawdź certyfikaty}other{Sprawdź certyfikaty}}"</string>
-    <!-- no translation found for user_settings_title (9208831545558787202) -->
-    <skip />
+    <string name="user_settings_title" msgid="9208831545558787202">"Użytkownicy"</string>
     <string name="user_list_title" msgid="1387379079186123404">"Użytkownicy i profile"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"Dodaj użytkownika lub profil"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"Profil ograniczony"</string>
@@ -4804,46 +4803,27 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"Informacje o zasadach służbowych"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"Ustawienia, którymi zarządza administrator"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
-    <!-- no translation found for enable_16k_pages (8001470927566110689) -->
-    <skip />
-    <!-- no translation found for enable_16k_pages_summary (1964363364670306912) -->
-    <skip />
-    <!-- no translation found for confirm_enable_16k_pages_title (1286925577014793351) -->
-    <skip />
-    <!-- no translation found for confirm_enable_16k_pages_text (570198382662424714) -->
-    <skip />
-    <!-- no translation found for confirm_enable_4k_pages_title (3210360137887034659) -->
-    <skip />
-    <!-- no translation found for confirm_enable_4k_pages_text (155070605667160083) -->
-    <skip />
+    <string name="enable_16k_pages" msgid="8001470927566110689">"Uruchom ze stroną 16 KB"</string>
+    <string name="enable_16k_pages_summary" msgid="1964363364670306912">"Uruchom z jądrem systemu obsługującym stronę 16 KB"</string>
+    <string name="confirm_enable_16k_pages_title" msgid="1286925577014793351">"Zmiana z trybu 4 KB na 16 KB"</string>
+    <string name="confirm_enable_16k_pages_text" msgid="570198382662424714">"Korzystasz z ogólnego trybu strony z jądrem 4 KB i zamierzasz przełączyć się na tryb 16 KB. W tym trybie nie można zagwarantować integralności oprogramowania. Kiedy program rozruchowy będzie odblokowany, dane zapisane na telefonie mogą być zagrożone. Zmiana spowoduje ponowne uruchomienie urządzenia. W tych trybach niektóre funkcje będą wyłączone, a część aplikacji może nie działać. Aby przywrócić na urządzeniu tryb produkcyjny, musisz przełączyć je z powrotem na tryb 4 KB i zablokować program rozruchowy, co spowoduje zresetowanie urządzenia. Gdy na urządzeniu uruchomi się Android, wyłącz zdjęcie blokady OEM w Opcjach programisty."</string>
+    <string name="confirm_enable_4k_pages_title" msgid="3210360137887034659">"Zmiana z trybu 16 KB na 4 KB"</string>
+    <string name="confirm_enable_4k_pages_text" msgid="155070605667160083">"Korzystasz z ogólnego trybu strony z jądrem 16 KB i zamierzasz przełączyć się na tryb 4 KB. W tym trybie nie można zagwarantować integralności oprogramowania. Kiedy program rozruchowy będzie odblokowany, dane zapisane na telefonie mogą być zagrożone. Zmiana spowoduje ponowne uruchomienie urządzenia. W tych trybach niektóre funkcje będą wyłączone, a część aplikacji może nie działać. Aby przywrócić na urządzeniu tryb produkcyjny, musisz zablokować program rozruchowy, co spowoduje zresetowanie urządzenia. Gdy na urządzeniu uruchomi się Android, wyłącz zdjęcie blokady OEM w Opcjach programisty."</string>
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"Nie udało się zaktualizować jądra systemu, aby obsługiwał strony o rozmiarze 16 KB."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Wprowadzam zmianę"</string>
-    <!-- no translation found for confirm_format_ext4_title (6696191800594435577) -->
-    <skip />
-    <!-- no translation found for confirm_format_ext4_text (7940372488624630214) -->
-    <skip />
-    <!-- no translation found for format_ext4_failure_toast (8059453995800471549) -->
-    <skip />
-    <!-- no translation found for confirm_oem_unlock_for_16k_title (5374451262432025419) -->
-    <skip />
-    <!-- no translation found for confirm_oem_unlock_for_16k_text (3583604865119937957) -->
-    <skip />
-    <!-- no translation found for page_agnostic_4k_pages_title (1184703958249093215) -->
-    <skip />
-    <!-- no translation found for page_agnostic_4k_pages_text_short (2894243902906666242) -->
-    <skip />
-    <!-- no translation found for page_agnostic_4k_pages_text (8284806650260868833) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_title (7762533464569818498) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text_short (269039281591806585) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text (6208765386837706582) -->
-    <skip />
-    <!-- no translation found for page_agnostic_notification_channel_name (1658444283036376361) -->
-    <skip />
-    <!-- no translation found for page_agnostic_notification_action (2309805437430150456) -->
-    <skip />
+    <string name="confirm_format_ext4_title" msgid="6696191800594435577">"Sformatować ponownie urządzenie jako ext4? (Jest to wymagane w przypadku trybu 16 KB)."</string>
+    <string name="confirm_format_ext4_text" msgid="7940372488624630214">"Aby można było użyć trybu 16 KB w Opcjach programisty, musisz przekonwertować partycję danych na system ext4. W tym trybie nie można zagwarantować integralności oprogramowania. Kiedy program rozruchowy będzie odblokowany, dane zapisane na telefonie mogą być zagrożone. Po aktywowaniu trybu 16 KB będzie trzeba co najmniej raz uruchomić ponownie urządzenie. Po włączeniu tego trybu przełączanie się między trybami 4 KB i 16 KB będzie wymagało tylko jednokrotnego restartu. W tych trybach niektóre funkcje będą wyłączone, a część aplikacji może nie działać. Aby przywrócić na urządzeniu tryb produkcyjny, musisz przełączyć je z powrotem na tryb 4 KB i zablokować program rozruchowy, co spowoduje zresetowanie urządzenia. Gdy na urządzeniu uruchomi się Android, wyłącz zdjęcie blokady OEM w Opcjach programisty. Z urządzenia zostaną usunięte wszystkie dane, a po potwierdzeniu system plików zmieni się na ext4. Po wykonaniu tych czynności wróć tutaj, aby ponownie włączyć tryb 16 KB."</string>
+    <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Nie udało się wyczyścić partycji danych i sformatować jej jako ext4."</string>
+    <string name="confirm_oem_unlock_for_16k_title" msgid="5374451262432025419">"Tryb 16 KB wymaga odblokowania programu rozruchowego"</string>
+    <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"Aby można było użyć trybu 16 KB w Opcjach programisty, musisz odblokować program rozruchowy. W tym trybie nie można zagwarantować integralności oprogramowania. Kiedy program rozruchowy będzie odblokowany, dane zapisane na telefonie mogą być zagrożone. Po włączeniu trybu 16 KB zostaną usunięte wszystkie dane i ustawienia użytkownika. Gdy program rozruchowy zostanie odblokowany, będzie trzeba dwukrotnie uruchomić ponownie urządzenia, aby włączyć tryb 16 KB. Po włączeniu tego trybu przełączanie się między trybami 4 KB i 16 KB będzie wymagało tylko jednokrotnego restartu. W tych trybach niektóre funkcje będą wyłączone, a część aplikacji może nie działać. Aby przywrócić na urządzeniu tryb produkcyjny, musisz przełączyć je z powrotem na tryb 4 KB i włączyć blokadę OEM lub zablokować program rozruchowy, co spowoduje zresetowanie urządzenia. Odblokuj program rozruchowy i spróbuj jeszcze raz. Instrukcje znajdziesz na stronie &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;."</string>
+    <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"Włączony jest ogólny tryb strony 4 KB"</string>
+    <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"Korzystasz z ogólnego trybu strony 4 KB. W tym trybie nie można zagwarantować integralności oprogramowania. Kiedy program rozruchowy będzie odblokowany, dane zapisane na telefonie mogą być zagrożone. W tych trybach niektóre funkcje będą wyłączone, a część aplikacji może nie działać. Aby wrócić do trybu produkcyjnego, musisz zablokować program rozruchowy urządzenia. Kliknij, aby dowiedzieć się więcej."</string>
+    <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"Korzystasz z ogólnego trybu strony 4 KB. W tym trybie nie można zagwarantować integralności oprogramowania. Kiedy program rozruchowy będzie odblokowany, dane zapisane na telefonie mogą być zagrożone. W tych trybach niektóre funkcje będą wyłączone, a część aplikacji może nie działać. Aby wrócić do trybu produkcyjnego, musisz zablokować program rozruchowy urządzenia. Spowoduje to ponowne zresetowanie urządzenia i przywrócenie na nim ustawień produkcyjnych. Gdy na urządzeniu uruchomi się Android, wyłącz zdjęcie blokady OEM w Opcjach programisty. Jeśli nie uda się uruchomić Androida lub będzie on działać niestabilnie, sflashuj na urządzeniu najnowszy obraz fabryczny pobrany ze strony &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; lub użyj narzędzia &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; i wybierz kolejno opcje „Wyczyść pamięć urządzenia”, „Zablokuj program rozruchowy” i „Wymuś flashowanie wszystkich partycji”."</string>
+    <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"Włączony jest ogólny tryb strony 16 KB"</string>
+    <string name="page_agnostic_16k_pages_text_short" msgid="269039281591806585">"Korzystasz z ogólnego trybu strony 16 KB. W tym trybie nie można zagwarantować integralności oprogramowania. Kiedy program rozruchowy będzie odblokowany, dane zapisane na telefonie mogą być zagrożone. W tych trybach niektóre funkcje będą wyłączone, a część aplikacji może nie działać. Aby wrócić do trybu produkcyjnego, musisz przełączyć się z powrotem na tryb 4 KB i zablokować program rozruchowy urządzenia. Kliknij, aby dowiedzieć się więcej."</string>
+    <string name="page_agnostic_16k_pages_text" msgid="6208765386837706582">"Korzystasz z ogólnego trybu strony 16 KB. W tym trybie nie można zagwarantować integralności oprogramowania. Kiedy program rozruchowy będzie odblokowany, dane zapisane na telefonie mogą być zagrożone. W tych trybach niektóre funkcje będą wyłączone, a część aplikacji może nie działać. Aby wrócić do trybu produkcyjnego, musisz przełączyć się z powrotem na tryb 4 KB i zablokować program rozruchowy urządzenia. Spowoduje to ponowne zresetowanie urządzenia i przywrócenie na nim ustawień produkcyjnych. Gdy na urządzeniu uruchomi się Android, wyłącz zdjęcie blokady OEM w Opcjach programisty. Jeśli nie uda się uruchomić Androida lub będzie on działać niestabilnie, sflashuj na urządzeniu najnowszy obraz fabryczny pobrany ze strony &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; lub użyj narzędzia &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; i wybierz kolejno opcje „Wyczyść pamięć urządzenia”, „Zablokuj program rozruchowy” i „Wymuś flashowanie wszystkich partycji”."</string>
+    <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"Ogólny tryb strony 16 KB"</string>
+    <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Więcej informacji"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Obsługiwanie zgłaszania błędów"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Określa, która aplikacja ma obsługiwać skrót do zgłaszania błędów na urządzeniu."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Osobista"</string>
@@ -4977,8 +4957,7 @@
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Używaj usługi drukowania"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Zezwalaj na wielu użytkowników"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"zezwalać, wiele, użytkownik, pozwolenie, dużo"</string>
-    <!-- no translation found for multiple_users_title_keywords (2395593167746225172) -->
-    <skip />
+    <string name="multiple_users_title_keywords" msgid="2395593167746225172">"kilka, użytkownicy, profile, ludzie, konta, przełącznik, wiele"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Używaj debugowania bezprzewodowego"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Używaj ustawień sterownika grafiki"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"Używaj podświetlenia nocnego"</string>
@@ -5002,7 +4981,7 @@
     <string name="enable_2g_summary" msgid="2794534052372565914">"Sieć 2G jest mniej bezpieczna, ale może poprawić jakość połączenia w niektórych lokalizacjach. W przypadku połączeń alarmowych sieć 2G jest zawsze dozwolona."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> wymaga dostępu do sieci 2G"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Zezwalaj tylko na zaszyfrowane sieci"</string>
-    <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"Jest to bezpieczniejsze, ale w niektórych lokalizacjach może ograniczać połączenie z siecią komórkową. Połączenia alarmowe są zawsze dozwolone."</string>
+    <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"Jest to bezpieczniejsze, ale w niektórych lokalizacjach może ograniczać połączenie z siecią komórkową; połączenia alarmowe są zawsze dozwolone"</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Wszystkie usługi"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Pokazuj dostęp do schowka"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Pokazuj komunikat, gdy aplikacja uzyskuje dostęp do skopiowanego tekstu, obrazów lub innych treści"</string>
@@ -5013,8 +4992,12 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Aby użyć UWB, wyłącz tryb samolotowy"</string>
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"Technologia UWB nie jest dostępna w tym miejscu"</string>
     <string name="thread_network_settings_title" msgid="4212301030523859220">"Thread"</string>
-    <string name="thread_network_settings_summary" msgid="8065599651021748339">"Łącz się ze zgodnymi urządzeniami za pomocą protokołu Thread, aby móc wygodnie korzystać z funkcji inteligentnego domu"</string>
-    <string name="thread_network_settings_summary_airplane_mode" msgid="7207252895832446979">"Aby użyć Thread, wyłącz tryb samolotowy"</string>
+    <!-- no translation found for thread_network_settings_main_switch_title (3859168481929323474) -->
+    <skip />
+    <!-- no translation found for thread_network_settings_footer_title (7385600318850220927) -->
+    <skip />
+    <!-- no translation found for thread_network_settings_learn_more (8278498005848565050) -->
+    <skip />
     <string name="camera_toggle_title" msgid="8952668677727244992">"Dostęp do aparatu"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Dostęp do mikrofonu"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"Dotyczy aplikacji i usług"</string>

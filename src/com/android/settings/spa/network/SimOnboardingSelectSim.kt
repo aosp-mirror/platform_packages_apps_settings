@@ -16,8 +16,6 @@
 
 package com.android.settings.spa.network
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.SignalCellularAlt
 import androidx.compose.runtime.Composable
@@ -25,16 +23,13 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.android.settings.R
 import com.android.settings.network.SimOnboardingService
-import com.android.settingslib.spa.framework.theme.SettingsDimension
 import com.android.settingslib.spa.widget.preference.CheckboxPreference
 import com.android.settingslib.spa.widget.preference.CheckboxPreferenceModel
 import com.android.settingslib.spa.widget.scaffold.BottomAppBarButton
 import com.android.settingslib.spa.widget.scaffold.SuwScaffold
-import com.android.settingslib.spa.widget.ui.SettingsBody
 
 /**
  * the sim onboarding select sim compose
@@ -69,9 +64,8 @@ private fun SelectSimBody(
     onboardingService: SimOnboardingService,
     isFinished: MutableState<Boolean>
 ) {
-    Column(Modifier.padding(SettingsDimension.itemPadding)) {
-        SettingsBody(stringResource(id = R.string.sim_onboarding_select_sim_msg))
-    }
+    SimOnboardingMessage(stringResource(id = R.string.sim_onboarding_select_sim_msg))
+
     isFinished.value = onboardingService.isSimSelectionFinished
     for (subInfo in onboardingService.getSelectableSubscriptionInfoList()) {
         var title = onboardingService.getSubscriptionInfoDisplayName(subInfo)

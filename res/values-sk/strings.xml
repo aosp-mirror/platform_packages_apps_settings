@@ -286,7 +286,8 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Aplikácie s povolením pre zariadenia v okolí môžu rozpoznať relatívnu pozíciu pripojených zariadení."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Prístup aplikácií a služieb k polohe je vypnutý. Poloha zariadenia však stále môže byť odoslaná záchranárom, keď zavoláte na tiesňovú linku alebo na ňu pošlete textovú správu."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Ďalšie informácie o nastaveniach polohy"</string>
-    <string name="location_settings_tooltip_text_for_chrome" msgid="3574930966097093550">"Zmena prístupu k polohe: Nastavenia &gt; Zabezp. a ochr. súkromia &gt; Nast. och. súkromia"</string>
+    <!-- no translation found for location_settings_tooltip_text_for_chrome (5781821709250544575) -->
+    <skip />
     <string name="account_settings_title" msgid="9138880127246241885">"Účty"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Zabezpečenie"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Šifrovanie a prihlasovacie údaje"</string>
@@ -566,7 +567,8 @@
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"Vždy, keď sa zariadenie uzamkne"</string>
     <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"Po piatich minútach nečinnosti"</string>
     <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"Iba po reštarte zariadenia"</string>
-    <string name="private_space_hide_page_title" msgid="4351404195904146088">"Skryť súkromný priestor, keď je uzamknutý"</string>
+    <string name="private_space_hide_page_title" msgid="3364639176511877414">"Skrytie súkromného priestoru"</string>
+    <string name="private_space_hide_when_locked" msgid="6219472348124151797">"Skrytie súkromného priestoru pri jeho uzamknutí"</string>
     <string name="private_space_hide_page_summary" msgid="6247773353685839242">"Ak nechcete, aby ostatní ľudia vedeli, že máte v zariadení súkromný priestor, môžete ho v zozname aplikácií skryť"</string>
     <string name="private_space_access_header" msgid="1077082416567150819">"Prístup do súkromného priestoru, keď je skrytý"</string>
     <string name="private_space_search_description" msgid="1538155187658429618">"Do vyhľadávacieho panela zadajte „súkromný priestor“"</string>
@@ -2016,7 +2018,6 @@
     <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"Farebný kontrast"</string>
     <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"Zvýšením kontrastu zvýrazníte text, tlačidlá a ikony. Vyberte úroveň kontrastu, ktorá vám najviac vyhovuje."</string>
     <string name="color_contrast_note" msgid="7592686603372566198">"Niektoré aplikácie nemusia podporovať všetky nastavenia kontrastu farieb a textu"</string>
-    <string name="accessibility_color_contrast_summary" msgid="7563237683500106632">"Upravte, vzhľad farieb a textu na farbe pozadia obrazovky"</string>
     <string name="color_contrast_preview" msgid="6791430227535363883">"Ukážka"</string>
     <string name="color_contrast_preview_sender_name" msgid="8641943417589238147">"Helena, Adam"</string>
     <string name="color_contrast_preview_email_send_date" msgid="2108702726171600080">"Pred 2 dňami"</string>
@@ -2571,8 +2572,7 @@
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Predĺženie výdrže batérie"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Vypnúť po nabití"</string>
     <string name="battery_saver_sticky_title_percentage" msgid="1178162022087559148">"Vypnúť pri <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <!-- no translation found for battery_saver_sticky_description_new (8543277078136947874) -->
-    <skip />
+    <string name="battery_saver_sticky_description_new" msgid="8543277078136947874">"Šetrič batérie sa vypne, keď sa batéria nabije na viac ako <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Zapnúť"</string>
@@ -2963,8 +2963,7 @@
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{Doména {orgName} nainštalovala pre váš pracovný profil certifikačnú autoritu, ktorá jej môže umožniť monitorovať aktivitu v pracovnej sieti vrátane pošty, aplikácií a zabezpečených webov.\n\nViac o tomto certifikáte sa dozviete od svojho správcu.}few{Doména {orgName} nainštalovala pre váš pracovný profil certifikačné autority, ktoré jej môžu umožniť monitorovať aktivitu v pracovnej sieti vrátane pošty, aplikácií a zabezpečených webov.\n\nViac o týchto certifikátoch sa dozviete od svojho správcu.}many{Doména {orgName} nainštalovala pre váš pracovný profil certifikačné autority, ktoré jej môžu umožniť monitorovať aktivitu v pracovnej sieti vrátane pošty, aplikácií a zabezpečených webov.\n\nViac o týchto certifikátoch sa dozviete od svojho správcu.}other{Doména {orgName} nainštalovala pre váš pracovný profil certifikačné autority, ktoré jej môžu umožniť monitorovať aktivitu v pracovnej sieti vrátane pošty, aplikácií a zabezpečených webov.\n\nViac o týchto certifikátoch sa dozviete od svojho správcu.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"Vaša aktivita v sieti, vrátane e-mailov, aplikácií a zabezpečených webov môže byť monitorovaná treťou stranou.\n\nUmožňujú to dôveryhodné poverenia nainštalované vo vašom zariadení."</string>
     <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{Skontrolovať certifikát}few{Skontrolovať certifikáty}many{Skontrolovať certifikáty}other{Skontrolovať certifikáty}}"</string>
-    <!-- no translation found for user_settings_title (9208831545558787202) -->
-    <skip />
+    <string name="user_settings_title" msgid="9208831545558787202">"Používatelia"</string>
     <string name="user_list_title" msgid="1387379079186123404">"Používatelia a profily"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"Pridať používateľa alebo profil"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"Obmedzený profil"</string>
@@ -3059,7 +3058,7 @@
     <string name="amber_alerts_title" msgid="5238275758191804575">"Upozornenia Amber"</string>
     <string name="amber_alerts_summary" msgid="5755221775246075883">"Prijímať bulletiny o únosoch detí"</string>
     <string name="repeat_title" msgid="8676570486899483606">"Opakovať"</string>
-    <string name="cell_broadcast_settings" msgid="2416980110093867199">"Bezdrôtové núdzové upozornenia"</string>
+    <string name="cell_broadcast_settings" msgid="2416980110093867199">"Bezdrôtové tiesňové varovania"</string>
     <string name="network_operators_settings" msgid="5105453353329748954">"Sieťoví operátori"</string>
     <string name="access_point_names" msgid="5768430498022188057">"Názvy prístupových bodov"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
@@ -4804,46 +4803,27 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"Informácie o pracovných pravidlách"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"Nastavenia spravované vaším správcom IT"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"Grafický procesor"</string>
-    <!-- no translation found for enable_16k_pages (8001470927566110689) -->
-    <skip />
-    <!-- no translation found for enable_16k_pages_summary (1964363364670306912) -->
-    <skip />
-    <!-- no translation found for confirm_enable_16k_pages_title (1286925577014793351) -->
-    <skip />
-    <!-- no translation found for confirm_enable_16k_pages_text (570198382662424714) -->
-    <skip />
-    <!-- no translation found for confirm_enable_4k_pages_title (3210360137887034659) -->
-    <skip />
-    <!-- no translation found for confirm_enable_4k_pages_text (155070605667160083) -->
-    <skip />
+    <string name="enable_16k_pages" msgid="8001470927566110689">"Zapínať s veľkosťou stránok 16 kB"</string>
+    <string name="enable_16k_pages_summary" msgid="1964363364670306912">"Zapínať pomocou podpor. jadra s veľ. stránok 16 kB"</string>
+    <string name="confirm_enable_16k_pages_title" msgid="1286925577014793351">"Prepnutie z režimu 4 kB na 16 kB"</string>
+    <string name="confirm_enable_16k_pages_text" msgid="570198382662424714">"Nachádzate sa v režime, ktorý nezohľadňuje stránkovanie, s jadrom 4 kB a prepínate na režim 16 kB. V tomto režime nie je možné zaručiť integritu softvéru a všetky dáta uložené v telefóne môžu byť počas odomknutia zavádzacieho programu systému ohrozené. Tento postup zariadenie reštartuje. Niektoré funkcie budú v týchto režimoch vypnuté, takže niektoré aplikácie nemusia fungovať. Ak chcete zariadenie vrátiť do ostrého režimu, musíte potom prepnúť späť do režimu 4 kB a uzamknúť zavádzací program systému, čím sa v zariadení obnovia výrobné nastavenia. Po úspešnom zapnutí zariadenia do Androidu vypnite odomknutie OEM v sekcii Pre vývojárov."</string>
+    <string name="confirm_enable_4k_pages_title" msgid="3210360137887034659">"Prepnutie z režimu 16 kB na 4 kB"</string>
+    <string name="confirm_enable_4k_pages_text" msgid="155070605667160083">"Nachádzate sa v režime, ktorý nezohľadňuje stránkovanie, s jadrom 16 kB a prepínate na režim 4 kB. V tomto režime nie je možné zaručiť integritu softvéru a všetky dáta uložené v telefóne môžu byť počas odomknutia zavádzacieho programu systému ohrozené. Tento postup zariadenie reštartuje. Niektoré funkcie budú v týchto režimoch vypnuté, takže niektoré aplikácie nemusia fungovať. Ak chcete zariadenie vrátiť do ostrého režimu, musíte uzamknúť zavádzací program systému, čím sa v zariadení obnovia výrobné nastavenia. Po úspešnom zapnutí zariadenia do Androidu vypnite odomknutie OEM v sekcii Pre vývojárov."</string>
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"Jadro sa nepodarilo aktualizovať na kompatibilné jadro so 16 KB stránkami"</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Zmena sa uplatňuje"</string>
-    <!-- no translation found for confirm_format_ext4_title (6696191800594435577) -->
-    <skip />
-    <!-- no translation found for confirm_format_ext4_text (7940372488624630214) -->
-    <skip />
-    <!-- no translation found for format_ext4_failure_toast (8059453995800471549) -->
-    <skip />
-    <!-- no translation found for confirm_oem_unlock_for_16k_title (5374451262432025419) -->
-    <skip />
-    <!-- no translation found for confirm_oem_unlock_for_16k_text (3583604865119937957) -->
-    <skip />
-    <!-- no translation found for page_agnostic_4k_pages_title (1184703958249093215) -->
-    <skip />
-    <!-- no translation found for page_agnostic_4k_pages_text_short (2894243902906666242) -->
-    <skip />
-    <!-- no translation found for page_agnostic_4k_pages_text (8284806650260868833) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_title (7762533464569818498) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text_short (269039281591806585) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text (6208765386837706582) -->
-    <skip />
-    <!-- no translation found for page_agnostic_notification_channel_name (1658444283036376361) -->
-    <skip />
-    <!-- no translation found for page_agnostic_notification_action (2309805437430150456) -->
-    <skip />
+    <string name="confirm_format_ext4_title" msgid="6696191800594435577">"Chcete zmeniť formát zariadenia na ext4? (vyžadované pre režim 16 kB)"</string>
+    <string name="confirm_format_ext4_text" msgid="7940372488624630214">"Dátový oddiel tohto zariadenia je potrebné pred použitím možnosti 16 kB pre vývojárov konvertovať na ext4. V tomto režime nie je možné zaručiť integritu softvéru a všetky dáta uložené v telefóne môžu byť počas odomknutia zavádzacieho programu systému ohrozené. Aktivácia možnosti 16 kB si potom vyžiada ešte jedno reštartovanie. Keď budete v tomto režime, môžete prepínať medzi režimom 4 kB a 16 kB jedným reštartovaním. Niektoré funkcie budú v týchto režimoch vypnuté, takže niektoré aplikácie nemusia fungovať. Ak chcete zariadenie vrátiť do ostrého režimu, musíte prepnúť späť na režim 4 kB a potom uzamknúť zavádzací program systému, čím sa v zariadení obnovia výrobné nastavenia. Po úspešnom zapnutí zariadenia do Androidu vypnite odomknutie OEM v sekcii Pre vývojárov. Zariadenie sa trvalo vymaže a súborový systém sa po potvrdení zmení na ext4. Po dokončení tohto kroku sa vráťte a znova zapnite režim 16 kB."</string>
+    <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Nepodarilo sa zmeniť formát ani trvale vymazať oddiel dát na ext4."</string>
+    <string name="confirm_oem_unlock_for_16k_title" msgid="5374451262432025419">"Režim 16 kB vyžaduje odomknutie zavádzacieho programu systému"</string>
+    <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"Toto zariadenie musí mať pred použitím možnosti pre vývojárov 16 kB odomknutý zavádzací program systému. V tomto režime nie je možné zaručiť integritu softvéru a všetky dáta uložené v telefóne môžu byť počas odomknutia zavádzacieho programu systému ohrozené. Pri aktivácii režimu 16 kB sa vymažú všetky dáta a nastavenia používateľa. Po odomknutí zavádzacieho programu systému si aktivácia možnosti 16 kB vyžiada dve reštartovania. Keď budete v tomto režime, môžete prepínať medzi režimom 4 kB a 16 kB jedným reštartovaním. Niektoré funkcie budú v týchto režimoch vypnuté, takže niektoré aplikácie nemusia fungovať. Ak chcete zariadenie vrátiť do ostrého režimu, musíte prepnúť späť na režim 4 kB a potom uzamknúť OEM alebo zavádzací program systému, čím sa v zariadení obnovia výrobné nastavenia. Odomknite zavádzací program systému a skúste to znova. Postup, ako to vykonať, nájdete na &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
+    <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"Používa sa režim 4 kB, ktorý nezohľadňuje stránkovanie"</string>
+    <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"Ste v režime 4 kB, ktorý nezohľadňuje stránkovanie. V tomto režime nie je možné zaručiť integritu softvéru a všetky dáta uložené v telefóne môžu byť počas odomknutia zavádzacieho programu systému ohrozené. Niektoré funkcie budú v týchto režimoch vypnuté, takže niektoré aplikácie nemusia fungovať. Ak chcete znova vstúpiť do ostrého režimu, musíte uzamknúť zavádzací program systému zariadenia. Klepnutím zobrazíte ďalšie informácie."</string>
+    <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"Ste v režime 4 kB, ktorý nezohľadňuje stránkovanie. V tomto režime nie je možné zaručiť integritu softvéru a všetky dáta uložené v telefóne môžu byť počas odomknutia zavádzacieho programu systému ohrozené. Niektoré funkcie budú v týchto režimoch vypnuté, takže niektoré aplikácie nemusia fungovať. Ak chcete znova vstúpiť do ostrého režimu, musíte uzamknúť zavádzací program systému zariadenia. Tým sa v zariadení znova obnovia výrobné nastavenia na nastavenia ostrého režimu. Po úspešnom zapnutí zariadenia do Androidu vypnite odomknutie OEM v sekcii Pre vývojárov. Ak sa zariadeniu nepodarí spustiť Android alebo bude nestabilné, znova nainštalujte najnovšie výrobné obrazy systému z webu &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; alebo prejdite na &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; a vyberte Vymazať zariadenie, Uzamknúť zavádzací program systému alebo Vynútiť inštaláciu obrazu systému vo všetkých oddieloch."</string>
+    <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"Používa sa režim 16 kB, ktorý nezohľadňuje stránkovanie"</string>
+    <string name="page_agnostic_16k_pages_text_short" msgid="269039281591806585">"Ste v režime 16 kB, ktorý nezohľadňuje stránkovanie. V tomto režime nie je možné zaručiť integritu softvéru a všetky dáta uložené v telefóne môžu byť počas odomknutia zavádzacieho programu systému ohrozené. Niektoré funkcie budú v týchto režimoch vypnuté, takže niektoré aplikácie nemusia fungovať. Ak chcete znova vstúpiť do ostrého režimu, musíte prepnúť späť do režimu 4 kB a potom uzamknúť zavádzací program systému zariadenia. Klepnutím zobrazíte ďalšie informácie."</string>
+    <string name="page_agnostic_16k_pages_text" msgid="6208765386837706582">"Ste v režime 16 kB, ktorý nezohľadňuje stránkovanie. V tomto režime nie je možné zaručiť integritu softvéru a všetky dáta uložené v telefóne môžu byť počas odomknutia zavádzacieho programu systému ohrozené. Niektoré funkcie budú v týchto režimoch vypnuté, takže niektoré aplikácie nemusia fungovať. Ak chcete znova vstúpiť do ostrého režimu, musíte prepnúť späť do režimu 4 kB a potom uzamknúť zavádzací program systému zariadenia. Tým sa v zariadení znova obnovia výrobné nastavenia na nastavenia ostrého režimu. Po úspešnom zapnutí zariadenia do Androidu vypnite odomknutie OEM v sekcii Pre vývojárov. Ak sa zariadeniu nepodarí spustiť Android alebo bude nestabilné, znova nainštalujte najnovšie výrobné obrazy systému z webu &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; alebo prejdite na &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; a vyberte Vymazať zariadenie, Uzamknúť zavádzací program systému alebo Vynútiť inštaláciu obrazu systému vo všetkých oddieloch."</string>
+    <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"Režim 16 kB nezohľadňujúci stránkovanie"</string>
+    <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Ďalšie informácie"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Obsluha hlásení chýb"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Určuje, ktorá aplikácia vo vašom zariadení obsluhuje odkaz na hlásenie chýb."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Osobné"</string>
@@ -4977,8 +4957,7 @@
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Používať tlačovú službu"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Povoliť viacero používateľov"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"povoliť, viacero, používateľ, povolenie, veľa"</string>
-    <!-- no translation found for multiple_users_title_keywords (2395593167746225172) -->
-    <skip />
+    <string name="multiple_users_title_keywords" msgid="2395593167746225172">"viacerí, používatelia, profily, ľudia, účty, prepnúť, mnoho"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Používať bezdrôtové ladenie"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Používanie predvolieb grafického ovládača"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"Používať nočný režim"</string>
@@ -5013,8 +4992,12 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Ak chcete používať UWB, vypnite režim v lietadle"</string>
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"Technológia UWB nie je v aktuálnej oblasti k dispozícii"</string>
     <string name="thread_network_settings_title" msgid="4212301030523859220">"Thread"</string>
-    <string name="thread_network_settings_summary" msgid="8065599651021748339">"Pripojte sa ku kompatibilným zariadeniam pomocou siete Thread, aby ste mali k dispozícii plynulé prostredie inteligentnej domácnosti"</string>
-    <string name="thread_network_settings_summary_airplane_mode" msgid="7207252895832446979">"Ak chcete používať Thread, vypnite režim v lietadle"</string>
+    <!-- no translation found for thread_network_settings_main_switch_title (3859168481929323474) -->
+    <skip />
+    <!-- no translation found for thread_network_settings_footer_title (7385600318850220927) -->
+    <skip />
+    <!-- no translation found for thread_network_settings_learn_more (8278498005848565050) -->
+    <skip />
     <string name="camera_toggle_title" msgid="8952668677727244992">"Prístup ku kamere"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Prístup k mikrofónu"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"Pre aplikácie a služby"</string>
@@ -5095,7 +5078,7 @@
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Reštartovať neskôr"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"Priestorový zvuk"</string>
     <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"Zvuk z kompatibilných médií bude strhujúcejší"</string>
-    <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"Sledovanie pohybov hlavy"</string>
+    <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"Sledovanie polohy hlavy"</string>
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"Zmeny zvuku pri pohybe hlavou budú prirodzenejšie"</string>
     <string name="bluetooth_details_permissions_sync_title" msgid="7277580382321003521">"Synchronizácia povolení z telefónu"</string>
     <string name="bluetooth_details_permissions_sync_summary" msgid="8125037984381432059">"Udeľte hodinkám rovnaké povolenia aplikácie, ktoré ste poskytli v tomto telefóne"</string>

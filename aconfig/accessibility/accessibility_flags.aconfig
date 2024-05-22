@@ -1,7 +1,14 @@
 package: "com.android.settings.accessibility"
-container: "system"
+container: "system_ext"
 
 # NOTE: Keep alphabetized to help limit merge conflicts from multiple simultaneous editors.
+
+flag {
+  name: "add_brightness_settings_in_suw"
+  namespace: "accessibility"
+  description: "Whether to add brightness preference in SUW Vision Settings"
+  bug: "332974327"
+}
 
 flag {
   name: "edit_shortcuts_in_full_screen"

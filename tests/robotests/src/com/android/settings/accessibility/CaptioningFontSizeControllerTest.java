@@ -23,7 +23,10 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.when;
 
+import static org.robolectric.Shadows.shadowOf;
+
 import android.content.Context;
+import android.os.Looper;
 import android.provider.Settings;
 import android.view.accessibility.CaptioningManager;
 
@@ -85,7 +88,9 @@ public class CaptioningFontSizeControllerTest {
 
     @Test
     public void updateState_bySmallValue_shouldReturnSmall() {
-        mShadowCaptioningManager.setFontScale(0.5f);
+        Settings.Secure.putFloat(mContext.getContentResolver(),
+            Settings.Secure.ACCESSIBILITY_CAPTIONING_FONT_SCALE, 0.5f);
+        shadowOf(Looper.getMainLooper()).idle();
 
         mController.updateState(mPreference);
 
@@ -94,7 +99,8 @@ public class CaptioningFontSizeControllerTest {
 
     @Test
     public void onPreferenceChange_shouldSetCaptionEnabled() {
-        mShadowCaptioningManager.setEnabled(false);
+        Settings.Secure.putInt(
+            mContext.getContentResolver(), Settings.Secure.ACCESSIBILITY_CAPTIONING_ENABLED, OFF);
         mController.displayPreference(mScreen);
 
         mController.onPreferenceChange(mPreference, "0.5");

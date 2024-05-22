@@ -43,7 +43,7 @@ class RFPSViewModel(
   orientationInteractor: OrientationInteractor,
 ) : ViewModel() {
 
-  private val _textViewIsVisible = MutableStateFlow<Boolean>(false)
+  private val _textViewIsVisible = MutableStateFlow(false)
   /** Value to indicate if the text view is visible or not */
   val textViewIsVisible: Flow<Boolean> = _textViewIsVisible.asStateFlow()
 
@@ -52,7 +52,7 @@ class RFPSViewModel(
   /** Indicates if the icon should be animating or not */
   val shouldAnimateIcon = _shouldAnimateIcon
 
-  private var enrollFlow: Flow<FingerEnrollState?> = fingerprintEnrollViewModel.enrollFLow
+  private var enrollFlow: Flow<FingerEnrollState?> = fingerprintEnrollViewModel.enrollFlow
 
   /**
    * Enroll progress message with a replay of size 1 allowing for new subscribers to get the most
@@ -142,7 +142,7 @@ class RFPSViewModel(
     _textViewIsVisible.update { false }
     _shouldAnimateIcon = fingerprintEnrollViewModel.enrollFlowShouldBeRunning
     /** Indicates if the icon should be animating or not */
-    enrollFlow = fingerprintEnrollViewModel.enrollFLow
+    enrollFlow = fingerprintEnrollViewModel.enrollFlow
   }
 
   class RFPSViewModelFactory(

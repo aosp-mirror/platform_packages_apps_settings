@@ -36,11 +36,11 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.android.settings.R
@@ -62,7 +62,6 @@ import com.android.settingslib.spaprivileged.settingsprovider.settingsGlobalBool
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.conflate
 import kotlinx.coroutines.flow.flowOf
@@ -75,8 +74,8 @@ import kotlinx.coroutines.withContext
 /**
  * Showing the sim onboarding which is the process flow of sim switching on.
  */
-object NetworkCellularGroupProvider : SettingsPageProvider {
-    override val name = "NetworkCellularGroupProvider"
+open class NetworkCellularGroupProvider : SettingsPageProvider {
+    override val name = fileName
 
     private val owner = createSettingsPage()
 
@@ -85,7 +84,7 @@ object NetworkCellularGroupProvider : SettingsPageProvider {
     var defaultDataSubId: Int = SubscriptionManager.INVALID_SUBSCRIPTION_ID
     var nonDds: Int = SubscriptionManager.INVALID_SUBSCRIPTION_ID
 
-    fun buildInjectEntry() = SettingsEntryBuilder.createInject(owner = owner)
+    open fun buildInjectEntry() = SettingsEntryBuilder.createInject(owner = owner)
             .setUiLayoutFn {
                 // never using
                 Preference(object : PreferenceModel {
@@ -123,13 +122,26 @@ object NetworkCellularGroupProvider : SettingsPageProvider {
             nonDdsRemember.intValue = nonDds
         }
 
-        PageImpl(
-            subscriptionViewModel.selectableSubscriptionInfoListFlow,
-            callsSelectedId,
-            textsSelectedId,
-            mobileDataSelectedId,
-            nonDdsRemember
-        )
+        val selectableSubscriptionInfoList by subscriptionViewModel
+                .selectableSubscriptionInfoListFlow
+                .collectAsStateWithLifecycle(initialValue = emptyList())
+
+        val stringSims = stringResource(R.string.provider_network_settings_title)
+        RegularScaffold(title = stringSims) {
+            SimsSection(selectableSubscriptionInfoList)
+            MobileDataSectionImpl(mobileDataSelectedId,
+                nonDdsRemember,
+            )
+
+            PrimarySimSectionImpl(
+                subscriptionViewModel.selectableSubscriptionInfoListFlow,
+                callsSelectedId,
+                textsSelectedId,
+                mobileDataSelectedId,
+            )
+
+            OtherSection()
+        }
     }
 
     private fun allOfFlows(context: Context,
@@ -139,7 +151,7 @@ object NetworkCellularGroupProvider : SettingsPageProvider {
                     context.defaultVoiceSubscriptionFlow(),
                     context.defaultSmsSubscriptionFlow(),
                     context.defaultDefaultDataSubscriptionFlow(),
-                    NetworkCellularGroupProvider::refreshUiStates,
+                    this::refreshUiStates,
             ).flowOn(Dispatchers.Default)
 
     private fun refreshUiStates(
@@ -164,32 +176,12 @@ object NetworkCellularGroupProvider : SettingsPageProvider {
 
         Log.d(name, "defaultDataSubId: $defaultDataSubId, nonDds: $nonDds")
     }
-}
-
-@Composable
-fun PageImpl(
-    selectableSubscriptionInfoListFlow: StateFlow<List<SubscriptionInfo>>,
-    defaultVoiceSubId: MutableIntState,
-    defaultSmsSubId: MutableIntState,
-    defaultDataSubId: MutableIntState,
-    nonDds: MutableIntState,
-) {
-    val selectableSubscriptionInfoList by selectableSubscriptionInfoListFlow
-        .collectAsStateWithLifecycle(initialValue = emptyList())
-
-    val stringSims = stringResource(R.string.provider_network_settings_title)
-    RegularScaffold(title = stringSims) {
-        SimsSection(selectableSubscriptionInfoList)
-        MobileDataSectionImpl(defaultDataSubId,
-            nonDds,
-        )
-
-        PrimarySimSectionImpl(
-            selectableSubscriptionInfoListFlow,
-            defaultVoiceSubId,
-            defaultSmsSubId,
-            defaultDataSubId,
-        )
+    @Composable
+    open fun OtherSection(){
+        // Do nothing
+    }
+    companion object {
+        const val fileName = "NetworkCellularGroupProvider"
     }
 }
 
@@ -214,7 +206,7 @@ fun MobileDataSectionImpl(
         }.collectAsStateWithLifecycle(initialValue = null)
 
         val mobileDataStateChanged by remember(mobileDataSelectedId.intValue) {
-            TelephonyRepository(context).isDataEnabled(mobileDataSelectedId.intValue)
+            TelephonyRepository(context).isDataEnabledFlow(mobileDataSelectedId.intValue)
         }.collectAsStateWithLifecycle(initialValue = false)
         val coroutineScope = rememberCoroutineScope()
 
@@ -417,11 +409,22 @@ suspend fun setMobileData(
     enabled: Boolean,
 ): Unit =
     withContext(Dispatchers.Default) {
-        Log.d(NetworkCellularGroupProvider.name, "setMobileData: $enabled")
+        Log.d(NetworkCellularGroupProvider.fileName, "setMobileData[$subId]: $enabled")
+
+        var targetSubId = subId
+        val activeSubIdList = subscriptionManager?.activeSubscriptionIdList
+        if (activeSubIdList?.size == 1) {
+            targetSubId = activeSubIdList[0]
+            Log.d(
+                NetworkCellularGroupProvider.fileName,
+                "There is only one sim in the device, correct dds as $targetSubId"
+            )
+        }
+
         if (enabled) {
-            Log.d(NetworkCellularGroupProvider.name, "setDefaultData: [$subId]")
-            subscriptionManager?.setDefaultDataSubId(subId)
+            Log.d(NetworkCellularGroupProvider.fileName, "setDefaultData: [$targetSubId]")
+            subscriptionManager?.setDefaultDataSubId(targetSubId)
         }
         TelephonyRepository(context)
-            .setMobileData(subId, enabled, wifiPickerTrackerHelper)
+            .setMobileData(targetSubId, enabled, wifiPickerTrackerHelper)
     }

@@ -286,7 +286,8 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Sovellukset, joilla on lähellä olevien laitteiden lupa, voivat määrittää yhdistettyjen laitteiden suhteellisen sijainnin."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Sovelluksilla ja palveluilla ei ole sijaintilupaa. Tiedot laitteesi sijainnista voidaan silti lähettää pelastustyöntekijöille, kun soitat tai lähetät tekstiviestin hätänumeroon."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Lue lisää sijaintiasetuksista"</string>
-    <string name="location_settings_tooltip_text_for_chrome" msgid="3574930966097093550">"Pääsy sijaintiin: Asetukset &gt; Tietosuoja ja yksityisyys &gt; Yksityisyysasetukset"</string>
+    <!-- no translation found for location_settings_tooltip_text_for_chrome (5781821709250544575) -->
+    <skip />
     <string name="account_settings_title" msgid="9138880127246241885">"Tilit"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Suojaus"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Salaus ja kirjautumistiedot"</string>
@@ -566,7 +567,8 @@
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"Aina kun laite lukittuu"</string>
     <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"5 minuutin toimettomuuden jälkeen"</string>
     <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"Vain laitteen käynnistymisen jälkeen"</string>
-    <string name="private_space_hide_page_title" msgid="4351404195904146088">"Piilota yksityinen tila kun se on lukittu"</string>
+    <string name="private_space_hide_page_title" msgid="3364639176511877414">"Piilota yksityinen tila"</string>
+    <string name="private_space_hide_when_locked" msgid="6219472348124151797">"Piilota yksityinen tila, kun se lukittu"</string>
     <string name="private_space_hide_page_summary" msgid="6247773353685839242">"Piilota yksityinen tila laitteellasi piilottamalla se sovelluslistalta"</string>
     <string name="private_space_access_header" msgid="1077082416567150819">"Pääsy yksityiseen tilaan, kun se on piilotettuna"</string>
     <string name="private_space_search_description" msgid="1538155187658429618">"Kirjoita hakukenttään \"yksityinen tila\""</string>
@@ -2016,7 +2018,6 @@
     <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"Värikontrasti"</string>
     <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"Korkeampi kontrasti tekee tekstistä, painikkeita ja kuvakkeista näkyvämpiä. Valitse haluamasi kontrasti."</string>
     <string name="color_contrast_note" msgid="7592686603372566198">"Jotkin sovellukset eivät välttämättä tue kaikkia väri‑ ja tekstikontrastin asetuksia"</string>
-    <string name="accessibility_color_contrast_summary" msgid="7563237683500106632">"Muuta värien ja tekstin näkyvyyttä puhelimen taustaväriä vasten"</string>
     <string name="color_contrast_preview" msgid="6791430227535363883">"Esikatselu"</string>
     <string name="color_contrast_preview_sender_name" msgid="8641943417589238147">"Helena, Aatu"</string>
     <string name="color_contrast_preview_email_send_date" msgid="2108702726171600080">"2 päivää sitten"</string>
@@ -2571,8 +2572,7 @@
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Pidennä akunkestoa"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Laita pois päältä, kun lataus on valmis"</string>
     <string name="battery_saver_sticky_title_percentage" msgid="1178162022087559148">"Laita pois päältä, kun virtaa on jäljellä <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <!-- no translation found for battery_saver_sticky_description_new (8543277078136947874) -->
-    <skip />
+    <string name="battery_saver_sticky_description_new" msgid="8543277078136947874">"Virransäästö menee pois päältä, kun akun varaus on yli <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Ota käyttöön"</string>
@@ -2963,8 +2963,7 @@
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{{orgName} on asentanut työprofiiliisi varmenteen myöntäjän, mikä mahdollistaa toimintasi (esim. sähköpostin, sovellusten ja suojattujen verkkosivustojen käytön) seuraamisen työverkossa.\n\nSaat lisätietoja varmenteesta järjestelmänvalvojaltasi.}other{{orgName} on asentanut työprofiiliisi varmenteen myöntäjiä, mikä mahdollistaa toimintasi (esim. sähköpostin, sovellusten ja suojattujen verkkosivustojen käytön) seuraamisen työverkossa.\n\nSaat lisätietoja varmenteista järjestelmänvalvojaltasi.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"Kolmas osapuoli pystyy seuraamaan toimiasi verkossa, esimerkiksi sähköpostiviestien, sovellusten ja turvallisten verkkosivustojen käyttöä.\n\nLaitteeseesi asennettu luotettu varmenne tekee tämän mahdolliseksi."</string>
     <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{Tarkista varmenne}other{Tarkista varmenteet}}"</string>
-    <!-- no translation found for user_settings_title (9208831545558787202) -->
-    <skip />
+    <string name="user_settings_title" msgid="9208831545558787202">"Käyttäjät"</string>
     <string name="user_list_title" msgid="1387379079186123404">"Käyttäjät ja profiilit"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"Lisää käyttäjä tai profiili"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"Rajoitettu profiili"</string>
@@ -4804,46 +4803,27 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"Työkäytäntötietosi"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"IT-järjestelmänvalvojan ylläpitämät asetukset"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"Grafiikkasuoritin"</string>
-    <!-- no translation found for enable_16k_pages (8001470927566110689) -->
-    <skip />
-    <!-- no translation found for enable_16k_pages_summary (1964363364670306912) -->
-    <skip />
-    <!-- no translation found for confirm_enable_16k_pages_title (1286925577014793351) -->
-    <skip />
-    <!-- no translation found for confirm_enable_16k_pages_text (570198382662424714) -->
-    <skip />
-    <!-- no translation found for confirm_enable_4k_pages_title (3210360137887034659) -->
-    <skip />
-    <!-- no translation found for confirm_enable_4k_pages_text (155070605667160083) -->
-    <skip />
+    <string name="enable_16k_pages" msgid="8001470927566110689">"Käynnistä uudelleen 16 kt:lla"</string>
+    <string name="enable_16k_pages_summary" msgid="1964363364670306912">"Käynnistä laite uudelleen 16 kt:n ydintasolla"</string>
+    <string name="confirm_enable_16k_pages_title" msgid="1286925577014793351">"Vaihda 4 kt:n tilasta 16 kt:n tilaan"</string>
+    <string name="confirm_enable_16k_pages_text" msgid="570198382662424714">"Olet sivusta riippumattomassa tilassa, joka käyttää 4 kt:n kerneliä. Olet vaihtamassa 16 kt:n tilaan. Ohjelmiston eheyttä ei voida taata tässä tilassa. Kaikki tälle puhelimelle tallennettu data voi olla vaarassa, kun käynnistysohjelman lukitus on auki. Tämä käynnistää laitteen uudelleen. Jotkin ominaisuudet on poistettu käytöstä näissä tiloissa, eivätkä kaikki sovellukset välttämättä toimi. Jos haluat palauttaa laitteen tuotantotilaan, sinun on vaihdettava takaisin 4 kt:n tilaan ja lukittava käynnistysohjelma. Tämä palauttaa laitteen tehdasasetukset. Kun laite käynnistyy Androidissa, poista OEM-avaus käytöstä kehittäjäasetuksista."</string>
+    <string name="confirm_enable_4k_pages_title" msgid="3210360137887034659">"Vaihda 16 kt:n tilasta 4 kt:n tilaan"</string>
+    <string name="confirm_enable_4k_pages_text" msgid="155070605667160083">"Olet sivusta riippumattomassa tilassa, joka käyttää 16 kt:n kerneliä. Olet vaihtamassa 4 kt:n tilaan. Ohjelmiston eheyttä ei voida taata tässä tilassa. Kaikki tälle puhelimelle tallennettu data voi olla vaarassa, kun käynnistysohjelman lukitus on auki. Tämä käynnistää laitteen uudelleen. Jotkin ominaisuudet on poistettu käytöstä näissä tiloissa, eivätkä kaikki sovellukset välttämättä toimi. Jos haluat palauttaa laitteen tuotantotilaan, sinun lukittava käynnistysohjelma. Tämä palauttaa laitteen tehdasasetukset. Kun laite käynnistyy Androidissa, poista OEM-avaus käytöstä kehittäjäasetuksista."</string>
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"Ydintason päivitys 16 kt:n sivukoon yhteensopivaan ydintasoon epäonnistui."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Otetaan muutos käyttöön"</string>
-    <!-- no translation found for confirm_format_ext4_title (6696191800594435577) -->
-    <skip />
-    <!-- no translation found for confirm_format_ext4_text (7940372488624630214) -->
-    <skip />
-    <!-- no translation found for format_ext4_failure_toast (8059453995800471549) -->
-    <skip />
-    <!-- no translation found for confirm_oem_unlock_for_16k_title (5374451262432025419) -->
-    <skip />
-    <!-- no translation found for confirm_oem_unlock_for_16k_text (3583604865119937957) -->
-    <skip />
-    <!-- no translation found for page_agnostic_4k_pages_title (1184703958249093215) -->
-    <skip />
-    <!-- no translation found for page_agnostic_4k_pages_text_short (2894243902906666242) -->
-    <skip />
-    <!-- no translation found for page_agnostic_4k_pages_text (8284806650260868833) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_title (7762533464569818498) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text_short (269039281591806585) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text (6208765386837706582) -->
-    <skip />
-    <!-- no translation found for page_agnostic_notification_channel_name (1658444283036376361) -->
-    <skip />
-    <!-- no translation found for page_agnostic_notification_action (2309805437430150456) -->
-    <skip />
+    <string name="confirm_format_ext4_title" msgid="6696191800594435577">"Uudelleenformatoidaanko laitteen data ext4-muotoon? (edellytetään 16 kt:n tilaa varten)"</string>
+    <string name="confirm_format_ext4_text" msgid="7940372488624630214">"Tämän laitteen dataosio on muunnettava ext4-muotoon ennen 16 kt:n kehittäjäasetuksen käyttämistä. Ohjelmiston eheyttä ei voida taata tässä tilassa. Kaikki tälle puhelimelle tallennettu data voi olla vaarassa, kun käynnistysohjelman lukitus on auki. 16 kt:n tilan aktivoiminen edellyttää tämän jälkeen vielä yhtä uudelleenkäynnistystä. Kun olet tässä tilassa, voit vaihtaa 4 kt:n ja 16 kt:n tilan välillä yhdellä uudelleenkäynnistyksellä. Jotkin ominaisuudet on poistettu käytöstä näissä tiloissa, eivätkä kaikki sovellukset välttämättä toimi. Jos haluat palauttaa laitteen tuotantotilaan, sinun on vaihdettava takaisin 4 kt:n tilaan ja lukittava käynnistysohjelma. Tämä palauttaa laitteen tehdasasetukset. Kun laite käynnistyy Androidissa, poista OEM-avaus käytöstä kehittäjäasetuksista. Laite pyyhitään ja tiedostojärjestelmä vaihdetaan ext4-muotoon vahvistuksen jälkeen. Kun tämä on valmis, palaa ottamaan 16 kt:n tila uudelleen."</string>
+    <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Dataosion tyhjentäminen ja uudelleenformatointi ext4-muotoon epäonnistui."</string>
+    <string name="confirm_oem_unlock_for_16k_title" msgid="5374451262432025419">"16 kt:n tila edellyttää käynnistysohjelman lukituksen avausta"</string>
+    <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"Tämän laitteen käynnistysohjelma on avattava ennen 16 kt:n kehittäjäasetuksen käyttämistä. Ohjelmiston eheyttä ei voida taata tässä tilassa. Kaikki tälle puhelimelle tallennettu data voi olla vaarassa, kun käynnistysohjelman lukitus on auki. Kaikki käyttäjädata ja asetukset pyyhitään, kun 16 kt:n tila aktivoidaan. Kun käynnistysohjelman lukitus on avattu, 16 kt:n tilan aktivointi edellyttää kahta uudelleenkäynnistystä. Kun olet tässä tilassa, voit vaihtaa 4 kt:n ja 16 kt:n tilan välillä yhdellä uudelleenkäynnistyksellä. Jotkin ominaisuudet on poistettu käytöstä näissä tiloissa, eivätkä kaikki sovellukset välttämättä toimi. Jos haluat palauttaa laitteen tuotantotilaan, sinun on vaihdettava takaisin 4 kt:n tilaan ja tehtävä käynnistysohjelman tai OEM:n lukitus. Tämä palauttaa laitteen tehdasasetukset. Avaa käynnistysohjelman lukitus ja yritä uudelleen. Voit katsoa ohjeet tämän tekemiseen osoitteesta &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
+    <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"Käytetään 4 kt:n sivusta riippumatonta tilaa"</string>
+    <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"Olet sivusta riippumattoman tilan 4 kt:n tilassa. Ohjelmiston eheyttä ei voida taata tässä tilassa. Kaikki tälle puhelimelle tallennettu data voi olla vaarassa, kun käynnistysohjelman lukitus on auki. Jotkin ominaisuudet on poistettu käytöstä näissä tiloissa, eivätkä kaikki sovellukset välttämättä toimi. Jos haluat siirtyä tuotantotilaan uudelleen, sinun on lukittava käynnistysohjelma. Lue lisää napauttamalla."</string>
+    <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"Olet sivusta riippumattoman tilan 4 kt:n tilassa. Ohjelmiston eheyttä ei voida taata tässä tilassa. Kaikki tälle puhelimelle tallennettu data voi olla vaarassa, kun käynnistysohjelman lukitus on auki. Jotkin ominaisuudet on poistettu käytöstä näissä tiloissa, eivätkä kaikki sovellukset välttämättä toimi. Jos haluat siirtyä tuotantotilaan uudelleen, sinun on lukittava käynnistysohjelma. Tämä palauttaa laitteen tehdasasetukset uudelleen ja palauttaa sen tuotantoasetuksiin. Kun laite käynnistyy Androidissa, poista OEM-avaus käytöstä kehittäjäasetuksista. Jos laitteen käynnistäminen Androidiin epäonnistuu tai se on epävakaa, suorita Flash uudelleen viimeisimmillä tehdasasetusten näköistiedostoilla osoitteesta &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; tai käytä &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; ja valitse \"Pyyhi laite\", \"Lukitse käynnistysohjelma\" tai \"Pakota Flash kaikille osioille\"."</string>
+    <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"Käytetään 16 kt:n sivusta riippumatonta tilaa"</string>
+    <string name="page_agnostic_16k_pages_text_short" msgid="269039281591806585">"Olet sivusta riippumattoman tilan 16 kt:n tilassa. Ohjelmiston eheyttä ei voida taata tässä tilassa. Kaikki tälle puhelimelle tallennettu data voi olla vaarassa, kun käynnistysohjelman lukitus on auki. Jotkin ominaisuudet on poistettu käytöstä näissä tiloissa, eivätkä kaikki sovellukset välttämättä toimi. Jos haluat siirtyä tuotantotilaan uudelleen, sinun on vaihdettava takaisin 4 kt:n tilaan ja lukittava käynnistysohjelma. Lue lisää napauttamalla."</string>
+    <string name="page_agnostic_16k_pages_text" msgid="6208765386837706582">"Olet sivusta riippumattoman tilan 16 kt:n tilassa. Ohjelmiston eheyttä ei voida taata tässä tilassa. Kaikki tälle puhelimelle tallennettu data voi olla vaarassa, kun käynnistysohjelman lukitus on auki. Jotkin ominaisuudet on poistettu käytöstä näissä tiloissa, eivätkä kaikki sovellukset välttämättä toimi. Jos haluat siirtyä tuotantotilaan uudelleen, sinun on vaihdettava takaisin 4 kt:n tilaan ja lukittava käynnistysohjelma. Tämä palauttaa laitteen tehdasasetukset uudelleen ja palauttaa sen tuotantoasetuksiin. Kun laite käynnistyy Androidissa, poista OEM-avaus käytöstä kehittäjäasetuksista. Jos laitteen käynnistäminen Androidiin epäonnistuu tai se on epävakaa, suorita Flash uudelleen viimeisimmillä tehdasasetusten näköistiedostoilla osoitteesta &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; tai käytä &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; ja valitse \"Pyyhi laite\", \"Lukitse käynnistysohjelma\" tai \"Pakota Flash kaikille osioille\"."</string>
+    <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"16 kt:n sivusta riippumaton tila"</string>
+    <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Lue lisää"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Virheraportin käsittelijä"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Valitsee, mikä sovellus käsittelee laitteen virheraportti-pikanäppäintä."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Henkilökohtainen"</string>
@@ -4905,7 +4885,7 @@
     <string name="media_controls_show_player" msgid="8504571042365814021">"Näytä soitin"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"media"</string>
     <string name="camera_extensions_fallback_title" msgid="3604579046777004989">"Salli kameraohjelmistolaajennukset"</string>
-    <string name="camera_extensions_fallback_description" msgid="4306833827773277263">"Ottaa käyttöön kameran lisäominaisuuksien (esim. HRD:n, Yönäkymän tai muiden kameralaajennuksien) oletusohjelmistot"</string>
+    <string name="camera_extensions_fallback_description" msgid="4306833827773277263">"Ottaa käyttöön kameran lisäominaisuuksien (esim. HDR:n, Yönäkymän tai muiden kameralaajennuksien) oletusohjelmistot"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth käynnistyy"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"Internet"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM-kortit"</string>
@@ -4975,8 +4955,7 @@
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Käytä tulostuspalvelua"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Salli useat käyttäjät"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"salli, useita, käyttäjä, lupa, monta"</string>
-    <!-- no translation found for multiple_users_title_keywords (2395593167746225172) -->
-    <skip />
+    <string name="multiple_users_title_keywords" msgid="2395593167746225172">"monta, käyttäjää, profiilia, henkilöä, tiliä, vaihda, useita"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Käytä langatonta virheenkorjausta"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Käytä grafiikkaohjaimen asetuksia"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"Käytä yövaloa"</string>
@@ -5011,8 +4990,12 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Laita lentokonetila pois päältä, jotta voit käyttää UWB:tä"</string>
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"UWB ei ole saatavilla nykyisessä sijainnissa"</string>
     <string name="thread_network_settings_title" msgid="4212301030523859220">"Thread"</string>
-    <string name="thread_network_settings_summary" msgid="8065599651021748339">"Saat saumattoman käyttökokemuksen älykkäässä kodissa, kun yhdistät yhteensopivat laitteet käyttämällä Threadia"</string>
-    <string name="thread_network_settings_summary_airplane_mode" msgid="7207252895832446979">"Laita lentokonetila pois päältä, jotta voit käyttää Threadia"</string>
+    <!-- no translation found for thread_network_settings_main_switch_title (3859168481929323474) -->
+    <skip />
+    <!-- no translation found for thread_network_settings_footer_title (7385600318850220927) -->
+    <skip />
+    <!-- no translation found for thread_network_settings_learn_more (8278498005848565050) -->
+    <skip />
     <string name="camera_toggle_title" msgid="8952668677727244992">"Pääsy kameraan"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Pääsy mikrofoniin"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"Sovellukset ja palvelut"</string>

@@ -64,6 +64,11 @@ public class PrivateSpaceDeletionProgressFragmentTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = ApplicationProvider.getApplicationContext();
+        final FakeFeatureFactory featureFactory = FakeFeatureFactory.setupForTest();
+        when(featureFactory.securityFeatureProvider.getLockPatternUtils(mContext))
+                .thenReturn(mLockPatternUtils);
+        doReturn(true).when(mLockPatternUtils).isSecure(anyInt());
+
         mFragment = new PrivateSpaceDeletionProgressFragment();
         PrivateSpaceDeletionProgressFragment.Injector injector =
                 new PrivateSpaceDeletionProgressFragment.Injector() {
@@ -74,10 +79,6 @@ public class PrivateSpaceDeletionProgressFragmentTest {
                 };
         mPrivateSpaceMaintainer = PrivateSpaceMaintainer.getInstance(mContext);
         mFragment.setPrivateSpaceMaintainer(injector);
-        final FakeFeatureFactory featureFactory = FakeFeatureFactory.setupForTest();
-        when(featureFactory.securityFeatureProvider.getLockPatternUtils(mContext))
-                .thenReturn(mLockPatternUtils);
-        doReturn(true).when(mLockPatternUtils).isSecure(anyInt());
     }
 
     @After

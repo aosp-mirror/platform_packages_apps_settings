@@ -20,16 +20,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.credentials.CredentialManager;
 import android.credentials.CredentialProviderInfo;
+import android.credentials.SetEnabledProvidersException;
 import android.graphics.drawable.Drawable;
+import android.os.OutcomeReceiver;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.service.autofill.AutofillService;
 import android.service.autofill.AutofillServiceInfo;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.autofill.AutofillManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.preference.Preference;
 
 import com.android.internal.annotations.VisibleForTesting;
@@ -41,6 +45,7 @@ import com.android.settingslib.widget.TwoTargetPreference;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executor;
 
 public class DefaultCombinedPreferenceController extends DefaultAppPreferenceController {
 
@@ -49,10 +54,12 @@ public class DefaultCombinedPreferenceController extends DefaultAppPreferenceCon
 
     private final AutofillManager mAutofillManager;
     private final CredentialManager mCredentialManager;
+    private final Executor mExecutor;
 
     public DefaultCombinedPreferenceController(Context context) {
         super(context);
 
+        mExecutor = ContextCompat.getMainExecutor(context);
         mAutofillManager = mContext.getSystemService(AutofillManager.class);
 
         if (CredentialManager.isServiceEnabled(context)) {
@@ -158,6 +165,9 @@ public class DefaultCombinedPreferenceController extends DefaultAppPreferenceCon
         // Apply device admin restrictions to top provider.
         if (topProvider != null
                 && topProvider.getDeviceAdminRestrictions(mContext, userId) != null) {
+            // This case means, the provider is blocked by device admin, but settings' storage has
+            // not be cleared correctly. So clean the storage here.
+            removePrimaryProvider();
             return null;
         }
 
@@ -173,16 +183,15 @@ public class DefaultCombinedPreferenceController extends DefaultAppPreferenceCon
         final List<AutofillServiceInfo> autofillProviders =
                 AutofillServiceInfo.getAvailableServices(mContext, userId);
         final String selectedAutofillProvider =
-                Settings.Secure.getStringForUser(
-                        mContext.getContentResolver(),
-                        DefaultCombinedPicker.AUTOFILL_SETTING,
-                        userId);
+                CredentialManagerPreferenceController
+                .getSelectedAutofillProvider(mContext, userId, TAG);
 
         final List<CredentialProviderInfo> credManProviders = new ArrayList<>();
         if (mCredentialManager != null) {
             credManProviders.addAll(
                     mCredentialManager.getCredentialProviderServices(
-                            userId, CredentialManager.PROVIDER_FILTER_USER_PROVIDERS_ONLY));
+                            userId,
+                            CredentialManager.PROVIDER_FILTER_USER_PROVIDERS_INCLUDING_HIDDEN));
         }
 
         return CombinedProviderInfo.buildMergedList(
@@ -208,5 +217,35 @@ public class DefaultCombinedPreferenceController extends DefaultAppPreferenceCon
         final Context context =
                 mContext.createContextAsUser(UserHandle.of(getUser()), /* flags= */ 0);
         return new Intent(context, CredentialsPickerActivity.class);
+    }
+
+    private void removePrimaryProvider() {
+        // Commit using the CredMan API.
+        if (mCredentialManager == null) {
+            return;
+        }
+
+        // Clean the autofill provider settings
+        Settings.Secure.putStringForUser(
+                mContext.getContentResolver(),
+                DefaultCombinedPicker.AUTOFILL_SETTING, null, getUser());
+
+        // Clean the credman provider settings.
+        mCredentialManager.setEnabledProviders(
+                List.of(), // empty primary provider.
+                List.of(), // empty enabled providers.
+                getUser(),
+                mExecutor,
+                new OutcomeReceiver<Void, SetEnabledProvidersException>() {
+                    @Override
+                    public void onResult(Void result) {
+                        Log.i(TAG, "setEnabledProviders success");
+                    }
+
+                    @Override
+                    public void onError(SetEnabledProvidersException e) {
+                        Log.e(TAG, "setEnabledProviders error: " + e.toString());
+                    }
+                });
     }
 }

@@ -16,6 +16,8 @@
 
 package com.android.settings.applications.credentials;
 
+import static com.android.settings.applications.credentials.CredentialManagerPreferenceController.getCredentialAutofillService;
+
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -273,15 +275,13 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
                             CredentialManager.PROVIDER_FILTER_USER_PROVIDERS_INCLUDING_HIDDEN));
         }
 
-        final String selectedAutofillProvider = getSelectedAutofillProvider(context, userId);
+        final String selectedAutofillProvider =
+                CredentialManagerPreferenceController
+                    .getSelectedAutofillProvider(context, userId, TAG);
         return CombinedProviderInfo.buildMergedList(
                 autofillProviders, credManProviders, selectedAutofillProvider);
     }
 
-    public static String getSelectedAutofillProvider(Context context, int userId) {
-        return Settings.Secure.getStringForUser(
-                context.getContentResolver(), AUTOFILL_SETTING, userId);
-    }
 
     protected List<DefaultAppInfo> getCandidates() {
         final Context context = getContext();
@@ -463,9 +463,13 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
     private void setProviders(String autofillProvider, List<String> primaryCredManProviders) {
         if (TextUtils.isEmpty(autofillProvider)) {
             if (primaryCredManProviders.size() > 0) {
-                autofillProvider =
-                        CredentialManagerPreferenceController
-                                .AUTOFILL_CREDMAN_ONLY_PROVIDER_PLACEHOLDER;
+                if (android.service.autofill.Flags.autofillCredmanDevIntegration()) {
+                    autofillProvider = getCredentialAutofillService(getContext(), TAG);
+                } else {
+                    autofillProvider =
+                            CredentialManagerPreferenceController
+                                    .AUTOFILL_CREDMAN_ONLY_PROVIDER_PLACEHOLDER;
+                }
             }
         }
 
