@@ -7948,8 +7948,55 @@
     <!--  Do not disturb: Subtitle for the Visual signals option to toggle on/off visual signals/alerts when the screen is on/when screen is off. [CHAR LIMIT=30] -->
     <string name="zen_mode_visual_signals_settings_subtitle">Allow visual signals</string>
 
+    <!-- Do not disturb: mode page section title [CHAR LIMIT=80] -->
+    <string name="mode_interruption_filter_title">Notifications that can reach you</string>
+    <!-- Do not disturb: mode page section title [CHAR LIMIT=80] -->
+    <string name="mode_device_effects_title">Additional actions</string>
+
+
+    <!-- Do not disturb: display settings title [CHAR LIMIT=80] -->
+    <string name="mode_display_settings_title">Display settings</string>
+    <!-- Do not disturb: display options section header [CHAR LIMIT=80] -->
+    <string name="mode_display_options_section">Display options</string>
+    <!-- Do not disturb: device effect option, title or first in list [CHAR LIMIT=80] -->
+    <string name="mode_grayscale_title">Grayscale</string>
+    <!-- Do not disturb: device effect option, not first in list [CHAR LIMIT=80] -->
+    <string name="mode_grayscale_title_secondary_list">grayscale</string>
+    <!-- Do not disturb: device effect summary [CHAR LIMIT=NONE] -->
+    <string name="mode_grayscale_summary">Change the screen to black and white</string>
+    <!-- Do not disturb: device effect option, title or first in list [CHAR LIMIT=80] -->
+    <string name="mode_aod_title">Keep the screen dark</string>
+    <!-- Do not disturb: device effect option, not first in list [CHAR LIMIT=80] -->
+    <string name="mode_aod_title_secondary_list">keep the screen dark</string>
+    <!-- Do not disturb: device effect summary [CHAR LIMIT=NONE] -->
+    <string name="mode_aod_summary">Disable always on display</string>
+    <!-- Do not disturb: device effect option , title or first in list[CHAR LIMIT=80] -->
+    <string name="mode_wallpaper_title">Dim the wallpaper</string>
+    <!-- Do not disturb: device effect option, not first in list [CHAR LIMIT=80] -->
+    <string name="mode_wallpaper_title_secondary_list">dim the wallpaper</string>
+    <!-- Do not disturb: device effect summary [CHAR LIMIT=NONE] -->
+    <string name="mode_wallpaper_summary">Filter the brightness of the wallpaper</string>
+    <!-- Do not disturb: device effect option, title or first in list [CHAR LIMIT=80] -->
+    <string name="mode_dark_theme_title">Enable dark theme</string>
+    <!-- Do not disturb: device effect option, not first in list [CHAR LIMIT=80] -->
+    <string name="mode_dark_theme_title_secondary_list">enable dark theme</string>
+    <!-- Do not disturb: device effect summary [CHAR LIMIT=NONE] -->
+    <string name="mode_dark_theme_summary">Switch the OS and apps to prefer light text on a dark
+        background, which may be easier on the eyes and confers significant battery savings on some devices</string>
+    <!-- [CHAR LIMIT=NONE] Zen mode settings: Summary for sound interruption settings -->
+    <string name="mode_display_settings_summary">
+        {count, plural, offset:2
+        =0    {No display changes}
+        =1    {{effect_1}}
+        =2    {{effect_1} and {effect_2}}
+        =3    {{effect_1}, {effect_2}, and {effect_3}}
+        other {{effect_1}, {effect_2}, and # more}
+        }
+    </string>
+
     <!-- Do not disturb: restrict notifications settings title [CHAR LIMIT=80] -->
-    <string name="zen_mode_restrict_notifications_title">Display options for hidden notifications</string>
+    <string name="zen_mode_restrict_notifications_title">Display options for filtered
+        notifications</string>
     <!-- Do not disturb: Hide notifications screen category title [CHAR LIMIT=100] -->
     <string name="zen_mode_restrict_notifications_category">When Do Not Disturb is on</string>
     <!-- Do not disturb: Mute notifications option [CHAR LIMIT=60] -->
@@ -7971,11 +8018,12 @@
     <!-- Do not disturb: restrict notifications page, menu option [CHAR LIMIT=60] -->
     <string name="zen_mode_restrict_notifications_disable_custom">Remove custom setting</string>
     <!-- Do not disturb: restrict notifications page, menu option [CHAR LIMIT=60] -->
-    <string name="zen_mode_restrict_notifications_summary_muted">No sound from notifications</string>
+    <string name="zen_mode_restrict_notifications_summary_muted">Notifications shown</string>
     <!-- Do not disturb: restrict notifications page, menu option [CHAR LIMIT=60] -->
-    <string name="zen_mode_restrict_notifications_summary_custom">Partially hidden</string>
+    <string name="zen_mode_restrict_notifications_summary_custom">Notifications partially
+        hidden</string>
     <!-- Do not disturb: restrict notifications page, menu option [CHAR LIMIT=100] -->
-    <string name="zen_mode_restrict_notifications_summary_hidden">No visuals or sound from notifications</string>
+    <string name="zen_mode_restrict_notifications_summary_hidden">Notifications hidden</string>
 
     <!-- Do not disturb: what to block title [CHAR LIMIT = 60] -->
     <string name="zen_mode_what_to_block_title">Custom restrictions</string>

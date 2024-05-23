@@ -16,52 +16,44 @@
 
 package com.android.settings.notification.modes;
 
-import android.app.AutomaticZenRule;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-
 import com.android.settings.R;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ZenModeFragment extends ZenModeFragmentBase {
-
-    @Override
-    protected int getPreferenceScreenResId() {
-        return R.xml.modes_rule_settings;
-    }
+/**
+ * Settings page that shows what device effects/notification visuals will change when this mode
+ * is on.
+ */
+public class ZenModeDisplayFragment extends ZenModeFragmentBase {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         List<AbstractPreferenceController> prefControllers = new ArrayList<>();
-        prefControllers.add(new ZenModeHeaderController(context, "header", this, mBackend));
-        prefControllers.add(new ZenModePeopleLinkPreferenceController(
-                context, "zen_mode_people", mBackend));
-        prefControllers.add(new ZenModeOtherLinkPreferenceController(
-                context, "zen_other_settings", mBackend));
-        prefControllers.add(new ZenModeDisplayLinkPreferenceController(
-                context, "mode_display_settings", mBackend));
+        prefControllers.add(new ZenModeNotifVisLinkPreferenceController(
+                context, "notification_visibility", mBackend));
+        prefControllers.add(new ZenModeDisplayEffectPreferenceController(
+                context, "effect_greyscale", mBackend));
+        prefControllers.add(new ZenModeDisplayEffectPreferenceController(
+                context, "effect_aod", mBackend));
+        prefControllers.add(new ZenModeDisplayEffectPreferenceController(
+                context, "effect_wallpaper", mBackend));
+        prefControllers.add(new ZenModeDisplayEffectPreferenceController(
+                context, "effect_dark_theme", mBackend));
         return prefControllers;
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-
-        // Set title for the entire screen
-        ZenMode mode = getMode();
-        AutomaticZenRule azr = getAZR();
-        if (mode == null || azr == null) {
-            return;
-        }
-        getActivity().setTitle(azr.getName());
+    protected int getPreferenceScreenResId() {
+        return R.xml.modes_display_settings;
     }
 
     @Override
     public int getMetricsCategory() {
         // TODO: b/332937635 - make this the correct metrics category
-        return SettingsEnums.NOTIFICATION_ZEN_MODE_AUTOMATION;
+        return SettingsEnums.DND_PEOPLE;
     }
 }
