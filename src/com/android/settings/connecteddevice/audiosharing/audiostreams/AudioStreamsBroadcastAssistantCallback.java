@@ -101,7 +101,12 @@ public class AudioStreamsBroadcastAssistantCallback
     @Override
     public void onSourceFound(BluetoothLeBroadcastMetadata source) {
         if (DEBUG) {
-            Log.d(TAG, "onSourceFound() broadcastId : " + source.getBroadcastId());
+            Log.d(
+                    TAG,
+                    "onSourceFound() broadcastId : "
+                            + source.getBroadcastId()
+                            + " broadcastName : "
+                            + source.getBroadcastName());
         }
     }
 

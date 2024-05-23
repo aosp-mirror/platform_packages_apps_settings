@@ -21,8 +21,6 @@ import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
 import android.util.Log;
 
-import java.util.Locale;
-
 public class AudioStreamsProgressCategoryCallback extends AudioStreamsBroadcastAssistantCallback {
     private static final String TAG = "AudioStreamsProgressCategoryCallback";
 
@@ -48,8 +46,7 @@ public class AudioStreamsProgressCategoryCallback extends AudioStreamsBroadcastA
     @Override
     public void onSearchStartFailed(int reason) {
         super.onSearchStartFailed(reason);
-        mCategoryController.showToast(
-                String.format(Locale.US, "Failed to start scanning, reason %d", reason));
+        mCategoryController.showToast("Failed to start scanning. Try again.");
         mCategoryController.setScanning(false);
     }
 
@@ -66,8 +63,7 @@ public class AudioStreamsProgressCategoryCallback extends AudioStreamsBroadcastA
     @Override
     public void onSearchStopFailed(int reason) {
         super.onSearchStopFailed(reason);
-        mCategoryController.showToast(
-                String.format(Locale.US, "Failed to stop scanning, reason %d", reason));
+        mCategoryController.showToast("Failed to stop scanning. Try again.");
     }
 
     @Override
@@ -106,12 +102,7 @@ public class AudioStreamsProgressCategoryCallback extends AudioStreamsBroadcastA
     @Override
     public void onSourceRemoveFailed(BluetoothDevice sink, int sourceId, int reason) {
         super.onSourceRemoveFailed(sink, sourceId, reason);
-        mCategoryController.showToast(
-                String.format(
-                        Locale.US,
-                        "Failed to remove source %d for sink %s",
-                        sourceId,
-                        sink.getAddress()));
+        mCategoryController.showToast("Failed to remove source.");
     }
 
     @Override

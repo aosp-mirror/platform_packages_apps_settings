@@ -48,9 +48,9 @@
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"Seulement pour les jeux, les vidéos et plus"</string>
     <string name="selective_stay_awake_summary" msgid="9055967322921984543">"L\'écran frontal s\'allume pour les applications qui empêchent la mise en veille de votre écran"</string>
     <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Balayer vers le haut pour continuer"</string>
-    <string name="stay_awake_on_lockscreen_summary" msgid="2299351813382522952">"Pliez votre téléphone et balayez l\'écran frontal vers le haut pour continuer à utiliser l\'application, ou attendez quelques secondes pour que l\'écran se verrouille"</string>
+    <string name="stay_awake_on_lockscreen_summary" msgid="8825321939913726566">"Pliez votre téléphone et balayez l\'écran frontal vers le haut pour continuer à utiliser l\'appli, ou attendez quelques secondes pour que l\'écran se verrouille. Les applis de jeux et de vidéos resteront ouvertes automatiquement."</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"Jamais"</string>
-    <string name="sleep_on_fold_summary" msgid="7737992842459588846">"L\'écran frontal se verrouille lorsque vous pliez votre appareil"</string>
+    <string name="sleep_on_fold_summary" msgid="4191753338303043456">"L\'écran frontal se désactive et se verrouille lorsque vous pliez votre appareil"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Utiliser la rotation automatique"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"La technologie de détection des visages utilise l\'appareil photo avant pour améliorer la précision de la rotation automatique. Les images ne sont jamais stockées ni envoyées à Google."</string>
     <string name="bluetooth" msgid="8898478620943459654">"Bluetooth"</string>
@@ -139,7 +139,6 @@
     <string name="stylus_textfield_handwriting" msgid="2363579035338976327">"Écrire dans les champs de texte"</string>
     <string name="stylus_ignore_button" msgid="7734540973145241391">"Ignorer toutes les pressions sur les boutons du stylet"</string>
     <string name="stylus_connected_devices_title" msgid="2823967577941359812">"Stylet"</string>
-    <string name="audio_streams_empty" msgid="8803517701437394982">"Aucun flux audio trouvé à proximité."</string>
     <string name="date_and_time" msgid="1788358029823431692">"Date et heure"</string>
     <string name="proxy_settings_title" msgid="4201866858226087066">"Serveur mandataire"</string>
     <string name="proxy_clear_text" msgid="6529658759984031149">"Effacer"</string>
@@ -286,8 +285,7 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Les applications qui disposent de l\'autorisation de détection des appareils à proximité peuvent déterminer la position relative des appareils connectés."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"L\'accès à la position est désactivé pour les applications et les services. La position de votre appareil pourrait quand même être envoyée aux intervenants d\'urgence lorsque vous appelez ou textez un numéro d\'urgence."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"En savoir plus sur les paramètres de localisation"</string>
-    <!-- no translation found for location_settings_tooltip_text_for_chrome (5781821709250544575) -->
-    <skip />
+    <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"Pour modifier cela, accédez à Paramètres ChromeOS &gt; Confidentialité et sécurité &gt; Paramètres de confidentialité &gt; Accès à la localisation"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Comptes"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Sécurité"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Chiffrement et authentifiants"</string>
@@ -565,7 +563,7 @@
     <string name="private_space_auto_lock_title" msgid="8663409382910601261">"Verrouiller automatiquement l\'Espace privé"</string>
     <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"Vous pouvez verrouiller automatiquement votre Espace privé si vous n\'avez pas utilisé votre appareil pendant un certain temps"</string>
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"Chaque fois que l\'appareil se verrouille"</string>
-    <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"Après cinq minutes d\'inactivité"</string>
+    <string name="private_space_auto_lock_after_inactivity" msgid="7107814517866649733">"5 min. après la mise veille de l\'écran"</string>
     <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"Seul. après le redémarrage de l\'appareil"</string>
     <string name="private_space_hide_page_title" msgid="3364639176511877414">"Masquer l\'espace privé"</string>
     <string name="private_space_hide_when_locked" msgid="6219472348124151797">"Masquer l\'espace privé lorsqu\'il est verrouillé"</string>
@@ -1753,7 +1751,7 @@
     <string name="enable_text" msgid="8570798764647110430">"Activer"</string>
     <string name="clear_user_data_text" msgid="6773186434260397947">"Effacer l\'espace de stockage"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"Désinstaller mises à jour"</string>
-    <string name="app_restricted_settings_lockscreen_title" msgid="796413224212436400">"Autoriser les autorisations limitées"</string>
+    <string name="app_restricted_settings_lockscreen_title" msgid="5993061278264872648">"Autoriser les paramètres restreints"</string>
     <string name="auto_launch_enable_text" msgid="8912714475823807798">"Certaines activités que vous avez sélectionnées s\'ouvrent dans cette application par défaut."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"Vous avez choisi de permettre à cette application de créer des widgets et d\'accéder à leurs données."</string>
     <string name="auto_launch_disable_text" msgid="502648841250936209">"Aucun paramètre par défaut défini"</string>
@@ -2017,7 +2015,7 @@
     <string name="accessibility_color_and_motion_title" msgid="2323301706545305874">"Couleur et mouvement"</string>
     <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"Contraste des couleurs"</string>
     <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"Un contraste plus élevé fait ressortir davantage le texte, les boutons et les icônes. Choisissez le contraste qui vous convient le mieux."</string>
-    <string name="color_contrast_note" msgid="7592686603372566198">"Certaines applications peuvent ne pas prendre en charge tous les paramètres de contraste de couleur et de texte"</string>
+    <string name="color_contrast_note" msgid="7592686603372566198">"Certaines applis peuvent ne pas prendre en charge tous les paramètres de contraste de couleur et de texte"</string>
     <string name="color_contrast_preview" msgid="6791430227535363883">"Aperçu"</string>
     <string name="color_contrast_preview_sender_name" msgid="8641943417589238147">"Hélène, Adam"</string>
     <string name="color_contrast_preview_email_send_date" msgid="2108702726171600080">"Il y a 2 jours"</string>
@@ -2325,6 +2323,7 @@
     <string name="daltonizer_mode_protanomaly_title" msgid="6392456967103014723">"Rouge-vert"</string>
     <string name="daltonizer_mode_tritanomaly_title" msgid="2278786218762602022">"Bleu-jaune"</string>
     <string name="daltonizer_mode_grayscale_title" msgid="152005391387952588">"Nuances de gris"</string>
+    <string name="daltonizer_saturation_title" msgid="2999486412114963068">"Intensité"</string>
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="2117727423019598455">"Vert faible, deutéranomalie"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="4617032854982040748">"Rouge faible, protanomalie"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Tritanomalie"</string>
@@ -2405,7 +2404,6 @@
     <string name="keywords_select_to_speak" msgid="2872704811610888719"></string>
     <string name="keywords_color_correction" msgid="8540442886990423681">"ajuster la couleur"</string>
     <string name="keywords_color_inversion" msgid="4291058365873221962">"assombrir l\'écran, éclaircir l\'écran"</string>
-    <string name="keywords_contrast" msgid="4668393735398949873">"contraste des couleurs"</string>
     <string name="keywords_accessibility_menu" msgid="4300579436464706608"></string>
     <string name="keywords_switch_access" msgid="5813094504384313402"></string>
     <string name="keywords_auto_click" msgid="6811744211216280998">"motricité, souris, souris externe, souris contrôlée par la tête, souris adaptée, fauteuil roulant, manche"</string>
@@ -2581,7 +2579,7 @@
     <string name="battery_saver_turn_on_automatically_never" msgid="6194649389871448663">"Jamais"</string>
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"à <xliff:g id="PERCENT">%1$s</xliff:g> d\'autonomie restante"</string>
     <string name="battery_percentage" msgid="1779934245963043490">"Pourcentage de charge de la pile"</string>
-    <string name="battery_percentage_description" msgid="2321465139126125541">"Le pourcentage de charge de la pile s\'affiche dans la barre d\'état"</string>
+    <string name="battery_percentage_description" msgid="2321465139126125541">"Afficher le pourcentage de charge de la pile dans la barre d\'état"</string>
     <string name="battery_usage_chart_graph_hint_last_full_charge" msgid="6570336408060566877">"Niveau de la pile depuis la dernière recharge complète"</string>
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"Niveau de la pile, dernières 24 h"</string>
     <string name="battery_app_usage" msgid="8976453608783133770">"Utilisation des applications depuis la dernière charge complète"</string>
@@ -3306,6 +3304,7 @@
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Paramètres des appareils connectés"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Aucun}=1{1 horaire programmé}one{# horaire programmé}other{# horaires programmés}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Ne pas déranger"</string>
+    <string name="zen_modes_list_title" msgid="5138745349253275428">"Modes prioritaires"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Recevez uniquement les notifications des personnes et des applications importantes"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Limiter les interruptions"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Activer le mode Ne pas déranger"</string>
@@ -3532,7 +3531,7 @@
     <string name="notifications_sent_daily" msgid="10274479224185437">"{count,plural, =1{Environ # notification par jour}one{Environ # notification par jour}other{Environ # notifications par jour}}"</string>
     <string name="notifications_sent_weekly" msgid="7895656213187555346">"{count,plural, =1{Environ # notification par semaine}one{Environ # notification par semaine}other{Environ # notifications par semaine}}"</string>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Jamais"</string>
-    <string name="manage_notification_access_title" msgid="6481256069087219982">"Notifications de l\'appareil et des applications"</string>
+    <string name="manage_notification_access_title" msgid="4154723216570646451">"Lecture et contrôle des notifications, réponses à celles-ci"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"Contrôler quelles applications et quels appareils peuvent lire les notifications"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8643809206612366067">"L\'accès aux notifications du profil professionnel est bloqué"</string>
     <string name="notification_assistant_title" msgid="5889201903272393099">"Notifications améliorées"</string>
@@ -3623,7 +3622,7 @@
     <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"Cette application n\'envoie pas de notifications"</string>
     <string name="notification_channels" msgid="1502969522886493799">"Catégories"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"Autre"</string>
-    <string name="no_channels" msgid="4716199078612071915">"Cette application n\'a publié aucune notification"</string>
+    <string name="no_channels" msgid="4716199078612071915">"Cette appli n\'a publié aucune notification"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Paramètres supplémentaires dans l\'application"</string>
     <string name="show_unused_channels" msgid="4956292847964439078">"Afficher les catégories inutilisées"</string>
     <string name="hide_unused_channels" msgid="2019739275175707170">"Masquer les catégories inutilisées"</string>
@@ -3632,7 +3631,7 @@
     <string name="app_notification_block_summary" msgid="1804611676339341551">"Ne jamais afficher ces notifications"</string>
     <string name="notification_content_block_title" msgid="6689085826061361351">"Afficher les notifications"</string>
     <string name="notification_content_block_summary" msgid="329171999992248925">"Ne jamais afficher les notifications dans l\'ombre ou sur des appareils périphériques"</string>
-    <string name="app_notification_fsi_permission_title" msgid="5424116606034705020">"Autoriser les notifications plein écran"</string>
+    <string name="app_notification_fsi_permission_title" msgid="2260977598430154428">"Autoriser les notifications en plein écran"</string>
     <string name="app_notification_fsi_permission_summary" msgid="7673487977631068039">"Autorisez les notifications à s\'afficher en plein écran lorsque l\'appareil est verrouillé"</string>
     <string name="notification_badge_title" msgid="6854537463548411313">"Autoriser la pastille de notification"</string>
     <string name="notification_channel_badge_title" msgid="6505542437385640049">"Afficher la pastille de notification"</string>
@@ -3865,10 +3864,10 @@
     <string name="app_link_open_always_summary" msgid="4524005594295855117">"{count,plural, =1{L\'application prétend cibler # lien}one{L\'application prétend cibler # lien}other{L\'application prétend cibler # liens}}"</string>
     <string name="open_supported_links_footer" msgid="3188808142432787933">"L\'application réclame les liens suivants :"</string>
     <string name="assist_and_voice_input_title" msgid="6317935163145135914">"Assist. et entrée vocale"</string>
-    <string name="default_assist_title" msgid="1182435129627493758">"Application d\'assistant numérique"</string>
+    <string name="default_assist_title" msgid="1182435129627493758">"Appli d\'assistant numérique"</string>
     <string name="default_digital_assistant_title" msgid="5654663086385490838">"Assistant numérique par défaut"</string>
     <string name="assistant_security_warning_agree" msgid="9013334158753473359">"J\'accepte"</string>
-    <string name="default_browser_title" msgid="8342074390782390458">"Application de navigateur"</string>
+    <string name="default_browser_title" msgid="8342074390782390458">"Appli de navigateur"</string>
     <string name="default_phone_title" msgid="7616730756650803827">"Application de téléphonie"</string>
     <string name="system_app" msgid="1863291702508355041">"(Système)"</string>
     <string name="apps_storage" msgid="643866814746927111">"Stockage des applications"</string>
@@ -3933,7 +3932,7 @@
     <string name="background_check_pref" msgid="5304564658578987535">"Vérification en arrière-plan"</string>
     <string name="assist_access_context_title" msgid="5201495523514096201">"Utiliser le texte affiché à l\'écran"</string>
     <string name="assist_access_context_summary" msgid="6951814413185646275">"Autorisez l\'application d\'assistance à accéder au contenu affiché à l\'écran sous forme de texte"</string>
-    <string name="assist_access_screenshot_title" msgid="4395902231753643633">"Utiliser la saisie d\'écran"</string>
+    <string name="assist_access_screenshot_title" msgid="4395902231753643633">"Utiliser la capture d\'écran"</string>
     <string name="assist_access_screenshot_summary" msgid="5276593070956201863">"Autorisez l\'application d\'assistance à accéder au contenu affiché à l\'écran sous forme d\'image"</string>
     <string name="assist_flash_title" msgid="5449512572885550108">"Faire clignoter l\'écran"</string>
     <string name="assist_flash_summary" msgid="3032289860177784594">"Faites clignoter les bordures de l\'écran lorsque l\'application d\'assistance accède à du texte à partir de l\'écran ou d\'une capture d\'écran"</string>
@@ -3981,8 +3980,8 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Autorisez l\'accès pour gérer tous les fichiers"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Autoriser cette application à lire, à modifier et à supprimer tous les fichiers qui se trouvent sur cet appareil ou sur des volumes de stockage connectés. Si vous accordez cette autorisation, l\'application pourra accéder à des fichiers sans que vous le sachiez."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Peuvent accéder à tous les fichiers"</string>
-    <string name="full_screen_intent_title" msgid="747270185715224130">"Notifications en plein écran"</string>
-    <string name="permit_full_screen_intent" msgid="9035367640019960861">"Autoriser les notifications en plein écran de cette application"</string>
+    <string name="full_screen_intent_title" msgid="5888548315628268674">"Notifications en plein écran"</string>
+    <string name="permit_full_screen_intent" msgid="2414307667550523630">"Autoriser les notifications en plein écran de cette appli"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Autoriser cette application à afficher des notifications en plein écran lorsque l\'appareil est verrouillé. Les applications peuvent s\'en servir pour mettre en évidence des alarmes, des appels entrants ou d\'autres notifications urgentes."</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"Applis de gestion des fichiers multimédias"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Autoriser l\'appli à gérer fichiers multimédias"</string>
@@ -4100,7 +4099,7 @@
     <string name="data_usage_template" msgid="3822452362629968010">"<xliff:g id="ID_1">%1$s</xliff:g> utilisés pour la période : <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="configure" msgid="1499586749829665889">"Configurer"</string>
     <string name="data_usage_other_apps" msgid="5649047093607329537">"Autres applications incluses dans l\'utilisation"</string>
-    <string name="data_saver_unrestricted_summary" msgid="7343571401172437542">"{count,plural, =1{1 application est autorisée à ignorer les restrictions lorsque la fonction Économiseur de données est activée}one{# application est autorisée à ignorer les restrictions lorsque la fonction Économiseur de données est activée}other{# applications sont autorisées à ignorer les restrictions lorsque la fonction Économiseur de données est activée}}"</string>
+    <string name="data_saver_unrestricted_summary" msgid="559673440849071149">"{count,plural, =1{1 appli est autorisée à utiliser les données cellulaires sans restrictions lorsque la fonction Économiseur de données est activée}one{# appli est autorisée à utiliser les données cellulaires sans restrictions lorsque la fonction Économiseur de données est activée}other{# applis sont autorisées à utiliser les données cellulaires sans restrictions lorsque la fonction Économiseur de données est activée}}"</string>
     <string name="data_usage_title" msgid="4039024073687469094">"Données primaires"</string>
     <string name="data_usage_wifi_title" msgid="1060495519280456926">"Données Wi-Fi"</string>
     <string name="data_used_formatted" msgid="7913920278059077938">"<xliff:g id="ID_1">^1</xliff:g> <xliff:g id="ID_2">^2</xliff:g> utilisés"</string>
@@ -4117,13 +4116,13 @@
     <string name="no_carrier_update_now_text" msgid="7898004907837200752">"Mis à jour à l\'instant"</string>
     <string name="launch_wifi_text" msgid="976421974332512894">"Afficher les détails"</string>
     <string name="data_saver_title" msgid="2593804270788863815">"Économiseur de données"</string>
-    <string name="unrestricted_data_saver" msgid="7922563266857367495">"Données sans restrictions"</string>
+    <string name="unrestricted_data_saver" msgid="5913547065342097274">"Données cellulaires sans restrictions"</string>
     <string name="restrict_background_blocklisted" msgid="2308345280442438232">"Les données en arrière-plan sont désactivées"</string>
     <string name="data_saver_on" msgid="7848893946018448793">"Activé"</string>
     <string name="data_saver_off" msgid="5891210864117269045">"Désactivé"</string>
     <string name="data_saver_switch_title" msgid="7111538580123722959">"Utiliser l\'Économiseur de données"</string>
-    <string name="unrestricted_app_title" msgid="7117585996574329284">"Utilis. donn. sans restriction"</string>
-    <string name="unrestricted_app_summary" msgid="282698963532000403">"Ignorer restrict. données lorsque Écon. donn. act."</string>
+    <string name="unrestricted_app_title" msgid="8531936851059106374">"Utilisation de données cellulaires sans restrictions"</string>
+    <string name="unrestricted_app_summary" msgid="8320813971858627624">"Autoriser l\'accès aux données cellulaires sans restrictions lorsque l\'Économiseur de données est activé"</string>
     <string name="home_app" msgid="6056850504746902747">"Application d\'accueil"</string>
     <string name="suggestion_additional_fingerprints" msgid="4726777300101156208">"Ajouter une empreinte digitale"</string>
     <string name="suggestion_additional_fingerprints_summary" msgid="2825364645039666674">"Déverrouiller avec un autre doigt"</string>
@@ -4197,9 +4196,9 @@
     <string name="notification_suggestion_summary" msgid="7615611244249276113">"Afficher ou masquer le contenu des notifications"</string>
     <string name="page_tab_title_support" msgid="3235725053332345773">"Astuces et assistance"</string>
     <string name="developer_smallest_width" msgid="632354817870920911">"La plus petite largeur"</string>
-    <string name="premium_sms_none" msgid="8737045049886416739">"Aucune application installée n\'a demandé l\'accès aux textos payants"</string>
+    <string name="premium_sms_none" msgid="4718916765158062108">"Aucune appli installée n\'a demandé l\'accès aux messages texte payants"</string>
     <string name="premium_sms_warning" msgid="2192300872411073324">"Les textos de cette catégorie peuvent être payants et s\'ajouter aux factures mensuelles de votre fournisseur de services. Si vous activez l\'autorisation pour une application, vous serez en mesure d\'envoyer des textos payants à l\'aide de cette dernière."</string>
-    <string name="premium_sms_access" msgid="5605970342699013212">"Accès aux textos payants"</string>
+    <string name="premium_sms_access" msgid="8487315743197916530">"Messages texte payants"</string>
     <string name="bluetooth_disabled" msgid="835838280837359514">"Désactivé"</string>
     <string name="bluetooth_connected_summary" msgid="8043167194934315712">"Connecté à <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="2294954614327771844">"Connecté à plusieurs appareils"</string>
@@ -4251,7 +4250,7 @@
     <string name="high_label" msgid="357503396626018487">"Élevée"</string>
     <string name="left_edge" msgid="1513576842959071849">"Bord gauche"</string>
     <string name="right_edge" msgid="1505309103265829121">"Bord droit"</string>
-    <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"Une sensibilité élevée pourrait interférer avec les gestes dans l\'application le long des rebords de l\'écran."</string>
+    <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"Une sensibilité élevée pourrait interférer avec les gestes dans l\'appli le long des rebords de l\'écran."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Sensibilité du retour arrière"</string>
     <string name="gesture_settings_activity_title" msgid="1882463161833981820">"Navigation par gestes"</string>
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"Navigation à boutons"</string>
@@ -4990,12 +4989,9 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Désactivez le mode Avion pour utiliser la connectivité à bande ultralarge"</string>
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"La BUL n\'est pas accessible à l\'emplacement actuel"</string>
     <string name="thread_network_settings_title" msgid="4212301030523859220">"Thread"</string>
-    <!-- no translation found for thread_network_settings_main_switch_title (3859168481929323474) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_footer_title (7385600318850220927) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_learn_more (8278498005848565050) -->
-    <skip />
+    <string name="thread_network_settings_main_switch_title" msgid="3859168481929323474">"Utiliser Thread"</string>
+    <string name="thread_network_settings_footer_title" msgid="7385600318850220927">"Thread permet de connecter vos appareil pour maison intelligente et d\'en améliorer l\'efficacité et les performances.\n\nUne fois activé, cet appareil peut rejoindre un réseau Thread, permettant de contrôler les appareils pris en charge par Matter à partir de ce téléphone."</string>
+    <string name="thread_network_settings_learn_more" msgid="8278498005848565050">"En savoir plus sur Thread"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"Accès à la caméra"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Accès au microphone"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"Pour les applications et les services"</string>
@@ -5080,12 +5076,12 @@
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"Le son est modifié en fonction des mouvements de votre tête pour produire un son plus naturel"</string>
     <string name="bluetooth_details_permissions_sync_title" msgid="7277580382321003521">"Synchroniser les autorisations du téléphone"</string>
     <string name="bluetooth_details_permissions_sync_summary" msgid="8125037984381432059">"Accordez à votre montre les mêmes autorisations de l\'application que celles que vous avez accordées sur ce téléphone"</string>
-    <string name="bluetooth_details_audio_device_types_title" msgid="3381941189346781614">"Type d\'appareil audio"</string>
-    <string name="bluetooth_details_audio_device_type_unknown" msgid="839337391037998014">"Inconnu"</string>
+    <string name="bluetooth_details_audio_device_types_title" msgid="1889644189800180316">"Type d\'appareil audio"</string>
+    <string name="bluetooth_details_audio_device_type_unknown" msgid="5299284975435974206">"Non défini"</string>
     <string name="bluetooth_details_audio_device_type_speaker" msgid="3706227767994792124">"Haut-parleur"</string>
     <string name="bluetooth_details_audio_device_type_headphones" msgid="7644588291215033798">"Écouteurs"</string>
-    <string name="bluetooth_details_audio_device_type_hearing_aid" msgid="1310631131071939859">"Prothèse auditive"</string>
-    <string name="bluetooth_details_audio_device_type_carkit" msgid="4439017600454703229">"Trousse mains libres"</string>
+    <string name="bluetooth_details_audio_device_type_hearing_aid" msgid="6311786545025321187">"Appareil auditif"</string>
+    <string name="bluetooth_details_audio_device_type_carkit" msgid="1866236563013629394">"Voiture"</string>
     <string name="bluetooth_details_audio_device_type_other" msgid="7019481234617207563">"Autre"</string>
     <string name="ingress_rate_limit_title" msgid="2106694002836274350">"Limitation du taux de téléchargement sur le réseau"</string>
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"Configurez la limitation du taux d\'entrée sur la bande passante qui est appliquée à tous les réseaux qui fournissent une connectivité Internet."</string>
@@ -5170,8 +5166,6 @@
     <string name="screen_flash_color_violet" msgid="1279950780509029495">"Violet"</string>
     <string name="color_selector_dialog_done" msgid="121253968943363376">"Terminé"</string>
     <string name="color_selector_dialog_cancel" msgid="8667350644753900701">"Annuler"</string>
-    <string name="contrast_title" msgid="6885768151336508075">"Contraste"</string>
-    <string name="contrast_standard" msgid="1097297089917185235">"Standard"</string>
     <string name="contrast_default" msgid="8918545965525226966">"Par défaut"</string>
     <string name="contrast_medium" msgid="384414510709285811">"Moyen"</string>
     <string name="contrast_high" msgid="3988567609694797696">"Élevé"</string>
@@ -5208,4 +5202,99 @@
     <string name="fingerprint_acquired_imager_dirty_udfps" msgid="7005042288289506776">"Nettoyez l\'écran près du capteur, puis réessayez"</string>
     <string name="sim_category_converted_sim" msgid="8575548015816988908">"Convertie en carte eSIM. Retirez-la et jetez-la."</string>
     <string name="sync_across_devices_title" msgid="3447757705383089345">"Synchroniser sur tous les appareils"</string>
+    <string name="device_diagnostics_title" msgid="2914523189695727897">"Diagnostic de l\'appareil"</string>
+    <string name="audio_sharing_title" msgid="4144157137502923821">"Partage du son"</string>
+    <string name="audio_sharing_switch_title" msgid="7052827328670825701">"Partager le son"</string>
+    <string name="calls_and_alarms_device_title" msgid="6993559028175454198">"Appels et alarmes"</string>
+    <string name="audio_sharing_description" msgid="1660255584523640628">"Laissez les gens écouter votre contenu multimédia en même temps que vous. Les auditeurs doivent disposer de leurs propres écouteurs LE Audio."</string>
+    <string name="audio_sharing_device_group_title" msgid="3019780581643956943">"Appareils de stockage multimédia actifs"</string>
+    <string name="audio_sharing_call_audio_title" msgid="7978867452289583929">"Audio des appels"</string>
+    <string name="audio_sharing_call_audio_description" msgid="6573621048260616924">"Faire jouer uniquement sur <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_sharing_test_sound_title" msgid="6438868185641027763">"Tester l\'audio"</string>
+    <string name="audio_sharing_test_sound_description" msgid="4072462502371937399">"Tous les auditeurs devraient l\'entendre"</string>
+    <string name="audio_sharing_stream_settings_title" msgid="1374391898689242036">"Paramètres du flux audio"</string>
+    <string name="audio_sharing_stream_name_title" msgid="8156859441897180940">"Nom"</string>
+    <string name="audio_sharing_stream_password_title" msgid="7026649168165764602">"Mot de passe"</string>
+    <string name="audio_sharing_stream_compatibility_title" msgid="5690947186724469918">"Améliorer la compatibilité"</string>
+    <string name="audio_sharing_stream_compatibility_description" msgid="8170241188606110963">"Aide certains appareils, comme les prothèses auditives, à se connecter en réduisant la qualité audio"</string>
+    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="2586408353546825682">"Désactive le partage audio pour configurer la compatibilité"</string>
+    <string name="audio_sharing_nearby_audio_title" msgid="4795438407040677177">"Écouter l\'audio à proximité"</string>
+    <string name="audio_sharing_footer_description" msgid="4786942197840271680">"Le partage audio prend en charge Auracast🅪"</string>
+    <string name="audio_sharing_stream_name_dialog_title" msgid="6706027295417556499">"Nom du flux audio"</string>
+    <string name="audio_sharing_stream_password_dialog_title" msgid="4148196538860845705">"Mot de passe du flux audio"</string>
+    <string name="audio_sharing_media_device_group_title" msgid="4850674234590549565">"Autres appareils de stockage multimédia"</string>
+    <string name="audio_sharing_summary_on" msgid="611197542982323788">"Activé"</string>
+    <string name="audio_sharing_summary_off" msgid="8833198995257547378">"Désactivé"</string>
+    <string name="audio_sharing_share_dialog_title" msgid="427514648577553621">"Partager votre audio"</string>
+    <string name="audio_sharing_share_dialog_subtitle" msgid="5208582843732057871">"<xliff:g id="DEVICE_NAME1">%1$s</xliff:g> et <xliff:g id="DEVICE_NAME2">%2$s</xliff:g>"</string>
+    <string name="audio_sharing_share_button_label" msgid="3895900668317105537">"Partager l\'audio"</string>
+    <string name="audio_sharing_no_thanks_button_label" msgid="5822491984114744357">"Non merci"</string>
+    <string name="audio_sharing_share_with_dialog_title" msgid="3934377530640830364">"Partager l\'audio avec <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
+    <string name="audio_sharing_share_with_more_dialog_title" msgid="2840069088858232267">"Partager l\'audio avec un autre appareil"</string>
+    <string name="audio_sharing_share_with_button_label" msgid="4146194430380237357">"Partager avec <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_sharing_close_button_label" msgid="2666534149100498574">"Fermer"</string>
+    <string name="audio_sharing_dialog_connect_device_content" msgid="2873230647152283734">"Connectez une autre paire d\'écouteurs compatibles ou partagez le nom et le mot de passe de votre flux avec l\'autre personne"</string>
+    <string name="audio_sharing_dialog_pair_device_content" msgid="3136997898244863470">"Associez une autre paire d\'écouteurs compatibles ou partagez le code QR de votre flux audio avec l\'autre personne"</string>
+    <string name="audio_sharing_sharing_label" msgid="1038021053061111508">"Partage de l\'audio en cours…"</string>
+    <string name="audio_sharing_pair_button_label" msgid="7987236990273083588">"Associer un nouvel appareil"</string>
+    <string name="audio_sharing_qrcode_button_label" msgid="3207039106555097659">"Afficher le code QR"</string>
+    <string name="audio_sharing_notification_title" msgid="1204798942946033005">"Vous partagez l\'audio"</string>
+    <string name="audio_sharing_notification_content" msgid="1577180829878785642">"Les personnes qui écoutent peuvent entendre l\'audio de votre contenu multimédia. Elles n\'entendront pas les appels."</string>
+    <string name="audio_sharing_stop_button_label" msgid="8770519671470608849">"Arrêter le partage"</string>
+    <string name="audio_sharing_settings_button_label" msgid="8574808650318270491">"Paramètres"</string>
+    <string name="audio_sharing_disconnect_dialog_title" msgid="2192751727237748602">"Choisir un appareil à déconnecter"</string>
+    <string name="audio_sharing_dialog_disconnect_content" msgid="3840488888970653308">"Seulement deux appareils à la fois peuvent partager l\'audio"</string>
+    <string name="audio_sharing_disconnect_device_button_label" msgid="4272897217708930576">"Déconnecter <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_sharing_stop_dialog_title" msgid="4872853738164232075">"Connecter <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
+    <string name="audio_sharing_stop_dialog_content" msgid="6371546856710692910">"Vous ne partagerez plus l\'audio avec <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_sharing_stop_dialog_with_two_content" msgid="2119020725467967219">"Vous ne partagerez plus l\'audio avec <xliff:g id="DEVICE_NAME1">%1$s</xliff:g> ni <xliff:g id="DEVICE_NAME2">%2$s</xliff:g>"</string>
+    <string name="audio_sharing_stop_dialog_with_more_content" msgid="5262441138981618703">"Vous ne partagerez plus l\'audio avec les écouteurs connectés"</string>
+    <string name="audio_sharing_connect_button_label" msgid="4241911519063029982">"Se connecter"</string>
+    <string name="audio_sharing_sharing_stopped_label" msgid="8128194452354240996">"Partage audio arrêté"</string>
+    <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"Connecter un appareil compatible"</string>
+    <string name="audio_sharing_comfirm_dialog_content" msgid="3479217934447446066">"Pour commencer à partager de l\'audio, connectez d\'abord les écouteurs LE Audio à votre téléphone"</string>
+    <string name="audio_streams_category_title" msgid="4878022761829895463">"Se connecter à un flux LE Audio"</string>
+    <string name="audio_streams_pref_title" msgid="6320485086288646209">"Flux audio à proximité"</string>
+    <string name="audio_streams_title" msgid="6617990880383079165">"Flux audio"</string>
+    <string name="audio_streams_qr_code_summary" msgid="2838923349871884871">"Connectez-vous à un flux audio à l\'aide d\'un code QR"</string>
+    <string name="audio_streams_empty" msgid="8803517701437394982">"Aucun flux audio trouvé à proximité."</string>
+    <string name="audio_streams_disconnect" msgid="1755594831469579161">"Déconnecter"</string>
+    <string name="audio_streams_connect" msgid="1955964373102927954">"Se connecter"</string>
+    <string name="audio_streams_qr_code_is_not_valid_format" msgid="4856288389653121830">"Le format du code QR est incorrect"</string>
+    <string name="audio_streams_qr_code_scanner" msgid="525396804963685478">"Pour commencer à écouter, centrez le code QR ci-dessous"</string>
+    <string name="audio_streams_add_source_bad_code_state_summary" msgid="6527086906921868757">"Vérifiez le mot de passe et réessayez"</string>
+    <string name="audio_streams_add_source_failed_state_summary" msgid="3937546443978562322">"Connexion impossible. Réessayez."</string>
+    <string name="audio_streams_add_source_wait_for_response_summary" msgid="3763240901110974606">"Connexion en cours…"</string>
+    <string name="audio_streams_wait_for_sync_state_summary" msgid="11905744690831864">"Analyse en cours…"</string>
+    <string name="audio_streams_dialog_stream_is_not_available" msgid="4032878851270690546">"Le flux audio n\'est pas accessible"</string>
+    <string name="audio_streams_is_not_playing" msgid="8480293894696007941">"Ce flux audio ne fait jouer aucun contenu pour l\'instant"</string>
+    <string name="audio_streams_dialog_close" msgid="8177201719298408431">"Fermer"</string>
+    <string name="audio_streams_dialog_listen" msgid="7290340191504987685">"Écouter"</string>
+    <string name="audio_streams_dialog_retry" msgid="4456843891970998556">"Réessayer"</string>
+    <string name="audio_streams_dialog_listen_to_audio_stream" msgid="8585253007762261528">"Écouter le flux audio"</string>
+    <string name="audio_streams_dialog_control_volume" msgid="7615062686016713544">"Le flux audio sera diffusé sur <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Utilisez cet appareil pour contrôler le volume."</string>
+    <string name="audio_streams_dialog_cannot_listen" msgid="4432257183698209966">"Impossible d\'écouter le flux audio"</string>
+    <string name="audio_streams_dialog_default_device" msgid="6159800303379303266">"écouteurs compatibles connectés"</string>
+    <string name="audio_streams_activity_title" msgid="9011162151277443663">"Diffusions"</string>
+    <string name="audio_streams_no_password_summary" msgid="8976357323034830144">"Aucun mot de passe"</string>
+    <string name="audio_streams_dialog_learn_more" msgid="6711241053442211345">"En savoir plus"</string>
+    <string name="audio_streams_dialog_cannot_play" msgid="1358828316927479091">"Impossible de faire jouer le flux audio sur <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
+    <string name="audio_streams_listening_now" msgid="4205614429222949176">"Écouter maintenant"</string>
+    <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"Arrêter l\'écoute"</string>
+    <string name="audio_streams_dialog_no_le_device_title" msgid="3931163990976742282">"Connecter des écouteurs compatibles"</string>
+    <string name="audio_streams_dialog_no_le_device_button" msgid="4484355549428642588">"Connecter un appareil"</string>
+    <string name="audio_streams_detail_page_title" msgid="7884132061275273766">"Détails du flux audio"</string>
+    <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"Code QR du flux audio"</string>
+    <string name="audio_streams_qr_code_page_password" msgid="7268475614131297060">"Mot de passe : <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
+    <string name="audio_streams_qr_code_page_description" msgid="1317961663706630428">"Pour écouter <xliff:g id="STREAM_NAME">%1$s</xliff:g>, d\'autres personnes peuvent connecter des écouteurs compatibles à leur appareil Android. Elles pourront ensuite balayer ce code QR."</string>
+    <string name="audio_streams_main_page_title" msgid="1838380471076527639">"Trouver un flux audio"</string>
+    <string name="audio_streams_main_page_subtitle" msgid="3251995732921981539">"Écoutez un appareil qui partage de l\'audio ou une diffusion Auracast à proximité"</string>
+    <string name="audio_streams_main_page_device_title" msgid="2635744035523908253">"Votre appareil audio"</string>
+    <string name="audio_streams_main_page_no_device_summary" msgid="2936000845397406389">"Connecter des écouteurs compatibles"</string>
+    <string name="audio_streams_main_page_scan_section_title" msgid="2778235929304061163">"Flux audio à proximité"</string>
+    <string name="audio_streams_main_page_scan_qr_code_title" msgid="8337270277392468895">"Balayer le code QR"</string>
+    <string name="audio_streams_main_page_scan_qr_code_summary" msgid="1991792283368249499">"Commencez à écouter en balayant le code QR d\'un flux"</string>
+    <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Écouter le flux"</string>
+    <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Balayez le code QR d\'un flux audio pour l\'écouter avec votre <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Impossible de modifier le mot de passe lors du partage. Pour modifier le mot de passe, désactivez d\'abord le partage audio."</string>
 </resources>

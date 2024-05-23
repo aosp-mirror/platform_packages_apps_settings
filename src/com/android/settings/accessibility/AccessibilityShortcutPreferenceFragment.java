@@ -42,6 +42,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
+import com.android.internal.accessibility.common.ShortcutConstants;
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragment;
@@ -222,12 +223,12 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
                 if (WizardManagerHelper.isAnySetupWizard(getIntent())) {
                     mDialog = AccessibilityShortcutsTutorial
                             .createAccessibilityTutorialDialogForSetupWizard(
-                                    getPrefContext(), getUserShortcutTypes(),
+                                    getPrefContext(), getUserPreferredShortcutTypes(),
                                     this::callOnTutorialDialogButtonClicked, getLabelName());
                 } else {
                     mDialog = AccessibilityShortcutsTutorial
                             .createAccessibilityTutorialDialog(
-                                    getPrefContext(), getUserShortcutTypes(),
+                                    getPrefContext(), getUserPreferredShortcutTypes(),
                                     this::callOnTutorialDialogButtonClicked, getLabelName());
                 }
                 mDialog.setCanceledOnTouchOutside(false);
@@ -274,8 +275,7 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
             return;
         }
 
-        final int shortcutTypes = PreferredShortcuts.retrieveUserShortcutType(getPrefContext(),
-                getComponentName().flattenToString());
+        final int shortcutTypes = getUserPreferredShortcutTypes();
         if (preference.isChecked()) {
             AccessibilityUtil.optInAllValuesToSettings(getPrefContext(), shortcutTypes,
                     getComponentName());
@@ -451,8 +451,7 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
             return context.getText(R.string.accessibility_shortcut_state_off);
         }
 
-        final int shortcutTypes = PreferredShortcuts.retrieveUserShortcutType(context,
-                getComponentName().flattenToString());
+        final int shortcutTypes = getUserPreferredShortcutTypes();
 
         // LINT.IfChange(shortcut_type_ui_order)
         final List<CharSequence> list = new ArrayList<>();
@@ -487,9 +486,7 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
         // when shortcutPreference is checked.
         int value = restoreOnConfigChangedValue();
         if (value == NOT_SET) {
-            final int lastNonEmptyUserShortcutType = PreferredShortcuts.retrieveUserShortcutType(
-                    getPrefContext(), getComponentName().flattenToString()
-            );
+            final int lastNonEmptyUserShortcutType = getUserPreferredShortcutTypes();
             value = mShortcutPreference.isChecked() ? lastNonEmptyUserShortcutType
                     : AccessibilityUtil.UserShortcutType.EMPTY;
         }
@@ -529,8 +526,7 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
             return;
         }
 
-        final int shortcutTypes = PreferredShortcuts.retrieveUserShortcutType(getPrefContext(),
-                getComponentName().flattenToString());
+        final int shortcutTypes = getUserPreferredShortcutTypes();
         mShortcutPreference.setChecked(
                 AccessibilityUtil.hasValuesInSettings(getPrefContext(), shortcutTypes,
                         getComponentName()));
@@ -580,5 +576,15 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
         AccessibilityQuickSettingUtils.optInValueToSharedPreferences(getContext(),
                 tileComponentName);
         mNeedsQSTooltipReshow = false;
+    }
+
+    /**
+     * Returns the user preferred shortcut types or the default shortcut types if not set
+     */
+    @ShortcutConstants.UserShortcutType
+    protected int getUserPreferredShortcutTypes() {
+        return PreferredShortcuts.retrieveUserShortcutType(
+                getPrefContext(),
+                getComponentName().flattenToString());
     }
 }
