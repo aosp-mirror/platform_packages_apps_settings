@@ -393,7 +393,7 @@ public class BatteryUtils {
                     packageName, uid, ActivityManager.RESTRICTION_LEVEL_BACKGROUND_RESTRICTED,
                     mode == AppOpsManager.MODE_IGNORED,
                     ActivityManager.RESTRICTION_REASON_USER,
-                    "settings", 0);
+                    "settings", ActivityManager.RESTRICTION_SOURCE_USER, 0L);
         }
         // Control whether app could run jobs in the background
         mAppOpsManager.setMode(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, uid, packageName, mode);
