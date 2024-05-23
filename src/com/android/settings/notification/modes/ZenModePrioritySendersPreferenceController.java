@@ -36,10 +36,13 @@ import android.provider.Contacts;
 import android.service.notification.ConversationChannelWrapper;
 import android.service.notification.ZenPolicy;
 import android.view.View;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.notification.app.ConversationListSettings;
@@ -59,7 +62,7 @@ import java.util.Map;
  * bypass DND for calls or messages, which may be one of the following values: starred contacts, all
  * contacts, priority conversations (for messages only), anyone, or no one.
  */
-public class ZenModePrioritySendersPreferenceController
+class ZenModePrioritySendersPreferenceController
         extends AbstractZenModePreferenceController {
     private final boolean mIsMessages; // if this is false, then this preference is for calls
 
@@ -124,12 +127,12 @@ public class ZenModePrioritySendersPreferenceController
     }
 
     @Override
-    public void updateState(Preference preference) {
+    public void updateState(Preference preference, @NonNull ZenMode zenMode) {
         if (mIsMessages) {
             updateChannelCounts();
         }
-        final int currContactsSetting = getPrioritySenders();
-        final int currConversationsSetting = getPriorityConversationSenders();
+        final int currContactsSetting = getPrioritySenders(zenMode.getPolicy());
+        final int currConversationsSetting = getPriorityConversationSenders(zenMode.getPolicy());
         for (SelectorWithWidgetPreference pref : mSelectorPreferences) {
             // for each preference, check whether the current state matches what this state
             // would look like if the button were checked.
@@ -173,17 +176,17 @@ public class ZenModePrioritySendersPreferenceController
         mNumImportantConversations = numImportantConversations;
     }
 
-    private int getPrioritySenders() {
+    private int getPrioritySenders(ZenPolicy policy) {
         if (mIsMessages) {
-            return getMode().getPolicy().getPriorityMessageSenders();
+            return policy.getPriorityMessageSenders();
         } else {
-            return getMode().getPolicy().getPriorityCallSenders();
+            return policy.getPriorityCallSenders();
         }
     }
 
-    private int getPriorityConversationSenders() {
+    private int getPriorityConversationSenders(ZenPolicy policy) {
         if (mIsMessages) {
-            return getMode().getPolicy().getPriorityConversationSenders();
+            return policy.getPriorityConversationSenders();
         }
         return CONVERSATION_SENDERS_UNSET;
     }
@@ -419,29 +422,31 @@ public class ZenModePrioritySendersPreferenceController
     @VisibleForTesting
     SelectorWithWidgetPreference.OnClickListener mSelectorClickListener =
             new SelectorWithWidgetPreference.OnClickListener() {
-        @Override
-        public void onRadioButtonClicked(SelectorWithWidgetPreference preference) {
-            // The settingsToSaveOnClick function takes whether the preference is a
-            // checkbox into account to determine whether this selection is checked or unchecked.
-            final int[] settingsToSave = settingsToSaveOnClick(preference,
-                    getPrioritySenders(), getPriorityConversationSenders());
-            final int prioritySendersSetting = settingsToSave[0];
-            final int priorityConvosSetting = settingsToSave[1];
+                @Override
+                public void onRadioButtonClicked(SelectorWithWidgetPreference preference) {
+                    savePolicy(policy -> {
+                        ZenPolicy previousPolicy = policy.build();
+                        // The settingsToSaveOnClick function takes whether the preference is a
+                        // checkbox into account to determine whether this selection is checked or
+                        // unchecked.
+                        final int[] settingsToSave = settingsToSaveOnClick(preference,
+                                getPrioritySenders(previousPolicy),
+                                getPriorityConversationSenders(previousPolicy));
+                        final int prioritySendersSetting = settingsToSave[0];
+                        final int priorityConvosSetting = settingsToSave[1];
 
-            ZenPolicy.Builder diffPolicy = new ZenPolicy.Builder();
-            if (prioritySendersSetting != PEOPLE_TYPE_UNSET) {
-                if (mIsMessages) {
-                    diffPolicy.allowMessages(prioritySendersSetting);
-
-                } else {
-                    diffPolicy.allowCalls(prioritySendersSetting);
+                        if (prioritySendersSetting != PEOPLE_TYPE_UNSET) {
+                            if (mIsMessages) {
+                                policy.allowMessages(prioritySendersSetting);
+                            } else {
+                                policy.allowCalls(prioritySendersSetting);
+                            }
+                        }
+                        if (mIsMessages && priorityConvosSetting != CONVERSATION_SENDERS_UNSET) {
+                            policy.allowConversations(priorityConvosSetting);
+                        }
+                        return policy;
+                    });
                 }
-            }
-            if (mIsMessages && priorityConvosSetting != CONVERSATION_SENDERS_UNSET) {
-                diffPolicy.allowConversations(priorityConvosSetting);
-            }
-            getMode().setPolicy(diffPolicy.build());
-            mBackend.updateMode(getMode());
-        }
-    };
+            };
 }

@@ -26,6 +26,7 @@ import android.app.AutomaticZenRule;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.service.notification.ZenDeviceEffects;
 import android.service.notification.ZenPolicy;
 import android.util.Log;
 
@@ -151,14 +152,6 @@ class ZenMode {
     }
 
     /**
-     * Use sparingly. If you're updating a policy field, use
-     * {@link #setPolicy(android.service.notification.ZenPolicy)} instead.
-     */
-    public void setAzr(@NonNull AutomaticZenRule newRule) {
-        mRule = newRule;
-    }
-
-    /**
      * Updates the {@link ZenPolicy} of the associated {@link AutomaticZenRule} based on the
      * supplied policy. In some cases this involves conversions, so that the following call
      * to {@link #getPolicy} might return a different policy from the one supplied here.
@@ -202,6 +195,13 @@ class ZenMode {
             mRule.setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY);
         }
         mRule.setZenPolicy(policy);
+    }
+
+    @NonNull
+    public ZenDeviceEffects getDeviceEffects() {
+        return mRule.getDeviceEffects() != null
+                ? mRule.getDeviceEffects()
+                : new ZenDeviceEffects.Builder().build();
     }
 
     public boolean canBeDeleted() {

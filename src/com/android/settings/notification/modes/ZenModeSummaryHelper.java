@@ -30,7 +30,6 @@ import static android.service.notification.ZenPolicy.PRIORITY_CATEGORY_MESSAGES;
 import static android.service.notification.ZenPolicy.PRIORITY_CATEGORY_REMINDERS;
 import static android.service.notification.ZenPolicy.PRIORITY_CATEGORY_REPEAT_CALLERS;
 import static android.service.notification.ZenPolicy.PRIORITY_CATEGORY_SYSTEM;
-import static android.service.notification.ZenPolicy.STATE_DISALLOW;
 import static android.service.notification.ZenPolicy.VISUAL_EFFECT_AMBIENT;
 import static android.service.notification.ZenPolicy.VISUAL_EFFECT_BADGE;
 import static android.service.notification.ZenPolicy.VISUAL_EFFECT_FULL_SCREEN_INTENT;
@@ -44,7 +43,6 @@ import android.icu.text.MessageFormat;
 import android.service.notification.ZenDeviceEffects;
 import android.service.notification.ZenPolicy;
 
-import android.util.SparseArray;
 import com.android.settings.R;
 
 import java.util.ArrayList;
@@ -54,10 +52,10 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.function.Predicate;
 
-public class ZenModeSummaryHelper {
+class ZenModeSummaryHelper {
 
-    private Context mContext;
-    private ZenModesBackend mBackend;
+    private final Context mContext;
+    private final ZenModesBackend mBackend;
 
     public ZenModeSummaryHelper(Context context, ZenModesBackend backend) {
         mContext = context;

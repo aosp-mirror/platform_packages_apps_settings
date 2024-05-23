@@ -16,20 +16,22 @@
 
 package com.android.settings.notification.modes;
 
-
 import static com.android.settings.notification.modes.ZenModeFragmentBase.MODE_ID;
 
 import android.content.Context;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.preference.Preference;
+
 import com.android.settings.core.SubSettingLauncher;
 
 /**
  * Preference with a link and summary about what other sounds can break through the mode
  */
-public class ZenModeOtherLinkPreferenceController extends AbstractZenModePreferenceController {
+class ZenModeOtherLinkPreferenceController extends AbstractZenModePreferenceController {
 
-    ZenModeSummaryHelper mSummaryHelper;
+    private final ZenModeSummaryHelper mSummaryHelper;
 
     public ZenModeOtherLinkPreferenceController(Context context, String key,
             ZenModesBackend backend) {
@@ -38,15 +40,14 @@ public class ZenModeOtherLinkPreferenceController extends AbstractZenModePrefere
     }
 
     @Override
-    public void updateState(Preference preference) {
-        super.updateState(preference);
+    public void updateState(Preference preference, @NonNull ZenMode zenMode) {
         Bundle bundle = new Bundle();
-        bundle.putString(MODE_ID, getMode().getId());
+        bundle.putString(MODE_ID, zenMode.getId());
         preference.setIntent(new SubSettingLauncher(mContext)
                 .setDestination(ZenModeOtherFragment.class.getName())
                 .setSourceMetricsCategory(0)
                 .setArguments(bundle)
                 .toIntent());
-        preference.setSummary(mSummaryHelper.getOtherSoundCategoriesSummary(getMode()));
+        preference.setSummary(mSummaryHelper.getOtherSoundCategoriesSummary(zenMode));
     }
 }

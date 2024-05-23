@@ -18,9 +18,12 @@ package com.android.settings.notification.modes;
 
 import android.content.Context;
 import android.service.notification.ZenPolicy;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.CheckBoxPreference;
 import androidx.preference.Preference;
+
 import com.android.settings.widget.DisabledCheckBoxPreference;
 
 public class ZenModeNotifVisPreferenceController extends AbstractZenModePreferenceController
@@ -53,13 +56,13 @@ public class ZenModeNotifVisPreferenceController extends AbstractZenModePreferen
     }
 
     @Override
-    public void updateState(Preference preference) {
+    public void updateState(Preference preference, @NonNull ZenMode zenMode) {
 
-        boolean suppressed = !getMode().getPolicy().isVisualEffectAllowed(mEffect, false);
+        boolean suppressed = !zenMode.getPolicy().isVisualEffectAllowed(mEffect, false);
         boolean parentSuppressed = false;
         if (mParentSuppressedEffects != null) {
             for (@ZenPolicy.VisualEffect int parentEffect : mParentSuppressedEffects) {
-                if (!getMode().getPolicy().isVisualEffectAllowed(parentEffect, true)) {
+                if (!zenMode.getPolicy().isVisualEffectAllowed(parentEffect, true)) {
                     parentSuppressed = true;
                 }
             }
@@ -77,15 +80,6 @@ public class ZenModeNotifVisPreferenceController extends AbstractZenModePreferen
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final boolean allowEffect = !((Boolean) newValue);
-
-        if (getMode().getPolicy().isVisualEffectAllowed(mEffect, true) != allowEffect) {
-            ZenPolicy diffPolicy = new ZenPolicy.Builder()
-                    .showVisualEffect(mEffect, allowEffect)
-                    .build();
-            getMode().setPolicy(diffPolicy);
-            mBackend.updateMode(getMode());
-        }
-
-        return true;
+        return savePolicy(policy -> policy.showVisualEffect(mEffect, allowEffect));
     }
 }
