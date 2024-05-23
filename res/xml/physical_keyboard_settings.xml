@@ -38,4 +38,26 @@
             android:summary="@string/modifier_keys_settings_summary"
             android:fragment="com.android.settings.inputmethod.ModifierKeysSettings" />
     </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="keyboard_a11y_category"
+        android:title="@string/keyboard_a11y_category">
+
+        <SwitchPreferenceCompat
+            android:key="accessibility_sticky_keys"
+            android:title="@string/sticky_keys"
+            android:summary="@string/sticky_keys_summary"
+            android:defaultValue="false" />
+
+        <SwitchPreferenceCompat
+            android:key="accessibility_bounce_keys"
+            android:title="@string/bounce_keys"
+            android:defaultValue="false" />
+
+        <SwitchPreferenceCompat
+            android:key="accessibility_slow_keys"
+            android:title="@string/slow_keys"
+            android:defaultValue="false" />
+
+    </PreferenceCategory>
 </PreferenceScreen>

@@ -28,6 +28,7 @@
     <string name="show_dev_on" msgid="2840850085134853754">"Dabar esate kūrėjas!"</string>
     <string name="show_dev_already" msgid="7041756429707644630">"Nereikia, jūs jau esate kūrėjas."</string>
     <string name="dev_settings_disabled_warning" msgid="6971867026249671244">"Pirmiausia įgalinkite kūrėjo parinktis."</string>
+    <string name="dev_settings_available_to_admin_only_warning" msgid="3408243404879083111">"Tik naudotojai administratoriai gali pasiekti kūrėjo nustatymus."</string>
     <string name="header_category_system" msgid="1665516346845259058">"Sistema"</string>
     <string name="radioInfo_service_in" msgid="9088637745836646271">"Aptarnaujama"</string>
     <string name="radioInfo_service_out" msgid="1868347333892403287">"Paslaugos neteikiamos"</string>
@@ -46,6 +47,8 @@
     <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"Priekinis rodinys įjungiamas sulenkus įrenginį"</string>
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"Tik žaidimai, vaizdo įrašai ir kt."</string>
     <string name="selective_stay_awake_summary" msgid="9055967322921984543">"Priekinis rodinys įjungiamas programose, kurios išjungia neaktyvų ekraną"</string>
+    <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Perbraukite aukštyn ir tęskite"</string>
+    <string name="stay_awake_on_lockscreen_summary" msgid="2299351813382522952">"Sulenkite telefoną ir perbraukite aukštyn priekiniame rodinyje, jei norite toliau naudoti programą, arba palaukite kelias sekundes, kol ekranas bus užrakintas"</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"Niekada"</string>
     <string name="sleep_on_fold_summary" msgid="7737992842459588846">"Priekinis rodinys užrakinamas sulenkus įrenginį"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Automatinio pasukimo naudojimas"</string>
@@ -62,6 +65,7 @@
     <string name="bluetooth_disconnect_title" msgid="4581951246357823044">"Atjungti įrenginį?"</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Susieti naują įrenginį"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
+    <string name="bluetooth_screen_auto_on_title" msgid="8496443490064988240">"Automatiškai vėl įjungti rytoj"</string>
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Susieti dešinę ausį"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Susieti kairę ausį"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Susiekite kitą ausį"</string>
@@ -70,8 +74,10 @@
     <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"Susieti dešinę ausį"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"Susieti kairę ausį"</string>
     <string name="bluetooth_device_controls_general" msgid="1399214835599665488">"Visuose pasiekiamuose klausos įrenginiuose"</string>
-    <string name="bluetooth_device_controls_title" msgid="1895676556354697234">"Klausos įrenginio nustatymai"</string>
-    <string name="bluetooth_device_controls_summary" msgid="8115767735418425663">"Spartusis klavišas, klausos aparato suderinamumas"</string>
+    <!-- no translation found for bluetooth_device_controls_title (659009912978022189) -->
+    <skip />
+    <!-- no translation found for bluetooth_device_controls_summary (5387400497394163925) -->
+    <skip />
     <string name="bluetooth_device_controls_specific" msgid="7706863288754077107">"Šiame įrenginyje"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Garso išvestis"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Apie garso išvestį"</string>
@@ -79,8 +85,8 @@
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"Susiję"</string>
     <string name="bluetooth_ringtone_title" msgid="3177308461256892085">"Skambėjimo tonas ir signalai"</string>
     <string name="bluetooth_call_title" msgid="6851464952021874072">"Garsas vykstant skambučiams"</string>
-    <string name="bluetooth_media_title" msgid="343705257183053699">"Medija"</string>
-    <string name="bluetooth_system_sounds_title" msgid="6746938637128763205">"Pranešimai ir sistemos garsai"</string>
+    <string name="bluetooth_media_title" msgid="2878373577382067290">"Medijos ir sistemos garsai"</string>
+    <string name="bluetooth_notification_title" msgid="8708962394926222039">"Pranešimai"</string>
     <string name="bluetooth_audio_routing_footer_summary" msgid="410260713589309293">"Pagal numatytuosius nustatymus garso išvestis nustatoma atsižvelgiant į atskiras programas"</string>
     <string name="bluetooth_device" msgid="2217973503732544291">"„Bluetooth“ įrenginys be pavadinimo"</string>
     <string name="progress_scanning" msgid="2564746192843011826">"Ieškoma"</string>
@@ -112,6 +118,7 @@
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Atšaukti"</string>
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"„Bluetooth LE Audio“ išjungimas"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Jei įrenginys palaiko „LE Audio“ aparatinės įrangos galimybes, išjungiama funkcija „Bluetooth LE Audio“."</string>
+    <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"„Bluetooth LE Audio“ režimas"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Rodyti „LE Audio“ jungiklį įrenginio informacijoje"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"„Bluetooth LE Audio“ leidžiamųjų sąrašo išskyrimas"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Naudoti „LE Audio“ pagal numatytuosius nustatymus, net jei „LE Audio“ išorinis įrenginys nebuvo patvirtintas kaip atitinkantis leidžiamųjų sąrašo kriterijus."</string>
@@ -133,13 +140,6 @@
     <string name="stylus_textfield_handwriting" msgid="2363579035338976327">"Rašymas teksto laukuose"</string>
     <string name="stylus_ignore_button" msgid="7734540973145241391">"Visų rašiklio mygtuko paspaudimų nepaisymas"</string>
     <string name="stylus_connected_devices_title" msgid="2823967577941359812">"Rašiklis"</string>
-    <string name="audio_sharing_title" msgid="4144157137502923821">"Garso bendrinimas"</string>
-    <string name="audio_sharing_switch_title" msgid="7052827328670825701">"Bendrinti garsą"</string>
-    <string name="calls_and_alarms_device_title" msgid="6993559028175454198">"Skambučiai ir signalai"</string>
-    <string name="audio_streams_category_title" msgid="4878022761829895463">"Prisijungimas prie „LE Audio“ srauto"</string>
-    <string name="audio_streams_pref_title" msgid="6320485086288646209">"Garso srautai netoliese"</string>
-    <string name="audio_streams_title" msgid="6617990880383079165">"Garso srautai"</string>
-    <string name="audio_streams_qr_code_summary" msgid="2838923349871884871">"Prisijunkite prie garso srauto naudodami QR kodą"</string>
     <string name="audio_streams_empty" msgid="8803517701437394982">"Netoliese nerasta jokių garso srautų."</string>
     <string name="date_and_time" msgid="1788358029823431692">"Data ir laikas"</string>
     <string name="proxy_settings_title" msgid="4201866858226087066">"Tarpinis serveris"</string>
@@ -283,6 +283,7 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Programos, turinčios netoliese esančių įrenginių leidimą, gali nustatyti apytikslį atstumą iki prijungtų įrenginių."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Programų ir paslaugų prieiga prie vietovės išjungta. Įrenginio vietovės informacija vis tiek gali būti siunčiama pagalbos tarnyboms skambinant ar siunčiant teksto pranešimą pagalbos numeriu."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Sužinokite daugiau apie vietovės nustatymus."</string>
+    <string name="location_settings_tooltip_text_for_chrome" msgid="3574930966097093550">"Jei norite pakeisti prieigą prie vietovės, eikite į skiltį „Nustatymai“ &gt; „Sauga ir privatumas“ &gt; „Privatumo valdikliai“"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Paskyros"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Sauga"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Šifruotė ir prisijungimo duomenys"</string>
@@ -541,64 +542,102 @@
     <string name="security_header" msgid="961514795852103424">"Sauga"</string>
     <string name="privacy_header" msgid="5526002421324257007">"Privatumas"</string>
     <string name="work_profile_category_header" msgid="85707750968948517">"Darbo profilis"</string>
-    <string name="private_space_title" msgid="7078627930195569767">"Privati erdvė"</string>
-    <string name="private_space_summary" msgid="8237652417163408001">"Slėpkite programas privačiame aplanke"</string>
-    <string name="private_space_description" msgid="5494963647270826210">"Slėpkite programas privačiame aplanke, kurį galite pasiekti tik jūs"</string>
-    <string name="private_space_lock_title" msgid="3006539720164938296">"Privačios erdvės užraktas"</string>
-    <string name="private_space_one_lock_summary" msgid="2759953747682959371">"Galite atrakinti privačią erdvę taip pat, kaip atrakinate įrenginį, arba pasirinkti kitą užraktą"</string>
+    <string name="private_space_title" msgid="1752064212078238723">"Privati erdvė"</string>
+    <string name="private_space_summary" msgid="2274405892301976238">"Privačių programų užrakinimas ir slėpimas"</string>
+    <string name="private_space_description" msgid="4059594203775816136">"Laikykite privačias programas atskiroje erdvėje, kurią galite slėpti ar užrakinti"</string>
+    <string name="private_space_lock_title" msgid="7230836881433350526">"Privačios erdvės užraktas"</string>
+    <string name="private_space_one_lock_summary" msgid="2106513606571219068">"Galite atrakinti privačią erdvę taip pat, kaip atrakinate įrenginį, arba pasirinkti kitą užraktą"</string>
     <string name="private_space_screen_lock_title" msgid="8679383894967823163">"Įrenginio ekrano užrakto naudojimas"</string>
     <string name="private_space_biometric_title" msgid="3934339826674553174">"Atrakinimas pagal veidą ir piršto atspaudu"</string>
+    <string name="private_space_fingerprint_title" msgid="5989254643211889931">"Atrakinimas piršto atspaudu"</string>
+    <string name="private_space_face_title" msgid="3290402865367663079">"Atrakinimas pagal veidą"</string>
     <string name="private_space_biometric_summary" msgid="4403837276018724581">"Palieskite, kad atliktumėte sąranką"</string>
+    <string name="private_space_fingerprint_unlock_title" msgid="3614016453395789051">"Privačios erdvės atrakinimas piršto atspaudu"</string>
+    <string name="private_space_face_unlock_title" msgid="462248384776453613">"Privačios erdvės atrakinimas pagal veidą"</string>
+    <string name="private_space_category_ways_to_unlock" msgid="4356631225316950046">"Atrakinimo metodai"</string>
     <string name="private_space_screen_lock_summary" msgid="394837965365561070">"Toks pats kaip įrenginio ekrano užraktas"</string>
-    <string name="private_space_new_lock_title" msgid="7306873010565337671">"Pasirinkti naują privačios erdvės užraktą?"</string>
+    <string name="private_space_new_lock_title" msgid="9056139964133004094">"Pasirinkti naują privačios erdvės užraktą?"</string>
+    <string name="private_space_auto_lock_title" msgid="8663409382910601261">"Užrakinti privačią erdvę automatiškai"</string>
+    <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"Galite automatiškai užrakinti privačią erdvę, jei tam tikrą laikotarpį nenaudojote įrenginio"</string>
+    <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"Kaskart, kai įrenginys užrakinamas"</string>
+    <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"Po penkių neaktyvumo minučių"</string>
+    <string name="private_space_auto_lock_never" msgid="595014527119778873">"Niekada"</string>
     <string name="private_space_hide_title" msgid="8687034008994037610">"Slėpimas užrakinus"</string>
-    <string name="privatespace_hide_page_title" msgid="972581369094289386">"Užrakintos privačios erdvės slėpimas"</string>
-    <string name="privatespace_hide_page_summary" msgid="1052569521186403642">"Jei nenorite, kad kiti žmonės žinotų, jog privati erdvė yra jūsų įrenginyje, galite slėpti ją programų sąraše"</string>
-    <string name="privatespace_access_header" msgid="982809349769470185">"Prieiga prie paslėptos privačios erdvės"</string>
-    <string name="privatespace_search_description" msgid="983837656432484282">"Ieškokite pagal užklausą „Privati erdvė“ paieškos juostoje"</string>
-    <string name="privatespace_tap_tile_description" msgid="4146608898639668340">"Palieskite privačios erdvės pavadinimą"</string>
-    <string name="privatespace_unlock_description" msgid="4132755357482447360">"Atrakinti privačią erdvę"</string>
+    <string name="privatespace_hide_page_title" msgid="8417507414027827566">"Užrakintos privačios erdvės slėpimas"</string>
+    <string name="privatespace_hide_page_summary" msgid="5525422595477989312">"Jei nenorite, kad kiti žmonės žinotų, jog turite privačią erdvę savo įrenginyje, galite slėpti ją programų sąraše"</string>
+    <string name="privatespace_access_header" msgid="6066826215718835041">"Prieiga prie paslėptos privačios erdvės"</string>
+    <string name="privatespace_search_description" msgid="3121043205513022357">"Programų sąrašo paieškos juostoje įveskite „privati erdvė“"</string>
+    <string name="privatespace_tap_tile_description" msgid="8346440188590931635">"Palieskite privačios erdvės išklotinės elementą"</string>
+    <string name="privatespace_unlock_description" msgid="3177710543121916413">"Atrakinti privačią erdvę"</string>
     <string name="privatespace_hide_off_summary" msgid="7227778747159633671">"Išjungti"</string>
     <string name="privatespace_hide_on_summary" msgid="6136704537527640183">"Įjungti"</string>
     <string name="private_space_category_system" msgid="1286843321867285700">"Sistema"</string>
-    <string name="private_space_delete_title" msgid="3075645119800272800">"Privačios erdvės ištrynimas"</string>
-    <string name="private_space_deleted" msgid="7825768516955610897">"Privati erdvė sėkmingai ištrinta"</string>
-    <string name="private_space_delete_failed" msgid="8500755484258565011">"Nepavyko ištrinti privačios erdvės"</string>
+    <string name="private_space_delete_title" msgid="636873505724100006">"Ištrinti privačią erdvę"</string>
+    <string name="private_space_delete_header" msgid="4594429153176776184">"Ištrinti privačią erdvę?"</string>
+    <string name="private_space_delete_summary" msgid="3344372988408565545">"Jūsų privati erdvė bus pašalinta iš įrenginio. Visos privačios programos ir duomenys bus ištrinti. Negalite anuliuoti šio veiksmo."</string>
+    <string name="private_space_accounts" msgid="1078277762792056395">"Toliau nurodytos paskyros bus pašalintos iš jūsų privačios erdvės."</string>
+    <string name="private_space_delete_button_label" msgid="1256981385318225002">"Ištrinti"</string>
+    <string name="private_space_confirm_deletion_header" msgid="3468651585498942977">"Ištrinama privati erdvė…"</string>
+    <string name="private_space_confirm_deletion_summary" msgid="342544588554284686">"Tai užtruks kelias akimirkas"</string>
+    <string name="private_space_deleted" msgid="7692240901492540053">"Privati erdvė ištrinta"</string>
+    <string name="private_space_delete_failed" msgid="7705795653796174741">"Nepavyko ištrinti privačios erdvės"</string>
+    <string name="private_space_unlocked" msgid="9091600948712932046">"Privati erdvė atrakinta"</string>
     <string name="no_device_lock_title" msgid="1078223464721029954">"Nustatykite ekrano užraktą"</string>
-    <string name="no_device_lock_summary" msgid="7653477413589207824">"Jei norite naudoti privačią erdvę, nustatykite ekrano užraktą šiame įrenginyje."</string>
+    <string name="no_device_lock_summary" msgid="7436025227616244687">"Jei norite naudoti privačią erdvę, nustatykite ekrano užraktą šiame įrenginyje"</string>
     <string name="no_device_lock_action_label" msgid="2640487005629001288">"Ekrano užrakto nustatymas"</string>
     <string name="no_device_lock_cancel" msgid="4412602160321228863">"Atšaukti"</string>
-    <string name="privatespace_cancel_label" msgid="362351004019511784">"Atšaukti"</string>
-    <string name="privatespace_setup_button_label" msgid="3696372546231047258">"Nustatyti"</string>
-    <string name="privatespace_setup_title" msgid="177623114624330394">"Privačios erdvės nustatymas"</string>
-    <string name="privatespace_hide_apps_summary" msgid="4016518749055602268">"Slėpkite privačias programas saugioje erdvėje, kurią galite pasiekti tik jūs"</string>
-    <string name="privatespace_how_title" msgid="8794102046435526065">"Kaip tai veikia"</string>
-    <string name="privatespace_access_bottom_text" msgid="1075244097441349030">"Privačią erdvę galite pasiekti iš programų sąrašo apačios"</string>
-    <string name="privatespace_protected_lock_text" msgid="7320604832432017423">"Programos privačioje erdvėje saugomos jas užrakinant"</string>
-    <string name="privatespace_hidden_notifications_text" msgid="8121285743543004812">"Pranešimai iš programų privačioje erdvėje slepiami, kai ji užrakinta"</string>
-    <string name="privatespace_apps_permission_text" msgid="4418511924151828812">"Privačios erdvės programos nebus rodomos leidimų tvarkytuvėje, privatumo informacijos suvestinėje ir kituose nustatymuose, kai privati erdvė bus užrakinta"</string>
-    <string name="privatespace_setting_up_text" msgid="8532777749891406509">"Nustatoma privati erdvė…"</string>
-    <string name="privatespace_apps_hidden_title" msgid="6146605677591599107">"Privačios erdvės programų naudojimo informacija paslėpta, kai užrakinta"</string>
-    <string name="privatespace_access_from_apps_title" msgid="6787000636686810564">"Prieiga prie privačios erdvės iš programų sąrašo"</string>
-    <string name="privatespace_system_apps_installed_title" msgid="4782295812052574626">"Kai kurios sistemos programos jau įdiegtos privačioje erdvėje"</string>
-    <string name="privatespace_error_screen_title" msgid="8658511165913662275">"Nepavyko nustatyti privačios erdvės"</string>
-    <string name="privatespace_error_screen_summary" msgid="5679626031159521676">"Bandykite dar kartą dabar arba grįžkite vėliau"</string>
-    <string name="privatespace_tryagain_label" msgid="4091466165724929876">"Bandyti dar kartą"</string>
-    <string name="privatespace_lockscreen_title" msgid="7459425150560213662">"Naudoti ekrano užraktą norint atrakinti?"</string>
-    <string name="privatespace_lockscreen_summary" msgid="980268845497843861">"Galite atrakinti privačią erdvę taip pat, kaip atrakinate įrenginį, arba pasirinkti kitą užraktą"</string>
-    <string name="privatespace_use_screenlock_label" msgid="2775404941450049991">"Naudoti ekrano užraktą"</string>
-    <string name="privatespace_set_lock_label" msgid="6277529807188602545">"Pasirinkti naują užraktą"</string>
-    <string name="privatespace_success_title" msgid="4854425684898602993">"Viskas nustatyta!"</string>
-    <string name="privatespace_access_text" msgid="1253541577173303723">"Privačią erdvę galite pasiekti iš programų sąrašo"</string>
-    <string name="privatespace_done_label" msgid="5534818213879562387">"Atlikta"</string>
-    <string name="scrolldown_to_access" msgid="5160743933093369151">"Slinkite žemyn, kad pasiektumėte privačią erdvę"</string>
-    <string name="privatespace_retry_signin_title" msgid="495054309243289223">"Privačios erdvės nustatymas prisijungus"</string>
-    <string name="privatespace_retry_summary" msgid="1508253540053006284">"Norint nustatyti privačią erdvę, reikia prisijungti prie paskyros"</string>
-    <string name="privatespace_unhide_header" msgid="1192011539687584004">"Norint rodyti privačią erdvę (ne galutinė NP)"</string>
-    <string name="privatespace_open_settings" msgid="5038101805604421393">"Atidarykite Nustatymų programą"</string>
-    <string name="privatespace_tap_settings" msgid="928932826450238276">"Palieskite „Sauga ir privatumas“ &gt; „Privati erdvė“ &gt; „Užrakintos privačios erdvės slėpimas“"</string>
-    <string name="privatespace_turnoff_hide" msgid="4858511423837613842">"Išjunkite jungiklį „Užrakintos privačios erdvės slėpimas“"</string>
-    <string name="privatespace_development_note" msgid="2999992301558700721">"Pastaba „Google“ darbuotojams: ši funkcija vis dar kuriama"</string>
+    <string name="private_space_cancel_label" msgid="379259667396956886">"Atšaukti"</string>
+    <string name="private_space_setup_button_label" msgid="2094882154623560585">"Nustatyti"</string>
+    <string name="private_space_setup_title" msgid="2272968244329821450">"Privati erdvė"</string>
+    <string name="private_space_hide_apps_summary" msgid="4418722947376042418">"Paslėpkite ir užrakinkite privačias programas atskiroje erdvėje. Norėdami užtikrinti papildomą saugą naudokite specialiai tam skirtą „Google“ paskyrą."</string>
+    <string name="private_space_setup_sub_header" msgid="5454598292017819146">"Nustatykite privačią erdvę"</string>
+    <string name="private_space_separate_account_text" msgid="4492251315012955548"><b>"Pasirinkite „Google“ paskyrą, kurią naudosite erdvėje"</b>\n"Naudojant specialiai tam skirtą paskyrą, sinchronizuoti failai, nuotraukos ir el. laiškai neatsidurs už erdvės ribų."</string>
+    <string name="private_space_protected_lock_text" msgid="9123250938334372735"><b>"Nustatykite užraktą"</b>\n"Užrakinkite erdvę, kad į ją nepatektų kiti žmonės."</string>
+    <string name="private_space_install_apps_text" msgid="5693139160766464498"><b>"Įdiekite programų"</b>\n"Jūsų privačioje erdvėje yra „Play“ parduotuvė, todėl galite lengvai įdiegti programų."</string>
+    <string name="private_space_apps_permission_text" msgid="7030946025253366172">"Programos privačioje erdvėje nebus rodomos leidimų tvarkytuvėje, privatumo informacijos suvestinėje ir kituose nustatymuose, kai privati erdvė bus užrakinta.\n\nPrivačios erdvės negalima perkelti į naują įrenginį. Turėsite nustatyti kitą privačią erdvę, jei norėsite ją naudoti kitame įrenginyje.\n\nBet kuris naudotojas, prijungęs jūsų įrenginį prie kompiuterio ar įdiegęs žalingų programų įrenginyje, galės pasiekti jūsų privačią erdvę."</string>
+    <string name="private_space_setting_up_text" msgid="8458035555212009528">"Nustatoma privati erdvė…"</string>
+    <string name="private_space_notifications_hidden_title" msgid="2009112565217540581">"Pranešimai iš privačios erdvės programų slepiami, kai ji užrakinta"</string>
+    <string name="private_space_explore_settings_title" msgid="1448128245941571654">"Peržiūrėkite privačios erdvės nustatymus, jei norite paslėpti privačią erdvę ir nustatyti automatinį užrakinimą"</string>
+    <!-- no translation found for private_space_apps_installed_title (4781838023423527730) -->
+    <skip />
+    <string name="private_space_error_screen_title" msgid="739381738044418346">"Nepavyko nustatyti privačios erdvės"</string>
+    <string name="private_space_tryagain_label" msgid="8305362615231738367">"Bandyti dar kartą"</string>
+    <string name="private_space_lockscreen_title" msgid="6034864097861137509">"Naudoti ekrano užraktą privačiai erdvei atrakinti?"</string>
+    <string name="private_space_lockscreen_summary" msgid="430569465080645805">"Galite atrakinti privačią erdvę taip pat, kaip atrakinate įrenginį, arba pasirinkti kitą užraktą"</string>
+    <string name="private_space_use_screenlock_label" msgid="9182153443192032782">"Naudoti ekrano užraktą"</string>
+    <string name="private_space_set_lock_label" msgid="1790408277477408475">"Pasirinkti naują užraktą"</string>
+    <string name="private_space_success_title" msgid="4351904015352046118">"Viskas nustatyta!"</string>
+    <string name="private_space_access_text" msgid="4433988836344567888">"Jei norite rasti privačią erdvę, eikite į programų sąrašą, tada slinkite žemyn"</string>
+    <string name="private_space_done_label" msgid="1020482651595246071">"Atlikta"</string>
+    <string name="private_space_scrolldown_to_access" msgid="4820954877349434545">"Slinkite žemyn, kad surastumėte privačią erdvę"</string>
+    <string name="private_space_retry_signin_title" msgid="8090276618867918844">"Prisijungti"</string>
+    <string name="private_space_retry_summary" msgid="1920444015972648774">"Prisijunkite prie paskyros, kad galėtumėte naudoti su privačia erdve"</string>
+    <string name="private_space_skip_login_label" msgid="7078019409056628192">"Ne dabar"</string>
+    <string name="private_space_continue_login_label" msgid="7779965766333065391">"Tęsti"</string>
+    <string name="private_space_lock_setup_title" msgid="6541564212199510787">"Privačios erdvės užrakto pasirinkimas"</string>
+    <string name="private_space_lock_setup_description" msgid="423405593476300918">"Privačią erdvę galite atrakinti piršto atspaudu. Saugos sumetimais, įgalinus šią parinktį, reikia naudoti atsarginį užraktą."</string>
+    <string name="private_space_choose_your_pin_header" msgid="4560802934975898265">"Privačios erdvės PIN kodo nustatymas"</string>
+    <string name="private_space_choose_your_password_header" msgid="7660259341095044434">"Privačios erdvės slaptažodžio nustatymas"</string>
+    <string name="private_space_choose_your_pattern_header" msgid="2165607102459936724">"Privačios erdvės atrakinimo piešinio nustatymas"</string>
+    <string name="private_space_apps_and_notifications_header" msgid="7493922100321972687">"Programos ir pranešimai"</string>
+    <string name="private_space_notifications_title" msgid="3456249671149740404">"Neskelbtini pranešimai užrakinimo ekrane"</string>
+    <string name="private_space_sensitive_notifications_description" msgid="1466031201599700985">"Rodyti visuomenę jaudinantį turinį, kai privati erdvė užrakinta"</string>
+    <!-- no translation found for private_space_gaia_education_title (3787414895669666563) -->
+    <skip />
+    <!-- no translation found for private_space_gaia_education_description (1592753570023264559) -->
+    <skip />
+    <!-- no translation found for private_space_gaia_education_header (7835879839637613495) -->
+    <skip />
+    <!-- no translation found for private_space_gaia_education_bullet1 (641701340908301992) -->
+    <skip />
+    <!-- no translation found for private_space_gaia_education_bullet2 (3679859681253672976) -->
+    <skip />
+    <!-- no translation found for private_space_gaia_education_bullet3 (1703614225321289717) -->
+    <skip />
+    <!-- no translation found for private_space_gaia_education_bullet4 (515761604505366164) -->
+    <skip />
+    <!-- no translation found for private_space_gaia_education_got_it (7824029819615566806) -->
+    <skip />
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Galite pridėti iki <xliff:g id="COUNT">%d</xliff:g> piršto ats."</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Pridėjote maksimalų skaičių kontrolinių kodų"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Negalima pridėti daugiau kontrolinių kodų"</string>
@@ -654,7 +693,7 @@
     <string name="unlock_set_unlock_mode_pattern" msgid="1926480143883094896">"Piešinys"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="9028659554829888373">"PIN kodas"</string>
     <string name="unlock_set_unlock_mode_password" msgid="8810609692771987513">"Slaptažodis"</string>
-    <string name="unlock_disable_frp_warning_title" msgid="3606280046362811229">"Ištrinti ekrano užraktą?"</string>
+    <string name="unlock_disable_frp_warning_title" msgid="2545569051372893686">"Pašalinti visų tipų įrenginio atrakinimą?"</string>
     <string name="unlock_disable_frp_warning_title_profile" msgid="1005284289723910461">"Pašalinti profilio apsaugą?"</string>
     <string name="unlock_disable_frp_warning_content_pattern" msgid="6246242612158828147">"Atrakinimo piešinys apsaugo pamestą ar pavogtą telefoną"</string>
     <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="2259825377085781801">"Atrakinimo piešinys apsaugo pamestą ar pavogtą telefoną.<xliff:g id="EMPTY_LINE">
@@ -667,15 +706,35 @@
 
 </xliff:g>Įrenginyje išsaugotas kontrolinio kodo modelis ištrinamas. Be to, jūsų veido modelis bus visam laikui saugiai ištrintas. Negalėsite naudoti veido ar kontrolinio kodo tapatybei nustatyti programose."</string>
     <string name="unlock_disable_frp_warning_content_pin" msgid="122154942944422284">"PIN kodas apsaugo pamestą ar pavogtą telefoną"</string>
+    <string name="unlock_disable_frp_warning_content_pin_authbound_keys" msgid="6497861740382402784">"Prarasite išsaugotus duomenis, pvz., PIN kodą.<xliff:g id="EMPTY_LINE_0">
+
+</xliff:g>Kortelės, nustatytos mokėti bekontakčiu būdu, bus pašalintos.<xliff:g id="EMPTY_LINE_1">
+
+</xliff:g>Piniginės ir kitos programos, kurioms reikia atrakinti įrenginį, gali tinkamai neveikti."</string>
     <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="983373874470746066">"PIN kodas apsaugo pamestą ar pavogtą telefoną.<xliff:g id="EMPTY_LINE">
 
 </xliff:g>Be to, įrenginyje ištrinamas išsaugotas kontrolinio kodo modelis. Negalėsite naudoti kontrolinio kodo tapatybei nustatyti programose."</string>
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint_authbound_keys" msgid="8930057076658360799">"Prarasite išsaugotus duomenis, pvz., PIN kodą ir piršto atspaudo modelį.<xliff:g id="EMPTY_LINE_0">
+
+</xliff:g>Kortelės, nustatytos mokėti bekontakčiu būdu, bus pašalintos.<xliff:g id="EMPTY_LINE_1">
+
+</xliff:g>Piniginės ir kitos programos, kurioms reikia atrakinti įrenginį, gali tinkamai neveikti."</string>
     <string name="unlock_disable_frp_warning_content_pin_face" msgid="5607150515413131761">"PIN kodas apsaugo pamestą ar pavogtą telefoną.<xliff:g id="EMPTY_LINE">
 
 </xliff:g>Be to, jūsų veido modelis bus visam laikui saugiai ištrintas. Negalėsite naudoti veido tapatybei nustatyti programose."</string>
+    <string name="unlock_disable_frp_warning_content_pin_face_authbound_keys" msgid="979399855891561038">"Prarasite išsaugotus duomenis, pvz., PIN kodą ir veido modelį.<xliff:g id="EMPTY_LINE_0">
+
+</xliff:g>Kortelės, nustatytos mokėti bekontakčiu būdu, bus pašalintos.<xliff:g id="EMPTY_LINE_1">
+
+</xliff:g>Piniginės ir kitos programos, kurioms reikia atrakinti įrenginį, gali tinkamai neveikti."</string>
     <string name="unlock_disable_frp_warning_content_pin_face_fingerprint" msgid="1821792325159866312">"PIN kodas apsaugo pamestą ar pavogtą telefoną.<xliff:g id="EMPTY_LINE">
 
 </xliff:g>Įrenginyje išsaugotas kontrolinio kodo modelis ištrinamas. Be to, jūsų veido modelis bus visam laikui saugiai ištrintas. Negalėsite naudoti veido ar kontrolinio kodo tapatybei nustatyti programose."</string>
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint_authbound_keys" msgid="7019955731206729909">"Prarasite išsaugotus duomenis, pvz., PIN kodą, veido ir piršto atspaudo modelius.<xliff:g id="EMPTY_LINE_0">
+
+</xliff:g>Kortelės, nustatytos mokėti bekontakčiu būdu, bus pašalintos.<xliff:g id="EMPTY_LINE_1">
+
+</xliff:g>Piniginės ir kitos programos, kurioms reikia atrakinti įrenginį, gali tinkamai neveikti."</string>
     <string name="unlock_disable_frp_warning_content_password" msgid="6422723907917376210">"Slaptažodis apsaugo pamestą ar pavogtą telefoną"</string>
     <string name="unlock_disable_frp_warning_content_password_fingerprint" msgid="8899452884016354856">"Slaptažodis apsaugo pamestą ar pavogtą telefoną.<xliff:g id="EMPTY_LINE">
 
@@ -744,7 +803,7 @@
     <string name="bluetooth_settings" msgid="2967239493428695171">"Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"Bluetooth"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"Susieti su „<xliff:g id="DEVICE_NAME">%1$s</xliff:g>“?"</string>
-    <string name="bluetooth_pairing_group_late_bonding" msgid="5310869364570266209">"Pridėkite naują narį prie esamo suderinto rinkinio"</string>
+    <string name="bluetooth_pairing_group_late_bonding" msgid="3047893658902159692">"Patvirtinkite, kad pridėtumėte antrą garso įrenginio dalį"</string>
     <string name="bluetooth_pairing_key_msg" msgid="1329835708475701761">"„Bluetooth“ susiejimo kodas"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="5806420933599368592">"Įveskite susiejimo kodą, tada paspauskite „Return“ arba „Enter“"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7256286571636950635">"PIN kodą sudaro raidės arba simboliai"</string>
@@ -752,7 +811,7 @@
     <string name="bluetooth_pin_values_hint_16_digits" msgid="5603928271430883558">"Turi būti 16 skaitmenų"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="6737778699899780717">"Galbūt reikės šį PIN kodą įvesti kitame įrenginyje."</string>
     <string name="bluetooth_enter_passkey_other_device" msgid="8270426446247344709">"Galbūt reikės šį prieigos raktą įvesti kitame įrenginyje."</string>
-    <string name="bluetooth_paring_group_msg" msgid="4609515924670823316">"Patvirtinkite, kad susietumėte su suderintu rinkiniu"</string>
+    <string name="bluetooth_paring_group_msg" msgid="2455293929036668131">"Patvirtinkite, kad susietumėte su garso įrenginiu"</string>
     <string name="bluetooth_pairing_shares_phonebook" msgid="4329325125260724843">"Leisti pasiekti jūsų kontaktus ir skambučių istoriją"</string>
     <string name="bluetooth_pairing_phonebook_toggle_text" msgid="2474015367387690034">"Taip pat leiskite pasiekti kontaktus ir skambučių istoriją"</string>
     <string name="bluetooth_pairing_phonebook_toggle_details" msgid="1367197978487212581">"Informacija bus naudojama skambučių pranešimams ir kt."</string>
@@ -763,7 +822,9 @@
     <string name="bluetooth_device_context_disconnect" msgid="4464167389972513232">"Atjungti"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="2406032703622371826">"Susieti ir jungti"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="7326727272747345476">"Kai „Bluetooth“ įj., įreng. gali užm. ryšį su kitais netoliese esančiais „Bluetooth“ įreng."</string>
+    <string name="bluetooth_empty_list_bluetooth_off_auto_on_available" msgid="5833847615853525971">"Kai „Bluetooth“ įjungtas, įrenginys gali užmegzti ryšį su kitais netoliese esančiais „Bluetooth“ įrenginiais. Tokioms funkcijoms kaip „Spartusis bendrinimas“, „Rasti įrenginį“ ir įrenginio vietovė naudojamas „Bluetooth“ ryšys."</string>
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Kai „Bluetooth“ įjungtas, įrenginys gali užmegzti ryšį su kitais netoliese esančiais „Bluetooth“ įrenginiais.\n\nKad pagerintų įrenginio funkcijas, programos ir paslaugos vis tiek gali bet kada nuskaityti ieškodamos netoliese esančių įrenginių, net kai „Bluetooth“ išjungtas. Tai galima naudoti norint, pvz., tobulinti pagal vietovę teikiamas funkcijas ir paslaugas. Tai galite pakeisti „Bluetooth“ nuskaitymo nustatymuose."</string>
+    <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="5047787966768730069">"Kai „Bluetooth“ įjungtas, įrenginys gali užmegzti ryšį su kitais netoliese esančiais „Bluetooth“ įrenginiais. Tokioms funkcijoms kaip „Spartusis bendrinimas“, „Rasti įrenginį“ ir įrenginio vietovė naudojamas „Bluetooth“ ryšys.\n\nProgramos ir paslaugos vis tiek gali bet kada nuskaityti ieškodamos netoliese esančių įrenginių, net kai „Bluetooth“ išjungtas. Tai galima naudoti norint, pvz., tobulinti pagal vietovę teikiamas funkcijas ir paslaugas. Tai galite pakeisti „Bluetooth“ nuskaitymo nustatymuose."</string>
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"Keisti"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Išsami įrenginio info."</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Klaviatūros nustatymai"</string>
@@ -835,6 +896,9 @@
     <string name="wifi_in_airplane_mode" msgid="1235412508135267981">"Veikia lėktuvo režimu"</string>
     <string name="wifi_notify_open_networks" msgid="2610323626246818961">"Pranešti apie viešuosius tinklus"</string>
     <string name="wifi_notify_open_networks_summary" msgid="191058832201741013">"Pranešti, kai pasiekiamas aukštos kokybės viešas tinklas"</string>
+    <string name="wifi_allow_wep_networks" msgid="8772342993235292010">"Leisti WEP tinklus"</string>
+    <string name="wifi_allow_wep_networks_summary" msgid="3033397893296724615">"WEP yra senesnis ir mažiau saugus saugos protokolas"</string>
+    <string name="wifi_allow_wep_networks_summary_carrier_not_allow" msgid="6298103289728210026">"Jūsų operatorius neleidžia WEP tinklų, nes jie mažiau saugūs"</string>
     <string name="wifi_wakeup" msgid="3834327315861781611">"Automatiškai įjungti „Wi‑Fi“"</string>
     <string name="wifi_wakeup_summary" msgid="5778059083790221465">"„Wi‑Fi“ bus vėl įjungtas esant šalia išsaugotų aukštos kokybės tinklų, pvz., jūsų namų tinklo"</string>
     <string name="wifi_wakeup_summary_no_location" msgid="681323616606485096">"Nepasiekiama, nes vietovės parinktis išjungta. Įjunkite "<annotation id="link">"vietovę"</annotation>"."</string>
@@ -856,6 +920,16 @@
     <string name="wifi_settings_scanning_required_info" msgid="1473411566072565789">"„Wi-Fi“ nuskaitymo funkcija leidžia programoms ir paslaugoms bet kuriuo metu nuskaityti ieškant „Wi‑Fi“ tinklų, net kai „Wi‑Fi“ išjungtas. Tai galima naudoti norint, pvz., tobulinti pagal vietovę teikiamas funkcijas ir paslaugas."</string>
     <string name="wifi_settings_scanning_required_turn_on" msgid="1112223196123955447">"Įjungti"</string>
     <string name="wifi_settings_scanning_required_enabled" msgid="4721729158927146365">"„Wi‑Fi“ nuskaitymas įjungtas"</string>
+    <string name="wifi_settings_warning_wep_network" msgid="2655077013800385646">"Šiame tinkle naudojamas senesnis ir mažiau saugus saugos protokolas"</string>
+    <string name="wifi_settings_wep_networks_blocked_title" msgid="8337700496544833669">"Tinklas „<xliff:g id="NAME">%1$s</xliff:g>“ užblokuotas"</string>
+    <string name="wifi_settings_wep_networks_summary_toggle_off" msgid="1113138364046142949">"Šiame tinkle naudojamas senesnis ir mažiau saugus saugos protokolas, vadinamas WEP. Jei vis tiek norite prisijungti, galit leisti WEP tinklus."</string>
+    <string name="wifi_settings_wep_networks_summary_blocked_by_carrier" msgid="6085673947156094523">"Jūsų operatorius neleidžia prisijungti prie šio tinklo, nes jame naudojamas senesnis ir mažiau saugus saugos protokolas"</string>
+    <string name="wifi_settings_wep_networks_button_allow" msgid="2807926329019873706">"Leisti WEP"</string>
+    <string name="wifi_settings_ssid_block_button_close" msgid="3013886895576949908">"Uždaryti"</string>
+    <!-- no translation found for wifi_settings_wep_networks_disconnect_title (2158070405309246888) -->
+    <skip />
+    <!-- no translation found for wifi_settings_wep_networks_disconnect_summary (643132352152685538) -->
+    <skip />
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Išplėstinės parinktys"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Išskleidžiamojo sąrašo išplėstinės parinktys"</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"išskleisti"</string>
@@ -888,6 +962,10 @@
     <string name="wifi_ap_prefer_5G" msgid="2520628479818369902">"Pageidaujama 5,0 GHz dažnio juosta"</string>
     <string name="wifi_ip_settings" msgid="6420498748726599133">"IP nustatymai"</string>
     <string name="wifi_privacy_settings" msgid="3283946009000725698">"Privatumas"</string>
+    <string name="wifi_privacy_mac_settings" msgid="3188060664478313363">"MAC"</string>
+    <string name="wifi_privacy_device_name_settings" msgid="3699130177041345275">"Įrenginio pavadinimas"</string>
+    <string name="wifi_privacy_send_device_name_toggle_title" msgid="1228107313152880073">"Siųsti įrenginio pavadinimą"</string>
+    <string name="wifi_privacy_send_device_name_toggle_summary" msgid="5995365836332817655">"Bendrinti šį įrenginio pavadinimą su tinklu"</string>
     <string name="wifi_subscription" msgid="4432423938285430113">"Prenumerata"</string>
     <string name="wifi_subscription_summary" msgid="18802471063384598">"Prenumeratos peržiūra arba keitimas"</string>
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"Atsitikt. tv. pasir. MAC"</string>
@@ -1114,7 +1192,9 @@
     <string name="display_white_balance_title" msgid="2624544323029364713">"Pateikti baltos spalv. balansą"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="fold_lock_behavior_title" msgid="786228803694268449">"Toliau naudoti programas, kai įrenginys sulenktas"</string>
-    <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Ekrano glodinimas"</string>
+    <string name="disable_game_default_frame_rate_title" msgid="3712908601744143753">"Išjungti numatytąjį žaidimų kadrų dažnį"</string>
+    <string name="disable_game_default_frame_rate_summary" msgid="4436762704707434225">"Išjungti maksimalaus <xliff:g id="FRAME_RATE">%1$d</xliff:g> Hz žaidimų kadrų dažnio ribojimą."</string>
+    <string name="peak_refresh_rate_title" msgid="2056355754210341011">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="3212309985294885790">"Automatiškai padidinamas kai kurio turinio atnaujinimo dažnis iki <xliff:g id="ID_1">%1$d</xliff:g> Hz. Vartojama daugiau akumuliatoriaus energijos."</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Priverstinai nustatyti didžiausią atnaujinimo dažnį"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Didžiausias atnaujinimo dažnis, siekiant patobulinti palietimo atsakomumą ir animacijos kokybę. Vartojama daugiau akumuliatoriaus energijos."</string>
@@ -1172,6 +1252,8 @@
     <string name="dark_ui_text" msgid="4392646155331126666">"Tamsiojoje temoje naudojamas tamsus fonas, kad akumuliatorius ilgiau veiktų tam tikruose ekranuose. Tamsiosios temos tvarkaraščiai neprasideda, kol ekranas neišsijungia."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Tamsioji tema šiuo metu veikia pagal miego režimo tvarkaraštį"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Miego režimo nustatymai"</string>
+    <string name="even_dimmer_display_title" msgid="8589063452814896327">"Dar blankesnis"</string>
+    <string name="even_dimmer_display_summary" msgid="120301078873242172">"Leisti blankesnį įrenginio ekraną nei įprastai"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Ekrano skirtasis laikas"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"Po <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> neveiklumo"</string>
     <string name="screen_timeout_summary_not_set" msgid="5107680774964178875">"Nenustatyta"</string>
@@ -1257,10 +1339,8 @@
     <string name="imei_multi_sim" msgid="9001570420423929507">"IMEI (<xliff:g id="IMEI_SLOT_ID">%1$d</xliff:g> SIM lizdas)"</string>
     <string name="imei_multi_sim_primary" msgid="7914653040843734282">"IMEI (<xliff:g id="IMEI_SLOT_ID_PRIMARY">%1$d</xliff:g> SIM lizdas) (pagrindinis)"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"Norėdami peržiūrėti pasirinkite išsaugotą tinklą"</string>
-    <!-- no translation found for status_imei (5719752369250485007) -->
-    <skip />
-    <!-- no translation found for status_imei_sv (6908985558726440951) -->
-    <skip />
+    <string name="status_imei" msgid="5719752369250485007">"IMEI"</string>
+    <string name="status_imei_sv" msgid="6908985558726440951">"IMEI SV"</string>
     <string name="status_min_number" msgid="4492899165438225714">"MIN."</string>
     <string name="status_msid_number" msgid="3871958248824595774">"MSID"</string>
     <string name="status_prl_version" msgid="9002131357502714281">"PRL versija"</string>
@@ -1354,6 +1434,7 @@
     <string name="battery_level_title" msgid="1371765298786083448">"Akumuliatoriaus lygis"</string>
     <string name="communal_settings_title" msgid="2845678473945902115">"Bendruomenės"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"Bendruomenės nustatymai"</string>
+    <string name="satellite_setting" msgid="706846910912477125">"Palydoviniai pranešimai"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Redaguoti prieigos tašką"</string>
     <string name="apn_add" msgid="9069613192201630934">"Prieigos taško pridėjimas"</string>
@@ -1388,11 +1469,13 @@
     <string name="menu_save" msgid="6611465355127483100">"Išsaugoti"</string>
     <string name="menu_cancel" msgid="1197826697950745335">"Atšaukti"</string>
     <string name="error_title" msgid="7158648377702417716"></string>
+    <string name="error_duplicate_apn_entry" msgid="7792928408935276618">"Tiksli APN įrašo kopija."</string>
     <string name="error_name_empty" msgid="1258275899283079142">"Pavadinimo laukas negali būti tuščias."</string>
     <string name="error_apn_empty" msgid="7657491065443746915">"APN negali būti tuščias."</string>
     <string name="error_mcc_not3" msgid="883659545640179094">"MKC lauke turi būti įvesti 3 skaitmenys."</string>
     <string name="error_mnc_not23" msgid="7642478711158474918">"MNC lauke turi būti įvesti 2 ar 3 skaitmenys."</string>
     <string name="error_adding_apn_type" msgid="1324263534991467943">"Operatorius neleidžia pridėti %s tipo APN."</string>
+    <string name="error_mmsc_valid" msgid="8380951905485647380">"MMSC laukas turi būti galiojantis."</string>
     <string name="restore_default_apn" msgid="6596048535642130689">"Atkuriami numatytieji APN nustatymai."</string>
     <string name="menu_restore" msgid="4310539620115151551">"Nustatyti iš naujo į numatytuosius nust."</string>
     <string name="restore_default_apn_completed" msgid="5167505087078340256">"Numatytųjų APN nustatymų nustatymas iš naujo baigtas."</string>
@@ -1405,7 +1488,7 @@
     <string name="reset_bluetooth_wifi_button_text" msgid="3974098137045963639">"Nustatyti iš naujo"</string>
     <string name="reset_bluetooth_wifi_complete_toast" msgid="5893439291030574365">"„Bluetooth“ ir „Wi‑Fi“ ryšiai nustatyti iš naujo"</string>
     <string name="reset_esim_title" msgid="4194570573425902754">"Ištrinti eSIM korteles"</string>
-    <string name="reset_esim_desc" msgid="3662444090563399131">"Šiuo veiksmu neatšauksite jokio mobiliųjų paslaugų plano. Jei norite atsisiųsti pakaitinių SIM kortelių, susisiekite su operatoriumi."</string>
+    <string name="reset_esim_desc" msgid="6125192435907740751">"Šiuo veiksmu nebus atšauktas jūsų mobiliojo ryšio planas. Jei norite gauti pakaitinę SIM kortelę, susisiekite su operatoriumi."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"Nustatyti iš naujo"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"Iš naujo nustatyti visus tinklo nustatymus? Negalite anuliuoti šio veiksmo."</string>
     <string name="reset_network_final_desc_esim" msgid="1129251284212847939">"Iš naujo nustatyti visus tinklo nustatymus ir ištrinti „eSIM“ korteles? Šio veiksmo anuliuoti negalima."</string>
@@ -1413,15 +1496,15 @@
     <string name="reset_network_confirm_title" msgid="913014422184481270">"Nustatyti iš naujo?"</string>
     <string name="network_reset_not_available" msgid="1966334631394607829">"Šis naudotojas negali iš naujo nustatyti tinklo"</string>
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"Tinklo nustatymai nustatyti iš naujo"</string>
-    <string name="reset_esim_error_title" msgid="4670073610967959597">"Nepavyko ištrinti SIM kortelių"</string>
-    <string name="reset_esim_error_msg" msgid="7279607120606365250">"„eSIM“ kortelių negalima ištrinti dėl klaidos.\n\nPaleiskite įrenginį iš naujo ir bandykite dar kartą."</string>
+    <string name="reset_esim_error_title" msgid="6516110227665862295">"Nepavyko ištrinti „eSIM“ kortelių"</string>
+    <string name="reset_esim_error_msg" msgid="8459527827897797168">"Kažkas nepavyko ir „eSIM“ kortelės nebuvo ištrintos.\n\nIš naujo paleiskite įrenginį ir bandykite dar kartą."</string>
     <string name="main_clear_title" msgid="277664302144837723">"Ištrinti visus duomenis (atkurti gamyklinius nustatymus)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Ištr. duom. (atk. gam. nust.)"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"Muzika"</li>\n<li>"Nuotraukos"</li>\n<li>"Kiti naudotojo duomenys"</li></string>
     <string name="main_clear_desc_also_erases_esim" msgid="4553469876411831729"><li>"„eSIM“ kortelės"</li></string>
     <string name="main_clear_desc_no_cancel_mobile_plan" msgid="369883568059127035">\n\n"Tai atlikus mobiliojo ryšio paslaugų planas nebus atšauktas."</string>
     <string name="main_clear_final_desc" msgid="5800877928569039580">"Bus ištrinta visa asmens informacija ir atsisiųstos programos. Negalite anuliuoti šio veiksmo."</string>
-    <string name="main_clear_final_desc_esim" msgid="440406836793824969">"Bus ištrinta visa asmens informacija, įskaitant atsisiųstas programas ir SIM korteles. Negalite anuliuoti šio veiksmo."</string>
+    <string name="main_clear_final_desc_esim" msgid="6592404057237813989">"Bus ištrinta visa asmens informacija, įskaitant atsisiųstas programas ir „eSIM“ korteles. Negalite anuliuoti šio veiksmo."</string>
     <string name="main_clear_confirm_title" msgid="6577071819657853713">"Ištrinti visus duomenis?"</string>
     <string name="main_clear_not_available" msgid="3433795327146684827">"Šis naudotojas negali atkurti gamyklinių nustatymų"</string>
     <string name="main_clear_progress_title" msgid="7239741132015617719">"Ištrinama"</string>
@@ -1650,6 +1733,12 @@
     <string name="clear_uri_btn_text" msgid="4828117421162495134">"Išvalyti prieigą"</string>
     <string name="controls_label" msgid="8671492254263626383">"Valdikliai"</string>
     <string name="force_stop" msgid="2681771622136916280">"Sustabdyti"</string>
+    <string name="archive" msgid="9074663845068632127">"Archyvuoti"</string>
+    <string name="restore" msgid="7622486640713967157">"Atkurti"</string>
+    <string name="restoring_step_one" msgid="3465050101254272874">"Atkuriama"</string>
+    <string name="restoring_step_two" msgid="140484846432595108">"Atkuriama."</string>
+    <string name="restoring_step_three" msgid="3712883580876329811">"Atkuriama…"</string>
+    <string name="restoring_step_four" msgid="8966846882470446209">"Atkuriama..."</string>
     <string name="total_size_label" msgid="2052185048749658866">"Iš viso"</string>
     <string name="application_size_label" msgid="6407051020651716729">"Programos dydis"</string>
     <string name="external_code_size_label" msgid="7375146402660973743">"USB atminties programa"</string>
@@ -1703,6 +1792,10 @@
     <string name="invalid_size_value" msgid="7017371543563259201">"Nepavyko apskaičiuoti paketo dydžio."</string>
     <string name="version_text" msgid="7628938665256107608">"<xliff:g id="VERSION_NUM">%1$s</xliff:g> versija"</string>
     <string name="move_app" msgid="5421158479447276791">"Perkelti"</string>
+    <string name="archiving_failed" msgid="2037798988961634978">"Nepavyko archyvuoti"</string>
+    <string name="archiving_succeeded" msgid="7891249456483297845">"Suarchyvuota <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>"</string>
+    <string name="restoring_failed" msgid="3390531747355943533">"Nepavyko atkurti"</string>
+    <string name="restoring_in_progress" msgid="7787443682651146115">"Atkuriama „<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>“"</string>
     <string name="another_migration_already_in_progress" msgid="6550546307856052261">"Jau vykdomas kitas perkėlimas."</string>
     <string name="insufficient_storage" msgid="8115088042669030558">"Nėra pakankamai vietos atmintinėje."</string>
     <string name="does_not_exist" msgid="6499163879348776120">"Programos nėra."</string>
@@ -1788,9 +1881,19 @@
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Pasiekiama ekrano klaviatūra"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Tvarkyti ekrano klaviatūras"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"Parinktys"</string>
+    <string name="keyboard_a11y_category" msgid="8230758278046841469">"Pritaikomumas"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Fizinė klaviatūra"</string>
     <string name="show_ime" msgid="4334255501724746849">"Ekrano klaviatūros naudojimas"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"Palikti ekrane, kol fizinė klaviatūra aktyvi"</string>
+    <string name="bounce_keys" msgid="7419450970351743904">"Peradresavimo klavišai"</string>
+    <!-- no translation found for bounce_keys_summary (7347050868868080302) -->
+    <skip />
+    <string name="slow_keys" msgid="2891452895499690837">"Lėtieji klavišai"</string>
+    <!-- no translation found for slow_keys_summary (1784371292745423292) -->
+    <skip />
+    <string name="sticky_keys" msgid="7317317044898161747">"Atmenieji klavišai"</string>
+    <!-- no translation found for sticky_keys_summary (1844953803625480623) -->
+    <skip />
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Spartieji klavišai"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Rodyti sparčiųjų klavišų sąrašą"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Darbo profilio klaviatūros ir įrankiai"</string>
@@ -1808,6 +1911,8 @@
     <string name="trackpad_bottom_right_tap_summary" msgid="8734094086900680674">"Daugiau – palietus jutiklinės dalies apačioje dešinėje"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Žymiklio greitis"</string>
     <string name="trackpad_touch_gesture" msgid="8641725062131922497">"Sužinokite jutiklinės dalies gestus"</string>
+    <string name="keywords_touchpad" msgid="8159846254066666032">"jutiklinė dalis, pelė, žymeklis, slinkti, perbraukti, spustelėti dešiniuoju klavišu, spustelėti"</string>
+    <string name="keywords_trackpad_bottom_right_tap" msgid="1285062446073929305">"spustelėti dešiniuoju klavišu, paliesti"</string>
     <string name="gesture_title_go_home" msgid="3682238648647225933">"Eikite į pagrindinį puslapį"</string>
     <string name="gesture_summary_go_home" msgid="6409031586904205741">"Braukite viršun trimis pirštais bet kur jutiklinėje dalyje"</string>
     <string name="gesture_title_go_back" msgid="6619462058488419802">"Grįžti"</string>
@@ -1888,7 +1993,8 @@
     <string name="usage_stats_sort_by_usage_time" msgid="2927310334119998301">"Rūšiuoti pagal naudojimo laiką"</string>
     <string name="usage_stats_sort_by_last_time_used" msgid="7039213339779884017">"Rūšiuoti pagal pastarąjį naudojimą"</string>
     <string name="usage_stats_sort_by_app_name" msgid="4463833145514850478">"Rūšiuoti pagal programos pavadinimą"</string>
-    <string name="last_time_used_label" msgid="2639712813493534074">"Paskutinį kartą naudota"</string>
+    <string name="last_time_used_label" msgid="7589377271406011659">"Paskutinį kartą naudota"</string>
+    <string name="last_time_used_never" msgid="2936073559267990034">"niekada"</string>
     <string name="usage_time_label" msgid="9105343335151559883">"Naudojimo laikas"</string>
     <string name="accessibility_settings" msgid="4713215774904704682">"Pritaikymas neįgal."</string>
     <string name="accessibility_settings_title" msgid="6739115703615065716">"Pasiekiamumo nustatymai"</string>
@@ -1897,11 +2003,35 @@
     <string name="vision_settings_description" msgid="7614894785054441991">"Galite tinkinti šį įrenginį pagal savo poreikius. Vėliau šias pritaikymo neįgaliesiems funkcijas galite pakeisti nustatymuose."</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"Pakeisti šrifto dydį"</string>
     <string name="screen_reader_category_title" msgid="5825700839731107803">"Ekrano skaitytuvas"</string>
+    <!-- no translation found for keyboard_category_title (6841712758039893220) -->
+    <skip />
     <string name="captions_category_title" msgid="574490148949400274">"Subtitrai"</string>
     <string name="audio_category_title" msgid="5283853679967605826">"Garsas"</string>
     <string name="general_category_title" msgid="6298579528716834157">"Bendrieji"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Ekranas"</string>
     <string name="accessibility_color_and_motion_title" msgid="2323301706545305874">"Spalva ir judesys"</string>
+    <!-- no translation found for accessibility_color_contrast_title (5757724357142452378) -->
+    <skip />
+    <!-- no translation found for accessibility_color_contrast_intro (7795090401101214930) -->
+    <skip />
+    <!-- no translation found for color_contrast_note (7592686603372566198) -->
+    <skip />
+    <!-- no translation found for accessibility_color_contrast_summary (7563237683500106632) -->
+    <skip />
+    <!-- no translation found for color_contrast_preview (6791430227535363883) -->
+    <skip />
+    <!-- no translation found for color_contrast_preview_sender_name (8641943417589238147) -->
+    <skip />
+    <!-- no translation found for color_contrast_preview_email_send_date (2108702726171600080) -->
+    <skip />
+    <!-- no translation found for color_contrast_preview_email_badge (4845484039428505392) -->
+    <skip />
+    <!-- no translation found for color_contrast_preview_email_title (198712116139754823) -->
+    <skip />
+    <!-- no translation found for color_contrast_preview_email_body (4139331665325624199) -->
+    <skip />
+    <!-- no translation found for color_contrast_preview_email_attachment_name (852407311884814746) -->
+    <skip />
     <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"Ekrano tamsinimas"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Sąveikos valdikliai"</string>
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"Laiko valdikliai"</string>
@@ -1976,14 +2106,14 @@
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Naudokite pritaikomumo mygtuką, kad atidarytumėte"</string>
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Norėdami atidaryti, palaikykite garsumo klavišus"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Norėdami atidaryti, triskart palieskite ekraną"</string>
-    <string name="accessibility_tutorial_dialog_title_two_finger_triple" msgid="1090593773487065541">"Atidarymas palietus ekraną tris kartus dviem pirštais"</string>
+    <string name="accessibility_tutorial_dialog_title_two_finger_double" msgid="3912970760484557646">"Atidarymas palietus ekraną du kartus dviem pirštais"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Naudokite gestą, kad atidarytumėte"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="6800684770875867559">"Pritaikomumo gesto naudojimas"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"Norėdami naudoti šią funkciją, ekrano apačioje palieskite pritaikomumo mygtuką <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>.\n\nJei norite perjungti funkcijas, palieskite ir palaikykite pritaikomumo mygtuką."</string>
     <string name="accessibility_tutorial_dialog_message_floating_button" msgid="2551777208185138391">"Jei norite naudoti šią funkciją, palieskite pritaikomumo mygtuką ekrane."</string>
     <string name="accessibility_tutorial_dialog_message_volume" msgid="5033080515460519183">"Norėdami naudoti šią funkciją, paspauskite ir palaikykite abu garsumo klavišus."</string>
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"Norėdami pradėti ar baigti didinti, triskart palieskite bet kur ekrane."</string>
-    <string name="accessibility_tutorial_dialog_message_two_finger_triple" msgid="6205072282308562361">"Jei norite pradėti ar baigti didinti, triskart palieskite bet kurioje ekrano vietoje dviem pirštais."</string>
+    <string name="accessibility_tutorial_dialog_message_two_finger_triple" msgid="860548190334486449">"Jei norite pradėti ar baigti didinti, dukart palieskite bet kurioje ekrano vietoje dviem pirštais."</string>
     <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"Norėdami naudoti šią funkciją, perbraukite dviem pirštais aukštyn nuo ekrano apačios.\n\nJei norite perjungti funkcijas, perbraukite aukštyn dviem pirštais ir palaikykite."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="8142847782708562793">"Norėdami naudoti šią funkciją, perbraukite trimis pirštais aukštyn nuo ekrano apačios.\n\nJei norite perjungti funkcijas, perbraukite aukštyn trimis pirštais ir palaikykite."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"Norėdami naudoti pritaikymo neįgaliesiems funkciją, perbraukite dviem pirštais aukštyn nuo ekrano apačios.\n\nJei norite perjungti funkcijas, perbraukite aukštyn dviem pirštais ir palaikykite."</string>
@@ -2005,9 +2135,9 @@
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Laikyti garsumo klavišus"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"laikyti garsumo klavišus"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Paspauskite ir palaikykite abu garsumo klavišus"</string>
-    <string name="accessibility_shortcut_edit_dialog_title_two_finger_triple_tap" msgid="6687765191490040899">"Ekrano palietimas tris kartus dviem pirštais"</string>
-    <string name="accessibility_shortcut_two_finger_triple_tap_keyword" msgid="4200744613585702430">"ekrano palietimas tris kartus dviem pirštais"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_two_finger_triple_tap" msgid="2631127444247448793">"Greitai palieskite ekraną {0,number,integer} k. dviem pirštais"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_two_finger_double_tap" msgid="2271778556854020996">"Dukart palieskite ekraną dviem pirštais"</string>
+    <string name="accessibility_shortcut_two_finger_double_tap_keyword" msgid="2971265341474137433">"dukart palieskite ekraną dviem pirštais"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_two_finger_double_tap" msgid="8262165091808318538">"Greitai palieskite ekraną {0,number,integer} k. dviem pirštais"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"Ekrano palietimas tris kartus"</string>
     <string name="accessibility_shortcut_triple_tap_keyword" msgid="6863958573135995927">"triskart paliesti ekraną"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="2102327956423320536">"Sparčiai palieskite ekraną {0,number,integer} k. Dėl šio sparčiojo klavišo įrenginys gali veikti lėčiau"</string>
@@ -2038,15 +2168,17 @@
     <string name="accessibility_button_high_label" msgid="9138077512008190896">"Neskaidrus"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Didelio kontrasto tekstas"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Keiskite teksto spalvą į juodą arba baltą. Nustatykite didžiausią kontrastą su fonu."</string>
+    <!-- no translation found for accessibility_toggle_maximize_text_contrast_preference_title (8737272017343509753) -->
+    <skip />
+    <!-- no translation found for accessibility_toggle_maximize_text_contrast_preference_summary (5493999083693403489) -->
+    <skip />
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Automat. atnaujinti ekrano didinimą"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Atnaujinti ekrano didinimą perkeliant programas"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Maitinimo mygt. baig. skamb."</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="5508351959249876801">"Didelis pelės žymeklis"</string>
     <string name="accessibility_toggle_large_pointer_icon_summary" msgid="1480527946039237705">"Padarykite pelės žymeklį geriau matomą"</string>
-    <!-- no translation found for accessibility_force_invert_title (5015366813138748407) -->
-    <skip />
-    <!-- no translation found for accessibility_force_invert_summary (1882329675950887268) -->
-    <skip />
+    <string name="accessibility_force_invert_title" msgid="5015366813138748407">"Padaryti visas programas tamsias"</string>
+    <string name="accessibility_force_invert_summary" msgid="1882329675950887268">"Taikoma programoms be tamsiosios temos. Kai kuriose programose gali būti klaidų, pvz., pakeistos spalvos."</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Pašalinti animacijas"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Sumažinkite judėjimą ekrane"</string>
     <string name="accessibility_toggle_primary_mono_title" msgid="7587152099472946571">"Monofoninis garsas"</string>
@@ -2134,9 +2266,13 @@
     <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"2 pirštais perbraukti aukštyn iš apačios"</string>
     <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"Laikyti garsumo klavišus"</string>
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Triskart paliesti ekraną"</string>
+    <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"Pritaikomumo šaukinių redagavimas"</string>
+    <!-- no translation found for accessibility_shortcut_edit_screen_prompt (5966054283114856682) -->
+    <skip />
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Tęsti"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Klausos įrenginiai"</string>
-    <string name="accessibility_hearingaid_intro" msgid="5856992709195963850">"Galite naudoti klausos aparatus, vidinės ausies implantus ir kitus garso stiprinimo įrenginius su telefonu"</string>
+    <!-- no translation found for accessibility_hearingaid_intro (6686620444104350629) -->
+    <skip />
     <string name="accessibility_hearingaid_not_connected_summary" msgid="7438018718889849521">"Prijungtų klausos įrenginių nėra"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"Pridėti klausos aparatų"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Klausos apar. susiejimas"</string>
@@ -2147,7 +2283,6 @@
     <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="4268221140368164452">"„<xliff:g id="DEVICE_NAME">%1$s</xliff:g>“, kairiojoje ir dešiniojoje pusėse"</string>
     <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"„<xliff:g id="DEVICE_NAME">%1$s</xliff:g>“ ir dar 1"</string>
     <string name="accessibility_hearing_device_pairing_title" msgid="2701812183769537320">"Naujo įrenginio susiejimas"</string>
-    <string name="accessibility_pair_hearing_device_about_title" msgid="5870335480815052755">"Apie naujo įrenginio susiejimo funkciją"</string>
     <string name="accessibility_hearing_device_connected_title" msgid="3785140037249487287">"Klausos įrenginiai"</string>
     <string name="accessibility_hearing_device_saved_title" msgid="7573926212664909296">"Išsaugoti įrenginiai"</string>
     <string name="accessibility_hearing_device_control" msgid="2661965917013100611">"Klausos įrenginio valdikliai"</string>
@@ -2155,8 +2290,10 @@
     <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"Klausos aparato suderinamumas"</string>
     <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"Pagerinamas suderinamumas su teleritėmis ir sumažinamas nepageidaujamas triukšmas"</string>
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"Apie klausos įrenginius"</string>
-    <string name="accessibility_hearing_device_footer_summary" msgid="7451899224828040581">"Įsitikinkite, kad klausos įrenginys įjungtas ir paruoštas susieti"</string>
+    <!-- no translation found for accessibility_hearing_device_footer_summary (256061045064940818) -->
+    <skip />
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"Klausos įrenginio susiejimas"</string>
+    <string name="accessibility_hearing_device_pairing_intro" msgid="7022201665808166517">"Šiame puslapyje galite susieti ASHA ir „LE Audio“ klausos įrenginius. Įsitikinkite, kad klausos įrenginys įjungtas ir paruoštas susieti."</string>
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"Pasiekiami klausos įrenginiai"</string>
     <string name="accessibility_found_all_devices" msgid="7817834722148556520">"Nematote savo klausos įrenginio?"</string>
     <string name="accessibility_list_all_devices_title" msgid="161495343959211216">"Daugiau įrenginių"</string>
@@ -2345,12 +2482,6 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Žr. daugiausia energijos vartojančias programas"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="6258554134146272311">"Įkrovimas optimizuotas, siekiant apsaugoti akumuliatorių"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="5107379280241187562">"Kad akumuliatorius veiktų ilgiau, įkrovimas optimizuotas"</string>
-    <string name="battery_tip_dock_defender_future_bypass_title" msgid="4332616280495788195">"Įkrovimas optimizuotas, siekiant apsaugoti akumuliatorių"</string>
-    <string name="battery_tip_dock_defender_future_bypass_summary" msgid="7870758621381307597">"Kad akumuliatorius veiktų ilgiau, įkrovimas optimizuotas, kai prijungta prie doko."</string>
-    <string name="battery_tip_dock_defender_active_title" msgid="1414785238383255699">"Įkrovimas optimizuotas, siekiant apsaugoti akumuliatorių"</string>
-    <string name="battery_tip_dock_defender_active_summary" msgid="3512082623718801459">"Kad akumuliatorius veiktų ilgiau, įkrovimas optimizuotas, kai prijungta prie doko."</string>
-    <string name="battery_tip_dock_defender_temporarily_bypassed_title" msgid="1679449361090557201">"Visiškas įkrovimas"</string>
-    <string name="battery_tip_dock_defender_temporarily_bypassed_summary" msgid="1099500476761333281">"Siekiant apsaugoti akumuliatorių, įkrovimas bus optimizuotas kitą kartą, kai planšetinis kompiuteris bus prijungtas prie doko"</string>
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"Sužinokite daugiau apie pristabdyto įkrovimo būseną"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Tęsti įkrovimą"</string>
     <string name="battery_tip_dialog_message_footer" msgid="986542164372177504">"Įtraukiama daug energijos eikvojanti veikla fone"</string>
@@ -2367,8 +2498,8 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Ši programa galės naudoti akumuliatoriaus energiją fone. Akumuliatoriaus energija gali išsekti greičiau nei tikėjotės."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Pašalinti"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Atšaukti"</string>
-    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"Įkrauti iki visiško įkrovimo"</string>
-    <string name="battery_tip_incompatible_charging_title" msgid="5120763575150751300">"Su įkrovimo priedu susijusi problema"</string>
+    <string name="battery_tip_charge_to_full_button" msgid="9172893341338732733">"Nepaisyti"</string>
+    <string name="battery_tip_incompatible_charging_title" msgid="1567827436103364999">"Įkrovimo priedo patikra"</string>
     <string name="battery_tip_incompatible_charging_content_description" msgid="355668467640367701">"Sužinokite daugiau apie nesuderinamą įkrovimą"</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"Akumuliatoriaus tvarkytuvė"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"Automatinis programų tvarkymas"</string>
@@ -2460,9 +2591,11 @@
     <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"dabar"</string>
     <string name="battery_usage_timestamps_hyphen" msgid="7401188432989043905">"<xliff:g id="FROM_TIMESTAMP">%1$s</xliff:g>–<xliff:g id="TO_TIMESTAMP">%2$s</xliff:g>"</string>
     <string name="battery_usage_day_and_hour" msgid="1417890420844950881">"<xliff:g id="DAY">%1$s</xliff:g> <xliff:g id="HOUR">%2$s</xliff:g>⁠"</string>
+    <string name="battery_usage_time_info_and_battery_level" msgid="6732629268310936155">"<xliff:g id="TIME_INFO">%1$s</xliff:g> <xliff:g id="BATTERY_LEVEL">%2$s</xliff:g>⁠"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Akumuliatoriaus energijos vartojimo diagrama"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Akumuliatoriaus energijos vartojimo kas dieną diagrama"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Akumuliatoriaus energijos vartojimo kas valandą diagrama"</string>
+    <string name="battery_level_percentage" msgid="1433178290838842146">"Akumuliatoriaus įkrovos lygis procentais nuo <xliff:g id="START_PERCENTAGE">%1$s</xliff:g> iki <xliff:g id="END_PERCENTAGE">%2$s</xliff:g>"</string>
     <string name="battery_usage_breakdown_title_since_last_full_charge" msgid="435006273323199906">"Akumuliatoriaus naudojimo laikas nuo pastarojo visiško įkrovimo"</string>
     <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"Akumuliatoriaus naudojimas su pasirinkta <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"Įrenginio naudojimo laikas nuo paskutinio visiško įkrovimo"</string>
@@ -2959,7 +3092,7 @@
     <string name="sim_status_title" msgid="6188770698037109774">"SIM būsena"</string>
     <string name="sim_status_title_sim_slot" msgid="4932996839194493313">"SIM būsena (%1$d SIM lizdas)"</string>
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> ASU"</string>
-    <string name="sim_notification_title" msgid="2819551384383504031">"SIM kortelės pakeistos."</string>
+    <string name="sim_notification_title" msgid="6839556577405929262">"Jūsų SIM kortelė pakeista"</string>
     <string name="sim_notification_summary" msgid="5593339846307029991">"Palieskite, kad nustatytumėte"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="3077694594349657933">"Klausti kaskart"</string>
     <string name="sim_selection_required_pref" msgid="231437651041498359">"Būtina pasirinkti"</string>
@@ -2983,7 +3116,7 @@
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Pastarosios programos, numatytosios programos"</string>
     <string name="notification_settings_work_profile" msgid="6076211850526353975">"Prieiga prie pranešimų negalima darbo profilio programoms."</string>
     <string name="account_dashboard_title" msgid="8228773251948253914">"Slaptažodžiai ir paskyros"</string>
-    <string name="account_dashboard_default_summary" msgid="1730719656099599488">"Išsaugoti slaptažodžiai, automatinis pildymas, sinchronizuotos paskyros"</string>
+    <string name="account_dashboard_default_summary" msgid="7976899924144356939">"Prisijungimo ir automatinio pildymo pasiūlymai"</string>
     <string name="app_default_dashboard_title" msgid="4071015747629103216">"Numatytosios programos"</string>
     <string name="cloned_apps_dashboard_title" msgid="5542076801222950921">"Nukopijuotos programos"</string>
     <string name="desc_cloned_apps_intro_text" msgid="1369621522882622476">"Sukurkite antrą programos atvejį, kad galėtumėte naudoti dvi paskyras vienu metu."</string>
@@ -3350,6 +3483,7 @@
     <string name="recent_convos_removed" msgid="2122932798895714203">"Pašalinti pastarieji pokalbiai"</string>
     <string name="recent_convo_removed" msgid="8686414146325958281">"Pokalbis pašalintas"</string>
     <string name="clear" msgid="5092178335409471100">"Išvalyti"</string>
+    <string name="clear_conversation" msgid="5564321180363279096">"Išvalyti <xliff:g id="CONVERSATION_NAME">%1$s</xliff:g>."</string>
     <string name="conversation_onboarding_title" msgid="5194559958353468484">"Svarbiausi ir pakeisti pokalbiai bus rodomi čia"</string>
     <string name="conversation_onboarding_summary" msgid="2484845363368486941">"Kai pažymėsite pokalbį kaip svarbiausią ar atliksite kitų pokalbio keitimų, jie bus rodomi čia. \n\nJei norite pakeisti pokalbių nustatymus: \nslinkite ekranu iš viršaus žemyn, tada atidarę išskleidžiamąjį skydelį palieskite ir palaikykite pokalbį."</string>
     <string name="notification_importance_min_title" msgid="7676541266705442501">"Sumažinti"</string>
@@ -3464,6 +3598,8 @@
     <string name="notification_channels_other" msgid="18159805343647908">"Kita"</string>
     <string name="no_channels" msgid="4716199078612071915">"Ši programa nepaskelbė jokių pranešimų"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Papildomi programos nustatymai"</string>
+    <string name="show_unused_channels" msgid="2754356124204058828">"Rodyti nenaudojamus kanalus"</string>
+    <string name="hide_unused_channels" msgid="9049958190570733200">"Slėpti nenaudojamus kanalus"</string>
     <string name="deleted_channels" msgid="8489800381509312964">"{count,plural, =1{Pašalinta # kategorija}one{Pašalinta # kategorija}few{Pašalintos # kategorijos}many{Pašalinta # kategorijos}other{Pašalinta # kategorijų}}"</string>
     <string name="app_notification_block_title" msgid="3880322745749900296">"Blokuoti viską"</string>
     <string name="app_notification_block_summary" msgid="1804611676339341551">"Niekada nerodyti šių pranešimų"</string>
@@ -3620,7 +3756,7 @@
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Prašyti PIN kodo prieš atsegant"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Prašyti slaptažodžio prieš atsegant"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Užrakinti įrenginį atsegant"</string>
-    <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Patvirtinti SIM kortelės ištrynimą"</string>
+    <string name="confirm_sim_deletion_title" msgid="7262127071183428893">"Patvirtinkite, kad norite ištrinti „eSIM“ kortelę"</string>
     <string name="confirm_sim_deletion_description" msgid="4439657901673639063">"Prieš ištrindami „eSIM“ kortelę patvirtinkite savo tapatybę"</string>
     <string name="memtag_title" msgid="5096176296797727201">"Beta versijos išplėstinė atminties apsauga"</string>
     <string name="memtag_toggle" msgid="8695028758462939212">"Išplėstinė atminties apsauga"</string>
@@ -3680,6 +3816,8 @@
     <string name="unused_apps_category" msgid="8954930958175500851">"Nenaudojamos programos nustatymai"</string>
     <string name="unused_apps_switch" msgid="7595419855882245772">"Pristabdyti nenaudojamų programų veiklą"</string>
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"Pašalinkite leidimus, ištrinkite laikinus failus ir sustabdykite pranešimus"</string>
+    <string name="unused_apps_switch_v2" msgid="7464060328451454469">"Tvarkyti programą, jei nenaudojama"</string>
+    <string name="unused_apps_switch_summary_v2" msgid="3182898279622036805">"Pašalinti leidimus, ištrinti laikinus failus, sustabdyti pranešimus ir archyvuoti programą"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Visos programos"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Įdiegtos programos"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Akimirksniu įkeliamos programos"</string>
@@ -3788,6 +3926,9 @@
     <string name="free_memory" msgid="439783742246854785">"Laisva"</string>
     <string name="memory_usage_apps" msgid="5776108502569850579">"Programų naudojama atmintis"</string>
     <string name="memory_usage_apps_summary" msgid="7168292864155527974">"{count,plural, =1{Viena programa naudojo atmintį per tiek laiko: {time}}one{# programa naudojo atmintį per tiek laiko: {time}}few{# programos naudojo atmintį per tiek laiko: {time}}many{# programos naudojo atmintį per tiek laiko: {time}}other{# programų naudojo atmintį per tiek laiko: {time}}}"</string>
+    <string name="force_enable_pss_profiling_title" msgid="2253816522775341523">"Įgalinti atminties sąnaudų profiliavimą"</string>
+    <string name="force_enable_pss_profiling_summary" msgid="7714294324548399136">"Norint profiliuoti atminties sąnaudas reikia papildomų sistemos išteklių."</string>
+    <string name="pss_profiling_disabled" msgid="1967278421143514850">"Atminties profiliavimas išjungtas"</string>
     <string name="running_frequency" msgid="7260225121706316639">"Dažnis"</string>
     <string name="memory_maximum_usage" msgid="2047013391595835607">"Daugiausia panaudota"</string>
     <string name="no_data_usage" msgid="4665617440434654132">"Duomenys nenaudojami"</string>
@@ -3806,6 +3947,9 @@
     <string name="system_alert_window_settings" msgid="6458633954424862521">"Rodyti virš kitų programų"</string>
     <string name="permit_draw_overlay" msgid="4468994037192804075">"Leisti rodyti virš kitų programų"</string>
     <string name="allow_overlay_description" msgid="1607235723669496298">"Leisti šią programą pateikti virš kitų naudojamų programų. Ši programa galės peržiūrėti, kur paliečiate, arba keisti, kas pateikiama ekrane."</string>
+    <string name="media_routing_control_title" msgid="6402800638960066807">"Keisti medijos išvestį"</string>
+    <string name="allow_media_routing_control" msgid="4907036637509360616">"Leisti programai perjungti medijos išvestį"</string>
+    <string name="allow_media_routing_description" msgid="8343709701298051207">"Leisti šiai programai pasirinkti, kuris prijungtas įrenginys leidžia garso ar vaizdo įrašą iš kitų programų. Jei leidžiama, ši programa gali pasiekti pasiekiamų įrenginių, pvz., ausinių ir garsiakalbių, sąrašą ir pasirinkti, kuris išvesties įrenginys naudojamas garso ar vaizdo įrašo srautui leisti ar įrašui perduoti."</string>
     <string name="manage_external_storage_title" msgid="8024521099838816100">"Visų failų prieiga"</string>
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Leisti pasiekti ir tvarkyti visus failus"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Šiai programai leidžiama nuskaityti, keisti ir ištrinti visus failus, esančius šiame įrenginyje ar bet kurioje prijungtoje saugykloje. Jei suteiksite leidimą, programa gali pasiekti failus jūsų tiksliai neinformavus."</string>
@@ -4022,6 +4166,10 @@
     <string name="long_background_tasks_title" msgid="3272230637974707490">"Ilgai trunkančios užduotys fone"</string>
     <string name="long_background_tasks_footer_title" msgid="9117342254914743097">"Leidžiama šiai programai atlikti ilgai trunkančias užduotis fone. Programa gali vykdyti užduotis, kurios gali trukti ilgiau nei kelias minutes, pvz., atsisiuntimai ir įkėlimai. \n\nAtmetus šį leidimą sistema apribos, kiek laiko programa gali vykdyti tokias užduotis fone."</string>
     <string name="keywords_long_background_tasks" msgid="5788956269136054574">"ilgai trunkantys darbai, duomenų perkėlimas, fone atliekamos užduotys"</string>
+    <string name="run_backup_tasks_title" msgid="8572480651659803275">"Atsarginio kopijavimo užduočių atlikimas fone"</string>
+    <string name="run_backup_tasks_switch_title" msgid="4740767959730361777">"Leisti programai vykdyti su atsargine kopija susijusias užduotis fone"</string>
+    <string name="run_backup_tasks_footer_title" msgid="1766222193265152388">"Nurodoma, kad šiai programai taikomas pagrindinis naudojimo atvejis, kai reikia kurti atsarginę turinio kopiją arba sinchronizuoti turinį. Suteikus šį leidimą leidžiama šiek tiek ilgiau vykdyti programą fone, kad būtų galima atlikti su atsargine kopija susijusį darbą. \n\nAtmetus šį leidimą sistema nesuteiks jokios specialios išimties šiai programai, kad būtų galima užbaigti su atsargine kopija susijusį darbą fone."</string>
+    <string name="keywords_run_backup_tasks" msgid="632219905465766211">"atsarginio kopijavimo užduotys, atsarginio kopijavimo darbai"</string>
     <string name="reset_shortcut_manager_throttling" msgid="2183940254903144298">"Iš naujo nustatyti „ShortcutManager“ įkainių ribojimą"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="8949943009096885470">"„ShortcutManager“ įkainių ribojimas nustatytas iš naujo"</string>
     <string name="notification_suggestion_title" msgid="6309263655965785411">"Valdykite informaciją užrakinimo ekrane"</string>
@@ -4234,18 +4382,28 @@
     <string name="autofill_app" msgid="7595308061826307921">"Aut. pildymo paslauga"</string>
     <string name="default_autofill_app" msgid="372234803718251606">"Numatytoji automatinio pildymo paslauga"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"Slaptažodžiai"</string>
-    <string name="credman_chosen_app_title" msgid="872524130208251505">"Slaptažodžiai, prieigos raktai ir duomenų paslaugos"</string>
-    <string name="credman_credentials" msgid="4931371941253324143">"Papildomi teikėjai"</string>
+    <string name="credman_chosen_app_title" msgid="7735183808067729319">"Pageidaujama paslauga"</string>
+    <string name="credman_credentials" msgid="2620352336624160642">"Papildomos paslaugos"</string>
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# slaptažodis}one{# slaptažodis}few{# slaptažodžiai}many{# slaptažodžio}other{# slaptažodžių}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"automatinis, užpildyti, automatinis pildymas, slaptažodis"</string>
     <string name="credman_keywords" msgid="8305600680836806170">"duomenys, „passkey“, slaptažodis"</string>
     <string name="credman_autofill_keywords" msgid="701180623776848914">"automatinis, užpildyti, automatinis pildymas, duomenys, prieigos raktas, slaptažodis"</string>
+    <string name="credman_button_change" msgid="4072629639218503790">"Keisti"</string>
+    <string name="credman_button_open" msgid="7519871964170816850">"Atidaryti"</string>
+    <string name="credman_app_list_preference_none" msgid="2509646651254971448">"Nieko nepasirinkta"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Įsitikinkite, kad pasitikite šia programa&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=„Google“ automatinis pildymas&gt;%1$s&lt;/xliff:g&gt; naudodamas informaciją ekrane nustato, ką gali užpildyti automatiškai."</string>
     <string name="credman_autofill_confirmation_message" msgid="843829628024668466">"&lt;b&gt;Naudokite &lt;xliff:g id=app_name example=„Provider“&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Nuo šiol čia išsaugomi nauji slaptažodžiai, prieigos raktai ir kita informacija. &lt;xliff:g id=app_name example=„Provider“&gt;%1$s&lt;/xliff:g&gt; gali naudoti ekrane esančią informaciją, kad nustatytų, ką galima automatiškai užpildyti."</string>
-    <string name="credman_picker_title" msgid="8191267620665129205">"Slaptažodžiai, prieigos raktai ir duomenų paslaugos"</string>
+    <string name="credman_picker_title" msgid="8442086614222006564">"Pageidaujama slaptažodžių, prieigos raktų ir automatinio pildymo paslauga"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Išjungti „%1$s“?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Išjungti šį įrenginį?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Išsaugota informacija, pvz., slaptažodžiai, prieigos raktai, mokėjimo metodai ir kita informacija, nebus užpildyta prisijungiant. Jei norite naudoti išsaugotą informaciją, pasirinkite slaptažodį, prieigos raktą arba duomenų paslaugą."</string>
+    <string name="account_dashboard_title_with_passkeys" msgid="6214673787161409996">"Slaptažodžiai, prieigos raktai ir automatinis pildymas"</string>
+    <string name="credman_confirmation_message_new_ui" msgid="6126274509951156460">"&lt;b&gt;Išjungti visas paslaugas?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Kai prisijungsite, slaptažodžių, prieigos raktų ir kitos informacijos nebus galima užpildyti automatiškai"</string>
+    <string name="credman_autofill_confirmation_message_new_ui" msgid="6222139222478822267">"&lt;b&gt;Pakeiskite pageidaujamą paslaugą į &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Nuo dabar nauji slaptažodžiai, prieigos raktai ir kita informacija bus išsaugomi čia. &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; gali naudoti ekrane esančią informaciją, kad nustatytų, ką galima automatiškai užpildyti"</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"Naudoti „%1$s“?"</string>
+    <string name="credman_confirmation_turn_off_positive_button" msgid="5678773011513369161">"Išjungti"</string>
+    <string name="credman_confirmation_change_provider_positive_button" msgid="7732302992885116967">"Keisti"</string>
+    <string name="credman_limit_error_msg_title" msgid="1525814645803612135">"Gali būti įjungtos tik penkios paslaugos"</string>
+    <string name="credman_limit_error_msg" msgid="2521803280130310063">"Išjunkite bent vieną paslaugą, kad galėtumėte pridėti kitą"</string>
     <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"„%1$s“ naudoja ekrane esančią informaciją siekdama nustatyti, ką galima automatiškai užpildyti."</string>
     <string name="credman_error_message_title" msgid="4099557206946333568">"Slaptažodžių, prieigos raktų ir duomenų paslaugų apribojimas"</string>
     <string name="credman_error_message" msgid="8334797097200415449">"Vienu metu galite turėti daugiausia penkis aktyvius slaptažodžius, prieigos raktus ir duomenų paslaugas. Norėdami pridėti daugiau, išjunkite paslaugą."</string>
@@ -4319,8 +4477,7 @@
     <string name="change_nfc_tag_apps_detail_summary" msgid="3338220223868942195">"Leisti paleisti šią programą, kai nuskaitoma NFC žyma.\nJei šis leidimas įjungtas, programa bus pasiekiama kaip parinktis, kai žyma bus aptikta."</string>
     <string name="media_output_title" msgid="8283629315159510680">"Leisti mediją į"</string>
     <string name="media_output_label_title" msgid="4139048973886819148">"Paleisti: <xliff:g id="LABEL">%s</xliff:g>"</string>
-    <!-- no translation found for media_output_title_without_playing (3339321669132875821) -->
-    <skip />
+    <string name="media_output_title_without_playing" msgid="3339321669132875821">"Garsas bus leidžiamas"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"Šis įrenginys"</string>
     <string name="media_out_summary_ongoing_call_state" msgid="475188726850090363">"Nepasiekiama skambučių metu"</string>
     <string name="take_call_on_title" msgid="1159417893879946757">"Gauti skambučius"</string>
@@ -4416,11 +4573,11 @@
     <string name="mobile_network_sim_name_label" msgid="1452440641628369625">"Pavadinimas"</string>
     <string name="mobile_network_sim_color_label" msgid="5293944087609632340">"Spalva (naudoja suderinamos programos)"</string>
     <string name="mobile_network_sim_name_rename" msgid="5967588549571582924">"Išsaugoti"</string>
-    <string name="mobile_network_use_sim_on" msgid="7298332437547707908">"Naudoti SIM kortelę"</string>
+    <string name="mobile_network_use_sim_on" msgid="5333182776279917886">"Naudoti šią SIM kortelę"</string>
     <string name="mobile_network_use_sim_off" msgid="6303281166199670639">"Išjungta"</string>
-    <string name="mobile_network_disable_sim_explanation" msgid="2851862257846773796">"Norėdami išjungti šią SIM kortelę, pašalinkite ją"</string>
-    <string name="mobile_network_tap_to_activate" msgid="4139979375717958102">"Palieskite, kad suaktyvintumėte „<xliff:g id="CARRIER">%1$s</xliff:g>“"</string>
-    <string name="mobile_network_erase_sim" msgid="4629071168032714930">"Ištrinti SIM kortelę"</string>
+    <string name="mobile_network_disable_sim_explanation" msgid="7182341033728911879">"Jei norite išjungti šią SIM kortelę, išimkite SIM kortelę"</string>
+    <string name="mobile_network_tap_to_activate" msgid="5280456487243915465">"Palieskite, kad suaktyvintumėte „<xliff:g id="CARRIER">%1$s</xliff:g>“ SIM kortelę"</string>
+    <string name="mobile_network_erase_sim" msgid="5387971155494245850">"Ištrinti „eSIM“"</string>
     <string name="preferred_network_mode_title" msgid="3083431168988535628">"Pageidaujamas tinklo tipas"</string>
     <string name="preferred_network_mode_summary" msgid="537577807865497546">"Pakeisti tinklo veikimo režimą"</string>
     <string name="preferred_network_mode_dialogtitle" msgid="4179420486180351631">"Pageidaujamas tinklo tipas"</string>
@@ -4437,8 +4594,24 @@
     <string name="register_automatically" msgid="5208258089316657167">"Automatinė registracija…"</string>
     <string name="roaming_alert_title" msgid="9052791521868787985">"Leisti tarptinklinį duomenų ryšį?"</string>
     <string name="roaming_check_price_warning" msgid="5876977438036791361">"Daugiau kainodaros informacijos galite gauti susisiekę su tinklo paslaugų teikėju."</string>
-    <string name="mobile_data_usage_title" msgid="2047864499317759728">"Programos duomenų naudojimas"</string>
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"Netinkamas tinklo režimas (<xliff:g id="NETWORKMODEID">%1$d</xliff:g>). Nepaisyti."</string>
+    <string name="satellite_setting_title" msgid="2543034229989047673">"Palydoviniai pranešimai"</string>
+    <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"Siųskite ir gaukite teksto pranešimus per palydovą. Įtraukiama į jūsų paskyrą."</string>
+    <string name="satellite_setting_disabled_summary" msgid="6789122487534159857">"Siųskite ir gaukite teksto pranešimus per palydovą. Neįtraukiama į jūsų paskyrą."</string>
+    <string name="keywords_satellite_setting" msgid="3312183289776517695">"Palydoviniai pranešimai"</string>
+    <string name="category_name_about_satellite_messaging" msgid="3756205049485508340">"Apie palydovinius pranešimus"</string>
+    <string name="title_about_satellite_setting" msgid="9212860038048311345">"Galite siųsti ir gauti teksto pranešimus palydovo ryšiu, jei turite tinkamą „<xliff:g id="CARRIER_NAME">%1$s</xliff:g>“ paskyrą"</string>
+    <string name="category_title_your_satellite_plan" msgid="3017895097366691841">"Jūsų „<xliff:g id="CARRIER_NAME">%1$s</xliff:g>“ planas"</string>
+    <string name="title_have_satellite_plan" msgid="2048372355699977947">"Palydoviniai pranešimai įtraukti į jūsų paskyrą"</string>
+    <string name="title_no_satellite_plan" msgid="2876056203035197505">"Palydoviniai pranešimai neįtraukti į jūsų paskyrą"</string>
+    <string name="summary_add_satellite_setting" msgid="3815254731634052432">"Pridėti palydovinius pranešimus"</string>
+    <string name="category_name_how_it_works" msgid="585303230539269496">"Kaip tai veikia"</string>
+    <string name="title_satellite_connection_guide" msgid="3294802307913609072">"Kai neturite mobiliojo ryšio tinklo"</string>
+    <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"Telefonas bus automatiškai prijungtas prie palydovo. Kad užtikrintumėte geriausią ryšį, turi būti aiškiai matomas dangus."</string>
+    <string name="title_supported_service" msgid="4275535165812691571">"Kai telefonas prisijungia prie palydovo"</string>
+    <string name="summary_supported_service" msgid="4320535903444834786">"Galite siųsti teksto pranešimą bet kam, įskaitant pagalbos tarnybas. Telefonas bus iš naujo prijungtas prie mobiliojo ryšio tinklo, kai jis bus pasiekiamas."</string>
+    <string name="satellite_setting_summary_more_information" msgid="4008690241760925372">"Palydoviniai pranešimai gali užtrukti ilgiau ir gali būti pasiekiami tik tam tikruose regionuose. Orų sąlygos ir tam tikros struktūros gali turėti įtakos palydovo ryšiui. Skambinti palydovo ryšiu negalima.\n\nGali šiek tiek užtrukti, kol paskyros pakeitimai bus parodyti „Nustatymų“ skiltyje. Kreipkitės į „<xliff:g id="CARRIER_NAME">%1$s</xliff:g>“ išsamios informacijos."</string>
+    <string name="more_about_satellite_messaging" msgid="3385673133561348509">"Daugiau apie palydovinius pranešimus"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Prieigos taškų pavadinimai"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"Prieigos taško pavadinimas"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Nepasiekiama, kai prisijungta prie „<xliff:g id="CARRIER">%1$s</xliff:g>“"</string>
@@ -4448,22 +4621,22 @@
     <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"Perjungti į „<xliff:g id="CARRIER_NAME">%1$s</xliff:g>“?"</string>
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"Perjungti į SIM kortelę?"</string>
     <string name="sim_action_switch_sub_dialog_mep_title" msgid="933856847099933004">"Naudoti „<xliff:g id="CARRIER_NAME">%1$s</xliff:g>“?"</string>
-    <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"Vienu metu gali būti aktyvi tik viena SIM kortelė.\n\nPerjungus į „<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>“ jums teikiamos „<xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>“ paslaugos nebus atšauktos."</string>
-    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="8977951796005849471">"Vienu metu gali būti aktyvi tik viena „eSIM“ kortelė.\n\nPerjungus į „<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>“ jums teikiamos „<xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>“ paslaugos nebus atšauktos."</string>
-    <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"Vienu metu gali būti aktyvi tik viena SIM kortelė.\n\nPerjungus jums teikiamos „<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>“ paslaugos nebus atšauktos."</string>
+    <string name="sim_action_switch_sub_dialog_text" msgid="7474905814976249607">"Vienu metu gali būti tik viena SIM kortelė.\n\nPerjungus į „<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>“ jums teikiamos „<xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>“ paslaugos nebus atšauktos."</string>
+    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="6415848271400253954">"Vienu metu gali būti tik viena „eSIM“ kortelė.\n\nPerjungus į „<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>“ jums teikiamos „<xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>“ paslaugos nebus atšauktos."</string>
+    <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="421658355882679837">"Vienu metu gali būti tik viena SIM kortelė.\n\nPerjungus jums teikiamos „<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>“ paslaugos nebus atšauktos."</string>
     <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"Vienu metu galite naudoti dvi SIM korteles. Jei norite naudoti „<xliff:g id="CARRIER_NAME">%1$s</xliff:g>“, išjunkite vieną iš SIM kortelių."</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"Perjungti į „<xliff:g id="CARRIER_NAME">%1$s</xliff:g>“"</string>
     <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"Išjungti „<xliff:g id="CARRIER_NAME">%1$s</xliff:g>“"</string>
     <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"Išjungus SIM kortelę, paslauga nebus atšaukta"</string>
-    <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"Prisijungiama prie tinklo…"</string>
-    <string name="sim_action_switch_sub_dialog_progress" msgid="4718412054243793310">"Perjungiama į „<xliff:g id="CARRIER_NAME">%1$s</xliff:g>“ skambučiams ir pranešimams…"</string>
-    <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"Nepavyksta perjungti operatoriaus"</string>
-    <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"Nepavyksta perjungti operatoriaus dėl klaidos."</string>
+    <string name="sim_action_enabling_sim_without_carrier_name" msgid="8144175623622669136">"Aktyvinama SIM kortelė…"</string>
+    <string name="sim_action_switch_sub_dialog_progress" msgid="697127154780501304">"Perjungiama į „<xliff:g id="CARRIER_NAME">%1$s</xliff:g>“…"</string>
+    <string name="sim_action_enable_sim_fail_title" msgid="2718084141744769701">"Nepavyko perjungti SIM kortelės"</string>
+    <string name="sim_action_enable_sim_fail_text" msgid="8332742656111984482">"Kažkas nepavyko. Nepavyko perjungti SIM kortelės."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"Išjungti „<xliff:g id="CARRIER_NAME">%1$s</xliff:g>“?"</string>
     <string name="privileged_action_disable_sub_dialog_title_without_carrier" msgid="6518373229436331608">"Išjungti SIM kortelę?"</string>
     <string name="privileged_action_disable_sub_dialog_progress" msgid="5900243067681478102">"Išjungiama SIM kortelė<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
-    <string name="privileged_action_disable_fail_title" msgid="6689494935697043555">"Nepavyksta išjungti operatoriaus"</string>
-    <string name="privileged_action_disable_fail_text" msgid="8404023523406091819">"Kažkas nepavyko, todėl operatorius nebuvo išjungtas."</string>
+    <string name="privileged_action_disable_fail_title" msgid="1808735136395980905">"Nepavyko išjungti SIM kortelės"</string>
+    <string name="privileged_action_disable_fail_text" msgid="6236231745255527458">"Kažkas nepavyko ir jūsų SIM kortelė nebuvo išjungta."</string>
     <string name="sim_action_enable_dsds_title" msgid="226508711751577169">"Naudoti dvi SIM korteles?"</string>
     <string name="sim_action_enable_dsds_text" msgid="970986559326263949">"Šiame įrenginyje vienu metu gali būti dvi aktyvios SIM kortelės. Jei norite toliau naudoti vieną SIM kortelę vienu metu, palieskite „Ne, ačiū“."</string>
     <string name="sim_action_restart_title" msgid="7054617569121993825">"Paleisti įrenginį iš naujo?"</string>
@@ -4475,30 +4648,56 @@
     <string name="sim_action_turn_off" msgid="3506698692916473000">"Išjungti"</string>
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"Nepavyko suaktyvinti SIM kortelės"</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"Pabandykite vėl įjungti SIM kortelę. Jei problema išlieka, iš naujo paleiskite įrenginį."</string>
+    <string name="sim_onboarding_bottomsheets_title" msgid="143711121394213711">"SIM kortelės nustatymas"</string>
+    <string name="sim_onboarding_bottomsheets_msg" msgid="7367245016476460849">"Nustatykite mobiliojo ryšio tinklo nuostatas, kad galėtumėte naudoti kelias SIM korteles šiame įrenginyje"</string>
+    <string name="sim_onboarding_label_sim_title" msgid="273162565849288273">"SIM kortelių etikečių pridėjimas"</string>
+    <string name="sim_onboarding_label_sim_msg" msgid="5105859235219529056">"Šios etiketės bus rodomos skambinant, siunčiant teksto pranešimus ir naudojant duomenis bei „Nustatymų“ skiltyje"</string>
+    <string name="sim_onboarding_label_sim_dialog_title" msgid="5839073125605286120">"SIM kortelės etiketė"</string>
+    <string name="sim_onboarding_label_sim_dialog_label" msgid="9020433985426525185">"Etiketė"</string>
+    <string name="sim_onboarding_select_sim_title" msgid="5895262188167744055">"Naudotinų SIM kortelių pasirinkimas"</string>
+    <string name="sim_onboarding_select_sim_msg" msgid="5638859405391915048">"Vienu metu galite naudoti dvi SIM korteles"</string>
+    <string name="sim_onboarding_primary_sim_title" msgid="2793090401371135675">"Pagrindinių SIM kortelių nustatymas"</string>
+    <string name="sim_onboarding_primary_sim_msg" msgid="5484656671490558032">"Pasirinkite, kurias SIM korteles naudoti pagal numatytuosius nustatymus skambučiams, teksto pranešimams ir duomenims"</string>
+    <string name="primary_sim_title" msgid="2508161011657571566">"Pagrindinės SIM kortelės"</string>
+    <string name="primary_sim_calls_title" msgid="4961189133582615685">"Skambučiai"</string>
+    <string name="primary_sim_texts_title" msgid="1287584042733097749">"Teksto pranešimai"</string>
+    <string name="primary_sim_automatic_data_title" msgid="1265528923229642480">"Automatinis duomenų perjungimas"</string>
+    <string name="primary_sim_automatic_data_msg" msgid="1612203837010785203">"Naudoti duomenis iš bet kurios SIM kortelės, atsižvelgiant į aprėptį ir pasiekiamumą"</string>
+    <string name="sim_onboarding_phoneNumber_data_only" msgid="8158409121949373662">"Tik duomenys"</string>
+    <string name="sim_onboarding_setup" msgid="5750393553605388463">"Nustatyti"</string>
+    <string name="sim_onboarding_next" msgid="6415025179929475355">"Kitas"</string>
+    <string name="sim_onboarding_progressbar_turning_sim_on" msgid="1163318788393361574">"Įjungiama „<xliff:g id="CARRIER_NAME">%1$s</xliff:g>“…"</string>
+    <string name="mobile_network_spn_title" msgid="3053793174495329077">"Mobiliojo ryšio tinklas"</string>
+    <string name="mobile_network_phone_number_title" msgid="2090794402855021784">"Telefono numeris"</string>
+    <string name="mobile_network_sim_label_color_title" msgid="2401352348041132876">"SIM etiketė ir spalva"</string>
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"Tinklo aktyvinimas"</string>
     <string name="sim_switch_channel_id" msgid="4927038626791837861">"Operatoriaus keitimas"</string>
-    <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"Operatorius „<xliff:g id="CARRIER_NAME">%1$s</xliff:g>“ aktyvus"</string>
+    <string name="post_dsds_reboot_notification_title_with_carrier" msgid="975447139749692794">"„<xliff:g id="CARRIER_NAME">%1$s</xliff:g>“ SIM kortelė yra aktyvi"</string>
     <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"Palieskite ir atnaujinkite SIM nustatymus"</string>
     <string name="switch_to_removable_notification" msgid="7640342063449806296">"Perjungta į „<xliff:g id="CARRIER_NAME">%1$s</xliff:g>“"</string>
     <string name="switch_to_removable_notification_no_carrier_name" msgid="7384856964036215338">"Perjungta į kitą operatorių"</string>
     <string name="network_changed_notification_text" msgid="2407908598496951243">"Mobiliojo ryšio tinklas pakeistas"</string>
     <string name="dsds_notification_after_suw_title" msgid="3738898232310273982">"Nustatykite kitą SIM kortelę"</string>
     <string name="dsds_notification_after_suw_text" msgid="1287357774676361084">"Pasirinkite aktyvią SIM kortelę arba naudokite 2 SIM korteles vienu metu"</string>
-    <string name="choose_sim_title" msgid="4804689675237716286">"Pasirinkite norimą naudoti numerį"</string>
-    <string name="choose_sim_text" msgid="4356662002583501647">"{count,plural, =1{Vienas numeris pasiekiamas šiame įrenginyje, bet vienu metu galima naudoti tik vieną}=2{Du numeriai pasiekiami šiame įrenginyje, bet vienu metu galima naudoti tik vieną}one{# numeris pasiekiamas šiame įrenginyje, bet vienu metu galima naudoti tik vieną}few{# numeriai pasiekiami šiame įrenginyje, bet vienu metu galima naudoti tik vieną}many{# numerio pasiekiama šiame įrenginyje, bet vienu metu galima naudoti tik vieną}other{# numerių pasiekiama šiame įrenginyje, bet vienu metu galima naudoti tik vieną}}"</string>
-    <string name="choose_sim_activating" msgid="9035902671985449448">"Suaktyvinama<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
-    <string name="choose_sim_could_not_activate" msgid="2154564459842291617">"Šiuo metu nepavyko suaktyvinti"</string>
+    <string name="choose_sim_title" msgid="66509047151583877">"Pasirinkite norimą naudoti SIM kortelę"</string>
+    <string name="choose_sim_text" msgid="8992163497852069924">"{count,plural, =1{1 SIM kortelė pasiekiama šiame įrenginyje, bet vienu metu galima naudoti tik vieną}=2{2 SIM kortelės pasiekiamos šiame įrenginyje, bet vienu metu galima naudoti tik vieną}one{# SIM kortelė pasiekiama šiame įrenginyje, bet vienu metu galima naudoti tik vieną}few{# SIM kortelės pasiekiamos šiame įrenginyje, bet vienu metu galima naudoti tik vieną}many{# SIM kortelės pasiekiama šiame įrenginyje, bet vienu metu galima naudoti tik vieną}other{# SIM kortelių pasiekiama šiame įrenginyje, bet vienu metu galima naudoti tik vieną}}"</string>
+    <string name="choose_sim_activating" msgid="6485547671356386998">"Įjungiama<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
+    <string name="choose_sim_could_not_activate" msgid="866488735834045525">"Šiuo metu nepavyko įjungti šios SIM kortelės"</string>
     <string name="switch_sim_dialog_title" msgid="5407316878973237773">"Naudoti „<xliff:g id="CARRIER_NAME">%1$s</xliff:g>“?"</string>
     <string name="switch_sim_dialog_text" msgid="7530186862171635464">"„<xliff:g id="CARRIER_NAME">%1$s</xliff:g>“ ryšys bus naudojamas mobiliojo ryšio duomenims, skambučiams ir SMS žinutėms."</string>
     <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"Nėra jokių pasiekiamų aktyvių SIM kortelių"</string>
     <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"Kad vėliau galėtumėte naudoti mobiliojo ryšio duomenis, skambučių ir SMS funkcijas, eikite į tinklo nustatymus"</string>
     <string name="sim_card_label" msgid="6263064316075963775">"SIM kortelė"</string>
     <string name="erase_sim_dialog_title" msgid="4742077437653028326">"Ištrinti šią „eSIM“ kortelę?"</string>
-    <string name="erase_sim_dialog_text" msgid="753031064269699885">"Ištrynus šią SIM kortelę bus pašalintos „<xliff:g id="CARRIER_NAME_A">%1$s</xliff:g>“ paslaugos iš šio įrenginio.\n\n„<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g>“ paslaugos nebus atšauktos."</string>
+    <string name="erase_sim_dialog_text" msgid="1406141218170595272">"Tai atlikus „<xliff:g id="CARRIER_NAME_A">%1$s</xliff:g>“ paslauga bus pašalinta iš šio įrenginio, bet jūsų turimas „<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g>“ planas nebus atšauktas."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Ištrinti"</string>
-    <string name="erasing_sim" msgid="7877703231075699139">"Ištrinama SIM kortelė…"</string>
-    <string name="erase_sim_fail_title" msgid="2024446702985862427">"Nepavyko ištrinti SIM kortelės"</string>
-    <string name="erase_sim_fail_text" msgid="7870804401227483131">"Šios SIM kortelės negalima ištrinti dėl klaidos.\n\nPaleiskite įrenginį iš naujo ir bandykite dar kartą."</string>
+    <string name="erasing_sim" msgid="4237180547590463930">"Trinama „eSIM“ kortelė…"</string>
+    <string name="erase_sim_fail_title" msgid="1445700500168357303">"Nepavyko ištrinti „eSIM“ kortelės"</string>
+    <string name="erase_sim_fail_text" msgid="6898841004987411547">"Kažkas nepavyko ir ši „eSIM“ kortelė nebuvo ištrinta.\n\nIš naujo paleiskite įrenginį ir bandykite dar kartą."</string>
+    <string name="wifi_warning_dialog_title" msgid="7328515476966592390">"Prisijunkite prie „Wi‑Fi“ prieš ištrindami"</string>
+    <string name="wifi_warning_dialog_text" msgid="6584060137703953174">"Taip galėsite lengviau ateityje vėl naudoti savo „eSIM“ kortelę ir nereikės susisiekti su operatoriumi"</string>
+    <string name="wifi_warning_continue_button" msgid="8171574741789688214">"Vis tiek ištrinti"</string>
+    <string name="wifi_warning_return_button" msgid="6226063181583906340">"Gerai"</string>
     <string name="network_connection_request_dialog_title" msgid="1896186380874289434">"Prijungimas prie įrenginio"</string>
     <string name="network_connection_request_dialog_summary" msgid="7693038309792726170">"Programa „<xliff:g id="APPNAME">%1$s</xliff:g>“ nori naudoti laikiną „Wi‑Fi“ tinklą, kad galėtų prisijungti prie jūsų įrenginio"</string>
     <string name="network_connection_timeout_dialog_message" msgid="598509083077743772">"Nerasta jokių įrenginių. Įsitikinkite, kad įrenginiai įjungti ir prie jų galima prisijungti."</string>
@@ -4570,6 +4769,14 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"Darbo politikos informacija"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"Nustatymus tvarko jūsų IT administratorius"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"Grafikos procesorius"</string>
+    <string name="enable_16k_pages" msgid="5009476566957520607">"Paleisti su 16 K puslapio dydžiu"</string>
+    <string name="enable_16k_pages_summary" msgid="428117226069445198">"Paleisti įrenginį su 16 K psl. palaik. branduoliu"</string>
+    <string name="confirm_enable_16k_pages_title" msgid="6751570067857011642">"Paleisti iš naujo naudojant su 16 KB puslapiais suderinamą branduolį?"</string>
+    <string name="confirm_enable_16k_pages_text" msgid="702888115148257215">"PERSPĖJIMAS: kai kurios programos gali būti nesuderinamos su šiuo režimu. Patvirtinus įrenginys bus paleistas iš naujo."</string>
+    <string name="confirm_enable_4k_pages_title" msgid="626987400420355263">"Paleisti iš naujo naudojant su 4 KB puslapiais suderinamą branduolį?"</string>
+    <string name="confirm_enable_4k_pages_text" msgid="6168921566226074524">"Patvirtinus įrenginys bus paleistas iš naujo."</string>
+    <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"Nepavyko atnaujinti į su 16 KB puslapiais suderinamą branduolį"</string>
+    <string name="progress_16k_ota_title" msgid="2117218313875523741">"Pritaikomas pakeitimas"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Pranešimų apie riktus doroklė"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Nustatoma, kuri programa apdoroja pranešimo apie riktą spartųjį klavišą įrenginyje."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Asmeninė"</string>
@@ -4620,16 +4827,20 @@
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Leiskite virš kitų programų rodomoms programoms perdengti skilties „Nustatymai“ ekranus"</string>
     <string name="allow_mock_modem" msgid="3832264806530479214">"Leisti imituojamą modemą"</string>
     <string name="allow_mock_modem_summary" msgid="9097416612748005374">"Leisti šiame įrenginyje vykdyti imituojamo modemo paslaugą atliekant stebimumo ir vertinamumo bandymą. Neįgalinkite įprastai naudodami telefoną"</string>
+    <string name="disable_screen_share_protections_for_apps_and_notifications" msgid="4987116103699222633">"Ekrano bendrinimo apsaugos išjungimas"</string>
+    <string name="disable_screen_share_protections_for_apps_and_notifications_summary" msgid="932295234626582052">"Išjungiama sistemos taikoma programa ir pranešimų apsauga bendrinant ekraną"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Medija"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Medijos leistuvės prisegimas"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Kad būtų galima sparčiai atnaujinti atkūrimą, medijos leistuvė lieka atidaryta „Sparčiųjų nustatymų“ skiltyje"</string>
     <string name="media_controls_lockscreen_title" msgid="2188311721857512510">"Rodyti mediją užrakinimo ekrane"</string>
     <string name="media_controls_lockscreen_description" msgid="3320333660404439510">"Kad būtų galima sparčiai atnaujinti atkūrimą, medijos leistuvė lieka atidaryta užrakinimo ekrane"</string>
-    <string name="media_controls_recommendations_title" msgid="184225835236807677">"Medijos rekomendacijų rodymas"</string>
+    <string name="media_controls_recommendations_title" msgid="3012692549413927608">"Rodyti Padėjėjo medijos rekomendacijas"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"Pagrįsta jūsų veikla"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Slėpti leistuvę"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"Rodyti leistuvę"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"medija"</string>
+    <string name="camera_extensions_fallback_title" msgid="3604579046777004989">"Fotoaparato programinės įrangos plėtinių leidimas"</string>
+    <string name="camera_extensions_fallback_description" msgid="6939818294458854536">"Įgalinamas numatytasis išplėstinių fotoaparato funkcijų, pvz., „Eyes Free“ videografijos, programinės įrangos diegimas."</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bus įjungtas „Bluetooth“"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"Internetas"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM"</string>
@@ -4657,8 +4868,8 @@
     <string name="sim_category_title" msgid="2341314000964710495">"SIM kortelė"</string>
     <string name="downloaded_sim_category_title" msgid="2876988650413179752">"„eSIM“ kortelė"</string>
     <string name="downloaded_sims_category_title" msgid="487799905978489922">"„eSIM“ kortelės"</string>
-    <string name="sim_category_active_sim" msgid="1503823567818544012">"Aktyvi"</string>
-    <string name="sim_category_inactive_sim" msgid="4068899490133820881">"Neaktyvi"</string>
+    <string name="sim_category_active_sim" msgid="3077009911935592178">"Įjungta"</string>
+    <string name="sim_category_inactive_sim" msgid="7351553344148400450">"Išjungta"</string>
     <string name="sim_category_default_active_sim" msgid="1208194173387987231">" / Numatytoji <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="default_active_sim_calls" msgid="2390973682556353558">"skambučiams"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"SMS"</string>
@@ -4732,6 +4943,12 @@
     <string name="uwb_settings_summary" msgid="3074271396764672268">"Padeda nustatyti santykinį atstumą nuo netoliese esančių įrenginių su UWB"</string>
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Norėdami naudoti UWB, išjunkite lėktuvo režimą"</string>
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"UWB ryšys nepasiekiamas dabartinėje vietovėje"</string>
+    <!-- no translation found for thread_network_settings_title (4212301030523859220) -->
+    <skip />
+    <!-- no translation found for thread_network_settings_summary (8065599651021748339) -->
+    <skip />
+    <!-- no translation found for thread_network_settings_summary_airplane_mode (7207252895832446979) -->
+    <skip />
     <string name="camera_toggle_title" msgid="8952668677727244992">"Prieiga prie fotoaparato"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Prieiga prie mikrofono"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"Programos ir paslaugos"</string>
@@ -4908,6 +5125,8 @@
     <string name="color_selector_dialog_cancel" msgid="8667350644753900701">"Atšaukti"</string>
     <string name="contrast_title" msgid="6885768151336508075">"Kontrastas"</string>
     <string name="contrast_standard" msgid="1097297089917185235">"Įprastas"</string>
+    <!-- no translation found for contrast_default (8918545965525226966) -->
+    <skip />
     <string name="contrast_medium" msgid="384414510709285811">"Vidutinis"</string>
     <string name="contrast_high" msgid="3988567609694797696">"Aukštas"</string>
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"Šią programą galima atidaryti tik viename lange"</string>
@@ -4920,7 +5139,7 @@
     <string name="color_inversion_state_on" msgid="1160969033636440368">"Įjungta"</string>
     <string name="color_inversion_state_off" msgid="6925638668080451724">"Išjungta"</string>
     <string name="color_inversion_feature_summary" msgid="1199876648549627647">"Šviesūs ekranai tampa tamsūs, o tamsūs – šviesūs"</string>
-    <string name="magnification_feature_summary" msgid="641825267460247848">"Sparčiai artinkite ekrane, kad turinys būtų didesnis"</string>
+    <string name="magnification_feature_summary" msgid="2053971569640663564">"Artinti ekrane"</string>
     <string name="autoclick_disabled" msgid="3213396804955002120">"Išjungta"</string>
     <string name="show_captions_disabled" msgid="690650956523818755">"Išjungta"</string>
     <string name="show_captions_enabled" msgid="7089043007924626">"Įjungta"</string>
@@ -4935,4 +5154,6 @@
     <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="3004347470520916069">"Atlikti apgaulingų darbo programų nuskaitymą"</string>
     <string name="content_protection_preference_subpage_summary" msgid="3595621220981703364"></string>
     <string name="content_protection_preference_subpage_info" msgid="6890886357653365489"></string>
+    <string name="accessibility_setup_password_complete" msgid="6358749253318369077">"Slaptažodis dabar nustatytas"</string>
+    <string name="show_stylus_pointer_icon" msgid="1010583689203665786">"Rodyti rodyklę, kol ji laikoma užvesta virš parinkties"</string>
 </resources>

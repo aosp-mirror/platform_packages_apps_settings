@@ -14,13 +14,13 @@
 
 package com.android.settings.datausage;
 
-import android.annotation.Nullable;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
 
+import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 

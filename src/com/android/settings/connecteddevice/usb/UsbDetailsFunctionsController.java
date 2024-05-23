@@ -130,37 +130,39 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
 
     @Override
     public void onRadioButtonClicked(SelectorWithWidgetPreference preference) {
-        final long function = UsbBackend.usbFunctionsFromString(preference.getKey());
-        final long previousFunction = mUsbBackend.getCurrentFunctions();
-        if (DEBUG) {
-            Log.d(TAG, "onRadioButtonClicked() function : " + function + ", toString() : "
-                    + UsbManager.usbFunctionsToString(function) + ", previousFunction : "
-                    + previousFunction + ", toString() : "
-                    + UsbManager.usbFunctionsToString(previousFunction));
-        }
-        if (function != previousFunction && !Utils.isMonkeyRunning()
-                && !isClickEventIgnored(function, previousFunction)) {
-            mPreviousFunction = previousFunction;
-
-            //Update the UI in advance to make it looks smooth
-            final SelectorWithWidgetPreference prevPref =
-                    (SelectorWithWidgetPreference) mProfilesContainer.findPreference(
-                            UsbBackend.usbFunctionsToString(mPreviousFunction));
-            if (prevPref != null) {
-                prevPref.setChecked(false);
-                preference.setChecked(true);
+        requireAuthAndExecute(() -> {
+            final long function = UsbBackend.usbFunctionsFromString(preference.getKey());
+            final long previousFunction = mUsbBackend.getCurrentFunctions();
+            if (DEBUG) {
+                Log.d(TAG, "onRadioButtonClicked() function : " + function + ", toString() : "
+                        + UsbManager.usbFunctionsToString(function) + ", previousFunction : "
+                        + previousFunction + ", toString() : "
+                        + UsbManager.usbFunctionsToString(previousFunction));
             }
+            if (function != previousFunction && !Utils.isMonkeyRunning()
+                    && !isClickEventIgnored(function, previousFunction)) {
+                mPreviousFunction = previousFunction;
 
-            if (function == UsbManager.FUNCTION_RNDIS || function == UsbManager.FUNCTION_NCM) {
-                // We need to have entitlement check for usb tethering, so use API in
-                // TetheringManager.
-                mTetheringManager.startTethering(
-                        TetheringManager.TETHERING_USB, new HandlerExecutor(mHandler),
-                        mOnStartTetheringCallback);
-            } else {
-                mUsbBackend.setCurrentFunctions(function);
+                //Update the UI in advance to make it looks smooth
+                final SelectorWithWidgetPreference prevPref =
+                        (SelectorWithWidgetPreference) mProfilesContainer.findPreference(
+                                UsbBackend.usbFunctionsToString(mPreviousFunction));
+                if (prevPref != null) {
+                    prevPref.setChecked(false);
+                    preference.setChecked(true);
+                }
+
+                if (function == UsbManager.FUNCTION_RNDIS || function == UsbManager.FUNCTION_NCM) {
+                    // We need to have entitlement check for usb tethering, so use API in
+                    // TetheringManager.
+                    mTetheringManager.startTethering(
+                            TetheringManager.TETHERING_USB, new HandlerExecutor(mHandler),
+                            mOnStartTetheringCallback);
+                } else {
+                    mUsbBackend.setCurrentFunctions(function);
+                }
             }
-        }
+        });
     }
 
     private boolean isClickEventIgnored(long function, long previousFunction) {

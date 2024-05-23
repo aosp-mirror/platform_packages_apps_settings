@@ -16,12 +16,17 @@
 
 package com.android.settings.privatespace;
 
+import static android.text.Layout.BREAK_STRATEGY_SIMPLE;
+
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.app.settings.SettingsEnums;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -30,7 +35,6 @@ import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
@@ -39,6 +43,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.setupdesign.GlifLayout;
 import com.google.common.collect.ImmutableList;
 
@@ -56,21 +61,21 @@ public class AutoAdvanceSetupFragment extends InstrumentedFragment {
     private GlifLayout mRootView;
     private Handler mHandler;
     private int mScreenTitleIndex;
-    private static final List<Pair<Integer, Integer>> HEADER_IMAGE_PAIRS =
+    private static final List<Pair<Integer, Integer>> HEADER_ILLUSTRATION_PAIRS =
             ImmutableList.of(
                     new Pair(R.string.private_space_notifications_hidden_title,
-                            R.drawable.privatespace_setup_flow_placeholder),
-                    new Pair(R.string.private_space_share_photos_title,
-                            R.drawable.privatespace_setup_flow_placeholder),
+                            R.raw.private_space_notifications_illustration),
                     new Pair(R.string.private_space_apps_installed_title,
-                            R.drawable.privatespace_setup_flow_placeholder));
+                            R.raw.private_space_unlock_to_share_illustration),
+                    new Pair(R.string.private_space_explore_settings_title,
+                            R.raw.private_space_placeholder_illustration));
 
     private Runnable mUpdateScreenResources =
             new Runnable() {
                 @Override
                 public void run() {
                     if (getActivity() != null) {
-                        if (++mScreenTitleIndex < HEADER_IMAGE_PAIRS.size()) {
+                        if (++mScreenTitleIndex < HEADER_ILLUSTRATION_PAIRS.size()) {
                             startFadeOutAnimation();
                             mHandler.postDelayed(mUpdateScreenResources, DELAY_BETWEEN_SCREENS);
                         } else if (PrivateSpaceMaintainer.getInstance(getActivity())
@@ -79,8 +84,13 @@ public class AutoAdvanceSetupFragment extends InstrumentedFragment {
                                     getContext(),
                                     SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_SPACE_CREATED,
                                     true);
-                            NavHostFragment.findNavController(AutoAdvanceSetupFragment.this)
-                                    .navigate(R.id.action_set_lock_fragment);
+                            if (isConnectedToInternet()) {
+                                NavHostFragment.findNavController(AutoAdvanceSetupFragment.this)
+                                        .navigate(R.id.action_account_intro_fragment);
+                            } else {
+                                NavHostFragment.findNavController(AutoAdvanceSetupFragment.this)
+                                        .navigate(R.id.action_set_lock_fragment);
+                            }
                         } else {
                             mMetricsFeatureProvider.action(
                                     getContext(),
@@ -110,15 +120,16 @@ public class AutoAdvanceSetupFragment extends InstrumentedFragment {
             }
         } else {
             mScreenTitleIndex = savedInstanceState.getInt(TITLE_INDEX);
-            if (mScreenTitleIndex >= HEADER_IMAGE_PAIRS.size()) {
+            if (mScreenTitleIndex >= HEADER_ILLUSTRATION_PAIRS.size()) {
                 return super.onCreateView(inflater, container, savedInstanceState);
             }
         }
         mRootView =
                 (GlifLayout)
-                        inflater.inflate(R.layout.privatespace_advancing_screen, container, false);
+                        inflater.inflate(R.layout.private_space_advancing_screen, container, false);
         mRootView.getHeaderTextView().setMaxLines(HEADER_TEXT_MAX_LINES);
-        updateHeaderAndImage();
+        mRootView.getHeaderTextView().setBreakStrategy(BREAK_STRATEGY_SIMPLE);
+        updateHeaderAndIllustration();
         mHandler = new Handler(Looper.getMainLooper());
         mHandler.postDelayed(mUpdateScreenResources, DELAY_BETWEEN_SCREENS);
         OnBackPressedCallback callback =
@@ -141,7 +152,9 @@ public class AutoAdvanceSetupFragment extends InstrumentedFragment {
 
     @Override
     public void onDestroy() {
-        mHandler.removeCallbacks(mUpdateScreenResources);
+        if (mHandler != null) {
+            mHandler.removeCallbacks(mUpdateScreenResources);
+        }
         super.onDestroy();
     }
 
@@ -155,20 +168,21 @@ public class AutoAdvanceSetupFragment extends InstrumentedFragment {
                 .navigate(R.id.action_advance_profile_error);
     }
 
-    private void updateHeaderAndImage() {
-        mRootView.setHeaderText(HEADER_IMAGE_PAIRS.get(mScreenTitleIndex).first);
-        ((ImageView) mRootView.findViewById(R.id.placeholder_image))
-                .setImageResource(HEADER_IMAGE_PAIRS.get(mScreenTitleIndex).second);
+    private void updateHeaderAndIllustration() {
+        mRootView.setHeaderText(HEADER_ILLUSTRATION_PAIRS.get(mScreenTitleIndex).first);
+        LottieAnimationView animationView = mRootView.findViewById(R.id.lottie_animation);
+        animationView.setAnimation(HEADER_ILLUSTRATION_PAIRS.get(mScreenTitleIndex).second);
+        animationView.playAnimation();
         startFadeInAnimation();
     }
 
     private  void startFadeInAnimation() {
         ValueAnimator textView =  ObjectAnimator.ofFloat(
                 mRootView.getHeaderTextView(), View.ALPHA, 0f, 1f);
-        ValueAnimator imageView = ObjectAnimator.ofFloat(
-                mRootView.findViewById(R.id.placeholder_image), View.ALPHA, 0, 1f);
+        ValueAnimator lottieView = ObjectAnimator.ofFloat(
+                mRootView.findViewById(R.id.lottie_animation), View.ALPHA, 0, 1f);
         AnimatorSet fadeIn = new AnimatorSet();
-        fadeIn.playTogether(textView, imageView);
+        fadeIn.playTogether(textView, lottieView);
         fadeIn.setDuration(ANIMATION_DURATION_MILLIS).start();
     }
 
@@ -176,15 +190,24 @@ public class AutoAdvanceSetupFragment extends InstrumentedFragment {
         AnimatorSet fadeOut = new AnimatorSet();
         ValueAnimator textView =  ObjectAnimator.ofFloat(
                 mRootView.getHeaderTextView(), View.ALPHA, 1f, 0f);
-        ValueAnimator imageView = ObjectAnimator.ofFloat(
-                mRootView.findViewById(R.id.placeholder_image), View.ALPHA, 1f, 0f);
-        fadeOut.playTogether(textView, imageView);
+        ValueAnimator lottieView = ObjectAnimator.ofFloat(
+                mRootView.findViewById(R.id.lottie_animation), View.ALPHA, 1f, 0f);
+        fadeOut.playTogether(textView, lottieView);
         fadeOut.setDuration(ANIMATION_DURATION_MILLIS).start();
         fadeOut.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
-                updateHeaderAndImage();
+                updateHeaderAndIllustration();
             }
         });
+    }
+
+    /** Returns true if device has an active internet connection, false otherwise. */
+    private boolean isConnectedToInternet() {
+        ConnectivityManager cm =
+                (ConnectivityManager)
+                        getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
     }
 }

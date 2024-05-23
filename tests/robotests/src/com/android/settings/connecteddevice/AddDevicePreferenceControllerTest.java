@@ -22,6 +22,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
+import static org.robolectric.Shadows.shadowOf;
 
 import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
@@ -31,6 +32,7 @@ import android.content.pm.PackageManager;
 import android.text.TextUtils;
 
 import androidx.preference.PreferenceScreen;
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
 import com.android.settingslib.RestrictedPreference;
@@ -40,9 +42,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
-import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplicationPackageManager;
 import org.robolectric.util.ReflectionHelpers;
@@ -50,13 +51,13 @@ import org.robolectric.util.ReflectionHelpers;
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowApplicationPackageManager.class)
 public class AddDevicePreferenceControllerTest {
-
     @Mock
     private PreferenceScreen mScreen;
     @Mock
     private BluetoothAdapter mBluetoothAdapter;
 
-    private Context mContext;
+    @Spy
+    private Context mContext = ApplicationProvider.getApplicationContext();
     private AddDevicePreferenceController mAddDevicePreferenceController;
     private RestrictedPreference mAddDevicePreference;
     private ShadowApplicationPackageManager mPackageManager;
@@ -66,8 +67,7 @@ public class AddDevicePreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mContext = RuntimeEnvironment.application;
-        mPackageManager = (ShadowApplicationPackageManager) Shadows.shadowOf(
+        mPackageManager = (ShadowApplicationPackageManager) shadowOf(
                 mContext.getPackageManager());
         mPackageManager.setSystemFeature(PackageManager.FEATURE_BLUETOOTH, true);
 

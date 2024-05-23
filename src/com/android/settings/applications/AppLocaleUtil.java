@@ -16,7 +16,6 @@
 
 package com.android.settings.applications;
 
-import android.annotation.NonNull;
 import android.app.LocaleConfig;
 import android.content.Context;
 import android.content.Intent;
@@ -28,6 +27,7 @@ import android.text.TextUtils;
 import android.util.FeatureFlagUtils;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;

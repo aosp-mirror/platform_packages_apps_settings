@@ -29,6 +29,7 @@ import com.android.settingslib.spaprivileged.model.app.AppEntry
 import com.android.settingslib.spaprivileged.model.app.AppListModel
 import com.android.settingslib.spaprivileged.model.app.AppRecord
 import java.text.DateFormat
+import java.time.Duration
 import java.util.concurrent.TimeUnit
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
@@ -77,13 +78,23 @@ class UsageStatsListModel(private val context: Context) : AppListModel<UsageStat
     @Composable
     override fun getSummary(option: Int, record: UsageStatsAppRecord): (() -> String)? {
         val usageStats = record.usageStats ?: return null
-        val lastTimeUsed = DateUtils.formatSameDayTime(
-            usageStats.lastTimeUsed, now, DateFormat.MEDIUM, DateFormat.MEDIUM
-        )
-        val lastTimeUsedLine = "${context.getString(R.string.last_time_used_label)}: $lastTimeUsed"
+        val lastTimeUsedLine =
+            "${context.getString(R.string.last_time_used_label)}: ${usageStats.getLastUsedString()}"
         val usageTime = DateUtils.formatElapsedTime(usageStats.totalTimeInForeground / 1000)
         val usageTimeLine = "${context.getString(R.string.usage_time_label)}: $usageTime"
         return { "$lastTimeUsedLine\n$usageTimeLine" }
+    }
+
+    private fun UsageStats.getLastUsedString() = when {
+        lastTimeUsed < Duration.ofDays(1)
+            .toMillis() -> context.getString(R.string.last_time_used_never)
+
+        else -> DateUtils.formatSameDayTime(
+            lastTimeUsed,
+            now,
+            DateFormat.MEDIUM,
+            DateFormat.MEDIUM
+        )
     }
 
     private fun getUsageStats(): Map<String, UsageStats> {

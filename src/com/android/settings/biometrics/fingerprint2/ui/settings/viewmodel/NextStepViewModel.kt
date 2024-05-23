@@ -29,10 +29,8 @@ data class EnrollFirstFingerprint(
   val challengeToken: ByteArray?,
 ) : NextStepViewModel()
 
-data class EnrollAdditionalFingerprint(
-  val userId: Int,
-  val challengeToken: ByteArray?,
-) : NextStepViewModel()
+data class EnrollAdditionalFingerprint(val userId: Int, val challengeToken: ByteArray?) :
+  NextStepViewModel()
 
 data class FinishSettings(val reason: String) : NextStepViewModel()
 

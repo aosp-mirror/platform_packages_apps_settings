@@ -40,7 +40,7 @@ public class PoliteNotifVibrateUnlockedToggleController extends TogglePreference
     @Override
     public int getAvailabilityStatus() {
         // TODO: b/291897570 - remove this when the feature flag is removed!
-        if (!Flags.politeNotifications()) {
+        if (!Flags.politeNotifications() || !Flags.vibrateWhileUnlocked()) {
             return CONDITIONALLY_UNAVAILABLE;
         }
         return mContext.getSystemService(Vibrator.class).hasVibrator() ? AVAILABLE

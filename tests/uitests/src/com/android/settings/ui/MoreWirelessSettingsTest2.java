@@ -23,10 +23,10 @@ import android.provider.Settings;
 import android.system.helpers.CommandsHelper;
 import android.system.helpers.SettingsHelper;
 import android.test.InstrumentationTestCase;
-import android.test.suitebuilder.annotation.MediumTest;
-import android.test.suitebuilder.annotation.Suppress;
 import android.util.Log;
 
+import androidx.test.filters.MediumTest;
+import androidx.test.filters.Suppress;
 import androidx.test.uiautomator.By;
 import androidx.test.uiautomator.BySelector;
 import androidx.test.uiautomator.Direction;

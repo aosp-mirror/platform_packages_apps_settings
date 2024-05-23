@@ -24,6 +24,7 @@ import android.app.Activity;
 import android.app.AppOpsManager;
 import android.app.KeyguardManager;
 import android.app.admin.DevicePolicyManager;
+import android.app.ecm.EnhancedConfirmationManager;
 import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -490,12 +491,23 @@ public class AppInfoDashboardFragment extends DashboardFragment
                 return true;
             case ACCESS_RESTRICTED_SETTINGS:
                 showLockScreen(getContext(), () -> {
-                    final AppOpsManager appOpsManager = getContext().getSystemService(
-                            AppOpsManager.class);
-                    appOpsManager.setMode(AppOpsManager.OP_ACCESS_RESTRICTED_SETTINGS,
-                            getUid(),
-                            getPackageName(),
-                            AppOpsManager.MODE_ALLOWED);
+                    if (android.permission.flags.Flags.enhancedConfirmationModeApisEnabled()
+                            && android.security.Flags.extendEcmToAllSettings()) {
+                        EnhancedConfirmationManager manager = getContext().getSystemService(
+                                EnhancedConfirmationManager.class);
+                        try {
+                            manager.clearRestriction(getPackageName());
+                        } catch (NameNotFoundException e) {
+                            Log.e(TAG, "Exception when retrieving package:" + getPackageName(), e);
+                        }
+                    } else {
+                        final AppOpsManager appOpsManager = getContext().getSystemService(
+                                AppOpsManager.class);
+                        appOpsManager.setMode(AppOpsManager.OP_ACCESS_RESTRICTED_SETTINGS,
+                                getUid(),
+                                getPackageName(),
+                                AppOpsManager.MODE_ALLOWED);
+                    }
                     getActivity().invalidateOptionsMenu();
                     final String toastString = getContext().getString(
                             R.string.toast_allows_restricted_settings_successfully,
@@ -527,14 +539,25 @@ public class AppInfoDashboardFragment extends DashboardFragment
     }
 
     private boolean shouldShowAccessRestrictedSettings() {
-        try {
-            final int mode = getSystemService(AppOpsManager.class).noteOpNoThrow(
-                    AppOpsManager.OP_ACCESS_RESTRICTED_SETTINGS, getUid(),
-                    getPackageName());
-            return mode == AppOpsManager.MODE_IGNORED;
-        } catch (Exception e) {
-            // Fallback in case if app ops is not available in testing.
-            return false;
+        if (android.permission.flags.Flags.enhancedConfirmationModeApisEnabled()
+                && android.security.Flags.extendEcmToAllSettings()) {
+            try {
+                return getSystemService(EnhancedConfirmationManager.class)
+                        .isClearRestrictionAllowed(getPackageName());
+            } catch (NameNotFoundException e) {
+                Log.e(TAG, "Exception when retrieving package:" + getPackageName(), e);
+                return false;
+            }
+        } else {
+            try {
+                final int mode = getSystemService(AppOpsManager.class).noteOpNoThrow(
+                        AppOpsManager.OP_ACCESS_RESTRICTED_SETTINGS, getUid(),
+                        getPackageName());
+                return mode == AppOpsManager.MODE_IGNORED;
+            } catch (Exception e) {
+                // Fallback in case if app ops is not available in testing.
+                return false;
+            }
         }
     }
 

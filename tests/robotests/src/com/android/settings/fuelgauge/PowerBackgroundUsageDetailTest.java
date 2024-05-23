@@ -22,19 +22,22 @@ import static com.android.settings.fuelgauge.BatteryOptimizeHistoricalLogEntry.A
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
 import android.app.AppOpsManager;
-import android.app.backup.BackupManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.InstallSourceInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -43,15 +46,17 @@ import android.widget.CompoundButton;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.loader.app.LoaderManager;
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.SettingsActivity;
 import com.android.settings.fuelgauge.batteryusage.BatteryEntry;
-import com.android.settings.testutils.shadow.ShadowActivityManager;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.LayoutPreference;
 import com.android.settingslib.widget.MainSwitchPreference;
@@ -59,26 +64,32 @@ import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.mockito.stubbing.Answer;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
+
+import java.util.concurrent.TimeUnit;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(
         shadows = {
             ShadowEntityHeaderController.class,
-            ShadowActivityManager.class,
             com.android.settings.testutils.shadow.ShadowFragment.class,
         })
 public class PowerBackgroundUsageDetailTest {
+
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+
     private static final String APP_LABEL = "app label";
     private static final String SUMMARY = "summary";
     private static final int ICON_ID = 123;
@@ -91,6 +102,7 @@ public class PowerBackgroundUsageDetailTest {
     private PowerBackgroundUsageDetail mFragment;
     private FooterPreference mFooterPreference;
     private MainSwitchPreference mMainSwitchPreference;
+    private MetricsFeatureProvider mMetricsFeatureProvider;
     private SelectorWithWidgetPreference mOptimizePreference;
     private SelectorWithWidgetPreference mUnrestrictedPreference;
     private SettingsActivity mTestActivity;
@@ -106,19 +118,23 @@ public class PowerBackgroundUsageDetailTest {
     @Mock private LoaderManager mLoaderManager;
     @Mock private ApplicationsState.AppEntry mAppEntry;
     @Mock private BatteryEntry mBatteryEntry;
-    @Mock private BackupManager mBackupManager;
     @Mock private PackageManager mPackageManager;
     @Mock private AppOpsManager mAppOpsManager;
     @Mock private CompoundButton mMockSwitch;
+    @Mock private InstallSourceInfo mInstallSourceInfo;
 
     @Before
-    public void setUp() {
-        MockitoAnnotations.initMocks(this);
-
-        mContext = spy(RuntimeEnvironment.application);
+    public void setUp() throws Exception {
+        mContext = spy(ApplicationProvider.getApplicationContext());
         when(mContext.getPackageName()).thenReturn("foo");
+        when(mContext.getPackageManager()).thenReturn(mPackageManager);
+        when(mPackageManager.getInstallSourceInfo(anyString())).thenReturn(mInstallSourceInfo);
+
+        final FakeFeatureFactory fakeFeatureFactory = FakeFeatureFactory.setupForTest();
+        mMetricsFeatureProvider = fakeFeatureFactory.metricsFeatureProvider;
 
         mFragment = spy(new PowerBackgroundUsageDetail());
+        mFragment.mLogStringBuilder = new StringBuilder();
         doReturn(mContext).when(mFragment).getContext();
         doReturn(mActivity).when(mFragment).getActivity();
         doReturn(SUMMARY).when(mFragment).getString(anyInt());
@@ -156,7 +172,6 @@ public class PowerBackgroundUsageDetailTest {
         mFragment.mHeaderPreference = mHeaderPreference;
         mFragment.mState = mState;
         mFragment.mBatteryOptimizeUtils = mBatteryOptimizeUtils;
-        mFragment.mBackupManager = mBackupManager;
         mAppEntry.info = mock(ApplicationInfo.class);
 
         mTestActivity = spy(new SettingsActivity());
@@ -284,5 +299,50 @@ public class PowerBackgroundUsageDetailTest {
         verify(mOptimizePreference).setChecked(true);
         assertThat(mFragment.getSelectedPreference()).isEqualTo(optimizedMode);
         verify(mBatteryOptimizeUtils).setAppUsageState(optimizedMode, Action.APPLY);
+    }
+
+    @Test
+    public void onPause_optimizationModeChanged_logPreference() throws Exception {
+        final String packageName = "testPackageName";
+        final int restrictedMode = BatteryOptimizeUtils.MODE_RESTRICTED;
+        final int optimizedMode = BatteryOptimizeUtils.MODE_OPTIMIZED;
+        mFragment.mOptimizationMode = restrictedMode;
+        when(mBatteryOptimizeUtils.getPackageName()).thenReturn(packageName);
+        when(mInstallSourceInfo.getInitiatingPackageName()).thenReturn("com.android.vending");
+
+        mFragment.onCheckedChanged(mMockSwitch, /* isChecked= */ true);
+        verify(mBatteryOptimizeUtils).setAppUsageState(optimizedMode, Action.APPLY);
+        when(mBatteryOptimizeUtils.getAppOptimizationMode()).thenReturn(optimizedMode);
+        mFragment.onPause();
+
+        TimeUnit.SECONDS.sleep(1);
+        verify(mMetricsFeatureProvider)
+                .action(
+                        SettingsEnums.LEAVE_POWER_USAGE_MANAGE_BACKGROUND,
+                        SettingsEnums.ACTION_APP_BATTERY_USAGE_OPTIMIZED,
+                        SettingsEnums.FUELGAUGE_POWER_USAGE_MANAGE_BACKGROUND,
+                        packageName,
+                        /* consumed battery */ 0);
+    }
+
+    @Test
+    public void onPause_optimizationModeIsNotChanged_notInvokeLogging() throws Exception {
+        final String packageName = "testPackageName";
+        final int restrictedMode = BatteryOptimizeUtils.MODE_RESTRICTED;
+        final int optimizedMode = BatteryOptimizeUtils.MODE_OPTIMIZED;
+        mFragment.mOptimizationMode = restrictedMode;
+        when(mBatteryOptimizeUtils.getPackageName()).thenReturn(packageName);
+        when(mInstallSourceInfo.getInitiatingPackageName()).thenReturn("com.android.vending");
+
+        mFragment.onCheckedChanged(mMockSwitch, /* isChecked= */ true);
+        verify(mBatteryOptimizeUtils).setAppUsageState(optimizedMode, Action.APPLY);
+        when(mBatteryOptimizeUtils.getAppOptimizationMode()).thenReturn(optimizedMode);
+        mFragment.onCheckedChanged(mMockSwitch, /* isChecked= */ false);
+        verify(mBatteryOptimizeUtils).setAppUsageState(restrictedMode, Action.APPLY);
+        when(mBatteryOptimizeUtils.getAppOptimizationMode()).thenReturn(restrictedMode);
+        mFragment.onPause();
+
+        TimeUnit.SECONDS.sleep(1);
+        verifyNoInteractions(mMetricsFeatureProvider);
     }
 }

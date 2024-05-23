@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022 The Android Open Source Project
+ * Copyright (C) 2024 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,10 +17,11 @@
 package com.android.settings.testutils
 
 import android.content.Context
-import org.mockito.Mockito.any
-import org.mockito.Mockito.doReturn
-import org.mockito.Mockito.eq
+import org.mockito.kotlin.any
+import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.eq
+import org.mockito.kotlin.whenever
 
 fun Context.mockAsUser() {
-    doReturn(this).`when`(this).createContextAsUser(any(), eq(0))
+    doReturn(this).whenever(this).createContextAsUser(any(), eq(0))
 }

@@ -29,6 +29,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.applications.ProcessStatsSummary;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
 public class DisableDevSettingsDialogFragment extends InstrumentedDialogFragment
@@ -42,7 +44,7 @@ public class DisableDevSettingsDialogFragment extends InstrumentedDialogFragment
         return dialog;
     }
 
-    public static void show(DevelopmentSettingsDashboardFragment host) {
+    public static void show(SettingsPreferenceFragment host) {
         final DisableDevSettingsDialogFragment dialog = new DisableDevSettingsDialogFragment();
         dialog.setTargetFragment(host, 0 /* requestCode */);
         // We need to handle data changes and switch state based on which button user clicks,
@@ -75,18 +77,31 @@ public class DisableDevSettingsDialogFragment extends InstrumentedDialogFragment
     @Override
     public void onClick(DialogInterface dialog, int which) {
         Fragment fragment = getTargetFragment();
-        if (!(fragment instanceof DevelopmentSettingsDashboardFragment)){
+        if (!(fragment instanceof DevelopmentSettingsDashboardFragment)
+                && !(fragment instanceof ProcessStatsSummary)) {
             Log.e(TAG, "getTargetFragment return unexpected type");
         }
 
-        final DevelopmentSettingsDashboardFragment host =
-                (DevelopmentSettingsDashboardFragment) fragment;
-        if (which == DialogInterface.BUTTON_POSITIVE) {
-            host.onDisableDevelopmentOptionsConfirmed();
-            PowerManager pm = getContext().getSystemService(PowerManager.class);
-            pm.reboot(null);
-        } else {
-            host.onDisableDevelopmentOptionsRejected();
+        if (fragment instanceof DevelopmentSettingsDashboardFragment) {
+            final DevelopmentSettingsDashboardFragment host =
+                    (DevelopmentSettingsDashboardFragment) fragment;
+            if (which == DialogInterface.BUTTON_POSITIVE) {
+                host.onDisableDevelopmentOptionsConfirmed();
+                PowerManager pm = getContext().getSystemService(PowerManager.class);
+                pm.reboot(null);
+            } else {
+                host.onDisableDevelopmentOptionsRejected();
+            }
+        } else if (fragment instanceof ProcessStatsSummary) {
+            final ProcessStatsSummary host =
+                    (ProcessStatsSummary) fragment;
+            if (which == DialogInterface.BUTTON_POSITIVE) {
+                host.onRebootDialogConfirmed();
+                PowerManager pm = getContext().getSystemService(PowerManager.class);
+                pm.reboot(null);
+            } else {
+                host.onRebootDialogCanceled();
+            }
         }
     }
 }

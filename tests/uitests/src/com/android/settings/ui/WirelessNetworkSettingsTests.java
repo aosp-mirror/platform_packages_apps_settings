@@ -17,6 +17,7 @@
 package com.android.settings.ui;
 
 import static com.android.settings.ui.testutils.SettingsTestUtils.SETTINGS_PACKAGE;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
@@ -26,10 +27,10 @@ import android.platform.test.annotations.Presubmit;
 import android.provider.Settings;
 import android.system.helpers.CommandsHelper;
 import android.system.helpers.SettingsHelper;
-import android.test.suitebuilder.annotation.MediumTest;
 import android.util.Log;
 
 import androidx.test.InstrumentationRegistry;
+import androidx.test.filters.MediumTest;
 import androidx.test.runner.AndroidJUnit4;
 import androidx.test.uiautomator.By;
 import androidx.test.uiautomator.UiDevice;

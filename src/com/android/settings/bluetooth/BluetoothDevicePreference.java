@@ -156,7 +156,7 @@ public final class BluetoothDevicePreference extends GearPreference {
         return R.layout.preference_widget_gear;
     }
 
-    CachedBluetoothDevice getCachedDevice() {
+    public CachedBluetoothDevice getCachedDevice() {
         return mCachedDevice;
     }
 
@@ -362,7 +362,11 @@ public final class BluetoothDevicePreference extends GearPreference {
         }
     }
 
-    void onClicked() {
+    /**
+     * Performs different actions according to the device connected and bonded state after
+     * clicking on the preference.
+     */
+    public void onClicked() {
         Context context = getContext();
         int bondState = mCachedDevice.getBondState();
 

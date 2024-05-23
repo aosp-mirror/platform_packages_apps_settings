@@ -105,8 +105,13 @@ public class NewKeyboardLayoutEnabledLocalesFragment extends DashboardFragment
     public void onActivityCreated(final Bundle icicle) {
         super.onActivityCreated(icicle);
         Bundle arguments = getArguments();
+        if (arguments == null) {
+            Log.e(TAG, "Arguments should not be null");
+            return;
+        }
         mInputDeviceIdentifier =
-                arguments.getParcelable(NewKeyboardSettingsUtils.EXTRA_INPUT_DEVICE_IDENTIFIER);
+                arguments.getParcelable(NewKeyboardSettingsUtils.EXTRA_INPUT_DEVICE_IDENTIFIER,
+                        InputDeviceIdentifier.class);
         if (mInputDeviceIdentifier == null) {
             Log.e(TAG, "The inputDeviceIdentifier should not be null");
             return;
@@ -128,6 +133,7 @@ public class NewKeyboardLayoutEnabledLocalesFragment extends DashboardFragment
         InputDevice inputDevice =
                 NewKeyboardSettingsUtils.getInputDevice(mIm, mInputDeviceIdentifier);
         if (inputDevice == null) {
+            Log.e(TAG, "Unable to start: input device is null");
             getActivity().finish();
             return;
         }

@@ -19,12 +19,13 @@ package com.android.settings.accessibility;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
-import android.annotation.NonNull;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -33,6 +34,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.os.Bundle;
+import android.platform.test.annotations.RequiresFlagsDisabled;
 import android.platform.test.annotations.RequiresFlagsEnabled;
 import android.platform.test.flag.junit.CheckFlagsRule;
 import android.platform.test.flag.junit.DeviceFlagsValueProvider;
@@ -40,12 +42,15 @@ import android.service.quicksettings.TileService;
 import android.view.accessibility.AccessibilityManager;
 import android.view.accessibility.Flags;
 
+import androidx.annotation.NonNull;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
+import com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragment;
 import com.android.settings.widget.SettingsMainSwitchPreference;
 
 import org.junit.Before;
@@ -53,6 +58,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
@@ -298,7 +304,9 @@ public class ToggleAccessibilityServicePreferenceFragmentTest {
 
     @Test
     @RequiresFlagsEnabled(Flags.FLAG_CLEANUP_ACCESSIBILITY_WARNING_DIALOG)
-    public void clickShortcutSettingsPreference_warningNotRequired_dontShowWarning()
+    @RequiresFlagsDisabled(
+            com.android.settings.accessibility.Flags.FLAG_EDIT_SHORTCUTS_IN_FULL_SCREEN)
+    public void clickShortcutSettingsPreference_warningNotRequired_dontShowWarning_showDialog()
             throws Throwable {
         setupServiceWarningRequired(false);
         mFragment.mShortcutPreference = new ShortcutPreference(mContext, /* attrs= */null);
@@ -307,6 +315,23 @@ public class ToggleAccessibilityServicePreferenceFragmentTest {
 
         assertThat(mFragment.mLastShownDialogId).isEqualTo(
                 AccessibilityDialogUtils.DialogEnums.EDIT_SHORTCUT);
+    }
+
+    @Test
+    @RequiresFlagsEnabled({Flags.FLAG_CLEANUP_ACCESSIBILITY_WARNING_DIALOG,
+            com.android.settings.accessibility.Flags.FLAG_EDIT_SHORTCUTS_IN_FULL_SCREEN})
+    public void clickShortcutSettingsPreference_warningNotRequired_dontShowWarning_launchActivity()
+            throws Throwable {
+        setupServiceWarningRequired(false);
+        mFragment.mShortcutPreference = new ShortcutPreference(mContext, /* attrs= */null);
+        doNothing().when(mContext).startActivity(any());
+
+        mFragment.onSettingsClicked(mFragment.mShortcutPreference);
+
+        ArgumentCaptor<Intent> captor = ArgumentCaptor.forClass(Intent.class);
+        verify(mContext).startActivity(captor.capture());
+        assertThat(captor.getValue().getExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT))
+                .isEqualTo(EditShortcutsPreferenceFragment.class.getName());
     }
 
     private void setupTileService(String packageName, String name, String tileName) {

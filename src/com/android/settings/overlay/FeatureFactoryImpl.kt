@@ -34,6 +34,8 @@ import com.android.settings.biometrics.fingerprint.FingerprintFeatureProviderImp
 import com.android.settings.biometrics2.factory.BiometricsRepositoryProviderImpl
 import com.android.settings.bluetooth.BluetoothFeatureProvider
 import com.android.settings.bluetooth.BluetoothFeatureProviderImpl
+import com.android.settings.connecteddevice.audiosharing.AudioSharingFeatureProvider
+import com.android.settings.connecteddevice.audiosharing.AudioSharingFeatureProviderImpl
 import com.android.settings.connecteddevice.dock.DockUpdaterFeatureProviderImpl
 import com.android.settings.connecteddevice.fastpair.FastPairFeatureProvider
 import com.android.settings.connecteddevice.fastpair.FastPairFeatureProviderImpl
@@ -45,6 +47,8 @@ import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProviderImpl
 import com.android.settings.deviceinfo.hardwareinfo.HardwareInfoFeatureProvider
 import com.android.settings.deviceinfo.hardwareinfo.HardwareInfoFeatureProviderImpl
+import com.android.settings.display.DisplayFeatureProvider
+import com.android.settings.display.DisplayFeatureProviderImpl
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProviderImpl
 import com.android.settings.fuelgauge.BatterySettingsFeatureProviderImpl
 import com.android.settings.fuelgauge.BatteryStatusFeatureProviderImpl
@@ -189,5 +193,13 @@ open class FeatureFactoryImpl : FeatureFactory() {
 
     override val privateSpaceLoginFeatureProvider: PrivateSpaceLoginFeatureProvider by lazy {
         PrivateSpaceLoginFeatureProviderImpl()
+    }
+
+    override val displayFeatureProvider: DisplayFeatureProvider by lazy {
+        DisplayFeatureProviderImpl()
+    }
+
+    override val audioSharingFeatureProvider: AudioSharingFeatureProvider by lazy {
+        AudioSharingFeatureProviderImpl()
     }
 }

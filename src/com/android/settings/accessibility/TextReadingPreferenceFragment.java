@@ -117,6 +117,11 @@ public class TextReadingPreferenceFragment extends DashboardFragment {
                 }
             }
         }
+
+        if (Flags.enableColorContrastControl()) {
+            // High text contrast toggle will be added inside Color Contrast page on V+.
+            removePreference(HIGH_TEXT_CONTRAST_KEY);
+        }
     }
 
     @Override
@@ -203,10 +208,12 @@ public class TextReadingPreferenceFragment extends DashboardFragment {
         mFontWeightAdjustmentController.setEntryPoint(mEntryPoint);
         controllers.add(mFontWeightAdjustmentController);
 
-        final HighTextContrastPreferenceController highTextContrastController =
-                new HighTextContrastPreferenceController(context, HIGH_TEXT_CONTRAST_KEY);
-        highTextContrastController.setEntryPoint(mEntryPoint);
-        controllers.add(highTextContrastController);
+        if (!Flags.enableColorContrastControl()) {
+            final HighTextContrastPreferenceController highTextContrastController =
+                    new HighTextContrastPreferenceController(context, HIGH_TEXT_CONTRAST_KEY);
+            highTextContrastController.setEntryPoint(mEntryPoint);
+            controllers.add(highTextContrastController);
+        }
 
         final TextReadingResetController resetController =
                 new TextReadingResetController(context, RESET_KEY,

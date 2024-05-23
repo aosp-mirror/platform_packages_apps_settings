@@ -13,7 +13,7 @@
  */
 package com.android.settings.datausage;
 
-import static com.android.settingslib.RestrictedLockUtilsInternal.checkIfMeteredDataRestricted;
+import static com.android.settingslib.RestrictedLockUtilsInternal.checkIfMeteredDataUsageUserControlDisabled;
 
 import android.app.Application;
 import android.app.settings.SettingsEnums;
@@ -149,8 +149,9 @@ public class UnrestrictedDataAccessPreferenceController extends BasePreferenceCo
                 preference.setOnPreferenceChangeListener(this);
                 mScreen.addPreference(preference);
             } else {
-                preference.setDisabledByAdmin(checkIfMeteredDataRestricted(mContext,
+                preference.setDisabledByAdmin(checkIfMeteredDataUsageUserControlDisabled(mContext,
                         entry.info.packageName, UserHandle.getUserId(entry.info.uid)));
+                preference.checkEcmRestrictionAndSetDisabled(entry.info.packageName);
                 preference.updateState();
             }
             preference.setOrder(i);

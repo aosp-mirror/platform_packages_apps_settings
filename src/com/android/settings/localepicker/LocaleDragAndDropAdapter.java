@@ -270,12 +270,14 @@ class LocaleDragAndDropAdapter
     void removeChecked() {
         int itemCount = mFeedItemList.size();
         LocaleStore.LocaleInfo localeInfo;
+        NotificationController controller = NotificationController.getInstance(mContext);
         for (int i = itemCount - 1; i >= 0; i--) {
             localeInfo = mFeedItemList.get(i);
             if (localeInfo.getChecked()) {
                 FeatureFactory.getFeatureFactory().getMetricsFeatureProvider()
                         .action(mContext, SettingsEnums.ACTION_REMOVE_LANGUAGE);
                 mFeedItemList.remove(i);
+                controller.removeNotificationInfo(localeInfo.getLocale().toLanguageTag());
             }
         }
         notifyDataSetChanged();

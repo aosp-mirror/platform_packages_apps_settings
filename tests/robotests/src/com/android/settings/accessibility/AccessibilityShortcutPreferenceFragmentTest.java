@@ -110,7 +110,7 @@ public class AccessibilityShortcutPreferenceFragmentTest {
         mFragment.updateShortcutPreferenceData();
 
         final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
-                mFragment.getComponentName().flattenToString(), UserShortcutType.SOFTWARE);
+                mFragment.getComponentName().flattenToString());
         // Compare to default UserShortcutType
         assertThat(expectedType).isEqualTo(UserShortcutType.SOFTWARE);
     }
@@ -123,7 +123,7 @@ public class AccessibilityShortcutPreferenceFragmentTest {
         mFragment.updateShortcutPreferenceData();
 
         final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
-                mFragment.getComponentName().flattenToString(), UserShortcutType.SOFTWARE);
+                mFragment.getComponentName().flattenToString());
         assertThat(expectedType).isEqualTo(UserShortcutType.SOFTWARE | UserShortcutType.HARDWARE);
     }
 
@@ -136,7 +136,7 @@ public class AccessibilityShortcutPreferenceFragmentTest {
         mFragment.updateShortcutPreferenceData();
 
         final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
-                mFragment.getComponentName().flattenToString(), UserShortcutType.SOFTWARE);
+                mFragment.getComponentName().flattenToString());
         assertThat(expectedType).isEqualTo(UserShortcutType.HARDWARE);
     }
 
@@ -201,7 +201,7 @@ public class AccessibilityShortcutPreferenceFragmentTest {
         mFragment.saveNonEmptyUserShortcutType(value);
 
         final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
-                mFragment.getComponentName().flattenToString(), UserShortcutType.SOFTWARE);
+                mFragment.getComponentName().flattenToString());
         assertThat(expectedType).isEqualTo(UserShortcutType.SOFTWARE | UserShortcutType.HARDWARE);
     }
 

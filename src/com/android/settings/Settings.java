@@ -57,7 +57,9 @@ public class Settings extends SettingsActivity {
     public static class CombinedBiometricProfileSettingsActivity extends SettingsActivity { /* empty */ }
     public static class TetherSettingsActivity extends SettingsActivity { /* empty */ }
     public static class WifiTetherSettingsActivity extends SettingsActivity { /* empty */ }
-
+    public static class PrivateSpaceBiometricSettingsActivity extends SettingsActivity {
+        /* empty */
+    }
     public static class VpnSettingsActivity extends SettingsActivity { /* empty */ }
     /** Activity for Data saver settings. */
     public static class DataSaverSummaryActivity extends SettingsActivity { /* empty */ }
@@ -100,6 +102,7 @@ public class Settings extends SettingsActivity {
     public static class DevelopmentSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AccessibilitySettingsActivity extends SettingsActivity { /* empty */ }
     public static class AccessibilityDetailsSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class AccessibilityEditShortcutsActivity extends SettingsActivity { /* empty */ }
     public static class CaptioningSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AccessibilityInversionSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AccessibilityContrastSettingsActivity extends SettingsActivity { /* empty */ }
@@ -114,6 +117,8 @@ public class Settings extends SettingsActivity {
     public static class TextReadingSettingsActivity extends SettingsActivity { /* empty */ }
     /** Activity for text color and motion settings. */
     public static class ColorAndMotionActivity extends SettingsActivity { /* empty */ }
+    /** Activity for color contrast settings. */
+    public static class ColorContrastActivity extends SettingsActivity { /* empty */ }
     /** Activity for the security dashboard. */
     public static class SecurityDashboardActivity extends SettingsActivity {
 
@@ -343,6 +348,7 @@ public class Settings extends SettingsActivity {
         /* empty */
     }
 
+    public static class SatelliteSettingActivity extends SettingsActivity { /* empty */ }
     public static class ApnSettingsActivity extends SettingsActivity { /* empty */ }
     public static class WifiCallingSettingsActivity extends SettingsActivity { /* empty */ }
     public static class MemorySettingsActivity extends SettingsActivity { /* empty */ }
@@ -480,4 +486,7 @@ public class Settings extends SettingsActivity {
     public static class PreviouslyConnectedDeviceActivity extends SettingsActivity { /* empty */ }
 
     public static class ScreenTimeoutActivity extends SettingsActivity { /* empty */ }
+
+    /** Activity for the Reset mobile network settings. */
+    public static class ResetMobileNetworkSettingsActivity extends SettingsActivity { /* empty */ }
 }

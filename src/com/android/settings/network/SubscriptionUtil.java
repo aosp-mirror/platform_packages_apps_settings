@@ -17,14 +17,15 @@
 package com.android.settings.network;
 
 import static android.telephony.SubscriptionManager.INVALID_SIM_SLOT_INDEX;
-import static android.telephony.UiccSlotInfo.CARD_STATE_INFO_PRESENT;
 import static android.telephony.SubscriptionManager.PROFILE_CLASS_PROVISIONING;
+import static android.telephony.UiccSlotInfo.CARD_STATE_INFO_PRESENT;
 
 import static com.android.internal.util.CollectionUtils.emptyIfNull;
 
-import android.annotation.Nullable;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkCapabilities;
 import android.os.ParcelUuid;
 import android.provider.Settings;
 import android.telephony.PhoneNumberUtils;
@@ -39,17 +40,20 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.telephony.MccTable;
-import com.android.internal.telephony.flags.Flags;
 import com.android.settings.R;
+import com.android.settings.flags.Flags;
 import com.android.settings.network.helper.SelectableSubscriptions;
 import com.android.settings.network.helper.SubscriptionAnnotation;
 import com.android.settings.network.telephony.DeleteEuiccSubscriptionDialogActivity;
+import com.android.settings.network.telephony.EuiccRacConnectivityDialogActivity;
 import com.android.settings.network.telephony.ToggleSubscriptionDialogActivity;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -335,8 +339,16 @@ public class SubscriptionUtil {
 
             if (duplicateOriginalNames.contains(info.originalName)) {
                 // This may return null, if the user cannot view the phone number itself.
-                final String phoneNumber = getBidiFormattedPhoneNumber(context,
-                        info.subscriptionInfo);
+                String phoneNumber = "";
+                try {
+                    final SubscriptionManager subscriptionManager = context.getSystemService(
+                        SubscriptionManager.class);
+                    phoneNumber = subscriptionManager.getPhoneNumber(infoSubId);
+                } catch (IllegalStateException
+                        | SecurityException
+                        | UnsupportedOperationException e) {
+                    Log.w(TAG, "get number error." + e);
+                }
                 String lastFourDigits = "";
                 if (phoneNumber != null) {
                     lastFourDigits = (phoneNumber.length() > 4)
@@ -535,6 +547,10 @@ public class SubscriptionUtil {
             Log.i(TAG, "Unable to toggle subscription due to invalid subscription ID.");
             return;
         }
+        if (enable && Flags.isDualSimOnboardingEnabled()) {
+            SimOnboardingActivity.startSimOnboardingActivity(context, subId);
+            return;
+        }
         context.startActivity(ToggleSubscriptionDialogActivity.getIntent(context, subId, enable));
     }
 
@@ -543,12 +559,21 @@ public class SubscriptionUtil {
      * @param context {@code Context}
      * @param subId The id of subscription need to be deleted.
      */
-    public static void startDeleteEuiccSubscriptionDialogActivity(Context context, int subId) {
+    public static void startDeleteEuiccSubscriptionDialogActivity(Context context, int subId,
+            int carrierId) {
         if (!SubscriptionManager.isUsableSubscriptionId(subId)) {
             Log.i(TAG, "Unable to delete subscription due to invalid subscription ID.");
             return;
         }
-        context.startActivity(DeleteEuiccSubscriptionDialogActivity.getIntent(context, subId));
+        final int[] carriersThatUseRAC = context.getResources().getIntArray(
+                R.array.config_carrier_use_rac);
+        boolean isCarrierRac = Arrays.stream(carriersThatUseRAC).anyMatch(cid -> cid == carrierId);
+
+        if (isCarrierRac && !isConnectedToWifiOrDifferentSubId(context, subId)) {
+            context.startActivity(EuiccRacConnectivityDialogActivity.getIntent(context, subId));
+        } else {
+            context.startActivity(DeleteEuiccSubscriptionDialogActivity.getIntent(context, subId));
+        }
     }
 
     /**
@@ -814,10 +839,35 @@ public class SubscriptionUtil {
     private static boolean isEmbeddedSubscriptionVisible(@NonNull SubscriptionInfo subInfo) {
         if (subInfo.isEmbedded()
                 && (subInfo.getProfileClass() == PROFILE_CLASS_PROVISIONING
-                || (Flags.oemEnabledSatelliteFlag()
+                || (com.android.internal.telephony.flags.Flags.oemEnabledSatelliteFlag()
                 && subInfo.isOnlyNonTerrestrialNetwork()))) {
             return false;
         }
         return true;
+    }
+
+    /**
+     * Returns {@code true} if device is connected to Wi-Fi or mobile data provided by a different
+     * subId.
+     *
+     * @param context context
+     * @param targetSubId subscription that is going to be deleted
+     */
+    @VisibleForTesting
+    static boolean isConnectedToWifiOrDifferentSubId(@NonNull Context context, int targetSubId) {
+        ConnectivityManager connectivityManager =
+                context.getSystemService(ConnectivityManager.class);
+        NetworkCapabilities capabilities =
+                connectivityManager.getNetworkCapabilities(connectivityManager.getActiveNetwork());
+
+        if (capabilities != null) {
+            if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+                // Connected to WiFi
+                return true;
+            } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
+                return targetSubId != SubscriptionManager.getActiveDataSubscriptionId();
+            }
+        }
+        return false;
     }
 }

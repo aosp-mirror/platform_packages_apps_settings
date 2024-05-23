@@ -16,13 +16,13 @@
 
 package com.android.settings.development;
 
-import android.annotation.Nullable;
 import android.content.Context;
 import android.hardware.dumpstate.V1_0.IDumpstateDevice;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.TwoStatePreference;

@@ -25,9 +25,12 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
+import android.app.settings.SettingsEnums;
 import android.content.Intent;
 
 import androidx.activity.result.ActivityResultLauncher;
+
+import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -42,6 +45,7 @@ import org.robolectric.android.controller.ActivityController;
 public class NotificationActionActivityTest {
     private NotificationActionActivity mNotificationActivity;
     private ActivityController<NotificationActionActivity> mActivityController;
+    private FakeFeatureFactory mFeatureFactory;
     @Mock
     private NotificationController mNotificationController;
     @Mock
@@ -50,6 +54,7 @@ public class NotificationActionActivityTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
     }
 
     @Test
@@ -70,6 +75,8 @@ public class NotificationActionActivityTest {
         mNotificationActivity.onCreate(null);
 
         verify(mLauncher).launch(any(Intent.class));
+        verify(mFeatureFactory.metricsFeatureProvider).action(
+                any(), eq(SettingsEnums.ACTION_NOTIFICATION_CLICK_FOR_SYSTEM_LOCALE));
         verify(mNotificationActivity).finish();
     }
 }

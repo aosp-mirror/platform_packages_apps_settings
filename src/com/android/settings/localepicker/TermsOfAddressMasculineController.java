@@ -35,7 +35,7 @@ public class TermsOfAddressMasculineController extends TermsOfAddressBaseControl
 
     @Override
     protected int getMetricsActionKey() {
-        return SettingsEnums.ACTION_TERMS_OF_ADDRESS_MASCULINE;
+        return SettingsEnums.ACTION_TERMS_OF_ADDRESS_SPECIFIED;
     }
 
     @Override

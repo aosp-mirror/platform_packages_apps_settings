@@ -16,7 +16,6 @@
 package com.android.settings.bluetooth;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
@@ -25,36 +24,26 @@ import static org.mockito.Mockito.when;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothLeBroadcastReceiveState;
 import android.bluetooth.BluetoothProfile;
-import android.bluetooth.BluetoothStatusCodes;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
-import android.platform.test.annotations.RequiresFlagsDisabled;
-import android.platform.test.annotations.RequiresFlagsEnabled;
-import android.platform.test.flag.junit.CheckFlagsRule;
-import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.util.Pair;
 
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
+import com.android.settings.connecteddevice.audiosharing.AudioSharingFeatureProvider;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.flags.Flags;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowAudioManager;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
-import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast;
-import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
-import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -75,9 +64,6 @@ import java.util.Collection;
             ShadowBluetoothUtils.class
         })
 public class AvailableMediaBluetoothDeviceUpdaterTest {
-    @Rule
-    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
-
     private static final String MAC_ADDRESS = "04:52:C7:0B:D8:3C";
 
     @Mock private DashboardFragment mDashboardFragment;
@@ -86,11 +72,7 @@ public class AvailableMediaBluetoothDeviceUpdaterTest {
     @Mock private BluetoothDevice mBluetoothDevice;
     @Mock private Drawable mDrawable;
     @Mock private LocalBluetoothManager mLocalBtManager;
-    @Mock private LocalBluetoothProfileManager mLocalBtProfileManager;
     @Mock private CachedBluetoothDeviceManager mCachedDeviceManager;
-    @Mock private LocalBluetoothLeBroadcast mBroadcast;
-    @Mock private LocalBluetoothLeBroadcastAssistant mAssistant;
-    @Mock private BluetoothLeBroadcastReceiveState mBroadcastReceiveState;
 
     private Context mContext;
     private AvailableMediaBluetoothDeviceUpdater mBluetoothDeviceUpdater;
@@ -98,12 +80,14 @@ public class AvailableMediaBluetoothDeviceUpdaterTest {
     private AudioManager mAudioManager;
     private BluetoothDevicePreference mPreference;
     private ShadowBluetoothAdapter mShadowBluetoothAdapter;
+    private AudioSharingFeatureProvider mFeatureProvider;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
         mContext = RuntimeEnvironment.application;
+        mFeatureProvider = FakeFeatureFactory.setupForTest().getAudioSharingFeatureProvider();
         mAudioManager = mContext.getSystemService(AudioManager.class);
         ShadowBluetoothUtils.sLocalBluetoothManager = mLocalBtManager;
         mLocalBtManager = Utils.getLocalBtManager(mContext);
@@ -267,13 +251,15 @@ public class AvailableMediaBluetoothDeviceUpdaterTest {
     }
 
     @Test
-    @RequiresFlagsDisabled(Flags.FLAG_ENABLE_LE_AUDIO_SHARING)
-    public void onProfileConnectionStateChanged_leAudioDeviceConnected_notInCall_addsPreference() {
-        setUpBroadcast(/* isSupported= */ false, /* isBroadcasting= */ false);
+    public void
+            onProfileConnectionStateChanged_leaDeviceConnected_notInCallNoSharing_addsPreference() {
         mAudioManager.setMode(AudioManager.MODE_NORMAL);
         when(mBluetoothDeviceUpdater.isDeviceConnected(any(CachedBluetoothDevice.class)))
                 .thenReturn(true);
         when(mCachedBluetoothDevice.isConnectedLeAudioDevice()).thenReturn(true);
+        when(mFeatureProvider.isAudioSharingFilterMatched(
+                        any(CachedBluetoothDevice.class), any(LocalBluetoothManager.class)))
+                .thenReturn(false);
 
         mBluetoothDeviceUpdater.onProfileConnectionStateChanged(
                 mCachedBluetoothDevice,
@@ -284,13 +270,15 @@ public class AvailableMediaBluetoothDeviceUpdaterTest {
     }
 
     @Test
-    @RequiresFlagsDisabled(Flags.FLAG_ENABLE_LE_AUDIO_SHARING)
-    public void onProfileConnectionStateChanged_leAudioDeviceConnected_inCall_addsPreference() {
-        setUpBroadcast(/* isSupported= */ false, /* isBroadcasting= */ false);
+    public void
+            onProfileConnectionStateChanged_leaDeviceConnected_inCallNoSharing_addsPreference() {
         mAudioManager.setMode(AudioManager.MODE_IN_CALL);
         when(mBluetoothDeviceUpdater.isDeviceConnected(any(CachedBluetoothDevice.class)))
                 .thenReturn(true);
         when(mCachedBluetoothDevice.isConnectedLeAudioDevice()).thenReturn(true);
+        when(mFeatureProvider.isAudioSharingFilterMatched(
+                        any(CachedBluetoothDevice.class), any(LocalBluetoothManager.class)))
+                .thenReturn(false);
 
         mBluetoothDeviceUpdater.onProfileConnectionStateChanged(
                 mCachedBluetoothDevice,
@@ -301,50 +289,16 @@ public class AvailableMediaBluetoothDeviceUpdaterTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_ENABLE_LE_AUDIO_SHARING)
     public void
-            onProfileConnectionStateChanged_leaDeviceConnected_notInCall_notInBroadcast_addsPref() {
-        setUpBroadcast(/* isSupported= */ true, /* isBroadcasting= */ false);
+            onProfileConnectionStateChanged_leaDeviceConnected_notInCallInSharing_removesPref() {
         mAudioManager.setMode(AudioManager.MODE_NORMAL);
         when(mBluetoothDeviceUpdater.isDeviceConnected(any(CachedBluetoothDevice.class)))
                 .thenReturn(true);
         when(mCachedBluetoothDevice.isConnectedLeAudioDevice()).thenReturn(true);
-
-        mBluetoothDeviceUpdater.onProfileConnectionStateChanged(
-                mCachedBluetoothDevice,
-                BluetoothProfile.STATE_CONNECTED,
-                BluetoothProfile.LE_AUDIO);
-
-        verify(mBluetoothDeviceUpdater).addPreference(mCachedBluetoothDevice);
-    }
-
-    @Test
-    @RequiresFlagsEnabled(Flags.FLAG_ENABLE_LE_AUDIO_SHARING)
-    public void
-            onProfileConnectionStateChanged_leaDeviceConnected_inCall_notInBroadcast_addsPref() {
-        setUpBroadcast(/* isSupported= */ true, /* isBroadcasting= */ false);
-        mAudioManager.setMode(AudioManager.MODE_IN_CALL);
-        when(mBluetoothDeviceUpdater.isDeviceConnected(any(CachedBluetoothDevice.class)))
+        when(mCachedBluetoothDevice.isConnectedA2dpDevice()).thenReturn(true);
+        when(mFeatureProvider.isAudioSharingFilterMatched(
+                        any(CachedBluetoothDevice.class), any(LocalBluetoothManager.class)))
                 .thenReturn(true);
-        when(mCachedBluetoothDevice.isConnectedLeAudioDevice()).thenReturn(true);
-
-        mBluetoothDeviceUpdater.onProfileConnectionStateChanged(
-                mCachedBluetoothDevice,
-                BluetoothProfile.STATE_CONNECTED,
-                BluetoothProfile.LE_AUDIO);
-
-        verify(mBluetoothDeviceUpdater).addPreference(mCachedBluetoothDevice);
-    }
-
-    @Test
-    @RequiresFlagsEnabled(Flags.FLAG_ENABLE_LE_AUDIO_SHARING)
-    public void
-            onProfileConnectionStateChanged_leaDeviceConnected_notInCall_inBroadcast_removesPref() {
-        setUpBroadcast(/* isSupported= */ true, /* isBroadcasting= */ true);
-        mAudioManager.setMode(AudioManager.MODE_NORMAL);
-        when(mBluetoothDeviceUpdater.isDeviceConnected(any(CachedBluetoothDevice.class)))
-                .thenReturn(true);
-        when(mCachedBluetoothDevice.isConnectedLeAudioDevice()).thenReturn(true);
 
         mBluetoothDeviceUpdater.onProfileConnectionStateChanged(
                 mCachedBluetoothDevice,
@@ -355,14 +309,15 @@ public class AvailableMediaBluetoothDeviceUpdaterTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_ENABLE_LE_AUDIO_SHARING)
-    public void
-            onProfileConnectionStateChanged_leaDeviceConnected_inCall_inBroadcast_removesPref() {
-        setUpBroadcast(/* isSupported= */ true, /* isBroadcasting= */ true);
-        mAudioManager.setMode(AudioManager.MODE_IN_CALL);
+    public void onProfileConnectionStateChanged_leaDeviceConnected_inCallInSharing_removesPref() {
+        mAudioManager.setMode(AudioManager.MODE_NORMAL);
         when(mBluetoothDeviceUpdater.isDeviceConnected(any(CachedBluetoothDevice.class)))
                 .thenReturn(true);
         when(mCachedBluetoothDevice.isConnectedLeAudioDevice()).thenReturn(true);
+        when(mCachedBluetoothDevice.isConnectedHfpDevice()).thenReturn(true);
+        when(mFeatureProvider.isAudioSharingFilterMatched(
+                        any(CachedBluetoothDevice.class), any(LocalBluetoothManager.class)))
+                .thenReturn(true);
 
         mBluetoothDeviceUpdater.onProfileConnectionStateChanged(
                 mCachedBluetoothDevice,
@@ -414,56 +369,9 @@ public class AvailableMediaBluetoothDeviceUpdaterTest {
     }
 
     @Test
-    @RequiresFlagsDisabled(Flags.FLAG_ENABLE_LE_AUDIO_SHARING)
     public void onClick_Preference_setActive() {
-        setUpBroadcast(/* isSupported= */ false, /* isBroadcasting= */ false);
         mBluetoothDeviceUpdater.onPreferenceClick(mPreference);
 
         verify(mCachedBluetoothDevice).setActive();
-    }
-
-    @Test
-    @RequiresFlagsEnabled(Flags.FLAG_ENABLE_LE_AUDIO_SHARING)
-    public void onClick_Preference_isNotBroadcasting_setActive() {
-        setUpBroadcast(/* isSupported= */ true, /* isBroadcasting= */ false);
-        mBluetoothDeviceUpdater.onPreferenceClick(mPreference);
-
-        verify(mCachedBluetoothDevice).setActive();
-    }
-
-    @Test
-    @RequiresFlagsEnabled(Flags.FLAG_ENABLE_LE_AUDIO_SHARING)
-    public void onClick_Preference_isBroadcasting_stopBroadcastingAndSetActive() {
-        setUpBroadcast(/* isSupported= */ true, /* isBroadcasting= */ true);
-        doNothing().when(mBroadcast).stopBroadcast(anyInt());
-        mBluetoothDeviceUpdater.onPreferenceClick(mPreference);
-
-        verify(mBroadcast).stopBroadcast(anyInt());
-        verify(mCachedBluetoothDevice).setActive();
-    }
-
-    private void setUpBroadcast(boolean isSupported, boolean isBroadcasting) {
-        if (isSupported) {
-            mShadowBluetoothAdapter.setIsLeAudioBroadcastSourceSupported(
-                    BluetoothStatusCodes.FEATURE_SUPPORTED);
-            mShadowBluetoothAdapter.setIsLeAudioBroadcastAssistantSupported(
-                    BluetoothStatusCodes.FEATURE_SUPPORTED);
-            when(mLocalBtManager.getProfileManager()).thenReturn(mLocalBtProfileManager);
-            when(mLocalBtProfileManager.getLeAudioBroadcastProfile()).thenReturn(mBroadcast);
-            when(mBroadcast.isEnabled(null)).thenReturn(isBroadcasting);
-            when(mLocalBtProfileManager.getLeAudioBroadcastAssistantProfile())
-                    .thenReturn(mAssistant);
-            if (isBroadcasting) {
-                when(mAssistant.getAllSources(any()))
-                        .thenReturn(ImmutableList.of(mBroadcastReceiveState));
-            } else {
-                when(mAssistant.getAllSources(any())).thenReturn(ImmutableList.of());
-            }
-        } else {
-            mShadowBluetoothAdapter.setIsLeAudioBroadcastSourceSupported(
-                    BluetoothStatusCodes.FEATURE_NOT_SUPPORTED);
-            mShadowBluetoothAdapter.setIsLeAudioBroadcastAssistantSupported(
-                    BluetoothStatusCodes.FEATURE_NOT_SUPPORTED);
-        }
     }
 }

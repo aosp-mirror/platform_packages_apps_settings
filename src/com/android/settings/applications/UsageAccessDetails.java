@@ -38,11 +38,11 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.Preference.OnPreferenceClickListener;
-import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.applications.AppStateUsageBridge.UsageState;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 public class UsageAccessDetails extends AppInfoWithHeader implements OnPreferenceChangeListener,
@@ -57,7 +57,7 @@ public class UsageAccessDetails extends AppInfoWithHeader implements OnPreferenc
     // TODO: Break out this functionality into its own class.
     private AppStateUsageBridge mUsageBridge;
     private AppOpsManager mAppOpsManager;
-    private TwoStatePreference mSwitchPref;
+    private RestrictedSwitchPreference mSwitchPref;
     private Preference mUsageDesc;
     private Intent mSettingsIntent;
     private UsageState mUsageState;
@@ -78,7 +78,7 @@ public class UsageAccessDetails extends AppInfoWithHeader implements OnPreferenc
         mDpm = context.getSystemService(DevicePolicyManager.class);
 
         addPreferencesFromResource(R.xml.app_ops_permissions_details);
-        mSwitchPref = (TwoStatePreference) findPreference(KEY_APP_OPS_SETTINGS_SWITCH);
+        mSwitchPref = (RestrictedSwitchPreference) findPreference(KEY_APP_OPS_SETTINGS_SWITCH);
         mUsageDesc = findPreference(KEY_APP_OPS_SETTINGS_DESC);
 
         getPreferenceScreen().setTitle(R.string.usage_access);
@@ -170,8 +170,16 @@ public class UsageAccessDetails extends AppInfoWithHeader implements OnPreferenc
                 mPackageInfo.applicationInfo.uid);
 
         boolean hasAccess = mUsageState.isPermissible();
+        boolean shouldEnable = mUsageState.permissionDeclared;
+
+        if (shouldEnable && !hasAccess) {
+            mSwitchPref.checkEcmRestrictionAndSetDisabled(AppOpsManager.OPSTR_GET_USAGE_STATS,
+                    mPackageName);
+            shouldEnable = !mSwitchPref.isDisabledByEcm();
+        }
+
         mSwitchPref.setChecked(hasAccess);
-        mSwitchPref.setEnabled(mUsageState.permissionDeclared);
+        mSwitchPref.setEnabled(shouldEnable);
 
         ResolveInfo resolveInfo = mPm.resolveActivityAsUser(mSettingsIntent,
                 PackageManager.GET_META_DATA, mUserId);

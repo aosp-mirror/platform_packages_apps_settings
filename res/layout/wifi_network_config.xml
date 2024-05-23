@@ -22,6 +22,19 @@
     android:orientation="vertical"
     android:paddingBottom="8dip">
 
+    <LinearLayout android:id="@+id/wep_warning_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="20dp"
+        style="@style/wifi_item"
+        android:visibility="gone">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/wifi_item_label"
+            android:text="@string/wifi_settings_warning_wep_network"/>
+    </LinearLayout>
+
     <LinearLayout android:id="@+id/info"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"

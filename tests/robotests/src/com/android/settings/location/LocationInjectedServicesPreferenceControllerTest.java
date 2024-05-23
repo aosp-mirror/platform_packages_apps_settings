@@ -38,20 +38,22 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
+import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.widget.RestrictedAppPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
-import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
@@ -59,8 +61,10 @@ import java.util.List;
 import java.util.Map;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = ShadowUserManager.class)
+@Config(shadows = {ShadowUserManager.class, ShadowDevicePolicyManager.class})
 public class LocationInjectedServicesPreferenceControllerTest {
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
 
     private static final String KEY_LOCATION_SERVICES = "location_service";
 
@@ -82,8 +86,7 @@ public class LocationInjectedServicesPreferenceControllerTest {
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-        mContext = spy(RuntimeEnvironment.application);
+        mContext = spy(ApplicationProvider.getApplicationContext());
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
         mController = spy(
@@ -115,7 +118,6 @@ public class LocationInjectedServicesPreferenceControllerTest {
         verify(mContext).unregisterReceiver(mController.mInjectedSettingsReceiver);
     }
 
-    @Ignore("b/313540388")
     @Test
     public void workProfileDisallowShareLocationOn_getParentUserLocationServicesOnly() {
         final int fakeWorkProfileId = 123;
@@ -168,7 +170,6 @@ public class LocationInjectedServicesPreferenceControllerTest {
         verify(mSettingsInjector).reloadStatusMessages();
     }
 
-    @Ignore("b/313540388")
     @Test
     public void withUserRestriction_shouldDisableLocationAccuracy() {
         final List<Preference> preferences = new ArrayList<>();

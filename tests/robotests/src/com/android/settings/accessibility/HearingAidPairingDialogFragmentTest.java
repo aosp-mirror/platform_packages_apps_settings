@@ -138,7 +138,7 @@ public class HearingAidPairingDialogFragmentTest {
 
         final Intent intent = shadowOf(mActivity).getNextStartedActivity();
         assertThat(intent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT))
-                .isEqualTo(HearingDevicePairingDetail.class.getName());
+                .isEqualTo(HearingDevicePairingFragment.class.getName());
     }
 
     @Test

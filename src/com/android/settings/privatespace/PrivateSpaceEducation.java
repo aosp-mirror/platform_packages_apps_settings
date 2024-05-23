@@ -19,6 +19,7 @@ package com.android.settings.privatespace;
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +36,7 @@ import com.google.android.setupdesign.GlifLayout;
 
 /** Fragment educating about the usage of Private Space. */
 public class PrivateSpaceEducation extends InstrumentedFragment {
+    private static final String TAG = "PrivateSpaceEducation";
 
     @Override
     public View onCreateView(
@@ -46,7 +48,7 @@ public class PrivateSpaceEducation extends InstrumentedFragment {
         }
         GlifLayout rootView =
                 (GlifLayout)
-                        inflater.inflate(R.layout.privatespace_education_screen, container, false);
+                        inflater.inflate(R.layout.private_space_education_screen, container, false);
         final FooterBarMixin mixin = rootView.getMixin(FooterBarMixin.class);
         mixin.setPrimaryButton(
                 new FooterButton.Builder(getContext())
@@ -60,9 +62,7 @@ public class PrivateSpaceEducation extends InstrumentedFragment {
                         .setText(R.string.private_space_cancel_label)
                         .setListener(onCancel())
                         .setButtonType(FooterButton.ButtonType.CANCEL)
-                        .setTheme(
-                                androidx.appcompat.R.style
-                                        .Base_TextAppearance_AppCompat_Widget_Button)
+                        .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Secondary)
                         .build());
 
         return rootView;
@@ -77,6 +77,7 @@ public class PrivateSpaceEducation extends InstrumentedFragment {
         return v -> {
             mMetricsFeatureProvider.action(
                     getContext(), SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_START);
+            Log.i(TAG, "Starting private space setup");
             NavHostFragment.findNavController(PrivateSpaceEducation.this)
                     .navigate(R.id.action_education_to_auto_advance);
         };
@@ -88,6 +89,7 @@ public class PrivateSpaceEducation extends InstrumentedFragment {
             if (activity != null) {
                 mMetricsFeatureProvider.action(
                         getContext(), SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_CANCEL);
+                Log.i(TAG, "private space setup cancelled");
                 activity.finish();
             }
         };

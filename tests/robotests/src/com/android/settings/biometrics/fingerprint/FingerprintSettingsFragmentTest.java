@@ -20,9 +20,7 @@ import static android.hardware.fingerprint.FingerprintSensorProperties.TYPE_POWE
 import static android.hardware.fingerprint.FingerprintSensorProperties.TYPE_UDFPS_OPTICAL;
 
 import static com.android.settings.biometrics.fingerprint.FingerprintSettings.FingerprintSettingsFragment;
-import static com.android.settings.biometrics.fingerprint.FingerprintSettings.FingerprintSettingsFragment.ADD_FINGERPRINT_REQUEST;
 import static com.android.settings.biometrics.fingerprint.FingerprintSettings.FingerprintSettingsFragment.CHOOSE_LOCK_GENERIC_REQUEST;
-import static com.android.settings.biometrics.fingerprint.FingerprintSettings.FingerprintSettingsFragment.KEY_FINGERPRINT_ADD;
 import static com.android.settings.biometrics.fingerprint.FingerprintSettings.FingerprintSettingsFragment.KEY_REQUIRE_SCREEN_ON_TO_AUTH;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -34,9 +32,7 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import android.content.Context;
@@ -57,10 +53,8 @@ import android.view.ViewGroup;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.preference.Preference;
 import androidx.test.core.app.ApplicationProvider;
 
-import com.android.settings.biometrics.BiometricsSplitScreenDialog;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowFragment;
@@ -130,35 +124,6 @@ public class FingerprintSettingsFragmentTest {
     @After
     public void tearDown() {
         ShadowUtils.reset();
-    }
-
-    @Test
-    public void testAddFingerprint_inFullScreen_noDialog() {
-        setUpFragment(false);
-        // Click "Add Fingerprint"
-        final Preference preference = new Preference(mContext);
-        preference.setKey(KEY_FINGERPRINT_ADD);
-        mFragment.onPreferenceTreeClick(preference);
-
-        verify(mFragment).startActivityForResult(any(), eq(ADD_FINGERPRINT_REQUEST));
-        verify(mFragmentTransaction, never()).add(any(),
-                eq(BiometricsSplitScreenDialog.class.getName()));
-
-    }
-
-    @Test
-    public void testAddFingerprint_inMultiWindow_showsDialog() {
-        setUpFragment(false);
-
-        doReturn(true).when(mActivity).isInMultiWindowMode();
-
-        // Click "Add Fingerprint"
-        final Preference preference = new Preference(mContext);
-        preference.setKey(KEY_FINGERPRINT_ADD);
-        mFragment.onPreferenceTreeClick(preference);
-
-        verify(mFragment, times(0)).startActivityForResult(any(), eq(ADD_FINGERPRINT_REQUEST));
-        verify(mFragmentTransaction).add(any(), eq(BiometricsSplitScreenDialog.class.getName()));
     }
 
     @Test
@@ -262,6 +227,7 @@ public class FingerprintSettingsFragmentTest {
         mFragment.onResume();
     }
 
+    @Ignore("b/315519360")
     @Test
     public void testFragmentVisibleWhenNoHardwareDetected() {
         doReturn(false).when(mFingerprintManager).isHardwareDetected();

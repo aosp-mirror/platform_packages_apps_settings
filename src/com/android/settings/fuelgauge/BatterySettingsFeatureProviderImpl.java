@@ -18,6 +18,8 @@ package com.android.settings.fuelgauge;
 
 import android.content.Context;
 
+import com.android.settings.fuelgauge.batterytip.BatteryTipPolicy;
+import com.android.settings.fuelgauge.batterytip.detectors.LowBatteryDetector;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 
 import java.util.List;
@@ -41,5 +43,11 @@ public class BatterySettingsFeatureProviderImpl implements BatterySettingsFeatur
     }
 
     @Override
-    public void addBatteryTipDetector(Context context, List<BatteryTip> tips) {}
+    public void addBatteryTipDetector(
+            Context context,
+            List<BatteryTip> batteryTips,
+            BatteryInfo batteryInfo,
+            BatteryTipPolicy batteryTipPolicy) {
+        batteryTips.add(new LowBatteryDetector(context, batteryTipPolicy, batteryInfo).detect());
+    }
 }

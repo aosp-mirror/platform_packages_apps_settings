@@ -31,6 +31,7 @@ import com.android.settings.R
 import com.android.settingslib.spa.framework.compose.stateOf
 import com.android.settingslib.spa.testutils.FakeNavControllerWrapper
 import com.android.settingslib.spa.testutils.firstWithTimeoutOrNull
+import com.android.settingslib.spaprivileged.framework.compose.getPlaceholder
 import com.android.settingslib.spaprivileged.template.app.AppListInput
 import com.android.settingslib.spaprivileged.template.app.AppListItemModel
 import com.google.common.truth.Truth.assertThat
@@ -142,7 +143,7 @@ class AllAppListTest {
     }
 
     @Test
-    fun allAppListModel_getSummary() {
+    fun listModelGetSummary_regular() {
         val listModel = AllAppListModel(context) { stateOf(SUMMARY) }
 
         lateinit var summary: () -> String
@@ -154,7 +155,19 @@ class AllAppListTest {
     }
 
     @Test
-    fun allAppListModel_getSummaryWhenDisabled() {
+    fun listModelGetSummary_emptyStorage() {
+        val listModel = AllAppListModel(context) { stateOf("") }
+
+        lateinit var summary: () -> String
+        composeTestRule.setContent {
+            summary = listModel.getSummary(option = 0, record = AppRecordWithSize(app = APP))
+        }
+
+        assertThat(summary()).isEqualTo(context.getPlaceholder())
+    }
+
+    @Test
+    fun listModelGetSummary_disabled() {
         val listModel = AllAppListModel(context) { stateOf(SUMMARY) }
         val disabledApp = ApplicationInfo().apply {
             packageName = PACKAGE_NAME
@@ -172,7 +185,26 @@ class AllAppListTest {
     }
 
     @Test
-    fun allAppListModel_getSummaryWhenNotInstalled() {
+    fun listModelGetSummary_emptyStorageAndDisabled() {
+        val listModel = AllAppListModel(context) { stateOf("") }
+        val disabledApp = ApplicationInfo().apply {
+            packageName = PACKAGE_NAME
+            flags = ApplicationInfo.FLAG_INSTALLED
+            enabled = false
+        }
+
+        lateinit var summary: () -> String
+        composeTestRule.setContent {
+            summary =
+                listModel.getSummary(option = 0, record = AppRecordWithSize(app = disabledApp))
+        }
+
+        assertThat(summary())
+            .isEqualTo(context.getString(com.android.settingslib.R.string.disabled))
+    }
+
+    @Test
+    fun listModelGetSummary_notInstalled() {
         val listModel = AllAppListModel(context) { stateOf(SUMMARY) }
         val notInstalledApp = ApplicationInfo().apply {
             packageName = PACKAGE_NAME

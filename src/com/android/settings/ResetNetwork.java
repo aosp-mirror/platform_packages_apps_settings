@@ -16,12 +16,10 @@
 
 package com.android.settings;
 
-import android.annotation.Nullable;
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -43,8 +41,10 @@ import android.widget.Spinner;
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 
+import com.android.internal.telephony.flags.Flags;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.network.ResetNetworkRestrictionViewBuilder;
@@ -122,16 +122,24 @@ public class ResetNetwork extends InstrumentedFragment {
     void showFinalConfirmation() {
         Bundle args = new Bundle();
 
-        ResetNetworkRequest request = new ResetNetworkRequest(
-                ResetNetworkRequest.RESET_CONNECTIVITY_MANAGER |
-                ResetNetworkRequest.RESET_VPN_MANAGER
-        );
+        // TODO(b/317276437) Simplify the logic once flag is released
+        int resetOptions = ResetNetworkRequest.RESET_CONNECTIVITY_MANAGER
+                        | ResetNetworkRequest.RESET_VPN_MANAGER;
+        if (Flags.resetMobileNetworkSettings()) {
+            resetOptions |= ResetNetworkRequest.RESET_IMS_STACK;
+            resetOptions |= ResetNetworkRequest.RESET_PHONE_PROCESS;
+            resetOptions |= ResetNetworkRequest.RESET_RILD;
+        }
+        ResetNetworkRequest request = new ResetNetworkRequest(resetOptions);
         if (mSubscriptions != null && mSubscriptions.size() > 0) {
             int selectedIndex = mSubscriptionSpinner.getSelectedItemPosition();
             SubscriptionInfo subscription = mSubscriptions.get(selectedIndex);
             int subId = subscription.getSubscriptionId();
             request.setResetTelephonyAndNetworkPolicyManager(subId)
                    .setResetApn(subId);
+            if (Flags.resetMobileNetworkSettings()) {
+                request.setResetImsSubId(subId);
+            }
         }
         if (mEsimContainer.getVisibility() == View.VISIBLE && mEsimCheckbox.isChecked()) {
             request.setResetEsim(getContext().getPackageName())

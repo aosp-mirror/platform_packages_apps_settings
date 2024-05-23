@@ -20,27 +20,47 @@ import android.content.ContentResolver
 import android.content.Context
 import android.database.MatrixCursor
 import android.net.Uri
+import android.provider.Telephony
+import android.telephony.SubscriptionInfo
+import android.telephony.SubscriptionManager
+import android.telephony.TelephonyManager
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mockito
+import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
+import org.mockito.kotlin.spy
+import org.mockito.kotlin.stub
 import org.mockito.kotlin.whenever
 
 @RunWith(AndroidJUnit4::class)
 class ApnRepositoryTest {
 
-    private val context: Context = ApplicationProvider.getApplicationContext()
-    private val mContentResolver = mock<ContentResolver> {}
+    private val contentResolver = mock<ContentResolver>()
+
+    private val mockSubscriptionInfo = mock<SubscriptionInfo> {
+        on { mccString } doReturn MCC
+        on { mncString } doReturn MNC
+    }
+
+    private val mockSubscriptionManager = mock<SubscriptionManager> {
+        on { getActiveSubscriptionInfo(SUB_ID) } doReturn mockSubscriptionInfo
+    }
+
+    private val context: Context = spy(ApplicationProvider.getApplicationContext()) {
+        on { contentResolver } doReturn contentResolver
+        on { getSystemService(SubscriptionManager::class.java) } doReturn mockSubscriptionManager
+    }
     private val uri = mock<Uri> {}
 
     @Test
     fun getApnDataFromUri() {
         // mock out resources and the feature provider
-        val cursor = MatrixCursor(sProjection)
+        val cursor = MatrixCursor(Projection)
         cursor.addRow(
-            arrayOf<Any?>(
+            arrayOf<Any>(
                 0,
                 "name",
                 "apn",
@@ -60,12 +80,41 @@ class ApnRepositoryTest {
                 "apnRoaming",
                 0,
                 1,
-                0
             )
         )
-        val context = Mockito.spy(context)
-        whenever(context.contentResolver).thenReturn(mContentResolver)
-        whenever(mContentResolver.query(uri, sProjection, null, null, null)).thenReturn(cursor)
-        assert(getApnDataFromUri(uri, context).name == "name")
+        whenever(contentResolver.query(uri, Projection, null, null, null)).thenReturn(cursor)
+
+        val apnData = getApnDataFromUri(uri, context)
+
+        assertThat(apnData.name).isEqualTo("name")
+    }
+
+    @Test
+    fun getApnIdMap_knownCarrierId() {
+        mockSubscriptionInfo.stub {
+            on { carrierId } doReturn CARRIER_ID
+        }
+
+        val idMap = context.getApnIdMap(SUB_ID)
+
+        assertThat(idMap).containsExactly(Telephony.Carriers.CARRIER_ID, CARRIER_ID)
+    }
+
+    @Test
+    fun getApnIdMap_unknownCarrierId() {
+        mockSubscriptionInfo.stub {
+            on { carrierId } doReturn TelephonyManager.UNKNOWN_CARRIER_ID
+        }
+
+        val idMap = context.getApnIdMap(SUB_ID)
+
+        assertThat(idMap).containsExactly(Telephony.Carriers.NUMERIC, MCC + MNC)
+    }
+
+    private companion object {
+        const val SUB_ID = 2
+        const val CARRIER_ID = 10
+        const val MCC = "310"
+        const val MNC = "101"
     }
 }

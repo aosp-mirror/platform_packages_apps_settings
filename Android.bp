@@ -48,6 +48,7 @@ android_library {
     name: "Settings-core",
     defaults: [
         "SettingsLib-search-defaults",
+        "SettingsLintDefaults",
         "SpaPrivilegedLib-defaults",
     ],
 
@@ -56,7 +57,7 @@ android_library {
         "src/**/*.kt",
     ],
     exclude_srcs: [
-        "src/com/android/settings/biometrics/fingerprint2/shared/**/*.kt",
+        "src/com/android/settings/biometrics/fingerprint2/lib/**/*.kt",
     ],
     use_resource_processor: true,
     resource_dirs: [
@@ -89,6 +90,7 @@ android_library {
         "MediaDrmSettingsFlagsLib",
         "Settings-change-ids",
         "SettingsLib",
+        "SettingsLibDataStore",
         "SettingsLibActivityEmbedding",
         "aconfig_settings_flags_lib",
         "accessibility_settings_flags_lib",
@@ -106,6 +108,9 @@ android_library {
         "settings-logtags",
         "settings-telephony-protos-lite",
         "statslog-settings",
+        "androidx.test.rules",
+        "telephony_flags_core_java_lib",
+        "setupdesign-lottie-loading-layout",
     ],
 
     plugins: ["androidx.room_room-compiler-plugin"],

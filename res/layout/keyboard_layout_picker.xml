@@ -17,15 +17,33 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/keyboard_picker_margin"
     android:id="@+id/keyboard_layout_picker_container"
     android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/keyboard_layout_preview"
+    <FrameLayout
+        android:id="@+id/keyboard_layout_preview_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:scaleType="fitCenter"/>
+        android:background="@drawable/keyboard_review_layout_background">
+        <ImageView
+            android:id="@+id/keyboard_layout_preview"
+            android:layout_marginTop="@dimen/keyboard_picker_margin_small"
+            android:layout_marginBottom="@dimen/keyboard_picker_margin_large"
+            android:layout_marginHorizontal="@dimen/keyboard_picker_margin_small"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter" />
+        <TextView
+            android:id="@+id/keyboard_layout_preview_name"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/keyboard_picker_margin_large"
+            android:textSize="@dimen/keyboard_picker_text_size"
+            android:textColor="?android:attr/textColorPrimary"
+            android:layout_gravity="bottom"
+            android:gravity="center" />
+    </FrameLayout>
 
     <FrameLayout
         android:id="@+id/keyboard_layout_title"

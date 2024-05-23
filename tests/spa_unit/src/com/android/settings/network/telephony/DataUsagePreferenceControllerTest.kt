@@ -22,7 +22,6 @@ import android.net.NetworkTemplate
 import android.provider.Settings
 import android.telephony.SubscriptionManager
 import android.util.DataUnit
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.testing.TestLifecycleOwner
 import androidx.preference.Preference
 import androidx.preference.PreferenceManager
@@ -34,6 +33,7 @@ import com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE
 import com.android.settings.datausage.DataUsageUtils
 import com.android.settings.datausage.lib.DataUsageLib
 import com.android.settings.datausage.lib.NetworkCycleDataRepository
+import com.android.settings.datausage.lib.NetworkStatsRepository.Companion.AllTimeRange
 import com.android.settings.datausage.lib.NetworkUsageData
 import com.android.settingslib.spa.testutils.waitUntil
 import com.google.common.truth.Truth.assertThat
@@ -78,13 +78,11 @@ class DataUsagePreferenceControllerTest {
     fun setUp() {
         mockSession = ExtendedMockito.mockitoSession()
             .initMocks(this)
-            .mockStatic(SubscriptionManager::class.java)
             .spyStatic(DataUsageUtils::class.java)
             .spyStatic(DataUsageLib::class.java)
             .strictness(Strictness.LENIENT)
             .startMocking()
 
-        whenever(SubscriptionManager.isValidSubscriptionId(SUB_ID)).thenReturn(true)
         ExtendedMockito.doReturn(true).`when` { DataUsageUtils.hasMobileData(context) }
         ExtendedMockito.doReturn(networkTemplate).`when` {
             DataUsageLib.getMobileTemplate(context, SUB_ID)
@@ -109,9 +107,10 @@ class DataUsagePreferenceControllerTest {
 
     @Test
     fun getAvailabilityStatus_invalidSubId_returnUnsearchable() {
-        controller.init(SubscriptionManager.INVALID_SUBSCRIPTION_ID)
+        val availabilityStatus =
+            controller.getAvailabilityStatus(SubscriptionManager.INVALID_SUBSCRIPTION_ID)
 
-        assertThat(controller.availabilityStatus).isEqualTo(AVAILABLE_UNSEARCHABLE)
+        assertThat(availabilityStatus).isEqualTo(AVAILABLE_UNSEARCHABLE)
     }
 
     @Test
@@ -120,7 +119,7 @@ class DataUsagePreferenceControllerTest {
         repository.stub {
             on { loadFirstCycle() } doReturn usageData
         }
-        controller.onViewCreated(TestLifecycleOwner(initialState = Lifecycle.State.STARTED))
+        controller.onViewCreated(TestLifecycleOwner())
         waitUntil { preference.summary != null }
 
         controller.handlePreferenceTreeClick(preference)
@@ -136,21 +135,41 @@ class DataUsagePreferenceControllerTest {
     fun updateState_invalidSubId_disabled() = runBlocking {
         controller.init(SubscriptionManager.INVALID_SUBSCRIPTION_ID)
 
-        controller.onViewCreated(TestLifecycleOwner(initialState = Lifecycle.State.STARTED))
+        controller.onViewCreated(TestLifecycleOwner())
 
         waitUntil { !preference.isEnabled }
     }
 
     @Test
-    fun updateState_noUsageData_shouldDisablePreference() = runBlocking {
+    fun updateState_noFistCycleUsageButOtherUsage_shouldEnablePreference() = runBlocking {
         val usageData = NetworkUsageData(START_TIME, END_TIME, 0L)
         repository.stub {
             on { loadFirstCycle() } doReturn usageData
+            on { queryUsage(AllTimeRange) } doReturn
+                NetworkUsageData(AllTimeRange.lower, AllTimeRange.upper, 1L)
         }
+        preference.isEnabled = false
 
-        controller.onViewCreated(TestLifecycleOwner(initialState = Lifecycle.State.STARTED))
+        controller.onViewCreated(TestLifecycleOwner())
+
+        waitUntil { preference.isEnabled }
+        waitUntil { preference.summary?.contains("0 B used") == true }
+    }
+
+    @Test
+    fun updateState_noDataUsage_shouldDisablePreference() = runBlocking {
+        val usageData = NetworkUsageData(START_TIME, END_TIME, 0L)
+        repository.stub {
+            on { loadFirstCycle() } doReturn usageData
+            on { queryUsage(AllTimeRange) } doReturn
+                NetworkUsageData(AllTimeRange.lower, AllTimeRange.upper, 0L)
+        }
+        preference.isEnabled = true
+
+        controller.onViewCreated(TestLifecycleOwner())
 
         waitUntil { !preference.isEnabled }
+        waitUntil { preference.summary?.contains("0 B used") == true }
     }
 
     @Test
@@ -160,9 +179,9 @@ class DataUsagePreferenceControllerTest {
             on { loadFirstCycle() } doReturn usageData
         }
 
-        controller.onViewCreated(TestLifecycleOwner(initialState = Lifecycle.State.STARTED))
+        controller.onViewCreated(TestLifecycleOwner())
 
-        waitUntil { preference.summary?.contains("1.00 MB") == true }
+        waitUntil { preference.summary?.contains("1.00 MB used") == true }
     }
 
     private companion object {

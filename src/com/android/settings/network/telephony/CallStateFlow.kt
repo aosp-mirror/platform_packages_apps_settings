@@ -18,28 +18,15 @@ package com.android.settings.network.telephony
 
 import android.content.Context
 import android.telephony.TelephonyCallback
-import android.telephony.TelephonyManager
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.asExecutor
-import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.callbackFlow
-import kotlinx.coroutines.flow.conflate
-import kotlinx.coroutines.flow.flowOn
 
 /**
  * Flow for call state.
  */
-fun Context.callStateFlow(subId: Int): Flow<Int> = callbackFlow {
-    val telephonyManager = getSystemService(TelephonyManager::class.java)!!
-        .createForSubscriptionId(subId)
-
-    val callback = object : TelephonyCallback(), TelephonyCallback.CallStateListener {
+fun Context.callStateFlow(subId: Int): Flow<Int> = telephonyCallbackFlow(subId) {
+    object : TelephonyCallback(), TelephonyCallback.CallStateListener {
         override fun onCallStateChanged(state: Int) {
             trySend(state)
         }
     }
-    telephonyManager.registerTelephonyCallback(Dispatchers.Default.asExecutor(), callback)
-
-    awaitClose { telephonyManager.unregisterTelephonyCallback(callback) }
-}.conflate().flowOn(Dispatchers.Default)
+}

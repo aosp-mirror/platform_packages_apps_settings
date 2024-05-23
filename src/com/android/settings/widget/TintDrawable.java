@@ -16,15 +16,16 @@
 
 package com.android.settings.widget;
 
-import android.annotation.NonNull;
-import android.annotation.Nullable;
+
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.content.res.Resources.Theme;
 import android.content.res.TypedArray;
 import android.graphics.drawable.DrawableWrapper;
 import android.util.AttributeSet;
-import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.android.settings.R;
 

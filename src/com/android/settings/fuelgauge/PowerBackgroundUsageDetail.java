@@ -19,7 +19,6 @@ package com.android.settings.fuelgauge;
 import static com.android.settings.fuelgauge.BatteryOptimizeHistoricalLogEntry.Action;
 
 import android.app.Activity;
-import android.app.backup.BackupManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
@@ -42,6 +41,7 @@ import com.android.settingslib.HelpUtils;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.datastore.ChangeReason;
 import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.LayoutPreference;
 import com.android.settingslib.widget.MainSwitchPreference;
@@ -78,7 +78,6 @@ public class PowerBackgroundUsageDetail extends DashboardFragment
     @VisibleForTesting SelectorWithWidgetPreference mUnrestrictedPreference;
     @VisibleForTesting MainSwitchPreference mMainSwitchPreference;
     @VisibleForTesting FooterPreference mFooterPreference;
-    @VisibleForTesting BackupManager mBackupManager;
     @VisibleForTesting StringBuilder mLogStringBuilder;
 
     @VisibleForTesting @BatteryOptimizeUtils.OptimizationMode
@@ -110,18 +109,6 @@ public class PowerBackgroundUsageDetail extends DashboardFragment
         initHeader();
         mOptimizationMode = mBatteryOptimizeUtils.getAppOptimizationMode();
         initFooter();
-        mExecutor.execute(
-                () -> {
-                    String packageName =
-                            BatteryUtils.getLoggingPackageName(
-                                    getContext(), mBatteryOptimizeUtils.getPackageName());
-                    FeatureFactory.getFeatureFactory()
-                            .getMetricsFeatureProvider()
-                            .action(
-                                    getContext(),
-                                    SettingsEnums.OPEN_APP_BATTERY_USAGE,
-                                    packageName);
-                });
         mLogStringBuilder = new StringBuilder("onResume mode = ").append(mOptimizationMode);
     }
 
@@ -199,9 +186,7 @@ public class PowerBackgroundUsageDetail extends DashboardFragment
     @VisibleForTesting
     void notifyBackupManager() {
         if (mOptimizationMode != mBatteryOptimizeUtils.getAppOptimizationMode()) {
-            final BackupManager backupManager =
-                    mBackupManager != null ? mBackupManager : new BackupManager(getContext());
-            backupManager.dataChanged();
+            BatterySettingsStorage.get(getContext()).notifyChange(ChangeReason.UPDATE);
         }
     }
 
@@ -338,9 +323,11 @@ public class PowerBackgroundUsageDetail extends DashboardFragment
                     FeatureFactory.getFeatureFactory()
                             .getMetricsFeatureProvider()
                             .action(
-                                    /* attribution */ SettingsEnums.OPEN_APP_BATTERY_USAGE,
+                                    /* attribution */ SettingsEnums
+                                            .LEAVE_POWER_USAGE_MANAGE_BACKGROUND,
                                     /* action */ finalMetricCategory,
-                                    /* pageId */ SettingsEnums.OPEN_APP_BATTERY_USAGE,
+                                    /* pageId */ SettingsEnums
+                                            .FUELGAUGE_POWER_USAGE_MANAGE_BACKGROUND,
                                     packageName,
                                     getArguments().getInt(EXTRA_POWER_USAGE_AMOUNT));
                 });

@@ -20,7 +20,6 @@ package com.android.settings.biometrics.fingerprint;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.FINGERPRINT_UNLOCK_DISABLED_EXPLANATION;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_FINGERPRINT_LAST_DELETE_MESSAGE;
 import static android.app.admin.DevicePolicyResources.UNDEFINED;
-import static android.hardware.biometrics.BiometricAuthenticator.TYPE_FINGERPRINT;
 
 import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
 import static com.android.settings.biometrics.BiometricEnrollBase.EXTRA_FROM_SETTINGS_SUMMARY;
@@ -68,13 +67,13 @@ import com.android.settings.SubSettings;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.BiometricUtils;
-import com.android.settings.biometrics.BiometricsSplitScreenDialog;
 import com.android.settings.biometrics.GatekeeperPasswordProvider;
 import com.android.settings.biometrics2.ui.model.EnrollmentRequest;
 import com.android.settings.biometrics2.ui.view.FingerprintEnrollmentActivity;
 import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -83,7 +82,6 @@ import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedSwitchPreference;
-import com.android.settingslib.activityembedding.ActivityEmbeddingUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.transition.SettingsTransitionHelper;
@@ -635,6 +633,19 @@ public class FingerprintSettings extends SubSettings {
         private void addFingerprintUnlockCategory() {
             mFingerprintUnlockCategory = findPreference(KEY_FINGERPRINT_UNLOCK_CATEGORY);
             setupFingerprintUnlockCategoryPreferences();
+            final Preference restToUnlockPreference = FeatureFactory.getFeatureFactory()
+                    .getFingerprintFeatureProvider()
+                    .getSfpsRestToUnlockFeature(getContext())
+                    .getRestToUnlockPreference(getContext());
+            if (restToUnlockPreference != null) {
+                // Use custom featured preference if any.
+                mRequireScreenOnToAuthPreference.setTitle(restToUnlockPreference.getTitle());
+                mRequireScreenOnToAuthPreference.setSummary(restToUnlockPreference.getSummary());
+                mRequireScreenOnToAuthPreference.setChecked(
+                        ((TwoStatePreference) restToUnlockPreference).isChecked());
+                mRequireScreenOnToAuthPreference.setOnPreferenceChangeListener(
+                        restToUnlockPreference.getOnPreferenceChangeListener());
+            }
             updateFingerprintUnlockCategoryVisibility();
         }
 
@@ -776,17 +787,6 @@ public class FingerprintSettings extends SubSettings {
         public boolean onPreferenceTreeClick(Preference pref) {
             final String key = pref.getKey();
             if (KEY_FINGERPRINT_ADD.equals(key)) {
-                // If it's in split mode, show the error dialog and don't need to show adding
-                // fingerprint intent.
-                final boolean isActivityEmbedded = ActivityEmbeddingUtils.isActivityEmbedded(
-                        getActivity());
-                if (getActivity().isInMultiWindowMode() && !isActivityEmbedded) {
-                    BiometricsSplitScreenDialog.newInstance(TYPE_FINGERPRINT).show(
-                            getActivity().getSupportFragmentManager(),
-                            BiometricsSplitScreenDialog.class.getName());
-                    return true;
-                }
-
                 mIsEnrolling = true;
                 Intent intent = new Intent();
                 if (FeatureFlagUtils.isEnabled(getContext(),
