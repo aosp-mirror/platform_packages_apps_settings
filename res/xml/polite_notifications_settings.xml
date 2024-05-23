@@ -17,23 +17,7 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title="@string/notification_polite_title">
-
-<!--    <com.android.settings.RestrictedListPreference-->
-<!--        android:key="polite_notifications_pref_dlg"-->
-<!--        android:persistent="false"-->
-<!--        android:title="@string/notification_polite_title"-->
-<!--        android:entries="@array/notification_polite_options"-->
-<!--        android:entryValues="@array/notification_polite_options_values"-->
-<!--        settings:controller="com.android.settings.notification.PoliteNotificationFilterController"/>-->
-
-<!--    <SwitchPreferenceCompat-->
-<!--        android:key="notification_polite_vibrate_unlocked"-->
-<!--        android:persistent="false"-->
-<!--        android:title="@string/notification_polite_vibrate_unlocked"-->
-<!--        android:summary="@string/notification_polite_vibrate_unlocked_summary"-->
-<!--        settings:controller="com.android.settings.notification.PoliteNotifVibrateUnlockedToggleController" />-->
 
     <com.android.settingslib.widget.TopIntroPreference
         android:key="polite_notification_desc"
