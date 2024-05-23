@@ -27,6 +27,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
+import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.widget.TwoTargetPreference;
 
 /**
@@ -76,6 +77,9 @@ class AudioStreamPreference extends TwoTargetPreference {
     void setAudioStreamMetadata(BluetoothLeBroadcastMetadata metadata) {
         if (mAudioStream != null) {
             mAudioStream.setMetadata(metadata);
+            // Update title based on the metadata
+            String broadcastName = AudioStreamsHelper.getBroadcastName(metadata);
+            ThreadUtils.postOnMainThread(() -> setTitle(broadcastName));
         }
     }
 

@@ -214,6 +214,9 @@ public class AudioSharingNamePreferenceController extends BasePreferenceControll
                 ThreadUtils.postOnBackgroundThread(
                         () -> {
                             if (mBroadcast != null) {
+                                mBroadcast.setBroadcastName((String) newValue);
+                                // We currently don't have a UI field for program info so we keep it
+                                // consistent with broadcast name.
                                 mBroadcast.setProgramInfo((String) newValue);
                                 if (isBroadcasting(mBtManager)) {
                                     mBroadcast.updateBroadcast();
@@ -242,7 +245,7 @@ public class AudioSharingNamePreferenceController extends BasePreferenceControll
                     ThreadUtils.postOnBackgroundThread(
                             () -> {
                                 if (mBroadcast != null) {
-                                    String name = mBroadcast.getProgramInfo();
+                                    String name = mBroadcast.getBroadcastName();
                                     AudioSharingUtils.postOnMainThread(
                                             mContext,
                                             () -> {

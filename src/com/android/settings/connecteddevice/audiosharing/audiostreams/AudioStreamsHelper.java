@@ -314,22 +314,15 @@ public class AudioStreamsHelper {
     }
 
     static String getBroadcastName(BluetoothLeBroadcastMetadata source) {
-        // TODO(b/331547596): prioritize broadcastName
-        Optional<String> optionalProgramInfo =
-                source.getSubgroups().stream()
-                        .map(subgroup -> subgroup.getContentMetadata().getProgramInfo())
-                        .filter(programInfo -> !Strings.isNullOrEmpty(programInfo))
-                        .findFirst();
-
-        return optionalProgramInfo.orElseGet(
-                () -> {
-                    String broadcastName = source.getBroadcastName();
-                    if (broadcastName != null && !broadcastName.isEmpty()) {
-                        return broadcastName;
-                    } else {
-                        return "Broadcast Id: " + source.getBroadcastId();
-                    }
-                });
+        String broadcastName = source.getBroadcastName();
+        if (broadcastName != null && !broadcastName.isEmpty()) {
+            return broadcastName;
+        }
+        return source.getSubgroups().stream()
+                .map(subgroup -> subgroup.getContentMetadata().getProgramInfo())
+                .filter(programInfo -> !Strings.isNullOrEmpty(programInfo))
+                .findFirst()
+                .orElse("Broadcast Id: " + source.getBroadcastId());
     }
 
     static String getBroadcastName(BluetoothLeBroadcastReceiveState state) {
