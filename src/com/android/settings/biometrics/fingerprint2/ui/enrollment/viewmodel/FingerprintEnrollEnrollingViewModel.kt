@@ -16,6 +16,7 @@
 
 package com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.android.systemui.biometrics.shared.model.FingerprintSensor
@@ -68,7 +69,8 @@ class FingerprintEnrollEnrollingViewModel(
   val enrollFlow =
     enrollFlowShouldBeRunning.transformLatest {
       if (it) {
-        fingerprintEnrollViewModel.enrollFlow.collect { event -> emit(event) }
+        fingerprintEnrollViewModel.enrollFlow.collect { event ->
+          emit(event) }
       }
     }
 
@@ -81,5 +83,9 @@ class FingerprintEnrollEnrollingViewModel(
       return FingerprintEnrollEnrollingViewModel(fingerprintEnrollViewModel, backgroundViewModel)
         as T
     }
+  }
+
+  companion object {
+    private val TAG = "FingerprintEnrollEnrollingViewModel"
   }
 }

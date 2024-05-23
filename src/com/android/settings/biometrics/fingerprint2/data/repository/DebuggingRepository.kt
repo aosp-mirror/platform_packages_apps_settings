@@ -34,7 +34,7 @@ class DebuggingRepositoryImpl : DebuggingRepository {
    */
   private val isBuildDebuggable = Build.IS_DEBUGGABLE
   /** This flag indicates if udfps should use debug repos to supply data to its various views. */
-  private val udfpsEnrollmentDebugEnabled = true
+  private val udfpsEnrollmentDebugEnabled = false
 
   override fun isDebuggingEnabled(): Boolean {
     return isBuildDebuggable
