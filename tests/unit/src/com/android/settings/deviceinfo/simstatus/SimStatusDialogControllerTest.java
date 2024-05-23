@@ -418,7 +418,6 @@ public class SimStatusDialogControllerTest {
     }
 
     @Test
-    @Ignore
     public void initialize_showImsRegistration_shouldNotRemoveImsRegistrationStateSetting() {
         mPersistableBundle.putBoolean(
                 CarrierConfigManager.KEY_SHOW_IMS_REGISTRATION_STATUS_BOOL, true);
@@ -429,7 +428,6 @@ public class SimStatusDialogControllerTest {
     }
 
     @Test
-    @Ignore
     public void initialize_doNotShowImsRegistration_shouldRemoveImsRegistrationStateSetting() {
         mPersistableBundle.putBoolean(
                 CarrierConfigManager.KEY_SHOW_IMS_REGISTRATION_STATUS_BOOL, false);

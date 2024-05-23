@@ -170,22 +170,25 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
             infoMessageRequireEyes.setText(getInfoMessageRequireEyes());
         }
 
-        mFaceManager.addAuthenticatorsRegisteredCallback(
-                new IFaceAuthenticatorsRegisteredCallback.Stub() {
-                    @Override
-                    public void onAllAuthenticatorsRegistered(
-                            @NonNull List<FaceSensorPropertiesInternal> sensors) {
-                        if (sensors.isEmpty()) {
-                            Log.e(TAG, "No sensors");
-                            return;
-                        }
 
-                        boolean isFaceStrong = sensors.get(0).sensorStrength
-                                == SensorProperties.STRENGTH_STRONG;
-                        mIsFaceStrong = isFaceStrong;
-                        onFaceStrengthChanged();
-                    }
-                });
+        if (mFaceManager != null) {
+            mFaceManager.addAuthenticatorsRegisteredCallback(
+                    new IFaceAuthenticatorsRegisteredCallback.Stub() {
+                        @Override
+                        public void onAllAuthenticatorsRegistered(
+                                @NonNull List<FaceSensorPropertiesInternal> sensors) {
+                            if (sensors.isEmpty()) {
+                                Log.e(TAG, "No sensors");
+                                return;
+                            }
+
+                            boolean isFaceStrong = sensors.get(0).sensorStrength
+                                    == SensorProperties.STRENGTH_STRONG;
+                            mIsFaceStrong = isFaceStrong;
+                            onFaceStrengthChanged();
+                        }
+                    });
+        }
 
         // This path is an entry point for SetNewPasswordController, e.g.
         // adb shell am start -a android.app.action.SET_NEW_PASSWORD

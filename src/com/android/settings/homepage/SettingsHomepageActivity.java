@@ -455,7 +455,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
     }
 
     private void updateHomepageBackground() {
-        if (!mIsEmbeddingActivityEnabled) {
+        if (!Flags.homepageRevamp() && !mIsEmbeddingActivityEnabled) {
             return;
         }
 

@@ -25,15 +25,11 @@ import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.notification.zen.ZenModeSettings;
 import com.android.settingslib.RestrictedPreference;
 
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
-
 /**
  * Preference representing a single mode item on the modes aggregator page. Clicking on this
  * preference leads to an individual mode's configuration page.
  */
-public class ZenModeListPreference extends RestrictedPreference {
+class ZenModeListPreference extends RestrictedPreference {
     final Context mContext;
     ZenMode mZenMode;
 
@@ -68,10 +64,10 @@ public class ZenModeListPreference extends RestrictedPreference {
         mZenMode = zenMode;
         setTitle(mZenMode.getRule().getName());
         setSummary(mZenMode.getRule().getTriggerDescription());
-        try {
-            setIcon(mZenMode.getIcon(mContext).get(200, TimeUnit.MILLISECONDS));
-        } catch (Exception e) {
-            // no icon
-        }
+
+        FutureUtil.whenDone(
+                mZenMode.getIcon(IconLoader.getInstance(mContext)),
+                icon -> setIcon(icon),
+                mContext.getMainExecutor());
     }
 }

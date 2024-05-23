@@ -33,7 +33,7 @@ import com.android.settingslib.utils.ThreadUtils;
 class WaitForSyncState extends AudioStreamStateHandler {
     @VisibleForTesting
     static final int AUDIO_STREAM_WAIT_FOR_SYNC_STATE_SUMMARY =
-            R.string.audio_streams_wait_for_sync_state_summary;
+            R.string.audio_streams_connecting_summary;
 
     @VisibleForTesting static final int WAIT_FOR_SYNC_TIMEOUT_MILLIS = 15000;
 
