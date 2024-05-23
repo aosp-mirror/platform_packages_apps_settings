@@ -329,38 +329,6 @@ public class UiccSlotUtil {
         return INVALID_PHYSICAL_SLOT_ID;
     }
 
-    // Device |                                        |Slot   |
-    // Working|                                        |Mapping|
-    // State  |Type                                    |Mode   |Friendly name
-    //--------------------------------------------------------------------------
-    // Single |SIM pSIM [RIL 0]                        |1      |pSIM active
-    // Single |SIM MEP Port #0 [RIL0]                  |2      |eSIM Port0 active
-    // Single |SIM MEP Port #1 [RIL0]                  |2.1    |eSIM Port1 active
-    // DSDS   |pSIM [RIL 0] + MEP Port #0 [RIL 1]      |3      |pSIM+Port0
-    // DSDS   |pSIM [RIL 0] + MEP Port #1 [RIL 1]      |3.1    |pSIM+Port1
-    // DSDS   |MEP Port #0 [RIL 0] + MEP Port #1 [RIL1]|3.2    |Dual-Ports-A
-    // DSDS   |MEP Port #1 [RIL 0] + MEP Port #0 [RIL1]|4      |Dual-Ports-B
-    //
-    // The rules are:
-    // 1. pSIM's logical slots always is [RIL 0].
-    // 2. assign the new active port to the same stack that will be de-activated
-    //    For example: mode#3->mode#4
-    // 3. Add an eSIM carrier or enable eSIM carrier. The cases are at the below.
-    //    1) 1   => 2 / 2.1 / 3 / 3.1
-    //    2) 2   => 1 / 3 / 3.2
-    //    3) 2.1 => 3.1 / 4
-    //    4) 3   => 4
-    //    5) 3.1 => 3.2
-    //    Note:
-    //        1) 2 <=> 2.1  blocked by LPA (reason: existing active port in SS so just re-use)
-    //        2) 3 <=> 3.1 blocked by LPA (reason: if pSIM+an active port, re-use the active port)
-    // 4. pSIM insertion or enabling
-    //     1) 2   => 1 / 3
-    //     2) 2.1 => 1 / 3.1
-    //     3) 3.2 => 3 / 3.1
-    //     4) 4   => 3 / 3.1
-
-
     @VisibleForTesting
     static Collection<UiccSlotMapping> prepareUiccSlotMappings(
             Collection<UiccSlotMapping> uiccSlotMappings, boolean isPsim, int physicalSlotId,
