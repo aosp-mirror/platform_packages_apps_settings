@@ -12112,12 +12112,12 @@
     <!-- setting Checkbox summary whether to boot with 16K page size[CHAR_LIMIT=50] -->
     <string name="enable_16k_pages_summary">Boot device using 16KB page size supported kernel</string>
     <!-- Confirmation dialog title to ensure user wishes to enable 16K page size -->
-    <string name="confirm_enable_16k_pages_title">Switch from 4kB mode to 16KB mode</string>
+    <string name="confirm_enable_16k_pages_title">Switch from 4KB mode to 16KB mode</string>
     <!-- Warning dialog message to confirm user wishes to enable 16KB page size -->
-    <string name="confirm_enable_16k_pages_text">You are in the page-agnostic mode running a 4kB kernel, and you are switching to the 16KB mode.
+    <string name="confirm_enable_16k_pages_text">You are in the page-agnostic mode running a 4KB kernel, and you are switching to the 16KB mode.
         Software integrity cannot be guaranteed in this mode, and any data stored on the phone while the bootloader is unlocked may be at risk.
         This will reboot the device. Some features will be disabled in these modes, so some applications may not work.
-        To return the device to production mode, you would need to then, switch back to the 4kB mode and lock the bootloader,
+        To return the device to production mode, you would need to then, switch back to the 4KB mode and lock the bootloader,
         which factory resets the device. After the device successfully boots into Android, disable OEM unlocking in Developer options.</string>
     <!-- dialog title to confirm user wishes to revert to 4k page size kernel -->
     <string name="confirm_enable_4k_pages_title">Switch from 16KB mode to 4KB mode</string>
@@ -12138,6 +12138,8 @@
         then lock the bootloader, which factory resets the device. After the device successfully boots into Android, disable OEM unlocking in Developer options.
         The device will be wiped and the filesystem will be changed to ext4 after confirmation. After this completes, please come back to enable 16KB again.
     </string>
+    <!-- Text for confirmation buttion for ext4 -->
+    <string name="confirm_ext4_button_text">Erase all data</string>
     <!-- Toast on failure to reformat data to ext4 -->
     <string name="format_ext4_failure_toast">Failed to reformat and wipe the data partition to ext4.</string>
     <!-- Dialog to OEM unlock the device before using 16K developer option -->
