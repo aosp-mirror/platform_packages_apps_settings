@@ -5191,6 +5191,18 @@
             android:theme="@style/Theme.SpaLib.Dialog">
         </activity>
 
+        <activity android:name="Settings$BluetoothDashboardActivity"
+            android:label="@string/bluetooth_settings_title"
+            android:permission="android.permission.BLUETOOTH_CONNECT"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.settings.BLUETOOTH_DASHBOARD_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.connecteddevice.BluetoothDashboardFragment"/>
+        </activity>
+
         <activity
             android:name="com.android.settings.connecteddevice.audiosharing.AudioSharingActivity"
             android:label="@string/audio_sharing_title"
