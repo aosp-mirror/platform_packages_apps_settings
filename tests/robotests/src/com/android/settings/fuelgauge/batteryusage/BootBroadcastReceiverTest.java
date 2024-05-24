@@ -43,6 +43,7 @@ import org.robolectric.shadows.ShadowAlarmManager;
 
 import java.time.Clock;
 import java.util.List;
+import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
 /** Tests of {@link BootBroadcastReceiver}. */
@@ -56,6 +57,7 @@ public final class BootBroadcastReceiverTest {
 
     @Before
     public void setUp() {
+        TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
         mContext = ApplicationProvider.getApplicationContext();
         mPeriodicJobManager = PeriodicJobManager.getInstance(mContext);
         mShadowAlarmManager = shadowOf(mContext.getSystemService(AlarmManager.class));
@@ -136,7 +138,7 @@ public final class BootBroadcastReceiverTest {
 
         mReceiver.onReceive(mContext, new Intent(Intent.ACTION_TIME_CHANGED));
 
-        TimeUnit.MILLISECONDS.sleep(100);
+        TimeUnit.MILLISECONDS.sleep(1000);
         assertThat(mDao.getAllAfter(0)).isEmpty();
         assertThat(mShadowAlarmManager.peekNextScheduledAlarm()).isNotNull();
     }
@@ -150,7 +152,7 @@ public final class BootBroadcastReceiverTest {
 
         mReceiver.onReceive(mContext, new Intent(Intent.ACTION_TIME_CHANGED));
 
-        TimeUnit.MILLISECONDS.sleep(100);
+        TimeUnit.MILLISECONDS.sleep(1000);
         assertThat(mDao.getAllAfter(0).size()).isEqualTo(1);
         assertThat(mShadowAlarmManager.peekNextScheduledAlarm()).isNotNull();
     }
@@ -168,7 +170,7 @@ public final class BootBroadcastReceiverTest {
                                 Intent.EXTRA_TIME_PREF_24_HOUR_FORMAT,
                                 Intent.EXTRA_TIME_PREF_VALUE_USE_12_HOUR));
 
-        TimeUnit.MILLISECONDS.sleep(100);
+        TimeUnit.MILLISECONDS.sleep(1000);
         assertThat(mDao.getAllAfter(0).size()).isEqualTo(1);
         assertThat(mShadowAlarmManager.peekNextScheduledAlarm()).isNull();
     }
@@ -182,7 +184,7 @@ public final class BootBroadcastReceiverTest {
 
         mReceiver.onReceive(mContext, new Intent(Intent.ACTION_TIMEZONE_CHANGED));
 
-        TimeUnit.MILLISECONDS.sleep(100);
+        TimeUnit.MILLISECONDS.sleep(1000);
         assertThat(mDao.getAllAfter(0)).isEmpty();
         assertThat(mShadowAlarmManager.peekNextScheduledAlarm()).isNotNull();
     }
