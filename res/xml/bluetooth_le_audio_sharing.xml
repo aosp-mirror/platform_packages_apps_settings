@@ -68,14 +68,14 @@
 
     <PreferenceCategory
         android:key="audio_streams_settings_category"
-        android:title="@string/audio_streams_category_title"
+        android:title="@string/audio_sharing_nearby_audio_title"
         settings:controller="com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsCategoryController">
 
         <Preference
             android:fragment="com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsDashboardFragment"
             android:icon="@drawable/ic_chevron_right_24dp"
             android:key="audio_streams_settings"
-            android:title="@string/audio_streams_pref_title" />
+            android:title="@string/audio_streams_main_page_title" />
 
     </PreferenceCategory>
 </PreferenceScreen>
