@@ -48,9 +48,9 @@
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"게임, 동영상 등만"</string>
     <string name="selective_stay_awake_summary" msgid="9055967322921984543">"화면 유휴 상태를 중지하는 앱의 경우 전면 디스플레이가 켜집니다"</string>
     <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"위로 스와이프하여 계속하기"</string>
-    <string name="stay_awake_on_lockscreen_summary" msgid="2299351813382522952">"휴대전화를 접고 전면 디스플레이에서 위로 스와이프하여 계속 앱을 사용하거나, 화면이 잠길 때까지 몇 초 동안 기다립니다"</string>
+    <string name="stay_awake_on_lockscreen_summary" msgid="8825321939913726566">"휴대전화를 접고 전면 디스플레이에서 위로 스와이프하여 계속 앱을 사용하거나, 화면이 잠길 때까지 몇 초 동안 기다립니다. 게임 및 동영상 앱은 자동으로 계속됩니다."</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"사용 안함"</string>
-    <string name="sleep_on_fold_summary" msgid="7737992842459588846">"기기를 접으면 전면 디스플레이가 잠깁니다"</string>
+    <string name="sleep_on_fold_summary" msgid="4191753338303043456">"기기를 접으면 전면 디스플레이가 꺼진 후 잠깁니다."</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"자동 회전 사용"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"얼굴 인식 기능은 전면 카메라를 사용하여 자동 회전 정확도를 높입니다. 이미지는 Google에 전송되거나 저장되지 않습니다."</string>
     <string name="bluetooth" msgid="8898478620943459654">"블루투스"</string>
@@ -139,7 +139,6 @@
     <string name="stylus_textfield_handwriting" msgid="2363579035338976327">"텍스트 입력란에 쓰기"</string>
     <string name="stylus_ignore_button" msgid="7734540973145241391">"스타일러스 버튼 누름 모두 무시"</string>
     <string name="stylus_connected_devices_title" msgid="2823967577941359812">"스타일러스"</string>
-    <string name="audio_streams_empty" msgid="8803517701437394982">"주변 오디오 스트림이 없습니다."</string>
     <string name="date_and_time" msgid="1788358029823431692">"날짜 및 시간"</string>
     <string name="proxy_settings_title" msgid="4201866858226087066">"프록시"</string>
     <string name="proxy_clear_text" msgid="6529658759984031149">"지우기"</string>
@@ -286,8 +285,7 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"근처 기기 액세스 권한이 있는 앱은 연결된 기기 간의 상대적인 위치를 파악할 수 있습니다."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"앱 및 서비스에 대한 위치 정보 액세스가 사용 중지되어 있습니다. 그래도 긴급 전화번호로 전화를 걸거나 문자 메시지를 보내면 기기의 위치 정보가 긴급 구조원에게 전달될 수 있습니다."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"위치 설정에 대해 자세히 알아보기"</string>
-    <!-- no translation found for location_settings_tooltip_text_for_chrome (5781821709250544575) -->
-    <skip />
+    <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"변경하려면 ChromeOS 설정 &gt; 개인 정보 보호 및 보안 &gt; 개인 정보 보호 설정 &gt; 위치 액세스로 이동하세요."</string>
     <string name="account_settings_title" msgid="9138880127246241885">"계정"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"보안"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"암호화 및 사용자 인증 정보"</string>
@@ -565,7 +563,8 @@
     <string name="private_space_auto_lock_title" msgid="8663409382910601261">"비공개 스페이스 자동 잠금"</string>
     <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"일정 시간 동안 기기를 사용하지 않은 경우 비공개 스페이스를 자동으로 잠글 수 있습니다."</string>
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"기기를 잠글 때마다"</string>
-    <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"5분 동안 사용하지 않은 경우"</string>
+    <!-- no translation found for private_space_auto_lock_after_inactivity (7107814517866649733) -->
+    <skip />
     <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"기기를 다시 시작한 후에만"</string>
     <string name="private_space_hide_page_title" msgid="3364639176511877414">"비공개 스페이스 숨기기"</string>
     <string name="private_space_hide_when_locked" msgid="6219472348124151797">"잠겨 있을 때 비공개 스페이스 숨기기"</string>
@@ -1753,7 +1752,7 @@
     <string name="enable_text" msgid="8570798764647110430">"사용"</string>
     <string name="clear_user_data_text" msgid="6773186434260397947">"저장용량 비우기"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"업데이트 제거"</string>
-    <string name="app_restricted_settings_lockscreen_title" msgid="796413224212436400">"제한된 권한 허용"</string>
+    <string name="app_restricted_settings_lockscreen_title" msgid="5993061278264872648">"제한된 설정 허용"</string>
     <string name="auto_launch_enable_text" msgid="8912714475823807798">"선택한 일부 활동이 기본적으로 이 앱에서 열립니다."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"이 앱이 위젯을 만들고 자체 데이터에 액세스할 수 있도록 선택했습니다."</string>
     <string name="auto_launch_disable_text" msgid="502648841250936209">"기본값이 설정되지 않음"</string>
@@ -2016,14 +2015,14 @@
     <string name="display_category_title" msgid="6638191682294461408">"디스플레이"</string>
     <string name="accessibility_color_and_motion_title" msgid="2323301706545305874">"색상 및 모션"</string>
     <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"색상 대비"</string>
-    <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"고대비를 사용하면 텍스트, 버튼, 아이콘이 더 선명하게 보입니다. 자신에게 가장 괜찮아 보이는 대비를 선택하세요."</string>
-    <string name="color_contrast_note" msgid="7592686603372566198">"일부 앱에서는 모든 색상 및 텍스트 대조 설정을 지원하지 않습니다."</string>
+    <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"고대비를 사용하면 텍스트, 버튼, 아이콘이 더 선명하게 보입니다. 가장 괜찮아 보이는 대비를 선택하세요."</string>
+    <string name="color_contrast_note" msgid="7592686603372566198">"일부 앱에서는 몇몇 색상 및 텍스트 대비 설정을 지원하지 않습니다."</string>
     <string name="color_contrast_preview" msgid="6791430227535363883">"미리보기"</string>
     <string name="color_contrast_preview_sender_name" msgid="8641943417589238147">"헬렌, 아담"</string>
     <string name="color_contrast_preview_email_send_date" msgid="2108702726171600080">"2일 전"</string>
     <string name="color_contrast_preview_email_badge" msgid="4845484039428505392">"후속 조치를 하시겠습니까?"</string>
     <string name="color_contrast_preview_email_title" msgid="198712116139754823">"출장 보고서"</string>
-    <string name="color_contrast_preview_email_body" msgid="2714343154965937945">"추가 지원이 필요하면 저나 민지님에게 문의하세요. 이 보고서는"</string>
+    <string name="color_contrast_preview_email_body" msgid="2714343154965937945">"추가 지원이 필요하면 저나 헬렌에게 문의하세요. 이 보고서는"</string>
     <string name="color_contrast_preview_email_attachment_name" msgid="852407311884814746">"클라이언트 비용"</string>
     <string name="color_contrast_about_title" msgid="5939566801408667867">"색상 대비 정보"</string>
     <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"화면 어둡게"</string>
@@ -2185,7 +2184,7 @@
     <string name="accessibility_button_high_label" msgid="9138077512008190896">"불투명"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"고대비 텍스트"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"텍스트 색상을 검은색 또는 흰색으로 변경하여 배경과의 대비를 극대화합니다."</string>
-    <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"텍스트 대조 극대화"</string>
+    <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"텍스트 대비 극대화"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"텍스트 주변에 검은색 또는 흰색 배경을 추가하여 대비를 높이세요"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"화면 확대 자동 업데이트"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"앱 전환 시 화면 확대 업데이트"</string>
@@ -2325,6 +2324,8 @@
     <string name="daltonizer_mode_protanomaly_title" msgid="6392456967103014723">"빨간색과 초록색"</string>
     <string name="daltonizer_mode_tritanomaly_title" msgid="2278786218762602022">"파란색과 노란색"</string>
     <string name="daltonizer_mode_grayscale_title" msgid="152005391387952588">"그레이 스케일"</string>
+    <!-- no translation found for daltonizer_saturation_title (2999486412114963068) -->
+    <skip />
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="2117727423019598455">"녹색약"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="4617032854982040748">"적색약"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"청색약"</string>
@@ -2405,7 +2406,6 @@
     <string name="keywords_select_to_speak" msgid="2872704811610888719"></string>
     <string name="keywords_color_correction" msgid="8540442886990423681">"색상 조정"</string>
     <string name="keywords_color_inversion" msgid="4291058365873221962">"화면 어둡게, 화면 밝게"</string>
-    <string name="keywords_contrast" msgid="4668393735398949873">"색상 대비"</string>
     <string name="keywords_accessibility_menu" msgid="4300579436464706608"></string>
     <string name="keywords_switch_access" msgid="5813094504384313402"></string>
     <string name="keywords_auto_click" msgid="6811744211216280998">"거동, 마우스, 외장 마우스, 헤드 마우스, 어댑티브 마우스, 휠체어, 조이스틱"</string>
@@ -3306,6 +3306,8 @@
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"연결된 기기 설정"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{없음}=1{예약 1개 설정됨}other{예약 #개 설정됨}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"방해 금지 모드"</string>
+    <!-- no translation found for zen_modes_list_title (5138745349253275428) -->
+    <skip />
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"중요한 사람과 앱의 알림만 받기"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"방해 요소 제한"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"방해 금지 모드 사용 설정"</string>
@@ -3532,7 +3534,7 @@
     <string name="notifications_sent_daily" msgid="10274479224185437">"{count,plural, =1{매일 알림 약 #개}other{매일 알림 약 #개}}"</string>
     <string name="notifications_sent_weekly" msgid="7895656213187555346">"{count,plural, =1{매주 알림 약 #개}other{매주 알림 약 #개}}"</string>
     <string name="notifications_sent_never" msgid="9081278709126812062">"전송하지 않음"</string>
-    <string name="manage_notification_access_title" msgid="6481256069087219982">"기기 및 앱 알림"</string>
+    <string name="manage_notification_access_title" msgid="4154723216570646451">"알림 읽기, 답장하기, 관리하기"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"알림을 읽을 수 있는 앱과 기기 제어"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8643809206612366067">"직장 프로필 알림에 액세스하지 못하도록 차단됨"</string>
     <string name="notification_assistant_title" msgid="5889201903272393099">"개선된 알림 기능"</string>
@@ -3632,7 +3634,7 @@
     <string name="app_notification_block_summary" msgid="1804611676339341551">"이러한 알림을 다시 표시하지 않음"</string>
     <string name="notification_content_block_title" msgid="6689085826061361351">"알림 표시"</string>
     <string name="notification_content_block_summary" msgid="329171999992248925">"알림을 창이나 주변기기에 표시하지 않음"</string>
-    <string name="app_notification_fsi_permission_title" msgid="5424116606034705020">"전체 화면 알림 허용"</string>
+    <string name="app_notification_fsi_permission_title" msgid="2260977598430154428">"전체 화면 알림 허용"</string>
     <string name="app_notification_fsi_permission_summary" msgid="7673487977631068039">"기기가 잠겨 있을 때 알림을 전체 화면에 표시할 수 있도록 허용합니다."</string>
     <string name="notification_badge_title" msgid="6854537463548411313">"알림 표시 점 허용"</string>
     <string name="notification_channel_badge_title" msgid="6505542437385640049">"알림 표시 점 보기"</string>
@@ -3981,8 +3983,8 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"모든 파일 관리 허용"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"앱이 이 기기 또는 연결된 모든 저장장치에 있는 파일을 모두 읽고 수정하고 삭제하도록 허용합니다. 권한을 부여하면 앱이 나에게 명시적으로 알리지 않고도 파일에 액세스할 수 있습니다."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"모든 파일에 액세스 가능"</string>
-    <string name="full_screen_intent_title" msgid="747270185715224130">"전체 화면 알림"</string>
-    <string name="permit_full_screen_intent" msgid="9035367640019960861">"이 앱에 전체 화면 알림 허용하기"</string>
+    <string name="full_screen_intent_title" msgid="5888548315628268674">"전체 화면 알림"</string>
+    <string name="permit_full_screen_intent" msgid="2414307667550523630">"이 앱에 전체 화면 알림 허용"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"기기가 잠겨 있을 때 앱에서 알림을 전체 화면에 표시할 수 있도록 허용합니다. 앱에서는 이러한 방식으로 알람, 수신 전화 또는 기타 긴급 알림을 강조 표시할 수 있습니다."</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"미디어 관리 앱"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"앱이 미디어를 관리하도록 허용"</string>
@@ -4100,7 +4102,7 @@
     <string name="data_usage_template" msgid="3822452362629968010">"<xliff:g id="ID_2">%2$s</xliff:g>에 <xliff:g id="ID_1">%1$s</xliff:g> 사용함"</string>
     <string name="configure" msgid="1499586749829665889">"설정"</string>
     <string name="data_usage_other_apps" msgid="5649047093607329537">"사용량이 집계된 기타 앱"</string>
-    <string name="data_saver_unrestricted_summary" msgid="7343571401172437542">"{count,plural, =1{데이터 절약 모드가 켜져 있을 때 1개의 앱이 무제한 데이터를 사용하도록 허용됨}other{데이터 절약 모드가 켜져 있을 때 #개의 앱이 무제한 데이터를 사용하도록 허용됨}}"</string>
+    <string name="data_saver_unrestricted_summary" msgid="559673440849071149">"{count,plural, =1{데이터 절약 모드가 켜져 있을 때 1개의 앱이 무제한 모바일 데이터를 사용하도록 허용됨}other{데이터 절약 모드가 켜져 있을 때 #개의 앱이 무제한 모바일 데이터를 사용하도록 허용됨}}"</string>
     <string name="data_usage_title" msgid="4039024073687469094">"기본 자료"</string>
     <string name="data_usage_wifi_title" msgid="1060495519280456926">"Wi‑Fi 데이터"</string>
     <string name="data_used_formatted" msgid="7913920278059077938">"<xliff:g id="ID_1">^1</xliff:g><xliff:g id="ID_2">^2</xliff:g> 사용됨"</string>
@@ -4117,13 +4119,13 @@
     <string name="no_carrier_update_now_text" msgid="7898004907837200752">"조금 전 업데이트됨"</string>
     <string name="launch_wifi_text" msgid="976421974332512894">"세부정보 보기"</string>
     <string name="data_saver_title" msgid="2593804270788863815">"데이터 절약 모드"</string>
-    <string name="unrestricted_data_saver" msgid="7922563266857367495">"무제한 데이터"</string>
+    <string name="unrestricted_data_saver" msgid="5913547065342097274">"무제한 모바일 데이터"</string>
     <string name="restrict_background_blocklisted" msgid="2308345280442438232">"백그라운드 데이터 사용 중지됨"</string>
     <string name="data_saver_on" msgid="7848893946018448793">"사용"</string>
     <string name="data_saver_off" msgid="5891210864117269045">"사용 안함"</string>
     <string name="data_saver_switch_title" msgid="7111538580123722959">"데이터 절약 모드 사용"</string>
-    <string name="unrestricted_app_title" msgid="7117585996574329284">"무제한 데이터 사용"</string>
-    <string name="unrestricted_app_summary" msgid="282698963532000403">"데이터 절약 모드가 켜져 있을 때 무제한 데이터 액세스 허용"</string>
+    <string name="unrestricted_app_title" msgid="8531936851059106374">"무제한 모바일 데이터 사용량"</string>
+    <string name="unrestricted_app_summary" msgid="8320813971858627624">"데이터 절약 모드가 켜져 있을 때 무제한 모바일 데이터 액세스 허용"</string>
     <string name="home_app" msgid="6056850504746902747">"홈 앱"</string>
     <string name="suggestion_additional_fingerprints" msgid="4726777300101156208">"다른 지문 추가"</string>
     <string name="suggestion_additional_fingerprints_summary" msgid="2825364645039666674">"다른 손가락으로 잠금 해제"</string>
@@ -4197,9 +4199,9 @@
     <string name="notification_suggestion_summary" msgid="7615611244249276113">"알림 내용 표시 또는 숨기기"</string>
     <string name="page_tab_title_support" msgid="3235725053332345773">"도움말 및 지원"</string>
     <string name="developer_smallest_width" msgid="632354817870920911">"최소 폭"</string>
-    <string name="premium_sms_none" msgid="8737045049886416739">"설치된 앱 중에서 프리미엄 SMS 액세스를 요청한 앱이 없습니다."</string>
+    <string name="premium_sms_none" msgid="4718916765158062108">"설치된 앱 중에서 프리미엄 SMS를 요청한 앱이 없습니다."</string>
     <string name="premium_sms_warning" msgid="2192300872411073324">"프리미엄 SMS는 요금이 부과될 수 있으며 이는 이동통신사 요금에 추가됩니다. 앱에 권한을 부여하면 해당 앱을 사용하여 프리미엄 SMS를 사용할 수 있게 됩니다."</string>
-    <string name="premium_sms_access" msgid="5605970342699013212">"프리미엄 SMS 액세스"</string>
+    <string name="premium_sms_access" msgid="8487315743197916530">"프리미엄 SMS"</string>
     <string name="bluetooth_disabled" msgid="835838280837359514">"사용 안함"</string>
     <string name="bluetooth_connected_summary" msgid="8043167194934315712">"<xliff:g id="ID_1">%1$s</xliff:g>에 연결됨"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="2294954614327771844">"여러 기기에 연결됨"</string>
@@ -4990,12 +4992,9 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"UWB를 사용하려면 비행기 모드를 사용 중지하세요."</string>
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"현재 위치에서는 UWB를 사용할 수 없습니다."</string>
     <string name="thread_network_settings_title" msgid="4212301030523859220">"스레드"</string>
-    <!-- no translation found for thread_network_settings_main_switch_title (3859168481929323474) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_footer_title (7385600318850220927) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_learn_more (8278498005848565050) -->
-    <skip />
+    <string name="thread_network_settings_main_switch_title" msgid="3859168481929323474">"스레드 사용하기"</string>
+    <string name="thread_network_settings_footer_title" msgid="7385600318850220927">"스레드는 스마트 홈 기기를 연결하여 효율성과 성능을 높이는 데 도움이 됩니다.\n\n사용 설정하면 이 기기가 스레드 네트워크에 연결되어 이 휴대전화를 통해 Matter 지원 기기를 제어할 수 있습니다."</string>
+    <string name="thread_network_settings_learn_more" msgid="8278498005848565050">"스레드 자세히 알아보기"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"카메라 액세스"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"마이크 액세스"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"앱 및 서비스에 적용"</string>
@@ -5080,12 +5079,12 @@
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"머리를 움직이면 오디오가 변경되어 더 자연스러운 소리를 들을 수 있습니다."</string>
     <string name="bluetooth_details_permissions_sync_title" msgid="7277580382321003521">"휴대전화에서 권한 동기화"</string>
     <string name="bluetooth_details_permissions_sync_summary" msgid="8125037984381432059">"이 휴대전화에서 허용한 것과 동일한 앱 권한을 시계에 부여합니다."</string>
-    <string name="bluetooth_details_audio_device_types_title" msgid="3381941189346781614">"오디오 기기 유형"</string>
-    <string name="bluetooth_details_audio_device_type_unknown" msgid="839337391037998014">"알 수 없음"</string>
+    <string name="bluetooth_details_audio_device_types_title" msgid="1889644189800180316">"오디오 기기 유형"</string>
+    <string name="bluetooth_details_audio_device_type_unknown" msgid="5299284975435974206">"설정되지 않음"</string>
     <string name="bluetooth_details_audio_device_type_speaker" msgid="3706227767994792124">"스피커"</string>
     <string name="bluetooth_details_audio_device_type_headphones" msgid="7644588291215033798">"헤드폰"</string>
-    <string name="bluetooth_details_audio_device_type_hearing_aid" msgid="1310631131071939859">"보청기"</string>
-    <string name="bluetooth_details_audio_device_type_carkit" msgid="4439017600454703229">"차량 키트"</string>
+    <string name="bluetooth_details_audio_device_type_hearing_aid" msgid="6311786545025321187">"청각 보조 기기"</string>
+    <string name="bluetooth_details_audio_device_type_carkit" msgid="1866236563013629394">"자동차"</string>
     <string name="bluetooth_details_audio_device_type_other" msgid="7019481234617207563">"기타"</string>
     <string name="ingress_rate_limit_title" msgid="2106694002836274350">"네트워크 다운로드 속도 제한"</string>
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"인터넷 연결을 제공하는 모든 네트워크에 적용할 네트워크 대역폭 인그레스 속도 제한을 설정합니다."</string>
@@ -5170,8 +5169,6 @@
     <string name="screen_flash_color_violet" msgid="1279950780509029495">"보라색"</string>
     <string name="color_selector_dialog_done" msgid="121253968943363376">"완료"</string>
     <string name="color_selector_dialog_cancel" msgid="8667350644753900701">"취소"</string>
-    <string name="contrast_title" msgid="6885768151336508075">"대비"</string>
-    <string name="contrast_standard" msgid="1097297089917185235">"표준"</string>
     <string name="contrast_default" msgid="8918545965525226966">"기본값"</string>
     <string name="contrast_medium" msgid="384414510709285811">"보통"</string>
     <string name="contrast_high" msgid="3988567609694797696">"높음"</string>
@@ -5208,4 +5205,100 @@
     <string name="fingerprint_acquired_imager_dirty_udfps" msgid="7005042288289506776">"센서 주변 화면을 닦고 다시 시도하세요."</string>
     <string name="sim_category_converted_sim" msgid="8575548015816988908">"eSIM으로 전환했습니다. 기존 SIM을 제거하고 폐기하세요."</string>
     <string name="sync_across_devices_title" msgid="3447757705383089345">"기기 간 동기화"</string>
+    <!-- no translation found for device_diagnostics_title (2914523189695727897) -->
+    <skip />
+    <string name="audio_sharing_title" msgid="4144157137502923821">"오디오 공유"</string>
+    <string name="audio_sharing_switch_title" msgid="7052827328670825701">"오디오 공유"</string>
+    <string name="calls_and_alarms_device_title" msgid="6993559028175454198">"통화 및 알람"</string>
+    <string name="audio_sharing_description" msgid="1660255584523640628">"다른 사용자가 나와 함께 미디어를 들을 수 있게 하세요. 미디어를 들으려면 각자 LE 오디오 헤드폰이 있어야 합니다."</string>
+    <string name="audio_sharing_device_group_title" msgid="3019780581643956943">"사용 중인 미디어 기기"</string>
+    <string name="audio_sharing_call_audio_title" msgid="7978867452289583929">"통화 오디오"</string>
+    <string name="audio_sharing_call_audio_description" msgid="6573621048260616924">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>에서만 재생"</string>
+    <string name="audio_sharing_test_sound_title" msgid="6438868185641027763">"테스트 소리 재생"</string>
+    <string name="audio_sharing_test_sound_description" msgid="4072462502371937399">"청취 중인 모든 사용자가 들어야 합니다."</string>
+    <string name="audio_sharing_stream_settings_title" msgid="1374391898689242036">"오디오 스트림 설정"</string>
+    <string name="audio_sharing_stream_name_title" msgid="8156859441897180940">"이름"</string>
+    <string name="audio_sharing_stream_password_title" msgid="7026649168165764602">"비밀번호"</string>
+    <string name="audio_sharing_stream_compatibility_title" msgid="5690947186724469918">"호환성 개선"</string>
+    <string name="audio_sharing_stream_compatibility_description" msgid="8170241188606110963">"음질을 낮추고 보청기와 같은 일부 기기의 연결을 지원합니다."</string>
+    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="2586408353546825682">"호환성을 구성하기 위해 오디오 공유를 사용 중지합니다."</string>
+    <string name="audio_sharing_nearby_audio_title" msgid="4795438407040677177">"주변 오디오 듣기"</string>
+    <string name="audio_sharing_footer_description" msgid="4786942197840271680">"오디오 공유는 Auracast™를 지원합니다."</string>
+    <string name="audio_sharing_stream_name_dialog_title" msgid="6706027295417556499">"오디오 스트림 이름"</string>
+    <string name="audio_sharing_stream_password_dialog_title" msgid="4148196538860845705">"오디오 스트림 비밀번호"</string>
+    <string name="audio_sharing_media_device_group_title" msgid="4850674234590549565">"기타 미디어 기기"</string>
+    <string name="audio_sharing_summary_on" msgid="611197542982323788">"사용"</string>
+    <string name="audio_sharing_summary_off" msgid="8833198995257547378">"사용 안함"</string>
+    <string name="audio_sharing_share_dialog_title" msgid="427514648577553621">"오디오 공유"</string>
+    <string name="audio_sharing_share_dialog_subtitle" msgid="5208582843732057871">"<xliff:g id="DEVICE_NAME1">%1$s</xliff:g> 및 <xliff:g id="DEVICE_NAME2">%2$s</xliff:g>"</string>
+    <string name="audio_sharing_share_button_label" msgid="3895900668317105537">"오디오 공유"</string>
+    <string name="audio_sharing_no_thanks_button_label" msgid="5822491984114744357">"나중에"</string>
+    <string name="audio_sharing_share_with_dialog_title" msgid="3934377530640830364">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> 기기와 오디오를 공유하시겠습니까?"</string>
+    <string name="audio_sharing_share_with_more_dialog_title" msgid="2840069088858232267">"다른 기기와 오디오 공유"</string>
+    <string name="audio_sharing_share_with_button_label" msgid="4146194430380237357">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> 기기와 공유"</string>
+    <string name="audio_sharing_close_button_label" msgid="2666534149100498574">"닫기"</string>
+    <string name="audio_sharing_dialog_connect_device_content" msgid="2873230647152283734">"호환되는 다른 헤드폰을 연결하거나 스트림의 이름 및 비밀번호를 다른 사용자와 공유하세요."</string>
+    <string name="audio_sharing_dialog_pair_device_content" msgid="3136997898244863470">"호환되는 다른 헤드폰과 페어링하거나 오디오 스트림의 QR 코드를 다른 사용자와 공유하세요."</string>
+    <string name="audio_sharing_sharing_label" msgid="1038021053061111508">"오디오 공유 중"</string>
+    <string name="audio_sharing_pair_button_label" msgid="7987236990273083588">"새 기기와 페어링"</string>
+    <string name="audio_sharing_qrcode_button_label" msgid="3207039106555097659">"QR 코드 표시"</string>
+    <string name="audio_sharing_notification_title" msgid="1204798942946033005">"오디오를 공유 중입니다"</string>
+    <string name="audio_sharing_notification_content" msgid="1577180829878785642">"청취 중인 사용자는 미디어를 들을 수 있습니다. 통화는 들을 수 없습니다."</string>
+    <string name="audio_sharing_stop_button_label" msgid="8770519671470608849">"공유 중지"</string>
+    <string name="audio_sharing_settings_button_label" msgid="8574808650318270491">"설정"</string>
+    <string name="audio_sharing_disconnect_dialog_title" msgid="2192751727237748602">"연결 해제할 기기를 선택하세요"</string>
+    <string name="audio_sharing_dialog_disconnect_content" msgid="3840488888970653308">"한 번에 2개의 기기에서만 오디오를 공유할 수 있습니다."</string>
+    <string name="audio_sharing_disconnect_device_button_label" msgid="4272897217708930576">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> 연결 해제"</string>
+    <string name="audio_sharing_stop_dialog_title" msgid="4872853738164232075">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> 기기와 연결하시겠습니까?"</string>
+    <string name="audio_sharing_stop_dialog_content" msgid="6371546856710692910">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> 기기와의 오디오 공유를 중지합니다."</string>
+    <string name="audio_sharing_stop_dialog_with_two_content" msgid="2119020725467967219">"<xliff:g id="DEVICE_NAME1">%1$s</xliff:g> 및 <xliff:g id="DEVICE_NAME2">%2$s</xliff:g> 기기와의 오디오 공유를 중지합니다."</string>
+    <string name="audio_sharing_stop_dialog_with_more_content" msgid="5262441138981618703">"연결된 헤드폰과의 오디오 공유를 중지합니다."</string>
+    <string name="audio_sharing_connect_button_label" msgid="4241911519063029982">"연결"</string>
+    <string name="audio_sharing_sharing_stopped_label" msgid="8128194452354240996">"오디오 공유 중지됨"</string>
+    <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"호환되는 기기를 연결하세요"</string>
+    <string name="audio_sharing_comfirm_dialog_content" msgid="3479217934447446066">"오디오 공유를 시작하려면 먼저 LE 오디오 헤드폰을 휴대전화에 연결하세요."</string>
+    <string name="audio_streams_category_title" msgid="4878022761829895463">"LE 오디오 스트림에 연결"</string>
+    <string name="audio_streams_pref_title" msgid="6320485086288646209">"주변 오디오 스트림"</string>
+    <string name="audio_streams_title" msgid="6617990880383079165">"오디오 스트림"</string>
+    <string name="audio_streams_qr_code_summary" msgid="2838923349871884871">"QR 코드를 사용해 오디오 스트림에 연결"</string>
+    <string name="audio_streams_empty" msgid="8803517701437394982">"주변 오디오 스트림이 없습니다."</string>
+    <string name="audio_streams_disconnect" msgid="1755594831469579161">"연결 해제"</string>
+    <string name="audio_streams_connect" msgid="1955964373102927954">"연결"</string>
+    <string name="audio_streams_qr_code_is_not_valid_format" msgid="4856288389653121830">"QR 코드가 유효한 형식이 아닙니다."</string>
+    <string name="audio_streams_qr_code_scanner" msgid="525396804963685478">"오디오를 들으려면 아래의 QR 코드가 가운데에 오도록 스캔하세요."</string>
+    <string name="audio_streams_add_source_bad_code_state_summary" msgid="6527086906921868757">"비밀번호를 확인하고 다시 시도하세요."</string>
+    <string name="audio_streams_add_source_failed_state_summary" msgid="3937546443978562322">"연결할 수 없습니다. 다시 시도해 주세요."</string>
+    <string name="audio_streams_add_source_wait_for_response_summary" msgid="3763240901110974606">"연결 중…"</string>
+    <string name="audio_streams_wait_for_sync_state_summary" msgid="11905744690831864">"검색 중…"</string>
+    <string name="audio_streams_dialog_stream_is_not_available" msgid="4032878851270690546">"오디오 스트림을 사용할 수 없음"</string>
+    <string name="audio_streams_is_not_playing" msgid="8480293894696007941">"현재 이 오디오 스트림에서 재생 중인 스트림이 없습니다"</string>
+    <string name="audio_streams_dialog_close" msgid="8177201719298408431">"닫기"</string>
+    <string name="audio_streams_dialog_listen" msgid="7290340191504987685">"듣기"</string>
+    <string name="audio_streams_dialog_retry" msgid="4456843891970998556">"다시 시도"</string>
+    <string name="audio_streams_dialog_listen_to_audio_stream" msgid="8585253007762261528">"오디오 스트림 듣기"</string>
+    <string name="audio_streams_dialog_control_volume" msgid="7615062686016713544">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> 기기에서 오디오 스트림이 재생됩니다. 이 기기를 사용하여 볼륨을 조절하세요"</string>
+    <string name="audio_streams_dialog_cannot_listen" msgid="4432257183698209966">"오디오 스트림을 들을 수 없음"</string>
+    <string name="audio_streams_dialog_default_device" msgid="6159800303379303266">"호환되는 헤드폰 연결됨"</string>
+    <string name="audio_streams_activity_title" msgid="9011162151277443663">"브로드캐스트"</string>
+    <string name="audio_streams_no_password_summary" msgid="8976357323034830144">"비밀번호 필요 없음"</string>
+    <string name="audio_streams_dialog_learn_more" msgid="6711241053442211345">"자세히 알아보기"</string>
+    <string name="audio_streams_dialog_cannot_play" msgid="1358828316927479091">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> 기기에서 이 오디오 스트림을 재생할 수 없습니다"</string>
+    <string name="audio_streams_listening_now" msgid="4205614429222949176">"듣는 중"</string>
+    <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"그만 듣기"</string>
+    <string name="audio_streams_dialog_no_le_device_title" msgid="3931163990976742282">"호환되는 헤드폰 연결"</string>
+    <string name="audio_streams_dialog_no_le_device_button" msgid="4484355549428642588">"기기 연결"</string>
+    <string name="audio_streams_detail_page_title" msgid="7884132061275273766">"오디오 스트림 세부정보"</string>
+    <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"오디오 스트림 QR 코드"</string>
+    <string name="audio_streams_qr_code_page_password" msgid="7268475614131297060">"비밀번호: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
+    <string name="audio_streams_qr_code_page_description" msgid="1317961663706630428">"다른 사용자가 <xliff:g id="STREAM_NAME">%1$s</xliff:g> 스트림을 들으려면 사용 중인 Android 기기에 호환되는 헤드폰을 연결합니다. 그런 다음 이 QR 코드를 스캔합니다."</string>
+    <string name="audio_streams_main_page_title" msgid="1838380471076527639">"오디오 스트림 찾기"</string>
+    <string name="audio_streams_main_page_subtitle" msgid="3251995732921981539">"오디오를 공유 중인 기기 또는 주변 Auracast 방송을 들으세요"</string>
+    <string name="audio_streams_main_page_device_title" msgid="2635744035523908253">"내 오디오 기기"</string>
+    <string name="audio_streams_main_page_no_device_summary" msgid="2936000845397406389">"호환되는 헤드폰 연결"</string>
+    <string name="audio_streams_main_page_scan_section_title" msgid="2778235929304061163">"주변 오디오 스트림"</string>
+    <string name="audio_streams_main_page_scan_qr_code_title" msgid="8337270277392468895">"QR 코드 스캔"</string>
+    <string name="audio_streams_main_page_scan_qr_code_summary" msgid="1991792283368249499">"스트림의 QR 코드를 스캔하여 들으세요."</string>
+    <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"스트림 듣기"</string>
+    <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"오디오 스트림 QR 코드를 스캔하여 <xliff:g id="DEVICE_NAME">%1$s</xliff:g> 기기로 들으세요."</string>
+    <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"공유 중에는 비밀번호를 수정할 수 없습니다. 비밀번호를 변경하려면 먼저 오디오 공유를 사용 중지하세요."</string>
 </resources>

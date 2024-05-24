@@ -48,9 +48,9 @@
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"الألعاب والفيديوهات فقط وغير ذلك"</string>
     <string name="selective_stay_awake_summary" msgid="9055967322921984543">"يتم تشغيل الشاشة الأمامية للتطبيقات التي تمنع انتقال الشاشة إلى \"وضع عدم النشاط\"."</string>
     <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"التمرير سريعًا للأعلى لمواصلة استخدام التطبيق"</string>
-    <string name="stay_awake_on_lockscreen_summary" msgid="2299351813382522952">"عليك طي هاتفك ثم التمرير سريعًا للأعلى على الشاشة الأمامية لمواصلة استخدام التطبيق، أو الانتظار بضع لحظات إلى أن يتم قفل الشاشة."</string>
+    <string name="stay_awake_on_lockscreen_summary" msgid="8825321939913726566">"عليك طيّ هاتفك ثم التمرير سريعًا للأعلى على الشاشة الأمامية لمواصلة استخدام التطبيق، أو الانتظار بضع لحظات إلى أن يتم قفل الشاشة. سيستمر تشغيل الألعاب وتطبيقات الفيديو تلقائيًا."</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"أبدًا"</string>
-    <string name="sleep_on_fold_summary" msgid="7737992842459588846">"يتم قفل الشاشة الأمامية عند طيّ الجهاز."</string>
+    <string name="sleep_on_fold_summary" msgid="4191753338303043456">"يتم إطفاء الشاشة الأمامية وقفلها عند طيّ الجهاز"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"استخدام التدوير التلقائي"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"‏تستخدم ميزة \"التعرّف على الوجوه\" الكاميرا الأمامية لتحسين دقة التدوير التلقائي. لا يتم تخزين الصور أو إرسالها إلى Google مطلقًا."</string>
     <string name="bluetooth" msgid="8898478620943459654">"بلوتوث"</string>
@@ -139,7 +139,6 @@
     <string name="stylus_textfield_handwriting" msgid="2363579035338976327">"الكتابة بخط اليد في الحقول النصية"</string>
     <string name="stylus_ignore_button" msgid="7734540973145241391">"تجاهل كل حالات الضغط على زر قلم الشاشة"</string>
     <string name="stylus_connected_devices_title" msgid="2823967577941359812">"قلم الشاشة"</string>
-    <string name="audio_streams_empty" msgid="8803517701437394982">"لم يتم العثور على أجهزة بث صوتي قريبة."</string>
     <string name="date_and_time" msgid="1788358029823431692">"التاريخ والوقت"</string>
     <string name="proxy_settings_title" msgid="4201866858226087066">"الخادم الوكيل"</string>
     <string name="proxy_clear_text" msgid="6529658759984031149">"محو"</string>
@@ -286,8 +285,7 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"يمكن للتطبيقات التي لديها إذن بالوصول إلى الأجهزة المجاورة تحديد الموضع النسبي للأجهزة المتصلة بجهازك."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"ميزة وصول التطبيقات والخدمات إلى الموقع الجغرافي غير مفّعلة. قد يستمر إرسال الموقع الجغرافي لجهازك إلى مسؤولي الاستجابة لحالات الطوارئ عند الاتصال برقم طوارئ أو مراسلته نصيًا."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"مزيد من المعلومات حول إعدادات الموقع الجغرافي"</string>
-    <!-- no translation found for location_settings_tooltip_text_for_chrome (5781821709250544575) -->
-    <skip />
+    <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"‏لتغيير الإعداد، انتقِل إلى \"إعدادات ChromeOS‏\" &gt; \"الخصوصية والأمان\" &gt; \"عناصر التحكّم في الخصوصية\" &gt; \"الوصول إلى الموقع الجغرافي\""</string>
     <string name="account_settings_title" msgid="9138880127246241885">"الحسابات"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"الأمان"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"التشفير وبيانات الاعتماد"</string>
@@ -363,7 +361,7 @@
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"بصمة الإصبع"</string>
     <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"عند استخدام ميزة \"فتح الجهاز ببصمة الإصبع\""</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"بصمة الإصبع لملف العمل"</string>
-    <string name="fingerprint_add_title" msgid="1837610443487902050">"إضافة بصمة إصبع"</string>
+    <string name="fingerprint_add_title" msgid="1837610443487902050">"إضافة بصمة الإصبع"</string>
     <string name="security_settings_fingerprint_preference_summary" msgid="8486134175759676037">"{count,plural, =1{تمت إضافة بصمة إصبع واحدة}zero{تمت إضافة # بصمة إصبع}two{تمت إضافة بصمتَى إصبعَين}few{تمت إضافة # بصمات أصابع}many{تمت إضافة # بصمة إصبع}other{تمت إضافة # بصمة إصبع}}"</string>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1146977379031250790">"يجب ضبط الإعدادات"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"إعداد بصمة الإصبع"</string>
@@ -565,7 +563,7 @@
     <string name="private_space_auto_lock_title" msgid="8663409382910601261">"قفل المساحة الخاصة تلقائيًا"</string>
     <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"يمكنك قفل مساحتك الخاصة تلقائيًا إذا لم تستخدم جهازك لفترة زمنية"</string>
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"في كل مرة يتم فيها قفل الجهاز"</string>
-    <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"بعد توقّف النشاط لمدة 5 دقائق"</string>
+    <string name="private_space_auto_lock_after_inactivity" msgid="7107814517866649733">"‫5 دقائق بعد انقضاء مهلة غلق الشاشة"</string>
     <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"بعد إعادة تشغيل الجهاز فقط"</string>
     <string name="private_space_hide_page_title" msgid="3364639176511877414">"إخفاء المساحة الخاصّة"</string>
     <string name="private_space_hide_when_locked" msgid="6219472348124151797">"إخفاء المساحة الخاصّة عندما تكون مقفلة"</string>
@@ -1753,7 +1751,7 @@
     <string name="enable_text" msgid="8570798764647110430">"تفعيل"</string>
     <string name="clear_user_data_text" msgid="6773186434260397947">"محو مساحة التخزين"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"إلغاء تثبيت التحديثات"</string>
-    <string name="app_restricted_settings_lockscreen_title" msgid="796413224212436400">"السماح بالأذونات المقيّدة"</string>
+    <string name="app_restricted_settings_lockscreen_title" msgid="5993061278264872648">"السماح بالإعدادات المحظورة"</string>
     <string name="auto_launch_enable_text" msgid="8912714475823807798">"بعض الأنشطة التي اخترتها يتم فتحها في هذا التطبيق تلقائيًا."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"لقد اخترت السماح لهذا التطبيق بإنشاء الأدوات والوصول إلى بياناتها."</string>
     <string name="auto_launch_disable_text" msgid="502648841250936209">"لم يتم ضبط إعدادات تلقائية."</string>
@@ -2325,6 +2323,7 @@
     <string name="daltonizer_mode_protanomaly_title" msgid="6392456967103014723">"الأحمر والأخضر"</string>
     <string name="daltonizer_mode_tritanomaly_title" msgid="2278786218762602022">"الأزرق والأصفر"</string>
     <string name="daltonizer_mode_grayscale_title" msgid="152005391387952588">"تدرّج الرمادي"</string>
+    <string name="daltonizer_saturation_title" msgid="2999486412114963068">"كثافة اللون"</string>
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="2117727423019598455">"ضعف إبصار الأخضر، عَمَى الأخضر والأحمر"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="4617032854982040748">"ضعف إبصار الأحمر، عَمَى الأحمر"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"غمش الأزرق"</string>
@@ -2405,7 +2404,6 @@
     <string name="keywords_select_to_speak" msgid="2872704811610888719"></string>
     <string name="keywords_color_correction" msgid="8540442886990423681">"ضبط اللون"</string>
     <string name="keywords_color_inversion" msgid="4291058365873221962">"تعتيم الشاشة، تفتيح الشاشة"</string>
-    <string name="keywords_contrast" msgid="4668393735398949873">"تباين الألوان"</string>
     <string name="keywords_accessibility_menu" msgid="4300579436464706608"></string>
     <string name="keywords_switch_access" msgid="5813094504384313402"></string>
     <string name="keywords_auto_click" msgid="6811744211216280998">"مهارات حركية، ماوس، ماوس خارجي، ماوس يتبع حركة الرأس، ماوس تكيّفي، كرسي متحرك، ذراع تحكُّم"</string>
@@ -2572,8 +2570,7 @@
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"إطالة عمر البطارية"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"إيقاف الميزة عندما يكون الجهاز مشحونًا"</string>
     <string name="battery_saver_sticky_title_percentage" msgid="1178162022087559148">"إيقاف شحن البطارية عند <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <!-- no translation found for battery_saver_sticky_description_new (8543277078136947874) -->
-    <skip />
+    <string name="battery_saver_sticky_description_new" msgid="8543277078136947874">"‏تتوقف ميزة \"توفير شحن البطارية\" عندما تتخطى نسبة شحن البطارية ‎<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"تفعيل"</string>
@@ -3307,6 +3304,7 @@
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"إعدادات الأجهزة المتصلة"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{ما من جداول زمنية}=1{تم ضبط جدول زمني واحد}two{تم ضبط جدولين زمنيين}few{تم ضبط # جداول زمنية}many{تم ضبط # جدولاً زمنيًا}other{تم ضبط # جدول زمني}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"وضع \"عدم الإزعاج\""</string>
+    <string name="zen_modes_list_title" msgid="5138745349253275428">"الأوضاع ذات الأولوية"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"ستصلك الإشعارات من الأشخاص المهمّين والتطبيقات المهمّة فقط"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"الحد من المقاطعات"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"تفعيل ميزة \"عدم الإزعاج\""</string>
@@ -3533,7 +3531,7 @@
     <string name="notifications_sent_daily" msgid="10274479224185437">"{count,plural, =1{حوالي إشعار واحد في اليوم}zero{حوالي # إشعار في اليوم}two{حوالي إشعارَين في اليوم}few{حوالي # إشعارات في اليوم}many{حوالي # إشعارًا في اليوم}other{حوالي # إشعار في اليوم}}"</string>
     <string name="notifications_sent_weekly" msgid="7895656213187555346">"{count,plural, =1{حوالي إشعار واحد في الأسبوع}zero{حوالي # إشعار في الأسبوع}two{حوالي إشعارَين في الأسبوع}few{حوالي # إشعارات في الأسبوع}many{حوالي # إشعارًا في الأسبوع}other{حوالي # إشعار في الأسبوع}}"</string>
     <string name="notifications_sent_never" msgid="9081278709126812062">"أبدًا"</string>
-    <string name="manage_notification_access_title" msgid="6481256069087219982">"إشعارات التطبيقات والأجهزة"</string>
+    <string name="manage_notification_access_title" msgid="4154723216570646451">"قراءة الإشعارات والردّ عليها والتحكّم فيها"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"تحديد التطبيقات والأجهزة التي يمكنها قراءة الإشعارات"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8643809206612366067">"الوصول إلى إشعارات ملف العمل محظور"</string>
     <string name="notification_assistant_title" msgid="5889201903272393099">"الإشعارات المحسّنة"</string>
@@ -3633,7 +3631,7 @@
     <string name="app_notification_block_summary" msgid="1804611676339341551">"عدم عرض هذه الإشعارات"</string>
     <string name="notification_content_block_title" msgid="6689085826061361351">"عرض الإشعارات"</string>
     <string name="notification_content_block_summary" msgid="329171999992248925">"عدم عرض الإشعارات في مركز الإشعارات أو على الأجهزة الملحقة"</string>
-    <string name="app_notification_fsi_permission_title" msgid="5424116606034705020">"السماح بعرض الإشعارات بملء الشاشة"</string>
+    <string name="app_notification_fsi_permission_title" msgid="2260977598430154428">"السماح بعرض الإشعارات بملء الشاشة"</string>
     <string name="app_notification_fsi_permission_summary" msgid="7673487977631068039">"السماح بعرض الإشعارات بملء الشاشة عندما يكون الجهاز مقفلاً"</string>
     <string name="notification_badge_title" msgid="6854537463548411313">"السماح بنقطة الإشعار"</string>
     <string name="notification_channel_badge_title" msgid="6505542437385640049">"إظهار نقطة الإشعار"</string>
@@ -3982,8 +3980,8 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"السماح بالوصول إلى كل الملفات لإدارتها"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"يسمح هذا الإعداد لهذا التطبيق بقراءة كل الملفات وتعديلها وحذفها من هذا الجهاز أو أي وحدات تخزين متصلة. في حال تفعيله، يمكن أن يصل التطبيق إلى الملفات بدون إعلامك بذلك."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"يمكن الوصول إلى كل الملفات"</string>
-    <string name="full_screen_intent_title" msgid="747270185715224130">"الإشعارات بملء الشاشة"</string>
-    <string name="permit_full_screen_intent" msgid="9035367640019960861">"السماح بعرض الإشعارات من هذا التطبيق بملء الشاشة"</string>
+    <string name="full_screen_intent_title" msgid="5888548315628268674">"عرض الإشعارات بملء الشاشة"</string>
+    <string name="permit_full_screen_intent" msgid="2414307667550523630">"السماح بعرض الإشعارات بملء الشاشة من هذا التطبيق"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"يتم السماح لهذا التطبيق بعرض إشعارات بملء الشاشة عندما يكون الجهاز مُقفَلاً. قد تستخدم التطبيقات هذا الإذن لإبراز المنبّهات أو المكالمات الواردة أو غيرها من الإشعارات العاجلة."</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"تطبيقات إدارة الوسائط"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"السماح للتطبيق بإدارة الوسائط"</string>
@@ -4101,7 +4099,7 @@
     <string name="data_usage_template" msgid="3822452362629968010">"<xliff:g id="ID_1">%1$s</xliff:g> مستخدمة خلال <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="configure" msgid="1499586749829665889">"إعداد"</string>
     <string name="data_usage_other_apps" msgid="5649047093607329537">"التطبيقات الأخرى المضمّنة في الاستخدام"</string>
-    <string name="data_saver_unrestricted_summary" msgid="7343571401172437542">"{count,plural, =1{هناك تطبيق واحد مسموح له بالاستخدام غير المحدود للبيانات عندما تكون ميزة \"توفير البيانات\" مفعَّلة}zero{هناك # تطبيق مسموح له بالاستخدام غير المحدود للبيانات عندما تكون ميزة \"توفير البيانات\" مفعَّلة}two{هناك تطبيقان مسموح لهما بالاستخدام غير المحدود للبيانات عندما تكون ميزة \"توفير البيانات\" مفعَّلة}few{هناك # تطبيقات مسموح لها بالاستخدام غير المحدود للبيانات عندما تكون ميزة \"توفير البيانات\" مفعَّلة}many{هناك # تطبيقًا مسموح له بالاستخدام غير المحدود للبيانات عندما تكون ميزة \"توفير البيانات\" مفعَّلة}other{هناك # تطبيق مسموح له بالاستخدام غير المحدود للبيانات عندما تكون ميزة \"توفير البيانات\" مفعَّلة}}"</string>
+    <string name="data_saver_unrestricted_summary" msgid="559673440849071149">"{count,plural, =1{هناك تطبيق واحد مسموح له بالاستخدام غير المحدود لبيانات الجوّال عندما تكون ميزة \"توفير البيانات\" مفعَّلة}zero{هناك # تطبيق مسموح له بالاستخدام غير المحدود لبيانات الجوّال عندما تكون ميزة \"توفير البيانات\" مفعَّلة}two{هناك تطبيقان مسموح لهما بالاستخدام غير المحدود لبيانات الجوّال عندما تكون ميزة \"توفير البيانات\" مفعَّلة}few{هناك # تطبيقات مسموح لها بالاستخدام غير المحدود لبيانات الجوّال عندما تكون ميزة \"توفير البيانات\" مفعَّلة}many{هناك # تطبيقًا مسموحًا له بالاستخدام غير المحدود لبيانات الجوّال عندما تكون ميزة \"توفير البيانات\" مفعَّلة}other{هناك # تطبيق مسموح له بالاستخدام غير المحدود لبيانات الجوّال عندما تكون ميزة \"توفير البيانات\" مفعَّلة}}"</string>
     <string name="data_usage_title" msgid="4039024073687469094">"البيانات الأساسية"</string>
     <string name="data_usage_wifi_title" msgid="1060495519280456926">"‏بيانات Wi‑Fi"</string>
     <string name="data_used_formatted" msgid="7913920278059077938">"تم استخدام <xliff:g id="ID_1">^1</xliff:g> <xliff:g id="ID_2">^2</xliff:g>"</string>
@@ -4118,13 +4116,13 @@
     <string name="no_carrier_update_now_text" msgid="7898004907837200752">"تم التحديث الآن."</string>
     <string name="launch_wifi_text" msgid="976421974332512894">"عرض التفاصيل"</string>
     <string name="data_saver_title" msgid="2593804270788863815">"توفير البيانات"</string>
-    <string name="unrestricted_data_saver" msgid="7922563266857367495">"استخدام البيانات بدون قيود"</string>
+    <string name="unrestricted_data_saver" msgid="5913547065342097274">"التطبيقات المسموح لها بالاستخدام غير المحدود لبيانات الجوّال"</string>
     <string name="restrict_background_blocklisted" msgid="2308345280442438232">"تم إيقاف بيانات الخلفية."</string>
     <string name="data_saver_on" msgid="7848893946018448793">"قيد التفعيل"</string>
     <string name="data_saver_off" msgid="5891210864117269045">"الميزة غير مفعّلة"</string>
     <string name="data_saver_switch_title" msgid="7111538580123722959">"استخدام أداة توفير البيانات"</string>
-    <string name="unrestricted_app_title" msgid="7117585996574329284">"الاستخدام غير المقيَّد للبيانات"</string>
-    <string name="unrestricted_app_summary" msgid="282698963532000403">"السماح بالاستخدام غير المحدود لبيانات الجوال عند تفعيل ميزة \"توفير البيانات\""</string>
+    <string name="unrestricted_app_title" msgid="8531936851059106374">"الاستخدام غير المحدود لبيانات الجوّال"</string>
+    <string name="unrestricted_app_summary" msgid="8320813971858627624">"السماح بالاستخدام غير المحدود لبيانات الجوّال عندما تكون ميزة \"توفير البيانات\" مفعّلة"</string>
     <string name="home_app" msgid="6056850504746902747">"تطبيق الشاشة الرئيسية"</string>
     <string name="suggestion_additional_fingerprints" msgid="4726777300101156208">"إضافة بصمة إصبع أخرى"</string>
     <string name="suggestion_additional_fingerprints_summary" msgid="2825364645039666674">"فتح القفل باستخدام إصبع مختلف"</string>
@@ -4198,9 +4196,9 @@
     <string name="notification_suggestion_summary" msgid="7615611244249276113">"إظهار محتوى الإشعار أو إخفاؤه"</string>
     <string name="page_tab_title_support" msgid="3235725053332345773">"النصائح والدعم"</string>
     <string name="developer_smallest_width" msgid="632354817870920911">"أصغر عرض"</string>
-    <string name="premium_sms_none" msgid="8737045049886416739">"‏لم تطلب أي تطبيقات مثبَّتة إمكانية إرسال رسائل قصيرة SMS مميزة"</string>
+    <string name="premium_sms_none" msgid="4718916765158062108">"لم تطلب أي تطبيقات مثبَّتة إرسال رسائل قصيرة برسوم إضافية"</string>
     <string name="premium_sms_warning" msgid="2192300872411073324">"‏يمكن أن تكلفك الرسائل القصيرة SMS للخدمات بعض الرسوم، وستتم إضافة هذه الرسوم إلى فواتير مشغِّل شبكة الجوّال. وفي حالة تفعيل الإذن لأحد التطبيقات، ستتمكن من إرسال رسائل قصيرة SMS للخدمات باستخدام هذا التطبيق."</string>
-    <string name="premium_sms_access" msgid="5605970342699013212">"‏إمكانية إرسال رسائل قصيرة SMS مميزة"</string>
+    <string name="premium_sms_access" msgid="8487315743197916530">"الرسائل القصيرة برسوم إضافية"</string>
     <string name="bluetooth_disabled" msgid="835838280837359514">"غير مفعّل"</string>
     <string name="bluetooth_connected_summary" msgid="8043167194934315712">"متصل بـ <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="2294954614327771844">"متصل بأجهزة متعددة"</string>
@@ -4804,46 +4802,27 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"معلومات سياسة العمل"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"يتولى مشرف تكنولوجيا المعلومات إدارة الإعدادات."</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"وحدة معالجة الرسومات"</string>
-    <!-- no translation found for enable_16k_pages (8001470927566110689) -->
-    <skip />
-    <!-- no translation found for enable_16k_pages_summary (1964363364670306912) -->
-    <skip />
-    <!-- no translation found for confirm_enable_16k_pages_title (1286925577014793351) -->
-    <skip />
-    <!-- no translation found for confirm_enable_16k_pages_text (570198382662424714) -->
-    <skip />
-    <!-- no translation found for confirm_enable_4k_pages_title (3210360137887034659) -->
-    <skip />
-    <!-- no translation found for confirm_enable_4k_pages_text (155070605667160083) -->
-    <skip />
+    <string name="enable_16k_pages" msgid="8001470927566110689">"التشغيل مع صفحات حجمها 16 كيلوبايت"</string>
+    <string name="enable_16k_pages_summary" msgid="1964363364670306912">"التشغيل بنواة متوافقة مع صفحات حجمها 16 كيلوبايت"</string>
+    <string name="confirm_enable_16k_pages_title" msgid="1286925577014793351">"التبديل من الوضع 4 كيلوبايت إلى الوضع 16 كيلوبايت"</string>
+    <string name="confirm_enable_16k_pages_text" msgid="570198382662424714">"‏يُرجى العلم بأنَّ جهازك حاليًا في الوضع غير المستند إلى حجم الصفحة، ويستخدم نواة متوافقة مع الصفحات بحجم 4 كيلوبايت، وأنت بصدد التبديل إلى الوضع الذي يستخدم صفحات بحجم 16 كيلوبايت. وفي هذا الوضع، لا يمكن ضمان سلامة برنامج النظام. وعندما يكون برنامج الإقلاع غير مقفل، قد تصبح بياناتك المخزَّنة على الهاتف معرَّضة للخطر. سيؤدي هذا الإجراء إلى إعادة تشغيل جهازك. سيتم إيقاف بعض الميزات في هذَين الوضعَين، وبالتالي قد لا تعمل بعض التطبيقات. لإعادة الجهاز إلى وضع الإنتاج، عليك التبديل مرة أخرى إلى الوضع 4 كيلوبايت وقفل برنامج الإقلاع، وسيؤدي ذلك إلى إعادة ضبط الجهاز على الإعدادات الأصلية. بعد تشغيل نظام Android على الجهاز بنجاح، أوقِف الإعداد \"فتح قفل المصنّع الأصلي للجهاز\" ضِمن \"خيارات المطوّرين\"."</string>
+    <string name="confirm_enable_4k_pages_title" msgid="3210360137887034659">"التبديل من الوضع 16 كيلوبايت إلى الوضع 4 كيلوبايت"</string>
+    <string name="confirm_enable_4k_pages_text" msgid="155070605667160083">"‏يُرجى العلم بأنَّ جهازك حاليًا في الوضع غير المستند إلى حجم الصفحة، ويستخدم نواة متوافقة مع الصفحات بحجم 16 كيلوبايت، وأنت بصدد التبديل إلى الوضع الذي يستخدم صفحات بحجم 4 كيلوبايت. وفي هذا الوضع، لا يمكن ضمان سلامة برنامج النظام. وعندما يكون برنامج الإقلاع غير مقفل، قد تصبح بياناتك المخزَّنة على الهاتف معرَّضة للخطر. سيؤدي هذا الإجراء إلى إعادة تشغيل جهازك. سيتم إيقاف بعض الميزات في هذَين الوضعَين، وبالتالي قد لا تعمل بعض التطبيقات. لإعادة الجهاز إلى وضع الإنتاج، عليك قفل برنامج الإقلاع، وسيؤدي ذلك إلى إعادة ضبط الجهاز على الإعدادات الأصلية. بعد تشغيل نظام Android على الجهاز بنجاح، أوقِف الإعداد \"فتح قفل المصنّع الأصلي للجهاز\" ضِمن \"خيارات المطوّرين\"."</string>
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"تعذَّر تحديث النواة إلى إصدار متوافق مع الصفحات التي حجمها 16 كيلوبايت."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"جارٍ تطبيق التغييرات"</string>
-    <!-- no translation found for confirm_format_ext4_title (6696191800594435577) -->
-    <skip />
-    <!-- no translation found for confirm_format_ext4_text (7940372488624630214) -->
-    <skip />
-    <!-- no translation found for format_ext4_failure_toast (8059453995800471549) -->
-    <skip />
-    <!-- no translation found for confirm_oem_unlock_for_16k_title (5374451262432025419) -->
-    <skip />
-    <!-- no translation found for confirm_oem_unlock_for_16k_text (3583604865119937957) -->
-    <skip />
-    <!-- no translation found for page_agnostic_4k_pages_title (1184703958249093215) -->
-    <skip />
-    <!-- no translation found for page_agnostic_4k_pages_text_short (2894243902906666242) -->
-    <skip />
-    <!-- no translation found for page_agnostic_4k_pages_text (8284806650260868833) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_title (7762533464569818498) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text_short (269039281591806585) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text (6208765386837706582) -->
-    <skip />
-    <!-- no translation found for page_agnostic_notification_channel_name (1658444283036376361) -->
-    <skip />
-    <!-- no translation found for page_agnostic_notification_action (2309805437430150456) -->
-    <skip />
+    <string name="confirm_format_ext4_title" msgid="6696191800594435577">"‏هل تريد إعادة تنسيق بيانات الجهاز إلى ext4؟ (مطلوب للوضع 16 كيلوبايت)"</string>
+    <string name="confirm_format_ext4_text" msgid="7940372488624630214">"‏يجب تحويل قسم البيانات في هذا الجهاز إلى نظام الملفات ext4 لتتمكّن من استخدام الوضع 16 كيلوبايت ضِمن خيارات المطوِّرين. وفي هذا الوضع، لا يمكن ضمان سلامة برنامج النظام. وعندما يكون برنامج الإقلاع غير مقفل، قد تصبح بياناتك المخزَّنة على الهاتف معرَّضة للخطر. لتفعيل الخيار 16 كيلوبايت، يجب إعادة تشغيل الجهاز مرة أخرى بعد ذلك. بعد تفعيل هذا الوضع، يمكنك التبديل بين الوضعَين 4 كيلوبايت و16 كيلوبايت من خلال إعادة تشغيل الجهاز لمرّة واحدة. سيتم إيقاف بعض الميزات في هذَين الوضعَين، وبالتالي قد لا تعمل بعض التطبيقات. لإعادة الجهاز إلى وضع الإنتاج، عليك التبديل مرة أخرى إلى الوضع 4 كيلوبايت وقفل برنامج الإقلاع، وسيؤدي ذلك إلى إعادة ضبط الجهاز على الإعدادات الأصلية. بعد تشغيل نظام Android على الجهاز بنجاح، أوقِف الإعداد \"فتح قفل المصنّع الأصلي للجهاز\" ضِمن \"خيارات المطوّرين\". بعد التأكيد، سيتم حجب بيانات الجهاز وتغيير نظام الملفات إلى ext4. بعد إتمام هذه الخطوات، يُرجى إعادة تفعيل الوضع 16 كيلوبايت."</string>
+    <string name="format_ext4_failure_toast" msgid="8059453995800471549">"‏تعذَّر حجب قسم البيانات وإعادة تنسيقه إلى ext4."</string>
+    <string name="confirm_oem_unlock_for_16k_title" msgid="5374451262432025419">"يجب فتح قفل برنامج الإقلاع لتفعيل الوضع 16 كيلوبايت"</string>
+    <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"‏يجب فتح قفل برنامج الإقلاع على هذا الجهاز قبل استخدام الوضع 16 كيلوبايت ضِمن خيارات المطوِّرين. وفي هذا الوضع، لا يمكن ضمان سلامة برنامج النظام. وعندما يكون برنامج الإقلاع غير مقفل، قد تصبح بياناتك المخزَّنة على الهاتف معرَّضة للخطر. وعند تفعيل الوضع 16 كيلوبايت، سيتم حجب كل بيانات المستخدم وإعداداته. بعد فتح قفل برنامج الإقلاع، سيكون عليك إعادة تشغيل الجهاز مرّتين لتفعيل الخيار 16 كيلوبايت. بعد تفعيل هذا الوضع، يمكنك التبديل بين الوضعَين 4 كيلوبايت و16 كيلوبايت من خلال إعادة تشغيل الجهاز لمرّة واحدة. سيتم إيقاف بعض الميزات في هذَين الوضعَين، وبالتالي قد لا تعمل بعض التطبيقات. لإعادة الجهاز إلى وضع الإنتاج، عليك التبديل مرة أخرى إلى الوضع 4 كيلوبايت وقفل برنامج الإقلاع أو إعدادات المصنّع الأصلي للجهاز، وسيؤدي ذلك إلى إعادة ضبط الجهاز على الإعدادات الأصلية. يُرجى فتح قفل برنامج الإقلاع ثم إعادة المحاولة. يمكنك الاطّلاع على تعليمات حول كيفية تنفيذ هذا الإجراء من خلال الانتقال إلى: &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
+    <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"استخدام الوضع 4 كيلوبايت غير المستند إلى حجم الصفحة"</string>
+    <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"جهازك الآن في الوضع 4 كيلوبايت ضِمن الوضع غير المستند إلى حجم الصفحة. وفي هذا الوضع، لا يمكن ضمان سلامة برنامج النظام. وعندما يكون برنامج الإقلاع غير مقفل، قد تصبح بياناتك المخزَّنة على الهاتف معرَّضة للخطر. سيتم إيقاف بعض الميزات في هذَين الوضعَين، وبالتالي قد لا تعمل بعض التطبيقات. لإعادة تفعيل وضع الإنتاج، عليك قفل برنامج إقلاع الجهاز. انقر لقراءة المزيد."</string>
+    <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"‏جهازك الآن في الوضع 4 كيلوبايت ضِمن الوضع غير المستند إلى حجم الصفحة. وفي هذا الوضع، لا يمكن ضمان سلامة برنامج النظام. وعندما يكون برنامج الإقلاع غير مقفل، قد تصبح بياناتك المخزَّنة على الهاتف معرَّضة للخطر. سيتم إيقاف بعض الميزات في هذَين الوضعَين، وبالتالي قد لا تعمل بعض التطبيقات. لإعادة تفعيل وضع الإنتاج، عليك قفل برنامج إقلاع الجهاز. سيؤدي هذا الإجراء إلى إعادة ضبط الجهاز على الإعدادات الأصلية لوضع الإنتاج. بعد تشغيل نظام Android على الجهاز بنجاح، أوقِف الإعداد \"فتح قفل المصنّع الأصلي للجهاز\" ضِمن \"خيارات المطوّرين\". إذا تعذَّر تشغيل نظام Android أو كان يعمل بشكل غير مستقر، عليك إعادة تثبيت أحدث نسخ برامج الجهة المصنِّعة من خلال &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; أو &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt;، وتحديد الخيارات التالية: \"حجب بيانات الجهاز\" (Wipe Device)، و\"قفل برنامج الإقلاع\" (Lock Bootloader)، و\"فرض تثبيت البيانات في جميع الأقسام\" (Force Flash all partitions)."</string>
+    <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"استخدام الوضع 16 كيلوبايت غير المستند إلى حجم الصفحة"</string>
+    <string name="page_agnostic_16k_pages_text_short" msgid="269039281591806585">"جهازك الآن في الوضع 16 كيلوبايت ضِمن الوضع غير المستند إلى حجم الصفحة. وفي هذا الوضع، لا يمكن ضمان سلامة برنامج النظام. وعندما يكون برنامج الإقلاع غير مقفل، قد تصبح بياناتك المخزَّنة على الهاتف معرَّضة للخطر. سيتم إيقاف بعض الميزات في هذَين الوضعَين، وبالتالي قد لا تعمل بعض التطبيقات. لإعادة تفعيل وضع الإنتاج، عليك التبديل مرة أخرى إلى الوضع 4 كيلوبايت وقفل برنامج الإقلاع. انقر لقراءة المزيد."</string>
+    <string name="page_agnostic_16k_pages_text" msgid="6208765386837706582">"‏جهازك الآن في الوضع 16 كيلوبايت ضِمن الوضع غير المستند إلى حجم الصفحة. وفي هذا الوضع، لا يمكن ضمان سلامة برنامج النظام. وعندما يكون برنامج الإقلاع غير مقفل، قد تصبح بياناتك المخزَّنة على الهاتف معرَّضة للخطر. سيتم إيقاف بعض الميزات في هذَين الوضعَين، وبالتالي قد لا تعمل بعض التطبيقات. لإعادة تفعيل وضع الإنتاج، عليك التبديل مرة أخرى إلى الوضع 4 كيلوبايت وقفل برنامج الإقلاع. سيؤدي هذا الإجراء إلى إعادة ضبط الجهاز على الإعدادات الأصلية لوضع الإنتاج. بعد تشغيل نظام Android على الجهاز بنجاح، أوقِف الإعداد \"فتح قفل المصنّع الأصلي للجهاز\" ضِمن \"خيارات المطوّرين\". إذا تعذَّر تشغيل نظام Android أو كان يعمل بشكل غير مستقر، عليك إعادة تثبيت أحدث نسخ برامج الجهة المصنِّعة من خلال &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; أو &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt;، وتحديد الخيارات التالية: \"حجب بيانات الجهاز\" (Wipe Device)، و\"قفل برنامج الإقلاع\" (Lock Bootloader)، و\"فرض تثبيت البيانات في جميع الأقسام\" (Force Flash all partitions)."</string>
+    <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"الوضع 16 كيلوبايت غير المستند إلى حجم الصفحة"</string>
+    <string name="page_agnostic_notification_action" msgid="2309805437430150456">"قراءة المزيد"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"معالِج تقارير الأخطاء"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"يحدّد هذا الإعداد التطبيق الذي سيعالج اختصار \"تقرير الأخطاء\" على جهازك."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"شخصي"</string>
@@ -4909,7 +4888,7 @@
     <string name="media_controls_show_player" msgid="8504571042365814021">"إظهار المشغِّل"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"الوسائط"</string>
     <string name="camera_extensions_fallback_title" msgid="3604579046777004989">"السماح بإضافات برنامج الكاميرا"</string>
-    <string name="camera_extensions_fallback_description" msgid="4306833827773277263">"تتم إتاحة التنفيذ البرمجي التلقائي لميزات الكاميرا المتقدّمة، مثل \"النطاق العالي الديناميكية\" أو \"صور في الليل\" أو غير ذلك من إضافات الكاميرا."</string>
+    <string name="camera_extensions_fallback_description" msgid="4306833827773277263">"إتاحة التنفيذ البرمجي التلقائي لميزات الكاميرا المتقدّمة، مثل \"النطاق العالي الديناميكية\" أو \"صور في الليل\" أو غير ذلك من إضافات الكاميرا"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"سيتم تفعيل البلوتوث."</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"الإنترنت"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"‏شرائح SIM"</string>
@@ -5014,12 +4993,9 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"يجب إيقاف وضع الطيران لاستخدام النطاق الواسع جدًا."</string>
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"‏النطاق الفائق العرض (UWB) غير متاح في الموقع الجغرافي الحالي."</string>
     <string name="thread_network_settings_title" msgid="4212301030523859220">"Thread"</string>
-    <!-- no translation found for thread_network_settings_main_switch_title (3859168481929323474) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_footer_title (7385600318850220927) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_learn_more (8278498005848565050) -->
-    <skip />
+    <string name="thread_network_settings_main_switch_title" msgid="3859168481929323474">"‏استخدام شبكة Thread"</string>
+    <string name="thread_network_settings_footer_title" msgid="7385600318850220927">"‏تساعد شبكة Thread في ربط أجهزة المنزل الذكية بالهاتف، ما يعزِّز كفاءتها وأدائها.\n\nيصبح الجهاز مؤهَّلاً لاستخدام شبكة Thread عند تفعيلها عليه، ما يتيح التحكّم في الأجهزة المتوافقة مع معيار Matter من خلال هذا الهاتف."</string>
+    <string name="thread_network_settings_learn_more" msgid="8278498005848565050">"‏مزيد من المعلومات عن شبكة Thread"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"الوصول إلى الكاميرا"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"الوصول إلى الميكروفون"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"للتطبيقات والخدمات"</string>
@@ -5104,12 +5080,12 @@
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"يتغيّر الصوت بينما تُحرك رأسك ليبدو طبيعيًا جدًا."</string>
     <string name="bluetooth_details_permissions_sync_title" msgid="7277580382321003521">"مزامنة الأذونات من الهاتف"</string>
     <string name="bluetooth_details_permissions_sync_summary" msgid="8125037984381432059">"امنح ساعتك أذونات التطبيقات نفسها التي سبق أن سمحت بها على هذا الهاتف."</string>
-    <string name="bluetooth_details_audio_device_types_title" msgid="3381941189346781614">"نوع الجهاز السماعي"</string>
-    <string name="bluetooth_details_audio_device_type_unknown" msgid="839337391037998014">"غير معروف"</string>
+    <string name="bluetooth_details_audio_device_types_title" msgid="1889644189800180316">"نوع الجهاز السماعي"</string>
+    <string name="bluetooth_details_audio_device_type_unknown" msgid="5299284975435974206">"لم يتم التحديد"</string>
     <string name="bluetooth_details_audio_device_type_speaker" msgid="3706227767994792124">"مكبّر صوت"</string>
     <string name="bluetooth_details_audio_device_type_headphones" msgid="7644588291215033798">"سماعات رأس"</string>
-    <string name="bluetooth_details_audio_device_type_hearing_aid" msgid="1310631131071939859">"سماعة أذن طبية"</string>
-    <string name="bluetooth_details_audio_device_type_carkit" msgid="4439017600454703229">"مجموعة أدوات السيارة"</string>
+    <string name="bluetooth_details_audio_device_type_hearing_aid" msgid="6311786545025321187">"سماعة أذن طبية"</string>
+    <string name="bluetooth_details_audio_device_type_carkit" msgid="1866236563013629394">"سيارة"</string>
     <string name="bluetooth_details_audio_device_type_other" msgid="7019481234617207563">"غير ذلك"</string>
     <string name="ingress_rate_limit_title" msgid="2106694002836274350">"الحد الأقصى لمعدّل تنزيل الشبكة"</string>
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"يمكنك ضبط الحد الأقصى لحركة البيانات الواردة في معدّل نقل البيانات للشبكة والذي يتم تطبيقه على جميع الشبكات التي توفّر اتصالاً بالإنترنت."</string>
@@ -5194,8 +5170,6 @@
     <string name="screen_flash_color_violet" msgid="1279950780509029495">"بنفسجي"</string>
     <string name="color_selector_dialog_done" msgid="121253968943363376">"تم"</string>
     <string name="color_selector_dialog_cancel" msgid="8667350644753900701">"إلغاء"</string>
-    <string name="contrast_title" msgid="6885768151336508075">"التباين"</string>
-    <string name="contrast_standard" msgid="1097297089917185235">"عادي"</string>
     <string name="contrast_default" msgid="8918545965525226966">"تلقائي"</string>
     <string name="contrast_medium" msgid="384414510709285811">"متوسط"</string>
     <string name="contrast_high" msgid="3988567609694797696">"مرتفع"</string>
@@ -5232,4 +5206,99 @@
     <string name="fingerprint_acquired_imager_dirty_udfps" msgid="7005042288289506776">"يُرجى تنظيف الشاشة بالقرب من جهاز الاستشعار ثم إعادة المحاولة"</string>
     <string name="sim_category_converted_sim" msgid="8575548015816988908">"‏تم التحويل إلى شريحة eSIM. أزِل الشريحة وتخلّص منها."</string>
     <string name="sync_across_devices_title" msgid="3447757705383089345">"المزامنة بين الأجهزة"</string>
+    <string name="device_diagnostics_title" msgid="2914523189695727897">"تفحّص الجهاز"</string>
+    <string name="audio_sharing_title" msgid="4144157137502923821">"مشاركة الصوت"</string>
+    <string name="audio_sharing_switch_title" msgid="7052827328670825701">"مشاركة الصوت"</string>
+    <string name="calls_and_alarms_device_title" msgid="6993559028175454198">"المكالمات والمنبّهات"</string>
+    <string name="audio_sharing_description" msgid="1660255584523640628">"‏شارِك وسائطك مع المستخدمين الآخرين ليستمعوا إليها باستخدام سماعات الرأس المتوافقة مع LE Audio."</string>
+    <string name="audio_sharing_device_group_title" msgid="3019780581643956943">"أجهزة الوسائط المشغَّلة"</string>
+    <string name="audio_sharing_call_audio_title" msgid="7978867452289583929">"صوت المكالمة"</string>
+    <string name="audio_sharing_call_audio_description" msgid="6573621048260616924">"التشغيل على \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\" فقط"</string>
+    <string name="audio_sharing_test_sound_title" msgid="6438868185641027763">"تشغيل صوت تجريبي"</string>
+    <string name="audio_sharing_test_sound_description" msgid="4072462502371937399">"من المفترض أن يسمع جميع المستخدمين هذا الصوت"</string>
+    <string name="audio_sharing_stream_settings_title" msgid="1374391898689242036">"إعدادات البث الصوتي"</string>
+    <string name="audio_sharing_stream_name_title" msgid="8156859441897180940">"الاسم"</string>
+    <string name="audio_sharing_stream_password_title" msgid="7026649168165764602">"كلمة المرور"</string>
+    <string name="audio_sharing_stream_compatibility_title" msgid="5690947186724469918">"تحسين مدى التوافق"</string>
+    <string name="audio_sharing_stream_compatibility_description" msgid="8170241188606110963">"يساعد ذلك الخيار في ربط بعض الأجهزة، مثل سماعة الأذن الطبية، بجهازك من خلال تقليل جودة الصوت"</string>
+    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="2586408353546825682">"يؤدي تحديد ذلك الخيار إلى إيقاف مشاركة الصوت لضبط توافُق الأجهزة"</string>
+    <string name="audio_sharing_nearby_audio_title" msgid="4795438407040677177">"الاستماع إلى الصوت القريب"</string>
+    <string name="audio_sharing_footer_description" msgid="4786942197840271680">"‏تتوافق ميزة \"مشاركة الصوت\" مع تقنية Auracast™‎"</string>
+    <string name="audio_sharing_stream_name_dialog_title" msgid="6706027295417556499">"اسم البث الصوتي"</string>
+    <string name="audio_sharing_stream_password_dialog_title" msgid="4148196538860845705">"كلمة مرور البث الصوتي"</string>
+    <string name="audio_sharing_media_device_group_title" msgid="4850674234590549565">"أجهزة الوسائط الأخرى"</string>
+    <string name="audio_sharing_summary_on" msgid="611197542982323788">"مفعَّلة"</string>
+    <string name="audio_sharing_summary_off" msgid="8833198995257547378">"غير مفعَّلة"</string>
+    <string name="audio_sharing_share_dialog_title" msgid="427514648577553621">"مشاركة صوت جهازك"</string>
+    <string name="audio_sharing_share_dialog_subtitle" msgid="5208582843732057871">"‫\"<xliff:g id="DEVICE_NAME1">%1$s</xliff:g>\" و\"<xliff:g id="DEVICE_NAME2">%2$s</xliff:g>\""</string>
+    <string name="audio_sharing_share_button_label" msgid="3895900668317105537">"مشاركة الصوت"</string>
+    <string name="audio_sharing_no_thanks_button_label" msgid="5822491984114744357">"لا، شكرًا"</string>
+    <string name="audio_sharing_share_with_dialog_title" msgid="3934377530640830364">"هل تريد مشاركة الصوت مع \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\"؟"</string>
+    <string name="audio_sharing_share_with_more_dialog_title" msgid="2840069088858232267">"مشاركة الصوت مع جهاز آخر"</string>
+    <string name="audio_sharing_share_with_button_label" msgid="4146194430380237357">"المشاركة مع \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\""</string>
+    <string name="audio_sharing_close_button_label" msgid="2666534149100498574">"إغلاق"</string>
+    <string name="audio_sharing_dialog_connect_device_content" msgid="2873230647152283734">"يمكنك الربط بسماعات رأس أخرى متوافقة أو مشاركة اسم البث وكلمة المرور الخاصة به مع مستخدِم آخر"</string>
+    <string name="audio_sharing_dialog_pair_device_content" msgid="3136997898244863470">"يمكنك إقران جهازك بسماعات رأس أخرى متوافقة أو مشاركة رمز الاستجابة السريعة الخاص بالبث الصوتي مع مستخدِم آخر"</string>
+    <string name="audio_sharing_sharing_label" msgid="1038021053061111508">"جارٍ مشاركة الصوت"</string>
+    <string name="audio_sharing_pair_button_label" msgid="7987236990273083588">"إقران جهاز جديد"</string>
+    <string name="audio_sharing_qrcode_button_label" msgid="3207039106555097659">"إظهار رمز الاستجابة السريعة"</string>
+    <string name="audio_sharing_notification_title" msgid="1204798942946033005">"جارٍ مشاركة الصوت من جهازك"</string>
+    <string name="audio_sharing_notification_content" msgid="1577180829878785642">"بإمكان المستخدمين سماع الوسائط، وليس مكالماتك."</string>
+    <string name="audio_sharing_stop_button_label" msgid="8770519671470608849">"إيقاف المشاركة"</string>
+    <string name="audio_sharing_settings_button_label" msgid="8574808650318270491">"الإعدادات"</string>
+    <string name="audio_sharing_disconnect_dialog_title" msgid="2192751727237748602">"اختَر جهازًا لإلغاء ربطه"</string>
+    <string name="audio_sharing_dialog_disconnect_content" msgid="3840488888970653308">"يمكن لجهازين فقط مشاركة الصوت في كل مرّة"</string>
+    <string name="audio_sharing_disconnect_device_button_label" msgid="4272897217708930576">"إلغاء ربط \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\""</string>
+    <string name="audio_sharing_stop_dialog_title" msgid="4872853738164232075">"هل تريد الربط بـ \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\"؟"</string>
+    <string name="audio_sharing_stop_dialog_content" msgid="6371546856710692910">"سيتم إيقاف مشاركة الصوت مع \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\""</string>
+    <string name="audio_sharing_stop_dialog_with_two_content" msgid="2119020725467967219">"سيتم إيقاف مشاركة الصوت مع \"<xliff:g id="DEVICE_NAME1">%1$s</xliff:g>\" و\"<xliff:g id="DEVICE_NAME2">%2$s</xliff:g>\""</string>
+    <string name="audio_sharing_stop_dialog_with_more_content" msgid="5262441138981618703">"سيتم إيقاف مشاركة الصوت مع سماعات الرأس المرتبطة"</string>
+    <string name="audio_sharing_connect_button_label" msgid="4241911519063029982">"ربط"</string>
+    <string name="audio_sharing_sharing_stopped_label" msgid="8128194452354240996">"تم إيقاف مشاركة الصوت"</string>
+    <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"الربط بجهاز متوافق"</string>
+    <string name="audio_sharing_comfirm_dialog_content" msgid="3479217934447446066">"‏لبدء مشاركة الصوت، يجب أولاً ربط هاتفك بسماعات الرأس المتوافقة مع LE Audio"</string>
+    <string name="audio_streams_category_title" msgid="4878022761829895463">"‏الاتصال بجهاز بث صوتي منخفض الطاقة (متوافق مع ميزة Bluetooth LE Audio)"</string>
+    <string name="audio_streams_pref_title" msgid="6320485086288646209">"أجهزة بث صوتي قريبة"</string>
+    <string name="audio_streams_title" msgid="6617990880383079165">"أجهزة البث الصوتي"</string>
+    <string name="audio_streams_qr_code_summary" msgid="2838923349871884871">"الاتصال بجهاز بث صوتي باستخدام رمز الاستجابة السريعة"</string>
+    <string name="audio_streams_empty" msgid="8803517701437394982">"لم يتم العثور على أجهزة بث صوتي قريبة."</string>
+    <string name="audio_streams_disconnect" msgid="1755594831469579161">"قطع الاتصال"</string>
+    <string name="audio_streams_connect" msgid="1955964373102927954">"اتصال"</string>
+    <string name="audio_streams_qr_code_is_not_valid_format" msgid="4856288389653121830">"تنسيق رمز الاستجابة السريعة غير صالح."</string>
+    <string name="audio_streams_qr_code_scanner" msgid="525396804963685478">"لبدء الاستماع، امسَح ضوئيًا رمز الاستجابة السريعة التالي."</string>
+    <string name="audio_streams_add_source_bad_code_state_summary" msgid="6527086906921868757">"يُرجى التأكد من كلمة المرور وإعادة المحاولة"</string>
+    <string name="audio_streams_add_source_failed_state_summary" msgid="3937546443978562322">"يتعذّر الربط بالجهاز. يُرجى إعادة المحاولة."</string>
+    <string name="audio_streams_add_source_wait_for_response_summary" msgid="3763240901110974606">"جارٍ الربط…"</string>
+    <string name="audio_streams_wait_for_sync_state_summary" msgid="11905744690831864">"جارٍ البحث عن أجهزة…"</string>
+    <string name="audio_streams_dialog_stream_is_not_available" msgid="4032878851270690546">"البث الصوتي غير متوفّر"</string>
+    <string name="audio_streams_is_not_playing" msgid="8480293894696007941">"ما مِن محتوى في هذا البث الصوتي"</string>
+    <string name="audio_streams_dialog_close" msgid="8177201719298408431">"إغلاق"</string>
+    <string name="audio_streams_dialog_listen" msgid="7290340191504987685">"استماع"</string>
+    <string name="audio_streams_dialog_retry" msgid="4456843891970998556">"إعادة المحاولة"</string>
+    <string name="audio_streams_dialog_listen_to_audio_stream" msgid="8585253007762261528">"الاستماع إلى البث الصوتي"</string>
+    <string name="audio_streams_dialog_control_volume" msgid="7615062686016713544">"سيتم تشغيل البث الصوتي على \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\". استخدِم هذا الجهاز للتحكّم في مستوى الصوت."</string>
+    <string name="audio_streams_dialog_cannot_listen" msgid="4432257183698209966">"يتعذّر الاستماع إلى البث الصوتي"</string>
+    <string name="audio_streams_dialog_default_device" msgid="6159800303379303266">"سماعات الرأس المتوافقة والمتصلة"</string>
+    <string name="audio_streams_activity_title" msgid="9011162151277443663">"عمليات البث"</string>
+    <string name="audio_streams_no_password_summary" msgid="8976357323034830144">"بلا كلمة مرور"</string>
+    <string name="audio_streams_dialog_learn_more" msgid="6711241053442211345">"مزيد من المعلومات"</string>
+    <string name="audio_streams_dialog_cannot_play" msgid="1358828316927479091">"يتعذّر تشغيل هذا البث الصوتي على \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\"."</string>
+    <string name="audio_streams_listening_now" msgid="4205614429222949176">"يتم الاستماع الآن"</string>
+    <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"إيقاف الاستماع"</string>
+    <string name="audio_streams_dialog_no_le_device_title" msgid="3931163990976742282">"ربط سماعات الرأس المتوافقة"</string>
+    <string name="audio_streams_dialog_no_le_device_button" msgid="4484355549428642588">"ربط جهاز"</string>
+    <string name="audio_streams_detail_page_title" msgid="7884132061275273766">"تفاصيل البث الصوتي"</string>
+    <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"رمز الاستجابة السريعة للبث الصوتي"</string>
+    <string name="audio_streams_qr_code_page_password" msgid="7268475614131297060">"كلمة المرور: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
+    <string name="audio_streams_qr_code_page_description" msgid="1317961663706630428">"‏بإمكان المستخدمين الآخرين الاستماع إلى \"<xliff:g id="STREAM_NAME">%1$s</xliff:g>\" عن طريق ربط سماعات الرأس المتوافقة بأجهزة Android. ويمكنهم بعد ذلك مسح رمز الاستجابة السريعة هذا ضوئيًا."</string>
+    <string name="audio_streams_main_page_title" msgid="1838380471076527639">"البحث عن بث صوتي"</string>
+    <string name="audio_streams_main_page_subtitle" msgid="3251995732921981539">"‏استمِع إلى صوت تتم مشاركته من أحد الأجهزة أو إلى رسالة بث قريبة تتوافق مع تقنية Auracast"</string>
+    <string name="audio_streams_main_page_device_title" msgid="2635744035523908253">"الجهاز السماعي"</string>
+    <string name="audio_streams_main_page_no_device_summary" msgid="2936000845397406389">"ربط سماعات الرأس المتوافقة"</string>
+    <string name="audio_streams_main_page_scan_section_title" msgid="2778235929304061163">"البث الصوتي القريب"</string>
+    <string name="audio_streams_main_page_scan_qr_code_title" msgid="8337270277392468895">"مسح رمز الاستجابة السريعة ضوئيًا"</string>
+    <string name="audio_streams_main_page_scan_qr_code_summary" msgid="1991792283368249499">"ابدأ الاستماع إلى البث من خلال مسح رمز الاستجابة السريعة ضوئيًا"</string>
+    <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"الاستماع إلى البث"</string>
+    <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"عليك أن تمسح ضوئيًا رمز الاستجابة السريعة للبث الصوتي للاستماع إليه باستخدام \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\""</string>
+    <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"لا يمكن تعديل كلمة المرور أثناء المشاركة. ولتعديلها، عليك أولاً إيقاف ميزة \"مشاركة الصوت\"."</string>
 </resources>

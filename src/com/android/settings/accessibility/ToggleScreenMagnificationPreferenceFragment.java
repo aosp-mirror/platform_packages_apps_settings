@@ -414,8 +414,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         // when shortcutPreference is checked.
         int value = restoreOnConfigChangedValue();
         if (value == NOT_SET) {
-            final int lastNonEmptyUserShortcutType = PreferredShortcuts.retrieveUserShortcutType(
-                    getPrefContext(), MAGNIFICATION_CONTROLLER_NAME);
+            final int lastNonEmptyUserShortcutType = getUserPreferredShortcutTypes();
             value = mShortcutPreference.isChecked() ? lastNonEmptyUserShortcutType
                     : UserShortcutType.EMPTY;
         }
@@ -611,8 +610,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
     @Override
     public void onToggleClicked(ShortcutPreference preference) {
-        final int shortcutTypes = PreferredShortcuts.retrieveUserShortcutType(getPrefContext(),
-                MAGNIFICATION_CONTROLLER_NAME);
+        final int shortcutTypes = getUserPreferredShortcutTypes();
         if (preference.isChecked()) {
             optInAllMagnificationValuesToSettings(getPrefContext(), shortcutTypes);
             showDialog(DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL);
@@ -666,8 +664,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
     @Override
     protected void updateShortcutPreference() {
-        final int shortcutTypes = PreferredShortcuts.retrieveUserShortcutType(getPrefContext(),
-                MAGNIFICATION_CONTROLLER_NAME);
+        final int shortcutTypes = getUserPreferredShortcutTypes();
         mShortcutPreference.setChecked(
                 hasMagnificationValuesInSettings(getPrefContext(), shortcutTypes));
         mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
@@ -937,5 +934,11 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         final CharSequence featureSummary = context.getText(R.string.magnification_feature_summary);
         return context.getString(R.string.preference_summary_default_combination,
                 featureState, featureSummary);
+    }
+
+    @Override
+    protected int getUserPreferredShortcutTypes() {
+        return PreferredShortcuts.retrieveUserShortcutType(
+                getPrefContext(), MAGNIFICATION_CONTROLLER_NAME);
     }
 }

@@ -48,9 +48,9 @@
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"Endast spel, videor med mera"</string>
     <string name="selective_stay_awake_summary" msgid="9055967322921984543">"Främre skärmen slås på för appar som förhindrar att skärmen inaktiveras"</string>
     <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Svep uppåt för att fortsätta"</string>
-    <string name="stay_awake_on_lockscreen_summary" msgid="2299351813382522952">"Vik telefonen och svep uppåt på den främre skärmen för att fortsätta använda appen, eller vänta i några sekunder tills skärmen låses"</string>
+    <string name="stay_awake_on_lockscreen_summary" msgid="8825321939913726566">"Vik telefonen och svep uppåt på den främre skärmen för att fortsätta använda appen, eller vänta i några sekunder tills skärmen låses. Spel och videoappar fortsätter automatiskt."</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"Aldrig"</string>
-    <string name="sleep_on_fold_summary" msgid="7737992842459588846">"Främre skärmen låses när du viker enheten"</string>
+    <string name="sleep_on_fold_summary" msgid="4191753338303043456">"Främre skärmen stängs av och låses när du viker enheten"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Använd automatisk rotation"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"Ansiktsigenkänning använder den framåtvända kameran för att förbättra inställningen för att rotera automatiskt. Inga bilder sparas eller skickas till Google."</string>
     <string name="bluetooth" msgid="8898478620943459654">"Bluetooth"</string>
@@ -116,7 +116,7 @@
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"Starta om"</string>
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Avbryt"</string>
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Inaktivera Bluetooth LE Audio"</string>
-    <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Inaktiverar Bluetooth LE Audio-funktionen om enheten har stöd för funktioner för LE Audio-maskinvara."</string>
+    <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Inaktiverar Bluetooth LE Audio-funktionen om enheten har stöd för funktioner för LE Audio-hårdvara."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Bluetooth LE Audio-läge"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Visa reglage för LE Audio i Enhetsinfo"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Hoppa över godkännandelistan för Bluetooth LE Audio"</string>
@@ -139,7 +139,6 @@
     <string name="stylus_textfield_handwriting" msgid="2363579035338976327">"Skriv i textfälten"</string>
     <string name="stylus_ignore_button" msgid="7734540973145241391">"Ignorera alla knapptryckningar på e-pennan"</string>
     <string name="stylus_connected_devices_title" msgid="2823967577941359812">"E-penna"</string>
-    <string name="audio_streams_empty" msgid="8803517701437394982">"Inga ljudstreamar hittades i närheten."</string>
     <string name="date_and_time" msgid="1788358029823431692">"Datum och tid"</string>
     <string name="proxy_settings_title" msgid="4201866858226087066">"Proxy"</string>
     <string name="proxy_clear_text" msgid="6529658759984031149">"Rensa"</string>
@@ -286,8 +285,7 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Appar med behörighet att upptäcka enheter i närheten kan beräkna anslutna enheters relativa position."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Platsåtkomst har inaktiverats för appar och tjänster. Enhetens plats kan fortfarande skickas till räddningstjänst när du ringer eller skickar sms till ett nödnummer."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Läs mer om platsinställningar"</string>
-    <!-- no translation found for location_settings_tooltip_text_for_chrome (5781821709250544575) -->
-    <skip />
+    <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"Om du vill ändra detta öppnar du ChromeOS-inställningar &gt; Integritet och säkerhet &gt; Integritetsinställningar &gt; Platsåtkomst"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Konton"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Säkerhet"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Kryptering och användaruppgifter"</string>
@@ -565,7 +563,8 @@
     <string name="private_space_auto_lock_title" msgid="8663409382910601261">"Lås privat område automatiskt"</string>
     <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"Du kan låsa ditt privata område automatiskt om du inte har använt enheten på ett tag"</string>
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"Varje gång enheten låses"</string>
-    <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"Efter fem minuters inaktivitet"</string>
+    <!-- no translation found for private_space_auto_lock_after_inactivity (7107814517866649733) -->
+    <skip />
     <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"Endast när enheten har startats om"</string>
     <string name="private_space_hide_page_title" msgid="3364639176511877414">"Dölj privat område"</string>
     <string name="private_space_hide_when_locked" msgid="6219472348124151797">"Dölj privat område när det är låst"</string>
@@ -1753,7 +1752,7 @@
     <string name="enable_text" msgid="8570798764647110430">"Aktivera"</string>
     <string name="clear_user_data_text" msgid="6773186434260397947">"Rensa lagringsutrymme"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"Avinstallera uppdateringar"</string>
-    <string name="app_restricted_settings_lockscreen_title" msgid="796413224212436400">"Tillåt begränsade behörigheter"</string>
+    <string name="app_restricted_settings_lockscreen_title" msgid="5993061278264872648">"Tillåt blockerade inställningar"</string>
     <string name="auto_launch_enable_text" msgid="8912714475823807798">"Vissa aktiviteter som du har valt öppnas i den här appen som standard."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"Du har valt att tillåta att den här appen skapar widgetar och får åtkomst till apparnas data."</string>
     <string name="auto_launch_disable_text" msgid="502648841250936209">"Inga standardinställningar har angetts."</string>
@@ -2325,6 +2324,8 @@
     <string name="daltonizer_mode_protanomaly_title" msgid="6392456967103014723">"Röd–grön"</string>
     <string name="daltonizer_mode_tritanomaly_title" msgid="2278786218762602022">"Gul–blå"</string>
     <string name="daltonizer_mode_grayscale_title" msgid="152005391387952588">"Gråskala"</string>
+    <!-- no translation found for daltonizer_saturation_title (2999486412114963068) -->
+    <skip />
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="2117727423019598455">"Nedsatt känslighet för grönt, deuteranomali"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="4617032854982040748">"Nedsatt känslighet för rött, protanomali"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Tritanopi"</string>
@@ -2382,7 +2383,7 @@
     <string name="accessibility_service_screen_control_title" msgid="324795030658109870">"Visa och styra skärmen"</string>
     <string name="accessibility_service_screen_control_description" msgid="8431940515157990426">"Den kan läsa allt innehåll på skärmen och visa innehåll över andra appar."</string>
     <string name="accessibility_service_action_perform_title" msgid="1449360056585337833">"Visa och vidta åtgärder"</string>
-    <string name="accessibility_service_action_perform_description" msgid="7807832069800034738">"Den kan registrera din användning av en app eller maskinvarusensor och interagera med appar åt dig."</string>
+    <string name="accessibility_service_action_perform_description" msgid="7807832069800034738">"Den kan registrera din användning av en app eller hårdvarusensor och interagera med appar åt dig."</string>
     <string name="accessibility_dialog_button_allow" msgid="8274918676473216697">"Tillåt"</string>
     <string name="accessibility_dialog_button_deny" msgid="2037249860078259284">"Neka"</string>
     <string name="accessibility_dialog_button_stop" msgid="7584815613743292151">"Inaktivera"</string>
@@ -2405,7 +2406,6 @@
     <string name="keywords_select_to_speak" msgid="2872704811610888719"></string>
     <string name="keywords_color_correction" msgid="8540442886990423681">"justera färg"</string>
     <string name="keywords_color_inversion" msgid="4291058365873221962">"göra skärmen mörk, göra skärmen ljus"</string>
-    <string name="keywords_contrast" msgid="4668393735398949873">"färgkontrast"</string>
     <string name="keywords_accessibility_menu" msgid="4300579436464706608"></string>
     <string name="keywords_switch_access" msgid="5813094504384313402"></string>
     <string name="keywords_auto_click" msgid="6811744211216280998">"motorik, mus, extern mus, huvudstyrning, anpassad mus, rullstol, styrspak"</string>
@@ -3306,6 +3306,8 @@
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Inställningar för anslutna enheter"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Inga}=1{1 schema har ställts in}other{# scheman har ställts in}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Stör ej"</string>
+    <!-- no translation found for zen_modes_list_title (5138745349253275428) -->
+    <skip />
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Få bara aviseringar från viktiga personer och appar"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Begränsa antalet avbrott"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Aktivera Stör ej."</string>
@@ -3532,7 +3534,7 @@
     <string name="notifications_sent_daily" msgid="10274479224185437">"{count,plural, =1{Cirka # avisering per dag}other{Cirka # aviseringar per dag}}"</string>
     <string name="notifications_sent_weekly" msgid="7895656213187555346">"{count,plural, =1{Cirka # avisering per vecka}other{Cirka # aviseringar per vecka}}"</string>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Aldrig"</string>
-    <string name="manage_notification_access_title" msgid="6481256069087219982">"Enhets- och appaviseringar"</string>
+    <string name="manage_notification_access_title" msgid="4154723216570646451">"Läsa, svara på och kontrollera aviseringar"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"Styr vilka appar och enheter som kan läsa aviseringar"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8643809206612366067">"Åtkomsten till aviseringar för jobbprofilen har blockerats"</string>
     <string name="notification_assistant_title" msgid="5889201903272393099">"Förbättrade aviseringar"</string>
@@ -3632,7 +3634,7 @@
     <string name="app_notification_block_summary" msgid="1804611676339341551">"Visa aldrig de här aviseringarna"</string>
     <string name="notification_content_block_title" msgid="6689085826061361351">"Visa aviseringar"</string>
     <string name="notification_content_block_summary" msgid="329171999992248925">"Visa aldrig aviseringar i panelen eller på perifera enheter"</string>
-    <string name="app_notification_fsi_permission_title" msgid="5424116606034705020">"Tillåt aviseringar på hela skärmen"</string>
+    <string name="app_notification_fsi_permission_title" msgid="2260977598430154428">"Tillåt aviseringar i helskärm"</string>
     <string name="app_notification_fsi_permission_summary" msgid="7673487977631068039">"Tillåt att aviseringar täcker hela skärmen när enheten är låst"</string>
     <string name="notification_badge_title" msgid="6854537463548411313">"Tillåt aviseringsprick"</string>
     <string name="notification_channel_badge_title" msgid="6505542437385640049">"Visa aviseringsprick"</string>
@@ -3981,8 +3983,8 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Tillåt hanteringsåtkomst för alla filer"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Tillåt att den här appen får läsa, redigera och radera alla filer på enheten och eventuella anslutna lagringsutrymmen. Om du beviljar behörigheten kan appen komma åt filer utan att du informeras."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Har åtkomst till alla filer"</string>
-    <string name="full_screen_intent_title" msgid="747270185715224130">"Aviseringar i helskärm"</string>
-    <string name="permit_full_screen_intent" msgid="9035367640019960861">"Tillåt aviseringar i helskärm från den här appen"</string>
+    <string name="full_screen_intent_title" msgid="5888548315628268674">"Aviseringar i helskärm"</string>
+    <string name="permit_full_screen_intent" msgid="2414307667550523630">"Tillåt aviseringar i helskärm från den här appen"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Tillåt att den här appen visar aviseringar som täcker hela skärmen när enheten är låst. Sådana aviseringar kan användas i appar för att lyfta fram alarm, inkommande samtal och andra brådskande aviseringar."</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"Appar för mediehantering"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Tillåt att appen hanterar media"</string>
@@ -4100,7 +4102,7 @@
     <string name="data_usage_template" msgid="3822452362629968010">"<xliff:g id="ID_1">%1$s</xliff:g> användes <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="configure" msgid="1499586749829665889">"Konfigurera"</string>
     <string name="data_usage_other_apps" msgid="5649047093607329537">"Andra appar som är inkluderade i användningen"</string>
-    <string name="data_saver_unrestricted_summary" msgid="7343571401172437542">"{count,plural, =1{1 app tillåts använda obegränsad mängd data när Databesparing är aktiverat}other{# appar tillåts använda obegränsad mängd data när Databesparing är aktiverat}}"</string>
+    <string name="data_saver_unrestricted_summary" msgid="559673440849071149">"{count,plural, =1{1 app tillåts använda obegränsad mobildata när Databesparing är aktiverat}other{# appar tillåts använda obegränsad mobildata när Databesparing är aktiverat}}"</string>
     <string name="data_usage_title" msgid="4039024073687469094">"Primär data"</string>
     <string name="data_usage_wifi_title" msgid="1060495519280456926">"Wi‑Fi-data"</string>
     <string name="data_used_formatted" msgid="7913920278059077938">"<xliff:g id="ID_1">^1</xliff:g> <xliff:g id="ID_2">^2</xliff:g> använt"</string>
@@ -4117,13 +4119,13 @@
     <string name="no_carrier_update_now_text" msgid="7898004907837200752">"Uppdaterades alldeles nyss"</string>
     <string name="launch_wifi_text" msgid="976421974332512894">"Visa detaljer"</string>
     <string name="data_saver_title" msgid="2593804270788863815">"Databesparing"</string>
-    <string name="unrestricted_data_saver" msgid="7922563266857367495">"Obegränsad data"</string>
+    <string name="unrestricted_data_saver" msgid="5913547065342097274">"Obegränsad mobildata"</string>
     <string name="restrict_background_blocklisted" msgid="2308345280442438232">"Bakgrundsdata har inaktiverats"</string>
     <string name="data_saver_on" msgid="7848893946018448793">"På"</string>
     <string name="data_saver_off" msgid="5891210864117269045">"Av"</string>
     <string name="data_saver_switch_title" msgid="7111538580123722959">"Använd databesparing"</string>
-    <string name="unrestricted_app_title" msgid="7117585996574329284">"Obegränsad dataanvändning"</string>
-    <string name="unrestricted_app_summary" msgid="282698963532000403">"Tillåt obegränsad dataåtkomst när Databesparing är på"</string>
+    <string name="unrestricted_app_title" msgid="8531936851059106374">"Obegränsad mobildataanvändning"</string>
+    <string name="unrestricted_app_summary" msgid="8320813971858627624">"Tillåt obegränsad mobildataåtkomst när Databesparing är på"</string>
     <string name="home_app" msgid="6056850504746902747">"Startskärmsapp"</string>
     <string name="suggestion_additional_fingerprints" msgid="4726777300101156208">"Lägg till ett fingeravtryck"</string>
     <string name="suggestion_additional_fingerprints_summary" msgid="2825364645039666674">"Lås upp med ett annat finger"</string>
@@ -4197,9 +4199,9 @@
     <string name="notification_suggestion_summary" msgid="7615611244249276113">"Visa eller dölja innehåll i aviseringar"</string>
     <string name="page_tab_title_support" msgid="3235725053332345773">"Tips och support"</string>
     <string name="developer_smallest_width" msgid="632354817870920911">"Minsta bredd"</string>
-    <string name="premium_sms_none" msgid="8737045049886416739">"Inga installerade appar har begärt åtkomst till premium-sms"</string>
+    <string name="premium_sms_none" msgid="4718916765158062108">"Inga installerade appar har begärt åtkomst till premium-sms"</string>
     <string name="premium_sms_warning" msgid="2192300872411073324">"Det kan hända att premium-sms kostar pengar och läggs till på dina fakturor från operatören. Om du ger en app åtkomst kan du skicka premium-sms med den appen."</string>
-    <string name="premium_sms_access" msgid="5605970342699013212">"Åtkomst till premium-sms"</string>
+    <string name="premium_sms_access" msgid="8487315743197916530">"Premium-sms"</string>
     <string name="bluetooth_disabled" msgid="835838280837359514">"Av"</string>
     <string name="bluetooth_connected_summary" msgid="8043167194934315712">"Ansluten till <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="2294954614327771844">"Ansluten till flera enheter"</string>
@@ -4308,7 +4310,7 @@
     <string name="enterprise_privacy_settings" msgid="786350385374794180">"Information om hanterad enhet"</string>
     <string name="enterprise_privacy_settings_summary_generic" msgid="5471858290610344646">"Ändringar och inställningar som hanteras av organisationen"</string>
     <string name="enterprise_privacy_settings_summary_with_name" msgid="1315413275836515937">"Ändringar och inställningar som hanteras av <xliff:g id="ORGANIZATION_NAME">%s</xliff:g>"</string>
-    <string name="enterprise_privacy_header" msgid="4626225398848641603">"Organisationen kan ändra inställningar och installera programvara på enheten för att ge dig tillgång till jobbrelaterad information.\n\nKontakta organisationens administratör om du vill veta mer."</string>
+    <string name="enterprise_privacy_header" msgid="4626225398848641603">"Organisationen kan ändra inställningar och installera mjukvara på enheten för att ge dig tillgång till jobbrelaterad information.\n\nKontakta organisationens administratör om du vill veta mer."</string>
     <string name="enterprise_privacy_exposure_category" msgid="2507761423540037308">"Vilken typ av information som visas för organisationen"</string>
     <string name="enterprise_privacy_exposure_changes_category" msgid="5459989751333816587">"Ändringar som organisationens administratör har gjort"</string>
     <string name="enterprise_privacy_device_access_category" msgid="140157499478630004">"Din åtkomst till den här enheten"</string>
@@ -4350,7 +4352,7 @@
     <string name="toast_allows_restricted_settings_successfully" msgid="1219116121291466102">"Blockerade inställningar har tillåtits för <xliff:g id="APP_NAME">%s</xliff:g>"</string>
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"Av säkerhetsskäl är den här inställningen inte tillgänglig för närvarande."</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"Information om finansierad enhet"</string>
-    <string name="financed_privacy_intro" msgid="7836497475568741579">"Långivaren kan ändra inställningar och installera programvara på enheten under konfigureringen.\n\nOm en betalning uteblir kan långivaren låsa enheten och ändra enhetsinställningarna.\n\nKontakta långivaren om du vill veta mer."</string>
+    <string name="financed_privacy_intro" msgid="7836497475568741579">"Långivaren kan ändra inställningar och installera mjukvara på enheten under konfigureringen.\n\nOm en betalning uteblir kan långivaren låsa enheten och ändra enhetsinställningarna.\n\nKontakta långivaren om du vill veta mer."</string>
     <string name="financed_privacy_restrictions_category" msgid="2472659467919651602">"Om enheten är finansierad kan du inte göra följande:"</string>
     <string name="financed_privacy_install_apps" msgid="7381718005710210851">"Installera appar utanför Play Butik"</string>
     <string name="financed_privacy_safe_mode" msgid="5362149445732602578">"Starta om enheten i säkert läge"</string>
@@ -4884,7 +4886,7 @@
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Dölj spelare"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"Visa spelare"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"media"</string>
-    <string name="camera_extensions_fallback_title" msgid="3604579046777004989">"Tillåt programvarutillägg för kameran"</string>
+    <string name="camera_extensions_fallback_title" msgid="3604579046777004989">"Tillåt mjukvarutillägg för kameran"</string>
     <string name="camera_extensions_fallback_description" msgid="4306833827773277263">"Aktiverar implementeringen av standardmjukvaran för avancerade kamerafunktioner, till exempel HDR, Natt och andra kameratillägg."</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth aktiveras"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"Internet"</string>
@@ -4978,7 +4980,7 @@
     <string name="enable_2g_title" msgid="8184757884636162942">"Tillåt 2G"</string>
     <string name="enable_2g_summary" msgid="2794534052372565914">"2G är mindre säkert men kan ge bättre anslutning på vissa platser. 2G är alltid tillåtet för nödsamtal."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> kräver att 2G är tillgängligt"</string>
-    <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Tillåt endast i krypterade nätverk"</string>
+    <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Tillåt endast krypterade nätverk"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"Detta är säkrare men kan begränsa din mobilnätverksanslutning på vissa platser. Nödsamtal tillåts alltid."</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Alla tjänster"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Visa åtkomst till urklipp"</string>
@@ -4990,12 +4992,9 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Inaktivera flygplansläge för att använda UWB"</string>
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"UWB är inte tillgängligt på den aktuella platsen"</string>
     <string name="thread_network_settings_title" msgid="4212301030523859220">"Thread"</string>
-    <!-- no translation found for thread_network_settings_main_switch_title (3859168481929323474) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_footer_title (7385600318850220927) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_learn_more (8278498005848565050) -->
-    <skip />
+    <string name="thread_network_settings_main_switch_title" msgid="3859168481929323474">"Använd Thread"</string>
+    <string name="thread_network_settings_footer_title" msgid="7385600318850220927">"Med Thread kan du ansluta dina smarta hemenheter och få ökad effektivitet och prestanda.\n\nNär protokollet har aktiverats kan den här enheten läggas till i ett Thread-nätverk så att enheter som stöds av Matter kan styras med telefonen."</string>
+    <string name="thread_network_settings_learn_more" msgid="8278498005848565050">"Läs mer om Thread"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"Kameraåtkomst"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Mikrofonåtkomst"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"För appar och tjänster"</string>
@@ -5080,12 +5079,12 @@
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"Ljudet ändras när du rör på huvudet för att låta mer naturligt"</string>
     <string name="bluetooth_details_permissions_sync_title" msgid="7277580382321003521">"Synkronisera behörigheter från telefonen"</string>
     <string name="bluetooth_details_permissions_sync_summary" msgid="8125037984381432059">"Ge klockan samma appbehörigheter som du har gett den här telefonen"</string>
-    <string name="bluetooth_details_audio_device_types_title" msgid="3381941189346781614">"Ljudenhetstyp"</string>
-    <string name="bluetooth_details_audio_device_type_unknown" msgid="839337391037998014">"Okänd"</string>
+    <string name="bluetooth_details_audio_device_types_title" msgid="1889644189800180316">"Ljudenhetstyp"</string>
+    <string name="bluetooth_details_audio_device_type_unknown" msgid="5299284975435974206">"Inte angivet"</string>
     <string name="bluetooth_details_audio_device_type_speaker" msgid="3706227767994792124">"Högtalare"</string>
     <string name="bluetooth_details_audio_device_type_headphones" msgid="7644588291215033798">"Hörlurar"</string>
-    <string name="bluetooth_details_audio_device_type_hearing_aid" msgid="1310631131071939859">"Hörapparat"</string>
-    <string name="bluetooth_details_audio_device_type_carkit" msgid="4439017600454703229">"Bilsats"</string>
+    <string name="bluetooth_details_audio_device_type_hearing_aid" msgid="6311786545025321187">"Hörhjälpmedel"</string>
+    <string name="bluetooth_details_audio_device_type_carkit" msgid="1866236563013629394">"Bil"</string>
     <string name="bluetooth_details_audio_device_type_other" msgid="7019481234617207563">"Annan"</string>
     <string name="ingress_rate_limit_title" msgid="2106694002836274350">"Gräns för nedladdningshastighet i nätverket"</string>
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"Konfigurera den inkommande bandbredden i nätverket som ska gälla för alla nätverk med internetanslutning."</string>
@@ -5170,8 +5169,6 @@
     <string name="screen_flash_color_violet" msgid="1279950780509029495">"Violett"</string>
     <string name="color_selector_dialog_done" msgid="121253968943363376">"Klar"</string>
     <string name="color_selector_dialog_cancel" msgid="8667350644753900701">"Avbryt"</string>
-    <string name="contrast_title" msgid="6885768151336508075">"Kontrast"</string>
-    <string name="contrast_standard" msgid="1097297089917185235">"Standard"</string>
     <string name="contrast_default" msgid="8918545965525226966">"Standard"</string>
     <string name="contrast_medium" msgid="384414510709285811">"Medelhög"</string>
     <string name="contrast_high" msgid="3988567609694797696">"Hög"</string>
@@ -5203,9 +5200,105 @@
     <string name="accessibility_setup_password_complete" msgid="6358749253318369077">"Nu är lösenordet inställt"</string>
     <string name="show_stylus_pointer_icon" msgid="1010583689203665786">"Visa pekare när du håller muspekaren över något"</string>
     <string name="media_drm_settings_title" msgid="897424966554739867">"Medieinställningar för kopieringsskydd"</string>
-    <string name="force_swcrypto_fallback_title" msgid="8053166299808645593">"Tvinga säker programvarukryptering"</string>
-    <string name="force_swcrypto_fallback_summary" msgid="181969966310309701">"Tvinga hantering av kopieringsskyddsnyckel att använda programvarubaserad white-box-kryptering"</string>
+    <string name="force_swcrypto_fallback_title" msgid="8053166299808645593">"Tvinga säker mjukvarukryptering"</string>
+    <string name="force_swcrypto_fallback_summary" msgid="181969966310309701">"Tvinga hantering av kopieringsskyddsnyckel att använda mjukvarubaserad white-box-kryptering"</string>
     <string name="fingerprint_acquired_imager_dirty_udfps" msgid="7005042288289506776">"Rengör skärmen i närheten av sensorn och försök igen"</string>
     <string name="sim_category_converted_sim" msgid="8575548015816988908">"Har konverterats till eSIM. Ta ut och släng det."</string>
     <string name="sync_across_devices_title" msgid="3447757705383089345">"Synkronisera enheter"</string>
+    <!-- no translation found for device_diagnostics_title (2914523189695727897) -->
+    <skip />
+    <string name="audio_sharing_title" msgid="4144157137502923821">"Ljuddelning"</string>
+    <string name="audio_sharing_switch_title" msgid="7052827328670825701">"Dela ljud"</string>
+    <string name="calls_and_alarms_device_title" msgid="6993559028175454198">"Samtal och alarm"</string>
+    <string name="audio_sharing_description" msgid="1660255584523640628">"Låt andra lyssna på media tillsammans med dig. Lyssnare behöver sina egna LE Audio-hörlurar."</string>
+    <string name="audio_sharing_device_group_title" msgid="3019780581643956943">"Aktiva medieenheter"</string>
+    <string name="audio_sharing_call_audio_title" msgid="7978867452289583929">"Samtalsljud"</string>
+    <string name="audio_sharing_call_audio_description" msgid="6573621048260616924">"Spela endast på <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_sharing_test_sound_title" msgid="6438868185641027763">"Spela upp ett testljud"</string>
+    <string name="audio_sharing_test_sound_description" msgid="4072462502371937399">"Alla som lyssnar bör höra det"</string>
+    <string name="audio_sharing_stream_settings_title" msgid="1374391898689242036">"Inställningar för ljudstream"</string>
+    <string name="audio_sharing_stream_name_title" msgid="8156859441897180940">"Namn"</string>
+    <string name="audio_sharing_stream_password_title" msgid="7026649168165764602">"Lösenord"</string>
+    <string name="audio_sharing_stream_compatibility_title" msgid="5690947186724469918">"Förbättra kompatibiliteten"</string>
+    <string name="audio_sharing_stream_compatibility_description" msgid="8170241188606110963">"Hjälper vissa enheter, till exempel hörapparater, att ansluta genom att reducera ljudkvaliteten"</string>
+    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="2586408353546825682">"Stänger av ljuddelningen för att konfigurera kompatibiliteten"</string>
+    <string name="audio_sharing_nearby_audio_title" msgid="4795438407040677177">"Lyssna på ljud i närheten"</string>
+    <string name="audio_sharing_footer_description" msgid="4786942197840271680">"Ljuddelning har stöd för Auracast™"</string>
+    <string name="audio_sharing_stream_name_dialog_title" msgid="6706027295417556499">"Namn på ljudstream"</string>
+    <string name="audio_sharing_stream_password_dialog_title" msgid="4148196538860845705">"Lösenord för ljudstream"</string>
+    <string name="audio_sharing_media_device_group_title" msgid="4850674234590549565">"Andra medieenheter"</string>
+    <string name="audio_sharing_summary_on" msgid="611197542982323788">"På"</string>
+    <string name="audio_sharing_summary_off" msgid="8833198995257547378">"Av"</string>
+    <string name="audio_sharing_share_dialog_title" msgid="427514648577553621">"Dela ljudet"</string>
+    <string name="audio_sharing_share_dialog_subtitle" msgid="5208582843732057871">"<xliff:g id="DEVICE_NAME1">%1$s</xliff:g> och <xliff:g id="DEVICE_NAME2">%2$s</xliff:g>"</string>
+    <string name="audio_sharing_share_button_label" msgid="3895900668317105537">"Dela ljud"</string>
+    <string name="audio_sharing_no_thanks_button_label" msgid="5822491984114744357">"Nej tack"</string>
+    <string name="audio_sharing_share_with_dialog_title" msgid="3934377530640830364">"Vill du dela ljud med <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
+    <string name="audio_sharing_share_with_more_dialog_title" msgid="2840069088858232267">"Dela ljud med en annan enhet"</string>
+    <string name="audio_sharing_share_with_button_label" msgid="4146194430380237357">"Dela med <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_sharing_close_button_label" msgid="2666534149100498574">"Stäng"</string>
+    <string name="audio_sharing_dialog_connect_device_content" msgid="2873230647152283734">"Anslut ännu ett par kompatibla hörlurar, eller dela streamens namn och lösenord med den andra personen"</string>
+    <string name="audio_sharing_dialog_pair_device_content" msgid="3136997898244863470">"Parkoppla ännu ett par kompatibla hörlurar, eller dela ljudstreamens QR-kod med den andra personen"</string>
+    <string name="audio_sharing_sharing_label" msgid="1038021053061111508">"Delar ljud"</string>
+    <string name="audio_sharing_pair_button_label" msgid="7987236990273083588">"Parkoppla en ny enhet"</string>
+    <string name="audio_sharing_qrcode_button_label" msgid="3207039106555097659">"Visa QR-kod"</string>
+    <string name="audio_sharing_notification_title" msgid="1204798942946033005">"Du delar ljud"</string>
+    <string name="audio_sharing_notification_content" msgid="1577180829878785642">"Personer som lyssnar kan höra din media. De hör inte dina samtal."</string>
+    <string name="audio_sharing_stop_button_label" msgid="8770519671470608849">"Sluta dela"</string>
+    <string name="audio_sharing_settings_button_label" msgid="8574808650318270491">"Inställningar"</string>
+    <string name="audio_sharing_disconnect_dialog_title" msgid="2192751727237748602">"Välj en enhet att koppla ifrån"</string>
+    <string name="audio_sharing_dialog_disconnect_content" msgid="3840488888970653308">"Endast två enheter kan dela ljud samtidigt"</string>
+    <string name="audio_sharing_disconnect_device_button_label" msgid="4272897217708930576">"Koppla från <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_sharing_stop_dialog_title" msgid="4872853738164232075">"Vill du ansluta <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
+    <string name="audio_sharing_stop_dialog_content" msgid="6371546856710692910">"Du slutar dela ljud med <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_sharing_stop_dialog_with_two_content" msgid="2119020725467967219">"Du slutar dela ljud med <xliff:g id="DEVICE_NAME1">%1$s</xliff:g> och <xliff:g id="DEVICE_NAME2">%2$s</xliff:g>"</string>
+    <string name="audio_sharing_stop_dialog_with_more_content" msgid="5262441138981618703">"Du slutar dela ljud med de anslutna hörlurarna"</string>
+    <string name="audio_sharing_connect_button_label" msgid="4241911519063029982">"Anslut"</string>
+    <string name="audio_sharing_sharing_stopped_label" msgid="8128194452354240996">"Ljuddelningen har avslutats"</string>
+    <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"Anslut en kompatibel enhet"</string>
+    <string name="audio_sharing_comfirm_dialog_content" msgid="3479217934447446066">"Om du vill dela ljud ska du börja med att ansluta LE Audio-hörlurarna till din telefon"</string>
+    <string name="audio_streams_category_title" msgid="4878022761829895463">"Ansut till en LE Audio-stream"</string>
+    <string name="audio_streams_pref_title" msgid="6320485086288646209">"Ljudstreamar i närheten"</string>
+    <string name="audio_streams_title" msgid="6617990880383079165">"Ljudstreamar"</string>
+    <string name="audio_streams_qr_code_summary" msgid="2838923349871884871">"Anslut till en ljudstream med QR-kod"</string>
+    <string name="audio_streams_empty" msgid="8803517701437394982">"Inga ljudstreamar hittades i närheten."</string>
+    <string name="audio_streams_disconnect" msgid="1755594831469579161">"Koppla från"</string>
+    <string name="audio_streams_connect" msgid="1955964373102927954">"Anslut"</string>
+    <string name="audio_streams_qr_code_is_not_valid_format" msgid="4856288389653121830">"QR-kodens format är ogiltigt"</string>
+    <string name="audio_streams_qr_code_scanner" msgid="525396804963685478">"Centrera QR-koden nedan om du vill börja lyssna"</string>
+    <string name="audio_streams_add_source_bad_code_state_summary" msgid="6527086906921868757">"Kontrollera lösenordet och försök igen"</string>
+    <string name="audio_streams_add_source_failed_state_summary" msgid="3937546443978562322">"Det gick inte att ansluta. Försök igen."</string>
+    <string name="audio_streams_add_source_wait_for_response_summary" msgid="3763240901110974606">"Ansluter …"</string>
+    <string name="audio_streams_wait_for_sync_state_summary" msgid="11905744690831864">"Söker …"</string>
+    <string name="audio_streams_dialog_stream_is_not_available" msgid="4032878851270690546">"Ljudstreamen är inte tillgänglig"</string>
+    <string name="audio_streams_is_not_playing" msgid="8480293894696007941">"Den här ljudstreamen spelar inte upp något just nu"</string>
+    <string name="audio_streams_dialog_close" msgid="8177201719298408431">"Stäng"</string>
+    <string name="audio_streams_dialog_listen" msgid="7290340191504987685">"Lyssna"</string>
+    <string name="audio_streams_dialog_retry" msgid="4456843891970998556">"Försök igen"</string>
+    <string name="audio_streams_dialog_listen_to_audio_stream" msgid="8585253007762261528">"Lyssna på ljudstreamen"</string>
+    <string name="audio_streams_dialog_control_volume" msgid="7615062686016713544">"Ljudstreamen spelas upp på <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Använd den här enheten för att justera volymen."</string>
+    <string name="audio_streams_dialog_cannot_listen" msgid="4432257183698209966">"Kan inte lyssna på ljudstreamen"</string>
+    <string name="audio_streams_dialog_default_device" msgid="6159800303379303266">"anslutna kompatibla hörlurar"</string>
+    <string name="audio_streams_activity_title" msgid="9011162151277443663">"Utsändningar"</string>
+    <string name="audio_streams_no_password_summary" msgid="8976357323034830144">"Inget lösenord"</string>
+    <string name="audio_streams_dialog_learn_more" msgid="6711241053442211345">"Läs mer"</string>
+    <string name="audio_streams_dialog_cannot_play" msgid="1358828316927479091">"Kan inte spela upp den här ljudstreamen på <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
+    <string name="audio_streams_listening_now" msgid="4205614429222949176">"Lyssnar nu"</string>
+    <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"Sluta lyssna"</string>
+    <string name="audio_streams_dialog_no_le_device_title" msgid="3931163990976742282">"Anslut kompatibla hörlurar"</string>
+    <string name="audio_streams_dialog_no_le_device_button" msgid="4484355549428642588">"Anslut en enhet"</string>
+    <string name="audio_streams_detail_page_title" msgid="7884132061275273766">"Information om ljudstream"</string>
+    <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"QR-kod för ljudstream"</string>
+    <string name="audio_streams_qr_code_page_password" msgid="7268475614131297060">"Lösenord: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
+    <string name="audio_streams_qr_code_page_description" msgid="1317961663706630428">"Andra som vill lyssna på <xliff:g id="STREAM_NAME">%1$s</xliff:g> kan ansluta kompatibla hörlurar till sin Android-enhet. Sedan kan de skanna den här QR-koden."</string>
+    <string name="audio_streams_main_page_title" msgid="1838380471076527639">"Hitta en ljudstream"</string>
+    <string name="audio_streams_main_page_subtitle" msgid="3251995732921981539">"Lyssna på en enhet som delar ljud eller på en Auracast-utsändning i närheten"</string>
+    <string name="audio_streams_main_page_device_title" msgid="2635744035523908253">"Din ljudenhet"</string>
+    <string name="audio_streams_main_page_no_device_summary" msgid="2936000845397406389">"Anslut kompatibla hörlurar"</string>
+    <string name="audio_streams_main_page_scan_section_title" msgid="2778235929304061163">"Ljudstreamar i närheten"</string>
+    <string name="audio_streams_main_page_scan_qr_code_title" msgid="8337270277392468895">"Skanna QR-kod"</string>
+    <string name="audio_streams_main_page_scan_qr_code_summary" msgid="1991792283368249499">"Börja lyssna genom att skanna QR-koden för en stream"</string>
+    <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Lyssna på streamen"</string>
+    <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Skanna QR-koden för en ljudstream om du vill lyssna med <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Det går inte att redigera lösenordet medan delning pågår. Om du vill byta lösenord måste du först stänga av ljuddelningen."</string>
 </resources>

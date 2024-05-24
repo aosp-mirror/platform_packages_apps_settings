@@ -30,11 +30,21 @@ import static android.service.notification.ZenPolicy.PRIORITY_CATEGORY_MESSAGES;
 import static android.service.notification.ZenPolicy.PRIORITY_CATEGORY_REMINDERS;
 import static android.service.notification.ZenPolicy.PRIORITY_CATEGORY_REPEAT_CALLERS;
 import static android.service.notification.ZenPolicy.PRIORITY_CATEGORY_SYSTEM;
+import static android.service.notification.ZenPolicy.STATE_DISALLOW;
+import static android.service.notification.ZenPolicy.VISUAL_EFFECT_AMBIENT;
+import static android.service.notification.ZenPolicy.VISUAL_EFFECT_BADGE;
+import static android.service.notification.ZenPolicy.VISUAL_EFFECT_FULL_SCREEN_INTENT;
+import static android.service.notification.ZenPolicy.VISUAL_EFFECT_LIGHTS;
+import static android.service.notification.ZenPolicy.VISUAL_EFFECT_NOTIFICATION_LIST;
+import static android.service.notification.ZenPolicy.VISUAL_EFFECT_PEEK;
+import static android.service.notification.ZenPolicy.VISUAL_EFFECT_STATUS_BAR;
 
 import android.content.Context;
 import android.icu.text.MessageFormat;
+import android.service.notification.ZenDeviceEffects;
 import android.service.notification.ZenPolicy;
 
+import android.util.SparseArray;
 import com.android.settings.R;
 
 import java.util.ArrayList;
@@ -129,16 +139,111 @@ public class ZenModeSummaryHelper {
     }
 
     String getBlockedEffectsSummary(ZenMode zenMode) {
-        if (zenMode.getPolicy().shouldShowAllVisualEffects()) {
+        List<Integer> relevantVisualEffects = new ArrayList<>();
+        relevantVisualEffects.add(VISUAL_EFFECT_FULL_SCREEN_INTENT);
+        relevantVisualEffects.add(VISUAL_EFFECT_PEEK);
+        relevantVisualEffects.add(VISUAL_EFFECT_STATUS_BAR);
+        relevantVisualEffects.add(VISUAL_EFFECT_BADGE);
+        relevantVisualEffects.add(VISUAL_EFFECT_AMBIENT);
+        relevantVisualEffects.add(VISUAL_EFFECT_NOTIFICATION_LIST);
+        if (mContext.getResources()
+                .getBoolean(com.android.internal.R.bool.config_intrusiveNotificationLed)) {
+            relevantVisualEffects.add(VISUAL_EFFECT_LIGHTS);
+        }
+
+        if (shouldShowAllVisualEffects(zenMode.getPolicy(), relevantVisualEffects)) {
             return mContext.getResources().getString(
                     R.string.zen_mode_restrict_notifications_summary_muted);
-        } else if (zenMode.getPolicy().shouldHideAllVisualEffects()) {
+        } else if (shouldHideAllVisualEffects(zenMode.getPolicy(), relevantVisualEffects)) {
             return mContext.getResources().getString(
                     R.string.zen_mode_restrict_notifications_summary_hidden);
         } else {
             return mContext.getResources().getString(
                     R.string.zen_mode_restrict_notifications_summary_custom);
         }
+    }
+
+    private boolean shouldShowAllVisualEffects(ZenPolicy policy, List<Integer> relevantEffects) {
+        for (int i = 0; i < relevantEffects.size(); i++) {
+            if (!policy.isVisualEffectAllowed(relevantEffects.get(i), false)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean shouldHideAllVisualEffects(ZenPolicy policy, List<Integer> relevantEffects) {
+        for (int i = 0; i < relevantEffects.size(); i++) {
+            if (policy.isVisualEffectAllowed(relevantEffects.get(i), false)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    String getDisplayEffectsSummary(ZenMode zenMode) {
+        boolean isFirst = true;
+        List<String> enabledEffects = new ArrayList<>();
+        if (!zenMode.getPolicy().shouldShowAllVisualEffects()) {
+            enabledEffects.add(getBlockedEffectsSummary(zenMode));
+            isFirst = false;
+        }
+        ZenDeviceEffects currEffects =  zenMode.getRule().getDeviceEffects();
+        if (currEffects != null) {
+            if (currEffects.shouldDisplayGrayscale()) {
+                if (isFirst) {
+                    enabledEffects.add(mContext.getString(R.string.mode_grayscale_title));
+                } else {
+                    enabledEffects.add(mContext.getString(
+                            R.string.mode_grayscale_title_secondary_list));
+                }
+                isFirst = false;
+            }
+            if (currEffects.shouldSuppressAmbientDisplay()) {
+                if (isFirst) {
+                    enabledEffects.add(mContext.getString(R.string.mode_aod_title));
+                } else {
+                    enabledEffects.add(mContext.getString(
+                            R.string.mode_aod_title_secondary_list));
+                }
+                isFirst = false;
+            }
+            if (currEffects.shouldDimWallpaper()) {
+                if (isFirst) {
+                    enabledEffects.add(mContext.getString(R.string.mode_wallpaper_title));
+                } else {
+                    enabledEffects.add(mContext.getString(
+                            R.string.mode_wallpaper_title_secondary_list));
+                }
+                isFirst = false;
+            }
+            if (currEffects.shouldUseNightMode()) {
+                if (isFirst) {
+                    enabledEffects.add(mContext.getString(R.string.mode_dark_theme_title));
+                } else {
+                    enabledEffects.add(mContext.getString(
+                            R.string.mode_dark_theme_title_secondary_list));
+                }
+                isFirst = false;
+            }
+        }
+
+        int numCategories = enabledEffects.size();
+        MessageFormat msgFormat = new MessageFormat(
+                mContext.getString(R.string.mode_display_settings_summary),
+                Locale.getDefault());
+        Map<String, Object> args = new HashMap<>();
+        args.put("count", numCategories);
+        if (numCategories >= 1) {
+            args.put("effect_1", enabledEffects.get(0));
+            if (numCategories >= 2) {
+                args.put("effect_2", enabledEffects.get(1));
+                if (numCategories == 3) {
+                    args.put("effect_3", enabledEffects.get(2));
+                }
+            }
+        }
+        return msgFormat.format(args);
     }
 
     private List<String> getEnabledCategories(ZenPolicy policy,

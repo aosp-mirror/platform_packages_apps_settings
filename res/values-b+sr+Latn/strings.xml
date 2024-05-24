@@ -48,9 +48,9 @@
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"Samo igre, videi i drugo"</string>
     <string name="selective_stay_awake_summary" msgid="9055967322921984543">"Prednji ekran se uključuje za aplikacije koje onemogućavaju da ekran bude neaktivan"</string>
     <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Prevucite nagore da biste nastavili"</string>
-    <string name="stay_awake_on_lockscreen_summary" msgid="2299351813382522952">"Zatvorite telefon i prevucite nagore na prednjem ekranu da biste i dalje korisili aplikaciju ili sačekajte nekoliko sekundi da se ekran zaključa"</string>
+    <string name="stay_awake_on_lockscreen_summary" msgid="8825321939913726566">"Zatvorite telefon i prevucite nagore na prednjem ekranu da biste i dalje koristili aplikaciju ili sačekajte nekoliko sekundi da se ekran zaključa. Igre i video aplikacije se nastavljaju automatski."</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"Nikad"</string>
-    <string name="sleep_on_fold_summary" msgid="7737992842459588846">"Prednji ekran se zaključava kada zatvorite uređaj"</string>
+    <string name="sleep_on_fold_summary" msgid="4191753338303043456">"Prednji ekran se isključuje i zaključava kada zatvorite uređaj"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Koristi automatsko rotiranje"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"Prepoznavanje lica koristi prednju kameru za poboljšanje preciznosti automatskog rotiranja. Slike se nikada ne čuvaju niti šalju Google-u."</string>
     <string name="bluetooth" msgid="8898478620943459654">"Bluetooth"</string>
@@ -139,7 +139,6 @@
     <string name="stylus_textfield_handwriting" msgid="2363579035338976327">"Pišite u poljima za tekst"</string>
     <string name="stylus_ignore_button" msgid="7734540973145241391">"Ignoriši sva pritiskanja dugmeta pomoću pisaljke"</string>
     <string name="stylus_connected_devices_title" msgid="2823967577941359812">"Pisaljka"</string>
-    <string name="audio_streams_empty" msgid="8803517701437394982">"Nema audio strimova u blizini."</string>
     <string name="date_and_time" msgid="1788358029823431692">"Datum i vreme"</string>
     <string name="proxy_settings_title" msgid="4201866858226087066">"Proksi"</string>
     <string name="proxy_clear_text" msgid="6529658759984031149">"Obriši"</string>
@@ -286,8 +285,7 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Aplikacije sa dozvolom za uređaje u blizini mogu da odrede približan položaj povezanih uređaja."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Pristup lokaciji je isključen za aplikacije i usluge. Lokacija uređaja može i dalje da se šalje ekipama hitnih službi kada pozovete broj za hitne slučajeve ili pošaljete SMS na njega."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Saznajte više o podešavanjima lokacije"</string>
-    <!-- no translation found for location_settings_tooltip_text_for_chrome (5781821709250544575) -->
-    <skip />
+    <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"Da biste to promenili, na ChromeOS-u otvorite Podešavanja &gt; Bezbednost i privatnost &gt; Kontrole privatnosti &gt; Pristup lokaciji"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Nalozi"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Bezbednost"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Šifrovanje i akreditivi"</string>
@@ -565,7 +563,8 @@
     <string name="private_space_auto_lock_title" msgid="8663409382910601261">"Automatsko zaključavanje privatnog prostora"</string>
     <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"Možete automatski da zaključate privatan prostor ako uređaj niste koristili neko vreme"</string>
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"Svaki put kad se uređaj zaključa"</string>
-    <string name="private_space_auto_lock_after_inactivity" msgid="1748673030841528649">"Posle 5 minuta neaktivnosti"</string>
+    <!-- no translation found for private_space_auto_lock_after_inactivity (7107814517866649733) -->
+    <skip />
     <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"Samo posle restartovanja uređaja"</string>
     <string name="private_space_hide_page_title" msgid="3364639176511877414">"Sakrijte privatan prostor"</string>
     <string name="private_space_hide_when_locked" msgid="6219472348124151797">"Sakrij privatan prostor kada je zaključan"</string>
@@ -1247,8 +1246,8 @@
     <string name="dark_ui_summary_on_auto_mode_custom" msgid="2526935680241734784">"Isključuje se automatski u <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_on_auto_mode_custom_bedtime" msgid="1976993025762551246">"Isključuje se automatski posle vremena za spavanje"</string>
     <string name="dark_ui_text" msgid="4392646155331126666">"Tamna tema koristi crnu pozadinu da bi baterija trajala duže na nekim ekranima. Rasporedi tamne teme se uključuju tek kada se ekran isključi."</string>
-    <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Tamna tema trenutno prati raspored noćnog režima"</string>
-    <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Podešavanja noćnog režima"</string>
+    <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Tamna tema trenutno prati raspored režima za spavanje"</string>
+    <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Podešavanja režima za spavanje"</string>
     <string name="even_dimmer_display_title" msgid="6731255736830410149">"Još slabije osvetljenje"</string>
     <string name="even_dimmer_display_summary" msgid="120301078873242172">"Dozvolite da osvetljenje uređaja bude slabije nego obično"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Gašenje ekrana"</string>
@@ -1264,7 +1263,7 @@
     <string name="style_suggestion_summary" msgid="4271131877800968159">"Probajte drugačije stilove, pozadine i još toga"</string>
     <string name="screensaver_settings_title" msgid="3588535639672365395">"Čuvar ekrana"</string>
     <string name="keywords_screensaver" msgid="7249337959432229172">"čuvar ekrana"</string>
-    <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"Nedostupno je jer je noćni režim uključen"</string>
+    <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"Nedostupno je jer je režim za spavanje uključen"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Koristi čuvar ekrana"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Tokom punjenja ili na baznoj stanici"</string>
     <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"Dok je na baznoj stanici i puni se"</string>
@@ -1753,7 +1752,7 @@
     <string name="enable_text" msgid="8570798764647110430">"Omogući"</string>
     <string name="clear_user_data_text" msgid="6773186434260397947">"Obriši memorijski prostor"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"Deinstaliraj ažuriranja"</string>
-    <string name="app_restricted_settings_lockscreen_title" msgid="796413224212436400">"Omogućite ograničene dozvole"</string>
+    <string name="app_restricted_settings_lockscreen_title" msgid="5993061278264872648">"Dozvolite ograničena podešavanja"</string>
     <string name="auto_launch_enable_text" msgid="8912714475823807798">"Neke aktivnosti koje ste izabrali se podrazumevano otvaraju u ovoj aplikaciji."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"Izabrali ste da dozvolite ovoj aplikaciji da pravi vidžete i pristupa njihovim podacima."</string>
     <string name="auto_launch_disable_text" msgid="502648841250936209">"Nisu postavljene podrazumevane vrednosti."</string>
@@ -2325,6 +2324,8 @@
     <string name="daltonizer_mode_protanomaly_title" msgid="6392456967103014723">"Crveno-zeleno"</string>
     <string name="daltonizer_mode_tritanomaly_title" msgid="2278786218762602022">"Plavo-žuto"</string>
     <string name="daltonizer_mode_grayscale_title" msgid="152005391387952588">"Sivilo"</string>
+    <!-- no translation found for daltonizer_saturation_title (2999486412114963068) -->
+    <skip />
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="2117727423019598455">"Delimično slepilo za zelenu, deuteranomalija"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="4617032854982040748">"Delimično slepilo za crvenu, protanomalija"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Tritanomalija"</string>
@@ -2405,7 +2406,6 @@
     <string name="keywords_select_to_speak" msgid="2872704811610888719"></string>
     <string name="keywords_color_correction" msgid="8540442886990423681">"podešavanje boje"</string>
     <string name="keywords_color_inversion" msgid="4291058365873221962">"zatamniti ekran, osvetliti ekran"</string>
-    <string name="keywords_contrast" msgid="4668393735398949873">"kontrast boja"</string>
     <string name="keywords_accessibility_menu" msgid="4300579436464706608"></string>
     <string name="keywords_switch_access" msgid="5813094504384313402"></string>
     <string name="keywords_auto_click" msgid="6811744211216280998">"motorika, miš, spoljni miš, miš za glavu, adaptivni miš, invalidska kolica, džojstik"</string>
@@ -3306,6 +3306,8 @@
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Podešavanja povezanih uređaja"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Nijedan}=1{1 raspored je podešen}one{# raspored je podešen}few{# rasporeda su podešena}other{# rasporeda je podešeno}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Ne uznemiravaj"</string>
+    <!-- no translation found for zen_modes_list_title (5138745349253275428) -->
+    <skip />
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Dobijajte obaveštenja samo od važnih osoba i aplikacija"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Ograničite prekide"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Uključite režim Ne uznemiravaj"</string>
@@ -3532,7 +3534,7 @@
     <string name="notifications_sent_daily" msgid="10274479224185437">"{count,plural, =1{Oko # obaveštenje dnevno}one{Oko # obaveštenje dnevno}few{Oko # obaveštenja dnevno}other{Oko # obaveštenja dnevno}}"</string>
     <string name="notifications_sent_weekly" msgid="7895656213187555346">"{count,plural, =1{Oko # obaveštenje nedeljno}one{Oko # obaveštenje nedeljno}few{Oko # obaveštenja nedeljno}other{Oko # obaveštenja nedeljno}}"</string>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Nikad"</string>
-    <string name="manage_notification_access_title" msgid="6481256069087219982">"Obaveštenja na uređajima i u aplikacijama"</string>
+    <string name="manage_notification_access_title" msgid="4154723216570646451">"Čitanje obaveštenja, odgovaranje na njih i upravljanje njima"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"Kontrolišite koje aplikacije i uređaji mogu da čitaju obaveštenja"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8643809206612366067">"Pristup obaveštenjima poslovnog profila je blokiran"</string>
     <string name="notification_assistant_title" msgid="5889201903272393099">"Poboljšana obaveštenja"</string>
@@ -3632,7 +3634,7 @@
     <string name="app_notification_block_summary" msgid="1804611676339341551">"Nikada ne prikazuj ova obaveštenja"</string>
     <string name="notification_content_block_title" msgid="6689085826061361351">"Prikazuj obaveštenja"</string>
     <string name="notification_content_block_summary" msgid="329171999992248925">"Obaveštenja se nikada ne prikazuju na traci ili periferijskim uređajima"</string>
-    <string name="app_notification_fsi_permission_title" msgid="5424116606034705020">"Dozvoli obaveštenja preko celog ekrana"</string>
+    <string name="app_notification_fsi_permission_title" msgid="2260977598430154428">"Dozvoli obaveštenja preko celog ekrana"</string>
     <string name="app_notification_fsi_permission_summary" msgid="7673487977631068039">"Dozvoli obaveštenja preko celog ekrana kada je uređaj zaključan"</string>
     <string name="notification_badge_title" msgid="6854537463548411313">"Dozvoli tačku za obaveštenja"</string>
     <string name="notification_channel_badge_title" msgid="6505542437385640049">"Prikazuj tačku za obaveštenja"</string>
@@ -3981,8 +3983,8 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Dozvoli pristup za upravljanje svim datotekama"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Dozvolite da ova aplikacija čita, menja i briše sve datoteke na ovom uređaju ili svim povezanim uređajima za skladištenje. Ako to dozvolite, aplikacija može da pristupa datotekama bez vašeg znanja."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Može da pristupa svim datotekama"</string>
-    <string name="full_screen_intent_title" msgid="747270185715224130">"Obaveštenja preko celog ekrana"</string>
-    <string name="permit_full_screen_intent" msgid="9035367640019960861">"Dozvoli obaveštenja preko celog ekrana od ove aplikacije"</string>
+    <string name="full_screen_intent_title" msgid="5888548315628268674">"Obaveštenja preko celog ekrana"</string>
+    <string name="permit_full_screen_intent" msgid="2414307667550523630">"Dozvoli obaveštenja preko celog ekrana od ove aplikacije"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Dozvolite ovoj aplikaciji da prikazuje obaveštenja preko celog ekrana kada je uređaj zaključan. Aplikacije mogu da ih koriste radi isticanja alarma, dolaznih poziva ili drugih hitnih obaveštenja."</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"Aplikacije za upravljanje medijima"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Omogući aplikaciji upravljanje medijima"</string>
@@ -4100,7 +4102,7 @@
     <string name="data_usage_template" msgid="3822452362629968010">"<xliff:g id="ID_1">%1$s</xliff:g> iskorišteno: <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="configure" msgid="1499586749829665889">"Konfigurišite"</string>
     <string name="data_usage_other_apps" msgid="5649047093607329537">"Druge aplikacije koje su trošile podatke"</string>
-    <string name="data_saver_unrestricted_summary" msgid="7343571401172437542">"{count,plural, =1{1 aplikacija ima dozvolu da koristi neograničenu količinu podataka kada je Ušteda podataka uključena}one{# aplikacija ima dozvolu da koristi neograničenu količinu podataka kada je Ušteda podataka uključena}few{# aplikacije imaju dozvolu da koriste neograničenu količinu podataka kada je Ušteda podataka uključena}other{# aplikacija ima dozvolu da koristi neograničenu količinu podataka kada je Ušteda podataka uključena}}"</string>
+    <string name="data_saver_unrestricted_summary" msgid="559673440849071149">"{count,plural, =1{1 aplikacija ima dozvolu da koristi neograničene mobilne podatke kada je Ušteda podataka uključena}one{# aplikacija ima dozvolu da koristi neograničene mobilne podatke kada je Ušteda podataka uključena}few{# aplikacije imaju dozvolu da koriste neograničene mobilne podatke kada je Ušteda podataka uključena}other{# aplikacija ima dozvolu da koristi neograničene mobilne podatke kada je Ušteda podataka uključena}}"</string>
     <string name="data_usage_title" msgid="4039024073687469094">"Primarni podaci"</string>
     <string name="data_usage_wifi_title" msgid="1060495519280456926">"Wi‑Fi podaci"</string>
     <string name="data_used_formatted" msgid="7913920278059077938">"<xliff:g id="ID_1">^1</xliff:g> <xliff:g id="ID_2">^2</xliff:g> potrošeno"</string>
@@ -4117,13 +4119,13 @@
     <string name="no_carrier_update_now_text" msgid="7898004907837200752">"Ažurirano je malopre"</string>
     <string name="launch_wifi_text" msgid="976421974332512894">"Prikaži detalje"</string>
     <string name="data_saver_title" msgid="2593804270788863815">"Ušteda podataka"</string>
-    <string name="unrestricted_data_saver" msgid="7922563266857367495">"Neograničen pristup podacima"</string>
+    <string name="unrestricted_data_saver" msgid="5913547065342097274">"Neograničeni mobilni podaci"</string>
     <string name="restrict_background_blocklisted" msgid="2308345280442438232">"Pozadinski podaci su isključeni"</string>
     <string name="data_saver_on" msgid="7848893946018448793">"Uključeno"</string>
     <string name="data_saver_off" msgid="5891210864117269045">"Isključeno"</string>
     <string name="data_saver_switch_title" msgid="7111538580123722959">"Koristi Uštedu podataka"</string>
-    <string name="unrestricted_app_title" msgid="7117585996574329284">"Neograničena potrošnja podataka"</string>
-    <string name="unrestricted_app_summary" msgid="282698963532000403">"Dozvoljav neograničen pristup podacima uz uključenu Uštedu podataka"</string>
+    <string name="unrestricted_app_title" msgid="8531936851059106374">"Neograničena potrošnja mobilnih podataka"</string>
+    <string name="unrestricted_app_summary" msgid="8320813971858627624">"Dozvoli neograničen protok mobilnih podataka kada je uključena Ušteda podataka"</string>
     <string name="home_app" msgid="6056850504746902747">"Aplikacija za početnu stranicu"</string>
     <string name="suggestion_additional_fingerprints" msgid="4726777300101156208">"Dodajte još jedan otisak prsta"</string>
     <string name="suggestion_additional_fingerprints_summary" msgid="2825364645039666674">"Otključavajte pomoću drugog prsta"</string>
@@ -4197,9 +4199,9 @@
     <string name="notification_suggestion_summary" msgid="7615611244249276113">"Pregledajte ili sakrijte sadržaj obaveštenja"</string>
     <string name="page_tab_title_support" msgid="3235725053332345773">"Saveti i podrška"</string>
     <string name="developer_smallest_width" msgid="632354817870920911">"Najmanja širina"</string>
-    <string name="premium_sms_none" msgid="8737045049886416739">"Nijedna instalirana aplikacija nije zahtevala pristup premijum SMS-ovima"</string>
+    <string name="premium_sms_none" msgid="4718916765158062108">"Nijedna instalirana aplikacija nije zahtevala premijum SMS-ove"</string>
     <string name="premium_sms_warning" msgid="2192300872411073324">"Premijum SMS-ovi mogu da koštaju i povećaće račune kod mobilnog operatera. Ako omogućite dozvolu za neku aplikaciju, moći ćete da šaljete premijum SMS-ove pomoću te aplikacije."</string>
-    <string name="premium_sms_access" msgid="5605970342699013212">"Pristup premijum SMS-ovima"</string>
+    <string name="premium_sms_access" msgid="8487315743197916530">"Premijum SMS"</string>
     <string name="bluetooth_disabled" msgid="835838280837359514">"Isključeno"</string>
     <string name="bluetooth_connected_summary" msgid="8043167194934315712">"Povezan je sa uređajem <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="2294954614327771844">"Povezan je sa više uređaja"</string>
@@ -4932,7 +4934,7 @@
     <string name="mobile_data_disable_message" msgid="7829414836454769970">"Nećete imati pristup podacima ili internetu preko mobilnog operatera <xliff:g id="CARRIER">%s</xliff:g>. Internet će biti dostupan samo preko WiFi-a."</string>
     <string name="mobile_data_disable_message_default_carrier" msgid="4449469407705838612">"mobilni operater"</string>
     <string name="not_allowed_by_ent" msgid="1958611623122304411">"Ne dozvoljava vaša organizacija"</string>
-    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Nedostupno je jer je noćni režim uključen"</string>
+    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Nedostupno je jer je režim za spavanje uključen"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Resetovanje važnosti obaveštenja je dovršeno."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Aplikacije"</string>
     <string name="bluetooth_message_access_notification_content" msgid="5111712860712823893">"Uređaj želi da pristupa porukama. Dodirnite za detalje."</string>
@@ -4991,12 +4993,9 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Isključuje režim rada u avionu radi korišćenja UWB-a"</string>
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"Ultra-široki pojas je nedostupan na aktuelnoj lokaciji"</string>
     <string name="thread_network_settings_title" msgid="4212301030523859220">"Thread"</string>
-    <!-- no translation found for thread_network_settings_main_switch_title (3859168481929323474) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_footer_title (7385600318850220927) -->
-    <skip />
-    <!-- no translation found for thread_network_settings_learn_more (8278498005848565050) -->
-    <skip />
+    <string name="thread_network_settings_main_switch_title" msgid="3859168481929323474">"Koristi Thread"</string>
+    <string name="thread_network_settings_footer_title" msgid="7385600318850220927">"Thread vam omogućava da povežete pametne kućne uređaje i tako poboljšate efikasnost i performanse.\n\nKada je Thread omogućen, ovaj uređaj ispunjava uslove za pridruživanje Thread mreži, pa preko ovog telefona možete da kontrolišete uređaje koji podržavaju Matter."</string>
+    <string name="thread_network_settings_learn_more" msgid="8278498005848565050">"Saznajte više o Thread-u"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"Pristup kameri"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Pristup mikrofonu"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"Za aplikacije i usluge"</string>
@@ -5081,12 +5080,12 @@
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"Zvuk se menja kako pomerate glavu da bi delovao prirodnije"</string>
     <string name="bluetooth_details_permissions_sync_title" msgid="7277580382321003521">"Sinhronizuj dozvole sa telefona"</string>
     <string name="bluetooth_details_permissions_sync_summary" msgid="8125037984381432059">"Odobrite iste dozvole za aplikacije na satu kao na ovom telefonu"</string>
-    <string name="bluetooth_details_audio_device_types_title" msgid="3381941189346781614">"Tip audio uređaja"</string>
-    <string name="bluetooth_details_audio_device_type_unknown" msgid="839337391037998014">"Nepoznato"</string>
+    <string name="bluetooth_details_audio_device_types_title" msgid="1889644189800180316">"Tip audio uređaja"</string>
+    <string name="bluetooth_details_audio_device_type_unknown" msgid="5299284975435974206">"Nije podešeno"</string>
     <string name="bluetooth_details_audio_device_type_speaker" msgid="3706227767994792124">"Zvučnik"</string>
     <string name="bluetooth_details_audio_device_type_headphones" msgid="7644588291215033798">"Slušalice"</string>
-    <string name="bluetooth_details_audio_device_type_hearing_aid" msgid="1310631131071939859">"Slušni aparat"</string>
-    <string name="bluetooth_details_audio_device_type_carkit" msgid="4439017600454703229">"Oprema za automobil"</string>
+    <string name="bluetooth_details_audio_device_type_hearing_aid" msgid="6311786545025321187">"Slušni aparat"</string>
+    <string name="bluetooth_details_audio_device_type_carkit" msgid="1866236563013629394">"Automobil"</string>
     <string name="bluetooth_details_audio_device_type_other" msgid="7019481234617207563">"Drugo"</string>
     <string name="ingress_rate_limit_title" msgid="2106694002836274350">"Ograničenje brzine preuzimanja na mreži"</string>
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"Konfigurišite ograničenje brzine dolaznog propusnog opsega mreže koje se primenjuje na sve mreže koje pružaju internet vezu."</string>
@@ -5171,8 +5170,6 @@
     <string name="screen_flash_color_violet" msgid="1279950780509029495">"Ljubičasta"</string>
     <string name="color_selector_dialog_done" msgid="121253968943363376">"Gotovo"</string>
     <string name="color_selector_dialog_cancel" msgid="8667350644753900701">"Otkaži"</string>
-    <string name="contrast_title" msgid="6885768151336508075">"Kontrast"</string>
-    <string name="contrast_standard" msgid="1097297089917185235">"Standardno"</string>
     <string name="contrast_default" msgid="8918545965525226966">"Podrazumevano"</string>
     <string name="contrast_medium" msgid="384414510709285811">"Srednje"</string>
     <string name="contrast_high" msgid="3988567609694797696">"Visoko"</string>
@@ -5209,4 +5206,100 @@
     <string name="fingerprint_acquired_imager_dirty_udfps" msgid="7005042288289506776">"Obrišite ekran u blizini senzora i probajte ponovo"</string>
     <string name="sim_category_converted_sim" msgid="8575548015816988908">"Konvertovano u eSIM. Uklonite i odbacite."</string>
     <string name="sync_across_devices_title" msgid="3447757705383089345">"Sinhronizujte više uređaja"</string>
+    <!-- no translation found for device_diagnostics_title (2914523189695727897) -->
+    <skip />
+    <string name="audio_sharing_title" msgid="4144157137502923821">"Deljenje zvuka"</string>
+    <string name="audio_sharing_switch_title" msgid="7052827328670825701">"Deli zvuk"</string>
+    <string name="calls_and_alarms_device_title" msgid="6993559028175454198">"Pozivi i alarmi"</string>
+    <string name="audio_sharing_description" msgid="1660255584523640628">"Omogućite ljudima da zajedno sa vama slušaju medije. Slušaoci treba da koriste svoje LE Audio slušalice."</string>
+    <string name="audio_sharing_device_group_title" msgid="3019780581643956943">"Aktivni medijski uređaji"</string>
+    <string name="audio_sharing_call_audio_title" msgid="7978867452289583929">"Zvuk poziva"</string>
+    <string name="audio_sharing_call_audio_description" msgid="6573621048260616924">"Pustite samo na: <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_sharing_test_sound_title" msgid="6438868185641027763">"Pustite probni zvuk"</string>
+    <string name="audio_sharing_test_sound_description" msgid="4072462502371937399">"Svi slušaoci bi trebalo da čuju"</string>
+    <string name="audio_sharing_stream_settings_title" msgid="1374391898689242036">"Podešavanja audio strima"</string>
+    <string name="audio_sharing_stream_name_title" msgid="8156859441897180940">"Naziv"</string>
+    <string name="audio_sharing_stream_password_title" msgid="7026649168165764602">"Lozinka"</string>
+    <string name="audio_sharing_stream_compatibility_title" msgid="5690947186724469918">"Poboljšajte kompatibilnost"</string>
+    <string name="audio_sharing_stream_compatibility_description" msgid="8170241188606110963">"Pomaže da se neki uređaji, poput slušnih aparata, povežu uz smanjenje kvaliteta zvuka"</string>
+    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="2586408353546825682">"Isključuje se deljenje zvuka zbog konfigurisanja kompatibilnosti"</string>
+    <string name="audio_sharing_nearby_audio_title" msgid="4795438407040677177">"Slušajte zvuk u blizini"</string>
+    <string name="audio_sharing_footer_description" msgid="4786942197840271680">"Deljenje zvuka podržava Auracast™"</string>
+    <string name="audio_sharing_stream_name_dialog_title" msgid="6706027295417556499">"Naziv audio strima"</string>
+    <string name="audio_sharing_stream_password_dialog_title" msgid="4148196538860845705">"Lozinka za audio strim"</string>
+    <string name="audio_sharing_media_device_group_title" msgid="4850674234590549565">"Drugi medijski uređaji"</string>
+    <string name="audio_sharing_summary_on" msgid="611197542982323788">"Uključeno"</string>
+    <string name="audio_sharing_summary_off" msgid="8833198995257547378">"Isključeno"</string>
+    <string name="audio_sharing_share_dialog_title" msgid="427514648577553621">"Delite zvuk"</string>
+    <string name="audio_sharing_share_dialog_subtitle" msgid="5208582843732057871">"<xliff:g id="DEVICE_NAME1">%1$s</xliff:g> i <xliff:g id="DEVICE_NAME2">%2$s</xliff:g>"</string>
+    <string name="audio_sharing_share_button_label" msgid="3895900668317105537">"Deli zvuk"</string>
+    <string name="audio_sharing_no_thanks_button_label" msgid="5822491984114744357">"Ne, hvala"</string>
+    <string name="audio_sharing_share_with_dialog_title" msgid="3934377530640830364">"Želite da delite zvuk sa: <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
+    <string name="audio_sharing_share_with_more_dialog_title" msgid="2840069088858232267">"Delite zvuk sa drugim uređajem"</string>
+    <string name="audio_sharing_share_with_button_label" msgid="4146194430380237357">"Deli sa: <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_sharing_close_button_label" msgid="2666534149100498574">"Zatvori"</string>
+    <string name="audio_sharing_dialog_connect_device_content" msgid="2873230647152283734">"Povežite drugi par kompatibilnih slušalica ili delite naziv strima i lozinku sa drugom osobom"</string>
+    <string name="audio_sharing_dialog_pair_device_content" msgid="3136997898244863470">"Uparite drugi komplet kompatibilnih slušalica ili delite QR kôd audio strima sa drugom osobom"</string>
+    <string name="audio_sharing_sharing_label" msgid="1038021053061111508">"Deli se zvuk"</string>
+    <string name="audio_sharing_pair_button_label" msgid="7987236990273083588">"Upari novi uređaj"</string>
+    <string name="audio_sharing_qrcode_button_label" msgid="3207039106555097659">"Prikaži QR kôd"</string>
+    <string name="audio_sharing_notification_title" msgid="1204798942946033005">"Delite zvuk"</string>
+    <string name="audio_sharing_notification_content" msgid="1577180829878785642">"Slušaoci mogu da čuju vaše medije. Ne mogu da čuju pozive."</string>
+    <string name="audio_sharing_stop_button_label" msgid="8770519671470608849">"Zaustavi deljenje"</string>
+    <string name="audio_sharing_settings_button_label" msgid="8574808650318270491">"Podešavanja"</string>
+    <string name="audio_sharing_disconnect_dialog_title" msgid="2192751727237748602">"Odaberite uređaj za koji želite da opozovete vezu"</string>
+    <string name="audio_sharing_dialog_disconnect_content" msgid="3840488888970653308">"Samo 2 uređaja mogu da dele zvuk istovremeno"</string>
+    <string name="audio_sharing_disconnect_device_button_label" msgid="4272897217708930576">"Prekini vezu sa uređajem: <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_sharing_stop_dialog_title" msgid="4872853738164232075">"Želite da povežete <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
+    <string name="audio_sharing_stop_dialog_content" msgid="6371546856710692910">"Zaustavlja se deljenje zvuka sa: <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_sharing_stop_dialog_with_two_content" msgid="2119020725467967219">"Zaustavlja se deljenje zvuka sa uređajima: <xliff:g id="DEVICE_NAME1">%1$s</xliff:g> i <xliff:g id="DEVICE_NAME2">%2$s</xliff:g>"</string>
+    <string name="audio_sharing_stop_dialog_with_more_content" msgid="5262441138981618703">"Zaustavlja se deljenje zvuka sa povezanim slušalicama"</string>
+    <string name="audio_sharing_connect_button_label" msgid="4241911519063029982">"Poveži"</string>
+    <string name="audio_sharing_sharing_stopped_label" msgid="8128194452354240996">"Deljenje zvuka je zaustavljeno"</string>
+    <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"Povežite kompatibilan uređaj"</string>
+    <string name="audio_sharing_comfirm_dialog_content" msgid="3479217934447446066">"Da biste počeli da delite zvuk, prvo povežite LE Audio slušalice sa telefonom"</string>
+    <string name="audio_streams_category_title" msgid="4878022761829895463">"Povežite se sa LE Audio strimom"</string>
+    <string name="audio_streams_pref_title" msgid="6320485086288646209">"Audio strimovi u blizini"</string>
+    <string name="audio_streams_title" msgid="6617990880383079165">"Audio strimovi"</string>
+    <string name="audio_streams_qr_code_summary" msgid="2838923349871884871">"Povežite se sa audio strimom pomoću QR koda"</string>
+    <string name="audio_streams_empty" msgid="8803517701437394982">"Nema audio strimova u blizini."</string>
+    <string name="audio_streams_disconnect" msgid="1755594831469579161">"Prekini vezu"</string>
+    <string name="audio_streams_connect" msgid="1955964373102927954">"Poveži"</string>
+    <string name="audio_streams_qr_code_is_not_valid_format" msgid="4856288389653121830">"QR kôd nije u važećem formatu"</string>
+    <string name="audio_streams_qr_code_scanner" msgid="525396804963685478">"Da biste počeli da slušate, centrirajte QR kôd ispod"</string>
+    <string name="audio_streams_add_source_bad_code_state_summary" msgid="6527086906921868757">"Proverite lozinku i probajte ponovo"</string>
+    <string name="audio_streams_add_source_failed_state_summary" msgid="3937546443978562322">"Povezivanje nije uspelo. Probajte ponovo."</string>
+    <string name="audio_streams_add_source_wait_for_response_summary" msgid="3763240901110974606">"Povezuje se…"</string>
+    <string name="audio_streams_wait_for_sync_state_summary" msgid="11905744690831864">"Skenira se…"</string>
+    <string name="audio_streams_dialog_stream_is_not_available" msgid="4032878851270690546">"Audio strim nije dostupan"</string>
+    <string name="audio_streams_is_not_playing" msgid="8480293894696007941">"Ovaj audio strim trenutno ništa ne reprodukuje"</string>
+    <string name="audio_streams_dialog_close" msgid="8177201719298408431">"Zatvori"</string>
+    <string name="audio_streams_dialog_listen" msgid="7290340191504987685">"Pusti"</string>
+    <string name="audio_streams_dialog_retry" msgid="4456843891970998556">"Probaj ponovo"</string>
+    <string name="audio_streams_dialog_listen_to_audio_stream" msgid="8585253007762261528">"Slušajte audio strim"</string>
+    <string name="audio_streams_dialog_control_volume" msgid="7615062686016713544">"Audio strim će se reprodukovati na: <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Koristite ovaj uređaj za kontrolu jačine zvuka."</string>
+    <string name="audio_streams_dialog_cannot_listen" msgid="4432257183698209966">"Audio strim ne može da se sluša"</string>
+    <string name="audio_streams_dialog_default_device" msgid="6159800303379303266">"povezane kompatibilne slušalice"</string>
+    <string name="audio_streams_activity_title" msgid="9011162151277443663">"Emitovanja"</string>
+    <string name="audio_streams_no_password_summary" msgid="8976357323034830144">"Bez lozinke"</string>
+    <string name="audio_streams_dialog_learn_more" msgid="6711241053442211345">"Saznajte više"</string>
+    <string name="audio_streams_dialog_cannot_play" msgid="1358828316927479091">"Audio strim ne može da se reprodukuje na: <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
+    <string name="audio_streams_listening_now" msgid="4205614429222949176">"Sada slušate"</string>
+    <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"Zaustavite slušanje"</string>
+    <string name="audio_streams_dialog_no_le_device_title" msgid="3931163990976742282">"Povežite kompatibilne slušalice"</string>
+    <string name="audio_streams_dialog_no_le_device_button" msgid="4484355549428642588">"Poveži uređaj"</string>
+    <string name="audio_streams_detail_page_title" msgid="7884132061275273766">"Detalji audio strima"</string>
+    <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"QR kôd audio strima"</string>
+    <string name="audio_streams_qr_code_page_password" msgid="7268475614131297060">"Lozinka: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
+    <string name="audio_streams_qr_code_page_description" msgid="1317961663706630428">"Da bi slušali strim <xliff:g id="STREAM_NAME">%1$s</xliff:g>, drugi ljudi mogu da povežu kompatibilne slušalice sa Android uređajem. Zatim mogu da skeniraju ovaj QR kôd."</string>
+    <string name="audio_streams_main_page_title" msgid="1838380471076527639">"Pronađite audio strim"</string>
+    <string name="audio_streams_main_page_subtitle" msgid="3251995732921981539">"Slušajte uređaj koji deli zvuk ili Auracast emitovanje u blizini"</string>
+    <string name="audio_streams_main_page_device_title" msgid="2635744035523908253">"Vaš audio uređaj"</string>
+    <string name="audio_streams_main_page_no_device_summary" msgid="2936000845397406389">"Povežite kompatibilne slušalice"</string>
+    <string name="audio_streams_main_page_scan_section_title" msgid="2778235929304061163">"Audio strimovi u blizini"</string>
+    <string name="audio_streams_main_page_scan_qr_code_title" msgid="8337270277392468895">"Skenirajte QR kôd"</string>
+    <string name="audio_streams_main_page_scan_qr_code_summary" msgid="1991792283368249499">"Skenirajte QR kôd strima da biste počeli da slušate"</string>
+    <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Slušajte strim"</string>
+    <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Skenirajte QR kôd audio strima da biste slušali pomoću: <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Lozinka ne može da se menja tokom deljenja. Da biste promenili lozinku, prvo isključite deljenje zvuka."</string>
 </resources>
