@@ -101,6 +101,8 @@ object ApnTypes {
         }
     }
 
+    fun List<SettingsDropdownCheckOption>.isValid(): Boolean = any { it.selected.value }
+
     fun List<SettingsDropdownCheckOption>.toApnType(): String {
         val (selectAllOptions, regularOptions) = partition { it.isSelectAll }
         for (selectAllOption in selectAllOptions) {

@@ -24,6 +24,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import com.android.settings.R
+import com.android.settings.network.apn.ApnTypes.isValid
 import com.android.settings.network.apn.ApnTypes.toApnType
 import com.android.settingslib.spa.widget.editor.SettingsDropdownCheckBox
 
@@ -47,6 +48,8 @@ fun ApnTypeCheckBox(
         label = stringResource(R.string.apn_type),
         options = apnTypeOptions,
         enabled = apnData.isFieldEnabled(Telephony.Carriers.TYPE),
+        errorMessage = stringResource(R.string.error_apn_type_empty)
+            .takeUnless { apnTypeOptions.isValid() },
     ) {
         onTypeChanged(apnTypeOptions.toApnType())
         updateMmsSelected()
