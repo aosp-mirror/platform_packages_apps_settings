@@ -72,7 +72,7 @@ class ZenModePrioritySendersPreferenceController
     static final String KEY_IMPORTANT = "conversations_important";
     static final String KEY_NONE = "senders_none";
 
-    private int mNumImportantConversations = CONVERSATION_SENDERS_UNSET;
+    private int mNumImportantConversations = 0;
 
     private static final Intent ALL_CONTACTS_INTENT =
             new Intent(Contacts.Intents.UI.LIST_DEFAULT)
@@ -230,6 +230,7 @@ class ZenModePrioritySendersPreferenceController
                     && ALL_CONTACTS_INTENT.resolveActivity(mPackageManager) != null) {
                 mContext.startActivity(ALL_CONTACTS_INTENT);
             } else if (KEY_IMPORTANT.equals(key)) {
+                // TODO: b/332937635 - set correct metrics category
                 new SubSettingLauncher(mContext)
                         .setDestination(ConversationListSettings.class.getName())
                         .setSourceMetricsCategory(SettingsEnums.DND_CONVERSATIONS)
@@ -315,7 +316,6 @@ class ZenModePrioritySendersPreferenceController
                 }
             }
         }
-
         // Error case check: if somehow, after all of that, endState is still
         // {PEOPLE_TYPE_UNSET, CONVERSATION_SENDERS_UNSET}, something has gone wrong.
         if (endState[0] == PEOPLE_TYPE_UNSET && endState[1] == CONVERSATION_SENDERS_UNSET) {
@@ -343,17 +343,15 @@ class ZenModePrioritySendersPreferenceController
     //     the contacts setting is additionally reset to "none".
     //   - if "anyone" is previously selected, and the user clicks one of the contacts values,
     //     then the conversations setting is additionally reset to "none".
-    int[] settingsToSaveOnClick(SelectorWithWidgetPreference preference,
+    int[] settingsToSaveOnClick(String key, boolean checked,
             int currSendersSetting, int currConvosSetting) {
         int[] savedSettings = new int[]{ PEOPLE_TYPE_UNSET, CONVERSATION_SENDERS_UNSET };
 
         // If the preference isn't a checkbox, always consider this to be "checking" the setting.
         // Otherwise, toggle.
-        final int[] endState = keyToSettingEndState(preference.getKey(),
-                preference.isCheckBox() ? preference.isChecked() : true);
+        final int[] endState = keyToSettingEndState(key, checked);
         final int prioritySendersSetting = endState[0];
         final int priorityConvosSetting = endState[1];
-
         if (prioritySendersSetting != PEOPLE_TYPE_UNSET
                 && prioritySendersSetting != currSendersSetting) {
             savedSettings[0] = prioritySendersSetting;
@@ -370,14 +368,14 @@ class ZenModePrioritySendersPreferenceController
             // Special-case handling for the "priority conversations" checkbox:
             // If a specific selection exists for priority senders (starred, contacts), we leave
             // it untouched. Otherwise (when the senders is set to "any"), set it to NONE.
-            if (preference.getKey() == KEY_IMPORTANT
+            if (key.equals(KEY_IMPORTANT)
                     && currSendersSetting == PEOPLE_TYPE_ANYONE) {
                 savedSettings[0] = PEOPLE_TYPE_NONE;
             }
 
             // Flip-side special case for clicking either "contacts" option: if a specific selection
             // exists for priority conversations, leave it untouched; otherwise, set to none.
-            if ((preference.getKey() == KEY_STARRED || preference.getKey() == KEY_CONTACTS)
+            if ((key.equals(KEY_STARRED) || key.equals(KEY_CONTACTS))
                     && currConvosSetting == CONVERSATION_SENDERS_ANYONE) {
                 savedSettings[1] = CONVERSATION_SENDERS_NONE;
             }
@@ -426,10 +424,9 @@ class ZenModePrioritySendersPreferenceController
                 public void onRadioButtonClicked(SelectorWithWidgetPreference preference) {
                     savePolicy(policy -> {
                         ZenPolicy previousPolicy = policy.build();
-                        // The settingsToSaveOnClick function takes whether the preference is a
-                        // checkbox into account to determine whether this selection is checked or
-                        // unchecked.
-                        final int[] settingsToSave = settingsToSaveOnClick(preference,
+                        final int[] settingsToSave = settingsToSaveOnClick(
+                                preference.getKey(),
+                                preference.isCheckBox() ? !preference.isChecked() : true,
                                 getPrioritySenders(previousPolicy),
                                 getPriorityConversationSenders(previousPolicy));
                         final int prioritySendersSetting = settingsToSave[0];
