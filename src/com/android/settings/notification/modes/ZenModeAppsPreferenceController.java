@@ -16,8 +16,11 @@
 
 package com.android.settings.notification.modes;
 
+import static com.android.settings.notification.modes.ZenModeFragmentBase.MODE_ID;
+
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.os.Bundle;
 import android.service.notification.ZenPolicy;
 
 import androidx.annotation.NonNull;
@@ -28,7 +31,6 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.TwoStatePreference;
 
 import com.android.settings.core.SubSettingLauncher;
-import com.android.settings.notification.zen.ZenModeBypassingAppsSettings;
 import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 public class ZenModeAppsPreferenceController extends
@@ -37,6 +39,8 @@ public class ZenModeAppsPreferenceController extends
     static final String KEY_PRIORITY = "zen_mode_apps_priority";
     static final String KEY_NONE = "zen_mode_apps_none";
     static final String KEY_ALL = "zen_mode_apps_all";
+
+    String mModeId;
 
 
     public ZenModeAppsPreferenceController(@NonNull Context context,
@@ -62,6 +66,7 @@ public class ZenModeAppsPreferenceController extends
 
     @Override
     public void updateState(Preference preference, @NonNull ZenMode zenMode) {
+        mModeId = zenMode.getId();
         TwoStatePreference pref = (TwoStatePreference) preference;
         switch (getPreferenceKey()) {
             case KEY_PRIORITY:
@@ -107,10 +112,15 @@ public class ZenModeAppsPreferenceController extends
             };
 
     private void launchPrioritySettings() {
+        Bundle bundle = new Bundle();
+        if (mModeId != null) {
+            bundle.putString(MODE_ID, mModeId);
+        }
         // TODO(b/332937635): Update metrics category
         new SubSettingLauncher(mContext)
-                .setDestination(ZenModeBypassingAppsSettings.class.getName())
+                .setDestination(ZenModeSelectBypassingAppsFragment.class.getName())
                 .setSourceMetricsCategory(SettingsEnums.SETTINGS_ZEN_NOTIFICATIONS)
+                .setArguments(bundle)
                 .launch();
     }
 }
