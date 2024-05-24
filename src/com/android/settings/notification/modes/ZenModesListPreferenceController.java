@@ -39,7 +39,7 @@ import java.util.Map;
  * containing links to each individual mode. This is a central controller that populates and updates
  * all the preferences that then lead to a mode configuration page.
  */
-public class ZenModesListPreferenceController extends BasePreferenceController {
+class ZenModesListPreferenceController extends BasePreferenceController {
     protected static final String KEY = "zen_modes_list";
 
     @Nullable

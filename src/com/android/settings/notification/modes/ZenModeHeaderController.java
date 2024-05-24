@@ -47,9 +47,8 @@ class ZenModeHeaderController extends AbstractZenModePreferenceController {
     }
 
     @Override
-    public void updateState(Preference preference) {
-        ZenMode mode = getMode();
-        if (mode == null || mFragment == null) {
+    public void updateState(Preference preference, @NonNull ZenMode zenMode) {
+        if (mFragment == null) {
             return;
         }
 
@@ -62,9 +61,9 @@ class ZenModeHeaderController extends AbstractZenModePreferenceController {
         }
 
         FutureUtil.whenDone(
-                mode.getIcon(IconLoader.getInstance(mContext)),
+                zenMode.getIcon(IconLoader.getInstance(mContext)),
                 icon -> mHeaderController.setIcon(icon)
-                        .setLabel(mode.getRule().getName())
+                        .setLabel(zenMode.getRule().getName())
                         .done(false /* rebindActions */),
                 mContext.getMainExecutor());
     }

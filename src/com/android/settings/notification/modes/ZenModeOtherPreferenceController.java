@@ -23,11 +23,12 @@ import static android.service.notification.ZenPolicy.PRIORITY_CATEGORY_REMINDERS
 import static android.service.notification.ZenPolicy.PRIORITY_CATEGORY_SYSTEM;
 
 import android.content.Context;
-import android.service.notification.ZenPolicy;
+
+import androidx.annotation.NonNull;
 import androidx.preference.Preference;
 import androidx.preference.TwoStatePreference;
 
-public class ZenModeOtherPreferenceController extends AbstractZenModePreferenceController
+class ZenModeOtherPreferenceController extends AbstractZenModePreferenceController
         implements Preference.OnPreferenceChangeListener {
 
     public ZenModeOtherPreferenceController(Context context, String key,
@@ -36,24 +37,15 @@ public class ZenModeOtherPreferenceController extends AbstractZenModePreferenceC
     }
 
     @Override
-    public void updateState(Preference preference) {
-        super.updateState(preference);
-
+    public void updateState(Preference preference, @NonNull ZenMode zenMode) {
         TwoStatePreference pref = (TwoStatePreference) preference;
-        pref.setChecked(getMode().getPolicy().isCategoryAllowed(getCategory(), true));
+        pref.setChecked(zenMode.getPolicy().isCategoryAllowed(getCategory(), true));
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final boolean allow = (Boolean) newValue;
-
-        ZenPolicy diffPolicy = new ZenPolicy.Builder()
-                .allowCategory(getCategory(), allow)
-                .build();
-        getMode().setPolicy(diffPolicy);
-        mBackend.updateMode(getMode());
-
-        return true;
+        return savePolicy(policy -> policy.allowCategory(getCategory(), allow));
     }
 
     private int getCategory() {

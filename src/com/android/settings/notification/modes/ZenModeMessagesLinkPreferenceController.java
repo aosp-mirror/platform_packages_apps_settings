@@ -20,10 +20,13 @@ import static com.android.settings.notification.modes.ZenModeFragmentBase.MODE_I
 
 import android.content.Context;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.preference.Preference;
+
 import com.android.settings.core.SubSettingLauncher;
 
-public class ZenModeMessagesLinkPreferenceController extends AbstractZenModePreferenceController {
+class ZenModeMessagesLinkPreferenceController extends AbstractZenModePreferenceController {
     private final ZenModeSummaryHelper mSummaryHelper;
 
     public ZenModeMessagesLinkPreferenceController(Context context, String key,
@@ -33,11 +36,9 @@ public class ZenModeMessagesLinkPreferenceController extends AbstractZenModePref
     }
 
     @Override
-    public void updateState(Preference preference) {
-        super.updateState(preference);
-
+    public void updateState(Preference preference, @NonNull ZenMode zenMode) {
         Bundle bundle = new Bundle();
-        bundle.putString(MODE_ID, getMode().getId());
+        bundle.putString(MODE_ID, zenMode.getId());
         // TODO(b/332937635): Update metrics category
         preference.setIntent(new SubSettingLauncher(mContext)
                 .setDestination(ZenModeMessagesFragment.class.getName())
@@ -46,6 +47,6 @@ public class ZenModeMessagesLinkPreferenceController extends AbstractZenModePref
                 .toIntent());
 
         preference.setEnabled(true);
-        preference.setSummary(mSummaryHelper.getMessagesSettingSummary(getMode().getPolicy()));
+        preference.setSummary(mSummaryHelper.getMessagesSettingSummary(zenMode.getPolicy()));
     }
 }
