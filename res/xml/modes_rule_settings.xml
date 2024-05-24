@@ -22,6 +22,11 @@
             android:key="header"
             android:layout="@layout/settings_entity_header" />
 
+    <com.android.settingslib.widget.LayoutPreference
+            android:key="activate"
+            android:selectable="false"
+            android:layout="@layout/modes_activation_button"/>
+
     <PreferenceCategory
             android:title="@string/mode_interruption_filter_title"
             android:key="modes_filters">
