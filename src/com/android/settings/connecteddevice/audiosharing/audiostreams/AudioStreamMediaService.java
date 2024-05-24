@@ -42,6 +42,7 @@ import com.android.settings.bluetooth.Utils;
 import com.android.settings.connecteddevice.audiosharing.AudioSharingUtils;
 import com.android.settingslib.bluetooth.BluetoothCallback;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.VolumeControlProfile;
@@ -60,6 +61,7 @@ public class AudioStreamMediaService extends Service {
     private static final String LEAVE_BROADCAST_ACTION = "leave_broadcast_action";
     private static final String LEAVE_BROADCAST_TEXT = "Leave Broadcast";
     private static final String CHANNEL_ID = "bluetooth_notification_channel";
+    private static final String DEFAULT_DEVICE_NAME = "";
     private static final int STATIC_PLAYBACK_DURATION = 100;
     private static final int STATIC_PLAYBACK_POSITION = 30;
     private static final int ZERO_PLAYBACK_SPEED = 0;
@@ -355,16 +357,34 @@ public class AudioStreamMediaService extends Service {
         return mIsMuted ? mPlayStatePausingBuilder.build() : mPlayStatePlayingBuilder.build();
     }
 
+    private String getDeviceName() {
+        if (mDevices == null || mDevices.isEmpty() || mLocalBtManager == null) {
+            return DEFAULT_DEVICE_NAME;
+        }
+
+        CachedBluetoothDeviceManager manager = mLocalBtManager.getCachedDeviceManager();
+        if (manager == null) {
+            return DEFAULT_DEVICE_NAME;
+        }
+
+        CachedBluetoothDevice device = manager.findDevice(mDevices.get(0));
+        return device != null ? device.getName() : DEFAULT_DEVICE_NAME;
+    }
+
     private Notification buildNotification() {
+        String deviceName = getDeviceName();
+        Notification.MediaStyle mediaStyle =
+                new Notification.MediaStyle()
+                        .setMediaSession(
+                                mLocalSession != null ? mLocalSession.getSessionToken() : null);
+        if (deviceName != null && !deviceName.isEmpty()) {
+            mediaStyle.setRemotePlaybackInfo(
+                    deviceName, com.android.internal.R.drawable.ic_bt_headset_hfp, null);
+        }
         Notification.Builder notificationBuilder =
                 new Notification.Builder(this, CHANNEL_ID)
                         .setSmallIcon(com.android.settingslib.R.drawable.ic_bt_le_audio_sharing)
-                        .setStyle(
-                                new Notification.MediaStyle()
-                                        .setMediaSession(
-                                                mLocalSession != null
-                                                        ? mLocalSession.getSessionToken()
-                                                        : null))
+                        .setStyle(mediaStyle)
                         .setContentText(this.getString(BROADCAST_CONTENT_TEXT))
                         .setSilent(true);
         return notificationBuilder.build();
