@@ -17,13 +17,61 @@
 package com.android.settings.network.apn
 
 import android.telephony.data.ApnSetting
+import androidx.compose.runtime.mutableStateOf
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.settings.network.apn.ApnTypes.isValid
+import com.android.settings.network.apn.ApnTypes.toApnType
+import com.android.settingslib.spa.widget.editor.SettingsDropdownCheckOption
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class ApnTypesTest {
+
+    @Test
+    fun isValid_hasSelected() {
+        val options = listOf(
+            SettingsDropdownCheckOption(text = APN_TYPE, selected = mutableStateOf(true)),
+        )
+
+        val isValid = options.isValid()
+
+        assertThat(isValid).isTrue()
+    }
+
+    @Test
+    fun isValid_hasNotSelected() {
+        val options = listOf(
+            SettingsDropdownCheckOption(text = APN_TYPE, selected = mutableStateOf(false)),
+        )
+
+        val isValid = options.isValid()
+
+        assertThat(isValid).isFalse()
+    }
+
+    @Test
+    fun toApnType_hasSelected() {
+        val options = listOf(
+            SettingsDropdownCheckOption(text = APN_TYPE, selected = mutableStateOf(true)),
+        )
+
+        val apnType = options.toApnType()
+
+        assertThat(apnType).isEqualTo(APN_TYPE)
+    }
+
+    @Test
+    fun toApnType_hasNotSelected() {
+        val options = listOf(
+            SettingsDropdownCheckOption(text = APN_TYPE, selected = mutableStateOf(false)),
+        )
+
+        val apnType = options.toApnType()
+
+        assertThat(apnType).isEmpty()
+    }
 
     @Test
     fun getPreSelectedApnType_regular() {
@@ -41,5 +89,9 @@ class ApnTypesTest {
         val apnType = ApnTypes.getPreSelectedApnType(customizedConfig)
 
         assertThat(apnType).isEqualTo("default,mms,supl,hipri,fota,cbs,xcap")
+    }
+
+    private companion object {
+        const val APN_TYPE = "type"
     }
 }
