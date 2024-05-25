@@ -211,6 +211,8 @@ public class FaceSettings extends DashboardFragment {
                 ((FaceSettingsPreferenceController) controller).setUserId(mUserId);
             } else if (controller instanceof FaceSettingsEnrollButtonPreferenceController) {
                 ((FaceSettingsEnrollButtonPreferenceController) controller).setUserId(mUserId);
+            } else if (controller instanceof FaceSettingsFooterPreferenceController) {
+                ((FaceSettingsFooterPreferenceController) controller).setUserId(mUserId);
             }
         }
         mRemoveController.setUserId(mUserId);
@@ -367,6 +369,7 @@ public class FaceSettings extends DashboardFragment {
         controllers.add(new FaceSettingsRemoveButtonPreferenceController(context));
         controllers.add(new FaceSettingsConfirmPreferenceController(context));
         controllers.add(new FaceSettingsEnrollButtonPreferenceController(context));
+        controllers.add(new FaceSettingsFooterPreferenceController(context));
         return controllers;
     }
 

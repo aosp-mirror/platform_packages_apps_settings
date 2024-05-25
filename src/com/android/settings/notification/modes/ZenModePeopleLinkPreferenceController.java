@@ -16,21 +16,22 @@
 
 package com.android.settings.notification.modes;
 
-
 import static com.android.settings.notification.modes.ZenModeFragmentBase.MODE_ID;
 
 import android.content.Context;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.preference.Preference;
-import com.android.settings.R;
+
 import com.android.settings.core.SubSettingLauncher;
 
 /**
  * Preference with a link and summary about what calls and messages can break through the mode
  */
-public class ZenModePeopleLinkPreferenceController extends AbstractZenModePreferenceController {
+class ZenModePeopleLinkPreferenceController extends AbstractZenModePreferenceController {
 
-    ZenModeSummaryHelper mSummaryHelper;
+    private final ZenModeSummaryHelper mSummaryHelper;
 
     public ZenModePeopleLinkPreferenceController(Context context, String key,
             ZenModesBackend backend) {
@@ -39,16 +40,15 @@ public class ZenModePeopleLinkPreferenceController extends AbstractZenModePrefer
     }
 
     @Override
-    public void updateState(Preference preference) {
-        super.updateState(preference);
+    public void updateState(Preference preference, @NonNull ZenMode zenMode) {
         Bundle bundle = new Bundle();
-        bundle.putString(MODE_ID, getMode().getId());
+        bundle.putString(MODE_ID, zenMode.getId());
         // TODO(b/332937635): Update metrics category
         preference.setIntent(new SubSettingLauncher(mContext)
                 .setDestination(ZenModePeopleFragment.class.getName())
                 .setSourceMetricsCategory(0)
                 .setArguments(bundle)
                 .toIntent());
-        preference.setSummary(mSummaryHelper.getPeopleSummary(getMode()));
+        preference.setSummary(mSummaryHelper.getPeopleSummary(zenMode));
     }
 }

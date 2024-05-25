@@ -19,18 +19,16 @@ package com.android.settings.notification.modes;
 import static android.app.NotificationManager.INTERRUPTION_FILTER_PRIORITY;
 import static android.service.notification.ZenPolicy.STATE_ALLOW;
 import static android.service.notification.ZenPolicy.STATE_DISALLOW;
-import static android.service.notification.ZenPolicy.STATE_UNSET;
 import static android.service.notification.ZenPolicy.VISUAL_EFFECT_LIGHTS;
 import static android.service.notification.ZenPolicy.VISUAL_EFFECT_NOTIFICATION_LIST;
 import static android.service.notification.ZenPolicy.VISUAL_EFFECT_PEEK;
 import static android.service.notification.ZenPolicy.VISUAL_EFFECT_STATUS_BAR;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -41,12 +39,10 @@ import android.content.res.Resources;
 import android.net.Uri;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
-import android.service.notification.ZenDeviceEffects;
 import android.service.notification.ZenPolicy;
-import androidx.preference.TwoStatePreference;
-import com.android.settings.notification.zen.ZenModeVisEffectPreferenceController;
+
 import com.android.settings.widget.DisabledCheckBoxPreference;
-import com.android.settingslib.core.lifecycle.Lifecycle;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -162,7 +158,7 @@ public final class ZenModeNotifVisPreferenceControllerTest {
         assertThat(captor.getValue().getPolicy().getVisualEffectStatusBar())
                 .isEqualTo(STATE_DISALLOW);
         assertThat(captor.getValue().getPolicy().getVisualEffectNotificationList())
-                .isEqualTo(STATE_UNSET);
+                .isEqualTo(STATE_DISALLOW); // Untouched
     }
 
     @Test
@@ -211,7 +207,7 @@ public final class ZenModeNotifVisPreferenceControllerTest {
         assertThat(captor.getValue().getPolicy().getVisualEffectPeek())
                 .isEqualTo(STATE_ALLOW);
         assertThat(captor.getValue().getPolicy().getVisualEffectNotificationList())
-                .isEqualTo(STATE_UNSET);
+                .isEqualTo(STATE_DISALLOW); // Untouched
     }
 
     @Test
@@ -236,6 +232,6 @@ public final class ZenModeNotifVisPreferenceControllerTest {
         assertThat(captor.getValue().getPolicy().getVisualEffectPeek())
                 .isEqualTo(STATE_DISALLOW);
         assertThat(captor.getValue().getPolicy().getVisualEffectNotificationList())
-                .isEqualTo(STATE_UNSET);
+                .isEqualTo(STATE_ALLOW); // Untouched
     }
 }

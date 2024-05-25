@@ -16,16 +16,10 @@
 
 package com.android.settings.notification.modes;
 
-import static android.service.notification.ZenPolicy.PRIORITY_CATEGORY_ALARMS;
-import static android.service.notification.ZenPolicy.PRIORITY_CATEGORY_EVENTS;
-import static android.service.notification.ZenPolicy.PRIORITY_CATEGORY_MEDIA;
-import static android.service.notification.ZenPolicy.PRIORITY_CATEGORY_REMINDERS;
-import static android.service.notification.ZenPolicy.PRIORITY_CATEGORY_SYSTEM;
-
-import android.app.AutomaticZenRule;
 import android.content.Context;
 import android.service.notification.ZenDeviceEffects;
-import android.service.notification.ZenPolicy;
+
+import androidx.annotation.NonNull;
 import androidx.preference.Preference;
 import androidx.preference.TwoStatePreference;
 
@@ -38,9 +32,9 @@ public class ZenModeDisplayEffectPreferenceController extends AbstractZenModePre
     }
 
     @Override
-    public void updateState(Preference preference) {
+    public void updateState(Preference preference, @NonNull ZenMode zenMode) {
         TwoStatePreference pref = (TwoStatePreference) preference;
-        ZenDeviceEffects effects =  getMode().getRule().getDeviceEffects();
+        ZenDeviceEffects effects =  zenMode.getRule().getDeviceEffects();
         if (effects == null) {
             pref.setChecked(false);
         } else {
@@ -62,33 +56,27 @@ public class ZenModeDisplayEffectPreferenceController extends AbstractZenModePre
     }
 
     @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
+    public boolean onPreferenceChange(@NonNull Preference preference, Object newValue) {
         final boolean allow = (Boolean) newValue;
-
-        ZenDeviceEffects currEffects =  getMode().getRule().getDeviceEffects();
-        ZenDeviceEffects.Builder updatedEffects = currEffects == null
-                ? new ZenDeviceEffects.Builder()
-                : new ZenDeviceEffects.Builder(getMode().getRule().getDeviceEffects());
-        switch (getPreferenceKey()) {
-            case "effect_greyscale":
-                updatedEffects.setShouldDisplayGrayscale(allow);
-                break;
-            case "effect_aod":
-                updatedEffects.setShouldSuppressAmbientDisplay(allow);
-                break;
-            case "effect_wallpaper":
-                updatedEffects.setShouldDimWallpaper(allow);
-                break;
-            case "effect_dark_theme":
-                updatedEffects.setShouldUseNightMode(allow);
-                break;
-        }
-        AutomaticZenRule updatedAzr = new AutomaticZenRule.Builder(getMode().getRule())
-                .setDeviceEffects(updatedEffects.build())
-                .build();
-        getMode().setAzr(updatedAzr);
-        mBackend.updateMode(getMode());
-
-        return true;
+        return saveMode(zenMode -> {
+            ZenDeviceEffects.Builder updatedEffects = new ZenDeviceEffects.Builder(
+                    zenMode.getDeviceEffects());
+            switch (getPreferenceKey()) {
+                case "effect_greyscale":
+                    updatedEffects.setShouldDisplayGrayscale(allow);
+                    break;
+                case "effect_aod":
+                    updatedEffects.setShouldSuppressAmbientDisplay(allow);
+                    break;
+                case "effect_wallpaper":
+                    updatedEffects.setShouldDimWallpaper(allow);
+                    break;
+                case "effect_dark_theme":
+                    updatedEffects.setShouldUseNightMode(allow);
+                    break;
+            }
+            zenMode.getRule().setDeviceEffects(updatedEffects.build());
+            return zenMode;
+        });
     }
 }

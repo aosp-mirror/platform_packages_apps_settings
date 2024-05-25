@@ -34,10 +34,10 @@ class EnrollStageInteractorImpl() : EnrollStageInteractor {
     flowOf(
       mapOf(
         0.0f to EnrollStageModel.Center,
-        0.25f to EnrollStageModel.Guided,
-        0.5f to EnrollStageModel.Fingertip,
-        0.75f to EnrollStageModel.LeftEdge,
-        0.875f to EnrollStageModel.RightEdge,
+        0.065f to EnrollStageModel.Guided,
+        0.48f to EnrollStageModel.Fingertip,
+        0.584f to EnrollStageModel.LeftEdge,
+        0.792f to EnrollStageModel.RightEdge,
       )
     )
 }

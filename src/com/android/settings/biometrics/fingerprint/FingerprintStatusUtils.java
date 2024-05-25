@@ -68,7 +68,10 @@ public class FingerprintStatusUtils {
     public String getTitle() {
         UserManager userManager = mContext.getSystemService(UserManager.class);
         if (userManager != null && userManager.isProfile()) {
-            return mContext.getString(R.string.security_settings_work_fingerprint_preference_title);
+            return mContext.getString(
+                    Utils.isPrivateProfile(mUserId, mContext)
+                            ? R.string.private_space_fingerprint_unlock_title
+                            : R.string.security_settings_work_fingerprint_preference_title);
         } else {
             return mContext.getString(R.string.security_settings_fingerprint_preference_title);
         }

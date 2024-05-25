@@ -17,7 +17,6 @@
 package com.android.settings.network.telephony
 
 import android.content.Context
-import android.os.UserManager
 import android.telephony.SubscriptionInfo
 import android.telephony.SubscriptionManager
 import android.telephony.TelephonyManager
@@ -40,6 +39,7 @@ import com.android.settingslib.spaprivileged.framework.common.userManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+
 
 /**
  * Preference controller for "IMEI"
@@ -123,23 +123,49 @@ class MobileNetworkImeiPreferenceController(context: Context, key: String) :
         ImeiInfoDialogFragment.show(fragment, simSlot, preference.title.toString())
         return true
     }
+
     private fun getImei(): String {
         val phoneType = getPhoneType()
         return if (phoneType == TelephonyManager.PHONE_TYPE_CDMA) mTelephonyManager.meid?: String()
                 else mTelephonyManager.imei?: String()
     }
+
     private fun getTitleForGsmPhone(): String {
-        return mContext.getString(R.string.status_imei)
+        return mContext.getString(
+            if (isPrimaryImei()) R.string.imei_primary else R.string.status_imei)
     }
 
     private fun getTitleForCdmaPhone(): String {
-        return mContext.getString(R.string.status_meid_number)
+        return mContext.getString(
+            if (isPrimaryImei()) R.string.meid_primary else R.string.status_meid_number)
     }
 
     private fun getTitle(): String {
         val phoneType = getPhoneType()
         return if (phoneType == TelephonyManager.PHONE_TYPE_CDMA) getTitleForCdmaPhone()
                 else getTitleForGsmPhone()
+    }
+
+    /**
+     * As per GSMA specification TS37, below Primary IMEI requirements are mandatory to support
+     *
+     * TS37_2.2_REQ_5
+     * TS37_2.2_REQ_8 (Attached the document has description about this test cases)
+     */
+    protected fun isPrimaryImei(): Boolean {
+        val imei = getImei()
+        var primaryImei = String()
+
+        try {
+            primaryImei = mTelephonyManager.primaryImei
+        } catch (exception: Exception) {
+            Log.e(TAG, "PrimaryImei not available. $exception")
+        }
+        return primaryImei == imei && isMultiSim()
+    }
+
+    private fun isMultiSim(): Boolean {
+        return mTelephonyManager.activeModemCount > 1
     }
 
     fun getPhoneType(): Int {

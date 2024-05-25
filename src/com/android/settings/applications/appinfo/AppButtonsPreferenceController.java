@@ -559,7 +559,8 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
         if (android.app.Flags.appRestrictionsApi()) {
             am.noteAppRestrictionEnabled(pkgName, mAppEntry.info.uid,
                     ActivityManager.RESTRICTION_LEVEL_FORCE_STOPPED, true,
-                    ActivityManager.RESTRICTION_REASON_USER, "settings", 0L);
+                    ActivityManager.RESTRICTION_REASON_USER,
+                    "settings", ActivityManager.RESTRICTION_SOURCE_USER, 0L);
         }
         am.forceStopPackage(pkgName);
         int userId = UserHandle.getUserId(mAppEntry.info.uid);

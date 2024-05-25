@@ -72,6 +72,7 @@ import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enroll
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.rfps.ui.fragment.RFPSEnrollFragment
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.rfps.ui.viewmodel.RFPSViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.udfps.ui.fragment.UdfpsEnrollFragment
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.udfps.ui.viewmodel.UdfpsLastStepViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.udfps.ui.viewmodel.UdfpsViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.BackgroundViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintAction
@@ -126,6 +127,7 @@ class FingerprintEnrollmentV2Activity : FragmentActivity() {
   private lateinit var fingerprintFlowViewModel: FingerprintFlowViewModel
   private lateinit var fingerprintEnrollConfirmationViewModel:
     FingerprintEnrollConfirmationViewModel
+  private lateinit var udfpsLastStepViewModel: UdfpsLastStepViewModel
   private lateinit var udfpsViewModel: UdfpsViewModel
   private lateinit var enrollStageInteractor: EnrollStageInteractor
   private val coroutineDispatcher = Dispatchers.Default
@@ -320,7 +322,7 @@ class FingerprintEnrollmentV2Activity : FragmentActivity() {
     foldStateInteractor = FoldStateInteractorImpl(context)
     foldStateInteractor.onConfigurationChange(resources.configuration)
 
-    orientationInteractor = OrientationInteractorImpl(context, lifecycleScope)
+    orientationInteractor = OrientationInteractorImpl(context)
     vibrationInteractor =
       VibrationInteractorImpl(context.getSystemService(Vibrator::class.java)!!, context)
 
@@ -373,10 +375,14 @@ class FingerprintEnrollmentV2Activity : FragmentActivity() {
         fingerprintEnrollEnrollingViewModel,
         navigationViewModel,
         orientationInteractor,
+        fingerprintManagerInteractor,
       ),
     )[RFPSViewModel::class.java]
 
     enrollStageInteractor = EnrollStageInteractorImpl()
+
+    udfpsLastStepViewModel =
+      UdfpsLastStepViewModel(fingerprintEnrollEnrollingViewModel, vibrationInteractor)
 
     udfpsViewModel =
       ViewModelProvider(
@@ -393,6 +399,9 @@ class FingerprintEnrollmentV2Activity : FragmentActivity() {
           backgroundViewModel,
           fingerprintSensorRepo,
           udfpsEnrollInteractor,
+          fingerprintManagerInteractor,
+          udfpsLastStepViewModel,
+          accessibilityInteractor,
         ),
       )[UdfpsViewModel::class.java]
 
@@ -456,7 +465,7 @@ class FingerprintEnrollmentV2Activity : FragmentActivity() {
                 step.exitTransition.toAnimation(),
               )
               .setReorderingAllowed(true)
-              .add(R.id.fragment_container_view, theClass::class.java, null)
+              .replace(R.id.fragment_container_view, theClass::class.java, null)
               .commit()
             navigationViewModel.update(
               FingerprintAction.TRANSITION_FINISHED,

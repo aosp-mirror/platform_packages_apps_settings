@@ -1240,6 +1240,28 @@
     <string name="private_space_fingerprint_unlock_title">Fingerprint Unlock for private space</string>
     <!-- Title for the Face unlock for private space preference. [CHAR LIMIT=60] -->
     <string name="private_space_face_unlock_title">Face Unlock for private space</string>
+    <!-- Title for the Face and Fingerprint preference for private space. [CHAR LIMIT=60] -->
+    <string name="private_space_biometric_unlock_title">Face &amp; Fingerprint Unlock for private space</string>
+    <!-- Introduction title shown in private space fingerprint enrollment [CHAR LIMIT=90] -->
+    <string name="private_space_fingerprint_enroll_introduction_title">Set up Fingerprint Unlock for private space</string>
+    <!-- Introduction detail message shown in private space fingerprint enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name ="private_space_fingerprint_enroll_introduction_message">Use your fingerprint to unlock your private space or verify it\u2019s you, like when you sign in to apps or approve a purchase</string>
+    <!-- Introduction description message shown in private space fingerprint enrollment introduction screen. [CHAR LIMIT=NONE] -->
+    <string name="private_space_fingerprint_enroll_introduction_footer_message">Your private space can be unlocked when you don\u2019t intend to, like if someone holds up your phone to your finger.</string>
+    <!-- Message shown in fingerprint enrollment dialog once enrollment is completed (private space) [CHAR LIMIT=NONE] -->
+    <string name="private_space_fingerprint_enroll_finish_message">Use your fingerprint to unlock your private space or to approve purchases</string>
+    <!-- Introduction title shown in private space face enrollment [CHAR LIMIT=90] -->
+    <string name="private_space_face_enroll_introduction_title">Set up Face Unlock for private space</string>
+    <!-- Introduction detail message shown in private space face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name ="private_space_face_enroll_introduction_message">Use your face to unlock your private space or verify it\u2019s you, like when you sign in to apps or approve a purchase</string>
+    <!-- Message on the face enrollment introduction page for private space that provides information about what could cause the phone to unlock. [CHAR LIMIT=NONE] -->
+    <string name="private_space_face_enroll_introduction_info_looking">Looking at the phone can unlock private space even when you don\u2019t intend to. Your private space can also be unlocked by someone who looks a lot like you, like an identical sibling, or if someone holds the device up to your face.</string>
+    <!-- Message on the face enrollment introduction page for private space that provides information about the relative security of face for unlocking the phone. [CHAR LIMIT=NONE] -->
+    <string name="private_space_face_enroll_introduction_info_less_secure">Using your face to unlock your private space may be less secure than a strong pattern, PIN, or password</string>
+    <!-- Text shown on the details of a toggle which disables/enables face unlock for private space, depending if the user's eyes are open. [CHAR LIMIT=NONE] -->
+    <string name="private_space_face_settings_require_attention_details">To unlock private space, your eyes must be open. For best results, take off sunglasses.</string>
+    <!-- Text shown in face settings in private space explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="private_space_face_settings_footer">Use your face to unlock your private space.\n\nKeep in mind:\nYou can only have one face set up at a time. To add another face, delete the current one.\n\nLooking at the phone can unlock it when you don\u2019t intend to.\n\nYour private space can be unlocked by someone else if your device is held up to your face.\n\nYour private space can be unlocked by someone who looks a lot like you, like an identical sibling.</string>
     <!-- Biometric category title - biometric options for unlocking the device. [CHAR LIMIT=50] -->
     <string name="private_space_category_ways_to_unlock">Ways to unlock</string>
     <!-- Summary for one lock when device screen lock is used as private profile lock. [CHAR LIMIT=40] -->
@@ -11406,7 +11428,7 @@
     <string name="media_output_default_summary">This device</string>
 
     <!-- Summary for media output when audio sharing. [CHAR LIMIT=NONE] -->
-    <string name="media_output_audio_sharing">Audio sharing</string>
+    <string name="media_output_audio_sharing">Sharing audio</string>
 
     <!-- Summary for media output settings when device is in ongoing call state. -->
     <string name="media_out_summary_ongoing_call_state">Unavailable during calls</string>
@@ -11896,6 +11918,10 @@
     <string name="sim_onboarding_progressbar_turning_sim_on">Turning on <xliff:g id="carrier_name" example="Google Fi">%1$s</xliff:g>&#8230;</string>
     <!-- Title of service provider name(SPN) at mobile network settings page. [CHAR LIMIT=30] -->
     <string name="mobile_network_spn_title">Mobile network</string>
+    <!-- At the mobile network page, title for primary IMEI for multi-sim devices -->
+    <string name="imei_primary">IMEI (primary)</string>
+    <!-- At the mobile network page, title for primary MEID for multi-sim devices -->
+    <string name="meid_primary">MEID (primary)</string>
     <!-- Title of phone number at mobile network settings page. [CHAR LIMIT=30] -->
     <string name="mobile_network_phone_number_title">Phone number</string>
     <!-- Title of SIM label and color editor dialog at mobile network settings page. [CHAR LIMIT=30] -->

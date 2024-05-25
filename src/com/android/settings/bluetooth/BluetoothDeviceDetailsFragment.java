@@ -66,6 +66,7 @@ import java.util.List;
 public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment {
     public static final String KEY_DEVICE_ADDRESS = "device_address";
     private static final String TAG = "BTDeviceDetailsFrg";
+    private static final int METADATA_FAST_PAIR_CUSTOMIZED_FIELDS = 25;
 
     @VisibleForTesting
     static int EDIT_DEVICE_NAME_ITEM_ID = Menu.FIRST;
@@ -95,11 +96,14 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
     LocalBluetoothManager mManager;
     @VisibleForTesting
     CachedBluetoothDevice mCachedDevice;
+    BluetoothAdapter mBluetoothAdapter;
 
     @Nullable
     InputDevice mInputDevice;
 
     private UserManager mUserManager;
+    int mExtraControlViewWidth = 0;
+    boolean mExtraControlUriLoaded = false;
 
     private final BluetoothCallback mBluetoothCallback =
             new BluetoothCallback() {
@@ -112,6 +116,16 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
                             activity.finish();
                         }
                     }
+                }
+            };
+
+    private final BluetoothAdapter.OnMetadataChangedListener mExtraControlMetadataListener =
+            (device, key, value) -> {
+                if (key == METADATA_FAST_PAIR_CUSTOMIZED_FIELDS
+                        && mExtraControlViewWidth > 0
+                        && !mExtraControlUriLoaded) {
+                    Log.i(TAG, "Update extra control UI because of metadata change.");
+                    updateExtraControlUri(mExtraControlViewWidth);
                 }
             };
 
@@ -173,6 +187,7 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
     public void onAttach(Context context) {
         mDeviceAddress = getArguments().getString(KEY_DEVICE_ADDRESS);
         mManager = getLocalBluetoothManager(context);
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         mCachedDevice = getCachedDevice(mDeviceAddress);
         mUserManager = getUserManager();
 
@@ -202,12 +217,18 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
                 : null);
 
         mManager.getEventManager().registerCallback(mBluetoothCallback);
+        mBluetoothAdapter.addOnMetadataChangedListener(
+                mCachedDevice.getDevice(),
+                context.getMainExecutor(),
+                mExtraControlMetadataListener);
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
         mManager.getEventManager().unregisterCallback(mBluetoothCallback);
+        mBluetoothAdapter.removeOnMetadataChangedListener(
+                mCachedDevice.getDevice(), mExtraControlMetadataListener);
     }
 
     private void updateExtraControlUri(int viewWidth) {
@@ -222,9 +243,9 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
                 controlUri = Uri.parse(uri + viewWidth);
             } catch (NullPointerException exception) {
                 Log.d(TAG, "unable to parse uri");
-                controlUri = null;
             }
         }
+        mExtraControlUriLoaded |= controlUri != null;
         final SlicePreferenceController slicePreferenceController = use(
                 SlicePreferenceController.class);
         slicePreferenceController.setSliceUri(sliceEnabled ? controlUri : null);
@@ -253,7 +274,8 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
                     if (view.getWidth() <= 0) {
                         return;
                     }
-                    updateExtraControlUri(view.getWidth() - getPaddingSize());
+                    mExtraControlViewWidth = view.getWidth() - getPaddingSize();
+                    updateExtraControlUri(mExtraControlViewWidth);
                     view.getViewTreeObserver().removeOnGlobalLayoutListener(
                             mOnGlobalLayoutListener);
                 }
