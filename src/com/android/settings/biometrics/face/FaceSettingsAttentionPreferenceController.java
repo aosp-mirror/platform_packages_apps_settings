@@ -24,10 +24,12 @@ import android.hardware.face.FaceManager.GetFeatureCallback;
 import android.hardware.face.FaceManager.SetFeatureCallback;
 import android.provider.Settings;
 
+import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.TwoStatePreference;
 
+import com.android.settings.R;
 import com.android.settings.Utils;
 
 /**
@@ -96,6 +98,18 @@ public class FaceSettingsAttentionPreferenceController extends FaceSettingsPrefe
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = screen.findPreference(KEY);
+    }
+
+    @Override
+    public void updateState(@Nullable Preference preference) {
+        if (preference == null) {
+            return;
+        }
+        super.updateState(preference);
+        if (Utils.isPrivateProfile(getUserId(), mContext)) {
+            preference.setSummary(mContext.getString(
+                    R.string.private_space_face_settings_require_attention_details));
+        }
     }
 
     @Override
