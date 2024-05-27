@@ -86,6 +86,7 @@ import com.android.settings.bluetooth.BluetoothPairingDetail;
 import com.android.settings.bugreporthandler.BugReportHandlerPicker;
 import com.android.settings.communal.CommunalDashboardFragment;
 import com.android.settings.connecteddevice.AdvancedConnectedDeviceDashboardFragment;
+import com.android.settings.connecteddevice.BluetoothDashboardFragment;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
 import com.android.settings.connecteddevice.NfcAndPaymentFragment;
 import com.android.settings.connecteddevice.PreviouslyConnectedDeviceDashboardFragment;
@@ -213,6 +214,7 @@ public class SettingsGateway {
             AdvancedConnectedDeviceDashboardFragment.class.getName(),
             CreateShortcut.class.getName(),
             BluetoothPairingDetail.class.getName(),
+            BluetoothDashboardFragment.class.getName(),
             WifiNetworkDetailsFragment.class.getName(),
             ConfigureWifiSettings.class.getName(),
             SavedAccessPointsWifiSettings2.class.getName(),
