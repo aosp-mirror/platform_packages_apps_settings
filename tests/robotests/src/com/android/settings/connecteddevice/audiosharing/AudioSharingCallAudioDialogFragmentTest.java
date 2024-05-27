@@ -51,7 +51,7 @@ import java.util.ArrayList;
             ShadowAlertDialogCompat.class,
             ShadowBluetoothAdapter.class,
         })
-public class CallsAndAlarmsDialogFragmentTest {
+public class AudioSharingCallAudioDialogFragmentTest {
     @Rule public final MockitoRule mocks = MockitoJUnit.rule();
     @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
@@ -64,7 +64,7 @@ public class CallsAndAlarmsDialogFragmentTest {
             new AudioSharingDeviceItem(TEST_DEVICE_NAME2, /* groupId= */ 1, /* isActive= */ true);
 
     private Fragment mParent;
-    private CallsAndAlarmsDialogFragment mFragment;
+    private AudioSharingCallAudioDialogFragment mFragment;
     private ShadowBluetoothAdapter mShadowBluetoothAdapter;
 
     @Before
@@ -76,7 +76,7 @@ public class CallsAndAlarmsDialogFragmentTest {
                 BluetoothStatusCodes.FEATURE_SUPPORTED);
         mShadowBluetoothAdapter.setIsLeAudioBroadcastAssistantSupported(
                 BluetoothStatusCodes.FEATURE_SUPPORTED);
-        mFragment = new CallsAndAlarmsDialogFragment();
+        mFragment = new AudioSharingCallAudioDialogFragment();
         mParent = new Fragment();
         FragmentController.setupFragment(
                 mParent, FragmentActivity.class, /* containerViewId= */ 0, /* bundle= */ null);
