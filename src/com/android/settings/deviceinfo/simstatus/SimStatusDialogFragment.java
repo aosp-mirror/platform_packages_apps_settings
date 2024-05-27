@@ -91,6 +91,13 @@ public class SimStatusDialogFragment extends InstrumentedDialogFragment {
         super.onDestroy();
     }
 
+    public void setSettingVisibility(int viewId, boolean isVisible) {
+        final View view = mRootView.findViewById(viewId);
+        if (view != null) {
+            view.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+        }
+    }
+
     public void removeSettingFromScreen(int viewId) {
         final View view = mRootView.findViewById(viewId);
         if (view != null) {

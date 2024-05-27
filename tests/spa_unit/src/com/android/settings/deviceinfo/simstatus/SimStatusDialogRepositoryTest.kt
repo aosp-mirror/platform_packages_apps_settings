@@ -17,9 +17,12 @@
 package com.android.settings.deviceinfo.simstatus
 
 import android.content.Context
+import android.os.PersistableBundle
+import android.telephony.CarrierConfigManager
 import androidx.lifecycle.testing.TestLifecycleOwner
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.settings.deviceinfo.simstatus.SimStatusDialogRepository.SimStatusDialogInfo
 import com.android.settings.network.telephony.SimSlotRepository
 import com.android.settings.network.telephony.ims.ImsMmTelRepository
 import com.google.common.truth.Truth.assertThat
@@ -30,11 +33,27 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
+import org.mockito.kotlin.spy
 
 @RunWith(AndroidJUnit4::class)
-class ImsRegistrationStateControllerTest {
+class SimStatusDialogRepositoryTest {
 
-    private val context: Context = ApplicationProvider.getApplicationContext()
+    private val carrierConfig = PersistableBundle().apply {
+        putBoolean(CarrierConfigManager.KEY_SHOW_IMS_REGISTRATION_STATUS_BOOL, true)
+    }
+
+    private val mockCarrierConfigManager = mock<CarrierConfigManager> {
+        on {
+            getConfigForSubId(
+                SUB_ID,
+                CarrierConfigManager.KEY_SHOW_IMS_REGISTRATION_STATUS_BOOL,
+            )
+        } doReturn carrierConfig
+    }
+
+    private val context: Context = spy(ApplicationProvider.getApplicationContext()) {
+        on { getSystemService(CarrierConfigManager::class.java) } doReturn mockCarrierConfigManager
+    }
 
     private val mockSimSlotRepository = mock<SimSlotRepository> {
         on { subIdInSimSlotFlow(SIM_SLOT_INDEX) } doReturn flowOf(SUB_ID)
@@ -44,7 +63,7 @@ class ImsRegistrationStateControllerTest {
         on { imsRegisteredFlow() } doReturn flowOf(true)
     }
 
-    private val controller = ImsRegistrationStateController(
+    private val controller = SimStatusDialogRepository(
         context = context,
         simSlotRepository = mockSimSlotRepository,
         imsMmTelRepositoryFactory = { subId ->
@@ -54,15 +73,28 @@ class ImsRegistrationStateControllerTest {
     )
 
     @Test
-    fun collectImsRegistered() = runBlocking {
-        var imsRegistered = false
+    fun collectSimStatusDialogInfo() = runBlocking {
+        var simStatusDialogInfo = SimStatusDialogInfo()
 
-        controller.collectImsRegistered(TestLifecycleOwner(), SIM_SLOT_INDEX) {
-            imsRegistered = it
+        controller.collectSimStatusDialogInfo(TestLifecycleOwner(), SIM_SLOT_INDEX) {
+            simStatusDialogInfo = it
         }
         delay(100)
 
-        assertThat(imsRegistered).isTrue()
+        assertThat(simStatusDialogInfo).isEqualTo(SimStatusDialogInfo(imsRegistered = true))
+    }
+
+    @Test
+    fun collectSimStatusDialogInfo_doNotShowImsRegistration() = runBlocking {
+        carrierConfig.putBoolean(CarrierConfigManager.KEY_SHOW_IMS_REGISTRATION_STATUS_BOOL, false)
+        var simStatusDialogInfo = SimStatusDialogInfo()
+
+        controller.collectSimStatusDialogInfo(TestLifecycleOwner(), SIM_SLOT_INDEX) {
+            simStatusDialogInfo = it
+        }
+        delay(100)
+
+        assertThat(simStatusDialogInfo.imsRegistered).isNull()
     }
 
     private companion object {

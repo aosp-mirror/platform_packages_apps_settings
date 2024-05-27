@@ -36,7 +36,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -394,8 +393,6 @@ public class SimStatusDialogControllerTest {
     @Test
     @Ignore
     public void initialize_imsRegistered_shouldSetImsRegistrationStateSummaryToRegisterd() {
-        mPersistableBundle.putBoolean(
-                CarrierConfigManager.KEY_SHOW_IMS_REGISTRATION_STATUS_BOOL, true);
         when(mTelephonyManager.isImsRegistered(anyInt())).thenReturn(true);
 
         mController.initialize();
@@ -407,8 +404,6 @@ public class SimStatusDialogControllerTest {
     @Test
     @Ignore
     public void initialize_imsNotRegistered_shouldSetImsRegistrationStateSummaryToNotRegisterd() {
-        mPersistableBundle.putBoolean(
-                CarrierConfigManager.KEY_SHOW_IMS_REGISTRATION_STATUS_BOOL, true);
         when(mTelephonyManager.isImsRegistered(anyInt())).thenReturn(false);
 
         mController.initialize();
@@ -418,24 +413,20 @@ public class SimStatusDialogControllerTest {
     }
 
     @Test
-    public void initialize_showImsRegistration_shouldNotRemoveImsRegistrationStateSetting() {
-        mPersistableBundle.putBoolean(
-                CarrierConfigManager.KEY_SHOW_IMS_REGISTRATION_STATUS_BOOL, true);
-
+    @Ignore("b/337417520")
+    public void initialize_showImsRegistration_shouldShowImsRegistrationStateSetting() {
         mController.initialize();
 
-        verify(mDialog, never()).removeSettingFromScreen(IMS_REGISTRATION_STATE_VALUE_ID);
+        verify(mDialog).setSettingVisibility(IMS_REGISTRATION_STATE_VALUE_ID, true);
     }
 
     @Test
-    public void initialize_doNotShowImsRegistration_shouldRemoveImsRegistrationStateSetting() {
-        mPersistableBundle.putBoolean(
-                CarrierConfigManager.KEY_SHOW_IMS_REGISTRATION_STATUS_BOOL, false);
-
+    @Ignore("b/337417520")
+    public void initialize_doNotShowImsRegistration_shouldHideImsRegistrationStateSetting() {
         mController.initialize();
 
-        verify(mDialog).removeSettingFromScreen(IMS_REGISTRATION_STATE_LABEL_ID);
-        verify(mDialog).removeSettingFromScreen(IMS_REGISTRATION_STATE_VALUE_ID);
+        verify(mDialog).setSettingVisibility(IMS_REGISTRATION_STATE_LABEL_ID, false);
+        verify(mDialog).setSettingVisibility(IMS_REGISTRATION_STATE_VALUE_ID, false);
     }
 
     @Test

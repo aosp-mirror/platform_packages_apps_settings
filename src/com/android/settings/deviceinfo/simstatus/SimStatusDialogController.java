@@ -227,7 +227,6 @@ public class SimStatusDialogController implements DefaultLifecycleObserver {
         updateNetworkType();
         updateRoamingStatus(serviceState);
         updateIccidNumber();
-        updateImsRegistrationState();
     }
 
     /**
@@ -257,7 +256,7 @@ public class SimStatusDialogController implements DefaultLifecycleObserver {
                 .registerTelephonyCallback(mContext.getMainExecutor(), mTelephonyCallback);
         mSubscriptionManager.addOnSubscriptionsChangedListener(
                 mContext.getMainExecutor(), mOnSubscriptionsChangedListener);
-        collectImsRegistered(owner);
+        collectSimStatusDialogInfo(owner);
 
         if (mShowLatestAreaInfo) {
             updateAreaInfoText();
@@ -581,39 +580,20 @@ public class SimStatusDialogController implements DefaultLifecycleObserver {
         }
     }
 
-    private boolean isImsRegistrationStateShowUp() {
-        if (mSubscriptionInfo == null) {
-            return false;
-        }
-        final int subscriptionId = mSubscriptionInfo.getSubscriptionId();
-        final PersistableBundle carrierConfig =
-                mCarrierConfigManager.getConfigForSubId(subscriptionId);
-        return carrierConfig == null ? false :
-                carrierConfig.getBoolean(
-                        CarrierConfigManager.KEY_SHOW_IMS_REGISTRATION_STATUS_BOOL);
+    private void updateImsRegistrationState(@Nullable Boolean imsRegistered) {
+        boolean isVisible = imsRegistered != null;
+        mDialog.setSettingVisibility(IMS_REGISTRATION_STATE_LABEL_ID, isVisible);
+        mDialog.setSettingVisibility(IMS_REGISTRATION_STATE_VALUE_ID, isVisible);
+        int stringId = Boolean.TRUE.equals(imsRegistered)
+                ? com.android.settingslib.R.string.ims_reg_status_registered
+                : com.android.settingslib.R.string.ims_reg_status_not_registered;
+        mDialog.setText(IMS_REGISTRATION_STATE_VALUE_ID, mRes.getString(stringId));
     }
 
-    private void updateImsRegistrationState() {
-        if (isImsRegistrationStateShowUp()) {
-            return;
-        }
-        mDialog.removeSettingFromScreen(IMS_REGISTRATION_STATE_LABEL_ID);
-        mDialog.removeSettingFromScreen(IMS_REGISTRATION_STATE_VALUE_ID);
-    }
-
-    private void collectImsRegistered(@NonNull LifecycleOwner owner) {
-        if (!isImsRegistrationStateShowUp()) {
-            return;
-        }
-        new ImsRegistrationStateController(mContext).collectImsRegistered(
-                owner, mSlotIndex, (Boolean imsRegistered) -> {
-                    if (imsRegistered) {
-                        mDialog.setText(IMS_REGISTRATION_STATE_VALUE_ID, mRes.getString(
-                                com.android.settingslib.R.string.ims_reg_status_registered));
-                    } else {
-                        mDialog.setText(IMS_REGISTRATION_STATE_VALUE_ID, mRes.getString(
-                                com.android.settingslib.R.string.ims_reg_status_not_registered));
-                    }
+    private void collectSimStatusDialogInfo(@NonNull LifecycleOwner owner) {
+        new SimStatusDialogRepository(mContext).collectSimStatusDialogInfo(
+                owner, mSlotIndex, (simStatusDialogInfo) -> {
+                    updateImsRegistrationState(simStatusDialogInfo.getImsRegistered());
                     return Unit.INSTANCE;
                 }
         );
