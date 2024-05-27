@@ -26,6 +26,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -113,7 +114,7 @@ public class SimStatusDialogFragment extends InstrumentedDialogFragment {
                     SimStatusDialogController.PHONE_NUMBER_VALUE_ID)
             .sorted().toArray();
 
-    public void setText(int viewId, CharSequence text) {
+    public void setText(int viewId, @Nullable CharSequence text) {
         if (!isAdded()) {
             Log.d(TAG, "Fragment not attached yet.");
             return;

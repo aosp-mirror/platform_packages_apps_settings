@@ -32,10 +32,8 @@ import android.telephony.Annotation;
 import android.telephony.CarrierConfigManager;
 import android.telephony.CellBroadcastIntents;
 import android.telephony.CellBroadcastService;
-import android.telephony.CellSignalStrength;
 import android.telephony.ICellBroadcastService;
 import android.telephony.ServiceState;
-import android.telephony.SignalStrength;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.SubscriptionManager.OnSubscriptionsChangedListener;
@@ -113,7 +111,6 @@ public class SimStatusDialogController implements DefaultLifecycleObserver {
 
     private SubscriptionInfo mSubscriptionInfo;
     private TelephonyDisplayInfo mTelephonyDisplayInfo;
-    private ServiceState mPreviousServiceState;
 
     private final int mSlotIndex;
     private TelephonyManager mTelephonyManager;
@@ -219,11 +216,9 @@ public class SimStatusDialogController implements DefaultLifecycleObserver {
         // getServiceState() may return null when the subscription is inactive
         // or when there was an error communicating with the phone process.
         final ServiceState serviceState = getTelephonyManager().getServiceState();
-        final SignalStrength signalStrength = getTelephonyManager().getSignalStrength();
 
         updatePhoneNumber();
         updateServiceState(serviceState);
-        updateSignalStrength(signalStrength);
         updateNetworkType();
         updateRoamingStatus(serviceState);
         updateIccidNumber();
@@ -419,12 +414,6 @@ public class SimStatusDialogController implements DefaultLifecycleObserver {
 
     private void updateServiceState(ServiceState serviceState) {
         final int state = Utils.getCombinedServiceState(serviceState);
-        if (!Utils.isInService(serviceState)) {
-            resetSignalStrength();
-        } else if (!Utils.isInService(mPreviousServiceState)) {
-            // If ServiceState changed from out of service -> in service, update signal strength.
-            updateSignalStrength(getTelephonyManager().getSignalStrength());
-        }
 
         String serviceStateValue;
 
@@ -449,49 +438,11 @@ public class SimStatusDialogController implements DefaultLifecycleObserver {
         mDialog.setText(SERVICE_STATE_VALUE_ID, serviceStateValue);
     }
 
-    private void updateSignalStrength(SignalStrength signalStrength) {
-        if (signalStrength == null) {
-            return;
-        }
-        // by default we show the signal strength
-        boolean showSignalStrength = true;
-        if (mSubscriptionInfo != null) {
-            final int subscriptionId = mSubscriptionInfo.getSubscriptionId();
-            final PersistableBundle carrierConfig =
-                    mCarrierConfigManager.getConfigForSubId(subscriptionId);
-            if (carrierConfig != null) {
-                showSignalStrength = carrierConfig.getBoolean(
-                        CarrierConfigManager.KEY_SHOW_SIGNAL_STRENGTH_IN_SIM_STATUS_BOOL);
-            }
-        }
-        if (!showSignalStrength) {
-            mDialog.removeSettingFromScreen(SIGNAL_STRENGTH_LABEL_ID);
-            mDialog.removeSettingFromScreen(SIGNAL_STRENGTH_VALUE_ID);
-            return;
-        }
-
-        ServiceState serviceState = getTelephonyManager().getServiceState();
-        if (!Utils.isInService(serviceState)) {
-            return;
-        }
-
-        int signalDbm = getDbm(signalStrength);
-        int signalAsu = getAsuLevel(signalStrength);
-
-        if (signalDbm == -1) {
-            signalDbm = 0;
-        }
-
-        if (signalAsu == -1) {
-            signalAsu = 0;
-        }
-
-        mDialog.setText(SIGNAL_STRENGTH_VALUE_ID, mRes.getString(R.string.sim_signal_strength,
-                signalDbm, signalAsu));
-    }
-
-    private void resetSignalStrength() {
-        mDialog.setText(SIGNAL_STRENGTH_VALUE_ID, "0");
+    private void updateSignalStrength(@Nullable String signalStrength) {
+        boolean isVisible = signalStrength != null;
+        mDialog.setSettingVisibility(SIGNAL_STRENGTH_LABEL_ID, isVisible);
+        mDialog.setSettingVisibility(SIGNAL_STRENGTH_VALUE_ID, isVisible);
+        mDialog.setText(SIGNAL_STRENGTH_VALUE_ID, signalStrength);
     }
 
     private void updateNetworkType() {
@@ -593,6 +544,7 @@ public class SimStatusDialogController implements DefaultLifecycleObserver {
     private void collectSimStatusDialogInfo(@NonNull LifecycleOwner owner) {
         new SimStatusDialogRepository(mContext).collectSimStatusDialogInfo(
                 owner, mSlotIndex, (simStatusDialogInfo) -> {
+                    updateSignalStrength(simStatusDialogInfo.getSignalStrength());
                     updateImsRegistrationState(simStatusDialogInfo.getImsRegistered());
                     return Unit.INSTANCE;
                 }
@@ -603,44 +555,9 @@ public class SimStatusDialogController implements DefaultLifecycleObserver {
         return SubscriptionManager.from(mContext).getActiveSubscriptionInfoForSimSlotIndex(slotId);
     }
 
-    private int getDbm(SignalStrength signalStrength) {
-        List<CellSignalStrength> cellSignalStrengthList = signalStrength.getCellSignalStrengths();
-        int dbm = -1;
-        if (cellSignalStrengthList == null) {
-            return dbm;
-        }
-
-        for (CellSignalStrength cell : cellSignalStrengthList) {
-            if (cell.getDbm() != -1) {
-                dbm = cell.getDbm();
-                break;
-            }
-        }
-
-        return dbm;
-    }
-
-    private int getAsuLevel(SignalStrength signalStrength) {
-        List<CellSignalStrength> cellSignalStrengthList = signalStrength.getCellSignalStrengths();
-        int asu = -1;
-        if (cellSignalStrengthList == null) {
-            return asu;
-        }
-
-        for (CellSignalStrength cell : cellSignalStrengthList) {
-            if (cell.getAsuLevel() != -1) {
-                asu = cell.getAsuLevel();
-                break;
-            }
-        }
-
-        return asu;
-    }
-
     @VisibleForTesting
     class SimStatusDialogTelephonyCallback extends TelephonyCallback implements
             TelephonyCallback.DataConnectionStateListener,
-            TelephonyCallback.SignalStrengthsListener,
             TelephonyCallback.ServiceStateListener,
             TelephonyCallback.DisplayInfoListener {
         @Override
@@ -650,16 +567,10 @@ public class SimStatusDialogController implements DefaultLifecycleObserver {
         }
 
         @Override
-        public void onSignalStrengthsChanged(SignalStrength signalStrength) {
-            updateSignalStrength(signalStrength);
-        }
-
-        @Override
         public void onServiceStateChanged(ServiceState serviceState) {
             updateNetworkProvider();
             updateServiceState(serviceState);
             updateRoamingStatus(serviceState);
-            mPreviousServiceState = serviceState;
         }
 
         @Override

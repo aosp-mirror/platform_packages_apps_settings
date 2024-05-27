@@ -31,7 +31,9 @@ import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.kotlin.anyVararg
 import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.eq
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.spy
 
@@ -43,12 +45,7 @@ class SimStatusDialogRepositoryTest {
     }
 
     private val mockCarrierConfigManager = mock<CarrierConfigManager> {
-        on {
-            getConfigForSubId(
-                SUB_ID,
-                CarrierConfigManager.KEY_SHOW_IMS_REGISTRATION_STATUS_BOOL,
-            )
-        } doReturn carrierConfig
+        on { getConfigForSubId(eq(SUB_ID), anyVararg()) } doReturn carrierConfig
     }
 
     private val context: Context = spy(ApplicationProvider.getApplicationContext()) {
@@ -59,6 +56,10 @@ class SimStatusDialogRepositoryTest {
         on { subIdInSimSlotFlow(SIM_SLOT_INDEX) } doReturn flowOf(SUB_ID)
     }
 
+    private val mockSignalStrengthRepository = mock<SignalStrengthRepository> {
+        on { signalStrengthDisplayFlow(SUB_ID) } doReturn flowOf(SIGNAL_STRENGTH)
+    }
+
     private val mockImsMmTelRepository = mock<ImsMmTelRepository> {
         on { imsRegisteredFlow() } doReturn flowOf(true)
     }
@@ -66,6 +67,7 @@ class SimStatusDialogRepositoryTest {
     private val controller = SimStatusDialogRepository(
         context = context,
         simSlotRepository = mockSimSlotRepository,
+        signalStrengthRepository = mockSignalStrengthRepository,
         imsMmTelRepositoryFactory = { subId ->
             assertThat(subId).isEqualTo(SUB_ID)
             mockImsMmTelRepository
@@ -81,7 +83,28 @@ class SimStatusDialogRepositoryTest {
         }
         delay(100)
 
-        assertThat(simStatusDialogInfo).isEqualTo(SimStatusDialogInfo(imsRegistered = true))
+        assertThat(simStatusDialogInfo).isEqualTo(
+            SimStatusDialogInfo(
+                signalStrength = SIGNAL_STRENGTH,
+                imsRegistered = true,
+            )
+        )
+    }
+
+    @Test
+    fun collectSimStatusDialogInfo_doNotShowSignalStrength() = runBlocking {
+        carrierConfig.putBoolean(
+            CarrierConfigManager.KEY_SHOW_SIGNAL_STRENGTH_IN_SIM_STATUS_BOOL,
+            false
+        )
+        var simStatusDialogInfo = SimStatusDialogInfo()
+
+        controller.collectSimStatusDialogInfo(TestLifecycleOwner(), SIM_SLOT_INDEX) {
+            simStatusDialogInfo = it
+        }
+        delay(100)
+
+        assertThat(simStatusDialogInfo.signalStrength).isNull()
     }
 
     @Test
@@ -100,5 +123,7 @@ class SimStatusDialogRepositoryTest {
     private companion object {
         const val SIM_SLOT_INDEX = 0
         const val SUB_ID = 1
+
+        const val SIGNAL_STRENGTH = "-82 dBm 58 asu"
     }
 }

@@ -42,6 +42,8 @@ import kotlinx.coroutines.launch
 class SimStatusDialogRepository @JvmOverloads constructor(
     private val context: Context,
     private val simSlotRepository: SimSlotRepository = SimSlotRepository(context),
+    private val signalStrengthRepository: SignalStrengthRepository =
+        SignalStrengthRepository(context),
     private val imsMmTelRepositoryFactory: (subId: Int) -> ImsMmTelRepository = { subId ->
         ImsMmTelRepositoryImpl(context, subId)
     },
@@ -49,10 +51,12 @@ class SimStatusDialogRepository @JvmOverloads constructor(
     private val carrierConfigManager = context.getSystemService(CarrierConfigManager::class.java)!!
 
     data class SimStatusDialogInfo(
+        val signalStrength: String? = null,
         val imsRegistered: Boolean? = null,
     )
 
     private data class SimStatusDialogVisibility(
+        val signalStrengthShowUp: Boolean,
         val imsRegisteredShowUp: Boolean,
     )
 
@@ -83,25 +87,34 @@ class SimStatusDialogRepository @JvmOverloads constructor(
     private fun simStatusDialogInfoFlow(subId: Int): Flow<SimStatusDialogInfo> =
         showUpFlow(subId).flatMapLatest { visibility ->
             combine(
+                if (visibility.signalStrengthShowUp) {
+                    signalStrengthRepository.signalStrengthDisplayFlow(subId)
+                } else flowOf(null),
                 if (visibility.imsRegisteredShowUp) {
                     imsMmTelRepositoryFactory(subId).imsRegisteredFlow()
                 } else flowOf(null),
-            ) { (imsRegistered) ->
-                SimStatusDialogInfo(imsRegistered = imsRegistered)
+            ) { signalStrength, imsRegistered ->
+                SimStatusDialogInfo(signalStrength = signalStrength, imsRegistered = imsRegistered)
             }
         }
 
     private fun showUpFlow(subId: Int) = flow {
         val config = carrierConfigManager.safeGetConfig(
-            keys = listOf(CarrierConfigManager.KEY_SHOW_IMS_REGISTRATION_STATUS_BOOL),
+            keys = listOf(
+                CarrierConfigManager.KEY_SHOW_SIGNAL_STRENGTH_IN_SIM_STATUS_BOOL,
+                CarrierConfigManager.KEY_SHOW_IMS_REGISTRATION_STATUS_BOOL,
+            ),
             subId = subId,
         )
-        emit(
-            SimStatusDialogVisibility(
-                imsRegisteredShowUp = config.getBoolean(
-                    CarrierConfigManager.KEY_SHOW_IMS_REGISTRATION_STATUS_BOOL
-                ),
-            )
+        val visibility = SimStatusDialogVisibility(
+            signalStrengthShowUp = config.getBoolean(
+                CarrierConfigManager.KEY_SHOW_SIGNAL_STRENGTH_IN_SIM_STATUS_BOOL,
+                true,  // by default we show the signal strength in sim status
+            ),
+            imsRegisteredShowUp = config.getBoolean(
+                CarrierConfigManager.KEY_SHOW_IMS_REGISTRATION_STATUS_BOOL
+            ),
         )
+        emit(visibility)
     }
 }
