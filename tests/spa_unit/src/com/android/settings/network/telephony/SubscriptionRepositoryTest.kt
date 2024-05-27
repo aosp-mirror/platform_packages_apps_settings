@@ -116,6 +116,27 @@ class SubscriptionRepositoryTest {
     }
 
     @Test
+    fun getSelectableSubscriptionInfoList_oneNotInSlot_inSlotSortedFirst() {
+        mockSubscriptionManager.stub {
+            on { getAvailableSubscriptionInfoList() } doReturn listOf(
+                SubscriptionInfo.Builder().apply {
+                    setSimSlotIndex(SubscriptionManager.INVALID_SIM_SLOT_INDEX)
+                    setId(SUB_ID_3_NOT_IN_SLOT)
+                }.build(),
+                SubscriptionInfo.Builder().apply {
+                    setSimSlotIndex(SIM_SLOT_INDEX_1)
+                    setId(SUB_ID_IN_SLOT_1)
+                }.build(),
+            )
+        }
+
+        val subInfos = context.getSelectableSubscriptionInfoList()
+
+        assertThat(subInfos.map { it.simSlotIndex })
+            .containsExactly(SIM_SLOT_INDEX_1, SubscriptionManager.INVALID_SIM_SLOT_INDEX).inOrder()
+    }
+
+    @Test
     fun getSelectableSubscriptionInfoList_sameGroupAndOneHasSlot_returnTheOneWithSimSlotIndex() {
         mockSubscriptionManager.stub {
             on { getAvailableSubscriptionInfoList() } doReturn listOf(
