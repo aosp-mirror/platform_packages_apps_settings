@@ -124,6 +124,14 @@ fun Context.getSelectableSubscriptionInfoList(): List<SubscriptionInfo> {
             }
         }
         // Matching the sorting order in SubscriptionManagerService.getAvailableSubscriptionInfoList
-        .sortedWith(compareBy({ it.simSlotIndex }, { it.subscriptionId }))
+        .sortedWith(compareBy({ it.sortableSimSlotIndex }, { it.subscriptionId }))
         .also { Log.d(TAG, "getSelectableSubscriptionInfoList: $it") }
 }
+
+/** Subscription with invalid sim slot index has lowest sort order. */
+private val SubscriptionInfo.sortableSimSlotIndex: Int
+    get() = if (simSlotIndex != SubscriptionManager.INVALID_SIM_SLOT_INDEX) {
+        simSlotIndex
+    } else {
+        Int.MAX_VALUE
+    }
