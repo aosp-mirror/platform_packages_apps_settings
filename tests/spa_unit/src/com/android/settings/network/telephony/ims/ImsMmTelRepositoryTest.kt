@@ -43,6 +43,7 @@ import org.mockito.kotlin.doThrow
 import org.mockito.kotlin.eq
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.stub
+import org.mockito.kotlin.verify
 
 @RunWith(AndroidJUnit4::class)
 class ImsMmTelRepositoryTest {
@@ -153,6 +154,13 @@ class ImsMmTelRepositoryTest {
         val isSupported = repository.isSupported(CAPABILITY, TRANSPORT)
 
         assertThat(isSupported).isTrue()
+    }
+
+    @Test
+    fun setCrossSimCallingEnabled() = runBlocking {
+        repository.setCrossSimCallingEnabled(true)
+
+        verify(mockImsMmTelManager).setCrossSimCallingEnabled(true)
     }
 
     private companion object {
