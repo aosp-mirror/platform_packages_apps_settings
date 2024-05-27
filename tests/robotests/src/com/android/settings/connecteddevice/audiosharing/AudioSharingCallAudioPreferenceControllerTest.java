@@ -88,7 +88,7 @@ import java.util.List;
             ShadowBluetoothUtils.class,
             ShadowThreadUtils.class,
         })
-public class CallsAndAlarmsPreferenceControllerTest {
+public class AudioSharingCallAudioPreferenceControllerTest {
     private static final String PREF_KEY = "calls_and_alarms";
     private static final String TEST_DEVICE_NAME1 = "test1";
     private static final String TEST_DEVICE_NAME2 = "test2";
@@ -118,7 +118,7 @@ public class CallsAndAlarmsPreferenceControllerTest {
     @Mock private CachedBluetoothDevice mCachedDevice3;
     @Mock private BluetoothLeBroadcastReceiveState mState;
     @Mock private ContentResolver mContentResolver;
-    private CallsAndAlarmsPreferenceController mController;
+    private AudioSharingCallAudioPreferenceController mController;
     @Spy private ContentObserver mContentObserver;
     private ShadowBluetoothAdapter mShadowBluetoothAdapter;
     private LocalBluetoothManager mBtManager;
@@ -151,7 +151,7 @@ public class CallsAndAlarmsPreferenceControllerTest {
         bisSyncState.add(1L);
         when(mState.getBisSyncState()).thenReturn(bisSyncState);
         when(mContext.getContentResolver()).thenReturn(mContentResolver);
-        mController = new CallsAndAlarmsPreferenceController(mContext);
+        mController = new AudioSharingCallAudioPreferenceController(mContext);
         mController.init(null);
         mContentObserver = mController.getSettingsObserver();
         mPreference = new Preference(mContext);

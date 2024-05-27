@@ -51,6 +51,8 @@ import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 import com.android.settingslib.utils.ThreadUtils;
 
+import com.google.common.collect.ImmutableList;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -60,7 +62,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /** PreferenceController to control the dialog to choose the active device for calls and alarms */
-public class CallsAndAlarmsPreferenceController extends AudioSharingBasePreferenceController
+public class AudioSharingCallAudioPreferenceController extends AudioSharingBasePreferenceController
         implements BluetoothCallback {
     private static final String TAG = "CallsAndAlarmsPreferenceController";
     private static final String PREF_KEY = "calls_and_alarms";
@@ -131,7 +133,7 @@ public class CallsAndAlarmsPreferenceController extends AudioSharingBasePreferen
                 }
             };
 
-    public CallsAndAlarmsPreferenceController(Context context) {
+    public AudioSharingCallAudioPreferenceController(Context context) {
         super(context, PREF_KEY);
         mBtManager = Utils.getLocalBtManager(mContext);
         mProfileManager = mBtManager == null ? null : mBtManager.getProfileManager();
@@ -176,16 +178,13 @@ public class CallsAndAlarmsPreferenceController extends AudioSharingBasePreferen
                         }
                         updateDeviceItemsInSharingSession();
                         if (mDeviceItemsInSharingSession.size() >= 1) {
-                            CallsAndAlarmsDialogFragment.show(
+                            AudioSharingCallAudioDialogFragment.show(
                                     mFragment,
                                     mDeviceItemsInSharingSession,
                                     (AudioSharingDeviceItem item) -> {
-                                        if (!mGroupedConnectedDevices.containsKey(
-                                                item.getGroupId())) {
-                                            return;
-                                        }
                                         List<CachedBluetoothDevice> devices =
-                                                mGroupedConnectedDevices.get(item.getGroupId());
+                                                mGroupedConnectedDevices.getOrDefault(
+                                                        item.getGroupId(), ImmutableList.of());
                                         @Nullable
                                         CachedBluetoothDevice lead =
                                                 AudioSharingUtils.getLeadDevice(devices);

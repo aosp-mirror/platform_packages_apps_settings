@@ -28,7 +28,6 @@ import android.telephony.SubscriptionManager;
 import android.util.Log;
 
 import androidx.annotation.Keep;
-import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
@@ -240,15 +239,6 @@ public class ProxySubscriptionManager implements LifecycleObserver {
      */
     public SubscriptionInfo getAccessibleSubscriptionInfo(int subId) {
         return mSubscriptionMonitor.getAccessibleSubscriptionInfo(subId);
-    }
-
-    /**
-     * Gets a list of active, visible subscription Id(s) of the currently active SIM(s).
-     *
-     * @return the list of subId's that are active and visible; the length may be 0.
-     */
-    public @NonNull int[] getActiveSubscriptionIdList() {
-        return mSubscriptionMonitor.getActiveSubscriptionIdList();
     }
 
     /**

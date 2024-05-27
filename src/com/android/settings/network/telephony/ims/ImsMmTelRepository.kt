@@ -51,6 +51,8 @@ interface ImsMmTelRepository {
         @MmTelFeature.MmTelCapabilities.MmTelCapability capability: Int,
         @AccessNetworkConstants.TransportType transportType: Int,
     ): Boolean
+
+    suspend fun setCrossSimCallingEnabled(enabled: Boolean)
 }
 
 class ImsMmTelRepositoryImpl(
@@ -130,6 +132,7 @@ class ImsMmTelRepositoryImpl(
         @MmTelFeature.MmTelCapabilities.MmTelCapability capability: Int,
         @AccessNetworkConstants.TransportType transportType: Int,
     ): Boolean = withContext(Dispatchers.Default) {
+        val logName = "isSupported(capability=$capability,transportType=$transportType)"
         suspendCancellableCoroutine { continuation ->
             try {
                 imsMmTelManager.isSupported(
@@ -140,9 +143,18 @@ class ImsMmTelRepositoryImpl(
                 )
             } catch (e: Exception) {
                 continuation.resume(false)
-                Log.w(TAG, "[$subId] isSupported failed", e)
+                Log.w(TAG, "[$subId] $logName failed", e)
             }
-        }.also { Log.d(TAG, "[$subId] isSupported = $it") }
+        }.also { Log.d(TAG, "[$subId] $logName = $it") }
+    }
+
+    override suspend fun setCrossSimCallingEnabled(enabled: Boolean) {
+        try {
+            imsMmTelManager.setCrossSimCallingEnabled(enabled)
+            Log.d(TAG, "[$subId] setCrossSimCallingEnabled: $enabled")
+        } catch (e: Exception) {
+            Log.e(TAG, "[$subId] failed setCrossSimCallingEnabled to $enabled", e)
+        }
     }
 
     private companion object {
