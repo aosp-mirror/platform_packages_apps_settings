@@ -107,7 +107,8 @@ fun PageImpl(onboardingService:SimOnboardingService,navHostController: NavHostCo
         composable(route = SimOnboardingScreen.LabelSim.name) {
             val nextPage =
                 if (onboardingService.isMultipleEnabledProfilesSupported
-                            && onboardingService.isAllOfSlotAssigned) {
+                        && onboardingService.isAllOfSlotAssigned
+                        && !onboardingService.doesTargetSimActive) {
                     SimOnboardingScreen.SelectSim.name
                 } else {
                     LaunchedEffect(Unit) {

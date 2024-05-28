@@ -16,6 +16,9 @@
 
 package com.android.settings.network
 
+import android.telephony.SubscriptionManager.INVALID_SUBSCRIPTION_ID
+import android.telephony.SubscriptionManager.INVALID_SIM_SLOT_INDEX
+
 import android.content.Context
 import android.telephony.SubscriptionInfo
 import android.telephony.SubscriptionManager
@@ -40,26 +43,26 @@ class SimOnboardingService {
     var subscriptionManager:SubscriptionManager? = null
     var telephonyManager:TelephonyManager? = null
 
-    var targetSubId: Int = INVALID
+    var targetSubId: Int = INVALID_SUBSCRIPTION_ID
     var targetSubInfo: SubscriptionInfo? = null
     var availableSubInfoList: List<SubscriptionInfo> = listOf()
     var activeSubInfoList: List<SubscriptionInfo> = listOf()
     var slotInfoList: List<UiccSlotInfo> = listOf()
     var uiccCardInfoList: List<UiccCardInfo> = listOf()
-    var targetPrimarySimCalls: Int = SubscriptionManager.INVALID_SUBSCRIPTION_ID
-    var targetPrimarySimTexts: Int = SubscriptionManager.INVALID_SUBSCRIPTION_ID
-    var targetPrimarySimMobileData: Int = SubscriptionManager.INVALID_SUBSCRIPTION_ID
+    var targetPrimarySimCalls: Int = INVALID_SUBSCRIPTION_ID
+    var targetPrimarySimTexts: Int = INVALID_SUBSCRIPTION_ID
+    var targetPrimarySimMobileData: Int = INVALID_SUBSCRIPTION_ID
     val targetPrimarySimAutoDataSwitch = MutableStateFlow(false)
-    var targetNonDds: Int = SubscriptionManager.INVALID_SUBSCRIPTION_ID
+    var targetNonDds: Int = INVALID_SUBSCRIPTION_ID
         get() {
-            if(targetPrimarySimMobileData == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            if(targetPrimarySimMobileData == INVALID_SUBSCRIPTION_ID) {
                 Log.w(TAG, "No DDS")
-                return SubscriptionManager.INVALID_SUBSCRIPTION_ID
+                return INVALID_SUBSCRIPTION_ID
             }
             return userSelectedSubInfoList
                 .filter { info -> info.subscriptionId != targetPrimarySimMobileData }
                 .map { it.subscriptionId }
-                .firstOrNull() ?: SubscriptionManager.INVALID_SUBSCRIPTION_ID
+                .firstOrNull() ?: INVALID_SUBSCRIPTION_ID
         }
     var callback: (CallbackType) -> Unit = {}
 
@@ -84,6 +87,11 @@ class SimOnboardingService {
             activeSubInfoList.stream().anyMatch { it.isEmbedded }
             return false
         }
+    var doesTargetSimActive = false
+        get() {
+            return targetSubInfo?.getSimSlotIndex() ?: INVALID_SIM_SLOT_INDEX >= 0
+        }
+
     var doesTargetSimHaveEsimOperation = false
         get() {
             return targetSubInfo?.isEmbedded ?: false
@@ -95,7 +103,7 @@ class SimOnboardingService {
         }
     var getActiveModemCount = 0
         get() {
-            return telephonyManager?.getActiveModemCount() ?: 0
+            return (telephonyManager?.getActiveModemCount() ?: 0)
         }
 
     var renameMutableMap : MutableMap<Int, String> = mutableMapOf()
@@ -103,16 +111,18 @@ class SimOnboardingService {
 
     var isSimSelectionFinished = false
         get() {
-            return getActiveModemCount != 0 && userSelectedSubInfoList.size == getActiveModemCount
+            val activeModem = getActiveModemCount
+            return activeModem != 0 && userSelectedSubInfoList.size == activeModem
         }
 
     var isAllOfSlotAssigned = false
         get() {
-            if(getActiveModemCount == 0){
+            val activeModem = getActiveModemCount
+            if(activeModem == 0){
                 Log.e(TAG, "isAllOfSlotAssigned: getActiveModemCount is 0")
                 return true
             }
-            return getActiveModemCount != 0 && activeSubInfoList.size == getActiveModemCount
+            return getActiveModemCount != 0 && activeSubInfoList.size == activeModem
         }
     var isMultiSimEnabled = false
         get() {
@@ -129,7 +139,7 @@ class SimOnboardingService {
         }
 
     fun isValid(): Boolean {
-        return targetSubId != INVALID
+        return targetSubId != INVALID_SUBSCRIPTION_ID
             && targetSubInfo != null
             && activeSubInfoList.isNotEmpty()
             && slotInfoList.isNotEmpty()
@@ -156,14 +166,15 @@ class SimOnboardingService {
     fun initData(inputTargetSubId: Int,
                  context: Context,
                  callback: (CallbackType) -> Unit) {
+        clear()
         this.callback = callback
         targetSubId = inputTargetSubId
         subscriptionManager = context.getSystemService(SubscriptionManager::class.java)
         telephonyManager = context.getSystemService(TelephonyManager::class.java)
+        activeSubInfoList = SubscriptionUtil.getActiveSubscriptions(subscriptionManager)
         Log.d(
             TAG, "startInit: targetSubId:$targetSubId, activeSubInfoList: $activeSubInfoList"
         )
-        activeSubInfoList = SubscriptionUtil.getActiveSubscriptions(subscriptionManager)
 
         ThreadUtils.postOnBackgroundThread {
             availableSubInfoList = SubscriptionUtil.getAvailableSubscriptions(context)
@@ -242,14 +253,19 @@ class SimOnboardingService {
 
     fun addCurrentItemForSelectedSim() {
         if (userSelectedSubInfoList.size < getActiveModemCount) {
-            userSelectedSubInfoList.addAll(activeSubInfoList)
-            Log.d(TAG, "addCurrentItemForSelectedSim: userSelectedSubInfoList:" +
-                    ", $userSelectedSubInfoList")
+            userSelectedSubInfoList.addAll(
+                activeSubInfoList.filter { !userSelectedSubInfoList.contains(it) }
+            )
+            Log.d(TAG,
+                "addCurrentItemForSelectedSim: userSelectedSubInfoList: $userSelectedSubInfoList"
+            )
         }
     }
 
     fun addItemForSelectedSim(selectedSubInfo: SubscriptionInfo) {
-        userSelectedSubInfoList.add(selectedSubInfo)
+        if (!userSelectedSubInfoList.contains(selectedSubInfo)) {
+            userSelectedSubInfoList.add(selectedSubInfo)
+        }
     }
 
     fun removeItemForSelectedSim(selectedSubInfo: SubscriptionInfo) {
@@ -370,7 +386,6 @@ class SimOnboardingService {
 
     companion object{
         private const val TAG = "SimOnboardingService"
-        private const val INVALID = SubscriptionManager.INVALID_SUBSCRIPTION_ID
         const val NUM_OF_SIMS_FOR_DSDS = 2
     }
 }
