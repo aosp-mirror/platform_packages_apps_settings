@@ -72,7 +72,7 @@ public class EnableExt4WarningDialog extends InstrumentedDialogFragment
                 .setTitle(R.string.confirm_format_ext4_title)
                 .setIcon(R.drawable.ic_delete_accent)
                 .setMessage(R.string.confirm_format_ext4_text)
-                .setPositiveButton(R.string.main_clear_confirm_title, this /* onClickListener */)
+                .setPositiveButton(R.string.confirm_ext4_button_text, this /* onClickListener */)
                 .setNegativeButton(android.R.string.cancel, this /* onClickListener */)
                 .create();
     }
