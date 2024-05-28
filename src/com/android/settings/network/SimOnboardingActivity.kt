@@ -401,6 +401,11 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
         Log.d(TAG, "startSimSwitching:")
 
         var targetSubInfo = onboardingService.targetSubInfo
+        if(onboardingService.doesTargetSimActive) {
+            Log.d(TAG, "target subInfo is already active")
+            callbackListener(CallbackType.CALLBACK_SETUP_NAME)
+            return
+        }
         targetSubInfo?.let {
             var removedSubInfo = onboardingService.getRemovedSim()
             if (targetSubInfo.isEmbedded) {
