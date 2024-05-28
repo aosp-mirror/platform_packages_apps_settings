@@ -309,6 +309,11 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
                 UserInfo.FLAG_INITIALIZED | UserInfo.FLAG_ADMIN | UserInfo.FLAG_PRIMARY);
     }
 
+    @Implementation
+    protected UserHandle getMainUser() {
+        return UserHandle.of(PRIMARY_USER_ID);
+    }
+
     protected boolean setUserEphemeral(@UserIdInt int userId, boolean enableEphemeral) {
         UserInfo userInfo = mUserProfileInfos.stream()
                 .filter(user -> user.id == userId)

@@ -27,7 +27,7 @@ import org.robolectric.RobolectricTestRunner;
 public final class AppUsageEventEntityTest {
     @Test
     public void testBuilder_returnsExpectedResult() {
-        final int uid = 101;
+        final long uid = 101L;
         final long userId = 1001L;
         final long timestamp = 10001L;
         final int appUsageEventType = 1;
