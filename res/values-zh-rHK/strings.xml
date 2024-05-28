@@ -556,6 +556,28 @@
     <string name="private_space_biometric_summary" msgid="4403837276018724581">"輕按即可設定"</string>
     <string name="private_space_fingerprint_unlock_title" msgid="3614016453395789051">"使用指紋解鎖私人空間"</string>
     <string name="private_space_face_unlock_title" msgid="462248384776453613">"使用面孔解鎖私人空間"</string>
+    <!-- no translation found for private_space_biometric_unlock_title (1978145237698659673) -->
+    <skip />
+    <!-- no translation found for private_space_fingerprint_enroll_introduction_title (5187730641333680942) -->
+    <skip />
+    <!-- no translation found for private_space_fingerprint_enroll_introduction_message (9092068873421435300) -->
+    <skip />
+    <!-- no translation found for private_space_fingerprint_enroll_introduction_footer_message (7125255484447984854) -->
+    <skip />
+    <!-- no translation found for private_space_fingerprint_enroll_finish_message (4754797926493316965) -->
+    <skip />
+    <!-- no translation found for private_space_face_enroll_introduction_title (3717541082520006032) -->
+    <skip />
+    <!-- no translation found for private_space_face_enroll_introduction_message (250239418499081821) -->
+    <skip />
+    <!-- no translation found for private_space_face_enroll_introduction_info_looking (5694757845303924042) -->
+    <skip />
+    <!-- no translation found for private_space_face_enroll_introduction_info_less_secure (8460719783943533172) -->
+    <skip />
+    <!-- no translation found for private_space_face_settings_require_attention_details (2799569069549999689) -->
+    <skip />
+    <!-- no translation found for private_space_face_settings_footer (7722256209563543711) -->
+    <skip />
     <string name="private_space_category_ways_to_unlock" msgid="4356631225316950046">"解鎖方法"</string>
     <string name="private_space_screen_lock_summary" msgid="394837965365561070">"與裝置的螢幕鎖定相同"</string>
     <string name="private_space_new_lock_title" msgid="9056139964133004094">"要為私人空間選擇新的鎖定方式嗎？"</string>
@@ -563,7 +585,7 @@
     <string name="private_space_auto_lock_title" msgid="8663409382910601261">"自動鎖定私人空間"</string>
     <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"裝置可在閒置一段時間後自動鎖定私人空間"</string>
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"每當裝置鎖定"</string>
-    <string name="private_space_auto_lock_after_inactivity" msgid="7107814517866649733">"螢幕自動關閉的 5 分鐘後"</string>
+    <string name="private_space_auto_lock_after_inactivity" msgid="7107814517866649733">"螢幕逾時 5 分鐘後"</string>
     <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"只在裝置重新啟動後"</string>
     <string name="private_space_hide_page_title" msgid="3364639176511877414">"隱藏私人空間"</string>
     <string name="private_space_hide_when_locked" msgid="6219472348124151797">"私人空間處於鎖定狀態時，系統會隱藏私人空間"</string>
@@ -819,7 +841,7 @@
     <string name="bluetooth_empty_list_bluetooth_off" msgid="7326727272747345476">"藍牙開啟後，裝置即可與其他附近的藍牙裝置通訊"</string>
     <string name="bluetooth_empty_list_bluetooth_off_auto_on_available" msgid="3430864468105204282">"藍牙開啟後，裝置即可與其他附近的藍牙裝置通訊。「快速共享」和「尋找我的裝置」等功能都會使用藍牙。"</string>
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"啟用藍牙功能後，你的裝置可與附近的其他藍牙裝置通訊。\n\n為改善裝置的使用體驗，應用程式和服務仍可隨時掃瞄附近的裝置 (即使藍牙功能已關閉)。此操作可用來改善定位功能和服務。你可在藍牙掃瞄設定中變更此設定。"</string>
-    <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"藍牙開啟後，裝置即可與其他附近的藍牙裝置通訊。「快速共享」和「尋找我的裝置」等功能都會使用藍牙。\n\n應用程式和服務仍可隨時掃瞄附近的裝置 (即使藍牙功能已關閉)。此操作可用來改善定位功能和服務等。你可在藍牙掃瞄設定中變更此設定。"</string>
+    <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"藍牙開啟後，裝置便可與附近的藍牙裝置通訊。「快速共享」和「尋找我的裝置」等功能均使用藍牙。\n\n無論藍牙是否開啟，應用程式和服務都可以隨時掃瞄附近的裝置。此操作有助改善定位功能和服務等。你可在藍牙掃瞄設定中變更此設定。"</string>
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"變更"</string>
     <string name="device_details_title" msgid="1155622417516195481">"裝置詳情"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"鍵盤設定"</string>
@@ -1470,6 +1492,8 @@
     <string name="error_duplicate_apn_entry" msgid="7792928408935276618">"重複的 APN 項目。"</string>
     <string name="error_name_empty" msgid="1258275899283079142">"[名稱] 欄位不得留空。"</string>
     <string name="error_apn_empty" msgid="7657491065443746915">"APN 不可留空。"</string>
+    <!-- no translation found for error_apn_type_empty (8697781608034468813) -->
+    <skip />
     <string name="error_mcc_not3" msgid="883659545640179094">"MCC 欄位必須為 3 位數。"</string>
     <string name="error_mnc_not23" msgid="7642478711158474918">"MNC 欄位必須要有 2 或 3 位數。"</string>
     <string name="error_adding_apn_type" msgid="1324263534991467943">"流動網絡供應商不允許新增 %s 類型的 APN。"</string>
@@ -3324,7 +3348,24 @@
     <string name="zen_mode_settings_category" msgid="3794956668816783447">"允許發出音效的干擾"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"封鎖視覺干擾"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"允許視覺訊號"</string>
-    <string name="zen_mode_restrict_notifications_title" msgid="4169952466106040297">"隱藏通知的顯示方式"</string>
+    <string name="mode_interruption_filter_title" msgid="6657431939996264417">"可收到的通知"</string>
+    <string name="mode_device_effects_title" msgid="5857008332618433744">"其他動作"</string>
+    <string name="mode_display_settings_title" msgid="8132825978346535472">"顯示設定"</string>
+    <string name="mode_display_options_section" msgid="5151597748243866532">"顯示選項"</string>
+    <string name="mode_grayscale_title" msgid="6027553257331235461">"灰階"</string>
+    <string name="mode_grayscale_title_secondary_list" msgid="2662593380253642581">"灰階"</string>
+    <string name="mode_grayscale_summary" msgid="6682099523626777038">"將螢幕切換為黑白模式"</string>
+    <string name="mode_aod_title" msgid="5903435070341237325">"不要喚醒螢幕"</string>
+    <string name="mode_aod_title_secondary_list" msgid="8268180392811027557">"不要喚醒螢幕"</string>
+    <string name="mode_aod_summary" msgid="7516159044827627065">"停用螢幕長亮模式"</string>
+    <string name="mode_wallpaper_title" msgid="5549693923133928374">"調低桌布亮度"</string>
+    <string name="mode_wallpaper_title_secondary_list" msgid="5034602021811580157">"調低桌布亮度"</string>
+    <string name="mode_wallpaper_summary" msgid="665480011615603784">"變更桌布亮度"</string>
+    <string name="mode_dark_theme_title" msgid="8099007897943513209">"啟用深色主題"</string>
+    <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"啟用深色主題"</string>
+    <string name="mode_dark_theme_summary" msgid="8428887193785431898">"將作業系統和應用程式偏好設定切換成「淺色文字搭配深色背景」。這項設定或許可以降低眼睛負擔，而且在某些裝置上還能節省大量電力"</string>
+    <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{沒有顯示變更}=1{{effect_1}}=2{{effect_1}和{effect_2}}=3{{effect_1}、{effect_2}和{effect_3}}other{{effect_1}、{effect_2}和另外 # 個設定}}"</string>
+    <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"用來過濾通知的顯示選項"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"開啟「請勿騷擾」模式時"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"不發出音效通知"</string>
     <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"你會在螢幕上看到通知"</string>
@@ -3335,9 +3376,9 @@
     <string name="zen_mode_restrict_notifications_custom" msgid="5469078057954463796">"自訂"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"啟用自訂設定"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="5062332754972217218">"移除自訂設定"</string>
-    <string name="zen_mode_restrict_notifications_summary_muted" msgid="4750213316794189968">"不發出音效通知"</string>
-    <string name="zen_mode_restrict_notifications_summary_custom" msgid="3918461289557316364">"隱藏部分通知"</string>
-    <string name="zen_mode_restrict_notifications_summary_hidden" msgid="636494600775773296">"不顯示或發出音效通知"</string>
+    <string name="zen_mode_restrict_notifications_summary_muted" msgid="2826459087306271381">"顯示通知"</string>
+    <string name="zen_mode_restrict_notifications_summary_custom" msgid="6455811408721183198">"隱藏部分通知"</string>
+    <string name="zen_mode_restrict_notifications_summary_hidden" msgid="2157279412167366119">"隱藏通知"</string>
     <string name="zen_mode_what_to_block_title" msgid="5692710098205334164">"自訂限制"</string>
     <string name="zen_mode_block_effects_screen_on" msgid="8780668375194500987">"螢幕開啟時"</string>
     <string name="zen_mode_block_effects_screen_off" msgid="2291988790355612826">"螢幕關閉時"</string>
@@ -4505,7 +4546,8 @@
     <string name="media_output_label_title" msgid="4139048973886819148">"使用以下裝置播放「<xliff:g id="LABEL">%s</xliff:g>」的內容"</string>
     <string name="media_output_title_without_playing" msgid="3339321669132875821">"音訊播放媒體"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"此裝置"</string>
-    <string name="media_output_audio_sharing" msgid="6531742594884809737">"音訊分享功能"</string>
+    <!-- no translation found for media_output_audio_sharing (8169294522817470115) -->
+    <skip />
     <string name="media_out_summary_ongoing_call_state" msgid="475188726850090363">"通話時無法使用"</string>
     <string name="take_call_on_title" msgid="1159417893879946757">"接聽來電時使用的裝置"</string>
     <string name="cannot_change_apn_toast" msgid="296540724089240405">"無法變更此 APN。"</string>
@@ -4701,6 +4743,10 @@
     <string name="sim_onboarding_next" msgid="6415025179929475355">"下一頁"</string>
     <string name="sim_onboarding_progressbar_turning_sim_on" msgid="1163318788393361574">"正在開啟 <xliff:g id="CARRIER_NAME">%1$s</xliff:g>…"</string>
     <string name="mobile_network_spn_title" msgid="3053793174495329077">"流動網絡"</string>
+    <!-- no translation found for imei_primary (5312232202518974440) -->
+    <skip />
+    <!-- no translation found for meid_primary (3256732684155678106) -->
+    <skip />
     <string name="mobile_network_phone_number_title" msgid="2090794402855021784">"電話號碼"</string>
     <string name="mobile_network_sim_label_color_title" msgid="2401352348041132876">"SIM 卡標籤和顏色"</string>
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"網絡啟用"</string>
@@ -4804,14 +4850,15 @@
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
     <string name="enable_16k_pages" msgid="8001470927566110689">"使用 16 KB 頁面大小啟動"</string>
     <string name="enable_16k_pages_summary" msgid="1964363364670306912">"使用 16 KB 頁面大小支援的 kernel 啟動裝置"</string>
-    <string name="confirm_enable_16k_pages_title" msgid="1286925577014793351">"由 4 KB 模式切換至 16 KB 模式"</string>
-    <string name="confirm_enable_16k_pages_text" msgid="570198382662424714">"你正處於執行 4 KB 核心的頁面通用模式，即將切換至 16 KB 模式。在此模式中無法保證軟件完整性，在啟動程式解鎖時，儲存在手機上的任何資料都可能面臨風險。這樣做會重新啟動裝置。在這類模式中，部分功能會停用，因此部分應用程式無法運作。如要將裝置返回實際工作環境模式，你需要切換回 4 KB 模式並鎖定啟動程式，然後裝置就會回復原廠設定。裝置成功啟動 Android 後，請在開發人員選項中停用 OEM 解鎖設定。"</string>
+    <string name="confirm_enable_16k_pages_title" msgid="611010487387251491">"從 4KB 模式切換為 16KB 模式"</string>
+    <string name="confirm_enable_16k_pages_text" msgid="6129208614283750541">"你正處於執行 4KB 核心的可變頁面模式，即將切換為 16KB 模式。此模式無法保證軟體完整性，且系統啟動載入程式解鎖時，手機上的資料可能面臨風險。這樣做會重新啟動裝置。在這類模式中，部分功能會停用，因此有些應用程式可能無法運作。如要讓裝置返回實際工作環境模式，必須切換回 4KB 模式並鎖定系統啟動載入程式，裝置就會恢復原廠設定。裝置成功啟動 Android 系統後，請在開發人員選項中停用 OEM 解鎖設定。"</string>
     <string name="confirm_enable_4k_pages_title" msgid="3210360137887034659">"由 16 KB 模式切換至 4 KB 模式"</string>
     <string name="confirm_enable_4k_pages_text" msgid="155070605667160083">"你正處於執行 16 KB 核心的頁面通用模式，即將切換至 4 KB 模式。在此模式中無法保證軟件完整性，在啟動程式解鎖時，儲存在手機上的任何資料都可能面臨風險。這樣做會重新啟動裝置。在這類模式中，部分功能會停用，因此部分應用程式無法運作。如要將裝置返回實際工作環境模式，你需要鎖定啟動程式，然後裝置就會回復原廠設定。裝置成功啟動 Android 後，請在開發人員選項中停用 OEM 解鎖設定。"</string>
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"無法將 kernel 更新為 16 KB 頁面兼容 kernel。"</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"正在套用變更"</string>
     <string name="confirm_format_ext4_title" msgid="6696191800594435577">"要將裝置重新格式化為 ext4 嗎？(需要這樣做才可使用 16 KB 模式)"</string>
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"你需要先將此裝置的資料分區轉換為 ext4，才能使用 16 KB 開發人員選項。在此模式中無法保證軟件完整性，在啟動程式解鎖時，儲存在手機上的任何資料都可能面臨風險。在此之後需要再重新啟動一次，才能啟用 16 KB 選項。當你處於此模式時，可以在 4 KB 和 16 KB 模式之間來回切換，每次切換都要重新啟動一次。在這類模式中，部分功能會停用，因此部分應用程式無法運作。如要將裝置返回實際工作環境模式，你需要切換回 4 KB 模式並鎖定啟動程式，然後裝置就會回復原廠設定。裝置成功啟動 Android 後，請在開發人員選項中停用 OEM 解鎖設定。裝置資料將會抹除，檔案系統會在確認後變更為 ext4。完成此步驟之後，請再次返回啟用 16 KB。"</string>
+    <string name="confirm_ext4_button_text" msgid="6045501984773738407">"清除所有資料"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"無法重新格式化並將資料分區抹除，變更為 ext4 檔案系統。"</string>
     <string name="confirm_oem_unlock_for_16k_title" msgid="5374451262432025419">"需要解鎖啟動程式才可使用 16 KB 模式"</string>
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"你需要先將此裝置的啟動程式解鎖，才能使用 16 KB 開發人員選項。在此模式中無法保證軟件完整性，在啟動程式解鎖時，儲存在手機上的任何資料都可能面臨風險。啟用 16 KB 模式時，所有使用者資料和設定都將抹除。啟動程式解鎖後需要經過兩次重新啟動，才能啟用 16 KB 選項。當你處於此模式時，可以在 4 KB 和 16 KB 模式之間來回切換，每次切換都要重新啟動一次。在這類模式中，部分功能會停用，因此部分應用程式無法運作。如要將裝置返回實際工作環境模式，你需要切換回 4 KB 模式，然後原始設備製造商 (OEM)/啟動程式就會鎖定裝置 (此操作會將裝置回復原廠設定)。請解鎖啟動程式，然後再試一次。如需有關的操作指示，請瀏覽 &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
@@ -5264,8 +5311,7 @@
     <string name="audio_streams_qr_code_scanner" msgid="525396804963685478">"如要開始收聽，請將掃瞄器對準下方的 QR 碼"</string>
     <string name="audio_streams_add_source_bad_code_state_summary" msgid="6527086906921868757">"請檢查密碼，然後再試一次"</string>
     <string name="audio_streams_add_source_failed_state_summary" msgid="3937546443978562322">"無法連線，請再試一次。"</string>
-    <string name="audio_streams_add_source_wait_for_response_summary" msgid="3763240901110974606">"正在連線…"</string>
-    <string name="audio_streams_wait_for_sync_state_summary" msgid="11905744690831864">"正在掃瞄…"</string>
+    <string name="audio_streams_connecting_summary" msgid="7237827765572331702">"正在連線…"</string>
     <string name="audio_streams_dialog_stream_is_not_available" msgid="4032878851270690546">"無法使用音訊串流"</string>
     <string name="audio_streams_is_not_playing" msgid="8480293894696007941">"此音訊串流目前沒有播放任何內容"</string>
     <string name="audio_streams_dialog_close" msgid="8177201719298408431">"關閉"</string>
@@ -5275,7 +5321,7 @@
     <string name="audio_streams_dialog_control_volume" msgid="7615062686016713544">"音訊串流將在「<xliff:g id="DEVICE_NAME">%1$s</xliff:g>」上播放。請使用此裝置控制音量。"</string>
     <string name="audio_streams_dialog_cannot_listen" msgid="4432257183698209966">"無法收聽音訊串流"</string>
     <string name="audio_streams_dialog_default_device" msgid="6159800303379303266">"已連接兼容的耳機"</string>
-    <string name="audio_streams_activity_title" msgid="9011162151277443663">"廣播"</string>
+    <string name="audio_streams_activity_title" msgid="6766869545769831935">"音訊串流"</string>
     <string name="audio_streams_no_password_summary" msgid="8976357323034830144">"無需密碼"</string>
     <string name="audio_streams_dialog_learn_more" msgid="6711241053442211345">"瞭解詳情"</string>
     <string name="audio_streams_dialog_cannot_play" msgid="1358828316927479091">"無法在「<xliff:g id="DEVICE_NAME">%1$s</xliff:g>」上播放此音訊串流。"</string>
