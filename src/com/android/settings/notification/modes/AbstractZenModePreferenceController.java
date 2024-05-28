@@ -41,7 +41,7 @@ abstract class AbstractZenModePreferenceController extends AbstractPreferenceCon
     @Nullable
     protected ZenModesBackend mBackend;
 
-    @Nullable  // only until updateZenMode() is called
+    @Nullable  // only until setZenMode() is called
     private ZenMode mZenMode;
 
     @NonNull
@@ -65,7 +65,22 @@ abstract class AbstractZenModePreferenceController extends AbstractPreferenceCon
 
     @Override
     public boolean isAvailable() {
-        return Flags.modesUi();
+        if (mZenMode != null) {
+            return Flags.modesUi() && isAvailable(mZenMode);
+        } else {
+            return Flags.modesUi();
+        }
+    }
+
+    public boolean isAvailable(@NonNull ZenMode zenMode) {
+        return true;
+    }
+
+    // Called by parent Fragment onAttach, for any methods (such as isAvailable()) that need
+    // zen mode info before onStart. Most callers should use updateZenMode instead, which will
+    // do any further necessary propagation.
+    protected final void setZenMode(@NonNull ZenMode zenMode) {
+        mZenMode = zenMode;
     }
 
     // Called by the parent Fragment onStart, which means it will happen before resume.

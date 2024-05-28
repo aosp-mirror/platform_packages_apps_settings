@@ -37,6 +37,7 @@ public class ZenModeFragment extends ZenModeFragmentBase {
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         List<AbstractPreferenceController> prefControllers = new ArrayList<>();
         prefControllers.add(new ZenModeHeaderController(context, "header", this, mBackend));
+        prefControllers.add(new ZenModeButtonPreferenceController(context, "activate", mBackend));
         prefControllers.add(new ZenModePeopleLinkPreferenceController(
                 context, "zen_mode_people", mBackend));
         prefControllers.add(new ZenModeOtherLinkPreferenceController(

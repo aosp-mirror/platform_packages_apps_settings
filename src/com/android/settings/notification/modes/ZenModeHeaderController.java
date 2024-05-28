@@ -51,6 +51,7 @@ class ZenModeHeaderController extends AbstractZenModePreferenceController {
         if (mFragment == null) {
             return;
         }
+        preference.setSelectable(false);
 
         if (mHeaderController == null) {
             final LayoutPreference pref = (LayoutPreference) preference;
