@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 The Android Open Source Project
+ * Copyright (C) 2024 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,51 +16,48 @@
 
 package com.android.settings.notification;
 
-import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
-import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
-
 import android.content.Context;
-import android.os.Vibrator;
 import android.provider.Settings;
 
+import androidx.annotation.NonNull;
+
 import com.android.server.notification.Flags;
-import com.android.settings.R;
-import com.android.settings.core.TogglePreferenceController;
+import com.android.settings.widget.SettingsMainSwitchPreferenceController;
 
-/**
- * Controls the toggle that determines whether notifications
- * should only vibrate (no sound) when the device is unlocked.
- */
-public class PoliteNotifVibrateUnlockedToggleController extends TogglePreferenceController {
+public class PoliteNotificationGlobalPreferenceController extends
+        SettingsMainSwitchPreferenceController {
 
-    public PoliteNotifVibrateUnlockedToggleController(Context context, String preferenceKey) {
+    public static final int ON = 1;
+    public static final int OFF = 0;
+    public PoliteNotificationGlobalPreferenceController(@NonNull Context context,
+            @NonNull String preferenceKey) {
         super(context, preferenceKey);
     }
 
     @Override
     public int getAvailabilityStatus() {
         // TODO: b/291897570 - remove this when the feature flag is removed!
-        if (!Flags.politeNotifications() || !Flags.vibrateWhileUnlocked()) {
-            return CONDITIONALLY_UNAVAILABLE;
+        if (Flags.politeNotifications()) {
+            return AVAILABLE;
         }
-        return mContext.getSystemService(Vibrator.class).hasVibrator() ? AVAILABLE
-                : UNSUPPORTED_ON_DEVICE;
+        return CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override
     public boolean isChecked() {
         return Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.NOTIFICATION_COOLDOWN_VIBRATE_UNLOCKED, OFF) != OFF;
+                Settings.System.NOTIFICATION_COOLDOWN_ENABLED, ON) == ON;
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
         return Settings.System.putInt(mContext.getContentResolver(),
-                Settings.System.NOTIFICATION_COOLDOWN_VIBRATE_UNLOCKED, (isChecked ? ON : OFF));
+                Settings.System.NOTIFICATION_COOLDOWN_ENABLED, (isChecked ? ON : OFF));
     }
 
     @Override
     public int getSliceHighlightMenuRes() {
-        return R.string.menu_key_accessibility;
+        // not needed since it's not sliceable
+        return NO_RES;
     }
 }
