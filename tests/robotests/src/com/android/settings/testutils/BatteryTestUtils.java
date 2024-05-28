@@ -169,7 +169,7 @@ public class BatteryTestUtils {
             Context context, long userId, long timestamp, String packageName, boolean multiple) {
         final AppUsageEventEntity entity =
                 new AppUsageEventEntity(
-                        /* uid= */ 101,
+                        /* uid= */ 101L,
                         userId,
                         timestamp,
                         /* appUsageEventType= */ 2,
