@@ -16,8 +16,6 @@
 
 package com.android.settings.notification.modes;
 
-import static java.util.Objects.requireNonNull;
-
 import android.annotation.Nullable;
 import android.app.ActivityManager;
 import android.app.AutomaticZenRule;
@@ -32,11 +30,11 @@ import android.provider.ContactsContract;
 import android.provider.Settings;
 import android.service.notification.Condition;
 import android.service.notification.ConversationChannelWrapper;
-import android.service.notification.ZenAdapters;
 import android.service.notification.ZenModeConfig;
-
 import android.util.Log;
+
 import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.R;
 
 import java.time.Duration;
@@ -162,22 +160,19 @@ class ZenModesBackend {
     }
 
     private ZenMode getManualDndMode(ZenModeConfig config) {
-        // TODO: b/333530553 - Read ZenDeviceEffects of manual DND.
+        ZenModeConfig.ZenRule manualRule = config.manualRule;
         // TODO: b/333682392 - Replace with final strings for name & trigger description
         AutomaticZenRule manualDndRule = new AutomaticZenRule.Builder(
-                mContext.getString(R.string.zen_mode_settings_title), Uri.EMPTY)
-                .setType(AutomaticZenRule.TYPE_OTHER)
-                .setZenPolicy(ZenAdapters.notificationPolicyToZenPolicy(
-                        mNotificationManager.getNotificationPolicy()))
-                .setDeviceEffects(null)
-                .setManualInvocationAllowed(true)
+                mContext.getString(R.string.zen_mode_settings_title), manualRule.conditionId)
+                .setType(manualRule.type)
+                .setZenPolicy(manualRule.zenPolicy)
+                .setDeviceEffects(manualRule.zenDeviceEffects)
+                .setManualInvocationAllowed(manualRule.allowManualInvocation)
                 .setConfigurationActivity(null) // No further settings
                 .setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_PRIORITY)
                 .build();
 
-        // Regardless of its contents, non-null manualRule means that manual rule is active.
-        return ZenMode.manualDndMode(manualDndRule,
-                config != null && config.manualRule != null);
+        return ZenMode.manualDndMode(manualDndRule, config != null && config.isManualActive());
     }
 
     private static boolean isRuleActive(String id, ZenModeConfig config) {
@@ -191,10 +186,16 @@ class ZenModesBackend {
 
     void updateMode(ZenMode mode) {
         if (mode.isManualDnd()) {
-            NotificationManager.Policy dndPolicy =
-                    new ZenModeConfig().toNotificationPolicy(requireNonNull(mode.getPolicy()));
-            mNotificationManager.setNotificationPolicy(dndPolicy, /* fromUser= */ true);
-            // TODO: b/333530553 - Update ZenDeviceEffects of the manual DND too.
+            try {
+                NotificationManager.Policy dndPolicy =
+                        new ZenModeConfig().toNotificationPolicy(mode.getPolicy());
+                mNotificationManager.setNotificationPolicy(dndPolicy, /* fromUser= */ true);
+
+                mNotificationManager.setManualZenRuleDeviceEffects(
+                        mode.getRule().getDeviceEffects());
+            } catch (Exception e) {
+                Log.w(TAG, "Error updating manual mode", e);
+            }
         } else {
             mNotificationManager.updateAutomaticZenRule(mode.getId(), mode.getRule(),
                     /* fromUser= */ true);
