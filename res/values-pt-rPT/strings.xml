@@ -556,6 +556,28 @@
     <string name="private_space_biometric_summary" msgid="4403837276018724581">"Toque para configurar"</string>
     <string name="private_space_fingerprint_unlock_title" msgid="3614016453395789051">"Desbloqueio por impressão digital para o espaço privado"</string>
     <string name="private_space_face_unlock_title" msgid="462248384776453613">"Desbloqueio facial para o espaço privado"</string>
+    <!-- no translation found for private_space_biometric_unlock_title (1978145237698659673) -->
+    <skip />
+    <!-- no translation found for private_space_fingerprint_enroll_introduction_title (5187730641333680942) -->
+    <skip />
+    <!-- no translation found for private_space_fingerprint_enroll_introduction_message (9092068873421435300) -->
+    <skip />
+    <!-- no translation found for private_space_fingerprint_enroll_introduction_footer_message (7125255484447984854) -->
+    <skip />
+    <!-- no translation found for private_space_fingerprint_enroll_finish_message (4754797926493316965) -->
+    <skip />
+    <!-- no translation found for private_space_face_enroll_introduction_title (3717541082520006032) -->
+    <skip />
+    <!-- no translation found for private_space_face_enroll_introduction_message (250239418499081821) -->
+    <skip />
+    <!-- no translation found for private_space_face_enroll_introduction_info_looking (5694757845303924042) -->
+    <skip />
+    <!-- no translation found for private_space_face_enroll_introduction_info_less_secure (8460719783943533172) -->
+    <skip />
+    <!-- no translation found for private_space_face_settings_require_attention_details (2799569069549999689) -->
+    <skip />
+    <!-- no translation found for private_space_face_settings_footer (7722256209563543711) -->
+    <skip />
     <string name="private_space_category_ways_to_unlock" msgid="4356631225316950046">"Formas de desbloquear"</string>
     <string name="private_space_screen_lock_summary" msgid="394837965365561070">"O mesmo que o bloqueio de ecrã do dispositivo"</string>
     <string name="private_space_new_lock_title" msgid="9056139964133004094">"Escolher um novo bloqueio para o espaço privado?"</string>
@@ -820,7 +842,7 @@
     <string name="bluetooth_empty_list_bluetooth_off_auto_on_available" msgid="3430864468105204282">"Com o Bluetooth ativado, o dispositivo pode comunicar com dispositivos Bluetooth próximos. As funcionalidades como a Partilha rápida e o serviço Localizar o meu dispositivo usam o Bluetooth."</string>
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Quando o Bluetooth está ativado, o dispositivo pode comunicar com outros dispositivos Bluetooth próximos.\n\nPara melhorar a experiência do dispositivo, as apps e os serviços podem continuar a procurar dispositivos próximos em qualquer altura, mesmo quando o Bluetooth está desativado. Pode usar esta opção, por exemplo, para melhorar as funcionalidades e os serviços baseados na localização. Pode alterar esta opção nas definições de procura de Bluetooth."</string>
     <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"Com o Bluetooth ativado, o dispositivo pode comunicar com dispositivos Bluetooth próximos. As funcionalidades como a Partilha rápida e o serviço Localizar o meu dispositivo usam o Bluetooth.\n\nAs apps e os serviços podem continuar a procurar dispositivos próximos em qualquer altura, mesmo quando o Bluetooth está desativado. Pode usar esta opção, por exemplo, para melhorar as funcionalidades e os serviços baseados na localização. Pode alterar esta opção nas definições de procura de Bluetooth."</string>
-    <string name="bluetooth_scan_change" msgid="1744636222637390367">"Altere"</string>
+    <string name="bluetooth_scan_change" msgid="1744636222637390367">"Alterar"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Detalhes do dispositivo"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Definições do teclado"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Endereço Bluetooth do dispositivo: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
@@ -1470,6 +1492,8 @@
     <string name="error_duplicate_apn_entry" msgid="7792928408935276618">"Entrada de APN duplicada."</string>
     <string name="error_name_empty" msgid="1258275899283079142">"O campo Nome não pode estar vazio."</string>
     <string name="error_apn_empty" msgid="7657491065443746915">"O APN não pode estar vazio."</string>
+    <!-- no translation found for error_apn_type_empty (8697781608034468813) -->
+    <skip />
     <string name="error_mcc_not3" msgid="883659545640179094">"O campo MCC tem de ter 3 dígitos."</string>
     <string name="error_mnc_not23" msgid="7642478711158474918">"O campo MNC tem de ter 2 ou 3 dígitos."</string>
     <string name="error_adding_apn_type" msgid="1324263534991467943">"O operador não permite a adição de APNs do tipo %s."</string>
@@ -3324,7 +3348,24 @@
     <string name="zen_mode_settings_category" msgid="3794956668816783447">"Permitir interrupções que emitam som"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Bloquear perturbações visuais"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Permitir sinais visuais"</string>
-    <string name="zen_mode_restrict_notifications_title" msgid="4169952466106040297">"Opções de apresentação de notificações ocultas"</string>
+    <string name="mode_interruption_filter_title" msgid="6657431939996264417">"Notificações que pode receber"</string>
+    <string name="mode_device_effects_title" msgid="5857008332618433744">"Ações adicionais"</string>
+    <string name="mode_display_settings_title" msgid="8132825978346535472">"Definições de visualização"</string>
+    <string name="mode_display_options_section" msgid="5151597748243866532">"Opções de visualização"</string>
+    <string name="mode_grayscale_title" msgid="6027553257331235461">"Escala de cinzentos"</string>
+    <string name="mode_grayscale_title_secondary_list" msgid="2662593380253642581">"escala de cinzentos"</string>
+    <string name="mode_grayscale_summary" msgid="6682099523626777038">"Mude o ecrã para preto e branco"</string>
+    <string name="mode_aod_title" msgid="5903435070341237325">"Manter o ecrã escuro"</string>
+    <string name="mode_aod_title_secondary_list" msgid="8268180392811027557">"manter o ecrã escuro"</string>
+    <string name="mode_aod_summary" msgid="7516159044827627065">"Desative o ecrã sempre ligado"</string>
+    <string name="mode_wallpaper_title" msgid="5549693923133928374">"Escurecer a imagem de fundo"</string>
+    <string name="mode_wallpaper_title_secondary_list" msgid="5034602021811580157">"escurecer a imagem de fundo"</string>
+    <string name="mode_wallpaper_summary" msgid="665480011615603784">"Filtre o brilho da imagem de fundo"</string>
+    <string name="mode_dark_theme_title" msgid="8099007897943513209">"Ativar tema escuro"</string>
+    <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"ativar tema escuro"</string>
+    <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Mude as opções do sistema operativo e das apps para darem preferência a texto claro num fundo escuro, o que pode ser mais agradável para os olhos e permite poupar significativamente a bateria em alguns dispositivos"</string>
+    <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Nenhuma alteração de visualização}=1{{effect_1}}=2{{effect_1} e {effect_2}}=3{{effect_1}, {effect_2} e {effect_3}}other{{effect_1}, {effect_2} e mais #}}"</string>
+    <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"Opções de visualização para notificações filtradas"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Quando o modo Não incomodar está ativado"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Sem som de notificações"</string>
     <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"Vê as notificações no ecrã"</string>
@@ -3335,9 +3376,9 @@
     <string name="zen_mode_restrict_notifications_custom" msgid="5469078057954463796">"Personalizadas"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"Ativar definição personalizada"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="5062332754972217218">"Remover definição personalizada"</string>
-    <string name="zen_mode_restrict_notifications_summary_muted" msgid="4750213316794189968">"Sem som de notificações"</string>
-    <string name="zen_mode_restrict_notifications_summary_custom" msgid="3918461289557316364">"Parcialmente ocultas"</string>
-    <string name="zen_mode_restrict_notifications_summary_hidden" msgid="636494600775773296">"Sem imagens ou som de notificações"</string>
+    <string name="zen_mode_restrict_notifications_summary_muted" msgid="2826459087306271381">"Notificações apresentadas"</string>
+    <string name="zen_mode_restrict_notifications_summary_custom" msgid="6455811408721183198">"Notificações parcialmente ocultas"</string>
+    <string name="zen_mode_restrict_notifications_summary_hidden" msgid="2157279412167366119">"Notificações ocultas"</string>
     <string name="zen_mode_what_to_block_title" msgid="5692710098205334164">"Restrições personalizadas"</string>
     <string name="zen_mode_block_effects_screen_on" msgid="8780668375194500987">"Quando o ecrã estiver ligado"</string>
     <string name="zen_mode_block_effects_screen_off" msgid="2291988790355612826">"Quando o ecrã estiver desligado"</string>
@@ -4505,7 +4546,8 @@
     <string name="media_output_label_title" msgid="4139048973886819148">"Reproduzir <xliff:g id="LABEL">%s</xliff:g> em"</string>
     <string name="media_output_title_without_playing" msgid="3339321669132875821">"O áudio vai ser ouvido em"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"Este dispositivo"</string>
-    <string name="media_output_audio_sharing" msgid="6531742594884809737">"Partilha de áudio"</string>
+    <!-- no translation found for media_output_audio_sharing (8169294522817470115) -->
+    <skip />
     <string name="media_out_summary_ongoing_call_state" msgid="475188726850090363">"Indisponível durante as chamadas."</string>
     <string name="take_call_on_title" msgid="1159417893879946757">"Atender chamada em"</string>
     <string name="cannot_change_apn_toast" msgid="296540724089240405">"Não é possível alterar este APN."</string>
@@ -4701,6 +4743,10 @@
     <string name="sim_onboarding_next" msgid="6415025179929475355">"Seguinte"</string>
     <string name="sim_onboarding_progressbar_turning_sim_on" msgid="1163318788393361574">"A ativar a operadora <xliff:g id="CARRIER_NAME">%1$s</xliff:g>…"</string>
     <string name="mobile_network_spn_title" msgid="3053793174495329077">"Rede móvel"</string>
+    <!-- no translation found for imei_primary (5312232202518974440) -->
+    <skip />
+    <!-- no translation found for meid_primary (3256732684155678106) -->
+    <skip />
     <string name="mobile_network_phone_number_title" msgid="2090794402855021784">"Número de telefone"</string>
     <string name="mobile_network_sim_label_color_title" msgid="2401352348041132876">"Etiqueta e cor do SIM"</string>
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"Ativação da rede"</string>
@@ -4804,14 +4850,15 @@
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
     <string name="enable_16k_pages" msgid="8001470927566110689">"Reiniciar com páginas de 16 KB"</string>
     <string name="enable_16k_pages_summary" msgid="1964363364670306912">"Reinicie com o kernel compatível com pág. de 16 KB"</string>
-    <string name="confirm_enable_16k_pages_title" msgid="1286925577014793351">"Mude do modo de 4 KB para o modo de 16 KB"</string>
-    <string name="confirm_enable_16k_pages_text" msgid="570198382662424714">"Está no modo sem página a executar um kernel de 4 KB e está a mudar para o modo de 16 KB. A integridade do software não pode ser garantida neste modo e quaisquer dados armazenados no telemóvel enquanto o carregador de arranque estiver desbloqueado podem estar em risco. Esta ação vai reiniciar o dispositivo. Algumas funcionalidades são desativadas nestes modos, por isso, algumas apps podem não funcionar. Para voltar a definir o modo de produção no dispositivo, precisa de voltar a ativar o modo de 4 KB e bloquear o carregador de arranque, o que repõe as definições de fábrica do dispositivo. Depois de o dispositivo arrancar com êxito no Android, desative o desbloqueio pelo OEM nas Opções de programador."</string>
+    <string name="confirm_enable_16k_pages_title" msgid="611010487387251491">"Mude do modo de 4 KB para o modo de 16 KB"</string>
+    <string name="confirm_enable_16k_pages_text" msgid="6129208614283750541">"Está no modo sem página a executar um kernel de 4 KB e está a mudar para o modo de 16 KB. A integridade do software não pode ser garantida neste modo e quaisquer dados armazenados no telemóvel enquanto o carregador de arranque estiver desbloqueado podem estar em risco. Esta ação vai reiniciar o dispositivo. Algumas funcionalidades são desativadas nestes modos, por isso, algumas apps podem não funcionar. Para voltar a definir o modo de produção no dispositivo, precisa de voltar a ativar o modo de 4 KB e bloquear o carregador de arranque, o que repõe as definições de fábrica do dispositivo. Depois de o dispositivo arrancar com êxito no Android, desative o desbloqueio pelo OEM nas Opções de programador."</string>
     <string name="confirm_enable_4k_pages_title" msgid="3210360137887034659">"Mude do modo de 16 KB para o modo de 4 KB"</string>
     <string name="confirm_enable_4k_pages_text" msgid="155070605667160083">"Está no modo sem página a executar um kernel de 16 KB e está a mudar para o modo de 4 KB. A integridade do software não pode ser garantida neste modo e quaisquer dados armazenados no telemóvel enquanto o carregador de arranque estiver desbloqueado podem estar em risco. Esta ação vai reiniciar o dispositivo. Algumas funcionalidades são desativadas nestes modos, por isso, algumas apps podem não funcionar. Para voltar a definir o modo de produção no dispositivo, precisa de bloquear o carregador de arranque, o que repõe as definições de fábrica do dispositivo. Depois de o dispositivo arrancar com êxito no Android, desative o desbloqueio pelo OEM nas Opções de programador."</string>
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"Falha ao fazer a atualização para o kernel compatível com páginas de 16 KB."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"A aplicar a alteração"</string>
     <string name="confirm_format_ext4_title" msgid="6696191800594435577">"Reformatar o dispositivo para ext4? (exigido para o modo de 16 KB)"</string>
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"A partição de dados deste dispositivo tem de ser convertida em ext4 antes de usar a opção de programador de 16 KB. A integridade do software não pode ser garantida neste modo e quaisquer dados armazenados no telemóvel enquanto o carregador de arranque estiver desbloqueado podem estar em risco. A ativação da opção de 16 KB exige reiniciar mais uma vez depois desta ação. Quando este modo estiver ativado, pode alternar entre os modos de 4 KB e 16 KB depois de reiniciar uma vez. Algumas funcionalidades são desativadas nestes modos, por isso, algumas apps podem não funcionar. Para voltar a definir o modo de produção no dispositivo, precisa de voltar a ativar o modo de 4 KB e, de seguida, bloquear o carregador de arranque, o que repõe as definições de fábrica do dispositivo. Depois de o dispositivo arrancar com êxito no Android, desative o desbloqueio pelo OEM nas Opções de programador. O dispositivo vai ser limpo e o sistema de ficheiros vai ser alterado para ext4 após a confirmação. Concluído este passo, ative novamente o modo de 16 KB."</string>
+    <string name="confirm_ext4_button_text" msgid="6045501984773738407">"Apagar todos os dados"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Falha ao reformatar e limpar a partição de dados para ext4."</string>
     <string name="confirm_oem_unlock_for_16k_title" msgid="5374451262432025419">"Desbloqueio do carregador de arranque necessário para o modo de 16 KB"</string>
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"Este dispositivo precisa de desbloquear o carregador de arranque antes de usar a opção de programador de 16 KB. A integridade do software não pode ser garantida neste modo e quaisquer dados armazenados no telemóvel enquanto o carregador de arranque estiver desbloqueado podem estar em risco. Todos os dados e definições do utilizador são limpos com a ativação do modo de 16 KB. Uma vez desbloqueado o carregador de arranque, a ativação da opção de 16 KB exige reiniciar duas vezes. Quando este modo estiver ativado, pode alternar entre os modos de 4 KB e 16 KB depois de reiniciar uma vez. Algumas funcionalidades são desativadas nestes modos, por isso, algumas apps podem não funcionar. Para voltar a definir o modo de produção no dispositivo, precisa de voltar a ativar o modo de 4 KB e, de seguida, bloquear o OEM/carregador de arranque (o que repõe as definições de fábrica do dispositivo). Desbloqueie o carregador de arranque e tente novamente. Pode ver instruções sobre como o fazer em &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
@@ -5264,8 +5311,7 @@
     <string name="audio_streams_qr_code_scanner" msgid="525396804963685478">"Para começar a ouvir, centre o código QR abaixo"</string>
     <string name="audio_streams_add_source_bad_code_state_summary" msgid="6527086906921868757">"Verifique a palavra-passe e tente de novo"</string>
     <string name="audio_streams_add_source_failed_state_summary" msgid="3937546443978562322">"Não é possível ligar. Tente novamente."</string>
-    <string name="audio_streams_add_source_wait_for_response_summary" msgid="3763240901110974606">"A ligar…"</string>
-    <string name="audio_streams_wait_for_sync_state_summary" msgid="11905744690831864">"A procurar…"</string>
+    <string name="audio_streams_connecting_summary" msgid="7237827765572331702">"A ligar…"</string>
     <string name="audio_streams_dialog_stream_is_not_available" msgid="4032878851270690546">"A stream de áudio não está disponível"</string>
     <string name="audio_streams_is_not_playing" msgid="8480293894696007941">"Esta stream de áudio não está a tocar nada neste momento"</string>
     <string name="audio_streams_dialog_close" msgid="8177201719298408431">"Fechar"</string>
@@ -5275,7 +5321,7 @@
     <string name="audio_streams_dialog_control_volume" msgid="7615062686016713544">"A stream de áudio vai tocar no dispositivo <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Use este dispositivo para controlar o volume."</string>
     <string name="audio_streams_dialog_cannot_listen" msgid="4432257183698209966">"Não é possível ouvir a stream de áudio"</string>
     <string name="audio_streams_dialog_default_device" msgid="6159800303379303266">"auscultadores compatíveis ligados"</string>
-    <string name="audio_streams_activity_title" msgid="9011162151277443663">"Transmissões"</string>
+    <string name="audio_streams_activity_title" msgid="6766869545769831935">"Streams de áudio"</string>
     <string name="audio_streams_no_password_summary" msgid="8976357323034830144">"Sem palavra-passe"</string>
     <string name="audio_streams_dialog_learn_more" msgid="6711241053442211345">"Saiba mais"</string>
     <string name="audio_streams_dialog_cannot_play" msgid="1358828316927479091">"Não é possível tocar esta stream de áudio no dispositivo <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
