@@ -22,7 +22,7 @@ import static android.provider.Settings.Secure.PRIVATE_SPACE_AUTO_LOCK;
 import static com.android.settings.privatespace.PrivateSpaceMaintainer.HIDE_PRIVATE_SPACE_ENTRY_POINT_DISABLED_VAL;
 import static com.android.settings.privatespace.PrivateSpaceMaintainer.HIDE_PRIVATE_SPACE_ENTRY_POINT_ENABLED_VAL;
 import static com.android.settings.privatespace.PrivateSpaceMaintainer.HIDE_PRIVATE_SPACE_SENSITIVE_NOTIFICATIONS_DISABLED_VAL;
-import static com.android.settings.privatespace.PrivateSpaceMaintainer.PRIVATE_SPACE_AUTO_LOCK_DEFAULT_VAL;
+import static com.android.settings.privatespace.PrivateSpaceMaintainer.PRIVATE_SPACE_CREATE_AUTO_LOCK_VAL;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -336,9 +336,9 @@ public class PrivateSpaceMaintainerTest {
         privateSpaceMaintainer.deletePrivateSpace();
         privateSpaceMaintainer.createPrivateSpace();
         assertThat(privateSpaceMaintainer.getPrivateSpaceAutoLockSetting())
-                .isEqualTo(PRIVATE_SPACE_AUTO_LOCK_DEFAULT_VAL);
+                .isEqualTo(PRIVATE_SPACE_CREATE_AUTO_LOCK_VAL);
         assertThat(Settings.Secure.getInt(mContentResolver, PRIVATE_SPACE_AUTO_LOCK, -1))
-                .isEqualTo(PRIVATE_SPACE_AUTO_LOCK_DEFAULT_VAL);
+                .isEqualTo(PRIVATE_SPACE_CREATE_AUTO_LOCK_VAL);
     }
 
     /**
