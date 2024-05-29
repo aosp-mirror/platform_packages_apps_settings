@@ -210,7 +210,6 @@ public class AccessibilitySettings extends DashboardFragment implements
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         initializeAllPreferences();
-        updateAllPreferences();
         registerContentMonitors();
         registerInputDeviceListener();
     }
