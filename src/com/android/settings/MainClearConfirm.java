@@ -151,15 +151,20 @@ public class MainClearConfirm extends InstrumentedFragment {
         if (pdbManager == null) {
             return false;
         }
+
         // The persistent data block will persist if the device is still being provisioned.
         if (isDeviceStillBeingProvisioned()) {
             return false;
         }
-        // If OEM unlock is allowed, the persistent data block will be wiped during FR
-        // process. If disabled, it will be wiped here instead.
-        if (isOemUnlockedAllowed()) {
+
+        // If OEM unlock is allowed, the persistent data block will be wiped during the FR
+        // process on devices without FRP Hardening. If disabled, it will be wiped here instead.
+        // On devices with FRP Hardening, the persistent data block should always be wiped,
+        // regardless of the OEM Unlocking state.
+        if (!android.security.Flags.frpEnforcement() && isOemUnlockedAllowed()) {
             return false;
         }
+
         final DevicePolicyManager dpm = (DevicePolicyManager) getActivity()
                 .getSystemService(Context.DEVICE_POLICY_SERVICE);
         // Do not erase the factory reset protection data (from Settings) if factory reset
@@ -167,6 +172,7 @@ public class MainClearConfirm extends InstrumentedFragment {
         if (!dpm.isFactoryResetProtectionPolicySupported()) {
             return false;
         }
+
         // Do not erase the factory reset protection data (from Settings) if the
         // device is an organization-owned managed profile device and a factory
         // reset protection policy has been set.
@@ -175,6 +181,7 @@ public class MainClearConfirm extends InstrumentedFragment {
                 && frpPolicy.isNotEmpty()) {
             return false;
         }
+
         return true;
     }
 

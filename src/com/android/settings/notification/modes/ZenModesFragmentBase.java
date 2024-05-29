@@ -60,17 +60,15 @@ abstract class ZenModesFragmentBase extends RestrictedDashboardFragment {
         mContext = context;
         mBackend = ZenModesBackend.getInstance(context);
         super.onAttach(context);
+        mSettingsObserver.register();
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        updateZenModeState();
-        mSettingsObserver.register();
         if (isUiRestricted()) {
             if (isUiRestrictedByOnlyAdmin()) {
                 getPreferenceScreen().removeAll();
-                return;
             } else {
                 finish();
             }
@@ -84,8 +82,8 @@ abstract class ZenModesFragmentBase extends RestrictedDashboardFragment {
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
+    public void onDetach() {
+        super.onDetach();
         mSettingsObserver.unregister();
     }
 

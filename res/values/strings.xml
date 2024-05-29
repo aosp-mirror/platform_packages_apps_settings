@@ -1262,6 +1262,8 @@
     <string name="private_space_face_settings_require_attention_details">To unlock private space, your eyes must be open. For best results, take off sunglasses.</string>
     <!-- Text shown in face settings in private space explaining what your face can be used for. [CHAR LIMIT=NONE] -->
     <string name="private_space_face_settings_footer">Use your face to unlock your private space.\n\nKeep in mind:\nYou can only have one face set up at a time. To add another face, delete the current one.\n\nLooking at the phone can unlock it when you don\u2019t intend to.\n\nYour private space can be unlocked by someone else if your device is held up to your face.\n\nYour private space can be unlocked by someone who looks a lot like you, like an identical sibling.</string>
+    <!-- Text shown on the details of a toggle which enables/disables confirmation (i.e. confirm button) each time face unlock is used for private space. [CHAR LIMIT=90] -->
+    <string name="private_space_face_settings_require_confirmation_details">When using Face Unlock, always require confirmation step</string>
     <!-- Biometric category title - biometric options for unlocking the device. [CHAR LIMIT=50] -->
     <string name="private_space_category_ways_to_unlock">Ways to unlock</string>
     <!-- Summary for one lock when device screen lock is used as private profile lock. [CHAR LIMIT=40] -->
@@ -6480,7 +6482,7 @@
     <!-- Message when there are no available trust agents to display -->
     <string name="no_trust_agents">No available trust agents</string>
 
-    <!-- Title for screen to add a device admin app [CHAR LIMIT=40] -->
+    <!-- Title for screen to add a device admin app [CHAR LIMIT=50] -->
     <string name="add_device_admin_msg">Activate device admin app?</string>
     <!-- Label for button to set the active device admin [CHAR_LIMIT=80] -->
     <string name="add_device_admin">Activate this device admin app</string>
@@ -7718,7 +7720,7 @@
     <string name="keywords_wallpaper">background, theme, grid, customize, personalize</string>
 
     <!-- List of synonyms for the Styles picker setting, used to match in settings search [CHAR LIMIT=NONE] -->
-    <string name="keywords_styles">icon, accent, color, home screen, lock screen, shortcut, clock size</string>
+    <string name="keywords_styles">icon, icons, accent, color, home screen, lock screen, shortcut, clock size</string>
 
     <!-- List of synonyms for the Default Assist and Voice input setting, used to match in settings search [CHAR LIMIT=NONE] -->
     <string name="keywords_assist_input">default, assistant</string>
@@ -8017,6 +8019,7 @@
         other {{effect_1}, {effect_2}, and # more}
         }
     </string>
+
 
     <!-- Do not disturb: restrict notifications settings title [CHAR LIMIT=80] -->
     <string name="zen_mode_restrict_notifications_title">Display options for filtered
@@ -9172,6 +9175,17 @@
     <string name="zen_mode_events_list">events</string>
     <!-- [CHAR LIMIT=50] Zen mode settings: Events (ie: calendar events) category in a list of sounds when events is the first or only element in the list. For example “Events can interrupt" or “Events and touch sounds can interrupt" -->
     <string name="zen_mode_events_list_first">Events</string>
+
+    <!-- [CHAR LIMIT=80] Zen mode settings: Title for page to select which apps allowed to interrupt dnd -->
+    <string name="zen_mode_apps_title">Apps</string>
+    <!-- [CHAR LIMIT=100] Zen mode settings: subtitle for page to select which apps allowed to interrupt dnd -->
+    <string name="zen_mode_apps_category">Apps that can interrupt</string>
+    <!-- [CHAR LIMIT=60] Zen mode settings: selected apps will be able to bypass dnd -->
+    <string name="zen_mode_apps_priority_apps">Selected apps</string>
+    <!-- [CHAR LIMIT=60] Zen mode settings: no apps will be able to bypass dnd -->
+    <string name="zen_mode_apps_none_apps">None</string>
+    <!-- [CHAR LIMIT=60] Zen mode settings: all apps will be able to bypass dnd -->
+    <string name="zen_mode_apps_all_apps">All</string>
 
     <!-- [CHAR LIMIT=100] Zen mode settings: Allow apps to bypass DND -->
     <string name="zen_mode_bypassing_apps">Allow apps to override</string>

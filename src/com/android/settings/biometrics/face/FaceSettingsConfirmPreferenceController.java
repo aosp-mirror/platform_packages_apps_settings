@@ -26,6 +26,7 @@ import android.provider.Settings;
 
 import androidx.preference.Preference;
 
+import com.android.settings.R;
 import com.android.settings.Utils;
 
 import java.util.List;
@@ -76,6 +77,11 @@ public class FaceSettingsConfirmPreferenceController extends FaceSettingsPrefere
             preference.setEnabled(false);
         } else {
             preference.setEnabled(true);
+            // Update summary for private space face settings toggle
+            if (Utils.isPrivateProfile(getUserId(), mContext)) {
+                preference.setSummary(mContext.getString(
+                        R.string.private_space_face_settings_require_confirmation_details));
+            }
         }
     }
 
