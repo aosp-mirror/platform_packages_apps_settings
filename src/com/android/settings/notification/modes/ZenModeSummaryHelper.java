@@ -395,4 +395,19 @@ class ZenModeSummaryHelper {
             return mContext.getResources().getString(R.string.zen_mode_people_some);
         }
     }
+
+    /**
+     * Generates a summary to display under the top level "Apps" preference for a mode.
+     */
+    public String getAppsSummary(ZenMode zenMode) {
+        // TODO: b/308819928 - Set summary using priority app list if Selected Apps Chosen.
+        if (zenMode.getPolicy().getAllowedChannels() == ZenPolicy.CHANNEL_POLICY_PRIORITY) {
+            return mContext.getResources().getString(R.string.zen_mode_apps_priority_apps);
+        } else if (zenMode.getPolicy().getAllowedChannels() == ZenPolicy.CHANNEL_POLICY_NONE) {
+            return mContext.getResources().getString(R.string.zen_mode_apps_none_apps);
+        } else if (zenMode.getPolicy().getAllowedChannels() == ZenMode.CHANNEL_POLICY_ALL) {
+            return mContext.getResources().getString(R.string.zen_mode_apps_all_apps);
+        }
+        return "";
+    }
 }
