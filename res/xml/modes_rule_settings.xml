@@ -16,6 +16,7 @@
   -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:settings="http://schemas.android.com/apk/res-auto"
                   android:title="@string/zen_modes_list_title" >
 
     <com.android.settingslib.widget.LayoutPreference
@@ -41,6 +42,14 @@
         <Preference
                 android:key="zen_other_settings"
                 android:title="@string/zen_category_exceptions" />
+    </PreferenceCategory>
+
+    <!-- automatic trigger section; preference changes programmatically depending on type -->
+    <PreferenceCategory
+        android:key="zen_automatic_trigger_category"
+        android:title="@string/zen_mode_automatic_trigger_title">
+        <com.android.settingslib.PrimarySwitchPreference
+            android:key="zen_automatic_trigger_settings" />
     </PreferenceCategory>
 
     <PreferenceCategory
