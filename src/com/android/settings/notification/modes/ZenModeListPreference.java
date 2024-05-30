@@ -24,6 +24,7 @@ import android.os.Bundle;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.notification.zen.ZenModeSettings;
 import com.android.settingslib.RestrictedPreference;
+import com.android.settingslib.Utils;
 
 /**
  * Preference representing a single mode item on the modes aggregator page. Clicking on this
@@ -64,10 +65,15 @@ class ZenModeListPreference extends RestrictedPreference {
         mZenMode = zenMode;
         setTitle(mZenMode.getRule().getName());
         setSummary(mZenMode.getRule().getTriggerDescription());
+        setIconSize(ICON_SIZE_SMALL);
 
         FutureUtil.whenDone(
-                mZenMode.getIcon(IconLoader.getInstance(mContext)),
-                icon -> setIcon(icon),
+                mZenMode.getIcon(mContext, IconLoader.getInstance()),
+                icon -> {
+                    icon.setTintList(
+                            Utils.getColorAttr(mContext, android.R.attr.colorControlNormal));
+                    setIcon(icon);
+                },
                 mContext.getMainExecutor());
     }
 }
