@@ -31,6 +31,7 @@ import com.android.settings.R;
 import com.android.settings.privatespace.PrivateSpaceMaintainer;
 import com.android.settings.widget.RadioButtonPickerFragment;
 import com.android.settingslib.widget.CandidateInfo;
+import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.TopIntroPreference;
 
 import java.util.ArrayList;
@@ -76,7 +77,10 @@ public class AutoLockSettingsFragment extends RadioButtonPickerFragment {
     protected void addStaticPreferences(PreferenceScreen screen) {
         final TopIntroPreference introPreference = new TopIntroPreference(screen.getContext());
         introPreference.setTitle(R.string.private_space_auto_lock_page_summary);
+        final FooterPreference footerPreference = new FooterPreference(screen.getContext());
+        footerPreference.setSummary(R.string.private_space_auto_lock_footer_message);
         screen.addPreference(introPreference);
+        screen.addPreference(footerPreference);
     }
 
     @Override
