@@ -20,6 +20,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.robolectric.shadows.ShadowLooper.shadowMainLooper;
 
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothStatusCodes;
 import android.platform.test.flag.junit.SetFlagsRule;
@@ -80,6 +81,12 @@ public class AudioSharingCallAudioDialogFragmentTest {
         mParent = new Fragment();
         FragmentController.setupFragment(
                 mParent, FragmentActivity.class, /* containerViewId= */ 0, /* bundle= */ null);
+    }
+
+    @Test
+    public void getMetricsCategory_correctValue() {
+        assertThat(mFragment.getMetricsCategory())
+                .isEqualTo(SettingsEnums.DIALOG_AUDIO_SHARING_CALL_AUDIO);
     }
 
     @Test

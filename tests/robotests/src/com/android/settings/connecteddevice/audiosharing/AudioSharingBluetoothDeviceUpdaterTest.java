@@ -26,6 +26,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
 
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
@@ -43,6 +44,7 @@ import androidx.test.core.app.ApplicationProvider;
 import com.android.settings.bluetooth.BluetoothDevicePreference;
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
 import com.android.settings.testutils.shadow.ShadowThreadUtils;
@@ -102,6 +104,7 @@ public class AudioSharingBluetoothDeviceUpdaterTest {
     private AudioSharingBluetoothDeviceUpdater mDeviceUpdater;
     private Collection<CachedBluetoothDevice> mCachedDevices;
     private ShadowBluetoothAdapter mShadowBluetoothAdapter;
+    private FakeFeatureFactory mFeatureFactory;
 
     @Before
     public void setUp() {
@@ -113,6 +116,7 @@ public class AudioSharingBluetoothDeviceUpdaterTest {
         mShadowBluetoothAdapter.setIsLeAudioBroadcastAssistantSupported(
                 BluetoothStatusCodes.FEATURE_SUPPORTED);
         ShadowBluetoothUtils.sLocalBluetoothManager = mLocalBtManager;
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mLocalBtManager = Utils.getLocalBtManager(mContext);
         when(mLocalBtManager.getCachedDeviceManager()).thenReturn(mCachedDeviceManager);
         when(mLocalBtManager.getProfileManager()).thenReturn(mLocalBtProfileManager);
@@ -253,6 +257,14 @@ public class AudioSharingBluetoothDeviceUpdaterTest {
     @Test
     public void getPreferenceKey_returnsCorrectKey() {
         assertThat(mDeviceUpdater.getPreferenceKey()).isEqualTo(PREF_KEY);
+    }
+
+    @Test
+    public void onPreferenceClick_logClick() {
+        Preference preference = new Preference(mContext);
+        mDeviceUpdater.onPreferenceClick(preference);
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(mContext, SettingsEnums.ACTION_AUDIO_SHARING_DEVICE_CLICK);
     }
 
     private void setupPreferenceMapWithDevice() {
