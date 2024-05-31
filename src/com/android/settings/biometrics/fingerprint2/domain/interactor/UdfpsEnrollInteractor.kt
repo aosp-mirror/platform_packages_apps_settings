@@ -17,6 +17,7 @@
 package com.android.settings.biometrics.fingerprint2.domain.interactor
 
 import android.graphics.PointF
+import android.util.Log
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
@@ -69,6 +70,7 @@ class UdfpsEnrollInteractorImpl(
 
   override fun onEnrollmentStep(stepsRemaining: Int, totalStep: Int) {
     val index = (totalStep - stepsRemaining) % guidedEnrollmentPoints.size
+    Log.e("JRM", "guided enroll step $index")
     _guidedEnrollment.update { guidedEnrollmentPoints[index] }
   }
 

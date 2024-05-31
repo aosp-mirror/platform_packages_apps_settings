@@ -19,6 +19,8 @@ package com.android.settings.privatespace;
 import static android.content.Intent.ACTION_PROFILE_INACCESSIBLE;
 import static android.content.Intent.ACTION_PROFILE_UNAVAILABLE;
 
+import static com.android.settings.privatespace.PrivateSpaceMaintainer.PRIVATE_SPACE_AUTO_LOCK_DEFAULT_VAL;
+
 import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -101,8 +103,13 @@ public class SetupPreFinishDelayFragment extends InstrumentedFragment {
                 };
         requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
         if (savedInstanceState == null) {
-            // TODO(b/307729746): Add a test to verify PS is locked after setup completion.
-            PrivateSpaceMaintainer.getInstance(getActivity()).lockPrivateSpace();
+            // TODO(b/307729746): Add test to verify PS is locked and auto-lock value is set to
+            // auto-lock on device lock after setup completion.
+            PrivateSpaceMaintainer privateSpaceMaintainer =
+                    PrivateSpaceMaintainer.getInstance(getActivity());
+            privateSpaceMaintainer.setPrivateSpaceAutoLockSetting(
+                    PRIVATE_SPACE_AUTO_LOCK_DEFAULT_VAL);
+            privateSpaceMaintainer.lockPrivateSpace();
         }
         return rootView;
     }

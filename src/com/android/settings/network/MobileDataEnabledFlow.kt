@@ -28,8 +28,8 @@ import kotlinx.coroutines.flow.merge
  *
  * Note: This flow can only notify enabled status changes, cannot provide the latest status.
  */
-fun Context.mobileDataEnabledFlow(subId: Int): Flow<Unit> {
-    val flow = settingsGlobalChangeFlow(Settings.Global.MOBILE_DATA)
+fun Context.mobileDataEnabledFlow(subId: Int, sendInitialValue: Boolean = true): Flow<Unit> {
+    val flow = settingsGlobalChangeFlow(Settings.Global.MOBILE_DATA, sendInitialValue)
     return when (subId) {
         SubscriptionManager.INVALID_SUBSCRIPTION_ID -> flow
         else -> {

@@ -1240,6 +1240,30 @@
     <string name="private_space_fingerprint_unlock_title">Fingerprint Unlock for private space</string>
     <!-- Title for the Face unlock for private space preference. [CHAR LIMIT=60] -->
     <string name="private_space_face_unlock_title">Face Unlock for private space</string>
+    <!-- Title for the Face and Fingerprint preference for private space. [CHAR LIMIT=60] -->
+    <string name="private_space_biometric_unlock_title">Face &amp; Fingerprint Unlock for private space</string>
+    <!-- Introduction title shown in private space fingerprint enrollment [CHAR LIMIT=90] -->
+    <string name="private_space_fingerprint_enroll_introduction_title">Set up Fingerprint Unlock for private space</string>
+    <!-- Introduction detail message shown in private space fingerprint enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name ="private_space_fingerprint_enroll_introduction_message">Use your fingerprint to unlock your private space or verify it\u2019s you, like when you sign in to apps or approve a purchase</string>
+    <!-- Introduction description message shown in private space fingerprint enrollment introduction screen. [CHAR LIMIT=NONE] -->
+    <string name="private_space_fingerprint_enroll_introduction_footer_message">Your private space can be unlocked when you don\u2019t intend to, like if someone holds up your phone to your finger.</string>
+    <!-- Message shown in fingerprint enrollment dialog once enrollment is completed (private space) [CHAR LIMIT=NONE] -->
+    <string name="private_space_fingerprint_enroll_finish_message">Use your fingerprint to unlock your private space or to approve purchases</string>
+    <!-- Introduction title shown in private space face enrollment [CHAR LIMIT=90] -->
+    <string name="private_space_face_enroll_introduction_title">Set up Face Unlock for private space</string>
+    <!-- Introduction detail message shown in private space face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name ="private_space_face_enroll_introduction_message">Use your face to unlock your private space or verify it\u2019s you, like when you sign in to apps or approve a purchase</string>
+    <!-- Message on the face enrollment introduction page for private space that provides information about what could cause the phone to unlock. [CHAR LIMIT=NONE] -->
+    <string name="private_space_face_enroll_introduction_info_looking">Looking at the phone can unlock private space even when you don\u2019t intend to. Your private space can also be unlocked by someone who looks a lot like you, like an identical sibling, or if someone holds the device up to your face.</string>
+    <!-- Message on the face enrollment introduction page for private space that provides information about the relative security of face for unlocking the phone. [CHAR LIMIT=NONE] -->
+    <string name="private_space_face_enroll_introduction_info_less_secure">Using your face to unlock your private space may be less secure than a strong pattern, PIN, or password</string>
+    <!-- Text shown on the details of a toggle which disables/enables face unlock for private space, depending if the user's eyes are open. [CHAR LIMIT=NONE] -->
+    <string name="private_space_face_settings_require_attention_details">To unlock private space, your eyes must be open. For best results, take off sunglasses.</string>
+    <!-- Text shown in face settings in private space explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="private_space_face_settings_footer">Use your face to unlock your private space.\n\nKeep in mind:\nYou can only have one face set up at a time. To add another face, delete the current one.\n\nLooking at the phone can unlock it when you don\u2019t intend to.\n\nYour private space can be unlocked by someone else if your device is held up to your face.\n\nYour private space can be unlocked by someone who looks a lot like you, like an identical sibling.</string>
+    <!-- Text shown on the details of a toggle which enables/disables confirmation (i.e. confirm button) each time face unlock is used for private space. [CHAR LIMIT=90] -->
+    <string name="private_space_face_settings_require_confirmation_details">When using Face Unlock, always require confirmation step</string>
     <!-- Biometric category title - biometric options for unlocking the device. [CHAR LIMIT=50] -->
     <string name="private_space_category_ways_to_unlock">Ways to unlock</string>
     <!-- Summary for one lock when device screen lock is used as private profile lock. [CHAR LIMIT=40] -->
@@ -1258,6 +1282,8 @@
     <string name="private_space_auto_lock_after_inactivity">5 minutes after screen timeout</string>
     <!-- Configure auto lock: Value for auto lock configuration to lock private space only after device restarts. [CHAR LIMIT=40] -->
     <string name="private_space_auto_lock_after_device_restart">Only after device restarts</string>
+    <!-- Note in footer of private space auto lock settings page that using privae apps may need a lock verification when a separate lock is used for private space. [CHAR LIMIT=NONE] -->
+    <string name="private_space_auto_lock_footer_message">If you use a different lock for your private space, you may need to verify it\u2019s you to open apps in your private space.</string>
     <!-- Title for the settings page for hiding private space. [CHAR LIMIT=45] -->
     <string name="private_space_hide_page_title">Hide private space</string>
     <!-- Title for the settings preference for hiding private space when it's locked. [CHAR LIMIT=60] -->
@@ -1289,7 +1315,7 @@
     <!-- Title for the delete private space page. [CHAR LIMIT=40] -->
     <string name="private_space_delete_header">Delete private space?</string>
     <!-- Description for hide Private Space settings page. [CHAR LIMIT=NONE] -->
-    <string name="private_space_delete_summary">Your private space will be removed from your device. All private apps and data will be deleted. You can’t undo this action.</string>
+    <string name="private_space_delete_summary">Your private space will be permanently deleted from your device. \n\nAll apps in your space and their data will also be permanently deleted from your phone\u2019s <b>internal storage</b>.</string>
     <!-- Text for the accounts added to private space that will be removed. [CHAR LIMIT=90] -->
     <string name="private_space_accounts">The following accounts will be removed from your private space:</string>
     <!-- Label for private space delete button [CHAR LIMIT=30] -->
@@ -1327,7 +1353,7 @@
     <!-- Text shown in private space setup screen which explains notifications from private space apps will not be shown when private space is locked. [CHAR LIMIT=NONE] -->
     <string name="private_space_install_apps_text"><b>Install apps</b>\nYour private space has its own Play Store so you can install apps easily.</string>
     <!-- This is info text to help explain in private space setup screen that the permissions granted to private space apps will not be shown in settings when private space is locked. [CHAR LIMIT=NONE] -->
-    <string name="private_space_apps_permission_text">Apps in your private space won\'t appear in permission manager, privacy dashboard, and other settings when your private space is locked.\n\nYour private space can\'t be moved to a new device. You\'ll need to set up another private space if you want to use it on another device.\n\nAnyone that connects your device to a computer or installs harmful apps on your device may be able to access your private space.</string>
+    <string name="private_space_apps_permission_text">Apps in your private space won\'t appear in permission manager, privacy dashboard, and other settings when your private space is locked.\n\nYour private space can\'t be restored to a new device. You\'ll need to set up another private space if you want to use it on another device.\n\nAnyone that connects your device to a computer or installs malicious apps on your device may be able to access your private space.</string>
     <!-- Private space footer link content description [CHAR LIMIT=40] -->
     <string name="private_space_learn_more_text">Learn more about private space</string>
     <string name="private_space_learn_more_url" translatable="false">https://support.google.com/android?p=private_space</string>
@@ -3408,6 +3434,8 @@
     <string name="error_name_empty">The Name field can\u2019t be empty.</string>
     <!-- APN error dialog messages: -->
     <string name="error_apn_empty">The APN can\u2019t be empty.</string>
+    <!-- APN error message about APN type cannot be empty -->
+    <string name="error_apn_type_empty">The APN type can\u2019t be empty.</string>
     <!-- APN error dialog messages: -->
     <string name="error_mcc_not3">MCC field must be 3 digits.</string>
     <!-- APN error dialog messages: -->
@@ -3474,7 +3502,7 @@
     <!-- Title for the Delete private space settings controller [CHAR LIMIT=40] -->
     <string name="reset_private_space_delete_title">Delete private space</string>
     <!-- Delete private space dialog mentioning that private space and the apps in it along with its data will be permanently deleted [CHAR LIMIT=NONE] -->
-    <string name="reset_private_space_delete_dialog">If you have a private space on your device, it will be permanently deleted and the Google Account added to your space will be removed.\n\nAll apps in your space and their data will also be permanently deleted.</string>
+    <string name="reset_private_space_delete_dialog">If you have a private space on your device, it will be permanently deleted and the Google Account added to your space will be removed. \n\nAll apps in your space and their data will also be permanently deleted from your phone\u2019s <b>internal storage</b>.</string>
 
     <!-- Main Clear -->
     <!-- Button title to factory data reset the entire device [CHAR LIMIT=NONE] -->
@@ -6456,7 +6484,7 @@
     <!-- Message when there are no available trust agents to display -->
     <string name="no_trust_agents">No available trust agents</string>
 
-    <!-- Title for screen to add a device admin app [CHAR LIMIT=40] -->
+    <!-- Title for screen to add a device admin app [CHAR LIMIT=50] -->
     <string name="add_device_admin_msg">Activate device admin app?</string>
     <!-- Label for button to set the active device admin [CHAR_LIMIT=80] -->
     <string name="add_device_admin">Activate this device admin app</string>
@@ -7694,7 +7722,7 @@
     <string name="keywords_wallpaper">background, theme, grid, customize, personalize</string>
 
     <!-- List of synonyms for the Styles picker setting, used to match in settings search [CHAR LIMIT=NONE] -->
-    <string name="keywords_styles">icon, accent, color, home screen, lock screen, shortcut, clock size</string>
+    <string name="keywords_styles">icon, icons, accent, color, home screen, lock screen, shortcut, clock size</string>
 
     <!-- List of synonyms for the Default Assist and Voice input setting, used to match in settings search [CHAR LIMIT=NONE] -->
     <string name="keywords_assist_input">default, assistant</string>
@@ -7921,6 +7949,18 @@
     <!--  Do not disturb: Title for a specific zen mode automatic rule in settings. [CHAR LIMIT=30] -->
     <string name="zen_mode_automatic_rule_settings_page_title">Schedule</string>
 
+    <!-- Do not disturb: Title for settings section describing when the rule turns on automatically [CHAR LIMIT=30] -->
+    <string name="zen_mode_automatic_trigger_title">Turn on automatically</string>
+
+    <!-- Do not disturb: Title prompting a user to choose a calendar to use for an automatic rule [CHAR LIMIT=30] -->
+    <string name="zen_mode_set_calendar_title">Add a calendar</string>
+
+    <!-- Do not disturb: Link text prompting a user to click through to setting a calendar [CHAR LIMIT=40] -->
+    <string name="zen_mode_set_calendar_link">Use your calendar</string>
+
+    <!-- Do not disturb: Title on the page where users choose a calendar to determine the schedule for an automatically-triggered DND rule. [CHAR LIMIT=30] -->
+    <string name="zen_mode_set_calendar_category_title">Schedule</string>
+
     <!--  Do not disturb: Title do not disturb settings representing automatic (scheduled) do not disturb rules. [CHAR LIMIT=30] -->
     <string name="zen_mode_schedule_category_title">Schedule</string>
 
@@ -7993,6 +8033,7 @@
         other {{effect_1}, {effect_2}, and # more}
         }
     </string>
+
 
     <!-- Do not disturb: restrict notifications settings title [CHAR LIMIT=80] -->
     <string name="zen_mode_restrict_notifications_title">Display options for filtered
@@ -8680,17 +8721,11 @@
     <string name="notif_listener_more_settings_desc">More settings are available inside this app</string>
 
     <!-- Title for Polite Notifications setting  [CHAR LIMIT=30]-->
-    <string name="notification_polite_title">Notification cooldown</string>
-    <string name="notification_polite_all_apps">Apply cooldown to all notifications</string>
-    <string name="notification_polite_all_apps_summary">Gradually lower the notification volume when you get many successive notifications from the same app</string>
-    <string name="notification_polite_conversations">Apply cooldown to conversations</string>
-    <string name="notification_polite_conversations_summary">Gradually lower the notification volume when you get many messages from the same chat within a short period of time</string>
-    <string name="notification_polite_disabled">Don\'t use notification cooldown</string>
-    <string name="notification_polite_disabled_summary">Never lower notification volume, regardless of the amount of successive notifications from the same app</string>
-    <string name="notification_polite_vibrate_unlocked">Vibrate when unlocked</string>
-    <string name="notification_polite_vibrate_unlocked_summary">Only vibrate when screen is unlocked</string>
+    <string name="notification_polite_title">Cooldown</string>
+    <string name="notification_polite_main_control_title">Use Cooldown</string>
+    <string name="notification_polite_description">When you get many notifications within a short time span, your device will minimize sound interruptions and pop-ups on the screen. Calls, alarms, and priority conversations will still alert as notmal, and all delivered notifications are easy to find in the Shade.</string>
     <string name="notification_polite_work">Apply to work profiles</string>
-    <string name="notification_polite_work_summary">Apply the notification cooldown settings from your personal profile to your work profile</string>
+    <string name="notification_polite_work_summary">Apply to work profile apps</string>
 
 
     <!-- Title for managing VR (virtual reality) helper services. [CHAR LIMIT=50] -->
@@ -9154,6 +9189,17 @@
     <string name="zen_mode_events_list">events</string>
     <!-- [CHAR LIMIT=50] Zen mode settings: Events (ie: calendar events) category in a list of sounds when events is the first or only element in the list. For example “Events can interrupt" or “Events and touch sounds can interrupt" -->
     <string name="zen_mode_events_list_first">Events</string>
+
+    <!-- [CHAR LIMIT=80] Zen mode settings: Title for page to select which apps allowed to interrupt dnd -->
+    <string name="zen_mode_apps_title">Apps</string>
+    <!-- [CHAR LIMIT=100] Zen mode settings: subtitle for page to select which apps allowed to interrupt dnd -->
+    <string name="zen_mode_apps_category">Apps that can interrupt</string>
+    <!-- [CHAR LIMIT=60] Zen mode settings: selected apps will be able to bypass dnd -->
+    <string name="zen_mode_apps_priority_apps">Selected apps</string>
+    <!-- [CHAR LIMIT=60] Zen mode settings: no apps will be able to bypass dnd -->
+    <string name="zen_mode_apps_none_apps">None</string>
+    <!-- [CHAR LIMIT=60] Zen mode settings: all apps will be able to bypass dnd -->
+    <string name="zen_mode_apps_all_apps">All</string>
 
     <!-- [CHAR LIMIT=100] Zen mode settings: Allow apps to bypass DND -->
     <string name="zen_mode_bypassing_apps">Allow apps to override</string>
@@ -11406,7 +11452,7 @@
     <string name="media_output_default_summary">This device</string>
 
     <!-- Summary for media output when audio sharing. [CHAR LIMIT=NONE] -->
-    <string name="media_output_audio_sharing">Audio sharing</string>
+    <string name="media_output_audio_sharing">Sharing audio</string>
 
     <!-- Summary for media output settings when device is in ongoing call state. -->
     <string name="media_out_summary_ongoing_call_state">Unavailable during calls</string>
@@ -11896,6 +11942,10 @@
     <string name="sim_onboarding_progressbar_turning_sim_on">Turning on <xliff:g id="carrier_name" example="Google Fi">%1$s</xliff:g>&#8230;</string>
     <!-- Title of service provider name(SPN) at mobile network settings page. [CHAR LIMIT=30] -->
     <string name="mobile_network_spn_title">Mobile network</string>
+    <!-- At the mobile network page, title for primary IMEI for multi-sim devices -->
+    <string name="imei_primary">IMEI (primary)</string>
+    <!-- At the mobile network page, title for primary MEID for multi-sim devices -->
+    <string name="meid_primary">MEID (primary)</string>
     <!-- Title of phone number at mobile network settings page. [CHAR LIMIT=30] -->
     <string name="mobile_network_phone_number_title">Phone number</string>
     <!-- Title of SIM label and color editor dialog at mobile network settings page. [CHAR LIMIT=30] -->

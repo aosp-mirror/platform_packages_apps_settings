@@ -556,6 +556,28 @@
     <string name="private_space_biometric_summary" msgid="4403837276018724581">"Tocca per configurare"</string>
     <string name="private_space_fingerprint_unlock_title" msgid="3614016453395789051">"Sblocco con l\'Impronta per lo spazio privato"</string>
     <string name="private_space_face_unlock_title" msgid="462248384776453613">"Sblocco con il Volto per lo spazio privato"</string>
+    <!-- no translation found for private_space_biometric_unlock_title (1978145237698659673) -->
+    <skip />
+    <!-- no translation found for private_space_fingerprint_enroll_introduction_title (5187730641333680942) -->
+    <skip />
+    <!-- no translation found for private_space_fingerprint_enroll_introduction_message (9092068873421435300) -->
+    <skip />
+    <!-- no translation found for private_space_fingerprint_enroll_introduction_footer_message (7125255484447984854) -->
+    <skip />
+    <!-- no translation found for private_space_fingerprint_enroll_finish_message (4754797926493316965) -->
+    <skip />
+    <!-- no translation found for private_space_face_enroll_introduction_title (3717541082520006032) -->
+    <skip />
+    <!-- no translation found for private_space_face_enroll_introduction_message (250239418499081821) -->
+    <skip />
+    <!-- no translation found for private_space_face_enroll_introduction_info_looking (5694757845303924042) -->
+    <skip />
+    <!-- no translation found for private_space_face_enroll_introduction_info_less_secure (8460719783943533172) -->
+    <skip />
+    <!-- no translation found for private_space_face_settings_require_attention_details (2799569069549999689) -->
+    <skip />
+    <!-- no translation found for private_space_face_settings_footer (7722256209563543711) -->
+    <skip />
     <string name="private_space_category_ways_to_unlock" msgid="4356631225316950046">"Modi per sbloccare"</string>
     <string name="private_space_screen_lock_summary" msgid="394837965365561070">"Uguale al blocco schermo del dispositivo"</string>
     <string name="private_space_new_lock_title" msgid="9056139964133004094">"Scegliere un nuovo blocco per lo spazio privato?"</string>
@@ -563,8 +585,7 @@
     <string name="private_space_auto_lock_title" msgid="8663409382910601261">"Blocca automaticamente lo spazio privato"</string>
     <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"Puoi bloccare automaticamente il tuo spazio privato se non hai utilizzato il dispositivo per un certo periodo di tempo"</string>
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"Ogni volta che il dispositivo si blocca"</string>
-    <!-- no translation found for private_space_auto_lock_after_inactivity (7107814517866649733) -->
-    <skip />
+    <string name="private_space_auto_lock_after_inactivity" msgid="7107814517866649733">"5 min. dopo lo spegnimento dello schermo"</string>
     <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"Solo dopo il riavvio del dispositivo"</string>
     <string name="private_space_hide_page_title" msgid="3364639176511877414">"Nascondi lo spazio privato"</string>
     <string name="private_space_hide_when_locked" msgid="6219472348124151797">"Nascondi lo spazio privato quando è bloccato"</string>
@@ -820,7 +841,7 @@
     <string name="bluetooth_empty_list_bluetooth_off" msgid="7326727272747345476">"Quando il Bluetooth è attivato, il tuo dispositivo può comunicare con altri dispositivi che si trovano nelle vicinanze"</string>
     <string name="bluetooth_empty_list_bluetooth_off_auto_on_available" msgid="3430864468105204282">"Quando il Bluetooth è attivato, il tuo dispositivo può comunicare con altri dispositivi che si trovano nelle vicinanze. Funzionalità come Quick Share e Trova il mio dispositivo usano il Bluetooth."</string>
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Quando il Bluetooth è attivo, il dispositivo può comunicare con altri dispositivi Bluetooth nelle vicinanze.\n\nPer migliorare l\'esperienza sul dispositivo, app e servizi possono comunque cercare dispositivi nelle vicinanze in qualsiasi momento, anche quando il Bluetooth non è attivo. Questo può essere utile, ad esempio, per migliorare funzionalità e servizi basati sulla posizione. Puoi modificare questa opzione nelle impostazioni relative alla scansione Bluetooth."</string>
-    <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"Quando il Bluetooth è attivato, il tuo dispositivo può comunicare con altri dispositivi che si trovano nelle vicinanze. Funzionalità come Quick Share e Trova il mio dispositivo usano il Bluetooth.\n\nApp e servizi possono comunque cercare dispositivi nelle vicinanze in qualsiasi momento, anche quando il Bluetooth non è attivo. Questo può essere utile, ad esempio, per migliorare funzionalità e servizi basati sulla posizione. Puoi modificare questa opzione nelle impostazioni di scansione Bluetooth."</string>
+    <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"Quando il Bluetooth è attivato, il tuo dispositivo può comunicare con altri dispositivi Bluetooth che si trovano nelle vicinanze. Funzionalità come Quick Share e Trova il mio dispositivo usano il Bluetooth.\n\nApp e servizi possono comunque cercare dispositivi nelle vicinanze in qualsiasi momento, anche quando il Bluetooth non è attivo. Questo può essere utile, ad esempio, per migliorare funzionalità e servizi basati sulla posizione. Puoi modificare questa opzione nelle impostazioni di ricerca di dispositivi Bluetooth."</string>
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"Modifica"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Dettagli dispositivo"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Impostazioni tastiera"</string>
@@ -989,7 +1010,7 @@
     <string name="wifi_dpp_sharing_wifi_with_this_device" msgid="7250369936882080107">"Condivisione della rete Wi‑Fi con questo dispositivo…"</string>
     <string name="wifi_dpp_connecting" msgid="2312769193202897589">"Connessione…"</string>
     <string name="wifi_dpp_share_hotspot" msgid="6186452780604755316">"Condividi hotspot"</string>
-    <string name="wifi_dpp_lockscreen_title" msgid="5246641326066972419">"Dimostra che sei tu"</string>
+    <string name="wifi_dpp_lockscreen_title" msgid="5246641326066972419">"Verifica la tua identità"</string>
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Password Wi-Fi: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"Password hotspot: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"Connessione automatica"</string>
@@ -1471,6 +1492,8 @@
     <string name="error_duplicate_apn_entry" msgid="7792928408935276618">"Esiste un duplicato della voce APN."</string>
     <string name="error_name_empty" msgid="1258275899283079142">"Il campo Nome non può essere vuoto."</string>
     <string name="error_apn_empty" msgid="7657491065443746915">"Il campo APN non può essere vuoto."</string>
+    <!-- no translation found for error_apn_type_empty (8697781608034468813) -->
+    <skip />
     <string name="error_mcc_not3" msgid="883659545640179094">"Il campo MCC deve contenere 3 cifre."</string>
     <string name="error_mnc_not23" msgid="7642478711158474918">"Il campo MNC deve contenere 2 o 3 cifre."</string>
     <string name="error_adding_apn_type" msgid="1324263534991467943">"L\'operatore non consente di aggiungere APN di tipo %s."</string>
@@ -2324,8 +2347,7 @@
     <string name="daltonizer_mode_protanomaly_title" msgid="6392456967103014723">"Rosso-verde"</string>
     <string name="daltonizer_mode_tritanomaly_title" msgid="2278786218762602022">"Blu-giallo"</string>
     <string name="daltonizer_mode_grayscale_title" msgid="152005391387952588">"Scala di grigi"</string>
-    <!-- no translation found for daltonizer_saturation_title (2999486412114963068) -->
-    <skip />
+    <string name="daltonizer_saturation_title" msgid="2999486412114963068">"Intensità"</string>
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="2117727423019598455">"Ridotta percezione del verde, deuteranomalia"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="4617032854982040748">"Ridotta percezione del rosso, protanomalia"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Tritanomalia"</string>
@@ -3306,8 +3328,7 @@
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Impostazioni dispositivi connessi"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Nessuna}=1{1 pianificazione impostata}other{# pianificazioni impostate}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Non disturbare"</string>
-    <!-- no translation found for zen_modes_list_title (5138745349253275428) -->
-    <skip />
+    <string name="zen_modes_list_title" msgid="5138745349253275428">"Modalità priorità"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Ricevi soltanto le notifiche di app e persone importanti"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Limitare le interruzioni"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Attiva Non disturbare"</string>
@@ -3327,7 +3348,42 @@
     <string name="zen_mode_settings_category" msgid="3794956668816783447">"Consenti le interruzioni sonore"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Blocca interruzioni visive"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Consenti segnali visivi"</string>
-    <string name="zen_mode_restrict_notifications_title" msgid="4169952466106040297">"Opzioni di visualizzazione per notifiche nascoste"</string>
+    <!-- no translation found for mode_interruption_filter_title (6657431939996264417) -->
+    <skip />
+    <!-- no translation found for mode_device_effects_title (5857008332618433744) -->
+    <skip />
+    <!-- no translation found for mode_display_settings_title (8132825978346535472) -->
+    <skip />
+    <!-- no translation found for mode_display_options_section (5151597748243866532) -->
+    <skip />
+    <!-- no translation found for mode_grayscale_title (6027553257331235461) -->
+    <skip />
+    <!-- no translation found for mode_grayscale_title_secondary_list (2662593380253642581) -->
+    <skip />
+    <!-- no translation found for mode_grayscale_summary (6682099523626777038) -->
+    <skip />
+    <!-- no translation found for mode_aod_title (5903435070341237325) -->
+    <skip />
+    <!-- no translation found for mode_aod_title_secondary_list (8268180392811027557) -->
+    <skip />
+    <!-- no translation found for mode_aod_summary (7516159044827627065) -->
+    <skip />
+    <!-- no translation found for mode_wallpaper_title (5549693923133928374) -->
+    <skip />
+    <!-- no translation found for mode_wallpaper_title_secondary_list (5034602021811580157) -->
+    <skip />
+    <!-- no translation found for mode_wallpaper_summary (665480011615603784) -->
+    <skip />
+    <!-- no translation found for mode_dark_theme_title (8099007897943513209) -->
+    <skip />
+    <!-- no translation found for mode_dark_theme_title_secondary_list (4761262694149772845) -->
+    <skip />
+    <!-- no translation found for mode_dark_theme_summary (8428887193785431898) -->
+    <skip />
+    <!-- no translation found for mode_display_settings_summary (5929234706883482380) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_title (4926944083757096458) -->
+    <skip />
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Quando è attiva la modalità Non disturbare"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Notifiche senza audio"</string>
     <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"Vedrai le notifiche sullo schermo"</string>
@@ -3338,9 +3394,12 @@
     <string name="zen_mode_restrict_notifications_custom" msgid="5469078057954463796">"Personalizza"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"Attiva modalità personalizzata"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="5062332754972217218">"Rimuovi impostazione personalizzata"</string>
-    <string name="zen_mode_restrict_notifications_summary_muted" msgid="4750213316794189968">"Notifiche senza audio"</string>
-    <string name="zen_mode_restrict_notifications_summary_custom" msgid="3918461289557316364">"Parzialmente nascoste"</string>
-    <string name="zen_mode_restrict_notifications_summary_hidden" msgid="636494600775773296">"Notifiche senza audio né elementi visivi"</string>
+    <!-- no translation found for zen_mode_restrict_notifications_summary_muted (2826459087306271381) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_summary_custom (6455811408721183198) -->
+    <skip />
+    <!-- no translation found for zen_mode_restrict_notifications_summary_hidden (2157279412167366119) -->
+    <skip />
     <string name="zen_mode_what_to_block_title" msgid="5692710098205334164">"Limitazioni personalizzate"</string>
     <string name="zen_mode_block_effects_screen_on" msgid="8780668375194500987">"Quando lo schermo è acceso"</string>
     <string name="zen_mode_block_effects_screen_off" msgid="2291988790355612826">"Quando lo schermo è spento"</string>
@@ -4508,7 +4567,8 @@
     <string name="media_output_label_title" msgid="4139048973886819148">"Riproduci <xliff:g id="LABEL">%s</xliff:g> su"</string>
     <string name="media_output_title_without_playing" msgid="3339321669132875821">"L\'audio verrà riprodotto su"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"Questo dispositivo"</string>
-    <string name="media_output_audio_sharing" msgid="6531742594884809737">"Condivisione audio"</string>
+    <!-- no translation found for media_output_audio_sharing (8169294522817470115) -->
+    <skip />
     <string name="media_out_summary_ongoing_call_state" msgid="475188726850090363">"Non disponibile durante le chiamate"</string>
     <string name="take_call_on_title" msgid="1159417893879946757">"Rispondi alle chiamate su"</string>
     <string name="cannot_change_apn_toast" msgid="296540724089240405">"Questo APN non può essere modificato."</string>
@@ -4704,6 +4764,10 @@
     <string name="sim_onboarding_next" msgid="6415025179929475355">"Avanti"</string>
     <string name="sim_onboarding_progressbar_turning_sim_on" msgid="1163318788393361574">"Attivazione di <xliff:g id="CARRIER_NAME">%1$s</xliff:g> in corso…"</string>
     <string name="mobile_network_spn_title" msgid="3053793174495329077">"Rete mobile"</string>
+    <!-- no translation found for imei_primary (5312232202518974440) -->
+    <skip />
+    <!-- no translation found for meid_primary (3256732684155678106) -->
+    <skip />
     <string name="mobile_network_phone_number_title" msgid="2090794402855021784">"Numero di telefono"</string>
     <string name="mobile_network_sim_label_color_title" msgid="2401352348041132876">"Etichetta e colore della SIM"</string>
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"Attivazione della rete"</string>
@@ -4807,14 +4871,18 @@
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
     <string name="enable_16k_pages" msgid="8001470927566110689">"Avvia con dimensione pagina 16 kB"</string>
     <string name="enable_16k_pages_summary" msgid="1964363364670306912">"Avvia con un kernel per dimensione pagina di 16 kB"</string>
-    <string name="confirm_enable_16k_pages_title" msgid="1286925577014793351">"Passa dalla modalità 4 kB alla modalità a 16 kB"</string>
-    <string name="confirm_enable_16k_pages_text" msgid="570198382662424714">"Sei nella modalità indipendente dalla pagina che esegue un kernel a 4 kB e stai passando alla modalità a 16 kB. Non è possibile garantire l\'integrità del software in questa modalità e i dati archiviati sullo smartphone potrebbero essere a rischio finché il bootloader è sbloccato. L\'operazione riavvierà il dispositivo. Alcune funzionalità verranno disattivate in queste modalità, pertanto alcune applicazioni potrebbero non funzionare. Per far tornare il dispositivo in modalità di produzione, dovrai tornare alla modalità a 4 kB e bloccare il bootloader, il che ripristina i dati di fabbrica del dispositivo. Dopo che Android viene avviato correttamente sul dispositivo, disattiva lo sblocco OEM nelle Opzioni sviluppatore."</string>
+    <!-- no translation found for confirm_enable_16k_pages_title (611010487387251491) -->
+    <skip />
+    <!-- no translation found for confirm_enable_16k_pages_text (6129208614283750541) -->
+    <skip />
     <string name="confirm_enable_4k_pages_title" msgid="3210360137887034659">"Passa dalla modalità a 16 kB alla modalità a 4 kB"</string>
     <string name="confirm_enable_4k_pages_text" msgid="155070605667160083">"Sei nella modalità indipendente dalla pagina che esegue un kernel a 16 kB e stai passando alla modalità a 4 kB. Non è possibile garantire l\'integrità del software in questa modalità e i dati archiviati sullo smartphone potrebbero essere a rischio finché il bootloader è sbloccato. L\'operazione riavvierà il dispositivo. Alcune funzionalità verranno disattivate in queste modalità, pertanto alcune applicazioni potrebbero non funzionare. Per far tornare il dispositivo in modalità di produzione, dovrai bloccare il bootloader, il che ripristina i dati di fabbrica del dispositivo. Dopo che Android viene avviato correttamente sul dispositivo, disattiva lo sblocco OEM nelle Opzioni sviluppatore."</string>
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"Impossibile aggiornare il kernel alla versione compatibile con pagine da 16 KB."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Applicazione della modifica in corso…"</string>
     <string name="confirm_format_ext4_title" msgid="6696191800594435577">"Riformattare il dispositivo in ext4? (Operazione necessaria per la modalità a 16 kB)"</string>
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"La partizione dei dati del dispositivo deve essere convertita in ext4 prima di usare l\'opzione sviluppatore a 16 kB. Non è possibile garantire l\'integrità del software in questa modalità e i dati archiviati sullo smartphone potrebbero essere a rischio finché il bootloader è sbloccato. Se attivi l\'opzione a 16 kB, sarà necessario un ulteriore riavvio. Una volta che sarà attiva questa modalità, potrai passare dalla modalità a 4 kB a quella a 16 kB con un solo riavvio. Alcune funzionalità verranno disattivate in queste modalità, pertanto alcune applicazioni potrebbero non funzionare. Per far tornare il dispositivo in modalità di produzione, dovrai tornare alla modalità a 4 kB e bloccare il bootloader, il che ripristina i dati di fabbrica del dispositivo. Dopo che Android viene avviato correttamente sul dispositivo, disattiva lo sblocco OEM nelle Opzioni sviluppatore. Tutti i dati verranno cancellati dal dispositivo e il file system verrà convertito in ext4 dopo la conferma. Quando termina l\'operazione, riabilita nuovamente la modalità a 16 kB."</string>
+    <!-- no translation found for confirm_ext4_button_text (6045501984773738407) -->
+    <skip />
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Impossibile riformattare e cancellare la partizione di dati in ext4."</string>
     <string name="confirm_oem_unlock_for_16k_title" msgid="5374451262432025419">"Sblocco del bootloader richiesto per la modalità a 16 kB"</string>
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"È necessario sbloccare il bootloader del dispositivo prima di usare l\'opzione sviluppatore a 16 kB. Non è possibile garantire l\'integrità del software in questa modalità e i dati archiviati sullo smartphone potrebbero essere a rischio finché il bootloader è sbloccato. Tutti i dati utente e le impostazioni verranno cancellati quando attivi la modalità a 16 kB. Dopo aver sbloccato il bootloader, l\'attivazione dell\'opzione a 16 kB richiederà due riavvii. Una volta che sarà attiva questa modalità, potrai passare dalla modalità a 4 kB a quella a 16 kB con un solo riavvio. Alcune funzionalità verranno disattivate in queste modalità, pertanto alcune applicazioni potrebbero non funzionare. Per far tornare il dispositivo in modalità di produzione, dovrai tornare alla modalità a 4 kB e bloccare il bootloader del dispositivo, il che ripristina i dati di fabbrica del dispositivo. Sblocca il bootloader e riprova. Puoi consultare le istruzioni su come fare all\'indirizzo &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
@@ -5205,8 +5273,7 @@
     <string name="fingerprint_acquired_imager_dirty_udfps" msgid="7005042288289506776">"Pulisci lo schermo vicino al sensore e riprova"</string>
     <string name="sim_category_converted_sim" msgid="8575548015816988908">"Convertita in eSIM. Rimuovi e ignora."</string>
     <string name="sync_across_devices_title" msgid="3447757705383089345">"Sincronizzazione su più dispositivi"</string>
-    <!-- no translation found for device_diagnostics_title (2914523189695727897) -->
-    <skip />
+    <string name="device_diagnostics_title" msgid="2914523189695727897">"Diagnostica dispositivo"</string>
     <string name="audio_sharing_title" msgid="4144157137502923821">"Condivisione audio"</string>
     <string name="audio_sharing_switch_title" msgid="7052827328670825701">"Condividi audio"</string>
     <string name="calls_and_alarms_device_title" msgid="6993559028175454198">"Chiamate e sveglie"</string>
@@ -5268,8 +5335,7 @@
     <string name="audio_streams_qr_code_scanner" msgid="525396804963685478">"Per iniziare ad ascoltare, centra il codice QR qui sotto"</string>
     <string name="audio_streams_add_source_bad_code_state_summary" msgid="6527086906921868757">"Controlla la password e riprova"</string>
     <string name="audio_streams_add_source_failed_state_summary" msgid="3937546443978562322">"Impossibile connettersi. Riprova."</string>
-    <string name="audio_streams_add_source_wait_for_response_summary" msgid="3763240901110974606">"Connessione in corso…"</string>
-    <string name="audio_streams_wait_for_sync_state_summary" msgid="11905744690831864">"Analisi in corso…"</string>
+    <string name="audio_streams_connecting_summary" msgid="7237827765572331702">"Connessione in corso…"</string>
     <string name="audio_streams_dialog_stream_is_not_available" msgid="4032878851270690546">"Stream audio non disponibile"</string>
     <string name="audio_streams_is_not_playing" msgid="8480293894696007941">"Al momento questo stream audio non sta riproducendo alcun contenuto"</string>
     <string name="audio_streams_dialog_close" msgid="8177201719298408431">"Chiudi"</string>
@@ -5279,7 +5345,7 @@
     <string name="audio_streams_dialog_control_volume" msgid="7615062686016713544">"Lo stream audio verrà riprodotto su <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Usa questo dispositivo per controllare il volume."</string>
     <string name="audio_streams_dialog_cannot_listen" msgid="4432257183698209966">"Impossibile ascoltare lo stream audio"</string>
     <string name="audio_streams_dialog_default_device" msgid="6159800303379303266">"cuffie compatibili connesse"</string>
-    <string name="audio_streams_activity_title" msgid="9011162151277443663">"Trasmissioni"</string>
+    <string name="audio_streams_activity_title" msgid="6766869545769831935">"Stream audio"</string>
     <string name="audio_streams_no_password_summary" msgid="8976357323034830144">"Nessuna password"</string>
     <string name="audio_streams_dialog_learn_more" msgid="6711241053442211345">"Scopri di più"</string>
     <string name="audio_streams_dialog_cannot_play" msgid="1358828316927479091">"Impossibile riprodurre questo stream audio su <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>

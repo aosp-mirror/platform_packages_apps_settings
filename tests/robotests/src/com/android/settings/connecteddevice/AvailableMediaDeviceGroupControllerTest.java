@@ -22,16 +22,17 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.robolectric.Shadows.shadowOf;
 import static org.robolectric.shadows.ShadowLooper.shadowMainLooper;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothLeBroadcast;
 import android.bluetooth.BluetoothLeBroadcastAssistant;
 import android.bluetooth.BluetoothProfile;
 import android.bluetooth.BluetoothStatusCodes;
@@ -39,11 +40,13 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
+import android.os.Looper;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.util.Pair;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
@@ -64,6 +67,7 @@ import com.android.settingslib.bluetooth.BluetoothEventManager;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.HearingAidInfo;
+import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
@@ -114,6 +118,7 @@ public class AvailableMediaDeviceGroupControllerTest {
     @Mock private LocalBluetoothManager mLocalBluetoothManager;
     @Mock private LocalBluetoothProfileManager mLocalBtProfileManager;
     @Mock private CachedBluetoothDeviceManager mCachedDeviceManager;
+    @Mock private LocalBluetoothLeBroadcast mBroadcast;
     @Mock private LocalBluetoothLeBroadcastAssistant mAssistant;
     @Mock private CachedBluetoothDevice mCachedBluetoothDevice;
     @Mock private BluetoothDevice mDevice;
@@ -122,6 +127,7 @@ public class AvailableMediaDeviceGroupControllerTest {
 
     private PreferenceGroup mPreferenceGroup;
     private Context mContext;
+    private FragmentManager mFragManager;
     private Preference mPreference;
     private AvailableMediaDeviceGroupController mAvailableMediaDeviceGroupController;
     private AudioManager mAudioManager;
@@ -137,7 +143,8 @@ public class AvailableMediaDeviceGroupControllerTest {
         mPreference = new Preference(mContext);
         mPreference.setKey(PREFERENCE_KEY_1);
         mPreferenceGroup = spy(new PreferenceScreen(mContext, null));
-        final FragmentActivity mActivity = Robolectric.setupActivity(FragmentActivity.class);
+        mFragManager =
+                Robolectric.setupActivity(FragmentActivity.class).getSupportFragmentManager();
         when(mPreferenceGroup.getPreferenceManager()).thenReturn(mPreferenceManager);
         doReturn(mPackageManager).when(mContext).getPackageManager();
         doReturn(true).when(mPackageManager).hasSystemFeature(PackageManager.FEATURE_BLUETOOTH);
@@ -163,8 +170,7 @@ public class AvailableMediaDeviceGroupControllerTest {
         mAvailableMediaDeviceGroupController.setBluetoothDeviceUpdater(
                 mAvailableMediaBluetoothDeviceUpdater);
         mAvailableMediaDeviceGroupController.setDialogHandler(mDialogHandler);
-        mAvailableMediaDeviceGroupController.setFragmentManager(
-                mActivity.getSupportFragmentManager());
+        mAvailableMediaDeviceGroupController.setFragmentManager(mFragManager);
         mAvailableMediaDeviceGroupController.mPreferenceGroup = mPreferenceGroup;
     }
 
@@ -208,14 +214,19 @@ public class AvailableMediaDeviceGroupControllerTest {
     }
 
     @Test
-    public void testRegister_audioSharingOff() {
+    public void testRegister_audioSharingFlagOff() {
         mSetFlagsRule.disableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
+        setUpBroadcast();
         // register the callback in onStart()
         mAvailableMediaDeviceGroupController.onStart(mLifecycleOwner);
+        shadowOf(Looper.getMainLooper()).idle();
 
         verify(mAvailableMediaBluetoothDeviceUpdater).registerCallback();
         verify(mEventManager).registerCallback(any(BluetoothCallback.class));
         verify(mAvailableMediaBluetoothDeviceUpdater).refreshPreference();
+        verify(mBroadcast, times(0))
+                .registerServiceCallBack(
+                        any(Executor.class), any(BluetoothLeBroadcast.Callback.class));
         verify(mAssistant, times(0))
                 .registerServiceCallBack(
                         any(Executor.class), any(BluetoothLeBroadcastAssistant.Callback.class));
@@ -223,14 +234,19 @@ public class AvailableMediaDeviceGroupControllerTest {
     }
 
     @Test
-    public void testRegister_audioSharingOn() {
+    public void testRegister_audioSharingFlagOn() {
         mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         setUpBroadcast();
         // register the callback in onStart()
         mAvailableMediaDeviceGroupController.onStart(mLifecycleOwner);
+        shadowOf(Looper.getMainLooper()).idle();
+
         verify(mAvailableMediaBluetoothDeviceUpdater).registerCallback();
         verify(mEventManager).registerCallback(any(BluetoothCallback.class));
         verify(mAvailableMediaBluetoothDeviceUpdater).refreshPreference();
+        verify(mBroadcast)
+                .registerServiceCallBack(
+                        any(Executor.class), any(BluetoothLeBroadcast.Callback.class));
         verify(mAssistant)
                 .registerServiceCallBack(
                         any(Executor.class), any(BluetoothLeBroadcastAssistant.Callback.class));
@@ -238,25 +254,29 @@ public class AvailableMediaDeviceGroupControllerTest {
     }
 
     @Test
-    public void testUnregister_audioSharingOff() {
+    public void testUnregister_audioSharingFlagOff() {
         mSetFlagsRule.disableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
+        setUpBroadcast();
         // unregister the callback in onStop()
         mAvailableMediaDeviceGroupController.onStop(mLifecycleOwner);
         verify(mAvailableMediaBluetoothDeviceUpdater).unregisterCallback();
         verify(mEventManager).unregisterCallback(any(BluetoothCallback.class));
+        verify(mBroadcast, times(0))
+                .unregisterServiceCallBack(any(BluetoothLeBroadcast.Callback.class));
         verify(mAssistant, times(0))
                 .unregisterServiceCallBack(any(BluetoothLeBroadcastAssistant.Callback.class));
         verify(mDialogHandler, times(0)).unregisterCallbacks();
     }
 
     @Test
-    public void testUnregister_audioSharingOn() {
+    public void testUnregister_audioSharingFlagOn() {
         mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         setUpBroadcast();
         // unregister the callback in onStop()
         mAvailableMediaDeviceGroupController.onStop(mLifecycleOwner);
         verify(mAvailableMediaBluetoothDeviceUpdater).unregisterCallback();
         verify(mEventManager).unregisterCallback(any(BluetoothCallback.class));
+        verify(mBroadcast).unregisterServiceCallBack(any(BluetoothLeBroadcast.Callback.class));
         verify(mAssistant)
                 .unregisterServiceCallBack(any(BluetoothLeBroadcastAssistant.Callback.class));
         verify(mDialogHandler).unregisterCallbacks();
@@ -280,25 +300,59 @@ public class AvailableMediaDeviceGroupControllerTest {
 
     @Test
     public void setTitle_inCallState_showCallStateTitle() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
+        setUpBroadcast();
         mAudioManager.setMode(AudioManager.MODE_IN_CALL);
+        when(mBroadcast.isEnabled(null)).thenReturn(true);
         mAvailableMediaDeviceGroupController.onAudioModeChanged();
+        shadowOf(Looper.getMainLooper()).idle();
 
-        assertThat(mPreferenceGroup.getTitle())
-                .isEqualTo(mContext.getText(R.string.connected_device_call_device_title));
+        assertThat(mPreferenceGroup.getTitle().toString())
+                .isEqualTo(mContext.getString(R.string.connected_device_call_device_title));
     }
 
     @Test
-    public void setTitle_notInCallState_showMediaStateTitle() {
+    public void setTitle_notInCallState_notInAudioSharing_showMediaStateTitle() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
+        setUpBroadcast();
         mAudioManager.setMode(AudioManager.MODE_NORMAL);
+        when(mBroadcast.isEnabled(null)).thenReturn(false);
         mAvailableMediaDeviceGroupController.onAudioModeChanged();
+        shadowOf(Looper.getMainLooper()).idle();
 
-        assertThat(mPreferenceGroup.getTitle())
-                .isEqualTo(mContext.getText(R.string.connected_device_media_device_title));
+        assertThat(mPreferenceGroup.getTitle().toString())
+                .isEqualTo(mContext.getString(R.string.connected_device_media_device_title));
+    }
+
+    @Test
+    public void setTitle_notInCallState_audioSharingFlagOff_showMediaStateTitle() {
+        mSetFlagsRule.disableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
+        setUpBroadcast();
+        mAudioManager.setMode(AudioManager.MODE_NORMAL);
+        when(mBroadcast.isEnabled(null)).thenReturn(true);
+        mAvailableMediaDeviceGroupController.onAudioModeChanged();
+        shadowOf(Looper.getMainLooper()).idle();
+
+        assertThat(mPreferenceGroup.getTitle().toString())
+                .isEqualTo(mContext.getString(R.string.connected_device_media_device_title));
+    }
+
+    @Test
+    public void setTitle_notInCallState_inAudioSharing_showAudioSharingMediaStateTitle() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
+        setUpBroadcast();
+        mAudioManager.setMode(AudioManager.MODE_NORMAL);
+        when(mBroadcast.isEnabled(null)).thenReturn(true);
+        mAvailableMediaDeviceGroupController.onAudioModeChanged();
+        shadowOf(Looper.getMainLooper()).idle();
+
+        assertThat(mPreferenceGroup.getTitle().toString())
+                .isEqualTo(mContext.getString(R.string.audio_sharing_media_device_group_title));
     }
 
     @Test
     public void onStart_localBluetoothManagerNull_shouldNotCrash() {
-        mAvailableMediaDeviceGroupController.mLocalBluetoothManager = null;
+        mAvailableMediaDeviceGroupController.mBtManager = null;
 
         // Shouldn't crash
         mAvailableMediaDeviceGroupController.onStart(mLifecycleOwner);
@@ -306,7 +360,7 @@ public class AvailableMediaDeviceGroupControllerTest {
 
     @Test
     public void onStop_localBluetoothManagerNull_shouldNotCrash() {
-        mAvailableMediaDeviceGroupController.mLocalBluetoothManager = null;
+        mAvailableMediaDeviceGroupController.mBtManager = null;
 
         // Shouldn't crash
         mAvailableMediaDeviceGroupController.onStop(mLifecycleOwner);
@@ -367,13 +421,14 @@ public class AvailableMediaDeviceGroupControllerTest {
                 BluetoothStatusCodes.FEATURE_SUPPORTED);
         mShadowBluetoothAdapter.setIsLeAudioBroadcastAssistantSupported(
                 BluetoothStatusCodes.FEATURE_SUPPORTED);
+        when(mLocalBtProfileManager.getLeAudioBroadcastProfile()).thenReturn(mBroadcast);
         when(mLocalBtProfileManager.getLeAudioBroadcastAssistantProfile()).thenReturn(mAssistant);
-        doNothing()
-                .when(mAssistant)
-                .registerServiceCallBack(
-                        any(Executor.class), any(BluetoothLeBroadcastAssistant.Callback.class));
-        doNothing()
-                .when(mAssistant)
-                .unregisterServiceCallBack(any(BluetoothLeBroadcastAssistant.Callback.class));
+        mAvailableMediaDeviceGroupController =
+                spy(new AvailableMediaDeviceGroupController(mContext));
+        mAvailableMediaDeviceGroupController.setBluetoothDeviceUpdater(
+                mAvailableMediaBluetoothDeviceUpdater);
+        mAvailableMediaDeviceGroupController.setDialogHandler(mDialogHandler);
+        mAvailableMediaDeviceGroupController.setFragmentManager(mFragManager);
+        mAvailableMediaDeviceGroupController.mPreferenceGroup = mPreferenceGroup;
     }
 }

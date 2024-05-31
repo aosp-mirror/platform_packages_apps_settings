@@ -21,8 +21,10 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.MotionEvent.ACTION_HOVER_MOVE
 import android.view.View
+import android.view.ViewGroup
 import android.view.WindowManager
-import android.widget.TextView
+import android.widget.Button
+import android.widget.FrameLayout
 import androidx.annotation.VisibleForTesting
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
@@ -40,7 +42,6 @@ import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enroll
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.udfps.ui.viewmodel.EducationAnimationModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.udfps.ui.viewmodel.UdfpsViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.udfps.ui.widget.UdfpsEnrollViewV2
-import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintNavigationStep
 import com.google.android.setupdesign.GlifLayout
 import kotlinx.coroutines.launch
 
@@ -71,10 +72,8 @@ class UdfpsEnrollFragment() : Fragment(R.layout.fingerprint_v2_udfps_enroll_enro
     val fragment = this
     lottie = view.findViewById(R.id.illustration_lottie)!!
     udfpsEnrollView = view.findViewById(R.id.udfps_animation_view)!!
-    val titleTextView = view.findViewById<TextView>(R.id.title)!!
-    val descriptionTextView = view.findViewById<TextView>(R.id.description)!!
+    val glifLayout: GlifLayout = view.findViewById(R.id.glif_layout)!!
 
-    val glifLayout = view.findViewById<GlifLayout>(R.id.dummy_glif_layout)!!
     val backgroundColor = glifLayout.backgroundBaseColor
     val window = requireActivity().window
     window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
@@ -82,6 +81,10 @@ class UdfpsEnrollFragment() : Fragment(R.layout.fingerprint_v2_udfps_enroll_enro
     val color = backgroundColor?.defaultColor ?: glifLayout.primaryColor.defaultColor
     window.statusBarColor = color
     view.setBackgroundColor(color)
+
+    view.findViewById<Button>(R.id.skip)?.apply {
+      setOnClickListener { viewModel.negativeButtonClicked() }
+    }
 
     udfpsEnrollView.setFinishAnimationCompleted { viewModel.finishedSuccessfully() }
 
@@ -92,32 +95,41 @@ class UdfpsEnrollFragment() : Fragment(R.layout.fingerprint_v2_udfps_enroll_enro
             udfpsEnrollView.setSensorRect(sensor.sensorBounds, sensor.sensorType)
           }
         }
-        viewLifecycleOwner.lifecycleScope.launch {
-          viewModel.headerText.collect { titleTextView.setText(it.toResource()) }
-        }
 
-        viewLifecycleOwner.lifecycleScope.launch {
-          viewModel.descriptionText.collect {
-            if (it != null) {
-              it.toResource()?.let { text -> descriptionTextView.setText(text) }
-            } else {
-              descriptionTextView.text = ""
+        launch { viewModel.overlayShown.collect { udfpsEnrollView.overlayShown() } }
+        launch { viewModel.headerText.collect { glifLayout.setHeaderText(it.toResource()) } }
+        launch {
+          viewModel.userInteractedWithSensor.collect {
+            if (!it) {
+              glifLayout.setHeaderText(R.string.security_settings_fingerprint_enroll_udfps_title)
+              glifLayout.setDescriptionText(R.string.security_settings_udfps_enroll_start_message)
             }
           }
         }
-        viewLifecycleOwner.lifecycleScope.launch {
+
+        launch {
+          viewModel.descriptionText.collect {
+            if (it != null) {
+              it.toResource()?.let { text -> glifLayout.setDescriptionText(text) }
+            } else {
+              glifLayout.descriptionText = ""
+            }
+          }
+        }
+        launch {
           viewModel.shouldShowLottie.collect {
             lottie.visibility = if (it) View.VISIBLE else View.GONE
           }
         }
 
-        viewLifecycleOwner.lifecycleScope.launch {
+        launch {
           viewModel.lottie.collect { lottieModel ->
             if (lottie.visibility == View.GONE) {
               return@collect
             }
             val resource = lottieModel.toResource()
             if (resource != null) {
+              glifLayout.descriptionTextView.visibility = View.GONE
               LottieCompositionFactory.fromRawRes(requireContext(), resource).addListener { comp ->
                 comp?.let { composition ->
                   lottie.setComposition(composition)
@@ -126,27 +138,24 @@ class UdfpsEnrollFragment() : Fragment(R.layout.fingerprint_v2_udfps_enroll_enro
                 }
               }
             } else {
+              glifLayout.descriptionTextView.visibility = View.VISIBLE
               lottie.visibility = View.INVISIBLE
             }
           }
         }
-
-        viewLifecycleOwner.lifecycleScope.launch {
-          repeatOnLifecycle(Lifecycle.State.DESTROYED) { viewModel.stopEnrollment() }
-        }
-
-        viewLifecycleOwner.lifecycleScope.launch {
+        launch {
           viewModel.accessibilityEnabled.collect { enabled ->
             udfpsEnrollView.setAccessibilityEnabled(enabled)
           }
         }
 
-        viewLifecycleOwner.lifecycleScope.launch {
+        launch {
           viewModel.enrollState.collect {
             Log.d(TAG, "EnrollEvent $it")
             if (it is FingerEnrollState.EnrollError) {
               try {
                 FingerprintErrorDialog.showInstance(it, fragment)
+                viewModel.errorDialogShown(it)
               } catch (exception: Exception) {
                 Log.e(TAG, "Exception occurred $exception")
               }
@@ -156,19 +165,40 @@ class UdfpsEnrollFragment() : Fragment(R.layout.fingerprint_v2_udfps_enroll_enro
           }
         }
 
-        viewLifecycleOwner.lifecycleScope.launch {
-          viewModel.progressSaved.collect { udfpsEnrollView.onEnrollProgressSaved(it) }
+        launch { viewModel.progressSaved.collect { udfpsEnrollView.onEnrollProgressSaved(it) } }
+
+        launch { viewModel.guidedEnrollment.collect { udfpsEnrollView.updateGuidedEnrollment(it) } }
+        launch {
+          viewModel.guidedEnrollmentSaved.collect { udfpsEnrollView.onGuidedPointSaved(it) }
         }
 
-        viewLifecycleOwner.lifecycleScope.launch {
-          viewModel.guidedEnrollment.collect {
-            glifLayout.post { udfpsEnrollView.updateGuidedEnrollment(it) }
+        launch { viewModel.shouldDrawIcon.collect { udfpsEnrollView.shouldDrawIcon(it) } }
+
+        // Hack to get the final step of enroll progress to animate.
+        launch {
+          viewModel.udfpsLastStepViewModel.shouldAnimateCompletion.collect {
+            Log.d(TAG, "Sending fake last enroll event $it")
+            udfpsEnrollView.onUdfpsEvent(it)
           }
         }
-        viewLifecycleOwner.lifecycleScope.launch {
-          viewModel.guidedEnrollmentSaved.collect {
-            glifLayout.post { udfpsEnrollView.onGuidedPointSaved(it) }
-          }
+      }
+    }
+
+    viewLifecycleOwner.lifecycleScope.launch {
+      repeatOnLifecycle(Lifecycle.State.DESTROYED) { viewModel.stopEnrollment() }
+    }
+
+    viewLifecycleOwner.lifecycleScope.launch {
+      viewModel.isLandscape.collect {
+        if (it) {
+          changeViewToLandscape()
+        }
+      }
+    }
+    viewLifecycleOwner.lifecycleScope.launch {
+      viewModel.isReverseLandscape.collect {
+        if (it) {
+          changeViewToReverseLandscape()
         }
       }
     }
@@ -183,12 +213,70 @@ class UdfpsEnrollFragment() : Fragment(R.layout.fingerprint_v2_udfps_enroll_enro
     viewModel.readyForEnrollment()
   }
 
+  private fun changeViewToReverseLandscape() {
+    Log.d(TAG, "changeViewToReverseLandscape")
+    val glifContainer = requireView().findViewById<GlifLayout>(R.id.glif_layout)!!
+    val headerView =
+      glifContainer.findViewById<View>(
+        com.google.android.setupdesign.R.id.sud_landscape_header_area
+      )
+    // The landscape_header_area nad landscape_content_area should have the same parent
+    val parent = headerView!!.parent as ViewGroup
+    val sudContentFrame =
+      glifContainer.findViewById<View>(
+        com.google.android.setupdesign.R.id.sud_landscape_content_area
+      )!!
+    val udfpsContainer = requireView().findViewById<FrameLayout>(R.id.layout_container)!!
+
+    parent.removeView(headerView)
+    parent.removeView(sudContentFrame)
+    parent.addView(sudContentFrame)
+    parent.addView(headerView)
+
+    unclipSubviewsFromParent(udfpsContainer)
+    udfpsEnrollView.requestLayout()
+  }
+
+  private fun changeViewToLandscape() {
+    Log.d(TAG, "changeViewToLandscape")
+
+    val glifContainer = requireView().findViewById<GlifLayout>(R.id.glif_layout)!!
+    val headerView =
+      glifContainer.findViewById<View>(
+        com.google.android.setupdesign.R.id.sud_landscape_header_area
+      )
+    // The landscape_header_area nad landscape_content_area should have the same parent
+    val parent = headerView!!.parent as ViewGroup
+    val sudContentFrame =
+      glifContainer.findViewById<View>(
+        com.google.android.setupdesign.R.id.sud_landscape_content_area
+      )!!
+
+    parent.removeView(headerView)
+    parent.removeView(sudContentFrame)
+    parent.addView(headerView)
+    parent.addView(sudContentFrame)
+
+    val udfpsContainer = requireView().findViewById<FrameLayout>(R.id.layout_container)!!
+    unclipSubviewsFromParent(udfpsContainer)
+    udfpsEnrollView.requestLayout()
+  }
+
+  private fun unclipSubviewsFromParent(view: View) {
+    var currParent = view.parent
+    while (currParent is ViewGroup) {
+      currParent.clipChildren = false
+      currParent.clipToPadding = false
+      currParent = currParent.parent
+    }
+  }
+
   private fun HeaderText.toResource(): Int {
     return when (this.enrollStageModel) {
       EnrollStageModel.Center,
-      EnrollStageModel.Guided,
-      EnrollStageModel.Fingertip,
-      EnrollStageModel.Unknown -> R.string.security_settings_udfps_enroll_fingertip_title
+      EnrollStageModel.Guided -> R.string.security_settings_fingerprint_enroll_repeat_title
+      EnrollStageModel.Fingertip -> R.string.security_settings_udfps_enroll_fingertip_title
+      EnrollStageModel.Unknown -> R.string.security_settings_fingerprint_enroll_udfps_title
       EnrollStageModel.LeftEdge -> R.string.security_settings_udfps_enroll_left_edge_title
       EnrollStageModel.RightEdge -> R.string.security_settings_udfps_enroll_right_edge_title
     }
@@ -218,6 +306,5 @@ class UdfpsEnrollFragment() : Fragment(R.layout.fingerprint_v2_udfps_enroll_enro
 
   companion object {
     private const val TAG = "UDFPSEnrollFragment"
-    private val navStep = FingerprintNavigationStep.Enrollment::class
   }
 }

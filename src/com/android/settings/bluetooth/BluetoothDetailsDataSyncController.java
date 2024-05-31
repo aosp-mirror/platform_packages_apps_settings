@@ -124,8 +124,12 @@ public class BluetoothDetailsDataSyncController extends BluetoothDetailsControll
 
         boolean visible = false;
         boolean checked = false;
-        PermissionSyncRequest request = mCompanionDeviceManager.getPermissionSyncRequest(
-                mAssociationId);
+        PermissionSyncRequest request = null;
+        try {
+            request = mCompanionDeviceManager.getPermissionSyncRequest(mAssociationId);
+        } catch (IllegalArgumentException e) {
+            // no-op, keep request null.
+        }
         if (request != null) {
             visible = true;
             if (request.isUserConsented()) {

@@ -19,6 +19,7 @@ package com.android.settings.privatespace;
 import static android.os.UserManager.USER_TYPE_PROFILE_PRIVATE;
 import static android.provider.Settings.Secure.HIDE_PRIVATESPACE_ENTRY_POINT;
 import static android.provider.Settings.Secure.PRIVATE_SPACE_AUTO_LOCK;
+import static android.provider.Settings.Secure.PRIVATE_SPACE_AUTO_LOCK_AFTER_DEVICE_RESTART;
 import static android.provider.Settings.Secure.PRIVATE_SPACE_AUTO_LOCK_ON_DEVICE_LOCK;
 import static android.provider.Settings.Secure.SKIP_FIRST_USE_HINTS;
 import static android.provider.Settings.Secure.USER_SETUP_COMPLETE;
@@ -70,6 +71,10 @@ public class PrivateSpaceMaintainer {
     @Settings.Secure.PrivateSpaceAutoLockOption
     public static final int PRIVATE_SPACE_AUTO_LOCK_DEFAULT_VAL =
             PRIVATE_SPACE_AUTO_LOCK_ON_DEVICE_LOCK;
+    /** Value for private space auto lock settings after private space creation. */
+    @Settings.Secure.PrivateSpaceAutoLockOption
+    public static final int PRIVATE_SPACE_CREATE_AUTO_LOCK_VAL =
+            PRIVATE_SPACE_AUTO_LOCK_AFTER_DEVICE_RESTART;
     /** Default value for the hide private space sensitive notifications on lockscreen. */
     public static final int HIDE_PRIVATE_SPACE_SENSITIVE_NOTIFICATIONS_DISABLED_VAL = 0;
 
@@ -327,7 +332,7 @@ public class PrivateSpaceMaintainer {
     @GuardedBy("this")
     private void resetPrivateSpaceSettings() {
         setHidePrivateSpaceEntryPointSetting(HIDE_PRIVATE_SPACE_ENTRY_POINT_DISABLED_VAL);
-        setPrivateSpaceAutoLockSetting(PRIVATE_SPACE_AUTO_LOCK_DEFAULT_VAL);
+        setPrivateSpaceAutoLockSetting(PRIVATE_SPACE_CREATE_AUTO_LOCK_VAL);
         setPrivateSpaceSensitiveNotificationsDefaultValue();
     }
 

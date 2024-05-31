@@ -32,7 +32,7 @@ import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import java.util.List;
 
 /** Provides a dialog to choose the active device for calls and alarms. */
-public class CallsAndAlarmsDialogFragment extends InstrumentedDialogFragment {
+public class AudioSharingCallAudioDialogFragment extends InstrumentedDialogFragment {
     private static final String TAG = "CallsAndAlarmsDialog";
     private static final String BUNDLE_KEY_DEVICE_ITEMS = "bundle_key_device_items";
 
@@ -55,7 +55,7 @@ public class CallsAndAlarmsDialogFragment extends InstrumentedDialogFragment {
     }
 
     /**
-     * Display the {@link CallsAndAlarmsDialogFragment} dialog.
+     * Display the {@link AudioSharingCallAudioDialogFragment} dialog.
      *
      * @param host The Fragment this dialog will be hosted.
      * @param deviceItems The connected device items in audio sharing session.
@@ -71,7 +71,8 @@ public class CallsAndAlarmsDialogFragment extends InstrumentedDialogFragment {
         if (manager.findFragmentByTag(TAG) == null) {
             final Bundle bundle = new Bundle();
             bundle.putParcelableList(BUNDLE_KEY_DEVICE_ITEMS, deviceItems);
-            final CallsAndAlarmsDialogFragment dialog = new CallsAndAlarmsDialogFragment();
+            final AudioSharingCallAudioDialogFragment dialog =
+                    new AudioSharingCallAudioDialogFragment();
             dialog.setArguments(bundle);
             dialog.show(manager, TAG);
         }

@@ -20,12 +20,15 @@ import static com.android.settings.notification.modes.ZenModeFragmentBase.MODE_I
 
 import android.content.Context;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.preference.Preference;
+
 import com.android.settings.core.SubSettingLauncher;
 
-public class ZenModeCallsLinkPreferenceController extends AbstractZenModePreferenceController  {
+class ZenModeCallsLinkPreferenceController extends AbstractZenModePreferenceController  {
 
-    private ZenModeSummaryHelper mSummaryHelper;
+    private final ZenModeSummaryHelper mSummaryHelper;
 
     public ZenModeCallsLinkPreferenceController(Context context, String key,
             ZenModesBackend backend) {
@@ -34,16 +37,15 @@ public class ZenModeCallsLinkPreferenceController extends AbstractZenModePrefere
     }
 
     @Override
-    public void updateState(Preference preference) {
-        super.updateState(preference);
+    public void updateState(Preference preference, @NonNull ZenMode zenMode) {
         Bundle bundle = new Bundle();
-        bundle.putString(MODE_ID, getMode().getId());
+        bundle.putString(MODE_ID, zenMode.getId());
         // TODO(b/332937635): Update metrics category
         preference.setIntent(new SubSettingLauncher(mContext)
                 .setDestination(ZenModeCallsFragment.class.getName())
                 .setSourceMetricsCategory(0)
                 .setArguments(bundle)
                 .toIntent());
-        preference.setSummary(mSummaryHelper.getCallsSettingSummary(getMode()));
+        preference.setSummary(mSummaryHelper.getCallsSettingSummary(zenMode));
     }
 }

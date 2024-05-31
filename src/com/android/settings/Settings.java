@@ -47,6 +47,7 @@ public class Settings extends SettingsActivity {
 
     public static class MemtagPageActivity extends SettingsActivity { /* empty */}
     public static class BluetoothSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class BluetoothDashboardActivity extends SettingsActivity { /* empty */ }
     public static class CreateShortcutActivity extends SettingsActivity { /* empty */ }
     public static class FaceSettingsActivity extends SettingsActivity { /* empty */ }
     /** Container for {@link FaceSettings} to use with a pre-defined task affinity. */

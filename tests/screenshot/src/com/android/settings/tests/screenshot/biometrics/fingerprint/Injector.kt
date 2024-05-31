@@ -118,7 +118,12 @@ class Injector(step: FingerprintNavigationStep.UiStep) {
 
   var rfpsIconTouchViewModel = RFPSIconTouchViewModel()
   var rfpsViewModel =
-    RFPSViewModel(fingerprintEnrollEnrollingViewModel, navigationViewModel, orientationInteractor)
+    RFPSViewModel(
+      fingerprintEnrollEnrollingViewModel,
+      navigationViewModel,
+      orientationInteractor,
+      interactor,
+    )
 
   val fingerprintEnrollConfirmationViewModel =
     FingerprintEnrollConfirmationViewModel(navigationViewModel, interactor)
@@ -151,7 +156,8 @@ class Injector(step: FingerprintNavigationStep.UiStep) {
           BackgroundViewModel::class.java -> backgroundViewModel
           RFPSIconTouchViewModel::class.java -> rfpsIconTouchViewModel
           FingerprintEnrollEnrollingViewModel::class.java -> fingerprintEnrollEnrollingViewModel
-          FingerprintEnrollConfirmationViewModel::class.java -> fingerprintEnrollConfirmationViewModel
+          FingerprintEnrollConfirmationViewModel::class.java ->
+            fingerprintEnrollConfirmationViewModel
           else -> null
         }
           as T

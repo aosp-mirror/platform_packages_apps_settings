@@ -47,10 +47,10 @@ sealed class FingerEnrollState {
   data class Acquired(val acquiredGood: Boolean) : FingerEnrollState()
 
   /** Indicates a pointer down event has occurred */
-  data object PointerDown : FingerEnrollState()
+  data class PointerDown(val fingerId: Int) : FingerEnrollState()
 
   /** Indicates a pointer up event has occurred */
-  data object PointerUp : FingerEnrollState()
+  data class PointerUp(val fingerId: Int) : FingerEnrollState()
 
   /** Indicates the overlay has shown */
   data object OverlayShown : FingerEnrollState()

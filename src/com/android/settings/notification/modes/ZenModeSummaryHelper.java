@@ -30,7 +30,6 @@ import static android.service.notification.ZenPolicy.PRIORITY_CATEGORY_MESSAGES;
 import static android.service.notification.ZenPolicy.PRIORITY_CATEGORY_REMINDERS;
 import static android.service.notification.ZenPolicy.PRIORITY_CATEGORY_REPEAT_CALLERS;
 import static android.service.notification.ZenPolicy.PRIORITY_CATEGORY_SYSTEM;
-import static android.service.notification.ZenPolicy.STATE_DISALLOW;
 import static android.service.notification.ZenPolicy.VISUAL_EFFECT_AMBIENT;
 import static android.service.notification.ZenPolicy.VISUAL_EFFECT_BADGE;
 import static android.service.notification.ZenPolicy.VISUAL_EFFECT_FULL_SCREEN_INTENT;
@@ -44,7 +43,6 @@ import android.icu.text.MessageFormat;
 import android.service.notification.ZenDeviceEffects;
 import android.service.notification.ZenPolicy;
 
-import android.util.SparseArray;
 import com.android.settings.R;
 
 import java.util.ArrayList;
@@ -54,10 +52,10 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.function.Predicate;
 
-public class ZenModeSummaryHelper {
+class ZenModeSummaryHelper {
 
-    private Context mContext;
-    private ZenModesBackend mBackend;
+    private final Context mContext;
+    private final ZenModesBackend mBackend;
 
     public ZenModeSummaryHelper(Context context, ZenModesBackend backend) {
         mContext = context;
@@ -396,5 +394,20 @@ public class ZenModeSummaryHelper {
         } else {
             return mContext.getResources().getString(R.string.zen_mode_people_some);
         }
+    }
+
+    /**
+     * Generates a summary to display under the top level "Apps" preference for a mode.
+     */
+    public String getAppsSummary(ZenMode zenMode) {
+        // TODO: b/308819928 - Set summary using priority app list if Selected Apps Chosen.
+        if (zenMode.getPolicy().getAllowedChannels() == ZenPolicy.CHANNEL_POLICY_PRIORITY) {
+            return mContext.getResources().getString(R.string.zen_mode_apps_priority_apps);
+        } else if (zenMode.getPolicy().getAllowedChannels() == ZenPolicy.CHANNEL_POLICY_NONE) {
+            return mContext.getResources().getString(R.string.zen_mode_apps_none_apps);
+        } else if (zenMode.getPolicy().getAllowedChannels() == ZenMode.CHANNEL_POLICY_ALL) {
+            return mContext.getResources().getString(R.string.zen_mode_apps_all_apps);
+        }
+        return "";
     }
 }

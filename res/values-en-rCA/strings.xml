@@ -556,6 +556,28 @@
     <string name="private_space_biometric_summary" msgid="4403837276018724581">"Tap to set up"</string>
     <string name="private_space_fingerprint_unlock_title" msgid="3614016453395789051">"Fingerprint Unlock for private space"</string>
     <string name="private_space_face_unlock_title" msgid="462248384776453613">"Face Unlock for private space"</string>
+    <!-- no translation found for private_space_biometric_unlock_title (1978145237698659673) -->
+    <skip />
+    <!-- no translation found for private_space_fingerprint_enroll_introduction_title (5187730641333680942) -->
+    <skip />
+    <!-- no translation found for private_space_fingerprint_enroll_introduction_message (9092068873421435300) -->
+    <skip />
+    <!-- no translation found for private_space_fingerprint_enroll_introduction_footer_message (7125255484447984854) -->
+    <skip />
+    <!-- no translation found for private_space_fingerprint_enroll_finish_message (4754797926493316965) -->
+    <skip />
+    <!-- no translation found for private_space_face_enroll_introduction_title (3717541082520006032) -->
+    <skip />
+    <!-- no translation found for private_space_face_enroll_introduction_message (250239418499081821) -->
+    <skip />
+    <!-- no translation found for private_space_face_enroll_introduction_info_looking (5694757845303924042) -->
+    <skip />
+    <!-- no translation found for private_space_face_enroll_introduction_info_less_secure (8460719783943533172) -->
+    <skip />
+    <!-- no translation found for private_space_face_settings_require_attention_details (2799569069549999689) -->
+    <skip />
+    <!-- no translation found for private_space_face_settings_footer (7722256209563543711) -->
+    <skip />
     <string name="private_space_category_ways_to_unlock" msgid="4356631225316950046">"Ways to unlock"</string>
     <string name="private_space_screen_lock_summary" msgid="394837965365561070">"Same as device screen lock"</string>
     <string name="private_space_new_lock_title" msgid="9056139964133004094">"Choose a new lock for private space?"</string>
@@ -1470,6 +1492,8 @@
     <string name="error_duplicate_apn_entry" msgid="7792928408935276618">"Duplicate apn entry."</string>
     <string name="error_name_empty" msgid="1258275899283079142">"The Name field can’t be empty."</string>
     <string name="error_apn_empty" msgid="7657491065443746915">"The APN can’t be empty."</string>
+    <!-- no translation found for error_apn_type_empty (8697781608034468813) -->
+    <skip />
     <string name="error_mcc_not3" msgid="883659545640179094">"MCC field must be 3 digits."</string>
     <string name="error_mnc_not23" msgid="7642478711158474918">"MNC field must be 2 or 3 digits."</string>
     <string name="error_adding_apn_type" msgid="1324263534991467943">"Carrier does not allow adding APNs of type %s."</string>
@@ -3324,7 +3348,24 @@
     <string name="zen_mode_settings_category" msgid="3794956668816783447">"Allow interruptions that make sound"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Block visual disturbances"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Allow visual signals"</string>
-    <string name="zen_mode_restrict_notifications_title" msgid="4169952466106040297">"Display options for hidden notifications"</string>
+    <string name="mode_interruption_filter_title" msgid="6657431939996264417">"Notifications that can reach you"</string>
+    <string name="mode_device_effects_title" msgid="5857008332618433744">"Additional actions"</string>
+    <string name="mode_display_settings_title" msgid="8132825978346535472">"Display settings"</string>
+    <string name="mode_display_options_section" msgid="5151597748243866532">"Display options"</string>
+    <string name="mode_grayscale_title" msgid="6027553257331235461">"Grayscale"</string>
+    <string name="mode_grayscale_title_secondary_list" msgid="2662593380253642581">"grayscale"</string>
+    <string name="mode_grayscale_summary" msgid="6682099523626777038">"Change the screen to black and white"</string>
+    <string name="mode_aod_title" msgid="5903435070341237325">"Keep the screen dark"</string>
+    <string name="mode_aod_title_secondary_list" msgid="8268180392811027557">"keep the screen dark"</string>
+    <string name="mode_aod_summary" msgid="7516159044827627065">"Disable always on display"</string>
+    <string name="mode_wallpaper_title" msgid="5549693923133928374">"Dim the wallpaper"</string>
+    <string name="mode_wallpaper_title_secondary_list" msgid="5034602021811580157">"dim the wallpaper"</string>
+    <string name="mode_wallpaper_summary" msgid="665480011615603784">"Filter the brightness of the wallpaper"</string>
+    <string name="mode_dark_theme_title" msgid="8099007897943513209">"Enable dark theme"</string>
+    <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"enable dark theme"</string>
+    <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Switch the OS and apps to prefer light text on a dark background, which may be easier on the eyes and confers significant battery savings on some devices"</string>
+    <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{No display changes}=1{{effect_1}}=2{{effect_1} and {effect_2}}=3{{effect_1}, {effect_2}, and {effect_3}}other{{effect_1}, {effect_2}, and # more}}"</string>
+    <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"Display options for filtered notifications"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"When Do Not Disturb is on"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"No sound from notifications"</string>
     <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"You will see notifications on your screen"</string>
@@ -3335,9 +3376,9 @@
     <string name="zen_mode_restrict_notifications_custom" msgid="5469078057954463796">"Custom"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"Enable custom setting"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="5062332754972217218">"Remove custom setting"</string>
-    <string name="zen_mode_restrict_notifications_summary_muted" msgid="4750213316794189968">"No sound from notifications"</string>
-    <string name="zen_mode_restrict_notifications_summary_custom" msgid="3918461289557316364">"Partially hidden"</string>
-    <string name="zen_mode_restrict_notifications_summary_hidden" msgid="636494600775773296">"No visuals or sound from notifications"</string>
+    <string name="zen_mode_restrict_notifications_summary_muted" msgid="2826459087306271381">"Notifications shown"</string>
+    <string name="zen_mode_restrict_notifications_summary_custom" msgid="6455811408721183198">"Notifications partially hidden"</string>
+    <string name="zen_mode_restrict_notifications_summary_hidden" msgid="2157279412167366119">"Notifications hidden"</string>
     <string name="zen_mode_what_to_block_title" msgid="5692710098205334164">"Custom restrictions"</string>
     <string name="zen_mode_block_effects_screen_on" msgid="8780668375194500987">"When the screen is on"</string>
     <string name="zen_mode_block_effects_screen_off" msgid="2291988790355612826">"When the screen is off"</string>
@@ -4505,7 +4546,7 @@
     <string name="media_output_label_title" msgid="4139048973886819148">"Play <xliff:g id="LABEL">%s</xliff:g> on"</string>
     <string name="media_output_title_without_playing" msgid="3339321669132875821">"Audio will play on"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"This device"</string>
-    <string name="media_output_audio_sharing" msgid="6531742594884809737">"Audio sharing"</string>
+    <string name="media_output_audio_sharing" msgid="8169294522817470115">"Sharing audio"</string>
     <string name="media_out_summary_ongoing_call_state" msgid="475188726850090363">"Unavailable during calls"</string>
     <string name="take_call_on_title" msgid="1159417893879946757">"Take call on"</string>
     <string name="cannot_change_apn_toast" msgid="296540724089240405">"This APN cannot be changed."</string>
@@ -4701,6 +4742,8 @@
     <string name="sim_onboarding_next" msgid="6415025179929475355">"Next"</string>
     <string name="sim_onboarding_progressbar_turning_sim_on" msgid="1163318788393361574">"Turning on <xliff:g id="CARRIER_NAME">%1$s</xliff:g>…"</string>
     <string name="mobile_network_spn_title" msgid="3053793174495329077">"Mobile network"</string>
+    <string name="imei_primary" msgid="5312232202518974440">"IMEI (primary)"</string>
+    <string name="meid_primary" msgid="3256732684155678106">"MEID (primary)"</string>
     <string name="mobile_network_phone_number_title" msgid="2090794402855021784">"Phone number"</string>
     <string name="mobile_network_sim_label_color_title" msgid="2401352348041132876">"SIM label and color"</string>
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"Network activation"</string>
@@ -4804,14 +4847,15 @@
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
     <string name="enable_16k_pages" msgid="8001470927566110689">"Boot with 16KB page size"</string>
     <string name="enable_16k_pages_summary" msgid="1964363364670306912">"Boot device using 16KB page size supported kernel"</string>
-    <string name="confirm_enable_16k_pages_title" msgid="1286925577014793351">"Switch from 4kB mode to 16KB mode"</string>
-    <string name="confirm_enable_16k_pages_text" msgid="570198382662424714">"You are in the page-agnostic mode running a 4kB kernel, and you are switching to the 16KB mode. Software integrity cannot be guaranteed in this mode, and any data stored on the phone while the bootloader is unlocked may be at risk. This will reboot the device. Some features will be disabled in these modes, so some applications may not work. To return the device to production mode, you would need to then, switch back to the 4kB mode and lock the bootloader, which factory resets the device. After the device successfully boots into Android, disable OEM unlocking in Developer options."</string>
+    <string name="confirm_enable_16k_pages_title" msgid="611010487387251491">"Switch from 4KB mode to 16KB mode"</string>
+    <string name="confirm_enable_16k_pages_text" msgid="6129208614283750541">"You are in the page-agnostic mode running a 4KB kernel, and you are switching to the 16KB mode. Software integrity cannot be guaranteed in this mode, and any data stored on the phone while the bootloader is unlocked may be at risk. This will reboot the device. Some features will be disabled in these modes, so some applications may not work. To return the device to production mode, you would need to then, switch back to the 4KB mode and lock the bootloader, which factory resets the device. After the device successfully boots into Android, disable OEM unlocking in Developer options."</string>
     <string name="confirm_enable_4k_pages_title" msgid="3210360137887034659">"Switch from 16KB mode to 4KB mode"</string>
     <string name="confirm_enable_4k_pages_text" msgid="155070605667160083">"You are in the page-agnostic mode running a 16KB kernel, and you are switching to the 4KB mode. Software integrity cannot be guaranteed in this mode, and any data stored on the phone while the bootloader is unlocked may be at risk. This will reboot the device. Some features will be disabled in these modes, so some applications may not work. To return the device to production mode, you would need to then lock the bootloader, which factory resets the device. After the device successfully boots into Android, disable OEM unlocking in Developer options."</string>
     <string name="toast_16k_update_failed_text" msgid="8888858987184345567">"Failed to update kernel to 16KB pages compatible kernel."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Applying change"</string>
     <string name="confirm_format_ext4_title" msgid="6696191800594435577">"Reformat device to ext4? (required for 16KB mode)"</string>
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"This device’s data partition needs to be converted to ext4 before using the 16KB developer option. Software integrity cannot be guaranteed in this mode, and any data stored on the phone while the bootloader is unlocked may be at risk. Activating the 16KB option will require one more reboot after this. Once you are in this mode, you can switch back and forth between 4KB and 16KB mode with a single reboot. Some features will be disabled in these modes, so some applications may not work. To return the device to production mode, you would need to switch back to 4KB mode and then lock the bootloader, which factory resets the device. After the device successfully boots into Android, disable OEM unlocking in Developer options. The device will be wiped and the filesystem will be changed to ext4 after confirmation. After this completes, please come back to enable 16KB again."</string>
+    <string name="confirm_ext4_button_text" msgid="6045501984773738407">"Erase all data"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Failed to reformat and wipe the data partition to ext4."</string>
     <string name="confirm_oem_unlock_for_16k_title" msgid="5374451262432025419">"Bootloader Unlock Required for 16KB Mode"</string>
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"This device needs to have the bootloader unlocked before using the 16KB developer option. Software integrity cannot be guaranteed in this mode, and any data stored on the phone while the bootloader is unlocked may be at risk. All user data and settings will be wiped when activating 16KB mode. Once the bootloader is unlocked, activating the 16KB option will require two reboots. Once you are in this mode, you can switch back and forth between 4KB and 16KB mode with a single reboot. Some features will be disabled in these modes, so some applications may not work. To return the device to production mode, you would need to switch back to 4KB mode and then OEM/bootloader lock (which factory resets) the device. Please unlock the bootloader and try again. You can see instructions for how to do this at &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
@@ -5264,8 +5308,7 @@
     <string name="audio_streams_qr_code_scanner" msgid="525396804963685478">"To start listening, center the QR code below"</string>
     <string name="audio_streams_add_source_bad_code_state_summary" msgid="6527086906921868757">"Check password and try again"</string>
     <string name="audio_streams_add_source_failed_state_summary" msgid="3937546443978562322">"Can\'t connect. Try again."</string>
-    <string name="audio_streams_add_source_wait_for_response_summary" msgid="3763240901110974606">"Connecting…"</string>
-    <string name="audio_streams_wait_for_sync_state_summary" msgid="11905744690831864">"Scanning…"</string>
+    <string name="audio_streams_connecting_summary" msgid="7237827765572331702">"Connecting…"</string>
     <string name="audio_streams_dialog_stream_is_not_available" msgid="4032878851270690546">"Audio stream isn\'t available"</string>
     <string name="audio_streams_is_not_playing" msgid="8480293894696007941">"This audio stream isn\'t playing anything right now"</string>
     <string name="audio_streams_dialog_close" msgid="8177201719298408431">"Close"</string>
@@ -5275,7 +5318,7 @@
     <string name="audio_streams_dialog_control_volume" msgid="7615062686016713544">"The audio stream will play on <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Use this device to control the volume."</string>
     <string name="audio_streams_dialog_cannot_listen" msgid="4432257183698209966">"Can\'t listen to audio stream"</string>
     <string name="audio_streams_dialog_default_device" msgid="6159800303379303266">"connected compatible headphones"</string>
-    <string name="audio_streams_activity_title" msgid="9011162151277443663">"Broadcasts"</string>
+    <string name="audio_streams_activity_title" msgid="6766869545769831935">"Audio streams"</string>
     <string name="audio_streams_no_password_summary" msgid="8976357323034830144">"No password"</string>
     <string name="audio_streams_dialog_learn_more" msgid="6711241053442211345">"Learn more"</string>
     <string name="audio_streams_dialog_cannot_play" msgid="1358828316927479091">"Can\'t play this audio stream on <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>

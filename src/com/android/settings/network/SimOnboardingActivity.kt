@@ -401,6 +401,11 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
         Log.d(TAG, "startSimSwitching:")
 
         var targetSubInfo = onboardingService.targetSubInfo
+        if(onboardingService.doesTargetSimActive) {
+            Log.d(TAG, "target subInfo is already active")
+            callbackListener(CallbackType.CALLBACK_SETUP_NAME)
+            return
+        }
         targetSubInfo?.let {
             var removedSubInfo = onboardingService.getRemovedSim()
             if (targetSubInfo.isEmbedded) {
@@ -494,14 +499,13 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
         SettingsAlertDialogWithIcon(
             onDismissRequest = cancelAction,
             confirmButton = AlertDialogButton(
-                getString(R.string.sim_onboarding_setup),
-                nextAction
+                text = getString(R.string.sim_onboarding_setup),
+                onClick = nextAction,
             ),
-            dismissButton =
-                AlertDialogButton(
-                    getString(R.string.sim_onboarding_close),
-                    cancelAction
-                ),
+            dismissButton = AlertDialogButton(
+                text = getString(R.string.sim_onboarding_close),
+                onClick = cancelAction,
+            ),
             title = stringResource(R.string.sim_onboarding_dialog_starting_title),
             icon = {
                 Icon(

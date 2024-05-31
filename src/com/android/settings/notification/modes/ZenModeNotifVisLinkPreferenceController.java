@@ -20,12 +20,16 @@ import static com.android.settings.notification.modes.ZenModeFragmentBase.MODE_I
 
 import android.content.Context;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.preference.Preference;
+
 import com.android.settings.core.SubSettingLauncher;
 
-public class ZenModeNotifVisLinkPreferenceController extends AbstractZenModePreferenceController  {
+class ZenModeNotifVisLinkPreferenceController extends AbstractZenModePreferenceController  {
 
-    ZenModeSummaryHelper mSummaryBuilder;
+    private final ZenModeSummaryHelper mSummaryBuilder;
+
     public ZenModeNotifVisLinkPreferenceController(Context context, String key,
             ZenModesBackend backend) {
         super(context, key, backend);
@@ -33,10 +37,9 @@ public class ZenModeNotifVisLinkPreferenceController extends AbstractZenModePref
     }
 
     @Override
-    public void updateState(Preference preference) {
-        super.updateState(preference);
+    public void updateState(Preference preference, @NonNull ZenMode zenMode) {
         Bundle bundle = new Bundle();
-        bundle.putString(MODE_ID, getMode().getId());
+        bundle.putString(MODE_ID, zenMode.getId());
         // TODO(b/332937635): Update metrics category
         preference.setIntent(new SubSettingLauncher(mContext)
                 .setDestination(ZenModeNotifVisFragment.class.getName())
@@ -46,7 +49,7 @@ public class ZenModeNotifVisLinkPreferenceController extends AbstractZenModePref
     }
 
     @Override
-    public CharSequence getSummary() {
-        return mSummaryBuilder.getBlockedEffectsSummary(getMode());
+    public CharSequence getSummary(@NonNull ZenMode zenMode) {
+        return mSummaryBuilder.getBlockedEffectsSummary(zenMode);
     }
 }

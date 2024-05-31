@@ -20,12 +20,15 @@ import static com.android.settings.notification.modes.ZenModeFragmentBase.MODE_I
 
 import android.content.Context;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.preference.Preference;
+
 import com.android.settings.core.SubSettingLauncher;
 
-public class ZenModeDisplayLinkPreferenceController extends AbstractZenModePreferenceController  {
+class ZenModeDisplayLinkPreferenceController extends AbstractZenModePreferenceController  {
 
-    ZenModeSummaryHelper mSummaryHelper;
+    private final ZenModeSummaryHelper mSummaryHelper;
 
     public ZenModeDisplayLinkPreferenceController(Context context, String key,
             ZenModesBackend backend) {
@@ -34,10 +37,9 @@ public class ZenModeDisplayLinkPreferenceController extends AbstractZenModePrefe
     }
 
     @Override
-    public void updateState(Preference preference) {
-        super.updateState(preference);
+    void updateState(Preference preference, @NonNull ZenMode zenMode) {
         Bundle bundle = new Bundle();
-        bundle.putString(MODE_ID, getMode().getId());
+        bundle.putString(MODE_ID, zenMode.getId());
         // TODO(b/332937635): Update metrics category
         preference.setIntent(new SubSettingLauncher(mContext)
                 .setDestination(ZenModeDisplayFragment.class.getName())
@@ -47,7 +49,7 @@ public class ZenModeDisplayLinkPreferenceController extends AbstractZenModePrefe
     }
 
     @Override
-    public CharSequence getSummary() {
-        return mSummaryHelper.getDisplayEffectsSummary(getMode());
+    public CharSequence getSummary(@NonNull ZenMode zenMode) {
+        return mSummaryHelper.getDisplayEffectsSummary(zenMode);
     }
 }

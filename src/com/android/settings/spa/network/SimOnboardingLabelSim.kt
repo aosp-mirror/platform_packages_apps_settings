@@ -28,6 +28,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import com.android.settings.R
 import com.android.settings.network.SimOnboardingService
@@ -104,9 +105,9 @@ private fun LabelSimPreference(
                 value = titleSimName,
                 label = stringResource(R.string.sim_onboarding_label_sim_dialog_label),
                 placeholder = {Text(text = originalSimCarrierName)},
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth().testTag("contentInput")
             ) {
-                titleSimName = if (it.isEmpty()) originalSimCarrierName else it
+                titleSimName = if (it.matches(Regex("^\\s*$"))) originalSimCarrierName else it
             }
         },
     )

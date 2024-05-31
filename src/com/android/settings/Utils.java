@@ -1401,6 +1401,16 @@ public final class Utils extends com.android.settingslib.Utils {
     }
 
     /**
+     * Returns true if the userId is a private profile, false otherwise.
+     */
+    public static boolean isPrivateProfile(int userId, @NonNull Context context) {
+        final UserManager userManager = context.getSystemService(UserManager.class);
+        UserInfo userInfo = userManager.getUserInfo(userId);
+        return Flags.allowPrivateProfile() && android.multiuser.Flags.enablePrivateSpaceFeatures()
+                && userInfo.isPrivateProfile();
+    }
+
+    /**
      * Enable new edge to edge feature.
      *
      * @param activity the Activity need to setup the edge to edge feature.
