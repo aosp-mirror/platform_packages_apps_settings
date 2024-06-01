@@ -17,6 +17,7 @@ package com.android.settings.connecteddevice;
 
 import static com.android.settingslib.Utils.isAudioModeOngoingCall;
 
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeBroadcast;
 import android.bluetooth.BluetoothLeBroadcastAssistant;
@@ -47,6 +48,7 @@ import com.android.settings.connecteddevice.audiosharing.AudioSharingDialogHandl
 import com.android.settings.connecteddevice.audiosharing.AudioSharingUtils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.bluetooth.BluetoothCallback;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
@@ -279,6 +281,8 @@ public class AvailableMediaDeviceGroupController extends BasePreferenceControlle
                 ((BluetoothDevicePreference) preference).getBluetoothDevice();
         if (AudioSharingUtils.isFeatureEnabled() && mDialogHandler != null) {
             mDialogHandler.handleDeviceConnected(cachedDevice, /* userTriggered= */ true);
+            FeatureFactory.getFeatureFactory().getMetricsFeatureProvider()
+                    .action(mContext, SettingsEnums.ACTION_MEDIA_DEVICE_CLICK);
         } else {
             cachedDevice.setActive();
         }

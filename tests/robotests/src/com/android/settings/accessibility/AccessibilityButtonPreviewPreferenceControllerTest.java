@@ -19,18 +19,18 @@ package com.android.settings.accessibility;
 import static android.provider.Settings.Secure.ACCESSIBILITY_BUTTON_MODE_FLOATING_MENU;
 import static android.provider.Settings.Secure.ACCESSIBILITY_BUTTON_MODE_NAVIGATION_BAR;
 
-import static com.android.settings.testutils.ImageTestUtils.drawableToBitmap;
-
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.robolectric.Shadows.shadowOf;
 
 import android.content.ContentResolver;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.provider.Settings;
 
+import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
@@ -45,6 +45,7 @@ import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.shadows.ShadowDrawable;
 
 /** Tests for {@link AccessibilityButtonPreviewPreferenceController}. */
 @RunWith(RobolectricTestRunner.class)
@@ -52,18 +53,22 @@ public class AccessibilityButtonPreviewPreferenceControllerTest {
 
     @Rule
     public MockitoRule mocks = MockitoJUnit.rule();
-
+    private static final String PREF_KEY = "test_key";
     @Spy
     private final Context mContext = ApplicationProvider.getApplicationContext();
     @Mock
     private ContentResolver mContentResolver;
+    @Mock
+    private PreferenceScreen mPreferenceScreen;
     private AccessibilityButtonPreviewPreferenceController mController;
 
     @Before
     public void setUp() {
         when(mContext.getContentResolver()).thenReturn(mContentResolver);
-        mController = new AccessibilityButtonPreviewPreferenceController(mContext, "test_key");
+        mController = new AccessibilityButtonPreviewPreferenceController(mContext, PREF_KEY);
         mController.mIllustrationPreference = new IllustrationPreference(mContext);
+        when(mPreferenceScreen.findPreference(PREF_KEY))
+                .thenReturn(mController.mIllustrationPreference);
     }
 
     @Test
@@ -73,29 +78,31 @@ public class AccessibilityButtonPreviewPreferenceControllerTest {
 
         mController.mContentObserver.onChange(false);
 
-        final Drawable navigationBarDrawable = mContext.getDrawable(
-                R.drawable.a11y_button_navigation);
-        assertThat(drawableToBitmap(mController.mIllustrationPreference.getImageDrawable()).sameAs(
-                drawableToBitmap(navigationBarDrawable))).isTrue();
+        ShadowDrawable drawable = shadowOf(mController.mIllustrationPreference.getImageDrawable());
+        assertThat(drawable.getCreatedFromResId())
+                .isEqualTo(R.drawable.accessibility_shortcut_type_navbar);
     }
 
     @Test
-    public void onChange_updatePreviewPreferenceWithConfig_expectedPreviewDrawable() {
+    public void onChange_updateFloatingMenuSize_expectedPreviewDrawable() {
         Settings.Secure.putInt(mContentResolver,
                 Settings.Secure.ACCESSIBILITY_BUTTON_MODE, ACCESSIBILITY_BUTTON_MODE_FLOATING_MENU);
         Settings.Secure.putInt(mContentResolver,
                 Settings.Secure.ACCESSIBILITY_FLOATING_MENU_SIZE, /* small size */ 0);
-        Settings.Secure.putFloat(mContentResolver,
-                Settings.Secure.ACCESSIBILITY_FLOATING_MENU_OPACITY, 0.1f);
+        mController.displayPreference(mPreferenceScreen);
+        Drawable actualDrawable = mController.mIllustrationPreference.getImageDrawable();
+        ShadowDrawable shadowDrawable = shadowOf(actualDrawable);
+        assertThat(shadowDrawable.getCreatedFromResId())
+                .isEqualTo(R.drawable.accessibility_shortcut_type_fab_size_small_preview);
 
+        Settings.Secure.putInt(mContentResolver,
+                Settings.Secure.ACCESSIBILITY_FLOATING_MENU_SIZE, /* large size */ 1);
         mController.mContentObserver.onChange(false);
 
-        final Drawable smallFloatingMenuWithTenOpacityDrawable =
-                AccessibilityLayerDrawable.createLayerDrawable(mContext,
-                        R.drawable.a11y_button_preview_small_floating_menu, 10);
-        assertThat(
-                mController.mIllustrationPreference.getImageDrawable().getConstantState())
-                .isEqualTo(smallFloatingMenuWithTenOpacityDrawable.getConstantState());
+        actualDrawable = mController.mIllustrationPreference.getImageDrawable();
+        shadowDrawable = shadowOf(actualDrawable);
+        assertThat(shadowDrawable.getCreatedFromResId())
+                .isEqualTo(R.drawable.accessibility_shortcut_type_fab_size_large_preview);
     }
 
     @Test
