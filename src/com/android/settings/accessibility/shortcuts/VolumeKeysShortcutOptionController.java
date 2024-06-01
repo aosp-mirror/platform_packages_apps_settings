@@ -53,7 +53,7 @@ public class VolumeKeysShortcutOptionController extends ShortcutOptionPreference
             shortcutOptionPreference.setSummary(
                     R.string.accessibility_shortcut_edit_dialog_summary_hardware);
             shortcutOptionPreference.setIntroImageResId(
-                    R.drawable.a11y_shortcut_type_hardware);
+                    R.drawable.accessibility_shortcut_type_volume_keys);
         }
     }
 

@@ -46,6 +46,8 @@ public class ZenModeFragment extends ZenModeFragmentBase {
                 context, "zen_other_settings", mBackend));
         prefControllers.add(new ZenModeDisplayLinkPreferenceController(
                 context, "mode_display_settings", mBackend));
+        prefControllers.add(new ZenModeSetTriggerLinkPreferenceController(context,
+                "zen_automatic_trigger_category", mBackend));
         return prefControllers;
     }
 
