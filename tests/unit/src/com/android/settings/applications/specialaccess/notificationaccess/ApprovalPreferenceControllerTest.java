@@ -189,8 +189,8 @@ public class ApprovalPreferenceControllerTest {
 
     @Test
     @EnableFlags(Flags.FLAG_MODES_API)
-    @Ignore("b/339550695")
     public void disable() {
+        when(mNm.isNotificationPolicyAccessGrantedForPackage(anyString())).thenReturn(false);
         mController.disable(mCn);
         verify(mFeatureFactory.metricsFeatureProvider).action(
                 mContext,
