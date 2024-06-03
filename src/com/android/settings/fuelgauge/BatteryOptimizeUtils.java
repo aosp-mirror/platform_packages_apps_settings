@@ -182,6 +182,14 @@ public class BatteryOptimizeUtils {
                 && getAppOptimizationMode() != BatteryOptimizeUtils.MODE_RESTRICTED;
     }
 
+    String getPackageName() {
+        return mPackageName == null ? UNKNOWN_PACKAGE : mPackageName;
+    }
+
+    int getUid() {
+        return mUid;
+    }
+
     /** Gets the list of installed applications. */
     public static ArraySet<ApplicationInfo> getInstalledApplications(
             Context context, IPackageManager ipm) {
@@ -255,10 +263,6 @@ public class BatteryOptimizeUtils {
                     allowlistBackend,
                     Action.RESET);
         }
-    }
-
-    String getPackageName() {
-        return mPackageName == null ? UNKNOWN_PACKAGE : mPackageName;
     }
 
     static int getMode(AppOpsManager appOpsManager, int uid, String packageName) {
