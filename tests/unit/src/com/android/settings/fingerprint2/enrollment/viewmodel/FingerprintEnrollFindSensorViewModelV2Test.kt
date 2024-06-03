@@ -18,6 +18,11 @@ package com.android.settings.fingerprint2.enrollment.viewmodel
 
 import android.content.Context
 import android.content.res.Configuration
+import android.hardware.biometrics.ComponentInfoInternal
+import android.hardware.biometrics.SensorLocationInternal
+import android.hardware.biometrics.SensorProperties
+import android.hardware.fingerprint.FingerprintSensorProperties
+import android.hardware.fingerprint.FingerprintSensorPropertiesInternal
 import android.view.Surface
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.core.app.ApplicationProvider
@@ -33,9 +38,7 @@ import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.Fing
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintNavigationStep
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintNavigationViewModel
 import com.android.settings.testutils2.FakeFingerprintManagerInteractor
-import com.android.systemui.biometrics.shared.model.FingerprintSensor
-import com.android.systemui.biometrics.shared.model.FingerprintSensorType
-import com.android.systemui.biometrics.shared.model.SensorStrength
+import com.android.systemui.biometrics.shared.model.toFingerprintSensor
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -94,7 +97,19 @@ class FingerprintEnrollFindSensorViewModelV2Test {
         )
         .create(FingerprintGatekeeperViewModel::class.java)
 
-    val sensor = FingerprintSensor(1, SensorStrength.STRONG, 5, FingerprintSensorType.POWER_BUTTON)
+    val sensor =
+      FingerprintSensorPropertiesInternal(
+          0 /* sensorId */,
+          SensorProperties.STRENGTH_STRONG,
+          5 /* maxEnrollmentsPerUser */,
+          listOf<ComponentInfoInternal>(),
+          FingerprintSensorProperties.TYPE_POWER_BUTTON,
+          false /* halControlsIllumination */,
+          true /* resetLockoutRequiresHardwareAuthToken */,
+          listOf<SensorLocationInternal>(SensorLocationInternal.DEFAULT),
+        )
+        .toFingerprintSensor()
+
     val fingerprintFlowViewModel = FingerprintFlowViewModel(Default)
     navigationViewModel =
       FingerprintNavigationViewModel(
@@ -130,7 +145,8 @@ class FingerprintEnrollFindSensorViewModelV2Test {
     orientationInteractor =
       object : OrientationInteractor {
         override val orientation: Flow<Int> = flowOf(Configuration.ORIENTATION_LANDSCAPE)
-        override val rotation: Flow<Int> = flowOf(Surface.ROTATION_0)
+          override val rotation: Flow<Int> = flowOf(Surface.ROTATION_0)
+          override val rotationFromDefault: Flow<Int> = flowOf(Surface.ROTATION_0)
         override fun getRotationFromDefault(rotation: Int): Int = rotation
       }
     underTest =
@@ -159,12 +175,17 @@ class FingerprintEnrollFindSensorViewModelV2Test {
   fun udfpsLottieInfo() =
     testScope.runTest {
       fakeFingerprintManagerInteractor.sensorProp =
-        FingerprintSensor(
-          0 /* sensorId */,
-          SensorStrength.STRONG,
-          5,
-          FingerprintSensorType.UDFPS_OPTICAL,
-        )
+        FingerprintSensorPropertiesInternal(
+            0 /* sensorId */,
+            SensorProperties.STRENGTH_STRONG,
+            5 /* maxEnrollmentsPerUser */,
+            listOf<ComponentInfoInternal>(),
+            FingerprintSensorProperties.TYPE_UDFPS_OPTICAL,
+            false /* halControlsIllumination */,
+            true /* resetLockoutRequiresHardwareAuthToken */,
+            listOf<SensorLocationInternal>(SensorLocationInternal.DEFAULT),
+          )
+          .toFingerprintSensor()
 
       var udfpsLottieInfo: Boolean? = null
       val job = launch { underTest.udfpsLottieInfo.collect { udfpsLottieInfo = it } }
@@ -218,7 +239,17 @@ class FingerprintEnrollFindSensorViewModelV2Test {
   fun rfpsAnimation() =
     testScope.runTest {
       fakeFingerprintManagerInteractor.sensorProp =
-        FingerprintSensor(0 /* sensorId */, SensorStrength.STRONG, 5, FingerprintSensorType.REAR)
+        FingerprintSensorPropertiesInternal(
+            0 /* sensorId */,
+            SensorProperties.STRENGTH_STRONG,
+            5 /* maxEnrollmentsPerUser */,
+            listOf<ComponentInfoInternal>(),
+            FingerprintSensorProperties.TYPE_REAR,
+            false /* halControlsIllumination */,
+            true /* resetLockoutRequiresHardwareAuthToken */,
+            listOf<SensorLocationInternal>(SensorLocationInternal.DEFAULT),
+          )
+          .toFingerprintSensor()
 
       var showRfpsAnimation: Boolean? = null
       val job = launch { underTest.showRfpsAnimation.collect { showRfpsAnimation = it } }
@@ -232,12 +263,17 @@ class FingerprintEnrollFindSensorViewModelV2Test {
   fun showPrimaryButton_ifUdfps() =
     testScope.runTest {
       fakeFingerprintManagerInteractor.sensorProp =
-        FingerprintSensor(
-          0 /* sensorId */,
-          SensorStrength.STRONG,
-          5,
-          FingerprintSensorType.UDFPS_OPTICAL,
-        )
+        FingerprintSensorPropertiesInternal(
+            0 /* sensorId */,
+            SensorProperties.STRENGTH_STRONG,
+            5 /* maxEnrollmentsPerUser */,
+            listOf<ComponentInfoInternal>(),
+            FingerprintSensorProperties.TYPE_UDFPS_OPTICAL,
+            false /* halControlsIllumination */,
+            true /* resetLockoutRequiresHardwareAuthToken */,
+            listOf<SensorLocationInternal>(SensorLocationInternal.DEFAULT),
+          )
+          .toFingerprintSensor()
 
       var showPrimaryButton: Boolean? = null
       val job = launch { underTest.showPrimaryButton.collect { showPrimaryButton = it } }

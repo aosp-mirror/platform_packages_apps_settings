@@ -33,31 +33,29 @@ class UserIdsSeries {
     @Nullable private UserInfo mPrivateUser = null;
     @Nullable private UserInfo mManagedProfileUser = null;
 
-    UserIdsSeries(final Context context, final boolean mainUserOnly) {
+    UserIdsSeries(final Context context, final boolean isNonUIRequest) {
         mUserManager = context.getSystemService(UserManager.class);
         mCurrentUserId = context.getUserId();
         List<UserInfo> aliveUsers =
                 mUserManager != null ? mUserManager.getAliveUsers() : new ArrayList<>();
 
-        if (mainUserOnly) {
-            aliveUsers.stream()
-                    .filter(UserInfo::isMain)
-                    .forEach(userInfo -> mVisibleUserIds.add(userInfo.id));
-            return;
-        }
-
         for (UserInfo userInfo : aliveUsers) {
             if (!mUserManager.isSameProfileGroup(mCurrentUserId, userInfo.id)) {
                 continue;
             }
-            if (!userInfo.isQuietModeEnabled() || userInfo.isManagedProfile()) {
-                mVisibleUserIds.add(userInfo.id);
-            }
-            if (userInfo.isPrivateProfile()) {
-                mPrivateUser = userInfo;
-            }
             if (userInfo.isManagedProfile()) {
+                // Load data for WorkProfile mode
                 mManagedProfileUser = userInfo;
+                mVisibleUserIds.add(userInfo.id);
+            } else if (userInfo.isPrivateProfile()) {
+                mPrivateUser = userInfo;
+                // Load data for PrivateProfile if it is from UI caller and PS is unlocked.
+                if (!isNonUIRequest && !userInfo.isQuietModeEnabled()) {
+                    mVisibleUserIds.add(userInfo.id);
+                }
+            } else if (!userInfo.isQuietModeEnabled()) {
+                // Load data for other profiles if it is not in quiet mode
+                mVisibleUserIds.add(userInfo.id);
             }
         }
     }

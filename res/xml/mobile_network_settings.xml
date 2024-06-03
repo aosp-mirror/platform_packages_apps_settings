@@ -36,6 +36,7 @@
         <ListPreference
             android:key="calls_preference"
             android:title="@string/calls_preference"
+            android:summary="@string/summary_placeholder"
             android:enabled="false"
             settings:controller="com.android.settings.network.telephony.CallsDefaultSubscriptionController"
             settings:allowDividerAbove="true"/>
@@ -43,6 +44,7 @@
         <ListPreference
             android:key="sms_preference"
             android:title="@string/sms_preference"
+            android:summary="@string/summary_placeholder"
             android:enabled="false"
             settings:controller="com.android.settings.network.telephony.SmsDefaultSubscriptionController"/>
 
@@ -293,11 +295,9 @@
             settings:controller=
                 "com.android.settings.network.telephony.NullAlgorithmsPreferenceController"/>
 
-        <SwitchPreferenceCompat
+        <com.android.settings.spa.preference.ComposePreference
             android:key="nr_advanced_calling"
             android:title="@string/nr_advanced_calling_title"
-            android:persistent="false"
-            android:summary="@string/nr_advanced_calling_summary"
             settings:keywords="@string/keywords_nr_advanced_calling"
             settings:controller="com.android.settings.network.telephony.NrAdvancedCallingPreferenceController"/>
     </PreferenceCategory>

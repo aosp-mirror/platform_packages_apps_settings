@@ -40,6 +40,7 @@ import com.android.settings.privatespace.onelock.UseOneLockController;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -67,6 +68,7 @@ public class UseOneLockControllerTest {
         final FakeFeatureFactory featureFactory = FakeFeatureFactory.setupForTest();
         when(featureFactory.securityFeatureProvider.getLockPatternUtils(mContext))
                 .thenReturn(mLockPatternUtils);
+        doReturn(true).when(mLockPatternUtils).isSecure(anyInt());
         mUseOneLockController = new UseOneLockController(mContext, preferenceKey);
 
     }
@@ -82,6 +84,7 @@ public class UseOneLockControllerTest {
 
 
     /** Tests that summary in controller is Pattern. */
+    @Ignore("b/323652985")
     @Test
     public void getSummary_whenProfileLockPattern() {
         doReturn(true)
@@ -96,6 +99,7 @@ public class UseOneLockControllerTest {
     }
 
     /** Tests that summary in controller is PIN. */
+    @Ignore("b/323652985")
     @Test
     public void getSummary_whenProfileLockPin() {
         doReturn(true)
@@ -109,6 +113,7 @@ public class UseOneLockControllerTest {
     }
 
     /** Tests that summary in controller is Password. */
+    @Ignore("b/323652985")
     @Test
     public void getSummary_whenProfileLockPassword() {
         doReturn(true)

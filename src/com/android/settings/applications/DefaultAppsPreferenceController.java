@@ -18,11 +18,16 @@ package com.android.settings.applications;
 
 import android.app.role.RoleManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.icu.text.ListFormatter;
+import android.provider.Settings;
 import android.text.TextUtils;
 
+import androidx.annotation.NonNull;
 import androidx.core.text.BidiFormatter;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.applications.AppUtils;
@@ -45,6 +50,17 @@ public class DefaultAppsPreferenceController extends BasePreferenceController {
     @Override
     public int getAvailabilityStatus() {
         return AVAILABLE;
+    }
+
+    @Override
+    public void displayPreference(@NonNull PreferenceScreen screen) {
+        super.displayPreference(screen);
+
+        Preference pref = screen.findPreference(getPreferenceKey());
+        if (pref != null) {
+            pref.setIntent(new Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS)
+                    .setPackage(mPackageManager.getPermissionControllerPackageName()));
+        }
     }
 
     @Override

@@ -25,27 +25,31 @@ import android.telephony.RadioAccessSpecifier
 import android.telephony.TelephonyManager
 import android.telephony.TelephonyScanManager
 import android.util.Log
-import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LifecycleOwner
-import com.android.settings.network.telephony.CellInfoUtil
+import com.android.settings.R
 import com.android.settings.network.telephony.CellInfoUtil.getNetworkTitle
+import com.android.settings.network.telephony.telephonyManager
 import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.asExecutor
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.conflate
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.onEach
 
-class NetworkScanRepository(context: Context, subId: Int) {
-    sealed interface NetworkScanResult
+class NetworkScanRepository(private val context: Context, subId: Int) {
+    enum class NetworkScanState {
+        ACTIVE, COMPLETE, ERROR
+    }
 
-    data class NetworkScanCellInfos(val cellInfos: List<CellInfo>) : NetworkScanResult
-    data object NetworkScanComplete : NetworkScanResult
-    data class NetworkScanError(val error: Int) : NetworkScanResult
+    data class NetworkScanResult(
+        val state: NetworkScanState,
+        val cellInfos: List<CellInfo>,
+    )
 
-    private val telephonyManager =
-        context.getSystemService(TelephonyManager::class.java)!!.createForSubscriptionId(subId)
+    private val telephonyManager = context.telephonyManager(subId)
 
     /** TODO: Move this to UI layer, when UI layer migrated to Kotlin. */
     fun launchNetworkScan(lifecycleOwner: LifecycleOwner, onResult: (NetworkScanResult) -> Unit) {
@@ -65,23 +69,29 @@ class NetworkScanRepository(context: Context, subId: Int) {
     }
 
     fun networkScanFlow(): Flow<NetworkScanResult> = callbackFlow {
+        var state = NetworkScanState.ACTIVE
+        var cellInfos: List<CellInfo> = emptyList()
+
         val callback = object : TelephonyScanManager.NetworkScanCallback() {
             override fun onResults(results: List<CellInfo>) {
-                val cellInfos = results.distinctBy { CellInfoScanKey(it) }
-                trySend(NetworkScanCellInfos(cellInfos))
-                Log.d(TAG, "CellInfoList: ${CellInfoUtil.cellInfoListToString(cellInfos)}")
+                cellInfos = results.distinctBy { CellInfoScanKey(it) }
+                sendResult()
             }
 
             override fun onComplete() {
-                trySend(NetworkScanComplete)
-                close()
-                Log.d(TAG, "onComplete")
+                state = NetworkScanState.COMPLETE
+                sendResult()
+                // Don't call close() here since onComplete() could happens before onResults()
             }
 
             override fun onError(error: Int) {
-                trySend(NetworkScanError(error))
+                state = NetworkScanState.ERROR
+                sendResult()
                 close()
-                Log.d(TAG, "onError: $error")
+            }
+
+            private fun sendResult() {
+                trySend(NetworkScanResult(state, cellInfos))
             }
         }
 
@@ -92,7 +102,7 @@ class NetworkScanRepository(context: Context, subId: Int) {
         )
 
         awaitClose { networkScan.stopScan() }
-    }.flowOn(Dispatchers.Default)
+    }.conflate().onEach { Log.d(TAG, "networkScanFlow: $it") }.flowOn(Dispatchers.Default)
 
     /** Create network scan for allowed network types. */
     private fun createNetworkScan(): NetworkScanRequest {
@@ -105,7 +115,7 @@ class NetworkScanRepository(context: Context, subId: Int) {
             NetworkScanRequest.SCAN_TYPE_ONE_SHOT,
             radioAccessSpecifiers,
             NetworkScanRequest.MIN_SEARCH_PERIODICITY_SEC, // one shot, not used
-            MAX_SEARCH_TIME_SEC,
+            context.resources.getInteger(R.integer.config_network_scan_helper_max_search_time_sec),
             true,
             INCREMENTAL_RESULTS_PERIODICITY_SEC,
             null,
@@ -158,10 +168,6 @@ class NetworkScanRepository(context: Context, subId: Int) {
     companion object {
         private const val TAG = "NetworkScanRepository"
 
-        @VisibleForTesting
-        val MAX_SEARCH_TIME_SEC = 300
-
-        @VisibleForTesting
-        val INCREMENTAL_RESULTS_PERIODICITY_SEC = 3
+        private const val INCREMENTAL_RESULTS_PERIODICITY_SEC = 3
     }
 }

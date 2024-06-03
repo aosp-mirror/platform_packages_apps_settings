@@ -17,8 +17,8 @@
 package com.android.settings.privatespace.autolock;
 
 import static android.provider.Settings.Secure.PRIVATE_SPACE_AUTO_LOCK;
+import static android.provider.Settings.Secure.PRIVATE_SPACE_AUTO_LOCK_AFTER_DEVICE_RESTART;
 import static android.provider.Settings.Secure.PRIVATE_SPACE_AUTO_LOCK_AFTER_INACTIVITY;
-import static android.provider.Settings.Secure.PRIVATE_SPACE_AUTO_LOCK_NEVER;
 import static android.provider.Settings.Secure.PRIVATE_SPACE_AUTO_LOCK_ON_DEVICE_LOCK;
 
 import static com.android.settings.privatespace.PrivateSpaceMaintainer.PRIVATE_SPACE_AUTO_LOCK_DEFAULT_VAL;
@@ -128,7 +128,9 @@ public class AutoLockSettingsFragmentTest {
         mFragment.onAttach(mContext);
 
         Settings.Secure.putInt(
-                mContentResolver, PRIVATE_SPACE_AUTO_LOCK, PRIVATE_SPACE_AUTO_LOCK_NEVER);
+                mContentResolver,
+                PRIVATE_SPACE_AUTO_LOCK,
+                PRIVATE_SPACE_AUTO_LOCK_AFTER_DEVICE_RESTART);
         assertThat(mFragment.getDefaultKey()).isEqualTo("2");
 
         Settings.Secure.putInt(
@@ -153,7 +155,7 @@ public class AutoLockSettingsFragmentTest {
         mFragment.onAttach(mContext);
         mFragment.setDefaultKey("2");
         assertThat(Settings.Secure.getInt(mContentResolver, PRIVATE_SPACE_AUTO_LOCK, -1))
-                .isEqualTo(PRIVATE_SPACE_AUTO_LOCK_NEVER);
+                .isEqualTo(PRIVATE_SPACE_AUTO_LOCK_AFTER_DEVICE_RESTART);
 
         mFragment.setDefaultKey("1");
         assertThat(Settings.Secure.getInt(mContentResolver, PRIVATE_SPACE_AUTO_LOCK, -1))

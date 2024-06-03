@@ -139,13 +139,15 @@
     <uses-permission android:name="android.permission.CUSTOMIZE_SYSTEM_UI" />
     <uses-permission android:name="android.permission.REMAP_MODIFIER_KEYS" />
     <uses-permission android:name="android.permission.ACCESS_GPU_SERVICE" />
-    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <uses-permission android:name="android.permission.MANAGE_GAME_MODE" />
     <uses-permission android:name="android.permission.RESTART_PHONE_PROCESS" />
     <uses-permission android:name="android.permission.MANAGE_ENHANCED_CONFIRMATION_STATES" />
     <uses-permission android:name="android.permission.ACCESS_KEYGUARD_SECURE_STORAGE" />
     <uses-permission android:name="android.permission.MANAGE_NETWORK_POLICY" />
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.GET_BACKGROUND_INSTALLED_PACKAGES" />
+    <uses-permission android:name="android.permission.SATELLITE_COMMUNICATION" />
+    <uses-permission android:name="android.permission.READ_SYSTEM_GRAMMATICAL_GENDER" />
 
     <application
             android:name=".SettingsApplication"
@@ -237,6 +239,28 @@
                 <action android:name="android.intent.action.PRE_BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
+
+        <receiver
+            android:name=".development.Enable16KBootReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".development.PageAgnosticNotificationService"
+            android:enabled="true"
+            android:exported="false"
+            android:permission="android.permission.POST_NOTIFICATIONS"/>
+
+        <activity android:name=".development.PageAgnosticWarningActivity"
+                  android:enabled="true"
+                  android:launchMode="singleTask"
+                  android:taskAffinity=""
+                  android:excludeFromRecents="true"
+                  android:theme="@*android:style/Theme.DeviceDefault.Dialog.Alert.DayNight"/>
 
         <activity android:name=".SubSettings"
                   android:exported="false"
@@ -820,6 +844,7 @@
 
         <activity android:name=".network.SimOnboardingActivity"
             android:exported="false"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenSize|screenLayout|smallestScreenSize"
             android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS"
             android:theme="@style/Theme.SpaLib.BottomSheetDialog"/>
 
@@ -967,39 +992,6 @@
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
                        android:value="@string/menu_key_apps"/>
         </activity>
-
-        <activity-alias
-            android:name="BackupTasksActivity"
-            android:knownActivityEmbeddingCerts="@array/config_known_host_certs"
-            android:exported="true"
-            android:targetActivity=".spa.SpaBridgeActivity"
-            android:label="@string/run_backup_tasks_title">
-            <intent-filter android:priority="1">
-                <action android:name="android.settings.REQUEST_RUN_BACKUP_JOBS" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.spa.DESTINATION"
-                       android:value="TogglePermissionAppList/BackupTasksApps"/>
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_apps"/>
-        </activity-alias>
-
-        <activity-alias
-            android:name="AppBackupTasksActivity"
-            android:knownActivityEmbeddingCerts="@array/config_known_host_certs"
-            android:exported="true"
-            android:targetActivity=".spa.SpaAppBridgeActivity"
-            android:label="@string/run_backup_tasks_title">
-            <intent-filter android:priority="1">
-                <action android:name="android.settings.REQUEST_RUN_BACKUP_JOBS" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:scheme="package" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.spa.DESTINATION"
-                       android:value="TogglePermissionAppInfoPage/BackupTasksApps"/>
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_apps"/>
-        </activity-alias>
 
         <activity
             android:name="Settings$DateTimeSettingsActivity"
@@ -1629,6 +1621,39 @@
         </activity>
 
         <activity
+            android:name=".Settings$HearingDevicesActivity"
+            android:label="@string/accessibility_hearingaid_title"
+            android:exported="true">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.HEARING_DEVICES_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.accessibility.AccessibilityHearingAidsFragment" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_accessibility"/>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true" />
+        </activity>
+
+        <activity
+            android:name=".Settings$HearingDevicesPairingActivity"
+            android:label="@string/accessibility_hearing_device_pairing_title"
+            android:permission="android.permission.BLUETOOTH_SCAN"
+            android:exported="true">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.HEARING_DEVICES_PAIRING_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.accessibility.HearingDevicePairingFragment" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_accessibility"/>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true" />
+        </activity>
+
+        <activity
             android:name="SettingsLicenseActivity"
             android:label="@string/settings_license_activity_title"
             android:exported="true"
@@ -1755,12 +1780,6 @@
                 <action android:name="android.settings.IGNORE_BATTERY_OPTIMIZATION_SETTINGS" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <intent-filter android:priority="1">
-                <action android:name="android.settings.BACKGROUND_RESTRICTIONS_SETTINGS" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:scheme="package" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.applications.manageapplications.ManageApplications" />
@@ -2532,9 +2551,9 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.accessibility.ColorContrastFragment" />
+                android:value="com.android.settings.display.ColorContrastFragment" />
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                android:value="@string/menu_key_accessibility"/>
+                android:value="@string/menu_key_display"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -2657,6 +2676,7 @@
 
         <activity android:name=".biometrics.face.FaceEnrollIntroduction"
                   android:exported="true"
+                  android:theme="@style/GlifV4Theme.DayNight"
                   android:screenOrientation="nosensor">
             <intent-filter>
                 <action android:name="android.settings.FACE_ENROLL"/>
@@ -2667,18 +2687,22 @@
         <activity android:name=".biometrics.face.FaceEnrollIntroductionInternal"
                   android:exported="false"
                   android:screenOrientation="nosensor"
+                  android:theme="@style/GlifV4Theme.DayNight"
                   android:taskAffinity="com.android.settings.root" />
 
         <activity android:name=".biometrics.face.FaceEnrollEducation"
             android:exported="false"
+            android:theme="@style/GlifV4Theme.DayNight"
             android:screenOrientation="nosensor"/>
 
         <activity android:name=".biometrics.face.FaceEnrollEnrolling"
             android:exported="false"
+            android:theme="@style/GlifV4Theme.DayNight"
             android:screenOrientation="portrait"/>
 
         <activity android:name=".biometrics.face.FaceEnrollFinish"
             android:exported="false"
+            android:theme="@style/GlifV4Theme.DayNight"
             android:screenOrientation="portrait"/>
 
         <activity android:name=".biometrics.BiometricHandoffActivity"
@@ -2753,6 +2777,7 @@
         <activity android:name=".biometrics.fingerprint2.ui.enrollment.activity.FingerprintEnrollmentV2Activity"
             android:exported="true"
             android:permission="android.permission.MANAGE_FINGERPRINT"
+            android:configChanges="density"
             android:theme="@style/GlifTheme.Light">
             <intent-filter>
                 <action android:name="android.settings.FINGERPRINT_SETUP" />
@@ -3024,9 +3049,6 @@
                 <action android:name="com.android.settings.APPLICATION_DEVELOPMENT_SETTINGS" />
                 <action android:name="android.service.quicksettings.action.QS_TILE_PREFERENCES"/>
                 <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="com.android.intent.action.SHOW_CONTRAST_DIALOG" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.development.DevelopmentSettingsDashboardFragment" />
@@ -3319,6 +3341,7 @@
                 <action android:name="com.google.android.setupwizard.SETUP_WIZARD_FINISHED"/>
                 <action android:name="com.android.settings.battery.action.PERIODIC_JOB_RECHECK"/>
                 <action android:name="android.intent.action.TIME_SET"/>
+                <action android:name="android.intent.action.TIMEZONE_CHANGED"/>
             </intent-filter>
         </receiver>
 
@@ -3966,6 +3989,9 @@
                 <action android:name="android.settings.ENABLE_MMS_DATA_REQUEST"/>
             </intent-filter>
         </receiver>
+
+        <service android:name=".sim.PrimarySubscriptionListChangedService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -5106,9 +5132,9 @@
         <activity
             android:name=".privatespace.PrivateSpaceAuthenticationActivity"
             android:theme="@*android:style/Theme.DeviceDefault.Settings.Dialog.NoActionBar"
-            android:exported="true">
+            android:exported="false">
             <intent-filter>
-                <action android:name="com.android.settings.action.PRIVATE_SPACE_SETUP_FLOW" />
+                <action android:name="com.android.settings.action.OPEN_PRIVATE_SPACE_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
@@ -5119,6 +5145,14 @@
                   android:label="@string/private_space_delete_header"
                   android:exported="false">
         </activity>
+
+        <receiver android:name=".privatespace.PrivateSpaceBroadcastReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.PRE_BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
 
         <activity-alias android:name="UsageStatsActivity"
                         android:exported="true"
@@ -5142,10 +5176,83 @@
 
         <activity
             android:name="com.android.settings.network.WepNetworkDialogActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenSize|screenLayout|smallestScreenSize"
+            android:excludeFromRecents="true"
             android:exported="true"
-            android:theme="@style/Theme.SpaLib.Dialog"
-            android:permission="android.permission.NETWORK_SETTINGS">
+            android:permission="android.permission.NETWORK_SETTINGS"
+            android:theme="@style/Theme.SpaLib.Dialog">
         </activity>
+
+        <activity
+            android:name="com.android.settings.network.SatelliteWarningDialogActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenSize|screenLayout|smallestScreenSize"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:permission="android.permission.NETWORK_SETTINGS"
+            android:theme="@style/Theme.SpaLib.Dialog">
+        </activity>
+
+        <activity android:name="Settings$BluetoothDashboardActivity"
+            android:label="@string/bluetooth_settings_title"
+            android:permission="android.permission.BLUETOOTH_CONNECT"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.settings.BLUETOOTH_DASHBOARD_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.connecteddevice.BluetoothDashboardFragment"/>
+        </activity>
+
+        <activity
+            android:name="com.android.settings.connecteddevice.audiosharing.AudioSharingActivity"
+            android:label="@string/audio_sharing_title"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.android.settings.BLUETOOTH_AUDIO_SHARING_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.connecteddevice.audiosharing.AudioSharingDashboardFragment"/>
+        </activity>
+
+        <activity
+            android:name="com.android.settings.connecteddevice.audiosharing.audiostreams.qrcode.QrCodeScanModeActivity"
+            android:permission="android.permission.BLUETOOTH_CONNECT"
+            android:screenOrientation="portrait"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.settings.BLUETOOTH_LE_AUDIO_QR_CODE_SCANNER"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamConfirmDialogActivity"
+            android:exported="true"
+            android:theme="@style/Transparent"
+            android:configChanges="orientation|keyboardHidden|screenSize">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.AUDIO_STREAM_DIALOG" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamConfirmDialog" />
+        </activity>
+
+        <service
+            android:name="com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamMediaService"
+            android:foregroundServiceType="mediaPlayback"
+            android:enabled="true"
+            android:exported="false" />
+
+        <receiver android:name="com.android.settings.connecteddevice.audiosharing.AudioSharingReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.android.settings.action.BLUETOOTH_LE_AUDIO_SHARING_STATE_CHANGE" />
+                <action android:name="com.android.settings.action.BLUETOOTH_LE_AUDIO_SHARING_STOP" />
+            </intent-filter>
+        </receiver>
 
         <!-- This is the longest AndroidManifest.xml ever. -->
     </application>

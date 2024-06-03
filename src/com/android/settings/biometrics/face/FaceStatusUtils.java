@@ -16,6 +16,7 @@
 
 package com.android.settings.biometrics.face;
 
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.hardware.biometrics.BiometricAuthenticator;
 import android.hardware.face.FaceManager;
@@ -26,6 +27,7 @@ import com.android.settings.Settings;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.ParentalControlsUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 
 /**
  * Utilities for face details shared between Security Settings and Safety Center.
@@ -65,7 +67,10 @@ public class FaceStatusUtils {
     public String getTitle() {
         UserManager userManager = mContext.getSystemService(UserManager.class);
         if (userManager != null && userManager.isProfile()) {
-            return mContext.getString(R.string.security_settings_face_profile_preference_title);
+            return mContext.getString(
+                    Utils.isPrivateProfile(mUserId, mContext)
+                            ? R.string.private_space_face_unlock_title
+                            : R.string.security_settings_face_profile_preference_title);
         } else {
             return mContext.getString(R.string.security_settings_face_preference_title);
         }
@@ -75,9 +80,14 @@ public class FaceStatusUtils {
      * Returns the summary of face settings entity.
      */
     public String getSummary() {
-        return mContext.getResources().getString(hasEnrolled()
+        if (shouldShowDisabledByAdminStr()) {
+            return mContext.getString(
+                    com.android.settingslib.widget.restricted.R.string.disabled_by_admin);
+        } else {
+            return mContext.getResources().getString(hasEnrolled()
                 ? R.string.security_settings_face_preference_summary
                 : R.string.security_settings_face_preference_summary_none);
+        }
     }
 
     /**
@@ -93,5 +103,13 @@ public class FaceStatusUtils {
      */
     public boolean hasEnrolled() {
         return mFaceManager.hasEnrolledTemplates(mUserId);
+    }
+
+    /**
+     * Indicates if the face feature is enabled or disabled by the Device Admin.
+     */
+    private boolean shouldShowDisabledByAdminStr() {
+        return RestrictedLockUtilsInternal.checkIfKeyguardFeaturesDisabled(
+                mContext, DevicePolicyManager.KEYGUARD_DISABLE_FACE, mUserId) != null;
     }
 }

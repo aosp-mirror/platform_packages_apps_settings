@@ -19,18 +19,16 @@ package com.android.settings.network.telephony
 import android.content.Context
 import android.telephony.SubscriptionInfo
 import android.telephony.TelephonyManager
-import android.telephony.euicc.EuiccManager
 import androidx.fragment.app.Fragment
 import androidx.preference.Preference
 import androidx.preference.PreferenceManager
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.dx.mockito.inline.extended.ExtendedMockito
-import com.android.internal.telephony.PhoneConstants
+import com.android.settings.R
 import com.android.settings.core.BasePreferenceController
 import com.android.settings.network.SubscriptionInfoListViewModel
 import com.android.settings.network.SubscriptionUtil
-import com.android.settingslib.CustomDialogPreferenceCompat
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.runBlocking
 import org.junit.After
@@ -62,6 +60,8 @@ class MobileNetworkImeiPreferenceControllerTest {
         on { currentPhoneType } doReturn TelephonyManager.PHONE_TYPE_GSM
         on { imei } doReturn mockImei
         on { meid } doReturn mockImei
+        on { primaryImei } doReturn mockImei
+        on { activeModemCount } doReturn 2
     }
 
     private val context: Context = spy(ApplicationProvider.getApplicationContext()) {
@@ -90,7 +90,7 @@ class MobileNetworkImeiPreferenceControllerTest {
     }
 
     @Test
-    fun refreshData_getPhoneNumber_preferenceSummaryIsExpected() = runBlocking {
+    fun refreshData_getImei_preferenceSummaryIsExpected() = runBlocking {
         whenever(SubscriptionUtil.isSimHardwareVisible(context)).thenReturn(true)
         whenever(SubscriptionUtil.getActiveSubscriptions(any())).thenReturn(
             listOf(
@@ -108,6 +108,50 @@ class MobileNetworkImeiPreferenceControllerTest {
         controller.refreshData(SUB_INFO_2)
 
         assertThat(preference.summary).isEqualTo(mockImei)
+    }
+
+    @Test
+    fun refreshData_getImeiTitle_showImei() = runBlocking {
+        whenever(SubscriptionUtil.isSimHardwareVisible(context)).thenReturn(true)
+        whenever(SubscriptionUtil.getActiveSubscriptions(any())).thenReturn(
+            listOf(
+                SUB_INFO_1,
+                SUB_INFO_2
+            )
+        )
+        var mockSubId = 2
+        controller.init(mockFragment, mockSubId)
+        mockImei = "test imei"
+        mockTelephonyManager.stub {
+            on { imei } doReturn mockImei
+            on { primaryImei } doReturn ""
+        }
+
+        controller.refreshData(SUB_INFO_2)
+
+        assertThat(preference.title).isEqualTo(context.getString(R.string.status_imei))
+    }
+
+    @Test
+    fun refreshData_getPrimaryImeiTitle_showPrimaryImei() = runBlocking {
+        whenever(SubscriptionUtil.isSimHardwareVisible(context)).thenReturn(true)
+        whenever(SubscriptionUtil.getActiveSubscriptions(any())).thenReturn(
+            listOf(
+                SUB_INFO_1,
+                SUB_INFO_2
+            )
+        )
+        var mockSubId = 2
+        controller.init(mockFragment, mockSubId)
+        mockImei = "test imei"
+        mockTelephonyManager.stub {
+            on { imei } doReturn mockImei
+            on { primaryImei } doReturn mockImei
+        }
+
+        controller.refreshData(SUB_INFO_2)
+
+        assertThat(preference.title).isEqualTo(context.getString(R.string.imei_primary))
     }
 
     @Test

@@ -31,38 +31,38 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.SignalCellularAlt
 import androidx.compose.material3.AlertDialogDefaults
 import androidx.compose.material3.BasicAlertDialog
-import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ModalBottomSheet
-import androidx.compose.material3.SheetState
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
+import androidx.lifecycle.LifecycleRegistry
 import com.android.settings.R
 import com.android.settings.SidecarFragment
 import com.android.settings.network.telephony.SubscriptionActionDialogActivity
 import com.android.settings.network.telephony.ToggleSubscriptionDialogActivity
 import com.android.settings.spa.SpaActivity.Companion.startSpaActivity
 import com.android.settings.spa.network.SimOnboardingPageProvider.getRoute
+import com.android.settings.wifi.WifiPickerTrackerHelper
 import com.android.settingslib.spa.SpaBaseDialogActivity
 import com.android.settingslib.spa.framework.theme.SettingsDimension
 import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
 import com.android.settingslib.spa.widget.dialog.AlertDialogButton
+import com.android.settingslib.spa.widget.dialog.SettingsAlertDialogWithIcon
 import com.android.settingslib.spa.widget.dialog.getDialogWidth
 import com.android.settingslib.spa.widget.dialog.rememberAlertDialogPresenter
 import com.android.settingslib.spa.widget.ui.SettingsTitle
@@ -77,7 +77,9 @@ import kotlinx.coroutines.launch
 
 class SimOnboardingActivity : SpaBaseDialogActivity() {
     lateinit var scope: CoroutineScope
-    lateinit var showBottomSheet: MutableState<Boolean>
+    lateinit var wifiPickerTrackerHelper: WifiPickerTrackerHelper
+    lateinit var context: Context
+    lateinit var showStartingDialog: MutableState<Boolean>
     lateinit var showError: MutableState<ErrorType>
     lateinit var showProgressDialog: MutableState<Boolean>
     lateinit var showDsdsProgressDialog: MutableState<Boolean>
@@ -89,6 +91,7 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         if (!this.userManager.isAdminUser) {
             Log.e(TAG, "It is not the admin user. Unable to toggle subscription.")
             finish()
@@ -138,7 +141,7 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
             }
 
             CallbackType.CALLBACK_ONBOARDING_COMPLETE -> {
-                showBottomSheet.value = false
+                showStartingDialog.value = false
                 setProgressDialog(true)
                 scope.launch {
                     // TODO: refactor the Sidecar
@@ -155,7 +158,10 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
 
             CallbackType.CALLBACK_SETUP_PRIMARY_SIM -> {
                 scope.launch {
-                    onboardingService.startSetupPrimarySim(this@SimOnboardingActivity)
+                    onboardingService.startSetupPrimarySim(
+                        this@SimOnboardingActivity,
+                        wifiPickerTrackerHelper
+                    )
                 }
             }
 
@@ -181,27 +187,40 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     override fun Content() {
-        showBottomSheet = remember { mutableStateOf(false) }
-        showError = remember { mutableStateOf(ErrorType.ERROR_NONE) }
-        showProgressDialog = remember { mutableStateOf(false) }
-        showDsdsProgressDialog = remember { mutableStateOf(false) }
-        showRestartDialog = remember { mutableStateOf(false) }
+        showStartingDialog = rememberSaveable { mutableStateOf(false) }
+        showError = rememberSaveable { mutableStateOf(ErrorType.ERROR_NONE) }
+        showProgressDialog = rememberSaveable { mutableStateOf(false) }
+        showDsdsProgressDialog = rememberSaveable { mutableStateOf(false) }
+        showRestartDialog = rememberSaveable { mutableStateOf(false) }
         scope = rememberCoroutineScope()
+        context = LocalContext.current
+        val lifecycleOwner = LocalLifecycleOwner.current
+        wifiPickerTrackerHelper = WifiPickerTrackerHelper(
+            LifecycleRegistry(lifecycleOwner), context,
+            null /* WifiPickerTrackerCallback */
+        )
 
         registerSidecarReceiverFlow()
 
         ErrorDialogImpl()
         RestartDialogImpl()
         LaunchedEffect(Unit) {
-            if (onboardingService.activeSubInfoList.isNotEmpty()) {
-                showBottomSheet.value = true
+            if (showError.value != ErrorType.ERROR_NONE
+                || showProgressDialog.value
+                || showDsdsProgressDialog.value
+                || showRestartDialog.value) {
+                Log.d(TAG, "status: showError:${showError.value}, " +
+                        "showProgressDialog:${showProgressDialog.value}, " +
+                        "showDsdsProgressDialog:${showDsdsProgressDialog.value}, " +
+                        "showRestartDialog:${showRestartDialog.value}")
+                showStartingDialog.value = false
+            } else if (onboardingService.activeSubInfoList.isNotEmpty()) {
+                showStartingDialog.value = true
             }
         }
 
-        if (showBottomSheet.value) {
-            var sheetState = rememberModalBottomSheetState()
-            BottomSheetImpl(
-                sheetState = sheetState,
+        if (showStartingDialog.value) {
+            StartingDialogImpl(
                 nextAction = {
                     if (onboardingService.isDsdsConditionSatisfied()) {
                         // TODO: if the phone is SS mode and the isDsdsConditionSatisfied is true,
@@ -382,6 +401,11 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
         Log.d(TAG, "startSimSwitching:")
 
         var targetSubInfo = onboardingService.targetSubInfo
+        if(onboardingService.doesTargetSimActive) {
+            Log.d(TAG, "target subInfo is already active")
+            callbackListener(CallbackType.CALLBACK_SETUP_NAME)
+            return
+        }
         targetSubInfo?.let {
             var removedSubInfo = onboardingService.getRemovedSim()
             if (targetSubInfo.isEmbedded) {
@@ -468,48 +492,38 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
     }
 
     @Composable
-    fun BottomSheetBody(nextAction: () -> Unit) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.padding(bottom = SettingsDimension.itemPaddingVertical)) {
-            Icon(
-                imageVector = Icons.Outlined.SignalCellularAlt,
-                contentDescription = null,
-                modifier = Modifier
-                    .size(SettingsDimension.iconLarge),
-                tint = MaterialTheme.colorScheme.primary,
-            )
-            SettingsTitle(stringResource(R.string.sim_onboarding_bottomsheets_title))
-            Column(Modifier.padding(SettingsDimension.itemPadding)) {
-                Text(
-                    text = stringResource(R.string.sim_onboarding_bottomsheets_msg),
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    style = MaterialTheme.typography.bodyMedium,
-                    overflow = TextOverflow.Ellipsis,
-                    textAlign = TextAlign.Center
-                )
-            }
-            Button(onClick = nextAction) {
-                Text(stringResource(R.string.sim_onboarding_setup))
-            }
-        }
-    }
-
-    @OptIn(ExperimentalMaterial3Api::class)
-    @Composable
-    fun BottomSheetImpl(
-        sheetState: SheetState,
+    fun StartingDialogImpl(
         nextAction: () -> Unit,
         cancelAction: () -> Unit,
     ) {
-        ModalBottomSheet(
+        SettingsAlertDialogWithIcon(
             onDismissRequest = cancelAction,
-            sheetState = sheetState,
-        ) {
-            BottomSheetBody(nextAction = nextAction)
-        }
-        LaunchedEffect(Unit) {
-            sheetState.show()
-        }
+            confirmButton = AlertDialogButton(
+                text = getString(R.string.sim_onboarding_setup),
+                onClick = nextAction,
+            ),
+            dismissButton = AlertDialogButton(
+                text = getString(R.string.sim_onboarding_close),
+                onClick = cancelAction,
+            ),
+            title = stringResource(R.string.sim_onboarding_dialog_starting_title),
+            icon = {
+                Icon(
+                    imageVector = Icons.Outlined.SignalCellularAlt,
+                    contentDescription = null,
+                    modifier = Modifier
+                        .size(SettingsDimension.iconLarge),
+                    tint = MaterialTheme.colorScheme.primary,
+                )
+            },
+            text = {
+                Text(
+                    stringResource(R.string.sim_onboarding_dialog_starting_msg),
+                    modifier = Modifier.fillMaxWidth(),
+                    textAlign = TextAlign.Center
+                )
+            })
+
     }
 
     fun setProgressState(state: Int) {
@@ -539,6 +553,7 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
             val intent = Intent(context, SimOnboardingActivity::class.java).apply {
                 putExtra(SUB_ID, subId)
             }
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             context.startActivity(intent)
         }
 

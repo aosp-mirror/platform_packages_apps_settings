@@ -16,14 +16,15 @@
 
 package com.android.settings.testutils.shadow;
 
+import android.annotation.NonNull;
 import android.annotation.UserIdInt;
 import android.content.ComponentName;
+import android.util.ArrayMap;
 import android.view.accessibility.AccessibilityManager;
 
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 
-import java.util.Collections;
 import java.util.Map;
 
 /**
@@ -31,12 +32,21 @@ import java.util.Map;
  */
 @Implements(AccessibilityManager.class)
 public class ShadowAccessibilityManager extends org.robolectric.shadows.ShadowAccessibilityManager {
+    private Map<ComponentName, ComponentName> mA11yFeatureToTileMap = new ArrayMap<>();
+
     /**
-     * Implements a hidden method {@link AccessibilityManager.getA11yFeatureToTileMap} and returns
-     * an empty map.
+     * Implements a hidden method {@link AccessibilityManager.getA11yFeatureToTileMap}
      */
     @Implementation
     public Map<ComponentName, ComponentName> getA11yFeatureToTileMap(@UserIdInt int userId) {
-        return Collections.emptyMap();
+        return mA11yFeatureToTileMap;
+    }
+
+    /**
+     * Set fake a11y feature to tile mapping
+     */
+    public void setA11yFeatureToTileMap(
+            @NonNull Map<ComponentName, ComponentName> a11yFeatureToTileMap) {
+        mA11yFeatureToTileMap = a11yFeatureToTileMap;
     }
 }

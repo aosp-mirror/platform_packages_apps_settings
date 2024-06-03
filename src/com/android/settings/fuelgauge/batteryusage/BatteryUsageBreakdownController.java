@@ -88,6 +88,7 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
     @VisibleForTesting FooterPreference mFooterPreference;
     @VisibleForTesting BatteryDiffData mBatteryDiffData;
     @VisibleForTesting String mPercentLessThanThresholdText;
+    @VisibleForTesting String mPercentLessThanThresholdContentDescription;
     @VisibleForTesting boolean mIsHighlightSlot;
     @VisibleForTesting int mAnomalyKeyNumber;
     @VisibleForTesting String mAnomalyEntryKey;
@@ -202,10 +203,14 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
         mSpinnerPreference = screen.findPreference(SPINNER_PREFERENCE_KEY);
         mAppListPreferenceGroup = screen.findPreference(APP_LIST_PREFERENCE_KEY);
         mFooterPreference = screen.findPreference(FOOTER_PREFERENCE_KEY);
+        final String formatPercentage =
+                Utils.formatPercentage(BatteryDiffData.SMALL_PERCENTAGE_THRESHOLD, false);
         mPercentLessThanThresholdText =
+                mPrefContext.getString(R.string.battery_usage_less_than_percent, formatPercentage);
+        mPercentLessThanThresholdContentDescription =
                 mPrefContext.getString(
-                        R.string.battery_usage_less_than_percent,
-                        Utils.formatPercentage(BatteryDiffData.SMALL_PERCENTAGE_THRESHOLD, false));
+                        R.string.battery_usage_less_than_percent_content_description,
+                        formatPercentage);
 
         mAppListPreferenceGroup.setOrderingAsAdded(false);
         mSpinnerPreference.initializeSpinner(
@@ -394,12 +399,15 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
 
     @VisibleForTesting
     void setPreferencePercentage(PowerGaugePreference preference, BatteryDiffEntry entry) {
-        preference.setPercentage(
-                entry.getPercentage() < BatteryDiffData.SMALL_PERCENTAGE_THRESHOLD
-                        ? mPercentLessThanThresholdText
-                        : Utils.formatPercentage(
-                                entry.getPercentage() + entry.getAdjustPercentageOffset(),
-                                /* round= */ true));
+        if (entry.getPercentage() < BatteryDiffData.SMALL_PERCENTAGE_THRESHOLD) {
+            preference.setPercentage(mPercentLessThanThresholdText);
+            preference.setPercentageContentDescription(mPercentLessThanThresholdContentDescription);
+        } else {
+            preference.setPercentage(
+                    Utils.formatPercentage(
+                            entry.getPercentage() + entry.getAdjustPercentageOffset(),
+                            /* round= */ true));
+        }
     }
 
     @VisibleForTesting

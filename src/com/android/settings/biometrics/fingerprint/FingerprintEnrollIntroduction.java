@@ -176,7 +176,9 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
     @Override
     protected void initViews() {
         setDescriptionText(getString(
-                R.string.security_settings_fingerprint_enroll_introduction_v3_message,
+                isPrivateProfile()
+                        ? R.string.private_space_fingerprint_enroll_introduction_message
+                        : R.string.security_settings_fingerprint_enroll_introduction_v3_message,
                 DeviceHelper.getDeviceName(this)));
 
         super.initViews();
@@ -261,6 +263,9 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
 
     @StringRes
     protected int getFooterMessage5() {
+        if (isPrivateProfile()) {
+            return R.string.private_space_fingerprint_enroll_introduction_footer_message;
+        }
         return R.string.security_settings_fingerprint_v2_enroll_introduction_footer_message_5;
     }
 
@@ -292,6 +297,9 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
 
     @Override
     protected int getHeaderResDefault() {
+        if (isPrivateProfile()) {
+            return R.string.private_space_fingerprint_enroll_introduction_title;
+        }
         return R.string.security_settings_fingerprint_enroll_introduction_title;
     }
 
@@ -476,5 +484,9 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
         }
         data.putExtra(MultiBiometricEnrollHelper.EXTRA_SKIP_PENDING_ENROLL, true);
         return data;
+    }
+
+    private boolean isPrivateProfile() {
+        return Utils.isPrivateProfile(mUserId, getApplicationContext());
     }
 }

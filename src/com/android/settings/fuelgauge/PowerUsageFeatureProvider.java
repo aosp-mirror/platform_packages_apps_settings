@@ -16,6 +16,7 @@
 
 package com.android.settings.fuelgauge;
 
+import android.annotation.Nullable;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -37,6 +38,9 @@ public interface PowerUsageFeatureProvider {
 
     /** Check whether the battery tips card is enabled in the battery usage page */
     boolean isBatteryTipsEnabled();
+
+    /** Check whether to log the optimization mode of app entry in period job */
+    boolean isAppOptimizationModeLogged();
 
     /**
      * Returns a threshold (in milliseconds) for the minimal screen on time in battery usage list
@@ -110,8 +114,9 @@ public interface PowerUsageFeatureProvider {
     /** Returns {@code true} if delay the hourly job when device is booting */
     boolean delayHourlyJobWhenBooting();
 
-    /** Returns {@link Bundle} for settings anomaly detection result */
-    PowerAnomalyEventList detectSettingsAnomaly(
+    /** Returns {@link Bundle} for power anomaly detection result */
+    @Nullable
+    PowerAnomalyEventList detectPowerAnomaly(
             Context context, double displayDrain, DetectRequestSourceType detectRequestSourceType);
 
     /** Gets an intent for one time bypass charge limited to resume charging. */
@@ -146,4 +151,7 @@ public interface PowerUsageFeatureProvider {
 
     /** Whether the app optimization mode is valid to restore */
     boolean isValidToRestoreOptimizationMode(ArrayMap<String, String> deviceInfoMap);
+
+    /** Whether the device is under the battery defender mode */
+    boolean isBatteryDefend(BatteryInfo info);
 }

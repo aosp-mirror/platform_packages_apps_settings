@@ -33,7 +33,7 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settings.fuelgauge.BatteryOptimizeHistoricalLogEntry.Action;
-import com.android.settingslib.datastore.ChangeReason;
+import com.android.settingslib.datastore.DataChangeReason;
 import com.android.settingslib.fuelgauge.PowerAllowlistBackend;
 
 import java.lang.annotation.Retention;
@@ -182,6 +182,14 @@ public class BatteryOptimizeUtils {
                 && getAppOptimizationMode() != BatteryOptimizeUtils.MODE_RESTRICTED;
     }
 
+    String getPackageName() {
+        return mPackageName == null ? UNKNOWN_PACKAGE : mPackageName;
+    }
+
+    int getUid() {
+        return mUid;
+    }
+
     /** Gets the list of installed applications. */
     public static ArraySet<ApplicationInfo> getInstalledApplications(
             Context context, IPackageManager ipm) {
@@ -225,7 +233,7 @@ public class BatteryOptimizeUtils {
 
         // App preferences are already clear when code reach here, and there may be no
         // setAppUsageStateInternal call to notifyChange. So always trigger notifyChange here.
-        BatterySettingsStorage.get(context).notifyChange(ChangeReason.DELETE);
+        BatterySettingsStorage.get(context).notifyChange(DataChangeReason.DELETE);
 
         allowlistBackend.refreshList();
         // Resets optimization mode for each application.
@@ -255,10 +263,6 @@ public class BatteryOptimizeUtils {
                     allowlistBackend,
                     Action.RESET);
         }
-    }
-
-    String getPackageName() {
-        return mPackageName == null ? UNKNOWN_PACKAGE : mPackageName;
     }
 
     static int getMode(AppOpsManager appOpsManager, int uid, String packageName) {
@@ -345,9 +349,9 @@ public class BatteryOptimizeUtils {
         try {
             batteryUtils.setForceAppStandby(uid, packageName, appStandbyMode);
             if (allowListed) {
-                powerAllowlistBackend.addApp(packageName);
+                powerAllowlistBackend.addApp(packageName, uid);
             } else {
-                powerAllowlistBackend.removeApp(packageName);
+                powerAllowlistBackend.removeApp(packageName, uid);
             }
         } catch (Exception e) {
             // Error cases, set standby mode as -1 for logging.
@@ -371,7 +375,7 @@ public class BatteryOptimizeUtils {
                         getAppOptimizationMode(appStandbyMode, allowListed));
     }
 
-    private static @ChangeReason int toChangeReason(Action action) {
-        return action == Action.RESTORE ? ChangeReason.RESTORE : ChangeReason.UPDATE;
+    private static @DataChangeReason int toChangeReason(Action action) {
+        return action == Action.RESTORE ? DataChangeReason.RESTORE : DataChangeReason.UPDATE;
     }
 }

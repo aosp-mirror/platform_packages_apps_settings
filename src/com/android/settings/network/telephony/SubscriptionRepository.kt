@@ -20,13 +20,17 @@ import android.content.Context
 import android.telephony.SubscriptionInfo
 import android.telephony.SubscriptionManager
 import android.util.Log
+import androidx.lifecycle.LifecycleOwner
 import com.android.settings.network.SubscriptionUtil
+import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.asExecutor
 import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.conflate
 import kotlinx.coroutines.flow.filterNot
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
@@ -34,6 +38,8 @@ import kotlinx.coroutines.flow.onEach
 private const val TAG = "SubscriptionRepository"
 
 class SubscriptionRepository(private val context: Context) {
+    private val subscriptionManager = context.requireSubscriptionManager()
+
     /**
      * Return a list of subscriptions that are available and visible to the user.
      *
@@ -42,7 +48,26 @@ class SubscriptionRepository(private val context: Context) {
     fun getSelectableSubscriptionInfoList(): List<SubscriptionInfo> =
         context.getSelectableSubscriptionInfoList()
 
-    fun isSubscriptionEnabledFlow(subId: Int) = context.isSubscriptionEnabledFlow(subId)
+    /** Flow of whether the subscription enabled for the given [subId]. */
+    fun isSubscriptionEnabledFlow(subId: Int): Flow<Boolean> {
+        if (!SubscriptionManager.isValidSubscriptionId(subId)) return flowOf(false)
+        return context.subscriptionsChangedFlow()
+            .map { subscriptionManager.isSubscriptionEnabled(subId) }
+            .conflate()
+            .onEach { Log.d(TAG, "[$subId] isSubscriptionEnabledFlow: $it") }
+            .flowOn(Dispatchers.Default)
+    }
+
+    /** TODO: Move this to UI layer, when UI layer migrated to Kotlin. */
+    fun collectSubscriptionEnabled(
+        subId: Int,
+        lifecycleOwner: LifecycleOwner,
+        action: (Boolean) -> Unit,
+    ) {
+        isSubscriptionEnabledFlow(subId).collectLatestWithLifecycle(lifecycleOwner, action = action)
+    }
+
+    fun canDisablePhysicalSubscription() = subscriptionManager.canDisablePhysicalSubscription()
 }
 
 val Context.subscriptionManager: SubscriptionManager?
@@ -50,12 +75,8 @@ val Context.subscriptionManager: SubscriptionManager?
 
 fun Context.requireSubscriptionManager(): SubscriptionManager = subscriptionManager!!
 
-fun Context.isSubscriptionEnabledFlow(subId: Int) = subscriptionsChangedFlow().map {
-    subscriptionManager?.isSubscriptionEnabled(subId) ?: false
-}.flowOn(Dispatchers.Default)
-
 fun Context.phoneNumberFlow(subscriptionInfo: SubscriptionInfo) = subscriptionsChangedFlow().map {
-    SubscriptionUtil.getFormattedPhoneNumber(this, subscriptionInfo)
+    SubscriptionUtil.getBidiFormattedPhoneNumber(this, subscriptionInfo)
 }.filterNot { it.isNullOrEmpty() }.flowOn(Dispatchers.Default)
 
 fun Context.subscriptionsChangedFlow() = callbackFlow {
@@ -88,21 +109,29 @@ fun Context.getSelectableSubscriptionInfoList(): List<SubscriptionInfo> {
         // to users so they should never be returned.
         SubscriptionUtil.isSubscriptionVisible(subscriptionManager, this, subInfo)
     }
-    // Multiple subscriptions in a group should only have one representative.
-    // It should be the current active primary subscription if any, or any primary subscription.
-    val groupUuidToSelectedIdMap = visibleList
-        .groupBy { it.groupUuid }
-        .mapValues { (_, subInfos) ->
-            subInfos.filter { it.simSlotIndex != SubscriptionManager.INVALID_SIM_SLOT_INDEX }
-                .ifEmpty { subInfos }
-                .minOf { it.subscriptionId }
-        }
-
     return visibleList
-        .filter { subInfo ->
-            val groupUuid = subInfo.groupUuid ?: return@filter true
-            groupUuidToSelectedIdMap[groupUuid] == subInfo.subscriptionId
+        .groupBy { it.groupUuid }
+        .flatMap { (groupUuid, subInfos) ->
+            if (groupUuid == null) {
+                subInfos
+            } else {
+                // Multiple subscriptions in a group should only have one representative.
+                // It should be the current active primary subscription if any, or the primary
+                // subscription with minimum subscription id.
+                subInfos.filter { it.simSlotIndex != SubscriptionManager.INVALID_SIM_SLOT_INDEX }
+                    .ifEmpty { subInfos.sortedBy { it.subscriptionId } }
+                    .take(1)
+            }
         }
-        .sortedBy { it.subscriptionId }
+        // Matching the sorting order in SubscriptionManagerService.getAvailableSubscriptionInfoList
+        .sortedWith(compareBy({ it.sortableSimSlotIndex }, { it.subscriptionId }))
         .also { Log.d(TAG, "getSelectableSubscriptionInfoList: $it") }
 }
+
+/** Subscription with invalid sim slot index has lowest sort order. */
+private val SubscriptionInfo.sortableSimSlotIndex: Int
+    get() = if (simSlotIndex != SubscriptionManager.INVALID_SIM_SLOT_INDEX) {
+        simSlotIndex
+    } else {
+        Int.MAX_VALUE
+    }

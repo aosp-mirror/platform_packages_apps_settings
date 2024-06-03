@@ -18,6 +18,7 @@ package com.android.settings.accessibility;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.database.ContentObserver;
 import android.provider.Settings;
 
 import androidx.annotation.IntDef;
@@ -99,6 +100,29 @@ public final class MagnificationCapabilities {
 
         return Settings.Secure.getIntForUser(contentResolver, KEY_CAPABILITY,
                 MagnificationMode.FULLSCREEN, contentResolver.getUserId());
+    }
+
+    /**
+     * Register an observer class that gets callbacks when magnification capabilities changes.
+     *
+     * @param context A {@link Context}.
+     * @param contentObserver The object that receives callbacks when changes occur.
+     */
+    public static void registerObserver(Context context, ContentObserver contentObserver) {
+        context.getContentResolver().registerContentObserver(
+                Settings.Secure.getUriFor(KEY_CAPABILITY),
+                /* notifyForDescendants= */ false,
+                contentObserver);
+    }
+
+    /**
+     * Unregisters a magnification capabilities change observer.
+     *
+     * @param context A {@link Context}.
+     * @param contentObserver The previously registered observer that is no longer needed.
+     */
+    public static void unregisterObserver(Context context, ContentObserver contentObserver) {
+        context.getContentResolver().unregisterContentObserver(contentObserver);
     }
 
     private MagnificationCapabilities() {}

@@ -40,53 +40,32 @@ public class BatteryDefenderDetectorTest {
 
     @Mock private BatteryInfo mBatteryInfo;
     private BatteryDefenderDetector mBatteryDefenderDetector;
-    private Context mContext;
 
     private FakeFeatureFactory mFakeFeatureFactory;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-
-        mBatteryInfo.discharging = false;
-
-        mContext = ApplicationProvider.getApplicationContext();
-
-        mBatteryDefenderDetector = new BatteryDefenderDetector(mBatteryInfo, mContext);
-
+        final Context context = ApplicationProvider.getApplicationContext();
+        mBatteryDefenderDetector = new BatteryDefenderDetector(mBatteryInfo, context);
         mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
     }
 
     @Test
-    public void testDetect_notDefenderNotExtraDefend_tipInvisible() {
-        mBatteryInfo.isBatteryDefender = false;
-        when(mFakeFeatureFactory.powerUsageFeatureProvider.isExtraDefend()).thenReturn(false);
+    public void detect_notBatteryDefend_tipInvisible() {
+        when(mFakeFeatureFactory.powerUsageFeatureProvider.isBatteryDefend(mBatteryInfo))
+                .thenReturn(false);
 
         assertThat(mBatteryDefenderDetector.detect().isVisible()).isFalse();
     }
 
     @Test
-    public void testDetect_notDefenderIsExtraDefend_tipInvisible() {
-        mBatteryInfo.isBatteryDefender = false;
-        when(mFakeFeatureFactory.powerUsageFeatureProvider.isExtraDefend()).thenReturn(true);
-
-        assertThat(mBatteryDefenderDetector.detect().isVisible()).isFalse();
-    }
-
-    @Test
-    public void testDetect_isDefenderIsExtraDefend_tipInvisible() {
-        mBatteryInfo.isBatteryDefender = false;
-        when(mFakeFeatureFactory.powerUsageFeatureProvider.isExtraDefend()).thenReturn(true);
-
-        assertThat(mBatteryDefenderDetector.detect().isVisible()).isFalse();
-    }
-
-    @Test
-    public void testDetect_isDefenderNotExtraDefend_tipNew() {
-        mBatteryInfo.isBatteryDefender = true;
-        when(mFakeFeatureFactory.powerUsageFeatureProvider.isExtraDefend()).thenReturn(false);
+    public void detect_isBatteryDefend_tipNew() {
+        when(mFakeFeatureFactory.powerUsageFeatureProvider.isBatteryDefend(mBatteryInfo))
+                .thenReturn(true);
 
         assertThat(mBatteryDefenderDetector.detect().getState())
                 .isEqualTo(BatteryTip.StateType.NEW);
+        assertThat(mBatteryDefenderDetector.detect().isVisible()).isTrue();
     }
 }

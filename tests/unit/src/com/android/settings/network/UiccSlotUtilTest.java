@@ -757,7 +757,7 @@ public class UiccSlotUtilTest {
         CountDownLatch latch = spy(new CountDownLatch(1));
         UiccSlotUtil.SimCardStateChangeReceiver receive =
                 new UiccSlotUtil.SimCardStateChangeReceiver(latch);
-        Intent intent = new Intent(TelephonyManager.ACTION_SIM_SLOT_STATUS_CHANGED);
+        Intent intent = new Intent(TelephonyManager.ACTION_SIM_CARD_STATE_CHANGED);
         intent.putExtra(TelephonyManager.EXTRA_SIM_STATE, TelephonyManager.SIM_STATE_PRESENT);
 
         receive.onReceive(mContext, intent);

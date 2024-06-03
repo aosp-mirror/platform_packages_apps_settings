@@ -73,13 +73,14 @@ public class UseOneLockSettingsFragment extends DashboardFragment {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new UseOneLockControllerSwitch(context, this));
         controllers.add(new PrivateSpaceLockController(context, this));
-        if (Utils.isMultipleBiometricsSupported(context)) {
+        boolean isFaceAuthAllowed = Utils.isFaceNotConvenienceBiometric(context);
+        if (Utils.isMultipleBiometricsSupported(context) && isFaceAuthAllowed) {
             controllers.add(new FaceFingerprintUnlockController(context, getSettingsLifecycle()));
         } else if (Utils.hasFingerprintHardware(context)) {
             controllers.add(
                     new PrivateSpaceFingerprintPreferenceController(
                             context, "private_space_biometrics", getSettingsLifecycle()));
-        } else if (Utils.hasFaceHardware(context)) {
+        } else if (Utils.hasFaceHardware(context) && isFaceAuthAllowed) {
             controllers.add(
                     new PrivateSpaceFacePreferenceController(
                             context, "private_space_biometrics", getSettingsLifecycle()));

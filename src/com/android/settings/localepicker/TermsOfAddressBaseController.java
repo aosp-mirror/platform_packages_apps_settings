@@ -16,9 +16,9 @@
 
 package com.android.settings.localepicker;
 
-import android.app.GrammaticalInflectionManager;
 import android.content.Context;
 
+import androidx.annotation.NonNull;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
@@ -35,13 +35,15 @@ public abstract class TermsOfAddressBaseController extends BasePreferenceControl
     private PreferenceScreen mPreferenceScreen;
     private MetricsFeatureProvider mMetricsFeatureProvider;
     private TickButtonPreference mPreference;
-    private GrammaticalInflectionManager mGrammaticalInflectionManager;
+    private TermsOfAddressHelper mTermsOfAddressHelper;
 
     public TermsOfAddressBaseController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
-        mGrammaticalInflectionManager = context.getSystemService(
-                GrammaticalInflectionManager.class);
+    }
+
+    public void setTermsOfAddressHelper(@NonNull TermsOfAddressHelper termsOfAddressHelper) {
+        mTermsOfAddressHelper = termsOfAddressHelper;
     }
 
     @Override
@@ -52,7 +54,7 @@ public abstract class TermsOfAddressBaseController extends BasePreferenceControl
         mPreference.setOnPreferenceClickListener(clickedPref -> {
             sExecutor.execute(
                     () -> {
-                        mGrammaticalInflectionManager.setSystemWideGrammaticalGender(
+                        mTermsOfAddressHelper.setSystemGrammaticalGender(
                                 getGrammaticalGenderType());
                     });
             setSelected(mPreference);
@@ -74,8 +76,7 @@ public abstract class TermsOfAddressBaseController extends BasePreferenceControl
             return;
         }
         mPreference.setSelected(
-                mGrammaticalInflectionManager.getSystemGrammaticalGender()
-                        == getGrammaticalGenderType());
+                mTermsOfAddressHelper.getSystemGrammaticalGender() == getGrammaticalGenderType());
     }
 
     @Override

@@ -41,9 +41,12 @@ import com.android.settings.R;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.HapClientProfile;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
+import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
+import com.android.settingslib.core.lifecycle.events.OnStart;
+import com.android.settingslib.core.lifecycle.events.OnStop;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.List;
@@ -53,13 +56,16 @@ import java.util.List;
  */
 public class BluetoothDetailsHearingAidsPresetsController extends
         BluetoothDetailsController implements Preference.OnPreferenceChangeListener,
-        BluetoothHapClient.Callback, OnResume, OnPause {
+        BluetoothHapClient.Callback, LocalBluetoothProfileManager.ServiceListener,
+        OnStart, OnResume, OnPause, OnStop {
 
     private static final boolean DEBUG = true;
     private static final String TAG = "BluetoothDetailsHearingAidsPresetsController";
     static final String KEY_HEARING_AIDS_PRESETS = "hearing_aids_presets";
 
+    private final LocalBluetoothProfileManager mProfileManager;
     private final HapClientProfile mHapClientProfile;
+
     @Nullable
     private ListPreference mPreference;
 
@@ -69,23 +75,32 @@ public class BluetoothDetailsHearingAidsPresetsController extends
             @NonNull CachedBluetoothDevice device,
             @NonNull Lifecycle lifecycle) {
         super(context, fragment, device, lifecycle);
-        mHapClientProfile = manager.getProfileManager().getHapClientProfile();
+        mProfileManager = manager.getProfileManager();
+        mHapClientProfile = mProfileManager.getHapClientProfile();
+    }
+
+    @Override
+    public void onStart() {
+        if (mHapClientProfile != null && !mHapClientProfile.isProfileReady()) {
+            mProfileManager.addServiceListener(this);
+        }
     }
 
     @Override
     public void onResume() {
+        registerHapCallback();
         super.onResume();
-        if (mHapClientProfile != null) {
-            mHapClientProfile.registerCallback(ThreadUtils.getBackgroundExecutor(), this);
-        }
     }
 
     @Override
     public void onPause() {
-        if (mHapClientProfile != null) {
-            mHapClientProfile.unregisterCallback(this);
-        }
+        unregisterHapCallback();
         super.onPause();
+    }
+
+    @Override
+    public void onStop() {
+        mProfileManager.removeServiceListener(this);
     }
 
     @Override
@@ -95,46 +110,25 @@ public class BluetoothDetailsHearingAidsPresetsController extends
                     && preference instanceof final ListPreference listPreference) {
                 final int index = listPreference.findIndexOfValue(value);
                 final String presetName = listPreference.getEntries()[index].toString();
-                final int presetIndex = Integer.parseInt(
-                        listPreference.getEntryValues()[index].toString());
+                final int presetIndex = Integer.parseInt(value);
                 listPreference.setSummary(presetName);
+                if (DEBUG) {
+                    Log.d(TAG, "onPreferenceChange"
+                            + ", presetIndex: " + presetIndex
+                            + ", presetName: "  + presetName);
+                }
                 boolean supportSynchronizedPresets = mHapClientProfile.supportsSynchronizedPresets(
                         mCachedDevice.getDevice());
                 int hapGroupId = mHapClientProfile.getHapGroup(mCachedDevice.getDevice());
-                if (supportSynchronizedPresets
-                        && hapGroupId != BluetoothCsipSetCoordinator.GROUP_ID_INVALID) {
-                    if (DEBUG) {
-                        Log.d(TAG, "onPreferenceChange, selectPresetForGroup "
-                                + ", presetName: " + presetName
-                                + ", presetIndex: " + presetIndex
-                                + ", hapGroupId: "  + hapGroupId
-                                + ", device: " + mCachedDevice.getAddress());
+                if (supportSynchronizedPresets) {
+                    if (hapGroupId != BluetoothCsipSetCoordinator.GROUP_ID_INVALID) {
+                        selectPresetSynchronously(hapGroupId, presetIndex);
+                    } else {
+                        Log.w(TAG, "supportSynchronizedPresets but hapGroupId is invalid.");
+                        selectPresetIndependently(presetIndex);
                     }
-                    mHapClientProfile.selectPresetForGroup(hapGroupId, presetIndex);
                 } else {
-                    if (DEBUG) {
-                        Log.d(TAG, "onPreferenceChange, selectPreset "
-                                + ", presetName: " + presetName
-                                + ", presetIndex: " + presetIndex
-                                + ", device: " + mCachedDevice.getAddress());
-                    }
-                    mHapClientProfile.selectPreset(mCachedDevice.getDevice(), presetIndex);
-                    final CachedBluetoothDevice subDevice = mCachedDevice.getSubDevice();
-                    if (subDevice != null) {
-                        if (DEBUG) {
-                            Log.d(TAG, "onPreferenceChange, selectPreset for subDevice"
-                                    + ", device: " + subDevice.getAddress());
-                        }
-                        mHapClientProfile.selectPreset(subDevice.getDevice(), presetIndex);
-                    }
-                    for (final CachedBluetoothDevice memberDevice :
-                            mCachedDevice.getMemberDevice()) {
-                        if (DEBUG) {
-                            Log.d(TAG, "onPreferenceChange, selectPreset for memberDevice"
-                                    + ", device: " + memberDevice.getAddress());
-                        }
-                        mHapClientProfile.selectPreset(memberDevice.getDevice(), presetIndex);
-                    }
+                    selectPresetIndependently(presetIndex);
                 }
                 return true;
             }
@@ -166,6 +160,9 @@ public class BluetoothDetailsHearingAidsPresetsController extends
 
         loadAllPresetInfo();
         if (mPreference.getEntries().length == 0) {
+            if (DEBUG) {
+                Log.w(TAG, "Disable the preference since preset info size = 0");
+            }
             mPreference.setEnabled(false);
         } else {
             int activePresetIndex = mHapClientProfile.getActivePresetIndex(
@@ -202,11 +199,8 @@ public class BluetoothDetailsHearingAidsPresetsController extends
     @Override
     public void onPresetSelectionFailed(@NonNull BluetoothDevice device, int reason) {
         if (device.equals(mCachedDevice.getDevice())) {
-            if (DEBUG) {
-                Log.d(TAG,
-                        "onPresetSelectionFailed, device: " + device.getAddress()
-                                + ", reason: " + reason);
-            }
+            Log.w(TAG, "onPresetSelectionFailed, device: " + device.getAddress()
+                    + ", reason: " + reason);
             mContext.getMainExecutor().execute(() -> {
                 refresh();
                 showErrorToast();
@@ -217,14 +211,12 @@ public class BluetoothDetailsHearingAidsPresetsController extends
     @Override
     public void onPresetSelectionForGroupFailed(int hapGroupId, int reason) {
         if (hapGroupId == mHapClientProfile.getHapGroup(mCachedDevice.getDevice())) {
-            if (DEBUG) {
-                Log.d(TAG, "onPresetSelectionForGroupFailed, group: " + hapGroupId
-                        + ", reason: " + reason);
+            Log.w(TAG, "onPresetSelectionForGroupFailed, group: " + hapGroupId
+                    + ", reason: " + reason);
+            // Try to set the preset independently if group operation failed
+            if (mPreference != null) {
+                selectPresetIndependently(Integer.parseInt(mPreference.getValue()));
             }
-            mContext.getMainExecutor().execute(() -> {
-                refresh();
-                showErrorToast();
-            });
         }
     }
 
@@ -234,8 +226,10 @@ public class BluetoothDetailsHearingAidsPresetsController extends
         if (device.equals(mCachedDevice.getDevice())) {
             if (DEBUG) {
                 Log.d(TAG, "onPresetInfoChanged, device: " + device.getAddress()
-                        + ", reason: " + reason
-                        + ", infoList: " + presetInfoList);
+                        + ", reason: " + reason);
+                for (BluetoothHapPresetInfo info: presetInfoList) {
+                    Log.d(TAG, "    preset " + info.getIndex() + ": " + info.getName());
+                }
             }
             mContext.getMainExecutor().execute(this::refresh);
         }
@@ -244,11 +238,8 @@ public class BluetoothDetailsHearingAidsPresetsController extends
     @Override
     public void onSetPresetNameFailed(@NonNull BluetoothDevice device, int reason) {
         if (device.equals(mCachedDevice.getDevice())) {
-            if (DEBUG) {
-                Log.d(TAG,
-                        "onSetPresetNameFailed, device: " + device.getAddress()
-                                + ", reason: " + reason);
-            }
+            Log.w(TAG, "onSetPresetNameFailed, device: " + device.getAddress()
+                    + ", reason: " + reason);
             mContext.getMainExecutor().execute(() -> {
                 refresh();
                 showErrorToast();
@@ -259,10 +250,8 @@ public class BluetoothDetailsHearingAidsPresetsController extends
     @Override
     public void onSetPresetNameForGroupFailed(int hapGroupId, int reason) {
         if (hapGroupId == mHapClientProfile.getHapGroup(mCachedDevice.getDevice())) {
-            if (DEBUG) {
-                Log.d(TAG, "onSetPresetNameForGroupFailed, group: " + hapGroupId
-                        + ", reason: " + reason);
-            }
+            Log.w(TAG, "onSetPresetNameForGroupFailed, group: " + hapGroupId
+                    + ", reason: " + reason);
             mContext.getMainExecutor().execute(() -> {
                 refresh();
                 showErrorToast();
@@ -304,5 +293,80 @@ public class BluetoothDetailsHearingAidsPresetsController extends
     void showErrorToast() {
         Toast.makeText(mContext, R.string.bluetooth_hearing_aids_presets_error,
                 Toast.LENGTH_SHORT).show();
+    }
+
+    private void registerHapCallback() {
+        if (mHapClientProfile != null) {
+            try {
+                mHapClientProfile.registerCallback(ThreadUtils.getBackgroundExecutor(), this);
+            } catch (IllegalArgumentException e) {
+                // The callback was already registered
+                Log.w(TAG, "Cannot register callback: " + e.getMessage());
+            }
+
+        }
+    }
+
+    private void unregisterHapCallback() {
+        if (mHapClientProfile != null) {
+            try {
+                mHapClientProfile.unregisterCallback(this);
+            } catch (IllegalArgumentException e) {
+                // The callback was never registered or was already unregistered
+                Log.w(TAG, "Cannot unregister callback: " + e.getMessage());
+            }
+        }
+    }
+
+    @Override
+    public void onServiceConnected() {
+        if (mHapClientProfile != null && mHapClientProfile.isProfileReady()) {
+            mProfileManager.removeServiceListener(this);
+            registerHapCallback();
+            refresh();
+        }
+    }
+
+    @Override
+    public void onServiceDisconnected() {
+        // Do nothing
+    }
+
+    private void selectPresetSynchronously(int groupId, int presetIndex) {
+        if (mPreference == null) {
+            return;
+        }
+        if (DEBUG) {
+            Log.d(TAG, "selectPresetSynchronously"
+                    + ", presetIndex: " + presetIndex
+                    + ", groupId: "  + groupId
+                    + ", device: " + mCachedDevice.getAddress());
+        }
+        mHapClientProfile.selectPresetForGroup(groupId, presetIndex);
+    }
+    private void selectPresetIndependently(int presetIndex) {
+        if (mPreference == null) {
+            return;
+        }
+        if (DEBUG) {
+            Log.d(TAG, "selectPresetIndependently"
+                    + ", presetIndex: " + presetIndex
+                    + ", device: " + mCachedDevice.getAddress());
+        }
+        mHapClientProfile.selectPreset(mCachedDevice.getDevice(), presetIndex);
+        final CachedBluetoothDevice subDevice = mCachedDevice.getSubDevice();
+        if (subDevice != null) {
+            if (DEBUG) {
+                Log.d(TAG, "selectPreset for subDevice, device: " + subDevice);
+            }
+            mHapClientProfile.selectPreset(subDevice.getDevice(), presetIndex);
+        }
+        for (final CachedBluetoothDevice memberDevice :
+                mCachedDevice.getMemberDevice()) {
+            if (DEBUG) {
+                Log.d(TAG, "selectPreset for memberDevice, device: " + memberDevice);
+            }
+            mHapClientProfile.selectPreset(memberDevice.getDevice(), presetIndex);
+        }
     }
 }

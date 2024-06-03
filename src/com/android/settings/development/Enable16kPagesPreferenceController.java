@@ -23,15 +23,11 @@ import android.os.ParcelFileDescriptor;
 import android.os.PersistableBundle;
 import android.os.PowerManager;
 import android.os.RecoverySystem;
-import android.os.SystemProperties;
 import android.os.SystemUpdateManager;
 import android.os.UpdateEngine;
 import android.os.UpdateEngineStable;
 import android.os.UpdateEngineStableCallback;
-import android.os.UserHandle;
-import android.os.UserManager;
 import android.provider.Settings;
-import android.service.oemlock.OemLockManager;
 import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -57,7 +53,6 @@ import com.google.common.util.concurrent.MoreExecutors;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -78,15 +73,14 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
     private static final String TAG = "Enable16kPages";
     private static final String REBOOT_REASON = "toggle16k";
     private static final String ENABLE_16K_PAGES = "enable_16k_pages";
-
-    @VisibleForTesting
-    static final String DEV_OPTION_PROPERTY = "ro.product.build.16k_page.enabled";
-
     private static final int ENABLE_4K_PAGE_SIZE = 0;
     private static final int ENABLE_16K_PAGE_SIZE = 1;
 
-    private static final String OTA_16K_PATH = "/system/boot_otas/boot_ota_16k.zip";
-    private static final String OTA_4K_PATH = "/system/boot_otas/boot_ota_4k.zip";
+    private static final String SYSTEM_PATH = "/system";
+    private static final String VENDOR_PATH = "/vendor";
+    private static final String OTA_16K_PATH = "/boot_otas/boot_ota_16k.zip";
+    private static final String OTA_4K_PATH = "/boot_otas/boot_ota_4k.zip";
+
     private static final String PAYLOAD_BINARY_FILE_NAME = "payload.bin";
     private static final String PAYLOAD_PROPERTIES_FILE_NAME = "payload_properties.txt";
     private static final int OFFSET_TO_FILE_NAME = 30;
@@ -104,11 +98,12 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
             @NonNull Context context, @NonNull DevelopmentSettingsDashboardFragment fragment) {
         super(context);
         this.mFragment = fragment;
+        mEnable16k = Enable16kUtils.isUsing16kbPages();
     }
 
     @Override
     public boolean isAvailable() {
-        return SystemProperties.getBoolean(DEV_OPTION_PROPERTY, false);
+        return Enable16kUtils.is16KbToggleAvailable();
     }
 
     @Override
@@ -120,12 +115,12 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         mEnable16k = (Boolean) newValue;
         // Prompt user to do oem unlock first
-        if (!isDeviceOEMUnlocked()) {
+        if (!Enable16kUtils.isDeviceOEMUnlocked(mContext)) {
             Enable16KOemUnlockDialog.show(mFragment);
             return false;
         }
 
-        if (isDataf2fs()) {
+        if (!Enable16kUtils.isDataExt4()) {
             EnableExt4WarningDialog.show(mFragment, this);
             return false;
         }
@@ -135,11 +130,13 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
 
     @Override
     public void updateState(Preference preference) {
+        int defaultOptionValue =
+                Enable16kUtils.isUsing16kbPages() ? ENABLE_16K_PAGE_SIZE : ENABLE_4K_PAGE_SIZE;
         final int optionValue =
                 Settings.Global.getInt(
                         mContext.getContentResolver(),
                         Settings.Global.ENABLE_16K_PAGES,
-                        ENABLE_4K_PAGE_SIZE /* default */);
+                        defaultOptionValue /* default */);
 
         ((SwitchPreference) mPreference).setChecked(optionValue == ENABLE_16K_PAGE_SIZE);
     }
@@ -153,6 +150,14 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
                 Settings.Global.ENABLE_16K_PAGES,
                 ENABLE_4K_PAGE_SIZE);
         ((SwitchPreference) mPreference).setChecked(false);
+    }
+
+    @Override
+    protected void onDeveloperOptionsSwitchEnabled() {
+        int currentStatus =
+                Enable16kUtils.isUsing16kbPages() ? ENABLE_16K_PAGE_SIZE : ENABLE_4K_PAGE_SIZE;
+        Settings.Global.putInt(
+                mContext.getContentResolver(), Settings.Global.ENABLE_16K_PAGES, currentStatus);
     }
 
     /** Called when user confirms reboot dialog */
@@ -179,7 +184,7 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
                     @Override
                     public void onFailure(@NonNull Throwable t) {
                         hideProgressDialog();
-                        Log.e(TAG, "Failed to call applyPayload of UpdateEngineStable!");
+                        Log.e(TAG, "Failed to call applyPayload of UpdateEngineStable!", t);
                         displayToast(mContext.getString(R.string.toast_16k_update_failed_text));
                     }
                 },
@@ -188,7 +193,12 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
 
     /** Called when user dismisses to reboot dialog */
     @Override
-    public void on16kPagesDialogDismissed() {}
+    public void on16kPagesDialogDismissed() {
+        if (mPreference == null) {
+            return;
+        }
+        updateState(mPreference);
+    }
 
     private void installUpdate() {
         // Check if there is any pending system update
@@ -197,16 +207,19 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
         int status = data.getInt(SystemUpdateManager.KEY_STATUS);
         if (status != SystemUpdateManager.STATUS_UNKNOWN
                 && status != SystemUpdateManager.STATUS_IDLE) {
-            throw new RuntimeException("System has pending update!");
+            throw new RuntimeException(
+                    "System has pending update! Please restart the device to complete applying"
+                            + " pending update. If you are seeing this after using 16KB developer"
+                            + " options, please check configuration and OTA packages!");
         }
 
         // Publish system update info
         PersistableBundle info = createUpdateInfo(SystemUpdateManager.STATUS_IN_PROGRESS);
         manager.updateSystemUpdateInfo(info);
 
-        String updateFilePath = mEnable16k ? OTA_16K_PATH : OTA_4K_PATH;
         try {
-            File updateFile = new File(updateFilePath);
+            File updateFile = getOtaFile();
+            Log.i(TAG, "Update file path is " + updateFile.getAbsolutePath());
             applyUpdateFile(updateFile);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -303,7 +316,7 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
     }
 
     private void displayToast(String message) {
-        Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(mContext, message, Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -320,7 +333,7 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
 
                     @Override
                     public void onFailure(@NonNull Throwable t) {
-                        Log.e(TAG, "Failed to change the /data partition with ext4");
+                        Log.e(TAG, "Failed to change the /data partition to ext4");
                         displayToast(mContext.getString(R.string.format_ext4_failure_toast));
                     }
                 },
@@ -395,6 +408,7 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
                         LinearLayout.LayoutParams.WRAP_CONTENT,
                         LinearLayout.LayoutParams.WRAP_CONTENT);
         progressBar.setLayoutParams(params);
+        progressBar.setPadding(0, 24, 0, 24);
         builder.setView(progressBar);
         builder.setCancelable(false);
         return builder.create();
@@ -408,49 +422,22 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
         return infoBundle;
     }
 
-    private boolean isDataf2fs() {
-        try (BufferedReader br = new BufferedReader(new FileReader("/proc/mounts"))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                Log.i(TAG, line);
-                final String[] fields = line.split(" ");
-                final String partition = fields[1];
-                final String fsType = fields[2];
-                if (partition.equals("/data") && fsType.equals("f2fs")) {
-                    return true;
-                }
-            }
-        } catch (IOException e) {
-            Log.e(TAG, "Failed to read /proc/mounts");
-            displayToast(mContext.getString(R.string.format_ext4_failure_toast));
+    // if BOARD_16K_OTA_MOVE_VENDOR, OTAs will be present on the /vendor partition
+    private File getOtaFile() throws FileNotFoundException {
+        String otaPath = mEnable16k ? OTA_16K_PATH : OTA_4K_PATH;
+        // Check if boot ota exists on vendor path and prefer vendor ota if present
+        String vendorOta = VENDOR_PATH + otaPath;
+        File vendorOtaFile = new File(vendorOta);
+        if (vendorOtaFile != null && vendorOtaFile.exists()) {
+            return vendorOtaFile;
         }
 
-        return false;
-    }
-
-    private boolean isDeviceOEMUnlocked() {
-        // OEM unlock is checked for bootloader, carrier and user. Check all three to ensure
-        // that device is unlocked and it is also allowed by user as well as carrier
-        final OemLockManager oemLockManager = mContext.getSystemService(OemLockManager.class);
-        final UserManager userManager = mContext.getSystemService(UserManager.class);
-        if (oemLockManager == null || userManager == null) {
-            Log.e(TAG, "Required services not found on device to check for OEM unlock state.");
-            return false;
+        // otherwise, fallback to boot ota from system partition
+        String systemOta = SYSTEM_PATH + otaPath;
+        File systemOtaFile = new File(systemOta);
+        if (systemOtaFile == null || !systemOtaFile.exists()) {
+            throw new FileNotFoundException("File not found at path " + systemOta);
         }
-
-        // If either of device or carrier is not allowed to unlock, return false
-        if (!oemLockManager.isDeviceOemUnlocked()
-                || !oemLockManager.isOemUnlockAllowedByCarrier()) {
-            Log.e(TAG, "Device is not OEM unlocked or it is not allowed by carrier");
-            return false;
-        }
-
-        final UserHandle userHandle = UserHandle.of(UserHandle.myUserId());
-        if (userManager.hasBaseUserRestriction(UserManager.DISALLOW_FACTORY_RESET, userHandle)) {
-            Log.e(TAG, "Factory reset is not allowed for user.");
-            return false;
-        }
-
-        return true;
+        return systemOtaFile;
     }
 }

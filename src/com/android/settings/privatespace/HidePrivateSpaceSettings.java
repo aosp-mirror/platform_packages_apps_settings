@@ -21,9 +21,12 @@ import android.os.Bundle;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settingslib.widget.IllustrationPreference;
 
-public class HidePrivateSpaceSettings extends DashboardFragment{
+public class HidePrivateSpaceSettings extends DashboardFragment {
     private static final String TAG = "HidePrivateSpaceSettings";
+    private static final String PRIVATE_SPACE_HIDE_ILLUSTRATION_KEY =
+            "private_space_hide_illustration";
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -39,6 +42,14 @@ public class HidePrivateSpaceSettings extends DashboardFragment{
         if (PrivateSpaceMaintainer.getInstance(getContext()).isPrivateSpaceLocked()) {
             finish();
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        final IllustrationPreference illustrationPreference =
+                getPreferenceScreen().findPreference(PRIVATE_SPACE_HIDE_ILLUSTRATION_KEY);
+        illustrationPreference.applyDynamicColor();
     }
 
     @Override

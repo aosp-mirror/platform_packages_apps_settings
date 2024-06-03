@@ -150,7 +150,10 @@ public class BatteryDiffData {
         final Iterator<BatteryDiffEntry> iterator = entries.iterator();
         while (iterator.hasNext()) {
             final BatteryDiffEntry entry = iterator.next();
-            final long screenOnTimeInMs = entry.mScreenOnTimeInMs;
+            final long screenOnTimeInMs =
+                    entry.isSystemEntry()
+                            ? entry.mForegroundUsageTimeInMs
+                            : entry.mScreenOnTimeInMs;
             final double comsumePower = entry.mConsumePower;
             final String packageName = entry.getPackageName();
             final Integer componentId = entry.mComponentId;

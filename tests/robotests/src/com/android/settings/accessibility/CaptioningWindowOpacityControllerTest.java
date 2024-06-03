@@ -102,7 +102,8 @@ public class CaptioningWindowOpacityControllerTest {
 
     @Test
     public void onValueChanged_shouldSetCaptionEnabled() {
-        mShadowCaptioningManager.setEnabled(false);
+        Settings.Secure.putInt(
+            mContext.getContentResolver(), Settings.Secure.ACCESSIBILITY_CAPTIONING_ENABLED, OFF);
         mController.displayPreference(mScreen);
 
         mController.onValueChanged(mPreference, 0x80FFFFFF);

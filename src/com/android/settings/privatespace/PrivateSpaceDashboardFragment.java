@@ -19,16 +19,19 @@ package com.android.settings.privatespace;
 import static com.android.settings.privatespace.PrivateSpaceAuthenticationActivity.EXTRA_SHOW_PRIVATE_SPACE_UNLOCKED;
 
 import android.app.settings.SettingsEnums;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settingslib.widget.IllustrationPreference;
 
 /** Fragment representing the Private Space dashboard in Settings. */
 public class PrivateSpaceDashboardFragment extends DashboardFragment {
     private static final String TAG = "PSDashboardFragment";
+    private static final String PRIVATE_SPACE_ILLUSTRATION_KEY = "private_space_illustration";
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -38,7 +41,14 @@ public class PrivateSpaceDashboardFragment extends DashboardFragment {
             if (icicle == null
                     && getIntent().getBooleanExtra(EXTRA_SHOW_PRIVATE_SPACE_UNLOCKED, false)) {
                 Log.i(TAG, "Private space unlocked showing toast");
-                Toast.makeText(getContext(), R.string.private_space_unlocked, Toast.LENGTH_SHORT)
+                Drawable drawable =
+                        getContext().getDrawable(R.drawable.ic_private_space_unlock_icon);
+                Toast.makeCustomToastWithIcon(
+                                getContext(),
+                                null /* looper */,
+                                getContext().getString(R.string.private_space_unlocked),
+                                Toast.LENGTH_SHORT,
+                                drawable)
                         .show();
             }
         }
@@ -48,8 +58,17 @@ public class PrivateSpaceDashboardFragment extends DashboardFragment {
     public void onStart() {
         super.onStart();
         if (PrivateSpaceMaintainer.getInstance(getContext()).isPrivateSpaceLocked()) {
-            finish();
+            // To make sure the task is removed if it is the last activity in that stack.
+            getActivity().finishAndRemoveTask();
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        final IllustrationPreference illustrationPreference =
+                getPreferenceScreen().findPreference(PRIVATE_SPACE_ILLUSTRATION_KEY);
+        illustrationPreference.applyDynamicColor();
     }
 
     @Override

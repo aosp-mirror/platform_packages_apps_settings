@@ -17,6 +17,9 @@
 package com.android.settings.accessibility;
 
 import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
+import static com.android.settings.accessibility.MagnificationCapabilities.MagnificationMode;
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -36,6 +39,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.ShadowContentResolver;
 
 @RunWith(RobolectricTestRunner.class)
 public class MagnificationAlwaysOnPreferenceControllerTest {
@@ -43,21 +48,27 @@ public class MagnificationAlwaysOnPreferenceControllerTest {
     private static final String KEY_ALWAYS_ON =
             Settings.Secure.ACCESSIBILITY_MAGNIFICATION_ALWAYS_ON_ENABLED;
 
-    private final Context mContext = ApplicationProvider.getApplicationContext();
-    private final SwitchPreference mSwitchPreference = spy(new SwitchPreference(mContext));
-    private final MagnificationAlwaysOnPreferenceController mController =
-            new MagnificationAlwaysOnPreferenceController(mContext,
-                    MagnificationAlwaysOnPreferenceController.PREF_KEY);
+    private Context mContext;
+    private ShadowContentResolver mShadowContentResolver;
+    private SwitchPreference mSwitchPreference;
+    private MagnificationAlwaysOnPreferenceController mController;
 
     @Before
     public void setUp() {
+        mContext = ApplicationProvider.getApplicationContext();
+        mShadowContentResolver = Shadow.extract(mContext.getContentResolver());
+
         final PreferenceManager preferenceManager = new PreferenceManager(mContext);
         final PreferenceScreen screen = preferenceManager.createPreferenceScreen(mContext);
+        mSwitchPreference = spy(new SwitchPreference(mContext));
         mSwitchPreference.setKey(MagnificationAlwaysOnPreferenceController.PREF_KEY);
         screen.addPreference(mSwitchPreference);
-        mController.displayPreference(screen);
 
+        mController = new MagnificationAlwaysOnPreferenceController(mContext,
+                MagnificationAlwaysOnPreferenceController.PREF_KEY);
+        mController.displayPreference(screen);
         mController.updateState(mSwitchPreference);
+
         reset(mSwitchPreference);
     }
 
@@ -79,5 +90,57 @@ public class MagnificationAlwaysOnPreferenceControllerTest {
         verify(mSwitchPreference).setChecked(false);
         assertThat(mController.isChecked()).isFalse();
         assertThat(mSwitchPreference.isChecked()).isFalse();
+    }
+
+    @Test
+    public void onResume_verifyRegisterCapabilityObserver() {
+        mController.onResume();
+        assertThat(mShadowContentResolver.getContentObservers(
+                Settings.Secure.getUriFor(Settings.Secure.ACCESSIBILITY_MAGNIFICATION_CAPABILITY)))
+                .hasSize(1);
+    }
+
+    @Test
+    public void onPause_verifyUnregisterCapabilityObserver() {
+        mController.onResume();
+        mController.onPause();
+        assertThat(mShadowContentResolver.getContentObservers(
+                Settings.Secure.getUriFor(Settings.Secure.ACCESSIBILITY_MAGNIFICATION_CAPABILITY)))
+                .isEmpty();
+    }
+
+    @Test
+    public void updateState_windowModeOnly_preferenceBecomesUnavailable() {
+        MagnificationCapabilities.setCapabilities(mContext, MagnificationMode.WINDOW);
+
+        mController.updateState(mSwitchPreference);
+        assertThat(mSwitchPreference.isEnabled()).isFalse();
+    }
+
+    @Test
+    public void updateState_fullscreenModeOnly_preferenceIsAvailable() {
+        MagnificationCapabilities.setCapabilities(mContext, MagnificationMode.FULLSCREEN);
+
+        mController.updateState(mSwitchPreference);
+        assertThat(mSwitchPreference.isEnabled()).isTrue();
+    }
+
+    @Test
+    public void updateState_switchMode_preferenceIsAvailable() {
+        MagnificationCapabilities.setCapabilities(mContext, MagnificationMode.ALL);
+
+        mController.updateState(mSwitchPreference);
+        assertThat(mSwitchPreference.isEnabled()).isTrue();
+    }
+
+    @Test
+    public void getAvailableStatus_notInSetupWizard_returnAvailable() {
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+    }
+
+    @Test
+    public void getAvailableStatus_inSetupWizard_returnConditionallyUnavailable() {
+        mController.setInSetupWizard(true);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 }

@@ -1,7 +1,14 @@
 package: "com.android.settings.accessibility"
-container: "system"
+container: "system_ext"
 
 # NOTE: Keep alphabetized to help limit merge conflicts from multiple simultaneous editors.
+
+flag {
+  name: "add_brightness_settings_in_suw"
+  namespace: "accessibility"
+  description: "Whether to add brightness preference in SUW Vision Settings"
+  bug: "332974327"
+}
 
 flag {
   name: "edit_shortcuts_in_full_screen"
@@ -22,6 +29,16 @@ flag {
   namespace: "accessibility"
   description: "Allows users to control hearing aid volume offset in the Bluetooth device details page."
   bug: "301198830"
+}
+
+flag {
+  name: "hide_magnification_always_on_toggle_when_window_mode_only"
+  namespace: "accessibility"
+  description: "Decides whether to hide the magnification always on setting when capabilities is window mode only."
+  bug: "328787031"
+  metadata {
+    purpose: PURPOSE_BUGFIX
+  }
 }
 
 flag {

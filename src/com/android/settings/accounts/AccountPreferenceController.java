@@ -256,6 +256,7 @@ public class AccountPreferenceController extends AbstractPreferenceController
             if (preference == profileData.addAccountPreference) {
                 mMetricsFeatureProvider.logClickedPreference(preference, metricsCategory);
                 Intent intent = new Intent(ACTION_ADD_ACCOUNT);
+                intent.setClass(mContext, AddAccountSettings.class);
                 intent.putExtra(EXTRA_USER, profileData.userInfo.getUserHandle());
                 intent.putExtra(EXTRA_AUTHORITIES, mAuthorities);
                 mContext.startActivity(intent);

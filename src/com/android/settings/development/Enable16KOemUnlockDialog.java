@@ -16,10 +16,15 @@
 
 package com.android.settings.development;
 
+import static androidx.core.text.HtmlCompat.FROM_HTML_MODE_COMPACT;
+
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -60,7 +65,10 @@ public class Enable16KOemUnlockDialog extends InstrumentedDialogFragment
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         return new AlertDialog.Builder(getActivity())
                 .setTitle(R.string.confirm_oem_unlock_for_16k_title)
-                .setMessage(R.string.confirm_oem_unlock_for_16k_text)
+                .setMessage(
+                        Html.fromHtml(
+                                getString(R.string.confirm_oem_unlock_for_16k_text),
+                                FROM_HTML_MODE_COMPACT))
                 .setPositiveButton(android.R.string.ok, this /* onClickListener */)
                 .create();
     }
@@ -73,5 +81,12 @@ public class Enable16KOemUnlockDialog extends InstrumentedDialogFragment
     @Override
     public void onDismiss(@NonNull DialogInterface dialog) {
         super.onDismiss(dialog);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        ((TextView) getDialog().findViewById(android.R.id.message))
+                .setMovementMethod(LinkMovementMethod.getInstance());
     }
 }

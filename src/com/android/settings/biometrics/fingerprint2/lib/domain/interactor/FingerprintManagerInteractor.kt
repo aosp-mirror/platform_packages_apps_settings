@@ -16,6 +16,7 @@
 
 package com.android.settings.biometrics.fingerprint2.lib.domain.interactor
 
+import android.hardware.fingerprint.FingerprintSensorPropertiesInternal
 import com.android.settings.biometrics.fingerprint2.lib.model.EnrollReason
 import com.android.settings.biometrics.fingerprint2.lib.model.FingerEnrollState
 import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintAuthAttemptModel
@@ -56,8 +57,7 @@ interface FingerprintManagerInteractor {
 
   /**
    * Runs [FingerprintManager.enroll] with the [hardwareAuthToken] and [EnrollReason] for this
-   * enrollment. Returning the [FingerEnrollState] that represents this fingerprint enrollment
-   * state.
+   * enrollment. If successful data in the [fingerprintEnrollState] should be populated.
    */
   suspend fun enroll(
     hardwareAuthToken: ByteArray?,

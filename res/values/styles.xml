@@ -459,6 +459,13 @@
         <item name="cardElevation">0dp</item>
     </style>
 
+    <style name="SearchBarStyle_v2">
+        <item name="cardCornerRadius">40dp</item>
+        <item name="cardElevation">0dp</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="strokeColor">@color/settingslib_materialColorOutlineVariant</item>
+    </style>
+
     <style name="ConditionCardBorderlessButton"
            parent="android:Widget.DeviceDefault.Button.Borderless">
         <item name="android:textColor">?android:attr/colorAccent</item>
@@ -953,7 +960,7 @@
         <item name="android:fontFamily">google-sans-text</item>
     </style>
 
-    <style name="PrivateSpaceSetupTextFontStyle">
+    <style name="PrivateSpaceSetupTextFontStyle" parent="@android:style/TextAppearance.DeviceDefault">
         <item name="android:textColor">?android:attr/textColorPrimary</item>
         <item name="android:fontFamily">google-sans-text</item>
         <item name="android:layout_width">wrap_content</item>

@@ -17,11 +17,10 @@
 package com.android.settings.spa.network
 
 import android.telephony.SubscriptionInfo
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.SignalCellularAlt
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -29,6 +28,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import com.android.settings.R
 import com.android.settings.network.SimOnboardingService
@@ -41,7 +41,6 @@ import com.android.settingslib.spa.widget.preference.Preference
 import com.android.settingslib.spa.widget.preference.PreferenceModel
 import com.android.settingslib.spa.widget.scaffold.BottomAppBarButton
 import com.android.settingslib.spa.widget.scaffold.SuwScaffold
-import com.android.settingslib.spa.widget.ui.SettingsBody
 
 /**
  * the sim onboarding label compose
@@ -56,12 +55,12 @@ fun SimOnboardingLabelSimImpl(
         imageVector = Icons.Outlined.SignalCellularAlt,
         title = stringResource(R.string.sim_onboarding_label_sim_title),
         actionButton = BottomAppBarButton(
-            stringResource(R.string.sim_onboarding_next),
-            nextAction
+            text = stringResource(R.string.sim_onboarding_next),
+            onClick = nextAction
         ),
         dismissButton = BottomAppBarButton(
-            stringResource(R.string.cancel),
-            cancelAction
+            text = stringResource(R.string.cancel),
+            onClick = cancelAction
         ),
     ) {
         LabelSimBody(onboardingService)
@@ -70,9 +69,7 @@ fun SimOnboardingLabelSimImpl(
 
 @Composable
 private fun LabelSimBody(onboardingService: SimOnboardingService) {
-    Column(Modifier.padding(SettingsDimension.itemPadding)) {
-        SettingsBody(stringResource(R.string.sim_onboarding_label_sim_msg))
-    }
+    SimOnboardingMessage(stringResource(R.string.sim_onboarding_label_sim_msg))
 
     for (subInfo in onboardingService.getSelectableSubscriptionInfoList()) {
         LabelSimPreference(onboardingService, subInfo)
@@ -84,13 +81,16 @@ private fun LabelSimPreference(
     onboardingService: SimOnboardingService,
     subInfo: SubscriptionInfo,
 ) {
+    val originalSimCarrierName = subInfo.displayName.toString()
     var titleSimName by remember {
         mutableStateOf(onboardingService.getSubscriptionInfoDisplayName(subInfo))
     }
     val phoneNumber = phoneNumber(subInfo)
     val alertDialogPresenter = rememberAlertDialogPresenter(
         confirmButton = AlertDialogButton(stringResource(R.string.mobile_network_sim_name_rename)) {
-            onboardingService.addItemForRenaming(subInfo, titleSimName)
+            onboardingService.addItemForRenaming(
+                subInfo, if (titleSimName.isEmpty()) originalSimCarrierName else titleSimName
+            )
         },
         dismissButton = AlertDialogButton(stringResource(R.string.cancel)) {
             titleSimName = onboardingService.getSubscriptionInfoDisplayName(subInfo)
@@ -104,9 +104,10 @@ private fun LabelSimPreference(
             SettingsOutlinedTextField(
                 value = titleSimName,
                 label = stringResource(R.string.sim_onboarding_label_sim_dialog_label),
-                shape = MaterialTheme.shapes.extraLarge
+                placeholder = {Text(text = originalSimCarrierName)},
+                modifier = Modifier.fillMaxWidth().testTag("contentInput")
             ) {
-                titleSimName = it
+                titleSimName = if (it.matches(Regex("^\\s*$"))) originalSimCarrierName else it
             }
         },
     )

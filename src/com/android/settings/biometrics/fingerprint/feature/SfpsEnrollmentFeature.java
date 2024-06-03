@@ -93,4 +93,25 @@ public interface SfpsEnrollmentFeature {
      * @param lottieView the view related to the lottie
      */
     default void handleOnEnrollmentLottieComposition(LottieAnimationView lottieView) {}
+
+    /**
+     * Indicates if the title and description should be updated.
+     * @return true to update the title and description; false otherwise.
+     */
+    default boolean shouldUpdateTitleAndDescription() {
+        return true;
+    }
+
+    /**
+     * Notifies an acquisition happens.
+     * @param isAcquiredGood isAcquiredGood
+     */
+    default void handleOnAcquired(boolean isAcquiredGood) {}
+
+    /**
+     * Notifies an enrollment progress changes event.
+     * @param steps steps
+     * @param remaining remaining
+     */
+    default void handleOnEnrollmentProgressChange(int steps, int remaining) {}
 }

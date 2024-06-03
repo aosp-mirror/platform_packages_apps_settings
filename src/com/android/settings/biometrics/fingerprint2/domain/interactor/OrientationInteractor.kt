@@ -19,21 +19,27 @@ package com.android.settings.biometrics.fingerprint2.domain.interactor
 import android.content.Context
 import android.view.OrientationEventListener
 import com.android.internal.R
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.callbackFlow
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.transform
 
-/**
- * Interactor which provides information about orientation
- */
+/** Interactor which provides information about orientation */
 interface OrientationInteractor {
   /** A flow that contains the information about the orientation changing */
   val orientation: Flow<Int>
-  /** A flow that contains the rotation info */
+  /**
+   * This indicates the surface rotation that hte view is currently in. For instance its possible to
+   * rotate a view to 90 degrees but for it to still be portrait mode. In this case, this flow
+   * should emit that we are in rotation 0 (SurfaceView.Rotation_0)
+   */
   val rotation: Flow<Int>
+  /**
+   * A flow that contains the rotation info matched against the def [config_reverseDefaultRotation]
+   */
+  val rotationFromDefault: Flow<Int>
+
   /**
    * A Helper function that computes rotation if device is in
    * [R.bool.config_reverseDefaultConfigRotation]
@@ -41,8 +47,7 @@ interface OrientationInteractor {
   fun getRotationFromDefault(rotation: Int): Int
 }
 
-class OrientationInteractorImpl(private val context: Context, activityScope: CoroutineScope) :
-  OrientationInteractor {
+class OrientationInteractorImpl(private val context: Context) : OrientationInteractor {
 
   override val orientation: Flow<Int> = callbackFlow {
     val orientationEventListener =
@@ -56,21 +61,11 @@ class OrientationInteractorImpl(private val context: Context, activityScope: Cor
   }
 
   override val rotation: Flow<Int> =
-    callbackFlow {
-      val orientationEventListener =
-        object : OrientationEventListener(context) {
-          override fun onOrientationChanged(orientation: Int) {
-            trySend(getRotationFromDefault(context.display!!.rotation))
-          }
-        }
-      orientationEventListener.enable()
-      awaitClose { orientationEventListener.disable() }
+    orientation.transform {
+      emit(context.display!!.rotation)
     }
-      .stateIn(
-        activityScope, // This is tied to the activity scope
-        SharingStarted.WhileSubscribed(), // When no longer subscribed, we removeTheListener
-        context.display!!.rotation,
-      )
+
+  override val rotationFromDefault: Flow<Int> = rotation.map { getRotationFromDefault(it) }
 
   override fun getRotationFromDefault(rotation: Int): Int {
     val isReverseDefaultRotation =

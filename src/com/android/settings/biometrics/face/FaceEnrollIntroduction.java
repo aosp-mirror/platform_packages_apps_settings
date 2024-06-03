@@ -170,22 +170,25 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
             infoMessageRequireEyes.setText(getInfoMessageRequireEyes());
         }
 
-        mFaceManager.addAuthenticatorsRegisteredCallback(
-                new IFaceAuthenticatorsRegisteredCallback.Stub() {
-                    @Override
-                    public void onAllAuthenticatorsRegistered(
-                            @NonNull List<FaceSensorPropertiesInternal> sensors) {
-                        if (sensors.isEmpty()) {
-                            Log.e(TAG, "No sensors");
-                            return;
-                        }
 
-                        boolean isFaceStrong = sensors.get(0).sensorStrength
-                                == SensorProperties.STRENGTH_STRONG;
-                        mIsFaceStrong = isFaceStrong;
-                        onFaceStrengthChanged();
-                    }
-                });
+        if (mFaceManager != null) {
+            mFaceManager.addAuthenticatorsRegisteredCallback(
+                    new IFaceAuthenticatorsRegisteredCallback.Stub() {
+                        @Override
+                        public void onAllAuthenticatorsRegistered(
+                                @NonNull List<FaceSensorPropertiesInternal> sensors) {
+                            if (sensors.isEmpty()) {
+                                Log.e(TAG, "No sensors");
+                                return;
+                            }
+
+                            boolean isFaceStrong = sensors.get(0).sensorStrength
+                                    == SensorProperties.STRENGTH_STRONG;
+                            mIsFaceStrong = isFaceStrong;
+                            onFaceStrengthChanged();
+                        }
+                    });
+        }
 
         // This path is an entry point for SetNewPasswordController, e.g.
         // adb shell am start -a android.app.action.SET_NEW_PASSWORD
@@ -362,7 +365,9 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
 
     @StringRes
     protected int getInfoMessageLooking() {
-        return R.string.security_settings_face_enroll_introduction_info_looking;
+        return isPrivateProfile()
+                ? R.string.private_space_face_enroll_introduction_info_looking
+                : R.string.security_settings_face_enroll_introduction_info_looking;
     }
 
     @StringRes
@@ -387,7 +392,10 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
 
     @StringRes
     protected int getLessSecureMessage() {
-        return R.string.security_settings_face_enroll_introduction_info_less_secure;
+        return isPrivateProfile()
+                ? R.string.private_space_face_enroll_introduction_info_less_secure
+                : R.string.security_settings_face_enroll_introduction_info_less_secure;
+
     }
 
     @Override
@@ -408,6 +416,9 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
 
     @Override
     protected int getHeaderResDefault() {
+        if (isPrivateProfile()) {
+            return R.string.private_space_face_enroll_introduction_title;
+        }
         return R.string.security_settings_face_enroll_introduction_title;
     }
 
@@ -574,7 +585,10 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
 
     @Override
     protected void updateDescriptionText() {
-        if (mIsFaceStrong) {
+        if (isPrivateProfile()) {
+            setDescriptionText(getString(
+                    R.string.private_space_face_enroll_introduction_message));
+        } else if (mIsFaceStrong) {
             setDescriptionText(getString(
                     R.string.security_settings_face_enroll_introduction_message_class3));
         }
@@ -604,5 +618,9 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
             iconLessSecure.getBackground().setColorFilter(getIconColorFilter());
         }
         updateDescriptionText();
+    }
+
+    private boolean isPrivateProfile() {
+        return Utils.isPrivateProfile(mUserId, getApplicationContext());
     }
 }

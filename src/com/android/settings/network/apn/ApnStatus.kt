@@ -174,20 +174,13 @@ fun validateAndSaveApnData(
  * @return An error message if the apn data is invalid, otherwise return null.
  */
 fun validateApnData(apnData: ApnData, context: Context): String? {
-    var errorMsg: String?
-    val name = apnData.name
-    val apn = apnData.apn
-    errorMsg = if (name == "") {
-        context.resources.getString(R.string.error_name_empty)
-    } else if (apn == "") {
-        context.resources.getString(R.string.error_apn_empty)
-    } else {
-        validateMMSC(true, apnData.mmsc, context)
+    val errorMsg: String? = when {
+        apnData.name.isEmpty() -> context.resources.getString(R.string.error_name_empty)
+        apnData.apn.isEmpty() -> context.resources.getString(R.string.error_apn_empty)
+        apnData.apnType.isEmpty() -> context.resources.getString(R.string.error_apn_type_empty)
+        else -> validateMMSC(true, apnData.mmsc, context) ?: isItemExist(apnData, context)
     }
-    if (errorMsg == null) {
-        errorMsg = isItemExist(apnData, context)
-    }
-    return errorMsg?.apply { Log.d(TAG, "APN data not valid, reason: $this") }
+    return errorMsg?.also { Log.d(TAG, "APN data not valid, reason: $it") }
 }
 
 /**

@@ -165,7 +165,7 @@ public class SubscriptionsPreferenceControllerTest {
         mController =  new FakeSubscriptionsPreferenceController(mContext, mLifecycle,
                 mUpdateListener, KEY, 5);
         Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 0);
-        mController.setWifiPickerTrackerHelper(mWifiPickerTrackerHelper);
+        mController.mWifiPickerTrackerHelper = mWifiPickerTrackerHelper;
     }
 
     @After

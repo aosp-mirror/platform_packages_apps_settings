@@ -42,23 +42,16 @@ class NetworkCycleDataRepository(
     fun loadFirstCycle(): NetworkUsageData? = getCycles().firstOrNull()?.let { queryUsage(it) }
 
     override fun getCycles(): List<Range<Long>> =
-        getPolicy()?.getCycles() ?: queryCyclesAsFourWeeks()
+        getPolicy()?.getCycles().orEmpty().ifEmpty { queryCyclesAsFourWeeks() }
 
-    private fun queryCyclesAsFourWeeks(): List<Range<Long>> {
-        val timeRange = networkStatsRepository.getTimeRange() ?: return emptyList()
-        return reverseBucketRange(
-            startTime = timeRange.lower,
-            endTime = timeRange.upper,
-            step = DateUtils.WEEK_IN_MILLIS * 4,
-        )
-    }
+    private fun queryCyclesAsFourWeeks(): List<Range<Long>> =
+        networkStatsRepository.getTimeRange().asFourWeeks()
 
     override fun getPolicy(): NetworkPolicy? =
         with(NetworkPolicyEditor(policyManager)) {
             read()
             getPolicy(networkTemplate)
         }
-
 
     override fun queryUsage(range: Range<Long>) = NetworkUsageData(
         startTime = range.lower,
@@ -70,6 +63,15 @@ class NetworkCycleDataRepository(
         fun NetworkPolicy.getCycles() = cycleIterator().asSequence().map {
             Range(it.lower.toInstant().toEpochMilli(), it.upper.toInstant().toEpochMilli())
         }.toList()
+
+        fun Range<Long>?.asFourWeeks(): List<Range<Long>> {
+            val timeRange = this ?: return emptyList()
+            return reverseBucketRange(
+                startTime = timeRange.lower,
+                endTime = timeRange.upper,
+                step = DateUtils.WEEK_IN_MILLIS * 4,
+            )
+        }
 
         fun bucketRange(startTime: Long, endTime: Long, step: Long): List<Range<Long>> =
             (startTime..endTime step step).zipWithNext(::Range)

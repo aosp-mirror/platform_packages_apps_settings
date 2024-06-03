@@ -17,6 +17,7 @@
 package com.android.settings.biometrics.fingerprint;
 
 import static android.hardware.biometrics.BiometricAuthenticator.TYPE_FINGERPRINT;
+import static android.hardware.biometrics.BiometricFingerprintConstants.FINGERPRINT_ACQUIRED_IMAGER_DIRTY;
 import static android.text.Layout.HYPHENATION_FREQUENCY_NONE;
 
 import android.animation.Animator;
@@ -263,7 +264,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
 
         mIsSetupWizard = WizardManagerHelper.isAnySetupWizard(getIntent());
         if (mCanAssumeUdfps || mCanAssumeSfps) {
-            updateTitleAndDescription();
+            updateTitleAndDescription(true);
         } else {
             setHeaderText(R.string.security_settings_fingerprint_enroll_repeat_title);
         }
@@ -386,7 +387,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     protected void onStart() {
         super.onStart();
         updateProgress(false /* animate */);
-        updateTitleAndDescription();
+        updateTitleAndDescription(true);
         if (mRestoring) {
             startIconAnimation();
         }
@@ -490,12 +491,14 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         return new Intent(this, FingerprintEnrollFinish.class);
     }
 
-    private void updateTitleAndDescription() {
+    private void updateTitleAndDescription(boolean force) {
         if (mCanAssumeUdfps) {
             updateTitleAndDescriptionForUdfps();
             return;
         } else if (mCanAssumeSfps) {
-            updateTitleAndDescriptionForSfps();
+            if (force || mSfpsEnrollmentFeature.shouldUpdateTitleAndDescription()) {
+                updateTitleAndDescriptionForSfps();
+            }
             return;
         }
 
@@ -770,9 +773,14 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
 
     @Override
     public void onEnrollmentHelp(int helpMsgId, CharSequence helpString) {
-        final CharSequence featuredString = mCanAssumeSfps
+        CharSequence featuredString = mCanAssumeSfps
                 ? mSfpsEnrollmentFeature.getFeaturedVendorString(this, helpMsgId, helpString)
                 : helpString;
+
+        if (helpMsgId == FINGERPRINT_ACQUIRED_IMAGER_DIRTY && mCanAssumeUdfps) {
+            featuredString = getResources().getString(
+                    R.string.fingerprint_acquired_imager_dirty_udfps);
+        }
 
         if (!TextUtils.isEmpty(featuredString)) {
             if (!(mCanAssumeUdfps || mCanAssumeSfps)) {
@@ -808,19 +816,15 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     public void onEnrollmentProgressChange(int steps, int remaining) {
         updateProgress(true /* animate */);
         final int percent = (int) (((float) (steps - remaining) / (float) steps) * 100);
-        if (mCanAssumeSfps && mIsAccessibilityEnabled) {
-            CharSequence announcement = getString(
-                    R.string.security_settings_sfps_enroll_progress_a11y_message, percent);
-            announceEnrollmentProgress(announcement);
-            if (mIllustrationLottie != null) {
-                mIllustrationLottie.setContentDescription(
-                        getString(
-                                R.string.security_settings_sfps_animation_a11y_label,
-                                percent)
-                );
+        if (mCanAssumeSfps) {
+            mSfpsEnrollmentFeature.handleOnEnrollmentProgressChange(steps, remaining);
+            if (mIsAccessibilityEnabled) {
+                CharSequence announcement = getString(
+                        R.string.security_settings_sfps_enroll_progress_a11y_message, percent);
+                announceEnrollmentProgress(announcement);
             }
         }
-        updateTitleAndDescription();
+        updateTitleAndDescription(false);
         animateFlash();
         if (mCanAssumeUdfps) {
             if (mIsAccessibilityEnabled) {
@@ -850,6 +854,9 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     public void onAcquired(boolean isAcquiredGood) {
         if (mUdfpsEnrollHelper != null) {
             mUdfpsEnrollHelper.onAcquired(isAcquiredGood);
+        }
+        if (mCanAssumeSfps) {
+            mSfpsEnrollmentFeature.handleOnAcquired(isAcquiredGood);
         }
     }
 

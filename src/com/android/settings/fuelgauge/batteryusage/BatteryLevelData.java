@@ -28,6 +28,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.core.util.Preconditions;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -39,17 +40,24 @@ public final class BatteryLevelData {
     private static final long MIN_SIZE = 2;
     private static final long TIME_SLOT = DateUtils.HOUR_IN_MILLIS * 2;
 
+    // For testing only.
+    @VisibleForTesting @Nullable static Calendar sTestCalendar;
+
     /** A container for the battery timestamp and level data. */
     public static final class PeriodBatteryLevelData {
         // The length of mTimestamps and mLevels must be the same. mLevels[index] might be null when
         // there is no level data for the corresponding timestamp.
         private final List<Long> mTimestamps;
         private final List<Integer> mLevels;
+        private final boolean mIsStartTimestamp;
 
         public PeriodBatteryLevelData(
-                @NonNull Map<Long, Integer> batteryLevelMap, @NonNull List<Long> timestamps) {
+                @NonNull Map<Long, Integer> batteryLevelMap,
+                @NonNull List<Long> timestamps,
+                boolean isStartTimestamp) {
             mTimestamps = timestamps;
             mLevels = new ArrayList<>(timestamps.size());
+            mIsStartTimestamp = isStartTimestamp;
             for (Long timestamp : timestamps) {
                 mLevels.add(
                         batteryLevelMap.containsKey(timestamp)
@@ -64,6 +72,10 @@ public final class BatteryLevelData {
 
         public List<Integer> getLevels() {
             return mLevels;
+        }
+
+        public boolean isStartTimestamp() {
+            return mIsStartTimestamp;
         }
 
         @Override
@@ -105,14 +117,21 @@ public final class BatteryLevelData {
 
         final List<Long> timestampList = new ArrayList<>(batteryLevelMap.keySet());
         Collections.sort(timestampList);
+        final long minTimestamp = timestampList.get(0);
+        final long sixDaysAgoTimestamp =
+                DatabaseUtils.getTimestampSixDaysAgo(sTestCalendar != null ? sTestCalendar : null);
+        final boolean isStartTimestamp = minTimestamp > sixDaysAgoTimestamp;
         final List<Long> dailyTimestamps = getDailyTimestamps(timestampList);
         final List<List<Long>> hourlyTimestamps = getHourlyTimestamps(dailyTimestamps);
 
-        mDailyBatteryLevels = new PeriodBatteryLevelData(batteryLevelMap, dailyTimestamps);
+        mDailyBatteryLevels =
+                new PeriodBatteryLevelData(batteryLevelMap, dailyTimestamps, isStartTimestamp);
         mHourlyBatteryLevelsPerDay = new ArrayList<>(hourlyTimestamps.size());
-        for (List<Long> hourlyTimestampsPerDay : hourlyTimestamps) {
+        for (int i = 0; i < hourlyTimestamps.size(); i++) {
+            final List<Long> hourlyTimestampsPerDay = hourlyTimestamps.get(i);
             mHourlyBatteryLevelsPerDay.add(
-                    new PeriodBatteryLevelData(batteryLevelMap, hourlyTimestampsPerDay));
+                    new PeriodBatteryLevelData(
+                            batteryLevelMap, hourlyTimestampsPerDay, isStartTimestamp && i == 0));
         }
     }
 

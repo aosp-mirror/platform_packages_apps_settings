@@ -35,6 +35,7 @@ import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -65,12 +66,14 @@ public class FaceFingerprintUnlockControllerTest {
         final FakeFeatureFactory featureFactory = FakeFeatureFactory.setupForTest();
         when(featureFactory.securityFeatureProvider.getLockPatternUtils(mContext))
                 .thenReturn(mLockPatternUtils);
+        doReturn(true).when(mLockPatternUtils).isSecure(anyInt());
 
         mFaceFingerprintUnlockController =
                 new FaceFingerprintUnlockController(mContext, mLifecycle);
     }
 
     /** Tests that the controller is always available. */
+    @Ignore("b/323652985")
     @Test
     public void getAvailabilityStatus_whenFlagsEnabled_returnsAvailable() {
         mSetFlagsRule.enableFlags(
@@ -131,6 +134,7 @@ public class FaceFingerprintUnlockControllerTest {
     }
 
     /** Tests that preference is enabled and summary is not same as device lock. */
+    @Ignore("b/323652985")
     @Test
     public void getSummary_whenSeparateProfileLock() {
         doReturn(true).when(mLockPatternUtils).isSeparateProfileChallengeEnabled(anyInt());

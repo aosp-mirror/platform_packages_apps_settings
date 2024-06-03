@@ -43,23 +43,26 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
     @VisibleForTesting BatteryStatusFeatureProvider mBatteryStatusFeatureProvider;
     @VisibleForTesting UsageProgressBarPreference mBatteryUsageProgressBarPref;
 
-    private BatteryTip mBatteryTip;
     private final PowerManager mPowerManager;
+    private final BatterySettingsFeatureProvider mBatterySettingsFeatureProvider;
+
+    private BatteryTip mBatteryTip;
 
     public BatteryHeaderPreferenceController(Context context, String key) {
         super(context, key);
         mPowerManager = context.getSystemService(PowerManager.class);
         mBatteryStatusFeatureProvider =
                 FeatureFactory.getFeatureFactory().getBatteryStatusFeatureProvider();
+        mBatterySettingsFeatureProvider =
+                FeatureFactory.getFeatureFactory().getBatterySettingsFeatureProvider();
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mBatteryUsageProgressBarPref = screen.findPreference(getPreferenceKey());
-        // Set up loading text first to prevent layout flaky before info loaded.
-        mBatteryUsageProgressBarPref.setBottomSummary(
-                mContext.getString(R.string.settings_license_activity_loading));
+        // Set up empty space text first to prevent layout flaky before info loaded.
+        mBatteryUsageProgressBarPref.setBottomSummary(" ");
 
         if (com.android.settings.Utils.isBatteryPresent(mContext)) {
             quickUpdateHeaderPreference();
@@ -77,15 +80,36 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
         if (Utils.containsIncompatibleChargers(mContext, TAG)) {
             return mContext.getString(
                     com.android.settingslib.R.string.battery_info_status_not_charging);
-        } else if (BatteryUtils.isBatteryDefenderOn(info)) {
+        }
+        if (BatteryUtils.isBatteryDefenderOn(info)) {
             return mContext.getString(
                     com.android.settingslib.R.string.battery_info_status_charging_on_hold);
-        } else if (info.remainingLabel == null
+        }
+        if (info.remainingLabel != null
+                && mBatterySettingsFeatureProvider.isChargingOptimizationMode(mContext)) {
+            return info.remainingLabel;
+        }
+        if (info.remainingLabel == null
                 || info.batteryStatus == BatteryManager.BATTERY_STATUS_NOT_CHARGING) {
-            // Present status only if no remaining time or status anomalous
             return info.statusLabel;
-        } else if (info.statusLabel != null && !info.discharging) {
+        }
+        if (info.pluggedStatus == BatteryManager.BATTERY_PLUGGED_WIRELESS) {
+            final CharSequence wirelessChargingLabel =
+                    mBatterySettingsFeatureProvider.getWirelessChargingLabel(mContext, info);
+            if (wirelessChargingLabel != null) {
+                return wirelessChargingLabel;
+            }
+        }
+        if (info.statusLabel != null && !info.discharging) {
             // Charging state
+            if (com.android.settingslib.fuelgauge.BatteryUtils.isChargingStringV2Enabled()) {
+                return info.isFastCharging
+                        ? mContext.getString(
+                                R.string.battery_state_and_duration,
+                                info.statusLabel,
+                                info.remainingLabel)
+                        : info.remainingLabel;
+            }
             return mContext.getString(
                     R.string.battery_state_and_duration, info.statusLabel, info.remainingLabel);
         } else if (mPowerManager.isPowerSaveMode()) {

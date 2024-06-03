@@ -23,7 +23,6 @@ import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.storage.DiskInfo;
 import android.os.storage.StorageManager;
@@ -34,6 +33,7 @@ import android.text.format.Formatter;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
@@ -206,7 +206,7 @@ public class StorageUtils {
     /** Shows information about system storage. */
     public static class SystemInfoFragment extends InstrumentedDialogFragment {
         /** Shows the fragment. */
-        public static void show(Fragment parent) {
+        public static void show(@NonNull Fragment parent) {
             if (!parent.isAdded()) return;
 
             final SystemInfoFragment dialog = new SystemInfoFragment();
@@ -222,8 +222,33 @@ public class StorageUtils {
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             return new AlertDialog.Builder(getActivity())
-                    .setMessage(getContext().getString(R.string.storage_detail_dialog_system,
-                            Build.VERSION.RELEASE_OR_PREVIEW_DISPLAY))
+                    .setMessage(getContext().getString(R.string.storage_os_detail_dialog_system))
+                    .setPositiveButton(android.R.string.ok, null)
+                    .create();
+        }
+    }
+
+    /** Shows information about temporary system files. */
+    public static class TemporaryFilesInfoFragment extends InstrumentedDialogFragment {
+        /** Shows the fragment. */
+        public static void show(@NonNull Fragment parent) {
+            if (!parent.isAdded()) return;
+
+            final TemporaryFilesInfoFragment dialog = new TemporaryFilesInfoFragment();
+            dialog.setTargetFragment(parent, 0);
+            dialog.show(parent.getFragmentManager(), "temporaryFilesInfo");
+        }
+
+        @Override
+        public int getMetricsCategory() {
+            return SettingsEnums.DIALOG_TEMPORARY_FILES_INFO;
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            return new AlertDialog.Builder(getActivity())
+                    .setMessage(getContext().getString(
+                            R.string.storage_other_files_detail_dialog_system))
                     .setPositiveButton(android.R.string.ok, null)
                     .create();
         }

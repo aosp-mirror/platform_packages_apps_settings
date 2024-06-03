@@ -16,6 +16,7 @@
 
 package com.android.settings.notification.zen;
 
+import android.app.Flags;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.ContentObserver;
@@ -27,7 +28,9 @@ import android.provider.Settings;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.notification.modes.ZenModesListFragment;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
@@ -46,7 +49,9 @@ public class ZenModePreferenceController extends BasePreferenceController
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mSettingObserver = new SettingObserver(screen.findPreference(getPreferenceKey()));
+        Preference preference = screen.findPreference(getPreferenceKey());
+        mSettingObserver = new SettingObserver(preference);
+        maybeSetTitleAndDestination(preference);
     }
 
     @Override
@@ -71,9 +76,20 @@ public class ZenModePreferenceController extends BasePreferenceController
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
+        maybeSetTitleAndDestination(preference);
         if (preference.isEnabled()) {
             preference.setSummary(mSummaryBuilder.getSoundSummary());
         }
+    }
+
+    // Only when modes_ui is active: change title & target fragment.
+    private void maybeSetTitleAndDestination(Preference preference) {
+        if (!Flags.modesUi()) {
+            return;
+        }
+
+        preference.setTitle(R.string.zen_modes_list_title);
+        preference.setFragment(ZenModesListFragment.class.getCanonicalName());
     }
 
     class SettingObserver extends ContentObserver {

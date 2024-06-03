@@ -195,7 +195,7 @@ public class GraphicsDriverEnableAngleAsSystemDriverController
 
     @VisibleForTesting
     void rebootDevice(Context context) {
-        final Intent intent = new Intent(Intent.ACTION_REBOOT);
+        final Intent intent = new Intent(Intent.ACTION_REBOOT).setPackage("android");
         context.startActivity(intent);
     }
 

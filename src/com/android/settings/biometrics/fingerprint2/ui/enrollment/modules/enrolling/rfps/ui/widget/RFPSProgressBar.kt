@@ -24,7 +24,6 @@ import android.graphics.drawable.AnimatedVectorDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.LayerDrawable
 import android.util.AttributeSet
-import android.util.Log
 import android.view.animation.AnimationUtils
 import android.view.animation.Interpolator
 import com.android.settings.R
@@ -82,7 +81,6 @@ class RFPSProgressBar : RingProgressBar {
     }
 
     shouldAnimateInternal = shouldAnimate
-
   }
   /** This function should only be called when actual progress has been made. */
   fun updateProgress(percentComplete: Float) {

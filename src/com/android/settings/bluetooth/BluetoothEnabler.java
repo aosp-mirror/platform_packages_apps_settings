@@ -16,6 +16,9 @@
 
 package com.android.settings.bluetooth;
 
+import static com.android.settings.network.SatelliteWarningDialogActivity.EXTRA_TYPE_OF_SATELLITE_WARNING_DIALOG;
+import static com.android.settings.network.SatelliteWarningDialogActivity.TYPE_IS_BLUETOOTH;
+
 import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -23,15 +26,24 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.UserManager;
 import android.provider.Settings;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
+import com.android.settings.network.SatelliteRepository;
+import com.android.settings.network.SatelliteWarningDialogActivity;
 import com.android.settings.widget.SwitchWidgetController;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.WirelessUtils;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * BluetoothEnabler is a helper to manage the Bluetooth on/off checkbox
@@ -39,6 +51,7 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
  * preference reflects the current state.
  */
 public final class BluetoothEnabler implements SwitchWidgetController.OnSwitchChangeListener {
+    private static final String TAG = BluetoothEnabler.class.getSimpleName();
     private final SwitchWidgetController mSwitchController;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
     private Context mContext;
@@ -51,6 +64,9 @@ public final class BluetoothEnabler implements SwitchWidgetController.OnSwitchCh
     private static final String EVENT_DATA_IS_BT_ON = "is_bluetooth_on";
     private static final int EVENT_UPDATE_INDEX = 0;
     private final int mMetricsEvent;
+    private SatelliteRepository mSatelliteRepository;
+    @VisibleForTesting
+    AtomicBoolean mIsSatelliteOn = new AtomicBoolean(false);
 
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
@@ -81,6 +97,7 @@ public final class BluetoothEnabler implements SwitchWidgetController.OnSwitchCh
         }
         mIntentFilter = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
         mRestrictionUtils = restrictionUtils;
+        mSatelliteRepository = new SatelliteRepository(context);
     }
 
     public void setupSwitchController() {
@@ -112,6 +129,15 @@ public final class BluetoothEnabler implements SwitchWidgetController.OnSwitchCh
         mContext.registerReceiver(mReceiver, mIntentFilter,
                 Context.RECEIVER_EXPORTED_UNAUDITED);
         mValidListener = true;
+
+        new Thread(() -> {
+            try {
+                mIsSatelliteOn.set(mSatelliteRepository.requestIsEnabled(
+                        Executors.newSingleThreadExecutor()).get(3000, TimeUnit.MILLISECONDS));
+            } catch (InterruptedException | ExecutionException | TimeoutException e) {
+                Log.e(TAG, "Error to get satellite status : " + e);
+            }
+        }).start();
     }
 
     public void pause() {
@@ -166,6 +192,17 @@ public final class BluetoothEnabler implements SwitchWidgetController.OnSwitchCh
         if (maybeEnforceRestrictions()) {
             triggerParentPreferenceCallback(isChecked);
             return true;
+        }
+
+        if (mIsSatelliteOn.get()) {
+            mContext.startActivity(
+                    new Intent(mContext, SatelliteWarningDialogActivity.class)
+                            .putExtra(
+                                    EXTRA_TYPE_OF_SATELLITE_WARNING_DIALOG,
+                                    TYPE_IS_BLUETOOTH)
+            );
+            mSwitchController.setChecked(!isChecked);
+            return false;
         }
 
         // Show toast message if Bluetooth is not allowed in airplane mode

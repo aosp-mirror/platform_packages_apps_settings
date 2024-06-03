@@ -40,35 +40,28 @@
     <Preference
         android:key="privacy_accessibility_usage"
         android:title="@string/accessibility_usage_title"
-        settings:controller="com.android.settings.privacy.AccessibilityUsagePreferenceController">
-        <intent android:action="android.intent.action.REVIEW_ACCESSIBILITY_SERVICES"/>
-    </Preference>
+        settings:controller="com.android.settings.privacy.AccessibilityUsagePreferenceController"/>
 
     <!-- Permissions usage -->
     <Preference
         android:key="privacy_permissions_usage"
         android:title="@string/permissions_usage_title"
         android:summary="@string/permissions_usage_summary"
-        settings:controller="com.android.settings.privacy.PrivacyHubPreferenceController">
-        <intent android:action="android.intent.action.REVIEW_PERMISSION_USAGE"/>
-    </Preference>
+        settings:controller="com.android.settings.privacy.PrivacyHubPreferenceController"/>
 
     <!-- App permissions -->
     <Preference
         android:key="privacy_manage_perms"
         android:title="@string/app_permissions"
-        android:summary="@string/runtime_permissions_summary_control_app_access">
-        <intent android:action="android.intent.action.MANAGE_PERMISSIONS"/>
-    </Preference>
+        android:summary="@string/runtime_permissions_summary_control_app_access"
+        settings:controller="com.android.settings.privacy.ManagePermissionsPreferenceController"/>
 
     <!-- App Data Sharing Update -->
     <Preference
         android:key="privacy_app_data_sharing_updates"
         android:title="@string/app_data_sharing_updates_title"
         android:summary="@string/app_data_sharing_updates_summary"
-        settings:controller="com.android.settings.privacy.AppDataSharingUpdatesPreferenceController">
-        <intent android:action="android.intent.action.REVIEW_APP_DATA_SHARING_UPDATES"/>
-    </Preference>
+        settings:controller="com.android.settings.privacy.AppDataSharingUpdatesPreferenceController"/>
 
 
     <!-- Camera toggle -->

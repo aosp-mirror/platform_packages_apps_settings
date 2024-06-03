@@ -43,7 +43,7 @@ class PrimarySimRepository(private val context: Context) {
             val item = ListPreferenceOption(
                 id = info.subscriptionId,
                 text = "${info.displayName}",
-                summary = SubscriptionUtil.getFormattedPhoneNumber(context, info) ?: "",
+                summary = SubscriptionUtil.getBidiFormattedPhoneNumber(context, info) ?: "",
             )
             callsAndSmsList += item
             dataList += item

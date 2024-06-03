@@ -15,6 +15,7 @@
  */
 package com.android.settings.fuelgauge;
 
+import android.app.ActivityManager;
 import android.app.AppOpsManager;
 import android.content.Context;
 import android.content.Intent;
@@ -386,6 +387,14 @@ public class BatteryUtils {
             // Control whether app could run in the background if it is pre O app
             mAppOpsManager.setMode(AppOpsManager.OP_RUN_IN_BACKGROUND, uid, packageName, mode);
         }
+        // Notify system of reason for change
+        if (isForceAppStandbyEnabled(uid, packageName) != (mode == AppOpsManager.MODE_IGNORED)) {
+            mContext.getSystemService(ActivityManager.class).noteAppRestrictionEnabled(
+                    packageName, uid, ActivityManager.RESTRICTION_LEVEL_BACKGROUND_RESTRICTED,
+                    mode == AppOpsManager.MODE_IGNORED,
+                    ActivityManager.RESTRICTION_REASON_USER,
+                    "settings", ActivityManager.RESTRICTION_SOURCE_USER, 0L);
+        }
         // Control whether app could run jobs in the background
         mAppOpsManager.setMode(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, uid, packageName, mode);
 
@@ -670,7 +679,7 @@ public class BatteryUtils {
             long timeInMs,
             final int lessThanOneMinuteResId,
             final int normalResId) {
-        if (timeInMs < DateUtils.MINUTE_IN_MILLIS) {
+        if (timeInMs <= DateUtils.MINUTE_IN_MILLIS / 2) {
             return context.getString(lessThanOneMinuteResId);
         }
         final CharSequence timeSequence =

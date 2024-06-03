@@ -20,15 +20,18 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.android.settings.biometrics.fingerprint2.domain.interactor.OrientationInteractor
+import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.FingerprintManagerInteractor
 import com.android.settings.biometrics.fingerprint2.lib.model.FingerEnrollState
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintAction
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollEnrollingViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintNavigationStep.Enrollment
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintNavigationViewModel
+import com.android.systemui.biometrics.shared.model.FingerprintSensorType
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.filterIsInstance
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.map
@@ -41,9 +44,10 @@ class RFPSViewModel(
   private val fingerprintEnrollViewModel: FingerprintEnrollEnrollingViewModel,
   private val navigationViewModel: FingerprintNavigationViewModel,
   orientationInteractor: OrientationInteractor,
+  private val fingerprintManager: FingerprintManagerInteractor,
 ) : ViewModel() {
 
-  private val _textViewIsVisible = MutableStateFlow<Boolean>(false)
+  private val _textViewIsVisible = MutableStateFlow(false)
   /** Value to indicate if the text view is visible or not */
   val textViewIsVisible: Flow<Boolean> = _textViewIsVisible.asStateFlow()
 
@@ -52,7 +56,16 @@ class RFPSViewModel(
   /** Indicates if the icon should be animating or not */
   val shouldAnimateIcon = _shouldAnimateIcon
 
-  private var enrollFlow: Flow<FingerEnrollState?> = fingerprintEnrollViewModel.enrollFLow
+  private var enrollFlow: Flow<FingerEnrollState?> =
+    fingerprintManager.sensorPropertiesInternal.filterNotNull().combine(
+      fingerprintEnrollViewModel.enrollFlow
+    ) { props, enroll ->
+      if (props.sensorType == FingerprintSensorType.REAR) {
+        enroll
+      } else {
+        null
+      }
+    }
 
   /**
    * Enroll progress message with a replay of size 1 allowing for new subscribers to get the most
@@ -142,13 +155,14 @@ class RFPSViewModel(
     _textViewIsVisible.update { false }
     _shouldAnimateIcon = fingerprintEnrollViewModel.enrollFlowShouldBeRunning
     /** Indicates if the icon should be animating or not */
-    enrollFlow = fingerprintEnrollViewModel.enrollFLow
+    enrollFlow = fingerprintEnrollViewModel.enrollFlow
   }
 
   class RFPSViewModelFactory(
     private val fingerprintEnrollEnrollingViewModel: FingerprintEnrollEnrollingViewModel,
     private val navigationViewModel: FingerprintNavigationViewModel,
     private val orientationInteractor: OrientationInteractor,
+    private val fingerprintManager: FingerprintManagerInteractor,
   ) : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")
@@ -157,6 +171,7 @@ class RFPSViewModel(
         fingerprintEnrollEnrollingViewModel,
         navigationViewModel,
         orientationInteractor,
+        fingerprintManager,
       )
         as T
     }

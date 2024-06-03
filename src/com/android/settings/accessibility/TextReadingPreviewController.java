@@ -33,7 +33,6 @@ import com.android.settings.accessibility.TextReadingPreferenceFragment.EntryPoi
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.instrumentation.SettingsStatsLog;
 import com.android.settings.display.PreviewPagerAdapter;
-import com.android.settings.flags.Flags;
 import com.android.settings.widget.LabeledSeekBarPreference;
 
 import java.util.Objects;
@@ -47,10 +46,6 @@ class TextReadingPreviewController extends BasePreferenceController implements
     private static final String TAG = "TextReadingPreviewCtrl";
     private static final int LAYER_INITIAL_INDEX = 0;
     private static final int FRAME_INITIAL_INDEX = 0;
-    private static final int[] PREVIEW_SAMPLE_RES_IDS = new int[]{
-            R.layout.accessibility_text_reading_preview_app_grid,
-            R.layout.screen_zoom_preview_1,
-            R.layout.accessibility_text_reading_preview_mail_content};
     private static final String PREVIEW_KEY = "preview";
     private static final String FONT_SIZE_KEY = "font_size";
     private static final String DISPLAY_SIZE_KEY = "display_size";
@@ -183,9 +178,6 @@ class TextReadingPreviewController extends BasePreferenceController implements
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     static int[] getPreviewSampleLayouts(Context context) {
-        if (!Flags.accessibilityCustomizeTextReadingPreview()) {
-            return PREVIEW_SAMPLE_RES_IDS;
-        }
         TypedArray previews = context.getResources().obtainTypedArray(
                 R.array.config_text_reading_preview_samples);
         int previewCount = previews.length();

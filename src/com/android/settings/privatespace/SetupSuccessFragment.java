@@ -17,10 +17,13 @@
 package com.android.settings.privatespace;
 
 import android.app.Activity;
+import android.app.ActivityManager;
+import android.app.role.RoleManager;
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -33,10 +36,14 @@ import androidx.annotation.Nullable;
 
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
+import com.android.settingslib.widget.LottieColorUtils;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupdesign.GlifLayout;
+
+import java.util.List;
 
 /** Fragment for the final screen shown on successful completion of private space setup. */
 public class SetupSuccessFragment extends InstrumentedFragment {
@@ -71,6 +78,8 @@ public class SetupSuccessFragment extends InstrumentedFragment {
                     }
                 };
         requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
+        LottieAnimationView lottieAnimationView = rootView.findViewById(R.id.lottie_animation);
+        LottieColorUtils.applyDynamicColors(getContext(), lottieAnimationView);
 
         return rootView;
     }
@@ -86,8 +95,6 @@ public class SetupSuccessFragment extends InstrumentedFragment {
             if (activity != null) {
                 mMetricsFeatureProvider.action(
                         getContext(), SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_DONE);
-                //TODO(b/307729746): Add a test to verify PS is locked after setup completion.
-                PrivateSpaceMaintainer.getInstance(activity).lockPrivateSpace();
                 Intent allAppsIntent = new Intent(Intent.ACTION_ALL_APPS);
                 ResolveInfo resolveInfo =
                         activity.getPackageManager()
@@ -97,19 +104,41 @@ public class SetupSuccessFragment extends InstrumentedFragment {
                                         PackageManager.MATCH_SYSTEM_ONLY,
                                         activity.getUserId());
                 if (resolveInfo != null) {
-                    allAppsIntent.setPackage(resolveInfo.activityInfo.packageName);
-                    allAppsIntent.setComponent(resolveInfo.activityInfo.getComponentName());
+                    RoleManager mRoleManager = getContext().getSystemService(RoleManager.class);
+                    final List<String> packageNames = mRoleManager
+                            .getRoleHolders(RoleManager.ROLE_HOME);
+                    if (packageNames.contains(resolveInfo.activityInfo.packageName)) {
+                        allAppsIntent.setPackage(resolveInfo.activityInfo.packageName);
+                        allAppsIntent.setComponent(resolveInfo.activityInfo.getComponentName());
+                    }
                 }
-                accessPrivateSpaceToast();
-                startActivity(allAppsIntent);
+                activity.setTheme(R.style.Theme_SubSettings);
+                if (allAppsIntent.getPackage() != null) {
+                    accessPrivateSpaceToast();
+                    startActivity(allAppsIntent);
+                }
                 Log.i(TAG, "Private space setup complete");
-                activity.finish();
+                deleteAllTaskAndFinish(activity);
             }
         };
     }
 
     private void accessPrivateSpaceToast() {
-        Toast.makeText(getContext(), R.string.private_space_scrolldown_to_access,
-                Toast.LENGTH_SHORT).show();
+        Drawable drawable = getContext().getDrawable(R.drawable.ic_private_space_icon);
+        Toast.makeCustomToastWithIcon(
+                        getContext(),
+                        null /* looper */ ,
+                        getContext().getString(R.string.private_space_scrolldown_to_access),
+                        Toast.LENGTH_SHORT,
+                        drawable)
+                .show();
+    }
+
+    private void deleteAllTaskAndFinish(Activity activity) {
+        ActivityManager activityManager = activity.getSystemService(ActivityManager.class);
+        List<ActivityManager.AppTask> tasks = activityManager.getAppTasks();
+        for (var task : tasks) {
+            task.finishAndRemoveTask();
+        }
     }
 }

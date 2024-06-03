@@ -20,21 +20,27 @@ import static com.android.settings.privatespace.PrivateSpaceMaintainer.ErrorDele
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.junit.Assume.assumeTrue;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Flags;
+import android.os.UserManager;
 import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.test.annotation.UiThreadTest;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.privatespace.PrivateSpaceMaintainer;
+import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.After;
 import org.junit.Before;
@@ -51,12 +57,18 @@ public class PrivateSpaceDeletionProgressFragmentTest {
     private PrivateSpaceDeletionProgressFragment mFragment;
     private PrivateSpaceMaintainer mPrivateSpaceMaintainer;
     @Mock private PrivateSpaceMaintainer mPrivateSpaceMaintainerMock;
+    @Mock private LockPatternUtils mLockPatternUtils;
 
     @UiThreadTest
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = ApplicationProvider.getApplicationContext();
+        final FakeFeatureFactory featureFactory = FakeFeatureFactory.setupForTest();
+        when(featureFactory.securityFeatureProvider.getLockPatternUtils(mContext))
+                .thenReturn(mLockPatternUtils);
+        doReturn(true).when(mLockPatternUtils).isSecure(anyInt());
+
         mFragment = new PrivateSpaceDeletionProgressFragment();
         PrivateSpaceDeletionProgressFragment.Injector injector =
                 new PrivateSpaceDeletionProgressFragment.Injector() {
@@ -90,6 +102,7 @@ public class PrivateSpaceDeletionProgressFragmentTest {
         doNothing().when(spyFragment).showSuccessfulDeletionToast();
         mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE,
                 android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
+        assumeTrue(mContext.getSystemService(UserManager.class).canAddPrivateProfile());
 
         mPrivateSpaceMaintainer.createPrivateSpace();
         spyFragment.deletePrivateSpace();
@@ -104,6 +117,7 @@ public class PrivateSpaceDeletionProgressFragmentTest {
         doNothing().when(spyFragment).showSuccessfulDeletionToast();
         mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE,
                 android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
+        assumeTrue(mContext.getSystemService(UserManager.class).canAddPrivateProfile());
 
         mPrivateSpaceMaintainer.createPrivateSpace();
         spyFragment.deletePrivateSpace();
@@ -128,6 +142,7 @@ public class PrivateSpaceDeletionProgressFragmentTest {
         doNothing().when(spyFragment).showDeletionInternalErrorToast();
         mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE,
                 android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
+        assumeTrue(mContext.getSystemService(UserManager.class).canAddPrivateProfile());
 
         spyFragment.deletePrivateSpace();
 

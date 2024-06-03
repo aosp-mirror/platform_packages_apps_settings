@@ -54,6 +54,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.internal.accessibility.common.ShortcutConstants;
 import com.android.internal.accessibility.dialog.AccessibilityTarget;
 import com.android.internal.accessibility.dialog.AccessibilityTargetHelper;
 import com.android.settings.R;
@@ -181,8 +182,10 @@ public class EditShortcutsPreferenceFragment extends DashboardFragment {
                     refreshPreferenceController(QuickSettingsShortcutOptionController.class);
                 }
 
-                PreferredShortcuts.updatePreferredShortcutsFromSettings(
-                        getContext(), mShortcutTargets);
+                if (getContext() != null) {
+                    PreferredShortcuts.updatePreferredShortcutsFromSettings(
+                            getContext(), mShortcutTargets);
+                }
             }
         };
 
@@ -204,7 +207,7 @@ public class EditShortcutsPreferenceFragment extends DashboardFragment {
         // TODO(b/325664350): Implement shortcut type for "all shortcuts"
         List<AccessibilityTarget> accessibilityTargets =
                 AccessibilityTargetHelper.getInstalledTargets(
-                        activity.getBaseContext(), AccessibilityManager.ACCESSIBILITY_SHORTCUT_KEY);
+                        activity.getBaseContext(), ShortcutConstants.UserShortcutType.HARDWARE);
 
         Pair<String, String> titles = getTitlesFromAccessibilityTargetList(
                 mShortcutTargets,
@@ -258,8 +261,10 @@ public class EditShortcutsPreferenceFragment extends DashboardFragment {
     @Override
     public void onResume() {
         super.onResume();
-        mTouchExplorationStateChangeListener = isTouchExplorationEnabled ->
-                refreshPreferenceController(GestureShortcutOptionController.class);
+        mTouchExplorationStateChangeListener = isTouchExplorationEnabled -> {
+            refreshPreferenceController(QuickSettingsShortcutOptionController.class);
+            refreshPreferenceController(GestureShortcutOptionController.class);
+        };
 
         final AccessibilityManager am = getSystemService(
                 AccessibilityManager.class);
@@ -385,7 +390,7 @@ public class EditShortcutsPreferenceFragment extends DashboardFragment {
     private void refreshPreferenceController(
             Class<? extends AbstractPreferenceController> controllerClass) {
         AbstractPreferenceController controller = use(controllerClass);
-        if (controller != null) {
+        if (controller != null && getPreferenceScreen() != null) {
             controller.displayPreference(getPreferenceScreen());
             if (!TextUtils.isEmpty(controller.getPreferenceKey())) {
                 controller.updateState(findPreference(controller.getPreferenceKey()));

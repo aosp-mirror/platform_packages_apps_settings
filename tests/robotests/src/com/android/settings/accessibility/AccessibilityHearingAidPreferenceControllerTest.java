@@ -134,7 +134,7 @@ public class AccessibilityHearingAidPreferenceControllerTest {
         sendIntent(intent);
 
         assertThat(mHearingAidPreference.getSummary().toString().contentEquals(
-                "TEST_HEARING_AID_BT_DEVICE_NAME, right only")).isTrue();
+                "TEST_HEARING_AID_BT_DEVICE_NAME / Right only")).isTrue();
     }
 
     @Test
@@ -151,7 +151,7 @@ public class AccessibilityHearingAidPreferenceControllerTest {
         sendIntent(intent);
 
         assertThat(mHearingAidPreference.getSummary().toString().contentEquals(
-                "TEST_HEARING_AID_BT_DEVICE_NAME, left and right")).isTrue();
+                "TEST_HEARING_AID_BT_DEVICE_NAME / Left and right")).isTrue();
     }
 
     @Test
@@ -167,7 +167,7 @@ public class AccessibilityHearingAidPreferenceControllerTest {
         sendIntent(intent);
 
         assertThat(mHearingAidPreference.getSummary().toString().contentEquals(
-                "TEST_HEARING_AID_BT_DEVICE_NAME, left only")).isTrue();
+                "TEST_HEARING_AID_BT_DEVICE_NAME / Left only")).isTrue();
     }
 
     @Test
@@ -183,7 +183,7 @@ public class AccessibilityHearingAidPreferenceControllerTest {
         sendIntent(intent);
 
         assertThat(mHearingAidPreference.getSummary().toString().contentEquals(
-                "TEST_HEARING_AID_BT_DEVICE_NAME, right only")).isTrue();
+                "TEST_HEARING_AID_BT_DEVICE_NAME / Right only")).isTrue();
     }
 
     @Test
@@ -199,7 +199,7 @@ public class AccessibilityHearingAidPreferenceControllerTest {
         sendIntent(intent);
 
         assertThat(mHearingAidPreference.getSummary().toString().contentEquals(
-                "TEST_HEARING_AID_BT_DEVICE_NAME, left and right")).isTrue();
+                "TEST_HEARING_AID_BT_DEVICE_NAME / Left and right")).isTrue();
     }
 
     @Test
@@ -214,7 +214,7 @@ public class AccessibilityHearingAidPreferenceControllerTest {
         sendIntent(intent);
 
         assertThat(mHearingAidPreference.getSummary().toString()).isEqualTo(
-                "TEST_HEARING_AID_BT_DEVICE_NAME, left and right");
+                "TEST_HEARING_AID_BT_DEVICE_NAME / Left and right");
     }
 
     @Test
@@ -254,7 +254,7 @@ public class AccessibilityHearingAidPreferenceControllerTest {
         mPreferenceController.onServiceConnected();
 
         assertThat(mHearingAidPreference.getSummary().toString()).isEqualTo(
-                "TEST_HEARING_AID_BT_DEVICE_NAME, left only");
+                "TEST_HEARING_AID_BT_DEVICE_NAME / Left only");
     }
 
     @Test
@@ -267,7 +267,7 @@ public class AccessibilityHearingAidPreferenceControllerTest {
         mPreferenceController.onServiceConnected();
 
         assertThat(mHearingAidPreference.getSummary().toString()).isEqualTo(
-                "TEST_HEARING_AID_BT_DEVICE_NAME, right only");
+                "TEST_HEARING_AID_BT_DEVICE_NAME / Right only");
     }
 
     private void setupEnvironment() {

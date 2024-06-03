@@ -20,7 +20,6 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.provider.Settings;
-import android.util.FeatureFlagUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
@@ -53,6 +52,7 @@ public class KeyboardSettingsPreferenceController extends BasePreferenceControll
         for (HardKeyboardDeviceInfo hardKeyboardDeviceInfo : newHardKeyboards) {
             if (mCachedDevice.getAddress().equals(hardKeyboardDeviceInfo.mBluetoothAddress)) {
                 Intent intent = new Intent(Settings.ACTION_HARD_KEYBOARD_SETTINGS);
+                intent.setPackage(mContext.getPackageName());
                 intent.putExtra(
                         Settings.EXTRA_ENTRYPOINT, SettingsEnums.CONNECTED_DEVICES_SETTINGS);
                 intent.putExtra(
@@ -68,8 +68,7 @@ public class KeyboardSettingsPreferenceController extends BasePreferenceControll
     @Override
     public int getAvailabilityStatus() {
         List<HardKeyboardDeviceInfo> newHardKeyboards = getHardKeyboardList();
-        if (FeatureFlagUtils.isEnabled(mContext, FeatureFlagUtils.SETTINGS_NEW_KEYBOARD_UI)
-                && !newHardKeyboards.isEmpty()) {
+        if (!newHardKeyboards.isEmpty()) {
             for (HardKeyboardDeviceInfo hardKeyboardDeviceInfo : newHardKeyboards) {
                 if (mCachedDevice.getAddress() != null
                         && hardKeyboardDeviceInfo.mBluetoothAddress != null

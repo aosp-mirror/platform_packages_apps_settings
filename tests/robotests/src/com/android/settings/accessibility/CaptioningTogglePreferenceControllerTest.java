@@ -82,7 +82,8 @@ public class CaptioningTogglePreferenceControllerTest {
 
     @Test
     public void displayPreference_captionEnabled_shouldSetChecked() {
-        mShadowCaptioningManager.setEnabled(true);
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_CAPTIONING_ENABLED, ON);
 
         mController.displayPreference(mScreen);
 
@@ -91,7 +92,8 @@ public class CaptioningTogglePreferenceControllerTest {
 
     @Test
     public void displayPreference_captionDisabled_shouldSetUnchecked() {
-        mShadowCaptioningManager.setEnabled(false);
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_CAPTIONING_ENABLED, OFF);
 
         mController.displayPreference(mScreen);
 
@@ -100,7 +102,8 @@ public class CaptioningTogglePreferenceControllerTest {
 
     @Test
     public void performClick_captionEnabled_shouldSetCaptionDisabled() {
-        mShadowCaptioningManager.setEnabled(true);
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_CAPTIONING_ENABLED, ON);
         mController.displayPreference(mScreen);
 
         mSwitchPreference.performClick();
@@ -111,7 +114,8 @@ public class CaptioningTogglePreferenceControllerTest {
 
     @Test
     public void performClick_captionDisabled_shouldSetCaptionEnabled() {
-        mShadowCaptioningManager.setEnabled(false);
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_CAPTIONING_ENABLED, OFF);
         mController.displayPreference(mScreen);
 
         mSwitchPreference.performClick();

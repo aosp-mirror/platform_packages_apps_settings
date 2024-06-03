@@ -16,7 +16,8 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
                   xmlns:settings="http://schemas.android.com/apk/res-auto"
-                  android:title="@string/configure_notification_settings">
+                  android:title="@string/configure_notification_settings"
+                  android:key="configure_notification_settings">
 
     <PreferenceCategory
         android:key="general_notifications_category"
@@ -106,6 +107,11 @@
             settings:controller="com.android.settings.biometrics.face.FaceSettingsLockscreenBypassPreferenceController" />
 
     </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="sync_across_devices"
+        android:title="@string/sync_across_devices_title"
+        settings:controller="com.android.settings.notification.syncacrossdevices.SyncAcrossDevicesPreferenceController"/>
 
     <PreferenceCategory
         android:key="advanced_section_header"

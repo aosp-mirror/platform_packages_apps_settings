@@ -295,6 +295,12 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        final Context context = getContext();
+        if (context != null && !context.getResources().getBoolean(
+                R.bool.config_show_internet_settings)) {
+            finish();
+            return;
+        }
         mAirplaneModeEnabler = new AirplaneModeEnabler(getContext(), this);
 
         // TODO(b/37429702): Add animations and preference comparator back after initial screen is
@@ -475,10 +481,6 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
 
         if (intent.hasExtra(EXTRA_START_CONNECT_SSID)) {
             mOpenSsid = intent.getStringExtra(EXTRA_START_CONNECT_SSID);
-        }
-
-        if (mNetworkMobileProviderController != null) {
-            mNetworkMobileProviderController.setWifiPickerTrackerHelper(mWifiPickerTrackerHelper);
         }
 
         requireActivity().addMenuProvider(mMenuProvider);

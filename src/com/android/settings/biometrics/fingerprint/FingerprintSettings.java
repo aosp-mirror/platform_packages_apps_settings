@@ -22,6 +22,7 @@ import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROF
 import static android.app.admin.DevicePolicyResources.UNDEFINED;
 
 import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
+import static com.android.settings.Utils.isPrivateProfile;
 import static com.android.settings.biometrics.BiometricEnrollBase.EXTRA_FROM_SETTINGS_SUMMARY;
 import static com.android.settings.biometrics.BiometricEnrollBase.EXTRA_KEY_CHALLENGE;
 
@@ -88,7 +89,6 @@ import com.android.settingslib.transition.SettingsTransitionHelper;
 import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.TwoTargetPreference;
 
-import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.util.DeviceHelper;
 
 import java.util.ArrayList;
@@ -112,9 +112,6 @@ public class FingerprintSettings extends SubSettings {
     private static final int RESULT_SKIP = BiometricEnrollBase.RESULT_SKIP;
     private static final int RESULT_TIMEOUT = BiometricEnrollBase.RESULT_TIMEOUT;
 
-    @Nullable
-    private UdfpsEnrollCalibrator mCalibrator;
-
     @Override
     public Intent getIntent() {
         Intent modIntent = new Intent(super.getIntent());
@@ -131,15 +128,11 @@ public class FingerprintSettings extends SubSettings {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        CharSequence msg = getText(R.string.security_settings_fingerprint_preference_title);
+        final int userId = getIntent().getIntExtra(Intent.EXTRA_USER_ID, UserHandle.myUserId());
+        CharSequence msg = getText(isPrivateProfile(userId, this)
+                ? R.string.private_space_fingerprint_unlock_title
+                : R.string.security_settings_fingerprint_preference_title);
         setTitle(msg);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        mCalibrator = FeatureFactory.getFeatureFactory().getFingerprintFeatureProvider()
-                .getUdfpsEnrollCalibrator(getApplicationContext(), null, null);
     }
 
     /**
@@ -272,6 +265,9 @@ public class FingerprintSettings extends SubSettings {
         private FingerprintRemoveSidecar mRemovalSidecar;
         private HashMap<Integer, String> mFingerprintsRenaming;
 
+        @Nullable
+        private UdfpsEnrollCalibrator mCalibrator;
+
         FingerprintAuthenticateSidecar.Listener mAuthenticateListener =
                 new FingerprintAuthenticateSidecar.Listener() {
                     @Override
@@ -360,11 +356,6 @@ public class FingerprintSettings extends SubSettings {
          */
         protected void handleError(int errMsgId, CharSequence msg) {
             switch (errMsgId) {
-                case FingerprintManager.FINGERPRINT_ERROR_CANCELED:
-                case FingerprintManager.FINGERPRINT_ERROR_USER_CANCELED:
-                    // Only happens if we get preempted by another activity, or canceled by the
-                    // user (e.g. swipe up to home). Ignored.
-                    return;
                 case FingerprintManager.FINGERPRINT_ERROR_LOCKOUT:
                     mInFingerprintLockout = true;
                     // We've been locked out.  Reset after 30s.
@@ -523,8 +514,9 @@ public class FingerprintSettings extends SubSettings {
                 mFooterColumns.add(column2);
             } else {
                 final FooterColumn column = new FooterColumn();
-                column.mTitle = getString(
-                        R.string.security_settings_fingerprint_enroll_introduction_v3_message,
+                column.mTitle = getString(isPrivateProfile()
+                        ? R.string.private_space_fingerprint_enroll_introduction_message
+                        : R.string.security_settings_fingerprint_enroll_introduction_v3_message,
                         DeviceHelper.getDeviceName(getActivity()));
                 column.mLearnMoreClickListener = learnMoreClickListener;
                 column.mLearnMoreOverrideText = getText(
@@ -699,10 +691,16 @@ public class FingerprintSettings extends SubSettings {
             // retryFingerprint() will be called when remove finishes
             // need to disable enroll or have a way to determine if enroll is in progress
             final boolean removalInProgress = mRemovalSidecar.inProgress();
+            final boolean isDeviceOwnerBlockingAuth =
+                    RestrictedLockUtilsInternal.checkIfKeyguardFeaturesDisabled(
+                            getContext(), DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT,
+                            mUserId) != null;
+
             CharSequence maxSummary = tooMany ?
                     getContext().getString(R.string.fingerprint_add_max, max) : "";
             mAddFingerprintPreference.setSummary(maxSummary);
-            mAddFingerprintPreference.setEnabled(!tooMany && !removalInProgress && mToken != null);
+            mAddFingerprintPreference.setEnabled(!isDeviceOwnerBlockingAuth
+                    && !tooMany && !removalInProgress && mToken != null);
         }
 
         private void createFooterPreference(PreferenceGroup root) {
@@ -745,6 +743,9 @@ public class FingerprintSettings extends SubSettings {
             if (mRemovalSidecar != null) {
                 mRemovalSidecar.setListener(mRemovalListener);
             }
+
+            mCalibrator = FeatureFactory.getFeatureFactory().getFingerprintFeatureProvider()
+                    .getUdfpsEnrollCalibrator(getActivity().getApplicationContext(), null, null);
         }
 
         private void updatePreferences() {
@@ -811,10 +812,8 @@ public class FingerprintSettings extends SubSettings {
                 }
                 intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
                 intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, mToken);
-                if (((FingerprintSettings) getActivity()).mCalibrator != null) {
-                    intent.putExtras(
-                            (((FingerprintSettings) getActivity()).mCalibrator)
-                                    .getExtrasForNextIntent());
+                if (mCalibrator != null) {
+                    intent.putExtras(mCalibrator.getExtrasForNextIntent());
                 }
                 startActivityForResult(intent, ADD_FINGERPRINT_REQUEST);
             } else if (pref instanceof FingerprintPreference) {
@@ -1136,6 +1135,10 @@ public class FingerprintSettings extends SubSettings {
             }
         };
 
+        private boolean isPrivateProfile() {
+            return Utils.isPrivateProfile(mUserId, getContext());
+        }
+
         public static class DeleteFingerprintDialog extends InstrumentedDialogFragment
                 implements DialogInterface.OnClickListener {
 
@@ -1338,7 +1341,7 @@ public class FingerprintSettings extends SubSettings {
 
                 final String title = getString(R.string.fingerprint_delete_title, mFp.getName());
                 final String message =
-                        getString(R.string.fingerprint_v2_delete_message, mFp.getName()) + ".";
+                        getString(R.string.fingerprint_v2_delete_message, mFp.getName());
 
                 DevicePolicyManager devicePolicyManager =
                         getContext().getSystemService(DevicePolicyManager.class);

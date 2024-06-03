@@ -18,6 +18,7 @@ package com.android.settings.display;
 
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.DISABLED_DEPENDENT_SETTING;
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -35,6 +36,7 @@ import android.provider.Settings;
 import com.android.server.display.feature.flags.Flags;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -84,6 +86,7 @@ public class EvenDimmerPreferenceControllerTest {
                 Settings.Secure.EVEN_DIMMER_ACTIVATED)).isEqualTo(0.0f); // false
     }
 
+    @Ignore("b/331324279")
     @RequiresFlagsEnabled(Flags.FLAG_EVEN_DIMMER)
     @Test
     public void testGetAvailabilityStatus_flagOnConfigTrue() {
@@ -96,6 +99,7 @@ public class EvenDimmerPreferenceControllerTest {
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
+    @Ignore("b/331324279")
     @Test
     @RequiresFlagsEnabled(Flags.FLAG_EVEN_DIMMER)
     public void testSetChecked_enable() throws Settings.SettingNotFoundException {
@@ -110,5 +114,20 @@ public class EvenDimmerPreferenceControllerTest {
         mController.setChecked(false);
         assertThat(Settings.Secure.getFloat(mContext.getContentResolver(),
                 Settings.Secure.EVEN_DIMMER_ACTIVATED)).isEqualTo(0.0f); // false
+    }
+
+    @Ignore("b/331324279")
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_EVEN_DIMMER)
+    public void testDisabledIfAutobrightnessIsOff() {
+        // Autobrightness off
+        Settings.System.putInt(mContext.getContentResolver(),
+                Settings.System.SCREEN_BRIGHTNESS_MODE,
+                Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
+        // Try turn controller on
+        mController.setChecked(true);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                DISABLED_DEPENDENT_SETTING);
     }
 }

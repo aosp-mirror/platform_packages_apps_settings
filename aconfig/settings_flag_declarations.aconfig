@@ -1,5 +1,5 @@
 package: "com.android.settings.flags"
-container: "system"
+container: "system_ext"
 
 flag {
     name: "show_factory_reset_cancel_button"
@@ -20,4 +20,25 @@ flag {
     namespace: "android_settings"
     description: "Feature flag to enable the archiving feature."
     bug: "323164382"
+}
+
+flag {
+    name: "homepage_revamp"
+    namespace: "android_settings"
+    description: "Feature flag to enable new settings homepage UX."
+    bug: "321612737"
+}
+
+flag {
+    name: "dynamic_injection_category"
+    namespace: "android_settings"
+    description: "Feature flag to enable injection into PreferenceCategory."
+    bug: "333547416"
+}
+
+flag {
+    name: "slices_retirement"
+    namespace: "android_settings"
+    description: "Feature flag to remove relevant slices dependencies."
+    bug: "297367302"
 }

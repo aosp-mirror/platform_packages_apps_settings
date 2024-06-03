@@ -32,6 +32,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.transform
 import kotlinx.coroutines.withContext
 
 /**
@@ -45,12 +46,12 @@ interface FingerprintSensorRepository {
 }
 
 class FingerprintSensorRepositoryImpl(
-    fingerprintManager: FingerprintManager,
-    backgroundDispatcher: CoroutineDispatcher,
-    activityScope: CoroutineScope,
+  fingerprintManager: FingerprintManager,
+  backgroundDispatcher: CoroutineDispatcher,
+  activityScope: CoroutineScope,
 ) : FingerprintSensorRepository {
 
-  override val fingerprintSensor: Flow<FingerprintSensor> =
+  private val fingerprintPropsInternal: Flow<FingerprintSensorPropertiesInternal> =
     callbackFlow {
         val callback =
           object : IFingerprintAuthenticatorsRegisteredCallback.Stub() {
@@ -60,7 +61,7 @@ class FingerprintSensorRepositoryImpl(
               if (sensors.isEmpty()) {
                 trySend(DEFAULT_PROPS)
               } else {
-                trySend(sensors[0].toFingerprintSensor())
+                trySend(sensors[0])
               }
             }
           }
@@ -71,20 +72,24 @@ class FingerprintSensorRepositoryImpl(
       }
       .stateIn(activityScope, started = SharingStarted.Eagerly, initialValue = DEFAULT_PROPS)
 
-    companion object {
-        private const val TAG = "FingerprintSensorRepoImpl"
-
-        private val DEFAULT_PROPS =
-            FingerprintSensorPropertiesInternal(
-                -1 /* sensorId */,
-                SensorProperties.STRENGTH_CONVENIENCE,
-                0 /* maxEnrollmentsPerUser */,
-                listOf<ComponentInfoInternal>(),
-                FingerprintSensorProperties.TYPE_UNKNOWN,
-                false /* halControlsIllumination */,
-                true /* resetLockoutRequiresHardwareAuthToken */,
-                listOf<SensorLocationInternal>(SensorLocationInternal.DEFAULT),
-            )
-                .toFingerprintSensor()
+  override val fingerprintSensor: Flow<FingerprintSensor> =
+    fingerprintPropsInternal.transform {
+      emit(it.toFingerprintSensor())
     }
+
+  companion object {
+    private const val TAG = "FingerprintSensorRepoImpl"
+
+    private val DEFAULT_PROPS =
+      FingerprintSensorPropertiesInternal(
+        -1 /* sensorId */,
+        SensorProperties.STRENGTH_CONVENIENCE,
+        0 /* maxEnrollmentsPerUser */,
+        listOf<ComponentInfoInternal>(),
+        FingerprintSensorProperties.TYPE_UNKNOWN,
+        false /* halControlsIllumination */,
+        true /* resetLockoutRequiresHardwareAuthToken */,
+        listOf<SensorLocationInternal>(SensorLocationInternal.DEFAULT),
+      )
+  }
 }

@@ -34,7 +34,7 @@ import android.security.Credentials;
 import android.security.IKeyChainService;
 import android.security.KeyChain;
 import android.security.KeyChain.KeyChainConnection;
-import android.security.KeyStore;
+import android.security.keystore.KeyProperties;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
@@ -126,9 +126,9 @@ public final class CredentialStorage extends FragmentActivity {
         final Bundle bundle = mInstallBundle;
         mInstallBundle = null;
 
-        final int uid = bundle.getInt(Credentials.EXTRA_INSTALL_AS_UID, KeyStore.UID_SELF);
+        final int uid = bundle.getInt(Credentials.EXTRA_INSTALL_AS_UID, KeyProperties.UID_SELF);
 
-        if (uid != KeyStore.UID_SELF && !UserHandle.isSameUser(uid, Process.myUid())) {
+        if (uid != KeyProperties.UID_SELF && !UserHandle.isSameUser(uid, Process.myUid())) {
             final int dstUserId = UserHandle.getUserId(uid);
 
             // Restrict install target to the wifi uid.
@@ -139,6 +139,7 @@ public final class CredentialStorage extends FragmentActivity {
             }
 
             final Intent installIntent = new Intent(ACTION_INSTALL)
+                    .setPackage(getPackageName())
                     .setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT)
                     .putExtras(bundle);
             startActivityAsUser(installIntent, new UserHandle(dstUserId));
@@ -279,7 +280,7 @@ public final class CredentialStorage extends FragmentActivity {
 
                 // If this is not a WiFi key, mark  it as user-selectable, so that it can be
                 // selected by users from the Certificate Selection prompt.
-                if (mUid == Process.SYSTEM_UID || mUid == KeyStore.UID_SELF) {
+                if (mUid == Process.SYSTEM_UID || mUid == KeyProperties.UID_SELF) {
                     service.setUserSelectable(mAlias, true);
                 }
 

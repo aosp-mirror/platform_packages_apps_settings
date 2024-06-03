@@ -126,6 +126,9 @@
     <PreferenceCategory
             android:key="ip_details_category"
             android:title="@string/wifi_setup_detail">
+        <com.android.settings.spa.preference.ComposePreference
+            android:key="server_name"
+            settings:controller="com.android.settings.wifi.details2.ServerNamePreferenceController"/>
         <Preference
                 android:key="type"
                 android:title="@string/wifi_type_title"

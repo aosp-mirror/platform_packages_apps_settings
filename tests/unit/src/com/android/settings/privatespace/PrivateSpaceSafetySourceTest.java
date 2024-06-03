@@ -26,11 +26,13 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.Flags;
+import android.os.UserManager;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.safetycenter.SafetyEvent;
 import android.safetycenter.SafetySourceData;
@@ -55,7 +57,9 @@ public class PrivateSpaceSafetySourceTest {
     private static final SafetyEvent EVENT_TYPE_DEVICE_REBOOTED =
             new SafetyEvent.Builder(SAFETY_EVENT_TYPE_DEVICE_REBOOTED).build();
     private Context mContext = ApplicationProvider.getApplicationContext();
+    private Context mMockContext;
     @Mock private SafetyCenterManagerWrapper mSafetyCenterManagerWrapper;
+    @Mock private UserManager mUserManager;
     @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     /** Required setup before a test. */
@@ -146,5 +150,21 @@ public class PrivateSpaceSafetySourceTest {
                 .isEqualTo(PrivateSpaceAuthenticationActivity.class.getName());
         assertThat(safetySourceStatus.getPendingIntent().getIntent().getIdentifier())
                 .isEqualTo(SAFETY_SOURCE_ID);
+    }
+
+    /** Tests that setSafetySourceData sets the source status enabled. */
+    @Test
+    public void setSafetySourceData_whenNonMainUser_doesNotSendData() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE,
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
+        mMockContext = spy(mContext);
+        when(mSafetyCenterManagerWrapper.isEnabled(mMockContext)).thenReturn(true);
+        when(mMockContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
+        when(mUserManager.isMainUser()).thenReturn(false);
+
+        PrivateSpaceSafetySource.setSafetySourceData(mMockContext, EVENT_TYPE_DEVICE_REBOOTED);
+
+        verify(mSafetyCenterManagerWrapper, never()).setSafetySourceData(
+                any(), any(), any(), any());
     }
 }

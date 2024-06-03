@@ -33,16 +33,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.android.settings.R
-import com.android.settings.biometrics.fingerprint2.domain.interactor.OrientationInteractor
 import com.android.settings.biometrics.fingerprint2.lib.model.FingerEnrollState
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.common.widget.FingerprintErrorDialog
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.rfps.ui.viewmodel.RFPSIconTouchViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.rfps.ui.viewmodel.RFPSViewModel
-import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.rfps.ui.widget.FingerprintErrorDialog
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.rfps.ui.widget.IconTouchDialog
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.rfps.ui.widget.RFPSProgressBar
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.BackgroundViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintNavigationStep
-import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintNavigationViewModel
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment
 import com.google.android.setupcompat.template.FooterBarMixin
 import com.google.android.setupcompat.template.FooterButton
@@ -86,6 +84,7 @@ class RFPSEnrollFragment() : Fragment(R.layout.fingerprint_v2_rfps_enroll_enroll
   private val backgroundViewModel: BackgroundViewModel by lazy {
     viewModelProvider[BackgroundViewModel::class.java]
   }
+
   override fun onCreateView(
     inflater: LayoutInflater,
     container: ViewGroup?,

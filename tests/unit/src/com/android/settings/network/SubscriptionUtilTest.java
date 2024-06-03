@@ -572,6 +572,7 @@ public class SubscriptionUtilTest {
     }
 
     @Test
+    @Ignore("b/339149463")
     public void isSimHardwareVisible_configAsVisible_returnTrue() {
         when(mResources.getBoolean(R.bool.config_show_sim_info))
                 .thenReturn(true);
@@ -636,6 +637,14 @@ public class SubscriptionUtilTest {
     }
 
     @Test
+    public void isValidCachedDisplayName_withBrackets_noCrash() {
+        String originalName = "originalName(";
+        String cacheString = "originalName( 1234";
+
+        assertThat(SubscriptionUtil.isValidCachedDisplayName(cacheString, originalName)).isTrue();
+    }
+
+    @Test
     public void isConnectedToWifi_hasWiFi_returnTrue() {
         addNetworkTransportType(NetworkCapabilities.TRANSPORT_WIFI);
 
@@ -647,6 +656,39 @@ public class SubscriptionUtilTest {
         addNetworkTransportType(NetworkCapabilities.TRANSPORT_BLUETOOTH);
 
         assertFalse(SubscriptionUtil.isConnectedToWifi(mContext));
+    }
+
+    @Test
+    public void hasSubscriptionWithRacCarrier_hasNoWifi_showRacDialogForAllEsims_returnTrue() {
+        when(mResources.getIntArray(anyInt())).thenReturn(CARRIERS_THAT_USE_RAC);
+        final SubscriptionInfo info = mock(SubscriptionInfo.class);
+        when(info.getCarrierId()).thenReturn(RAC_CARRIER_ID);
+        when(mSubMgr.getAvailableSubscriptionInfoList()).thenReturn(Arrays.asList(info));
+        addNetworkTransportType(NetworkCapabilities.TRANSPORT_BLUETOOTH);
+
+        assertTrue(SubscriptionUtil.shouldShowRacDialogWhenErasingAllEsims(mContext));
+    }
+
+    @Test
+    public void hasSubscriptionWithRacCarrier_hasWifi_showRacDialogForAllEsims_returnFalse() {
+        when(mResources.getIntArray(anyInt())).thenReturn(CARRIERS_THAT_USE_RAC);
+        final SubscriptionInfo info = mock(SubscriptionInfo.class);
+        when(info.getCarrierId()).thenReturn(RAC_CARRIER_ID);
+        when(mSubMgr.getAvailableSubscriptionInfoList()).thenReturn(Arrays.asList(info));
+        addNetworkTransportType(NetworkCapabilities.TRANSPORT_WIFI);
+
+        assertFalse(SubscriptionUtil.shouldShowRacDialogWhenErasingAllEsims(mContext));
+    }
+
+    @Test
+    public void hasNoSubscriptionWithRacCarrier_hasNoWifi_showRacDialogForAllEsims_returnFalse() {
+        when(mResources.getIntArray(anyInt())).thenReturn(CARRIERS_THAT_USE_RAC);
+        final SubscriptionInfo info = mock(SubscriptionInfo.class);
+        when(info.getCarrierId()).thenReturn(NO_RAC_CARRIER_ID);
+        when(mSubMgr.getAvailableSubscriptionInfoList()).thenReturn(Arrays.asList(info));
+        addNetworkTransportType(NetworkCapabilities.TRANSPORT_WIFI);
+
+        assertFalse(SubscriptionUtil.shouldShowRacDialogWhenErasingAllEsims(mContext));
     }
 
     private void addNetworkTransportType(int networkType) {

@@ -278,7 +278,8 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                     .setRequestWriteRepairModePassword(true)
                     .setForceVerifyPath(true)
                     .show();
-        } else if (isEffectiveUserManagedProfile && isInternalActivity()) {
+        } else if (mLockPatternUtils.isManagedProfileWithUnifiedChallenge(mUserId)
+                && isInternalActivity()) {
             // When the mForceVerifyPath is set to true, we launch the real confirm credential
             // activity with an explicit but fake challenge value (0L). This will result in
             // ConfirmLockPassword calling verifyTiedProfileChallenge() (if it's a profile with
@@ -312,7 +313,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
             mForceVerifyPath = userProperties.isCredentialShareableWithParent();
             if (android.multiuser.Flags.enableBiometricsToUnlockPrivateSpace()
                     && isBiometricAllowed(effectiveUserId, mUserId)) {
-                promptInfo.setUseParentProfileForDeviceCredential(true);
+                setBiometricPromptPropertiesForPrivateProfile(promptInfo);
                 showBiometricPrompt(promptInfo, effectiveUserId);
                 launchedBiometric = true;
             } else {
@@ -341,6 +342,11 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
             setResult(Activity.RESULT_OK);
             finish();
         }
+    }
+
+    private static void setBiometricPromptPropertiesForPrivateProfile(PromptInfo promptInfo) {
+        promptInfo.setUseParentProfileForDeviceCredential(true);
+        promptInfo.setConfirmationRequested(false);
     }
 
     private String getTitleFromCredentialType(@LockPatternUtils.CredentialType int credentialType,
@@ -436,7 +442,8 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         boolean newFragment = false;
 
         if (mBiometricFragment == null) {
-            mBiometricFragment = BiometricFragment.newInstance(promptInfo);
+            mBiometricFragment = BiometricFragment.newInstance(promptInfo,
+                    getCallingActivity());
             newFragment = true;
         }
         mBiometricFragment.setCallbacks(mExecutor, mAuthenticationCallback);

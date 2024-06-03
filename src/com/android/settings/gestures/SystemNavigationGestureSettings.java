@@ -41,8 +41,9 @@ import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceScreen;
 
+import com.android.internal.accessibility.common.ShortcutConstants;
 import com.android.settings.R;
-import com.android.settings.accessibility.AccessibilityGestureNavigationTutorial;
+import com.android.settings.accessibility.AccessibilityShortcutsTutorial;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerListHelper;
 import com.android.settings.core.SubSettingLauncher;
@@ -101,7 +102,7 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
             mA11yTutorialDialogShown =
                     savedInstanceState.getBoolean(KEY_SHOW_A11Y_TUTORIAL_DIALOG, false);
             if (mA11yTutorialDialogShown) {
-                AccessibilityGestureNavigationTutorial.showGestureNavigationTutorialDialog(
+                AccessibilityShortcutsTutorial.showGestureNavigationTutorialDialog(
                         getContext(), dialog -> mA11yTutorialDialogShown = false);
             }
         }
@@ -181,7 +182,8 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
 
         if (KEY_SYSTEM_NAV_GESTURAL.equals(info.getKey())) {
             pref.setExtraWidgetOnClickListener((v) -> startActivity(new Intent(
-                    GestureNavigationSettingsFragment.GESTURE_NAVIGATION_SETTINGS)));
+                    GestureNavigationSettingsFragment.GESTURE_NAVIGATION_SETTINGS)
+                    .setPackage(getContext().getPackageName())));
         }
 
         if ((KEY_SYSTEM_NAV_2BUTTONS.equals(info.getKey())
@@ -355,7 +357,7 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
                 && !isAccessibilityFloatingMenuEnabled()
                 && (isAnyServiceSupportAccessibilityButton() || isNavBarMagnificationEnabled())) {
             mA11yTutorialDialogShown = true;
-            AccessibilityGestureNavigationTutorial.showGestureNavigationTutorialDialog(getContext(),
+            AccessibilityShortcutsTutorial.showGestureNavigationTutorialDialog(getContext(),
                     dialog -> mA11yTutorialDialogShown = false);
         } else {
             mA11yTutorialDialogShown = false;
@@ -365,7 +367,7 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
     private boolean isAnyServiceSupportAccessibilityButton() {
         final AccessibilityManager ams = getContext().getSystemService(AccessibilityManager.class);
         final List<String> targets = ams.getAccessibilityShortcutTargets(
-                AccessibilityManager.ACCESSIBILITY_BUTTON);
+                ShortcutConstants.UserShortcutType.SOFTWARE);
         return !targets.isEmpty();
     }
 

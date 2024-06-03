@@ -244,6 +244,33 @@ public class MobileNetworkUtilsTest {
     }
 
     @Test
+    public void getActiveSubscriptionIdList_nonActive_returnEmptyArray() {
+        int[] expectedList = new int[0];
+        when(mSubscriptionManager.getActiveSubscriptionInfoList()).thenReturn(new ArrayList<>());
+
+        assertThat(MobileNetworkUtils.getActiveSubscriptionIdList(mContext))
+                .isEqualTo(expectedList);
+    }
+
+    @Test
+    public void getActiveSubscriptionIdList_normalCaseTwoActiveSims_returnValidSubId() {
+        int[] expectedList = {SUB_ID_1, SUB_ID_2};
+
+        assertThat(MobileNetworkUtils.getActiveSubscriptionIdList(mContext))
+                .isEqualTo(expectedList);
+    }
+
+    @Test
+    public void getActiveSubscriptionIdList_TwoActiveSimsAndOneIsNtn_returnOneSubId() {
+        int[] expectedList = {SUB_ID_2};
+        when(mSubscriptionInfo1.isEmbedded()).thenReturn(true);
+        when(mSubscriptionInfo1.isOnlyNonTerrestrialNetwork()).thenReturn(true);
+
+        assertThat(MobileNetworkUtils.getActiveSubscriptionIdList(mContext))
+                .isEqualTo(expectedList);
+    }
+
+    @Test
     public void shouldDisplayNetworkSelectOptions_HideCarrierNetwork_returnFalse() {
         mCarrierConfig.putBoolean(CarrierConfigManager.KEY_HIDE_CARRIER_NETWORK_SETTINGS_BOOL,
                 true);

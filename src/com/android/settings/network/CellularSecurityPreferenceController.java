@@ -19,6 +19,7 @@ package com.android.settings.network;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.safetycenter.SafetyCenterManager;
@@ -65,7 +66,8 @@ public class CellularSecurityPreferenceController extends BasePreferenceControll
 
     @Override
     public int getAvailabilityStatus() {
-        if (!Flags.enableIdentifierDisclosureTransparencyUnsolEvents()
+        if (!mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_TELEPHONY)
+                || !Flags.enableIdentifierDisclosureTransparencyUnsolEvents()
                 || !Flags.enableModemCipherTransparencyUnsolEvents()
                 || !Flags.enableIdentifierDisclosureTransparency()
                 || !Flags.enableModemCipherTransparency()) {

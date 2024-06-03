@@ -90,7 +90,8 @@ public class FactoryResetPreferenceController extends BasePreferenceController {
             String packageName = resolution.activityInfo.packageName;
             PackageInfo factoryResetWizardPackageInfo;
             try {
-                factoryResetWizardPackageInfo = pm.getPackageInfo(packageName, 0);
+                factoryResetWizardPackageInfo = pm.getPackageInfo(packageName,
+                        PackageManager.GET_PERMISSIONS);
             } catch (PackageManager.NameNotFoundException e) {
                 Log.e(TAG, "Unable to resolve a Factory Reset Handler Application");
                 return null;

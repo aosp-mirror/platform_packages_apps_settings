@@ -36,7 +36,7 @@ import android.util.Log;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.ResetNetworkRequest;
-import com.android.settings.network.apn.ApnSettings;
+import com.android.settings.network.apn.PreferredApnRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -204,7 +204,7 @@ public class ResetNetworkOperationBuilder {
         Runnable runnable = () -> {
             long startTime = SystemClock.elapsedRealtime();
 
-            Uri uri = Uri.parse(ApnSettings.RESTORE_CARRIERS_URI);
+            Uri uri = PreferredApnRepository.getRestorePreferredApnUri();
 
             if (SubscriptionManager.isUsableSubscriptionId(subscriptionId)) {
                 uri = Uri.withAppendedPath(uri, "subId/" + String.valueOf(subscriptionId));

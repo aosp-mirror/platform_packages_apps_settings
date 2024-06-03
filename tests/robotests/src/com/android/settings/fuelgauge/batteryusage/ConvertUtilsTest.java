@@ -382,9 +382,13 @@ public final class ConvertUtilsTest {
                         /* foregroundServiceUsageConsumePower= */ 1.3,
                         /* backgroundUsageConsumePower= */ 1.4,
                         /* cachedUsageConsumePower= */ 1.5);
+        BatteryOptimizationModeCache optimizationModeCache =
+                new BatteryOptimizationModeCache(mContext);
+        optimizationModeCache.mBatteryOptimizeModeCacheMap.put(
+                (int) batteryDiffEntry.mUid, BatteryOptimizationMode.MODE_OPTIMIZED);
 
         final BatteryUsageDiff batteryUsageDiff =
-                ConvertUtils.convertToBatteryUsageDiff(batteryDiffEntry);
+                ConvertUtils.convertToBatteryUsageDiff(batteryDiffEntry, optimizationModeCache);
 
         assertThat(batteryUsageDiff.getUid()).isEqualTo(101L);
         assertThat(batteryUsageDiff.getUserId()).isEqualTo(1001L);
@@ -402,6 +406,8 @@ public final class ConvertUtilsTest {
         assertThat(batteryUsageDiff.getBackgroundUsageTime()).isEqualTo(5678L);
         assertThat(batteryUsageDiff.getScreenOnTime()).isEqualTo(123L);
         assertThat(batteryUsageDiff.getKey()).isEqualTo("key");
+        assertThat(batteryUsageDiff.getAppOptimizationMode())
+                .isEqualTo(BatteryOptimizationMode.MODE_OPTIMIZED);
         assertThat(batteryUsageDiff.hasPackageName()).isFalse();
         assertThat(batteryUsageDiff.hasLabel()).isFalse();
     }
@@ -559,7 +565,9 @@ public final class ConvertUtilsTest {
     public void convertToBatteryEventList_normalCase_returnsExpectedResult() {
         final BatteryLevelData batteryLevelData =
                 new BatteryLevelData(
-                        Map.of(1691589600000L, 98, 1691596800000L, 90, 1691596812345L, 80));
+                        // 2023-08-09 14:00:00 UTC
+                        // 2023-08-09 16:00:00 UTC
+                        Map.of(1691589600000L, 98, 1691596800000L, 90));
 
         final List<BatteryEvent> batteryEventList =
                 ConvertUtils.convertToBatteryEventList(batteryLevelData);
@@ -572,6 +580,31 @@ public final class ConvertUtilsTest {
         assertThat(batteryEventList.get(1).getType()).isEqualTo(BatteryEventType.EVEN_HOUR);
         assertThat(batteryEventList.get(1).getBatteryLevel()).isEqualTo(90);
     }
+
+    @Test
+    public void convertToBatteryEventList_multipleDays_returnsExpectedResult() {
+        final BatteryLevelData batteryLevelData =
+                new BatteryLevelData(
+                        // 2024-04-23 22:00:00 UTC
+                        // 2024-04-24 00:00:00 UTC
+                        // 2024-04-24 02:00:00 UTC
+                        Map.of(1713909600000L, 98, 1713916800000L, 90, 1713924000000L, 83));
+
+        final List<BatteryEvent> batteryEventList =
+                ConvertUtils.convertToBatteryEventList(batteryLevelData);
+
+        assertThat(batteryEventList).hasSize(3);
+        assertThat(batteryEventList.get(0).getTimestamp()).isEqualTo(1713909600000L);
+        assertThat(batteryEventList.get(0).getType()).isEqualTo(BatteryEventType.EVEN_HOUR);
+        assertThat(batteryEventList.get(0).getBatteryLevel()).isEqualTo(98);
+        assertThat(batteryEventList.get(1).getTimestamp()).isEqualTo(1713916800000L);
+        assertThat(batteryEventList.get(1).getType()).isEqualTo(BatteryEventType.EVEN_HOUR);
+        assertThat(batteryEventList.get(1).getBatteryLevel()).isEqualTo(90);
+        assertThat(batteryEventList.get(2).getTimestamp()).isEqualTo(1713924000000L);
+        assertThat(batteryEventList.get(2).getType()).isEqualTo(BatteryEventType.EVEN_HOUR);
+        assertThat(batteryEventList.get(2).getBatteryLevel()).isEqualTo(83);
+    }
+
 
     @Test
     public void convertToBatteryUsageSlotList_normalCase_returnsExpectedResult() {
@@ -591,7 +624,7 @@ public final class ConvertUtilsTest {
                 Map.of(11L, batteryDiffData1, 21L, batteryDiffData2, 31L, batteryDiffData3);
 
         final List<BatteryUsageSlot> batteryUsageSlotList =
-                ConvertUtils.convertToBatteryUsageSlotList(batteryDiffDataMap);
+                ConvertUtils.convertToBatteryUsageSlotList(mContext, batteryDiffDataMap, false);
 
         assertThat(batteryUsageSlotList).hasSize(3);
         assertThat(batteryUsageSlotList.stream().map((s) -> s.getScreenOnTime()).sorted().toList())
