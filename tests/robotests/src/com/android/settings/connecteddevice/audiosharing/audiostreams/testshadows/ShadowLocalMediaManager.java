@@ -21,6 +21,7 @@ import com.android.settingslib.media.MediaDevice;
 
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
+import org.robolectric.annotation.Resetter;
 
 import java.util.Collections;
 
@@ -34,6 +35,13 @@ public class ShadowLocalMediaManager {
         sMockManager = mockLocalMediaManager;
     }
 
+    /** Reset static fields */
+    @Resetter
+    public static void reset() {
+        sMockManager = null;
+        sDeviceCallback = null;
+    }
+
     /** Triggers onDeviceListUpdate of {@link LocalMediaManager.DeviceCallback} */
     public static void onDeviceListUpdate() {
         sDeviceCallback.onDeviceListUpdate(Collections.emptyList());
@@ -45,7 +53,7 @@ public class ShadowLocalMediaManager {
         sMockManager.startScan();
     }
 
-    /** Registers {@link  LocalMediaManager.DeviceCallback} */
+    /** Registers {@link LocalMediaManager.DeviceCallback} */
     @Implementation
     public void registerCallback(LocalMediaManager.DeviceCallback deviceCallback) {
         sMockManager.registerCallback(deviceCallback);
