@@ -97,7 +97,7 @@ public class ShortcutOptionPreference extends CheckBoxPreference {
                                 result));
                 imageView.setAnimation(mIntroImageRawResId);
                 imageView.setRepeatCount(LottieDrawable.INFINITE);
-                LottieColorUtils.applyDynamicColors(getContext(), imageView);
+                LottieColorUtils.applyDynamicColors(imageView.getContext(), imageView);
                 imageView.playAnimation();
             } else {
                 imageView.setImageResource(mIntroImageResId);
