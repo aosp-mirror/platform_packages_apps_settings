@@ -592,7 +592,7 @@
     <string name="private_space_separate_account_text" msgid="4492251315012955548"><b>"Kies een Google-account voor je gedeelte"</b>\n"Als je een apart account gebruikt, kun je voorkomen dat bestanden, foto\'s en e-mails buiten je privégedeelte worden getoond."</string>
     <string name="private_space_protected_lock_text" msgid="9123250938334372735"><b>"Stel een vergrendeling in"</b>\n"Vergrendel je privégedeelte, zodat anderen het niet kunnen openen."</string>
     <string name="private_space_install_apps_text" msgid="5693139160766464498"><b>"Installeer apps"</b>\n"Je privégedeelte heeft een eigen Play Store, zodat je makkelijk apps kunt installeren."</string>
-    <string name="private_space_apps_permission_text" msgid="7030946025253366172">"Apps in je privégedeelte verschijnen niet in Rechtenbeheer, het privacydashboard en in andere instellingen als je privégedeelte is vergrendeld.\n\nJe privégedeelte kan niet worden overgezet naar een nieuw apparaat. Je moet een nieuw privégedeelte instellen als je dit wilt gebruiken op een ander apparaat.\n\nIedereen die je apparaat aan een computer koppelt of schadelijke apps op je apparaat installeert, heeft mogelijk toegang tot je privégedeelte."</string>
+    <string name="private_space_apps_permission_text" msgid="7030946025253366172">"Apps in je privégedeelte verschijnen niet in Rechtenbeheer, het privacydashboard en in andere instellingen als je privégedeelte is vergrendeld.\n\nJe privégedeelte kan niet worden hersteld op een nieuw apparaat. Je moet een nieuw privégedeelte instellen als je dit wilt gebruiken op een ander apparaat.\n\nAls iemand je apparaat aan een computer koppelt of schadelijke apps op je apparaat installeert, kan die toegang hebben tot je privégedeelte."</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Privégedeelte instellen…"</string>
     <string name="private_space_notifications_hidden_title" msgid="2009112565217540581">"Meldingen van apps in het privégedeelte worden verborgen als dit is vergrendeld"</string>
     <string name="private_space_explore_settings_title" msgid="1448128245941571654">"Instellingen om het privégedeelte te verbergen en automatisch te laten vergrendelen"</string>
@@ -4841,7 +4841,7 @@
     <string name="default_active_sim_calls" msgid="2390973682556353558">"gesprekken"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"sms"</string>
     <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"mobiele data"</string>
-    <string name="wifi_scan_notify_message" msgid="1331238142061476869">"Apps en services kunnen nog steeds op elk gewenst moment zoeken naar apparaten in de buurt om de apparaatfunctionaliteit te verbeteren, zelfs als bluetooth uitstaat. Dit kan worden gebruikt om bijvoorbeeld locatiegebaseerde functies en services te verbeteren. Je kunt dit wijzigen in de instellingen voor wifi-scannen."</string>
+    <string name="wifi_scan_notify_message" msgid="1331238142061476869">"Voor een betere apparaatfunctionaliteit kunnen apps en services nog steeds op elk moment zoeken naar wifi-netwerken, zelfs als wifi uitstaat. Dit kan worden gebruikt om bijvoorbeeld locatiegebaseerde functies en services te verbeteren. Je kunt dit wijzigen in de instellingen voor wifi-scannen."</string>
     <string name="wifi_scan_change" msgid="8438320311511852918">"Wijzigen"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>: <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Verbonden"</string>
@@ -4906,8 +4906,8 @@
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Toon een bericht als apps toegang hebben tot tekst, afbeeldingen of andere content die je hebt gekopieerd"</string>
     <string name="all_apps" msgid="3054120149509114789">"Alle apps"</string>
     <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"Niet toestaan"</string>
-    <string name="uwb_settings_title" msgid="8578498712312002231">"Ultra-WideBand (UWB)"</string>
-    <string name="uwb_settings_summary" msgid="3074271396764672268">"Helpt de relatieve positie van apparaten in de buurt die UWB hebben te identificeren"</string>
+    <string name="uwb_settings_title" msgid="8578498712312002231">"Ultra-wideband (UWB)"</string>
+    <string name="uwb_settings_summary" msgid="3074271396764672268">"Helpt de relatieve positie van apparaten in de buurt die UWB hebben te bepalen"</string>
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Zet de vliegtuigmodus uit om UWB te gebruiken"</string>
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"UWB is niet beschikbaar op je huidige locatie"</string>
     <string name="thread_network_settings_title" msgid="4212301030523859220">"Thread"</string>
@@ -4981,7 +4981,7 @@
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Extra informatie tonen"</string>
     <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Toon bijvoorbeeld de tijd, het weer of andere informatie op de screensaver"</string>
     <string name="dream_home_controls_toggle_title" msgid="706799741564479248">"Bediening voor in huis tonen"</string>
-    <string name="dream_home_controls_toggle_summary" msgid="4102519907917430579">"Knop voor bediening voor in huis tonen op de screensaver"</string>
+    <string name="dream_home_controls_toggle_summary" msgid="4102519907917430579">"Toon knop voor bediening voor in huis op de screensaver"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Meer instellingen"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Je screensaver kiezen"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Kies wat je op het scherm wilt zien wanneer de tablet is gedockt. Het apparaat gebruikt misschien meer energie als je een screensaver instelt."</string>
@@ -5112,7 +5112,7 @@
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Grammaticaal geslacht"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Grammaticaal geslacht selecteren"</string>
     <string name="content_protection_preference_title" msgid="5069260032659193074">"Scannen op misleidende apps"</string>
-    <string name="content_protection_preference_summary" msgid="2252393849408445391">"App-activiteit checken op phishing"</string>
+    <string name="content_protection_preference_summary" msgid="2252393849408445391">"Check app-activiteit op phishing"</string>
     <string name="content_protection_preference_user_consent_switch_title" msgid="1797782616799594426">"Scannen op misleidende apps gebruiken"</string>
     <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="3004347470520916069">"Scannen gebruiken om misleidende apps voor werk te vinden"</string>
     <string name="content_protection_preference_subpage_summary" msgid="3595621220981703364"></string>
