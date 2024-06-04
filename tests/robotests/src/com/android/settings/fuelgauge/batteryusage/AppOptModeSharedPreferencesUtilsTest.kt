@@ -43,7 +43,7 @@ import org.robolectric.RobolectricTestRunner
 
 @RunWith(RobolectricTestRunner::class)
 class AppOptModeSharedPreferencesUtilsTest {
-    @JvmField @Rule val mockitoRule: MockitoRule = MockitoJUnit.rule()
+    @get:Rule val mockitoRule: MockitoRule = MockitoJUnit.rule()
 
     @Spy private var context: Context = ApplicationProvider.getApplicationContext()
 
@@ -62,36 +62,48 @@ class AppOptModeSharedPreferencesUtilsTest {
 
     @Test
     fun updateAppOptModeExpirationInternal_withExpirationTime_verifyData() {
-        insertAppOptModeEventForTest(/* expirationTime= */ 1000L)
+        insertAppOptModeEventForTest(expirationTime = 1000L)
 
         val events = AppOptModeSharedPreferencesUtils.getAllEvents(context)
 
-        assertThat(events.size).isEqualTo(1)
-        assertAppOptimizationModeEventInfo(events.get(0), UID, PACKAGE_NAME, MODE_OPTIMIZED, 1000L)
+        assertThat(events).hasSize(1)
+        assertAppOptimizationModeEventInfo(
+            events[0],
+            UID,
+            PACKAGE_NAME,
+            MODE_OPTIMIZED,
+            expirationTime = 1000L
+        )
     }
 
     @Test
     fun updateAppOptModeExpirationInternal_withoutExpirationTime_verifyEmptyList() {
-        insertAppOptModeEventForTest(/* expirationTime= */ UNLIMITED_EXPIRE_TIME)
+        insertAppOptModeEventForTest(expirationTime = UNLIMITED_EXPIRE_TIME)
 
         assertThat(AppOptModeSharedPreferencesUtils.getAllEvents(context)).isEmpty()
     }
 
     @Test
     fun deleteAppOptimizationModeEventByUid_uidNotContained_verifyData() {
-        insertAppOptModeEventForTest(/* expirationTime= */ 1000L)
-        assertThat(AppOptModeSharedPreferencesUtils.getAllEvents(context).size).isEqualTo(1)
+        insertAppOptModeEventForTest(expirationTime = 1000L)
+        assertThat(AppOptModeSharedPreferencesUtils.getAllEvents(context)).hasSize(1)
 
         AppOptModeSharedPreferencesUtils.deleteAppOptimizationModeEventByUid(context, UNSET_UID)
         val events = AppOptModeSharedPreferencesUtils.getAllEvents(context)
 
-        assertThat(events.size).isEqualTo(1)
-        assertAppOptimizationModeEventInfo(events.get(0), UID, PACKAGE_NAME, MODE_OPTIMIZED, 1000L)
+        assertThat(events).hasSize(1)
+        assertAppOptimizationModeEventInfo(
+            events[0],
+            UID,
+            PACKAGE_NAME,
+            MODE_OPTIMIZED,
+            expirationTime = 1000L
+        )
     }
 
     @Test
     fun deleteAppOptimizationModeEventByUid_uidExisting_verifyData() {
-        insertAppOptModeEventForTest(/* expirationTime= */ 1000L)
+        insertAppOptModeEventForTest(expirationTime = 1000L)
 
         AppOptModeSharedPreferencesUtils.deleteAppOptimizationModeEventByUid(context, UID)
 
@@ -100,20 +112,32 @@ class AppOptModeSharedPreferencesUtilsTest {
 
     @Test
     fun resetExpiredAppOptModeBeforeTimestamp_noExpiredData_verifyData() {
-        insertAppOptModeEventForTest(/* expirationTime= */ 1000L)
+        insertAppOptModeEventForTest(expirationTime = 1000L)
 
-        AppOptModeSharedPreferencesUtils.resetExpiredAppOptModeBeforeTimestamp(context, 999L)
+        AppOptModeSharedPreferencesUtils.resetExpiredAppOptModeBeforeTimestamp(
+            context,
+            queryTimestampMs = 999L
+        )
         val events = AppOptModeSharedPreferencesUtils.getAllEvents(context)
 
-        assertThat(events.size).isEqualTo(1)
-        assertAppOptimizationModeEventInfo(events.get(0), UID, PACKAGE_NAME, MODE_OPTIMIZED, 1000L)
+        assertThat(events).hasSize(1)
+        assertAppOptimizationModeEventInfo(
+            events[0],
+            UID,
+            PACKAGE_NAME,
+            MODE_OPTIMIZED,
+            expirationTime = 1000L
+        )
     }
 
     @Test
     fun resetExpiredAppOptModeBeforeTimestamp_hasExpiredData_verifyEmptyList() {
-        insertAppOptModeEventForTest(/* expirationTime= */ 1000L)
+        insertAppOptModeEventForTest(expirationTime = 1000L)
 
-        AppOptModeSharedPreferencesUtils.resetExpiredAppOptModeBeforeTimestamp(context, 1001L)
+        AppOptModeSharedPreferencesUtils.resetExpiredAppOptModeBeforeTimestamp(
+            context,
+            queryTimestampMs = 1001L
+        )
 
         assertThat(AppOptModeSharedPreferencesUtils.getAllEvents(context)).isEmpty()
     }
@@ -185,7 +209,7 @@ class AppOptModeSharedPreferencesUtilsTest {
             mutableListOf(UID),
             mutableListOf(PACKAGE_NAME),
             mutableListOf(MODE_OPTIMIZED),
-            longArrayOf(expirationTime)
+            longArrayOf(expirationTime),
         ) { _: Int, _: String ->
             testBatteryOptimizeUtils
         }
