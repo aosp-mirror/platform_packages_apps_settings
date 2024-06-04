@@ -21,6 +21,7 @@ import static android.app.NotificationManager.INTERRUPTION_FILTER_PRIORITY;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.app.AutomaticZenRule;
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.service.notification.ZenPolicy;
@@ -37,12 +38,13 @@ import org.robolectric.RuntimeEnvironment;
 @RunWith(RobolectricTestRunner.class)
 public class IconLoaderTest {
 
+    private Context mContext;
     private IconLoader mLoader;
 
     @Before
     public void setUp() {
-        mLoader = new IconLoader(RuntimeEnvironment.application,
-                MoreExecutors.newDirectExecutorService());
+        mContext = RuntimeEnvironment.application;
+        mLoader = new IconLoader(MoreExecutors.newDirectExecutorService());
     }
 
     @Test
@@ -52,7 +54,7 @@ public class IconLoaderTest {
                 .setIconResId(android.R.drawable.ic_media_play)
                 .build();
 
-        ListenableFuture<Drawable> loadFuture = mLoader.getIcon(systemRule);
+        ListenableFuture<Drawable> loadFuture = mLoader.getIcon(mContext, systemRule);
         assertThat(loadFuture.isDone()).isTrue();
         assertThat(loadFuture.get()).isNotNull();
     }
@@ -64,7 +66,7 @@ public class IconLoaderTest {
                 .setPackage("com.blah")
                 .build();
 
-        ListenableFuture<Drawable> loadFuture = mLoader.getIcon(rule);
+        ListenableFuture<Drawable> loadFuture = mLoader.getIcon(mContext, rule);
         assertThat(loadFuture.isDone()).isTrue();
         assertThat(loadFuture.get()).isNotNull();
     }
@@ -77,7 +79,7 @@ public class IconLoaderTest {
                 .setIconResId(-123456)
                 .build();
 
-        ListenableFuture<Drawable> loadFuture = mLoader.getIcon(rule);
+        ListenableFuture<Drawable> loadFuture = mLoader.getIcon(mContext, rule);
         assertThat(loadFuture.get()).isNotNull();
     }
 

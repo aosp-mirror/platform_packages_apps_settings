@@ -499,14 +499,13 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
         SettingsAlertDialogWithIcon(
             onDismissRequest = cancelAction,
             confirmButton = AlertDialogButton(
-                getString(R.string.sim_onboarding_setup),
-                nextAction
+                text = getString(R.string.sim_onboarding_setup),
+                onClick = nextAction,
             ),
-            dismissButton =
-                AlertDialogButton(
-                    getString(R.string.sim_onboarding_close),
-                    cancelAction
-                ),
+            dismissButton = AlertDialogButton(
+                text = getString(R.string.sim_onboarding_close),
+                onClick = cancelAction,
+            ),
             title = stringResource(R.string.sim_onboarding_dialog_starting_title),
             icon = {
                 Icon(

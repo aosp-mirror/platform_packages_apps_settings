@@ -56,7 +56,7 @@ public class AudioSharingJoinDialogFragment extends InstrumentedDialogFragment {
     @Override
     public int getMetricsCategory() {
         return AudioSharingUtils.isBroadcasting(Utils.getLocalBtManager(getContext()))
-                ? SettingsEnums.DIALOG_START_AUDIO_SHARING
+                ? SettingsEnums.DIALOG_AUDIO_SHARING_ADD_DEVICE
                 : SettingsEnums.DIALOG_START_AUDIO_SHARING;
     }
 

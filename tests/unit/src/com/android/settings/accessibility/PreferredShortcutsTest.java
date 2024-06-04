@@ -25,9 +25,10 @@ import static com.google.common.truth.Truth.assertThat;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.platform.test.annotations.DisableFlags;
-import android.platform.test.annotations.EnableFlags;
-import android.platform.test.flag.junit.SetFlagsRule;
+import android.platform.test.annotations.RequiresFlagsDisabled;
+import android.platform.test.annotations.RequiresFlagsEnabled;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.provider.Settings;
 import android.view.accessibility.Flags;
 
@@ -61,7 +62,7 @@ public class PreferredShortcutsTest {
     private static final ContentResolver sContentResolver =
             ApplicationProvider.getApplicationContext().getContentResolver();
     @Rule
-    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
     private final Context mContext = ApplicationProvider.getApplicationContext();
 
     @Before
@@ -174,7 +175,7 @@ public class PreferredShortcutsTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
+    @RequiresFlagsEnabled(Flags.FLAG_A11Y_QS_SHORTCUT)
     public void updatePreferredShortcutFromSettings_colorInversionWithQsAndSoftwareShortcut_preferredShortcutsMatches() {
         String target = COLOR_INVERSION_COMPONENT_NAME.flattenToString();
         Settings.Secure.putString(sContentResolver,
@@ -192,7 +193,7 @@ public class PreferredShortcutsTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
+    @RequiresFlagsDisabled(Flags.FLAG_A11Y_QS_SHORTCUT)
     public void updatePreferredShortcutFromSettings_colorInversionWithQsAndHardwareShortcut_qsShortcutNotSaved() {
         String target = COLOR_INVERSION_COMPONENT_NAME.flattenToString();
         Settings.Secure.putString(sContentResolver,
