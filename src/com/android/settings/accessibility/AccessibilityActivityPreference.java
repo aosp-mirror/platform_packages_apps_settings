@@ -24,6 +24,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.core.content.ContextCompat;
 
@@ -31,11 +32,17 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.RestrictedPreference;
+import com.android.settingslib.utils.ThreadUtils;
+
+import com.google.common.util.concurrent.ListenableFuture;
+
+import java.util.concurrent.ExecutionException;
 
 /**
  * Preference item for showing an accessibility activity in a preference list
  */
 public class AccessibilityActivityPreference extends RestrictedPreference {
+    private static final String LOG_TAG = AccessibilityActivityPreference.class.getSimpleName();
     // Index of the first preference in a preference category.
     private static final int FIRST_PREFERENCE_IN_CATEGORY_INDEX = -1;
     private static final String TARGET_FRAGMENT =
@@ -43,6 +50,7 @@ public class AccessibilityActivityPreference extends RestrictedPreference {
     private final AccessibilityShortcutInfo mA11yShortcutInfo;
     private final PackageManager mPm;
     private final ComponentName mComponentName;
+    private final ListenableFuture mExtraArgumentsFuture;
 
     public AccessibilityActivityPreference(Context context, String packageName, int uid,
             AccessibilityShortcutInfo a11yShortcutInfo) {
@@ -60,13 +68,28 @@ public class AccessibilityActivityPreference extends RestrictedPreference {
         setPersistent(false); // Disable SharedPreferences.
         setOrder(FIRST_PREFERENCE_IN_CATEGORY_INDEX);
 
-        final Drawable icon = getA11yActivityIcon();
-        setIcon(icon);
+        // kick off image loading tasks
+        ThreadUtils.postOnBackgroundThread(() -> {
+            final Drawable icon = getA11yActivityIcon();
+            ThreadUtils.getUiThreadHandler().post(() -> this.setIcon(icon));
+        });
 
         final Bundle extras = getExtras();
         extras.putParcelable(AccessibilitySettings.EXTRA_COMPONENT_NAME, mComponentName);
 
-        setupDataForOpenFragment();
+        mExtraArgumentsFuture = ThreadUtils.postOnBackgroundThread(this::setupDataForOpenFragment);
+    }
+
+    @Override
+    public void performClick() {
+        try {
+            mExtraArgumentsFuture.get();
+        } catch (InterruptedException | ExecutionException e) {
+            Log.e(LOG_TAG,
+                    "Unable to finish grabbing necessary arguments to open the fragment: "
+                            + "componentName: " + mComponentName);
+        }
+        super.performClick();
     }
 
     private Drawable getA11yActivityIcon() {
@@ -93,11 +116,13 @@ public class AccessibilityActivityPreference extends RestrictedPreference {
                 .getAccessibilityMetricsFeatureProvider()
                 .getDownloadedFeatureMetricsCategory(mComponentName);
 
-        RestrictedPreferenceHelper.putBasicExtras(
-                this, prefKey, getTitle(), intro, description, imageRes,
-                htmlDescription, mComponentName, metricsCategory);
-        RestrictedPreferenceHelper.putSettingsExtras(this, getPackageName(), settingsClassName);
-        RestrictedPreferenceHelper.putTileServiceExtras(
-                this, getPackageName(), tileServiceClassName);
+        ThreadUtils.getUiThreadHandler().post(() -> {
+            RestrictedPreferenceHelper.putBasicExtras(
+                    this, prefKey, getTitle(), intro, description, imageRes,
+                    htmlDescription, mComponentName, metricsCategory);
+            RestrictedPreferenceHelper.putSettingsExtras(this, getPackageName(), settingsClassName);
+            RestrictedPreferenceHelper.putTileServiceExtras(
+                    this, getPackageName(), tileServiceClassName);
+        });
     }
 }

@@ -24,6 +24,7 @@ import android.content.pm.ResolveInfo;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.core.content.ContextCompat;
 
@@ -31,17 +32,24 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.RestrictedPreference;
+import com.android.settingslib.utils.ThreadUtils;
+
+import com.google.common.util.concurrent.ListenableFuture;
+
+import java.util.concurrent.ExecutionException;
 
 /**
  * Preference item for showing an accessibility service in a preference list
  */
 public class AccessibilityServicePreference extends RestrictedPreference {
+    private static final String LOG_TAG = AccessibilityServicePreference.class.getSimpleName();
     // Index of the first preference in a preference category.
     private static final int FIRST_PREFERENCE_IN_CATEGORY_INDEX = -1;
     private final PackageManager mPm;
     private final AccessibilityServiceInfo mA11yServiceInfo;
     private final ComponentName mComponentName;
     private final boolean mServiceEnabled;
+    private final ListenableFuture mExtraArgumentsFuture;
 
     public AccessibilityServicePreference(Context context, String packageName, int uid,
             AccessibilityServiceInfo a11yServiceInfo, boolean serviceEnabled) {
@@ -63,13 +71,28 @@ public class AccessibilityServicePreference extends RestrictedPreference {
         setPersistent(false); // Disable SharedPreferences.
         setOrder(FIRST_PREFERENCE_IN_CATEGORY_INDEX);
 
-        final Drawable icon = getA11yServiceIcon();
-        setIcon(icon);
+        // kick off image loading tasks
+        ThreadUtils.postOnBackgroundThread(() -> {
+            final Drawable icon = getA11yServiceIcon();
+            ThreadUtils.getUiThreadHandler().post(() -> this.setIcon(icon));
+        });
 
         final Bundle extras = getExtras();
         extras.putParcelable(AccessibilitySettings.EXTRA_COMPONENT_NAME, mComponentName);
 
-        setupDataForOpenFragment();
+        mExtraArgumentsFuture = ThreadUtils.postOnBackgroundThread(this::setupDataForOpenFragment);
+    }
+
+    @Override
+    public void performClick() {
+        try {
+            mExtraArgumentsFuture.get();
+        } catch (InterruptedException | ExecutionException e) {
+            Log.e(LOG_TAG,
+                    "Unable to finish grabbing necessary arguments to open the fragment: "
+                            + "componentName: " + mComponentName);
+        }
+        super.performClick();
     }
 
     private Drawable getA11yServiceIcon() {
@@ -97,13 +120,14 @@ public class AccessibilityServicePreference extends RestrictedPreference {
         final int metricsCategory = FeatureFactory.getFeatureFactory()
                 .getAccessibilityMetricsFeatureProvider()
                 .getDownloadedFeatureMetricsCategory(mComponentName);
-
-        RestrictedPreferenceHelper.putBasicExtras(
-                this, prefKey, getTitle(), intro, description, imageRes,
-                htmlDescription, mComponentName, metricsCategory);
-        RestrictedPreferenceHelper.putServiceExtras(this, resolveInfo, mServiceEnabled);
-        RestrictedPreferenceHelper.putSettingsExtras(this, getPackageName(), settingsClassName);
-        RestrictedPreferenceHelper.putTileServiceExtras(
-                this, getPackageName(), tileServiceClassName);
+        ThreadUtils.getUiThreadHandler().post(() -> {
+            RestrictedPreferenceHelper.putBasicExtras(
+                    this, prefKey, getTitle(), intro, description, imageRes,
+                    htmlDescription, mComponentName, metricsCategory);
+            RestrictedPreferenceHelper.putServiceExtras(this, resolveInfo, mServiceEnabled);
+            RestrictedPreferenceHelper.putSettingsExtras(this, getPackageName(), settingsClassName);
+            RestrictedPreferenceHelper.putTileServiceExtras(
+                    this, getPackageName(), tileServiceClassName);
+        });
     }
 }
