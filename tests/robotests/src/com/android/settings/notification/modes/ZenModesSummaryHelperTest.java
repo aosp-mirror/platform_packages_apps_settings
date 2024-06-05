@@ -22,6 +22,7 @@ import static android.service.notification.ZenPolicy.PEOPLE_TYPE_ANYONE;
 import static android.service.notification.ZenPolicy.PEOPLE_TYPE_CONTACTS;
 import static android.service.notification.ZenPolicy.VISUAL_EFFECT_AMBIENT;
 import static android.service.notification.ZenPolicy.VISUAL_EFFECT_LIGHTS;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import android.app.AutomaticZenRule;
@@ -29,6 +30,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.service.notification.ZenDeviceEffects;
 import android.service.notification.ZenPolicy;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -324,5 +326,47 @@ public class ZenModesSummaryHelperTest {
 
         assertThat(mSummaryHelper.getDisplayEffectsSummary(zenMode)).isEqualTo(
                 "Notifications partially hidden, grayscale, and 2 more");
+    }
+
+    @Test
+    public void getAppsSummary_all() {
+        AutomaticZenRule rule = new AutomaticZenRule.Builder("Bedtime", Uri.parse("bed"))
+                .setType(AutomaticZenRule.TYPE_BEDTIME)
+                .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
+                .setZenPolicy(new ZenPolicy.Builder()
+                        .allowChannels(ZenMode.CHANNEL_POLICY_ALL)
+                        .build())
+                .build();
+        ZenMode zenMode = new ZenMode("id", rule, true);
+
+        assertThat(mSummaryHelper.getAppsSummary(zenMode)).isEqualTo("All");
+    }
+
+    @Test
+    public void getAppsSummary_none() {
+        AutomaticZenRule rule = new AutomaticZenRule.Builder("Bedtime", Uri.parse("bed"))
+                .setType(AutomaticZenRule.TYPE_BEDTIME)
+                .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
+                .setZenPolicy(new ZenPolicy.Builder()
+                        .allowChannels(ZenPolicy.CHANNEL_POLICY_NONE)
+                        .build())
+                .build();
+        ZenMode zenMode = new ZenMode("id", rule, true);
+
+        assertThat(mSummaryHelper.getAppsSummary(zenMode)).isEqualTo("None");
+    }
+
+    @Test
+    public void getAppsSummary_priorityApps() {
+        AutomaticZenRule rule = new AutomaticZenRule.Builder("Bedtime", Uri.parse("bed"))
+                .setType(AutomaticZenRule.TYPE_BEDTIME)
+                .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
+                .setZenPolicy(new ZenPolicy.Builder()
+                        .allowChannels(ZenPolicy.CHANNEL_POLICY_PRIORITY)
+                        .build())
+                .build();
+        ZenMode zenMode = new ZenMode("id", rule, true);
+
+        assertThat(mSummaryHelper.getAppsSummary(zenMode)).isEqualTo("Selected apps");
     }
 }

@@ -19,7 +19,6 @@ package com.android.settings.privacy;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.provider.DeviceConfig;
-import android.provider.Settings;
 
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
@@ -38,26 +37,25 @@ public class ShowClipAccessNotificationPreferenceController
 
     private static final String KEY_SHOW_CLIP_ACCESS_NOTIFICATION = "show_clip_access_notification";
 
-    private final DeviceConfig.OnPropertiesChangedListener mDeviceConfigListener =
-            properties -> updateConfig();
-    private boolean mDefault;
     private Preference mPreference;
+    private final ClipboardManager mClipboardManager;
+    private final DeviceConfig.OnPropertiesChangedListener mDeviceConfigListener =
+            properties -> updateState(mPreference);
 
     public ShowClipAccessNotificationPreferenceController(Context context) {
         super(context, KEY_SHOW_CLIP_ACCESS_NOTIFICATION);
-        updateConfig();
+        mClipboardManager = context.getSystemService(ClipboardManager.class);
+        updateState(mPreference);
     }
 
     @Override
     public boolean isChecked() {
-        return Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.CLIPBOARD_SHOW_ACCESS_NOTIFICATIONS, (mDefault ? 1 : 0)) != 0;
+        return mClipboardManager.areClipboardAccessNotificationsEnabled();
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.CLIPBOARD_SHOW_ACCESS_NOTIFICATIONS, (isChecked ? 1 : 0));
+        mClipboardManager.setClipboardAccessNotificationsEnabled(isChecked);
         return true;
     }
 
@@ -94,12 +92,4 @@ public class ShowClipAccessNotificationPreferenceController
     public void onStop() {
         DeviceConfig.removeOnPropertiesChangedListener(mDeviceConfigListener);
     }
-
-    private void updateConfig() {
-        mDefault = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_CLIPBOARD,
-                ClipboardManager.DEVICE_CONFIG_SHOW_ACCESS_NOTIFICATIONS,
-                ClipboardManager.DEVICE_CONFIG_DEFAULT_SHOW_ACCESS_NOTIFICATIONS);
-        updateState(mPreference);
-    }
-
 }

@@ -27,6 +27,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
@@ -320,10 +321,15 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                 }
                 return;
             }
-            if (mAssistant
-                    .getDevicesMatchingConnectionStates(
-                            new int[] {BluetoothProfile.STATE_CONNECTED})
-                    .isEmpty()) {
+            // FeatureFlagUtils.SETTINGS_NEED_CONNECTED_BLE_DEVICE_FOR_BROADCAST is always true in
+            // prod. We can turn off the flag for debug purpose.
+            if (FeatureFlagUtils.isEnabled(
+                            mContext,
+                            FeatureFlagUtils.SETTINGS_NEED_CONNECTED_BLE_DEVICE_FOR_BROADCAST)
+                    && mAssistant
+                            .getDevicesMatchingConnectionStates(
+                                    new int[] {BluetoothProfile.STATE_CONNECTED})
+                            .isEmpty()) {
                 // Pop up dialog to ask users to connect at least one lea buds before audio sharing.
                 AudioSharingUtils.postOnMainThread(
                         mContext,

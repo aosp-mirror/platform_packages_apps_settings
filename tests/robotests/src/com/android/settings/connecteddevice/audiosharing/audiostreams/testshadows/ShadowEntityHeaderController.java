@@ -25,6 +25,7 @@ import com.android.settings.widget.EntityHeaderController;
 
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
+import org.robolectric.annotation.Resetter;
 
 @Implements(value = EntityHeaderController.class, callThroughByDefault = false)
 public class ShadowEntityHeaderController {
@@ -32,6 +33,12 @@ public class ShadowEntityHeaderController {
 
     public static void setUseMock(EntityHeaderController mockController) {
         sMockController = mockController;
+    }
+
+    /** Reset static fields */
+    @Resetter
+    public static void reset() {
+        sMockController = null;
     }
 
     /** Returns new instance of {@link EntityHeaderController} */
