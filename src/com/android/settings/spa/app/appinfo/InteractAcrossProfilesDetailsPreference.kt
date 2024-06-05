@@ -25,7 +25,6 @@ import androidx.compose.ui.res.stringResource
 import com.android.settings.R
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment
 import com.android.settings.applications.specialaccess.interactacrossprofiles.InteractAcrossProfilesDetails
-import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settingslib.spa.widget.preference.Preference
 import com.android.settingslib.spa.widget.preference.PreferenceModel
@@ -34,7 +33,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
-@OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun InteractAcrossProfilesDetailsPreference(app: ApplicationInfo) {
     val context = LocalContext.current

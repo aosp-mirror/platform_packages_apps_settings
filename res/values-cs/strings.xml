@@ -26,7 +26,7 @@
     <string name="device_info_protected_single_press" msgid="3810785480060743677">"Klepnutím zobrazíte informace."</string>
     <string name="show_dev_countdown" msgid="2936506773086395069">"{count,plural, =1{Jste # krok od toho, abyste se stali vývojářem.}few{Jste # kroky od toho, abyste se stali vývojářem.}many{Jste # kroku od toho, abyste se stali vývojářem.}other{Jste # kroků od toho, abyste se stali vývojářem.}}"</string>
     <string name="show_dev_on" msgid="2840850085134853754">"Voilà! Stal se z vás vývojář."</string>
-    <string name="show_dev_already" msgid="7041756429707644630">"Není potřeba, již jste vývojář."</string>
+    <string name="show_dev_already" msgid="7041756429707644630">"Stačí, už jste vývojář."</string>
     <string name="dev_settings_disabled_warning" msgid="6971867026249671244">"Nejprve prosím aktivujte možnosti pro vývojáře."</string>
     <string name="header_category_system" msgid="1665516346845259058">"Systém"</string>
     <string name="radioInfo_service_in" msgid="9088637745836646271">"V provozu"</string>
@@ -94,11 +94,11 @@
     <string name="bluetooth_connection_permission_request" msgid="8793131019383198861">"Požadavek na připojení zařízení Bluetooth"</string>
     <string name="bluetooth_phonebook_request" msgid="1085102844577089889">"Požadavek na přístup k telefonnímu seznamu"</string>
     <string name="bluetooth_map_request" msgid="8664081227240707479">"Požadavek na přístup ke zprávám"</string>
-    <string name="bluetooth_device_name_summary" msgid="8678342689845439583">"Viditelné pro ostatní zařízení jako „<xliff:g id="DEVICE_NAME">^1</xliff:g>“"</string>
+    <string name="bluetooth_device_name_summary" msgid="8678342689845439583">"Viditelné pro ostatní zařízení jako „<xliff:g id="DEVICE_NAME">^1</xliff:g>“."</string>
     <string name="bluetooth_off_footer" msgid="76578735660216295">"Pokud se chcete připojit k ostatním zařízením, zapněte Bluetooth."</string>
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"Vaše zařízení"</string>
     <string name="bluetooth_pairing_page_title" msgid="3403981358823707692">"Spárovat nové zařízení"</string>
-    <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Vypnout hardwarové snížení zátěže Bluetooth (A2DP)"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Vypnout hardwarové snižování zátěže Bluetooth (A2DP)"</string>
     <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"Vypnout snižování zatížení zvukového hardwaru Bluetooth LE"</string>
     <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"Restartovat zařízení?"</string>
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"Ke změně nastavení je nutné restartovat zařízení."</string>
@@ -109,7 +109,7 @@
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Zobrazit přepínač LE Audio v Podrobnostech o zařízení"</string>
     <string name="bluetooth_enable_leaudio_allow_list" msgid="1692999156437357534">"Zapnout seznam povolených zařízení Bluetooth LE Audio"</string>
     <string name="bluetooth_enable_leaudio_allow_list_summary" msgid="725601205276008525">"Povolit funkci seznamu povolených zařízení Bluetooth LE Audio."</string>
-    <string name="connected_device_media_device_title" msgid="3783388247594566734">"Mediální zařízení"</string>
+    <string name="connected_device_media_device_title" msgid="3783388247594566734">"Multimediální zařízení"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Volání na zařízení"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Ostatní zařízení"</string>
     <string name="connected_device_saved_title" msgid="5607274378851905959">"Uložená zařízení"</string>
@@ -215,8 +215,8 @@
     <string name="airplane_mode" msgid="3196085857882526817">"Režim Letadlo"</string>
     <string name="wireless_networks_settings_title" msgid="8557542379234105369">"Bezdrátová připojení a sítě"</string>
     <string name="roaming" msgid="3055365654530847985">"Roaming"</string>
-    <string name="roaming_enable" msgid="7845716016861535340">"Používat datové služby při roamingu"</string>
-    <string name="roaming_disable" msgid="729512894708689604">"Používat datové služby při roamingu"</string>
+    <string name="roaming_enable" msgid="7845716016861535340">"Při roamingu používat datové služby"</string>
+    <string name="roaming_disable" msgid="729512894708689604">"Při roamingu používat datové služby"</string>
     <string name="roaming_warning" msgid="7703647889040229013">"Mohou vám být účtovány poplatky za roaming."</string>
     <string name="date_time_auto" msgid="4239202185055225869">"Nastavovat čas automaticky"</string>
     <string name="zone_auto_title" msgid="5141692422373097957">"Nastavovat automaticky"</string>
@@ -233,7 +233,7 @@
     <string name="date_time_select_fixed_offset_time_zones" msgid="594848300882055361">"Vyberte posun od UTC"</string>
     <string name="zone_info_exemplar_location_and_offset" msgid="2186042522225153092">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g> (<xliff:g id="OFFSET">%2$s</xliff:g>)"</string>
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
-    <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"Použití: <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
+    <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"Použité časové pásmo: <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
     <string name="zone_info_footer_second_sentence" msgid="6472889173541729110">"<xliff:g id="DST_TIME_TYPE">%1$s</xliff:g> začíná <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>."</string>
     <string name="zone_info_footer_no_dst" msgid="8399585343328811158">"Používá <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. Nepoužívá letní čas."</string>
     <string name="zone_time_type_dst" msgid="9189689342265305808">"Letní čas"</string>
@@ -352,13 +352,13 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Nejlepších výsledků dosáhnete s ochranou displeje, která má certifikát Made for Google. S ostatními ochranami displeje nemusí otisk prstu fungovat."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Nejlepších výsledků dosáhnete s ochranou displeje, která má certifikát Made for Google. S ostatními ochranami displeje nemusí otisk prstu dítěte fungovat."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
-    <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"Odemknutí pomocí hodinek"</string>
+    <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"Odemknutí hodinkami"</string>
     <string name="biometric_settings_intro_with_activeunlock" msgid="6583248094453119314">"Pokud budete mít při odemykání obličejem zakrytou tvář nebo bude vaše okolí tmavé, telefon bude žádat o nasnímání otisku prstu.\n\nPokud nerozpozná váš obličej nebo otisk, můžete ho odemknout hodinkami."</string>
     <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"Telefon můžete odemknout hodinkami, pokud nerozpozná váš otisk prstu."</string>
     <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"Telefon můžete odemknout hodinkami, pokud nerozpozná váš obličej."</string>
     <string name="biometric_settings_use_fingerprint_or_watch_for" msgid="1160830065613858095">"Použít otisk prstu nebo hodinky k"</string>
     <string name="biometric_settings_use_face_or_watch_for" msgid="1507077107150278532">"Použít obličej nebo hodinky k"</string>
-    <string name="biometric_settings_use_face_fingerprint_or_watch_for" msgid="7495835723072020641">"Použít obličej, otisk prstu nebo hodinky k"</string>
+    <string name="biometric_settings_use_face_fingerprint_or_watch_for" msgid="7495835723072020641">"Obličejem, otiskem prstu nebo hodinkami můžete"</string>
     <string name="biometric_settings_use_watch_for" msgid="5454545622244040110">"Použít hodinky k"</string>
     <string name="biometric_settings_use_face_or_watch_preference_summary" msgid="4969685200340861744">"Pomocí obličeje nebo hodinek"</string>
     <string name="biometric_settings_use_fingerprint_or_watch_preference_summary" msgid="2425628094194828407">"Pomocí otisku prstu nebo hodinek"</string>
@@ -487,14 +487,14 @@
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Maximální počet otisků prstů, které lze přidat: <xliff:g id="COUNT">%d</xliff:g>"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Přidali jste maximální počet otisků prstů"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Další otisky prstů nelze přidat"</string>
-    <string name="fingerprint_delete_title" msgid="5412123164503407098">"Smazat otisk <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>"</string>
+    <string name="fingerprint_delete_title" msgid="5412123164503407098">"Smazání otisku <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>"</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Otisk prstu už nebude možné používat k odemknutí pracovního profilu, autorizaci nákupů ani přihlašování do pracovních aplikací."</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"Šifrování"</string>
     <string name="encrypted_summary" msgid="545623487587251207">"Šifrováno"</string>
     <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"Nastavení zámku obrazovky"</string>
     <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"Kvůli lepší bezpečnosti nastavte v zařízení PIN, gesto nebo heslo."</string>
     <string name="no_screen_lock_issue_action_label" msgid="2691229130486382863">"Nastavit zámek obrazovky"</string>
-    <string name="no_screen_lock_issue_notification_title" msgid="1214876733592830628">"Nastavte zámek obrazovky"</string>
+    <string name="no_screen_lock_issue_notification_title" msgid="1214876733592830628">"Nastavte si zámek obrazovky"</string>
     <string name="no_screen_lock_issue_notification_text" msgid="8696194459170873345">"Kvůli lepší bezpečnosti nastavte v zařízení PIN, gesto nebo heslo."</string>
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"Zabezpečení telefonu"</string>
     <string name="suggested_fingerprint_lock_settings_title" msgid="3140266181874137984">"Chcete-li odemknout, přidejte otisk prstu"</string>
@@ -505,9 +505,9 @@
     <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"Vyberte nový pracovní zámek"</string>
     <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"Pro ještě lepší zabezpečení si nastavte záložní zámek obrazovky"</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Zvolte záložní metodu zámku obrazovky"</string>
-    <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"Pokud zapomenete zámek obrazovky, administrátor IT ho nemůže resetovat."</string>
+    <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"Pokud zámek obrazovky zapomenete, IT administrátor ho nemůže resetovat."</string>
     <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"Nastavit samostatný pracovní zámek"</string>
-    <string name="lock_settings_picker_profile_message" msgid="9142379549980873478">"Pokud tento zámek zapomenete, požádejte administrátora IT o resetování."</string>
+    <string name="lock_settings_picker_profile_message" msgid="9142379549980873478">"Pokud tento zámek zapomenete, požádejte IT administrátora o resetování"</string>
     <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"Možnosti zámku obrazovky"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="7985107300517468569">"Možnosti zámku obrazovky"</string>
     <string name="lock_screen_auto_pin_confirm_title" msgid="3012128112186088375">"Automatické potvrzování odemknutí"</string>
@@ -649,9 +649,9 @@
     <string name="bluetooth_device_context_disconnect" msgid="4464167389972513232">"Odpojit"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="2406032703622371826">"Spárovat a připojit"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="316627049372961941">"Když je připojení Bluetooth zapnuto, vaše zařízení může komunikovat s ostatními zařízeními Bluetooth v okolí."</string>
-    <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Když je zapnuté připojení Bluetooth, zařízení může komunikovat s ostatními zařízeními Bluetooth v okolí.\n\nAplikace a služby mohou za účelem vylepšení funkcí nadále vyhledávat zařízení v okolí, i když je Bluetooth vypnuté. Lze tak například vylepšit funkce a služby založené na poloze. Toto chování můžete změnit v nastavení vyhledávání Bluetooth."</string>
+    <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Když je připojení Bluetooth zapnuté, zařízení může komunikovat s ostatními zařízeními Bluetooth v okolí.\n\nZa účelem vylepšení funkcí však můžou aplikace a služby vyhledávat zařízení v okolí kdykoliv, dokonce i tehdy, když je Bluetooth vypnuté. Je tak například možné vylepšit funkce a služby založené na poloze. Toto chování můžete změnit v nastavení vyhledávání Bluetooth."</string>
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"Změnit"</string>
-    <string name="device_details_title" msgid="1155622417516195481">"O zařízení"</string>
+    <string name="device_details_title" msgid="1155622417516195481">"Podrobnosti o zařízení"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Nastavení klávesnice"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Adresa Bluetooth zařízení: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_multuple_devices_mac_address" msgid="4974301550897923376">"Adresa Bluetooth zařízení:\n<xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
@@ -691,7 +691,7 @@
     <string name="wifi_sign_in_button_text" msgid="8483892122845654850">"Přihlásit se"</string>
     <string name="wifi_venue_website_button_text" msgid="7749360432667175030">"Otevřít web"</string>
     <string name="wifi_time_remaining" msgid="8503606272869846170">"Zbývá: <xliff:g id="REMAINING_TIME">%1$s</xliff:g>"</string>
-    <string name="wifi_expiry_time" msgid="5419758551129267624">"Platnost vyprší <xliff:g id="EXPIRY_TIME">%1$s</xliff:g>"</string>
+    <string name="wifi_expiry_time" msgid="5419758551129267624">"Platnost skončí <xliff:g id="EXPIRY_TIME">%1$s</xliff:g>"</string>
     <string name="tx_link_speed" msgid="3071955184703668113">"<xliff:g id="TRANSMIT_LINK_SPEED">%1$d</xliff:g> Mb/s"</string>
     <string name="rx_link_speed" msgid="6292229178855567783">"<xliff:g id="RECEIVE_LINK_SPEED">%1$d</xliff:g> Mb/s"</string>
     <string name="link_speed" msgid="931786745741016446">"<xliff:g id="LINK_SPEED">%1$d</xliff:g> Mb/s"</string>
@@ -750,8 +750,8 @@
     <string name="wifi_hidden_network_warning" msgid="3937433813754746158">"Pokud router nevysílá ID sítě, ale vy se k síti budete chtít v budoucnu připojit, můžete síť nastavit jako skrytou.\n\nToto opatření může představovat bezpečnostní riziko, protože telefon bude pravidelně vysílat signál za účelem nalezení sítě.\n\nPokud tuto síť nastavíte jako skrytou, nastavení routeru tím nezměníte."</string>
     <string name="wifi_signal" msgid="4442182285304271424">"Síla signálu"</string>
     <string name="wifi_status" msgid="5349199188871002778">"Stav"</string>
-    <string name="tx_wifi_speed" msgid="2368986629172050673">"Rychlost odkazu pro přenos"</string>
-    <string name="rx_wifi_speed" msgid="5167966079215111232">"Rychlost odkazu k přijímání"</string>
+    <string name="tx_wifi_speed" msgid="2368986629172050673">"Odchozí rychlost spojení"</string>
+    <string name="rx_wifi_speed" msgid="5167966079215111232">"Příchozí rychlost spojení"</string>
     <string name="wifi_speed" msgid="6562147734565434513">"Rychlost připojení"</string>
     <string name="wifi_frequency" msgid="3120998420184702834">"Frekvence"</string>
     <string name="wifi_ip_address" msgid="8903577251845268209">"IP adresa"</string>
@@ -809,7 +809,7 @@
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"Automatické připojení"</string>
     <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"Povolit připojení k této síti, když bude v dosahu"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"Přidat zařízení"</string>
-    <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Pomocí QR kódu přidejte zařízení do této sítě"</string>
+    <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Přidejte zařízení do této sítě pomocí QR kódu"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR kód není platný formát"</string>
     <string name="retry" msgid="7542103800274026915">"Zkusit znovu"</string>
     <string name="wifi_shared" msgid="8850748923537589782">"Sdílet s ostatními uživateli zařízení"</string>
@@ -842,7 +842,7 @@
     <string name="wifi_failed_connect_message" msgid="8538000546604347894">"Připojení k síti se nezdařilo."</string>
     <string name="wifi_not_in_range_message" msgid="3885327464037574739">"Síť není v dosahu"</string>
     <string name="wifi_forget" msgid="3485573280364015620">"Zapomenout"</string>
-    <string name="wifi_modify" msgid="5127926476383659412">"Upravit"</string>
+    <string name="wifi_modify" msgid="5127926476383659412">"Změnit"</string>
     <string name="wifi_failed_forget_message" msgid="8272732599235525880">"Zapomenutí sítě se nezdařilo."</string>
     <string name="wifi_save" msgid="2312643132472226807">"Uložit"</string>
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"Uložení sítě se nezdařilo."</string>
@@ -855,7 +855,7 @@
     <string name="wifi_advanced_device_mac_address_title" msgid="6155800851233164411">"Adresa MAC zařízení"</string>
     <string name="wifi_advanced_randomized_mac_address_title" msgid="3930671320234553088">"Náhodná adresa MAC"</string>
     <string name="wifi_advanced_randomized_mac_address_disconnected_title" msgid="2755843130417523727">"Náhodná adresa MAC (naposledy použitá)"</string>
-    <string name="wifi_details_title" msgid="222735438574597493">"Podrobnosti sítě"</string>
+    <string name="wifi_details_title" msgid="222735438574597493">"Podrobnosti o síti"</string>
     <string name="wifi_details_subnet_mask" msgid="1619151769276260512">"Maska podsítě"</string>
     <string name="wifi_type_title" msgid="2174893488722015838">"Typ"</string>
     <string name="wifi_details_dns" msgid="273231528073312579">"DNS"</string>
@@ -901,7 +901,7 @@
     <string name="wifi_hotspot_speed_summary_5g" msgid="6221158936983135040">"5 GHz / Kompatibilní s mnoha zařízeními"</string>
     <string name="wifi_hotspot_speed_summary_6g" msgid="8863992901226595544">"6 GHz / Kompatibilní s méně zařízeními"</string>
     <string name="wifi_hotspot_speed_summary_2g_and_5g" msgid="5931052946168943750">"2,4 a 5 GHz / Kompatibilní s většinou zařízení"</string>
-    <string name="wifi_hotspot_speed_intro" msgid="6973482196363758925">"Zvolte frekvenci pro hotspot. Tato frekvence má vliv na rychlost připojení a typy zařízení, které hotspot dokážou najít."</string>
+    <string name="wifi_hotspot_speed_intro" msgid="6973482196363758925">"Zvolte frekvenci pro hotspot. Frekvence má vliv na rychlost připojení a typy zařízení, které hotspot dokážou najít."</string>
     <string name="wifi_hotspot_speed_category" msgid="5265655850463630286">"Preferovaná frekvence"</string>
     <string name="wifi_hotspot_speed_2g" msgid="3400600834257664480">"2,4 GHz"</string>
     <string name="wifi_hotspot_speed_2g_summary" msgid="6930273933810520155">"Pomalejší rychlosti. Kompatibilní s většinou zařízení."</string>
@@ -914,7 +914,7 @@
     <string name="wifi_hotspot_speed_summary_unavailable" msgid="7276080644693388756">"Ve vaší zemi nebo oblasti není k dispozici"</string>
     <string name="wifi_hotspot_speed_footer" msgid="8846939503916795002">"Pokud vámi preferovaná frekvence nebude k dispozici, hotspot může použít jinou. Pokud frekvenci změníte, může se změnit nastavení zabezpečení hotspotu."</string>
     <string name="wifi_hotspot_security_summary_unavailable" msgid="117582979310345853">"S frekvencí 6 GHz není k dispozici"</string>
-    <string name="wifi_hotspot_security_footer" msgid="4608329688744949796">"Pokud frekvenci hotspotu změníte, může se změnit nastavení zabezpečení"</string>
+    <string name="wifi_hotspot_security_footer" msgid="4608329688744949796">"Pokud frekvenci hotspotu změníte, může se změnit nastavení zabezpečení."</string>
     <string name="wifi_tether_starting" msgid="8879874184033857814">"Zapínání hotspotu…"</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"Vypínání hotspotu…"</string>
     <string name="wifi_tether_carrier_unsupport_dialog_title" msgid="3089432578433978073">"Tethering není k dispozici"</string>
@@ -953,7 +953,7 @@
     <string name="wifi_calling_off_explanation_2" msgid="3487475808574416183"></string>
     <string name="emergency_address_title" msgid="8102786488994263815">"Nouzová adresa"</string>
     <string name="emergency_address_summary" msgid="3022628750270626473">"Použije se jako vaše poloha, pokud uskutečníte tísňové volání přes Wi-Fi"</string>
-    <string name="private_dns_help_message" msgid="851221502063782306"><annotation id="url">"Další informace"</annotation>" o funkcích soukromého režimu DNS"</string>
+    <string name="private_dns_help_message" msgid="851221502063782306"><annotation id="url">"Další informace"</annotation>" o funkci soukromého DNS"</string>
     <string name="private_dns_mode_on" msgid="8878679071975375696">"Zapnuto"</string>
     <string name="wifi_calling_settings_activation_instructions" msgid="3936067355828542266">"Aktivujte volání přes Wi-Fi"</string>
     <string name="wifi_calling_turn_on" msgid="7687886259199428823">"Zapněte volání přes Wi-Fi"</string>
@@ -1149,7 +1149,7 @@
     <string name="status_signal_strength" msgid="7644525712554444359">"Síla signálu"</string>
     <string name="status_roaming" msgid="1253597174715663778">"Roaming"</string>
     <string name="status_operator" msgid="4335640583552058491">"Síť"</string>
-    <string name="status_wifi_mac_address" msgid="4447611754614388914">"Adresa MAC sítě Wi-Fi"</string>
+    <string name="status_wifi_mac_address" msgid="4447611754614388914">"MAC adresa sítě Wi-Fi"</string>
     <string name="status_device_wifi_mac_address" msgid="1896121694334176494">"Adresa MAC sítě Wi-Fi zařízení"</string>
     <string name="status_bt_address" msgid="6919660304578476547">"Adresa Bluetooth"</string>
     <string name="status_serial_number" msgid="9060064164331466789">"Sériové číslo"</string>
@@ -1167,7 +1167,7 @@
     <string name="storage_menu_set_up" msgid="4401074025612064744">"Nastavit"</string>
     <string name="storage_menu_free" msgid="616100170298501673">"Uvolnit místo"</string>
     <string name="storage_menu_manage" msgid="7465522758801346408">"Správa úložiště"</string>
-    <string name="storage_free_up_space_title" msgid="281047807372131975">"Uvolnit místo"</string>
+    <string name="storage_free_up_space_title" msgid="281047807372131975">"Uvolněte místo"</string>
     <string name="storage_free_up_space_summary" msgid="6650027929735481350">"Místo můžete spravovat a uvolnit v aplikaci Files"</string>
     <string name="storage_other_users" msgid="7017206190449510992">"Další uživatelé"</string>
     <string name="storage_size_large" msgid="1155308277890194878">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small>""</string>
@@ -1221,7 +1221,7 @@
     <string name="communal_settings_title" msgid="2845678473945902115">"Komunální"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"Komunální nastavení"</string>
     <string name="apn_settings" msgid="4295467389400441299">"Přístupové body"</string>
-    <string name="apn_edit" msgid="2003683641840248741">"Upravit přístupový bod"</string>
+    <string name="apn_edit" msgid="2003683641840248741">"Úprava příst. bodu"</string>
     <string name="apn_not_set" msgid="8246646433109750293">"Nenastaveno"</string>
     <string name="apn_not_set_for_mvno" msgid="1141490067313964640">"Nenastaveno"</string>
     <string name="apn_name" msgid="6677695784108157953">"Název"</string>
@@ -1348,7 +1348,7 @@
     <string name="mobile_insert_sim_card" msgid="3639245241283948038">"Vložte SIM kartu a restartujte zařízení."</string>
     <string name="mobile_connect_to_internet" msgid="8162654404357069060">"Připojte se prosím k internetu."</string>
     <string name="location_category_recent_location_requests" msgid="2205900488782832082">"Nedávné žádosti o určení polohy"</string>
-    <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Umístění pracovního profilu"</string>
+    <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Poloha pro pracovní profil"</string>
     <string name="location_app_level_permissions" msgid="907206607664629759">"Oprávnění aplikací pro přístup k poloze"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"Určování polohy je vypnuto"</string>
     <string name="location_app_permission_summary_location_on" msgid="7552095451731948984">"{count,plural, =1{Přístup k poloze má # z {total} aplikací}few{Přístup k poloze mají # z {total} aplikací}many{Přístup k poloze má # z {total} aplikací}other{Přístup k poloze má # z {total} aplikací}}"</string>
@@ -1384,7 +1384,7 @@
     <string name="about_settings_summary" msgid="4831942939227432513">"Zobrazí právní informace, stav a verzi softwaru"</string>
     <string name="legal_information" msgid="7509900979811934843">"Právní informace"</string>
     <string name="manual" msgid="3651593989906084868">"Příručka"</string>
-    <string name="regulatory_labels" msgid="5960251403367154270">"Regulační štítky"</string>
+    <string name="regulatory_labels" msgid="5960251403367154270">"Předpisové štítky"</string>
     <string name="safety_and_regulatory_info" msgid="8285048080439298528">"Příručka k bezpečnosti a předpisům"</string>
     <string name="copyright_title" msgid="83245306827757857">"Autorská práva"</string>
     <string name="license_title" msgid="8745742085916617540">"Licence"</string>
@@ -1498,7 +1498,7 @@
     <string name="lock_settings_profile_unification_dialog_uncompliant_body" msgid="8844682343443755895">"Zámek pracovního profilu nesplňuje požadavky vaší organizace na zabezpečení. Pro obrazovku zařízení i pracovní profil můžete používat stejný zámek, budou se na něj však vztahovat všechny zásady platné pro pracovní zámek."</string>
     <string name="lock_settings_profile_unification_dialog_confirm" msgid="6276915393736137843">"Používat jeden zámek"</string>
     <string name="lock_settings_profile_unification_dialog_uncompliant_confirm" msgid="8509287115116369677">"Používat jeden zámek"</string>
-    <string name="lock_settings_profile_unified_summary" msgid="777095092175037385">"Stejný jako zámek obrazovky zařízení"</string>
+    <string name="lock_settings_profile_unified_summary" msgid="777095092175037385">"Stejný způsob zamykání jako u obrazovky"</string>
     <string name="manageapplications_settings_title" msgid="9198876415524237657">"Spravovat aplikace"</string>
     <string name="applications_settings" msgid="1941993743933425622">"Informace o aplikacích"</string>
     <string name="applications_settings_header" msgid="3154670675856048015">"Nastavení aplikace"</string>
@@ -1551,9 +1551,9 @@
     <string name="show_background_processes" msgid="5682856012453562151">"Zobrazit mezipaměť"</string>
     <string name="default_emergency_app" msgid="1929974800666613803">"Aplikace k příjmu výstražných zpráv"</string>
     <string name="reset_app_preferences" msgid="8861758340732716573">"Obnovit nastavení aplikací"</string>
-    <string name="reset_app_preferences_title" msgid="8935136792316050759">"Obnovit nastavení aplikací?"</string>
-    <string name="reset_app_preferences_desc" msgid="8550782670650158299">"Tímto resetujete všechny následující předvolby:\n\n"<li>"deaktivované aplikace,"</li>\n<li>"zakázaná oznámení aplikací,"</li>\n<li>"výchozí aplikace pro různé akce,"</li>\n<li>"omezení datových přenosů na pozadí pro aplikace,"</li>\n<li>"veškerá omezení oprávnění,"</li>\n<li>"nastavení využití baterie."</li>\n\n"Nepřijdete o žádná data aplikací."</string>
-    <string name="reset_app_preferences_button" msgid="2591318711372850058">"Obnovit aplikace"</string>
+    <string name="reset_app_preferences_title" msgid="8935136792316050759">"Resetovat nastavení aplikací?"</string>
+    <string name="reset_app_preferences_desc" msgid="8550782670650158299">"Tímto resetujete všechny následující předvolby:\n\n"<li>"zakázané aplikace,"</li>\n<li>"deaktivovaná oznámení aplikací,"</li>\n<li>"výchozí aplikace pro různé akce,"</li>\n<li>"omezení datových přenosů na pozadí pro aplikace,"</li>\n<li>"veškerá omezení oprávnění,"</li>\n<li>"nastavení využití baterie."</li>\n\n"O data aplikací nepřijdete."</string>
+    <string name="reset_app_preferences_button" msgid="2591318711372850058">"Resetovat aplikace"</string>
     <string name="filter" msgid="9039576690686251462">"Filtrovat"</string>
     <string name="filter_dlg_title" msgid="3086282431958601338">"Vyberte možnosti filtru"</string>
     <string name="filter_apps_all" msgid="5705421199299914620">"Všechny aplikace"</string>
@@ -1640,7 +1640,7 @@
     <string name="language_keyboard_settings_title" msgid="7934844313233544557">"Jazyky a zadávání"</string>
     <string name="input_assistance" msgid="3437568284144952104">"Nástroje"</string>
     <string name="keyboard_settings_category" msgid="5392847229300117064">"Klávesnice a metody zadávání"</string>
-    <string name="system_language" msgid="1146762166579643257">"Systémové jazyky"</string>
+    <string name="system_language" msgid="1146762166579643257">"Jazyky systému"</string>
     <string name="phone_language" msgid="5986939176239963826">"Jazyky"</string>
     <string name="phone_language_summary" msgid="863041222809685325"></string>
     <string name="auto_replace" msgid="4830732960264447043">"Automatické nahrazování"</string>
@@ -1835,7 +1835,7 @@
     <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"Dobré ráno!\n\nChci se jen zeptat, jak jsou na tom návrhy. Budou hotové, než začneme vyrábět nové balóny?"</string>
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"Resetovat nastavení"</string>
     <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"Velikost zobrazení a nastavení textu byly resetovány"</string>
-    <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Resetovat velikost obrazovky a text?"</string>
+    <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Resetovat velikost prvků na obrazovce a text?"</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Resetovat"</string>
     <string name="accessibility_text_reading_conversation_message_1" msgid="7883952203831957831">"Máš plány na víkend?"</string>
     <string name="accessibility_text_reading_conversation_message_2" msgid="8112160435318635856">"Jdu na pláž. Přidáš se?"</string>
@@ -1889,7 +1889,7 @@
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Můžete povolit, aby zkratka přístupnosti fungovala i na obrazovce uzamčení. Stačí, když na několik sekund podržíte obě tlačítka hlasitosti."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Tlačítko přístupnosti"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Tlačítko a gesto přístupnosti"</string>
-    <string name="accessibility_button_intro_text" msgid="80993874471745687">"Rychle zapněte funkce pro usnadnění přístupu na libovolné obrazovce"</string>
+    <string name="accessibility_button_intro_text" msgid="80993874471745687">"Rychlý přístup k funkcím pro usnadnění přístupu z libovolné obrazovky"</string>
     <string name="accessibility_button_about_title" msgid="3581116105084067926">"Tlačítko přístupnosti"</string>
     <string name="accessibility_button_gesture_about_title" msgid="8468987303602865536">"Tlačítko a gesto přístupnosti"</string>
     <string name="accessibility_button_gesture_footer_learn_more_content_description" msgid="4144803517680297869">"Další informace o tlačítku a gestu přístupnosti"</string>
@@ -1901,8 +1901,8 @@
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Umístění"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Velikost"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Vybledne, když se nepoužívá"</string>
-    <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"Zmizí po několika sekundách, takže je obrazovka lépe vidět"</string>
-    <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"Průhlednost, když se nepoužívá"</string>
+    <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"Po několika sekundách zmizí, takže je obrazovka lépe vidět"</string>
+    <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"Míra průhlednosti při nepoužívání"</string>
     <string name="accessibility_button_low_label" msgid="4193015407828927741">"Průhledné"</string>
     <string name="accessibility_button_high_label" msgid="9138077512008190896">"Neprůhledné"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Text s vysokým kontrastem"</string>
@@ -1940,7 +1940,7 @@
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Automatické klikání (doba setrvání)"</string>
     <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"Další informace o automatickém klikání (doba setrvání)"</string>
     <string name="accessibility_autoclick_intro_text" msgid="8959680635470639347">"Můžete nastavit, aby připojená myš automaticky klikla, když se kurzor na určitou dobu přestane pohybovat"</string>
-    <string name="accessibility_autoclick_description" msgid="6695732131412361101">"Automatické klikání se může hodit, když je pro vás obtížné klikat na myš."</string>
+    <string name="accessibility_autoclick_description" msgid="6695732131412361101">"Automatické klikání se může hodit, když je pro vás obtížné klikat tlačítkem myši."</string>
     <string name="accessibility_autoclick_default_title" msgid="2024730028293793490">"Automatické klikání vypnuto"</string>
     <string name="accessibility_autoclick_short_title" msgid="7938302504358912984">"Krátká"</string>
     <string name="accessibility_autoclick_short_summary" msgid="4106953930081213514">"0,2 sekundy"</string>
@@ -2014,7 +2014,7 @@
     <string name="accessibility_hearing_device_connected_title" msgid="3785140037249487287">"Naslouchátka"</string>
     <string name="accessibility_hearing_device_saved_title" msgid="7573926212664909296">"Uložená zařízení"</string>
     <string name="accessibility_hearing_device_control" msgid="2661965917013100611">"Ovládání naslouchátek"</string>
-    <string name="accessibility_hearing_device_shortcut_title" msgid="7645100199603031360">"Zkratka naslouchátka"</string>
+    <string name="accessibility_hearing_device_shortcut_title" msgid="7645100199603031360">"Zkratka pro naslouchátko"</string>
     <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"Kompatibilita s naslouchátky"</string>
     <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"Zlepšuje kompatibilitu s indukčními cívkami a snižuje nežádoucí šum"</string>
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"Informace o naslouchátkách"</string>
@@ -2042,9 +2042,9 @@
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="2117727423019598455">"Oslabené vidění zelené barvy, deuteranomálie"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="4617032854982040748">"Oslabené vidění červené barvy, protanomálie"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Tritanomálie"</string>
-    <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"Velmi tmavé"</string>
+    <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"Velmi tmavé zobrazení"</string>
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Nastavit velmi tmavou obrazovku"</string>
-    <string name="reduce_bright_colors_shortcut_title" msgid="495648157059202745">"Zkratka pro snížení jasu"</string>
+    <string name="reduce_bright_colors_shortcut_title" msgid="495648157059202745">"Zkratka pro velmi tmavé zobrazení"</string>
     <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"Velmi tmavé"</string>
     <string name="reduce_bright_colors_preference_intro_text" msgid="3502290826747650566">"Obrazovku si můžete ztmavit. Bude se vám tak lépe číst."</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Intenzita"</string>
@@ -2061,7 +2061,7 @@
     <string name="captioning_preview_title" msgid="2888561631323180535">"Náhled"</string>
     <string name="captioning_standard_options_title" msgid="5360264497750980205">"Standardní možnosti"</string>
     <string name="captioning_locale" msgid="5533303294290661590">"Jazyk"</string>
-    <string name="captioning_text_size" msgid="8039448543171463017">"Velikost textu"</string>
+    <string name="captioning_text_size" msgid="8039448543171463017">"Velikost písma"</string>
     <string name="captioning_preset" msgid="4174276086501638524">"Styl titulků"</string>
     <string name="captioning_custom_options_title" msgid="3858866498893566351">"Vlastní možnosti"</string>
     <string name="captioning_background_color" msgid="5231412761368883107">"Barva pozadí"</string>
@@ -2094,9 +2094,9 @@
     <string name="accessibility_service_warning" msgid="6779187188736432618">"Služba <xliff:g id="SERVICE">%1$s</xliff:g> požaduje plnou kontrolu nad zařízením. Služba může číst obrazovku a vykonávat akce namísto uživatelů, kteří potřebují usnadnění přístupu. Tato úroveň kontroly není u většiny aplikací vhodná."</string>
     <string name="accessibility_service_warning_description" msgid="6573203795976134751">"Plná kontrola je vhodná u aplikací, které vám pomáhají s usnadněním přístupu. U většiny aplikací však vhodná není."</string>
     <string name="accessibility_service_screen_control_title" msgid="324795030658109870">"Zobrazení a ovládání obrazovky"</string>
-    <string name="accessibility_service_screen_control_description" msgid="8431940515157990426">"Služba může číst veškerý obsah obrazovky a zobrazovat ho přes ostatní aplikace."</string>
+    <string name="accessibility_service_screen_control_description" msgid="8431940515157990426">"Služba může číst veškerý obsah obrazovky a zobrazovat ho přes ostatní aplikace."</string>
     <string name="accessibility_service_action_perform_title" msgid="1449360056585337833">"Zobrazení a provádění akcí"</string>
-    <string name="accessibility_service_action_perform_description" msgid="7807832069800034738">"Služba může sledovat vaše interakce s aplikací nebo hardwarovým senzorem a komunikovat s aplikacemi namísto vás."</string>
+    <string name="accessibility_service_action_perform_description" msgid="7807832069800034738">"Služba může sledovat vaše interakce s aplikací nebo hardwarovým senzorem a komunikovat s aplikacemi za vás."</string>
     <string name="accessibility_dialog_button_allow" msgid="8274918676473216697">"Povolit"</string>
     <string name="accessibility_dialog_button_deny" msgid="2037249860078259284">"Zakázat"</string>
     <string name="accessibility_dialog_button_stop" msgid="7295448112784528196">"Ukončit"</string>
@@ -2129,7 +2129,7 @@
     <string name="keywords_voice_access" msgid="7807335263195876454"></string>
     <string name="print_settings" msgid="8519810615863882491">"Tisk"</string>
     <string name="print_settings_summary_no_service" msgid="6721731154917653862">"Vypnuto"</string>
-    <string name="print_settings_summary" msgid="1458773840720811915">"{count,plural, =1{1 tisková služba je zapnutá}few{# tiskové služby jsou zapnuté}many{# tiskové služby je zapnutých}other{# tiskových služeb je zapnutých}}"</string>
+    <string name="print_settings_summary" msgid="1458773840720811915">"{count,plural, =1{Je zapnutá 1 tisková služba}few{Jsou zapnuté # tiskové služby}many{Je zapnuto # tiskové služby}other{Je zapnuto # tiskových služeb}}"</string>
     <string name="print_jobs_summary" msgid="7040836482336577323">"{count,plural, =1{1 tisková úloha}few{# tiskové úlohy}many{# tiskové úlohy}other{# tiskových úloh}}"</string>
     <string name="print_settings_title" msgid="7680498284751129935">"Tiskové služby"</string>
     <string name="print_no_services_installed" msgid="7554057966540602692">"Žádná služba není nainstalována"</string>
@@ -2279,7 +2279,7 @@
     <string name="battery_saver_pref_auto_routine_summary" msgid="4739240095966241508">"Zapne se dle sledu činností"</string>
     <string name="battery_saver_auto_percentage" msgid="558533724806281980">"Na základě procenta"</string>
     <string name="battery_saver_auto_routine_summary" msgid="3913145448299472628">"Spořič baterie se zapne, když bude pravděpodobné, že se baterie vybije dřív, než zařízení obvykle nabíjíte."</string>
-    <string name="battery_saver_auto_percentage_summary" msgid="6190884450723824287">"Zapne se při <xliff:g id="PERCENT">%1$s</xliff:g>."</string>
+    <string name="battery_saver_auto_percentage_summary" msgid="6190884450723824287">"Zapne se při <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Nastavení plánu"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Prodloužení výdrže baterie"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Vypnout při nabití"</string>
@@ -2296,7 +2296,7 @@
     <string name="battery_percentage_description" msgid="2321465139126125541">"Zobrazovat procento baterie na stavovém řádku"</string>
     <string name="battery_usage_chart_graph_hint_last_full_charge" msgid="6570336408060566877">"Stav baterie od posledního úplného nabití"</string>
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"Úroveň baterie za posledních 24 hodin"</string>
-    <string name="battery_app_usage" msgid="8976453608783133770">"Využití ze strany aplikací od posledního úplného nabití"</string>
+    <string name="battery_app_usage" msgid="8976453608783133770">"Využití aplikací od posledního úplného nabití"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"Využití baterie aplikacemi za posledních 24 hodin"</string>
     <string name="battery_system_usage" msgid="1395943945140097585">"Využití ze strany systému od posledního úplného nabití"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Využití baterie systémem za posledních 24 hodin"</string>
@@ -2368,7 +2368,7 @@
     <string name="voice_interaction_security_warning" msgid="7962884055885987671">"Služba hlasového zadávání bude moci neustále monitorovat hlas a ovládat za vás aplikace s aktivovaným hlasovým zadáváním. Služba pochází z <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g>. Chcete použití této služby povolit?"</string>
     <string name="on_device_recognition_settings" msgid="6503160369314598069">"Nastavení rozpoznávání na zařízení"</string>
     <string name="on_device_recognition_settings_title" msgid="7137599722039096545">"Rozpoznávání na zařízení"</string>
-    <string name="on_device_recognition_settings_summary" msgid="3292736423223499348">"Rozpoznávání řeči na zařízení"</string>
+    <string name="on_device_recognition_settings_summary" msgid="3292736423223499348">"Rozpoznávat řeč na zařízení"</string>
     <string name="tts_engine_preference_title" msgid="7808775764174571132">"Preferovaný modul"</string>
     <string name="tts_engine_settings_title" msgid="1298093555056321577">"Nastavení modulu"</string>
     <string name="tts_sliders_title" msgid="6901146958648426181">"Rychlost řeči a výška hlasu"</string>
@@ -2390,7 +2390,7 @@
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"Zapnuto"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"Vypnuto"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Používat adaptivní připojení"</string>
-    <string name="credentials_title" msgid="7535942196886123656">"Úložiště pověření"</string>
+    <string name="credentials_title" msgid="7535942196886123656">"Úložiště přihlašovacích údajů"</string>
     <string name="credentials_install" msgid="3933218407598415827">"Instalace certifikátu"</string>
     <string name="credentials_reset" msgid="4246628389366452655">"Vymazání pověření"</string>
     <string name="credentials_reset_summary" msgid="5400585520572874255">"Odstranit všechny certifikáty"</string>
@@ -2474,7 +2474,7 @@
     <string name="notification_history_dismiss" msgid="6180321217375722918">"Nedávno zavřené"</string>
     <string name="notification_history_count" msgid="885305572972482838">"{count,plural, =1{# oznámení}few{# oznámení}many{# oznámení}other{# oznámení}}"</string>
     <string name="sound_category_call_ringtone_vibrate_title" msgid="9090693401915654528">"Tón vyzvánění a vibrace"</string>
-    <string name="wifi_setup_detail" msgid="2012898800571616422">"Podrobnosti sítě"</string>
+    <string name="wifi_setup_detail" msgid="2012898800571616422">"Podrobnosti o síti"</string>
     <string name="accessibility_sync_enabled" msgid="5308864640407050209">"Synchronizace zapnuta"</string>
     <string name="accessibility_sync_disabled" msgid="5507600126380593611">"Synchronizace deaktivována"</string>
     <string name="accessibility_sync_in_progress" msgid="3229428197779196660">"Probíhá synchronizace..."</string>
@@ -2547,7 +2547,7 @@
     <string name="data_usage_background_label" msgid="5363718469293175279">"Pozadí:"</string>
     <string name="data_usage_app_settings" msgid="5693524672522122485">"Nastavení aplikace"</string>
     <string name="data_usage_app_restrict_background" msgid="5728840276368097276">"Data na pozadí"</string>
-    <string name="data_usage_app_restrict_background_summary" msgid="2997942775999602794">"Povolit využití mobilních dat na pozadí"</string>
+    <string name="data_usage_app_restrict_background_summary" msgid="2997942775999602794">"Povolit využívání mobilních dat na pozadí"</string>
     <string name="data_usage_app_restrict_background_summary_disabled" msgid="8213268097024597864">"Data na pozadí u aplikace omezíte nastavením limitu mob. dat."</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="5383874438677899255">"Omezit přenosy na pozadí?"</string>
     <string name="data_usage_app_restrict_dialog" msgid="5534272311979978297">"Pokud budou k dispozici pouze mobilní sítě, může tato funkce způsobit, že aplikace, které data na pozadí vyžadují, nebudou fungovat.\n\nVhodnější způsoby řízení využívání dat naleznete v nastavení aplikace."</string>
@@ -3005,7 +3005,7 @@
     <string name="spatial_audio_speaker" msgid="9145233652433523302">"Reproduktor telefonu"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Sluchátka s kabelem"</string>
     <string name="spatial_audio_text" msgid="8201387855375146000">"Zvuk z kompatibilních médií bude realističtější"</string>
-    <string name="spatial_summary_off" msgid="8272678804629774378">"Vypnuto"</string>
+    <string name="spatial_summary_off" msgid="8272678804629774378">"Vypnutý"</string>
     <string name="spatial_summary_on_one" msgid="6239933399496282994">"Zapnuto / <xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"Zapnuto / <xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> a <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
     <string name="spatial_audio_footer_title" msgid="8775010547623606088">"Prostorový zvuk můžete zapnout také pro zařízení Bluetooth."</string>
@@ -3026,7 +3026,7 @@
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Ztlumit telefon v určitou dobu"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Nastavit pravidla režimu Nerušit"</string>
     <string name="zen_mode_schedule_title" msgid="7064866561892906613">"Plán"</string>
-    <string name="zen_mode_use_automatic_rule" msgid="733850322530002484">"Použít plán"</string>
+    <string name="zen_mode_use_automatic_rule" msgid="733850322530002484">"Používat plán"</string>
     <string name="zen_mode_summary_combination" msgid="5944689309915947828">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_settings_category" msgid="3794956668816783447">"Povolit vyrušení, která vydávají zvuk"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Blokovat vizuální vyrušení"</string>
@@ -3173,7 +3173,7 @@
     <string name="lockscreen_bypass_summary" msgid="4578154430436224161">"Po odemknutí přejdete přímo na naposledy používanou obrazovku. Oznámení se na obrazovce uzamčení nebudou zobrazovat. Zobrazíte je přejetím prstem dolů."</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Obrazovka uzamčení, přeskočení, obejití"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Když je pracovní profil uzamčen"</string>
-    <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Zobrazovat pouze nová oznámení na obrazovce uzamčení"</string>
+    <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Na obrazovce uzamčení zobrazovat pouze nová oznámení"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Z obrazovky uzamčení automaticky odstraňovat dříve zobrazená oznámení"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Oznámení na obrazovce uzamčení"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Zobrazovat konverzace a výchozí i tichá oznámení"</string>
@@ -3181,9 +3181,9 @@
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Skrýt tiché konverzace a oznámení"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Nezobrazovat žádná oznámení"</string>
     <string name="lock_screen_notifs_redact" msgid="9024158855454642296">"Citlivá oznámení"</string>
-    <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"Při uzamknutí zobrazovat citlivý obsah"</string>
+    <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"Zobrazovat citlivý obsah při uzamknutí"</string>
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"Citlivá oznámení v pracovním profilu"</string>
-    <string name="lock_screen_notifs_redact_work_summary" msgid="3238238380405430156">"Při uzamknutí zobrazovat citlivý obsah pracovního profilu"</string>
+    <string name="lock_screen_notifs_redact_work_summary" msgid="3238238380405430156">"Zobrazovat citlivý obsah pracovního profilu při uzamknutí"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"Zobrazovat veškerý obsah oznámení"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"Citlivý obsah zobrazovat jen po odemknutí"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="3388290397947365744">"Oznámení vůbec nezobrazovat"</string>
@@ -3237,7 +3237,7 @@
     <string name="notifications_sent_daily" msgid="10274479224185437">"{count,plural, =1{Přibližně # oznámení za den}few{Přibližně # oznámení za den}many{Přibližně # oznámení za den}other{Přibližně # oznámení za den}}"</string>
     <string name="notifications_sent_weekly" msgid="7895656213187555346">"{count,plural, =1{Přibližně # oznámení za týden}few{Přibližně # oznámení za týden}many{Přibližně # oznámení za týden}other{Přibližně # oznámení za týden}}"</string>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Nikdy"</string>
-    <string name="manage_notification_access_title" msgid="6481256069087219982">"Oznámení v zařízeních a aplikacích"</string>
+    <string name="manage_notification_access_title" msgid="6481256069087219982">"Oznámení ze zařízení a aplikací"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"Ovládat, které aplikace a zařízení mohou číst oznámení"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8643809206612366067">"Přístup k oznámením pracovního profilu je zablokován"</string>
     <string name="notification_assistant_title" msgid="5889201903272393099">"Vylepšená oznámení"</string>
@@ -3263,7 +3263,7 @@
     <string name="notif_type_conversation" msgid="4383931408641374979">"Konverzace"</string>
     <string name="notif_type_conversation_summary" msgid="179142405410217101">"SMS, textové zprávy a další komunikace"</string>
     <string name="notif_type_alerting" msgid="4713073696855718576">"Oznámení"</string>
-    <string name="notif_type_alerting_summary" msgid="4681068287836313604">"Vyzvání nebo vibruje podle nastavení"</string>
+    <string name="notif_type_alerting_summary" msgid="4681068287836313604">"Vyzvánějí nebo vibrují podle nastavení"</string>
     <string name="notif_type_silent" msgid="6273951794420331010">"Tichý režim"</string>
     <string name="notif_type_silent_summary" msgid="7820923063105060844">"Oznámení, která nikdy nevydávají zvuk ani nevibrují"</string>
     <string name="notification_listener_allowed" msgid="5536962633536318551">"Povoleno"</string>
@@ -3295,16 +3295,16 @@
     <string name="interact_across_profiles_switch_enabled" msgid="7294719120282287495">"Propojeno"</string>
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"Propojit tyto aplikace"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Propojené aplikace sdílejí oprávnění a mají vzájemný přístup k datům."</string>
-    <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"Propojujte pouze aplikace, kterým důvěřujete, že nebudou sdílet osobní údaje s vaším administrátorem IT."</string>
+    <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"Propojujte pouze aplikace, kterým důvěřujete, že nebudou sdílet osobní údaje s vaším IT administrátorem."</string>
     <string name="interact_across_profiles_summary_3" msgid="444428694843299854">"Aplikace můžete kdykoli odpojit v nastavení ochrany soukromí v zařízení."</string>
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"Svěřit pracovní aplikaci <xliff:g id="NAME">%1$s</xliff:g> vaše osobní data?"</string>
-    <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"Propojujte pouze aplikace, kterým důvěřujete, že nebudou sdílet osobní údaje s vaším administrátorem IT."</string>
+    <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"Propojujte pouze aplikace, kterým důvěřujete, že nebudou sdílet osobní údaje s vaším IT administrátorem."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"Data aplikací"</string>
     <string name="interact_across_profiles_consent_dialog_app_data_summary" msgid="6057019384328088311">"Tato aplikace má přístup k datům v osobní aplikaci <xliff:g id="NAME">%1$s</xliff:g>."</string>
     <string name="interact_across_profiles_consent_dialog_permissions_title" msgid="2316852600280487055">"Oprávnění"</string>
     <string name="interact_across_profiles_consent_dialog_permissions_summary" msgid="995051542847604039">"Tato aplikace může používat oprávnění osobní aplikace <xliff:g id="NAME">%1$s</xliff:g>, jako je přístup k poloze, úložišti nebo kontaktům."</string>
     <string name="interact_across_profiles_number_of_connected_apps_none" msgid="8573289199942092964">"Nejsou propojeny žádné aplikace"</string>
-    <string name="interact_across_profiles_number_of_connected_apps" msgid="4000424798291479207">"{count,plural, =1{Je propojena # aplikace.}few{Jsou propojeny # aplikace.}many{Je propojeno # aplikace.}other{Je propojeno # aplikací.}}"</string>
+    <string name="interact_across_profiles_number_of_connected_apps" msgid="4000424798291479207">"{count,plural, =1{Je propojena # aplikace}few{Jsou propojeny # aplikace}many{Je propojeno # aplikace}other{Je propojeno # aplikací}}"</string>
     <string name="interact_across_profiles_install_work_app_title" msgid="2821669067014436056">"Chcete-li tyto aplikace propojit, nainstalujte si v pracovním profilu aplikaci <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="interact_across_profiles_install_personal_app_title" msgid="4790651223324866344">"Chcete-li tyto aplikace propojit, nainstalujte si v osobním profilu aplikaci <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"Aplikaci stáhnete klepnutím"</string>
@@ -3312,7 +3312,7 @@
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Povolit režim Nerušit"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"O přístup při nastavení Nerušit nepožádaly žádné nainstalované aplikace"</string>
     <string name="app_notifications_off_desc" msgid="2484843759466874201">"Oznámení z této aplikace jste nepovolili"</string>
-    <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Tato kategorie oznámení je v zařízení na vaši žádost blokována systémem Android"</string>
+    <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Tato kategorie oznámení je v zařízení na vaši žádost blokována systémem Android."</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"Tato skupina oznámení je v zařízení na vaši žádost blokována systémem Android"</string>
     <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"Tato aplikace neodesílá oznámení"</string>
     <string name="notification_channels" msgid="1502969522886493799">"Kategorie"</string>
@@ -3376,7 +3376,7 @@
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Žádné"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{Žádná}=1{1 konverzace}few{# konverzace}many{# konverzace}other{# konverzací}}"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"Kdo smí vyrušovat"</string>
-    <string name="zen_mode_people_footer" msgid="7710707353004137431">"Ačkoliv vás nebudou moct informovat aplikace na odesílání zpráv nebo volání, vybraní lidé vás prostřednictvím těchto aplikací zkontaktují."</string>
+    <string name="zen_mode_people_footer" msgid="7710707353004137431">"U lidí, které zde vyberte, vás příslušné aplikace pořád můžou upozornit na příchozí hovor nebo zprávu."</string>
     <string name="zen_mode_calls_title" msgid="2078578043677037740">"Volání"</string>
     <string name="zen_mode_calls" msgid="7653245854493631095">"Volání"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"hovory"</string>
@@ -3466,10 +3466,10 @@
     <string name="nfc_setting_off" msgid="7142103438532732309">"Vypnuto"</string>
     <string name="screen_pinning_switch_on_text" msgid="6971386830247542552">"Zapnuto"</string>
     <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"Vypnuto"</string>
-    <string name="screen_pinning_title" msgid="6927227272780208966">"Připnutí aplikace"</string>
+    <string name="screen_pinning_title" msgid="6927227272780208966">"Připínání aplikací"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"Připnutí aplikace vám umožňuje nechat aktuální aplikaci zobrazenou, dokud ji neodepnete. Tuto funkci lze použít, například když chcete nechat důvěryhodného přítele hrát konkrétní hru."</string>
-    <string name="screen_pinning_description" msgid="4305370471370474846">"Když je aplikace připnutá, může otevírat další aplikace a mít přístup k soukromým datům. \n\nPoužití připnutí aplikace: 	\n1. Zapněte připnutí aplikace 	\n2. Otevřete Přehled 	\n3. Klepněte na ikonu aplikace v horní části obrazovky a potom na Připnout"</string>
-    <string name="screen_pinning_guest_user_description" msgid="2465729370037556955">"Když je aplikace připnutá, může otevírat další aplikace a mít přístup k soukromým datům. \n\nChcete-li s někým bezpečně sdílet zařízení, zkuste místo toho použít režim hosta. \n\nPoužití připnutí aplikace: 	\n1. Zapněte připnutí aplikace 	\n2. Otevřete Přehled 	\n3. Klepněte na ikonu aplikace v horní části obrazovky a potom na Připnout"</string>
+    <string name="screen_pinning_description" msgid="4305370471370474846">"Když je aplikace připnutá, může otevírat další aplikace a mít přístup k soukromým datům. \n\nJak připnout aplikaci: 	\n1. Zapněte připnutí aplikace 	\n2. Otevřete Přehled 	\n3. Klepněte na ikonu aplikace v horní části obrazovky a potom na Připnout."</string>
+    <string name="screen_pinning_guest_user_description" msgid="2465729370037556955">"Když je aplikace připnutá, může otevírat další aplikace a mít přístup k soukromým datům. \n\nPokud s někým chcete bezpečně sdílet zařízení, zkuste místo toho použít režim hosta. \n\nJak připnout aplikaci: 	\n1. Zapněte připnutí aplikace 	\n2. Otevřete Přehled 	\n3. Klepněte na ikonu aplikace v horní části obrazovky a potom na Připnout."</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Když je aplikace připnutá: \n\n• Může mít přístup k soukromým datům \n (například kontaktům a obsahu e-mailů) \n• Připnutá aplikace může otevírat další aplikace \n\nPřipnutí aplikace používejte pouze s lidmi, kterým důvěřujete."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Před uvolněním požádat o bezpečnostní gesto"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Před uvolněním požádat o PIN"</string>
@@ -3522,7 +3522,7 @@
     <string name="notifications_label" msgid="8471624476040164538">"Oznámení"</string>
     <string name="notifications_enabled" msgid="7743168481579361019">"Zapnuto"</string>
     <string name="notifications_enabled_with_info" msgid="1808946629277684308">"<xliff:g id="NOTIFICATIONS_SENT">%1$s</xliff:g> / <xliff:g id="NOTIFICATIONS_CATEGORIES_OFF">%2$s</xliff:g>"</string>
-    <string name="notifications_disabled" msgid="5603160425378437143">"Vypnuto"</string>
+    <string name="notifications_disabled" msgid="5603160425378437143">"Vypnuta"</string>
     <string name="notifications_categories_off" msgid="7712037485557237328">"{count,plural, =1{# kategorie byla vypnuta}few{# kategorie byly vypnuty}many{# kategorie bylo vypnuto}other{# kategorií bylo vypnuto}}"</string>
     <string name="runtime_permissions_additional_count" msgid="6071909675951786523">"{count,plural, =1{# další oprávnění}few{# další oprávnění}many{# dalšího oprávnění}other{# dalších oprávnění}}"</string>
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"Nebyla udělena žádná oprávnění"</string>
@@ -3564,8 +3564,8 @@
     <string name="apps_storage" msgid="643866814746927111">"Úložiště aplikací"</string>
     <string name="usage_access" msgid="5487993885373893282">"Přístup k údajům o využití"</string>
     <string name="permit_usage_access" msgid="179630895262172674">"Povolit přístup k údajům o využití"</string>
-    <string name="time_spent_in_app_pref_title" msgid="25327097913383330">"Čas strávený na zařízení"</string>
-    <string name="usage_access_description" msgid="8547716253713890707">"Přístup k údajům o využití umožňuje aplikaci sledovat, které ostatní aplikace používáte, jak často je používáte, jakého máte operátora, nastavení jazyka a další podrobnosti."</string>
+    <string name="time_spent_in_app_pref_title" msgid="25327097913383330">"Doba používání"</string>
+    <string name="usage_access_description" msgid="8547716253713890707">"Přístup k údajům o využití umožňuje aplikaci sledovat, jaké další aplikace používáte, jak často je používáte, jakého máte operátora, nastavení jazyka a další podrobnosti."</string>
     <string name="memory_settings_title" msgid="6582588646363308430">"Paměť"</string>
     <string name="always_running" msgid="9012705720688200252">"Vždy spuštěno (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
     <string name="sometimes_running" msgid="7954947311082655448">"Spuštěno občas (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
@@ -3666,8 +3666,8 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Když tuto možnost povolíte, aplikace bude moci načítat, upravovat a mazat soubory v tomto zařízení a v připojených úložištích. Aplikace bude mít přístup k souborům i bez vašeho vědomí."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Mají přístup ke všem souborům"</string>
     <string name="full_screen_intent_title" msgid="747270185715224130">"Oznámení na celou obrazovku"</string>
-    <string name="permit_full_screen_intent" msgid="9035367640019960861">"Povolte oznámení z této aplikace na celou obrazovku"</string>
-    <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Povolte této aplikaci zobrazovat oznámení na celou obrazovku, když bude zařízení zamknuté. Aplikace tak mohou zvýraznit budíky, příchozí hovory a další důležitá oznámení."</string>
+    <string name="permit_full_screen_intent" msgid="9035367640019960861">"Povolit oznámení z této aplikace na celou obrazovku"</string>
+    <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Aplikaci můžete povolit zobrazovat oznámení přes celou obrazovku, když bude zařízení zamknuté. Aplikace tak mohou zvýraznit budíky, příchozí hovory a další důležitá oznámení."</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"Aplikace pro správu médií"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Povolit aplikaci spravovat média"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"Když tuto možnost povolíte, aplikace bude moci bez zeptání upravovat a mazat mediální soubory vytvořené v jiných aplikacích. Aplikace musí mít oprávnění pro přístup k souborům a médiím."</string>
@@ -3726,7 +3726,7 @@
     <string name="condition_expand_show" msgid="1501084007540953213">"Zobrazit"</string>
     <string name="condition_expand_hide" msgid="8347564076209121058">"Skrýt"</string>
     <string name="condition_hotspot_title" msgid="7903918338790641071">"Hotspot je aktivní"</string>
-    <string name="condition_airplane_title" msgid="5847967403687381705">"Režim Letadlo je zapnutý"</string>
+    <string name="condition_airplane_title" msgid="5847967403687381705">"Je zapnutý režim Letadlo"</string>
     <string name="condition_airplane_summary" msgid="1964500689287879888">"Sítě nejsou k dispozici"</string>
     <string name="condition_zen_title" msgid="7674761111934567490">"Režim Nerušit je zapnutý"</string>
     <string name="condition_zen_summary_phone_muted" msgid="6516753722927681820">"Telefon je ztlumen"</string>
@@ -3807,8 +3807,8 @@
     <string name="data_saver_on" msgid="7848893946018448793">"Zapnutý"</string>
     <string name="data_saver_off" msgid="5891210864117269045">"Vypnutý"</string>
     <string name="data_saver_switch_title" msgid="7111538580123722959">"Používat spořič dat"</string>
-    <string name="unrestricted_app_title" msgid="7117585996574329284">"Neomezené využití dat"</string>
-    <string name="unrestricted_app_summary" msgid="282698963532000403">"Povolit neomezený přístup k datům, když je zapnutý Spořič dat"</string>
+    <string name="unrestricted_app_title" msgid="7117585996574329284">"Neomezené využívání dat"</string>
+    <string name="unrestricted_app_summary" msgid="282698963532000403">"Povolit neomezený přístup k datům, když je zapnutý spořič dat"</string>
     <string name="home_app" msgid="6056850504746902747">"Vstupní aplikace"</string>
     <string name="suggestion_additional_fingerprints" msgid="4726777300101156208">"Přidejte další otisk"</string>
     <string name="suggestion_additional_fingerprints_summary" msgid="2825364645039666674">"Odemknout jiným prstem"</string>
@@ -3892,7 +3892,7 @@
     <string name="sensors_off_quick_settings_title" msgid="8472151847125917167">"Senzory jsou vypnuty"</string>
     <string name="managed_profile_settings_title" msgid="3400923723423564217">"Nastavení pracovního profilu"</string>
     <string name="managed_profile_contact_search_title" msgid="6562061740814513737">"Vyhledávat kontakty z pracovního adresáře v osobních aplikacích"</string>
-    <string name="managed_profile_contact_search_summary" msgid="4974727886709219105">"Vaše vyhledávání a příchozí hovory se možná zobrazí administrátorovi IT."</string>
+    <string name="managed_profile_contact_search_summary" msgid="4974727886709219105">"Vaše vyhledávání a příchozí hovory se možná zobrazí IT administrátorovi."</string>
     <string name="cross_profile_calendar_title" msgid="7570277841490216947">"Kalendář s více profily"</string>
     <string name="cross_profile_calendar_summary" msgid="8856185206722860069">"Zobrazovat v osobním kalendáři pracovní události"</string>
     <string name="managed_profile_settings_footer" msgid="996500759305118103">"Když jsou pracovní aplikace vypnuté, jsou pozastaveny, nelze je otevřít a nemohou vám ani zasílat oznámení."</string>
@@ -4085,7 +4085,7 @@
     <string name="credman_keywords" msgid="8305600680836806170">"data, přístupový klíč, heslo"</string>
     <string name="credman_autofill_keywords" msgid="701180623776848914">"automatické, vyplňování, automatické vyplňování, údaje, přístupový klíč, heslo"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Zkontrolujte, zda se jedná o důvěryhodnou aplikaci&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Automatické doplňování Google&gt;%1$s&lt;/xliff:g&gt; určuje, co lze automaticky vyplnit, na základě obsahu obrazovky."</string>
-    <string name="credman_autofill_confirmation_message" msgid="4951846866327737417">"&lt;b&gt;Použít &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; používá obsah obrazovky k určení, co lze automaticky vyplnit. Odteď se sem budou ukládat nová hesla, přístupové klíče a další údaje."</string>
+    <string name="credman_autofill_confirmation_message" msgid="4951846866327737417">"&lt;b&gt;Použít &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; používá obsah obrazovky k určení toho, co lze automaticky vyplnit. Odteď se sem budou ukládat nová hesla, přístupové klíče a další údaje."</string>
     <string name="credman_picker_title" msgid="2642776965060619988">"Hesla, přístupové klíče a datové služby"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Vypnout poskytovatele %1$s?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Vypnout tuto službu?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Při přihlášení se nebudou vyplňovat uložené údaje, jako jsou hesla, přístupové klíče, platební metody a podobně. Pokud chcete používat uložené údaje, zvolte heslo, přístupový klíč nebo datovou službu."</string>
@@ -4175,7 +4175,7 @@
     <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"Vibrace"</string>
     <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"Vypnout zvuk"</string>
     <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="8070356204398144241">"Pokud chcete zapnout tuto možnost, nejdříve změňte akci přidruženou k podržení vypínače tak, aby se jím otevírala nabídka vypínače."</string>
-    <string name="pref_title_network_details" msgid="7329759534269363308">"Podrobnosti sítě"</string>
+    <string name="pref_title_network_details" msgid="7329759534269363308">"Podrobnosti o síti"</string>
     <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Název vašeho zařízení je viditelný pro aplikace v telefonu. Mohou ho vidět také ostatní uživatelé, když se připojíte k zařízení Bluetooth nebo síti Wi-Fi, případně když vytvoříte hotspot Wi-Fi."</string>
     <string name="devices_title" msgid="649715719278562515">"Zařízení"</string>
     <string name="choose_network_title" msgid="5355609223363859430">"Vybrat síť"</string>
@@ -4413,7 +4413,7 @@
     <string name="dual_cdma_sim_warning_notification_summary" msgid="2826474790710586487">"Použití operátora <xliff:g id="OPERATOR_NAMES">%1$s</xliff:g> může omezit funkce. Klepnutím zobrazíte další informace."</string>
     <string name="dual_cdma_sim_warning_notification_channel_title" msgid="1049161096896074364">"Kombinace SIM karet"</string>
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"Informace o pracovních zásadách"</string>
-    <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"Nastavení spravováno administrátorem IT"</string>
+    <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"Nastavení spravuje IT administrátor"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Nástroj pro zprávy o chybách"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Určuje, která aplikace na vašem zařízení zpracovává zkratku k odeslání zprávy o chybě."</string>
@@ -4441,7 +4441,7 @@
     <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"Povolit přístup ke čtečce QR kódů na obrazovce uzamčení"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Zobrazit ovládací prvky zařízení"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="7522918441738915364">"Z obrazovky uzamčení"</string>
-    <string name="lockscreen_trivial_controls_setting_toggle" msgid="2174300719855112358">"Použít ovládání zařízení"</string>
+    <string name="lockscreen_trivial_controls_setting_toggle" msgid="2174300719855112358">"Používat ovládací prvky zařízení"</string>
     <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"Nejprve zapněte zobrazení ovládání zařízení"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Pokud to je možné, zobrazovat hodiny na dva řádky"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"Hodiny na dva řádky"</string>
@@ -4462,7 +4462,7 @@
     <string name="blob_never_expires_text" msgid="7293376386620106623">"Neomezená platnost."</string>
     <string name="accessor_never_expires_text" msgid="4647624492147788340">"Pronájem nikdy vyprší."</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Povolit překryvné vrstvy obrazovek v Nastavení"</string>
-    <string name="overlay_settings_summary" msgid="2745336273786148166">"Povolte aplikace, které se smí zobrazovat přes jiné aplikace a vytvářet vrstvy obrazovek Nastavení"</string>
+    <string name="overlay_settings_summary" msgid="2745336273786148166">"Povolit aplikacím, které se mohou zobrazovat přes jiné aplikace, překrývat obrazovky Nastavení"</string>
     <string name="allow_mock_modem" msgid="3832264806530479214">"Povolit simulovaný modem"</string>
     <string name="allow_mock_modem_summary" msgid="9097416612748005374">"Povolte tomuto zařízení používat službu simulovaného modemu pro účely instrumentačního testu. Během běžného používání telefonu tuto možnost nepovolujte"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Média"</string>
@@ -4494,7 +4494,7 @@
     <string name="reset_your_internet_title" msgid="4856899004343241310">"Resetovat internet?"</string>
     <string name="resetting_internet_text" msgid="6696779371800051806">"Resetování internetu…"</string>
     <string name="fix_connectivity" msgid="2781433603228089501">"Opravit připojení"</string>
-    <string name="networks_available" msgid="3299512933684383474">"Sítě jsou k dispozici"</string>
+    <string name="networks_available" msgid="3299512933684383474">"Sítě k dispozici"</string>
     <string name="to_switch_networks_disconnect_ethernet" msgid="6615374552827587197">"Pokud chcete přepnout sítě, odpojte ethernet"</string>
     <string name="carrier_wifi_offload_title" msgid="7263365988016247722">"Připojení W+"</string>
     <string name="carrier_wifi_offload_summary" msgid="2980563718888371142">"Povolte službě Google Fi používat sítě W+ k vylepšení rychlosti a pokrytí"</string>
@@ -4515,7 +4515,7 @@
     <string name="mobile_data_temp_connection_active" msgid="3430470299756236413">"Dočasně připojeno"</string>
     <string name="mobile_data_temp_using" msgid="5211002380149434155">"Dočasně se používá <xliff:g id="SUBNAME">%1$s</xliff:g>"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"Žádné připojení"</string>
-    <string name="mobile_data_off_summary" msgid="1884248776904165539">"Mobilní data se nebudou připojovat automaticky"</string>
+    <string name="mobile_data_off_summary" msgid="1884248776904165539">"Bez automatického připojení přes mobilní data"</string>
     <string name="mobile_data_disable_title" msgid="8438714772256088913">"Vypnout mobilní data?"</string>
     <string name="mobile_data_disable_message" msgid="7829414836454769970">"Prostřednictvím <xliff:g id="CARRIER">%s</xliff:g> nebudete moci používat data ani internet. Internet bude dostupný pouze přes Wi-Fi."</string>
     <string name="mobile_data_disable_message_default_carrier" msgid="4449469407705838612">"vašeho operátora"</string>
@@ -4644,7 +4644,7 @@
     <string name="dream_picker_category" msgid="7726447836872744867">"Vyberte spořič obrazovky"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Zobrazovat další informace"</string>
     <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Zobrazovat na spořiči obrazovky informace jako čas, počasí atd."</string>
-    <string name="dream_home_controls_toggle_title" msgid="706799741564479248">"Zobrazit ovládání domácnosti"</string>
+    <string name="dream_home_controls_toggle_title" msgid="706799741564479248">"Zobrazovat ovládání domácnosti"</string>
     <string name="dream_home_controls_toggle_summary" msgid="4102519907917430579">"Zobrazovat na spořiči obrazovky tlačítko ovládání domácnosti"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Další nastavení"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Vyberte spořič obrazovky"</string>

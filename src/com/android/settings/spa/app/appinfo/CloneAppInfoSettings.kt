@@ -23,7 +23,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
@@ -69,7 +68,6 @@ object CloneAppInfoSettingsProvider : SettingsPageProvider {
     fun getRoute(packageName: String, userId: Int): String = "$name/$packageName/$userId"
 }
 
-@OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 private fun CloneAppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
     LifecycleEffect(onStart = { packageInfoPresenter.reloadPackageInfo() })

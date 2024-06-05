@@ -243,7 +243,7 @@
     <string name="lock_after_timeout" msgid="8682769000437403444">"Заключв. след времето до авт. изкл."</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> след времето за изчакване"</string>
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"Веднага след времето за изчакване, освен когато екранът се поддържа отключен от <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> след времето за изчакване, освен когато екранът се поддържа отключен от <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> след времето за изчакване, освен когато екранът се поддържа отключен от „<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>“"</string>
     <string name="owner_info_settings_title" msgid="3555626140700093017">"Добав. на текст на закл. екран"</string>
     <string name="owner_info_settings_summary" msgid="347238313388083297">"Няма"</string>
     <string name="owner_info_settings_edit_text_hint" msgid="841926875876050274">"Напр. „Устройството с Android на Иван“."</string>
@@ -896,7 +896,7 @@
     <string name="wifi_hotspot_maximize_compatibility" msgid="6494125684420024058">"Разширяване на съвместимостта"</string>
     <string name="wifi_hotspot_maximize_compatibility_single_ap_summary" msgid="383355687431591441">"Помага на други устройства да намерят тази точка за достъп. Намалява скоростта на връзката с нея."</string>
     <string name="wifi_hotspot_maximize_compatibility_dual_ap_summary" msgid="3579549223159056533">"Помага на други устройства да намерят тази точка за достъп. По-интензивно използване на батерията."</string>
-    <string name="wifi_hotspot_speed_title" msgid="8629448084180512685">"Сигурност и съвместимост"</string>
+    <string name="wifi_hotspot_speed_title" msgid="8629448084180512685">"Скорост и съвместимост"</string>
     <string name="wifi_hotspot_speed_summary_2g" msgid="5063438001736234858">"2,4 GHz/честотната лента е съвместима с повечето устройства"</string>
     <string name="wifi_hotspot_speed_summary_5g" msgid="6221158936983135040">"5 GHz/честотната лента е съвместима с много устройства"</string>
     <string name="wifi_hotspot_speed_summary_6g" msgid="8863992901226595544">"6 GHz/честотната лента е съвместима с малко устройства"</string>
@@ -1016,7 +1016,7 @@
     <string name="night_display_start_time_title" msgid="2611541851596977786">"Начален час"</string>
     <string name="night_display_end_time_title" msgid="5243112480391192111">"Краен час"</string>
     <string name="night_display_temperature_title" msgid="857248782470764263">"Наситеност"</string>
-    <string name="night_display_summary_off_auto_mode_never" msgid="7406899634169354142">"Няма да се включи автоматично"</string>
+    <string name="night_display_summary_off_auto_mode_never" msgid="7406899634169354142">"Няма да се включва автоматично"</string>
     <string name="night_display_summary_off_auto_mode_custom" msgid="6667008039080687931">"Ще се включи автоматично в <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_summary_off_auto_mode_twilight" msgid="3669132200611324994">"Ще се включва автоматично при залез"</string>
     <string name="night_display_summary_on_auto_mode_never" msgid="832333009202889350">"Няма да се изключи автоматично"</string>
@@ -1031,7 +1031,7 @@
     <string name="dark_ui_activation_off_auto" msgid="9136717444658505208">"Изключване до залез"</string>
     <string name="dark_ui_title" msgid="3373976268671557416">"Тъмен режим"</string>
     <string name="dark_ui_auto_mode_title" msgid="9027528859262295099">"График"</string>
-    <string name="dark_ui_auto_mode_never" msgid="3980412582267787662">"Без"</string>
+    <string name="dark_ui_auto_mode_never" msgid="3980412582267787662">"Няма"</string>
     <string name="dark_ui_auto_mode_auto" msgid="6658909029498623375">"Включва се от залез до изгрев"</string>
     <string name="dark_ui_auto_mode_custom" msgid="3800138185265182170">"Включва се в избран час"</string>
     <string name="dark_ui_auto_mode_custom_bedtime" msgid="8465023741946439266">"Включва се, когато стане време за сън"</string>
@@ -1237,7 +1237,7 @@
     <string name="apn_mcc" msgid="4971414138516074809">"Mобилен код на държава"</string>
     <string name="apn_mnc" msgid="1926382406843447854">"Код на мобилна мрежа (MNC)"</string>
     <string name="apn_auth_type" msgid="4234397513494356932">"Тип удостоверяване"</string>
-    <string name="apn_type" msgid="1835573305077788773">"Тип на името на точката за достъп"</string>
+    <string name="apn_type" msgid="1835573305077788773">"APN тип"</string>
     <string name="apn_protocol" msgid="181529867160380010">"APN протокол"</string>
     <string name="apn_roaming_protocol" msgid="1645131094105362513">"APN протокол при роуминг"</string>
     <string name="carrier_enabled" msgid="664074151573150130">"Актив./деактив. на APN"</string>
@@ -1246,7 +1246,7 @@
     <string name="bearer" msgid="3231443241639159358">"Носител"</string>
     <string name="mvno_type" msgid="4734654257494971247">"Тип MVNO"</string>
     <string name="mvno_match_data" msgid="5213193073684321156">"Стойност на MVNO"</string>
-    <string name="menu_delete" msgid="9199740901584348273">"Изтриване на името на точката за достъп (APN)"</string>
+    <string name="menu_delete" msgid="9199740901584348273">"Изтриване на APN"</string>
     <string name="menu_new" msgid="6571230342655509006">"Ново име на точка за достъп (APN)"</string>
     <string name="menu_save" msgid="6611465355127483100">"Запазване"</string>
     <string name="menu_cancel" msgid="1197826697950745335">"Отказ"</string>
@@ -1483,7 +1483,7 @@
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"Фигурата за потребителския профил да е видима"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"Вибриране при докосване"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"Заключване веднага с бутона за вкл./изкл."</string>
-    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="2202430156268094229">"Освен когато екранът се поддържа отключен от <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
+    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="2202430156268094229">"Освен когато екранът се поддържа отключен от „<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>“"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="2193588309557281466">"Задаване на фигура за отключване"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="7614155083815661347">"Промяна на фигурата за отключване"</string>
     <string name="lockpattern_settings_help_how_to_record" msgid="2093801939046625774">"Как се чертае фигура за отключване"</string>
@@ -1862,7 +1862,7 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="7292969929578621958">"За да използвате функцията за достъпност, прекарайте три пръста нагоре от долната част на екрана.\n\nЗа превключване между функциите прекарайте три пръста нагоре и задръжте."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Разбрах"</string>
     <string name="accessibility_tutorial_dialog_link_button" msgid="1624189347106713695">"Настройки за бутона"</string>
-    <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Пряк път за <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
+    <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Пряк път за: <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Бутон за достъпност"</string>
     <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"Жест за достъпност"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Бързо плъзгане нагоре с 2 пръста"</string>
@@ -1936,7 +1936,7 @@
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Пряк път за инвертиране на цветовете"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"Функцията за инвертиране на цветовете превръща светлите цветове на екрана в тъмни, а тъмните – в светли."</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"&lt;b&gt;Имайте предвид следното&lt;/b&gt;:&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Цветовете в мултимедийното съдържание и изображенията ще се променят.&lt;/li&gt; &lt;li&gt; Функцията за инвертиране на цветовете работи във всички приложения.&lt;/li&gt; &lt;li&gt; Тъмната тема може да се използва за показване на тъмен фон.&lt;/li&gt; &lt;/ol&gt;"</string>
-    <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Автоматично кликване (време на задържане на курсора на мишката)"</string>
+    <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Авт. кликване (време на задържане на курсора)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Авт. кликване (време на задържане)"</string>
     <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"Научете повече за автоматичното кликване (време на задържане на курсора на мишката)"</string>
     <string name="accessibility_autoclick_intro_text" msgid="8959680635470639347">"Имате възможност да зададете свързаната мишка да кликва автоматично върху елементите, когато курсорът спре да се движи за определен период от време"</string>
@@ -2461,7 +2461,7 @@
     <string name="device_admin_add_title" msgid="6087481040932322289">"Администриране на устройството"</string>
     <string name="device_admin_warning" msgid="1889160106787280321">"Активирането на това приложение за администриране ще разреши на <xliff:g id="APP_NAME">%1$s</xliff:g> да изпълнява следните действия:"</string>
     <string name="device_admin_warning_simplified" msgid="2715756519899116115">"Това устройство ще се управлява и наблюдава от <xliff:g id="APP_NAME">%1$s</xliff:g>."</string>
-    <string name="device_admin_status" msgid="6332571781623084064">"Това приложение за администриране е активно и разрешава на <xliff:g id="APP_NAME">%1$s</xliff:g> да изпълнява следните действия:"</string>
+    <string name="device_admin_status" msgid="6332571781623084064">"Това приложение за администриране е активно и разрешава на „<xliff:g id="APP_NAME">%1$s</xliff:g>“ да изпълнява следните действия:"</string>
     <string name="profile_owner_add_title" msgid="2774489881662331549">"Да се акт. ли мениджърът на потр. профил?"</string>
     <string name="profile_owner_add_title_simplified" msgid="2320828996993774182">"Да се разреши ли контролирането?"</string>
     <string name="adding_profile_owner_warning" msgid="6868275476058020513">"Ако продължите, потребителят ви ще се управлява от администратора ви, който може също да съхранява свързани данни в допълнение към личната ви информация.\n\nАдминистраторът ви има възможност да наблюдава и управлява настройките, достъпа, приложенията и данните, свързани с този потребител, включително мрежовата активност и информацията за местоположението на устройството ви."</string>
@@ -3007,7 +3007,7 @@
     <string name="spatial_audio_text" msgid="8201387855375146000">"Звукът от съвместимите източници става по-реалистичен"</string>
     <string name="spatial_summary_off" msgid="8272678804629774378">"Изкл."</string>
     <string name="spatial_summary_on_one" msgid="6239933399496282994">"Вкл./<xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
-    <string name="spatial_summary_on_two" msgid="4526919818832483883">"Вкл./<xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> и <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
+    <string name="spatial_summary_on_two" msgid="4526919818832483883">"Вкл./<xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g>, <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
     <string name="spatial_audio_footer_title" msgid="8775010547623606088">"Можете също да включите пространственото аудио за устройствата с Bluetooth."</string>
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Настройки за свързани устройства"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Нито един}=1{Зададен е 1 график}other{Зададени са # графика}}"</string>
@@ -4500,7 +4500,7 @@
     <string name="downloaded_sims_category_title" msgid="487799905978489922">"Електронни SIM карти"</string>
     <string name="sim_category_active_sim" msgid="1503823567818544012">"Активна"</string>
     <string name="sim_category_inactive_sim" msgid="4068899490133820881">"Неактивна"</string>
-    <string name="sim_category_default_active_sim" msgid="1208194173387987231">" /основна за <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="sim_category_default_active_sim" msgid="1208194173387987231">" / основна за <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="default_active_sim_calls" msgid="2390973682556353558">"обаждания"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"SMS"</string>
     <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"мобилни данни"</string>
@@ -4678,7 +4678,7 @@
     <string name="find_broadcast_join_broadcast_error" msgid="5486980388774711346">"Присъединяването към предаването не е възможно"</string>
     <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"За да започнете да слушате, центрирайте QR кода по-долу"</string>
     <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"Невалиден формат на QR кода"</string>
-    <string name="convert_to_esim_title" msgid="71037864129009206">"Преминаване към електронна SIM карта"</string>
+    <string name="convert_to_esim_title" msgid="71037864129009206">"Конвертиране към електронна SIM карта"</string>
     <string name="transfer_esim_to_another_device_title" msgid="5286117866086383192">"Прехвърляне на електронната SIM карта към друго устройство"</string>
     <string name="background_install_preference_summary" msgid="3065219346519340364">"{count,plural, =1{# приложение}other{# приложения}}"</string>
     <string name="background_install_title" msgid="607913515188276168">"Приложения на заден план"</string>
