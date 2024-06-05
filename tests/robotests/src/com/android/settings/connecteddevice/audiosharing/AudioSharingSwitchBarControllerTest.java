@@ -42,6 +42,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Looper;
 import android.platform.test.flag.junit.SetFlagsRule;
+import android.util.FeatureFlagUtils;
 import android.widget.CompoundButton;
 
 import androidx.lifecycle.LifecycleOwner;
@@ -322,7 +323,9 @@ public class AudioSharingSwitchBarControllerTest {
     }
 
     @Test
-    public void onCheckedChangedToChecked_noConnectedLeaDevices_notStartAudioSharing() {
+    public void onCheckedChangedToChecked_noConnectedLeaDevices_flagOn_notStartAudioSharing() {
+        FeatureFlagUtils.setEnabled(
+                mContext, FeatureFlagUtils.SETTINGS_NEED_CONNECTED_BLE_DEVICE_FOR_BROADCAST, true);
         when(mBtnView.isEnabled()).thenReturn(true);
         when(mAssistant.getDevicesMatchingConnectionStates(
                         new int[] {BluetoothProfile.STATE_CONNECTED}))
@@ -334,7 +337,22 @@ public class AudioSharingSwitchBarControllerTest {
     }
 
     @Test
+    public void onCheckedChangedToChecked_noConnectedLeaDevices_flagOff_startAudioSharing() {
+        FeatureFlagUtils.setEnabled(
+                mContext, FeatureFlagUtils.SETTINGS_NEED_CONNECTED_BLE_DEVICE_FOR_BROADCAST, false);
+        when(mBtnView.isEnabled()).thenReturn(true);
+        when(mAssistant.getDevicesMatchingConnectionStates(
+                        new int[] {BluetoothProfile.STATE_CONNECTED}))
+                .thenReturn(ImmutableList.of());
+        doNothing().when(mBroadcast).startPrivateBroadcast();
+        mController.onCheckedChanged(mBtnView, /* isChecked= */ true);
+        verify(mBroadcast).startPrivateBroadcast();
+    }
+
+    @Test
     public void onCheckedChangedToChecked_notSharing_withConnectedLeaDevices_startAudioSharing() {
+        FeatureFlagUtils.setEnabled(
+                mContext, FeatureFlagUtils.SETTINGS_NEED_CONNECTED_BLE_DEVICE_FOR_BROADCAST, true);
         when(mBtnView.isEnabled()).thenReturn(true);
         when(mAssistant.getDevicesMatchingConnectionStates(
                         new int[] {BluetoothProfile.STATE_CONNECTED}))

@@ -118,14 +118,14 @@ class ZenMode {
     }
 
     @NonNull
-    public ListenableFuture<Drawable> getIcon(@NonNull IconLoader iconLoader) {
-        Context context = iconLoader.getContext();
+    public ListenableFuture<Drawable> getIcon(@NonNull Context context,
+            @NonNull IconLoader iconLoader) {
         if (mIsManualDnd) {
             return Futures.immediateFuture(requireNonNull(
                     context.getDrawable(R.drawable.ic_do_not_disturb_on_24dp)));
         }
 
-        return iconLoader.getIcon(mRule);
+        return iconLoader.getIcon(context, mRule);
     }
 
     @NonNull

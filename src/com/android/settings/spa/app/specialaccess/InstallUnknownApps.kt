@@ -22,7 +22,6 @@ import android.app.AppOpsManager
 import android.app.AppOpsManager.MODE_DEFAULT
 import android.content.Context
 import android.content.pm.ApplicationInfo
-import android.os.Process
 import android.os.UserManager
 import androidx.compose.runtime.Composable
 import com.android.settings.R
@@ -92,10 +91,8 @@ class InstallUnknownAppsListModel(private val context: Context) :
         private fun isChangeable(
             record: InstallUnknownAppsRecord,
             potentialPackageNames: Set<String>,
-        ) =
-           record.app.uid != Process.SYSTEM_UID && record.app.uid != Process.ROOT_UID &&
-               (record.appOpsController.getMode() != MODE_DEFAULT ||
-                    record.app.packageName in potentialPackageNames)
+        ) = record.appOpsController.getMode() != MODE_DEFAULT ||
+            record.app.packageName in potentialPackageNames
 
         private fun getPotentialPackageNames(userId: Int): Set<String> =
             AppGlobals.getPackageManager()

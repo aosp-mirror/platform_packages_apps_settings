@@ -16,6 +16,7 @@
 
 package com.android.settings.connecteddevice.audiosharing;
 
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothCsipSetCoordinator;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
@@ -156,6 +157,10 @@ public class AudioSharingDeviceVolumeControlUpdater extends BluetoothDeviceUpdat
         if (mVolumeControl != null) {
             mVolumeControl.setDeviceVolume(
                     cachedDevice.getDevice(), progress, /* isGroupOp= */ true);
+            mMetricsFeatureProvider.action(
+                    mContext,
+                    SettingsEnums.ACTION_AUDIO_SHARING_CHANGE_MEDIA_DEVICE_VOLUME,
+                    /* isPrimary= */ false);
         }
     }
 
@@ -170,6 +175,10 @@ public class AudioSharingDeviceVolumeControlUpdater extends BluetoothDeviceUpdat
                             - audioManager.getStreamMinVolume(AudioManager.STREAM_MUSIC);
             int volume = Math.round((float) progress * streamVolumeRange / seekbarRange);
             audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, volume, 0);
+            mMetricsFeatureProvider.action(
+                    mContext,
+                    SettingsEnums.ACTION_AUDIO_SHARING_CHANGE_MEDIA_DEVICE_VOLUME,
+                    /* isPrimary= */ true);
         } catch (RuntimeException e) {
             Log.e(TAG, "Fail to setAudioManagerStreamVolumeForFallbackDevice, error = " + e);
         }
