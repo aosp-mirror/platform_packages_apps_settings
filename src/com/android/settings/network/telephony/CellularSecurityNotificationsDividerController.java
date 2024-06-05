@@ -24,7 +24,6 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
-import androidx.preference.PreferenceScreen;
 
 import com.android.internal.telephony.flags.Flags;
 import com.android.settings.core.BasePreferenceController;
@@ -53,18 +52,6 @@ public class CellularSecurityNotificationsDividerController extends
         super(context, prefKey);
         mTelephonyManager = mContext.getSystemService(TelephonyManager.class);
         mSafetyCenterManager = mContext.getSystemService(SafetyCenterManager.class);
-    }
-
-    /**
-     * Initialization.
-     */
-    public CellularSecurityNotificationsDividerController init() {
-        return this;
-    }
-
-    @Override
-    public void displayPreference(@NonNull PreferenceScreen screen) {
-        super.displayPreference(screen);
     }
 
     @Override

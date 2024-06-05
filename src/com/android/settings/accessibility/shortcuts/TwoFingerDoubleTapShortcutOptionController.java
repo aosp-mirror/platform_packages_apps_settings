@@ -63,9 +63,8 @@ public class TwoFingerDoubleTapShortcutOptionController
                     numFingers);
 
             shortcutOptionPreference.setSummary(summary);
-            // TODO (b/306153204): Update shortcut image when UX provides them
             shortcutOptionPreference.setIntroImageRawResId(
-                    R.raw.a11y_shortcut_type_triple_tap);
+                    R.raw.accessibility_shortcut_type_2finger_doubletap);
         }
     }
 

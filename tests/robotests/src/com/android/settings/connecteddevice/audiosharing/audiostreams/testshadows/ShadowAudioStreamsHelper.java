@@ -18,12 +18,15 @@ package com.android.settings.connecteddevice.audiosharing.audiostreams.testshado
 
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
 
+import androidx.annotation.Nullable;
+
 import com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsHelper;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
+import org.robolectric.annotation.Resetter;
 
 import java.util.List;
 import java.util.Optional;
@@ -31,20 +34,22 @@ import java.util.Optional;
 @Implements(value = AudioStreamsHelper.class, callThroughByDefault = false)
 public class ShadowAudioStreamsHelper {
     private static AudioStreamsHelper sMockHelper;
-    private static Optional<CachedBluetoothDevice> sCachedBluetoothDevice;
+    @Nullable private static CachedBluetoothDevice sCachedBluetoothDevice;
 
     public static void setUseMock(AudioStreamsHelper mockAudioStreamsHelper) {
         sMockHelper = mockAudioStreamsHelper;
     }
 
-    /** Resets {@link CachedBluetoothDevice} */
-    public static void resetCachedBluetoothDevice() {
-        sCachedBluetoothDevice = Optional.empty();
+    /** Reset static fields */
+    @Resetter
+    public static void reset() {
+        sMockHelper = null;
+        sCachedBluetoothDevice = null;
     }
 
     public static void setCachedBluetoothDeviceInSharingOrLeConnected(
             CachedBluetoothDevice cachedBluetoothDevice) {
-        sCachedBluetoothDevice = Optional.of(cachedBluetoothDevice);
+        sCachedBluetoothDevice = cachedBluetoothDevice;
     }
 
     @Implementation
@@ -56,6 +61,6 @@ public class ShadowAudioStreamsHelper {
     @Implementation
     public static Optional<CachedBluetoothDevice> getCachedBluetoothDeviceInSharingOrLeConnected(
             LocalBluetoothManager manager) {
-        return sCachedBluetoothDevice;
+        return Optional.ofNullable(sCachedBluetoothDevice);
     }
 }

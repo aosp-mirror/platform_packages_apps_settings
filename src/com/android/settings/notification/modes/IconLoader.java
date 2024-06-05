@@ -56,47 +56,42 @@ class IconLoader {
     @Nullable // Until first usage
     private static IconLoader sInstance;
 
-    private final Context mContext;
     private final LruCache<String, Drawable> mCache;
     private final ListeningExecutorService mBackgroundExecutor;
 
-    static IconLoader getInstance(Context context) {
+    static IconLoader getInstance() {
         if (sInstance == null) {
-            sInstance = new IconLoader(context);
+            sInstance = new IconLoader();
         }
         return sInstance;
     }
 
-    private IconLoader(Context context) {
-        this(context, Executors.newFixedThreadPool(4));
+    private IconLoader() {
+        this(Executors.newFixedThreadPool(4));
     }
 
     @VisibleForTesting
-    IconLoader(Context context, ExecutorService backgroundExecutor) {
-        mContext = context.getApplicationContext();
+    IconLoader(ExecutorService backgroundExecutor) {
         mCache = new LruCache<>(50);
         mBackgroundExecutor =
                 MoreExecutors.listeningDecorator(backgroundExecutor);
     }
 
-    Context getContext() {
-        return mContext;
-    }
-
     @NonNull
-    ListenableFuture<Drawable> getIcon(@NonNull AutomaticZenRule rule) {
+    ListenableFuture<Drawable> getIcon(Context context, @NonNull AutomaticZenRule rule) {
         if (rule.getIconResId() == 0) {
-            return Futures.immediateFuture(getFallbackIcon(rule.getType()));
+            return Futures.immediateFuture(getFallbackIcon(context, rule.getType()));
         }
 
-        return FluentFuture.from(loadIcon(rule.getPackageName(), rule.getIconResId()))
+        return FluentFuture.from(loadIcon(context, rule.getPackageName(), rule.getIconResId()))
                 .transform(icon ->
-                        icon != null ? icon : getFallbackIcon(rule.getType()),
+                        icon != null ? icon : getFallbackIcon(context, rule.getType()),
                         MoreExecutors.directExecutor());
     }
 
     @NonNull
-    private ListenableFuture</* @Nullable */ Drawable> loadIcon(String pkg, int iconResId) {
+    private ListenableFuture</* @Nullable */ Drawable> loadIcon(Context context, String pkg,
+            int iconResId) {
         String cacheKey = pkg + ":" + iconResId;
         synchronized (mCache) {
             Drawable cachedValue = mCache.get(cacheKey);
@@ -107,9 +102,9 @@ class IconLoader {
 
         return FluentFuture.from(mBackgroundExecutor.submit(() -> {
             if (TextUtils.isEmpty(pkg) || SystemZenRules.PACKAGE_ANDROID.equals(pkg)) {
-                return mContext.getDrawable(iconResId);
+                return context.getDrawable(iconResId);
             } else {
-                Context appContext = mContext.createPackageContext(pkg, 0);
+                Context appContext = context.createPackageContext(pkg, 0);
                 Drawable appDrawable = AppCompatResources.getDrawable(appContext, iconResId);
                 return getMonochromeIconIfPresent(appDrawable);
             }
@@ -126,21 +121,21 @@ class IconLoader {
         }, MoreExecutors.directExecutor());
     }
 
-    private Drawable getFallbackIcon(int ruleType) {
+    private static Drawable getFallbackIcon(Context context, int ruleType) {
         int iconResIdFromType = switch (ruleType) {
-            // TODO: b/333528437 - continue replacing with proper default icons
-            case AutomaticZenRule.TYPE_UNKNOWN -> R.drawable.ic_do_not_disturb_on_24dp;
-            case AutomaticZenRule.TYPE_OTHER -> R.drawable.ic_do_not_disturb_on_24dp;
-            case AutomaticZenRule.TYPE_SCHEDULE_TIME -> R.drawable.ic_modes_time;
-            case AutomaticZenRule.TYPE_SCHEDULE_CALENDAR -> R.drawable.ic_modes_event;
-            case AutomaticZenRule.TYPE_BEDTIME -> R.drawable.ic_do_not_disturb_on_24dp;
-            case AutomaticZenRule.TYPE_DRIVING -> R.drawable.ic_do_not_disturb_on_24dp;
-            case AutomaticZenRule.TYPE_IMMERSIVE -> R.drawable.ic_do_not_disturb_on_24dp;
-            case AutomaticZenRule.TYPE_THEATER -> R.drawable.ic_do_not_disturb_on_24dp;
-            case AutomaticZenRule.TYPE_MANAGED -> R.drawable.ic_do_not_disturb_on_24dp;
-            default -> R.drawable.ic_do_not_disturb_on_24dp;
+            case AutomaticZenRule.TYPE_UNKNOWN -> R.drawable.ic_zen_mode_type_unknown;
+            case AutomaticZenRule.TYPE_OTHER -> R.drawable.ic_zen_mode_type_other;
+            case AutomaticZenRule.TYPE_SCHEDULE_TIME -> R.drawable.ic_zen_mode_type_schedule_time;
+            case AutomaticZenRule.TYPE_SCHEDULE_CALENDAR ->
+                    R.drawable.ic_zen_mode_type_schedule_calendar;
+            case AutomaticZenRule.TYPE_BEDTIME -> R.drawable.ic_zen_mode_type_bedtime;
+            case AutomaticZenRule.TYPE_DRIVING -> R.drawable.ic_zen_mode_type_driving;
+            case AutomaticZenRule.TYPE_IMMERSIVE -> R.drawable.ic_zen_mode_type_immersive;
+            case AutomaticZenRule.TYPE_THEATER -> R.drawable.ic_zen_mode_type_theater;
+            case AutomaticZenRule.TYPE_MANAGED -> R.drawable.ic_zen_mode_type_managed;
+            default -> R.drawable.ic_zen_mode_type_unknown;
         };
-        return requireNonNull(mContext.getDrawable(iconResIdFromType));
+        return requireNonNull(context.getDrawable(iconResIdFromType));
     }
 
     private static Drawable getMonochromeIconIfPresent(Drawable icon) {
