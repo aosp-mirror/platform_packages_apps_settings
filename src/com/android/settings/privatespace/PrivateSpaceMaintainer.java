@@ -31,6 +31,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.IntentSender;
+import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
 import android.os.Flags;
 import android.os.UserHandle;
@@ -44,6 +45,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.annotations.GuardedBy;
+import com.android.settings.Utils;
 
 import java.util.List;
 
@@ -129,6 +131,7 @@ public class PrivateSpaceMaintainer {
             resetPrivateSpaceSettings();
             setUserSetupComplete();
             setSkipFirstUseHints();
+            disableComponentsToHidePrivateSpaceSettings();
         }
         return true;
     }
@@ -354,6 +357,24 @@ public class PrivateSpaceMaintainer {
         Log.d(TAG, "setting USER_SETUP_COMPLETE = 1 for private profile");
         Settings.Secure.putIntForUser(mContext.getContentResolver(), USER_SETUP_COMPLETE,
                 1, mUserHandle.getIdentifier());
+    }
+
+    /**
+     * Disables the launcher icon and shortcut picker component for the Settings app instance
+     * inside the private space
+     */
+    @GuardedBy("this")
+    private void disableComponentsToHidePrivateSpaceSettings() {
+        if (mUserHandle == null) {
+            Log.e(TAG, "User handle null while hiding settings icon");
+            return;
+        }
+
+        Context privateSpaceUserContext = mContext.createContextAsUser(mUserHandle, /* flags */ 0);
+        PackageManager packageManager = privateSpaceUserContext.getPackageManager();
+
+        Log.d(TAG, "Hiding settings app launcher icon for " + mUserHandle);
+        Utils.disableComponentsToHideSettings(privateSpaceUserContext, packageManager);
     }
 
     /**
