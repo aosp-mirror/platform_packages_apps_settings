@@ -313,7 +313,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
             mForceVerifyPath = userProperties.isCredentialShareableWithParent();
             if (android.multiuser.Flags.enableBiometricsToUnlockPrivateSpace()
                     && isBiometricAllowed(effectiveUserId, mUserId)) {
-                promptInfo.setUseParentProfileForDeviceCredential(true);
+                setBiometricPromptPropertiesForPrivateProfile(promptInfo);
                 showBiometricPrompt(promptInfo, effectiveUserId);
                 launchedBiometric = true;
             } else {
@@ -342,6 +342,11 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
             setResult(Activity.RESULT_OK);
             finish();
         }
+    }
+
+    private static void setBiometricPromptPropertiesForPrivateProfile(PromptInfo promptInfo) {
+        promptInfo.setUseParentProfileForDeviceCredential(true);
+        promptInfo.setConfirmationRequested(false);
     }
 
     private String getTitleFromCredentialType(@LockPatternUtils.CredentialType int credentialType,

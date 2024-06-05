@@ -58,6 +58,7 @@ public class KeyboardSettingsPreferenceController extends BasePreferenceControll
                 intent.putExtra(
                         Settings.EXTRA_INPUT_DEVICE_IDENTIFIER,
                         hardKeyboardDeviceInfo.mDeviceIdentifier);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 mContext.startActivity(intent);
                 break;
             }

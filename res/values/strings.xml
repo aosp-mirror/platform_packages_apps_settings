@@ -154,8 +154,8 @@
     <string name="bluetooth_hearing_device_settings_title">Hearing device settings</string>
     <!-- Connected devices settings. Summary of the preference to show the entrance of the hearing device settings page. [CHAR LIMIT=65 BACKUP_MESSAGE_ID=8115767735418425663] -->
     <string name="bluetooth_hearing_device_settings_summary">Shortcut, hearing aid compatibility</string>
-    <!-- Connected devices settings. Title for hearing aids presets. A preset is a set of hearing aid settings. User can apply different settings in different environments (e.g. Outdoor, Restaurant, Home) [CHAR LIMIT=60] -->
-    <string name="bluetooth_hearing_aids_presets">Presets</string>
+    <!-- Connected devices settings. Title for hearing aids presets. A preset is a set of hearing aid settings. User can apply different settings in different environments (e.g. Outdoor, Restaurant, Home) [CHAR LIMIT=60] [BACKUP_MESSAGE_ID=5429761844739722885] -->
+    <string name="bluetooth_hearing_aids_presets">Preset</string>
     <!-- Message when selecting hearing aids presets failed. [CHAR LIMIT=NONE] -->
     <string name="bluetooth_hearing_aids_presets_error">Couldn\u2019t update preset</string>
     <!-- Connected devices settings. Title of the preference to show the entrance of the audio output page. It can change different types of audio are played on phone or other bluetooth devices. [CHAR LIMIT=35] -->
@@ -732,7 +732,7 @@
     <!-- Button text to cancel enrollment from the introduction [CHAR LIMIT=22] -->
     <string name="security_settings_face_enroll_introduction_cancel">Cancel</string>
     <!-- Button text to cancel enrollment [CHAR LIMIT=30] -->
-    <string name="security_settings_face_enroll_introduction_no_thanks">No thanks</string>
+    <string name="security_settings_face_enroll_introduction_no_thanks">Not now</string>
     <!-- Button text to start enrollment [CHAR LIMIT=30] -->
     <string name="security_settings_face_enroll_introduction_agree">I agree</string>
     <!-- Button text to scroll to the end of a scrollview. [CHAR LIMIT=30] -->
@@ -861,7 +861,7 @@
     <!-- Button text to cancel enrollment from the introduction [CHAR LIMIT=22] -->
     <string name="security_settings_fingerprint_enroll_introduction_cancel">Cancel</string>
     <!-- Button text to cancel enrollment [CHAR LIMIT=30] -->
-    <string name="security_settings_fingerprint_enroll_introduction_no_thanks">No thanks</string>
+    <string name="security_settings_fingerprint_enroll_introduction_no_thanks">Not now</string>
     <!-- Button text to agree the consent and continue to the next screen from the introduction [CHAR LIMIT=22] -->
     <string name="security_settings_fingerprint_enroll_introduction_agree">I agree</string>
     <!-- Title of dialog shown when the user tries to skip setting up fingerprint after adding lock screen during initial setup. [CHAR LIMIT=30] -->
@@ -1262,6 +1262,8 @@
     <string name="private_space_face_settings_require_attention_details">To unlock private space, your eyes must be open. For best results, take off sunglasses.</string>
     <!-- Text shown in face settings in private space explaining what your face can be used for. [CHAR LIMIT=NONE] -->
     <string name="private_space_face_settings_footer">Use your face to unlock your private space.\n\nKeep in mind:\nYou can only have one face set up at a time. To add another face, delete the current one.\n\nLooking at the phone can unlock it when you don\u2019t intend to.\n\nYour private space can be unlocked by someone else if your device is held up to your face.\n\nYour private space can be unlocked by someone who looks a lot like you, like an identical sibling.</string>
+    <!-- Text shown on the details of a toggle which enables/disables confirmation (i.e. confirm button) each time face unlock is used for private space. [CHAR LIMIT=90] -->
+    <string name="private_space_face_settings_require_confirmation_details">When using Face Unlock, always require confirmation step</string>
     <!-- Biometric category title - biometric options for unlocking the device. [CHAR LIMIT=50] -->
     <string name="private_space_category_ways_to_unlock">Ways to unlock</string>
     <!-- Summary for one lock when device screen lock is used as private profile lock. [CHAR LIMIT=40] -->
@@ -1280,6 +1282,8 @@
     <string name="private_space_auto_lock_after_inactivity">5 minutes after screen timeout</string>
     <!-- Configure auto lock: Value for auto lock configuration to lock private space only after device restarts. [CHAR LIMIT=40] -->
     <string name="private_space_auto_lock_after_device_restart">Only after device restarts</string>
+    <!-- Note in footer of private space auto lock settings page that using privae apps may need a lock verification when a separate lock is used for private space. [CHAR LIMIT=NONE] -->
+    <string name="private_space_auto_lock_footer_message">If you use a different lock for your private space, you may need to verify it\u2019s you to open apps in your private space.</string>
     <!-- Title for the settings page for hiding private space. [CHAR LIMIT=45] -->
     <string name="private_space_hide_page_title">Hide private space</string>
     <!-- Title for the settings preference for hiding private space when it's locked. [CHAR LIMIT=60] -->
@@ -1341,15 +1345,21 @@
     <!-- Summary for the private space setup education screen. [CHAR LIMIT=NONE] -->
     <string name="private_space_hide_apps_summary">Hide or lock private apps in a separate space. Use a dedicated Google Account for extra security.</string>
     <!-- Text shown in private space setup screen which explains how the private space works [CHAR LIMIT=50] -->
-    <string name="private_space_setup_sub_header">Set up your private space</string>
+    <string name="private_space_setup_sub_header">How it works</string>
     <!-- Text shown in private space setup screen which explains private space can be accessed from bottom of all apps list. [CHAR LIMIT=NONE] -->
-    <string name="private_space_separate_account_text"><b>Choose a Google Account for your space</b>\nUsing a dedicated account helps to stop synced files, photos, and emails appearing outside your space</string>
+    <string name="private_space_separate_account_text"><b>Create a Google Account for your space</b>\nIf you use a dedicated account, it helps to stop synced files, photos, and emails appearing outside your space</string>
     <!-- Text shown in private space setup screen which explains private space apps are protected by a lock. [CHAR LIMIT=NONE] -->
     <string name="private_space_protected_lock_text"><b>Set a lock</b>\nLock your space to stop other people opening it</string>
     <!-- Text shown in private space setup screen which explains notifications from private space apps will not be shown when private space is locked. [CHAR LIMIT=NONE] -->
-    <string name="private_space_install_apps_text"><b>Install apps</b>\nYour private space has its own Play Store so you can install apps easily.</string>
+    <string name="private_space_install_apps_text"><b>Install apps</b>\nInstall apps that you want to keep private in your space</string>
+    <!-- Category name "Keep in mind" [CHAR_LIMIT=40] -->
+    <string name="private_space_keep_in_mind_text">Keep in mind</string>
+    <!-- Text shown in private space setup screen which explains  that apps in private space are stopped when private space is locked. [CHAR LIMIT=NONE] -->
+    <string name="private_space_apps_stopped_text"><b>Apps stop when you lock your space</b>\nWhen you lock your space, apps in your space are stopped and you won\u2019t receive notifications from them</string>
     <!-- This is info text to help explain in private space setup screen that the permissions granted to private space apps will not be shown in settings when private space is locked. [CHAR LIMIT=NONE] -->
-    <string name="private_space_apps_permission_text">Apps in your private space won\'t appear in permission manager, privacy dashboard, and other settings when your private space is locked.\n\nYour private space can\'t be restored to a new device. You\'ll need to set up another private space if you want to use it on another device.\n\nAnyone that connects your device to a computer or installs malicious apps on your device may be able to access your private space.</string>
+    <string name="private_space_apps_permission_text">Apps in your private space won\'t appear in permission manager, privacy dashboard, and other settings when your private space is locked.\n\nYour private space can\'t be moved to a new device. You\'ll need to set up another private space if you want to use it on another device.\n\nAnyone that connects your device to a computer or installs harmful apps on your device may be able to access your private space.</string>
+    <!-- This is footer text in private space settings page to help explain that when private space is locked the apps are stopped, the permissions granted to private space apps will not be shown in settings. [CHAR LIMIT=NONE] -->
+    <string name="private_space_settings_footer_text">When you lock your space, apps in your private space are stopped and you won\u2019t receive notifications from them.\n\nApps in your private space won\'t appear in permission manager, privacy dashboard, and other settings when private space is locked.\n\nYour private space can\'t be restored to a new device. You\u2019ll need to set up another space if you want to use it on another device.\n\nAnyone that connects your device to a computer or installs malicious apps on your device may be able to access your private space.</string>
     <!-- Private space footer link content description [CHAR LIMIT=40] -->
     <string name="private_space_learn_more_text">Learn more about private space</string>
     <string name="private_space_learn_more_url" translatable="false">https://support.google.com/android?p=private_space</string>
@@ -2356,6 +2366,8 @@
     <!-- Wifi Network Details -->
     <!-- Wifi details title-->
     <string name="wifi_details_title">Network details</string>
+    <!-- WEP network less secure warning title -->
+    <string name="wep_network_less_secure_warning_title">This network uses an older security protocol called WEP, which is less secure</string>
     <!-- Wifi details preference title to display router IP subnet mask -->
     <string name="wifi_details_subnet_mask">Subnet mask</string>
     <!-- Server name title-->
@@ -3151,7 +3163,7 @@
     <!-- About phone, status item title.  The hardware serial number. [CHAR LIMIT=30]-->
     <string name="status_serial_number">Serial number</string>
     <!-- About phone, status item title.  How long the device has been running since its last reboot. -->
-    <string name="status_up_time">Up time</string>
+    <string name="status_up_time">Uptime</string>
 
     <!-- About phone, status item title. The battery manufacture date. [CHAR LIMIT=60]-->
     <string name="battery_manufacture_date">Manufacture date</string>
@@ -6480,7 +6492,7 @@
     <!-- Message when there are no available trust agents to display -->
     <string name="no_trust_agents">No available trust agents</string>
 
-    <!-- Title for screen to add a device admin app [CHAR LIMIT=40] -->
+    <!-- Title for screen to add a device admin app [CHAR LIMIT=50] -->
     <string name="add_device_admin_msg">Activate device admin app?</string>
     <!-- Label for button to set the active device admin [CHAR_LIMIT=80] -->
     <string name="add_device_admin">Activate this device admin app</string>
@@ -7718,7 +7730,7 @@
     <string name="keywords_wallpaper">background, theme, grid, customize, personalize</string>
 
     <!-- List of synonyms for the Styles picker setting, used to match in settings search [CHAR LIMIT=NONE] -->
-    <string name="keywords_styles">icon, accent, color, home screen, lock screen, shortcut, clock size</string>
+    <string name="keywords_styles">icon, icons, accent, color, home screen, lock screen, shortcut, clock size</string>
 
     <!-- List of synonyms for the Default Assist and Voice input setting, used to match in settings search [CHAR LIMIT=NONE] -->
     <string name="keywords_assist_input">default, assistant</string>
@@ -7945,6 +7957,18 @@
     <!--  Do not disturb: Title for a specific zen mode automatic rule in settings. [CHAR LIMIT=30] -->
     <string name="zen_mode_automatic_rule_settings_page_title">Schedule</string>
 
+    <!-- Do not disturb: Title for settings section describing when the rule turns on automatically [CHAR LIMIT=30] -->
+    <string name="zen_mode_automatic_trigger_title">Turn on automatically</string>
+
+    <!-- Do not disturb: Title prompting a user to choose a calendar to use for an automatic rule [CHAR LIMIT=30] -->
+    <string name="zen_mode_set_calendar_title">Add a calendar</string>
+
+    <!-- Do not disturb: Link text prompting a user to click through to setting a calendar [CHAR LIMIT=40] -->
+    <string name="zen_mode_set_calendar_link">Use your calendar</string>
+
+    <!-- Do not disturb: Title on the page where users choose a calendar to determine the schedule for an automatically-triggered DND rule. [CHAR LIMIT=30] -->
+    <string name="zen_mode_set_calendar_category_title">Schedule</string>
+
     <!--  Do not disturb: Title do not disturb settings representing automatic (scheduled) do not disturb rules. [CHAR LIMIT=30] -->
     <string name="zen_mode_schedule_category_title">Schedule</string>
 
@@ -8017,6 +8041,7 @@
         other {{effect_1}, {effect_2}, and # more}
         }
     </string>
+
 
     <!-- Do not disturb: restrict notifications settings title [CHAR LIMIT=80] -->
     <string name="zen_mode_restrict_notifications_title">Display options for filtered
@@ -8703,7 +8728,7 @@
     <string name="notif_listener_more_settings">More settings</string>
     <string name="notif_listener_more_settings_desc">More settings are available inside this app</string>
 
-    <!-- Title for Polite Notifications setting  [CHAR LIMIT=30]-->
+    <!-- Title for Polite Notifications setting  [CHAR LIMIT=45]-->
     <string name="notification_polite_title">Cooldown</string>
     <string name="notification_polite_main_control_title">Use Cooldown</string>
     <string name="notification_polite_description">When you get many notifications within a short time span, your device will minimize sound interruptions and pop-ups on the screen. Calls, alarms, and priority conversations will still alert as notmal, and all delivered notifications are easy to find in the Shade.</string>
@@ -9172,6 +9197,17 @@
     <string name="zen_mode_events_list">events</string>
     <!-- [CHAR LIMIT=50] Zen mode settings: Events (ie: calendar events) category in a list of sounds when events is the first or only element in the list. For example “Events can interrupt" or “Events and touch sounds can interrupt" -->
     <string name="zen_mode_events_list_first">Events</string>
+
+    <!-- [CHAR LIMIT=80] Zen mode settings: Title for page to select which apps allowed to interrupt dnd -->
+    <string name="zen_mode_apps_title">Apps</string>
+    <!-- [CHAR LIMIT=100] Zen mode settings: subtitle for page to select which apps allowed to interrupt dnd -->
+    <string name="zen_mode_apps_category">Apps that can interrupt</string>
+    <!-- [CHAR LIMIT=60] Zen mode settings: selected apps will be able to bypass dnd -->
+    <string name="zen_mode_apps_priority_apps">Selected apps</string>
+    <!-- [CHAR LIMIT=60] Zen mode settings: no apps will be able to bypass dnd -->
+    <string name="zen_mode_apps_none_apps">None</string>
+    <!-- [CHAR LIMIT=60] Zen mode settings: all apps will be able to bypass dnd -->
+    <string name="zen_mode_apps_all_apps">All</string>
 
     <!-- [CHAR LIMIT=100] Zen mode settings: Allow apps to bypass DND -->
     <string name="zen_mode_bypassing_apps">Allow apps to override</string>
@@ -12024,6 +12060,8 @@
     <string name="bluetooth_right_name">Right</string>
     <!-- Title for middle bluetooth device. [CHAR LIMIT=NONE] -->
     <string name="bluetooth_middle_name">Case</string>
+    <!-- Content description for battery icon in bluetooth header. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_header_battery_content_description">Battery</string>
 
     <!-- Default title for the settings panel [CHAR LIMIT=NONE] -->
     <string name="settings_panel_title">Settings Panel</string>

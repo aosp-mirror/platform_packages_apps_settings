@@ -61,6 +61,7 @@ import com.android.internal.net.LegacyVpnInfo;
 import com.android.internal.net.VpnConfig;
 import com.android.internal.net.VpnProfile;
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.GearPreference;
@@ -592,6 +593,9 @@ public class VpnSettings extends RestrictedDashboardFragment implements
         // Mark connected third-party services
         Set<AppVpnInfo> connections = new ArraySet<>();
         for (UserHandle profile : mUserManager.getUserProfiles()) {
+            if (Utils.shouldHideUser(profile, mUserManager)) {
+                continue;
+            }
             VpnConfig config = mVpnManager.getVpnConfig(profile.getIdentifier());
             if (config != null && !config.legacy) {
                 connections.add(new AppVpnInfo(profile.getIdentifier(), config.user));
@@ -604,6 +608,9 @@ public class VpnSettings extends RestrictedDashboardFragment implements
     private Set<AppVpnInfo> getAlwaysOnAppVpnInfos() {
         Set<AppVpnInfo> result = new ArraySet<>();
         for (UserHandle profile : mUserManager.getUserProfiles()) {
+            if (Utils.shouldHideUser(profile, mUserManager)) {
+                continue;
+            }
             final int profileId = profile.getIdentifier();
             final String packageName = mVpnManager.getAlwaysOnVpnPackageForUser(profileId);
             if (packageName != null) {
@@ -627,7 +634,11 @@ public class VpnSettings extends RestrictedDashboardFragment implements
         final Set<Integer> profileIds;
         if (includeProfiles) {
             profileIds = new ArraySet<>();
-            for (UserHandle profile : UserManager.get(context).getUserProfiles()) {
+            UserManager userManager = UserManager.get(context);
+            for (UserHandle profile : userManager.getUserProfiles()) {
+                if (Utils.shouldHideUser(profile, userManager)) {
+                    continue;
+                }
                 profileIds.add(profile.getIdentifier());
             }
         } else {

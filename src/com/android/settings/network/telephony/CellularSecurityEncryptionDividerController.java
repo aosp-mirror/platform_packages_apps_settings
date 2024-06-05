@@ -21,7 +21,6 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.preference.PreferenceScreen;
 
 import com.android.internal.telephony.flags.FeatureFlags;
 import com.android.internal.telephony.flags.FeatureFlagsImpl;
@@ -52,26 +51,11 @@ public class CellularSecurityEncryptionDividerController extends
         mTelephonyManager = mContext.getSystemService(TelephonyManager.class);
     }
 
-    /**
-     * Initialization.
-     */
-    public CellularSecurityEncryptionDividerController init() {
-        return this;
-    }
-
-    @Override
-    public void displayPreference(@NonNull PreferenceScreen screen) {
-        super.displayPreference(screen);
-    }
-
     @Override
     public int getAvailabilityStatus() {
         if (mTelephonyManager == null) {
-            Log.w(LOG_TAG,
-                    "Telephony manager not yet initialized. Marking availability as "
-                            + "CONDITIONALLY_UNAVAILABLE");
+            Log.w(LOG_TAG, "Telephony manager not yet initialized.");
             mTelephonyManager = mContext.getSystemService(TelephonyManager.class);
-            return CONDITIONALLY_UNAVAILABLE;
         }
 
         try {

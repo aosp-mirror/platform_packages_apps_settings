@@ -20,6 +20,8 @@ import android.content.Context;
 import android.util.Log;
 
 import com.android.settings.fuelgauge.BatteryUtils;
+import com.android.settings.fuelgauge.batteryusage.AppOptModeSharedPreferencesUtils;
+import com.android.settings.fuelgauge.batteryusage.AppOptimizationModeEvent;
 import com.android.settings.fuelgauge.batteryusage.BatteryUsageSlot;
 import com.android.settings.fuelgauge.batteryusage.ConvertUtils;
 import com.android.settings.fuelgauge.batteryusage.DatabaseUtils;
@@ -46,6 +48,13 @@ public final class LogUtils {
     private static final String TAG = "LogUtils";
     private static final Duration DUMP_TIME_OFFSET = Duration.ofHours(24);
     private static final Duration DUMP_TIME_OFFSET_FOR_ENTRY = Duration.ofHours(4);
+
+    static void dumpAppOptimizationModeEventHist(Context context, PrintWriter writer) {
+        writer.println("\n\tApp Optimization Mode Event History:");
+        final List<AppOptimizationModeEvent> events =
+                AppOptModeSharedPreferencesUtils.getAllEvents(context);
+        dumpListItems(writer, events, event -> event);
+    }
 
     static void dumpBatteryUsageDatabaseHist(Context context, PrintWriter writer) {
         // Dumps periodic job events.

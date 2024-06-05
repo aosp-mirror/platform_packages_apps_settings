@@ -30,6 +30,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -47,6 +48,7 @@ import com.android.settingslib.spaprivileged.model.enterprise.Restrictions
 import com.android.settingslib.spaprivileged.template.preference.RestrictedPreference
 import com.android.settingslib.spaprivileged.template.preference.RestrictedTwoTargetSwitchPreference
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.launch
 
 @Composable
 fun SimsSection(subscriptionInfoList: List<SubscriptionInfo>) {
@@ -71,9 +73,11 @@ private fun SimPreference(subInfo: SubscriptionInfo) {
             emit(SubscriptionUtil.isConvertedPsimSubscription(subInfo))
         }
     }.collectAsStateWithLifecycle(initialValue = false)
+    val subscriptionActivationRepository = remember { SubscriptionActivationRepository(context) }
     val isActivationChangeable by remember {
-        SubscriptionActivationRepository(context).isActivationChangeableFlow()
+        subscriptionActivationRepository.isActivationChangeableFlow()
     }.collectAsStateWithLifecycle(initialValue = false)
+    val coroutineScope = rememberCoroutineScope()
     RestrictedTwoTargetSwitchPreference(
         model = object : SwitchPreferenceModel {
             override val title = subInfo.displayName.toString()
@@ -87,12 +91,10 @@ private fun SimPreference(subInfo: SubscriptionInfo) {
             override val icon = @Composable { SimIcon(subInfo.isEmbedded) }
             override val changeable = { isActivationChangeable && !isConvertedPsim }
             override val checked = { checked.value }
-            override val onCheckedChange = { newChecked: Boolean ->
-                SubscriptionUtil.startToggleSubscriptionDialogActivity(
-                    context,
-                    subInfo.subscriptionId,
-                    newChecked,
-                )
+            override val onCheckedChange: (Boolean) -> Unit = { newChecked ->
+                coroutineScope.launch {
+                    subscriptionActivationRepository.setActive(subInfo.subscriptionId, newChecked)
+                }
             }
         },
         restrictions = Restrictions(keys = listOf(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS)),
