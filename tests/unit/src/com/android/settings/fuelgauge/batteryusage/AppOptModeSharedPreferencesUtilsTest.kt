@@ -18,6 +18,7 @@ package com.android.settings.fuelgauge.batteryusage
 
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.fuelgauge.BatteryOptimizeHistoricalLogEntry.Action
 import com.android.settings.fuelgauge.BatteryOptimizeUtils
 import com.android.settings.fuelgauge.BatteryOptimizeUtils.MODE_OPTIMIZED
@@ -26,6 +27,7 @@ import com.android.settings.fuelgauge.BatteryOptimizeUtils.MODE_UNKNOWN
 import com.android.settings.fuelgauge.BatteryOptimizeUtils.MODE_UNRESTRICTED
 import com.android.settings.fuelgauge.batteryusage.AppOptModeSharedPreferencesUtils.UNLIMITED_EXPIRE_TIME
 import com.google.common.truth.Truth.assertThat
+import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -39,9 +41,8 @@ import org.mockito.Mockito.`when` as whenever
 import org.mockito.Spy
 import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoRule
-import org.robolectric.RobolectricTestRunner
 
-@RunWith(RobolectricTestRunner::class)
+@RunWith(AndroidJUnit4::class)
 class AppOptModeSharedPreferencesUtilsTest {
     @get:Rule val mockitoRule: MockitoRule = MockitoJUnit.rule()
 
@@ -52,11 +53,26 @@ class AppOptModeSharedPreferencesUtilsTest {
 
     @Before
     fun setup() {
-        AppOptModeSharedPreferencesUtils.deleteAppOptimizationModeEventByUid(context, UID)
+        AppOptModeSharedPreferencesUtils.clearAll(context)
+    }
+
+    @After
+    fun tearDown() {
+        AppOptModeSharedPreferencesUtils.clearAll(context)
     }
 
     @Test
     fun getAllEvents_emptyData_verifyEmptyList() {
+        assertThat(AppOptModeSharedPreferencesUtils.getAllEvents(context)).isEmpty()
+    }
+
+    @Test
+    fun clearAll_withData_verifyCleared() {
+        insertAppOptModeEventForTest(expirationTime = 1000L)
+        assertThat(AppOptModeSharedPreferencesUtils.getAllEvents(context)).hasSize(1)
+
+        AppOptModeSharedPreferencesUtils.clearAll(context)
+
         assertThat(AppOptModeSharedPreferencesUtils.getAllEvents(context)).isEmpty()
     }
 
